@@ -140,7 +140,8 @@
         .typing-indicator span:nth-child(2){animation-delay:.2s}.typing-indicator span:nth-child(3){animation-delay:.4s}
         @keyframes typingAnim{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
         .team-section{background:var(--bg-primary)}
-        .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3.5rem}
+        .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3.5rem;justify-items:center}
+        .team-grid .team-card{width:100%}
         .team-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:2rem 1.5rem;text-align:center;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
         .team-card::after{content:'';position:absolute;bottom:-50%;left:50%;transform:translateX(-50%);width:200px;height:200px;background:radial-gradient(circle,var(--accent-glow),transparent 70%);opacity:0;transition:opacity .5s}
         .team-card:hover{border-color:var(--border-accent-strong);transform:translateY(-5px)}
@@ -304,6 +305,7 @@
                 <div class="team-card reveal reveal-delay-1"><div class="team-avatar"><img src="team-faheem.jpg" alt="Faheem Haider"></div><h3>Faheem Haider</h3><div class="role">Founding Data Engineer</div><div class="tagline">Data Pipelines & ML Ops</div></div>
                 <div class="team-card reveal reveal-delay-2"><div class="team-avatar"><img src="team-rafeh.jpg" alt="Abdul Rafeh"></div><h3>Abdul Rafeh</h3><div class="role">CMO</div><div class="tagline">Intelligence & Validation</div></div>
                 <div class="team-card reveal reveal-delay-3"><div class="team-avatar"><img src="team-lewis.jpg" alt="Lewis Mulhall"></div><h3>Lewis Mulhall</h3><div class="role">Founder</div><div class="tagline">Social Media & Partnerships</div></div>
+                <div class="team-card reveal"><div class="team-avatar"><img src="team-filza.jpg" alt="Syeda Filza Bukhari"></div><h3>Syeda Filza Bukhari</h3><div class="role">CLO</div><div class="tagline">Compliance & Legal</div></div>
             </div>
         </div>
     </section>
@@ -314,7 +316,7 @@
             <div class="contact-grid reveal">
                 <div class="contact-left">
                     <p>Artemis AI is being built to be the most intelligent social media platform on the market. We're looking for forward-thinking brands and agencies to shape the product alongside us during development.</p>
-                    <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="contact-text"><strong>Email</strong>contactus@artemisai.co.uk</div></div>
+                    <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="contact-text"><strong>Email</strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8bbb7b6acb9bbacadab98b9aaacbdb5b1abb9b1f6bbb7f6adb3">[email&#160;protected]</a></div></div>
                     <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="contact-text"><strong>Website</strong>artemisai.co.uk</div></div>
                     <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="contact-text"><strong>Location</strong>United Kingdom</div></div>
                 </div>
@@ -337,11 +339,11 @@
         </div>
     </section>
 
-    <footer><div class="footer-content"><p>© 2026 Artemis AI — The Complete Social Media Intelligence Platform</p><div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="mailto:contactus@artemisai.co.uk">contactus@artemisai.co.uk</a></div></div></footer>
+    <footer><div class="footer-content"><p>© 2026 Artemis AI — The Complete Social Media Intelligence Platform</p><div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="/cdn-cgi/l/email-protection#62010d0c16030116171122031016070f0b11030b4c010d4c1709"><span class="__cf_email__" data-cfemail="87e4e8e9f3e6e4f3f2f4c7e6f5f3e2eaeef4e6eea9e4e8a9f2ec">[email&#160;protected]</span></a></div></div></footer>
 
     <div class="chat-bubble" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="chat-bubble-label">Talk to us →</span></div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         const glow=document.getElementById('cursorGlow'),hero=document.querySelector('.hero');
         document.addEventListener('mousemove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});
         new IntersectionObserver(([e])=>{glow.classList.toggle('active',e.isIntersecting)}).observe(hero);
@@ -364,9 +366,9 @@
         const msgs=[{t:'bot',m:"Good morning! ☀️ Here's what happened overnight:<br><br>🚀 Post #12847 went VIRAL — 5,000 engagements!<br>Why: Product Launch + Tuesday 6PM + Meme format<br><br>📊 Behind-the-Scenes content performing 40% better than usual this week. Ride this wave!"},{t:'user',m:"Will my new draft post perform well?"},{t:'bot',m:"Analysing your draft...<br><br>📉 Virality Score: 0.35 (Low)<br>📍 Predicted engagement: ~200 likes<br><br>💡 Recommendations:<br>→ Post at 6 PM instead of 3 PM (+45%)<br>→ Add 2-3 emojis to headline (+28%)<br>→ Use trending Drake template (+92%)<br><br>✨ New predicted score: 0.78 — Likely to go viral!"}];
         let cs=false;
         new IntersectionObserver(([e])=>{if(e.isIntersecting&&!cs){cs=true;sm()}},{threshold:.3}).observe(document.getElementById('chatDemo'));
-        function sm(){const b=document.getElementById('chatBody');let dl=500;msgs.forEach(m=>{setTimeout(()=>{if(m.t==='bot'){const te=document.createElement('div');te.className='msg msg-bot visible';te.innerHTML='<span class="sender">✦ ART-E</span><div class="typing-indicator"><span></span><span></span><span></span></div>';b.appendChild(te);b.scrollTop=b.scrollHeight;setTimeout(()=>{te.remove();const me=document.createElement('div');me.className='msg msg-bot';me.innerHTML='<span class="sender">✦ ART-E</span>'+m.m;b.appendChild(me);requestAnimationFrame(()=>{me.classList.add('visible');b.scrollTop=b.scrollHeight})},1200)}else{const me=document.createElement('div');me.className='msg msg-user';me.textContent=m.m;b.appendChild(me);requestAnimationFrame(()=>{me.classList.add('visible');b.scrollTop=b.scrollHeight})}},dl);dl+=m.t==='bot'?3000:1500})}
+        function sm(){const b=document.getElementById('chatBody');let dl=500;msgs.forEach(m=>{setTimeout(()=>{if(m.t==='bot'){const te=document.createElement('div');te.className='msg msg-bot visible';te.innerHTML='<span class="sender">\u2726 ART-E</span><div class="typing-indicator"><span></span><span></span><span></span></div>';b.appendChild(te);b.scrollTop=b.scrollHeight;setTimeout(()=>{te.remove();const me=document.createElement('div');me.className='msg msg-bot';me.innerHTML='<span class="sender">\u2726 ART-E</span>'+m.m;b.appendChild(me);requestAnimationFrame(()=>{me.classList.add('visible');b.scrollTop=b.scrollHeight})},1200)}else{const me=document.createElement('div');me.className='msg msg-user';me.textContent=m.m;b.appendChild(me);requestAnimationFrame(()=>{me.classList.add('visible');b.scrollTop=b.scrollHeight})}},dl);dl+=m.t==='bot'?3000:1500})}
 
-        document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();this.innerHTML='<div class="form-success"><div class="checkmark">✓</div><h3>You\'re on the list!</h3><p>We\'ll reach out soon with early access details.</p></div>'});
+        document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();this.innerHTML='<div class="form-success"><div class="checkmark">\u2713</div><h3>You\'re on the list!</h3><p>We\'ll reach out soon with early access details.</p></div>'});
     </script>
 </body>
 </html>
