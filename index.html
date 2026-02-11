@@ -381,13 +381,16 @@
         document.getElementById('contactForm').addEventListener('submit',function(e){
             e.preventDefault();
             var form=this;
-            var formData=new FormData(form);
-            fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(formData).toString()})
-            .then(function(){
+            var btn=form.querySelector('.form-submit');
+            btn.textContent='Submitting...';
+            btn.disabled=true;
+            var formData=new URLSearchParams(new FormData(form)).toString();
+            fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:formData})
+            .then(function(response){
                 if(typeof gtag!=='undefined'){gtag('event','early_access_signup',{event_category:'engagement',event_label:'Early Access Form'})}
                 form.innerHTML='<div class="form-success"><div class="checkmark">\u2713</div><h3>You\'re on the list!</h3><p>We\'ll reach out soon with early access details.</p></div>';
             })
-            .catch(function(){
+            .catch(function(err){
                 form.innerHTML='<div class="form-success"><div class="checkmark">\u2713</div><h3>You\'re on the list!</h3><p>We\'ll reach out soon with early access details.</p></div>';
             });
         });
