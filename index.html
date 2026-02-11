@@ -193,6 +193,15 @@
         @media(max-width:1024px){.features-grid,.team-grid{grid-template-columns:repeat(2,1fr)}.steps-container{grid-template-columns:repeat(2,1fr);gap:2rem}.steps-container::before{display:none}.stats-grid{grid-template-columns:repeat(2,1fr)}.comparison-grid{grid-template-columns:1fr}.comparison-divider{transform:rotate(90deg);margin:-.5rem 0}}
         @media(max-width:768px){nav{padding:0 1.5rem}.nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(6,10,19,0.98);backdrop-filter:blur(20px);padding:1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}.nav-links.open{display:flex}.hamburger{display:block}.features-grid,.team-grid,.stats-grid{grid-template-columns:1fr}.steps-container{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr;gap:2rem}.form-row{grid-template-columns:1fr}.hero{padding:6rem 1.5rem 3rem;min-height:90vh}.hero h1{font-size:2.2rem}.hero-buttons{flex-direction:column;width:100%}.hero-buttons a{width:100%;text-align:center;justify-content:center}section{padding:4rem 1.5rem}.footer-content{flex-direction:column;gap:1rem}.scroll-hint{display:none}.chat-bubble-label{display:none}.trust-logos{gap:1.5rem}}
     </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4RCP8LMKYK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4RCP8LMKYK');
+</script>
 </head>
 <body>
     <div class="load-bar"></div>
@@ -368,7 +377,24 @@
         new IntersectionObserver(([e])=>{if(e.isIntersecting&&!cs){cs=true;sm()}},{threshold:.3}).observe(document.getElementById('chatDemo'));
         function sm(){const b=document.getElementById('chatBody');let dl=500;msgs.forEach(m=>{setTimeout(()=>{if(m.t==='bot'){const te=document.createElement('div');te.className='msg msg-bot visible';te.innerHTML='<span class="sender">\u2726 ART-E</span><div class="typing-indicator"><span></span><span></span><span></span></div>';b.appendChild(te);b.scrollTop=b.scrollHeight;setTimeout(()=>{te.remove();const me=document.createElement('div');me.className='msg msg-bot';me.innerHTML='<span class="sender">\u2726 ART-E</span>'+m.m;b.appendChild(me);requestAnimationFrame(()=>{me.classList.add('visible');b.scrollTop=b.scrollHeight})},1200)}else{const me=document.createElement('div');me.className='msg msg-user';me.textContent=m.m;b.appendChild(me);requestAnimationFrame(()=>{me.classList.add('visible');b.scrollTop=b.scrollHeight})}},dl);dl+=m.t==='bot'?3000:1500})}
 
-        document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();this.innerHTML='<div class="form-success"><div class="checkmark">\u2713</div><h3>You\'re on the list!</h3><p>We\'ll reach out soon with early access details.</p></div>'});
+        document.getElementById('contactForm').addEventListener('submit',function(e){
+            e.preventDefault();
+
+            // Track conversion
+            gtag('event', 'early_access_signup', {
+                event_category: 'engagement',
+                event_label: 'Early Access Form'
+            });
+        
+            this.innerHTML='<div class="form-success"><div class="checkmark">✓</div><h3>You\'re on the list!</h3><p>We\'ll reach out soon with early access details.</p></div>';
+        });
+    </script>
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "vfp7p4b3cv");
     </script>
 </body>
 </html>
