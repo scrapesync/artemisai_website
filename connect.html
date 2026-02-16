@@ -246,7 +246,10 @@
                         <h3>Permissions Requested</h3>
                         <div class="perm-item"><span class="perm-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span><strong>pages_show_list</strong> — See your list of managed pages</span></div>
                         <div class="perm-item"><span class="perm-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span><strong>pages_read_engagement</strong> — Read likes, comments & shares</span></div>
+                        <div class="perm-item"><span class="perm-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span><strong>pages_manage_posts</strong> — Create and manage page posts</span></div>
+                        <div class="perm-item"><span class="perm-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span><strong>pages_read_user_content</strong> — Read user-generated content on pages</span></div>
                         <div class="perm-item"><span class="perm-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span><strong>read_insights</strong> — Access page analytics & insights</span></div>
+                        <div class="perm-item"><span class="perm-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span><strong>pages_manage_metadata</strong> — Manage page settings & metadata</span></div>
                     </div>
                 </div>
             </div>
@@ -270,7 +273,7 @@
                             <label class="form-label">Access Token <span class="required">*</span></label>
                             <textarea class="form-input" id="tokenInput" placeholder="Paste your Facebook access token here..." required></textarea>
                             <div class="form-hint">
-                                Get a token from the <a href="https://developers.facebook.com/tools/explorer/" target="_blank" rel="noopener">Graph API Explorer</a>. Must include <code>pages_read_engagement</code> and <code>read_insights</code>.
+                                Get a token from the <a href="https://developers.facebook.com/tools/explorer/" target="_blank" rel="noopener">Graph API Explorer</a>. Required permissions: <code>pages_show_list</code>, <code>pages_read_engagement</code>, <code>pages_manage_posts</code>, <code>pages_read_user_content</code>, <code>read_insights</code>, <code>pages_manage_metadata</code>.
                             </div>
                         </div>
 
@@ -305,8 +308,19 @@
                 <ol>
                     <li>Go to <a href="https://developers.facebook.com/tools/explorer/" target="_blank" rel="noopener" style="color:var(--accent)">Graph API Explorer</a></li>
                     <li>Select your app from the dropdown</li>
+                    <li>Click <strong>"Add a Permission"</strong> and enable all 6 below:</li>
+                </ol>
+                <div style="margin:.8rem 0 .8rem 1.2rem;display:flex;flex-wrap:wrap;gap:.35rem">
+                    <code>pages_show_list</code>
+                    <code>pages_read_engagement</code>
+                    <code>pages_manage_posts</code>
+                    <code>pages_read_user_content</code>
+                    <code>read_insights</code>
+                    <code>pages_manage_metadata</code>
+                </div>
+                <ol start="4">
                     <li>Click <strong>"Generate Access Token"</strong></li>
-                    <li>Grant the permissions: <code>pages_show_list</code>, <code>pages_read_engagement</code>, <code>read_insights</code></li>
+                    <li>Approve all permissions in the Facebook popup</li>
                     <li>Copy the token and paste it above</li>
                 </ol>
             </div>
@@ -366,8 +380,12 @@
             return {
                 checked: true,
                 permissions: {
+                    'pages_show_list': grantedScopes.includes('pages_show_list'),
                     'pages_read_engagement': grantedScopes.includes('pages_read_engagement'),
+                    'pages_manage_posts': grantedScopes.includes('pages_manage_posts'),
+                    'pages_read_user_content': grantedScopes.includes('pages_read_user_content'),
                     'read_insights': grantedScopes.includes('read_insights'),
+                    'pages_manage_metadata': grantedScopes.includes('pages_manage_metadata'),
                 },
                 allScopes: grantedScopes,
                 valid: data.data.is_valid !== false,
@@ -380,7 +398,7 @@
 
     // ── Show user-level scopes ──
     function showUserScopes(scopes) {
-        const required = ['pages_read_engagement', 'read_insights', 'pages_show_list'];
+        const required = ['pages_show_list', 'pages_read_engagement', 'pages_manage_posts', 'pages_read_user_content', 'read_insights', 'pages_manage_metadata'];
         const box = document.getElementById('userScopesBox');
         const list = document.getElementById('userScopesList');
 
@@ -446,15 +464,14 @@
                 return;
             }
 
-            // Warn (but don't block) if read_insights is missing at user level
-            const missingUserLevel = [];
-            if (!userScopes.includes('read_insights')) missingUserLevel.push('read_insights');
-            if (!userScopes.includes('pages_show_list')) missingUserLevel.push('pages_show_list');
+            // Warn (but don't block) if other permissions are missing at user level
+            const requiredPerms = ['pages_show_list', 'pages_read_engagement', 'pages_manage_posts', 'pages_read_user_content', 'read_insights', 'pages_manage_metadata'];
+            const missingUserLevel = requiredPerms.filter(p => !userScopes.includes(p));
 
             if (missingUserLevel.length > 0) {
-                showStatus('manualStatus', 'warning', `<strong>Note:</strong> Your user token is missing <code>${missingUserLevel.join('</code>, <code>')}</code> at the user level. We'll check each page token individually — they may still have the right access.`);
+                showStatus('manualStatus', 'warning', `<strong>Missing user-level permissions:</strong> <code>${missingUserLevel.join('</code>, <code>')}</code>. We'll still check each page token individually — they may have the right access.`);
             } else {
-                showStatus('manualStatus', 'info', '<strong>Token valid!</strong> Fetching your pages...');
+                showStatus('manualStatus', 'success', '<strong>Token valid!</strong> All 6 required permissions found. Fetching your pages...');
             }
 
             btn.innerHTML = '<span class="spinner"></span> Fetching pages...';
@@ -480,19 +497,25 @@
 
             // Step 4: Check permissions for each page token
             let allGood = true;
-            let pagesWithEngagement = 0;
-            let pagesWithInsights = 0;
+            const permCounts = {
+                'pages_read_engagement': 0,
+                'read_insights': 0,
+                'pages_manage_posts': 0,
+                'pages_read_user_content': 0,
+                'pages_show_list': 0,
+                'pages_manage_metadata': 0,
+            };
 
             for (const page of pages) {
                 const result = await checkPagePermissions(page.access_token, token);
                 updatePagePermissions(page.id, result);
 
                 if (result.checked && result.permissions) {
-                    if (result.permissions['pages_read_engagement']) pagesWithEngagement++;
-                    if (result.permissions['read_insights']) pagesWithInsights++;
-                    if (!result.permissions['pages_read_engagement'] || !result.permissions['read_insights']) {
-                        allGood = false;
+                    for (const key of Object.keys(permCounts)) {
+                        if (result.permissions[key]) permCounts[key]++;
                     }
+                    const hasAll = Object.keys(permCounts).every(k => result.permissions[k]);
+                    if (!hasAll) allGood = false;
                 } else {
                     allGood = false;
                 }
@@ -517,9 +540,10 @@
 
             // Step 6: Final status
             if (allGood) {
-                showStatus('manualStatus', 'success', `<strong>All done!</strong> ${pages.length} page${pages.length > 1 ? 's' : ''} connected with full permissions (engagement + insights). We'll start analysing your data shortly.`);
+                showStatus('manualStatus', 'success', `<strong>All done!</strong> ${pages.length} page${pages.length > 1 ? 's' : ''} connected with all 6 permissions. We'll start analysing your data shortly.`);
             } else {
-                showStatus('manualStatus', 'warning', `<strong>Connected ${pages.length} page${pages.length > 1 ? 's' : ''}.</strong> Engagement: ${pagesWithEngagement}/${pages.length} | Insights: ${pagesWithInsights}/${pages.length}. Pages missing permissions will have limited analytics — see badges below.`);
+                const summary = Object.entries(permCounts).map(([k, v]) => `${k}: ${v}/${pages.length}`).join(' · ');
+                showStatus('manualStatus', 'warning', `<strong>Connected ${pages.length} page${pages.length > 1 ? 's' : ''}.</strong> Some pages are missing permissions — see badges below.<br><span style="font-family:'JetBrains Mono',monospace;font-size:.75rem;margin-top:.3rem;display:block;opacity:.8">${summary}</span>`);
             }
 
         } catch (err) {
@@ -569,6 +593,10 @@
         const badges = [
             { name: 'pages_read_engagement', ok: p['pages_read_engagement'] },
             { name: 'read_insights', ok: p['read_insights'] },
+            { name: 'pages_manage_posts', ok: p['pages_manage_posts'] },
+            { name: 'pages_read_user_content', ok: p['pages_read_user_content'] },
+            { name: 'pages_show_list', ok: p['pages_show_list'] },
+            { name: 'pages_manage_metadata', ok: p['pages_manage_metadata'] },
         ];
 
         const allGranted = badges.every(b => b.ok);
@@ -576,7 +604,7 @@
         permsEl.innerHTML = badges.map(b =>
             `<span class="perm-badge ${b.ok ? 'granted' : 'missing'}">${b.ok ? checkSvg : crossSvg} ${b.name}</span>`
         ).join('') +
-        `<div class="page-row-perm-summary ${allGranted ? 'all-good' : 'has-issues'}">${allGranted ? '✓ Full access — engagement + insights' : '⚠ Missing permissions — limited analytics'}</div>`;
+        `<div class="page-row-perm-summary ${allGranted ? 'all-good' : 'has-issues'}">${allGranted ? '✓ All 6 permissions granted' : '⚠ Missing ' + badges.filter(b=>!b.ok).length + ' permission(s)'}</div>`;
 
         if (dotEl) {
             if (allGranted) {
