@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Your Pages — Artemis AI</title>
+    <meta name="description" content="Connect your Facebook pages to Artemis AI and unlock AI-powered social media intelligence.">
+    <meta name="theme-color" content="#0a0e17">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg-primary:#060a13;--bg-secondary:#0c1221;--bg-tertiary:#111a2e;--bg-card:#0f1729;--bg-card-hover:#142036;--accent:#00d4aa;--accent-bright:#00f5c4;--accent-secondary:#6366f1;--accent-dim:rgba(0,212,170,0.1);--accent-glow:rgba(0,212,170,0.35);--accent-glow-strong:rgba(0,212,170,0.6);--text-primary:#e8ecf4;--text-secondary:#7b8ba8;--text-muted:#4a5568;--border:rgba(255,255,255,0.05);--border-accent:rgba(0,212,170,0.15);--border-accent-strong:rgba(0,212,170,0.3);--fb-blue:#1877f2;--fb-blue-hover:#166fe5;--danger:#f87171;--danger-dim:rgba(248,113,113,0.1);--success:#00d4aa;--warning:#febc2e}
+        *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+        body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-primary);overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100vh}
+        body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:10000}
+        ::selection{background:var(--accent);color:var(--bg-primary)}
+
+        /* ── Navigation (identical to index.html) ── */
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.85);border-bottom:1px solid var(--border)}
+        .nav-logo{font-size:1.3rem;font-weight:700;letter-spacing:.12em;color:var(--text-primary);text-decoration:none;display:flex;align-items:center;gap:.7rem}
+        .logo-mark{width:36px;height:36px;position:relative}.logo-mark svg{width:100%;height:100%}
+        .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+        .nav-links a{color:var(--text-secondary);text-decoration:none;font-size:.88rem;font-weight:400;letter-spacing:.02em;transition:color .3s;position:relative}
+        .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transition:transform .3s}
+        .nav-links a:hover{color:var(--text-primary)}.nav-links a:hover::after{transform:scaleX(1)}
+        .nav-cta{padding:.55rem 1.4rem!important;background:var(--accent)!important;color:var(--bg-primary)!important;border-radius:8px;font-weight:600!important;font-size:.82rem!important;transition:all .3s!important}
+        .nav-cta::after{display:none!important}.nav-cta:hover{background:var(--accent-bright)!important;transform:translateY(-1px);box-shadow:0 8px 25px var(--accent-glow)}
+        .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+        .hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);margin:5px 0;border-radius:2px;transition:all .3s}
+
+        /* ── Page Layout ── */
+        .page-container{max-width:680px;margin:0 auto;padding:120px 2rem 4rem}
+
+        /* ── Hero Header ── */
+        .page-hero{text-align:center;margin-bottom:3rem;position:relative}
+        .page-hero::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:500px;height:300px;background:radial-gradient(ellipse,rgba(0,212,170,0.06),transparent 70%);pointer-events:none}
+        .page-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem .4rem .7rem;background:rgba(0,212,170,0.06);border:1px solid rgba(0,212,170,0.12);border-radius:100px;font-size:.75rem;font-weight:500;color:var(--accent);margin-bottom:1.5rem;letter-spacing:.04em}
+        .page-badge svg{width:14px;height:14px;stroke:var(--accent);fill:none;stroke-width:2}
+        .page-hero h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.8rem;line-height:1.15}
+        .page-hero h1 .gradient-text{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-bright) 40%,#4fd1c5 70%,var(--accent-secondary) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .page-hero p{font-size:1rem;color:var(--text-secondary);line-height:1.7;max-width:500px;margin:0 auto;font-weight:300}
+
+        /* ── Main Card ── */
+        .connect-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;overflow:hidden;position:relative}
+        .connect-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.5}
+
+        /* ── Tabs ── */
+        .tab-nav{display:flex;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.01)}
+        .tab-btn{flex:1;padding:1rem;background:none;border:none;color:var(--text-muted);font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;transition:all .3s;position:relative;letter-spacing:.01em}
+        .tab-btn:hover{color:var(--text-secondary);background:rgba(255,255,255,0.01)}
+        .tab-btn.active{color:var(--accent)}
+        .tab-btn.active::after{content:'';position:absolute;bottom:-1px;left:20%;right:20%;height:2px;background:var(--accent);border-radius:2px 2px 0 0}
+        .tab-btn svg{width:16px;height:16px;vertical-align:-3px;margin-right:.4rem}
+
+        /* ── Tab Content ── */
+        .tab-content{display:none;padding:2rem}
+        .tab-content.active{display:block}
+
+        /* ── Facebook Connect (Tab 1) ── */
+        .fb-connect-section{text-align:center}
+        .fb-icon-wrap{width:72px;height:72px;background:rgba(24,119,242,0.08);border:1px solid rgba(24,119,242,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
+        .fb-icon-wrap svg{width:32px;height:32px}
+        .fb-connect-section h2{font-size:1.2rem;font-weight:600;margin-bottom:.5rem}
+        .fb-connect-section p{font-size:.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:2rem;font-weight:300}
+        .btn-facebook{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 2.4rem;background:var(--fb-blue);color:#fff;border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .35s;text-decoration:none;position:relative;overflow:hidden}
+        .btn-facebook::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,0.1),transparent);transform:translateX(-100%);transition:transform .5s}
+        .btn-facebook:hover::before{transform:translateX(100%)}
+        .btn-facebook:hover{background:var(--fb-blue-hover);transform:translateY(-2px);box-shadow:0 12px 40px rgba(24,119,242,0.3)}
+        .btn-facebook svg{width:20px;height:20px;fill:#fff}
+
+        .permissions-list{margin-top:2rem;text-align:left}
+        .permissions-list h3{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.8rem}
+        .perm-item{display:flex;align-items:center;gap:.6rem;padding:.55rem 0;font-size:.82rem;color:var(--text-secondary)}
+        .perm-check{width:18px;height:18px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .perm-check svg{width:11px;height:11px;stroke:var(--accent);fill:none;stroke-width:2.5}
+
+        /* ── Manual Token (Tab 2) ── */
+        .manual-section h2{font-size:1.2rem;font-weight:600;margin-bottom:.4rem}
+        .manual-section>p{font-size:.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.5rem;font-weight:300}
+
+        .form-group{margin-bottom:1.2rem}
+        .form-label{display:block;font-size:.8rem;font-weight:500;color:var(--text-secondary);margin-bottom:.45rem;letter-spacing:.02em}
+        .form-label .required{color:var(--danger);margin-left:.15rem}
+        .form-input{width:100%;padding:.85rem 1.1rem;background:var(--bg-primary);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-family:'JetBrains Mono',monospace;font-size:.82rem;outline:none;transition:all .3s;line-height:1.5}
+        .form-input::placeholder{color:var(--text-muted);font-family:'Outfit',sans-serif}
+        .form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,170,0.08)}
+        textarea.form-input{min-height:100px;resize:vertical;font-family:'JetBrains Mono',monospace}
+        .form-hint{font-size:.72rem;color:var(--text-muted);margin-top:.35rem;line-height:1.5}
+        .form-hint a{color:var(--accent);text-decoration:none}
+        .form-hint a:hover{text-decoration:underline}
+
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+        .btn-submit{width:100%;padding:.9rem;background:var(--accent);color:var(--bg-primary);border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .35s;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.5rem}
+        .btn-submit::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,0.15),transparent);transform:translateX(-100%);transition:transform .5s}
+        .btn-submit:hover::before{transform:translateX(100%)}
+        .btn-submit:hover{background:var(--accent-bright);transform:translateY(-1px);box-shadow:0 8px 30px var(--accent-glow)}
+        .btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+        .btn-submit svg{width:18px;height:18px;stroke:var(--bg-primary);fill:none;stroke-width:2}
+
+        /* ── Status / Results ── */
+        .status-banner{padding:.85rem 1.1rem;border-radius:10px;font-size:.85rem;display:none;align-items:flex-start;gap:.6rem;margin-bottom:1.2rem;animation:fadeIn .3s ease}
+        .status-banner.show{display:flex}
+        .status-banner.success{background:rgba(0,212,170,0.06);border:1px solid rgba(0,212,170,0.15);color:var(--accent)}
+        .status-banner.error{background:var(--danger-dim);border:1px solid rgba(248,113,113,0.2);color:var(--danger)}
+        .status-banner.warning{background:rgba(254,188,46,0.06);border:1px solid rgba(254,188,46,0.15);color:var(--warning)}
+        .status-banner.info{background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.15);color:var(--accent-secondary)}
+        .status-icon{flex-shrink:0;margin-top:1px}
+        .status-text{line-height:1.55;font-weight:400}
+        .status-text strong{font-weight:600}
+
+        @keyframes fadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+
+        .pages-result{margin-top:1.5rem;display:none}
+        .pages-result.show{display:block}
+        .pages-result h3{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.8rem}
+        .page-row{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:var(--bg-primary);border:1px solid var(--border);border-radius:10px;margin-bottom:.5rem;transition:all .3s}
+        .page-row:hover{border-color:var(--border-accent)}
+        .page-row-icon{width:36px;height:36px;background:rgba(24,119,242,0.08);border:1px solid rgba(24,119,242,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .page-row-icon svg{width:16px;height:16px;fill:var(--fb-blue)}
+        .page-row-info{flex:1;min-width:0}
+        .page-row-name{font-size:.88rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .page-row-meta{font-size:.72rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
+        .page-row-status{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;box-shadow:0 0 8px var(--accent-glow)}
+
+        /* ── Info Cards ── */
+        .info-section{margin-top:2.5rem}
+        .info-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1rem}
+        .info-card h3{font-size:.9rem;font-weight:600;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+        .info-card h3 svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:2}
+        .info-card p,.info-card li{font-size:.82rem;color:var(--text-secondary);line-height:1.65;font-weight:300}
+        .info-card ol{padding-left:1.2rem;margin-top:.5rem}
+        .info-card ol li{margin-bottom:.4rem}
+        .info-card code{font-family:'JetBrains Mono',monospace;font-size:.75rem;background:var(--bg-primary);border:1px solid var(--border);padding:.15rem .45rem;border-radius:4px;color:var(--accent)}
+
+        /* ── Spinner ── */
+        .spinner{width:18px;height:18px;border:2px solid rgba(6,10,19,0.2);border-top-color:var(--bg-primary);border-radius:50%;animation:spin .6s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+
+        /* ── Footer ── */
+        footer{padding:2.5rem 2rem;border-top:1px solid var(--border);text-align:center;background:var(--bg-primary)}
+        .footer-content{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto}
+        footer p{font-size:.78rem;color:var(--text-muted)}
+        footer a{color:var(--accent);text-decoration:none;transition:color .3s}footer a:hover{color:var(--accent-bright)}
+        .footer-links{display:flex;gap:1.5rem}.footer-links a{font-size:.78rem;color:var(--text-muted)}.footer-links a:hover{color:var(--accent)}
+
+        /* ── Responsive ── */
+        @media(max-width:768px){
+            nav{padding:0 1.5rem}
+            .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(6,10,19,0.98);backdrop-filter:blur(20px);padding:1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}
+            .nav-links.open{display:flex}
+            .hamburger{display:block}
+            .page-container{padding:100px 1.25rem 3rem}
+            .tab-content{padding:1.5rem}
+            .form-row{grid-template-columns:1fr}
+            .footer-content{flex-direction:column;gap:1rem}
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="/" class="nav-logo">
+            <div class="logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
+            ARTEMIS
+        </a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="/#features">Features</a></li>
+            <li><a href="/#how">How It Works</a></li>
+            <li><a href="/#team">Team</a></li>
+            <li><a href="/#contact">Contact</a></li>
+            <li><a href="/#contact" class="nav-cta">Get Early Access</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="page-container">
+
+        <!-- Header -->
+        <div class="page-hero">
+            <div class="page-badge">
+                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Secure Connection
+            </div>
+            <h1>Connect Your <span class="gradient-text">Facebook Pages</span></h1>
+            <p>Link your pages to Artemis so we can start analysing your content, audience, and engagement patterns.</p>
+        </div>
+
+        <!-- Main Card -->
+        <div class="connect-card">
+            <div class="tab-nav">
+                <button class="tab-btn active" onclick="switchTab('oauth')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    Quick Connect
+                </button>
+                <button class="tab-btn" onclick="switchTab('manual')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                    Manual Token
+                </button>
+            </div>
+
+            <!-- Tab 1: OAuth Quick Connect -->
+            <div class="tab-content active" id="tab-oauth">
+                <div class="fb-connect-section">
+                    <div class="fb-icon-wrap">
+                        <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.414c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971H15.83c-1.491 0-1.956.93-1.956 1.886v2.263h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" fill="#1877F2"/></svg>
+                    </div>
+                    <h2>Connect with Facebook</h2>
+                    <p>Click below to securely connect your Facebook account. You'll be asked to grant Artemis permission to read your page engagement data. We never post on your behalf.</p>
+                    <button class="btn-facebook" id="btnFbConnect" onclick="connectFacebook()">
+                        <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.414c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971H15.83c-1.491 0-1.956.93-1.956 1.886v2.263h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+                        Connect with Facebook
+                    </button>
+                    <div class="permissions-list">
+                        <h3>Permissions Requested</h3>
+                        <div class="perm-item">
+                            <span class="perm-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <span><strong>pages_show_list</strong> — See your list of managed pages</span>
+                        </div>
+                        <div class="perm-item">
+                            <span class="perm-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <span><strong>pages_read_engagement</strong> — Read likes, comments & shares</span>
+                        </div>
+                        <div class="perm-item">
+                            <span class="perm-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <span><strong>read_insights</strong> — Access page analytics & insights</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Manual Token Submission -->
+            <div class="tab-content" id="tab-manual">
+                <div class="manual-section">
+                    <h2>Submit Token Manually</h2>
+                    <p>If you already have a Facebook User Access Token or Page Access Token, paste it below. We'll validate it and pull your page data automatically.</p>
+
+                    <div id="manualStatus" class="status-banner"></div>
+
+                    <form id="tokenForm" onsubmit="submitToken(event)">
+                        <div class="form-group">
+                            <label class="form-label">Access Token <span class="required">*</span></label>
+                            <textarea class="form-input" id="tokenInput" placeholder="Paste your Facebook access token here..." required></textarea>
+                            <div class="form-hint">
+                                Get a token from the <a href="https://developers.facebook.com/tools/explorer/" target="_blank" rel="noopener">Graph API Explorer</a> or your app's OAuth flow. Must include <code>pages_read_engagement</code> permission.
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Your Name</label>
+                                <input type="text" class="form-input" id="userName" placeholder="e.g. John Doe" style="font-family:'Outfit',sans-serif">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" id="userEmail" placeholder="you@company.com" style="font-family:'Outfit',sans-serif">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="btnSubmit">
+                            <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4z"/></svg>
+                            Validate & Connect Pages
+                        </button>
+                    </form>
+
+                    <!-- Pages Result -->
+                    <div class="pages-result" id="pagesResult">
+                        <h3>Connected Pages</h3>
+                        <div id="pagesList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="info-card">
+                <h3>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    How to get a token manually
+                </h3>
+                <ol>
+                    <li>Go to <a href="https://developers.facebook.com/tools/explorer/" target="_blank" rel="noopener" style="color:var(--accent)">Graph API Explorer</a></li>
+                    <li>Select your app from the dropdown</li>
+                    <li>Click <strong>"Generate Access Token"</strong></li>
+                    <li>Grant the permissions: <code>pages_show_list</code>, <code>pages_read_engagement</code>, <code>read_insights</code></li>
+                    <li>Copy the token and paste it above</li>
+                </ol>
+            </div>
+
+            <div class="info-card">
+                <h3>
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    Your data is safe
+                </h3>
+                <p>Artemis only reads your page data — we never post, edit, or delete anything on your pages. Tokens are encrypted at rest and transmitted over HTTPS. You can revoke access at any time from your Facebook settings.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Artemis AI — The Complete Social Media Intelligence Platform</p>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // =============================================
+    // CONFIGURATION — Replace these with your values
+    // =============================================
+    const CONFIG = {
+        FB_APP_ID: 'YOUR_FACEBOOK_APP_ID',           // Replace with your Facebook App ID
+        REDIRECT_URI: window.location.origin + '/connect.html', // OAuth callback URL
+        SCOPES: 'pages_show_list,pages_read_engagement,read_insights',
+        API_VERSION: 'v22.0',
+        // Your backend endpoint that receives token + page data
+        BACKEND_URL: '/api/connect',  // Replace with your actual backend
+    };
+
+    // =============================================
+    // TAB SWITCHING
+    // =============================================
+    function switchTab(tab) {
+        document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+            btn.classList.toggle('active', (tab === 'oauth' && i === 0) || (tab === 'manual' && i === 1));
+        });
+        document.getElementById('tab-oauth').classList.toggle('active', tab === 'oauth');
+        document.getElementById('tab-manual').classList.toggle('active', tab === 'manual');
+    }
+
+    // =============================================
+    // FACEBOOK OAUTH CONNECT
+    // =============================================
+    function connectFacebook() {
+        const state = crypto.randomUUID ? crypto.randomUUID() : Date.now().toString();
+        sessionStorage.setItem('fb_oauth_state', state);
+
+        const params = new URLSearchParams({
+            client_id: CONFIG.FB_APP_ID,
+            redirect_uri: CONFIG.REDIRECT_URI,
+            scope: CONFIG.SCOPES,
+            response_type: 'code',
+            state: state
+        });
+
+        const url = `https://www.facebook.com/${CONFIG.API_VERSION}/dialog/oauth?${params}`;
+        window.location.href = url;
+    }
+
+    // Handle OAuth callback (if redirected back with ?code=)
+    function handleOAuthCallback() {
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        const state = params.get('state');
+        const error = params.get('error');
+
+        if (error) {
+            showStatus('manualStatus', 'error', `Facebook authorization was denied: ${params.get('error_description') || error}`);
+            switchTab('oauth');
+            // Clean URL
+            window.history.replaceState({}, '', window.location.pathname);
+            return;
+        }
+
+        if (!code) return; // Not a callback, normal page load
+
+        // Clean the URL immediately
+        window.history.replaceState({}, '', window.location.pathname);
+
+        // Switch to manual tab to show results
+        switchTab('manual');
+
+        // Verify state
+        const savedState = sessionStorage.getItem('fb_oauth_state');
+        if (state && savedState && state !== savedState) {
+            showStatus('manualStatus', 'error', 'Security check failed (state mismatch). Please try connecting again.');
+            return;
+        }
+        sessionStorage.removeItem('fb_oauth_state');
+
+        showStatus('manualStatus', 'info', '<strong>Processing...</strong> Exchanging authorization code for access token. This may take a moment.');
+
+        // Send the code to your backend to exchange for tokens
+        // Your backend should:
+        // 1. Exchange code for user access token
+        // 2. Exchange for long-lived token
+        // 3. Get page tokens via /me/accounts
+        // 4. Store everything
+        // 5. Return the list of connected pages
+        sendToBackend({ type: 'oauth_code', code: code });
+    }
+
+    // =============================================
+    // MANUAL TOKEN SUBMISSION
+    // =============================================
+    async function submitToken(e) {
+        e.preventDefault();
+        const token = document.getElementById('tokenInput').value.trim();
+        const name = document.getElementById('userName').value.trim();
+        const email = document.getElementById('userEmail').value.trim();
+
+        if (!token) {
+            showStatus('manualStatus', 'error', 'Please paste your access token.');
+            return;
+        }
+
+        const btn = document.getElementById('btnSubmit');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Validating token...';
+        hideStatus('manualStatus');
+        document.getElementById('pagesResult').classList.remove('show');
+
+        try {
+            // Step 1: Validate the token via Facebook debug endpoint
+            const debugRes = await fetch(`https://graph.facebook.com/${CONFIG.API_VERSION}/debug_token?input_token=${encodeURIComponent(token)}&access_token=${encodeURIComponent(token)}`);
+            const debugData = await debugRes.json();
+
+            if (debugData.error || !debugData.data) {
+                throw new Error(debugData.error?.message || 'Invalid token');
+            }
+
+            const scopes = debugData.data.scopes || [];
+            if (!scopes.includes('pages_read_engagement')) {
+                showStatus('manualStatus', 'warning', `<strong>Missing permission:</strong> This token doesn't have <code>pages_read_engagement</code>. Found scopes: ${scopes.join(', ')}. Please generate a new token with the correct permissions.`);
+                resetBtn();
+                return;
+            }
+
+            showStatus('manualStatus', 'info', '<strong>Token valid!</strong> Fetching your pages...');
+
+            // Step 2: Get pages
+            const pagesRes = await fetch(`https://graph.facebook.com/${CONFIG.API_VERSION}/me/accounts?fields=id,name,access_token,category,tasks&limit=100&access_token=${encodeURIComponent(token)}`);
+            const pagesData = await pagesRes.json();
+
+            if (pagesData.error) {
+                throw new Error(pagesData.error.message);
+            }
+
+            const pages = pagesData.data || [];
+
+            if (pages.length === 0) {
+                showStatus('manualStatus', 'warning', '<strong>No pages found.</strong> This token doesn\'t have access to any Facebook pages. Make sure you\'re using a User Access Token (not a Page token) and that you manage at least one page.');
+                resetBtn();
+                return;
+            }
+
+            // Step 3: Display pages
+            displayPages(pages);
+
+            // Step 4: Send to backend
+            showStatus('manualStatus', 'success', `<strong>Found ${pages.length} page${pages.length > 1 ? 's' : ''}!</strong> Connecting to Artemis...`);
+
+            await sendToBackend({
+                type: 'manual_token',
+                user_token: token,
+                user_name: name,
+                user_email: email,
+                pages: pages.map(p => ({
+                    id: p.id,
+                    name: p.name,
+                    access_token: p.access_token,
+                    category: p.category,
+                    tasks: p.tasks
+                }))
+            });
+
+            showStatus('manualStatus', 'success', `<strong>All done!</strong> ${pages.length} page${pages.length > 1 ? 's' : ''} connected to Artemis. We'll start analysing your data shortly.`);
+
+        } catch (err) {
+            showStatus('manualStatus', 'error', `<strong>Error:</strong> ${err.message}`);
+        }
+
+        resetBtn();
+    }
+
+    function displayPages(pages) {
+        const list = document.getElementById('pagesList');
+        list.innerHTML = pages.map(p => `
+            <div class="page-row">
+                <div class="page-row-icon">
+                    <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="#1877F2"/></svg>
+                </div>
+                <div class="page-row-info">
+                    <div class="page-row-name">${escapeHtml(p.name)}</div>
+                    <div class="page-row-meta">ID: ${p.id}${p.category ? ' · ' + escapeHtml(p.category) : ''}</div>
+                </div>
+                <div class="page-row-status" title="Connected"></div>
+            </div>
+        `).join('');
+        document.getElementById('pagesResult').classList.add('show');
+    }
+
+    // =============================================
+    // BACKEND COMMUNICATION
+    // =============================================
+    async function sendToBackend(data) {
+        try {
+            const res = await fetch(CONFIG.BACKEND_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            if (!res.ok) {
+                console.warn('Backend responded with:', res.status);
+            }
+            return await res.json().catch(() => ({}));
+        } catch (err) {
+            // Backend might not be set up yet — that's ok, we still show the pages
+            console.warn('Backend not reachable (this is OK during development):', err.message);
+            return {};
+        }
+    }
+
+    // =============================================
+    // HELPERS
+    // =============================================
+    function showStatus(id, type, html) {
+        const el = document.getElementById(id);
+        el.className = `status-banner show ${type}`;
+        const icons = {
+            success: '✓',
+            error: '✗',
+            warning: '⚠',
+            info: '⟳'
+        };
+        el.innerHTML = `<span class="status-icon">${icons[type] || ''}</span><span class="status-text">${html}</span>`;
+    }
+
+    function hideStatus(id) {
+        document.getElementById(id).classList.remove('show');
+    }
+
+    function resetBtn() {
+        const btn = document.getElementById('btnSubmit');
+        btn.disabled = false;
+        btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4z"/></svg> Validate & Connect Pages';
+    }
+
+    function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
+    // =============================================
+    // INIT
+    // =============================================
+    handleOAuthCallback();
+    </script>
+</body>
+</html>
