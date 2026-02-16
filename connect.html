@@ -17,7 +17,6 @@
         body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:10000}
         ::selection{background:var(--accent);color:var(--bg-primary)}
 
-        /* ── Navigation (identical to index.html) ── */
         nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.85);border-bottom:1px solid var(--border)}
         .nav-logo{font-size:1.3rem;font-weight:700;letter-spacing:.12em;color:var(--text-primary);text-decoration:none;display:flex;align-items:center;gap:.7rem}
         .logo-mark{width:36px;height:36px;position:relative}.logo-mark svg{width:100%;height:100%}
@@ -30,10 +29,8 @@
         .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
         .hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);margin:5px 0;border-radius:2px;transition:all .3s}
 
-        /* ── Page Layout ── */
         .page-container{max-width:680px;margin:0 auto;padding:120px 2rem 4rem}
 
-        /* ── Hero Header ── */
         .page-hero{text-align:center;margin-bottom:3rem;position:relative}
         .page-hero::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:500px;height:300px;background:radial-gradient(ellipse,rgba(0,212,170,0.06),transparent 70%);pointer-events:none}
         .page-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem .4rem .7rem;background:rgba(0,212,170,0.06);border:1px solid rgba(0,212,170,0.12);border-radius:100px;font-size:.75rem;font-weight:500;color:var(--accent);margin-bottom:1.5rem;letter-spacing:.04em}
@@ -42,41 +39,16 @@
         .page-hero h1 .gradient-text{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-bright) 40%,#4fd1c5 70%,var(--accent-secondary) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .page-hero p{font-size:1rem;color:var(--text-secondary);line-height:1.7;max-width:500px;margin:0 auto;font-weight:300}
 
-        /* ── Main Card ── */
         .connect-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;overflow:hidden;position:relative}
         .connect-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.5}
 
-        /* ── Tabs ── */
         .tab-nav{display:flex;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.01)}
-        .tab-btn{flex:1;padding:1rem;background:none;border:none;color:var(--text-muted);font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;transition:all .3s;position:relative;letter-spacing:.01em}
-        .tab-btn:hover{color:var(--text-secondary);background:rgba(255,255,255,0.01)}
-        .tab-btn.active{color:var(--accent)}
-        .tab-btn.active::after{content:'';position:absolute;bottom:-1px;left:20%;right:20%;height:2px;background:var(--accent);border-radius:2px 2px 0 0}
+        .tab-btn{flex:1;padding:1rem;background:none;border:none;color:var(--accent);font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:500;cursor:default;position:relative;letter-spacing:.01em}
+        .tab-btn::after{content:'';position:absolute;bottom:-1px;left:20%;right:20%;height:2px;background:var(--accent);border-radius:2px 2px 0 0}
         .tab-btn svg{width:16px;height:16px;vertical-align:-3px;margin-right:.4rem}
 
-        /* ── Tab Content ── */
-        .tab-content{display:none;padding:2rem}
-        .tab-content.active{display:block}
+        .tab-content{padding:2rem}
 
-        /* ── Facebook Connect (Tab 1) ── */
-        .fb-connect-section{text-align:center}
-        .fb-icon-wrap{width:72px;height:72px;background:rgba(24,119,242,0.08);border:1px solid rgba(24,119,242,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
-        .fb-icon-wrap svg{width:32px;height:32px}
-        .fb-connect-section h2{font-size:1.2rem;font-weight:600;margin-bottom:.5rem}
-        .fb-connect-section p{font-size:.88rem;color:var(--text-secondary);line-height:1.6;margin-bottom:2rem;font-weight:300}
-        .btn-facebook{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 2.4rem;background:var(--fb-blue);color:#fff;border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .35s;text-decoration:none;position:relative;overflow:hidden}
-        .btn-facebook::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,0.1),transparent);transform:translateX(-100%);transition:transform .5s}
-        .btn-facebook:hover::before{transform:translateX(100%)}
-        .btn-facebook:hover{background:var(--fb-blue-hover);transform:translateY(-2px);box-shadow:0 12px 40px rgba(24,119,242,0.3)}
-        .btn-facebook svg{width:20px;height:20px;fill:#fff}
-
-        .permissions-list{margin-top:2rem;text-align:left}
-        .permissions-list h3{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.8rem}
-        .perm-item{display:flex;align-items:center;gap:.6rem;padding:.55rem 0;font-size:.82rem;color:var(--text-secondary)}
-        .perm-check{width:18px;height:18px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-        .perm-check svg{width:11px;height:11px;stroke:var(--accent);fill:none;stroke-width:2.5}
-
-        /* ── Manual Token (Tab 2) ── */
         .manual-section h2{font-size:1.2rem;font-weight:600;margin-bottom:.4rem}
         .manual-section>p{font-size:.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.5rem;font-weight:300}
 
@@ -100,7 +72,6 @@
         .btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none!important;box-shadow:none!important}
         .btn-submit svg{width:18px;height:18px;stroke:var(--bg-primary);fill:none;stroke-width:2}
 
-        /* ── Status / Results ── */
         .status-banner{padding:.85rem 1.1rem;border-radius:10px;font-size:.85rem;display:none;align-items:flex-start;gap:.6rem;margin-bottom:1.2rem;animation:fadeIn .3s ease}
         .status-banner.show{display:flex}
         .status-banner.success{background:rgba(0,212,170,0.06);border:1px solid rgba(0,212,170,0.15);color:var(--accent)}
@@ -118,14 +89,34 @@
         .pages-result h3{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.8rem}
         .page-row{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:var(--bg-primary);border:1px solid var(--border);border-radius:10px;margin-bottom:.5rem;transition:all .3s}
         .page-row:hover{border-color:var(--border-accent)}
+        .page-row.has-warning{border-color:rgba(254,188,46,0.3)}
+        .page-row.has-error{border-color:rgba(248,113,113,0.3)}
         .page-row-icon{width:36px;height:36px;background:rgba(24,119,242,0.08);border:1px solid rgba(24,119,242,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
         .page-row-icon svg{width:16px;height:16px;fill:var(--fb-blue)}
         .page-row-info{flex:1;min-width:0}
         .page-row-name{font-size:.88rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .page-row-meta{font-size:.72rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
-        .page-row-status{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;box-shadow:0 0 8px var(--accent-glow)}
+        .page-row-status{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+        .page-row-status.ok{background:var(--accent);box-shadow:0 0 8px var(--accent-glow)}
+        .page-row-status.warn{background:var(--warning);box-shadow:0 0 8px rgba(254,188,46,0.4)}
+        .page-row-status.fail{background:var(--danger);box-shadow:0 0 8px rgba(248,113,113,0.4)}
+        .page-row-status.checking{background:var(--text-muted);animation:pulse 1.5s infinite}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
-        /* ── Info Cards ── */
+        .perm-badges{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+        .perm-badge{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:4px;font-size:.62rem;font-family:'JetBrains Mono',monospace;font-weight:500;letter-spacing:.02em}
+        .perm-badge.granted{background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.2);color:var(--accent)}
+        .perm-badge.missing{background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);color:var(--danger)}
+        .perm-badge.unknown{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-muted)}
+        .perm-badge svg{width:9px;height:9px;stroke-width:2.5;fill:none}
+        .perm-badge.granted svg{stroke:var(--accent)}
+        .perm-badge.missing svg{stroke:var(--danger)}
+
+        .perm-summary{margin-top:1rem;padding:1rem;border-radius:10px;font-size:.82rem;line-height:1.6}
+        .perm-summary.all-good{background:rgba(0,212,170,0.06);border:1px solid rgba(0,212,170,0.15);color:var(--accent)}
+        .perm-summary.has-issues{background:rgba(254,188,46,0.06);border:1px solid rgba(254,188,46,0.15);color:var(--warning)}
+        .perm-summary strong{font-weight:600}
+
         .info-section{margin-top:2.5rem}
         .info-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1rem}
         .info-card h3{font-size:.9rem;font-weight:600;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
@@ -135,18 +126,15 @@
         .info-card ol li{margin-bottom:.4rem}
         .info-card code{font-family:'JetBrains Mono',monospace;font-size:.75rem;background:var(--bg-primary);border:1px solid var(--border);padding:.15rem .45rem;border-radius:4px;color:var(--accent)}
 
-        /* ── Spinner ── */
         .spinner{width:18px;height:18px;border:2px solid rgba(6,10,19,0.2);border-top-color:var(--bg-primary);border-radius:50%;animation:spin .6s linear infinite}
         @keyframes spin{to{transform:rotate(360deg)}}
 
-        /* ── Footer ── */
         footer{padding:2.5rem 2rem;border-top:1px solid var(--border);text-align:center;background:var(--bg-primary)}
         .footer-content{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto}
         footer p{font-size:.78rem;color:var(--text-muted)}
         footer a{color:var(--accent);text-decoration:none;transition:color .3s}footer a:hover{color:var(--accent-bright)}
         .footer-links{display:flex;gap:1.5rem}.footer-links a{font-size:.78rem;color:var(--text-muted)}.footer-links a:hover{color:var(--accent)}
 
-        /* ── Responsive ── */
         @media(max-width:768px){
             nav{padding:0 1.5rem}
             .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(6,10,19,0.98);backdrop-filter:blur(20px);padding:1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}
@@ -161,7 +149,6 @@
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav>
         <a href="/" class="nav-logo">
             <div class="logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
@@ -177,10 +164,8 @@
         </ul>
     </nav>
 
-    <!-- Page Content -->
     <div class="page-container">
 
-        <!-- Header -->
         <div class="page-hero">
             <div class="page-badge">
                 <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -190,54 +175,18 @@
             <p>Link your pages to Artemis so we can start analysing your content, audience, and engagement patterns.</p>
         </div>
 
-        <!-- Main Card -->
         <div class="connect-card">
             <div class="tab-nav">
-                <button class="tab-btn active" onclick="switchTab('oauth')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                    Quick Connect
-                </button>
-                <button class="tab-btn" onclick="switchTab('manual')">
+                <button class="tab-btn">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-                    Manual Token
+                    Connect with Token
                 </button>
             </div>
 
-            <!-- Tab 1: OAuth Quick Connect -->
-            <div class="tab-content active" id="tab-oauth">
-                <div class="fb-connect-section">
-                    <div class="fb-icon-wrap">
-                        <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.414c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971H15.83c-1.491 0-1.956.93-1.956 1.886v2.263h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" fill="#1877F2"/></svg>
-                    </div>
-                    <h2>Connect with Facebook</h2>
-                    <p>Click below to securely connect your Facebook account. You'll be asked to grant Artemis permission to read your page engagement data. We never post on your behalf.</p>
-                    <button class="btn-facebook" id="btnFbConnect" onclick="connectFacebook()">
-                        <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.414c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971H15.83c-1.491 0-1.956.93-1.956 1.886v2.263h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-                        Connect with Facebook
-                    </button>
-                    <div class="permissions-list">
-                        <h3>Permissions Requested</h3>
-                        <div class="perm-item">
-                            <span class="perm-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            <span><strong>pages_show_list</strong> — See your list of managed pages</span>
-                        </div>
-                        <div class="perm-item">
-                            <span class="perm-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            <span><strong>pages_read_engagement</strong> — Read likes, comments & shares</span>
-                        </div>
-                        <div class="perm-item">
-                            <span class="perm-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            <span><strong>read_insights</strong> — Access page analytics & insights</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tab 2: Manual Token Submission -->
-            <div class="tab-content" id="tab-manual">
+            <div class="tab-content" style="display:block">
                 <div class="manual-section">
-                    <h2>Submit Token Manually</h2>
-                    <p>If you already have a Facebook User Access Token or Page Access Token, paste it below. We'll validate it and pull your page data automatically.</p>
+                    <h2>Submit Your Access Token</h2>
+                    <p>Paste your Facebook User Access Token below. We'll validate it, fetch your pages, and verify each page has the permissions Artemis needs.</p>
 
                     <div id="manualStatus" class="status-banner"></div>
 
@@ -246,7 +195,7 @@
                             <label class="form-label">Access Token <span class="required">*</span></label>
                             <textarea class="form-input" id="tokenInput" placeholder="Paste your Facebook access token here..." required></textarea>
                             <div class="form-hint">
-                                Get a token from the <a href="https://developers.facebook.com/tools/explorer/" target="_blank" rel="noopener">Graph API Explorer</a> or your app's OAuth flow. Must include <code>pages_read_engagement</code> permission.
+                                Get a token from the <a href="https://developers.facebook.com/tools/explorer/" target="_blank" rel="noopener">Graph API Explorer</a>. Must include <code>pages_read_engagement</code> and <code>read_insights</code>.
                             </div>
                         </div>
 
@@ -267,21 +216,20 @@
                         </button>
                     </form>
 
-                    <!-- Pages Result -->
                     <div class="pages-result" id="pagesResult">
                         <h3>Connected Pages</h3>
                         <div id="pagesList"></div>
+                        <div id="permSummary"></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Info Section -->
         <div class="info-section">
             <div class="info-card">
                 <h3>
                     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                    How to get a token manually
+                    How to get a token
                 </h3>
                 <ol>
                     <li>Go to <a href="https://developers.facebook.com/tools/explorer/" target="_blank" rel="noopener" style="color:var(--accent)">Graph API Explorer</a></li>
@@ -303,7 +251,6 @@
 
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <p>&copy; 2026 Artemis AI — The Complete Social Media Intelligence Platform</p>
@@ -316,93 +263,19 @@
     </footer>
 
     <script>
-    // =============================================
-    // CONFIGURATION — Replace these with your values
-    // =============================================
     const CONFIG = {
-        FB_APP_ID: 'YOUR_FACEBOOK_APP_ID',           // Replace with your Facebook App ID
-        REDIRECT_URI: window.location.origin + '/connect.html', // OAuth callback URL
-        SCOPES: 'pages_show_list,pages_read_engagement,read_insights',
         API_VERSION: 'v22.0',
-        // Your backend endpoint that receives token + page data
-        BACKEND_URL: '/api/connect',  // Replace with your actual backend
+        BACKEND_URL: '/api/connect',
+        REQUIRED_PERMISSIONS: ['pages_read_engagement', 'read_insights'],
+    };
+
+    const ICONS = {
+        check: '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>',
+        cross: '<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
     };
 
     // =============================================
-    // TAB SWITCHING
-    // =============================================
-    function switchTab(tab) {
-        document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-            btn.classList.toggle('active', (tab === 'oauth' && i === 0) || (tab === 'manual' && i === 1));
-        });
-        document.getElementById('tab-oauth').classList.toggle('active', tab === 'oauth');
-        document.getElementById('tab-manual').classList.toggle('active', tab === 'manual');
-    }
-
-    // =============================================
-    // FACEBOOK OAUTH CONNECT
-    // =============================================
-    function connectFacebook() {
-        const state = crypto.randomUUID ? crypto.randomUUID() : Date.now().toString();
-        sessionStorage.setItem('fb_oauth_state', state);
-
-        const params = new URLSearchParams({
-            client_id: CONFIG.FB_APP_ID,
-            redirect_uri: CONFIG.REDIRECT_URI,
-            scope: CONFIG.SCOPES,
-            response_type: 'code',
-            state: state
-        });
-
-        const url = `https://www.facebook.com/${CONFIG.API_VERSION}/dialog/oauth?${params}`;
-        window.location.href = url;
-    }
-
-    // Handle OAuth callback (if redirected back with ?code=)
-    function handleOAuthCallback() {
-        const params = new URLSearchParams(window.location.search);
-        const code = params.get('code');
-        const state = params.get('state');
-        const error = params.get('error');
-
-        if (error) {
-            showStatus('manualStatus', 'error', `Facebook authorization was denied: ${params.get('error_description') || error}`);
-            switchTab('oauth');
-            // Clean URL
-            window.history.replaceState({}, '', window.location.pathname);
-            return;
-        }
-
-        if (!code) return; // Not a callback, normal page load
-
-        // Clean the URL immediately
-        window.history.replaceState({}, '', window.location.pathname);
-
-        // Switch to manual tab to show results
-        switchTab('manual');
-
-        // Verify state
-        const savedState = sessionStorage.getItem('fb_oauth_state');
-        if (state && savedState && state !== savedState) {
-            showStatus('manualStatus', 'error', 'Security check failed (state mismatch). Please try connecting again.');
-            return;
-        }
-        sessionStorage.removeItem('fb_oauth_state');
-
-        showStatus('manualStatus', 'info', '<strong>Processing...</strong> Exchanging authorization code for access token. This may take a moment.');
-
-        // Send the code to your backend to exchange for tokens
-        // Your backend should:
-        // 1. Exchange code for user access token
-        // 2. Exchange for long-lived token
-        // 3. Get page tokens via /me/accounts
-        // 4. Store everything
-        // 5. Return the list of connected pages
-        sendToBackend({ type: 'oauth_code', code: code });
-    }
-
-    // =============================================
-    // MANUAL TOKEN SUBMISSION
+    // MAIN SUBMIT FLOW
     // =============================================
     async function submitToken(e) {
         e.preventDefault();
@@ -410,10 +283,7 @@
         const name = document.getElementById('userName').value.trim();
         const email = document.getElementById('userEmail').value.trim();
 
-        if (!token) {
-            showStatus('manualStatus', 'error', 'Please paste your access token.');
-            return;
-        }
+        if (!token) { showStatus('manualStatus', 'error', 'Please paste your access token.'); return; }
 
         const btn = document.getElementById('btnSubmit');
         btn.disabled = true;
@@ -422,44 +292,47 @@
         document.getElementById('pagesResult').classList.remove('show');
 
         try {
-            // Step 1: Validate the token via Facebook debug endpoint
+            // ── Step 1: Validate token & check user-level scopes ──
+            showStatus('manualStatus', 'info', '<strong>Step 1/4:</strong> Validating token...');
+
             const debugRes = await fetch(`https://graph.facebook.com/${CONFIG.API_VERSION}/debug_token?input_token=${encodeURIComponent(token)}&access_token=${encodeURIComponent(token)}`);
             const debugData = await debugRes.json();
 
-            if (debugData.error || !debugData.data) {
-                throw new Error(debugData.error?.message || 'Invalid token');
+            if (debugData.error || !debugData.data) throw new Error(debugData.error?.message || 'Invalid token');
+
+            const userScopes = debugData.data.scopes || [];
+            const missingScopes = CONFIG.REQUIRED_PERMISSIONS.filter(p => !userScopes.includes(p));
+
+            if (missingScopes.length > 0) {
+                showStatus('manualStatus', 'warning', `<strong>Missing user-level permissions:</strong> ${missingScopes.map(s => '<code>' + s + '</code>').join(', ')}. Found: ${userScopes.join(', ')}. Please generate a new token with the correct permissions.`);
+                resetBtn(); return;
             }
 
-            const scopes = debugData.data.scopes || [];
-            if (!scopes.includes('pages_read_engagement')) {
-                showStatus('manualStatus', 'warning', `<strong>Missing permission:</strong> This token doesn't have <code>pages_read_engagement</code>. Found scopes: ${scopes.join(', ')}. Please generate a new token with the correct permissions.`);
-                resetBtn();
-                return;
-            }
+            // ── Step 2: Fetch pages ──
+            btn.innerHTML = '<span class="spinner"></span> Fetching pages...';
+            showStatus('manualStatus', 'info', '<strong>Step 2/4:</strong> Fetching your pages...');
 
-            showStatus('manualStatus', 'info', '<strong>Token valid!</strong> Fetching your pages...');
-
-            // Step 2: Get pages
             const pagesRes = await fetch(`https://graph.facebook.com/${CONFIG.API_VERSION}/me/accounts?fields=id,name,access_token,category,tasks&limit=100&access_token=${encodeURIComponent(token)}`);
             const pagesData = await pagesRes.json();
-
-            if (pagesData.error) {
-                throw new Error(pagesData.error.message);
-            }
+            if (pagesData.error) throw new Error(pagesData.error.message);
 
             const pages = pagesData.data || [];
-
             if (pages.length === 0) {
-                showStatus('manualStatus', 'warning', '<strong>No pages found.</strong> This token doesn\'t have access to any Facebook pages. Make sure you\'re using a User Access Token (not a Page token) and that you manage at least one page.');
-                resetBtn();
-                return;
+                showStatus('manualStatus', 'warning', '<strong>No pages found.</strong> Make sure you\'re using a User Access Token and that you manage at least one page.');
+                resetBtn(); return;
             }
 
-            // Step 3: Display pages
-            displayPages(pages);
+            // ── Step 3: Show pages + check permissions per page ──
+            btn.innerHTML = '<span class="spinner"></span> Checking permissions...';
+            showStatus('manualStatus', 'info', `<strong>Step 3/4:</strong> Checking permissions for ${pages.length} page(s)...`);
 
-            // Step 4: Send to backend
-            showStatus('manualStatus', 'success', `<strong>Found ${pages.length} page${pages.length > 1 ? 's' : ''}!</strong> Connecting to Artemis...`);
+            displayPagesInitial(pages);
+            const permResults = await checkAllPagePermissions(pages);
+            showPermissionSummary(pages, permResults);
+
+            // ── Step 4: Send to backend ──
+            btn.innerHTML = '<span class="spinner"></span> Saving to Artemis...';
+            showStatus('manualStatus', 'info', `<strong>Step 4/4:</strong> Saving ${pages.length} page(s)...`);
 
             await sendToBackend({
                 type: 'manual_token',
@@ -467,42 +340,122 @@
                 user_name: name,
                 user_email: email,
                 pages: pages.map(p => ({
-                    id: p.id,
-                    name: p.name,
-                    access_token: p.access_token,
-                    category: p.category,
-                    tasks: p.tasks
+                    id: p.id, name: p.name, access_token: p.access_token,
+                    category: p.category, tasks: p.tasks,
+                    permissions: permResults[p.id] || {},
                 }))
             });
 
-            showStatus('manualStatus', 'success', `<strong>All done!</strong> ${pages.length} page${pages.length > 1 ? 's' : ''} connected to Artemis. We'll start analysing your data shortly.`);
+            // ── Final status ──
+            const fullPerms = Object.values(permResults).filter(r => r.read_engagement && r.read_insights).length;
+            if (fullPerms === pages.length) {
+                showStatus('manualStatus', 'success', `<strong>All done!</strong> ${pages.length} page(s) connected with full permissions. Artemis will start analysing your data shortly.`);
+            } else {
+                showStatus('manualStatus', 'warning', `<strong>Connected ${pages.length} page(s)</strong> — ${fullPerms} with full permissions, ${pages.length - fullPerms} with issues. Check the details below.`);
+            }
 
         } catch (err) {
             showStatus('manualStatus', 'error', `<strong>Error:</strong> ${err.message}`);
         }
-
         resetBtn();
     }
 
-    function displayPages(pages) {
+    // =============================================
+    // PER-PAGE PERMISSION CHECKING
+    // =============================================
+    async function checkAllPagePermissions(pages) {
+        const results = {};
+        for (const page of pages) {
+            results[page.id] = await checkPagePerms(page);
+            updatePageRow(page.id, results[page.id]);
+        }
+        return results;
+    }
+
+    async function checkPagePerms(page) {
+        const r = { read_engagement: false, read_insights: false, feed: false };
+        const pt = page.access_token;
+        if (!pt) return r;
+
+        // Check feed + engagement
+        try {
+            const res = await fetch(`https://graph.facebook.com/${CONFIG.API_VERSION}/${page.id}/feed?fields=id,likes.summary(true),comments.summary(true)&limit=1&access_token=${encodeURIComponent(pt)}`);
+            const data = await res.json();
+            if (!data.error) {
+                r.feed = true;
+                r.read_engagement = true;
+            }
+        } catch (e) { console.warn('Feed check failed:', page.name, e); }
+
+        // Check insights
+        try {
+            const res = await fetch(`https://graph.facebook.com/${CONFIG.API_VERSION}/${page.id}/insights/page_impressions?period=day&limit=1&access_token=${encodeURIComponent(pt)}`);
+            const data = await res.json();
+            if (!data.error) {
+                r.read_insights = true;
+            }
+        } catch (e) { console.warn('Insights check failed:', page.name, e); }
+
+        return r;
+    }
+
+    // =============================================
+    // DISPLAY
+    // =============================================
+    function displayPagesInitial(pages) {
         const list = document.getElementById('pagesList');
         list.innerHTML = pages.map(p => `
-            <div class="page-row">
+            <div class="page-row" id="pr-${p.id}">
                 <div class="page-row-icon">
                     <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="#1877F2"/></svg>
                 </div>
                 <div class="page-row-info">
-                    <div class="page-row-name">${escapeHtml(p.name)}</div>
-                    <div class="page-row-meta">ID: ${p.id}${p.category ? ' · ' + escapeHtml(p.category) : ''}</div>
+                    <div class="page-row-name">${esc(p.name)}</div>
+                    <div class="page-row-meta">ID: ${p.id}${p.category ? ' · ' + esc(p.category) : ''}</div>
+                    <div class="perm-badges" id="pb-${p.id}">
+                        <span class="perm-badge unknown">checking permissions...</span>
+                    </div>
                 </div>
-                <div class="page-row-status" title="Connected"></div>
+                <div class="page-row-status checking" id="ps-${p.id}" title="Checking..."></div>
             </div>
         `).join('');
         document.getElementById('pagesResult').classList.add('show');
     }
 
+    function updatePageRow(id, perms) {
+        const badges = document.getElementById('pb-' + id);
+        const dot = document.getElementById('ps-' + id);
+        const row = document.getElementById('pr-' + id);
+        if (!badges) return;
+
+        const allOk = perms.read_engagement && perms.read_insights;
+        const partial = perms.read_engagement || perms.read_insights;
+
+        dot.className = 'page-row-status ' + (allOk ? 'ok' : partial ? 'warn' : 'fail');
+        dot.title = allOk ? 'All permissions OK' : 'Missing permissions';
+        if (!allOk) row.className = 'page-row ' + (partial ? 'has-warning' : 'has-error');
+
+        badges.innerHTML = [
+            { label: 'read_engagement', ok: perms.read_engagement },
+            { label: 'read_insights', ok: perms.read_insights },
+            { label: 'feed', ok: perms.feed },
+        ].map(b => `<span class="perm-badge ${b.ok ? 'granted' : 'missing'}">${b.ok ? ICONS.check : ICONS.cross} ${b.label}</span>`).join('');
+    }
+
+    function showPermissionSummary(pages, permResults) {
+        const total = pages.length;
+        const ok = Object.values(permResults).filter(r => r.read_engagement && r.read_insights).length;
+        const el = document.getElementById('permSummary');
+
+        if (ok === total) {
+            el.innerHTML = `<div class="perm-summary all-good"><strong>✓ All ${total} page(s) have full permissions.</strong> Artemis can read engagement data and insights for every connected page.</div>`;
+        } else {
+            el.innerHTML = `<div class="perm-summary has-issues"><strong>⚠ ${total - ok} of ${total} page(s) have missing permissions.</strong> Try regenerating your token with <code>pages_read_engagement</code> and <code>read_insights</code> granted for all pages.</div>`;
+        }
+    }
+
     // =============================================
-    // BACKEND COMMUNICATION
+    // BACKEND
     // =============================================
     async function sendToBackend(data) {
         try {
@@ -511,13 +464,10 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
-            if (!res.ok) {
-                console.warn('Backend responded with:', res.status);
-            }
+            if (!res.ok) console.warn('Backend:', res.status);
             return await res.json().catch(() => ({}));
         } catch (err) {
-            // Backend might not be set up yet — that's ok, we still show the pages
-            console.warn('Backend not reachable (this is OK during development):', err.message);
+            console.warn('Backend not reachable:', err.message);
             return {};
         }
     }
@@ -528,35 +478,16 @@
     function showStatus(id, type, html) {
         const el = document.getElementById(id);
         el.className = `status-banner show ${type}`;
-        const icons = {
-            success: '✓',
-            error: '✗',
-            warning: '⚠',
-            info: '⟳'
-        };
+        const icons = { success: '✓', error: '✗', warning: '⚠', info: '⟳' };
         el.innerHTML = `<span class="status-icon">${icons[type] || ''}</span><span class="status-text">${html}</span>`;
     }
-
-    function hideStatus(id) {
-        document.getElementById(id).classList.remove('show');
-    }
-
+    function hideStatus(id) { document.getElementById(id).classList.remove('show'); }
     function resetBtn() {
         const btn = document.getElementById('btnSubmit');
         btn.disabled = false;
         btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4z"/></svg> Validate & Connect Pages';
     }
-
-    function escapeHtml(str) {
-        const div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-    }
-
-    // =============================================
-    // INIT
-    // =============================================
-    handleOAuthCallback();
+    function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
     </script>
 </body>
 </html>
