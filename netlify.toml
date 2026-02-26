@@ -9,3 +9,8 @@
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+
+[[redirects]]
+  from = "/data"
+  to = "/data_explorer.html"
+  status = 200

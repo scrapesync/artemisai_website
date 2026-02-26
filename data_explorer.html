@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Explorer — Artemis AI</title>
+    <meta name="description" content="Browse and export data warehouse tables. Secure analyst portal for Artemis AI.">
+    <meta name="theme-color" content="#0a0e17">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        :root{--bg-primary:#060a13;--bg-secondary:#0c1221;--bg-tertiary:#111a2e;--bg-card:#0f1729;--bg-card-hover:#142036;--accent:#00d4aa;--accent-bright:#00f5c4;--accent-secondary:#6366f1;--accent-dim:rgba(0,212,170,0.1);--accent-glow:rgba(0,212,170,0.35);--accent-glow-strong:rgba(0,212,170,0.6);--text-primary:#e8ecf4;--text-secondary:#7b8ba8;--text-muted:#4a5568;--border:rgba(255,255,255,0.05);--border-accent:rgba(0,212,170,0.15);--border-accent-strong:rgba(0,212,170,0.3);--danger:#f87171;--danger-dim:rgba(248,113,113,0.1);--warning:#febc2e;--warning-dim:rgba(254,188,46,0.1)}
+        *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+        body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-primary);overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100vh}
+        body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:10000}
+        ::selection{background:var(--accent);color:var(--bg-primary)}
+
+        /* Nav */
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.85);border-bottom:1px solid var(--border)}
+        .nav-logo{font-size:1.3rem;font-weight:700;letter-spacing:.12em;color:var(--text-primary);text-decoration:none;display:flex;align-items:center;gap:.7rem}
+        .logo-mark{width:36px;height:36px;position:relative}.logo-mark svg{width:100%;height:100%}
+        .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+        .nav-links a{color:var(--text-secondary);text-decoration:none;font-size:.88rem;font-weight:400;letter-spacing:.02em;transition:color .3s;position:relative}
+        .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transition:transform .3s}
+        .nav-links a:hover{color:var(--text-primary)}.nav-links a:hover::after{transform:scaleX(1)}
+        .nav-cta{padding:.55rem 1.4rem!important;background:var(--accent)!important;color:var(--bg-primary)!important;border-radius:8px;font-weight:600!important;font-size:.82rem!important;transition:all .3s!important}
+        .nav-cta::after{display:none!important}.nav-cta:hover{background:var(--accent-bright)!important;transform:translateY(-1px);box-shadow:0 8px 25px var(--accent-glow)}
+        .nav-user{display:flex;align-items:center;gap:.8rem;padding:.4rem .8rem .4rem 1rem;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;font-size:.82rem;color:var(--text-secondary);cursor:default}
+        .nav-user-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;flex-shrink:0}
+        .nav-user-name{color:var(--text-primary);font-weight:500}
+        .nav-logout{background:none;border:1px solid rgba(248,113,113,0.2);color:var(--danger);padding:.35rem .8rem;border-radius:6px;font-family:'Outfit',sans-serif;font-size:.78rem;cursor:pointer;transition:all .3s}
+        .nav-logout:hover{background:var(--danger-dim);border-color:var(--danger)}
+        .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+        .hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);margin:5px 0;border-radius:2px;transition:all .3s}
+
+        /* Login Screen */
+        .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden}
+        .login-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,170,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,170,0.02) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,black,transparent)}
+        .login-orb{position:absolute;width:400px;height:400px;border-radius:50%;filter:blur(100px);pointer-events:none}
+        .login-orb-1{background:radial-gradient(circle,rgba(0,212,170,0.08),transparent 70%);top:10%;left:15%;animation:float 12s ease-in-out infinite}
+        .login-orb-2{background:radial-gradient(circle,rgba(99,102,241,0.06),transparent 70%);bottom:10%;right:10%;animation:float 12s ease-in-out infinite reverse}
+        @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-20px)}}
+        .login-card{position:relative;z-index:2;width:100%;max-width:420px;background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:3rem 2.5rem;box-shadow:0 40px 80px rgba(0,0,0,0.4)}
+        .login-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+        .login-icon{width:56px;height:56px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
+        .login-icon svg{width:26px;height:26px;stroke:var(--accent);fill:none;stroke-width:1.5}
+        .login-card h1{text-align:center;font-size:1.6rem;font-weight:700;margin-bottom:.4rem;letter-spacing:-.02em}
+        .login-card .login-sub{text-align:center;font-size:.88rem;color:var(--text-secondary);margin-bottom:2rem;font-weight:300}
+        .form-group{margin-bottom:1.2rem}
+        .form-label{display:block;font-size:.78rem;font-weight:500;color:var(--text-secondary);letter-spacing:.04em;text-transform:uppercase;margin-bottom:.5rem;font-family:'JetBrains Mono',monospace}
+        .form-input{width:100%;padding:.8rem 1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-family:'Outfit',sans-serif;font-size:.92rem;transition:all .3s;outline:none}
+        .form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+        .form-input::placeholder{color:var(--text-muted)}
+        .login-btn{width:100%;padding:.9rem;background:var(--accent);color:var(--bg-primary);border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .35s;margin-top:.5rem;position:relative;overflow:hidden}
+        .login-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,0.15),transparent);transform:translateX(-100%);transition:transform .5s}
+        .login-btn:hover::before{transform:translateX(100%)}
+        .login-btn:hover{background:var(--accent-bright);transform:translateY(-1px);box-shadow:0 12px 40px var(--accent-glow)}
+        .login-btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+        .login-error{text-align:center;color:var(--danger);font-size:.82rem;margin-top:1rem;padding:.6rem;background:var(--danger-dim);border-radius:8px;display:none}
+        .login-error.show{display:block;animation:shake .4s ease}
+        @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+        .login-hint{text-align:center;font-size:.72rem;color:var(--text-muted);margin-top:1.5rem;line-height:1.5}
+
+        /* Explorer Screen */
+        .explorer{display:none;padding:90px 2rem 3rem;max-width:1440px;margin:0 auto;min-height:100vh}
+        .explorer.active{display:block}
+        .explorer-header{margin-bottom:2rem}
+        .explorer-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1rem;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.08em;margin-bottom:1rem}
+        .explorer-badge svg{width:14px;height:14px;stroke:var(--accent);fill:none;stroke-width:2}
+        .explorer h1{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.4rem}
+        .explorer h1 .gradient-text{background:linear-gradient(135deg,var(--accent),var(--accent-bright),var(--accent-secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .explorer-sub{font-size:.95rem;color:var(--text-secondary);font-weight:300}
+
+        /* Table Cards Grid */
+        .tables-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;margin-bottom:2rem}
+        .schema-section{grid-column:1/-1;margin-top:1.5rem}
+        .schema-section:first-child{margin-top:0}
+        .schema-header{display:flex;align-items:center;gap:.8rem;padding:.6rem 0;border-bottom:1px solid var(--border)}
+        .schema-badge{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:600;color:var(--bg-primary);background:var(--accent);padding:.2rem .6rem;border-radius:5px;letter-spacing:.06em}
+        .schema-label{font-size:.88rem;font-weight:500;color:var(--text-primary)}
+        .schema-count{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-muted)}
+        .table-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;cursor:pointer;transition:all .35s;position:relative;overflow:hidden}
+        .table-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}
+        .table-card:hover{border-color:var(--border-accent-strong);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.3)}
+        .table-card:hover::before{opacity:1}
+        .table-card.active{border-color:var(--accent);background:var(--bg-card-hover)}
+        .table-card.active::before{opacity:1}
+        .table-card.empty{opacity:.45;cursor:default}
+        .table-card.empty:hover{transform:none;border-color:var(--border);box-shadow:none}
+        .table-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.6rem}
+        .table-card h3{font-size:.95rem;font-weight:600;line-height:1.3}
+        .table-card-count{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--accent);background:var(--accent-dim);padding:.2rem .6rem;border-radius:6px;white-space:nowrap;flex-shrink:0}
+        .table-card-count.zero{color:var(--text-muted);background:rgba(255,255,255,0.03)}
+        .table-card p{font-size:.8rem;color:var(--text-secondary);line-height:1.5;font-weight:300}
+        .table-card-cols{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.7rem}
+        .table-card-col{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);background:rgba(255,255,255,0.03);padding:.15rem .45rem;border-radius:4px;border:1px solid var(--border)}
+
+        /* Data Table View */
+        .data-panel{display:none;margin-top:1rem}
+        .data-panel.active{display:block}
+        .data-panel-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;padding:1.2rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px}
+        .data-panel-title{display:flex;align-items:center;gap:.8rem}
+        .data-panel-title h2{font-size:1.1rem;font-weight:600}
+        .data-panel-title .tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text-muted);background:rgba(255,255,255,0.04);padding:.2rem .6rem;border-radius:5px}
+        .data-panel-actions{display:flex;gap:.6rem;align-items:center}
+        .btn-export{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.2rem;background:var(--accent);color:var(--bg-primary);border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .3s}
+        .btn-export:hover{background:var(--accent-bright);transform:translateY(-1px);box-shadow:0 8px 25px var(--accent-glow)}
+        .btn-export:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+        .btn-export svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+        .btn-back{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1rem;background:transparent;color:var(--text-secondary);border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:.82rem;cursor:pointer;transition:all .3s}
+        .btn-back:hover{border-color:var(--border-accent);color:var(--text-primary);background:var(--accent-dim)}
+        .btn-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+
+        /* Table */
+        .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;background:var(--bg-card)}
+        .data-table{width:100%;border-collapse:collapse;font-size:.82rem}
+        .data-table thead{position:sticky;top:0;z-index:5}
+        .data-table th{padding:.7rem .8rem;text-align:left;background:var(--bg-tertiary);color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--border-accent);cursor:pointer;user-select:none;transition:background .2s}
+        .data-table th:hover{background:rgba(0,212,170,0.08)}
+        .data-table th .sort-arrow{margin-left:.3rem;opacity:.3;font-size:.65rem}
+        .data-table th.sorted .sort-arrow{opacity:1;color:var(--accent-bright)}
+        .data-table td{padding:.6rem .8rem;border-bottom:1px solid var(--border);color:var(--text-secondary);font-size:.78rem;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:'JetBrains Mono',monospace}
+        .data-table tr:hover td{background:rgba(0,212,170,0.02);color:var(--text-primary)}
+        .data-table tr:last-child td{border-bottom:none}
+        .cell-null{color:var(--text-muted);font-style:italic}
+        .cell-number{color:var(--accent);text-align:right}
+        .cell-bool-true{color:var(--accent)}
+        .cell-bool-false{color:var(--danger)}
+        .cell-long{cursor:help}
+
+        /* Pagination */
+        .pagination{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;flex-wrap:wrap;gap:.8rem}
+        .pagination-info{font-size:.78rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
+        .pagination-controls{display:flex;gap:.4rem}
+        .page-btn{padding:.4rem .8rem;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;font-size:.75rem;cursor:pointer;transition:all .2s}
+        .page-btn:hover{border-color:var(--border-accent);color:var(--text-primary)}
+        .page-btn.active{background:var(--accent);color:var(--bg-primary);border-color:var(--accent)}
+        .page-btn:disabled{opacity:.3;cursor:not-allowed}
+
+        /* Loading */
+        .loading{display:flex;align-items:center;justify-content:center;padding:4rem;gap:.8rem;color:var(--text-muted);font-size:.88rem}
+        .spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+
+        /* Toast */
+        .toast{position:fixed;bottom:2rem;right:2rem;padding:.8rem 1.4rem;background:var(--bg-card);border:1px solid var(--border-accent);border-radius:10px;color:var(--accent);font-size:.85rem;font-weight:500;z-index:9999;transform:translateY(100px);opacity:0;transition:all .4s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;gap:.5rem;box-shadow:0 10px 40px rgba(0,0,0,0.4)}
+        .toast.show{transform:translateY(0);opacity:1}
+        .toast svg{width:18px;height:18px;stroke:var(--accent);fill:none;stroke-width:2}
+
+        /* Footer */
+        footer{padding:2.5rem 2rem;border-top:1px solid var(--border);text-align:center;background:var(--bg-primary)}
+        .footer-content{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto}
+        footer p{font-size:.78rem;color:var(--text-muted)}
+        footer a{color:var(--accent);text-decoration:none;transition:color .3s}footer a:hover{color:var(--accent-bright)}
+        .footer-links{display:flex;gap:1.5rem}.footer-links a{font-size:.78rem;color:var(--text-muted)}.footer-links a:hover{color:var(--accent)}
+
+        /* Responsive */
+        @media(max-width:768px){
+            nav{padding:0 1.2rem}
+            .nav-links{position:fixed;top:72px;left:0;right:0;background:rgba(6,10,19,0.97);backdrop-filter:blur(24px);flex-direction:column;padding:1.5rem;gap:1rem;display:none;border-bottom:1px solid var(--border)}
+            .nav-links.open{display:flex}
+            .hamburger{display:block}
+            .login-card{padding:2rem 1.5rem;margin:0 .5rem}
+            .explorer{padding:80px 1rem 2rem}
+            .tables-grid{grid-template-columns:1fr}
+            .data-panel-header{flex-direction:column;align-items:flex-start}
+            .footer-content{flex-direction:column;gap:.8rem}
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ NAV ═══ -->
+    <nav id="nav">
+        <a href="/" class="nav-logo">
+            <div class="logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
+            ARTEMIS
+        </a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/">Home</a></li>
+            <li><a href="/connect">Connect Pages</a></li>
+            <li id="navUserArea"></li>
+        </ul>
+    </nav>
+
+    <!-- ═══ LOGIN SCREEN ═══ -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-bg"></div>
+        <div class="login-orb login-orb-1"></div>
+        <div class="login-orb login-orb-2"></div>
+        <div class="login-card">
+            <div class="login-icon">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+            </div>
+            <h1>Data Explorer</h1>
+            <p class="login-sub">Sign in to browse and export warehouse data</p>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label" for="username">Username</label>
+                    <input class="form-input" type="text" id="username" placeholder="Enter your username" autocomplete="username" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-input" type="password" id="password" placeholder="Enter your password" autocomplete="current-password" required>
+                </div>
+                <button class="login-btn" type="submit" id="loginBtn">Sign In</button>
+            </form>
+            <div class="login-error" id="loginError"></div>
+            <p class="login-hint">Access restricted to authorized Artemis AI team members.<br>Contact your admin if you need an account.</p>
+        </div>
+    </div>
+
+    <!-- ═══ EXPLORER SCREEN ═══ -->
+    <div class="explorer" id="explorerScreen">
+        <div class="explorer-header">
+            <div class="explorer-badge">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                DATA WAREHOUSE EXPLORER
+            </div>
+            <h1>Browse <span class="gradient-text">Warehouse Tables</span></h1>
+            <p class="explorer-sub">Select a table to preview rows, then export to Excel with one click.</p>
+        </div>
+
+        <!-- Table Cards -->
+        <div class="tables-grid" id="tablesGrid">
+            <div class="loading"><div class="spinner"></div> Loading tables...</div>
+        </div>
+
+        <!-- Data Panel -->
+        <div class="data-panel" id="dataPanel">
+            <div class="data-panel-header">
+                <div class="data-panel-title">
+                    <button class="btn-back" onclick="closeDataPanel()"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+                    <h2 id="panelTitle">Table</h2>
+                    <span class="tag" id="panelCount"></span>
+                </div>
+                <div class="data-panel-actions">
+                    <button class="btn-export" id="exportBtn" onclick="handleExport()">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Export to Excel
+                    </button>
+                </div>
+            </div>
+            <div class="table-wrap" id="tableWrap">
+                <div class="loading"><div class="spinner"></div> Loading data...</div>
+            </div>
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span id="toastMsg">Done</span>
+    </div>
+
+    <footer><div class="footer-content"><p>&copy; 2026 Artemis AI &mdash; Data Explorer Portal</p><div class="footer-links"><a href="/">Home</a><a href="/connect">Connect Pages</a></div></div></footer>
+
+<script>
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+const API = '/api/data-explorer';
+let state = {
+    user: JSON.parse(localStorage.getItem('artemis_user') || 'null'),
+    tables: [],
+    currentTable: null,
+    currentSchema: null,
+    currentData: null,
+    page: 1,
+    sortBy: null,
+    sortDir: 'desc',
+};
+
+// ══════════════════════════════════════════
+// API HELPER
+// ══════════════════════════════════════════
+async function api(body) {
+    const res = await fetch(API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...body, user_id: state.user?.id }),
+    });
+    const data = await res.json();
+    if (res.status === 401 && body.action !== 'login') {
+        logout();
+        throw new Error('Session expired');
+    }
+    if (!res.ok) throw new Error(data.error || 'Request failed');
+    return data;
+}
+
+// ══════════════════════════════════════════
+// AUTH
+// ══════════════════════════════════════════
+async function handleLogin(e) {
+    e.preventDefault();
+    const btn = document.getElementById('loginBtn');
+    const err = document.getElementById('loginError');
+    btn.disabled = true;
+    btn.textContent = 'Signing in...';
+    err.classList.remove('show');
+
+    try {
+        const data = await api({
+            action: 'login',
+            username: document.getElementById('username').value,
+            password: document.getElementById('password').value,
+        });
+        state.user = data.user;
+        localStorage.setItem('artemis_user', JSON.stringify(data.user));
+        showExplorer();
+    } catch (e) {
+        err.textContent = e.message || 'Invalid credentials';
+        err.classList.add('show');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Sign In';
+    }
+}
+
+function logout() {
+    state.user = null;
+    localStorage.removeItem('artemis_user');
+    document.getElementById('loginScreen').style.display = '';
+    document.getElementById('explorerScreen').classList.remove('active');
+    document.getElementById('navUserArea').innerHTML = '';
+}
+
+async function checkSession() {
+    if (!state.user) return;
+    try {
+        // Quick check: try loading tables — if user_id is invalid, backend returns 401
+        showExplorer();
+    } catch {
+        state.user = null;
+        localStorage.removeItem('artemis_user');
+    }
+}
+
+// ══════════════════════════════════════════
+// EXPLORER
+// ══════════════════════════════════════════
+async function showExplorer() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('explorerScreen').classList.add('active');
+
+    // Update nav
+    document.getElementById('navUserArea').innerHTML = `
+        <div style="display:flex;align-items:center;gap:.7rem;">
+            <div class="nav-user"><span class="nav-user-dot"></span><span class="nav-user-name">${state.user?.full_name || state.user?.username}</span>&nbsp;·&nbsp;${state.user?.role || 'user'}</div>
+            <button class="nav-logout" onclick="logout()">Sign Out</button>
+        </div>`;
+
+    await loadTables();
+}
+
+async function loadTables() {
+    const grid = document.getElementById('tablesGrid');
+    grid.innerHTML = '<div class="loading"><div class="spinner"></div> Loading tables...</div>';
+
+    try {
+        const data = await api({ action: 'list_tables' });
+        state.tables = data.tables;
+        renderTableCards();
+    } catch (e) {
+        grid.innerHTML = `<div class="loading" style="color:var(--danger)">Failed to load tables: ${e.message}</div>`;
+    }
+}
+
+function renderTableCards() {
+    const grid = document.getElementById('tablesGrid');
+    
+    // Group by schema
+    const schemas = {};
+    state.tables.forEach(t => {
+        if (!schemas[t.schema]) schemas[t.schema] = [];
+        schemas[t.schema].push(t);
+    });
+
+    const schemaLabels = { odl: 'ODL — Operational Data Layer', public: 'Public', rdl: 'RDL — Refined Data Layer' };
+    const schemaOrder = ['odl', 'public', 'rdl'];
+    
+    let html = '';
+    schemaOrder.forEach(schema => {
+        const tables = schemas[schema];
+        if (!tables) return;
+        html += `<div class="schema-section">
+            <div class="schema-header">
+                <span class="schema-badge">${schema.toUpperCase()}</span>
+                <span class="schema-label">${schemaLabels[schema] || schema}</span>
+                <span class="schema-count">${tables.length} tables</span>
+            </div>
+        </div>`;
+        tables.forEach(t => {
+            const isEmpty = t.row_count === 0;
+            const countLabel = t.row_count >= 1000 ? (t.row_count / 1000).toFixed(1) + 'K' : t.row_count.toLocaleString();
+            const cols = (t.columns || []).slice(0, 6);
+            const extraCols = (t.columns || []).length - 6;
+            html += `
+            <div class="table-card ${isEmpty ? 'empty' : ''} ${state.currentTable === t.table ? 'active' : ''}" 
+                 ${isEmpty ? '' : `onclick="browseTable('${t.schema}','${t.table}')"`}>
+                <div class="table-card-header">
+                    <h3>${t.label}</h3>
+                    <span class="table-card-count ${isEmpty ? 'zero' : ''}">${isEmpty ? 'Empty' : countLabel + ' rows'}</span>
+                </div>
+                <p>${t.description}</p>
+                ${cols.length > 0 ? `<div class="table-card-cols">${cols.map(c => `<span class="table-card-col">${c.name}</span>`).join('')}${extraCols > 0 ? `<span class="table-card-col">+${extraCols} more</span>` : ''}</div>` : ''}
+            </div>`;
+        });
+    });
+    grid.innerHTML = html;
+}
+
+// ══════════════════════════════════════════
+// BROWSE TABLE
+// ══════════════════════════════════════════
+async function browseTable(schema, tableName, page = 1) {
+    state.currentTable = tableName;
+    state.currentSchema = schema;
+    state.page = page;
+    renderTableCards(); // highlight active
+
+    const panel = document.getElementById('dataPanel');
+    const wrap = document.getElementById('tableWrap');
+    panel.classList.add('active');
+    wrap.innerHTML = '<div class="loading"><div class="spinner"></div> Loading data...</div>';
+
+    try {
+        const data = await api({
+            action: 'browse',
+            schema: schema,
+            table: tableName,
+            page: page,
+            page_size: 50,
+            sort_by: state.sortBy,
+            sort_dir: state.sortDir,
+        });
+        state.currentData = data;
+
+        document.getElementById('panelTitle').textContent = data.label;
+        document.getElementById('panelCount').textContent = `${data.schema}.${data.table} · ${data.total.toLocaleString()} rows · Page ${data.page}/${data.total_pages}`;
+
+        renderDataTable(data);
+        renderPagination(data);
+
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch (e) {
+        wrap.innerHTML = `<div class="loading" style="color:var(--danger)">Error: ${e.message}</div>`;
+    }
+}
+
+function renderDataTable(data) {
+    if (data.rows.length === 0) {
+        document.getElementById('tableWrap').innerHTML = '<div class="loading">No data in this table yet.</div>';
+        return;
+    }
+
+    const cols = data.columns;
+    let html = '<table class="data-table"><thead><tr>';
+    cols.forEach(c => {
+        const isSorted = state.sortBy === c.name;
+        const arrow = isSorted ? (state.sortDir === 'asc' ? '▲' : '▼') : '▼';
+        html += `<th class="${isSorted ? 'sorted' : ''}" onclick="sortColumn('${c.name}')">${c.name}<span class="sort-arrow">${arrow}</span></th>`;
+    });
+    html += '</tr></thead><tbody>';
+
+    data.rows.forEach(row => {
+        html += '<tr>';
+        cols.forEach(c => {
+            const val = row[c.name];
+            if (val === null || val === undefined) {
+                html += '<td class="cell-null">null</td>';
+            } else if (typeof val === 'boolean') {
+                html += `<td class="${val ? 'cell-bool-true' : 'cell-bool-false'}">${val}</td>`;
+            } else if (typeof val === 'number') {
+                html += `<td class="cell-number">${val.toLocaleString()}</td>`;
+            } else {
+                const s = String(val);
+                const display = s.length > 80 ? s.substring(0, 77) + '...' : s;
+                html += `<td ${s.length > 80 ? 'class="cell-long" title="' + s.replace(/"/g, '&quot;').substring(0, 500) + '"' : ''}>${escapeHtml(display)}</td>`;
+            }
+        });
+        html += '</tr>';
+    });
+
+    html += '</tbody></table>';
+    document.getElementById('tableWrap').innerHTML = html;
+}
+
+function sortColumn(colName) {
+    if (state.sortBy === colName) {
+        state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
+    } else {
+        state.sortBy = colName;
+        state.sortDir = 'desc';
+    }
+    browseTable(state.currentSchema, state.currentTable, 1);
+}
+
+function renderPagination(data) {
+    const pag = document.getElementById('pagination');
+    if (data.total_pages <= 1) { pag.innerHTML = ''; return; }
+
+    const start = (data.page - 1) * data.page_size + 1;
+    const end = Math.min(data.page * data.page_size, data.total);
+
+    let btns = '';
+    btns += `<button class="page-btn" onclick="browseTable('${data.schema}','${data.table}',1)" ${data.page === 1 ? 'disabled' : ''}>&laquo;</button>`;
+    btns += `<button class="page-btn" onclick="browseTable('${data.schema}','${data.table}',${data.page - 1})" ${data.page === 1 ? 'disabled' : ''}>&lsaquo;</button>`;
+
+    const maxBtns = 5;
+    let startP = Math.max(1, data.page - Math.floor(maxBtns / 2));
+    let endP = Math.min(data.total_pages, startP + maxBtns - 1);
+    startP = Math.max(1, endP - maxBtns + 1);
+
+    for (let i = startP; i <= endP; i++) {
+        btns += `<button class="page-btn ${i === data.page ? 'active' : ''}" onclick="browseTable('${data.schema}','${data.table}',${i})">${i}</button>`;
+    }
+
+    btns += `<button class="page-btn" onclick="browseTable('${data.schema}','${data.table}',${data.page + 1})" ${data.page === data.total_pages ? 'disabled' : ''}>&rsaquo;</button>`;
+    btns += `<button class="page-btn" onclick="browseTable('${data.schema}','${data.table}',${data.total_pages})" ${data.page === data.total_pages ? 'disabled' : ''}>&raquo;</button>`;
+
+    pag.innerHTML = `
+        <div class="pagination-info">Showing ${start.toLocaleString()}–${end.toLocaleString()} of ${data.total.toLocaleString()}</div>
+        <div class="pagination-controls">${btns}</div>`;
+}
+
+function closeDataPanel() {
+    document.getElementById('dataPanel').classList.remove('active');
+    state.currentTable = null;
+    state.currentSchema = null;
+    state.sortBy = null;
+    state.sortDir = 'desc';
+    renderTableCards();
+}
+
+// ══════════════════════════════════════════
+// EXPORT TO EXCEL
+// ══════════════════════════════════════════
+async function handleExport() {
+    const btn = document.getElementById('exportBtn');
+    const origHTML = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<div class="spinner" style="width:14px;height:14px;border-width:2px;display:inline-block;vertical-align:middle"></div> Exporting...';
+
+    try {
+        const data = await api({ action: 'export', schema: state.currentSchema, table: state.currentTable });
+
+        // Build workbook
+        const wb = XLSX.utils.book_new();
+        const wsData = [data.columns, ...data.rows.map(row => data.columns.map(col => row[col]))];
+        const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+        // Auto-width columns
+        ws['!cols'] = data.columns.map(col => {
+            const maxLen = Math.max(col.length, ...data.rows.slice(0, 100).map(r => String(r[col] || '').length));
+            return { wch: Math.min(maxLen + 2, 40) };
+        });
+
+        XLSX.utils.book_append_sheet(wb, ws, data.label || data.table);
+        XLSX.writeFile(wb, `artemis_${data.table}_${new Date().toISOString().slice(0, 10)}.xlsx`);
+
+        showToast(`Exported ${data.rows.length.toLocaleString()} rows to Excel`);
+    } catch (e) {
+        showToast('Export failed: ' + e.message);
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = origHTML;
+    }
+}
+
+// ══════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════
+function escapeHtml(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+}
+
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+checkSession();
+</script>
+</body>
+</html>
