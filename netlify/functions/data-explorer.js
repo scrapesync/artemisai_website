@@ -145,19 +145,51 @@ exports.handler = async (event) => {
     // EXPORT (all rows for Excel)
     // ═══════════════════════════════════════
     if (action === "export") {
-      const { schema, table } = payload;
+      const { schema, table, limit, date_from, date_to } = payload;
       const allowed = ALLOWED_TABLES.find(t => t.table === table && t.schema === schema);
       if (!allowed) return { statusCode: 403, headers, body: JSON.stringify({ error: "Table not accessible" }) };
 
-      const dataRes = await client.query(`SELECT * FROM ${allowed.schema}.${allowed.table} ORDER BY 1 DESC LIMIT 50000`);
+      // Get columns to find a date column for filtering
       const colRes = await client.query(
-        `SELECT column_name FROM information_schema.columns WHERE table_schema = $1 AND table_name = $2 ORDER BY ordinal_position`,
+        `SELECT column_name, data_type FROM information_schema.columns WHERE table_schema = $1 AND table_name = $2 ORDER BY ordinal_position`,
         [allowed.schema, allowed.table]
+      );
+      const columns = colRes.rows;
+      const colNames = columns.map(c => c.column_name);
+
+      // Find the first date/timestamp column for date filtering
+      const dateCol = columns.find(c =>
+        c.data_type.includes("timestamp") || c.data_type.includes("date")
+      );
+
+      // Build WHERE clause for date range
+      let whereClause = "";
+      const queryParams = [];
+      if (dateCol && (date_from || date_to)) {
+        const conditions = [];
+        if (date_from) {
+          queryParams.push(date_from);
+          conditions.push(`"${dateCol.column_name}" >= $${queryParams.length}::date`);
+        }
+        if (date_to) {
+          queryParams.push(date_to);
+          conditions.push(`"${dateCol.column_name}" < ($${queryParams.length}::date + INTERVAL '1 day')`);
+        }
+        whereClause = "WHERE " + conditions.join(" AND ");
+      }
+
+      // Build LIMIT clause
+      const rowLimit = limit && Number.isInteger(limit) && limit > 0 ? Math.min(limit, 50000) : 50000;
+
+      const dataRes = await client.query(
+        `SELECT * FROM ${allowed.schema}.${allowed.table} ${whereClause} ORDER BY 1 DESC LIMIT ${rowLimit}`,
+        queryParams
       );
 
       return { statusCode: 200, headers, body: JSON.stringify({
         success: true, schema: allowed.schema, table: allowed.table, label: allowed.label,
-        columns: colRes.rows.map(c => c.column_name), rows: dataRes.rows, exported_at: new Date().toISOString(),
+        columns: colNames, rows: dataRes.rows, exported_at: new Date().toISOString(),
+        filters: { limit: rowLimit, date_from: date_from || null, date_to: date_to || null, date_column: dateCol ? dateCol.column_name : null },
       })};
     }
 

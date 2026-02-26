@@ -111,6 +111,25 @@
         .btn-export:hover{background:var(--accent-bright);transform:translateY(-1px);box-shadow:0 8px 25px var(--accent-glow)}
         .btn-export:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
         .btn-export svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+
+        /* Export Panel */
+        .export-panel{display:none;margin-bottom:1rem;background:var(--bg-card);border:1px solid var(--border-accent);border-radius:12px;overflow:hidden;animation:slideDown .25s ease}
+        .export-panel.open{display:block}
+        @keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+        .export-panel-inner{padding:1.2rem 1.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+        .export-section{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+        .export-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+        .export-hint{font-weight:400;color:var(--text-muted);text-transform:none;letter-spacing:0;font-size:.65rem}
+        .export-chips{display:flex;gap:.35rem}
+        .export-chip{padding:.35rem .7rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:6px;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;font-size:.72rem;cursor:pointer;transition:all .2s}
+        .export-chip:hover{border-color:var(--border-accent);color:var(--text-primary)}
+        .export-chip.active{background:var(--accent);color:var(--bg-primary);border-color:var(--accent);font-weight:600}
+        .export-dates{display:flex;align-items:center;gap:.4rem}
+        .export-date{width:140px;padding:.4rem .6rem;font-size:.78rem;font-family:'JetBrains Mono',monospace;border-radius:6px}
+        .export-date-sep{color:var(--text-muted);font-size:.78rem}
+        .export-date-clear{background:none;border:1px solid var(--border);color:var(--text-muted);width:28px;height:28px;border-radius:6px;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+        .export-date-clear:hover{border-color:var(--danger);color:var(--danger);background:var(--danger-dim)}
+        .export-go{margin-left:auto}
         .btn-back{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1rem;background:transparent;color:var(--text-secondary);border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:.82rem;cursor:pointer;transition:all .3s}
         .btn-back:hover{border-color:var(--border-accent);color:var(--text-primary);background:var(--accent-dim)}
         .btn-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
@@ -240,10 +259,43 @@
                     <span class="tag" id="panelCount"></span>
                 </div>
                 <div class="data-panel-actions">
-                    <button class="btn-export" id="exportBtn" onclick="handleExport()">
+                    <button class="btn-export" id="exportToggle" onclick="toggleExportPanel()">
                         <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                         Export to Excel
                     </button>
+                </div>
+            </div>
+
+            <!-- Export Options Panel -->
+            <div class="export-panel" id="exportPanel">
+                <div class="export-panel-inner">
+                    <div class="export-section">
+                        <span class="export-label">Rows</span>
+                        <div class="export-chips" id="limitChips">
+                            <button class="export-chip" onclick="setExportLimit(10)">10</button>
+                            <button class="export-chip" onclick="setExportLimit(50)">50</button>
+                            <button class="export-chip" onclick="setExportLimit(100)">100</button>
+                            <button class="export-chip" onclick="setExportLimit(500)">500</button>
+                            <button class="export-chip" onclick="setExportLimit(1000)">1,000</button>
+                            <button class="export-chip" onclick="setExportLimit(5000)">5,000</button>
+                            <button class="export-chip active" onclick="setExportLimit(0)">All</button>
+                        </div>
+                    </div>
+                    <div class="export-section">
+                        <span class="export-label">Date Range <span class="export-hint">(optional — filters the first date/timestamp column)</span></span>
+                        <div class="export-dates">
+                            <input type="date" class="form-input export-date" id="exportDateFrom" placeholder="From">
+                            <span class="export-date-sep">to</span>
+                            <input type="date" class="form-input export-date" id="exportDateTo" placeholder="To">
+                            <button class="export-date-clear" onclick="clearExportDates()" title="Clear dates">&times;</button>
+                        </div>
+                    </div>
+                    <div class="export-section export-go">
+                        <button class="btn-export" id="exportBtn" onclick="handleExport()">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            <span id="exportBtnLabel">Download All Rows</span>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="table-wrap" id="tableWrap">
@@ -533,6 +585,9 @@ function renderPagination(data) {
 
 function closeDataPanel() {
     document.getElementById('dataPanel').classList.remove('active');
+    document.getElementById('exportPanel').classList.remove('open');
+    exportLimit = 0;
+    clearExportDates();
     state.currentTable = null;
     state.currentSchema = null;
     state.sortBy = null;
@@ -543,6 +598,43 @@ function closeDataPanel() {
 // ══════════════════════════════════════════
 // EXPORT TO EXCEL
 // ══════════════════════════════════════════
+// ══════════════════════════════════════════
+// EXPORT CONTROLS
+// ══════════════════════════════════════════
+let exportLimit = 0; // 0 = all
+
+function toggleExportPanel() {
+    document.getElementById('exportPanel').classList.toggle('open');
+}
+
+function setExportLimit(n) {
+    exportLimit = n;
+    document.querySelectorAll('.export-chip').forEach(c => c.classList.remove('active'));
+    event.target.classList.add('active');
+    updateExportLabel();
+}
+
+function clearExportDates() {
+    document.getElementById('exportDateFrom').value = '';
+    document.getElementById('exportDateTo').value = '';
+    updateExportLabel();
+}
+
+function updateExportLabel() {
+    const from = document.getElementById('exportDateFrom').value;
+    const to = document.getElementById('exportDateTo').value;
+    const label = document.getElementById('exportBtnLabel');
+    let parts = [];
+    if (exportLimit > 0) parts.push(`${exportLimit.toLocaleString()} rows`);
+    else parts.push('All rows');
+    if (from || to) parts.push('with date filter');
+    label.textContent = 'Download ' + parts.join(' ');
+}
+
+// Listen for date changes
+document.getElementById('exportDateFrom')?.addEventListener('change', updateExportLabel);
+document.getElementById('exportDateTo')?.addEventListener('change', updateExportLabel);
+
 async function handleExport() {
     const btn = document.getElementById('exportBtn');
     const origHTML = btn.innerHTML;
@@ -550,7 +642,18 @@ async function handleExport() {
     btn.innerHTML = '<div class="spinner" style="width:14px;height:14px;border-width:2px;display:inline-block;vertical-align:middle"></div> Exporting...';
 
     try {
-        const data = await api({ action: 'export', schema: state.currentSchema, table: state.currentTable });
+        const params = {
+            action: 'export',
+            schema: state.currentSchema,
+            table: state.currentTable,
+        };
+        if (exportLimit > 0) params.limit = exportLimit;
+        const dateFrom = document.getElementById('exportDateFrom').value;
+        const dateTo = document.getElementById('exportDateTo').value;
+        if (dateFrom) params.date_from = dateFrom;
+        if (dateTo) params.date_to = dateTo;
+
+        const data = await api(params);
 
         // Build workbook
         const wb = XLSX.utils.book_new();
@@ -563,7 +666,8 @@ async function handleExport() {
             return { wch: Math.min(maxLen + 2, 40) };
         });
 
-        XLSX.utils.book_append_sheet(wb, ws, data.label || data.table);
+        const sheetName = (data.label || data.table).substring(0, 31);
+        XLSX.utils.book_append_sheet(wb, ws, sheetName);
         XLSX.writeFile(wb, `artemis_${data.table}_${new Date().toISOString().slice(0, 10)}.xlsx`);
 
         showToast(`Exported ${data.rows.length.toLocaleString()} rows to Excel`);
