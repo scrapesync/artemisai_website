@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis AI — Reports</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg-primary:#060a13;--bg-secondary:#0c1221;--bg-tertiary:#111a2e;--bg-card:#0f1729;--bg-card-hover:#142036;--accent:#00d4aa;--accent-bright:#00f5c4;--accent-secondary:#6366f1;--accent-dim:rgba(0,212,170,0.1);--accent-glow:rgba(0,212,170,0.35);--text-primary:#e8ecf4;--text-secondary:#7b8ba8;--text-muted:#4a5568;--border:rgba(255,255,255,0.05);--border-accent:rgba(0,212,170,0.15);--border-accent-strong:rgba(0,212,170,0.3);--danger:#f87171;--warning:#fbbf24;--success:#34d399}
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:var(--accent);color:var(--bg-primary)}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-primary);display:flex;-webkit-font-smoothing:antialiased}
+.sidebar{width:240px;height:100vh;background:var(--bg-secondary);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;position:relative;overflow:hidden}
+.sidebar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:radial-gradient(ellipse at 30% 100%,rgba(0,212,170,0.04),transparent 70%);pointer-events:none}
+.sidebar-logo{padding:22px 24px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);text-decoration:none}
+.sidebar-logo span{font-weight:700;font-size:15px;letter-spacing:0.12em;color:var(--text-primary)}
+.sidebar-logo svg{width:32px;height:32px;flex-shrink:0}
+.sidebar-nav{padding:12px;flex:1;overflow-y:auto}
+.nav-group-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;padding:16px 12px 6px}
+.nav-item{display:flex;align-items:center;gap:11px;padding:10px 14px;border-radius:10px;font-size:13.5px;color:var(--text-secondary);cursor:pointer;transition:all .25s;margin-bottom:1px;position:relative;border:1px solid transparent;text-decoration:none}
+.nav-item:hover{background:rgba(255,255,255,0.025);color:var(--text-primary)}
+.nav-item.active{background:var(--accent-dim);color:var(--accent);border-color:var(--border-accent);font-weight:500}
+.nav-item.active::before{content:'';position:absolute;left:0;top:25%;bottom:25%;width:2px;background:var(--accent);border-radius:0 2px 2px 0}
+.nav-item svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;opacity:.7}
+.nav-item.active svg{opacity:1;stroke:var(--accent)}
+.nav-badge{margin-left:auto;font-size:10px;padding:2px 7px;border-radius:6px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.badge-ai{background:var(--accent-dim);color:var(--accent);border:1px solid var(--border-accent)}
+.badge-alert{background:rgba(248,113,113,0.12);color:var(--danger);border:1px solid rgba(248,113,113,0.2)}
+.main{flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;position:relative}
+.topbar{height:60px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(6,10,19,0.6);backdrop-filter:blur(24px) saturate(180%);flex-shrink:0;position:relative;z-index:10}
+.topbar-left{display:flex;align-items:center;gap:16px}
+.topbar-title{font-size:17px;font-weight:700}
+.topbar-right{display:flex;align-items:center;gap:14px}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a88a);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--bg-primary);box-shadow:0 0 20px rgba(0,212,170,0.2)}
+.content{flex:1;overflow-y:auto;padding:28px;position:relative;z-index:1}
+.content::-webkit-scrollbar{width:6px}
+.content::-webkit-scrollbar-track{background:transparent}
+.content::-webkit-scrollbar-thumb{background:var(--border-accent);border-radius:3px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1)}
+.card:hover{border-color:var(--border-accent)}
+.card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .4s}
+.card:hover::before{opacity:1}
+.card-title{font-size:14px;font-weight:600;margin-bottom:4px}
+.card-subtitle{font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:16px}
+.btn{padding:9px 20px;border-radius:9px;font-size:12.5px;font-weight:600;cursor:pointer;border:none;font-family:'Outfit',sans-serif;transition:all .25s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--accent);color:var(--bg-primary);box-shadow:0 4px 16px rgba(0,212,170,0.25)}
+.btn-primary:hover{background:var(--accent-bright);box-shadow:0 8px 25px var(--accent-glow)}
+.btn-secondary{background:transparent;color:var(--text-secondary);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--border-accent);color:var(--accent)}
+.btn-danger{background:rgba(248,113,113,0.1);color:var(--danger);border:1px solid rgba(248,113,113,0.2)}
+.topbar-tabs{display:flex;gap:0}
+.topbar-tab{padding:8px 18px;font-size:12.5px;font-weight:400;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .25s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Outfit',sans-serif}
+.topbar-tab:hover{color:var(--text-secondary)}
+.topbar-tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px}
+.icon-wrap{width:40px;height:40px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.icon-wrap svg{width:18px;height:18px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.stat-big{font-size:32px;font-weight:800;color:var(--accent);letter-spacing:-0.03em;text-shadow:0 0 25px rgba(0,212,170,0.25)}
+.tag{display:inline-flex;padding:4px 10px;border-radius:6px;font-size:10.5px;font-weight:500;font-family:'JetBrains Mono',monospace}
+.tag-green{background:rgba(52,211,153,0.1);color:var(--success);border:1px solid rgba(52,211,153,0.2)}
+.tag-red{background:rgba(248,113,113,0.1);color:var(--danger);border:1px solid rgba(248,113,113,0.2)}
+.tag-yellow{background:rgba(251,191,36,0.1);color:var(--warning);border:1px solid rgba(251,191,36,0.2)}
+.tag-blue{background:rgba(99,102,241,0.1);color:#a5b4fc;border:1px solid rgba(99,102,241,0.2)}
+.tag-accent{background:var(--accent-dim);color:var(--accent);border:1px solid var(--border-accent)}
+.list-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);transition:all .2s}
+.list-item:last-child{border-bottom:none}
+.list-item:hover{padding-left:4px}
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-muted)}
+.empty-state svg{width:48px;height:48px;stroke:var(--text-muted);fill:none;stroke-width:1;margin-bottom:16px;opacity:.5}
+.toggle{width:44px;height:24px;border-radius:12px;background:var(--bg-tertiary);border:1px solid var(--border);position:relative;cursor:pointer;transition:all .3s}
+.toggle.on{background:var(--accent);border-color:var(--accent)}
+.toggle::after{content:'';width:18px;height:18px;border-radius:50%;background:white;position:absolute;top:2px;left:2px;transition:all .3s}
+.toggle.on::after{left:22px}
+.form-group{margin-bottom:16px}
+.form-label{font-size:12px;font-weight:500;color:var(--text-secondary);margin-bottom:6px;display:block}
+.form-input{width:100%;padding:10px 14px;background:var(--bg-primary);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-family:'Outfit',sans-serif;font-size:13px;outline:none;transition:all .3s}
+.form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,170,0.08)}
+select.form-input{cursor:pointer;-webkit-appearance:none}
+textarea.form-input{min-height:80px;resize:vertical}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.animate{animation:fadeUp .5s ease both}
+.delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}
+
+
+.report-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:20px;transition:all .4s;cursor:pointer}
+.report-card:hover{border-color:var(--border-accent-strong);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.report-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px}
+
+</style>
+</head>
+<body>
+<aside class="sidebar"><a href="mockup_dashboard.html" class="sidebar-logo"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg><span>ARTEMIS</span></a><nav class="sidebar-nav"><div class="nav-group-label">Main</div><a href="mockup_dashboard.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a><a href="mockup_discovery.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discovery Feed</a><a href="mockup_predictions.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predictions</a><a href="mockup_audience.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Audience</a><div class="nav-group-label">Intelligence</div><a href="mockup_arte.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Art-E<span class="nav-badge badge-ai">AI</span></a><a href="mockup_alerts.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Alerts<span class="nav-badge badge-alert">3</span></a><a href="mockup_reports.html" class="nav-item active"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</a><div class="nav-group-label">Settings</div><a href="mockup_connected.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Connected Pages</a><a href="mockup_settings.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a></nav></aside><div class="main"><header class="topbar"><div class="topbar-left"><div class="topbar-title">Reports</div></div><div class="topbar-right"><button class="btn btn-primary" onclick="this.textContent='Generating...'">+ New Report</button><div class="avatar">AS</div></div></header><div class="content">
+<div class="section-label">Quick Reports</div>
+<div class="grid-3 animate">
+  <div class="report-card" onclick="this.querySelector('.tag').textContent='Generating...'"><div class="report-icon" style="background:var(--accent-dim)">📊</div><div class="card-title">Weekly Performance</div><p style="font-size:12px;color:var(--text-secondary);margin:8px 0">KPIs, engagement trends, and top content for the past 7 days.</p><span class="tag tag-accent">Generate →</span></div>
+  <div class="report-card" onclick="this.querySelector('.tag').textContent='Generating...'"><div class="report-icon" style="background:rgba(99,102,241,0.08)">🎯</div><div class="card-title">Audience Insights</div><p style="font-size:12px;color:var(--text-secondary);margin:8px 0">Demographics, segments, interests, and growth patterns.</p><span class="tag tag-blue">Generate →</span></div>
+  <div class="report-card" onclick="this.querySelector('.tag').textContent='Generating...'"><div class="report-icon" style="background:rgba(52,211,153,0.08)">🚀</div><div class="card-title">Virality Report</div><p style="font-size:12px;color:var(--text-secondary);margin:8px 0">Top viral posts, prediction accuracy, and format analysis.</p><span class="tag tag-green">Generate →</span></div>
+</div>
+
+<div class="section-label" style="margin-top:28px">Scheduled Reports</div>
+<div class="card animate delay-1">
+  <div class="list-item"><div class="icon-wrap">📅</div><div style="flex:1"><div style="font-size:13px;font-weight:500">Weekly Digest</div><div style="font-size:11px;color:var(--text-muted)">Every Monday 9 AM · PDF · Sent to team@viraldata.co.uk</div></div><span class="tag tag-green">Active</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+  <div class="list-item"><div class="icon-wrap">📅</div><div style="flex:1"><div style="font-size:13px;font-weight:500">Monthly Board Report</div><div style="font-size:11px;color:var(--text-muted)">1st of each month · PDF · Sent to alex@viraldata.co.uk</div></div><span class="tag tag-green">Active</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+  <div class="list-item"><div class="icon-wrap">📅</div><div style="flex:1"><div style="font-size:13px;font-weight:500">Crisis Summary</div><div style="font-size:11px;color:var(--text-muted)">Triggered on crisis events · Slack notification</div></div><span class="tag tag-yellow">Triggered</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+</div>
+
+<div class="section-label" style="margin-top:28px">Recent Exports</div>
+<div class="card animate delay-2">
+  <div class="list-item"><div style="font-size:14px">📄</div><div style="flex:1"><div style="font-size:13px;font-weight:500">Weekly_Report_Feb24.pdf</div><div style="font-size:11px;color:var(--text-muted)">Generated 24 Feb 2026 · 2.4 MB</div></div><button class="btn btn-secondary" style="padding:5px 14px;font-size:11px">Download</button></div>
+  <div class="list-item"><div style="font-size:14px">📄</div><div style="flex:1"><div style="font-size:13px;font-weight:500">Audience_Insights_Feb.xlsx</div><div style="font-size:11px;color:var(--text-muted)">Generated 20 Feb 2026 · 1.1 MB</div></div><button class="btn btn-secondary" style="padding:5px 14px;font-size:11px">Download</button></div>
+</div>
+</div></div></body></html>
