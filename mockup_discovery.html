@@ -2,134 +2,221 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis AI — Discovery Feed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
-:root{--bg:#060a13;--bg2:#0c1221;--bg3:#111a2e;--card:#0f1729;--accent:#00d4aa;--accent-bright:#00f5c4;--accent2:#6366f1;--text:#e8ecf4;--text2:#7b8ba8;--text3:#4a5568;--border:rgba(255,255,255,0.05);--border-a:rgba(0,212,170,0.15);--border-a2:rgba(0,212,170,0.3);--glow:rgba(0,212,170,0.35)}
+:root{--bg-primary:#060a13;--bg-secondary:#0c1221;--bg-tertiary:#111a2e;--bg-card:#0f1729;--bg-card-hover:#142036;--accent:#00d4aa;--accent-bright:#00f5c4;--accent-secondary:#6366f1;--accent-dim:rgba(0,212,170,0.1);--accent-glow:rgba(0,212,170,0.35);--accent-glow-strong:rgba(0,212,170,0.6);--text-primary:#e8ecf4;--text-secondary:#7b8ba8;--text-muted:#4a5568;--border:rgba(255,255,255,0.05);--border-accent:rgba(0,212,170,0.15);--border-accent-strong:rgba(0,212,170,0.3);--danger:#f87171;--warning:#fbbf24;--success:#34d399}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);width:1280px;height:800px;overflow:hidden;display:flex}
+::selection{background:var(--accent);color:var(--bg-primary)}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-primary);display:flex;-webkit-font-smoothing:antialiased}
 
-.sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column}
-.sidebar-logo{padding:20px 20px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
-.logo-icon{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--bg)}
-.logo-text{font-weight:700;font-size:15px;letter-spacing:0.1em}
-.sidebar-nav{padding:16px 12px;flex:1}
-.nav-section{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;padding:12px 8px 6px;margin-top:8px}
-.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;font-size:13px;color:var(--text2);margin-bottom:2px}
-.nav-item.active{background:rgba(0,212,170,0.08);color:var(--accent);border:1px solid var(--border-a)}
-.nav-item .icon{width:18px;text-align:center;font-size:14px}
-.nav-item .badge{margin-left:auto;font-size:10px;padding:2px 6px;border-radius:6px;font-weight:600}
+/* ═══ SIDEBAR (same as dashboard) ═══ */
+.sidebar{width:240px;height:100vh;background:var(--bg-secondary);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;position:relative;overflow:hidden}
+.sidebar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:radial-gradient(ellipse at 30% 100%,rgba(0,212,170,0.04),transparent 70%);pointer-events:none}
+.sidebar-logo{padding:22px 24px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+.sidebar-logo svg{width:32px;height:32px;flex-shrink:0}
+.sidebar-logo span{font-weight:700;font-size:15px;letter-spacing:0.12em}
+.sidebar-nav{padding:12px;flex:1;overflow-y:auto}
+.nav-group-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;padding:16px 12px 6px}
+.nav-item{display:flex;align-items:center;gap:11px;padding:10px 14px;border-radius:10px;font-size:13.5px;color:var(--text-secondary);cursor:pointer;transition:all .25s;margin-bottom:1px;position:relative;border:1px solid transparent}
+.nav-item:hover{background:rgba(255,255,255,0.025);color:var(--text-primary)}
+.nav-item.active{background:var(--accent-dim);color:var(--accent);border-color:var(--border-accent);font-weight:500}
+.nav-item.active::before{content:'';position:absolute;left:0;top:25%;bottom:25%;width:2px;background:var(--accent);border-radius:0 2px 2px 0}
+.nav-item svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;opacity:.7}
+.nav-item.active svg{opacity:1;stroke:var(--accent)}
+.nav-badge{margin-left:auto;font-size:10px;padding:2px 7px;border-radius:6px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.badge-ai{background:var(--accent-dim);color:var(--accent);border:1px solid var(--border-accent)}
+.badge-alert{background:rgba(248,113,113,0.12);color:var(--danger);border:1px solid rgba(248,113,113,0.2)}
 
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.topbar{height:56px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:rgba(6,10,19,0.8)}
-.topbar-title{font-size:16px;font-weight:600}
-.topbar-right{display:flex;align-items:center;gap:12px}
-.avatar{width:32px;height:32px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--bg)}
+/* ═══ MAIN ═══ */
+.main{flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;position:relative}
+.main::before{content:'';position:absolute;top:-100px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(99,102,241,0.03),transparent 70%);pointer-events:none;z-index:0}
+.main::after{content:'';position:absolute;bottom:-200px;left:20%;width:500px;height:500px;background:radial-gradient(circle,rgba(0,212,170,0.025),transparent 70%);pointer-events:none;z-index:0}
 
-.content{flex:1;overflow-y:auto;padding:24px;background:var(--bg)}
+/* ═══ TOPBAR ═══ */
+.topbar{height:60px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(6,10,19,0.6);backdrop-filter:blur(24px) saturate(180%);flex-shrink:0;position:relative;z-index:10}
+.topbar-left{display:flex;align-items:center;gap:16px}
+.topbar-title{font-size:17px;font-weight:700}
+.topbar-stat{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:6px}
+.topbar-stat .live-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 var(--accent-glow)}50%{opacity:.6;box-shadow:0 0 0 5px transparent}}
+.topbar-right{display:flex;align-items:center;gap:14px}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a88a);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--bg-primary);box-shadow:0 0 20px rgba(0,212,170,0.2)}
+.view-toggle{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.view-btn{padding:6px 14px;font-size:11.5px;font-family:'Outfit',sans-serif;color:var(--text-muted);background:transparent;border:none;cursor:pointer;transition:all .2s}
+.view-btn.active{background:var(--accent-dim);color:var(--accent)}
+.view-btn:hover:not(.active){color:var(--text-secondary)}
 
-/* Search + Filters */
-.search-row{display:flex;gap:12px;align-items:center;margin-bottom:20px}
-.search-box{flex:1;display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--text3)}
-.search-box:focus-within{border-color:var(--border-a2)}
-.filter-pills{display:flex;gap:8px}
-.pill{padding:7px 16px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.2s;border:1px solid var(--border)}
-.pill.active{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:600}
-.pill:not(.active){color:var(--text2);background:var(--card)}
+/* ═══ CONTENT ═══ */
+.content{flex:1;overflow-y:auto;padding:28px;position:relative;z-index:1}
+.content::-webkit-scrollbar{width:6px}
+.content::-webkit-scrollbar-track{background:transparent}
+.content::-webkit-scrollbar-thumb{background:var(--border-accent);border-radius:3px}
+
+/* Search */
+.search-row{display:flex;gap:12px;align-items:center;margin-bottom:22px}
+.search-box{flex:1;display:flex;align-items:center;gap:10px;padding:11px 18px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;transition:all .3s}
+.search-box:focus-within{border-color:var(--border-accent-strong);box-shadow:0 0 0 3px rgba(0,212,170,0.06)}
+.search-box svg{width:16px;height:16px;stroke:var(--text-muted);fill:none;stroke-width:1.5;flex-shrink:0}
+.search-box input{flex:1;background:none;border:none;color:var(--text-primary);font-family:'Outfit',sans-serif;font-size:13.5px;outline:none}
+.search-box input::placeholder{color:var(--text-muted)}
+.filter-pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{padding:7px 18px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .25s;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary)}
+.pill:hover{border-color:var(--border-accent);color:var(--text-primary)}
+.pill.active{background:var(--accent);color:var(--bg-primary);border-color:var(--accent);font-weight:600;box-shadow:0 4px 16px rgba(0,212,170,0.25)}
 
 /* PLY Header */
-.ply-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.ply-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase}
-.ply-count{font-size:12px;color:var(--text3)}
+.ply-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.ply-left{display:flex;align-items:center;gap:10px}
+.ply-icon{width:28px;height:28px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.ply-icon svg{width:14px;height:14px;stroke:var(--accent);fill:none;stroke-width:1.5}
+.ply-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;font-weight:500}
+.ply-desc{font-size:11.5px;color:var(--text-muted)}
 
-/* Flywheel */
-.flywheel{display:flex;align-items:center;gap:0;margin-bottom:32px;position:relative;padding:0 20px}
-.flywheel-arrow{width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--accent);cursor:pointer;flex-shrink:0;z-index:2;transition:all 0.2s}
-.flywheel-arrow:hover{border-color:var(--accent);background:rgba(0,212,170,0.08);box-shadow:0 0 20px rgba(0,212,170,0.15)}
-.flywheel-track{display:flex;gap:16px;flex:1;align-items:center;justify-content:center;overflow:hidden;padding:10px 16px}
+/* ═══ FLYWHEEL ═══ */
+.flywheel{display:flex;align-items:center;gap:0;margin-bottom:32px;position:relative;padding:16px 0}
+.flywheel::before{content:'';position:absolute;top:0;bottom:0;left:0;width:80px;background:linear-gradient(to right,var(--bg-primary),transparent);z-index:2;pointer-events:none}
+.flywheel::after{content:'';position:absolute;top:0;bottom:0;right:0;width:80px;background:linear-gradient(to left,var(--bg-primary),transparent);z-index:2;pointer-events:none}
+.fly-arrow{width:44px;height:44px;border-radius:50%;background:var(--bg-card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;z-index:3;transition:all .3s;position:relative}
+.fly-arrow:hover{border-color:var(--accent);background:var(--accent-dim);box-shadow:0 0 25px rgba(0,212,170,0.15)}
+.fly-arrow svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:2}
+.fly-track{display:flex;gap:20px;flex:1;align-items:center;justify-content:center;overflow:hidden;padding:8px 24px}
 
-/* Business Cards */
-.bcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:0;width:280px;flex-shrink:0;transition:all 0.4s;position:relative;overflow:hidden}
-.bcard.faded{opacity:0.3;transform:scale(0.88);filter:blur(1px)}
-.bcard.center{opacity:1;transform:scale(1.05);border-color:var(--border-a2);box-shadow:0 20px 60px rgba(0,0,0,0.4),0 0 40px rgba(0,212,170,0.08)}
-.bcard.center::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
-.bcard-header{padding:16px 16px 12px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
-.bcard-avatar{width:44px;height:44px;border-radius:50%;background:var(--bg3);border:2px solid var(--border-a);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--accent);flex-shrink:0}
+/* ═══ BUSINESS CARD ═══ */
+.bcard{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;width:310px;flex-shrink:0;transition:all .5s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+.bcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .4s}
+.bcard::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at center,rgba(0,212,170,0.02),transparent 50%);opacity:0;transition:opacity .4s}
+.bcard.faded{opacity:.25;transform:scale(.85);filter:blur(2px)}
+.bcard.semi{opacity:.5;transform:scale(.92);filter:blur(0.5px)}
+.bcard.center{opacity:1;transform:scale(1.04);border-color:var(--border-accent-strong);box-shadow:0 24px 80px rgba(0,0,0,0.4),0 0 60px rgba(0,212,170,0.06)}
+.bcard.center::before{opacity:1}
+.bcard.center::after{opacity:1}
+.bcard:hover:not(.faded){border-color:var(--border-accent-strong);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+
+.bcard-top{padding:18px 20px 14px;display:flex;align-items:flex-start;gap:14px;position:relative;z-index:1}
+.bcard-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--bg-tertiary),var(--bg-secondary));border:2px solid var(--border-accent);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--accent);flex-shrink:0;transition:all .4s}
+.bcard.center .bcard-avatar{border-color:var(--accent);box-shadow:0 0 20px rgba(0,212,170,0.2)}
 .bcard-info{flex:1;min-width:0}
-.bcard-name{font-size:14px;font-weight:600;margin-bottom:2px}
-.bcard-niche{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;background:rgba(0,212,170,0.08);border:1px solid var(--border-a);border-radius:6px;font-size:10px;color:var(--accent);font-weight:500}
-.bcard-match{text-align:right}
-.bcard-match-val{font-size:18px;font-weight:800;color:var(--accent)}
-.bcard-match-label{font-size:9px;color:var(--text3)}
-.bcard-sale{position:absolute;top:12px;right:12px;padding:2px 8px;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);border-radius:6px;font-size:9px;font-weight:600;color:#f59e0b}
+.bcard-name{font-size:15px;font-weight:600;margin-bottom:4px}
+.bcard-niche{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:8px;font-size:10.5px;color:var(--accent);font-weight:500;font-family:'JetBrains Mono',monospace}
+.bcard-match{text-align:right;flex-shrink:0}
+.bcard-match-val{font-size:22px;font-weight:800;color:var(--accent);text-shadow:0 0 15px rgba(0,212,170,0.3);line-height:1}
+.bcard-match-lbl{font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:.06em}
+.bcard-sale{position:absolute;top:14px;right:16px;padding:3px 10px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);border-radius:6px;font-size:9px;font-weight:600;color:var(--warning);font-family:'JetBrains Mono',monospace;letter-spacing:.04em;z-index:1}
 
-.bcard-body{padding:14px 16px}
-.bcard-section-label{font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;margin-bottom:8px}
-.bcard-metric{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
-.bcard-metric:last-child{border-bottom:none}
-.bcard-metric-name{font-size:12px;color:var(--text2)}
-.bcard-metric-val{font-size:12px;font-weight:600;color:var(--text)}
+.bcard-divider{height:1px;background:var(--border);margin:0 20px}
 
-.bcard-patterns{padding:0 16px 14px}
-.pattern-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2);margin-bottom:4px}
-.pattern-icon{color:var(--accent);font-size:10px}
+.bcard-metrics{padding:14px 20px;position:relative;z-index:1}
+.bcard-section-lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.bcard-section-lbl svg{width:12px;height:12px;stroke:var(--accent);fill:none;stroke-width:1.5}
+.metric-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0}
+.metric-row+.metric-row{border-top:1px solid rgba(255,255,255,0.02)}
+.metric-name{font-size:12.5px;color:var(--text-secondary);display:flex;align-items:center;gap:6px}
+.metric-name .emoji{font-size:13px}
+.metric-val{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;color:var(--accent)}
 
-.bcard-actions{display:flex;gap:6px;padding:0 16px 16px}
-.bcard-btn{flex:1;padding:8px 0;border-radius:8px;font-size:11px;font-weight:600;text-align:center;cursor:pointer;border:none;font-family:'Outfit',sans-serif;transition:all 0.2s}
-.btn-fb{background:#1877F2;color:white}
-.btn-contact{background:rgba(0,212,170,0.12);color:var(--accent);border:1px solid var(--border-a)}
-.btn-chat{background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
-.btn-collab{background:rgba(99,102,241,0.12);color:#a5b4fc;border:1px solid rgba(99,102,241,0.2)}
+.bcard-patterns{padding:0 20px 14px;position:relative;z-index:1}
+.pattern-row{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--text-secondary);padding:3px 0}
+.pattern-row svg{width:12px;height:12px;stroke:var(--accent);fill:none;stroke-width:2;flex-shrink:0}
 
-/* Grid view below */
-.grid-section{margin-top:8px}
-.grid-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.grid-header h3{font-size:15px;font-weight:600}
-.view-toggle{display:flex;gap:4px}
-.view-btn{padding:6px 10px;border-radius:6px;font-size:11px;color:var(--text3);cursor:pointer;background:transparent;border:1px solid var(--border)}
-.view-btn.active{background:var(--card);color:var(--text);border-color:var(--border-a)}
+.bcard-actions{display:flex;gap:6px;padding:0 20px 18px;position:relative;z-index:1}
+.bcard-btn{flex:1;padding:9px 0;border-radius:9px;font-size:11px;font-weight:600;text-align:center;cursor:pointer;border:none;font-family:'Outfit',sans-serif;transition:all .25s}
+.bcard-btn:hover{transform:translateY(-1px)}
+.btn-fb{background:#1877F2;color:white;box-shadow:0 4px 12px rgba(24,119,242,0.25)}
+.btn-fb:hover{background:#1565D8;box-shadow:0 6px 20px rgba(24,119,242,0.35)}
+.btn-contact{background:var(--accent-dim);color:var(--accent);border:1px solid var(--border-accent)}
+.btn-contact:hover{background:rgba(0,212,170,0.15);border-color:var(--accent)}
+.btn-chat{background:var(--bg-tertiary);color:var(--text-secondary);border:1px solid var(--border)}
+.btn-chat:hover{border-color:var(--border-accent);color:var(--text-primary)}
+.btn-collab{background:rgba(99,102,241,0.08);color:#a5b4fc;border:1px solid rgba(99,102,241,0.2)}
+.btn-collab:hover{background:rgba(99,102,241,0.15);border-color:rgba(99,102,241,0.4)}
 
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.grid .bcard{width:100%;transform:none;opacity:1;filter:none}
-.grid .bcard:hover{border-color:var(--border-a2);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.3),0 0 30px rgba(0,212,170,0.06)}
+/* Flywheel auto-rotate indicator */
+.flywheel-footer{text-align:center;margin-bottom:28px;display:flex;align-items:center;justify-content:center;gap:16px}
+.flywheel-dots{display:flex;gap:6px}
+.flywheel-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.08);transition:all .3s}
+.flywheel-dot.active{background:var(--accent);box-shadow:0 0 8px rgba(0,212,170,0.4)}
+.flywheel-hint{font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
+
+/* ═══ GRID VIEW ═══ */
+.grid-section{animation:fadeUp .6s .1s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.grid-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding-top:4px;border-top:1px solid var(--border)}
+.grid-header h3{font-size:15px;font-weight:600;padding-top:16px}
+.grid-count{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);padding-top:16px}
+
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card-grid .bcard{width:100%;transform:none!important;opacity:1!important;filter:none!important}
+
+/* Niche color variations */
+.niche-fitness .bcard-niche{background:var(--accent-dim);border-color:var(--border-accent);color:var(--accent)}
+.niche-fitness .bcard-avatar{border-color:var(--border-accent);color:var(--accent)}
+.niche-tech .bcard-niche{background:rgba(99,102,241,0.08);border-color:rgba(99,102,241,0.2);color:#a5b4fc}
+.niche-tech .bcard-avatar{border-color:rgba(99,102,241,0.3);color:#a5b4fc}
+.niche-tech .bcard-match-val,.niche-tech .metric-val{color:#a5b4fc}
+.niche-food .bcard-niche{background:rgba(52,211,153,0.08);border-color:rgba(52,211,153,0.2);color:#6ee7b7}
+.niche-food .bcard-avatar{border-color:rgba(52,211,153,0.3);color:#6ee7b7}
+.niche-food .bcard-match-val,.niche-food .metric-val{color:#6ee7b7}
+.niche-fashion .bcard-niche{background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.2);color:#fbbf24}
+.niche-fashion .bcard-avatar{border-color:rgba(251,191,36,0.3);color:#fbbf24}
+.niche-fashion .bcard-match-val,.niche-fashion .metric-val{color:#fbbf24}
 </style>
 </head>
 <body>
 
-<div class="sidebar">
-  <div class="sidebar-logo"><div class="logo-icon">A</div><div class="logo-text">ARTEMIS</div></div>
-  <div class="sidebar-nav">
-    <div class="nav-section">Main</div>
-    <div class="nav-item"><span class="icon">📊</span>Dashboard</div>
-    <div class="nav-item active"><span class="icon">🔍</span>Discovery Feed</div>
-    <div class="nav-item"><span class="icon">📈</span>Predictions</div>
-    <div class="nav-item"><span class="icon">🎯</span>Audience</div>
-    <div class="nav-section">Intelligence</div>
-    <div class="nav-item"><span class="icon">🤖</span>Ask Artemis<span class="badge" style="background:rgba(0,212,170,0.1);color:var(--accent)">AI</span></div>
-    <div class="nav-item"><span class="icon">⚡</span>Alerts</div>
-    <div class="nav-item"><span class="icon">📋</span>Reports</div>
-    <div class="nav-section">Settings</div>
-    <div class="nav-item"><span class="icon">🔗</span>Connected Pages</div>
-    <div class="nav-item"><span class="icon">⚙️</span>Settings</div>
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
+    <span>ARTEMIS</span>
   </div>
-</div>
+  <nav class="sidebar-nav">
+    <div class="nav-group-label">Main</div>
+    <div class="nav-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</div>
+    <div class="nav-item active"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discovery Feed</div>
+    <div class="nav-item"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predictions</div>
+    <div class="nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Audience</div>
+    <div class="nav-group-label">Intelligence</div>
+    <div class="nav-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Ask Artemis<span class="nav-badge badge-ai">AI</span></div>
+    <div class="nav-item"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Alerts<span class="nav-badge badge-alert">3</span></div>
+    <div class="nav-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</div>
+    <div class="nav-group-label">Settings</div>
+    <div class="nav-item"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Connected Pages</div>
+    <div class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</div>
+  </nav>
+</aside>
 
+<!-- ═══ MAIN ═══ -->
 <div class="main">
-  <div class="topbar">
-    <div class="topbar-title">Discovery Feed</div>
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">Discovery Feed</div>
+      <div class="topbar-stat"><span class="live-dot"></span>12,847 pages analysed</div>
+    </div>
     <div class="topbar-right">
-      <div style="font-size:12px;color:var(--text3)">12,847 pages discovered</div>
+      <div class="view-toggle">
+        <button class="view-btn active">Flywheel</button>
+        <button class="view-btn">Grid</button>
+      </div>
       <div class="avatar">AS</div>
     </div>
-  </div>
+  </header>
 
   <div class="content">
-    <!-- Search + Filter -->
+    <!-- Search -->
     <div class="search-row">
-      <div class="search-box">🔍 Search pages, niches, or keywords...</div>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" placeholder="Search pages, niches, or keywords...">
+      </div>
       <div class="filter-pills">
         <div class="pill active">All</div>
         <div class="pill">Fitness</div>
-        <div class="pill">Food</div>
+        <div class="pill">Food & Drink</div>
         <div class="pill">Tech</div>
         <div class="pill">Fashion</div>
         <div class="pill">Business</div>
@@ -138,47 +225,70 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);widt
 
     <!-- PLY Header -->
     <div class="ply-header">
-      <div class="ply-label">✦ People Like You — Recommended</div>
-      <div class="ply-count">Showing pages matching your audience profile</div>
+      <div class="ply-left">
+        <div class="ply-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div>
+          <div class="ply-label">People Like You — Recommended</div>
+          <div class="ply-desc">Matching your audience, niche, and content style</div>
+        </div>
+      </div>
     </div>
 
-    <!-- Flywheel Carousel -->
+    <!-- ═══ FLYWHEEL CAROUSEL ═══ -->
     <div class="flywheel">
-      <div class="flywheel-arrow">◀</div>
-      <div class="flywheel-track">
+      <div class="fly-arrow" id="prevBtn"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></div>
+      <div class="fly-track">
 
-        <!-- Faded left -->
-        <div class="bcard faded">
-          <div class="bcard-header">
-            <div class="bcard-avatar">NF</div>
-            <div class="bcard-info"><div class="bcard-name">NutriFuel</div><div class="bcard-niche">🥗 Nutrition</div></div>
+        <!-- FAR LEFT (faded) -->
+        <div class="bcard faded niche-food">
+          <div class="bcard-top">
+            <div class="bcard-avatar">CB</div>
+            <div class="bcard-info"><div class="bcard-name">CleanBites</div><div class="bcard-niche">🥗 Nutrition</div></div>
           </div>
-          <div class="bcard-body">
-            <div class="bcard-section-label">TOP METRICS (30D)</div>
-            <div class="bcard-metric"><span class="bcard-metric-name">Engagement</span><span class="bcard-metric-val">3.1%</span></div>
-            <div class="bcard-metric"><span class="bcard-metric-name">Reach</span><span class="bcard-metric-val">18.2K</span></div>
+          <div class="bcard-divider"></div>
+          <div class="bcard-metrics">
+            <div class="metric-row"><span class="metric-name">Engagement</span><span class="metric-val">3.9%</span></div>
+            <div class="metric-row"><span class="metric-name">Reach</span><span class="metric-val">12.1K</span></div>
           </div>
         </div>
 
-        <!-- CENTER CARD (Bold) -->
-        <div class="bcard center">
-          <div class="bcard-sale">For Sale</div>
-          <div class="bcard-header">
+        <!-- LEFT (semi) -->
+        <div class="bcard semi niche-food">
+          <div class="bcard-top">
+            <div class="bcard-avatar">NF</div>
+            <div class="bcard-info"><div class="bcard-name">NutriFuel</div><div class="bcard-niche">🥗 Nutrition</div></div>
+            <div class="bcard-match"><div class="bcard-match-val">78%</div><div class="bcard-match-lbl">MATCH</div></div>
+          </div>
+          <div class="bcard-divider"></div>
+          <div class="bcard-metrics">
+            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>TOP METRICS (30D)</div>
+            <div class="metric-row"><span class="metric-name"><span class="emoji">📊</span>Engagement</span><span class="metric-val">3.1%</span></div>
+            <div class="metric-row"><span class="metric-name"><span class="emoji">👥</span>Reach</span><span class="metric-val">18.2K</span></div>
+            <div class="metric-row"><span class="metric-name"><span class="emoji">😊</span>Sentiment</span><span class="metric-val">0.88</span></div>
+          </div>
+        </div>
+
+        <!-- ═══ CENTER CARD (BOLD) ═══ -->
+        <div class="bcard center niche-fitness">
+          <div class="bcard-sale">FOR SALE</div>
+          <div class="bcard-top">
             <div class="bcard-avatar">FL</div>
             <div class="bcard-info"><div class="bcard-name">FitLife Pro</div><div class="bcard-niche">💪 Fitness</div></div>
-            <div class="bcard-match"><div class="bcard-match-val">92%</div><div class="bcard-match-label">match</div></div>
+            <div class="bcard-match"><div class="bcard-match-val">92%</div><div class="bcard-match-lbl">MATCH</div></div>
           </div>
-          <div class="bcard-body">
-            <div class="bcard-section-label">TOP 3 POSTS (30 DAYS)</div>
-            <div class="bcard-metric"><span class="bcard-metric-name">🎬 Product launch video</span><span class="bcard-metric-val" style="color:var(--accent)">4.2K</span></div>
-            <div class="bcard-metric"><span class="bcard-metric-name">📸 Behind the scenes reel</span><span class="bcard-metric-val" style="color:var(--accent)">3.8K</span></div>
-            <div class="bcard-metric"><span class="bcard-metric-name">💪 Customer transformation</span><span class="bcard-metric-val" style="color:var(--accent)">2.9K</span></div>
+          <div class="bcard-divider"></div>
+          <div class="bcard-metrics">
+            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>TOP 3 POSTS (30 DAYS)</div>
+            <div class="metric-row"><span class="metric-name"><span class="emoji">🎬</span>Product launch video</span><span class="metric-val">4.2K</span></div>
+            <div class="metric-row"><span class="metric-name"><span class="emoji">📸</span>Behind the scenes reel</span><span class="metric-val">3.8K</span></div>
+            <div class="metric-row"><span class="metric-name"><span class="emoji">💪</span>Customer transformation</span><span class="metric-val">2.9K</span></div>
           </div>
+          <div class="bcard-divider"></div>
           <div class="bcard-patterns">
-            <div class="bcard-section-label">🔓 PATTERNS UNLOCKED</div>
-            <div class="pattern-item"><span class="pattern-icon">→</span>Best time: Tue 6 PM</div>
-            <div class="pattern-item"><span class="pattern-icon">→</span>Top format: Short video</div>
-            <div class="pattern-item"><span class="pattern-icon">→</span>Audience: 25-34, urban</div>
+            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>PATTERNS UNLOCKED</div>
+            <div class="pattern-row"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Best posting time: Tue & Thu 6 PM</div>
+            <div class="pattern-row"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Top format: Short-form video (+156%)</div>
+            <div class="pattern-row"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Audience: 25–34, urban, health-conscious</div>
           </div>
           <div class="bcard-actions">
             <div class="bcard-btn btn-fb">Follow FB</div>
@@ -188,82 +298,109 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);widt
           </div>
         </div>
 
-        <!-- Faded right -->
-        <div class="bcard faded">
-          <div class="bcard-header">
+        <!-- RIGHT (semi) -->
+        <div class="bcard semi niche-fitness">
+          <div class="bcard-top">
             <div class="bcard-avatar">YG</div>
             <div class="bcard-info"><div class="bcard-name">YogaGlow</div><div class="bcard-niche">🧘 Wellness</div></div>
+            <div class="bcard-match"><div class="bcard-match-val">85%</div><div class="bcard-match-lbl">MATCH</div></div>
           </div>
-          <div class="bcard-body">
-            <div class="bcard-section-label">TOP METRICS (30D)</div>
-            <div class="bcard-metric"><span class="bcard-metric-name">Engagement</span><span class="bcard-metric-val">5.6%</span></div>
-            <div class="bcard-metric"><span class="bcard-metric-name">Reach</span><span class="bcard-metric-val">31.4K</span></div>
+          <div class="bcard-divider"></div>
+          <div class="bcard-metrics">
+            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>TOP METRICS (30D)</div>
+            <div class="metric-row"><span class="metric-name"><span class="emoji">📊</span>Engagement</span><span class="metric-val">5.6%</span></div>
+            <div class="metric-row"><span class="metric-name"><span class="emoji">👥</span>Reach</span><span class="metric-val">31.4K</span></div>
+            <div class="metric-row"><span class="metric-name"><span class="emoji">😊</span>Sentiment</span><span class="metric-val">0.93</span></div>
+          </div>
+        </div>
+
+        <!-- FAR RIGHT (faded) -->
+        <div class="bcard faded niche-tech">
+          <div class="bcard-top">
+            <div class="bcard-avatar">TH</div>
+            <div class="bcard-info"><div class="bcard-name">TechHustle</div><div class="bcard-niche">💻 Tech</div></div>
+          </div>
+          <div class="bcard-divider"></div>
+          <div class="bcard-metrics">
+            <div class="metric-row"><span class="metric-name">Engagement</span><span class="metric-val">2.8%</span></div>
+            <div class="metric-row"><span class="metric-name">Reach</span><span class="metric-val">45.3K</span></div>
           </div>
         </div>
 
       </div>
-      <div class="flywheel-arrow">▶</div>
+      <div class="fly-arrow" id="nextBtn"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
+    </div>
+
+    <!-- Flywheel indicator -->
+    <div class="flywheel-footer">
+      <div class="flywheel-dots">
+        <div class="flywheel-dot"></div>
+        <div class="flywheel-dot"></div>
+        <div class="flywheel-dot active"></div>
+        <div class="flywheel-dot"></div>
+        <div class="flywheel-dot"></div>
+      </div>
+      <div class="flywheel-hint">Auto-rotating · Hover to pause</div>
     </div>
 
     <!-- Grid Section -->
     <div class="grid-section">
       <div class="grid-header">
         <h3>All Discovered Pages</h3>
-        <div class="view-toggle">
-          <div class="view-btn">Flywheel</div>
-          <div class="view-btn active">Grid</div>
-        </div>
+        <div class="grid-count">Showing 847 of 12,847 pages</div>
       </div>
-      <div class="grid">
-        <!-- Grid card 1 -->
-        <div class="bcard">
-          <div class="bcard-header">
+      <div class="card-grid">
+        <div class="bcard niche-food">
+          <div class="bcard-top">
             <div class="bcard-avatar">CB</div>
             <div class="bcard-info"><div class="bcard-name">CleanBites</div><div class="bcard-niche">🥗 Nutrition</div></div>
-            <div class="bcard-match"><div class="bcard-match-val" style="font-size:15px">78%</div><div class="bcard-match-label">match</div></div>
+            <div class="bcard-match"><div class="bcard-match-val" style="font-size:17px">78%</div><div class="bcard-match-lbl">MATCH</div></div>
           </div>
-          <div class="bcard-body">
-            <div class="bcard-section-label">TOP METRICS (30D)</div>
-            <div class="bcard-metric"><span class="bcard-metric-name">Engagement</span><span class="bcard-metric-val">3.9%</span></div>
-            <div class="bcard-metric"><span class="bcard-metric-name">Reach</span><span class="bcard-metric-val">12.1K</span></div>
-            <div class="bcard-metric"><span class="bcard-metric-name">Sentiment</span><span class="bcard-metric-val" style="color:var(--accent)">0.91</span></div>
+          <div class="bcard-divider"></div>
+          <div class="bcard-metrics">
+            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>TOP METRICS (30D)</div>
+            <div class="metric-row"><span class="metric-name">Engagement</span><span class="metric-val">3.9%</span></div>
+            <div class="metric-row"><span class="metric-name">Reach</span><span class="metric-val">12.1K</span></div>
+            <div class="metric-row"><span class="metric-name">Sentiment</span><span class="metric-val">0.91</span></div>
           </div>
           <div class="bcard-actions">
             <div class="bcard-btn btn-fb">Follow FB</div>
             <div class="bcard-btn btn-contact">Contact</div>
           </div>
         </div>
-        <!-- Grid card 2 -->
-        <div class="bcard">
-          <div class="bcard-header">
-            <div class="bcard-avatar" style="color:#a5b4fc;border-color:rgba(99,102,241,0.3)">TH</div>
-            <div class="bcard-info"><div class="bcard-name">TechHustle</div><div class="bcard-niche" style="background:rgba(99,102,241,0.08);border-color:rgba(99,102,241,0.2);color:#a5b4fc">💻 Tech</div></div>
-            <div class="bcard-match"><div class="bcard-match-val" style="font-size:15px;color:#a5b4fc">65%</div><div class="bcard-match-label">match</div></div>
+
+        <div class="bcard niche-tech">
+          <div class="bcard-top">
+            <div class="bcard-avatar">TH</div>
+            <div class="bcard-info"><div class="bcard-name">TechHustle</div><div class="bcard-niche">💻 Tech</div></div>
+            <div class="bcard-match"><div class="bcard-match-val" style="font-size:17px">65%</div><div class="bcard-match-lbl">MATCH</div></div>
           </div>
-          <div class="bcard-body">
-            <div class="bcard-section-label">TOP METRICS (30D)</div>
-            <div class="bcard-metric"><span class="bcard-metric-name">Engagement</span><span class="bcard-metric-val">2.8%</span></div>
-            <div class="bcard-metric"><span class="bcard-metric-name">Reach</span><span class="bcard-metric-val">45.3K</span></div>
-            <div class="bcard-metric"><span class="bcard-metric-name">Sentiment</span><span class="bcard-metric-val" style="color:#a5b4fc">0.76</span></div>
+          <div class="bcard-divider"></div>
+          <div class="bcard-metrics">
+            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>TOP METRICS (30D)</div>
+            <div class="metric-row"><span class="metric-name">Engagement</span><span class="metric-val">2.8%</span></div>
+            <div class="metric-row"><span class="metric-name">Reach</span><span class="metric-val">45.3K</span></div>
+            <div class="metric-row"><span class="metric-name">Sentiment</span><span class="metric-val">0.76</span></div>
           </div>
           <div class="bcard-actions">
             <div class="bcard-btn btn-fb">Follow FB</div>
             <div class="bcard-btn btn-collab">Collab</div>
           </div>
         </div>
-        <!-- Grid card 3 -->
-        <div class="bcard">
-          <div class="bcard-sale">For Sale</div>
-          <div class="bcard-header">
-            <div class="bcard-avatar" style="color:#fbbf24;border-color:rgba(245,158,11,0.3)">SM</div>
-            <div class="bcard-info"><div class="bcard-name">StyleMaven</div><div class="bcard-niche" style="background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.2);color:#fbbf24">👗 Fashion</div></div>
-            <div class="bcard-match"><div class="bcard-match-val" style="font-size:15px;color:#fbbf24">58%</div><div class="bcard-match-label">match</div></div>
+
+        <div class="bcard niche-fashion">
+          <div class="bcard-sale">FOR SALE</div>
+          <div class="bcard-top">
+            <div class="bcard-avatar">SM</div>
+            <div class="bcard-info"><div class="bcard-name">StyleMaven</div><div class="bcard-niche">👗 Fashion</div></div>
+            <div class="bcard-match"><div class="bcard-match-val" style="font-size:17px">58%</div><div class="bcard-match-lbl">MATCH</div></div>
           </div>
-          <div class="bcard-body">
-            <div class="bcard-section-label">TOP METRICS (30D)</div>
-            <div class="bcard-metric"><span class="bcard-metric-name">Engagement</span><span class="bcard-metric-val">6.1%</span></div>
-            <div class="bcard-metric"><span class="bcard-metric-name">Reach</span><span class="bcard-metric-val">8.7K</span></div>
-            <div class="bcard-metric"><span class="bcard-metric-name">Sentiment</span><span class="bcard-metric-val" style="color:#fbbf24">0.88</span></div>
+          <div class="bcard-divider"></div>
+          <div class="bcard-metrics">
+            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>TOP METRICS (30D)</div>
+            <div class="metric-row"><span class="metric-name">Engagement</span><span class="metric-val">6.1%</span></div>
+            <div class="metric-row"><span class="metric-name">Reach</span><span class="metric-val">8.7K</span></div>
+            <div class="metric-row"><span class="metric-name">Sentiment</span><span class="metric-val">0.88</span></div>
           </div>
           <div class="bcard-actions">
             <div class="bcard-btn btn-fb">Follow FB</div>

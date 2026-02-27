@@ -3,134 +3,244 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis AI — Executive Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
-:root{--bg:#060a13;--bg2:#0c1221;--bg3:#111a2e;--card:#0f1729;--accent:#00d4aa;--accent-bright:#00f5c4;--accent2:#6366f1;--text:#e8ecf4;--text2:#7b8ba8;--text3:#4a5568;--border:rgba(255,255,255,0.05);--border-a:rgba(0,212,170,0.15);--border-a2:rgba(0,212,170,0.3);--glow:rgba(0,212,170,0.35)}
+:root{--bg-primary:#060a13;--bg-secondary:#0c1221;--bg-tertiary:#111a2e;--bg-card:#0f1729;--bg-card-hover:#142036;--accent:#00d4aa;--accent-bright:#00f5c4;--accent-secondary:#6366f1;--accent-dim:rgba(0,212,170,0.1);--accent-glow:rgba(0,212,170,0.35);--accent-glow-strong:rgba(0,212,170,0.6);--text-primary:#e8ecf4;--text-secondary:#7b8ba8;--text-muted:#4a5568;--border:rgba(255,255,255,0.05);--border-accent:rgba(0,212,170,0.15);--border-accent-strong:rgba(0,212,170,0.3);--danger:#f87171;--warning:#fbbf24;--success:#34d399}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);width:1280px;height:800px;overflow:hidden;display:flex}
+::selection{background:var(--accent);color:var(--bg-primary)}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-primary);display:flex;-webkit-font-smoothing:antialiased}
 
-/* Sidebar */
-.sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:0}
-.sidebar-logo{padding:20px 20px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
-.logo-icon{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--bg)}
-.logo-text{font-weight:700;font-size:15px;letter-spacing:0.1em}
-.sidebar-nav{padding:16px 12px;flex:1}
-.nav-section{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;padding:12px 8px 6px;margin-top:8px}
-.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;font-size:13px;color:var(--text2);cursor:pointer;transition:all 0.2s;margin-bottom:2px}
-.nav-item:hover{background:rgba(255,255,255,0.03);color:var(--text)}
-.nav-item.active{background:rgba(0,212,170,0.08);color:var(--accent);border:1px solid var(--border-a)}
-.nav-item .icon{width:18px;text-align:center;font-size:14px}
-.nav-item .badge{margin-left:auto;background:rgba(239,68,68,0.15);color:#ef4444;font-size:10px;padding:2px 6px;border-radius:6px;font-weight:600}
+/* ═══ SIDEBAR ═══ */
+.sidebar{width:240px;height:100vh;background:var(--bg-secondary);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;position:relative;overflow:hidden}
+.sidebar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:radial-gradient(ellipse at 30% 100%,rgba(0,212,170,0.04),transparent 70%);pointer-events:none}
+.sidebar-logo{padding:22px 24px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+.sidebar-logo svg{width:32px;height:32px;flex-shrink:0}
+.sidebar-logo span{font-weight:700;font-size:15px;letter-spacing:0.12em;color:var(--text-primary)}
+.sidebar-nav{padding:12px;flex:1;overflow-y:auto}
+.nav-group{margin-bottom:4px}
+.nav-group-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;padding:16px 12px 6px}
+.nav-item{display:flex;align-items:center;gap:11px;padding:10px 14px;border-radius:10px;font-size:13.5px;font-weight:400;color:var(--text-secondary);cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);margin-bottom:1px;position:relative;border:1px solid transparent}
+.nav-item:hover{background:rgba(255,255,255,0.025);color:var(--text-primary)}
+.nav-item.active{background:var(--accent-dim);color:var(--accent);border-color:var(--border-accent);font-weight:500}
+.nav-item.active::before{content:'';position:absolute;left:0;top:25%;bottom:25%;width:2px;background:var(--accent);border-radius:0 2px 2px 0}
+.nav-item svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;opacity:.7}
+.nav-item.active svg{opacity:1;stroke:var(--accent)}
+.nav-badge{margin-left:auto;font-size:10px;padding:2px 7px;border-radius:6px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.badge-ai{background:var(--accent-dim);color:var(--accent);border:1px solid var(--border-accent)}
+.badge-alert{background:rgba(248,113,113,0.12);color:var(--danger);border:1px solid rgba(248,113,113,0.2)}
 
-/* Top bar */
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.topbar{height:56px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:rgba(6,10,19,0.8);backdrop-filter:blur(20px)}
-.topbar-left{display:flex;align-items:center;gap:16px}
-.topbar-title{font-size:16px;font-weight:600}
-.topbar-tabs{display:flex;gap:0;margin-left:24px}
-.topbar-tab{padding:8px 16px;font-size:12px;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
-.topbar-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-.topbar-tab:hover{color:var(--text)}
-.topbar-right{display:flex;align-items:center;gap:12px}
-.topbar-btn{padding:6px 14px;border-radius:8px;font-size:12px;font-family:'Outfit',sans-serif;cursor:pointer;border:none;transition:all 0.2s}
-.btn-outline{background:transparent;color:var(--text2);border:1px solid var(--border)}
-.btn-accent{background:var(--accent);color:var(--bg);font-weight:600}
-.avatar{width:32px;height:32px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--bg)}
+/* ═══ MAIN ═══ */
+.main{flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;position:relative}
+.main::before{content:'';position:absolute;top:-200px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,212,170,0.03),transparent 70%);pointer-events:none;z-index:0}
 
-/* Content */
-.content{flex:1;overflow-y:auto;padding:24px;background:var(--bg)}
-.content-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
-.content-header h2{font-size:20px;font-weight:700}
-.page-selector{display:flex;align-items:center;gap:8px;padding:6px 12px;background:var(--card);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--text2)}
-.page-selector .dot{width:8px;height:8px;background:var(--accent);border-radius:50%}
+/* ═══ TOPBAR ═══ */
+.topbar{height:60px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(6,10,19,0.6);backdrop-filter:blur(24px) saturate(180%);flex-shrink:0;position:relative;z-index:10}
+.topbar-left{display:flex;align-items:center;gap:24px}
+.topbar-title{font-size:17px;font-weight:700;letter-spacing:-0.01em}
+.topbar-tabs{display:flex;gap:0}
+.topbar-tab{padding:8px 18px;font-size:12.5px;font-weight:400;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .25s;position:relative}
+.topbar-tab:hover{color:var(--text-secondary)}
+.topbar-tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500}
+.topbar-tab.active::after{content:'';position:absolute;bottom:-1px;left:20%;right:20%;height:1px;background:var(--accent);filter:blur(4px)}
+.topbar-right{display:flex;align-items:center;gap:14px}
+.page-selector{display:flex;align-items:center;gap:8px;padding:7px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:9px;font-size:12.5px;color:var(--text-secondary);cursor:pointer;transition:all .25s}
+.page-selector:hover{border-color:var(--border-accent)}
+.page-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;position:relative}
+.page-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid var(--accent);animation:ping 2.5s cubic-bezier(0,0,.2,1) infinite;opacity:.4}
+@keyframes ping{0%{transform:scale(1);opacity:.4}75%,100%{transform:scale(2);opacity:0}}
+.topbar-btn{padding:7px 16px;border-radius:8px;font-size:12px;font-family:'Outfit',sans-serif;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-secondary);transition:all .25s}
+.topbar-btn:hover{border-color:var(--border-accent);color:var(--accent)}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a88a);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--bg-primary);box-shadow:0 0 20px rgba(0,212,170,0.2)}
 
-/* KPI Grid */
+/* ═══ CONTENT AREA ═══ */
+.content{flex:1;overflow-y:auto;padding:28px;position:relative;z-index:1}
+.content::-webkit-scrollbar{width:6px}
+.content::-webkit-scrollbar-track{background:transparent}
+.content::-webkit-scrollbar-thumb{background:var(--border-accent);border-radius:3px}
+
+/* ═══ ALERT BANNER ═══ */
+.alert{display:flex;align-items:center;gap:14px;padding:14px 20px;background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.12);border-radius:14px;margin-bottom:24px;animation:slideDown .5s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.alert-icon{width:36px;height:36px;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.alert-icon svg{width:18px;height:18px;stroke:var(--danger);fill:none;stroke-width:1.5}
+.alert-content{flex:1}
+.alert-title{font-size:12.5px;font-weight:600;color:var(--danger);margin-bottom:2px}
+.alert-desc{font-size:12px;color:rgba(248,113,113,0.7)}
+.alert-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);white-space:nowrap}
+.alert-close{width:28px;height:28px;border-radius:6px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .2s}
+.alert-close:hover{background:rgba(248,113,113,0.1);color:var(--danger)}
+
+/* ═══ KPI CARDS ═══ */
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;position:relative;overflow:hidden;transition:all 0.3s}
-.kpi-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity 0.3s}
-.kpi-card:hover{border-color:var(--border-a2);transform:translateY(-2px)}
+.kpi-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:22px 22px 18px;position:relative;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);cursor:default}
+.kpi-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .4s}
+.kpi-card::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at center,rgba(0,212,170,0.02),transparent 50%);opacity:0;transition:opacity .4s}
+.kpi-card:hover{border-color:var(--border-accent-strong);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.3),0 0 40px rgba(0,212,170,0.04)}
 .kpi-card:hover::before{opacity:1}
-.kpi-label{font-size:11px;color:var(--text3);font-weight:500;letter-spacing:0.03em;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.kpi-label .icon{font-size:12px}
-.kpi-value{font-size:28px;font-weight:800;letter-spacing:-0.02em;margin-bottom:4px}
-.kpi-value.accent{color:var(--accent);text-shadow:0 0 20px rgba(0,212,170,0.3)}
-.kpi-change{font-size:11px;font-weight:500;display:flex;align-items:center;gap:4px}
-.kpi-change.up{color:#34d399}
-.kpi-change.down{color:#f87171}
-.kpi-sparkline{position:absolute;bottom:0;right:0;width:80px;height:40px;opacity:0.15}
+.kpi-card:hover::after{opacity:1}
+.kpi-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.kpi-label{font-size:12px;color:var(--text-muted);font-weight:400;display:flex;align-items:center;gap:8px}
+.kpi-icon{width:32px;height:32px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.kpi-icon svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.kpi-value{font-size:32px;font-weight:800;letter-spacing:-0.03em;line-height:1;margin-bottom:8px;position:relative;z-index:1}
+.kpi-value.accent{color:var(--accent);text-shadow:0 0 30px rgba(0,212,170,0.25)}
+.kpi-change{font-size:11.5px;font-weight:500;display:flex;align-items:center;gap:5px;position:relative;z-index:1}
+.kpi-change.up{color:var(--success)}
+.kpi-change.down{color:var(--danger)}
+.kpi-change svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+.kpi-spark{position:absolute;bottom:8px;right:12px;opacity:.12;z-index:0}
+.kpi-spark svg{width:80px;height:36px;stroke:var(--accent);fill:none;stroke-width:1.5}
 
-/* Charts row */
-.charts-row{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:24px}
-.chart-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;position:relative}
-.chart-title{font-size:13px;font-weight:600;margin-bottom:4px}
-.chart-subtitle{font-size:11px;color:var(--text3);margin-bottom:16px}
-.chart-area{height:180px;position:relative;display:flex;align-items:flex-end;gap:2px;padding-bottom:20px}
-.chart-bar{flex:1;background:linear-gradient(to top,rgba(0,212,170,0.1),rgba(0,212,170,0.4));border-radius:4px 4px 0 0;transition:all 0.3s;position:relative}
-.chart-bar:hover{background:linear-gradient(to top,rgba(0,212,170,0.2),var(--accent))}
-.chart-line{position:absolute;bottom:20px;left:0;right:0;height:140px}
-.chart-line svg{width:100%;height:100%}
-.chart-grid-line{position:absolute;left:0;right:0;height:1px;background:rgba(255,255,255,0.03)}
-.chart-x-labels{display:flex;justify-content:space-between;position:absolute;bottom:0;left:0;right:0}
-.chart-x-labels span{font-size:9px;color:var(--text3);font-family:'JetBrains Mono',monospace}
+/* ═══ CHARTS ROW ═══ */
+.charts-row{display:grid;grid-template-columns:5fr 3fr;gap:16px;margin-bottom:24px}
+.chart-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1)}
+.chart-card:hover{border-color:var(--border-accent)}
+.chart-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+.chart-title{font-size:14px;font-weight:600}
+.chart-subtitle{font-size:11px;color:var(--text-muted);margin-top:3px;font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
+.chart-legend-inline{display:flex;gap:14px}
+.chart-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted)}
+.chart-legend-dot{width:6px;height:6px;border-radius:50%}
 
-/* Sentiment donut */
-.donut-container{display:flex;align-items:center;justify-content:center;gap:24px;height:180px}
-.donut{width:140px;height:140px;border-radius:50%;background:conic-gradient(var(--accent) 0deg 216deg, #6366f1 216deg 280deg, #f59e0b 280deg 320deg, #ef4444 320deg 360deg);position:relative;display:flex;align-items:center;justify-content:center}
-.donut::before{content:'';width:90px;height:90px;border-radius:50%;background:var(--card);position:absolute}
-.donut-center{position:relative;z-index:1;text-align:center}
-.donut-center .val{font-size:22px;font-weight:800;color:var(--accent)}
-.donut-center .label{font-size:9px;color:var(--text3)}
-.donut-legend{display:flex;flex-direction:column;gap:8px}
-.legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2)}
-.legend-dot{width:8px;height:8px;border-radius:50%}
+/* Bar chart */
+.chart-container{height:200px;display:flex;align-items:flex-end;gap:4px;padding:0 4px 28px;position:relative}
+.chart-gridline{position:absolute;left:0;right:0;height:1px;background:rgba(255,255,255,0.025)}
+.chart-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer}
+.chart-bar{width:100%;border-radius:5px 5px 2px 2px;background:linear-gradient(to top,rgba(0,212,170,0.15),rgba(0,212,170,0.45));transition:all .3s;position:relative}
+.chart-bar:hover{background:linear-gradient(to top,rgba(0,212,170,0.3),var(--accent))}
+.chart-bar:hover::after{content:attr(data-val);position:absolute;top:-24px;left:50%;transform:translateX(-50%);background:var(--bg-tertiary);border:1px solid var(--border-accent);padding:2px 8px;border-radius:6px;font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--accent);white-space:nowrap}
+.chart-bar.secondary{background:linear-gradient(to top,rgba(99,102,241,0.1),rgba(99,102,241,0.3))}
+.chart-bar.secondary:hover{background:linear-gradient(to top,rgba(99,102,241,0.2),var(--accent-secondary))}
+.chart-x-label{font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.chart-y-axis{position:absolute;left:-4px;top:0;bottom:28px;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none}
+.chart-y-label{font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;text-align:right;width:30px;transform:translateY(4px)}
 
-/* Alert bar */
-.alert-bar{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.15);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:24px}
-.alert-icon{width:32px;height:32px;background:rgba(239,68,68,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
-.alert-text{font-size:12px;color:#fca5a5}
-.alert-text strong{color:#f87171}
-.alert-time{margin-left:auto;font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;white-space:nowrap}
+/* Donut chart */
+.donut-wrap{display:flex;align-items:center;justify-content:center;gap:32px;height:200px}
+.donut{width:160px;height:160px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center}
+.donut svg{width:100%;height:100%;transform:rotate(-90deg)}
+.donut circle{fill:none;stroke-width:20;cx:80;cy:80;r:60}
+.donut-bg{stroke:rgba(255,255,255,0.03)}
+.donut-seg1{stroke:var(--accent);stroke-dasharray:226 377;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(0,212,170,0.3))}
+.donut-seg2{stroke:var(--accent-secondary);stroke-dasharray:68 377;stroke-dashoffset:-226}
+.donut-seg3{stroke:var(--warning);stroke-dasharray:41 377;stroke-dashoffset:-294}
+.donut-seg4{stroke:var(--danger);stroke-dasharray:42 377;stroke-dashoffset:-335}
+.donut-center{position:absolute;text-align:center}
+.donut-center .val{font-size:28px;font-weight:800;color:var(--accent);text-shadow:0 0 20px rgba(0,212,170,0.3)}
+.donut-center .lbl{font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:.06em}
+.donut-legend{display:flex;flex-direction:column;gap:10px}
+.legend-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-secondary)}
+.legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.legend-pct{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--text-primary)}
 
-/* Activity feed */
-.bottom-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.activity-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px}
-.activity-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+/* ═══ BOTTOM PANELS ═══ */
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all .4s cubic-bezier(.4,0,.2,1)}
+.panel:hover{border-color:var(--border-accent)}
+.panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.panel-title{font-size:14px;font-weight:600}
+.panel-subtitle{font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
+.panel-link{font-size:11px;color:var(--accent);cursor:pointer;transition:color .2s}
+.panel-link:hover{color:var(--accent-bright)}
+
+.activity-item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);transition:all .2s}
 .activity-item:last-child{border-bottom:none}
-.activity-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.activity-dot.green{background:#34d399}
-.activity-dot.blue{background:#6366f1}
-.activity-dot.yellow{background:#f59e0b}
-.activity-text{font-size:12px;color:var(--text2);flex:1}
-.activity-time{font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace}
+.activity-item:hover{padding-left:4px}
+.activity-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.activity-icon.green{background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.15)}
+.activity-icon.green svg{stroke:var(--success)}
+.activity-icon.yellow{background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.15)}
+.activity-icon.yellow svg{stroke:var(--warning)}
+.activity-icon.blue{background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.15)}
+.activity-icon.blue svg{stroke:var(--accent-secondary)}
+.activity-icon svg{width:14px;height:14px;fill:none;stroke-width:1.5}
+.activity-text{flex:1;font-size:12.5px;color:var(--text-secondary);line-height:1.5}
+.activity-text strong{color:var(--text-primary);font-weight:500}
+.activity-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);white-space:nowrap;margin-top:2px}
+
+.top-post{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);transition:all .2s;cursor:pointer}
+.top-post:last-child{border-bottom:none}
+.top-post:hover{padding-left:4px}
+.top-post-rank{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);width:20px}
+.top-post-type{width:32px;height:32px;border-radius:8px;background:var(--bg-tertiary);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.top-post-info{flex:1}
+.top-post-name{font-size:12.5px;font-weight:500;color:var(--text-primary);margin-bottom:2px}
+.top-post-meta{font-size:10.5px;color:var(--text-muted)}
+.top-post-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--accent)}
+
+/* Animation */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.kpi-grid{animation:fadeUp .6s ease both}
+.charts-row{animation:fadeUp .6s .1s ease both}
+.bottom-grid{animation:fadeUp .6s .2s ease both}
 </style>
 </head>
 <body>
 
-<!-- Sidebar -->
-<div class="sidebar">
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar">
   <div class="sidebar-logo">
-    <div class="logo-icon">A</div>
-    <div class="logo-text">ARTEMIS</div>
+    <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
+    <span>ARTEMIS</span>
   </div>
-  <div class="sidebar-nav">
-    <div class="nav-section">Main</div>
-    <div class="nav-item active"><span class="icon">📊</span>Dashboard</div>
-    <div class="nav-item"><span class="icon">🔍</span>Discovery Feed</div>
-    <div class="nav-item"><span class="icon">📈</span>Predictions</div>
-    <div class="nav-item"><span class="icon">🎯</span>Audience</div>
-    <div class="nav-section">Intelligence</div>
-    <div class="nav-item"><span class="icon">🤖</span>Ask Artemis<span class="badge">AI</span></div>
-    <div class="nav-item"><span class="icon">⚡</span>Alerts<span class="badge" style="background:rgba(239,68,68,0.15);color:#ef4444">3</span></div>
-    <div class="nav-item"><span class="icon">📋</span>Reports</div>
-    <div class="nav-section">Settings</div>
-    <div class="nav-item"><span class="icon">🔗</span>Connected Pages</div>
-    <div class="nav-item"><span class="icon">⚙️</span>Settings</div>
-  </div>
-</div>
+  <nav class="sidebar-nav">
+    <div class="nav-group">
+      <div class="nav-group-label">Main</div>
+      <div class="nav-item active">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Dashboard
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        Discovery Feed
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        Predictions
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Audience
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Intelligence</div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Ask Artemis
+        <span class="nav-badge badge-ai">AI</span>
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Alerts
+        <span class="nav-badge badge-alert">3</span>
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Reports
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Settings</div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        Connected Pages
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </div>
+    </div>
+  </nav>
+</aside>
 
-<!-- Main content -->
+<!-- ═══ MAIN CONTENT ═══ -->
 <div class="main">
-  <div class="topbar">
+  <header class="topbar">
     <div class="topbar-left">
       <div class="topbar-title">Executive Dashboard</div>
       <div class="topbar-tabs">
@@ -141,109 +251,197 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);widt
       </div>
     </div>
     <div class="topbar-right">
-      <div class="page-selector"><span class="dot"></span>FitLife Pro <span style="color:var(--text3)">▾</span></div>
-      <div class="topbar-btn btn-outline">Export</div>
+      <div class="page-selector">
+        <span class="page-dot"></span>
+        FitLife Pro
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <button class="topbar-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:-2px;margin-right:4px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export
+      </button>
       <div class="avatar">AS</div>
     </div>
-  </div>
+  </header>
 
   <div class="content">
     <!-- Alert -->
-    <div class="alert-bar">
-      <div class="alert-icon">⚠️</div>
-      <div class="alert-text"><strong>Crisis Alert:</strong> Negative sentiment spike on FitLife Pro (+35% in 2 hours). Review recommended.</div>
+    <div class="alert">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="alert-content">
+        <div class="alert-title">Crisis Alert — Negative Sentiment Spike</div>
+        <div class="alert-desc">Sentiment on FitLife Pro dropped 35% in the last 2 hours. 12 flagged comments detected.</div>
+      </div>
       <div class="alert-time">12 min ago</div>
+      <button class="alert-close">×</button>
     </div>
 
     <!-- KPIs -->
     <div class="kpi-grid">
       <div class="kpi-card">
-        <div class="kpi-label"><span class="icon">📊</span>Engagement Rate</div>
+        <div class="kpi-header">
+          <span class="kpi-label">Engagement Rate</span>
+          <div class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        </div>
         <div class="kpi-value accent">4.2%</div>
-        <div class="kpi-change up">▲ 12% vs last week</div>
+        <div class="kpi-change up"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>+12% vs last week</div>
+        <div class="kpi-spark"><svg viewBox="0 0 80 36"><polyline points="0,30 12,26 24,28 36,18 48,20 60,12 72,8 80,10" stroke-linecap="round"/></svg></div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label"><span class="icon">👥</span>Total Reach</div>
+        <div class="kpi-header">
+          <span class="kpi-label">Total Reach</span>
+          <div class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        </div>
         <div class="kpi-value">24.5K</div>
-        <div class="kpi-change up">▲ 8.3% vs last week</div>
+        <div class="kpi-change up"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>+8.3% vs last week</div>
+        <div class="kpi-spark"><svg viewBox="0 0 80 36"><polyline points="0,32 15,24 30,26 45,16 60,14 80,6" stroke-linecap="round"/></svg></div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label"><span class="icon">🧠</span>Sentiment Score</div>
+        <div class="kpi-header">
+          <span class="kpi-label">Sentiment Score</span>
+          <div class="kpi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+        </div>
         <div class="kpi-value accent">0.82</div>
-        <div class="kpi-change up">▲ Positive</div>
+        <div class="kpi-change up"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>Positive — stable</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label"><span class="icon">🚀</span>Virality Rate</div>
+        <div class="kpi-header">
+          <span class="kpi-label">Virality Rate</span>
+          <div class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        </div>
         <div class="kpi-value">67%</div>
-        <div class="kpi-change down">▼ 3.1% vs last week</div>
+        <div class="kpi-change down"><svg viewBox="0 0 24 24"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg>−3.1% vs last week</div>
+        <div class="kpi-spark"><svg viewBox="0 0 80 36"><polyline points="0,8 15,12 30,10 45,18 60,22 80,28" stroke-linecap="round"/></svg></div>
       </div>
     </div>
 
     <!-- Charts -->
     <div class="charts-row">
       <div class="chart-card">
-        <div class="chart-title">Engagement Trend</div>
-        <div class="chart-subtitle">Last 14 days · All connected pages</div>
-        <div class="chart-area">
-          <div class="chart-grid-line" style="bottom:140px"></div>
-          <div class="chart-grid-line" style="bottom:100px"></div>
-          <div class="chart-grid-line" style="bottom:60px"></div>
-          <div class="chart-bar" style="height:45%"></div>
-          <div class="chart-bar" style="height:52%"></div>
-          <div class="chart-bar" style="height:48%"></div>
-          <div class="chart-bar" style="height:65%"></div>
-          <div class="chart-bar" style="height:58%"></div>
-          <div class="chart-bar" style="height:72%"></div>
-          <div class="chart-bar" style="height:68%"></div>
-          <div class="chart-bar" style="height:55%"></div>
-          <div class="chart-bar" style="height:82%"></div>
-          <div class="chart-bar" style="height:75%"></div>
-          <div class="chart-bar" style="height:88%"></div>
-          <div class="chart-bar" style="height:92%"></div>
-          <div class="chart-bar" style="height:85%"></div>
-          <div class="chart-bar" style="height:95%"></div>
-          <div class="chart-x-labels">
-            <span>Feb 14</span><span>Feb 16</span><span>Feb 18</span><span>Feb 20</span><span>Feb 22</span><span>Feb 24</span><span>Feb 27</span>
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Engagement Trend</div>
+            <div class="chart-subtitle">Last 14 days · All connected pages</div>
           </div>
+          <div class="chart-legend-inline">
+            <div class="chart-legend-item"><div class="chart-legend-dot" style="background:var(--accent)"></div>Engagement</div>
+            <div class="chart-legend-item"><div class="chart-legend-dot" style="background:var(--accent-secondary)"></div>Reach (÷100)</div>
+          </div>
+        </div>
+        <div class="chart-container">
+          <div class="chart-gridline" style="bottom:180px"></div>
+          <div class="chart-gridline" style="bottom:130px"></div>
+          <div class="chart-gridline" style="bottom:80px"></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:42%" data-val="3.1%"></div><div class="chart-bar secondary" style="height:35%"></div><span class="chart-x-label">14</span></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:48%" data-val="3.4%"></div><div class="chart-bar secondary" style="height:38%"></div><span class="chart-x-label">15</span></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:44%" data-val="3.2%"></div><div class="chart-bar secondary" style="height:42%"></div><span class="chart-x-label">16</span></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:58%" data-val="3.8%"></div><div class="chart-bar secondary" style="height:48%"></div><span class="chart-x-label">17</span></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:52%" data-val="3.6%"></div><div class="chart-bar secondary" style="height:44%"></div><span class="chart-x-label">18</span></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:65%" data-val="4.0%"></div><div class="chart-bar secondary" style="height:55%"></div><span class="chart-x-label">19</span></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:60%" data-val="3.9%"></div><div class="chart-bar secondary" style="height:50%"></div><span class="chart-x-label">20</span></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:55%" data-val="3.7%"></div><div class="chart-bar secondary" style="height:46%"></div><span class="chart-x-label">21</span></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:72%" data-val="4.3%"></div><div class="chart-bar secondary" style="height:60%"></div><span class="chart-x-label">22</span></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:68%" data-val="4.1%"></div><div class="chart-bar secondary" style="height:58%"></div><span class="chart-x-label">23</span></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:78%" data-val="4.5%"></div><div class="chart-bar secondary" style="height:64%"></div><span class="chart-x-label">24</span></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:82%" data-val="4.6%"></div><div class="chart-bar secondary" style="height:68%"></div><span class="chart-x-label">25</span></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:75%" data-val="4.4%"></div><div class="chart-bar secondary" style="height:62%"></div><span class="chart-x-label">26</span></div>
+          <div class="chart-bar-wrap"><div class="chart-bar" style="height:88%" data-val="4.8%"></div><div class="chart-bar secondary" style="height:72%"></div><span class="chart-x-label">27</span></div>
         </div>
       </div>
       <div class="chart-card">
-        <div class="chart-title">Sentiment Breakdown</div>
-        <div class="chart-subtitle">Last 30 days · All pages</div>
-        <div class="donut-container">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Sentiment Breakdown</div>
+            <div class="chart-subtitle">Last 30 days · 847 posts</div>
+          </div>
+        </div>
+        <div class="donut-wrap">
           <div class="donut">
+            <svg viewBox="0 0 160 160">
+              <circle class="donut-bg" r="60" cx="80" cy="80"/>
+              <circle class="donut-seg1"/>
+              <circle class="donut-seg2"/>
+              <circle class="donut-seg3"/>
+              <circle class="donut-seg4"/>
+            </svg>
             <div class="donut-center">
               <div class="val">82%</div>
-              <div class="label">Positive</div>
+              <div class="lbl">POSITIVE</div>
             </div>
           </div>
           <div class="donut-legend">
-            <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>Positive 60%</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#6366f1"></div>Neutral 18%</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>Mixed 11%</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Negative 11%</div>
+            <div class="legend-row"><div class="legend-dot" style="background:var(--accent)"></div>Positive<span class="legend-pct">60%</span></div>
+            <div class="legend-row"><div class="legend-dot" style="background:var(--accent-secondary)"></div>Neutral<span class="legend-pct">18%</span></div>
+            <div class="legend-row"><div class="legend-dot" style="background:var(--warning)"></div>Mixed<span class="legend-pct">11%</span></div>
+            <div class="legend-row"><div class="legend-dot" style="background:var(--danger)"></div>Negative<span class="legend-pct">11%</span></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Bottom row -->
-    <div class="bottom-row">
-      <div class="activity-card">
-        <div class="chart-title">Recent Activity</div>
-        <div class="chart-subtitle" style="margin-bottom:12px">AI-detected events</div>
-        <div class="activity-item"><div class="activity-dot green"></div><div class="activity-text">Product launch video predicted to go viral (89% confidence)</div><div class="activity-time">2h ago</div></div>
-        <div class="activity-item"><div class="activity-dot yellow"></div><div class="activity-text">Engagement dip detected on morning posts — timing shift recommended</div><div class="activity-time">5h ago</div></div>
-        <div class="activity-item"><div class="activity-dot blue"></div><div class="activity-text">New audience segment discovered: "Health-conscious millennials"</div><div class="activity-time">1d ago</div></div>
-        <div class="activity-item"><div class="activity-dot green"></div><div class="activity-text">Weekly template trend: short-form video +156% engagement</div><div class="activity-time">1d ago</div></div>
+    <!-- Bottom panels -->
+    <div class="bottom-grid">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">AI Activity Feed</div>
+            <div class="panel-subtitle">Real-time intelligence</div>
+          </div>
+          <span class="panel-link">View all →</span>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon green"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <div class="activity-text"><strong>Virality predicted</strong> — Product launch video scored 89% confidence. Recommend boosting within 2 hours.</div>
+          <div class="activity-time">2h ago</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon yellow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div class="activity-text"><strong>Timing shift detected</strong> — Morning posts showing 23% lower engagement this week. Consider 6 PM slot.</div>
+          <div class="activity-time">5h ago</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon blue"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div class="activity-text"><strong>New segment found</strong> — "Health-conscious millennials" cluster detected in your audience (14% of followers).</div>
+          <div class="activity-time">1d ago</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon green"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div>
+          <div class="activity-text"><strong>Format trend</strong> — Short-form video outperforming all other formats by 156% this week.</div>
+          <div class="activity-time">1d ago</div>
+        </div>
       </div>
-      <div class="activity-card">
-        <div class="chart-title">Top Performing Content</div>
-        <div class="chart-subtitle" style="margin-bottom:12px">Last 7 days by engagement</div>
-        <div class="activity-item"><div class="activity-dot green"></div><div class="activity-text" style="font-weight:500;color:var(--text)">🎬 Product launch video</div><div class="activity-time" style="color:var(--accent)">4.2K</div></div>
-        <div class="activity-item"><div class="activity-dot green"></div><div class="activity-text" style="font-weight:500;color:var(--text)">📸 Behind the scenes reel</div><div class="activity-time" style="color:var(--accent)">3.8K</div></div>
-        <div class="activity-item"><div class="activity-dot blue"></div><div class="activity-text" style="font-weight:500;color:var(--text)">💪 Customer transformation</div><div class="activity-time" style="color:var(--accent)">2.9K</div></div>
-        <div class="activity-item"><div class="activity-dot yellow"></div><div class="activity-text" style="font-weight:500;color:var(--text)">📝 Nutrition tips carousel</div><div class="activity-time" style="color:var(--accent)">2.1K</div></div>
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Top Performing Content</div>
+            <div class="panel-subtitle">Last 7 days by engagement</div>
+          </div>
+          <span class="panel-link">Full report →</span>
+        </div>
+        <div class="top-post">
+          <span class="top-post-rank">01</span>
+          <div class="top-post-type">🎬</div>
+          <div class="top-post-info"><div class="top-post-name">Product launch video</div><div class="top-post-meta">Video · Tue 6 PM · Sentiment 0.94</div></div>
+          <div class="top-post-val">4.2K</div>
+        </div>
+        <div class="top-post">
+          <span class="top-post-rank">02</span>
+          <div class="top-post-type">📸</div>
+          <div class="top-post-info"><div class="top-post-name">Behind the scenes reel</div><div class="top-post-meta">Reel · Wed 7 PM · Sentiment 0.88</div></div>
+          <div class="top-post-val">3.8K</div>
+        </div>
+        <div class="top-post">
+          <span class="top-post-rank">03</span>
+          <div class="top-post-type">💪</div>
+          <div class="top-post-info"><div class="top-post-name">Customer transformation</div><div class="top-post-meta">Photo · Mon 12 PM · Sentiment 0.91</div></div>
+          <div class="top-post-val">2.9K</div>
+        </div>
+        <div class="top-post">
+          <span class="top-post-rank">04</span>
+          <div class="top-post-type">📝</div>
+          <div class="top-post-info"><div class="top-post-name">Nutrition tips carousel</div><div class="top-post-meta">Carousel · Thu 5 PM · Sentiment 0.85</div></div>
+          <div class="top-post-val">2.1K</div>
+        </div>
       </div>
     </div>
   </div>
