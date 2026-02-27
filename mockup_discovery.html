@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+:root{--bg:#060a13;--bg2:#0c1221;--bg3:#111a2e;--card:#0f1729;--accent:#00d4aa;--accent-bright:#00f5c4;--accent2:#6366f1;--text:#e8ecf4;--text2:#7b8ba8;--text3:#4a5568;--border:rgba(255,255,255,0.05);--border-a:rgba(0,212,170,0.15);--border-a2:rgba(0,212,170,0.3);--glow:rgba(0,212,170,0.35)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);width:1280px;height:800px;overflow:hidden;display:flex}
+
+.sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column}
+.sidebar-logo{padding:20px 20px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.logo-icon{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--bg)}
+.logo-text{font-weight:700;font-size:15px;letter-spacing:0.1em}
+.sidebar-nav{padding:16px 12px;flex:1}
+.nav-section{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;padding:12px 8px 6px;margin-top:8px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;font-size:13px;color:var(--text2);margin-bottom:2px}
+.nav-item.active{background:rgba(0,212,170,0.08);color:var(--accent);border:1px solid var(--border-a)}
+.nav-item .icon{width:18px;text-align:center;font-size:14px}
+.nav-item .badge{margin-left:auto;font-size:10px;padding:2px 6px;border-radius:6px;font-weight:600}
+
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{height:56px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:rgba(6,10,19,0.8)}
+.topbar-title{font-size:16px;font-weight:600}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--bg)}
+
+.content{flex:1;overflow-y:auto;padding:24px;background:var(--bg)}
+
+/* Search + Filters */
+.search-row{display:flex;gap:12px;align-items:center;margin-bottom:20px}
+.search-box{flex:1;display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--text3)}
+.search-box:focus-within{border-color:var(--border-a2)}
+.filter-pills{display:flex;gap:8px}
+.pill{padding:7px 16px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.2s;border:1px solid var(--border)}
+.pill.active{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:600}
+.pill:not(.active){color:var(--text2);background:var(--card)}
+
+/* PLY Header */
+.ply-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.ply-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase}
+.ply-count{font-size:12px;color:var(--text3)}
+
+/* Flywheel */
+.flywheel{display:flex;align-items:center;gap:0;margin-bottom:32px;position:relative;padding:0 20px}
+.flywheel-arrow{width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--accent);cursor:pointer;flex-shrink:0;z-index:2;transition:all 0.2s}
+.flywheel-arrow:hover{border-color:var(--accent);background:rgba(0,212,170,0.08);box-shadow:0 0 20px rgba(0,212,170,0.15)}
+.flywheel-track{display:flex;gap:16px;flex:1;align-items:center;justify-content:center;overflow:hidden;padding:10px 16px}
+
+/* Business Cards */
+.bcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:0;width:280px;flex-shrink:0;transition:all 0.4s;position:relative;overflow:hidden}
+.bcard.faded{opacity:0.3;transform:scale(0.88);filter:blur(1px)}
+.bcard.center{opacity:1;transform:scale(1.05);border-color:var(--border-a2);box-shadow:0 20px 60px rgba(0,0,0,0.4),0 0 40px rgba(0,212,170,0.08)}
+.bcard.center::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.bcard-header{padding:16px 16px 12px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+.bcard-avatar{width:44px;height:44px;border-radius:50%;background:var(--bg3);border:2px solid var(--border-a);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--accent);flex-shrink:0}
+.bcard-info{flex:1;min-width:0}
+.bcard-name{font-size:14px;font-weight:600;margin-bottom:2px}
+.bcard-niche{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;background:rgba(0,212,170,0.08);border:1px solid var(--border-a);border-radius:6px;font-size:10px;color:var(--accent);font-weight:500}
+.bcard-match{text-align:right}
+.bcard-match-val{font-size:18px;font-weight:800;color:var(--accent)}
+.bcard-match-label{font-size:9px;color:var(--text3)}
+.bcard-sale{position:absolute;top:12px;right:12px;padding:2px 8px;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);border-radius:6px;font-size:9px;font-weight:600;color:#f59e0b}
+
+.bcard-body{padding:14px 16px}
+.bcard-section-label{font-size:10px;color:var(--text3);font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;margin-bottom:8px}
+.bcard-metric{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
+.bcard-metric:last-child{border-bottom:none}
+.bcard-metric-name{font-size:12px;color:var(--text2)}
+.bcard-metric-val{font-size:12px;font-weight:600;color:var(--text)}
+
+.bcard-patterns{padding:0 16px 14px}
+.pattern-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2);margin-bottom:4px}
+.pattern-icon{color:var(--accent);font-size:10px}
+
+.bcard-actions{display:flex;gap:6px;padding:0 16px 16px}
+.bcard-btn{flex:1;padding:8px 0;border-radius:8px;font-size:11px;font-weight:600;text-align:center;cursor:pointer;border:none;font-family:'Outfit',sans-serif;transition:all 0.2s}
+.btn-fb{background:#1877F2;color:white}
+.btn-contact{background:rgba(0,212,170,0.12);color:var(--accent);border:1px solid var(--border-a)}
+.btn-chat{background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
+.btn-collab{background:rgba(99,102,241,0.12);color:#a5b4fc;border:1px solid rgba(99,102,241,0.2)}
+
+/* Grid view below */
+.grid-section{margin-top:8px}
+.grid-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.grid-header h3{font-size:15px;font-weight:600}
+.view-toggle{display:flex;gap:4px}
+.view-btn{padding:6px 10px;border-radius:6px;font-size:11px;color:var(--text3);cursor:pointer;background:transparent;border:1px solid var(--border)}
+.view-btn.active{background:var(--card);color:var(--text);border-color:var(--border-a)}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid .bcard{width:100%;transform:none;opacity:1;filter:none}
+.grid .bcard:hover{border-color:var(--border-a2);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.3),0 0 30px rgba(0,212,170,0.06)}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-logo"><div class="logo-icon">A</div><div class="logo-text">ARTEMIS</div></div>
+  <div class="sidebar-nav">
+    <div class="nav-section">Main</div>
+    <div class="nav-item"><span class="icon">📊</span>Dashboard</div>
+    <div class="nav-item active"><span class="icon">🔍</span>Discovery Feed</div>
+    <div class="nav-item"><span class="icon">📈</span>Predictions</div>
+    <div class="nav-item"><span class="icon">🎯</span>Audience</div>
+    <div class="nav-section">Intelligence</div>
+    <div class="nav-item"><span class="icon">🤖</span>Ask Artemis<span class="badge" style="background:rgba(0,212,170,0.1);color:var(--accent)">AI</span></div>
+    <div class="nav-item"><span class="icon">⚡</span>Alerts</div>
+    <div class="nav-item"><span class="icon">📋</span>Reports</div>
+    <div class="nav-section">Settings</div>
+    <div class="nav-item"><span class="icon">🔗</span>Connected Pages</div>
+    <div class="nav-item"><span class="icon">⚙️</span>Settings</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title">Discovery Feed</div>
+    <div class="topbar-right">
+      <div style="font-size:12px;color:var(--text3)">12,847 pages discovered</div>
+      <div class="avatar">AS</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- Search + Filter -->
+    <div class="search-row">
+      <div class="search-box">🔍 Search pages, niches, or keywords...</div>
+      <div class="filter-pills">
+        <div class="pill active">All</div>
+        <div class="pill">Fitness</div>
+        <div class="pill">Food</div>
+        <div class="pill">Tech</div>
+        <div class="pill">Fashion</div>
+        <div class="pill">Business</div>
+      </div>
+    </div>
+
+    <!-- PLY Header -->
+    <div class="ply-header">
+      <div class="ply-label">✦ People Like You — Recommended</div>
+      <div class="ply-count">Showing pages matching your audience profile</div>
+    </div>
+
+    <!-- Flywheel Carousel -->
+    <div class="flywheel">
+      <div class="flywheel-arrow">◀</div>
+      <div class="flywheel-track">
+
+        <!-- Faded left -->
+        <div class="bcard faded">
+          <div class="bcard-header">
+            <div class="bcard-avatar">NF</div>
+            <div class="bcard-info"><div class="bcard-name">NutriFuel</div><div class="bcard-niche">🥗 Nutrition</div></div>
+          </div>
+          <div class="bcard-body">
+            <div class="bcard-section-label">TOP METRICS (30D)</div>
+            <div class="bcard-metric"><span class="bcard-metric-name">Engagement</span><span class="bcard-metric-val">3.1%</span></div>
+            <div class="bcard-metric"><span class="bcard-metric-name">Reach</span><span class="bcard-metric-val">18.2K</span></div>
+          </div>
+        </div>
+
+        <!-- CENTER CARD (Bold) -->
+        <div class="bcard center">
+          <div class="bcard-sale">For Sale</div>
+          <div class="bcard-header">
+            <div class="bcard-avatar">FL</div>
+            <div class="bcard-info"><div class="bcard-name">FitLife Pro</div><div class="bcard-niche">💪 Fitness</div></div>
+            <div class="bcard-match"><div class="bcard-match-val">92%</div><div class="bcard-match-label">match</div></div>
+          </div>
+          <div class="bcard-body">
+            <div class="bcard-section-label">TOP 3 POSTS (30 DAYS)</div>
+            <div class="bcard-metric"><span class="bcard-metric-name">🎬 Product launch video</span><span class="bcard-metric-val" style="color:var(--accent)">4.2K</span></div>
+            <div class="bcard-metric"><span class="bcard-metric-name">📸 Behind the scenes reel</span><span class="bcard-metric-val" style="color:var(--accent)">3.8K</span></div>
+            <div class="bcard-metric"><span class="bcard-metric-name">💪 Customer transformation</span><span class="bcard-metric-val" style="color:var(--accent)">2.9K</span></div>
+          </div>
+          <div class="bcard-patterns">
+            <div class="bcard-section-label">🔓 PATTERNS UNLOCKED</div>
+            <div class="pattern-item"><span class="pattern-icon">→</span>Best time: Tue 6 PM</div>
+            <div class="pattern-item"><span class="pattern-icon">→</span>Top format: Short video</div>
+            <div class="pattern-item"><span class="pattern-icon">→</span>Audience: 25-34, urban</div>
+          </div>
+          <div class="bcard-actions">
+            <div class="bcard-btn btn-fb">Follow FB</div>
+            <div class="bcard-btn btn-contact">Contact</div>
+            <div class="bcard-btn btn-chat">Chat</div>
+            <div class="bcard-btn btn-collab">Collab</div>
+          </div>
+        </div>
+
+        <!-- Faded right -->
+        <div class="bcard faded">
+          <div class="bcard-header">
+            <div class="bcard-avatar">YG</div>
+            <div class="bcard-info"><div class="bcard-name">YogaGlow</div><div class="bcard-niche">🧘 Wellness</div></div>
+          </div>
+          <div class="bcard-body">
+            <div class="bcard-section-label">TOP METRICS (30D)</div>
+            <div class="bcard-metric"><span class="bcard-metric-name">Engagement</span><span class="bcard-metric-val">5.6%</span></div>
+            <div class="bcard-metric"><span class="bcard-metric-name">Reach</span><span class="bcard-metric-val">31.4K</span></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="flywheel-arrow">▶</div>
+    </div>
+
+    <!-- Grid Section -->
+    <div class="grid-section">
+      <div class="grid-header">
+        <h3>All Discovered Pages</h3>
+        <div class="view-toggle">
+          <div class="view-btn">Flywheel</div>
+          <div class="view-btn active">Grid</div>
+        </div>
+      </div>
+      <div class="grid">
+        <!-- Grid card 1 -->
+        <div class="bcard">
+          <div class="bcard-header">
+            <div class="bcard-avatar">CB</div>
+            <div class="bcard-info"><div class="bcard-name">CleanBites</div><div class="bcard-niche">🥗 Nutrition</div></div>
+            <div class="bcard-match"><div class="bcard-match-val" style="font-size:15px">78%</div><div class="bcard-match-label">match</div></div>
+          </div>
+          <div class="bcard-body">
+            <div class="bcard-section-label">TOP METRICS (30D)</div>
+            <div class="bcard-metric"><span class="bcard-metric-name">Engagement</span><span class="bcard-metric-val">3.9%</span></div>
+            <div class="bcard-metric"><span class="bcard-metric-name">Reach</span><span class="bcard-metric-val">12.1K</span></div>
+            <div class="bcard-metric"><span class="bcard-metric-name">Sentiment</span><span class="bcard-metric-val" style="color:var(--accent)">0.91</span></div>
+          </div>
+          <div class="bcard-actions">
+            <div class="bcard-btn btn-fb">Follow FB</div>
+            <div class="bcard-btn btn-contact">Contact</div>
+          </div>
+        </div>
+        <!-- Grid card 2 -->
+        <div class="bcard">
+          <div class="bcard-header">
+            <div class="bcard-avatar" style="color:#a5b4fc;border-color:rgba(99,102,241,0.3)">TH</div>
+            <div class="bcard-info"><div class="bcard-name">TechHustle</div><div class="bcard-niche" style="background:rgba(99,102,241,0.08);border-color:rgba(99,102,241,0.2);color:#a5b4fc">💻 Tech</div></div>
+            <div class="bcard-match"><div class="bcard-match-val" style="font-size:15px;color:#a5b4fc">65%</div><div class="bcard-match-label">match</div></div>
+          </div>
+          <div class="bcard-body">
+            <div class="bcard-section-label">TOP METRICS (30D)</div>
+            <div class="bcard-metric"><span class="bcard-metric-name">Engagement</span><span class="bcard-metric-val">2.8%</span></div>
+            <div class="bcard-metric"><span class="bcard-metric-name">Reach</span><span class="bcard-metric-val">45.3K</span></div>
+            <div class="bcard-metric"><span class="bcard-metric-name">Sentiment</span><span class="bcard-metric-val" style="color:#a5b4fc">0.76</span></div>
+          </div>
+          <div class="bcard-actions">
+            <div class="bcard-btn btn-fb">Follow FB</div>
+            <div class="bcard-btn btn-collab">Collab</div>
+          </div>
+        </div>
+        <!-- Grid card 3 -->
+        <div class="bcard">
+          <div class="bcard-sale">For Sale</div>
+          <div class="bcard-header">
+            <div class="bcard-avatar" style="color:#fbbf24;border-color:rgba(245,158,11,0.3)">SM</div>
+            <div class="bcard-info"><div class="bcard-name">StyleMaven</div><div class="bcard-niche" style="background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.2);color:#fbbf24">👗 Fashion</div></div>
+            <div class="bcard-match"><div class="bcard-match-val" style="font-size:15px;color:#fbbf24">58%</div><div class="bcard-match-label">match</div></div>
+          </div>
+          <div class="bcard-body">
+            <div class="bcard-section-label">TOP METRICS (30D)</div>
+            <div class="bcard-metric"><span class="bcard-metric-name">Engagement</span><span class="bcard-metric-val">6.1%</span></div>
+            <div class="bcard-metric"><span class="bcard-metric-name">Reach</span><span class="bcard-metric-val">8.7K</span></div>
+            <div class="bcard-metric"><span class="bcard-metric-name">Sentiment</span><span class="bcard-metric-val" style="color:#fbbf24">0.88</span></div>
+          </div>
+          <div class="bcard-actions">
+            <div class="bcard-btn btn-fb">Follow FB</div>
+            <div class="bcard-btn btn-contact">Contact</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
