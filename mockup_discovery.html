@@ -422,4 +422,93 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 </div>
 
 </body>
+<script>
+// ═══ VIEW TOGGLE ═══
+const viewBtns=document.querySelectorAll('.view-btn');
+const flySection=document.querySelector('.flywheel');
+const flyFooter=document.querySelector('.flywheel-footer');
+const plyHeader=document.querySelector('.ply-header');
+const gridSection=document.querySelector('.grid-section');
+
+viewBtns.forEach(btn=>{
+  btn.addEventListener('click',function(){
+    viewBtns.forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    const mode=this.textContent.trim();
+    if(mode==='Grid'){
+      flySection.style.display='none';
+      flyFooter.style.display='none';
+      gridSection.style.animation='fadeUp .4s ease';
+    } else {
+      flySection.style.display='flex';
+      flyFooter.style.display='flex';
+      gridSection.style.animation='fadeUp .4s ease';
+    }
+  });
+});
+
+// ═══ FLYWHEEL CAROUSEL ═══
+const cards=document.querySelectorAll('.fly-track .bcard');
+const dots=document.querySelectorAll('.flywheel-dot');
+let centerIdx=2; // FitLife Pro starts center
+const positions=['faded','semi','center','semi','faded'];
+
+function updateCarousel(newCenter,direction){
+  // Animate all cards out first
+  cards.forEach(c=>{
+    c.style.transition='all .5s cubic-bezier(.4,0,.2,1)';
+  });
+
+  centerIdx=newCenter;
+  // Remap positions
+  cards.forEach((c,i)=>{
+    c.classList.remove('faded','semi','center');
+    const diff=i-centerIdx;
+    if(diff===0) c.classList.add('center');
+    else if(Math.abs(diff)===1) c.classList.add('semi');
+    else c.classList.add('faded');
+  });
+
+  // Update dots
+  dots.forEach((d,i)=>{d.classList.toggle('active',i===centerIdx)});
+}
+
+document.getElementById('prevBtn').addEventListener('click',()=>{
+  if(centerIdx>0) updateCarousel(centerIdx-1,'left');
+});
+document.getElementById('nextBtn').addEventListener('click',()=>{
+  if(centerIdx<cards.length-1) updateCarousel(centerIdx+1,'right');
+});
+
+// ═══ CARD CLICK TO CENTER ═══
+cards.forEach((card,i)=>{
+  card.addEventListener('click',()=>{
+    if(i!==centerIdx) updateCarousel(i);
+  });
+  card.style.cursor='pointer';
+});
+
+// ═══ GRID CARD HOVER EFFECTS ═══
+document.querySelectorAll('.card-grid .bcard').forEach(card=>{
+  card.addEventListener('mouseenter',()=>{
+    card.style.transform='translateY(-6px) scale(1.02)';
+    card.style.borderColor='var(--border-accent-strong)';
+    card.style.boxShadow='0 24px 60px rgba(0,0,0,0.3), 0 0 40px rgba(0,212,170,0.06)';
+    card.style.transition='all .35s cubic-bezier(.4,0,.2,1)';
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='';
+    card.style.borderColor='';
+    card.style.boxShadow='';
+  });
+});
+
+// ═══ FILTER PILLS ═══
+document.querySelectorAll('.pill').forEach(pill=>{
+  pill.addEventListener('click',function(){
+    document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
 </html>

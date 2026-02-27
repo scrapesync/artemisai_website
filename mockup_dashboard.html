@@ -175,6 +175,15 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 /* Animation */
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .kpi-grid{animation:fadeUp .6s ease both}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:all .4s}
+.card:hover{border-color:var(--border-accent)}
+.card-title{font-size:14px;font-weight:600;margin-bottom:4px}
+.card-subtitle{font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:16px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
 .charts-row{animation:fadeUp .6s .1s ease both}
 .bottom-grid{animation:fadeUp .6s .2s ease both}
 </style>
@@ -239,6 +248,8 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
   </header>
 
   <div class="content">
+    <!-- TAB: KPIs -->
+    <div class="tab-panel active" data-tab="kpis">
     <!-- Alert -->
     <div class="alert">
       <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
@@ -329,6 +340,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
             <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite"/>
           </circle>
         </svg>
+      </div>
       </div>
       <div class="chart-card">
         <div class="chart-header">
@@ -426,8 +438,128 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
         </div>
       </div>
     </div>
+    </div><!-- end tab kpis -->
+
+    <!-- TAB: TRENDS -->
+    <div class="tab-panel" data-tab="trends">
+      <div class="section-label" style="animation:fadeUp .4s ease">ENGAGEMENT TRENDS — 30 DAY VIEW</div>
+      <div class="card animate" style="margin-bottom:20px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px"><div><div class="card-title">Engagement Rate Over Time</div><div class="card-subtitle">Daily average · All pages combined</div></div><div style="display:flex;gap:8px"><span style="padding:5px 12px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:6px;font-size:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;cursor:pointer">7D</span><span style="padding:5px 12px;background:var(--accent);border-radius:6px;font-size:10px;color:var(--bg-primary);font-weight:600;font-family:'JetBrains Mono',monospace;cursor:pointer">30D</span><span style="padding:5px 12px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:6px;font-size:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;cursor:pointer">90D</span></div></div>
+        <div style="height:220px;position:relative;padding:0 4px">
+          <svg width="100%" height="100%" viewBox="0 0 700 220" preserveAspectRatio="none" style="overflow:visible">
+            <defs><linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--accent)" stop-opacity="0.2"/><stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>
+            <line x1="0" y1="55" x2="700" y2="55" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+            <line x1="0" y1="110" x2="700" y2="110" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+            <line x1="0" y1="165" x2="700" y2="165" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+            <text x="-4" y="58" fill="var(--text-muted)" font-size="9" font-family="JetBrains Mono" text-anchor="end">5%</text>
+            <text x="-4" y="113" fill="var(--text-muted)" font-size="9" font-family="JetBrains Mono" text-anchor="end">3%</text>
+            <text x="-4" y="168" fill="var(--text-muted)" font-size="9" font-family="JetBrains Mono" text-anchor="end">1%</text>
+            <path d="M0,165 L23,158 L47,162 L70,148 L93,152 L117,140 L140,144 L163,130 L187,128 L210,118 L233,125 L257,110 L280,115 L303,98 L327,105 L350,88 L373,92 L397,78 L420,82 L443,68 L467,74 L490,60 L513,65 L537,50 L560,55 L583,42 L607,48 L630,35 L653,40 L677,28 L700,22 L700,220 L0,220 Z" fill="url(#trendFill)"/>
+            <path d="M0,165 L23,158 L47,162 L70,148 L93,152 L117,140 L140,144 L163,130 L187,128 L210,118 L233,125 L257,110 L280,115 L303,98 L327,105 L350,88 L373,92 L397,78 L420,82 L443,68 L467,74 L490,60 L513,65 L537,50 L560,55 L583,42 L607,48 L630,35 L653,40 L677,28 L700,22" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="700" cy="22" r="5" fill="var(--accent-bright)" stroke="var(--bg-card)" stroke-width="2"><animate attributeName="r" values="5;7;5" dur="2s" repeatCount="indefinite"/></circle>
+          </svg>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px" class="animate delay-1">
+        <div class="card"><div class="card-title">Follower Growth</div><div class="card-subtitle">Last 30 days</div><div style="font-size:28px;font-weight:800;color:var(--accent);margin:12px 0">+1,247</div><div style="font-size:12px;color:var(--success)">▲ 18% vs previous period</div><div style="margin-top:12px;height:60px"><svg width="100%" height="60" viewBox="0 0 200 60" preserveAspectRatio="none"><path d="M0,55 L30,48 L60,50 L90,38 L120,35 L150,22 L180,18 L200,8" fill="none" stroke="var(--accent)" stroke-width="2"/></svg></div></div>
+        <div class="card"><div class="card-title">Impressions</div><div class="card-subtitle">Last 30 days</div><div style="font-size:28px;font-weight:800;margin:12px 0">842K</div><div style="font-size:12px;color:var(--success)">▲ 24% vs previous period</div><div style="margin-top:12px;height:60px"><svg width="100%" height="60" viewBox="0 0 200 60" preserveAspectRatio="none"><path d="M0,50 L30,44 L60,48 L90,32 L120,28 L150,18 L180,15 L200,5" fill="none" stroke="var(--accent-secondary)" stroke-width="2"/></svg></div></div>
+        <div class="card"><div class="card-title">Click-Through Rate</div><div class="card-subtitle">Last 30 days</div><div style="font-size:28px;font-weight:800;color:var(--warning);margin:12px 0">2.8%</div><div style="font-size:12px;color:var(--danger)">▼ 3% vs previous period</div><div style="margin-top:12px;height:60px"><svg width="100%" height="60" viewBox="0 0 200 60" preserveAspectRatio="none"><path d="M0,15 L30,20 L60,18 L90,28 L120,32 L150,38 L180,42 L200,48" fill="none" stroke="var(--warning)" stroke-width="2"/></svg></div></div>
+      </div>
+    </div><!-- end tab trends -->
+
+    <!-- TAB: VIRALITY -->
+    <div class="tab-panel" data-tab="virality">
+      <div class="section-label" style="animation:fadeUp .4s ease">VIRALITY ANALYSIS</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px" class="animate">
+        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">VIRAL POSTS</div><div style="font-size:32px;font-weight:800;color:var(--accent)">14</div><div style="font-size:11px;color:var(--success);margin-top:4px">This month</div></div>
+        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">AVG VIRALITY</div><div style="font-size:32px;font-weight:800">0.67</div><div style="font-size:11px;color:var(--success);margin-top:4px">▲ 12% vs last month</div></div>
+        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">PREDICTION ACCURACY</div><div style="font-size:32px;font-weight:800;color:var(--accent)">94%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px">Last 50 predictions</div></div>
+        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">SHARE VELOCITY</div><div style="font-size:32px;font-weight:800;color:var(--accent-secondary)">3.2x</div><div style="font-size:11px;color:var(--success);margin-top:4px">Above niche avg</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:3fr 2fr;gap:16px" class="animate delay-1">
+        <div class="card">
+          <div class="card-title">Viral Velocity Timeline</div>
+          <div class="card-subtitle">How fast posts reach viral threshold</div>
+          <div style="margin-top:16px">
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="width:150px;font-size:12px;font-weight:500">Product launch video</span><div style="flex:1;height:24px;background:rgba(255,255,255,0.02);border-radius:6px;overflow:hidden;position:relative"><div style="width:92%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-bright));border-radius:6px;display:flex;align-items:center;padding-left:8px;font-size:10px;font-weight:600;color:var(--bg-primary)">0.92 — 45 min</div></div></div>
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="width:150px;font-size:12px;font-weight:500">Behind scenes reel</span><div style="flex:1;height:24px;background:rgba(255,255,255,0.02);border-radius:6px;overflow:hidden;position:relative"><div style="width:78%;height:100%;background:linear-gradient(90deg,var(--accent),rgba(0,212,170,0.6));border-radius:6px;display:flex;align-items:center;padding-left:8px;font-size:10px;font-weight:600;color:var(--bg-primary)">0.78 — 1.5 hrs</div></div></div>
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="width:150px;font-size:12px;font-weight:500">Transformation post</span><div style="flex:1;height:24px;background:rgba(255,255,255,0.02);border-radius:6px;overflow:hidden;position:relative"><div style="width:71%;height:100%;background:linear-gradient(90deg,var(--accent-secondary),rgba(99,102,241,0.6));border-radius:6px;display:flex;align-items:center;padding-left:8px;font-size:10px;font-weight:600;color:white">0.71 — 2.1 hrs</div></div></div>
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 0"><span style="width:150px;font-size:12px;font-weight:500">Nutrition carousel</span><div style="flex:1;height:24px;background:rgba(255,255,255,0.02);border-radius:6px;overflow:hidden;position:relative"><div style="width:45%;height:100%;background:linear-gradient(90deg,var(--warning),rgba(251,191,36,0.6));border-radius:6px;display:flex;align-items:center;padding-left:8px;font-size:10px;font-weight:600;color:var(--bg-primary)">0.45 — 6 hrs</div></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Viral Triggers</div>
+          <div class="card-subtitle">What makes your content go viral</div>
+          <div style="margin-top:16px">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-size:12.5px;color:var(--text-secondary)">🎬 Short-form video</span><span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:600">+156%</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-size:12.5px;color:var(--text-secondary)">🕕 Tuesday 6 PM posting</span><span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:600">+92%</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-size:12.5px;color:var(--text-secondary)">😊 High sentiment (>0.85)</span><span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:600">+78%</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-size:12.5px;color:var(--text-secondary)">🏷️ Product launches</span><span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--accent-secondary);font-weight:600">+65%</span></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0"><span style="font-size:12.5px;color:var(--text-secondary)">💬 Question in caption</span><span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--accent-secondary);font-weight:600">+41%</span></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end tab virality -->
+
+    <!-- TAB: SENTIMENT -->
+    <div class="tab-panel" data-tab="sentiment">
+      <div class="section-label" style="animation:fadeUp .4s ease">SENTIMENT INTELLIGENCE</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px" class="animate">
+        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">OVERALL SCORE</div><div style="font-size:36px;font-weight:800;color:var(--accent)">0.82</div><div style="font-size:11px;color:var(--success);margin-top:4px">Positive</div></div>
+        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">POSITIVE</div><div style="font-size:36px;font-weight:800;color:var(--success)">60%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px">508 posts</div></div>
+        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">NEGATIVE</div><div style="font-size:36px;font-weight:800;color:var(--danger)">11%</div><div style="font-size:11px;color:var(--danger);margin-top:4px">▲ 3% this week</div></div>
+        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">CRISIS EVENTS</div><div style="font-size:36px;font-weight:800;color:var(--warning)">2</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px">Last 30 days</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="animate delay-1">
+        <div class="card">
+          <div class="card-title">Sentiment Over Time</div>
+          <div class="card-subtitle">30-day rolling average</div>
+          <div style="height:180px;position:relative;margin-top:16px">
+            <svg width="100%" height="100%" viewBox="0 0 600 180" preserveAspectRatio="none">
+              <rect x="0" y="0" width="600" height="60" fill="rgba(52,211,153,0.03)"/><text x="4" y="14" fill="var(--text-muted)" font-size="8" font-family="JetBrains Mono">Positive</text>
+              <rect x="0" y="60" width="600" height="60" fill="rgba(251,191,36,0.02)"/><text x="4" y="74" fill="var(--text-muted)" font-size="8" font-family="JetBrains Mono">Neutral</text>
+              <rect x="0" y="120" width="600" height="60" fill="rgba(248,113,113,0.02)"/><text x="4" y="134" fill="var(--text-muted)" font-size="8" font-family="JetBrains Mono">Negative</text>
+              <path d="M0,45 L40,42 L80,40 L120,38 L160,44 L200,35 L240,30 L280,28 L320,32 L360,26 L400,24 L440,20 L480,22 L520,18 L560,15 L600,12" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="360" cy="26" r="6" fill="none" stroke="var(--danger)" stroke-width="2"><animate attributeName="r" values="6;10;6" dur="1.5s" repeatCount="indefinite"/></circle>
+              <text x="370" y="22" fill="var(--danger)" font-size="8" font-family="JetBrains Mono">Crisis event</text>
+            </svg>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Flagged Comments</div>
+          <div class="card-subtitle">Requiring attention</div>
+          <div style="margin-top:12px">
+            <div style="padding:10px;background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.1);border-radius:10px;margin-bottom:8px"><div style="font-size:11px;color:var(--danger);font-weight:600;margin-bottom:4px">⚠ High Priority</div><div style="font-size:12px;color:var(--text-secondary);line-height:1.5">"This product is way overpriced for what you get. Very disappointed."</div><div style="font-size:10px;color:var(--text-muted);margin-top:4px;font-family:'JetBrains Mono',monospace">FitLife Pro · 2h ago · 14 reactions</div></div>
+            <div style="padding:10px;background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.1);border-radius:10px;margin-bottom:8px"><div style="font-size:11px;color:var(--warning);font-weight:600;margin-bottom:4px">⚡ Medium Priority</div><div style="font-size:12px;color:var(--text-secondary);line-height:1.5">"Still waiting for my order from 2 weeks ago. No response from support."</div><div style="font-size:10px;color:var(--text-muted);margin-top:4px;font-family:'JetBrains Mono',monospace">FitLife Pro · 5h ago · 8 reactions</div></div>
+            <div style="padding:10px;background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.1);border-radius:10px"><div style="font-size:11px;color:var(--warning);font-weight:600;margin-bottom:4px">⚡ Medium Priority</div><div style="font-size:12px;color:var(--text-secondary);line-height:1.5">"Quality has gone downhill since last year tbh"</div><div style="font-size:10px;color:var(--text-muted);margin-top:4px;font-family:'JetBrains Mono',monospace">NutriFuel · 1d ago · 5 reactions</div></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end tab sentiment -->
+
   </div>
 </div>
-
+<script>
+// Dashboard tab switching
+document.querySelectorAll('.topbar-tab').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    document.querySelectorAll('.topbar-tab').forEach(t=>t.classList.remove('active'));
+    this.classList.add('active');
+    const name=this.textContent.trim().toLowerCase();
+    document.querySelectorAll('.tab-panel').forEach(p=>{
+      p.classList.remove('active');
+      p.style.animation='none';
+    });
+    const target=document.querySelector('.tab-panel[data-tab="'+name+'"]');
+    if(target){
+      target.offsetHeight; // force reflow
+      target.style.animation='';
+      target.classList.add('active');
+      // Scroll content to top
+      document.querySelector('.content').scrollTop=0;
+    }
+  });
+});
+</script>
 </body>
 </html>
