@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — Artemis AI by ViralData</title>
+    <meta name="description" content="Privacy Policy for Artemis AI, the social media intelligence platform by ViralData. Learn how we collect, use, and protect your data.">
+    <meta name="theme-color" content="#0a0e17">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg-primary:#060a13;--bg-secondary:#0c1221;--bg-tertiary:#111a2e;--bg-card:#0f1729;--accent:#00d4aa;--accent-bright:#00f5c4;--accent-dim:rgba(0,212,170,0.1);--text-primary:#e8ecf4;--text-secondary:#7b8ba8;--text-muted:#4a5568;--border:rgba(255,255,255,0.05);--border-accent:rgba(0,212,170,0.15)}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-primary);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+        ::selection{background:var(--accent);color:var(--bg-primary)}
+
+        /* NAV */
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.85);border-bottom:1px solid var(--border)}
+        .nav-logo{font-size:1.3rem;font-weight:700;letter-spacing:.12em;color:var(--text-primary);text-decoration:none}
+        .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+        .nav-links a{color:var(--text-secondary);text-decoration:none;font-size:.88rem;font-weight:400;letter-spacing:.02em;transition:color .3s}
+        .nav-links a:hover{color:var(--text-primary)}
+        .nav-cta{padding:.55rem 1.4rem!important;background:var(--accent)!important;color:var(--bg-primary)!important;border-radius:8px;font-weight:600!important;font-size:.82rem!important;transition:all .3s!important}
+        .nav-cta:hover{background:var(--accent-bright)!important;transform:translateY(-1px)}
+        .nav-connect{padding:.55rem 1.4rem!important;background:transparent!important;color:var(--accent)!important;border:1px solid rgba(0,212,170,0.3)!important;border-radius:8px;font-weight:600!important;font-size:.82rem!important;transition:all .3s!important}
+        .nav-connect:hover{background:var(--accent-dim)!important;border-color:var(--accent)!important}
+        .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+        .hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);margin:5px 0;border-radius:2px;transition:all .3s}
+
+        /* CONTENT */
+        .policy-hero{padding:8rem 2rem 3rem;text-align:center;border-bottom:1px solid var(--border)}
+        .policy-hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.75rem}
+        .policy-hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent-bright));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .policy-hero p{color:var(--text-secondary);font-size:1rem;font-weight:300}
+        .policy-meta{display:flex;justify-content:center;gap:2rem;margin-top:1.5rem;flex-wrap:wrap}
+        .policy-meta span{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text-muted);letter-spacing:.08em;padding:.4rem .8rem;background:var(--bg-card);border:1px solid var(--border);border-radius:6px}
+
+        .policy-container{max-width:820px;margin:0 auto;padding:3rem 2rem 6rem}
+
+        .policy-section{margin-bottom:3rem}
+        .policy-section h2{font-size:1.35rem;font-weight:700;color:var(--accent);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border-accent)}
+        .policy-section h3{font-size:1.05rem;font-weight:600;color:var(--text-primary);margin:1.5rem 0 .5rem}
+        .policy-section p{color:var(--text-secondary);line-height:1.8;margin-bottom:.75rem;font-size:.95rem;font-weight:300}
+        .policy-section ul{list-style:none;margin:.5rem 0 1rem;padding-left:0}
+        .policy-section li{color:var(--text-secondary);line-height:1.8;font-size:.95rem;font-weight:300;padding:.3rem 0 .3rem 1.5rem;position:relative}
+        .policy-section li::before{content:'';position:absolute;left:0;top:.85rem;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.6}
+        .policy-section a{color:var(--accent);text-decoration:none;transition:color .2s}
+        .policy-section a:hover{color:var(--accent-bright);text-decoration:underline}
+
+        .data-table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.88rem}
+        .data-table th{text-align:left;padding:.7rem 1rem;background:var(--bg-card);color:var(--accent);font-weight:600;border:1px solid var(--border);font-size:.8rem;letter-spacing:.03em}
+        .data-table td{padding:.6rem 1rem;border:1px solid var(--border);color:var(--text-secondary);font-weight:300}
+        .data-table tr:nth-child(even) td{background:rgba(15,23,41,0.5)}
+
+        .highlight-box{background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:10px;padding:1.2rem 1.5rem;margin:1.5rem 0}
+        .highlight-box p{color:var(--text-primary);margin:0;font-weight:400}
+
+        /* FOOTER */
+        footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center}
+        footer p{color:var(--text-muted);font-size:.8rem;font-weight:300;letter-spacing:.02em}
+        footer a{color:var(--accent);text-decoration:none}
+
+        @media(max-width:768px){
+            nav{padding:0 1.5rem}
+            .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(6,10,19,0.98);backdrop-filter:blur(20px);padding:1.5rem;gap:.75rem;border-bottom:1px solid var(--border)}
+            .nav-links.open{display:flex}
+            .hamburger{display:block}
+            .policy-hero{padding:6rem 1.5rem 2rem}
+            .policy-container{padding:2rem 1.5rem 4rem}
+            .policy-meta{flex-direction:column;align-items:center;gap:.75rem}
+            .data-table{font-size:.78rem}
+            .data-table th,.data-table td{padding:.5rem .6rem}
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="/" class="nav-logo">ARTEMIS AI</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/#how">How It Works</a></li>
+        <li><a href="/#team">Team</a></li>
+        <li><a href="/#contact">Contact</a></li>
+        <li><a href="/data">Data Explorer</a></li>
+        <li><a href="/connect" class="nav-connect">Connect Pages</a></li>
+        <li><a href="/#contact" class="nav-cta">Get Early Access</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="policy-hero">
+    <h1><span>Privacy Policy</span></h1>
+    <p>How Artemis AI collects, uses, and protects your data</p>
+    <div class="policy-meta">
+        <span>Effective: 27 February 2026</span>
+        <span>Last Updated: 27 February 2026</span>
+        <span>Version 1.0</span>
+    </div>
+</section>
+
+<!-- CONTENT -->
+<div class="policy-container">
+
+    <!-- 1. INTRODUCTION -->
+    <div class="policy-section">
+        <h2>1. Introduction</h2>
+        <p>Artemis AI ("we", "us", "our") is a social media intelligence platform operated by ViralData, a registered company in the United Kingdom. Our platform analyses Facebook Page data to deliver AI-powered insights including virality predictions, crisis detection, audience segmentation, and content recommendations.</p>
+        <p>This Privacy Policy explains how we collect, use, store, share, and protect information when you use our website (<a href="https://artemisai.co.uk">artemisai.co.uk</a>), connect your Facebook Pages to our platform, or interact with our services.</p>
+        <p>By using Artemis AI, you agree to the practices described in this policy. If you do not agree, please do not use our services.</p>
+    </div>
+
+    <!-- 2. DATA CONTROLLER -->
+    <div class="policy-section">
+        <h2>2. Data Controller</h2>
+        <p>ViralData is the data controller for personal data processed through Artemis AI. For any privacy-related enquiries, you can contact us at:</p>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:privacy@artemisai.co.uk">privacy@artemisai.co.uk</a></li>
+            <li><strong>Website:</strong> <a href="https://artemisai.co.uk">https://artemisai.co.uk</a></li>
+        </ul>
+        <p>For data collected through Facebook Page Insights, ViralData and Meta Platforms Ireland Limited act as joint controllers under GDPR Article 26. Meta assumes primary responsibility for processing Insights data. Our obligations as a joint controller are set out in Meta's Page Controller Addendum.</p>
+    </div>
+
+    <!-- 3. DATA WE COLLECT -->
+    <div class="policy-section">
+        <h2>3. Data We Collect</h2>
+        <p>We collect different types of data depending on how you interact with our platform:</p>
+
+        <h3>3.1 Data You Provide Directly</h3>
+        <table class="data-table">
+            <tr><th>Data Type</th><th>Examples</th><th>Purpose</th></tr>
+            <tr><td>Account information</td><td>Name, email address, company name</td><td>Account creation and communication</td></tr>
+            <tr><td>Contact form submissions</td><td>Name, email, message content</td><td>Responding to enquiries</td></tr>
+            <tr><td>Login credentials</td><td>Username, password</td><td>Authentication and account security</td></tr>
+        </table>
+
+        <h3>3.2 Data Collected via Facebook (Meta) Integration</h3>
+        <p>When you connect your Facebook Page(s) to Artemis AI, we access data through the Meta Graph API using permissions you explicitly grant. We collect:</p>
+        <table class="data-table">
+            <tr><th>Data Type</th><th>Source</th><th>Purpose</th></tr>
+            <tr><td>Page information</td><td>Page name, category, follower count, profile picture</td><td>Platform identification and analytics context</td></tr>
+            <tr><td>Page posts</td><td>Post text, media URLs, post type, timestamps</td><td>Content analysis, NLP labelling, virality prediction</td></tr>
+            <tr><td>Post engagement metrics</td><td>Likes, comments, shares, reactions, reach, impressions</td><td>ML feature extraction and performance analytics</td></tr>
+            <tr><td>Comments</td><td>Comment text, author name (public), timestamps</td><td>Sentiment analysis, toxicity detection, crisis monitoring</td></tr>
+            <tr><td>Reactions breakdown</td><td>Like, Love, Wow, Haha, Sad, Angry counts</td><td>Emotional analysis and audience insight</td></tr>
+            <tr><td>Page Insights</td><td>Daily reach, impressions, demographics (age, gender, location — aggregated)</td><td>Audience segmentation and performance reporting</td></tr>
+            <tr><td>Page access tokens</td><td>OAuth tokens for authenticated API access</td><td>Maintaining data connection (stored encrypted)</td></tr>
+        </table>
+
+        <div class="highlight-box">
+            <p><strong>Important:</strong> We do not access private messages, friend lists, personal timelines, or any data from Facebook users who are not administrators of connected Pages. We only access publicly available Page data and data that Page administrators explicitly authorise us to access.</p>
+        </div>
+
+        <h3>3.3 Data Collected Automatically</h3>
+        <table class="data-table">
+            <tr><th>Data Type</th><th>Examples</th><th>Purpose</th></tr>
+            <tr><td>Usage data</td><td>Pages visited, features used, timestamps</td><td>Service improvement and debugging</td></tr>
+            <tr><td>Device information</td><td>Browser type, operating system, screen resolution</td><td>Optimising user experience</td></tr>
+            <tr><td>IP address</td><td>Anonymised after collection</td><td>Security, fraud prevention, approximate geolocation</td></tr>
+            <tr><td>Cookies</td><td>Session cookies, preference cookies</td><td>Authentication and remembering preferences</td></tr>
+        </table>
+    </div>
+
+    <!-- 4. HOW WE USE YOUR DATA -->
+    <div class="policy-section">
+        <h2>4. How We Use Your Data</h2>
+        <p>We use the data we collect for the following purposes:</p>
+        <ul>
+            <li><strong>Providing our service:</strong> Analysing your Facebook Page data to generate predictions, insights, reports, and recommendations.</li>
+            <li><strong>Machine learning and AI:</strong> Training and running NLP models (sentiment analysis, topic classification, emotion detection, toxicity scoring) on your Page content to power platform features. Models are trained on aggregated, de-identified data and are not used to identify individuals.</li>
+            <li><strong>Feature extraction:</strong> Creating measurable features from your engagement data (e.g., engagement rates, posting patterns) to power predictive models.</li>
+            <li><strong>Crisis detection:</strong> Monitoring sentiment and engagement patterns in real-time to alert you to potential PR crises or negative trends.</li>
+            <li><strong>Communication:</strong> Sending you service-related notifications, responding to support requests, and providing product updates.</li>
+            <li><strong>Security:</strong> Protecting against unauthorised access, fraud, and abuse.</li>
+            <li><strong>Improvement:</strong> Analysing usage patterns (in aggregate) to improve our platform features and user experience.</li>
+        </ul>
+
+        <div class="highlight-box">
+            <p><strong>We do not:</strong> Sell your personal data or your Page data to any third party. We do not use your data for advertising purposes. We do not share your data with advertisers. We do not use your data to build profiles about individuals who interact with your Page.</p>
+        </div>
+    </div>
+
+    <!-- 5. LEGAL BASIS (GDPR) -->
+    <div class="policy-section">
+        <h2>5. Legal Basis for Processing (GDPR)</h2>
+        <p>Under the UK GDPR and EU GDPR, we process personal data on the following legal bases:</p>
+        <table class="data-table">
+            <tr><th>Legal Basis</th><th>Applies To</th></tr>
+            <tr><td><strong>Consent</strong> (Article 6(1)(a))</td><td>Connecting your Facebook Page to our platform; granting API permissions; receiving marketing communications</td></tr>
+            <tr><td><strong>Contract</strong> (Article 6(1)(b))</td><td>Processing data necessary to deliver the Artemis AI service you signed up for</td></tr>
+            <tr><td><strong>Legitimate Interest</strong> (Article 6(1)(f))</td><td>Improving our service, ensuring security, preventing fraud, aggregated analytics</td></tr>
+            <tr><td><strong>Legal Obligation</strong> (Article 6(1)(c))</td><td>Complying with UK/EU data protection laws and regulatory requirements</td></tr>
+        </table>
+        <p>You may withdraw consent at any time by disconnecting your Facebook Page from our platform or contacting us at <a href="mailto:privacy@artemisai.co.uk">privacy@artemisai.co.uk</a>.</p>
+    </div>
+
+    <!-- 6. DATA SHARING -->
+    <div class="policy-section">
+        <h2>6. Data Sharing and Third Parties</h2>
+        <p>We share data only in the following limited circumstances:</p>
+
+        <h3>6.1 Service Providers</h3>
+        <p>We use the following third-party services to operate our platform. Each processes data only on our behalf and under our instructions:</p>
+        <table class="data-table">
+            <tr><th>Provider</th><th>Purpose</th><th>Data Shared</th></tr>
+            <tr><td>Amazon Web Services (AWS)</td><td>Cloud hosting, data storage (Redshift, S3), ML inference (SageMaker)</td><td>All platform data (encrypted at rest and in transit)</td></tr>
+            <tr><td>Meta Platforms (Facebook)</td><td>Graph API for Page data access</td><td>API tokens, data requests</td></tr>
+            <tr><td>Netlify</td><td>Website hosting</td><td>Website access logs</td></tr>
+            <tr><td>Google Analytics</td><td>Website usage analytics</td><td>Anonymised browsing data</td></tr>
+        </table>
+
+        <h3>6.2 Legal Requirements</h3>
+        <p>We may disclose your data if required to do so by law, regulation, or valid legal process (such as a court order or regulatory request).</p>
+
+        <h3>6.3 Business Transfers</h3>
+        <p>In the event of a merger, acquisition, or sale of assets, your data may be transferred as part of that transaction. We will notify you of any such change.</p>
+
+        <p><strong>We do not sell, rent, or trade your personal data to any third party for marketing or any other purpose.</strong></p>
+    </div>
+
+    <!-- 7. DATA STORAGE & SECURITY -->
+    <div class="policy-section">
+        <h2>7. Data Storage and Security</h2>
+        <p>We take data security seriously and implement the following measures:</p>
+        <ul>
+            <li><strong>Encryption at rest:</strong> All data stored in AWS S3 and Redshift is encrypted using AES-256 (SSE-KMS).</li>
+            <li><strong>Encryption in transit:</strong> All data transmitted between your browser and our servers, and between our services, uses TLS 1.2+.</li>
+            <li><strong>Access control:</strong> Role-based access control (RBAC) with least-privilege IAM policies. Only authorised team members can access data.</li>
+            <li><strong>Token security:</strong> Facebook Page access tokens are stored encrypted in AWS Secrets Manager and are never exposed in client-side code.</li>
+            <li><strong>Infrastructure-as-Code:</strong> All infrastructure is version-controlled and auditable.</li>
+            <li><strong>Data validation:</strong> Automated data quality checks run after every pipeline execution.</li>
+        </ul>
+
+        <h3>Data Location</h3>
+        <p>Your data is stored in AWS data centres in the EU (eu-west-1, Ireland) or UK (eu-west-2, London). Data is not transferred outside the EEA/UK unless required by a third-party provider with appropriate safeguards (Standard Contractual Clauses or adequacy decisions).</p>
+    </div>
+
+    <!-- 8. DATA RETENTION -->
+    <div class="policy-section">
+        <h2>8. Data Retention</h2>
+        <p>We retain your data for as long as necessary to provide our services:</p>
+        <table class="data-table">
+            <tr><th>Data Type</th><th>Retention Period</th></tr>
+            <tr><td>Account data</td><td>Duration of your account + 30 days after deletion</td></tr>
+            <tr><td>Facebook Page data</td><td>Duration of connection + 90 days after disconnection</td></tr>
+            <tr><td>ML model outputs (labels, predictions)</td><td>Duration of your account</td></tr>
+            <tr><td>Media files (images/videos)</td><td>Duration of connection + 30 days after disconnection</td></tr>
+            <tr><td>Usage logs</td><td>12 months (rolling)</td></tr>
+            <tr><td>Contact form submissions</td><td>24 months</td></tr>
+        </table>
+        <p>When you disconnect a Facebook Page or delete your account, we delete all associated data within the retention periods above. You may also request immediate deletion by contacting us.</p>
+    </div>
+
+    <!-- 9. YOUR RIGHTS -->
+    <div class="policy-section">
+        <h2>9. Your Rights</h2>
+        <p>Under the UK GDPR, EU GDPR, and other applicable data protection laws, you have the following rights:</p>
+        <ul>
+            <li><strong>Right of access:</strong> Request a copy of the personal data we hold about you.</li>
+            <li><strong>Right to rectification:</strong> Request correction of inaccurate or incomplete personal data.</li>
+            <li><strong>Right to erasure:</strong> Request deletion of your personal data ("right to be forgotten").</li>
+            <li><strong>Right to restrict processing:</strong> Request that we limit how we use your data.</li>
+            <li><strong>Right to data portability:</strong> Request your data in a structured, machine-readable format.</li>
+            <li><strong>Right to object:</strong> Object to processing based on legitimate interests.</li>
+            <li><strong>Right to withdraw consent:</strong> Withdraw consent at any time by disconnecting your Pages or contacting us.</li>
+        </ul>
+        <p>To exercise any of these rights, contact us at <a href="mailto:privacy@artemisai.co.uk">privacy@artemisai.co.uk</a>. We will respond within 30 days.</p>
+        <p>You also have the right to lodge a complaint with the UK Information Commissioner's Office (ICO) at <a href="https://ico.org.uk">ico.org.uk</a> or your local supervisory authority.</p>
+    </div>
+
+    <!-- 10. META PLATFORM SPECIFIC -->
+    <div class="policy-section">
+        <h2>10. Meta (Facebook) Platform Compliance</h2>
+        <p>Artemis AI accesses Facebook data through the Meta Graph API in compliance with Meta's Platform Terms and Developer Policies (effective February 2025). Specifically:</p>
+        <ul>
+            <li>We only request the minimum permissions necessary to operate our service (pages_show_list, pages_read_engagement, pages_read_user_content, read_insights, pages_manage_metadata).</li>
+            <li>We obtain explicit consent from Page administrators before accessing any Page data.</li>
+            <li>We do not sell, license, or purchase any data obtained from Meta.</li>
+            <li>We do not use Meta data to conduct surveillance, or to provide data to any entity for surveillance purposes.</li>
+            <li>We do not transfer Meta data to any ad network, data broker, or advertising-related service.</li>
+            <li>We delete all data obtained from Meta upon request by the user or upon notification from Meta, within the timelines specified in Meta's Developer Data Use Policy.</li>
+            <li>We do not use Meta data to discriminate against or promote discrimination of individuals based on race, ethnicity, religion, sexual orientation, disability, or other protected categories.</li>
+            <li>Our privacy policy is publicly accessible, hosted on HTTPS, not geo-blocked, and accessible to Meta's web crawlers.</li>
+        </ul>
+
+        <h3>Data Deletion Requests</h3>
+        <p>If you wish to have all data obtained from Facebook deleted, you can:</p>
+        <ul>
+            <li>Disconnect your Facebook Page from Artemis AI via the Connect Pages dashboard</li>
+            <li>Email <a href="mailto:privacy@artemisai.co.uk">privacy@artemisai.co.uk</a> with subject line "Facebook Data Deletion Request"</li>
+        </ul>
+        <p>We will delete all Facebook-sourced data within 30 days of your request and confirm deletion via email.</p>
+    </div>
+
+    <!-- 11. COOKIES -->
+    <div class="policy-section">
+        <h2>11. Cookies</h2>
+        <p>Our website uses the following cookies:</p>
+        <table class="data-table">
+            <tr><th>Cookie</th><th>Type</th><th>Purpose</th><th>Duration</th></tr>
+            <tr><td>Session cookie</td><td>Essential</td><td>Maintains your login session</td><td>Session</td></tr>
+            <tr><td>Preference cookie</td><td>Functional</td><td>Remembers your display preferences</td><td>30 days</td></tr>
+            <tr><td>Google Analytics (_ga, _gid)</td><td>Analytics</td><td>Anonymous usage statistics</td><td>Up to 2 years</td></tr>
+        </table>
+        <p>You can control cookies through your browser settings. Disabling essential cookies may prevent you from using certain features of our platform.</p>
+    </div>
+
+    <!-- 12. CHILDREN -->
+    <div class="policy-section">
+        <h2>12. Children's Privacy</h2>
+        <p>Artemis AI is a business-to-business platform not intended for use by individuals under the age of 18. We do not knowingly collect personal data from children. If we become aware that we have collected data from a child under 18, we will delete it promptly.</p>
+    </div>
+
+    <!-- 13. INTERNATIONAL TRANSFERS -->
+    <div class="policy-section">
+        <h2>13. International Data Transfers</h2>
+        <p>Your data is primarily stored within the UK and EU. Where data is transferred outside these regions (for example, to AWS US regions for backup), we ensure appropriate safeguards are in place, including Standard Contractual Clauses (SCCs) approved by the UK ICO and European Commission, or transfers to countries with an adequacy decision.</p>
+    </div>
+
+    <!-- 14. CHANGES -->
+    <div class="policy-section">
+        <h2>14. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. When we make material changes, we will notify you by updating the "Last Updated" date at the top of this page and, where appropriate, notifying you by email.</p>
+        <p>We encourage you to review this policy periodically. Your continued use of Artemis AI after changes are posted constitutes your acceptance of the updated policy.</p>
+    </div>
+
+    <!-- 15. CONTACT -->
+    <div class="policy-section">
+        <h2>15. Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy or how we handle your data, please contact us:</p>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:privacy@artemisai.co.uk">privacy@artemisai.co.uk</a></li>
+            <li><strong>Website:</strong> <a href="https://artemisai.co.uk">https://artemisai.co.uk</a></li>
+        </ul>
+        <p>For Meta-specific data enquiries, you may also contact Meta Platforms Ireland Limited at <a href="https://www.facebook.com/help/contact/540977946302970">their Data Protection Contact Form</a>.</p>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2026 Artemis AI by ViralData. All rights reserved. &nbsp;|&nbsp; <a href="/">Home</a> &nbsp;|&nbsp; <a href="/privacy">Privacy Policy</a> &nbsp;|&nbsp; <a href="/#contact">Contact</a></p>
+</footer>
+
+</body>
+</html>
