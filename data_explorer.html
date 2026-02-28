@@ -261,7 +261,7 @@
                 <div class="data-panel-actions">
                     <button class="btn-export" id="exportToggle" onclick="toggleExportPanel()">
                         <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Export to Excel
+                        Export to CSV
                     </button>
                 </div>
             </div>
@@ -293,7 +293,7 @@
                     <div class="export-section export-go">
                         <button class="btn-export" id="exportBtn" onclick="handleExport()">
                             <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            <span id="exportBtnLabel">Download All Rows</span>
+                            <span id="exportBtnLabel">Download CSV</span>
                         </button>
                     </div>
                 </div>
@@ -635,6 +635,9 @@ function updateExportLabel() {
 document.getElementById('exportDateFrom')?.addEventListener('change', updateExportLabel);
 document.getElementById('exportDateTo')?.addEventListener('change', updateExportLabel);
 
+// Lambda endpoint for large exports (bypasses Netlify 6MB limit)
+const EXPORT_API = 'https://vhlmd6enazptkbdlueeizrr3im0imvhq.lambda-url.eu-west-2.on.aws/';  // ← Replace with your Lambda Function URL
+
 async function handleExport() {
     const btn = document.getElementById('exportBtn');
     const origHTML = btn.innerHTML;
@@ -643,9 +646,9 @@ async function handleExport() {
 
     try {
         const params = {
-            action: 'export',
             schema: state.currentSchema,
             table: state.currentTable,
+            user_id: state.user?.id,
         };
         if (exportLimit > 0) params.limit = exportLimit;
         const dateFrom = document.getElementById('exportDateFrom').value;
@@ -653,24 +656,23 @@ async function handleExport() {
         if (dateFrom) params.date_from = dateFrom;
         if (dateTo) params.date_to = dateTo;
 
-        const data = await api(params);
-
-        // Build workbook
-        const wb = XLSX.utils.book_new();
-        const wsData = [data.columns, ...data.rows.map(row => data.columns.map(col => row[col]))];
-        const ws = XLSX.utils.aoa_to_sheet(wsData);
-
-        // Auto-width columns
-        ws['!cols'] = data.columns.map(col => {
-            const maxLen = Math.max(col.length, ...data.rows.slice(0, 100).map(r => String(r[col] || '').length));
-            return { wch: Math.min(maxLen + 2, 40) };
+        const res = await fetch(EXPORT_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(params),
         });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Export failed');
 
-        const sheetName = (data.label || data.table).substring(0, 31);
-        XLSX.utils.book_append_sheet(wb, ws, sheetName);
-        XLSX.writeFile(wb, `artemis_${data.table}_${new Date().toISOString().slice(0, 10)}.xlsx`);
+        // Trigger download via presigned URL
+        const a = document.createElement('a');
+        a.href = data.download_url;
+        a.download = data.filename || `artemis_${state.currentTable}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
 
-        showToast(`Exported ${data.rows.length.toLocaleString()} rows to Excel`);
+        showToast(`Exported ${data.row_count.toLocaleString()} rows (${data.file_size_kb} KB) — link valid for ${data.expires_in}`);
     } catch (e) {
         showToast('Export failed: ' + e.message);
     } finally {
