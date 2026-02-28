@@ -665,7 +665,7 @@ async function handleExport() {
         if (!res.ok) throw new Error(data.error || 'Export failed');
 
         // Trigger download via presigned S3 URL
-        window.open(data.download_url, '_blank');
+        window.location.href = data.download_url;
 
         showToast(`Exported ${data.row_count.toLocaleString()} rows (${data.file_size_kb} KB) — link valid for ${data.expires_in}`);
     } catch (e) {
