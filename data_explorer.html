@@ -636,7 +636,7 @@ document.getElementById('exportDateFrom')?.addEventListener('change', updateExpo
 document.getElementById('exportDateTo')?.addEventListener('change', updateExportLabel);
 
 // Lambda endpoint for large exports (bypasses Netlify 6MB limit)
-const EXPORT_API = 'https://vhlmd6enazptkbdlueeizrr3im0imvhq.lambda-url.eu-west-2.on.aws/';  // ← Replace with your Lambda Function URL
+const EXPORT_API = 'https://vhlmd6enazptkbdlueeizrr3im0imvhq.lambda-url.eu-west-2.on.aws/';
 
 async function handleExport() {
     const btn = document.getElementById('exportBtn');
@@ -664,13 +664,8 @@ async function handleExport() {
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Export failed');
 
-        // Trigger download via presigned URL
-        const a = document.createElement('a');
-        a.href = data.download_url;
-        a.download = data.filename || `artemis_${state.currentTable}.csv`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+        // Trigger download via presigned S3 URL
+        window.open(data.download_url, '_blank');
 
         showToast(`Exported ${data.row_count.toLocaleString()} rows (${data.file_size_kb} KB) — link valid for ${data.expires_in}`);
     } catch (e) {
