@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>if(!localStorage.getItem("artemis_app_session")){window.location.href="mockup_login.html";}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Artemis AI — Connected Pages</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -100,6 +101,11 @@ textarea.form-input{min-height:80px;resize:vertical}
 .connect-card{background:var(--bg-card);border:2px dashed var(--border-accent);border-radius:16px;padding:40px;text-align:center;cursor:pointer;transition:all .3s}
 .connect-card:hover{border-color:var(--accent);background:var(--accent-dim)}
 
+.sidebar-signout{padding:12px 16px;border-top:1px solid var(--border);margin-top:auto;flex-shrink:0}
+.sidebar-user{font-size:11px;color:var(--text-muted);padding:0 8px 8px;font-family:"JetBrains Mono",monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn-signout{display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;background:none;border:1px solid rgba(248,113,113,0.15);border-radius:10px;color:var(--text-secondary);font-family:"Outfit",sans-serif;font-size:13px;cursor:pointer;transition:all .3s}
+.btn-signout:hover{background:rgba(248,113,113,0.08);border-color:rgba(248,113,113,0.3);color:#f87171}
+.btn-signout svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5}
 </style>
 </head>
 <body>
@@ -140,4 +146,5 @@ textarea.form-input{min-height:80px;resize:vertical}
   <div style="font-size:15px;font-weight:600;margin-bottom:4px">Connect Another Page</div>
   <div style="font-size:12px;color:var(--text-muted)">Link a Facebook page via OAuth to start analysing</div>
 </div>
-</div></div></body></html>
+</div></div><script>try{const u=JSON.parse(localStorage.getItem('artemis_app_session'));if(u&&document.getElementById('sidebarUser'))document.getElementById('sidebarUser').textContent=u.email||'';}catch{}</script>
+</body></html>

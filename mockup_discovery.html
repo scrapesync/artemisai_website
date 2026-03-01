@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>if(!localStorage.getItem("artemis_app_session")){window.location.href="mockup_login.html";}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Artemis AI — Discovery Feed</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -164,6 +165,11 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 .niche-fashion .bcard-niche{background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.2);color:#fbbf24}
 .niche-fashion .bcard-avatar{border-color:rgba(251,191,36,0.3);color:#fbbf24}
 .niche-fashion .bcard-match-val,.niche-fashion .metric-val{color:#fbbf24}
+.sidebar-signout{padding:12px 16px;border-top:1px solid var(--border);margin-top:auto;flex-shrink:0}
+.sidebar-user{font-size:11px;color:var(--text-muted);padding:0 8px 8px;font-family:"JetBrains Mono",monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn-signout{display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;background:none;border:1px solid rgba(248,113,113,0.15);border-radius:10px;color:var(--text-secondary);font-family:"Outfit",sans-serif;font-size:13px;cursor:pointer;transition:all .3s}
+.btn-signout:hover{background:rgba(248,113,113,0.08);border-color:rgba(248,113,113,0.3);color:#f87171}
+.btn-signout svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5}
 </style>
 </head>
 <body>
@@ -197,6 +203,10 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
     <a href="mockup_settings.html" class="nav-item ">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
   </nav>
+  <div class="sidebar-signout">
+    <div class="sidebar-user" id="sidebarUser"></div>
+    <button class="btn-signout" onclick="localStorage.removeItem('artemis_app_session');window.location.href='mockup_login.html'"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign Out</button>
+  </div>
 </aside>
 
 <!-- ═══ MAIN ═══ -->
@@ -421,6 +431,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
   </div>
 </div>
 
+<script>try{const u=JSON.parse(localStorage.getItem('artemis_app_session'));if(u&&document.getElementById('sidebarUser'))document.getElementById('sidebarUser').textContent=u.email||'';}catch{}</script>
 </body>
 <script>
 // ═══ VIEW TOGGLE ═══
