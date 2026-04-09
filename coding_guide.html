@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtemisAI — Implementation Guide for Faheem</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f1117;--surface:#181b24;--surface2:#1e2230;--border:#2a2e3d;--text:#e0e2eb;--text-muted:#8b90a5;--accent:#6ee7b7;--accent2:#38bdf8;--accent3:#f472b6;--orange:#fb923c;--code-bg:#141720;--yellow:#fbbf24;--red:#f87171;--teal:#2dd4bf}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7;padding:2rem;max-width:1000px;margin:0 auto}
+h1{font-family:'Source Serif 4',serif;font-size:2.4rem;font-weight:700;margin-bottom:.3rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:var(--text-muted);font-size:1rem;margin-bottom:2.5rem;border-bottom:1px solid var(--border);padding-bottom:1.5rem}
+h2{font-family:'Source Serif 4',serif;font-size:1.5rem;font-weight:600;color:var(--accent);margin-top:3rem;margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+h2 .num{font-family:'JetBrains Mono',monospace;font-size:.85rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:.15rem .5rem;color:var(--accent2)}
+h3{font-size:1.1rem;font-weight:600;margin-top:1.5rem;margin-bottom:.6rem}
+h3.david{color:var(--text-muted)}
+h3.ours{color:var(--accent)}
+p{margin-bottom:1rem}
+.callout{background:var(--surface);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin:1.2rem 0;font-size:.92rem}
+.callout.warn{border-left-color:var(--orange)}
+.callout.info{border-left-color:var(--accent2)}
+.callout.pink{border-left-color:var(--accent3)}
+.callout strong{color:var(--accent)}
+.callout.warn strong{color:var(--orange)}
+.callout.info strong{color:var(--accent2)}
+.callout.pink strong{color:var(--accent3)}
+pre{background:var(--code-bg);border:1px solid var(--border);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1rem 0 1.5rem;position:relative}
+pre .label{position:absolute;top:.5rem;right:.7rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-muted);background:var(--surface2);padding:.1rem .5rem;border-radius:4px;text-transform:uppercase;letter-spacing:.05em}
+pre .copy-btn{position:absolute;top:.5rem;right:auto;left:.7rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--accent);background:var(--surface2);border:1px solid var(--border);padding:.2rem .6rem;border-radius:4px;cursor:pointer;transition:all .2s}
+pre .copy-btn:hover{background:var(--accent);color:var(--bg)}
+code{font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.65;color:var(--text)}
+.inline-code{background:var(--surface2);padding:.15rem .4rem;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent2)}
+.kw{color:var(--accent3)}.fn{color:var(--accent2)}.str{color:var(--accent)}.cmt{color:#5c6078;font-style:italic}.num-lit{color:var(--orange)}.var{color:var(--yellow)}
+.comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+.comparison-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;transition:border-color .2s}
+.comparison-card:hover{border-color:var(--accent)}
+.comparison-card h4{font-size:.9rem;font-weight:600;margin-bottom:.5rem}
+.comparison-card.david h4{color:var(--text-muted)}
+.comparison-card.artemis h4{color:var(--accent)}
+.comparison-card ul{list-style:none;font-size:.85rem;color:var(--text-muted)}
+.comparison-card ul li{padding:.2rem 0;padding-left:1rem;position:relative}
+.comparison-card ul li::before{content:'\2192';position:absolute;left:0;color:var(--border)}
+.tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.1rem .45rem;border-radius:4px;margin-left:.3rem}
+.tag.cost{background:#1a2e1a;color:var(--accent)}.tag.new{background:#2e1a2a;color:var(--accent3)}.tag.same{background:#1a2535;color:var(--accent2)}
+table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.85rem}
+th{background:var(--surface2);color:var(--accent2);text-align:left;padding:.6rem .8rem;border:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}
+td{padding:.6rem .8rem;border:1px solid var(--border);color:var(--text-muted)}
+td:first-child{color:var(--text);font-weight:500}
+tr:nth-child(even){background:var(--surface)}
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem 2rem;margin:2rem 0}
+.toc a{color:var(--accent2);text-decoration:none;display:block;padding:.3rem 0;font-size:.9rem;transition:color .2s}
+.toc a:hover{color:var(--accent)}
+.toc a .tnum{font-family:'JetBrains Mono',monospace;color:var(--text-muted);margin-right:.5rem;font-size:.8rem}
+.divider{border:none;border-top:1px solid var(--border);margin:2rem 0}
+@media(max-width:700px){.comparison-grid{grid-template-columns:1fr}body{padding:1rem}}
+</style>
+</head>
+<body>
+
+<h1>ArtemisAI Implementation Guide</h1>
+<p class="subtitle">For Faheem &middot; Based on David Lawton's production code at Fluency &middot; April 2026</p>
+
+<div class="callout info">
+<strong>What this is:</strong> David classifies thousands of social media comments monthly for commercial clients at Fluency using GPT. This guide adapts his battle-tested patterns for ArtemisAI with DeepSeek (7x cheaper) and our rich system prompt (much more accurate). Same code structure, better results.
+</div>
+
+<div class="toc">
+<a href="#s1"><span class="tnum">01</span> Setup: one-line swap from GPT to DeepSeek</a>
+<a href="#s2"><span class="tnum">02</span> JSON parsing: David's biggest pain point, solved</a>
+<a href="#s3"><span class="tnum">03</span> The prompt: David's template + our rich system prompt</a>
+<a href="#s4"><span class="tnum">04</span> Single post classification</a>
+<a href="#s5"><span class="tnum">05</span> Batch processing: David's ThreadPoolExecutor pattern</a>
+<a href="#s6"><span class="tnum">06</span> Three-tier confidence routing (our addition)</a>
+<a href="#s7"><span class="tnum">07</span> Local model inference: HuggingFace pattern</a>
+<a href="#s8"><span class="tnum">08</span> End-to-end pipeline</a>
+<a href="#s9"><span class="tnum">09</span> Summary: what to keep, what to change</a>
+<a href="#s10"><span class="tnum">10</span> Zero-shot classification: instant new tasks</a>
+<a href="#s11"><span class="tnum">11</span> Brand equity scoring: multi-attribute prompts</a>
+<a href="#s12"><span class="tnum">12</span> Cutthrough / spam detection: boolean classification</a>
+<a href="#s13"><span class="tnum">13</span> Customer segmentation: K-Modes + XGBoost golden questions</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<h2 id="s1"><span class="num">01</span> Setup</h2>
+
+<p>DeepSeek uses the OpenAI-compatible API. Same Python library, one line different.</p>
+
+<div class="comparison-grid">
+<div class="comparison-card david">
+<h4>David's Original (Fluency)</h4>
+<ul>
+<li>OpenAI GPT-3.5-turbo</li>
+<li>~$0.002 per comment</li>
+<li>From: OpenAI_Basic.ipynb, NLP_Notebook.ipynb</li>
+</ul>
+</div>
+<div class="comparison-card artemis">
+<h4>Our Adaptation (ArtemisAI)</h4>
+<ul>
+<li>DeepSeek V3 (chat/completions) <span class="tag cost">7x cheaper</span></li>
+<li>~$0.0003 per post</li>
+<li>Same library, change base_url only <span class="tag same">same code</span></li>
+</ul>
+</div>
+</div>
+
+<h3 class="david">David's config (from OpenAI_Basic.ipynb)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">David's config</span>
+<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+
+<span class="var">client</span> = OpenAI(
+    organization=<span class="str">'org-5AXapliFSQImDsgpiF6PJs0t'</span>,
+    api_key=<span class="str">"sk-proj-..."</span>
+)
+
+<span class="var">base_model</span> = <span class="str">"gpt-3.5-turbo"</span>
+</code></pre>
+
+<h3 class="ours">Our config (config.py)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">config.py</span>
+<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+
+<span class="cmt"># Same library — just change base_url and model</span>
+<span class="var">client</span> = OpenAI(
+    api_key=<span class="str">"sk-your-deepseek-api-key"</span>,
+    base_url=<span class="str">"https://api.deepseek.com"</span>   <span class="cmt"># only difference</span>
+)
+
+<span class="var">MODEL</span> = <span class="str">"deepseek-chat"</span>  <span class="cmt"># DeepSeek V3</span>
+</code></pre>
+
+<div class="callout">
+<strong>Key insight:</strong> If DeepSeek is down or you want to A/B test, change <span class="inline-code">base_url</span> back to <span class="inline-code">https://api.openai.com/v1</span> and model to <span class="inline-code">gpt-4o-mini</span>. Everything else stays identical.
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<h2 id="s2"><span class="num">02</span> JSON Parsing</h2>
+
+<p>David's original code parses GPT responses by splitting on newlines and colons. This breaks constantly when GPT changes formatting.</p>
+
+<h3 class="david">David's fragile parsing (from Apify_Comments__1_.ipynb)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">David's parser — breaks often</span>
+<span class="cmt"># Splits on newlines and colons — one extra newline crashes everything</span>
+row[<span class="str">'Result'</span>].split(<span class="str">'\n'</span>)[<span class="num-lit">0</span>].split(<span class="str">':'</span>)[<span class="num-lit">1</span>].strip()  <span class="cmt"># sentiment</span>
+row[<span class="str">'Result'</span>].split(<span class="str">'\n'</span>)[<span class="num-lit">2</span>].split(<span class="str">':'</span>)[<span class="num-lit">1</span>].strip()  <span class="cmt"># trust</span>
+row[<span class="str">'Result'</span>].split(<span class="str">'\n'</span>)[<span class="num-lit">4</span>].split(<span class="str">':'</span>)[<span class="num-lit">1</span>].strip()  <span class="cmt"># explanation</span>
+row[<span class="str">'Result'</span>].split(<span class="str">'\n'</span>)[<span class="num-lit">6</span>].split(<span class="str">':'</span>)[<span class="num-lit">1</span>].strip()  <span class="cmt"># attributes</span>
+</code></pre>
+
+<h3 class="david">David's improved version (from NLP_Notebook.ipynb)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">David's clean_gpt_json</span>
+<span class="kw">import</span> re, json
+
+<span class="kw">def</span> <span class="fn">clean_gpt_json</span>(gpt_response):
+    <span class="cmt"># Remove control characters (vertical tabs, etc.)</span>
+    cleaned = re.sub(r<span class="str">'[\x00-\x1f\x7f]'</span>, <span class="str">' '</span>, gpt_response)
+    <span class="cmt"># Fix incorrectly quoted booleans</span>
+    cleaned = re.sub(r<span class="str">'"(true|false|null)"'</span>, r<span class="str">'\1'</span>, cleaned)
+    <span class="cmt"># Strip markdown fences</span>
+    cleaned = re.sub(r<span class="str">'```(json)?'</span>, <span class="str">''</span>, cleaned).strip()
+    <span class="kw">return</span> json.loads(cleaned)
+</code></pre>
+
+<h3 class="ours">Our version (parse_response.py)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">parse_response.py</span>
+<span class="kw">import</span> json, re
+
+<span class="kw">def</span> <span class="fn">parse_llm_response</span>(raw: str) -> dict:
+    <span class="str">"""Parse LLM JSON response. Handles markdown fences,
+    control chars, capitalisation issues, and confidence clamping."""</span>
+
+    <span class="cmt"># Strip markdown fences (DeepSeek sometimes wraps in ```json)</span>
+    <span class="kw">if</span> raw.startswith(<span class="str">"```"</span>):
+        raw = raw.split(<span class="str">"\n"</span>, <span class="num-lit">1</span>)[<span class="num-lit">1</span>].rsplit(<span class="str">"```"</span>, <span class="num-lit">1</span>)[<span class="num-lit">0</span>].strip()
+
+    <span class="cmt"># Remove control characters</span>
+    raw = re.sub(r<span class="str">'[\x00-\x1f\x7f]'</span>, <span class="str">' '</span>, raw)
+
+    result = json.loads(raw)
+
+    <span class="cmt"># Normalise capitalisation (David's known GPT issue)</span>
+    <span class="kw">if</span> <span class="str">"sentiment"</span> <span class="kw">in</span> result:
+        result[<span class="str">"sentiment"</span>] = result[<span class="str">"sentiment"</span>].strip().capitalize()
+    <span class="kw">if</span> <span class="str">"emotion"</span> <span class="kw">in</span> result:
+        result[<span class="str">"emotion"</span>] = result[<span class="str">"emotion"</span>].strip().lower()
+    <span class="kw">if</span> <span class="str">"intent"</span> <span class="kw">in</span> result:
+        result[<span class="str">"intent"</span>] = result[<span class="str">"intent"</span>].strip().lower()
+
+    <span class="cmt"># Clamp confidence to valid range</span>
+    result[<span class="str">"confidence"</span>] = max(<span class="num-lit">0.0</span>, min(<span class="num-lit">1.0</span>,
+        float(result.get(<span class="str">"confidence"</span>, <span class="num-lit">0.5</span>))))
+
+    <span class="kw">return</span> result
+</code></pre>
+
+<div class="callout warn">
+<strong>David's watchout:</strong> He warned that GPT is flaky with capitalisation (positive vs Positive). By forcing JSON output and normalising in our parser, we eliminate this entirely.
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<h2 id="s3"><span class="num">03</span> The Prompt</h2>
+
+<p>David's prompts all follow the same structure: role assignment, context, task list, output format. We keep the structure but replace the generic role with our 5-section rich system prompt.</p>
+
+<h3 class="david">David's prompt (from OpenAI_Basic.ipynb)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">David's prompt — government trust analysis</span>
+<span class="kw">def</span> <span class="fn">get_response</span>(model, tokens, post, comment):
+    prompt = <span class="str">f"""
+    You are a political analyst analysing comments on social media.
+    You will see both the outbound post from government and the
+    comment back. Your tasks are to:
+
+    1. Classify the sentiment as Positive, Neutral or Negative
+    2. Identify trust attributes (comma separated)
+    3. Rate trust on a scale of 1-100
+
+    Post: {post}
+    Comment: {comment}
+    """</span>
+
+    messages = [{<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: prompt}]
+
+    response = <span class="var">client</span>.chat.completions.create(
+        model=model, messages=messages,
+        max_tokens=tokens, temperature=<span class="num-lit">0.0</span>
+    )
+    <span class="kw">return</span> response.choices[<span class="num-lit">0</span>].message.content
+</code></pre>
+
+<h3 class="ours">Our rich system prompt (loaded from versioned JSON)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">prompts/deepseek_v1.json</span>
+{
+  <span class="str">"version"</span>: <span class="str">"v1"</span>,
+
+  <span class="str">"role"</span>: <span class="str">"You are an expert classifier for British social media
+    posts from Facebook entertainment and community pages."</span>,
+
+  <span class="str">"taxonomy"</span>: {
+    <span class="str">"sentiment"</span>: {
+      <span class="str">"Positive"</span>: <span class="str">"Post expresses approval, joy, amusement, support..."</span>,
+      <span class="str">"Negative"</span>: <span class="str">"Post expresses disapproval, anger, frustration..."</span>,
+      <span class="str">"Neutral"</span>: <span class="str">"Post is informational, no clear emotion signal"</span>
+    },
+    <span class="str">"emotion"</span>: {
+      <span class="str">"joy"</span>: <span class="str">"Amusement, happiness, delight. Laughing emoji dominant"</span>,
+      <span class="str">"anger"</span>: <span class="str">"Frustration, outrage, irritation. Explicit complaints"</span>,
+      <span class="str">"sadness"</span>: <span class="str">"Grief, loss, disappointment"</span>,
+      <span class="str">"fear"</span>: <span class="str">"Worry, anxiety, concern about safety"</span>,
+      <span class="str">"surprise"</span>: <span class="str">"Unexpected reaction, shock"</span>,
+      <span class="str">"love"</span>: <span class="str">"Affection, admiration. Heart emoji + long text"</span>,
+      <span class="str">"neutral"</span>: <span class="str">"No emotional signal. Factual or dry statement"</span>
+    }
+  },
+
+  <span class="str">"rules"</span>: [
+    <span class="str">"IF laughing emoji on short caption THEN joy NOT anger"</span>,
+    <span class="str">"IF 'cool cool cool' or 'saving now' THEN negative (sarcasm)"</span>,
+    <span class="str">"IF prison page + real named event THEN topic=Crime NOT Humour"</span>,
+    <span class="str">"IF present tense declaration THEN intent=Announce NOT Inform"</span>,
+    <span class="str">"IF long post (200+ words) with heart emoji THEN love NOT joy"</span>
+  ],
+
+  <span class="str">"few_shots"</span>: [
+    {
+      <span class="str">"post"</span>: <span class="str">"When your cellmate steals your last biscuit 😂🤣"</span>,
+      <span class="str">"labels"</span>: {<span class="str">"sentiment"</span>: <span class="str">"Positive"</span>, <span class="str">"emotion"</span>: <span class="str">"joy"</span>,
+               <span class="str">"topic"</span>: <span class="str">"Humour"</span>, <span class="str">"intent"</span>: <span class="str">"Entertain"</span>},
+      <span class="str">"reason"</span>: <span class="str">"Laughing emoji is dominant signal. Comedic observation."</span>
+    }
+  ],
+
+  <span class="str">"output_format"</span>: <span class="str">"Return ONLY valid JSON: {\"sentiment\", \"emotion\",
+    \"topic\", \"intent\", \"toxicity\", \"confidence\": 0-1, \"reasoning\"}"</span>
+}
+</code></pre>
+
+<div class="callout pink">
+<strong>The prompt is the model:</strong> David proved at Fluency that a well-structured prompt produces reliable results even with smaller models. Our prompt is versioned (v1, v2, v3...) and iterated like a model. By v3 or v4, DeepSeek should be above 95% on patterns it has seen. Every disagreement with Claude adds a new rule.
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<h2 id="s4"><span class="num">04</span> Single Post Classification</h2>
+
+<h3 class="ours">classifier.py</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">classifier.py</span>
+<span class="kw">import</span> json
+<span class="kw">from</span> config <span class="kw">import</span> client, MODEL
+<span class="kw">from</span> parse_response <span class="kw">import</span> parse_llm_response
+
+<span class="kw">def</span> <span class="fn">load_system_prompt</span>(version: str = <span class="str">"v1"</span>) -> str:
+    <span class="str">"""Load versioned prompt and assemble into system message."""</span>
+    <span class="kw">with</span> open(<span class="str">f"prompts/deepseek_{version}.json"</span>) <span class="kw">as</span> f:
+        cfg = json.load(f)
+
+    sections = [
+        cfg[<span class="str">"role"</span>],
+        <span class="str">"\n\nTAXONOMY (locked):\n"</span> + json.dumps(cfg[<span class="str">"taxonomy"</span>], indent=<span class="num-lit">2</span>),
+        <span class="str">"\n\nDECISION RULES:\n"</span> + <span class="str">"\n"</span>.join(cfg[<span class="str">"rules"</span>]),
+        <span class="str">"\n\nEXAMPLES:\n"</span> + json.dumps(cfg[<span class="str">"few_shots"</span>], indent=<span class="num-lit">2</span>),
+        <span class="str">"\n\nOUTPUT FORMAT:\n"</span> + cfg[<span class="str">"output_format"</span>]
+    ]
+    <span class="kw">return</span> <span class="str">"\n"</span>.join(sections)
+
+
+<span class="kw">def</span> <span class="fn">classify_post</span>(post_text: str, system_prompt: str) -> dict:
+    <span class="str">"""Classify a single post using the rich system prompt.
+    Returns dict: sentiment, emotion, topic, intent, toxicity,
+                  confidence, reasoning."""</span>
+
+    messages = [
+        {<span class="str">"role"</span>: <span class="str">"system"</span>, <span class="str">"content"</span>: system_prompt},
+        {<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: <span class="str">f"Classify this post:\n{post_text}"</span>}
+    ]
+
+    <span class="kw">try</span>:
+        response = <span class="var">client</span>.chat.completions.create(
+            model=MODEL,
+            messages=messages,
+            temperature=<span class="num-lit">0.0</span>,
+            max_tokens=<span class="num-lit">500</span>,
+        )
+        raw = response.choices[<span class="num-lit">0</span>].message.content.strip()
+        <span class="kw">return</span> parse_llm_response(raw)
+
+    <span class="kw">except</span> (json.JSONDecodeError, KeyError) <span class="kw">as</span> e:
+        print(<span class="str">f"Parse error: {e}"</span>)
+        <span class="kw">return</span> <span class="kw">None</span>
+    <span class="kw">except</span> Exception <span class="kw">as</span> e:
+        print(<span class="str">f"API error: {e}"</span>)
+        <span class="kw">return</span> <span class="kw">None</span>
+</code></pre>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<h2 id="s5"><span class="num">05</span> Batch Processing</h2>
+
+<p>David uses <span class="inline-code">ThreadPoolExecutor</span> in every notebook: 100 workers for Apify scraping, 8 for classification. We use the same pattern with rate limit handling.</p>
+
+<h3 class="david">David's pattern (from Apify_Comments__1_.ipynb)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">David's concurrent pattern</span>
+<span class="kw">from</span> concurrent.futures <span class="kw">import</span> ThreadPoolExecutor, as_completed
+<span class="kw">from</span> tqdm <span class="kw">import</span> tqdm
+
+<span class="kw">def</span> <span class="fn">run_concurrently</span>(urls, max_workers=<span class="num-lit">100</span>):
+    results = []
+    <span class="kw">with</span> ThreadPoolExecutor(max_workers=max_workers) <span class="kw">as</span> executor:
+        futures = [executor.submit(facebook_comments, url)
+                   <span class="kw">for</span> url <span class="kw">in</span> urls]
+        <span class="kw">for</span> future <span class="kw">in</span> tqdm(as_completed(futures), total=len(futures)):
+            <span class="kw">try</span>:
+                results.append(future.result())
+            <span class="kw">except</span> Exception <span class="kw">as</span> e:
+                print(<span class="str">f"Error: {e}"</span>)
+    <span class="kw">return</span> results
+</code></pre>
+
+<h3 class="ours">Our adaptation (batch_classifier.py)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">batch_classifier.py</span>
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> time
+<span class="kw">from</span> concurrent.futures <span class="kw">import</span> ThreadPoolExecutor, as_completed
+<span class="kw">from</span> tqdm <span class="kw">import</span> tqdm
+<span class="kw">from</span> classifier <span class="kw">import</span> classify_post
+
+<span class="kw">def</span> <span class="fn">classify_batch</span>(df: pd.DataFrame,
+                   system_prompt: str,
+                   text_col: str = <span class="str">"post_content"</span>,
+                   max_workers: int = <span class="num-lit">8</span>) -> pd.DataFrame:
+    <span class="str">"""Classify all posts in a DataFrame.
+    Same ThreadPoolExecutor pattern as David, with:
+    - Rate limit backoff (429 handling)
+    - Progress bar (tqdm)
+    - Error collection
+    - Skip posts with text < 10 chars
+    """</span>
+    results = [<span class="kw">None</span>] * len(df)
+    errors = []
+
+    <span class="kw">def</span> <span class="fn">_process</span>(idx, text):
+        <span class="kw">try</span>:
+            <span class="kw">return</span> idx, classify_post(text, system_prompt)
+        <span class="kw">except</span> Exception <span class="kw">as</span> e:
+            <span class="kw">if</span> <span class="str">"429"</span> <span class="kw">in</span> str(e):
+                time.sleep(<span class="num-lit">2</span>)  <span class="cmt"># rate limit backoff</span>
+                <span class="kw">return</span> idx, classify_post(text, system_prompt)
+            <span class="kw">raise</span>
+
+    <span class="kw">with</span> ThreadPoolExecutor(max_workers=max_workers) <span class="kw">as</span> executor:
+        futures = {}
+        <span class="kw">for</span> idx, row <span class="kw">in</span> df.iterrows():
+            text = str(row[text_col]) <span class="kw">if</span> pd.notna(row[text_col]) <span class="kw">else</span> <span class="str">""</span>
+            <span class="kw">if</span> <span class="kw">not</span> text.strip() <span class="kw">or</span> len(text) < <span class="num-lit">10</span>:
+                <span class="kw">continue</span>
+            future = executor.submit(_process, idx, text)
+            futures[future] = idx
+
+        <span class="kw">for</span> future <span class="kw">in</span> tqdm(as_completed(futures),
+                           total=len(futures), desc=<span class="str">"Classifying"</span>):
+            <span class="kw">try</span>:
+                idx, result = future.result()
+                results[idx] = result
+            <span class="kw">except</span> Exception <span class="kw">as</span> e:
+                errors.append((futures[future], str(e)))
+
+    <span class="cmt"># Unpack into columns (same as David's pattern)</span>
+    <span class="kw">for</span> col <span class="kw">in</span> [<span class="str">"sentiment"</span>, <span class="str">"emotion"</span>, <span class="str">"intent"</span>, <span class="str">"topic"</span>,
+                <span class="str">"toxicity"</span>, <span class="str">"confidence"</span>, <span class="str">"reasoning"</span>]:
+        df[col] = [r.get(col) <span class="kw">if</span> r <span class="kw">else</span> <span class="kw">None</span> <span class="kw">for</span> r <span class="kw">in</span> results]
+
+    print(<span class="str">f"\nClassified {len(futures)} posts | Errors: {len(errors)}"</span>)
+    <span class="kw">return</span> df
+</code></pre>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<h2 id="s6"><span class="num">06</span> Three-Tier Routing</h2>
+
+<p>David trusts every GPT result. We add confidence-based routing. This is our addition &mdash; no equivalent in David's code.</p>
+
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">tier_router.py</span>
+<span class="kw">def</span> <span class="fn">apply_tier_routing</span>(df: pd.DataFrame) -> pd.DataFrame:
+    <span class="str">"""Route posts through ArtemisAI's 3-tier system.
+
+    Tier 1 (>0.85): Accept our model's label. Free.        ~75%
+    Tier 2 (0.60-0.85): DeepSeek Agent verifies.           ~18%
+    Tier 3 (<0.60): DeepSeek Agent relabels from scratch.   ~7%
+    """</span>
+    <span class="kw">def</span> <span class="fn">assign_tier</span>(conf):
+        <span class="kw">if</span> conf <span class="kw">is</span> <span class="kw">None</span>: <span class="kw">return</span> <span class="num-lit">3</span>
+        <span class="kw">if</span> conf >= <span class="num-lit">0.85</span>: <span class="kw">return</span> <span class="num-lit">1</span>
+        <span class="kw">if</span> conf >= <span class="num-lit">0.60</span>: <span class="kw">return</span> <span class="num-lit">2</span>
+        <span class="kw">return</span> <span class="num-lit">3</span>
+
+    df[<span class="str">"tier"</span>] = df[<span class="str">"confidence"</span>].apply(assign_tier)
+
+    <span class="cmt"># Summary</span>
+    <span class="kw">for</span> tier <span class="kw">in</span> [<span class="num-lit">1</span>, <span class="num-lit">2</span>, <span class="num-lit">3</span>]:
+        count = (df[<span class="str">"tier"</span>] == tier).sum()
+        pct = count / len(df) * <span class="num-lit">100</span>
+        print(<span class="str">f"  Tier {tier}: {count:,} posts ({pct:.1f}%)"</span>)
+
+    <span class="kw">return</span> df
+</code></pre>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<h2 id="s7"><span class="num">07</span> Local Model Inference</h2>
+
+<p>David runs HuggingFace models locally for emotion/sentiment. This is the same pattern our fine-tuned models will use.</p>
+
+<h3 class="david">David's local model (from Emotions.ipynb)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">David's emotion model — Emotions.ipynb</span>
+<span class="kw">from</span> transformers <span class="kw">import</span> AutoTokenizer, AutoModelForSequenceClassification
+
+tokenizer = AutoTokenizer.from_pretrained(
+    <span class="str">"joeddav/distilbert-base-uncased-go-emotions-student"</span>
+)
+model = AutoModelForSequenceClassification.from_pretrained(
+    <span class="str">"joeddav/distilbert-base-uncased-go-emotions-student"</span>
+)
+
+<span class="cmt"># Inference loop</span>
+<span class="kw">for</span> x <span class="kw">in</span> tqdm(range(len(df))):
+    snippet = df[<span class="str">'Post'</span>][x]
+    inputs = tokenizer(snippet, return_tensors=<span class="str">"pt"</span>,
+                       truncation=<span class="kw">True</span>, max_length=<span class="num-lit">512</span>)
+    outputs = model(**inputs)
+    probs = outputs.logits.softmax(dim=-<span class="num-lit">1</span>).tolist()[<span class="num-lit">0</span>]
+    db.append(probs)
+</code></pre>
+
+<h3 class="ours">Our fine-tuned model (same pattern, our weights)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">local_models.py</span>
+<span class="kw">import</span> torch
+<span class="kw">from</span> transformers <span class="kw">import</span> AutoTokenizer, AutoModelForSequenceClassification
+
+<span class="cmt"># Load our fine-tuned model (trained on 20K labelled posts)</span>
+tokenizer = AutoTokenizer.from_pretrained(<span class="str">"./models/sentiment_v1"</span>)
+model = AutoModelForSequenceClassification.from_pretrained(
+    <span class="str">"./models/sentiment_v1"</span>
+)
+
+<span class="kw">def</span> <span class="fn">predict_sentiment</span>(text: str) -> dict:
+    inputs = tokenizer(text, return_tensors=<span class="str">"pt"</span>,
+                       truncation=<span class="kw">True</span>, max_length=<span class="num-lit">256</span>)
+    <span class="kw">with</span> torch.no_grad():
+        outputs = model(**inputs)
+
+    probs = outputs.logits.softmax(dim=-<span class="num-lit">1</span>)[<span class="num-lit">0</span>]
+    labels = [<span class="str">"Negative"</span>, <span class="str">"Neutral"</span>, <span class="str">"Positive"</span>]
+    pred_idx = probs.argmax().item()
+
+    <span class="kw">return</span> {
+        <span class="str">"label"</span>: labels[pred_idx],
+        <span class="str">"confidence"</span>: probs[pred_idx].item(),
+        <span class="str">"all_probs"</span>: {l: p.item() <span class="kw">for</span> l, p <span class="kw">in</span> zip(labels, probs)}
+    }
+</code></pre>
+
+<div class="callout info">
+<strong>The difference:</strong> David's models are generic (trained on Twitter/Reddit). Ours are trained on 20K British Facebook posts with Claude/DeepSeek labels. Same inference pattern. Much better accuracy on our content.
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<h2 id="s8"><span class="num">08</span> End-to-End Pipeline</h2>
+
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">main.py — complete weekly pipeline</span>
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> json
+<span class="kw">from</span> classifier <span class="kw">import</span> classify_post, load_system_prompt
+<span class="kw">from</span> batch_classifier <span class="kw">import</span> classify_batch
+<span class="kw">from</span> tier_router <span class="kw">import</span> apply_tier_routing
+<span class="kw">from</span> local_models <span class="kw">import</span> predict_sentiment, predict_emotion
+<span class="kw">from</span> local_models <span class="kw">import</span> predict_topic, predict_intent
+<span class="kw">from</span> local_models <span class="kw">import</span> predict_toxicity, predict_language
+
+<span class="cmt"># ── Step 1: Load the rich system prompt (versioned) ──</span>
+system_prompt = load_system_prompt(<span class="str">"v4"</span>)
+
+<span class="cmt"># ── Step 2: Load new posts from Redshift ──</span>
+df = pd.read_sql(<span class="str">"""
+    SELECT post_id, post_content, page_name, created_time
+    FROM odl.dim_posts
+    WHERE LENGTH(post_content) > 10
+      AND created_time > CURRENT_DATE - INTERVAL '7 days'
+"""</span>, conn)
+
+<span class="cmt"># ── Step 3: Our 6 fine-tuned models label everything ──</span>
+<span class="kw">for</span> task, fn <span class="kw">in</span> [(<span class="str">"sentiment"</span>, predict_sentiment),
+                (<span class="str">"emotion"</span>, predict_emotion),
+                (<span class="str">"topic"</span>, predict_topic),
+                (<span class="str">"intent"</span>, predict_intent),
+                (<span class="str">"toxicity"</span>, predict_toxicity),
+                (<span class="str">"language"</span>, predict_language)]:
+    results = [fn(text) <span class="kw">for</span> text <span class="kw">in</span> tqdm(df[<span class="str">"post_content"</span>])]
+    df[task] = [r[<span class="str">"label"</span>] <span class="kw">for</span> r <span class="kw">in</span> results]
+    df[<span class="str">f"{task}_conf"</span>] = [r[<span class="str">"confidence"</span>] <span class="kw">for</span> r <span class="kw">in</span> results]
+
+<span class="cmt"># ── Step 4: Overall confidence = min across all tasks ──</span>
+conf_cols = [c <span class="kw">for</span> c <span class="kw">in</span> df.columns <span class="kw">if</span> c.endswith(<span class="str">"_conf"</span>)]
+df[<span class="str">"confidence"</span>] = df[conf_cols].min(axis=<span class="num-lit">1</span>)
+
+<span class="cmt"># ── Step 5: Apply tier routing ──</span>
+df = apply_tier_routing(df)
+
+<span class="cmt"># ── Step 6: Tier 2/3 go to DeepSeek Agent ──</span>
+tier2_3 = df[df[<span class="str">"tier"</span>].isin([<span class="num-lit">2</span>, <span class="num-lit">3</span>])].copy()
+tier2_3 = classify_batch(tier2_3, system_prompt, max_workers=<span class="num-lit">8</span>)
+df.update(tier2_3)
+
+<span class="cmt"># ── Step 7: Low-conf DeepSeek posts go to Claude ──</span>
+low_conf = df[(df[<span class="str">"tier"</span>].isin([<span class="num-lit">2</span>, <span class="num-lit">3</span>])) & (df[<span class="str">"confidence"</span>] < <span class="num-lit">0.80</span>)]
+<span class="cmt"># ... Claude verification and prompt update logic</span>
+
+<span class="cmt"># ── Step 8: Write to Redshift ──</span>
+df.to_sql(<span class="str">"post_labels"</span>, conn, if_exists=<span class="str">"append"</span>, index=<span class="kw">False</span>)
+print(<span class="str">f"Done: {len(df)} posts labelled"</span>)
+</code></pre>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<h2 id="s9"><span class="num">09</span> Summary</h2>
+
+<table>
+<tr><th>Pattern</th><th>David (Fluency)</th><th>Us (ArtemisAI)</th></tr>
+<tr><td>API client</td><td>OpenAI GPT-3.5-turbo</td><td>DeepSeek V3 (same lib, change base_url)</td></tr>
+<tr><td>Prompt</td><td>Generic role + task list</td><td>Rich versioned 5-section system prompt</td></tr>
+<tr><td>Output parsing</td><td>Split on newlines (fragile)</td><td>JSON forced output + parse_llm_response()</td></tr>
+<tr><td>Concurrency</td><td>ThreadPoolExecutor (100 workers)</td><td>Same pattern (8 workers + rate limit backoff)</td></tr>
+<tr><td>Local models</td><td>distilbert, twitter-roberta</td><td>XLM-RoBERTa fine-tuned on 20K posts</td></tr>
+<tr><td>Topic modelling</td><td>LDA (unsupervised, 40 clusters)</td><td>LLM classification (locked 13 labels)</td></tr>
+<tr><td>Confidence</td><td>None</td><td>0.0-1.0 score per prediction</td></tr>
+<tr><td>Quality control</td><td>Trust every result</td><td>3-tier routing + Claude verification</td></tr>
+<tr><td>Cost per post</td><td>~$0.002 (GPT)</td><td>~$0.0003 (DeepSeek) = 7x cheaper</td></tr>
+</table>
+
+<div class="callout" style="margin-top:2rem">
+<strong>Bottom line:</strong> David's code works commercially at Fluency across 10+ clients. We keep his proven patterns (API client, ThreadPoolExecutor, tqdm progress, DataFrame in/out) and improve three things: better prompt (rich versioned system prompt from Claude's reasoning), safer parsing (JSON instead of string splitting), and smarter routing (3-tier confidence system instead of trusting every result).
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<h2 id="s10"><span class="num">10</span> Zero-Shot Classification</h2>
+
+<p>David uses HuggingFace's <span class="inline-code">zero-shot-classification</span> pipeline to classify posts into custom categories <em>without any training data</em>. He defines tag pairs and the model scores each post. This is powerful for new classification tasks before we have labelled data.</p>
+
+<h3 class="david">David's zero-shot (from Emotions.ipynb)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">David's zero-shot — Emotions.ipynb</span>
+<span class="kw">from</span> transformers <span class="kw">import</span> pipeline
+
+classifier = pipeline(<span class="str">"zero-shot-classification"</span>)
+
+<span class="cmt"># Define tag pairs — the model scores both sides</span>
+<span class="var">tag_list</span> = [
+    [<span class="str">'Rational'</span>, <span class="str">'Emotional'</span>],
+    [<span class="str">'Self Revealing'</span>, <span class="str">'Fact Oriented'</span>],
+    [<span class="str">'Action Seeking'</span>, <span class="str">'Information Seeking'</span>]
+]
+
+<span class="var">tags</span> = tag_list[<span class="num-lit">2</span>]  <span class="cmt"># pick a pair</span>
+
+dfs = []
+
+<span class="kw">for</span> x <span class="kw">in</span> tqdm(range(len(df))):
+    text = df[<span class="str">'Post'</span>][x]
+
+    res = classifier(str(text), tags, multi_label=<span class="kw">False</span>)
+
+    df_temp = pd.DataFrame([res[<span class="str">'scores'</span>]])
+    df_temp.columns = res[<span class="str">'labels'</span>]
+    df_temp[<span class="str">'Post'</span>] = str(df[<span class="str">'Post'</span>][x])
+
+    dfs.append(df_temp)
+
+pd.concat(dfs).to_clipboard()
+</code></pre>
+
+<h3 class="ours">Our adaptation: zero-shot for new tasks before training</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">zero_shot_classifier.py</span>
+<span class="kw">from</span> transformers <span class="kw">import</span> pipeline
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">from</span> tqdm <span class="kw">import</span> tqdm
+
+classifier = pipeline(<span class="str">"zero-shot-classification"</span>,
+                       model=<span class="str">"facebook/bart-large-mnli"</span>)
+
+<span class="kw">def</span> <span class="fn">zero_shot_classify</span>(df: pd.DataFrame,
+                       text_col: str,
+                       labels: list,
+                       multi_label: bool = <span class="kw">False</span>) -> pd.DataFrame:
+    <span class="str">"""Classify posts into custom categories with no training data.
+
+    Use this when:
+    - A new client asks for a category we have never trained on
+    - We want to prototype a new NLP task quickly
+    - We need psycholinguistic profiling (David's use case)
+
+    Args:
+        labels: e.g. ['Rational', 'Emotional'] or
+                ['product_feedback', 'customer_service', 'general']
+    """</span>
+    results = []
+
+    <span class="kw">for</span> text <span class="kw">in</span> tqdm(df[text_col], desc=<span class="str">"Zero-shot"</span>):
+        res = classifier(str(text), labels, multi_label=multi_label)
+        row = {label: score
+               <span class="kw">for</span> label, score <span class="kw">in</span> zip(res[<span class="str">'labels'</span>], res[<span class="str">'scores'</span>])}
+        row[<span class="str">'predicted'</span>] = res[<span class="str">'labels'</span>][<span class="num-lit">0</span>]
+        row[<span class="str">'confidence'</span>] = res[<span class="str">'scores'</span>][<span class="num-lit">0</span>]
+        results.append(row)
+
+    <span class="kw">return</span> pd.concat([df.reset_index(drop=<span class="kw">True</span>),
+                      pd.DataFrame(results)], axis=<span class="num-lit">1</span>)
+
+<span class="cmt"># Example: psycholinguistic profiling (David's exact use case)</span>
+df = zero_shot_classify(df, <span class="str">"post_content"</span>,
+                        [<span class="str">"Rational"</span>, <span class="str">"Emotional"</span>])
+
+<span class="cmt"># Example: new client wants virality type scoring</span>
+df = zero_shot_classify(df, <span class="str">"post_content"</span>,
+                        [<span class="str">"viral_potential"</span>, <span class="str">"niche_content"</span>,
+                         <span class="str">"evergreen"</span>, <span class="str">"time_sensitive"</span>],
+                        multi_label=<span class="kw">True</span>)
+</code></pre>
+
+<div class="callout info">
+<strong>When to use zero-shot vs our fine-tuned models:</strong> Zero-shot is for rapid prototyping and one-off tasks. No training needed, works immediately, but accuracy is 70-80%. Once we have enough labels for a task, we fine-tune a model which gets to 85%+. David uses zero-shot for psycholinguistic profiling (Rational/Emotional) because it is a one-off analysis, not a recurring pipeline.
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<h2 id="s11"><span class="num">11</span> Brand Equity Scoring</h2>
+
+<p>David structures multi-attribute scoring prompts for brand analysis. Each driver gets a -1/0/+1 score. He uses this for Asda, Goodyear, Barclays, and Bobcat. This pattern is directly applicable to our future brand sentiment features.</p>
+
+<h3 class="david">David's brand equity prompt (from OpenAI_Basic.ipynb)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">David's brand equity — OpenAI_Basic.ipynb</span>
+<span class="kw">def</span> <span class="fn">get_response</span>(model, tokens, post):
+    prompt = <span class="str">f"""
+    Please analyze the following social media post to assess its
+    sentiment toward Asda across specific brand equity drivers.
+
+    Each driver should be rated as follows:
+    - **1** if the driver is present and has a positive sentiment
+    - **0** if the driver is not relevant or neutral
+    - **-1** if the driver is present and has a negative sentiment
+
+    The drivers are: status, control, connection, individuality,
+    improvement, safety, nurturing, vitality, exploration, pleasure.
+
+    Here is the post: {post}
+
+    Please return your response as a JSON object with each driver
+    as a key and the score as the value.
+    """</span>
+
+    messages = [{<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: prompt}]
+    response = <span class="var">client</span>.chat.completions.create(
+        model=model, messages=messages,
+        max_tokens=tokens, temperature=<span class="num-lit">0.0</span>
+    )
+    <span class="kw">return</span> response
+</code></pre>
+
+<h3 class="david">David's Bobcat pillar classification (from OpenAI_Basic.ipynb)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">David's pillar classification — OpenAI_Basic.ipynb</span>
+<span class="kw">def</span> <span class="fn">get_response</span>(model, tokens, post_message):
+    pillars = {
+        <span class="str">"Move your Mountains"</span>: <span class="str">"""Build trust and value in Bobcat
+            by empowering our community with knowledge and resources.
+            Example: Step-by-step guides, Expert advice, Tool tips"""</span>,
+
+        <span class="str">"Change What's Possible"</span>: <span class="str">"""Showcase innovation and
+            versatility. Example: New attachments, Product launches"""</span>,
+    }
+
+    prompt = <span class="str">f"""Classify this post into one of these pillars:
+    {json.dumps(pillars, indent=2)}
+
+    Post: {post_message}
+
+    Return JSON: {{"pillar": "pillar name"}}"""</span>
+
+    <span class="cmt">...</span>
+
+<span class="cmt"># Batch loop</span>
+db = []
+<span class="kw">for</span> post <span class="kw">in</span> tqdm(df[<span class="str">'Post'</span>]):
+    res = get_response(base_model, <span class="num-lit">400</span>, post)
+    <span class="kw">try</span>:
+        db.append([post, json.loads(res.choices[<span class="num-lit">0</span>].message.content)[<span class="str">'pillar'</span>]])
+    <span class="kw">except</span>:
+        <span class="kw">pass</span>
+</code></pre>
+
+<h3 class="ours">Our adaptation: multi-attribute page analysis</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">brand_equity.py — future Sprint 9+ feature</span>
+<span class="kw">def</span> <span class="fn">build_brand_equity_prompt</span>(page_name: str,
+                              drivers: dict) -> str:
+    <span class="str">"""Build a brand equity scoring prompt.
+
+    David's pattern: define drivers with descriptions,
+    score each -1/0/+1, return as JSON.
+
+    Args:
+        page_name: e.g. "The HMP Bible"
+        drivers: dict of driver_name: description
+    """</span>
+    driver_text = <span class="str">"\n"</span>.join(
+        [<span class="str">f"- {name}: {desc}"</span> <span class="kw">for</span> name, desc <span class="kw">in</span> drivers.items()]
+    )
+
+    <span class="kw">return</span> <span class="str">f"""Analyze this Facebook post from {page_name} and
+score each engagement driver:
+
+{driver_text}
+
+Score each driver:
+  1  = driver present, positive engagement
+  0  = not relevant or neutral
+ -1  = driver present, negative engagement
+
+Return ONLY valid JSON with driver names as keys and scores as values.
+Include "reasoning": brief explanation."""</span>
+
+<span class="cmt"># ArtemisAI engagement drivers (customisable per client)</span>
+<span class="var">ARTEMIS_DRIVERS</span> = {
+    <span class="str">"humour"</span>: <span class="str">"Post uses comedy, memes, or wit to engage"</span>,
+    <span class="str">"community"</span>: <span class="str">"Post builds in-group identity or belonging"</span>,
+    <span class="str">"outrage"</span>: <span class="str">"Post provokes anger or moral indignation"</span>,
+    <span class="str">"nostalgia"</span>: <span class="str">"Post references shared memories or past"</span>,
+    <span class="str">"empathy"</span>: <span class="str">"Post shows vulnerability or seeks support"</span>,
+    <span class="str">"information"</span>: <span class="str">"Post provides useful facts or news"</span>,
+}
+</code></pre>
+
+<div class="callout warn">
+<strong>Future use:</strong> This pattern becomes relevant in Sprint 9+ when we build audience engagement analysis. David uses it commercially for brand perception. We can use the same -1/0/+1 scoring for content strategy recommendations: "posts scoring +1 on humour and community get 3x more engagement on this page."
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<h2 id="s12"><span class="num">12</span> Cutthrough / Spam Detection</h2>
+
+<p>David classifies whether a comment is relevant to the original post (boolean True/False). Simple but powerful for filtering noise. He also has a separate spam detection prompt for construction equipment comments.</p>
+
+<h3 class="david">David's cutthrough prompt (from OpenAI_Basic.ipynb)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">David's cutthrough — OpenAI_Basic.ipynb</span>
+<span class="kw">def</span> <span class="fn">get_prompt</span>(post, comment):
+    prompt_template = <span class="str">f'''You are an analyst analyzing comments on
+social media. You will see both the outbound post from the
+government and the comment back. You need to classify the
+comment as relevant to the outbound post or not.
+
+Please evaluate the relevance of the comment & return a
+boolean True or False for the classification.
+
+**Here is the post:**
+{post}
+
+**Here is the comment:**
+{comment}
+'''</span>
+    <span class="kw">return</span> prompt_template
+</code></pre>
+
+<h3 class="david">David's spam detection (from Apify_Comments__1_.ipynb)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">David's spam detection — Apify_Comments__1_.ipynb</span>
+<span class="kw">def</span> <span class="fn">get_response</span>(model, tokens, post):
+    prompt = <span class="str">f"""
+    Analyze the following comment about a construction loader
+    and provide the following information in JSON format:
+
+    1. "is_spam": Is this comment spam? Return True or False.
+    2. "is_listing": Is this a product listing trying to sell?
+       Return True or False.
+    3. "is_competitor_mention": Does it mention a competitor?
+       Return True or False.
+    4. "sentiment": Positive, Neutral, or Negative.
+
+    Comment: {post}
+    """</span>
+    <span class="cmt">...</span>
+</code></pre>
+
+<h3 class="ours">Our adaptation: comment relevance + spam filtering</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">spam_filter.py</span>
+<span class="kw">def</span> <span class="fn">build_relevance_prompt</span>(post_text: str,
+                           comment_text: str) -> str:
+    <span class="str">"""Check if a comment is relevant to the post.
+    David's pattern: boolean classification.
+
+    Use before NLP classification to filter noise.
+    Irrelevant comments get excluded from training data.
+    """</span>
+    <span class="kw">return</span> <span class="str">f"""You are a social media analyst. Determine if
+this comment is relevant to the original post.
+
+Return ONLY valid JSON:
+{{"is_relevant": true/false, "is_spam": true/false,
+  "reason": "one sentence"}}
+
+Original post: {post_text}
+Comment: {comment_text}"""</span>
+
+
+<span class="kw">def</span> <span class="fn">filter_spam_comments</span>(df: pd.DataFrame) -> pd.DataFrame:
+    <span class="str">"""Pre-filter comments before NLP classification.
+
+    Removes:
+    - Spam (promotional links, bot comments)
+    - Irrelevant comments (not about the post)
+    - Non-English comments (unless page is multilingual)
+
+    Run this BEFORE classify_batch() to save API costs.
+    """</span>
+    system_prompt = <span class="str">"You filter social media comments for relevance."</span>
+    results = classify_batch(df, system_prompt,
+                             text_col=<span class="str">"comment_text"</span>,
+                             max_workers=<span class="num-lit">8</span>)
+
+    df[<span class="str">"is_relevant"</span>] = results[<span class="str">"is_relevant"</span>]
+    df[<span class="str">"is_spam"</span>] = results[<span class="str">"is_spam"</span>]
+
+    clean = df[(df[<span class="str">"is_relevant"</span>] == <span class="kw">True</span>) &
+               (df[<span class="str">"is_spam"</span>] == <span class="kw">False</span>)]
+
+    print(<span class="str">f"Filtered: {len(df)} -> {len(clean)} "
+          f"({len(df)-len(clean)} removed)"</span>)
+    <span class="kw">return</span> clean
+</code></pre>
+
+<div class="callout">
+<strong>Why this matters:</strong> Our 3.28M comments include a lot of noise: emoji-only replies, tag-a-friend chains, spam links. Running relevance filtering before NLP classification saves DeepSeek API costs (skip irrelevant comments) and improves training data quality (only train on meaningful content).
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<h2 id="s13"><span class="num">13</span> Customer Segmentation</h2>
+
+<p>David builds audience segments using K-Modes clustering on survey data, then trains an XGBoost classifier so new respondents can be assigned to segments automatically. This is the same concept as our model training: cluster first to find patterns, then build a classifier to apply those patterns at scale.</p>
+
+<h3 class="david">David's segmentation (from BHA_Segmentation.ipynb)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">David's K-Modes clustering — BHA_Segmentation.ipynb</span>
+<span class="kw">from</span> kmodes.kmodes <span class="kw">import</span> KModes
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="cmt"># Step 1: Find optimal number of clusters (elbow method)</span>
+cost = []
+K = range(<span class="num-lit">1</span>, <span class="num-lit">20</span>)
+<span class="kw">for</span> k <span class="kw">in</span> list(K):
+    kmode = KModes(n_clusters=k, init=<span class="str">"random"</span>, n_init=<span class="num-lit">5</span>)
+    kmode.fit_predict(df_label[variables].fillna(<span class="str">'Other'</span>))
+    cost.append(kmode.cost_)
+
+plt.plot(K, cost, <span class="str">'x-'</span>)
+plt.xlabel(<span class="str">'No. of clusters'</span>)
+plt.title(<span class="str">'Elbow Curve'</span>)
+plt.show()
+
+<span class="cmt"># Step 2: Cluster with optimal k</span>
+kmode = KModes(n_clusters=<span class="num-lit">14</span>, init=<span class="str">"random"</span>, n_init=<span class="num-lit">5</span>)
+clusters = kmode.fit_predict(df_label[variables].fillna(<span class="str">'Other'</span>))
+df[<span class="str">'Cluster'</span>] = clusters
+</code></pre>
+
+<h3 class="david">David's golden question classifier (from BHA_Segmentation.ipynb)</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">David's XGBoost classifier — BHA_Segmentation.ipynb</span>
+<span class="kw">import</span> xgboost <span class="kw">as</span> xgb
+<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
+<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> classification_report
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> LabelEncoder
+
+le = LabelEncoder()
+y = le.fit_transform(df[<span class="str">'New seg'</span>])
+
+<span class="cmt"># Features = subset of survey questions ("golden questions")</span>
+X = df.drop(columns=<span class="str">'New seg'</span>).fillna(-<span class="num-lit">1</span>)
+
+<span class="cmt"># Train XGBoost to predict segment from golden questions</span>
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=<span class="num-lit">0.2</span>, random_state=<span class="num-lit">42</span>
+)
+
+model = xgb.XGBClassifier(use_label_encoder=<span class="kw">False</span>, eval_metric=<span class="str">'mlogloss'</span>)
+model.fit(X_train, y_train)
+
+<span class="cmt"># Check accuracy</span>
+df_res = pd.DataFrame(model.predict(X))
+df_res[<span class="str">'y'</span>] = y
+df_res[<span class="str">'accurate'</span>] = (df_res[<span class="num-lit">0</span>] == df_res[<span class="str">'y'</span>]).astype(int)
+print(df_res[<span class="str">'accurate'</span>].mean())  <span class="cmt"># accuracy score</span>
+</code></pre>
+
+<h3 class="ours">Our parallel: the same train-then-predict concept</h3>
+<pre><code><span class="copy-btn" onclick="copyCode(this)">Copy</span><span class="label">conceptual parallel — how this maps to our pipeline</span>
+<span class="cmt"># David's approach:
+#   1. Cluster survey data to find segments (unsupervised)
+#   2. Train XGBoost on golden questions to PREDICT segments
+#   3. New survey respondents get auto-assigned to a segment
+#
+# Our approach (same concept, different domain):
+#   1. Claude + DeepSeek label 18K posts (= creating "segments")
+#   2. Train 6 NLP models on labelled data to PREDICT labels
+#   3. New posts get auto-labelled by the trained models
+#
+# The principle is identical:
+#   - First: create ground truth (clustering / LLM labelling)
+#   - Then: train a cheap fast model to replicate it at scale
+#   - Finally: deploy for automatic classification of new data</span>
+
+<span class="cmt"># David's golden question idea applies to us too:
+# Not all features matter equally. XGBoost feature importance
+# shows which survey questions predict segments best.
+# Similarly, our weighted loss shows which training examples
+# matter most (Claude labels > DeepSeek > synthetic).</span>
+</code></pre>
+
+<div class="callout pink">
+<strong>The deeper lesson from David's segmentation:</strong> He does not cluster new data every time. He clusters ONCE to define segments, then builds a classifier to assign new respondents cheaply. We do the same: label ONCE with Claude+DeepSeek (expensive but accurate), then train models to label new posts cheaply. The expensive step creates the ground truth. The cheap step scales it. This is the pattern across all of David's work.
+</div>
+
+<hr class="divider">
+<p style="color:var(--text-muted);font-size:.85rem;text-align:center;margin-top:2rem">ArtemisAI &middot; Implementation Guide &middot; April 2026 &middot; Asad</p>
+
+<script>
+function copyCode(btn){
+    const pre=btn.closest('pre');
+    const code=pre.querySelector('code');
+    const text=code.innerText.replace(/^Copy\n?/,'').replace(/\n[A-Z\s&—.]+$/,'');
+    navigator.clipboard.writeText(text).then(()=>{
+        btn.textContent='Copied!';btn.style.background='var(--accent)';btn.style.color='var(--bg)';
+        setTimeout(()=>{btn.textContent='Copy';btn.style.background='';btn.style.color='';},1500);
+    });
+}
+</script>
+</body>
+</html>
