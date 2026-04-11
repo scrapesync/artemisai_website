@@ -516,9 +516,54 @@ body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-he
 .gantt-today-line::before{content:'TODAY';position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(248,113,113,.9);white-space:nowrap;}
 .gantt-bg-line{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.04);}
 
+
+@keyframes loginShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
 </style>
 </head>
 <body>
+
+<!-- LOGIN OVERLAY -->
+<div id="login-overlay" style="display:none;position:fixed;inset:0;background:#060a13;z-index:99999;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;">
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,170,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,170,0.02) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 60% 60% at 50% 50%,black,transparent)"></div>
+  <div style="position:absolute;width:500px;height:500px;border-radius:50%;filter:blur(120px);background:radial-gradient(circle,rgba(0,212,170,0.06),transparent 70%);top:5%;left:10%;pointer-events:none"></div>
+  <div style="position:absolute;width:400px;height:400px;border-radius:50%;filter:blur(100px);background:radial-gradient(circle,rgba(99,102,241,0.05),transparent 70%);bottom:5%;right:10%;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;width:100%;max-width:400px;padding:0 20px;">
+    <div style="background:#0f1729;border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:2.5rem 2.2rem;box-shadow:0 40px 80px rgba(0,0,0,0.5);position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,#00d4aa,transparent)"></div>
+      <!-- Logo -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1.8rem;">
+        <svg width="32" height="32" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg2)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg2)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg2)"/><defs><linearGradient id="lg2" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
+        <span style="font-size:1.2rem;font-weight:700;letter-spacing:0.1em;color:#e8ecf4;">ARTEMIS</span>
+      </div>
+      <h2 style="text-align:center;font-size:1.4rem;font-weight:700;color:#e8ecf4;margin-bottom:0.3rem;letter-spacing:-0.02em;">Sprint Command Centre</h2>
+      <p style="text-align:center;font-size:0.85rem;color:#7b8ba8;margin-bottom:1.8rem;font-weight:300;">Sign in to access your dashboard</p>
+      <!-- Form -->
+      <div style="margin-bottom:1rem;">
+        <label style="display:block;font-size:0.72rem;font-weight:500;color:#7b8ba8;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:0.4rem;font-family:'JetBrains Mono',monospace;">Username</label>
+        <input id="login-username" type="text" placeholder="Enter your username" autocomplete="username" autofocus
+          style="width:100%;padding:0.75rem 1rem;background:#0c1221;border:1px solid rgba(255,255,255,0.07);border-radius:10px;color:#e8ecf4;font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;"
+          onfocus="this.style.borderColor='#00d4aa';this.style.boxShadow='0 0 0 3px rgba(0,212,170,0.1)'"
+          onblur="this.style.borderColor='rgba(255,255,255,0.07)';this.style.boxShadow='none'"
+          onkeydown="if(event.key==='Enter')document.getElementById('login-password').focus()">
+      </div>
+      <div style="margin-bottom:1.2rem;">
+        <label style="display:block;font-size:0.72rem;font-weight:500;color:#7b8ba8;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:0.4rem;font-family:'JetBrains Mono',monospace;">Password</label>
+        <input id="login-password" type="password" placeholder="Enter your password" autocomplete="current-password"
+          style="width:100%;padding:0.75rem 1rem;background:#0c1221;border:1px solid rgba(255,255,255,0.07);border-radius:10px;color:#e8ecf4;font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;"
+          onfocus="this.style.borderColor='#00d4aa';this.style.boxShadow='0 0 0 3px rgba(0,212,170,0.1)'"
+          onblur="this.style.borderColor='rgba(255,255,255,0.07)';this.style.boxShadow='none'"
+          onkeydown="if(event.key==='Enter')attemptLogin()">
+      </div>
+      <button onclick="attemptLogin()" id="login-btn"
+        style="width:100%;padding:0.85rem;background:#00d4aa;color:#060a13;border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:0.93rem;font-weight:600;cursor:pointer;transition:all 0.2s;letter-spacing:0.01em;">
+        Sign In
+      </button>
+      <div id="login-error" style="display:none;text-align:center;color:#f87171;font-size:0.8rem;margin-top:0.9rem;padding:0.55rem;background:rgba(248,113,113,0.08);border-radius:8px;"></div>
+      <p style="text-align:center;font-size:0.7rem;color:#4a5568;margin-top:1.4rem;line-height:1.5;">Access restricted to ArtemisAI team members</p>
+    </div>
+  </div>
+</div>
+
 
 <div class="tab-bar">
   <div class="tab-logo">
@@ -1905,6 +1950,112 @@ function exportFullCSV(){
   document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
 }
 
+
+/* ═══ AUTH ═══ */
+const AUTH_KEY = 'artemis_sprint_session';
+
+function checkAuth(){
+  const sess = sessionStorage.getItem(AUTH_KEY) || localStorage.getItem(AUTH_KEY);
+  if(!sess){
+    showLoginOverlay();
+    return false;
+  }
+  try{
+    const user = JSON.parse(sess);
+    const el = document.getElementById('user-display');
+    const nm = document.getElementById('user-name');
+    if(el){ el.style.display='flex'; }
+    if(nm){ nm.textContent = user.name || user.username; }
+    return true;
+  }catch(e){
+    showLoginOverlay();
+    return false;
+  }
+}
+
+function showLoginOverlay(){
+  const ov = document.getElementById('login-overlay');
+  if(ov){ ov.style.display='flex'; }
+  // Hide main content while not logged in
+  document.querySelectorAll('.tab-bar, .page, #sprint-track-bar').forEach(el=>el.style.visibility='hidden');
+  setTimeout(()=>{ const u=document.getElementById('login-username'); if(u)u.focus(); },100);
+}
+
+function hideLoginOverlay(){
+  const ov = document.getElementById('login-overlay');
+  if(ov){ ov.style.display='none'; }
+  document.querySelectorAll('.tab-bar, .page, #sprint-track-bar').forEach(el=>el.style.visibility='visible');
+}
+
+async function attemptLogin(){
+  const btn = document.getElementById('login-btn');
+  const err = document.getElementById('login-error');
+  const username = (document.getElementById('login-username').value||'').trim().toLowerCase();
+  const password = (document.getElementById('login-password').value||'').trim();
+
+  if(!username||!password){
+    showLoginError('Please enter username and password');
+    return;
+  }
+
+  btn.disabled=true;
+  btn.textContent='Signing in...';
+  err.style.display='none';
+
+  try{
+    const resp = await fetch(API_BASE, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'login', username, password})
+    });
+    const data = await resp.json();
+
+    if(data.ok && data.user){
+      const sess = {
+        username: data.user.username,
+        name: data.user.full_name,
+        role: data.user.role,
+        loginAt: new Date().toISOString()
+      };
+      localStorage.setItem(AUTH_KEY, JSON.stringify(sess));
+      hideLoginOverlay();
+      const el=document.getElementById('user-display');
+      const nm=document.getElementById('user-name');
+      if(el)el.style.display='flex';
+      if(nm)nm.textContent=sess.name;
+      btn.disabled=false;
+      btn.textContent='Sign In';
+    } else {
+      showLoginError(data.error||'Invalid username or password');
+      btn.disabled=false;
+      btn.textContent='Sign In';
+    }
+  }catch(e){
+    showLoginError('Connection error — check network');
+    btn.disabled=false;
+    btn.textContent='Sign In';
+  }
+}
+
+function showLoginError(msg){
+  const err=document.getElementById('login-error');
+  if(err){err.textContent=msg;err.style.display='block';}
+  const card=document.querySelector('#login-overlay > div > div');
+  if(card){card.style.animation='none';requestAnimationFrame(()=>{card.style.animation='loginShake 0.35s ease';});}
+}
+
+function handleLogout(){
+  if(!confirm('Sign out of ArtemisAI?'))return;
+  localStorage.removeItem(AUTH_KEY);
+  sessionStorage.removeItem(AUTH_KEY);
+  showLoginOverlay();
+  document.getElementById('user-name').textContent='';
+}
+
+
+if(!checkAuth()){
+  // Will show login — init continues in background
+}
 loadST();
 const ALL_DONE=['Sprint 1','Sprint 2','Sprint 3'];
 ALL_DONE.forEach(sn=>{
