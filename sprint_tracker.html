@@ -566,7 +566,7 @@ body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-he
 
 
 <div class="tab-bar">
-  <div class="tab-logo">
+  <div class="tab-logo" onclick="window.location.href='index.html'" style="cursor:pointer" title="Back to home" style="cursor:pointer" title="Back to home">
     <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
       <polygon points="15,1 29,27 1,27" fill="rgba(0,212,170,0.07)" stroke="#00d4aa" stroke-width="1.5" stroke-linejoin="round"/>
       <polygon points="15,1 22,14 8,14" fill="rgba(0,212,170,0.2)" stroke="#00d4aa" stroke-width="1" stroke-linejoin="round"/>
@@ -1953,9 +1953,11 @@ function exportFullCSV(){
 
 /* ═══ AUTH ═══ */
 const AUTH_KEY = 'artemis_sprint_session';
+const UNIFIED_SK = 'artemis_session';
 
 function checkAuth(){
-  const sess = sessionStorage.getItem(AUTH_KEY) || localStorage.getItem(AUTH_KEY);
+  // Accept either sprint session or unified admin session
+  const sess = sessionStorage.getItem(AUTH_KEY) || localStorage.getItem(AUTH_KEY) || localStorage.getItem(UNIFIED_SK);
   if(!sess){
     showLoginOverlay();
     return false;
@@ -2018,6 +2020,7 @@ async function attemptLogin(){
         loginAt: new Date().toISOString()
       };
       localStorage.setItem(AUTH_KEY, JSON.stringify(sess));
+      localStorage.setItem(UNIFIED_SK, JSON.stringify(sess));
       hideLoginOverlay();
       const el=document.getElementById('user-display');
       const nm=document.getElementById('user-name');
@@ -2045,10 +2048,17 @@ function showLoginError(msg){
 }
 
 function handleLogout(){
+  if(!confirm('Sign out?'))return;
+  localStorage.removeItem('artemis_sprint_session');
+  localStorage.removeItem('artemis_session');
+  window.location.href='index.html';
+  return;
+  // original below (unreachable):
   if(!confirm('Sign out of ArtemisAI?'))return;
   localStorage.removeItem(AUTH_KEY);
   sessionStorage.removeItem(AUTH_KEY);
-  showLoginOverlay();
+  localStorage.removeItem('artemis_session');
+  window.location.href='index.html';
   document.getElementById('user-name').textContent='';
 }
 

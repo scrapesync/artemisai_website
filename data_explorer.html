@@ -189,9 +189,90 @@
             .data-panel-header{flex-direction:column;align-items:flex-start}
             .footer-content{flex-direction:column;gap:.8rem}
         }
-    </style>
+    
+nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.88);border-bottom:1px solid rgba(255,255,255,0.05);transition:background .3s}
+nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0,0,0,.3)}
+.site-logo{font-size:1.15rem;font-weight:700;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.65rem;flex-shrink:0}
+.site-logo-mark{width:32px;height:32px}.site-logo-mark svg{width:100%;height:100%}
+.site-nav-links{display:flex;align-items:center;gap:1.4rem;list-style:none;margin:0;padding:0}
+.site-nav-links a{color:#7b8ba8;text-decoration:none;font-size:.85rem;font-weight:400;letter-spacing:.01em;transition:color .25s;white-space:nowrap}
+.site-nav-links a:hover{color:#e8ecf4}
+.nav-pill-outline{padding:.42rem 1rem!important;border:1px solid rgba(0,212,170,.3)!important;border-radius:7px;color:#00d4aa!important;font-size:.8rem!important}
+.nav-pill-outline:hover{background:rgba(0,212,170,.07)!important;border-color:rgba(0,212,170,.6)!important}
+.nav-pill-solid{padding:.42rem 1.1rem!important;background:#00d4aa!important;color:#060a13!important;border-radius:7px;font-weight:600!important;font-size:.8rem!important}
+.nav-pill-solid:hover{background:#00f5c4!important}
+.nav-user-chip{display:none;align-items:center;gap:8px;padding:.35rem .9rem .35rem .5rem;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);border-radius:20px}
+.nav-user-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#00d4aa,#6366f1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#060a13;flex-shrink:0}
+.nav-user-name{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#00d4aa;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nav-logout-btn{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.75rem;padding:.3rem .65rem;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nav-logout-btn:hover{border-color:rgba(248,113,113,.4);color:#f87171}
+.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:4px}
+.nav-hamburger span{display:block;width:20px;height:2px;background:#7b8ba8;border-radius:2px;transition:all .3s}
+@media(max-width:768px){
+  nav.site-nav{padding:0 1.2rem}
+  .site-nav-links{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:rgba(6,10,19,.98);backdrop-filter:blur(20px);padding:1rem 1.5rem;gap:.6rem;border-bottom:1px solid rgba(255,255,255,.05)}
+  .site-nav-links.open{display:flex}
+  .nav-hamburger{display:flex}
+}
+#loginScreen{padding-top:68px}
+</style>
+<style>
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.85);border-bottom:1px solid rgba(255,255,255,0.05);transition:all .4s}
+.nav-logo{font-size:1.3rem;font-weight:700;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.7rem}
+.logo-mark{width:36px;height:36px}.logo-mark svg{width:100%;height:100%}
+.nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none}
+.nav-links a{color:#7b8ba8;text-decoration:none;font-size:.88rem;font-weight:400;letter-spacing:.02em;transition:color .3s}
+.nav-links a:hover{color:#e8ecf4}
+.nav-pill{padding:.45rem 1.1rem!important;border:1px solid rgba(0,212,170,0.3)!important;border-radius:8px;color:#00d4aa!important}
+.nav-pill:hover{background:rgba(0,212,170,0.08)!important}
+.nav-cta{padding:.55rem 1.4rem!important;background:#00d4aa!important;color:#060a13!important;border-radius:8px;font-weight:600!important;font-size:.82rem!important}
+.nav-cta:hover{background:#00f5c4!important}
+#nav-user-name{color:#00d4aa;font-family:'JetBrains Mono',monospace;font-size:.78rem}
+.nav-logout{background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:rgba(255,255,255,0.4);font-size:.78rem;padding:.3rem .7rem;cursor:pointer;font-family:inherit;transition:all .2s}
+.nav-logout:hover{border-color:rgba(248,113,113,.4);color:#f87171}
+@media(max-width:768px){nav{padding:0 1.2rem}.nav-links{gap:.8rem}}
+
+#loginScreen { padding-top: 72px; }
+</style>
 </head>
 <body>
+<script>
+// If already logged in via admin session, auto-proceed to explorer
+try{
+  const s = JSON.parse(localStorage.getItem('artemis_session')||'null');
+  if(s) {
+    // Map admin session to data explorer user
+    window._autoUser = {username: s.username, full_name: s.name, role: s.role};
+  }
+}catch(e){}
+</script>
+<nav class="site-nav" id="site-nav">
+    <a href="index.html" class="site-logo">
+      <div class="site-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#nlg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#nlg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#nlg)"/><defs><linearGradient id="nlg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
+      ARTEMIS
+    </a>
+    <button class="nav-hamburger" onclick="document.querySelector('.site-nav-links').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav-links">
+      
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#team">Team</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      
+      <li><a href="admin_panel.html" class="nav-pill-outline">⚡ Admin Panel</a></li>
+      <li>
+        <div class="nav-user-chip" id="nav-user-chip">
+          <div class="nav-user-avatar" id="nav-user-avatar">?</div>
+          <span class="nav-user-name" id="nav-user-name"></span>
+        </div>
+      </li>
+      <li><button class="nav-logout-btn" id="nav-logout-btn" onclick="_siteLogout()" style="display:none">Sign Out</button></li>
+    </ul>
+  </nav>
+
 
     <!-- ═══ NAV ═══ -->
     <nav id="nav">
@@ -317,7 +398,7 @@
 // ══════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════
-const API = '/api/data-explorer';
+const API = 'https://g6zr0b5lwe.execute-api.eu-west-2.amazonaws.com/default/lambda_save';  // DynamoDB via Lambda
 let state = {
     user: JSON.parse(localStorage.getItem('artemis_user') || 'null'),
     tables: [],
@@ -365,7 +446,8 @@ async function handleLogin(e) {
             password: document.getElementById('password').value,
         });
         state.user = data.user;
-        localStorage.setItem('artemis_user', JSON.stringify(data.user));
+        localStorage.setItem('artemis_session', JSON.stringify({username:data.user.username,name:data.user.full_name||data.user.username,role:data.user.role,loginAt:new Date().toISOString()}));
+localStorage.setItem('artemis_user', JSON.stringify(data.user));
         showExplorer();
     } catch (e) {
         err.textContent = e.message || 'Invalid credentials';
@@ -379,6 +461,7 @@ async function handleLogin(e) {
 function logout() {
     state.user = null;
     localStorage.removeItem('artemis_user');
+localStorage.removeItem('artemis_session');
     document.getElementById('loginScreen').style.display = '';
     document.getElementById('explorerScreen').classList.remove('active');
     document.getElementById('navUserArea').innerHTML = '';
@@ -696,6 +779,56 @@ function showToast(msg) {
 // INIT
 // ══════════════════════════════════════════
 checkSession();
+</script>
+<script>
+
+const _SK = 'artemis_session';
+const _API = 'https://g6zr0b5lwe.execute-api.eu-west-2.amazonaws.com/default/lambda_save';
+function _getSession(){try{return JSON.parse(localStorage.getItem(_SK)||'null');}catch{return null;}}
+function _requireAuth(redirect){if(!_getSession()){window.location.href=redirect||'admin_login.html';return false;}return true;}
+function _logout(){localStorage.removeItem(_SK);window.location.href='index.html';}
+function _initNav(){
+  const s=_getSession();
+  const nm=document.getElementById('nav-user-name');
+  const lb=document.getElementById('nav-logout-btn');
+  if(s&&nm){nm.textContent=s.name||s.username;nm.style.display='';}
+  if(s&&lb){lb.style.display='';}
+}
+
+_initNav();
+// Auto-login if admin session exists
+if(window._autoUser){
+  try{
+    const state = JSON.parse(localStorage.getItem('artemis_user')||'null');
+    if(!state){
+      localStorage.setItem('artemis_user', JSON.stringify(window._autoUser));
+    }
+  }catch(e){}
+}
+</script>
+<script>
+var _SK='artemis_session';
+function _siteLogout(){if(!confirm('Sign out?'))return;localStorage.removeItem(_SK);window.location.href='index.html';}
+function _getSession(){try{return JSON.parse(localStorage.getItem(_SK)||'null');}catch{return null;}}
+function _requireLogin(){if(!_getSession()){window.location.href='admin_login.html';return false;}return true;}
+function _initSiteNav(){
+  var s=_getSession();
+  var chip=document.getElementById('nav-user-chip');
+  var av=document.getElementById('nav-user-avatar');
+  var nm=document.getElementById('nav-user-name');
+  var lb=document.getElementById('nav-logout-btn');
+  var al=document.getElementById('nav-admin-link');
+  if(s){
+    if(chip)chip.style.display='flex';
+    if(av)av.textContent=(s.name||s.username||'?').charAt(0).toUpperCase();
+    if(nm)nm.textContent=s.name||s.username||'';
+    if(lb)lb.style.display='';
+    if(al)al.textContent='⚡ '+(s.name||'Admin').split(' ')[0];
+  }
+}
+window.addEventListener('scroll',function(){var n=document.getElementById('site-nav');if(n)n.classList.toggle('scrolled',window.scrollY>20);});
+document.addEventListener('DOMContentLoaded',_initSiteNav);
+_initSiteNav();
 </script>
 </body>
 </html>

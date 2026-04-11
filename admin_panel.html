@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis AI — Admin Panel</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg-primary:#060a13;--bg-secondary:#0c1221;--bg-card:#0f1729;--accent:#00d4aa;--accent-bright:#00f5c4;--accent-dim:rgba(0,212,170,0.1);--accent-glow:rgba(0,212,170,0.35);--text-primary:#e8ecf4;--text-secondary:#7b8ba8;--text-muted:#4a5568;--border:rgba(255,255,255,0.05);--border-accent:rgba(0,212,170,0.15);--danger:#f87171;--danger-dim:rgba(248,113,113,0.1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;-webkit-font-smoothing:antialiased}
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.85);border-bottom:1px solid rgba(255,255,255,0.05);transition:all .4s}
+.nav-logo{font-size:1.3rem;font-weight:700;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.7rem}
+.logo-mark{width:36px;height:36px}.logo-mark svg{width:100%;height:100%}
+.nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none}
+.nav-links a{color:#7b8ba8;text-decoration:none;font-size:.88rem;font-weight:400;letter-spacing:.02em;transition:color .3s}
+.nav-links a:hover{color:#e8ecf4}
+.nav-pill{padding:.45rem 1.1rem!important;border:1px solid rgba(0,212,170,0.3)!important;border-radius:8px;color:#00d4aa!important}
+.nav-pill:hover{background:rgba(0,212,170,0.08)!important}
+.nav-cta{padding:.55rem 1.4rem!important;background:#00d4aa!important;color:#060a13!important;border-radius:8px;font-weight:600!important;font-size:.82rem!important}
+.nav-cta:hover{background:#00f5c4!important}
+#nav-user-name{color:#00d4aa;font-family:'JetBrains Mono',monospace;font-size:.78rem}
+.nav-logout{background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:rgba(255,255,255,0.4);font-size:.78rem;padding:.3rem .7rem;cursor:pointer;font-family:inherit;transition:all .2s}
+.nav-logout:hover{border-color:rgba(248,113,113,.4);color:#f87171}
+@media(max-width:768px){nav{padding:0 1.2rem}.nav-links{gap:.8rem}}
+
+.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,170,0.05),transparent 70%);top:-20%;left:0;animation:fl 16s ease-in-out infinite}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(99,102,241,0.04),transparent 70%);bottom:-10%;right:-5%;animation:fl 16s ease-in-out infinite reverse}
+@keyframes fl{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-25px)}}
+.page{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 2rem 4rem}
+.welcome{text-align:center;margin-bottom:3.5rem}
+.welcome-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 16px;border:1px solid var(--border-accent);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:1.2rem;background:rgba(0,212,170,0.04)}
+.pd{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+h1{font-size:2.6rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.6rem}
+h1 span{color:var(--accent)}
+.sub{font-size:1rem;color:var(--text-secondary);font-weight:300}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:860px;width:100%}
+.dest-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:2rem;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;text-decoration:none;display:block}
+.dest-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--cc,var(--accent));opacity:.7;transition:opacity .3s}
+.dest-card:hover{border-color:var(--cc,var(--accent));transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.4)}
+.dest-card:hover::before{opacity:1}
+.dest-icon{width:52px;height:52px;border-radius:14px;background:var(--ci,rgba(0,212,170,0.1));border:1px solid var(--cb,rgba(0,212,170,0.2));display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:1.2rem}
+.dest-title{font-size:1.15rem;font-weight:700;color:var(--text-primary);margin-bottom:.4rem}
+.dest-desc{font-size:.82rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.1rem}
+.dest-tag{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--cc,var(--accent));background:var(--ci,rgba(0,212,170,0.08));border:1px solid var(--cb,rgba(0,212,170,0.15));border-radius:6px;padding:3px 9px}
+.dest-arrow{position:absolute;top:1.4rem;right:1.4rem;color:var(--text-muted);font-size:1.1rem;transition:all .3s}
+.dest-card:hover .dest-arrow{color:var(--cc,var(--accent));transform:translate(3px,-3px)}
+.signout-row{margin-top:2.5rem;text-align:center}
+.signout-btn{background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:var(--text-muted);font-family:'Outfit',sans-serif;font-size:.82rem;padding:.5rem 1.2rem;cursor:pointer;transition:all .2s}
+.signout-btn:hover{border-color:rgba(248,113,113,.3);color:#f87171}
+@media(max-width:768px){.cards{grid-template-columns:1fr}.welcome h1{font-size:1.8rem}}
+
+nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.88);border-bottom:1px solid rgba(255,255,255,0.05);transition:background .3s}
+nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0,0,0,.3)}
+.site-logo{font-size:1.15rem;font-weight:700;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.65rem;flex-shrink:0}
+.site-logo-mark{width:32px;height:32px}.site-logo-mark svg{width:100%;height:100%}
+.site-nav-links{display:flex;align-items:center;gap:1.4rem;list-style:none;margin:0;padding:0}
+.site-nav-links a{color:#7b8ba8;text-decoration:none;font-size:.85rem;font-weight:400;letter-spacing:.01em;transition:color .25s;white-space:nowrap}
+.site-nav-links a:hover{color:#e8ecf4}
+.nav-pill-outline{padding:.42rem 1rem!important;border:1px solid rgba(0,212,170,.3)!important;border-radius:7px;color:#00d4aa!important;font-size:.8rem!important}
+.nav-pill-outline:hover{background:rgba(0,212,170,.07)!important;border-color:rgba(0,212,170,.6)!important}
+.nav-pill-solid{padding:.42rem 1.1rem!important;background:#00d4aa!important;color:#060a13!important;border-radius:7px;font-weight:600!important;font-size:.8rem!important}
+.nav-pill-solid:hover{background:#00f5c4!important}
+.nav-user-chip{display:none;align-items:center;gap:8px;padding:.35rem .9rem .35rem .5rem;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);border-radius:20px}
+.nav-user-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#00d4aa,#6366f1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#060a13;flex-shrink:0}
+.nav-user-name{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#00d4aa;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nav-logout-btn{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.75rem;padding:.3rem .65rem;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nav-logout-btn:hover{border-color:rgba(248,113,113,.4);color:#f87171}
+.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:4px}
+.nav-hamburger span{display:block;width:20px;height:2px;background:#7b8ba8;border-radius:2px;transition:all .3s}
+@media(max-width:768px){
+  nav.site-nav{padding:0 1.2rem}
+  .site-nav-links{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:rgba(6,10,19,.98);backdrop-filter:blur(20px);padding:1rem 1.5rem;gap:.6rem;border-bottom:1px solid rgba(255,255,255,.05)}
+  .site-nav-links.open{display:flex}
+  .nav-hamburger{display:flex}
+}
+</style>
+</head>
+<body>
+<nav class="site-nav" id="site-nav">
+    <a href="index.html" class="site-logo">
+      <div class="site-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#nlg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#nlg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#nlg)"/><defs><linearGradient id="nlg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
+      ARTEMIS
+    </a>
+    <button class="nav-hamburger" onclick="document.querySelector('.site-nav-links').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav-links">
+      
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#team">Team</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      
+      <li><a href="admin_panel.html" class="nav-pill-outline">⚡ Admin Panel</a></li>
+      <li>
+        <div class="nav-user-chip" id="nav-user-chip">
+          <div class="nav-user-avatar" id="nav-user-avatar">?</div>
+          <span class="nav-user-name" id="nav-user-name"></span>
+        </div>
+      </li>
+      <li><button class="nav-logout-btn" id="nav-logout-btn" onclick="_siteLogout()" style="display:none">Sign Out</button></li>
+    </ul>
+  </nav>
+<div class="page">
+  <div class="welcome">
+    <div class="welcome-badge"><span class="pd"></span><span id="greeting-text">ARTEMISAI — ADMIN PANEL</span></div>
+    <h1>Welcome back, <span id="user-first">there</span></h1>
+    <p class="sub" id="user-role-line">Where would you like to go today?</p>
+  </div>
+  <div class="cards">
+    <a href="mockup_dashboard.html" class="dest-card" style="--cc:#00d4aa;--ci:rgba(0,212,170,0.08);--cb:rgba(0,212,170,0.2)">
+      <span class="dest-arrow">↗</span>
+      <div class="dest-icon">📊</div>
+      <div class="dest-title">Mockup Dashboard</div>
+      <div class="dest-desc">Explore the full ArtemisAI product mockup — Dashboard, Predictions, Audience, Art-E, Discovery Feed and more.</div>
+      <span class="dest-tag">🌐 10 screens</span>
+    </a>
+    <a href="sprint_tracker.html" class="dest-card" style="--cc:#6366f1;--ci:rgba(99,102,241,0.08);--cb:rgba(99,102,241,0.2)">
+      <span class="dest-arrow">↗</span>
+      <div class="dest-icon">🚀</div>
+      <div class="dest-title">Sprint Tracker</div>
+      <div class="dest-desc">Track all 22 sprints, check off tasks, view team progress, manage the Road to Launch mission control.</div>
+      <span class="dest-tag">⚡ 22 sprints</span>
+    </a>
+    <a href="coding_guide.html" class="dest-card" style="--cc:#f59e0b;--ci:rgba(245,158,11,0.08);--cb:rgba(245,158,11,0.2)">
+      <span class="dest-arrow">↗</span>
+      <div class="dest-icon">📖</div>
+      <div class="dest-title">Coding Guide</div>
+      <div class="dest-desc">Full implementation guide covering architecture, pipelines, ML models, APIs and every technical decision.</div>
+      <span class="dest-tag">🔧 Sprint 1–22</span>
+    </a>
+  </div>
+  <div class="signout-row">
+    <button class="signout-btn" onclick="doLogout()">⏻ Sign Out</button>
+  </div>
+</div>
+
+<script>
+var _SK='artemis_session';
+function _siteLogout(){if(!confirm('Sign out?'))return;localStorage.removeItem(_SK);window.location.href='index.html';}
+function _getSession(){try{return JSON.parse(localStorage.getItem(_SK)||'null');}catch{return null;}}
+function _requireLogin(){if(!_getSession()){window.location.href='admin_login.html';return false;}return true;}
+function _initSiteNav(){
+  var s=_getSession();
+  var chip=document.getElementById('nav-user-chip');
+  var av=document.getElementById('nav-user-avatar');
+  var nm=document.getElementById('nav-user-name');
+  var lb=document.getElementById('nav-logout-btn');
+  var al=document.getElementById('nav-admin-link');
+  if(s){
+    if(chip)chip.style.display='flex';
+    if(av)av.textContent=(s.name||s.username||'?').charAt(0).toUpperCase();
+    if(nm)nm.textContent=s.name||s.username||'';
+    if(lb)lb.style.display='';
+    if(al)al.textContent='⚡ '+(s.name||'Admin').split(' ')[0];
+  }
+}
+window.addEventListener('scroll',function(){var n=document.getElementById('site-nav');if(n)n.classList.toggle('scrolled',window.scrollY>20);});
+document.addEventListener('DOMContentLoaded',_initSiteNav);
+try{if(!_getSession())window.location.href="admin_login.html";
+else{_initSiteNav();var s=_getSession();var f=(s.name||s.username||"").split(" ")[0];document.getElementById("user-first").textContent=f||"there";document.getElementById("user-role-line").textContent="Signed in as "+(s.name||s.username)+" · "+(s.role||"Team")+" — where would you like to go?";}}catch(e){window.location.href="admin_login.html";}
+function doLogout(){_siteLogout();}
+</script>
+</body>
+</html>

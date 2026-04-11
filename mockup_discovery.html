@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script>if(!localStorage.getItem("artemis_app_session")){window.location.href="mockup_login.html";}</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Artemis AI — Discovery Feed</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -176,7 +176,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 
 <!-- ═══ SIDEBAR ═══ -->
 <aside class="sidebar">
-  <a href="index.html" class="sidebar-logo">
+  <a href="admin_panel.html" class="sidebar-logo" title="Back to Admin Panel">
     <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
     <span>ARTEMIS</span>
   </a>
@@ -205,7 +205,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
   </nav>
   <div class="sidebar-signout">
     <div class="sidebar-user" id="sidebarUser"></div>
-    <button class="btn-signout" onclick="localStorage.removeItem('artemis_app_session');window.location.href='mockup_login.html'"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign Out</button>
+    <button class="btn-signout" onclick="localStorage.removeItem('artemis_app_session');localStorage.removeItem('artemis_session');window.location.href='index.html'"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign Out</button>
   </div>
 </aside>
 
@@ -432,6 +432,27 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 </div>
 
 <script>try{const u=JSON.parse(localStorage.getItem('artemis_app_session'));if(u&&document.getElementById('sidebarUser'))document.getElementById('sidebarUser').textContent=u.email||'';}catch{}</script>
+<script>
+
+(function(){
+  var SK='artemis_session';
+  function getS(){try{return JSON.parse(localStorage.getItem(SK)||localStorage.getItem('artemis_app_session')||'null');}catch{return null;}}
+  var s=getS();
+  if(!s){window.location.href='admin_login.html';return;}
+  // Show user name in sidebar
+  var el=document.getElementById('sidebarUser');
+  if(el)el.textContent=s.name||s.full_name||s.email||s.username||'';
+  // Wire sign out
+  var btns=document.querySelectorAll('.btn-signout');
+  btns.forEach(function(b){
+    b.onclick=function(){
+      localStorage.removeItem(SK);
+      localStorage.removeItem('artemis_app_session');
+      window.location.href='index.html';
+    };
+  });
+})();
+</script>
 </body>
 <script>
 // ═══ VIEW TOGGLE ═══

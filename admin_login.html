@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis AI — Admin Login</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg-primary:#060a13;--bg-secondary:#0c1221;--bg-card:#0f1729;--accent:#00d4aa;--accent-bright:#00f5c4;--accent-dim:rgba(0,212,170,0.1);--accent-glow:rgba(0,212,170,0.35);--text-primary:#e8ecf4;--text-secondary:#7b8ba8;--text-muted:#4a5568;--border:rgba(255,255,255,0.05);--border-accent:rgba(0,212,170,0.15);--danger:#f87171;--danger-dim:rgba(248,113,113,0.1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;-webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;overflow:hidden}
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:100}
+.orb{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none}
+.orb1{width:500px;height:500px;background:radial-gradient(circle,rgba(0,212,170,0.07),transparent 70%);top:-10%;left:10%;animation:fl 14s ease-in-out infinite}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(99,102,241,0.05),transparent 70%);bottom:-5%;right:5%;animation:fl 14s ease-in-out infinite reverse}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,rgba(236,72,153,0.04),transparent 70%);top:40%;right:20%;animation:fl 18s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-25px)}}
+.bg-grid{position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,170,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,170,0.02) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 60% 60% at 50% 50%,black,transparent)}
+.card{position:relative;z-index:10;width:100%;max-width:420px;background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:2.8rem 2.4rem;box-shadow:0 40px 80px rgba(0,0,0,0.5);margin:1rem}
+.card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.logo-wrap{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1.8rem}
+.logo-wrap svg{width:34px;height:34px}
+.logo-wrap span{font-size:1.25rem;font-weight:700;letter-spacing:.12em}
+h1{text-align:center;font-size:1.5rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.3rem}
+.sub{text-align:center;font-size:.85rem;color:var(--text-secondary);margin-bottom:1.8rem;font-weight:300}
+.label{display:block;font-size:.72rem;font-weight:500;color:var(--text-secondary);letter-spacing:.05em;text-transform:uppercase;margin-bottom:.4rem;font-family:'JetBrains Mono',monospace}
+.input{width:100%;padding:.78rem 1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-family:'Outfit',sans-serif;font-size:.9rem;outline:none;transition:all .25s;margin-bottom:1rem}
+.input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+.input::placeholder{color:var(--text-muted)}
+.btn{width:100%;padding:.88rem;background:var(--accent);color:var(--bg-primary);border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.92rem;font-weight:600;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.15),transparent);transform:translateX(-100%);transition:transform .5s}
+.btn:hover::before{transform:translateX(100%)}
+.btn:hover{background:var(--accent-bright);transform:translateY(-1px);box-shadow:0 12px 40px var(--accent-glow)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.err{display:none;text-align:center;color:var(--danger);font-size:.8rem;margin-top:.8rem;padding:.55rem;background:var(--danger-dim);border-radius:8px;animation:shk .35s ease}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.hint{text-align:center;font-size:.7rem;color:var(--text-muted);margin-top:1.2rem}
+.back{text-align:center;margin-top:1rem}
+.back a{color:var(--text-muted);font-size:.78rem;text-decoration:none;transition:color .2s}
+.back a:hover{color:var(--accent)}
+
+nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.88);border-bottom:1px solid rgba(255,255,255,0.05);transition:background .3s}
+nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0,0,0,.3)}
+.site-logo{font-size:1.15rem;font-weight:700;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.65rem;flex-shrink:0}
+.site-logo-mark{width:32px;height:32px}.site-logo-mark svg{width:100%;height:100%}
+.site-nav-links{display:flex;align-items:center;gap:1.4rem;list-style:none;margin:0;padding:0}
+.site-nav-links a{color:#7b8ba8;text-decoration:none;font-size:.85rem;font-weight:400;letter-spacing:.01em;transition:color .25s;white-space:nowrap}
+.site-nav-links a:hover{color:#e8ecf4}
+.nav-pill-outline{padding:.42rem 1rem!important;border:1px solid rgba(0,212,170,.3)!important;border-radius:7px;color:#00d4aa!important;font-size:.8rem!important}
+.nav-pill-outline:hover{background:rgba(0,212,170,.07)!important;border-color:rgba(0,212,170,.6)!important}
+.nav-pill-solid{padding:.42rem 1.1rem!important;background:#00d4aa!important;color:#060a13!important;border-radius:7px;font-weight:600!important;font-size:.8rem!important}
+.nav-pill-solid:hover{background:#00f5c4!important}
+.nav-user-chip{display:none;align-items:center;gap:8px;padding:.35rem .9rem .35rem .5rem;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);border-radius:20px}
+.nav-user-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#00d4aa,#6366f1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#060a13;flex-shrink:0}
+.nav-user-name{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#00d4aa;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nav-logout-btn{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.75rem;padding:.3rem .65rem;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nav-logout-btn:hover{border-color:rgba(248,113,113,.4);color:#f87171}
+.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:4px}
+.nav-hamburger span{display:block;width:20px;height:2px;background:#7b8ba8;border-radius:2px;transition:all .3s}
+@media(max-width:768px){
+  nav.site-nav{padding:0 1.2rem}
+  .site-nav-links{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:rgba(6,10,19,.98);backdrop-filter:blur(20px);padding:1rem 1.5rem;gap:.6rem;border-bottom:1px solid rgba(255,255,255,.05)}
+  .site-nav-links.open{display:flex}
+  .nav-hamburger{display:flex}
+}
+.page-body{padding-top:88px}
+</style>
+</head>
+<body>
+<nav class="site-nav" id="site-nav">
+    <a href="index.html" class="site-logo">
+      <div class="site-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#nlg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#nlg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#nlg)"/><defs><linearGradient id="nlg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
+      ARTEMIS
+    </a>
+    <ul class="site-nav-links">
+      <li><a href="index.html">Home</a></li>
+    </ul>
+  </nav>
+
+<div class="bg-grid"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+<div class="card">
+  <div class="logo-wrap">
+    <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#nlg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#nlg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#nlg)"/><defs><linearGradient id="nlg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
+    <span>ARTEMIS</span>
+  </div>
+  <h1>Admin Panel</h1>
+  <p class="sub">Sign in to access the Artemis platform</p>
+  <label class="label" for="u">Username</label>
+  <input class="input" id="u" type="text" placeholder="Enter your username" autocomplete="username" autofocus>
+  <label class="label" for="p">Password</label>
+  <input class="input" id="p" type="password" placeholder="Enter your password" autocomplete="current-password">
+  <button class="btn" id="btn" onclick="doLogin()">Sign In</button>
+  <div class="err" id="err"></div>
+  <p class="hint">Access restricted to ArtemisAI team members</p>
+  <div class="back"><a href="index.html">← Back to home</a></div>
+</div>
+<script>
+const SK = 'artemis_session';
+const API = 'https://g6zr0b5lwe.execute-api.eu-west-2.amazonaws.com/default/lambda_save';
+
+// Already logged in → go to panel
+try{
+  if(localStorage.getItem(SK)) window.location.href = 'admin_panel.html';
+}catch{}
+
+document.getElementById('p').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+document.getElementById('u').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('p').focus(); });
+
+async function doLogin(){
+  const btn=document.getElementById('btn');
+  const err=document.getElementById('err');
+  const u=document.getElementById('u').value.trim().toLowerCase();
+  const p=document.getElementById('p').value;
+  if(!u||!p){ showErr('Please enter username and password'); return; }
+  btn.disabled=true; btn.textContent='Signing in...'; err.style.display='none';
+  try{
+    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'login',username:u,password:p})});
+    const d=await r.json();
+    if(d.ok&&d.user){
+      localStorage.setItem(SK,JSON.stringify({username:d.user.username,name:d.user.full_name,role:d.user.role,loginAt:new Date().toISOString()}));
+      window.location.href='admin_panel.html';
+    } else {
+      showErr(d.error||'Invalid username or password');
+      btn.disabled=false; btn.textContent='Sign In';
+    }
+  } catch(e){
+    showErr('Connection error — please try again');
+    btn.disabled=false; btn.textContent='Sign In';
+  }
+}
+function showErr(m){
+  const e=document.getElementById('err');
+  e.textContent=m; e.style.display='block';
+  e.style.animation='none'; requestAnimationFrame(()=>{e.style.animation='shk .35s ease';});
+}
+</script>
+<script>
+window.addEventListener("scroll",function(){var n=document.getElementById("site-nav");if(n)n.classList.toggle("scrolled",window.scrollY>20)});
+</script>
+</body>
+</html>
