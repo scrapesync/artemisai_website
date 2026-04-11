@@ -200,30 +200,35 @@ body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-he
 .stb-stat-val { color: var(--accent); font-weight: 600; }
 .stb-track-wrap {
   position: relative;
-  height: 42px;
+  height: 44px;
 }
 /* Base line */
 .stb-line {
   position: absolute;
-  top: 16px; left: 0; right: 0;
-  height: 1.5px;
-  background: rgba(255,255,255,0.1);
+  top: 50%; left: 0; right: 0;
+  height: 2px;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.08);
+  border-radius: 1px;
 }
 /* Progress glow line */
 .stb-progress-line {
   position: absolute;
-  top: 16px; left: 0;
-  height: 1.5px;
-  background: linear-gradient(90deg, rgba(0,212,170,0.6), #00d4aa);
-  box-shadow: 0 0 6px rgba(0,212,170,0.6);
-  transition: width 0.5s ease;
+  top: 50%; left: 0;
+  height: 3px;
+  transform: translateY(-50%);
+  background: #00d4aa;
+  box-shadow: 0 0 8px rgba(0,212,170,0.7), 0 0 2px rgba(0,212,170,1);
+  transition: width 0.6s ease;
+  border-radius: 0 2px 2px 0;
 }
 /* Phase colour segments */
 .stb-phase-seg {
   position: absolute;
-  top: 14px; height: 4px;
+  top: 50%; height: 4px;
+  transform: translateY(-50%);
   border-radius: 2px;
-  opacity: 0.18;
+  opacity: 0.15;
 }
 /* Sprint dots container */
 .stb-dots {
@@ -232,30 +237,31 @@ body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-he
 }
 .stb-dot-wrap {
   position: absolute;
-  top: 0;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex; flex-direction: column; align-items: center;
   cursor: pointer;
+  z-index: 2;
 }
 .stb-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.05);
-  margin-top: 12px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.06);
+  margin-top: 0;
   transition: all 0.2s;
   position: relative;
 }
 .stb-dot.done {
   border-color: var(--dc, #00d4aa);
   background: var(--dc, #00d4aa);
-  box-shadow: 0 0 6px var(--dc, #00d4aa);
+  box-shadow: 0 0 4px var(--dc, #00d4aa);
+  opacity: 0.7;
 }
 .stb-dot.active {
   border-color: var(--dc, #00d4aa);
-  background: rgba(0,212,170,0.3);
-  box-shadow: 0 0 8px var(--dc, #00d4aa);
-  animation: pulse-dot 2s ease-in-out infinite;
+  background: rgba(0,212,170,0.15);
+  border-width: 2px;
 }
 @keyframes pulse-dot {
   0%,100% { box-shadow: 0 0 4px var(--dc,#00d4aa); }
@@ -267,33 +273,40 @@ body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-he
 .stb-dot-label {
   font-family: 'JetBrains Mono', monospace;
   font-size: 7px;
-  color: rgba(255,255,255,0.25);
-  margin-top: 3px;
+  color: rgba(255,255,255,0.3);
+  margin-top: 5px;
   white-space: nowrap;
+  position: absolute;
+  top: 100%;
 }
 .stb-dot-wrap.done .stb-dot-label { color: var(--dc, #00d4aa); opacity: 0.8; }
 .stb-dot-wrap.active .stb-dot-label { color: var(--dc, #00d4aa); }
 /* Glowing dot — the "chariot" position */
 .stb-glow-dot {
   position: absolute;
-  top: 10px;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 14px; height: 14px;
   border-radius: 50%;
   background: #00d4aa;
-  box-shadow: 0 0 0 4px rgba(0,212,170,0.2), 0 0 16px 4px rgba(0,212,170,0.5);
-  transform: translateX(-50%);
+  box-shadow: 0 0 0 3px rgba(0,212,170,0.2), 0 0 14px 3px rgba(0,212,170,0.6);
   transition: left 0.6s ease;
   pointer-events: none;
-  z-index: 5;
+  z-index: 7;
+  animation: glow-pulse 2s ease-in-out infinite;
 }
-.stb-glow-dot::before {
+.stb-glow-dot::after {
   content: '';
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%,-50%);
-  width: 6px; height: 6px;
+  width: 5px; height: 5px;
   border-radius: 50%;
   background: white;
+}
+@keyframes glow-pulse {
+  0%,100% { box-shadow: 0 0 0 3px rgba(0,212,170,0.2), 0 0 14px 3px rgba(0,212,170,0.6); }
+  50% { box-shadow: 0 0 0 5px rgba(0,212,170,0.15), 0 0 20px 5px rgba(0,212,170,0.4); }
 }
 /* Finish line marker */
 .stb-finish {
@@ -302,8 +315,10 @@ body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-he
   display: flex; flex-direction: column; align-items: center;
 }
 .stb-finish-pole {
-  width: 2px; height: 42px;
-  background: rgba(255,255,255,0.5);
+  width: 2px; height: 100%;
+  position: absolute;
+  top: 0; right: 0;
+  background: rgba(255,255,255,0.4);
 }
 .stb-finish-flag {
   width: 16px; height: 12px;
@@ -671,16 +686,31 @@ function renderSprintTrackBar(){
   document.getElementById('stb-pct').textContent=o.pct+'%';
   document.getElementById('stb-done').textContent=o.d;
   document.getElementById('stb-total').textContent=o.t;
-  document.getElementById('stb-progress-line').style.width=o.pct+'%';
-
-  // Glow dot position = chariot progress
+  // Sprint-based positions — line and dot move together smoothly
   const total=SPRINTS_LIST.length;
-  let done=0;
-  SPRINTS_LIST.forEach(sn=>{const p=calcSP(sn);if(p.pct===100)done++;});
-  let partial=0;
-  for(let i=done;i<total;i++){const p=calcSP(SPRINTS_LIST[i]);if(p.pct>0&&p.pct<100){partial=p.pct/100*(1/total);break;}}
-  const charPct=Math.min(98,(done/total+partial)*100);
-  document.getElementById('stb-glow-dot').style.left=charPct+'%';
+
+  // Each sprint occupies 1/(total-1) of the track width
+  // Position = (sprintIndex + sprintProgress) / (total-1) * 100%
+  let progressPos=0;
+  for(let i=0;i<total;i++){
+    const p=calcSP(SPRINTS_LIST[i]);
+    if(p.pct===100){
+      // Fully done — advance past this sprint's dot
+      progressPos=(i/(total-1))*100;
+    } else if(p.pct>0){
+      // Partially done — interpolate between this dot and next
+      const frac=p.pct/100;
+      const thisPos=(i/(total-1))*100;
+      const nextPos=((i+1)/(total-1))*100;
+      progressPos=thisPos+(nextPos-thisPos)*frac;
+      break;
+    } else {
+      break;
+    }
+  }
+
+  document.getElementById('stb-progress-line').style.width=progressPos+'%';
+  document.getElementById('stb-glow-dot').style.left=progressPos+'%';
 
   // Phase colour segments
   const segWrap=document.getElementById('stb-phase-segs');
@@ -1430,11 +1460,14 @@ function renderMockupPage(){
       <div class="ma-view-toggle">
         <button class="ma-view-btn ${view==='cards'?'active':''}" onclick="setMockupView('cards')">Feature Cards</button>
         <button class="ma-view-btn ${view==='gantt'?'active':''}" onclick="setMockupView('gantt')">Timeline</button>
+        <button class="ma-view-btn ${view==='export'?'active':''}" onclick="setMockupView('export')">💾 State Export</button>
       </div>
-      <button class="ma-view-btn" onclick="exportMockupCSV()" style="border-color:rgba(52,211,153,.4);color:#34d399;">⬇ Export CSV</button>
+      <button class="ma-view-btn" onclick="exportMockupCSV()" style="border-color:rgba(52,211,153,.4);color:#34d399;">⬇ CSV</button>
     </div>
   </div>`;
-  h+=view==='cards'?renderMockupCards():renderMockupGantt();
+  if(view==='cards') h+=renderMockupCards();
+  else if(view==='gantt') h+=renderMockupGantt();
+  else if(view==='export') h+=renderStateExport();
   el.innerHTML=h;
 }
 
@@ -1687,6 +1720,189 @@ async function pushAllToDynamo(){
     if(data.ok){setSyncStatus('ok','Pushed '+data.count+' sprints ✓');if(btn)btn.style.display='none';}
     else{setSyncStatus('error','Push failed');if(btn){btn.disabled=false;btn.textContent='⬆ Push to DynamoDB';}}
   }catch(e){setSyncStatus('error','Network error');if(btn){btn.disabled=false;btn.textContent='⬆ Push to DynamoDB';}}
+}
+
+
+/* ═══ STATE EXPORT (for Claude context) ═══ */
+function renderStateExport(){
+  const o=calcAll();
+  const phaseMap={};
+  PHASES.forEach(p=>p.sprints.forEach(s=>phaseMap[s]=p.name+' — '+p.sub));
+
+  // Build full state snapshot
+  const snapshot={
+    generated: new Date().toISOString(),
+    project: 'ArtemisAI — ViralData Ltd',
+    overall: {pct:o.pct, done:o.d, total:o.t},
+    sprints: {}
+  };
+
+  Object.keys(SPRINT_DATA).forEach(sn=>{
+    const ss=gss(sn);
+    const sp=calcSP(sn);
+    const dates=getSprintDates(sn);
+    const deleted=ss.deletedTasks||[];
+    const allTasks=[...(SPRINT_DATA[sn]||[]),...(ss.customTasks||[])].filter(t=>!deleted.includes(t.ticket));
+    snapshot.sprints[sn]={
+      phase: phaseMap[sn]||'',
+      status: sp.pct===100?'Done':sp.pct>0?'In Progress':'Upcoming',
+      progress: {pct:sp.pct, done:sp.d, total:sp.t},
+      dates: {start:dates.start||'', end:dates.end||''},
+      tasks: allTasks.map(task=>{
+        const ts=gts(sn,task.ticket);
+        const tp=calcTaskProgress(sn,task.ticket);
+        const assignee=getEffectiveAssignee(sn,task.ticket,task.assignee);
+        const kanban=getKanbanStatus(sn,task.ticket);
+        const checks=task.checklist.map((text,i)=>({
+          text: ts.overrides?.[i]||text,
+          done: ts.checks[i]||false
+        }));
+        const customChecks=(ts.cc||[]).map(c=>({text:c.text,done:c.done||false}));
+        return{
+          ticket:task.ticket,
+          name:ts.name||task.name,
+          assignee, kanban,
+          progress:{pct:tp.pct,done:tp.d,total:tp.t},
+          checklist:[...checks,...customChecks]
+        };
+      })
+    };
+  });
+
+  const json=JSON.stringify(snapshot,null,2);
+  const lineCount=json.split('\n').length;
+  const sizeKb=Math.round(json.length/1024);
+
+  return`<div style="max-width:900px">
+    <div style="background:var(--card);border:1px solid rgba(0,212,170,.2);border-radius:12px;padding:20px 24px;margin-bottom:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px;">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:white;margin-bottom:4px;">Full State Snapshot — For Claude</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);">
+            ${lineCount.toLocaleString()} lines · ${sizeKb} KB · Generated ${new Date().toLocaleString('en-GB')}
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="ma-view-btn" onclick="copyStateJSON()" id="copy-state-btn" style="border-color:rgba(0,212,170,.4);color:var(--accent);">📋 Copy JSON</button>
+          <button class="ma-view-btn" onclick="downloadStateJSON()" style="border-color:rgba(52,211,153,.4);color:#34d399;">⬇ Download .json</button>
+          <button class="ma-view-btn" onclick="exportFullCSV()" style="border-color:rgba(99,102,241,.4);color:#6366f1;">⬇ Download .csv</button>
+        </div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);line-height:1.8;margin-bottom:14px;">
+        This snapshot contains everything: all 22 sprints, every task, every checklist item with tick state,
+        kanban status, assignee, and dates. Paste it to Claude with a message like:<br>
+        <span style="color:var(--accent);background:rgba(0,212,170,.08);padding:2px 6px;border-radius:4px;display:inline-block;margin-top:6px;">
+          "Here is my current ArtemisAI sprint state. [your request]"
+        </span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;">
+        ${PHASES.map(p=>{const pp=calcPP(p);return`<div style="background:var(--card2);border-radius:8px;padding:10px 12px;border-left:3px solid ${p.color}">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:${p.color};text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">${p.name}</div>
+          <div style="font-size:16px;font-weight:700;color:${p.color}">${pp.pct}%</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2)">${pp.d}/${pp.t} checks</div>
+        </div>`;}).join('')}
+      </div>
+    </div>
+    <div style="position:relative;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);margin-bottom:8px;">Preview (first 60 lines)</div>
+      <pre style="background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);line-height:1.7;max-height:380px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;">${escH(json.split('\n').slice(0,60).join('\n'))}${lineCount>60?'\n\n... ('+(lineCount-60)+' more lines) ...':''}</pre>
+    </div>
+  </div>`;
+}
+
+function copyStateJSON(){
+  const snapshot=buildStateSnapshot();
+  const json=JSON.stringify(snapshot,null,2);
+  navigator.clipboard.writeText(json).then(()=>{
+    const btn=document.getElementById('copy-state-btn');
+    if(btn){btn.textContent='✓ Copied!';setTimeout(()=>{btn.textContent='📋 Copy JSON';},2000);}
+  }).catch(()=>{
+    // Fallback for non-HTTPS
+    const ta=document.createElement('textarea');ta.value=json;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    const btn=document.getElementById('copy-state-btn');
+    if(btn){btn.textContent='✓ Copied!';setTimeout(()=>{btn.textContent='📋 Copy JSON';},2000);}
+  });
+}
+
+function downloadStateJSON(){
+  const snapshot=buildStateSnapshot();
+  const json=JSON.stringify(snapshot,null,2);
+  const blob=new Blob([json],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;
+  a.download='artemisai_state_'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+
+function buildStateSnapshot(){
+  const o=calcAll();
+  const phaseMap={};
+  PHASES.forEach(p=>p.sprints.forEach(s=>phaseMap[s]=p.name+' — '+p.sub));
+  const snapshot={
+    generated:new Date().toISOString(),
+    project:'ArtemisAI — ViralData Ltd',
+    overall:{pct:o.pct,done:o.d,total:o.t},
+    sprints:{}
+  };
+  Object.keys(SPRINT_DATA).forEach(sn=>{
+    const ss=gss(sn);const sp=calcSP(sn);
+    const dates=getSprintDates(sn);const deleted=ss.deletedTasks||[];
+    const allTasks=[...(SPRINT_DATA[sn]||[]),...(ss.customTasks||[])].filter(t=>!deleted.includes(t.ticket));
+    snapshot.sprints[sn]={
+      phase:phaseMap[sn]||'',
+      status:sp.pct===100?'Done':sp.pct>0?'In Progress':'Upcoming',
+      progress:{pct:sp.pct,done:sp.d,total:sp.t},
+      dates:{start:dates.start||'',end:dates.end||''},
+      tasks:allTasks.map(task=>{
+        const ts=gts(sn,task.ticket);const tp=calcTaskProgress(sn,task.ticket);
+        const assignee=getEffectiveAssignee(sn,task.ticket,task.assignee);
+        const kanban=getKanbanStatus(sn,task.ticket);
+        return{
+          ticket:task.ticket,name:ts.name||task.name,assignee,kanban,
+          progress:{pct:tp.pct,done:tp.d,total:tp.t},
+          checklist:[
+            ...task.checklist.map((text,i)=>({text:ts.overrides?.[i]||text,done:ts.checks[i]||false})),
+            ...(ts.cc||[]).map(c=>({text:c.text,done:c.done||false}))
+          ]
+        };
+      })
+    };
+  });
+  return snapshot;
+}
+
+function exportFullCSV(){
+  const rows=[['Sprint','Phase','Status','Sprint %','Sprint Start','Sprint End','Ticket','Task Name','Assignee','Kanban','Task %','Checks Done','Checks Total','Checklist Item','Item Done']];
+  const phaseMap={};PHASES.forEach(p=>p.sprints.forEach(s=>phaseMap[s]=p.name+' — '+p.sub));
+  Object.keys(SPRINT_DATA).forEach(sn=>{
+    const ss=gss(sn);const sp=calcSP(sn);
+    const dates=getSprintDates(sn);const deleted=ss.deletedTasks||[];
+    const allTasks=[...(SPRINT_DATA[sn]||[]),...(ss.customTasks||[])].filter(t=>!deleted.includes(t.ticket));
+    const sprintStatus=sp.pct===100?'Done':sp.pct>0?'In Progress':'Upcoming';
+    allTasks.forEach(task=>{
+      const ts=gts(sn,task.ticket);const tp=calcTaskProgress(sn,task.ticket);
+      const assignee=getEffectiveAssignee(sn,task.ticket,task.assignee);
+      const kanban=getKanbanStatus(sn,task.ticket);
+      const kanbanLabel=kanban==='done'?'Done':kanban==='inprog'?'In Progress':kanban==='blocker'?'Blocker':'Yet to Do';
+      const allChecks=[
+        ...task.checklist.map((text,i)=>({text:ts.overrides?.[i]||text,done:ts.checks[i]||false})),
+        ...(ts.cc||[]).map(c=>({text:c.text,done:c.done||false}))
+      ];
+      if(allChecks.length===0){
+        rows.push([sn,phaseMap[sn]||'',sprintStatus,sp.pct+'%',dates.start||'',dates.end||'',task.ticket,(ts.name||task.name).replace(/[🌐🧪★]/g,'').trim(),assignee,kanbanLabel,tp.pct+'%',tp.d,tp.t,'','']);
+      } else {
+        allChecks.forEach((c,ci)=>{
+          rows.push([ci===0?sn:'',ci===0?phaseMap[sn]||'':'',ci===0?sprintStatus:'',ci===0?sp.pct+'%':'',ci===0?dates.start||'':'',ci===0?dates.end||'':'',ci===0?task.ticket:'',ci===0?(ts.name||task.name).replace(/[🌐🧪★]/g,'').trim():'',ci===0?assignee:'',ci===0?kanbanLabel:'',ci===0?tp.pct+'%':'',ci===0?tp.d:'',ci===0?tp.t:'',c.text,c.done?'Yes':'No']);
+        });
+      }
+    });
+  });
+  const csv=rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;
+  a.download='artemisai_full_state_'+new Date().toISOString().slice(0,10)+'.csv';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
 }
 
 loadST();
