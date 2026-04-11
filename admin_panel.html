@@ -40,7 +40,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;
 h1{font-size:2.6rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.6rem}
 h1 span{color:var(--accent)}
 .sub{font-size:1rem;color:var(--text-secondary);font-weight:300}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1020px;width:100%}@media(min-width:700px){.cards{grid-template-columns:repeat(3,1fr)}}@media(min-width:1000px){.cards{grid-template-columns:repeat(5,1fr)}}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1100px;width:100%}@media(min-width:700px){.cards{grid-template-columns:repeat(3,1fr)}}@media(min-width:1100px){.cards{grid-template-columns:repeat(6,1fr)}}
 .dest-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:2rem;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;text-decoration:none;display:block}
 .dest-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--cc,var(--accent));opacity:.7;transition:opacity .3s}
 .dest-card:hover{border-color:var(--cc,var(--accent));transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.4)}
@@ -244,7 +244,34 @@ nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0
       <div class="dest-title">Learning Hub</div>
       <div class="dest-desc">Track GenAI learning across the team — Transformers, LLMs, RAG, Agents. Role-tailored paths for all 8 members.</div>
       <span class="dest-tag">8 team members</span>
+        <a href="resources.html" class="dest-card" style="--cc:#f59e0b;--ci:rgba(245,158,11,0.08);--cb:rgba(245,158,11,0.2)">
+      <span class="dest-arrow">↗</span>
+      <div class="dest-icon" style="overflow:hidden">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid of 4 tiles that pulse in sequence -->
+          <rect x="3" y="3" width="9" height="9" rx="2" fill="none" stroke="#f59e0b" stroke-width="1.4">
+            <animate attributeName="stroke-opacity" values="1;0.3;1" dur="2s" begin="0s" repeatCount="indefinite"/>
+            <animate attributeName="fill" values="rgba(245,158,11,0);rgba(245,158,11,0.15);rgba(245,158,11,0)" dur="2s" begin="0s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="16" y="3" width="9" height="9" rx="2" fill="none" stroke="#f59e0b" stroke-width="1.4">
+            <animate attributeName="stroke-opacity" values="1;0.3;1" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+            <animate attributeName="fill" values="rgba(245,158,11,0);rgba(245,158,11,0.15);rgba(245,158,11,0)" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="3" y="16" width="9" height="9" rx="2" fill="none" stroke="#f59e0b" stroke-width="1.4">
+            <animate attributeName="stroke-opacity" values="1;0.3;1" dur="2s" begin="1s" repeatCount="indefinite"/>
+            <animate attributeName="fill" values="rgba(245,158,11,0);rgba(245,158,11,0.15);rgba(245,158,11,0)" dur="2s" begin="1s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="16" y="16" width="9" height="9" rx="2" fill="none" stroke="#f59e0b" stroke-width="1.4">
+            <animate attributeName="stroke-opacity" values="1;0.3;1" dur="2s" begin="1.5s" repeatCount="indefinite"/>
+            <animate attributeName="fill" values="rgba(245,158,11,0);rgba(245,158,11,0.15);rgba(245,158,11,0)" dur="2s" begin="1.5s" repeatCount="indefinite"/>
+          </rect>
+        </svg>
+      </div>
+      <div class="dest-title">Resources</div>
+      <div class="dest-desc">All team links in one place — ClickUp, GitHub, Drive docs, Zoho, WhatsApp, Netlify and more.</div>
+      <span class="dest-tag">12 links</span>
     </a>
+</a>
   </div>
   <div class="signout-row">
     <button class="signout-btn" onclick="doLogout()">⏻ Sign Out</button>

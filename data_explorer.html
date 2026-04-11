@@ -20,21 +20,17 @@
         ::selection{background:var(--accent);color:var(--bg-primary)}
 
         /* Nav */
-        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.85);border-bottom:1px solid var(--border)}
-        .nav-logo{font-size:1.3rem;font-weight:700;letter-spacing:.12em;color:var(--text-primary);text-decoration:none;display:flex;align-items:center;gap:.7rem}
-        .logo-mark{width:36px;height:36px;position:relative}.logo-mark svg{width:100%;height:100%}
+        
+        .logo-mark svg{width:100%;height:100%}
         .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
         .nav-links a{color:var(--text-secondary);text-decoration:none;font-size:.88rem;font-weight:400;letter-spacing:.02em;transition:color .3s;position:relative}
         .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transition:transform .3s}
         .nav-links a:hover{color:var(--text-primary)}.nav-links a:hover::after{transform:scaleX(1)}
-        .nav-cta{padding:.55rem 1.4rem!important;background:var(--accent)!important;color:var(--bg-primary)!important;border-radius:8px;font-weight:600!important;font-size:.82rem!important;transition:all .3s!important}
-        .nav-cta::after{display:none!important}.nav-cta:hover{background:var(--accent-bright)!important;transform:translateY(-1px);box-shadow:0 8px 25px var(--accent-glow)}
-        .nav-user{display:flex;align-items:center;gap:.8rem;padding:.4rem .8rem .4rem 1rem;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;font-size:.82rem;color:var(--text-secondary);cursor:default}
+        .nav-cta::after{display:none!important}.nav-user{display:flex;align-items:center;gap:.8rem;padding:.4rem .8rem .4rem 1rem;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;font-size:.82rem;color:var(--text-secondary);cursor:default}
         .nav-user-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;flex-shrink:0}
         .nav-user-name{color:var(--text-primary);font-weight:500}
         .nav-logout{background:none;border:1px solid rgba(248,113,113,0.2);color:var(--danger);padding:.35rem .8rem;border-radius:6px;font-family:'Outfit',sans-serif;font-size:.78rem;cursor:pointer;transition:all .3s}
         .nav-logout:hover{background:var(--danger-dim);border-color:var(--danger)}
-        .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
         .hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);margin:5px 0;border-radius:2px;transition:all .3s}
 
         /* Login Screen */
@@ -182,7 +178,6 @@
             nav{padding:0 1.2rem}
             .nav-links{position:fixed;top:72px;left:0;right:0;background:rgba(6,10,19,0.97);backdrop-filter:blur(24px);flex-direction:column;padding:1.5rem;gap:1rem;display:none;border-bottom:1px solid var(--border)}
             .nav-links.open{display:flex}
-            .hamburger{display:block}
             .login-card{padding:2rem 1.5rem;margin:0 .5rem}
             .explorer{padding:80px 1rem 2rem}
             .tables-grid{grid-template-columns:1fr}
@@ -235,20 +230,17 @@ nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0
 </style>
 <style>
 
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.85);border-bottom:1px solid rgba(255,255,255,0.05);transition:all .4s}
-.nav-logo{font-size:1.3rem;font-weight:700;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.7rem}
-.logo-mark{width:36px;height:36px}.logo-mark svg{width:100%;height:100%}
+
+.logo-mark svg{width:100%;height:100%}
 .nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none}
 .nav-links a{color:#7b8ba8;text-decoration:none;font-size:.88rem;font-weight:400;letter-spacing:.02em;transition:color .3s}
 .nav-links a:hover{color:#e8ecf4}
 .nav-pill{padding:.45rem 1.1rem!important;border:1px solid rgba(0,212,170,0.3)!important;border-radius:8px;color:#00d4aa!important}
 .nav-pill:hover{background:rgba(0,212,170,0.08)!important}
-.nav-cta{padding:.55rem 1.4rem!important;background:#00d4aa!important;color:#060a13!important;border-radius:8px;font-weight:600!important;font-size:.82rem!important}
-.nav-cta:hover{background:#00f5c4!important}
 #nav-user-name{color:#00d4aa;font-family:'JetBrains Mono',monospace;font-size:.78rem}
 .nav-logout{background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:rgba(255,255,255,0.4);font-size:.78rem;padding:.3rem .7rem;cursor:pointer;font-family:inherit;transition:all .2s}
 .nav-logout:hover{border-color:rgba(248,113,113,.4);color:#f87171}
-@media(max-width:768px){nav{padding:0 1.2rem}.nav-links{gap:.8rem}}
+}
 
 #loginScreen { padding-top: 72px; }
 </style>
@@ -300,18 +292,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;
 
 
     <!-- ═══ NAV ═══ -->
-    <nav id="nav">
-        <a href="/" class="nav-logo">
-            <div class="logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
-            ARTEMIS
-        </a>
-        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="/">Home</a></li>
-            <li><a href="/connect">Connect Pages</a></li>
-            <li id="navUserArea"></li>
-        </ul>
-    </nav>
+    
 
     <!-- ═══ LOGIN SCREEN ═══ -->
     <div class="login-screen" id="loginScreen">
