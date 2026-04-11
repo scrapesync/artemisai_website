@@ -122,9 +122,43 @@ textarea.form-input{min-height:80px;resize:vertical}
 .btn-signout{display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;background:none;border:1px solid rgba(248,113,113,0.15);border-radius:10px;color:var(--text-secondary);font-family:"Outfit",sans-serif;font-size:13px;cursor:pointer;transition:all .3s}
 .btn-signout:hover{background:rgba(248,113,113,0.08);border-color:rgba(248,113,113,0.3);color:#f87171}
 .btn-signout svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5}
+
+/* ── Sign-out confirmation modal ── */
+#signout-modal{display:none;position:fixed;inset:0;z-index:99998;align-items:center;justify-content:center}
+#signout-modal.open{display:flex}
+#signout-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px)}
+#signout-card{position:relative;z-index:1;background:#0f1729;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:2rem 2.2rem;max-width:360px;width:90%;box-shadow:0 30px 60px rgba(0,0,0,0.5);animation:modalIn .2s ease}
+#signout-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(248,113,113,0.6),transparent);border-radius:0}
+@keyframes modalIn{from{opacity:0;transform:scale(.94) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.signout-icon{width:44px;height:44px;border-radius:12px;background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.signout-icon svg{width:20px;height:20px;stroke:#f87171;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.signout-title{text-align:center;font-size:1.05rem;font-weight:700;color:#e8ecf4;margin-bottom:.35rem}
+.signout-sub{text-align:center;font-size:.82rem;color:#7b8ba8;margin-bottom:1.6rem;line-height:1.5}
+.signout-btns{display:flex;gap:10px}
+.signout-cancel{flex:1;padding:.7rem;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:9px;color:#7b8ba8;font-family:inherit;font-size:.88rem;cursor:pointer;transition:all .2s}
+.signout-cancel:hover{border-color:rgba(255,255,255,0.2);color:#e8ecf4}
+.signout-confirm{flex:1;padding:.7rem;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);border-radius:9px;color:#f87171;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+.signout-confirm:hover{background:rgba(248,113,113,0.2);border-color:rgba(248,113,113,0.5)}
 </style>
 </head>
 <body>
+
+<!-- Sign-out confirmation modal -->
+<div id="signout-modal">
+  <div id="signout-backdrop" onclick="_closeSignoutModal()"></div>
+  <div id="signout-card">
+    <div class="signout-icon">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    </div>
+    <div class="signout-title">Sign out?</div>
+    <div class="signout-sub">You'll need to sign back in to access the Admin Panel.</div>
+    <div class="signout-btns">
+      <button class="signout-cancel" onclick="_closeSignoutModal()">Cancel</button>
+      <button class="signout-confirm" onclick="_doSignout()">Sign Out</button>
+    </div>
+  </div>
+</div>
+
 <aside class="sidebar"><a href="admin_panel.html" class="sidebar-logo" title="Back to Admin Panel"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg><span>ARTEMIS</span></a><nav class="sidebar-nav"><div class="nav-group-label">Main</div><a href="index.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="mockup_dashboard.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a><a href="mockup_discovery.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discovery Feed</a><a href="mockup_predictions.html" class="nav-item active"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predictions</a><a href="mockup_audience.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Audience</a><div class="nav-group-label">Intelligence</div><a href="mockup_arte.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Art-E<span class="nav-badge badge-ai">AI</span></a><a href="mockup_alerts.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Alerts<span class="nav-badge badge-alert">3</span></a><a href="mockup_reports.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</a><div class="nav-group-label">Settings</div><a href="mockup_connected.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Connected Pages</a><a href="mockup_settings.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a></nav></aside><div class="main"><header class="topbar"><div class="topbar-left"><div class="topbar-title">Predictions</div></div><div class="topbar-right"><div class="avatar">AS</div></div></header><div class="content">
 <div class="grid-3 animate">
   <div class="pred-card" style="text-align:center">
@@ -209,12 +243,32 @@ textarea.form-input{min-height:80px;resize:vertical}
   // Wire sign out
   var btns=document.querySelectorAll('.btn-signout');
   btns.forEach(function(b){
-    b.onclick=function(){
-      localStorage.removeItem(SK);
-      localStorage.removeItem('artemis_app_session');
-      window.location.href='index.html';
-    };
+    b.onclick=function(){_showSignoutModal();};
   });
 })();
+</script>
+<script>
+
+var _signoutFn = null;
+function _showSignoutModal(fn){
+  _signoutFn = fn || function(){
+    localStorage.removeItem('tmp');
+    localStorage.removeItem('artemis_session');
+    localStorage.removeItem('artemis_app_session');
+    localStorage.removeItem('artemis_sprint_session');
+    window.location.href='index.html';
+  };
+  document.getElementById('signout-modal').classList.add('open');
+  document.addEventListener('keydown', _escSignout);
+}
+function _closeSignoutModal(){
+  document.getElementById('signout-modal').classList.remove('open');
+  document.removeEventListener('keydown', _escSignout);
+}
+function _doSignout(){
+  _closeSignoutModal();
+  if(_signoutFn) _signoutFn();
+}
+function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
 </script>
 </body></html>

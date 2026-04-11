@@ -215,6 +215,23 @@ nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0
   .nav-hamburger{display:flex}
 }
 #loginScreen{padding-top:68px}
+
+/* ── Sign-out confirmation modal ── */
+#signout-modal{display:none;position:fixed;inset:0;z-index:99998;align-items:center;justify-content:center}
+#signout-modal.open{display:flex}
+#signout-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px)}
+#signout-card{position:relative;z-index:1;background:#0f1729;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:2rem 2.2rem;max-width:360px;width:90%;box-shadow:0 30px 60px rgba(0,0,0,0.5);animation:modalIn .2s ease}
+#signout-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(248,113,113,0.6),transparent);border-radius:0}
+@keyframes modalIn{from{opacity:0;transform:scale(.94) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.signout-icon{width:44px;height:44px;border-radius:12px;background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.signout-icon svg{width:20px;height:20px;stroke:#f87171;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.signout-title{text-align:center;font-size:1.05rem;font-weight:700;color:#e8ecf4;margin-bottom:.35rem}
+.signout-sub{text-align:center;font-size:.82rem;color:#7b8ba8;margin-bottom:1.6rem;line-height:1.5}
+.signout-btns{display:flex;gap:10px}
+.signout-cancel{flex:1;padding:.7rem;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:9px;color:#7b8ba8;font-family:inherit;font-size:.88rem;cursor:pointer;transition:all .2s}
+.signout-cancel:hover{border-color:rgba(255,255,255,0.2);color:#e8ecf4}
+.signout-confirm{flex:1;padding:.7rem;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);border-radius:9px;color:#f87171;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+.signout-confirm:hover{background:rgba(248,113,113,0.2);border-color:rgba(248,113,113,0.5)}
 </style>
 <style>
 
@@ -237,6 +254,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;
 </style>
 </head>
 <body>
+
+<!-- Sign-out confirmation modal -->
+<div id="signout-modal">
+  <div id="signout-backdrop" onclick="_closeSignoutModal()"></div>
+  <div id="signout-card">
+    <div class="signout-icon">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    </div>
+    <div class="signout-title">Sign out?</div>
+    <div class="signout-sub">You'll need to sign back in to access the Admin Panel.</div>
+    <div class="signout-btns">
+      <button class="signout-cancel" onclick="_closeSignoutModal()">Cancel</button>
+      <button class="signout-confirm" onclick="_doSignout()">Sign Out</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // If already logged in via admin session, auto-proceed to explorer
 try{
@@ -262,7 +296,7 @@ try{
       <li><a href="index.html#team">Team</a></li>
       <li><a href="index.html#contact">Contact</a></li>
       
-      <li><a href="admin_panel.html" class="nav-pill-outline">⚡ Admin Panel</a></li>
+      <li><a href="admin_panel.html" class="nav-pill-outline">← Admin Panel</a></li>
       <li>
         <div class="nav-user-chip" id="nav-user-chip">
           <div class="nav-user-avatar" id="nav-user-avatar">?</div>
@@ -808,7 +842,7 @@ if(window._autoUser){
 </script>
 <script>
 var _SK='artemis_session';
-function _siteLogout(){if(!confirm('Sign out?'))return;localStorage.removeItem(_SK);window.location.href='index.html';}
+function _siteLogout(){_showSignoutModal();}
 function _getSession(){try{return JSON.parse(localStorage.getItem(_SK)||'null');}catch{return null;}}
 function _requireLogin(){if(!_getSession()){window.location.href='admin_login.html';return false;}return true;}
 function _initSiteNav(){
@@ -829,6 +863,30 @@ function _initSiteNav(){
 window.addEventListener('scroll',function(){var n=document.getElementById('site-nav');if(n)n.classList.toggle('scrolled',window.scrollY>20);});
 document.addEventListener('DOMContentLoaded',_initSiteNav);
 _initSiteNav();
+</script>
+<script>
+
+var _signoutFn = null;
+function _showSignoutModal(fn){
+  _signoutFn = fn || function(){
+    localStorage.removeItem('tmp');
+    localStorage.removeItem('artemis_session');
+    localStorage.removeItem('artemis_app_session');
+    localStorage.removeItem('artemis_sprint_session');
+    window.location.href='index.html';
+  };
+  document.getElementById('signout-modal').classList.add('open');
+  document.addEventListener('keydown', _escSignout);
+}
+function _closeSignoutModal(){
+  document.getElementById('signout-modal').classList.remove('open');
+  document.removeEventListener('keydown', _escSignout);
+}
+function _doSignout(){
+  _closeSignoutModal();
+  if(_signoutFn) _signoutFn();
+}
+function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
 </script>
 </body>
 </html>
