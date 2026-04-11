@@ -1616,93 +1616,7 @@ const SYNC_ENABLED = true;
 const SYNC_USER_ID = 'asad';
 const API_BASE = 'https://g6zr0b5lwe.execute-api.eu-west-2.amazonaws.com/default/lambda_save';
 
-async function syncSaveSprint(sn){
-  if(!SYNC_ENABLED)return;
-  try{
-    const ss=gss(sn);
-    await fetch(API_BASE,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({userId:SYNC_USER_ID,sprintName:sn,action:'save',data:ss})
-    });
-  }catch(e){console.warn('DynamoDB sync failed (non-critical):',e);}
-}
 
-async function syncLoadAll(){
-  if(!SYNC_ENABLED)return;
-  try{
-    const res=await fetch(`${API_BASE}?action=load&userId=${SYNC_USER_ID}`);
-    const items=await res.json();
-    items.forEach(item=>{
-      const{userId,sprintName,updatedAt,...data}=item;
-      ST[sprintName]=data;
-    });
-    saveST();
-    renderLaunch();renderSprintTrackBar();renderTeamProgress();
-    if(currentTab==='sprint')renderSprintPage();
-    if(currentTab==='mockup')renderMockupPage();
-    console.log('Loaded',items.length,'sprints from DynamoDB');
-  }catch(e){console.warn('DynamoDB load failed:',e);}
-}
-
-// Direct sync — called explicitly after state changes
-// saveST() still handles localStorage; syncSaveSprint(sn) handles DynamoDB
-
-
-/* ═══ SYNC STATUS HELPERS ═══ */
-function setSyncStatus(status, text){
-  const ind=document.getElementById('sync-indicator');
-  const dot=document.getElementById('sync-dot');
-  const txt=document.getElementById('sync-text');
-  if(!ind)return;
-  ind.style.display='flex';
-  if(status==='syncing'){dot.style.background='#f59e0b';txt.textContent=text||'Syncing...';}
-  else if(status==='ok'){dot.style.background='#34d399';txt.textContent=text||'Synced';setTimeout(()=>{ind.style.display='none';},2000);}
-  else if(status==='error'){dot.style.background='#f87171';txt.textContent=text||'Sync failed';}
-}
-
-async function pushAllToDynamo(){
-  const btn=document.getElementById('push-all-btn');
-  if(btn){btn.disabled=true;btn.textContent='Pushing...';}
-  setSyncStatus('syncing','Pushing all sprints...');
-  try{
-    const resp=await fetch(API_BASE,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({action:'save-all',userId:SYNC_USER_ID,state:ST})
-    });
-    const data=await resp.json();
-    if(data.ok){
-      setSyncStatus('ok',`Pushed ${data.count} sprints ✓`);
-      if(btn){btn.style.display='none';}
-    } else {
-      setSyncStatus('error','Push failed: '+JSON.stringify(data));
-      if(btn){btn.disabled=false;btn.textContent='⬆ Push to DynamoDB';}
-    }
-  }catch(e){
-    setSyncStatus('error','Network error');
-    if(btn){btn.disabled=false;btn.textContent='⬆ Push to DynamoDB';}
-  }
-}
-
-/* Override syncSaveSprint to show status */
-const _origSyncSave=syncSaveSprint;
-async function syncSaveSprint(sn){
-  if(!SYNC_ENABLED)return;
-  setSyncStatus('syncing','Saving '+sn+'...');
-  try{
-    const ss=gss(sn);
-    const resp=await fetch(API_BASE,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({userId:SYNC_USER_ID,sprintName:sn,action:'save',data:ss})
-    });
-    const data=await resp.json();
-    if(data.ok) setSyncStatus('ok','Saved');
-    else setSyncStatus('error','Save failed');
-  }catch(e){setSyncStatus('error','Offline');}
-}
-
-/* Override syncLoadAll to show push button if DB is empty */
-const _origSyncLoad=syncLoadAll;
 async function syncLoadAll(){
   if(!SYNC_ENABLED)return;
   setSyncStatus('syncing','Loading from DynamoDB...');
@@ -1731,6 +1645,48 @@ async function syncLoadAll(){
     setSyncStatus('error','Load failed — using localStorage');
     console.warn('DynamoDB load failed, using localStorage:',e);
   }
+}
+
+
+function setSyncStatus(status,text){
+  const ind=document.getElementById('sync-indicator');
+  const dot=document.getElementById('sync-dot');
+  const txt=document.getElementById('sync-text');
+  if(!ind)return;
+  ind.style.display='flex';
+  if(status==='syncing'){dot.style.background='#f59e0b';if(txt)txt.textContent=text||'Syncing...';}
+  else if(status==='ok'){dot.style.background='#34d399';if(txt)txt.textContent=text||'Synced ✓';setTimeout(()=>{ind.style.display='none';},2500);}
+  else if(status==='error'){dot.style.background='#f87171';if(txt)txt.textContent=text||'Sync failed';}
+}
+
+async function syncSaveSprint(sn){
+  if(!SYNC_ENABLED)return;
+  setSyncStatus('syncing','Saving '+sn+'...');
+  try{
+    const ss=gss(sn);
+    const resp=await fetch(API_BASE,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({userId:SYNC_USER_ID,sprintName:sn,action:'save',data:ss})
+    });
+    const data=await resp.json();
+    if(data.ok)setSyncStatus('ok','Saved ✓');
+    else setSyncStatus('error','Save failed');
+  }catch(e){setSyncStatus('error','Offline');}
+}
+
+async function pushAllToDynamo(){
+  const btn=document.getElementById('push-all-btn');
+  if(btn){btn.disabled=true;btn.textContent='Pushing...';}
+  setSyncStatus('syncing','Pushing all sprints...');
+  try{
+    const resp=await fetch(API_BASE,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'save-all',userId:SYNC_USER_ID,state:ST})
+    });
+    const data=await resp.json();
+    if(data.ok){setSyncStatus('ok','Pushed '+data.count+' sprints ✓');if(btn)btn.style.display='none';}
+    else{setSyncStatus('error','Push failed');if(btn){btn.disabled=false;btn.textContent='⬆ Push to DynamoDB';}}
+  }catch(e){setSyncStatus('error','Network error');if(btn){btn.disabled=false;btn.textContent='⬆ Push to DynamoDB';}}
 }
 
 loadST();
