@@ -271,16 +271,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;
   </div>
 </div>
 
-<script>
-// If already logged in via admin session, auto-proceed to explorer
-try{
-  const s = JSON.parse(localStorage.getItem('artemis_session')||'null');
-  if(s) {
-    // Map admin session to data explorer user
-    window._autoUser = {username: s.username, full_name: s.name, role: s.role};
-  }
-}catch(e){}
-</script>
+
 <nav class="site-nav" id="site-nav">
     <a href="index.html" class="site-logo">
       <div class="site-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#nlg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#nlg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#nlg)"/><defs><linearGradient id="nlg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
@@ -434,7 +425,15 @@ try{
 // ══════════════════════════════════════════
 const API = 'https://g6zr0b5lwe.execute-api.eu-west-2.amazonaws.com/default/lambda_save';  // DynamoDB via Lambda
 let state = {
-    user: JSON.parse(localStorage.getItem('artemis_user') || 'null'),
+    user: (function(){
+    try{
+      var u=JSON.parse(localStorage.getItem('artemis_user')||'null');
+      if(u) return u;
+      var s=JSON.parse(localStorage.getItem('artemis_session')||'null');
+      if(s) return {username:s.username,full_name:s.name,role:s.role,id:s.username};
+      return null;
+    }catch{return null;}
+  })(),
     tables: [],
     currentTable: null,
     currentSchema: null,
@@ -813,6 +812,10 @@ function showToast(msg) {
 // INIT
 // ══════════════════════════════════════════
 checkSession();
+// If state.user is set (from unified session), go straight to explorer
+if(state.user){
+  showExplorer();
+}
 </script>
 <script>
 

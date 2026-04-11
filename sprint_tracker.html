@@ -538,6 +538,13 @@ body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-he
 </style>
 </head>
 <body>
+<script>
+// Immediate auth check — skip overlay if unified session exists
+(function(){
+  var s = localStorage.getItem('artemis_session') || localStorage.getItem('artemis_sprint_session');
+  if(!s) { window._needsLogin = true; }
+})();
+</script>
 
 <!-- Sign-out confirmation modal -->
 <div id="signout-modal">
@@ -557,7 +564,7 @@ body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-he
 
 
 <!-- LOGIN OVERLAY -->
-<div id="login-overlay" style="display:none;position:fixed;inset:0;background:#060a13;z-index:99999;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;">
+<div id="login-overlay" style="display:none" style="display:none;position:fixed;inset:0;background:#060a13;z-index:99999;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;">
   <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,170,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,170,0.02) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 60% 60% at 50% 50%,black,transparent)"></div>
   <div style="position:absolute;width:500px;height:500px;border-radius:50%;filter:blur(120px);background:radial-gradient(circle,rgba(0,212,170,0.06),transparent 70%);top:5%;left:10%;pointer-events:none"></div>
   <div style="position:absolute;width:400px;height:400px;border-radius:50%;filter:blur(100px);background:radial-gradient(circle,rgba(99,102,241,0.05),transparent 70%);bottom:5%;right:10%;pointer-events:none"></div>
@@ -1996,12 +2003,15 @@ const AUTH_KEY = 'artemis_sprint_session';
 const UNIFIED_SK = 'artemis_session';
 
 function checkAuth(){
-  // Accept either sprint session or unified admin session
   const sess = sessionStorage.getItem(AUTH_KEY) || localStorage.getItem(AUTH_KEY) || localStorage.getItem(UNIFIED_SK);
   if(!sess){
     showLoginOverlay();
     return false;
   }
+  // Hide overlay in case it was shown
+  const ov = document.getElementById('login-overlay');
+  if(ov) ov.style.display='none';
+  document.querySelectorAll('.tab-bar, .page, #sprint-track-bar').forEach(el=>el.style.visibility='visible');
   try{
     const user = JSON.parse(sess);
     const nm = document.getElementById('st-user-name');

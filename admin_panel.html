@@ -40,7 +40,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;
 h1{font-size:2.6rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.6rem}
 h1 span{color:var(--accent)}
 .sub{font-size:1rem;color:var(--text-secondary);font-weight:300}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:860px;width:100%}@media(min-width:900px){.cards{grid-template-columns:repeat(4,1fr)}}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1020px;width:100%}@media(min-width:700px){.cards{grid-template-columns:repeat(3,1fr)}}@media(min-width:1000px){.cards{grid-template-columns:repeat(5,1fr)}}
 .dest-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:2rem;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;text-decoration:none;display:block}
 .dest-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--cc,var(--accent));opacity:.7;transition:opacity .3s}
 .dest-card:hover{border-color:var(--cc,var(--accent));transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.4)}
@@ -151,31 +151,99 @@ nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0
   <div class="cards">
     <a href="mockup_dashboard.html" class="dest-card" style="--cc:#00d4aa;--ci:rgba(0,212,170,0.08);--cb:rgba(0,212,170,0.2)">
       <span class="dest-arrow">↗</span>
-      <div class="dest-icon">📊</div>
+      <div class="dest-icon" style="overflow:hidden">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="14" width="5" height="12" rx="1.5" fill="#00d4aa" opacity="0.9">
+          <animate attributeName="height" values="12;18;12" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="y" values="14;8;14" dur="2s" repeatCount="indefinite"/>
+        </rect>
+        <rect x="10" y="8" width="5" height="18" rx="1.5" fill="#00d4aa">
+          <animate attributeName="height" values="18;10;18" dur="2.4s" repeatCount="indefinite"/>
+          <animate attributeName="y" values="8;16;8" dur="2.4s" repeatCount="indefinite"/>
+        </rect>
+        <rect x="18" y="4" width="5" height="22" rx="1.5" fill="#00d4aa" opacity="0.7">
+          <animate attributeName="height" values="22;14;22" dur="1.8s" repeatCount="indefinite"/>
+          <animate attributeName="y" values="4;12;4" dur="1.8s" repeatCount="indefinite"/>
+        </rect>
+      </svg>
+    </div>
       <div class="dest-title">Mockup Dashboard</div>
       <div class="dest-desc">Explore the full ArtemisAI product mockup — Dashboard, Predictions, Audience, Art-E, Discovery Feed and more.</div>
-      <span class="dest-tag">🌐 10 screens</span>
+      <span class="dest-tag">10 screens</span>
     </a>
     <a href="sprint_tracker.html" class="dest-card" style="--cc:#6366f1;--ci:rgba(99,102,241,0.08);--cb:rgba(99,102,241,0.2)">
       <span class="dest-arrow">↗</span>
-      <div class="dest-icon">🚀</div>
+      <div class="dest-icon" style="overflow:hidden">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <animateTransform attributeName="transform" type="translate" values="0,0;0,-2;0,0" dur="1.5s" repeatCount="indefinite"/>
+        <path d="M14 3C14 3 20 6 20 14L14 20L8 14C8 6 14 3 14 3Z" fill="#6366f1" opacity="0.9"/>
+        <circle cx="14" cy="13" r="2.5" fill="white" opacity="0.9"/>
+        <path d="M10 20L8 25L14 22L20 25L18 20" fill="#f59e0b" opacity="0.8">
+          <animate attributeName="opacity" values="0.8;0.3;0.8" dur="0.6s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+    </div>
       <div class="dest-title">Sprint Tracker</div>
       <div class="dest-desc">Track all 22 sprints, check off tasks, view team progress, manage the Road to Launch mission control.</div>
-      <span class="dest-tag">⚡ 22 sprints</span>
+      <span class="dest-tag">22 sprints</span>
     </a>
     <a href="coding_guide.html" class="dest-card" style="--cc:#f59e0b;--ci:rgba(245,158,11,0.08);--cb:rgba(245,158,11,0.2)">
       <span class="dest-arrow">↗</span>
-      <div class="dest-icon">📖</div>
+      <div class="dest-icon" style="overflow:hidden">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="20" height="20" rx="3" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+        <line x1="8" y1="10" x2="16" y2="10" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round">
+          <animate attributeName="x2" values="16;12;16" dur="2s" repeatCount="indefinite"/>
+        </line>
+        <line x1="8" y1="14" x2="20" y2="14" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" opacity="0.6">
+          <animate attributeName="x2" values="20;14;20" dur="2.5s" repeatCount="indefinite"/>
+        </line>
+        <line x1="8" y1="18" x2="13" y2="18" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" opacity="0.4">
+          <animate attributeName="x2" values="13;18;13" dur="1.8s" repeatCount="indefinite"/>
+        </line>
+      </svg>
+    </div>
       <div class="dest-title">Coding Guide</div>
       <div class="dest-desc">Full implementation guide covering architecture, pipelines, ML models, APIs and every technical decision.</div>
-      <span class="dest-tag">🔧 Sprint 1–22</span>
+      <span class="dest-tag">Sprint 1–22</span>
     </a>
     <a href="data_explorer.html" class="dest-card" style="--cc:#38bdf8;--ci:rgba(56,189,248,0.08);--cb:rgba(56,189,248,0.2)">
       <span class="dest-arrow">↗</span>
-      <div class="dest-icon">🔍</div>
+      <div class="dest-icon" style="overflow:hidden">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="6" stroke="#38bdf8" stroke-width="1.8">
+          <animate attributeName="r" values="6;7;6" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="stroke-opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <line x1="16.5" y1="16.5" x2="22" y2="22" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round">
+          <animate attributeName="x1" values="16.5;17;16.5" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="y1" values="16.5;17;16.5" dur="2s" repeatCount="indefinite"/>
+        </line>
+        <circle cx="10" cy="10" r="2" fill="#38bdf8" opacity="0.4">
+          <animate attributeName="opacity" values="0.4;0.8;0.4" dur="1.5s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
       <div class="dest-title">Data Explorer</div>
       <div class="dest-desc">Query Redshift tables directly, export CSV data, explore post sentiments, engagement metrics and ML outputs.</div>
-      <span class="dest-tag">📊 Live data</span>
+      <span class="dest-tag">Live Redshift data</span>
+    </a>
+    <a href="learning_hub.html" class="dest-card" style="--cc:#a78bfa;--ci:rgba(167,139,250,0.08);--cb:rgba(167,139,250,0.2)">
+      <span class="dest-arrow">↗</span>
+      <div class="dest-icon" style="overflow:hidden">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="20" height="14" rx="2" fill="none" stroke="#a78bfa" stroke-width="1.5"><animate attributeName="stroke-opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/></rect>
+          <line x1="14" y1="8" x2="14" y2="22" stroke="#a78bfa" stroke-width="1" opacity="0.4"/>
+          <line x1="7" y1="12" x2="11" y2="12" stroke="#a78bfa" stroke-width="1.2" stroke-linecap="round"><animate attributeName="x2" values="11;13;11" dur="1.8s" repeatCount="indefinite"/></line>
+          <line x1="7" y1="15" x2="11" y2="15" stroke="#a78bfa" stroke-width="1.2" stroke-linecap="round" opacity="0.7"><animate attributeName="x2" values="11;9;11" dur="2.2s" repeatCount="indefinite"/></line>
+          <line x1="7" y1="18" x2="10" y2="18" stroke="#a78bfa" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+          <circle cx="21" cy="7" r="3.5" fill="none" stroke="#a78bfa" stroke-width="1.2"><animate attributeName="r" values="3.5;4.5;3.5" dur="2s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="21" cy="7" r="1.2" fill="#a78bfa"><animate attributeName="opacity" values="1;0.4;1" dur="1.5s" repeatCount="indefinite"/></circle>
+        </svg>
+      </div>
+      <div class="dest-title">Learning Hub</div>
+      <div class="dest-desc">Track GenAI learning across the team — Transformers, LLMs, RAG, Agents. Role-tailored paths for all 8 members.</div>
+      <span class="dest-tag">8 team members</span>
     </a>
   </div>
   <div class="signout-row">
@@ -205,8 +273,31 @@ function _initSiteNav(){
 }
 window.addEventListener('scroll',function(){var n=document.getElementById('site-nav');if(n)n.classList.toggle('scrolled',window.scrollY>20);});
 document.addEventListener('DOMContentLoaded',_initSiteNav);
-try{if(!_getSession())window.location.href="admin_login.html";
-else{_initSiteNav();var s=_getSession();var f=(s.name||s.username||"").split(" ")[0];document.getElementById("user-first").textContent=f||"there";document.getElementById("user-role-line").textContent="Signed in as "+(s.name||s.username)+" · "+(s.role||"Team")+" — where would you like to go?";}}catch(e){window.location.href="admin_login.html";}
+try{
+  var s=_getSession();
+  if(!s){window.location.href="admin_login.html";}
+  else{
+    _initSiteNav();
+    var f=(s.name||s.username||"").split(" ")[0];
+    document.getElementById("user-first").textContent=f||"there";
+    document.getElementById("user-role-line").textContent="Signed in as "+(s.name||s.username)+" · "+(s.role||"Team")+" — where would you like to go?";
+    // Guest role: hide all cards except Mockup Dashboard
+    var role=(s.role||"").toLowerCase();
+    if(role==="guest"){
+      var cards=document.querySelectorAll(".dest-card");
+      cards.forEach(function(c){
+        var href=c.getAttribute("href")||"";
+        if(href.indexOf("mockup_dashboard")===-1){
+          c.style.display="none";
+        }
+      });
+      document.getElementById("user-role-line").textContent="Welcome, "+f+" — you have access to the Mockup Dashboard.";
+      // Also hide sign-out button label change
+      var badge=document.querySelector(".welcome-badge");
+      if(badge)badge.innerHTML='<span class="pd"></span><span>ARTEMISAI · GUEST</span>';
+    }
+  }
+}catch(e){window.location.href="admin_login.html";}
 function doLogout(){_showSignoutModal();}
 </script>
 <script>
