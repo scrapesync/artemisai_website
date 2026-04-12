@@ -593,9 +593,81 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
   .tab-btn{padding:5px 10px!important;font-size:9.5px!important}
   .stb-label{font-size:9px!important}
 }
+
+/* ── Sprint date range button ── */
+.date-range-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--card2);border:1px solid rgba(255,255,255,.1);border-radius:8px;
+  padding:6px 12px;cursor:pointer;font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--text);transition:all .2s;white-space:nowrap;
+}
+.date-range-btn:hover{border-color:var(--accent);background:rgba(0,212,170,.06);}
+.date-range-btn svg{stroke:var(--accent);opacity:.7;flex-shrink:0}
+.drbtn-start,.drbtn-end{color:var(--accent);font-weight:500;}
+.drbtn-arrow{color:var(--muted2);font-size:10px;}
+.drbtn-dur{color:var(--muted2);font-size:9px;letter-spacing:.04em;margin-left:2px;}
+
+/* ── Date popover ── */
+#date-popover{
+  display:none;position:fixed;z-index:9999;
+  background:#0a1220;border:1px solid rgba(0,212,170,.25);border-radius:14px;
+  padding:18px 20px 16px;box-shadow:0 20px 50px rgba(0,0,0,.6);
+  min-width:300px;
+}
+#date-popover.open{display:block;}
+#date-popover::before{
+  content:'';position:absolute;top:-5px;left:24px;
+  width:8px;height:8px;background:#0a1220;
+  border-left:1px solid rgba(0,212,170,.25);border-top:1px solid rgba(0,212,170,.25);
+  transform:rotate(45deg);
+}
+.dp-title{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;}
+.dp-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.dp-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);
+  text-transform:uppercase;letter-spacing:.06em;min-width:36px;}
+.dp-input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:7px;padding:6px 9px;color:var(--text);font-family:'JetBrains Mono',monospace;
+  font-size:11px;outline:none;transition:all .2s;}
+.dp-input:focus{border-color:var(--accent);background:rgba(0,212,170,.05);}
+.dp-auto{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);
+  margin-bottom:12px;padding:6px 9px;background:rgba(255,255,255,.03);
+  border-radius:6px;border:1px solid rgba(255,255,255,.06);}
+.dp-auto b{color:var(--text);}
+.dp-actions{display:flex;gap:8px;margin-top:4px;}
+.dp-apply{flex:1;padding:8px;background:var(--accent);color:#060a13;
+  border:none;border-radius:8px;font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;letter-spacing:.05em;cursor:pointer;transition:all .2s;}
+.dp-apply:hover{background:var(--accent-bright);transform:translateY(-1px);}
+.dp-cancel{padding:8px 14px;background:transparent;border:1px solid rgba(255,255,255,.1);
+  border-radius:8px;color:var(--muted2);font-family:'JetBrains Mono',monospace;
+  font-size:10px;cursor:pointer;transition:all .2s;}
+.dp-cancel:hover{border-color:rgba(255,255,255,.25);color:var(--text);}
+.dp-cascade-note{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);
+  margin-top:8px;line-height:1.5;}
+.dp-cascade-note b{color:var(--accent);}
 </style>
 </head>
 <body>
+
+<!-- Sprint date popover -->
+<div id="date-popover">
+  <div class="dp-title">📅 <span id="dp-sprint-name">Sprint Dates</span></div>
+  <div class="dp-row">
+    <span class="dp-lbl">Start</span>
+    <input type="date" class="dp-input" id="dp-start" oninput="dpAutoCalc()">
+  </div>
+  <div class="dp-row">
+    <span class="dp-lbl">End</span>
+    <input type="date" class="dp-input" id="dp-end">
+  </div>
+  <div class="dp-auto" id="dp-auto-note">Duration: —</div>
+  <div class="dp-cascade-note">All <b>upcoming</b> sprints will shift automatically.</div>
+  <div class="dp-actions">
+    <button class="dp-cancel" onclick="closeDatePopover()">Cancel</button>
+    <button class="dp-apply" onclick="applyDatePopover()">✓ Apply & Cascade</button>
+  </div>
+</div>
 <nav class="site-nav">
   <a href="index.html" class="sn-logo">
     <div class="sn-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#slg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#slg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#slg)"/><defs><linearGradient id="slg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
@@ -705,6 +777,10 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
     <div class="stb-stats">
       <span><span class="stb-stat-val" id="stb-pct">0%</span> complete</span>
       <span><span class="stb-stat-val" id="stb-done">0</span> / <span id="stb-total">0</span> checks</span>
+      <button onclick="exportSprintCSV()" title="Download all sprints as CSV" style="background:transparent;border:1px solid rgba(0,212,170,.3);border-radius:6px;color:rgba(0,212,170,.7);font-family:'JetBrains Mono',monospace;font-size:9px;padding:3px 9px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px" onmouseover="this.style.borderColor='rgba(0,212,170,.7)';this.style.color='#00d4aa'" onmouseout="this.style.borderColor='rgba(0,212,170,.3)';this.style.color='rgba(0,212,170,.7)'">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        CSV
+      </button>
     </div>
   </div>
   <div class="stb-track-wrap">
@@ -800,12 +876,19 @@ function fmtShort(s){if(!s)return'—';const d=new Date(s+'T00:00:00');return d.
 
 function cascadeFrom(sn){
   const keys=Object.keys(SPRINT_DATA);const idx=keys.indexOf(sn);if(idx<0)return;
-  const ss=gss(sn);let next=ss.endDate;if(!next)return;
+  const ss=gss(sn);
+  const meta=SPRINT_META[sn]||{weeks:2};
+  // If endDate missing but startDate present, calculate it
+  let next=ss.endDate||(ss.startDate?addWeeks(ss.startDate,meta.weeks):null);
+  if(!next)return;
+  // Also save the calculated endDate back to the sprint
+  if(!ss.endDate&&ss.startDate)ss.endDate=next;
   for(let i=idx+1;i<keys.length;i++){
     const n=keys[i];const si=gss(n);
     if(!si._manual){
       const m=SPRINT_META[n]||{weeks:2};
       si.startDate=next;si.endDate=addWeeks(next,m.weeks);next=si.endDate;
+      syncSaveSprint(n); // persist each cascaded sprint
     } else {next=si.endDate||next;}
   }
   saveST();
@@ -1017,11 +1100,13 @@ function renderMain(sn){
     </div>
     <div class="sm-actions">
       <div class="date-editor">
-        <span class="date-lbl">Start</span>
-        <input type="date" class="date-input" value="${dates.start||''}" onchange="setDate('${sn}','start',this.value)">
-        <span style="color:var(--muted);font-size:11px;">→</span>
-        <span class="date-lbl">End</span>
-        <input type="date" class="date-input" value="${dates.end||''}" onchange="setDate('${sn}','end',this.value)">
+        <button class="date-range-btn" onclick="openDatePopover('${sn}',this)" title="Edit sprint dates">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span class="drbtn-start">${dates.start ? fmtShort(dates.start) : 'Set start'}</span>
+          <span class="drbtn-arrow">→</span>
+          <span class="drbtn-end">${dates.end ? fmtShort(dates.end) : 'Set end'}</span>
+          <span class="drbtn-dur">${dates.start && dates.end ? getDurationLabel(dates.start, dates.end) : ''}</span>
+        </button>
       </div>
       <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:6px;">
         <button class="ma-view-btn" onclick="exportSprintCSV()" style="border-color:rgba(52,211,153,.4);color:#34d399;font-size:9px;">⬇ Export All Sprints CSV</button>
@@ -1054,11 +1139,20 @@ function renderMain(sn){
 
 function setDate(sn,field,val){
   const ss=gss(sn);
-  if(field==='start')ss.startDate=val;
+  const meta=SPRINT_META[sn]||{weeks:2};
+  if(field==='start'){
+    ss.startDate=val;
+    // Auto-calculate end date = start + sprint weeks (unless manually overridden)
+    if(!ss._manual){
+      ss.endDate=addWeeks(val,meta.weeks);
+    }
+  }
   if(field==='end'){ss.endDate=val;ss._manual=true;}
   saveST();cascadeFrom(sn);syncSaveSprint(sn);
   renderMain(currentSprint);renderSidebar();renderSprintTrackBar();
-  if(currentTab==='launch')renderLaunch();else renderSprintTrackBar();
+  // Always refresh Mission Control and Mockup Alignment so phase dates update
+  renderLaunch();
+  if(currentTab==='mockup')renderMockupPage();
 }
 
 function renderTC(sn,task,color){
@@ -1744,9 +1838,29 @@ function exportMockupCSV(){
 }
 
 function exportSprintCSV(){
-  const rows=[['Sprint','Phase','Ticket','Task Name','Assignee','Status (Kanban)','Start Date','End Date','Checks Done','Checks Total','% Complete']];
   const phaseMap={};
   PHASES.forEach(p=>p.sprints.forEach(s=>phaseMap[s]=p.name+' — '+p.sub));
+
+  // Section 1: Sprint Summary
+  const summary=[
+    ['ARTEMISAI SPRINT PLAN — SUMMARY'],
+    ['Sprint','Phase','Start Date','End Date','Duration','Tasks','Checks Done','Checks Total','% Complete','Status']
+  ];
+  Object.keys(SPRINT_DATA).forEach(sn=>{
+    const ss=gss(sn);const sp=calcSP(sn);
+    const dates=getSprintDates(sn);
+    const deleted=ss.deletedTasks||[];
+    const taskCount=[...(SPRINT_DATA[sn]||[]),...(ss.customTasks||[])].filter(t=>!deleted.includes(t.ticket)).length;
+    const dur=dates.start&&dates.end?getDurationLabel(dates.start,dates.end):'';
+    const status=sp.pct===100?'Done':sp.pct>0?'In Progress':'Upcoming';
+    summary.push([sn,phaseMap[sn]||'',dates.start||'',dates.end||'',dur,taskCount,sp.d,sp.t,sp.pct+'%',status]);
+  });
+
+  // Section 2: Task Detail
+  const detail=[
+    ['ARTEMISAI SPRINT PLAN — TASK DETAIL'],
+    ['Sprint','Phase','Start Date','End Date','Ticket','Task Name','Assignee','Kanban Status','Checks Done','Checks Total','% Complete']
+  ];
   Object.keys(SPRINT_DATA).forEach(sn=>{
     const ss=gss(sn);const deleted=ss.deletedTasks||[];
     const allTasks=[...(SPRINT_DATA[sn]||[]),...(ss.customTasks||[])].filter(t=>!deleted.includes(t.ticket));
@@ -1756,20 +1870,37 @@ function exportSprintCSV(){
       const assignee=getEffectiveAssignee(sn,task.ticket,task.assignee);
       const kanban=getKanbanStatus(sn,task.ticket);
       const kanbanLabel=kanban==='done'?'Done':kanban==='inprog'?'In Progress':kanban==='blocker'?'Blocker':'Yet to Do';
-      rows.push([
-        sn,phaseMap[sn]||'',
-        task.ticket,
-        (task.name||'').replace(/[🌐🧪★⭐]/g,'').trim(),
-        assignee,kanbanLabel,
-        dates.start||'',dates.end||'',
-        tp.d,tp.t,tp.pct+'%'
-      ]);
+      detail.push([sn,phaseMap[sn]||'',dates.start||'',dates.end||'',task.ticket,
+        (task.name||'').replace(/[\u{1F300}-\u{1FFFF}]/gu,'').trim(),
+        assignee,kanbanLabel,tp.d,tp.t,tp.pct+'%']);
     });
   });
-  const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
-  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+
+  // Section 3: Checklist Detail
+  const chk=[
+    ['ARTEMISAI SPRINT PLAN — CHECKLIST DETAIL'],
+    ['Sprint','Ticket','Task Name','Checklist Item','Done','Assignee']
+  ];
+  Object.keys(SPRINT_DATA).forEach(sn=>{
+    const ss=gss(sn);const deleted=ss.deletedTasks||[];
+    const allTasks=[...(SPRINT_DATA[sn]||[]),...(ss.customTasks||[])].filter(t=>!deleted.includes(t.ticket));
+    allTasks.forEach(task=>{
+      const ts=gts(sn,task.ticket);
+      const assignee=getEffectiveAssignee(sn,task.ticket,task.assignee);
+      const name=(task.name||'').replace(/[\u{1F300}-\u{1FFFF}]/gu,'').trim();
+      (task.checklist||[]).forEach((item,i)=>{
+        chk.push([sn,task.ticket,name,ts.overrides?.[i]||item,ts.checks&&ts.checks[i]?'Yes':'No',assignee]);
+      });
+      (ts.cc||[]).forEach(c=>{chk.push([sn,task.ticket,name,c.text,c.done?'Yes':'No',assignee]);});
+    });
+  });
+
+  const toCSV=rows=>rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const full='\uFEFF'+toCSV(summary)+'\n\n'+toCSV(detail)+'\n\n'+toCSV(chk);
+  const stamp=new Date().toISOString().slice(0,10);
+  const blob=new Blob([full],{type:'text/csv;charset=utf-8;'});
   const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');a.href=url;a.download='artemisai_sprints.csv';
+  const a=document.createElement('a');a.href=url;a.download='artemisai_sprint_plan_'+stamp+'.csv';
   document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
 }
 
@@ -2211,6 +2342,91 @@ function _doSignout(){
   if(_signoutFn) _signoutFn();
 }
 function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
+
+/* ── Date popover JS ── */
+var _dpSprint = null;
+
+function getDurationLabel(s,e){
+  if(!s||!e)return '';
+  const ms=new Date(e+'T00:00:00')-new Date(s+'T00:00:00');
+  const days=Math.round(ms/86400000);
+  if(days<=0)return '';
+  const weeks=Math.floor(days/7),rem=days%7;
+  return weeks>0?(rem>0?weeks+'w '+rem+'d':weeks+'w'):(days+'d');
+}
+
+function openDatePopover(sn, btn){
+  _dpSprint = sn;
+  const dates = getSprintDates(sn);
+  document.getElementById('dp-sprint-name').textContent = sn + ' Dates';
+  document.getElementById('dp-start').value = dates.start || '';
+  document.getElementById('dp-end').value   = dates.end   || '';
+  dpAutoCalc();
+  const pop = document.getElementById('date-popover');
+  pop.classList.add('open');
+  // Position below the button
+  const rect = btn.getBoundingClientRect();
+  let top = rect.bottom + 8;
+  let left = rect.left;
+  // Keep within viewport
+  if(left + 300 > window.innerWidth) left = window.innerWidth - 310;
+  if(top + 200 > window.innerHeight) top = rect.top - 210;
+  pop.style.top  = top  + 'px';
+  pop.style.left = left + 'px';
+  // Close on outside click
+  setTimeout(()=>document.addEventListener('click', _dpOutside), 0);
+}
+
+function _dpOutside(e){
+  const pop = document.getElementById('date-popover');
+  if(!pop.contains(e.target) && !e.target.closest('.date-range-btn')){
+    closeDatePopover();
+  }
+}
+
+function closeDatePopover(){
+  document.getElementById('date-popover').classList.remove('open');
+  document.removeEventListener('click', _dpOutside);
+  _dpSprint = null;
+}
+
+function dpAutoCalc(){
+  const s = document.getElementById('dp-start').value;
+  const e = document.getElementById('dp-end').value;
+  const note = document.getElementById('dp-auto-note');
+  // If start changed and end is empty or before start, auto-calc end
+  if(s && (!e || e <= s)){
+    const meta = (SPRINT_META[_dpSprint]||{weeks:2});
+    const autoEnd = addWeeks(s, meta.weeks);
+    document.getElementById('dp-end').value = autoEnd;
+    note.innerHTML = 'Duration: <b>' + getDurationLabel(s, autoEnd) + '</b> · end auto-calculated';
+  } else if(s && e){
+    note.innerHTML = 'Duration: <b>' + getDurationLabel(s, e) + '</b>';
+  } else {
+    note.innerHTML = 'Duration: —';
+  }
+}
+
+function applyDatePopover(){
+  if(!_dpSprint) return;
+  const s = document.getElementById('dp-start').value;
+  const e = document.getElementById('dp-end').value;
+  if(!s || !e){ alert('Please set both start and end dates.'); return; }
+  if(e <= s){ alert('End date must be after start date.'); return; }
+  const ss = gss(_dpSprint);
+  ss.startDate = s;
+  ss.endDate   = e;
+  ss._manual   = true; // Both dates explicitly set
+  saveST();
+  cascadeFrom(_dpSprint);
+  syncSaveSprint(_dpSprint);
+  closeDatePopover();
+  renderMain(currentSprint);
+  renderSidebar();
+  renderSprintTrackBar();
+  renderLaunch();
+  if(currentTab==='mockup') renderMockupPage();
+}
 </script>
 </body>
 </html>
