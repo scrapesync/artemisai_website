@@ -803,7 +803,7 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 <!-- LAUNCH PAGE -->
 <div id="launch-page" class="page active">
   <div class="hero-mini">
-    <div class="hero-badge"><span class="pd"></span>ViralData Ltd — Active</div>
+    <div class="hero-badge"><span class="pd"></span>ArtemisAI — Active</div>
     <div class="hero-kpis">
       <div class="kpi"><span class="kpi-n" id="kpi-pct">0%</span><span class="kpi-l">Overall</span></div>
       <div class="kpi"><span class="kpi-n">22</span><span class="kpi-l">Sprints</span></div>
@@ -1469,110 +1469,123 @@ function toggleSidebar(){
 const CVS=document.getElementById('hero-canvas');
 const C=CVS.getContext('2d');
 let W,H;
-function resize(){W=CVS.width=window.innerWidth;H=CVS.height=window.innerHeight-60;}
-window.addEventListener('resize',()=>{resize();});
+function resize(){W=CVS.width=window.innerWidth;H=CVS.height=window.innerHeight;}
+window.addEventListener('resize',resize);
 resize();
 
-/* Stars */
-const STARS=Array.from({length:280},()=>({
-  x:Math.random(),y:Math.random(),
-  r:Math.random()>.95?2.2:Math.random()>.75?1.3:.65,
-  base:Math.random()*.5+.12,spd:Math.random()*.004+.001,ph:Math.random()*Math.PI*2
+/* ── Star layers: tiny background, medium mid, bright foreground ── */
+function mkStar(small){
+  return {
+    x: Math.random(),
+    y: Math.random(),
+    r: small ? (Math.random()*.5+.2) : (Math.random()*.9+.4),
+    base: small ? (Math.random()*.18+.04) : (Math.random()*.5+.15),
+    spd: Math.random()*.0015+.0003,
+    ph:  Math.random()*Math.PI*2,
+    col: Math.random()>.92 ? [180,210,255] :   // blue-white
+         Math.random()>.85 ? [255,230,180] :   // warm yellow
+         Math.random()>.78 ? [200,180,255] :   // lavender
+         [255,255,255]                          // white
+  };
+}
+const STARS_BG  = Array.from({length:320}, ()=>mkStar(true));
+const STARS_MID = Array.from({length:110}, ()=>mkStar(false));
+const STARS_FG  = Array.from({length:28},  ()=>({
+  x:Math.random(), y:Math.random(),
+  r:Math.random()*.6+1.2,
+  base:Math.random()*.7+.3,
+  spd:Math.random()*.003+.001,
+  ph:Math.random()*Math.PI*2,
+  col:[255,255,255]
 }));
 
-/* Nebulae */
+/* ── Nebulae ── */
 const NEBULAE=[
-  {x:.68,y:.32,rx:200,ry:110,r:0,g:212,b:170,op:.045},
-  {x:.52,y:.68,rx:160,ry:90,r:99,g:102,b:241,op:.038},
-  {x:.88,y:.18,rx:110,ry:65,r:236,g:72,b:153,op:.028},
-  {x:.35,y:.78,rx:130,ry:75,r:99,g:102,b:241,op:.022},
+  {x:.68,y:.35,rx:220,ry:120,r:0,  g:212,b:170,op:.032},
+  {x:.52,y:.65,rx:170,ry:95, r:99, g:102,b:241,op:.026},
+  {x:.88,y:.20,rx:130,ry:70, r:236,g:72, b:153,op:.018},
+  {x:.22,y:.72,rx:150,ry:85, r:99, g:102,b:241,op:.015},
+  {x:.40,y:.20,rx:100,ry:55, r:56, g:189,b:248,op:.014},
 ];
 
-/* Space deity constellations */
-const DEITIES=[
-  {name:'Orion',cx:.12,cy:.48,sc:.11,op:.042,color:'#6366f1',
-   paths:[[[.5,.12],[.5,.5]],[[.5,.32],[.18,.22]],[[.5,.32],[.82,.22]],
-          [[.38,.5],[.62,.5]],[[.5,.5],[.38,.88]],[[.5,.5],[.62,.88]]],
-   dots:[[.5,.12],[.18,.22],[.82,.22],[.38,.5],[.5,.5],[.62,.5],[.38,.88],[.62,.88]]},
-  {name:'Cassiopeia',cx:.9,cy:.18,sc:.08,op:.038,color:'#ec4899',
-   paths:[[[.1,.7],[.3,.2],[.5,.55],[.7,.2],[.9,.7]]],
-   dots:[[.1,.7],[.3,.2],[.5,.55],[.7,.2],[.9,.7]]},
-  {name:'Perseus',cx:.06,cy:.25,sc:.09,op:.03,color:'#f59e0b',
-   paths:[[[.5,.08],[.5,.52]],[[.5,.28],[.2,.48]],[[.5,.28],[.8,.48]],
-          [[.5,.52],[.4,.92]],[[.5,.52],[.6,.92]]],
-   dots:[[.5,.08],[.2,.48],[.8,.48],[.4,.92],[.6,.92]]},
-  {name:'Lyra',cx:.82,cy:.55,sc:.07,op:.028,color:'#34d399',
-   paths:[[[.5,.1],[.5,.4]],[[.2,.4],[.8,.4]],[[.2,.4],[.1,.7]],[[.8,.4],[.9,.7]],[[.1,.7],[.9,.7]]],
-   dots:[[.5,.1],[.2,.4],[.8,.4],[.1,.7],[.9,.7]]},
+/* ── Constellations ── */
+const CONSTELLATIONS=[
+  {cx:.12,cy:.46,sc:.10,op:.036,col:'rgba(99,102,241,',
+   lines:[[[.5,.1],[.5,.5]],[[.5,.3],[.2,.2]],[[.5,.3],[.8,.2]],
+          [[.38,.5],[.62,.5]],[[.5,.5],[.38,.9]],[[.5,.5],[.62,.9]]],
+   dots: [[.5,.1],[.2,.2],[.8,.2],[.38,.5],[.62,.5],[.38,.9],[.62,.9]]},
+  {cx:.88,cy:.16,sc:.07,op:.028,col:'rgba(236,72,153,',
+   lines:[[[.1,.7],[.3,.2],[.5,.55],[.7,.2],[.9,.7]]],
+   dots: [[.1,.7],[.3,.2],[.5,.55],[.7,.2],[.9,.7]]},
+  {cx:.82,cy:.58,sc:.065,op:.024,col:'rgba(52,211,153,',
+   lines:[[[.5,.1],[.5,.4]],[[.2,.4],[.8,.4]],[[.2,.4],[.1,.7]],[[.8,.4],[.9,.7]],[[.1,.7],[.9,.7]]],
+   dots: [[.5,.1],[.2,.4],[.8,.4],[.1,.7],[.9,.7]]},
+  {cx:.05,cy:.28,sc:.08,op:.020,col:'rgba(245,158,11,',
+   lines:[[[.5,.08],[.5,.52]],[[.5,.28],[.2,.48]],[[.5,.28],[.8,.48]]],
+   dots: [[.5,.08],[.2,.48],[.8,.48]]},
 ];
 
-/* Shooting star emojis — mood/emotion themed, slow drift upward, blast at top */
-const SHOOTERS=[
-  {e:'✨',x:.62,y:.78,vx:.00008,vy:-.00018,ph:0,sz:15,life:1,exploded:false},
-  {e:'🌟',x:.78,y:.72,vx:-.00006,vy:-.00022,ph:1.4,sz:14,life:1,exploded:false},
-  {e:'💫',x:.55,y:.82,vx:.00010,vy:-.00016,ph:2.8,sz:13,life:1,exploded:false},
-  {e:'⭐',x:.70,y:.75,vx:-.00009,vy:-.00020,ph:4.2,sz:14,life:1,exploded:false},
-  {e:'🌙',x:.85,y:.80,vx:.00007,vy:-.00015,ph:1.0,sz:15,life:1,exploded:false},
-  {e:'☄️',x:.48,y:.70,vx:.00012,vy:-.00025,ph:3.6,sz:16,life:1,exploded:false},
-  {e:'🌈',x:.92,y:.68,vx:-.00008,vy:-.00019,ph:5.1,sz:13,life:1,exploded:false},
-  {e:'💥',x:.40,y:.85,vx:.00009,vy:-.00021,ph:2.1,sz:14,life:1,exploded:false},
-];
-
-/* Reset a shooter back to bottom with slight random offset */
-function resetShooter(s){
-  s.x = .35 + Math.random()*.55;
-  s.y = .72 + Math.random()*.2;
-  s.life = 1;
-  s.exploded = false;
-  s.vx = (Math.random()-.5)*.00015;
-  s.vy = -(Math.random()*.00012+.00014);
-  s.trail = [];
+/* ── Shooting stars ── */
+function mkShooter(){
+  const ang = -(Math.PI/6 + Math.random()*Math.PI/8); // diagonal down-right to up-left
+  const spd = .00025 + Math.random()*.00035;
+  return {
+    x: .5 + Math.random()*.6,
+    y: .1 + Math.random()*.6,
+    vx: Math.cos(ang)*spd,
+    vy: Math.sin(ang)*spd,
+    len: 60 + Math.random()*120,
+    life: 0,
+    maxLife: 180 + Math.random()*140,
+    brightness: .6 + Math.random()*.4,
+    active: false,
+    nextFire: 1200 + Math.random()*4000
+  };
 }
-SHOOTERS.forEach(s=>{s.trail=[];});
+const SHOOTERS = Array.from({length:5}, mkShooter);
+let lastShooterCheck = 0;
 
-/* Explosion particles */
-let EXPLOSION_PARTICLES=[];
-function explode(x,y,e){
-  for(let i=0;i<16;i++){
-    const ang=Math.random()*Math.PI*2;
-    const spd=.4+Math.random()*1.2;
-    EXPLOSION_PARTICLES.push({x,y,vx:Math.cos(ang)*spd,vy:Math.sin(ang)*spd-1,life:1,e,sz:8+Math.random()*8});
-  }
-}
-
+/* ── Emitter (teal pulse at fixed position) ── */
 function drawEmitter(ts){
-  const bx=W*.28,by=H*.44;
-  const ring=.7+.3*Math.sin(ts*.0016);
-  const rg=C.createRadialGradient(bx,by,0,bx,by,52*ring);
-  rg.addColorStop(0,'rgba(0,212,170,.15)');rg.addColorStop(.6,'rgba(0,212,170,.04)');rg.addColorStop(1,'rgba(0,212,170,0)');
-  C.beginPath();C.arc(bx,by,52*ring,0,Math.PI*2);C.fillStyle=rg;C.fill();
-  C.beginPath();C.arc(bx,by,4.5,0,Math.PI*2);
-  C.fillStyle='#00d4aa';C.shadowColor='#00d4aa';C.shadowBlur=14;C.fill();C.shadowBlur=0;
-  const spk=9+3.5*Math.sin(ts*.0018);
+  const bx=W*.27, by=H*.44;
+  const pulse = .7 + .3*Math.sin(ts*.0016);
+  const rg = C.createRadialGradient(bx,by,0,bx,by,48*pulse);
+  rg.addColorStop(0,'rgba(0,212,170,.14)');
+  rg.addColorStop(.6,'rgba(0,212,170,.04)');
+  rg.addColorStop(1,'rgba(0,212,170,0)');
+  C.beginPath(); C.arc(bx,by,48*pulse,0,Math.PI*2);
+  C.fillStyle=rg; C.fill();
+  // Core dot
+  C.beginPath(); C.arc(bx,by,3.5,0,Math.PI*2);
+  C.fillStyle='#00d4aa';
+  C.shadowColor='#00d4aa'; C.shadowBlur=12; C.fill(); C.shadowBlur=0;
+  // Spikes
+  const spk = 8 + 3*Math.sin(ts*.0018);
   for(let i=0;i<8;i++){
-    const ang=i*Math.PI*.25+ts*.0004;
-    const len=i%2===0?spk:spk*.55;
-    C.beginPath();C.moveTo(bx+Math.cos(ang)*4,by+Math.sin(ang)*4);
-    C.lineTo(bx+Math.cos(ang)*len,by+Math.sin(ang)*len);
-    C.strokeStyle=`rgba(0,212,170,${.4+.2*Math.sin(ts*.002+i)})`;C.lineWidth=1.2;
-    C.shadowColor='#00d4aa';C.shadowBlur=5;C.stroke();C.shadowBlur=0;
+    const a = i*Math.PI*.25 + ts*.0004;
+    const l = i%2===0 ? spk : spk*.5;
+    C.beginPath();
+    C.moveTo(bx+Math.cos(a)*3.5, by+Math.sin(a)*3.5);
+    C.lineTo(bx+Math.cos(a)*l,   by+Math.sin(a)*l);
+    C.strokeStyle=`rgba(0,212,170,${.35+.15*Math.sin(ts*.002+i)})`;
+    C.lineWidth=1; C.shadowColor='#00d4aa'; C.shadowBlur=4;
+    C.stroke(); C.shadowBlur=0;
   }
   return {bx,by};
 }
 
-/* ── Arrows ── */
-let ARROWS=[];let lastFire=0;
+/* ── Arrows from emitter to random star ── */
+let ARROWS=[]; let lastFire=0;
 function fireArrow(bx,by){
-  const s=SHOOTERS[Math.floor(Math.random()*SHOOTERS.length)];
-  const tx=s.x*W,ty=s.y*H;
-  ARROWS.push({sx:bx,sy:by,tx,ty,p:0,spd:.012+Math.random()*.007,trail:[],color:'#00d4aa'});
+  const s=STARS_FG[Math.floor(Math.random()*STARS_FG.length)];
+  ARROWS.push({sx:bx,sy:by,tx:s.x*W,ty:s.y*H,p:0,spd:.009+Math.random()*.006,trail:[]});
 }
 
 /* ── MAIN FRAME ── */
 let T=0;
 function frame(ts){
   requestAnimationFrame(frame);
-  if(currentTab!=='launch')return;
+  if(currentTab!=='launch') return;
   T=ts;
   C.clearRect(0,0,W,H);
 
@@ -1580,31 +1593,73 @@ function frame(ts){
   NEBULAE.forEach(n=>{
     const g=C.createRadialGradient(n.x*W,n.y*H,0,n.x*W,n.y*H,n.rx);
     g.addColorStop(0,`rgba(${n.r},${n.g},${n.b},${n.op})`);
-    g.addColorStop(.5,`rgba(${n.r},${n.g},${n.b},${n.op*.4})`);
+    g.addColorStop(.5,`rgba(${n.r},${n.g},${n.b},${n.op*.35})`);
     g.addColorStop(1,`rgba(${n.r},${n.g},${n.b},0)`);
-    C.beginPath();C.ellipse(n.x*W,n.y*H,n.rx,n.ry,0,0,Math.PI*2);C.fillStyle=g;C.fill();
+    C.beginPath(); C.ellipse(n.x*W,n.y*H,n.rx,n.ry,0,0,Math.PI*2);
+    C.fillStyle=g; C.fill();
   });
 
-  /* Stars */
-  STARS.forEach(s=>{
+  /* Stars — background layer */
+  STARS_BG.forEach(s=>{
+    const a=s.base*(0.4+0.6*Math.sin(s.ph+ts*s.spd));
+    C.beginPath(); C.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
+    C.fillStyle=`rgba(${s.col[0]},${s.col[1]},${s.col[2]},${a})`; C.fill();
+  });
+
+  /* Stars — mid layer with soft glow on brightest */
+  STARS_MID.forEach(s=>{
     const a=s.base*(0.5+0.5*Math.sin(s.ph+ts*s.spd));
-    C.beginPath();C.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
-    C.fillStyle=`rgba(255,255,255,${a})`;C.fill();
+    if(a>.45){
+      const g=C.createRadialGradient(s.x*W,s.y*H,0,s.x*W,s.y*H,s.r*3.5);
+      g.addColorStop(0,`rgba(${s.col[0]},${s.col[1]},${s.col[2]},${a*.5})`);
+      g.addColorStop(1,`rgba(${s.col[0]},${s.col[1]},${s.col[2]},0)`);
+      C.beginPath(); C.arc(s.x*W,s.y*H,s.r*3.5,0,Math.PI*2);
+      C.fillStyle=g; C.fill();
+    }
+    C.beginPath(); C.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
+    C.fillStyle=`rgba(${s.col[0]},${s.col[1]},${s.col[2]},${a})`; C.fill();
   });
 
-  /* Deity constellations */
-  DEITIES.forEach(d=>{
-    const ox=d.cx*W,oy=d.cy*H,sc=d.sc*Math.min(W,H);
-    C.strokeStyle=d.color;C.lineWidth=1;C.globalAlpha=d.op;
-    d.paths.forEach(path=>{
-      if(path.length<2)return;
-      C.beginPath();C.moveTo(ox+path[0][0]*sc,oy+path[0][1]*sc);
-      for(let i=1;i<path.length;i++)C.lineTo(ox+path[i][0]*sc,oy+path[i][1]*sc);
-      C.stroke();
+  /* Stars — foreground bright with cross-diffraction spike */
+  STARS_FG.forEach(s=>{
+    const a=s.base*(0.6+0.4*Math.sin(s.ph+ts*s.spd));
+    // Glow halo
+    const g=C.createRadialGradient(s.x*W,s.y*H,0,s.x*W,s.y*H,s.r*5);
+    g.addColorStop(0,`rgba(255,255,255,${a*.55})`);
+    g.addColorStop(1,'rgba(255,255,255,0)');
+    C.beginPath(); C.arc(s.x*W,s.y*H,s.r*5,0,Math.PI*2);
+    C.fillStyle=g; C.fill();
+    // Core
+    C.beginPath(); C.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
+    C.fillStyle=`rgba(255,255,255,${a})`; C.fill();
+    // Cross diffraction spikes
+    if(a>.5){
+      const spikeLen=s.r*7*a;
+      C.strokeStyle=`rgba(255,255,255,${a*.25})`;
+      C.lineWidth=.8;
+      for(let d=0;d<2;d++){
+        const angle=d*Math.PI*.5;
+        C.beginPath();
+        C.moveTo(s.x*W - Math.cos(angle)*spikeLen, s.y*H - Math.sin(angle)*spikeLen);
+        C.lineTo(s.x*W + Math.cos(angle)*spikeLen, s.y*H + Math.sin(angle)*spikeLen);
+        C.stroke();
+      }
+    }
+  });
+
+  /* Constellations */
+  CONSTELLATIONS.forEach(d=>{
+    const ox=d.cx*W, oy=d.cy*H, sc=d.sc*Math.min(W,H);
+    C.globalAlpha=d.op;
+    d.lines.forEach(path=>{
+      C.beginPath();
+      C.moveTo(ox+path[0][0]*sc, oy+path[0][1]*sc);
+      for(let i=1;i<path.length;i++) C.lineTo(ox+path[i][0]*sc, oy+path[i][1]*sc);
+      C.strokeStyle=d.col+'1)'; C.lineWidth=.8; C.stroke();
     });
     d.dots.forEach(([px,py])=>{
-      C.beginPath();C.arc(ox+px*sc,oy+py*sc,1.5,0,Math.PI*2);
-      C.fillStyle=d.color;C.fill();
+      C.beginPath(); C.arc(ox+px*sc,oy+py*sc,1.4,0,Math.PI*2);
+      C.fillStyle=d.col+'1)'; C.fill();
     });
     C.globalAlpha=1;
   });
@@ -1612,83 +1667,87 @@ function frame(ts){
   /* Emitter */
   const {bx,by}=drawEmitter(ts);
 
-  /* Shooting star emojis — drift upward, slow oscillate, explode at top */
+  /* Shooting stars — pure canvas lines, no emojis */
+  if(ts-lastShooterCheck > 60){
+    lastShooterCheck=ts;
+    SHOOTERS.forEach(s=>{
+      if(!s.active){
+        s.nextFire -= 60;
+        if(s.nextFire<=0){
+          // Reset position and activate
+          s.x = .55+Math.random()*.5;
+          s.y = .02+Math.random()*.45;
+          const ang = -(Math.PI/5 + Math.random()*Math.PI/7);
+          const spd = .0003+Math.random()*.0004;
+          s.vx=Math.cos(ang)*spd; s.vy=Math.sin(ang)*spd;
+          s.life=0; s.maxLife=160+Math.random()*120;
+          s.brightness=.5+Math.random()*.5;
+          s.active=true;
+        }
+      }
+    });
+  }
+
   SHOOTERS.forEach(s=>{
-    s.x += s.vx;
-    s.y += s.vy;
-    /* Gentle side oscillation */
-    const oscX = Math.sin(ts*.0008+s.ph)*0.004;
-    s.x += oscX;
-    /* Record trail */
-    s.trail = s.trail||[];
-    s.trail.push({x:s.x*W,y:s.y*H,a:.7});
-    if(s.trail.length>28)s.trail.shift();
-    /* Explode when reaching ~top 20% of screen */
-    if(s.y<.18&&!s.exploded){
-      s.exploded=true;
-      explode(s.x*W,s.y*H,s.e);
-      setTimeout(()=>resetShooter(s),300+Math.random()*400);
+    if(!s.active) return;
+    s.life++;
+    s.x+=s.vx; s.y+=s.vy;
+    if(s.life>s.maxLife || s.x<0 || s.y<0 || s.x>1 || s.y>1){
+      s.active=false;
+      s.nextFire=800+Math.random()*3500;
       return;
     }
-    if(s.exploded)return;
-    s.life = Math.min(1,(s.y-.18)/.5);
-    /* Draw trail */
-    for(let i=1;i<s.trail.length;i++){
-      const ta=(i/s.trail.length)*s.life*.5;
-      C.beginPath();
-      C.moveTo(s.trail[i-1].x,s.trail[i-1].y);
-      C.lineTo(s.trail[i].x,s.trail[i].y);
-      C.strokeStyle=`rgba(200,230,255,${ta*.6})`;C.lineWidth=1.2;C.stroke();
-    }
-    /* Draw emoji */
-    C.globalAlpha=s.life*.28;
-    C.font=`${s.sz}px serif`;C.textAlign='center';C.textBaseline='middle';
-    C.fillStyle='#ffffff';
-    C.fillText(s.e,s.x*W,s.y*H);
-    C.globalAlpha=1;
-  });
-
-  /* Explosion particles */
-  EXPLOSION_PARTICLES=EXPLOSION_PARTICLES.filter(p=>{
-    p.x+=p.vx;p.y+=p.vy;p.vy+=.04;p.life-=.028;
-    if(p.life<=0)return false;
-    C.globalAlpha=p.life*.5;
-    C.font=`${p.sz*p.life}px serif`;C.textAlign='center';C.textBaseline='middle';
-    C.fillText(p.e,p.x,p.y);
-    C.globalAlpha=1;
-    return true;
+    // Fade in + fade out
+    const t=s.life/s.maxLife;
+    const alpha=s.brightness * (t<.12 ? t/.12 : t>.75 ? (1-t)/.25 : 1);
+    const cx=s.x*W, cy=s.y*H;
+    const tailLen=s.len*(alpha+.2);
+    const tailX=cx - s.vx/Math.abs(s.vx||1)*tailLen * (s.vx<0?1:1);
+    const tailY=cy - s.vy/Math.abs(s.vy||.001)*tailLen;
+    // Gradient trail
+    const grad=C.createLinearGradient(tailX,tailY,cx,cy);
+    grad.addColorStop(0,'rgba(255,255,255,0)');
+    grad.addColorStop(.6,`rgba(220,235,255,${alpha*.25})`);
+    grad.addColorStop(1,`rgba(255,255,255,${alpha})`);
+    C.beginPath(); C.moveTo(tailX,tailY); C.lineTo(cx,cy);
+    C.strokeStyle=grad; C.lineWidth=1.2+(alpha*.8); C.stroke();
+    // Head dot
+    C.beginPath(); C.arc(cx,cy,1.2+alpha*.8,0,Math.PI*2);
+    C.fillStyle=`rgba(255,255,255,${alpha})`; C.fill();
   });
 
   /* Arrows */
-  if(ts-lastFire>1400){lastFire=ts;fireArrow(bx,by);}
+  if(ts-lastFire>1600){lastFire=ts; fireArrow(bx,by);}
   ARROWS=ARROWS.filter(arr=>{
     arr.p+=arr.spd;
-    if(arr.p>=1)return false;
+    if(arr.p>=1) return false;
     const cp=(arr.sx+arr.tx)/2+(arr.ty-arr.sy)*.2;
     const cpy=(arr.sy+arr.ty)/2-(arr.tx-arr.sx)*.15;
     const p=arr.p;
     const x=(1-p)*(1-p)*arr.sx+2*(1-p)*p*cp+p*p*arr.tx;
     const y=(1-p)*(1-p)*arr.sy+2*(1-p)*p*cpy+p*p*arr.ty;
-    arr.trail.push({x,y});if(arr.trail.length>18)arr.trail.shift();
+    arr.trail.push({x,y}); if(arr.trail.length>16) arr.trail.shift();
     if(arr.trail.length>1){
       for(let i=1;i<arr.trail.length;i++){
-        C.beginPath();C.moveTo(arr.trail[i-1].x,arr.trail[i-1].y);C.lineTo(arr.trail[i].x,arr.trail[i].y);
-        C.strokeStyle=`rgba(0,212,170,${(i/arr.trail.length)*.45})`;C.lineWidth=1.4;C.stroke();
+        C.beginPath();
+        C.moveTo(arr.trail[i-1].x,arr.trail[i-1].y);
+        C.lineTo(arr.trail[i].x,arr.trail[i].y);
+        C.strokeStyle=`rgba(0,212,170,${(i/arr.trail.length)*.4})`;
+        C.lineWidth=1.2; C.stroke();
       }
     }
-    const pp=Math.max(0,p-.025);
+    const pp=Math.max(0,p-.02);
     const xp=(1-pp)*(1-pp)*arr.sx+2*(1-pp)*pp*cp+pp*pp*arr.tx;
     const yp=(1-pp)*(1-pp)*arr.sy+2*(1-pp)*pp*cpy+pp*pp*arr.ty;
     const ang=Math.atan2(y-yp,x-xp);
-    C.save();C.translate(x,y);C.rotate(ang);
-    C.beginPath();C.moveTo(8,0);C.lineTo(-4,-3);C.lineTo(-4,3);C.closePath();
-    C.fillStyle='#00d4aa';C.shadowColor='#00d4aa';C.shadowBlur=7;C.fill();C.shadowBlur=0;
-    C.restore();
+    C.save(); C.translate(x,y); C.rotate(ang);
+    C.beginPath(); C.moveTo(7,0); C.lineTo(-3.5,-2.5); C.lineTo(-3.5,2.5); C.closePath();
+    C.fillStyle='#00d4aa'; C.shadowColor='#00d4aa'; C.shadowBlur=6;
+    C.fill(); C.shadowBlur=0; C.restore();
     return true;
   });
-
 }
-/* drawTrack removed — now HTML-based */
+
 
 
 /* ═══ MOCKUP ALIGNMENT ═══ */
