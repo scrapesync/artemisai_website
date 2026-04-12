@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtemisAI — Resources</title>
+<title>ArtemisAI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -141,6 +142,26 @@ nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0
 @media(max-width:480px){
   .hero h1{font-size:1.6rem!important}
   .res-grid{grid-template-columns:1fr!important}
+}
+
+/* ─────────────────────────────────────────────────────────
+   ARTEMISAI SHARED MOBILE — injected into all pages
+   ───────────────────────────────────────────────────────── */
+@media(max-width:768px){
+  nav.site-nav{height:52px!important;padding:0 1rem!important}
+  .site-logo{font-size:.95rem!important;gap:.5rem!important}
+  .site-logo-mark{width:26px!important;height:26px!important}
+  .site-nav-links{gap:.5rem!important}
+  .nav-pill-outline{padding:.3rem .75rem!important;font-size:.72rem!important}
+  .nav-user-name{max-width:70px!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  .sn-links{gap:.5rem!important}
+  .sn-pill{padding:.3rem .75rem!important;font-size:.7rem!important}
+  .sn-name{max-width:70px!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #signout-card{padding:1.6rem 1.4rem!important;max-width:320px!important}
+}
+@media(max-width:480px){
+  .nav-user-name,.sn-name{display:none!important}
+  .nav-user-avatar,.sn-avatar{width:26px!important;height:26px!important;font-size:10px!important}
 }
 </style>
 </head>

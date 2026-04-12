@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtemisAI — Implementation Guide for Faheem</title>
+<title>ArtemisAI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0f1117;--surface:#181b24;--surface2:#1e2230;--border:#2a2e3d;--text:#e0e2eb;--text-muted:#8b90a5;--accent:#6ee7b7;--accent2:#38bdf8;--accent3:#f472b6;--orange:#fb923c;--code-bg:#141720;--yellow:#fbbf24;--red:#f87171;--teal:#2dd4bf}
@@ -125,6 +126,26 @@ body{padding-top:88px !important}
   h1{font-size:1.8rem!important}
   h2{font-size:1.2rem!important}
   pre,code{font-size:11px!important;overflow-x:auto}
+}
+
+/* ─────────────────────────────────────────────────────────
+   ARTEMISAI SHARED MOBILE — injected into all pages
+   ───────────────────────────────────────────────────────── */
+@media(max-width:768px){
+  nav.site-nav{height:52px!important;padding:0 1rem!important}
+  .site-logo{font-size:.95rem!important;gap:.5rem!important}
+  .site-logo-mark{width:26px!important;height:26px!important}
+  .site-nav-links{gap:.5rem!important}
+  .nav-pill-outline{padding:.3rem .75rem!important;font-size:.72rem!important}
+  .nav-user-name{max-width:70px!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  .sn-links{gap:.5rem!important}
+  .sn-pill{padding:.3rem .75rem!important;font-size:.7rem!important}
+  .sn-name{max-width:70px!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #signout-card{padding:1.6rem 1.4rem!important;max-width:320px!important}
+}
+@media(max-width:480px){
+  .nav-user-name,.sn-name{display:none!important}
+  .nav-user-avatar,.sn-avatar{width:26px!important;height:26px!important;font-size:10px!important}
 }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">

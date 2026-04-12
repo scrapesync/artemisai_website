@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtemisAI — Team Learning Tracker</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M16 2L30 28H2Z' fill='%2300d4aa'/></svg>">
+<title>ArtemisAI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml"><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml"><path d='M16 2L30 28H2Z' fill='%2300d4aa'/></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#060a13;--card:#0d1117;--card-hover:#111827;--border:#1e293b;--border-hi:#334155;--teal:#00d4aa;--teal-dim:rgba(0,212,170,.15);--indigo:#6366f1;--indigo-dim:rgba(99,102,241,.15);--amber:#f59e0b;--amber-dim:rgba(245,158,11,.15);--rose:#f43f5e;--rose-dim:rgba(244,63,94,.15);--sky:#38bdf8;--sky-dim:rgba(56,189,248,.15);--lime:#84cc16;--lime-dim:rgba(132,204,22,.15);--violet:#a78bfa;--violet-dim:rgba(167,139,250,.15);--pink:#ec4899;--pink-dim:rgba(236,72,153,.15);--text:#e2e8f0;--muted:#64748b;--dim:#475569;--font:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace}
@@ -113,6 +113,26 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;padding
   .stats-row{grid-template-columns:repeat(2,1fr)!important}
   .team-grid{grid-template-columns:1fr 1fr!important}
 }
+
+/* ─────────────────────────────────────────────────────────
+   ARTEMISAI SHARED MOBILE — injected into all pages
+   ───────────────────────────────────────────────────────── */
+@media(max-width:768px){
+  nav.site-nav{height:52px!important;padding:0 1rem!important}
+  .site-logo{font-size:.95rem!important;gap:.5rem!important}
+  .site-logo-mark{width:26px!important;height:26px!important}
+  .site-nav-links{gap:.5rem!important}
+  .nav-pill-outline{padding:.3rem .75rem!important;font-size:.72rem!important}
+  .nav-user-name{max-width:70px!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  .sn-links{gap:.5rem!important}
+  .sn-pill{padding:.3rem .75rem!important;font-size:.7rem!important}
+  .sn-name{max-width:70px!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #signout-card{padding:1.6rem 1.4rem!important;max-width:320px!important}
+}
+@media(max-width:480px){
+  .nav-user-name,.sn-name{display:none!important}
+  .nav-user-avatar,.sn-avatar{width:26px!important;height:26px!important;font-size:10px!important}
+}
 </style>
 </head>
 <body>
@@ -142,7 +162,7 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;padding
 </div>
 <div id="loading-overlay"><div class="ld-spin"></div><div class="ld-txt">LOADING YOUR PROGRESS...</div></div>
 
-<div id="app" style="display:none"><div class="topbar"><div class="topbar-left"><div class="topbar-logo-wrap"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 2L30 28H2L16 2Z" fill="none" stroke="#00d4aa" stroke-width="2"/><circle cx="16" cy="18" r="4" fill="#00d4aa" opacity="0.6"/><path d="M16 6L16 14" stroke="#00d4aa" stroke-width="2" stroke-linecap="round"/></svg><span class="topbar-logo">artemisai</span></div><span class="topbar-sep">|</span><span><span class="topbar-user" id="topbar-user"></span><span class="topbar-title" id="topbar-title"></span></span></div><div class="topbar-right"><span class="topbar-stat"><b id="stat-done">0</b>/<span id="stat-total">0</span> watched</span><span id="sync-status" style="font-family:var(--mono);font-size:10px;color:var(--muted);display:none;margin-left:4px"></span>
+<div id="app" style="display:none"><div class="topbar"><div class="topbar-left"><span class="topbar-sep">|</span><span><span class="topbar-user" id="topbar-user"></span><span class="topbar-title" id="topbar-title"></span></span></div><div class="topbar-right"><span class="topbar-stat"><b id="stat-done">0</b>/<span id="stat-total">0</span> watched</span><span id="sync-status" style="font-family:var(--mono);font-size:10px;color:var(--muted);display:none;margin-left:4px"></span>
       <span id="sync-status" style="font-family:var(--mono);font-size:10px;color:var(--muted);display:none"></span></div></div><div class="main"><div class="hero-greeting" id="hero-greeting"></div><div class="hero-tagline" id="hero-tagline"></div><div class="stats-row" id="stats-row"></div><div class="tabs" id="tabs"></div><div id="content"></div></div></div>
 <script>
 const TEAM=[{"id": "asad", "name": "Asad Ikram", "title": "Chief Technology Officer / Co-Founder", "color": "var(--teal)", "colorDim": "var(--teal-dim)", "initials": "AI"}, {"id": "faheem", "name": "Faheem Haider", "title": "Founding Data Engineer", "color": "var(--indigo)", "colorDim": "var(--indigo-dim)", "initials": "FH"}, {"id": "rafeh", "name": "Abdul Rafeh", "title": "Chief Marketing Officer", "color": "var(--sky)", "colorDim": "var(--sky-dim)", "initials": "AR"}, {"id": "alex", "name": "Alex Male", "title": "Founder", "color": "var(--amber)", "colorDim": "var(--amber-dim)", "initials": "AM"}, {"id": "lewis", "name": "Lewis Mulhall", "title": "Co-Founder", "color": "var(--lime)", "colorDim": "var(--lime-dim)", "initials": "LM"}, {"id": "jill", "name": "Jill Male", "title": "Co-Founder", "color": "var(--violet)", "colorDim": "var(--violet-dim)", "initials": "JM"}, {"id": "hannah", "name": "Hannah", "title": "Head of Operations & Coordination", "color": "var(--pink)", "colorDim": "var(--pink-dim)", "initials": "HN"}, {"id": "filza", "name": "Filza Bukhari", "title": "Chief Legal Officer", "color": "var(--rose)", "colorDim": "var(--rose-dim)", "initials": "FA"}];

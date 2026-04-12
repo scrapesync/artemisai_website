@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Artemis AI — Reports</title>
+<title>ArtemisAI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -122,6 +123,258 @@ textarea.form-input{min-height:80px;resize:vertical}
   .main-content{margin-left:0!important}
   .topbar{padding:0 12px!important}
 }
+
+/* ═══════════════════════════════════════════════
+   
+/* ─────────────────────────────────────────────────────────
+   ARTEMISAI SHARED MOBILE — injected into all pages
+   ───────────────────────────────────────────────────────── */
+@media(max-width:768px){
+  /* Site nav */
+  nav.site-nav{height:52px!important;padding:0 1rem!important}
+  .site-logo{font-size:.95rem!important;gap:.5rem!important}
+  .site-logo-mark{width:26px!important;height:26px!important}
+  .site-nav-links{gap:.5rem!important}
+  .nav-pill-outline{padding:.3rem .75rem!important;font-size:.72rem!important}
+  .nav-user-name{max-width:70px!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  /* sn-* variant (sprint tracker) */
+  .sn-links{gap:.5rem!important}
+  .sn-pill{padding:.3rem .75rem!important;font-size:.7rem!important}
+  .sn-name{max-width:70px!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  /* Sign-out modal */
+  #signout-card{padding:1.6rem 1.4rem!important;max-width:320px!important}
+}
+@media(max-width:480px){
+  .nav-user-name,.sn-name{display:none!important}
+  .nav-user-avatar,.sn-avatar{width:26px!important;height:26px!important;font-size:10px!important}
+}
+
+/* ─────────────────────────────────────────────────────────
+   ARTEMISAI MOCKUP APP — MOBILE (all 9 mockup pages)
+   Pattern: sidebar hidden → full-width content → bottom nav
+   ───────────────────────────────────────────────────────── */
+
+/* Bottom navigation bar — hidden on desktop, shown on mobile */
+.m-bottom-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;z-index:500;
+  background:rgba(6,10,19,.97);
+  backdrop-filter:blur(24px) saturate(180%);
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px));
+  justify-content:space-around;align-items:flex-end;
+}
+.m-bottom-nav a{
+  display:flex;flex-direction:column;align-items:center;
+  gap:3px;padding:6px 0;min-width:52px;
+  color:rgba(255,255,255,.38);text-decoration:none;
+  font-size:9.5px;font-family:'JetBrains Mono',monospace;
+  letter-spacing:.02em;transition:color .18s;
+  -webkit-tap-highlight-color:transparent;
+}
+.m-bottom-nav a.active{color:var(--accent,#00d4aa)}
+.m-bottom-nav a svg{
+  width:22px;height:22px;stroke:currentColor;fill:none;
+  stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
+  transition:transform .18s;
+}
+.m-bottom-nav a.active svg{transform:scale(1.12)}
+
+/* Admin panel back pill — shown on mobile at top */
+.m-admin-back{
+  display:none;
+  align-items:center;gap:6px;
+  padding:8px 14px;
+  background:rgba(0,212,170,.05);
+  border-bottom:1px solid rgba(0,212,170,.12);
+  font-size:11px;font-family:'JetBrains Mono',monospace;
+  color:rgba(0,212,170,.75);text-decoration:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.m-admin-back svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* Mobile page tabs — horizontal scroll strip */
+.m-page-tabs{
+  display:none;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding:8px 14px;gap:7px;
+  background:var(--bg-secondary,#0c1221);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  flex-shrink:0;
+}
+.m-page-tabs::-webkit-scrollbar{display:none}
+.m-page-tabs button{
+  flex-shrink:0;
+  padding:6px 14px;
+  border-radius:7px;
+  border:1px solid rgba(255,255,255,.1);
+  background:transparent;
+  color:rgba(255,255,255,.45);
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  cursor:pointer;white-space:nowrap;
+  transition:all .18s;
+  -webkit-tap-highlight-color:transparent;
+  min-height:32px;
+}
+.m-page-tabs button.active{
+  border-color:var(--accent,#00d4aa);
+  color:var(--accent,#00d4aa);
+  background:rgba(0,212,170,.08);
+}
+
+@media(max-width:768px){
+  /* Core layout */
+  body{overflow-x:hidden!important}
+  .sidebar{display:none!important}
+  .main{
+    margin-left:0!important;width:100%!important;
+    height:auto!important;min-height:100vh!important;
+    display:flex!important;flex-direction:column!important;
+  }
+  
+  /* Topbar */
+  .topbar{
+    height:52px!important;padding:0 14px!important;
+    flex-shrink:0!important;
+    position:sticky!important;top:0!important;z-index:100!important;
+  }
+  .topbar-title{font-size:15px!important;font-weight:600!important}
+  .topbar-tabs{display:none!important} /* replaced by .m-page-tabs */
+  .topbar-right > *:not(.avatar):not(.page-selector){
+    display:none!important;
+  }
+  .avatar{
+    width:32px!important;height:32px!important;
+    font-size:11px!important;flex-shrink:0!important;
+  }
+  .page-selector{max-width:160px!important}
+  
+  /* Mobile elements: show */
+  .m-bottom-nav{display:flex!important}
+  .m-admin-back{display:flex!important}
+  .m-page-tabs{display:flex!important}
+  
+  /* Content area */
+  .content{
+    padding:14px 14px 80px!important;
+    flex:1!important;overflow-y:auto!important;
+  }
+  
+  /* 4-col KPI grid → 2×2 */
+  .grid-4,.kpi-grid,
+  [class*="stats-grid"]{
+    grid-template-columns:1fr 1fr!important;
+    gap:10px!important;
+  }
+  
+  /* 3-col grids → 1-col */
+  .grid-3,
+  [class*="grid-3"]{
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+  }
+  
+  /* 2-col grids → keep on most phones, collapse on tiny */
+  .grid-2,[class*="grid-2"]{
+    grid-template-columns:1fr 1fr!important;
+    gap:10px!important;
+  }
+  
+  /* Large 2-col splits (5fr 3fr etc) → stack */
+  .chart-row,.insight-row,.main-split{
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+  }
+  
+  /* Cards */
+  .card{border-radius:10px!important;padding:14px!important}
+  .seg-card{border-radius:10px!important;padding:14px 12px!important}
+  
+  /* KPI stat values */
+  .stat-val,.kpi-val,.stat-value,.big-val{
+    font-size:1.4rem!important;
+  }
+  .stat-label,.kpi-label,.stat-sub{
+    font-size:.65rem!important;
+  }
+  
+  /* Charts: full width, cap height */
+  [class*="chart"]{width:100%!important;min-width:0!important}
+  .sparkline-container{width:100%!important}
+  
+  /* Tags */
+  .tag{font-size:.62rem!important;padding:3px 7px!important}
+  
+  /* Section labels */
+  .section-label{font-size:.72rem!important;margin-bottom:10px!important}
+  
+  /* Alerts */
+  .alert-card{border-radius:10px!important;padding:14px!important}
+  
+  /* Tables → scroll */
+  .table-wrap,table{
+    display:block!important;overflow-x:auto!important;
+    -webkit-overflow-scrolling:touch!important;
+    width:100%!important;
+  }
+  
+  /* Settings layout (sidebar + panel) */
+  .settings-layout{
+    grid-template-columns:1fr!important;
+    flex-direction:column!important;
+  }
+  .settings-nav{
+    display:flex!important;flex-direction:row!important;
+    overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;
+    scrollbar-width:none!important;
+    gap:4px!important;padding:8px 0!important;
+    border-right:none!important;border-bottom:1px solid rgba(255,255,255,.07)!important;
+    flex-shrink:0!important;
+  }
+  .settings-nav::-webkit-scrollbar{display:none!important}
+  .settings-nav-item{
+    flex-shrink:0!important;white-space:nowrap!important;
+    font-size:10px!important;padding:6px 12px!important;
+  }
+  .settings-panel{padding:14px 0!important;min-width:0!important}
+  
+  /* Connected pages grid */
+  .pages-grid{grid-template-columns:1fr!important}
+  .page-card{border-radius:10px!important;padding:14px!important}
+  
+  /* Art-E chat */
+  .chat-container{padding-bottom:80px!important}
+  .chat-input-area{padding:10px 14px!important}
+  .chat-input{font-size:14px!important}
+  
+  /* Discovery feed */
+  .flywheel-grid,.discovery-grid{
+    grid-template-columns:1fr!important;gap:12px!important;
+  }
+  .flywheel-card{border-radius:10px!important}
+  
+  /* Reports */
+  .report-card{border-radius:10px!important;padding:14px!important}
+  
+  /* Predictions — score ring: centre it */
+  .score-ring{margin:0 auto 12px!important}
+  .pred-card{text-align:center!important}
+  
+  /* List items */
+  .list-item{padding:10px 0!important;gap:10px!important}
+  .list-item button{font-size:10px!important;padding:5px 10px!important}
+}
+
+@media(max-width:480px){
+  /* Very small phones */
+  .grid-2,[class*="grid-2"]{
+    grid-template-columns:1fr!important;gap:10px!important;
+  }
+  .grid-4,.kpi-grid{gap:8px!important}
+  .topbar-title{font-size:14px!important}
+  .content{padding:12px 12px 80px!important}
+}
 </style>
 </head>
 <body>
@@ -142,6 +395,7 @@ textarea.form-input{min-height:80px;resize:vertical}
   </div>
 </div>
 
+<a href="admin_panel.html" class="m-admin-back"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>← Admin Panel</a>
 <aside class="sidebar"><a href="admin_panel.html" class="sidebar-logo" title="Back to Admin Panel"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg><span>ARTEMIS</span></a><nav class="sidebar-nav"><div class="nav-group-label">Main</div><a href="index.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="mockup_dashboard.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a><a href="mockup_discovery.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discovery Feed</a><a href="mockup_predictions.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predictions</a><a href="mockup_audience.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Audience</a><div class="nav-group-label">Intelligence</div><a href="mockup_arte.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Art-E<span class="nav-badge badge-ai">AI</span></a><a href="mockup_alerts.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Alerts<span class="nav-badge badge-alert">3</span></a><a href="mockup_reports.html" class="nav-item active"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</a><div class="nav-group-label">Settings</div><a href="mockup_connected.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Connected Pages</a><a href="mockup_settings.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a></nav></aside><div class="main"><header class="topbar"><div class="topbar-left"><div class="topbar-title">Reports</div></div><div class="topbar-right"><button class="btn btn-primary" onclick="this.textContent='Generating...'">+ New Report</button><div class="avatar">AS</div></div></header><div class="content">
 <div class="section-label">Quick Reports</div>
 <div class="grid-3 animate">
@@ -171,5 +425,46 @@ textarea.form-input{min-height:80px;resize:vertical}
   var btns=document.querySelectorAll('.btn-signout');
   btns.forEach(function(b){b.onclick=function(){_showSignoutModal();}});
 })();</script>
+
+<script>
+// Add mobile tabs below topbar based on current page
+(function(){
+  function addMobileTabs(){
+    const tabs = {
+      'mockup_dashboard.html': ['KPIs','Trends','Virality','Sentiment'],
+      'mockup_audience.html':  ['Segments','Demographics','Affinity'],
+      'mockup_settings.html':  ['Profile','Notifications','API Keys'],
+      'mockup_alerts.html':    ['All','Crisis','Performance','Trends'],
+    };
+    const page = location.pathname.split('/').pop();
+    const pageTabs = tabs[page];
+    if(!pageTabs) return;
+    const topbar = document.querySelector('.topbar');
+    if(!topbar) return;
+    const row = document.createElement('div');
+    row.className = 'mobile-tabs';
+    pageTabs.forEach((t,i) => {
+      const btn = document.createElement('button');
+      btn.textContent = t;
+      btn.style.cssText = 'flex-shrink:0;padding:6px 14px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.5);font-family:"JetBrains Mono",monospace;font-size:10px;cursor:pointer;white-space:nowrap;transition:all .2s';
+      if(i===0){btn.style.borderColor='var(--accent,#00d4aa)';btn.style.color='var(--accent,#00d4aa)';btn.style.background='rgba(0,212,170,.08)';}
+      btn.onclick = function(){
+        row.querySelectorAll('button').forEach(b=>{b.style.borderColor='rgba(255,255,255,.1)';b.style.color='rgba(255,255,255,.5)';b.style.background='transparent';});
+        this.style.borderColor='var(--accent,#00d4aa)';this.style.color='var(--accent,#00d4aa)';this.style.background='rgba(0,212,170,.08)';
+        // Try to click the desktop tab
+        const desktopTabs = document.querySelectorAll('.topbar-tab');
+        if(desktopTabs[i]) desktopTabs[i].click();
+      };
+      row.appendChild(btn);
+    });
+    topbar.insertAdjacentElement('afterend', row);
+  }
+  if(window.innerWidth<=768) addMobileTabs();
+  window.addEventListener('resize', function(){
+    if(window.innerWidth<=768 && !document.querySelector('.mobile-tabs')) addMobileTabs();
+  });
+})();
+</script>
+<nav class="m-bottom-nav"><a href="mockup_dashboard.html" class="active"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</a><a href="mockup_predictions.html"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predict</a><a href="mockup_audience.html"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100 8"/></svg>Audience</a><a href="mockup_alerts.html"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>Alerts</a><a href="mockup_arte.html"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Art-E</a></nav>
 </body>
 </html>
