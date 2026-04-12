@@ -202,6 +202,7 @@ body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-he
 .stb-track-wrap {
   position: relative;
   height: 44px;
+  overflow: visible;
 }
 /* Base line */
 .stb-line {
@@ -339,19 +340,34 @@ body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-he
 /* Tooltip */
 .stb-tooltip {
   position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%; transform: translateX(-50%);
-  background: rgba(9,18,32,0.95);
-  border: 1px solid rgba(0,212,170,0.2);
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(9,18,32,0.97);
+  border: 1px solid rgba(0,212,170,0.25);
   border-radius: 8px;
   padding: 8px 10px;
   min-width: 140px;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.15s;
-  z-index: 200;
+  z-index: 9999;
   white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
+.stb-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 8px; height: 8px;
+  background: rgba(9,18,32,0.97);
+  border-left: 1px solid rgba(0,212,170,0.25);
+  border-top: 1px solid rgba(0,212,170,0.25);
+  transform: translateX(-50%) rotate(45deg);
+}
+.stb-dot-wrap:nth-last-child(-n+3) .stb-tooltip { left: auto; right: 0; transform: none; }
+.stb-dot-wrap:nth-last-child(-n+3) .stb-tooltip::before { left: auto; right: 16px; transform: rotate(45deg); }
 .stb-dot-wrap:hover .stb-tooltip { opacity: 1; }
 .stb-tt-name { font-size: 11px; font-weight: 600; color: white; margin-bottom: 3px; }
 .stb-tt-row { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.5); margin-bottom:1px; }
@@ -551,6 +567,32 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 .sn-name{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#00d4aa;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sn-logout{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.7rem;padding:.26rem .6rem;cursor:pointer;transition:all .2s}
 .sn-logout:hover{border-color:rgba(248,113,113,.4);color:#f87171}
+
+@media(max-width:768px){
+  /* site-nav reduced */
+  nav.site-nav{height:44px!important;padding:0 .9rem!important}
+  .sn-logo{font-size:.9rem!important;gap:.4rem!important}
+  .sn-logo-mark{width:22px!important;height:22px!important}
+  .sn-pill{padding:.28rem .65rem!important;font-size:.7rem!important}
+  .sn-chip{padding:.25rem .5rem .25rem .35rem!important}
+  .sn-name{display:none!important}
+  /* tab-bar below site-nav */
+  .tab-bar{top:44px!important;padding:6px 10px!important;grid-template-columns:auto 1fr!important;gap:6px}
+  .tab-bar-title{display:none!important}
+  .tab-bar-tabs{gap:4px;justify-content:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tab-bar-tabs::-webkit-scrollbar{display:none}
+  .tab-btn{padding:6px 12px!important;font-size:10px!important;white-space:nowrap!important;flex-shrink:0}
+  /* sprint track bar */
+  #sprint-track-bar{top:88px!important}
+  /* page content */
+  .page{padding-top:145px!important}
+  .sprint-layout{padding-top:145px!important}
+  .ma-header{padding-top:145px!important}
+}
+@media(max-width:480px){
+  .tab-btn{padding:5px 10px!important;font-size:9.5px!important}
+  .stb-label{font-size:9px!important}
+}
 </style>
 </head>
 <body>

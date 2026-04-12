@@ -116,6 +116,12 @@ textarea.form-input{min-height:80px;resize:vertical}
 .signout-cancel:hover{border-color:rgba(255,255,255,0.2);color:#e8ecf4}
 .signout-confirm{flex:1;padding:.7rem;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);border-radius:9px;color:#f87171;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
 .signout-confirm:hover{background:rgba(248,113,113,0.2);border-color:rgba(248,113,113,0.5)}
+
+@media(max-width:768px){
+  .sidebar{display:none!important}
+  .main-content{margin-left:0!important}
+  .topbar{padding:0 12px!important}
+}
 </style>
 </head>
 <body>
@@ -155,3 +161,15 @@ textarea.form-input{min-height:80px;resize:vertical}
 <div class="card animate delay-2">
   <div class="list-item"><div style="font-size:14px">📄</div><div style="flex:1"><div style="font-size:13px;font-weight:500">Weekly_Report_Feb24.pdf</div><div style="font-size:11px;color:var(--text-muted)">Generated 24 Feb 2026 · 2.4 MB</div></div><button class="btn btn-secondary" style="padding:5px 14px;font-size:11px">Download</button></div>
   <div class="list-item"><div style="font-size:14px">📄</div><div style="flex:1"><div style="font-size:13px;font-weight:500">Audience_Ins
+<script>(function(){
+  var SK='artemis_session';
+  function getS(){try{return JSON.parse(localStorage.getItem(SK)||localStorage.getItem('artemis_app_session')||'null');}catch{return null;}}
+  var s=getS();
+  if(!s){window.location.href='admin_login.html';return;}
+  var el=document.getElementById('sidebarUser');
+  if(el)el.textContent=s.name||s.full_name||s.email||s.username||'';
+  var btns=document.querySelectorAll('.btn-signout');
+  btns.forEach(function(b){b.onclick=function(){_showSignoutModal();}});
+})();</script>
+</body>
+</html>

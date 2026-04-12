@@ -103,6 +103,45 @@ nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0
 .signout-cancel:hover{border-color:rgba(255,255,255,0.2);color:#e8ecf4}
 .signout-confirm{flex:1;padding:.7rem;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);border-radius:9px;color:#f87171;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
 .signout-confirm:hover{background:rgba(248,113,113,0.2);border-color:rgba(248,113,113,0.5)}
+
+@media(max-width:768px){
+  nav.site-nav{height:48px;padding:0 1rem}
+  .site-logo{font-size:.95rem;gap:.45rem}
+  .site-logo-mark{width:24px;height:24px}
+  .site-nav-links{gap:.6rem}
+  .site-nav-links a{font-size:.75rem}
+  .nav-pill-outline{padding:.3rem .7rem!important;font-size:.72rem!important}
+  .nav-user-name{display:none}
+  .nav-user-chip{padding:.28rem .5rem .28rem .4rem}
+  .nav-logout-btn{font-size:.7rem;padding:.25rem .5rem}
+  /* site-nav variants */
+  .sn-logo{font-size:.95rem;gap:.45rem}
+  .sn-logo-mark{width:24px;height:24px}
+  .sn-links{gap:.6rem}
+  .sn-pill{padding:.3rem .7rem!important;font-size:.72rem!important}
+  .sn-name{display:none}
+  .sn-chip{padding:.28rem .5rem .28rem .4rem}
+}
+@media(max-width:480px){
+  .nav-user-avatar,.sn-avatar{width:22px;height:22px;font-size:9px}
+}
+
+@media(max-width:768px){
+  .page{padding:80px 1.2rem 3rem!important}
+  .hero{margin-bottom:2rem!important}
+  .hero h1{font-size:1.9rem!important}
+  .hero-sub{font-size:.88rem!important}
+  .hero-stats{gap:1.2rem!important}
+  .search-wrap{margin-bottom:2rem!important}
+  .res-group{margin-bottom:2rem!important}
+  .res-card{padding:1.1rem!important;border-radius:12px!important}
+  .rc-name{font-size:.95rem!important}
+  .rc-desc{font-size:.78rem!important}
+}
+@media(max-width:480px){
+  .hero h1{font-size:1.6rem!important}
+  .res-grid{grid-template-columns:1fr!important}
+}
 </style>
 </head>
 <body>
