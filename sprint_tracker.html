@@ -574,6 +574,90 @@ body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-he
   .nav-user-name,.sn-name{display:none!important}
   .nav-user-avatar,.sn-avatar{width:26px!important;height:26px!important;font-size:10px!important}
 }
+
+/* ── site-nav (sn-*) restored ── */
+nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06)}
+.sn-logo{font-size:1rem;font-weight:700;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.55rem;flex-shrink:0}
+.sn-logo-mark{width:26px;height:26px;flex-shrink:0}
+.sn-logo-mark svg{width:100%;height:100%}
+.sn-logout{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.7rem;padding:.26rem .6rem;cursor:pointer;transition:all .2s}
+.sn-logout:hover{border-color:rgba(248,113,113,.4);color:#f87171}
+
+/* ── Date popover (dp-*) restored ── */
+#date-popover{
+  display:none;position:fixed;z-index:9999;
+  background:#0a1220;border:1px solid rgba(0,212,170,.25);border-radius:14px;
+  padding:18px 20px 16px;box-shadow:0 20px 50px rgba(0,0,0,.6);
+  min-width:300px;
+}
+#date-popover.open{display:block}
+#date-popover::before{content:'';position:absolute;top:-5px;left:24px;width:8px;height:8px;background:#0a1220;border-left:1px solid rgba(0,212,170,.25);border-top:1px solid rgba(0,212,170,.25);transform:rotate(45deg)}
+.dp-title{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent,#00d4aa);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.dp-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.dp-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;min-width:36px}
+.dp-input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:6px 9px;color:#e8ecf4;font-family:'JetBrains Mono',monospace;font-size:11px;outline:none;transition:all .2s}
+.dp-input:focus{border-color:var(--accent,#00d4aa);background:rgba(0,212,170,.05)}
+.dp-auto{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);margin-bottom:12px;padding:6px 9px;background:rgba(255,255,255,.03);border-radius:6px;border:1px solid rgba(255,255,255,.06)}
+.dp-auto b{color:#e8ecf4}
+.dp-cascade-note{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.3);margin-top:8px;line-height:1.5}
+.dp-cascade-note b{color:var(--accent,#00d4aa)}
+.dp-actions{display:flex;gap:8px;margin-top:4px}
+.dp-apply{flex:1;padding:8px;background:var(--accent,#00d4aa);color:#060a13;border:none;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.05em;cursor:pointer;transition:all .2s}
+.dp-apply:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.dp-cancel{padding:8px 14px;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:8px;color:rgba(255,255,255,.4);font-family:'JetBrains Mono',monospace;font-size:10px;cursor:pointer;transition:all .2s}
+.dp-cancel:hover{border-color:rgba(255,255,255,.25);color:#e8ecf4}
+
+/* ── Date range button (restored) ── */
+.date-range-btn{display:inline-flex;align-items:center;gap:7px;background:var(--card2,#091220);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:6px 12px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8ecf4;transition:all .2s;white-space:nowrap}
+.date-range-btn:hover{border-color:var(--accent,#00d4aa);background:rgba(0,212,170,.06)}
+.date-range-btn svg{stroke:var(--accent,#00d4aa);opacity:.7;flex-shrink:0}
+.drbtn-start,.drbtn-end{color:var(--accent,#00d4aa);font-weight:500}
+.drbtn-arrow{color:rgba(255,255,255,.3);font-size:10px}
+.drbtn-dur{color:rgba(255,255,255,.3);font-size:9px;margin-left:2px}
+
+/* ── Mobile sprint tracker ── */
+@media(max-width:768px){
+  nav.site-nav{height:44px!important;padding:0 .85rem!important}
+  .sn-logo span{display:none!important}
+  .sn-logo-mark{width:22px!important;height:22px!important}
+  .sn-pill{font-size:.68rem!important;padding:.26rem .6rem!important}
+  .sn-logout{padding:.26rem .5rem!important;font-size:.68rem!important}
+  .tab-bar{top:44px!important;padding:5px 8px!important}
+  .tab-bar-title{font-size:.6rem!important;letter-spacing:.04em!important}
+  .tab-btn{padding:5px 10px!important;font-size:9.5px!important;white-space:nowrap!important}
+  #sprint-track-bar{top:88px!important;padding:7px 10px 8px!important}
+  .stb-label{display:none!important}
+  .stb-stats{font-size:.62rem!important;gap:8px!important}
+  .page{padding-top:148px!important}
+  .hero-mini{padding:16px 12px 0!important}
+  .hero-kpis{grid-template-columns:1fr 1fr!important;gap:8px!important}
+  .kpi{padding:12px!important;border-radius:9px!important}
+  .kpi-n{font-size:1.35rem!important}
+  .timeline-wrap{padding:12px 10px 30px!important}
+  .phase-dates-row{grid-template-columns:1fr 1fr!important;gap:8px!important}
+  .phases-grid{grid-template-columns:1fr!important}
+  .prog-row{grid-template-columns:1fr 1fr!important;gap:8px!important}
+  .sprint-layout{flex-direction:column!important;padding-top:148px!important}
+  .sprint-sidebar-wrap{width:100%!important;height:auto!important;border-right:none!important;border-bottom:1px solid rgba(255,255,255,.07)!important;flex-shrink:0!important}
+  .sprint-sidebar{display:flex!important;flex-direction:row!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;padding:8px 10px!important;gap:5px!important;height:auto!important;scrollbar-width:none!important}
+  .sprint-sidebar::-webkit-scrollbar{display:none!important}
+  .sprint-item{flex-shrink:0!important;width:auto!important;padding:6px 12px!important;border-radius:8px!important;white-space:nowrap!important}
+  .sidebar-toggle{display:none!important}
+  .sprint-main{padding:12px!important;min-width:0!important}
+  .sm-actions{flex-direction:column!important;align-items:flex-start!important;gap:8px!important;width:100%!important}
+  .date-range-btn{width:100%!important;justify-content:center!important}
+  .kanban-board{flex-direction:column!important;gap:12px!important}
+  .kanban-col{min-width:0!important;width:100%!important}
+  .ma-header{padding-top:148px!important;flex-wrap:wrap!important;gap:8px!important}
+  .ma-grid{grid-template-columns:1fr!important}
+  #date-popover{left:10px!important;right:10px!important;min-width:unset!important}
+}
+@media(max-width:480px){
+  .tab-btn{padding:4px 8px!important;font-size:8.5px!important}
+  .phase-dates-row{grid-template-columns:1fr!important}
+  .hero-kpis{grid-template-columns:1fr 1fr!important}
+  .prog-row{grid-template-columns:1fr!important}
+}
 </style>
 </head>
 <body>
