@@ -30,7 +30,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 .mbtn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .brand{display:flex;align-items:center;gap:8px;text-decoration:none;margin-left:10px}
 .brand svg{width:26px;height:26px}
-.brand span{font-weight:800;font-size:15px;letter-spacing:.1em}
+.brand span{font-weight:800;font-size:15px;letter-spacing:.1em;color:#ffffff}
 .topnav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
 .psel{display:flex;align-items:center;gap:6px;padding:6px 13px;background:var(--card);border:1px solid var(--bdr);border-radius:20px;font-size:11.5px;color:var(--t2);cursor:pointer;transition:all .2s}
 .psel:hover{border-color:var(--bdra);color:var(--accent)}
@@ -278,6 +278,44 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 .di .dbg{margin-left:auto;font-size:9px;padding:2px 6px;border-radius:5px;font-weight:600;font-family:'JetBrains Mono',monospace;background:var(--adim);color:var(--accent);border:1px solid var(--bdra)}
 .drawer-foot{padding:14px 18px;border-top:1px solid var(--bdr);display:flex;align-items:center;gap:10px}
 .drawer-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a88a);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--bg)}
+
+/* ─── SVG ICON ANIMATIONS (replacing emojis) ─── */
+.anim-icon{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+.anim-icon svg{stroke-linecap:round;stroke-linejoin:round;fill:none;stroke-width:1.5}
+
+/* Pulse ring for danger */
+@keyframes ringPulse{0%,100%{r:8;opacity:1}50%{r:11;opacity:.4}}
+@keyframes ringPulse2{0%,100%{r:5;opacity:.8}50%{r:8;opacity:.2}}
+
+/* Flame flicker */
+@keyframes flameFlicker{0%,100%{transform:scaleY(1) rotate(-2deg)}25%{transform:scaleY(1.05) rotate(2deg)}75%{transform:scaleY(.97) rotate(-1deg)}}
+@keyframes flameSway{0%,100%{transform:translateX(0)}50%{transform:translateX(2px)}}
+
+/* Clock tick */
+@keyframes clockTick{0%,100%{transform:rotate(0deg)}50%{transform:rotate(180deg)}}
+
+/* People dots */
+@keyframes peopleBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes peopleBob2{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
+
+/* Handshake */
+@keyframes shake{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+
+/* Bar chart grow */
+@keyframes barGrow{0%{transform:scaleY(0)}100%{transform:scaleY(1)}}
+@keyframes barPulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* Lightbulb flash */
+@keyframes bulbFlash{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* Upward arrow for activity */
+@keyframes arrowBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+/* Spinning loader for Art-E */
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Warning triangle pulse */
+@keyframes warnPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.05)}}
 </style>
 </head>
 <body>
@@ -315,32 +353,32 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
   <div class="stories-wrap">
     <div class="stories">
       <div class="story has-alert" onclick="openModal('modal-risk')">
-        <div class="story-ring danger"><div class="story-inner">🚨</div></div>
+        <div class="story-ring danger"><div class="story-inner"><div class="anim-icon"><svg width="22" height="22" viewBox="0 0 24 24" stroke="var(--danger)"><g style="animation:warnPulse 1.5s ease-in-out infinite"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r="1" fill="var(--danger)"/></g></svg></div></div></div>
         <span class="story-label">Brand Risk</span>
         <div class="story-unread"></div>
       </div>
       <div class="story" onclick="openModal('modal-viral')">
-        <div class="story-ring win"><div class="story-inner">🔥</div></div>
+        <div class="story-ring win"><div class="story-inner"><div class="anim-icon"><svg width="22" height="22" viewBox="0 0 24 24" stroke="var(--success)"><g style="animation:flameFlicker 1.2s ease-in-out infinite;transform-origin:center bottom"><path d="M12 2c0 0-5 5-5 10a5 5 0 0010 0c0-3-2-5-2-5s-1 3-3 3-2-3-2-3S12 2 12 2z" fill="rgba(52,211,153,0.2)"/><path d="M12 14c0 0-2-2-2-4 0 0 1 1 2 1s2-1 2-1c0 2-2 4-2 4z" fill="var(--success)" stroke="none"/></g></svg></div></div></div>
         <span class="story-label">Viral post!</span>
       </div>
       <div class="story" onclick="openModal('modal-time')">
-        <div class="story-ring accent"><div class="story-inner">⏰</div></div>
+        <div class="story-ring accent"><div class="story-inner"><div class="anim-icon"><svg width="22" height="22" viewBox="0 0 24 24" stroke="var(--accent)"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15" style="animation:clockTick 2s steps(12) infinite;transform-origin:12px 12px"/><circle cx="12" cy="12" r="1" fill="var(--accent)" stroke="none"/></svg></div></div></div>
         <span class="story-label">Post now</span>
       </div>
       <div class="story" onclick="openModal('modal-audience')">
-        <div class="story-ring purple"><div class="story-inner">👥</div></div>
+        <div class="story-ring purple"><div class="story-inner"><div class="anim-icon"><svg width="22" height="22" viewBox="0 0 24 24" stroke="var(--purple)"><g style="animation:peopleBob 2s ease-in-out infinite"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4" fill="rgba(167,139,250,0.15)"/></g><g style="animation:peopleBob2 2s ease-in-out infinite"><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></g></svg></div></div></div>
         <span class="story-label">Your fans</span>
       </div>
       <div class="story" onclick="openModal('modal-collab')">
-        <div class="story-ring amber"><div class="story-inner">🤝</div></div>
+        <div class="story-ring amber"><div class="story-inner"><div class="anim-icon"><svg width="22" height="22" viewBox="0 0 24 24" stroke="var(--warn)"><g style="animation:shake 2s ease-in-out infinite;transform-origin:center"><path d="M12 12l-3-3a2 2 0 00-3 3l3 3 2 2 4-4 2-2-3-3a2 2 0 00-3 3l1 1"/><path d="M7 7l-2 2"/><path d="M17 17l2 2"/></g></svg></div></div></div>
         <span class="story-label">Collab</span>
       </div>
       <div class="story" onclick="openModal('modal-week')">
-        <div class="story-ring accent"><div class="story-inner">📊</div></div>
+        <div class="story-ring accent"><div class="story-inner"><div class="anim-icon"><svg width="22" height="22" viewBox="0 0 24 24" stroke="var(--accent)"><rect x="3" y="12" width="4" height="9" fill="rgba(0,212,170,0.2)" style="animation:barPulse 1.8s ease-in-out infinite"/><rect x="10" y="7" width="4" height="14" fill="rgba(0,212,170,0.3)" style="animation:barPulse 1.8s ease-in-out .3s infinite"/><rect x="17" y="3" width="4" height="18" fill="rgba(0,212,170,0.4)" style="animation:barPulse 1.8s ease-in-out .6s infinite"/></svg></div></div></div>
         <span class="story-label">This week</span>
       </div>
       <div class="story" onclick="openModal('modal-tip')">
-        <div class="story-ring purple"><div class="story-inner">💡</div></div>
+        <div class="story-ring purple"><div class="story-inner"><div class="anim-icon"><svg width="22" height="22" viewBox="0 0 24 24" stroke="var(--purple)"><path d="M12 2a7 7 0 015 11.95V17a1 1 0 01-1 1H8a1 1 0 01-1-1v-3.05A7 7 0 0112 2z" fill="rgba(167,139,250,0.15)" style="animation:bulbFlash 2s ease-in-out infinite"/><line x1="9" y1="21" x2="15" y2="21"/><line x1="10" y1="18" x2="14" y2="18"/><line x1="12" y1="2" x2="12" y2="1" style="animation:bulbFlash 2s ease-in-out infinite"/></svg></div></div></div>
         <span class="story-label">Today's tip</span>
       </div>
     </div>
@@ -349,7 +387,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
   <!-- MORNING BRIEFING -->
   <div class="briefing">
     <div class="br-top">
-      <div class="br-avi">☀️</div>
+      <div class="br-avi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.5"><circle cx="12" cy="12" r="5" fill="rgba(251,191,36,0.2)"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div>
       <div><div class="br-name">Morning briefing</div><div class="br-time">Tuesday 22 April &middot; 9:14 AM</div></div>
     </div>
     <div class="br-body">
@@ -363,7 +401,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 
   <!-- ART-E BAR -->
   <div class="arte-bar">
-    <span class="ab-emoji">🤖</span>
+    <div style="width:28px;height:28px;background:var(--adim);border:1px solid var(--bdra);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><rect x="3" y="8" width="18" height="13" rx="3"/><circle cx="9" cy="14" r="2" fill="rgba(0,212,170,0.3)" style="animation:bulbFlash 1.5s ease-in-out infinite"/><circle cx="15" cy="14" r="2" fill="rgba(0,212,170,0.3)" style="animation:bulbFlash 1.5s ease-in-out .5s infinite"/><line x1="12" y1="3" x2="12" y2="8"/><circle cx="12" cy="3" r="1.5" fill="var(--accent)"/></svg></div>
     <input type="text" id="homeInput" placeholder="Ask anything... &quot;Why did my post flop?&quot; &quot;Best time to post?&quot;" onkeypress="if(event.key==='Enter'){arteAsk(this.value);switchTab('arte',document.querySelector('[data-tab=arte]'))}">
     <button onclick="arteAsk(document.getElementById('homeInput').value);switchTab('arte',document.querySelector('[data-tab=arte]'))">Ask Art-E</button>
   </div>
@@ -373,8 +411,14 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 
     <!-- VIRAL HERO CARD -->
     <div class="hero-card" onclick="openModal('modal-viral')">
-      <div class="hero-bg" style="background:linear-gradient(135deg,#1a0a00,#2d1500,#1a0000)">
-        <div class="emoji-big">🔥</div>
+      <div class="hero-bg" style="background:linear-gradient(135deg,#0a1a0a,#0d2a10,#061406)">
+        <svg width="90" height="90" viewBox="0 0 60 60" fill="none" style="filter:drop-shadow(0 4px 16px rgba(52,211,153,0.5))">
+          <g style="animation:flameFlicker 1.2s ease-in-out infinite;transform-origin:30px 55px">
+            <path d="M30 5C30 5 10 22 10 38a20 20 0 0040 0c0-10-7-18-7-18S41 28 30 28s-10-14-10-14S30 5 30 5z" fill="url(#flameg1)" stroke="none"/>
+            <path d="M30 32c0 0-7-7-7-14 0 0 3 4 7 4s7-4 7-4c0 7-7 14-7 14z" fill="#34d399" stroke="none"/>
+          </g>
+          <defs><linearGradient id="flameg1" x1="30" y1="5" x2="30" y2="55" gradientUnits="userSpaceOnUse"><stop stop-color="#6ee7b7"/><stop offset="1" stop-color="#059669"/></linearGradient></defs>
+        </svg>
         <div class="hero-bg::after"></div>
       </div>
       <div class="hero-bottom">
@@ -397,8 +441,14 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 
     <!-- BRAND RISK -->
     <div class="fc" onclick="openModal('modal-risk')">
-      <div class="fc-visual" style="background:linear-gradient(135deg,#1a0808,#2d0a0a)">
-        <div class="vemoji">🚨</div>
+      <div class="fc-visual" style="background:linear-gradient(135deg,#1a0505,#2a0808,#0d0202)">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" style="filter:drop-shadow(0 2px 12px rgba(248,113,113,0.4))">
+          <g style="animation:warnPulse 1.5s ease-in-out infinite;transform-origin:30px 30px">
+            <path d="M30 8L6 50h48L30 8z" fill="rgba(248,113,113,0.15)" stroke="#f87171" stroke-width="2"/>
+            <rect x="27.5" y="24" width="5" height="14" rx="2.5" fill="#f87171"/>
+            <circle cx="30" cy="43" r="3" fill="#f87171"/>
+          </g>
+        </svg>
         <div class="vbar"><span style="font-size:11px;color:rgba(248,113,113,0.8);font-weight:600">Kelpie Daily · 12 min ago</span></div>
       </div>
       <div class="fc-body">
@@ -416,8 +466,14 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 
     <!-- POST NOW -->
     <div class="fc" onclick="openModal('modal-time')">
-      <div class="fc-visual" style="background:linear-gradient(135deg,#001a14,#003326)">
-        <div class="vemoji">⏰</div>
+      <div class="fc-visual" style="background:linear-gradient(135deg,#001a14,#002d1f,#001008)">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" style="filter:drop-shadow(0 2px 12px rgba(0,212,170,0.4))">
+          <circle cx="30" cy="30" r="22" fill="rgba(0,212,170,0.08)" stroke="#00d4aa" stroke-width="2"/>
+          <circle cx="30" cy="30" r="3" fill="#00d4aa"/>
+          <line x1="30" y1="12" x2="30" y2="30" stroke="#00d4aa" stroke-width="2.5" stroke-linecap="round" style="animation:clockTick 2s steps(12) infinite;transform-origin:30px 30px"/>
+          <line x1="30" y1="30" x2="44" y2="36" stroke="#00f5c4" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="30" cy="9" r="2" fill="#00d4aa" style="animation:barPulse 1.5s ease-in-out infinite"/>
+        </svg>
         <div class="vbar"><span style="font-size:11px;color:rgba(0,212,170,0.8);font-weight:600">Drinking Memes · Right now</span></div>
       </div>
       <div class="fc-body">
@@ -435,8 +491,18 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 
     <!-- AUDIENCE INSIGHT -->
     <div class="fc" onclick="openModal('modal-audience')">
-      <div class="fc-visual" style="background:linear-gradient(135deg,#0d0a1e,#1a1035)">
-        <div class="vemoji">👥</div>
+      <div class="fc-visual" style="background:linear-gradient(135deg,#0a0816,#160d2a,#080510)">
+        <svg width="64" height="60" viewBox="0 0 64 60" fill="none" style="filter:drop-shadow(0 2px 12px rgba(167,139,250,0.4))">
+          <g style="animation:peopleBob 2s ease-in-out infinite">
+            <circle cx="22" cy="18" r="8" fill="rgba(167,139,250,0.2)" stroke="#a78bfa" stroke-width="1.5"/>
+            <path d="M6 46c0-8.8 7.2-16 16-16" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <g style="animation:peopleBob2 2s ease-in-out infinite">
+            <circle cx="42" cy="18" r="8" fill="rgba(167,139,250,0.3)" stroke="#c4b5fd" stroke-width="1.5"/>
+            <path d="M58 46c0-8.8-7.2-16-16-16" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round"/>
+            <path d="M22 46c0-8.8 7.2-16 16-16s16 7.2 16 16" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </svg>
         <div class="vbar"><span style="font-size:11px;color:rgba(167,139,250,0.8);font-weight:600">Drinking Memes · This week</span></div>
       </div>
       <div class="fc-body">
@@ -454,8 +520,15 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 
     <!-- VIDEO TIP -->
     <div class="fc" onclick="openModal('modal-tip')">
-      <div class="fc-visual" style="background:linear-gradient(135deg,#0a0d00,#1a1f00)">
-        <div class="vemoji">📉</div>
+      <div class="fc-visual" style="background:linear-gradient(135deg,#0d0a00,#1f1600,#080600)">
+        <svg width="70" height="60" viewBox="0 0 70 60" fill="none" style="filter:drop-shadow(0 2px 12px rgba(251,191,36,0.3))">
+          <polyline points="8,15 22,35 36,25 50,42 62,20" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <polyline points="8,15 22,35 36,25 50,42 62,20" stroke="rgba(251,191,36,0.15)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <g style="animation:warnPulse 1.5s ease-in-out infinite;transform-origin:50px 42px">
+            <circle cx="50" cy="42" r="5" fill="#fbbf24"/>
+          </g>
+          <line x1="8" y1="52" x2="62" y2="52" stroke="rgba(251,191,36,0.2)" stroke-width="1"/>
+        </svg>
         <div class="vbar"><span style="font-size:11px;color:rgba(251,191,36,0.8);font-weight:600">All pages · This week</span></div>
       </div>
       <div class="fc-body">
@@ -472,8 +545,17 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 
     <!-- COLLAB -->
     <div class="fc" onclick="openModal('modal-collab')">
-      <div class="fc-visual" style="background:linear-gradient(135deg,#00101a,#001a2d)">
-        <div class="vemoji">🤝</div>
+      <div class="fc-visual" style="background:linear-gradient(135deg,#000d1a,#001525,#00060d)">
+        <svg width="70" height="60" viewBox="0 0 70 60" fill="none" style="filter:drop-shadow(0 2px 12px rgba(96,165,250,0.4))">
+          <g style="animation:shake 2s ease-in-out infinite;transform-origin:35px 30px">
+            <circle cx="20" cy="24" r="10" fill="rgba(96,165,250,0.15)" stroke="#60a5fa" stroke-width="1.5"/>
+            <circle cx="50" cy="24" r="10" fill="rgba(96,165,250,0.15)" stroke="#93c5fd" stroke-width="1.5"/>
+            <path d="M28 30c0 0 3.5 4 7 4s7-4 7-4" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
+            <line x1="20" y1="34" x2="20" y2="46" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="50" y1="34" x2="50" y2="46" stroke="#93c5fd" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="20" y1="46" x2="50" y2="46" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 3"/>
+          </g>
+        </svg>
         <div class="vbar"><span style="font-size:11px;color:rgba(96,165,250,0.8);font-weight:600">Drinking Memes · New match</span></div>
       </div>
       <div class="fc-body">
@@ -490,8 +572,15 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 
     <!-- WIN CARD -->
     <div class="fc" onclick="openModal('modal-week')">
-      <div class="fc-visual" style="background:linear-gradient(135deg,#001a14,#002d1a)">
-        <div class="vemoji">🏆</div>
+      <div class="fc-visual" style="background:linear-gradient(135deg,#001a14,#002d1a,#000d08)">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" style="filter:drop-shadow(0 2px 16px rgba(52,211,153,0.5))">
+          <rect x="18" y="8" width="8" height="26" rx="1" fill="rgba(52,211,153,0.2)" stroke="#34d399" stroke-width="1.5" style="animation:barPulse 1.8s ease-in-out .4s infinite"/>
+          <rect x="29" y="3" width="8" height="31" rx="1" fill="rgba(52,211,153,0.3)" stroke="#34d399" stroke-width="1.5" style="animation:barPulse 1.8s ease-in-out infinite"/>
+          <rect x="40" y="14" width="8" height="20" rx="1" fill="rgba(52,211,153,0.2)" stroke="#6ee7b7" stroke-width="1.5" style="animation:barPulse 1.8s ease-in-out .8s infinite"/>
+          <line x1="10" y1="42" x2="52" y2="42" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
+          <polyline points="12,38 22,28 33,32 44,22 54,26" stroke="#00d4aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="54" cy="26" r="3" fill="#00d4aa" style="animation:barPulse 1s ease-in-out infinite"/>
+        </svg>
         <div class="vbar"><span style="font-size:11px;color:rgba(52,211,153,0.8);font-weight:600">All pages · This week</span></div>
       </div>
       <div class="fc-body">
@@ -514,18 +603,18 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 <div class="tab-panel" id="panel-activity">
   <div class="act-header">Today</div>
   <div class="activity-list">
-    <div class="act-item"><div class="act-icon" style="background:rgba(248,113,113,0.1)">🚨</div><div class="act-body"><div class="act-title">Angry comments spotted on Kelpie Daily</div><div class="act-desc">Council tax post getting a lot of negative comments. They're at the council, not you. Low risk. Art-E is monitoring.</div></div><div class="act-time">12m</div></div>
-    <div class="act-item"><div class="act-icon" style="background:rgba(52,211,153,0.1)">🔥</div><div class="act-body"><div class="act-title">Prison biscuit post went viral!</div><div class="act-desc">47.2K reach, 892 shares, 3.4K reactions. Your best post in 3 months. Art-E saved the winning formula for you.</div></div><div class="act-time">2h</div></div>
-    <div class="act-item"><div class="act-icon" style="background:rgba(0,212,170,0.1)">⏰</div><div class="act-body"><div class="act-title">Best posting windows calculated</div><div class="act-desc">1:15 PM for memes (89% confidence). 6:30 PM for news (82%). Based on 24 months of your page history.</div></div><div class="act-time">3h</div></div>
-    <div class="act-item"><div class="act-icon" style="background:rgba(167,139,250,0.1)">👥</div><div class="act-body"><div class="act-title">New audience group found</div><div class="act-desc">14% of your followers are active 10pm–1am and love late-night content. They've never been shown as a separate group before.</div></div><div class="act-time">5h</div></div>
-    <div class="act-item"><div class="act-icon" style="background:rgba(96,165,250,0.1)">📉</div><div class="act-body"><div class="act-title">Video reach dropping this week</div><div class="act-desc">Down 42% across all your pages. Photos and memes are winning right now. Art-E updated your recommendations.</div></div><div class="act-time">6h</div></div>
-    <div class="act-item"><div class="act-icon" style="background:rgba(96,165,250,0.1)">🤝</div><div class="act-body"><div class="act-title">Collab match found</div><div class="act-desc">"Friday Night Chaos" — 67% audience overlap. Cross-post could bring ~15K new reach.</div></div><div class="act-time">8h</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(248,113,113,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r="1" fill="#f87171"/></svg></div><div class="act-body"><div class="act-title">Angry comments spotted on Kelpie Daily</div><div class="act-desc">Council tax post getting a lot of negative comments. They're at the council, not you. Low risk. Art-E is monitoring.</div></div><div class="act-time">12m</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(52,211,153,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.5"><path d="M12 2s-5 5-5 10a5 5 0 0010 0c0-3-2-5-2-5s-1 3-3 3-2-3-2-3S12 2 12 2z" fill="rgba(52,211,153,0.2)"/></svg></div><div class="act-body"><div class="act-title">Prison biscuit post went viral!</div><div class="act-desc">47.2K reach, 892 shares, 3.4K reactions. Your best post in 3 months. Art-E saved the winning formula for you.</div></div><div class="act-time">2h</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(0,212,170,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg></div><div class="act-body"><div class="act-title">Best posting windows calculated</div><div class="act-desc">1:15 PM for memes (89% confidence). 6:30 PM for news (82%). Based on 24 months of your page history.</div></div><div class="act-time">3h</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(167,139,250,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><div class="act-body"><div class="act-title">New audience group found</div><div class="act-desc">14% of your followers are active 10pm–1am and love late-night content. They've never been shown as a separate group before.</div></div><div class="act-time">5h</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(96,165,250,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div><div class="act-body"><div class="act-title">Video reach dropping this week</div><div class="act-desc">Down 42% across all your pages. Photos and memes are winning right now. Art-E updated your recommendations.</div></div><div class="act-time">6h</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(96,165,250,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><div class="act-body"><div class="act-title">Collab match found</div><div class="act-desc">"Friday Night Chaos" — 67% audience overlap. Cross-post could bring ~15K new reach.</div></div><div class="act-time">8h</div></div>
   </div>
   <div class="act-header">Yesterday</div>
   <div class="activity-list">
-    <div class="act-item"><div class="act-icon" style="background:rgba(52,211,153,0.1)">📊</div><div class="act-body"><div class="act-title">Weekly report ready</div><div class="act-desc">8 of 10 tips followed. Average uplift: +21%. Strategy score went from 72 → 81.</div></div><div class="act-time">1d</div></div>
-    <div class="act-item"><div class="act-icon" style="background:rgba(0,212,170,0.1)">🤖</div><div class="act-body"><div class="act-title">Art-E processed 847 new posts</div><div class="act-desc">82% positive sentiment. 6 posts flagged for a second look. 2 new topics spotted: energy prices and local elections.</div></div><div class="act-time">1d</div></div>
-    <div class="act-item"><div class="act-icon" style="background:rgba(167,139,250,0.1)">⭐</div><div class="act-body"><div class="act-title">Super sharer list updated</div><div class="act-desc">@dave_memes is now officially a super sharer — shared 8 posts this week alone.</div></div><div class="act-time">1d</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(52,211,153,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="act-body"><div class="act-title">Weekly report ready</div><div class="act-desc">8 of 10 tips followed. Average uplift: +21%. Strategy score went from 72 → 81.</div></div><div class="act-time">1d</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(0,212,170,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5"><rect x="3" y="8" width="18" height="13" rx="3"/><circle cx="9" cy="14" r="2"/><circle cx="15" cy="14" r="2"/><line x1="12" y1="3" x2="12" y2="8"/></svg></div><div class="act-body"><div class="act-title">Art-E processed 847 new posts</div><div class="act-desc">82% positive sentiment. 6 posts flagged for a second look. 2 new topics spotted: energy prices and local elections.</div></div><div class="act-time">1d</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(167,139,250,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="rgba(167,139,250,0.2)"/></svg></div><div class="act-body"><div class="act-title">Super sharer list updated</div><div class="act-desc">@dave_memes is now officially a super sharer — shared 8 posts this week alone.</div></div><div class="act-time">1d</div></div>
   </div>
 </div>
 
@@ -533,15 +622,15 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 <div class="tab-panel" id="panel-arte">
   <div class="arte-panel">
     <div class="arte-welcome">
-      <div class="arte-avatar">🤖</div>
+      <div class="arte-avatar"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><rect x="3" y="8" width="18" height="13" rx="3" fill="rgba(0,212,170,0.1)"/><circle cx="9" cy="14" r="2" fill="rgba(0,212,170,0.4)" style="animation:bulbFlash 1.5s ease-in-out infinite"/><circle cx="15" cy="14" r="2" fill="rgba(0,212,170,0.4)" style="animation:bulbFlash 1.5s ease-in-out .5s infinite"/><line x1="12" y1="3" x2="12" y2="8"/><circle cx="12" cy="3" r="1.5" fill="var(--accent)"/><line x1="7" y1="21" x2="5" y2="23"/><line x1="17" y1="21" x2="19" y2="23"/></svg></div>
       <h2>Hey! What can I help with? 👋</h2>
       <p>I know everything about your pages, your audience, and what's working right now. Just ask.</p>
     </div>
     <div class="arte-sugs">
-      <div class="arte-sug" onclick="arteAsk('What should I post right now?')"><span class="sug-emoji">📝</span><strong>What should I post?</strong>Best content for right now</div>
-      <div class="arte-sug" onclick="arteAsk('Why did my last post underperform?')"><span class="sug-emoji">🤔</span><strong>Why did my post flop?</strong>Let's figure out what went wrong</div>
-      <div class="arte-sug" onclick="arteAsk('Show me my best performing content this month')"><span class="sug-emoji">🏆</span><strong>My best posts</strong>Top content this month</div>
-      <div class="arte-sug" onclick="arteAsk('When is the best time to post this week?')"><span class="sug-emoji">⏰</span><strong>Best times to post</strong>For each of your pages</div>
+      <div class="arte-sug" onclick="arteAsk('What should I post right now?')"><div style="margin-bottom:6px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" style="animation:arrowBounce 2s ease-in-out infinite"/></svg></div><strong>What should I post?</strong>Best content for right now</div>
+      <div class="arte-sug" onclick="arteAsk('Why did my last post underperform?')"><div style="margin-bottom:6px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.5"><circle cx="12" cy="12" r="10" fill="rgba(99,102,241,0.1)"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5" stroke-linecap="round"/></svg></div><strong>Why did my post flop?</strong>Let's figure out what went wrong</div>
+      <div class="arte-sug" onclick="arteAsk('Show me my best performing content this month')"><div style="margin-bottom:6px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="1.5"><polyline points="20 6 9 17 4 12" style="animation:arrowBounce 1.5s ease-in-out infinite"/></svg></div><strong>My best posts</strong>Top content this month</div>
+      <div class="arte-sug" onclick="arteAsk('When is the best time to post this week?')"><div style="margin-bottom:6px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--warn)" stroke-width="1.5"><circle cx="12" cy="12" r="9" fill="rgba(251,191,36,0.1)"/><polyline points="12 7 12 12 15 15" style="animation:clockTick 2s steps(12) infinite;transform-origin:12px 12px"/></svg></div><strong>Best times to post</strong>For each of your pages</div>
     </div>
     <div class="arte-chat" id="arteChat"></div>
     <div class="arte-input-bar">
@@ -555,12 +644,12 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 <div class="tab-panel" id="panel-alerts">
   <div class="alerts-panel">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h3 style="font-size:16px;font-weight:700">Notifications 🔔</h3><span style="font-size:11.5px;color:var(--accent);cursor:pointer;font-weight:500">Mark all read</span></div>
-    <div class="alert-card unread" onclick="openModal('modal-risk')"><div class="alert-emoji">🚨</div><div class="alert-body"><h4>Angry comments on Kelpie Daily's council tax post</h4><p>16 negative comments flagged. They're annoyed at the council, not you. Low risk, but keep an eye on it.</p></div><div class="alert-meta"><time>12m</time><span class="ab crit">Heads up</span></div></div>
-    <div class="alert-card unread"><div class="alert-emoji">📉</div><div class="alert-body"><h4>Videos aren't performing well this week</h4><p>Reach down 42%. Images and memes are winning right now. Art-E updated your recommendations.</p></div><div class="alert-meta"><time>3h</time><span class="ab warn">Trend</span></div></div>
-    <div class="alert-card unread" onclick="openModal('modal-viral')"><div class="alert-emoji">🔥</div><div class="alert-body"><h4>Prison biscuit post went viral!</h4><p>47.2K reach, 892 shares. Art-E saved the formula so you can do this again.</p></div><div class="alert-meta"><time>4h</time><span class="ab win">Win 🏆</span></div></div>
-    <div class="alert-card" onclick="openModal('modal-collab')"><div class="alert-emoji">🤝</div><div class="alert-body"><h4>Collab opportunity with "Friday Night Chaos"</h4><p>67% audience match. Could bring ~15K new reach with a single cross-post.</p></div><div class="alert-meta"><time>8h</time><span class="ab info">Growth</span></div></div>
-    <div class="alert-card"><div class="alert-emoji">📊</div><div class="alert-body"><h4>Your weekly report is ready</h4><p>8 suggestions followed, 21% average uplift. Strategy score: 81. Nice work! 💪</p></div><div class="alert-meta"><time>1d</time><span class="ab win">Report</span></div></div>
-    <div class="alert-card"><div class="alert-emoji">⭐</div><div class="alert-body"><h4>@dave_memes is now one of your top sharers</h4><p>Shared 8 posts this week. When they share, your content reaches 2 extra audience groups.</p></div><div class="alert-meta"><time>1d</time><span class="ab info">Growth</span></div></div>
+    <div class="alert-card unread" onclick="openModal('modal-risk')"><div class="alert-emoji"style="background:rgba(167,139,250,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="rgba(167,139,250,0.2)"/></svg> on Kelpie Daily's council tax post</h4><p>16 negative comments flagged. They're annoyed at the council, not you. Low risk, but keep an eye on it.</p></div><div class="alert-meta"><time>12m</time><span class="ab crit">Heads up</span></div></div>
+    <div class="alert-card unread"><div class="alert-emoji"style="background:rgba(167,139,250,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="rgba(167,139,250,0.2)"/></svg>'t performing well this week</h4><p>Reach down 42%. Images and memes are winning right now. Art-E updated your recommendations.</p></div><div class="alert-meta"><time>3h</time><span class="ab warn">Trend</span></div></div>
+    <div class="alert-card unread" onclick="openModal('modal-viral')"><div class="alert-emoji"style="background:rgba(167,139,250,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="rgba(167,139,250,0.2)"/></svg> post went viral!</h4><p>47.2K reach, 892 shares. Art-E saved the formula so you can do this again.</p></div><div class="alert-meta"><time>4h</time><span class="ab win">Win 🏆</span></div></div>
+    <div class="alert-card" onclick="openModal('modal-collab')"><div class="alert-emoji"style="background:rgba(167,139,250,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="rgba(167,139,250,0.2)"/></svg> opportunity with "Friday Night Chaos"</h4><p>67% audience match. Could bring ~15K new reach with a single cross-post.</p></div><div class="alert-meta"><time>8h</time><span class="ab info">Growth</span></div></div>
+    <div class="alert-card"><div class="alert-emoji"style="background:rgba(167,139,250,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="rgba(167,139,250,0.2)"/></svg> report is ready</h4><p>8 suggestions followed, 21% average uplift. Strategy score: 81. Nice work! 💪</p></div><div class="alert-meta"><time>1d</time><span class="ab win">Report</span></div></div>
+    <div class="alert-card"><div class="alert-emoji"style="background:rgba(167,139,250,0.1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="rgba(167,139,250,0.2)"/></svg> is now one of your top sharers</h4><p>Shared 8 posts this week. When they share, your content reaches 2 extra audience groups.</p></div><div class="alert-meta"><time>1d</time><span class="ab info">Growth</span></div></div>
   </div>
 </div>
 
@@ -580,16 +669,16 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
     </div>
     <div style="margin-bottom:20px">
       <div class="you-section"><h3>Your pages</h3></div>
-      <div class="you-page"><span class="you-page-emoji">🍺</span><div class="you-page-name">Drinking Memes</div><div class="you-page-stat">47.2K reach this week</div></div>
-      <div class="you-page"><span class="you-page-emoji">🐕</span><div class="you-page-name">Kelpie Daily</div><div class="you-page-stat">12.8K reach this week</div></div>
-      <div class="you-page"><span class="you-page-emoji">⚖️</span><div class="you-page-name">UK Jail News</div><div class="you-page-stat">8.4K reach this week</div></div>
+      <div class="you-page"><div style="width:32px;height:32px;background:rgba(0,212,170,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div><div class="you-page-name">Drinking Memes</div><div class="you-page-stat">47.2K reach this week</div></div>
+      <div class="you-page"><div style="width:32px;height:32px;background:rgba(251,191,36,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div><div class="you-page-name">Kelpie Daily</div><div class="you-page-stat">12.8K reach this week</div></div>
+      <div class="you-page"><div style="width:32px;height:32px;background:rgba(167,139,250,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div><div class="you-page-name">UK Jail News</div><div class="you-page-stat">8.4K reach this week</div></div>
     </div>
     <div>
       <div class="you-section"><h3>How you did this week</h3></div>
-      <div class="you-page"><span class="you-page-emoji">✅</span><div class="you-page-name">Tips you followed</div><div class="you-page-stat">8 out of 10</div></div>
-      <div class="you-page"><span class="you-page-emoji">📈</span><div class="you-page-name">Average boost when you did</div><div class="you-page-stat">+21% engagement</div></div>
-      <div class="you-page"><span class="you-page-emoji">❌</span><div class="you-page-name">Missed opportunities</div><div class="you-page-stat">2 posts</div></div>
-      <div class="you-page"><span class="you-page-emoji">🏆</span><div class="you-page-name">Best move of the week</div><div class="you-page-stat">Thursday timing: 2.1x reach</div></div>
+      <div class="you-page"><div style="width:32px;height:32px;background:rgba(52,211,153,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="you-page-name">Tips you followed</div><div class="you-page-stat">8 out of 10</div></div>
+      <div class="you-page"><div style="width:32px;height:32px;background:rgba(52,211,153,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><div class="you-page-name">Average boost when you did</div><div class="you-page-stat">+21% engagement</div></div>
+      <div class="you-page"><div style="width:32px;height:32px;background:rgba(248,113,113,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><div class="you-page-name">Missed opportunities</div><div class="you-page-stat">2 posts</div></div>
+      <div class="you-page"><div style="width:32px;height:32px;background:rgba(251,191,36,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="you-page-name">Best move of the week</div><div class="you-page-stat">Thursday timing: 2.1x reach</div></div>
     </div>
   </div>
 </div>
@@ -601,7 +690,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 <div class="modal-overlay" id="mo" onclick="closeModal()"></div>
 
 <div class="modal" id="modal-risk">
-  <div class="modal-header"><span class="modal-emoji">🚨</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-header"><div style="width:44px;height:44px;background:rgba(248,113,113,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:8px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" fill="rgba(248,113,113,0.15)"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r="1" fill="#f87171"/></svg></div><button class="modal-close" onclick="closeModal()">✕</button></div>
   <div class="modal-body">
     <div class="modal-title">Angry comments on Kelpie Daily</div>
     <div class="modal-sub">Kelpie Daily &middot; 12 minutes ago</div>
@@ -619,7 +708,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 </div>
 
 <div class="modal" id="modal-viral">
-  <div class="modal-header"><span class="modal-emoji">🔥</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-header"><div style="width:44px;height:44px;background:rgba(52,211,153,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:8px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.5"><path d="M12 2s-5 5-5 10a5 5 0 0010 0c0-3-2-5-2-5s-1 3-3 3-2-3-2-3S12 2 12 2z" fill="rgba(52,211,153,0.2)"/><path d="M12 14c0 0-2-2-2-4 0 0 1 1 2 1s2-1 2-1c0 2-2 4-2 4z" fill="#34d399" stroke="none"/></svg></div><button class="modal-close" onclick="closeModal()">✕</button></div>
   <div class="modal-body">
     <div class="modal-title">Prison biscuit post went viral!</div>
     <div class="modal-sub">Drinking Memes &middot; Yesterday</div>
@@ -637,7 +726,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 </div>
 
 <div class="modal" id="modal-time">
-  <div class="modal-header"><span class="modal-emoji">⏰</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-header"><div style="width:44px;height:44px;background:var(--adim);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:8px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5"><circle cx="12" cy="12" r="9" fill="rgba(0,212,170,0.1)"/><polyline points="12 7 12 12 15 15"/><circle cx="12" cy="12" r="1.5" fill="#00d4aa"/></svg></div><button class="modal-close" onclick="closeModal()">✕</button></div>
   <div class="modal-body">
     <div class="modal-title">Your audience is scrolling right now</div>
     <div class="modal-sub">Drinking Memes &middot; Right now</div>
@@ -655,7 +744,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 </div>
 
 <div class="modal" id="modal-audience">
-  <div class="modal-header"><span class="modal-emoji">👥</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-header"><div style="width:44px;height:44px;background:rgba(167,139,250,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:8px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4" fill="rgba(167,139,250,0.2)"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><button class="modal-close" onclick="closeModal()">✕</button></div>
   <div class="modal-body">
     <div class="modal-title">Your 12 super sharers 🙌</div>
     <div class="modal-sub">Drinking Memes &middot; This week</div>
@@ -673,7 +762,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 </div>
 
 <div class="modal" id="modal-collab">
-  <div class="modal-header"><span class="modal-emoji">🤝</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-header"><div style="width:44px;height:44px;background:rgba(96,165,250,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:8px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" fill="rgba(96,165,250,0.15)"/></svg></div><button class="modal-close" onclick="closeModal()">✕</button></div>
   <div class="modal-body">
     <div class="modal-title">Collab with "Friday Night Chaos"?</div>
     <div class="modal-sub">New match detected &middot; Today</div>
@@ -691,7 +780,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 </div>
 
 <div class="modal" id="modal-week">
-  <div class="modal-header"><span class="modal-emoji">🏆</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-header"><div style="width:44px;height:44px;background:rgba(52,211,153,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:8px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.5"><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M17 4h4v6a4 4 0 01-4 4H7a4 4 0 01-4-4V4h4" fill="rgba(52,211,153,0.15)"/><line x1="7" y1="4" x2="17" y2="4"/></svg></div><button class="modal-close" onclick="closeModal()">✕</button></div>
   <div class="modal-body">
     <div class="modal-title">Your week in numbers</div>
     <div class="modal-sub">All pages &middot; 14 April – 22 April</div>
@@ -709,7 +798,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
 </div>
 
 <div class="modal" id="modal-tip">
-  <div class="modal-header"><span class="modal-emoji">💡</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-header"><div style="width:44px;height:44px;background:rgba(251,191,36,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:8px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.5"><path d="M12 2a7 7 0 015 11.95V17a1 1 0 01-1 1H8a1 1 0 01-1-1v-3.05A7 7 0 0112 2z" fill="rgba(251,191,36,0.15)"/><line x1="9" y1="21" x2="15" y2="21"/><line x1="10" y1="18" x2="14" y2="18"/></svg></div><button class="modal-close" onclick="closeModal()">✕</button></div>
   <div class="modal-body">
     <div class="modal-title">Skip the videos this week 📸</div>
     <div class="modal-sub">All pages &middot; This week's tip</div>
@@ -732,9 +821,9 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webki
   <div class="drawer-hdr"><h2>Menu</h2><button class="drawer-x" onclick="toggleDrawer()">✕</button></div>
   <div class="drawer-scroll">
     <div class="dlbl">Your pages</div>
-    <a class="di active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>🍺 Drinking Memes<span class="dbg">Active</span></a>
-    <a class="di"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>🐕 Kelpie Daily</a>
-    <a class="di"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>⚖️ UK Jail News</a>
+    <a class="di active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3" fill="rgba(0,212,170,0.1)"/></svg>Drinking Memes<span class="dbg">Active</span></a>
+    <a class="di"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3" fill="rgba(251,191,36,0.1)"/></svg>Kelpie Daily</a>
+    <a class="di"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3" fill="rgba(167,139,250,0.1)"/></svg>UK Jail News</a>
     <a class="di" style="color:var(--accent)"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Connect new page</a>
     <div class="dlbl">Advanced Analytics</div>
     <a href="mockup_dashboard.html" class="di"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a>
