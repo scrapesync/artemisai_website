@@ -91,16 +91,31 @@ textarea.form-input{min-height:80px;resize:vertical}
 .delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}
 
 
-.page-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;align-items:center;gap:16px;transition:all .3s;margin-bottom:12px}
-.page-card:hover{border-color:var(--border-accent)}
-.page-avatar{width:56px;height:56px;border-radius:50%;background:var(--bg-tertiary);border:2px solid var(--border-accent);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--accent);flex-shrink:0}
-.page-info{flex:1}
-.page-name{font-size:15px;font-weight:600;margin-bottom:4px}
-.page-meta{font-size:11px;color:var(--text-muted);display:flex;gap:16px}
-.page-stat{display:flex;align-items:center;gap:4px}
-.page-actions{display:flex;gap:8px}
-.connect-card{background:var(--bg-card);border:2px dashed var(--border-accent);border-radius:16px;padding:40px;text-align:center;cursor:pointer;transition:all .3s}
-.connect-card:hover{border-color:var(--accent);background:var(--accent-dim)}
+.chat-container{max-width:800px;margin:0 auto;height:calc(100vh - 120px);display:flex;flex-direction:column}
+.chat-header-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px 16px 0 0;padding:16px 20px;display:flex;align-items:center;gap:12px}
+.chat-status{width:10px;height:10px;background:var(--accent);border-radius:50%;animation:pulse 2.5s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--accent-glow)}50%{box-shadow:0 0 0 6px transparent}}
+.chat-header-text{flex:1}
+.chat-header-text h3{font-size:14px;font-weight:600}
+.chat-header-text p{font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
+.chat-body{flex:1;background:var(--bg-card);border-left:1px solid var(--border);border-right:1px solid var(--border);overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px}
+.chat-body::-webkit-scrollbar{width:4px}
+.chat-body::-webkit-scrollbar-thumb{background:var(--border-accent);border-radius:2px}
+.msg{max-width:85%;padding:14px 18px;border-radius:16px;font-size:13px;line-height:1.7;animation:fadeUp .4s ease}
+.msg-bot{background:rgba(0,212,170,0.05);border:1px solid rgba(0,212,170,0.1);border-bottom-left-radius:4px;align-self:flex-start}
+.msg-bot .sender{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.08em;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.msg-user{background:var(--bg-tertiary);border:1px solid var(--border);border-bottom-right-radius:4px;align-self:flex-end;color:var(--text-secondary)}
+.msg-bot strong{color:var(--accent);font-weight:600}
+.msg-bot em{color:var(--warning);font-style:normal;font-weight:500}
+.chat-input{display:flex;align-items:center;gap:10px;padding:16px 20px;background:var(--bg-card);border:1px solid var(--border);border-radius:0 0 16px 16px;border-top:1px solid var(--border)}
+.chat-input input{flex:1;background:var(--bg-primary);border:1px solid var(--border);border-radius:10px;padding:12px 16px;color:var(--text-primary);font-family:'Outfit',sans-serif;font-size:13px;outline:none;transition:all .3s}
+.chat-input input:focus{border-color:var(--accent)}
+.chat-send{width:42px;height:42px;background:var(--accent);border:none;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s}
+.chat-send:hover{background:var(--accent-bright);box-shadow:0 4px 16px var(--accent-glow)}
+.chat-send svg{width:18px;height:18px;stroke:var(--bg-primary);fill:none;stroke-width:2}
+.suggestion-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.suggestion-pill{padding:6px 14px;border-radius:20px;background:transparent;border:1px solid var(--border-accent);color:var(--accent);font-size:11px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.suggestion-pill:hover{background:var(--accent-dim);border-color:var(--accent)}
 
 .sidebar-signout{padding:12px 16px;border-top:1px solid var(--border);margin-top:auto;flex-shrink:0}
 .sidebar-user{font-size:11px;color:var(--text-muted);padding:0 8px 8px;font-family:"JetBrains Mono",monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -403,44 +418,44 @@ textarea.form-input{min-height:80px;resize:vertical}
 </div>
 
 <a href="admin_panel.html" class="m-admin-back"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>← Admin Panel</a>
-<aside class="sidebar"><a href="admin_panel.html" class="sidebar-logo" title="Back to Admin Panel"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg><span>ARTEMIS</span></a><nav class="sidebar-nav"><div class="nav-group-label">For You</div><a href="mockup_feed.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Feed</a>
-    <div class="nav-group-label">Advanced Analytics</div><a href="index.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="mockup_dashboard.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a><a href="mockup_discovery.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discovery Feed</a><a href="mockup_predictions.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predictions</a><a href="mockup_audience.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Audience</a><div class="nav-group-label">Intelligence</div><a href="mockup_arte.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Art-E<span class="nav-badge badge-ai">AI</span></a><a href="mockup_alerts.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Alerts<span class="nav-badge badge-alert">3</span></a><a href="mockup_reports.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</a><div class="nav-group-label">Settings</div><a href="mockup_connected.html" class="nav-item active"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Connected Pages</a><a href="mockup_settings.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a></nav></aside><div class="main"><header class="topbar"><div class="topbar-left"><div class="topbar-title">Connected Pages</div></div><div class="topbar-right"><button class="btn btn-primary">+ Connect Page</button><div class="avatar">AS</div></div></header><div class="content">
-<div class="section-label">Your Pages (3 connected)</div>
-<div class="animate">
-  <div class="page-card">
-    <div class="page-avatar">FL</div>
-    <div class="page-info"><div class="page-name">FitLife Pro</div><div class="page-meta"><span class="page-stat">👥 24.5K followers</span><span class="page-stat">📊 847 posts analysed</span><span class="page-stat">🕐 Last sync: 2 min ago</span></div></div>
-    <span class="tag tag-green">Active</span>
-    <div class="page-actions"><button class="btn btn-secondary" style="padding:6px 14px;font-size:11px">Sync Now</button><button class="btn btn-secondary" style="padding:6px 14px;font-size:11px">Settings</button></div>
+<aside class="sidebar"><a href="admin_panel.html" class="sidebar-logo" title="Back to Admin Panel"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg><span>ARTEMIS</span></a><nav class="sidebar-nav"><div class="nav-group-label">Main</div><a href="index.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="mockup_dashboard.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a><a href="mockup_discovery.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discovery Feed</a><a href="mockup_predictions.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predictions</a><a href="mockup_audience.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Audience</a><div class="nav-group-label">Intelligence</div><a href="mockup_arte.html" class="nav-item active"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Art-E<span class="nav-badge badge-ai">AI</span></a><a href="mockup_alerts.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Alerts<span class="nav-badge badge-alert">3</span></a><a href="mockup_reports.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</a><div class="nav-group-label">Settings</div><a href="mockup_connected.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Connected Pages</a><a href="mockup_settings.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a></nav></aside><div class="main"><header class="topbar"><div class="topbar-left"><div class="topbar-title">Art-E</div><span class="tag tag-accent" style="margin-left:8px">AI Assistant</span></div><div class="topbar-right"><button class="btn btn-secondary" onclick="document.getElementById('chatBody').innerHTML=''">Clear Chat</button><div class="avatar">AS</div></div></header><div class="content">
+<div class="chat-container">
+  <div class="chat-header-card">
+    <div class="chat-status"></div>
+    <div class="chat-header-text"><h3>✦ Art-E — Your AI Analyst</h3><p>Trained on YOUR data · Ask anything about your social media performance</p></div>
   </div>
-  <div class="page-card">
-    <div class="page-avatar" style="color:#a5b4fc;border-color:rgba(99,102,241,0.3)">NF</div>
-    <div class="page-info"><div class="page-name">NutriFuel Hub</div><div class="page-meta"><span class="page-stat">👥 8.2K followers</span><span class="page-stat">📊 312 posts analysed</span><span class="page-stat">🕐 Last sync: 15 min ago</span></div></div>
-    <span class="tag tag-green">Active</span>
-    <div class="page-actions"><button class="btn btn-secondary" style="padding:6px 14px;font-size:11px">Sync Now</button><button class="btn btn-secondary" style="padding:6px 14px;font-size:11px">Settings</button></div>
+  <div class="chat-body" id="chatBody">
+    <div class="msg msg-bot"><div class="sender">✦ ART-E</div>Good morning! ☀️ Here's your overnight summary:<br><br>🚀 Post #12847 went <strong>VIRAL</strong> — 5,000 engagements!<br>Why: Product Launch + Tuesday 6PM + Meme format<br><br>📊 Behind-the-Scenes content performing <strong>40% better</strong> than usual this week. Ride this wave!<br><br>⚠️ <em>1 alert:</em> Negative sentiment spike on FitLife Pro (+35% in 2 hours).</div>
+    <div class="msg msg-user">Why did Tuesday's post go viral?</div>
+    <div class="msg msg-bot"><div class="sender">✦ ART-E</div>Great question. I analysed Post #12847 against your historical data. Here's why it performed <strong>3.2x above average</strong>:<br><br><strong>1. Timing</strong> — Posted at 6:12 PM on Tuesday. Your audience is 45% more active at this time vs your usual 3 PM slot.<br><br><strong>2. Format</strong> — Short-form video (under 30s). This format gets <strong>156% more engagement</strong> than static images for your page.<br><br><strong>3. Topic</strong> — Product launch content. Your top 3 performing posts this month are all product reveals.<br><br><strong>4. Emotion</strong> — Sentiment score: 0.94 (Positive). Posts above 0.85 get shared 2x more.<br><br>💡 <strong>Recommendation:</strong> Replicate this formula — short video + product content + Tuesday 6 PM. I predict a <strong>78% chance</strong> of viral performance.</div>
+    <div class="msg msg-user">What should I post tomorrow?</div>
+    <div class="msg msg-bot"><div class="sender">✦ ART-E</div>Based on your audience patterns and trending topics:<br><br>📅 <strong>Tomorrow (Thursday)</strong> — best time: <strong>6 PM</strong><br><br>Recommended content ideas:<br>→ Behind-the-scenes reel (trending +40% this week)<br>→ Customer transformation story (your #2 format)<br>→ Quick nutrition tip carousel<br><br>Avoid: Text-only posts (0.8% avg engagement) and posting before noon (23% lower reach on Thursdays).<br><br>Want me to draft a caption for any of these?</div>
   </div>
-  <div class="page-card">
-    <div class="page-avatar" style="color:var(--warning);border-color:rgba(251,191,36,0.3)">WR</div>
-    <div class="page-info"><div class="page-name">Weekend Runner</div><div class="page-meta"><span class="page-stat">👥 3.1K followers</span><span class="page-stat">📊 156 posts analysed</span><span class="page-stat">🕐 Last sync: 1 hour ago</span></div></div>
-    <span class="tag tag-green">Active</span>
-    <div class="page-actions"><button class="btn btn-secondary" style="padding:6px 14px;font-size:11px">Sync Now</button><button class="btn btn-danger" style="padding:6px 14px;font-size:11px">Disconnect</button></div>
+  <div style="padding:8px 20px;background:var(--bg-card);border-left:1px solid var(--border);border-right:1px solid var(--border)">
+    <div class="suggestion-pills">
+      <button class="suggestion-pill" onclick="addMsg(this.textContent)">What's trending this week?</button>
+      <button class="suggestion-pill" onclick="addMsg(this.textContent)">Show my best performing content</button>
+      <button class="suggestion-pill" onclick="addMsg(this.textContent)">Analyse competitor pages</button>
+      <button class="suggestion-pill" onclick="addMsg(this.textContent)">Draft a caption for me</button>
+    </div>
   </div>
-</div>
-
-<div class="section-label" style="margin-top:28px">Competitor Pages (tracking)</div>
-<div class="animate delay-1">
-  <div class="page-card" style="border-left:3px solid var(--accent-secondary)">
-    <div class="page-avatar" style="color:#a5b4fc;border-color:rgba(99,102,241,0.3);font-size:14px">👁️</div>
-    <div class="page-info"><div class="page-name">GymShark Official</div><div class="page-meta"><span class="page-stat">Public data only</span><span class="page-stat">📊 Used in cross-page comparison</span></div></div>
-    <span class="tag tag-blue">Tracking</span>
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Ask Art-E anything about your social media..." onkeydown="if(event.key==='Enter')sendMsg()">
+    <button class="chat-send" onclick="sendMsg()"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4z"/></svg></button>
   </div>
 </div>
-
-<div class="connect-card animate delay-2" onclick="this.innerHTML='<p style=\'color:var(--accent)\'>Redirecting to Facebook OAuth...</p>'">
-  <svg viewBox="0 0 24 24" style="width:36px;height:36px;stroke:var(--accent);fill:none;stroke-width:1.5;margin-bottom:12px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-  <div style="font-size:15px;font-weight:600;margin-bottom:4px">Connect Another Page</div>
-  <div style="font-size:12px;color:var(--text-muted)">Link a Facebook page via OAuth to start analysing</div>
-</div>
+<script>
+function addMsg(text){
+  const body=document.getElementById('chatBody');
+  const m=document.createElement('div');m.className='msg msg-user';m.textContent=text;body.appendChild(m);body.scrollTop=body.scrollHeight;
+  setTimeout(()=>{const b=document.createElement('div');b.className='msg msg-bot';b.innerHTML='<div class="sender">✦ ART-E</div>Analysing your data... I\'ll have insights on that in a moment. <strong>Based on 847 posts</strong> in your history, here\'s what I found:<br><br>→ This topic has been trending upward across your niche (+18% this week)<br>→ Your audience engagement peaks when you combine this with video format<br>→ 3 competitor pages are also posting about this — you have a <strong>24-hour window</strong> to capture attention first.<br><br>Want me to draft something specific?';body.appendChild(b);body.scrollTop=body.scrollHeight},800);
+}
+function sendMsg(){
+  const input=document.getElementById('chatInput');
+  if(!input.value.trim())return;
+  addMsg(input.value);input.value='';
+}
+</script>
 </div></div><script>try{const u=JSON.parse(localStorage.getItem('artemis_app_session'));if(u&&document.getElementById('sidebarUser'))document.getElementById('sidebarUser').textContent=u.email||'';}catch{}</script>
 <script>
 
@@ -523,5 +538,5 @@ function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
   });
 })();
 </script>
-<nav class="m-bottom-nav"><a href="mockup_dashboard.html" class="active"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</a><a href="mockup_predictions.html"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predict</a><a href="mockup_audience.html"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100 8"/></svg>Audience</a><a href="mockup_alerts.html"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>Alerts</a><a href="mockup_arte.html"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Art-E</a></nav>
+<nav class="m-bottom-nav"><a href="mockup_dashboard.html"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</a><a href="mockup_predictions.html"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predict</a><a href="mockup_audience.html"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100 8"/></svg>Audience</a><a href="mockup_alerts.html"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>Alerts</a><a href="mockup_arte.html" class="active"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Art-E</a></nav>
 </body></html>

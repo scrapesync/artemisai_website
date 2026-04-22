@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtemisAI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg-primary:#060a13;--bg-secondary:#0c1221;--bg-card:#0f1729;--accent:#00d4aa;--accent-bright:#00f5c4;--accent-dim:rgba(0,212,170,0.1);--accent-glow:rgba(0,212,170,0.35);--text-primary:#e8ecf4;--text-secondary:#7b8ba8;--text-muted:#4a5568;--border:rgba(255,255,255,0.05);--border-accent:rgba(0,212,170,0.15);--danger:#f87171;--danger-dim:rgba(248,113,113,0.1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;-webkit-font-smoothing:antialiased;overflow:hidden}
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:10000}
+::selection{background:var(--accent);color:var(--bg-primary)}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.85);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:1.3rem;font-weight:700;letter-spacing:.12em;color:var(--text-primary);text-decoration:none;display:flex;align-items:center;gap:.7rem}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{color:var(--text-secondary);text-decoration:none;font-size:.88rem;font-weight:400;letter-spacing:.02em;transition:color .3s}
+.nav-links a:hover{color:var(--text-primary)}
+.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden}
+.login-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,170,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,170,0.02) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,black,transparent)}
+.login-orb{position:absolute;width:400px;height:400px;border-radius:50%;filter:blur(100px);pointer-events:none}
+.login-orb-1{background:radial-gradient(circle,rgba(0,212,170,0.08),transparent 70%);top:10%;left:15%;animation:float 12s ease-in-out infinite}
+.login-orb-2{background:radial-gradient(circle,rgba(99,102,241,0.06),transparent 70%);bottom:10%;right:10%;animation:float 12s ease-in-out infinite reverse}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-20px)}}
+.login-card{position:relative;z-index:2;width:100%;max-width:420px;background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:3rem 2.5rem;box-shadow:0 40px 80px rgba(0,0,0,0.4)}
+.login-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.login-icon{width:56px;height:56px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
+.login-card h1{text-align:center;font-size:1.6rem;font-weight:700;margin-bottom:.4rem;letter-spacing:-.02em}
+.login-sub{text-align:center;font-size:.88rem;color:var(--text-secondary);margin-bottom:2rem;font-weight:300}
+.form-group{margin-bottom:1.2rem}
+.form-label{display:block;font-size:.78rem;font-weight:500;color:var(--text-secondary);letter-spacing:.04em;text-transform:uppercase;margin-bottom:.5rem;font-family:'JetBrains Mono',monospace}
+.form-input{width:100%;padding:.8rem 1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-family:'Outfit',sans-serif;font-size:.92rem;transition:all .3s;outline:none}
+.form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+.form-input::placeholder{color:var(--text-muted)}
+.login-btn{width:100%;padding:.9rem;background:var(--accent);color:var(--bg-primary);border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .35s;margin-top:.5rem;position:relative;overflow:hidden}
+.login-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,0.15),transparent);transform:translateX(-100%);transition:transform .5s}
+.login-btn:hover::before{transform:translateX(100%)}
+.login-btn:hover{background:var(--accent-bright);transform:translateY(-1px);box-shadow:0 12px 40px var(--accent-glow)}
+.login-btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.login-error{text-align:center;color:var(--danger);font-size:.82rem;margin-top:1rem;padding:.6rem;background:var(--danger-dim);border-radius:8px;display:none}
+.login-error.show{display:block;animation:shake .4s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.login-hint{text-align:center;font-size:.72rem;color:var(--text-muted);margin-top:1.5rem;line-height:1.5}
+@media(max-width:768px){nav{padding:0 1.2rem}.login-card{padding:2rem 1.5rem;margin:0 .5rem}}
+
+nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.88);border-bottom:1px solid rgba(255,255,255,0.05);transition:background .3s}
+nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0,0,0,.3)}
+.site-logo{font-size:1.15rem;font-weight:700;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.65rem;flex-shrink:0}
+.site-logo-mark{width:32px;height:32px}.site-logo-mark svg{width:100%;height:100%}
+.site-nav-links{display:flex;align-items:center;gap:1.4rem;list-style:none;margin:0;padding:0}
+.site-nav-links a{color:#7b8ba8;text-decoration:none;font-size:.85rem;font-weight:400;letter-spacing:.01em;transition:color .25s;white-space:nowrap}
+.site-nav-links a:hover{color:#e8ecf4}
+.nav-pill-outline{padding:.42rem 1rem!important;border:1px solid rgba(0,212,170,.3)!important;border-radius:7px;color:#00d4aa!important;font-size:.8rem!important}
+.nav-pill-outline:hover{background:rgba(0,212,170,.07)!important;border-color:rgba(0,212,170,.6)!important}
+.nav-pill-solid{padding:.42rem 1.1rem!important;background:#00d4aa!important;color:#060a13!important;border-radius:7px;font-weight:600!important;font-size:.8rem!important}
+.nav-pill-solid:hover{background:#00f5c4!important}
+.nav-user-chip{display:none;align-items:center;gap:8px;padding:.35rem .9rem .35rem .5rem;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);border-radius:20px}
+.nav-user-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#00d4aa,#6366f1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#060a13;flex-shrink:0}
+.nav-user-name{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#00d4aa;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nav-logout-btn{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.75rem;padding:.3rem .65rem;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nav-logout-btn:hover{border-color:rgba(248,113,113,.4);color:#f87171}
+.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:4px}
+.nav-hamburger span{display:block;width:20px;height:2px;background:#7b8ba8;border-radius:2px;transition:all .3s}
+@media(max-width:768px){
+  nav.site-nav{padding:0 1.2rem}
+  .site-nav-links{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:rgba(6,10,19,.98);backdrop-filter:blur(20px);padding:1rem 1.5rem;gap:.6rem;border-bottom:1px solid rgba(255,255,255,.05)}
+  .site-nav-links.open{display:flex}
+  .nav-hamburger{display:flex}
+}
+
+/* ── Sign-out confirmation modal ── */
+#signout-modal{display:none;position:fixed;inset:0;z-index:99998;align-items:center;justify-content:center}
+#signout-modal.open{display:flex}
+#signout-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px)}
+#signout-card{position:relative;z-index:1;background:#0f1729;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:2rem 2.2rem;max-width:360px;width:90%;box-shadow:0 30px 60px rgba(0,0,0,0.5);animation:modalIn .2s ease}
+#signout-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(248,113,113,0.6),transparent);border-radius:0}
+@keyframes modalIn{from{opacity:0;transform:scale(.94) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.signout-icon{width:44px;height:44px;border-radius:12px;background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.signout-icon svg{width:20px;height:20px;stroke:#f87171;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.signout-title{text-align:center;font-size:1.05rem;font-weight:700;color:#e8ecf4;margin-bottom:.35rem}
+.signout-sub{text-align:center;font-size:.82rem;color:#7b8ba8;margin-bottom:1.6rem;line-height:1.5}
+.signout-btns{display:flex;gap:10px}
+.signout-cancel{flex:1;padding:.7rem;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:9px;color:#7b8ba8;font-family:inherit;font-size:.88rem;cursor:pointer;transition:all .2s}
+.signout-cancel:hover{border-color:rgba(255,255,255,0.2);color:#e8ecf4}
+.signout-confirm{flex:1;padding:.7rem;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);border-radius:9px;color:#f87171;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+.signout-confirm:hover{background:rgba(248,113,113,0.2);border-color:rgba(248,113,113,0.5)}
+
+@media(max-width:768px){
+  nav.site-nav{height:48px;padding:0 1rem}
+  .site-logo{font-size:.95rem;gap:.45rem}
+  .site-logo-mark{width:24px;height:24px}
+  .site-nav-links{gap:.6rem}
+  .site-nav-links a{font-size:.75rem}
+  .nav-pill-outline{padding:.3rem .7rem!important;font-size:.72rem!important}
+  .nav-user-name{display:none}
+  .nav-user-chip{padding:.28rem .5rem .28rem .4rem}
+  .nav-logout-btn{font-size:.7rem;padding:.25rem .5rem}
+  /* site-nav variants */
+  .sn-logo{font-size:.95rem;gap:.45rem}
+  .sn-logo-mark{width:24px;height:24px}
+  .sn-links{gap:.6rem}
+  .sn-pill{padding:.3rem .7rem!important;font-size:.72rem!important}
+  .sn-name{display:none}
+  .sn-chip{padding:.28rem .5rem .28rem .4rem}
+}
+@media(max-width:480px){
+  .nav-user-avatar,.sn-avatar{width:22px;height:22px;font-size:9px}
+}
+
+/* ─────────────────────────────────────────────────────────
+   ARTEMISAI SHARED MOBILE — injected into all pages
+   ───────────────────────────────────────────────────────── */
+@media(max-width:768px){
+  nav.site-nav{height:52px!important;padding:0 1rem!important}
+  .site-logo{font-size:.95rem!important;gap:.5rem!important}
+  .site-logo-mark{width:26px!important;height:26px!important}
+  .site-nav-links{gap:.5rem!important}
+  .nav-pill-outline{padding:.3rem .75rem!important;font-size:.72rem!important}
+  .nav-user-name{max-width:70px!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  .sn-links{gap:.5rem!important}
+  .sn-pill{padding:.3rem .75rem!important;font-size:.7rem!important}
+  .sn-name{max-width:70px!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #signout-card{padding:1.6rem 1.4rem!important;max-width:320px!important}
+}
+@media(max-width:480px){
+  .nav-user-name,.sn-name{display:none!important}
+  .nav-user-avatar,.sn-avatar{width:26px!important;height:26px!important;font-size:10px!important}
+}
+</style>
+</head>
+<body>
+
+<!-- Sign-out confirmation modal -->
+<div id="signout-modal">
+  <div id="signout-backdrop" onclick="_closeSignoutModal()"></div>
+  <div id="signout-card">
+    <div class="signout-icon">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    </div>
+    <div class="signout-title">Sign out?</div>
+    <div class="signout-sub">You'll need to sign back in to access the Admin Panel.</div>
+    <div class="signout-btns">
+      <button class="signout-cancel" onclick="_closeSignoutModal()">Cancel</button>
+      <button class="signout-confirm" onclick="_doSignout()">Sign Out</button>
+    </div>
+  </div>
+</div>
+
+<nav class="site-nav" id="site-nav">
+    <a href="index.html" class="site-logo">
+      <div class="site-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#nlg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#nlg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#nlg)"/><defs><linearGradient id="nlg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
+      ARTEMIS
+    </a>
+    <button class="nav-hamburger" onclick="document.querySelector('.site-nav-links').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav-links">
+      
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#team">Team</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      
+      <li><a href="admin_login.html" class="nav-pill-outline" id="nav-admin-link">Admin Panel</a></li>
+      <li><a href="mockup_login.html" class="nav-pill-solid">Launch App →</a></li>
+    </ul>
+  </nav>
+<div class="login-screen">
+  <div class="login-bg"></div>
+  <div class="login-orb login-orb-1"></div>
+  <div class="login-orb login-orb-2"></div>
+  <div class="login-card">
+    <div class="login-icon">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <h1>Artemis Platform</h1>
+    <p class="login-sub">Sign in to access your dashboard</p>
+    <div class="form-group">
+      <label class="form-label" for="username">Username</label>
+      <input class="form-input" type="text" id="username" placeholder="Enter your username" autocomplete="username" required autofocus>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="password">Password</label>
+      <input class="form-input" type="password" id="password" placeholder="Enter your password" autocomplete="current-password" required>
+    </div>
+    <button class="login-btn" id="loginBtn" onclick="handleLogin()">Sign In</button>
+    <div class="login-error" id="loginError"></div>
+    <p class="login-hint">Access restricted to authorized ArtemisAI team members.</p>
+  </div>
+</div>
+<script>
+const API = 'https://g6zr0b5lwe.execute-api.eu-west-2.amazonaws.com/default/lambda_save';
+const SESSION_KEY = 'artemis_session';
+
+// Already logged in? Redirect immediately
+if(localStorage.getItem(SESSION_KEY)||localStorage.getItem('artemis_app_session')){window.location.href='mockup_dashboard.html';}
+
+document.getElementById('password').addEventListener('keydown', e=>{
+  if(e.key==='Enter') handleLogin();
+});
+document.getElementById('username').addEventListener('keydown', e=>{
+  if(e.key==='Enter') document.getElementById('password').focus();
+});
+
+async function handleLogin(){
+  const btn=document.getElementById('loginBtn');
+  const err=document.getElementById('loginError');
+  const username=document.getElementById('username').value.trim().toLowerCase();
+  const password=document.getElementById('password').value;
+
+  if(!username||!password){
+    showError('Please enter username and password');
+    return;
+  }
+
+  btn.disabled=true;
+  btn.textContent='Signing in...';
+  err.classList.remove('show');
+
+  try{
+    const resp=await fetch(API,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'login',username,password})
+    });
+    const data=await resp.json();
+
+    if(data.ok&&data.user){
+      localStorage.setItem(SESSION_KEY,JSON.stringify({
+        username:data.user.username,
+        name:data.user.full_name,
+        role:data.user.role,
+        loginAt:new Date().toISOString()
+      }));
+      window.location.href='mockup_dashboard.html';
+    } else {
+      showError(data.error||'Invalid username or password');
+      btn.disabled=false;
+      btn.textContent='Sign In';
+    }
+  }catch(e){
+    showError('Connection error — please try again');
+    btn.disabled=false;
+    btn.textContent='Sign In';
+  }
+}
+
+function showError(msg){
+  const err=document.getElementById('loginError');
+  err.textContent=msg;
+  err.classList.add('show');
+}
+</script>
+<script>
+var _SK='artemis_session';
+function _siteLogout(){_showSignoutModal();}
+function _getSession(){try{return JSON.parse(localStorage.getItem(_SK)||'null');}catch{return null;}}
+function _requireLogin(){if(!_getSession()){window.location.href='admin_login.html';return false;}return true;}
+function _initSiteNav(){
+  var s=_getSession();
+  var chip=document.getElementById('nav-user-chip');
+  var av=document.getElementById('nav-user-avatar');
+  var nm=document.getElementById('nav-user-name');
+  var lb=document.getElementById('nav-logout-btn');
+  var al=document.getElementById('nav-admin-link');
+  if(s){
+    if(chip)chip.style.display='flex';
+    if(av)av.textContent=(s.name||s.username||'?').charAt(0).toUpperCase();
+    if(nm)nm.textContent=s.name||s.username||'';
+    if(lb)lb.style.display='';
+    if(al)al.textContent='⚡ '+(s.name||'Admin').split(' ')[0];
+  }
+}
+window.addEventListener('scroll',function(){var n=document.getElementById('site-nav');if(n)n.classList.toggle('scrolled',window.scrollY>20);});
+document.addEventListener('DOMContentLoaded',_initSiteNav);
+_initSiteNav();
+</script>
+<script>
+
+var _signoutFn = null;
+function _showSignoutModal(fn){
+  _signoutFn = fn || function(){
+    localStorage.removeItem('tmp');
+    localStorage.removeItem('artemis_session');
+    localStorage.removeItem('artemis_app_session');
+    localStorage.removeItem('artemis_sprint_session');
+    window.location.href='index.html';
+  };
+  document.getElementById('signout-modal').classList.add('open');
+  document.addEventListener('keydown', _escSignout);
+}
+function _closeSignoutModal(){
+  document.getElementById('signout-modal').classList.remove('open');
+  document.removeEventListener('keydown', _escSignout);
+}
+function _doSignout(){
+  _closeSignoutModal();
+  if(_signoutFn) _signoutFn();
+}
+function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
+</script>
+</body>
+</html>
