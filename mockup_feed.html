@@ -9,420 +9,804 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#060a13;--bg2:#0c1221;--bg3:#111a2e;--card:#0f1729;--card-h:#142036;--accent:#00d4aa;--accent-b:#00f5c4;--accent2:#6366f1;--adim:rgba(0,212,170,0.1);--aglow:rgba(0,212,170,0.35);--t1:#e8ecf4;--t2:#7b8ba8;--t3:#4a5568;--bdr:rgba(255,255,255,0.05);--bdra:rgba(0,212,170,0.15);--danger:#f87171;--warn:#fbbf24;--success:#34d399;--purple:#a78bfa;--blue:#60a5fa}
-*{margin:0;padding:0;box-sizing:border-box}::selection{background:var(--accent);color:var(--bg)}html,body{height:100%;overflow:hidden}body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased}
+:root{
+  --bg:#060a13;--bg2:#0c1221;--bg3:#111a2e;--card:#0f1729;--card-h:#142036;
+  --accent:#00d4aa;--accent-b:#00f5c4;--accent2:#6366f1;
+  --adim:rgba(0,212,170,0.1);--aglow:rgba(0,212,170,0.4);
+  --t1:#e8ecf4;--t2:#7b8ba8;--t3:#4a5568;
+  --bdr:rgba(255,255,255,0.06);--bdra:rgba(0,212,170,0.2);
+  --danger:#f87171;--warn:#fbbf24;--success:#34d399;--purple:#a78bfa;--blue:#60a5fa;--pink:#f472b6
+}
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:var(--accent);color:var(--bg)}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased}
 .app{display:flex;flex-direction:column;height:100vh}
 
-/* TOPNAV */
-.topnav{height:54px;background:rgba(6,10,19,0.88);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--bdr);display:flex;align-items:center;padding:0 16px;flex-shrink:0;z-index:100}
-.topnav-left{display:flex;align-items:center;gap:12px}
+/* ─── TOP NAV ─── */
+.topnav{height:54px;background:rgba(6,10,19,0.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--bdr);display:flex;align-items:center;padding:0 18px;flex-shrink:0;z-index:100}
 .mbtn{width:38px;height:38px;border:none;background:transparent;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:10px;transition:all .2s}
-.mbtn:hover{background:rgba(255,255,255,0.04);color:var(--t1)}
+.mbtn:hover{background:rgba(255,255,255,0.05);color:var(--t1)}
 .mbtn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.topnav-brand{display:flex;align-items:center;gap:8px;text-decoration:none}
-.topnav-brand svg{width:26px;height:26px}
-.topnav-brand span{font-weight:700;font-size:15px;letter-spacing:.1em;color:var(--t1)}
+.brand{display:flex;align-items:center;gap:8px;text-decoration:none;margin-left:10px}
+.brand svg{width:26px;height:26px}
+.brand span{font-weight:800;font-size:15px;letter-spacing:.1em}
 .topnav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.psel{display:flex;align-items:center;gap:6px;padding:6px 13px;background:var(--card);border:1px solid var(--bdr);border-radius:20px;font-size:11.5px;color:var(--t2);cursor:pointer;transition:all .2s}
+.psel:hover{border-color:var(--bdra);color:var(--accent)}
+.psel .live{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:livePulse 2s ease-in-out infinite}
+@keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(0,212,170,0.4)}50%{box-shadow:0 0 0 4px rgba(0,212,170,0)}}
 .tbtn{position:relative;width:38px;height:38px;border-radius:10px;border:1px solid var(--bdr);background:transparent;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .tbtn:hover{border-color:var(--bdra);color:var(--accent)}
 .tbtn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.tdot{position:absolute;top:7px;right:7px;width:7px;height:7px;background:var(--danger);border-radius:50%;border:2px solid var(--bg2)}
-.tav{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a88a);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--bg);cursor:pointer}
-.psel{display:flex;align-items:center;gap:6px;padding:5px 12px;background:var(--card);border:1px solid var(--bdr);border-radius:20px;font-size:11.5px;color:var(--t2);cursor:pointer;transition:all .2s}
-.psel:hover{border-color:var(--bdra);color:var(--accent)}
-.psel .pd{width:6px;height:6px;background:var(--accent);border-radius:50%}
-.psel svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2}
+.tdot{position:absolute;top:7px;right:7px;width:7px;height:7px;background:var(--danger);border-radius:50%;border:2px solid var(--bg2);animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.tav{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a88a);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--bg);cursor:pointer;box-shadow:0 0 12px rgba(0,212,170,0.2)}
 
-/* TABS */
-.tabbar{display:flex;background:rgba(6,10,19,0.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--bdr);flex-shrink:0;z-index:90}
-.tab{flex:1;padding:12px 0;text-align:center;font-size:11px;font-weight:500;color:var(--t3);cursor:pointer;transition:all .25s;position:relative;border-bottom:2px solid transparent}
+/* ─── TABS ─── */
+.tabbar{display:flex;background:rgba(6,10,19,0.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--bdr);flex-shrink:0;z-index:90}
+.tab{flex:1;padding:11px 0;text-align:center;font-size:11px;font-weight:500;color:var(--t3);cursor:pointer;transition:all .25s;position:relative;border-bottom:2px solid transparent}
 .tab:hover{color:var(--t2)}
 .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
 .tab.active::after{content:'';position:absolute;bottom:-1px;left:25%;right:25%;height:2px;background:var(--accent);filter:blur(6px)}
 .tab-ic{display:block;margin:0 auto 3px;width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.tab-bd{position:absolute;top:6px;right:calc(50% - 18px);min-width:14px;height:14px;background:var(--danger);border-radius:7px;font-size:8px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg);padding:0 3px}
+.tab-bd{position:absolute;top:5px;right:calc(50% - 20px);min-width:15px;height:15px;background:var(--danger);border-radius:8px;font-size:8px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg);padding:0 3px}
 
-/* CONTENT */
+/* ─── LAYOUT ─── */
 .content-area{flex:1;overflow-y:auto;position:relative}
-.content-area::-webkit-scrollbar{width:5px}
-.content-area::-webkit-scrollbar-track{background:transparent}
-.content-area::-webkit-scrollbar-thumb{background:var(--bdra);border-radius:3px}
+.content-area::-webkit-scrollbar{width:4px}
+.content-area::-webkit-scrollbar-thumb{background:var(--bdra);border-radius:2px}
 .tab-panel{display:none}.tab-panel.active{display:block}
 
-/* DRAWER */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
-.overlay.open{opacity:1;pointer-events:auto}
-.drawer{position:fixed;left:0;top:0;bottom:0;width:280px;background:var(--bg2);border-right:1px solid var(--bdr);z-index:201;transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow-y:auto}
-.drawer.open{transform:translateX(0)}
-.drawer-hdr{padding:18px 18px 14px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
-.drawer-hdr h2{font-size:15px;font-weight:700;letter-spacing:.08em}
-.drawer-x{width:34px;height:34px;border:none;background:transparent;color:var(--t2);cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;transition:all .2s}
-.drawer-x:hover{background:rgba(255,255,255,0.04);color:var(--t1)}
-.drawer-sec{padding:14px 14px 6px}
-.drawer-lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--t3);letter-spacing:.12em;text-transform:uppercase;padding:0 8px 8px}
-.di{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;color:var(--t2);cursor:pointer;transition:all .2s;font-size:13px;text-decoration:none;border:1px solid transparent;margin-bottom:1px}
-.di:hover{background:rgba(255,255,255,0.025);color:var(--t1)}
-.di.active{background:var(--adim);color:var(--accent);border-color:var(--bdra)}
-.di svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.di .dbg{margin-left:auto;font-size:9px;padding:2px 6px;border-radius:5px;font-weight:600;font-family:'JetBrains Mono',monospace;background:var(--adim);color:var(--accent);border:1px solid var(--bdra)}
-.drawer-user{padding:14px 18px;border-top:1px solid var(--bdr);margin-top:auto;display:flex;align-items:center;gap:10px}
-.drawer-user-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a88a);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--bg);flex-shrink:0}
-.du-name{font-size:12.5px;font-weight:600}.du-email{font-size:10.5px;color:var(--t3)}
+/* ─── STORIES ─── */
+.stories-wrap{padding:20px 0;display:flex;justify-content:center}
+.stories{display:flex;gap:14px;justify-content:center;flex-wrap:nowrap}
+.story{display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;flex-shrink:0;position:relative}
+.story-ring{width:60px;height:60px;border-radius:50%;padding:2.5px;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.story:hover .story-ring{transform:scale(1.1)}
+.story-ring.danger{background:linear-gradient(135deg,var(--danger),#e11d48);animation:glowDanger 2s ease-in-out infinite}
+.story-ring.win{background:linear-gradient(135deg,var(--success),#059669);animation:glowWin 2.5s ease-in-out infinite}
+.story-ring.accent{background:linear-gradient(135deg,var(--accent),#0099cc);animation:glowAccent 3s ease-in-out infinite}
+.story-ring.purple{background:linear-gradient(135deg,var(--purple),var(--accent2));animation:glowPurple 3.5s ease-in-out infinite}
+.story-ring.amber{background:linear-gradient(135deg,var(--warn),#d97706);animation:glowAmber 2.8s ease-in-out infinite}
+@keyframes glowDanger{0%,100%{box-shadow:0 0 8px rgba(248,113,113,0.3)}50%{box-shadow:0 0 22px rgba(248,113,113,0.7),0 0 44px rgba(248,113,113,0.2)}}
+@keyframes glowWin{0%,100%{box-shadow:0 0 8px rgba(52,211,153,0.3)}50%{box-shadow:0 0 22px rgba(52,211,153,0.7),0 0 44px rgba(52,211,153,0.2)}}
+@keyframes glowAccent{0%,100%{box-shadow:0 0 8px rgba(0,212,170,0.3)}50%{box-shadow:0 0 22px rgba(0,212,170,0.7),0 0 44px rgba(0,212,170,0.2)}}
+@keyframes glowPurple{0%,100%{box-shadow:0 0 8px rgba(167,139,250,0.3)}50%{box-shadow:0 0 22px rgba(167,139,250,0.7),0 0 44px rgba(167,139,250,0.2)}}
+@keyframes glowAmber{0%,100%{box-shadow:0 0 8px rgba(251,191,36,0.3)}50%{box-shadow:0 0 22px rgba(251,191,36,0.7),0 0 44px rgba(251,191,36,0.2)}}
+.story-inner{width:53px;height:53px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:22px}
+.story-label{font-size:10px;color:var(--t2);text-align:center;max-width:64px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.story-unread{position:absolute;top:2px;right:2px;width:12px;height:12px;background:var(--danger);border-radius:50%;border:2px solid var(--bg);display:none}
+.story.has-alert .story-unread{display:block}
 
-/* STORIES - CENTERED */
-.stories{display:flex;gap:16px;padding:18px 0;justify-content:center;flex-shrink:0}
-.story{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex-shrink:0}
-.sr{width:56px;height:56px;border-radius:50%;padding:2px;display:flex;align-items:center;justify-content:center;transition:transform .2s;position:relative}
-.sr:hover{transform:scale(1.1)}
-.sr.g1{background:linear-gradient(135deg,var(--accent),var(--accent2))}
-.sr.g2{background:linear-gradient(135deg,var(--danger),#e11d48)}
-.sr.g3{background:linear-gradient(135deg,var(--success),#059669)}
-.sr-in{width:50px;height:50px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center}
-.sr-in svg{width:20px;height:20px;stroke:var(--t2);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.story span{font-size:10px;color:var(--t3);max-width:64px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* GLOW ANIMATION */
-@keyframes storyGlow{0%,100%{box-shadow:0 0 8px rgba(0,212,170,0.2)}50%{box-shadow:0 0 20px rgba(0,212,170,0.5),0 0 40px rgba(0,212,170,0.2)}}
-@keyframes alertGlow{0%,100%{box-shadow:0 0 8px rgba(248,113,113,0.2)}50%{box-shadow:0 0 20px rgba(248,113,113,0.5),0 0 40px rgba(248,113,113,0.2)}}
-@keyframes winGlow{0%,100%{box-shadow:0 0 8px rgba(52,211,153,0.2)}50%{box-shadow:0 0 20px rgba(52,211,153,0.5),0 0 40px rgba(52,211,153,0.2)}}
-.sr.g1{animation:storyGlow 3s ease-in-out infinite}
-.sr.g2{animation:alertGlow 2s ease-in-out infinite}
-.sr.g3{animation:winGlow 2.5s ease-in-out infinite}
+/* ─── STORY MODAL ─── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:300;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(8px)}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-48%);width:min(480px,92vw);background:var(--bg2);border:1px solid var(--bdr);border-radius:20px;z-index:301;opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.4,0,.2,1)}
+.modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.modal-header{padding:20px 20px 0;display:flex;align-items:flex-start;justify-content:space-between}
+.modal-emoji{font-size:36px;margin-bottom:10px;display:block}
+.modal-close{width:32px;height:32px;border:none;background:rgba(255,255,255,0.04);color:var(--t2);cursor:pointer;border-radius:8px;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.modal-close:hover{background:rgba(255,255,255,0.08);color:var(--t1)}
+.modal-body{padding:0 20px 20px}
+.modal-title{font-size:18px;font-weight:700;margin-bottom:6px}
+.modal-sub{font-size:12px;color:var(--t3);margin-bottom:16px}
+.modal-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.mstat{background:var(--bg3);border-radius:10px;padding:12px;text-align:center}
+.mstat-val{font-size:18px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.mstat-val.up{color:var(--success)}.mstat-val.dn{color:var(--danger)}.mstat-val.nt{color:var(--accent)}
+.mstat-label{font-size:9.5px;color:var(--t3);margin-top:3px;text-transform:uppercase;letter-spacing:.04em}
+.modal-text{font-size:13px;color:var(--t2);line-height:1.65;margin-bottom:16px}
+.modal-text b{color:var(--t1)}
+.modal-actions{display:flex;gap:8px;flex-wrap:wrap}
+.modal-btn{padding:9px 16px;border-radius:9px;font-size:12.5px;font-weight:600;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s;border:none}
+.modal-btn.primary{background:var(--accent);color:var(--bg)}
+.modal-btn.primary:hover{background:var(--accent-b);box-shadow:0 0 16px var(--aglow)}
+.modal-btn.ghost{background:transparent;border:1px solid var(--bdr);color:var(--t2)}
+.modal-btn.ghost:hover{border-color:var(--bdra);color:var(--accent)}
 
-/* BRIEFING */
-.briefing{margin:0 24px;padding:20px;background:linear-gradient(135deg,rgba(0,212,170,0.06),rgba(99,102,241,0.04));border:1px solid var(--bdra);border-radius:16px;position:relative;overflow:hidden}
-.briefing::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(0,212,170,0.08),transparent);pointer-events:none}
-.br-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.br-icon{width:36px;height:36px;background:var(--adim);border:1px solid var(--bdra);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.br-icon svg{width:17px;height:17px;stroke:var(--accent);fill:none;stroke-width:1.5}
-.br-label{font-size:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
-.br-time{font-size:10.5px;color:var(--t3)}
-.br-body{font-size:13.5px;line-height:1.65;margin-bottom:12px}
-.br-body b{color:var(--accent);font-weight:600}
-.br-btns{display:flex;gap:8px;flex-wrap:wrap}
-.bb{padding:7px 14px;border-radius:8px;font-size:11.5px;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .25s;font-weight:500;border:1px solid var(--bdra);background:var(--adim);color:var(--accent)}
+/* ─── BRIEFING ─── */
+.briefing{margin:0 20px;padding:20px;border-radius:16px;background:linear-gradient(135deg,rgba(0,212,170,0.08) 0%,rgba(99,102,241,0.05) 100%);border:1px solid var(--bdra);position:relative;overflow:hidden}
+.briefing::after{content:'';position:absolute;top:-60px;right:-60px;width:180px;height:180px;background:radial-gradient(circle,rgba(0,212,170,0.1),transparent 70%);pointer-events:none}
+.br-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.br-avi{width:40px;height:40px;border-radius:12px;background:var(--adim);border:1px solid var(--bdra);display:flex;align-items:center;justify-content:center;font-size:18px}
+.br-name{font-size:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.br-time{font-size:11px;color:var(--t3);margin-top:1px}
+.br-body{font-size:14px;line-height:1.7;margin-bottom:14px;color:var(--t1)}
+.br-body b{color:var(--accent);font-weight:700}
+.br-body .warn{color:var(--warn);font-weight:600}
+.br-btns{display:flex;gap:8px}
+.bb{padding:8px 16px;border-radius:9px;font-size:12px;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .25s;font-weight:600;border:1px solid var(--bdra);background:var(--adim);color:var(--accent)}
 .bb:hover{background:var(--accent);color:var(--bg)}
 .bb.s{border-color:var(--bdr);background:transparent;color:var(--t2)}
 .bb.s:hover{border-color:var(--bdra);color:var(--accent)}
 
-/* ARTE BAR */
-.arte-bar{margin:14px 24px 0;padding:11px 16px;background:var(--card);border:1px solid var(--bdra);border-radius:12px;display:flex;align-items:center;gap:10px}
-.ab-ic{width:30px;height:30px;background:var(--adim);border:1px solid var(--bdra);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ab-ic svg{width:14px;height:14px;stroke:var(--accent);fill:none;stroke-width:1.5}
+/* ─── ART-E BAR ─── */
+.arte-bar{margin:14px 20px 0;padding:12px 16px;background:var(--card);border:1px solid var(--bdra);border-radius:14px;display:flex;align-items:center;gap:10px;position:relative}
+.arte-bar::before{content:'';position:absolute;inset:-1px;border-radius:14px;background:linear-gradient(90deg,rgba(0,212,170,0.1),rgba(99,102,241,0.1));z-index:-1;opacity:0;transition:opacity .3s}
+.arte-bar:focus-within::before{opacity:1}
+.ab-emoji{font-size:20px;flex-shrink:0}
 .arte-bar input{flex:1;background:transparent;border:none;outline:none;color:var(--t1);font-size:13px;font-family:'Outfit',sans-serif}
 .arte-bar input::placeholder{color:var(--t3)}
-.arte-bar button{padding:6px 14px;border-radius:7px;border:none;background:var(--accent);color:var(--bg);font-size:11px;font-weight:600;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s}
+.arte-bar button{padding:7px 14px;border-radius:8px;border:none;background:var(--accent);color:var(--bg);font-size:11.5px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s;white-space:nowrap}
 .arte-bar button:hover{background:var(--accent-b);box-shadow:0 0 14px var(--aglow)}
 
-/* FEED CARDS */
-.feed{padding:14px 24px 80px;display:flex;flex-direction:column;gap:10px}
-.fc{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:16px;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
-.fc:hover{border-color:var(--bdra);background:var(--card-h);transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,0.2)}
-.fc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
-.fc.c1::before{background:var(--accent)}.fc.c2::before{background:var(--danger)}.fc.c3::before{background:var(--accent2)}.fc.c4::before{background:var(--success)}.fc.c5::before{background:var(--warn)}.fc.c6::before{background:var(--blue)}
-.fc-top{display:flex;align-items:center;gap:7px;margin-bottom:7px;flex-wrap:wrap}
-.ft{font-size:9px;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:4px;font-weight:600}
+/* ─── FEED ─── */
+.feed{padding:14px 20px 100px;display:flex;flex-direction:column;gap:12px}
+
+/* ─── VISUAL HERO CARD ─── */
+.hero-card{border-radius:18px;overflow:hidden;position:relative;cursor:pointer;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.hero-card:hover{transform:scale(1.01)}
+.hero-bg{width:100%;height:180px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-bg .emoji-big{font-size:64px;position:relative;z-index:2;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3))}
+.hero-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(transparent,rgba(6,10,19,0.9))}
+.hero-bottom{padding:16px;background:var(--card);border:1px solid var(--bdr);border-top:none;border-radius:0 0 18px 18px}
+.hero-bottom-inner{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.hero-tag-row{display:flex;align-items:center;gap:8px}
+.hero-title{font-size:15px;font-weight:700;margin-bottom:5px;line-height:1.4}
+.hero-sub{font-size:12.5px;color:var(--t2);margin-bottom:12px;line-height:1.5}
+.hero-metrics{display:flex;gap:16px;margin-bottom:14px}
+.hm{display:flex;align-items:center;gap:5px}
+.hm-val{font-size:14px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.hm-val.up{color:var(--success)}.hm-val.dn{color:var(--danger)}.hm-val.nt{color:var(--accent)}
+.hm-label{font-size:10px;color:var(--t3)}
+.hero-cta{width:100%;padding:11px;border-radius:10px;border:none;font-size:13px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .25s}
+
+/* ─── REGULAR FEED CARD ─── */
+.fc{background:var(--card);border:1px solid var(--bdr);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1)}
+.fc:hover{border-color:var(--bdra);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.3)}
+.fc-visual{height:120px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.fc-visual .vemoji{font-size:52px;position:relative;z-index:2;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3))}
+.fc-visual .vbar{position:absolute;bottom:0;left:0;right:0;padding:8px 14px;background:linear-gradient(transparent,rgba(6,10,19,0.9));display:flex;align-items:center;gap:8px}
+.fc-body{padding:14px}
+.ft{font-size:9px;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:5px;font-weight:700;display:inline-block;margin-bottom:8px}
 .ft1{background:var(--adim);color:var(--accent);border:1px solid var(--bdra)}
-.ft2{background:rgba(248,113,113,0.08);color:var(--danger);border:1px solid rgba(248,113,113,0.15)}
-.ft3{background:rgba(99,102,241,0.08);color:var(--accent2);border:1px solid rgba(99,102,241,0.15)}
-.ft4{background:rgba(52,211,153,0.08);color:var(--success);border:1px solid rgba(52,211,153,0.15)}
-.ft5{background:rgba(251,191,36,0.08);color:var(--warn);border:1px solid rgba(251,191,36,0.15)}
-.ft6{background:rgba(96,165,250,0.08);color:var(--blue);border:1px solid rgba(96,165,250,0.15)}
-.fc-pg{font-size:10.5px;color:var(--t3)}.fc-tm{font-size:9.5px;color:var(--t3);margin-left:auto;font-family:'JetBrains Mono',monospace}
-.fc-ti{font-size:13.5px;font-weight:600;line-height:1.45;margin-bottom:4px}
-.fc-bd{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:10px}
-.fc-ms{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.ft2{background:rgba(248,113,113,0.1);color:var(--danger);border:1px solid rgba(248,113,113,0.2)}
+.ft3{background:rgba(99,102,241,0.1);color:var(--purple);border:1px solid rgba(99,102,241,0.2)}
+.ft4{background:rgba(52,211,153,0.1);color:var(--success);border:1px solid rgba(52,211,153,0.2)}
+.ft5{background:rgba(251,191,36,0.1);color:var(--warn);border:1px solid rgba(251,191,36,0.2)}
+.ft6{background:rgba(96,165,250,0.1);color:var(--blue);border:1px solid rgba(96,165,250,0.2)}
+.fc-page{font-size:10px;color:var(--t3);float:right;font-family:'JetBrains Mono',monospace}
+.fc-title{font-size:14px;font-weight:700;line-height:1.45;margin-bottom:5px}
+.fc-desc{font-size:12px;color:var(--t2);line-height:1.55;margin-bottom:12px}
+.fc-ms{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px}
 .fm{display:flex;align-items:center;gap:4px}
-.fv{font-size:12px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.fv{font-size:12.5px;font-weight:700;font-family:'JetBrains Mono',monospace}
 .fv.u{color:var(--success)}.fv.d{color:var(--danger)}.fv.n{color:var(--t2)}
-.fl{font-size:9.5px;color:var(--t3)}
-.fc-cta{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:7px;font-size:11px;font-weight:500;background:var(--adim);color:var(--accent);border:1px solid var(--bdra);cursor:pointer;transition:all .25s}
-.fc-cta:hover{background:var(--accent);color:var(--bg)}
-.fc-cta svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fl{font-size:10px;color:var(--t3)}
+.fc-btn{width:100%;padding:10px;border-radius:10px;border:none;font-size:12.5px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:6px}
+.fc-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.fc{animation:fadeUp .4s ease both}
-.fc:nth-child(1){animation-delay:.05s}.fc:nth-child(2){animation-delay:.1s}.fc:nth-child(3){animation-delay:.15s}
-.fc:nth-child(4){animation-delay:.2s}.fc:nth-child(5){animation-delay:.25s}.fc:nth-child(6){animation-delay:.3s}
-.fc:nth-child(7){animation-delay:.35s}.fc:nth-child(8){animation-delay:.4s}
+/* Card button colours */
+.btn-green{background:rgba(52,211,153,0.12);color:var(--success)}
+.btn-green:hover{background:var(--success);color:var(--bg)}
+.btn-red{background:rgba(248,113,113,0.12);color:var(--danger)}
+.btn-red:hover{background:var(--danger);color:white}
+.btn-accent{background:var(--adim);color:var(--accent)}
+.btn-accent:hover{background:var(--accent);color:var(--bg)}
+.btn-purple{background:rgba(167,139,250,0.12);color:var(--purple)}
+.btn-purple:hover{background:var(--purple);color:white}
+.btn-amber{background:rgba(251,191,36,0.12);color:var(--warn)}
+.btn-amber:hover{background:var(--warn);color:var(--bg)}
+.btn-blue{background:rgba(96,165,250,0.12);color:var(--blue)}
+.btn-blue:hover{background:var(--blue);color:white}
 
-/* ACTIVITY TAB */
-.activity-list{padding:20px 24px 80px;display:flex;flex-direction:column;gap:1px}
+/* animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero-card{animation:fadeUp .4s ease both .05s}
+.fc:nth-child(2){animation:fadeUp .4s ease both .1s}
+.fc:nth-child(3){animation:fadeUp .4s ease both .15s}
+.fc:nth-child(4){animation:fadeUp .4s ease both .2s}
+.fc:nth-child(5){animation:fadeUp .4s ease both .25s}
+.fc:nth-child(6){animation:fadeUp .4s ease both .3s}
+.fc:nth-child(7){animation:fadeUp .4s ease both .35s}
+
+/* ─── ACTIVITY TAB ─── */
+.act-header{padding:20px 20px 8px;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--t3);letter-spacing:.1em;text-transform:uppercase}
+.activity-list{padding:0 20px 100px}
 .act-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--bdr);align-items:flex-start}
-.act-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.act-icon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5}
-.act-icon.green{background:rgba(52,211,153,0.1);color:var(--success)}
-.act-icon.red{background:rgba(248,113,113,0.1);color:var(--danger)}
-.act-icon.blue{background:rgba(96,165,250,0.1);color:var(--blue)}
-.act-icon.purple{background:rgba(167,139,250,0.1);color:var(--purple)}
-.act-icon.amber{background:rgba(251,191,36,0.1);color:var(--warn)}
-.act-icon.teal{background:var(--adim);color:var(--accent)}
-.act-body{flex:1}.act-title{font-size:13px;font-weight:500;margin-bottom:3px}.act-desc{font-size:11.5px;color:var(--t2);line-height:1.5}
+.act-icon{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.act-body{flex:1}.act-title{font-size:13px;font-weight:600;margin-bottom:3px}.act-desc{font-size:11.5px;color:var(--t2);line-height:1.5}
 .act-time{font-size:10px;color:var(--t3);font-family:'JetBrains Mono',monospace;flex-shrink:0;padding-top:2px}
-.act-header{padding:20px 24px 10px;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--t3);letter-spacing:.1em;text-transform:uppercase}
 
-/* ARTE TAB */
-.arte-panel{padding:20px 24px 80px;max-width:700px;margin:0 auto}
-.arte-welcome{text-align:center;padding:40px 20px}
-.arte-avatar{width:64px;height:64px;border-radius:20px;background:var(--adim);border:2px solid var(--bdra);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
-.arte-avatar svg{width:28px;height:28px;stroke:var(--accent);fill:none;stroke-width:1.5}
+/* ─── ART-E TAB ─── */
+.arte-panel{padding:20px;max-width:700px;margin:0 auto 100px}
+.arte-welcome{text-align:center;padding:30px 20px}
+.arte-avatar{width:70px;height:70px;border-radius:22px;background:var(--adim);border:2px solid var(--bdra);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:30px;box-shadow:0 0 30px var(--aglow)}
 .arte-welcome h2{font-size:20px;font-weight:700;margin-bottom:6px}
 .arte-welcome p{font-size:13px;color:var(--t2);line-height:1.6}
-.arte-suggestions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-.arte-sug{padding:14px;background:var(--card);border:1px solid var(--bdr);border-radius:12px;cursor:pointer;transition:all .2s;font-size:12.5px;color:var(--t2);line-height:1.5}
+.arte-sugs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.arte-sug{padding:14px;background:var(--card);border:1px solid var(--bdr);border-radius:14px;cursor:pointer;transition:all .2s;font-size:12px;color:var(--t2);line-height:1.5}
 .arte-sug:hover{border-color:var(--bdra);color:var(--accent);background:var(--card-h)}
-.arte-sug strong{display:block;color:var(--t1);margin-bottom:4px;font-size:13px}
-.arte-chat{margin-top:20px}
-.arte-msg{padding:14px 18px;border-radius:14px;margin-bottom:10px;font-size:13px;line-height:1.6;max-width:85%}
-.arte-msg.user{background:var(--accent);color:var(--bg);margin-left:auto;border-bottom-right-radius:4px}
-.arte-msg.bot{background:var(--card);border:1px solid var(--bdr);border-bottom-left-radius:4px}
+.arte-sug .sug-emoji{font-size:20px;display:block;margin-bottom:6px}
+.arte-sug strong{display:block;color:var(--t1);margin-bottom:3px;font-size:13px}
+.arte-chat{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+.arte-msg{padding:13px 16px;border-radius:14px;font-size:13px;line-height:1.6;max-width:88%}
+.arte-msg.user{background:linear-gradient(135deg,var(--accent),#00a88a);color:var(--bg);margin-left:auto;border-bottom-right-radius:4px;font-weight:500}
+.arte-msg.bot{background:var(--card);border:1px solid var(--bdr);border-bottom-left-radius:4px;color:var(--t1)}
 .arte-msg.bot b{color:var(--accent)}
-.arte-input{display:flex;gap:10px;margin-top:16px;padding:12px 16px;background:var(--card);border:1px solid var(--bdra);border-radius:14px}
-.arte-input input{flex:1;background:transparent;border:none;outline:none;color:var(--t1);font-size:13px;font-family:'Outfit',sans-serif}
-.arte-input input::placeholder{color:var(--t3)}
-.arte-input button{padding:8px 16px;border-radius:8px;border:none;background:var(--accent);color:var(--bg);font-size:12px;font-weight:600;font-family:'Outfit',sans-serif;cursor:pointer}
+.arte-input-bar{display:flex;gap:10px;margin-top:16px;padding:12px 14px;background:var(--card);border:1px solid var(--bdra);border-radius:14px}
+.arte-input-bar input{flex:1;background:transparent;border:none;outline:none;color:var(--t1);font-size:13px;font-family:'Outfit',sans-serif}
+.arte-input-bar input::placeholder{color:var(--t3)}
+.arte-input-bar button{padding:8px 16px;border-radius:9px;border:none;background:var(--accent);color:var(--bg);font-size:12px;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s}
+.arte-input-bar button:hover{background:var(--accent-b)}
 
-/* ALERTS TAB */
-.alerts-panel{padding:20px 24px 80px}
-.alert-card{display:flex;gap:14px;padding:18px;background:var(--card);border:1px solid var(--bdr);border-radius:14px;margin-bottom:10px;transition:all .2s;cursor:pointer}
+/* ─── ALERTS TAB ─── */
+.alerts-panel{padding:20px 20px 100px}
+.alert-card{display:flex;gap:12px;padding:16px;background:var(--card);border:1px solid var(--bdr);border-radius:14px;margin-bottom:10px;transition:all .2s;cursor:pointer;align-items:flex-start}
 .alert-card:hover{border-color:var(--bdra);background:var(--card-h)}
 .alert-card.unread{border-left:3px solid var(--danger)}
-.alert-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0}
-.alert-dot.red{background:var(--danger)}.alert-dot.amber{background:var(--warn)}.alert-dot.green{background:var(--success)}.alert-dot.blue{background:var(--blue)}
-.alert-body{flex:1}.alert-body h4{font-size:13px;font-weight:600;margin-bottom:3px}.alert-body p{font-size:11.5px;color:var(--t2);line-height:1.5}
-.alert-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+.alert-emoji{font-size:24px;flex-shrink:0;margin-top:2px}
+.alert-body{flex:1}.alert-body h4{font-size:13px;font-weight:600;margin-bottom:3px;line-height:1.4}.alert-body p{font-size:11.5px;color:var(--t2);line-height:1.5}
+.alert-meta{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0}
 .alert-meta time{font-size:10px;color:var(--t3);font-family:'JetBrains Mono',monospace}
-.alert-badge{font-size:9px;padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-weight:600}
-.alert-badge.critical{background:rgba(248,113,113,0.1);color:var(--danger);border:1px solid rgba(248,113,113,0.2)}
-.alert-badge.warning{background:rgba(251,191,36,0.1);color:var(--warn);border:1px solid rgba(251,191,36,0.2)}
-.alert-badge.info{background:rgba(96,165,250,0.1);color:var(--blue);border:1px solid rgba(96,165,250,0.2)}
-.alert-badge.success{background:rgba(52,211,153,0.1);color:var(--success);border:1px solid rgba(52,211,153,0.2)}
+.ab{font-size:9px;padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-weight:700}
+.ab.crit{background:rgba(248,113,113,0.12);color:var(--danger);border:1px solid rgba(248,113,113,0.2)}
+.ab.warn{background:rgba(251,191,36,0.12);color:var(--warn);border:1px solid rgba(251,191,36,0.2)}
+.ab.info{background:rgba(96,165,250,0.12);color:var(--blue);border:1px solid rgba(96,165,250,0.2)}
+.ab.win{background:rgba(52,211,153,0.12);color:var(--success);border:1px solid rgba(52,211,153,0.2)}
 
-/* YOU TAB */
-.you-panel{padding:20px 24px 80px}
-.you-header{text-align:center;padding:20px 0 30px}
-.you-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a88a);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--bg);margin:0 auto 12px;box-shadow:0 0 30px rgba(0,212,170,0.25)}
-.you-header h2{font-size:18px;font-weight:700;margin-bottom:4px}.you-header p{font-size:12px;color:var(--t3)}
-.you-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
-.you-stat{background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:14px;text-align:center}
-.you-stat .val{font-size:20px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--accent)}
-.you-stat .label{font-size:10px;color:var(--t3);margin-top:4px;text-transform:uppercase;letter-spacing:.05em}
-.you-section{margin-bottom:20px}
-.you-section h3{font-size:13px;font-weight:600;margin-bottom:10px;color:var(--t2)}
-.you-page{display:flex;align-items:center;gap:12px;padding:12px;background:var(--card);border:1px solid var(--bdr);border-radius:10px;margin-bottom:6px}
-.you-page-dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
-.you-page-name{font-size:13px;font-weight:500;flex:1}
-.you-page-stat{font-size:11px;color:var(--t3);font-family:'JetBrains Mono',monospace}
+/* ─── YOU TAB ─── */
+.you-panel{padding:20px 20px 100px}
+.you-hero{text-align:center;padding:20px 0 24px}
+.you-av{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a88a);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:var(--bg);margin:0 auto 12px;box-shadow:0 0 32px rgba(0,212,170,0.3)}
+.you-hero h2{font-size:18px;font-weight:700}.you-hero p{font-size:12px;color:var(--t3);margin-top:3px}
+.you-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:24px}
+.ys{background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:14px;text-align:center}
+.ys .val{font-size:18px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--accent)}
+.ys .lbl{font-size:9.5px;color:var(--t3);margin-top:4px;text-transform:uppercase;letter-spacing:.04em}
+.you-section h3{font-size:13px;font-weight:600;margin-bottom:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;font-family:'JetBrains Mono',monospace;font-size:10px}
+.you-page{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--card);border:1px solid var(--bdr);border-radius:12px;margin-bottom:8px}
+.you-page-emoji{font-size:20px;flex-shrink:0}
+.you-page-name{font-size:13px;font-weight:600;flex:1}.you-page-stat{font-size:11px;color:var(--t3);font-family:'JetBrains Mono',monospace}
+
+/* ─── DRAWER ─── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;left:0;top:0;bottom:0;width:280px;background:var(--bg2);border-right:1px solid var(--bdr);z-index:201;transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.drawer.open{transform:translateX(0)}
+.drawer-hdr{padding:18px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.drawer-hdr h2{font-size:15px;font-weight:700}
+.drawer-x{width:32px;height:32px;border:none;background:transparent;color:var(--t2);cursor:pointer;border-radius:8px;font-size:20px;display:flex;align-items:center;justify-content:center}
+.drawer-x:hover{background:rgba(255,255,255,0.05);color:var(--t1)}
+.drawer-scroll{flex:1;overflow-y:auto;padding:12px}
+.dlbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--t3);letter-spacing:.12em;text-transform:uppercase;padding:14px 8px 6px}
+.di{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;color:var(--t2);cursor:pointer;transition:all .2s;font-size:13px;text-decoration:none;border:1px solid transparent;margin-bottom:1px}
+.di:hover{background:rgba(255,255,255,0.025);color:var(--t1)}
+.di.active{background:var(--adim);color:var(--accent);border-color:var(--bdra)}
+.di svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.5;flex-shrink:0}
+.di .dbg{margin-left:auto;font-size:9px;padding:2px 6px;border-radius:5px;font-weight:600;font-family:'JetBrains Mono',monospace;background:var(--adim);color:var(--accent);border:1px solid var(--bdra)}
+.drawer-foot{padding:14px 18px;border-top:1px solid var(--bdr);display:flex;align-items:center;gap:10px}
+.drawer-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#00a88a);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--bg)}
 </style>
 </head>
 <body>
 <div class="app">
+
+<!-- TOP NAV -->
 <div class="topnav">
-<div class="topnav-left">
-<button class="mbtn" onclick="toggleDrawer()"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-<a href="#" class="topnav-brand"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg><span>ARTEMIS</span></a>
-</div>
-<div class="topnav-right">
-<div class="psel" onclick="toggleDrawer()"><div class="pd"></div>Drinking Memes<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
-<button class="tbtn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-<button class="tbtn"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><div class="tdot"></div></button>
-<div class="tav">LM</div>
-</div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <button class="mbtn" onclick="toggleDrawer()"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <a href="#" class="brand"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg><span>ARTEMIS</span></a>
+  </div>
+  <div class="topnav-right">
+    <div class="psel" onclick="toggleDrawer()"><div class="live"></div>Drinking Memes<svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <button class="tbtn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+    <button class="tbtn" onclick="switchTab('alerts',document.querySelector('[data-tab=alerts]'))"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><div class="tdot"></div></button>
+    <div class="tav">LM</div>
+  </div>
 </div>
 
+<!-- TAB BAR -->
 <div class="tabbar">
-<div class="tab active" data-tab="home" onclick="switchTab('home',this)"><svg class="tab-ic" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</div>
-<div class="tab" data-tab="activity" onclick="switchTab('activity',this)"><svg class="tab-ic" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Activity</div>
-<div class="tab" data-tab="arte" onclick="switchTab('arte',this)"><svg class="tab-ic" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Art-E</div>
-<div class="tab" data-tab="alerts" onclick="switchTab('alerts',this)"><svg class="tab-ic" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="tab-bd">3</span>Alerts</div>
-<div class="tab" data-tab="you" onclick="switchTab('you',this)"><svg class="tab-ic" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>You</div>
+  <div class="tab active" data-tab="home" onclick="switchTab('home',this)"><svg class="tab-ic" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</div>
+  <div class="tab" data-tab="activity" onclick="switchTab('activity',this)"><svg class="tab-ic" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Activity</div>
+  <div class="tab" data-tab="arte" onclick="switchTab('arte',this)"><svg class="tab-ic" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Art-E</div>
+  <div class="tab" data-tab="alerts" onclick="switchTab('alerts',this)"><svg class="tab-ic" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="tab-bd">3</span>Alerts</div>
+  <div class="tab" data-tab="you" onclick="switchTab('you',this)"><svg class="tab-ic" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>You</div>
 </div>
 
 <div class="content-area">
 
-<!-- ════════ HOME TAB ════════ -->
+<!-- ═══ HOME ═══ -->
 <div class="tab-panel active" id="panel-home">
-<div class="stories">
-<div class="story"><div class="sr g2"><div class="sr-in"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div></div><span>Brand Risk</span></div>
-<div class="story"><div class="sr g3"><div class="sr-in"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div></div><span>Viral Post!</span></div>
-<div class="story"><div class="sr g1"><div class="sr-in"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div><span>Best time</span></div>
-<div class="story"><div class="sr g1"><div class="sr-in"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div></div><span>Audience</span></div>
-<div class="story"><div class="sr g1"><div class="sr-in"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div></div><span>Trending</span></div>
-<div class="story"><div class="sr g1"><div class="sr-in"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div></div><span>Weekly</span></div>
-<div class="story"><div class="sr g1"><div class="sr-in"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div></div><span>Tips</span></div>
+
+  <!-- STORIES -->
+  <div class="stories-wrap">
+    <div class="stories">
+      <div class="story has-alert" onclick="openModal('modal-risk')">
+        <div class="story-ring danger"><div class="story-inner">🚨</div></div>
+        <span class="story-label">Brand Risk</span>
+        <div class="story-unread"></div>
+      </div>
+      <div class="story" onclick="openModal('modal-viral')">
+        <div class="story-ring win"><div class="story-inner">🔥</div></div>
+        <span class="story-label">Viral post!</span>
+      </div>
+      <div class="story" onclick="openModal('modal-time')">
+        <div class="story-ring accent"><div class="story-inner">⏰</div></div>
+        <span class="story-label">Post now</span>
+      </div>
+      <div class="story" onclick="openModal('modal-audience')">
+        <div class="story-ring purple"><div class="story-inner">👥</div></div>
+        <span class="story-label">Your fans</span>
+      </div>
+      <div class="story" onclick="openModal('modal-collab')">
+        <div class="story-ring amber"><div class="story-inner">🤝</div></div>
+        <span class="story-label">Collab</span>
+      </div>
+      <div class="story" onclick="openModal('modal-week')">
+        <div class="story-ring accent"><div class="story-inner">📊</div></div>
+        <span class="story-label">This week</span>
+      </div>
+      <div class="story" onclick="openModal('modal-tip')">
+        <div class="story-ring purple"><div class="story-inner">💡</div></div>
+        <span class="story-label">Today's tip</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MORNING BRIEFING -->
+  <div class="briefing">
+    <div class="br-top">
+      <div class="br-avi">☀️</div>
+      <div><div class="br-name">Morning briefing</div><div class="br-time">Tuesday 22 April &middot; 9:14 AM</div></div>
+    </div>
+    <div class="br-body">
+      Yesterday killed it 💪 <b>Drinking Memes</b> hit <b>47K reach</b> &mdash; your best post in 3 months. But heads up: <span class="warn">Kelpie Daily</span> has angry comments coming in on the council tax post. Not a big deal yet, but worth keeping an eye on. Best time to post today: <b>1:15 PM 🍺</b>
+    </div>
+    <div class="br-btns">
+      <button class="bb" onclick="switchTab('arte',document.querySelector('[data-tab=arte]'))">✨ What should I post?</button>
+      <button class="bb s">Read full briefing</button>
+    </div>
+  </div>
+
+  <!-- ART-E BAR -->
+  <div class="arte-bar">
+    <span class="ab-emoji">🤖</span>
+    <input type="text" id="homeInput" placeholder="Ask anything... &quot;Why did my post flop?&quot; &quot;Best time to post?&quot;" onkeypress="if(event.key==='Enter'){arteAsk(this.value);switchTab('arte',document.querySelector('[data-tab=arte]'))}">
+    <button onclick="arteAsk(document.getElementById('homeInput').value);switchTab('arte',document.querySelector('[data-tab=arte]'))">Ask Art-E</button>
+  </div>
+
+  <!-- FEED -->
+  <div class="feed">
+
+    <!-- VIRAL HERO CARD -->
+    <div class="hero-card" onclick="openModal('modal-viral')">
+      <div class="hero-bg" style="background:linear-gradient(135deg,#1a0a00,#2d1500,#1a0000)">
+        <div class="emoji-big">🔥</div>
+        <div class="hero-bg::after"></div>
+      </div>
+      <div class="hero-bottom">
+        <div class="hero-bottom-inner">
+          <div class="hero-tag-row">
+            <span class="ft ft4">🔥 Viral post</span>
+            <span style="font-size:10px;color:var(--t3);font-family:'JetBrains Mono',monospace">Yesterday &middot; Drinking Memes</span>
+          </div>
+        </div>
+        <div class="hero-title">Your prison biscuit post absolutely blew up 🤣</div>
+        <div class="hero-sub">47,200 people saw it. 892 shares. That's 340% more than your average. Here's the formula that worked so you can do it again.</div>
+        <div class="hero-metrics">
+          <div class="hm"><span class="hm-val up">47.2K</span><span class="hm-label">Reach</span></div>
+          <div class="hm"><span class="hm-val up">892</span><span class="hm-label">Shares</span></div>
+          <div class="hm"><span class="hm-val up">+340%</span><span class="hm-label">vs your average</span></div>
+        </div>
+        <button class="hero-cta" style="background:linear-gradient(135deg,var(--success),#059669);color:white">🚀 Show me how to do this again</button>
+      </div>
+    </div>
+
+    <!-- BRAND RISK -->
+    <div class="fc" onclick="openModal('modal-risk')">
+      <div class="fc-visual" style="background:linear-gradient(135deg,#1a0808,#2d0a0a)">
+        <div class="vemoji">🚨</div>
+        <div class="vbar"><span style="font-size:11px;color:rgba(248,113,113,0.8);font-weight:600">Kelpie Daily · 12 min ago</span></div>
+      </div>
+      <div class="fc-body">
+        <span class="ft ft2">⚠️ Heads up</span><span class="fc-page">Kelpie Daily</span>
+        <div class="fc-title">Angry comments on your council tax post</div>
+        <div class="fc-desc">People are venting in the comments — but they're angry at the council, not at you. Low risk to your page. Still worth knowing.</div>
+        <div class="fc-ms">
+          <div class="fm"><span class="fv d">-26%</span><span class="fl">Positive comments</span></div>
+          <div class="fm"><span class="fv u">+340%</span><span class="fl">Comment speed</span></div>
+          <div class="fm"><span class="fv n">Low</span><span class="fl">Risk level</span></div>
+        </div>
+        <button class="fc-btn btn-red" onclick="event.stopPropagation();openModal('modal-risk')">🚨 See what's happening</button>
+      </div>
+    </div>
+
+    <!-- POST NOW -->
+    <div class="fc" onclick="openModal('modal-time')">
+      <div class="fc-visual" style="background:linear-gradient(135deg,#001a14,#003326)">
+        <div class="vemoji">⏰</div>
+        <div class="vbar"><span style="font-size:11px;color:rgba(0,212,170,0.8);font-weight:600">Drinking Memes · Right now</span></div>
+      </div>
+      <div class="fc-body">
+        <span class="ft ft1">⚡ Post now</span>
+        <div class="fc-title">Your audience is scrolling right now. Don't miss this window 👀</div>
+        <div class="fc-desc">Tuesday 1-2 PM is your golden hour. Your last 5 Tuesday afternoon posts got 2.3x more shares than any other time.</div>
+        <div class="fc-ms">
+          <div class="fm"><span class="fv u">2.3x</span><span class="fl">More shares</span></div>
+          <div class="fm"><span class="fv u">31K</span><span class="fl">Average reach</span></div>
+          <div class="fm"><span class="fv n">89%</span><span class="fl">Confidence</span></div>
+        </div>
+        <button class="fc-btn btn-accent" onclick="event.stopPropagation();switchTab('arte',document.querySelector('[data-tab=arte]'));arteAsk('I want to post a meme right now, what should it be?')">✍️ Draft something with Art-E</button>
+      </div>
+    </div>
+
+    <!-- AUDIENCE INSIGHT -->
+    <div class="fc" onclick="openModal('modal-audience')">
+      <div class="fc-visual" style="background:linear-gradient(135deg,#0d0a1e,#1a1035)">
+        <div class="vemoji">👥</div>
+        <div class="vbar"><span style="font-size:11px;color:rgba(167,139,250,0.8);font-weight:600">Drinking Memes · This week</span></div>
+      </div>
+      <div class="fc-body">
+        <span class="ft ft3">🔍 Your fans</span>
+        <div class="fc-title">12 people are basically your street team 🙌</div>
+        <div class="fc-desc">These 12 super-sharers share almost everything you post. When they do, your content reaches crowds you'd never reach on your own.</div>
+        <div class="fc-ms">
+          <div class="fm"><span class="fv u">12</span><span class="fl">Super sharers</span></div>
+          <div class="fm"><span class="fv u">34%</span><span class="fl">Of your total shares</span></div>
+          <div class="fm"><span class="fv u">5x</span><span class="fl">More active weekends</span></div>
+        </div>
+        <button class="fc-btn btn-purple">👀 See who they are</button>
+      </div>
+    </div>
+
+    <!-- VIDEO TIP -->
+    <div class="fc" onclick="openModal('modal-tip')">
+      <div class="fc-visual" style="background:linear-gradient(135deg,#0a0d00,#1a1f00)">
+        <div class="vemoji">📉</div>
+        <div class="vbar"><span style="font-size:11px;color:rgba(251,191,36,0.8);font-weight:600">All pages · This week</span></div>
+      </div>
+      <div class="fc-body">
+        <span class="ft ft5">💡 Heads up</span>
+        <div class="fc-title">Videos aren't working as well this week — stick to photos 📸</div>
+        <div class="fc-desc">Your video reach dropped 42% this week. Photos and memes are getting 1.7x more engagement right now. Worth switching things up.</div>
+        <div class="fc-ms">
+          <div class="fm"><span class="fv d">-42%</span><span class="fl">Video reach</span></div>
+          <div class="fm"><span class="fv u">1.7x</span><span class="fl">Images vs videos</span></div>
+        </div>
+        <button class="fc-btn btn-amber">💡 Got it, show me what works</button>
+      </div>
+    </div>
+
+    <!-- COLLAB -->
+    <div class="fc" onclick="openModal('modal-collab')">
+      <div class="fc-visual" style="background:linear-gradient(135deg,#00101a,#001a2d)">
+        <div class="vemoji">🤝</div>
+        <div class="vbar"><span style="font-size:11px;color:rgba(96,165,250,0.8);font-weight:600">Drinking Memes · New match</span></div>
+      </div>
+      <div class="fc-body">
+        <span class="ft ft6">🤝 Collab opportunity</span>
+        <div class="fc-title">"Friday Night Chaos" could bring you 15K new followers 🚀</div>
+        <div class="fc-desc">67% of their audience also follows pages like yours. A cross-post or shoutout could unlock an audience you've never reached.</div>
+        <div class="fc-ms">
+          <div class="fm"><span class="fv u">67%</span><span class="fl">Audience match</span></div>
+          <div class="fm"><span class="fv u">~15K</span><span class="fl">New reach potential</span></div>
+        </div>
+        <button class="fc-btn btn-blue">🤝 Tell me more</button>
+      </div>
+    </div>
+
+    <!-- WIN CARD -->
+    <div class="fc" onclick="openModal('modal-week')">
+      <div class="fc-visual" style="background:linear-gradient(135deg,#001a14,#002d1a)">
+        <div class="vemoji">🏆</div>
+        <div class="vbar"><span style="font-size:11px;color:rgba(52,211,153,0.8);font-weight:600">All pages · This week</span></div>
+      </div>
+      <div class="fc-body">
+        <span class="ft ft4">🏆 Nice work!</span>
+        <div class="fc-title">You followed 8 suggestions this week and got 21% more engagement 💪</div>
+        <div class="fc-desc">That's not a coincidence — it's working. Your best move was the Thursday timing tweak that got 2.1x more reach than usual.</div>
+        <div class="fc-ms">
+          <div class="fm"><span class="fv u">+21%</span><span class="fl">More engagement</span></div>
+          <div class="fm"><span class="fv u">8/10</span><span class="fl">Tips you used</span></div>
+          <div class="fm"><span class="fv u">2.1x</span><span class="fl">Best result</span></div>
+        </div>
+        <button class="fc-btn btn-green">📊 See your week in full</button>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-<div class="briefing">
-<div class="br-top"><div class="br-icon"><svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/><circle cx="12" cy="12" r="4"/></svg></div><div><div class="br-label">Good morning, Lewis</div><div class="br-time">Tuesday 22 April &middot; 9:14 AM</div></div></div>
-<div class="br-body">Yesterday was strong. <b>Drinking Memes</b> hit <b>47K reach</b> on the prison biscuit post (+340% vs avg). <b>Kelpie Daily</b> had a sentiment shift. Best posting window today: <b>1:15 PM</b> for memes, <b>6:30 PM</b> for news.</div>
-<div class="br-btns"><button class="bb" onclick="switchTab('arte',document.querySelector('[data-tab=arte]'))">Ask Art-E what to post</button><button class="bb s">View full briefing</button></div>
-</div>
-
-<div class="arte-bar">
-<div class="ab-ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-<input type="text" placeholder="Ask Art-E... &quot;What should I post today?&quot;">
-<button onclick="switchTab('arte',document.querySelector('[data-tab=arte]'))">Ask</button>
-</div>
-
-<div class="feed">
-<div class="fc c2"><div class="fc-top"><span class="ft ft2">Brand risk</span><span class="fc-pg">Kelpie Daily</span><span class="fc-tm">12m ago</span></div><div class="fc-ti">Angry comments spiking on your council tax post</div><div class="fc-bd">Sentiment dropped to 34% negative (normally 8%). 47 new comments, 16 flagged angry. Negativity is at the council, not your page, but attracting political spam.</div><div class="fc-ms"><div class="fm"><span class="fv d">-26%</span><span class="fl">Sentiment</span></div><div class="fm"><span class="fv u">+340%</span><span class="fl">Comment velocity</span></div><div class="fm"><span class="fv n">Low</span><span class="fl">Page risk</span></div></div><div class="fc-cta" onclick="switchTab('arte',document.querySelector('[data-tab=arte]'))"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Ask Art-E what to do</div></div>
-
-<div class="fc c1"><div class="fc-top"><span class="ft ft1">Post now</span><span class="fc-pg">Drinking Memes</span><span class="fc-tm">1h ago</span></div><div class="fc-ti">Your audience is most active right now. Post a meme.</div><div class="fc-bd">Tuesday 1-2 PM is your #1 slot. Posts here get 2.3x more shares. Last 5 Tuesday afternoons averaged 31K reach.</div><div class="fc-ms"><div class="fm"><span class="fv u">2.3x</span><span class="fl">Share boost</span></div><div class="fm"><span class="fv u">31K</span><span class="fl">Avg reach</span></div><div class="fm"><span class="fv n">89%</span><span class="fl">Confidence</span></div></div><div class="fc-cta" onclick="switchTab('arte',document.querySelector('[data-tab=arte]'))"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Draft with Art-E</div></div>
-
-<div class="fc c4"><div class="fc-top"><span class="ft ft4">Viral</span><span class="fc-pg">Drinking Memes</span><span class="fc-tm">Yesterday</span></div><div class="fc-ti">Your prison biscuit post went viral</div><div class="fc-bd">47,200 reach. 3,400 reactions. 892 shares. Best in 3 months. Formula: laughing emoji + short caption + relatable topic.</div><div class="fc-ms"><div class="fm"><span class="fv u">47.2K</span><span class="fl">Reach</span></div><div class="fm"><span class="fv u">+340%</span><span class="fl">vs avg</span></div><div class="fm"><span class="fv u">892</span><span class="fl">Shares</span></div></div><div class="fc-cta" onclick="switchTab('arte',document.querySelector('[data-tab=arte]'))"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Show similar ideas</div></div>
-
-<div class="fc c3"><div class="fc-top"><span class="ft ft3">Insight</span><span class="fc-pg">All pages</span><span class="fc-tm">Today</span></div><div class="fc-ti">Your audience is engaging less with video this week</div><div class="fc-bd">Video averaged 8.2K reach vs 14.1K last week. Images outperforming by 1.7x. Matches a broader platform shift toward static content.</div><div class="fc-ms"><div class="fm"><span class="fv d">-42%</span><span class="fl">Video reach</span></div><div class="fm"><span class="fv u">1.7x</span><span class="fl">Image vs video</span></div></div><div class="fc-cta"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Full analysis</div></div>
-
-<div class="fc c5"><div class="fc-top"><span class="ft ft5">Growth tip</span><span class="fc-pg">UK Jail News</span><span class="fc-tm">Today</span></div><div class="fc-ti">Factual crime news could unlock a new demographic</div><div class="fc-bd">Similar pages posting factual news (no opinion) between 7-8 AM get 40% higher reach from a different age group.</div><div class="fc-cta" onclick="switchTab('arte',document.querySelector('[data-tab=arte]'))"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Draft a factual post</div></div>
-
-<div class="fc c3"><div class="fc-top"><span class="ft ft3">Pattern</span><span class="fc-pg">Drinking Memes</span><span class="fc-tm">This week</span></div><div class="fc-ti">12 super sharers drive 34% of your reach</div><div class="fc-bd">5x more active Saturdays 8-10 PM. When they share, content reaches 3 new clusters. Post at 7:45 PM Saturday to maximise pickup.</div><div class="fc-ms"><div class="fm"><span class="fv u">12</span><span class="fl">Super sharers</span></div><div class="fm"><span class="fv u">34%</span><span class="fl">Share contribution</span></div><div class="fm"><span class="fv u">5x</span><span class="fl">Weekend boost</span></div></div><div class="fc-cta"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>See profiles</div></div>
-
-<div class="fc c6"><div class="fc-top"><span class="ft ft6">Collaborate</span><span class="fc-pg">Drinking Memes</span><span class="fc-tm">New</span></div><div class="fc-ti">"Friday Night Chaos" has 67% audience overlap</div><div class="fc-bd">Their meme posts get shared into your audience. A cross-post could unlock ~15K new reach.</div><div class="fc-ms"><div class="fm"><span class="fv u">67%</span><span class="fl">Overlap</span></div><div class="fm"><span class="fv u">~15K</span><span class="fl">New reach</span></div></div><div class="fc-cta"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>View collaboration</div></div>
-
-<div class="fc c4"><div class="fc-top"><span class="ft ft4">Milestone</span><span class="fc-pg">All pages</span><span class="fc-tm">This week</span></div><div class="fc-ti">8 recommendations followed. 21% average uplift.</div><div class="fc-bd">Posts with Art-E suggestions got 21% more engagement. Best: Thursday posting time at 2.1x reach.</div><div class="fc-ms"><div class="fm"><span class="fv u">+21%</span><span class="fl">Uplift</span></div><div class="fm"><span class="fv u">8/10</span><span class="fl">Used</span></div><div class="fm"><span class="fv u">2.1x</span><span class="fl">Best result</span></div></div></div>
-</div>
-</div>
-
-<!-- ════════ ACTIVITY TAB ════════ -->
+<!-- ═══ ACTIVITY ═══ -->
 <div class="tab-panel" id="panel-activity">
-<div class="act-header">Today</div>
-<div class="activity-list">
-<div class="act-item"><div class="act-icon red"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="act-body"><div class="act-title">Sentiment spike detected on Kelpie Daily</div><div class="act-desc">Council tax post comments reached 34% negative. AI classified as low page risk — anger directed at council, not page.</div></div><div class="act-time">12m</div></div>
-<div class="act-item"><div class="act-icon green"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="act-body"><div class="act-title">Prison biscuit post hit viral threshold</div><div class="act-desc">47.2K reach, 892 shares, 3.4K reactions. Classified as viral at 09:23 AM. Content formula logged: laughing emoji + short caption + relatable topic.</div></div><div class="act-time">2h</div></div>
-<div class="act-item"><div class="act-icon teal"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="act-body"><div class="act-title">Optimal posting window calculated</div><div class="act-desc">Tuesday 1:15 PM for meme content (89% confidence). 6:30 PM for news content (82% confidence). Based on 24-month rolling analysis.</div></div><div class="act-time">3h</div></div>
-<div class="act-item"><div class="act-icon purple"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="act-body"><div class="act-title">New audience cluster identified</div><div class="act-desc">14% of your followers form a "late-night humour" cluster. Most active 10pm-1am. Distinct from your main daytime audience.</div></div><div class="act-time">5h</div></div>
-<div class="act-item"><div class="act-icon blue"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="act-body"><div class="act-title">Video performance drop flagged</div><div class="act-desc">Video reach down 42% this week across all pages. Image content outperforming by 1.7x. Platform algorithm shift detected.</div></div><div class="act-time">6h</div></div>
-<div class="act-item"><div class="act-icon amber"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/></svg></div><div class="act-body"><div class="act-title">Collaboration opportunity scored</div><div class="act-desc">"Friday Night Chaos" — 67% audience overlap. Cross-post potential: ~15K new reach. Their drinking games meme had 240 engagements from your followers.</div></div><div class="act-time">8h</div></div>
-</div>
-<div class="act-header">Yesterday</div>
-<div class="activity-list">
-<div class="act-item"><div class="act-icon green"><svg viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></div><div class="act-body"><div class="act-title">Weekly recommendation report generated</div><div class="act-desc">8 of 10 Art-E recommendations followed. Average uplift: +21%. Best performer: Thursday posting time optimisation (2.1x reach).</div></div><div class="act-time">1d</div></div>
-<div class="act-item"><div class="act-icon teal"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="act-body"><div class="act-title">NLP models processed 847 new posts</div><div class="act-desc">Sentiment: 82% positive. 6 posts flagged for toxicity review. 2 new topics detected: "energy prices" and "local elections".</div></div><div class="act-time">1d</div></div>
-<div class="act-item"><div class="act-icon purple"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div><div class="act-body"><div class="act-title">Super sharer analysis updated</div><div class="act-desc">12 users now account for 34% of total shares. User @dave_memes promoted to super sharer status (shared 8 posts this week).</div></div><div class="act-time">1d</div></div>
-</div>
+  <div class="act-header">Today</div>
+  <div class="activity-list">
+    <div class="act-item"><div class="act-icon" style="background:rgba(248,113,113,0.1)">🚨</div><div class="act-body"><div class="act-title">Angry comments spotted on Kelpie Daily</div><div class="act-desc">Council tax post getting a lot of negative comments. They're at the council, not you. Low risk. Art-E is monitoring.</div></div><div class="act-time">12m</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(52,211,153,0.1)">🔥</div><div class="act-body"><div class="act-title">Prison biscuit post went viral!</div><div class="act-desc">47.2K reach, 892 shares, 3.4K reactions. Your best post in 3 months. Art-E saved the winning formula for you.</div></div><div class="act-time">2h</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(0,212,170,0.1)">⏰</div><div class="act-body"><div class="act-title">Best posting windows calculated</div><div class="act-desc">1:15 PM for memes (89% confidence). 6:30 PM for news (82%). Based on 24 months of your page history.</div></div><div class="act-time">3h</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(167,139,250,0.1)">👥</div><div class="act-body"><div class="act-title">New audience group found</div><div class="act-desc">14% of your followers are active 10pm–1am and love late-night content. They've never been shown as a separate group before.</div></div><div class="act-time">5h</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(96,165,250,0.1)">📉</div><div class="act-body"><div class="act-title">Video reach dropping this week</div><div class="act-desc">Down 42% across all your pages. Photos and memes are winning right now. Art-E updated your recommendations.</div></div><div class="act-time">6h</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(96,165,250,0.1)">🤝</div><div class="act-body"><div class="act-title">Collab match found</div><div class="act-desc">"Friday Night Chaos" — 67% audience overlap. Cross-post could bring ~15K new reach.</div></div><div class="act-time">8h</div></div>
+  </div>
+  <div class="act-header">Yesterday</div>
+  <div class="activity-list">
+    <div class="act-item"><div class="act-icon" style="background:rgba(52,211,153,0.1)">📊</div><div class="act-body"><div class="act-title">Weekly report ready</div><div class="act-desc">8 of 10 tips followed. Average uplift: +21%. Strategy score went from 72 → 81.</div></div><div class="act-time">1d</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(0,212,170,0.1)">🤖</div><div class="act-body"><div class="act-title">Art-E processed 847 new posts</div><div class="act-desc">82% positive sentiment. 6 posts flagged for a second look. 2 new topics spotted: energy prices and local elections.</div></div><div class="act-time">1d</div></div>
+    <div class="act-item"><div class="act-icon" style="background:rgba(167,139,250,0.1)">⭐</div><div class="act-body"><div class="act-title">Super sharer list updated</div><div class="act-desc">@dave_memes is now officially a super sharer — shared 8 posts this week alone.</div></div><div class="act-time">1d</div></div>
+  </div>
 </div>
 
-<!-- ════════ ART-E TAB ════════ -->
+<!-- ═══ ART-E ═══ -->
 <div class="tab-panel" id="panel-arte">
-<div class="arte-panel">
-<div class="arte-welcome">
-<div class="arte-avatar"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-<h2>What can I help with?</h2>
-<p>I know your pages, your audience, and your content history. Ask me anything.</p>
-</div>
-<div class="arte-suggestions">
-<div class="arte-sug" onclick="arteAsk('What should I post today?')"><strong>What should I post?</strong>Best content for right now based on your audience</div>
-<div class="arte-sug" onclick="arteAsk('Why did my last post underperform?')"><strong>Why did my post flop?</strong>Analyse what went wrong and how to fix it</div>
-<div class="arte-sug" onclick="arteAsk('Show me my best performing content this month')"><strong>My best content</strong>Top posts by reach, shares, and engagement</div>
-<div class="arte-sug" onclick="arteAsk('When is the best time to post this week?')"><strong>Best posting times</strong>Optimal windows for each of your pages</div>
-</div>
-<div class="arte-chat" id="arteChat"></div>
-<div class="arte-input">
-<input type="text" id="arteInput" placeholder="Ask Art-E anything..." onkeypress="if(event.key==='Enter')arteAsk(this.value)">
-<button onclick="arteAsk(document.getElementById('arteInput').value)">Send</button>
-</div>
-</div>
+  <div class="arte-panel">
+    <div class="arte-welcome">
+      <div class="arte-avatar">🤖</div>
+      <h2>Hey! What can I help with? 👋</h2>
+      <p>I know everything about your pages, your audience, and what's working right now. Just ask.</p>
+    </div>
+    <div class="arte-sugs">
+      <div class="arte-sug" onclick="arteAsk('What should I post right now?')"><span class="sug-emoji">📝</span><strong>What should I post?</strong>Best content for right now</div>
+      <div class="arte-sug" onclick="arteAsk('Why did my last post underperform?')"><span class="sug-emoji">🤔</span><strong>Why did my post flop?</strong>Let's figure out what went wrong</div>
+      <div class="arte-sug" onclick="arteAsk('Show me my best performing content this month')"><span class="sug-emoji">🏆</span><strong>My best posts</strong>Top content this month</div>
+      <div class="arte-sug" onclick="arteAsk('When is the best time to post this week?')"><span class="sug-emoji">⏰</span><strong>Best times to post</strong>For each of your pages</div>
+    </div>
+    <div class="arte-chat" id="arteChat"></div>
+    <div class="arte-input-bar">
+      <input type="text" id="arteInput" placeholder="Ask me anything about your pages..." onkeypress="if(event.key==='Enter')arteAsk(this.value)">
+      <button onclick="arteAsk(document.getElementById('arteInput').value)">Send 🚀</button>
+    </div>
+  </div>
 </div>
 
-<!-- ════════ ALERTS TAB ════════ -->
+<!-- ═══ ALERTS ═══ -->
 <div class="tab-panel" id="panel-alerts">
-<div class="alerts-panel">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h3 style="font-size:16px">Notifications</h3><span style="font-size:11px;color:var(--accent);cursor:pointer">Mark all read</span></div>
-
-<div class="alert-card unread"><div class="alert-dot red"></div><div class="alert-body"><h4>Sentiment spike on Kelpie Daily</h4><p>Council tax post at 34% negative comments. 16 flagged angry. Negativity directed at council, not page. Low page risk but monitor for political spam.</p></div><div class="alert-meta"><time>12m ago</time><span class="alert-badge critical">Critical</span></div></div>
-
-<div class="alert-card unread"><div class="alert-dot amber"></div><div class="alert-body"><h4>Video performance declining across all pages</h4><p>Video reach down 42% this week. Image content outperforming by 1.7x. Consider switching to static content for the next 7 days.</p></div><div class="alert-meta"><time>3h ago</time><span class="alert-badge warning">Warning</span></div></div>
-
-<div class="alert-card unread"><div class="alert-dot green"></div><div class="alert-body"><h4>Prison biscuit post went viral!</h4><p>47.2K reach, 892 shares. Your best post in 3 months. Art-E has identified the winning formula and prepared 3 similar post ideas.</p></div><div class="alert-meta"><time>4h ago</time><span class="alert-badge success">Win</span></div></div>
-
-<div class="alert-card"><div class="alert-dot blue"></div><div class="alert-body"><h4>New collaboration opportunity detected</h4><p>"Friday Night Chaos" has 67% audience overlap. Cross-post could unlock ~15K new reach. Their content resonates with your followers.</p></div><div class="alert-meta"><time>8h ago</time><span class="alert-badge info">Growth</span></div></div>
-
-<div class="alert-card"><div class="alert-dot green"></div><div class="alert-body"><h4>Weekly performance report ready</h4><p>8 recommendations followed with 21% average uplift. Your content strategy score improved from 72 to 81 this week.</p></div><div class="alert-meta"><time>1d ago</time><span class="alert-badge success">Report</span></div></div>
-
-<div class="alert-card"><div class="alert-dot amber"></div><div class="alert-body"><h4>Audience shift detected on Drinking Memes</h4><p>Late-night cluster (10pm-1am) growing 3x faster than daytime audience. Consider scheduling content for this window.</p></div><div class="alert-meta"><time>1d ago</time><span class="alert-badge warning">Trend</span></div></div>
-
-<div class="alert-card"><div class="alert-dot blue"></div><div class="alert-body"><h4>Super sharer milestone</h4><p>@dave_memes reached super sharer status. Their shares drive content into 2 audience clusters you don't reach organically.</p></div><div class="alert-meta"><time>2d ago</time><span class="alert-badge info">Growth</span></div></div>
-</div>
+  <div class="alerts-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h3 style="font-size:16px;font-weight:700">Notifications 🔔</h3><span style="font-size:11.5px;color:var(--accent);cursor:pointer;font-weight:500">Mark all read</span></div>
+    <div class="alert-card unread" onclick="openModal('modal-risk')"><div class="alert-emoji">🚨</div><div class="alert-body"><h4>Angry comments on Kelpie Daily's council tax post</h4><p>16 negative comments flagged. They're annoyed at the council, not you. Low risk, but keep an eye on it.</p></div><div class="alert-meta"><time>12m</time><span class="ab crit">Heads up</span></div></div>
+    <div class="alert-card unread"><div class="alert-emoji">📉</div><div class="alert-body"><h4>Videos aren't performing well this week</h4><p>Reach down 42%. Images and memes are winning right now. Art-E updated your recommendations.</p></div><div class="alert-meta"><time>3h</time><span class="ab warn">Trend</span></div></div>
+    <div class="alert-card unread" onclick="openModal('modal-viral')"><div class="alert-emoji">🔥</div><div class="alert-body"><h4>Prison biscuit post went viral!</h4><p>47.2K reach, 892 shares. Art-E saved the formula so you can do this again.</p></div><div class="alert-meta"><time>4h</time><span class="ab win">Win 🏆</span></div></div>
+    <div class="alert-card" onclick="openModal('modal-collab')"><div class="alert-emoji">🤝</div><div class="alert-body"><h4>Collab opportunity with "Friday Night Chaos"</h4><p>67% audience match. Could bring ~15K new reach with a single cross-post.</p></div><div class="alert-meta"><time>8h</time><span class="ab info">Growth</span></div></div>
+    <div class="alert-card"><div class="alert-emoji">📊</div><div class="alert-body"><h4>Your weekly report is ready</h4><p>8 suggestions followed, 21% average uplift. Strategy score: 81. Nice work! 💪</p></div><div class="alert-meta"><time>1d</time><span class="ab win">Report</span></div></div>
+    <div class="alert-card"><div class="alert-emoji">⭐</div><div class="alert-body"><h4>@dave_memes is now one of your top sharers</h4><p>Shared 8 posts this week. When they share, your content reaches 2 extra audience groups.</p></div><div class="alert-meta"><time>1d</time><span class="ab info">Growth</span></div></div>
+  </div>
 </div>
 
-<!-- ════════ YOU TAB ════════ -->
+<!-- ═══ YOU ═══ -->
 <div class="tab-panel" id="panel-you">
-<div class="you-panel">
-<div class="you-header">
-<div class="you-avatar">LM</div>
-<h2>Lewis Mitchell</h2>
-<p>Managing 3 pages &middot; Member since March 2026</p>
-</div>
-<div class="you-stats">
-<div class="you-stat"><div class="val">111.8K</div><div class="label">Total reach</div></div>
-<div class="you-stat"><div class="val">3.28M</div><div class="label">Comments</div></div>
-<div class="you-stat"><div class="val">4.2%</div><div class="label">Eng. rate</div></div>
-<div class="you-stat"><div class="val">81</div><div class="label">Strategy score</div></div>
-</div>
-<div class="you-section">
-<h3>Your pages</h3>
-<div class="you-page"><div class="you-page-dot"></div><div class="you-page-name">Drinking Memes</div><div class="you-page-stat">47.2K reach this week</div></div>
-<div class="you-page"><div class="you-page-dot" style="background:var(--warn)"></div><div class="you-page-name">Kelpie Daily</div><div class="you-page-stat">12.8K reach this week</div></div>
-<div class="you-page"><div class="you-page-dot" style="background:var(--purple)"></div><div class="you-page-name">UK Jail News</div><div class="you-page-stat">8.4K reach this week</div></div>
-</div>
-<div class="you-section">
-<h3>Art-E recommendations this week</h3>
-<div class="you-page"><div class="you-page-dot" style="background:var(--success)"></div><div class="you-page-name">Recommendations followed</div><div class="you-page-stat">8 / 10</div></div>
-<div class="you-page"><div class="you-page-dot" style="background:var(--success)"></div><div class="you-page-name">Average uplift when followed</div><div class="you-page-stat">+21%</div></div>
-<div class="you-page"><div class="you-page-dot" style="background:var(--danger)"></div><div class="you-page-name">Missed opportunities</div><div class="you-page-stat">2 posts</div></div>
-</div>
-</div>
+  <div class="you-panel">
+    <div class="you-hero">
+      <div class="you-av">LM</div>
+      <h2>Lewis Mitchell</h2>
+      <p>Managing 3 pages &middot; Joined March 2026 &middot; Score 81 🏆</p>
+    </div>
+    <div class="you-stats">
+      <div class="ys"><div class="val">111.8K</div><div class="lbl">Total reach</div></div>
+      <div class="ys"><div class="val">3.28M</div><div class="lbl">Comments</div></div>
+      <div class="ys"><div class="val">4.2%</div><div class="lbl">Eng. rate</div></div>
+      <div class="ys"><div class="val">81</div><div class="lbl">Score</div></div>
+    </div>
+    <div style="margin-bottom:20px">
+      <div class="you-section"><h3>Your pages</h3></div>
+      <div class="you-page"><span class="you-page-emoji">🍺</span><div class="you-page-name">Drinking Memes</div><div class="you-page-stat">47.2K reach this week</div></div>
+      <div class="you-page"><span class="you-page-emoji">🐕</span><div class="you-page-name">Kelpie Daily</div><div class="you-page-stat">12.8K reach this week</div></div>
+      <div class="you-page"><span class="you-page-emoji">⚖️</span><div class="you-page-name">UK Jail News</div><div class="you-page-stat">8.4K reach this week</div></div>
+    </div>
+    <div>
+      <div class="you-section"><h3>How you did this week</h3></div>
+      <div class="you-page"><span class="you-page-emoji">✅</span><div class="you-page-name">Tips you followed</div><div class="you-page-stat">8 out of 10</div></div>
+      <div class="you-page"><span class="you-page-emoji">📈</span><div class="you-page-name">Average boost when you did</div><div class="you-page-stat">+21% engagement</div></div>
+      <div class="you-page"><span class="you-page-emoji">❌</span><div class="you-page-name">Missed opportunities</div><div class="you-page-stat">2 posts</div></div>
+      <div class="you-page"><span class="you-page-emoji">🏆</span><div class="you-page-name">Best move of the week</div><div class="you-page-stat">Thursday timing: 2.1x reach</div></div>
+    </div>
+  </div>
 </div>
 
+</div><!-- end content-area -->
+</div><!-- end app -->
+
+<!-- ═══ STORY MODALS ═══ -->
+<div class="modal-overlay" id="mo" onclick="closeModal()"></div>
+
+<div class="modal" id="modal-risk">
+  <div class="modal-header"><span class="modal-emoji">🚨</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-body">
+    <div class="modal-title">Angry comments on Kelpie Daily</div>
+    <div class="modal-sub">Kelpie Daily &middot; 12 minutes ago</div>
+    <div class="modal-stats">
+      <div class="mstat"><div class="mstat-val dn">-26%</div><div class="mstat-label">Positive comments</div></div>
+      <div class="mstat"><div class="mstat-val dn">34%</div><div class="mstat-label">Negative rate</div></div>
+      <div class="mstat"><div class="mstat-val nt">Low</div><div class="mstat-label">Risk to page</div></div>
+    </div>
+    <div class="modal-text">The good news: <b>people aren't angry at you</b> — they're angry at the council. Your post shared a factual news story about council tax and it hit a nerve. 47 new comments came in the last hour.<br><br>The comments are just people venting. No threats to your page, no calls to unfollow, no hate directed at you personally. Art-E classifies this as <b>low risk</b>.<br><br>One thing to watch: some political spam accounts are jumping in. You might want to turn off comments if it gets messy.</div>
+    <div class="modal-actions">
+      <button class="modal-btn primary" onclick="closeModal();switchTab('arte',document.querySelector('[data-tab=arte]'));arteAsk('Should I turn off comments on the Kelpie Daily council tax post?')">🤖 Ask Art-E what to do</button>
+      <button class="modal-btn ghost" onclick="closeModal()">Got it, I'll monitor</button>
+    </div>
+  </div>
 </div>
+
+<div class="modal" id="modal-viral">
+  <div class="modal-header"><span class="modal-emoji">🔥</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-body">
+    <div class="modal-title">Prison biscuit post went viral!</div>
+    <div class="modal-sub">Drinking Memes &middot; Yesterday</div>
+    <div class="modal-stats">
+      <div class="mstat"><div class="mstat-val up">47.2K</div><div class="mstat-label">Reach</div></div>
+      <div class="mstat"><div class="mstat-val up">892</div><div class="mstat-label">Shares</div></div>
+      <div class="mstat"><div class="mstat-val up">+340%</div><div class="mstat-label">vs your average</div></div>
+    </div>
+    <div class="modal-text">This was your best post in 3 months. Here's exactly what made it work:<br><br>✅ <b>Short caption</b> — just 8 words<br>✅ <b>Laughing emoji front and centre</b><br>✅ <b>Relatable topic</b> — everyone knows the biscuit struggle<br>✅ <b>Posted Tuesday 1:17 PM</b> — peak activity window<br><br>Art-E has already prepped <b>3 similar post ideas</b> that use the same formula.</div>
+    <div class="modal-actions">
+      <button class="modal-btn primary" onclick="closeModal();switchTab('arte',document.querySelector('[data-tab=arte]'));arteAsk('Give me 3 post ideas that use the same formula as the prison biscuit post')">🚀 Show me the 3 ideas</button>
+      <button class="modal-btn ghost" onclick="closeModal()">Nice, I'll come back to this</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-time">
+  <div class="modal-header"><span class="modal-emoji">⏰</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-body">
+    <div class="modal-title">Your audience is scrolling right now</div>
+    <div class="modal-sub">Drinking Memes &middot; Right now</div>
+    <div class="modal-stats">
+      <div class="mstat"><div class="mstat-val up">2.3x</div><div class="mstat-label">More shares</div></div>
+      <div class="mstat"><div class="mstat-val up">31K</div><div class="mstat-label">Average reach</div></div>
+      <div class="mstat"><div class="mstat-val nt">89%</div><div class="mstat-label">Confidence</div></div>
+    </div>
+    <div class="modal-text">Tuesday 1–2 PM is your single best posting window for meme content. Based on 24 months of your page history.<br><br>Your last 5 Tuesday afternoon posts averaged <b>31K reach and 2.3x more shares</b> than posts at any other time.<br><br>The window closes at 2 PM. You've got about 45 minutes.</div>
+    <div class="modal-actions">
+      <button class="modal-btn primary" onclick="closeModal();switchTab('arte',document.querySelector('[data-tab=arte]'));arteAsk('I want to post a meme right now, what should it be?')">✍️ Draft something fast</button>
+      <button class="modal-btn ghost" onclick="closeModal()">Maybe later</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-audience">
+  <div class="modal-header"><span class="modal-emoji">👥</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-body">
+    <div class="modal-title">Your 12 super sharers 🙌</div>
+    <div class="modal-sub">Drinking Memes &middot; This week</div>
+    <div class="modal-stats">
+      <div class="mstat"><div class="mstat-val up">12</div><div class="mstat-label">Super sharers</div></div>
+      <div class="mstat"><div class="mstat-val up">34%</div><div class="mstat-label">Of all your shares</div></div>
+      <div class="mstat"><div class="mstat-val up">5x</div><div class="mstat-label">More active weekends</div></div>
+    </div>
+    <div class="modal-text">These 12 people share almost everything you post — and when they do, your content reaches <b>3 new audience groups</b> you wouldn't reach on your own.<br><br>They're most active <b>Saturday 8–10 PM</b>. If you post a meme at 7:45 PM on Saturday, you're almost guaranteed they'll pick it up and share it.<br><br>Think of them as free word-of-mouth marketing. The more you understand them, the better you can cater to what they love.</div>
+    <div class="modal-actions">
+      <button class="modal-btn primary" onclick="closeModal();switchTab('arte',document.querySelector('[data-tab=arte]'));arteAsk('Tell me more about my super sharers and what they love')">👀 Tell me more about them</button>
+      <button class="modal-btn ghost" onclick="closeModal()">Good to know!</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-collab">
+  <div class="modal-header"><span class="modal-emoji">🤝</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-body">
+    <div class="modal-title">Collab with "Friday Night Chaos"?</div>
+    <div class="modal-sub">New match detected &middot; Today</div>
+    <div class="modal-stats">
+      <div class="mstat"><div class="mstat-val up">67%</div><div class="mstat-label">Audience match</div></div>
+      <div class="mstat"><div class="mstat-val up">~15K</div><div class="mstat-label">New reach potential</div></div>
+      <div class="mstat"><div class="mstat-val nt">High</div><div class="mstat-label">Match quality</div></div>
+    </div>
+    <div class="modal-text">Friday Night Chaos has a very similar audience to you — same sense of humour, same age group, active at the same times.<br><br>Their drinking games meme last week got <b>240 likes from your followers</b>. That's unusual — it means your audience already likes them.<br><br>A simple cross-post or shoutout could bring you up to <b>~15K new reach</b> at zero cost. Art-E can help you draft a message to reach out.</div>
+    <div class="modal-actions">
+      <button class="modal-btn primary" onclick="closeModal();switchTab('arte',document.querySelector('[data-tab=arte]'));arteAsk('Help me draft a message to reach out to Friday Night Chaos about a collaboration')">✍️ Draft a message to them</button>
+      <button class="modal-btn ghost" onclick="closeModal()">Maybe later</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-week">
+  <div class="modal-header"><span class="modal-emoji">🏆</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-body">
+    <div class="modal-title">Your week in numbers</div>
+    <div class="modal-sub">All pages &middot; 14 April – 22 April</div>
+    <div class="modal-stats">
+      <div class="mstat"><div class="mstat-val up">+21%</div><div class="mstat-label">More engagement</div></div>
+      <div class="mstat"><div class="mstat-val up">8/10</div><div class="mstat-label">Tips followed</div></div>
+      <div class="mstat"><div class="mstat-val up">81</div><div class="mstat-label">Strategy score</div></div>
+    </div>
+    <div class="modal-text">You had a genuinely good week. 8 of the 10 suggestions Art-E gave you were followed, and the posts that used those suggestions got <b>21% more engagement</b> on average.<br><br>Your strategy score went from <b>72 → 81</b> this week. That's one of your biggest weekly jumps.<br><br>Best move of the week: changing your Thursday posting time to 6:30 PM resulted in <b>2.1x your normal reach</b> on that post.</div>
+    <div class="modal-actions">
+      <button class="modal-btn primary" onclick="closeModal();location.href='mockup_reports.html'">📊 See full report</button>
+      <button class="modal-btn ghost" onclick="closeModal()">Cheers! 🎉</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-tip">
+  <div class="modal-header"><span class="modal-emoji">💡</span><button class="modal-close" onclick="closeModal()">✕</button></div>
+  <div class="modal-body">
+    <div class="modal-title">Skip the videos this week 📸</div>
+    <div class="modal-sub">All pages &middot; This week's tip</div>
+    <div class="modal-stats">
+      <div class="mstat"><div class="mstat-val dn">-42%</div><div class="mstat-label">Video reach</div></div>
+      <div class="mstat"><div class="mstat-val up">1.7x</div><div class="mstat-label">Images vs videos</div></div>
+      <div class="mstat"><div class="mstat-val nt">7 days</div><div class="mstat-label">Trend duration</div></div>
+    </div>
+    <div class="modal-text">Video reach is down across all your pages this week — and it's not just you, it's a wider platform pattern Art-E detected across similar pages.<br><br>Images, memes, and static posts are getting <b>1.7x more reach</b> right now. Reels and videos are getting deprioritised by the algorithm this week.<br><br>Simple swap: instead of filming something, take a photo or use a meme format this week. Then switch back to video next week and see if it recovers.</div>
+    <div class="modal-actions">
+      <button class="modal-btn primary" onclick="closeModal();switchTab('arte',document.querySelector('[data-tab=arte]'));arteAsk('Give me 3 image post ideas for this week since videos are underperforming')">✍️ Give me image post ideas</button>
+      <button class="modal-btn ghost" onclick="closeModal()">Got it, switching to photos</button>
+    </div>
+  </div>
 </div>
 
 <!-- DRAWER -->
 <div class="overlay" id="ov" onclick="toggleDrawer()"></div>
 <div class="drawer" id="dw">
-<div class="drawer-hdr"><h2>Menu</h2><button class="drawer-x" onclick="toggleDrawer()">&times;</button></div>
-<div class="drawer-sec"><div class="drawer-lbl">Your pages</div>
-<a class="di active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>Drinking Memes<span class="dbg">Active</span></a>
-<a class="di"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>Kelpie Daily</a>
-<a class="di"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>UK Jail News</a>
-<a class="di" style="color:var(--accent);font-size:12px"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Connect new page</a>
-</div>
-<div class="drawer-sec"><div class="drawer-lbl">Advanced Analytics</div>
-<a href="mockup_dashboard.html" class="di"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a>
-<a href="mockup_predictions.html" class="di"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predictions</a>
-<a href="mockup_audience.html" class="di"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Audience</a>
-<a href="mockup_discovery.html" class="di"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discovery</a>
-<a href="mockup_reports.html" class="di"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</a>
-<a href="mockup_alerts.html" class="di"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Alert History</a>
-</div>
-<div class="drawer-sec"><div class="drawer-lbl">Settings</div>
-<a href="mockup_connected.html" class="di"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Connected Pages</a>
-<a href="mockup_settings.html" class="di"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33"/></svg>Settings</a>
-</div>
-<div class="drawer-user"><div class="drawer-user-av">LM</div><div><div class="du-name">Lewis Mitchell</div><div class="du-email">lewis@artemisai.co.uk</div></div></div>
+  <div class="drawer-hdr"><h2>Menu</h2><button class="drawer-x" onclick="toggleDrawer()">✕</button></div>
+  <div class="drawer-scroll">
+    <div class="dlbl">Your pages</div>
+    <a class="di active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>🍺 Drinking Memes<span class="dbg">Active</span></a>
+    <a class="di"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>🐕 Kelpie Daily</a>
+    <a class="di"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>⚖️ UK Jail News</a>
+    <a class="di" style="color:var(--accent)"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Connect new page</a>
+    <div class="dlbl">Advanced Analytics</div>
+    <a href="mockup_dashboard.html" class="di"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a>
+    <a href="mockup_predictions.html" class="di"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predictions</a>
+    <a href="mockup_audience.html" class="di"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Audience</a>
+    <a href="mockup_discovery.html" class="di"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discovery</a>
+    <a href="mockup_reports.html" class="di"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</a>
+    <a href="mockup_alerts.html" class="di"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Alert History</a>
+    <div class="dlbl">Settings</div>
+    <a href="mockup_connected.html" class="di"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Connected Pages</a>
+    <a href="mockup_settings.html" class="di"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33"/></svg>Settings</a>
+  </div>
+  <div class="drawer-foot">
+    <div class="drawer-av">LM</div>
+    <div><div style="font-size:12.5px;font-weight:600">Lewis Mitchell</div><div style="font-size:10.5px;color:var(--t3)">lewis@artemisai.co.uk</div></div>
+  </div>
 </div>
 
 <script>
-function toggleDrawer(){document.getElementById('dw').classList.toggle('open');document.getElementById('ov').classList.toggle('open')}
+// Tabs
 function switchTab(id,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  el.classList.add('active');
+  if(el)el.classList.add('active');
   document.getElementById('panel-'+id).classList.add('active');
   document.querySelector('.content-area').scrollTop=0;
 }
+
+// Drawer
+function toggleDrawer(){
+  document.getElementById('dw').classList.toggle('open');
+  document.getElementById('ov').classList.toggle('open');
+}
+
+// Story Modals
+function openModal(id){
+  document.getElementById('mo').classList.add('open');
+  document.getElementById(id).classList.add('open');
+}
+function closeModal(){
+  document.getElementById('mo').classList.remove('open');
+  document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open'));
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// Art-E Chat
+const RESPONSES={
+  'What should I post right now?':'Right now? <b>A meme, in the next 45 minutes.</b> ⏰<br><br>It\'s Tuesday 1:17 PM — your golden window for Drinking Memes. Short caption, one laughing emoji, relatable topic. The prison biscuit formula is still hot.<br><br>Want me to draft 3 options?',
+  'I want to post a meme right now, what should it be?':'Here are 3 meme ideas using the prison biscuit formula 🔥<br><br><b>Option 1:</b> "When your cell door opens and you realise it\'s not meal time 😅"<br><b>Option 2:</b> "Monday morning energy vs Friday afternoon energy 😴🔥"<br><b>Option 3:</b> "When you finally find the remote after 20 minutes 😂"<br><br>All use: short caption + relatable situation + single emoji. Post before 2 PM!',
+  'Why did my last post underperform?':'Your last post had two issues 👀<br><br><b>Wrong time:</b> Posted 9:47 AM. Your news audience peaks at 6:30 PM.<br><b>Wrong format:</b> Link preview instead of an image with caption. Link previews get 60% less reach on your page.<br><br>Quick fix: Screenshot the headline, add your own caption, post at 6:30 PM tonight.',
+  'Show me my best performing content this month':'Your top 3 this month 🏆<br><br><b>1.</b> Prison biscuit meme — 47.2K reach, 892 shares<br><b>2.</b> Monday motivation dog photo — 28.1K reach, 445 shares<br><b>3.</b> Council tax rant — 19.3K reach (mixed sentiment)<br><br><b>Pattern:</b> Short captions with one emoji outperform long captions by 2.8x on your pages.',
+  'When is the best time to post this week?':'Best windows this week ⏰<br><br><b>🍺 Drinking Memes:</b> Today 1:15 PM, Thu 7:30 PM, Sat 7:45 PM<br><b>🐕 Kelpie Daily:</b> Wed 6:30 PM, Fri 12:00 PM<br><b>⚖️ UK Jail News:</b> Mon 7:00 AM, Wed 8:00 PM<br><br>Saturday evening is your biggest missed opportunity — super sharers are 5x more active but you haven\'t posted a Saturday in 3 weeks!',
+  'Should I turn off comments on the Kelpie Daily council tax post?':'I\'d say <b>leave them on for now</b> 🤔<br><br>The anger is directed at the council, not at you. Turning off comments can actually signal to Facebook that your content is controversial, which can hurt your reach.<br><br>Instead: let the venting happen naturally. If specific comments cross a line (personal attacks, explicit content), delete those individually. The angry-but-not-abusive comments are actually good for your reach right now.',
+  'Give me 3 post ideas that use the same formula as the prison biscuit post':'Here are 3 posts using the winning formula 🔥<br><br><b>Option 1:</b> "When the screw brings the wrong meal again 😭" (relatable + emoji)<br><b>Option 2:</b> "Phone call ends. Back to reality. 😔" (relatable moment + simple emotion)<br><b>Option 3:</b> "First day out energy vs Day 3 out energy 💀😂" (contrast + laughing emoji)<br><br>All follow: short caption + relatable situation + one emoji. Post any of these before 2 PM today.',
+  'Tell me more about my super sharers and what they love':'Your 12 super sharers 👥<br><br>They share 34% of your total reach. Most active <b>Saturday 8-10 PM</b>. What they love:<br><br>✅ Relatable prison/everyday life content<br>✅ Short memes (under 10 words)<br>✅ Posts with a laughing or crying emoji<br>❌ Long political posts<br>❌ Videos over 60 seconds<br>❌ Promotional content<br><br>Post at 7:45 PM Saturday to maximise pickup.',
+  'Give me 3 image post ideas for this week since videos are underperforming':'3 high-performing image ideas for this week 📸<br><br><b>1.</b> A "when X happens" reaction meme — proven format, works every time<br><b>2.</b> A photo from the news with a short caption in your voice<br><b>3.</b> A simple "caption this" image — gets 3x more comments than average<br><br>All three should perform significantly better than video content right now. The algorithm is prioritising static posts this week.',
+  'Help me draft a message to reach out to Friday Night Chaos about a collaboration':'Here\'s a casual DM you could send 📩<br><br><i>"Hey! I run Drinking Memes and noticed our audiences really overlap — loads of your followers engage with my stuff too. Would you be up for a cross-post or shoutout swap? Think it could be a big win for both of us. Let me know! 🍻"</i><br><br>Keep it casual, short, and lead with the mutual benefit. Want me to adjust the tone?'
+};
+
 function arteAsk(q){
   if(!q||!q.trim())return;
-  var chat=document.getElementById('arteChat');
+  const chat=document.getElementById('arteChat');
+  const input=document.getElementById('arteInput');
   chat.innerHTML+='<div class="arte-msg user">'+q+'</div>';
-  document.getElementById('arteInput').value='';
-  var responses={
-    'What should I post today?':'Based on your data, <b>post a meme at 1:15 PM</b>. Your Tuesday afternoon slot gets 2.3x more shares. Use the laughing emoji + short caption formula that worked on the prison biscuit post. Avoid video — your audience engagement with video is down 42% this week. Stick to images.',
-    'Why did my last post underperform?':'Your last post was a news share at 9:47 AM. Two issues: <b>wrong time</b> (your news audience peaks at 6:30 PM, not morning) and <b>wrong format</b> (you used a link preview instead of an image with caption). Link previews get 60% less reach on your page. Next time, screenshot the headline and post as an image with your own caption.',
-    'Show me my best performing content this month':'Your top 3 this month: <b>1.</b> Prison biscuit meme (47.2K reach, 892 shares) <b>2.</b> "Monday motivation" dog photo (28.1K reach, 445 shares) <b>3.</b> Council tax rant (19.3K reach, but 34% negative comments). Pattern: short captions with single emoji outperform long captions by 2.8x on your pages.',
-    'When is the best time to post this week?':'<b>Drinking Memes:</b> Tue 1:15 PM, Thu 7:30 PM, Sat 7:45 PM (super sharers active). <b>Kelpie Daily:</b> Wed 6:30 PM, Fri 12:00 PM. <b>UK Jail News:</b> Mon 7:00 AM, Wed 8:00 PM. Your Saturday evening slot is underused — 5x super sharer activity but you have not posted on a Saturday in 3 weeks.'
-  };
-  var r=responses[q]||'Looking at your data across all 3 pages... <b>Drinking Memes</b> is your strongest performer with 47.2K reach this week. Your audience responds best to <b>short caption + emoji</b> memes posted between <b>1-2 PM on weekdays</b> and <b>8-10 PM on weekends</b>. Would you like me to draft a post or analyse a specific topic?';
-  setTimeout(function(){chat.innerHTML+='<div class="arte-msg bot">'+r+'</div>';chat.scrollIntoView({behavior:'smooth',block:'end'})},600);
+  if(input)input.value='';
+  const homeInput=document.getElementById('homeInput');
+  if(homeInput)homeInput.value='';
+  const r=RESPONSES[q]||'Looking across all 3 of your pages... <b>Drinking Memes</b> is your star performer at 47.2K reach this week 🔥 Your audience loves short, relatable memes posted between 1-2 PM on weekdays. Want me to look at something specific?';
+  setTimeout(()=>{
+    chat.innerHTML+='<div class="arte-msg bot">'+r+'</div>';
+    chat.lastElementChild.scrollIntoView({behavior:'smooth',block:'end'});
+  },600);
 }
 </script>
 </body>
