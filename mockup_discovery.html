@@ -640,87 +640,88 @@ canvas{display:block!important}
     <!-- ══════════════ COLLABORATIONS (DEFAULT) ══════════════ -->
     <div class="tab-panel active" id="panel-collabs">
 
-      <!-- Hero KPIs -->
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px">
-        <div class="kpi-card" style="background:linear-gradient(135deg,rgba(0,212,170,0.08),var(--bg-card));border-color:rgba(0,212,170,0.2)">
-          <div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">Collab Matches</div>
-          <div style="font-size:32px;font-weight:800;color:#00d4aa;font-family:'JetBrains Mono',monospace;line-height:1">24</div>
-          <div style="font-size:11px;color:#34d399;margin-top:4px">Above 40% overlap</div>
+      <!-- KPI strip -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px">
+        <div class="kpi-card" style="background:linear-gradient(135deg,rgba(0,212,170,0.07),var(--bg-card));border-color:rgba(0,212,170,0.2)">
+          <div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">Flywheel Speed</div>
+          <div class="fw-kpi-val" id="fwSpeed" style="font-size:28px;font-weight:800;color:#00d4aa;font-family:'JetBrains Mono',monospace;line-height:1">1×</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Velocity multiplier</div>
         </div>
         <div class="kpi-card">
-          <div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">Top Potential Reach</div>
-          <div style="font-size:32px;font-weight:800;font-family:'JetBrains Mono',monospace;line-height:1">~18K</div>
-          <div style="font-size:11px;color:#34d399;margin-top:4px">Per cross-post</div>
+          <div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">Pages Connected</div>
+          <div class="fw-kpi-val" id="fwPages" style="font-size:28px;font-weight:800;font-family:'JetBrains Mono',monospace;line-height:1">0</div>
+          <div style="font-size:11px;color:#34d399;margin-top:4px">Added to flywheel</div>
         </div>
         <div class="kpi-card">
-          <div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">Connected</div>
-          <div style="font-size:32px;font-weight:800;color:#a78bfa;font-family:'JetBrains Mono',monospace;line-height:1" id="connectedCount">0</div>
-          <div style="font-size:11px;color:var(--text-muted);margin-top:4px">This session</div>
+          <div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">Network Reach</div>
+          <div class="fw-kpi-val" id="fwReach" style="font-size:28px;font-weight:800;font-family:'JetBrains Mono',monospace;line-height:1">22K</div>
+          <div style="font-size:11px;color:#34d399;margin-top:4px">Across all pages</div>
         </div>
         <div class="kpi-card">
-          <div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">Art-E Score</div>
-          <div style="font-size:32px;font-weight:800;color:#fbbf24;font-family:'JetBrains Mono',monospace;line-height:1">94</div>
-          <div style="font-size:11px;color:#fbbf24;margin-top:4px">Top match quality</div>
+          <div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">Projected Growth</div>
+          <div class="fw-kpi-val" id="fwGrowth" style="font-size:28px;font-weight:800;color:#fbbf24;font-family:'JetBrains Mono',monospace;line-height:1">+0%</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Monthly reach uplift</div>
         </div>
       </div>
 
-      <!-- Main: Tinder + Pipeline + Chart -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px">
+      <!-- MAIN: Flywheel canvas + collab list -->
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:24px;margin-bottom:20px;align-items:start">
 
-        <!-- LEFT: Tinder Swipe -->
-        <div>
-          <div class="panel-title" style="margin-bottom:4px">Find Collaborators</div>
-          <div class="panel-subtitle" style="margin-bottom:14px">Swipe right to connect · Drag or use buttons · Art-E ranks by compatibility</div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <div style="display:flex;gap:8px">
-              <span style="font-size:10px;padding:3px 10px;border-radius:4px;background:rgba(248,113,113,0.1);color:#f87171;font-family:'JetBrains Mono',monospace">← Skip</span>
-              <span style="font-size:10px;padding:3px 10px;border-radius:4px;background:rgba(0,212,170,0.1);color:#00d4aa;font-family:'JetBrains Mono',monospace">Connect →</span>
+        <!-- Flywheel -->
+        <div class="panel" style="padding:0;overflow:hidden">
+          <div style="padding:16px 20px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <div class="panel-title">Collaboration Flywheel</div>
+              <div class="panel-subtitle">Add pages to accelerate the loop · Click a stage to learn more</div>
             </div>
-            <div id="swipeStatus" style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace">Card 1 of 8</div>
+            <div style="display:flex;gap:6px;align-items:center">
+              <div id="fwStatus" style="font-size:10px;padding:3px 10px;border-radius:5px;background:rgba(0,212,170,0.1);color:#00d4aa;border:1px solid rgba(0,212,170,0.2);font-family:'JetBrains Mono',monospace">Idle</div>
+            </div>
           </div>
-          <div id="cardStack" style="position:relative;height:350px;margin-bottom:16px"></div>
-          <!-- Action buttons -->
-          <div style="display:flex;justify-content:center;align-items:center;gap:16px">
-            <button onclick="swipeCard('skip')" class="swipe-btn skip">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-            </button>
-            <button onclick="showCardActions()" class="swipe-btn msg" style="width:44px;height:44px;border-radius:50%;border:2px solid rgba(96,165,250,0.4);background:rgba(96,165,250,0.08);color:#60a5fa;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s" title="Message">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-            </button>
-            <button onclick="swipeCard('connect')" class="swipe-btn connect">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-            </button>
+          <canvas id="flywheelCanvas" style="display:block;width:100%;cursor:pointer"></canvas>
+          <!-- Stage detail tooltip -->
+          <div id="stageDetail" style="padding:14px 20px;border-top:1px solid var(--border);min-height:58px;display:flex;align-items:center;gap:12px">
+            <div id="stageIcon" style="width:36px;height:36px;border-radius:10px;background:rgba(0,212,170,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0"></div>
+            <div>
+              <div id="stageTitle" style="font-size:13px;font-weight:600;color:var(--text-primary)">Click any stage to explore</div>
+              <div id="stageDesc" style="font-size:11px;color:var(--text-muted);margin-top:2px;line-height:1.5">The flywheel spins faster as you connect more pages. Each connection compounds the effect of every other.</div>
+            </div>
           </div>
         </div>
 
-        <!-- RIGHT: Pipeline + Actions -->
+        <!-- Right: Add pages + pipeline -->
         <div style="display:flex;flex-direction:column;gap:16px">
-          <div class="panel" style="flex:1">
-            <div class="panel-header">
-              <div><div class="panel-title">Collab Pipeline</div><div class="panel-subtitle">Pages you've connected with</div></div>
-              <span id="pipeCount" style="font-size:10px;padding:2px 9px;border-radius:4px;background:rgba(0,212,170,0.1);color:#00d4aa;border:1px solid rgba(0,212,170,0.2);font-family:'JetBrains Mono',monospace">0 connected</span>
-            </div>
-            <div id="pipelineList"><div style="font-size:11px;color:var(--text-muted);padding:16px 0;text-align:center;border:1px dashed rgba(255,255,255,0.08);border-radius:8px">Swipe right to start building your collab pipeline</div></div>
-          </div>
+          <!-- Available pages to add -->
           <div class="panel">
-            <div class="panel-header"><div><div class="panel-title">Reach Uplift Forecast</div><div class="panel-subtitle">What each collab adds to your reach</div></div></div>
-            <canvas id="crossPostChart" height="130"></canvas>
+            <div class="panel-header">
+              <div><div class="panel-title">Add to Flywheel</div><div class="panel-subtitle">Art-E ranked · Click to connect</div></div>
+              <span id="addedCount" style="font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(0,212,170,0.1);color:#00d4aa;border:1px solid rgba(0,212,170,0.2);font-family:'JetBrains Mono',monospace">0 added</span>
+            </div>
+            <div id="pageList"></div>
+          </div>
+
+          <!-- Pipeline of connected pages -->
+          <div class="panel">
+            <div class="panel-header">
+              <div><div class="panel-title">Connected Pages</div><div class="panel-subtitle">Each page powers the loop</div></div>
+            </div>
+            <div id="connectedList"><div style="font-size:11px;color:var(--text-muted);text-align:center;padding:14px 0;border:1px dashed rgba(255,255,255,0.07);border-radius:8px">Add pages above to start the flywheel</div></div>
           </div>
         </div>
       </div>
 
-      <!-- Bottom: collab insights -->
+      <!-- Bottom charts -->
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
         <div class="panel">
-          <div class="panel-header"><div><div class="panel-title">Collab Score Breakdown</div><div class="panel-subtitle">Why Art-E ranked them this way</div></div></div>
-          <canvas id="collabScoreChart" height="150"></canvas>
+          <div class="panel-header"><div><div class="panel-title">Flywheel Momentum</div><div class="panel-subtitle">Projected reach as you add pages</div></div></div>
+          <canvas id="momentumChart" height="150"></canvas>
         </div>
         <div class="panel">
-          <div class="panel-header"><div><div class="panel-title">Past Collab Performance</div><div class="panel-subtitle">Reach uplift from previous cross-posts</div></div></div>
-          <canvas id="pastCollabChart" height="150"></canvas>
+          <div class="panel-header"><div><div class="panel-title">Collab Performance</div><div class="panel-subtitle">Reach uplift per connected page</div></div></div>
+          <canvas id="collabPerfChart" height="150"></canvas>
         </div>
         <div class="panel">
-          <div class="panel-header"><div><div class="panel-title">Best Collab Times</div><div class="panel-subtitle">When cross-posts perform best</div></div></div>
+          <div class="panel-header"><div><div class="panel-title">Best Cross-Post Times</div><div class="panel-subtitle">When collabs perform best</div></div></div>
           <canvas id="collabTimesChart" height="150"></canvas>
         </div>
       </div>
@@ -996,185 +997,341 @@ function initTabs(){
 }
 
 // ══════════════════════════════════════════
-// TINDER SWIPE
+// FLYWHEEL
 // ══════════════════════════════════════════
-const CARDS=[
-  {name:'Friday Night Chaos',overlap:67,followers:'28K',topic:'Humour · Dark Comedy',posts:'42/wk',sentiment:0.88,potential:'~15K',color:'#00d4aa',score:94,desc:'Strongest overlap in your network. Their fans already engage with your style. Art-E predicts 89% cross-post success rate.'},
-  {name:'Northern Banter HQ',overlap:58,followers:'41K',topic:'Community · Lifestyle',posts:'35/wk',sentiment:0.82,potential:'~18K',color:'#a78bfa',score:88,desc:'Largest audience in your match list. Community content crosses over extremely well with yours.'},
-  {name:'Prison Watch UK',overlap:55,followers:'12K',topic:'Crime · News',posts:'28/wk',sentiment:0.71,potential:'~8K',color:'#f87171',score:81,desc:'Direct match for UK Jail News cross-posts. Crime audience highly engaged with shared topics.'},
-  {name:'British Pub Culture',overlap:52,followers:'20K',topic:'Lifestyle · Humour',posts:'24/wk',sentiment:0.84,potential:'~9K',color:'#fbbf24',score:76,desc:'Pub humour demographic overlaps heavily with Drinking Memes. Natural partnership.'},
-  {name:'True Crime Weekly',overlap:48,followers:'35K',topic:'Crime · Investigations',posts:'18/wk',sentiment:0.74,potential:'~12K',color:'#60a5fa',score:74,desc:'Large engaged crime audience. Good reach potential despite lower overlap.'},
-  {name:'Late Night Laughs',overlap:44,followers:'24K',topic:'Humour · Late Night',posts:'50/wk',sentiment:0.90,potential:'~8K',color:'#34d399',score:68,desc:'Posting patterns match your super sharer activity windows exactly.'},
-  {name:'UK Rant Page',overlap:38,followers:'18K',topic:'Politics · Opinion',posts:'30/wk',sentiment:0.62,potential:'~5K',color:'#fbbf24',score:55,desc:'Lower sentiment score. Some overlap but tone more negative — review before connecting.'},
-  {name:'Mancunian Memes',overlap:42,followers:'16K',topic:'Humour · Regional',posts:'22/wk',sentiment:0.85,potential:'~5K',color:'#00d4aa',score:62,desc:'Regional meme page. Good Manchester area cross-promotion opportunity.'}
-];
-let cardIdx=0,connected=[];
 
-function renderCards(){
-  const stack=document.getElementById('cardStack');
-  if(!stack)return;
-  stack.innerHTML='';
-  if(cardIdx>=CARDS.length){
-    stack.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px"><div style="font-size:48px">🎉</div><div style="font-size:14px;font-weight:600;color:var(--text-primary)">All pages reviewed!</div><div style="font-size:12px;color:var(--text-muted)">You connected with '+connected.length+' pages</div><button onclick="cardIdx=0;connected=[];renderCards();updatePipeline();" style="margin-top:8px;padding:8px 20px;border-radius:8px;border:1px solid rgba(0,212,170,0.3);background:rgba(0,212,170,0.08);color:#00d4aa;cursor:pointer;font-family:inherit;font-size:12px">Start over</button></div>';
-    return;
-  }
-  for(let i=Math.min(cardIdx+2,CARDS.length-1);i>=cardIdx;i--){
-    const card=CARDS[i],depth=i-cardIdx;
-    const el=document.createElement('div');
-    el.style.cssText=`position:absolute;width:100%;background:var(--bg-card);border:1.5px solid ${depth===0?card.color+'55':'rgba(255,255,255,0.04)'};border-radius:16px;padding:20px 22px;box-shadow:0 ${8+depth*6}px ${24+depth*10}px rgba(0,0,0,${0.35+depth*0.1});transform:scale(${1-depth*0.04}) translateY(${depth*-16}px);transform-origin:top center;top:0;${depth===0?'cursor:grab;z-index:3;':'z-index:'+(3-depth)+';pointer-events:none;'}`;
-    if(depth===0){
-      el.id='topCard';
-      el.innerHTML=`
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
-          <div>
-            <div style="font-size:18px;font-weight:700;color:var(--text-primary);line-height:1.2">${card.name}</div>
-            <div style="font-size:11px;color:var(--text-muted);margin-top:3px">${card.topic}</div>
-          </div>
-          <div style="text-align:right">
-            <div style="font-size:32px;font-weight:800;color:${card.color};font-family:'JetBrains Mono',monospace;line-height:1">${card.overlap}%</div>
-            <div style="font-size:9px;color:var(--text-muted)">audience overlap</div>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px">
-          <div style="background:var(--bg-tertiary);border-radius:8px;padding:9px;text-align:center">
-            <div style="font-size:15px;font-weight:700;font-family:'JetBrains Mono',monospace">${card.followers}</div>
-            <div style="font-size:8px;color:var(--text-muted);margin-top:2px">Followers</div>
-          </div>
-          <div style="background:var(--bg-tertiary);border-radius:8px;padding:9px;text-align:center">
-            <div style="font-size:13px;font-weight:700;font-family:'JetBrains Mono',monospace;color:${card.color}">${card.potential}</div>
-            <div style="font-size:8px;color:var(--text-muted);margin-top:2px">New reach</div>
-          </div>
-          <div style="background:var(--bg-tertiary);border-radius:8px;padding:9px;text-align:center">
-            <div style="font-size:15px;font-weight:700;font-family:'JetBrains Mono',monospace">${card.sentiment}</div>
-            <div style="font-size:8px;color:var(--text-muted);margin-top:2px">Sentiment</div>
-          </div>
-          <div style="background:var(--bg-tertiary);border-radius:8px;padding:9px;text-align:center">
-            <div style="font-size:15px;font-weight:700;font-family:'JetBrains Mono',monospace;color:${card.color}">${card.score}</div>
-            <div style="font-size:8px;color:var(--text-muted);margin-top:2px">Art-E score</div>
-          </div>
-        </div>
-        <div style="font-size:11px;color:var(--text-secondary);line-height:1.65;border-left:2px solid ${card.color};padding-left:10px;margin-bottom:14px">${card.desc}</div>
-        <div style="display:flex;gap:8px">
-          <button onclick="showMsgModal('${card.name}')" style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(96,165,250,0.3);background:rgba(96,165,250,0.06);color:#60a5fa;font-size:11px;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Message</button>
-          <button onclick="showMsgModal('${card.name}')" style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(167,139,250,0.3);background:rgba(167,139,250,0.06);color:#a78bfa;font-size:11px;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>Collab</button>
-        </div>`;
-      // Drag support
-      let sx=0,drag=false,dx=0;
-      const onMove=e=>{
-        if(!drag)return;
-        dx=(e.touches?e.touches[0]:e).clientX-sx;
-        const rot=dx*0.06;
-        el.style.transform=`scale(1) translateX(${dx}px) rotate(${rot}deg)`;
-        el.style.borderColor=dx>60?'rgba(0,212,170,0.8)':dx<-60?'rgba(248,113,113,0.8)':card.color+'55';
-        el.style.boxShadow=dx>60?'0 8px 40px rgba(0,212,170,0.25)':dx<-60?'0 8px 40px rgba(248,113,113,0.2)':'';
-      };
-      const onUp=()=>{
-        if(!drag)return;drag=false;
-        el.style.transition='all .3s';
-        if(dx>90)swipeCard('connect');
-        else if(dx<-90)swipeCard('skip');
-        else{el.style.transform='scale(1) translateY(0)';el.style.cursor='grab';el.style.borderColor=card.color+'55';dx=0;}
-      };
-      el.addEventListener('mousedown',e=>{sx=e.clientX;drag=true;el.style.cursor='grabbing';el.style.transition='none';});
-      el.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;drag=true;el.style.transition='none';},{passive:true});
-      document.addEventListener('mousemove',onMove);
-      document.addEventListener('mouseup',onUp);
-      el.addEventListener('touchmove',onMove,{passive:true});
-      el.addEventListener('touchend',onUp);
-    }
-    stack.appendChild(el);
-  }
-  const s=document.getElementById('swipeStatus');
-  if(s)s.textContent=cardIdx<CARDS.length?`Card ${cardIdx+1} of ${CARDS.length}`:'Done!';
+// Alex's PAP flywheel stages (from his notes)
+const FW_STAGES = [
+  { id:0, label:'Connect Pages', icon:'🔗', color:'#00d4aa',
+    desc:'Add collaborator pages. Each new page injects fresh audience data and opens new reach channels into the loop.',
+    metric:'Pages', value:0 },
+  { id:1, label:'Data Ingested', icon:'📥', color:'#6366f1',
+    desc:'The more pages connected, the more audience data Artemis ingests. Cross-page patterns emerge that single pages never reveal.',
+    metric:'Data points', value:0 },
+  { id:2, label:'AI Learns', icon:'🧠', color:'#a78bfa',
+    desc:'Art-E builds a richer model of your combined audience. Predictions become sharper. Timing windows more precise.',
+    metric:'Accuracy', value:0 },
+  { id:3, label:'Pages Grow', icon:'📈', color:'#34d399',
+    desc:'Better predictions drive better content decisions. Pages grow faster. Follower quality improves.',
+    metric:'Reach', value:0 },
+  { id:4, label:'More Sign-ups', icon:'🚀', color:'#fbbf24',
+    desc:'Growing pages attract more creators who want the same intelligence. The network expands.',
+    metric:'New pages', value:0 },
+  { id:5, label:'Loop Repeats', icon:'♾️', color:'#f87171',
+    desc:'Every new page makes every other page smarter. The flywheel spins faster. Growth compounds.',
+    metric:'Velocity', value:0 },
+];
+
+const FW_PAGES = [
+  { name:'Friday Night Chaos', overlap:67, followers:'28K', reach:15000, color:'#00d4aa', score:94 },
+  { name:'Northern Banter HQ', overlap:58, followers:'41K', reach:18000, color:'#a78bfa', score:88 },
+  { name:'Prison Watch UK',    overlap:55, followers:'12K', reach:8000,  color:'#f87171', score:81 },
+  { name:'British Pub Culture',overlap:52, followers:'20K', reach:9000,  color:'#fbbf24', score:76 },
+  { name:'True Crime Weekly',  overlap:48, followers:'35K', reach:12000, color:'#60a5fa', score:74 },
+  { name:'Late Night Laughs',  overlap:44, followers:'24K', reach:8000,  color:'#34d399', score:68 },
+  { name:'UK Rant Page',       overlap:38, followers:'18K', reach:5000,  color:'#fbbf24', score:55 },
+  { name:'Mancunian Memes',    overlap:42, followers:'16K', reach:5000,  color:'#6366f1', score:62 },
+];
+
+let fwConnected = [], fwAngle = 0, fwRAF = null, fwHovered = -1, fwSelected = -1;
+let fwSpeed = 0.003; // radians per frame at idle
+
+function fwUpdate() {
+  const n = fwConnected.length;
+  fwSpeed = 0.003 + n * 0.0018; // spins faster with more pages
+  fwAngle += fwSpeed;
+
+  // Update KPI displays
+  const totalReach = 22000 + fwConnected.reduce((s,p)=>s+p.reach,0);
+  const growth = Math.round(fwConnected.reduce((s,p)=>s+p.overlap,0)/3);
+  document.getElementById('fwPages').textContent  = n;
+  document.getElementById('fwReach').textContent  = totalReach>=1000?(totalReach/1000).toFixed(1)+'K':totalReach;
+  document.getElementById('fwGrowth').textContent = '+'+growth+'%';
+  document.getElementById('fwSpeed').textContent  = (1+n*0.6).toFixed(1)+'×';
+  document.getElementById('addedCount').textContent = n+' added';
+  const st = document.getElementById('fwStatus');
+  if(st) st.textContent = n===0?'Idle': n<3?'Building momentum': n<6?'Accelerating':'At escape velocity';
+
+  // Stage metric updates
+  FW_STAGES[0].value = n;
+  FW_STAGES[1].value = Math.round(n * 8400);
+  FW_STAGES[2].value = Math.min(99, 74 + n*3) + '%';
+  FW_STAGES[3].value = (totalReach/1000).toFixed(0)+'K';
+  FW_STAGES[4].value = n+' pages';
+  FW_STAGES[5].value = (1+n*0.6).toFixed(1)+'×';
 }
 
-window.swipeCard=function(action){
-  if(cardIdx>=CARDS.length)return;
-  const card=CARDS[cardIdx];
-  const top=document.getElementById('topCard');
-  if(top){
-    top.style.transition='all .32s cubic-bezier(.4,0,.2,1)';
-    top.style.transform=action==='connect'?'translateX(150%) rotate(28deg)':'translateX(-150%) rotate(-28deg)';
-    top.style.opacity='0';
+function fwDraw() {
+  const canvas = document.getElementById('flywheelCanvas');
+  if(!canvas) return;
+  const W = canvas.width, H = canvas.height;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,W,H);
+
+  const cx = W/2, cy = H/2;
+  const R = Math.min(W,H)*0.34;   // main ring radius
+  const nStages = FW_STAGES.length;
+  const arcGap = 0.08; // gap between segments in radians
+
+  // ── Outer glow ring ──
+  const glow = ctx.createRadialGradient(cx,cy,R*0.6,cx,cy,R*1.2);
+  glow.addColorStop(0,'rgba(0,212,170,0.04)');
+  glow.addColorStop(1,'transparent');
+  ctx.beginPath(); ctx.arc(cx,cy,R*1.2,0,Math.PI*2);
+  ctx.fillStyle=glow; ctx.fill();
+
+  // ── Draw flywheel segments ──
+  const segAngle = (Math.PI*2 - nStages*arcGap) / nStages;
+  FW_STAGES.forEach((stage, i) => {
+    const startA = fwAngle + i*(segAngle+arcGap) - Math.PI/2;
+    const endA   = startA + segAngle;
+    const isHov  = fwHovered===i;
+    const isSel  = fwSelected===i;
+    const baseAlpha = 0.18 + (i/nStages)*0.12;
+    const alpha  = isHov||isSel ? 0.55 : baseAlpha;
+    const rOuter = isHov||isSel ? R*1.04 : R;
+
+    // Segment arc
+    ctx.beginPath();
+    ctx.arc(cx, cy, rOuter, startA, endA);
+    ctx.arc(cx, cy, R*0.52, endA, startA, true);
+    ctx.closePath();
+
+    // Gradient fill
+    const midA = (startA+endA)/2;
+    const grd = ctx.createLinearGradient(
+      cx + Math.cos(midA)*R*0.5, cy + Math.sin(midA)*R*0.5,
+      cx + Math.cos(midA)*rOuter, cy + Math.sin(midA)*rOuter
+    );
+    grd.addColorStop(0, stage.color+'11');
+    grd.addColorStop(1, stage.color + Math.round(alpha*255).toString(16).padStart(2,'0'));
+    ctx.fillStyle = grd;
+    ctx.fill();
+    ctx.strokeStyle = stage.color + (isHov||isSel ? 'cc' : '55');
+    ctx.lineWidth = isHov||isSel ? 2 : 1;
+    ctx.stroke();
+
+    // Label inside segment
+    const labelR = R*0.76;
+    const lx = cx + Math.cos(midA)*labelR;
+    const ly = cy + Math.sin(midA)*labelR;
+    ctx.save();
+    ctx.translate(lx,ly);
+    ctx.rotate(midA + Math.PI/2);
+    ctx.font = `bold ${isHov||isSel?11:10}px 'Outfit'`;
+    ctx.fillStyle = isHov||isSel ? '#e8ecf4' : stage.color+'cc';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    // Split label to 2 lines
+    const words = stage.label.split(' ');
+    if(words.length>1){
+      ctx.fillText(words.slice(0,Math.ceil(words.length/2)).join(' '), 0, -7);
+      ctx.fillText(words.slice(Math.ceil(words.length/2)).join(' '), 0, 7);
+    } else {
+      ctx.fillText(stage.label, 0, 0);
+    }
+    ctx.restore();
+
+    // Arrow at end of segment (direction indicator)
+    const arrowA = endA - 0.06;
+    const ax = cx + Math.cos(arrowA)*R*0.76;
+    const ay = cy + Math.sin(arrowA)*R*0.76;
+    ctx.beginPath();
+    ctx.arc(ax, ay, 4, 0, Math.PI*2);
+    ctx.fillStyle = stage.color + (isHov||isSel?'ff':'88');
+    ctx.fill();
+  });
+
+  // ── Centre hub ──
+  const hubR = R*0.48;
+  const hubGlow = ctx.createRadialGradient(cx,cy,0,cx,cy,hubR);
+  hubGlow.addColorStop(0,'rgba(0,212,170,0.15)');
+  hubGlow.addColorStop(0.5,'rgba(0,212,170,0.06)');
+  hubGlow.addColorStop(1,'rgba(0,212,170,0.02)');
+  ctx.beginPath(); ctx.arc(cx,cy,hubR,0,Math.PI*2);
+  ctx.fillStyle = hubGlow; ctx.fill();
+  ctx.beginPath(); ctx.arc(cx,cy,hubR,0,Math.PI*2);
+  ctx.strokeStyle='rgba(0,212,170,0.3)'; ctx.lineWidth=1.5; ctx.stroke();
+
+  // Hub text
+  const n = fwConnected.length;
+  ctx.font = 'bold 26px JetBrains Mono';
+  ctx.fillStyle = '#00d4aa';
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText(n===0?'0':(1+n*0.6).toFixed(1)+'×', cx, cy-10);
+  ctx.font = '10px Outfit';
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.fillText(n===0?'Add pages':'velocity', cx, cy+10);
+
+  // ── Connected page satellites orbiting ──
+  fwConnected.forEach((p, i) => {
+    const orbitR = R*1.38 + i*18;
+    const speed  = fwAngle * (0.6 + i*0.08);
+    const px = cx + Math.cos(speed)*orbitR;
+    const py = cy + Math.sin(speed)*orbitR;
+    // Orbit trail
+    ctx.beginPath();
+    ctx.arc(cx, cy, orbitR, 0, Math.PI*2);
+    ctx.strokeStyle='rgba(255,255,255,0.03)'; ctx.lineWidth=1; ctx.stroke();
+    // Node
+    ctx.beginPath(); ctx.arc(px,py,8,0,Math.PI*2);
+    ctx.fillStyle=p.color+'33'; ctx.fill();
+    ctx.strokeStyle=p.color+'cc'; ctx.lineWidth=1.5; ctx.stroke();
+    // Name
+    ctx.font='9px Outfit'; ctx.fillStyle=p.color+'bb';
+    ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+    const label = p.name.length>12?p.name.slice(0,11)+'…':p.name;
+    ctx.fillText(label, px, py-12);
+  });
+}
+
+function fwLoop() {
+  fwUpdate();
+  fwDraw();
+  fwRAF = requestAnimationFrame(fwLoop);
+}
+
+function initFlywheel() {
+  const canvas = document.getElementById('flywheelCanvas');
+  if(!canvas || canvas._fwInit) return;
+  canvas._fwInit = true;
+
+  function resize() {
+    const W = canvas.parentElement.clientWidth || 620;
+    const H = Math.round(W * 0.68);
+    canvas.width  = W;
+    canvas.height = H;
   }
-  if(action==='connect'){connected.push(card);updatePipeline();}
-  setTimeout(()=>{cardIdx++;renderCards();},300);
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Hit test for hover/click
+  function hitStage(mx, my) {
+    const W=canvas.width, H=canvas.height;
+    const cx=W/2, cy=H/2, R=Math.min(W,H)*0.34;
+    const dx=mx-cx, dy=my-cy, dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist < R*0.52 || dist > R*1.05) return -1;
+    const nStages=FW_STAGES.length;
+    const segAngle=(Math.PI*2-nStages*0.08)/nStages;
+    let a = (Math.atan2(dy,dx) - fwAngle + Math.PI/2 + Math.PI*4) % (Math.PI*2);
+    const idx = Math.floor(a / (segAngle+0.08));
+    return idx < nStages ? idx : -1;
+  }
+
+  canvas.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    fwHovered = hitStage(e.clientX-r.left, e.clientY-r.top);
+    canvas.style.cursor = fwHovered>=0 ? 'pointer' : 'default';
+  });
+  canvas.addEventListener('mouseleave', () => { fwHovered=-1; canvas.style.cursor='default'; });
+  canvas.addEventListener('click', e => {
+    const r = canvas.getBoundingClientRect();
+    const hit = hitStage(e.clientX-r.left, e.clientY-r.top);
+    if(hit>=0) {
+      fwSelected = fwSelected===hit ? -1 : hit;
+      const s = FW_STAGES[hit];
+      document.getElementById('stageIcon').innerHTML = `<span style="font-size:20px">${s.icon}</span>`;
+      document.getElementById('stageTitle').textContent = s.label;
+      document.getElementById('stageTitle').style.color = s.color;
+      document.getElementById('stageDesc').textContent = s.desc;
+    }
+  });
+
+  // Build page list
+  buildPageList();
+  fwLoop();
+}
+
+function buildPageList() {
+  const el = document.getElementById('pageList');
+  if(!el||el._done) return; el._done=true;
+  FW_PAGES.forEach((p, i) => {
+    const row = document.createElement('div');
+    row.id = 'fwrow-'+i;
+    row.style.cssText='display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;border-radius:6px;padding:8px 6px;margin:0 -6px';
+    row.innerHTML=`
+      <div style="width:7px;height:7px;border-radius:50%;background:${p.color};flex-shrink:0"></div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div>
+        <div style="font-size:10px;color:var(--text-muted)">${p.overlap}% overlap · ${p.followers}</div>
+      </div>
+      <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:${p.color};font-weight:600;flex-shrink:0">${p.score}</div>
+      <button id="fwbtn-${i}" onclick="fwTogglePage(${i})" style="font-size:10px;padding:4px 10px;border-radius:6px;border:1px solid rgba(0,212,170,0.3);background:transparent;color:#00d4aa;cursor:pointer;font-family:inherit;flex-shrink:0;transition:all .15s">+ Add</button>`;
+    row.onmouseover=()=>row.style.background='rgba(255,255,255,0.03)';
+    row.onmouseout=()=>row.style.background='';
+    el.appendChild(row);
+  });
+}
+
+window.fwTogglePage = function(i) {
+  const p = FW_PAGES[i];
+  const btn = document.getElementById('fwbtn-'+i);
+  const already = fwConnected.findIndex(c=>c.name===p.name);
+  if(already>=0) {
+    fwConnected.splice(already,1);
+    btn.textContent='+ Add';
+    btn.style.color='#00d4aa';
+    btn.style.borderColor='rgba(0,212,170,0.3)';
+  } else {
+    fwConnected.push(p);
+    btn.textContent='✓ Added';
+    btn.style.color='#34d399';
+    btn.style.borderColor='rgba(52,211,153,0.5)';
+    btn.style.background='rgba(52,211,153,0.08)';
+  }
+  updateConnectedList();
+  updateMomentumChart();
 };
 
-window.showCardActions=function(){
-  if(cardIdx<CARDS.length)swipeCard('connect');
-};
+function updateConnectedList(){
+  const el=document.getElementById('connectedList');
+  if(!el)return;
+  if(!fwConnected.length){
+    el.innerHTML='<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:14px 0;border:1px dashed rgba(255,255,255,0.07);border-radius:8px">Add pages above to start the flywheel</div>';
+    return;
+  }
+  el.innerHTML=fwConnected.map(p=>`
+    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">
+      <div style="width:7px;height:7px;border-radius:50%;background:${p.color};flex-shrink:0"></div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:12px;font-weight:500">${p.name}</div>
+        <div style="font-size:10px;color:var(--text-muted)">+${(p.reach/1000).toFixed(0)}K reach added</div>
+      </div>
+      <div style="display:flex;gap:5px">
+        <button onclick="showMsgModal('${p.name}')" style="font-size:9px;padding:3px 7px;border-radius:4px;border:1px solid rgba(96,165,250,0.3);background:transparent;color:#60a5fa;cursor:pointer;font-family:inherit">DM</button>
+        <button style="font-size:9px;padding:3px 7px;border-radius:4px;border:1px solid rgba(0,212,170,0.3);background:transparent;color:#00d4aa;cursor:pointer;font-family:inherit">Post</button>
+      </div>
+    </div>`).join('');
+}
 
-window.showMsgModal=function(name){
-  // Create a quick message modal
-  const existing=document.getElementById('msgModal');
-  if(existing)existing.remove();
-  const m=document.createElement('div');
-  m.id='msgModal';
-  m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center';
-  m.innerHTML=`<div style="background:#0f1729;border:1px solid rgba(0,212,170,0.3);border-radius:16px;padding:24px;width:400px;max-width:90vw;box-shadow:0 24px 60px rgba(0,0,0,0.6)">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-      <div style="font-size:15px;font-weight:700">Draft message to ${name}</div>
-      <button onclick="document.getElementById('msgModal').remove()" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:20px;line-height:1">×</button>
-    </div>
-    <textarea style="width:100%;height:100px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:8px;padding:12px;color:var(--text-primary);font-family:inherit;font-size:13px;resize:none;outline:none;box-sizing:border-box" placeholder="Hey! I manage Drinking Memes and I noticed we have a strong audience overlap. Would love to discuss a cross-posting arrangement..."></textarea>
-    <div style="display:flex;gap:10px;margin-top:12px">
-      <button onclick="document.getElementById('msgModal').remove()" style="flex:1;padding:9px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-family:inherit">Cancel</button>
-      <button onclick="document.getElementById('msgModal').remove()" style="flex:1;padding:9px;border-radius:8px;border:none;background:#00d4aa;color:#0c1221;font-weight:600;cursor:pointer;font-family:inherit">Send Message</button>
-    </div>
-  </div>`;
-  document.body.appendChild(m);
-  m.addEventListener('click',e=>{if(e.target===m)m.remove();});
-};
-
-function updatePipeline(){
-  const cc=document.getElementById('connectedCount');
-  const pc=document.getElementById('pipeCount');
-  const pl=document.getElementById('pipelineList');
-  if(cc)cc.textContent=connected.length;
-  if(pc)pc.textContent=`${connected.length} connected`;
-  if(!pl)return;
-  if(!connected.length){pl.innerHTML='<div style="font-size:11px;color:var(--text-muted);padding:16px 0;text-align:center;border:1px dashed rgba(255,255,255,0.08);border-radius:8px">Swipe right to start building your collab pipeline</div>';return;}
-  pl.innerHTML=connected.map(c=>`<div style="padding:9px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
-    <div style="width:6px;height:6px;border-radius:50%;background:${c.color};flex-shrink:0"></div>
-    <div style="flex:1;min-width:0">
-      <div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.name}</div>
-      <div style="font-size:10px;color:var(--text-muted)">${c.potential} new reach · ${c.overlap}% overlap</div>
-    </div>
-    <div style="display:flex;gap:6px;flex-shrink:0">
-      <button onclick="showMsgModal('${c.name}')" style="font-size:9px;padding:3px 7px;border-radius:4px;border:1px solid rgba(96,165,250,0.3);background:transparent;color:#60a5fa;cursor:pointer;font-family:inherit">DM</button>
-      <button style="font-size:9px;padding:3px 7px;border-radius:4px;border:1px solid rgba(0,212,170,0.3);background:transparent;color:#00d4aa;cursor:pointer;font-family:inherit">Post</button>
-    </div>
-  </div>`).join('');
+let momentumChart = null;
+function updateMomentumChart(){
+  const ctx = document.getElementById('momentumChart');
+  if(!ctx) return;
+  if(momentumChart){ momentumChart.destroy(); momentumChart=null; }
+  const labels = ['0','1','2','3','4','5','6','7','8'];
+  const data = labels.map(n=>{
+    const x=parseInt(n);
+    return Math.round(22000*(1+x*0.18+x*x*0.04));
+  });
+  momentumChart = new Chart(ctx,{type:'line',data:{labels,datasets:[
+    {data,borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.08)',borderWidth:2.5,pointRadius:[0,0,0,0,0,0,0,0,0],fill:true,tension:0.5},
+    {data:[22000,...fwConnected.map((_,i)=>Math.round(22000*(1+(i+1)*0.18+(i+1)*(i+1)*0.04)))],
+      borderColor:'#fbbf24',backgroundColor:'transparent',borderWidth:1.5,borderDash:[4,3],pointRadius:4,pointBackgroundColor:'#fbbf24',fill:false,tension:0.4}
+  ]},options:{responsive:true,maintainAspectRatio:true,
+    plugins:{legend:{display:false}},
+    scales:{x:{grid:{display:false},ticks:{font:{size:9}},title:{display:true,text:'Pages connected',font:{size:9}}},
+      y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>(v/1000).toFixed(0)+'K',font:{size:9}}}}}});
 }
 
 function initCollabs(){
-  renderCards();
   D();
-  once('crosspost',()=>{
-    new Chart(document.getElementById('crossPostChart'),{type:'bar',data:{
+  initFlywheel();
+  once('collabperf',()=>{
+    new Chart(document.getElementById('collabPerfChart'),{type:'bar',data:{
       labels:['Fri Night Chaos','N.Banter HQ','Prison Watch','Pub Culture','True Crime'],
-      datasets:[
-        {label:'Current reach',data:[22,22,9,22,9],backgroundColor:'rgba(255,255,255,0.07)',borderRadius:4},
-        {label:'With collab',data:[37,40,17,31,21],backgroundColor:'rgba(0,212,170,0.75)',borderRadius:4}
-      ]},
+      datasets:[{label:'Current',data:[22,22,9,22,9],backgroundColor:'rgba(255,255,255,0.07)',borderRadius:4},{label:'With collab',data:[37,40,17,31,21],backgroundColor:'rgba(0,212,170,0.75)',borderRadius:4}]},
       options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},
-        scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'rgba(255,255,255,0.04)'},stacked:false,ticks:{callback:v=>v+'K',font:{size:9}}}}}});
-  });
-  once('collabscore',()=>{
-    new Chart(document.getElementById('collabScoreChart'),{type:'bar',data:{
-      labels:['Fri Night Chaos','N.Banter HQ','Prison Watch','Pub Culture','True Crime','Late Night'],
-      datasets:[{data:[94,88,81,76,74,68],
-        backgroundColor:['rgba(0,212,170,0.8)','rgba(0,212,170,0.7)','rgba(99,102,241,0.7)','rgba(251,191,36,0.6)','rgba(96,165,250,0.6)','rgba(52,211,153,0.6)'],borderRadius:5}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,
-        scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},max:100},y:{grid:{display:false},ticks:{font:{size:9}}}}}});
-  });
-  once('pastcollab',()=>{
-    new Chart(document.getElementById('pastCollabChart'),{type:'line',data:{
-      labels:['W1','W2','W3','W4','W5','W6','W7','W8'],
-      datasets:[{label:'Cross-post reach',data:[8,0,12,0,0,15,0,18],type:'bar',backgroundColor:'rgba(0,212,170,0.5)',borderRadius:4},{label:'Organic reach',data:[14,16,18,17,19,22,21,24],borderColor:'#6366f1',backgroundColor:'transparent',borderWidth:2,pointRadius:0,tension:0.4,type:'line'}]},
-      options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},
-        scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'K',font:{size:9}}}}}});
+        scales:{x:{grid:{display:false},ticks:{font:{size:8}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'K',font:{size:9}}}}}});
   });
   once('collabtimes',()=>{
     new Chart(document.getElementById('collabTimesChart'),{type:'bar',data:{
@@ -1183,7 +1340,27 @@ function initCollabs(){
       options:{responsive:true,maintainAspectRatio:true,
         scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}});
   });
+  updateMomentumChart();
 }
+
+window.showMsgModal=function(name){
+  const existing=document.getElementById('msgModal');if(existing)existing.remove();
+  const m=document.createElement('div');m.id='msgModal';
+  m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center';
+  m.innerHTML=`<div style="background:#0f1729;border:1px solid rgba(0,212,170,0.3);border-radius:16px;padding:24px;width:400px;max-width:90vw;box-shadow:0 24px 60px rgba(0,0,0,0.6)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div style="font-size:15px;font-weight:700">Draft message to ${name}</div>
+      <button onclick="document.getElementById('msgModal').remove()" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:20px;line-height:1">×</button>
+    </div>
+    <textarea style="width:100%;height:100px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:8px;padding:12px;color:var(--text-primary);font-family:inherit;font-size:13px;resize:none;outline:none;box-sizing:border-box" placeholder="Hey! I manage Drinking Memes and noticed we have a strong audience overlap. Would love to discuss a cross-posting arrangement..."></textarea>
+    <div style="display:flex;gap:10px;margin-top:12px">
+      <button onclick="document.getElementById('msgModal').remove()" style="flex:1;padding:9px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-family:inherit">Cancel</button>
+      <button onclick="document.getElementById('msgModal').remove()" style="flex:1;padding:9px;border-radius:8px;border:none;background:#00d4aa;color:#0c1221;font-weight:600;cursor:pointer;font-family:inherit">Send Message</button>
+    </div>
+  </div>`;
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>{if(e.target===m)m.remove();});
+};
 
 // ══════════════════════════════════════════
 // PAGE NETWORK GRAPH (Canvas 2D force-relaxed)
