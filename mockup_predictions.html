@@ -419,7 +419,19 @@ textarea.form-input{min-height:80px;resize:vertical}
 .btn-primary,.btn,.bb,.modal,.drawer{transition-duration:0.2s!important}
 @keyframes fadeUp{from{opacity:0;transform:translate3d(0,8px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @keyframes float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-12px,0)}}
+
+.chart-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.chart-card-title,.card-title{font-size:13px;font-weight:600}
+.chart-card-sub,.card-subtitle{font-size:10.5px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-top:2px}
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{text-align:left;padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:500}
+.data-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-secondary)}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);color:var(--text-primary)}
+.td-num{font-family:'JetBrains Mono',monospace;color:var(--accent)}
+.td-up{color:#34d399;font-family:'JetBrains Mono',monospace}
+.td-dn{color:#f87171;font-family:'JetBrains Mono',monospace}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -460,57 +472,196 @@ textarea.form-input{min-height:80px;resize:vertical}
   </div>
 </div>
 
-<div class="grid-2 animate delay-1" style="margin-top:20px">
+
+<!-- ROW 1: Virality Score predictor + Confidence breakdown + Best time gauge -->
+<div style="display:grid;grid-template-columns:1.2fr 1fr 0.8fr;gap:16px;margin-bottom:16px">
   <div class="card">
-    <div class="card-title">Draft Predictor</div>
-    <div class="card-subtitle">Paste your draft to get a virality score</div>
-    <textarea class="draft-area" placeholder="Paste your post text here... or describe what you plan to post. Art-E will analyse it and predict performance."></textarea>
-    <div style="display:flex;gap:8px;margin-top:12px">
-      <button class="btn btn-primary" onclick="this.textContent='Score: 0.89 — Viral!';this.style.background='var(--accent)'">Predict Score</button>
-      <button class="btn btn-secondary">Add Image</button>
+    <div class="card-title">Draft Post Predictor</div>
+    <div class="card-subtitle">Paste your draft — Art-E scores it before you post</div>
+    <textarea class="draft-area" id="draftText" placeholder="Type or paste your post here. Art-E will predict reach, engagement rate, virality score, and optimal timing." style="height:80px;margin-bottom:12px"></textarea>
+    <div style="display:flex;gap:8px;margin-bottom:16px">
+      <button class="btn btn-primary" onclick="runPredictor()">Predict Score</button>
+      <button class="btn btn-secondary">Clear</button>
+    </div>
+    <div id="predResult" style="display:none">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+        <div style="background:var(--bg-tertiary);border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:22px;font-weight:800;color:#00d4aa;font-family:'JetBrains Mono',monospace">0.89</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px">Virality Score</div>
+        </div>
+        <div style="background:var(--bg-tertiary);border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:22px;font-weight:800;color:#34d399;font-family:'JetBrains Mono',monospace">4.6%</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px">Predicted Eng Rate</div>
+        </div>
+        <div style="background:var(--bg-tertiary);border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:22px;font-weight:800;color:#a78bfa;font-family:'JetBrains Mono',monospace">18.4K</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px">Predicted Reach</div>
+        </div>
+        <div style="background:var(--bg-tertiary);border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:22px;font-weight:800;color:#fbbf24;font-family:'JetBrains Mono',monospace">Tue 6PM</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px">Best Post Time</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--text-muted);background:rgba(0,212,170,0.04);border:1px solid rgba(0,212,170,0.1);border-radius:8px;padding:10px;line-height:1.6">
+        <strong style="color:#00d4aa">Art-E says:</strong> High virality likely. Short caption + emoji matches your winning formula. Your 7 super sharers are active at this time. Cross-share to page B at 60 mins for +32% additional reach.
+      </div>
     </div>
   </div>
+
   <div class="card">
-    <div class="card-title">AI Recommendations</div>
-    <div class="card-subtitle">How to boost your predicted score</div>
-    <div class="rec-item"><span class="rec-icon">→</span><span>Post at <strong>6 PM Tuesday</strong> instead of 3 PM</span><span class="rec-impact">+45%</span></div>
-    <div class="rec-item"><span class="rec-icon">→</span><span>Add 2–3 emojis to headline</span><span class="rec-impact">+28%</span></div>
-    <div class="rec-item"><span class="rec-icon">→</span><span>Use short-form video format</span><span class="rec-impact">+156%</span></div>
-    <div class="rec-item"><span class="rec-icon">→</span><span>Include a call-to-action in first line</span><span class="rec-impact">+34%</span></div>
-    <div class="rec-item"><span class="rec-icon">→</span><span>Tag trending topic: #FitnessJourney</span><span class="rec-impact">+22%</span></div>
+    <div class="card-title">Score Confidence Breakdown</div>
+    <div class="card-subtitle">What drives the prediction</div>
+    <canvas id="confChart" height="180"></canvas>
+  </div>
+
+  <div class="card" style="text-align:center">
+    <div class="card-title">Optimal Post Window</div>
+    <div class="card-subtitle">This week's #1 slot</div>
+    <div style="padding:20px 0">
+      <div style="font-size:36px;font-weight:900;color:#00d4aa;font-family:'JetBrains Mono',monospace">Tue</div>
+      <div style="font-size:28px;font-weight:700;color:#e8ecf4;font-family:'JetBrains Mono',monospace">6:00 PM</div>
+      <div style="font-size:11px;color:#34d399;margin-top:6px;font-weight:600">+89% vs average</div>
+      <div style="font-size:10px;color:var(--text-muted);margin-top:4px">Based on 24mo audience data</div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:12px">
+      <div style="font-size:11px;color:var(--text-secondary);margin-bottom:6px">Runner-up slots</div>
+      <div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;line-height:1.8">
+        Thu 7:30 PM (+72%)<br>Sat 8:00 PM (+64%)<br>Wed 6:30 PM (+58%)
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="grid-2 animate delay-2" style="margin-top:20px">
+<!-- ROW 2: Virality probability over time + Sentiment score impact -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
   <div class="card">
-    <div class="card-title">Best Posting Times</div>
-    <div class="card-subtitle">Heatmap · Last 90 days</div>
-    <div style="display:flex;gap:4px;margin-bottom:6px;padding-left:40px">
-      <span style="flex:1;text-align:center;font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace">Mon</span>
-      <span style="flex:1;text-align:center;font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace">Tue</span>
-      <span style="flex:1;text-align:center;font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace">Wed</span>
-      <span style="flex:1;text-align:center;font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace">Thu</span>
-      <span style="flex:1;text-align:center;font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace">Fri</span>
-      <span style="flex:1;text-align:center;font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace">Sat</span>
-      <span style="flex:1;text-align:center;font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace">Sun</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:4px;margin-bottom:4px"><span style="width:36px;font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;text-align:right">9AM</span><div class="time-grid" style="flex:1"><div class="time-cell cool"></div><div class="time-cell warm"></div><div class="time-cell cool"></div><div class="time-cell warm"></div><div class="time-cell cool"></div><div class="time-cell cold"></div><div class="time-cell cold"></div></div></div>
-    <div style="display:flex;align-items:center;gap:4px;margin-bottom:4px"><span style="width:36px;font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;text-align:right">12PM</span><div class="time-grid" style="flex:1"><div class="time-cell warm"></div><div class="time-cell warm"></div><div class="time-cell warm"></div><div class="time-cell cool"></div><div class="time-cell warm"></div><div class="time-cell cool"></div><div class="time-cell cool"></div></div></div>
-    <div style="display:flex;align-items:center;gap:4px;margin-bottom:4px"><span style="width:36px;font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;text-align:right">3PM</span><div class="time-grid" style="flex:1"><div class="time-cell warm"></div><div class="time-cell warm"></div><div class="time-cell cool"></div><div class="time-cell warm"></div><div class="time-cell cool"></div><div class="time-cell warm"></div><div class="time-cell cool"></div></div></div>
-    <div style="display:flex;align-items:center;gap:4px;margin-bottom:4px"><span style="width:36px;font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;text-align:right">6PM</span><div class="time-grid" style="flex:1"><div class="time-cell warm"></div><div class="time-cell hot">★</div><div class="time-cell warm"></div><div class="time-cell hot">★</div><div class="time-cell warm"></div><div class="time-cell warm"></div><div class="time-cell cool"></div></div></div>
-    <div style="display:flex;align-items:center;gap:4px;margin-bottom:4px"><span style="width:36px;font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;text-align:right">9PM</span><div class="time-grid" style="flex:1"><div class="time-cell cool"></div><div class="time-cell warm"></div><div class="time-cell cool"></div><div class="time-cell cool"></div><div class="time-cell warm"></div><div class="time-cell warm"></div><div class="time-cell warm"></div></div></div>
+    <div class="card-title">Virality Probability by Day &amp; Time</div>
+    <div class="card-subtitle">% chance of exceeding viral threshold · Based on 90 days history</div>
+    <canvas id="probHeatmap" height="160"></canvas>
   </div>
   <div class="card">
-    <div class="card-title">Format Performance</div>
-    <div class="card-subtitle">Avg engagement by content type</div>
-    <div class="hist-bar"><span class="hist-bar-label">Video</span><div class="hist-bar-track"><div class="hist-bar-fill" style="width:92%;background:var(--accent)"></div></div><span style="font-size:11px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-weight:600;width:40px;text-align:right">4.8%</span></div>
-    <div class="hist-bar"><span class="hist-bar-label">Reel</span><div class="hist-bar-track"><div class="hist-bar-fill" style="width:78%;background:var(--accent)"></div></div><span style="font-size:11px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-weight:600;width:40px;text-align:right">4.1%</span></div>
-    <div class="hist-bar"><span class="hist-bar-label">Carousel</span><div class="hist-bar-track"><div class="hist-bar-fill" style="width:62%;background:var(--accent-secondary)"></div></div><span style="font-size:11px;color:#a5b4fc;font-family:'JetBrains Mono',monospace;font-weight:600;width:40px;text-align:right">3.2%</span></div>
-    <div class="hist-bar"><span class="hist-bar-label">Photo</span><div class="hist-bar-track"><div class="hist-bar-fill" style="width:48%;background:var(--accent-secondary)"></div></div><span style="font-size:11px;color:#a5b4fc;font-family:'JetBrains Mono',monospace;font-weight:600;width:40px;text-align:right">2.5%</span></div>
-    <div class="hist-bar"><span class="hist-bar-label">Text</span><div class="hist-bar-track"><div class="hist-bar-fill" style="width:25%;background:var(--warning)"></div></div><span style="font-size:11px;color:var(--warning);font-family:'JetBrains Mono',monospace;font-weight:600;width:40px;text-align:right">1.3%</span></div>
-    <div class="hist-bar"><span class="hist-bar-label">Link</span><div class="hist-bar-track"><div class="hist-bar-fill" style="width:15%;background:var(--danger)"></div></div><span style="font-size:11px;color:var(--danger);font-family:'JetBrains Mono',monospace;font-weight:600;width:40px;text-align:right">0.8%</span></div>
+    <div class="card-title">Sentiment Score → Engagement Rate</div>
+    <div class="card-subtitle">Scatter plot of 847 posts — correlation analysis</div>
+    <canvas id="sentScatter" height="160"></canvas>
   </div>
 </div>
+
+<!-- ROW 3: Format score model + Recommendations table -->
+<div style="display:grid;grid-template-columns:1fr 1.4fr;gap:16px;margin-bottom:16px">
+  <div class="card">
+    <div class="card-title">Content Format Score Model</div>
+    <div class="card-subtitle">Predicted engagement by format type</div>
+    <canvas id="fmtRadar" height="200"></canvas>
+  </div>
+  <div class="card">
+    <div class="card-title">AI Recommendations Queue</div>
+    <div class="card-subtitle">Ranked by predicted impact · Click to apply</div>
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Recommendation</th><th>Type</th><th>Impact</th><th>Confidence</th></tr></thead>
+      <tbody>
+        <tr><td class="td-num">01</td><td>Post at 6PM Tuesday (currently posting 3PM)</td><td><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(0,212,170,0.1);color:#00d4aa">Timing</span></td><td class="td-up">+45%</td><td class="td-num">94%</td></tr>
+        <tr><td class="td-num">02</td><td>Switch from photo to short-form video</td><td><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(99,102,241,0.1);color:#a78bfa">Format</span></td><td class="td-up">+156%</td><td class="td-num">91%</td></tr>
+        <tr><td class="td-num">03</td><td>Add 2-3 emojis to first line of caption</td><td><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(251,191,36,0.1);color:#fbbf24">Copy</span></td><td class="td-up">+28%</td><td class="td-num">88%</td></tr>
+        <tr><td class="td-num">04</td><td>Cross-share to Kelpie Daily at +60min</td><td><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(96,165,250,0.1);color:#60a5fa">Strategy</span></td><td class="td-up">+32%</td><td class="td-num">85%</td></tr>
+        <tr><td class="td-num">05</td><td>Caption length 15-25 words performs 2.1x better</td><td><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(251,191,36,0.1);color:#fbbf24">Copy</span></td><td class="td-up">+34%</td><td class="td-num">82%</td></tr>
+        <tr><td class="td-num">06</td><td>Post product content (your #1 topic)</td><td><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(99,102,241,0.1);color:#a78bfa">Content</span></td><td class="td-up">+67%</td><td class="td-num">79%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ROW 4: 30-day predicted reach line -->
+<div class="card" style="margin-bottom:16px">
+  <div class="chart-card-header" style="margin-bottom:12px">
+    <div>
+      <div class="card-title">30-Day Predicted Reach Forecast</div>
+      <div class="card-subtitle">Model confidence bands shown · Assumes current posting cadence</div>
+    </div>
+    <span style="font-size:11px;padding:3px 8px;border-radius:5px;background:rgba(99,102,241,0.1);color:#a78bfa;border:1px solid rgba(99,102,241,0.2);font-family:'JetBrains Mono',monospace">ML Forecast v2.1</span>
+  </div>
+  <canvas id="forecastChart" height="80"></canvas>
+</div>
+
+<script>
+Chart.defaults.color='#7b8ba8';Chart.defaults.borderColor='rgba(255,255,255,0.05)';
+Chart.defaults.font.family="'Outfit',sans-serif";Chart.defaults.plugins.legend.display=false;
+Chart.defaults.plugins.tooltip.backgroundColor='#0f1729';Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.3)';
+Chart.defaults.plugins.tooltip.borderWidth=1;Chart.defaults.plugins.tooltip.padding=10;
+
+function runPredictor(){
+  const t=document.getElementById('draftText').value;
+  if(!t.trim())return;
+  document.getElementById('predResult').style.display='block';
+}
+
+// Confidence breakdown radar
+const confCtx=document.getElementById('confChart');
+if(confCtx) new Chart(confCtx,{type:'bar',data:{
+  labels:['Timing','Format','Caption Length','Sentiment','Topic','Emoji','Historical Pattern'],
+  datasets:[{data:[92,88,76,94,82,68,89],
+    backgroundColor:['rgba(0,212,170,0.7)','rgba(0,212,170,0.65)','rgba(99,102,241,0.6)','rgba(0,212,170,0.8)','rgba(99,102,241,0.65)','rgba(251,191,36,0.6)','rgba(0,212,170,0.75)'],
+    borderRadius:5,borderSkipped:false}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,
+    scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},max:100},
+      y:{grid:{display:false},ticks:{font:{size:9}}}}}});
+
+// Virality probability scatter as bar (day x hour matrix represented as grouped bar)
+const probCtx=document.getElementById('probHeatmap');
+if(probCtx) new Chart(probCtx,{type:'bar',data:{
+  labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+  datasets:[
+    {label:'9AM',data:[18,22,16,20,14,8,6],backgroundColor:'rgba(0,212,170,0.3)',borderRadius:3},
+    {label:'12PM',data:[28,34,26,30,22,12,10],backgroundColor:'rgba(0,212,170,0.45)',borderRadius:3},
+    {label:'3PM',data:[32,38,30,36,28,16,14],backgroundColor:'rgba(0,212,170,0.55)',borderRadius:3},
+    {label:'6PM',data:[48,72,52,68,44,38,30],backgroundColor:'rgba(0,212,170,0.85)',borderRadius:3},
+    {label:'9PM',data:[22,36,24,32,28,42,36],backgroundColor:'rgba(0,212,170,0.4)',borderRadius:3}
+  ]},
+  options:{responsive:true,maintainAspectRatio:true,
+    plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},
+    scales:{x:{grid:{display:false},ticks:{font:{size:10}}},
+      y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}});
+
+// Sentiment scatter
+const scatCtx=document.getElementById('sentScatter');
+if(scatCtx){
+  const pts=[];
+  for(let i=0;i<80;i++){const s=0.3+Math.random()*0.7;pts.push({x:parseFloat(s.toFixed(2)),y:parseFloat((s*4.8+Math.random()*1.5-0.3).toFixed(2))});}
+  new Chart(scatCtx,{type:'scatter',data:{datasets:[{label:'Posts',data:pts,
+    backgroundColor:'rgba(0,212,170,0.4)',borderColor:'rgba(0,212,170,0.6)',pointRadius:4,pointHoverRadius:6}]},
+    options:{responsive:true,maintainAspectRatio:true,
+      scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},title:{display:true,text:'Sentiment Score',font:{size:10}},min:0.2,max:1.0},
+        y:{grid:{color:'rgba(255,255,255,0.04)'},title:{display:true,text:'Engagement Rate %',font:{size:10}},min:0}}}});}
+
+// Format radar
+const fmtCtx=document.getElementById('fmtRadar');
+if(fmtCtx) new Chart(fmtCtx,{type:'radar',data:{
+  labels:['Reach','Engagement','Shares','Comments','Saves','Virality'],
+  datasets:[
+    {label:'Video',data:[92,88,76,62,48,89],backgroundColor:'rgba(0,212,170,0.1)',borderColor:'rgba(0,212,170,0.7)',borderWidth:2,pointRadius:3},
+    {label:'Photo',data:[58,52,38,44,56,34],backgroundColor:'rgba(99,102,241,0.08)',borderColor:'rgba(99,102,241,0.5)',borderWidth:1.5,pointRadius:2,borderDash:[4,3]},
+    {label:'Carousel',data:[64,62,44,72,82,48],backgroundColor:'rgba(251,191,36,0.06)',borderColor:'rgba(251,191,36,0.5)',borderWidth:1.5,pointRadius:2,borderDash:[2,4]}
+  ]},
+  options:{responsive:false,plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:8,font:{size:9},padding:8}}},
+    scales:{r:{grid:{color:'rgba(255,255,255,0.06)'},ticks:{display:false},pointLabels:{font:{size:9}},min:0,max:100}}}});
+
+// Forecast chart
+const fcCtx=document.getElementById('forecastChart');
+if(fcCtx){
+  const days=Array.from({length:60},(_,i)=>`Day ${i+1}`);
+  const actual=Array.from({length:30},()=>15000+Math.random()*8000);
+  const forecast=Array.from({length:30},(_,i)=>actual[29]+i*300+Math.random()*2000);
+  const upper=forecast.map(v=>v*1.18),lower=forecast.map(v=>v*0.84);
+  new Chart(fcCtx,{type:'line',data:{labels:days,datasets:[
+    {label:'Actual Reach',data:[...actual,...Array(30).fill(null)],borderColor:'#00d4aa',borderWidth:2,pointRadius:0,fill:false},
+    {label:'Forecast',data:[...Array(29).fill(null),actual[29],...forecast],borderColor:'#6366f1',borderDash:[6,3],borderWidth:2,pointRadius:0,fill:false},
+    {label:'Upper band',data:[...Array(29).fill(null),actual[29],...upper],borderColor:'rgba(99,102,241,0.2)',borderWidth:0,fill:'+1',backgroundColor:'rgba(99,102,241,0.06)',pointRadius:0},
+    {label:'Lower band',data:[...Array(29).fill(null),actual[29],...lower],borderColor:'rgba(99,102,241,0.2)',borderWidth:0,fill:false,pointRadius:0}
+  ]},options:{responsive:true,maintainAspectRatio:true,
+    plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:10},padding:10}}},
+    scales:{x:{grid:{display:false},ticks:{maxTicksLimit:10,font:{size:9}}},
+      y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>(v/1000).toFixed(0)+'K',font:{size:9}}}}}}); }
+</script>
+
 </div></div><script>try{const u=JSON.parse(localStorage.getItem('artemis_app_session'));if(u&&document.getElementById('sidebarUser'))document.getElementById('sidebarUser').textContent=u.email||'';}catch{}</script>
 <script>
 

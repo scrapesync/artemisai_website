@@ -410,7 +410,8 @@ textarea.form-input{min-height:80px;resize:vertical}
 .btn-primary,.btn,.bb,.modal,.drawer{transition-duration:0.2s!important}
 @keyframes fadeUp{from{opacity:0;transform:translate3d(0,8px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @keyframes float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-12px,0)}}
-</style>
+.data-table{width:100%;border-collapse:collapse;font-size:12px}.data-table th{text-align:left;padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:500}.data-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-secondary)}.data-table tr:hover td{background:rgba(255,255,255,0.02)}.td-num{font-family:'JetBrains Mono',monospace;color:var(--accent)}.td-up{color:#34d399;font-family:'JetBrains Mono',monospace}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -444,221 +445,184 @@ textarea.form-input{min-height:80px;resize:vertical}
   <div class="seg-card"><div class="seg-emoji">🆕</div><div class="seg-name">New Arrivals</div><div class="seg-pct">17%</div><div class="seg-count">4,165 followers</div><span class="tag tag-accent" style="margin-top:8px">Growing</span></div>
 </div>
 
-<div class="grid-2 animate delay-1" style="margin-top:24px">
+
+<!-- ROW 1: Audience growth line + Age distribution bars + Gender donut -->
+<div style="display:grid;grid-template-columns:2fr 1fr 0.8fr;gap:16px;margin-bottom:16px">
+  <div class="card">
+    <div class="card-title">Audience Growth — 6 Months</div>
+    <div class="card-subtitle">Total followers across all pages · Daily</div>
+    <canvas id="growthChart" height="120"></canvas>
+  </div>
   <div class="card">
     <div class="card-title">Age Distribution</div>
-    <div class="card-subtitle">All followers</div>
-    <div class="demo-bar"><span class="demo-label">18–24</span><div class="demo-track"><div class="demo-fill" style="width:22%;background:var(--accent-secondary)"></div></div><span class="demo-pct">22%</span></div>
-    <div class="demo-bar"><span class="demo-label">25–34</span><div class="demo-track"><div class="demo-fill" style="width:68%;background:var(--accent)"></div></div><span class="demo-pct">68%</span></div>
-    <div class="demo-bar"><span class="demo-label">35–44</span><div class="demo-track"><div class="demo-fill" style="width:8%;background:var(--warning)"></div></div><span class="demo-pct">8%</span></div>
-    <div class="demo-bar"><span class="demo-label">45+</span><div class="demo-track"><div class="demo-fill" style="width:2%;background:rgba(255,255,255,0.1)"></div></div><span class="demo-pct">2%</span></div>
+    <div class="card-subtitle">% of total audience</div>
+    <canvas id="ageChart" height="150"></canvas>
   </div>
-  <div class="card">
-    <div class="card-title">Top Locations</div>
-    <div class="card-subtitle">By country</div>
-    <div class="demo-bar"><span class="demo-label">🇬🇧 UK</span><div class="demo-track"><div class="demo-fill" style="width:45%;background:var(--accent)"></div></div><span class="demo-pct">45%</span></div>
-    <div class="demo-bar"><span class="demo-label">🇺🇸 USA</span><div class="demo-track"><div class="demo-fill" style="width:22%;background:var(--accent)"></div></div><span class="demo-pct">22%</span></div>
-    <div class="demo-bar"><span class="demo-label">🇨🇦 Canada</span><div class="demo-track"><div class="demo-fill" style="width:12%;background:var(--accent-secondary)"></div></div><span class="demo-pct">12%</span></div>
-    <div class="demo-bar"><span class="demo-label">🇦🇺 Australia</span><div class="demo-track"><div class="demo-fill" style="width:8%;background:var(--accent-secondary)"></div></div><span class="demo-pct">8%</span></div>
-    <div class="demo-bar"><span class="demo-label">🌍 Other</span><div class="demo-track"><div class="demo-fill" style="width:13%;background:rgba(255,255,255,0.1)"></div></div><span class="demo-pct">13%</span></div>
-  </div>
-</div>
-
-<div class="card animate delay-2" style="margin-top:20px">
-  <div class="card-title">Audience Interests</div>
-  <div class="card-subtitle">Top topics your audience engages with</div>
-  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
-    <span class="tag tag-accent">Fitness</span><span class="tag tag-accent">Health</span><span class="tag tag-green">Nutrition</span><span class="tag tag-green">Weight Loss</span><span class="tag tag-blue">Workout Routines</span><span class="tag tag-blue">Supplements</span><span class="tag tag-yellow">Yoga</span><span class="tag tag-yellow">Mental Health</span><span class="tag tag-accent">Running</span><span class="tag tag-blue">Meal Prep</span><span class="tag tag-green">Transformation</span><span class="tag tag-yellow">Meditation</span>
-  </div>
-</div>
-</div><!-- end segments -->
-
-<!-- TAB: DEMOGRAPHICS -->
-<div class="tab-panel" data-tab="demographics">
-<div class="section-label" style="animation:fadeUp .4s ease">DETAILED DEMOGRAPHICS</div>
-<div class="grid-2 animate">
-  <div class="card">
+  <div class="card" style="text-align:center">
     <div class="card-title">Gender Split</div>
-    <div class="card-subtitle">All followers</div>
-    <div style="display:flex;gap:12px;margin-top:16px">
-      <div style="flex:1;text-align:center;padding:20px;background:rgba(0,212,170,0.04);border:1px solid var(--border-accent);border-radius:12px"><div style="font-size:28px;margin-bottom:4px">♀</div><div style="font-size:24px;font-weight:800;color:var(--accent)">58%</div><div style="font-size:11px;color:var(--text-muted)">Female</div></div>
-      <div style="flex:1;text-align:center;padding:20px;background:rgba(99,102,241,0.04);border:1px solid rgba(99,102,241,0.15);border-radius:12px"><div style="font-size:28px;margin-bottom:4px">♂</div><div style="font-size:24px;font-weight:800;color:#a5b4fc">39%</div><div style="font-size:11px;color:var(--text-muted)">Male</div></div>
-      <div style="flex:1;text-align:center;padding:20px;background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.15);border-radius:12px"><div style="font-size:28px;margin-bottom:4px">⚧</div><div style="font-size:24px;font-weight:800;color:var(--warning)">3%</div><div style="font-size:11px;color:var(--text-muted)">Other</div></div>
+    <div class="card-subtitle">All pages combined</div>
+    <div style="height:140px;display:flex;align-items:center;justify-content:center">
+      <canvas id="genderDonut" height="130" width="130"></canvas>
     </div>
-  </div>
-  <div class="card">
-    <div class="card-title">Active Hours</div>
-    <div class="card-subtitle">When your audience is online</div>
-    <div style="display:flex;align-items:flex-end;gap:3px;height:120px;margin-top:16px;padding-bottom:20px;position:relative">
-      <div style="flex:1;background:rgba(0,212,170,0.1);border-radius:4px 4px 0 0;height:15%"></div>
-      <div style="flex:1;background:rgba(0,212,170,0.1);border-radius:4px 4px 0 0;height:10%"></div>
-      <div style="flex:1;background:rgba(0,212,170,0.15);border-radius:4px 4px 0 0;height:20%"></div>
-      <div style="flex:1;background:rgba(0,212,170,0.2);border-radius:4px 4px 0 0;height:35%"></div>
-      <div style="flex:1;background:rgba(0,212,170,0.3);border-radius:4px 4px 0 0;height:55%"></div>
-      <div style="flex:1;background:rgba(0,212,170,0.4);border-radius:4px 4px 0 0;height:70%"></div>
-      <div style="flex:1;background:rgba(0,212,170,0.3);border-radius:4px 4px 0 0;height:60%"></div>
-      <div style="flex:1;background:rgba(0,212,170,0.25);border-radius:4px 4px 0 0;height:45%"></div>
-      <div style="flex:1;background:rgba(0,212,170,0.3);border-radius:4px 4px 0 0;height:55%"></div>
-      <div style="flex:1;background:rgba(0,212,170,0.5);border-radius:4px 4px 0 0;height:78%"></div>
-      <div style="flex:1;background:var(--accent);border-radius:4px 4px 0 0;height:95%"></div>
-      <div style="flex:1;background:rgba(0,212,170,0.6);border-radius:4px 4px 0 0;height:85%"></div>
-      <div style="flex:1;background:rgba(0,212,170,0.3);border-radius:4px 4px 0 0;height:50%"></div>
-      <div style="flex:1;background:rgba(0,212,170,0.15);border-radius:4px 4px 0 0;height:25%"></div>
+    <div style="display:flex;justify-content:center;gap:14px;margin-top:8px;font-size:11px;color:var(--text-muted)">
+      <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:50%;background:#00d4aa;display:inline-block"></span>Female 54%</span>
+      <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:50%;background:#6366f1;display:inline-block"></span>Male 44%</span>
     </div>
-    <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace"><span>6AM</span><span>9AM</span><span>12PM</span><span>3PM</span><span>6PM</span><span>9PM</span><span>12AM</span></div>
-    <div style="margin-top:10px;font-size:12px;color:var(--accent);font-weight:500">Peak activity: 6–8 PM (78% of audience online)</div>
   </div>
 </div>
-<div class="grid-2 animate delay-1" style="margin-top:16px">
+
+<!-- ROW 2: Audience segments + Super sharers table -->
+<div style="display:grid;grid-template-columns:1fr 1.2fr;gap:16px;margin-bottom:16px">
   <div class="card">
-    <div class="card-title">Top Cities</div>
-    <div class="card-subtitle">By follower concentration</div>
-    <div class="demo-bar"><span class="demo-label">London</span><div class="demo-track"><div class="demo-fill" style="width:32%;background:var(--accent)"></div></div><span class="demo-pct">32%</span></div>
-    <div class="demo-bar"><span class="demo-label">Manchester</span><div class="demo-track"><div class="demo-fill" style="width:14%;background:var(--accent)"></div></div><span class="demo-pct">14%</span></div>
-    <div class="demo-bar"><span class="demo-label">New York</span><div class="demo-track"><div class="demo-fill" style="width:11%;background:var(--accent-secondary)"></div></div><span class="demo-pct">11%</span></div>
-    <div class="demo-bar"><span class="demo-label">Birmingham</span><div class="demo-track"><div class="demo-fill" style="width:8%;background:var(--accent-secondary)"></div></div><span class="demo-pct">8%</span></div>
-    <div class="demo-bar"><span class="demo-label">Toronto</span><div class="demo-track"><div class="demo-fill" style="width:6%;background:var(--warning)"></div></div><span class="demo-pct">6%</span></div>
+    <div class="card-title">Audience Segments</div>
+    <div class="card-subtitle">AI-discovered clusters · % of total followers</div>
+    <canvas id="segChart" height="180"></canvas>
+  </div>
+  <div class="card">
+    <div class="card-title">Super Sharer Profiles</div>
+    <div class="card-subtitle">Top 12 amplifiers · Click to see full profile</div>
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Segment</th><th>Active Since</th><th>Shares</th><th>Reach Unlocked</th><th>Clusters</th></tr></thead>
+      <tbody>
+        <tr><td class="td-num">01</td><td>@dave_memes</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px">8 months</td><td class="td-up">142</td><td class="td-num">48.2K</td><td style="font-size:10px;color:var(--text-muted)">Late-night · Dark humour</td></tr>
+        <tr><td class="td-num">02</td><td>@kettlebell_sam</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px">14 months</td><td class="td-up">118</td><td class="td-num">39.7K</td><td style="font-size:10px;color:var(--text-muted)">Fitness · Manchester</td></tr>
+        <tr><td class="td-num">03</td><td>@northernheart</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px">22 months</td><td class="td-up">97</td><td class="td-num">34.1K</td><td style="font-size:10px;color:var(--text-muted)">Community · Yorkshire</td></tr>
+        <tr><td class="td-num">04</td><td>@pint_of_banter</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px">5 months</td><td class="td-up">84</td><td class="td-num">28.8K</td><td style="font-size:10px;color:var(--text-muted)">Pub culture · Humour</td></tr>
+        <tr><td class="td-num">05</td><td>@truecrimejess</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px">11 months</td><td class="td-up">76</td><td class="td-num">25.4K</td><td style="font-size:10px;color:var(--text-muted)">Crime · News</td></tr>
+        <tr><td class="td-num">06</td><td>@footballmad84</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px">18 months</td><td class="td-up">68</td><td class="td-num">22.1K</td><td style="font-size:10px;color:var(--text-muted)">Sport · Weekend</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ROW 3: Active hours heatmap + Device breakdown + Location -->
+<div style="display:grid;grid-template-columns:1.5fr 0.8fr 1fr;gap:16px;margin-bottom:16px">
+  <div class="card">
+    <div class="card-title">Audience Active Hours</div>
+    <div class="card-subtitle">% of followers online by hour · All timezones normalised to UK</div>
+    <canvas id="activeHrsChart" height="130"></canvas>
   </div>
   <div class="card">
     <div class="card-title">Device Usage</div>
-    <div class="card-subtitle">How your audience accesses content</div>
-    <div style="display:flex;gap:12px;margin-top:16px">
-      <div style="flex:1;text-align:center;padding:16px;background:rgba(0,212,170,0.04);border:1px solid var(--border-accent);border-radius:12px"><div style="font-size:24px;margin-bottom:4px">📱</div><div style="font-size:20px;font-weight:800;color:var(--accent)">72%</div><div style="font-size:11px;color:var(--text-muted)">Mobile</div></div>
-      <div style="flex:1;text-align:center;padding:16px;background:rgba(99,102,241,0.04);border:1px solid rgba(99,102,241,0.15);border-radius:12px"><div style="font-size:24px;margin-bottom:4px">💻</div><div style="font-size:20px;font-weight:800;color:#a5b4fc">24%</div><div style="font-size:11px;color:var(--text-muted)">Desktop</div></div>
-      <div style="flex:1;text-align:center;padding:16px;background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.15);border-radius:12px"><div style="font-size:24px;margin-bottom:4px">📟</div><div style="font-size:20px;font-weight:800;color:var(--warning)">4%</div><div style="font-size:11px;color:var(--text-muted)">Tablet</div></div>
+    <div class="card-subtitle">Content consumption</div>
+    <canvas id="deviceDonut" height="140"></canvas>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:10px;font-size:10px;color:var(--text-muted)">
+      <span>📱 Mobile 74%</span><span>💻 Desktop 18%</span>
+      <span>📟 Tablet 6%</span><span>📺 Other 2%</span>
     </div>
   </div>
-</div>
-</div><!-- end demographics -->
-
-<!-- TAB: AFFINITY -->
-<div class="tab-panel" data-tab="affinity">
-<div class="section-label" style="animation:fadeUp .4s ease">AUDIENCE AFFINITY SCORES</div>
-<p style="font-size:12.5px;color:var(--text-secondary);margin-bottom:20px">How closely your audience overlaps with other brands and interests. Powered by the PLY (People Like You) matching engine.</p>
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px" class="animate">
-  <div class="affinity-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:14px;font-weight:600">🏋️ GymShark</div><div class="affinity-score">89%</div></div><div class="affinity-bar"><div class="affinity-fill" style="width:89%"></div></div><div style="font-size:11px;color:var(--text-muted);margin-top:8px">34% audience overlap · Fitness category</div></div>
-  <div class="affinity-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:14px;font-weight:600">🥤 Huel</div><div class="affinity-score">82%</div></div><div class="affinity-bar"><div class="affinity-fill" style="width:82%"></div></div><div style="font-size:11px;color:var(--text-muted);margin-top:8px">28% audience overlap · Nutrition category</div></div>
-  <div class="affinity-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:14px;font-weight:600">🧘 Lululemon</div><div class="affinity-score">76%</div></div><div class="affinity-bar"><div class="affinity-fill" style="width:76%"></div></div><div style="font-size:11px;color:var(--text-muted);margin-top:8px">22% audience overlap · Wellness category</div></div>
-  <div class="affinity-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:14px;font-weight:600">📊 MyFitnessPal</div><div class="affinity-score">71%</div></div><div class="affinity-bar"><div class="affinity-fill" style="width:71%"></div></div><div style="font-size:11px;color:var(--text-muted);margin-top:8px">19% audience overlap · Health Tech category</div></div>
-  <div class="affinity-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:14px;font-weight:600">🏃 Nike Running</div><div class="affinity-score">68%</div></div><div class="affinity-bar"><div class="affinity-fill" style="width:68%"></div></div><div style="font-size:11px;color:var(--text-muted);margin-top:8px">15% audience overlap · Sports category</div></div>
-  <div class="affinity-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:14px;font-weight:600">🥗 Nourish</div><div class="affinity-score">64%</div></div><div class="affinity-bar"><div class="affinity-fill" style="width:64%"></div></div><div style="font-size:11px;color:var(--text-muted);margin-top:8px">12% audience overlap · Nutrition category</div></div>
-</div>
-<div class="card animate delay-1" style="margin-top:20px">
-  <div class="card-title">Affinity Topics</div>
-  <div class="card-subtitle">What topics resonate across your audience segments</div>
-  <div style="margin-top:12px">
-    <div class="demo-bar"><span class="demo-label" style="width:120px">Weight Loss</span><div class="demo-track"><div class="demo-fill" style="width:88%;background:var(--accent)"></div></div><span class="demo-pct">88%</span></div>
-    <div class="demo-bar"><span class="demo-label" style="width:120px">Healthy Recipes</span><div class="demo-track"><div class="demo-fill" style="width:76%;background:var(--accent)"></div></div><span class="demo-pct">76%</span></div>
-    <div class="demo-bar"><span class="demo-label" style="width:120px">Home Workouts</span><div class="demo-track"><div class="demo-fill" style="width:72%;background:var(--accent-secondary)"></div></div><span class="demo-pct">72%</span></div>
-    <div class="demo-bar"><span class="demo-label" style="width:120px">Mental Health</span><div class="demo-track"><div class="demo-fill" style="width:65%;background:var(--accent-secondary)"></div></div><span class="demo-pct">65%</span></div>
-    <div class="demo-bar"><span class="demo-label" style="width:120px">Supplements</span><div class="demo-track"><div class="demo-fill" style="width:54%;background:var(--warning)"></div></div><span class="demo-pct">54%</span></div>
+  <div class="card">
+    <div class="card-title">Top Locations</div>
+    <div class="card-subtitle">City-level breakdown</div>
+    <div id="locationBars" style="margin-top:4px"></div>
   </div>
 </div>
-</div><!-- end affinity -->
 
-</div></div>
-<script>
-// Audience tab switching
-document.querySelectorAll('.topbar-tab').forEach(tab=>{
-  tab.addEventListener('click',function(){
-    document.querySelectorAll('.topbar-tab').forEach(t=>t.classList.remove('active'));
-    this.classList.add('active');
-    const name=this.textContent.trim().toLowerCase();
-    document.querySelectorAll('.tab-panel').forEach(p=>{
-      p.classList.remove('active');
-      p.style.animation='none';
-    });
-    const target=document.querySelector('.tab-panel[data-tab="'+name+'"]');
-    if(target){
-      target.offsetHeight;
-      target.style.animation='';
-      target.classList.add('active');
-      document.querySelector('.content').scrollTop=0;
-    }
-  });
-});
-</script>
-<script>try{const u=JSON.parse(localStorage.getItem('artemis_app_session'));if(u&&document.getElementById('sidebarUser'))document.getElementById('sidebarUser').textContent=u.email||'';}catch{}</script>
-<script>
-
-(function(){
-  var SK='artemis_session';
-  function getS(){try{return JSON.parse(localStorage.getItem(SK)||localStorage.getItem('artemis_app_session')||'null');}catch{return null;}}
-  var s=getS();
-  if(!s){window.location.href='admin_login.html';return;}
-  // Show user name in sidebar
-  var el=document.getElementById('sidebarUser');
-  if(el)el.textContent=s.name||s.full_name||s.email||s.username||'';
-  // Wire sign out
-  var btns=document.querySelectorAll('.btn-signout');
-  btns.forEach(function(b){
-    b.onclick=function(){_showSignoutModal();};
-  });
-})();
-</script>
-<script>
-
-var _signoutFn = null;
-function _showSignoutModal(fn){
-  _signoutFn = fn || function(){
-    localStorage.removeItem('tmp');
-    localStorage.removeItem('artemis_session');
-    localStorage.removeItem('artemis_app_session');
-    localStorage.removeItem('artemis_sprint_session');
-    window.location.href='index.html';
-  };
-  document.getElementById('signout-modal').classList.add('open');
-  document.addEventListener('keydown', _escSignout);
-}
-function _closeSignoutModal(){
-  document.getElementById('signout-modal').classList.remove('open');
-  document.removeEventListener('keydown', _escSignout);
-}
-function _doSignout(){
-  _closeSignoutModal();
-  if(_signoutFn) _signoutFn();
-}
-function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
-</script>
+<!-- ROW 4: Affinity topics + Follower churn -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+  <div class="card">
+    <div class="card-title">Audience Affinity Topics</div>
+    <div class="card-subtitle">What your followers engage with beyond your content</div>
+    <canvas id="affinityChart" height="150"></canvas>
+  </div>
+  <div class="card">
+    <div class="card-title">Follower Acquisition vs Churn</div>
+    <div class="card-subtitle">Net growth breakdown — last 12 weeks</div>
+    <canvas id="churnChart" height="150"></canvas>
+  </div>
+</div>
 
 <script>
-// Add mobile tabs below topbar based on current page
-(function(){
-  function addMobileTabs(){
-    const tabs = {
-      'mockup_dashboard.html': ['KPIs','Trends','Virality','Sentiment'],
-      'mockup_audience.html':  ['Segments','Demographics','Affinity'],
-      'mockup_settings.html':  ['Profile','Notifications','API Keys'],
-      'mockup_alerts.html':    ['All','Crisis','Performance','Trends'],
-    };
-    const page = location.pathname.split('/').pop();
-    const pageTabs = tabs[page];
-    if(!pageTabs) return;
-    const topbar = document.querySelector('.topbar');
-    if(!topbar) return;
-    const row = document.createElement('div');
-    row.className = 'mobile-tabs';
-    pageTabs.forEach((t,i) => {
-      const btn = document.createElement('button');
-      btn.textContent = t;
-      btn.style.cssText = 'flex-shrink:0;padding:6px 14px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.5);font-family:"JetBrains Mono",monospace;font-size:10px;cursor:pointer;white-space:nowrap;transition:all .2s';
-      if(i===0){btn.style.borderColor='var(--accent,#00d4aa)';btn.style.color='var(--accent,#00d4aa)';btn.style.background='rgba(0,212,170,.08)';}
-      btn.onclick = function(){
-        row.querySelectorAll('button').forEach(b=>{b.style.borderColor='rgba(255,255,255,.1)';b.style.color='rgba(255,255,255,.5)';b.style.background='transparent';});
-        this.style.borderColor='var(--accent,#00d4aa)';this.style.color='var(--accent,#00d4aa)';this.style.background='rgba(0,212,170,.08)';
-        // Try to click the desktop tab
-        const desktopTabs = document.querySelectorAll('.topbar-tab');
-        if(desktopTabs[i]) desktopTabs[i].click();
-      };
-      row.appendChild(btn);
-    });
-    topbar.insertAdjacentElement('afterend', row);
-  }
-  if(window.innerWidth<=768) addMobileTabs();
-  window.addEventListener('resize', function(){
-    if(window.innerWidth<=768 && !document.querySelector('.mobile-tabs')) addMobileTabs();
-  });
-})();
+Chart.defaults.color='#7b8ba8';Chart.defaults.borderColor='rgba(255,255,255,0.05)';
+Chart.defaults.font.family="'Outfit',sans-serif";Chart.defaults.plugins.legend.display=false;
+Chart.defaults.plugins.tooltip.backgroundColor='#0f1729';Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.3)';
+Chart.defaults.plugins.tooltip.borderWidth=1;
+
+// Audience growth
+const gCtx=document.getElementById('growthChart');
+if(gCtx){
+  const wks=Array.from({length:26},(_,i)=>`W${i+1}`);
+  const follows=Array.from({length:26},(_,i)=>18000+i*180+Math.random()*400);
+  new Chart(gCtx,{type:'line',data:{labels:wks,datasets:[
+    {data:follows,borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.07)',borderWidth:2,pointRadius:0,fill:true,tension:0.4}]},
+    options:{responsive:true,maintainAspectRatio:true,
+      scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:9}}},
+        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>(v/1000).toFixed(0)+'K',font:{size:9}}}}}});}
+
+// Age distribution
+const aCtx=document.getElementById('ageChart');
+if(aCtx) new Chart(aCtx,{type:'bar',data:{labels:['13-17','18-24','25-34','35-44','45-54','55-64','65+'],
+  datasets:[{data:[3,22,38,24,9,3,1],
+    backgroundColor:['rgba(0,212,170,0.5)','rgba(0,212,170,0.7)','rgba(0,212,170,0.9)','rgba(99,102,241,0.7)','rgba(99,102,241,0.5)','rgba(251,191,36,0.5)','rgba(248,113,113,0.4)'],
+    borderRadius:5}]},
+  options:{responsive:false,maintainAspectRatio:true,
+    scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+      y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}});
+
+// Gender donut
+const gdCtx=document.getElementById('genderDonut');
+if(gdCtx) new Chart(gdCtx,{type:'doughnut',data:{labels:['Female','Male','Other'],
+  datasets:[{data:[54,44,2],backgroundColor:['rgba(0,212,170,0.85)','rgba(99,102,241,0.85)','rgba(251,191,36,0.7)'],
+    borderColor:'#0f1729',borderWidth:3}]},
+  options:{cutout:'68%',responsive:false,plugins:{legend:{display:false}}}});
+
+// Segments polar
+const segCtx=document.getElementById('segChart');
+if(segCtx) new Chart(segCtx,{type:'polarArea',data:{
+  labels:['Dark Humour Fans','Late Night Browsers','Community Sharers','Sports Fans','Crime/News Readers','Fitness Enthusiasts','Casual Scrollers'],
+  datasets:[{data:[28,18,14,12,11,9,8],
+    backgroundColor:['rgba(0,212,170,0.7)','rgba(99,102,241,0.6)','rgba(251,191,36,0.6)','rgba(96,165,250,0.6)','rgba(248,113,113,0.6)','rgba(167,139,250,0.6)','rgba(52,211,153,0.5)'],
+    borderColor:'rgba(255,255,255,0.06)'}]},
+  options:{responsive:true,plugins:{legend:{display:true,position:'right',labels:{boxWidth:8,font:{size:9},padding:6}}},
+    scales:{r:{grid:{color:'rgba(255,255,255,0.06)'},ticks:{display:false}}}}});
+
+// Active hours
+const ahCtx=document.getElementById('activeHrsChart');
+if(ahCtx){
+  const hrs=Array.from({length:24},(_,i)=>(i<10?'0':'')+i+':00');
+  const vals=[2,1,1,1,1,2,4,8,12,16,18,22,24,20,18,16,20,28,38,42,36,28,20,12];
+  new Chart(ahCtx,{type:'bar',data:{labels:hrs,datasets:[
+    {data:vals,backgroundColor:vals.map(v=>v>30?'rgba(0,212,170,0.85)':v>20?'rgba(0,212,170,0.6)':'rgba(0,212,170,0.25)'),borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:true,
+      scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:9}}},
+        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}}); }
+
+// Device donut
+const dvCtx=document.getElementById('deviceDonut');
+if(dvCtx) new Chart(dvCtx,{type:'doughnut',data:{
+  labels:['Mobile','Desktop','Tablet','Other'],
+  datasets:[{data:[74,18,6,2],
+    backgroundColor:['rgba(0,212,170,0.85)','rgba(99,102,241,0.75)','rgba(251,191,36,0.7)','rgba(248,113,113,0.5)'],
+    borderColor:'#0f1729',borderWidth:3}]},
+  options:{cutout:'65%',responsive:false,plugins:{legend:{display:false}}}});
+
+// Location bars
+const locData=[{city:'Manchester',pct:18},{city:'London',pct:14},{city:'Leeds',pct:12},{city:'Birmingham',pct:9},{city:'Liverpool',pct:8},{city:'Glasgow',pct:6},{city:'Bristol',pct:5},{city:'Sheffield',pct:4}];
+const locEl=document.getElementById('locationBars');
+if(locEl) locData.forEach(d=>{
+  locEl.innerHTML+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px"><div style="width:72px;font-size:10px;color:var(--text-secondary);white-space:nowrap">${d.city}</div><div style="flex:1;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden"><div style="width:${d.pct*4}%;height:100%;background:rgba(0,212,170,0.7);border-radius:3px"></div></div><div style="width:28px;font-size:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;text-align:right">${d.pct}%</div></div>`;});
+
+// Affinity
+const afCtx=document.getElementById('affinityChart');
+if(afCtx) new Chart(afCtx,{type:'bar',data:{
+  labels:['Dark Humour','Football','True Crime','Community','Fitness','Food & Drink','News','Animals'],
+  datasets:[{data:[68,54,48,42,38,34,28,24],
+    backgroundColor:'rgba(0,212,170,0.6)',borderRadius:5}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,
+    scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},max:80},
+      y:{grid:{display:false},ticks:{font:{size:9}}}}}});
+
+// Churn chart
+const chCtx=document.getElementById('churnChart');
+if(chCtx) new Chart(chCtx,{type:'bar',data:{
+  labels:Array.from({length:12},(_,i)=>`W${i+1}`),
+  datasets:[
+    {label:'New Followers',data:[340,280,420,390,310,480,520,440,360,490,540,420],backgroundColor:'rgba(52,211,153,0.7)',borderRadius:4},
+    {label:'Unfollows',data:[-120,-90,-150,-130,-100,-160,-180,-140,-110,-160,-190,-140],backgroundColor:'rgba(248,113,113,0.6)',borderRadius:4}
+  ]},
+  options:{responsive:true,maintainAspectRatio:true,
+    plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},
+    scales:{x:{grid:{display:false},stacked:true,ticks:{font:{size:9}}},
+      y:{grid:{color:'rgba(255,255,255,0.04)'},stacked:true,ticks:{font:{size:9}}}}}});
 </script>
-<nav class="m-bottom-nav"><a href="mockup_dashboard.html"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</a><a href="mockup_predictions.html"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predict</a><a href="mockup_audience.html" class="active"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100 8"/></svg>Audience</a><a href="mockup_alerts.html"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>Alerts</a><a href="mockup_arte.html"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Art-E</a></nav>
-</body></html>
+>

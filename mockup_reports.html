@@ -396,7 +396,18 @@ textarea.form-input{min-height:80px;resize:vertical}
 .btn-primary,.btn,.bb,.modal,.drawer{transition-duration:0.2s!important}
 @keyframes fadeUp{from{opacity:0;transform:translate3d(0,8px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @keyframes float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-12px,0)}}
+
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{text-align:left;padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.06em}
+.data-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-secondary)}
+.data-table tr:hover td{background:rgba(255,255,255,0.02)}
+.td-num{font-family:'JetBrains Mono',monospace;color:var(--accent)}
+.td-up{color:#34d399;font-family:'JetBrains Mono',monospace}
+.td-dn{color:#f87171;font-family:'JetBrains Mono',monospace}
+.card-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.card-subtitle{font-size:10.5px;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -419,74 +430,127 @@ textarea.form-input{min-height:80px;resize:vertical}
 <a href="admin_panel.html" class="m-admin-back"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>← Admin Panel</a>
 <aside class="sidebar"><a href="admin_panel.html" class="sidebar-logo" title="Back to Admin Panel"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg><span>ARTEMIS</span></a><nav class="sidebar-nav"><div class="nav-group-label">For You</div><a href="mockup_feed.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Feed</a>
     <div class="nav-group-label">Metrics Centre</div><a href="index.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="mockup_dashboard.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a><a href="mockup_discovery.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discovery Feed</a><a href="mockup_predictions.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predictions</a><a href="mockup_audience.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Audience</a><div class="nav-group-label">Intelligence</div><a href="mockup_arte.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Art-E<span class="nav-badge badge-ai">AI</span></a><a href="mockup_alerts.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Alerts<span class="nav-badge badge-alert">3</span></a><a href="mockup_reports.html" class="nav-item active"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</a><div class="nav-group-label">Settings</div><a href="mockup_connected.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Connected Pages</a><a href="mockup_settings.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a></nav></aside><div class="main"><header class="topbar"><div class="topbar-left"><div class="topbar-title">Reports</div></div><div class="topbar-right"><button class="btn btn-primary" onclick="this.textContent='Generating...'">+ New Report</button><div class="avatar">AS</div></div></header><div class="content">
-<div class="section-label">Quick Reports</div>
-<div class="grid-3 animate">
-  <div class="report-card" onclick="this.querySelector('.tag').textContent='Generating...'"><div class="report-icon" style="background:var(--accent-dim)">📊</div><div class="card-title">Weekly Performance</div><p style="font-size:12px;color:var(--text-secondary);margin:8px 0">KPIs, engagement trends, and top content for the past 7 days.</p><span class="tag tag-accent">Generate →</span></div>
-  <div class="report-card" onclick="this.querySelector('.tag').textContent='Generating...'"><div class="report-icon" style="background:rgba(99,102,241,0.08)">🎯</div><div class="card-title">Audience Insights</div><p style="font-size:12px;color:var(--text-secondary);margin:8px 0">Demographics, segments, interests, and growth patterns.</p><span class="tag tag-blue">Generate →</span></div>
-  <div class="report-card" onclick="this.querySelector('.tag').textContent='Generating...'"><div class="report-icon" style="background:rgba(52,211,153,0.08)">🚀</div><div class="card-title">Virality Report</div><p style="font-size:12px;color:var(--text-secondary);margin:8px 0">Top viral posts, prediction accuracy, and format analysis.</p><span class="tag tag-green">Generate →</span></div>
+
+<!-- Reports: Professional analytics view -->
+<div style="margin-bottom:20px">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+    <div>
+      <div style="font-size:16px;font-weight:700">Report Centre</div>
+      <div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-top:2px">All pages · Week of Apr 14–22 2026</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-secondary" style="font-size:11px">Export PDF</button>
+      <button class="btn btn-secondary" style="font-size:11px">Export CSV</button>
+      <button class="btn btn-primary" style="font-size:11px">+ Schedule Report</button>
+    </div>
+  </div>
 </div>
 
-<div class="section-label" style="margin-top:28px">Scheduled Reports</div>
-<div class="card animate delay-1">
-  <div class="list-item"><div class="icon-wrap">📅</div><div style="flex:1"><div style="font-size:13px;font-weight:500">Weekly Digest</div><div style="font-size:11px;color:var(--text-muted)">Every Monday 9 AM · PDF · Sent to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="304455515d70465942515c545144511e535f1e455b">[email&#160;protected]</a></div></div><span class="tag tag-green">Active</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-  <div class="list-item"><div class="icon-wrap">📅</div><div style="flex:1"><div style="font-size:13px;font-weight:500">Monthly Board Report</div><div style="font-size:11px;color:var(--text-muted)">1st of each month · PDF · Sent to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff9e939a87bf89968d9e939b9e8b9ed19c90d18a94">[email&#160;protected]</a></div></div><span class="tag tag-green">Active</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-  <div class="list-item"><div class="icon-wrap">📅</div><div style="flex:1"><div style="font-size:13px;font-weight:500">Crisis Summary</div><div style="font-size:11px;color:var(--text-muted)">Triggered on crisis events · Slack notification</div></div><span class="tag tag-yellow">Triggered</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+<!-- ROW 1: KPI summary table + Strategy Score -->
+<div style="display:grid;grid-template-columns:1.6fr 1fr;gap:16px;margin-bottom:16px">
+  <div class="card">
+    <div class="card-title">Weekly KPI Summary — All Pages</div>
+    <div class="card-subtitle">Apr 14–22 · vs prior week · vs 30-day average</div>
+    <table class="data-table" style="margin-top:12px">
+      <thead><tr><th>Metric</th><th>This Week</th><th>Last Week</th><th>Change</th><th>vs 30-Day Avg</th></tr></thead>
+      <tbody>
+        <tr><td>Total Reach</td><td class="td-num">111.8K</td><td class="td-num">98.4K</td><td class="td-up">+13.6%</td><td class="td-up">+22.1%</td></tr>
+        <tr><td>Impressions</td><td class="td-num">284.2K</td><td class="td-num">251.7K</td><td class="td-up">+12.9%</td><td class="td-up">+18.4%</td></tr>
+        <tr><td>Engagements</td><td class="td-num">18,240</td><td class="td-num">16,890</td><td class="td-up">+8.0%</td><td class="td-up">+14.2%</td></tr>
+        <tr><td>Engagement Rate</td><td class="td-num">4.8%</td><td class="td-num">4.2%</td><td class="td-up">+0.6pp</td><td class="td-up">+1.1pp</td></tr>
+        <tr><td>Shares</td><td class="td-num">3,284</td><td class="td-num">2,841</td><td class="td-up">+15.6%</td><td class="td-up">+28.4%</td></tr>
+        <tr><td>Comments</td><td class="td-num">5,847</td><td class="td-num">5,241</td><td class="td-up">+11.6%</td><td class="td-up">+9.8%</td></tr>
+        <tr><td>New Followers</td><td class="td-num">+1,284</td><td class="td-num">+984</td><td class="td-up">+30.5%</td><td class="td-up">+41.2%</td></tr>
+        <tr><td>Avg Sentiment</td><td class="td-num">0.84</td><td class="td-num">0.81</td><td class="td-up">+0.03</td><td class="td-up">+0.06</td></tr>
+        <tr><td>Posts Published</td><td class="td-num">24</td><td class="td-num">21</td><td class="td-up">+3</td><td>—</td></tr>
+        <tr><td>Viral Posts (>1K eng)</td><td class="td-num">4</td><td class="td-num">2</td><td class="td-up">+100%</td><td class="td-up">+33%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card" style="text-align:center">
+    <div class="card-title">Content Strategy Score</div>
+    <div class="card-subtitle">AI composite · 0–100</div>
+    <div style="position:relative;padding:16px 0 8px">
+      <canvas id="stratGauge" height="140" width="180" style="display:block;margin:0 auto"></canvas>
+      <div style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);white-space:nowrap">
+        <div style="font-size:34px;font-weight:900;color:#00d4aa;font-family:'JetBrains Mono',monospace;line-height:1">81</div>
+        <div style="font-size:9px;color:var(--text-muted);text-align:center">OUT OF 100</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#34d399;font-weight:600;margin-bottom:12px">↑ 9 points this week</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:left">
+      <div style="background:var(--bg-tertiary);border-radius:8px;padding:9px"><div style="font-size:9px;color:var(--text-muted);margin-bottom:2px">Timing</div><div style="font-size:16px;font-weight:700;color:#00d4aa;font-family:'JetBrains Mono',monospace">88</div></div>
+      <div style="background:var(--bg-tertiary);border-radius:8px;padding:9px"><div style="font-size:9px;color:var(--text-muted);margin-bottom:2px">Format</div><div style="font-size:16px;font-weight:700;color:#a78bfa;font-family:'JetBrains Mono',monospace">76</div></div>
+      <div style="background:var(--bg-tertiary);border-radius:8px;padding:9px"><div style="font-size:9px;color:var(--text-muted);margin-bottom:2px">Sentiment</div><div style="font-size:16px;font-weight:700;color:#34d399;font-family:'JetBrains Mono',monospace">84</div></div>
+      <div style="background:var(--bg-tertiary);border-radius:8px;padding:9px"><div style="font-size:9px;color:var(--text-muted);margin-bottom:2px">Consistency</div><div style="font-size:16px;font-weight:700;color:#fbbf24;font-family:'JetBrains Mono',monospace">72</div></div>
+    </div>
+  </div>
 </div>
 
-<div class="section-label" style="margin-top:28px">Recent Exports</div>
-<div class="card animate delay-2">
-  <div class="list-item"><div style="font-size:14px">📄</div><div style="flex:1"><div style="font-size:13px;font-weight:500">Weekly_Report_Feb24.pdf</div><div style="font-size:11px;color:var(--text-muted)">Generated 24 Feb 2026 · 2.4 MB</div></div><button class="btn btn-secondary" style="padding:5px 14px;font-size:11px">Download</button></div>
-  <div class="list-item"><div style="font-size:14px">📄</div><div style="flex:1"><div style="font-size:13px;font-weight:500">Audience_Ins
-<script>(function(){
-  var SK='artemis_session';
-  function getS(){try{return JSON.parse(localStorage.getItem(SK)||localStorage.getItem('artemis_app_session')||'null');}catch{return null;}}
-  var s=getS();
-  if(!s){window.location.href='admin_login.html';return;}
-  var el=document.getElementById('sidebarUser');
-  if(el)el.textContent=s.name||s.full_name||s.email||s.username||'';
-  var btns=document.querySelectorAll('.btn-signout');
-  btns.forEach(function(b){b.onclick=function(){_showSignoutModal();}});
-})();</script>
+<!-- ROW 2: Stacked reach chart + Per-page comparison -->
+<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-bottom:16px">
+  <div class="card">
+    <div class="card-title">Cumulative Reach — Last 12 Weeks</div>
+    <div class="card-subtitle">Stacked area by page</div>
+    <canvas id="reachStackChart" height="140"></canvas>
+  </div>
+  <div class="card">
+    <div class="card-title">Performance by Page</div>
+    <div class="card-subtitle">Key metrics this week</div>
+    <canvas id="pageCompChart" height="140"></canvas>
+  </div>
+</div>
+
+<!-- ROW 3: Full content audit table -->
+<div class="card" style="margin-bottom:16px">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+    <div><div class="card-title">Full Content Audit — Last 14 Days</div><div class="card-subtitle">All 24 posts · Sorted by engagement rate</div></div>
+    <button style="font-size:11px;padding:5px 12px;border-radius:7px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Export CSV</button>
+  </div>
+  <table class="data-table">
+    <thead><tr><th>#</th><th>Page</th><th>Caption</th><th>Format</th><th>Posted</th><th>Reach</th><th>Eng %</th><th>Shares</th><th>Sentiment</th><th>Art-E Score</th></tr></thead>
+    <tbody>
+      <tr><td class="td-num">01</td><td style="font-size:10px;white-space:nowrap;color:#00d4aa">Drinking Memes</td><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Prison biscuit — when you realise...</td><td><span style="font-size:9px;padding:1px 6px;border-radius:3px;background:rgba(0,212,170,0.1);color:#00d4aa">Photo</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;white-space:nowrap">Tue 1:17PM</td><td class="td-num">47.2K</td><td class="td-up">5.1%</td><td class="td-num">892</td><td><span style="color:#34d399;font-size:10px">0.94 ✓</span></td><td class="td-num">91</td></tr>
+      <tr><td class="td-num">02</td><td style="font-size:10px;white-space:nowrap;color:#00d4aa">Drinking Memes</td><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Monday motivation hits different...</td><td><span style="font-size:9px;padding:1px 6px;border-radius:3px;background:rgba(0,212,170,0.1);color:#00d4aa">Photo</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;white-space:nowrap">Mon 1:15PM</td><td class="td-num">28.1K</td><td class="td-up">4.2%</td><td class="td-num">445</td><td><span style="color:#34d399;font-size:10px">0.88 ✓</span></td><td class="td-num">78</td></tr>
+      <tr><td class="td-num">03</td><td style="font-size:10px;white-space:nowrap;color:#a78bfa">Kelpie Daily</td><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Council tax up again — who is responsible</td><td><span style="font-size:9px;padding:1px 6px;border-radius:3px;background:rgba(251,191,36,0.1);color:#fbbf24">News</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;white-space:nowrap">Wed 6:30PM</td><td class="td-num">19.3K</td><td class="td-up">3.8%</td><td class="td-num">312</td><td><span style="color:#f87171;font-size:10px">0.32 ⚠</span></td><td class="td-num">58</td></tr>
+      <tr><td class="td-num">04</td><td style="font-size:10px;white-space:nowrap;color:#fbbf24">UK Jail News</td><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Sentencing guidelines reform could affect...</td><td><span style="font-size:9px;padding:1px 6px;border-radius:3px;background:rgba(251,191,36,0.1);color:#fbbf24">News</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;white-space:nowrap">Thu 7:00AM</td><td class="td-num">11.4K</td><td class="td-up">3.2%</td><td class="td-num">198</td><td><span style="color:#fbbf24;font-size:10px">0.61 ~</span></td><td class="td-num">62</td></tr>
+      <tr><td class="td-num">05</td><td style="font-size:10px;white-space:nowrap;color:#00d4aa">Drinking Memes</td><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Friday feeling when the weekend finally...</td><td><span style="font-size:9px;padding:1px 6px;border-radius:3px;background:rgba(0,212,170,0.1);color:#00d4aa">Photo</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;white-space:nowrap">Fri 7:30PM</td><td class="td-num">9.8K</td><td class="td-up">2.9%</td><td class="td-num">156</td><td><span style="color:#34d399;font-size:10px">0.88 ✓</span></td><td class="td-num">54</td></tr>
+      <tr><td colspan="10" style="text-align:center;padding:12px;font-size:11px;color:var(--text-muted);font-style:italic">+ 19 more posts · Export to view full dataset</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Scheduled reports section -->
+<div class="card">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+    <div><div class="card-title">Scheduled Reports</div><div class="card-subtitle">Automated delivery · PDF or CSV</div></div>
+    <button style="font-size:11px;padding:5px 12px;border-radius:7px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">+ Add Schedule</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px">
+    <div style="width:36px;height:36px;background:rgba(0,212,170,0.1);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px">📅</div>
+    <div style="flex:1"><div style="font-size:13px;font-weight:500">Weekly Performance Digest</div><div style="font-size:11px;color:var(--text-muted)">Every Monday 9 AM · PDF · Sent to lewis@drinkingmemes.co.uk</div></div>
+    <span style="font-size:10px;padding:2px 8px;border-radius:5px;background:rgba(52,211,153,0.1);color:#34d399;border:1px solid rgba(52,211,153,0.2);font-family:'JetBrains Mono',monospace">Active</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--border);border-radius:10px">
+    <div style="width:36px;height:36px;background:rgba(99,102,241,0.1);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px">📊</div>
+    <div style="flex:1"><div style="font-size:13px;font-weight:500">Monthly Trend Report</div><div style="font-size:11px;color:var(--text-muted)">1st of each month · CSV + PDF · Includes audience growth, virality stats, content audit</div></div>
+    <span style="font-size:10px;padding:2px 8px;border-radius:5px;background:rgba(52,211,153,0.1);color:#34d399;border:1px solid rgba(52,211,153,0.2);font-family:'JetBrains Mono',monospace">Active</span>
+  </div>
+</div>
 
 <script>
-// Add mobile tabs below topbar based on current page
-(function(){
-  function addMobileTabs(){
-    const tabs = {
-      'mockup_dashboard.html': ['KPIs','Trends','Virality','Sentiment'],
-      'mockup_audience.html':  ['Segments','Demographics','Affinity'],
-      'mockup_settings.html':  ['Profile','Notifications','API Keys'],
-      'mockup_alerts.html':    ['All','Crisis','Performance','Trends'],
-    };
-    const page = location.pathname.split('/').pop();
-    const pageTabs = tabs[page];
-    if(!pageTabs) return;
-    const topbar = document.querySelector('.topbar');
-    if(!topbar) return;
-    const row = document.createElement('div');
-    row.className = 'mobile-tabs';
-    pageTabs.forEach((t,i) => {
-      const btn = document.createElement('button');
-      btn.textContent = t;
-      btn.style.cssText = 'flex-shrink:0;padding:6px 14px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.5);font-family:"JetBrains Mono",monospace;font-size:10px;cursor:pointer;white-space:nowrap;transition:all .2s';
-      if(i===0){btn.style.borderColor='var(--accent,#00d4aa)';btn.style.color='var(--accent,#00d4aa)';btn.style.background='rgba(0,212,170,.08)';}
-      btn.onclick = function(){
-        row.querySelectorAll('button').forEach(b=>{b.style.borderColor='rgba(255,255,255,.1)';b.style.color='rgba(255,255,255,.5)';b.style.background='transparent';});
-        this.style.borderColor='var(--accent,#00d4aa)';this.style.color='var(--accent,#00d4aa)';this.style.background='rgba(0,212,170,.08)';
-        // Try to click the desktop tab
-        const desktopTabs = document.querySelectorAll('.topbar-tab');
-        if(desktopTabs[i]) desktopTabs[i].click();
-      };
-      row.appendChild(btn);
-    });
-    topbar.insertAdjacentElement('afterend', row);
-  }
-  if(window.innerWidth<=768) addMobileTabs();
-  window.addEventListener('resize', function(){
-    if(window.innerWidth<=768 && !document.querySelector('.mobile-tabs')) addMobileTabs();
-  });
-})();
+Chart.defaults.color='#7b8ba8';Chart.defaults.borderColor='rgba(255,255,255,0.05)';
+Chart.defaults.font.family="'Outfit',sans-serif";Chart.defaults.plugins.legend.display=false;
+Chart.defaults.plugins.tooltip.backgroundColor='#0f1729';Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.3)';Chart.defaults.plugins.tooltip.borderWidth=1;
+
+const gaugeCtx=document.getElementById('stratGauge');
+if(gaugeCtx) new Chart(gaugeCtx,{type:'doughnut',data:{datasets:[{data:[81,19],backgroundColor:['rgba(0,212,170,0.85)','rgba(255,255,255,0.04)'],borderWidth:0,circumference:180,rotation:270}]},options:{cutout:'76%',responsive:false,plugins:{legend:{display:false},tooltip:{enabled:false}}}});
+
+const rsCtx=document.getElementById('reachStackChart');
+if(rsCtx){const wks=Array.from({length:12},(_,i)=>`W${i+1}`);new Chart(rsCtx,{type:'line',data:{labels:wks,datasets:[{label:'Drinking Memes',data:[28,32,29,35,38,34,40,44,39,47,48,47],fill:true,backgroundColor:'rgba(0,212,170,0.18)',borderColor:'#00d4aa',borderWidth:2,pointRadius:0,tension:0.4},{label:'Kelpie Daily',data:[12,14,13,15,14,16,15,17,16,18,17,19],fill:true,backgroundColor:'rgba(99,102,241,0.15)',borderColor:'#6366f1',borderWidth:2,pointRadius:0,tension:0.4},{label:'UK Jail News',data:[7,8,7,9,8,9,10,11,10,12,11,12],fill:true,backgroundColor:'rgba(251,191,36,0.12)',borderColor:'#fbbf24',borderWidth:2,pointRadius:0,tension:0.4}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'K',font:{size:9}}}}}}); }
+
+const pgCtx=document.getElementById('pageCompChart');
+if(pgCtx) new Chart(pgCtx,{type:'bar',data:{labels:['Drinking Memes','Kelpie Daily','UK Jail News'],datasets:[{label:'Eng Rate %',data:[4.8,3.2,2.9],backgroundColor:['rgba(0,212,170,0.75)','rgba(99,102,241,0.65)','rgba(251,191,36,0.6)'],borderRadius:8}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}});
 </script>
-<nav class="m-bottom-nav"><a href="mockup_dashboard.html" class="active"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</a><a href="mockup_predictions.html"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predict</a><a href="mockup_audience.html"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100 8"/></svg>Audience</a><a href="mockup_alerts.html"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>Alerts</a><a href="mockup_arte.html"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Art-E</a></nav>
-</body>
-</html>
+
+>
