@@ -562,6 +562,7 @@ textarea.form-input{min-height:80px;resize:vertical}
 </div>
 
 <script>
+requestAnimationFrame(()=>requestAnimationFrame(()=>{
 Chart.defaults.color='#7b8ba8';Chart.defaults.borderColor='rgba(255,255,255,0.05)';
 Chart.defaults.font.family="'Outfit',sans-serif";Chart.defaults.plugins.legend.display=false;
 Chart.defaults.plugins.tooltip.backgroundColor='#0f1729';Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.3)';
@@ -639,6 +640,7 @@ if(fcCtx){
     plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:10},padding:10}}},
     scales:{x:{grid:{display:false},ticks:{maxTicksLimit:10,font:{size:9}}},
       y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>(v/1000).toFixed(0)+'K',font:{size:9}}}}}}); }
+}));
 </script>
 
 </div></div><script>try{const u=JSON.parse(localStorage.getItem('artemis_app_session'));if(u&&document.getElementById('sidebarUser'))document.getElementById('sidebarUser').textContent=u.email||'';}catch{}</script>
