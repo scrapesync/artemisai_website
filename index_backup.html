@@ -13,7 +13,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml"><text y='.9em' font-size='90'>🏛️</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?display=swap&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root{--bg-primary:#060a13;--bg-secondary:#0c1221;--bg-tertiary:#111a2e;--bg-card:#0f1729;--bg-card-hover:#142036;--accent:#00d4aa;--accent-bright:#00f5c4;--accent-secondary:#6366f1;--accent-dim:rgba(0,212,170,0.1);--accent-glow:rgba(0,212,170,0.35);--accent-glow-strong:rgba(0,212,170,0.6);--text-primary:#e8ecf4;--text-secondary:#7b8ba8;--text-muted:#4a5568;--border:rgba(255,255,255,0.05);--border-accent:rgba(0,212,170,0.15);--border-accent-strong:rgba(0,212,170,0.3)}
         *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
@@ -22,16 +22,16 @@
         ::selection{background:var(--accent);color:var(--bg-primary)}
         .load-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent-bright),var(--accent-secondary));z-index:10001;animation:loadBar 1.2s ease-out forwards}
         @keyframes loadBar{0%{width:0;opacity:1}80%{width:100%;opacity:1}100%{width:100%;opacity:0}}
-        .cursor-glow{position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,170,0.06),transparent 60%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .15s;opacity:0}
+        .cursor-glow{position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,170,0.06),transparent 60%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}
         .cursor-glow.active{opacity:1}
         .section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border-accent),transparent);max-width:600px;margin:0 auto}
-        nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.88);border-bottom:1px solid rgba(255,255,255,0.05);transition:background .15s}nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0,0,0,.3)}.site-logo{font-size:1.15rem;font-weight:700;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.65rem;flex-shrink:0}.site-logo-mark{width:32px;height:32px}.site-logo-mark svg{width:100%;height:100%}.site-nav-links{display:flex;align-items:center;gap:1.4rem;list-style:none;margin:0;padding:0}.site-nav-links a{color:#7b8ba8;text-decoration:none;font-size:.85rem;font-weight:400;letter-spacing:.01em;transition:color .25s;white-space:nowrap}.site-nav-links a:hover{color:#e8ecf4}.nav-pill-outline{padding:.42rem 1rem!important;border:1px solid rgba(0,212,170,.3)!important;border-radius:7px;color:#00d4aa!important;font-size:.8rem!important}.nav-pill-outline:hover{background:rgba(0,212,170,.07)!important;border-color:rgba(0,212,170,.6)!important}.nav-pill-solid{padding:.42rem 1.1rem!important;background:#00d4aa!important;color:#060a13!important;border-radius:7px;font-weight:600!important;font-size:.8rem!important}.nav-pill-solid:hover{background:#00f5c4!important}.nav-user-chip{display:none;align-items:center;gap:8px;padding:.35rem .9rem .35rem .5rem;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);border-radius:20px}.nav-user-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#00d4aa,#6366f1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#060a13;flex-shrink:0}.nav-user-name{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#00d4aa;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.nav-logout-btn{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.75rem;padding:.3rem .65rem;cursor:pointer;transition:all .2s;white-space:nowrap}.nav-logout-btn:hover{border-color:rgba(248,113,113,.4);color:#f87171}.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:4px}.nav-hamburger span{display:block;width:20px;height:2px;background:#7b8ba8;border-radius:2px;transition:all .15s}@media(max-width:768px){  nav.site-nav{padding:0 1.2rem}  .site-nav-links{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:rgba(6,10,19,.98);backdrop-filter:blur(20px);padding:1rem 1.5rem;gap:.6rem;border-bottom:1px solid rgba(255,255,255,.05)}  .site-nav-links.open{display:flex}  .nav-hamburger{display:flex}}
+        nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.88);border-bottom:1px solid rgba(255,255,255,0.05);transition:background .3s}nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0,0,0,.3)}.site-logo{font-size:1.15rem;font-weight:700;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.65rem;flex-shrink:0}.site-logo-mark{width:32px;height:32px}.site-logo-mark svg{width:100%;height:100%}.site-nav-links{display:flex;align-items:center;gap:1.4rem;list-style:none;margin:0;padding:0}.site-nav-links a{color:#7b8ba8;text-decoration:none;font-size:.85rem;font-weight:400;letter-spacing:.01em;transition:color .25s;white-space:nowrap}.site-nav-links a:hover{color:#e8ecf4}.nav-pill-outline{padding:.42rem 1rem!important;border:1px solid rgba(0,212,170,.3)!important;border-radius:7px;color:#00d4aa!important;font-size:.8rem!important}.nav-pill-outline:hover{background:rgba(0,212,170,.07)!important;border-color:rgba(0,212,170,.6)!important}.nav-pill-solid{padding:.42rem 1.1rem!important;background:#00d4aa!important;color:#060a13!important;border-radius:7px;font-weight:600!important;font-size:.8rem!important}.nav-pill-solid:hover{background:#00f5c4!important}.nav-user-chip{display:none;align-items:center;gap:8px;padding:.35rem .9rem .35rem .5rem;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);border-radius:20px}.nav-user-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#00d4aa,#6366f1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#060a13;flex-shrink:0}.nav-user-name{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#00d4aa;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.nav-logout-btn{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.75rem;padding:.3rem .65rem;cursor:pointer;transition:all .2s;white-space:nowrap}.nav-logout-btn:hover{border-color:rgba(248,113,113,.4);color:#f87171}.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:4px}.nav-hamburger span{display:block;width:20px;height:2px;background:#7b8ba8;border-radius:2px;transition:all .3s}@media(max-width:768px){  nav.site-nav{padding:0 1.2rem}  .site-nav-links{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:rgba(6,10,19,.98);backdrop-filter:blur(20px);padding:1rem 1.5rem;gap:.6rem;border-bottom:1px solid rgba(255,255,255,.05)}  .site-nav-links.open{display:flex}  .nav-hamburger{display:flex}}
         .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
-        .hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);margin:5px 0;border-radius:2px;transition:all .15s}
+        .hamburger span{display:block;width:22px;height:2px;background:var(--text-primary);margin:5px 0;border-radius:2px;transition:all .3s}
         .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden}
         .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,170,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,170,0.025) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 60% 50% at 50% 45%,black,transparent);animation:gridPulse 8s ease-in-out infinite}
         @keyframes gridPulse{0%,100%{opacity:.6}50%{opacity:1}}
-        .hero-orb{position:absolute;border-radius:50%;filter:blur(60px);will-change:transform;pointer-events:none;animation:float 12s ease-in-out infinite}
+        .hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;animation:float 12s ease-in-out infinite}
         .hero-orb-1{width:500px;height:500px;background:radial-gradient(circle,rgba(0,212,170,0.12),transparent 70%);top:-10%;left:20%;animation-delay:0s}
         .hero-orb-2{width:400px;height:400px;background:radial-gradient(circle,rgba(99,102,241,0.08),transparent 70%);bottom:10%;right:10%;animation-delay:-4s}
         .hero-orb-3{width:300px;height:300px;background:radial-gradient(circle,rgba(0,212,170,0.06),transparent 70%);top:40%;right:25%;animation-delay:-8s}
@@ -47,11 +47,11 @@
         .hero h1 .gradient-text{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-bright) 40%,#4fd1c5 70%,var(--accent-secondary) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .hero-sub{font-size:1.15rem;color:var(--text-secondary);line-height:1.75;max-width:600px;margin:0 auto 2.5rem;font-weight:300;animation:fadeInUp .9s .3s ease both}
         .hero-buttons{display:flex;align-items:center;justify-content:center;gap:1rem;animation:fadeInUp .9s .45s ease both}
-        .btn-primary{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;background:var(--accent);color:var(--bg-primary);border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .35s ease-out;text-decoration:none;position:relative;overflow:hidden}
-        .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,0.15),transparent);transform:translateX(-100%);transition:transform .2s}
+        .btn-primary{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;background:var(--accent);color:var(--bg-primary);border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .35s cubic-bezier(.4,0,.2,1);text-decoration:none;position:relative;overflow:hidden}
+        .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,0.15),transparent);transform:translateX(-100%);transition:transform .5s}
         .btn-primary:hover::before{transform:translateX(100%)}
         .btn-primary:hover{background:var(--accent-bright);transform:translateY(-2px);box-shadow:0 12px 40px var(--accent-glow),0 0 80px rgba(0,212,170,0.15)}
-        .btn-ghost{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;background:transparent;color:var(--text-primary);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:500;cursor:pointer;transition:all .15s;text-decoration:none}
+        .btn-ghost{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;background:transparent;color:var(--text-primary);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:500;cursor:pointer;transition:all .3s;text-decoration:none}
         .btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,212,170,0.04)}
         .scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:fadeInUp 1s 1s ease both}
         .scroll-mouse{width:24px;height:38px;border:2px solid rgba(255,255,255,0.15);border-radius:12px;position:relative}
@@ -73,16 +73,16 @@
         .section-title{font-size:clamp(2rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.8rem;line-height:1.15}
         .section-subtitle{font-size:1.05rem;color:var(--text-secondary);line-height:1.7;max-width:560px;font-weight:300}
         .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3.5rem}
-        .feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:2rem 1.75rem;transition:all .15s ease-out;position:relative;overflow:hidden}
-        .feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .15s}
-        .feature-card::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at center,rgba(0,212,170,0.03),transparent 50%);opacity:0;transition:opacity .15s}
+        .feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:2rem 1.75rem;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+        .feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .4s}
+        .feature-card::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at center,rgba(0,212,170,0.03),transparent 50%);opacity:0;transition:opacity .4s}
         .feature-card:hover{border-color:var(--border-accent-strong);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.3),0 0 40px rgba(0,212,170,0.05)}
         .feature-card:hover::before{opacity:1}.feature-card:hover::after{opacity:1}
         .feature-icon-wrap{width:52px;height:52px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1.3rem;position:relative;z-index:1}
         .feature-icon-wrap svg{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
         .feature-card h3{font-size:1.05rem;font-weight:600;margin-bottom:.5rem;position:relative;z-index:1}
         .feature-card p{font-size:.88rem;color:var(--text-secondary);line-height:1.65;font-weight:300;position:relative;z-index:1}
-        .feature-card .card-index{position:absolute;top:-10px;right:12px;font-family:'JetBrains Mono',monospace;font-size:5rem;font-weight:800;color:rgba(255,255,255,0.015);line-height:1;pointer-events:none;transition:color .15s}
+        .feature-card .card-index{position:absolute;top:-10px;right:12px;font-family:'JetBrains Mono',monospace;font-size:5rem;font-weight:800;color:rgba(255,255,255,0.015);line-height:1;pointer-events:none;transition:color .4s}
         .feature-card:hover .card-index{color:rgba(0,212,170,0.04)}
         .comparison{background:var(--bg-secondary)}
         .comparison-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:2rem;margin-top:3.5rem;align-items:stretch}
@@ -100,7 +100,7 @@
         .steps-container{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:3.5rem;position:relative}
         .steps-container::before{content:'';position:absolute;top:36px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--border-accent),var(--border-accent),transparent)}
         .step-item{text-align:center;padding:0 1rem;position:relative}
-        .step-num{width:72px;height:72px;border:1.5px solid var(--border-accent);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:600;color:var(--accent);background:var(--bg-primary);position:relative;z-index:2;transition:all .15s}
+        .step-num{width:72px;height:72px;border:1.5px solid var(--border-accent);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:600;color:var(--accent);background:var(--bg-primary);position:relative;z-index:2;transition:all .4s}
         .step-item:hover .step-num{background:var(--accent-dim);border-color:var(--accent);box-shadow:0 0 30px rgba(0,212,170,0.15)}
         .step-item h3{font-size:1rem;font-weight:600;margin-bottom:.5rem}
         .step-item p{font-size:.85rem;color:var(--text-secondary);line-height:1.6;font-weight:300}
@@ -115,14 +115,14 @@
         .chat-header-text{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--text-muted)}
         .chat-header-text strong{color:var(--text-secondary);font-weight:500}
         .chat-body{padding:1.5rem;min-height:320px;display:flex;flex-direction:column;gap:1rem}
-        .msg{max-width:88%;padding:1rem 1.25rem;border-radius:16px;font-size:.9rem;line-height:1.65;opacity:0;transform:translateY(10px);transition:all .2s ease}
+        .msg{max-width:88%;padding:1rem 1.25rem;border-radius:16px;font-size:.9rem;line-height:1.65;opacity:0;transform:translateY(10px);transition:all .5s ease}
         .msg.visible{opacity:1;transform:translateY(0)}
         .msg-bot{background:rgba(0,212,170,0.06);border:1px solid rgba(0,212,170,0.1);border-bottom-left-radius:4px;align-self:flex-start}
         .msg-bot .sender{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent);letter-spacing:.08em;margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem}
         .msg-user{background:var(--bg-tertiary);border:1px solid var(--border);border-bottom-right-radius:4px;align-self:flex-end;color:var(--text-secondary)}
         .chat-input-bar{display:flex;align-items:center;gap:.75rem;padding:1rem 1.5rem;border-top:1px solid var(--border);background:rgba(255,255,255,0.01)}
         .chat-input-bar input{flex:1;background:none;border:none;color:var(--text-muted);font-family:'Outfit',sans-serif;font-size:.88rem;outline:none}
-        .chat-send-btn{width:36px;height:36px;background:var(--accent);border:none;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s}
+        .chat-send-btn{width:36px;height:36px;background:var(--accent);border:none;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s}
         .chat-send-btn:hover{background:var(--accent-bright);box-shadow:0 4px 15px var(--accent-glow)}
         .chat-send-btn svg{width:16px;height:16px;stroke:var(--bg-primary);fill:none;stroke-width:2}
         .typing-indicator{display:flex;gap:4px;padding:.5rem 0}
@@ -132,14 +132,14 @@
         .team-section{background:var(--bg-primary)}
         .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3.5rem;justify-items:center}
         .team-grid .team-card{width:100%}
-        .team-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:2rem 1.5rem;text-align:center;transition:all .15s ease-out;position:relative;overflow:hidden}
-        .team-card::after{content:'';position:absolute;bottom:-50%;left:50%;transform:translateX(-50%);width:200px;height:200px;background:radial-gradient(circle,var(--accent-glow),transparent 70%);opacity:0;transition:opacity .2s}
+        .team-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:2rem 1.5rem;text-align:center;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+        .team-card::after{content:'';position:absolute;bottom:-50%;left:50%;transform:translateX(-50%);width:200px;height:200px;background:radial-gradient(circle,var(--accent-glow),transparent 70%);opacity:0;transition:opacity .5s}
         .team-card:hover{border-color:var(--border-accent-strong);transform:translateY(-5px)}
         .team-card:hover::after{opacity:.15}
-        .team-avatar{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--bg-tertiary),var(--bg-secondary));border:2px solid var(--border-accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;font-size:1.4rem;font-weight:800;color:var(--accent);position:relative;z-index:1;transition:all .15s;overflow:visible}
+        .team-avatar{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--bg-tertiary),var(--bg-secondary));border:2px solid var(--border-accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;font-size:1.4rem;font-weight:800;color:var(--accent);position:relative;z-index:1;transition:all .4s;overflow:visible}
         .team-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
         .team-card:hover .team-avatar{border-color:var(--accent);box-shadow:0 0 25px rgba(0,212,170,0.2)}
-        .team-avatar::after{content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%) scaleX(0);width:40px;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);border-radius:2px;transition:transform .15s}
+        .team-avatar::after{content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%) scaleX(0);width:40px;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);border-radius:2px;transition:transform .4s}
         .team-card:hover .team-avatar::after{transform:translateX(-50%) scaleX(1)}
         .team-card h3{font-size:1.05rem;font-weight:600;margin-bottom:.25rem;position:relative;z-index:1}
         .team-card .role{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.06em;font-weight:500;position:relative;z-index:1}
@@ -147,7 +147,7 @@
         .contact-section{background:var(--bg-secondary);border-top:1px solid var(--border)}
         .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem}
         .contact-left p{color:var(--text-secondary);line-height:1.75;margin-bottom:2rem;font-weight:300}
-        .contact-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--bg-primary);border:1px solid var(--border);border-radius:12px;margin-bottom:.75rem;transition:all .15s}
+        .contact-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--bg-primary);border:1px solid var(--border);border-radius:12px;margin-bottom:.75rem;transition:all .3s}
         .contact-item:hover{border-color:var(--border-accent)}
         .contact-icon{width:42px;height:42px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
         .contact-icon svg{width:18px;height:18px;stroke:var(--accent);fill:none;stroke-width:1.5}
@@ -155,7 +155,7 @@
         .contact-text strong{color:var(--text-primary);display:block;font-weight:500;margin-bottom:.1rem;font-size:.82rem}
         .contact-form{display:flex;flex-direction:column;gap:.85rem}
         .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
-        .contact-form input,.contact-form textarea,.contact-form select{padding:.85rem 1.15rem;background:var(--bg-primary);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-family:'Outfit',sans-serif;font-size:.88rem;outline:none;transition:all .15s}
+        .contact-form input,.contact-form textarea,.contact-form select{padding:.85rem 1.15rem;background:var(--bg-primary);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-family:'Outfit',sans-serif;font-size:.88rem;outline:none;transition:all .3s}
         .contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,170,0.08)}
         .contact-form textarea{min-height:110px;resize:vertical}
         .contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--text-muted)}
@@ -168,16 +168,16 @@
         footer{padding:2.5rem 2rem;border-top:1px solid var(--border);text-align:center;background:var(--bg-primary)}
         .footer-content{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto}
         footer p{font-size:.78rem;color:var(--text-muted)}
-        footer a{color:var(--accent);text-decoration:none;transition:color .15s}footer a:hover{color:var(--accent-bright)}
+        footer a{color:var(--accent);text-decoration:none;transition:color .3s}footer a:hover{color:var(--accent-bright)}
         .footer-links{display:flex;gap:1.5rem}.footer-links a{font-size:.78rem;color:var(--text-muted)}.footer-links a:hover{color:var(--accent)}
-        .chat-bubble{position:fixed;bottom:2rem;right:2rem;z-index:999;width:56px;height:56px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 30px var(--accent-glow),0 0 60px rgba(0,212,170,0.1);transition:all .15s;animation:bubbleIn .6s 2s ease both}
+        .chat-bubble{position:fixed;bottom:2rem;right:2rem;z-index:999;width:56px;height:56px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 30px var(--accent-glow),0 0 60px rgba(0,212,170,0.1);transition:all .4s;animation:bubbleIn .6s 2s ease both}
         .chat-bubble:hover{transform:scale(1.1);box-shadow:0 12px 40px var(--accent-glow-strong)}
         .chat-bubble svg{width:24px;height:24px;stroke:var(--bg-primary);fill:none;stroke-width:2}
-        .chat-bubble-label{position:absolute;right:70px;white-space:nowrap;background:var(--bg-card);border:1px solid var(--border);padding:.5rem 1rem;border-radius:10px;font-size:.8rem;color:var(--text-secondary);opacity:0;transform:translateX(10px);transition:all .15s;pointer-events:none}
+        .chat-bubble-label{position:absolute;right:70px;white-space:nowrap;background:var(--bg-card);border:1px solid var(--border);padding:.5rem 1rem;border-radius:10px;font-size:.8rem;color:var(--text-secondary);opacity:0;transform:translateX(10px);transition:all .3s;pointer-events:none}
         .chat-bubble:hover .chat-bubble-label{opacity:1;transform:translateX(0)}
         @keyframes bubbleIn{from{opacity:0;transform:scale(0) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
         @keyframes fadeInUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
-        .reveal{opacity:0;transform:translateY(35px);transition:all .7s ease-out}
+        .reveal{opacity:0;transform:translateY(35px);transition:all .7s cubic-bezier(.4,0,.2,1)}
         .reveal.visible{opacity:1;transform:translateY(0)}
         .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}.reveal-delay-5{transition-delay:.5s}
         @media(max-width:1024px){.features-grid,.team-grid{grid-template-columns:repeat(2,1fr)}.steps-container{grid-template-columns:repeat(2,1fr);gap:2rem}.steps-container::before{display:none}.stats-grid{grid-template-columns:repeat(2,1fr)}.comparison-grid{grid-template-columns:1fr}.comparison-divider{transform:rotate(90deg);margin:-.5rem 0}}
@@ -247,27 +247,6 @@
   .nav-user-name,.sn-name{display:none!important}
   .nav-user-avatar,.sn-avatar{width:26px!important;height:26px!important;font-size:10px!important}
 }
-
-/* ── PERFORMANCE PATCH ── */
-*{-webkit-font-smoothing:antialiased;text-rendering:optimizeSpeed}
-.topnav,.tabbar,.topbar,.site-nav,.sidebar{will-change:auto}
-
-/* Replace slow backdrop-filter with opaque background on lower-end */
-@media(prefers-reduced-motion:reduce){
-  *{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}
-}
-
-/* GPU-accelerate only elements that actually move */
-.fcard,.fc,.feature-card,.stat-card,.feed-card,.alert-card,.bcard{
-  will-change:transform;
-  transform:translateZ(0);
-}
-
-/* Reduce transition times globally — snappier */
-*{transition-duration:0.15s!important}
-.btn-primary,.btn,.bb,.modal,.drawer{transition-duration:0.2s!important}
-@keyframes fadeUp{from{opacity:0;transform:translate3d(0,8px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
-@keyframes float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-12px,0)}}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RCP8LMKYK"></script>
@@ -327,11 +306,11 @@
         <canvas id="particles"></canvas>
         <div class="hero-content">
             <div class="hero-badge"><span class="badge-dot"></span>Currently in Development — Early Access Available</div>
-            <h1>All your pages.<br>One <span class="gradient-text">AI that never sleeps.</span></h1>
-            <p class="hero-sub">Artemis watches every post, every comment, every shift in your audience — and tells you exactly what to do next. No dashboards to read. No guesswork. Just answers.</p>
+            <h1>Your AI-Powered<br><span class="gradient-text">Social Media Strategist</span></h1>
+            <p class="hero-sub">Artemis analyses your entire social media history, predicts what will go viral, warns you before crises happen, and answers any question in language you understand.</p>
             <div class="hero-buttons">
-                <a href="#contact" class="btn-primary"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Are you ready for change?</a>
-                <a href="#how" class="btn-ghost">See how it works</a>
+                <a href="#contact" class="btn-primary"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Request Early Access</a>
+                <a href="#features" class="btn-ghost">See What It Does</a>
             </div>
         </div>
         <div class="scroll-hint"><div class="scroll-mouse"></div><span class="scroll-text">Scroll</span></div>
@@ -344,20 +323,22 @@
 
     <div class="stats-section">
         <div class="stats-grid">
-            <div class="stat-card reveal"><div class="stat-value" id="cnt-posts" data-target="111796" data-suffix="">0</div><div class="stat-label">Posts Analysed</div></div>
-            <div class="stat-card reveal reveal-delay-1"><div class="stat-value" id="cnt-comments" data-target="3280000" data-suffix="">0</div><div class="stat-label">Comments Processed</div></div>
-            <div class="stat-card reveal reveal-delay-2"><div class="stat-value" data-target="24" data-suffix="">0</div><div class="stat-label">Months of History Ingested</div></div>
-            <div class="stat-card reveal reveal-delay-3"><div class="stat-value" data-target="20" data-suffix="">0</div><div class="stat-label">Facebook Pages Connected</div></div>
+            <div class="stat-card reveal"><div class="stat-value" data-target="1" data-suffix="M+">0</div><div class="stat-label">Posts Analysed Per Account</div></div>
+            <div class="stat-card reveal reveal-delay-1"><div class="stat-value" data-target="95" data-suffix="%">0</div><div class="stat-label">Virality Prediction Accuracy</div></div>
+            <div class="stat-card reveal reveal-delay-2"><div class="stat-value" data-target="7" data-suffix="">0</div><div class="stat-label">AI Models Running 24/7</div></div>
+            <div class="stat-card reveal reveal-delay-3"><div class="stat-value" data-target="12" data-suffix="hrs">0</div><div class="stat-label">Saved Per Week on Analysis</div></div>
         </div>
     </div>
 
     <section id="features" class="container">
-        <div class="reveal"><div class="section-label">// How It Works</div><div class="section-title">Four layers.<br>One simple product.</div><div class="section-subtitle">Artemis is not a dashboard full of charts. It is a decision engine that tells you what to do — and why.</div></div>
-        <div class="features-grid" style="grid-template-columns:repeat(2,1fr)">
-            <div class="feature-card reveal" style="border-color:rgba(0,212,170,0.3);background:linear-gradient(135deg,rgba(0,212,170,0.05),transparent)"><span class="card-index">01</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3>Home Feed</h3><p style="color:#00d4aa;font-size:.75rem;font-weight:600;margin-bottom:.5rem">Your control centre</p><p>Everything in one live feed. Viral alerts, brand risks, audience shifts, posting windows, collaboration opportunities. All ranked by what matters most right now. No need to go looking — it comes to you.</p></div>
-            <div class="feature-card reveal reveal-delay-1" style="border-color:rgba(99,102,241,0.3);background:linear-gradient(135deg,rgba(99,102,241,0.05),transparent)"><span class="card-index">02</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Art-E</h3><p style="color:#a78bfa;font-size:.75rem;font-weight:600;margin-bottom:.5rem">Predict. Explain. Alert. Prescribe.</p><p>Not a chatbot. The interface to the entire system. Ask what to post, when to post, why something worked, who drove it, and how to replicate it. Art-E explains the patterns within patterns — the hidden pathways that lead to outcomes.</p></div>
-            <div class="feature-card reveal reveal-delay-2" style="border-color:rgba(251,191,36,0.3);background:linear-gradient(135deg,rgba(251,191,36,0.05),transparent)"><span class="card-index">03</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><h3>Discovery</h3><p style="color:#fbbf24;font-size:.75rem;font-weight:600;margin-bottom:.5rem">Chats. Collabs. Audience affinity.</p><p>Find pages with the same audience patterns. Identify collaboration opportunities. Connect and grow together. Audience matching shows you who shares your followers and what content crosses over — before you post it.</p></div>
-            <div class="feature-card reveal reveal-delay-3" style="border-color:rgba(52,211,153,0.3);background:linear-gradient(135deg,rgba(52,211,153,0.05),transparent)"><span class="card-index">04</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h3>Metrics Centre</h3><p style="color:#34d399;font-size:.75rem;font-weight:600;margin-bottom:.5rem">The engine room</p><p>All the detailed analytics, trend data, audience reports, sentiment breakdowns, and performance history for when you want to go deep. The AI runs over all of it and explains what you don't see.</p></div>
+        <div class="reveal"><div class="section-label">// Intelligence Suite</div><div class="section-title">Everything You Need.<br>Nothing You Don't.</div><div class="section-subtitle">Connect your pages. Artemis handles the rest — automatically, 24/7.</div></div>
+        <div class="features-grid">
+            <div class="feature-card reveal"><span class="card-index">01</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h3>Virality Prediction</h3><p>Get a confidence score before you hit publish. Know predicted engagement and get actionable recommendations to boost performance.</p></div>
+            <div class="feature-card reveal reveal-delay-1"><span class="card-index">02</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><h3>Real-Time Velocity</h3><p>Get alerted within 30 minutes when a post starts taking off. Boost it at the perfect moment for maximum return on ad spend.</p></div>
+            <div class="feature-card reveal reveal-delay-2"><span class="card-index">03</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Crisis Detection</h3><p>Artemis monitors sentiment 24/7 and warns you 2-4 hours before a negative shift becomes a full-blown crisis.</p></div>
+            <div class="feature-card reveal reveal-delay-1"><span class="card-index">04</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h3>Content Intelligence</h3><p>Every post automatically labelled — sentiment, emotion, topic, content type. See exactly what works and why across your entire history.</p></div>
+            <div class="feature-card reveal reveal-delay-2"><span class="card-index">05</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Audience Segments</h3><p>Discover your Super Fans, Meme Lovers, and Silent Browsers. Target each segment with content they actually engage with.</p></div>
+            <div class="feature-card reveal reveal-delay-3"><span class="card-index">06</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Ask Artemis Anything</h3><p>A ChatGPT-like interface trained on YOUR data. Ask "Why did Tuesday's post go viral?" and get an instant, sourced answer.</p></div>
         </div>
     </section>
 
@@ -376,12 +357,12 @@
 
     <section id="how" class="how-section">
         <div class="container">
-            <div class="reveal" style="text-align:center"><div class="section-label">// Getting Started</div><div class="section-title">Connect once.<br>Change everything.</div><div class="section-subtitle" style="margin:0 auto">No dashboards to configure. No learning curve. Within minutes of connecting your pages, Artemis already knows more about your audience than you do.</div></div>
+            <div class="reveal" style="text-align:center"><div class="section-label">// How It Works</div><div class="section-title">Connect to Insights in Minutes</div><div class="section-subtitle" style="margin:0 auto">No setup. No configuration. No learning curve.</div></div>
             <div class="steps-container">
-                <div class="step-item reveal"><div class="step-num">01</div><h3>Connect your pages</h3><p>Link your Facebook pages in one click. Artemis immediately starts ingesting your full 2-year history — every post, comment, reaction, share, and timestamp.</p></div>
-                <div class="step-item reveal reveal-delay-1"><div class="step-num">02</div><h3>Watch the intelligence build</h3><p>Your data loads in real time. Watch 111K posts, 3.28M comments, and 24 months of audience behaviour get processed. The patterns start appearing immediately.</p></div>
-                <div class="step-item reveal reveal-delay-2"><div class="step-num">03</div><h3>Your feed comes alive</h3><p>Within minutes, Art-E starts surfacing what matters: your super sharers, your best posting windows, your audience clusters, your viral patterns. Specific to your pages only.</p></div>
-                <div class="step-item reveal reveal-delay-3"><div class="step-num">04</div><h3>Never guess again</h3><p>Art-E monitors everything 24/7 and tells you what to do next. Every like, share, comment, and post makes it smarter. It gets better every single day.</p></div>
+                <div class="step-item reveal"><div class="step-num">01</div><h3>Connect</h3><p>Link your Facebook pages with one click. We handle permissions automatically.</p></div>
+                <div class="step-item reveal reveal-delay-1"><div class="step-num">02</div><h3>Analyse</h3><p>Artemis pulls your full history and runs it through 7 AI models simultaneously.</p></div>
+                <div class="step-item reveal reveal-delay-2"><div class="step-num">03</div><h3>Learn</h3><p>The system discovers patterns unique to your audience, content, and timing.</p></div>
+                <div class="step-item reveal reveal-delay-3"><div class="step-num">04</div><h3>Advise</h3><p>Get predictions, alerts, and answers 24/7. Artemis gets smarter every day.</p></div>
             </div>
         </div>
     </section>
@@ -416,7 +397,7 @@
 
     <section id="contact" class="contact-section">
         <div class="container">
-            <div class="reveal" style="text-align:center"><div class="section-label">// Early Access</div><div class="section-title">Are you ready<br>for change?</div><div class="section-subtitle" style="margin:0 auto">We are onboarding a limited number of early partners. Connect your pages, watch 24 months of data load in real time, and see what Artemis finds that you've never seen before.</div></div>
+            <div class="reveal" style="text-align:center"><div class="section-label">// Get In Touch</div><div class="section-title">Ready to See It in Action?</div><div class="section-subtitle" style="margin:0 auto">We're onboarding a limited number of early partners. Be one of them.</div></div>
             <div class="contact-grid reveal">
                 <div class="contact-left">
                     <p>Artemis AI is being built to be the most intelligent social media platform on the market. We're looking for forward-thinking brands and agencies to shape the product alongside us during development.</p>
@@ -459,7 +440,7 @@
 
         window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60)});
 
-        const co=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,t=parseInt(el.dataset.target),s=el.dataset.suffix||'',d=2200,st=performance.now();function fmt(v){if(t>=1000000)return(v/1000000).toFixed(v>=t?2:1)+'M';if(t>=1000)return v.toLocaleString();return v;}function u(n){const p=Math.min((n-st)/d,1),ea=1-Math.pow(1-p,3),c=Math.floor(ea*t);el.textContent=fmt(c)+s;if(p<1)requestAnimationFrame(u);}requestAnimationFrame(u);co.unobserve(el)}})},{threshold:.5});
+        const co=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,t=parseInt(el.dataset.target),s=el.dataset.suffix||'',d=2000,st=performance.now();function u(n){const p=Math.min((n-st)/d,1),ea=1-Math.pow(1-p,3),c=Math.floor(ea*t);el.textContent=c.toLocaleString()+s;if(p<1)requestAnimationFrame(u)}requestAnimationFrame(u);co.unobserve(el)}})},{threshold:.5});
         document.querySelectorAll('[data-target]').forEach(el=>co.observe(el));
 
         const cv=document.getElementById('particles'),cx=cv.getContext('2d');let pts=[],aid;
