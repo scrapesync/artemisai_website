@@ -489,6 +489,24 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 .btn-primary,.btn,.bb,.modal,.drawer{transition-duration:0.2s!important}
 @keyframes fadeUp{from{opacity:0;transform:translate3d(0,8px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @keyframes float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-12px,0)}}
+
+/* ── EXTRA DASHBOARD CSS ── */
+.range-btn{padding:4px 10px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:6px;font-size:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;cursor:pointer}
+.range-btn.active{background:var(--accent);color:var(--bg-primary);font-weight:600;border-color:var(--accent)}
+.badge-fmt{font-size:9px;padding:2px 7px;border-radius:4px;font-weight:600}
+.badge-fmt.purple{background:rgba(99,102,241,0.1);color:#a78bfa;border:1px solid rgba(99,102,241,0.2)}
+.badge-fmt.teal{background:rgba(0,212,170,0.1);color:#00d4aa;border:1px solid rgba(0,212,170,0.2)}
+.badge-fmt.blue{background:rgba(96,165,250,0.1);color:#60a5fa;border:1px solid rgba(96,165,250,0.2)}
+.badge-fmt.amber{background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)}
+.td-clip{font-size:11px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.td-mono{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:11px}
+.td-mono.sm{font-size:10px;white-space:nowrap}
+.td-num{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:11px}
+.td-up{color:#34d399;font-family:'JetBrains Mono',monospace;font-size:11px}
+.td-dn{color:#f87171;font-family:'JetBrains Mono',monospace;font-size:11px}
+.td-sent.g{color:#34d399;font-size:10px}
+.td-sent.a{color:#fbbf24;font-size:10px}
+.td-sent.r{color:#f87171;font-size:10px}
 </style>
 </head>
 <body>
@@ -512,6 +530,332 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 
 <!-- ═══ SIDEBAR ═══ -->
 <a href="admin_panel.html" class="m-admin-back"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>← Admin Panel</a>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function(){
+'use strict';
+// ─── DEFAULTS ───
+function setDefaults(){
+  if(typeof Chart==='undefined') return;
+  Chart.defaults.color='#7b8ba8';
+  Chart.defaults.borderColor='rgba(255,255,255,0.05)';
+  Chart.defaults.font.family="'Outfit',sans-serif";
+  Chart.defaults.plugins.legend.display=false;
+  Chart.defaults.plugins.tooltip.backgroundColor='#0f1729';
+  Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.3)';
+  Chart.defaults.plugins.tooltip.borderWidth=1;
+  Chart.defaults.plugins.tooltip.padding=10;
+  Chart.defaults.plugins.tooltip.titleColor='#e8ecf4';
+  Chart.defaults.plugins.tooltip.bodyColor='#7b8ba8';
+}
+
+// ─── TAB SWITCHING ───
+function initTabs(){
+  const tabs=document.querySelectorAll('.topbar-tab[data-target]');
+  tabs.forEach(tab=>{
+    tab.addEventListener('click',function(){
+      tabs.forEach(t=>t.classList.remove('active'));
+      this.classList.add('active');
+      const tid=this.dataset.target;
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      const panel=document.getElementById('panel-'+tid);
+      if(panel){
+        panel.classList.add('active');
+        document.querySelector('.content').scrollTop=0;
+        setTimeout(()=>initChartsForTab(tid),60);
+      }
+    });
+  });
+}
+
+// ─── SPARKLINES ───
+function mkSpark(id,data,color,fill){
+  const c=document.getElementById(id);
+  if(!c||c._done) return;
+  c._done=true;
+  new Chart(c,{type:'line',data:{labels:data.map((_,i)=>i),datasets:[{data,borderColor:color,
+    backgroundColor:fill||'transparent',borderWidth:1.5,pointRadius:0,fill:!!fill,tension:0.4}]},
+    options:{responsive:true,maintainAspectRatio:true,
+      plugins:{legend:{display:false},tooltip:{enabled:false}},
+      scales:{x:{display:false},y:{display:false}}}});
+}
+
+// ─── KPI CHARTS ───
+function initKPICharts(){
+  if(typeof Chart==='undefined') return;
+  setDefaults();
+
+  mkSpark('spark1',[3.1,3.4,3.2,2.8,4.1,3.9,4.2,3.7,4.0,4.8],'#00d4aa','rgba(0,212,170,0.1)');
+  mkSpark('spark2',[18,22,20,19,25,24,26,23,27,24.5],'#6366f1','rgba(99,102,241,0.08)');
+  mkSpark('spark3',[0.78,0.80,0.79,0.81,0.83,0.80,0.82,0.83,0.81,0.82],'#00d4aa','rgba(0,212,170,0.08)');
+  mkSpark('spark4',[71,69,72,68,70,67,69,66,68,67],'#fbbf24','rgba(251,191,36,0.08)');
+
+  // Main engagement+reach chart
+  const me=document.getElementById('mainEngChart');
+  if(me&&!me._done){me._done=true;
+    const lbs=Array.from({length:30},(_,i)=>{const d=new Date(2026,3,i+1);return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})});
+    new Chart(me,{type:'line',data:{labels:lbs,datasets:[
+      {data:[3.1,3.4,3.2,2.8,4.1,3.9,4.2,3.7,4.0,4.3,3.8,4.5,4.1,4.6,4.2,3.9,4.4,4.7,4.3,4.8,4.1,4.5,4.9,4.6,4.2,4.8,5.1,4.7,4.3,4.8],
+        borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.07)',borderWidth:2,pointRadius:0,fill:true,tension:0.4,yAxisID:'y'},
+      {data:[182,196,178,164,241,228,248,218,235,252,224,265,242,271,248,231,259,277,253,283,244,266,289,272,251,284,302,278,255,284],
+        borderColor:'#6366f1',backgroundColor:'transparent',borderWidth:1.5,pointRadius:0,fill:false,tension:0.4,yAxisID:'y1'},
+      {type:'bar',data:[1,0,1,0,2,1,1,0,1,1,0,2,1,1,1,0,1,2,1,1,0,1,2,1,1,1,2,1,0,1],
+        backgroundColor:'rgba(251,191,36,0.2)',borderColor:'rgba(251,191,36,0.4)',borderWidth:1,yAxisID:'y2'}]},
+      options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
+        scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:10}}},
+          y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{callback:v=>v+'%',font:{size:10}},min:0,max:7},
+          y1:{position:'right',grid:{display:false},ticks:{callback:v=>(v/10).toFixed(0)+'K',font:{size:9}}},
+          y2:{display:false,max:5}}}});}
+
+  // Sentiment donut
+  const sd=document.getElementById('sentDonut');
+  if(sd&&!sd._done){sd._done=true;
+    new Chart(sd,{type:'doughnut',data:{labels:['Positive','Neutral','Mixed','Negative'],datasets:[{data:[60,18,11,11],
+      backgroundColor:['rgba(0,212,170,0.85)','rgba(99,102,241,0.85)','rgba(251,191,36,0.8)','rgba(248,113,113,0.8)'],
+      borderColor:'#0f1729',borderWidth:3}]},
+      options:{cutout:'72%',responsive:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+'%'}}}}});}
+
+  // Format bar
+  const fb=document.getElementById('formatChart');
+  if(fb&&!fb._done){fb._done=true;
+    new Chart(fb,{type:'bar',data:{labels:['Short Video','Reel','Photo','Carousel','Long Video','Text','Link'],
+      datasets:[{data:[5.8,4.9,3.7,3.4,2.1,1.8,0.9],
+        backgroundColor:['rgba(0,212,170,0.8)','rgba(0,212,170,0.65)','rgba(99,102,241,0.65)','rgba(99,102,241,0.5)','rgba(251,191,36,0.55)','rgba(251,191,36,0.4)','rgba(248,113,113,0.45)'],
+        borderRadius:5,borderSkipped:false}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,
+        scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}},
+          y:{grid:{display:false},ticks:{font:{size:9}}}}});}
+
+  // Heatmap
+  const hm=document.getElementById('heatmapEl');
+  if(hm&&!hm._done){hm._done=true;
+    const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    const times=['9AM','1PM','6PM','10PM'];
+    const data=[[12,18,32,18],[22,38,52,28],[16,28,38,24],[18,34,56,30],[14,26,36,20],[8,14,40,38],[6,10,30,34]];
+    let html='<div style="display:grid;grid-template-columns:32px repeat(4,1fr);gap:3px">';
+    html+='<div></div>'+times.map(t=>`<div style="font-size:9px;color:var(--text-muted);text-align:center;font-family:'JetBrains Mono',monospace;margin-bottom:3px">${t}</div>`).join('');
+    data.forEach((row,di)=>{
+      html+=`<div style="font-size:9px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;display:flex;align-items:center">${days[di]}</div>`;
+      row.forEach(val=>{
+        const op=Math.min(val/60,0.9).toFixed(2);
+        html+=`<div style="height:28px;border-radius:4px;background:rgba(0,212,170,${op});transition:transform .15s;cursor:default" title="${val}% avg engagement" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform=''"></div>`;
+      });
+    });
+    html+='</div>';
+    hm.innerHTML=html;}
+
+  // Week comparison
+  const wc=document.getElementById('weekComp');
+  if(wc&&!wc._done){wc._done=true;
+    new Chart(wc,{type:'bar',data:{labels:['Reach','Eng','Comments','Shares'],
+      datasets:[
+        {label:'This week',data:[24.5,4218,1847,892],backgroundColor:'rgba(0,212,170,0.7)',borderRadius:5},
+        {label:'Last week',data:[21.8,3740,1621,756],backgroundColor:'rgba(99,102,241,0.5)',borderRadius:5}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},
+        scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v>=1000?(v/1000).toFixed(0)+'K':v,font:{size:9}}}}}}); }
+
+  // Emotion radar
+  const er=document.getElementById('emotionRadar');
+  if(er&&!er._done){er._done=true;
+    new Chart(er,{type:'radar',data:{labels:['Joy','Anger','Sadness','Fear','Surprise','Love','Neutral'],
+      datasets:[
+        {label:'This week',data:[72,18,8,4,42,58,22],backgroundColor:'rgba(0,212,170,0.12)',borderColor:'rgba(0,212,170,0.7)',borderWidth:2,pointBackgroundColor:'#00d4aa',pointRadius:3},
+        {label:'Last week',data:[64,22,11,6,38,52,28],backgroundColor:'rgba(99,102,241,0.08)',borderColor:'rgba(99,102,241,0.5)',borderWidth:1.5,pointRadius:2,borderDash:[3,3]}]},
+      options:{responsive:true,plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:8,font:{size:9},padding:8}}},
+        scales:{r:{grid:{color:'rgba(255,255,255,0.06)'},ticks:{display:false},pointLabels:{font:{size:9}},min:0,max:100}}}});}
+}
+
+// ─── TRENDS CHARTS ───
+function initTrendsCharts(){
+  if(typeof Chart==='undefined') return;
+  setDefaults();
+
+  // Multi-metric 90 day
+  const tm=document.getElementById('trendMultiChart');
+  if(tm&&!tm._done){tm._done=true;
+    const lbs=Array.from({length:90},(_,i)=>i%7===0?`Day ${i+1}`:'');
+    const eng=Array.from({length:90},()=>parseFloat((2.5+Math.random()*3).toFixed(2)));
+    const reach=Array.from({length:90},()=>Math.round(8000+Math.random()*16000));
+    const posts=Array.from({length:90},()=>Math.random()>0.6?1:0);
+    new Chart(tm,{type:'line',data:{labels:lbs,datasets:[
+      {data:eng,borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.07)',borderWidth:2,pointRadius:0,fill:true,tension:0.4,yAxisID:'y'},
+      {data:reach,borderColor:'#6366f1',backgroundColor:'transparent',borderWidth:1.5,pointRadius:0,tension:0.4,yAxisID:'y1'},
+      {type:'bar',data:posts,backgroundColor:'rgba(251,191,36,0.25)',borderColor:'rgba(251,191,36,0)',yAxisID:'y2'}]},
+      options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
+        scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{callback:v=>v+'%',font:{size:9}},min:0,max:7},
+          y1:{position:'right',grid:{display:false},ticks:{callback:v=>(v/1000).toFixed(0)+'K',font:{size:9}}},
+          y2:{display:false,max:3}}}});}
+
+  // Day of week
+  const dow=document.getElementById('dowChart');
+  if(dow&&!dow._done){dow._done=true;
+    new Chart(dow,{type:'bar',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+      datasets:[{data:[3.2,5.1,3.8,4.6,3.4,2.9,2.4],
+        backgroundColor:['rgba(0,212,170,0.5)','rgba(0,212,170,0.92)','rgba(0,212,170,0.6)','rgba(0,212,170,0.82)','rgba(0,212,170,0.55)','rgba(99,102,241,0.6)','rgba(99,102,241,0.42)'],
+        borderRadius:6}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        scales:{x:{grid:{display:false},ticks:{font:{size:10}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}});}
+
+  // Scatter
+  const sc=document.getElementById('reachEngScatter');
+  if(sc&&!sc._done){sc._done=true;
+    const pts=Array.from({length:60},()=>({x:Math.round(2000+Math.random()*20000),y:parseFloat((1+Math.random()*5).toFixed(2))}));
+    new Chart(sc,{type:'scatter',data:{datasets:[{data:pts,backgroundColor:'rgba(0,212,170,0.4)',borderColor:'rgba(0,212,170,0.6)',pointRadius:4,pointHoverRadius:6}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v>=1000?(v/1000).toFixed(0)+'K':v,font:{size:9}},title:{display:true,text:'Reach',font:{size:10}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},title:{display:true,text:'Eng Rate',font:{size:10}}}}}});}
+
+  // Hourly
+  const hr=document.getElementById('hourlyChart');
+  if(hr&&!hr._done){hr._done=true;
+    const hrs=Array.from({length:24},(_,i)=>(i<10?'0':'')+i+':00');
+    const vals=[1.2,0.8,0.6,0.5,0.4,0.7,1.1,1.8,2.4,3.1,3.4,3.2,2.8,2.6,2.9,3.1,4.2,5.1,4.8,4.1,3.6,3.0,2.4,1.8];
+    new Chart(hr,{type:'line',data:{labels:hrs,datasets:[{data:vals,borderColor:'#00d4aa',
+      backgroundColor:'rgba(0,212,170,0.08)',borderWidth:2,pointRadius:0,fill:true,tension:0.4}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}}); }
+
+  // Trend table
+  const tb=document.getElementById('trendTableBody');
+  if(tb&&!tb._done){tb._done=true;
+    const rows=[
+      ['22 Apr','3','24.5K','62.1K','4,218','4.8%','+124','0.84'],['21 Apr','2','18.2K','46.8K','3,120','3.9%','+98','0.82'],
+      ['20 Apr','1','11.4K','28.9K','1,840','3.2%','+67','0.79'],['19 Apr','2','16.8K','42.4K','2,940','3.8%','+88','0.83'],
+      ['18 Apr','3','22.1K','56.2K','3,840','4.2%','+112','0.85'],['17 Apr','1','9.8K','24.8K','1,420','2.9%','+41','0.77'],
+      ['16 Apr','2','14.2K','36.1K','2,360','3.5%','+74','0.81']];
+    tb.innerHTML=rows.map(r=>`<tr><td class="td-mono sm">${r[0]}</td><td class="td-num">${r[1]}</td><td class="td-num">${r[2]}</td><td class="td-num">${r[3]}</td><td class="td-num">${r[4]}</td><td class="td-up">${r[5]}</td><td class="td-up">${r[6]}</td><td class="td-num">${r[7]}</td></tr>`).join('');}
+}
+
+// ─── VIRALITY CHARTS ───
+function initViralityCharts(){
+  if(typeof Chart==='undefined') return;
+  setDefaults();
+
+  const vel=document.getElementById('velChart');
+  if(vel&&!vel._done){vel._done=true;
+    const hrs=Array.from({length:48},(_,i)=>(i%24<10?'0':'')+i%24+':00');
+    const v=[4,2,3,2,1,2,4,8,12,18,24,31,28,22,18,14,19,24,38,62,89,142,198,241,287,312,278,223,187,156,134,112,98,87,76,68,89,124,167,214,243,289,321,298,267,234,198,176];
+    new Chart(vel,{type:'line',data:{labels:hrs,datasets:[
+      {label:'Shares/hr',data:v,borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.07)',borderWidth:2,pointRadius:0,fill:true,tension:0.3},
+      {label:'Viral threshold',data:Array(48).fill(200),borderColor:'rgba(248,113,113,0.7)',borderDash:[5,4],borderWidth:1.5,pointRadius:0,fill:false}]},
+      options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},
+        scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},min:0}}}});}
+
+  const vd=document.getElementById('viralDistChart');
+  if(vd&&!vd._done){vd._done=true;
+    new Chart(vd,{type:'bar',data:{labels:['0.0–0.2','0.2–0.4','0.4–0.5','0.5–0.6','0.6–0.7','0.7–0.8','0.8–0.9','0.9–1.0'],
+      datasets:[{data:[6,12,18,22,16,12,8,4],
+        backgroundColor:['rgba(248,113,113,0.5)','rgba(251,191,36,0.5)','rgba(251,191,36,0.6)','rgba(0,212,170,0.5)','rgba(0,212,170,0.65)','rgba(0,212,170,0.75)','rgba(0,212,170,0.85)','rgba(0,212,170,0.95)'],
+        borderRadius:4}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:30}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}}}}}}); }
+
+  const tc=document.getElementById('triggerChart');
+  if(tc&&!tc._done){tc._done=true;
+    new Chart(tc,{type:'bar',data:{
+      labels:['Short video','Tue 6 PM slot','Sentiment >0.85','Product launch','Emoji in caption','Cross-share','Question in copy'],
+      datasets:[{data:[156,92,78,65,54,45,41],
+        backgroundColor:'rgba(0,212,170,0.7)',borderRadius:5,borderSkipped:false}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,
+        scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>'+'+v+'%',font:{size:9}}},
+          y:{grid:{display:false},ticks:{font:{size:9}}}}}}); }
+
+  const vh=document.getElementById('viralHeatChart');
+  if(vh&&!vh._done){vh._done=true;
+    new Chart(vh,{type:'bar',data:{
+      labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+      datasets:[
+        {label:'9 AM',data:[18,22,16,20,14,8,6],backgroundColor:'rgba(0,212,170,0.3)',borderRadius:3},
+        {label:'1 PM',data:[28,34,26,30,22,12,10],backgroundColor:'rgba(0,212,170,0.45)',borderRadius:3},
+        {label:'6 PM',data:[48,72,52,68,44,38,30],backgroundColor:'rgba(0,212,170,0.85)',borderRadius:3},
+        {label:'10 PM',data:[22,36,24,32,28,42,36],backgroundColor:'rgba(99,102,241,0.5)',borderRadius:3}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},
+        scales:{x:{grid:{display:false},ticks:{font:{size:10}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}}); }
+}
+
+// ─── SENTIMENT CHARTS ───
+function initSentimentCharts(){
+  if(typeof Chart==='undefined') return;
+  setDefaults();
+
+  const st=document.getElementById('sentTimeChart');
+  if(st&&!st._done){st._done=true;
+    const d30=Array.from({length:30},(_,i)=>i+1+'');
+    new Chart(st,{type:'line',data:{labels:d30,datasets:[
+      {label:'Positive %',data:[58,61,59,63,65,62,66,68,64,70,67,72,69,74,71,68,73,75,72,76,70,74,78,75,71,76,80,77,73,78],fill:true,backgroundColor:'rgba(52,211,153,0.1)',borderColor:'rgba(52,211,153,0.8)',borderWidth:2,pointRadius:0,tension:0.4},
+      {label:'Negative %',data:[14,12,13,11,10,12,11,10,12,9,11,10,9,8,10,11,9,8,10,9,11,10,8,9,11,10,8,9,11,10],fill:true,backgroundColor:'rgba(248,113,113,0.08)',borderColor:'rgba(248,113,113,0.7)',borderWidth:1.5,pointRadius:0,tension:0.4}]},
+      options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},
+        scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}}); }
+
+  const eb=document.getElementById('emotionBarChart');
+  if(eb&&!eb._done){eb._done=true;
+    new Chart(eb,{type:'bar',data:{labels:['Joy','Anger','Sadness','Love','Surprise','Fear','Neutral'],
+      datasets:[{data:[42,18,12,14,8,3,3],
+        backgroundColor:['rgba(52,211,153,0.75)','rgba(248,113,113,0.7)','rgba(96,165,250,0.65)','rgba(244,114,182,0.7)','rgba(251,191,36,0.7)','rgba(167,139,250,0.6)','rgba(107,114,128,0.5)'],
+        borderRadius:5}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}}); }
+
+  const sb=document.getElementById('sentByPageChart');
+  if(sb&&!sb._done){sb._done=true;
+    new Chart(sb,{type:'bar',data:{labels:['Drinking Memes','Kelpie Daily','UK Jail News'],
+      datasets:[
+        {label:'Your page',data:[0.88,0.72,0.68],backgroundColor:['rgba(0,212,170,0.75)','rgba(99,102,241,0.65)','rgba(251,191,36,0.6)'],borderRadius:6},
+        {label:'Benchmark',data:[0.74,0.74,0.74],backgroundColor:'rgba(255,255,255,0.08)',borderRadius:6}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},
+        scales:{x:{grid:{display:false},ticks:{font:{size:10}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},min:0,max:1}}}}); }
+
+  const se=document.getElementById('sentEngChart');
+  if(se&&!se._done){se._done=true;
+    const pts=Array.from({length:60},()=>({x:parseFloat((0.3+Math.random()*0.68).toFixed(2)),y:parseFloat((1+Math.random()*5).toFixed(2))}));
+    new Chart(se,{type:'scatter',data:{datasets:[{data:pts,backgroundColor:'rgba(99,102,241,0.45)',borderColor:'rgba(99,102,241,0.7)',pointRadius:4,pointHoverRadius:6}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},title:{display:true,text:'Sentiment Score',font:{size:10}},min:0.2,max:1},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},title:{display:true,text:'Eng Rate',font:{size:10}},min:0}}}}); }
+}
+
+// ─── DISPATCHER ───
+function initChartsForTab(tid){
+  if(tid==='kpis') initKPICharts();
+  else if(tid==='trends') initTrendsCharts();
+  else if(tid==='virality') initViralityCharts();
+  else if(tid==='sentiment') initSentimentCharts();
+}
+
+// ─── RANGE BUTTONS ───
+document.querySelectorAll('.range-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    this.closest('.panel-header').querySelectorAll('.range-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ─── BOOT ───
+document.addEventListener('DOMContentLoaded',function(){
+  initTabs();
+  setTimeout(initKPICharts, 150);
+});
+
+})();
+</script>
+
 <aside class="sidebar">
   <a href="admin_panel.html" class="sidebar-logo" title="Back to Admin Panel">
     <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
@@ -554,833 +898,312 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 </aside>
 
 <!-- ═══ MAIN CONTENT ═══ -->
+
 <div class="main">
   <header class="topbar">
     <div class="topbar-left">
       <div class="topbar-title">Executive Dashboard</div>
       <div class="topbar-tabs">
-        <div class="topbar-tab active">KPIs</div>
-        <div class="topbar-tab">Trends</div>
-        <div class="topbar-tab">Virality</div>
-        <div class="topbar-tab">Sentiment</div>
+        <div class="topbar-tab active" data-target="kpis">KPIs</div>
+        <div class="topbar-tab" data-target="trends">Trends</div>
+        <div class="topbar-tab" data-target="virality">Virality</div>
+        <div class="topbar-tab" data-target="sentiment">Sentiment</div>
       </div>
     </div>
     <div class="topbar-right">
       <div class="page-selector">
-        <span class="page-dot"></span>
-        FitLife Pro
+        <span class="page-dot"></span>FitLife Pro
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
       <button class="topbar-btn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:-2px;margin-right:4px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Export
       </button>
       <div class="avatar">AS</div>
     </div>
   </header>
-<div class="m-page-tabs"><button class="active" onclick="document.querySelectorAll('.topbar-tab')[0]?.click();document.querySelectorAll('.m-page-tabs button').forEach((b,j)=>b.classList.toggle('active',j==0))">Overview</button><button class="" onclick="document.querySelectorAll('.topbar-tab')[1]?.click();document.querySelectorAll('.m-page-tabs button').forEach((b,j)=>b.classList.toggle('active',j==1))">Trends</button><button class="" onclick="document.querySelectorAll('.topbar-tab')[2]?.click();document.querySelectorAll('.m-page-tabs button').forEach((b,j)=>b.classList.toggle('active',j==2))">Virality</button><button class="" onclick="document.querySelectorAll('.topbar-tab')[3]?.click();document.querySelectorAll('.m-page-tabs button').forEach((b,j)=>b.classList.toggle('active',j==3))">Sentiment</button></div>
 
   <div class="content">
-    <!-- TAB: KPIs -->
-    <div class="tab-panel active" data-tab="kpis">
-    <!-- Alert -->
-    <div class="alert">
-      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <div class="alert-content">
-        <div class="alert-title">Crisis Alert — Negative Sentiment Spike</div>
-        <div class="alert-desc">Sentiment on FitLife Pro dropped 35% in the last 2 hours. 12 flagged comments detected.</div>
-      </div>
-      <div class="alert-time">12 min ago</div>
-      <button class="alert-close">×</button>
-    </div>
 
-    <!-- KPIs -->
-    <div class="kpi-grid">
-      <div class="kpi-card">
-        <div class="kpi-header">
-          <span class="kpi-label">Engagement Rate</span>
-          <div class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-        </div>
-        <div class="kpi-value accent">4.2%</div>
-        <div class="kpi-change up"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>+12% vs last week</div>
-        <div class="kpi-spark"><svg viewBox="0 0 80 36"><polyline points="0,30 12,26 24,28 36,18 48,20 60,12 72,8 80,10" stroke-linecap="round"/></svg></div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-header">
-          <span class="kpi-label">Total Reach</span>
-          <div class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        </div>
-        <div class="kpi-value">24.5K</div>
-        <div class="kpi-change up"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>+8.3% vs last week</div>
-        <div class="kpi-spark"><svg viewBox="0 0 80 36"><polyline points="0,32 15,24 30,26 45,16 60,14 80,6" stroke-linecap="round"/></svg></div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-header">
-          <span class="kpi-label">Sentiment Score</span>
-          <div class="kpi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
-        </div>
-        <div class="kpi-value accent">0.82</div>
-        <div class="kpi-change up"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>Positive — stable</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-header">
-          <span class="kpi-label">Virality Rate</span>
-          <div class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        </div>
-        <div class="kpi-value">67%</div>
-        <div class="kpi-change down"><svg viewBox="0 0 24 24"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/></svg>−3.1% vs last week</div>
-        <div class="kpi-spark"><svg viewBox="0 0 80 36"><polyline points="0,8 15,12 30,10 45,18 60,22 80,28" stroke-linecap="round"/></svg></div>
-      </div>
-    </div>
+    <!-- ══════════════════════════════════════════ KPIs TAB ══════════════════════════════════════════ -->
+    <div class="tab-panel active" id="panel-kpis">
 
-    <!-- Charts -->
-    <div class="charts-row">
-      
-    <!-- ROW 1: Engagement + Reach multi-axis line chart + Sentiment donut -->
-    <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px">
-      <div class="chart-card">
-        <div class="chart-card-header">
-          <div>
-            <div class="chart-card-title">Engagement &amp; Reach — 30 Day Trend</div>
-            <div class="chart-card-sub">All connected pages · Daily aggregated</div>
-          </div>
-          <div style="display:flex;gap:6px;align-items:center">
-            <span class="chart-card-badge badge-up">+12.4% WoW</span>
-            <select style="background:var(--bg-tertiary);border:1px solid var(--border);border-radius:6px;color:var(--text-secondary);font-size:11px;padding:4px 8px;font-family:inherit;outline:none">
-              <option>Last 30 days</option><option>Last 14 days</option><option>Last 90 days</option>
-            </select>
-          </div>
+      <!-- Alert banner -->
+      <div class="alert" id="dashAlert">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="alert-content">
+          <div class="alert-title">Crisis Alert — Negative Sentiment Spike</div>
+          <div class="alert-desc">Sentiment on FitLife Pro dropped 35% in the last 2 hours. 12 flagged comments detected.</div>
         </div>
-        <div class="chart-wrap"><canvas id="engReachChart" height="90"></canvas></div>
-        <div class="chart-legend">
-          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#00d4aa"></div>Engagement Rate (%)</div>
-          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#6366f1"></div>Reach (÷100)</div>
-          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:rgba(251,191,36,0.7)"></div>Posts Published</div>
-        </div>
+        <div class="alert-time">12 min ago</div>
+        <button class="alert-close" onclick="this.closest('.alert').remove()">×</button>
       </div>
-      <div class="chart-card">
-        <div class="chart-card-header">
-          <div>
-            <div class="chart-card-title">Sentiment Distribution</div>
-            <div class="chart-card-sub">Last 30 days · 847 posts</div>
-          </div>
-          <span class="chart-card-badge badge-up">82% Positive</span>
-        </div>
-        <div class="chart-wrap" style="height:160px;display:flex;align-items:center;justify-content:center">
-          <canvas id="sentimentDonut" height="150" width="150"></canvas>
-        </div>
-        <div class="chart-legend" style="justify-content:center">
-          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#00d4aa"></div>Positive 60%</div>
-          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#6366f1"></div>Neutral 18%</div>
-          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#fbbf24"></div>Mixed 11%</div>
-          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#f87171"></div>Negative 11%</div>
-        </div>
-      </div>
-    </div>
 
-    <!-- ROW 2: Viral Velocity + Post Heatmap + Emotion Radar -->
-    <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:16px;margin-bottom:16px">
-      <div class="chart-card">
-        <div class="chart-card-header">
-          <div>
-            <div class="chart-card-title">Viral Velocity — Live 48h</div>
-            <div class="chart-card-sub">Share rate per hour · Threshold line at 200</div>
-          </div>
-          <span class="chart-card-badge badge-up">↑ Active</span>
+      <!-- KPI row: 4 clean cards -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px">
+        <div class="kpi-card">
+          <div class="kpi-header"><span class="kpi-label">Engagement Rate</span><div class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div></div>
+          <div class="kpi-value accent">4.2%</div>
+          <div class="kpi-change up">+12% vs last week</div>
+          <canvas id="spark1" height="36" style="margin-top:8px"></canvas>
         </div>
-        <div class="chart-wrap"><canvas id="velocityChart" height="110"></canvas></div>
+        <div class="kpi-card">
+          <div class="kpi-header"><span class="kpi-label">Total Reach</span><div class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div></div>
+          <div class="kpi-value">24.5K</div>
+          <div class="kpi-change up">+8.3% vs last week</div>
+          <canvas id="spark2" height="36" style="margin-top:8px"></canvas>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><span class="kpi-label">Sentiment Score</span><div class="kpi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div></div>
+          <div class="kpi-value accent">0.82</div>
+          <div class="kpi-change" style="color:var(--text-muted)">Positive — stable</div>
+          <canvas id="spark3" height="36" style="margin-top:8px"></canvas>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header"><span class="kpi-label">Virality Rate</span><div class="kpi-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div></div>
+          <div class="kpi-value">67%</div>
+          <div class="kpi-change down">−3.1% vs last week</div>
+          <canvas id="spark4" height="36" style="margin-top:8px"></canvas>
+        </div>
       </div>
-      <div class="chart-card">
-        <div class="chart-card-header">
-          <div>
-            <div class="chart-card-title">Posting Heatmap</div>
-            <div class="chart-card-sub">Avg engagement by day &amp; hour</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:4px;margin-bottom:6px">
-          <div style="writing-mode:vertical-rl;font-size:9px;color:var(--text-muted);letter-spacing:.05em;transform:rotate(180deg);padding-right:4px;font-family:JetBrains Mono,monospace">MON→SUN</div>
-          <div style="flex:1">
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-bottom:4px">
-              <div style="font-size:9px;color:var(--text-muted);text-align:center;font-family:'JetBrains Mono',monospace">9AM</div>
-              <div style="font-size:9px;color:var(--text-muted);text-align:center;font-family:'JetBrains Mono',monospace">1PM</div>
-              <div style="font-size:9px;color:var(--text-muted);text-align:center;font-family:'JetBrains Mono',monospace">6PM</div>
-              <div style="font-size:9px;color:var(--text-muted);text-align:center;font-family:'JetBrains Mono',monospace">10PM</div>
+
+      <!-- Main chart + sentiment donut -->
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="panel">
+          <div class="panel-header">
+            <div><div class="panel-title">Engagement &amp; Reach — 30 Days</div><div class="panel-subtitle">All pages · Daily aggregated</div></div>
+            <div style="display:flex;gap:6px">
+              <span class="range-btn active" data-range="30">30D</span>
+              <span class="range-btn" data-range="14">14D</span>
+              <span class="range-btn" data-range="7">7D</span>
             </div>
-            <div id="heatmapGrid" style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(7,1fr);gap:3px;height:130px"></div>
           </div>
+          <canvas id="mainEngChart" height="120"></canvas>
         </div>
-        <div style="display:flex;justify-content:space-between;margin-top:6px">
-          <span style="font-size:9px;color:var(--text-muted)">Low</span>
-          <div style="display:flex;gap:2px;height:8px;align-items:center">
-            <div style="width:12px;height:8px;border-radius:2px;background:rgba(0,212,170,0.08)"></div>
-            <div style="width:12px;height:8px;border-radius:2px;background:rgba(0,212,170,0.2)"></div>
-            <div style="width:12px;height:8px;border-radius:2px;background:rgba(0,212,170,0.4)"></div>
-            <div style="width:12px;height:8px;border-radius:2px;background:rgba(0,212,170,0.65)"></div>
-            <div style="width:12px;height:8px;border-radius:2px;background:rgba(0,212,170,0.9)"></div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Sentiment Split</div><div class="panel-subtitle">Last 30 days · 847 posts</div></div><span style="font-size:10px;color:#34d399;font-weight:600">82% Positive</span></div>
+          <div style="display:flex;align-items:center;justify-content:center;padding:8px 0">
+            <canvas id="sentDonut" height="140" width="140"></canvas>
           </div>
-          <span style="font-size:9px;color:var(--text-muted)">High</span>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px;font-size:11px">
+            <div style="display:flex;align-items:center;gap:5px;color:var(--text-muted)"><span style="width:8px;height:8px;border-radius:50%;background:#00d4aa;display:inline-block"></span>Positive 60%</div>
+            <div style="display:flex;align-items:center;gap:5px;color:var(--text-muted)"><span style="width:8px;height:8px;border-radius:50%;background:#6366f1;display:inline-block"></span>Neutral 18%</div>
+            <div style="display:flex;align-items:center;gap:5px;color:var(--text-muted)"><span style="width:8px;height:8px;border-radius:50%;background:#fbbf24;display:inline-block"></span>Mixed 11%</div>
+            <div style="display:flex;align-items:center;gap:5px;color:var(--text-muted)"><span style="width:8px;height:8px;border-radius:50%;background:#f87171;display:inline-block"></span>Negative 11%</div>
+          </div>
         </div>
       </div>
-      <div class="chart-card">
-        <div class="chart-card-header">
-          <div>
-            <div class="chart-card-title">Emotion Radar</div>
-            <div class="chart-card-sub">Comment emotion breakdown</div>
-          </div>
-        </div>
-        <div class="chart-wrap" style="height:160px;display:flex;align-items:center;justify-content:center">
-          <canvas id="emotionRadar" height="150" width="150"></canvas>
-        </div>
-      </div>
-    </div>
 
-    <!-- ROW 3: Content Format Performance + Weekly Comparison bar chart -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
-      <div class="chart-card">
-        <div class="chart-card-header">
-          <div>
-            <div class="chart-card-title">Content Format Performance</div>
-            <div class="chart-card-sub">Avg engagement rate by format type</div>
-          </div>
-          <span class="chart-card-badge badge-nt">Last 90 days</span>
+      <!-- Format performance + Heatmap -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Format Performance</div><div class="panel-subtitle">Avg engagement by type</div></div></div>
+          <canvas id="formatChart" height="140"></canvas>
         </div>
-        <div class="chart-wrap"><canvas id="formatChart" height="120"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-card-header">
-          <div>
-            <div class="chart-card-title">This Week vs Last Week</div>
-            <div class="chart-card-sub">Key metrics comparison</div>
-          </div>
-          <span class="chart-card-badge badge-up">+9.1% overall</span>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Posting Heatmap</div><div class="panel-subtitle">Engagement intensity by time</div></div></div>
+          <div id="heatmapEl" style="margin-top:8px"></div>
         </div>
-        <div class="chart-wrap"><canvas id="weekCompChart" height="120"></canvas></div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">This Week vs Last</div><div class="panel-subtitle">Key metric comparison</div></div></div>
+          <canvas id="weekComp" height="140"></canvas>
+        </div>
       </div>
-    </div>
 
-    <!-- ROW 4: Top Posts Table -->
-    <div class="chart-card" style="margin-bottom:16px">
-      <div class="chart-card-header">
-        <div>
-          <div class="chart-card-title">Top Performing Posts — Last 14 Days</div>
-          <div class="chart-card-sub">Ranked by total engagement · Click any row to analyse with Art-E</div>
-        </div>
-        <button style="font-size:11px;padding:5px 12px;border-radius:7px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Export CSV</button>
-      </div>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>#</th><th>Post</th><th>Format</th><th>Date/Time</th>
-            <th>Reach</th><th>Engagements</th><th>Eng Rate</th>
-            <th>Sentiment</th><th>Virality Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td class="td-num">01</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Product launch video — new supplement line drops Friday</td><td><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(99,102,241,0.1);color:#a78bfa">Video</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:11px">Tue 6:12 PM</td><td class="td-num">18.4K</td><td class="td-num">4,218</td><td class="td-up">4.8%</td><td><span class="td-badge" style="background:rgba(52,211,153,0.1);color:#34d399">0.94 ✓</span></td><td class="td-num">89%</td></tr>
-          <tr><td class="td-num">02</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Behind the scenes — our morning routine</td><td><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(0,212,170,0.1);color:#00d4aa">Reel</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:11px">Wed 7:00 PM</td><td class="td-num">14.2K</td><td class="td-num">3,847</td><td class="td-up">4.2%</td><td><span class="td-badge" style="background:rgba(52,211,153,0.1);color:#34d399">0.88 ✓</span></td><td class="td-num">74%</td></tr>
-          <tr><td class="td-num">03</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Customer transformation — 12 week journey</td><td><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(96,165,250,0.1);color:#60a5fa">Photo</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:11px">Mon 12:00 PM</td><td class="td-num">11.8K</td><td class="td-num">2,934</td><td class="td-up">3.9%</td><td><span class="td-badge" style="background:rgba(52,211,153,0.1);color:#34d399">0.91 ✓</span></td><td class="td-num">68%</td></tr>
-          <tr><td class="td-num">04</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Nutrition tips carousel — 5 meal prep hacks</td><td><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(251,191,36,0.1);color:#fbbf24">Carousel</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:11px">Thu 5:45 PM</td><td class="td-num">9.4K</td><td class="td-num">2,110</td><td class="td-up">3.4%</td><td><span class="td-badge" style="background:rgba(52,211,153,0.1);color:#34d399">0.85 ✓</span></td><td class="td-num">61%</td></tr>
-          <tr><td class="td-num">05</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Monday motivation — do it for yourself</td><td><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(96,165,250,0.1);color:#60a5fa">Photo</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:11px">Mon 7:00 AM</td><td class="td-num">8.1K</td><td class="td-num">1,872</td><td class="td-up">3.1%</td><td><span class="td-badge" style="background:rgba(52,211,153,0.1);color:#34d399">0.79</span></td><td class="td-num">52%</td></tr>
-          <tr><td class="td-num">06</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Q&A session recap video</td><td><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(99,102,241,0.1);color:#a78bfa">Video</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:11px">Fri 8:00 PM</td><td class="td-num">7.6K</td><td class="td-num">1,644</td><td class="td-up">2.8%</td><td><span class="td-badge" style="background:rgba(52,211,153,0.1);color:#34d399">0.82</span></td><td class="td-num">48%</td></tr>
-          <tr><td class="td-num">07</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Promo post — 20% off this weekend only</td><td><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(96,165,250,0.1);color:#60a5fa">Photo</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:11px">Sat 10:00 AM</td><td class="td-num">5.9K</td><td class="td-num">822</td><td class="td-dn">1.4%</td><td><span class="td-badge" style="background:rgba(251,191,36,0.1);color:#fbbf24">0.61 ~</span></td><td class="td-num">21%</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Bottom panels -->
-    <div class="bottom-grid">
-      <div class="panel">
+      <!-- Top posts table -->
+      <div class="panel" style="margin-bottom:16px">
         <div class="panel-header">
-          <div>
-            <div class="panel-title">AI Activity Feed</div>
-            <div class="panel-subtitle">Real-time intelligence</div>
-          </div>
-          <span class="panel-link">View all →</span>
+          <div><div class="panel-title">Top Posts — Last 14 Days</div><div class="panel-subtitle">Ranked by engagement · Click any row → Art-E analysis</div></div>
+          <button style="font-size:11px;padding:4px 12px;border-radius:7px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Export CSV</button>
         </div>
-        <div class="activity-item">
-          <div class="activity-icon green"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-          <div class="activity-text"><strong>Virality predicted</strong> — Product launch video scored 89% confidence. Recommend boosting within 2 hours.</div>
-          <div class="activity-time">2h ago</div>
-        </div>
-        <div class="activity-item">
-          <div class="activity-icon yellow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-          <div class="activity-text"><strong>Timing shift detected</strong> — Morning posts showing 23% lower engagement this week. Consider 6 PM slot.</div>
-          <div class="activity-time">5h ago</div>
-        </div>
-        <div class="activity-item">
-          <div class="activity-icon blue"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
-          <div class="activity-text"><strong>New segment found</strong> — "Health-conscious millennials" cluster detected in your audience (14% of followers).</div>
-          <div class="activity-time">1d ago</div>
-        </div>
-        <div class="activity-item">
-          <div class="activity-icon green"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div>
-          <div class="activity-text"><strong>Format trend</strong> — Short-form video outperforming all other formats by 156% this week.</div>
-          <div class="activity-time">1d ago</div>
-        </div>
-      </div>
-      <div class="panel">
-        <div class="panel-header">
-          <div>
-            <div class="panel-title">Top Performing Content</div>
-            <div class="panel-subtitle">Last 7 days by engagement</div>
-          </div>
-          <span class="panel-link">Full report →</span>
-        </div>
-        <div class="top-post">
-          <span class="top-post-rank">01</span>
-          <div class="top-post-type">🎬</div>
-          <div class="top-post-info"><div class="top-post-name">Product launch video</div><div class="top-post-meta">Video · Tue 6 PM · Sentiment 0.94</div></div>
-          <div class="top-post-val">4.2K</div>
-        </div>
-        <div class="top-post">
-          <span class="top-post-rank">02</span>
-          <div class="top-post-type">📸</div>
-          <div class="top-post-info"><div class="top-post-name">Behind the scenes reel</div><div class="top-post-meta">Reel · Wed 7 PM · Sentiment 0.88</div></div>
-          <div class="top-post-val">3.8K</div>
-        </div>
-        <div class="top-post">
-          <span class="top-post-rank">03</span>
-          <div class="top-post-type">💪</div>
-          <div class="top-post-info"><div class="top-post-name">Customer transformation</div><div class="top-post-meta">Photo · Mon 12 PM · Sentiment 0.91</div></div>
-          <div class="top-post-val">2.9K</div>
-        </div>
-        <div class="top-post">
-          <span class="top-post-rank">04</span>
-          <div class="top-post-type">📝</div>
-          <div class="top-post-info"><div class="top-post-name">Nutrition tips carousel</div><div class="top-post-meta">Carousel · Thu 5 PM · Sentiment 0.85</div></div>
-          <div class="top-post-val">2.1K</div>
-        </div>
-      </div>
-    </div>
-    </div><!-- end tab kpis -->
-
-    <!-- TAB: TRENDS -->
-    <div class="tab-panel" data-tab="trends">
-      <div class="section-label">ENGAGEMENT TRENDS — DEEP DIVE</div>
-
-      <div class="card" style="margin-bottom:16px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <div><div class="card-title">Engagement Rate Over Time</div><div class="card-subtitle">Daily average · All connected pages</div></div>
-          <div style="display:flex;gap:6px">
-            <span onclick="setRange(this,7)" style="padding:4px 10px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:6px;font-size:10px;color:var(--accent);font-family:JetBrains Mono,monospace;cursor:pointer">7D</span>
-            <span onclick="setRange(this,30)" style="padding:4px 10px;background:var(--accent);border-radius:6px;font-size:10px;color:var(--bg-primary);font-weight:600;font-family:JetBrains Mono,monospace;cursor:pointer">30D</span>
-            <span onclick="setRange(this,90)" style="padding:4px 10px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:6px;font-size:10px;color:var(--accent);font-family:JetBrains Mono,monospace;cursor:pointer">90D</span>
-          </div>
-        </div>
-        <canvas id="engTrendChart" height="90"></canvas>
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Post</th><th>Format</th><th>Posted</th><th>Reach</th><th>Eng Rate</th><th>Shares</th><th>Sentiment</th><th>Virality</th></tr></thead>
+          <tbody>
+            <tr><td class="td-mono">01</td><td class="td-clip">Product launch video — new supplement line drops Friday</td><td><span class="badge-fmt purple">Video</span></td><td class="td-mono sm">Tue 6:12 PM</td><td class="td-num">18.4K</td><td class="td-up">4.8%</td><td class="td-num">892</td><td><span class="td-sent g">0.94 ✓</span></td><td class="td-num">89%</td></tr>
+            <tr><td class="td-mono">02</td><td class="td-clip">Behind the scenes — our morning routine revealed</td><td><span class="badge-fmt teal">Reel</span></td><td class="td-mono sm">Wed 7:00 PM</td><td class="td-num">14.2K</td><td class="td-up">4.2%</td><td class="td-num">445</td><td><span class="td-sent g">0.88 ✓</span></td><td class="td-num">74%</td></tr>
+            <tr><td class="td-mono">03</td><td class="td-clip">Customer transformation — 12 week journey in photos</td><td><span class="badge-fmt blue">Photo</span></td><td class="td-mono sm">Mon 12:00 PM</td><td class="td-num">11.8K</td><td class="td-up">3.9%</td><td class="td-num">312</td><td><span class="td-sent g">0.91 ✓</span></td><td class="td-num">68%</td></tr>
+            <tr><td class="td-mono">04</td><td class="td-clip">Nutrition tips carousel — 5 meal prep hacks</td><td><span class="badge-fmt amber">Carousel</span></td><td class="td-mono sm">Thu 5:45 PM</td><td class="td-num">9.4K</td><td class="td-up">3.4%</td><td class="td-num">198</td><td><span class="td-sent g">0.85 ✓</span></td><td class="td-num">61%</td></tr>
+            <tr><td class="td-mono">05</td><td class="td-clip">Monday motivation — do it for yourself not anyone else</td><td><span class="badge-fmt blue">Photo</span></td><td class="td-mono sm">Mon 7:00 AM</td><td class="td-num">8.1K</td><td class="td-up">3.1%</td><td class="td-num">156</td><td><span class="td-sent a">0.79</span></td><td class="td-num">52%</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
-        <div class="card">
-          <div class="card-title">Follower Growth</div>
-          <div class="card-subtitle">Last 30 days</div>
-          <div style="font-size:28px;font-weight:800;color:var(--accent);margin:10px 0 4px">+1,247</div>
-          <div style="font-size:11px;color:#34d399;margin-bottom:12px">▲ 18% vs prior period</div>
-          <canvas id="followGrowthSparkline" height="50"></canvas>
+      <!-- AI Activity + AI Insights side by side -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">AI Activity Feed</div><div class="panel-subtitle">Real-time intelligence</div></div><span class="panel-link">View all →</span></div>
+          <div class="activity-item"><div class="activity-icon green"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="activity-text"><strong>Virality predicted</strong> — Product launch video scored 89% confidence. Recommend boosting within 2 hours.</div><div class="activity-time">2h ago</div></div>
+          <div class="activity-item"><div class="activity-icon yellow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="activity-text"><strong>Timing shift detected</strong> — Morning posts showing 23% lower engagement. Consider 6 PM slot.</div><div class="activity-time">5h ago</div></div>
+          <div class="activity-item"><div class="activity-icon blue"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="activity-text"><strong>New segment found</strong> — "Health-conscious millennials" cluster detected (14% of followers).</div><div class="activity-time">1d ago</div></div>
+          <div class="activity-item"><div class="activity-icon green"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div><div class="activity-text"><strong>Format trend</strong> — Short-form video outperforming all other formats by 156% this week.</div><div class="activity-time">1d ago</div></div>
         </div>
-        <div class="card">
-          <div class="card-title">Total Impressions</div>
-          <div class="card-subtitle">Last 30 days</div>
-          <div style="font-size:28px;font-weight:800;margin:10px 0 4px">842K</div>
-          <div style="font-size:11px;color:#34d399;margin-bottom:12px">▲ 24% vs prior period</div>
-          <canvas id="impressionsSparkline" height="50"></canvas>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Emotion Radar</div><div class="panel-subtitle">Comment emotions this week vs last week</div></div></div>
+          <canvas id="emotionRadar" height="180"></canvas>
         </div>
-        <div class="card">
-          <div class="card-title">Click-Through Rate</div>
-          <div class="card-subtitle">Last 30 days</div>
-          <div style="font-size:28px;font-weight:800;color:var(--warning);margin:10px 0 4px">2.8%</div>
-          <div style="font-size:11px;color:#f87171;margin-bottom:12px">▼ 3% vs prior period</div>
-          <canvas id="ctrSparkline" height="50"></canvas>
+      </div>
+
+    </div><!-- end KPIs -->
+
+    <!-- ══════════════════════════════════════════ TRENDS TAB ══════════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-trends">
+      <div class="section-label">TRENDS — ENGAGEMENT DEEP DIVE</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px">
+        <div class="kpi-card"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">FOLLOWER GROWTH</div><div class="kpi-value accent">+1,247</div><div class="kpi-change up">▲ 18% vs prior 30d</div></div>
+        <div class="kpi-card"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">TOTAL IMPRESSIONS</div><div class="kpi-value">842K</div><div class="kpi-change up">▲ 24% vs prior 30d</div></div>
+        <div class="kpi-card"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">AVG POST REACH</div><div class="kpi-value">12.4K</div><div class="kpi-change up">▲ 11% vs prior 30d</div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Multi-Metric Trend — 90 Days</div><div class="panel-subtitle">Engagement rate · Reach · Posts published</div></div></div>
+          <canvas id="trendMultiChart" height="120"></canvas>
+          <div style="display:flex;gap:14px;margin-top:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted)"><span style="width:10px;height:2px;background:#00d4aa;display:inline-block"></span>Eng Rate %</div>
+            <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted)"><span style="width:10px;height:2px;background:#6366f1;display:inline-block"></span>Reach ÷100</div>
+            <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted)"><span style="width:8px;height:8px;border-radius:2px;background:rgba(251,191,36,0.5);display:inline-block"></span>Posts</div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Day-of-Week Performance</div><div class="panel-subtitle">Avg engagement by day</div></div></div>
+          <canvas id="dowChart" height="160"></canvas>
         </div>
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
-        <div class="card">
-          <div class="card-title">Reach vs Engagement — Correlation</div>
-          <div class="card-subtitle">Each dot = one post · Last 60 days</div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Reach vs Engagement Scatter</div><div class="panel-subtitle">60 posts · Does higher reach = higher engagement?</div></div></div>
           <canvas id="reachEngScatter" height="160"></canvas>
         </div>
-        <div class="card">
-          <div class="card-title">Day-of-Week Performance</div>
-          <div class="card-subtitle">Average engagement rate by day</div>
-          <canvas id="dowChart" height="160"></canvas>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Hourly Performance — Best Windows</div><div class="panel-subtitle">Avg engagement by hour of day</div></div></div>
+          <canvas id="hourlyChart" height="160"></canvas>
         </div>
       </div>
-    </div>
 
-    <!-- TAB: VIRALITY -->
-    <div class="tab-panel" data-tab="virality">
-      <div class="section-label">VIRALITY ANALYSIS — PATTERN INTELLIGENCE</div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">30-Day Performance Table</div><div class="panel-subtitle">Daily breakdown · All metrics</div></div></div>
+        <table class="data-table">
+          <thead><tr><th>Date</th><th>Posts</th><th>Reach</th><th>Impressions</th><th>Engagements</th><th>Eng Rate</th><th>New Followers</th><th>Sentiment</th></tr></thead>
+          <tbody id="trendTableBody"></tbody>
+        </table>
+      </div>
+    </div><!-- end Trends -->
 
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px">
-        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">VIRAL POSTS / MONTH</div><div style="font-size:32px;font-weight:800;color:var(--accent)">14</div><div style="font-size:10px;color:#34d399;margin-top:4px">▲ 4 vs last month</div></div>
-        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">AVG VIRALITY SCORE</div><div style="font-size:32px;font-weight:800">0.67</div><div style="font-size:10px;color:#34d399;margin-top:4px">▲ 12% vs last month</div></div>
-        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">PREDICTION ACCURACY</div><div style="font-size:32px;font-weight:800;color:var(--accent)">94%</div><div style="font-size:10px;color:var(--text-muted);margin-top:4px">Last 50 predictions</div></div>
-        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">SUPER SHARERS ACTIVE</div><div style="font-size:32px;font-weight:800;color:var(--accent-secondary)">12</div><div style="font-size:10px;color:#34d399;margin-top:4px">34% of all shares</div></div>
+    <!-- ══════════════════════════════════════════ VIRALITY TAB ══════════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-virality">
+      <div class="section-label">VIRALITY INTELLIGENCE — PATTERN ANALYSIS</div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px">
+        <div class="kpi-card" style="text-align:center"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">VIRAL POSTS / MONTH</div><div class="kpi-value accent">14</div><div class="kpi-change up">▲ 4 vs last month</div></div>
+        <div class="kpi-card" style="text-align:center"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">AVG VIRALITY SCORE</div><div class="kpi-value">0.67</div><div class="kpi-change up">▲ 12% vs last month</div></div>
+        <div class="kpi-card" style="text-align:center"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">PREDICTION ACCURACY</div><div class="kpi-value accent">94%</div><div class="kpi-change" style="color:var(--text-muted)">Last 50 predictions</div></div>
+        <div class="kpi-card" style="text-align:center"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">SUPER SHARERS ACTIVE</div><div class="kpi-value" style="color:#a78bfa">12</div><div class="kpi-change up">Drive 34% of shares</div></div>
       </div>
 
       <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:16px;margin-bottom:16px">
-        <div class="card">
-          <div class="card-title">Share Velocity — Live 48h</div>
-          <div class="card-subtitle">Shares per hour · Red line = viral threshold (200/hr)</div>
-          <canvas id="viralVelChart" height="130"></canvas>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Share Velocity — Live 48h</div><div class="panel-subtitle">Shares per hour · Red = viral threshold (200/hr)</div></div><span style="font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(52,211,153,0.1);color:#34d399;font-family:'JetBrains Mono',monospace">↑ Active now</span></div>
+          <canvas id="velChart" height="130"></canvas>
         </div>
-        <div class="card">
-          <div class="card-title">Virality Score Distribution</div>
-          <div class="card-subtitle">All posts this month · 0–1 scale</div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Score Distribution</div><div class="panel-subtitle">All posts this month · 0–1 scale</div></div></div>
           <canvas id="viralDistChart" height="130"></canvas>
         </div>
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
-        <div class="card">
-          <div class="card-title">Top Viral Posts — Time to Threshold</div>
-          <div class="card-subtitle">How fast each post crossed 1,000 engagements</div>
-          <table class="data-table" style="margin-top:10px">
-            <thead><tr><th>Post</th><th>Score</th><th>Time to viral</th><th>Total reach</th><th>Driver</th></tr></thead>
-            <tbody>
-              <tr><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Product launch video</td><td class="td-num">0.92</td><td style="color:#34d399;font-family:JetBrains Mono,monospace;font-size:11px">45 min</td><td class="td-num">18.4K</td><td style="font-size:10px;color:var(--text-muted)">@dave_memes</td></tr>
-              <tr><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Prison biscuit meme</td><td class="td-num">0.89</td><td style="color:#34d399;font-family:JetBrains Mono,monospace;font-size:11px">62 min</td><td class="td-num">47.2K</td><td style="font-size:10px;color:var(--text-muted)">7 super sharers</td></tr>
-              <tr><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Behind the scenes reel</td><td class="td-num">0.78</td><td style="color:#fbbf24;font-family:JetBrains Mono,monospace;font-size:11px">1.5 hrs</td><td class="td-num">14.2K</td><td style="font-size:10px;color:var(--text-muted)">Late-night cluster</td></tr>
-              <tr><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Customer transformation</td><td class="td-num">0.71</td><td style="color:#fbbf24;font-family:JetBrains Mono,monospace;font-size:11px">2.1 hrs</td><td class="td-num">11.8K</td><td style="font-size:10px;color:var(--text-muted)">Fitness cluster</td></tr>
-              <tr><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Monday motivation photo</td><td class="td-num">0.64</td><td style="color:#f87171;font-family:JetBrains Mono,monospace;font-size:11px">4.8 hrs</td><td class="td-num">9.4K</td><td style="font-size:10px;color:var(--text-muted)">@kettlebell_sam</td></tr>
-            </tbody>
-          </table>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Virality Triggers — Impact Ranking</div><div class="panel-subtitle">Factors that increase viral probability</div></div></div>
+          <canvas id="triggerChart" height="170"></canvas>
         </div>
-        <div class="card">
-          <div class="card-title">Virality Triggers — Impact Ranking</div>
-          <div class="card-subtitle">Factors that increase viral probability</div>
-          <canvas id="triggerChart" height="180"></canvas>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Virality Probability by Day &amp; Time</div><div class="panel-subtitle">% chance of exceeding viral threshold</div></div></div>
+          <canvas id="viralHeatChart" height="170"></canvas>
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-title">Super Sharer Cascade Map</div>
-        <div class="card-subtitle">Which accounts triggered which audience clusters · Last viral post</div>
-        <div style="padding:20px;font-family:JetBrains Mono,monospace;font-size:11px">
-          <div style="display:flex;align-items:center;gap:0;overflow-x:auto;padding-bottom:8px">
-            <div style="background:var(--accent);color:var(--bg-primary);padding:8px 14px;border-radius:8px;font-weight:700;white-space:nowrap">Post published<br>1:17 PM Tue</div>
-            <div style="width:30px;height:2px;background:var(--border-accent);flex-shrink:0"></div>
-            <div style="background:var(--bg-tertiary);border:1px solid var(--border-accent);padding:8px 12px;border-radius:8px;white-space:nowrap;color:var(--accent)">@dave_memes<br><span style="color:var(--text-muted);font-size:9px">+5 min · 8K reach</span></div>
-            <div style="width:30px;height:2px;background:var(--border-accent);flex-shrink:0"></div>
-            <div style="background:var(--bg-tertiary);border:1px solid rgba(99,102,241,0.3);padding:8px 12px;border-radius:8px;white-space:nowrap;color:#a78bfa">Dark humour cluster<br><span style="color:var(--text-muted);font-size:9px">+22 min · 18K reach</span></div>
-            <div style="width:30px;height:2px;background:var(--border-accent);flex-shrink:0"></div>
-            <div style="background:var(--bg-tertiary);border:1px solid rgba(251,191,36,0.3);padding:8px 12px;border-radius:8px;white-space:nowrap;color:#fbbf24">Late-night cluster<br><span style="color:var(--text-muted);font-size:9px">+45 min · 12K reach</span></div>
-            <div style="width:30px;height:2px;background:var(--border-accent);flex-shrink:0"></div>
-            <div style="background:var(--bg-tertiary);border:1px solid rgba(52,211,153,0.3);padding:8px 12px;border-radius:8px;white-space:nowrap;color:#34d399">Algorithm pickup<br><span style="color:var(--text-muted);font-size:9px">+62 min · 47K total</span></div>
+      <!-- Cascade map -->
+      <div class="panel" style="margin-bottom:16px">
+        <div class="panel-header"><div><div class="panel-title">Super Sharer Cascade — Last Viral Post</div><div class="panel-subtitle">Pathway: post → super sharers → audience clusters → algorithm</div></div></div>
+        <div style="overflow-x:auto;padding:16px 0">
+          <div style="display:flex;align-items:center;gap:0;min-width:700px">
+            <div style="background:linear-gradient(135deg,#00d4aa,#00a88a);color:var(--bg-primary);padding:12px 16px;border-radius:10px;font-size:11px;font-weight:700;text-align:center;flex-shrink:0;min-width:110px">Post published<br><span style="font-size:10px;font-weight:400">Tue 1:17 PM</span></div>
+            <div style="flex:1;height:2px;background:linear-gradient(90deg,#00d4aa,rgba(0,212,170,0.3));min-width:30px"></div>
+            <div style="background:var(--bg-tertiary);border:1px solid rgba(0,212,170,0.3);padding:10px 14px;border-radius:10px;font-size:11px;text-align:center;flex-shrink:0;min-width:110px;color:#00d4aa">@dave_memes<br><span style="color:var(--text-muted);font-size:10px">+5 min · 8K</span></div>
+            <div style="flex:1;height:2px;background:linear-gradient(90deg,rgba(0,212,170,0.3),rgba(99,102,241,0.3));min-width:30px"></div>
+            <div style="background:var(--bg-tertiary);border:1px solid rgba(99,102,241,0.3);padding:10px 14px;border-radius:10px;font-size:11px;text-align:center;flex-shrink:0;min-width:120px;color:#a78bfa">Dark Humour<br>Cluster<br><span style="color:var(--text-muted);font-size:10px">+22 min · 18K</span></div>
+            <div style="flex:1;height:2px;background:linear-gradient(90deg,rgba(99,102,241,0.3),rgba(251,191,36,0.3));min-width:30px"></div>
+            <div style="background:var(--bg-tertiary);border:1px solid rgba(251,191,36,0.3);padding:10px 14px;border-radius:10px;font-size:11px;text-align:center;flex-shrink:0;min-width:120px;color:#fbbf24">Late-Night<br>Cluster<br><span style="color:var(--text-muted);font-size:10px">+45 min · 12K</span></div>
+            <div style="flex:1;height:2px;background:linear-gradient(90deg,rgba(251,191,36,0.3),rgba(52,211,153,0.5));min-width:30px"></div>
+            <div style="background:var(--bg-tertiary);border:1px solid rgba(52,211,153,0.4);padding:10px 14px;border-radius:10px;font-size:11px;text-align:center;flex-shrink:0;min-width:120px;color:#34d399">Algorithm<br>Pickup<br><span style="color:var(--text-muted);font-size:10px">+62 min · 47K</span></div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- TAB: SENTIMENT -->
-    <div class="tab-panel" data-tab="sentiment">
-      <div class="section-label">SENTIMENT INTELLIGENCE — 30 DAY VIEW</div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Top Viral Posts — Time to Threshold</div><div class="panel-subtitle">How fast each post crossed 1,000 engagements</div></div></div>
+        <table class="data-table">
+          <thead><tr><th>Post</th><th>Virality Score</th><th>Time to Viral</th><th>Total Reach</th><th>Primary Driver</th><th>Clusters Reached</th><th>Cross-shared</th></tr></thead>
+          <tbody>
+            <tr><td class="td-clip">Product launch video</td><td class="td-num">0.92</td><td style="color:#34d399;font-family:'JetBrains Mono',monospace;font-size:11px">45 min</td><td class="td-num">18.4K</td><td style="font-size:11px;color:var(--text-secondary)">@dave_memes</td><td class="td-num">3</td><td style="color:#34d399;font-size:11px">Yes (+8.2K)</td></tr>
+            <tr><td class="td-clip">Prison biscuit meme</td><td class="td-num">0.89</td><td style="color:#34d399;font-family:'JetBrains Mono',monospace;font-size:11px">62 min</td><td class="td-num">47.2K</td><td style="font-size:11px;color:var(--text-secondary)">7 super sharers</td><td class="td-num">4</td><td style="color:#34d399;font-size:11px">Yes (+14.1K)</td></tr>
+            <tr><td class="td-clip">Behind the scenes reel</td><td class="td-num">0.78</td><td style="color:#fbbf24;font-family:'JetBrains Mono',monospace;font-size:11px">1.5 hrs</td><td class="td-num">14.2K</td><td style="font-size:11px;color:var(--text-secondary)">Late-night cluster</td><td class="td-num">2</td><td style="color:var(--text-muted);font-size:11px">No</td></tr>
+            <tr><td class="td-clip">Customer transformation post</td><td class="td-num">0.71</td><td style="color:#fbbf24;font-family:'JetBrains Mono',monospace;font-size:11px">2.1 hrs</td><td class="td-num">11.8K</td><td style="font-size:11px;color:var(--text-secondary)">Fitness cluster</td><td class="td-num">2</td><td style="color:var(--text-muted);font-size:11px">No</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div><!-- end Virality -->
 
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px">
-        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">OVERALL SCORE</div><div style="font-size:36px;font-weight:800;color:var(--accent)">0.82</div><div style="font-size:10px;color:#34d399;margin-top:4px">Positive — stable</div></div>
-        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">POSITIVE</div><div style="font-size:36px;font-weight:800;color:#34d399">60%</div><div style="font-size:10px;color:var(--text-muted);margin-top:4px">508 posts</div></div>
-        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">NEGATIVE RATE</div><div style="font-size:36px;font-weight:800;color:#f87171">11%</div><div style="font-size:10px;color:#f87171;margin-top:4px">▲ 3% this week</div></div>
-        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">CRISIS EVENTS</div><div style="font-size:36px;font-weight:800;color:var(--warning)">2</div><div style="font-size:10px;color:var(--text-muted);margin-top:4px">Last 30 days</div></div>
+    <!-- ══════════════════════════════════════════ SENTIMENT TAB ══════════════════════════════════════════ -->
+    <div class="tab-panel" id="panel-sentiment">
+      <div class="section-label">SENTIMENT INTELLIGENCE</div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px">
+        <div class="kpi-card" style="text-align:center"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">OVERALL SCORE</div><div class="kpi-value accent">0.82</div><div class="kpi-change" style="color:#34d399">Positive — stable</div></div>
+        <div class="kpi-card" style="text-align:center"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">POSITIVE RATE</div><div class="kpi-value" style="color:#34d399">60%</div><div class="kpi-change" style="color:var(--text-muted)">508 posts</div></div>
+        <div class="kpi-card" style="text-align:center"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">NEGATIVE RATE</div><div class="kpi-value" style="color:#f87171">11%</div><div class="kpi-change down">▲ 3% this week</div></div>
+        <div class="kpi-card" style="text-align:center"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">CRISIS EVENTS</div><div class="kpi-value" style="color:#fbbf24">2</div><div class="kpi-change" style="color:var(--text-muted)">Last 30 days</div></div>
       </div>
 
       <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px">
-        <div class="card">
-          <div class="card-title">Sentiment Over Time — 30 Day Rolling</div>
-          <div class="card-subtitle">Positive / Neutral / Negative bands · Crisis events marked</div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Sentiment Over Time — 30 Days</div><div class="panel-subtitle">Positive and negative rate daily · Crisis events marked</div></div></div>
           <canvas id="sentTimeChart" height="130"></canvas>
         </div>
-        <div class="card">
-          <div class="card-title">Emotion Breakdown</div>
-          <div class="card-subtitle">Comment emotion classification</div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Emotion Breakdown</div><div class="panel-subtitle">Comment classification</div></div></div>
           <canvas id="emotionBarChart" height="130"></canvas>
         </div>
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
-        <div class="card">
-          <div class="card-title">Sentiment by Page</div>
-          <div class="card-subtitle">Average score vs industry benchmark</div>
-          <canvas id="sentByPageChart" height="140"></canvas>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Sentiment by Page vs Benchmark</div><div class="panel-subtitle">Your avg vs industry benchmark</div></div></div>
+          <canvas id="sentByPageChart" height="150"></canvas>
         </div>
-        <div class="card">
-          <div class="card-title">Sentiment vs Engagement Rate</div>
-          <div class="card-subtitle">Does higher sentiment = more engagement?</div>
-          <canvas id="sentEngChart" height="140"></canvas>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Sentiment → Engagement Correlation</div><div class="panel-subtitle">Scatter · 60 posts · Does sentiment drive engagement?</div></div></div>
+          <canvas id="sentEngChart" height="150"></canvas>
         </div>
       </div>
 
-      <div class="card">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-          <div><div class="card-title">Flagged Comments — Action Required</div><div class="card-subtitle">Sorted by priority · AI risk scored</div></div>
-          <span style="font-size:10px;padding:3px 8px;border-radius:5px;background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.2);font-family:JetBrains Mono,monospace">3 unreviewed</span>
-        </div>
-        <table class="data-table">
-          <thead><tr><th>Priority</th><th>Comment</th><th>Page</th><th>Time</th><th>Reactions</th><th>AI Risk</th><th>Action</th></tr></thead>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Flagged Comments — Action Required</div><div class="panel-subtitle">AI risk-scored · Respond directly</div></div><span style="font-size:10px;padding:3px 9px;border-radius:5px;background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.2);font-family:'JetBrains Mono',monospace">3 unreviewed</span></div>
+        <table class="data-table" style="margin-top:10px">
+          <thead><tr><th>Priority</th><th>Comment</th><th>Page</th><th>Time</th><th>Reactions</th><th>AI Risk</th><th>Emotion</th><th>Action</th></tr></thead>
           <tbody>
-            <tr><td><span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.2)">High</span></td><td style="font-size:11px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">"This product is way overpriced. Very disappointed."</td><td style="font-size:10px;color:var(--text-muted)">Kelpie Daily</td><td style="font-family:JetBrains Mono,monospace;font-size:10px">2h ago</td><td class="td-num">14</td><td style="font-family:JetBrains Mono,monospace;font-size:10px;color:#f87171">0.78</td><td><button style="font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer">Respond</button></td></tr>
-            <tr><td><span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)">Medium</span></td><td style="font-size:11px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">"Still waiting 2 weeks. No response from support."</td><td style="font-size:10px;color:var(--text-muted)">Kelpie Daily</td><td style="font-family:JetBrains Mono,monospace;font-size:10px">5h ago</td><td class="td-num">8</td><td style="font-family:JetBrains Mono,monospace;font-size:10px;color:#fbbf24">0.61</td><td><button style="font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer">Respond</button></td></tr>
-            <tr><td><span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)">Medium</span></td><td style="font-size:11px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">"Quality has gone downhill since last year tbh"</td><td style="font-size:10px;color:var(--text-muted)">UK Jail News</td><td style="font-family:JetBrains Mono,monospace;font-size:10px">1d ago</td><td class="td-num">5</td><td style="font-family:JetBrains Mono,monospace;font-size:10px;color:#fbbf24">0.54</td><td><button style="font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer">Respond</button></td></tr>
+            <tr><td><span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.2)">High</span></td><td class="td-clip">"This product is way overpriced for what you get. Very disappointed."</td><td style="font-size:10px;color:var(--text-muted)">Kelpie Daily</td><td class="td-mono sm">2h ago</td><td class="td-num">14</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#f87171">0.78</td><td style="font-size:10px;color:var(--text-muted)">Anger</td><td><button style="font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Respond</button></td></tr>
+            <tr><td><span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)">Medium</span></td><td class="td-clip">"Still waiting for my order from 2 weeks ago. No response from support."</td><td style="font-size:10px;color:var(--text-muted)">Kelpie Daily</td><td class="td-mono sm">5h ago</td><td class="td-num">8</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#fbbf24">0.61</td><td style="font-size:10px;color:var(--text-muted)">Frustration</td><td><button style="font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Respond</button></td></tr>
+            <tr><td><span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)">Medium</span></td><td class="td-clip">"Quality has gone downhill since last year tbh"</td><td style="font-size:10px;color:var(--text-muted)">UK Jail News</td><td class="td-mono sm">1d ago</td><td class="td-num">5</td><td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#fbbf24">0.54</td><td style="font-size:10px;color:var(--text-muted)">Sadness</td><td><button style="font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Respond</button></td></tr>
           </tbody>
         </table>
       </div>
-    </div>
+    </div><!-- end Sentiment -->
 
-  </div>
-</div>
-<script>
-// Dashboard tab switching
-document.querySelectorAll('.topbar-tab').forEach(tab=>{
-  tab.addEventListener('click',function(){
-    document.querySelectorAll('.topbar-tab').forEach(t=>t.classList.remove('active'));
-    this.classList.add('active');
-    const name=this.textContent.trim().toLowerCase();
-    document.querySelectorAll('.tab-panel').forEach(p=>{
-      p.classList.remove('active');
-      p.style.animation='none';
-    });
-    const target=document.querySelector('.tab-panel[data-tab="'+name+'"]');
-    if(target){
-      target.offsetHeight; // force reflow
-      target.style.animation='';
-      target.classList.add('active');
-      // Scroll content to top
-      document.querySelector('.content').scrollTop=0;
-    }
-  });
-});
-</script>
-
-<script>
-// ── CHART.JS GLOBAL DEFAULTS ──
-Chart.defaults.color = '#7b8ba8';
-Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
-Chart.defaults.font.family = "'Outfit', sans-serif";
-Chart.defaults.plugins.legend.display = false;
-Chart.defaults.plugins.tooltip.backgroundColor = '#0f1729';
-Chart.defaults.plugins.tooltip.borderColor = 'rgba(0,212,170,0.3)';
-Chart.defaults.plugins.tooltip.borderWidth = 1;
-Chart.defaults.plugins.tooltip.padding = 10;
-Chart.defaults.plugins.tooltip.titleColor = '#e8ecf4';
-Chart.defaults.plugins.tooltip.bodyColor = '#7b8ba8';
-
-// ── 1. ENGAGEMENT + REACH LINE CHART ──
-const engCtx = document.getElementById('engReachChart');
-if(engCtx){
-  const labels = ['Apr 1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'];
-  new Chart(engCtx, {
-    type:'line',
-    data:{
-      labels,
-      datasets:[
-        {label:'Engagement Rate',data:[3.1,3.4,3.2,2.8,4.1,3.9,4.2,3.7,4.0,4.3,3.8,4.5,4.1,4.6,4.2,3.9,4.4,4.7,4.3,4.8,4.1,4.5,4.9,4.6,4.2,4.8,5.1,4.7,4.3,4.8],
-          borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.08)',borderWidth:2,pointRadius:0,pointHoverRadius:5,fill:true,tension:0.4,yAxisID:'y'},
-        {label:'Reach ÷100',data:[182,196,178,164,241,228,248,218,235,252,224,265,242,271,248,231,259,277,253,283,244,266,289,272,251,284,302,278,255,284],
-          borderColor:'#6366f1',backgroundColor:'transparent',borderWidth:2,pointRadius:0,pointHoverRadius:5,fill:false,tension:0.4,yAxisID:'y1'},
-        {label:'Posts',data:[1,0,1,0,2,1,1,0,1,1,0,2,1,1,1,0,1,2,1,1,0,1,2,1,1,1,2,1,0,1],
-          type:'bar',backgroundColor:'rgba(251,191,36,0.25)',borderColor:'rgba(251,191,36,0.5)',borderWidth:1,yAxisID:'y2'}
-      ]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
-      scales:{
-        x:{grid:{color:'rgba(255,255,255,0.03)'},ticks:{maxTicksLimit:8,font:{size:10}}},
-        y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{callback:v=>v+'%',font:{size:10}},min:0,max:7},
-        y1:{position:'right',grid:{display:false},ticks:{callback:v=>(v/10).toFixed(0)+'K',font:{size:10}}},
-        y2:{display:false,max:6}
-      }
-    }
-  });
-}
-
-// ── 2. SENTIMENT DONUT ──
-const sentCtx = document.getElementById('sentimentDonut');
-if(sentCtx){
-  new Chart(sentCtx, {
-    type:'doughnut',
-    data:{
-      labels:['Positive','Neutral','Mixed','Negative'],
-      datasets:[{data:[60,18,11,11],
-        backgroundColor:['rgba(0,212,170,0.85)','rgba(99,102,241,0.85)','rgba(251,191,36,0.85)','rgba(248,113,113,0.85)'],
-        borderColor:'#0f1729',borderWidth:3,hoverOffset:6}]
-    },
-    options:{
-      cutout:'72%',responsive:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.parsed+'%'}}}
-    }
-  });
-}
-
-// ── 3. VIRAL VELOCITY CHART ──
-const velCtx = document.getElementById('velocityChart');
-if(velCtx){
-  const hrs = Array.from({length:48},(_,i)=>{const h=i%24;return (h<10?'0'+h:h)+':00'});
-  const vel = [4,2,3,2,1,2,4,8,12,18,24,31,28,22,18,14,19,24,38,62,89,142,198,241,287,312,278,223,187,156,134,112,98,87,76,68,89,124,167,214,243,289,321,298,267,234,198,176];
-  new Chart(velCtx, {
-    type:'line',
-    data:{
-      labels:hrs,
-      datasets:[
-        {label:'Share Rate/hr',data:vel,borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.06)',borderWidth:2,pointRadius:0,fill:true,tension:0.3},
-        {label:'Threshold',data:Array(48).fill(200),borderColor:'rgba(248,113,113,0.6)',borderDash:[4,4],borderWidth:1.5,pointRadius:0,fill:false}
-      ]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
-      plugins:{legend:{display:false}},
-      scales:{
-        x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:9}}},
-        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},min:0}
-      }
-    }
-  });
-}
-
-// ── 4. EMOTION RADAR ──
-const radCtx = document.getElementById('emotionRadar');
-if(radCtx){
-  new Chart(radCtx, {
-    type:'radar',
-    data:{
-      labels:['Joy','Anger','Sadness','Fear','Surprise','Love','Neutral'],
-      datasets:[{label:'This week',data:[72,18,8,4,42,58,22],
-        backgroundColor:'rgba(0,212,170,0.12)',borderColor:'rgba(0,212,170,0.7)',borderWidth:2,pointBackgroundColor:'#00d4aa',pointRadius:3},
-       {label:'Last week',data:[64,22,11,6,38,52,28],
-        backgroundColor:'rgba(99,102,241,0.08)',borderColor:'rgba(99,102,241,0.5)',borderWidth:1.5,pointBackgroundColor:'#6366f1',pointRadius:2,borderDash:[3,3]}]
-    },
-    options:{
-      responsive:false,
-      plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:8,font:{size:10},padding:8}}},
-      scales:{r:{grid:{color:'rgba(255,255,255,0.06)'},ticks:{display:false},pointLabels:{font:{size:10}},min:0,max:100}}
-    }
-  });
-}
-
-// ── 5. POSTING HEATMAP ──
-const heatData = [
-  [12,8,6,4],[18,14,10,8],[24,20,18,14],[22,18,16,12],
-  [20,16,14,10],[32,28,44,38],[28,24,36,42]
-];
-const heatGrid = document.getElementById('heatmapGrid');
-if(heatGrid){
-  heatData.forEach(row => {
-    row.forEach(val => {
-      const cell = document.createElement('div');
-      const opacity = val/50;
-      cell.style.cssText = `background:rgba(0,212,170,${opacity});border-radius:3px;cursor:default;transition:transform .15s`;
-      cell.title = val+'% avg engagement';
-      cell.onmouseover=()=>cell.style.transform='scale(1.15)';
-      cell.onmouseout=()=>cell.style.transform='scale(1)';
-      heatGrid.appendChild(cell);
-    });
-  });
-}
-
-// ── 6. CONTENT FORMAT BAR CHART ──
-const fmtCtx = document.getElementById('formatChart');
-if(fmtCtx){
-  new Chart(fmtCtx, {
-    type:'bar',
-    data:{
-      labels:['Short Video','Reel','Photo','Carousel','Long Video','Text','Link Share'],
-      datasets:[{label:'Avg Eng Rate',
-        data:[5.8,4.9,3.7,3.4,2.1,1.8,0.9],
-        backgroundColor:['rgba(0,212,170,0.8)','rgba(0,212,170,0.65)','rgba(99,102,241,0.7)','rgba(99,102,241,0.55)','rgba(251,191,36,0.6)','rgba(251,191,36,0.45)','rgba(248,113,113,0.5)'],
-        borderRadius:6,borderSkipped:false}]
-    },
-    options:{
-      indexAxis:'y',responsive:true,maintainAspectRatio:true,
-      plugins:{legend:{display:false}},
-      scales:{
-        x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:10}}},
-        y:{grid:{display:false},ticks:{font:{size:10}}}
-      }
-    }
-  });
-}
-
-// ── 7. WEEK COMPARISON CHART ──
-const wkCtx = document.getElementById('weekCompChart');
-if(wkCtx){
-  new Chart(wkCtx, {
-    type:'bar',
-    data:{
-      labels:['Reach','Engagements','Comments','Shares','Saves','Impressions'],
-      datasets:[
-        {label:'This week',data:[24.5,4218,1847,892,334,48200],
-          backgroundColor:'rgba(0,212,170,0.7)',borderRadius:5,borderSkipped:false},
-        {label:'Last week',data:[21.8,3740,1621,756,298,43100],
-          backgroundColor:'rgba(99,102,241,0.5)',borderRadius:5,borderSkipped:false}
-      ]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:true,
-      plugins:{legend:{display:true,position:'top',labels:{boxWidth:10,font:{size:10},padding:10}}},
-      scales:{
-        x:{grid:{display:false},ticks:{font:{size:9}}},
-        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v>=1000?(v/1000).toFixed(0)+'K':v,font:{size:9}}}
-      }
-    }
-  });
-}
-</script>
-
-
-<script>
-// ── SHARED CHART DEFAULTS ──
-if(typeof Chart !== 'undefined'){
-  Chart.defaults.color='#7b8ba8';
-  Chart.defaults.borderColor='rgba(255,255,255,0.05)';
-  Chart.defaults.font.family="'Outfit',sans-serif";
-  Chart.defaults.plugins.legend.display=false;
-  Chart.defaults.plugins.tooltip.backgroundColor='#0f1729';
-  Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.3)';
-  Chart.defaults.plugins.tooltip.borderWidth=1;
-  Chart.defaults.plugins.tooltip.padding=10;
-  Chart.defaults.plugins.tooltip.titleColor='#e8ecf4';
-  Chart.defaults.plugins.tooltip.bodyColor='#7b8ba8';
-}
-
-// ── TRENDS TAB ──
-function initTrendsCharts(){
-  const d30=Array.from({length:30},(_,i)=>{const d=new Date(2026,3,i+1);return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})});
-
-  // Engagement trend line
-  const etCtx=document.getElementById('engTrendChart');
-  if(etCtx&&!etCtx._chart) etCtx._chart=new Chart(etCtx,{type:'line',data:{labels:d30,
-    datasets:[{label:'Eng Rate',data:[3.1,3.4,3.2,2.8,4.1,3.9,4.2,3.7,4.0,4.3,3.8,4.5,4.1,4.6,4.2,3.9,4.4,4.7,4.3,4.8,4.1,4.5,4.9,4.6,4.2,4.8,5.1,4.7,4.3,4.8],
-      borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.08)',borderWidth:2.5,pointRadius:0,fill:true,tension:0.4}]},
-    options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
-      scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:10}}},
-        y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{callback:v=>v+'%',font:{size:10}},min:0,max:7}}}});
-
-  // Sparklines
-  const mkSpark=(id,data,color)=>{const c=document.getElementById(id);if(c&&!c._chart)c._chart=new Chart(c,{type:'line',data:{labels:data.map((_,i)=>i),datasets:[{data,borderColor:color,backgroundColor:color.replace(')',',0.1)').replace('rgb','rgba'),borderWidth:1.5,pointRadius:0,fill:true,tension:0.4}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}}}});};
-  mkSpark('followGrowthSparkline',[18,22,20,25,28,26,32,35,30,38,42,38,44],[`rgb(52,211,153)`]);
-  mkSpark('impressionsSparkline',[420,380,450,480,440,520,560,500,580,620,600,660,700],'rgb(99,102,241)');
-  mkSpark('ctrSparkline',[3.2,3.0,2.9,3.1,2.8,2.7,2.9,2.8,2.7,2.6,2.8,2.7,2.8],'rgb(251,191,36)');
-
-  // Scatter reach vs engagement
-  const sCtx=document.getElementById('reachEngScatter');
-  if(sCtx&&!sCtx._chart){
-    const pts=Array.from({length:60},()=>({x:Math.round(2000+Math.random()*20000),y:parseFloat((1+Math.random()*5).toFixed(2))}));
-    sCtx._chart=new Chart(sCtx,{type:'scatter',data:{datasets:[{data:pts,backgroundColor:'rgba(0,212,170,0.4)',borderColor:'rgba(0,212,170,0.6)',pointRadius:4,pointHoverRadius:6}]},
-      options:{responsive:true,maintainAspectRatio:true,scales:{
-        x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v>=1000?(v/1000).toFixed(0)+'K':v,font:{size:9}},title:{display:true,text:'Reach',font:{size:10}}},
-        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},title:{display:true,text:'Eng Rate',font:{size:10}}}}}});}
-
-  // Day of week
-  const dowCtx=document.getElementById('dowChart');
-  if(dowCtx&&!dowCtx._chart) dowCtx._chart=new Chart(dowCtx,{type:'bar',data:{
-    labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
-    datasets:[{data:[3.2,5.1,3.8,4.6,3.4,2.9,2.4],
-      backgroundColor:['rgba(0,212,170,0.5)','rgba(0,212,170,0.9)','rgba(0,212,170,0.6)','rgba(0,212,170,0.8)','rgba(0,212,170,0.55)','rgba(99,102,241,0.6)','rgba(99,102,241,0.4)'],
-      borderRadius:6}]},
-    options:{responsive:true,maintainAspectRatio:true,
-      scales:{x:{grid:{display:false},ticks:{font:{size:10}}},
-        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}});
-}
-
-// ── VIRALITY TAB ──
-function initViralityCharts(){
-  // Velocity
-  const vvCtx=document.getElementById('viralVelChart');
-  if(vvCtx&&!vvCtx._chart){
-    const hrs=Array.from({length:48},(_,i)=>(i%24<10?'0':'')+i%24+':00');
-    const vel=[4,2,3,2,1,2,4,8,12,18,24,31,28,22,18,14,19,24,38,62,89,142,198,241,287,312,278,223,187,156,134,112,98,87,76,68,89,124,167,214,243,289,321,298,267,234,198,176];
-    vvCtx._chart=new Chart(vvCtx,{type:'line',data:{labels:hrs,datasets:[
-      {label:'Shares/hr',data:vel,borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.07)',borderWidth:2,pointRadius:0,fill:true,tension:0.3},
-      {label:'Threshold',data:Array(48).fill(200),borderColor:'rgba(248,113,113,0.7)',borderDash:[5,4],borderWidth:1.5,pointRadius:0}]},
-      options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
-        scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:9}}},
-          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},min:0}}}});}
-
-  // Score distribution histogram
-  const vdCtx=document.getElementById('viralDistChart');
-  if(vdCtx&&!vdCtx._chart) vdCtx._chart=new Chart(vdCtx,{type:'bar',data:{
-    labels:['0.0–0.1','0.1–0.2','0.2–0.3','0.3–0.4','0.4–0.5','0.5–0.6','0.6–0.7','0.7–0.8','0.8–0.9','0.9–1.0'],
-    datasets:[{data:[2,4,8,12,18,22,16,10,6,3],
-      backgroundColor:['rgba(248,113,113,0.5)','rgba(248,113,113,0.5)','rgba(251,191,36,0.5)','rgba(251,191,36,0.5)','rgba(251,191,36,0.6)','rgba(0,212,170,0.5)','rgba(0,212,170,0.65)','rgba(0,212,170,0.75)','rgba(0,212,170,0.85)','rgba(0,212,170,0.95)'],
-      borderRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:true,
-      scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:45}},
-        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}}}}});
-
-  // Triggers bar
-  const tCtx=document.getElementById('triggerChart');
-  if(tCtx&&!tCtx._chart) tCtx._chart=new Chart(tCtx,{type:'bar',data:{
-    labels:['Short video','Tue 6 PM slot','Sentiment >0.85','Product launch','Laughing emoji','Question in caption','Cross-share within 1hr'],
-    datasets:[{data:[156,92,78,65,54,41,38],
-      backgroundColor:'rgba(0,212,170,0.7)',borderRadius:5}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,
-      scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>'+'+v+'%',font:{size:9}}},
-        y:{grid:{display:false},ticks:{font:{size:9}}}}});
-}
-
-// ── SENTIMENT TAB ──
-function initSentimentCharts(){
-  // Sentiment over time
-  const stCtx=document.getElementById('sentTimeChart');
-  if(stCtx&&!stCtx._chart){
-    const d30=Array.from({length:30},(_,i)=>i+1+'');
-    stCtx._chart=new Chart(stCtx,{type:'line',data:{labels:d30,datasets:[
-      {label:'Positive',data:[58,61,59,63,65,62,66,68,64,70,67,72,69,74,71,68,73,75,72,76,70,74,78,75,71,76,80,77,73,78],fill:true,backgroundColor:'rgba(52,211,153,0.12)',borderColor:'rgba(52,211,153,0.8)',borderWidth:2,pointRadius:0,tension:0.4},
-      {label:'Negative',data:[14,12,13,11,10,12,11,10,12,9,11,10,9,8,10,11,9,8,10,9,11,10,8,9,11,10,8,9,11,10],fill:true,backgroundColor:'rgba(248,113,113,0.1)',borderColor:'rgba(248,113,113,0.7)',borderWidth:1.5,pointRadius:0,tension:0.4}]},
-      options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
-        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:10},padding:10}}},
-        scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:9}}},
-          y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}});}
-
-  // Emotion bar
-  const ebCtx=document.getElementById('emotionBarChart');
-  if(ebCtx&&!ebCtx._chart) ebCtx._chart=new Chart(ebCtx,{type:'bar',data:{
-    labels:['Joy','Anger','Sadness','Love','Surprise','Fear','Neutral'],
-    datasets:[{data:[42,18,12,14,8,3,3],
-      backgroundColor:['rgba(52,211,153,0.75)','rgba(248,113,113,0.7)','rgba(96,165,250,0.65)','rgba(244,114,182,0.7)','rgba(251,191,36,0.7)','rgba(167,139,250,0.6)','rgba(107,114,128,0.5)'],
-      borderRadius:5}]},
-    options:{responsive:true,maintainAspectRatio:true,
-      scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
-        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}});
-
-  // Sentiment by page grouped bar
-  const sbpCtx=document.getElementById('sentByPageChart');
-  if(sbpCtx&&!sbpCtx._chart) sbpCtx._chart=new Chart(sbpCtx,{type:'bar',data:{
-    labels:['Drinking Memes','Kelpie Daily','UK Jail News'],
-    datasets:[
-      {label:'Page avg',data:[0.88,0.72,0.68],backgroundColor:['rgba(0,212,170,0.75)','rgba(99,102,241,0.65)','rgba(251,191,36,0.6)'],borderRadius:6},
-      {label:'Benchmark',data:[0.74,0.74,0.74],backgroundColor:'rgba(255,255,255,0.1)',borderRadius:6}
-    ]},
-    options:{responsive:true,maintainAspectRatio:true,
-      plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:10},padding:8}}},
-      scales:{x:{grid:{display:false},ticks:{font:{size:10}}},
-        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},min:0,max:1}}});
-
-  // Sentiment vs engagement scatter
-  const seCtx=document.getElementById('sentEngChart');
-  if(seCtx&&!seCtx._chart){
-    const pts=Array.from({length:60},()=>({x:parseFloat((0.3+Math.random()*0.68).toFixed(2)),y:parseFloat((1+Math.random()*5).toFixed(2))}));
-    seCtx._chart=new Chart(seCtx,{type:'scatter',data:{datasets:[{data:pts,backgroundColor:'rgba(99,102,241,0.45)',borderColor:'rgba(99,102,241,0.7)',pointRadius:4}]},
-      options:{responsive:true,maintainAspectRatio:true,
-        scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},title:{display:true,text:'Sentiment Score',font:{size:10}},min:0.2,max:1},
-          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},title:{display:true,text:'Eng Rate',font:{size:10}},min:0}}}});}
-}
-
-// ── TAB SWITCHING — init charts on first show ──
-const _tabInited={};
-document.querySelectorAll('.topbar-tab').forEach((tab,i)=>{
-  tab.addEventListener('click',function(){
-    const name=this.textContent.trim().toLowerCase();
-    if(!_tabInited[name]){
-      _tabInited[name]=true;
-      if(name==='trends') setTimeout(initTrendsCharts,50);
-      if(name==='virality') setTimeout(initViralityCharts,50);
-      if(name==='sentiment') setTimeout(initSentimentCharts,50);
-    }
-  });
-});
-// Init trends immediately since KPI tab shown first, trends might be clicked soon
-setTimeout(()=>{if(typeof Chart!=='undefined')initTrendsCharts();},200);
-</script>
+  </div><!-- end .content -->
+</div><!-- end .main -->
 
 <script>try{const u=JSON.parse(localStorage.getItem('artemis_app_session')||localStorage.getItem('artemis_session')||'null');if(u&&document.getElementById('sidebarUser'))document.getElementById('sidebarUser').textContent=u.name||u.full_name||u.email||u.username||'';}catch{}</script>
 <script>

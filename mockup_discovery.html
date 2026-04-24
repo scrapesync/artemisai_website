@@ -467,6 +467,21 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 .btn-primary,.btn,.bb,.modal,.drawer{transition-duration:0.2s!important}
 @keyframes fadeUp{from{opacity:0;transform:translate3d(0,8px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @keyframes float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-12px,0)}}
+
+.td-mono{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:11px}
+.td-mono.sm{font-size:10px;white-space:nowrap}
+.td-num{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:11px}
+.td-up{color:#34d399;font-family:'JetBrains Mono',monospace;font-size:11px}
+.td-clip{font-size:11px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kpi-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.kpi-value{font-size:28px;font-weight:800;letter-spacing:-0.03em;line-height:1;margin:8px 0 4px}
+.kpi-change{font-size:11px}
+.kpi-change.up{color:#34d399}
+.kpi-change.down{color:#f87171}
+.kpi-label{font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase}
+.kpi-card .accent{color:var(--accent)}
+.range-btn{padding:4px 10px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:6px;font-size:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;cursor:pointer}
+.range-btn.active{background:var(--accent);color:var(--bg-primary);font-weight:600;border-color:var(--accent)}
 </style>
 </head>
 <body>
@@ -490,6 +505,339 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 
 <!-- ═══ SIDEBAR ═══ -->
 <a href="admin_panel.html" class="m-admin-back"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>← Admin Panel</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function(){
+'use strict';
+
+// ─── DEFAULTS ───
+function setDef(){
+  if(typeof Chart==='undefined') return;
+  Chart.defaults.color='#7b8ba8';Chart.defaults.borderColor='rgba(255,255,255,0.05)';
+  Chart.defaults.font.family="'Outfit',sans-serif";Chart.defaults.plugins.legend.display=false;
+  Chart.defaults.plugins.tooltip.backgroundColor='#0f1729';
+  Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.3)';
+  Chart.defaults.plugins.tooltip.borderWidth=1;Chart.defaults.plugins.tooltip.padding=10;
+}
+
+// ─── TAB SWITCHING ───
+function initTabs(){
+  document.querySelectorAll('.topbar-tab[data-target]').forEach(tab=>{
+    tab.addEventListener('click',function(){
+      document.querySelectorAll('.topbar-tab[data-target]').forEach(t=>t.classList.remove('active'));
+      this.classList.add('active');
+      const tid=this.dataset.target;
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      const panel=document.getElementById('panel-'+tid);
+      if(panel){panel.classList.add('active');document.querySelector('.content').scrollTop=0;setTimeout(()=>initChartsForTab(tid),60);}
+    });
+  });
+}
+
+// ─── NODE GRAPH (Canvas 2D) ───
+const MY_PAGES=['Drinking Memes','Kelpie Daily','UK Jail News'];
+const NODES=[
+  {id:0,label:'Drinking Memes',x:0,y:0,r:28,color:'#00d4aa',mine:true,followers:'22K',topics:'Humour'},
+  {id:1,label:'Kelpie Daily',x:0,y:0,r:22,color:'#00d4aa',mine:true,followers:'14K',topics:'Community'},
+  {id:2,label:'UK Jail News',x:0,y:0,r:18,color:'#00d4aa',mine:true,followers:'9K',topics:'Crime'},
+  {id:3,label:'Friday Night Chaos',x:0,y:0,r:24,color:'#6366f1',mine:false,followers:'28K',overlap:67,topics:'Humour'},
+  {id:4,label:'Northern Banter HQ',x:0,y:0,r:30,color:'#a78bfa',mine:false,followers:'41K',overlap:58,topics:'Community'},
+  {id:5,label:'True Crime Weekly',x:0,y:0,r:26,color:'#f87171',mine:false,followers:'35K',overlap:48,topics:'Crime'},
+  {id:6,label:'British Pub Culture',x:0,y:0,r:20,color:'#fbbf24',mine:false,followers:'20K',overlap:52,topics:'Lifestyle'},
+  {id:7,label:'Late Night Laughs',x:0,y:0,r:22,color:'#6366f1',mine:false,followers:'24K',overlap:44,topics:'Humour'},
+  {id:8,label:'UK Rant Page',x:0,y:0,r:16,color:'#f87171',mine:false,followers:'18K',overlap:38,topics:'Politics'},
+  {id:9,label:'Prison Watch UK',x:0,y:0,r:18,color:'#f87171',mine:false,followers:'12K',overlap:55,topics:'Crime'},
+  {id:10,label:'Mancunian Memes',x:0,y:0,r:20,color:'#a78bfa',mine:false,followers:'16K',overlap:42,topics:'Humour'},
+];
+const EDGES=[
+  {a:0,b:3,w:67},{a:0,b:4,w:58},{a:0,b:6,w:52},{a:0,b:7,w:44},{a:0,b:10,w:42},
+  {a:1,b:4,w:54},{a:1,b:8,w:48},{a:1,b:6,w:38},
+  {a:2,b:5,w:62},{a:2,b:9,w:55},{a:2,b:8,w:44},
+  {a:3,b:7,w:72},{a:3,b:10,w:68},{a:4,b:6,w:44},{a:5,b:9,w:58},
+];
+
+let showLabels=true;
+let animFrame=0,hoveredNode=null;
+let positions=[];
+
+function initNetworkGraph(){
+  const canvas=document.getElementById('networkCanvas');
+  if(!canvas||canvas._init) return;
+  canvas._init=true;
+  const container=canvas.parentElement;
+  const W=container.clientWidth||700, H=480;
+  canvas.width=W; canvas.height=H;
+  const cx=W/2, cy=H/2;
+  // Arrange nodes in force-like positions
+  const angles=Array.from({length:NODES.length},(_,i)=>(i/(NODES.length))*Math.PI*2);
+  NODES.forEach((n,i)=>{
+    if(i<3){// my pages: inner cluster
+      n.x=cx+Math.cos(angles[i]*2)*130;
+      n.y=cy+Math.sin(angles[i]*2)*100;
+    } else {
+      n.x=cx+Math.cos(angles[i])*220;
+      n.y=cy+Math.sin(angles[i])*180;
+    }
+  });
+  positions=NODES.map(n=>({x:n.x,y:n.y,vx:0,vy:0}));
+
+  function draw(){
+    const ctx=canvas.getContext('2d');
+    ctx.clearRect(0,0,W,H);
+    // Draw edges
+    EDGES.forEach(e=>{
+      const a=positions[e.a],b=positions[e.b];
+      const alpha=e.w/100*0.7;
+      ctx.beginPath();
+      ctx.moveTo(a.x,a.y);
+      ctx.lineTo(b.x,b.y);
+      ctx.strokeStyle=`rgba(0,212,170,${alpha})`;
+      ctx.lineWidth=Math.max(0.5,e.w/40);
+      ctx.stroke();
+      // Label on edge
+      if(showLabels){
+        const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+        ctx.font='9px JetBrains Mono';ctx.fillStyle='rgba(0,212,170,0.6)';
+        ctx.textAlign='center';ctx.fillText(e.w+'%',mx,my);
+      }
+    });
+    // Draw nodes
+    NODES.forEach((n,i)=>{
+      const p=positions[i];
+      const isHov=(hoveredNode===i);
+      // Glow
+      if(isHov||n.mine){
+        const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,n.r*2.5);
+        g.addColorStop(0,n.mine?'rgba(0,212,170,0.2)':'rgba(99,102,241,0.15)');
+        g.addColorStop(1,'transparent');
+        ctx.beginPath();ctx.arc(p.x,p.y,n.r*2.5,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+      }
+      // Circle
+      ctx.beginPath();ctx.arc(p.x,p.y,isHov?n.r*1.15:n.r,0,Math.PI*2);
+      ctx.fillStyle=n.mine?'rgba(0,212,170,0.15)':'rgba(99,102,241,0.08)';ctx.fill();
+      ctx.strokeStyle=n.color;ctx.lineWidth=n.mine?2.5:1.5;ctx.stroke();
+      // Label
+      if(showLabels||isHov){
+        ctx.font=`${n.mine?600:400} 10px 'Outfit'`;
+        ctx.fillStyle=n.mine?'#00d4aa':isHov?'#e8ecf4':'#7b8ba8';
+        ctx.textAlign='center';
+        ctx.fillText(n.label.length>14?n.label.slice(0,13)+'…':n.label,p.x,p.y+n.r+13);
+      }
+      // Follower count inside
+      ctx.font='bold 9px JetBrains Mono';ctx.fillStyle=n.mine?'#00d4aa':'#a78bfa';
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(n.followers,p.x,p.y);ctx.textBaseline='alphabetic';
+    });
+    animFrame=requestAnimationFrame(draw);
+  }
+  draw();
+
+  // Hover detection
+  canvas.addEventListener('mousemove',e=>{
+    const rect=canvas.getBoundingClientRect();
+    const mx=e.clientX-rect.left, my=e.clientY-rect.top;
+    const tt=document.getElementById('nodeTooltip');
+    hoveredNode=null;
+    for(let i=0;i<NODES.length;i++){
+      const p=positions[i],n=NODES[i];
+      if(Math.hypot(mx-p.x,my-p.y)<n.r+6){
+        hoveredNode=i;
+        tt.style.display='block';
+        tt.style.left=(mx+14)+'px';tt.style.top=(my-10)+'px';
+        tt.innerHTML=`<div style="font-weight:600;color:${n.color};margin-bottom:4px">${n.label}</div>
+          <div style="color:#7b8ba8;font-size:10px">Followers: <span style="color:#e8ecf4">${n.followers}</span></div>
+          ${n.mine?'<div style="color:#00d4aa;font-size:10px">✓ Your page</div>':`<div style="color:#7b8ba8;font-size:10px">Overlap: <span style="color:#00d4aa">${n.overlap}%</span></div>`}
+          <div style="color:#7b8ba8;font-size:10px">Topics: <span style="color:#e8ecf4">${n.topics}</span></div>`;
+        break;
+      }
+    }
+    if(hoveredNode===null) tt.style.display='none';
+  });
+  canvas.addEventListener('mouseleave',()=>{hoveredNode=null;document.getElementById('nodeTooltip').style.display='none';});
+}
+
+window.resetGraph=function(){};
+window.toggleLabels=function(){showLabels=!showLabels;};
+
+// Build sidebar lists
+function buildSidebarLists(){
+  const mpl=document.getElementById('myPagesList');
+  if(mpl&&!mpl._done){mpl._done=true;
+    const cols=['#00d4aa','#6366f1','#fbbf24'];
+    NODES.filter(n=>n.mine).forEach((n,i)=>{
+      mpl.innerHTML+=`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">
+        <div style="width:10px;height:10px;border-radius:50%;background:${cols[i]};flex-shrink:0"></div>
+        <div style="flex:1"><div style="font-size:12px;font-weight:500">${n.label}</div><div style="font-size:10px;color:var(--text-muted)">${n.followers} followers · ${n.topics}</div></div>
+      </div>`;});
+  }
+  const tml=document.getElementById('topMatchesList');
+  if(tml&&!tml._done){tml._done=true;
+    NODES.filter(n=>!n.mine).sort((a,b)=>(b.overlap||0)-(a.overlap||0)).slice(0,5).forEach(n=>{
+      const pct=n.overlap||0;
+      tml.innerHTML+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <div style="font-size:11px;font-weight:500">${n.label}</div>
+          <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:#00d4aa">${pct}%</div>
+        </div>
+        <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden">
+          <div style="width:${pct}%;height:100%;background:rgba(0,212,170,0.7);border-radius:2px"></div>
+        </div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:3px">${n.followers} followers · ${n.topics}</div>
+      </div>`;});
+  }
+}
+
+// ─── AFFINITY CHARTS ───
+function initAffinityCharts(){
+  setDef();
+  initNetworkGraph();
+  buildSidebarLists();
+
+  const oc=document.getElementById('overlapChart');
+  if(oc&&!oc._done){oc._done=true;
+    new Chart(oc,{type:'bar',data:{
+      labels:['Friday Night Chaos','Northern Banter HQ','Prison Watch UK','British Pub Culture','True Crime Weekly','Late Night Laughs','UK Rant Page','Mancunian Memes'],
+      datasets:[{data:[67,58,55,52,48,44,38,42],backgroundColor:'rgba(0,212,170,0.7)',borderRadius:5,borderSkipped:false}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,
+        scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},max:80},
+          y:{grid:{display:false},ticks:{font:{size:9}}}}}}); }
+
+  const st=document.getElementById('sharedTopicsChart');
+  if(st&&!st._done){st._done=true;
+    new Chart(st,{type:'radar',data:{
+      labels:['Humour','Crime','Community','Politics','Sport','Lifestyle','News'],
+      datasets:[
+        {label:'Your followers',data:[78,62,54,38,44,42,36],backgroundColor:'rgba(0,212,170,0.12)',borderColor:'rgba(0,212,170,0.7)',borderWidth:2,pointRadius:3},
+        {label:'Shared audience',data:[84,70,48,42,38,46,40],backgroundColor:'rgba(99,102,241,0.08)',borderColor:'rgba(99,102,241,0.6)',borderWidth:1.5,pointRadius:2,borderDash:[3,3]}]},
+      options:{responsive:true,plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:8,font:{size:9},padding:8}}},
+        scales:{r:{grid:{color:'rgba(255,255,255,0.06)'},ticks:{display:false},pointLabels:{font:{size:9}},min:0,max:100}}}});}
+}
+
+// ─── COLLAB CHARTS ───
+function initCollabCharts(){
+  setDef();
+  const cb=document.getElementById('collabBubbleChart');
+  if(cb&&!cb._done){cb._done=true;
+    new Chart(cb,{type:'bubble',data:{datasets:[
+      {label:'Humour pages',data:[{x:67,y:28.4,r:14},{x:44,y:24,r:11},{x:42,y:16,r:8}],backgroundColor:'rgba(0,212,170,0.5)',borderColor:'rgba(0,212,170,0.8)'},
+      {label:'Community pages',data:[{x:58,y:41.2,r:16},{x:38,y:20,r:9}],backgroundColor:'rgba(99,102,241,0.5)',borderColor:'rgba(99,102,241,0.8)'},
+      {label:'Crime pages',data:[{x:55,y:12,r:10},{x:48,y:34.6,r:13}],backgroundColor:'rgba(248,113,113,0.5)',borderColor:'rgba(248,113,113,0.8)'}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},
+        scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},title:{display:true,text:'Audience Overlap %',font:{size:10}},ticks:{callback:v=>v+'%',font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},title:{display:true,text:'Their Followers (K)',font:{size:10}},ticks:{callback:v=>v+'K',font:{size:9}}}}}}); }
+
+  const cp=document.getElementById('crossPostChart');
+  if(cp&&!cp._done){cp._done=true;
+    new Chart(cp,{type:'bar',data:{
+      labels:['Friday Night Chaos','Northern Banter HQ','Prison Watch UK','British Pub Culture','True Crime Weekly'],
+      datasets:[
+        {label:'Current reach',data:[22,22,9,22,9],backgroundColor:'rgba(255,255,255,0.1)',borderRadius:5},
+        {label:'Predicted uplift',data:[15,18,8,8,12],backgroundColor:'rgba(0,212,170,0.7)',borderRadius:5}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},
+        scales:{x:{grid:{display:false},stacked:true,ticks:{font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},stacked:false,ticks:{callback:v=>v+'K',font:{size:9}}}}}}); }
+}
+
+// ─── CHAT CHARTS ───
+function initChatCharts(){
+  setDef();
+  const cg=document.getElementById('chatGrowthChart');
+  if(cg&&!cg._done){cg._done=true;
+    const wks=Array.from({length:12},(_,i)=>`W${i+1}`);
+    new Chart(cg,{type:'line',data:{labels:wks,datasets:[
+      {label:'Members',data:[4,6,7,8,10,12,14,16,18,22,24,26],borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.08)',borderWidth:2,pointRadius:0,fill:true,tension:0.4,yAxisID:'y'},
+      {label:'Pages',data:[2,3,4,5,6,6,7,8,9,10,11,12],borderColor:'#6366f1',backgroundColor:'transparent',borderWidth:1.5,pointRadius:0,tension:0.4,yAxisID:'y1'}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},
+        scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}}},
+          y1:{position:'right',grid:{display:false},ticks:{font:{size:9}}}}}}); }
+
+  const ca=document.getElementById('chatActivityChart');
+  if(ca&&!ca._done){ca._done=true;
+    new Chart(ca,{type:'bar',data:{
+      labels:['W1','W2','W3','W4','W5','W6','W7','W8'],
+      datasets:[
+        {label:'UK Meme Creators',data:[24,28,32,38,42,36,44,48],backgroundColor:'rgba(0,212,170,0.7)',borderRadius:4},
+        {label:'Crime & News Pages',data:[12,14,16,18,16,20,22,18],backgroundColor:'rgba(248,113,113,0.6)',borderRadius:4},
+        {label:'Northern England',data:[6,8,10,12,14,12,16,18],backgroundColor:'rgba(99,102,241,0.55)',borderRadius:4}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}}},
+        scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}}}}}}); }
+}
+
+// ─── AUDIENCE MATCH CHARTS ───
+function initAudienceCharts(){
+  setDef();
+  const ar=document.getElementById('audienceRadar');
+  if(ar&&!ar._done){ar._done=true;
+    new Chart(ar,{type:'radar',data:{
+      labels:['Age 18-34','Male ratio','UK-based','Evening active','Mobile user','Dark humour','Community focus'],
+      datasets:[
+        {label:'Drinking Memes',data:[82,64,88,74,92,86,58],backgroundColor:'rgba(0,212,170,0.12)',borderColor:'rgba(0,212,170,0.7)',borderWidth:2,pointRadius:3},
+        {label:'Friday Night Chaos',data:[78,68,82,80,90,92,52],backgroundColor:'rgba(99,102,241,0.08)',borderColor:'rgba(99,102,241,0.6)',borderWidth:1.5,pointRadius:2,borderDash:[3,3]}]},
+      options:{responsive:true,plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:8,font:{size:9},padding:8}}},
+        scales:{r:{grid:{color:'rgba(255,255,255,0.06)'},ticks:{display:false},pointLabels:{font:{size:9}},min:0,max:100}}}});}
+
+  const fj=document.getElementById('followerJourneyChart');
+  if(fj&&!fj._done){fj._done=true;
+    new Chart(fj,{type:'doughnut',data:{
+      labels:['Organic search','Shared post','Collab page','Group chat','Direct link','Ad'],
+      datasets:[{data:[34,28,18,10,6,4],
+        backgroundColor:['rgba(0,212,170,0.85)','rgba(99,102,241,0.8)','rgba(251,191,36,0.8)','rgba(96,165,250,0.8)','rgba(167,139,250,0.75)','rgba(248,113,113,0.7)'],
+        borderColor:'#0f1729',borderWidth:3}]},
+      options:{cutout:'60%',responsive:true,
+        plugins:{legend:{display:true,position:'right',labels:{boxWidth:8,font:{size:9},padding:8}}}}}); }
+
+  const ao=document.getElementById('ageOverlapChart');
+  if(ao&&!ao._done){ao._done=true;
+    new Chart(ao,{type:'bar',data:{labels:['13-17','18-24','25-34','35-44','45-54','55+'],
+      datasets:[
+        {label:'Drinking Memes',data:[3,22,38,24,9,4],backgroundColor:'rgba(0,212,170,0.7)',borderRadius:4},
+        {label:'Friday Night Chaos',data:[4,26,36,22,8,4],backgroundColor:'rgba(99,102,241,0.55)',borderRadius:4}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:6}}},
+        scales:{x:{grid:{display:false},ticks:{font:{size:8}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}}); }
+
+  const ho=document.getElementById('hoursOverlapChart');
+  if(ho&&!ho._done){ho._done=true;
+    const hrs=Array.from({length:24},(_,i)=>(i<10?'0':'')+i);
+    new Chart(ho,{type:'line',data:{labels:hrs,datasets:[
+      {label:'Drinking Memes',data:[1,1,1,0,0,1,2,4,7,10,12,14,13,11,10,9,12,16,22,28,24,18,12,6],borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.06)',borderWidth:1.5,pointRadius:0,fill:true,tension:0.4},
+      {label:'Friday Night Chaos',data:[2,1,2,1,0,1,2,3,6,8,10,12,11,10,9,8,11,14,20,26,28,22,16,8],borderColor:'#6366f1',backgroundColor:'rgba(99,102,241,0.04)',borderWidth:1.5,pointRadius:0,fill:true,tension:0.4}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:6}}},
+        scales:{x:{grid:{display:false},ticks:{maxTicksLimit:6,font:{size:8}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:8}},display:false}}}});}
+
+  const cp=document.getElementById('contentPrefChart');
+  if(cp&&!cp._done){cp._done=true;
+    new Chart(cp,{type:'bar',data:{labels:['Photo','Video','Reel','Carousel','Text'],
+      datasets:[
+        {label:'Shared audience',data:[42,28,18,8,4],backgroundColor:['rgba(0,212,170,0.8)','rgba(0,212,170,0.65)','rgba(99,102,241,0.65)','rgba(99,102,241,0.5)','rgba(251,191,36,0.5)'],borderRadius:5}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}}); }
+}
+
+// ─── DISPATCHER ───
+function initChartsForTab(tid){
+  if(tid==='affinity') initAffinityCharts();
+  else if(tid==='collabs') initCollabCharts();
+  else if(tid==='chats') initChatCharts();
+  else if(tid==='audience') initAudienceCharts();
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  initTabs();
+  setTimeout(initAffinityCharts, 150);
+});
+})();
+</script>
+
 <aside class="sidebar">
   <a href="admin_panel.html" class="sidebar-logo" title="Back to Admin Panel">
     <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
@@ -532,224 +880,167 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 </aside>
 
 <!-- ═══ MAIN ═══ -->
+
 <div class="main">
   <header class="topbar">
     <div class="topbar-left">
       <div class="topbar-title">Discovery — Chats, Collabs, Affinity</div>
-      <div class="topbar-stat"><span class="live-dot"></span>12,847 pages analysed</div>
+      <div class="topbar-tabs">
+        <div class="topbar-tab active" data-target="affinity">Affinity Map</div>
+        <div class="topbar-tab" data-target="collabs">Collaborations</div>
+        <div class="topbar-tab" data-target="chats">Group Chats</div>
+        <div class="topbar-tab" data-target="audience">Audience Match</div>
+      </div>
     </div>
     <div class="topbar-right">
-      <div class="view-toggle">
-        <button class="view-btn active">Flywheel</button>
-        <button class="view-btn">Grid</button>
-      </div>
+      <div class="page-selector"><span class="page-dot"></span>Drinking Memes<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
       <div class="avatar">AS</div>
     </div>
   </header>
 
   <div class="content">
-    <!-- Search -->
-    <div class="search-row">
-      <div class="search-box">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <input type="text" placeholder="Search pages, niches, or keywords...">
-      </div>
-      <div class="filter-pills">
-        <div class="pill active">All</div>
-        <div class="pill">Fitness</div>
-        <div class="pill">Food & Drink</div>
-        <div class="pill">Tech</div>
-        <div class="pill">Fashion</div>
-        <div class="pill">Business</div>
-      </div>
-    </div>
 
-    <!-- PLY Header -->
-    <div class="ply-header">
-      <div class="ply-left">
-        <div class="ply-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <div>
-          <div class="ply-label">People Like You — Recommended</div>
-          <div class="ply-desc">Matching your audience, niche, and content style</div>
+    <!-- ══ AFFINITY MAP TAB ══ -->
+    <div class="tab-panel active" id="panel-affinity">
+      <div class="section-label">AFFINITY MAP — PAGE NETWORK VISUALISATION</div>
+
+      <div style="display:grid;grid-template-columns:1fr 320px;gap:16px;margin-bottom:16px">
+        <!-- Node graph canvas -->
+        <div class="panel" style="padding:0;overflow:hidden;position:relative;min-height:520px">
+          <div style="padding:14px 18px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <div class="panel-title">Page Affinity Network</div>
+              <div class="panel-subtitle">Node size = follower count · Edge thickness = audience overlap % · Hover for details</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <button onclick="resetGraph()" style="font-size:10px;padding:4px 10px;border-radius:6px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Reset</button>
+              <button onclick="toggleLabels()" style="font-size:10px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-family:inherit">Labels</button>
+            </div>
+          </div>
+          <canvas id="networkCanvas" style="width:100%;display:block"></canvas>
+          <div id="nodeTooltip" style="position:absolute;display:none;background:#0f1729;border:1px solid rgba(0,212,170,0.3);border-radius:8px;padding:10px 14px;font-size:11px;pointer-events:none;z-index:10;min-width:160px"></div>
+        </div>
+
+        <!-- Sidebar: top matches -->
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="panel">
+            <div class="panel-header"><div><div class="panel-title">Your Pages</div><div class="panel-subtitle">Currently tracking</div></div></div>
+            <div id="myPagesList"></div>
+          </div>
+          <div class="panel" style="flex:1">
+            <div class="panel-header"><div><div class="panel-title">Top Affinity Matches</div><div class="panel-subtitle">Sorted by overlap score</div></div></div>
+            <div id="topMatchesList"></div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- ═══ FLYWHEEL CAROUSEL ═══ -->
-    <div class="flywheel">
-      <div class="fly-arrow" id="prevBtn"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></div>
-      <div class="fly-track">
-
-        <!-- FAR LEFT (faded) -->
-        <div class="bcard faded niche-food">
-          <div class="bcard-top">
-            <div class="bcard-avatar">CB</div>
-            <div class="bcard-info"><div class="bcard-name">CleanBites</div><div class="bcard-niche">🥗 Nutrition</div></div>
-          </div>
-          <div class="bcard-divider"></div>
-          <div class="bcard-metrics">
-            <div class="metric-row"><span class="metric-name">Engagement</span><span class="metric-val">3.9%</span></div>
-            <div class="metric-row"><span class="metric-name">Reach</span><span class="metric-val">12.1K</span></div>
-          </div>
+      <!-- Affinity score breakdown chart -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Audience Overlap — Top 8 Pages</div><div class="panel-subtitle">% of your followers also follow them</div></div></div>
+          <canvas id="overlapChart" height="160"></canvas>
         </div>
-
-        <!-- LEFT (semi) -->
-        <div class="bcard semi niche-food">
-          <div class="bcard-top">
-            <div class="bcard-avatar">NF</div>
-            <div class="bcard-info"><div class="bcard-name">NutriFuel</div><div class="bcard-niche">🥗 Nutrition</div></div>
-            <div class="bcard-match"><div class="bcard-match-val">78%</div><div class="bcard-match-lbl">MATCH</div></div>
-          </div>
-          <div class="bcard-divider"></div>
-          <div class="bcard-metrics">
-            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>TOP METRICS (30D)</div>
-            <div class="metric-row"><span class="metric-name"><span class="emoji">📊</span>Engagement</span><span class="metric-val">3.1%</span></div>
-            <div class="metric-row"><span class="metric-name"><span class="emoji">👥</span>Reach</span><span class="metric-val">18.2K</span></div>
-            <div class="metric-row"><span class="metric-name"><span class="emoji">😊</span>Sentiment</span><span class="metric-val">0.88</span></div>
-          </div>
-        </div>
-
-        <!-- ═══ CENTER CARD (BOLD) ═══ -->
-        <div class="bcard center niche-fitness">
-          <div class="bcard-sale">FOR SALE</div>
-          <div class="bcard-top">
-            <div class="bcard-avatar">FL</div>
-            <div class="bcard-info"><div class="bcard-name">FitLife Pro</div><div class="bcard-niche">💪 Fitness</div></div>
-            <div class="bcard-match"><div class="bcard-match-val">92%</div><div class="bcard-match-lbl">MATCH</div></div>
-          </div>
-          <div class="bcard-divider"></div>
-          <div class="bcard-metrics">
-            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>TOP 3 POSTS (30 DAYS)</div>
-            <div class="metric-row"><span class="metric-name"><span class="emoji">🎬</span>Product launch video</span><span class="metric-val">4.2K</span></div>
-            <div class="metric-row"><span class="metric-name"><span class="emoji">📸</span>Behind the scenes reel</span><span class="metric-val">3.8K</span></div>
-            <div class="metric-row"><span class="metric-name"><span class="emoji">💪</span>Customer transformation</span><span class="metric-val">2.9K</span></div>
-          </div>
-          <div class="bcard-divider"></div>
-          <div class="bcard-patterns">
-            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>PATTERNS UNLOCKED</div>
-            <div class="pattern-row"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Best posting time: Tue & Thu 6 PM</div>
-            <div class="pattern-row"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Top format: Short-form video (+156%)</div>
-            <div class="pattern-row"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Audience: 25–34, urban, health-conscious</div>
-          </div>
-          <div class="bcard-actions">
-            <div class="bcard-btn btn-fb">Follow FB</div>
-            <div class="bcard-btn btn-contact">Contact</div>
-            <div class="bcard-btn btn-chat">Chat</div>
-            <div class="bcard-btn btn-collab">Collab</div>
-          </div>
-        </div>
-
-        <!-- RIGHT (semi) -->
-        <div class="bcard semi niche-fitness">
-          <div class="bcard-top">
-            <div class="bcard-avatar">YG</div>
-            <div class="bcard-info"><div class="bcard-name">YogaGlow</div><div class="bcard-niche">🧘 Wellness</div></div>
-            <div class="bcard-match"><div class="bcard-match-val">85%</div><div class="bcard-match-lbl">MATCH</div></div>
-          </div>
-          <div class="bcard-divider"></div>
-          <div class="bcard-metrics">
-            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>TOP METRICS (30D)</div>
-            <div class="metric-row"><span class="metric-name"><span class="emoji">📊</span>Engagement</span><span class="metric-val">5.6%</span></div>
-            <div class="metric-row"><span class="metric-name"><span class="emoji">👥</span>Reach</span><span class="metric-val">31.4K</span></div>
-            <div class="metric-row"><span class="metric-name"><span class="emoji">😊</span>Sentiment</span><span class="metric-val">0.93</span></div>
-          </div>
-        </div>
-
-        <!-- FAR RIGHT (faded) -->
-        <div class="bcard faded niche-tech">
-          <div class="bcard-top">
-            <div class="bcard-avatar">TH</div>
-            <div class="bcard-info"><div class="bcard-name">TechHustle</div><div class="bcard-niche">💻 Tech</div></div>
-          </div>
-          <div class="bcard-divider"></div>
-          <div class="bcard-metrics">
-            <div class="metric-row"><span class="metric-name">Engagement</span><span class="metric-val">2.8%</span></div>
-            <div class="metric-row"><span class="metric-name">Reach</span><span class="metric-val">45.3K</span></div>
-          </div>
-        </div>
-
-      </div>
-      <div class="fly-arrow" id="nextBtn"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
-    </div>
-
-    <!-- Flywheel indicator -->
-    <div class="flywheel-footer">
-      <div class="flywheel-dots">
-        <div class="flywheel-dot"></div>
-        <div class="flywheel-dot"></div>
-        <div class="flywheel-dot active"></div>
-        <div class="flywheel-dot"></div>
-        <div class="flywheel-dot"></div>
-      </div>
-      <div class="flywheel-hint">Auto-rotating · Hover to pause</div>
-    </div>
-
-    <!-- Grid Section -->
-    <div class="grid-section">
-      <div class="grid-header">
-        <h3>All Discovered Pages</h3>
-        <div class="grid-count">Showing 847 of 12,847 pages</div>
-      </div>
-      <div class="card-grid">
-        <div class="bcard niche-food">
-          <div class="bcard-top">
-            <div class="bcard-avatar">CB</div>
-            <div class="bcard-info"><div class="bcard-name">CleanBites</div><div class="bcard-niche">🥗 Nutrition</div></div>
-            <div class="bcard-match"><div class="bcard-match-val" style="font-size:17px">78%</div><div class="bcard-match-lbl">MATCH</div></div>
-          </div>
-          <div class="bcard-divider"></div>
-          <div class="bcard-metrics">
-            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>TOP METRICS (30D)</div>
-            <div class="metric-row"><span class="metric-name">Engagement</span><span class="metric-val">3.9%</span></div>
-            <div class="metric-row"><span class="metric-name">Reach</span><span class="metric-val">12.1K</span></div>
-            <div class="metric-row"><span class="metric-name">Sentiment</span><span class="metric-val">0.91</span></div>
-          </div>
-          <div class="bcard-actions">
-            <div class="bcard-btn btn-fb">Follow FB</div>
-            <div class="bcard-btn btn-contact">Contact</div>
-          </div>
-        </div>
-
-        <div class="bcard niche-tech">
-          <div class="bcard-top">
-            <div class="bcard-avatar">TH</div>
-            <div class="bcard-info"><div class="bcard-name">TechHustle</div><div class="bcard-niche">💻 Tech</div></div>
-            <div class="bcard-match"><div class="bcard-match-val" style="font-size:17px">65%</div><div class="bcard-match-lbl">MATCH</div></div>
-          </div>
-          <div class="bcard-divider"></div>
-          <div class="bcard-metrics">
-            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>TOP METRICS (30D)</div>
-            <div class="metric-row"><span class="metric-name">Engagement</span><span class="metric-val">2.8%</span></div>
-            <div class="metric-row"><span class="metric-name">Reach</span><span class="metric-val">45.3K</span></div>
-            <div class="metric-row"><span class="metric-name">Sentiment</span><span class="metric-val">0.76</span></div>
-          </div>
-          <div class="bcard-actions">
-            <div class="bcard-btn btn-fb">Follow FB</div>
-            <div class="bcard-btn btn-collab">Collab</div>
-          </div>
-        </div>
-
-        <div class="bcard niche-fashion">
-          <div class="bcard-sale">FOR SALE</div>
-          <div class="bcard-top">
-            <div class="bcard-avatar">SM</div>
-            <div class="bcard-info"><div class="bcard-name">StyleMaven</div><div class="bcard-niche">👗 Fashion</div></div>
-            <div class="bcard-match"><div class="bcard-match-val" style="font-size:17px">58%</div><div class="bcard-match-lbl">MATCH</div></div>
-          </div>
-          <div class="bcard-divider"></div>
-          <div class="bcard-metrics">
-            <div class="bcard-section-lbl"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>TOP METRICS (30D)</div>
-            <div class="metric-row"><span class="metric-name">Engagement</span><span class="metric-val">6.1%</span></div>
-            <div class="metric-row"><span class="metric-name">Reach</span><span class="metric-val">8.7K</span></div>
-            <div class="metric-row"><span class="metric-name">Sentiment</span><span class="metric-val">0.88</span></div>
-          </div>
-          <div class="bcard-actions">
-            <div class="bcard-btn btn-fb">Follow FB</div>
-            <div class="bcard-btn btn-contact">Contact</div>
-          </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Shared Audience by Topic</div><div class="panel-subtitle">What interests your overlapping followers</div></div></div>
+          <canvas id="sharedTopicsChart" height="160"></canvas>
         </div>
       </div>
     </div>
+
+    <!-- ══ COLLABORATIONS TAB ══ -->
+    <div class="tab-panel" id="panel-collabs">
+      <div class="section-label">COLLABORATION OPPORTUNITIES</div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px">
+        <div class="kpi-card" style="text-align:center"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">COLLAB MATCHES</div><div class="kpi-value accent">24</div><div class="kpi-change" style="color:var(--text-muted)">Above 50% overlap</div></div>
+        <div class="kpi-card" style="text-align:center"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">AVG POTENTIAL REACH</div><div class="kpi-value">12.4K</div><div class="kpi-change up">Per cross-post</div></div>
+        <div class="kpi-card" style="text-align:center"><div class="kpi-label" style="font-size:10px;margin-bottom:8px">PAST COLLABS</div><div class="kpi-value" style="color:#a78bfa">3</div><div class="kpi-change up">Avg +18% reach</div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Collab Opportunity Score</div><div class="panel-subtitle">Top 8 matches · Bubble = potential reach</div></div></div>
+          <canvas id="collabBubbleChart" height="200"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Cross-Post Impact Modelling</div><div class="panel-subtitle">Predicted uplift from cross-posting with top 5</div></div></div>
+          <canvas id="crossPostChart" height="200"></canvas>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Collaboration Pipeline</div><div class="panel-subtitle">All matches ranked by score · Art-E can draft outreach messages</div></div></div>
+        <table class="data-table" style="margin-top:10px">
+          <thead><tr><th>#</th><th>Page</th><th>Overlap</th><th>Their Followers</th><th>Potential New Reach</th><th>Content Match</th><th>Best Format</th><th>Score</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td class="td-mono">01</td><td style="font-size:12px;font-weight:500">Friday Night Chaos</td><td class="td-num">67%</td><td class="td-num">28.4K</td><td style="color:#34d399;font-family:'JetBrains Mono',monospace;font-size:11px">~15K</td><td style="font-size:10px;color:var(--text-muted)">Humour / Memes</td><td style="font-size:10px;color:var(--text-muted)">Photo</td><td class="td-num">94</td><td><button style="font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Draft DM</button></td></tr>
+            <tr><td class="td-mono">02</td><td style="font-size:12px;font-weight:500">Northern Banter HQ</td><td class="td-num">58%</td><td class="td-num">41.2K</td><td style="color:#34d399;font-family:'JetBrains Mono',monospace;font-size:11px">~18K</td><td style="font-size:10px;color:var(--text-muted)">Community / Lifestyle</td><td style="font-size:10px;color:var(--text-muted)">Reel</td><td class="td-num">88</td><td><button style="font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Draft DM</button></td></tr>
+            <tr><td class="td-mono">03</td><td style="font-size:12px;font-weight:500">British Pub Culture</td><td class="td-num">52%</td><td class="td-num">19.8K</td><td style="color:#34d399;font-family:'JetBrains Mono',monospace;font-size:11px">~8K</td><td style="font-size:10px;color:var(--text-muted)">Food & Drink / Humour</td><td style="font-size:10px;color:var(--text-muted)">Photo</td><td class="td-num">81</td><td><button style="font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Draft DM</button></td></tr>
+            <tr><td class="td-mono">04</td><td style="font-size:12px;font-weight:500">True Crime Weekly</td><td class="td-num">48%</td><td class="td-num">34.6K</td><td style="color:#34d399;font-family:'JetBrains Mono',monospace;font-size:11px">~12K</td><td style="font-size:10px;color:var(--text-muted)">Crime / News</td><td style="font-size:10px;color:var(--text-muted)">Carousel</td><td class="td-num">76</td><td><button style="font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Draft DM</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ GROUP CHATS TAB ══ -->
+    <div class="tab-panel" id="panel-chats">
+      <div class="section-label">GROUP CHATS — COMMUNITY NETWORK</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Network Growth via Group Chats</div><div class="panel-subtitle">Members, pages, reach over time</div></div></div>
+          <canvas id="chatGrowthChart" height="160"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Chat Activity by Group</div><div class="panel-subtitle">Messages per week · Last 8 weeks</div></div></div>
+          <canvas id="chatActivityChart" height="160"></canvas>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Active Group Chats</div><div class="panel-subtitle">Your atomic networks — each chat is a growth node</div></div><button style="font-size:11px;padding:4px 12px;border-radius:7px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">+ Create Group</button></div>
+        <table class="data-table" style="margin-top:10px">
+          <thead><tr><th>Group</th><th>Members</th><th>Pages</th><th>Topics</th><th>Activity</th><th>Reach Pool</th><th>Last Active</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td style="font-size:12px;font-weight:500">🍺 UK Meme Creators</td><td class="td-num">12</td><td class="td-num">8</td><td style="font-size:10px;color:var(--text-muted)">Humour · Community</td><td><span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(52,211,153,0.1);color:#34d399;border:1px solid rgba(52,211,153,0.2)">High</span></td><td class="td-num">284K</td><td class="td-mono sm">2h ago</td><td><button style="font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Open</button></td></tr>
+            <tr><td style="font-size:12px;font-weight:500">⚖️ Crime & News Pages</td><td class="td-num">8</td><td class="td-num">6</td><td style="font-size:10px;color:var(--text-muted)">Crime · Politics · News</td><td><span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)">Medium</span></td><td class="td-num">198K</td><td class="td-mono sm">6h ago</td><td><button style="font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Open</button></td></tr>
+            <tr><td style="font-size:12px;font-weight:500">🌍 Northern England Pages</td><td class="td-num">6</td><td class="td-num">4</td><td style="font-size:10px;color:var(--text-muted)">Local · Community</td><td><span style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(96,165,250,0.1);color:#60a5fa;border:1px solid rgba(96,165,250,0.2)">Growing</span></td><td class="td-num">124K</td><td class="td-mono sm">1d ago</td><td><button style="font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Open</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ AUDIENCE MATCH TAB ══ -->
+    <div class="tab-panel" id="panel-audience">
+      <div class="section-label">AUDIENCE MATCH — DEEP ANALYSIS</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Audience Similarity Radar</div><div class="panel-subtitle">Your top match vs your own profile</div></div></div>
+          <canvas id="audienceRadar" height="200"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Follower Journey — Where They Come From</div><div class="panel-subtitle">How new followers discovered your page</div></div></div>
+          <canvas id="followerJourneyChart" height="200"></canvas>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Age Overlap</div><div class="panel-subtitle">Your page vs top match</div></div></div>
+          <canvas id="ageOverlapChart" height="160"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Active Hours Overlap</div><div class="panel-subtitle">When shared followers are online</div></div></div>
+          <canvas id="hoursOverlapChart" height="160"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Content Type Preference</div><div class="panel-subtitle">What shared audience engages with</div></div></div>
+          <canvas id="contentPrefChart" height="160"></canvas>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
