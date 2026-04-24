@@ -856,100 +856,175 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 
     <!-- TAB: TRENDS -->
     <div class="tab-panel" data-tab="trends">
-      <div class="section-label" style="animation:fadeUp .4s ease">ENGAGEMENT TRENDS — 30 DAY VIEW</div>
-      <div class="card animate" style="margin-bottom:20px">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px"><div><div class="card-title">Engagement Rate Over Time</div><div class="card-subtitle">Daily average · All pages combined</div></div><div style="display:flex;gap:8px"><span style="padding:5px 12px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:6px;font-size:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;cursor:pointer">7D</span><span style="padding:5px 12px;background:var(--accent);border-radius:6px;font-size:10px;color:var(--bg-primary);font-weight:600;font-family:'JetBrains Mono',monospace;cursor:pointer">30D</span><span style="padding:5px 12px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:6px;font-size:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;cursor:pointer">90D</span></div></div>
-        <div style="height:220px;position:relative;padding:0 4px">
-          <svg width="100%" height="100%" viewBox="0 0 700 220" preserveAspectRatio="none" style="overflow:visible">
-            <defs><linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--accent)" stop-opacity="0.2"/><stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>
-            <line x1="0" y1="55" x2="700" y2="55" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-            <line x1="0" y1="110" x2="700" y2="110" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-            <line x1="0" y1="165" x2="700" y2="165" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-            <text x="-4" y="58" fill="var(--text-muted)" font-size="9" font-family="JetBrains Mono" text-anchor="end">5%</text>
-            <text x="-4" y="113" fill="var(--text-muted)" font-size="9" font-family="JetBrains Mono" text-anchor="end">3%</text>
-            <text x="-4" y="168" fill="var(--text-muted)" font-size="9" font-family="JetBrains Mono" text-anchor="end">1%</text>
-            <path d="M0,165 L23,158 L47,162 L70,148 L93,152 L117,140 L140,144 L163,130 L187,128 L210,118 L233,125 L257,110 L280,115 L303,98 L327,105 L350,88 L373,92 L397,78 L420,82 L443,68 L467,74 L490,60 L513,65 L537,50 L560,55 L583,42 L607,48 L630,35 L653,40 L677,28 L700,22 L700,220 L0,220 Z" fill="url(#trendFill)"/>
-            <path d="M0,165 L23,158 L47,162 L70,148 L93,152 L117,140 L140,144 L163,130 L187,128 L210,118 L233,125 L257,110 L280,115 L303,98 L327,105 L350,88 L373,92 L397,78 L420,82 L443,68 L467,74 L490,60 L513,65 L537,50 L560,55 L583,42 L607,48 L630,35 L653,40 L677,28 L700,22" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="700" cy="22" r="5" fill="var(--accent-bright)" stroke="var(--bg-card)" stroke-width="2"><animate attributeName="r" values="5;7;5" dur="2s" repeatCount="indefinite"/></circle>
-          </svg>
+      <div class="section-label">ENGAGEMENT TRENDS — DEEP DIVE</div>
+
+      <div class="card" style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <div><div class="card-title">Engagement Rate Over Time</div><div class="card-subtitle">Daily average · All connected pages</div></div>
+          <div style="display:flex;gap:6px">
+            <span onclick="setRange(this,7)" style="padding:4px 10px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:6px;font-size:10px;color:var(--accent);font-family:JetBrains Mono,monospace;cursor:pointer">7D</span>
+            <span onclick="setRange(this,30)" style="padding:4px 10px;background:var(--accent);border-radius:6px;font-size:10px;color:var(--bg-primary);font-weight:600;font-family:JetBrains Mono,monospace;cursor:pointer">30D</span>
+            <span onclick="setRange(this,90)" style="padding:4px 10px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:6px;font-size:10px;color:var(--accent);font-family:JetBrains Mono,monospace;cursor:pointer">90D</span>
+          </div>
+        </div>
+        <canvas id="engTrendChart" height="90"></canvas>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
+        <div class="card">
+          <div class="card-title">Follower Growth</div>
+          <div class="card-subtitle">Last 30 days</div>
+          <div style="font-size:28px;font-weight:800;color:var(--accent);margin:10px 0 4px">+1,247</div>
+          <div style="font-size:11px;color:#34d399;margin-bottom:12px">▲ 18% vs prior period</div>
+          <canvas id="followGrowthSparkline" height="50"></canvas>
+        </div>
+        <div class="card">
+          <div class="card-title">Total Impressions</div>
+          <div class="card-subtitle">Last 30 days</div>
+          <div style="font-size:28px;font-weight:800;margin:10px 0 4px">842K</div>
+          <div style="font-size:11px;color:#34d399;margin-bottom:12px">▲ 24% vs prior period</div>
+          <canvas id="impressionsSparkline" height="50"></canvas>
+        </div>
+        <div class="card">
+          <div class="card-title">Click-Through Rate</div>
+          <div class="card-subtitle">Last 30 days</div>
+          <div style="font-size:28px;font-weight:800;color:var(--warning);margin:10px 0 4px">2.8%</div>
+          <div style="font-size:11px;color:#f87171;margin-bottom:12px">▼ 3% vs prior period</div>
+          <canvas id="ctrSparkline" height="50"></canvas>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px" class="animate delay-1">
-        <div class="card"><div class="card-title">Follower Growth</div><div class="card-subtitle">Last 30 days</div><div style="font-size:28px;font-weight:800;color:var(--accent);margin:12px 0">+1,247</div><div style="font-size:12px;color:var(--success)">▲ 18% vs previous period</div><div style="margin-top:12px;height:60px"><svg width="100%" height="60" viewBox="0 0 200 60" preserveAspectRatio="none"><path d="M0,55 L30,48 L60,50 L90,38 L120,35 L150,22 L180,18 L200,8" fill="none" stroke="var(--accent)" stroke-width="2"/></svg></div></div>
-        <div class="card"><div class="card-title">Impressions</div><div class="card-subtitle">Last 30 days</div><div style="font-size:28px;font-weight:800;margin:12px 0">842K</div><div style="font-size:12px;color:var(--success)">▲ 24% vs previous period</div><div style="margin-top:12px;height:60px"><svg width="100%" height="60" viewBox="0 0 200 60" preserveAspectRatio="none"><path d="M0,50 L30,44 L60,48 L90,32 L120,28 L150,18 L180,15 L200,5" fill="none" stroke="var(--accent-secondary)" stroke-width="2"/></svg></div></div>
-        <div class="card"><div class="card-title">Click-Through Rate</div><div class="card-subtitle">Last 30 days</div><div style="font-size:28px;font-weight:800;color:var(--warning);margin:12px 0">2.8%</div><div style="font-size:12px;color:var(--danger)">▼ 3% vs previous period</div><div style="margin-top:12px;height:60px"><svg width="100%" height="60" viewBox="0 0 200 60" preserveAspectRatio="none"><path d="M0,15 L30,20 L60,18 L90,28 L120,32 L150,38 L180,42 L200,48" fill="none" stroke="var(--warning)" stroke-width="2"/></svg></div></div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="card">
+          <div class="card-title">Reach vs Engagement — Correlation</div>
+          <div class="card-subtitle">Each dot = one post · Last 60 days</div>
+          <canvas id="reachEngScatter" height="160"></canvas>
+        </div>
+        <div class="card">
+          <div class="card-title">Day-of-Week Performance</div>
+          <div class="card-subtitle">Average engagement rate by day</div>
+          <canvas id="dowChart" height="160"></canvas>
+        </div>
       </div>
-    </div><!-- end tab trends -->
+    </div>
 
     <!-- TAB: VIRALITY -->
     <div class="tab-panel" data-tab="virality">
-      <div class="section-label" style="animation:fadeUp .4s ease">VIRALITY ANALYSIS</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px" class="animate">
-        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">VIRAL POSTS</div><div style="font-size:32px;font-weight:800;color:var(--accent)">14</div><div style="font-size:11px;color:var(--success);margin-top:4px">This month</div></div>
-        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">AVG VIRALITY</div><div style="font-size:32px;font-weight:800">0.67</div><div style="font-size:11px;color:var(--success);margin-top:4px">▲ 12% vs last month</div></div>
-        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">PREDICTION ACCURACY</div><div style="font-size:32px;font-weight:800;color:var(--accent)">94%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px">Last 50 predictions</div></div>
-        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">SHARE VELOCITY</div><div style="font-size:32px;font-weight:800;color:var(--accent-secondary)">3.2x</div><div style="font-size:11px;color:var(--success);margin-top:4px">Above niche avg</div></div>
+      <div class="section-label">VIRALITY ANALYSIS — PATTERN INTELLIGENCE</div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px">
+        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">VIRAL POSTS / MONTH</div><div style="font-size:32px;font-weight:800;color:var(--accent)">14</div><div style="font-size:10px;color:#34d399;margin-top:4px">▲ 4 vs last month</div></div>
+        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">AVG VIRALITY SCORE</div><div style="font-size:32px;font-weight:800">0.67</div><div style="font-size:10px;color:#34d399;margin-top:4px">▲ 12% vs last month</div></div>
+        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">PREDICTION ACCURACY</div><div style="font-size:32px;font-weight:800;color:var(--accent)">94%</div><div style="font-size:10px;color:var(--text-muted);margin-top:4px">Last 50 predictions</div></div>
+        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">SUPER SHARERS ACTIVE</div><div style="font-size:32px;font-weight:800;color:var(--accent-secondary)">12</div><div style="font-size:10px;color:#34d399;margin-top:4px">34% of all shares</div></div>
       </div>
-      <div style="display:grid;grid-template-columns:3fr 2fr;gap:16px" class="animate delay-1">
+
+      <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:16px;margin-bottom:16px">
         <div class="card">
-          <div class="card-title">Viral Velocity Timeline</div>
-          <div class="card-subtitle">How fast posts reach viral threshold</div>
-          <div style="margin-top:16px">
-            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="width:150px;font-size:12px;font-weight:500">Product launch video</span><div style="flex:1;height:24px;background:rgba(255,255,255,0.02);border-radius:6px;overflow:hidden;position:relative"><div style="width:92%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-bright));border-radius:6px;display:flex;align-items:center;padding-left:8px;font-size:10px;font-weight:600;color:var(--bg-primary)">0.92 — 45 min</div></div></div>
-            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="width:150px;font-size:12px;font-weight:500">Behind scenes reel</span><div style="flex:1;height:24px;background:rgba(255,255,255,0.02);border-radius:6px;overflow:hidden;position:relative"><div style="width:78%;height:100%;background:linear-gradient(90deg,var(--accent),rgba(0,212,170,0.6));border-radius:6px;display:flex;align-items:center;padding-left:8px;font-size:10px;font-weight:600;color:var(--bg-primary)">0.78 — 1.5 hrs</div></div></div>
-            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="width:150px;font-size:12px;font-weight:500">Transformation post</span><div style="flex:1;height:24px;background:rgba(255,255,255,0.02);border-radius:6px;overflow:hidden;position:relative"><div style="width:71%;height:100%;background:linear-gradient(90deg,var(--accent-secondary),rgba(99,102,241,0.6));border-radius:6px;display:flex;align-items:center;padding-left:8px;font-size:10px;font-weight:600;color:white">0.71 — 2.1 hrs</div></div></div>
-            <div style="display:flex;align-items:center;gap:12px;padding:10px 0"><span style="width:150px;font-size:12px;font-weight:500">Nutrition carousel</span><div style="flex:1;height:24px;background:rgba(255,255,255,0.02);border-radius:6px;overflow:hidden;position:relative"><div style="width:45%;height:100%;background:linear-gradient(90deg,var(--warning),rgba(251,191,36,0.6));border-radius:6px;display:flex;align-items:center;padding-left:8px;font-size:10px;font-weight:600;color:var(--bg-primary)">0.45 — 6 hrs</div></div></div>
-          </div>
+          <div class="card-title">Share Velocity — Live 48h</div>
+          <div class="card-subtitle">Shares per hour · Red line = viral threshold (200/hr)</div>
+          <canvas id="viralVelChart" height="130"></canvas>
         </div>
         <div class="card">
-          <div class="card-title">Viral Triggers</div>
-          <div class="card-subtitle">What makes your content go viral</div>
-          <div style="margin-top:16px">
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-size:12.5px;color:var(--text-secondary)">🎬 Short-form video</span><span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:600">+156%</span></div>
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-size:12.5px;color:var(--text-secondary)">🕕 Tuesday 6 PM posting</span><span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:600">+92%</span></div>
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-size:12.5px;color:var(--text-secondary)">😊 High sentiment (>0.85)</span><span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:600">+78%</span></div>
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-size:12.5px;color:var(--text-secondary)">🏷️ Product launches</span><span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--accent-secondary);font-weight:600">+65%</span></div>
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0"><span style="font-size:12.5px;color:var(--text-secondary)">💬 Question in caption</span><span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--accent-secondary);font-weight:600">+41%</span></div>
+          <div class="card-title">Virality Score Distribution</div>
+          <div class="card-subtitle">All posts this month · 0–1 scale</div>
+          <canvas id="viralDistChart" height="130"></canvas>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="card">
+          <div class="card-title">Top Viral Posts — Time to Threshold</div>
+          <div class="card-subtitle">How fast each post crossed 1,000 engagements</div>
+          <table class="data-table" style="margin-top:10px">
+            <thead><tr><th>Post</th><th>Score</th><th>Time to viral</th><th>Total reach</th><th>Driver</th></tr></thead>
+            <tbody>
+              <tr><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Product launch video</td><td class="td-num">0.92</td><td style="color:#34d399;font-family:JetBrains Mono,monospace;font-size:11px">45 min</td><td class="td-num">18.4K</td><td style="font-size:10px;color:var(--text-muted)">@dave_memes</td></tr>
+              <tr><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Prison biscuit meme</td><td class="td-num">0.89</td><td style="color:#34d399;font-family:JetBrains Mono,monospace;font-size:11px">62 min</td><td class="td-num">47.2K</td><td style="font-size:10px;color:var(--text-muted)">7 super sharers</td></tr>
+              <tr><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Behind the scenes reel</td><td class="td-num">0.78</td><td style="color:#fbbf24;font-family:JetBrains Mono,monospace;font-size:11px">1.5 hrs</td><td class="td-num">14.2K</td><td style="font-size:10px;color:var(--text-muted)">Late-night cluster</td></tr>
+              <tr><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Customer transformation</td><td class="td-num">0.71</td><td style="color:#fbbf24;font-family:JetBrains Mono,monospace;font-size:11px">2.1 hrs</td><td class="td-num">11.8K</td><td style="font-size:10px;color:var(--text-muted)">Fitness cluster</td></tr>
+              <tr><td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Monday motivation photo</td><td class="td-num">0.64</td><td style="color:#f87171;font-family:JetBrains Mono,monospace;font-size:11px">4.8 hrs</td><td class="td-num">9.4K</td><td style="font-size:10px;color:var(--text-muted)">@kettlebell_sam</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title">Virality Triggers — Impact Ranking</div>
+          <div class="card-subtitle">Factors that increase viral probability</div>
+          <canvas id="triggerChart" height="180"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Super Sharer Cascade Map</div>
+        <div class="card-subtitle">Which accounts triggered which audience clusters · Last viral post</div>
+        <div style="padding:20px;font-family:JetBrains Mono,monospace;font-size:11px">
+          <div style="display:flex;align-items:center;gap:0;overflow-x:auto;padding-bottom:8px">
+            <div style="background:var(--accent);color:var(--bg-primary);padding:8px 14px;border-radius:8px;font-weight:700;white-space:nowrap">Post published<br>1:17 PM Tue</div>
+            <div style="width:30px;height:2px;background:var(--border-accent);flex-shrink:0"></div>
+            <div style="background:var(--bg-tertiary);border:1px solid var(--border-accent);padding:8px 12px;border-radius:8px;white-space:nowrap;color:var(--accent)">@dave_memes<br><span style="color:var(--text-muted);font-size:9px">+5 min · 8K reach</span></div>
+            <div style="width:30px;height:2px;background:var(--border-accent);flex-shrink:0"></div>
+            <div style="background:var(--bg-tertiary);border:1px solid rgba(99,102,241,0.3);padding:8px 12px;border-radius:8px;white-space:nowrap;color:#a78bfa">Dark humour cluster<br><span style="color:var(--text-muted);font-size:9px">+22 min · 18K reach</span></div>
+            <div style="width:30px;height:2px;background:var(--border-accent);flex-shrink:0"></div>
+            <div style="background:var(--bg-tertiary);border:1px solid rgba(251,191,36,0.3);padding:8px 12px;border-radius:8px;white-space:nowrap;color:#fbbf24">Late-night cluster<br><span style="color:var(--text-muted);font-size:9px">+45 min · 12K reach</span></div>
+            <div style="width:30px;height:2px;background:var(--border-accent);flex-shrink:0"></div>
+            <div style="background:var(--bg-tertiary);border:1px solid rgba(52,211,153,0.3);padding:8px 12px;border-radius:8px;white-space:nowrap;color:#34d399">Algorithm pickup<br><span style="color:var(--text-muted);font-size:9px">+62 min · 47K total</span></div>
           </div>
         </div>
       </div>
-    </div><!-- end tab virality -->
+    </div>
 
     <!-- TAB: SENTIMENT -->
     <div class="tab-panel" data-tab="sentiment">
-      <div class="section-label" style="animation:fadeUp .4s ease">SENTIMENT INTELLIGENCE</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px" class="animate">
-        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">OVERALL SCORE</div><div style="font-size:36px;font-weight:800;color:var(--accent)">0.82</div><div style="font-size:11px;color:var(--success);margin-top:4px">Positive</div></div>
-        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">POSITIVE</div><div style="font-size:36px;font-weight:800;color:var(--success)">60%</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px">508 posts</div></div>
-        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">NEGATIVE</div><div style="font-size:36px;font-weight:800;color:var(--danger)">11%</div><div style="font-size:11px;color:var(--danger);margin-top:4px">▲ 3% this week</div></div>
-        <div class="card" style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">CRISIS EVENTS</div><div style="font-size:36px;font-weight:800;color:var(--warning)">2</div><div style="font-size:11px;color:var(--text-muted);margin-top:4px">Last 30 days</div></div>
+      <div class="section-label">SENTIMENT INTELLIGENCE — 30 DAY VIEW</div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px">
+        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">OVERALL SCORE</div><div style="font-size:36px;font-weight:800;color:var(--accent)">0.82</div><div style="font-size:10px;color:#34d399;margin-top:4px">Positive — stable</div></div>
+        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">POSITIVE</div><div style="font-size:36px;font-weight:800;color:#34d399">60%</div><div style="font-size:10px;color:var(--text-muted);margin-top:4px">508 posts</div></div>
+        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">NEGATIVE RATE</div><div style="font-size:36px;font-weight:800;color:#f87171">11%</div><div style="font-size:10px;color:#f87171;margin-top:4px">▲ 3% this week</div></div>
+        <div class="card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:JetBrains Mono,monospace;margin-bottom:8px">CRISIS EVENTS</div><div style="font-size:36px;font-weight:800;color:var(--warning)">2</div><div style="font-size:10px;color:var(--text-muted);margin-top:4px">Last 30 days</div></div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="animate delay-1">
+
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px">
         <div class="card">
-          <div class="card-title">Sentiment Over Time</div>
-          <div class="card-subtitle">30-day rolling average</div>
-          <div style="height:180px;position:relative;margin-top:16px">
-            <svg width="100%" height="100%" viewBox="0 0 600 180" preserveAspectRatio="none">
-              <rect x="0" y="0" width="600" height="60" fill="rgba(52,211,153,0.03)"/><text x="4" y="14" fill="var(--text-muted)" font-size="8" font-family="JetBrains Mono">Positive</text>
-              <rect x="0" y="60" width="600" height="60" fill="rgba(251,191,36,0.02)"/><text x="4" y="74" fill="var(--text-muted)" font-size="8" font-family="JetBrains Mono">Neutral</text>
-              <rect x="0" y="120" width="600" height="60" fill="rgba(248,113,113,0.02)"/><text x="4" y="134" fill="var(--text-muted)" font-size="8" font-family="JetBrains Mono">Negative</text>
-              <path d="M0,45 L40,42 L80,40 L120,38 L160,44 L200,35 L240,30 L280,28 L320,32 L360,26 L400,24 L440,20 L480,22 L520,18 L560,15 L600,12" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="360" cy="26" r="6" fill="none" stroke="var(--danger)" stroke-width="2"><animate attributeName="r" values="6;10;6" dur="1.5s" repeatCount="indefinite"/></circle>
-              <text x="370" y="22" fill="var(--danger)" font-size="8" font-family="JetBrains Mono">Crisis event</text>
-            </svg>
-          </div>
+          <div class="card-title">Sentiment Over Time — 30 Day Rolling</div>
+          <div class="card-subtitle">Positive / Neutral / Negative bands · Crisis events marked</div>
+          <canvas id="sentTimeChart" height="130"></canvas>
         </div>
         <div class="card">
-          <div class="card-title">Flagged Comments</div>
-          <div class="card-subtitle">Requiring attention</div>
-          <div style="margin-top:12px">
-            <div style="padding:10px;background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.1);border-radius:10px;margin-bottom:8px"><div style="font-size:11px;color:var(--danger);font-weight:600;margin-bottom:4px">⚠ High Priority</div><div style="font-size:12px;color:var(--text-secondary);line-height:1.5">"This product is way overpriced for what you get. Very disappointed."</div><div style="font-size:10px;color:var(--text-muted);margin-top:4px;font-family:'JetBrains Mono',monospace">FitLife Pro · 2h ago · 14 reactions</div></div>
-            <div style="padding:10px;background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.1);border-radius:10px;margin-bottom:8px"><div style="font-size:11px;color:var(--warning);font-weight:600;margin-bottom:4px">⚡ Medium Priority</div><div style="font-size:12px;color:var(--text-secondary);line-height:1.5">"Still waiting for my order from 2 weeks ago. No response from support."</div><div style="font-size:10px;color:var(--text-muted);margin-top:4px;font-family:'JetBrains Mono',monospace">FitLife Pro · 5h ago · 8 reactions</div></div>
-            <div style="padding:10px;background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.1);border-radius:10px"><div style="font-size:11px;color:var(--warning);font-weight:600;margin-bottom:4px">⚡ Medium Priority</div><div style="font-size:12px;color:var(--text-secondary);line-height:1.5">"Quality has gone downhill since last year tbh"</div><div style="font-size:10px;color:var(--text-muted);margin-top:4px;font-family:'JetBrains Mono',monospace">NutriFuel · 1d ago · 5 reactions</div></div>
-          </div>
+          <div class="card-title">Emotion Breakdown</div>
+          <div class="card-subtitle">Comment emotion classification</div>
+          <canvas id="emotionBarChart" height="130"></canvas>
         </div>
       </div>
-    </div><!-- end tab sentiment -->
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="card">
+          <div class="card-title">Sentiment by Page</div>
+          <div class="card-subtitle">Average score vs industry benchmark</div>
+          <canvas id="sentByPageChart" height="140"></canvas>
+        </div>
+        <div class="card">
+          <div class="card-title">Sentiment vs Engagement Rate</div>
+          <div class="card-subtitle">Does higher sentiment = more engagement?</div>
+          <canvas id="sentEngChart" height="140"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div><div class="card-title">Flagged Comments — Action Required</div><div class="card-subtitle">Sorted by priority · AI risk scored</div></div>
+          <span style="font-size:10px;padding:3px 8px;border-radius:5px;background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.2);font-family:JetBrains Mono,monospace">3 unreviewed</span>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Priority</th><th>Comment</th><th>Page</th><th>Time</th><th>Reactions</th><th>AI Risk</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.2)">High</span></td><td style="font-size:11px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">"This product is way overpriced. Very disappointed."</td><td style="font-size:10px;color:var(--text-muted)">Kelpie Daily</td><td style="font-family:JetBrains Mono,monospace;font-size:10px">2h ago</td><td class="td-num">14</td><td style="font-family:JetBrains Mono,monospace;font-size:10px;color:#f87171">0.78</td><td><button style="font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer">Respond</button></td></tr>
+            <tr><td><span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)">Medium</span></td><td style="font-size:11px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">"Still waiting 2 weeks. No response from support."</td><td style="font-size:10px;color:var(--text-muted)">Kelpie Daily</td><td style="font-family:JetBrains Mono,monospace;font-size:10px">5h ago</td><td class="td-num">8</td><td style="font-family:JetBrains Mono,monospace;font-size:10px;color:#fbbf24">0.61</td><td><button style="font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer">Respond</button></td></tr>
+            <tr><td><span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)">Medium</span></td><td style="font-size:11px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">"Quality has gone downhill since last year tbh"</td><td style="font-size:10px;color:var(--text-muted)">UK Jail News</td><td style="font-family:JetBrains Mono,monospace;font-size:10px">1d ago</td><td class="td-num">5</td><td style="font-family:JetBrains Mono,monospace;font-size:10px;color:#fbbf24">0.54</td><td><button style="font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer">Respond</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
   </div>
 </div>
@@ -1148,6 +1223,163 @@ if(wkCtx){
     }
   });
 }
+</script>
+
+
+<script>
+// ── SHARED CHART DEFAULTS ──
+if(typeof Chart !== 'undefined'){
+  Chart.defaults.color='#7b8ba8';
+  Chart.defaults.borderColor='rgba(255,255,255,0.05)';
+  Chart.defaults.font.family="'Outfit',sans-serif";
+  Chart.defaults.plugins.legend.display=false;
+  Chart.defaults.plugins.tooltip.backgroundColor='#0f1729';
+  Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.3)';
+  Chart.defaults.plugins.tooltip.borderWidth=1;
+  Chart.defaults.plugins.tooltip.padding=10;
+  Chart.defaults.plugins.tooltip.titleColor='#e8ecf4';
+  Chart.defaults.plugins.tooltip.bodyColor='#7b8ba8';
+}
+
+// ── TRENDS TAB ──
+function initTrendsCharts(){
+  const d30=Array.from({length:30},(_,i)=>{const d=new Date(2026,3,i+1);return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})});
+
+  // Engagement trend line
+  const etCtx=document.getElementById('engTrendChart');
+  if(etCtx&&!etCtx._chart) etCtx._chart=new Chart(etCtx,{type:'line',data:{labels:d30,
+    datasets:[{label:'Eng Rate',data:[3.1,3.4,3.2,2.8,4.1,3.9,4.2,3.7,4.0,4.3,3.8,4.5,4.1,4.6,4.2,3.9,4.4,4.7,4.3,4.8,4.1,4.5,4.9,4.6,4.2,4.8,5.1,4.7,4.3,4.8],
+      borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.08)',borderWidth:2.5,pointRadius:0,fill:true,tension:0.4}]},
+    options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
+      scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:10}}},
+        y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{callback:v=>v+'%',font:{size:10}},min:0,max:7}}}});
+
+  // Sparklines
+  const mkSpark=(id,data,color)=>{const c=document.getElementById(id);if(c&&!c._chart)c._chart=new Chart(c,{type:'line',data:{labels:data.map((_,i)=>i),datasets:[{data,borderColor:color,backgroundColor:color.replace(')',',0.1)').replace('rgb','rgba'),borderWidth:1.5,pointRadius:0,fill:true,tension:0.4}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}}}});};
+  mkSpark('followGrowthSparkline',[18,22,20,25,28,26,32,35,30,38,42,38,44],[`rgb(52,211,153)`]);
+  mkSpark('impressionsSparkline',[420,380,450,480,440,520,560,500,580,620,600,660,700],'rgb(99,102,241)');
+  mkSpark('ctrSparkline',[3.2,3.0,2.9,3.1,2.8,2.7,2.9,2.8,2.7,2.6,2.8,2.7,2.8],'rgb(251,191,36)');
+
+  // Scatter reach vs engagement
+  const sCtx=document.getElementById('reachEngScatter');
+  if(sCtx&&!sCtx._chart){
+    const pts=Array.from({length:60},()=>({x:Math.round(2000+Math.random()*20000),y:parseFloat((1+Math.random()*5).toFixed(2))}));
+    sCtx._chart=new Chart(sCtx,{type:'scatter',data:{datasets:[{data:pts,backgroundColor:'rgba(0,212,170,0.4)',borderColor:'rgba(0,212,170,0.6)',pointRadius:4,pointHoverRadius:6}]},
+      options:{responsive:true,maintainAspectRatio:true,scales:{
+        x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v>=1000?(v/1000).toFixed(0)+'K':v,font:{size:9}},title:{display:true,text:'Reach',font:{size:10}}},
+        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},title:{display:true,text:'Eng Rate',font:{size:10}}}}}});}
+
+  // Day of week
+  const dowCtx=document.getElementById('dowChart');
+  if(dowCtx&&!dowCtx._chart) dowCtx._chart=new Chart(dowCtx,{type:'bar',data:{
+    labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    datasets:[{data:[3.2,5.1,3.8,4.6,3.4,2.9,2.4],
+      backgroundColor:['rgba(0,212,170,0.5)','rgba(0,212,170,0.9)','rgba(0,212,170,0.6)','rgba(0,212,170,0.8)','rgba(0,212,170,0.55)','rgba(99,102,241,0.6)','rgba(99,102,241,0.4)'],
+      borderRadius:6}]},
+    options:{responsive:true,maintainAspectRatio:true,
+      scales:{x:{grid:{display:false},ticks:{font:{size:10}}},
+        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}});
+}
+
+// ── VIRALITY TAB ──
+function initViralityCharts(){
+  // Velocity
+  const vvCtx=document.getElementById('viralVelChart');
+  if(vvCtx&&!vvCtx._chart){
+    const hrs=Array.from({length:48},(_,i)=>(i%24<10?'0':'')+i%24+':00');
+    const vel=[4,2,3,2,1,2,4,8,12,18,24,31,28,22,18,14,19,24,38,62,89,142,198,241,287,312,278,223,187,156,134,112,98,87,76,68,89,124,167,214,243,289,321,298,267,234,198,176];
+    vvCtx._chart=new Chart(vvCtx,{type:'line',data:{labels:hrs,datasets:[
+      {label:'Shares/hr',data:vel,borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.07)',borderWidth:2,pointRadius:0,fill:true,tension:0.3},
+      {label:'Threshold',data:Array(48).fill(200),borderColor:'rgba(248,113,113,0.7)',borderDash:[5,4],borderWidth:1.5,pointRadius:0}]},
+      options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
+        scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},min:0}}}});}
+
+  // Score distribution histogram
+  const vdCtx=document.getElementById('viralDistChart');
+  if(vdCtx&&!vdCtx._chart) vdCtx._chart=new Chart(vdCtx,{type:'bar',data:{
+    labels:['0.0–0.1','0.1–0.2','0.2–0.3','0.3–0.4','0.4–0.5','0.5–0.6','0.6–0.7','0.7–0.8','0.8–0.9','0.9–1.0'],
+    datasets:[{data:[2,4,8,12,18,22,16,10,6,3],
+      backgroundColor:['rgba(248,113,113,0.5)','rgba(248,113,113,0.5)','rgba(251,191,36,0.5)','rgba(251,191,36,0.5)','rgba(251,191,36,0.6)','rgba(0,212,170,0.5)','rgba(0,212,170,0.65)','rgba(0,212,170,0.75)','rgba(0,212,170,0.85)','rgba(0,212,170,0.95)'],
+      borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:true,
+      scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:45}},
+        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}}}}});
+
+  // Triggers bar
+  const tCtx=document.getElementById('triggerChart');
+  if(tCtx&&!tCtx._chart) tCtx._chart=new Chart(tCtx,{type:'bar',data:{
+    labels:['Short video','Tue 6 PM slot','Sentiment >0.85','Product launch','Laughing emoji','Question in caption','Cross-share within 1hr'],
+    datasets:[{data:[156,92,78,65,54,41,38],
+      backgroundColor:'rgba(0,212,170,0.7)',borderRadius:5}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,
+      scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>'+'+v+'%',font:{size:9}}},
+        y:{grid:{display:false},ticks:{font:{size:9}}}}});
+}
+
+// ── SENTIMENT TAB ──
+function initSentimentCharts(){
+  // Sentiment over time
+  const stCtx=document.getElementById('sentTimeChart');
+  if(stCtx&&!stCtx._chart){
+    const d30=Array.from({length:30},(_,i)=>i+1+'');
+    stCtx._chart=new Chart(stCtx,{type:'line',data:{labels:d30,datasets:[
+      {label:'Positive',data:[58,61,59,63,65,62,66,68,64,70,67,72,69,74,71,68,73,75,72,76,70,74,78,75,71,76,80,77,73,78],fill:true,backgroundColor:'rgba(52,211,153,0.12)',borderColor:'rgba(52,211,153,0.8)',borderWidth:2,pointRadius:0,tension:0.4},
+      {label:'Negative',data:[14,12,13,11,10,12,11,10,12,9,11,10,9,8,10,11,9,8,10,9,11,10,8,9,11,10,8,9,11,10],fill:true,backgroundColor:'rgba(248,113,113,0.1)',borderColor:'rgba(248,113,113,0.7)',borderWidth:1.5,pointRadius:0,tension:0.4}]},
+      options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:10},padding:10}}},
+        scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}});}
+
+  // Emotion bar
+  const ebCtx=document.getElementById('emotionBarChart');
+  if(ebCtx&&!ebCtx._chart) ebCtx._chart=new Chart(ebCtx,{type:'bar',data:{
+    labels:['Joy','Anger','Sadness','Love','Surprise','Fear','Neutral'],
+    datasets:[{data:[42,18,12,14,8,3,3],
+      backgroundColor:['rgba(52,211,153,0.75)','rgba(248,113,113,0.7)','rgba(96,165,250,0.65)','rgba(244,114,182,0.7)','rgba(251,191,36,0.7)','rgba(167,139,250,0.6)','rgba(107,114,128,0.5)'],
+      borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:true,
+      scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}});
+
+  // Sentiment by page grouped bar
+  const sbpCtx=document.getElementById('sentByPageChart');
+  if(sbpCtx&&!sbpCtx._chart) sbpCtx._chart=new Chart(sbpCtx,{type:'bar',data:{
+    labels:['Drinking Memes','Kelpie Daily','UK Jail News'],
+    datasets:[
+      {label:'Page avg',data:[0.88,0.72,0.68],backgroundColor:['rgba(0,212,170,0.75)','rgba(99,102,241,0.65)','rgba(251,191,36,0.6)'],borderRadius:6},
+      {label:'Benchmark',data:[0.74,0.74,0.74],backgroundColor:'rgba(255,255,255,0.1)',borderRadius:6}
+    ]},
+    options:{responsive:true,maintainAspectRatio:true,
+      plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:10},padding:8}}},
+      scales:{x:{grid:{display:false},ticks:{font:{size:10}}},
+        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},min:0,max:1}}});
+
+  // Sentiment vs engagement scatter
+  const seCtx=document.getElementById('sentEngChart');
+  if(seCtx&&!seCtx._chart){
+    const pts=Array.from({length:60},()=>({x:parseFloat((0.3+Math.random()*0.68).toFixed(2)),y:parseFloat((1+Math.random()*5).toFixed(2))}));
+    seCtx._chart=new Chart(seCtx,{type:'scatter',data:{datasets:[{data:pts,backgroundColor:'rgba(99,102,241,0.45)',borderColor:'rgba(99,102,241,0.7)',pointRadius:4}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},title:{display:true,text:'Sentiment Score',font:{size:10}},min:0.2,max:1},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},title:{display:true,text:'Eng Rate',font:{size:10}},min:0}}}});}
+}
+
+// ── TAB SWITCHING — init charts on first show ──
+const _tabInited={};
+document.querySelectorAll('.topbar-tab').forEach((tab,i)=>{
+  tab.addEventListener('click',function(){
+    const name=this.textContent.trim().toLowerCase();
+    if(!_tabInited[name]){
+      _tabInited[name]=true;
+      if(name==='trends') setTimeout(initTrendsCharts,50);
+      if(name==='virality') setTimeout(initViralityCharts,50);
+      if(name==='sentiment') setTimeout(initSentimentCharts,50);
+    }
+  });
+});
+// Init trends immediately since KPI tab shown first, trends might be clicked soon
+setTimeout(()=>{if(typeof Chart!=='undefined')initTrendsCharts();},200);
 </script>
 
 <script>try{const u=JSON.parse(localStorage.getItem('artemis_app_session')||localStorage.getItem('artemis_session')||'null');if(u&&document.getElementById('sidebarUser'))document.getElementById('sidebarUser').textContent=u.name||u.full_name||u.email||u.username||'';}catch{}</script>
