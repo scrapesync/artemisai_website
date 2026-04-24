@@ -306,11 +306,11 @@
         <canvas id="particles"></canvas>
         <div class="hero-content">
             <div class="hero-badge"><span class="badge-dot"></span>Currently in Development — Early Access Available</div>
-            <h1>Your AI-Powered<br><span class="gradient-text">Social Media Strategist</span></h1>
-            <p class="hero-sub">Artemis analyses your entire social media history, predicts what will go viral, warns you before crises happen, and answers any question in language you understand.</p>
+            <h1>All your pages.<br>One <span class="gradient-text">AI that never sleeps.</span></h1>
+            <p class="hero-sub">Artemis watches every post, every comment, every shift in your audience — and tells you exactly what to do next. No dashboards to read. No guesswork. Just answers.</p>
             <div class="hero-buttons">
-                <a href="#contact" class="btn-primary"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Request Early Access</a>
-                <a href="#features" class="btn-ghost">See What It Does</a>
+                <a href="#contact" class="btn-primary"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Are you ready for change?</a>
+                <a href="#how" class="btn-ghost">See how it works</a>
             </div>
         </div>
         <div class="scroll-hint"><div class="scroll-mouse"></div><span class="scroll-text">Scroll</span></div>
@@ -323,22 +323,20 @@
 
     <div class="stats-section">
         <div class="stats-grid">
-            <div class="stat-card reveal"><div class="stat-value" data-target="1" data-suffix="M+">0</div><div class="stat-label">Posts Analysed Per Account</div></div>
-            <div class="stat-card reveal reveal-delay-1"><div class="stat-value" data-target="95" data-suffix="%">0</div><div class="stat-label">Virality Prediction Accuracy</div></div>
-            <div class="stat-card reveal reveal-delay-2"><div class="stat-value" data-target="7" data-suffix="">0</div><div class="stat-label">AI Models Running 24/7</div></div>
-            <div class="stat-card reveal reveal-delay-3"><div class="stat-value" data-target="12" data-suffix="hrs">0</div><div class="stat-label">Saved Per Week on Analysis</div></div>
+            <div class="stat-card reveal"><div class="stat-value" id="cnt-posts" data-target="111796" data-suffix="">0</div><div class="stat-label">Posts Analysed</div></div>
+            <div class="stat-card reveal reveal-delay-1"><div class="stat-value" id="cnt-comments" data-target="3280000" data-suffix="">0</div><div class="stat-label">Comments Processed</div></div>
+            <div class="stat-card reveal reveal-delay-2"><div class="stat-value" data-target="24" data-suffix="">0</div><div class="stat-label">Months of History Ingested</div></div>
+            <div class="stat-card reveal reveal-delay-3"><div class="stat-value" data-target="20" data-suffix="">0</div><div class="stat-label">Facebook Pages Connected</div></div>
         </div>
     </div>
 
     <section id="features" class="container">
-        <div class="reveal"><div class="section-label">// Intelligence Suite</div><div class="section-title">Everything You Need.<br>Nothing You Don't.</div><div class="section-subtitle">Connect your pages. Artemis handles the rest — automatically, 24/7.</div></div>
-        <div class="features-grid">
-            <div class="feature-card reveal"><span class="card-index">01</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h3>Virality Prediction</h3><p>Get a confidence score before you hit publish. Know predicted engagement and get actionable recommendations to boost performance.</p></div>
-            <div class="feature-card reveal reveal-delay-1"><span class="card-index">02</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><h3>Real-Time Velocity</h3><p>Get alerted within 30 minutes when a post starts taking off. Boost it at the perfect moment for maximum return on ad spend.</p></div>
-            <div class="feature-card reveal reveal-delay-2"><span class="card-index">03</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Crisis Detection</h3><p>Artemis monitors sentiment 24/7 and warns you 2-4 hours before a negative shift becomes a full-blown crisis.</p></div>
-            <div class="feature-card reveal reveal-delay-1"><span class="card-index">04</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h3>Content Intelligence</h3><p>Every post automatically labelled — sentiment, emotion, topic, content type. See exactly what works and why across your entire history.</p></div>
-            <div class="feature-card reveal reveal-delay-2"><span class="card-index">05</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Audience Segments</h3><p>Discover your Super Fans, Meme Lovers, and Silent Browsers. Target each segment with content they actually engage with.</p></div>
-            <div class="feature-card reveal reveal-delay-3"><span class="card-index">06</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Ask Artemis Anything</h3><p>A ChatGPT-like interface trained on YOUR data. Ask "Why did Tuesday's post go viral?" and get an instant, sourced answer.</p></div>
+        <div class="reveal"><div class="section-label">// How It Works</div><div class="section-title">Four layers.<br>One simple product.</div><div class="section-subtitle">Artemis is not a dashboard full of charts. It is a decision engine that tells you what to do — and why.</div></div>
+        <div class="features-grid" style="grid-template-columns:repeat(2,1fr)">
+            <div class="feature-card reveal" style="border-color:rgba(0,212,170,0.3);background:linear-gradient(135deg,rgba(0,212,170,0.05),transparent)"><span class="card-index">01</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3>Home Feed</h3><p style="color:#00d4aa;font-size:.75rem;font-weight:600;margin-bottom:.5rem">Your control centre</p><p>Everything in one live feed. Viral alerts, brand risks, audience shifts, posting windows, collaboration opportunities. All ranked by what matters most right now. No need to go looking — it comes to you.</p></div>
+            <div class="feature-card reveal reveal-delay-1" style="border-color:rgba(99,102,241,0.3);background:linear-gradient(135deg,rgba(99,102,241,0.05),transparent)"><span class="card-index">02</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Art-E</h3><p style="color:#a78bfa;font-size:.75rem;font-weight:600;margin-bottom:.5rem">Predict. Explain. Alert. Prescribe.</p><p>Not a chatbot. The interface to the entire system. Ask what to post, when to post, why something worked, who drove it, and how to replicate it. Art-E explains the patterns within patterns — the hidden pathways that lead to outcomes.</p></div>
+            <div class="feature-card reveal reveal-delay-2" style="border-color:rgba(251,191,36,0.3);background:linear-gradient(135deg,rgba(251,191,36,0.05),transparent)"><span class="card-index">03</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><h3>Discovery</h3><p style="color:#fbbf24;font-size:.75rem;font-weight:600;margin-bottom:.5rem">Chats. Collabs. Audience affinity.</p><p>Find pages with the same audience patterns. Identify collaboration opportunities. Connect and grow together. Audience matching shows you who shares your followers and what content crosses over — before you post it.</p></div>
+            <div class="feature-card reveal reveal-delay-3" style="border-color:rgba(52,211,153,0.3);background:linear-gradient(135deg,rgba(52,211,153,0.05),transparent)"><span class="card-index">04</span><div class="feature-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h3>Metrics Centre</h3><p style="color:#34d399;font-size:.75rem;font-weight:600;margin-bottom:.5rem">The engine room</p><p>All the detailed analytics, trend data, audience reports, sentiment breakdowns, and performance history for when you want to go deep. The AI runs over all of it and explains what you don't see.</p></div>
         </div>
     </section>
 
@@ -357,12 +355,12 @@
 
     <section id="how" class="how-section">
         <div class="container">
-            <div class="reveal" style="text-align:center"><div class="section-label">// How It Works</div><div class="section-title">Connect to Insights in Minutes</div><div class="section-subtitle" style="margin:0 auto">No setup. No configuration. No learning curve.</div></div>
+            <div class="reveal" style="text-align:center"><div class="section-label">// Getting Started</div><div class="section-title">Connect once.<br>Change everything.</div><div class="section-subtitle" style="margin:0 auto">No dashboards to configure. No learning curve. Within minutes of connecting your pages, Artemis already knows more about your audience than you do.</div></div>
             <div class="steps-container">
-                <div class="step-item reveal"><div class="step-num">01</div><h3>Connect</h3><p>Link your Facebook pages with one click. We handle permissions automatically.</p></div>
-                <div class="step-item reveal reveal-delay-1"><div class="step-num">02</div><h3>Analyse</h3><p>Artemis pulls your full history and runs it through 7 AI models simultaneously.</p></div>
-                <div class="step-item reveal reveal-delay-2"><div class="step-num">03</div><h3>Learn</h3><p>The system discovers patterns unique to your audience, content, and timing.</p></div>
-                <div class="step-item reveal reveal-delay-3"><div class="step-num">04</div><h3>Advise</h3><p>Get predictions, alerts, and answers 24/7. Artemis gets smarter every day.</p></div>
+                <div class="step-item reveal"><div class="step-num">01</div><h3>Connect your pages</h3><p>Link your Facebook pages in one click. Artemis immediately starts ingesting your full 2-year history — every post, comment, reaction, share, and timestamp.</p></div>
+                <div class="step-item reveal reveal-delay-1"><div class="step-num">02</div><h3>Watch the intelligence build</h3><p>Your data loads in real time. Watch 111K posts, 3.28M comments, and 24 months of audience behaviour get processed. The patterns start appearing immediately.</p></div>
+                <div class="step-item reveal reveal-delay-2"><div class="step-num">03</div><h3>Your feed comes alive</h3><p>Within minutes, Art-E starts surfacing what matters: your super sharers, your best posting windows, your audience clusters, your viral patterns. Specific to your pages only.</p></div>
+                <div class="step-item reveal reveal-delay-3"><div class="step-num">04</div><h3>Never guess again</h3><p>Art-E monitors everything 24/7 and tells you what to do next. Every like, share, comment, and post makes it smarter. It gets better every single day.</p></div>
             </div>
         </div>
     </section>
@@ -397,7 +395,7 @@
 
     <section id="contact" class="contact-section">
         <div class="container">
-            <div class="reveal" style="text-align:center"><div class="section-label">// Get In Touch</div><div class="section-title">Ready to See It in Action?</div><div class="section-subtitle" style="margin:0 auto">We're onboarding a limited number of early partners. Be one of them.</div></div>
+            <div class="reveal" style="text-align:center"><div class="section-label">// Early Access</div><div class="section-title">Are you ready<br>for change?</div><div class="section-subtitle" style="margin:0 auto">We are onboarding a limited number of early partners. Connect your pages, watch 24 months of data load in real time, and see what Artemis finds that you've never seen before.</div></div>
             <div class="contact-grid reveal">
                 <div class="contact-left">
                     <p>Artemis AI is being built to be the most intelligent social media platform on the market. We're looking for forward-thinking brands and agencies to shape the product alongside us during development.</p>
@@ -440,7 +438,7 @@
 
         window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60)});
 
-        const co=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,t=parseInt(el.dataset.target),s=el.dataset.suffix||'',d=2000,st=performance.now();function u(n){const p=Math.min((n-st)/d,1),ea=1-Math.pow(1-p,3),c=Math.floor(ea*t);el.textContent=c.toLocaleString()+s;if(p<1)requestAnimationFrame(u)}requestAnimationFrame(u);co.unobserve(el)}})},{threshold:.5});
+        const co=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,t=parseInt(el.dataset.target),s=el.dataset.suffix||'',d=2200,st=performance.now();function fmt(v){if(t>=1000000)return(v/1000000).toFixed(v>=t?2:1)+'M';if(t>=1000)return v.toLocaleString();return v;}function u(n){const p=Math.min((n-st)/d,1),ea=1-Math.pow(1-p,3),c=Math.floor(ea*t);el.textContent=fmt(c)+s;if(p<1)requestAnimationFrame(u);}requestAnimationFrame(u);co.unobserve(el)}})},{threshold:.5});
         document.querySelectorAll('[data-target]').forEach(el=>co.observe(el));
 
         const cv=document.getElementById('particles'),cx=cv.getContext('2d');let pts=[],aid;
