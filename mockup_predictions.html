@@ -408,9 +408,136 @@ textarea.form-input{min-height:80px;resize:vertical}
 .td-dn{color:#f87171;font-family:'JetBrains Mono',monospace}
 
 
+
+.export-btn{font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid rgba(0,212,170,0.2);background:transparent;color:rgba(0,212,170,0.7);cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:4px;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.export-btn:hover{border-color:rgba(0,212,170,0.5);color:#00d4aa;background:rgba(0,212,170,0.06)}
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<script>
+
+Chart.defaults.color='#7b8ba8';
+Chart.defaults.borderColor='rgba(255,255,255,0.05)';
+Chart.defaults.font.family="'Outfit',sans-serif";
+Chart.defaults.plugins.legend.display=false;
+Chart.defaults.plugins.tooltip.backgroundColor='#0c1221';
+Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.35)';
+Chart.defaults.plugins.tooltip.borderWidth=1;
+Chart.defaults.plugins.tooltip.padding=12;
+Chart.defaults.plugins.tooltip.titleColor='#e8ecf4';
+Chart.defaults.plugins.tooltip.bodyColor='#9aa5b8';
+Chart.defaults.plugins.tooltip.titleFont={size:11,weight:'600',family:"'JetBrains Mono',monospace"};
+Chart.defaults.plugins.tooltip.bodyFont={size:11,family:"'Outfit',sans-serif"};
+Chart.defaults.plugins.tooltip.callbacks={
+  label: function(ctx){
+    const raw=ctx.parsed;
+    const v=raw && raw.y!==undefined ? raw.y : (raw && raw.r!==undefined ? raw.r : ctx.raw);
+    const ds=ctx.dataset.label||'';
+    if(typeof v==='object'&&v!==null&&v.x!==undefined) return (ds?ds+': ':'')+`x:${v.x}, y:${v.y}${v.r!==undefined?', r:'+v.r:''}`;
+    if(typeof v==='number'){
+      if(v>=1000000) return (ds?ds+': ':'')+( v/1000000).toFixed(2)+'M';
+      if(v>=1000) return (ds?ds+': ':'')+v.toLocaleString();
+      if(Math.abs(v)<1&&v!==0) return (ds?ds+': ':'')+v.toFixed(3);
+      if(Number.isInteger(v)) return (ds?ds+': ':'')+v.toLocaleString();
+      return (ds?ds+': ':'')+v.toFixed(2);
+    }
+    return (ds?ds+': ':'')+String(v);
+  }
+};
+
+
+// ── ANALYST UTILITIES ──────────────────────────────────────────────
+(function(){
+
+// Registry of chart data for export
+window._CHART_DATA = {};
+
+// Download CSV helper
+window.downloadCSV = function(rows, filename){
+  const csv = rows.map(r => r.map(c => {
+    const s = String(c).replace(/"/g,'""');
+    return s.includes(',') || s.includes('"') || s.includes('\n') ? `"${s}"` : s;
+  }).join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename || 'artemis-export.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+// Export chart by canvas ID
+window.exportChart = function(canvasId, title){
+  const reg = window._CHART_DATA[canvasId];
+  if(reg){ downloadCSV(reg, (title||canvasId)+'.csv'); return; }
+
+  // Fall back to Chart.js instance
+  const canvas = document.getElementById(canvasId);
+  if(!canvas) return;
+  const chart = Chart.getChart ? Chart.getChart(canvas) : canvas._chartInstance;
+  if(!chart){ alert('No chart data found for export'); return; }
+
+  const labels = chart.data.labels || [];
+  const datasets = chart.data.datasets || [];
+  const headers = ['Label', ...datasets.map(d=>d.label||'Value')];
+  const rows = [headers];
+  labels.forEach((lbl,i)=>{
+    rows.push([lbl, ...datasets.map(d=> d.data && d.data[i] !== undefined ? d.data[i] : '')]);
+  });
+  downloadCSV(rows, (title||canvasId)+'.csv');
+};
+
+// Export data table by table ID
+window.exportTable = function(tableId, title){
+  const tbl = document.getElementById(tableId);
+  if(!tbl) return;
+  const rows = [];
+  tbl.querySelectorAll('tr').forEach(tr=>{
+    rows.push([...tr.querySelectorAll('th,td')].map(c=>c.innerText.trim()));
+  });
+  downloadCSV(rows, (title||tableId)+'.csv');
+};
+
+// Export all visible charts + tables on page
+window.exportAll = function(){
+  const page = location.pathname.split('/').pop().replace('.html','');
+  const allRows = [['Artemis Analytics Export', '', '', ''],
+                   ['Page', page, '', ''],
+                   ['Exported at', new Date().toISOString(), '', ''],
+                   ['', '', '', '']];
+
+  // All canvases with charts
+  document.querySelectorAll('canvas[id]').forEach(canvas=>{
+    const chart = Chart.getChart ? Chart.getChart(canvas) : null;
+    if(!chart) return;
+    const labels = chart.data.labels || [];
+    const datasets = chart.data.datasets || [];
+    if(!labels.length && !datasets.length) return;
+    allRows.push([canvas.id.toUpperCase(), '', '', '']);
+    allRows.push(['Label', ...datasets.map(d=>d.label||'Value')]);
+    labels.forEach((lbl,i)=>{
+      allRows.push([lbl, ...datasets.map(d=> d.data?.[i] ?? '')]);
+    });
+    allRows.push(['','','','']);
+  });
+
+  // All data tables
+  document.querySelectorAll('table.data-table').forEach((tbl,ti)=>{
+    allRows.push([`TABLE_${ti+1}`, '', '', '']);
+    tbl.querySelectorAll('tr').forEach(tr=>{
+      allRows.push([...tr.querySelectorAll('th,td')].map(c=>c.innerText.trim()));
+    });
+    allRows.push(['','','','']);
+  });
+
+  downloadCSV(allRows, page+'-full-export-'+new Date().toISOString().slice(0,10)+'.csv');
+};
+
+})();
+</script>
+
+
 </head>
 <body>
 
@@ -432,7 +559,16 @@ textarea.form-input{min-height:80px;resize:vertical}
 
 <a href="admin_panel.html" class="m-admin-back"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>← Admin Panel</a>
 <aside class="sidebar"><a href="admin_panel.html" class="sidebar-logo" title="Back to Admin Panel"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg><span>ARTEMIS</span></a><nav class="sidebar-nav"><div class="nav-group-label">For You</div><a href="mockup_feed.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Feed</a>
-    <div class="nav-group-label">Metrics Centre</div><a href="index.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="mockup_dashboard.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a><a href="mockup_discovery.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discovery Feed</a><a href="mockup_predictions.html" class="nav-item active"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predictions</a><a href="mockup_audience.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Audience</a><div class="nav-group-label">Intelligence</div><a href="mockup_arte.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Art-E<span class="nav-badge badge-ai">AI</span></a><a href="mockup_alerts.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Alerts<span class="nav-badge badge-alert">3</span></a><a href="mockup_reports.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</a><div class="nav-group-label">Settings</div><a href="mockup_connected.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Connected Pages</a><a href="mockup_settings.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a></nav></aside><div class="main"><header class="topbar"><div class="topbar-left"><div class="topbar-title">Predictions</div></div><div class="topbar-right"><div class="avatar">AS</div></div></header><div class="content">
+    <div class="nav-group-label">Metrics Centre</div><a href="index.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="mockup_dashboard.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a><a href="mockup_discovery.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discovery Feed</a><a href="mockup_predictions.html" class="nav-item active"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predictions</a><a href="mockup_audience.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Audience</a><div class="nav-group-label">Intelligence</div><a href="mockup_arte.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Art-E<span class="nav-badge badge-ai">AI</span></a><a href="mockup_alerts.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Alerts<span class="nav-badge badge-alert">3</span></a><a href="mockup_reports.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</a><div class="nav-group-label">Settings</div><a href="mockup_connected.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Connected Pages</a><a href="mockup_settings.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a></nav></aside><div class="main"><header class="topbar"><div class="topbar-left"><div class="topbar-title">Predictions</div>
+      <div class="topbar-tabs">
+        <div class="topbar-tab active" data-target="predict-main">Predictor</div>
+        <div class="topbar-tab" data-target="predict-timing">Timing Analysis</div>
+        <div class="topbar-tab" data-target="predict-content">Content Lab</div>
+        <div class="topbar-tab" data-target="predict-history">Prediction History</div>
+      </div>
+    </div><div class="topbar-right"><button onclick="exportAll()" class="topbar-btn" style="display:flex;align-items:center;gap:5px;font-size:11px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg>Export All</button><div class="avatar">AS</div></div></header><div class="content">
+    <div class="tab-panel active" id="panel-predict-main">
+
 <div class="grid-3 animate">
   <div class="pred-card" style="text-align:center">
     <div class="card-subtitle">DRAFT SCORE</div>
@@ -489,7 +625,7 @@ textarea.form-input{min-height:80px;resize:vertical}
 
   <div class="card">
     <div class="card-title">Score Confidence Breakdown</div>
-    <div class="card-subtitle">What drives the prediction</div>
+    <div class="card-subtitle">What drives the prediction<button onclick="exportChart('confChart','Score-Confidence')" class="export-btn">↓ CSV</button></div>
     <canvas id="confChart" height="180"></canvas>
   </div>
 
@@ -515,12 +651,12 @@ textarea.form-input{min-height:80px;resize:vertical}
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
   <div class="card">
     <div class="card-title">Virality Probability by Day &amp; Time</div>
-    <div class="card-subtitle">% chance of exceeding viral threshold · Based on 90 days history</div>
+    <div class="card-subtitle">% chance of exceeding viral threshold · Based on 90 days history<button onclick="exportChart('probHeatmap','Virality-Probability')" class="export-btn">↓ CSV</button></div>
     <canvas id="probHeatmap" height="160"></canvas>
   </div>
   <div class="card">
     <div class="card-title">Sentiment Score → Engagement Rate</div>
-    <div class="card-subtitle">Scatter plot of 847 posts — correlation analysis</div>
+    <div class="card-subtitle">Scatter plot of 847 posts — correlation analysis<button onclick="exportChart('sentScatter','Sentiment-Scatter')" class="export-btn">↓ CSV</button></div>
     <canvas id="sentScatter" height="160"></canvas>
   </div>
 </div>
@@ -529,7 +665,7 @@ textarea.form-input{min-height:80px;resize:vertical}
 <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:16px;margin-bottom:16px">
   <div class="card">
     <div class="card-title">Content Format Score Model</div>
-    <div class="card-subtitle">Predicted engagement by format type</div>
+    <div class="card-subtitle">Predicted engagement by format type<button onclick="exportChart('fmtRadar','Format-Radar')" class="export-btn">↓ CSV</button></div>
     <canvas id="fmtRadar" height="200"></canvas>
   </div>
   <div class="card">
@@ -557,7 +693,7 @@ textarea.form-input{min-height:80px;resize:vertical}
       <div class="card-subtitle">Model confidence bands shown · Assumes current posting cadence</div>
     </div>
     <span style="font-size:11px;padding:3px 8px;border-radius:5px;background:rgba(99,102,241,0.1);color:#a78bfa;border:1px solid rgba(99,102,241,0.2);font-family:'JetBrains Mono',monospace">ML Forecast v2.1</span>
-  </div>
+  <button onclick="exportChart('forecastChart','Forecast')" class="export-btn">↓ CSV</button></div>
   <canvas id="forecastChart" height="80"></canvas>
 </div>
 
@@ -643,7 +779,313 @@ if(fcCtx){
 }));
 </script>
 
-</div></div><script>try{const u=JSON.parse(localStorage.getItem('artemis_app_session'));if(u&&document.getElementById('sidebarUser'))document.getElementById('sidebarUser').textContent=u.email||'';}catch{}</script>
+
+    </div>
+
+    <!-- TIMING ANALYSIS TAB -->
+    <div class="tab-panel" id="panel-predict-timing">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px">
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">OPTIMAL WINDOW</div><div style="font-size:22px;font-weight:800;color:#00d4aa;font-family:'JetBrains Mono',monospace">Tue 6PM</div><div style="font-size:11px;color:#34d399">+89% vs avg</div></div>
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">WORST TIME</div><div style="font-size:22px;font-weight:800;color:#f87171;font-family:'JetBrains Mono',monospace">Sun 7AM</div><div style="font-size:11px;color:#f87171">−61% vs avg</div></div>
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">SAMPLE SIZE</div><div style="font-size:28px;font-weight:800;font-family:'JetBrains Mono',monospace">847</div><div style="font-size:11px;color:var(--text-muted)">Posts analysed</div></div>
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">TIMING LIFT RANGE</div><div style="font-size:22px;font-weight:800;color:#a78bfa;font-family:'JetBrains Mono',monospace">−61% → +89%</div><div style="font-size:11px;color:var(--text-muted)">Min to max</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">24-Hour Engagement Profile</div><div class="panel-subtitle">Avg eng rate by hour · All days combined · 847 posts</div></div><button onclick="exportChart('hourProfileChart','Hour-Profile')" class="export-btn">↓ CSV</button></div>
+          <canvas id="hourProfileChart" height="160"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">7-Day Performance Matrix</div><div class="panel-subtitle">Mean eng rate ± std deviation by day</div></div><button onclick="exportChart('dayProfileChart','Day-Profile')" class="export-btn">↓ CSV</button></div>
+          <canvas id="dayProfileChart" height="160"></canvas>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Hour × Day Full Heatmap</div><div class="panel-subtitle">168 time slots · colour = avg eng rate</div></div><button onclick="exportChart('fullHeatmap','Full-Heatmap')" class="export-btn">↓ CSV</button></div>
+          <canvas id="fullHeatmap" height="180"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Time Since Last Post Effect</div><div class="panel-subtitle">Hours gap vs engagement uplift</div></div><button onclick="exportChart('gapChart','Post-Gap-Effect')" class="export-btn">↓ CSV</button></div>
+          <canvas id="gapChart" height="180"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Seasonal Trend Index</div><div class="panel-subtitle">Monthly multiplier vs annual average</div></div><button onclick="exportChart('seasonalChart','Seasonal-Index')" class="export-btn">↓ CSV</button></div>
+          <canvas id="seasonalChart" height="180"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT LAB TAB -->
+    <div class="tab-panel" id="panel-predict-content">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px">
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">BEST FORMAT</div><div style="font-size:22px;font-weight:800;color:#00d4aa;font-family:'JetBrains Mono',monospace">Short Video</div><div style="font-size:11px;color:#34d399">5.8% avg eng</div></div>
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">OPTIMAL LENGTH</div><div style="font-size:28px;font-weight:800;font-family:'JetBrains Mono',monospace">16-20w</div><div style="font-size:11px;color:#34d399">4.8% avg eng</div></div>
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">EMOJI SWEET SPOT</div><div style="font-size:28px;font-weight:800;color:#fbbf24;font-family:'JetBrains Mono',monospace">4-5</div><div style="font-size:11px;color:#34d399">+34% lift</div></div>
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">TOP TOPIC</div><div style="font-size:22px;font-weight:800;color:#a78bfa;font-family:'JetBrains Mono',monospace">Product Launch</div><div style="font-size:11px;color:#34d399">+67% vs avg</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Topic Performance Ranking</div><div class="panel-subtitle">14 content topics · avg eng rate + post count</div></div><button onclick="exportChart('topicRankChart','Topic-Performance')" class="export-btn">↓ CSV</button></div>
+          <canvas id="topicRankChart" height="180"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Format × Topic Matrix</div><div class="panel-subtitle">Which format works best per topic</div></div><button onclick="exportChart('fmtTopicMatrix','Format-Topic-Matrix')" class="export-btn">↓ CSV</button></div>
+          <canvas id="fmtTopicMatrix" height="180"></canvas>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Hashtag Usage Impact</div><div class="panel-subtitle">Number of hashtags vs reach multiplier</div></div><button onclick="exportChart('hashtagChart','Hashtag-Impact')" class="export-btn">↓ CSV</button></div>
+          <canvas id="hashtagChart" height="160"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Question CTA Effect</div><div class="panel-subtitle">Posts with question vs without · comment rate</div></div><button onclick="exportChart('ctaChart','CTA-Effect')" class="export-btn">↓ CSV</button></div>
+          <canvas id="ctaChart" height="160"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">First 60-Min Velocity Threshold</div><div class="panel-subtitle">Early velocity vs final reach · log scale</div></div><button onclick="exportChart('velThreshChart','Velocity-Threshold')" class="export-btn">↓ CSV</button></div>
+          <canvas id="velThreshChart" height="160"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREDICTION HISTORY TAB -->
+    <div class="tab-panel" id="panel-predict-history">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Prediction Accuracy Over Time</div><div class="panel-subtitle">Model accuracy vs actual — rolling 30d</div></div><button onclick="exportChart('accuracyTrend','Accuracy-Trend')" class="export-btn">↓ CSV</button></div>
+          <canvas id="accuracyTrend" height="160"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Predicted vs Actual Scatter</div><div class="panel-subtitle">847 posts · diagonal = perfect prediction</div></div><button onclick="exportChart('predActualScatter','Predicted-vs-Actual')" class="export-btn">↓ CSV</button></div>
+          <canvas id="predActualScatter" height="160"></canvas>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Prediction Log — Last 30 Posts</div><div class="panel-subtitle">All predictions with actual vs expected</div></div>
+          <button onclick="exportTable('predHistoryTable','Prediction-History')" class="export-btn" style="font-size:11px;padding:5px 12px">↓ Export CSV</button>
+        </div>
+        <table class="data-table" id="predHistoryTable">
+          <thead><tr><th>Date</th><th>Post (truncated)</th><th>Format</th><th>Predicted Score</th><th>Actual Eng%</th><th>Predicted Eng%</th><th>Error</th><th>Predicted Reach</th><th>Actual Reach</th><th>Reach Error</th><th>Model Version</th><th>Outcome</th></tr></thead>
+          <tbody id="predHistBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+</div></div>
+<script>
+// ── PREDICTIONS TAB SWITCHING ──
+(function(){
+  function initPredTabs(){
+    document.querySelectorAll('.topbar-tab[data-target]').forEach(tab=>{
+      tab.addEventListener('click',function(){
+        document.querySelectorAll('.topbar-tab[data-target]').forEach(t=>t.classList.remove('active'));
+        this.classList.add('active');
+        const tid=this.dataset.target;
+        document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+        const panel=document.getElementById('panel-'+tid);
+        if(panel){
+          panel.classList.add('active');
+          const ct=document.querySelector('.content');if(ct)ct.scrollTop=0;
+          requestAnimationFrame(()=>requestAnimationFrame(()=>{
+            if(tid==='predict-timing') initTimingCharts();
+            if(tid==='predict-content') initContentCharts();
+            if(tid==='predict-history') initHistoryCharts();
+          }));
+        }
+      });
+    });
+  }
+
+  const _R={};
+  function once(id,fn){if(!_R[id]){_R[id]=true;fn();}}
+
+  function initTimingCharts(){
+    once('hour-profile',()=>{
+      const hrs=Array.from({length:24},(_,i)=>(i<10?'0':'')+i+':00');
+      const vals=[1.2,0.8,0.6,0.5,0.4,0.7,1.1,1.8,2.4,3.1,3.4,3.2,2.8,2.6,2.9,3.1,4.2,5.1,4.8,4.1,3.6,3.0,2.4,1.8];
+      new Chart(document.getElementById('hourProfileChart'),{type:'bar',data:{labels:hrs,datasets:[
+        {data:vals,backgroundColor:vals.map(v=>v>=4.5?'rgba(0,212,170,0.9)':v>=3.5?'rgba(0,212,170,0.7)':v>=2.5?'rgba(0,212,170,0.5)':'rgba(0,212,170,0.25)'),borderRadius:4}]},
+        options:{responsive:true,maintainAspectRatio:true,
+          plugins:{tooltip:{callbacks:{label:ctx=>`Avg: ${ctx.parsed.y.toFixed(2)}% engagement`}}},
+          scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:8}}},
+            y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}});
+    });
+    once('day-profile',()=>{
+      const means=[3.2,5.1,3.8,4.6,3.4,2.9,2.4];
+      const stds=[0.8,1.2,0.9,1.1,0.7,0.9,0.6];
+      new Chart(document.getElementById('dayProfileChart'),{type:'bar',data:{
+        labels:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+        datasets:[
+          {label:'Avg Eng %',data:means,backgroundColor:means.map(v=>v>=5?'rgba(0,212,170,0.85)':v>=4?'rgba(0,212,170,0.65)':'rgba(0,212,170,0.4)'),borderRadius:5,order:2},
+          {label:'±σ Upper',data:means.map((m,i)=>m+stds[i]),type:'line',borderColor:'rgba(251,191,36,0.6)',borderDash:[4,3],borderWidth:1.5,pointRadius:4,pointBackgroundColor:'#fbbf24',fill:false,order:1},
+          {label:'±σ Lower',data:means.map((m,i)=>m-stds[i]),type:'line',borderColor:'rgba(251,191,36,0.4)',borderDash:[4,3],borderWidth:1.5,pointRadius:0,fill:'1',backgroundColor:'rgba(251,191,36,0.04)',order:0}
+        ]},
+        options:{responsive:true,maintainAspectRatio:true,
+          plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}},
+            tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(2)+'%'}}},
+          scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+            y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}});
+    });
+    once('full-heatmap',()=>{
+      const dows=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+      const hours=['6AM','9AM','12PM','3PM','6PM','9PM','11PM'];
+      const raw=[[1.2,1.8,2.4,2.1,4.8,3.2,1.8],[1.4,2.1,2.8,2.6,5.1,3.6,2.1],[1.1,1.6,2.2,2.0,4.2,2.9,1.6],[1.3,1.9,2.7,2.4,4.6,3.4,1.9],[1.0,1.5,2.0,1.8,3.8,3.1,1.7],[0.8,1.1,1.6,1.9,3.2,4.2,2.8],[0.6,0.9,1.4,1.7,2.8,3.9,2.6]];
+      const cols=['rgba(0,212,170,0.3)','rgba(0,212,170,0.45)','rgba(0,212,170,0.58)','rgba(0,212,170,0.52)','rgba(0,212,170,0.9)','rgba(99,102,241,0.7)','rgba(99,102,241,0.5)'];
+      new Chart(document.getElementById('fullHeatmap'),{type:'bar',data:{labels:dows,
+        datasets:hours.map((h,i)=>({label:h,data:raw.map(row=>row[i]),backgroundColor:cols[i],borderRadius:3}))},
+        options:{responsive:true,maintainAspectRatio:true,
+          plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:8},padding:5}},
+            tooltip:{callbacks:{label:ctx=>ctx.dataset.label+' / '+ctx.label+': '+ctx.parsed.y.toFixed(2)+'% avg eng'}}},
+          scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+            y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}});
+    });
+    once('gap-chart',()=>{
+      new Chart(document.getElementById('gapChart'),{type:'line',data:{
+        labels:['0-2h','2-6h','6-12h','12-24h','1-2d','2-3d','3-5d','5-7d','7d+'],
+        datasets:[{label:'Engagement Uplift',data:[1.8,2.4,3.2,4.1,4.8,4.2,3.6,3.1,2.8],
+          borderColor:'#a78bfa',backgroundColor:'rgba(167,139,250,0.08)',borderWidth:2.5,
+          pointRadius:5,pointBackgroundColor:'#a78bfa',pointBorderColor:'#0c1221',pointBorderWidth:2,fill:true,tension:0.4}]},
+        options:{responsive:true,maintainAspectRatio:true,
+          plugins:{tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y.toFixed(2)}% avg eng rate (gap: ${ctx.label})`}}},
+          scales:{x:{grid:{display:false},ticks:{font:{size:8},maxRotation:30}},
+            y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}});
+    });
+    once('seasonal',()=>{
+      new Chart(document.getElementById('seasonalChart'),{type:'bar',data:{
+        labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        datasets:[{label:'Seasonal Index',data:[0.82,0.88,0.94,1.08,1.12,0.98,0.91,0.95,1.04,1.11,1.18,1.24],
+          backgroundColor:[0.82,0.88,0.94,1.08,1.12,0.98,0.91,0.95,1.04,1.11,1.18,1.24].map(v=>v>=1?`rgba(0,212,170,${(v-1)*4+0.5})`:`rgba(248,113,113,${(1-v)*3+0.3})`),
+          borderRadius:5}]},
+        options:{responsive:true,maintainAspectRatio:true,
+          plugins:{tooltip:{callbacks:{label:ctx=>`Index: ${ctx.parsed.y.toFixed(2)} (${((ctx.parsed.y-1)*100).toFixed(0)}% vs annual avg)`}}},
+          scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+            y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v.toFixed(2)+'×',font:{size:9}},min:0.6,max:1.4}}}});
+    });
+  }
+
+  function initContentCharts(){
+    once('topic-rank',()=>{
+      new Chart(document.getElementById('topicRankChart'),{type:'bar',data:{
+        labels:['Product Launch','Behind Scenes','Transformation','Education','Meme/Humour','Community','Motivation','Q&A','News','Event','Review','Poll','Tutorial','Lifestyle'],
+        datasets:[
+          {label:'Avg Eng %',data:[5.8,4.9,4.6,4.2,3.9,3.7,3.4,3.2,2.8,2.6,2.4,2.2,2.0,1.8],
+            backgroundColor:'rgba(0,212,170,0.75)',borderRadius:4,order:2},
+          {label:'Post Count',data:[42,68,31,89,124,57,76,34,98,28,45,62,38,71],
+            type:'line',borderColor:'rgba(251,191,36,0.7)',borderWidth:1.5,pointRadius:3,fill:false,yAxisID:'y1',order:1}
+        ]},
+        options:{responsive:true,maintainAspectRatio:true,
+          plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}},
+            tooltip:{callbacks:{label:ctx=>{if(ctx.datasetIndex===0)return 'Avg: '+ctx.parsed.y.toFixed(2)+'%';return 'Posts: '+ctx.parsed.y;}}}},
+          scales:{x:{grid:{display:false},ticks:{font:{size:8},maxRotation:45}},
+            y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}},
+            y1:{position:'right',grid:{display:false},ticks:{font:{size:9}}}}}});
+    });
+    once('fmt-topic',()=>{
+      new Chart(document.getElementById('fmtTopicMatrix'),{type:'radar',data:{
+        labels:['Product Launch','Humour','Community','Education','Behind Scenes','Motivation'],
+        datasets:[
+          {label:'Short Video',data:[92,68,54,78,85,62],backgroundColor:'rgba(0,212,170,0.12)',borderColor:'rgba(0,212,170,0.7)',borderWidth:2,pointRadius:3},
+          {label:'Photo',data:[58,82,68,42,61,54],backgroundColor:'rgba(99,102,241,0.08)',borderColor:'rgba(99,102,241,0.6)',borderWidth:1.5,pointRadius:2,borderDash:[4,3]},
+          {label:'Carousel',data:[44,52,78,88,48,48],backgroundColor:'rgba(251,191,36,0.06)',borderColor:'rgba(251,191,36,0.55)',borderWidth:1.5,pointRadius:2,borderDash:[2,4]}
+        ]},
+        options:{responsive:true,plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:8,font:{size:9},padding:8}}},
+          scales:{r:{grid:{color:'rgba(255,255,255,0.06)'},ticks:{display:false},pointLabels:{font:{size:8}},min:0,max:100}}}});
+    });
+    once('hashtag',()=>{
+      new Chart(document.getElementById('hashtagChart'),{type:'line',data:{
+        labels:['0','1','2','3','4','5','6','7','8','9','10+'],
+        datasets:[{label:'Reach multiplier',data:[1.0,1.08,1.18,1.28,1.34,1.31,1.22,1.14,1.06,0.98,0.88],
+          borderColor:'#60a5fa',backgroundColor:'rgba(96,165,250,0.08)',borderWidth:2.5,
+          pointRadius:5,pointBackgroundColor:'#60a5fa',pointBorderColor:'#0c1221',pointBorderWidth:2,fill:true,tension:0.4}]},
+        options:{responsive:true,maintainAspectRatio:true,
+          plugins:{tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y.toFixed(2)}× reach (${((ctx.parsed.y-1)*100).toFixed(0)}% vs no hashtags)`}}},
+          scales:{x:{grid:{display:false},ticks:{font:{size:9}},title:{display:true,text:'# hashtags',font:{size:9}}},
+            y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v.toFixed(2)+'×',font:{size:9}}}}}});
+    });
+    once('cta',()=>{
+      new Chart(document.getElementById('ctaChart'),{type:'bar',data:{
+        labels:['No CTA','Statement','Question','Call-to-action','Poll','Tag a friend'],
+        datasets:[{label:'Avg comment rate',data:[1.2,1.8,3.4,2.6,4.2,3.8],
+          backgroundColor:['rgba(255,255,255,0.1)','rgba(0,212,170,0.4)','rgba(0,212,170,0.85)','rgba(0,212,170,0.65)','rgba(99,102,241,0.8)','rgba(99,102,241,0.65)'],
+          borderRadius:5}]},
+        options:{responsive:true,maintainAspectRatio:true,
+          plugins:{tooltip:{callbacks:{label:ctx=>`${ctx.parsed.y.toFixed(2)}% comment rate`}}},
+          scales:{x:{grid:{display:false},ticks:{font:{size:8},maxRotation:20}},
+            y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}});
+    });
+    once('vel-thresh',()=>{
+      const pts=Array.from({length:50},()=>{const v=Math.round(10+Math.random()*400);return{x:v,y:Math.round(v*Math.random()*180+1000)};});
+      new Chart(document.getElementById('velThreshChart'),{type:'scatter',data:{datasets:[
+        {label:'Posts',data:pts,backgroundColor:'rgba(0,212,170,0.5)',pointRadius:5,pointHoverRadius:7},
+        {label:'Viral threshold (200/hr)',data:[{x:200,y:0},{x:200,y:80000}],type:'line',borderColor:'rgba(248,113,113,0.7)',borderDash:[5,4],borderWidth:1.5,pointRadius:0,fill:false}
+      ]},options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}},
+          tooltip:{callbacks:{label:ctx=>`${ctx.parsed.x} shares/hr → ${ctx.parsed.y.toLocaleString()} total reach`}}},
+        scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},title:{display:true,text:'Shares/hr at 60 min',font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>(v/1000).toFixed(0)+'K',font:{size:9}},title:{display:true,text:'Final reach',font:{size:9}}}}}});
+    });
+  }
+
+  function initHistoryCharts(){
+    once('acc-trend',()=>{
+      const wks=Array.from({length:12},(_,i)=>`W${i+1}`);
+      const acc=[82,84,85,83,87,89,88,90,91,93,92,94];
+      new Chart(document.getElementById('accuracyTrend'),{type:'line',data:{labels:wks,datasets:[
+        {label:'Accuracy %',data:acc,borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,0.08)',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#00d4aa',fill:true,tension:0.4},
+        {label:'Target (90%)',data:Array(12).fill(90),borderColor:'rgba(251,191,36,0.5)',borderDash:[4,3],borderWidth:1.5,pointRadius:0,fill:false}
+      ]},options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}},
+          tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'%'}}},
+        scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},min:75,max:100}}}});
+    });
+    once('pred-actual',()=>{
+      const pts=Array.from({length:60},()=>{const p=parseFloat((1+Math.random()*5).toFixed(2));return{x:p,y:parseFloat((p*0.85+Math.random()*1.2).toFixed(2))};});
+      new Chart(document.getElementById('predActualScatter'),{type:'scatter',data:{datasets:[
+        {label:'Posts',data:pts,backgroundColor:'rgba(0,212,170,0.5)',pointRadius:5},
+        {label:'Perfect prediction',data:[{x:1,y:1},{x:6,y:6}],type:'line',borderColor:'rgba(255,255,255,0.2)',borderDash:[4,4],borderWidth:1.5,pointRadius:0}
+      ]},options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}},
+          tooltip:{callbacks:{label:ctx=>`Predicted: ${ctx.parsed.x}% · Actual: ${ctx.parsed.y}% · Error: ${(ctx.parsed.y-ctx.parsed.x).toFixed(2)}pp`}}},
+        scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},title:{display:true,text:'Predicted Eng %',font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},title:{display:true,text:'Actual Eng %',font:{size:9}}}}}});
+    });
+    once('pred-history-table',()=>{
+      const tbody=document.getElementById('predHistBody');if(!tbody)return;
+      const fmts=['Video','Photo','Reel','Carousel'],topics=['Product Launch','Humour','Community','Education'];
+      for(let i=0;i<30;i++){
+        const d=new Date(2026,3,1+i);
+        const pred=(2+Math.random()*4).toFixed(2);
+        const actual=(parseFloat(pred)*0.85+Math.random()*1.2).toFixed(2);
+        const err=(actual-pred).toFixed(2);
+        const rp=Math.round(8000+Math.random()*15000);
+        const ra=Math.round(rp*(0.8+Math.random()*0.4));
+        const ok=Math.abs(parseFloat(err))<0.5;
+        tbody.innerHTML+=`<tr>
+          <td style="font-family:'JetBrains Mono',monospace;font-size:10px">${d.toISOString().slice(0,10)}</td>
+          <td style="font-size:10px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${topics[i%4]} post ${i+1}</td>
+          <td><span style="font-size:9px;padding:1px 6px;border-radius:3px;background:rgba(0,212,170,0.1);color:#00d4aa">${fmts[i%4]}</span></td>
+          <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent)">${pred}</td>
+          <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:${actual>pred?'#34d399':'#f87171'}">${actual}%</td>
+          <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted)">${pred}%</td>
+          <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:${ok?'#34d399':'#f87171'}">${err>0?'+':''}${err}pp</td>
+          <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent)">${rp.toLocaleString()}</td>
+          <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:${ra>=rp?'#34d399':'#f87171'}">${ra.toLocaleString()}</td>
+          <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:${ra>=rp?'#34d399':'#f87171'}">${((ra-rp)/rp*100).toFixed(1)}%</td>
+          <td style="font-size:10px;color:var(--text-muted)">v2.1</td>
+          <td><span style="font-size:9px;padding:1px 6px;border-radius:3px;background:${ok?'rgba(52,211,153,0.1)':'rgba(248,113,113,0.1)'};color:${ok?'#34d399':'#f87171'}">${ok?'✓ On target':'⚠ Off'}</span></td>
+        </tr>`;
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initPredTabs);
+})();
+</script>
+
+<script>try{const u=JSON.parse(localStorage.getItem('artemis_app_session'));if(u&&document.getElementById('sidebarUser'))document.getElementById('sidebarUser').textContent=u.email||'';}catch{}</script>
 <script>
 
 (function(){

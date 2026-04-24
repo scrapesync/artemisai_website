@@ -431,8 +431,135 @@ textarea.form-input{min-height:80px;resize:vertical}
 .td-dn{color:#f87171!important;font-family:'JetBrains Mono',monospace;font-size:11px}
 .td-clip{font-size:11px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
+
+.export-btn{font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid rgba(0,212,170,0.2);background:transparent;color:rgba(0,212,170,0.7);cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:4px;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.export-btn:hover{border-color:rgba(0,212,170,0.5);color:#00d4aa;background:rgba(0,212,170,0.06)}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<script>
+
+Chart.defaults.color='#7b8ba8';
+Chart.defaults.borderColor='rgba(255,255,255,0.05)';
+Chart.defaults.font.family="'Outfit',sans-serif";
+Chart.defaults.plugins.legend.display=false;
+Chart.defaults.plugins.tooltip.backgroundColor='#0c1221';
+Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.35)';
+Chart.defaults.plugins.tooltip.borderWidth=1;
+Chart.defaults.plugins.tooltip.padding=12;
+Chart.defaults.plugins.tooltip.titleColor='#e8ecf4';
+Chart.defaults.plugins.tooltip.bodyColor='#9aa5b8';
+Chart.defaults.plugins.tooltip.titleFont={size:11,weight:'600',family:"'JetBrains Mono',monospace"};
+Chart.defaults.plugins.tooltip.bodyFont={size:11,family:"'Outfit',sans-serif"};
+Chart.defaults.plugins.tooltip.callbacks={
+  label: function(ctx){
+    const raw=ctx.parsed;
+    const v=raw && raw.y!==undefined ? raw.y : (raw && raw.r!==undefined ? raw.r : ctx.raw);
+    const ds=ctx.dataset.label||'';
+    if(typeof v==='object'&&v!==null&&v.x!==undefined) return (ds?ds+': ':'')+`x:${v.x}, y:${v.y}${v.r!==undefined?', r:'+v.r:''}`;
+    if(typeof v==='number'){
+      if(v>=1000000) return (ds?ds+': ':'')+( v/1000000).toFixed(2)+'M';
+      if(v>=1000) return (ds?ds+': ':'')+v.toLocaleString();
+      if(Math.abs(v)<1&&v!==0) return (ds?ds+': ':'')+v.toFixed(3);
+      if(Number.isInteger(v)) return (ds?ds+': ':'')+v.toLocaleString();
+      return (ds?ds+': ':'')+v.toFixed(2);
+    }
+    return (ds?ds+': ':'')+String(v);
+  }
+};
+
+
+// ── ANALYST UTILITIES ──────────────────────────────────────────────
+(function(){
+
+// Registry of chart data for export
+window._CHART_DATA = {};
+
+// Download CSV helper
+window.downloadCSV = function(rows, filename){
+  const csv = rows.map(r => r.map(c => {
+    const s = String(c).replace(/"/g,'""');
+    return s.includes(',') || s.includes('"') || s.includes('\n') ? `"${s}"` : s;
+  }).join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename || 'artemis-export.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+// Export chart by canvas ID
+window.exportChart = function(canvasId, title){
+  const reg = window._CHART_DATA[canvasId];
+  if(reg){ downloadCSV(reg, (title||canvasId)+'.csv'); return; }
+
+  // Fall back to Chart.js instance
+  const canvas = document.getElementById(canvasId);
+  if(!canvas) return;
+  const chart = Chart.getChart ? Chart.getChart(canvas) : canvas._chartInstance;
+  if(!chart){ alert('No chart data found for export'); return; }
+
+  const labels = chart.data.labels || [];
+  const datasets = chart.data.datasets || [];
+  const headers = ['Label', ...datasets.map(d=>d.label||'Value')];
+  const rows = [headers];
+  labels.forEach((lbl,i)=>{
+    rows.push([lbl, ...datasets.map(d=> d.data && d.data[i] !== undefined ? d.data[i] : '')]);
+  });
+  downloadCSV(rows, (title||canvasId)+'.csv');
+};
+
+// Export data table by table ID
+window.exportTable = function(tableId, title){
+  const tbl = document.getElementById(tableId);
+  if(!tbl) return;
+  const rows = [];
+  tbl.querySelectorAll('tr').forEach(tr=>{
+    rows.push([...tr.querySelectorAll('th,td')].map(c=>c.innerText.trim()));
+  });
+  downloadCSV(rows, (title||tableId)+'.csv');
+};
+
+// Export all visible charts + tables on page
+window.exportAll = function(){
+  const page = location.pathname.split('/').pop().replace('.html','');
+  const allRows = [['Artemis Analytics Export', '', '', ''],
+                   ['Page', page, '', ''],
+                   ['Exported at', new Date().toISOString(), '', ''],
+                   ['', '', '', '']];
+
+  // All canvases with charts
+  document.querySelectorAll('canvas[id]').forEach(canvas=>{
+    const chart = Chart.getChart ? Chart.getChart(canvas) : null;
+    if(!chart) return;
+    const labels = chart.data.labels || [];
+    const datasets = chart.data.datasets || [];
+    if(!labels.length && !datasets.length) return;
+    allRows.push([canvas.id.toUpperCase(), '', '', '']);
+    allRows.push(['Label', ...datasets.map(d=>d.label||'Value')]);
+    labels.forEach((lbl,i)=>{
+      allRows.push([lbl, ...datasets.map(d=> d.data?.[i] ?? '')]);
+    });
+    allRows.push(['','','','']);
+  });
+
+  // All data tables
+  document.querySelectorAll('table.data-table').forEach((tbl,ti)=>{
+    allRows.push([`TABLE_${ti+1}`, '', '', '']);
+    tbl.querySelectorAll('tr').forEach(tr=>{
+      allRows.push([...tr.querySelectorAll('th,td')].map(c=>c.innerText.trim()));
+    });
+    allRows.push(['','','','']);
+  });
+
+  downloadCSV(allRows, page+'-full-export-'+new Date().toISOString().slice(0,10)+'.csv');
+};
+
+})();
+</script>
+
+
 </head>
 <body>
 
@@ -454,7 +581,7 @@ textarea.form-input{min-height:80px;resize:vertical}
 
 <a href="admin_panel.html" class="m-admin-back"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>← Admin Panel</a>
 <aside class="sidebar"><a href="admin_panel.html" class="sidebar-logo" title="Back to Admin Panel"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg><span>ARTEMIS</span></a><nav class="sidebar-nav"><div class="nav-group-label">For You</div><a href="mockup_feed.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Feed</a>
-    <div class="nav-group-label">Metrics Centre</div><a href="index.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="mockup_dashboard.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a><a href="mockup_discovery.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discovery Feed</a><a href="mockup_predictions.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predictions</a><a href="mockup_audience.html" class="nav-item active"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Audience</a><div class="nav-group-label">Intelligence</div><a href="mockup_arte.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Art-E<span class="nav-badge badge-ai">AI</span></a><a href="mockup_alerts.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Alerts<span class="nav-badge badge-alert">3</span></a><a href="mockup_reports.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</a><div class="nav-group-label">Settings</div><a href="mockup_connected.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Connected Pages</a><a href="mockup_settings.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a></nav></aside><div class="main"><header class="topbar"><div class="topbar-left"><div class="topbar-title">Audience</div><div class="topbar-tabs"><button class="topbar-tab active">Segments</button><button class="topbar-tab">Demographics</button><button class="topbar-tab">Affinity</button></div></div><div class="topbar-right"><div class="avatar">AS</div></div></header>
+    <div class="nav-group-label">Metrics Centre</div><a href="index.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a><a href="mockup_dashboard.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a><a href="mockup_discovery.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discovery Feed</a><a href="mockup_predictions.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predictions</a><a href="mockup_audience.html" class="nav-item active"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Audience</a><div class="nav-group-label">Intelligence</div><a href="mockup_arte.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Art-E<span class="nav-badge badge-ai">AI</span></a><a href="mockup_alerts.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Alerts<span class="nav-badge badge-alert">3</span></a><a href="mockup_reports.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Reports</a><div class="nav-group-label">Settings</div><a href="mockup_connected.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Connected Pages</a><a href="mockup_settings.html" class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a></nav></aside><div class="main"><header class="topbar"><div class="topbar-left"><div class="topbar-title">Audience</div><div class="topbar-tabs"><button class="topbar-tab active">Segments</button><button class="topbar-tab">Demographics</button><button class="topbar-tab">Affinity</button></div></div><div class="topbar-right"><button onclick="exportAll()" class="topbar-btn" style="display:flex;align-items:center;gap:5px;font-size:11px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg>Export All</button><div class="avatar">AS</div></div></header>
 <div class="m-page-tabs"><button class="active" onclick="document.querySelectorAll('.topbar-tab')[0]?.click();document.querySelectorAll('.m-page-tabs button').forEach((b,j)=>b.classList.toggle('active',j==0))">Segments</button><button class="" onclick="document.querySelectorAll('.topbar-tab')[1]?.click();document.querySelectorAll('.m-page-tabs button').forEach((b,j)=>b.classList.toggle('active',j==1))">Demographics</button><button class="" onclick="document.querySelectorAll('.topbar-tab')[2]?.click();document.querySelectorAll('.m-page-tabs button').forEach((b,j)=>b.classList.toggle('active',j==2))">Affinity</button></div><div class="content">
 <!-- TAB: SEGMENTS -->
 <div class="tab-panel active" data-tab="segments">
@@ -471,12 +598,12 @@ textarea.form-input{min-height:80px;resize:vertical}
 <div style="display:grid;grid-template-columns:2fr 1fr 0.8fr;gap:16px;margin-bottom:16px">
   <div class="card">
     <div class="card-title">Audience Growth — 6 Months</div>
-    <div class="card-subtitle">Total followers across all pages · Daily</div>
+    <div class="card-subtitle">Total followers across all pages · Daily<button onclick="exportChart('growthChart','Audience-Growth')" class="export-btn">↓ CSV</button></div>
     <canvas id="growthChart" height="120"></canvas>
   </div>
   <div class="card">
     <div class="card-title">Age Distribution</div>
-    <div class="card-subtitle">% of total audience</div>
+    <div class="card-subtitle">% of total audience<button onclick="exportChart('ageChart','Age-Distribution')" class="export-btn">↓ CSV</button></div>
     <canvas id="ageChart" height="150"></canvas>
   </div>
   <div class="card" style="text-align:center">
@@ -496,7 +623,7 @@ textarea.form-input{min-height:80px;resize:vertical}
 <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:16px;margin-bottom:16px">
   <div class="card">
     <div class="card-title">Audience Segments</div>
-    <div class="card-subtitle">AI-discovered clusters · % of total followers</div>
+    <div class="card-subtitle">AI-discovered clusters · % of total followers<button onclick="exportChart('segChart','Segments')" class="export-btn">↓ CSV</button></div>
     <canvas id="segChart" height="180"></canvas>
   </div>
   <div class="card">
@@ -520,7 +647,7 @@ textarea.form-input{min-height:80px;resize:vertical}
 <div style="display:grid;grid-template-columns:1.5fr 0.8fr 1fr;gap:16px;margin-bottom:16px">
   <div class="card">
     <div class="card-title">Audience Active Hours</div>
-    <div class="card-subtitle">% of followers online by hour · All timezones normalised to UK</div>
+    <div class="card-subtitle">% of followers online by hour · All timezones normalised to UK<button onclick="exportChart('activeHrsChart','Active-Hours')" class="export-btn">↓ CSV</button></div>
     <canvas id="activeHrsChart" height="130"></canvas>
   </div>
   <div class="card">
@@ -543,12 +670,12 @@ textarea.form-input{min-height:80px;resize:vertical}
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
   <div class="card">
     <div class="card-title">Audience Affinity Topics</div>
-    <div class="card-subtitle">What your followers engage with beyond your content</div>
+    <div class="card-subtitle">What your followers engage with beyond your content<button onclick="exportChart('affinityChart','Affinity-Topics')" class="export-btn">↓ CSV</button></div>
     <canvas id="affinityChart" height="150"></canvas>
   </div>
   <div class="card">
     <div class="card-title">Follower Acquisition vs Churn</div>
-    <div class="card-subtitle">Net growth breakdown — last 12 weeks</div>
+    <div class="card-subtitle">Net growth breakdown — last 12 weeks<button onclick="exportChart('churnChart','Churn')" class="export-btn">↓ CSV</button></div>
     <canvas id="churnChart" height="150"></canvas>
   </div>
 </div>

@@ -386,6 +386,99 @@ textarea.form-input{min-height:80px;resize:vertical}
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<script>
+// ── ANALYST UTILITIES ──────────────────────────────────────────────
+(function(){
+
+// Registry of chart data for export
+window._CHART_DATA = {};
+
+// Download CSV helper
+window.downloadCSV = function(rows, filename){
+  const csv = rows.map(r => r.map(c => {
+    const s = String(c).replace(/"/g,'""');
+    return s.includes(',') || s.includes('"') || s.includes('\n') ? `"${s}"` : s;
+  }).join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename || 'artemis-export.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+// Export chart by canvas ID
+window.exportChart = function(canvasId, title){
+  const reg = window._CHART_DATA[canvasId];
+  if(reg){ downloadCSV(reg, (title||canvasId)+'.csv'); return; }
+
+  // Fall back to Chart.js instance
+  const canvas = document.getElementById(canvasId);
+  if(!canvas) return;
+  const chart = Chart.getChart ? Chart.getChart(canvas) : canvas._chartInstance;
+  if(!chart){ alert('No chart data found for export'); return; }
+
+  const labels = chart.data.labels || [];
+  const datasets = chart.data.datasets || [];
+  const headers = ['Label', ...datasets.map(d=>d.label||'Value')];
+  const rows = [headers];
+  labels.forEach((lbl,i)=>{
+    rows.push([lbl, ...datasets.map(d=> d.data && d.data[i] !== undefined ? d.data[i] : '')]);
+  });
+  downloadCSV(rows, (title||canvasId)+'.csv');
+};
+
+// Export data table by table ID
+window.exportTable = function(tableId, title){
+  const tbl = document.getElementById(tableId);
+  if(!tbl) return;
+  const rows = [];
+  tbl.querySelectorAll('tr').forEach(tr=>{
+    rows.push([...tr.querySelectorAll('th,td')].map(c=>c.innerText.trim()));
+  });
+  downloadCSV(rows, (title||tableId)+'.csv');
+};
+
+// Export all visible charts + tables on page
+window.exportAll = function(){
+  const page = location.pathname.split('/').pop().replace('.html','');
+  const allRows = [['Artemis Analytics Export', '', '', ''],
+                   ['Page', page, '', ''],
+                   ['Exported at', new Date().toISOString(), '', ''],
+                   ['', '', '', '']];
+
+  // All canvases with charts
+  document.querySelectorAll('canvas[id]').forEach(canvas=>{
+    const chart = Chart.getChart ? Chart.getChart(canvas) : null;
+    if(!chart) return;
+    const labels = chart.data.labels || [];
+    const datasets = chart.data.datasets || [];
+    if(!labels.length && !datasets.length) return;
+    allRows.push([canvas.id.toUpperCase(), '', '', '']);
+    allRows.push(['Label', ...datasets.map(d=>d.label||'Value')]);
+    labels.forEach((lbl,i)=>{
+      allRows.push([lbl, ...datasets.map(d=> d.data?.[i] ?? '')]);
+    });
+    allRows.push(['','','','']);
+  });
+
+  // All data tables
+  document.querySelectorAll('table.data-table').forEach((tbl,ti)=>{
+    allRows.push([`TABLE_${ti+1}`, '', '', '']);
+    tbl.querySelectorAll('tr').forEach(tr=>{
+      allRows.push([...tr.querySelectorAll('th,td')].map(c=>c.innerText.trim()));
+    });
+    allRows.push(['','','','']);
+  });
+
+  downloadCSV(allRows, page+'-full-export-'+new Date().toISOString().slice(0,10)+'.csv');
+};
+
+})();
+</script>
+
+
 </head>
 <body>
 

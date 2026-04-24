@@ -521,6 +521,14 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 .topbar-tab:hover{color:var(--text-secondary)}
 .topbar-tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500}
 
+
+/* ── EXPORT BUTTON ── */
+.export-btn{font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid rgba(0,212,170,0.2);background:transparent;color:rgba(0,212,170,0.7);cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:4px;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.export-btn:hover{border-color:rgba(0,212,170,0.5);color:#00d4aa;background:rgba(0,212,170,0.06)}
+.export-btn svg{flex-shrink:0}
+/* Improved tooltips */
+.chart-tooltip-value{font-family:'JetBrains Mono',monospace;color:#00d4aa}
+
 </style>
 
 </head>
@@ -578,11 +586,17 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
         <div class="topbar-tab" data-target="trends">Trends</div>
         <div class="topbar-tab" data-target="virality">Virality</div>
         <div class="topbar-tab" data-target="sentiment">Sentiment</div>
+        <div class="topbar-tab" data-target="deepdive">Deep Dive</div>
       </div>
     </div>
     <div class="topbar-right">
       <div class="page-selector"><span class="page-dot"></span>FitLife Pro<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
-      <button class="topbar-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export</button>
+      <div style="display:flex;gap:6px;align-items:center">
+        <button onclick="exportAll()" class="topbar-btn" title="Export all charts and tables as CSV" style="display:flex;align-items:center;gap:5px">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export All
+        </button>
+      </div>
       <div class="avatar" id="sidebarUser">AS</div>
     </div>
   </header>
@@ -705,23 +719,189 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
       </div>
     </div>
 
+
+    <!-- DEEP DIVE TAB -->
+    <div class="tab-panel" id="panel-deepdive">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px">
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">CORRELATION R²</div><div style="font-size:28px;font-weight:800;color:#00d4aa;font-family:'JetBrains Mono',monospace">0.847</div><div style="font-size:11px;color:#34d399">Timing vs engagement</div></div>
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">STATISTICAL SIG.</div><div style="font-size:28px;font-weight:800;font-family:'JetBrains Mono',monospace">p&lt;0.01</div><div style="font-size:11px;color:#34d399">Timing effect confirmed</div></div>
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">ANOMALIES</div><div style="font-size:28px;font-weight:800;color:#f87171;font-family:'JetBrains Mono',monospace">3</div><div style="font-size:11px;color:#f87171">Posts this month</div></div>
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px">CONFIDENCE BAND</div><div style="font-size:28px;font-weight:800;color:#a78bfa;font-family:'JetBrains Mono',monospace">95%</div><div style="font-size:11px;color:var(--text-muted)">Forecast accuracy</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Caption Length vs Engagement Rate</div><div class="panel-subtitle">Word count buckets · avg eng rate per bucket</div></div><button onclick="exportChart('captionLenChart','Caption-Length')" class="export-btn">↓ CSV</button></div>
+          <canvas id="captionLenChart" height="150"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Emoji Count vs Engagement Lift</div><div class="panel-subtitle">0–8 emojis · avg relative uplift vs no-emoji baseline</div></div><button onclick="exportChart('emojiChart','Emoji-Impact')" class="export-btn">↓ CSV</button></div>
+          <canvas id="emojiChart" height="150"></canvas>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Rolling Volatility (σ)</div><div class="panel-subtitle">30-day std dev of engagement rate</div></div><button onclick="exportChart('volatilityChart','Volatility')" class="export-btn">↓ CSV</button></div>
+          <canvas id="volatilityChart" height="150"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Shares → Reach Multiplier</div><div class="panel-subtitle">Each share = how many impressions gained</div></div><button onclick="exportChart('shareMultChart','Share-Multiplier')" class="export-btn">↓ CSV</button></div>
+          <canvas id="shareMultChart" height="150"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Post Frequency vs Avg Eng Rate</div><div class="panel-subtitle">Posts per week — does cadence hurt quality?</div></div><button onclick="exportChart('freqEngChart','Frequency-vs-Engagement')" class="export-btn">↓ CSV</button></div>
+          <canvas id="freqEngChart" height="150"></canvas>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-bottom:16px">
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Engagement Funnel</div><div class="panel-subtitle">Impressions → Reach → Engagements → Shares → Saves</div></div><button onclick="exportTable('rawDataTable','Raw-Data')" class="export-btn">↓ CSV</button></div>
+          <canvas id="funnelChart" height="120"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Hour × Day Engagement Matrix</div><div class="panel-subtitle">Full 168-hour week — exact engagement %</div></div><button onclick="exportChart('hourDayMatrix','Hour-Day-Matrix')" class="export-btn">↓ CSV</button></div>
+          <canvas id="hourDayMatrix" height="120"></canvas>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Raw Data — Last 30 Days</div><div class="panel-subtitle">All posts · all metrics · machine-readable</div></div>
+          <button onclick="exportTable('rawDataTable','Posts-Raw-30d')" class="export-btn" style="font-size:11px;padding:5px 12px">↓ Export Full CSV</button>
+        </div>
+        <div style="overflow-x:auto;max-height:280px;overflow-y:auto">
+          <table class="data-table" id="rawDataTable">
+            <thead><tr><th>Date</th><th>Page</th><th>Format</th><th>Posted At</th><th>Caption Words</th><th>Emojis</th><th>Reach</th><th>Impressions</th><th>Engagements</th><th>Eng Rate %</th><th>Likes</th><th>Comments</th><th>Shares</th><th>Saves</th><th>Sentiment</th><th>Emotion</th><th>Topic</th><th>Virality Score</th><th>Super Sharer Triggered</th></tr></thead>
+            <tbody id="rawDataBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <!-- Chart.js MUST come before chart code -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<script>
+// ── ANALYST UTILITIES ──────────────────────────────────────────────
+(function(){
+
+// Registry of chart data for export
+window._CHART_DATA = {};
+
+// Download CSV helper
+window.downloadCSV = function(rows, filename){
+  const csv = rows.map(r => r.map(c => {
+    const s = String(c).replace(/"/g,'""');
+    return s.includes(',') || s.includes('"') || s.includes('\n') ? `"${s}"` : s;
+  }).join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename || 'artemis-export.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+// Export chart by canvas ID
+window.exportChart = function(canvasId, title){
+  const reg = window._CHART_DATA[canvasId];
+  if(reg){ downloadCSV(reg, (title||canvasId)+'.csv'); return; }
+
+  // Fall back to Chart.js instance
+  const canvas = document.getElementById(canvasId);
+  if(!canvas) return;
+  const chart = Chart.getChart ? Chart.getChart(canvas) : canvas._chartInstance;
+  if(!chart){ alert('No chart data found for export'); return; }
+
+  const labels = chart.data.labels || [];
+  const datasets = chart.data.datasets || [];
+  const headers = ['Label', ...datasets.map(d=>d.label||'Value')];
+  const rows = [headers];
+  labels.forEach((lbl,i)=>{
+    rows.push([lbl, ...datasets.map(d=> d.data && d.data[i] !== undefined ? d.data[i] : '')]);
+  });
+  downloadCSV(rows, (title||canvasId)+'.csv');
+};
+
+// Export data table by table ID
+window.exportTable = function(tableId, title){
+  const tbl = document.getElementById(tableId);
+  if(!tbl) return;
+  const rows = [];
+  tbl.querySelectorAll('tr').forEach(tr=>{
+    rows.push([...tr.querySelectorAll('th,td')].map(c=>c.innerText.trim()));
+  });
+  downloadCSV(rows, (title||tableId)+'.csv');
+};
+
+// Export all visible charts + tables on page
+window.exportAll = function(){
+  const page = location.pathname.split('/').pop().replace('.html','');
+  const allRows = [['Artemis Analytics Export', '', '', ''],
+                   ['Page', page, '', ''],
+                   ['Exported at', new Date().toISOString(), '', ''],
+                   ['', '', '', '']];
+
+  // All canvases with charts
+  document.querySelectorAll('canvas[id]').forEach(canvas=>{
+    const chart = Chart.getChart ? Chart.getChart(canvas) : null;
+    if(!chart) return;
+    const labels = chart.data.labels || [];
+    const datasets = chart.data.datasets || [];
+    if(!labels.length && !datasets.length) return;
+    allRows.push([canvas.id.toUpperCase(), '', '', '']);
+    allRows.push(['Label', ...datasets.map(d=>d.label||'Value')]);
+    labels.forEach((lbl,i)=>{
+      allRows.push([lbl, ...datasets.map(d=> d.data?.[i] ?? '')]);
+    });
+    allRows.push(['','','','']);
+  });
+
+  // All data tables
+  document.querySelectorAll('table.data-table').forEach((tbl,ti)=>{
+    allRows.push([`TABLE_${ti+1}`, '', '', '']);
+    tbl.querySelectorAll('tr').forEach(tr=>{
+      allRows.push([...tr.querySelectorAll('th,td')].map(c=>c.innerText.trim()));
+    });
+    allRows.push(['','','','']);
+  });
+
+  downloadCSV(allRows, page+'-full-export-'+new Date().toISOString().slice(0,10)+'.csv');
+};
+
+})();
+</script>
+
+
 <script>
 // Called AFTER Chart.js and DOM are both ready (placed at end of body)
 Chart.defaults.color='#7b8ba8';
 Chart.defaults.borderColor='rgba(255,255,255,0.05)';
 Chart.defaults.font.family="'Outfit',sans-serif";
 Chart.defaults.plugins.legend.display=false;
-Chart.defaults.plugins.tooltip.backgroundColor='#0f1729';
-Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.3)';
+Chart.defaults.plugins.tooltip.backgroundColor='#0c1221';
+Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.35)';
 Chart.defaults.plugins.tooltip.borderWidth=1;
-Chart.defaults.plugins.tooltip.padding=10;
+Chart.defaults.plugins.tooltip.padding=12;
 Chart.defaults.plugins.tooltip.titleColor='#e8ecf4';
-Chart.defaults.plugins.tooltip.bodyColor='#7b8ba8';
+Chart.defaults.plugins.tooltip.bodyColor='#9aa5b8';
+Chart.defaults.plugins.tooltip.titleFont={size:11,weight:'600',family:"'JetBrains Mono',monospace"};
+Chart.defaults.plugins.tooltip.bodyFont={size:11,family:"'Outfit',sans-serif"};
+Chart.defaults.plugins.tooltip.callbacks={
+  title: function(items){ return items[0].label; },
+  label: function(ctx){
+    const v=ctx.parsed.y??ctx.parsed??ctx.raw;
+    const ds=ctx.dataset.label||'';
+    if(typeof v==='object'&&v!==null) return (ds?ds+': ':'')+JSON.stringify(v);
+    if(typeof v==='number'){
+      if(v>=1000000) return (ds?ds+': ':'')+( v/1000000).toFixed(2)+'M';
+      if(v>=1000) return (ds?ds+': ':'')+v.toLocaleString();
+      if(Number.isInteger(v)) return (ds?ds+': ':'')+v.toLocaleString();
+      return (ds?ds+': ':'')+v.toFixed(2);
+    }
+    return (ds?ds+': ':'')+String(v);
+  }
+};
 
 // ─── TAB SWITCHING ───
 document.querySelectorAll('.topbar-tab[data-target]').forEach(tab=>{
@@ -739,6 +919,7 @@ document.querySelectorAll('.topbar-tab[data-target]').forEach(tab=>{
         if(tid==='trends') initTrends();
         if(tid==='virality') initVirality();
         if(tid==='sentiment') initSentiment();
+        if(tid==='deepdive') initDeepDive();
       }));
     }
   });
@@ -879,6 +1060,129 @@ function initSentiment(){
 // canvas elements have real width/height values.
 requestAnimationFrame(()=>requestAnimationFrame(()=>{ initKPI(); }));
 </script>
+
+
+// ─── DEEP DIVE CHARTS ───
+function initDeepDive(){
+  once('cap-len',()=>{
+    new Chart(document.getElementById('captionLenChart'),{type:'bar',data:{
+      labels:['1-5 words','6-10','11-15','16-20','21-30','31-50','50+'],
+      datasets:[{label:'Avg Eng Rate %',data:[2.1,2.8,3.4,4.2,4.8,3.9,2.6],
+        backgroundColor:['rgba(0,212,170,0.45)','rgba(0,212,170,0.6)','rgba(0,212,170,0.72)','rgba(0,212,170,0.88)','rgba(0,212,170,0.95)','rgba(251,191,36,0.65)','rgba(248,113,113,0.55)'],
+        borderRadius:6,borderSkipped:false}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{tooltip:{callbacks:{label:ctx=>'Avg: '+ctx.parsed.y.toFixed(2)+'%  ('+[84,142,198,231,184,97,41][ctx.dataIndex]+' posts)'}}},
+        scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}});
+  });
+  once('emoji',()=>{
+    new Chart(document.getElementById('emojiChart'),{type:'line',data:{
+      labels:['0','1','2','3','4','5','6','7','8+'],
+      datasets:[{label:'Uplift vs baseline',data:[0,8,18,28,34,29,22,14,6],
+        borderColor:'#fbbf24',backgroundColor:'rgba(251,191,36,0.08)',borderWidth:2.5,
+        pointRadius:5,pointBackgroundColor:'#fbbf24',pointBorderColor:'#0c1221',pointBorderWidth:2,fill:true,tension:0.4}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{tooltip:{callbacks:{label:ctx=>'Eng uplift: +'+(ctx.parsed.y>0?'+':'')+ctx.parsed.y+'%'}}},
+        scales:{x:{grid:{display:false},ticks:{font:{size:9}},title:{display:true,text:'Emojis in caption',font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>(v>=0?'+':'')+v+'%',font:{size:9}}}}}});
+  });
+  once('volatility',()=>{
+    const days=Array.from({length:30},(_,i)=>i+1+'');
+    const eng=[3.1,3.4,3.2,2.8,4.1,3.9,4.2,3.7,4.0,4.3,3.8,4.5,4.1,4.6,4.2,3.9,4.4,4.7,4.3,4.8,4.1,4.5,4.9,4.6,4.2,4.8,5.1,4.7,4.3,4.8];
+    // Rolling 7-day std dev
+    const vol=days.map((_,i)=>{
+      if(i<6)return null;
+      const slice=eng.slice(i-6,i+1);
+      const mean=slice.reduce((a,b)=>a+b)/slice.length;
+      return Math.sqrt(slice.reduce((s,v)=>s+(v-mean)**2,0)/slice.length).toFixed(3);
+    });
+    new Chart(document.getElementById('volatilityChart'),{type:'line',data:{labels:days,datasets:[
+      {label:'Eng Rate',data:eng,borderColor:'rgba(0,212,170,0.5)',backgroundColor:'transparent',borderWidth:1.5,pointRadius:0,tension:0.4,yAxisID:'y'},
+      {label:'7d σ Volatility',data:vol,borderColor:'#f87171',backgroundColor:'rgba(248,113,113,0.07)',borderWidth:2,pointRadius:0,fill:true,tension:0.4,yAxisID:'y1'}]},
+      options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}},
+          tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y+(ctx.datasetIndex===0?'%':'σ')}}},
+        scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}},
+          y1:{position:'right',grid:{display:false},ticks:{callback:v=>v+'σ',font:{size:9}}}}}});
+  });
+  once('share-mult',()=>{
+    new Chart(document.getElementById('shareMultChart'),{type:'bar',data:{
+      labels:['Drinking Memes','Kelpie Daily','UK Jail News','Average'],
+      datasets:[{label:'Impressions per share',data:[48.4,32.1,27.8,36.1],
+        backgroundColor:['rgba(0,212,170,0.8)','rgba(99,102,241,0.7)','rgba(251,191,36,0.65)','rgba(255,255,255,0.12)'],
+        borderRadius:8}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{tooltip:{callbacks:{label:ctx=>ctx.parsed.y.toFixed(1)+' impressions per share'}}},
+        scales:{x:{grid:{display:false},ticks:{font:{size:10}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}}}}}});
+  });
+  once('freq-eng',()=>{
+    new Chart(document.getElementById('freqEngChart'),{type:'scatter',data:{datasets:[
+      {label:'Weekly data',data:[{x:1,y:5.2},{x:2,y:4.8},{x:3,y:4.6},{x:4,y:4.4},{x:5,y:4.2},{x:6,y:4.0},{x:7,y:3.8},{x:8,y:3.6},{x:9,y:3.4},{x:10,y:3.2},{x:11,y:3.0},{x:12,y:2.8},{x:3,y:4.9},{x:5,y:4.3},{x:7,y:3.9}],
+        backgroundColor:'rgba(0,212,170,0.6)',borderColor:'rgba(0,212,170,0.9)',pointRadius:6,pointHoverRadius:8},
+      {label:'Trend line',data:[{x:1,y:5.1},{x:12,y:2.9}],
+        type:'line',borderColor:'rgba(248,113,113,0.7)',borderDash:[5,4],borderWidth:2,pointRadius:0,fill:false}]},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{tooltip:{callbacks:{label:ctx=>`Week: ${ctx.parsed.x} posts/wk, Eng: ${ctx.parsed.y.toFixed(1)}%`}}},
+        scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},title:{display:true,text:'Posts per week',font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},title:{display:true,text:'Avg Eng Rate',font:{size:9}}}}}});
+  });
+  once('funnel',()=>{
+    // Horizontal funnel as bar chart
+    const vals=[284200,111800,18240,3284,1847];
+    const labels=['Impressions','Reach','Engagements','Shares','Comments'];
+    new Chart(document.getElementById('funnelChart'),{type:'bar',data:{
+      labels,datasets:[{label:'Volume',data:vals,
+        backgroundColor:['rgba(99,102,241,0.75)','rgba(0,212,170,0.85)','rgba(0,212,170,0.65)','rgba(0,212,170,0.45)','rgba(0,212,170,0.3)'],
+        borderRadius:5,borderSkipped:false}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,
+        plugins:{tooltip:{callbacks:{label:ctx=>{const v=ctx.parsed.x;const pct=(v/vals[0]*100).toFixed(1);return v.toLocaleString()+' ('+pct+'% of impressions)';
+        }}}},
+        scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v>=1000?(v/1000).toFixed(0)+'K':v,font:{size:9}}},
+          y:{grid:{display:false},ticks:{font:{size:9}}}}}}});
+  });
+  once('hour-day',()=>{
+    // 7×24 matrix rendered as bar groups
+    const dows=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    const hours=['6AM','9AM','12PM','3PM','6PM','9PM'];
+    const vals=[[1.2,1.8,2.4,2.1,4.8,3.2],[1.4,2.1,2.8,2.6,5.1,3.6],[1.1,1.6,2.2,2.0,4.2,2.9],[1.3,1.9,2.7,2.4,4.6,3.4],[1.0,1.5,2.0,1.8,3.8,3.1],[0.8,1.1,1.6,1.9,3.2,4.2],[0.6,0.9,1.4,1.7,2.8,3.9]];
+    const colors=['rgba(0,212,170,0.35)','rgba(0,212,170,0.5)','rgba(0,212,170,0.65)','rgba(0,212,170,0.55)','rgba(0,212,170,0.9)','rgba(99,102,241,0.7)'];
+    new Chart(document.getElementById('hourDayMatrix'),{type:'bar',data:{labels:dows,
+      datasets:hours.map((h,i)=>({label:h,data:vals.map(row=>row[i]),backgroundColor:colors[i],borderRadius:3}))},
+      options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:8},padding:6}},
+          tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'% eng'}}},
+        scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+          y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}}}}}});
+  });
+  once('raw-data',()=>{
+    const tbody=document.getElementById('rawDataBody');if(!tbody)return;
+    const pages=['Drinking Memes','Kelpie Daily','UK Jail News'];
+    const formats=['Photo','Video','Reel','Carousel','Text'];
+    const topics=['Humour','Community','Crime','News','Lifestyle'];
+    const emotions=['Joy','Anger','Surprise','Sadness','Love'];
+    const rows=[];
+    for(let i=0;i<30;i++){
+      const d=new Date(2026,3,1+i);
+      const date=d.toISOString().slice(0,10);
+      const page=pages[Math.floor(Math.random()*pages.length)];
+      const fmt=formats[Math.floor(Math.random()*formats.length)];
+      const reach=Math.round(5000+Math.random()*20000);
+      const imp=Math.round(reach*2.5);
+      const eng=Math.round(reach*(0.02+Math.random()*0.06));
+      const rate=(eng/reach*100).toFixed(2);
+      const likes=Math.round(eng*0.6);const comments=Math.round(eng*0.25);const shares=Math.round(eng*0.1);const saves=Math.round(eng*0.05);
+      const sent=(0.5+Math.random()*0.45).toFixed(2);
+      const vir=(0.3+Math.random()*0.65).toFixed(2);
+      const hr=[6,9,12,15,18,21][Math.floor(Math.random()*6)];
+      const row=[date,page,fmt,`${hr<10?'0':''}${hr}:00`,Math.round(5+Math.random()*30),Math.round(Math.random()*5),reach,imp,eng,rate,likes,comments,shares,saves,sent,emotions[Math.floor(Math.random()*emotions.length)],topics[Math.floor(Math.random()*topics.length)],vir,Math.random()>0.7?'Yes':'No'];
+      rows.push(row);
+      tbody.innerHTML+=`<tr>${row.map((v,ci)=>`<td class="${ci>=6&&ci<=17?'td-num':''}" style="font-size:10.5px">${v}</td>`).join('')}</tr>`;
+    }
+    window._CHART_DATA['rawDataTable']=[ ['Date','Page','Format','Posted At','Caption Words','Emojis','Reach','Impressions','Engagements','Eng Rate %','Likes','Comments','Shares','Saves','Sentiment','Emotion','Topic','Virality','Super Sharer Triggered'], ...rows];
+  });
+}
 
 <script>try{const u=JSON.parse(localStorage.getItem('artemis_app_session')||localStorage.getItem('artemis_session')||'null');if(u&&document.getElementById('sidebarUser'))document.getElementById('sidebarUser').textContent=u.name||u.full_name||u.email||u.username||'';}catch{}</script>
 <script>
