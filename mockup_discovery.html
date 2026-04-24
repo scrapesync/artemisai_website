@@ -482,6 +482,53 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 .kpi-card .accent{color:var(--accent)}
 .range-btn{padding:4px 10px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:6px;font-size:10px;color:var(--accent);font-family:'JetBrains Mono',monospace;cursor:pointer}
 .range-btn.active{background:var(--accent);color:var(--bg-primary);font-weight:600;border-color:var(--accent)}
+
+/* ═══ UNIVERSAL FIX ═══ */
+/* Ensure topbar tabs always flex horizontally */
+.topbar-tabs{display:flex!important;align-items:center!important;gap:0!important;flex-wrap:nowrap!important;overflow-x:auto!important}
+.topbar-tabs::-webkit-scrollbar{display:none}
+.topbar-left{display:flex!important;align-items:center!important;gap:16px!important;min-width:0!important;overflow:hidden!important}
+.topbar{height:56px!important;display:flex!important;align-items:center!important;padding:0 20px!important;border-bottom:1px solid var(--border)!important;background:var(--bg-secondary)!important;position:sticky!important;top:0!important;z-index:50!important;flex-shrink:0!important}
+/* Tab panel: only active shows */
+.tab-panel{display:none!important}
+.tab-panel.active{display:block!important}
+/* Consistent card style */
+.panel,.card{background:var(--bg-card)!important;border:1px solid var(--border)!important;border-radius:12px!important;padding:18px!important}
+.panel-header,.chart-card-header{display:flex!important;align-items:flex-start!important;justify-content:space-between!important;margin-bottom:14px!important}
+.panel-title,.card-title,.chart-card-title{font-size:13px!important;font-weight:600!important;color:var(--text-primary)!important;font-family:'Outfit',sans-serif!important}
+.panel-subtitle,.card-subtitle,.chart-card-sub{font-size:10.5px!important;color:var(--text-muted)!important;margin-top:2px!important;font-family:'JetBrains Mono',monospace!important}
+/* Data tables */
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.data-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-secondary)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);color:var(--text-primary)}
+.td-mono,.td-num{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:11px}
+.td-up{color:#34d399!important;font-family:'JetBrains Mono',monospace;font-size:11px}
+.td-dn{color:#f87171!important;font-family:'JetBrains Mono',monospace;font-size:11px}
+.td-clip{font-size:11px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* KPI cards */
+.kpi-card{background:var(--bg-card)!important;border:1px solid var(--border)!important;border-radius:12px!important;padding:16px!important}
+.kpi-value{font-size:28px!important;font-weight:800!important;letter-spacing:-0.03em!important;line-height:1!important;margin:8px 0 4px!important;font-family:'Outfit',sans-serif!important}
+.kpi-value.accent,.kpi-value.up{color:var(--accent)!important}
+.kpi-change{font-size:11px!important;font-family:'Outfit',sans-serif!important}
+.kpi-change.up{color:#34d399!important}
+.kpi-change.down{color:#f87171!important}
+/* Section labels */
+.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;padding-top:4px}
+/* Topbar tab active glow */
+.topbar-tab{padding:0 16px;height:56px;display:flex;align-items:center;font-size:12.5px;font-weight:400;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.topbar-tab:hover{color:var(--text-secondary)}
+.topbar-tab.active{color:var(--accent)!important;border-bottom-color:var(--accent)!important;font-weight:500!important}
+/* Sidebar label consistency */
+.nav-group-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:.14em;text-transform:uppercase;padding:14px 12px 6px;font-weight:600}
+/* Charts need a min-height to show */
+canvas{display:block!important}
+/* Content area */
+.content{flex:1;overflow-y:auto;padding:20px}
+.content::-webkit-scrollbar{width:5px}
+.content::-webkit-scrollbar-thumb{background:var(--border-accent);border-radius:3px}
+
 </style>
 </head>
 <body>
@@ -506,10 +553,17 @@ body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--te
 <!-- ═══ SIDEBAR ═══ -->
 <a href="admin_panel.html" class="m-admin-back"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>← Admin Panel</a>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
 <script>
 (function(){
 'use strict';
+
+function waitForChart(cb,n){
+  if(typeof Chart!=='undefined'){cb();return;}
+  if((n||0)>60){return;}
+  setTimeout(()=>waitForChart(cb,(n||0)+1),80);
+}
+
 
 // ─── DEFAULTS ───
 function setDef(){
@@ -691,27 +745,80 @@ function buildSidebarLists(){
 // ─── AFFINITY CHARTS ───
 function initAffinityCharts(){
   setDef();
-  initNetworkGraph();
-  buildSidebarLists();
+  buildMatchesList();
 
-  const oc=document.getElementById('overlapChart');
-  if(oc&&!oc._done){oc._done=true;
-    new Chart(oc,{type:'bar',data:{
+  // Simple bubble chart - x=overlap%, y=their followers, r=collab score
+  const abCtx=document.getElementById('affinityBubbleChart');
+  if(abCtx&&!abCtx._done){abCtx._done=true;
+    new Chart(abCtx,{type:'bubble',data:{datasets:[
+      {label:'Humour pages',data:[
+        {x:67,y:28.4,r:16,label:'Friday Night Chaos'},
+        {x:44,y:24,r:12,label:'Late Night Laughs'},
+        {x:42,y:16,r:9,label:'Mancunian Memes'}
+      ],backgroundColor:'rgba(0,212,170,0.5)',borderColor:'rgba(0,212,170,0.8)',borderWidth:1.5},
+      {label:'Community pages',data:[
+        {x:58,y:41.2,r:18,label:'Northern Banter HQ'},
+        {x:38,y:20,r:10,label:'British Pub Culture'}
+      ],backgroundColor:'rgba(99,102,241,0.5)',borderColor:'rgba(99,102,241,0.8)',borderWidth:1.5},
+      {label:'Crime/News pages',data:[
+        {x:55,y:12,r:11,label:'Prison Watch UK'},
+        {x:48,y:34.6,r:15,label:'True Crime Weekly'},
+        {x:38,y:18,r:9,label:'UK Rant Page'}
+      ],backgroundColor:'rgba(248,113,113,0.5)',borderColor:'rgba(248,113,113,0.8)',borderWidth:1.5}
+    ]},options:{responsive:true,maintainAspectRatio:true,
+      plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:9},padding:8}},
+        tooltip:{callbacks:{label:ctx=>{const d=ctx.raw;return `${d.label}: ${d.x}% overlap · ${d.y}K followers`;}}
+      }},
+      scales:{
+        x:{grid:{color:'rgba(255,255,255,0.04)'},title:{display:true,text:'Audience Overlap %',font:{size:10}},ticks:{callback:v=>v+'%',font:{size:9}},min:20,max:80},
+        y:{grid:{color:'rgba(255,255,255,0.04)'},title:{display:true,text:'Their Followers (K)',font:{size:10}},ticks:{callback:v=>v+'K',font:{size:9}}}}}}); }
+
+  // Overlap bar
+  const ocCtx=document.getElementById('overlapChart');
+  if(ocCtx&&!ocCtx._done){ocCtx._done=true;
+    new Chart(ocCtx,{type:'bar',data:{
       labels:['Friday Night Chaos','Northern Banter HQ','Prison Watch UK','British Pub Culture','True Crime Weekly','Late Night Laughs','UK Rant Page','Mancunian Memes'],
-      datasets:[{data:[67,58,55,52,48,44,38,42],backgroundColor:'rgba(0,212,170,0.7)',borderRadius:5,borderSkipped:false}]},
+      datasets:[{data:[67,58,55,52,48,44,38,42],
+        backgroundColor:'rgba(0,212,170,0.7)',borderRadius:5,borderSkipped:false}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:true,
         scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>v+'%',font:{size:9}},max:80},
           y:{grid:{display:false},ticks:{font:{size:9}}}}}}); }
 
-  const st=document.getElementById('sharedTopicsChart');
-  if(st&&!st._done){st._done=true;
-    new Chart(st,{type:'radar',data:{
+  // Shared topics radar
+  const stCtx=document.getElementById('sharedTopicsChart');
+  if(stCtx&&!stCtx._done){stCtx._done=true;
+    new Chart(stCtx,{type:'radar',data:{
       labels:['Humour','Crime','Community','Politics','Sport','Lifestyle','News'],
       datasets:[
-        {label:'Your followers',data:[78,62,54,38,44,42,36],backgroundColor:'rgba(0,212,170,0.12)',borderColor:'rgba(0,212,170,0.7)',borderWidth:2,pointRadius:3},
+        {label:'Your audience',data:[78,62,54,38,44,42,36],backgroundColor:'rgba(0,212,170,0.12)',borderColor:'rgba(0,212,170,0.7)',borderWidth:2,pointRadius:3,pointBackgroundColor:'#00d4aa'},
         {label:'Shared audience',data:[84,70,48,42,38,46,40],backgroundColor:'rgba(99,102,241,0.08)',borderColor:'rgba(99,102,241,0.6)',borderWidth:1.5,pointRadius:2,borderDash:[3,3]}]},
-      options:{responsive:true,plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:8,font:{size:9},padding:8}}},
+      options:{responsive:true,
+        plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:8,font:{size:9},padding:8}}},
         scales:{r:{grid:{color:'rgba(255,255,255,0.06)'},ticks:{display:false},pointLabels:{font:{size:9}},min:0,max:100}}}});}
+}
+
+function buildMatchesList(){
+  const el=document.getElementById('matchesList');
+  if(!el||el._done) return; el._done=true;
+  const matches=[
+    {name:'Friday Night Chaos',pct:67,followers:'28K',topic:'Humour',color:'#00d4aa'},
+    {name:'Northern Banter HQ',pct:58,followers:'41K',topic:'Community',color:'#a78bfa'},
+    {name:'Prison Watch UK',pct:55,followers:'12K',topic:'Crime',color:'#f87171'},
+    {name:'British Pub Culture',pct:52,followers:'20K',topic:'Lifestyle',color:'#fbbf24'},
+    {name:'True Crime Weekly',pct:48,followers:'35K',topic:'Crime',color:'#f87171'},
+  ];
+  matches.forEach(m=>{
+    el.innerHTML+=`<div style="padding:9px 0;border-bottom:1px solid var(--border)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+        <div style="font-size:12px;font-weight:500">${m.name}</div>
+        <div style="font-size:12px;font-family:'JetBrains Mono',monospace;color:${m.color};font-weight:600">${m.pct}%</div>
+      </div>
+      <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-bottom:5px">
+        <div style="width:${m.pct}%;height:100%;background:${m.color};opacity:0.7;border-radius:2px"></div>
+      </div>
+      <div style="font-size:10px;color:var(--text-muted)">${m.followers} followers · ${m.topic}</div>
+    </div>`;
+  });
 }
 
 // ─── COLLAB CHARTS ───
@@ -833,7 +940,7 @@ function initChartsForTab(tid){
 
 document.addEventListener('DOMContentLoaded',function(){
   initTabs();
-  setTimeout(initAffinityCharts, 150);
+  waitForChart(initAffinityCharts);
 });
 })();
 </script>
@@ -845,7 +952,7 @@ document.addEventListener('DOMContentLoaded',function(){
   </a>
   <nav class="sidebar-nav">
     <div class="nav-group-label">For You</div><a href="mockup_feed.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Feed</a>
-    <div class="nav-group-label">Advanced Analytics</div><a href="index.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a>
+    <div class="nav-group-label">Metrics Centre</div><a href="index.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</a>
     <a href="mockup_dashboard.html" class="nav-item ">
       <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Dashboard</a>
     <a href="mockup_discovery.html" class="nav-item active">
@@ -902,52 +1009,46 @@ document.addEventListener('DOMContentLoaded',function(){
 
     <!-- ══ AFFINITY MAP TAB ══ -->
     <div class="tab-panel active" id="panel-affinity">
-      <div class="section-label">AFFINITY MAP — PAGE NETWORK VISUALISATION</div>
+      <div class="section-label">AFFINITY MAP — PAGE NETWORK</div>
 
-      <div style="display:grid;grid-template-columns:1fr 320px;gap:16px;margin-bottom:16px">
-        <!-- Node graph canvas -->
-        <div class="panel" style="padding:0;overflow:hidden;position:relative;min-height:520px">
-          <div style="padding:14px 18px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
-            <div>
-              <div class="panel-title">Page Affinity Network</div>
-              <div class="panel-subtitle">Node size = follower count · Edge thickness = audience overlap % · Hover for details</div>
-            </div>
-            <div style="display:flex;gap:6px">
-              <button onclick="resetGraph()" style="font-size:10px;padding:4px 10px;border-radius:6px;border:1px solid var(--border-accent);background:transparent;color:var(--accent);cursor:pointer;font-family:inherit">Reset</button>
-              <button onclick="toggleLabels()" style="font-size:10px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-family:inherit">Labels</button>
-            </div>
+      <!-- Summary KPIs -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px">
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">YOUR PAGES</div><div class="kpi-value accent">3</div><div style="font-size:11px;color:var(--text-muted)">Connected</div></div>
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">AFFINITY MATCHES</div><div class="kpi-value">24</div><div style="font-size:11px;color:#34d399">Above 40% overlap</div></div>
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">TOP OVERLAP</div><div class="kpi-value accent">67%</div><div style="font-size:11px;color:var(--text-muted)">Friday Night Chaos</div></div>
+        <div class="kpi-card" style="text-align:center"><div style="font-size:10px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">POTENTIAL REACH</div><div class="kpi-value" style="color:#a78bfa">68K</div><div style="font-size:11px;color:#34d399">From top 5 collabs</div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-bottom:16px">
+        <!-- Visual affinity map - clean bubble chart -->
+        <div class="panel">
+          <div class="panel-header">
+            <div><div class="panel-title">Audience Overlap — Visual Map</div><div class="panel-subtitle">Bubble size = their followers · Position = overlap %</div></div>
           </div>
-          <canvas id="networkCanvas" style="width:100%;display:block"></canvas>
-          <div id="nodeTooltip" style="position:absolute;display:none;background:#0f1729;border:1px solid rgba(0,212,170,0.3);border-radius:8px;padding:10px 14px;font-size:11px;pointer-events:none;z-index:10;min-width:160px"></div>
+          <canvas id="affinityBubbleChart" height="240"></canvas>
         </div>
 
-        <!-- Sidebar: top matches -->
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div class="panel">
-            <div class="panel-header"><div><div class="panel-title">Your Pages</div><div class="panel-subtitle">Currently tracking</div></div></div>
-            <div id="myPagesList"></div>
-          </div>
-          <div class="panel" style="flex:1">
-            <div class="panel-header"><div><div class="panel-title">Top Affinity Matches</div><div class="panel-subtitle">Sorted by overlap score</div></div></div>
-            <div id="topMatchesList"></div>
-          </div>
+        <!-- Top matches list -->
+        <div class="panel">
+          <div class="panel-header"><div><div class="panel-title">Top Affinity Matches</div><div class="panel-subtitle">% of your followers also follow them</div></div></div>
+          <div id="matchesList" style="margin-top:4px"></div>
         </div>
       </div>
 
-      <!-- Affinity score breakdown chart -->
+      <!-- Overlap bar + shared topics -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
         <div class="panel">
-          <div class="panel-header"><div><div class="panel-title">Audience Overlap — Top 8 Pages</div><div class="panel-subtitle">% of your followers also follow them</div></div></div>
-          <canvas id="overlapChart" height="160"></canvas>
+          <div class="panel-header"><div><div class="panel-title">Audience Overlap by Page</div><div class="panel-subtitle">% of your followers who also follow each page</div></div></div>
+          <canvas id="overlapChart" height="180"></canvas>
         </div>
         <div class="panel">
-          <div class="panel-header"><div><div class="panel-title">Shared Audience by Topic</div><div class="panel-subtitle">What interests your overlapping followers</div></div></div>
-          <canvas id="sharedTopicsChart" height="160"></canvas>
+          <div class="panel-header"><div><div class="panel-title">Shared Interest Topics</div><div class="panel-subtitle">What your overlapping audience cares about</div></div></div>
+          <canvas id="sharedTopicsChart" height="180"></canvas>
         </div>
       </div>
     </div>
 
-    <!-- ══ COLLABORATIONS TAB ══ -->
+<!-- ══ COLLABORATIONS TAB ══ -->
     <div class="tab-panel" id="panel-collabs">
       <div class="section-label">COLLABORATION OPPORTUNITIES</div>
 
@@ -1127,6 +1228,7 @@ function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
 })();
 </script>
 <nav class="m-bottom-nav"><a href="mockup_dashboard.html" class="active"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</a><a href="mockup_predictions.html"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Predict</a><a href="mockup_audience.html"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100 8"/></svg>Audience</a><a href="mockup_alerts.html"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>Alerts</a><a href="mockup_arte.html"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Art-E</a></nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </body>
 <script>
 // ═══ VIEW TOGGLE ═══
