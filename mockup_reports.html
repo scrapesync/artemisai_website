@@ -154,7 +154,7 @@ textarea.form-input{min-height:80px;resize:vertical}
    Pattern: sidebar hidden → full-width content → bottom nav
    ───────────────────────────────────────────────────────── */
 
-/* Bottom navigation bar — hidden on desktop, shown on mobile */
+
 .m-bottom-nav{
   display:none;
   position:fixed;bottom:0;left:0;right:0;z-index:500;
@@ -194,34 +194,10 @@ textarea.form-input{min-height:80px;resize:vertical}
 .m-admin-back svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
 /* Mobile page tabs — horizontal scroll strip */
-.m-page-tabs{
-  display:none;
-  overflow-x:auto;-webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
-  padding:8px 14px;gap:7px;
-  background:var(--bg-secondary,#0c1221);
-  border-bottom:1px solid rgba(255,255,255,.05);
-  flex-shrink:0;
-}
+
 .m-page-tabs::-webkit-scrollbar{display:none}
-.m-page-tabs button{
-  flex-shrink:0;
-  padding:6px 14px;
-  border-radius:7px;
-  border:1px solid rgba(255,255,255,.1);
-  background:transparent;
-  color:rgba(255,255,255,.45);
-  font-family:'JetBrains Mono',monospace;font-size:10px;
-  cursor:pointer;white-space:nowrap;
-  transition:all .18s;
-  -webkit-tap-highlight-color:transparent;
-  min-height:32px;
-}
-.m-page-tabs button.active{
-  border-color:var(--accent,#00d4aa);
-  color:var(--accent,#00d4aa);
-  background:rgba(0,212,170,.08);
-}
+
+
 
 @media(max-width:768px){
   /* Core layout */
@@ -240,7 +216,7 @@ textarea.form-input{min-height:80px;resize:vertical}
     position:sticky!important;top:0!important;z-index:100!important;
   }
   .topbar-title{font-size:15px!important;font-weight:600!important}
-  .topbar-tabs{display:none!important} /* replaced by .m-page-tabs */
+  /* topbar tabs: handled by design system */
   .topbar-right > *:not(.avatar):not(.page-selector){
     display:none!important;
   }
@@ -253,7 +229,7 @@ textarea.form-input{min-height:80px;resize:vertical}
   /* Mobile elements: show */
   .m-bottom-nav{display:flex!important}
   .m-admin-back{display:flex!important}
-  .m-page-tabs{display:flex!important}
+  
   
   /* Content area */
   .content{
@@ -407,54 +383,10 @@ textarea.form-input{min-height:80px;resize:vertical}
 .card-title{font-size:13px;font-weight:600;margin-bottom:3px}
 .card-subtitle{font-size:10.5px;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
 
-/* ═══ UNIVERSAL FIX ═══ */
-/* Ensure topbar tabs always flex horizontally */
-.topbar-tabs{display:flex!important;align-items:center!important;gap:0!important;flex-wrap:nowrap!important;overflow-x:auto!important}
-.topbar-tabs::-webkit-scrollbar{display:none}
-.topbar-left{display:flex!important;align-items:center!important;gap:16px!important;min-width:0!important;overflow:hidden!important}
-.topbar{height:56px!important;display:flex!important;align-items:center!important;padding:0 20px!important;border-bottom:1px solid var(--border)!important;background:var(--bg-secondary)!important;position:sticky!important;top:0!important;z-index:50!important;flex-shrink:0!important}
-/* Tab panel: only active shows */
-.tab-panel{display:none!important}
-.tab-panel.active{display:block!important}
-/* Consistent card style */
-.panel,.card{background:var(--bg-card)!important;border:1px solid var(--border)!important;border-radius:12px!important;padding:18px!important}
-.panel-header,.chart-card-header{display:flex!important;align-items:flex-start!important;justify-content:space-between!important;margin-bottom:14px!important}
-.panel-title,.card-title,.chart-card-title{font-size:13px!important;font-weight:600!important;color:var(--text-primary)!important;font-family:'Outfit',sans-serif!important}
-.panel-subtitle,.card-subtitle,.chart-card-sub{font-size:10.5px!important;color:var(--text-muted)!important;margin-top:2px!important;font-family:'JetBrains Mono',monospace!important}
-/* Data tables */
-.data-table{width:100%;border-collapse:collapse;font-size:12px}
-.data-table th{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
-.data-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-secondary)}
-.data-table tr:last-child td{border-bottom:none}
-.data-table tr:hover td{background:rgba(255,255,255,0.02);color:var(--text-primary)}
-.td-mono,.td-num{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:11px}
-.td-up{color:#34d399!important;font-family:'JetBrains Mono',monospace;font-size:11px}
-.td-dn{color:#f87171!important;font-family:'JetBrains Mono',monospace;font-size:11px}
-.td-clip{font-size:11px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-/* KPI cards */
-.kpi-card{background:var(--bg-card)!important;border:1px solid var(--border)!important;border-radius:12px!important;padding:16px!important}
-.kpi-value{font-size:28px!important;font-weight:800!important;letter-spacing:-0.03em!important;line-height:1!important;margin:8px 0 4px!important;font-family:'Outfit',sans-serif!important}
-.kpi-value.accent,.kpi-value.up{color:var(--accent)!important}
-.kpi-change{font-size:11px!important;font-family:'Outfit',sans-serif!important}
-.kpi-change.up{color:#34d399!important}
-.kpi-change.down{color:#f87171!important}
-/* Section labels */
-.section-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;padding-top:4px}
-/* Topbar tab active glow */
-.topbar-tab{padding:0 16px;height:56px;display:flex;align-items:center;font-size:12.5px;font-weight:400;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;flex-shrink:0}
-.topbar-tab:hover{color:var(--text-secondary)}
-.topbar-tab.active{color:var(--accent)!important;border-bottom-color:var(--accent)!important;font-weight:500!important}
-/* Sidebar label consistency */
-.nav-group-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:.14em;text-transform:uppercase;padding:14px 12px 6px;font-weight:600}
-/* Charts need a min-height to show */
-canvas{display:block!important}
-/* Content area */
-.content{flex:1;overflow-y:auto;padding:20px}
-.content::-webkit-scrollbar{width:5px}
-.content::-webkit-scrollbar-thumb{background:var(--border-accent);border-radius:3px}
 
 </style>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
 
