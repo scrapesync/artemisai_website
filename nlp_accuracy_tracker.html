@@ -185,6 +185,11 @@ body{display:flex;flex-direction:column;min-height:100vh}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .card,.kpi,.form-section,.task-card{animation:fadeUp .25s ease both}
+
+.row-edit-btn{font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid rgba(0,212,170,0.25);background:transparent;color:#00d4aa;cursor:pointer;font-family:'Outfit',sans-serif;margin-right:4px;transition:all .15s}
+.row-edit-btn:hover{background:rgba(0,212,170,0.1);border-color:rgba(0,212,170,0.5)}
+.row-del-btn{font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid rgba(248,113,113,0.2);background:transparent;color:#f87171;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s}
+.row-del-btn:hover{background:rgba(248,113,113,0.12);border-color:rgba(248,113,113,0.5)}
 </style>
 </head>
 <body>
@@ -287,7 +292,7 @@ body{display:flex;flex-direction:column;min-height:100vh}
           </div>
         </div>
       </div>
-      <div style="overflow-x:auto">
+      <div style="overflow-x:auto;max-height:420px;overflow-y:auto">
         <table class="acc-table" id="accTable">
           <thead>
             <tr>
@@ -302,7 +307,7 @@ body{display:flex;flex-direction:column;min-height:100vh}
               <th>vs Baseline</th>
               <th>Benchmark</th>
               <th>Notes</th>
-              <th style="width:100px"></th>
+              <th style="width:100px;position:sticky;right:0;background:var(--card)"></th>
             </tr>
           </thead>
           <tbody id="tableBody"></tbody>
@@ -391,27 +396,27 @@ body{display:flex;flex-direction:column;min-height:100vh}
     </div>
 
     <div style="background:var(--bg3);border-radius:10px;padding:14px;margin-bottom:14px">
-      <div style="font-size:10px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px">F1 Scores — leave blank if not yet evaluated</div>
+      <div style="font-size:10px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px">F1 Scores as % (0–100) — leave blank if not yet evaluated</div>
       <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
         <div class="form-group">
           <label style="color:#00d4aa">Sentiment</label>
-          <input type="number" id="f-sentiment" min="0" max="1" step="0.001" placeholder="0.000">
+          <input type="number" id="f-sentiment" min="0" max="100" step="0.1" placeholder="e.g. 80.4">
         </div>
         <div class="form-group">
           <label style="color:#a78bfa">Emotion</label>
-          <input type="number" id="f-emotion" min="0" max="1" step="0.001" placeholder="0.000">
+          <input type="number" id="f-emotion" min="0" max="100" step="0.1" placeholder="e.g. 80.4">
         </div>
         <div class="form-group">
           <label style="color:#60a5fa">Topic</label>
-          <input type="number" id="f-topic" min="0" max="1" step="0.001" placeholder="0.000">
+          <input type="number" id="f-topic" min="0" max="100" step="0.1" placeholder="e.g. 80.4">
         </div>
         <div class="form-group">
           <label style="color:#f87171">Intent</label>
-          <input type="number" id="f-intent" min="0" max="1" step="0.001" placeholder="0.000">
+          <input type="number" id="f-intent" min="0" max="100" step="0.1" placeholder="e.g. 80.4">
         </div>
         <div class="form-group">
           <label style="color:#34d399">Toxicity</label>
-          <input type="number" id="f-toxicity" min="0" max="1" step="0.001" placeholder="0.000">
+          <input type="number" id="f-toxicity" min="0" max="100" step="0.1" placeholder="e.g. 80.4">
         </div>
       </div>
     </div>
@@ -473,7 +478,7 @@ const CONFUSION=[
 function save(){ localStorage.setItem('artemis_nlp_entries',JSON.stringify(ENTRIES)); }
 function avgF1(e){ const v=TASKS.map(t=>e[t]).filter(x=>x!=null&&!isNaN(x)); return v.length?v.reduce((a,b)=>a+b)/v.length:null; }
 function sc(v){ if(v==null)return'muted'; if(v>=0.80)return'green'; if(v>=0.65)return'amber'; return'red'; }
-function fmtV(v){ if(v==null)return'<span style="color:var(--text3)">—</span>'; const cl=sc(v); const cols={green:'#34d399',amber:'#fbbf24',red:'#f87171',muted:'#4a5568'}; return`<span style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px;color:${cols[cl]}">${v.toFixed(3)}</span>`; }
+function fmtV(v){ if(v==null)return'<span style="color:var(--text3)">—</span>'; const cl=sc(v); const cols={green:'#34d399',amber:'#fbbf24',red:'#f87171',muted:'#4a5568'}; return`<span style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px;color:${cols[cl]}">${(v*100).toFixed(1)}%</span>`; }
 function badgeCol(v){ const m=v.toLowerCase(); if(m.includes('claude'))return'#00d4aa'; if(m.includes('deepseek'))return'#a78bfa'; if(m.includes('sprint 3')||m.includes('baseline'))return'#7b8ba8'; if(m.includes('target'))return'#34d399'; if(m.includes('v1'))return'#fbbf24'; if(m.includes('v2')||m.includes('v3'))return'#60a5fa'; return'#7b8ba8'; }
 
 // ── TABLE ──
@@ -483,7 +488,7 @@ function renderTable(){
   tbody.innerHTML=ENTRIES.map(e=>{
     const avg=avgF1(e); const diff=avg!=null&&baseAvg?(avg-baseAvg):null;
     const bc=badgeCol(e.version);
-    const diffHtml=diff!=null?`<span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:${diff>=0?'#34d399':'#f87171'}">${diff>=0?'+':''}${diff.toFixed(3)}</span>`:'<span style="color:var(--text3)">—</span>';
+    const diffHtml=diff!=null?`<span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:${diff>=0?'#34d399':'#f87171'}">${diff>=0?'+':''}${(diff*100).toFixed(1)}pp</span>`:'<span style="color:var(--text3)">—</span>';
     const trendHtml=avg!=null?trendArrow(e):'';
     return`<tr style="${e.isTarget?'opacity:.7':e.pending?'opacity:.75':''}">
       <td><span style="font-size:10px;padding:2px 9px;border-radius:4px;border:1px solid ${bc}33;background:${bc}11;color:${bc};font-family:'JetBrains Mono',monospace;font-weight:600">${e.version}</span></td>
@@ -493,14 +498,14 @@ function renderTable(){
       <td>${fmtV(e.Topic)}</td>
       <td>${fmtV(e.Intent)}</td>
       <td>${fmtV(e.Toxicity)}</td>
-      <td style="white-space:nowrap">${avg!=null?`<span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:${avg>=0.8?'#34d399':avg>=0.65?'#fbbf24':'#f87171'}">${avg.toFixed(3)}</span>`:'<span style="color:var(--text3)">—</span>'} ${trendHtml}</td>
+      <td style="white-space:nowrap;position:sticky;right:0;background:var(--card);padding-left:8px">${avg!=null?`<span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:${avg>=0.8?'#34d399':avg>=0.65?'#fbbf24':'#f87171'}">${(avg*100).toFixed(1)}%</span>`:'<span style="color:var(--text3)">—</span>'} ${trendHtml}</td>
       <td>${diffHtml}</td>
       <td style="font-size:10.5px;color:var(--text2)">${e.benchmark||'—'}</td>
       <td style="font-size:10.5px;color:var(--text2);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${e.notes||''}">${e.notes||'—'}</td>
-      <td style="white-space:nowrap">
+      <td style="white-space:nowrap;position:sticky;right:0;background:var(--card);padding-left:8px">
         ${e.isTarget?'':`
-        <button onclick="openEdit(${e.id})" style="font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;margin-right:4px;transition:all .15s" onmouseover="this.style.borderColor='rgba(0,212,170,0.4)';this.style.color='#00d4aa'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">Edit</button>
-        <button onclick="deleteById(${e.id})" style="font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid rgba(248,113,113,0.2);background:transparent;color:#f87171;cursor:pointer;font-family:inherit;transition:all .15s" onmouseover="this.style.background='rgba(248,113,113,0.1)'" onmouseout="this.style.background='transparent'">Del</button>`}
+        <button onclick="openEdit(${e.id})" class="row-edit-btn">✎ Edit</button>
+        <button onclick="deleteById(${e.id})" class="row-del-btn">✕</button>`}
       </td>
     </tr>`;
   }).join('');
@@ -525,7 +530,7 @@ function renderKPIs(){
     const el=document.getElementById('kpi-'+t.toLowerCase());
     const ml=document.getElementById('kpi-'+t.toLowerCase()+'-model');
     const bar=document.getElementById('kbar-'+t.toLowerCase());
-    if(el)el.textContent=best[t].toFixed(3);
+    if(el)el.textContent=(best[t]*100).toFixed(1)+"%";
     if(ml)ml.textContent=best.version+' · best';
     if(bar)bar.style.width=(best[t]*100)+'%';
   });
@@ -543,7 +548,7 @@ Chart.defaults.plugins.tooltip.padding=12;
 Chart.defaults.plugins.tooltip.titleColor='#e8ecf4';
 Chart.defaults.plugins.tooltip.bodyColor='#9aa5b8';
 Chart.defaults.plugins.tooltip.titleFont={size:11,weight:'600',family:"'JetBrains Mono',monospace"};
-Chart.defaults.plugins.tooltip.callbacks={label:ctx=>{const v=ctx.parsed.y;if(v==null)return'';const ds=ctx.dataset.label||'';return ds+': '+(typeof v==='number'?v.toFixed(3):v);}};
+Chart.defaults.plugins.tooltip.callbacks={label:ctx=>{const v=ctx.parsed.y;if(v==null)return'';const ds=ctx.dataset.label||'';if(ds==='Target 0.80'||ds==='Target'||ds==='Sprint 4 target')return ds+': '+(v*100).toFixed(0)+'%';return ds+(ds?': ':'')+(typeof v==='number'?(v*100).toFixed(1)+'%':v);}};
 
 let _charts={};
 function mkChart(id,cfg){if(_charts[id])_charts[id].destroy();const c=document.getElementById(id);if(c)_charts[id]=new Chart(c,cfg);}
@@ -570,7 +575,7 @@ function buildCharts(){
     plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10},padding:10}}},
     scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
       y:{grid:{color:'rgba(255,255,255,0.05)'},min:0,max:1.05,
-        ticks:{callback:v=>v.toFixed(2),font:{size:9}},
+        ticks:{callback:v=>(v*100).toFixed(0)+'%',font:{size:9}},
         title:{display:true,text:'Macro F1',font:{size:9}}}}}});
 
   // ── BAR: avg F1 per version (all entries inc pending) with change arrows ──
@@ -591,7 +596,7 @@ function buildCharts(){
     plugins:{legend:{position:'top',labels:{boxWidth:8,font:{size:9},padding:10}},
       tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+(ctx.parsed.y!=null?ctx.parsed.y.toFixed(3):'—')}}},
     scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:20}},
-      y:{grid:{color:'rgba(255,255,255,0.05)'},min:0,max:1.05,ticks:{callback:v=>v.toFixed(2),font:{size:9}}}}}});
+      y:{grid:{color:'rgba(255,255,255,0.05)'},min:0,max:1.05,ticks:{callback:v=>(v*100).toFixed(0)+'%',font:{size:9}}}}}});
 
   // ── RADAR: gate progress ──
   const best=Object.fromEntries(TASKS.map(t=>[t,Math.max(...ENTRIES.filter(e=>!e.isTarget&&e[t]!=null).map(e=>e[t]).filter(x=>!isNaN(x)))||0]));
@@ -609,8 +614,8 @@ function buildCharts(){
     const col=v>=TARGET[t]?'#34d399':v>=0.65?'#fbbf24':'#f87171';
     return`<div style="background:var(--bg3);border-radius:8px;padding:8px 10px">
       <div style="font-size:9px;color:${col};font-family:'JetBrains Mono',monospace;margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em">${t}</div>
-      <div style="font-size:18px;font-weight:700;font-family:'JetBrains Mono',monospace;color:${col}">${v.toFixed(3)}</div>
-      <div style="font-size:9px;color:var(--text2);margin-top:2px">Target ${TARGET[t].toFixed(2)} · ${pct}%</div>
+      <div style="font-size:18px;font-weight:700;font-family:'JetBrains Mono',monospace;color:${col}">${(v*100).toFixed(1)}%</div>
+      <div style="font-size:9px;color:var(--text2);margin-top:2px">Target ${(TARGET[t]*100).toFixed(0)}% · ${pct}% there</div>
     </div>`;
   }).join('');
 }
@@ -643,7 +648,7 @@ function renderLog(){
       <div style="flex:1;min-width:0">
         <div style="display:flex;justify-content:space-between;align-items:center">
           <span style="font-size:12px;font-weight:600">${e.version}</span>
-          ${avg!=null?`<span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:${avg>=0.8?'#34d399':avg>=0.65?'#fbbf24':'#f87171'}">${avg.toFixed(3)}</span>`:''}
+          ${avg!=null?`<span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:${avg>=0.8?'#34d399':avg>=0.65?'#fbbf24':'#f87171'}">${(avg*100).toFixed(1)}%</span>`:''}
         </div>
         <div style="font-size:10.5px;color:var(--text2);font-family:'JetBrains Mono',monospace;margin-top:2px">${e.date||'Pending'} · ${e.benchmark||''}</div>
         <div style="font-size:11px;color:var(--text2);margin-top:3px;line-height:1.5">${e.desc||''}</div>
@@ -673,11 +678,11 @@ function openEdit(id){
   document.getElementById('f-version').value=e.version||'';
   document.getElementById('f-date').value=e.date||'';
   document.getElementById('f-desc').value=e.desc||'';
-  document.getElementById('f-sentiment').value=e.Sentiment!=null?e.Sentiment:'';
-  document.getElementById('f-emotion').value=e.Emotion!=null?e.Emotion:'';
-  document.getElementById('f-topic').value=e.Topic!=null?e.Topic:'';
-  document.getElementById('f-intent').value=e.Intent!=null?e.Intent:'';
-  document.getElementById('f-toxicity').value=e.Toxicity!=null?e.Toxicity:'';
+  document.getElementById('f-sentiment').value=e.Sentiment!=null?(e.Sentiment*100).toFixed(1):'';
+  document.getElementById('f-emotion').value=e.Emotion!=null?(e.Emotion*100).toFixed(1):'';
+  document.getElementById('f-topic').value=e.Topic!=null?(e.Topic*100).toFixed(1):'';
+  document.getElementById('f-intent').value=e.Intent!=null?(e.Intent*100).toFixed(1):'';
+  document.getElementById('f-toxicity').value=e.Toxicity!=null?(e.Toxicity*100).toFixed(1):'';
   document.getElementById('f-benchmark').value=e.benchmark||'vs Claude (97 posts)';
   document.getElementById('f-notes').value=e.notes||'';
   document.getElementById('addModal').classList.add('open');
@@ -688,7 +693,7 @@ document.getElementById('addModal').addEventListener('click',e=>{if(e.target===d
 
 function readForm(){
   const get=id=>document.getElementById(id).value.trim();
-  const num=id=>{const v=parseFloat(document.getElementById(id).value);return isNaN(v)?null:Math.max(0,Math.min(1,v));};
+  const num=id=>{const v=parseFloat(document.getElementById(id).value);return isNaN(v)?null:Math.max(0,Math.min(100,v))/100;};
   return{version:get('f-version'),date:get('f-date')||null,desc:get('f-desc'),
     Sentiment:num('f-sentiment'),Emotion:num('f-emotion'),Topic:num('f-topic'),Intent:num('f-intent'),Toxicity:num('f-toxicity'),
     benchmark:document.getElementById('f-benchmark').value,notes:get('f-notes')};
