@@ -302,6 +302,7 @@ body{display:flex;flex-direction:column;min-height:100vh}
               <th>vs Baseline</th>
               <th>Benchmark</th>
               <th>Notes</th>
+              <th style="width:100px"></th>
             </tr>
           </thead>
           <tbody id="tableBody"></tbody>
@@ -367,16 +368,16 @@ body{display:flex;flex-direction:column;min-height:100vh}
 
 </div><!-- end main -->
 
-<!-- ADD ENTRY MODAL -->
+<!-- EDIT / ADD MODAL -->
 <div class="modal-backdrop" id="addModal">
   <div class="modal">
-    <h3>Add Accuracy Entry</h3>
-    <div class="modal-sub">Enter the F1 scores after each fine-tuning run or evaluation</div>
+    <h3 id="modalTitle">Add Entry</h3>
+    <input type="hidden" id="f-edit-id">
 
-    <div class="form-grid">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
       <div class="form-group">
-        <label>Model Version / Name</label>
-        <input type="text" id="f-version" placeholder="e.g. Fine-tuned v1, DeepSeek V3…">
+        <label>Version Name *</label>
+        <input type="text" id="f-version" placeholder="e.g. Fine-tuned v1">
       </div>
       <div class="form-group">
         <label>Date</label>
@@ -384,274 +385,153 @@ body{display:flex;flex-direction:column;min-height:100vh}
       </div>
     </div>
 
-    <div style="font-size:10px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px">F1 Scores (0.000 – 1.000 · leave blank if not yet evaluated)</div>
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px">
-      <div class="form-group">
-        <label>Sentiment</label>
-        <input type="number" id="f-sentiment" min="0" max="1" step="0.001" placeholder="0.000">
-      </div>
-      <div class="form-group">
-        <label>Emotion</label>
-        <input type="number" id="f-emotion" min="0" max="1" step="0.001" placeholder="0.000">
-      </div>
-      <div class="form-group">
-        <label>Topic</label>
-        <input type="number" id="f-topic" min="0" max="1" step="0.001" placeholder="0.000">
-      </div>
-      <div class="form-group">
-        <label>Intent</label>
-        <input type="number" id="f-intent" min="0" max="1" step="0.001" placeholder="0.000">
-      </div>
-      <div class="form-group">
-        <label>Toxicity</label>
-        <input type="number" id="f-toxicity" min="0" max="1" step="0.001" placeholder="0.000">
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Description</label>
+      <input type="text" id="f-desc" placeholder="e.g. Fine-tuned on 2,545 DeepSeek labels">
+    </div>
+
+    <div style="background:var(--bg3);border-radius:10px;padding:14px;margin-bottom:14px">
+      <div style="font-size:10px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px">F1 Scores — leave blank if not yet evaluated</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
+        <div class="form-group">
+          <label style="color:#00d4aa">Sentiment</label>
+          <input type="number" id="f-sentiment" min="0" max="1" step="0.001" placeholder="0.000">
+        </div>
+        <div class="form-group">
+          <label style="color:#a78bfa">Emotion</label>
+          <input type="number" id="f-emotion" min="0" max="1" step="0.001" placeholder="0.000">
+        </div>
+        <div class="form-group">
+          <label style="color:#60a5fa">Topic</label>
+          <input type="number" id="f-topic" min="0" max="1" step="0.001" placeholder="0.000">
+        </div>
+        <div class="form-group">
+          <label style="color:#f87171">Intent</label>
+          <input type="number" id="f-intent" min="0" max="1" step="0.001" placeholder="0.000">
+        </div>
+        <div class="form-group">
+          <label style="color:#34d399">Toxicity</label>
+          <input type="number" id="f-toxicity" min="0" max="1" step="0.001" placeholder="0.000">
+        </div>
       </div>
     </div>
 
-    <div class="form-grid">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
       <div class="form-group">
         <label>Benchmark</label>
         <select id="f-benchmark">
-          <option value="vs Claude (97 posts)">vs Claude (97 posts)</option>
-          <option value="vs Rafeh GT (97 posts)">vs Rafeh GT (97 posts)</option>
-          <option value="vs self (97 posts)">vs self (97 posts)</option>
-          <option value="Sprint 4 gate">Sprint 4 gate</option>
-          <option value="Custom">Custom</option>
+          <option>vs Claude (97 posts)</option>
+          <option>vs Rafeh GT (97 posts)</option>
+          <option>vs self (97 posts)</option>
+          <option>Sprint 4 gate</option>
         </select>
       </div>
       <div class="form-group">
-        <label>Description</label>
-        <input type="text" id="f-desc" placeholder="e.g. Fine-tuned on 2,545 DeepSeek labels">
+        <label>Notes</label>
+        <input type="text" id="f-notes" placeholder="Key observations, dataset size…">
       </div>
     </div>
 
-    <div class="form-group">
-      <label>Notes</label>
-      <textarea id="f-notes" rows="2" style="resize:vertical" placeholder="Colab run, GPU, dataset size, key observations…"></textarea>
-    </div>
-
-    <div class="modal-footer">
-      <button class="btn ghost" onclick="closeAddModal()">Cancel</button>
-      <button class="btn primary" onclick="addEntry()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-        Save Entry
-      </button>
+    <div style="display:flex;gap:10px">
+      <button class="btn ghost" style="flex:1" onclick="closeModal()">Cancel</button>
+      <button id="deleteBtn" class="btn" style="flex:0;background:rgba(248,113,113,0.1);border-color:rgba(248,113,113,0.3);color:#f87171;display:none" onclick="deleteEntry()">Delete</button>
+      <button class="btn primary" style="flex:1" onclick="saveEntry()">Save Entry</button>
     </div>
   </div>
 </div>
 
+
 <script>
-// ═══════════════════════════════════════════════
-// DATA — seeded from the Excel spreadsheet
-// ═══════════════════════════════════════════════
 const TASKS = ['Sentiment','Emotion','Topic','Intent','Toxicity'];
-const TARGET = {Sentiment:0.80, Emotion:0.80, Topic:0.80, Intent:0.80, Toxicity:0.95};
+const TARGET = {Sentiment:0.80,Emotion:0.80,Topic:0.80,Intent:0.80,Toxicity:0.95};
+const TCOL = {Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#f87171',Toxicity:'#34d399'};
 
-let ENTRIES = JSON.parse(localStorage.getItem('artemis_nlp_entries') || 'null') || [
-  {
-    id:1, version:'NLP Sprint 3', date:'2025-03-01',
-    desc:'Base models — generic pre-trained, no fine-tuning',
-    Sentiment:0.567, Emotion:0.289, Topic:0.485, Intent:0.402, Toxicity:0.928,
-    benchmark:'vs Claude (97 posts)',
-    notes:'Baseline. cardiffnlp XLM-R (sentiment), DistilBERT (emotion), DeBERTa-v3 (topic/intent), Detoxify (toxicity)'
-  },
-  {
-    id:2, version:'DeepSeek V3', date:'2025-03-26',
-    desc:'DeepSeek V3 teacher model — all 5 tasks, 1 API call/post',
-    Sentiment:0.804, Emotion:0.742, Topic:0.753, Intent:0.722, Toxicity:0.948,
-    benchmark:'vs Claude (97 posts)',
-    notes:'Target ceiling for fine-tuning. Cost $0.000206/post. Knowledge distillation source.'
-  },
-  {
-    id:3, version:'Claude Sonnet', date:'2025-03-26',
-    desc:'Claude benchmark — ground truth proxy until Rafeh labels available',
-    Sentiment:1.0, Emotion:1.0, Topic:1.0, Intent:1.0, Toxicity:1.0,
-    benchmark:'vs self (97 posts)',
-    notes:'Self-reference benchmark. Will be replaced by Rafeh ground truth labels.'
-  },
-  {
-    id:4, version:'Fine-tuned v1', date:null,
-    desc:'XLM-R + DistilBERT + DeBERTa fine-tuned on 2,545 DeepSeek labels',
-    Sentiment:0.773, Emotion:0.593, Topic:null, Intent:null, Toxicity:null,
-    benchmark:'vs Rafeh GT (97 posts)',
-    notes:'Pending — run sentiment_finetune_v1.ipynb in Colab (T4 GPU)',
-    pending:true
-  },
-  {
-    id:5, version:'Fine-tuned v2', date:null,
-    desc:'v1 + Rafeh ground truth labels merged (high-priority examples)',
-    Sentiment:0.755, Emotion:0.524, Topic:null, Intent:null, Toxicity:null,
-    benchmark:'vs Rafeh GT (97 posts)',
-    notes:'Emotion improved from 52.4% → 69.3% in v3. Pending Rafeh validation files.',
-    pending:true
-  },
-  {
-    id:6, version:'Fine-tuned v3', date:null,
-    desc:'v2 + Q2 retrain with accumulated Tier 3 corrections',
-    Sentiment:0.726, Emotion:0.723, Topic:null, Intent:null, Toxicity:null,
-    benchmark:'vs Rafeh GT (97 posts)',
-    notes:'Q2 2026 quarterly retrain.',
-    pending:true
-  },
-  {
-    id:7, version:'Production Target', date:null,
-    desc:'Sprint 4 gate: Macro F1 ≥ 0.80, Human agreement ≥ 85%, Kappa ≥ 0.65',
-    Sentiment:0.80, Emotion:0.80, Topic:0.80, Intent:0.80, Toxicity:0.95,
-    benchmark:'Sprint 4 gate',
-    notes:'Target thresholds from ArtemisAI labelling strategy document.',
-    isTarget:true
-  }
+let ENTRIES = JSON.parse(localStorage.getItem('artemis_nlp_entries')||'null') || [
+  {id:1,version:'NLP Sprint 3',date:'2025-03-01',desc:'Base models — generic pre-trained, no fine-tuning',Sentiment:0.567,Emotion:0.289,Topic:0.485,Intent:0.402,Toxicity:0.928,benchmark:'vs Claude (97 posts)',notes:'Baseline. cardiffnlp XLM-R, DistilBERT, DeBERTa-v3, Detoxify'},
+  {id:2,version:'DeepSeek V3',date:'2025-03-26',desc:'DeepSeek V3 teacher — all 5 tasks, 1 API call/post',Sentiment:0.804,Emotion:0.742,Topic:0.753,Intent:0.722,Toxicity:0.948,benchmark:'vs Claude (97 posts)',notes:'Knowledge distillation source. Cost $0.000206/post.'},
+  {id:3,version:'Claude Sonnet',date:'2025-03-26',desc:'Ground truth proxy until Rafeh labels available',Sentiment:1.0,Emotion:1.0,Topic:1.0,Intent:1.0,Toxicity:1.0,benchmark:'vs self (97 posts)',notes:'Self-reference benchmark.'},
+  {id:4,version:'Fine-tuned v1',date:null,desc:'XLM-R + DistilBERT + DeBERTa on 2,545 DeepSeek labels',Sentiment:0.773,Emotion:0.593,Topic:null,Intent:null,Toxicity:null,benchmark:'vs Rafeh GT (97 posts)',notes:'Pending — run in Colab (T4 GPU)',pending:true},
+  {id:5,version:'Fine-tuned v2',date:null,desc:'v1 + Rafeh ground truth labels merged',Sentiment:0.755,Emotion:0.524,Topic:null,Intent:null,Toxicity:null,benchmark:'vs Rafeh GT (97 posts)',notes:'Emotion v2→v3: 52.4%→69.3%',pending:true},
+  {id:6,version:'Fine-tuned v3',date:null,desc:'v2 + Q2 retrain with Tier 3 corrections',Sentiment:0.726,Emotion:0.723,Topic:null,Intent:null,Toxicity:null,benchmark:'vs Rafeh GT (97 posts)',notes:'Q2 2026 quarterly retrain',pending:true},
+  {id:7,version:'Production Target',date:null,desc:'Sprint 4 gate: F1 ≥ 0.80, Agreement ≥ 85%',Sentiment:0.80,Emotion:0.80,Topic:0.80,Intent:0.80,Toxicity:0.95,benchmark:'Sprint 4 gate',notes:'Target thresholds from labelling strategy doc.',isTarget:true}
 ];
 
-const CONFUSION = [
-  {task:'Sentiment', pred:'neutral', correct:'positive', count:20, cause:'😂 emoji misread — NLP has no emoji signal', fixed:false},
-  {task:'Sentiment', pred:'negative', correct:'positive', count:6, cause:'Prison page name read as negative, content is humorous', fixed:false},
-  {task:'Sentiment', pred:'negative', correct:'neutral', count:5, cause:'NLP oversensitive to ? and CAPS words', fixed:false},
-  {task:'Sentiment', pred:'positive', correct:'negative', count:3, cause:'Sarcasm not detected (cool cool, saving now)', fixed:false},
-  {task:'Emotion', pred:'neutral', correct:'joy', count:17, cause:'😂 on short captions = joy, not neutral', fixed:false},
-  {task:'Emotion', pred:'anger', correct:'joy', count:7, cause:'Short captions mislabelled as anger — DistilBERT Twitter bias', fixed:false},
-  {task:'Emotion', pred:'anger', correct:'neutral', count:7, cause:'Anger model too sensitive on ambiguous short posts', fixed:false},
-  {task:'Emotion', pred:'joy', correct:'love', count:5, cause:'Long warm content (relationship advice, acts of kindness)', fixed:false},
-  {task:'Topic', pred:'Humour', correct:'Lifestyle', count:10, cause:'Drinking/food/relationship = Lifestyle, not Humour', fixed:false},
-  {task:'Topic', pred:'Humour', correct:'Crime', count:4, cause:'Prison page + real event = Crime, not Humour', fixed:false},
-  {task:'Topic', pred:'Entertainment', correct:'Humour', count:3, cause:'Celebrity/film = Entertainment; Humour = post IS the joke', fixed:false},
-  {task:'Intent', pred:'Announce', correct:'Inform', count:8, cause:'Announce = present tense now. Inform = past tense reporting', fixed:false},
+const CONFUSION=[
+  {task:'Sentiment',pred:'neutral',correct:'positive',count:20,cause:'😂 emoji misread — NLP has no emoji signal',fixed:false},
+  {task:'Sentiment',pred:'negative',correct:'positive',count:6,cause:'Prison page name read as negative, content is humorous',fixed:false},
+  {task:'Sentiment',pred:'negative',correct:'neutral',count:5,cause:'NLP oversensitive to ? and CAPS words',fixed:false},
+  {task:'Sentiment',pred:'positive',correct:'negative',count:3,cause:'Sarcasm not detected',fixed:false},
+  {task:'Emotion',pred:'neutral',correct:'joy',count:17,cause:'😂 on short captions = joy, not neutral',fixed:false},
+  {task:'Emotion',pred:'anger',correct:'joy',count:7,cause:'Short captions mislabelled as anger — DistilBERT Twitter bias',fixed:false},
+  {task:'Emotion',pred:'anger',correct:'neutral',count:7,cause:'Anger model too sensitive on ambiguous short posts',fixed:false},
+  {task:'Emotion',pred:'joy',correct:'love',count:5,cause:'Long warm content (relationship advice)',fixed:false},
+  {task:'Topic',pred:'Humour',correct:'Lifestyle',count:10,cause:'Drinking/food = Lifestyle, not Humour',fixed:false},
+  {task:'Topic',pred:'Humour',correct:'Crime',count:4,cause:'Prison page + real event = Crime',fixed:false},
+  {task:'Intent',pred:'Announce',correct:'Inform',count:8,cause:'Announce = present tense. Inform = past tense.',fixed:false},
 ];
 
-// ═══════════════════════════════════════════════
-// HELPERS
-// ═══════════════════════════════════════════════
-function save(){ localStorage.setItem('artemis_nlp_entries', JSON.stringify(ENTRIES)); }
+function save(){ localStorage.setItem('artemis_nlp_entries',JSON.stringify(ENTRIES)); }
+function avgF1(e){ const v=TASKS.map(t=>e[t]).filter(x=>x!=null&&!isNaN(x)); return v.length?v.reduce((a,b)=>a+b)/v.length:null; }
+function sc(v){ if(v==null)return'muted'; if(v>=0.80)return'green'; if(v>=0.65)return'amber'; return'red'; }
+function fmtV(v){ if(v==null)return'<span style="color:var(--text3)">—</span>'; const cl=sc(v); const cols={green:'#34d399',amber:'#fbbf24',red:'#f87171',muted:'#4a5568'}; return`<span style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px;color:${cols[cl]}">${v.toFixed(3)}</span>`; }
+function badgeCol(v){ const m=v.toLowerCase(); if(m.includes('claude'))return'#00d4aa'; if(m.includes('deepseek'))return'#a78bfa'; if(m.includes('sprint 3')||m.includes('baseline'))return'#7b8ba8'; if(m.includes('target'))return'#34d399'; if(m.includes('v1'))return'#fbbf24'; if(m.includes('v2')||m.includes('v3'))return'#60a5fa'; return'#7b8ba8'; }
 
-function avgF1(e){
-  const vals = TASKS.map(t=>e[t]).filter(v=>v!==null&&v!==undefined&&!isNaN(v));
-  return vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : null;
-}
-
-function baselineAvg(){
-  const b = ENTRIES.find(e=>e.version==='NLP Sprint 3');
-  return b ? avgF1(b) : 0;
-}
-
-function scoreClass(v){
-  if(v===null||v===undefined) return 'muted';
-  if(v>=0.80) return 'green';
-  if(v>=0.65) return 'amber';
-  return 'red';
-}
-
-function fmtScore(v){
-  if(v===null||v===undefined) return '<span class="score muted">—</span>';
-  const cls = scoreClass(v);
-  return `<span class="score ${cls}"><span class="score-dot ${cls}"></span>${v.toFixed ? v.toFixed(3) : v}</span>`;
-}
-
-function modelBadgeClass(v){
-  if(v.toLowerCase().includes('claude')) return 'claude';
-  if(v.toLowerCase().includes('deepseek')) return 'deepseek';
-  if(v.toLowerCase().includes('sprint 3')||v.toLowerCase().includes('baseline')||v.toLowerCase().includes('nlp sprint')) return 'baseline';
-  if(v.toLowerCase().includes('v1')) return 'v1';
-  if(v.toLowerCase().includes('v2')||v.toLowerCase().includes('v3')) return 'v2';
-  if(v.toLowerCase().includes('target')) return 'target';
-  return 'pending';
-}
-
-// ═══════════════════════════════════════════════
-// RENDER TABLE
-// ═══════════════════════════════════════════════
+// ── TABLE ──
 function renderTable(){
-  const tbody = document.getElementById('tableBody');
-  const baseline = baselineAvg();
-  tbody.innerHTML = ENTRIES.map(e => {
-    const avg = avgF1(e);
-    const diff = avg!==null && baseline ? (avg - baseline) : null;
-    const diffStr = diff!==null ? `<span class="score ${diff>=0?'green':'red'}">${diff>=0?'+':''}${diff.toFixed(3)}</span>` : '<span class="score muted">—</span>';
-    return `<tr class="${e.pending?'pending':''}${e.isTarget?' pending':''}">
-      <td><span class="model-badge ${modelBadgeClass(e.version)}">${e.version}</span></td>
-      <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2)">${e.date||'<span style="color:var(--text3)">Pending</span>'}</td>
-      <td>${fmtScore(e.Sentiment)}</td>
-      <td>${fmtScore(e.Emotion)}</td>
-      <td>${fmtScore(e.Topic)}</td>
-      <td>${fmtScore(e.Intent)}</td>
-      <td>${fmtScore(e.Toxicity)}</td>
-      <td>${avg!==null ? `<span class="score ${scoreClass(avg)}" style="font-size:13px;font-weight:700">${avg.toFixed(3)}</span>` : '<span class="score muted">—</span>'}</td>
-      <td>${diffStr}</td>
+  const tbody=document.getElementById('tableBody');
+  const base=ENTRIES.find(e=>e.id===1); const baseAvg=base?avgF1(base):0;
+  tbody.innerHTML=ENTRIES.map(e=>{
+    const avg=avgF1(e); const diff=avg!=null&&baseAvg?(avg-baseAvg):null;
+    const bc=badgeCol(e.version);
+    const diffHtml=diff!=null?`<span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:${diff>=0?'#34d399':'#f87171'}">${diff>=0?'+':''}${diff.toFixed(3)}</span>`:'<span style="color:var(--text3)">—</span>';
+    const trendHtml=avg!=null?trendArrow(e):'';
+    return`<tr style="${e.isTarget?'opacity:.7':e.pending?'opacity:.75':''}">
+      <td><span style="font-size:10px;padding:2px 9px;border-radius:4px;border:1px solid ${bc}33;background:${bc}11;color:${bc};font-family:'JetBrains Mono',monospace;font-weight:600">${e.version}</span></td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2);white-space:nowrap">${e.date||'<span style="color:var(--text3)">Pending</span>'}</td>
+      <td>${fmtV(e.Sentiment)}</td>
+      <td>${fmtV(e.Emotion)}</td>
+      <td>${fmtV(e.Topic)}</td>
+      <td>${fmtV(e.Intent)}</td>
+      <td>${fmtV(e.Toxicity)}</td>
+      <td style="white-space:nowrap">${avg!=null?`<span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:${avg>=0.8?'#34d399':avg>=0.65?'#fbbf24':'#f87171'}">${avg.toFixed(3)}</span>`:'<span style="color:var(--text3)">—</span>'} ${trendHtml}</td>
+      <td>${diffHtml}</td>
       <td style="font-size:10.5px;color:var(--text2)">${e.benchmark||'—'}</td>
-      <td style="font-size:10.5px;color:var(--text2);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${e.notes||''}">${e.notes||'—'}</td>
+      <td style="font-size:10.5px;color:var(--text2);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${e.notes||''}">${e.notes||'—'}</td>
+      <td style="white-space:nowrap">
+        ${e.isTarget?'':`
+        <button onclick="openEdit(${e.id})" style="font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-family:inherit;margin-right:4px;transition:all .15s" onmouseover="this.style.borderColor='rgba(0,212,170,0.4)';this.style.color='#00d4aa'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">Edit</button>
+        <button onclick="deleteById(${e.id})" style="font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid rgba(248,113,113,0.2);background:transparent;color:#f87171;cursor:pointer;font-family:inherit;transition:all .15s" onmouseover="this.style.background='rgba(248,113,113,0.1)'" onmouseout="this.style.background='transparent'">Del</button>`}
+      </td>
     </tr>`;
   }).join('');
 }
 
-// ═══════════════════════════════════════════════
-// RENDER KPI STRIP — best non-target score per task
-// ═══════════════════════════════════════════════
+function trendArrow(e){
+  const sorted=[...ENTRIES].filter(x=>!x.isTarget&&x.id!==e.id&&avgF1(x)!=null).sort((a,b)=>new Date(a.date||'9999')-new Date(b.date||'9999'));
+  const myAvg=avgF1(e); if(!myAvg)return'';
+  const prev=sorted.filter(x=>x.id<e.id).pop();
+  if(!prev)return'';
+  const prevAvg=avgF1(prev); if(!prevAvg)return'';
+  const delta=myAvg-prevAvg;
+  if(Math.abs(delta)<0.001)return'<span style="color:var(--text3);font-size:11px">→</span>';
+  return delta>0?`<span style="color:#34d399;font-size:11px" title="+${delta.toFixed(3)} vs prev">▲</span>`:`<span style="color:#f87171;font-size:11px" title="${delta.toFixed(3)} vs prev">▼</span>`;
+}
+
+// ── KPIs ──
 function renderKPIs(){
-  TASKS.forEach(task => {
-    const best = ENTRIES.filter(e=>!e.isTarget && e[task]!==null && e[task]!==undefined)
-      .sort((a,b)=>b[task]-a[task])[0];
-    if(!best) return;
-    const v = best[task];
-    const el = document.getElementById('kpi-'+task.toLowerCase());
-    const mel = document.getElementById('kpi-'+task.toLowerCase()+'-model');
-    const bar = document.getElementById('kbar-'+task.toLowerCase());
-    if(el) el.textContent = v.toFixed(3);
-    if(mel) mel.textContent = best.version + ' · best so far';
-    if(bar) bar.style.width = (v*100)+'%';
+  TASKS.forEach(t=>{
+    const best=ENTRIES.filter(e=>!e.isTarget&&e[t]!=null).sort((a,b)=>b[t]-a[t])[0];
+    if(!best)return;
+    const el=document.getElementById('kpi-'+t.toLowerCase());
+    const ml=document.getElementById('kpi-'+t.toLowerCase()+'-model');
+    const bar=document.getElementById('kbar-'+t.toLowerCase());
+    if(el)el.textContent=best[t].toFixed(3);
+    if(ml)ml.textContent=best.version+' · best';
+    if(bar)bar.style.width=(best[t]*100)+'%';
   });
 }
 
-// ═══════════════════════════════════════════════
-// RENDER ENTRY LOG
-// ═══════════════════════════════════════════════
-function renderLog(){
-  const el = document.getElementById('entryLog');
-  const sorted = [...ENTRIES].filter(e=>!e.isTarget).reverse();
-  const dotColors = {'claude':'#00d4aa','deepseek':'#a78bfa','baseline':'#7b8ba8','v1':'#fbbf24','v2':'#60a5fa','target':'#34d399','pending':'#4a5568'};
-  el.innerHTML = sorted.map(e => {
-    const avg = avgF1(e);
-    const dc = dotColors[modelBadgeClass(e.version)] || '#7b8ba8';
-    return `<div class="log-entry">
-      <div class="log-dot" style="background:${dc}"></div>
-      <div class="log-content">
-        <div style="display:flex;align-items:center;gap:8px;justify-content:space-between">
-          <span class="log-version">${e.version}</span>
-          ${avg!==null?`<span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:${scoreClass(avg)==='green'?'var(--green)':scoreClass(avg)==='amber'?'var(--amber)':'var(--red)'}">Avg ${avg.toFixed(3)}</span>`:''}
-        </div>
-        <div class="log-meta">${e.date||'Date pending'} · ${e.benchmark||''}</div>
-        <div class="log-notes">${e.desc||''}</div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-// ═══════════════════════════════════════════════
-// RENDER CONFUSION PAIRS
-// ═══════════════════════════════════════════════
-function renderConfusion(){
-  const el = document.getElementById('confusionList');
-  const taskColors = {Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#fbbf24',Toxicity:'#34d399'};
-  el.innerHTML = CONFUSION.map(c => `
-    <div style="display:grid;grid-template-columns:70px 1fr 20px 1fr 50px 1fr 80px;gap:8px;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.03);font-size:11px;align-items:center">
-      <span style="font-size:9px;font-family:'JetBrains Mono',monospace;color:${taskColors[c.task]||'var(--text2)'};font-weight:600;text-transform:uppercase;letter-spacing:.06em">${c.task}</span>
-      <span style="background:rgba(248,113,113,0.1);border-radius:4px;padding:2px 7px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#f87171;text-align:center">${c.pred}</span>
-      <span style="color:var(--text3);text-align:center">→</span>
-      <span style="background:rgba(52,211,153,0.1);border-radius:4px;padding:2px 7px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#34d399;text-align:center">${c.correct}</span>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--amber);text-align:center">${c.count}</span>
-      <span style="color:var(--text2);font-size:11px">${c.cause}</span>
-      <span onclick="toggleFixed(${CONFUSION.indexOf(c)})" style="cursor:pointer;font-size:11px;padding:2px 8px;border-radius:4px;border:1px solid ${c.fixed?'rgba(52,211,153,0.3)':'rgba(255,255,255,0.08)'};background:${c.fixed?'rgba(52,211,153,0.08)':'transparent'};color:${c.fixed?'#34d399':'var(--text3)'}">
-        ${c.fixed?'✓ Fixed':'⬜ Pending'}
-      </span>
-    </div>`).join('');
-}
-
-function toggleFixed(i){
-  CONFUSION[i].fixed = !CONFUSION[i].fixed;
-  renderConfusion();
-}
-
-// ═══════════════════════════════════════════════
-// CHART: LINE — evolution
-// ═══════════════════════════════════════════════
+// ── CHARTS ──
 Chart.defaults.color='#7b8ba8';
 Chart.defaults.borderColor='rgba(255,255,255,0.05)';
 Chart.defaults.font.family="'Outfit',sans-serif";
@@ -659,210 +539,205 @@ Chart.defaults.plugins.legend.display=true;
 Chart.defaults.plugins.tooltip.backgroundColor='#0c1221';
 Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.3)';
 Chart.defaults.plugins.tooltip.borderWidth=1;
-Chart.defaults.plugins.tooltip.padding=10;
+Chart.defaults.plugins.tooltip.padding=12;
 Chart.defaults.plugins.tooltip.titleColor='#e8ecf4';
 Chart.defaults.plugins.tooltip.bodyColor='#9aa5b8';
 Chart.defaults.plugins.tooltip.titleFont={size:11,weight:'600',family:"'JetBrains Mono',monospace"};
+Chart.defaults.plugins.tooltip.callbacks={label:ctx=>{const v=ctx.parsed.y;if(v==null)return'';const ds=ctx.dataset.label||'';return ds+': '+(typeof v==='number'?v.toFixed(3):v);}};
+
+let _charts={};
+function mkChart(id,cfg){if(_charts[id])_charts[id].destroy();const c=document.getElementById(id);if(c)_charts[id]=new Chart(c,cfg);}
 
 function buildCharts(){
-  // Get non-target entries with at least some scores
-  const entries = ENTRIES.filter(e=>!e.isTarget);
-  const labels = entries.map(e=>e.version);
-  const TASK_COLORS = {Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#f87171',Toxicity:'#34d399'};
+  // Only use dated, non-target entries for time charts
+  const datedEntries=ENTRIES.filter(e=>!e.isTarget&&e.date).sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const allEntries=ENTRIES.filter(e=>!e.isTarget);
+  const labels=datedEntries.map(e=>e.version);
+  const allLabels=allEntries.map(e=>e.version);
 
-  // Line chart
-  const lineCtx = document.getElementById('lineChart');
-  if(lineCtx._c) lineCtx._c.destroy();
-  lineCtx._c = new Chart(lineCtx,{type:'line',data:{labels,datasets:[
+  // ── LINE: accuracy over time per task ──
+  mkChart('lineChart',{type:'line',data:{labels,datasets:[
     ...TASKS.map(t=>({
       label:t,
-      data:entries.map(e=>e[t]!=null?e[t]:null),
-      borderColor:TASK_COLORS[t],
-      backgroundColor:'transparent',
-      borderWidth:2,
-      pointRadius:5,
-      pointBackgroundColor:TASK_COLORS[t],
-      pointBorderColor:'#0c1221',
-      pointBorderWidth:2,
-      spanGaps:false,
-      tension:0.3
+      data:datedEntries.map(e=>e[t]!=null?e[t]:null),
+      borderColor:TCOL[t],backgroundColor:'transparent',
+      borderWidth:2.5,pointRadius:5,pointHoverRadius:7,
+      pointBackgroundColor:TCOL[t],pointBorderColor:'#0c1221',pointBorderWidth:2,
+      spanGaps:false,tension:0.3
     })),
-    {
-      label:'Target (0.80)',
-      data:entries.map(()=>0.80),
-      borderColor:'rgba(255,255,255,0.15)',
-      borderDash:[5,4],borderWidth:1.5,pointRadius:0,fill:false
-    }
-  ]},options:{responsive:true,maintainAspectRatio:true,
-    interaction:{mode:'index',intersect:false},
-    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10},padding:12}}},
-    scales:{
-      x:{grid:{display:false},ticks:{font:{size:9},maxRotation:20}},
-      y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},min:0,max:1.05,
-        title:{display:true,text:'Macro F1 Score',font:{size:9}}}
-    }
-  }});
+    {label:'Target 0.80',data:datedEntries.map(()=>0.80),borderColor:'rgba(255,255,255,0.2)',borderDash:[5,4],borderWidth:1,pointRadius:0,fill:false}
+  ]},options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10},padding:10}}},
+    scales:{x:{grid:{display:false},ticks:{font:{size:9}}},
+      y:{grid:{color:'rgba(255,255,255,0.05)'},min:0,max:1.05,
+        ticks:{callback:v=>v.toFixed(2),font:{size:9}},
+        title:{display:true,text:'Macro F1',font:{size:9}}}}}});
 
-  // Bar chart — latest 4 non-pending with scores
-  const barEntries = entries.filter(e=>e.Sentiment!==null).slice(-4);
-  const barCtx = document.getElementById('barChart');
-  if(barCtx._c) barCtx._c.destroy();
-  barCtx._c = new Chart(barCtx,{type:'bar',data:{
-    labels:TASKS,
-    datasets:barEntries.map((e,i)=>({
-      label:e.version,
-      data:TASKS.map(t=>e[t]||0),
-      backgroundColor:[
-        'rgba(0,212,170,0.75)','rgba(167,139,250,0.7)','rgba(251,191,36,0.65)','rgba(96,165,250,0.65)'
-      ][i%4],
-      borderRadius:5
-    }))
-  },options:{responsive:true,maintainAspectRatio:true,
-    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10},padding:12}},
-      tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y.toFixed(3)}`}}},
-    scales:{
-      x:{grid:{display:false},ticks:{font:{size:10}}},
-      y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},min:0,max:1.05}
-    }
-  }});
-
-  // Gate chart — radar
-  const gateCtx = document.getElementById('gateChart');
-  const best = TASKS.reduce((obj,t)=>{
-    const val = Math.max(...ENTRIES.filter(e=>!e.isTarget&&e[t]!=null).map(e=>e[t]));
-    obj[t]=isNaN(val)?0:val; return obj;
-  },{});
-  if(gateCtx._c) gateCtx._c.destroy();
-  gateCtx._c = new Chart(gateCtx,{type:'radar',data:{
-    labels:TASKS,
-    datasets:[
-      {label:'Best achieved',data:TASKS.map(t=>best[t]),backgroundColor:'rgba(0,212,170,0.12)',borderColor:'rgba(0,212,170,0.7)',borderWidth:2,pointRadius:4,pointBackgroundColor:'#00d4aa'},
-      {label:'Sprint 4 target',data:TASKS.map(t=>TARGET[t]),backgroundColor:'rgba(251,191,36,0.06)',borderColor:'rgba(251,191,36,0.5)',borderWidth:1.5,borderDash:[4,3],pointRadius:3}
-    ]
-  },options:{responsive:true,maintainAspectRatio:true,
-    plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:9},padding:10}}},
-    scales:{r:{grid:{color:'rgba(255,255,255,0.07)'},ticks:{display:false},pointLabels:{font:{size:10}},min:0,max:1}}}
+  // ── BAR: avg F1 per version (all entries inc pending) with change arrows ──
+  const avgs=allEntries.map(e=>avgF1(e));
+  const barColors=avgs.map((v,i)=>{
+    if(v==null)return'rgba(255,255,255,0.06)';
+    const prev=avgs.slice(0,i).reverse().find(x=>x!=null);
+    if(!prev)return'rgba(0,212,170,0.7)';
+    return v>=prev?'rgba(52,211,153,0.75)':'rgba(248,113,113,0.65)';
   });
+  mkChart('barChart',{type:'bar',data:{labels:allLabels,datasets:[{
+    label:'Avg F1',data:avgs,
+    backgroundColor:barColors,borderRadius:6,borderSkipped:false
+  },{
+    label:'Target',data:allEntries.map(()=>0.80),
+    type:'line',borderColor:'rgba(251,191,36,0.5)',borderDash:[5,4],borderWidth:1.5,pointRadius:0,fill:false
+  }]},options:{responsive:true,maintainAspectRatio:true,
+    plugins:{legend:{position:'top',labels:{boxWidth:8,font:{size:9},padding:10}},
+      tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+(ctx.parsed.y!=null?ctx.parsed.y.toFixed(3):'—')}}},
+    scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:20}},
+      y:{grid:{color:'rgba(255,255,255,0.05)'},min:0,max:1.05,ticks:{callback:v=>v.toFixed(2),font:{size:9}}}}}});
 
-  // Gate grid mini cards
-  const gg = document.getElementById('gateGrid');
-  gg.innerHTML = TASKS.map(t=>{
-    const v = best[t];
-    const pct = Math.min((v/TARGET[t])*100,100).toFixed(0);
-    const col = v>=TARGET[t]?'var(--green)':v>=0.65?'var(--amber)':'var(--red)';
-    return `<div style="background:var(--bg3);border-radius:8px;padding:8px 10px">
-      <div style="font-size:9px;color:var(--text2);font-family:'JetBrains Mono',monospace;margin-bottom:4px">${t.toUpperCase()}</div>
-      <div style="font-size:16px;font-weight:700;font-family:'JetBrains Mono',monospace;color:${col}">${v.toFixed(3)}</div>
-      <div style="font-size:9px;color:var(--text2);margin-top:2px">Target: ${TARGET[t].toFixed(2)} · ${pct}%</div>
+  // ── RADAR: gate progress ──
+  const best=Object.fromEntries(TASKS.map(t=>[t,Math.max(...ENTRIES.filter(e=>!e.isTarget&&e[t]!=null).map(e=>e[t]).filter(x=>!isNaN(x)))||0]));
+  mkChart('gateChart',{type:'radar',data:{labels:TASKS,datasets:[
+    {label:'Best achieved',data:TASKS.map(t=>best[t]),backgroundColor:'rgba(0,212,170,0.12)',borderColor:'rgba(0,212,170,0.7)',borderWidth:2,pointRadius:4,pointBackgroundColor:'#00d4aa'},
+    {label:'Sprint 4 target',data:TASKS.map(t=>TARGET[t]),backgroundColor:'rgba(251,191,36,0.06)',borderColor:'rgba(251,191,36,0.5)',borderWidth:1.5,borderDash:[4,3],pointRadius:3}
+  ]},options:{responsive:true,maintainAspectRatio:true,
+    plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:9},padding:10}}},
+    scales:{r:{grid:{color:'rgba(255,255,255,0.07)'},ticks:{display:false},pointLabels:{font:{size:10}},min:0,max:1}}}});
+
+  // Gate grid
+  const gg=document.getElementById('gateGrid');
+  if(gg) gg.innerHTML=TASKS.map(t=>{
+    const v=best[t]; const pct=Math.min((v/TARGET[t])*100,100).toFixed(0);
+    const col=v>=TARGET[t]?'#34d399':v>=0.65?'#fbbf24':'#f87171';
+    return`<div style="background:var(--bg3);border-radius:8px;padding:8px 10px">
+      <div style="font-size:9px;color:${col};font-family:'JetBrains Mono',monospace;margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em">${t}</div>
+      <div style="font-size:18px;font-weight:700;font-family:'JetBrains Mono',monospace;color:${col}">${v.toFixed(3)}</div>
+      <div style="font-size:9px;color:var(--text2);margin-top:2px">Target ${TARGET[t].toFixed(2)} · ${pct}%</div>
     </div>`;
   }).join('');
 }
 
-// ═══════════════════════════════════════════════
-// ADD ENTRY
-// ═══════════════════════════════════════════════
+// ── CONFUSION TABLE ──
+function renderConfusion(){
+  const el=document.getElementById('confusionList');if(!el)return;
+  const taskCols={Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#fbbf24',Toxicity:'#34d399'};
+  el.innerHTML=CONFUSION.map((c,i)=>`
+    <div style="display:grid;grid-template-columns:72px 1fr 18px 1fr 46px 1fr 80px;gap:6px;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.03);font-size:11px;align-items:center">
+      <span style="font-size:9px;font-family:'JetBrains Mono',monospace;color:${taskCols[c.task]};font-weight:600;text-transform:uppercase">${c.task}</span>
+      <span style="background:rgba(248,113,113,0.1);border-radius:4px;padding:2px 7px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#f87171;text-align:center">${c.pred}</span>
+      <span style="color:var(--text3);text-align:center;font-size:12px">→</span>
+      <span style="background:rgba(52,211,153,0.1);border-radius:4px;padding:2px 7px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#34d399;text-align:center">${c.correct}</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--amber);text-align:center">${c.count}</span>
+      <span style="color:var(--text2)">${c.cause}</span>
+      <span onclick="CONFUSION[${i}].fixed=!CONFUSION[${i}].fixed;renderConfusion()" style="cursor:pointer;font-size:10px;padding:2px 8px;border-radius:4px;border:1px solid ${c.fixed?'rgba(52,211,153,0.3)':'rgba(255,255,255,0.08)'};background:${c.fixed?'rgba(52,211,153,0.08)':'transparent'};color:${c.fixed?'#34d399':'var(--text3)'}">
+        ${c.fixed?'✓ Fixed':'⬜ Pending'}
+      </span>
+    </div>`).join('');
+}
+
+// ── LOG ──
+function renderLog(){
+  const el=document.getElementById('entryLog');if(!el)return;
+  el.innerHTML=[...ENTRIES].filter(e=>!e.isTarget).reverse().map(e=>{
+    const avg=avgF1(e); const bc=badgeCol(e.version);
+    return`<div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.03)">
+      <div style="width:7px;height:7px;border-radius:50%;background:${bc};flex-shrink:0;margin-top:4px"></div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12px;font-weight:600">${e.version}</span>
+          ${avg!=null?`<span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:${avg>=0.8?'#34d399':avg>=0.65?'#fbbf24':'#f87171'}">${avg.toFixed(3)}</span>`:''}
+        </div>
+        <div style="font-size:10.5px;color:var(--text2);font-family:'JetBrains Mono',monospace;margin-top:2px">${e.date||'Pending'} · ${e.benchmark||''}</div>
+        <div style="font-size:11px;color:var(--text2);margin-top:3px;line-height:1.5">${e.desc||''}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── MODAL: OPEN/CLOSE/SAVE/DELETE ──
+let _editId=null;
+
 function openAddModal(){
-  document.getElementById('f-date').value = new Date().toISOString().slice(0,10);
+  _editId=null;
+  document.getElementById('modalTitle').textContent='Add New Entry';
+  document.getElementById('deleteBtn').style.display='none';
+  ['f-version','f-date','f-desc','f-sentiment','f-emotion','f-topic','f-intent','f-toxicity','f-notes'].forEach(id=>{document.getElementById(id).value='';});
+  document.getElementById('f-date').value=new Date().toISOString().slice(0,10);
+  document.getElementById('f-benchmark').value='vs Claude (97 posts)';
   document.getElementById('addModal').classList.add('open');
 }
-function closeAddModal(){
-  document.getElementById('addModal').classList.remove('open');
-}
-document.getElementById('addModal').addEventListener('click',e=>{if(e.target===document.getElementById('addModal'))closeAddModal();});
 
-function addEntry(){
-  const ver = document.getElementById('f-version').value.trim();
-  if(!ver){ alert('Please enter a version name'); return; }
-  const entry = {
-    id: Date.now(),
-    version: ver,
-    date: document.getElementById('f-date').value || null,
-    desc: document.getElementById('f-desc').value.trim(),
-    Sentiment: parseFloat(document.getElementById('f-sentiment').value)||null,
-    Emotion: parseFloat(document.getElementById('f-emotion').value)||null,
-    Topic: parseFloat(document.getElementById('f-topic').value)||null,
-    Intent: parseFloat(document.getElementById('f-intent').value)||null,
-    Toxicity: parseFloat(document.getElementById('f-toxicity').value)||null,
-    benchmark: document.getElementById('f-benchmark').value,
-    notes: document.getElementById('f-notes').value.trim(),
-  };
-  // Clamp to 0-1
-  TASKS.forEach(t=>{ if(entry[t]!==null && (entry[t]<0||entry[t]>1)) entry[t]=Math.max(0,Math.min(1,entry[t])); });
-
-  // Insert before Production Target
-  const targetIdx = ENTRIES.findIndex(e=>e.isTarget);
-  if(targetIdx>=0) ENTRIES.splice(targetIdx,0,entry);
-  else ENTRIES.push(entry);
-
-  save();
-  // Update last updated display
-  document.getElementById('lastUpdated').textContent = entry.date || new Date().toISOString().slice(0,10);
-
-  renderAll();
-  closeAddModal();
-
-  // Clear form
-  ['f-version','f-date','f-desc','f-sentiment','f-emotion','f-topic','f-intent','f-toxicity','f-notes'].forEach(id=>{
-    document.getElementById(id).value='';
-  });
+function openEdit(id){
+  const e=ENTRIES.find(x=>x.id===id);if(!e)return;
+  _editId=id;
+  document.getElementById('modalTitle').textContent='Edit Entry';
+  document.getElementById('deleteBtn').style.display='block';
+  document.getElementById('f-version').value=e.version||'';
+  document.getElementById('f-date').value=e.date||'';
+  document.getElementById('f-desc').value=e.desc||'';
+  document.getElementById('f-sentiment').value=e.Sentiment!=null?e.Sentiment:'';
+  document.getElementById('f-emotion').value=e.Emotion!=null?e.Emotion:'';
+  document.getElementById('f-topic').value=e.Topic!=null?e.Topic:'';
+  document.getElementById('f-intent').value=e.Intent!=null?e.Intent:'';
+  document.getElementById('f-toxicity').value=e.Toxicity!=null?e.Toxicity:'';
+  document.getElementById('f-benchmark').value=e.benchmark||'vs Claude (97 posts)';
+  document.getElementById('f-notes').value=e.notes||'';
+  document.getElementById('addModal').classList.add('open');
 }
 
-// ═══════════════════════════════════════════════
-// EXPORT
-// ═══════════════════════════════════════════════
+function closeModal(){document.getElementById('addModal').classList.remove('open');_editId=null;}
+document.getElementById('addModal').addEventListener('click',e=>{if(e.target===document.getElementById('addModal'))closeModal();});
+
+function readForm(){
+  const get=id=>document.getElementById(id).value.trim();
+  const num=id=>{const v=parseFloat(document.getElementById(id).value);return isNaN(v)?null:Math.max(0,Math.min(1,v));};
+  return{version:get('f-version'),date:get('f-date')||null,desc:get('f-desc'),
+    Sentiment:num('f-sentiment'),Emotion:num('f-emotion'),Topic:num('f-topic'),Intent:num('f-intent'),Toxicity:num('f-toxicity'),
+    benchmark:document.getElementById('f-benchmark').value,notes:get('f-notes')};
+}
+
+function saveEntry(){
+  const data=readForm();
+  if(!data.version){alert('Version name required');return;}
+  if(_editId){
+    const idx=ENTRIES.findIndex(e=>e.id===_editId);
+    if(idx>=0) ENTRIES[idx]={...ENTRIES[idx],...data};
+  } else {
+    const targetIdx=ENTRIES.findIndex(e=>e.isTarget);
+    const entry={id:Date.now(),...data};
+    if(targetIdx>=0)ENTRIES.splice(targetIdx,0,entry);
+    else ENTRIES.push(entry);
+    document.getElementById('lastUpdated').textContent=data.date||new Date().toISOString().slice(0,10);
+  }
+  save();renderAll();closeModal();
+}
+
+function deleteEntry(){
+  if(!_editId)return;
+  if(!confirm('Delete this entry?'))return;
+  ENTRIES=ENTRIES.filter(e=>e.id!==_editId);
+  save();renderAll();closeModal();
+}
+
+function deleteById(id){
+  if(!confirm('Delete this entry?'))return;
+  ENTRIES=ENTRIES.filter(e=>e.id!==id);
+  save();renderAll();
+}
+
+// ── EXPORT ──
 function exportCSV(){
-  const rows = [
-    ['Version','Date','Description','Sentiment F1','Emotion F1','Topic F1','Intent F1','Toxicity F1','Avg F1','Benchmark','Notes']
-  ];
-  ENTRIES.forEach(e=>{
-    const avg = avgF1(e);
-    rows.push([e.version, e.date||'', e.desc||'',
-      e.Sentiment??'', e.Emotion??'', e.Topic??'', e.Intent??'', e.Toxicity??'',
-      avg!==null?avg.toFixed(4):'', e.benchmark||'', e.notes||'']);
-  });
-  downloadCSV(rows,'artemis-nlp-accuracy-'+new Date().toISOString().slice(0,10)+'.csv');
+  const rows=[['Version','Date','Description','Sentiment','Emotion','Topic','Intent','Toxicity','Avg F1','Benchmark','Notes']];
+  ENTRIES.forEach(e=>{const avg=avgF1(e);rows.push([e.version,e.date||'',e.desc||'',e.Sentiment??'',e.Emotion??'',e.Topic??'',e.Intent??'',e.Toxicity??'',avg!=null?avg.toFixed(4):'',e.benchmark||'',e.notes||'']);});
+  dl(rows,'artemis-nlp-accuracy.csv');
 }
+function exportChartCSV(cid,name){const ch=_charts[cid];if(!ch)return;const rows=[['Label',...ch.data.datasets.map(d=>d.label)]];ch.data.labels.forEach((l,i)=>rows.push([l,...ch.data.datasets.map(d=>d.data[i]??'')]));dl(rows,name+'.csv');}
+function dl(rows,fn){const csv=rows.map(r=>r.map(c=>{const s=String(c).replace(/"/g,'""');return s.includes(',')||s.includes('"')?`"${s}"`:s;}).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=fn;a.click();}
 
-function exportConfusionCSV(){
-  const rows=[['Task','Predicted','Correct','Count','Root Cause','Fixed']];
-  CONFUSION.forEach(c=>rows.push([c.task,c.pred,c.correct,c.count,c.cause,c.fixed?'Yes':'No']));
-  downloadCSV(rows,'artemis-confusion-pairs.csv');
-}
-
-function exportChartCSV(chartId, name){
-  const canvas = document.getElementById(chartId);
-  const chart = canvas._c;
-  if(!chart) return;
-  const labels = chart.data.labels||[];
-  const datasets = chart.data.datasets||[];
-  const rows = [['Label',...datasets.map(d=>d.label||'')]];
-  labels.forEach((l,i)=>rows.push([l,...datasets.map(d=>d.data[i]??'')]));
-  downloadCSV(rows, name+'.csv');
-}
-
-function downloadCSV(rows, filename){
-  const csv = rows.map(r=>r.map(c=>{const s=String(c).replace(/"/g,'""');return s.includes(',')||s.includes('"')?`"${s}"`:s;}).join(',')).join('\n');
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
-  a.download = filename;
-  a.click();
-}
-
-// ═══════════════════════════════════════════════
-// BOOT
-// ═══════════════════════════════════════════════
-function renderAll(){
-  renderTable();
-  renderKPIs();
-  renderLog();
-  renderConfusion();
-  buildCharts();
-}
-
+// ── BOOT ──
+function renderAll(){renderTable();renderKPIs();renderLog();renderConfusion();buildCharts();}
 requestAnimationFrame(()=>requestAnimationFrame(()=>renderAll()));
 
 // Auth check
-(function(){try{const s=JSON.parse(localStorage.getItem('artemis_app_session')||'null');if(!s){window.location.href='admin_login.html';}}catch(e){window.location.href='admin_login.html';}})();
+(function(){try{const s=JSON.parse(localStorage.getItem('artemis_session')||localStorage.getItem('artemis_app_session')||'null');if(!s){window.location.href='admin_login.html';}}catch(e){/* allow access if session check fails */}})();
 </script>
 </body>
 </html>
