@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtemisAI · NLP Accuracy Tracker</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#060a13;--bg2:#0c1221;--bg3:#111a2e;--card:#0f1729;--card2:#142036;
+  --accent:#00d4aa;--accent2:#00f5c4;--accent-dim:rgba(0,212,170,0.1);
+  --purple:#6366f1;--amber:#fbbf24;--red:#f87171;--green:#34d399;
+  --text:#e8ecf4;--text2:#7b8ba8;--text3:#4a5568;
+  --border:rgba(255,255,255,0.06);--border-a:rgba(0,212,170,0.15);
+  --r:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif}
+body{display:flex;flex-direction:column;min-height:100vh}
+
+/* ── TOP NAV ── */
+.topnav{height:56px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:16px;position:sticky;top:0;z-index:100}
+.topnav-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:var(--text)}
+.topnav-logo svg{flex-shrink:0}
+.topnav-sep{color:var(--text3);font-size:18px;margin:0 2px}
+.topnav-title{font-size:13px;font-weight:500;color:var(--text2)}
+.topnav-right{margin-left:auto;display:flex;gap:10px;align-items:center}
+.btn{font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;padding:7px 14px;border-radius:8px;cursor:pointer;border:1px solid var(--border-a);background:var(--accent-dim);color:var(--accent);transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:rgba(0,212,170,0.18);border-color:rgba(0,212,170,0.4)}
+.btn.primary{background:var(--accent);color:#0c1221;border-color:var(--accent);font-weight:600}
+.btn.primary:hover{background:var(--accent2)}
+.btn.ghost{background:transparent;border-color:var(--border);color:var(--text2)}
+.btn.ghost:hover{border-color:var(--border-a);color:var(--text)}
+.back-btn{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);text-decoration:none;padding:5px 10px;border-radius:7px;border:1px solid var(--border);transition:all .15s}
+.back-btn:hover{border-color:var(--border-a);color:var(--accent)}
+
+/* ── MAIN ── */
+.main{flex:1;padding:24px 28px;max-width:1400px;margin:0 auto;width:100%}
+
+/* ── HEADER STRIP ── */
+.page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px}
+.page-header-left h1{font-size:22px;font-weight:800;letter-spacing:-0.02em}
+.page-header-left p{font-size:12px;color:var(--text2);margin-top:4px;font-family:'JetBrains Mono',monospace}
+.sprint-badge{font-size:10px;padding:2px 9px;border-radius:4px;background:rgba(99,102,241,0.1);color:#a78bfa;border:1px solid rgba(99,102,241,0.2);font-family:'JetBrains Mono',monospace;font-weight:600;margin-left:10px}
+.target-badge{font-size:10px;padding:2px 9px;border-radius:4px;background:rgba(0,212,170,0.1);color:var(--accent);border:1px solid var(--border-a);font-family:'JetBrains Mono',monospace;font-weight:600;margin-left:6px}
+
+/* ── KPI STRIP ── */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:22px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--kc,var(--accent))}
+.kpi-label{font-size:9.5px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.kpi-value{font-size:28px;font-weight:800;color:var(--kc,var(--accent));font-family:'JetBrains Mono',monospace;line-height:1;letter-spacing:-0.03em}
+.kpi-sub{font-size:11px;color:var(--text2);margin-top:4px}
+.kpi-bar{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:10px;overflow:hidden}
+.kpi-bar-fill{height:100%;border-radius:2px;background:var(--kc,var(--accent));transition:width 1s ease}
+
+/* ── MAIN GRID ── */
+.grid-main{display:grid;grid-template-columns:1fr 380px;gap:20px;margin-bottom:20px}
+
+/* ── CARD ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.card-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:13px;font-weight:600}
+.card-sub{font-size:10.5px;color:var(--text2);font-family:'JetBrains Mono',monospace;margin-top:2px}
+.card-body{padding:18px 20px}
+
+/* ── ACCURACY TABLE ── */
+.acc-table{width:100%;border-collapse:collapse}
+.acc-table th{text-align:left;padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap}
+.acc-table td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.03);font-size:12px}
+.acc-table tr:last-child td{border-bottom:none}
+.acc-table tr:hover td{background:rgba(255,255,255,0.025)}
+.acc-table tr.pending td{opacity:.6}
+
+/* ── Score cell ── */
+.score{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px;display:inline-flex;align-items:center;gap:4px}
+.score.green{color:var(--green)}
+.score.amber{color:var(--amber)}
+.score.red{color:var(--red)}
+.score.muted{color:var(--text3);font-style:italic}
+.score-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.score-dot.green{background:var(--green)}
+.score-dot.amber{background:var(--amber)}
+.score-dot.red{background:var(--red)}
+.score-dot.muted{background:var(--text3)}
+
+/* Model name badges */
+.model-badge{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;font-family:'JetBrains Mono',monospace;display:inline-block}
+.model-badge.claude{background:rgba(0,212,170,0.1);color:#00d4aa;border:1px solid rgba(0,212,170,0.2)}
+.model-badge.deepseek{background:rgba(99,102,241,0.1);color:#a78bfa;border:1px solid rgba(99,102,241,0.2)}
+.model-badge.baseline{background:rgba(255,255,255,0.06);color:var(--text2);border:1px solid var(--border)}
+.model-badge.v1{background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)}
+.model-badge.v2{background:rgba(96,165,250,0.1);color:#60a5fa;border:1px solid rgba(96,165,250,0.2)}
+.model-badge.target{background:rgba(52,211,153,0.1);color:var(--green);border:1px solid rgba(52,211,153,0.2)}
+.model-badge.pending{background:rgba(255,255,255,0.04);color:var(--text3);border:1px solid var(--border)}
+
+/* ── MINI SPARKBAR ── */
+.sparkbar{display:flex;align-items:center;gap:6px;height:16px}
+.sparkbar-track{flex:1;height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden}
+.sparkbar-fill{height:100%;border-radius:3px;transition:width 1s ease}
+
+/* ── PROGRESS RING ── */
+.progress-ring{display:inline-block;position:relative}
+.progress-ring svg{transform:rotate(-90deg)}
+.progress-ring-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column}
+
+/* ── ADD ENTRY FORM ── */
+.form-section{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:20px}
+.form-section.collapsed .form-body{display:none}
+.form-toggle{width:100%;padding:14px 20px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;color:var(--text);font-family:'Outfit',sans-serif;font-size:13px;font-weight:600}
+.form-toggle:hover{background:rgba(255,255,255,0.02)}
+.form-toggle svg{transition:transform .2s}
+.form-section:not(.collapsed) .form-toggle svg{transform:rotate(180deg)}
+.form-body{padding:20px}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:16px}
+.form-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:16px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group label{font-size:10px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.07em}
+.form-group input,.form-group select,.form-group textarea{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:8px 10px;color:var(--text);font-family:'Outfit',sans-serif;font-size:12px;outline:none;transition:border-color .15s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:rgba(0,212,170,0.4)}
+.form-group input::placeholder{color:var(--text3)}
+.form-actions{display:flex;gap:10px;align-items:center}
+
+/* ── CHART AREA ── */
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+
+/* ── PER TASK CARDS ── */
+.task-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px}
+.task-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center;position:relative;overflow:hidden;cursor:pointer;transition:all .2s}
+.task-card:hover{border-color:var(--tc,var(--border-a));transform:translateY(-2px)}
+.task-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--tc,var(--accent));opacity:.6}
+.task-card.active{border-color:var(--tc,var(--accent));background:var(--card2)}
+.task-card.active::before{opacity:1}
+.task-label{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--text2);font-family:'JetBrains Mono',monospace;margin-bottom:8px}
+.task-score{font-size:26px;font-weight:800;font-family:'JetBrains Mono',monospace;line-height:1;color:var(--tc,var(--accent))}
+.task-model{font-size:9.5px;color:var(--text2);margin-top:4px}
+.task-trend{font-size:10px;margin-top:6px;font-family:'JetBrains Mono',monospace}
+
+/* ── CONFUSION TABLE ── */
+.confusion-row{display:grid;grid-template-columns:70px 1fr 1fr 50px 1fr 80px;gap:8px;align-items:center;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.03);font-size:11px}
+.confusion-row:last-child{border-bottom:none}
+.confusion-row:hover{background:rgba(255,255,255,0.02)}
+.conf-task{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--text2)}
+.conf-label{background:rgba(255,255,255,0.06);border-radius:4px;padding:2px 7px;font-family:'JetBrains Mono',monospace;font-size:10px;text-align:center}
+.conf-arrow{color:var(--text3);text-align:center;font-size:10px}
+.conf-count{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--amber);text-align:center}
+.conf-status.pending{color:var(--text3);font-size:10px}
+.conf-status.fixed{color:var(--green);font-size:10px}
+
+/* ── LOG / HISTORY ── */
+.log-entry{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.log-entry:last-child{border-bottom:none}
+.log-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.log-content{flex:1;min-width:0}
+.log-version{font-size:12px;font-weight:600}
+.log-meta{font-size:10.5px;color:var(--text2);font-family:'JetBrains Mono',monospace;margin-top:2px}
+.log-notes{font-size:11px;color:var(--text2);margin-top:4px;line-height:1.5}
+
+/* ── TOOLTIP ── */
+.tooltip-host{position:relative}
+.tooltip-host:hover .tt{display:block}
+.tt{display:none;position:absolute;bottom:calc(100%+6px);left:50%;transform:translateX(-50%);background:#0c1221;border:1px solid rgba(0,212,170,0.3);border-radius:7px;padding:7px 10px;font-size:10px;color:var(--text);white-space:nowrap;z-index:200;pointer-events:none;font-family:'JetBrains Mono',monospace}
+
+/* ── MODAL ── */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:999;display:none;align-items:center;justify-content:center}
+.modal-backdrop.open{display:flex}
+.modal{background:#0f1729;border:1px solid rgba(0,212,170,0.25);border-radius:16px;padding:28px;width:520px;max-width:94vw;box-shadow:0 32px 80px rgba(0,0,0,0.6);max-height:90vh;overflow-y:auto}
+.modal h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.modal-sub{font-size:11px;color:var(--text2);font-family:'JetBrains Mono',monospace;margin-bottom:20px}
+.modal-footer{display:flex;gap:10px;margin-top:20px}
+
+/* ── EXPORT ── */
+.export-btn{font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid var(--border-a);background:var(--accent-dim);color:var(--accent);cursor:pointer;font-family:'Outfit',sans-serif;display:inline-flex;align-items:center;gap:4px;transition:all .15s}
+.export-btn:hover{background:rgba(0,212,170,0.18)}
+
+/* ── MISC ── */
+.section-label{font-size:9.5px;font-family:'JetBrains Mono',monospace;color:var(--text3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:14px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tag{font-size:10px;padding:2px 9px;border-radius:4px;border:1px solid var(--border);color:var(--text2);font-family:'JetBrains Mono',monospace}
+.divider{height:1px;background:var(--border);margin:20px 0}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.card,.kpi,.form-section,.task-card{animation:fadeUp .25s ease both}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a href="admin_panel.html" class="back-btn">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Admin Panel
+  </a>
+  <div class="topnav-sep">/</div>
+  <div class="topnav-logo">
+    <svg viewBox="0 0 28 28" width="22" height="22" fill="none"><rect x="1" y="1" width="26" height="26" rx="6" fill="#0c1221"/><path d="M14 5L22 23H6L14 5Z" stroke="#00d4aa" stroke-width="1.5" fill="none"/><circle cx="14" cy="17" r="2.5" fill="#00d4aa"/></svg>
+    ArtemisAI
+  </div>
+  <div class="topnav-sep">/</div>
+  <div class="topnav-title">NLP Accuracy Tracker</div>
+  <div class="topnav-right">
+    <button class="btn ghost" onclick="exportCSV()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export CSV
+    </button>
+    <button class="btn primary" onclick="openAddModal()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add Entry
+    </button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-left">
+      <h1>NLP Model Accuracy Tracker
+        <span class="sprint-badge">Sprint 3 → Sprint 4</span>
+        <span class="target-badge">Gate: F1 ≥ 0.80</span>
+      </h1>
+      <p>Knowledge distillation pipeline · Claude → DeepSeek V3 → Fine-tuned models · 6 model versions tracked</p>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <div style="text-align:right">
+        <div style="font-size:10px;color:var(--text2);font-family:'JetBrains Mono',monospace">Last updated</div>
+        <div id="lastUpdated" style="font-size:12px;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--accent)">26 Mar 2025</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPI STRIP: one per task -->
+  <div class="kpi-row">
+    <div class="kpi" style="--kc:#00d4aa">
+      <div class="kpi-label">Sentiment F1</div>
+      <div class="kpi-value" id="kpi-sentiment">0.804</div>
+      <div class="kpi-sub" id="kpi-sentiment-model">DeepSeek V3 · best so far</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" id="kbar-sentiment" style="width:80.4%"></div></div>
+    </div>
+    <div class="kpi" style="--kc:#a78bfa">
+      <div class="kpi-label">Emotion F1</div>
+      <div class="kpi-value" id="kpi-emotion">0.742</div>
+      <div class="kpi-sub" id="kpi-emotion-model">DeepSeek V3 · weakest task</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" id="kbar-emotion" style="width:74.2%;background:var(--amber)"></div></div>
+    </div>
+    <div class="kpi" style="--kc:#60a5fa">
+      <div class="kpi-label">Topic F1</div>
+      <div class="kpi-value" id="kpi-topic">0.753</div>
+      <div class="kpi-sub" id="kpi-topic-model">DeepSeek V3 · best</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" id="kbar-topic" style="width:75.3%;background:#60a5fa"></div></div>
+    </div>
+    <div class="kpi" style="--kc:#f87171">
+      <div class="kpi-label">Intent F1</div>
+      <div class="kpi-value" id="kpi-intent">0.722</div>
+      <div class="kpi-sub" id="kpi-intent-model">DeepSeek V3 · best</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" id="kbar-intent" style="width:72.2%;background:#f87171"></div></div>
+    </div>
+    <div class="kpi" style="--kc:#34d399">
+      <div class="kpi-label">Toxicity F1</div>
+      <div class="kpi-value" id="kpi-toxicity">0.948</div>
+      <div class="kpi-sub" id="kpi-toxicity-model">DeepSeek V3 · excellent</div>
+      <div class="kpi-bar"><div class="kpi-bar-fill" id="kbar-toxicity" style="width:94.8%"></div></div>
+    </div>
+  </div>
+
+  <!-- MAIN TABLE + SIDE PANEL -->
+  <div class="grid-main">
+
+    <!-- LEFT: Accuracy table -->
+    <div class="card" style="animation-delay:.05s">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Model Version History</div>
+          <div class="card-sub">All versions · Macro F1 scores · vs Claude ground truth</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="export-btn" onclick="exportCSV()">↓ CSV</button>
+          <div style="display:flex;gap:4px">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span><span style="font-size:9px;color:var(--text2)">≥0.80</span>
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--amber);display:inline-block;margin-left:6px"></span><span style="font-size:9px;color:var(--text2)">0.65–0.79</span>
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--red);display:inline-block;margin-left:6px"></span><span style="font-size:9px;color:var(--text2)">&lt;0.65</span>
+          </div>
+        </div>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="acc-table" id="accTable">
+          <thead>
+            <tr>
+              <th>Version</th>
+              <th>Date</th>
+              <th>Sentiment</th>
+              <th>Emotion</th>
+              <th>Topic</th>
+              <th>Intent</th>
+              <th>Toxicity</th>
+              <th>Avg F1</th>
+              <th>vs Baseline</th>
+              <th>Benchmark</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- RIGHT: Progress rings + log -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <!-- Sprint gate progress -->
+      <div class="card" style="animation-delay:.1s">
+        <div class="card-header">
+          <div><div class="card-title">Sprint 4 Gate Progress</div><div class="card-sub">Target: Macro F1 ≥ 0.80</div></div>
+        </div>
+        <div class="card-body">
+          <canvas id="gateChart" height="160"></canvas>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px" id="gateGrid"></div>
+        </div>
+      </div>
+
+      <!-- Recent entries log -->
+      <div class="card" style="animation-delay:.15s;flex:1">
+        <div class="card-header">
+          <div><div class="card-title">Entry Log</div><div class="card-sub">Newest first</div></div>
+        </div>
+        <div class="card-body" id="entryLog" style="padding:12px 16px;max-height:280px;overflow-y:auto"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHARTS ROW -->
+  <div class="chart-row">
+    <div class="card">
+      <div class="card-header"><div><div class="card-title">F1 Score Evolution by Task</div><div class="card-sub">All model versions · line per task</div></div><button class="export-btn" onclick="exportChartCSV('lineChart','f1-evolution')">↓ CSV</button></div>
+      <div class="card-body" style="padding:14px"><canvas id="lineChart" height="180"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div><div class="card-title">Model Comparison — All Tasks</div><div class="card-sub">Grouped bar · latest 4 versions</div></div><button class="export-btn" onclick="exportChartCSV('barChart','model-comparison')">↓ CSV</button></div>
+      <div class="card-body" style="padding:14px"><canvas id="barChart" height="180"></canvas></div>
+    </div>
+  </div>
+
+  <!-- CONFUSION PAIRS -->
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-header">
+      <div><div class="card-title">Known Confusion Pairs</div><div class="card-sub">Top failure modes from 97-post benchmark · update status after each fine-tune run</div></div>
+      <button class="export-btn" onclick="exportConfusionCSV()">↓ CSV</button>
+    </div>
+    <div style="padding:0 4px">
+      <div style="display:grid;grid-template-columns:70px 1fr 20px 1fr 50px 1fr 80px;gap:8px;padding:8px 12px;border-bottom:1px solid var(--border)">
+        <span style="font-size:9.5px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-transform:uppercase">Task</span>
+        <span style="font-size:9.5px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-transform:uppercase">Predicted</span>
+        <span></span>
+        <span style="font-size:9.5px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-transform:uppercase">Correct</span>
+        <span style="font-size:9.5px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-transform:uppercase;text-align:center">Count</span>
+        <span style="font-size:9.5px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-transform:uppercase">Root Cause</span>
+        <span style="font-size:9.5px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-transform:uppercase">Fixed?</span>
+      </div>
+      <div id="confusionList"></div>
+    </div>
+  </div>
+
+</div><!-- end main -->
+
+<!-- ADD ENTRY MODAL -->
+<div class="modal-backdrop" id="addModal">
+  <div class="modal">
+    <h3>Add Accuracy Entry</h3>
+    <div class="modal-sub">Enter the F1 scores after each fine-tuning run or evaluation</div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Model Version / Name</label>
+        <input type="text" id="f-version" placeholder="e.g. Fine-tuned v1, DeepSeek V3…">
+      </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="f-date">
+      </div>
+    </div>
+
+    <div style="font-size:10px;color:var(--text2);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px">F1 Scores (0.000 – 1.000 · leave blank if not yet evaluated)</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px">
+      <div class="form-group">
+        <label>Sentiment</label>
+        <input type="number" id="f-sentiment" min="0" max="1" step="0.001" placeholder="0.000">
+      </div>
+      <div class="form-group">
+        <label>Emotion</label>
+        <input type="number" id="f-emotion" min="0" max="1" step="0.001" placeholder="0.000">
+      </div>
+      <div class="form-group">
+        <label>Topic</label>
+        <input type="number" id="f-topic" min="0" max="1" step="0.001" placeholder="0.000">
+      </div>
+      <div class="form-group">
+        <label>Intent</label>
+        <input type="number" id="f-intent" min="0" max="1" step="0.001" placeholder="0.000">
+      </div>
+      <div class="form-group">
+        <label>Toxicity</label>
+        <input type="number" id="f-toxicity" min="0" max="1" step="0.001" placeholder="0.000">
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Benchmark</label>
+        <select id="f-benchmark">
+          <option value="vs Claude (97 posts)">vs Claude (97 posts)</option>
+          <option value="vs Rafeh GT (97 posts)">vs Rafeh GT (97 posts)</option>
+          <option value="vs self (97 posts)">vs self (97 posts)</option>
+          <option value="Sprint 4 gate">Sprint 4 gate</option>
+          <option value="Custom">Custom</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <input type="text" id="f-desc" placeholder="e.g. Fine-tuned on 2,545 DeepSeek labels">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Notes</label>
+      <textarea id="f-notes" rows="2" style="resize:vertical" placeholder="Colab run, GPU, dataset size, key observations…"></textarea>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn ghost" onclick="closeAddModal()">Cancel</button>
+      <button class="btn primary" onclick="addEntry()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        Save Entry
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// DATA — seeded from the Excel spreadsheet
+// ═══════════════════════════════════════════════
+const TASKS = ['Sentiment','Emotion','Topic','Intent','Toxicity'];
+const TARGET = {Sentiment:0.80, Emotion:0.80, Topic:0.80, Intent:0.80, Toxicity:0.95};
+
+let ENTRIES = JSON.parse(localStorage.getItem('artemis_nlp_entries') || 'null') || [
+  {
+    id:1, version:'NLP Sprint 3', date:'2025-03-01',
+    desc:'Base models — generic pre-trained, no fine-tuning',
+    Sentiment:0.567, Emotion:0.289, Topic:0.485, Intent:0.402, Toxicity:0.928,
+    benchmark:'vs Claude (97 posts)',
+    notes:'Baseline. cardiffnlp XLM-R (sentiment), DistilBERT (emotion), DeBERTa-v3 (topic/intent), Detoxify (toxicity)'
+  },
+  {
+    id:2, version:'DeepSeek V3', date:'2025-03-26',
+    desc:'DeepSeek V3 teacher model — all 5 tasks, 1 API call/post',
+    Sentiment:0.804, Emotion:0.742, Topic:0.753, Intent:0.722, Toxicity:0.948,
+    benchmark:'vs Claude (97 posts)',
+    notes:'Target ceiling for fine-tuning. Cost $0.000206/post. Knowledge distillation source.'
+  },
+  {
+    id:3, version:'Claude Sonnet', date:'2025-03-26',
+    desc:'Claude benchmark — ground truth proxy until Rafeh labels available',
+    Sentiment:1.0, Emotion:1.0, Topic:1.0, Intent:1.0, Toxicity:1.0,
+    benchmark:'vs self (97 posts)',
+    notes:'Self-reference benchmark. Will be replaced by Rafeh ground truth labels.'
+  },
+  {
+    id:4, version:'Fine-tuned v1', date:null,
+    desc:'XLM-R + DistilBERT + DeBERTa fine-tuned on 2,545 DeepSeek labels',
+    Sentiment:0.773, Emotion:0.593, Topic:null, Intent:null, Toxicity:null,
+    benchmark:'vs Rafeh GT (97 posts)',
+    notes:'Pending — run sentiment_finetune_v1.ipynb in Colab (T4 GPU)',
+    pending:true
+  },
+  {
+    id:5, version:'Fine-tuned v2', date:null,
+    desc:'v1 + Rafeh ground truth labels merged (high-priority examples)',
+    Sentiment:0.755, Emotion:0.524, Topic:null, Intent:null, Toxicity:null,
+    benchmark:'vs Rafeh GT (97 posts)',
+    notes:'Emotion improved from 52.4% → 69.3% in v3. Pending Rafeh validation files.',
+    pending:true
+  },
+  {
+    id:6, version:'Fine-tuned v3', date:null,
+    desc:'v2 + Q2 retrain with accumulated Tier 3 corrections',
+    Sentiment:0.726, Emotion:0.723, Topic:null, Intent:null, Toxicity:null,
+    benchmark:'vs Rafeh GT (97 posts)',
+    notes:'Q2 2026 quarterly retrain.',
+    pending:true
+  },
+  {
+    id:7, version:'Production Target', date:null,
+    desc:'Sprint 4 gate: Macro F1 ≥ 0.80, Human agreement ≥ 85%, Kappa ≥ 0.65',
+    Sentiment:0.80, Emotion:0.80, Topic:0.80, Intent:0.80, Toxicity:0.95,
+    benchmark:'Sprint 4 gate',
+    notes:'Target thresholds from ArtemisAI labelling strategy document.',
+    isTarget:true
+  }
+];
+
+const CONFUSION = [
+  {task:'Sentiment', pred:'neutral', correct:'positive', count:20, cause:'😂 emoji misread — NLP has no emoji signal', fixed:false},
+  {task:'Sentiment', pred:'negative', correct:'positive', count:6, cause:'Prison page name read as negative, content is humorous', fixed:false},
+  {task:'Sentiment', pred:'negative', correct:'neutral', count:5, cause:'NLP oversensitive to ? and CAPS words', fixed:false},
+  {task:'Sentiment', pred:'positive', correct:'negative', count:3, cause:'Sarcasm not detected (cool cool, saving now)', fixed:false},
+  {task:'Emotion', pred:'neutral', correct:'joy', count:17, cause:'😂 on short captions = joy, not neutral', fixed:false},
+  {task:'Emotion', pred:'anger', correct:'joy', count:7, cause:'Short captions mislabelled as anger — DistilBERT Twitter bias', fixed:false},
+  {task:'Emotion', pred:'anger', correct:'neutral', count:7, cause:'Anger model too sensitive on ambiguous short posts', fixed:false},
+  {task:'Emotion', pred:'joy', correct:'love', count:5, cause:'Long warm content (relationship advice, acts of kindness)', fixed:false},
+  {task:'Topic', pred:'Humour', correct:'Lifestyle', count:10, cause:'Drinking/food/relationship = Lifestyle, not Humour', fixed:false},
+  {task:'Topic', pred:'Humour', correct:'Crime', count:4, cause:'Prison page + real event = Crime, not Humour', fixed:false},
+  {task:'Topic', pred:'Entertainment', correct:'Humour', count:3, cause:'Celebrity/film = Entertainment; Humour = post IS the joke', fixed:false},
+  {task:'Intent', pred:'Announce', correct:'Inform', count:8, cause:'Announce = present tense now. Inform = past tense reporting', fixed:false},
+];
+
+// ═══════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════
+function save(){ localStorage.setItem('artemis_nlp_entries', JSON.stringify(ENTRIES)); }
+
+function avgF1(e){
+  const vals = TASKS.map(t=>e[t]).filter(v=>v!==null&&v!==undefined&&!isNaN(v));
+  return vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : null;
+}
+
+function baselineAvg(){
+  const b = ENTRIES.find(e=>e.version==='NLP Sprint 3');
+  return b ? avgF1(b) : 0;
+}
+
+function scoreClass(v){
+  if(v===null||v===undefined) return 'muted';
+  if(v>=0.80) return 'green';
+  if(v>=0.65) return 'amber';
+  return 'red';
+}
+
+function fmtScore(v){
+  if(v===null||v===undefined) return '<span class="score muted">—</span>';
+  const cls = scoreClass(v);
+  return `<span class="score ${cls}"><span class="score-dot ${cls}"></span>${v.toFixed ? v.toFixed(3) : v}</span>`;
+}
+
+function modelBadgeClass(v){
+  if(v.toLowerCase().includes('claude')) return 'claude';
+  if(v.toLowerCase().includes('deepseek')) return 'deepseek';
+  if(v.toLowerCase().includes('sprint 3')||v.toLowerCase().includes('baseline')||v.toLowerCase().includes('nlp sprint')) return 'baseline';
+  if(v.toLowerCase().includes('v1')) return 'v1';
+  if(v.toLowerCase().includes('v2')||v.toLowerCase().includes('v3')) return 'v2';
+  if(v.toLowerCase().includes('target')) return 'target';
+  return 'pending';
+}
+
+// ═══════════════════════════════════════════════
+// RENDER TABLE
+// ═══════════════════════════════════════════════
+function renderTable(){
+  const tbody = document.getElementById('tableBody');
+  const baseline = baselineAvg();
+  tbody.innerHTML = ENTRIES.map(e => {
+    const avg = avgF1(e);
+    const diff = avg!==null && baseline ? (avg - baseline) : null;
+    const diffStr = diff!==null ? `<span class="score ${diff>=0?'green':'red'}">${diff>=0?'+':''}${diff.toFixed(3)}</span>` : '<span class="score muted">—</span>';
+    return `<tr class="${e.pending?'pending':''}${e.isTarget?' pending':''}">
+      <td><span class="model-badge ${modelBadgeClass(e.version)}">${e.version}</span></td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2)">${e.date||'<span style="color:var(--text3)">Pending</span>'}</td>
+      <td>${fmtScore(e.Sentiment)}</td>
+      <td>${fmtScore(e.Emotion)}</td>
+      <td>${fmtScore(e.Topic)}</td>
+      <td>${fmtScore(e.Intent)}</td>
+      <td>${fmtScore(e.Toxicity)}</td>
+      <td>${avg!==null ? `<span class="score ${scoreClass(avg)}" style="font-size:13px;font-weight:700">${avg.toFixed(3)}</span>` : '<span class="score muted">—</span>'}</td>
+      <td>${diffStr}</td>
+      <td style="font-size:10.5px;color:var(--text2)">${e.benchmark||'—'}</td>
+      <td style="font-size:10.5px;color:var(--text2);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${e.notes||''}">${e.notes||'—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════
+// RENDER KPI STRIP — best non-target score per task
+// ═══════════════════════════════════════════════
+function renderKPIs(){
+  TASKS.forEach(task => {
+    const best = ENTRIES.filter(e=>!e.isTarget && e[task]!==null && e[task]!==undefined)
+      .sort((a,b)=>b[task]-a[task])[0];
+    if(!best) return;
+    const v = best[task];
+    const el = document.getElementById('kpi-'+task.toLowerCase());
+    const mel = document.getElementById('kpi-'+task.toLowerCase()+'-model');
+    const bar = document.getElementById('kbar-'+task.toLowerCase());
+    if(el) el.textContent = v.toFixed(3);
+    if(mel) mel.textContent = best.version + ' · best so far';
+    if(bar) bar.style.width = (v*100)+'%';
+  });
+}
+
+// ═══════════════════════════════════════════════
+// RENDER ENTRY LOG
+// ═══════════════════════════════════════════════
+function renderLog(){
+  const el = document.getElementById('entryLog');
+  const sorted = [...ENTRIES].filter(e=>!e.isTarget).reverse();
+  const dotColors = {'claude':'#00d4aa','deepseek':'#a78bfa','baseline':'#7b8ba8','v1':'#fbbf24','v2':'#60a5fa','target':'#34d399','pending':'#4a5568'};
+  el.innerHTML = sorted.map(e => {
+    const avg = avgF1(e);
+    const dc = dotColors[modelBadgeClass(e.version)] || '#7b8ba8';
+    return `<div class="log-entry">
+      <div class="log-dot" style="background:${dc}"></div>
+      <div class="log-content">
+        <div style="display:flex;align-items:center;gap:8px;justify-content:space-between">
+          <span class="log-version">${e.version}</span>
+          ${avg!==null?`<span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:${scoreClass(avg)==='green'?'var(--green)':scoreClass(avg)==='amber'?'var(--amber)':'var(--red)'}">Avg ${avg.toFixed(3)}</span>`:''}
+        </div>
+        <div class="log-meta">${e.date||'Date pending'} · ${e.benchmark||''}</div>
+        <div class="log-notes">${e.desc||''}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════
+// RENDER CONFUSION PAIRS
+// ═══════════════════════════════════════════════
+function renderConfusion(){
+  const el = document.getElementById('confusionList');
+  const taskColors = {Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#fbbf24',Toxicity:'#34d399'};
+  el.innerHTML = CONFUSION.map(c => `
+    <div style="display:grid;grid-template-columns:70px 1fr 20px 1fr 50px 1fr 80px;gap:8px;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.03);font-size:11px;align-items:center">
+      <span style="font-size:9px;font-family:'JetBrains Mono',monospace;color:${taskColors[c.task]||'var(--text2)'};font-weight:600;text-transform:uppercase;letter-spacing:.06em">${c.task}</span>
+      <span style="background:rgba(248,113,113,0.1);border-radius:4px;padding:2px 7px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#f87171;text-align:center">${c.pred}</span>
+      <span style="color:var(--text3);text-align:center">→</span>
+      <span style="background:rgba(52,211,153,0.1);border-radius:4px;padding:2px 7px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#34d399;text-align:center">${c.correct}</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--amber);text-align:center">${c.count}</span>
+      <span style="color:var(--text2);font-size:11px">${c.cause}</span>
+      <span onclick="toggleFixed(${CONFUSION.indexOf(c)})" style="cursor:pointer;font-size:11px;padding:2px 8px;border-radius:4px;border:1px solid ${c.fixed?'rgba(52,211,153,0.3)':'rgba(255,255,255,0.08)'};background:${c.fixed?'rgba(52,211,153,0.08)':'transparent'};color:${c.fixed?'#34d399':'var(--text3)'}">
+        ${c.fixed?'✓ Fixed':'⬜ Pending'}
+      </span>
+    </div>`).join('');
+}
+
+function toggleFixed(i){
+  CONFUSION[i].fixed = !CONFUSION[i].fixed;
+  renderConfusion();
+}
+
+// ═══════════════════════════════════════════════
+// CHART: LINE — evolution
+// ═══════════════════════════════════════════════
+Chart.defaults.color='#7b8ba8';
+Chart.defaults.borderColor='rgba(255,255,255,0.05)';
+Chart.defaults.font.family="'Outfit',sans-serif";
+Chart.defaults.plugins.legend.display=true;
+Chart.defaults.plugins.tooltip.backgroundColor='#0c1221';
+Chart.defaults.plugins.tooltip.borderColor='rgba(0,212,170,0.3)';
+Chart.defaults.plugins.tooltip.borderWidth=1;
+Chart.defaults.plugins.tooltip.padding=10;
+Chart.defaults.plugins.tooltip.titleColor='#e8ecf4';
+Chart.defaults.plugins.tooltip.bodyColor='#9aa5b8';
+Chart.defaults.plugins.tooltip.titleFont={size:11,weight:'600',family:"'JetBrains Mono',monospace"};
+
+function buildCharts(){
+  // Get non-target entries with at least some scores
+  const entries = ENTRIES.filter(e=>!e.isTarget);
+  const labels = entries.map(e=>e.version);
+  const TASK_COLORS = {Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#f87171',Toxicity:'#34d399'};
+
+  // Line chart
+  const lineCtx = document.getElementById('lineChart');
+  if(lineCtx._c) lineCtx._c.destroy();
+  lineCtx._c = new Chart(lineCtx,{type:'line',data:{labels,datasets:[
+    ...TASKS.map(t=>({
+      label:t,
+      data:entries.map(e=>e[t]!=null?e[t]:null),
+      borderColor:TASK_COLORS[t],
+      backgroundColor:'transparent',
+      borderWidth:2,
+      pointRadius:5,
+      pointBackgroundColor:TASK_COLORS[t],
+      pointBorderColor:'#0c1221',
+      pointBorderWidth:2,
+      spanGaps:false,
+      tension:0.3
+    })),
+    {
+      label:'Target (0.80)',
+      data:entries.map(()=>0.80),
+      borderColor:'rgba(255,255,255,0.15)',
+      borderDash:[5,4],borderWidth:1.5,pointRadius:0,fill:false
+    }
+  ]},options:{responsive:true,maintainAspectRatio:true,
+    interaction:{mode:'index',intersect:false},
+    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10},padding:12}}},
+    scales:{
+      x:{grid:{display:false},ticks:{font:{size:9},maxRotation:20}},
+      y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},min:0,max:1.05,
+        title:{display:true,text:'Macro F1 Score',font:{size:9}}}
+    }
+  }});
+
+  // Bar chart — latest 4 non-pending with scores
+  const barEntries = entries.filter(e=>e.Sentiment!==null).slice(-4);
+  const barCtx = document.getElementById('barChart');
+  if(barCtx._c) barCtx._c.destroy();
+  barCtx._c = new Chart(barCtx,{type:'bar',data:{
+    labels:TASKS,
+    datasets:barEntries.map((e,i)=>({
+      label:e.version,
+      data:TASKS.map(t=>e[t]||0),
+      backgroundColor:[
+        'rgba(0,212,170,0.75)','rgba(167,139,250,0.7)','rgba(251,191,36,0.65)','rgba(96,165,250,0.65)'
+      ][i%4],
+      borderRadius:5
+    }))
+  },options:{responsive:true,maintainAspectRatio:true,
+    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10},padding:12}},
+      tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y.toFixed(3)}`}}},
+    scales:{
+      x:{grid:{display:false},ticks:{font:{size:10}}},
+      y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{font:{size:9}},min:0,max:1.05}
+    }
+  }});
+
+  // Gate chart — radar
+  const gateCtx = document.getElementById('gateChart');
+  const best = TASKS.reduce((obj,t)=>{
+    const val = Math.max(...ENTRIES.filter(e=>!e.isTarget&&e[t]!=null).map(e=>e[t]));
+    obj[t]=isNaN(val)?0:val; return obj;
+  },{});
+  if(gateCtx._c) gateCtx._c.destroy();
+  gateCtx._c = new Chart(gateCtx,{type:'radar',data:{
+    labels:TASKS,
+    datasets:[
+      {label:'Best achieved',data:TASKS.map(t=>best[t]),backgroundColor:'rgba(0,212,170,0.12)',borderColor:'rgba(0,212,170,0.7)',borderWidth:2,pointRadius:4,pointBackgroundColor:'#00d4aa'},
+      {label:'Sprint 4 target',data:TASKS.map(t=>TARGET[t]),backgroundColor:'rgba(251,191,36,0.06)',borderColor:'rgba(251,191,36,0.5)',borderWidth:1.5,borderDash:[4,3],pointRadius:3}
+    ]
+  },options:{responsive:true,maintainAspectRatio:true,
+    plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:9},padding:10}}},
+    scales:{r:{grid:{color:'rgba(255,255,255,0.07)'},ticks:{display:false},pointLabels:{font:{size:10}},min:0,max:1}}}
+  });
+
+  // Gate grid mini cards
+  const gg = document.getElementById('gateGrid');
+  gg.innerHTML = TASKS.map(t=>{
+    const v = best[t];
+    const pct = Math.min((v/TARGET[t])*100,100).toFixed(0);
+    const col = v>=TARGET[t]?'var(--green)':v>=0.65?'var(--amber)':'var(--red)';
+    return `<div style="background:var(--bg3);border-radius:8px;padding:8px 10px">
+      <div style="font-size:9px;color:var(--text2);font-family:'JetBrains Mono',monospace;margin-bottom:4px">${t.toUpperCase()}</div>
+      <div style="font-size:16px;font-weight:700;font-family:'JetBrains Mono',monospace;color:${col}">${v.toFixed(3)}</div>
+      <div style="font-size:9px;color:var(--text2);margin-top:2px">Target: ${TARGET[t].toFixed(2)} · ${pct}%</div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════
+// ADD ENTRY
+// ═══════════════════════════════════════════════
+function openAddModal(){
+  document.getElementById('f-date').value = new Date().toISOString().slice(0,10);
+  document.getElementById('addModal').classList.add('open');
+}
+function closeAddModal(){
+  document.getElementById('addModal').classList.remove('open');
+}
+document.getElementById('addModal').addEventListener('click',e=>{if(e.target===document.getElementById('addModal'))closeAddModal();});
+
+function addEntry(){
+  const ver = document.getElementById('f-version').value.trim();
+  if(!ver){ alert('Please enter a version name'); return; }
+  const entry = {
+    id: Date.now(),
+    version: ver,
+    date: document.getElementById('f-date').value || null,
+    desc: document.getElementById('f-desc').value.trim(),
+    Sentiment: parseFloat(document.getElementById('f-sentiment').value)||null,
+    Emotion: parseFloat(document.getElementById('f-emotion').value)||null,
+    Topic: parseFloat(document.getElementById('f-topic').value)||null,
+    Intent: parseFloat(document.getElementById('f-intent').value)||null,
+    Toxicity: parseFloat(document.getElementById('f-toxicity').value)||null,
+    benchmark: document.getElementById('f-benchmark').value,
+    notes: document.getElementById('f-notes').value.trim(),
+  };
+  // Clamp to 0-1
+  TASKS.forEach(t=>{ if(entry[t]!==null && (entry[t]<0||entry[t]>1)) entry[t]=Math.max(0,Math.min(1,entry[t])); });
+
+  // Insert before Production Target
+  const targetIdx = ENTRIES.findIndex(e=>e.isTarget);
+  if(targetIdx>=0) ENTRIES.splice(targetIdx,0,entry);
+  else ENTRIES.push(entry);
+
+  save();
+  // Update last updated display
+  document.getElementById('lastUpdated').textContent = entry.date || new Date().toISOString().slice(0,10);
+
+  renderAll();
+  closeAddModal();
+
+  // Clear form
+  ['f-version','f-date','f-desc','f-sentiment','f-emotion','f-topic','f-intent','f-toxicity','f-notes'].forEach(id=>{
+    document.getElementById(id).value='';
+  });
+}
+
+// ═══════════════════════════════════════════════
+// EXPORT
+// ═══════════════════════════════════════════════
+function exportCSV(){
+  const rows = [
+    ['Version','Date','Description','Sentiment F1','Emotion F1','Topic F1','Intent F1','Toxicity F1','Avg F1','Benchmark','Notes']
+  ];
+  ENTRIES.forEach(e=>{
+    const avg = avgF1(e);
+    rows.push([e.version, e.date||'', e.desc||'',
+      e.Sentiment??'', e.Emotion??'', e.Topic??'', e.Intent??'', e.Toxicity??'',
+      avg!==null?avg.toFixed(4):'', e.benchmark||'', e.notes||'']);
+  });
+  downloadCSV(rows,'artemis-nlp-accuracy-'+new Date().toISOString().slice(0,10)+'.csv');
+}
+
+function exportConfusionCSV(){
+  const rows=[['Task','Predicted','Correct','Count','Root Cause','Fixed']];
+  CONFUSION.forEach(c=>rows.push([c.task,c.pred,c.correct,c.count,c.cause,c.fixed?'Yes':'No']));
+  downloadCSV(rows,'artemis-confusion-pairs.csv');
+}
+
+function exportChartCSV(chartId, name){
+  const canvas = document.getElementById(chartId);
+  const chart = canvas._c;
+  if(!chart) return;
+  const labels = chart.data.labels||[];
+  const datasets = chart.data.datasets||[];
+  const rows = [['Label',...datasets.map(d=>d.label||'')]];
+  labels.forEach((l,i)=>rows.push([l,...datasets.map(d=>d.data[i]??'')]));
+  downloadCSV(rows, name+'.csv');
+}
+
+function downloadCSV(rows, filename){
+  const csv = rows.map(r=>r.map(c=>{const s=String(c).replace(/"/g,'""');return s.includes(',')||s.includes('"')?`"${s}"`:s;}).join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download = filename;
+  a.click();
+}
+
+// ═══════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════
+function renderAll(){
+  renderTable();
+  renderKPIs();
+  renderLog();
+  renderConfusion();
+  buildCharts();
+}
+
+requestAnimationFrame(()=>requestAnimationFrame(()=>renderAll()));
+
+// Auth check
+(function(){try{const s=JSON.parse(localStorage.getItem('artemis_app_session')||'null');if(!s){window.location.href='admin_login.html';}}catch(e){window.location.href='admin_login.html';}})();
+</script>
+</body>
+</html>
