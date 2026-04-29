@@ -340,6 +340,68 @@ tbody tr.pending-row td{opacity:.8}
     </div>
   </div>
 
+
+  <!-- ═══════════════════════════════════════════════════════
+       ORBITAL SYSTEM: Models as planets orbiting accuracy sun
+  ═══════════════════════════════════════════════════════ -->
+  <div style="margin-bottom:20px">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Model Accuracy Solar System</div>
+          <div class="card-sub">Each planet = one model version · Orbit radius = avg accuracy · Size = tasks completed · Hover for details</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button onclick="toggleOrbital()" id="orbitalToggle" class="btn" style="font-size:11px">⏸ Pause</button>
+          <button onclick="resetOrbital()" class="btn" style="font-size:11px;border-color:var(--bd);color:var(--t2)">Reset</button>
+        </div>
+      </div>
+      <canvas id="orbitalCanvas" style="display:block;width:100%;background:transparent;cursor:crosshair"></canvas>
+      <div id="orbitalInfo" style="padding:12px 20px;border-top:1px solid var(--bd);min-height:48px;display:flex;align-items:center;gap:12px">
+        <div style="font-size:12px;color:var(--t2)">Hover any planet to see model details · Planets orbit faster as accuracy improves</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PHASE 1+2 FLOW DIAGRAM (interactive JS)
+  ═══════════════════════════════════════════════════════ -->
+  <div style="margin-bottom:20px">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Pipeline Diagram — Phase 1, 1.5 &amp; 2: Label → Diversify → Train</div>
+          <div class="card-sub">Click any node to expand · From the Sprint 4 Training Strategy document</div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button onclick="expandAll('phase12')" class="btn" style="font-size:11px">Expand All</button>
+          <button onclick="collapseAll('phase12')" class="btn" style="font-size:11px;border-color:var(--bd);color:var(--t2)">Collapse</button>
+        </div>
+      </div>
+      <div id="phase12" style="padding:20px 24px;overflow-x:auto"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PHASE 3 FLOW DIAGRAM (weekly loop)
+  ═══════════════════════════════════════════════════════ -->
+  <div style="margin-bottom:20px">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Pipeline Diagram — Phase 3: Weekly Live Loop (Every Monday)</div>
+          <div class="card-sub">Three-tier routing system · Animated data flow · Click nodes to drill down</div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button onclick="expandAll('phase3')" class="btn" style="font-size:11px">Expand All</button>
+          <button onclick="collapseAll('phase3')" class="btn" style="font-size:11px;border-color:var(--bd);color:var(--t2)">Collapse</button>
+        </div>
+      </div>
+      <div id="phase3" style="padding:20px 24px;overflow-x:auto"></div>
+    </div>
+  </div>
+
+
 </div><!-- end main -->
 
 <!-- MODAL -->
@@ -679,5 +741,335 @@ requestAnimationFrame(()=>requestAnimationFrame(()=>renderAll()));
 // Auth — check both session keys
 (function(){try{const s=JSON.parse(localStorage.getItem('artemis_session')||localStorage.getItem('artemis_app_session')||'null');if(!s)window.location.href='admin_login.html';}catch(e){}})();
 </script>
+<script>
+// ═══════════════════════════════════════════════════════
+// ORBITAL SYSTEM
+// ═══════════════════════════════════════════════════════
+(function(){
+  const canvas = document.getElementById('orbitalCanvas');
+  if(!canvas) return;
+
+  let W, H, cx, cy, animating = true, raf, time = 0;
+  let hoveredPlanet = null;
+
+  function resize(){
+    W = canvas.parentElement.clientWidth;
+    H = Math.round(Math.min(W * 0.52, 520));
+    canvas.width = W; canvas.height = H;
+    cx = W/2; cy = H/2;
+  }
+  resize();
+
+  // Build planets from ENTRIES
+  function getPlanets(){
+    const entries = (typeof ENTRIES !== 'undefined' ? ENTRIES : []).filter(e=>!e.isTarget&&!e.isReference&&(typeof avg==='function'?avg(e):null)!=null);
+    const colors = ['#7b8ba8','#a78bfa','#00d4aa','#60a5fa','#fbbf24','#f87171','#34d399','#e879f9'];
+    const baseR = Math.min(W,H)*0.1;
+    const step  = Math.min(W,H)*0.078;
+    return entries.map((e, i) => {
+      const a = avg(e);
+      const tasksDone = (typeof TASKS !== 'undefined' ? TASKS : []).filter(t=>e[t]!=null).length;
+      return {
+        entry: e,
+        color: colors[i % colors.length],
+        orbitR: baseR + step * i,
+        size: 6 + tasksDone * 2.4,
+        speed: 0.0004 + (a / 100) * 0.0006,  // faster = more accurate
+        angle: (i / entries.length) * Math.PI * 2,
+        glow: a >= 80,
+      };
+    });
+  }
+
+  function draw(){
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0,0,W,H);
+
+    // Background stars
+    if(!canvas._stars){
+      canvas._stars = Array.from({length:60},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5,a:Math.random()}));
+    }
+    canvas._stars.forEach(s=>{
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${s.a*0.4})`; ctx.fill();
+    });
+
+    const planets = getPlanets();
+
+    // Draw orbit rings
+    planets.forEach(p=>{
+      ctx.beginPath(); ctx.arc(cx,cy,p.orbitR,0,Math.PI*2);
+      ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.lineWidth=1; ctx.stroke();
+    });
+
+    // Sun (target/goal)
+    const sunR = Math.min(W,H)*0.065;
+    const sunGlow = ctx.createRadialGradient(cx,cy,0,cx,cy,sunR*2.2);
+    sunGlow.addColorStop(0,'rgba(0,212,170,0.22)');
+    sunGlow.addColorStop(1,'transparent');
+    ctx.beginPath(); ctx.arc(cx,cy,sunR*2.2,0,Math.PI*2);
+    ctx.fillStyle=sunGlow; ctx.fill();
+
+    const sunGrad = ctx.createRadialGradient(cx,cy,0,cx,cy,sunR);
+    sunGrad.addColorStop(0,'#00f5c4');
+    sunGrad.addColorStop(0.6,'#00d4aa');
+    sunGrad.addColorStop(1,'rgba(0,212,170,0.4)');
+    ctx.beginPath(); ctx.arc(cx,cy,sunR,0,Math.PI*2);
+    ctx.fillStyle=sunGrad; ctx.fill();
+
+    // Sun label
+    ctx.font='bold 12px Outfit';
+    ctx.fillStyle='#0c1221'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText('TARGET', cx, cy-6);
+    ctx.font='bold 11px JetBrains Mono';
+    ctx.fillText('≥80%', cx, cy+8);
+    ctx.textBaseline='alphabetic';
+
+    // Draw planets
+    planets.forEach(p=>{
+      const px = cx + Math.cos(p.angle) * p.orbitR;
+      const py = cy + Math.sin(p.angle) * p.orbitR;
+      const isHov = hoveredPlanet === p;
+
+      // Glow
+      if(p.glow || isHov){
+        const g=ctx.createRadialGradient(px,py,0,px,py,p.size*3);
+        g.addColorStop(0,p.color+'44');
+        g.addColorStop(1,'transparent');
+        ctx.beginPath(); ctx.arc(px,py,p.size*3,0,Math.PI*2);
+        ctx.fillStyle=g; ctx.fill();
+      }
+
+      // Planet circle
+      const planetGrad = ctx.createRadialGradient(px-p.size*0.3,py-p.size*0.3,0,px,py,p.size);
+      planetGrad.addColorStop(0, p.color+'ff');
+      planetGrad.addColorStop(1, p.color+'88');
+      ctx.beginPath(); ctx.arc(px,py,isHov?p.size*1.25:p.size,0,Math.PI*2);
+      ctx.fillStyle=planetGrad; ctx.fill();
+      if(isHov){ ctx.strokeStyle='#fff'; ctx.lineWidth=1.5; ctx.stroke(); }
+
+      // Accuracy label on planet
+      const a = avg(p.entry);
+      ctx.font=`bold ${p.size>10?9:8}px JetBrains Mono`;
+      ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(a!=null?(a%1===0?a:a.toFixed(0))+'%':'?', px, py);
+      ctx.textBaseline='alphabetic';
+
+      // Version label below
+      const label = p.entry.version.replace('Our NLP ','').replace(' (Latest)','★').replace(' (Baseline)','₀').replace('DeepSeek V3 (Teacher)','DS V3').replace('Claude Sonnet (Reference)','Claude');
+      ctx.font=`${isHov?'bold ':''} ${isHov?11:9}px Outfit`;
+      ctx.fillStyle=isHov?'#e8ecf4':p.color+'cc';
+      ctx.textAlign='center';
+      ctx.fillText(label, px, py + p.size + 13);
+
+      // Update orbit angle
+      if(animating) p.angle += p.speed;
+    });
+
+    // Store planets for hit test
+    canvas._planets = planets;
+    time++;
+    raf = requestAnimationFrame(draw);
+  }
+
+  draw();
+
+  // Hover
+  canvas.addEventListener('mousemove', e=>{
+    const rect=canvas.getBoundingClientRect();
+    const mx=e.clientX-rect.left, my=e.clientY-rect.top;
+    hoveredPlanet = null;
+    const info = document.getElementById('orbitalInfo');
+    if(!canvas._planets) return;
+    for(const p of canvas._planets){
+      const px=cx+Math.cos(p.angle)*p.orbitR, py=cy+Math.sin(p.angle)*p.orbitR;
+      if(Math.hypot(mx-px,my-py)<p.size*2){
+        hoveredPlanet=p;
+        const a=avg(p.entry);
+        const tasksDone=TASKS.filter(t=>p.entry[t]!=null).length;
+        const scores=TASKS.map(t=>p.entry[t]!=null?`<span style="color:${TCOL[t]};font-family:'JetBrains Mono',monospace;font-size:11px">${t}: ${p.entry[t]%1===0?p.entry[t]:p.entry[t].toFixed(1)}%</span>`:`<span style="color:#4a5568;font-size:11px">${t}: —</span>`).join(' &nbsp;·&nbsp; ');
+        info.innerHTML=`<div style="width:10px;height:10px;border-radius:50%;background:${p.color};flex-shrink:0"></div>
+          <div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:3px">${p.entry.version}</div>
+            <div style="font-size:11px;margin-bottom:4px">${scores}</div>
+            <div style="font-size:10.5px;color:#7b8ba8">${p.entry.desc||''}</div>
+          </div>
+          <div style="margin-left:auto;text-align:right;flex-shrink:0">
+            <div style="font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace;color:${a>=80?'#34d399':a>=65?'#fbbf24':'#f87171'}">${a!=null?a.toFixed(1)+'%':'—'}</div>
+            <div style="font-size:10px;color:#7b8ba8">${tasksDone}/5 tasks evaluated</div>
+          </div>`;
+        break;
+      }
+    }
+    if(!hoveredPlanet) info.innerHTML=`<div style="font-size:12px;color:#7b8ba8">Hover any planet to see model details · Planets orbit faster as accuracy improves · ★ = latest version</div>`;
+  });
+  canvas.addEventListener('mouseleave',()=>{ hoveredPlanet=null; });
+
+  window.toggleOrbital=function(){
+    animating=!animating;
+    document.getElementById('orbitalToggle').textContent=animating?'⏸ Pause':'▶ Play';
+    if(animating)draw();
+  };
+  window.resetOrbital=function(){
+    if(canvas._planets) canvas._planets.forEach((p,i)=>p.angle=(i/canvas._planets.length)*Math.PI*2);
+  };
+
+  window.addEventListener('resize',()=>{ resize(); canvas._stars=null; });
+})();
+
+// ═══════════════════════════════════════════════════════
+// FLOW DIAGRAMS
+// ═══════════════════════════════════════════════════════
+(function(){
+
+// Node styling
+const NS = {
+  teal:   { bg:'rgba(0,212,170,0.1)',  border:'rgba(0,212,170,0.5)',  text:'#00d4aa',  head:'#00d4aa' },
+  purple: { bg:'rgba(167,139,250,0.1)',border:'rgba(167,139,250,0.5)',text:'#a78bfa',  head:'#a78bfa' },
+  amber:  { bg:'rgba(251,191,36,0.1)', border:'rgba(251,191,36,0.5)', text:'#fbbf24',  head:'#fbbf24' },
+  blue:   { bg:'rgba(96,165,250,0.1)', border:'rgba(96,165,250,0.5)', text:'#60a5fa',  head:'#60a5fa' },
+  green:  { bg:'rgba(52,211,153,0.1)', border:'rgba(52,211,153,0.5)', text:'#34d399',  head:'#34d399' },
+  red:    { bg:'rgba(248,113,113,0.1)',border:'rgba(248,113,113,0.5)',text:'#f87171',  head:'#f87171' },
+  grey:   { bg:'rgba(255,255,255,0.04)',border:'rgba(255,255,255,0.1)',text:'#7b8ba8', head:'#7b8ba8' },
+};
+
+function node(text, sub, style, detail){
+  const s = NS[style]||NS.grey;
+  const id = 'fn_'+Math.random().toString(36).slice(2);
+  const detailHtml = detail ? `<div id="${id}_d" style="display:none;padding:10px 14px 14px;font-size:11px;color:#9aa5b8;line-height:1.7;border-top:1px solid rgba(255,255,255,0.06);margin-top:8px">${detail}</div>` : '';
+  const clickable = detail ? `onclick="var d=document.getElementById('${id}_d');if(d){d.style.display=d.style.display==='none'?'block':'none';this.querySelector('.fn-arrow').textContent=d.style.display==='block'?'▲':'▼';}"style="cursor:pointer"` : '';
+  const arrow = detail ? `<span class="fn-arrow" style="float:right;color:#4a5568;font-size:11px;margin-top:2px">▼</span>` : '';
+  return `<div ${clickable} style="background:${s.bg};border:1px solid ${s.border};border-radius:10px;padding:11px 14px;margin:0 auto;max-width:520px;transition:all .2s;user-select:none">
+    ${arrow}
+    <div style="font-size:12px;font-weight:600;color:${s.text}">${text}</div>
+    ${sub?`<div style="font-size:10.5px;color:#7b8ba8;margin-top:3px;font-family:'JetBrains Mono',monospace">${sub}</div>`:''}
+    ${detailHtml}
+  </div>`;
+}
+
+function arrow(label='', col='rgba(255,255,255,0.2)'){
+  return `<div style="display:flex;flex-direction:column;align-items:center;margin:5px 0;gap:2px">
+    ${label?`<span style="font-size:9.5px;font-family:'JetBrains Mono',monospace;color:#4a5568">${label}</span>`:''}
+    <svg width="18" height="20" viewBox="0 0 18 20"><line x1="9" y1="0" x2="9" y2="14" stroke="${col}" stroke-width="1.5"/><polygon points="4,12 14,12 9,20" fill="${col}"/></svg>
+  </div>`;
+}
+
+function section(title, col, content){
+  return `<div style="border:1.5px solid ${col}33;border-radius:12px;padding:16px 18px;margin-bottom:14px;background:${col}08">
+    <div style="font-size:11px;font-weight:700;color:${col};font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;text-align:center">${title}</div>
+    ${content}
+  </div>`;
+}
+
+function split(leftHtml, rightHtml){
+  return `<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0">${leftHtml}${rightHtml}</div>`;
+}
+
+function connector(label='', vertical=true){
+  if(vertical) return arrow(label);
+  return `<div style="display:flex;align-items:center;justify-content:center;gap:6px;margin:0 6px">
+    <svg width="30" height="16" viewBox="0 0 30 16"><line x1="0" y1="8" x2="22" y2="8" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><polygon points="16,3 28,8 16,13" fill="rgba(255,255,255,0.2)"/></svg>
+    ${label?`<span style="font-size:9px;color:#4a5568;font-family:'JetBrains Mono',monospace">${label}</span>`:''}
+  </div>`;
+}
+
+// ── PHASE 1+2 DIAGRAM ──
+const p12 = document.getElementById('phase12');
+if(p12) p12.innerHTML = `
+  ${section('#00d4aa', '#00d4aa', `
+    ${node('18K posts from Redshift','text > 10 chars · All 20 Facebook pages','teal','Posts pulled from Redshift. Filtered to text > 10 chars. This is the full dataset before any labelling starts.')}
+    ${arrow()}
+    ${node('Stratified selection: 6,000 posts for Claude','Balanced across all 20 pages, all topics, sentiments, emotions','amber','Not random. Stratified means if fear is 2% of all posts, fear is 2% of the 6K selected. Ensures Claude sees rare classes (fear, love, negative) not just dominant ones (joy, positive, humour).')}
+    ${arrow()}
+    ${node('Claude labels 6,000 posts','5 tasks + reasoning · cost ~$10','teal','Claude labels Sentiment, Emotion, Topic, Intent, Toxicity for each post AND writes reasoning. Reasoning is the key — it becomes the rules in the next step. Self-reference: Claude is ground truth.')}
+    ${arrow()}
+    ${node('Mine decision rules from Claude reasoning','IF [signal] THEN [label] BECAUSE [reason]','purple','Claude summarises top 15 rules per task. Includes edge cases and tiebreakers. Example: "Laughing emoji on short caption = Joy not Anger." These rules become the DeepSeek system prompt.')}
+    ${arrow()}
+    ${node('Build rich DeepSeek system prompt v1','Role · Taxonomy · Rules · Few-shots · Format','blue','5 sections: (1) ROLE: Expert classifier for British social media posts. (2) TAXONOMY: Every label precisely defined, locked across versions. (3) RULES: From Claude — sarcasm, tiebreakers. (4) FEW-SHOTS: 5-10 hardest cases per task. (5) FORMAT: Strict JSON {label, confidence, reasoning}.')}
+    ${arrow()}
+    ${node('DeepSeek labels remaining 12,000 posts','Rich prompt v1 · stratified · cost ~$2.50','purple','DeepSeek uses the Claude-derived rules to label the remaining 12K posts. Stratified across pages and topics. Conf score returned with every label.')}
+    ${arrow()}
+    ${node('Confidence < 0.80 → Claude checks','~10-15% of 12K routed back · cost ~$2.50','amber','Posts where DeepSeek is uncertain go back to Claude. Disagreements = new rules added to prompt v2, v3, v4. Prompt is versioned and iterates over time.')}
+    ${split(
+      node('Disagree: update prompt','New rule added to next version','red','Every disagreement is a learning event. The rule that caused the disagreement is added to the prompt so DeepSeek handles it correctly next time.'),
+      node('Agree: confirmed','Label committed','green','Both models agree. Label is committed to the training dataset with source_weight=1.0.')
+    )}
+  `)}
+
+  ${section('Phase 1.5: Synthetic Diversity', '#f87171', `
+    ${split(
+      node('18K real labelled posts','From Phase 1 · domain-specific','blue','Real posts from 20 UK entertainment/prison/meme pages. High domain specificity — models may overfit to prison memes and miss general patterns.'),
+      node('~2K synthetic posts · Claude generates','4 niches × 500 · food, fitness, sport, parenting','red','Claude writes AND labels simultaneously. Prompt: "Write a realistic Facebook post from a food page that is sarcastic joy with emoji." Teaches models that sarcasm looks the same in any content type.')
+    )}
+    ${arrow()}
+    ${node('Combined 20K dataset','Real wt 1.0-4.0 · Synthetic wt 0.5','grey','Synthetic at half weight — it is a bridge, not permanent. As real pages from new niches onboard, synthetic gets replaced by real data.')}
+    ${arrow()}
+    ${node('Stratified 80/20 train/test split','Class ratios preserved in both splits','amber','If fear = 2% of data, fear = 2% of train AND 2% of test. Prevents the test set having zero fear posts which would make F1 scores unreliable.')}
+  `)}
+
+  ${section('Phase 2: Fine-tune 6 Models', '#6366f1', `
+    ${node('Fine-tune 6 models — weighted loss','loss = per_sample_loss × conf × class_wt × source_wt','purple','Claude examples: 4× weight. Rare classes: up to 10× weight. Synthetic: 0.5× weight. Model learns hardest from the most certain, unusual, reliable examples.')}
+    ${arrow()}
+    ${node('Gate: Macro F1 > 0.85','Must pass BOTH Rafeh 97-post holdout AND 4K stratified test','red','Two separate exams. Cannot pass by memorising common classes only. If gate fails, model goes back for more fine-tuning.')}
+    ${split(
+      node('Fail: back to fine-tuning','Adjust class weights, add more examples','red'),
+      node('Pass: deploy to SageMaker','6 separate endpoints · independent scaling','green','Each model deployed to its own SageMaker endpoint. Parallel inference, < 100ms per post.')
+    )}
+    ${arrow()}
+    ${node('Rafeh validates 200 random posts','Final human quality gate','teal','Rafeh manually reviews 200 posts from model output. Human sign-off required before production use.')}
+    ${arrow()}
+    ${node('✓ Models deployed · Proceed to Phase 3','Go to weekly live pipeline','green')}
+  `)}
+`;
+
+// ── PHASE 3 DIAGRAM ──
+const p3 = document.getElementById('phase3');
+if(p3) p3.innerHTML = `
+  ${node('⏰ Every Monday 1 AM — Weekly pipeline runs','Automated · LOKI + GALACTUS','teal','LOKI pulls new posts from Facebook to S3. GALACTUS loads posts from S3 to Redshift. Fully automated, no manual trigger needed.')}
+  ${arrow()}
+  ${node('New posts from Facebook','LOKI (scraper) → S3 → GALACTUS → Redshift','blue')}
+  ${arrow()}
+  ${node('Our 6 fine-tuned models label every new post','6 SageMaker endpoints in parallel · < 100ms per post','purple','All 6 models (Sentiment, Emotion, Topic, Intent, Toxicity × 2 versions) label each post simultaneously. Confidence score returned with every label.')}
+  ${arrow('Confidence score per post')}
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0">
+    ${node('🟢 Tier 1: Auto-commit','conf > 0.85 · ~75% of posts','green','Model is confident. Label committed directly to post_labels. No human or DeepSeek review needed. This tier gets larger as models improve.')}
+    ${node('🟡 Tier 2: DS Agent','conf 0.60–0.85 · ~18% of posts','amber','Model is uncertain. Sent to DeepSeek Agent with rich prompt v4+, few-shot library, error memory, and page-specific profiles for review.')}
+    ${node('🔴 Tier 3: DS Agent','conf < 0.60 · ~7% of posts','red','Model is very uncertain. Also sent to DeepSeek Agent. More scrutiny applied. If DeepSeek also uncertain, escalated to Claude.')}
+  </div>
+
+  ${arrow()}
+  ${node('DeepSeek Agent reviews Tier 2 + 3 posts','Rich prompt v4+ · few-shot library · error memory · page profiles','purple','DeepSeek sees the full context: its own system prompt rules, examples of past errors for that post type, and the profile of the page the post came from.')}
+  ${arrow()}
+  ${node('DS confidence < 0.80 → Claude checks','Low-conf only · cost ~$1/month','amber','Only the posts DeepSeek is unsure about go to Claude. As models improve, this escalation rate drops. Eventually Claude is barely needed.')}
+  ${split(
+    node('Disagree: update prompt','New rule added · prompt versioned','red','Disagreement = the model got something wrong that the rules did not cover. The gap is added as a new rule. Prompt learns continuously.'),
+    node('Agree: confirmed','Label committed to post_labels','green')
+  )}
+  ${arrow()}
+  ${node('post_labels updated weekly','Labels + confidence + model_version + tier','teal','Full audit trail: every label has which model produced it, what confidence score, which tier it went through, and when.')}
+  ${arrow()}
+  ${node('Quarterly retrain at 10K uncertain posts','Full retrain on ALL data · New model if F1 improves','blue','Every quarter, when 10K uncertain/corrected posts accumulate, models are fully retrained. Each cycle: Tier 1 % grows, DeepSeek called less, Claude barely needed. System gets faster and cheaper.')}
+`;
+
+// expand/collapse all
+window.expandAll = function(id){
+  document.getElementById(id).querySelectorAll('[id$="_d"]').forEach(d=>{
+    d.style.display='block';
+    const btn=d.closest('[onclick]');
+    if(btn){ const a=btn.querySelector('.fn-arrow'); if(a)a.textContent='▲'; }
+  });
+};
+window.collapseAll = function(id){
+  document.getElementById(id).querySelectorAll('[id$="_d"]').forEach(d=>{
+    d.style.display='none';
+    const btn=d.closest('[onclick]');
+    if(btn){ const a=btn.querySelector('.fn-arrow'); if(a)a.textContent='▼'; }
+  });
+};
+
+})();
+</script>
+
 </body>
 </html>
