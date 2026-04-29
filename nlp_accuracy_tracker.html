@@ -512,55 +512,43 @@ let ENTRIES = [];
 
 // ── LOAD: try DynamoDB first, fall back to localStorage ──
 async function loadEntries() {
-  setStatus('loading', 'Loading from DynamoDB…');
+  setStatus('loading', 'Loading…');
   try {
+    // Single call: nlp_get_all returns entries OR seeds+returns in one Lambda invocation
     const res = await fetch(API, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({action: 'nlp_get_all'})
     });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    
-    if (data.entries && data.entries.length > 0) {
-      ENTRIES = data.entries;
+
+    if (data.ok && Array.isArray(data.entries)) {
+      ENTRIES = data.entries.length > 0 ? data.entries : getDefaultEntries();
       _dbAvailable = true;
-      setStatus('synced', `DynamoDB · ${ENTRIES.length} entries`);
-      // Seed localStorage cache
+      // If table was empty, write defaults to DynamoDB in background (fire-and-forget)
+      if (data.entries.length === 0) {
+        fetch(API, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({action: 'nlp_seed'})
+        }).catch(()=>{});
+      }
       localStorage.setItem('artemis_nlp_v2', JSON.stringify(ENTRIES));
-      return;
+      setStatus('synced', 'DynamoDB · ' + ENTRIES.length + ' entries');
+    } else {
+      throw new Error('Bad response');
     }
-    
-    // Table is empty — seed it with defaults then reload
-    if (data.entries && data.entries.length === 0) {
-      setStatus('saving', 'Seeding DynamoDB with defaults…');
-      await fetch(API, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({action: 'nlp_seed'})
-      });
-      // Reload after seeding
-      const res2 = await fetch(API, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({action: 'nlp_get_all'})
-      });
-      const data2 = await res2.json();
-      ENTRIES = data2.entries || getDefaultEntries();
-      _dbAvailable = true;
-      setStatus('synced', `DynamoDB · ${ENTRIES.length} entries`);
-      localStorage.setItem('artemis_nlp_v2', JSON.stringify(ENTRIES));
-      return;
-    }
-    throw new Error('Unexpected response');
   } catch(e) {
-    console.warn('DynamoDB load failed, using localStorage:', e.message);
+    console.warn('DynamoDB unavailable, using localStorage:', e.message);
     _dbAvailable = false;
-    // Fall back to localStorage
     const cached = localStorage.getItem('artemis_nlp_v2');
     ENTRIES = cached ? JSON.parse(cached) : getDefaultEntries();
-    setStatus('local', 'Local only — DynamoDB unavailable');
+    setStatus('local', 'Local only');
   }
+  // Render once, mark ready for orbital system
+  window._nlpReady = true;
+  renderAll();
 }
 
 // ── SAVE ENTRY to DynamoDB (with localStorage backup) ──
@@ -858,10 +846,8 @@ function dl(rows,fn){ const csv=rows.map(r=>r.map(c=>{const s=String(c).replace(
 // ─── BOOT ───
 function renderAll(){ renderTable();renderKPIs();renderLog();buildCharts(); }
 
-// Load from DynamoDB on page load, then render
-loadEntries().then(()=>{
-  requestAnimationFrame(()=>requestAnimationFrame(()=>renderAll()));
-});
+// Load from DynamoDB ONCE on page load — renderAll called inside loadEntries
+loadEntries();
 
 // Auth — check both session keys
 (function(){try{const s=JSON.parse(localStorage.getItem('artemis_session')||localStorage.getItem('artemis_app_session')||'null');if(!s)window.location.href='admin_login.html';}catch(e){}})();
@@ -903,7 +889,7 @@ window.openAdd = function(){
   let planetAngles = [];
 
   function buildPlanets(){
-    const entries = ENTRIES.filter(e=>!e.isTarget&&!e.isReference&&avg(e)!=null);
+    const entries = (window._nlpReady && typeof ENTRIES!=='undefined' ? ENTRIES : []).filter(e=>!e.isTarget&&!e.isReference&&avg(e)!=null);
     const colors = ['#7b8ba8','#a78bfa','#00d4aa','#60a5fa','#fbbf24','#f87171','#34d399','#e879f9','#fb923c','#38bdf8'];
     const maxOrbit = Math.min(W,H)*0.44;
     const minOrbit = Math.min(W,H)*0.1;
