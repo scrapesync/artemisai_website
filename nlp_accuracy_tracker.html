@@ -140,6 +140,8 @@ tbody tr.pending-row td{opacity:.8}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .kpi,.card,.chart-row,.chart-row-3{animation:fadeUp .2s ease both}
+
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -174,7 +176,10 @@ tbody tr.pending-row td{opacity:.8}
         Scores shown as accuracy % &nbsp;·&nbsp; 🟢 ≥80% target met &nbsp;·&nbsp; 🟡 65–79% improving &nbsp;·&nbsp; 🔴 &lt;65% needs work
       </p>
     </div>
-    <div style="text-align:right">
+    <div style="text-align:right;display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+      <div id="syncStatus" style="min-width:180px;text-align:right">
+        <span style="color:#7b8ba8;font-family:'JetBrains Mono',monospace;font-size:11px">⟳ Connecting…</span>
+      </div>
       <div style="font-size:9px;color:var(--t2);font-family:'JetBrains Mono',monospace">Last updated</div>
       <div id="lastUpdated" style="font-size:13px;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--accent)">26 Apr 2026</div>
     </div>
@@ -483,46 +488,146 @@ const TASKS = ['Sentiment','Emotion','Topic','Intent','Toxicity'];
 const TCOL  = {Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#f87171',Toxicity:'#34d399'};
 const TARGET = {Sentiment:80,Emotion:80,Topic:80,Intent:80,Toxicity:95};
 
-let ENTRIES = JSON.parse(localStorage.getItem('artemis_nlp_v2')||'null') || [
-  {id:1,version:'Our NLP v0 (Baseline)',date:null,desc:'Pre-trained base models, no fine-tuning',
-   Sentiment:null,Emotion:null,Topic:null,Intent:null,Toxicity:null,
-   benchmark:'vs Claude (97 posts)',notes:'cardiffnlp XLM-R (sentiment), DistilBERT (emotion), DeBERTa-v3 (topic/intent), Detoxify (toxicity)'},
-  {id:2,version:'DeepSeek V3 (Teacher)',date:'2026-03-26',desc:'Teacher model trained on Claude labels — all 5 tasks',
-   Sentiment:80.4,Emotion:74.2,Topic:75.3,Intent:72.2,Toxicity:94.8,
-   benchmark:'vs Claude (97 posts)',notes:'Knowledge distillation source. Claude labels → DeepSeek. Cost $0.000206/post.'},
-  {id:3,version:'Claude Sonnet (Reference)',date:'2026-03-26',desc:'Ground truth reference — used to label training data',
-   Sentiment:100,Emotion:100,Topic:100,Intent:100,Toxicity:100,
-   benchmark:'vs self (97 posts)',notes:'Ground truth. Claude labels were used to train DeepSeek which then fine-tuned our models.',isReference:true},
-  {id:4,version:'Our NLP v1',date:null,desc:'Fine-tuned on 2,545 DeepSeek labels',
-   Sentiment:77.3,Emotion:59.3,Topic:50,Intent:45,Toxicity:92,
-   benchmark:"vs Rafeh's GT (97 posts)",notes:'Pending — run sentiment_finetune_v1.ipynb in Colab (T4 GPU)',pending:true},
-  {id:5,version:'Our NLP v2',date:null,desc:'v1 + Rafeh ground truth labels merged',
-   Sentiment:75.5,Emotion:52.4,Topic:56,Intent:55,Toxicity:93,
-   benchmark:'vs Rafeh GT (97 posts)',notes:'Pending Rafeh validation files. Emotion v2→v3: 52.4%→69.3%',pending:true},
-  {id:6,version:'Our NLP v3',date:null,desc:'v2 + Q2 retrain with Tier 3 corrections',
-   Sentiment:72.6,Emotion:72.3,Topic:61,Intent:60,Toxicity:92,
-   benchmark:'vs Rafeh GT (97 posts)',notes:'Q2 2026 quarterly retrain',pending:true},
-  {id:7,version:'Our NLP v4 (Latest)',date:'2026-04-26',desc:'Latest fine-tune run — DeepSeek weekly loop',
-   Sentiment:88,Emotion:80,Topic:76,Intent:75,Toxicity:90,
-   benchmark:'vs Claude (97 posts)',notes:'Working on resolving Toxicity — target 95%'},
-  {id:8,version:'Production Target',date:null,desc:'Sprint 4 gate: all tasks ≥ 80%, agreement ≥ 85%',
-   Sentiment:80,Emotion:80,Topic:80,Intent:80,Toxicity:95,
-   benchmark:'Sprint 4 gate',notes:'Target thresholds from ArtemisAI labelling strategy doc.',isTarget:true},
-];
+// ── DynamoDB via existing Lambda endpoint ──
+const API = 'https://g6zr0b5lwe.execute-api.eu-west-2.amazonaws.com/default/lambda_save';
+let _dbAvailable = null; // null=unknown, true=ok, false=failed
 
-function save(){ localStorage.setItem('artemis_nlp_v2',JSON.stringify(ENTRIES)); }
-function avg(e){ const v=TASKS.map(t=>e[t]).filter(x=>x!=null&&!isNaN(x)); return v.length?v.reduce((a,b)=>a+b)/v.length:null; }
-function sc(v){ if(v==null)return'm'; if(v>=80)return'g'; if(v>=65)return'a'; return'r'; }
-function pct(v){ if(v==null)return'<span class="sc m">—</span>'; const c=sc(v); return`<span class="sc ${c}">${v%1===0?v.toFixed(0):v.toFixed(1)}%</span>`; }
-function badgeStyle(ver){
-  const v=ver.toLowerCase();
-  if(v.includes('claude'))return'border:1px solid rgba(0,212,170,.3);background:rgba(0,212,170,.08);color:#00d4aa';
-  if(v.includes('deepseek'))return'border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.08);color:#a78bfa';
-  if(v.includes('target'))return'border:1px solid rgba(52,211,153,.3);background:rgba(52,211,153,.08);color:#34d399';
-  if(v.includes('v4')||v.includes('latest'))return'border:1px solid rgba(251,191,36,.35);background:rgba(251,191,36,.08);color:#fbbf24';
-  if(v.includes('v0')||v.includes('baseline'))return'border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:#7b8ba8';
-  return'border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#60a5fa';
+// Status indicator elements
+function setStatus(state, msg) {
+  const el = document.getElementById('syncStatus');
+  if (!el) return;
+  const configs = {
+    loading:  {col:'#7b8ba8', icon:'⟳', spin:true},
+    synced:   {col:'#34d399', icon:'✓', spin:false},
+    saving:   {col:'#fbbf24', icon:'⟳', spin:true},
+    error:    {col:'#f87171', icon:'⚠', spin:false},
+    local:    {col:'#fbbf24', icon:'⚡', spin:false},
+  };
+  const cfg = configs[state] || configs.local;
+  el.innerHTML = `<span style="color:${cfg.col};font-family:'JetBrains Mono',monospace;font-size:11px;display:flex;align-items:center;gap:5px"><span style="${cfg.spin?'display:inline-block;animation:spin .8s linear infinite':''}">${cfg.icon}</span>${msg}</span>`;
 }
+
+// ── ENTRIES: live array, always authoritative ──
+let ENTRIES = [];
+
+// ── LOAD: try DynamoDB first, fall back to localStorage ──
+async function loadEntries() {
+  setStatus('loading', 'Loading from DynamoDB…');
+  try {
+    const res = await fetch(API, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: 'nlp_get_all'})
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    
+    if (data.entries && data.entries.length > 0) {
+      ENTRIES = data.entries;
+      _dbAvailable = true;
+      setStatus('synced', `DynamoDB · ${ENTRIES.length} entries`);
+      // Seed localStorage cache
+      localStorage.setItem('artemis_nlp_v2', JSON.stringify(ENTRIES));
+      return;
+    }
+    
+    // Table is empty — seed it with defaults then reload
+    if (data.entries && data.entries.length === 0) {
+      setStatus('saving', 'Seeding DynamoDB with defaults…');
+      await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({action: 'nlp_seed'})
+      });
+      // Reload after seeding
+      const res2 = await fetch(API, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({action: 'nlp_get_all'})
+      });
+      const data2 = await res2.json();
+      ENTRIES = data2.entries || getDefaultEntries();
+      _dbAvailable = true;
+      setStatus('synced', `DynamoDB · ${ENTRIES.length} entries`);
+      localStorage.setItem('artemis_nlp_v2', JSON.stringify(ENTRIES));
+      return;
+    }
+    throw new Error('Unexpected response');
+  } catch(e) {
+    console.warn('DynamoDB load failed, using localStorage:', e.message);
+    _dbAvailable = false;
+    // Fall back to localStorage
+    const cached = localStorage.getItem('artemis_nlp_v2');
+    ENTRIES = cached ? JSON.parse(cached) : getDefaultEntries();
+    setStatus('local', 'Local only — DynamoDB unavailable');
+  }
+}
+
+// ── SAVE ENTRY to DynamoDB (with localStorage backup) ──
+async function dbSaveEntry(entry) {
+  // Always save to localStorage immediately
+  const idx = ENTRIES.findIndex(e => e.id === entry.id);
+  if (idx >= 0) ENTRIES[idx] = entry; else {
+    const ti = ENTRIES.findIndex(e => e.isTarget);
+    if (ti >= 0) ENTRIES.splice(ti, 0, entry); else ENTRIES.push(entry);
+  }
+  localStorage.setItem('artemis_nlp_v2', JSON.stringify(ENTRIES));
+  
+  if (!_dbAvailable) {
+    setStatus('local', 'Saved locally — DynamoDB unavailable');
+    return;
+  }
+  
+  setStatus('saving', 'Saving to DynamoDB…');
+  try {
+    const res = await fetch(API, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: 'nlp_save_entry', entry})
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    setStatus('synced', `DynamoDB · saved ✓`);
+    setTimeout(() => setStatus('synced', `DynamoDB · ${ENTRIES.length} entries`), 2000);
+  } catch(e) {
+    console.warn('DynamoDB save failed:', e.message);
+    setStatus('error', 'DynamoDB save failed — stored locally');
+    _dbAvailable = false;
+  }
+}
+
+// ── DELETE ENTRY from DynamoDB ──
+async function dbDeleteEntry(id) {
+  ENTRIES = ENTRIES.filter(e => e.id !== id);
+  localStorage.setItem('artemis_nlp_v2', JSON.stringify(ENTRIES));
+  
+  if (!_dbAvailable) return;
+  
+  try {
+    await fetch(API, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: 'nlp_delete_entry', id: String(id)})
+    });
+    setStatus('synced', `DynamoDB · ${ENTRIES.length} entries`);
+  } catch(e) {
+    console.warn('DynamoDB delete failed:', e.message);
+  }
+}
+
+// ── DEFAULT ENTRIES (seed data, used if DynamoDB and localStorage both empty) ──
+function getDefaultEntries(){
+  return [
+    {id:'nlp_v0',sort_order:1,version:'Our NLP v0 (Baseline)',date:null,desc:'Pre-trained base models, no fine-tuning',Sentiment:null,Emotion:null,Topic:null,Intent:null,Toxicity:null,benchmark:'vs Claude (97 posts)',notes:'cardiffnlp XLM-R, DistilBERT, DeBERTa-v3, Detoxify'},
+    {id:'nlp_ds3',sort_order:2,version:'DeepSeek V3 (Teacher)',date:'2026-03-26',desc:'Teacher model trained on Claude labels — all 5 tasks',Sentiment:80.4,Emotion:74.2,Topic:75.3,Intent:72.2,Toxicity:94.8,benchmark:'vs Claude (97 posts)',notes:'Knowledge distillation source. Cost $0.000206/post.'},
+    {id:'nlp_claude',sort_order:3,version:'Claude Sonnet (Reference)',date:'2026-03-26',desc:'Ground truth reference — used to label training data',Sentiment:100,Emotion:100,Topic:100,Intent:100,Toxicity:100,benchmark:'vs self (97 posts)',notes:'Ground truth. Claude labels → DeepSeek → our models.',isReference:true},
+    {id:'nlp_v1',sort_order:4,version:'Our NLP v1',date:null,desc:'Fine-tuned on 2,545 DeepSeek labels',Sentiment:77.3,Emotion:59.3,Topic:50,Intent:45,Toxicity:92,benchmark:"vs Rafeh's GT (97 posts)",notes:'Pending — run in Colab (T4 GPU)',pending:true},
+    {id:'nlp_v2',sort_order:5,version:'Our NLP v2',date:null,desc:'v1 + Rafeh ground truth labels merged',Sentiment:75.5,Emotion:52.4,Topic:56,Intent:55,Toxicity:93,benchmark:'vs Rafeh GT (97 posts)',notes:'Emotion v2→v3: 52.4%→69.3%',pending:true},
+    {id:'nlp_v3',sort_order:6,version:'Our NLP v3',date:null,desc:'v2 + Q2 retrain with Tier 3 corrections',Sentiment:72.6,Emotion:72.3,Topic:61,Intent:60,Toxicity:92,benchmark:'vs Rafeh GT (97 posts)',notes:'Q2 2026 quarterly retrain',pending:true},
+    {id:'nlp_v4',sort_order:7,version:'Our NLP v4 (Latest)',date:'2026-04-26',desc:'Latest fine-tune run — DeepSeek weekly loop',Sentiment:88,Emotion:80,Topic:76,Intent:75,Toxicity:90,benchmark:'vs Claude (97 posts)',notes:'Working on resolving Toxicity — target 95%'},
+    {id:'nlp_target',sort_order:99,version:'Production Target',date:null,desc:'Sprint 4 gate: all tasks ≥ 80%, agreement ≥ 85%',Sentiment:80,Emotion:80,Topic:80,Intent:80,Toxicity:95,benchmark:'Sprint 4 gate',notes:'Target thresholds from labelling strategy doc.',isTarget:true},
+  ];
+}
+
 
 // ─── TABLE ───
 function renderTable(){
@@ -705,23 +810,41 @@ document.getElementById('modal').addEventListener('click',e=>{if(e.target===docu
 
 function num(id){ const v=parseFloat(document.getElementById(id).value); return isNaN(v)?null:Math.max(0,Math.min(100,v)); }
 
-function saveEntry(){
+async function saveEntry(){
   const ver=document.getElementById('fVersion').value.trim();
   if(!ver){alert('Please enter a model name');return;}
-  const data={version:ver,date:document.getElementById('fDate').value||null,desc:document.getElementById('fDesc').value.trim(),Sentiment:num('fSentiment'),Emotion:num('fEmotion'),Topic:num('fTopic'),Intent:num('fIntent'),Toxicity:num('fToxicity'),benchmark:document.getElementById('fBenchmark').value,notes:document.getElementById('fNotes').value.trim()};
+  const formData={
+    version:ver, date:document.getElementById('fDate').value||null,
+    desc:document.getElementById('fDesc').value.trim(),
+    Sentiment:num('fSentiment'), Emotion:num('fEmotion'),
+    Topic:num('fTopic'), Intent:num('fIntent'), Toxicity:num('fToxicity'),
+    benchmark:document.getElementById('fBenchmark').value,
+    notes:document.getElementById('fNotes').value.trim()
+  };
+  let entry;
   if(_eid){
-    const i=ENTRIES.findIndex(e=>e.id===_eid);if(i>=0)ENTRIES[i]={...ENTRIES[i],...data};
+    const existing=ENTRIES.find(e=>e.id===_eid)||{};
+    entry={...existing,...formData,id:String(_eid)};
   } else {
-    const ti=ENTRIES.findIndex(e=>e.isTarget);
-    const entry={id:Date.now(),...data};
-    if(ti>=0)ENTRIES.splice(ti,0,entry);else ENTRIES.push(entry);
-    if(data.date)document.getElementById('lastUpdated').textContent=data.date;
+    const maxOrder=Math.max(...ENTRIES.filter(e=>!e.isTarget).map(e=>e.sort_order||0),0);
+    entry={id:'nlp_'+Date.now(),sort_order:maxOrder+1,created_at:Date.now(),...formData};
+    if(formData.date) document.getElementById('lastUpdated').textContent=formData.date;
   }
-  save();renderAll();closeModal();
+  closeModal();
+  await dbSaveEntry(entry);
+  renderAll();
 }
 
-function doDelete(){ if(!_eid)return; if(!confirm('Delete this entry?'))return; ENTRIES=ENTRIES.filter(e=>e.id!==_eid); save();renderAll();closeModal(); }
-function doDeleteById(id){ if(!confirm('Delete this entry?'))return; ENTRIES=ENTRIES.filter(e=>e.id!==id); save();renderAll(); }
+async function doDelete(){
+  if(!_eid)return;
+  if(!confirm('Delete this entry?'))return;
+  const id=_eid; closeModal();
+  await dbDeleteEntry(id); renderAll();
+}
+async function doDeleteById(id){
+  if(!confirm('Delete this entry?'))return;
+  await dbDeleteEntry(id); renderAll();
+}
 
 // ─── EXPORT ───
 function exportCSV(){
@@ -734,7 +857,11 @@ function dl(rows,fn){ const csv=rows.map(r=>r.map(c=>{const s=String(c).replace(
 
 // ─── BOOT ───
 function renderAll(){ renderTable();renderKPIs();renderLog();buildCharts(); }
-requestAnimationFrame(()=>requestAnimationFrame(()=>renderAll()));
+
+// Load from DynamoDB on page load, then render
+loadEntries().then(()=>{
+  requestAnimationFrame(()=>requestAnimationFrame(()=>renderAll()));
+});
 
 // Auth — check both session keys
 (function(){try{const s=JSON.parse(localStorage.getItem('artemis_session')||localStorage.getItem('artemis_app_session')||'null');if(!s)window.location.href='admin_login.html';}catch(e){}})();
@@ -749,17 +876,17 @@ window.addEventListener('load', function(){
 const _origOpenAdd = window.openAdd;
 window.openAdd = function(){
   _origOpenAdd && _origOpenAdd();
-  // Auto-suggest next version name
+  // Auto-suggest next version name: Our NLP v5, v6, v7...
   const ourVersions = ENTRIES.filter(e=>e.version.match(/Our NLP v\d/));
   if(ourVersions.length){
     const maxV = Math.max(...ourVersions.map(e=>parseInt(e.version.match(/v(\d+)/)?.[1]||0)));
     const suggest = 'Our NLP v'+(maxV+1);
     const vEl = document.getElementById('fVersion');
     if(vEl && !vEl.value) vEl.value = suggest;
-    // Auto-fill date to today
-    const dEl = document.getElementById('fDate');
-    if(dEl && !dEl.value) dEl.value = new Date().toISOString().slice(0,10);
   }
+  // Auto-fill date to today
+  const dEl = document.getElementById('fDate');
+  if(dEl) dEl.value = new Date().toISOString().slice(0,10);
 };
 
 // ═══════════════════════════════════════════════════════
