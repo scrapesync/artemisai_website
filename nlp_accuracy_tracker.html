@@ -1094,155 +1094,82 @@ const C={
 function renderFlowDiagram(containerId, nodes, layout){
   const container = document.getElementById(containerId);
   if(!container) return;
-  container.innerHTML='';
+  const byId = {};
+  nodes.forEach(n => byId[n.id] = n);
 
-  // Build SVG-based diagram
-  const NODE_W=130, NODE_H=44, NODE_R=6;
-  const GAP_Y=14, GAP_X=12;
+  const C = {
+    teal:  {bg:'rgba(0,212,170,.08)',  border:'rgba(0,212,170,.45)',  text:'#00d4aa'},
+    purple:{bg:'rgba(167,139,250,.08)',border:'rgba(167,139,250,.45)',text:'#a78bfa'},
+    amber: {bg:'rgba(251,191,36,.08)', border:'rgba(251,191,36,.45)', text:'#fbbf24'},
+    blue:  {bg:'rgba(96,165,250,.08)', border:'rgba(96,165,250,.45)', text:'#60a5fa'},
+    green: {bg:'rgba(52,211,153,.08)', border:'rgba(52,211,153,.45)', text:'#34d399'},
+    red:   {bg:'rgba(248,113,113,.08)',border:'rgba(248,113,113,.45)',text:'#f87171'},
+    grey:  {bg:'rgba(255,255,255,.03)',border:'rgba(255,255,255,.12)',text:'#7b8ba8'},
+  };
 
-  // layout: array of rows, each row is array of node indices or null (gap)
-  // Calculate total size
-  let maxCols=1;
-  layout.forEach(row=>{ if(Array.isArray(row)) maxCols=Math.max(maxCols,row.filter(x=>x!=null).length); });
-  const totalW=maxCols*(NODE_W+GAP_X)+GAP_X;
-  const totalH=layout.length*(NODE_H+GAP_Y)+GAP_Y;
+  // Tiny tooltip
+  let _tt = null;
+  function showTT(e,n,col){
+    hideTT();
+    _tt = document.createElement('div');
+    _tt.style.cssText = `position:fixed;background:#0c1221;border:1px solid ${col.border};border-radius:8px;padding:10px 14px;font-size:11px;max-width:260px;z-index:9999;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,.7);line-height:1.6;color:#9aa5b8`;
+    _tt.innerHTML = `<div style="font-weight:700;color:${col.text};margin-bottom:5px">${n.label}</div>${n.detail||''}`;
+    document.body.appendChild(_tt); moveTT(e);
+  }
+  function moveTT(e){ if(!_tt) return; _tt.style.left=Math.min(e.clientX+14,window.innerWidth-280)+'px'; _tt.style.top=Math.min(e.clientY-8,window.innerHeight-200)+'px'; }
+  function hideTT(){ if(_tt){_tt.remove();_tt=null;} }
+  document.addEventListener('mousemove', moveTT);
 
-  // Position nodes
-  const pos={};
-  let y=GAP_Y;
-  layout.forEach((row,ri)=>{
-    if(row==='arrow'||row==='arrow-split'||row==='spacer') { y+=row==='spacer'?20:GAP_Y; return; }
-    const cols=row.filter(x=>x!=null);
-    const rowW=cols.length*(NODE_W+GAP_X)-GAP_X;
-    const startX=(totalW-rowW)/2;
-    let colIdx=0;
-    row.forEach(nid=>{
-      if(nid==null){colIdx++;return;}
-      const x=startX+colIdx*(NODE_W+GAP_X);
-      pos[nid]={x,y,cx:x+NODE_W/2,cy:y+NODE_H/2};
-      colIdx++;
-    });
-    y+=NODE_H+GAP_Y;
-  });
-
-  // Build SVG
-  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
-  svg.setAttribute('width',totalW);
-  svg.setAttribute('height',totalH+60);
-  svg.setAttribute('viewBox', `0 0 ${totalW} ${totalH+60}`);
-  svg.style.overflow='visible';
-  svg.style.display='block';
-  svg.style.width='100%';
-  svg.style.maxWidth='100%';
-  svg.style.height='auto';
-
-  // Defs — arrowhead marker
-  const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
-  ['teal','purple','amber','blue','green','red','grey'].forEach(col=>{
-    const m=document.createElementNS('http://www.w3.org/2000/svg','marker');
-    m.setAttribute('id','arr_'+col);
-    m.setAttribute('viewBox','0 0 10 10');
-    m.setAttribute('refX','9');m.setAttribute('refY','5');
-    m.setAttribute('markerWidth','5');m.setAttribute('markerHeight','5');
-    m.setAttribute('orient','auto');
-    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
-    p.setAttribute('d','M 0 0 L 10 5 L 0 10 z');
-    p.setAttribute('fill',C[col]?.border||'rgba(255,255,255,0.3)');
-    m.appendChild(p); defs.appendChild(m);
-  });
-  svg.appendChild(defs);
-
-  // Draw edges
-  nodes.forEach(n=>{
-    if(!n.next) return;
-    const from=pos[n.id]; if(!from)return;
-    (Array.isArray(n.next)?n.next:[n.next]).forEach(nxt=>{
-      const to=pos[nxt.id||nxt]; if(!to)return;
-      const col=n.edgeColor||n.color||'grey';
-      const path=document.createElementNS('http://www.w3.org/2000/svg','path');
-      const x1=from.cx, y1=from.y+NODE_H;
-      const x2=to.cx, y2=to.y;
-      const cpY=y1+(y2-y1)*0.45;
-      path.setAttribute('d',`M ${x1} ${y1} C ${x1} ${cpY} ${x2} ${cpY} ${x2} ${y2}`);
-      path.setAttribute('fill','none');
-      path.setAttribute('stroke',C[col]?.border||'rgba(255,255,255,0.2)');
-      path.setAttribute('stroke-width','1');
-      path.setAttribute('stroke-dasharray','6,4');
-      path.setAttribute('marker-end',`url(#arr_${col})`);
-      path.setAttribute('opacity','0.7');
-      svg.appendChild(path);
-
-      // Edge label
-      if(nxt.label){
-        const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
-        txt.setAttribute('x',(x1+x2)/2+4);
-        txt.setAttribute('y',(y1+y2)/2);
-        txt.setAttribute('fill','rgba(255,255,255,0.35)');
-        txt.setAttribute('font-size','9');
-        txt.setAttribute('font-family','JetBrains Mono, monospace');
-        txt.setAttribute('text-anchor','middle');
-        txt.textContent=nxt.label||'';
-        svg.appendChild(txt);
-      }
-    });
-  });
-
-  // Draw node cards as foreignObject
-  nodes.forEach(n=>{
-    const p=pos[n.id]; if(!p)return;
-    const col=C[n.color]||C.grey;
-    const fo=document.createElementNS('http://www.w3.org/2000/svg','foreignObject');
-    fo.setAttribute('x',p.x); fo.setAttribute('y',p.y);
-    fo.setAttribute('width',NODE_W); fo.setAttribute('height',NODE_H + 10);
-    fo.setAttribute('overflow','visible');
-
-    const div=document.createElement('div');
-    div.setAttribute('xmlns','http://www.w3.org/1999/xhtml');
-    div.style.cssText=`width:${NODE_W}px;background:${col.bg};border:1.5px solid ${col.border};border-radius:${NODE_R}px;padding:5px 8px;cursor:${n.detail?'pointer':'default'};transition:border-color .15s,box-shadow .15s;user-select:none;position:relative;box-sizing:border-box`;
-
-    div.innerHTML=`<div style="font-size:8.5px;font-weight:700;color:${col.text};line-height:1.3;white-space:normal;word-break:break-word">${n.icon?n.icon+' ':''} ${n.label}</div>${n.sub?`<div style="font-size:7.5px;color:rgba(255,255,255,0.4);margin-top:1px;font-family:'JetBrains Mono',monospace;white-space:normal;word-break:break-word;line-height:1.3">${n.sub}</div>`:''}`;
-
-    // Tooltip on hover
+  function node(n){
+    const col = C[n.color]||C.grey;
+    const d = document.createElement('div');
+    d.style.cssText = `background:${col.bg};border:1px solid ${col.border};border-radius:5px;padding:4px 8px;cursor:${n.detail?'pointer':'default'};transition:border-color .15s;box-sizing:border-box;display:inline-block;vertical-align:top`;
+    d.innerHTML = `<span style="font-size:9.5px;font-weight:700;color:${col.text};line-height:1.3">${n.icon?n.icon+' ':''}${n.label}</span>${n.sub?`<div style="font-size:8px;color:rgba(255,255,255,.38);font-family:'JetBrains Mono',monospace;margin-top:1px;line-height:1.2">${n.sub}</div>`:''}`;
     if(n.detail){
-      div.addEventListener('mouseenter',e=>{
-        div.style.borderColor=col.text;
-        div.style.boxShadow=`0 0 16px ${col.border}44`;
-        showTooltip(e, n, col);
-      });
-      div.addEventListener('mouseleave',()=>{
-        div.style.borderColor=col.border;
-        div.style.boxShadow='none';
-        hideTooltip();
-      });
+      d.addEventListener('mouseenter',e=>{d.style.borderColor=col.text;showTT(e,n,col);});
+      d.addEventListener('mouseleave',()=>{d.style.borderColor=col.border;hideTT();});
     }
+    return d;
+  }
 
-    fo.appendChild(div);
-    svg.appendChild(fo);
+  function arrow(){
+    const d=document.createElement('div');
+    d.style.cssText='display:flex;flex-direction:column;align-items:center;margin:2px 0;flex-shrink:0';
+    d.innerHTML='<div style="width:1px;height:10px;background:rgba(255,255,255,.15)"></div><svg width="8" height="5" viewBox="0 0 8 5" fill="rgba(255,255,255,.2)"><polygon points="4,5 0,0 8,0"/></svg>';
+    return d;
+  }
+
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'display:flex;flex-direction:column;align-items:center';
+
+  let first = true;
+  layout.forEach(row => {
+    if(row === 'spacer'){
+      const sp=document.createElement('div'); sp.style.height='6px'; wrap.appendChild(sp); return;
+    }
+    if(typeof row === 'string') return;
+    const ids = row.filter(Boolean);
+    if(!ids.length) return;
+
+    if(!first) wrap.appendChild(arrow());
+    first = false;
+
+    if(ids.length === 1){
+      const n = byId[ids[0]]; if(n) wrap.appendChild(node(n));
+    } else {
+      const row_el = document.createElement('div');
+      row_el.style.cssText = 'display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap;justify-content:center';
+      ids.forEach(id=>{ const n=byId[id]; if(n) row_el.appendChild(node(n)); });
+      wrap.appendChild(row_el);
+    }
   });
 
-  container.appendChild(svg);
+  container.innerHTML='';
+  container.appendChild(wrap);
 }
+window.expandAll=function(){};
+window.collapseAll=function(){};
 
-// Global tooltip
-let _tt=null;
-function showTooltip(e, n, col){
-  hideTooltip();
-  _tt=document.createElement('div');
-  _tt.style.cssText=`position:fixed;background:#0f1729;border:1px solid ${col.border};border-radius:10px;padding:12px 16px;font-size:11px;max-width:280px;z-index:9999;pointer-events:none;box-shadow:0 12px 40px rgba(0,0,0,0.7);line-height:1.6;color:#9aa5b8`;
-  _tt.innerHTML=`<div style="font-weight:700;color:${col.text};margin-bottom:4px;font-size:12px">${n.label}</div>${n.detail}`;
-  document.body.appendChild(_tt);
-  positionTooltip(e);
-}
-function positionTooltip(e){
-  if(!_tt)return;
-  const vw=window.innerWidth, vh=window.innerHeight;
-  let x=e.clientX+16, y=e.clientY-10;
-  if(x+340>vw) x=e.clientX-340;
-  if(y+200>vh) y=vh-210;
-  _tt.style.left=x+'px'; _tt.style.top=y+'px';
-}
-function hideTooltip(){ if(_tt){_tt.remove();_tt=null;} }
-document.addEventListener('mousemove',positionTooltip);
 
 // ── PHASE 1+2 NODES ──
 const p12Nodes=[
