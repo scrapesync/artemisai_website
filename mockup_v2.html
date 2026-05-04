@@ -1,0 +1,2731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtemisAI — v2</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Facebook uses SF Pro Display / Helvetica / system fonts. We use Inter (closest open-source equivalent) + Optimistic-style display. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Facebook-inspired neutral palette adapted to dark mode */
+  --bg:#0e1116;            /* Deep neutral, like FB dark */
+  --bg-elev:#16191f;       /* Card surface */
+  --bg-elev-2:#1c2128;     /* Hover card surface */
+  --bg-input:#222831;      /* Input fields */
+
+  /* Brand */
+  --teal:#00C4A0;
+  --teal-d:#00a085;
+  --teal-bg:rgba(0,196,160,0.10);
+
+  /* Art-E (always purple-teal gradient signature) */
+  --arte-1:#7C5CBF;
+  --arte-2:#00C4A0;
+  --arte-bg:rgba(124,92,191,0.08);
+
+  /* States */
+  --crisis:#E53935;        /* Bell red */
+  --crisis-bg:rgba(229,57,53,0.10);
+  --opp:#22C55E;           /* Bell green */
+  --opp-bg:rgba(34,197,94,0.10);
+  --warn:#F59E0B;          /* Bell amber */
+  --warn-bg:rgba(245,158,11,0.10);
+
+  /* Text */
+  --t1:#E4E6EB;            /* FB primary text */
+  --t2:#B0B3B8;            /* FB secondary */
+  --t3:#65676B;            /* FB tertiary / muted */
+
+  /* Borders */
+  --bdr:#3A3B3C;           /* FB divider */
+  --bdr-soft:#2D2E30;
+
+  /* Radii — FB uses 8px / 12px / round */
+  --r-sm:8px;
+  --r:12px;
+  --r-lg:16px;
+
+  /* Shadows */
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.3);
+  --shadow:0 4px 12px rgba(0,0,0,0.35);
+  --shadow-lg:0 12px 32px rgba(0,0,0,0.45);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+*::selection{background:var(--teal);color:#0a0e13}
+
+html,body{
+  height:100%;
+  background:var(--bg);
+  color:var(--t1);
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  /* Facebook system text: 15px body. We use 14px for compactness, scale via vars. */
+  font-size:14px;
+  line-height:1.34;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+body{
+  display:flex;
+  justify-content:center;
+  min-height:100vh;
+}
+
+/* ─── APP SHELL ──────────────────────────────────── */
+.app{
+  width:100%;
+  max-width:1640px;
+  display:grid;
+  grid-template-columns:300px 1fr 340px;
+  grid-template-rows:56px 1fr;
+  grid-template-areas:
+    "topnav topnav topnav"
+    "left   feed   right";
+  height:100vh;
+  overflow:hidden;
+}
+
+/* ─── TOP NAV (Facebook-style: logo left, search centre, actions right) ── */
+.topnav{
+  grid-area:topnav;
+  background:var(--bg-elev);
+  border-bottom:1px solid var(--bdr-soft);
+  display:flex;
+  align-items:center;
+  padding:0 16px;
+  gap:12px;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+.brand-block{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:268px;
+  padding-left:4px;
+}
+.brand-mark{
+  width:36px;height:36px;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--teal) 0%, #009E7E 100%);
+  display:grid;place-items:center;
+  position:relative;
+  box-shadow:0 0 0 1px rgba(0,196,160,0.3);
+}
+.brand-mark svg{width:18px;height:18px;fill:none;stroke:#0a1410;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.brand-name{
+  font-weight:800;
+  font-size:18px;
+  letter-spacing:-0.4px;
+  color:var(--t1);
+}
+.brand-name em{
+  color:var(--teal);
+  font-style:normal;
+}
+
+.search{
+  width:280px;
+  height:40px;
+  background:var(--bg-input);
+  border:none;
+  border-radius:9999px;
+  padding:0 16px 0 40px;
+  color:var(--t1);
+  font-family:inherit;
+  font-size:14px;
+  outline:none;
+  position:relative;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B0B3B8' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:14px center;
+  background-size:16px;
+}
+.search:focus{background-color:var(--bg-elev-2);box-shadow:0 0 0 1px var(--teal)}
+.search::placeholder{color:var(--t3);font-weight:400}
+
+.topnav-spacer{flex:1}
+
+.icon-btn{
+  width:40px;height:40px;
+  border-radius:50%;
+  border:none;
+  background:var(--bg-input);
+  color:var(--t1);
+  display:grid;place-items:center;
+  cursor:pointer;
+  position:relative;
+  transition:background .15s;
+}
+.icon-btn:hover{background:var(--bg-elev-2)}
+.icon-btn svg{width:20px;height:20px;fill:currentColor}
+.icon-btn .badge{
+  position:absolute;
+  top:-2px;right:-2px;
+  background:var(--crisis);
+  color:white;
+  font-size:11px;
+  font-weight:700;
+  min-width:18px;height:18px;
+  border-radius:9999px;
+  padding:0 5px;
+  display:grid;place-items:center;
+  border:2px solid var(--bg-elev);
+}
+.user-avatar{
+  width:40px;height:40px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#FFA500,#FF6B00);
+  display:grid;place-items:center;
+  font-weight:700;
+  font-size:14px;
+  color:white;
+  cursor:pointer;
+  margin-left:4px;
+}
+
+/* ─── LEFT SIDEBAR — Pages + Quick Nav ──────────── */
+.left-sidebar{
+  grid-area:left;
+  background:var(--bg);
+  overflow-y:auto;
+  padding:16px 8px;
+  border-right:1px solid var(--bdr-soft);
+}
+.left-sidebar::-webkit-scrollbar{width:8px}
+.left-sidebar::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:4px}
+
+.sidebar-section{margin-bottom:8px}
+.sidebar-title{
+  font-size:11px;
+  font-weight:700;
+  color:var(--t3);
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  padding:10px 12px 6px;
+}
+
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:8px 12px;
+  border-radius:var(--r-sm);
+  color:var(--t1);
+  text-decoration:none;
+  font-weight:500;
+  font-size:15px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.nav-item:hover{background:var(--bg-elev)}
+.nav-item.active{background:var(--bg-elev);color:var(--teal)}
+.nav-item-icon{
+  width:36px;height:36px;
+  border-radius:50%;
+  background:var(--bg-elev-2);
+  display:grid;place-items:center;
+  flex-shrink:0;
+}
+.nav-item-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav-item.active .nav-item-icon{background:var(--teal-bg);color:var(--teal)}
+.nav-item-icon.arte{
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  color:white;
+  position:relative;
+}
+.nav-item-icon.arte::after{
+  content:'';position:absolute;inset:-3px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  filter:blur(6px);
+  opacity:.45;
+  z-index:-1;
+}
+
+.page-card{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:8px 12px;
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  transition:background .15s;
+}
+.page-card:hover{background:var(--bg-elev)}
+.page-avatar{
+  width:36px;height:36px;
+  border-radius:8px;
+  background:linear-gradient(135deg,#1a2a3e,#0c1729);
+  display:grid;place-items:center;
+  font-weight:700;
+  font-size:14px;
+  color:var(--teal);
+  flex-shrink:0;
+}
+.page-meta{flex:1;min-width:0}
+.page-name{
+  font-weight:600;
+  font-size:14px;
+  color:var(--t1);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.page-stat{
+  font-size:12px;
+  color:var(--t2);
+  margin-top:2px;
+  display:flex;align-items:center;gap:4px;
+}
+.page-stat .dot{width:6px;height:6px;border-radius:50%;background:var(--opp)}
+.page-stat .dot.warn{background:var(--warn)}
+.page-stat .dot.crisis{background:var(--crisis)}
+
+.divider{
+  height:1px;
+  background:var(--bdr-soft);
+  margin:8px 12px;
+}
+
+/* ─── MAIN FEED ───────────────────────────────── */
+.feed-col{
+  grid-area:feed;
+  overflow-y:auto;
+  padding:16px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.feed-col::-webkit-scrollbar{width:8px}
+.feed-col::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:4px}
+
+.feed-inner{
+  width:100%;
+  max-width:680px;
+  padding:0 16px;
+}
+
+/* Activity tab strip — subtle, FB-like */
+.feed-tabs{
+  display:flex;
+  gap:4px;
+  margin-bottom:16px;
+  background:var(--bg-elev);
+  padding:4px;
+  border-radius:var(--r);
+}
+.feed-tab{
+  flex:1;
+  padding:8px 16px;
+  background:transparent;
+  border:none;
+  color:var(--t2);
+  font-family:inherit;
+  font-size:14px;
+  font-weight:600;
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:all .15s;
+}
+.feed-tab:hover{color:var(--t1)}
+.feed-tab.active{
+  background:var(--bg-elev-2);
+  color:var(--teal);
+}
+.feed-tab svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+.feed-tab .badge-mini{
+  background:var(--crisis);
+  color:white;
+  font-size:11px;
+  font-weight:700;
+  padding:1px 6px;
+  border-radius:9999px;
+  margin-left:2px;
+}
+
+/* ART-E INSIGHT STRIP — top of every screen */
+.arte-strip{
+  background:linear-gradient(135deg,
+    rgba(124,92,191,0.18) 0%,
+    rgba(0,196,160,0.10) 100%);
+  border:1px solid rgba(124,92,191,0.25);
+  border-radius:var(--r);
+  padding:12px 16px;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  transition:transform .15s, border-color .15s;
+}
+.arte-strip:hover{transform:translateY(-1px);border-color:rgba(124,92,191,0.45)}
+.arte-orb{
+  width:36px;height:36px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  display:grid;place-items:center;
+  flex-shrink:0;
+  position:relative;
+  box-shadow:0 0 16px rgba(124,92,191,0.4);
+  animation:orbPulse 2.4s ease-in-out infinite;
+}
+.arte-orb svg{width:16px;height:16px;fill:white}
+@keyframes orbPulse{
+  0%,100%{box-shadow:0 0 16px rgba(124,92,191,0.4)}
+  50%{box-shadow:0 0 22px rgba(0,196,160,0.55)}
+}
+.arte-text{flex:1;min-width:0}
+.arte-label{
+  font-size:11px;
+  font-weight:700;
+  color:var(--arte-1);
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  margin-bottom:1px;
+}
+.arte-message{
+  font-size:14px;
+  color:var(--t1);
+  font-weight:500;
+  line-height:1.35;
+}
+.arte-message strong{color:var(--teal);font-weight:700}
+.arte-arrow{
+  color:var(--arte-1);
+  flex-shrink:0;
+}
+.arte-arrow svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.5}
+
+/* MORNING BRIEFING — looks like a FB post */
+.briefing-card{
+  background:var(--bg-elev);
+  border-radius:var(--r);
+  padding:16px;
+  margin-bottom:12px;
+  border:1px solid transparent;
+}
+.briefing-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+.briefing-avatar{
+  width:40px;height:40px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  display:grid;place-items:center;
+  flex-shrink:0;
+  box-shadow:0 0 12px rgba(124,92,191,0.35);
+}
+.briefing-avatar svg{width:18px;height:18px;fill:white}
+.briefing-meta{flex:1}
+.briefing-author{
+  font-weight:700;
+  font-size:15px;
+  color:var(--t1);
+  display:flex;align-items:center;gap:6px;
+}
+.briefing-author .verified{
+  width:14px;height:14px;
+  background:var(--arte-1);
+  border-radius:50%;
+  display:grid;place-items:center;
+}
+.briefing-author .verified svg{width:9px;height:9px;fill:white}
+.briefing-time{
+  font-size:12px;
+  color:var(--t2);
+  margin-top:1px;
+}
+.briefing-body{
+  font-size:15px;
+  line-height:1.45;
+  color:var(--t1);
+  margin-bottom:12px;
+}
+.briefing-body strong{color:var(--teal)}
+.briefing-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:12px;
+}
+.briefing-stat{
+  background:var(--bg);
+  border-radius:var(--r-sm);
+  padding:10px 12px;
+  text-align:center;
+}
+.briefing-stat-val{
+  font-size:18px;
+  font-weight:800;
+  color:var(--teal);
+  font-variant-numeric:tabular-nums;
+}
+.briefing-stat-val.up{color:var(--opp)}
+.briefing-stat-val.purp{color:var(--arte-1)}
+.briefing-stat-lbl{
+  font-size:11px;
+  color:var(--t2);
+  margin-top:2px;
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  font-weight:600;
+}
+.briefing-actions{
+  display:flex;
+  gap:6px;
+  border-top:1px solid var(--bdr-soft);
+  padding-top:8px;
+}
+.briefing-btn{
+  flex:1;
+  background:transparent;
+  border:none;
+  color:var(--t2);
+  font-family:inherit;
+  font-size:14px;
+  font-weight:600;
+  padding:8px;
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:background .15s;
+}
+.briefing-btn:hover{background:var(--bg-elev-2);color:var(--t1)}
+.briefing-btn.primary{color:var(--teal)}
+.briefing-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* ─── REWARD CARDS — alternating types ──────────── */
+.card{
+  background:var(--bg-elev);
+  border-radius:var(--r);
+  margin-bottom:12px;
+  overflow:hidden;
+  border:1px solid transparent;
+  transition:border-color .15s;
+}
+.card:hover{border-color:var(--bdr-soft)}
+
+.card-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 16px 10px;
+}
+.card-icon{
+  width:40px;height:40px;
+  border-radius:8px;
+  display:grid;place-items:center;
+  flex-shrink:0;
+  font-size:20px;
+}
+.card-icon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2}
+.card-icon.tribe{background:var(--teal-bg);color:var(--teal)}
+.card-icon.hunt{background:var(--arte-bg);color:var(--arte-1)}
+.card-icon.self{background:var(--warn-bg);color:var(--warn)}
+.card-icon.crisis-i{background:var(--crisis-bg);color:var(--crisis)}
+.card-icon.opp-i{background:var(--opp-bg);color:var(--opp)}
+
+.card-meta{flex:1;min-width:0}
+.card-title{
+  font-size:15px;
+  font-weight:700;
+  color:var(--t1);
+  display:flex;align-items:center;gap:8px;
+  flex-wrap:wrap;
+}
+.card-title-page{color:var(--teal)}
+.card-sub{
+  font-size:12px;
+  color:var(--t2);
+  margin-top:2px;
+}
+.card-sub .dot{display:inline-block;width:3px;height:3px;border-radius:50%;background:var(--t3);margin:0 6px;vertical-align:middle}
+
+.reward-chip{
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0.04em;
+  padding:3px 8px;
+  border-radius:9999px;
+  text-transform:uppercase;
+}
+.reward-chip.tribe{background:var(--teal-bg);color:var(--teal)}
+.reward-chip.hunt{background:var(--arte-bg);color:var(--arte-1)}
+.reward-chip.self{background:var(--warn-bg);color:var(--warn)}
+
+.score-circle{
+  width:46px;height:46px;
+  position:relative;
+  flex-shrink:0;
+}
+.score-circle svg{width:100%;height:100%;transform:rotate(-90deg)}
+.score-circle .track{stroke:var(--bdr);stroke-width:4;fill:none}
+.score-circle .fill{stroke:var(--teal);stroke-width:4;fill:none;stroke-linecap:round;transition:stroke-dashoffset 1s}
+.score-text{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font-size:13px;
+  font-weight:800;
+  color:var(--teal);
+  font-variant-numeric:tabular-nums;
+}
+
+.card-body{padding:0 16px 12px;font-size:14px;color:var(--t1);line-height:1.45}
+.card-image{
+  height:280px;
+  background:linear-gradient(135deg,#1a2a3e 0%,#0c1729 50%,#0a1410 100%);
+  position:relative;
+  overflow:hidden;
+}
+.card-image::after{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 40%,rgba(0,196,160,0.08),transparent 60%);
+}
+.card-image-text{
+  position:absolute;
+  inset:0;
+  display:grid;place-items:center;
+  font-size:13px;
+  color:var(--t3);
+  font-weight:500;
+}
+
+.card-stats{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:10px 16px 8px;
+  font-size:13px;
+  color:var(--t2);
+  border-top:1px solid var(--bdr-soft);
+}
+.card-stats span{display:inline-flex;align-items:center;gap:5px}
+.card-stats .stat-num{color:var(--t1);font-weight:600;font-variant-numeric:tabular-nums}
+
+.card-actions{
+  display:flex;
+  border-top:1px solid var(--bdr-soft);
+  padding:4px 8px;
+}
+.card-action{
+  flex:1;
+  background:transparent;
+  border:none;
+  color:var(--t2);
+  font-family:inherit;
+  font-size:14px;
+  font-weight:600;
+  padding:10px;
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:background .15s;
+}
+.card-action:hover{background:var(--bg-elev-2);color:var(--t1)}
+.card-action.primary{color:var(--teal)}
+.card-action.arte{color:var(--arte-1)}
+.card-action.crisis{color:var(--crisis)}
+.card-action svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* Tribe card body — match strength bar */
+.match-bars{padding:0 16px 12px;display:flex;flex-direction:column;gap:8px}
+.match-row{display:flex;align-items:center;gap:10px;font-size:13px}
+.match-label{flex:1;color:var(--t2)}
+.match-pct{font-weight:700;color:var(--t1);font-variant-numeric:tabular-nums}
+.match-bar-track{
+  height:6px;
+  background:var(--bg);
+  border-radius:9999px;
+  overflow:hidden;
+  flex-basis:60%;
+}
+.match-bar-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--teal),#00e8c0);
+  border-radius:9999px;
+}
+
+/* Self card body — streak / progression */
+.streak-row{
+  display:flex;
+  gap:6px;
+  padding:0 16px 12px;
+}
+.streak-day{
+  flex:1;
+  aspect-ratio:1;
+  border-radius:8px;
+  background:var(--bg);
+  display:grid;place-items:center;
+  font-size:11px;
+  font-weight:700;
+  color:var(--t3);
+  position:relative;
+}
+.streak-day.done{
+  background:linear-gradient(135deg,var(--warn) 0%, #FF9900 100%);
+  color:white;
+}
+.streak-day.today{
+  background:transparent;
+  border:2px dashed var(--warn);
+  color:var(--warn);
+}
+
+/* Crisis alert card — red accent */
+.alert-banner{
+  background:linear-gradient(135deg,rgba(229,57,53,0.15) 0%, rgba(229,57,53,0.05) 100%);
+  border:1px solid rgba(229,57,53,0.3);
+  border-radius:var(--r);
+  padding:14px 16px;
+  margin-bottom:12px;
+  display:flex;align-items:flex-start;gap:12px;
+}
+.alert-banner.opp{
+  background:linear-gradient(135deg,rgba(34,197,94,0.15) 0%, rgba(34,197,94,0.05) 100%);
+  border-color:rgba(34,197,94,0.3);
+}
+.alert-icon{
+  width:40px;height:40px;
+  border-radius:50%;
+  background:var(--crisis-bg);
+  color:var(--crisis);
+  display:grid;place-items:center;
+  flex-shrink:0;
+}
+.alert-banner.opp .alert-icon{background:var(--opp-bg);color:var(--opp)}
+.alert-icon svg{width:20px;height:20px;fill:currentColor}
+.alert-content{flex:1}
+.alert-title{font-weight:700;font-size:15px;color:var(--t1);margin-bottom:2px;display:flex;align-items:center;gap:8px}
+.alert-cat{
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0.04em;
+  padding:2px 7px;
+  border-radius:9999px;
+  text-transform:uppercase;
+  background:var(--crisis-bg);
+  color:var(--crisis);
+}
+.alert-banner.opp .alert-cat{background:var(--opp-bg);color:var(--opp)}
+.alert-msg{font-size:13px;color:var(--t2);line-height:1.45}
+.alert-actions{display:flex;gap:6px;margin-top:10px}
+.alert-btn{
+  background:var(--crisis);
+  color:white;
+  border:none;
+  padding:6px 14px;
+  border-radius:var(--r-sm);
+  font-family:inherit;
+  font-weight:600;
+  font-size:13px;
+  cursor:pointer;
+}
+.alert-banner.opp .alert-btn{background:var(--opp)}
+.alert-btn-ghost{
+  background:transparent;
+  color:var(--t2);
+  padding:6px 12px;
+  border:none;
+  font-family:inherit;
+  font-weight:600;
+  font-size:13px;
+  cursor:pointer;
+  border-radius:var(--r-sm);
+}
+.alert-btn-ghost:hover{background:var(--bg-elev-2);color:var(--t1)}
+
+/* ─── RIGHT SIDEBAR — Bell tray + Live ──────────── */
+.right-sidebar{
+  grid-area:right;
+  background:var(--bg);
+  overflow-y:auto;
+  padding:16px;
+  border-left:1px solid var(--bdr-soft);
+}
+.right-sidebar::-webkit-scrollbar{width:8px}
+.right-sidebar::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:4px}
+
+.right-card{
+  background:var(--bg-elev);
+  border-radius:var(--r);
+  padding:14px;
+  margin-bottom:12px;
+}
+.right-card-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+.right-card-title{
+  font-size:14px;
+  font-weight:700;
+  color:var(--t1);
+  display:flex;align-items:center;gap:8px;
+}
+.right-card-title .live-dot{
+  width:8px;height:8px;
+  background:var(--opp);
+  border-radius:50%;
+  animation:pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.3);opacity:0.6}
+}
+.right-card-link{
+  font-size:12px;
+  color:var(--teal);
+  font-weight:600;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+/* Live counters mini-stats */
+.live-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.live-stat{
+  background:var(--bg);
+  border-radius:var(--r-sm);
+  padding:10px;
+}
+.live-stat-val{
+  font-size:18px;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+  color:var(--t1);
+}
+.live-stat-val.up{color:var(--opp)}
+.live-stat-val .delta{font-size:11px;color:var(--opp);margin-left:4px;font-weight:600}
+.live-stat-lbl{
+  font-size:11px;
+  color:var(--t2);
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  font-weight:600;
+  margin-top:1px;
+}
+
+/* Bell tray notifications */
+.bell-item{
+  display:flex;
+  gap:10px;
+  padding:10px;
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  margin-bottom:4px;
+  position:relative;
+  transition:background .15s;
+}
+.bell-item:hover{background:var(--bg-elev-2)}
+.bell-item.unread::before{
+  content:'';position:absolute;left:2px;top:50%;
+  transform:translateY(-50%);
+  width:6px;height:6px;border-radius:50%;
+  background:var(--teal);
+}
+.bell-icon{
+  width:32px;height:32px;
+  border-radius:50%;
+  display:grid;place-items:center;
+  flex-shrink:0;
+}
+.bell-icon.crisis{background:var(--crisis-bg);color:var(--crisis)}
+.bell-icon.opp{background:var(--opp-bg);color:var(--opp)}
+.bell-icon.warn{background:var(--warn-bg);color:var(--warn)}
+.bell-icon svg{width:16px;height:16px;fill:currentColor}
+.bell-body{flex:1;min-width:0}
+.bell-text{font-size:13px;color:var(--t1);line-height:1.4}
+.bell-text strong{font-weight:600;color:var(--t1)}
+.bell-text .accent{color:var(--teal)}
+.bell-time{font-size:11px;color:var(--t2);margin-top:2px}
+
+/* Top performer mini card */
+.top-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 0;
+}
+.top-row + .top-row{border-top:1px solid var(--bdr-soft)}
+.top-rank{
+  font-size:18px;
+  font-weight:800;
+  color:var(--t3);
+  width:20px;
+  text-align:center;
+  font-variant-numeric:tabular-nums;
+}
+.top-rank.gold{color:var(--warn)}
+.top-page{
+  width:32px;height:32px;
+  border-radius:8px;
+  background:var(--bg-input);
+  display:grid;place-items:center;
+  font-weight:700;
+  font-size:12px;
+  color:var(--teal);
+  flex-shrink:0;
+}
+.top-meta{flex:1;min-width:0}
+.top-name{font-size:13px;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-score{font-size:11px;color:var(--t2);margin-top:2px}
+
+/* Footer info */
+.right-footer{
+  font-size:11px;
+  color:var(--t3);
+  padding:12px 4px;
+  line-height:1.5;
+}
+.right-footer a{color:var(--t2);text-decoration:none;margin-right:8px}
+.right-footer a:hover{color:var(--teal)}
+
+/* Composer at top of feed (FB-style "What's on your mind") */
+.composer{
+  background:var(--bg-elev);
+  border-radius:var(--r);
+  padding:12px 16px;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.composer-avatar{
+  width:40px;height:40px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#FFA500,#FF6B00);
+  display:grid;place-items:center;
+  font-weight:700;
+  color:white;
+  flex-shrink:0;
+}
+.composer-input{
+  flex:1;
+  background:var(--bg-input);
+  border:none;
+  border-radius:9999px;
+  padding:10px 16px;
+  color:var(--t2);
+  font-family:inherit;
+  font-size:15px;
+  cursor:pointer;
+  text-align:left;
+}
+.composer-input:hover{background:var(--bg-elev-2)}
+
+.composer-actions{
+  display:flex;
+  border-top:1px solid var(--bdr-soft);
+  margin:10px -16px -12px;
+  padding:6px 8px;
+  gap:2px;
+}
+.composer-btn{
+  flex:1;
+  background:transparent;
+  border:none;
+  color:var(--t2);
+  font-family:inherit;
+  font-size:14px;
+  font-weight:600;
+  padding:8px;
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.composer-btn:hover{background:var(--bg-elev-2);color:var(--t1)}
+.composer-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+.composer-btn.predict svg{color:var(--teal)}
+.composer-btn.arte svg{color:var(--arte-1)}
+
+/* FAB for Art-E (always present, mobile + desktop) */
+.fab-arte{
+  position:fixed;
+  bottom:20px;right:20px;
+  width:60px;height:60px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  border:none;
+  cursor:pointer;
+  display:grid;place-items:center;
+  box-shadow:0 8px 24px rgba(124,92,191,0.45);
+  z-index:100;
+  transition:transform .2s;
+}
+.fab-arte:hover{transform:scale(1.08)}
+.fab-arte svg{width:26px;height:26px;fill:white}
+.fab-arte::after{
+  content:'';
+  position:absolute;inset:-4px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  filter:blur(12px);
+  opacity:.4;
+  z-index:-1;
+}
+
+/* Mobile responsive */
+@media(max-width:1280px){
+  .app{grid-template-columns:80px 1fr 320px}
+  .brand-name,.sidebar-title,.nav-item span,.page-meta,.search{display:none}
+  .left-sidebar{padding:16px 8px}
+  .nav-item{justify-content:center;padding:8px}
+}
+@media(max-width:980px){
+  .app{grid-template-columns:80px 1fr;grid-template-areas:"topnav topnav" "left feed"}
+  .right-sidebar{display:none}
+}
+@media(max-width:640px){
+  .app{grid-template-columns:1fr;grid-template-areas:"topnav" "feed"}
+  .left-sidebar{display:none}
+  .feed-inner{padding:0 12px}
+  .topnav{padding:0 12px}
+  .brand-block{min-width:auto}
+}
+
+/* ─── PAGE-LEVEL ENTRANCE ANIMATION ──────────── */
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.feed-inner > *{
+  animation:slideUp .4s ease-out both;
+}
+.feed-inner > *:nth-child(1){animation-delay:0s}
+.feed-inner > *:nth-child(2){animation-delay:0.05s}
+.feed-inner > *:nth-child(3){animation-delay:0.1s}
+.feed-inner > *:nth-child(4){animation-delay:0.15s}
+.feed-inner > *:nth-child(5){animation-delay:0.2s}
+.feed-inner > *:nth-child(6){animation-delay:0.25s}
+.feed-inner > *:nth-child(7){animation-delay:0.3s}
+.feed-inner > *:nth-child(8){animation-delay:0.35s}
+.feed-inner > *:nth-child(9){animation-delay:0.4s}
+
+/* Counter animation hooks */
+.count-up{display:inline-block}
+
+/* Spec watermark */
+.spec-watermark{
+  position:fixed;
+  bottom:14px;left:14px;
+  font-size:10px;
+  color:var(--t3);
+  font-weight:600;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  z-index:200;
+  background:var(--bg-elev);
+  border:1px solid var(--bdr-soft);
+  padding:5px 10px;
+  border-radius:9999px;
+}
+
+
+/* ─── PAGE ROUTING ──────────────────────────── */
+.page{display:none}
+.page.active{display:contents}
+.feed-col .page{display:none}
+.feed-col .page.active{display:block}
+
+/* ─── ANALYTICS PAGE ──────────────────────────── */
+.analytics-wrap{padding:0 16px;max-width:1100px;margin:0 auto}
+.page-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:14px;padding-top:4px;
+}
+.page-title-block .page-title{font-size:24px;font-weight:800;letter-spacing:-0.4px;color:var(--t1);margin:0}
+.page-title-block .page-sub{font-size:13px;color:var(--t2);margin-top:2px}
+.page-actions{display:flex;gap:8px}
+.btn{
+  background:var(--bg-elev);border:1px solid var(--bdr-soft);color:var(--t1);
+  font-family:inherit;font-size:13px;font-weight:600;padding:8px 14px;
+  border-radius:var(--r-sm);cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+  transition:all .15s;
+}
+.btn:hover{background:var(--bg-elev-2);border-color:var(--bdr)}
+.btn.primary{background:var(--teal);color:#0a1410;border-color:var(--teal)}
+.btn.primary:hover{background:#00d4b0}
+.btn.arte{background:linear-gradient(135deg,var(--arte-1),var(--arte-2));color:white;border:none}
+.btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* Sub-tabs (KPIs / Trends / Virality / Sentiment / Deep Dive) */
+.subtabs{
+  display:flex;gap:2px;margin-bottom:16px;
+  background:var(--bg-elev);padding:4px;border-radius:var(--r);
+  overflow-x:auto;
+}
+.subtab{
+  padding:8px 16px;background:transparent;border:none;color:var(--t2);
+  font-family:inherit;font-size:13px;font-weight:600;border-radius:var(--r-sm);
+  cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px;
+  transition:all .15s;
+}
+.subtab:hover{color:var(--t1)}
+.subtab.active{background:var(--bg-elev-2);color:var(--teal)}
+.subtab svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+
+.subpanel{display:none}
+.subpanel.active{display:block;animation:slideUp .3s ease both}
+
+/* KPI cards row — FB grid */
+.kpi-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;
+}
+.kpi-card-v2{
+  background:var(--bg-elev);border-radius:var(--r);padding:14px;
+  display:flex;flex-direction:column;gap:4px;cursor:pointer;
+  border:1px solid transparent;transition:all .15s;
+}
+.kpi-card-v2:hover{border-color:var(--teal);transform:translateY(-1px)}
+.kpi-card-v2 .label{font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:0.04em;font-weight:600}
+.kpi-card-v2 .value{font-size:26px;font-weight:800;color:var(--t1);font-variant-numeric:tabular-nums;letter-spacing:-0.4px}
+.kpi-card-v2 .value.accent{color:var(--teal)}
+.kpi-card-v2 .delta{font-size:12px;font-weight:600;display:flex;align-items:center;gap:3px;margin-top:2px}
+.kpi-card-v2 .delta.up{color:var(--opp)}
+.kpi-card-v2 .delta.down{color:var(--crisis)}
+.kpi-card-v2 .delta.neutral{color:var(--t2)}
+.kpi-card-v2 canvas{margin-top:6px;height:32px !important;width:100% !important}
+
+/* Panels — chart cards */
+.panel{
+  background:var(--bg-elev);border-radius:var(--r);padding:16px;margin-bottom:12px;
+}
+.panel-header{
+  display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;
+}
+.panel-title{font-size:15px;font-weight:700;color:var(--t1);margin:0;display:flex;align-items:center;gap:8px}
+.panel-sub{font-size:12px;color:var(--t2);margin-top:2px}
+.panel-body{position:relative}
+.panel canvas{max-width:100%}
+.arte-badge{
+  background:var(--arte-bg);color:var(--arte-1);font-size:10px;font-weight:700;
+  padding:2px 6px;border-radius:9999px;text-transform:uppercase;letter-spacing:0.04em;
+  display:inline-flex;align-items:center;gap:3px;
+}
+.arte-badge svg{width:9px;height:9px;fill:var(--arte-1)}
+
+/* Two-column panels */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:900px){.two-col,.three-col{grid-template-columns:1fr}}
+
+/* Art-E Insight callout inside Analytics */
+.insight-callout{
+  background:linear-gradient(135deg,rgba(124,92,191,0.12),rgba(0,196,160,0.06));
+  border:1px solid rgba(124,92,191,0.25);
+  border-radius:var(--r);
+  padding:12px 14px;
+  margin-bottom:12px;
+  display:flex;gap:10px;align-items:center;
+}
+.insight-callout .arte-orb{width:32px;height:32px;animation:none}
+.insight-callout .arte-orb svg{width:14px;height:14px}
+.insight-callout-text{flex:1;font-size:13px;color:var(--t1);line-height:1.45}
+.insight-callout-text strong{color:var(--teal)}
+
+/* Posting Heatmap grid */
+.heatmap-grid{display:grid;grid-template-columns:auto repeat(24,1fr);gap:2px;font-size:10px}
+.heatmap-grid .lbl{color:var(--t3);padding-right:4px;text-align:right;font-weight:600;font-size:9px;align-self:center}
+.heat-cell{aspect-ratio:1;border-radius:2px;background:var(--bdr-soft);min-width:0;cursor:pointer;transition:transform .1s}
+.heat-cell:hover{transform:scale(1.4);z-index:2;position:relative}
+.heat-cell.h1{background:rgba(0,196,160,0.15)}
+.heat-cell.h2{background:rgba(0,196,160,0.30)}
+.heat-cell.h3{background:rgba(0,196,160,0.50)}
+.heat-cell.h4{background:rgba(0,196,160,0.70)}
+.heat-cell.h5{background:rgba(0,196,160,0.95)}
+
+/* Top posts list */
+.toplist{display:flex;flex-direction:column;gap:8px}
+.toplist-row{
+  display:flex;align-items:center;gap:10px;padding:8px;border-radius:var(--r-sm);
+  background:var(--bg);cursor:pointer;transition:background .15s;
+}
+.toplist-row:hover{background:var(--bg-elev-2)}
+.toplist-rank{width:22px;font-weight:800;color:var(--t3);font-variant-numeric:tabular-nums;font-size:14px;text-align:center}
+.toplist-rank.gold{color:var(--warn)}
+.toplist-thumb{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,#1a2a3e,#0c1729);flex-shrink:0;display:grid;place-items:center;color:var(--teal);font-size:14px;font-weight:700}
+.toplist-meta{flex:1;min-width:0}
+.toplist-title{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.toplist-meta-sub{font-size:11px;color:var(--t2)}
+.toplist-score{font-size:13px;font-weight:800;color:var(--teal);font-variant-numeric:tabular-nums}
+
+/* Sentiment donut summary row */
+.sent-summary{display:flex;justify-content:space-around;flex-wrap:wrap;gap:8px;font-size:11px;color:var(--t2);margin-top:8px}
+.sent-summary span{display:inline-flex;align-items:center;gap:5px}
+.sent-summary .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+
+/* Data table */
+.data-table{width:100%;border-collapse:collapse;font-size:13px}
+.data-table th,.data-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--bdr-soft)}
+.data-table th{font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:0.04em;font-weight:700}
+.data-table td{color:var(--t1)}
+.data-table tr:hover{background:var(--bg-elev-2)}
+
+/* Toast notifications */
+.toast-host{
+  position:fixed;bottom:90px;right:20px;z-index:300;
+  display:flex;flex-direction:column-reverse;gap:8px;pointer-events:none;
+}
+.toast{
+  background:var(--bg-elev);border:1px solid var(--bdr-soft);border-radius:var(--r);
+  padding:10px 16px;color:var(--t1);font-size:13px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.4);
+  display:flex;align-items:center;gap:10px;min-width:240px;max-width:340px;
+  animation:toastIn .25s ease, toastOut .25s ease 2.7s forwards;
+  pointer-events:auto;
+}
+.toast.success{border-left:3px solid var(--opp)}
+.toast.crisis{border-left:3px solid var(--crisis)}
+.toast.arte{border-left:3px solid var(--arte-1)}
+.toast.info{border-left:3px solid var(--teal)}
+.toast-icon{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+.toast.success .toast-icon{background:var(--opp-bg);color:var(--opp)}
+.toast.crisis .toast-icon{background:var(--crisis-bg);color:var(--crisis)}
+.toast.arte .toast-icon{background:var(--arte-bg);color:var(--arte-1)}
+.toast.info .toast-icon{background:var(--teal-bg);color:var(--teal)}
+.toast-icon svg{width:14px;height:14px;fill:currentColor}
+@keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+@keyframes toastOut{to{opacity:0;transform:translateX(20px)}}
+
+/* Modal */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);
+  display:none;align-items:flex-start;justify-content:center;padding:60px 16px 16px;z-index:200;
+  overflow-y:auto;
+}
+.modal-overlay.open{display:flex;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{
+  background:var(--bg-elev);border-radius:var(--r-lg);max-width:560px;width:100%;
+  border:1px solid var(--bdr-soft);
+  box-shadow:0 24px 64px rgba(0,0,0,0.6);
+  animation:slideUp .3s ease both;
+  margin:auto 0;
+}
+.modal-header{padding:16px 20px;border-bottom:1px solid var(--bdr-soft);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-size:17px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:8px}
+.modal-close{
+  background:transparent;border:none;color:var(--t2);cursor:pointer;
+  width:32px;height:32px;border-radius:50%;display:grid;place-items:center;
+}
+.modal-close:hover{background:var(--bg-elev-2);color:var(--t1)}
+.modal-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.5}
+.modal-body{padding:20px;color:var(--t1);font-size:14px;line-height:1.55}
+.modal-body p{margin-bottom:10px}
+.modal-body strong{color:var(--teal)}
+.modal-actions{padding:12px 20px;border-top:1px solid var(--bdr-soft);display:flex;gap:8px;justify-content:flex-end}
+
+/* Art-E chat modal */
+.arte-chat-host{
+  position:fixed;bottom:90px;right:20px;z-index:150;
+  width:380px;height:520px;background:var(--bg-elev);
+  border:1px solid var(--bdr-soft);border-radius:var(--r-lg);
+  display:none;flex-direction:column;overflow:hidden;
+  box-shadow:0 24px 64px rgba(124,92,191,0.3);
+}
+.arte-chat-host.open{display:flex;animation:slideUp .3s ease both}
+.arte-chat-head{
+  background:linear-gradient(135deg,rgba(124,92,191,0.15),rgba(0,196,160,0.08));
+  border-bottom:1px solid var(--bdr-soft);
+  padding:12px 14px;display:flex;align-items:center;gap:10px;
+}
+.arte-chat-head .arte-orb{width:32px;height:32px;animation:orbPulse 2.4s infinite}
+.arte-chat-head .arte-orb svg{width:14px;height:14px}
+.arte-chat-title{flex:1;font-weight:700;font-size:14px;color:var(--t1)}
+.arte-chat-sub{font-size:11px;color:var(--arte-1);font-weight:600;margin-top:1px}
+.arte-chat-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.arte-chat-msgs::-webkit-scrollbar{width:4px}
+.arte-chat-msgs::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:2px}
+.msg{display:flex;gap:8px;align-items:flex-start;max-width:90%}
+.msg.user{align-self:flex-end;flex-direction:row-reverse}
+.msg-avatar-mini{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:11px;font-weight:700}
+.msg.arte .msg-avatar-mini{background:linear-gradient(135deg,var(--arte-1),var(--arte-2));color:white}
+.msg.user .msg-avatar-mini{background:linear-gradient(135deg,#FFA500,#FF6B00);color:white}
+.msg-bubble{
+  background:var(--bg);border-radius:14px;padding:8px 12px;font-size:13px;
+  color:var(--t1);line-height:1.45;
+}
+.msg.user .msg-bubble{background:var(--teal-bg);color:var(--t1)}
+.msg.arte .msg-bubble{background:rgba(124,92,191,0.10)}
+.arte-prompts{padding:8px 14px;display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bdr-soft);background:var(--bg)}
+.arte-prompt-chip{
+  font-size:11px;background:var(--bg-elev-2);color:var(--t2);
+  border:1px solid var(--bdr-soft);border-radius:9999px;padding:4px 10px;
+  cursor:pointer;font-family:inherit;font-weight:500;transition:all .15s;
+}
+.arte-prompt-chip:hover{background:var(--bg-elev);color:var(--arte-1);border-color:var(--arte-1)}
+.arte-chat-input-row{
+  padding:10px 12px;border-top:1px solid var(--bdr-soft);display:flex;gap:6px;
+}
+.arte-chat-input{
+  flex:1;background:var(--bg-input);border:none;border-radius:9999px;
+  padding:8px 14px;color:var(--t1);font-family:inherit;font-size:13px;outline:none;
+}
+.arte-chat-input:focus{box-shadow:0 0 0 2px var(--arte-1)}
+.arte-chat-send{
+  width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  display:grid;place-items:center;
+}
+.arte-chat-send svg{width:14px;height:14px;fill:white}
+
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ─── TOP NAV ─────────────────────────── -->
+  <header class="topnav">
+    <div class="brand-block">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 4l8 18H4z"/><circle cx="12" cy="16" r="2.5" fill="#0a1410" stroke="none"/></svg>
+      </div>
+      <div class="brand-name">Artemis<em>AI</em></div>
+    </div>
+    <input type="text" class="search" placeholder="Search posts, pages, people, topics">
+    <div class="topnav-spacer"></div>
+
+    <button class="icon-btn" title="Discovery">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="icon-btn" title="Group chats">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM7 9h10v2H7zm6 5H7v-2h6zm4-6H7V6h10z"/></svg>
+    </button>
+    <button class="icon-btn" title="Notifications">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22a2.5 2.5 0 002.5-2.5h-5A2.5 2.5 0 0012 22zm6.5-7v-4.5a6.5 6.5 0 10-13 0V15L4 17v1h16v-1z"/></svg>
+      <span class="badge">3</span>
+    </button>
+    <div class="user-avatar" title="Asad Ikram">A</div>
+  </header>
+
+  <!-- ─── LEFT SIDEBAR ─────────────────────── -->
+  <aside class="left-sidebar">
+
+    <div class="sidebar-section">
+      <a class="nav-item active">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>
+        <span>Home</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg></span>
+        <span>Analytics</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-item-icon arte"><svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></span>
+        <span>Art-E</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M9 12v3a2 2 0 002 2h3"/></svg></span>
+        <span>Discovery</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
+        <span>Profile</span>
+      </a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Your Pages</div>
+
+      <div class="page-card">
+        <div class="page-avatar">DM</div>
+        <div class="page-meta">
+          <div class="page-name">Drinking Memes</div>
+          <div class="page-stat"><span class="dot crisis"></span> Brand risk active</div>
+        </div>
+      </div>
+
+      <div class="page-card">
+        <div class="page-avatar">KD</div>
+        <div class="page-meta">
+          <div class="page-name">Kelpie Daily</div>
+          <div class="page-stat"><span class="dot"></span> Going viral · +3.2× reach</div>
+        </div>
+      </div>
+
+      <div class="page-card">
+        <div class="page-avatar">FN</div>
+        <div class="page-meta">
+          <div class="page-name">Fri Night Chaos</div>
+          <div class="page-stat"><span class="dot warn"></span> Score down 8%</div>
+        </div>
+      </div>
+
+      <div class="page-card">
+        <div class="page-avatar">UK</div>
+        <div class="page-meta">
+          <div class="page-name">UK Jail News</div>
+          <div class="page-stat"><span class="dot"></span> Steady · 4.8% engagement</div>
+        </div>
+      </div>
+
+      <div class="page-card">
+        <div class="page-avatar">PB</div>
+        <div class="page-meta">
+          <div class="page-name">Prison Biscuit</div>
+          <div class="page-stat"><span class="dot"></span> 12 new followers</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Shortcuts</div>
+      <a class="nav-item">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+        <span>Live now</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+        <span>Group chats</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+        <span>Schedule</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ─── CENTRE FEED ─────────────────────── -->
+  <main class="feed-col">
+    <div class="feed-inner">
+      <div class="page active" id="page-home">
+
+      <!-- TAB STRIP — 3 only, FB Marketplace style -->
+      <div class="feed-tabs">
+        <button class="feed-tab active">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          For you
+        </button>
+        <button class="feed-tab">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Live
+        </button>
+        <button class="feed-tab">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92V21a1 1 0 01-1.11 1A19.79 19.79 0 012 4.18 1 1 0 013 3h4.09a1 1 0 011 .75l1 4a1 1 0 01-.27 1L7.21 10.79a16 16 0 006 6l2-1.6a1 1 0 011-.27l4 1a1 1 0 01.79 1z"/></svg>
+          Action items
+          <span class="badge-mini">3</span>
+        </button>
+      </div>
+
+      <!-- ART-E INSIGHT STRIP — TOP, INTERNAL TRIGGER ANSWER -->
+      <div class="arte-strip">
+        <div class="arte-orb">
+          <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+        </div>
+        <div class="arte-text">
+          <div class="arte-label">Art-E · Your morning answer</div>
+          <div class="arte-message">Best post window today: <strong>Tuesday 6PM</strong> — your audience is +34% more active than average. Three pages are ready to post.</div>
+        </div>
+        <div class="arte-arrow">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </div>
+
+      <!-- COMPOSER (write a new post) -->
+      <div class="composer-wrap card" style="padding:0">
+        <div style="display:flex;align-items:center;gap:10px;padding:12px 16px">
+          <div class="composer-avatar">A</div>
+          <button class="composer-input">What are you posting today, Asad?</button>
+        </div>
+        <div class="composer-actions">
+          <button class="composer-btn predict">
+            <svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            Predict score
+          </button>
+          <button class="composer-btn arte">
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+            Ask Art-E
+          </button>
+          <button class="composer-btn">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Schedule
+          </button>
+        </div>
+      </div>
+
+      <!-- CRISIS BANNER — only when active -->
+      <div class="alert-banner">
+        <div class="alert-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 6v6m0 4h.01"/></svg>
+        </div>
+        <div class="alert-content">
+          <div class="alert-title">Brand risk on Drinking Memes <span class="alert-cat">Crisis</span></div>
+          <div class="alert-msg">23 negative comments in 4 minutes on your 6PM post. Sentiment dropping fast — Art-E recommends a response within the hour.</div>
+          <div class="alert-actions">
+            <button class="alert-btn">Respond now</button>
+            <button class="alert-btn-ghost">Mute 24h</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1️⃣  MORNING BRIEFING — Looks like an FB post from Art-E -->
+      <div class="briefing-card">
+        <div class="briefing-head">
+          <div class="briefing-avatar">
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg>
+          </div>
+          <div class="briefing-meta">
+            <div class="briefing-author">
+              Art-E
+              <span class="verified"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+            <div class="briefing-time">Morning briefing · 7:02 AM · For your 5 pages</div>
+          </div>
+        </div>
+        <div class="briefing-body">
+          Good morning. Your network had a strong night — total reach is up <strong>+18% vs last Tuesday</strong>, with Kelpie Daily leading after a meme post crossed 12K shares before midnight. Two opportunities to act on today: the 6PM window for Drinking Memes, and a fresh collab match worth a look.
+        </div>
+        <div class="briefing-stats">
+          <div class="briefing-stat">
+            <div class="briefing-stat-val up">+18%</div>
+            <div class="briefing-stat-lbl">Network reach</div>
+          </div>
+          <div class="briefing-stat">
+            <div class="briefing-stat-val">12.4K</div>
+            <div class="briefing-stat-lbl">Shares overnight</div>
+          </div>
+          <div class="briefing-stat">
+            <div class="briefing-stat-val purp">91</div>
+            <div class="briefing-stat-lbl">Avg AI score</div>
+          </div>
+        </div>
+        <div class="briefing-actions">
+          <button class="briefing-btn primary">
+            <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            Read full briefing
+          </button>
+          <button class="briefing-btn">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            Ask Art-E
+          </button>
+          <button class="briefing-btn">
+            <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51L8.59 10.49"/></svg>
+            Share
+          </button>
+        </div>
+      </div>
+
+      <!-- 2️⃣  HUNT REWARD — Post Performance Card -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon hunt">
+            <svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg>
+          </div>
+          <div class="card-meta">
+            <div class="card-title">
+              <span class="card-title-page">Drinking Memes</span> · 6PM post
+              <span class="reward-chip hunt">Hunt</span>
+            </div>
+            <div class="card-sub">Outperformed average by 3.2× <span class="dot"></span> 2 hours ago</div>
+          </div>
+          <div class="score-circle" title="AI Score: 91">
+            <svg viewBox="0 0 50 50">
+              <circle class="track" cx="25" cy="25" r="22"/>
+              <circle class="fill" cx="25" cy="25" r="22" stroke-dasharray="138" stroke-dashoffset="12"/>
+            </svg>
+            <div class="score-text">91</div>
+          </div>
+        </div>
+        <div class="card-image">
+          <div class="card-image-text">[Post preview · meme image]</div>
+        </div>
+        <div class="card-stats">
+          <span><span class="stat-num">2.4K</span> reactions</span>
+          <span><span class="stat-num">184</span> comments</span>
+          <span><span class="stat-num">312</span> shares</span>
+        </div>
+        <div class="card-actions">
+          <button class="card-action primary">
+            <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>
+            Repost
+          </button>
+          <button class="card-action arte">
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+            Why it worked
+          </button>
+          <button class="card-action">
+            <svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg>
+            Full analytics
+          </button>
+        </div>
+      </div>
+
+      <!-- 3️⃣  TRIBE REWARD — Collab Match -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon tribe">
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M11.65 11.65l3.7 3.7"/></svg>
+          </div>
+          <div class="card-meta">
+            <div class="card-title">
+              New collab match
+              <span class="reward-chip tribe">Tribe</span>
+            </div>
+            <div class="card-sub"><span class="card-title-page">Fri Night Chaos</span> · 89K followers <span class="dot"></span> Found just now</div>
+          </div>
+        </div>
+        <div class="card-body">Their audience overlaps yours by 34% with strong shared interest in pub-culture humour. 7 topics in common with your top performers.</div>
+        <div class="match-bars">
+          <div class="match-row">
+            <div class="match-label">Audience overlap</div>
+            <div class="match-bar-track"><div class="match-bar-fill" style="width:94%"></div></div>
+            <div class="match-pct">94%</div>
+          </div>
+          <div class="match-row">
+            <div class="match-label">Topic similarity</div>
+            <div class="match-bar-track"><div class="match-bar-fill" style="width:78%"></div></div>
+            <div class="match-pct">78%</div>
+          </div>
+          <div class="match-row">
+            <div class="match-label">Posting time alignment</div>
+            <div class="match-bar-track"><div class="match-bar-fill" style="width:65%"></div></div>
+            <div class="match-pct">65%</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="card-action primary">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+            Connect
+          </button>
+          <button class="card-action">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+            View page
+          </button>
+          <button class="card-action">
+            <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            Not now
+          </button>
+        </div>
+      </div>
+
+      <!-- 4️⃣  HUNT REWARD — Trend Alert -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon hunt">
+            <svg viewBox="0 0 24 24"><path d="M2 12h2l3-9 6 18 3-9h6"/></svg>
+          </div>
+          <div class="card-meta">
+            <div class="card-title">
+              "Prison drama" trending in your niche
+              <span class="reward-chip hunt">Hunt</span>
+            </div>
+            <div class="card-sub">+340% mentions vs last week <span class="dot"></span> Estimated peak window: next 4 hours</div>
+          </div>
+        </div>
+        <div class="card-body">Your UK Jail News page is positioned to capture this. Art-E predicts a post in this slot would score <strong>92</strong> — your highest forecast this week.</div>
+        <div class="card-actions">
+          <button class="card-action arte">
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+            Draft a post
+          </button>
+          <button class="card-action">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            See trend data
+          </button>
+          <button class="card-action">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>
+            Hide
+          </button>
+        </div>
+      </div>
+
+      <!-- 5️⃣  SELF REWARD — Streak / Mastery -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon self">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          </div>
+          <div class="card-meta">
+            <div class="card-title">
+              You're on a 6-day streak
+              <span class="reward-chip self">Self</span>
+            </div>
+            <div class="card-sub">Post today to extend it · Best streak: 14 days</div>
+          </div>
+        </div>
+        <div class="streak-row">
+          <div class="streak-day done">M</div>
+          <div class="streak-day done">T</div>
+          <div class="streak-day done">W</div>
+          <div class="streak-day done">T</div>
+          <div class="streak-day done">F</div>
+          <div class="streak-day done">S</div>
+          <div class="streak-day today">S</div>
+        </div>
+        <div class="card-actions">
+          <button class="card-action primary">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Post now
+          </button>
+          <button class="card-action">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Schedule
+          </button>
+        </div>
+      </div>
+
+      <!-- 6️⃣  OPPORTUNITY BANNER — viral spike -->
+      <div class="alert-banner opp">
+        <div class="alert-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        </div>
+        <div class="alert-content">
+          <div class="alert-title">Kelpie Daily post going viral <span class="alert-cat">Opportunity</span></div>
+          <div class="alert-msg">3.2× average reach in the first 90 minutes — strongest velocity in 30 days. Reshare across your other pages now to capture the wave.</div>
+          <div class="alert-actions">
+            <button class="alert-btn">Reshare now</button>
+            <button class="alert-btn-ghost">View live</button>
+          </div>
+        </div>
+      </div>
+
+      </div><!-- /page-home -->
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- ANALYTICS PAGE — All charts, FB-styled  -->
+      <!-- ════════════════════════════════════════ -->
+      <div class="page" id="page-analytics">
+        <div class="analytics-wrap">
+
+          <div class="page-header">
+            <div class="page-title-block">
+              <h1 class="page-title">Analytics</h1>
+              <div class="page-sub">All pages · Last 30 days · Updated 2 minutes ago</div>
+            </div>
+            <div class="page-actions">
+              <button class="btn" onclick="toast('info','Date range picker — coming soon')">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                Last 30 days
+              </button>
+              <button class="btn" onclick="toast('success','Report exported as PDF')">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                Export
+              </button>
+              <button class="btn arte" onclick="openArteChat('Explain my analytics this week')">
+                <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+                Ask Art-E
+              </button>
+            </div>
+          </div>
+
+          <!-- Sub-tabs -->
+          <div class="subtabs" id="analyticsSubtabs">
+            <button class="subtab active" data-sub="kpis"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg> KPIs</button>
+            <button class="subtab" data-sub="trends"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Trends</button>
+            <button class="subtab" data-sub="virality"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg> Virality</button>
+            <button class="subtab" data-sub="sentiment"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8z"/></svg> Sentiment</button>
+            <button class="subtab" data-sub="deepdive"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 7v8M7 11h8"/></svg> Deep Dive</button>
+          </div>
+
+          <!-- ─── KPIs PANEL ─────────────── -->
+          <div class="subpanel active" id="sub-kpis">
+            <div class="insight-callout">
+              <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+              <div class="insight-callout-text">Your engagement rate is <strong>+12% vs last week</strong> — driven by Tuesday 6PM posts. Reach is following the same trend with a one-day lag.</div>
+            </div>
+
+            <div class="kpi-grid">
+              <div class="kpi-card-v2" onclick="toast('info','Engagement Rate · drill-down coming soon')">
+                <div class="label">Engagement Rate</div>
+                <div class="value accent">4.2%</div>
+                <div class="delta up">↑ 12% vs last week</div>
+                <canvas id="sp1"></canvas>
+              </div>
+              <div class="kpi-card-v2" onclick="toast('info','Total Reach · drill-down coming soon')">
+                <div class="label">Total Reach</div>
+                <div class="value">24.5K</div>
+                <div class="delta up">↑ 8.3% vs last week</div>
+                <canvas id="sp2"></canvas>
+              </div>
+              <div class="kpi-card-v2" onclick="toast('info','Sentiment · drill-down coming soon')">
+                <div class="label">Sentiment Score</div>
+                <div class="value accent">0.82</div>
+                <div class="delta neutral">Stable · positive</div>
+                <canvas id="sp3"></canvas>
+              </div>
+              <div class="kpi-card-v2" onclick="toast('info','Virality · drill-down coming soon')">
+                <div class="label">Virality Rate</div>
+                <div class="value">67%</div>
+                <div class="delta down">↓ 3.1% vs last week</div>
+                <canvas id="sp4"></canvas>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <div class="panel-title">Engagement &amp; Reach — 30 Days</div>
+                  <div class="panel-sub">All pages · daily</div>
+                </div>
+                <span class="arte-badge"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Art-E</span>
+              </div>
+              <canvas id="mainEng" height="120"></canvas>
+            </div>
+
+            <div class="two-col">
+              <div class="panel">
+                <div class="panel-header">
+                  <div><div class="panel-title">Sentiment Split</div><div class="panel-sub">847 posts · last 30 days</div></div>
+                </div>
+                <div style="display:flex;justify-content:center;padding:8px 0">
+                  <canvas id="sentDonut" width="180" height="180"></canvas>
+                </div>
+                <div class="sent-summary">
+                  <span><span class="dot" style="background:#22C55E"></span> Positive 60%</span>
+                  <span><span class="dot" style="background:#60A5FA"></span> Neutral 18%</span>
+                  <span><span class="dot" style="background:#F59E0B"></span> Mixed 11%</span>
+                  <span><span class="dot" style="background:#E53935"></span> Negative 11%</span>
+                </div>
+              </div>
+              <div class="panel">
+                <div class="panel-header">
+                  <div><div class="panel-title">Format Performance</div><div class="panel-sub">Avg engagement by type</div></div>
+                </div>
+                <canvas id="fmtChart" height="170"></canvas>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <div><div class="panel-title">Posting Heatmap</div><div class="panel-sub">Engagement by day &amp; time</div></div>
+                <span class="arte-badge"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Best: Tue 6PM</span>
+              </div>
+              <div id="heatmapEl"></div>
+            </div>
+
+            <div class="two-col">
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">This Week vs Last</div><div class="panel-sub">Key metric comparison</div></div></div>
+                <canvas id="weekComp" height="170"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Emotion Radar</div><div class="panel-sub">This week vs last</div></div></div>
+                <canvas id="emotionRadar" height="170"></canvas>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header"><div><div class="panel-title">Top Posts — Last 14 Days</div><div class="panel-sub">Ranked by AI score</div></div></div>
+              <div class="toplist">
+                <div class="toplist-row" onclick="toast('info','Opening Drinking Memes 6PM post')">
+                  <div class="toplist-rank gold">1</div>
+                  <div class="toplist-thumb">DM</div>
+                  <div class="toplist-meta">
+                    <div class="toplist-title">Drinking Memes · "Your liver after Monday meetings…"</div>
+                    <div class="toplist-meta-sub">2.4K reactions · 312 shares · Tue 6PM</div>
+                  </div>
+                  <div class="toplist-score">94</div>
+                </div>
+                <div class="toplist-row" onclick="toast('info','Opening Kelpie Daily post')">
+                  <div class="toplist-rank">2</div>
+                  <div class="toplist-thumb">KD</div>
+                  <div class="toplist-meta">
+                    <div class="toplist-title">Kelpie Daily · "When the kelpie spots a Bunnings bag"</div>
+                    <div class="toplist-meta-sub">3.8K reactions · 489 shares · Wed 7PM</div>
+                  </div>
+                  <div class="toplist-score">92</div>
+                </div>
+                <div class="toplist-row" onclick="toast('info','Opening UK Jail News post')">
+                  <div class="toplist-rank">3</div>
+                  <div class="toplist-thumb">UK</div>
+                  <div class="toplist-meta">
+                    <div class="toplist-title">UK Jail News · "Inmates rate the prison breakfast"</div>
+                    <div class="toplist-meta-sub">1.9K reactions · 234 shares · Thu 8PM</div>
+                  </div>
+                  <div class="toplist-score">87</div>
+                </div>
+                <div class="toplist-row" onclick="toast('info','Opening Fri Night Chaos post')">
+                  <div class="toplist-rank">4</div>
+                  <div class="toplist-thumb">FN</div>
+                  <div class="toplist-meta">
+                    <div class="toplist-title">Fri Night Chaos · "Friday plans hierarchy chart"</div>
+                    <div class="toplist-meta-sub">1.4K reactions · 178 shares · Fri 9PM</div>
+                  </div>
+                  <div class="toplist-score">82</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ─── TRENDS PANEL ─────────────── -->
+          <div class="subpanel" id="sub-trends">
+            <div class="insight-callout">
+              <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+              <div class="insight-callout-text"><strong>Tuesday and Thursday</strong> are your strongest days — engagement is 38% higher than your weekend baseline. Posting volume on weekends is still cannibalising weekday performance.</div>
+            </div>
+            <div class="panel">
+              <div class="panel-header"><div><div class="panel-title">90-Day Multi-Metric Trend</div><div class="panel-sub">Engagement rate · reach · posts published</div></div></div>
+              <canvas id="trend90" height="130"></canvas>
+            </div>
+            <div class="two-col">
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Day of Week</div><div class="panel-sub">Avg engagement</div></div></div>
+                <canvas id="dowChart" height="170"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Best Posting Hours</div><div class="panel-sub">Avg engagement by hour</div></div></div>
+                <canvas id="hourlyChart" height="170"></canvas>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-header"><div><div class="panel-title">Reach vs Engagement Scatter</div><div class="panel-sub">60 posts · correlation analysis</div></div></div>
+              <canvas id="scatterChart" height="170"></canvas>
+            </div>
+          </div>
+
+          <!-- ─── VIRALITY PANEL ─────────────── -->
+          <div class="subpanel" id="sub-virality">
+            <div class="insight-callout">
+              <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+              <div class="insight-callout-text">Your virality threshold is <strong>200 shares/hour</strong>. Two posts crossed it this month — both used the question CTA pattern with humour-led visuals.</div>
+            </div>
+            <div class="panel">
+              <div class="panel-header"><div><div class="panel-title">Share Velocity — 48h</div><div class="panel-sub">Shares per hour · red line = viral threshold (200/hr)</div></div></div>
+              <canvas id="velChart" height="140"></canvas>
+            </div>
+            <div class="two-col">
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Virality Score Distribution</div><div class="panel-sub">All posts this month</div></div></div>
+                <canvas id="viralDist" height="160"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Viral Triggers</div><div class="panel-sub">Impact ranking</div></div></div>
+                <canvas id="triggerChart" height="160"></canvas>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-header"><div><div class="panel-title">Probability by Day &amp; Time</div><div class="panel-sub">% chance of crossing viral threshold</div></div></div>
+              <canvas id="viralHeat" height="180"></canvas>
+            </div>
+          </div>
+
+          <!-- ─── SENTIMENT PANEL ─────────────── -->
+          <div class="subpanel" id="sub-sentiment">
+            <div class="insight-callout">
+              <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+              <div class="insight-callout-text">Sentiment dipped <strong>−6% on Drinking Memes</strong> after the controversial post on the 18th. Recovery curve is on track — back to baseline by day 4.</div>
+            </div>
+            <div class="panel">
+              <div class="panel-header"><div><div class="panel-title">Sentiment Over Time — 30 Days</div><div class="panel-sub">Positive and negative rate daily</div></div></div>
+              <canvas id="sentTime" height="140"></canvas>
+            </div>
+            <div class="two-col">
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Emotion Breakdown</div><div class="panel-sub">Comment classification</div></div></div>
+                <canvas id="emotionBar" height="160"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Sentiment by Page vs Benchmark</div><div class="panel-sub">Industry baseline = 0.65</div></div></div>
+                <canvas id="sentByPage" height="160"></canvas>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-header"><div><div class="panel-title">Sentiment → Engagement</div><div class="panel-sub">60-post scatter correlation</div></div></div>
+              <canvas id="sentEng" height="170"></canvas>
+            </div>
+          </div>
+
+          <!-- ─── DEEP DIVE PANEL ─────────────── -->
+          <div class="subpanel" id="sub-deepdive">
+            <div class="insight-callout">
+              <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+              <div class="insight-callout-text">Caption length sweet spot is <strong>80-120 characters</strong>. Posts in this range have 2.3× the engagement of short captions (&lt;40 chars) and 1.6× of long captions (&gt;200 chars).</div>
+            </div>
+            <div class="three-col">
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Caption Length</div><div class="panel-sub">Engagement by char count</div></div></div>
+                <canvas id="captionLenChart" height="160"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Emoji Sweet Spot</div><div class="panel-sub">Reactions by emoji count</div></div></div>
+                <canvas id="emojiChart" height="160"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Volatility Index</div><div class="panel-sub">Variance per page</div></div></div>
+                <canvas id="volatilityChart" height="160"></canvas>
+              </div>
+            </div>
+            <div class="two-col">
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Share Multiplier</div><div class="panel-sub">Cumulative reach effect</div></div></div>
+                <canvas id="shareMultChart" height="160"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Post Frequency vs Engagement</div><div class="panel-sub">Diminishing returns curve</div></div></div>
+                <canvas id="freqEngChart" height="160"></canvas>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-header"><div><div class="panel-title">Engagement Funnel</div><div class="panel-sub">Reach → reaction → comment → share</div></div></div>
+              <canvas id="funnelChart" height="140"></canvas>
+            </div>
+            <div class="panel">
+              <div class="panel-header"><div><div class="panel-title">Raw Data — Last 12 Posts</div><div class="panel-sub">Click any row for full details</div></div></div>
+              <table class="data-table" id="rawDataTable">
+                <thead><tr><th>Page</th><th>Posted</th><th>Reach</th><th>React</th><th>Shares</th><th>AI Score</th></tr></thead>
+                <tbody id="rawDataBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /page-analytics -->
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- PLACEHOLDER PAGES                       -->
+      <!-- ════════════════════════════════════════ -->
+      <div class="page" id="page-arte">
+        <div class="analytics-wrap">
+          <div class="page-header">
+            <div class="page-title-block">
+              <h1 class="page-title">Art-E</h1>
+              <div class="page-sub">Your AI co-pilot · Trained on your 5 pages</div>
+            </div>
+          </div>
+          <div class="panel" style="text-align:center;padding:60px 20px">
+            <div class="arte-orb" style="margin:0 auto 16px;width:60px;height:60px;animation:orbPulse 2.4s infinite">
+              <svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg>
+            </div>
+            <div style="font-size:18px;font-weight:700;margin-bottom:8px">Open Art-E from anywhere</div>
+            <div style="color:var(--t2);font-size:14px;margin-bottom:16px">Use the floating button to start a conversation. I'll remember context across sessions.</div>
+            <button class="btn arte" onclick="openArteChat()">
+              <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+              Start chatting
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="page" id="page-discovery">
+        <div class="analytics-wrap">
+          <div class="page-header"><div class="page-title-block"><h1 class="page-title">Discovery</h1><div class="page-sub">Your collaboration network</div></div></div>
+          <div class="insight-callout">
+            <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+            <div class="insight-callout-text"><strong>3 new collab matches</strong> in your niche this week. The strongest match is Fri Night Chaos with 94% audience overlap.</div>
+          </div>
+          <div class="panel" style="text-align:center;padding:60px 20px;color:var(--t2)">
+            Discovery — collab flywheel, page network graph, post cascade, group chats. Coming in v2.1.
+          </div>
+        </div>
+      </div>
+
+      <div class="page" id="page-profile">
+        <div class="analytics-wrap">
+          <div class="page-header"><div class="page-title-block"><h1 class="page-title">Profile</h1><div class="page-sub">Asad Ikram</div></div></div>
+          <div class="panel" style="text-align:center;padding:60px 20px;color:var(--t2)">Profile settings — coming in v2.1.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ─── RIGHT SIDEBAR ─────────────────────── -->
+  <aside class="right-sidebar">
+
+    <!-- Live counters (Hunt — fresh data) -->
+    <div class="right-card">
+      <div class="right-card-head">
+        <div class="right-card-title">
+          <span class="live-dot"></span> Live
+        </div>
+        <a class="right-card-link">Today</a>
+      </div>
+      <div class="live-grid">
+        <div class="live-stat">
+          <div class="live-stat-val up">2.4K<span class="delta">↑18%</span></div>
+          <div class="live-stat-lbl">Reach right now</div>
+        </div>
+        <div class="live-stat">
+          <div class="live-stat-val">187</div>
+          <div class="live-stat-lbl">Engagements/min</div>
+        </div>
+        <div class="live-stat">
+          <div class="live-stat-val">4.8%</div>
+          <div class="live-stat-lbl">Engagement rate</div>
+        </div>
+        <div class="live-stat">
+          <div class="live-stat-val up">91<span class="delta">↑3</span></div>
+          <div class="live-stat-lbl">Avg AI score</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bell tray notifications -->
+    <div class="right-card">
+      <div class="right-card-head">
+        <div class="right-card-title">Notifications</div>
+        <a class="right-card-link">See all</a>
+      </div>
+
+      <div class="bell-item unread">
+        <div class="bell-icon crisis">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 6v6m0 4h.01"/></svg>
+        </div>
+        <div class="bell-body">
+          <div class="bell-text"><strong>Brand risk</strong> on <span class="accent">Drinking Memes</span> — 23 negative comments in 4 minutes</div>
+          <div class="bell-time">3 minutes ago</div>
+        </div>
+      </div>
+
+      <div class="bell-item unread">
+        <div class="bell-icon opp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        </div>
+        <div class="bell-body">
+          <div class="bell-text"><strong>Going viral:</strong> <span class="accent">Kelpie Daily</span> at 3.2× average reach</div>
+          <div class="bell-time">11 minutes ago</div>
+        </div>
+      </div>
+
+      <div class="bell-item unread">
+        <div class="bell-icon warn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </div>
+        <div class="bell-body">
+          <div class="bell-text"><strong>Reminder:</strong> 6PM window for <span class="accent">Drinking Memes</span> closes in 1h</div>
+          <div class="bell-time">22 minutes ago</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top performers (Self) -->
+    <div class="right-card">
+      <div class="right-card-head">
+        <div class="right-card-title">Top this week</div>
+        <a class="right-card-link">All pages</a>
+      </div>
+
+      <div class="top-row">
+        <div class="top-rank gold">1</div>
+        <div class="top-page">KD</div>
+        <div class="top-meta">
+          <div class="top-name">Kelpie Daily</div>
+          <div class="top-score">94 score · 3.2× reach</div>
+        </div>
+      </div>
+
+      <div class="top-row">
+        <div class="top-rank">2</div>
+        <div class="top-page">DM</div>
+        <div class="top-meta">
+          <div class="top-name">Drinking Memes</div>
+          <div class="top-score">91 score · 2.4× reach</div>
+        </div>
+      </div>
+
+      <div class="top-row">
+        <div class="top-rank">3</div>
+        <div class="top-page">UK</div>
+        <div class="top-meta">
+          <div class="top-name">UK Jail News</div>
+          <div class="top-score">87 score · 1.8× reach</div>
+        </div>
+      </div>
+
+      <div class="top-row">
+        <div class="top-rank">4</div>
+        <div class="top-page">FN</div>
+        <div class="top-meta">
+          <div class="top-name">Fri Night Chaos</div>
+          <div class="top-score">82 score · 1.4× reach</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-footer">
+      <a>About</a><a>Help</a><a>Privacy</a><a>Settings</a><br/>
+      ArtemisAI · Internal preview · v2 redesign
+    </div>
+  </aside>
+
+</div>
+
+<!-- Floating Art-E button — Investment engine, always one tap away -->
+<button class="fab-arte" title="Ask Art-E" onclick="openArteChat()">
+  <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg>
+</button>
+
+<!-- Toast host -->
+<div class="toast-host" id="toastHost"></div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Title</div>
+      <button class="modal-close" onclick="closeModal()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="modal-body" id="modalBody">Content</div>
+    <div class="modal-actions" id="modalActions">
+      <button class="btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Art-E chat -->
+<div class="arte-chat-host" id="arteChatHost">
+  <div class="arte-chat-head">
+    <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+    <div>
+      <div class="arte-chat-title">Art-E</div>
+      <div class="arte-chat-sub">● Online · Knows your 5 pages</div>
+    </div>
+    <button class="modal-close" onclick="closeArteChat()" style="margin-left:auto"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="arte-chat-msgs" id="arteChatMsgs">
+    <div class="msg arte">
+      <div class="msg-avatar-mini">A</div>
+      <div class="msg-bubble">Hey Asad — what's on your mind? I can help with timing, predictions, content ideas, or explain anything in your analytics.</div>
+    </div>
+  </div>
+  <div class="arte-prompts">
+    <button class="arte-prompt-chip" onclick="sendArteMsg('What should I post today?')">What should I post today?</button>
+    <button class="arte-prompt-chip" onclick="sendArteMsg('Why did my last post do well?')">Why did my last post do well?</button>
+    <button class="arte-prompt-chip" onclick="sendArteMsg('Best time to post on Drinking Memes?')">Best time to post?</button>
+  </div>
+  <div class="arte-chat-input-row">
+    <input class="arte-chat-input" id="arteChatInput" placeholder="Ask Art-E anything…" onkeypress="if(event.key==='Enter'){sendArteMsg(this.value);this.value=''}">
+    <button class="arte-chat-send" onclick="var i=document.getElementById('arteChatInput');sendArteMsg(i.value);i.value=''"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+
+<!-- Spec watermark -->
+<div class="spec-watermark">v2 · Hooked applied · May 2026</div>
+
+<script>
+/* ─── ROUTER ──────────────────────────────────── */
+function navigateTo(pageName, navItem){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target = document.getElementById('page-'+pageName);
+  if(target) target.classList.add('active');
+
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  if(navItem) navItem.classList.add('active');
+
+  document.querySelector('.feed-col').scrollTop = 0;
+
+  // Init analytics charts on first nav
+  if(pageName === 'analytics' && !window._analyticsLoaded){
+    setTimeout(()=>{ initAnalytics(); window._analyticsLoaded = true; }, 50);
+  }
+}
+
+/* ─── TOASTS ──────────────────────────────────── */
+const TOAST_ICONS = {
+  success:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4 1.4 1.4L11 17l-3.4-3.4z"/></svg>',
+  crisis:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 6v6m0 4h.01"/></svg>',
+  arte:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>',
+  info:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01" stroke="white" stroke-width="2" fill="none"/></svg>'
+};
+function toast(type, message){
+  const host = document.getElementById('toastHost');
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.innerHTML = `<div class="toast-icon">${TOAST_ICONS[type]||TOAST_ICONS.info}</div><div>${message}</div>`;
+  host.appendChild(t);
+  setTimeout(()=>t.remove(), 3000);
+}
+
+/* ─── MODAL ──────────────────────────────────── */
+function openModal(title, body, actions){
+  document.getElementById('modalTitle').innerHTML = title;
+  document.getElementById('modalBody').innerHTML = body;
+  if(actions){
+    document.getElementById('modalActions').innerHTML = actions;
+  } else {
+    document.getElementById('modalActions').innerHTML = '<button class="btn" onclick="closeModal()">Close</button>';
+  }
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); }
+
+/* ─── ART-E CHAT ──────────────────────────────────── */
+function openArteChat(prompt){
+  document.getElementById('arteChatHost').classList.add('open');
+  if(prompt){ setTimeout(()=>sendArteMsg(prompt), 300); }
+}
+function closeArteChat(){ document.getElementById('arteChatHost').classList.remove('open'); }
+function sendArteMsg(text){
+  if(!text || !text.trim()) return;
+  const msgs = document.getElementById('arteChatMsgs');
+  msgs.insertAdjacentHTML('beforeend',
+    `<div class="msg user"><div class="msg-avatar-mini">A</div><div class="msg-bubble">${escapeHtml(text)}</div></div>`);
+  msgs.scrollTop = msgs.scrollHeight;
+  setTimeout(()=>{
+    const reply = arteReply(text);
+    msgs.insertAdjacentHTML('beforeend',
+      `<div class="msg arte"><div class="msg-avatar-mini">A</div><div class="msg-bubble">${reply}</div></div>`);
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 700);
+}
+function arteReply(text){
+  const t = text.toLowerCase();
+  if(t.includes('post today') || t.includes('what should i'))
+    return 'Today I\'d push <strong>Drinking Memes at 6PM</strong> — your audience is +34% more active than weekly average. The pub-culture angle is also peaking right now (+340% mentions). Want me to draft three caption options?';
+  if(t.includes('why') && (t.includes('well') || t.includes('worked')))
+    return 'Your last post hit 91/100 because: (1) the hook landed in the first 8 words, (2) you posted in your top time slot (Tue 6PM), and (3) it was a question CTA — your highest-converting format this month.';
+  if(t.includes('time') || t.includes('when'))
+    return 'For <strong>Drinking Memes</strong>: best times are Tue 6PM (+34%), Thu 8PM (+28%), Sun 10AM (+19%). Avoid Mon mornings — engagement drops 41%.';
+  if(t.includes('analytics') || t.includes('explain') || t.includes('week'))
+    return 'This week: engagement <strong>+12%</strong>, reach <strong>+8.3%</strong>, sentiment stable at 0.82. The big win was Tue 6PM — your top post crossed 12K shares overnight. Virality dipped slightly because you posted less frequently on weekends. Want me to break down by page?';
+  if(t.includes('drinking') || t.includes('kelpie') || t.includes('chaos'))
+    return 'Pulling that page\'s data… Most engaging recent posts: the meme on the 22nd (94 score) and the question CTA on the 19th (89 score). Both used images + question hooks. Pattern is clear: that\'s your formula.';
+  return 'Good question. Based on your 5 pages, the strongest signal I\'m seeing this week is that <strong>question CTAs</strong> are outperforming statement posts by 1.6×. Want me to dig into which questions specifically?';
+}
+function escapeHtml(s){ return s.replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]); }
+
+/* ─── BUTTON HANDLERS ──────────────────────────────────── */
+function handleAction(action, ctx){
+  switch(action){
+    case 'predict-score': openModal(
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00C4A0" stroke-width="2" style="vertical-align:-3px;margin-right:6px"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg> Predict Post Score',
+      '<p>Paste your draft caption to get an instant AI score, predicted engagement, and Art-E\'s suggestions.</p><textarea style="width:100%;height:90px;background:var(--bg-input);border:1px solid var(--bdr-soft);border-radius:8px;padding:10px;color:var(--t1);font-family:inherit;font-size:14px;outline:none;margin-bottom:8px" placeholder="Type or paste your caption…"></textarea><div style="background:var(--teal-bg);padding:10px 12px;border-radius:8px;color:var(--t1);font-size:13px"><strong style="color:var(--teal)">Tip from Art-E:</strong> Posts with a question in the first sentence score 1.6× higher on your pages.</div>',
+      '<button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="closeModal();toast(\'arte\',\'Score: 87 / 100 — strong post\')">Predict</button>'
+    ); break;
+    case 'ask-arte': openArteChat(); break;
+    case 'schedule': toast('info','Scheduler — opening calendar'); break;
+    case 'respond': openModal('Respond to Brand Risk',
+      '<p><strong>Drinking Memes — 6PM post</strong></p><p>23 negative comments in 4 minutes. Suggested response template (Art-E):</p><div style="background:var(--bg);padding:10px 12px;border-radius:8px;font-size:13px;color:var(--t2);margin-bottom:8px;border-left:3px solid var(--teal)">"Hey everyone — we hear you. Taking the post down while we review. Open to feedback in DMs."</div><p style="font-size:13px">This template performed 78% better than generic responses on your previous brand risk events.</p>',
+      '<button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="closeModal();toast(\'success\',\'Response sent · 23 comments hidden\')">Use template</button>'
+    ); break;
+    case 'mute': toast('info','Brand risk muted for 24 hours'); break;
+    case 'repost': toast('success','Reposted to your other 4 pages'); break;
+    case 'why-it-worked': openArteChat('Why did the Drinking Memes 6PM post do well?'); break;
+    case 'full-analytics': navigateTo('analytics', document.querySelector('[data-page="analytics"]')); break;
+    case 'connect': toast('success','Fri Night Chaos added to your collab flywheel'); break;
+    case 'view-page': toast('info','Opening Fri Night Chaos page'); break;
+    case 'not-now': toast('info','Hidden — won\'t show again for 7 days'); break;
+    case 'draft-post': openArteChat('Draft me a post about prison drama trending now'); break;
+    case 'see-trend': navigateTo('analytics', document.querySelector('[data-page="analytics"]')); break;
+    case 'hide': toast('info','Card hidden'); break;
+    case 'post-now': openModal('Post now — extends your streak to 7 days',
+      '<p>Choose which page to post to:</p><div style="display:flex;flex-direction:column;gap:6px;margin-top:10px">' +
+      ['Drinking Memes','Kelpie Daily','Fri Night Chaos','UK Jail News','Prison Biscuit'].map(p=>
+        `<button class="btn" style="justify-content:flex-start;width:100%" onclick="closeModal();toast(\'success\',\'Posted to ${p} · streak extended to 7\')">${p}</button>`
+      ).join('') + '</div>',
+      '<button class="btn" onclick="closeModal()">Cancel</button>'
+    ); break;
+    case 'reshare': toast('success','Reshared to all pages · expect +25% reach'); break;
+    case 'view-live': toast('info','Opening live performance view'); break;
+    case 'read-briefing': openModal('Morning Briefing — Full',
+      '<p><strong>Network reach:</strong> +18% vs last Tuesday — strongest opening in 14 days.</p>' +
+      '<p><strong>Standouts:</strong> Kelpie Daily\'s meme post crossed 12K shares before midnight. Drinking Memes is sitting on a +34% audience window for 6PM.</p>' +
+      '<p><strong>Risk watch:</strong> Brand risk on Drinking Memes — 23 negative comments. Suggested response template ready.</p>' +
+      '<p><strong>Today\'s plan:</strong> Post Drinking Memes at 6PM (+34% boost), draft a UK Jail News post on the prison drama trend, connect with Fri Night Chaos collab.</p>',
+      '<button class="btn" onclick="closeModal()">Got it</button><button class="btn arte" onclick="closeModal();openArteChat(\'Walk me through today\\\'s plan\')">Discuss with Art-E</button>'
+    ); break;
+    case 'composer': openModal('What are you posting today?',
+      '<textarea style="width:100%;height:120px;background:var(--bg-input);border:1px solid var(--bdr-soft);border-radius:8px;padding:12px;color:var(--t1);font-family:inherit;font-size:14px;outline:none" placeholder="What\'s on your mind?"></textarea>',
+      '<button class="btn" onclick="closeModal();toast(\'info\',\'Saved as draft\')">Save draft</button><button class="btn arte" onclick="closeModal();openArteChat(\'Score this draft\')">Predict & post</button>'
+    ); break;
+    case 'page':
+      toast('info','Opening ' + (ctx||'page'));
+      break;
+    case 'shortcut':
+      toast('info', ctx + ' — coming in v2.1');
+      break;
+    case 'topnav-search':
+      toast('info','Search — coming soon');
+      break;
+    case 'topnav-bell':
+      toast('info','See the right sidebar for active alerts');
+      break;
+    case 'topnav-chat':
+      toast('info','Group chats — coming in v2.1');
+      break;
+    case 'topnav-discovery':
+      navigateTo('discovery', document.querySelector('[data-page="discovery"]'));
+      break;
+    case 'topnav-user':
+      navigateTo('profile', document.querySelector('[data-page="profile"]'));
+      break;
+    case 'bell-item':
+      toast('info','Opening alert: ' + ctx);
+      break;
+    case 'tab-feed':
+      toast('info', ctx + ' tab — feed filter applied');
+      break;
+    default:
+      toast('info', action + ' — clicked');
+  }
+}
+
+/* ─── BIND ALL BUTTONS ───────────────────────── */
+document.addEventListener('DOMContentLoaded', ()=>{
+
+  // Sidebar nav
+  const navMap = [
+    [0,'home'],[1,'analytics'],[2,'arte'],[3,'discovery'],[4,'profile']
+  ];
+  const navItems = document.querySelectorAll('.left-sidebar .sidebar-section:first-child .nav-item');
+  navItems.forEach((item, i) => {
+    item.setAttribute('data-page', navMap[i] ? navMap[i][1] : '');
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      const pg = navMap[i] ? navMap[i][1] : null;
+      if(pg) navigateTo(pg, item);
+    });
+  });
+
+  // Pages list (left sidebar)
+  document.querySelectorAll('.page-card').forEach(pc => {
+    pc.addEventListener('click', () => {
+      const name = pc.querySelector('.page-name').textContent;
+      handleAction('page', name);
+    });
+  });
+
+  // Shortcuts
+  document.querySelectorAll('.left-sidebar .sidebar-section:last-child .nav-item').forEach(item => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      const lbl = item.querySelector('span:last-child').textContent;
+      handleAction('shortcut', lbl);
+    });
+  });
+
+  // Top nav icons
+  document.querySelector('.search')?.addEventListener('click', ()=>handleAction('topnav-search'));
+  document.querySelectorAll('.icon-btn').forEach((btn,i)=>{
+    btn.addEventListener('click', ()=>{
+      if(i===0) handleAction('topnav-discovery');
+      else if(i===1) handleAction('topnav-chat');
+      else if(i===2) handleAction('topnav-bell');
+    });
+  });
+  document.querySelector('.user-avatar')?.addEventListener('click', ()=>handleAction('topnav-user'));
+
+  // Feed tabs
+  document.querySelectorAll('.feed-tabs .feed-tab').forEach(tab=>{
+    tab.addEventListener('click', e=>{
+      document.querySelectorAll('.feed-tabs .feed-tab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      const lbl = tab.textContent.trim();
+      handleAction('tab-feed', lbl);
+    });
+  });
+
+  // Composer
+  document.querySelector('.composer-input')?.addEventListener('click', ()=>handleAction('composer'));
+  document.querySelectorAll('.composer-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const lbl = btn.textContent.trim();
+      if(lbl.includes('Predict')) handleAction('predict-score');
+      else if(lbl.includes('Art-E')) handleAction('ask-arte');
+      else if(lbl.includes('Schedule')) handleAction('schedule');
+    });
+  });
+
+  // Crisis banner buttons
+  document.querySelectorAll('.alert-banner .alert-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const lbl = btn.textContent.trim().toLowerCase();
+      if(lbl.includes('respond')) handleAction('respond');
+      else if(lbl.includes('reshare')) handleAction('reshare');
+      else if(lbl.includes('view live')) handleAction('view-live');
+    });
+  });
+  document.querySelectorAll('.alert-banner .alert-btn-ghost').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const lbl = btn.textContent.trim().toLowerCase();
+      if(lbl.includes('mute')) handleAction('mute');
+      else if(lbl.includes('view')) handleAction('view-live');
+    });
+  });
+
+  // Briefing buttons
+  document.querySelectorAll('.briefing-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const lbl = btn.textContent.trim().toLowerCase();
+      if(lbl.includes('read')) handleAction('read-briefing');
+      else if(lbl.includes('art-e')) handleAction('ask-arte');
+      else if(lbl.includes('share')) toast('info','Briefing copied to clipboard');
+    });
+  });
+
+  // Reward card actions — match by label
+  document.querySelectorAll('.card-action').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const lbl = btn.textContent.trim().toLowerCase();
+      if(lbl.includes('repost')) handleAction('repost');
+      else if(lbl.includes('why')) handleAction('why-it-worked');
+      else if(lbl.includes('full analytics')) handleAction('full-analytics');
+      else if(lbl.includes('connect')) handleAction('connect');
+      else if(lbl.includes('view page')) handleAction('view-page');
+      else if(lbl.includes('not now')) handleAction('not-now');
+      else if(lbl.includes('draft')) handleAction('draft-post');
+      else if(lbl.includes('trend data')) handleAction('see-trend');
+      else if(lbl.includes('hide')) handleAction('hide');
+      else if(lbl.includes('post now')) handleAction('post-now');
+      else if(lbl.includes('schedule')) handleAction('schedule');
+      else handleAction('card-action', lbl);
+    });
+  });
+
+  // Bell tray notifications
+  document.querySelectorAll('.bell-item').forEach(item=>{
+    item.addEventListener('click', ()=>{
+      const txt = item.querySelector('.bell-text').textContent.trim().slice(0,40);
+      handleAction('bell-item', txt);
+    });
+  });
+
+  // Top performers
+  document.querySelectorAll('.top-row').forEach(row=>{
+    row.addEventListener('click', ()=>{
+      const name = row.querySelector('.top-name').textContent;
+      handleAction('page', name);
+    });
+  });
+
+  // Live counter cards
+  document.querySelectorAll('.live-stat').forEach(stat=>{
+    stat.addEventListener('click', ()=>{
+      const lbl = stat.querySelector('.live-stat-lbl').textContent;
+      handleAction('analytics-drill', lbl);
+    });
+  });
+  document.querySelectorAll('.right-card-link').forEach(l=>{
+    l.addEventListener('click', e=>{
+      e.preventDefault();
+      const lbl = l.textContent.trim();
+      if(lbl==='See all') toast('info','Opening full notification history');
+      else if(lbl==='All pages') toast('info','Opening all pages overview');
+      else if(lbl==='Today') toast('info','Showing today\'s data');
+    });
+  });
+
+  // Analytics sub-tabs
+  document.querySelectorAll('.subtab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      const sub = tab.dataset.sub;
+      document.querySelectorAll('.subtab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.subpanel').forEach(p=>p.classList.remove('active'));
+      document.getElementById('sub-'+sub).classList.add('active');
+      // Trigger init for that sub
+      if(window._analyticsLoaded) initSub(sub);
+    });
+  });
+
+  // Arte strip
+  document.querySelector('.arte-strip')?.addEventListener('click', ()=>{
+    openArteChat('Tell me more about today\'s best post window');
+  });
+});
+
+/* ─── ANALYTICS — CHART INIT ─────────────────── */
+const C = {
+  teal:'#00C4A0', tealDim:'rgba(0,196,160,0.15)',
+  arte:'#7C5CBF', arteDim:'rgba(124,92,191,0.15)',
+  warn:'#F59E0B', crisis:'#E53935', opp:'#22C55E',
+  blue:'#60A5FA', text:'#B0B3B8', grid:'rgba(255,255,255,0.05)',
+  font:{family:'Inter',size:11}
+};
+
+const baseOpts = {
+  responsive:true, maintainAspectRatio:false,
+  plugins:{
+    legend:{display:false},
+    tooltip:{
+      backgroundColor:'#1c2128',titleColor:'#E4E6EB',bodyColor:'#B0B3B8',
+      borderColor:'#3A3B3C',borderWidth:1,padding:10,
+      titleFont:{family:'Inter',size:12,weight:'700'},
+      bodyFont:{family:'Inter',size:12}
+    }
+  },
+  scales:{
+    x:{grid:{color:C.grid,drawBorder:false},ticks:{color:C.text,font:C.font}},
+    y:{grid:{color:C.grid,drawBorder:false},ticks:{color:C.text,font:C.font}}
+  }
+};
+
+function initAnalytics(){
+  initSub('kpis');
+}
+
+function initSub(sub){
+  if(window._initedSubs && window._initedSubs[sub]) return;
+  window._initedSubs = window._initedSubs || {};
+  window._initedSubs[sub] = true;
+
+  if(sub==='kpis'){
+    // sparklines
+    [['sp1',[3.2,3.4,3.5,3.8,4.0,4.2,4.5,4.2],C.teal],
+     ['sp2',[18,19,20,22,23,24,25,24.5],C.teal],
+     ['sp3',[0.78,0.80,0.81,0.83,0.82,0.81,0.84,0.82],C.opp],
+     ['sp4',[72,74,71,68,65,69,66,67],C.warn]
+    ].forEach(([id,data,color])=>{
+      const el = document.getElementById(id); if(!el) return;
+      new Chart(el,{type:'line',data:{labels:data.map((_,i)=>i),datasets:[{data,borderColor:color,backgroundColor:color+'30',fill:true,tension:0.4,pointRadius:0,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}}}});
+    });
+
+    // mainEng
+    const days = Array.from({length:30},(_,i)=>'D'+(i+1));
+    new Chart(document.getElementById('mainEng'),{type:'line',data:{labels:days,datasets:[
+      {label:'Engagement %',data:days.map((_,i)=>3+Math.sin(i/3)*0.8+i*0.04+Math.random()*0.5),borderColor:C.teal,backgroundColor:'rgba(0,196,160,0.10)',fill:true,tension:0.4,pointRadius:0,borderWidth:2,yAxisID:'y'},
+      {label:'Reach (K)',data:days.map((_,i)=>18+Math.cos(i/4)*2.5+i*0.2),borderColor:C.arte,backgroundColor:'rgba(124,92,191,0.08)',fill:true,tension:0.4,pointRadius:0,borderWidth:2,yAxisID:'y1'}]},
+      options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8,boxHeight:8}}},
+      scales:{x:baseOpts.scales.x,y:{...baseOpts.scales.y,position:'left'},y1:{...baseOpts.scales.y,position:'right',grid:{display:false}}}}});
+
+    // sentDonut
+    new Chart(document.getElementById('sentDonut'),{type:'doughnut',data:{labels:['Positive','Neutral','Mixed','Negative'],datasets:[{data:[60,18,11,11],backgroundColor:[C.opp,C.blue,C.warn,C.crisis],borderWidth:0}]},
+      options:{responsive:true,maintainAspectRatio:false,cutout:'70%',plugins:{legend:{display:false},tooltip:baseOpts.plugins.tooltip}}});
+
+    // fmtChart
+    new Chart(document.getElementById('fmtChart'),{type:'bar',data:{labels:['Photo','Video','Reel','Carousel','Text'],datasets:[{label:'Engagement %',data:[3.2,5.8,7.4,4.6,2.1],backgroundColor:[C.teal,C.teal,C.warn,C.teal,C.text],borderRadius:6,borderSkipped:false}]},options:baseOpts});
+
+    // weekComp
+    new Chart(document.getElementById('weekComp'),{type:'bar',data:{labels:['Reach','React','Comments','Shares','Score'],datasets:[
+      {label:'Last week',data:[100,100,100,100,100],backgroundColor:'rgba(176,179,184,0.4)',borderRadius:6},
+      {label:'This week',data:[112,118,108,105,103],backgroundColor:C.teal,borderRadius:6}]},
+      options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8,boxHeight:8}}}}});
+
+    // emotionRadar
+    new Chart(document.getElementById('emotionRadar'),{type:'radar',data:{labels:['Joy','Excitement','Surprise','Trust','Anticipation','Anger','Sadness','Fear'],datasets:[
+      {label:'Last',data:[58,62,40,55,48,15,18,12],borderColor:C.text,backgroundColor:'rgba(176,179,184,0.15)',pointRadius:0,borderWidth:1.5},
+      {label:'This',data:[70,68,52,68,55,12,14,8],borderColor:C.teal,backgroundColor:'rgba(0,196,160,0.18)',pointRadius:0,borderWidth:2}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}},tooltip:baseOpts.plugins.tooltip},
+      scales:{r:{angleLines:{color:C.grid},grid:{color:C.grid},pointLabels:{color:C.text,font:{...C.font,size:10}},ticks:{display:false},suggestedMin:0,suggestedMax:80}}}});
+
+    // heatmap
+    const heat = document.getElementById('heatmapEl');
+    if(heat){
+      const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+      const HOURS = ['12a','3a','6a','9a','12p','3p','6p','9p'];
+      let html = '<div class="heatmap-grid" style="grid-template-columns:auto repeat(8,1fr)"><div></div>';
+      HOURS.forEach(h=>html+=`<div class="lbl">${h}</div>`);
+      days.forEach((d,di)=>{
+        html += `<div class="lbl">${d}</div>`;
+        for(let h=0; h<8; h++){
+          let intensity;
+          if((di===1 && h===6) || (di===3 && h===6)) intensity = 5;
+          else if(di>=1 && di<=4 && (h===4 || h===5 || h===6)) intensity = 3+Math.floor(Math.random()*2);
+          else if(di===5 || di===6) intensity = 1+Math.floor(Math.random()*2);
+          else intensity = Math.floor(Math.random()*4);
+          html += `<div class="heat-cell h${intensity}" title="${d} ${HOURS[h]} · intensity ${intensity}"></div>`;
+        }
+      });
+      html += '</div>';
+      heat.innerHTML = html;
+      heat.querySelectorAll('.heat-cell').forEach(c=>c.addEventListener('click',()=>toast('info', c.title)));
+    }
+  }
+
+  if(sub==='trends'){
+    const days90 = Array.from({length:90},(_,i)=>'D'+(i+1));
+    new Chart(document.getElementById('trend90'),{type:'line',data:{labels:days90,datasets:[
+      {label:'Engagement %',data:days90.map((_,i)=>3.5+Math.sin(i/8)*1+i*0.005),borderColor:C.teal,backgroundColor:'rgba(0,196,160,0.10)',fill:true,tension:0.4,pointRadius:0,borderWidth:2,yAxisID:'y'},
+      {label:'Reach',data:days90.map((_,i)=>18+Math.cos(i/12)*4+i*0.05),borderColor:C.arte,fill:false,tension:0.4,pointRadius:0,borderWidth:2,yAxisID:'y1'},
+      {label:'Posts',data:days90.map((_,i)=>2+Math.floor(Math.random()*3)),borderColor:C.warn,fill:false,tension:0.2,pointRadius:0,borderWidth:1.5,yAxisID:'y2',hidden:false}]},
+      options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}}},scales:{x:baseOpts.scales.x,y:baseOpts.scales.y,y1:{...baseOpts.scales.y,position:'right',grid:{display:false}},y2:{display:false}}}});
+
+    new Chart(document.getElementById('dowChart'),{type:'bar',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{label:'Engagement %',data:[3.1,5.8,4.2,5.4,3.8,2.9,3.2],backgroundColor:['#3A3B3C',C.teal,'#3A3B3C',C.teal,'#3A3B3C','#3A3B3C','#3A3B3C'],borderRadius:6}]},options:baseOpts});
+
+    const points = Array.from({length:60},()=>({x:Math.random()*30+5,y:Math.random()*8+1}));
+    new Chart(document.getElementById('scatterChart'),{type:'scatter',data:{datasets:[{label:'Posts',data:points,backgroundColor:C.teal,pointRadius:4}]},options:{...baseOpts,scales:{x:{...baseOpts.scales.x,title:{display:true,text:'Reach (K)',color:C.text}},y:{...baseOpts.scales.y,title:{display:true,text:'Engagement %',color:C.text}}}}});
+
+    new Chart(document.getElementById('hourlyChart'),{type:'bar',data:{labels:Array.from({length:24},(_,i)=>i+'h'),datasets:[{label:'Eng',data:Array.from({length:24},(_,h)=>{if(h>=18&&h<=20)return 7+Math.random();if(h>=12&&h<=14)return 4+Math.random();if(h>=8&&h<=10)return 3+Math.random();return 1+Math.random()*2}),backgroundColor:C.teal,borderRadius:4}]},options:baseOpts});
+  }
+
+  if(sub==='virality'){
+    const hrs = Array.from({length:48},(_,i)=>i+'h');
+    new Chart(document.getElementById('velChart'),{type:'line',data:{labels:hrs,datasets:[
+      {label:'Shares/hr',data:hrs.map((_,i)=>{if(i>=18&&i<=24)return 80+Math.sin(i)*30+i*5;return 20+Math.random()*40}),borderColor:C.teal,backgroundColor:'rgba(0,196,160,0.15)',fill:true,tension:0.4,pointRadius:0,borderWidth:2},
+      {label:'Threshold',data:hrs.map(()=>200),borderColor:C.crisis,borderDash:[5,5],fill:false,pointRadius:0,borderWidth:1.5}]},
+      options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}}}}});
+
+    new Chart(document.getElementById('viralDist'),{type:'bar',data:{labels:['0-20','20-40','40-60','60-80','80-100'],datasets:[{label:'Posts',data:[12,28,42,38,18],backgroundColor:[C.text,C.text,C.warn,C.teal,C.opp],borderRadius:6}]},options:baseOpts});
+
+    new Chart(document.getElementById('triggerChart'),{type:'bar',data:{labels:['Question CTA','Humour','Visual hook','Emotional','Trend tie-in','Length<80c'],datasets:[{label:'Lift',data:[1.6,1.4,1.3,1.25,1.2,1.15],backgroundColor:C.arte,borderRadius:6}]},options:{...baseOpts,indexAxis:'y'}});
+
+    // viralHeat — generate heatmap-style chart with bubble
+    const probData = [];
+    const wkdays = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    const hrLabels = ['12a','6a','12p','6p','9p'];
+    wkdays.forEach((d,di)=>{
+      hrLabels.forEach((h,hi)=>{
+        let p; if((di===1&&hi===3)||(di===3&&hi===3))p=85;
+        else if((di>=1&&di<=4)&&(hi>=2&&hi<=3))p=55+Math.random()*15;
+        else p=10+Math.random()*30;
+        probData.push({x:hi,y:di,r:p/4});
+      });
+    });
+    new Chart(document.getElementById('viralHeat'),{type:'bubble',data:{datasets:[{label:'% chance',data:probData,backgroundColor:probData.map(p=>{const v=p.r*4;return v>70?'#22C55E':v>40?C.warn:C.text})}]},
+      options:{...baseOpts,scales:{x:{...baseOpts.scales.x,ticks:{color:C.text,callback:(v)=>hrLabels[v]||''},min:-0.5,max:hrLabels.length-0.5},y:{...baseOpts.scales.y,ticks:{color:C.text,callback:(v)=>wkdays[v]||''},min:-0.5,max:wkdays.length-0.5,reverse:true}}}});
+  }
+
+  if(sub==='sentiment'){
+    const sd = Array.from({length:30},(_,i)=>'D'+(i+1));
+    new Chart(document.getElementById('sentTime'),{type:'line',data:{labels:sd,datasets:[
+      {label:'Positive %',data:sd.map((_,i)=>60+Math.sin(i/3)*5),borderColor:C.opp,backgroundColor:'rgba(34,197,94,0.10)',fill:true,tension:0.4,pointRadius:0,borderWidth:2},
+      {label:'Negative %',data:sd.map((_,i)=>{if(i===17||i===18)return 22-i*0.1;return 8+Math.cos(i/4)*3}),borderColor:C.crisis,backgroundColor:'rgba(229,57,53,0.10)',fill:true,tension:0.4,pointRadius:0,borderWidth:2}]},
+      options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}}}}});
+
+    new Chart(document.getElementById('emotionBar'),{type:'bar',data:{labels:['Joy','Excite','Trust','Surprise','Sad','Anger','Fear'],datasets:[{label:'Comments %',data:[32,24,18,12,7,5,2],backgroundColor:[C.opp,C.opp,C.opp,C.warn,C.text,C.crisis,C.crisis],borderRadius:6}]},options:baseOpts});
+
+    new Chart(document.getElementById('sentByPage'),{type:'bar',data:{labels:['Drinking Memes','Kelpie','Fri Night','UK Jail','Prison B'],datasets:[
+      {label:'Score',data:[0.78,0.85,0.71,0.82,0.79],backgroundColor:C.teal,borderRadius:6},
+      {label:'Benchmark',data:[0.65,0.65,0.65,0.65,0.65],backgroundColor:'rgba(176,179,184,0.4)',borderRadius:6}]},
+      options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}}}}});
+
+    const sePoints = Array.from({length:60},()=>({x:Math.random()*0.5+0.4,y:Math.random()*8+1}));
+    new Chart(document.getElementById('sentEng'),{type:'scatter',data:{datasets:[{label:'Posts',data:sePoints,backgroundColor:C.arte,pointRadius:4}]},options:{...baseOpts,scales:{x:{...baseOpts.scales.x,title:{display:true,text:'Sentiment',color:C.text}},y:{...baseOpts.scales.y,title:{display:true,text:'Engagement %',color:C.text}}}}});
+  }
+
+  if(sub==='deepdive'){
+    new Chart(document.getElementById('captionLenChart'),{type:'bar',data:{labels:['<40','40-80','80-120','120-200','200+'],datasets:[{label:'Eng',data:[2.1,4.2,7.3,4.8,3.1],backgroundColor:[C.text,C.warn,C.teal,C.warn,C.text],borderRadius:6}]},options:baseOpts});
+    new Chart(document.getElementById('emojiChart'),{type:'bar',data:{labels:['0','1-2','3-4','5-7','8+'],datasets:[{label:'Reactions',data:[1.4,2.8,4.6,3.2,1.8],backgroundColor:C.arte,borderRadius:6}]},options:baseOpts});
+    new Chart(document.getElementById('volatilityChart'),{type:'bar',data:{labels:['Drinking M','Kelpie','Fri Night','UK Jail','Prison'],datasets:[{label:'σ',data:[2.4,1.8,3.2,2.1,1.5],backgroundColor:[C.crisis,C.warn,C.crisis,C.warn,C.opp],borderRadius:6}]},options:baseOpts});
+    new Chart(document.getElementById('shareMultChart'),{type:'line',data:{labels:Array.from({length:14},(_,i)=>'D'+(i+1)),datasets:[{label:'Reach',data:Array.from({length:14},(_,i)=>1*Math.pow(1.18,i)),borderColor:C.teal,backgroundColor:'rgba(0,196,160,0.15)',fill:true,tension:0.4,pointRadius:2,borderWidth:2}]},options:baseOpts});
+    new Chart(document.getElementById('freqEngChart'),{type:'line',data:{labels:['1','2','3','4','5','6','7','8','9'],datasets:[{label:'Eng',data:[3.1,4.6,5.8,6.2,5.9,5.4,4.8,4.1,3.4],borderColor:C.warn,backgroundColor:'rgba(245,158,11,0.15)',fill:true,tension:0.4,pointRadius:3,borderWidth:2}]},options:baseOpts});
+    new Chart(document.getElementById('funnelChart'),{type:'bar',data:{labels:['Reach','React','Comment','Share'],datasets:[{label:'Count',data:[24500,2400,184,312],backgroundColor:[C.teal,C.warn,C.arte,C.opp],borderRadius:6}]},options:{...baseOpts,indexAxis:'y'}});
+
+    // raw data table
+    const tbody = document.getElementById('rawDataBody');
+    if(tbody){
+      const rows = [
+        ['Drinking Memes','2h ago','24.5K','2,400','312','94'],
+        ['Kelpie Daily','4h ago','38.2K','3,800','489','92'],
+        ['UK Jail News','6h ago','19.8K','1,920','234','87'],
+        ['Fri Night Chaos','1d ago','12.4K','1,420','178','82'],
+        ['Drinking Memes','1d ago','21.6K','1,780','201','79'],
+        ['Prison Biscuit','2d ago','8.3K','620','89','71'],
+        ['Kelpie Daily','2d ago','28.4K','2,100','312','85'],
+        ['UK Jail News','3d ago','15.2K','1,340','167','78'],
+        ['Drinking Memes','3d ago','19.4K','1,920','198','83'],
+        ['Fri Night Chaos','4d ago','9.8K','840','98','68'],
+        ['Kelpie Daily','4d ago','22.1K','2,180','248','81'],
+        ['Prison Biscuit','5d ago','6.4K','480','62','64']
+      ];
+      tbody.innerHTML = rows.map(r=>`<tr style="cursor:pointer" onclick="toast('info','Opening ${r[0]} post')"><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td><strong style="color:var(--teal)">${r[5]}</strong></td></tr>`).join('');
+    }
+  }
+}
+</script>
+
+</body>
+</html>
