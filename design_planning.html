@@ -773,6 +773,7 @@ function switchTab(name) {
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelector(`[data-tab="${name}"]`).classList.add('active');
   document.getElementById('tab-'+name).classList.add('active');
+  if (name === 'wireframe') requestAnimationFrame(()=>renderAll3());
 }
 
 // ══════════════════════════════════════════
@@ -1435,7 +1436,7 @@ function wfShareLayout() {
 }
 
 // ── INIT ──
-if (document.getElementById('wfPalette')) renderAll3();
+// Wireframe renders on tab switch, not at boot (panel hidden causes layout collapse)
 
 // ══════════════════════════════════════════
 // INIT
