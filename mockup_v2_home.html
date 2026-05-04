@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtemisAI — Home</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Facebook uses SF Pro Display / Helvetica / system fonts. We use Inter (closest open-source equivalent) + Optimistic-style display. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Facebook-inspired neutral palette adapted to dark mode */
+  --bg:#0e1116;            /* Deep neutral, like FB dark */
+  --bg-elev:#16191f;       /* Card surface */
+  --bg-elev-2:#1c2128;     /* Hover card surface */
+  --bg-input:#222831;      /* Input fields */
+
+  /* Brand */
+  --teal:#00C4A0;
+  --teal-d:#00a085;
+  --teal-bg:rgba(0,196,160,0.10);
+
+  /* Art-E (always purple-teal gradient signature) */
+  --arte-1:#7C5CBF;
+  --arte-2:#00C4A0;
+  --arte-bg:rgba(124,92,191,0.08);
+
+  /* States */
+  --crisis:#E53935;        /* Bell red */
+  --crisis-bg:rgba(229,57,53,0.10);
+  --opp:#22C55E;           /* Bell green */
+  --opp-bg:rgba(34,197,94,0.10);
+  --warn:#F59E0B;          /* Bell amber */
+  --warn-bg:rgba(245,158,11,0.10);
+
+  /* Text */
+  --t1:#E4E6EB;            /* FB primary text */
+  --t2:#B0B3B8;            /* FB secondary */
+  --t3:#65676B;            /* FB tertiary / muted */
+
+  /* Borders */
+  --bdr:#3A3B3C;           /* FB divider */
+  --bdr-soft:#2D2E30;
+
+  /* Radii — FB uses 8px / 12px / round */
+  --r-sm:8px;
+  --r:12px;
+  --r-lg:16px;
+
+  /* Shadows */
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.3);
+  --shadow:0 4px 12px rgba(0,0,0,0.35);
+  --shadow-lg:0 12px 32px rgba(0,0,0,0.45);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+*::selection{background:var(--teal);color:#0a0e13}
+
+html,body{
+  height:100%;
+  background:var(--bg);
+  color:var(--t1);
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  /* Facebook system text: 15px body. We use 14px for compactness, scale via vars. */
+  font-size:14px;
+  line-height:1.34;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+body{
+  display:flex;
+  justify-content:center;
+  min-height:100vh;
+}
+
+/* ─── APP SHELL ──────────────────────────────────── */
+.app{
+  width:100%;
+  max-width:1640px;
+  display:grid;
+  grid-template-columns:300px 1fr 340px;
+  grid-template-rows:56px 1fr;
+  grid-template-areas:
+    "topnav topnav topnav"
+    "left   feed   right";
+  height:100vh;
+  overflow:hidden;
+}
+
+/* ─── TOP NAV (Facebook-style: logo left, search centre, actions right) ── */
+.topnav{
+  grid-area:topnav;
+  background:var(--bg-elev);
+  border-bottom:1px solid var(--bdr-soft);
+  display:flex;
+  align-items:center;
+  padding:0 16px;
+  gap:12px;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+.brand-block{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:268px;
+  padding-left:4px;
+}
+.brand-mark{
+  width:36px;height:36px;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--teal) 0%, #009E7E 100%);
+  display:grid;place-items:center;
+  position:relative;
+  box-shadow:0 0 0 1px rgba(0,196,160,0.3);
+}
+.brand-mark svg{width:18px;height:18px;fill:none;stroke:#0a1410;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.brand-name{
+  font-weight:800;
+  font-size:18px;
+  letter-spacing:-0.4px;
+  color:var(--t1);
+}
+.brand-name em{
+  color:var(--teal);
+  font-style:normal;
+}
+
+.search{
+  width:280px;
+  height:40px;
+  background:var(--bg-input);
+  border:none;
+  border-radius:9999px;
+  padding:0 16px 0 40px;
+  color:var(--t1);
+  font-family:inherit;
+  font-size:14px;
+  outline:none;
+  position:relative;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B0B3B8' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:14px center;
+  background-size:16px;
+}
+.search:focus{background-color:var(--bg-elev-2);box-shadow:0 0 0 1px var(--teal)}
+.search::placeholder{color:var(--t3);font-weight:400}
+
+.topnav-spacer{flex:1}
+
+.icon-btn{
+  width:40px;height:40px;
+  border-radius:50%;
+  border:none;
+  background:var(--bg-input);
+  color:var(--t1);
+  display:grid;place-items:center;
+  cursor:pointer;
+  position:relative;
+  transition:background .15s;
+}
+.icon-btn:hover{background:var(--bg-elev-2)}
+.icon-btn svg{width:20px;height:20px;fill:currentColor}
+.icon-btn .badge{
+  position:absolute;
+  top:-2px;right:-2px;
+  background:var(--crisis);
+  color:white;
+  font-size:11px;
+  font-weight:700;
+  min-width:18px;height:18px;
+  border-radius:9999px;
+  padding:0 5px;
+  display:grid;place-items:center;
+  border:2px solid var(--bg-elev);
+}
+.user-avatar{
+  width:40px;height:40px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#FFA500,#FF6B00);
+  display:grid;place-items:center;
+  font-weight:700;
+  font-size:14px;
+  color:white;
+  cursor:pointer;
+  margin-left:4px;
+}
+
+/* ─── LEFT SIDEBAR — Pages + Quick Nav ──────────── */
+.left-sidebar{
+  grid-area:left;
+  background:var(--bg);
+  overflow-y:auto;
+  padding:16px 8px;
+  border-right:1px solid var(--bdr-soft);
+}
+.left-sidebar::-webkit-scrollbar{width:8px}
+.left-sidebar::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:4px}
+
+.sidebar-section{margin-bottom:8px}
+.sidebar-title{
+  font-size:11px;
+  font-weight:700;
+  color:var(--t3);
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  padding:10px 12px 6px;
+}
+
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:8px 12px;
+  border-radius:var(--r-sm);
+  color:var(--t1);
+  text-decoration:none;
+  font-weight:500;
+  font-size:15px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.nav-item:hover{background:var(--bg-elev)}
+.nav-item.active{background:var(--bg-elev);color:var(--teal)}
+.nav-item-icon{
+  width:36px;height:36px;
+  border-radius:50%;
+  background:var(--bg-elev-2);
+  display:grid;place-items:center;
+  flex-shrink:0;
+}
+.nav-item-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav-item.active .nav-item-icon{background:var(--teal-bg);color:var(--teal)}
+.nav-item-icon.arte{
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  color:white;
+  position:relative;
+}
+.nav-item-icon.arte::after{
+  content:'';position:absolute;inset:-3px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  filter:blur(6px);
+  opacity:.45;
+  z-index:-1;
+}
+
+.page-card{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:8px 12px;
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  transition:background .15s;
+}
+.page-card:hover{background:var(--bg-elev)}
+.page-avatar{
+  width:36px;height:36px;
+  border-radius:8px;
+  background:linear-gradient(135deg,#1a2a3e,#0c1729);
+  display:grid;place-items:center;
+  font-weight:700;
+  font-size:14px;
+  color:var(--teal);
+  flex-shrink:0;
+}
+.page-meta{flex:1;min-width:0}
+.page-name{
+  font-weight:600;
+  font-size:14px;
+  color:var(--t1);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.page-stat{
+  font-size:12px;
+  color:var(--t2);
+  margin-top:2px;
+  display:flex;align-items:center;gap:4px;
+}
+.page-stat .dot{width:6px;height:6px;border-radius:50%;background:var(--opp)}
+.page-stat .dot.warn{background:var(--warn)}
+.page-stat .dot.crisis{background:var(--crisis)}
+
+.divider{
+  height:1px;
+  background:var(--bdr-soft);
+  margin:8px 12px;
+}
+
+/* ─── MAIN FEED ───────────────────────────────── */
+.feed-col{
+  grid-area:feed;
+  overflow-y:auto;
+  padding:16px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.feed-col::-webkit-scrollbar{width:8px}
+.feed-col::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:4px}
+
+.feed-inner{
+  width:100%;
+  max-width:680px;
+  padding:0 16px;
+}
+
+/* Activity tab strip — subtle, FB-like */
+.feed-tabs{
+  display:flex;
+  gap:4px;
+  margin-bottom:16px;
+  background:var(--bg-elev);
+  padding:4px;
+  border-radius:var(--r);
+}
+.feed-tab{
+  flex:1;
+  padding:8px 16px;
+  background:transparent;
+  border:none;
+  color:var(--t2);
+  font-family:inherit;
+  font-size:14px;
+  font-weight:600;
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:all .15s;
+}
+.feed-tab:hover{color:var(--t1)}
+.feed-tab.active{
+  background:var(--bg-elev-2);
+  color:var(--teal);
+}
+.feed-tab svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+.feed-tab .badge-mini{
+  background:var(--crisis);
+  color:white;
+  font-size:11px;
+  font-weight:700;
+  padding:1px 6px;
+  border-radius:9999px;
+  margin-left:2px;
+}
+
+/* ART-E INSIGHT STRIP — top of every screen */
+.arte-strip{
+  background:linear-gradient(135deg,
+    rgba(124,92,191,0.18) 0%,
+    rgba(0,196,160,0.10) 100%);
+  border:1px solid rgba(124,92,191,0.25);
+  border-radius:var(--r);
+  padding:12px 16px;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  transition:transform .15s, border-color .15s;
+}
+.arte-strip:hover{transform:translateY(-1px);border-color:rgba(124,92,191,0.45)}
+.arte-orb{
+  width:36px;height:36px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  display:grid;place-items:center;
+  flex-shrink:0;
+  position:relative;
+  box-shadow:0 0 16px rgba(124,92,191,0.4);
+  animation:orbPulse 2.4s ease-in-out infinite;
+}
+.arte-orb svg{width:16px;height:16px;fill:white}
+@keyframes orbPulse{
+  0%,100%{box-shadow:0 0 16px rgba(124,92,191,0.4)}
+  50%{box-shadow:0 0 22px rgba(0,196,160,0.55)}
+}
+.arte-text{flex:1;min-width:0}
+.arte-label{
+  font-size:11px;
+  font-weight:700;
+  color:var(--arte-1);
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  margin-bottom:1px;
+}
+.arte-message{
+  font-size:14px;
+  color:var(--t1);
+  font-weight:500;
+  line-height:1.35;
+}
+.arte-message strong{color:var(--teal);font-weight:700}
+.arte-arrow{
+  color:var(--arte-1);
+  flex-shrink:0;
+}
+.arte-arrow svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.5}
+
+/* MORNING BRIEFING — looks like a FB post */
+.briefing-card{
+  background:var(--bg-elev);
+  border-radius:var(--r);
+  padding:16px;
+  margin-bottom:12px;
+  border:1px solid transparent;
+}
+.briefing-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+.briefing-avatar{
+  width:40px;height:40px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  display:grid;place-items:center;
+  flex-shrink:0;
+  box-shadow:0 0 12px rgba(124,92,191,0.35);
+}
+.briefing-avatar svg{width:18px;height:18px;fill:white}
+.briefing-meta{flex:1}
+.briefing-author{
+  font-weight:700;
+  font-size:15px;
+  color:var(--t1);
+  display:flex;align-items:center;gap:6px;
+}
+.briefing-author .verified{
+  width:14px;height:14px;
+  background:var(--arte-1);
+  border-radius:50%;
+  display:grid;place-items:center;
+}
+.briefing-author .verified svg{width:9px;height:9px;fill:white}
+.briefing-time{
+  font-size:12px;
+  color:var(--t2);
+  margin-top:1px;
+}
+.briefing-body{
+  font-size:15px;
+  line-height:1.45;
+  color:var(--t1);
+  margin-bottom:12px;
+}
+.briefing-body strong{color:var(--teal)}
+.briefing-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:12px;
+}
+.briefing-stat{
+  background:var(--bg);
+  border-radius:var(--r-sm);
+  padding:10px 12px;
+  text-align:center;
+}
+.briefing-stat-val{
+  font-size:18px;
+  font-weight:800;
+  color:var(--teal);
+  font-variant-numeric:tabular-nums;
+}
+.briefing-stat-val.up{color:var(--opp)}
+.briefing-stat-val.purp{color:var(--arte-1)}
+.briefing-stat-lbl{
+  font-size:11px;
+  color:var(--t2);
+  margin-top:2px;
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  font-weight:600;
+}
+.briefing-actions{
+  display:flex;
+  gap:6px;
+  border-top:1px solid var(--bdr-soft);
+  padding-top:8px;
+}
+.briefing-btn{
+  flex:1;
+  background:transparent;
+  border:none;
+  color:var(--t2);
+  font-family:inherit;
+  font-size:14px;
+  font-weight:600;
+  padding:8px;
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:background .15s;
+}
+.briefing-btn:hover{background:var(--bg-elev-2);color:var(--t1)}
+.briefing-btn.primary{color:var(--teal)}
+.briefing-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* ─── REWARD CARDS — alternating types ──────────── */
+.card{
+  background:var(--bg-elev);
+  border-radius:var(--r);
+  margin-bottom:12px;
+  overflow:hidden;
+  border:1px solid transparent;
+  transition:border-color .15s;
+}
+.card:hover{border-color:var(--bdr-soft)}
+
+.card-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 16px 10px;
+}
+.card-icon{
+  width:40px;height:40px;
+  border-radius:8px;
+  display:grid;place-items:center;
+  flex-shrink:0;
+  font-size:20px;
+}
+.card-icon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2}
+.card-icon.tribe{background:var(--teal-bg);color:var(--teal)}
+.card-icon.hunt{background:var(--arte-bg);color:var(--arte-1)}
+.card-icon.self{background:var(--warn-bg);color:var(--warn)}
+.card-icon.crisis-i{background:var(--crisis-bg);color:var(--crisis)}
+.card-icon.opp-i{background:var(--opp-bg);color:var(--opp)}
+
+.card-meta{flex:1;min-width:0}
+.card-title{
+  font-size:15px;
+  font-weight:700;
+  color:var(--t1);
+  display:flex;align-items:center;gap:8px;
+  flex-wrap:wrap;
+}
+.card-title-page{color:var(--teal)}
+.card-sub{
+  font-size:12px;
+  color:var(--t2);
+  margin-top:2px;
+}
+.card-sub .dot{display:inline-block;width:3px;height:3px;border-radius:50%;background:var(--t3);margin:0 6px;vertical-align:middle}
+
+.reward-chip{
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0.04em;
+  padding:3px 8px;
+  border-radius:9999px;
+  text-transform:uppercase;
+}
+.reward-chip.tribe{background:var(--teal-bg);color:var(--teal)}
+.reward-chip.hunt{background:var(--arte-bg);color:var(--arte-1)}
+.reward-chip.self{background:var(--warn-bg);color:var(--warn)}
+
+.score-circle{
+  width:46px;height:46px;
+  position:relative;
+  flex-shrink:0;
+}
+.score-circle svg{width:100%;height:100%;transform:rotate(-90deg)}
+.score-circle .track{stroke:var(--bdr);stroke-width:4;fill:none}
+.score-circle .fill{stroke:var(--teal);stroke-width:4;fill:none;stroke-linecap:round;transition:stroke-dashoffset 1s}
+.score-text{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font-size:13px;
+  font-weight:800;
+  color:var(--teal);
+  font-variant-numeric:tabular-nums;
+}
+
+.card-body{padding:0 16px 12px;font-size:14px;color:var(--t1);line-height:1.45}
+.card-image{
+  height:280px;
+  background:linear-gradient(135deg,#1a2a3e 0%,#0c1729 50%,#0a1410 100%);
+  position:relative;
+  overflow:hidden;
+}
+.card-image::after{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 40%,rgba(0,196,160,0.08),transparent 60%);
+}
+.card-image-text{
+  position:absolute;
+  inset:0;
+  display:grid;place-items:center;
+  font-size:13px;
+  color:var(--t3);
+  font-weight:500;
+}
+
+.card-stats{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:10px 16px 8px;
+  font-size:13px;
+  color:var(--t2);
+  border-top:1px solid var(--bdr-soft);
+}
+.card-stats span{display:inline-flex;align-items:center;gap:5px}
+.card-stats .stat-num{color:var(--t1);font-weight:600;font-variant-numeric:tabular-nums}
+
+.card-actions{
+  display:flex;
+  border-top:1px solid var(--bdr-soft);
+  padding:4px 8px;
+}
+.card-action{
+  flex:1;
+  background:transparent;
+  border:none;
+  color:var(--t2);
+  font-family:inherit;
+  font-size:14px;
+  font-weight:600;
+  padding:10px;
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:background .15s;
+}
+.card-action:hover{background:var(--bg-elev-2);color:var(--t1)}
+.card-action.primary{color:var(--teal)}
+.card-action.arte{color:var(--arte-1)}
+.card-action.crisis{color:var(--crisis)}
+.card-action svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* Tribe card body — match strength bar */
+.match-bars{padding:0 16px 12px;display:flex;flex-direction:column;gap:8px}
+.match-row{display:flex;align-items:center;gap:10px;font-size:13px}
+.match-label{flex:1;color:var(--t2)}
+.match-pct{font-weight:700;color:var(--t1);font-variant-numeric:tabular-nums}
+.match-bar-track{
+  height:6px;
+  background:var(--bg);
+  border-radius:9999px;
+  overflow:hidden;
+  flex-basis:60%;
+}
+.match-bar-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--teal),#00e8c0);
+  border-radius:9999px;
+}
+
+/* Self card body — streak / progression */
+.streak-row{
+  display:flex;
+  gap:6px;
+  padding:0 16px 12px;
+}
+.streak-day{
+  flex:1;
+  aspect-ratio:1;
+  border-radius:8px;
+  background:var(--bg);
+  display:grid;place-items:center;
+  font-size:11px;
+  font-weight:700;
+  color:var(--t3);
+  position:relative;
+}
+.streak-day.done{
+  background:linear-gradient(135deg,var(--warn) 0%, #FF9900 100%);
+  color:white;
+}
+.streak-day.today{
+  background:transparent;
+  border:2px dashed var(--warn);
+  color:var(--warn);
+}
+
+/* Crisis alert card — red accent */
+.alert-banner{
+  background:linear-gradient(135deg,rgba(229,57,53,0.15) 0%, rgba(229,57,53,0.05) 100%);
+  border:1px solid rgba(229,57,53,0.3);
+  border-radius:var(--r);
+  padding:14px 16px;
+  margin-bottom:12px;
+  display:flex;align-items:flex-start;gap:12px;
+}
+.alert-banner.opp{
+  background:linear-gradient(135deg,rgba(34,197,94,0.15) 0%, rgba(34,197,94,0.05) 100%);
+  border-color:rgba(34,197,94,0.3);
+}
+.alert-icon{
+  width:40px;height:40px;
+  border-radius:50%;
+  background:var(--crisis-bg);
+  color:var(--crisis);
+  display:grid;place-items:center;
+  flex-shrink:0;
+}
+.alert-banner.opp .alert-icon{background:var(--opp-bg);color:var(--opp)}
+.alert-icon svg{width:20px;height:20px;fill:currentColor}
+.alert-content{flex:1}
+.alert-title{font-weight:700;font-size:15px;color:var(--t1);margin-bottom:2px;display:flex;align-items:center;gap:8px}
+.alert-cat{
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0.04em;
+  padding:2px 7px;
+  border-radius:9999px;
+  text-transform:uppercase;
+  background:var(--crisis-bg);
+  color:var(--crisis);
+}
+.alert-banner.opp .alert-cat{background:var(--opp-bg);color:var(--opp)}
+.alert-msg{font-size:13px;color:var(--t2);line-height:1.45}
+.alert-actions{display:flex;gap:6px;margin-top:10px}
+.alert-btn{
+  background:var(--crisis);
+  color:white;
+  border:none;
+  padding:6px 14px;
+  border-radius:var(--r-sm);
+  font-family:inherit;
+  font-weight:600;
+  font-size:13px;
+  cursor:pointer;
+}
+.alert-banner.opp .alert-btn{background:var(--opp)}
+.alert-btn-ghost{
+  background:transparent;
+  color:var(--t2);
+  padding:6px 12px;
+  border:none;
+  font-family:inherit;
+  font-weight:600;
+  font-size:13px;
+  cursor:pointer;
+  border-radius:var(--r-sm);
+}
+.alert-btn-ghost:hover{background:var(--bg-elev-2);color:var(--t1)}
+
+/* ─── RIGHT SIDEBAR — Bell tray + Live ──────────── */
+.right-sidebar{
+  grid-area:right;
+  background:var(--bg);
+  overflow-y:auto;
+  padding:16px;
+  border-left:1px solid var(--bdr-soft);
+}
+.right-sidebar::-webkit-scrollbar{width:8px}
+.right-sidebar::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:4px}
+
+.right-card{
+  background:var(--bg-elev);
+  border-radius:var(--r);
+  padding:14px;
+  margin-bottom:12px;
+}
+.right-card-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+.right-card-title{
+  font-size:14px;
+  font-weight:700;
+  color:var(--t1);
+  display:flex;align-items:center;gap:8px;
+}
+.right-card-title .live-dot{
+  width:8px;height:8px;
+  background:var(--opp);
+  border-radius:50%;
+  animation:pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.3);opacity:0.6}
+}
+.right-card-link{
+  font-size:12px;
+  color:var(--teal);
+  font-weight:600;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+/* Live counters mini-stats */
+.live-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.live-stat{
+  background:var(--bg);
+  border-radius:var(--r-sm);
+  padding:10px;
+}
+.live-stat-val{
+  font-size:18px;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+  color:var(--t1);
+}
+.live-stat-val.up{color:var(--opp)}
+.live-stat-val .delta{font-size:11px;color:var(--opp);margin-left:4px;font-weight:600}
+.live-stat-lbl{
+  font-size:11px;
+  color:var(--t2);
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  font-weight:600;
+  margin-top:1px;
+}
+
+/* Bell tray notifications */
+.bell-item{
+  display:flex;
+  gap:10px;
+  padding:10px;
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  margin-bottom:4px;
+  position:relative;
+  transition:background .15s;
+}
+.bell-item:hover{background:var(--bg-elev-2)}
+.bell-item.unread::before{
+  content:'';position:absolute;left:2px;top:50%;
+  transform:translateY(-50%);
+  width:6px;height:6px;border-radius:50%;
+  background:var(--teal);
+}
+.bell-icon{
+  width:32px;height:32px;
+  border-radius:50%;
+  display:grid;place-items:center;
+  flex-shrink:0;
+}
+.bell-icon.crisis{background:var(--crisis-bg);color:var(--crisis)}
+.bell-icon.opp{background:var(--opp-bg);color:var(--opp)}
+.bell-icon.warn{background:var(--warn-bg);color:var(--warn)}
+.bell-icon svg{width:16px;height:16px;fill:currentColor}
+.bell-body{flex:1;min-width:0}
+.bell-text{font-size:13px;color:var(--t1);line-height:1.4}
+.bell-text strong{font-weight:600;color:var(--t1)}
+.bell-text .accent{color:var(--teal)}
+.bell-time{font-size:11px;color:var(--t2);margin-top:2px}
+
+/* Top performer mini card */
+.top-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 0;
+}
+.top-row + .top-row{border-top:1px solid var(--bdr-soft)}
+.top-rank{
+  font-size:18px;
+  font-weight:800;
+  color:var(--t3);
+  width:20px;
+  text-align:center;
+  font-variant-numeric:tabular-nums;
+}
+.top-rank.gold{color:var(--warn)}
+.top-page{
+  width:32px;height:32px;
+  border-radius:8px;
+  background:var(--bg-input);
+  display:grid;place-items:center;
+  font-weight:700;
+  font-size:12px;
+  color:var(--teal);
+  flex-shrink:0;
+}
+.top-meta{flex:1;min-width:0}
+.top-name{font-size:13px;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-score{font-size:11px;color:var(--t2);margin-top:2px}
+
+/* Footer info */
+.right-footer{
+  font-size:11px;
+  color:var(--t3);
+  padding:12px 4px;
+  line-height:1.5;
+}
+.right-footer a{color:var(--t2);text-decoration:none;margin-right:8px}
+.right-footer a:hover{color:var(--teal)}
+
+/* Composer at top of feed (FB-style "What's on your mind") */
+.composer{
+  background:var(--bg-elev);
+  border-radius:var(--r);
+  padding:12px 16px;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.composer-avatar{
+  width:40px;height:40px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#FFA500,#FF6B00);
+  display:grid;place-items:center;
+  font-weight:700;
+  color:white;
+  flex-shrink:0;
+}
+.composer-input{
+  flex:1;
+  background:var(--bg-input);
+  border:none;
+  border-radius:9999px;
+  padding:10px 16px;
+  color:var(--t2);
+  font-family:inherit;
+  font-size:15px;
+  cursor:pointer;
+  text-align:left;
+}
+.composer-input:hover{background:var(--bg-elev-2)}
+
+.composer-actions{
+  display:flex;
+  border-top:1px solid var(--bdr-soft);
+  margin:10px -16px -12px;
+  padding:6px 8px;
+  gap:2px;
+}
+.composer-btn{
+  flex:1;
+  background:transparent;
+  border:none;
+  color:var(--t2);
+  font-family:inherit;
+  font-size:14px;
+  font-weight:600;
+  padding:8px;
+  border-radius:var(--r-sm);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.composer-btn:hover{background:var(--bg-elev-2);color:var(--t1)}
+.composer-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+.composer-btn.predict svg{color:var(--teal)}
+.composer-btn.arte svg{color:var(--arte-1)}
+
+/* FAB for Art-E (always present, mobile + desktop) */
+.fab-arte{
+  position:fixed;
+  bottom:20px;right:20px;
+  width:60px;height:60px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  border:none;
+  cursor:pointer;
+  display:grid;place-items:center;
+  box-shadow:0 8px 24px rgba(124,92,191,0.45);
+  z-index:100;
+  transition:transform .2s;
+}
+.fab-arte:hover{transform:scale(1.08)}
+.fab-arte svg{width:26px;height:26px;fill:white}
+.fab-arte::after{
+  content:'';
+  position:absolute;inset:-4px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  filter:blur(12px);
+  opacity:.4;
+  z-index:-1;
+}
+
+/* Mobile responsive */
+@media(max-width:1280px){
+  .app{grid-template-columns:80px 1fr 320px}
+  .brand-name,.sidebar-title,.nav-item span,.page-meta,.search{display:none}
+  .left-sidebar{padding:16px 8px}
+  .nav-item{justify-content:center;padding:8px}
+}
+@media(max-width:980px){
+  .app{grid-template-columns:80px 1fr;grid-template-areas:"topnav topnav" "left feed"}
+  .right-sidebar{display:none}
+}
+@media(max-width:640px){
+  .app{grid-template-columns:1fr;grid-template-areas:"topnav" "feed"}
+  .left-sidebar{display:none}
+  .feed-inner{padding:0 12px}
+  .topnav{padding:0 12px}
+  .brand-block{min-width:auto}
+}
+
+/* ─── PAGE-LEVEL ENTRANCE ANIMATION ──────────── */
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.feed-inner > *{
+  animation:slideUp .4s ease-out both;
+}
+.feed-inner > *:nth-child(1){animation-delay:0s}
+.feed-inner > *:nth-child(2){animation-delay:0.05s}
+.feed-inner > *:nth-child(3){animation-delay:0.1s}
+.feed-inner > *:nth-child(4){animation-delay:0.15s}
+.feed-inner > *:nth-child(5){animation-delay:0.2s}
+.feed-inner > *:nth-child(6){animation-delay:0.25s}
+.feed-inner > *:nth-child(7){animation-delay:0.3s}
+.feed-inner > *:nth-child(8){animation-delay:0.35s}
+.feed-inner > *:nth-child(9){animation-delay:0.4s}
+
+/* Counter animation hooks */
+.count-up{display:inline-block}
+
+/* Spec watermark */
+.spec-watermark{
+  position:fixed;
+  bottom:14px;left:14px;
+  font-size:10px;
+  color:var(--t3);
+  font-weight:600;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  z-index:200;
+  background:var(--bg-elev);
+  border:1px solid var(--bdr-soft);
+  padding:5px 10px;
+  border-radius:9999px;
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ─── TOP NAV ─────────────────────────── -->
+  <header class="topnav">
+    <div class="brand-block">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 4l8 18H4z"/><circle cx="12" cy="16" r="2.5" fill="#0a1410" stroke="none"/></svg>
+      </div>
+      <div class="brand-name">Artemis<em>AI</em></div>
+    </div>
+    <input type="text" class="search" placeholder="Search posts, pages, people, topics">
+    <div class="topnav-spacer"></div>
+
+    <button class="icon-btn" title="Discovery">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="icon-btn" title="Group chats">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM7 9h10v2H7zm6 5H7v-2h6zm4-6H7V6h10z"/></svg>
+    </button>
+    <button class="icon-btn" title="Notifications">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22a2.5 2.5 0 002.5-2.5h-5A2.5 2.5 0 0012 22zm6.5-7v-4.5a6.5 6.5 0 10-13 0V15L4 17v1h16v-1z"/></svg>
+      <span class="badge">3</span>
+    </button>
+    <div class="user-avatar" title="Asad Ikram">A</div>
+  </header>
+
+  <!-- ─── LEFT SIDEBAR ─────────────────────── -->
+  <aside class="left-sidebar">
+
+    <div class="sidebar-section">
+      <a class="nav-item active">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>
+        <span>Home</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg></span>
+        <span>Analytics</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-item-icon arte"><svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></span>
+        <span>Art-E</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M9 12v3a2 2 0 002 2h3"/></svg></span>
+        <span>Discovery</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
+        <span>Profile</span>
+      </a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Your Pages</div>
+
+      <div class="page-card">
+        <div class="page-avatar">DM</div>
+        <div class="page-meta">
+          <div class="page-name">Drinking Memes</div>
+          <div class="page-stat"><span class="dot crisis"></span> Brand risk active</div>
+        </div>
+      </div>
+
+      <div class="page-card">
+        <div class="page-avatar">KD</div>
+        <div class="page-meta">
+          <div class="page-name">Kelpie Daily</div>
+          <div class="page-stat"><span class="dot"></span> Going viral · +3.2× reach</div>
+        </div>
+      </div>
+
+      <div class="page-card">
+        <div class="page-avatar">FN</div>
+        <div class="page-meta">
+          <div class="page-name">Fri Night Chaos</div>
+          <div class="page-stat"><span class="dot warn"></span> Score down 8%</div>
+        </div>
+      </div>
+
+      <div class="page-card">
+        <div class="page-avatar">UK</div>
+        <div class="page-meta">
+          <div class="page-name">UK Jail News</div>
+          <div class="page-stat"><span class="dot"></span> Steady · 4.8% engagement</div>
+        </div>
+      </div>
+
+      <div class="page-card">
+        <div class="page-avatar">PB</div>
+        <div class="page-meta">
+          <div class="page-name">Prison Biscuit</div>
+          <div class="page-stat"><span class="dot"></span> 12 new followers</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Shortcuts</div>
+      <a class="nav-item">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+        <span>Live now</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+        <span>Group chats</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+        <span>Schedule</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ─── CENTRE FEED ─────────────────────── -->
+  <main class="feed-col">
+    <div class="feed-inner">
+
+      <!-- TAB STRIP — 3 only, FB Marketplace style -->
+      <div class="feed-tabs">
+        <button class="feed-tab active">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          For you
+        </button>
+        <button class="feed-tab">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Live
+        </button>
+        <button class="feed-tab">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92V21a1 1 0 01-1.11 1A19.79 19.79 0 012 4.18 1 1 0 013 3h4.09a1 1 0 011 .75l1 4a1 1 0 01-.27 1L7.21 10.79a16 16 0 006 6l2-1.6a1 1 0 011-.27l4 1a1 1 0 01.79 1z"/></svg>
+          Action items
+          <span class="badge-mini">3</span>
+        </button>
+      </div>
+
+      <!-- ART-E INSIGHT STRIP — TOP, INTERNAL TRIGGER ANSWER -->
+      <div class="arte-strip">
+        <div class="arte-orb">
+          <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+        </div>
+        <div class="arte-text">
+          <div class="arte-label">Art-E · Your morning answer</div>
+          <div class="arte-message">Best post window today: <strong>Tuesday 6PM</strong> — your audience is +34% more active than average. Three pages are ready to post.</div>
+        </div>
+        <div class="arte-arrow">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </div>
+
+      <!-- COMPOSER (write a new post) -->
+      <div class="composer-wrap card" style="padding:0">
+        <div style="display:flex;align-items:center;gap:10px;padding:12px 16px">
+          <div class="composer-avatar">A</div>
+          <button class="composer-input">What are you posting today, Asad?</button>
+        </div>
+        <div class="composer-actions">
+          <button class="composer-btn predict">
+            <svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            Predict score
+          </button>
+          <button class="composer-btn arte">
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+            Ask Art-E
+          </button>
+          <button class="composer-btn">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Schedule
+          </button>
+        </div>
+      </div>
+
+      <!-- CRISIS BANNER — only when active -->
+      <div class="alert-banner">
+        <div class="alert-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 6v6m0 4h.01"/></svg>
+        </div>
+        <div class="alert-content">
+          <div class="alert-title">Brand risk on Drinking Memes <span class="alert-cat">Crisis</span></div>
+          <div class="alert-msg">23 negative comments in 4 minutes on your 6PM post. Sentiment dropping fast — Art-E recommends a response within the hour.</div>
+          <div class="alert-actions">
+            <button class="alert-btn">Respond now</button>
+            <button class="alert-btn-ghost">Mute 24h</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1️⃣  MORNING BRIEFING — Looks like an FB post from Art-E -->
+      <div class="briefing-card">
+        <div class="briefing-head">
+          <div class="briefing-avatar">
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg>
+          </div>
+          <div class="briefing-meta">
+            <div class="briefing-author">
+              Art-E
+              <span class="verified"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+            <div class="briefing-time">Morning briefing · 7:02 AM · For your 5 pages</div>
+          </div>
+        </div>
+        <div class="briefing-body">
+          Good morning. Your network had a strong night — total reach is up <strong>+18% vs last Tuesday</strong>, with Kelpie Daily leading after a meme post crossed 12K shares before midnight. Two opportunities to act on today: the 6PM window for Drinking Memes, and a fresh collab match worth a look.
+        </div>
+        <div class="briefing-stats">
+          <div class="briefing-stat">
+            <div class="briefing-stat-val up">+18%</div>
+            <div class="briefing-stat-lbl">Network reach</div>
+          </div>
+          <div class="briefing-stat">
+            <div class="briefing-stat-val">12.4K</div>
+            <div class="briefing-stat-lbl">Shares overnight</div>
+          </div>
+          <div class="briefing-stat">
+            <div class="briefing-stat-val purp">91</div>
+            <div class="briefing-stat-lbl">Avg AI score</div>
+          </div>
+        </div>
+        <div class="briefing-actions">
+          <button class="briefing-btn primary">
+            <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            Read full briefing
+          </button>
+          <button class="briefing-btn">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            Ask Art-E
+          </button>
+          <button class="briefing-btn">
+            <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51L8.59 10.49"/></svg>
+            Share
+          </button>
+        </div>
+      </div>
+
+      <!-- 2️⃣  HUNT REWARD — Post Performance Card -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon hunt">
+            <svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg>
+          </div>
+          <div class="card-meta">
+            <div class="card-title">
+              <span class="card-title-page">Drinking Memes</span> · 6PM post
+              <span class="reward-chip hunt">Hunt</span>
+            </div>
+            <div class="card-sub">Outperformed average by 3.2× <span class="dot"></span> 2 hours ago</div>
+          </div>
+          <div class="score-circle" title="AI Score: 91">
+            <svg viewBox="0 0 50 50">
+              <circle class="track" cx="25" cy="25" r="22"/>
+              <circle class="fill" cx="25" cy="25" r="22" stroke-dasharray="138" stroke-dashoffset="12"/>
+            </svg>
+            <div class="score-text">91</div>
+          </div>
+        </div>
+        <div class="card-image">
+          <div class="card-image-text">[Post preview · meme image]</div>
+        </div>
+        <div class="card-stats">
+          <span><span class="stat-num">2.4K</span> reactions</span>
+          <span><span class="stat-num">184</span> comments</span>
+          <span><span class="stat-num">312</span> shares</span>
+        </div>
+        <div class="card-actions">
+          <button class="card-action primary">
+            <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>
+            Repost
+          </button>
+          <button class="card-action arte">
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+            Why it worked
+          </button>
+          <button class="card-action">
+            <svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg>
+            Full analytics
+          </button>
+        </div>
+      </div>
+
+      <!-- 3️⃣  TRIBE REWARD — Collab Match -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon tribe">
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M11.65 11.65l3.7 3.7"/></svg>
+          </div>
+          <div class="card-meta">
+            <div class="card-title">
+              New collab match
+              <span class="reward-chip tribe">Tribe</span>
+            </div>
+            <div class="card-sub"><span class="card-title-page">Fri Night Chaos</span> · 89K followers <span class="dot"></span> Found just now</div>
+          </div>
+        </div>
+        <div class="card-body">Their audience overlaps yours by 34% with strong shared interest in pub-culture humour. 7 topics in common with your top performers.</div>
+        <div class="match-bars">
+          <div class="match-row">
+            <div class="match-label">Audience overlap</div>
+            <div class="match-bar-track"><div class="match-bar-fill" style="width:94%"></div></div>
+            <div class="match-pct">94%</div>
+          </div>
+          <div class="match-row">
+            <div class="match-label">Topic similarity</div>
+            <div class="match-bar-track"><div class="match-bar-fill" style="width:78%"></div></div>
+            <div class="match-pct">78%</div>
+          </div>
+          <div class="match-row">
+            <div class="match-label">Posting time alignment</div>
+            <div class="match-bar-track"><div class="match-bar-fill" style="width:65%"></div></div>
+            <div class="match-pct">65%</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="card-action primary">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+            Connect
+          </button>
+          <button class="card-action">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+            View page
+          </button>
+          <button class="card-action">
+            <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            Not now
+          </button>
+        </div>
+      </div>
+
+      <!-- 4️⃣  HUNT REWARD — Trend Alert -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon hunt">
+            <svg viewBox="0 0 24 24"><path d="M2 12h2l3-9 6 18 3-9h6"/></svg>
+          </div>
+          <div class="card-meta">
+            <div class="card-title">
+              "Prison drama" trending in your niche
+              <span class="reward-chip hunt">Hunt</span>
+            </div>
+            <div class="card-sub">+340% mentions vs last week <span class="dot"></span> Estimated peak window: next 4 hours</div>
+          </div>
+        </div>
+        <div class="card-body">Your UK Jail News page is positioned to capture this. Art-E predicts a post in this slot would score <strong>92</strong> — your highest forecast this week.</div>
+        <div class="card-actions">
+          <button class="card-action arte">
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+            Draft a post
+          </button>
+          <button class="card-action">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            See trend data
+          </button>
+          <button class="card-action">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>
+            Hide
+          </button>
+        </div>
+      </div>
+
+      <!-- 5️⃣  SELF REWARD — Streak / Mastery -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon self">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          </div>
+          <div class="card-meta">
+            <div class="card-title">
+              You're on a 6-day streak
+              <span class="reward-chip self">Self</span>
+            </div>
+            <div class="card-sub">Post today to extend it · Best streak: 14 days</div>
+          </div>
+        </div>
+        <div class="streak-row">
+          <div class="streak-day done">M</div>
+          <div class="streak-day done">T</div>
+          <div class="streak-day done">W</div>
+          <div class="streak-day done">T</div>
+          <div class="streak-day done">F</div>
+          <div class="streak-day done">S</div>
+          <div class="streak-day today">S</div>
+        </div>
+        <div class="card-actions">
+          <button class="card-action primary">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Post now
+          </button>
+          <button class="card-action">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Schedule
+          </button>
+        </div>
+      </div>
+
+      <!-- 6️⃣  OPPORTUNITY BANNER — viral spike -->
+      <div class="alert-banner opp">
+        <div class="alert-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        </div>
+        <div class="alert-content">
+          <div class="alert-title">Kelpie Daily post going viral <span class="alert-cat">Opportunity</span></div>
+          <div class="alert-msg">3.2× average reach in the first 90 minutes — strongest velocity in 30 days. Reshare across your other pages now to capture the wave.</div>
+          <div class="alert-actions">
+            <button class="alert-btn">Reshare now</button>
+            <button class="alert-btn-ghost">View live</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ─── RIGHT SIDEBAR ─────────────────────── -->
+  <aside class="right-sidebar">
+
+    <!-- Live counters (Hunt — fresh data) -->
+    <div class="right-card">
+      <div class="right-card-head">
+        <div class="right-card-title">
+          <span class="live-dot"></span> Live
+        </div>
+        <a class="right-card-link">Today</a>
+      </div>
+      <div class="live-grid">
+        <div class="live-stat">
+          <div class="live-stat-val up">2.4K<span class="delta">↑18%</span></div>
+          <div class="live-stat-lbl">Reach right now</div>
+        </div>
+        <div class="live-stat">
+          <div class="live-stat-val">187</div>
+          <div class="live-stat-lbl">Engagements/min</div>
+        </div>
+        <div class="live-stat">
+          <div class="live-stat-val">4.8%</div>
+          <div class="live-stat-lbl">Engagement rate</div>
+        </div>
+        <div class="live-stat">
+          <div class="live-stat-val up">91<span class="delta">↑3</span></div>
+          <div class="live-stat-lbl">Avg AI score</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bell tray notifications -->
+    <div class="right-card">
+      <div class="right-card-head">
+        <div class="right-card-title">Notifications</div>
+        <a class="right-card-link">See all</a>
+      </div>
+
+      <div class="bell-item unread">
+        <div class="bell-icon crisis">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 6v6m0 4h.01"/></svg>
+        </div>
+        <div class="bell-body">
+          <div class="bell-text"><strong>Brand risk</strong> on <span class="accent">Drinking Memes</span> — 23 negative comments in 4 minutes</div>
+          <div class="bell-time">3 minutes ago</div>
+        </div>
+      </div>
+
+      <div class="bell-item unread">
+        <div class="bell-icon opp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        </div>
+        <div class="bell-body">
+          <div class="bell-text"><strong>Going viral:</strong> <span class="accent">Kelpie Daily</span> at 3.2× average reach</div>
+          <div class="bell-time">11 minutes ago</div>
+        </div>
+      </div>
+
+      <div class="bell-item unread">
+        <div class="bell-icon warn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </div>
+        <div class="bell-body">
+          <div class="bell-text"><strong>Reminder:</strong> 6PM window for <span class="accent">Drinking Memes</span> closes in 1h</div>
+          <div class="bell-time">22 minutes ago</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top performers (Self) -->
+    <div class="right-card">
+      <div class="right-card-head">
+        <div class="right-card-title">Top this week</div>
+        <a class="right-card-link">All pages</a>
+      </div>
+
+      <div class="top-row">
+        <div class="top-rank gold">1</div>
+        <div class="top-page">KD</div>
+        <div class="top-meta">
+          <div class="top-name">Kelpie Daily</div>
+          <div class="top-score">94 score · 3.2× reach</div>
+        </div>
+      </div>
+
+      <div class="top-row">
+        <div class="top-rank">2</div>
+        <div class="top-page">DM</div>
+        <div class="top-meta">
+          <div class="top-name">Drinking Memes</div>
+          <div class="top-score">91 score · 2.4× reach</div>
+        </div>
+      </div>
+
+      <div class="top-row">
+        <div class="top-rank">3</div>
+        <div class="top-page">UK</div>
+        <div class="top-meta">
+          <div class="top-name">UK Jail News</div>
+          <div class="top-score">87 score · 1.8× reach</div>
+        </div>
+      </div>
+
+      <div class="top-row">
+        <div class="top-rank">4</div>
+        <div class="top-page">FN</div>
+        <div class="top-meta">
+          <div class="top-name">Fri Night Chaos</div>
+          <div class="top-score">82 score · 1.4× reach</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-footer">
+      <a>About</a><a>Help</a><a>Privacy</a><a>Settings</a><br/>
+      ArtemisAI · Internal preview · v2 redesign
+    </div>
+  </aside>
+
+</div>
+
+<!-- Floating Art-E button — Investment engine, always one tap away -->
+<button class="fab-arte" title="Ask Art-E">
+  <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg>
+</button>
+
+<!-- Spec watermark -->
+<div class="spec-watermark">v2 · Hooked applied · May 2026</div>
+
+</body>
+</html>
