@@ -208,6 +208,106 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .tab-panel.active>*{animation:fadeIn .2s ease both}
+
+/* ══ WIREFRAME BUILDER ══ */
+.wf-layout{display:grid;grid-template-columns:220px 1fr 200px;gap:0;height:calc(100vh - 170px);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--bg)}
+
+/* Left palette */
+.wf-palette{background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.wf-palette-head{padding:12px 14px;border-bottom:1px solid var(--border);font-family:var(--display);font-size:12px;font-weight:700;color:var(--t2)}
+.wf-palette-scroll{flex:1;overflow-y:auto;padding:10px}
+.wf-palette-scroll::-webkit-scrollbar{width:3px}
+.wf-palette-scroll::-webkit-scrollbar-thumb{background:var(--border)}
+.wf-section-label{font-size:9px;font-family:var(--mono);color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin:10px 0 5px;padding-left:2px}
+.wf-block{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:7px 10px;margin-bottom:5px;cursor:grab;font-size:11px;color:var(--t2);display:flex;align-items:center;gap:7px;transition:all .15s;user-select:none}
+.wf-block:hover{border-color:var(--border2);color:var(--t1);background:var(--card2)}
+.wf-block:active{cursor:grabbing;opacity:.7}
+.wf-block-icon{font-size:13px;flex-shrink:0}
+.wf-block-info{flex:1;min-width:0}
+.wf-block-name{font-size:11px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wf-block-desc{font-size:9px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Centre canvas */
+.wf-canvas-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.wf-toolbar{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;background:var(--card)}
+.wf-toolbar-btn{font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--t2);cursor:pointer;font-family:var(--font);transition:all .15s;display:flex;align-items:center;gap:4px}
+.wf-toolbar-btn:hover{border-color:var(--border2);color:var(--t1)}
+.wf-toolbar-btn.active{border-color:rgba(0,212,170,.4);color:var(--accent);background:rgba(0,212,170,.07)}
+.wf-screen-tabs{display:flex;gap:4px;flex:1;overflow-x:auto}
+.wf-screen-tab{font-size:11px;padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--t2);cursor:pointer;font-family:var(--font);white-space:nowrap;transition:all .15s}
+.wf-screen-tab:hover{border-color:var(--border2);color:var(--t1)}
+.wf-screen-tab.active{background:var(--bg3);border-color:var(--border2);color:var(--t1)}
+.wf-canvas{flex:1;overflow:auto;padding:20px;background:var(--bg);position:relative}
+.wf-canvas::-webkit-scrollbar{width:4px;height:4px}
+.wf-canvas::-webkit-scrollbar-thumb{background:var(--border)}
+.wf-phone{width:320px;min-height:580px;background:#0f1421;border:2px solid rgba(255,255,255,.12);border-radius:24px;margin:0 auto;padding:0;position:relative;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.6)}
+.wf-phone-notch{height:28px;background:#080d16;display:flex;align-items:center;justify-content:center}
+.wf-phone-notch::after{content:'';width:60px;height:5px;background:rgba(255,255,255,.15);border-radius:10px}
+.wf-phone-body{min-height:520px;position:relative}
+.wf-drop-zone{min-height:500px;padding:4px;position:relative}
+.wf-drop-zone.drag-active{background:rgba(0,212,170,.03);outline:2px dashed rgba(0,212,170,.3);outline-offset:-4px}
+/* Dropped elements */
+.wf-el{position:relative;cursor:pointer;transition:outline .1s;margin:4px}
+.wf-el:hover{outline:1.5px solid rgba(0,212,170,.5)}
+.wf-el.selected{outline:2px solid var(--accent)}
+.wf-el-del{position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--red);border:none;color:#fff;font-size:9px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:10;line-height:1}
+.wf-el:hover .wf-el-del,.wf-el.selected .wf-el-del{display:flex}
+.wf-el-move{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:4px;background:rgba(0,212,170,.5);border:none;color:#000;font-size:9px;cursor:grab;display:none;align-items:center;justify-content:center;z-index:10;line-height:1}
+.wf-el:hover .wf-el-move,.wf-el.selected .wf-el-move{display:flex}
+
+/* Right properties panel */
+.wf-props{background:var(--card);border-left:1px solid var(--border);overflow-y:auto;padding:14px}
+.wf-props::-webkit-scrollbar{width:3px}
+.wf-props-head{font-family:var(--display);font-size:12px;font-weight:700;color:var(--t2);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.wf-prop-group{margin-bottom:14px}
+.wf-prop-label{font-size:9px;font-family:var(--mono);color:var(--t3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+.wf-prop-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--t1);font-family:var(--font);font-size:11px;outline:none}
+.wf-prop-input:focus{border-color:rgba(0,212,170,.4)}
+.wf-prop-select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--t1);font-family:var(--font);font-size:11px;outline:none}
+.wf-chip-row{display:flex;gap:4px;flex-wrap:wrap}
+.wf-chip{font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--t2);cursor:pointer;font-family:var(--font);transition:all .15s}
+.wf-chip:hover,.wf-chip.active{border-color:rgba(0,212,170,.4);color:var(--accent);background:rgba(0,212,170,.07)}
+
+/* WIREFRAME UI BLOCKS — rendered inside phone */
+.wf-navtop{background:rgba(255,255,255,.05);height:40px;display:flex;align-items:center;padding:0 12px;gap:8px;font-size:11px;color:rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.06)}
+.wf-navbottom{background:rgba(255,255,255,.05);height:50px;display:flex;align-items:center;justify-content:space-around;border-top:1px solid rgba(255,255,255,.06)}
+.wf-navbottom-item{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:7px;color:rgba(255,255,255,.3);min-width:40px}
+.wf-navbottom-item.active-nav{color:var(--accent)}
+.wf-navbottom-item svg{opacity:.5}
+.wf-navbottom-item.active-nav svg{opacity:1}
+.wf-card-block{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:12px;margin:6px 8px;font-size:11px;color:rgba(255,255,255,.5)}
+.wf-feed-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:10px 12px;margin:5px 8px}
+.wf-feed-card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.wf-avatar-sm{width:28px;height:28px;border-radius:50%;background:rgba(0,212,170,.3);flex-shrink:0}
+.wf-feed-title{font-size:11px;color:rgba(255,255,255,.7);font-weight:600}
+.wf-feed-sub{font-size:9px;color:rgba(255,255,255,.3)}
+.wf-feed-img{height:70px;background:rgba(255,255,255,.06);border-radius:7px;margin-bottom:8px}
+.wf-feed-actions{display:flex;gap:10px}
+.wf-feed-action{font-size:9px;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:3px}
+.wf-kpi-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px 8px}
+.wf-kpi-mini{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:9px 10px}
+.wf-kpi-mini-label{font-size:8px;color:rgba(255,255,255,.3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
+.wf-kpi-mini-val{font-size:16px;font-weight:700;color:var(--accent)}
+.wf-arte-strip{background:linear-gradient(90deg,rgba(167,139,250,.12),rgba(0,212,170,.08));border:1px solid rgba(167,139,250,.2);border-radius:9px;padding:8px 12px;margin:5px 8px;display:flex;align-items:center;gap:8px;font-size:10px;color:rgba(167,139,250,.9)}
+.wf-arte-orb{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--accent));display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.wf-bell-chip{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.2);border-radius:100px;padding:4px 10px;margin:5px 8px;display:inline-flex;align-items:center;gap:5px;font-size:10px;color:rgba(248,113,113,.9)}
+.wf-search-bar{background:rgba(255,255,255,.06);border-radius:20px;height:30px;margin:5px 8px;display:flex;align-items:center;padding:0 12px;gap:6px;font-size:10px;color:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.06)}
+.wf-stories-row{display:flex;gap:8px;padding:8px 10px;overflow-x:auto}
+.wf-story{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0}
+.wf-story-ring{width:40px;height:40px;border-radius:50%;border:2px solid var(--accent);padding:2px}
+.wf-story-inner{width:100%;height:100%;border-radius:50%;background:rgba(0,212,170,.2)}
+.wf-story-label{font-size:8px;color:rgba(255,255,255,.3)}
+.wf-section-head{padding:8px 12px 4px;font-size:10px;font-weight:600;color:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:space-between}
+.wf-section-head span{font-size:8px;color:rgba(0,212,170,.7)}
+.wf-chart-block{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:9px;height:70px;margin:4px 8px;display:flex;align-items:flex-end;padding:8px 10px;gap:3px;overflow:hidden}
+.wf-bar{background:rgba(0,212,170,.4);border-radius:3px 3px 0 0;flex:1;min-width:8px;transition:height .3s}
+.wf-fab{position:absolute;bottom:16px;right:16px;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--accent));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(167,139,250,.4);z-index:10;font-size:18px}
+.wf-text-block{padding:6px 12px;font-size:11px;color:rgba(255,255,255,.4);line-height:1.5}
+.wf-divider{height:1px;background:rgba(255,255,255,.05);margin:4px 8px}
+.wf-tab-bar{display:flex;border-top:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);padding:4px 0}
+.wf-tab-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:5px 0;font-size:7px;color:rgba(255,255,255,.3);cursor:pointer}
+.wf-tab-item.act{color:var(--accent)}
+
 </style>
 </head>
 <body>
@@ -259,6 +359,10 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
     Art-E: Hooked AI
   </button>
+  <button class="tab-btn" data-tab="wireframe" onclick="switchTab('wireframe')">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    Wireframe Builder
+  </button>
 </div>
 
 <div class="main">
@@ -267,7 +371,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
      TAB 1: HOOKED FRAMEWORK
 ══════════════════════════════════════════ -->
 <div class="tab-panel active" id="tab-hooked">
-  <div style="display:grid;grid-template-columns:1fr 340px;gap:24px">
+  <div>
 
     <!-- LEFT: Framework stages -->
     <div>
@@ -399,22 +503,19 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       </div>
     </div>
 
-    <!-- RIGHT: Quick reference sidebar -->
-    <div style="display:flex;flex-direction:column;gap:16px">
-      <div class="card">
-        <div class="card-head"><div><div class="card-title">Priority Actions</div><div class="card-sub">Ordered by impact</div></div></div>
-        <div style="padding:12px 16px">
-          <div style="display:flex;flex-direction:column;gap:2px">
-            <div style="display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.03)" id="priorityList">
-            </div>
-          </div>
-        </div>
+  </div>
+  <!-- Priority actions + screen map BELOW, not squished in sidebar -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+    <div class="card">
+      <div class="card-head"><div><div class="card-title">Priority Actions</div><div class="card-sub">Ordered by impact · colour = urgency</div></div></div>
+      <div style="padding:14px 18px">
+        <div style="display:flex;flex-direction:column;gap:1px" id="priorityList"></div>
       </div>
-      <div class="card">
-        <div class="card-head"><div><div class="card-title">Screen Map</div><div class="card-sub">Current → Proposed</div></div></div>
-        <div style="padding:12px 16px;font-size:11px">
-          <div style="display:flex;flex-direction:column;gap:4px" id="screenMap"></div>
-        </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div><div class="card-title">Screen Map</div><div class="card-sub">Current 9 screens → Proposed 5</div></div></div>
+      <div style="padding:14px 18px;font-size:11px">
+        <div style="display:flex;flex-direction:column;gap:5px" id="screenMap"></div>
       </div>
     </div>
   </div>
@@ -584,6 +685,61 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       </div>
     </div>
   </div>
+
+
+<!-- ══════════════════════════════════════════
+     TAB 5: WIREFRAME BUILDER
+══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-wireframe">
+  <div style="margin-bottom:12px;display:flex;align-items:center;justify-content:space-between">
+    <div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.5">Drag blocks from the left panel onto the phone canvas. Switch between screens with the tabs. Each team member's layout saves separately.</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button onclick="wfClearCanvas()" class="wf-toolbar-btn">🗑 Clear</button>
+      <button onclick="wfSaveLayout()" class="wf-toolbar-btn" style="border-color:rgba(0,212,170,.3);color:var(--accent)">💾 Save Layout</button>
+      <button onclick="wfShareLayout()" class="wf-toolbar-btn">📤 Share</button>
+    </div>
+  </div>
+  <div class="wf-layout">
+    <!-- PALETTE -->
+    <div class="wf-palette">
+      <div class="wf-palette-head">UI Blocks</div>
+      <div class="wf-palette-scroll" id="wfPalette"></div>
+    </div>
+
+    <!-- CANVAS -->
+    <div class="wf-canvas-wrap">
+      <div class="wf-toolbar">
+        <div class="wf-screen-tabs" id="wfScreenTabs"></div>
+        <button onclick="wfAddScreen()" class="wf-toolbar-btn">+ Screen</button>
+        <button onclick="wfDeleteScreen()" class="wf-toolbar-btn" style="color:var(--red)">✕ Delete</button>
+      </div>
+      <div class="wf-canvas" id="wfCanvas"
+        ondragover="event.preventDefault()"
+        ondrop="wfDrop(event)">
+        <div class="wf-phone" id="wfPhone">
+          <div class="wf-phone-notch"></div>
+          <div class="wf-phone-body">
+            <div class="wf-drop-zone" id="wfDropZone"
+              ondragover="wfDragOver(event)"
+              ondragleave="wfDragLeave(event)"
+              ondrop="wfDrop(event)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROPERTIES -->
+    <div class="wf-props">
+      <div class="wf-props-head">Properties</div>
+      <div id="wfPropsContent">
+        <div style="font-size:11px;color:var(--t3);line-height:1.6">Click any element on the canvas to edit its properties.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 
 </div><!-- end main -->
@@ -968,6 +1124,318 @@ function sendPrompt(text) {
 }
 function handleChatKey(e) { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();} }
 function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,120)+'px'; }
+
+
+// ══════════════════════════════════════════
+// WIREFRAME BUILDER
+// ══════════════════════════════════════════
+const WF_BLOCKS = [
+  { section: 'Navigation' },
+  { id:'nav-top', name:'Top Nav Bar', desc:'Logo, page name, avatar', icon:'📱',
+    render:()=>`<div class="wf-navtop"><span style="font-size:14px;font-weight:700;color:var(--accent)">ARTEMIS</span><span style="flex:1"></span><div style="width:20px;height:20px;border-radius:50%;background:rgba(0,212,170,.3)"></div></div>` },
+  { id:'nav-bottom', name:'Bottom Tab Bar', desc:'5 tab icons', icon:'⬇️',
+    render:()=>`<div class="wf-navbottom"><div class="wf-navbottom-item active-nav"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</div><div class="wf-navbottom-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/></svg>Analytics</div><div class="wf-navbottom-item" style="color:var(--purple);opacity:1"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--accent));display:flex;align-items:center;justify-content:center;font-size:16px;margin-top:-14px;box-shadow:0 4px 16px rgba(167,139,250,.4)">✦</div></div><div class="wf-navbottom-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Discover</div><div class="wf-navbottom-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Profile</div></div>` },
+  { id:'bell-alert', name:'Alert Bell Strip', desc:'Crisis notification chip', icon:'🔔',
+    render:()=>`<div class="wf-bell-chip">🔔 Very negative comment on Drinking Memes — requires response</div>` },
+  { section: 'Feed & Content' },
+  { id:'feed-card', name:'Post Performance Card', desc:'Post with metrics', icon:'📊',
+    render:()=>`<div class="wf-feed-card"><div class="wf-feed-card-top"><div class="wf-avatar-sm"></div><div><div class="wf-feed-title">Drinking Memes · 6PM Post</div><div class="wf-feed-sub">2 hours ago · 3.2× avg reach</div></div><div style="margin-left:auto;font-size:11px;font-weight:700;color:var(--accent)">91%</div></div><div class="wf-feed-img"></div><div class="wf-feed-actions"><div class="wf-feed-action">❤️ 2.4K</div><div class="wf-feed-action">💬 184</div><div class="wf-feed-action">↗️ 312</div><div style="margin-left:auto;font-size:9px;padding:3px 8px;border-radius:100px;background:rgba(0,212,170,.1);color:var(--accent);border:1px solid rgba(0,212,170,.2)">🔁 Post Again</div></div></div>` },
+  { id:'briefing-card', name:'Morning Briefing (Post)', desc:'Art-E as author', icon:'☀️',
+    render:()=>`<div class="wf-feed-card"><div class="wf-feed-card-top"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--accent));display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">✦</div><div><div class="wf-feed-title">Art-E · Morning Briefing</div><div class="wf-feed-sub">Today 7:00 AM</div></div></div><div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.65;margin-bottom:8px">Your best post window today is <strong style="color:var(--accent)">6PM Tuesday (+34%)</strong>. Last night's reel outperformed by 3.2×. Sentiment across your pages is positive.</div><div style="font-size:9px;color:rgba(167,139,250,.8)">▸ See full briefing</div></div>` },
+  { id:'arte-strip', name:'Art-E Insight Strip', desc:'One-line AI insight', icon:'✦',
+    render:()=>`<div class="wf-arte-strip"><div class="wf-arte-orb">✦</div><span>Best post time today: <strong>6PM (+34% vs your avg)</strong></span></div>` },
+  { id:'stories', name:'Stories Row', desc:'Horizontal scroll stories', icon:'⭕',
+    render:()=>`<div class="wf-stories-row">${['DM','KD','UK','FM','NB'].map(l=>`<div class="wf-story"><div class="wf-story-ring"><div class="wf-story-inner"></div></div><div class="wf-story-label">${l}</div></div>`).join('')}</div>` },
+  { id:'section-head', name:'Section Header', desc:'Label with see all', icon:'#️⃣',
+    render:()=>`<div class="wf-section-head">Your Pages This Week <span>See all →</span></div>` },
+  { section: 'Analytics' },
+  { id:'kpi-row', name:'KPI Cards (2×2)', desc:'4 key metrics', icon:'📈',
+    render:()=>`<div class="wf-kpi-row"><div class="wf-kpi-mini"><div class="wf-kpi-mini-label">Engagement</div><div class="wf-kpi-mini-val">4.8%</div></div><div class="wf-kpi-mini"><div class="wf-kpi-mini-label">Reach</div><div class="wf-kpi-mini-val">24K</div></div><div class="wf-kpi-mini"><div class="wf-kpi-mini-label">AI Score</div><div class="wf-kpi-mini-val">91</div></div><div class="wf-kpi-mini"><div class="wf-kpi-mini-label">Sentiment</div><div class="wf-kpi-mini-val">84%</div></div></div>` },
+  { id:'chart-bar', name:'Bar Chart Block', desc:'Engagement over time', icon:'📊',
+    render:()=>`<div class="wf-chart-block">${[40,65,45,80,55,90,70,85,60,95].map(h=>`<div class="wf-bar" style="height:${h}%"></div>`).join('')}</div>` },
+  { section: 'UI Elements' },
+  { id:'search-bar', name:'Search Bar', desc:'Search / filter posts', icon:'🔍',
+    render:()=>`<div class="wf-search-bar"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Search posts, pages, topics…</div>` },
+  { id:'card-block', name:'Generic Card', desc:'Content card with padding', icon:'🃏',
+    render:()=>`<div class="wf-card-block"><div style="height:8px;width:60%;background:rgba(255,255,255,.1);border-radius:4px;margin-bottom:8px"></div><div style="height:6px;width:90%;background:rgba(255,255,255,.06);border-radius:4px;margin-bottom:5px"></div><div style="height:6px;width:75%;background:rgba(255,255,255,.06);border-radius:4px"></div></div>` },
+  { id:'divider', name:'Divider Line', desc:'Section separator', icon:'—',
+    render:()=>`<div class="wf-divider"></div>` },
+  { id:'text-block', name:'Text Block', desc:'Body copy / description', icon:'T',
+    render:()=>`<div class="wf-text-block">Tap any element to edit · Drag to reorder · Build your screen layout</div>` },
+  { id:'fab', name:'Art-E FAB Button', desc:'Floating action button', icon:'🔵',
+    render:()=>`<div style="position:relative;height:60px"><div class="wf-fab">✦</div></div>` },
+  { id:'tab-bar-2', name:'Tab Bar (Alt)', desc:'Alternative nav tabs', icon:'📋',
+    render:()=>`<div class="wf-tab-bar"><div class="wf-tab-item act">🏠 Home</div><div class="wf-tab-item">📊 Analytics</div><div class="wf-tab-item">🔍 Discovery</div><div class="wf-tab-item">⚙️ Settings</div></div>` },
+];
+
+// ── Per-user screens storage ──
+const WF_STORAGE_KEY = 'artemis_wf_' + (_name||'guest').replace(/\s/g,'_');
+let wfState = JSON.parse(localStorage.getItem(WF_STORAGE_KEY)||'null') || {
+  screens: [
+    {id:'home',name:'Home'},
+    {id:'analytics',name:'Analytics'},
+    {id:'discovery',name:'Discovery'},
+  ],
+  currentScreen: 'home',
+  layouts: {home:[], analytics:[], discovery:[]}
+};
+
+let _wfDragBlockId = null; // block being dragged FROM palette
+let _wfDragElId = null;    // element being dragged within canvas
+let _wfSelected = null;
+
+function wfSave() { localStorage.setItem(WF_STORAGE_KEY, JSON.stringify(wfState)); }
+
+// ── RENDER PALETTE ──
+function renderPalette() {
+  const el = document.getElementById('wfPalette');
+  if (!el) return;
+  let html = '';
+  WF_BLOCKS.forEach(b => {
+    if (b.section) {
+      html += `<div class="wf-section-label">${b.section}</div>`;
+    } else {
+      html += `<div class="wf-block" draggable="true" data-block-id="${b.id}"
+        ondragstart="wfPaletteDragStart(event,'${b.id}')"
+        onclick="wfQuickAdd('${b.id}')">
+        <span class="wf-block-icon">${b.icon}</span>
+        <div class="wf-block-info">
+          <div class="wf-block-name">${b.name}</div>
+          <div class="wf-block-desc">${b.desc}</div>
+        </div>
+      </div>`;
+    }
+  });
+  el.innerHTML = html;
+}
+
+// ── RENDER SCREEN TABS ──
+function renderScreenTabs() {
+  const el = document.getElementById('wfScreenTabs');
+  if (!el) return;
+  el.innerHTML = wfState.screens.map(s =>
+    `<button class="wf-screen-tab ${s.id===wfState.currentScreen?'active':''}"
+      onclick="wfSwitchScreen('${s.id}')">${s.name}</button>`
+  ).join('');
+}
+
+// ── RENDER CANVAS ──
+function renderCanvas() {
+  const zone = document.getElementById('wfDropZone');
+  if (!zone) return;
+  const items = wfState.layouts[wfState.currentScreen] || [];
+  if (!items.length) {
+    zone.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;gap:8px;color:rgba(255,255,255,.2)">
+      <div style="font-size:28px">📱</div>
+      <div style="font-size:11px">Drag blocks here to build your screen</div>
+      <div style="font-size:10px;opacity:.6">Click a block on the left to add instantly</div>
+    </div>`;
+    return;
+  }
+  zone.innerHTML = items.map((item, i) => {
+    const block = WF_BLOCKS.find(b=>b.id===item.blockId);
+    if (!block) return '';
+    const rendered = block.render();
+    return `<div class="wf-el ${_wfSelected===item.uid?'selected':''}"
+      data-uid="${item.uid}" data-idx="${i}"
+      onclick="wfSelectEl('${item.uid}',event)"
+      draggable="true"
+      ondragstart="wfElDragStart(event,'${item.uid}')"
+      ondragover="wfElDragOver(event,${i})"
+      ondrop="wfElDrop(event,${i})">
+      <button class="wf-el-del" onclick="wfDeleteEl('${item.uid}',event)">✕</button>
+      <button class="wf-el-move" title="Drag">⠿</button>
+      ${rendered}
+    </div>`;
+  }).join('');
+}
+
+function renderAll3() {
+  renderPalette();
+  renderScreenTabs();
+  renderCanvas();
+}
+
+// ── SWITCH SCREEN ──
+function wfSwitchScreen(id) {
+  wfState.currentScreen = id;
+  _wfSelected = null;
+  wfSave();
+  renderScreenTabs();
+  renderCanvas();
+  document.getElementById('wfPropsContent').innerHTML = '<div style="font-size:11px;color:var(--t3)">Click any element to edit.</div>';
+}
+
+// ── ADD SCREEN ──
+function wfAddScreen() {
+  const name = prompt('Screen name:', 'New Screen');
+  if (!name) return;
+  const id = 'screen_' + Date.now();
+  wfState.screens.push({id, name});
+  wfState.layouts[id] = [];
+  wfState.currentScreen = id;
+  wfSave(); renderScreenTabs(); renderCanvas();
+}
+
+function wfDeleteScreen() {
+  if (wfState.screens.length <= 1) { alert('Need at least one screen'); return; }
+  if (!confirm('Delete "' + (wfState.screens.find(s=>s.id===wfState.currentScreen)?.name||'this screen') + '"?')) return;
+  wfState.screens = wfState.screens.filter(s=>s.id!==wfState.currentScreen);
+  delete wfState.layouts[wfState.currentScreen];
+  wfState.currentScreen = wfState.screens[0].id;
+  wfSave(); renderScreenTabs(); renderCanvas();
+}
+
+// ── DROP FROM PALETTE ──
+function wfPaletteDragStart(e, blockId) {
+  _wfDragBlockId = blockId;
+  _wfDragElId = null;
+  e.dataTransfer.effectAllowed = 'copy';
+}
+
+function wfDragOver(e) {
+  e.preventDefault();
+  document.getElementById('wfDropZone').classList.add('drag-active');
+}
+function wfDragLeave(e) {
+  document.getElementById('wfDropZone').classList.remove('drag-active');
+}
+
+function wfDrop(e) {
+  e.preventDefault();
+  document.getElementById('wfDropZone').classList.remove('drag-active');
+  if (_wfDragBlockId) {
+    wfAddBlock(_wfDragBlockId);
+    _wfDragBlockId = null;
+  }
+}
+
+function wfQuickAdd(blockId) {
+  wfAddBlock(blockId);
+}
+
+function wfAddBlock(blockId) {
+  const uid = 'el_' + Date.now() + '_' + Math.random().toString(36).slice(2,6);
+  if (!wfState.layouts[wfState.currentScreen]) wfState.layouts[wfState.currentScreen] = [];
+  wfState.layouts[wfState.currentScreen].push({blockId, uid, props:{}});
+  _wfSelected = uid;
+  wfSave(); renderCanvas(); showPropsFor(uid);
+}
+
+// ── ELEMENT DRAG (reorder) ──
+let _dragFromIdx = null;
+function wfElDragStart(e, uid) {
+  _wfDragElId = uid;
+  _wfDragBlockId = null;
+  const items = wfState.layouts[wfState.currentScreen];
+  _dragFromIdx = items.findIndex(x=>x.uid===uid);
+  e.dataTransfer.effectAllowed = 'move';
+}
+function wfElDragOver(e, toIdx) {
+  e.preventDefault(); e.stopPropagation();
+}
+function wfElDrop(e, toIdx) {
+  e.preventDefault(); e.stopPropagation();
+  if (_wfDragElId && _dragFromIdx!==null && _dragFromIdx!==toIdx) {
+    const items = wfState.layouts[wfState.currentScreen];
+    const [moved] = items.splice(_dragFromIdx, 1);
+    items.splice(toIdx, 0, moved);
+    _dragFromIdx = null; _wfDragElId = null;
+    wfSave(); renderCanvas();
+  } else if (_wfDragBlockId) {
+    wfAddBlock(_wfDragBlockId);
+    _wfDragBlockId = null;
+  }
+}
+
+// ── DELETE ELEMENT ──
+function wfDeleteEl(uid, e) {
+  e.stopPropagation();
+  wfState.layouts[wfState.currentScreen] = wfState.layouts[wfState.currentScreen].filter(x=>x.uid!==uid);
+  if (_wfSelected === uid) { _wfSelected = null; document.getElementById('wfPropsContent').innerHTML = '<div style="font-size:11px;color:var(--t3)">Click any element to edit.</div>'; }
+  wfSave(); renderCanvas();
+}
+
+// ── SELECT ELEMENT & SHOW PROPS ──
+function wfSelectEl(uid, e) {
+  e.stopPropagation();
+  _wfSelected = uid;
+  renderCanvas();
+  showPropsFor(uid);
+}
+
+function showPropsFor(uid) {
+  const item = (wfState.layouts[wfState.currentScreen]||[]).find(x=>x.uid===uid);
+  const block = item ? WF_BLOCKS.find(b=>b.id===item.blockId) : null;
+  const el = document.getElementById('wfPropsContent');
+  if (!block || !item) { el.innerHTML = '<div style="font-size:11px;color:var(--t3)">Click any element to edit.</div>'; return; }
+  el.innerHTML = `
+    <div class="wf-prop-group">
+      <div class="wf-prop-label">Block Type</div>
+      <div style="font-size:12px;font-weight:600;color:var(--t1)">${block.icon} ${block.name}</div>
+    </div>
+    <div class="wf-prop-group">
+      <div class="wf-prop-label">Label / Note</div>
+      <input class="wf-prop-input" id="propNote" value="${item.props.note||''}" placeholder="Add annotation…" oninput="wfUpdateProp('${uid}','note',this.value)">
+    </div>
+    <div class="wf-prop-group">
+      <div class="wf-prop-label">Accent Colour</div>
+      <div class="wf-chip-row">
+        ${['#00d4aa','#a78bfa','#fbbf24','#f87171','#60a5fa','#fb923c'].map(col=>
+          `<button class="wf-chip ${item.props.accent===col?'active':''}" style="background:${col}22;border-color:${col}44;color:${col}"
+            onclick="wfUpdateProp('${uid}','accent','${col}');document.querySelectorAll('#wfPropsContent .wf-chip').forEach(c=>c.classList.remove('active'));this.classList.add('active')">●</button>`
+        ).join('')}
+      </div>
+    </div>
+    <div class="wf-prop-group">
+      <div class="wf-prop-label">Position</div>
+      <div style="display:flex;gap:5px">
+        <button class="wf-toolbar-btn" onclick="wfMoveEl('${uid}',-1)">↑ Up</button>
+        <button class="wf-toolbar-btn" onclick="wfMoveEl('${uid}',1)">↓ Down</button>
+      </div>
+    </div>
+    <div class="wf-prop-group" style="padding-top:10px;border-top:1px solid var(--border)">
+      <button onclick="wfDeleteEl('${uid}',{stopPropagation:()=>{}})" style="width:100%;padding:7px;border-radius:7px;border:1px solid rgba(248,113,113,.3);background:rgba(248,113,113,.07);color:var(--red);cursor:pointer;font-family:var(--font);font-size:12px">Remove Element</button>
+    </div>`;
+}
+
+function wfUpdateProp(uid, key, val) {
+  const item = (wfState.layouts[wfState.currentScreen]||[]).find(x=>x.uid===uid);
+  if (item) { item.props[key]=val; wfSave(); }
+}
+
+function wfMoveEl(uid, dir) {
+  const items = wfState.layouts[wfState.currentScreen];
+  const idx = items.findIndex(x=>x.uid===uid);
+  const newIdx = idx+dir;
+  if (newIdx<0||newIdx>=items.length) return;
+  const [item] = items.splice(idx,1);
+  items.splice(newIdx,0,item);
+  wfSave(); renderCanvas();
+}
+
+// ── CLEAR / SAVE / SHARE ──
+function wfClearCanvas() {
+  if (!confirm('Clear all elements from this screen?')) return;
+  wfState.layouts[wfState.currentScreen] = [];
+  _wfSelected = null;
+  wfSave(); renderCanvas();
+}
+
+function wfSaveLayout() {
+  wfSave();
+  const btn = document.querySelector('[onclick="wfSaveLayout()"]');
+  if (btn) { btn.textContent='✓ Saved!'; setTimeout(()=>btn.textContent='💾 Save Layout',1500); }
+}
+
+function wfShareLayout() {
+  const key = WF_STORAGE_KEY + '_shared';
+  localStorage.setItem(key, JSON.stringify({user:_name, layout:wfState, ts:new Date().toISOString()}));
+  alert('Layout shared! Other team members can view it by opening their Design Planning page.');
+}
+
+// ── INIT ──
+if (document.getElementById('wfPalette')) renderAll3();
 
 // ══════════════════════════════════════════
 // INIT
