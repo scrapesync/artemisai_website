@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ArtemisAI · Design Planning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4RCP8LMKYK"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4RCP8LMKYK');</script>
+<!-- Clarity -->
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","vfp7p4b3cv");</script>
+<style>
+/* ── TOKENS ── */
+:root {
+  --bg: #07080d;
+  --bg2: #0e1018;
+  --bg3: #141720;
+  --card: #111318;
+  --card2: #181c24;
+  --border: rgba(255,255,255,.07);
+  --border2: rgba(255,255,255,.12);
+  --accent: #00d4aa;
+  --accent2: #00ffcc;
+  --purple: #a78bfa;
+  --amber: #fbbf24;
+  --red: #f87171;
+  --green: #34d399;
+  --t1: #f0f2f8;
+  --t2: #8892a4;
+  --t3: #3d4558;
+  --r: 14px;
+  --font: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+  --display: 'Syne', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:var(--font);min-height:100vh;overflow-x:hidden}
+
+/* ── GRAIN OVERLAY ── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.025'/%3E%3C/svg%3E");opacity:.4;pointer-events:none;z-index:0}
+
+/* ── TOPNAV ── */
+.topnav{height:52px;background:rgba(7,8,13,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:14px;position:sticky;top:0;z-index:100}
+.back-btn{display:flex;align-items:center;gap:6px;color:var(--t2);text-decoration:none;font-size:12px;padding:5px 10px;border-radius:7px;border:1px solid var(--border);transition:all .15s}
+.back-btn:hover{border-color:rgba(0,212,170,.35);color:var(--accent)}
+.nav-logo{font-family:var(--display);font-weight:800;font-size:15px;letter-spacing:-.02em}
+.nav-logo span{color:var(--accent)}
+.nav-sep{color:var(--t3);font-size:16px}
+.nav-title{font-size:12px;color:var(--t2)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav-user{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--t2)}
+.nav-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#0c1221}
+
+/* ── HERO STRIP ── */
+.hero{padding:40px 28px 0;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--accent);background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2);border-radius:100px;padding:4px 12px;margin-bottom:16px}
+.hero h1{font-family:var(--display);font-size:clamp(28px,3.5vw,42px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:10px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{font-size:14px;color:var(--t2);max-width:540px;line-height:1.7}
+
+/* ── TAB BAR ── */
+.tab-bar{display:flex;align-items:center;gap:4px;padding:20px 28px 0;position:sticky;top:52px;z-index:50;background:rgba(7,8,13,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.tab-btn{font-family:var(--font);font-size:12px;font-weight:500;padding:8px 16px;border-radius:8px 8px 0 0;cursor:pointer;border:none;background:transparent;color:var(--t2);transition:all .15s;display:flex;align-items:center;gap:6px;border-bottom:2px solid transparent;position:relative;bottom:-1px}
+.tab-btn:hover{color:var(--t1)}
+.tab-btn.active{color:var(--t1);border-bottom-color:var(--accent);background:rgba(0,212,170,.05)}
+.tab-btn .tab-count{font-size:9px;background:var(--bg3);border-radius:100px;padding:1px 6px;font-family:var(--mono)}
+
+/* ── MAIN CONTENT ── */
+.main{padding:24px 28px;position:relative;z-index:1;max-width:1400px;margin:0 auto}
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+/* ── HOOKED FRAMEWORK PAGE ── */
+.hook-stage-row{display:grid;grid-template-columns:3px 200px 1fr 1fr;gap:0;margin-bottom:0}
+.hook-line{background:var(--stage-c);width:3px;border-radius:2px}
+.hook-stage-card{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--stage-c);border-radius:0 var(--r) var(--r) 0;padding:20px 24px;display:flex;flex-direction:column;justify-content:center}
+.hook-number{font-family:var(--mono);font-size:11px;color:var(--t3);margin-bottom:4px}
+.hook-name{font-family:var(--display);font-size:18px;font-weight:700;color:var(--stage-c);margin-bottom:4px}
+.hook-tagline{font-size:12px;color:var(--t2);line-height:1.5}
+.hook-detail{background:var(--card);border:1px solid var(--border);padding:20px 24px;border-radius:0 var(--r) 0 0}
+.hook-apply{background:var(--card2);border:1px solid rgba(0,212,170,.1);padding:20px 24px;border-radius:0 0 var(--r) 0}
+.hook-apply-label{font-size:9px;font-family:var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.hook-connector{width:3px;background:var(--stage-c);margin:0 0 0 0;height:16px;margin-left:0}
+
+/* Insight quotes from book */
+.book-quote{background:linear-gradient(135deg,rgba(0,212,170,.04),rgba(167,139,250,.04));border:1px solid rgba(0,212,170,.12);border-radius:var(--r);padding:16px 20px 16px 24px;position:relative;margin:12px 0}
+.book-quote::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent),var(--purple));border-radius:3px 0 0 3px}
+.book-quote p{font-size:13px;line-height:1.7;color:var(--t2);font-style:italic}
+.book-quote cite{display:block;margin-top:8px;font-size:10px;font-family:var(--mono);color:var(--t3)}
+
+/* ── SUGGESTIONS PAGE ── */
+.suggestion-form{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:24px}
+.form-header{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.form-header-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#0c1221;flex-shrink:0}
+.form-header-info{flex:1}
+.form-header-name{font-size:13px;font-weight:600}
+.form-header-role{font-size:10px;color:var(--t2);font-family:var(--mono)}
+.form-body{padding:18px 22px;display:flex;flex-direction:column;gap:12px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:10px;font-family:var(--mono);color:var(--t2);text-transform:uppercase;letter-spacing:.07em}
+.fg input,.fg select,.fg textarea{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--t1);font-family:var(--font);font-size:13px;outline:none;transition:border-color .15s;resize:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:rgba(0,212,170,.4)}
+.fg select option{background:var(--bg3)}
+.submit-btn{align-self:flex-end;font-family:var(--font);font-size:13px;font-weight:600;padding:9px 20px;border-radius:9px;border:none;background:var(--accent);color:#0a0f0d;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px}
+.submit-btn:hover{background:var(--accent2);transform:translateY(-1px)}
+
+/* Suggestion card */
+.sug-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .2s;margin-bottom:14px}
+.sug-card:hover{border-color:var(--border2)}
+.sug-card-header{padding:14px 18px;display:flex;align-items:flex-start;gap:12px;border-bottom:1px solid var(--border)}
+.sug-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#0c1221;flex-shrink:0}
+.sug-meta{flex:1;min-width:0}
+.sug-author{font-size:13px;font-weight:600}
+.sug-timestamp{font-size:10px;font-family:var(--mono);color:var(--t3);margin-top:1px}
+.sug-category{font-size:10px;padding:2px 9px;border-radius:100px;font-family:var(--mono);font-weight:500;flex-shrink:0;align-self:flex-start;margin-top:3px}
+.sug-body{padding:14px 18px}
+.sug-screen{font-size:10px;font-family:var(--mono);color:var(--t3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.07em}
+.sug-text{font-size:13px;line-height:1.7;color:var(--t2)}
+.sug-footer{padding:10px 18px;display:flex;align-items:center;gap:10px;border-top:1px solid rgba(255,255,255,.03)}
+.sug-vote-btn{font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--t2);cursor:pointer;font-family:var(--font);transition:all .15s;display:flex;align-items:center;gap:4px}
+.sug-vote-btn:hover{border-color:rgba(0,212,170,.35);color:var(--accent)}
+.sug-vote-btn.voted{border-color:rgba(0,212,170,.4);color:var(--accent);background:rgba(0,212,170,.07)}
+.sug-priority{font-size:9px;font-family:var(--mono);padding:2px 8px;border-radius:4px}
+.sug-priority.high{background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.2)}
+.sug-priority.medium{background:rgba(251,191,36,.1);color:var(--amber);border:1px solid rgba(251,191,36,.2)}
+.sug-priority.low{background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.2)}
+
+/* ── KANBAN PAGE ── */
+.kanban-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
+.kanban-col{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;min-height:200px}
+.kanban-col-header{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.kanban-col-title{font-family:var(--display);font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.kanban-col-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.kanban-col-count{font-size:10px;font-family:var(--mono);color:var(--t3);background:var(--bg3);padding:2px 7px;border-radius:100px}
+.kanban-col-body{padding:10px;min-height:100px}
+.kanban-item{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:grab;transition:all .15s;user-select:none}
+.kanban-item:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.kanban-item.dragging{opacity:.4;cursor:grabbing}
+.kanban-item.drag-over{border-color:var(--accent)!important;background:rgba(0,212,170,.05)}
+.ki-label{font-size:10px;font-family:var(--mono);padding:1px 7px;border-radius:4px;display:inline-block;margin-bottom:6px}
+.ki-title{font-size:12px;font-weight:600;line-height:1.4;margin-bottom:6px}
+.ki-meta{font-size:10px;color:var(--t3);font-family:var(--mono);display:flex;align-items:center;gap:6px}
+.ki-avatar-stack{display:flex}
+.ki-avatar-small{width:18px;height:18px;border-radius:50%;border:2px solid var(--card2);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#0c1221;margin-left:-4px}
+.ki-avatar-small:first-child{margin-left:0}
+.add-card-btn{width:100%;padding:8px;border-radius:8px;border:1px dashed var(--border);background:transparent;color:var(--t3);cursor:pointer;font-family:var(--font);font-size:11px;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:5px}
+.add-card-btn:hover{border-color:rgba(0,212,170,.3);color:var(--accent)}
+
+/* ── ART-E CHAT (Hooked AI) ── */
+.chat-layout{display:grid;grid-template-columns:1fr 320px;gap:20px;height:calc(100vh - 200px)}
+.chat-main{background:var(--card);border:1px solid var(--border);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
+.chat-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.arte-orb{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--accent));display:flex;align-items:center;justify-content:center;font-size:18px;position:relative;flex-shrink:0}
+.arte-orb::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1.5px solid rgba(167,139,250,.35);animation:orbPulse 2.4s ease-in-out infinite}
+@keyframes orbPulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+.arte-header-info strong{font-family:var(--display);font-size:14px;font-weight:700;display:block}
+.arte-header-info span{font-size:10px;font-family:var(--mono);color:var(--purple)}
+.chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}
+.chat-messages::-webkit-scrollbar{width:4px}
+.chat-messages::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.msg{display:flex;gap:10px;align-items:flex-start;animation:msgIn .2s ease both}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.msg.user{flex-direction:row-reverse}
+.msg-bubble{max-width:75%;padding:11px 15px;border-radius:14px;font-size:13px;line-height:1.65}
+.msg.user .msg-bubble{background:linear-gradient(135deg,rgba(0,212,170,.18),rgba(0,212,170,.1));border:1px solid rgba(0,212,170,.25);border-radius:14px 14px 4px 14px;color:var(--t1)}
+.msg.ai .msg-bubble{background:var(--card2);border:1px solid rgba(167,139,250,.2);border-radius:14px 14px 14px 4px;color:var(--t2)}
+.msg-avatar{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#0c1221}
+.msg.ai .msg-avatar{background:linear-gradient(135deg,var(--purple),var(--accent))}
+.msg.user .msg-avatar{background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.chat-input-area{padding:14px 16px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:flex-end}
+.chat-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--t1);font-family:var(--font);font-size:13px;outline:none;resize:none;max-height:120px;min-height:42px;transition:border-color .15s;line-height:1.5}
+.chat-input:focus{border-color:rgba(167,139,250,.4)}
+.chat-send-btn{width:40px;height:40px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--purple),var(--accent));color:#0c1221;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.chat-send-btn:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(167,139,250,.35)}
+.chat-send-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* Chat sidebar — quick prompts */
+.chat-sidebar{display:flex;flex-direction:column;gap:12px}
+.chat-sidebar-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.chat-sidebar-head{padding:12px 16px;border-bottom:1px solid var(--border);font-size:11px;font-weight:600;font-family:var(--display)}
+.prompt-chip{display:block;width:100%;text-align:left;padding:9px 14px;font-size:11px;font-family:var(--font);color:var(--t2);background:transparent;border:none;cursor:pointer;transition:all .15s;border-bottom:1px solid rgba(255,255,255,.03);line-height:1.4}
+.prompt-chip:last-child{border-bottom:none}
+.prompt-chip:hover{background:rgba(167,139,250,.06);color:var(--t1)}
+.typing-indicator{display:flex;gap:4px;align-items:center;padding:11px 15px}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:var(--t3);animation:typingBounce 1.2s ease-in-out infinite}
+.typing-dot:nth-child(2){animation-delay:.2s}
+.typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes typingBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* ── SHARED ── */
+.section-label{font-size:9px;font-family:var(--mono);color:var(--t3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r)}
+.card-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-family:var(--display);font-size:14px;font-weight:700}
+.card-sub{font-size:10px;font-family:var(--mono);color:var(--t2);margin-top:2px}
+.chip{display:inline-block;font-size:10px;font-family:var(--mono);padding:2px 9px;border-radius:100px;font-weight:500}
+.empty-state{text-align:center;padding:40px 20px;color:var(--t3);font-size:12px}
+.empty-state div{font-size:28px;margin-bottom:10px}
+.filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.filter-btn{font-size:11px;padding:5px 12px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--t2);cursor:pointer;font-family:var(--font);transition:all .15s}
+.filter-btn:hover{border-color:var(--border2);color:var(--t1)}
+.filter-btn.active{border-color:rgba(0,212,170,.4);color:var(--accent);background:rgba(0,212,170,.07)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.tab-panel.active>*{animation:fadeIn .2s ease both}
+</style>
+</head>
+<body>
+
+<!-- TOPNAV -->
+<nav class="topnav">
+  <a href="admin_panel.html" class="back-btn">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Admin Panel
+  </a>
+  <span class="nav-sep">/</span>
+  <span class="nav-logo">Artemi<span>s</span>AI</span>
+  <span class="nav-sep">/</span>
+  <span class="nav-title">Design Planning</span>
+  <div class="nav-right">
+    <div class="nav-user">
+      <span id="navUserName"></span>
+      <div class="nav-avatar" id="navAvatar">?</div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    ArtemisAI · Mockup Redesign
+  </div>
+  <h1>Design <em>Planning</em> Hub</h1>
+  <p>Hooked framework analysis, team feedback, collaborative kanban, and an AI assistant trained on the book — all in one place.</p>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="hooked" onclick="switchTab('hooked')">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/></svg>
+    Hooked Framework
+  </button>
+  <button class="tab-btn" data-tab="suggestions" onclick="switchTab('suggestions')">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    Team Suggestions
+    <span class="tab-count" id="sugCount">0</span>
+  </button>
+  <button class="tab-btn" data-tab="kanban" onclick="switchTab('kanban')">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+    Design Kanban
+  </button>
+  <button class="tab-btn" data-tab="arteai" onclick="switchTab('arteai')">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    Art-E: Hooked AI
+  </button>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════════════
+     TAB 1: HOOKED FRAMEWORK
+══════════════════════════════════════════ -->
+<div class="tab-panel active" id="tab-hooked">
+  <div style="display:grid;grid-template-columns:1fr 340px;gap:24px">
+
+    <!-- LEFT: Framework stages -->
+    <div>
+      <div class="section-label">Nir Eyal · Hooked · Applied to ArtemisAI</div>
+
+      <!-- Stage 1: Trigger -->
+      <div style="--stage-c:#00d4aa;margin-bottom:2px">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;border-radius:var(--r) var(--r) 0 0;overflow:hidden;border:1px solid rgba(0,212,170,.2);border-bottom:none">
+          <div style="background:rgba(0,212,170,.07);padding:20px 22px;border-right:1px solid rgba(0,212,170,.15)">
+            <div class="hook-number">Stage 01</div>
+            <div class="hook-name" style="color:#00d4aa;font-family:var(--display);font-size:20px;font-weight:800;margin:4px 0">Trigger</div>
+            <div style="font-size:11px;color:var(--t2);line-height:1.5">The cue that sets the behaviour in motion</div>
+          </div>
+          <div style="padding:16px 18px;background:var(--card);border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-family:var(--mono);color:var(--t3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.07em">What the book says</div>
+            <p style="font-size:12px;color:var(--t2);line-height:1.65">Two types: <strong style="color:var(--t1)">External</strong> (notifications, emails, ads) and <strong style="color:var(--t1)">Internal</strong> (emotions, boredom, anxiety). The goal is to move users from external to internal triggers — they open the app because they feel something, not because they were pushed.</p>
+          </div>
+          <div style="padding:16px 18px;background:rgba(0,212,170,.03)">
+            <div style="font-size:10px;font-family:var(--mono);color:#00d4aa;margin-bottom:8px;text-transform:uppercase;letter-spacing:.07em">ArtemisAI application</div>
+            <p style="font-size:12px;color:var(--t2);line-height:1.65">Push: "Your 6PM post just hit 3× average reach — Art-E called it." <br>Internal: Page manager's morning anxiety — "Did last night's post do well?" — should be answered the moment they open the app.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div style="display:flex;justify-content:center;height:20px;align-items:center">
+        <svg width="16" height="20" viewBox="0 0 16 20" fill="none"><line x1="8" y1="0" x2="8" y2="14" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/><polygon points="3,12 13,12 8,20" fill="rgba(255,255,255,.12)"/></svg>
+      </div>
+
+      <!-- Stage 2: Action -->
+      <div style="--stage-c:#a78bfa;margin-bottom:2px">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;overflow:hidden;border:1px solid rgba(167,139,250,.2);border-bottom:none">
+          <div style="background:rgba(167,139,250,.07);padding:20px 22px;border-right:1px solid rgba(167,139,250,.15)">
+            <div class="hook-number">Stage 02</div>
+            <div style="color:#a78bfa;font-family:var(--display);font-size:20px;font-weight:800;margin:4px 0">Action</div>
+            <div style="font-size:11px;color:var(--t2);line-height:1.5">Simplest behaviour in anticipation of reward</div>
+          </div>
+          <div style="padding:16px 18px;background:var(--card);border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-family:var(--mono);color:var(--t3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.07em">What the book says</div>
+            <p style="font-size:12px;color:var(--t2);line-height:1.65">B.J. Fogg's formula: <strong style="color:var(--t1)">Motivation + Ability = Action</strong>. Reduce friction until the action requires less effort than not doing it. Any unnecessary step is an opportunity for users to abandon.</p>
+          </div>
+          <div style="padding:16px 18px;background:rgba(167,139,250,.03)">
+            <div style="font-size:10px;font-family:var(--mono);color:#a78bfa;margin-bottom:8px;text-transform:uppercase;letter-spacing:.07em">ArtemisAI application</div>
+            <p style="font-size:12px;color:var(--t2);line-height:1.65">Home screen must answer "how did my posts do?" in <strong style="color:var(--t1)">zero clicks</strong>. Activity Feed is the first screen. Art-E insight strip is above the fold. No tab switching to find the core number.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:center;height:20px;align-items:center">
+        <svg width="16" height="20" viewBox="0 0 16 20" fill="none"><line x1="8" y1="0" x2="8" y2="14" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/><polygon points="3,12 13,12 8,20" fill="rgba(255,255,255,.12)"/></svg>
+      </div>
+
+      <!-- Stage 3: Variable Reward -->
+      <div style="--stage-c:#fbbf24;margin-bottom:2px">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;overflow:hidden;border:1px solid rgba(251,191,36,.2);border-bottom:none">
+          <div style="background:rgba(251,191,36,.07);padding:20px 22px;border-right:1px solid rgba(251,191,36,.15)">
+            <div class="hook-number">Stage 03</div>
+            <div style="color:#fbbf24;font-family:var(--display);font-size:20px;font-weight:800;margin:4px 0">Variable Reward</div>
+            <div style="font-size:11px;color:var(--t2);line-height:1.5">Unpredictable reward that relieves the itch</div>
+          </div>
+          <div style="padding:16px 18px;background:var(--card);border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-family:var(--mono);color:var(--t3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.07em">What the book says</div>
+            <p style="font-size:12px;color:var(--t2);line-height:1.65">Three reward types: <strong style="color:var(--t1)">Tribe</strong> (social — feeling connected), <strong style="color:var(--t1)">Hunt</strong> (information — finding something valuable), <strong style="color:var(--t1)">Self</strong> (mastery — completing, achieving). Variability is key — the reward must not always be the same.</p>
+          </div>
+          <div style="padding:16px 18px;background:rgba(251,191,36,.03)">
+            <div style="font-size:10px;font-family:var(--mono);color:#fbbf24;margin-bottom:8px;text-transform:uppercase;letter-spacing:.07em">ArtemisAI application</div>
+            <p style="font-size:12px;color:var(--t2);line-height:1.65"><strong style="color:var(--t1)">Tribe:</strong> which collaborator page just matched your audience. <strong style="color:var(--t1)">Hunt:</strong> this week's top-performing time slot. <strong style="color:var(--t1)">Self:</strong> Art-E score trending up 8% since last week.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:center;height:20px;align-items:center">
+        <svg width="16" height="20" viewBox="0 0 16 20" fill="none"><line x1="8" y1="0" x2="8" y2="14" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/><polygon points="3,12 13,12 8,20" fill="rgba(255,255,255,.12)"/></svg>
+      </div>
+
+      <!-- Stage 4: Investment -->
+      <div style="--stage-c:#f87171">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;border-radius:0 0 var(--r) var(--r);overflow:hidden;border:1px solid rgba(248,113,113,.2)">
+          <div style="background:rgba(248,113,113,.07);padding:20px 22px;border-right:1px solid rgba(248,113,113,.15)">
+            <div class="hook-number">Stage 04</div>
+            <div style="color:#f87171;font-family:var(--display);font-size:20px;font-weight:800;margin:4px 0">Investment</div>
+            <div style="font-size:11px;color:var(--t2);line-height:1.5">Stored value that loads the next trigger</div>
+          </div>
+          <div style="padding:16px 18px;background:var(--card);border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-family:var(--mono);color:var(--t3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.07em">What the book says</div>
+            <p style="font-size:12px;color:var(--t2);line-height:1.65">Users put in data, time, effort, or social capital. This stored value makes the next trigger more likely. The more invested, the harder to leave. Examples: curating a playlist, building a social graph, training a recommender.</p>
+          </div>
+          <div style="padding:16px 18px;background:rgba(248,113,113,.03)">
+            <div style="font-size:10px;font-family:var(--mono);color:#f87171;margin-bottom:8px;text-transform:uppercase;letter-spacing:.07em">ArtemisAI application</div>
+            <p style="font-size:12px;color:var(--t2);line-height:1.65">Training Art-E (thumbs up/down), connecting collaborator pages, setting alert thresholds — each makes the product more personalised. Show users: "Adding this page will improve your reach predictions by 14%."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team feedback section -->
+      <div style="margin-top:28px">
+        <div class="section-label">Team Feedback Summary</div>
+        <div class="three-col" style="margin-bottom:14px">
+          <div class="card" style="padding:16px 18px">
+            <div style="font-size:10px;font-family:var(--mono);color:var(--accent);margin-bottom:8px">ALEX</div>
+            <p style="font-size:12px;color:var(--t2);line-height:1.6">Activity screen should be the opening screen. Art-E in the centre. Alerts → bell icon only. Keep AI score feature.</p>
+          </div>
+          <div class="card" style="padding:16px 18px">
+            <div style="font-size:10px;font-family:var(--mono);color:var(--amber);margin-bottom:8px">ASAD</div>
+            <p style="font-size:12px;color:var(--t2);line-height:1.6">Too much information on the main page. Should feel more like a social media interface — like Meta. Not "in the face".</p>
+          </div>
+          <div class="card" style="padding:16px 18px">
+            <div style="font-size:10px;font-family:var(--mono);color:var(--purple);margin-bottom:8px">JILL</div>
+            <p style="font-size:12px;color:var(--t2);line-height:1.6">Easy to use and informative. Liked the AI score feature. A lot of repetitive information across screens.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key redesign decisions -->
+      <div class="section-label">Key Redesign Decisions</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px">
+        <div class="book-quote">
+          <p>"Navigation collapses from 9 to 5 destinations. Alerts move to a bell tray. Art-E becomes a floating action button accessible from every screen."</p>
+          <cite>Architecture Decision — Priority 1</cite>
+        </div>
+        <div class="book-quote">
+          <p>"Morning Briefing is redesigned as a post card (Art-E as author), not a dashboard widget. The home screen should feel like scrolling a feed, not reading a report."</p>
+          <cite>Visual Pattern Decision — based on Meta reference</cite>
+        </div>
+        <div class="book-quote">
+          <p>"Variable reward is the most underused Hook stage in the current mockup. The feed must show something new and surprising on each open — which post won this hour, which topic is spiking, which collaborator matched."</p>
+          <cite>Engagement Mechanic — Hooked Framework, Ch. 5</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Quick reference sidebar -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="card-head"><div><div class="card-title">Priority Actions</div><div class="card-sub">Ordered by impact</div></div></div>
+        <div style="padding:12px 16px">
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.03)" id="priorityList">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div><div class="card-title">Screen Map</div><div class="card-sub">Current → Proposed</div></div></div>
+        <div style="padding:12px 16px;font-size:11px">
+          <div style="display:flex;flex-direction:column;gap:4px" id="screenMap"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 2: SUGGESTIONS
+══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-suggestions">
+  <div style="display:grid;grid-template-columns:1fr 300px;gap:24px">
+    <div>
+      <!-- Add suggestion form -->
+      <div class="suggestion-form" id="sugForm">
+        <div class="form-header">
+          <div class="form-header-avatar" id="formAvatar">?</div>
+          <div class="form-header-info">
+            <div class="form-header-name" id="formUserName">Team Member</div>
+            <div class="form-header-role" id="formUserRole">Leaving a suggestion</div>
+          </div>
+        </div>
+        <div class="form-body">
+          <div class="fg">
+            <label>Your Suggestion</label>
+            <textarea id="sugText" rows="3" placeholder="What would you change, add, or remove? Be specific about which screen and why…"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="fg">
+              <label>Screen / Area</label>
+              <select id="sugScreen">
+                <option value="">— Select screen —</option>
+                <option>Home / Activity Feed</option>
+                <option>Dashboard / Analytics</option>
+                <option>Discovery</option>
+                <option>Art-E</option>
+                <option>Alerts</option>
+                <option>Navigation</option>
+                <option>Visual Design</option>
+                <option>Mobile</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>Category</label>
+              <select id="sugCategory">
+                <option value="">— Select type —</option>
+                <option>UX / Flow</option>
+                <option>Visual Design</option>
+                <option>Feature Addition</option>
+                <option>Feature Removal</option>
+                <option>Content / Copy</option>
+                <option>Performance</option>
+                <option>Hooked Pattern</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="fg">
+              <label>Priority Feel</label>
+              <select id="sugPriority">
+                <option value="medium">Medium</option>
+                <option value="high">High — blocking</option>
+                <option value="low">Low — nice to have</option>
+              </select>
+            </div>
+            <div style="display:flex;align-items:flex-end">
+              <button class="submit-btn" onclick="addSuggestion()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Post Suggestion
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="filters" id="sugFilters">
+        <button class="filter-btn active" onclick="filterSuggestions('all', this)">All</button>
+        <button class="filter-btn" onclick="filterSuggestions('UX / Flow', this)">UX / Flow</button>
+        <button class="filter-btn" onclick="filterSuggestions('Visual Design', this)">Visual</button>
+        <button class="filter-btn" onclick="filterSuggestions('Feature Addition', this)">Additions</button>
+        <button class="filter-btn" onclick="filterSuggestions('Feature Removal', this)">Removals</button>
+        <button class="filter-btn" onclick="filterSuggestions('Hooked Pattern', this)">Hooked</button>
+      </div>
+
+      <div id="sugList"></div>
+    </div>
+
+    <!-- Sidebar stats -->
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card">
+        <div class="card-head"><div><div class="card-title">Stats</div></div></div>
+        <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px" id="sugStats"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div><div class="card-title">Top Contributors</div></div></div>
+        <div style="padding:10px 14px" id="topContributors"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 3: KANBAN
+══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-kanban">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+    <div>
+      <div class="section-label">Drag cards between columns to track progress</div>
+    </div>
+    <button onclick="addKanbanItem()" style="font-family:var(--font);font-size:12px;padding:7px 14px;border-radius:8px;border:1px solid rgba(0,212,170,.3);background:rgba(0,212,170,.07);color:var(--accent);cursor:pointer;display:flex;align-items:center;gap:5px">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add Item
+    </button>
+  </div>
+  <div class="kanban-wrap" id="kanbanBoard"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 4: ART-E HOOKED AI
+══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-arteai">
+  <div class="chat-layout">
+    <div class="chat-main">
+      <div class="chat-header">
+        <div class="arte-orb">🧠</div>
+        <div class="arte-header-info">
+          <strong>Art-E</strong>
+          <span>Trained on Hooked by Nir Eyal · Design Intelligence</span>
+        </div>
+        <div style="margin-left:auto;font-size:10px;font-family:var(--mono);color:var(--green);display:flex;align-items:center;gap:5px">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;animation:orbPulse 2s ease-in-out infinite"></span>
+          Ready
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg ai">
+          <div class="msg-avatar">A</div>
+          <div class="msg-bubble">
+            Hey! I'm Art-E, trained on <strong>Hooked by Nir Eyal</strong> and the ArtemisAI design brief.<br><br>
+            I can help you apply the Hook model to specific screens, critique existing patterns, suggest engagement mechanics, or think through the redesign from a behavioural design perspective.<br><br>
+            What would you like to explore?
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <textarea class="chat-input" id="chatInput" placeholder="Ask about Hook stages, screen design, engagement mechanics…" rows="1" onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="chat-send-btn" id="chatSendBtn" onclick="sendChat()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="chat-sidebar">
+      <div class="chat-sidebar-card">
+        <div class="chat-sidebar-head">Quick Prompts</div>
+        <button class="prompt-chip" onclick="sendPrompt(this.textContent)">How should we apply the Trigger stage to the home screen?</button>
+        <button class="prompt-chip" onclick="sendPrompt(this.textContent)">What variable rewards would work best for a Facebook analytics tool?</button>
+        <button class="prompt-chip" onclick="sendPrompt(this.textContent)">How does Meta use the Hook model in their news feed?</button>
+        <button class="prompt-chip" onclick="sendPrompt(this.textContent)">What Investment mechanics make sense for Art-E?</button>
+        <button class="prompt-chip" onclick="sendPrompt(this.textContent)">How should alerts be designed according to Hooked?</button>
+        <button class="prompt-chip" onclick="sendPrompt(this.textContent)">What's the difference between internal and external triggers?</button>
+        <button class="prompt-chip" onclick="sendPrompt(this.textContent)">Review our current home screen against the Hook framework</button>
+        <button class="prompt-chip" onclick="sendPrompt(this.textContent)">What are the three types of variable rewards?</button>
+      </div>
+      <div class="chat-sidebar-card">
+        <div class="chat-sidebar-head">Context</div>
+        <div style="padding:10px 14px;font-size:11px;color:var(--t2);line-height:1.65">Art-E knows: the full Hooked framework, ArtemisAI's product context, current mockup structure, team feedback, and the redesign brief.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end main -->
+
+<script>
+// ══════════════════════════════════════════
+// SESSION
+// ══════════════════════════════════════════
+let _session = null;
+try { _session = JSON.parse(localStorage.getItem('artemis_session')||'null'); } catch(e){}
+if (!_session) { window.location.href = 'admin_login.html'; }
+
+const _name = _session?.name || _session?.username || 'Team';
+const _role = _session?.role || 'Team';
+const _initials = _name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+const _colors = ['#00d4aa','#a78bfa','#fbbf24','#f87171','#34d399','#60a5fa','#fb923c'];
+const _userColor = _colors[_name.length % _colors.length];
+
+document.getElementById('navUserName').textContent = _name;
+document.getElementById('navAvatar').textContent = _initials;
+document.getElementById('formAvatar').textContent = _initials;
+document.getElementById('formAvatar').style.background = `linear-gradient(135deg,${_userColor},var(--purple))`;
+document.getElementById('formUserName').textContent = _name;
+document.getElementById('formUserRole').textContent = _role + ' · leaving a suggestion';
+
+// ══════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector(`[data-tab="${name}"]`).classList.add('active');
+  document.getElementById('tab-'+name).classList.add('active');
+}
+
+// ══════════════════════════════════════════
+// PRIORITY LIST (Hooked tab sidebar)
+// ══════════════════════════════════════════
+const PRIORITIES = [
+  {n:1,text:'Activity Feed as home screen',col:'#f87171'},
+  {n:2,text:'Art-E insight strip above fold',col:'#f87171'},
+  {n:3,text:'Morning Briefing → post card',col:'#f87171'},
+  {n:4,text:'Collapse nav 9→5 sections',col:'#f87171'},
+  {n:5,text:'Bell icon tray for alerts',col:'#fbbf24'},
+  {n:6,text:'Lighter card borders (3%)',col:'#fbbf24'},
+  {n:7,text:'Art-E floating action button',col:'#fbbf24'},
+  {n:8,text:'Train Art-E micro-interaction',col:'#34d399'},
+  {n:9,text:'Streak & milestone badges',col:'#34d399'},
+  {n:10,text:'Collaborator impact display',col:'#34d399'},
+];
+const pl = document.getElementById('priorityList');
+pl.innerHTML = PRIORITIES.map(p=>`
+  <div style="display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.03)">
+    <span style="font-family:var(--mono);font-size:10px;color:${p.col};width:18px;flex-shrink:0;font-weight:600">${p.n}.</span>
+    <span style="font-size:11px;color:var(--t2);line-height:1.4">${p.text}</span>
+  </div>`).join('');
+
+const SCREEN_MAP = [
+  {old:'Feed + Dashboard',neo:'Home (Activity Feed)',col:'#00d4aa'},
+  {old:'Dashboard KPIs',neo:'↑ merged into Home',col:'#7b8ba8'},
+  {old:'Predictions',neo:'Analytics → tab 2',col:'#a78bfa'},
+  {old:'Audience',neo:'Analytics → tab 3',col:'#a78bfa'},
+  {old:'Reports',neo:'Analytics → tab 4',col:'#a78bfa'},
+  {old:'Discovery',neo:'Discovery (unchanged)',col:'#fbbf24'},
+  {old:'Art-E page',neo:'Art-E (FAB + page)',col:'#a78bfa'},
+  {old:'Alerts page',neo:'Bell icon tray',col:'#f87171'},
+  {old:'Settings',neo:'Settings (unchanged)',col:'#7b8ba8'},
+];
+document.getElementById('screenMap').innerHTML = SCREEN_MAP.map(s=>`
+  <div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.03)">
+    <span style="font-size:10px;color:var(--t3);width:100px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.old}</span>
+    <svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5h10M7 1l4 4-4 4" stroke="rgba(255,255,255,.2)" stroke-width="1.2" stroke-linecap="round"/></svg>
+    <span style="font-size:10px;font-family:var(--mono);color:${s.col}">${s.neo}</span>
+  </div>`).join('');
+
+// ══════════════════════════════════════════
+// SUGGESTIONS
+// ══════════════════════════════════════════
+const API = 'https://g6zr0b5lwe.execute-api.eu-west-2.amazonaws.com/default/lambda_save';
+let SUGGESTIONS = JSON.parse(localStorage.getItem('artemis_design_suggestions')||'[]');
+let _sugFilter = 'all';
+
+function saveSugs() { localStorage.setItem('artemis_design_suggestions', JSON.stringify(SUGGESTIONS)); }
+
+function addSuggestion() {
+  const text = document.getElementById('sugText').value.trim();
+  const screen = document.getElementById('sugScreen').value;
+  const cat = document.getElementById('sugCategory').value;
+  const priority = document.getElementById('sugPriority').value;
+  if (!text) { document.getElementById('sugText').focus(); return; }
+  const sug = {
+    id: Date.now(),
+    author: _name, role: _role, initials: _initials, color: _userColor,
+    text, screen, category: cat, priority,
+    timestamp: new Date().toISOString(),
+    votes: 0, voters: [], myVote: false
+  };
+  SUGGESTIONS.unshift(sug);
+  saveSugs();
+  document.getElementById('sugText').value='';
+  document.getElementById('sugScreen').value='';
+  document.getElementById('sugCategory').value='';
+  renderSuggestions();
+  renderSugStats();
+}
+
+function voteSuggestion(id) {
+  const s = SUGGESTIONS.find(x=>x.id===id);
+  if (!s) return;
+  if (s.voters.includes(_name)) {
+    s.votes--; s.voters = s.voters.filter(v=>v!==_name);
+  } else {
+    s.votes++; s.voters.push(_name);
+  }
+  saveSugs(); renderSuggestions();
+}
+
+function deleteSuggestion(id) {
+  const s = SUGGESTIONS.find(x=>x.id===id);
+  if (!s) return;
+  if (s.author !== _name && _role !== 'cto' && _role !== 'admin') return;
+  if (!confirm('Delete this suggestion?')) return;
+  SUGGESTIONS = SUGGESTIONS.filter(x=>x.id!==id);
+  saveSugs(); renderSuggestions(); renderSugStats();
+}
+
+function filterSuggestions(f, btn) {
+  _sugFilter = f;
+  document.querySelectorAll('#sugFilters .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSuggestions();
+}
+
+const catColors = {'UX / Flow':'#00d4aa','Visual Design':'#a78bfa','Feature Addition':'#34d399','Feature Removal':'#f87171','Content / Copy':'#fbbf24','Performance':'#60a5fa','Hooked Pattern':'#fb923c'};
+
+function renderSuggestions() {
+  const el = document.getElementById('sugList');
+  const filtered = _sugFilter === 'all' ? SUGGESTIONS : SUGGESTIONS.filter(s=>s.category===_sugFilter);
+  document.getElementById('sugCount').textContent = SUGGESTIONS.length;
+  if (!filtered.length) {
+    el.innerHTML = `<div class="empty-state"><div>💡</div>No suggestions yet — be the first!</div>`;
+    return;
+  }
+  el.innerHTML = filtered.map(s => {
+    const voted = s.voters.includes(_name);
+    const catCol = catColors[s.category]||'#7b8ba8';
+    const ts = new Date(s.timestamp).toLocaleDateString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+    const canDelete = s.author === _name;
+    return `<div class="sug-card" id="sug-${s.id}">
+      <div class="sug-card-header">
+        <div class="sug-avatar" style="background:linear-gradient(135deg,${s.color},var(--purple))">${s.initials||s.author[0]}</div>
+        <div class="sug-meta">
+          <div class="sug-author">${s.author} <span style="font-size:10px;font-family:var(--mono);color:var(--t3);font-weight:400">${s.role}</span></div>
+          <div class="sug-timestamp">${ts}${s.screen?` · ${s.screen}`:''}</div>
+        </div>
+        ${s.category?`<span class="chip" style="background:${catCol}18;color:${catCol};border:1px solid ${catCol}33">${s.category}</span>`:''}
+      </div>
+      <div class="sug-body">
+        ${s.screen?`<div class="sug-screen">📍 ${s.screen}</div>`:''}
+        <div class="sug-text">${s.text}</div>
+      </div>
+      <div class="sug-footer">
+        <button class="sug-vote-btn ${voted?'voted':''}" onclick="voteSuggestion(${s.id})">
+          ${voted?'❤️':'🤍'} ${s.votes} ${s.votes===1?'vote':'votes'}
+        </button>
+        <span class="sug-priority ${s.priority||'medium'}">${s.priority||'medium'}</span>
+        ${canDelete?`<button onclick="deleteSuggestion(${s.id})" style="margin-left:auto;font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid rgba(248,113,113,.2);background:transparent;color:var(--red);cursor:pointer;font-family:var(--font)">Delete</button>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderSugStats() {
+  const byCat = {};
+  SUGGESTIONS.forEach(s=>{ byCat[s.category||'Uncategorised']=(byCat[s.category||'Uncategorised']||0)+1; });
+  const catEl = document.getElementById('sugStats');
+  const total = SUGGESTIONS.length;
+  const highPri = SUGGESTIONS.filter(s=>s.priority==='high').length;
+  catEl.innerHTML = `
+    <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)">
+      <span style="color:var(--t2)">Total suggestions</span><span style="font-family:var(--mono);color:var(--accent)">${total}</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)">
+      <span style="color:var(--t2)">High priority</span><span style="font-family:var(--mono);color:var(--red)">${highPri}</span>
+    </div>
+    ${Object.entries(byCat).map(([k,v])=>`<div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.03)"><span style="color:var(--t3)">${k}</span><span style="font-family:var(--mono);color:var(--t2)">${v}</span></div>`).join('')}`;
+
+  // Top contributors
+  const byAuthor = {};
+  SUGGESTIONS.forEach(s=>{ byAuthor[s.author]=(byAuthor[s.author]||{count:0,color:s.color});byAuthor[s.author].count++; });
+  const topEl = document.getElementById('topContributors');
+  topEl.innerHTML = Object.entries(byAuthor).sort((a,b)=>b[1].count-a[1].count).slice(0,5).map(([name,data])=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.03)">
+      <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,${data.color},var(--purple));display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#0c1221;flex-shrink:0">${name[0]}</div>
+      <span style="font-size:12px;flex:1">${name}</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--accent)">${data.count}</span>
+    </div>`).join('') || '<div style="font-size:11px;color:var(--t3);padding:8px 0">No suggestions yet</div>';
+}
+
+// ══════════════════════════════════════════
+// KANBAN
+// ══════════════════════════════════════════
+const KANBAN_COLS = [
+  {id:'ideas',title:'Ideas',color:'#a78bfa',dot:'#a78bfa'},
+  {id:'planned',title:'Planned',color:'#fbbf24',dot:'#fbbf24'},
+  {id:'inprogress',title:'In Progress',color:'#00d4aa',dot:'#00d4aa'},
+  {id:'done',title:'Done',color:'#34d399',dot:'#34d399'},
+];
+let KANBAN = JSON.parse(localStorage.getItem('artemis_kanban')||'null') || {
+  ideas:[
+    {id:1,title:'Art-E floating button on all screens',label:'Feature',labelCol:'#a78bfa',priority:'high'},
+    {id:2,title:'Morning Briefing as post card',label:'Visual',labelCol:'#fbbf24',priority:'medium'},
+    {id:3,title:'Bell icon alert tray',label:'UX',labelCol:'#00d4aa',priority:'high'},
+    {id:4,title:'Train Art-E thumbs up/down',label:'Engagement',labelCol:'#f87171',priority:'medium'},
+    {id:5,title:'Streak counter on home',label:'Hook',labelCol:'#fb923c',priority:'low'},
+  ],
+  planned:[
+    {id:6,title:'Collapse nav 9→5 sections',label:'Architecture',labelCol:'#f87171',priority:'high'},
+    {id:7,title:'Art-E insight strip above feed',label:'Feature',labelCol:'#a78bfa',priority:'high'},
+    {id:8,title:'Reduce card border opacity',label:'Visual',labelCol:'#fbbf24',priority:'medium'},
+  ],
+  inprogress:[
+    {id:9,title:'Activity Feed as home screen',label:'Architecture',labelCol:'#f87171',priority:'high'},
+    {id:10,title:'Design Planning Hub page',label:'Internal',labelCol:'#60a5fa',priority:'high'},
+  ],
+  done:[
+    {id:11,title:'Hooked framework analysis doc',label:'Research',labelCol:'#34d399',priority:'high'},
+    {id:12,title:'Team feedback collection',label:'Research',labelCol:'#34d399',priority:'medium'},
+    {id:13,title:'Current mockup audit',label:'Research',labelCol:'#34d399',priority:'medium'},
+  ]
+};
+let _dragItem=null,_dragFrom=null;
+
+function saveKanban(){localStorage.setItem('artemis_kanban',JSON.stringify(KANBAN));}
+
+function renderKanban(){
+  const board=document.getElementById('kanbanBoard');
+  board.innerHTML=KANBAN_COLS.map(col=>{
+    const items=KANBAN[col.id]||[];
+    return`<div class="kanban-col" data-col="${col.id}" ondragover="kanbanDragOver(event,this)" ondrop="kanbanDrop(event,'${col.id}')" ondragleave="this.style.background=''">
+      <div class="kanban-col-header">
+        <div class="kanban-col-title"><span class="kanban-col-dot" style="background:${col.dot}"></span>${col.title}</div>
+        <span class="kanban-col-count">${items.length}</span>
+      </div>
+      <div class="kanban-col-body">
+        ${items.map(item=>`
+          <div class="kanban-item" draggable="true" data-id="${item.id}" data-col="${col.id}"
+            ondragstart="kanbanDragStart(event,${item.id},'${col.id}')"
+            ondragend="kanbanDragEnd(event)">
+            <span class="ki-label" style="background:${item.labelCol}22;color:${item.labelCol};border:1px solid ${item.labelCol}44">${item.label}</span>
+            <div class="ki-title">${item.title}</div>
+            <div class="ki-meta">
+              <span class="sug-priority ${item.priority}" style="margin:0">${item.priority}</span>
+            </div>
+          </div>`).join('')}
+        <button class="add-card-btn" onclick="addKanbanToCol('${col.id}')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add card
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function kanbanDragStart(e,id,col){
+  _dragItem=id; _dragFrom=col;
+  setTimeout(()=>{ const el=document.querySelector(`[data-id="${id}"]`); if(el)el.classList.add('dragging'); },0);
+  e.dataTransfer.effectAllowed='move';
+}
+function kanbanDragEnd(e){
+  document.querySelectorAll('.kanban-item').forEach(el=>el.classList.remove('dragging'));
+  document.querySelectorAll('.kanban-col').forEach(el=>el.style.background='');
+  _dragItem=null; _dragFrom=null;
+}
+function kanbanDragOver(e,el){
+  e.preventDefault();
+  el.style.background='rgba(0,212,170,.03)';
+}
+function kanbanDrop(e,toCol){
+  e.preventDefault();
+  if(!_dragItem||!_dragFrom||_dragFrom===toCol) return;
+  const fromItems=KANBAN[_dragFrom];
+  const idx=fromItems.findIndex(x=>x.id===_dragItem);
+  if(idx<0) return;
+  const [item]=fromItems.splice(idx,1);
+  KANBAN[toCol].push(item);
+  saveKanban(); renderKanban();
+}
+function addKanbanToCol(col){
+  const title=prompt('Card title:');
+  if(!title) return;
+  const id=Date.now();
+  KANBAN[col].push({id,title,label:'Design',labelCol:'#a78bfa',priority:'medium'});
+  saveKanban(); renderKanban();
+}
+function addKanbanItem(){addKanbanToCol('ideas');}
+
+// ══════════════════════════════════════════
+// ART-E CHAT (Anthropic API)
+// ══════════════════════════════════════════
+const SYSTEM_PROMPT = `You are Art-E, an AI design assistant specializing in the Hooked framework by Nir Eyal and behavioral product design.
+
+You have deep expertise in:
+- Hooked (Nir Eyal): Trigger→Action→Variable Reward→Investment cycle
+- Internal vs External Triggers: External (notifications, emails) load the next trigger until users form internal triggers (emotional cues like boredom, anxiety, FOMO)
+- Action stage: B.J. Fogg's Motivation+Ability formula. Reduce friction until action requires less effort than not doing it
+- Variable Reward - 3 types: Tribe (social rewards, feeling connected), Hunt (searching and finding information/resources), Self (mastery, completion, competence)
+- Investment: stored value (data, content, followers, skills) that loads the next trigger and improves future rewards
+- Eyal's ethical framework: manipulation matrix, "would I use this myself?" test
+
+You also know about ArtemisAI specifically:
+- A Facebook analytics SaaS for UK page managers (entertainment, crime, meme pages)
+- Current mockup: 9-screen sidebar app with Feed, Dashboard, Discovery, Predictions, Audience, Reports, Alerts, Art-E, Settings
+- Proposed redesign: collapse to 5 screens (Home/Activity Feed, Analytics, Discovery, Art-E FAB, Settings)
+- Team feedback: Alex wants Activity Feed as home, Art-E central, alerts to bell icon. Asad wants it to feel like Meta. Jill found it informative but repetitive.
+- Art-E is the AI assistant that predicts post performance, optimal timing, and provides insights
+
+Keep responses focused, practical, and specific to the ArtemisAI context when relevant. Be conversational but insightful. Format responses with occasional bold text for key terms. Keep responses under 250 words unless asked to go deep.`;
+
+let chatHistory = [];
+
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  input.style.height = '42px';
+  addMessage('user', msg);
+  chatHistory.push({role:'user',content:msg});
+  const btn = document.getElementById('chatSendBtn');
+  btn.disabled = true;
+  showTyping();
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system: SYSTEM_PROMPT,
+        messages: chatHistory
+      })
+    });
+    const data = await res.json();
+    removeTyping();
+    const reply = data.content?.[0]?.text || 'Sorry, I had trouble responding. Try again.';
+    chatHistory.push({role:'assistant',content:reply});
+    addMessage('ai', reply);
+  } catch(e) {
+    removeTyping();
+    addMessage('ai','Connection issue — please try again.');
+  }
+  btn.disabled = false;
+}
+
+function addMessage(role, text) {
+  const msgs = document.getElementById('chatMessages');
+  const initials = role==='user' ? _initials : 'A';
+  const bg = role==='user' ? `linear-gradient(135deg,${_userColor},var(--accent))` : 'linear-gradient(135deg,var(--purple),var(--accent))';
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  // Convert markdown-style bold to strong tags
+  const formatted = text.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  div.innerHTML = `<div class="msg-avatar" style="background:${bg}">${initials}</div><div class="msg-bubble">${formatted}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg ai'; div.id = 'typingIndicator';
+  div.innerHTML = `<div class="msg-avatar" style="background:linear-gradient(135deg,var(--purple),var(--accent))">A</div><div class="msg-bubble" style="padding:0"><div class="typing-indicator"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div></div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function removeTyping() { const el=document.getElementById('typingIndicator'); if(el)el.remove(); }
+
+function sendPrompt(text) {
+  document.getElementById('chatInput').value = text;
+  sendChat();
+}
+function handleChatKey(e) { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();} }
+function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,120)+'px'; }
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+renderSuggestions();
+renderSugStats();
+renderKanban();
+</script>
+</body>
+</html>
