@@ -1289,6 +1289,346 @@ body{
 }
 .arte-chat-send svg{width:14px;height:14px;fill:white}
 
+
+
+/* ─── LIGHT THEME (toggle via [data-theme="light"] on <html>) ──── */
+html[data-theme="light"]{
+  --bg:#F0F2F5;
+  --bg-elev:#FFFFFF;
+  --bg-elev-2:#F5F6F8;
+  --bg-input:#EBEDF0;
+
+  --teal:#00A085;
+  --teal-d:#008066;
+  --teal-bg:rgba(0,160,133,0.10);
+
+  --arte-1:#5A3FA0;
+  --arte-2:#00A085;
+  --arte-bg:rgba(90,63,160,0.08);
+
+  --crisis:#D33A35;
+  --crisis-bg:rgba(211,58,53,0.08);
+  --opp:#1A8745;
+  --opp-bg:rgba(26,135,69,0.08);
+  --warn:#C77700;
+  --warn-bg:rgba(199,119,0,0.08);
+
+  --t1:#050505;
+  --t2:#65676B;
+  --t3:#8A8D91;
+
+  --bdr:#CED0D4;
+  --bdr-soft:#E4E6EB;
+
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.08);
+  --shadow:0 4px 12px rgba(0,0,0,0.10);
+  --shadow-lg:0 12px 32px rgba(0,0,0,0.18);
+}
+
+/* Light-theme component overrides for elements that bake colors directly */
+html[data-theme="light"] .card-image{
+  background:linear-gradient(135deg,#E0E7EF 0%,#F2F5F8 50%,#FAFBFC 100%);
+}
+html[data-theme="light"] .card-image-text{color:var(--t3)}
+html[data-theme="light"] .briefing-stat{background:var(--bg)}
+html[data-theme="light"] .arte-strip{
+  background:linear-gradient(135deg,rgba(90,63,160,0.08),rgba(0,160,133,0.05));
+  border-color:rgba(90,63,160,0.2);
+}
+html[data-theme="light"] .insight-callout{
+  background:linear-gradient(135deg,rgba(90,63,160,0.07),rgba(0,160,133,0.05));
+  border-color:rgba(90,63,160,0.18);
+}
+html[data-theme="light"] .arte-chat-host{
+  box-shadow:0 24px 64px rgba(90,63,160,0.18);
+}
+html[data-theme="light"] .toast{box-shadow:0 8px 24px rgba(0,0,0,0.15)}
+html[data-theme="light"] .modal{box-shadow:0 24px 64px rgba(0,0,0,0.25)}
+html[data-theme="light"] .modal-overlay{background:rgba(0,0,0,0.45)}
+html[data-theme="light"] .page-avatar{background:linear-gradient(135deg,#E5EAF0,#D1D9E6);color:var(--teal)}
+html[data-theme="light"] .top-page,
+html[data-theme="light"] .toplist-thumb{background:linear-gradient(135deg,#E5EAF0,#D1D9E6);color:var(--teal)}
+html[data-theme="light"] .composer-avatar,
+html[data-theme="light"] .user-avatar,
+html[data-theme="light"] .briefing-avatar{box-shadow:0 0 0 1px rgba(0,0,0,0.05)}
+html[data-theme="light"] .heat-cell{background:#E4E6EB}
+html[data-theme="light"] .heat-cell.h1{background:rgba(0,160,133,0.18)}
+html[data-theme="light"] .heat-cell.h2{background:rgba(0,160,133,0.36)}
+html[data-theme="light"] .heat-cell.h3{background:rgba(0,160,133,0.55)}
+html[data-theme="light"] .heat-cell.h4{background:rgba(0,160,133,0.75)}
+html[data-theme="light"] .heat-cell.h5{background:rgba(0,160,133,0.95)}
+html[data-theme="light"] .spec-watermark{background:var(--bg-elev);box-shadow:var(--shadow-sm)}
+
+/* Theme toggle pill */
+.theme-toggle{
+  display:flex;align-items:center;gap:6px;
+  background:var(--bg-input);
+  border-radius:9999px;padding:4px;
+  border:none;cursor:pointer;
+  margin-right:6px;height:36px;
+}
+.theme-toggle-opt{
+  width:28px;height:28px;border-radius:50%;
+  display:grid;place-items:center;
+  color:var(--t2);transition:all .2s;
+}
+.theme-toggle-opt.active{
+  background:var(--bg-elev);color:var(--teal);
+  box-shadow:0 1px 3px rgba(0,0,0,0.15);
+}
+.theme-toggle-opt svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* ─── STORIES STRIP (Tribe reward — every page's daily moment) ──── */
+.stories-strip{
+  display:flex;gap:8px;overflow-x:auto;
+  padding:12px 4px 14px;margin-bottom:12px;
+  scroll-snap-type:x mandatory;
+}
+.stories-strip::-webkit-scrollbar{display:none}
+.stories-strip{scrollbar-width:none}
+.story-tile{
+  flex:0 0 96px;height:148px;border-radius:14px;
+  position:relative;cursor:pointer;overflow:hidden;
+  scroll-snap-align:start;
+  background-size:cover;background-position:center;
+  transition:transform .2s;
+  border:1px solid var(--bdr-soft);
+}
+.story-tile:hover{transform:translateY(-3px)}
+
+/* "Add story" tile = create post quick-action */
+.story-tile.create{
+  background:var(--bg-elev);
+  border:2px dashed var(--bdr);
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  padding-bottom:10px;
+}
+.story-tile.create::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:96px;
+  background:linear-gradient(135deg,var(--teal-bg),transparent);
+}
+.story-tile.create .plus{
+  position:absolute;top:36px;left:50%;transform:translateX(-50%);
+  width:36px;height:36px;border-radius:50%;
+  background:var(--teal);color:#0a1410;
+  display:grid;place-items:center;
+  border:3px solid var(--bg-elev);
+  font-weight:800;font-size:18px;
+}
+.story-tile.create .lbl{
+  position:relative;z-index:1;color:var(--t1);
+  font-size:11px;font-weight:600;text-align:center;
+  line-height:1.3;
+}
+
+/* Page story tile — gradient bg + page initials + insight badge */
+.story-tile.page-story{
+  background:linear-gradient(160deg,var(--bg-elev) 0%,var(--bg-elev-2) 100%);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:8px;
+}
+.story-tile.page-story::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:radial-gradient(120% 80% at 30% 10%, var(--page-tint, rgba(0,196,160,0.18)) 0%, transparent 60%);
+}
+.story-tile.page-story > *{position:relative;z-index:1}
+.story-page-name{
+  font-size:11px;font-weight:700;color:var(--t1);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.story-page-avatar{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(0,0,0,0.4);backdrop-filter:blur(6px);
+  display:grid;place-items:center;
+  font-weight:800;font-size:13px;color:var(--teal);
+  border:1.5px solid var(--page-ring,var(--teal));
+  align-self:flex-start;
+}
+html[data-theme="light"] .story-page-avatar{background:rgba(255,255,255,0.85)}
+.story-mvp-badge{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:9px;font-weight:700;letter-spacing:0.02em;
+  background:rgba(0,0,0,0.45);backdrop-filter:blur(6px);
+  border-radius:9999px;padding:3px 7px;
+  color:white;width:fit-content;
+  text-transform:uppercase;
+}
+html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
+.story-mvp-badge.viral{color:#FBBF24;background:rgba(40,15,8,0.82)}
+.story-mvp-badge.crisis{color:#FCA5A5;background:rgba(40,8,8,0.82)}
+.story-mvp-badge.sentiment{color:#86EFAC;background:rgba(8,30,15,0.82)}
+.story-mvp-badge.timing{color:#C4B5FD;background:rgba(20,8,40,0.82)}
+.story-mvp-badge.match{color:#7DD3FC;background:rgba(8,18,35,0.82)}
+.story-mvp-badge svg{width:9px;height:9px;fill:currentColor}
+.story-headline{
+  font-size:12px;font-weight:700;color:var(--t1);
+  line-height:1.25;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.story-metric{
+  font-size:14px;font-weight:800;
+  color:var(--story-color,var(--teal));
+  margin-top:1px;font-variant-numeric:tabular-nums;
+}
+.story-time{font-size:9.5px;color:var(--t2);font-weight:500}
+
+/* Story modal viewer (Instagram-like full-tap) */
+.story-viewer{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);
+  display:none;z-index:400;
+  align-items:center;justify-content:center;
+}
+.story-viewer.open{display:flex}
+.story-viewer-card{
+  width:380px;max-width:92vw;height:680px;max-height:88vh;
+  background:linear-gradient(160deg,#1a2030,#0c1729);
+  border-radius:18px;overflow:hidden;
+  display:flex;flex-direction:column;
+  position:relative;
+  box-shadow:0 24px 80px rgba(0,0,0,0.7);
+}
+.story-viewer-progress{
+  position:absolute;top:8px;left:12px;right:12px;
+  display:flex;gap:3px;z-index:5;
+}
+.story-prog-seg{
+  flex:1;height:3px;background:rgba(255,255,255,0.25);
+  border-radius:2px;overflow:hidden;
+}
+.story-prog-seg.active::after{
+  content:'';display:block;height:100%;
+  background:white;width:0;
+  animation:storyFill 6s linear forwards;
+}
+.story-prog-seg.done{background:white}
+@keyframes storyFill{from{width:0}to{width:100%}}
+.story-viewer-header{
+  position:absolute;top:18px;left:12px;right:12px;
+  display:flex;align-items:center;gap:10px;z-index:5;
+  color:white;
+}
+.story-viewer-avatar{
+  width:34px;height:34px;border-radius:8px;
+  background:linear-gradient(135deg,#1a2a3e,#0c1729);
+  display:grid;place-items:center;font-weight:700;color:#00C4A0;
+  border:2px solid white;font-size:13px;
+}
+.story-viewer-name{font-weight:700;font-size:14px}
+.story-viewer-time{font-size:11px;opacity:0.7}
+.story-viewer-close{
+  margin-left:auto;background:transparent;border:none;color:white;cursor:pointer;
+  width:32px;height:32px;display:grid;place-items:center;
+}
+.story-viewer-close svg{width:20px;height:20px;fill:none;stroke:white;stroke-width:2.5}
+.story-viewer-body{
+  flex:1;padding:80px 24px 24px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  color:white;position:relative;
+  background-size:cover;background-position:center;
+}
+.story-viewer-body::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 0%,transparent 40%,rgba(0,0,0,0.7) 100%);
+}
+.story-viewer-body > *{position:relative;z-index:2}
+.story-viewer-mvp{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 10px;border-radius:9999px;width:fit-content;margin-bottom:14px;
+  background:rgba(255,255,255,0.18);color:white;
+  backdrop-filter:blur(8px);
+}
+.story-viewer-headline{
+  font-size:24px;font-weight:800;line-height:1.18;
+  margin-bottom:6px;letter-spacing:-0.02em;
+}
+.story-viewer-detail{
+  font-size:13px;line-height:1.5;opacity:0.92;margin-bottom:12px;
+}
+.story-viewer-stat-row{
+  display:flex;gap:14px;margin-bottom:14px;
+}
+.story-viewer-stat{
+  flex:1;background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:10px;padding:10px;backdrop-filter:blur(8px);
+}
+.story-viewer-stat-val{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
+.story-viewer-stat-lbl{font-size:10px;opacity:0.75;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px}
+.story-viewer-actions{display:flex;gap:8px}
+.story-viewer-btn{
+  flex:1;padding:10px;border-radius:10px;
+  border:1px solid rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.1);backdrop-filter:blur(8px);
+  color:white;font-family:inherit;font-weight:600;font-size:13px;
+  cursor:pointer;transition:background .15s;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.story-viewer-btn:hover{background:rgba(255,255,255,0.18)}
+.story-viewer-btn.primary{background:#00C4A0;color:#0a1410;border-color:#00C4A0}
+.story-viewer-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+.story-viewer-nav{
+  position:absolute;top:0;width:50%;height:100%;
+  background:transparent;border:none;cursor:pointer;z-index:4;
+}
+.story-viewer-nav.left{left:0}
+.story-viewer-nav.right{right:0}
+
+/* MVP capability ribbon — single line that explains why we're seeing this in the feed */
+.cap-ribbon{
+  display:flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:700;letter-spacing:0.04em;
+  text-transform:uppercase;color:var(--t2);
+  padding:6px 12px;margin:-4px 0 0;
+}
+.cap-ribbon svg{width:11px;height:11px;fill:currentColor}
+.cap-ribbon .cap-name{color:var(--teal)}
+
+/* MVP Capability rail — bottom of home, shows what's powering this */
+.mvp-rail{
+  background:var(--bg-elev);border-radius:var(--r);padding:14px 16px;
+  margin-bottom:12px;
+}
+.mvp-rail-head{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;
+}
+.mvp-rail-title{font-size:13px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:8px}
+.mvp-rail-title .pulse-dot{
+  width:8px;height:8px;background:var(--opp);border-radius:50%;
+  animation:pulse 1.6s ease-in-out infinite;
+}
+.mvp-rail-link{font-size:11px;color:var(--teal);font-weight:600;cursor:pointer}
+.mvp-rail-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:8px;
+}
+.mvp-cap{
+  display:flex;flex-direction:column;align-items:flex-start;gap:4px;
+  padding:8px;border-radius:8px;
+  background:var(--bg);cursor:pointer;
+  transition:background .15s;
+}
+.mvp-cap:hover{background:var(--bg-elev-2)}
+.mvp-cap-icon{
+  width:24px;height:24px;border-radius:6px;
+  display:grid;place-items:center;
+}
+.mvp-cap-icon svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.2}
+.mvp-cap.sentiment .mvp-cap-icon{background:var(--opp-bg);color:var(--opp)}
+.mvp-cap.virality .mvp-cap-icon{background:var(--warn-bg);color:var(--warn)}
+.mvp-cap.timing .mvp-cap-icon{background:var(--arte-bg);color:var(--arte-1)}
+.mvp-cap.match .mvp-cap-icon{background:var(--teal-bg);color:var(--teal)}
+.mvp-cap.crisis .mvp-cap-icon{background:var(--crisis-bg);color:var(--crisis)}
+.mvp-cap-name{font-size:11px;font-weight:700;color:var(--t1)}
+.mvp-cap-status{font-size:10px;color:var(--t2)}
+.mvp-cap-status.live{color:var(--opp)}
+.mvp-cap-status.live::before{content:'● '}
+
+@media(max-width:780px){
+  .mvp-rail-grid{grid-template-columns:repeat(2,1fr)}
+}
 </style>
 </head>
 <body>
@@ -1314,6 +1654,10 @@ body{
     <button class="icon-btn" title="Notifications">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22a2.5 2.5 0 002.5-2.5h-5A2.5 2.5 0 0012 22zm6.5-7v-4.5a6.5 6.5 0 10-13 0V15L4 17v1h16v-1z"/></svg>
       <span class="badge">3</span>
+    </button>
+    <button class="theme-toggle" id="themeToggle" title="Switch theme">
+      <span class="theme-toggle-opt active" data-theme-set="dark" title="Dark"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+      <span class="theme-toggle-opt" data-theme-set="light" title="Light"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>
     </button>
     <div class="user-avatar" title="Asad Ikram">A</div>
   </header>
@@ -1414,294 +1758,492 @@ body{
     <div class="feed-inner">
       <div class="page active" id="page-home">
 
-      <!-- TAB STRIP — 3 only, FB Marketplace style -->
-      <div class="feed-tabs">
-        <button class="feed-tab active">
-          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-          For you
-        </button>
-        <button class="feed-tab">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          Live
-        </button>
-        <button class="feed-tab">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92V21a1 1 0 01-1.11 1A19.79 19.79 0 012 4.18 1 1 0 013 3h4.09a1 1 0 011 .75l1 4a1 1 0 01-.27 1L7.21 10.79a16 16 0 006 6l2-1.6a1 1 0 011-.27l4 1a1 1 0 01.79 1z"/></svg>
-          Action items
-          <span class="badge-mini">3</span>
-        </button>
-      </div>
-
-      <!-- ART-E INSIGHT STRIP — TOP, INTERNAL TRIGGER ANSWER -->
-      <div class="arte-strip">
-        <div class="arte-orb">
-          <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
-        </div>
-        <div class="arte-text">
-          <div class="arte-label">Art-E · Your morning answer</div>
-          <div class="arte-message">Best post window today: <strong>Tuesday 6PM</strong> — your audience is +34% more active than average. Three pages are ready to post.</div>
-        </div>
-        <div class="arte-arrow">
-          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </div>
-
-      <!-- COMPOSER (write a new post) -->
-      <div class="composer-wrap card" style="padding:0">
-        <div style="display:flex;align-items:center;gap:10px;padding:12px 16px">
-          <div class="composer-avatar">A</div>
-          <button class="composer-input">What are you posting today, Asad?</button>
-        </div>
-        <div class="composer-actions">
-          <button class="composer-btn predict">
-            <svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
-            Predict score
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- TAB STRIP: Now / Today / Action items                       -->
+        <!-- (Was: For you / Live / Action items — re-thought)           -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <div class="feed-tabs">
+          <button class="feed-tab active">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+            Now
           </button>
-          <button class="composer-btn arte">
-            <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
-            Ask Art-E
-          </button>
-          <button class="composer-btn">
+          <button class="feed-tab">
             <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-            Schedule
+            Today
+          </button>
+          <button class="feed-tab">
+            <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2z"/></svg>
+            Action items
+            <span class="badge-mini">3</span>
           </button>
         </div>
-      </div>
 
-      <!-- CRISIS BANNER — only when active -->
-      <div class="alert-banner">
-        <div class="alert-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 6v6m0 4h.01"/></svg>
-        </div>
-        <div class="alert-content">
-          <div class="alert-title">Brand risk on Drinking Memes <span class="alert-cat">Crisis</span></div>
-          <div class="alert-msg">23 negative comments in 4 minutes on your 6PM post. Sentiment dropping fast — Art-E recommends a response within the hour.</div>
-          <div class="alert-actions">
-            <button class="alert-btn">Respond now</button>
-            <button class="alert-btn-ghost">Mute 24h</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 1️⃣  MORNING BRIEFING — Looks like an FB post from Art-E -->
-      <div class="briefing-card">
-        <div class="briefing-head">
-          <div class="briefing-avatar">
+        <!-- ART-E INSIGHT STRIP — answers internal trigger -->
+        <div class="arte-strip">
+          <div class="arte-orb">
             <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg>
           </div>
-          <div class="briefing-meta">
-            <div class="briefing-author">
-              Art-E
-              <span class="verified"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </div>
-            <div class="briefing-time">Morning briefing · 7:02 AM · For your 5 pages</div>
+          <div class="arte-text">
+            <div class="arte-label">Art-E · Your morning answer</div>
+            <div class="arte-message">Best post window today: <strong>Tuesday 6PM</strong> — your audience is +34% more active than average. Three pages are ready to post.</div>
+          </div>
+          <div class="arte-arrow">
+            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
           </div>
         </div>
-        <div class="briefing-body">
-          Good morning. Your network had a strong night — total reach is up <strong>+18% vs last Tuesday</strong>, with Kelpie Daily leading after a meme post crossed 12K shares before midnight. Two opportunities to act on today: the 6PM window for Drinking Memes, and a fresh collab match worth a look.
-        </div>
-        <div class="briefing-stats">
-          <div class="briefing-stat">
-            <div class="briefing-stat-val up">+18%</div>
-            <div class="briefing-stat-lbl">Network reach</div>
-          </div>
-          <div class="briefing-stat">
-            <div class="briefing-stat-val">12.4K</div>
-            <div class="briefing-stat-lbl">Shares overnight</div>
-          </div>
-          <div class="briefing-stat">
-            <div class="briefing-stat-val purp">91</div>
-            <div class="briefing-stat-lbl">Avg AI score</div>
-          </div>
-        </div>
-        <div class="briefing-actions">
-          <button class="briefing-btn primary">
-            <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-            Read full briefing
-          </button>
-          <button class="briefing-btn">
-            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-            Ask Art-E
-          </button>
-          <button class="briefing-btn">
-            <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51L8.59 10.49"/></svg>
-            Share
-          </button>
-        </div>
-      </div>
 
-      <!-- 2️⃣  HUNT REWARD — Post Performance Card -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-icon hunt">
-            <svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg>
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- STORIES STRIP — Tribe reward + MVP feature showcase         -->
+        <!-- Each story = one of your pages had a moment worth seeing    -->
+        <!-- Tap any story to see the AI capability that found it        -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <div class="stories-strip" id="storiesStrip">
+          <!-- Create Story = quick post -->
+          <div class="story-tile create" data-story="create">
+            <div class="plus">+</div>
+            <div class="lbl">Post to a page</div>
           </div>
-          <div class="card-meta">
-            <div class="card-title">
-              <span class="card-title-page">Drinking Memes</span> · 6PM post
-              <span class="reward-chip hunt">Hunt</span>
-            </div>
-            <div class="card-sub">Outperformed average by 3.2× <span class="dot"></span> 2 hours ago</div>
-          </div>
-          <div class="score-circle" title="AI Score: 91">
-            <svg viewBox="0 0 50 50">
-              <circle class="track" cx="25" cy="25" r="22"/>
-              <circle class="fill" cx="25" cy="25" r="22" stroke-dasharray="138" stroke-dashoffset="12"/>
-            </svg>
-            <div class="score-text">91</div>
-          </div>
-        </div>
-        <div class="card-image">
-          <div class="card-image-text">[Post preview · meme image]</div>
-        </div>
-        <div class="card-stats">
-          <span><span class="stat-num">2.4K</span> reactions</span>
-          <span><span class="stat-num">184</span> comments</span>
-          <span><span class="stat-num">312</span> shares</span>
-        </div>
-        <div class="card-actions">
-          <button class="card-action primary">
-            <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>
-            Repost
-          </button>
-          <button class="card-action arte">
-            <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
-            Why it worked
-          </button>
-          <button class="card-action">
-            <svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg>
-            Full analytics
-          </button>
-        </div>
-      </div>
 
-      <!-- 3️⃣  TRIBE REWARD — Collab Match -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-icon tribe">
+          <!-- Story 1: Drinking Memes — Going Viral (Virality MVP) -->
+          <div class="story-tile page-story" data-story="0" style="--page-tint:rgba(251,191,36,0.30)">
+            <div class="story-page-avatar" style="--page-ring:#FBBF24">DM</div>
+            <div>
+              <span class="story-mvp-badge viral">
+                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                Virality
+              </span>
+              <div class="story-headline" style="margin-top:6px">Going viral — 3.2× reach</div>
+              <div class="story-metric" style="--story-color:#FBBF24">+312%</div>
+              <div class="story-time">2h ago</div>
+            </div>
+          </div>
+
+          <!-- Story 2: Drinking Memes — Brand Risk (Crisis MVP) -->
+          <div class="story-tile page-story" data-story="1" style="--page-tint:rgba(229,57,53,0.30)">
+            <div class="story-page-avatar" style="--page-ring:#E53935">DM</div>
+            <div>
+              <span class="story-mvp-badge crisis">
+                <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2z"/></svg>
+                Crisis
+              </span>
+              <div class="story-headline" style="margin-top:6px">23 negative comments</div>
+              <div class="story-metric" style="--story-color:#E53935">−42%</div>
+              <div class="story-time">3m ago</div>
+            </div>
+          </div>
+
+          <!-- Story 3: Kelpie Daily — Sentiment Spike (Sentiment MVP) -->
+          <div class="story-tile page-story" data-story="2" style="--page-tint:rgba(34,197,94,0.30)">
+            <div class="story-page-avatar" style="--page-ring:#22C55E">KD</div>
+            <div>
+              <span class="story-mvp-badge sentiment">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                Sentiment
+              </span>
+              <div class="story-headline" style="margin-top:6px">+18% positive comments</div>
+              <div class="story-metric" style="--story-color:#22C55E">0.94</div>
+              <div class="story-time">4h ago</div>
+            </div>
+          </div>
+
+          <!-- Story 4: Drinking Memes — Optimal Window (Timing MVP) -->
+          <div class="story-tile page-story" data-story="3" style="--page-tint:rgba(124,92,191,0.32)">
+            <div class="story-page-avatar" style="--page-ring:#7C5CBF">DM</div>
+            <div>
+              <span class="story-mvp-badge timing">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                Timing
+              </span>
+              <div class="story-headline" style="margin-top:6px">Window opens — 6PM Tue</div>
+              <div class="story-metric" style="--story-color:#7C5CBF">+34%</div>
+              <div class="story-time">in 1h</div>
+            </div>
+          </div>
+
+          <!-- Story 5: Fri Night Chaos — Audience Match (Match MVP) -->
+          <div class="story-tile page-story" data-story="4" style="--page-tint:rgba(96,165,250,0.28)">
+            <div class="story-page-avatar" style="--page-ring:#60A5FA">FN</div>
+            <div>
+              <span class="story-mvp-badge match">
+                <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M11.65 11.65l3.7 3.7"/></svg>
+                Match
+              </span>
+              <div class="story-headline" style="margin-top:6px">94% audience overlap</div>
+              <div class="story-metric" style="--story-color:#60A5FA">89K</div>
+              <div class="story-time">just now</div>
+            </div>
+          </div>
+
+          <!-- Story 6: UK Jail News — Trend Spike (Virality MVP) -->
+          <div class="story-tile page-story" data-story="5" style="--page-tint:rgba(251,191,36,0.30)">
+            <div class="story-page-avatar" style="--page-ring:#FBBF24">UK</div>
+            <div>
+              <span class="story-mvp-badge viral">
+                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                Trend
+              </span>
+              <div class="story-headline" style="margin-top:6px">Prison drama trending</div>
+              <div class="story-metric" style="--story-color:#FBBF24">+340%</div>
+              <div class="story-time">15m ago</div>
+            </div>
+          </div>
+
+          <!-- Story 7: Prison Biscuit — Streak (Self reward) -->
+          <div class="story-tile page-story" data-story="6" style="--page-tint:rgba(0,196,160,0.25)">
+            <div class="story-page-avatar" style="--page-ring:#00C4A0">PB</div>
+            <div>
+              <span class="story-mvp-badge sentiment">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                Growing
+              </span>
+              <div class="story-headline" style="margin-top:6px">12 new followers today</div>
+              <div class="story-metric" style="--story-color:#00C4A0">+12</div>
+              <div class="story-time">today</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- COMPOSER — re-thought                                       -->
+        <!-- 3 buttons: Predict score (the headline AI feature),         -->
+        <!--           Find best time (timing engine),                   -->
+        <!--           Ask Art-E (chat).                                 -->
+        <!-- Schedule moved to inside Predict modal as a follow-up.      -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <div class="composer-wrap card" style="padding:0">
+          <div style="display:flex;align-items:center;gap:10px;padding:12px 16px">
+            <div class="composer-avatar">A</div>
+            <button class="composer-input">Draft a post — Art-E will score it before you publish</button>
+          </div>
+          <div class="composer-actions">
+            <button class="composer-btn predict">
+              <svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg>
+              Predict score
+            </button>
+            <button class="composer-btn predict">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              Find best time
+            </button>
+            <button class="composer-btn arte">
+              <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+              Ask Art-E
+            </button>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- CRISIS BANNER — Crisis Detection MVP made visible           -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <div class="alert-banner">
+          <div class="alert-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 6v6m0 4h.01"/></svg>
+          </div>
+          <div class="alert-content">
+            <div class="alert-title">Brand risk on Drinking Memes <span class="alert-cat">Crisis</span></div>
+            <div class="alert-msg">23 negative comments in 4 minutes on your 6PM post. Sentiment dropping fast — Art-E recommends a response within the hour.</div>
+            <div class="alert-actions">
+              <button class="alert-btn">Respond now</button>
+              <button class="alert-btn-ghost">Mute 24h</button>
+            </div>
+          </div>
+        </div>
+        <div class="cap-ribbon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01" stroke="var(--bg-elev)" stroke-width="2" fill="none"/></svg>
+          Powered by <span class="cap-name">Sentiment + Crisis Detection</span> · trained on 50K labelled posts
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- MORNING BRIEFING — Art-E as author, FB-post style           -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <div class="briefing-card">
+          <div class="briefing-head">
+            <div class="briefing-avatar">
+              <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg>
+            </div>
+            <div class="briefing-meta">
+              <div class="briefing-author">
+                Art-E
+                <span class="verified"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+              <div class="briefing-time">Morning briefing · 7:02 AM · Across your 5 pages</div>
+            </div>
+          </div>
+          <div class="briefing-body">
+            Good morning. Strong night across the network — total reach is up <strong>+18% vs last Tuesday</strong>, with Kelpie Daily leading after a meme post crossed 12K shares before midnight. Two opportunities to act on today: the 6PM window for Drinking Memes, and a fresh collab match worth a look.
+          </div>
+          <div class="briefing-stats">
+            <div class="briefing-stat">
+              <div class="briefing-stat-val up">+18%</div>
+              <div class="briefing-stat-lbl">Network reach</div>
+            </div>
+            <div class="briefing-stat">
+              <div class="briefing-stat-val">12.4K</div>
+              <div class="briefing-stat-lbl">Shares overnight</div>
+            </div>
+            <div class="briefing-stat">
+              <div class="briefing-stat-val purp">91</div>
+              <div class="briefing-stat-lbl">Avg AI score</div>
+            </div>
+          </div>
+          <div class="briefing-actions">
+            <button class="briefing-btn primary">
+              <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+              Read full briefing
+            </button>
+            <button class="briefing-btn">
+              <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+              Ask Art-E
+            </button>
+            <button class="briefing-btn">
+              <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51L8.59 10.49"/></svg>
+              Share
+            </button>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- HUNT — Post Performance (Virality model)                    -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon hunt">
+              <svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg>
+            </div>
+            <div class="card-meta">
+              <div class="card-title">
+                <span class="card-title-page">Drinking Memes</span> · 6PM post
+                <span class="reward-chip hunt">Hunt</span>
+              </div>
+              <div class="card-sub">Outperformed average by 3.2× <span class="dot"></span> 2 hours ago</div>
+            </div>
+            <div class="score-circle" title="AI Score: 91">
+              <svg viewBox="0 0 50 50">
+                <circle class="track" cx="25" cy="25" r="22"/>
+                <circle class="fill" cx="25" cy="25" r="22" stroke-dasharray="138" stroke-dashoffset="12"/>
+              </svg>
+              <div class="score-text">91</div>
+            </div>
+          </div>
+          <div class="card-image">
+            <div class="card-image-text">[Post preview · meme image]</div>
+          </div>
+          <div class="card-stats">
+            <span><span class="stat-num">2.4K</span> reactions</span>
+            <span><span class="stat-num">184</span> comments</span>
+            <span><span class="stat-num">312</span> shares</span>
+          </div>
+          <div class="card-actions">
+            <button class="card-action primary">
+              <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>
+              Repost
+            </button>
+            <button class="card-action arte">
+              <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+              Why it worked
+            </button>
+            <button class="card-action">
+              <svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg>
+              Full analytics
+            </button>
+          </div>
+          <div class="cap-ribbon">
+            <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/></svg>
+            Powered by <span class="cap-name">Virality Prediction Model</span> · 52 features · trained on your past posts
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- TRIBE — Collab Match (Audience overlap clustering)          -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon tribe">
+              <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M11.65 11.65l3.7 3.7"/></svg>
+            </div>
+            <div class="card-meta">
+              <div class="card-title">
+                New collab match
+                <span class="reward-chip tribe">Tribe</span>
+              </div>
+              <div class="card-sub"><span class="card-title-page">Fri Night Chaos</span> · 89K followers <span class="dot"></span> Found just now</div>
+            </div>
+          </div>
+          <div class="card-body">Their audience overlaps yours by 34% with strong shared interest in pub-culture humour. 7 topics in common with your top performers.</div>
+          <div class="match-bars">
+            <div class="match-row">
+              <div class="match-label">Audience overlap</div>
+              <div class="match-bar-track"><div class="match-bar-fill" style="width:94%"></div></div>
+              <div class="match-pct">94%</div>
+            </div>
+            <div class="match-row">
+              <div class="match-label">Topic similarity</div>
+              <div class="match-bar-track"><div class="match-bar-fill" style="width:78%"></div></div>
+              <div class="match-pct">78%</div>
+            </div>
+            <div class="match-row">
+              <div class="match-label">Posting time alignment</div>
+              <div class="match-bar-track"><div class="match-bar-fill" style="width:65%"></div></div>
+              <div class="match-pct">65%</div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="card-action primary">
+              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              Connect
+            </button>
+            <button class="card-action">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+              View page
+            </button>
+            <button class="card-action">
+              <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              Not now
+            </button>
+          </div>
+          <div class="cap-ribbon">
             <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M11.65 11.65l3.7 3.7"/></svg>
-          </div>
-          <div class="card-meta">
-            <div class="card-title">
-              New collab match
-              <span class="reward-chip tribe">Tribe</span>
-            </div>
-            <div class="card-sub"><span class="card-title-page">Fri Night Chaos</span> · 89K followers <span class="dot"></span> Found just now</div>
+            Powered by <span class="cap-name">K-Means Audience Clustering</span> · cross-page topic embeddings
           </div>
         </div>
-        <div class="card-body">Their audience overlaps yours by 34% with strong shared interest in pub-culture humour. 7 topics in common with your top performers.</div>
-        <div class="match-bars">
-          <div class="match-row">
-            <div class="match-label">Audience overlap</div>
-            <div class="match-bar-track"><div class="match-bar-fill" style="width:94%"></div></div>
-            <div class="match-pct">94%</div>
-          </div>
-          <div class="match-row">
-            <div class="match-label">Topic similarity</div>
-            <div class="match-bar-track"><div class="match-bar-fill" style="width:78%"></div></div>
-            <div class="match-pct">78%</div>
-          </div>
-          <div class="match-row">
-            <div class="match-label">Posting time alignment</div>
-            <div class="match-bar-track"><div class="match-bar-fill" style="width:65%"></div></div>
-            <div class="match-pct">65%</div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <button class="card-action primary">
-            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-            Connect
-          </button>
-          <button class="card-action">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
-            View page
-          </button>
-          <button class="card-action">
-            <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
-            Not now
-          </button>
-        </div>
-      </div>
 
-      <!-- 4️⃣  HUNT REWARD — Trend Alert -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-icon hunt">
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- HUNT — Trend Detection (Topic trend spike)                  -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon hunt">
+              <svg viewBox="0 0 24 24"><path d="M2 12h2l3-9 6 18 3-9h6"/></svg>
+            </div>
+            <div class="card-meta">
+              <div class="card-title">
+                "Prison drama" trending in your niche
+                <span class="reward-chip hunt">Hunt</span>
+              </div>
+              <div class="card-sub">+340% mentions vs last week <span class="dot"></span> Estimated peak window: next 4 hours</div>
+            </div>
+          </div>
+          <div class="card-body">Your UK Jail News page is positioned to capture this. Art-E predicts a post in this slot would score <strong>92</strong> — your highest forecast this week.</div>
+          <div class="card-actions">
+            <button class="card-action arte">
+              <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+              Draft a post
+            </button>
+            <button class="card-action">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              See trend data
+            </button>
+            <button class="card-action">
+              <svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>
+              Hide
+            </button>
+          </div>
+          <div class="cap-ribbon">
             <svg viewBox="0 0 24 24"><path d="M2 12h2l3-9 6 18 3-9h6"/></svg>
-          </div>
-          <div class="card-meta">
-            <div class="card-title">
-              "Prison drama" trending in your niche
-              <span class="reward-chip hunt">Hunt</span>
-            </div>
-            <div class="card-sub">+340% mentions vs last week <span class="dot"></span> Estimated peak window: next 4 hours</div>
+            Powered by <span class="cap-name">Topic Classification</span> · DeBERTa-v3 zero-shot
           </div>
         </div>
-        <div class="card-body">Your UK Jail News page is positioned to capture this. Art-E predicts a post in this slot would score <strong>92</strong> — your highest forecast this week.</div>
-        <div class="card-actions">
-          <button class="card-action arte">
-            <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
-            Draft a post
-          </button>
-          <button class="card-action">
-            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            See trend data
-          </button>
-          <button class="card-action">
-            <svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>
-            Hide
-          </button>
-        </div>
-      </div>
 
-      <!-- 5️⃣  SELF REWARD — Streak / Mastery -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-icon self">
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- SELF — Streak (Mastery reward)                              -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon self">
+              <svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+            </div>
+            <div class="card-meta">
+              <div class="card-title">
+                You're on a 6-day streak
+                <span class="reward-chip self">Self</span>
+              </div>
+              <div class="card-sub">Post today to extend it · Best streak: 14 days</div>
+            </div>
+          </div>
+          <div class="streak-row">
+            <div class="streak-day done">M</div>
+            <div class="streak-day done">T</div>
+            <div class="streak-day done">W</div>
+            <div class="streak-day done">T</div>
+            <div class="streak-day done">F</div>
+            <div class="streak-day done">S</div>
+            <div class="streak-day today">S</div>
+          </div>
+          <div class="card-actions">
+            <button class="card-action primary">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Post now
+            </button>
+            <button class="card-action">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              Schedule
+            </button>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- OPPORTUNITY BANNER — Viral Spike Detection                  -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <div class="alert-banner opp">
+          <div class="alert-icon">
             <svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
           </div>
-          <div class="card-meta">
-            <div class="card-title">
-              You're on a 6-day streak
-              <span class="reward-chip self">Self</span>
+          <div class="alert-content">
+            <div class="alert-title">Kelpie Daily post going viral <span class="alert-cat">Opportunity</span></div>
+            <div class="alert-msg">3.2× average reach in the first 90 minutes — strongest velocity in 30 days. Reshare across your other pages now to capture the wave.</div>
+            <div class="alert-actions">
+              <button class="alert-btn">Reshare now</button>
+              <button class="alert-btn-ghost">View live</button>
             </div>
-            <div class="card-sub">Post today to extend it · Best streak: 14 days</div>
           </div>
         </div>
-        <div class="streak-row">
-          <div class="streak-day done">M</div>
-          <div class="streak-day done">T</div>
-          <div class="streak-day done">W</div>
-          <div class="streak-day done">T</div>
-          <div class="streak-day done">F</div>
-          <div class="streak-day done">S</div>
-          <div class="streak-day today">S</div>
-        </div>
-        <div class="card-actions">
-          <button class="card-action primary">
-            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Post now
-          </button>
-          <button class="card-action">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            Schedule
-          </button>
-        </div>
-      </div>
 
-      <!-- 6️⃣  OPPORTUNITY BANNER — viral spike -->
-      <div class="alert-banner opp">
-        <div class="alert-icon">
-          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
-        </div>
-        <div class="alert-content">
-          <div class="alert-title">Kelpie Daily post going viral <span class="alert-cat">Opportunity</span></div>
-          <div class="alert-msg">3.2× average reach in the first 90 minutes — strongest velocity in 30 days. Reshare across your other pages now to capture the wave.</div>
-          <div class="alert-actions">
-            <button class="alert-btn">Reshare now</button>
-            <button class="alert-btn-ghost">View live</button>
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- MVP CAPABILITY RAIL — what's powering all of this           -->
+        <!-- Bottom of feed: "Here's what AI is running for you right now" -->
+        <!-- Each cap is clickable → opens the matching analytics tab    -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <div class="mvp-rail">
+          <div class="mvp-rail-head">
+            <div class="mvp-rail-title">
+              <span class="pulse-dot"></span>
+              5 AI capabilities running on your pages
+            </div>
+            <a class="mvp-rail-link" data-mvp-rail-link>See how it works</a>
+          </div>
+          <div class="mvp-rail-grid">
+            <div class="mvp-cap sentiment" data-mvp="sentiment">
+              <div class="mvp-cap-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
+              <div class="mvp-cap-name">Sentiment</div>
+              <div class="mvp-cap-status live">Live</div>
+            </div>
+            <div class="mvp-cap virality" data-mvp="virality">
+              <div class="mvp-cap-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+              <div class="mvp-cap-name">Virality</div>
+              <div class="mvp-cap-status live">Live</div>
+            </div>
+            <div class="mvp-cap timing" data-mvp="timing">
+              <div class="mvp-cap-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div class="mvp-cap-name">Timing</div>
+              <div class="mvp-cap-status live">Live</div>
+            </div>
+            <div class="mvp-cap match" data-mvp="match">
+              <div class="mvp-cap-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M11.65 11.65l3.7 3.7"/></svg></div>
+              <div class="mvp-cap-name">Match</div>
+              <div class="mvp-cap-status live">Live</div>
+            </div>
+            <div class="mvp-cap crisis" data-mvp="crisis">
+              <div class="mvp-cap-icon"><svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2z"/></svg></div>
+              <div class="mvp-cap-name">Crisis</div>
+              <div class="mvp-cap-status live">Live</div>
+            </div>
           </div>
         </div>
-      </div>
+
+        <!-- Footer note about Hooked + sprint mapping -->
+        <div style="text-align:center;font-size:11px;color:var(--t3);padding:8px 0 24px;line-height:1.5">
+          v2 redesign · Internal trigger answered first, variable rewards alternated, Art-E central<br/>
+          Built on Sprint 4 NLP labels · Sprint 7 virality model · Sprint 8 timing engine · Sprint 9 audience clustering · Sprint 10 crisis detection
+        </div>
 
       </div><!-- /page-home -->
 
@@ -2168,6 +2710,32 @@ body{
   <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg>
 </button>
 
+<!-- Story viewer (Instagram-style) -->
+<div class="story-viewer" id="storyViewer" onclick="if(event.target===this)closeStoryViewer()">
+  <div class="story-viewer-card">
+    <div class="story-viewer-progress" id="storyProgress"></div>
+    <div class="story-viewer-header">
+      <div class="story-viewer-avatar" id="svAvatar">DM</div>
+      <div>
+        <div class="story-viewer-name" id="svName">Drinking Memes</div>
+        <div class="story-viewer-time" id="svTime">2 hours ago</div>
+      </div>
+      <button class="story-viewer-close" onclick="closeStoryViewer()">
+        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <button class="story-viewer-nav left" onclick="storyNav(-1)"></button>
+    <button class="story-viewer-nav right" onclick="storyNav(1)"></button>
+    <div class="story-viewer-body" id="svBody">
+      <div class="story-viewer-mvp" id="svMvp">Virality</div>
+      <div class="story-viewer-headline" id="svHeadline">Going viral — 3.2× reach</div>
+      <div class="story-viewer-detail" id="svDetail">Your 6PM meme post is at 3.2× average reach — strongest velocity in 30 days. Art-E predicted this would land based on the question hook + image format combo.</div>
+      <div class="story-viewer-stat-row" id="svStats"></div>
+      <div class="story-viewer-actions" id="svActions"></div>
+    </div>
+  </div>
+</div>
+
 <!-- Toast host -->
 <div class="toast-host" id="toastHost"></div>
 
@@ -2368,10 +2936,170 @@ function handleAction(action, ctx){
     case 'tab-feed':
       toast('info', ctx + ' tab — feed filter applied');
       break;
+    case 'find-best-time':
+      openModal('Find best time — '+(ctx||'all pages'),
+        '<p>Art-E\'s optimal timing engine has analysed your last 90 days of audience activity:</p>'+
+        '<div style="background:var(--bg-input);border-radius:8px;padding:12px;margin:8px 0">'+
+        '<div style="display:flex;justify-content:space-between;margin-bottom:6px"><strong>Tuesday 6PM</strong><span style="color:var(--teal);font-weight:700">+34% lift</span></div>'+
+        '<div style="display:flex;justify-content:space-between;margin-bottom:6px;color:var(--t2)"><span>Thursday 8PM</span><span>+28% lift</span></div>'+
+        '<div style="display:flex;justify-content:space-between;color:var(--t2)"><span>Sunday 10AM</span><span>+19% lift</span></div>'+
+        '</div>'+
+        '<p style="font-size:13px;color:var(--t2)">Confidence: <strong style="color:var(--teal)">High</strong> · based on 462 posts across your 5 pages</p>',
+        '<button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="closeModal();toast(\'success\',\'Scheduled for Tuesday 6PM\')">Schedule for Tue 6PM</button>'); break;
+    case 'view-comments':
+      toast('info','Opening comment thread'); break;
+    case 'set-alert':
+      toast('success','Alert set — you\'ll be notified at every milestone'); break;
+    case 'why-time':
+      openArteChat('Why is Tuesday 6PM the best time to post on Drinking Memes?'); break;
     default:
       toast('info', action + ' — clicked');
   }
 }
+
+
+/* ─── THEME TOGGLE ──────────────────────────────────── */
+function applyTheme(name){
+  document.documentElement.setAttribute('data-theme', name);
+  document.querySelectorAll('.theme-toggle-opt').forEach(o=>{
+    o.classList.toggle('active', o.dataset.themeSet === name);
+  });
+  try{ localStorage.setItem('artemis_v2_theme', name); }catch(e){}
+}
+(function(){
+  let saved = 'dark';
+  try{ saved = localStorage.getItem('artemis_v2_theme') || 'dark'; }catch(e){}
+  applyTheme(saved);
+})();
+
+/* ─── STORIES VIEWER ──────────────────────────────────── */
+const STORIES_DATA = [
+  {
+    page:'Drinking Memes', avatar:'DM', avatarColor:'#FBBF24', time:'2 hours ago',
+    mvp:'Virality Prediction', headline:'Going viral — 3.2× reach',
+    detail:"Your 6PM meme post is at 3.2× average reach in the first 90 minutes — your strongest velocity this month. Art-E predicted 91/100 based on the question hook + image format pattern.",
+    stats:[{v:'2.4K',l:'reactions'},{v:'312',l:'shares'},{v:'+312%',l:'vs avg'}],
+    bg:'linear-gradient(160deg,#3a2810,#1a1208)',
+    actions:[
+      {label:'Repost',primary:true,act:'repost'},
+      {label:'Why it worked',act:'why-it-worked',svg:'<path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/>'}
+    ]
+  },
+  {
+    page:'Drinking Memes', avatar:'DM', avatarColor:'#E53935', time:'3 minutes ago',
+    mvp:'Crisis Detection', headline:'Brand risk — 23 negative comments',
+    detail:"Negative sentiment spike detected on your 6PM post. 23 negative comments in 4 minutes — sentiment score dropped from 0.78 to 0.42. Art-E recommends a response within the hour.",
+    stats:[{v:'23',l:'negative'},{v:'0.42',l:'sentiment'},{v:'4 min',l:'window'}],
+    bg:'linear-gradient(160deg,#3a1010,#1a0808)',
+    actions:[
+      {label:'Respond now',primary:true,act:'respond'},
+      {label:'Mute 24h',act:'mute'}
+    ]
+  },
+  {
+    page:'Kelpie Daily', avatar:'KD', avatarColor:'#22C55E', time:'4 hours ago',
+    mvp:'Sentiment Analysis', headline:'+18% positive comments',
+    detail:"Your latest post is your most positively-received content this month. XLM-RoBERTa scored 94% of comments as Joy/Trust emotion class.",
+    stats:[{v:'0.94',l:'positive'},{v:'238',l:'comments'},{v:'94%',l:'joy/trust'}],
+    bg:'linear-gradient(160deg,#0a3018,#04180c)',
+    actions:[
+      {label:'Repost',primary:true,act:'repost'},
+      {label:'View comments',act:'view-comments'}
+    ]
+  },
+  {
+    page:'Drinking Memes', avatar:'DM', avatarColor:'#7C5CBF', time:'opens in 1 hour',
+    mvp:'Optimal Timing', headline:'Window opens — Tuesday 6PM',
+    detail:"Your audience activity peaks at 6PM Tuesday. Posting in this window adds +34% to reach based on your last 90 days of data and B.J. Fogg-style behaviour modelling.",
+    stats:[{v:'+34%',l:'lift'},{v:'High',l:'confidence'},{v:'1h',l:'until'}],
+    bg:'linear-gradient(160deg,#1f1240,#0e081f)',
+    actions:[
+      {label:'Schedule post',primary:true,act:'schedule'},
+      {label:'Why this time',act:'why-time',svg:'<path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/>'}
+    ]
+  },
+  {
+    page:'Fri Night Chaos', avatar:'FN', avatarColor:'#60A5FA', time:'just now',
+    mvp:'Audience Clustering', headline:'94% audience overlap match',
+    detail:"K-Means clustering found Fri Night Chaos shares 94% audience signature with your top performers. 7 topics in common, 89K combined reach if you collab.",
+    stats:[{v:'94%',l:'overlap'},{v:'89K',l:'followers'},{v:'7',l:'shared topics'}],
+    bg:'linear-gradient(160deg,#0a2040,#04101f)',
+    actions:[
+      {label:'Connect',primary:true,act:'connect'},
+      {label:'View page',act:'view-page'}
+    ]
+  },
+  {
+    page:'UK Jail News', avatar:'UK', avatarColor:'#FBBF24', time:'15 minutes ago',
+    mvp:'Topic Trend Detection', headline:'"Prison drama" trending +340%',
+    detail:"DeBERTa-v3 zero-shot topic classifier picked up a 340% spike in 'prison drama' mentions across your niche. Estimated peak window: next 4 hours. Art-E forecasts 92/100 if you post now.",
+    stats:[{v:'+340%',l:'mentions'},{v:'92',l:'forecast'},{v:'4h',l:'window'}],
+    bg:'linear-gradient(160deg,#3a2810,#1a1208)',
+    actions:[
+      {label:'Draft a post',primary:true,act:'draft-post'},
+      {label:'See trend',act:'see-trend'}
+    ]
+  },
+  {
+    page:'Prison Biscuit', avatar:'PB', avatarColor:'#00C4A0', time:'today',
+    mvp:'Self-learning Engine', headline:'+12 new followers today',
+    detail:"Your follower curve is steepening. Art-E recalibrated its predictions for this page based on the last 14 days — accuracy is now 91% (up from 74% last month).",
+    stats:[{v:'+12',l:'today'},{v:'91%',l:'AI accuracy'},{v:'+8%',l:'this month'}],
+    bg:'linear-gradient(160deg,#082820,#03100c)',
+    actions:[
+      {label:'View page',primary:true,act:'view-page'},
+      {label:'Set alert',act:'set-alert'}
+    ]
+  }
+];
+let _curStoryIdx = 0;
+let _storyTimer = null;
+
+function openStoryByIndex(i){
+  if(i<0||i>=STORIES_DATA.length){ closeStoryViewer(); return; }
+  _curStoryIdx = i;
+  const s = STORIES_DATA[i];
+  document.getElementById('svAvatar').textContent = s.avatar;
+  document.getElementById('svAvatar').style.color = s.avatarColor;
+  document.getElementById('svAvatar').style.borderColor = s.avatarColor;
+  document.getElementById('svName').textContent = s.page;
+  document.getElementById('svTime').textContent = s.time;
+  document.getElementById('svMvp').textContent = s.mvp;
+  document.getElementById('svHeadline').textContent = s.headline;
+  document.getElementById('svDetail').textContent = s.detail;
+  document.getElementById('svBody').style.background = s.bg;
+  document.getElementById('svStats').innerHTML = s.stats.map(st=>`<div class="story-viewer-stat"><div class="story-viewer-stat-val">${st.v}</div><div class="story-viewer-stat-lbl">${st.l}</div></div>`).join('');
+  document.getElementById('svActions').innerHTML = s.actions.map(a=>{
+    const cls = a.primary ? 'story-viewer-btn primary' : 'story-viewer-btn';
+    const sv = a.svg ? `<svg viewBox="0 0 24 24" fill="currentColor" stroke="none">${a.svg}</svg>` : '';
+    return `<button class="${cls}" onclick="closeStoryViewer();handleAction('${a.act}')">${sv}${a.label}</button>`;
+  }).join('');
+  // progress bars
+  const prog = document.getElementById('storyProgress');
+  prog.innerHTML = STORIES_DATA.map((_,j)=>{
+    const cls = j<i ? 'story-prog-seg done' : (j===i ? 'story-prog-seg active' : 'story-prog-seg');
+    return `<div class="${cls}"></div>`;
+  }).join('');
+  // auto-advance after 6s
+  if(_storyTimer) clearTimeout(_storyTimer);
+  _storyTimer = setTimeout(()=>{ if(document.getElementById('storyViewer').classList.contains('open')) storyNav(1); }, 6200);
+}
+
+function openStoryViewer(idx){
+  document.getElementById('storyViewer').classList.add('open');
+  openStoryByIndex(idx);
+}
+function closeStoryViewer(){
+  document.getElementById('storyViewer').classList.remove('open');
+  if(_storyTimer) clearTimeout(_storyTimer);
+}
+function storyNav(dir){
+  const next = _curStoryIdx + dir;
+  if(next<0){ _curStoryIdx = 0; return; }
+  if(next>=STORIES_DATA.length){ closeStoryViewer(); return; }
+  openStoryByIndex(next);
+}
+
 
 /* ─── BIND ALL BUTTONS ───────────────────────── */
 document.addEventListener('DOMContentLoaded', ()=>{
@@ -2434,10 +3162,56 @@ document.addEventListener('DOMContentLoaded', ()=>{
     btn.addEventListener('click', ()=>{
       const lbl = btn.textContent.trim();
       if(lbl.includes('Predict')) handleAction('predict-score');
+      else if(lbl.includes('Find best time')) handleAction('find-best-time');
       else if(lbl.includes('Art-E')) handleAction('ask-arte');
       else if(lbl.includes('Schedule')) handleAction('schedule');
     });
   });
+
+  // Theme toggle
+  document.querySelectorAll('.theme-toggle-opt').forEach(opt=>{
+    opt.addEventListener('click', e=>{
+      e.stopPropagation();
+      applyTheme(opt.dataset.themeSet);
+    });
+  });
+
+  // Stories
+  document.querySelectorAll('.story-tile').forEach(t=>{
+    t.addEventListener('click', ()=>{
+      const idx = t.dataset.story;
+      if(idx === 'create'){ handleAction('composer'); }
+      else { openStoryViewer(parseInt(idx)); }
+    });
+  });
+
+  // MVP capability rail
+  document.querySelectorAll('.mvp-cap').forEach(cap=>{
+    cap.addEventListener('click', ()=>{
+      const m = cap.dataset.mvp;
+      const labels = {
+        sentiment:'Sentiment Analysis · XLM-RoBERTa · running on every comment as it arrives',
+        virality:'Virality Prediction · 52-feature model · scoring every post pre-publish',
+        timing:'Optimal Timing Engine · 90-day audience activity model · refreshed nightly',
+        match:'Audience Clustering · K-Means · finding cross-page collab opportunities',
+        crisis:'Crisis Detection · sentiment spike monitor · 4-min rolling window'
+      };
+      toast('arte', labels[m] || 'AI capability running');
+    });
+  });
+  document.querySelector('[data-mvp-rail-link]')?.addEventListener('click', ()=>{
+    openModal('How ArtemisAI works under the hood',
+      `<p>Five ML capabilities, all running on your pages right now:</p>
+      <p><strong>1. Sentiment Analysis</strong> — XLM-RoBERTa (multilingual). Every comment classified Positive/Neutral/Negative in real time. <em>Sprint 3 complete.</em></p>
+      <p><strong>2. Virality Prediction</strong> — 52-feature model trained on your past posts. Scores draft posts before you publish. <em>Sprint 7 build.</em></p>
+      <p><strong>3. Optimal Timing</strong> — Audience activity model refreshed nightly. Recommends your best posting window per page. <em>Sprint 8 build.</em></p>
+      <p><strong>4. Audience Clustering</strong> — K-Means on topic embeddings. Finds collab opportunities by audience overlap. <em>Sprint 9 build.</em></p>
+      <p><strong>5. Crisis Detection</strong> — Sentiment spike monitor on a 4-minute rolling window. Triggers when negative comments cross threshold. <em>Sprint 10 build.</em></p>
+      <p>All five feed Art-E so it can answer questions and surface insights without you having to dig.</p>`,
+      '<button class="btn" onclick="closeModal()">Got it</button><button class="btn arte" onclick="closeModal();openArteChat(\'How does the virality prediction model work?\')">Ask Art-E</button>'
+    );
+  });
+
 
   // Crisis banner buttons
   document.querySelectorAll('.alert-banner .alert-btn').forEach(btn=>{
