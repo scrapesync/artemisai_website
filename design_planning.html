@@ -281,6 +281,9 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .wf-divider{height:1px;background:rgba(255,255,255,.05);margin:3px 8px}
 .wf-card-plain{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:9px;padding:11px 12px;margin:4px 8px}
 .wf-text{padding:5px 11px;font-size:11px;color:rgba(255,255,255,.35);line-height:1.55}
+
+.wf-preset-btn{width:100%;text-align:left;padding:5px 8px;font-size:10.5px;font-family:var(--font);color:var(--t2);background:var(--bg3);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all .15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wf-preset-btn:hover{border-color:rgba(0,212,170,.35);color:var(--accent);background:rgba(0,212,170,.05)}
 </style>
 </head>
 <body>
@@ -679,6 +682,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     <div class="wf-toolbar-row">
       <div id="wfScreenTabs" style="display:flex;gap:5px;flex:1;overflow-x:auto"></div>
       <button onclick="wfAddScreen()" class="wf-tbtn" style="flex-shrink:0">+ Screen</button>
+      <button onclick="wfRenameScreen()" class="wf-tbtn" style="flex-shrink:0">✏️</button>
       <button onclick="wfDeleteScreen()" class="wf-tbtn" style="color:var(--red);flex-shrink:0">✕</button>
     </div>
 
@@ -687,9 +691,17 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
       <!-- LEFT: block palette -->
       <div class="wf-palette">
-        <div class="wf-palette-head">UI Blocks — click or drag</div>
+        <div class="wf-palette-head">UI Blocks</div>
+        <div style="padding:6px 8px;border-bottom:1px solid var(--border)">
+          <input style="width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:5px 8px;color:var(--t1);font-family:var(--font);font-size:11px;outline:none;box-sizing:border-box"
+            placeholder="🔍 Search blocks…" oninput="wfSearch(this.value)">
+        </div>
+        <div style="padding:6px 8px 4px;border-bottom:1px solid var(--border)">
+          <div style="font-size:9px;font-family:var(--mono);color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px">Load Preset Screen</div>
+          <div id="wfPresets" style="display:flex;flex-direction:column;gap:3px"></div>
+        </div>
         <div class="wf-palette-scroll" id="wfPalette">
-          <!-- filled by renderPalette() -->
+          <!-- filled by wfRenderPalette() -->
         </div>
       </div>
 
@@ -1108,162 +1120,412 @@ function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.sc
 
 
 // ══════════════════════════════════════════
-// WIREFRAME BUILDER
+// WIREFRAME BUILDER — v3
+// Real ArtemisAI blocks + interaction designer
 // ══════════════════════════════════════════
+
+// ── INTERACTION FLOW REGISTRY ──────────────────────────
+// Each element gets a fromUid→actions map
+// actions: [{trigger, action, target, note}]
+let wfFlows = {}; // uid → [{trigger,action,target,note}]
+
+// ── BLOCK CATALOGUE ────────────────────────────────────
+// Grouped exactly as they appear in the real mockup
 const WF_BLOCKS = [
+
+  // ── NAVIGATION ─────────────────────────────────────
   {sec:'Navigation'},
-  {id:'nav-top', name:'Top Nav Bar', icon:'📱', render(){
-    return `<div class="wf-navtop"><span style="font-size:13px;font-weight:800;color:var(--accent)">ARTEMIS</span><span style="flex:1"></span><div style="width:18px;height:18px;border-radius:50%;background:rgba(0,212,170,.35)"></div></div>`;
-  }},
-  {id:'nav-bottom', name:'Bottom Tab Bar', icon:'⬇️', render(){
-    return `<div class="wf-navbottom">
-      <div class="wf-navbottom-item wf-nav-act"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</div>
-      <div class="wf-navbottom-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/></svg>Data</div>
-      <div class="wf-navbottom-item" style="color:var(--purple)"><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--accent));display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:-12px;box-shadow:0 4px 14px rgba(167,139,250,.4)">✦</div></div>
-      <div class="wf-navbottom-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Find</div>
-      <div class="wf-navbottom-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Me</div>
-    </div>`;
-  }},
-  {id:'bell-strip', name:'Alert Bell', icon:'🔔', render(){
-    return `<div class="wf-bell">🔔 Negative comment on Drinking Memes — action needed</div>`;
-  }},
-  {sec:'Feed & Content'},
-  {id:'post-card', name:'Post Performance Card', icon:'📊', render(){
-    return `<div class="wf-feed-card">
-      <div class="wf-feed-top"><div class="wf-av"></div><div><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.7)">Drinking Memes · 6PM</div><div style="font-size:9px;color:rgba(255,255,255,.3)">3.2× avg reach · 2h ago</div></div><div style="margin-left:auto;font-size:12px;font-weight:700;color:var(--accent)">91%</div></div>
-      <div class="wf-feed-img"></div>
-      <div style="display:flex;gap:10px"><span style="font-size:9px;color:rgba(255,255,255,.3)">❤️ 2.4K</span><span style="font-size:9px;color:rgba(255,255,255,.3)">💬 184</span><span style="font-size:9px;color:rgba(255,255,255,.3)">↗️ 312</span><span style="margin-left:auto;font-size:8.5px;padding:2px 7px;border-radius:100px;background:rgba(0,212,170,.1);color:var(--accent);border:1px solid rgba(0,212,170,.2)">🔁 Repost</span></div>
-    </div>`;
-  }},
-  {id:'briefing-card', name:'Morning Briefing', icon:'☀️', render(){
-    return `<div class="wf-feed-card">
-      <div class="wf-feed-top"><div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--accent));display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0">✦</div><div><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.7)">Art-E · Morning Briefing</div><div style="font-size:9px;color:rgba(255,255,255,.3)">Today 7:00 AM</div></div></div>
-      <div style="font-size:10.5px;color:rgba(255,255,255,.45);line-height:1.6">Best post time today: <strong style="color:var(--accent)">6PM (+34%)</strong>. Last reel beat avg by 3.2×. Sentiment positive.</div>
-    </div>`;
-  }},
-  {id:'arte-strip', name:'Art-E Insight Strip', icon:'✦', render(){
-    return `<div class="wf-arte-strip"><div class="wf-arte-orb">✦</div><span>Best post time: <strong>6PM (+34%)</strong></span></div>`;
-  }},
-  {id:'stories', name:'Stories Row', icon:'⭕', render(){
-    return `<div class="wf-stories">${['DM','KD','UK','FM','NB'].map(l=>`<div class="wf-story"><div class="wf-story-ring"><div class="wf-story-inner"></div></div><div class="wf-story-lbl">${l}</div></div>`).join('')}</div>`;
-  }},
-  {id:'section-head', name:'Section Header', icon:'#️⃣', render(){
-    return `<div class="wf-sec-head">This Week <span>See all →</span></div>`;
-  }},
+  {id:'topnav', name:'Top Nav Bar', icon:'📱', tags:['nav'],
+   render:()=>`<div style="background:rgba(255,255,255,.05);height:42px;display:flex;align-items:center;padding:0 12px;gap:8px;border-bottom:1px solid rgba(255,255,255,.07)">
+    <span style="font-size:13px;font-weight:800;color:#00d4aa;letter-spacing:-.02em">ARTEMIS</span>
+    <span style="flex:1"></span>
+    <div style="width:22px;height:22px;border-radius:50%;background:rgba(0,212,170,.25);display:flex;align-items:center;justify-content:center;font-size:9px;color:#00d4aa">AI</div>
+    <div style="width:8px;height:8px;border-radius:50%;background:#f87171;margin-left:2px"></div>
+    <div style="width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.12)"></div>
+   </div>`},
+
+  {id:'bottom-nav', name:'Bottom Nav — 5 tabs', icon:'⬇️', tags:['nav'],
+   render:()=>`<div style="background:rgba(10,15,26,.98);height:54px;display:flex;align-items:center;border-top:1px solid rgba(255,255,255,.07)">
+    ${[['🏠','Home',true],['📊','Analytics',false],['✦','Art-E',false,true],['🔍','Discovery',false],['👤','Me',false]].map(([ic,lb,act,fab])=>
+      fab ? `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:1px">
+        <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#00d4aa);display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:-14px;box-shadow:0 4px 14px rgba(167,139,250,.45)">${ic}</div>
+      </div>`
+      : `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:7.5px;color:${act?'#00d4aa':'rgba(255,255,255,.28)'}">
+        <span style="font-size:14px">${ic}</span>${lb}</div>`
+    ).join('')}
+   </div>`},
+
+  {id:'page-selector', name:'Page Selector Chip', icon:'📄', tags:['nav'],
+   render:()=>`<div style="padding:6px 10px;display:flex;gap:6px;overflow-x:hidden">
+    ${['Drinking Memes','Kelpie Daily','Fri Night Chaos'].map((p,i)=>`<div style="font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid ${i===0?'rgba(0,212,170,.5)':'rgba(255,255,255,.08)'};background:${i===0?'rgba(0,212,170,.1)':'transparent'};color:${i===0?'#00d4aa':'rgba(255,255,255,.35)'};white-space:nowrap">${p}</div>`).join('')}
+   </div>`},
+
+  {id:'tab-strip', name:'Tab Strip', icon:'📑', tags:['nav'],
+   render:()=>`<div style="display:flex;border-bottom:1px solid rgba(255,255,255,.07);padding:0 10px;gap:2px">
+    ${['Activity','Art-E','Alerts'].map((t,i)=>`<div style="font-size:11px;padding:8px 12px;color:${i===0?'#00d4aa':'rgba(255,255,255,.35)'};border-bottom:2px solid ${i===0?'#00d4aa':'transparent'};cursor:pointer">${t}</div>`).join('')}
+   </div>`},
+
+  {id:'breadcrumb', name:'Screen Breadcrumb', icon:'›', tags:['nav'],
+   render:()=>`<div style="padding:6px 12px;font-size:10px;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:5px">
+    <span>Home</span><span>›</span><span style="color:rgba(255,255,255,.6)">Activity Feed</span>
+   </div>`},
+
+  // ── FEED & HOME ─────────────────────────────────────
+  {sec:'Feed & Home'},
+
+  {id:'arte-insight', name:'Art-E Insight Strip', icon:'✦', tags:['feed','arte'],
+   render:()=>`<div style="background:linear-gradient(90deg,rgba(167,139,250,.1),rgba(0,212,170,.06));border:1px solid rgba(167,139,250,.18);border-radius:9px;padding:8px 12px;margin:5px 8px;display:flex;align-items:center;gap:8px">
+    <div style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#00d4aa);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">✦</div>
+    <div style="flex:1"><div style="font-size:10px;font-weight:600;color:#a78bfa">Art-E · Best post time today</div><div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:1px">6PM Tuesday <strong style="color:#00d4aa">+34% vs your avg</strong></div></div>
+   </div>`},
+
+  {id:'morning-briefing', name:'Morning Briefing Card', icon:'☀️', tags:['feed'],
+   render:()=>`<div style="background:rgba(255,255,255,.04);border:1px solid rgba(167,139,250,.15);border-radius:11px;padding:12px;margin:5px 8px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#00d4aa);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">✦</div>
+      <div><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.7)">Art-E · Morning briefing</div><div style="font-size:9px;color:rgba(255,255,255,.3)">Today 7:00 AM</div></div>
+    </div>
+    <div style="font-size:10.5px;color:rgba(255,255,255,.45);line-height:1.65">Best window today: <strong style="color:#00d4aa">6PM (+34%)</strong>. Last reel beat avg by 3.2×. Sentiment across your pages is positive.</div>
+    <div style="margin-top:8px;font-size:9.5px;color:#a78bfa;cursor:pointer">▸ Read full briefing</div>
+   </div>`},
+
+  {id:'post-card', name:'Post Performance Card', icon:'📊', tags:['feed'],
+   render:()=>`<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:10px 12px;margin:5px 8px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,212,170,.25)"></div>
+      <div><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.7)">Drinking Memes · 6PM</div><div style="font-size:9px;color:rgba(255,255,255,.3)">3.2× avg reach · 2h ago</div></div>
+      <div style="margin-left:auto;font-size:13px;font-weight:700;color:#00d4aa">91%</div>
+    </div>
+    <div style="height:60px;background:rgba(255,255,255,.04);border-radius:7px;margin-bottom:8px"></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span style="font-size:9px;color:rgba(255,255,255,.3)">❤️ 2.4K</span>
+      <span style="font-size:9px;color:rgba(255,255,255,.3)">💬 184</span>
+      <span style="font-size:9px;color:rgba(255,255,255,.3)">↗️ 312</span>
+      <span style="margin-left:auto;font-size:8.5px;padding:3px 8px;border-radius:100px;background:rgba(0,212,170,.1);color:#00d4aa;border:1px solid rgba(0,212,170,.2);cursor:pointer">🔁 Post now</span>
+    </div>
+   </div>`},
+
+  {id:'stories-row', name:'Stories Row', icon:'⭕', tags:['feed'],
+   render:()=>`<div style="display:flex;gap:8px;padding:8px 10px">
+    ${['DM','KD','FC','NB','ML'].map((l,i)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0">
+      <div style="width:38px;height:38px;border-radius:50%;border:2px solid ${i===0?'#00d4aa':'rgba(255,255,255,.2)'};padding:2px"><div style="width:100%;height:100%;border-radius:50%;background:${i===0?'rgba(0,212,170,.2)':'rgba(255,255,255,.06)'}"></div></div>
+      <div style="font-size:7.5px;color:rgba(255,255,255,.3)">${l}</div>
+    </div>`).join('')}
+   </div>`},
+
+  {id:'activity-item', name:'Activity Feed Item', icon:'🔔', tags:['feed'],
+   render:()=>`<div style="padding:10px 12px;display:flex;gap:10px;align-items:flex-start;border-bottom:1px solid rgba(255,255,255,.04)">
+    <div style="width:32px;height:32px;border-radius:50%;background:rgba(0,212,170,.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">📈</div>
+    <div><div style="font-size:11px;color:rgba(255,255,255,.65);line-height:1.4">Collab match found — <strong style="color:#00d4aa">Fri Night Chaos</strong> overlaps 34% of your audience</div><div style="font-size:9px;color:rgba(255,255,255,.25);margin-top:3px">2 minutes ago</div></div>
+   </div>`},
+
+  {id:'bell-alert', name:'Bell Alert Banner', icon:'🔔', tags:['feed','alerts'],
+   render:()=>`<div style="background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);border-radius:9px;padding:8px 12px;margin:5px 8px;display:flex;align-items:center;gap:8px">
+    <span style="font-size:14px">🔔</span>
+    <div style="flex:1;font-size:10px;color:rgba(248,113,113,.9)">Brand risk detected on Drinking Memes — <strong>respond now</strong></div>
+    <div style="font-size:9px;padding:3px 8px;border-radius:5px;background:rgba(248,113,113,.15);color:#f87171;border:1px solid rgba(248,113,113,.3);cursor:pointer">View</div>
+   </div>`},
+
+  // ── ANALYTICS / DASHBOARD ───────────────────────────
   {sec:'Analytics'},
-  {id:'kpi-grid', name:'KPI Cards 2×2', icon:'📈', render(){
-    return `<div class="wf-kpi-row"><div class="wf-kpi-cell"><div class="wf-kpi-lbl">Engagement</div><div class="wf-kpi-val">4.8%</div></div><div class="wf-kpi-cell"><div class="wf-kpi-lbl">Reach</div><div class="wf-kpi-val">24K</div></div><div class="wf-kpi-cell"><div class="wf-kpi-lbl">AI Score</div><div class="wf-kpi-val">91</div></div><div class="wf-kpi-cell"><div class="wf-kpi-lbl">Sentiment</div><div class="wf-kpi-val">84%</div></div></div>`;
-  }},
-  {id:'bar-chart', name:'Bar Chart', icon:'📊', render(){
-    return `<div class="wf-chart">${[40,65,45,80,55,90,70,85,60,95].map(h=>`<div class="wf-bar" style="height:${h}%"></div>`).join('')}</div>`;
-  }},
-  {sec:'UI Elements'},
-  {id:'search', name:'Search Bar', icon:'🔍', render(){
-    return `<div class="wf-search"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Search posts, pages…</div>`;
-  }},
-  {id:'card-empty', name:'Empty Card', icon:'🃏', render(){
-    return `<div class="wf-card-plain"><div style="height:7px;width:55%;background:rgba(255,255,255,.08);border-radius:3px;margin-bottom:7px"></div><div style="height:6px;width:85%;background:rgba(255,255,255,.05);border-radius:3px;margin-bottom:4px"></div><div style="height:6px;width:70%;background:rgba(255,255,255,.05);border-radius:3px"></div></div>`;
-  }},
-  {id:'fab-btn', name:'Art-E FAB Button', icon:'🔵', render(){
-    return `<div class="wf-fab-wrap"><div class="wf-fab">✦</div></div>`;
-  }},
-  {id:'divider', name:'Divider', icon:'—', render(){
-    return `<div class="wf-divider"></div>`;
-  }},
-  {id:'text', name:'Text Block', icon:'T', render(){
-    return `<div class="wf-text">Tap to edit · Drag to reorder</div>`;
-  }},
+
+  {id:'kpi-4', name:'KPI Row — 4 metrics', icon:'📈', tags:['dashboard','analytics'],
+   render:()=>`<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:5px 8px">
+    ${[['Engagement Rate','4.8%','#00d4aa'],['Total Reach','24.1K','#60a5fa'],['Virality Rate','12.3%','#fbbf24'],['Sentiment Score','84%','#34d399']].map(([l,v,col])=>`
+    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:9px 10px">
+      <div style="font-size:7.5px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">${l}</div>
+      <div style="font-size:16px;font-weight:700;color:${col}">${v}</div>
+    </div>`).join('')}
+   </div>`},
+
+  {id:'ai-score-badge', name:'AI Score Badge', icon:'🤖', tags:['dashboard','predictions'],
+   render:()=>`<div style="padding:8px 12px;display:flex;align-items:center;gap:10px;background:rgba(0,212,170,.05);border:1px solid rgba(0,212,170,.12);border-radius:9px;margin:4px 8px">
+    <div style="font-size:28px;font-weight:800;color:#00d4aa;font-variant-numeric:tabular-nums">91</div>
+    <div><div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.6)">AI Score — VIRAL</div><div style="font-size:9px;color:rgba(255,255,255,.35)">Confidence: High · Best slot: 6PM Tue</div></div>
+    <div style="margin-left:auto"><div style="width:40px;height:40px;border-radius:50%;border:3px solid #00d4aa;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#00d4aa">91%</div></div>
+   </div>`},
+
+  {id:'bar-chart', name:'Bar Chart', icon:'📊', tags:['dashboard','analytics'],
+   render:()=>`<div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:9px;margin:4px 8px">
+    <div style="padding:8px 10px 4px;font-size:10px;color:rgba(255,255,255,.5);font-weight:600">Engagement & Reach — 30 Days</div>
+    <div style="height:65px;display:flex;align-items:flex-end;padding:4px 9px 7px;gap:3px">
+      ${[40,65,45,80,55,90,70,85,60,95,75,88].map(h=>`<div style="flex:1;background:rgba(0,212,170,.38);border-radius:2px 2px 0 0;height:${h}%"></div>`).join('')}
+    </div>
+   </div>`},
+
+  {id:'sentiment-split', name:'Sentiment Split', icon:'💬', tags:['dashboard','analytics'],
+   render:()=>`<div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:9px;margin:4px 8px;padding:10px 12px">
+    <div style="font-size:10px;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:8px">Sentiment Split</div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <div style="flex:.72;height:8px;background:#34d399;border-radius:4px 0 0 4px"></div>
+      <div style="flex:.18;height:8px;background:rgba(255,255,255,.15)"></div>
+      <div style="flex:.10;height:8px;background:#f87171;border-radius:0 4px 4px 0"></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:5px">
+      <span style="font-size:9px;color:#34d399">● 72% Positive</span>
+      <span style="font-size:9px;color:rgba(255,255,255,.3)">● 18% Neutral</span>
+      <span style="font-size:9px;color:#f87171">● 10% Negative</span>
+    </div>
+   </div>`},
+
+  {id:'virality-score', name:'Virality Rate Card', icon:'🚀', tags:['dashboard','analytics'],
+   render:()=>`<div style="background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.12);border-radius:9px;margin:4px 8px;padding:10px 12px">
+    <div style="font-size:9px;color:rgba(251,191,36,.7);text-transform:uppercase;letter-spacing:.08em">Virality Rate</div>
+    <div style="font-size:24px;font-weight:800;color:#fbbf24;margin:3px 0">12.3%</div>
+    <div style="font-size:9px;color:rgba(255,255,255,.3)">↑ +2.1pp vs last week · Best slot: Thu 8PM</div>
+   </div>`},
+
+  {id:'posting-heatmap', name:'Posting Heatmap', icon:'🗓', tags:['dashboard','analytics','predictions'],
+   render:()=>`<div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:9px;margin:4px 8px;padding:9px 11px">
+    <div style="font-size:10px;color:rgba(255,255,255,.5);margin-bottom:6px">Posting Heatmap</div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">
+      ${Array.from({length:28},(_,i)=>{const v=Math.random();return`<div style="aspect-ratio:1;border-radius:2px;background:rgba(0,212,170,${(v*.7+.05).toFixed(2)})"></div>`}).join('')}
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:4px">
+      ${['M','T','W','T','F','S','S'].map(d=>`<div style="font-size:7px;color:rgba(255,255,255,.2);flex:1;text-align:center">${d}</div>`).join('')}
+    </div>
+   </div>`},
+
+  // ── PREDICTIONS / AI ─────────────────────────────────
+  {sec:'Predictions & Art-E'},
+
+  {id:'predictor-input', name:'Draft Post Predictor', icon:'✍️', tags:['predictions','arte'],
+   render:()=>`<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;margin:4px 8px;padding:10px 12px">
+    <div style="font-size:10px;color:rgba(255,255,255,.5);margin-bottom:6px;font-weight:600">Draft Post Predictor</div>
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:7px;padding:8px;font-size:10px;color:rgba(255,255,255,.25);min-height:44px">Type your caption here…</div>
+    <div style="display:flex;gap:6px;margin-top:8px">
+      <div style="flex:1;padding:6px;border-radius:6px;border:1px solid rgba(0,212,170,.25);text-align:center;font-size:10px;color:#00d4aa;cursor:pointer">Predict Score</div>
+      <div style="padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.35);cursor:pointer">Ask Art-E</div>
+    </div>
+   </div>`},
+
+  {id:'timing-window', name:'Optimal Post Window', icon:'⏰', tags:['predictions'],
+   render:()=>`<div style="background:rgba(0,212,170,.05);border:1px solid rgba(0,212,170,.15);border-radius:10px;margin:4px 8px;padding:10px 12px">
+    <div style="font-size:9px;color:#00d4aa;text-transform:uppercase;letter-spacing:.08em">Optimal Post Window</div>
+    <div style="font-size:20px;font-weight:800;color:rgba(255,255,255,.85);margin:4px 0">Tuesday 6PM</div>
+    <div style="font-size:9px;color:rgba(255,255,255,.35)">Timing lift: +34% · Confidence: High</div>
+    <div style="font-size:9px;color:rgba(255,255,255,.25);margin-top:3px">Runner-up: Thursday 8PM (+28%)</div>
+   </div>`},
+
+  {id:'arte-chat-bubble', name:'Art-E Chat Bubble', icon:'🧠', tags:['arte'],
+   render:()=>`<div style="margin:6px 8px">
+    <div style="display:flex;gap:7px;align-items:flex-start">
+      <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#00d4aa);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">✦</div>
+      <div style="background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.18);border-radius:12px 12px 12px 3px;padding:9px 12px;font-size:10.5px;color:rgba(255,255,255,.6);line-height:1.6">Your best post time this week is <strong style="color:#a78bfa">Thursday 8PM</strong>. Videos outperform photos by 2.3×.</div>
+    </div>
+    <div style="background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.15);border-radius:12px 12px 3px 12px;padding:9px 12px;font-size:10px;color:rgba(255,255,255,.4);margin-top:6px;margin-left:32px">Why does Thursday perform better?</div>
+   </div>`},
+
+  {id:'arte-fab', name:'Art-E FAB Button', icon:'🔵', tags:['arte','nav'],
+   render:()=>`<div style="position:relative;height:58px">
+    <div style="position:absolute;bottom:8px;right:10px;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#00d4aa);display:flex;align-items:center;justify-content:center;box-shadow:0 5px 18px rgba(167,139,250,.45);font-size:18px;cursor:pointer">✦</div>
+   </div>`},
+
+  // ── DISCOVERY ───────────────────────────────────────
+  {sec:'Discovery'},
+
+  {id:'collab-card', name:'Collaboration Match Card', icon:'🤝', tags:['discovery'],
+   render:()=>`<div style="background:rgba(255,255,255,.04);border:1px solid rgba(0,212,170,.12);border-radius:11px;padding:10px 12px;margin:4px 8px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+      <div style="width:32px;height:32px;border-radius:8px;background:rgba(251,191,36,.2);display:flex;align-items:center;justify-content:center;font-size:15px">🔥</div>
+      <div><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.75)">Fri Night Chaos</div><div style="font-size:9px;color:rgba(255,255,255,.3)">34% audience overlap · 89K followers</div></div>
+      <div style="margin-left:auto;font-size:9px;padding:4px 9px;border-radius:6px;background:rgba(0,212,170,.1);color:#00d4aa;border:1px solid rgba(0,212,170,.2);cursor:pointer">Connect</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <span style="font-size:9px;color:rgba(255,255,255,.3)">📈 Match quality: 94%</span>
+      <span style="font-size:9px;color:rgba(255,255,255,.3)">👥 Shared topics: 7</span>
+    </div>
+   </div>`},
+
+  {id:'flywheel-mini', name:'Collaboration Flywheel', icon:'🔄', tags:['discovery'],
+   render:()=>`<div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:9px;margin:4px 8px;padding:10px 12px">
+    <div style="font-size:10px;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:6px">Collaboration Flywheel</div>
+    <div style="display:flex;justify-content:center;align-items:center;height:70px;position:relative">
+      ${['📤','🔗','📥','📊'].map((ic,i)=>{const ang=i*90-45;const r=28;const x=50+r*Math.cos(ang*Math.PI/180);const y=50+r*Math.sin(ang*Math.PI/180);return`<div style="position:absolute;left:${x}%;top:${y}%;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;background:rgba(0,212,170,.15);display:flex;align-items:center;justify-content:center;font-size:11px;border:1px solid rgba(0,212,170,.25)">${ic}</div>`}).join('')}
+      <div style="position:absolute;font-size:10px;font-weight:700;color:#00d4aa">4 pages</div>
+    </div>
+    <div style="text-align:center;font-size:9px;color:rgba(255,255,255,.3)">Flywheel Momentum: <span style="color:#fbbf24">●●●●○</span></div>
+   </div>`},
+
+  {id:'audience-match', name:'Audience Match Bar', icon:'🎯', tags:['discovery','audience'],
+   render:()=>`<div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:9px;margin:4px 8px;padding:9px 11px">
+    <div style="font-size:10px;color:rgba(255,255,255,.5);margin-bottom:7px">Audience match</div>
+    ${[['Fri Night Chaos','94%','#00d4aa'],['UK Jail News','78%','#60a5fa'],['Meme Lovers','65%','#fbbf24']].map(([n,p,c])=>`
+    <div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;font-size:9.5px;margin-bottom:2px"><span style="color:rgba(255,255,255,.5)">${n}</span><span style="color:${c}">${p}</span></div>
+    <div style="height:4px;background:rgba(255,255,255,.06);border-radius:2px"><div style="height:100%;width:${p};background:${c};border-radius:2px"></div></div></div>`).join('')}
+   </div>`},
+
+  // ── ALERTS ──────────────────────────────────────────
+  {sec:'Alerts'},
+
+  {id:'alert-crisis', name:'Crisis Alert Card', icon:'🚨', tags:['alerts'],
+   render:()=>`<div style="background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.25);border-radius:10px;padding:10px 12px;margin:4px 8px">
+    <div style="display:flex;align-items:center;gap:7px;margin-bottom:5px">
+      <span style="font-size:14px">🚨</span>
+      <div><div style="font-size:11px;font-weight:600;color:#f87171">Brand Risk — High</div><div style="font-size:9px;color:rgba(248,113,113,.6)">Drinking Memes · 3 minutes ago</div></div>
+      <span style="margin-left:auto;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(248,113,113,.15);color:#f87171;border:1px solid rgba(248,113,113,.25)">Crisis</span>
+    </div>
+    <div style="font-size:10px;color:rgba(255,255,255,.45);line-height:1.5">Very negative comment spike detected — 23 negative comments in 4 minutes. Risk level: High.</div>
+    <div style="display:flex;gap:6px;margin-top:8px">
+      <div style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(248,113,113,.3);text-align:center;font-size:10px;color:#f87171;cursor:pointer">Respond</div>
+      <div style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(255,255,255,.08);text-align:center;font-size:10px;color:rgba(255,255,255,.3);cursor:pointer">Dismiss</div>
+    </div>
+   </div>`},
+
+  {id:'alert-performance', name:'Performance Alert', icon:'📈', tags:['alerts'],
+   render:()=>`<div style="background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2);border-radius:10px;padding:10px 12px;margin:4px 8px">
+    <div style="display:flex;align-items:center;gap:7px">
+      <span style="font-size:14px">🚀</span>
+      <div><div style="font-size:11px;font-weight:600;color:#34d399">Post going viral</div><div style="font-size:9px;color:rgba(52,211,153,.6)">Kelpie Daily · Just now</div></div>
+      <span style="margin-left:auto;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(52,211,153,.12);color:#34d399;border:1px solid rgba(52,211,153,.25)">Opportunity</span>
+    </div>
+    <div style="margin-top:5px;font-size:10px;color:rgba(255,255,255,.45)">3× average reach in first hour. Consider resharing now.</div>
+   </div>`},
+
+  {id:'alert-trend', name:'Trend Alert', icon:'📣', tags:['alerts'],
+   render:()=>`<div style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.2);border-radius:10px;padding:9px 12px;margin:4px 8px">
+    <div style="display:flex;align-items:center;gap:7px">
+      <span style="font-size:14px">📣</span>
+      <div><div style="font-size:11px;font-weight:600;color:#fbbf24">Trend detected</div><div style="font-size:9px;color:rgba(251,191,36,.6)">2 hours ago</div></div>
+      <span style="margin-left:auto;font-size:9px;color:#fbbf24">Trend</span>
+    </div>
+    <div style="margin-top:5px;font-size:10px;color:rgba(255,255,255,.45)">"Prison drama" trending +340% in your niche. Best time to post: next 4 hours.</div>
+   </div>`},
+
+  // ── UI COMPONENTS ───────────────────────────────────
+  {sec:'UI Components'},
+
+  {id:'search-bar', name:'Search Bar', icon:'🔍', tags:['ui'],
+   render:()=>`<div style="background:rgba(255,255,255,.05);border-radius:20px;height:32px;margin:5px 8px;display:flex;align-items:center;padding:0 11px;gap:6px;font-size:10px;color:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.06)">🔍 Search posts, pages, topics…</div>`},
+
+  {id:'section-header', name:'Section Header', icon:'#️⃣', tags:['ui'],
+   render:()=>`<div style="padding:8px 12px 3px;display:flex;align-items:center;justify-content:space-between"><span style="font-size:10px;font-weight:600;color:rgba(255,255,255,.55)">Your pages this week</span><span style="font-size:9px;color:#00d4aa;cursor:pointer">See all →</span></div>`},
+
+  {id:'empty-card', name:'Content Card (blank)', icon:'🃏', tags:['ui'],
+   render:()=>`<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:9px;padding:12px;margin:4px 8px">
+    <div style="height:8px;width:55%;background:rgba(255,255,255,.08);border-radius:3px;margin-bottom:7px"></div>
+    <div style="height:6px;width:85%;background:rgba(255,255,255,.05);border-radius:3px;margin-bottom:4px"></div>
+    <div style="height:6px;width:70%;background:rgba(255,255,255,.05);border-radius:3px"></div>
+   </div>`},
+
+  {id:'cta-button', name:'CTA Button Row', icon:'🔘', tags:['ui'],
+   render:()=>`<div style="display:flex;gap:7px;padding:5px 8px">
+    <div style="flex:1;padding:9px;border-radius:8px;background:linear-gradient(135deg,#a78bfa,#00d4aa);text-align:center;font-size:11px;font-weight:600;color:#0a0f1a;cursor:pointer">Post now</div>
+    <div style="flex:1;padding:9px;border-radius:8px;border:1px solid rgba(0,212,170,.3);text-align:center;font-size:11px;color:#00d4aa;cursor:pointer">Ask Art-E</div>
+   </div>`},
+
+  {id:'divider', name:'Divider', icon:'—', tags:['ui'],
+   render:()=>`<div style="height:1px;background:rgba(255,255,255,.05);margin:3px 8px"></div>`},
+
+  {id:'text-block', name:'Text / Label', icon:'T', tags:['ui'],
+   render:()=>`<div style="padding:5px 12px;font-size:11px;color:rgba(255,255,255,.4);line-height:1.55">Your text here</div>`},
 ];
 
-// Per-user state
-const _WFK = 'artemis_wf3_' + (_name||'guest').replace(/\s/g,'_');
-let wfState = (() => {
-  try { const s = localStorage.getItem(_WFK); if(s) return JSON.parse(s); } catch(e){}
+// ── PRESET SCREENS ────────────────────────────────────
+const WF_PRESETS = {
+  'Home / Feed': ['topnav','page-selector','arte-insight','stories-row','morning-briefing','post-card','activity-item','bottom-nav'],
+  'Dashboard': ['topnav','tab-strip','kpi-4','bar-chart','sentiment-split','virality-score','bottom-nav'],
+  'Predictions': ['topnav','predictor-input','ai-score-badge','timing-window','posting-heatmap','bottom-nav'],
+  'Discovery': ['topnav','tab-strip','flywheel-mini','collab-card','audience-match','bottom-nav'],
+  'Alerts': ['topnav','tab-strip','bell-alert','alert-crisis','alert-performance','alert-trend','bottom-nav'],
+  'Art-E Chat': ['topnav','arte-chat-bubble','arte-fab','bottom-nav'],
+};
+
+// ── PER-USER STATE ────────────────────────────────────
+const _WFK = 'artemis_wf4_' + (_name||'guest').replace(/\s/g,'_');
+let wfState = (()=>{
+  try{ const s=localStorage.getItem(_WFK); if(s) return JSON.parse(s); }catch(e){}
   return {
-    screens:[{id:'home',name:'Home'},{id:'analytics',name:'Analytics'},{id:'discovery',name:'Discovery'}],
+    screens:[{id:'home',name:'Home / Feed'},{id:'dashboard',name:'Dashboard'},{id:'discovery',name:'Discovery'}],
     cur:'home',
-    layouts:{home:[], analytics:[], discovery:[]}
+    layouts:{home:[],dashboard:[],discovery:[]},
+    flows:{}
   };
 })();
-let _wfSel = null;
-let _palDrag = null; // block id being dragged from palette
-let _elDragUid = null, _elDragFromIdx = null;
 
-function wfSave(){ try{ localStorage.setItem(_WFK, JSON.stringify(wfState)); }catch(e){} }
+let _wfSel=null, _palDrag=null, _elDragUid=null, _elDragIdx=null;
+let _wfSearchQuery='';
 
-// ── RENDER ──────────────────────────────────
-function wfRenderAll(){
-  wfRenderTabs();
-  wfRenderPalette();
-  wfRenderCanvas();
-}
+function wfSave(){ try{ localStorage.setItem(_WFK,JSON.stringify(wfState)); }catch(e){} }
+
+// ── RENDER ALL ────────────────────────────────────────
+function wfRenderAll(){ wfRenderTabs(); wfRenderPalette(); wfRenderCanvas(); }
 
 function wfRenderTabs(){
-  const el = document.getElementById('wfScreenTabs');
-  if(!el) return;
-  el.innerHTML = wfState.screens.map(s=>
+  const el=document.getElementById('wfScreenTabs'); if(!el) return;
+  el.innerHTML=wfState.screens.map(s=>
     `<button class="wf-screen-tab${s.id===wfState.cur?' wf-active':''}" onclick="wfSwitch('${s.id}')">${s.name}</button>`
   ).join('');
 }
 
 function wfRenderPalette(){
-  const el = document.getElementById('wfPalette');
-  if(!el){ return; }
-  let h = '';
-  WF_BLOCKS.forEach(b => {
-    if(b.sec){
-      h += `<div class="wf-section-label">${b.sec}</div>`;
-    } else {
-      h += `<div class="wf-block" draggable="true"
-        ondragstart="wfPalStart(event,'${b.id}')"
-        onclick="wfQuickAdd('${b.id}')">
+  const el=document.getElementById('wfPalette'); if(!el) return;
+  const q=_wfSearchQuery.toLowerCase();
+  let h='';
+  // Search filter
+  const blocks=q ? WF_BLOCKS.filter(b=>b.sec||b.name.toLowerCase().includes(q)||(b.tags||[]).some(t=>t.includes(q))) : WF_BLOCKS;
+  
+  blocks.forEach(b=>{
+    if(b.sec){ h+=`<div class="wf-section-label">${b.sec}</div>`; }
+    else {
+      h+=`<div class="wf-block" draggable="true" ondragstart="wfPalStart(event,'${b.id}')" onclick="wfQuickAdd('${b.id}')">
         <span class="wf-block-icon">${b.icon}</span>
         <span class="wf-block-name">${b.name}</span>
       </div>`;
     }
   });
-  el.innerHTML = h;
+  el.innerHTML=h;
+
+  // Preset buttons
+  const presetsEl=document.getElementById('wfPresets'); if(!presetsEl) return;
+  presetsEl.innerHTML=Object.keys(WF_PRESETS).map(name=>
+    `<button class="wf-preset-btn" onclick="wfLoadPreset('${name.replace(/'/g,"\\'")}')">📱 ${name}</button>`
+  ).join('');
 }
 
 function wfRenderCanvas(){
-  const zone = document.getElementById('wfDropZone');
-  if(!zone) return;
-  const items = wfState.layouts[wfState.cur] || [];
+  const zone=document.getElementById('wfDropZone'); if(!zone) return;
+  const items=wfState.layouts[wfState.cur]||[];
   if(!items.length){
-    zone.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;gap:10px;color:rgba(255,255,255,.18)">
+    zone.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:280px;gap:10px;color:rgba(255,255,255,.18);text-align:center;padding:20px">
       <div style="font-size:32px">📱</div>
-      <div style="font-size:12px">Drag blocks here or click them</div>
+      <div style="font-size:12px">Click any block or drag it here</div>
+      <div style="font-size:10px;opacity:.6">Or load a preset screen below</div>
     </div>`;
     return;
   }
-  zone.innerHTML = items.map((item,i) => {
-    const b = WF_BLOCKS.find(x=>x.id===item.bid);
-    if(!b) return '';
-    return `<div class="wf-el${_wfSel===item.uid?' wf-selected':''}"
-      data-uid="${item.uid}"
+  zone.innerHTML=items.map((item,i)=>{
+    const b=WF_BLOCKS.find(x=>x.id===item.bid); if(!b) return '';
+    const hasFlow=(wfState.flows[item.uid]||[]).length>0;
+    const sel=_wfSel===item.uid;
+    return `<div class="wf-el${sel?' wf-selected':''}" data-uid="${item.uid}"
       draggable="true"
       onclick="wfSelEl('${item.uid}',event)"
       ondragstart="wfElStart(event,'${item.uid}',${i})"
       ondragover="wfElOver(event,${i})"
       ondrop="wfElDrop(event,${i})">
       <button class="wf-el-del" onclick="wfDelEl('${item.uid}',event)">✕</button>
+      ${hasFlow?`<div style="position:absolute;top:3px;left:20px;font-size:8px;background:#a78bfa;border-radius:3px;padding:1px 5px;color:#0a0f1a;z-index:15;pointer-events:none">⚡ flow</div>`:''}
       ${b.render()}
     </div>`;
   }).join('');
 }
 
-// ── SCREEN MANAGEMENT ───────────────────────
-function wfSwitch(id){
-  wfState.cur = id; _wfSel = null; wfSave();
-  wfRenderTabs(); wfRenderCanvas();
-  document.getElementById('wfPropsContent').innerHTML = '<div style="font-size:11px;color:var(--t3)">Select an element.</div>';
+// ── PRESETS ───────────────────────────────────────────
+function wfLoadPreset(name){
+  if(!confirm(`Load preset "${name}"? This will replace the current screen.`)) return;
+  const ids=WF_PRESETS[name]||[];
+  wfState.layouts[wfState.cur]=ids.map(bid=>({bid,uid:'el'+Date.now()+Math.random().toString(36).slice(2,5),props:{}}));
+  wfSave(); wfRenderCanvas();
 }
+
+// ── SCREEN MANAGEMENT ─────────────────────────────────
+function wfSwitch(id){ wfState.cur=id; _wfSel=null; wfSave(); wfRenderTabs(); wfRenderCanvas(); document.getElementById('wfPropsContent').innerHTML='<div style="font-size:11px;color:var(--t3)">Select an element.</div>'; }
 function wfAddScreen(){
-  const n = prompt('Screen name:','New Screen'); if(!n) return;
-  const id = 'sc_'+Date.now();
-  wfState.screens.push({id,name:n});
-  wfState.layouts[id]=[];
-  wfState.cur=id; wfSave(); wfRenderAll();
+  const n=prompt('Screen name:','New Screen'); if(!n) return;
+  const id='sc_'+Date.now();
+  wfState.screens.push({id,name:n}); wfState.layouts[id]=[]; wfState.cur=id;
+  wfSave(); wfRenderAll();
 }
 function wfDeleteScreen(){
   if(wfState.screens.length<=1){alert('Need at least one screen');return;}
@@ -1273,95 +1535,144 @@ function wfDeleteScreen(){
   wfState.cur=wfState.screens[0].id;
   wfSave(); wfRenderAll();
 }
+function wfRenameScreen(){
+  const s=wfState.screens.find(x=>x.id===wfState.cur); if(!s) return;
+  const n=prompt('Rename screen:',s.name); if(!n) return;
+  s.name=n; wfSave(); wfRenderTabs();
+}
 
-// ── ADDING ELEMENTS ─────────────────────────
+// ── ADD ELEMENTS ──────────────────────────────────────
 function wfQuickAdd(bid){
-  const uid='el'+Date.now()+'_'+Math.random().toString(36).slice(2,5);
+  const uid='el'+Date.now()+Math.random().toString(36).slice(2,5);
   if(!wfState.layouts[wfState.cur]) wfState.layouts[wfState.cur]=[];
-  wfState.layouts[wfState.cur].push({bid,uid,props:{}});
+  wfState.layouts[wfState.cur].push({bid,uid,props:{label:''}});
   _wfSel=uid; wfSave(); wfRenderCanvas(); wfShowProps(uid);
 }
-
-// ── PALETTE DRAG ─────────────────────────────
 function wfPalStart(e,bid){ _palDrag=bid; _elDragUid=null; e.dataTransfer.effectAllowed='copy'; }
-
 function wfDragOver(e){ e.preventDefault(); document.getElementById('wfDropZone').classList.add('dz-active'); }
 function wfDragLeave(){ document.getElementById('wfDropZone').classList.remove('dz-active'); }
-function wfDropOnZone(e){
-  e.preventDefault();
-  document.getElementById('wfDropZone').classList.remove('dz-active');
-  if(_palDrag){ wfQuickAdd(_palDrag); _palDrag=null; }
-}
+function wfDropOnZone(e){ e.preventDefault(); document.getElementById('wfDropZone').classList.remove('dz-active'); if(_palDrag){wfQuickAdd(_palDrag);_palDrag=null;} }
 
-// ── ELEMENT DRAG (reorder) ───────────────────
-function wfElStart(e,uid,idx){ _elDragUid=uid; _elDragFromIdx=idx; _palDrag=null; e.dataTransfer.effectAllowed='move'; e.stopPropagation(); }
-function wfElOver(e,toIdx){ e.preventDefault(); e.stopPropagation(); }
+// ── ELEMENT DRAG REORDER ──────────────────────────────
+function wfElStart(e,uid,idx){ _elDragUid=uid; _elDragIdx=idx; _palDrag=null; e.dataTransfer.effectAllowed='move'; e.stopPropagation(); }
+function wfElOver(e,i){ e.preventDefault(); e.stopPropagation(); }
 function wfElDrop(e,toIdx){
   e.preventDefault(); e.stopPropagation();
-  if(_elDragUid && _elDragFromIdx!==null && _elDragFromIdx!==toIdx){
+  if(_elDragUid&&_elDragIdx!==null&&_elDragIdx!==toIdx){
     const items=wfState.layouts[wfState.cur];
-    const [m]=items.splice(_elDragFromIdx,1);
-    items.splice(toIdx,0,m);
-    _elDragUid=null; _elDragFromIdx=null;
-    wfSave(); wfRenderCanvas();
-  } else if(_palDrag){
-    wfQuickAdd(_palDrag); _palDrag=null;
-  }
+    const [m]=items.splice(_elDragIdx,1); items.splice(toIdx,0,m);
+    _elDragUid=null; _elDragIdx=null; wfSave(); wfRenderCanvas();
+  } else if(_palDrag){ wfQuickAdd(_palDrag); _palDrag=null; }
+}
+function wfDelEl(uid,e){
+  e.stopPropagation();
+  wfState.layouts[wfState.cur]=wfState.layouts[wfState.cur].filter(x=>x.uid!==uid);
+  delete (wfState.flows||{})[uid];
+  if(_wfSel===uid){_wfSel=null;document.getElementById('wfPropsContent').innerHTML='<div style="font-size:11px;color:var(--t3)">Select an element.</div>';}
+  wfSave(); wfRenderCanvas();
 }
 
-// ── SELECT & PROPERTIES ─────────────────────
+// ── SELECT & PROPERTIES PANEL ─────────────────────────
 function wfSelEl(uid,e){
   e.stopPropagation(); _wfSel=uid;
   wfRenderCanvas(); wfShowProps(uid);
 }
+
 function wfShowProps(uid){
   const item=(wfState.layouts[wfState.cur]||[]).find(x=>x.uid===uid);
   const b=item?WF_BLOCKS.find(x=>x.id===item.bid):null;
   const el=document.getElementById('wfPropsContent');
   if(!b||!item){el.innerHTML='<div style="font-size:11px;color:var(--t3)">Select an element.</div>';return;}
+  
+  const flows=(wfState.flows||{})[uid]||[];
+  const allScreens=wfState.screens;
+  const triggers=['Tap','Long press','Swipe left','Swipe right','Double tap'];
+  const actions=['Navigate to screen','Open Art-E','Show alert','Show modal','Dismiss','Scroll to top'];
+
   el.innerHTML=`
     <div class="wf-prop-g"><div class="wf-prop-lbl">Block</div>
-      <div style="font-size:12px;font-weight:600">${b.icon} ${b.name}</div></div>
-    <div class="wf-prop-g"><div class="wf-prop-lbl">Note</div>
-      <input class="wf-prop-input" value="${item.props.note||''}" placeholder="Annotation…"
-        oninput="wfSetProp('${uid}','note',this.value)"></div>
-    <div class="wf-prop-g"><div class="wf-prop-lbl">Move</div>
-      <div style="display:flex;gap:4px">
-        <button class="wf-tbtn" style="flex:1" onclick="wfMoveEl('${uid}',-1)">↑ Up</button>
-        <button class="wf-tbtn" style="flex:1" onclick="wfMoveEl('${uid}',1)">↓ Down</button>
-      </div></div>
-    <div class="wf-prop-g" style="margin-top:12px">
-      <button onclick="wfDelEl('${uid}',{stopPropagation:()=>{}})"
-        style="width:100%;padding:6px;border-radius:6px;border:1px solid rgba(248,113,113,.3);background:rgba(248,113,113,.07);color:var(--red);cursor:pointer;font-family:var(--font);font-size:11px">
-        Remove</button></div>`;
+      <div style="font-size:12px;font-weight:600;color:var(--t1)">${b.icon} ${b.name}</div></div>
+
+    <div class="wf-prop-g"><div class="wf-prop-lbl">Label / Note</div>
+      <input class="wf-prop-input" value="${item.props.label||''}" placeholder="Annotation…"
+        oninput="wfSetProp('${uid}','label',this.value)"></div>
+
+    <div class="wf-prop-g"><div class="wf-prop-lbl" style="display:flex;align-items:center;justify-content:space-between">
+      <span>Interactions</span>
+      <button onclick="wfAddFlow('${uid}')" style="font-size:9px;padding:2px 7px;border-radius:4px;border:1px solid rgba(167,139,250,.35);background:rgba(167,139,250,.08);color:#a78bfa;cursor:pointer;font-family:var(--font)">+ Add</button>
+    </div>
+    <div id="flowList_${uid}" style="display:flex;flex-direction:column;gap:4px;margin-top:4px">${wfRenderFlows(uid,flows,allScreens,triggers,actions)}</div>
+    </div>
+
+    <div class="wf-prop-g" style="display:flex;gap:4px">
+      <button class="wf-tbtn" style="flex:1" onclick="wfMoveEl('${uid}',-1)">↑</button>
+      <button class="wf-tbtn" style="flex:1" onclick="wfMoveEl('${uid}',1)">↓</button>
+      <button onclick="wfDelEl('${uid}',{stopPropagation:()=>{}})" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(248,113,113,.3);background:rgba(248,113,113,.07);color:var(--red);cursor:pointer;font-family:var(--font);font-size:11px">✕</button>
+    </div>`;
 }
-function wfSetProp(uid,k,v){
-  const item=(wfState.layouts[wfState.cur]||[]).find(x=>x.uid===uid);
-  if(item){item.props[k]=v;wfSave();}
+
+function wfRenderFlows(uid, flows, screens, triggers, actions){
+  if(!flows.length) return '<div style="font-size:10px;color:var(--t3)">No interactions yet</div>';
+  return flows.map((f,fi)=>`
+    <div style="background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.18);border-radius:7px;padding:7px 9px;font-size:10px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+        <span style="color:#a78bfa;font-weight:600">Interaction ${fi+1}</span>
+        <button onclick="wfDeleteFlow('${uid}',${fi})" style="font-size:9px;border:none;background:none;color:var(--red);cursor:pointer;padding:0">✕</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div style="display:flex;gap:4px;align-items:center">
+          <span style="font-size:9px;color:var(--t3);width:42px;flex-shrink:0">On:</span>
+          <select class="wf-prop-input" style="padding:3px 6px;font-size:10px" onchange="wfUpdateFlow('${uid}',${fi},'trigger',this.value)">
+            ${triggers.map(t=>`<option${f.trigger===t?' selected':''}>${t}</option>`).join('')}
+          </select>
+        </div>
+        <div style="display:flex;gap:4px;align-items:center">
+          <span style="font-size:9px;color:var(--t3);width:42px;flex-shrink:0">Do:</span>
+          <select class="wf-prop-input" style="padding:3px 6px;font-size:10px" onchange="wfUpdateFlow('${uid}',${fi},'action',this.value)">
+            ${actions.map(a=>`<option${f.action===a?' selected':''}>${a}</option>`).join('')}
+          </select>
+        </div>
+        ${f.action==='Navigate to screen'?`<div style="display:flex;gap:4px;align-items:center">
+          <span style="font-size:9px;color:var(--t3);width:42px;flex-shrink:0">To:</span>
+          <select class="wf-prop-input" style="padding:3px 6px;font-size:10px" onchange="wfUpdateFlow('${uid}',${fi},'target',this.value)">
+            ${screens.map(s=>`<option value="${s.id}"${f.target===s.id?' selected':''}>${s.name}</option>`).join('')}
+          </select>
+        </div>`:''}
+        <div style="display:flex;gap:4px;align-items:center">
+          <span style="font-size:9px;color:var(--t3);width:42px;flex-shrink:0">Note:</span>
+          <input class="wf-prop-input" style="padding:3px 6px;font-size:10px" value="${f.note||''}" placeholder="e.g. opens modal" oninput="wfUpdateFlow('${uid}',${fi},'note',this.value)">
+        </div>
+      </div>
+    </div>`).join('');
 }
-function wfMoveEl(uid,dir){
-  const items=wfState.layouts[wfState.cur];
-  const idx=items.findIndex(x=>x.uid===uid);
-  const ni=idx+dir;
-  if(ni<0||ni>=items.length)return;
-  const [m]=items.splice(idx,1); items.splice(ni,0,m);
-  wfSave(); wfRenderCanvas();
+
+function wfAddFlow(uid){
+  if(!wfState.flows) wfState.flows={};
+  if(!wfState.flows[uid]) wfState.flows[uid]=[];
+  wfState.flows[uid].push({trigger:'Tap',action:'Navigate to screen',target:wfState.screens[0]?.id||'',note:''});
+  wfSave(); wfShowProps(uid); wfRenderCanvas();
 }
-function wfDelEl(uid,e){
-  e.stopPropagation();
-  wfState.layouts[wfState.cur]=wfState.layouts[wfState.cur].filter(x=>x.uid!==uid);
-  if(_wfSel===uid){_wfSel=null;document.getElementById('wfPropsContent').innerHTML='<div style="font-size:11px;color:var(--t3)">Select an element.</div>';}
-  wfSave(); wfRenderCanvas();
+function wfDeleteFlow(uid,idx){
+  if(wfState.flows&&wfState.flows[uid]){
+    wfState.flows[uid].splice(idx,1);
+    wfSave(); wfShowProps(uid);
+  }
 }
-function wfClearCanvas(){
-  if(!confirm('Clear this screen?'))return;
-  wfState.layouts[wfState.cur]=[]; _wfSel=null; wfSave(); wfRenderCanvas();
+function wfUpdateFlow(uid,idx,key,val){
+  if(wfState.flows&&wfState.flows[uid]&&wfState.flows[uid][idx]){
+    wfState.flows[uid][idx][key]=val;
+    wfSave();
+    // Re-render canvas to update ⚡ badge
+    wfRenderCanvas();
+  }
 }
-function wfSaveLayout(){
-  wfSave();
-  const btn=document.querySelector('[onclick="wfSaveLayout()"]');
-  if(btn){const t=btn.textContent;btn.textContent='✓ Saved!';setTimeout(()=>btn.textContent=t,1500);}
-}
+
+// ── UTIL ──────────────────────────────────────────────
+function wfSetProp(uid,k,v){ const item=(wfState.layouts[wfState.cur]||[]).find(x=>x.uid===uid); if(item){item.props[k]=v;wfSave();} }
+function wfMoveEl(uid,dir){ const items=wfState.layouts[wfState.cur]; const idx=items.findIndex(x=>x.uid===uid); const ni=idx+dir; if(ni<0||ni>=items.length)return; const[m]=items.splice(idx,1);items.splice(ni,0,m);wfSave();wfRenderCanvas(); }
+function wfClearCanvas(){ if(!confirm('Clear this screen?'))return; wfState.layouts[wfState.cur]=[]; _wfSel=null; wfSave(); wfRenderCanvas(); }
+function wfSaveLayout(){ wfSave(); const btn=document.querySelector('[onclick="wfSaveLayout()"]'); if(btn){const t=btn.textContent;btn.textContent='✓ Saved!';setTimeout(()=>btn.textContent=t,1500);} }
+function wfSearch(q){ _wfSearchQuery=q; wfRenderPalette(); }
 
 
 // ══════════════════════════════════════════
