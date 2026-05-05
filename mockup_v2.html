@@ -984,28 +984,73 @@ body{
 
 .composer-actions{
   display:flex;
+  align-items:center;
   border-top:1px solid var(--bdr-soft);
   margin:10px -16px -12px;
-  padding:6px 8px;
-  gap:2px;
+  padding:10px 12px;
+  gap:10px;  /* clear gap between distinct buttons */
 }
 .composer-btn{
   flex:1;
-  background:transparent;
-  border:none;
-  color:var(--t2);
+  background:var(--bg-input);
+  border:1px solid var(--bdr-soft);
+  color:var(--t1);
   font-family:inherit;
-  font-size:14px;
-  font-weight:600;
-  padding:8px;
-  border-radius:var(--r-sm);
+  font-size:var(--fs-base);
+  font-weight:var(--fw-semibold);
+  padding:9px 12px;
+  border-radius:9999px;  /* pill shape — distinct, tappable */
   cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:6px;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  transition:all var(--t-base);
+  white-space:nowrap;
+  min-width:0;
 }
-.composer-btn:hover{background:var(--bg-elev-2);color:var(--t1)}
-.composer-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+.composer-btn:hover{
+  background:var(--hover-bg-strong);
+  border-color:var(--hover-border);
+  transform:translateY(-1px);
+}
+.composer-btn:active{
+  transform:translateY(0);
+  background:var(--hover-bg-pressed);
+}
+.composer-btn svg{
+  width:16px;height:16px;
+  fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0;
+}
 .composer-btn.predict svg{color:var(--teal)}
+.composer-btn.timing svg{color:var(--teal)}
+.composer-btn.arte{
+  color:var(--arte-1);
+  background:var(--arte-bg);
+  border-color:rgba(124,92,191,0.3);
+}
 .composer-btn.arte svg{color:var(--arte-1)}
+.composer-btn.arte:hover{
+  background:var(--hover-bg-arte);
+  border-color:var(--arte-1);
+}
+
+/* Light mode: brighter background contrast for the pills */
+html[data-theme="light"] .composer-btn{
+  background:var(--bg);
+  border-color:var(--bdr-soft);
+  color:var(--t1);
+}
+html[data-theme="light"] .composer-btn:hover{
+  background:var(--hover-bg);
+  border-color:var(--bdr);
+}
+html[data-theme="light"] .composer-btn.arte{
+  background:rgba(90,63,160,0.06);
+  border-color:rgba(90,63,160,0.25);
+  color:var(--arte-1);
+}
+html[data-theme="light"] .composer-btn.arte:hover{
+  background:rgba(90,63,160,0.12);
+  border-color:var(--arte-1);
+}
 
 /* FAB for Art-E (always present, mobile + desktop) */
 .fab-arte{
@@ -1218,8 +1263,9 @@ body.arte-suggestions-off .arte-chat-head .silence-link{
   /* Composer */
   .composer-wrap{margin:0 -8px 10px -8px;border-radius:0}
   .composer-input{font-size:13px}
-  .composer-action{font-size:12px;padding:9px 6px}
-  .composer-action svg{width:13px;height:13px}
+  .composer-btn{font-size:11px;padding:8px 10px;gap:5px}
+  .composer-btn svg{width:14px;height:14px}
+  /* svg sizing handled in .composer-btn rule above */
   
   /* Stories — already horizontally scrollable, just compact */
   .stories-strip{margin:0 -8px 10px -8px;padding:0 8px}
@@ -3923,7 +3969,7 @@ html[data-theme="light"] .kpi-card-v2.reach-hero{
               <svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg>
               Predict score
             </button>
-            <button class="composer-btn predict">
+            <button class="composer-btn timing">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
               Find best time
             </button>
