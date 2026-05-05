@@ -2504,21 +2504,34 @@ html[data-theme="light"] .hb-metric{
             <stop offset="0%" stop-color="rgba(124,92,191,0.26)"/>
             <stop offset="100%" stop-color="rgba(124,92,191,0.08)"/>
           </linearGradient>
+          <!-- New end-node gradients for notification channels -->
+          <linearGradient id="fg-email" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(0,196,160,0.22)"/>
+            <stop offset="100%" stop-color="rgba(0,196,160,0.06)"/>
+          </linearGradient>
+          <linearGradient id="fg-phone" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(124,92,191,0.26)"/>
+            <stop offset="100%" stop-color="rgba(124,92,191,0.08)"/>
+          </linearGradient>
+          <linearGradient id="fg-whatsapp" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(37,211,102,0.22)"/>
+            <stop offset="100%" stop-color="rgba(37,211,102,0.06)"/>
+          </linearGradient>
           <linearGradient id="path-grad-in" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="#00C4A0" stop-opacity="0.2"/>
             <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0.7"/>
           </linearGradient>
-          <linearGradient id="path-grad-crisis" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
-            <stop offset="100%" stop-color="#E53935" stop-opacity="0.6"/>
-          </linearGradient>
-          <linearGradient id="path-grad-opp" x1="0" y1="0" x2="1" y2="0">
+          <linearGradient id="path-grad-email" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
             <stop offset="100%" stop-color="#00C4A0" stop-opacity="0.6"/>
           </linearGradient>
-          <linearGradient id="path-grad-time" x1="0" y1="0" x2="1" y2="0">
+          <linearGradient id="path-grad-phone" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
             <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0.5"/>
+          </linearGradient>
+          <linearGradient id="path-grad-whatsapp" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#25D366" stop-opacity="0.7"/>
           </linearGradient>
           <filter id="node-shadow-3d" x="-30%" y="-30%" width="160%" height="160%">
             <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
@@ -2552,9 +2565,9 @@ html[data-theme="light"] .hb-metric{
 
         <!-- Connecting paths — increased vertical separation: top y=80, mid y=270, bot y=460 -->
         <path id="flow-path-in" d="M 220 270 Q 320 270 420 270" fill="none" stroke="url(#path-grad-in)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
-        <path id="flow-path-1" d="M 580 270 C 660 270 660 75 740 75" fill="none" stroke="url(#path-grad-crisis)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
-        <path id="flow-path-2" d="M 580 270 C 660 270 680 270 740 270" fill="none" stroke="url(#path-grad-opp)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
-        <path id="flow-path-3" d="M 580 270 C 660 270 660 465 740 465" fill="none" stroke="url(#path-grad-time)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-1" d="M 580 270 C 660 270 660 75 740 75" fill="none" stroke="url(#path-grad-email)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-2" d="M 580 270 C 660 270 680 270 740 270" fill="none" stroke="url(#path-grad-phone)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-3" d="M 580 270 C 660 270 660 465 740 465" fill="none" stroke="url(#path-grad-whatsapp)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
 
         <!-- Travelling pulses on input path (4 staggered teal dots) -->
         <g>
@@ -2573,26 +2586,27 @@ html[data-theme="light"] .hb-metric{
         </g>
 
         <!-- Travelling pulses on output paths (each path gets 2 dots) -->
+        <!-- Top → Email (teal), Middle → Phone (purple), Bottom → WhatsApp (green) -->
         <g>
-          <circle r="5" fill="#E53935" filter="url(#glow-strong)">
+          <circle r="5" fill="#00C4A0" filter="url(#glow-strong)">
             <animateMotion dur="2.8s" begin="0.5s" repeatCount="indefinite" path="M 580 270 C 660 270 660 75 740 75"/>
           </circle>
-          <circle r="4" fill="#E53935" filter="url(#glow-arte)">
+          <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
             <animateMotion dur="2.8s" begin="1.9s" repeatCount="indefinite" path="M 580 270 C 660 270 660 75 740 75"/>
           </circle>
 
-          <circle r="5" fill="#00C4A0" filter="url(#glow-strong)">
+          <circle r="5" fill="#7C5CBF" filter="url(#glow-strong)">
             <animateMotion dur="2.8s" begin="1s" repeatCount="indefinite" path="M 580 270 C 660 270 680 270 740 270"/>
           </circle>
-          <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
+          <circle r="4" fill="#7C5CBF" filter="url(#glow-arte)">
             <animateMotion dur="2.8s" begin="2.4s" repeatCount="indefinite" path="M 580 270 C 660 270 680 270 740 270"/>
           </circle>
 
-          <circle r="5" fill="#7C5CBF" filter="url(#glow-strong)">
-            <animateMotion dur="2.8s" begin="1.5s" repeatCount="indefinite" path="M 580 270 C 660 270 660 460 760 460"/>
+          <circle r="5" fill="#25D366" filter="url(#glow-strong)">
+            <animateMotion dur="2.8s" begin="1.5s" repeatCount="indefinite" path="M 580 270 C 660 270 660 465 740 465"/>
           </circle>
-          <circle r="4" fill="#7C5CBF" filter="url(#glow-arte)">
-            <animateMotion dur="2.8s" begin="2.6s" repeatCount="indefinite" path="M 580 270 C 660 270 660 460 760 460"/>
+          <circle r="4" fill="#25D366" filter="url(#glow-arte)">
+            <animateMotion dur="2.8s" begin="2.6s" repeatCount="indefinite" path="M 580 270 C 660 270 660 465 740 465"/>
           </circle>
         </g>
 
@@ -2623,43 +2637,47 @@ html[data-theme="light"] .hb-metric{
           <text class="flow-sublabel" x="80" y="136">reads · learns · understands</text>
         </g>
 
-        <!-- Node 3a: Drama spotted (top-right, y=20-140) - well separated from middle -->
+        <!-- Node 3a: Email (top-right) -->
         <g transform="translate(740, 0)" filter="url(#node-shadow-3d)">
           <rect x="3" y="3" width="240" height="150" rx="18" fill="rgba(0,0,0,0.3)"/>
-          <rect x="0" y="0" width="240" height="150" rx="18" fill="url(#fg-crisis)" stroke="rgba(229,57,53,0.55)" stroke-width="1.5"/>
-          <g transform="translate(36, 75)" stroke="#E53935" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M 0 -18 L 18 14 L -18 14 Z"/>
-            <path d="M 0 -7 v 10"/>
-            <circle cx="0" cy="11" r="1.4" fill="#E53935"/>
+          <rect x="0" y="0" width="240" height="150" rx="18" fill="url(#fg-email)" stroke="rgba(0,196,160,0.55)" stroke-width="1.5"/>
+          <!-- Envelope icon -->
+          <g transform="translate(36, 75)" stroke="#00C4A0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="-18" y="-13" width="36" height="26" rx="3"/>
+            <path d="M -18 -10 L 0 4 L 18 -10"/>
           </g>
-          <text x="76" y="58" text-anchor="start" fill="#E53935" style="font-size:15px;font-weight:700;font-family:inherit">Drama spotted</text>
-          <text x="76" y="86" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">"23 angry comments</text>
-          <text x="76" y="104" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">on Drinking Memes"</text>
+          <text x="76" y="58" text-anchor="start" fill="#00C4A0" style="font-size:15px;font-weight:700;font-family:inherit">Email</text>
+          <text x="76" y="86" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">Daily digest plus</text>
+          <text x="76" y="104" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">urgent alerts</text>
         </g>
 
-        <!-- Node 3b: Post going viral (middle-right, y=210-330) - well separated -->
+        <!-- Node 3b: Phone push (middle-right) -->
         <g transform="translate(740, 195)" filter="url(#node-shadow-3d)">
           <rect x="3" y="3" width="240" height="150" rx="18" fill="rgba(0,0,0,0.3)"/>
-          <rect x="0" y="0" width="240" height="150" rx="18" fill="url(#fg-opp)" stroke="rgba(0,196,160,0.55)" stroke-width="1.5"/>
-          <g transform="translate(36, 75)" stroke="#00C4A0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M 7 -18 L -9 5 L 0 5 L -2 18 L 14 -5 L 5 -5 Z" fill="#00C4A0"/>
+          <rect x="0" y="0" width="240" height="150" rx="18" fill="url(#fg-phone)" stroke="rgba(124,92,191,0.55)" stroke-width="1.5"/>
+          <!-- Phone icon -->
+          <g transform="translate(36, 75)" stroke="#7C5CBF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="-11" y="-19" width="22" height="38" rx="4"/>
+            <line x1="-3" y1="14" x2="3" y2="14"/>
+            <line x1="-7" y1="-15" x2="7" y2="-15"/>
           </g>
-          <text x="76" y="58" text-anchor="start" fill="#00C4A0" style="font-size:15px;font-weight:700;font-family:inherit">Post going viral</text>
-          <text x="76" y="86" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">"6PM post is on fire,</text>
-          <text x="76" y="104" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">share to your pages"</text>
+          <text x="76" y="58" text-anchor="start" fill="#7C5CBF" style="font-size:15px;font-weight:700;font-family:inherit">Phone</text>
+          <text x="76" y="86" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">Push notifications</text>
+          <text x="76" y="104" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">the moment it happens</text>
         </g>
 
-        <!-- Node 3c: Perfect time to post (bottom-right, y=400-520) - well separated -->
+        <!-- Node 3c: WhatsApp (bottom-right) -->
         <g transform="translate(740, 390)" filter="url(#node-shadow-3d)">
           <rect x="3" y="3" width="240" height="150" rx="18" fill="rgba(0,0,0,0.3)"/>
-          <rect x="0" y="0" width="240" height="150" rx="18" fill="url(#fg-time)" stroke="rgba(124,92,191,0.55)" stroke-width="1.5"/>
-          <g transform="translate(36, 75)" stroke="#7C5CBF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="0" cy="0" r="16"/>
-            <path d="M 0 -9 v 9 l 7 5"/>
+          <rect x="0" y="0" width="240" height="150" rx="18" fill="url(#fg-whatsapp)" stroke="rgba(37,211,102,0.55)" stroke-width="1.5"/>
+          <!-- WhatsApp chat-bubble icon (simplified) -->
+          <g transform="translate(36, 75)" stroke="#25D366" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M -16 -8 a 16 16 0 1 1 6 14 L -16 14 L -12 4 a 16 16 0 0 1 -4 -12 z"/>
+            <path d="M -5 -2 q 0 6 6 6 q 3 0 4 -2" stroke-width="2"/>
           </g>
-          <text x="76" y="58" text-anchor="start" fill="#7C5CBF" style="font-size:15px;font-weight:700;font-family:inherit">Perfect time to post</text>
-          <text x="76" y="86" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">"Tuesday 6PM, your fans</text>
-          <text x="76" y="104" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">are 34% more active"</text>
+          <text x="76" y="58" text-anchor="start" fill="#25D366" style="font-size:15px;font-weight:700;font-family:inherit">WhatsApp</text>
+          <text x="76" y="86" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">Chat with Art-E</text>
+          <text x="76" y="104" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">like a friend</text>
         </g>
       </svg>
 
@@ -2689,8 +2707,8 @@ html[data-theme="light"] .hb-metric{
         <div class="flow-mobile-step s4">
           <div class="flow-mobile-icon"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 11-12 0 6 6 0 0112 0zM18 14v8M6 14v8M14 22h8M-2 22h8" stroke="currentColor"/><path d="M22 16.92V21a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 3h4.09a2 2 0 012 1.72c.13.96.37 1.9.7 2.81a2 2 0 01-.45 2.11L8.91 11.09a16 16 0 006 6l1.45-1.45a2 2 0 012.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></div>
           <div>
-            <div class="flow-mobile-text-title">Pings your phone</div>
-            <div class="flow-mobile-text-sub">You decide what to do — or let Art-E handle it</div>
+            <div class="flow-mobile-text-title">Reaches you anywhere</div>
+            <div class="flow-mobile-text-sub">Email, phone, or WhatsApp. You decide</div>
           </div>
         </div>
       </div>
