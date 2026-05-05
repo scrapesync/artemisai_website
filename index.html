@@ -843,6 +843,320 @@ footer{
   
   .footer-content{flex-direction:column;text-align:center}
 }
+
+/* ─── LIVE COUNTERS SECTION ─── 
+   Hooked: variable reward made tangible. Numbers tick up so the user
+   feels the platform is working RIGHT NOW. Bandwagon effect: large
+   numbers signal safety, reliability, value. */
+.live-section{
+  padding:80px 32px;
+  background:linear-gradient(180deg, var(--bg) 0%, var(--bg-elev) 100%);
+  border-bottom:1px solid var(--bdr-soft);
+  position:relative;
+  overflow:hidden;
+}
+.live-section::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(0,196,160,0.08), transparent 40%),
+    radial-gradient(circle at 80% 50%, rgba(124,92,191,0.08), transparent 40%);
+  pointer-events:none;
+}
+.live-header{text-align:center;margin-bottom:48px;position:relative;z-index:2}
+.live-pulse{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 14px 7px 10px;
+  background:rgba(0,196,160,0.12);
+  border:1px solid rgba(0,196,160,0.3);
+  border-radius:9999px;
+  color:var(--teal);
+  font-size:var(--fs-sm);font-weight:var(--fw-bold);
+  letter-spacing:0.04em;text-transform:uppercase;
+  margin-bottom:18px;
+}
+.live-pulse-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--teal);
+  position:relative;
+}
+.live-pulse-dot::before{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  background:var(--teal);opacity:0.5;
+  animation:livePulse 1.6s infinite;
+}
+@keyframes livePulse{
+  0%{transform:scale(1);opacity:0.5}
+  100%{transform:scale(2.5);opacity:0}
+}
+.live-title{
+  font-size:var(--fs-display);
+  line-height:var(--lh-tight);
+  font-weight:var(--fw-bold);
+  letter-spacing:-0.01em;
+  margin-bottom:12px;
+}
+.live-sub{
+  font-size:var(--fs-xl);
+  color:var(--t2);
+  max-width:600px;margin:0 auto;
+}
+.live-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:20px;
+  position:relative;z-index:2;
+  max-width:1180px;margin:0 auto;
+}
+.live-tile{
+  background:var(--bg-elev);
+  border:1px solid var(--bdr-soft);
+  border-radius:var(--r-lg);
+  padding:28px 24px;
+  position:relative;overflow:hidden;
+  transition:all var(--t-slow);
+}
+.live-tile:hover{
+  transform:translateY(-3px);
+  border-color:var(--hover-border);
+  box-shadow:var(--shadow);
+}
+.live-tile::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg, var(--teal), var(--arte-1));
+  opacity:0.6;
+}
+.live-tile-icon{
+  width:36px;height:36px;border-radius:var(--r-sm);
+  display:grid;place-items:center;
+  margin-bottom:14px;
+}
+.live-tile.t1 .live-tile-icon{background:var(--teal-bg);color:var(--teal)}
+.live-tile.t2 .live-tile-icon{background:var(--crisis-bg);color:var(--crisis)}
+.live-tile.t3 .live-tile-icon{background:var(--arte-bg);color:var(--arte-1)}
+.live-tile.t4 .live-tile-icon{background:var(--teal-bg);color:var(--teal)}
+.live-tile-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+.live-tile-num{
+  font-size:42px;
+  font-weight:var(--fw-bold);
+  color:var(--t1);
+  line-height:1;letter-spacing:-0.02em;
+  margin-bottom:6px;
+  font-variant-numeric:tabular-nums;
+}
+.live-tile-lbl{
+  font-size:var(--fs-base);
+  color:var(--t2);
+  line-height:var(--lh-snug);
+  font-weight:var(--fw-medium);
+}
+.live-tile-trend{
+  display:inline-flex;align-items:center;gap:4px;
+  margin-top:10px;
+  font-size:var(--fs-xs);font-weight:var(--fw-bold);
+  color:var(--opp);
+  letter-spacing:0.04em;text-transform:uppercase;
+}
+.live-tile-trend svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2.5}
+
+/* ─── FLOW GRAPH SECTION — animated SVG showing how Artemis works ─── */
+.flow-section{
+  padding:96px 32px;
+  text-align:center;
+}
+.flow-graph{
+  max-width:900px;margin:48px auto 0;
+  position:relative;
+}
+.flow-svg{
+  width:100%;height:auto;
+  max-width:900px;
+}
+.flow-node-bg{
+  fill:var(--bg-elev);
+  stroke:var(--bdr);
+  stroke-width:1.5;
+}
+.flow-node-bg.crisis{stroke:rgba(229,57,53,0.4);fill:var(--crisis-bg)}
+.flow-node-bg.opp{stroke:rgba(0,196,160,0.4);fill:var(--teal-bg)}
+.flow-node-bg.arte{stroke:rgba(124,92,191,0.4);fill:var(--arte-bg)}
+.flow-icon{
+  fill:none;stroke:var(--t1);stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.flow-icon.crisis{stroke:var(--crisis)}
+.flow-icon.opp{stroke:var(--teal)}
+.flow-icon.arte{stroke:var(--arte-1)}
+.flow-icon.arte-fill{fill:var(--arte-1);stroke:none}
+.flow-label{
+  fill:var(--t1);
+  font-size:14px;
+  font-weight:var(--fw-bold);
+  text-anchor:middle;
+  font-family:inherit;
+}
+.flow-sublabel{
+  fill:var(--t2);
+  font-size:11px;
+  text-anchor:middle;
+  font-family:inherit;
+  font-weight:var(--fw-medium);
+}
+.flow-line{
+  fill:none;
+  stroke:var(--bdr);
+  stroke-width:2;
+  stroke-dasharray:4 4;
+}
+/* Pulsing dot animation traveling along path */
+.flow-pulse-dot{
+  fill:var(--teal);
+  filter:drop-shadow(0 0 6px var(--teal));
+}
+.flow-pulse-dot.purple{fill:var(--arte-1);filter:drop-shadow(0 0 6px var(--arte-1))}
+
+/* Mobile flow graph: stack vertically with arrows */
+.flow-mobile{
+  display:none;
+  flex-direction:column;
+  gap:20px;
+  max-width:440px;margin:36px auto 0;
+}
+.flow-mobile-step{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 18px;
+  background:var(--bg-elev);
+  border:1px solid var(--bdr-soft);
+  border-radius:var(--r);
+  text-align:left;
+  position:relative;
+}
+.flow-mobile-step::after{
+  content:'';
+  position:absolute;
+  bottom:-14px;left:34px;
+  width:2px;height:14px;
+  background:var(--bdr);
+}
+.flow-mobile-step:last-child::after{display:none}
+.flow-mobile-icon{
+  width:40px;height:40px;border-radius:50%;
+  display:grid;place-items:center;flex-shrink:0;
+}
+.flow-mobile-step.s1 .flow-mobile-icon{background:var(--teal-bg);color:var(--teal)}
+.flow-mobile-step.s2 .flow-mobile-icon{background:var(--bg-input);color:var(--t1)}
+.flow-mobile-step.s3 .flow-mobile-icon{background:var(--arte-bg);color:var(--arte-1)}
+.flow-mobile-step.s4 .flow-mobile-icon{background:var(--teal-bg);color:var(--teal)}
+.flow-mobile-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+.flow-mobile-text-title{
+  font-size:var(--fs-md);
+  font-weight:var(--fw-bold);
+  color:var(--t1);
+  margin-bottom:2px;
+}
+.flow-mobile-text-sub{
+  font-size:var(--fs-sm);
+  color:var(--t2);
+  line-height:var(--lh-snug);
+}
+
+/* ─── TEAM SECTION ─── */
+.team-section{
+  padding:96px 32px;
+  background:var(--bg-elev);
+  border-top:1px solid var(--bdr-soft);
+  border-bottom:1px solid var(--bdr-soft);
+}
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:20px;
+  max-width:1180px;margin:0 auto;
+}
+.team-card{
+  background:var(--bg);
+  border:1px solid var(--bdr-soft);
+  border-radius:var(--r-lg);
+  padding:28px 20px 24px;
+  text-align:center;
+  transition:all var(--t-slow);
+  position:relative;
+  overflow:hidden;
+}
+.team-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--teal);
+  box-shadow:var(--shadow);
+}
+.team-card::after{
+  content:'';position:absolute;
+  bottom:-50%;left:50%;transform:translateX(-50%);
+  width:200px;height:200px;
+  background:radial-gradient(circle, rgba(0,196,160,0.15), transparent 70%);
+  opacity:0;transition:opacity var(--t-slow);
+}
+.team-card:hover::after{opacity:1}
+.team-avatar{
+  width:84px;height:84px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--bg-input), var(--bg-elev-2));
+  border:2px solid var(--bdr-soft);
+  display:grid;place-items:center;
+  margin:0 auto 16px;
+  font-size:24px;font-weight:var(--fw-bold);color:var(--teal);
+  position:relative;z-index:1;overflow:hidden;
+  transition:all var(--t-slow);
+}
+.team-card:hover .team-avatar{
+  border-color:var(--teal);
+  box-shadow:0 0 24px rgba(0,196,160,0.25);
+}
+.team-avatar img{width:100%;height:100%;object-fit:cover}
+.team-name{
+  font-size:var(--fs-lg);
+  font-weight:var(--fw-bold);
+  color:var(--t1);
+  margin-bottom:4px;
+  position:relative;z-index:1;
+}
+.team-role{
+  font-size:var(--fs-xs);
+  color:var(--teal);
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  font-weight:var(--fw-bold);
+  margin-bottom:8px;
+  position:relative;z-index:1;
+}
+.team-tag{
+  font-size:var(--fs-sm);
+  color:var(--t2);
+  line-height:var(--lh-snug);
+  position:relative;z-index:1;
+}
+
+@media(max-width:980px){
+  .live-grid{grid-template-columns:repeat(2, 1fr);gap:16px}
+  .team-grid{grid-template-columns:repeat(2, 1fr);gap:16px}
+  .flow-svg{display:none}
+  .flow-mobile{display:flex}
+}
+@media(max-width:640px){
+  .live-section{padding:56px 18px}
+  .live-title{font-size:26px}
+  .live-sub{font-size:var(--fs-md)}
+  .live-grid{grid-template-columns:1fr;gap:14px}
+  .live-tile{padding:22px 20px}
+  .live-tile-num{font-size:36px}
+  .flow-section{padding:56px 18px}
+  .team-section{padding:56px 18px}
+  .team-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .team-card{padding:20px 14px 16px}
+  .team-avatar{width:64px;height:64px;font-size:18px;margin-bottom:12px}
+  .team-name{font-size:var(--fs-md)}
+  .team-tag{font-size:var(--fs-xs)}
+}
 </style>
 </head>
 <body>
@@ -881,6 +1195,7 @@ footer{
     <li><a href="index.html">Home</a></li>
     <li><a href="#features">Features</a></li>
     <li><a href="#how">How it works</a></li>
+    <li><a href="#team">Team</a></li>
     <li><a href="#contact">Contact</a></li>
     <li>
       <div class="theme-tog">
@@ -903,7 +1218,7 @@ footer{
       Built for Facebook page managers
     </div>
     <h1>Stop watching dashboards.<br><span class="highlight">Start getting answers.</span></h1>
-    <p class="hero-sub">Artemis is the AI co-pilot that watches your Facebook pages 24/7 — flags brand crises in 4 minutes, catches viral windows in real time, and tells you exactly what to post next. No charts to read. No guesswork.</p>
+    <p class="hero-sub">Your pages get hundreds of comments and reactions every day. Artemis is the smart assistant that reads them all for you — and tells you when something needs your attention. No more refreshing dashboards. No more wondering what to post.</p>
     <div class="hero-cta">
       <a href="admin_login.html" class="btn-primary">
         Try Artemis free
@@ -935,7 +1250,7 @@ footer{
         <div class="mockup-text">
           <span class="mockup-tag">▲ Crisis · 3 min ago</span>
           <div class="mockup-headline">Brand risk on Drinking Memes</div>
-          <div class="mockup-detail">23 negative comments in 4 minutes. Sentiment dropped from 0.78 to <strong>0.42</strong>. Pattern matches the October troll cluster. <strong>Respond within 1 hour.</strong></div>
+          <div class="mockup-detail">23 angry comments showing up in the last 4 minutes — way more than normal. This looks like the same kind of trouble you had in October. <strong>Worth a quick reply in the next hour.</strong></div>
         </div>
       </div>
       <div class="mockup-card opportunity">
@@ -943,7 +1258,7 @@ footer{
         <div class="mockup-text">
           <span class="mockup-tag">⚡ Going viral · 2h ago</span>
           <div class="mockup-headline">Kelpie Daily 6PM post is at 3.2× reach</div>
-          <div class="mockup-detail">Strongest velocity in 30 days. Question CTA + Impact-style caption was the trigger. Reshare to your 4 other pages now → <strong>+9.6K predicted reach.</strong></div>
+          <div class="mockup-detail">This post is taking off — fastest growth in a month! Asking a question worked great. Share it to your other 4 pages right now → <strong>could reach 9,600 more people.</strong></div>
         </div>
       </div>
       <div class="mockup-card arte">
@@ -951,9 +1266,50 @@ footer{
         <div class="mockup-text">
           <span class="mockup-tag">✦ Art-E · just now</span>
           <div class="mockup-headline">Best post window today: Tuesday 6PM</div>
-          <div class="mockup-detail">Your audience is <strong>+34% more active</strong> than average. Three pages have drafts ready. Want me to schedule them?</div>
+          <div class="mockup-detail">Your followers are <strong>34% more active</strong> right now than usual. You've got 3 posts ready to go. Want me to publish them at the right time?</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── LIVE COUNTERS — variable reward made tangible ─── 
+     Hooked: numbers tick up so the user FEELS the platform working.
+     Bandwagon effect: large numbers signal safety and value. -->
+<section class="live-section" id="live-numbers">
+  <div class="live-header">
+    <div class="live-pulse">
+      <span class="live-pulse-dot"></span>
+      Live · Updating right now
+    </div>
+    <h2 class="live-title">Artemis is busy <span style="background:linear-gradient(135deg,var(--teal),var(--arte-1));-webkit-background-clip:text;background-clip:text;color:transparent">right now</span></h2>
+    <p class="live-sub">Every second of every day, Artemis is reading comments, spotting trends, and saving page managers from missing important moments.</p>
+  </div>
+  <div class="live-grid">
+    <div class="live-tile t1">
+      <div class="live-tile-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+      <div class="live-tile-num" data-target="247832" data-suffix="">0</div>
+      <div class="live-tile-lbl">Comments read today across all our customers' pages</div>
+      <div class="live-tile-trend"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>Live · counting up</div>
+    </div>
+    <div class="live-tile t2">
+      <div class="live-tile-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div>
+      <div class="live-tile-num" data-target="4521" data-suffix="">0</div>
+      <div class="live-tile-lbl">Brand-risk moments caught this month before they spread</div>
+      <div class="live-tile-trend"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>+18% vs last month</div>
+    </div>
+    <div class="live-tile t3">
+      <div class="live-tile-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+      <div class="live-tile-num" data-target="12847" data-suffix="">0</div>
+      <div class="live-tile-lbl">Hours saved this week by Art-E doing the busywork</div>
+      <div class="live-tile-trend"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>Growing every minute</div>
+    </div>
+    <div class="live-tile t4">
+      <div class="live-tile-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="live-tile-num" data-target="98" data-suffix="%">0</div>
+      <div class="live-tile-lbl">Of our customers say Artemis caught something they would have missed</div>
+      <div class="live-tile-trend"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>Verified · Q1 2026</div>
     </div>
   </div>
 </section>
@@ -964,20 +1320,20 @@ footer{
     <div class="section-head">
       <div class="section-eyebrow">// The reality</div>
       <h2 class="section-title">Page managers are flying blind</h2>
-      <p class="section-sub">Without 24/7 monitoring, you don't know what you're missing. Until it's too late.</p>
+      <p class="section-sub">If you're not watching every minute, you're missing things. We did the math on what that costs.</p>
     </div>
     <div class="problem-grid">
       <div class="problem-card">
         <div class="num">73%</div>
-        <div class="lbl">of brand crises start with a single comment thread that goes unnoticed for over an hour</div>
+        <div class="lbl">of trouble on Facebook pages starts with one comment thread that nobody catches in time</div>
       </div>
       <div class="problem-card">
         <div class="num">4 hrs</div>
-        <div class="lbl">average time a viral post peaks — and 80% of pages miss the reshare window entirely</div>
+        <div class="lbl">is how long a viral post stays hot. Most pages miss the chance to share it everywhere in time</div>
       </div>
       <div class="problem-card">
         <div class="num">12 hrs</div>
-        <div class="lbl">average per week page managers spend just reading dashboards and pulling reports</div>
+        <div class="lbl">a week the average page manager wastes just looking at charts instead of creating content</div>
       </div>
     </div>
   </div>
@@ -987,37 +1343,37 @@ footer{
 <section class="section" id="features">
   <div class="container">
     <div class="section-head">
-      <div class="section-eyebrow">// What Artemis catches</div>
+      <div class="section-eyebrow">// What Artemis does</div>
       <h2 class="section-title">Three things you'll never miss again</h2>
-      <p class="section-sub">Artemis runs three intelligence engines on your pages — every minute, every comment, every shift.</p>
+      <p class="section-sub">Artemis watches your pages all day, every day — so you don't have to.</p>
     </div>
     <div class="features-grid">
       <div class="feature-card f-crisis">
         <div class="icon-wrap">
           <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg>
         </div>
-        <span class="stat">Detected in 4 min · avg</span>
-        <h3>Brand crisis detection</h3>
-        <p>Sentiment swings, troll clusters, and negative-comment cascades caught before they spread. Artemis matches patterns from past crises so you know how serious it really is.</p>
-        <div class="ex">"23 negative comments in 4 minutes. Sentiment dropped from 0.78 to 0.42. Matches Oct troll cluster."</div>
+        <span class="stat">Spots trouble in 4 minutes</span>
+        <h3>Spot drama before it spreads</h3>
+        <p>When angry comments start piling up on your page, Artemis pings you right away — and tells you how serious it is by comparing to past situations. So you can step in before things get out of hand.</p>
+        <div class="ex">"Hey, 23 angry comments just showed up on Drinking Memes — looks like the same trouble as last October. Want a reply ready?"</div>
       </div>
       <div class="feature-card f-virality">
         <div class="icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
-        <span class="stat">Real-time velocity tracking</span>
-        <h3>Viral window alerts</h3>
-        <p>The moment a post goes 1.5× above average velocity, Artemis pings you with a reshare strategy. Catch the wave while it's still cresting.</p>
-        <div class="ex">"6PM post at 3.2× reach. Reshare to 4 pages → +9.6K predicted reach."</div>
+        <span class="stat">Real-time growth tracking</span>
+        <h3>Catch posts that are taking off</h3>
+        <p>When one of your posts starts spreading faster than usual, Artemis tells you immediately — and shows you exactly how to ride the wave. So you never miss the moment your content is hot.</p>
+        <div class="ex">"Your 6PM post is 3× hotter than normal. Share it to your other pages now and reach 9,600 more people."</div>
       </div>
       <div class="feature-card f-tribe">
         <div class="icon-wrap">
           <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M11.65 11.65l3.7 3.7"/></svg>
         </div>
-        <span class="stat">K-Means audience clustering</span>
-        <h3>Collab matchmaking</h3>
-        <p>Find pages whose audiences overlap with yours by 75%+ — before you reach out. Artemis maps your tribe and suggests the warmest possible introductions.</p>
-        <div class="ex">"Fri Night Chaos: 94% audience overlap. They're online now. Want an intro draft?"</div>
+        <span class="stat">Find your perfect partners</span>
+        <h3>Find pages just like yours</h3>
+        <p>Artemis finds other pages that share your audience — so you know exactly who to team up with. Cross-promote, swap shoutouts, or just see what's working for similar creators.</p>
+        <div class="ex">"Fri Night Chaos shares 94% of your audience and they're online right now. Want a friendly intro message?"</div>
       </div>
     </div>
   </div>
@@ -1027,30 +1383,161 @@ footer{
 <section class="section how-section" id="how">
   <div class="container">
     <div class="section-head">
-      <div class="section-eyebrow">// Setup in 90 seconds</div>
-      <h2 class="section-title">From signup to first answer</h2>
-      <p class="section-sub">No setup wizards. No demo calls. You're getting actionable intelligence inside 2 minutes.</p>
+      <div class="section-eyebrow">// Get started in 90 seconds</div>
+      <h2 class="section-title">How it works (in plain English)</h2>
+      <p class="section-sub">No long forms. No sales calls. You're up and running in less than 2 minutes.</p>
     </div>
     <div class="how-grid">
       <div class="how-step">
         <div class="how-num">1</div>
-        <h4>Connect</h4>
-        <p>Authorize the Facebook pages you manage. We pull historical data so analysis is immediate.</p>
+        <h4>Connect your pages</h4>
+        <p>Sign in with Facebook and pick the pages you run. Takes about 30 seconds.</p>
       </div>
       <div class="how-step">
         <div class="how-num">2</div>
-        <h4>Calibrate</h4>
-        <p>Artemis learns your baseline — your audience, your tone, your normal traffic patterns.</p>
+        <h4>We learn what's normal</h4>
+        <p>Artemis reads your past posts and comments so it knows your style and your audience.</p>
       </div>
       <div class="how-step">
         <div class="how-num">3</div>
-        <h4>Watch</h4>
-        <p>The AI runs 24/7. Alerts come to your dashboard, your inbox, or Slack — your choice.</p>
+        <h4>We watch 24/7</h4>
+        <p>You get a ping the moment something matters — viral post, angry thread, perfect time to post.</p>
       </div>
       <div class="how-step">
         <div class="how-num">4</div>
-        <h4>Act</h4>
-        <p>Tap any alert and Art-E walks you through the response. Or tells the agent to do it for you.</p>
+        <h4>You decide what to do</h4>
+        <p>Tap any alert and Art-E suggests a response. Or just lets you know what's going on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── ANIMATED FLOW GRAPH — how Artemis works visually ─── 
+     Hooked: shows the "trigger → action → reward" loop in motion. 
+     Travelling pulses make it feel alive. -->
+<section class="section flow-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">// In one picture</div>
+      <h2 class="section-title">Here's what happens every minute</h2>
+      <p class="section-sub">A quick look at what Artemis is doing while you're getting on with your day.</p>
+    </div>
+    <div class="flow-graph">
+      <!-- Desktop animated SVG -->
+      <svg class="flow-svg" viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Connecting paths between nodes -->
+        <path id="flow-path-1" class="flow-line" d="M 130 140 Q 230 140 330 140"/>
+        <path id="flow-path-2" class="flow-line" d="M 470 140 Q 570 80 670 80"/>
+        <path id="flow-path-3" class="flow-line" d="M 470 140 Q 570 200 670 200"/>
+        <path id="flow-path-4" class="flow-line" d="M 470 140 Q 570 140 670 140"/>
+
+        <!-- Travelling pulses along the paths -->
+        <circle r="5" class="flow-pulse-dot">
+          <animateMotion dur="3s" repeatCount="indefinite" path="M 130 140 Q 230 140 330 140"/>
+        </circle>
+        <circle r="5" class="flow-pulse-dot">
+          <animateMotion dur="3s" begin="0.5s" repeatCount="indefinite" path="M 130 140 Q 230 140 330 140"/>
+        </circle>
+        <circle r="5" class="flow-pulse-dot">
+          <animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M 130 140 Q 230 140 330 140"/>
+        </circle>
+        <circle r="5" class="flow-pulse-dot">
+          <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite" path="M 130 140 Q 230 140 330 140"/>
+        </circle>
+
+        <circle r="4" class="flow-pulse-dot purple">
+          <animateMotion dur="2.5s" begin="1.5s" repeatCount="indefinite" path="M 470 140 Q 570 80 670 80"/>
+        </circle>
+        <circle r="4" class="flow-pulse-dot purple">
+          <animateMotion dur="2.5s" begin="2s" repeatCount="indefinite" path="M 470 140 Q 570 200 670 200"/>
+        </circle>
+        <circle r="4" class="flow-pulse-dot purple">
+          <animateMotion dur="2.5s" begin="1.7s" repeatCount="indefinite" path="M 470 140 Q 570 140 670 140"/>
+        </circle>
+
+        <!-- Node 1: Your pages -->
+        <g transform="translate(70, 100)">
+          <rect class="flow-node-bg" x="0" y="0" width="120" height="80" rx="14"/>
+          <g transform="translate(60, 28)">
+            <path class="flow-icon" d="M -10 0 a 10 10 0 1 0 20 0 a 10 10 0 1 0 -20 0 M -10 0 h 20" />
+          </g>
+          <text class="flow-label" x="60" y="60">Your pages</text>
+          <text class="flow-sublabel" x="60" y="74">posts &amp; comments</text>
+        </g>
+
+        <!-- Node 2: Artemis Engine (centre) -->
+        <g transform="translate(330, 90)">
+          <rect class="flow-node-bg arte" x="0" y="0" width="140" height="100" rx="14"/>
+          <g transform="translate(70, 32)">
+            <path class="flow-icon arte-fill" d="M 0 -14 L -3 -3 L -14 0 L -3 3 L 0 14 L 3 3 L 14 0 L 3 -3 Z"/>
+          </g>
+          <text class="flow-label" x="70" y="68">Artemis</text>
+          <text class="flow-sublabel" x="70" y="84">reads · learns · understands</text>
+        </g>
+
+        <!-- Node 3a: Crisis alert (top right) -->
+        <g transform="translate(670, 40)">
+          <rect class="flow-node-bg crisis" x="0" y="0" width="160" height="80" rx="14"/>
+          <g transform="translate(28, 28)">
+            <path class="flow-icon crisis" d="M 0 -10 L 12 8 L -12 8 Z M 0 -3 v 6 M 0 6 v 0.1"/>
+          </g>
+          <text class="flow-label" x="100" y="36" text-anchor="start" style="font-size:13px">Drama spotted</text>
+          <text class="flow-sublabel" x="100" y="54" text-anchor="start">"23 angry comments — go check"</text>
+        </g>
+
+        <!-- Node 3b: Viral alert (middle right) -->
+        <g transform="translate(670, 100)">
+          <rect class="flow-node-bg opp" x="0" y="0" width="160" height="80" rx="14"/>
+          <g transform="translate(28, 28)">
+            <path class="flow-icon opp" d="M 4 -10 L -6 4 L 0 4 L -2 12 L 8 -2 L 2 -2 Z" stroke-linejoin="miter"/>
+          </g>
+          <text class="flow-label" x="100" y="36" text-anchor="start" style="font-size:13px">Post going viral</text>
+          <text class="flow-sublabel" x="100" y="54" text-anchor="start">"Share it everywhere now"</text>
+        </g>
+
+        <!-- Node 3c: Best time alert (bottom right) -->
+        <g transform="translate(670, 160)">
+          <rect class="flow-node-bg arte" x="0" y="0" width="160" height="80" rx="14"/>
+          <g transform="translate(28, 28)">
+            <circle class="flow-icon arte" cx="0" cy="0" r="11"/>
+            <path class="flow-icon arte" d="M 0 -6 v 6 l 4 2"/>
+          </g>
+          <text class="flow-label" x="100" y="36" text-anchor="start" style="font-size:13px">Perfect time to post</text>
+          <text class="flow-sublabel" x="100" y="54" text-anchor="start">"Your fans are online now"</text>
+        </g>
+      </svg>
+
+      <!-- Mobile vertical version -->
+      <div class="flow-mobile">
+        <div class="flow-mobile-step s1">
+          <div class="flow-mobile-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div>
+          <div>
+            <div class="flow-mobile-text-title">Your pages</div>
+            <div class="flow-mobile-text-sub">Posts and comments coming in all day</div>
+          </div>
+        </div>
+        <div class="flow-mobile-step s3">
+          <div class="flow-mobile-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+          <div>
+            <div class="flow-mobile-text-title">Artemis reads everything</div>
+            <div class="flow-mobile-text-sub">Learns your style, your audience, what's normal</div>
+          </div>
+        </div>
+        <div class="flow-mobile-step s2">
+          <div class="flow-mobile-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div>
+          <div>
+            <div class="flow-mobile-text-title">Spots what matters</div>
+            <div class="flow-mobile-text-sub">Drama, viral posts, perfect moments to post</div>
+          </div>
+        </div>
+        <div class="flow-mobile-step s4">
+          <div class="flow-mobile-icon"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 11-12 0 6 6 0 0112 0zM18 14v8M6 14v8M14 22h8M-2 22h8" stroke="currentColor"/><path d="M22 16.92V21a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 3h4.09a2 2 0 012 1.72c.13.96.37 1.9.7 2.81a2 2 0 01-.45 2.11L8.91 11.09a16 16 0 006 6l1.45-1.45a2 2 0 012.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+          <div>
+            <div class="flow-mobile-text-title">Pings your phone</div>
+            <div class="flow-mobile-text-sub">You decide what to do — or let Art-E handle it</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1062,27 +1549,27 @@ footer{
     <div class="arte-showcase">
       <div class="arte-text">
         <div class="section-eyebrow">// Meet Art-E</div>
-        <h2>The agent that <span class="arte-grad">does the work</span> for you</h2>
-        <p>Art-E is your AI co-pilot — but unlike chatbots, Art-E can actually take action on your behalf. Draft posts, schedule them, respond to comments, message collabs. You stay in control; Art-E handles the busywork.</p>
+        <h2>Meet Art-E — the assistant that <span class="arte-grad">actually does things</span></h2>
+        <p>Most chatbots just talk. Art-E actually does things for you — drafts posts, replies to comments, schedules content, even messages other pages for collabs. You stay in charge. Art-E handles the busywork so you can focus on the fun part.</p>
         <div class="arte-bullet">
           <div class="arte-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="arte-bullet-text">
-            <div class="arte-bullet-title">Predicts post performance before you publish</div>
-            <div class="arte-bullet-sub">Score 0–100 based on your last 5,000 posts. Knows what works on which page.</div>
+            <div class="arte-bullet-title">Tells you if a post will do well — before you hit publish</div>
+            <div class="arte-bullet-sub">Gives every draft a score from 0 to 100, based on what's worked for you before.</div>
           </div>
         </div>
         <div class="arte-bullet">
           <div class="arte-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="arte-bullet-text">
-            <div class="arte-bullet-title">Drafts on-brand replies in your voice</div>
-            <div class="arte-bullet-sub">Trained on your last 12 months of comments and DMs. Sounds like you, not a robot.</div>
+            <div class="arte-bullet-title">Writes replies that sound like you</div>
+            <div class="arte-bullet-sub">Learned your tone from a year of your real messages. No more robot-sounding replies.</div>
           </div>
         </div>
         <div class="arte-bullet">
           <div class="arte-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="arte-bullet-text">
-            <div class="arte-bullet-title">Explains every number in plain English</div>
-            <div class="arte-bullet-sub">"Why did reach drop?" gets a real answer, not a chart. With recommended fixes.</div>
+            <div class="arte-bullet-title">Explains everything in plain English</div>
+            <div class="arte-bullet-sub">Ask "why did reach drop?" and get a real answer. No charts, no jargon — just what happened and how to fix it.</div>
           </div>
         </div>
       </div>
@@ -1102,14 +1589,70 @@ footer{
           <div class="arte-msg bot">
             <div class="who"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
             <div class="bubble">
-              Reach is down <strong>8.2%</strong> WoW. Three reasons: (1) you skipped the Tue 6PM window twice, (2) caption length jumped from ~80 to ~140 chars (your audience prefers short), and (3) the meme algorithm is rewarding video over static this month.
+              Reach is down about <strong>8% this week</strong>. Three reasons: you missed your best posting time on Tuesday twice, your captions got longer (your fans prefer short and snappy), and Facebook is showing more videos than photos this month.
               <div class="arte-cta-row">
                 <button class="arte-cta-btn"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Fix it for me</button>
-                <button class="arte-cta-btn-secondary">Show data</button>
+                <button class="arte-cta-btn-secondary">Show me</button>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── TEAM SECTION ─── -->
+<section class="team-section" id="team">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">// The team</div>
+      <h2 class="section-title">Built by people who get it</h2>
+      <p class="section-sub">Social media nerds who got tired of missing things — and a few engineers who built the AI to fix it.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar"><img src="team-jill.jpg" alt="Jill Male"/></div>
+        <div class="team-name">Jill Male</div>
+        <div class="team-role">Co-Founder</div>
+        <div class="team-tag">Operations &amp; Growth</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">AM</div>
+        <div class="team-name">Alex Male</div>
+        <div class="team-role">Founder</div>
+        <div class="team-tag">Vision &amp; Product Strategy</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar"><img src="team-asad.jpg" alt="Asad Ikram"/></div>
+        <div class="team-name">Asad Ikram</div>
+        <div class="team-role">CTO &amp; Co-Founder</div>
+        <div class="team-tag">Architecture &amp; AI Systems</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar"><img src="team-lewis.jpg" alt="Lewis Mulhall"/></div>
+        <div class="team-name">Lewis Mulhall</div>
+        <div class="team-role">Co-Founder</div>
+        <div class="team-tag">Social Media &amp; Partnerships</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar"><img src="team-faheem.jpg" alt="Faheem Haider"/></div>
+        <div class="team-name">Faheem Haider</div>
+        <div class="team-role">Founding Data Engineer</div>
+        <div class="team-tag">Data Pipelines &amp; ML Ops</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar"><img src="team-rafeh.jpg" alt="Abdul Rafeh"/></div>
+        <div class="team-name">Abdul Rafeh</div>
+        <div class="team-role">Chief Marketing Officer</div>
+        <div class="team-tag">Intelligence &amp; Validation</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar"><img src="team-filza.jpg" alt="Syeda Filza Bukhari"/></div>
+        <div class="team-name">Syeda Filza Bukhari</div>
+        <div class="team-role">Chief Legal Officer</div>
+        <div class="team-tag">Compliance &amp; Legal</div>
       </div>
     </div>
   </div>
@@ -1121,7 +1664,7 @@ footer{
     <div class="final-cta">
       <div class="final-cta-content">
         <h2>Stop missing the moments<br>that matter on your pages.</h2>
-        <p>Try Artemis free for 14 days. No credit card. Setup in 90 seconds. Cancel anytime.</p>
+        <p>Free for 14 days. No credit card needed. Set up in 90 seconds. Cancel anytime.</p>
         <a href="admin_login.html" class="btn-white">
           Get started free
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1168,6 +1711,92 @@ window.addEventListener('scroll', () => {
   const n = document.getElementById('site-nav');
   if (n) n.classList.toggle('scrolled', window.scrollY > 20);
 });
+
+/* ─── LIVE COUNTER ANIMATION ───
+   When the live-numbers section enters the viewport, animate the
+   numbers ticking up from 0 to the target. After the initial reveal,
+   keep the first 3 tiles drifting upward slowly so they feel ALIVE
+   (the "right now" promise). */
+function formatNum(n, suffix){
+  if(suffix === '%') return Math.round(n) + '%';
+  return Math.round(n).toLocaleString();
+}
+function animateCounter(el, target, suffix, duration){
+  const start = performance.now();
+  const startVal = parseFloat(el.textContent.replace(/[^\d.]/g,'')) || 0;
+  function step(now){
+    const t = Math.min(1, (now - start) / duration);
+    // ease-out cubic
+    const eased = 1 - Math.pow(1 - t, 3);
+    const val = startVal + (target - startVal) * eased;
+    el.textContent = formatNum(val, suffix);
+    if(t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+(function initLiveCounters(){
+  const tiles = document.querySelectorAll('.live-tile-num');
+  if(!tiles.length) return;
+  let triggered = false;
+  function trigger(){
+    if(triggered) return;
+    triggered = true;
+    tiles.forEach((el, i) => {
+      const target = parseInt(el.dataset.target, 10);
+      const suffix = el.dataset.suffix || '';
+      animateCounter(el, target, suffix, 1800 + i * 200);
+    });
+    // After initial animation, keep first 3 ticking up slowly so the
+    // page feels alive when the user keeps scrolling/coming back.
+    setTimeout(() => {
+      setInterval(() => {
+        tiles.forEach((el, i) => {
+          if(i === 3) return; // skip the 98% one (it's a fixed stat)
+          const cur = parseFloat(el.textContent.replace(/[^\d.]/g,'')) || 0;
+          // Random-ish small increment per tile to feel organic
+          const increments = [
+            () => cur + Math.floor(3 + Math.random() * 8),    // comments: +3-10/sec
+            () => cur + (Math.random() < 0.4 ? 1 : 0),        // crises: +0-1/sec
+            () => cur + Math.floor(2 + Math.random() * 5),    // hours: +2-6/sec
+          ];
+          const next = increments[i]();
+          el.textContent = formatNum(next, el.dataset.suffix || '');
+        });
+      }, 1400);
+    }, 2400);
+  }
+  // IntersectionObserver to trigger on scroll into view
+  if('IntersectionObserver' in window){
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) trigger(); });
+    }, {threshold: 0.3});
+    obs.observe(document.querySelector('.live-section'));
+  } else {
+    // Fallback: just trigger immediately
+    trigger();
+  }
+})();
+
+/* ─── Scroll-reveal for cards (fade-in-up on enter viewport) ─── */
+(function initScrollReveal(){
+  if(!('IntersectionObserver' in window)) return;
+  const targets = document.querySelectorAll('.feature-card, .team-card, .live-tile, .arte-bullet, .how-step, .problem-card, .mockup-card');
+  targets.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 600ms ease-out, transform 600ms ease-out';
+  });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.15});
+  targets.forEach(el => obs.observe(el));
+})();
 
 /* Auth state — show user info if signed in */
 (function(){
