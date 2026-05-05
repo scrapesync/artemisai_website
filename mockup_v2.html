@@ -312,7 +312,12 @@ body{
 .feed-inner:has(#page-advanced.active),
 .feed-inner:has(#page-discovery.active),
 .feed-inner:has(#page-inbox.active),
-.feed-inner:has(#page-arte.active){
+.feed-inner:has(#page-arte.active),
+.feed-inner:has(#page-profile.active),
+.feed-inner:has(#page-drafts.active),
+.feed-inner:has(#page-saved.active),
+.feed-inner:has(#page-reports.active),
+.feed-inner:has(#page-calendar.active){
   max-width:1180px;
 }
 
@@ -2057,6 +2062,285 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
   .flywheel-btn{width:48px;height:48px}
 }
 
+
+/* ─── MEME / POST IMAGE PLACEHOLDERS ────────────────── */
+/* Story tiles get a meme-themed bg image */
+.story-tile.page-story{
+  background:linear-gradient(160deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%), var(--story-bg, linear-gradient(135deg,#1a2030,#0c1729));
+  background-size:cover;background-position:center;
+}
+.story-tile.page-story::before{
+  z-index:0;
+}
+
+/* Post image inside cards = full-bleed meme */
+.card-image{
+  position:relative;
+  height:240px;
+  background:var(--bg-input);
+  background-size:cover;background-position:center;
+  border-radius:0;
+  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.card-image-svg{
+  position:absolute;inset:0;width:100%;height:100%;
+}
+.card-image-text{
+  position:relative;z-index:2;
+  padding:8px 12px;background:rgba(0,0,0,0.55);
+  color:white;font-weight:700;font-size:14px;
+  border-radius:8px;backdrop-filter:blur(8px);
+  text-align:center;line-height:1.3;
+  max-width:80%;
+}
+
+/* Feed image styles by mood */
+.meme-bg-pub{background:linear-gradient(135deg,#3a2810 0%,#5a3a18 50%,#2a1c08 100%)}
+.meme-bg-prison{background:linear-gradient(135deg,#1a2030 0%,#2a3045 50%,#0c1018 100%)}
+.meme-bg-trend{background:linear-gradient(135deg,#3a1a2c 0%,#5a2840 50%,#1a0c18 100%)}
+.meme-bg-kelpie{background:linear-gradient(135deg,#0a3018 0%,#184028 50%,#04180c 100%)}
+.meme-bg-streak{background:linear-gradient(135deg,#3a2810 0%,#3a3010 50%,#2a1c08 100%)}
+
+/* Story bg variants — paint inside the tile */
+.story-meme-1{background:radial-gradient(circle at 50% 40%, #c08020 0%, #5a3a18 35%, #2a1c08 80%)}
+.story-meme-2{background:radial-gradient(circle at 50% 40%, #c03030 0%, #5a1818 35%, #1a0808 80%)}
+.story-meme-3{background:radial-gradient(circle at 50% 40%, #20a060 0%, #185a30 35%, #08200c 80%)}
+.story-meme-4{background:radial-gradient(circle at 50% 40%, #6040c0 0%, #302060 35%, #100820 80%)}
+.story-meme-5{background:radial-gradient(circle at 50% 40%, #4080d0 0%, #204080 35%, #08183a 80%)}
+.story-meme-6{background:radial-gradient(circle at 50% 40%, #c08020 0%, #5a3010 35%, #2a1808 80%)}
+.story-meme-7{background:radial-gradient(circle at 50% 40%, #20a080 0%, #185040 35%, #08201a 80%)}
+
+/* Decorative meme glyphs inside tiles/cards (SVG icons, slightly transparent) */
+.story-tile .meme-glyph{
+  position:absolute;
+  top:16px;left:50%;transform:translateX(-50%);
+  width:42px;height:42px;
+  opacity:0.85;
+  z-index:0;pointer-events:none;
+}
+.story-tile .meme-glyph svg{width:100%;height:100%}
+
+.card-image .meme-glyph-lg{
+  position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  width:120px;height:120px;
+  opacity:0.18;
+  z-index:1;
+}
+.card-image .meme-glyph-lg svg{width:100%;height:100%}
+
+/* Caption strip on card image (looks like a meme) */
+.meme-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,0.85));
+  padding:36px 16px 14px;
+  font-family:'Impact',sans-serif;
+  font-size:18px;font-weight:900;
+  color:white;text-transform:uppercase;
+  text-align:center;letter-spacing:0.5px;
+  text-shadow:2px 2px 0 rgba(0,0,0,0.8);
+  z-index:2;
+}
+
+
+/* ─── PROFILE / SETTINGS / DRAFTS / SAVED / REPORTS / CALENDAR ──── */
+.prof-panel{display:none}
+.prof-panel.active{display:block;animation:slideUp .3s ease both}
+
+.settings-row{
+  display:flex;align-items:center;gap:14px;
+  padding:10px 0;
+}
+.settings-label{
+  width:140px;flex-shrink:0;
+  font-size:13px;color:var(--t2);font-weight:600;
+}
+.settings-input{
+  flex:1;background:var(--bg-input);
+  border:1px solid var(--bdr-soft);border-radius:8px;
+  padding:8px 12px;color:var(--t1);font-family:inherit;font-size:14px;outline:none;
+  transition:border-color .15s;
+}
+.settings-input:focus{border-color:var(--teal)}
+
+.settings-toggle-row{
+  display:flex;align-items:center;gap:14px;
+  padding:12px 0;border-bottom:1px solid var(--bdr-soft);
+  cursor:pointer;
+}
+.settings-toggle-row:last-child{border-bottom:none}
+.settings-toggle-info{flex:1}
+.settings-toggle-title{font-weight:700;color:var(--t1);font-size:14px}
+.settings-toggle-sub{font-size:12px;color:var(--t2);margin-top:2px}
+.settings-toggle{
+  width:40px;height:22px;border-radius:9999px;
+  background:var(--bdr);position:relative;
+  transition:background .2s;flex-shrink:0;
+}
+.settings-toggle::before{
+  content:'';position:absolute;
+  top:3px;left:3px;width:16px;height:16px;
+  border-radius:50%;background:white;
+  transition:left .2s;
+  box-shadow:0 1px 3px rgba(0,0,0,0.2);
+}
+.settings-toggle.on{background:var(--teal)}
+.settings-toggle.on::before{left:21px}
+
+.settings-integ-row{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 0;border-bottom:1px solid var(--bdr-soft);
+}
+.settings-integ-row:last-child{border-bottom:none}
+.settings-integ-icon{
+  width:42px;height:42px;border-radius:10px;
+  display:grid;place-items:center;flex-shrink:0;
+}
+.settings-integ-icon svg{width:22px;height:22px}
+
+/* Drafts/Saved/Reports rows */
+.draft-row, .saved-row, .report-row, .schedule-row{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;border-bottom:1px solid var(--bdr-soft);
+  transition:background .15s;
+}
+.draft-row:hover, .saved-row:hover, .report-row:hover, .schedule-row:hover{background:var(--bg-elev-2)}
+.draft-row:last-child, .saved-row:last-child, .report-row:last-child, .schedule-row:last-child{border-bottom:none}
+
+/* Calendar grid */
+.cal-grid{
+  display:grid;
+  grid-template-columns:60px repeat(7,1fr);
+  gap:3px;
+  margin-top:10px;
+}
+.cal-day-header{
+  padding:8px 4px;text-align:center;
+  font-size:11px;font-weight:700;
+  color:var(--t2);text-transform:uppercase;letter-spacing:0.06em;
+}
+.cal-day-header .day-num{font-size:16px;color:var(--t1);margin-top:2px;display:block}
+.cal-day-header.today .day-num{color:var(--teal)}
+.cal-hour-label{
+  padding:6px 4px;text-align:right;
+  font-size:10px;color:var(--t3);
+  font-family:ui-monospace,monospace;
+  align-self:center;
+}
+.cal-cell{
+  aspect-ratio:1.4/1;
+  border-radius:6px;background:var(--bg);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;
+  position:relative;
+  border:1px solid transparent;
+}
+.cal-cell:hover{transform:scale(1.05);z-index:5;border-color:var(--bdr)}
+
+.cal-cell.intensity-0{background:var(--bg-input)}
+.cal-cell.intensity-1{background:rgba(0,196,160,0.15)}
+.cal-cell.intensity-2{background:rgba(0,196,160,0.30)}
+.cal-cell.intensity-3{background:rgba(0,196,160,0.50)}
+.cal-cell.intensity-4{background:rgba(0,196,160,0.70)}
+.cal-cell.intensity-5{background:rgba(0,196,160,0.95)}
+
+.cal-cell.scheduled::after{
+  content:'';position:absolute;
+  top:4px;right:4px;
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--arte-1);
+}
+.cal-cell.bad{background:rgba(229,57,53,0.18)}
+
+.cal-cell-pct{
+  font-size:10px;font-weight:700;
+  color:white;text-shadow:0 1px 2px rgba(0,0,0,0.4);
+  opacity:0;transition:opacity .15s;
+}
+.cal-cell.intensity-3 .cal-cell-pct,
+.cal-cell.intensity-4 .cal-cell-pct,
+.cal-cell.intensity-5 .cal-cell-pct{opacity:1}
+
+.cal-legend{
+  display:flex;align-items:center;gap:14px;
+  margin-top:14px;font-size:11px;color:var(--t2);
+  flex-wrap:wrap;
+}
+.cal-legend-grad{
+  display:flex;align-items:center;gap:6px;
+}
+.cal-legend-grad-bar{
+  display:flex;height:10px;border-radius:6px;overflow:hidden;
+}
+.cal-legend-grad-bar > span{width:18px;height:100%}
+
+@media(max-width:780px){
+  .cal-grid{grid-template-columns:50px repeat(7,1fr);font-size:11px}
+  .cal-hour-label{padding:4px 2px}
+}
+
+
+/* Selected page card state */
+.page-card.selected{
+  background:var(--teal-bg) !important;
+  border-color:rgba(0,196,160,0.3) !important;
+}
+.page-card.selected .page-name{color:var(--teal)}
+
+/* ─── ART-E CONTEXTUAL HINT BUBBLE ────────────── */
+.arte-hint-bubble{
+  position:fixed;bottom:96px;right:78px;z-index:140;
+  background:var(--bg-elev);
+  border:1px solid var(--arte-1);
+  border-radius:14px;padding:8px 14px 8px 12px;
+  font-size:12.5px;color:var(--t1);
+  box-shadow:0 8px 24px rgba(124,92,191,0.35);
+  display:flex;align-items:center;gap:8px;
+  cursor:pointer;
+  opacity:0;transform:translateY(8px) scale(0.92);
+  pointer-events:none;
+  transition:opacity .35s ease, transform .35s ease;
+  max-width:240px;
+}
+.arte-hint-bubble.show{
+  opacity:1;transform:translateY(0) scale(1);
+  pointer-events:auto;
+  animation:hintWobble 4s ease-in-out 1s infinite;
+}
+@keyframes hintWobble{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-3px)}
+}
+.arte-hint-bubble::after{
+  content:'';position:absolute;
+  bottom:-7px;right:24px;
+  width:14px;height:14px;
+  background:var(--bg-elev);
+  border-right:1px solid var(--arte-1);
+  border-bottom:1px solid var(--arte-1);
+  transform:rotate(45deg);
+}
+.arte-hint-bubble .arte-hint-orb{
+  width:24px;height:24px;border-radius:50%;
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  display:grid;place-items:center;flex-shrink:0;
+}
+.arte-hint-bubble .arte-hint-orb svg{width:11px;height:11px;fill:white}
+.arte-hint-bubble .arte-hint-text{font-weight:600;line-height:1.35}
+.arte-hint-bubble .arte-hint-close{
+  margin-left:4px;color:var(--t3);cursor:pointer;
+  width:18px;height:18px;display:grid;place-items:center;
+  border-radius:50%;
+}
+.arte-hint-bubble .arte-hint-close:hover{background:var(--bg-elev-2);color:var(--t1)}
+.arte-hint-bubble .arte-hint-close svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:2.5}
+
+@media(max-width:640px){
+  .arte-hint-bubble{right:74px;bottom:86px;max-width:180px;font-size:11px}
+}
 </style>
 </head>
 <body>
@@ -2131,9 +2415,17 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
     <div class="divider"></div>
 
     <div class="sidebar-section">
-      <div class="sidebar-title">Your Pages</div>
+      <div class="sidebar-title" style="display:flex;align-items:center;justify-content:space-between">Your Pages <a class="right-card-link" onclick="selectPage('all','All pages')" style="font-size:10px;text-transform:none;letter-spacing:0;font-weight:600">All</a></div>
 
-      <div class="page-card">
+      <div class="page-card selected" data-page-id="all" onclick="selectPage('all','All pages')">
+        <div class="page-avatar" style="background:linear-gradient(135deg,var(--teal),var(--arte-1));color:white"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><circle cx="9" cy="9" r="2"/><circle cx="15" cy="9" r="2"/><circle cx="9" cy="15" r="2"/><circle cx="15" cy="15" r="2"/></svg></div>
+        <div class="page-meta">
+          <div class="page-name">All pages</div>
+          <div class="page-stat"><span class="dot"></span> Combined view · 5 pages</div>
+        </div>
+      </div>
+
+      <div class="page-card" data-page-id="dm">
         <div class="page-avatar">DM</div>
         <div class="page-meta">
           <div class="page-name">Drinking Memes</div>
@@ -2141,7 +2433,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
         </div>
       </div>
 
-      <div class="page-card">
+      <div class="page-card" data-page-id="kd">
         <div class="page-avatar">KD</div>
         <div class="page-meta">
           <div class="page-name">Kelpie Daily</div>
@@ -2149,7 +2441,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
         </div>
       </div>
 
-      <div class="page-card">
+      <div class="page-card" data-page-id="fn">
         <div class="page-avatar">FN</div>
         <div class="page-meta">
           <div class="page-name">Fri Night Chaos</div>
@@ -2157,7 +2449,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
         </div>
       </div>
 
-      <div class="page-card">
+      <div class="page-card" data-page-id="uk">
         <div class="page-avatar">UK</div>
         <div class="page-meta">
           <div class="page-name">UK Jail News</div>
@@ -2165,7 +2457,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
         </div>
       </div>
 
-      <div class="page-card">
+      <div class="page-card" data-page-id="pb">
         <div class="page-avatar">PB</div>
         <div class="page-meta">
           <div class="page-name">Prison Biscuit</div>
@@ -2178,20 +2470,25 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
 
     <div class="sidebar-section">
       <div class="sidebar-title">Quick Access</div>
-      <a class="nav-item">
+      <a class="nav-item" data-quick="drafts">
         <span class="nav-item-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span>
         <span>Drafts</span>
         <span style="margin-left:auto;font-size:11px;color:var(--t3);font-weight:600">3</span>
       </a>
-      <a class="nav-item">
+      <a class="nav-item" data-quick="calendar">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+        <span>Best times</span>
+        <span style="margin-left:auto;font-size:10px;color:var(--teal);font-weight:600;background:var(--teal-bg);padding:2px 6px;border-radius:9999px">NEW</span>
+      </a>
+      <a class="nav-item" data-quick="saved">
         <span class="nav-item-icon"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></span>
         <span>Saved insights</span>
       </a>
-      <a class="nav-item">
+      <a class="nav-item" data-quick="reports">
         <span class="nav-item-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></span>
         <span>Reports</span>
       </a>
-      <a class="nav-item">
+      <a class="nav-item" data-quick="profile">
         <span class="nav-item-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span>
         <span>Settings</span>
       </a>
@@ -2208,9 +2505,9 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
         <!-- (Was: For you / Live / Action items — re-thought)           -->
         <!-- ═══════════════════════════════════════════════════════════ -->
         <div class="feed-tabs">
-          <button class="feed-tab active" data-feed-tab="now">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
-            Now
+          <button class="feed-tab active" data-feed-tab="feed">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Feed
           </button>
           <button class="feed-tab" data-feed-tab="briefings">
             <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
@@ -2250,7 +2547,8 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           </div>
 
           <!-- Story 1: Drinking Memes — Going Viral (Virality MVP) -->
-          <div class="story-tile page-story" data-story="0" style="--page-tint:rgba(251,191,36,0.30)">
+          <div class="story-tile page-story story-meme-1" data-story="0" style="--page-tint:rgba(251,191,36,0.30)">
+            <div class="meme-glyph"><svg viewBox="0 0 24 24" fill="#FBBF24" opacity="0.7"><path d="M5 11h14v9a2 2 0 01-2 2H7a2 2 0 01-2-2v-9zM5 11l-1-3a2 2 0 012-2h12a2 2 0 012 2l-1 3M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></div>
             <div class="story-page-avatar" style="--page-ring:#FBBF24">DM</div>
             <div>
               <span class="story-mvp-badge viral">
@@ -2264,7 +2562,8 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           </div>
 
           <!-- Story 2: Drinking Memes — Brand Risk (Crisis MVP) -->
-          <div class="story-tile page-story" data-story="1" style="--page-tint:rgba(229,57,53,0.30)">
+          <div class="story-tile page-story story-meme-2" data-story="1" style="--page-tint:rgba(229,57,53,0.30)">
+            <div class="meme-glyph"><svg viewBox="0 0 24 24" fill="#FCA5A5" opacity="0.7"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><line x1="12" y1="8" x2="12" y2="13" stroke="#1a0808" stroke-width="2"/><circle cx="12" cy="15" r="1" fill="#1a0808"/></svg></div>
             <div class="story-page-avatar" style="--page-ring:#E53935">DM</div>
             <div>
               <span class="story-mvp-badge crisis">
@@ -2278,7 +2577,8 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           </div>
 
           <!-- Story 3: Kelpie Daily — Sentiment Spike (Sentiment MVP) -->
-          <div class="story-tile page-story" data-story="2" style="--page-tint:rgba(34,197,94,0.30)">
+          <div class="story-tile page-story story-meme-3" data-story="2" style="--page-tint:rgba(34,197,94,0.30)">
+            <div class="meme-glyph"><svg viewBox="0 0 24 24" fill="#86EFAC" opacity="0.85"><path d="M4.5 9.5L3 8l2-3 2 1 2-2 3 1 3-1 2 2 2-1 2 3-1.5 1.5L18 11v6l-2 4h-3l-1-3-1 3H8l-2-4v-6L4.5 9.5z"/><circle cx="9" cy="11" r="0.8" fill="#04180c"/><circle cx="15" cy="11" r="0.8" fill="#04180c"/></svg></div>
             <div class="story-page-avatar" style="--page-ring:#22C55E">KD</div>
             <div>
               <span class="story-mvp-badge sentiment">
@@ -2292,7 +2592,8 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           </div>
 
           <!-- Story 4: Drinking Memes — Optimal Window (Timing MVP) -->
-          <div class="story-tile page-story" data-story="3" style="--page-tint:rgba(124,92,191,0.32)">
+          <div class="story-tile page-story story-meme-4" data-story="3" style="--page-tint:rgba(124,92,191,0.32)">
+            <div class="meme-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="#C4B5FD" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
             <div class="story-page-avatar" style="--page-ring:#7C5CBF">DM</div>
             <div>
               <span class="story-mvp-badge timing">
@@ -2306,7 +2607,8 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           </div>
 
           <!-- Story 5: Fri Night Chaos — Audience Match (Match MVP) -->
-          <div class="story-tile page-story" data-story="4" style="--page-tint:rgba(96,165,250,0.28)">
+          <div class="story-tile page-story story-meme-5" data-story="4" style="--page-tint:rgba(96,165,250,0.28)">
+            <div class="meme-glyph"><svg viewBox="0 0 24 24" fill="#7DD3FC" opacity="0.85"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="15" r="3"/><line x1="10" y1="11" x2="14" y2="13" stroke="#7DD3FC" stroke-width="2"/></svg></div>
             <div class="story-page-avatar" style="--page-ring:#60A5FA">FN</div>
             <div>
               <span class="story-mvp-badge match">
@@ -2320,7 +2622,8 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           </div>
 
           <!-- Story 6: UK Jail News — Trend Spike (Virality MVP) -->
-          <div class="story-tile page-story" data-story="5" style="--page-tint:rgba(251,191,36,0.30)">
+          <div class="story-tile page-story story-meme-6" data-story="5" style="--page-tint:rgba(251,191,36,0.30)">
+            <div class="meme-glyph"><svg viewBox="0 0 24 24" fill="#FBBF24" opacity="0.85"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
             <div class="story-page-avatar" style="--page-ring:#FBBF24">UK</div>
             <div>
               <span class="story-mvp-badge viral">
@@ -2334,7 +2637,8 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           </div>
 
           <!-- Story 7: Prison Biscuit — Streak (Self reward) -->
-          <div class="story-tile page-story" data-story="6" style="--page-tint:rgba(0,196,160,0.25)">
+          <div class="story-tile page-story story-meme-7" data-story="6" style="--page-tint:rgba(0,196,160,0.25)">
+            <div class="meme-glyph"><svg viewBox="0 0 24 24" fill="#86EFAC" opacity="0.85"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
             <div class="story-page-avatar" style="--page-ring:#00C4A0">PB</div>
             <div>
               <span class="story-mvp-badge sentiment">
@@ -2469,8 +2773,9 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
               <div class="score-text">91</div>
             </div>
           </div>
-          <div class="card-image">
-            <div class="card-image-text">[Post preview · meme image]</div>
+          <div class="card-image meme-bg-pub">
+            <div class="meme-glyph-lg"><svg viewBox="0 0 24 24" fill="white"><path d="M5 11h14v9a2 2 0 01-2 2H7a2 2 0 01-2-2v-9zM5 11l-1-3a2 2 0 012-2h12a2 2 0 012 2l-1 3M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></div>
+            <div class="meme-caption">When the liver realises it's Monday again</div>
           </div>
           <div class="card-stats">
             <span><span class="stat-num">2.4K</span> reactions</span>
@@ -3340,8 +3645,519 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           </div>
         </div>
       </div>
+  
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- PROFILE PAGE                               -->
+      <!-- ════════════════════════════════════════ -->
+      <div class="page" id="page-profile">
+        <div class="analytics-wrap">
+          <div class="page-header">
+            <div class="page-title-block">
+              <h1 class="page-title">Profile & Settings</h1>
+              <div class="page-sub">Asad Ikram · asad@artemisai.co.uk · Pro account</div>
+            </div>
+            <div class="page-actions">
+              <button class="btn arte" onclick="openArteChat('Help me set up my profile')">
+                <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+                Ask Art-E
+              </button>
+            </div>
+          </div>
+
+          <!-- Profile card -->
+          <div class="panel" style="display:flex;align-items:center;gap:18px">
+            <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#FFA500,#FF6B00);display:grid;place-items:center;font-size:30px;font-weight:800;color:white;flex-shrink:0">A</div>
+            <div style="flex:1">
+              <div style="font-size:18px;font-weight:800;color:var(--t1)">Asad Ikram</div>
+              <div style="font-size:13px;color:var(--t2);margin-top:2px">@asad_artemis · Joined March 2026 · UK</div>
+              <div style="font-size:12px;color:var(--teal);margin-top:6px;font-weight:600">● Pro plan · 5 of 10 pages connected</div>
+            </div>
+            <button class="btn" onclick="toast('info','Edit profile photo')">Change photo</button>
+          </div>
+
+          <!-- Settings tabs -->
+          <div class="subtabs" style="margin-top:14px">
+            <button class="subtab active" data-prof-sub="account">Account</button>
+            <button class="subtab" data-prof-sub="notifications">Notifications</button>
+            <button class="subtab" data-prof-sub="integrations">Integrations</button>
+            <button class="subtab" data-prof-sub="billing">Billing</button>
+            <button class="subtab" data-prof-sub="team">Team</button>
+            <button class="subtab" data-prof-sub="security">Security</button>
+          </div>
+
+          <div class="prof-panel active" id="prof-account">
+            <div class="panel">
+              <div class="panel-title" style="margin-bottom:12px">Account details</div>
+              <div class="settings-row">
+                <div class="settings-label">Display name</div>
+                <input type="text" class="settings-input" value="Asad Ikram"/>
+              </div>
+              <div class="settings-row">
+                <div class="settings-label">Email</div>
+                <input type="text" class="settings-input" value="asad@artemisai.co.uk"/>
+              </div>
+              <div class="settings-row">
+                <div class="settings-label">Username</div>
+                <input type="text" class="settings-input" value="@asad_artemis"/>
+              </div>
+              <div class="settings-row">
+                <div class="settings-label">Timezone</div>
+                <select class="settings-input"><option>Europe/London (GMT+0)</option><option>America/New_York</option><option>Asia/Karachi</option></select>
+              </div>
+              <div class="settings-row">
+                <div class="settings-label">Language</div>
+                <select class="settings-input"><option>English (UK)</option><option>English (US)</option></select>
+              </div>
+              <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+                <button class="btn">Cancel</button>
+                <button class="btn primary" onclick="toast('success','Profile saved')">Save changes</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="prof-panel" id="prof-notifications">
+            <div class="panel">
+              <div class="panel-title" style="margin-bottom:12px">Notification preferences</div>
+              <div class="settings-toggle-row" onclick="toggleSetting(this)">
+                <div class="settings-toggle-info">
+                  <div class="settings-toggle-title">Crisis alerts</div>
+                  <div class="settings-toggle-sub">Brand risk + sentiment spikes — within 4 minutes</div>
+                </div>
+                <div class="settings-toggle on"></div>
+              </div>
+              <div class="settings-toggle-row" onclick="toggleSetting(this)">
+                <div class="settings-toggle-info">
+                  <div class="settings-toggle-title">Going viral notifications</div>
+                  <div class="settings-toggle-sub">When a post crosses 200 shares/hour</div>
+                </div>
+                <div class="settings-toggle on"></div>
+              </div>
+              <div class="settings-toggle-row" onclick="toggleSetting(this)">
+                <div class="settings-toggle-info">
+                  <div class="settings-toggle-title">Optimal posting window reminders</div>
+                  <div class="settings-toggle-sub">1 hour before your top time slots</div>
+                </div>
+                <div class="settings-toggle on"></div>
+              </div>
+              <div class="settings-toggle-row" onclick="toggleSetting(this)">
+                <div class="settings-toggle-info">
+                  <div class="settings-toggle-title">Daily morning briefing</div>
+                  <div class="settings-toggle-sub">7:00 AM · summary across all 5 pages</div>
+                </div>
+                <div class="settings-toggle on"></div>
+              </div>
+              <div class="settings-toggle-row" onclick="toggleSetting(this)">
+                <div class="settings-toggle-info">
+                  <div class="settings-toggle-title">New collab matches</div>
+                  <div class="settings-toggle-sub">When K-Means finds a fresh match</div>
+                </div>
+                <div class="settings-toggle on"></div>
+              </div>
+              <div class="settings-toggle-row" onclick="toggleSetting(this)">
+                <div class="settings-toggle-info">
+                  <div class="settings-toggle-title">Weekly performance review</div>
+                  <div class="settings-toggle-sub">Mondays at 9:00 AM</div>
+                </div>
+                <div class="settings-toggle off"></div>
+              </div>
+              <div class="settings-toggle-row" onclick="toggleSetting(this)">
+                <div class="settings-toggle-info">
+                  <div class="settings-toggle-title">Email digest (instead of in-app)</div>
+                  <div class="settings-toggle-sub">Quieter mode — daily summary by email</div>
+                </div>
+                <div class="settings-toggle off"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="prof-panel" id="prof-integrations">
+            <div class="panel">
+              <div class="panel-title" style="margin-bottom:12px">Connected platforms</div>
+              <div class="settings-integ-row">
+                <div class="settings-integ-icon" style="background:#1877F2"><svg viewBox="0 0 24 24" fill="white"><path d="M22 12a10 10 0 10-11.6 9.9v-7H8V12h2.5V9.5c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 3h-2.3v7A10 10 0 0022 12z"/></svg></div>
+                <div style="flex:1">
+                  <div style="font-weight:700;color:var(--t1)">Facebook Pages</div>
+                  <div style="font-size:12px;color:var(--t2)">5 of 10 pages connected</div>
+                </div>
+                <button class="btn" onclick="toast('info','Manage page connections')">Manage</button>
+              </div>
+              <div class="settings-integ-row">
+                <div class="settings-integ-icon" style="background:#E1306C"><svg viewBox="0 0 24 24" fill="white"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="white" stroke-width="2"/><circle cx="17" cy="7" r="1.2" fill="white"/></svg></div>
+                <div style="flex:1">
+                  <div style="font-weight:700;color:var(--t1)">Instagram</div>
+                  <div style="font-size:12px;color:var(--t2)">Not connected</div>
+                </div>
+                <button class="btn primary" onclick="toast('info','Instagram connection — coming soon')">Connect</button>
+              </div>
+              <div class="settings-integ-row">
+                <div class="settings-integ-icon" style="background:#000"><svg viewBox="0 0 24 24" fill="white"><path d="M21 5L4 12l5 2 2 6 3-4 5 4 2-15z"/></svg></div>
+                <div style="flex:1">
+                  <div style="font-weight:700;color:var(--t1)">X (Twitter)</div>
+                  <div style="font-size:12px;color:var(--t2)">Not connected</div>
+                </div>
+                <button class="btn" onclick="toast('info','X connection — coming soon')">Connect</button>
+              </div>
+              <div class="settings-integ-row">
+                <div class="settings-integ-icon" style="background:#4A154B"><svg viewBox="0 0 24 24" fill="white"><path d="M5 13a2 2 0 11-2-2h14a2 2 0 012 2v0a2 2 0 01-2 2H7M19 11a2 2 0 11-2 2V5a2 2 0 012-2v0a2 2 0 012 2v8M11 5a2 2 0 11-2-2h0a2 2 0 012 2v8a2 2 0 002 2h0"/></svg></div>
+                <div style="flex:1">
+                  <div style="font-weight:700;color:var(--t1)">Slack alerts</div>
+                  <div style="font-size:12px;color:var(--t2)">Push crisis alerts to #social-team</div>
+                </div>
+                <button class="btn" onclick="toast('success','Slack webhook configured')">Configured ✓</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="prof-panel" id="prof-billing">
+            <div class="panel">
+              <div class="panel-title" style="margin-bottom:12px">Current plan</div>
+              <div style="display:flex;align-items:center;gap:14px;padding:14px;background:var(--teal-bg);border-radius:12px;border:1px solid rgba(0,196,160,0.3);margin-bottom:14px">
+                <div style="font-size:28px;font-weight:800;color:var(--teal)">£99</div>
+                <div style="flex:1">
+                  <div style="font-weight:700;color:var(--t1)">Pro plan · monthly</div>
+                  <div style="font-size:12px;color:var(--t2)">Up to 10 pages · Art-E unlimited · Advanced analytics · API access</div>
+                </div>
+                <button class="btn" onclick="toast('info','Manage subscription')">Manage</button>
+              </div>
+              <div class="panel-title" style="margin-bottom:8px;font-size:14px">Recent invoices</div>
+              <table class="data-table">
+                <thead><tr><th>Date</th><th>Amount</th><th>Status</th><th></th></tr></thead>
+                <tbody>
+                  <tr><td>1 Apr 2026</td><td>£99.00</td><td><span style="color:var(--opp);font-weight:600">Paid</span></td><td><a class="right-card-link" onclick="toast('info','Downloading invoice')">Download</a></td></tr>
+                  <tr><td>1 Mar 2026</td><td>£99.00</td><td><span style="color:var(--opp);font-weight:600">Paid</span></td><td><a class="right-card-link" onclick="toast('info','Downloading invoice')">Download</a></td></tr>
+                  <tr><td>1 Feb 2026</td><td>£99.00</td><td><span style="color:var(--opp);font-weight:600">Paid</span></td><td><a class="right-card-link" onclick="toast('info','Downloading invoice')">Download</a></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="prof-panel" id="prof-team">
+            <div class="panel">
+              <div class="panel-title" style="margin-bottom:12px">Team members</div>
+              <div class="settings-integ-row">
+                <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#FFA500,#FF6B00);display:grid;place-items:center;color:white;font-weight:700">A</div>
+                <div style="flex:1">
+                  <div style="font-weight:700;color:var(--t1)">Asad Ikram (you)</div>
+                  <div style="font-size:12px;color:var(--t2)">Owner · all permissions</div>
+                </div>
+                <span style="font-size:11px;font-weight:700;background:var(--teal-bg);color:var(--teal);padding:3px 10px;border-radius:9999px">OWNER</span>
+              </div>
+              <button class="btn primary" style="margin-top:14px" onclick="toast('info','Invite link generated · copied to clipboard')">+ Invite teammate</button>
+            </div>
+          </div>
+
+          <div class="prof-panel" id="prof-security">
+            <div class="panel">
+              <div class="panel-title" style="margin-bottom:12px">Security</div>
+              <div class="settings-row">
+                <div class="settings-label">Password</div>
+                <button class="btn" onclick="toast('info','Reset link sent to your email')">Change password</button>
+              </div>
+              <div class="settings-toggle-row">
+                <div class="settings-toggle-info">
+                  <div class="settings-toggle-title">Two-factor authentication</div>
+                  <div class="settings-toggle-sub">Recommended · adds login app verification</div>
+                </div>
+                <div class="settings-toggle off" onclick="toggleSetting(this.parentElement)"></div>
+              </div>
+              <div style="margin-top:18px;padding-top:18px;border-top:1px solid var(--bdr-soft)">
+                <div style="font-size:13px;font-weight:700;color:var(--crisis);margin-bottom:8px">Danger zone</div>
+                <button class="btn" style="border-color:var(--crisis);color:var(--crisis)" onclick="toast('info','Account deletion — please contact support')">Delete account</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /page-profile -->
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- DRAFTS PAGE                                -->
+      <!-- ════════════════════════════════════════ -->
+      <div class="page" id="page-drafts">
+        <div class="analytics-wrap">
+          <div class="page-header">
+            <div class="page-title-block">
+              <h1 class="page-title">Drafts</h1>
+              <div class="page-sub">3 drafts · Art-E has scored each one for you</div>
+            </div>
+            <div class="page-actions">
+              <button class="btn primary" onclick="handleAction('composer')">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New draft
+              </button>
+            </div>
+          </div>
+
+          <div class="insight-callout">
+            <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+            <div class="insight-callout-text">Your highest-scoring draft is <strong>"Friday plans hierarchy"</strong> at 89/100. Best window to publish: <strong>Tomorrow 6PM</strong>.</div>
+          </div>
+
+          <div class="panel" style="padding:0">
+            <div class="draft-row">
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:4px">Friday plans hierarchy chart</div>
+                <div style="font-size:13px;color:var(--t2);line-height:1.45">Pyramid meme — top: stay in. Middle: pub with 2 mates. Bottom: that one friend who wants to go clubbing at 9PM.</div>
+                <div style="font-size:11px;color:var(--t3);margin-top:6px">Drinking Memes · last edited 2 hours ago</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="text-align:center"><div style="font-size:22px;font-weight:800;color:var(--teal)">89</div><div style="font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:0.04em">AI score</div></div>
+                <button class="btn" onclick="toast('info','Editing draft')">Edit</button>
+                <button class="btn primary" onclick="handleAction('post-now')">Publish</button>
+              </div>
+            </div>
+            <div class="draft-row">
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:4px">Why kelpies always win the Bunnings game</div>
+                <div style="font-size:13px;color:var(--t2);line-height:1.45">Photo set — 5 kelpies looking suspiciously innocent next to chewed plant pots, with caption "we did nothing officer".</div>
+                <div style="font-size:11px;color:var(--t3);margin-top:6px">Kelpie Daily · last edited yesterday</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="text-align:center"><div style="font-size:22px;font-weight:800;color:var(--teal)">82</div><div style="font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:0.04em">AI score</div></div>
+                <button class="btn" onclick="toast('info','Editing draft')">Edit</button>
+                <button class="btn primary" onclick="handleAction('post-now')">Publish</button>
+              </div>
+            </div>
+            <div class="draft-row">
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:4px">Inmates rank prison tea quality</div>
+                <div style="font-size:13px;color:var(--t2);line-height:1.45">Listicle format · 5 quotes from anonymous sources rating various establishments\' brews. Lighter take on prison content.</div>
+                <div style="font-size:11px;color:var(--t3);margin-top:6px">UK Jail News · last edited 3 days ago</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="text-align:center"><div style="font-size:22px;font-weight:800;color:var(--warn)">71</div><div style="font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:0.04em">AI score</div></div>
+                <button class="btn arte" onclick="openArteChat('How can I improve the prison tea draft?')">Improve</button>
+                <button class="btn" onclick="toast('info','Editing draft')">Edit</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /page-drafts -->
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- SAVED INSIGHTS PAGE                       -->
+      <!-- ════════════════════════════════════════ -->
+      <div class="page" id="page-saved">
+        <div class="analytics-wrap">
+          <div class="page-header">
+            <div class="page-title-block">
+              <h1 class="page-title">Saved Insights</h1>
+              <div class="page-sub">7 insights you bookmarked · Filtered by Art-E for relevance</div>
+            </div>
+          </div>
+
+          <div class="panel" style="padding:0">
+            <div class="saved-row">
+              <div class="bell-icon" style="background:var(--warn-bg);color:var(--warn);width:32px;height:32px"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:2px">Question CTA pattern lifts virality 1.6×</div>
+                <div style="font-size:12px;color:var(--t2)">Saved 12 days ago · From Virality analysis</div>
+              </div>
+              <button class="btn" onclick="toast('info','Opening insight')">Open</button>
+            </div>
+            <div class="saved-row">
+              <div class="bell-icon" style="background:var(--teal-bg);color:var(--teal);width:32px;height:32px"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke="white" stroke-width="2" fill="none"/></svg></div>
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:2px">Tuesday 6PM is your top window across all 5 pages</div>
+                <div style="font-size:12px;color:var(--t2)">Saved 8 days ago · From Optimal Timing</div>
+              </div>
+              <button class="btn" onclick="toast('info','Opening insight')">Open</button>
+            </div>
+            <div class="saved-row">
+              <div class="bell-icon" style="background:var(--arte-bg);color:var(--arte-1);width:32px;height:32px"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:2px">Caption sweet spot: 80-120 characters</div>
+                <div style="font-size:12px;color:var(--t2)">Saved 6 days ago · From Content Patterns</div>
+              </div>
+              <button class="btn" onclick="toast('info','Opening insight')">Open</button>
+            </div>
+            <div class="saved-row">
+              <div class="bell-icon" style="background:var(--opp-bg);color:var(--opp);width:32px;height:32px"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M11.65 11.65l3.7 3.7"/></svg></div>
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:2px">K-Means cluster A (pub humour) drives 38% of your reach</div>
+                <div style="font-size:12px;color:var(--t2)">Saved 4 days ago · From Audience Clusters</div>
+              </div>
+              <button class="btn" onclick="toast('info','Opening insight')">Open</button>
+            </div>
+            <div class="saved-row">
+              <div class="bell-icon" style="background:var(--crisis-bg);color:var(--crisis);width:32px;height:32px"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 6v6m0 4h.01"/></svg></div>
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:2px">Crisis response template performs 78% better</div>
+                <div style="font-size:12px;color:var(--t2)">Saved 2 days ago · From Crisis Detection</div>
+              </div>
+              <button class="btn" onclick="toast('info','Opening insight')">Open</button>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /page-saved -->
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- REPORTS PAGE                              -->
+      <!-- ════════════════════════════════════════ -->
+      <div class="page" id="page-reports">
+        <div class="analytics-wrap">
+          <div class="page-header">
+            <div class="page-title-block">
+              <h1 class="page-title">Reports</h1>
+              <div class="page-sub">Generate and download performance reports</div>
+            </div>
+            <div class="page-actions">
+              <button class="btn primary" onclick="openModal('Generate report','<p>Choose what to include:</p><div style=\'display:flex;flex-direction:column;gap:8px;margin:10px 0\'><label style=\'display:flex;align-items:center;gap:8px\'><input type=\'checkbox\' checked/> Performance summary</label><label style=\'display:flex;align-items:center;gap:8px\'><input type=\'checkbox\' checked/> Sentiment analysis</label><label style=\'display:flex;align-items:center;gap:8px\'><input type=\'checkbox\' checked/> Virality predictions</label><label style=\'display:flex;align-items:center;gap:8px\'><input type=\'checkbox\' checked/> Top posts</label><label style=\'display:flex;align-items:center;gap:8px\'><input type=\'checkbox\'/> Audience clusters</label><label style=\'display:flex;align-items:center;gap:8px\'><input type=\'checkbox\'/> Raw data export</label></div>','<button class=\'btn\' onclick=\'closeModal()\'>Cancel</button><button class=\'btn primary\' onclick=\'closeModal();toast(&quot;success&quot;,&quot;Report generating · you&apos;ll get an email when ready&quot;)\'>Generate</button>')">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New report
+              </button>
+            </div>
+          </div>
+
+          <div class="three-col" style="margin-bottom:14px">
+            <div class="panel" style="cursor:pointer" onclick="toast('info','Generating weekly report')">
+              <div style="font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:0.06em;font-weight:700">Quick template</div>
+              <div style="font-size:16px;font-weight:800;color:var(--t1);margin-top:4px">Weekly performance</div>
+              <div style="font-size:12px;color:var(--t2);margin-top:4px">Network reach, top posts, AI scores</div>
+              <div style="margin-top:10px;font-size:12px;color:var(--teal);font-weight:600">Generate →</div>
+            </div>
+            <div class="panel" style="cursor:pointer" onclick="toast('info','Generating monthly report')">
+              <div style="font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:0.06em;font-weight:700">Quick template</div>
+              <div style="font-size:16px;font-weight:800;color:var(--t1);margin-top:4px">Monthly deep-dive</div>
+              <div style="font-size:12px;color:var(--t2);margin-top:4px">Full analytics across 30 days</div>
+              <div style="margin-top:10px;font-size:12px;color:var(--teal);font-weight:600">Generate →</div>
+            </div>
+            <div class="panel" style="cursor:pointer" onclick="toast('info','Generating brand-risk report')">
+              <div style="font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:0.06em;font-weight:700">Quick template</div>
+              <div style="font-size:16px;font-weight:800;color:var(--t1);margin-top:4px">Brand-risk audit</div>
+              <div style="font-size:12px;color:var(--t2);margin-top:4px">Crisis events, sentiment dips, response logs</div>
+              <div style="margin-top:10px;font-size:12px;color:var(--teal);font-weight:600">Generate →</div>
+            </div>
+          </div>
+
+          <div class="panel" style="padding:0">
+            <div style="padding:14px 16px;border-bottom:1px solid var(--bdr-soft);font-weight:700;color:var(--t1);font-size:14px">Recent reports</div>
+            <div class="report-row">
+              <div class="bell-icon" style="background:var(--teal-bg);color:var(--teal);width:32px;height:32px"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4" stroke="white" stroke-width="2" fill="none"/></svg></div>
+              <div style="flex:1">
+                <div style="font-weight:700;color:var(--t1);font-size:14px">Weekly performance · 28 Apr — 4 May</div>
+                <div style="font-size:12px;color:var(--t2);margin-top:2px">Generated 2 days ago · 12 pages PDF · 2.3 MB</div>
+              </div>
+              <button class="btn" onclick="toast('success','Downloading report')">Download</button>
+            </div>
+            <div class="report-row">
+              <div class="bell-icon" style="background:var(--arte-bg);color:var(--arte-1);width:32px;height:32px"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+              <div style="flex:1">
+                <div style="font-weight:700;color:var(--t1);font-size:14px">Monthly deep-dive · April 2026</div>
+                <div style="font-size:12px;color:var(--t2);margin-top:2px">Generated 6 days ago · 32 pages PDF · 5.8 MB</div>
+              </div>
+              <button class="btn" onclick="toast('success','Downloading report')">Download</button>
+            </div>
+            <div class="report-row">
+              <div class="bell-icon" style="background:var(--crisis-bg);color:var(--crisis);width:32px;height:32px"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 6v6m0 4h.01"/></svg></div>
+              <div style="flex:1">
+                <div style="font-weight:700;color:var(--t1);font-size:14px">Brand-risk audit · 19 Apr</div>
+                <div style="font-size:12px;color:var(--t2);margin-top:2px">Generated 14 days ago · 8 pages PDF · 1.2 MB</div>
+              </div>
+              <button class="btn" onclick="toast('success','Downloading report')">Download</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /page-reports -->
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- CALENDAR / SCHEDULE PAGE                  -->
+      <!-- ════════════════════════════════════════ -->
+      <div class="page" id="page-calendar">
+        <div class="analytics-wrap">
+          <div class="page-header">
+            <div class="page-title-block">
+              <h1 class="page-title">Best Times to Post</h1>
+              <div class="page-sub">Calendar view of optimal posting windows · Powered by Optimal Timing engine</div>
+            </div>
+            <div class="page-actions">
+              <select class="btn" id="calPageSelect" onchange="renderCalendar()" style="padding-right:30px">
+                <option value="all">All pages</option>
+                <option value="dm">Drinking Memes</option>
+                <option value="kd">Kelpie Daily</option>
+                <option value="fn">Fri Night Chaos</option>
+                <option value="uk">UK Jail News</option>
+                <option value="pb">Prison Biscuit</option>
+              </select>
+              <button class="btn arte" onclick="openArteChat('Walk me through my best posting windows this week')">
+                <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+                Explain
+              </button>
+            </div>
+          </div>
+
+          <div class="insight-callout">
+            <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+            <div class="insight-callout-text">Your audience peaks <strong>Tuesday 6PM</strong> (+34% lift) and <strong>Thursday 8PM</strong> (+28% lift). Three windows this week haven\'t been used yet.</div>
+          </div>
+
+          <!-- This week summary -->
+          <div class="three-col" style="margin-bottom:14px">
+            <div class="panel">
+              <div style="font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:0.06em;font-weight:700">Best window this week</div>
+              <div style="font-size:24px;font-weight:800;color:var(--teal);margin-top:6px">Tue 6PM</div>
+              <div style="font-size:12px;color:var(--opp);font-weight:600;margin-top:2px">+34% lift expected</div>
+            </div>
+            <div class="panel">
+              <div style="font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:0.06em;font-weight:700">Windows this week</div>
+              <div style="font-size:24px;font-weight:800;color:var(--t1);margin-top:6px">11 high-confidence</div>
+              <div style="font-size:12px;color:var(--t2);margin-top:2px">8 untaken</div>
+            </div>
+            <div class="panel">
+              <div style="font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:0.06em;font-weight:700">Worst time</div>
+              <div style="font-size:24px;font-weight:800;color:var(--crisis);margin-top:6px">Mon 7AM</div>
+              <div style="font-size:12px;color:var(--crisis);font-weight:600;margin-top:2px">−41% drop</div>
+            </div>
+          </div>
+
+          <!-- Calendar week view -->
+          <div class="panel">
+            <div class="panel-header">
+              <div><div class="panel-title">Week of 4 May — 10 May 2026</div><div class="panel-sub">Hover any cell for details · Tap to schedule a post</div></div>
+              <div style="display:flex;gap:6px">
+                <button class="btn" onclick="toast('info','Previous week')"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+                <button class="btn" onclick="toast('info','Next week')"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+              </div>
+            </div>
+            <div id="calendarGrid"></div>
+          </div>
+
+          <!-- Scheduled posts -->
+          <div class="panel">
+            <div class="panel-title" style="margin-bottom:10px">Scheduled posts (3)</div>
+            <div class="schedule-row">
+              <div style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;width:90px;flex-shrink:0">TUE 6:00PM</div>
+              <div style="flex:1">
+                <div style="font-weight:700;color:var(--t1);font-size:13px">Drinking Memes · "Friday plans hierarchy"</div>
+                <div style="font-size:11px;color:var(--t2);margin-top:2px">Predicted score: 89/100 · +34% lift expected</div>
+              </div>
+              <button class="btn" onclick="toast('info','Editing scheduled post')">Edit</button>
+            </div>
+            <div class="schedule-row">
+              <div style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;width:90px;flex-shrink:0">THU 8:00PM</div>
+              <div style="flex:1">
+                <div style="font-weight:700;color:var(--t1);font-size:13px">Kelpie Daily · "Kelpies vs Bunnings game"</div>
+                <div style="font-size:11px;color:var(--t2);margin-top:2px">Predicted score: 82/100 · +28% lift expected</div>
+              </div>
+              <button class="btn" onclick="toast('info','Editing scheduled post')">Edit</button>
+            </div>
+            <div class="schedule-row">
+              <div style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;width:90px;flex-shrink:0">SUN 10:00AM</div>
+              <div style="flex:1">
+                <div style="font-weight:700;color:var(--t1);font-size:13px">UK Jail News · "Inmates rank prison tea quality"</div>
+                <div style="font-size:11px;color:var(--t2);margin-top:2px">Predicted score: 71/100 · +19% lift expected</div>
+              </div>
+              <button class="btn" onclick="toast('info','Editing scheduled post')">Edit</button>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /page-calendar -->
     </div>
-  </main>
+    </main>
 
   <!-- ─── RIGHT SIDEBAR ─────────────────────── -->
   <aside class="right-sidebar">
@@ -3471,6 +4287,15 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
   <span><strong>Art-E</strong> · monitoring 5 pages</span>
 </button>
 
+<!-- Art-E contextual hint bubble — appears next to FAB suggesting context-aware help -->
+<div class="arte-hint-bubble show" id="arteHintBubble" onclick="openArteChat()">
+  <div class="arte-hint-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+  <div class="arte-hint-text">Want me to draft tomorrow's posts?</div>
+  <div class="arte-hint-close" onclick="event.stopPropagation();document.getElementById('arteHintBubble').classList.remove('show')">
+    <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </div>
+</div>
+
 <!-- Floating Art-E button — Investment engine, always one tap away -->
 <button class="fab-arte" title="Ask Art-E" onclick="openArteChat()">
   <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg>
@@ -3571,6 +4396,11 @@ function navigateTo(pageName, navItem){
   if(pageName === 'discovery' && !window._discoveryLoaded){
     setTimeout(()=>{ initFlywheel(); window._discoveryLoaded = true; }, 50);
   }
+  if(pageName === 'calendar' && !window._calendarLoaded){
+    setTimeout(()=>{ renderCalendar(); window._calendarLoaded = true; }, 50);
+  }
+  // Update contextual Art-E prompt for current page
+  updateArteContextHint(pageName);
 }
 
 /* ─── TOASTS ──────────────────────────────────── */
@@ -3725,31 +4555,32 @@ function sendArteMsg(text){
 function switchFeedTab(name){
   const home = document.getElementById('page-home');
   if(!home) return;
-  // Remove existing filter-mode banner
   document.querySelectorAll('.feed-filter-banner').forEach(n=>n.remove());
 
-  // Hide everything by default, show what matches
-  const cards = home.querySelectorAll('.briefing-card, .card, .alert-banner, .composer-wrap, .stories-strip, .arte-strip, .cap-ribbon, .mvp-rail');
+  // Categorise everything in the home feed
+  const stripsAndComposer = home.querySelectorAll('.stories-strip, .composer-wrap, .mvp-rail');
+  const cards = home.querySelectorAll('.card:not(.composer-wrap), .alert-banner, .cap-ribbon, .briefing-card');
+  const arteStrip = home.querySelector('.arte-strip');
 
-  if(name === 'now'){
-    // Show all (default state)
-    cards.forEach(c=>c.style.display='');
+  if(name === 'feed'){
+    // FEED = stories, composer, MVP rail (the creation/discovery surface)
+    if(arteStrip) arteStrip.style.display = '';
+    stripsAndComposer.forEach(c=>c.style.display='');
+    cards.forEach(c=>c.style.display='none');
   }
   else if(name === 'briefings'){
-    // Show only Art-E briefing + insight strip + briefing cards
-    cards.forEach(c=>{
-      if(c.classList.contains('arte-strip') || c.classList.contains('briefing-card')) c.style.display='';
-      else c.style.display='none';
+    // BRIEFINGS = Art-E summaries, reward cards, cap ribbons, alerts
+    if(arteStrip) arteStrip.style.display = '';
+    stripsAndComposer.forEach(c=>{
+      // show only the briefing-related stuff, not composer/stories/mvp-rail
+      c.style.display = 'none';
     });
-    // Add a banner explaining filter
-    const banner = document.createElement('div');
-    banner.className = 'feed-filter-banner';
-    banner.innerHTML = `<div style="background:var(--arte-bg);border:1px solid rgba(124,92,191,0.2);border-radius:12px;padding:12px 16px;font-size:13px;color:var(--t1);display:flex;align-items:center;gap:10px;margin-bottom:12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="#7C5CBF"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg><div><strong>Briefings only</strong> — Art-E summaries and morning reports across your 5 pages.</div></div>`;
-    const inner = home.parentElement.firstChild;
-    home.insertBefore(banner, home.firstChild);
+    cards.forEach(c=>c.style.display='');
   }
   else if(name === 'actions'){
-    // Show only crisis + opportunity banners
+    // ACTION ITEMS = crisis + opportunity only
+    if(arteStrip) arteStrip.style.display = 'none';
+    stripsAndComposer.forEach(c=>c.style.display='none');
     cards.forEach(c=>{
       if(c.classList.contains('alert-banner')) c.style.display='';
       else c.style.display='none';
@@ -4003,6 +4834,14 @@ function openStoryByIndex(i){
 function openStoryViewer(idx){
   document.getElementById('storyViewer').classList.add('open');
   openStoryByIndex(idx);
+  // Update Art-E hint to story-specific
+  const bubble = document.getElementById('arteHintBubble');
+  if(bubble){
+    bubble.querySelector('.arte-hint-text').textContent = 'Let me explain this story';
+    bubble.classList.remove('show');
+    void bubble.offsetWidth;
+    bubble.classList.add('show');
+  }
 }
 function closeStoryViewer(){
   document.getElementById('storyViewer').classList.remove('open');
@@ -4016,8 +4855,237 @@ function storyNav(dir){
 }
 
 
+
+/* ─── TOP NAV: Search modal ───────────────────── */
+function openSearchModal(){
+  openModal('Search',
+    `<input type="text" id="searchModalInput" placeholder="Search posts, pages, comments, AI insights…" autofocus
+      style="width:100%;background:var(--bg-input);border:1px solid var(--bdr-soft);border-radius:9999px;padding:10px 16px;color:var(--t1);font-family:inherit;font-size:14px;outline:none;margin-bottom:12px"/>
+    <div style="font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:6px">Recent searches</div>
+    <div class="saved-row" onclick="closeModal();toast('info','Searching: viral posts')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--t2);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><div style="flex:1;font-size:13px">viral posts last week</div></div>
+    <div class="saved-row" onclick="closeModal();toast('info','Searching: brand risk')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--t2);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><div style="flex:1;font-size:13px">brand risk responses</div></div>
+    <div class="saved-row" onclick="closeModal();toast('info','Searching: collab matches')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--t2);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><div style="flex:1;font-size:13px">collab matches Drinking Memes</div></div>
+    <div style="font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin:14px 0 6px">Or ask Art-E directly</div>
+    <button class="btn arte" style="width:100%;justify-content:center" onclick="closeModal();openArteChat()"><svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E anything</button>`,
+    `<button class="btn" onclick="closeModal()">Close</button>`);
+}
+
+function openMessagesPanel(){
+  openModal('Messages · Group chats',
+    `<p style="color:var(--t2);font-size:13px;margin-bottom:12px">Conversations with your collab partners and team.</p>
+    <div class="saved-row" onclick="closeModal();toast('info','Opening chat with Fri Night Chaos')">
+      <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#0a2040,#04101f);display:grid;place-items:center;color:#60A5FA;font-weight:700;flex-shrink:0">FN</div>
+      <div style="flex:1">
+        <div style="font-weight:700;color:var(--t1);font-size:13px">Fri Night Chaos</div>
+        <div style="font-size:12px;color:var(--t2)">Hey! Saw the match notification. Want to do a meme swap?</div>
+      </div>
+      <span style="font-size:10px;color:var(--t3)">2h</span>
+    </div>
+    <div class="saved-row" onclick="closeModal();toast('info','Opening team chat')">
+      <div style="width:36px;height:36px;border-radius:10px;background:var(--arte-bg);display:grid;place-items:center;color:var(--arte-1);font-weight:700;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="7" r="4"/><circle cx="17" cy="7" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div>
+      <div style="flex:1">
+        <div style="font-weight:700;color:var(--t1);font-size:13px">#social-team</div>
+        <div style="font-size:12px;color:var(--t2)">Anna: Crisis on Drinking Memes contained — 23 comments hidden</div>
+      </div>
+      <span style="font-size:10px;color:var(--t3)">5h</span>
+    </div>
+    <div class="saved-row" onclick="closeModal();toast('info','Opening Northern Banter chat')">
+      <div style="width:36px;height:36px;border-radius:10px;background:var(--teal-bg);display:grid;place-items:center;color:var(--teal);font-weight:700;flex-shrink:0">NB</div>
+      <div style="flex:1">
+        <div style="font-weight:700;color:var(--t1);font-size:13px">Northern Banter</div>
+        <div style="font-size:12px;color:var(--t2)">You: Cheers — let's do this Friday 8PM</div>
+      </div>
+      <span style="font-size:10px;color:var(--t3)">1d</span>
+    </div>`,
+    `<button class="btn" onclick="closeModal()">Close</button><button class="btn primary" onclick="closeModal();toast('info','Opening new chat')">+ New chat</button>`);
+}
+
+function openNotificationsPanel(){
+  // Reuse the existing notification history modal
+  openNotificationHistory();
+}
+
+/* ─── PROFILE SUB-TABS ─────────────────────────── */
+function initProfileTabs(){
+  document.querySelectorAll('[data-prof-sub]').forEach(t=>{
+    t.addEventListener('click', ()=>{
+      document.querySelectorAll('[data-prof-sub]').forEach(o=>o.classList.remove('active'));
+      t.classList.add('active');
+      document.querySelectorAll('.prof-panel').forEach(p=>p.classList.remove('active'));
+      document.getElementById('prof-'+t.dataset.profSub)?.classList.add('active');
+    });
+  });
+}
+function toggleSetting(row){
+  const t = row.querySelector('.settings-toggle');
+  if(t){ t.classList.toggle('on'); t.classList.toggle('off'); toast('success','Preference saved'); }
+}
+
+/* ─── CALENDAR / BEST TIMES ─────────────────────── */
+const CAL_DATA = {
+  // Hour grid for each page (intensity 0-5 for each of 7 days × 8 time slots)
+  // Slots: 6AM, 9AM, 12PM, 3PM, 6PM, 8PM, 10PM, 12AM
+  all: [
+    [0,1,2,2,2,1,0,0],   // Mon
+    [1,2,3,4,5,4,2,1],   // Tue — peak Tue 6PM
+    [1,2,3,3,4,3,2,1],   // Wed
+    [1,2,3,3,4,5,3,1],   // Thu — peak Thu 8PM
+    [1,2,2,3,3,3,2,1],   // Fri
+    [1,1,2,2,2,3,3,2],   // Sat
+    [2,3,2,1,2,2,3,2]    // Sun — Sun 10AM strong
+  ],
+  dm: [
+    [0,1,1,2,3,2,1,0],
+    [1,1,2,3,5,4,2,1],
+    [1,1,2,3,3,3,1,0],
+    [0,1,2,3,3,4,2,0],
+    [1,2,3,4,4,4,3,2],
+    [1,1,2,3,3,4,4,3],
+    [2,2,2,2,3,3,2,1]
+  ],
+  kd: [
+    [1,2,2,2,2,2,1,0],
+    [1,2,3,3,4,4,2,0],
+    [1,3,4,4,4,3,1,0],
+    [2,3,3,3,4,5,3,0],
+    [2,2,3,3,3,3,2,1],
+    [2,2,3,3,3,3,2,1],
+    [3,4,3,2,2,2,1,0]
+  ],
+  fn: [
+    [0,0,1,1,2,2,1,0],
+    [0,1,1,2,3,2,1,0],
+    [0,1,1,2,2,2,1,0],
+    [0,1,2,2,3,3,2,1],
+    [1,2,3,4,5,5,4,3],
+    [1,1,2,3,4,5,5,4],
+    [1,2,2,2,2,2,1,0]
+  ],
+  uk: [
+    [1,2,3,2,2,2,1,1],
+    [2,3,4,3,3,3,2,1],
+    [2,3,3,3,3,3,2,1],
+    [2,3,4,3,3,4,2,1],
+    [1,2,2,2,3,3,3,2],
+    [1,1,2,2,3,3,3,2],
+    [3,3,3,2,3,3,2,1]
+  ],
+  pb: [
+    [1,1,1,2,2,2,1,0],
+    [1,2,2,2,3,3,2,1],
+    [1,2,2,2,2,2,1,0],
+    [1,2,2,2,3,3,2,0],
+    [1,2,2,2,2,3,2,1],
+    [1,2,2,2,3,3,3,2],
+    [2,3,2,2,2,2,1,0]
+  ]
+};
+
+const SCHEDULED_SLOTS = [
+  {day:1, hour:4, label:'Tue 6PM'},  // Tue 6PM
+  {day:3, hour:5, label:'Thu 8PM'},  // Thu 8PM
+  {day:6, hour:1, label:'Sun 10AM'}  // Sun-ish
+];
+
+function renderCalendar(){
+  const container = document.getElementById('calendarGrid');
+  if(!container) return;
+  const sel = document.getElementById('calPageSelect');
+  const data = CAL_DATA[sel?.value || 'all'];
+
+  const days = ['Mon 5','Tue 6','Wed 7','Thu 8','Fri 9','Sat 10','Sun 11'];
+  const hrs = ['6 AM','9 AM','12 PM','3 PM','6 PM','8 PM','10 PM','12 AM'];
+  const todayIdx = 1; // Tuesday
+
+  let html = '<div class="cal-grid">';
+  // Header row
+  html += '<div></div>';
+  days.forEach((d,i)=>{
+    const [name, num] = d.split(' ');
+    html += `<div class="cal-day-header${i===todayIdx?' today':''}">${name}<span class="day-num">${num}</span></div>`;
+  });
+  // Hour rows
+  hrs.forEach((h, hi)=>{
+    html += `<div class="cal-hour-label">${h}</div>`;
+    days.forEach((d, di)=>{
+      const intensity = data[di][hi];
+      const scheduled = SCHEDULED_SLOTS.some(s=>s.day===di && s.hour===hi);
+      const isBad = (di===0 && hi===0); // Mon early
+      const cls = isBad ? 'bad' : `intensity-${intensity}`;
+      const schedCls = scheduled ? ' scheduled' : '';
+      const pct = intensity===5?'+34%':intensity===4?'+24%':intensity===3?'+12%':'';
+      html += `<div class="cal-cell ${cls}${schedCls}" data-day="${di}" data-hour="${hi}" title="${days[di]} ${h} · intensity ${intensity}${scheduled?' · SCHEDULED':''}" onclick="onCalCellClick(${di},${hi},${intensity})"><span class="cal-cell-pct">${pct}</span></div>`;
+    });
+  });
+  html += '</div>';
+  // Legend
+  html += `<div class="cal-legend">
+    <div class="cal-legend-grad"><span>Less active</span><div class="cal-legend-grad-bar"><span style="background:var(--bg-input)"></span><span style="background:rgba(0,196,160,0.15)"></span><span style="background:rgba(0,196,160,0.30)"></span><span style="background:rgba(0,196,160,0.50)"></span><span style="background:rgba(0,196,160,0.70)"></span><span style="background:rgba(0,196,160,0.95)"></span></div><span>Best window</span></div>
+    <div style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:var(--arte-1);display:inline-block"></span> Scheduled</div>
+    <div style="display:flex;align-items:center;gap:6px"><span style="width:14px;height:10px;border-radius:3px;background:rgba(229,57,53,0.18);display:inline-block"></span> Avoid</div>
+  </div>`;
+  container.innerHTML = html;
+}
+
+function onCalCellClick(day, hour, intensity){
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const hrs = ['6 AM','9 AM','12 PM','3 PM','6 PM','8 PM','10 PM','12 AM'];
+  const lift = intensity===5?'+34%':intensity===4?'+24%':intensity===3?'+12%':intensity===2?'+5%':intensity===1?'flat':'low';
+  openModal(`Schedule a post — ${days[day]} ${hrs[hour]}`,
+    `<p>Predicted lift in this slot: <strong style="color:var(--teal)">${lift}</strong></p>
+    <p style="font-size:13px;color:var(--t2);margin-top:6px">Based on 90 days of audience activity data and the Optimal Timing engine.</p>
+    <select class="settings-input" style="margin-top:8px"><option>Drinking Memes</option><option>Kelpie Daily</option><option>Fri Night Chaos</option><option>UK Jail News</option><option>Prison Biscuit</option></select>
+    <textarea style="width:100%;height:90px;background:var(--bg-input);border:1px solid var(--bdr-soft);border-radius:8px;padding:10px;color:var(--t1);font-family:inherit;font-size:14px;outline:none;margin-top:8px" placeholder="Draft your post or pick from drafts…"></textarea>
+    <button class="btn arte" style="margin-top:8px;font-size:12px;padding:6px 12px" onclick="closeModal();navigateTo('drafts',null)"><svg viewBox='0 0 24 24' fill='white' stroke='none'><path d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/></svg> Pick from drafts</button>`,
+    `<button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="closeModal();toast('success','Scheduled for ${days[day]} ${hrs[hour]}')">Schedule</button>`);
+}
+
+/* ─── PAGE SELECTOR ─── click a page in left sidebar to filter analytics */
+function selectPage(pageId, pageName){
+  window._activePage = pageId;
+  toast('info', pageId === 'all' ? 'Showing all pages' : 'Filtered to: ' + pageName);
+  // Highlight the selected page in sidebar
+  document.querySelectorAll('.page-card').forEach(pc=>pc.classList.remove('selected'));
+  if(pageId !== 'all'){
+    const card = document.querySelector(`[data-page-id="${pageId}"]`);
+    card?.classList.add('selected');
+  }
+  // If on Analytics or Advanced, refresh data
+  // (This is a mockup, so we just show a toast — but in the production app this would refilter charts)
+}
+
+/* ─── ART-E CONTEXTUAL HINT BUBBLE ─────────────────── */
+const ARTE_HINTS = {
+  home:        'Want me to draft tomorrow\'s posts?',
+  analytics:   'Want me to explain these numbers?',
+  advanced:    'Want a tour of the cascade analysis?',
+  arte:        'Tap me — let\'s chat',
+  discovery:   'Help me triage these matches?',
+  inbox:       'Triage these together?',
+  profile:     'Need help configuring something?',
+  drafts:      'Want me to score your drafts?',
+  saved:       'Surface insights you forgot about?',
+  reports:     'Generate a custom report?',
+  calendar:    'Walk through your best windows?'
+};
+function updateArteContextHint(pageName){
+  const hint = ARTE_HINTS[pageName] || 'How can I help?';
+  const bubble = document.getElementById('arteHintBubble');
+  if(bubble){
+    bubble.querySelector('.arte-hint-text').textContent = hint;
+    // Re-pulse the bubble
+    bubble.classList.remove('show');
+    void bubble.offsetWidth;
+    bubble.classList.add('show');
+  }
+}
+
+
 /* ─── BIND ALL BUTTONS ───────────────────────── */
 document.addEventListener('DOMContentLoaded', ()=>{
+
+  // Apply default Feed tab filter so home loads as expected
+  setTimeout(()=>switchFeedTab('feed'), 50);
 
   // Sidebar nav
   const navMap = [
@@ -4033,33 +5101,37 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   });
 
-  // Pages list (left sidebar)
+  // Pages list (left sidebar) — filter analytics by page
   document.querySelectorAll('.page-card').forEach(pc => {
     pc.addEventListener('click', () => {
       const name = pc.querySelector('.page-name').textContent;
-      handleAction('page', name);
+      const id = pc.dataset.pageId || name.toLowerCase().replace(/\s+/g,'_');
+      selectPage(id, name);
     });
   });
+  // Profile sub-tabs (init only when first viewed)
+  initProfileTabs();
 
-  // Shortcuts
-  document.querySelectorAll('.left-sidebar .sidebar-section:last-child .nav-item').forEach(item => {
+  // Quick Access shortcuts
+  document.querySelectorAll('[data-quick]').forEach(item => {
     item.addEventListener('click', e => {
       e.preventDefault();
-      const lbl = item.querySelector('span:last-child').textContent;
-      handleAction('shortcut', lbl);
+      const target = item.dataset.quick;
+      navigateTo(target, null);
     });
   });
 
-  // Top nav icons
-  document.querySelector('.search')?.addEventListener('click', ()=>handleAction('topnav-search'));
+  // Top nav icons — search, messages, bell, user avatar
+  document.querySelector('.search')?.addEventListener('click', ()=>openSearchModal());
   document.querySelectorAll('.icon-btn').forEach((btn,i)=>{
-    btn.addEventListener('click', ()=>{
-      if(i===0) handleAction('topnav-discovery');
-      else if(i===1) handleAction('topnav-chat');
-      else if(i===2) handleAction('topnav-bell');
+    btn.addEventListener('click', e=>{
+      e.stopPropagation();
+      if(i===0) openSearchModal();
+      else if(i===1) openMessagesPanel();
+      else if(i===2) openNotificationsPanel(btn);
     });
   });
-  document.querySelector('.user-avatar')?.addEventListener('click', ()=>handleAction('topnav-user'));
+  document.querySelector('.user-avatar')?.addEventListener('click', ()=>navigateTo('profile', null));
 
   // Feed tabs — actually switch content
   document.querySelectorAll('.feed-tabs .feed-tab').forEach(tab=>{
