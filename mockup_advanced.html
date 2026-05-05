@@ -323,9 +323,13 @@ html[data-theme="light"] .cascade-host{background:var(--bg-input)}
 <div class="section-nav" id="sectionNav">
   <button class="section-nav-chip active" data-jump="overview">Overview</button>
   <button class="section-nav-chip" data-jump="virality">Virality</button>
+  <button class="section-nav-chip" data-jump="predictions">Predictions</button>
   <button class="section-nav-chip" data-jump="patterns">Content Patterns</button>
+  <button class="section-nav-chip" data-jump="timing">Timing Deep-Dive</button>
   <button class="section-nav-chip" data-jump="cascade">Cascade & Reach</button>
   <button class="section-nav-chip" data-jump="audience">Audience Clusters</button>
+  <button class="section-nav-chip" data-jump="demographics">Demographics</button>
+  <button class="section-nav-chip" data-jump="discovery">Network Discovery</button>
   <button class="section-nav-chip" data-jump="ai-activity">AI Activity</button>
   <button class="section-nav-chip" data-jump="raw">Raw Data</button>
 </div>
@@ -442,6 +446,83 @@ html[data-theme="light"] .cascade-host{background:var(--bg-input)}
     </div>
   </div>
 
+  
+  <!-- ════ PREDICTIONS ════ -->
+  <div class="section" id="sec-predictions">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">
+          <span class="section-title-icon" style="background:var(--arte-bg);color:var(--arte-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-4.35-4.35M11 19A8 8 0 113 11"/><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+          Predictions & Forecasting
+        </h2>
+        <div class="section-sub">Sprint 7 ML model · 52 features · forecasts next 7 days</div>
+      </div>
+    </div>
+
+    <div class="insight-callout">
+      <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+      <div class="insight-callout-text">Model accuracy is <strong>89%</strong> over the last 30 days. Predicted vs actual scatter shows tight clustering around the diagonal — your virality signal is well-calibrated.</div>
+    </div>
+
+    <div class="four-col">
+      <div class="stat-tile">
+        <div class="lbl">Model accuracy</div>
+        <div class="val opp">89%</div>
+        <div class="delta up">↑ 3pp last week</div>
+      </div>
+      <div class="stat-tile">
+        <div class="lbl">Posts forecast next 7d</div>
+        <div class="val">28</div>
+        <div class="sub">Avg pred score: 79</div>
+      </div>
+      <div class="stat-tile">
+        <div class="lbl">High-confidence wins</div>
+        <div class="val teal">11</div>
+        <div class="sub">Score &gt; 85</div>
+      </div>
+      <div class="stat-tile">
+        <div class="lbl">At-risk posts</div>
+        <div class="val warn">4</div>
+        <div class="sub">Predicted score &lt; 60</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">7-day engagement forecast</div><div class="panel-sub">Predicted reach + 80% confidence band</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="forecastChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Prediction accuracy over time</div><div class="panel-sub">Model performance · 30 days</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="accuracyTrend"></canvas></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div><div class="panel-title">Predicted vs actual scatter</div><div class="panel-sub">Diagonal = perfect calibration · last 60 posts</div></div></div>
+      <div class="chart-wrap h-lg"><canvas id="predActualScatter"></canvas></div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Confidence distribution</div><div class="panel-sub">Per-prediction confidence buckets</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="confChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Format radar — predicted lift</div><div class="panel-sub">Photo / Video / Reel / Carousel / Text / Link</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="fmtRadar"></canvas></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div><div class="panel-title">Prediction log — last 30 posts</div><div class="panel-sub">Predicted score · actual score · delta</div></div></div>
+      <table class="data-table" id="predLogTable">
+        <thead><tr><th>Post</th><th>Page</th><th>Predicted</th><th>Actual</th><th>Δ</th><th>Outcome</th></tr></thead>
+        <tbody id="predLogBody"></tbody>
+      </table>
+    </div>
+  </div>
+
   <!-- ════ CONTENT PATTERNS ════ -->
   <div class="section" id="sec-patterns">
     <div class="section-header">
@@ -488,6 +569,72 @@ html[data-theme="light"] .cascade-host{background:var(--bg-input)}
     <div class="panel">
       <div class="panel-header"><div><div class="panel-title">Engagement funnel</div><div class="panel-sub">Reach → reactions → comments → shares</div></div></div>
       <div class="chart-wrap h-md"><canvas id="funnelChart"></canvas></div>
+    </div>
+  </div>
+
+  
+  <!-- ════ TIMING DEEP-DIVE ════ -->
+  <div class="section" id="sec-timing">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">
+          <span class="section-title-icon" style="background:var(--warn-bg);color:var(--warn)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+          Timing Deep-Dive
+        </h2>
+        <div class="section-sub">Sprint 8 · Optimal Timing engine · 168 windows × 5 pages</div>
+      </div>
+    </div>
+
+    <div class="insight-callout">
+      <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+      <div class="insight-callout-text">Tuesday <strong>6PM</strong> is your top window network-wide (+34% lift). Posting <strong>within 2 hours of an engaged competitor</strong> in your niche gives a +12% boost.</div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">24-hour engagement profile</div><div class="panel-sub">Avg engagement by hour of day · all pages</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="hourProfileChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">7-day performance matrix</div><div class="panel-sub">Average engagement by day of week</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="dayProfileChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div><div class="panel-title">Hour × Day full heatmap</div><div class="panel-sub">All 168 windows · brightest = top opportunity</div></div></div>
+      <div class="chart-wrap h-xl"><canvas id="fullHeatmap"></canvas></div>
+    </div>
+
+    <div class="three-col">
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Time since last post</div><div class="panel-sub">Engagement vs gap (hours)</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="gapChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Seasonal trend index</div><div class="panel-sub">Year-over-year shift · weekly</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="seasonalChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">First 60-min velocity threshold</div><div class="panel-sub">Crosses → likely viral</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="velThreshChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Hashtag usage impact</div><div class="panel-sub">Engagement lift by hashtag count</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="hashtagChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Question CTA effect</div><div class="panel-sub">Posts with vs without a question</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="ctaChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div><div class="panel-title">Topic performance ranking</div><div class="panel-sub">Avg engagement per topic · DeBERTa-v3 zero-shot</div></div></div>
+      <div class="chart-wrap h-md"><canvas id="topicRankChart"></canvas></div>
     </div>
   </div>
 
@@ -573,6 +720,151 @@ html[data-theme="light"] .cascade-host{background:var(--bg-input)}
       <div class="panel">
         <div class="panel-header"><div><div class="panel-title">Emotion breakdown</div><div class="panel-sub">XLM-RoBERTa comment classification</div></div></div>
         <div class="chart-wrap h-md"><canvas id="emotionBarChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- ════ DEMOGRAPHICS ════ -->
+  <div class="section" id="sec-demographics">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">
+          <span class="section-title-icon" style="background:var(--opp-bg);color:var(--opp)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><circle cx="17" cy="7" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></span>
+          Audience Demographics
+        </h2>
+        <div class="section-sub">Who follows you · age, gender, location, devices, churn</div>
+      </div>
+    </div>
+
+    <div class="four-col">
+      <div class="stat-tile">
+        <div class="lbl">Total followers</div>
+        <div class="val">847K</div>
+        <div class="delta up">↑ 12.4K this week</div>
+      </div>
+      <div class="stat-tile">
+        <div class="lbl">Avg age</div>
+        <div class="val">28</div>
+        <div class="sub">Skew 25-34</div>
+      </div>
+      <div class="stat-tile">
+        <div class="lbl">Geographic centre</div>
+        <div class="val">UK</div>
+        <div class="sub">68% UK / 22% AU</div>
+      </div>
+      <div class="stat-tile">
+        <div class="lbl">7d churn rate</div>
+        <div class="val opp">0.8%</div>
+        <div class="delta up">↓ 0.3pp</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div><div class="panel-title">Follower growth — 30 days</div><div class="panel-sub">All pages combined · daily net new</div></div></div>
+      <div class="chart-wrap h-md"><canvas id="growthChart"></canvas></div>
+    </div>
+
+    <div class="three-col">
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Age distribution</div><div class="panel-sub">By bracket · all pages</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="ageChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Gender breakdown</div><div class="panel-sub">Self-reported</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="genderDonut"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Device split</div><div class="panel-sub">Mobile / desktop / tablet</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="deviceDonut"></canvas></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Active hours by segment</div><div class="panel-sub">When each cohort scrolls</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="activeHrsChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Audience segments</div><div class="panel-sub">K-Means · 4 clusters</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="segChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Topic affinity</div><div class="panel-sub">Where engagement is concentrated</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="affinityChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Churn risk over time</div><div class="panel-sub">Followers unfollowing per week</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="churnChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ NETWORK DISCOVERY ════ -->
+  <div class="section" id="sec-discovery">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">
+          <span class="section-title-icon" style="background:var(--teal-bg);color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M9 6h6M6 9v6M9 18h6M18 9v6"/></svg></span>
+          Network Discovery
+        </h2>
+        <div class="section-sub">Page connection network, collab analytics, post cascade graph</div>
+      </div>
+    </div>
+
+    <div class="insight-callout">
+      <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+      <div class="insight-callout-text">You have <strong>4 active collabs</strong> driving 23% of total reach. Network momentum is up <strong>+18%</strong> this month — Northern Banter is the strongest reciprocal partner.</div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Network growth</div><div class="panel-sub">Connected pages · 90 days</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="networkGrowthChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Flywheel momentum</div><div class="panel-sub">Active collab activity index</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="momentumChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="three-col">
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Collab performance</div><div class="panel-sub">Reach lift per partner</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="collabPerfChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Best cross-post times</div><div class="panel-sub">When your network is most active</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="collabTimesChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Audience overlap ranking</div><div class="panel-sub">Top connected pages</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="overlapBar"></canvas></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Similarity radar</div><div class="panel-sub">Top match across 6 axes</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="simRadar"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Cascade depth distribution</div><div class="panel-sub">How deep do shares go?</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="cascadeDepthChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Format vs cascade rate</div><div class="panel-sub">Which formats reshare most</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="formatCascadeChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div><div class="panel-title">Engagement flow over time</div><div class="panel-sub">Network-wide activity curve</div></div></div>
+        <div class="chart-wrap h-md"><canvas id="engFlowChart"></canvas></div>
       </div>
     </div>
   </div>
@@ -676,7 +968,7 @@ document.querySelectorAll('[data-jump]').forEach(chip=>{
   });
 });
 // Update chip active state on scroll
-const sections = ['overview','virality','patterns','cascade','audience','ai-activity','raw'];
+const sections = ['overview','virality','predictions','patterns','timing','cascade','audience','demographics','discovery','ai-activity','raw'];
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
@@ -893,6 +1185,236 @@ function renderAll(){
     labels:['Joy','Excite','Trust','Surprise','Sad','Anger','Fear'],
     datasets:[{label:'Comments %', data:[32,24,18,12,7,5,2], backgroundColor:[C.opp,C.opp,C.opp,C.warn,C.text,C.crisis,C.crisis], borderRadius:6}]
   }, options:o}));
+
+  // ═══ PREDICTIONS ═══
+
+  // Forecast 7-day
+  const fcDays = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const fcMid = [22000,28000,24000,26000,25000,18000,21000];
+  const fcUp  = fcMid.map(v=>v+3500);
+  const fcDn  = fcMid.map(v=>v-3500);
+  _charts.push(new Chart(document.getElementById('forecastChart'), {type:'line', data:{labels:fcDays, datasets:[
+    {label:'Upper bound', data:fcUp, borderColor:'rgba(0,196,160,0.3)', backgroundColor:'rgba(0,196,160,0.10)', fill:'+1', tension:0.4, pointRadius:0, borderWidth:1, borderDash:[3,3]},
+    {label:'Predicted reach', data:fcMid, borderColor:C.teal, backgroundColor:'rgba(0,196,160,0.20)', fill:'+1', tension:0.4, pointRadius:4, borderWidth:2.5},
+    {label:'Lower bound', data:fcDn, borderColor:'rgba(0,196,160,0.3)', fill:false, tension:0.4, pointRadius:0, borderWidth:1, borderDash:[3,3]}
+  ]}, options:{...o, plugins:{...o.plugins, legend:{display:true, labels:{color:C.text, font:C.font, boxWidth:8}}}}}));
+
+  // Accuracy trend
+  const accDays = Array.from({length:30},(_,i)=>'D'+(i+1));
+  _charts.push(new Chart(document.getElementById('accuracyTrend'), {type:'line', data:{labels:accDays, datasets:[
+    {label:'Model accuracy %', data:accDays.map((_,i)=>82+Math.sin(i/4)*3+i*0.2+Math.random()*1), borderColor:C.opp, backgroundColor:'rgba(34,197,94,0.10)', fill:true, tension:0.4, pointRadius:0, borderWidth:2}
+  ]}, options:o}));
+
+  // Predicted vs actual scatter
+  const paPoints = Array.from({length:60},()=>{
+    const pred = 30+Math.random()*60;
+    const actual = pred + (Math.random()*16 - 8);
+    return {x:pred, y:Math.max(0, Math.min(100, actual))};
+  });
+  _charts.push(new Chart(document.getElementById('predActualScatter'), {type:'scatter', data:{datasets:[
+    {label:'Posts', data:paPoints, backgroundColor:C.teal, pointRadius:5},
+    {label:'Perfect calibration', data:[{x:0,y:0},{x:100,y:100}], type:'line', borderColor:C.warn, borderDash:[5,5], pointRadius:0, borderWidth:1.5, fill:false}
+  ]}, options:{...o, plugins:{...o.plugins, legend:{display:true, labels:{color:C.text, font:C.font, boxWidth:8}}}, scales:{x:{...o.scales.x, min:0, max:100, title:{display:true, text:'Predicted score', color:C.text}}, y:{...o.scales.y, min:0, max:100, title:{display:true, text:'Actual score', color:C.text}}}}}));
+
+  // Confidence distribution
+  _charts.push(new Chart(document.getElementById('confChart'), {type:'bar', data:{
+    labels:['<50%','50-65%','65-80%','80-90%','>90%'],
+    datasets:[{label:'Predictions', data:[8,16,42,84,38], backgroundColor:[C.crisis,C.warn,C.text,C.teal,C.opp], borderRadius:6}]
+  }, options:o}));
+
+  // Format radar
+  _charts.push(new Chart(document.getElementById('fmtRadar'), {type:'radar', data:{
+    labels:['Photo','Video','Reel','Carousel','Text','Link'],
+    datasets:[{label:'Predicted lift', data:[1.2, 1.5, 1.8, 1.4, 0.9, 0.7], borderColor:C.teal, backgroundColor:'rgba(0,196,160,0.18)', pointRadius:3, borderWidth:2}]
+  }, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:o.plugins.tooltip}, scales:{r:{angleLines:{color:C.grid}, grid:{color:C.grid}, pointLabels:{color:C.text, font:{...C.font, size:10}}, ticks:{display:false}, suggestedMin:0, suggestedMax:2}}}}));
+
+  // ═══ TIMING DEEP-DIVE ═══
+
+  // 24-hour profile
+  const hours24 = Array.from({length:24},(_,i)=>i+'h');
+  _charts.push(new Chart(document.getElementById('hourProfileChart'), {type:'line', data:{labels:hours24, datasets:[
+    {label:'Engagement %', data:hours24.map((_,h)=>{if(h>=18&&h<=20)return 7+Math.random();if(h>=12&&h<=14)return 4+Math.random();if(h>=8&&h<=10)return 3+Math.random();return 1+Math.random()*2}), borderColor:C.teal, backgroundColor:'rgba(0,196,160,0.15)', fill:true, tension:0.4, pointRadius:0, borderWidth:2}
+  ]}, options:o}));
+
+  // 7-day profile
+  _charts.push(new Chart(document.getElementById('dayProfileChart'), {type:'bar', data:{
+    labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    datasets:[{label:'Avg engagement %', data:[3.1,5.8,4.2,5.4,3.8,2.9,3.2], backgroundColor:['#3A3B3C',C.teal,'#3A3B3C',C.teal,'#3A3B3C','#3A3B3C','#3A3B3C'], borderRadius:6}]
+  }, options:o}));
+
+  // Full Hour×Day heatmap (denser than the previous one)
+  const fhData = [];
+  for(let i=0;i<7;i++) for(let j=0;j<24;j++){
+    let v;
+    if((i===1||i===3)&&(j===18||j===19))v=85;
+    else if(i>=1&&i<=4&&(j>=12&&j<=14||j>=17&&j<=20))v=40+Math.random()*30;
+    else if(i>=5)v=10+Math.random()*20;
+    else v=5+Math.random()*15;
+    fhData.push({x:j,y:i,r:Math.max(3, v/5)});
+  }
+  _charts.push(new Chart(document.getElementById('fullHeatmap'), {type:'bubble', data:{datasets:[{
+    label:'Engagement', data:fhData,
+    backgroundColor:ctx=>{const v=ctx.raw.r*5; return v>70?C.opp:v>40?C.warn:v>20?C.arte:C.text}
+  }]}, options:{...o, scales:{
+    x:{...o.scales.x, min:-0.5, max:23.5, ticks:{color:C.text, stepSize:2, callback:v=>v+'h'}},
+    y:{...o.scales.y, min:-0.5, max:6.5, reverse:true, ticks:{color:C.text, stepSize:1, callback:v=>['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][v]||''}}
+  }}}));
+
+  // Time since last post effect
+  _charts.push(new Chart(document.getElementById('gapChart'), {type:'line', data:{
+    labels:['<6h','6-12h','12-24h','1-2d','2-4d','4-7d','>7d'],
+    datasets:[{label:'Engagement', data:[3.1,4.2,5.8,5.6,4.4,2.8,1.2], borderColor:C.warn, backgroundColor:'rgba(245,158,11,0.15)', fill:true, tension:0.4, pointRadius:3, borderWidth:2}]
+  }, options:o}));
+
+  // Seasonal index
+  _charts.push(new Chart(document.getElementById('seasonalChart'), {type:'line', data:{
+    labels:Array.from({length:12},(_,i)=>['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][i]),
+    datasets:[{label:'Index (100=avg)', data:[88,91,98,105,112,118,108,102,96,94,108,124], borderColor:C.arte, backgroundColor:'rgba(124,92,191,0.15)', fill:true, tension:0.4, pointRadius:3, borderWidth:2}]
+  }, options:o}));
+
+  // Velocity threshold
+  _charts.push(new Chart(document.getElementById('velThreshChart'), {type:'bar', data:{
+    labels:['<50','50-100','100-150','150-200','>200'],
+    datasets:[{label:'Posts', data:[28,42,38,18,6], backgroundColor:[C.text,C.text,C.warn,C.teal,C.opp], borderRadius:6}]
+  }, options:o}));
+
+  // Hashtag impact
+  _charts.push(new Chart(document.getElementById('hashtagChart'), {type:'bar', data:{
+    labels:['0','1-3','4-7','8-12','>12'],
+    datasets:[{label:'Engagement lift', data:[1.0,1.2,1.5,1.3,0.8], backgroundColor:[C.text,C.warn,C.teal,C.warn,C.crisis], borderRadius:6}]
+  }, options:o}));
+
+  // CTA effect
+  _charts.push(new Chart(document.getElementById('ctaChart'), {type:'bar', data:{
+    labels:['No CTA','Statement','Open Q','Closed Q','Direct ask'],
+    datasets:[{label:'Engagement lift', data:[1.0,1.1,1.6,1.4,1.3], backgroundColor:[C.text,C.text,C.opp,C.teal,C.warn], borderRadius:6}]
+  }, options:{...o, indexAxis:'y'}}));
+
+  // Topic performance
+  _charts.push(new Chart(document.getElementById('topicRankChart'), {type:'bar', data:{
+    labels:['Pub humour','Animals','News/serious','Memes','Culture','Sport','Lifestyle'],
+    datasets:[{label:'Avg engagement %', data:[6.4,5.8,3.2,5.4,4.1,3.8,2.9], backgroundColor:[C.opp,C.opp,C.text,C.teal,C.warn,C.warn,C.text], borderRadius:6}]
+  }, options:{...o, indexAxis:'y'}}));
+
+  // ═══ DEMOGRAPHICS ═══
+
+  // Growth chart
+  _charts.push(new Chart(document.getElementById('growthChart'), {type:'line', data:{
+    labels:Array.from({length:30},(_,i)=>'D'+(i+1)),
+    datasets:[
+      {label:'Net new followers', data:Array.from({length:30},(_,i)=>200+Math.sin(i/4)*80+i*8+Math.random()*40), borderColor:C.opp, backgroundColor:'rgba(34,197,94,0.15)', fill:true, tension:0.4, pointRadius:0, borderWidth:2},
+      {label:'Total followers (K)', data:Array.from({length:30},(_,i)=>820+i*0.9), borderColor:C.teal, fill:false, tension:0.4, pointRadius:0, borderWidth:2, yAxisID:'y1'}
+    ]
+  }, options:{...o, plugins:{...o.plugins, legend:{display:true, labels:{color:C.text, font:C.font, boxWidth:8}}}, scales:{x:o.scales.x, y:o.scales.y, y1:{...o.scales.y, position:'right', grid:{display:false}}}}}));
+
+  // Age
+  _charts.push(new Chart(document.getElementById('ageChart'), {type:'bar', data:{
+    labels:['13-17','18-24','25-34','35-44','45-54','55+'],
+    datasets:[{label:'Followers %', data:[3,18,42,22,9,6], backgroundColor:[C.text,C.warn,C.teal,C.opp,C.text,C.text], borderRadius:6}]
+  }, options:o}));
+
+  // Gender donut
+  _charts.push(new Chart(document.getElementById('genderDonut'), {type:'doughnut', data:{
+    labels:['Male','Female','Non-binary','Undisclosed'],
+    datasets:[{data:[58,36,3,3], backgroundColor:[C.blue,C.arte,C.warn,C.text], borderWidth:0}]
+  }, options:{responsive:true, maintainAspectRatio:false, cutout:'65%', plugins:{legend:{display:true, position:'bottom', labels:{color:C.text, font:C.font, boxWidth:8, padding:6}}, tooltip:o.plugins.tooltip}}}));
+
+  // Device split
+  _charts.push(new Chart(document.getElementById('deviceDonut'), {type:'doughnut', data:{
+    labels:['Mobile','Desktop','Tablet'],
+    datasets:[{data:[78,18,4], backgroundColor:[C.teal,C.arte,C.warn], borderWidth:0}]
+  }, options:{responsive:true, maintainAspectRatio:false, cutout:'65%', plugins:{legend:{display:true, position:'bottom', labels:{color:C.text, font:C.font, boxWidth:8, padding:6}}, tooltip:o.plugins.tooltip}}}));
+
+  // Active hours by segment
+  _charts.push(new Chart(document.getElementById('activeHrsChart'), {type:'line', data:{labels:hours24, datasets:[
+    {label:'Pub humour', data:hours24.map((_,h)=>h>=17&&h<=22?60+Math.random()*30:10+Math.random()*15), borderColor:C.teal, fill:false, tension:0.4, pointRadius:0, borderWidth:2},
+    {label:'Animals', data:hours24.map((_,h)=>h>=8&&h<=12?50+Math.random()*25:15+Math.random()*15), borderColor:C.arte, fill:false, tension:0.4, pointRadius:0, borderWidth:2},
+    {label:'News', data:hours24.map((_,h)=>h>=7&&h<=9||h>=18&&h<=20?45+Math.random()*20:20+Math.random()*15), borderColor:C.warn, fill:false, tension:0.4, pointRadius:0, borderWidth:2}
+  ]}, options:{...o, plugins:{...o.plugins, legend:{display:true, labels:{color:C.text, font:C.font, boxWidth:8}}}}}));
+
+  // Segments
+  _charts.push(new Chart(document.getElementById('segChart'), {type:'doughnut', data:{
+    labels:['Pub humour','Animals','News','Lifestyle'],
+    datasets:[{data:[42,28,18,12], backgroundColor:[C.teal,C.arte,C.warn,C.crisis], borderWidth:0}]
+  }, options:{responsive:true, maintainAspectRatio:false, cutout:'65%', plugins:{legend:{display:true, position:'bottom', labels:{color:C.text, font:C.font, boxWidth:8, padding:6}}, tooltip:o.plugins.tooltip}}}));
+
+  // Affinity
+  _charts.push(new Chart(document.getElementById('affinityChart'), {type:'bar', data:{
+    labels:['Memes','Pub humour','Animals','News','Lifestyle','Sport','Politics','Culture'],
+    datasets:[{label:'Affinity index', data:[1.8,1.6,1.4,1.2,0.9,0.7,0.5,1.1], backgroundColor:C.teal, borderRadius:6}]
+  }, options:{...o, indexAxis:'y'}}));
+
+  // Churn
+  _charts.push(new Chart(document.getElementById('churnChart'), {type:'line', data:{
+    labels:Array.from({length:12},(_,i)=>'W'+(i+1)),
+    datasets:[
+      {label:'Churn %', data:[1.2,1.1,1.4,1.3,1.0,0.9,1.2,0.8,0.7,0.9,0.8,0.7], borderColor:C.crisis, backgroundColor:'rgba(229,57,53,0.10)', fill:true, tension:0.4, pointRadius:0, borderWidth:2},
+      {label:'Reactivation %', data:[0.4,0.5,0.4,0.6,0.7,0.8,0.7,0.9,1.1,1.0,1.2,1.3], borderColor:C.opp, fill:false, tension:0.4, pointRadius:0, borderWidth:2}
+    ]
+  }, options:{...o, plugins:{...o.plugins, legend:{display:true, labels:{color:C.text, font:C.font, boxWidth:8}}}}}));
+
+  // ═══ NETWORK DISCOVERY ═══
+
+  // Network growth
+  _charts.push(new Chart(document.getElementById('networkGrowthChart'), {type:'line', data:{
+    labels:Array.from({length:13},(_,i)=>'W'+(i+1)),
+    datasets:[
+      {label:'Connected pages', data:[2,3,3,4,5,5,7,8,9,11,12,13,15], borderColor:C.teal, backgroundColor:'rgba(0,196,160,0.12)', fill:true, tension:0.4, pointRadius:3, borderWidth:2},
+      {label:'Active collabs', data:[1,1,2,2,2,3,3,3,4,4,4,4,4], borderColor:C.arte, fill:false, tension:0.4, pointRadius:3, borderWidth:2}
+    ]
+  }, options:{...o, plugins:{...o.plugins, legend:{display:true, labels:{color:C.text, font:C.font, boxWidth:8}}}}}));
+
+  // Momentum
+  _charts.push(new Chart(document.getElementById('momentumChart'), {type:'line', data:{
+    labels:Array.from({length:30},(_,i)=>'D'+(i+1)),
+    datasets:[{label:'Momentum index', data:Array.from({length:30},(_,i)=>50+Math.sin(i/3)*8+i*1.2), borderColor:C.opp, backgroundColor:'rgba(34,197,94,0.15)', fill:true, tension:0.4, pointRadius:0, borderWidth:2}]
+  }, options:o}));
+
+  // Collab perf
+  _charts.push(new Chart(document.getElementById('collabPerfChart'), {type:'bar', data:{
+    labels:['Northern Banter','Banterversity','Memetic Studies','Tea Time'],
+    datasets:[{label:'Reach lift %', data:[42,28,18,12], backgroundColor:[C.opp,C.teal,C.warn,C.text], borderRadius:6}]
+  }, options:{...o, indexAxis:'y'}}));
+
+  // Best cross-post times
+  _charts.push(new Chart(document.getElementById('collabTimesChart'), {type:'bar', data:{
+    labels:['8am','12pm','3pm','6pm','8pm','10pm'],
+    datasets:[{label:'Network activity', data:[28,42,52,82,76,38], backgroundColor:C.teal, borderRadius:6}]
+  }, options:o}));
+
+  // Overlap bar
+  _charts.push(new Chart(document.getElementById('overlapBar'), {type:'bar', data:{
+    labels:['Fri Night','Northern','Banterversity','UK Jail','Cocktail','Memetic'],
+    datasets:[{label:'Overlap %', data:[94,86,75,78,81,72], backgroundColor:[C.opp,C.opp,C.teal,C.teal,C.warn,C.warn], borderRadius:6}]
+  }, options:{...o, indexAxis:'y'}}));
+
+  // Similarity radar
+  _charts.push(new Chart(document.getElementById('simRadar'), {type:'radar', data:{
+    labels:['Audience','Topics','Tone','Timing','Format','Emotion'],
+    datasets:[{label:'Fri Night Chaos', data:[94,78,88,65,72,82], borderColor:C.teal, backgroundColor:'rgba(0,196,160,0.18)', pointRadius:3, borderWidth:2}]
+  }, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:o.plugins.tooltip}, scales:{r:{angleLines:{color:C.grid}, grid:{color:C.grid}, pointLabels:{color:C.text, font:{...C.font, size:10}}, ticks:{display:false}, suggestedMin:0, suggestedMax:100}}}}));
+
+  // Cascade depth
+  _charts.push(new Chart(document.getElementById('cascadeDepthChart'), {type:'bar', data:{
+    labels:['1','2','3','4','5','6+'],
+    datasets:[{label:'Posts', data:[124,84,42,18,8,3], backgroundColor:[C.text,C.warn,C.teal,C.opp,C.opp,C.opp], borderRadius:6}]
+  }, options:o}));
+
+  // Format vs cascade
+  _charts.push(new Chart(document.getElementById('formatCascadeChart'), {type:'bar', data:{
+    labels:['Photo','Video','Reel','Carousel','Text','Link'],
+    datasets:[{label:'Cascade rate', data:[1.2,2.4,3.1,1.8,0.9,0.6], backgroundColor:[C.warn,C.teal,C.opp,C.warn,C.text,C.text], borderRadius:6}]
+  }, options:o}));
+
+  // Engagement flow
+  _charts.push(new Chart(document.getElementById('engFlowChart'), {type:'line', data:{
+    labels:hours24,
+    datasets:[
+      {label:'Your network', data:hours24.map((_,h)=>{if(h>=17&&h<=21)return 60+Math.random()*20;if(h>=12&&h<=14)return 40+Math.random()*10;return 10+Math.random()*15}), borderColor:C.teal, backgroundColor:'rgba(0,196,160,0.15)', fill:true, tension:0.4, pointRadius:0, borderWidth:2},
+      {label:'Your pages alone', data:hours24.map((_,h)=>{if(h>=17&&h<=21)return 35+Math.random()*15;return 8+Math.random()*10}), borderColor:C.arte, fill:false, tension:0.4, pointRadius:0, borderWidth:2, borderDash:[4,4]}
+    ]
+  }, options:{...o, plugins:{...o.plugins, legend:{display:true, labels:{color:C.text, font:C.font, boxWidth:8}}}}}));
+
 }
 
 /* ── Cascade SVG ── */
@@ -1032,7 +1554,39 @@ window.addEventListener('load', ()=>{
   try { renderFlagged(); } catch(e) {}
   try { renderActivity(); } catch(e) {}
   try { renderRawData(); } catch(e) {}
+  try { renderPredLog(); } catch(e) {}
 });
+
+function renderPredLog(){
+  const tbody = document.getElementById('predLogBody');
+  if(!tbody) return;
+  const rows = [
+    ['Friday plans hierarchy','Drinking Memes',91,94,3,'hit'],
+    ['Liver realises Monday','Drinking Memes',86,92,6,'beat'],
+    ['Kelpies vs Bunnings','Kelpie Daily',89,87,-2,'hit'],
+    ['Inmates rank tea','UK Jail News',76,82,6,'beat'],
+    ['6PM is sacred','Drinking Memes',82,79,-3,'hit'],
+    ['Pub mate philosopher','Drinking Memes',74,71,-3,'hit'],
+    ['Heeler customer service','Kelpie Daily',88,85,-3,'hit'],
+    ['Prison drama 340%','UK Jail News',83,78,-5,'miss'],
+    ['Sunday roast survival','Fri Night Chaos',76,83,7,'beat'],
+    ['Banter taxonomy','Fri Night Chaos',71,68,-3,'hit'],
+    ['Cocktail confessions','Drinking Memes',79,81,2,'hit'],
+    ['Quiet kelpie','Kelpie Daily',62,64,2,'hit']
+  ];
+  tbody.innerHTML = rows.map(r=>{
+    const dir = r[4] > 0 ? 'opp' : r[4] < 0 ? 'crisis' : '';
+    const outcomeColor = r[5]==='beat'?'var(--opp)': r[5]==='miss'?'var(--crisis)':'var(--warn)';
+    return `<tr>
+      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r[0]}</td>
+      <td>${r[1]}</td>
+      <td>${r[2]}</td>
+      <td>${r[3]}</td>
+      <td><span style="color:${dir==='opp'?'var(--opp)':dir==='crisis'?'var(--crisis)':'var(--t2)'};font-weight:600">${r[4]>0?'+':''}${r[4]}</span></td>
+      <td><span style="color:${outcomeColor};font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:0.04em">${r[5]}</span></td>
+    </tr>`;
+  }).join('');
+}
 
 /* Re-render charts on window resize (debounced) */
 let _resizeTimer;

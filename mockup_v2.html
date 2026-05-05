@@ -2366,6 +2366,163 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
 .chart-wrap.h-md{height:170px}
 .chart-wrap.h-lg{height:220px}
 .chart-wrap.h-xl{height:260px}
+
+/* ─── INSIGHT POSTS — Facebook-style cards on Feed ────── */
+.insight-post{
+  background:var(--bg-elev);
+  border-radius:var(--r);
+  margin-bottom:14px;
+  border:1px solid transparent;
+  transition:border-color .15s, box-shadow .2s;
+  overflow:hidden;
+}
+.insight-post:hover{border-color:var(--bdr-soft);box-shadow:0 4px 16px rgba(0,0,0,0.18)}
+.insight-post-head{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 16px 10px;
+}
+.insight-post-avatar{
+  width:40px;height:40px;border-radius:50%;
+  display:grid;place-items:center;
+  font-weight:800;font-size:15px;
+  flex-shrink:0;
+}
+.insight-post-avatar.dm{background:linear-gradient(135deg,#FBBF24,#F59E0B);color:#0a1410}
+.insight-post-avatar.kd{background:linear-gradient(135deg,#22C55E,#15803D);color:white}
+.insight-post-avatar.fn{background:linear-gradient(135deg,#60A5FA,#2563EB);color:white}
+.insight-post-avatar.uk{background:linear-gradient(135deg,#A78BFA,#7C3AED);color:white}
+.insight-post-avatar.pb{background:linear-gradient(135deg,#00C4A0,#00a085);color:white}
+.insight-post-avatar.arte{background:linear-gradient(135deg,var(--arte-1),var(--arte-2));color:white}
+.insight-post-avatar svg{width:18px;height:18px}
+.insight-post-meta{flex:1;min-width:0}
+.insight-post-title{font-size:14px;font-weight:700;color:var(--t1);line-height:1.25}
+.insight-post-byline{font-size:12px;color:var(--t2);margin-top:1px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.insight-post-byline .dot{width:3px;height:3px;border-radius:50%;background:var(--t3);display:inline-block}
+.insight-post-tag{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;
+  padding:2px 8px;border-radius:9999px;
+  display:inline-flex;align-items:center;gap:4px;flex-shrink:0;
+}
+.insight-post-tag.crisis{background:var(--crisis-bg);color:var(--crisis)}
+.insight-post-tag.opp{background:var(--opp-bg);color:var(--opp)}
+.insight-post-tag.warn{background:var(--warn-bg);color:var(--warn)}
+.insight-post-tag.match{background:var(--teal-bg);color:var(--teal)}
+.insight-post-tag.briefing{background:var(--arte-bg);color:var(--arte-1)}
+.insight-post-menu{
+  width:32px;height:32px;border-radius:50%;
+  display:grid;place-items:center;
+  color:var(--t2);cursor:pointer;
+  transition:background .15s;
+}
+.insight-post-menu:hover{background:var(--bg-elev-2)}
+
+.insight-post-body{padding:0 16px 14px;font-size:14px;color:var(--t1);line-height:1.5}
+.insight-post-body strong{color:var(--teal);font-weight:700}
+.insight-post-body .neg{color:var(--crisis);font-weight:700}
+
+.insight-post-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+  margin:0 16px 12px;
+  padding:12px;background:var(--bg);border-radius:8px;
+}
+.insight-post-stat{text-align:center}
+.insight-post-stat-val{font-size:18px;font-weight:800;color:var(--t1);font-variant-numeric:tabular-nums}
+.insight-post-stat-val.teal{color:var(--teal)}
+.insight-post-stat-val.opp{color:var(--opp)}
+.insight-post-stat-val.crisis{color:var(--crisis)}
+.insight-post-stat-lbl{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:0.04em;font-weight:700;margin-top:3px}
+
+/* Sparkline chart slot inside a post */
+.insight-post-chart{
+  margin:0 16px 12px;height:80px;position:relative;
+}
+
+/* Image inside an insight post (full-bleed meme) */
+.insight-post-image{
+  position:relative;height:200px;margin-bottom:12px;
+  background-size:cover;background-position:center;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Post footer with action buttons */
+.insight-post-actions{
+  display:flex;border-top:1px solid var(--bdr-soft);
+}
+.insight-post-action{
+  flex:1;padding:10px;background:transparent;border:none;
+  font-family:inherit;font-size:13px;font-weight:600;color:var(--t2);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:background .15s, color .15s;
+}
+.insight-post-action:hover{background:var(--bg-elev-2);color:var(--t1)}
+.insight-post-action.primary:hover{color:var(--teal)}
+.insight-post-action.arte{color:var(--arte-1)}
+.insight-post-action.arte:hover{background:rgba(124,92,191,0.10)}
+.insight-post-action svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* Engagement readout strip on a post */
+.insight-post-engagement{
+  padding:8px 16px;font-size:12px;color:var(--t2);
+  display:flex;align-items:center;gap:14px;
+  border-top:1px solid var(--bdr-soft);
+}
+.insight-post-engagement strong{color:var(--t1);font-weight:600}
+
+/* ─── PERFORMANCE PATCH — make everything feel snappy ── */
+*{
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeSpeed;
+}
+/* GPU-accelerate elements that actually move */
+.fw-card, .insight-post, .panel, .stat-tile, .conv-item,
+.feed-tab, .nav-item, .page-card, .arte-fab, .arte-hint-bubble,
+.flywheel-btn, .live-stat, .modal-overlay, .arte-chat-host,
+.story-tile, .toast-host, .insight-post-action, .btn{
+  will-change:auto;
+  transform:translateZ(0);
+  backface-visibility:hidden;
+}
+/* Snappier transitions globally */
+.btn, .nav-item, .feed-tab, .page-card, .live-stat,
+.subtab, .conv-tab, .insight-post-action,
+.cal-cell, .cal-nav-chip, .adv-nav-chip{
+  transition-duration:0.12s !important;
+}
+/* Slightly longer for richer effects */
+.fw-card, .modal, .arte-chat-host, .story-viewer{
+  transition-duration:0.25s;
+}
+/* Reduce motion preference */
+@media(prefers-reduced-motion:reduce){
+  *{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+  }
+}
+/* Replace expensive backdrop-filter with opaque on lower-end devices */
+@media(max-width:980px){
+  .topnav, .arte-chat-host, .modal-overlay{
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+}
+
+/* Performance: GPU-accelerate transforms on key animated elements */
+.feed-tab, .nav-item, .page-card, .insight-post, .live-stat, .arte-fab, 
+.arte-hint-bubble, .modal-overlay, .toast-host, .fw-card,
+.story-tile, .panel, .stat-tile{
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+}
+/* Snappier transitions globally on hover-y bits */
+.btn, .nav-item, .feed-tab, .page-card, .live-stat,
+.subtab, .insight-post-action, .cal-cell, .cal-nav-chip{
+  transition-duration:0.12s;
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}
+}
 </style>
 </head>
 <body>
@@ -2430,9 +2587,9 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
       </a>
       <a class="nav-item">
         <span class="nav-item-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
         </span>
-        <span>Inbox</span>
+        <span>To-do</span>
         <span style="margin-left:auto;font-size:11px;font-weight:700;color:var(--crisis);background:var(--crisis-bg);padding:2px 8px;border-radius:9999px">7</span>
       </a>
     </div>
@@ -2511,7 +2668,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
       </a>
       <a class="nav-item" data-quick="reports">
         <span class="nav-item-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></span>
-        <span>Reports</span>
+        <span>Reports & Alerts</span>
       </a>
       <a class="nav-item" data-quick="profile">
         <span class="nav-item-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span>
@@ -2929,7 +3086,9 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
             <div class="card-meta">
               <div class="card-title">
                 You're on a 6-day streak
-                <span class="reward-chip self">Self</span>
+    
+
+            <span class="reward-chip self">Self</span>
               </div>
               <div class="card-sub">Post today to extend it · Best streak: 14 days</div>
             </div>
@@ -2973,7 +3132,188 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
         </div>
 
         <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- MVP CAPABILITY RAIL — what's powering all of this           -->
+
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- INSIGHT POSTS — Facebook-style page activity stream            -->
+        <!-- Auto-generated insights about your own pages, FB-card style  -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+
+        <div class="insight-post">
+          <div class="insight-post-head">
+            <div class="insight-post-avatar arte"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+            <div class="insight-post-meta">
+              <div class="insight-post-title">Art-E · Daily summary</div>
+              <div class="insight-post-byline">Today at 7:02 AM <span class="dot"></span> All 5 pages <span class="dot"></span> <span style="color:var(--arte-1)">● 4-min read</span></div>
+            </div>
+            <span class="insight-post-tag briefing">Briefing</span>
+          </div>
+          <div class="insight-post-body">
+            Strong night across the network — total reach is up <strong>+18% vs last Tuesday</strong>, with <strong>Kelpie Daily</strong> leading after a meme post crossed 12K shares before midnight. Two opportunities to act on today: the 6PM window for <strong>Drinking Memes</strong>, and a fresh collab match worth a look.
+          </div>
+          <div class="insight-post-stats">
+            <div class="insight-post-stat"><div class="insight-post-stat-val opp">+18%</div><div class="insight-post-stat-lbl">Network reach</div></div>
+            <div class="insight-post-stat"><div class="insight-post-stat-val teal">12.4K</div><div class="insight-post-stat-lbl">Shares overnight</div></div>
+            <div class="insight-post-stat"><div class="insight-post-stat-val">91</div><div class="insight-post-stat-lbl">Avg AI score</div></div>
+          </div>
+          <div class="insight-post-actions">
+            <button class="insight-post-action primary" onclick="handleAction('view-page','briefing')"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg> Read full briefing</button>
+            <button class="insight-post-action arte" onclick="openArteChat('Walk me through this morning briefing')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
+            <button class="insight-post-action" onclick="toast('info','Shared to team')"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Share</button>
+          </div>
+        </div>
+
+        <div class="insight-post">
+          <div class="insight-post-head">
+            <div class="insight-post-avatar dm">DM</div>
+            <div class="insight-post-meta">
+              <div class="insight-post-title">Drinking Memes · 6PM post</div>
+              <div class="insight-post-byline">2 hours ago <span class="dot"></span> Outperformed average by 3.2× <span class="dot"></span> <span style="color:var(--opp)">● Going viral</span></div>
+            </div>
+            <span class="insight-post-tag opp">Hunt · Opportunity</span>
+          </div>
+          <div class="insight-post-image meme-bg-pub">
+            <div class="meme-glyph-lg"><svg viewBox="0 0 24 24" fill="white"><path d="M5 11h14v9a2 2 0 01-2 2H7a2 2 0 01-2-2v-9zM5 11l-1-3a2 2 0 012-2h12a2 2 0 012 2l-1 3M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></div>
+            <div class="meme-caption">When the liver realises it's Monday again</div>
+          </div>
+          <div class="insight-post-body">
+            Reach hit <strong>24.5K in 90 minutes</strong> — your strongest velocity this month. The question CTA pattern + Impact-style caption was the trigger. Art-E predicts 2.4× more reach in the next 4 hours if you reshare to your other pages now.
+          </div>
+          <div class="insight-post-engagement">
+            <span><strong>2.4K</strong> reactions</span>
+            <span><strong>184</strong> comments</span>
+            <span><strong>312</strong> shares</span>
+            <span style="margin-left:auto;color:var(--teal);font-weight:700">AI Score 91</span>
+          </div>
+          <div class="insight-post-actions">
+            <button class="insight-post-action primary" onclick="handleAction('reshare')"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg> Reshare</button>
+            <button class="insight-post-action" onclick="handleAction('why-it-worked')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg> Why it worked</button>
+            <button class="insight-post-action arte" onclick="openArteChat('How can I capture more from this viral post?')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
+          </div>
+        </div>
+
+        <div class="insight-post">
+          <div class="insight-post-head">
+            <div class="insight-post-avatar dm">DM</div>
+            <div class="insight-post-meta">
+              <div class="insight-post-title">Brand risk on Drinking Memes</div>
+              <div class="insight-post-byline">3 minutes ago <span class="dot"></span> Crisis Detection <span class="dot"></span> <span style="color:var(--crisis)">● Action needed</span></div>
+            </div>
+            <span class="insight-post-tag crisis">Crisis</span>
+          </div>
+          <div class="insight-post-body">
+            <span class="neg">23 negative comments in 4 minutes</span> on your 6PM post. Sentiment dropped from 0.78 to <strong style="color:var(--crisis)">0.42</strong> — the steepest dip in 30 days. Art-E recommends a response within the hour. The pattern matches a known troll cluster from October.
+          </div>
+          <div class="insight-post-stats">
+            <div class="insight-post-stat"><div class="insight-post-stat-val crisis">−42%</div><div class="insight-post-stat-lbl">Sentiment</div></div>
+            <div class="insight-post-stat"><div class="insight-post-stat-val">23</div><div class="insight-post-stat-lbl">Comments flagged</div></div>
+            <div class="insight-post-stat"><div class="insight-post-stat-val">0.89</div><div class="insight-post-stat-lbl">Risk score</div></div>
+          </div>
+          <div class="insight-post-actions">
+            <button class="insight-post-action primary" onclick="handleAction('respond')" style="color:var(--crisis)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Respond now</button>
+            <button class="insight-post-action" onclick="handleAction('mute')"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg> Mute 24h</button>
+            <button class="insight-post-action arte" onclick="openArteChat('Help me draft a response to the brand risk')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Draft with Art-E</button>
+          </div>
+        </div>
+
+        <div class="insight-post">
+          <div class="insight-post-head">
+            <div class="insight-post-avatar fn">FN</div>
+            <div class="insight-post-meta">
+              <div class="insight-post-title">New collab match · Fri Night Chaos</div>
+              <div class="insight-post-byline">Today at 11:42 AM <span class="dot"></span> K-Means clustering <span class="dot"></span> <span style="color:var(--teal)">● 94% audience overlap</span></div>
+            </div>
+            <span class="insight-post-tag match">Tribe · Match</span>
+          </div>
+          <div class="insight-post-body">
+            Their audience overlaps yours by <strong>94%</strong> with strong shared interest in pub-culture humour. <strong>7 of their top 10 topics</strong> are in your top 15. They have <strong>89K followers</strong> and post 5×/week — connecting could lift both pages by 15-20% reach.
+          </div>
+          <div class="insight-post-stats">
+            <div class="insight-post-stat"><div class="insight-post-stat-val teal">94%</div><div class="insight-post-stat-lbl">Overlap</div></div>
+            <div class="insight-post-stat"><div class="insight-post-stat-val">89K</div><div class="insight-post-stat-lbl">Followers</div></div>
+            <div class="insight-post-stat"><div class="insight-post-stat-val opp">+18%</div><div class="insight-post-stat-lbl">Est. lift</div></div>
+          </div>
+          <div class="insight-post-actions">
+            <button class="insight-post-action primary" onclick="handleAction('connect')"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2M22 11l-3 3 3 3M22 14h-7"/></svg> Connect</button>
+            <button class="insight-post-action" onclick="navigateTo('discovery',document.querySelector('[data-page=&quot;discovery&quot;]'))"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> View page</button>
+            <button class="insight-post-action arte" onclick="openArteChat('Tell me more about Fri Night Chaos as a collab')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
+          </div>
+        </div>
+
+        <div class="insight-post">
+          <div class="insight-post-head">
+            <div class="insight-post-avatar uk">UK</div>
+            <div class="insight-post-meta">
+              <div class="insight-post-title">"Prison drama" trending in your niche</div>
+              <div class="insight-post-byline">Today at 9:14 AM <span class="dot"></span> Topic Classification <span class="dot"></span> <span style="color:var(--warn)">● 4-hour window</span></div>
+            </div>
+            <span class="insight-post-tag warn">Hunt · Trend</span>
+          </div>
+          <div class="insight-post-body">
+            <strong>+340% mentions</strong> vs last week. Estimated peak window: next 4 hours. Your <strong>UK Jail News</strong> page is positioned to capture this — Art-E predicts a post in this slot would score <strong>92</strong>, your highest forecast this week.
+          </div>
+          <div class="insight-post-stats">
+            <div class="insight-post-stat"><div class="insight-post-stat-val opp">+340%</div><div class="insight-post-stat-lbl">Mention spike</div></div>
+            <div class="insight-post-stat"><div class="insight-post-stat-val">4h</div><div class="insight-post-stat-lbl">Peak window</div></div>
+            <div class="insight-post-stat"><div class="insight-post-stat-val teal">92</div><div class="insight-post-stat-lbl">Predicted score</div></div>
+          </div>
+          <div class="insight-post-actions">
+            <button class="insight-post-action primary" onclick="handleAction('draft-post')"><svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg> Draft a post</button>
+            <button class="insight-post-action" onclick="handleAction('see-trend')"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg> See trend data</button>
+            <button class="insight-post-action arte" onclick="openArteChat('Help me write something for the prison drama trend')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
+          </div>
+        </div>
+
+        <div class="insight-post">
+          <div class="insight-post-head">
+            <div class="insight-post-avatar pb">PB</div>
+            <div class="insight-post-meta">
+              <div class="insight-post-title">Prison Biscuit · 6-day streak</div>
+              <div class="insight-post-byline">Today at 8:00 AM <span class="dot"></span> Self-tracking <span class="dot"></span> <span style="color:var(--teal)">● Personal best within reach</span></div>
+            </div>
+            <span class="insight-post-tag match">Self · Streak</span>
+          </div>
+          <div class="insight-post-body">
+            You've posted on Prison Biscuit every day for <strong>6 days straight</strong> — your second-longest streak. Personal best is 14 days. Post today to extend it.
+          </div>
+          <div class="insight-post-stats">
+            <div class="insight-post-stat"><div class="insight-post-stat-val teal">6 days</div><div class="insight-post-stat-lbl">Current streak</div></div>
+            <div class="insight-post-stat"><div class="insight-post-stat-val">14</div><div class="insight-post-stat-lbl">Personal best</div></div>
+            <div class="insight-post-stat"><div class="insight-post-stat-val opp">+12</div><div class="insight-post-stat-lbl">New followers</div></div>
+          </div>
+          <div class="insight-post-actions">
+            <button class="insight-post-action primary" onclick="handleAction('post-now')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Post now</button>
+            <button class="insight-post-action" onclick="navigateTo('calendar',null)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Schedule</button>
+            <button class="insight-post-action arte" onclick="openArteChat('What should I post on Prison Biscuit today?')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
+          </div>
+        </div>
+
+        <div class="insight-post">
+          <div class="insight-post-head">
+            <div class="insight-post-avatar kd">KD</div>
+            <div class="insight-post-meta">
+              <div class="insight-post-title">Kelpie Daily · Sentiment up overnight</div>
+              <div class="insight-post-byline">Yesterday at 11:30 PM <span class="dot"></span> XLM-RoBERTa <span class="dot"></span> <span style="color:var(--opp)">● 3.2× reach</span></div>
+            </div>
+            <span class="insight-post-tag opp">Hunt · Discovery</span>
+          </div>
+          <div class="insight-post-body">
+            Sentiment climbed <strong>+18%</strong> on Kelpie Daily after the "Australian heeler customer service" post. Comments are dominated by <strong>joy + trust emotions</strong>. The post broke the viral threshold at 11:14 PM.
+          </div>
+          <div class="insight-post-stats">
+            <div class="insight-post-stat"><div class="insight-post-stat-val opp">+18%</div><div class="insight-post-stat-lbl">Sentiment lift</div></div>
+            <div class="insight-post-stat"><div class="insight-post-stat-val teal">38.2K</div><div class="insight-post-stat-lbl">Reach</div></div>
+            <div class="insight-post-stat"><div class="insight-post-stat-val">94</div><div class="insight-post-stat-lbl">AI Score</div></div>
+          </div>
+          <div class="insight-post-actions">
+            <button class="insight-post-action primary" onclick="handleAction('view-live')"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View live</button>
+            <button class="insight-post-action" onclick="handleAction('reshare')"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg> Reshare</button>
+            <button class="insight-post-action arte" onclick="openArteChat('What is driving this sentiment lift?')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
+          </div>
+        </div>
+
+        
+
+                <!-- MVP CAPABILITY RAIL — what's powering all of this           -->
         <!-- Bottom of feed: "Here's what AI is running for you right now" -->
         <!-- Each cap is clickable → opens the matching analytics tab    -->
         <!-- ═══════════════════════════════════════════════════════════ -->
@@ -3031,7 +3371,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           <div class="page-header">
             <div class="page-title-block">
               <h1 class="page-title">Analytics</h1>
-              <div class="page-sub">All pages · Last 30 days · Updated 2 minutes ago</div>
+              <div class="page-sub">All pages · Last 30 days · Updated 2 minutes ago · Plain-English view</div>
             </div>
             <div class="page-actions">
               <button class="btn" onclick="toast('info','Date range picker — coming soon')">
@@ -3051,9 +3391,9 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
 
           <!-- Sub-tabs -->
           <div class="subtabs" id="analyticsSubtabs">
-            <button class="subtab active" data-sub="kpis"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg> KPIs</button>
-            <button class="subtab" data-sub="trends"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Trends</button>
-            <button class="subtab" data-sub="sentiment"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8z"/></svg> Sentiment</button>
+            <button class="subtab active" data-sub="kpis"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg> Overview</button>
+            <button class="subtab" data-sub="trends"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Performance</button>
+            <button class="subtab" data-sub="sentiment"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8z"/></svg> Audience Mood</button>
           </div>
           <div style="background:linear-gradient(90deg,rgba(124,92,191,0.12),rgba(0,196,160,0.06));border:1px solid rgba(124,92,191,0.2);border-radius:12px;padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;cursor:pointer" onclick="window.open('mockup_advanced.html','_blank')">
             <div style="width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--arte-1),var(--arte-2));display:grid;place-items:center;flex-shrink:0">
@@ -3069,7 +3409,8 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           </div>
 
           <!-- ─── KPIs PANEL ─────────────── -->
-          <div class="subpanel active" id="sub-kpis">
+          
+            <div class="subpanel active" id="sub-kpis">
             <div class="insight-callout">
               <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
               <div class="insight-callout-text">Your engagement rate is <strong>+12% vs last week</strong> — driven by Tuesday 6PM posts. Reach is following the same trend with a one-day lag.</div>
@@ -3214,7 +3555,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
                 <div class="chart-wrap h-md"><canvas id="dowChart"></canvas></div>
               </div>
               <div class="panel">
-                <div class="panel-header"><div><div class="panel-title">Best Posting Hours</div><div class="panel-sub">Avg engagement by hour</div></div></div>
+                <div class="panel-header"><div><div class="panel-title">Format performance breakdown</div><div class="panel-sub">Avg engagement by post type</div></div></div>
                 <div class="chart-wrap h-md"><canvas id="hourlyChart"></canvas></div>
               </div>
             </div>
@@ -3590,8 +3931,8 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
         <div class="analytics-wrap">
           <div class="page-header">
             <div class="page-title-block">
-              <h1 class="page-title">Inbox</h1>
-              <div class="page-sub">7 items need your attention · Sorted by Art-E priority</div>
+              <h1 class="page-title">To-do</h1>
+              <div class="page-sub">7 items need your input · Sorted by Art-E priority · Triaged from comments, alerts, and recommendations</div>
             </div>
             <div class="page-actions">
               <button class="btn" onclick="toast('info','Filter — All pages')">
@@ -4026,8 +4367,8 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
         <div class="analytics-wrap">
           <div class="page-header">
             <div class="page-title-block">
-              <h1 class="page-title">Reports</h1>
-              <div class="page-sub">Generate and download performance reports</div>
+              <h1 class="page-title">Reports & Alerts</h1>
+              <div class="page-sub">Scheduled performance reports + custom alert rules</div>
             </div>
             <div class="page-actions">
               <button class="btn primary" onclick="openModal('Generate report','<p>Choose what to include:</p><div style=\'display:flex;flex-direction:column;gap:8px;margin:10px 0\'><label style=\'display:flex;align-items:center;gap:8px\'><input type=\'checkbox\' checked/> Performance summary</label><label style=\'display:flex;align-items:center;gap:8px\'><input type=\'checkbox\' checked/> Sentiment analysis</label><label style=\'display:flex;align-items:center;gap:8px\'><input type=\'checkbox\' checked/> Virality predictions</label><label style=\'display:flex;align-items:center;gap:8px\'><input type=\'checkbox\' checked/> Top posts</label><label style=\'display:flex;align-items:center;gap:8px\'><input type=\'checkbox\'/> Audience clusters</label><label style=\'display:flex;align-items:center;gap:8px\'><input type=\'checkbox\'/> Raw data export</label></div>','<button class=\'btn\' onclick=\'closeModal()\'>Cancel</button><button class=\'btn primary\' onclick=\'closeModal();toast(&quot;success&quot;,&quot;Report generating · you&apos;ll get an email when ready&quot;)\'>Generate</button>')">
@@ -4083,6 +4424,68 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
                 <div style="font-size:12px;color:var(--t2);margin-top:2px">Generated 14 days ago · 8 pages PDF · 1.2 MB</div>
               </div>
               <button class="btn" onclick="toast('success','Downloading report')">Download</button>
+            </div>
+          </div>
+
+          <!-- ALERTS section — scheduled rules + active alerts -->
+          <div class="page-header" style="margin-top:24px;border-top:1px solid var(--bdr-soft);padding-top:18px">
+            <div class="page-title-block">
+              <h2 style="font-size:18px;font-weight:800;color:var(--t1)">Scheduled alerts</h2>
+              <div class="page-sub" style="font-size:12.5px">Custom rules · Art-E checks every 5 minutes and pings you when triggered</div>
+            </div>
+            <div class="page-actions">
+              <button class="btn primary" onclick="openModal('Create alert rule','<p>Set up a custom alert rule. Art-E will check every 5 minutes and notify you when triggered.</p><div style=\'display:flex;flex-direction:column;gap:8px;margin-top:14px\'><label style=\'font-size:12px;color:var(--t2);font-weight:600;text-transform:uppercase;letter-spacing:0.04em\'>When this happens</label><select class=\'settings-input\'><option>Sentiment drops below threshold</option><option>Reach exceeds expected by X%</option><option>Comment volume spikes</option><option>Page goes silent for X hours</option><option>Competitor posts in your niche</option></select><label style=\'font-size:12px;color:var(--t2);font-weight:600;text-transform:uppercase;letter-spacing:0.04em;margin-top:8px\'>On which page</label><select class=\'settings-input\'><option>All pages</option><option>Drinking Memes</option><option>Kelpie Daily</option><option>Fri Night Chaos</option><option>UK Jail News</option><option>Prison Biscuit</option></select><label style=\'font-size:12px;color:var(--t2);font-weight:600;text-transform:uppercase;letter-spacing:0.04em;margin-top:8px\'>Notify me via</label><div style=\'display:flex;gap:8px;flex-wrap:wrap\'><label style=\'display:flex;align-items:center;gap:6px;font-size:13px\'><input type=\'checkbox\' checked/> In-app</label><label style=\'display:flex;align-items:center;gap:6px;font-size:13px\'><input type=\'checkbox\'/> Email</label><label style=\'display:flex;align-items:center;gap:6px;font-size:13px\'><input type=\'checkbox\' checked/> Slack</label></div></div>','<button class=\'btn\' onclick=\'closeModal()\'>Cancel</button><button class=\'btn primary\' onclick=\'closeModal();toast(&quot;success&quot;,&quot;Alert rule created&quot;)\'>Create rule</button>')">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New alert rule
+              </button>
+            </div>
+          </div>
+
+          <div class="panel" style="padding:0">
+            <div class="report-row">
+              <div class="bell-icon crisis" style="width:36px;height:36px;flex-shrink:0"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 6v6m0 4h.01"/></svg></div>
+              <div style="flex:1">
+                <div style="font-weight:700;color:var(--t1);font-size:14px">Brand-risk threshold · Drinking Memes</div>
+                <div style="font-size:12px;color:var(--t2);margin-top:2px">Sentiment drops below 0.5 → ping in-app + Slack <span style="color:var(--opp);font-weight:600">● Active</span></div>
+              </div>
+              <div class="settings-toggle on" onclick="this.classList.toggle('on')" style="flex-shrink:0"></div>
+              <button class="btn" onclick="toast('info','Edit alert')" style="flex-shrink:0">Edit</button>
+            </div>
+            <div class="report-row">
+              <div class="bell-icon opp" style="width:36px;height:36px;flex-shrink:0"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+              <div style="flex:1">
+                <div style="font-weight:700;color:var(--t1);font-size:14px">Going viral · all pages</div>
+                <div style="font-size:12px;color:var(--t2);margin-top:2px">Reach exceeds 200% expected → in-app <span style="color:var(--opp);font-weight:600">● Active</span></div>
+              </div>
+              <div class="settings-toggle on" onclick="this.classList.toggle('on')" style="flex-shrink:0"></div>
+              <button class="btn" onclick="toast('info','Edit alert')" style="flex-shrink:0">Edit</button>
+            </div>
+            <div class="report-row">
+              <div class="bell-icon" style="background:var(--warn-bg);color:var(--warn);width:36px;height:36px;flex-shrink:0"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke="white" stroke-width="2" fill="none"/></svg></div>
+              <div style="flex:1">
+                <div style="font-weight:700;color:var(--t1);font-size:14px">Optimal window reminder · all pages</div>
+                <div style="font-size:12px;color:var(--t2);margin-top:2px">1 hour before each top window → in-app + email <span style="color:var(--opp);font-weight:600">● Active</span></div>
+              </div>
+              <div class="settings-toggle on" onclick="this.classList.toggle('on')" style="flex-shrink:0"></div>
+              <button class="btn" onclick="toast('info','Edit alert')" style="flex-shrink:0">Edit</button>
+            </div>
+            <div class="report-row">
+              <div class="bell-icon" style="background:var(--teal-bg);color:var(--teal);width:36px;height:36px;flex-shrink:0"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M11.65 11.65l3.7 3.7"/></svg></div>
+              <div style="flex:1">
+                <div style="font-weight:700;color:var(--t1);font-size:14px">New collab match · all pages</div>
+                <div style="font-size:12px;color:var(--t2);margin-top:2px">K-Means finds match with &gt;75% overlap → in-app <span style="color:var(--t3)">● Paused</span></div>
+              </div>
+              <div class="settings-toggle off" onclick="this.classList.toggle('on')" style="flex-shrink:0"></div>
+              <button class="btn" onclick="toast('info','Edit alert')" style="flex-shrink:0">Edit</button>
+            </div>
+            <div class="report-row">
+              <div class="bell-icon" style="background:var(--arte-bg);color:var(--arte-1);width:36px;height:36px;flex-shrink:0"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 12h2l3-9 6 18 3-9h6"/></svg></div>
+              <div style="flex:1">
+                <div style="font-weight:700;color:var(--t1);font-size:14px">Trending topic · UK Jail News</div>
+                <div style="font-size:12px;color:var(--t2);margin-top:2px">Topic in your niche grows &gt;200% in 24h → in-app + Slack <span style="color:var(--opp);font-weight:600">● Active</span></div>
+              </div>
+              <div class="settings-toggle on" onclick="this.classList.toggle('on')" style="flex-shrink:0"></div>
+              <button class="btn" onclick="toast('info','Edit alert')" style="flex-shrink:0">Edit</button>
             </div>
           </div>
         </div>
@@ -4187,38 +4590,23 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
   <!-- ─── RIGHT SIDEBAR ─────────────────────── -->
   <aside class="right-sidebar">
 
-    <!-- Live counters (Hunt — fresh data) -->
+    <!-- Live counters — change per selected page -->
     <div class="right-card">
       <div class="right-card-head">
         <div class="right-card-title">
-          <span class="live-dot"></span> Live
+          <span class="live-dot"></span> Live · <span id="liveContext">All pages</span>
         </div>
         <a class="right-card-link">Today</a>
       </div>
-      <div class="live-grid">
-        <div class="live-stat">
-          <div class="live-stat-val up">2.4K<span class="delta">↑18%</span></div>
-          <div class="live-stat-lbl">Reach right now</div>
-        </div>
-        <div class="live-stat">
-          <div class="live-stat-val">187</div>
-          <div class="live-stat-lbl">Engagements/min</div>
-        </div>
-        <div class="live-stat">
-          <div class="live-stat-val">4.8%</div>
-          <div class="live-stat-lbl">Engagement rate</div>
-        </div>
-        <div class="live-stat">
-          <div class="live-stat-val up">91<span class="delta">↑3</span></div>
-          <div class="live-stat-lbl">Avg AI score</div>
-        </div>
+      <div class="live-grid" id="liveGrid">
+        <!-- Populated by updateLiveStats() -->
       </div>
     </div>
 
     <!-- Bell tray notifications -->
     <div class="right-card">
       <div class="right-card-head">
-        <div class="right-card-title">Notifications</div>
+        <div class="right-card-title">Recent activity</div>
         <a class="right-card-link">See all</a>
       </div>
 
@@ -4591,37 +4979,57 @@ function switchFeedTab(name){
   if(!home) return;
   document.querySelectorAll('.feed-filter-banner').forEach(n=>n.remove());
 
-  // Categorise everything in the home feed
-  const stripsAndComposer = home.querySelectorAll('.stories-strip, .composer-wrap, .mvp-rail');
-  const cards = home.querySelectorAll('.card:not(.composer-wrap), .alert-banner, .cap-ribbon, .briefing-card');
+  const stories = home.querySelector('.stories-strip');
+  const composer = home.querySelector('.composer-wrap');
+  const mvpRail = home.querySelector('.mvp-rail');
+  const insightPosts = home.querySelectorAll('.insight-post');
+  const briefingCard = home.querySelector('.briefing-card');
+  const oldCards = home.querySelectorAll('.card:not(.composer-wrap):not(.briefing-card)');
+  const alerts = home.querySelectorAll('.alert-banner');
+  const capRibbons = home.querySelectorAll('.cap-ribbon');
   const arteStrip = home.querySelector('.arte-strip');
 
+  const show = el => { if(el) el.style.display = ''; };
+  const hide = el => { if(el) el.style.display = 'none'; };
+
   if(name === 'feed'){
-    // FEED = stories, composer, MVP rail (the creation/discovery surface)
-    if(arteStrip) arteStrip.style.display = '';
-    stripsAndComposer.forEach(c=>c.style.display='');
-    cards.forEach(c=>c.style.display='none');
+    // FEED = stories + composer + insight posts + MVP rail (FB-style activity feed about your pages)
+    show(arteStrip); show(stories); show(composer); show(mvpRail);
+    insightPosts.forEach(show);
+    oldCards.forEach(hide);
+    alerts.forEach(hide);
+    capRibbons.forEach(hide);
+    hide(briefingCard);
   }
   else if(name === 'briefings'){
-    // BRIEFINGS = Art-E summaries, reward cards, cap ribbons, alerts
-    if(arteStrip) arteStrip.style.display = '';
-    stripsAndComposer.forEach(c=>{
-      // show only the briefing-related stuff, not composer/stories/mvp-rail
-      c.style.display = 'none';
+    // BRIEFINGS = Art-E briefing card + capability ribbons + reward cards (informational)
+    show(arteStrip);
+    hide(stories); hide(composer); hide(mvpRail);
+    insightPosts.forEach(p => {
+      // Show only the Art-E briefing-style insight posts (the first one — daily summary)
+      if(p.querySelector('.insight-post-tag.briefing')) show(p);
+      else hide(p);
     });
-    cards.forEach(c=>c.style.display='');
+    show(briefingCard);
+    oldCards.forEach(show);
+    alerts.forEach(show);
+    capRibbons.forEach(show);
   }
   else if(name === 'actions'){
     // ACTION ITEMS = crisis + opportunity only
-    if(arteStrip) arteStrip.style.display = 'none';
-    stripsAndComposer.forEach(c=>c.style.display='none');
-    cards.forEach(c=>{
-      if(c.classList.contains('alert-banner')) c.style.display='';
-      else c.style.display='none';
+    hide(arteStrip);
+    hide(stories); hide(composer); hide(mvpRail);
+    insightPosts.forEach(p => {
+      if(p.querySelector('.insight-post-tag.crisis') || p.querySelector('.insight-post-tag.opp')) show(p);
+      else hide(p);
     });
+    hide(briefingCard);
+    oldCards.forEach(hide);
+    alerts.forEach(show);
+    capRibbons.forEach(hide);
     const banner = document.createElement('div');
     banner.className = 'feed-filter-banner';
-    banner.innerHTML = `<div style="background:var(--crisis-bg);border:1px solid rgba(229,57,53,0.25);border-radius:12px;padding:12px 16px;font-size:13px;color:var(--t1);display:flex;align-items:center;gap:10px;margin-bottom:12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="#E53935"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><div><strong>3 action items</strong> — things that need your input. <a onclick="navigateTo(\'inbox\',document.querySelector(\'[data-page=&quot;inbox&quot;]\'))" style="color:var(--teal);cursor:pointer;font-weight:600">See all in Inbox →</a></div></div>`;
+    banner.innerHTML = `<div style="background:var(--crisis-bg);border:1px solid rgba(229,57,53,0.25);border-radius:12px;padding:12px 16px;font-size:13px;color:var(--t1);display:flex;align-items:center;gap:10px;margin-bottom:12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="#E53935"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><div><strong>Action items only</strong> — crises and opportunities that need your input. <a onclick="navigateTo(\'inbox\',document.querySelector(\'[data-page=&quot;inbox&quot;]\'))" style="color:var(--teal);cursor:pointer;font-weight:600">See all in Inbox →</a></div></div>`;
     home.insertBefore(banner, home.firstChild);
   }
 }
@@ -4905,33 +5313,8 @@ function openSearchModal(){
 }
 
 function openMessagesPanel(){
-  openModal('Messages · Group chats',
-    `<p style="color:var(--t2);font-size:13px;margin-bottom:12px">Conversations with your collab partners and team.</p>
-    <div class="saved-row" onclick="closeModal();toast('info','Opening chat with Fri Night Chaos')">
-      <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#0a2040,#04101f);display:grid;place-items:center;color:#60A5FA;font-weight:700;flex-shrink:0">FN</div>
-      <div style="flex:1">
-        <div style="font-weight:700;color:var(--t1);font-size:13px">Fri Night Chaos</div>
-        <div style="font-size:12px;color:var(--t2)">Hey! Saw the match notification. Want to do a meme swap?</div>
-      </div>
-      <span style="font-size:10px;color:var(--t3)">2h</span>
-    </div>
-    <div class="saved-row" onclick="closeModal();toast('info','Opening team chat')">
-      <div style="width:36px;height:36px;border-radius:10px;background:var(--arte-bg);display:grid;place-items:center;color:var(--arte-1);font-weight:700;flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="7" r="4"/><circle cx="17" cy="7" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div>
-      <div style="flex:1">
-        <div style="font-weight:700;color:var(--t1);font-size:13px">#social-team</div>
-        <div style="font-size:12px;color:var(--t2)">Anna: Crisis on Drinking Memes contained — 23 comments hidden</div>
-      </div>
-      <span style="font-size:10px;color:var(--t3)">5h</span>
-    </div>
-    <div class="saved-row" onclick="closeModal();toast('info','Opening Northern Banter chat')">
-      <div style="width:36px;height:36px;border-radius:10px;background:var(--teal-bg);display:grid;place-items:center;color:var(--teal);font-weight:700;flex-shrink:0">NB</div>
-      <div style="flex:1">
-        <div style="font-weight:700;color:var(--t1);font-size:13px">Northern Banter</div>
-        <div style="font-size:12px;color:var(--t2)">You: Cheers — let's do this Friday 8PM</div>
-      </div>
-      <span style="font-size:10px;color:var(--t3)">1d</span>
-    </div>`,
-    `<button class="btn" onclick="closeModal()">Close</button><button class="btn primary" onclick="closeModal();toast('info','Opening new chat')">+ New chat</button>`);
+  // Opens dedicated group-chat page in a new tab
+  window.open('mockup_messages.html', '_blank');
 }
 
 function openNotificationsPanel(){
@@ -5074,18 +5457,105 @@ function onCalCellClick(day, hour, intensity){
     `<button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="closeModal();toast('success','Scheduled for ${days[day]} ${hrs[hour]}')">Schedule</button>`);
 }
 
+
+/* ─── PER-PAGE KPI DATA — updates the right-rail Live card ─── */
+const PAGE_LIVE_DATA = {
+  all: {
+    name: 'All pages',
+    stats: [
+      {val:'2.4K', delta:'+18%', up:true, lbl:'Reach right now'},
+      {val:'187',  delta:null,   up:false, lbl:'Engagements/min'},
+      {val:'4.8%', delta:null,   up:false, lbl:'Engagement rate'},
+      {val:'91',   delta:'+3',   up:true, lbl:'Avg AI score'}
+    ]
+  },
+  dm: {
+    name: 'Drinking Memes',
+    stats: [
+      {val:'1.2K', delta:'+34%', up:true, lbl:'Reach right now'},
+      {val:'94',   delta:null,   up:false, lbl:'Engagements/min'},
+      {val:'5.2%', delta:'+0.4', up:true, lbl:'Engagement rate'},
+      {val:'91',   delta:'+5',   up:true, lbl:'AI score'}
+    ]
+  },
+  kd: {
+    name: 'Kelpie Daily',
+    stats: [
+      {val:'3.2K', delta:'+82%', up:true, lbl:'Reach right now · viral'},
+      {val:'212',  delta:'+18',  up:true, lbl:'Engagements/min'},
+      {val:'5.4%', delta:'+0.6', up:true, lbl:'Engagement rate'},
+      {val:'94',   delta:'+8',   up:true, lbl:'AI score'}
+    ]
+  },
+  fn: {
+    name: 'Fri Night Chaos',
+    stats: [
+      {val:'420',  delta:'-8%',  up:false, lbl:'Reach right now'},
+      {val:'31',   delta:null,   up:false, lbl:'Engagements/min'},
+      {val:'3.2%', delta:'-0.2', up:false, lbl:'Engagement rate'},
+      {val:'82',   delta:'-2',   up:false, lbl:'AI score'}
+    ]
+  },
+  uk: {
+    name: 'UK Jail News',
+    stats: [
+      {val:'860',  delta:'+4%',  up:true, lbl:'Reach right now'},
+      {val:'62',   delta:null,   up:false, lbl:'Engagements/min'},
+      {val:'3.9%', delta:null,   up:false, lbl:'Engagement rate'},
+      {val:'87',   delta:'+1',   up:true, lbl:'AI score'}
+    ]
+  },
+  pb: {
+    name: 'Prison Biscuit',
+    stats: [
+      {val:'180',  delta:null,   up:false, lbl:'Reach right now'},
+      {val:'14',   delta:null,   up:false, lbl:'Engagements/min'},
+      {val:'2.8%', delta:null,   up:false, lbl:'Engagement rate'},
+      {val:'71',   delta:'+1',   up:true, lbl:'AI score · steady'}
+    ]
+  }
+};
+
+function updateLiveStats(pageId){
+  const data = PAGE_LIVE_DATA[pageId] || PAGE_LIVE_DATA.all;
+  const ctx = document.getElementById('liveContext');
+  if(ctx) ctx.textContent = data.name;
+  const grid = document.getElementById('liveGrid');
+  if(!grid) return;
+  grid.innerHTML = data.stats.map(s => {
+    const cls = s.up ? 'up' : (s.delta && s.delta.startsWith('-') ? 'dn' : '');
+    const deltaClr = cls === 'dn' ? 'color:var(--crisis)' : '';
+    const deltaHtml = s.delta ? `<span class="delta" style="${deltaClr}">${s.delta}</span>` : '';
+    return `<div class="live-stat">
+      <div class="live-stat-val ${cls}">${s.val}${deltaHtml}</div>
+      <div class="live-stat-lbl">${s.lbl}</div>
+    </div>`;
+  }).join('');
+}
+
+
 /* ─── PAGE SELECTOR ─── click a page in left sidebar to filter analytics */
 function selectPage(pageId, pageName){
   window._activePage = pageId;
   toast('info', pageId === 'all' ? 'Showing all pages' : 'Filtered to: ' + pageName);
   // Highlight the selected page in sidebar
   document.querySelectorAll('.page-card').forEach(pc=>pc.classList.remove('selected'));
-  if(pageId !== 'all'){
-    const card = document.querySelector(`[data-page-id="${pageId}"]`);
-    card?.classList.add('selected');
-  }
-  // If on Analytics or Advanced, refresh data
-  // (This is a mockup, so we just show a toast — but in the production app this would refilter charts)
+  const card = document.querySelector(`[data-page-id="${pageId}"]`);
+  card?.classList.add('selected');
+  // Update right-rail Live KPIs to show this page's numbers
+  updateLiveStats(pageId);
+  // Update notifications + top performers contextually too
+  updateRightRailContext(pageId);
+}
+
+function updateRightRailContext(pageId){
+  // Update the 'Top this week' section title
+  const topCardTitle = document.querySelector('.right-card .right-card-title');
+  // Already handled by liveContext span
+  // Update the Top this week link
+  document.querySelectorAll('.right-card .right-card-link').forEach(l => {
+    if(l.textContent.trim() === 'All pages') l.textContent = pageId === 'all' ? 'All pages' : 'Other pages';
+  });
 }
 
 /* ─── ART-E CONTEXTUAL HINT BUBBLE ─────────────────── */
@@ -5120,6 +5590,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   // Apply default Feed tab filter so home loads as expected
   setTimeout(()=>switchFeedTab('feed'), 50);
+  // Initialise right-rail Live stats with All pages data
+  updateLiveStats('all');
 
   // Sidebar nav
   const navMap = [
@@ -5434,7 +5906,7 @@ function initSub(sub){
     new Chart(document.getElementById('dowChart'),{type:'bar',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{label:'Engagement %',data:[3.1,5.8,4.2,5.4,3.8,2.9,3.2],backgroundColor:['#3A3B3C',C.teal,'#3A3B3C',C.teal,'#3A3B3C','#3A3B3C','#3A3B3C'],borderRadius:6}]},options:baseOpts});
     const points = Array.from({length:60},()=>({x:Math.random()*30+5,y:Math.random()*8+1}));
     new Chart(document.getElementById('scatterChart'),{type:'scatter',data:{datasets:[{label:'Posts',data:points,backgroundColor:C.teal,pointRadius:4}]},options:{...baseOpts,scales:{x:{...baseOpts.scales.x,title:{display:true,text:'Reach (K)',color:C.text}},y:{...baseOpts.scales.y,title:{display:true,text:'Engagement %',color:C.text}}}}});
-    new Chart(document.getElementById('hourlyChart'),{type:'bar',data:{labels:Array.from({length:24},(_,i)=>i+'h'),datasets:[{label:'Eng',data:Array.from({length:24},(_,h)=>{if(h>=18&&h<=20)return 7+Math.random();if(h>=12&&h<=14)return 4+Math.random();if(h>=8&&h<=10)return 3+Math.random();return 1+Math.random()*2}),backgroundColor:C.teal,borderRadius:4}]},options:baseOpts});
+    new Chart(document.getElementById('hourlyChart'),{type:'bar',data:{labels:['Photo','Video','Reel','Carousel','Text','Link'],datasets:[{label:'Engagement %',data:[3.2,5.8,7.4,4.6,2.1,1.8],backgroundColor:[C.teal,C.teal,C.warn,C.teal,C.text,C.text],borderRadius:6}]},options:baseOpts});
   }
 
   if(sub==='sentiment'){

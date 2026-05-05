@@ -213,7 +213,7 @@ nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0
     <p class="sub" id="user-role-line">Where would you like to go today?</p>
   </div>
   <div class="cards">
-    <a href="mockup_feed.html" class="dest-card" style="--cc:#00d4aa;--ci:rgba(0,212,170,0.08);--cb:rgba(0,212,170,0.2)">
+    <a href="mockup_chooser.html" class="dest-card" style="--cc:#00d4aa;--ci:rgba(0,212,170,0.08);--cb:rgba(0,212,170,0.2)">
       <span class="dest-arrow">↗</span>
       <div class="dest-icon" style="overflow:hidden">
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -412,7 +412,7 @@ try{
       var cards=document.querySelectorAll(".dest-card");
       cards.forEach(function(c){
         var href=c.getAttribute("href")||"";
-        if(href.indexOf("mockup_feed")===-1){
+        if(href.indexOf("mockup_feed")===-1 && href.indexOf("mockup_chooser")===-1){
           c.style.display="none";
         }
       });
