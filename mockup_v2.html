@@ -1011,6 +1011,43 @@ body{
 }
 
 /* Phone — full mobile experience */
+
+/* ─── Silence-tips button in chat header — DESKTOP DEFAULT ─── */
+.arte-chat-head .silence-link{
+  display:inline-flex !important;
+  align-items:center;gap:5px;
+  padding:5px 10px !important;
+  background:transparent;
+  border:1px solid var(--bdr-soft) !important;
+  border-radius:9999px !important;
+  color:var(--t3) !important;
+  font-family:inherit;font-size:11px !important;font-weight:600;
+  cursor:pointer;flex-shrink:0;
+  height:28px !important;
+  transition:all .12s;
+  margin-right:6px;
+  white-space:nowrap;
+  box-sizing:border-box;
+}
+.arte-chat-head .silence-link:hover{
+  background:var(--bg-elev-2);
+  color:var(--t1) !important;
+  border-color:var(--arte-1) !important;
+}
+.arte-chat-head .silence-link svg{
+  width:12px !important;height:12px !important;
+  fill:none !important;stroke:currentColor !important;stroke-width:2 !important;
+  flex-shrink:0;
+}
+.arte-chat-head .silence-link .silence-lbl{line-height:1}
+
+/* When tips are already off, indicate visually */
+body.arte-suggestions-off .arte-chat-head .silence-link{
+  color:var(--arte-1) !important;
+  border-color:var(--arte-1) !important;
+  background:var(--arte-bg);
+}
+
 @media(max-width:640px){
   /* ─────────────────────────────────────────────────────── */
   /* MOBILE — professional, polished, Hooked-aligned        */
@@ -1256,17 +1293,6 @@ body{
   /* Title block flex squish */
   .arte-chat-host .arte-chat-head .arte-chat-title{font-size:15px}
   .arte-chat-host .arte-chat-head .arte-chat-sub{font-size:11px}
-  /* Subtle Art-E silence shortcut inside the chat header */
-  .arte-chat-head .silence-link{
-    font-size:11px;color:var(--t3);font-weight:600;
-    padding:4px 8px;border-radius:6px;
-    border:1px solid var(--bdr-soft);
-    cursor:pointer;background:transparent;font-family:inherit;
-    margin-left:auto;margin-right:6px;
-    display:inline-flex;align-items:center;gap:4px;
-  }
-  .arte-chat-head .silence-link:hover{background:var(--bg-elev-2);color:var(--t1)}
-  .arte-chat-head .silence-link svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2}
   
   /* Hide status bar on mobile — bottom nav has the Art-E button instead */
   .arte-status-bar{display:none !important}
