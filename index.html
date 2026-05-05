@@ -1854,52 +1854,368 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
   100%{transform:scale(1)}
 }
 
-/* ═══ SECTION TRANSITIONS — when user clicks nav link / pip, the section
-   they're scrolling TO gets a brief flourish so it feels alive ═══ */
-.section-flash{
-  animation:sectionFlash 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+/* Section transitions and page-transition curtain rules live below in the
+   dramatic-transition section (3-layer curtain + dramaticEnter keyframe). */
+
+/* ═══════════════════════════════════════════════════════════════════════
+   HERO ORBITAL VISUALIZATION
+   Replaces the static mockup window. Pyramid + circle (Artemis brand
+   icon) sits at centre. Three orbits revolve around it at different
+   speeds and opposite directions, carrying social-data nodes (comments,
+   hearts, eyes, shares, charts, alerts, hashtags, cameras, platform
+   icons). Pulse waves emanate from centre. Floating data labels fade
+   in and out around the perimeter.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.hero-orbital{
+  position:relative;
+  z-index:2;
+  margin:60px auto 0;
+  max-width:760px;
+  width:100%;
+  perspective:1200px;
+  overflow:visible;
 }
-@keyframes sectionFlash{
-  0%{transform:scale(0.985);filter:brightness(0.6) blur(4px)}
-  60%{transform:scale(1.005);filter:brightness(1.15) blur(0)}
-  100%{transform:scale(1);filter:brightness(1) blur(0)}
+.orbital-stage{
+  position:relative;
+  aspect-ratio:1 / 1;
+  max-width:600px;
+  margin:0 auto;
+  transform-style:preserve-3d;
+  /* Prevent rotated SVG paths from triggering horizontal overflow at small viewports */
+  contain:layout paint;
 }
-/* Children inside the just-arrived section ripple in too */
-.section-flash > * {
-  animation:sectionFlashChild 900ms cubic-bezier(0.16, 1, 0.3, 1);
+.orbital-svg{
+  width:100%;
+  height:auto;
+  display:block;
+  filter:drop-shadow(0 20px 60px rgba(124,92,191,0.25));
+  overflow:visible;  /* SVG content fits inside viewBox */
 }
-@keyframes sectionFlashChild{
-  0%{transform:translateY(20px) scale(0.98);opacity:0.4}
-  100%{transform:translateY(0) scale(1);opacity:1}
+/* Mobile: clip the stage so animated rotations cannot push the bounding box past container */
+@media(max-width:640px){
+  .orbital-stage{overflow:hidden;border-radius:50%}
 }
 
-/* Page-transition curtain that briefly sweeps when navigating between
-   sections via nav clicks (gives that "tab-switch" feel) */
+/* ─── Background ambient glow ─── */
+.orb-bg-glow{
+  animation:orbBgPulse 6s ease-in-out infinite;
+  transform-origin:center;
+  transform-box:fill-box;
+}
+@keyframes orbBgPulse{
+  0%,100%{opacity:0.6;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.08)}
+}
+
+/* ─── Orbital rings (dashed circles, slow rotation) ─── */
+.orb-ring{
+  transform-origin:300px 300px;
+  transform-box:fill-box;
+}
+.orb-ring-1{animation:orbRingSpin 28s linear infinite}
+.orb-ring-2{animation:orbRingSpin 40s linear infinite reverse}
+.orb-ring-3{animation:orbRingSpin 60s linear infinite}
+@keyframes orbRingSpin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* ─── Pulse waves emanating from centre ─── */
+.orb-pulse{
+  transform-origin:300px 300px;
+  transform-box:fill-box;
+  opacity:0;
+}
+.orb-pulse-1{animation:orbPulseWave 3.6s ease-out infinite}
+.orb-pulse-2{animation:orbPulseWave 3.6s ease-out infinite 1.2s}
+.orb-pulse-3{animation:orbPulseWave 3.6s ease-out infinite 2.4s}
+@keyframes orbPulseWave{
+  0%{transform:scale(0.4);opacity:0.7}
+  60%{opacity:0.4}
+  100%{transform:scale(2.4);opacity:0}
+}
+
+/* ─── Orbits (spin the whole group, then counter-rotate each node so
+   the icons stay upright while still revolving along the path) ─── */
+.orb-orbit{
+  transform-origin:300px 300px;
+  transform-box:fill-box;
+}
+/* Orbits revolve around the centre. Each uses unique direction and speed
+   for visual variety. Inner counter-rotates so icons stay upright. */
+.orb-orbit-inner{animation:orbInnerSpin 18s linear infinite}
+.orb-orbit-middle{animation:orbMiddleSpin 30s linear infinite}
+.orb-orbit-outer{animation:orbOuterSpin 50s linear infinite}
+@keyframes orbInnerSpin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+@keyframes orbMiddleSpin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(-360deg)}
+}
+@keyframes orbOuterSpin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* Each data node has an inner wrapper that counter-rotates so the
+   icon always faces the viewer while the parent orbit revolves.
+   Direction must be opposite of parent so net screen rotation = 0. */
+.orb-data-inner{
+  transform-box:fill-box;
+  transform-origin:center;
+}
+.orb-orbit-inner .orb-data-inner{animation:orbCounterCW 18s linear infinite}
+.orb-orbit-middle .orb-data-inner{animation:orbCounterCCW 30s linear infinite}
+.orb-orbit-outer .orb-data-inner{animation:orbCounterCW 50s linear infinite}
+@keyframes orbCounterCW{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(-360deg)}
+}
+@keyframes orbCounterCCW{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* Pending platform pills (Instagram, X) — fade their first child circle to glow softly */
+.orb-data-pending .orb-data-inner > circle:first-child{animation:orbPendingPulse 2.4s ease-in-out infinite}
+@keyframes orbPendingPulse{
+  0%,100%{opacity:0.55}
+  50%{opacity:0.95}
+}
+
+/* ─── Centre pyramid ─── */
+.orb-centre{transform-origin:300px 300px;transform-box:fill-box}
+.orb-halo-outer{
+  transform-origin:300px 300px;
+  transform-box:fill-box;
+  animation:orbHaloPulse 3s ease-in-out infinite;
+}
+@keyframes orbHaloPulse{
+  0%,100%{opacity:0.6;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.08)}
+}
+.orb-pyramid-tri{
+  animation:orbPyramidPulse 3s ease-in-out infinite;
+}
+@keyframes orbPyramidPulse{
+  0%,100%{filter:drop-shadow(0 0 4px rgba(0,196,160,0.6))}
+  50%{filter:drop-shadow(0 0 12px rgba(0,196,160,0.95)) drop-shadow(0 0 20px rgba(124,92,191,0.5))}
+}
+.orb-pyramid-dot{
+  animation:orbDotBlink 2s ease-in-out infinite;
+}
+@keyframes orbDotBlink{
+  0%,100%{opacity:1}
+  50%{opacity:0.6}
+}
+
+/* ─── Floating data labels (fade in/out around perimeter) ─── */
+.orb-label{
+  position:absolute;
+  display:inline-flex;
+  flex-direction:column;
+  align-items:flex-start;
+  padding:10px 14px;
+  background:rgba(22,25,31,0.85);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(124,92,191,0.35);
+  border-radius:10px;
+  font-family:inherit;
+  pointer-events:none;
+  opacity:0;
+  white-space:nowrap;
+  box-shadow:0 8px 24px rgba(0,0,0,0.4);
+  z-index:3;
+}
+html[data-theme="light"] .orb-label{
+  background:rgba(255,255,255,0.95);
+  border-color:rgba(90,63,160,0.25);
+  box-shadow:0 8px 24px rgba(0,0,0,0.12);
+}
+.orb-label-num{
+  font-size:var(--fs-xl);
+  font-weight:var(--fw-bold);
+  letter-spacing:-0.02em;
+  background:linear-gradient(135deg,var(--teal),var(--arte-1));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  line-height:1;
+}
+.orb-label-txt{
+  font-size:var(--fs-xs);
+  font-weight:var(--fw-medium);
+  color:var(--t2);
+  letter-spacing:0.02em;
+  margin-top:3px;
+  text-transform:uppercase;
+}
+
+/* Position each label and stagger their fades. Each label fades in,
+   stays for ~3s, then fades out. The four together cycle continuously. */
+.orb-label-1{top:10%;left:6%;animation:orbLabelFade 8s ease-in-out infinite}
+.orb-label-2{top:18%;right:4%;animation:orbLabelFade 8s ease-in-out infinite 2s}
+.orb-label-3{bottom:18%;right:6%;animation:orbLabelFade 8s ease-in-out infinite 4s}
+.orb-label-4{bottom:10%;left:4%;animation:orbLabelFade 8s ease-in-out infinite 6s}
+@keyframes orbLabelFade{
+  0%{opacity:0;transform:translateY(8px) scale(0.94)}
+  10%{opacity:1;transform:translateY(0) scale(1)}
+  35%{opacity:1;transform:translateY(0) scale(1)}
+  45%{opacity:0;transform:translateY(-8px) scale(0.94)}
+  100%{opacity:0;transform:translateY(-8px) scale(0.94)}
+}
+
+/* Mouse parallax: rotateX/Y on hover-zone */
+.orbital-stage{transition:transform 200ms ease-out}
+
+/* Mobile: scale down + hide outer labels (would crowd) */
+@media(max-width:640px){
+  .hero-orbital{margin-top:36px;max-width:380px}
+  .orbital-stage{max-width:380px}
+  .orb-label{
+    padding:6px 10px;
+    border-radius:8px;
+  }
+  .orb-label-num{font-size:var(--fs-lg)}
+  .orb-label-txt{font-size:9px}
+  /* Slow down a bit on mobile for battery */
+  .orb-orbit-inner{animation-duration:24s}
+  .orb-orbit-middle{animation-duration:38s}
+  .orb-orbit-outer{animation-duration:60s}
+  .orb-orbit-inner .orb-data-inner{animation-duration:24s}
+  .orb-orbit-middle .orb-data-inner{animation-duration:38s}
+  .orb-orbit-outer .orb-data-inner{animation-duration:60s}
+}
+
+/* Reduced-motion: stop all spinning */
+@media(prefers-reduced-motion:reduce){
+  .orb-ring,.orb-orbit,.orb-orbit .orb-data-node,
+  .orb-pulse,.orb-bg-glow,.orb-pyramid-tri,.orb-halo-outer{
+    animation:none !important;
+  }
+  .orb-label{animation:none !important;opacity:1}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DRAMATIC SECTION TRANSITION
+   3-layer gradient curtain sweeps across the screen with distinct
+   colors per layer, each at staggered timings. Long enough to feel
+   like a real transition (1300ms total). Destination section gets
+   a 3D depth-warp entry: scale, rotateX, blur, brightness pulse.
+   ═══════════════════════════════════════════════════════════════════════ */
+
 .page-curtain{
   position:fixed;
   inset:0;
-  z-index:999;
+  z-index:9999;
   pointer-events:none;
-  background:linear-gradient(135deg, var(--arte-1), var(--teal));
-  transform-origin:left;
-  transform:scaleX(0);
+  overflow:hidden;
   opacity:0;
+  visibility:hidden;
 }
 .page-curtain.active{
-  animation:curtainSweep 700ms cubic-bezier(0.83, 0, 0.17, 1);
+  opacity:1;
+  visibility:visible;
 }
+
+.page-curtain::before,
+.page-curtain::after,
+.page-curtain .curtain-bar{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100%;
+  height:100%;
+  transform-origin:left center;
+  transform:translateX(-100%);
+}
+.page-curtain::before{
+  background:linear-gradient(135deg, rgba(124,92,191,0.98) 0%, rgba(0,196,160,0.95) 100%);
+  z-index:3;
+}
+.page-curtain::after{
+  background:linear-gradient(135deg, rgba(0,196,160,0.95) 0%, rgba(255,140,66,0.85) 100%);
+  z-index:2;
+}
+.page-curtain .curtain-bar{
+  background:linear-gradient(135deg, rgba(14,17,22,0.98) 0%, rgba(124,92,191,0.92) 100%);
+  z-index:1;
+}
+
+.page-curtain.active::before{animation:curtainSweep 1100ms cubic-bezier(0.83, 0, 0.17, 1) forwards}
+.page-curtain.active::after{animation:curtainSweep 1100ms cubic-bezier(0.83, 0, 0.17, 1) 100ms forwards}
+.page-curtain.active .curtain-bar{animation:curtainSweep 1100ms cubic-bezier(0.83, 0, 0.17, 1) 200ms forwards}
+
 @keyframes curtainSweep{
-  0%{transform:scaleX(0);opacity:0;transform-origin:left}
-  40%{transform:scaleX(1);opacity:0.85;transform-origin:left}
-  41%{transform:scaleX(1);opacity:0.85;transform-origin:right}
-  100%{transform:scaleX(0);opacity:0;transform-origin:right}
+  0%{transform:translateX(-100%)}
+  45%{transform:translateX(0)}
+  55%{transform:translateX(0)}
+  100%{transform:translateX(100%)}
+}
+
+/* Decorative shine line that sweeps with the third layer */
+.page-curtain.active .curtain-bar::after{
+  content:'';
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:-2px;
+  width:4px;
+  background:linear-gradient(180deg, transparent, rgba(255,255,255,0.9), transparent);
+  filter:blur(1px);
+  box-shadow:0 0 24px rgba(255,255,255,0.6), 0 0 60px rgba(0,196,160,0.5);
+}
+
+/* Destination section gets a dramatic 3D depth entry */
+.section-flash{
+  animation:dramaticEnter 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin:center top;
+}
+@keyframes dramaticEnter{
+  0%{
+    transform:scale(0.85) rotateX(-8deg) translateY(40px);
+    filter:brightness(0.5) blur(8px);
+    opacity:0.3;
+  }
+  35%{
+    transform:scale(1.02) rotateX(2deg) translateY(0);
+    filter:brightness(1.25) blur(0);
+    opacity:1;
+  }
+  60%{
+    transform:scale(0.99) rotateX(-1deg);
+    filter:brightness(1.05) blur(0);
+  }
+  100%{
+    transform:scale(1) rotateX(0) translateY(0);
+    filter:brightness(1) blur(0);
+    opacity:1;
+  }
+}
+
+.section-flash > * {
+  animation:dramaticChildEnter 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes dramaticChildEnter{
+  0%{transform:translateY(30px) scale(0.96);opacity:0.2;filter:blur(4px)}
+  60%{transform:translateY(-3px) scale(1.005);opacity:1;filter:blur(0)}
+  100%{transform:translateY(0) scale(1);opacity:1;filter:blur(0)}
 }
 </style>
 </head>
 <body>
 
 <!-- Page-transition curtain (sweeps across the screen on tab/anchor click) -->
-<div class="page-curtain" id="pageCurtain"></div>
+<div class="page-curtain" id="pageCurtain">
+  <div class="curtain-bar"></div>
+</div>
 
 <!-- Coming-soon / waitlist modal -->
 <div class="cs-modal" id="csModal" role="dialog" aria-modal="true" aria-labelledby="csModalTitle">
@@ -2029,38 +2345,218 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
     </div>
   </div>
 
-  <!-- Product preview — the variable reward made visible -->
-  <div class="hero-mockup">
-    <div class="mockup-bar">
-      <span class="mockup-dot r"></span>
-      <span class="mockup-dot y"></span>
-      <span class="mockup-dot g"></span>
-      <span class="mockup-bar-title">artemis.ai · Today at 6:42 PM</span>
-    </div>
-    <div class="mockup-body">
-      <div class="mockup-card crisis">
-        <div class="mockup-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div>
-        <div class="mockup-text">
-          <span class="mockup-tag">▲ Crisis · 3 min ago</span>
-          <div class="mockup-headline">Brand risk on Drinking Memes</div>
-          <div class="mockup-detail">23 angry comments in the last 4 minutes. Way more than normal. Same kind of trouble you had in October. <strong>Worth a quick reply.</strong></div>
-        </div>
+  <!-- Hero orbital visualization — pyramid centre with data revolving around it -->
+  <div class="hero-orbital" aria-hidden="true">
+    <div class="orbital-stage">
+      <svg class="orbital-svg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="orb-glow-core" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#00C4A0" stop-opacity="0.6"/>
+            <stop offset="40%" stop-color="#7C5CBF" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="orb-pyramid-fill" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#00C4A0"/>
+            <stop offset="100%" stop-color="#7C5CBF"/>
+          </linearGradient>
+          <linearGradient id="orb-ring-grad-1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#00C4A0" stop-opacity="0"/>
+            <stop offset="50%" stop-color="#00C4A0" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#00C4A0" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="orb-ring-grad-2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0"/>
+            <stop offset="50%" stop-color="#7C5CBF" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="orb-ring-grad-3" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#00C4A0" stop-opacity="0"/>
+            <stop offset="50%" stop-color="#FF8C42" stop-opacity="0.45"/>
+            <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0"/>
+          </linearGradient>
+          <filter id="orb-soft-glow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="4" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="orb-strong-glow" x="-200%" y="-200%" width="500%" height="500%">
+            <feGaussianBlur stdDeviation="10" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Background ambient glow behind centre -->
+        <circle cx="300" cy="300" r="220" fill="url(#orb-glow-core)" class="orb-bg-glow"/>
+
+        <!-- Orbital ring 1 (innermost, fast, teal) -->
+        <ellipse cx="300" cy="300" rx="120" ry="120" fill="none" stroke="url(#orb-ring-grad-1)" stroke-width="1.2" stroke-dasharray="3 6" class="orb-ring orb-ring-1"/>
+        <!-- Orbital ring 2 (middle, medium, purple) -->
+        <ellipse cx="300" cy="300" rx="180" ry="180" fill="none" stroke="url(#orb-ring-grad-2)" stroke-width="1.2" stroke-dasharray="4 8" class="orb-ring orb-ring-2"/>
+        <!-- Orbital ring 3 (outermost, slow, sunset gradient) -->
+        <ellipse cx="300" cy="300" rx="245" ry="245" fill="none" stroke="url(#orb-ring-grad-3)" stroke-width="1.2" stroke-dasharray="2 10" class="orb-ring orb-ring-3"/>
+
+        <!-- Pulse waves emanating from centre -->
+        <circle cx="300" cy="300" r="60" fill="none" stroke="rgba(0,196,160,0.5)" stroke-width="1.5" class="orb-pulse orb-pulse-1"/>
+        <circle cx="300" cy="300" r="60" fill="none" stroke="rgba(124,92,191,0.5)" stroke-width="1.5" class="orb-pulse orb-pulse-2"/>
+        <circle cx="300" cy="300" r="60" fill="none" stroke="rgba(0,196,160,0.4)" stroke-width="1.5" class="orb-pulse orb-pulse-3"/>
+
+        <!-- ═══ INNER ORBIT (radius 120) ═══ 4 fast data nodes ═══ -->
+        <g class="orb-orbit orb-orbit-inner">
+          <!-- Comment bubble -->
+          <g class="orb-data-node" transform="translate(300, 180)"><g class="orb-data-inner">
+            <circle r="20" fill="rgba(0,196,160,0.18)" stroke="rgba(0,196,160,0.6)" stroke-width="1.5"/>
+            <g transform="translate(-7, -7)" stroke="#00C4A0" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M 14 9 a 5 5 0 0 1 -5 5 H 4 v -2 a 5 5 0 0 1 0 -10 h 5 a 5 5 0 0 1 5 5 z"/>
+            </g>
+          </g></g>
+          <!-- Heart -->
+          <g class="orb-data-node" transform="translate(420, 300)"><g class="orb-data-inner">
+            <circle r="20" fill="rgba(229,57,53,0.18)" stroke="rgba(229,57,53,0.6)" stroke-width="1.5"/>
+            <path d="M 0 -5 C -3 -10, -10 -10, -10 -3 C -10 3, 0 10, 0 10 C 0 10, 10 3, 10 -3 C 10 -10, 3 -10, 0 -5 Z" fill="#E53935"/>
+          </g></g>
+          <!-- Eye -->
+          <g class="orb-data-node" transform="translate(300, 420)"><g class="orb-data-inner">
+            <circle r="20" fill="rgba(124,92,191,0.18)" stroke="rgba(124,92,191,0.6)" stroke-width="1.5"/>
+            <g stroke="#7C5CBF" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M -10 0 a 10 6 0 0 0 20 0 a 10 6 0 0 0 -20 0"/>
+              <circle cx="0" cy="0" r="3" fill="#7C5CBF"/>
+            </g>
+          </g></g>
+          <!-- Share -->
+          <g class="orb-data-node" transform="translate(180, 300)"><g class="orb-data-inner">
+            <circle r="20" fill="rgba(0,196,160,0.18)" stroke="rgba(0,196,160,0.6)" stroke-width="1.5"/>
+            <g stroke="#00C4A0" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="-6" cy="-6" r="2.5"/>
+              <circle cx="6" cy="0" r="2.5"/>
+              <circle cx="-6" cy="6" r="2.5"/>
+              <line x1="-4" y1="-5" x2="4" y2="-1"/>
+              <line x1="-4" y1="5" x2="4" y2="1"/>
+            </g>
+          </g></g>
+        </g>
+
+        <!-- ═══ MIDDLE ORBIT (radius 180) ═══ 5 medium-speed nodes ═══ -->
+        <g class="orb-orbit orb-orbit-middle">
+          <!-- Spike chart -->
+          <g class="orb-data-node" transform="translate(300, 120)"><g class="orb-data-inner">
+            <circle r="22" fill="rgba(0,196,160,0.18)" stroke="rgba(0,196,160,0.6)" stroke-width="1.5"/>
+            <polyline points="-10,7 -4,2 0,5 4,-3 10,-7" stroke="#00C4A0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="-10,9 10,9" stroke="rgba(0,196,160,0.3)" stroke-width="1" fill="none"/>
+          </g></g>
+          <!-- Trending -->
+          <g class="orb-data-node" transform="translate(471, 244)"><g class="orb-data-inner">
+            <circle r="22" fill="rgba(255,140,66,0.18)" stroke="rgba(255,140,66,0.6)" stroke-width="1.5"/>
+            <g stroke="#FF8C42" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="-9,5 -3,-1 1,3 9,-5"/>
+              <polyline points="6,-5 9,-5 9,-2"/>
+            </g>
+          </g></g>
+          <!-- Bell -->
+          <g class="orb-data-node" transform="translate(406, 446)"><g class="orb-data-inner">
+            <circle r="22" fill="rgba(229,57,53,0.18)" stroke="rgba(229,57,53,0.6)" stroke-width="1.5"/>
+            <g stroke="#E53935" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M 0 -8 a 6 6 0 0 1 6 6 v 4 l 2 3 H -8 l 2 -3 v -4 a 6 6 0 0 1 6 -6 z"/>
+              <path d="M -2 9 a 2 2 0 0 0 4 0"/>
+              <circle cx="6" cy="-7" r="2.5" fill="#E53935"/>
+            </g>
+          </g></g>
+          <!-- Hashtag -->
+          <g class="orb-data-node" transform="translate(194, 446)"><g class="orb-data-inner">
+            <circle r="22" fill="rgba(124,92,191,0.18)" stroke="rgba(124,92,191,0.6)" stroke-width="1.5"/>
+            <text x="0" y="6" text-anchor="middle" font-size="20" font-weight="700" fill="#7C5CBF" style="font-family:inherit">#</text>
+          </g></g>
+          <!-- Camera -->
+          <g class="orb-data-node" transform="translate(129, 244)"><g class="orb-data-inner">
+            <circle r="22" fill="rgba(0,196,160,0.18)" stroke="rgba(0,196,160,0.6)" stroke-width="1.5"/>
+            <g stroke="#00C4A0" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="-9" y="-6" width="18" height="13" rx="2"/>
+              <circle cx="0" cy="1" r="3.5"/>
+              <path d="M -5 -6 v -2 h 4 v 2"/>
+            </g>
+          </g></g>
+        </g>
+
+        <!-- ═══ OUTER ORBIT (radius 245) ═══ 6 slow platform nodes ═══ -->
+        <g class="orb-orbit orb-orbit-outer">
+          <!-- Facebook -->
+          <g class="orb-data-node" transform="translate(300, 55)"><g class="orb-data-inner">
+            <circle r="24" fill="rgba(24,119,242,0.2)" stroke="rgba(24,119,242,0.7)" stroke-width="1.5"/>
+            <text x="0" y="8" text-anchor="middle" font-size="22" font-weight="900" fill="#1877F2" style="font-family:'Helvetica Neue',Arial,sans-serif">f</text>
+          </g></g>
+          <!-- Instagram -->
+          <g class="orb-data-node orb-data-pending" transform="translate(512, 177)"><g class="orb-data-inner">
+            <circle r="24" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <g stroke="rgba(255,140,66,0.85)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="-8" y="-8" width="16" height="16" rx="4"/>
+              <circle cx="0" cy="0" r="4"/>
+              <circle cx="5" cy="-5" r="0.9" fill="rgba(255,140,66,0.9)"/>
+            </g>
+          </g></g>
+          <!-- X -->
+          <g class="orb-data-node orb-data-pending" transform="translate(512, 423)"><g class="orb-data-inner">
+            <circle r="24" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <g stroke="rgba(220,220,220,0.85)" stroke-width="2.2" fill="none" stroke-linecap="round">
+              <line x1="-7" y1="-7" x2="7" y2="7"/>
+              <line x1="7" y1="-7" x2="-7" y2="7"/>
+            </g>
+          </g></g>
+          <!-- Sparkles -->
+          <g class="orb-data-node" transform="translate(300, 545)"><g class="orb-data-inner">
+            <circle r="24" fill="rgba(0,196,160,0.18)" stroke="rgba(0,196,160,0.6)" stroke-width="1.5"/>
+            <path d="M 0 -10 L -2 -2 L -10 0 L -2 2 L 0 10 L 2 2 L 10 0 L 2 -2 Z" fill="#00C4A0"/>
+          </g></g>
+          <!-- Chat -->
+          <g class="orb-data-node" transform="translate(88, 423)"><g class="orb-data-inner">
+            <circle r="24" fill="rgba(124,92,191,0.18)" stroke="rgba(124,92,191,0.6)" stroke-width="1.5"/>
+            <g stroke="#7C5CBF" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M -10 -5 h 14 a 4 4 0 0 1 4 4 v 4 a 4 4 0 0 1 -4 4 H -2 l -4 4 v -4 H -10 a 4 4 0 0 1 0 -12 z"/>
+              <line x1="-5" y1="2" x2="3" y2="2"/>
+              <line x1="-5" y1="6" x2="0" y2="6"/>
+            </g>
+          </g></g>
+          <!-- Audience -->
+          <g class="orb-data-node" transform="translate(88, 177)"><g class="orb-data-inner">
+            <circle r="24" fill="rgba(0,196,160,0.18)" stroke="rgba(0,196,160,0.6)" stroke-width="1.5"/>
+            <g stroke="#00C4A0" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="-4" cy="-2" r="3"/>
+              <circle cx="5" cy="-3" r="2.5"/>
+              <path d="M -10 8 a 6 6 0 0 1 12 0"/>
+              <path d="M 1 7 a 5 5 0 0 1 9 0"/>
+            </g>
+          </g></g>
+        </g>
+
+        <!-- ═══ CENTRE: ARTEMIS PYRAMID ═══ -->
+        <g class="orb-centre">
+          <!-- Outer halo -->
+          <circle cx="300" cy="300" r="68" fill="none" stroke="rgba(0,196,160,0.25)" stroke-width="1" class="orb-halo-outer"/>
+          <!-- Inner halo -->
+          <circle cx="300" cy="300" r="55" fill="rgba(14,17,22,0.95)" stroke="rgba(124,92,191,0.6)" stroke-width="1.5"/>
+          <!-- Pyramid icon (Artemis brand) -->
+          <g transform="translate(300, 300)" filter="url(#orb-strong-glow)">
+            <!-- Triangle outline -->
+            <path d="M 0 -28 L 24 18 L -24 18 Z" fill="none" stroke="url(#orb-pyramid-fill)" stroke-width="2.5" stroke-linejoin="round" class="orb-pyramid-tri"/>
+            <!-- Inner circle (Artemis logo signature) -->
+            <circle cx="0" cy="6" r="6" fill="url(#orb-pyramid-fill)" class="orb-pyramid-dot"/>
+          </g>
+        </g>
+      </svg>
+
+      <!-- Floating data labels that fade in/out around the visualization -->
+      <div class="orb-label orb-label-1">
+        <span class="orb-label-num">+247</span>
+        <span class="orb-label-txt">comments read</span>
       </div>
-      <div class="mockup-card opportunity">
-        <div class="mockup-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <div class="mockup-text">
-          <span class="mockup-tag">⚡ Going viral · 2h ago</span>
-          <div class="mockup-headline">Kelpie Daily 6PM post is at 3.2× reach</div>
-          <div class="mockup-detail">This post is on fire. Fastest growth in a month. Share it to your other 4 pages right now and reach <strong>9,600 more people.</strong></div>
-        </div>
+      <div class="orb-label orb-label-2">
+        <span class="orb-label-num">3.2×</span>
+        <span class="orb-label-txt">post going viral</span>
       </div>
-      <div class="mockup-card arte">
-        <div class="mockup-icon"><svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
-        <div class="mockup-text">
-          <span class="mockup-tag">✦ Art-E · just now</span>
-          <div class="mockup-headline">Best post window today: Tuesday 6PM</div>
-          <div class="mockup-detail">Your followers are <strong>34% more active</strong> right now. You have 3 posts ready. Want me to publish them?</div>
-        </div>
+      <div class="orb-label orb-label-3">
+        <span class="orb-label-num">94%</span>
+        <span class="orb-label-txt">audience match</span>
+      </div>
+      <div class="orb-label orb-label-4">
+        <span class="orb-label-num">23</span>
+        <span class="orb-label-txt">drama spotted</span>
       </div>
     </div>
   </div>
@@ -2712,29 +3208,31 @@ function animateCounter(el, target, suffix, duration){
    Subtle — max ±5deg rotateX/Y based on cursor position relative to the
    element. Returns to neutral on mouseleave. */
 (function initTilt3D(){
-  // Hero mockup gets stronger tilt (it's the focal product preview)
-  const heroMockup = document.querySelector('.hero-mockup');
-  if(heroMockup){
+  // Hero orbital stage gets mouse-tracked 3D tilt for immersive feel
+  const orbStage = document.querySelector('.orbital-stage');
+  if(orbStage){
+    const heroSection = document.querySelector('.hero');
     let raf;
-    heroMockup.addEventListener('mousemove', (e) => {
-      const r = heroMockup.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width;
-      const y = (e.clientY - r.top) / r.height;
-      const rotY = (x - 0.5) * 8;  // ±4deg
-      const rotX = -(y - 0.5) * 6; // ±3deg
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        heroMockup.style.transform = 'perspective(1500px) rotateX('+rotX+'deg) rotateY('+rotY+'deg)';
+    if (heroSection){
+      heroSection.addEventListener('mousemove', (e) => {
+        const r = heroSection.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top) / r.height;
+        const rotY = (x - 0.5) * 14;   // ±7deg (slightly stronger because the orbital is showy)
+        const rotX = -(y - 0.5) * 10;  // ±5deg
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          orbStage.style.transform = 'rotateX('+rotX+'deg) rotateY('+rotY+'deg)';
+        });
       });
-    });
-    heroMockup.addEventListener('mouseleave', () => {
-      heroMockup.style.transform = 'perspective(1500px) rotateX(0) rotateY(0)';
-    });
+      heroSection.addEventListener('mouseleave', () => {
+        orbStage.style.transform = 'rotateX(0) rotateY(0)';
+      });
+    }
   }
 
-  // Other tilt-3d elements get subtle hover tilt (CSS handles base, JS adds mouse-tracked)
+  // Other tilt-3d elements get subtle hover tilt
   document.querySelectorAll('.tilt-3d').forEach(card => {
-    if(card === heroMockup) return;
     card.addEventListener('mousemove', (e) => {
       const r = card.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width;
@@ -2975,7 +3473,7 @@ document.querySelectorAll('.site-nav-links a').forEach(a => {
     curtain.classList.remove('active');
     void curtain.offsetWidth;
     curtain.classList.add('active');
-    setTimeout(() => curtain.classList.remove('active'), 720);
+    setTimeout(() => curtain.classList.remove('active'), 1400);
   }
 
   links.forEach(link => {
@@ -2986,15 +3484,14 @@ document.querySelectorAll('.site-nav-links a').forEach(a => {
       const target = document.getElementById(id);
       if (!target) return;
       e.preventDefault();
-      // Curtain sweep + scroll happens during the curtain transit so the
-      // landing feels seamless. Curtain peaks at ~280ms, that's when the
-      // scroll lands and the destination section flashes in.
+      // Curtain peaks around 500ms (1100ms × 45% + 200ms stagger). The
+      // scroll happens during peak coverage so the user only sees the
+      // destination after the curtain sweeps off the right edge.
       triggerCurtain();
       setTimeout(() => {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         flashSection(target);
-      }, 260);
-      // Update URL hash for back-button support
+      }, 550);
       try { history.pushState(null, '', '#' + id); } catch(e){}
     });
   });
