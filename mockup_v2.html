@@ -1904,20 +1904,36 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
 }
 .story-viewer-stat-val{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
 .story-viewer-stat-lbl{font-size:10px;opacity:0.75;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px}
-.story-viewer-actions{display:flex;gap:8px}
+.story-viewer-actions{
+  display:flex;flex-wrap:wrap;gap:8px;
+  position:relative;z-index:20;  /* above nav-zone clickables */
+}
 .story-viewer-btn{
-  flex:1;padding:10px;border-radius:10px;
+  flex:1 1 calc(50% - 4px);min-width:120px;
+  padding:11px 12px;border-radius:10px;
   border:1px solid rgba(255,255,255,0.2);
   background:rgba(255,255,255,0.1);backdrop-filter:blur(8px);
   color:white;font-family:inherit;font-weight:600;font-size:13px;
-  cursor:pointer;transition:background .15s;
+  cursor:pointer;transition:background .15s, transform .12s;
   display:flex;align-items:center;justify-content:center;gap:6px;
+  position:relative;z-index:20;
 }
-.story-viewer-btn:hover{background:rgba(255,255,255,0.18)}
+.story-viewer-btn:hover{background:rgba(255,255,255,0.18);transform:translateY(-1px)}
 .story-viewer-btn.primary{background:#00C4A0;color:#0a1410;border-color:#00C4A0}
+.story-viewer-btn.primary:hover{background:#00d4aa}
+.story-viewer-btn.arte{
+  background:linear-gradient(135deg, var(--arte-1), var(--arte-2));
+  border-color:transparent;
+  flex:1 1 100%;  /* Art-E button gets its own row, full width */
+}
+.story-viewer-btn.arte:hover{
+  filter:brightness(1.1);
+  box-shadow:0 4px 16px rgba(124,92,191,0.45);
+}
 .story-viewer-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+/* Nav zones — only cover the upper part of the story card so they don't trap action clicks */
 .story-viewer-nav{
-  position:absolute;top:0;width:50%;height:100%;
+  position:absolute;top:0;width:50%;height:60%;  /* was 100% — now stops above the actions area */
   background:transparent;border:none;cursor:pointer;z-index:4;
 }
 .story-viewer-nav.left{left:0}
@@ -2106,14 +2122,6 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
 .card-head{padding:16px 16px 12px}
 .match-bars{padding:0 16px 14px}
 .streak-row{padding:4px 16px 14px}
-
-.story-viewer-btn.arte{
-  background:linear-gradient(135deg,rgba(124,92,191,0.4),rgba(0,196,160,0.4));
-  border-color:rgba(124,92,191,0.6);
-}
-.story-viewer-btn.arte:hover{
-  background:linear-gradient(135deg,rgba(124,92,191,0.6),rgba(0,196,160,0.6));
-}
 
 /* Art-E status bar — shows monitoring is active */
 .arte-status-bar{
@@ -3162,6 +3170,128 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
     border:2px solid var(--bg-elev);
   }
 }
+
+/* ─── ART-E AGENT PILL — main agent action in topnav ─── */
+.arte-agent-pill{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 12px 7px 7px;
+  background:linear-gradient(135deg, var(--arte-1), var(--arte-2));
+  border:1px solid transparent;
+  border-radius:9999px;
+  color:white;
+  font-family:inherit;font-size:12px;font-weight:700;
+  cursor:pointer;flex-shrink:0;
+  transition:transform .12s, box-shadow .15s, filter .15s;
+  position:relative;
+  letter-spacing:0.02em;
+  box-shadow:0 2px 10px rgba(124,92,191,0.35);
+}
+.arte-agent-pill:hover{
+  transform:translateY(-1px);
+  box-shadow:0 6px 18px rgba(124,92,191,0.55);
+  filter:brightness(1.08);
+}
+.arte-agent-pill .arte-agent-orb{
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  display:grid;place-items:center;flex-shrink:0;
+  animation:orbPulse 2.4s infinite;
+}
+.arte-agent-pill .arte-agent-orb svg{width:11px;height:11px}
+.arte-agent-pill .arte-agent-caret{display:inline-flex;align-items:center;flex-shrink:0}
+.arte-agent-pill .arte-agent-caret svg{width:10px;height:10px}
+
+/* Active state when menu is open */
+.arte-agent-pill.menu-open .arte-agent-caret svg{transform:rotate(180deg)}
+
+/* Mobile — keep agent pill visible (this is the user's primary entry point) */
+@media(max-width:640px){
+  .arte-agent-pill{
+    padding:6px 10px 6px 6px;
+    font-size:11px;
+    gap:5px;
+  }
+  .arte-agent-pill .arte-agent-orb{width:20px;height:20px}
+  .arte-agent-pill .arte-agent-orb svg{width:9px;height:9px}
+  .arte-agent-pill .arte-agent-caret{display:none}
+}
+@media(max-width:380px){
+  .arte-agent-pill .arte-agent-lbl{display:none}
+  .arte-agent-pill{padding:6px;border-radius:50%;width:34px;height:34px;justify-content:center}
+}
+
+/* ─── ART-E AGENT MENU — dropdown of common tasks ─── */
+.arte-agent-menu{
+  position:fixed;
+  background:var(--bg-elev);
+  border:1px solid var(--bdr-soft);
+  border-radius:12px;
+  padding:6px;
+  min-width:280px;max-width:340px;
+  z-index:300;
+  box-shadow:0 18px 56px rgba(0,0,0,0.4);
+  display:none;
+  overflow:hidden;
+}
+.arte-agent-menu.open{display:block;animation:slideUp .2s ease both}
+.arte-agent-menu-header{
+  padding:10px 12px 8px;
+  font-size:11px;font-weight:700;color:var(--arte-1);
+  text-transform:uppercase;letter-spacing:0.05em;
+  display:flex;align-items:center;gap:6px;
+  border-bottom:1px solid var(--bdr-soft);
+  margin-bottom:4px;
+}
+.arte-agent-menu-header svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2}
+.arte-agent-item{
+  display:flex;align-items:center;gap:11px;
+  padding:10px 12px;
+  border-radius:8px;cursor:pointer;
+  transition:background .12s;
+  border:none;background:transparent;width:100%;
+  text-align:left;font-family:inherit;
+}
+.arte-agent-item:hover{background:var(--bg-elev-2)}
+.arte-agent-item-icon{
+  width:32px;height:32px;border-radius:8px;
+  background:var(--bg-input);
+  display:grid;place-items:center;flex-shrink:0;
+  color:var(--arte-1);
+}
+.arte-agent-item-icon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2}
+.arte-agent-item-body{flex:1;min-width:0}
+.arte-agent-item-title{
+  font-size:13px;font-weight:700;color:var(--t1);
+  margin-bottom:1px;
+}
+.arte-agent-item-sub{
+  font-size:11px;color:var(--t2);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.arte-agent-item-time{
+  font-size:10px;color:var(--t3);font-weight:600;
+  flex-shrink:0;background:var(--bg-input);
+  padding:3px 7px;border-radius:9999px;
+}
+.arte-agent-menu-footer{
+  padding:8px 12px;border-top:1px solid var(--bdr-soft);
+  margin-top:4px;display:flex;justify-content:space-between;align-items:center;
+}
+.arte-agent-menu-footer .lbl{font-size:11px;color:var(--t3)}
+.arte-agent-menu-footer button{
+  background:transparent;border:none;
+  color:var(--arte-1);font-family:inherit;font-size:11px;font-weight:700;
+  cursor:pointer;padding:4px 8px;border-radius:6px;
+}
+.arte-agent-menu-footer button:hover{background:var(--bg-elev-2)}
+
+@media(max-width:640px){
+  .arte-agent-menu{
+    left:8px !important;right:8px !important;
+    min-width:auto;max-width:none;
+    top:60px !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -3192,6 +3322,11 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
     <button class="icon-btn" title="Notifications">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22a2.5 2.5 0 002.5-2.5h-5A2.5 2.5 0 0012 22zm6.5-7v-4.5a6.5 6.5 0 10-13 0V15L4 17v1h16v-1z"/></svg>
       <span class="badge">3</span>
+    </button>
+    <button class="arte-agent-pill" id="arteAgentPill" onclick="openArteAgentMenu(this)" title="Open Art-E Agent — Art-E does tasks for you">
+      <span class="arte-agent-orb"><svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></span>
+      <span class="arte-agent-lbl">Art-E Agent</span>
+      <span class="arte-agent-caret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
     </button>
     <button class="arte-suggest-toggle" id="arteSuggestToggle" title="Art-E tips: ON · click to silence" onclick="toggleArteSuggestions()" aria-label="Toggle Art-E suggestions">
       <span class="arte-toggle-orb"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" id="arteToggleIcon"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></span>
@@ -6883,6 +7018,93 @@ function mbSelect(el){
   document.querySelectorAll('.mb-nav-btn').forEach(b=>b.classList.remove('active'));
   if(el && !el.classList.contains('arte')) el.classList.add('active');
 }
+
+
+/* ─── ART-E AGENT MENU — opens a dropdown of common agent tasks ─── */
+function openArteAgentMenu(anchor){
+  // Close if already open
+  let menu = document.getElementById('arteAgentMenu');
+  if(menu && menu.classList.contains('open')){
+    closeArteAgentMenu();
+    return;
+  }
+  if(!menu) menu = buildArteAgentMenu();
+
+  // Position the menu under the anchor (right-aligned)
+  const r = anchor.getBoundingClientRect();
+  menu.style.top = (r.bottom + 8) + 'px';
+  menu.style.right = Math.max(8, window.innerWidth - r.right) + 'px';
+  menu.style.left = 'auto';
+  menu.classList.add('open');
+  anchor.classList.add('menu-open');
+  // Click-outside to close
+  setTimeout(()=>{
+    document.addEventListener('click', _outsideArteMenu, {once:true});
+  }, 50);
+}
+function _outsideArteMenu(e){
+  const menu = document.getElementById('arteAgentMenu');
+  const pill = document.getElementById('arteAgentPill');
+  if(menu && !menu.contains(e.target) && pill && !pill.contains(e.target)){
+    closeArteAgentMenu();
+  } else {
+    document.addEventListener('click', _outsideArteMenu, {once:true});
+  }
+}
+function closeArteAgentMenu(){
+  const menu = document.getElementById('arteAgentMenu');
+  const pill = document.getElementById('arteAgentPill');
+  if(menu) menu.classList.remove('open');
+  if(pill) pill.classList.remove('menu-open');
+}
+
+function buildArteAgentMenu(){
+  const tasks = [
+    { intent:'crisis',          icon:'<svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 6v6m0 4h.01"/></svg>',
+      title:'Handle the brand risk',          sub:'23 negative comments on Drinking Memes', time:'< 1 min' },
+    { intent:'reshare-viral',   icon:'<svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>',
+      title:'Reshare the viral post',         sub:'+9.6K predicted reach across 4 pages',    time:'30 sec' },
+    { intent:'collab-fnc',      icon:'<svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M11.65 11.65l3.7 3.7"/></svg>',
+      title:'Connect with Fri Night Chaos',   sub:'94% audience overlap · they\'re online', time:'1 min' },
+    { intent:'trend-uk',        icon:'<svg viewBox="0 0 24 24"><path d="M2 12h2l3-9 6 18 3-9h6"/></svg>',
+      title:'Draft a prison-drama post',      sub:'+340% mentions · 4hr peak window',        time:'2 min' },
+    { intent:'streak',          icon:'<svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>',
+      title:'Extend Prison Biscuit streak',   sub:'76/100 draft ready · day 7',              time:'30 sec' },
+    { intent:'todo-triage',     icon:'<svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>',
+      title:'Triage my to-do list',           sub:'4 of 7 items I can clear myself',         time:'1 min' },
+    { intent:'best-windows',    icon:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
+      title:'Find my best windows',           sub:'Tue 6PM, Thu 8PM, Sun 10AM',              time:'instant' },
+    { intent:'explain-numbers', icon:'<svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg>',
+      title:'Explain my numbers',             sub:'Plain English breakdown',                 time:'instant' },
+  ];
+  const itemsHtml = tasks.map(t => `
+    <button class="arte-agent-item" onclick="closeArteAgentMenu();openArteChat('${t.title}', {intent:'${t.intent}'})">
+      <span class="arte-agent-item-icon">${t.icon}</span>
+      <span class="arte-agent-item-body">
+        <span class="arte-agent-item-title">${t.title}</span>
+        <span class="arte-agent-item-sub">${t.sub}</span>
+      </span>
+      <span class="arte-agent-item-time">${t.time}</span>
+    </button>
+  `).join('');
+  const menu = document.createElement('div');
+  menu.id = 'arteAgentMenu';
+  menu.className = 'arte-agent-menu';
+  menu.innerHTML = `
+    <div class="arte-agent-menu-header">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M3 12h2M19 12h2M12 3v2M12 19v2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4l1.4-1.4M17 7l1.4-1.4"/></svg>
+      Art-E can do these for you
+    </div>
+    ${itemsHtml}
+    <div class="arte-agent-menu-footer">
+      <span class="lbl">Or describe a task</span>
+      <button onclick="closeArteAgentMenu();openArteChat()">Open chat →</button>
+    </div>
+  `;
+  document.body.appendChild(menu);
+  return menu;
+}
+
 
 /* ─── ART-E SILENCE / TOGGLE — multiple paths to silence Art-E ─── */
 function silenceArteFor24h(){

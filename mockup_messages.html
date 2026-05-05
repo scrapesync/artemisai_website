@@ -70,6 +70,41 @@ body{
 @media(max-width:640px){
   .main{grid-template-columns:1fr}
   .conversations{display:none}
+  
+  /* Mobile topbar — compact, no overflow */
+  .topbar{
+    height:54px;
+    padding:0 10px;
+    gap:6px;
+    overflow:hidden;
+  }
+  .brand-mark{width:28px;height:28px}
+  .brand-mark svg{width:28px;height:28px}
+  .brand-name{display:none}
+  .crumb{
+    font-size:12px;
+    padding-left:10px;margin-left:4px;
+    flex:1;min-width:0;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .crumb-sub{display:none}
+  .topbar-actions{
+    gap:4px;
+    flex-shrink:0;
+  }
+  /* Buttons become icon-only on mobile */
+  .topbar-actions .btn{
+    padding:0;
+    width:36px;height:36px;
+    border-radius:50%;
+    display:grid;place-items:center;
+  }
+  .topbar-actions .btn svg{margin:0}
+  .topbar-actions .btn .lbl-full{display:none !important}
+}
+@media(max-width:380px){
+  .topbar-actions .btn{width:32px;height:32px}
+  .crumb{font-size:11px}
 }
 
 /* Conversations list */
@@ -299,15 +334,15 @@ body{
     </svg>
   </div>
   <div class="brand-name">ARTEMIS</div>
-  <div class="crumb"><strong>Messages</strong> · Group chats with your collab partners and team</div>
+  <div class="crumb"><strong>Messages</strong><span class="crumb-sub"> · Group chats with your collab partners and team</span></div>
   <div class="topbar-actions">
     <button class="btn" onclick="window.close()">
       <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-      Back to ArtemisAI
+      <span class="lbl-full">Back to ArtemisAI</span>
     </button>
     <button class="btn primary" onclick="alert('New chat')">
       <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      New chat
+      <span class="lbl-full">New chat</span>
     </button>
   </div>
 </div>

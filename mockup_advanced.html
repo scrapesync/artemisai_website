@@ -190,35 +190,46 @@ html[data-theme="light"] .section-nav{background:rgba(240,242,245,0.85)}
 @media(max-width:640px){
   body{font-size:14px}
   
-  /* Topbar — stack into 2 rows */
+  /* Topbar — single row, compact */
   .topbar{
-    height:auto;
-    padding:10px 12px;
-    flex-wrap:wrap;
-    gap:8px;
+    height:54px;
+    padding:0 10px;
+    gap:6px;
     align-items:center;
+    flex-wrap:nowrap;
+    overflow:hidden;
   }
-  .brand-mark{width:30px;height:30px;flex-shrink:0}
-  .brand-mark svg{width:30px;height:30px}
-  .brand-name{font-size:13px}
+  .brand-mark{width:28px;height:28px;flex-shrink:0}
+  .brand-mark svg{width:28px;height:28px}
+  .brand-name{display:none}  /* Hide ARTEMIS text on mobile */
   .crumb{
-    width:100%;order:99;
-    margin:0;padding:6px 0 0;
-    border-left:none;border-top:1px solid var(--bdr-soft);
+    margin:0 0 0 4px;
+    padding:0 0 0 10px;
+    border-left:1px solid var(--bdr-soft);
     font-size:12px;
+    flex:1;min-width:0;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
+  .crumb-sub{display:none}
   .topbar-actions{
     margin-left:auto;
-    display:flex;gap:6px;
+    display:flex;gap:4px;
     flex-shrink:0;
   }
+  .topbar-actions .theme-toggle{display:none}  /* Hide theme toggle on mobile to save space */
+  /* Hide ALL button labels on mobile — icon-only */
+  .topbar-actions .btn .lbl-full{display:none !important}
   .topbar-actions .btn{
-    padding:6px 10px;font-size:11.5px;
-    white-space:nowrap;
+    padding:0;
+    width:36px;height:36px;
+    border-radius:50%;
+    display:grid;place-items:center;
   }
-  .topbar-actions .btn svg{width:12px;height:12px}
-  /* Hide "Back to ArtemisAI" text, keep arrow */
-  .topbar-actions .btn:first-child .lbl-full{display:none}
+  .topbar-actions .btn svg{width:14px;height:14px;margin:0}
+  .topbar-actions .btn.arte{
+    background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+    color:white;border-color:transparent;
+  }
   
   /* Section nav — horizontal scroll */
   .section-nav{
@@ -299,19 +310,12 @@ html[data-theme="light"] .section-nav{background:rgba(240,242,245,0.85)}
   /* Page-content wrapper */
   .content{padding:0 12px 24px}
   
-  /* Hide the giant Galaxy SVGs on tiny phones — show just the cascade */
-  /* Actually keep them but constrain better */
-  
-  /* Ask Art-E button — keep visible but compact */
-  .topbar-actions .btn.arte{
-    background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
-    color:white;border-color:transparent;
-  }
 }
 
 @media(max-width:380px){
-  .topbar-actions .btn{padding:5px 8px;font-size:11px}
-  .topbar-actions .btn .lbl-full{display:none}
+  .topbar-actions .btn{width:32px;height:32px}
+  .topbar-actions .btn svg{width:13px;height:13px}
+  .crumb{font-size:11px}
   .four-col{grid-template-columns:1fr 1fr;gap:6px}
   .stat-tile{padding:10px}
   .stat-tile .val{font-size:18px}
@@ -433,7 +437,7 @@ html[data-theme="light"] .cascade-host{background:var(--bg-input)}
     </svg>
   </div>
   <div class="brand-name">ARTEMIS</div>
-  <div class="crumb"><strong>Advanced Analytics</strong> · Power-user view</div>
+  <div class="crumb"><strong>Advanced Analytics</strong><span class="crumb-sub"> · Power-user view</span></div>
   <div class="topbar-actions">
     <div class="theme-toggle">
       <button data-theme-set="dark" class="active" title="Dark"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
