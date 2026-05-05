@@ -244,6 +244,41 @@ html[data-theme="light"] .hero::before{
   font-size:var(--fs-sm);font-weight:var(--fw-bold);
   letter-spacing:0.02em;
   margin-bottom:32px;
+  font-family:inherit;
+  cursor:pointer;
+  transition:all var(--t-base);
+  position:relative;
+  overflow:hidden;
+}
+button.hero-badge{appearance:none}
+.hero-badge:hover{
+  background:rgba(0,196,160,0.18);
+  border-color:rgba(0,196,160,0.5);
+  transform:translateY(-1px);
+  box-shadow:0 6px 20px rgba(0,196,160,0.25);
+}
+.hero-badge:active{transform:translateY(0) scale(0.98)}
+.hero-badge .cs-arrow{
+  font-size:var(--fs-md);
+  font-weight:var(--fw-bold);
+  margin-left:2px;
+  transition:transform var(--t-base);
+  display:inline-block;
+}
+.hero-badge:hover .cs-arrow{transform:translateX(3px)}
+/* Burst effect on click */
+.hero-badge.bursting::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:radial-gradient(circle at center, rgba(0,196,160,0.6), transparent 70%);
+  animation:badgeBurst 600ms ease-out forwards;
+  pointer-events:none;
+}
+@keyframes badgeBurst{
+  0%{transform:scale(0.6);opacity:1}
+  100%{transform:scale(2.5);opacity:0}
 }
 .hero-badge .dot{
   width:8px;height:8px;border-radius:50%;background:var(--teal);
@@ -1588,15 +1623,325 @@ html[data-theme="light"] .section-pips{
 
 /* ─── Smooth scroll for pip links ─── */
 html{scroll-behavior:smooth;scroll-padding-top:80px}
+
+/* ─── COMING SOON MODAL ─── */
+.cs-modal{
+  position:fixed;inset:0;z-index:1000;
+  display:none;
+  align-items:center;justify-content:center;
+  padding:20px;
+}
+.cs-modal.open{display:flex;animation:csModalIn 320ms cubic-bezier(0.16, 1, 0.3, 1)}
+.cs-modal-backdrop{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+.cs-modal-card{
+  position:relative;z-index:1;
+  background:var(--bg-elev);
+  border:1px solid var(--bdr-soft);
+  border-radius:var(--r-xl);
+  padding:36px 32px;
+  max-width:440px;
+  width:100%;
+  box-shadow:var(--shadow-xl), 0 0 80px rgba(124,92,191,0.25);
+  text-align:center;
+  overflow:hidden;
+}
+.cs-modal-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg, var(--teal), var(--arte-1), var(--teal));
+  background-size:200% 100%;
+  animation:csGradientShift 3s linear infinite;
+}
+@keyframes csGradientShift{
+  0%{background-position:0% 50%}
+  100%{background-position:200% 50%}
+}
+@keyframes csModalIn{
+  from{opacity:0;transform:scale(0.85) translateY(20px)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+.cs-modal-card.closing{animation:csModalOut 240ms ease-in forwards}
+@keyframes csModalOut{
+  to{opacity:0;transform:scale(0.92) translateY(10px)}
+}
+
+.cs-rocket{
+  width:80px;height:80px;
+  margin:0 auto 18px;
+  display:grid;place-items:center;
+  font-size:48px;
+  background:linear-gradient(135deg, var(--arte-1), var(--teal));
+  border-radius:50%;
+  position:relative;
+  animation:csRocketBob 2.4s ease-in-out infinite;
+  box-shadow:0 12px 40px rgba(124,92,191,0.45);
+}
+@keyframes csRocketBob{
+  0%,100%{transform:translateY(0) rotate(-8deg)}
+  50%{transform:translateY(-8px) rotate(-12deg)}
+}
+.cs-rocket::after{
+  content:'';
+  position:absolute;
+  top:90%;left:50%;
+  transform:translateX(-50%);
+  width:6px;
+  height:40px;
+  background:linear-gradient(180deg, rgba(255,140,66,0.9), rgba(124,92,191,0.4), transparent);
+  border-radius:3px;
+  animation:csTrail 0.5s ease-in-out infinite alternate;
+  filter:blur(1px);
+}
+@keyframes csTrail{
+  from{height:18px;opacity:0.4}
+  to{height:32px;opacity:0.9}
+}
+
+.cs-modal h3{
+  font-size:var(--fs-3xl);
+  font-weight:var(--fw-bold);
+  letter-spacing:-0.01em;
+  line-height:var(--lh-tight);
+  margin-bottom:10px;
+  color:var(--t1);
+}
+.cs-modal h3 .grad{
+  background:linear-gradient(135deg, var(--arte-1), var(--teal));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.cs-modal p{
+  font-size:var(--fs-md);
+  color:var(--t2);
+  line-height:var(--lh-relaxed);
+  margin-bottom:24px;
+}
+
+/* Confetti container */
+.cs-confetti{
+  position:absolute;inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  border-radius:inherit;
+}
+.cs-confetti span{
+  position:absolute;
+  width:8px;height:8px;
+  border-radius:2px;
+  top:50%;left:50%;
+  opacity:0;
+}
+.cs-modal.open .cs-confetti span{
+  animation:csConfetti 1400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes csConfetti{
+  0%{transform:translate(-50%,-50%) scale(0);opacity:0}
+  10%{opacity:1}
+  100%{
+    transform:translate(calc(-50% + var(--cx, 0)), calc(-50% + var(--cy, 0))) rotate(var(--cr, 0deg)) scale(1);
+    opacity:0;
+  }
+}
+
+/* Email capture form */
+.cs-form{
+  display:flex;
+  gap:8px;
+  margin-bottom:14px;
+}
+.cs-form input{
+  flex:1;
+  background:var(--bg-input);
+  border:1px solid var(--bdr-soft);
+  border-radius:9999px;
+  padding:12px 18px;
+  color:var(--t1);
+  font-family:inherit;
+  font-size:var(--fs-md);
+  outline:none;
+  transition:all var(--t-base);
+  min-width:0;
+}
+.cs-form input:focus{
+  border-color:var(--teal);
+  box-shadow:0 0 0 3px var(--teal-bg);
+}
+.cs-form button{
+  padding:12px 22px;
+  background:var(--teal);
+  color:#0a0e13;
+  border:none;
+  border-radius:9999px;
+  font-family:inherit;
+  font-size:var(--fs-md);
+  font-weight:var(--fw-bold);
+  cursor:pointer;
+  transition:all var(--t-base);
+  white-space:nowrap;
+}
+.cs-form button:hover{
+  background:var(--teal-d);
+  transform:translateY(-1px);
+}
+.cs-platforms{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.cs-platform{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 12px;
+  background:var(--bg-input);
+  border:1px solid var(--bdr-soft);
+  border-radius:9999px;
+  font-size:var(--fs-xs);
+  font-weight:var(--fw-bold);
+  color:var(--t2);
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+}
+.cs-platform.live{
+  background:var(--teal-bg);
+  border-color:rgba(0,196,160,0.3);
+  color:var(--teal);
+}
+.cs-platform.live::before{
+  content:'';
+  width:6px;height:6px;border-radius:50%;
+  background:var(--teal);
+  box-shadow:0 0 0 3px var(--teal-bg);
+  animation:pulse 2s infinite;
+}
+.cs-close{
+  position:absolute;top:14px;right:14px;
+  width:32px;height:32px;
+  border-radius:50%;
+  background:transparent;
+  border:none;
+  color:var(--t2);
+  cursor:pointer;
+  display:grid;place-items:center;
+  transition:all var(--t-base);
+}
+.cs-close:hover{background:var(--hover-bg);color:var(--t1)}
+.cs-close svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.5}
+
+.cs-success{
+  display:none;
+  text-align:center;
+}
+.cs-success.show{display:block;animation:csModalIn 400ms cubic-bezier(0.16, 1, 0.3, 1)}
+.cs-success-icon{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--teal);color:#0a0e13;
+  display:grid;place-items:center;
+  margin:0 auto 16px;
+  animation:csCheckPop 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.cs-success-icon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:3}
+@keyframes csCheckPop{
+  0%{transform:scale(0)}
+  60%{transform:scale(1.15)}
+  100%{transform:scale(1)}
+}
+
+/* ═══ SECTION TRANSITIONS — when user clicks nav link / pip, the section
+   they're scrolling TO gets a brief flourish so it feels alive ═══ */
+.section-flash{
+  animation:sectionFlash 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes sectionFlash{
+  0%{transform:scale(0.985);filter:brightness(0.6) blur(4px)}
+  60%{transform:scale(1.005);filter:brightness(1.15) blur(0)}
+  100%{transform:scale(1);filter:brightness(1) blur(0)}
+}
+/* Children inside the just-arrived section ripple in too */
+.section-flash > * {
+  animation:sectionFlashChild 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes sectionFlashChild{
+  0%{transform:translateY(20px) scale(0.98);opacity:0.4}
+  100%{transform:translateY(0) scale(1);opacity:1}
+}
+
+/* Page-transition curtain that briefly sweeps when navigating between
+   sections via nav clicks (gives that "tab-switch" feel) */
+.page-curtain{
+  position:fixed;
+  inset:0;
+  z-index:999;
+  pointer-events:none;
+  background:linear-gradient(135deg, var(--arte-1), var(--teal));
+  transform-origin:left;
+  transform:scaleX(0);
+  opacity:0;
+}
+.page-curtain.active{
+  animation:curtainSweep 700ms cubic-bezier(0.83, 0, 0.17, 1);
+}
+@keyframes curtainSweep{
+  0%{transform:scaleX(0);opacity:0;transform-origin:left}
+  40%{transform:scaleX(1);opacity:0.85;transform-origin:left}
+  41%{transform:scaleX(1);opacity:0.85;transform-origin:right}
+  100%{transform:scaleX(0);opacity:0;transform-origin:right}
+}
 </style>
 </head>
 <body>
 
+<!-- Page-transition curtain (sweeps across the screen on tab/anchor click) -->
+<div class="page-curtain" id="pageCurtain"></div>
+
+<!-- Coming-soon / waitlist modal -->
+<div class="cs-modal" id="csModal" role="dialog" aria-modal="true" aria-labelledby="csModalTitle">
+  <div class="cs-modal-backdrop" data-close></div>
+  <div class="cs-modal-card">
+    <button class="cs-close" data-close aria-label="Close">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="cs-confetti" id="csConfetti"></div>
+    <div class="cs-form-view">
+      <div class="cs-rocket">
+        <svg viewBox="0 0 32 32" fill="white" stroke="none" style="width:36px;height:36px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.3))">
+          <path d="M16 2 L13 13 L2 16 L13 19 L16 30 L19 19 L30 16 L19 13 Z"/>
+        </svg>
+      </div>
+      <h3 id="csModalTitle">We are <span class="grad">launching soon</span></h3>
+      <p>Be first in line. We will email you the moment Artemis is ready for your pages.</p>
+      <form class="cs-form" id="csForm">
+        <input type="email" id="csEmail" placeholder="you@example.com" required autocomplete="email"/>
+        <button type="submit">Join waitlist</button>
+      </form>
+      <div class="cs-platforms">
+        <span class="cs-platform live">Facebook</span>
+        <span class="cs-platform">Instagram next</span>
+        <span class="cs-platform">X after that</span>
+      </div>
+    </div>
+    <div class="cs-success" id="csSuccess">
+      <div class="cs-success-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>You are on the list</h3>
+      <p>We will email <strong id="csEmailEcho">you</strong> the moment Artemis is ready.</p>
+    </div>
+  </div>
+</div>
+
 <div class="scroll-progress" id="scrollProgress"></div>
 
-<!-- Section navigation pips on right edge — show scroll position -->
+<!-- Section navigation pips on right edge -->
 <nav class="section-pips" id="sectionPips" aria-label="Section navigation">
-  <a href="#" data-section="hero" class="active" aria-label="Hero"><span class="pip"></span><span class="pip-label">Top</span></a>
+  <a href="#hero" data-section="hero" class="active" aria-label="Hero"><span class="pip"></span><span class="pip-label">Top</span></a>
   <a href="#live-numbers" data-section="live" aria-label="Live numbers"><span class="pip"></span><span class="pip-label">Live</span></a>
   <a href="#features" data-section="features" aria-label="Features"><span class="pip"></span><span class="pip-label">Features</span></a>
   <a href="#how" data-section="how" aria-label="How it works"><span class="pip"></span><span class="pip-label">How</span></a>
@@ -1660,26 +2005,27 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
   <div class="hero-orb hero-orb-2"></div>
   <div class="hero-orb hero-orb-3"></div>
   <div class="hero-content">
-    <div class="hero-badge">
+    <button class="hero-badge coming-soon-btn" id="comingSoonBtn" type="button" aria-label="Coming soon">
       <span class="dot"></span>
-      Built for Facebook page managers
-    </div>
-    <h1>Stop watching dashboards.<br><span class="highlight">Start getting answers.</span></h1>
-    <p class="hero-sub">Your pages get hundreds of comments and reactions every day. Artemis is the smart assistant that reads them all for you — and tells you when something needs your attention. No more refreshing dashboards. No more wondering what to post.</p>
+      <span class="cs-label">Coming soon</span>
+      <span class="cs-arrow">›</span>
+    </button>
+    <h1>We run your social media.<br><span class="highlight">You take back your time.</span></h1>
+    <p class="hero-sub">Artemis handles your Facebook pages while you focus on the work that matters. Instagram and X next.</p>
     <div class="hero-cta">
-      <a href="admin_login.html" class="btn-primary">
-        Try Artemis free
+      <button type="button" class="btn-primary" id="getEarlyAccessBtn">
+        Get early access
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+      </button>
       <a href="#how" class="btn-secondary">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
         See how it works
       </a>
     </div>
     <div class="hero-trust">
-      <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> No credit card</span>
-      <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 14-day trial</span>
-      <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Setup in 90 seconds</span>
+      <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Facebook ready</span>
+      <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Instagram next</span>
+      <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> X after that</span>
     </div>
   </div>
 
@@ -1697,7 +2043,7 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
         <div class="mockup-text">
           <span class="mockup-tag">▲ Crisis · 3 min ago</span>
           <div class="mockup-headline">Brand risk on Drinking Memes</div>
-          <div class="mockup-detail">23 angry comments showing up in the last 4 minutes — way more than normal. This looks like the same kind of trouble you had in October. <strong>Worth a quick reply in the next hour.</strong></div>
+          <div class="mockup-detail">23 angry comments in the last 4 minutes. Way more than normal. Same kind of trouble you had in October. <strong>Worth a quick reply.</strong></div>
         </div>
       </div>
       <div class="mockup-card opportunity">
@@ -1705,7 +2051,7 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
         <div class="mockup-text">
           <span class="mockup-tag">⚡ Going viral · 2h ago</span>
           <div class="mockup-headline">Kelpie Daily 6PM post is at 3.2× reach</div>
-          <div class="mockup-detail">This post is taking off — fastest growth in a month! Asking a question worked great. Share it to your other 4 pages right now → <strong>could reach 9,600 more people.</strong></div>
+          <div class="mockup-detail">This post is on fire. Fastest growth in a month. Share it to your other 4 pages right now and reach <strong>9,600 more people.</strong></div>
         </div>
       </div>
       <div class="mockup-card arte">
@@ -1713,7 +2059,7 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
         <div class="mockup-text">
           <span class="mockup-tag">✦ Art-E · just now</span>
           <div class="mockup-headline">Best post window today: Tuesday 6PM</div>
-          <div class="mockup-detail">Your followers are <strong>34% more active</strong> right now than usual. You've got 3 posts ready to go. Want me to publish them at the right time?</div>
+          <div class="mockup-detail">Your followers are <strong>34% more active</strong> right now. You have 3 posts ready. Want me to publish them?</div>
         </div>
       </div>
     </div>
@@ -1728,35 +2074,35 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
   <div class="live-header cinematic-reveal">
     <div class="live-pulse">
       <span class="live-pulse-dot"></span>
-      Live · Updating right now
+      Live right now
     </div>
     <h2 class="live-title">Artemis is busy <span style="background:linear-gradient(135deg,var(--teal),var(--arte-1));-webkit-background-clip:text;background-clip:text;color:transparent">right now</span></h2>
-    <p class="live-sub">Every second of every day, Artemis is reading comments, spotting trends, and saving page managers from missing important moments.</p>
+    <p class="live-sub">Every second of every day, Artemis is reading comments and spotting what matters.</p>
   </div>
   <div class="live-grid cinematic-stagger">
     <div class="live-tile tilt-3d t1">
       <div class="live-tile-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
       <div class="live-tile-num" data-target="247832" data-suffix="">0</div>
-      <div class="live-tile-lbl">Comments read today across all our customers' pages</div>
-      <div class="live-tile-trend"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>Live · counting up</div>
+      <div class="live-tile-lbl">Comments read today across our customer pages</div>
+      <div class="live-tile-trend"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>Counting up live</div>
     </div>
     <div class="live-tile tilt-3d t2">
       <div class="live-tile-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div>
       <div class="live-tile-num" data-target="4521" data-suffix="">0</div>
-      <div class="live-tile-lbl">Brand-risk moments caught this month before they spread</div>
+      <div class="live-tile-lbl">Drama moments caught this month</div>
       <div class="live-tile-trend"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>+18% vs last month</div>
     </div>
     <div class="live-tile tilt-3d t3">
       <div class="live-tile-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
       <div class="live-tile-num" data-target="12847" data-suffix="">0</div>
-      <div class="live-tile-lbl">Hours saved this week by Art-E doing the busywork</div>
+      <div class="live-tile-lbl">Hours we saved page managers this week</div>
       <div class="live-tile-trend"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>Growing every minute</div>
     </div>
     <div class="live-tile tilt-3d t4">
       <div class="live-tile-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
       <div class="live-tile-num" data-target="98" data-suffix="%">0</div>
-      <div class="live-tile-lbl">Of our customers say Artemis caught something they would have missed</div>
-      <div class="live-tile-trend"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>Verified · Q1 2026</div>
+      <div class="live-tile-lbl">Of our users say Artemis saved them this week</div>
+      <div class="live-tile-trend"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>Verified Q1 2026</div>
     </div>
   </div>
 </section>
@@ -1767,20 +2113,20 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
     <div class="section-head cinematic-reveal">
       <div class="section-eyebrow">// The reality</div>
       <h2 class="section-title">Page managers are flying blind</h2>
-      <p class="section-sub">If you're not watching every minute, you're missing things. We did the math on what that costs.</p>
+      <p class="section-sub">If you are not watching every minute, you are missing things. Here is what that costs.</p>
     </div>
     <div class="problem-grid cinematic-stagger">
       <div class="problem-card">
         <div class="num">73%</div>
-        <div class="lbl">of trouble on Facebook pages starts with one comment thread that nobody catches in time</div>
+        <div class="lbl">of drama on pages starts with one comment thread nobody catches in time</div>
       </div>
       <div class="problem-card">
         <div class="num">4 hrs</div>
-        <div class="lbl">is how long a viral post stays hot. Most pages miss the chance to share it everywhere in time</div>
+        <div class="lbl">is how long a viral post stays hot. Most pages miss the share window</div>
       </div>
       <div class="problem-card">
         <div class="num">12 hrs</div>
-        <div class="lbl">a week the average page manager wastes just looking at charts instead of creating content</div>
+        <div class="lbl">a week wasted on charts instead of creating content</div>
       </div>
     </div>
   </div>
@@ -1792,7 +2138,7 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
     <div class="section-head cinematic-reveal">
       <div class="section-eyebrow">// What Artemis does</div>
       <h2 class="section-title">Three things you'll never miss again</h2>
-      <p class="section-sub">Artemis watches your pages all day, every day — so you don't have to.</p>
+      <p class="section-sub">Artemis watches your pages so you do not have to.</p>
     </div>
     <div class="features-grid cinematic-stagger">
       <div class="feature-card tilt-3d f-crisis">
@@ -1801,8 +2147,8 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
         </div>
         <span class="stat">Spots trouble in 4 minutes</span>
         <h3>Spot drama before it spreads</h3>
-        <p>When angry comments start piling up on your page, Artemis pings you right away — and tells you how serious it is by comparing to past situations. So you can step in before things get out of hand.</p>
-        <div class="ex">"Hey, 23 angry comments just showed up on Drinking Memes — looks like the same trouble as last October. Want a reply ready?"</div>
+        <p>When angry comments pile up on your page, Artemis pings you right away. We tell you how serious it is and how to handle it.</p>
+        <div class="ex">"23 angry comments just showed up on Drinking Memes. Same trouble as last October. Want a reply ready?"</div>
       </div>
       <div class="feature-card tilt-3d f-virality">
         <div class="icon-wrap">
@@ -1810,8 +2156,8 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
         </div>
         <span class="stat">Real-time growth tracking</span>
         <h3>Catch posts that are taking off</h3>
-        <p>When one of your posts starts spreading faster than usual, Artemis tells you immediately — and shows you exactly how to ride the wave. So you never miss the moment your content is hot.</p>
-        <div class="ex">"Your 6PM post is 3× hotter than normal. Share it to your other pages now and reach 9,600 more people."</div>
+        <p>When a post starts spreading faster than usual, Artemis tells you right away. We show you exactly how to ride the wave.</p>
+        <div class="ex">"Your 6PM post is 3 times hotter than normal. Share to your other pages now and reach 9,600 more people."</div>
       </div>
       <div class="feature-card tilt-3d f-tribe">
         <div class="icon-wrap">
@@ -1819,8 +2165,8 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
         </div>
         <span class="stat">Find your perfect partners</span>
         <h3>Find pages just like yours</h3>
-        <p>Artemis finds other pages that share your audience — so you know exactly who to team up with. Cross-promote, swap shoutouts, or just see what's working for similar creators.</p>
-        <div class="ex">"Fri Night Chaos shares 94% of your audience and they're online right now. Want a friendly intro message?"</div>
+        <p>Artemis finds other pages that share your audience. You know exactly who to team up with.</p>
+        <div class="ex">"Fri Night Chaos shares 94% of your audience. They are online right now. Want a friendly intro?"</div>
       </div>
     </div>
   </div>
@@ -1831,8 +2177,8 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
   <div class="container">
     <div class="section-head cinematic-reveal">
       <div class="section-eyebrow">// Get started in 90 seconds</div>
-      <h2 class="section-title">How it works (in plain English)</h2>
-      <p class="section-sub">No long forms. No sales calls. You're up and running in less than 2 minutes.</p>
+      <h2 class="section-title">How it works</h2>
+      <p class="section-sub">No long forms. No sales calls. You are up and running in 2 minutes.</p>
     </div>
     <div class="how-grid cinematic-stagger">
       <div class="how-step">
@@ -1843,17 +2189,17 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
       <div class="how-step">
         <div class="how-num">2</div>
         <h4>We learn what's normal</h4>
-        <p>Artemis reads your past posts and comments so it knows your style and your audience.</p>
+        <p>Artemis reads your past posts and comments. We learn your style and your audience.</p>
       </div>
       <div class="how-step">
         <div class="how-num">3</div>
         <h4>We watch 24/7</h4>
-        <p>You get a ping the moment something matters — viral post, angry thread, perfect time to post.</p>
+        <p>You get a ping the moment something matters. Viral post, angry thread, perfect time to post.</p>
       </div>
       <div class="how-step">
         <div class="how-num">4</div>
         <h4>You decide what to do</h4>
-        <p>Tap any alert and Art-E suggests a response. Or just lets you know what's going on.</p>
+        <p>Tap any alert and Art-E handles it. Or you take over. Your call.</p>
       </div>
     </div>
   </div>
@@ -1868,7 +2214,7 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
     <div class="section-head cinematic-reveal">
       <div class="section-eyebrow">// In one picture</div>
       <h2 class="section-title">Here's what happens every minute</h2>
-      <p class="section-sub">A quick look at what Artemis is doing while you're getting on with your day.</p>
+      <p class="section-sub">A quick look at what Artemis does while you get on with your day.</p>
     </div>
     <div class="flow-graph">
       <!-- Desktop animated SVG -->
@@ -1942,9 +2288,9 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
 
         <!-- Connecting paths — increased vertical separation: top y=80, mid y=270, bot y=460 -->
         <path id="flow-path-in" d="M 220 270 Q 320 270 420 270" fill="none" stroke="url(#path-grad-in)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
-        <path id="flow-path-1" d="M 580 270 C 660 270 660 80 760 80" fill="none" stroke="url(#path-grad-crisis)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
-        <path id="flow-path-2" d="M 580 270 C 660 270 680 270 760 270" fill="none" stroke="url(#path-grad-opp)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
-        <path id="flow-path-3" d="M 580 270 C 660 270 660 460 760 460" fill="none" stroke="url(#path-grad-time)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-1" d="M 580 270 C 660 270 660 75 740 75" fill="none" stroke="url(#path-grad-crisis)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-2" d="M 580 270 C 660 270 680 270 740 270" fill="none" stroke="url(#path-grad-opp)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-3" d="M 580 270 C 660 270 660 465 740 465" fill="none" stroke="url(#path-grad-time)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
 
         <!-- Travelling pulses on input path (4 staggered teal dots) -->
         <g>
@@ -1965,17 +2311,17 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
         <!-- Travelling pulses on output paths (each path gets 2 dots) -->
         <g>
           <circle r="5" fill="#E53935" filter="url(#glow-strong)">
-            <animateMotion dur="2.8s" begin="0.5s" repeatCount="indefinite" path="M 580 270 C 660 270 660 80 760 80"/>
+            <animateMotion dur="2.8s" begin="0.5s" repeatCount="indefinite" path="M 580 270 C 660 270 660 75 740 75"/>
           </circle>
           <circle r="4" fill="#E53935" filter="url(#glow-arte)">
-            <animateMotion dur="2.8s" begin="1.9s" repeatCount="indefinite" path="M 580 270 C 660 270 660 80 760 80"/>
+            <animateMotion dur="2.8s" begin="1.9s" repeatCount="indefinite" path="M 580 270 C 660 270 660 75 740 75"/>
           </circle>
 
           <circle r="5" fill="#00C4A0" filter="url(#glow-strong)">
-            <animateMotion dur="2.8s" begin="1s" repeatCount="indefinite" path="M 580 270 C 660 270 680 270 760 270"/>
+            <animateMotion dur="2.8s" begin="1s" repeatCount="indefinite" path="M 580 270 C 660 270 680 270 740 270"/>
           </circle>
           <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
-            <animateMotion dur="2.8s" begin="2.4s" repeatCount="indefinite" path="M 580 270 C 660 270 680 270 760 270"/>
+            <animateMotion dur="2.8s" begin="2.4s" repeatCount="indefinite" path="M 580 270 C 660 270 680 270 740 270"/>
           </circle>
 
           <circle r="5" fill="#7C5CBF" filter="url(#glow-strong)">
@@ -2014,42 +2360,42 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
         </g>
 
         <!-- Node 3a: Drama spotted (top-right, y=20-140) - well separated from middle -->
-        <g transform="translate(760, 20)" filter="url(#node-shadow-3d)">
-          <rect x="3" y="3" width="200" height="120" rx="18" fill="rgba(0,0,0,0.3)"/>
-          <rect x="0" y="0" width="200" height="120" rx="18" fill="url(#fg-crisis)" stroke="rgba(229,57,53,0.55)" stroke-width="1.5"/>
-          <g transform="translate(36, 60)" stroke="#E53935" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M 0 -16 L 16 12 L -16 12 Z"/>
-            <path d="M 0 -6 v 8"/>
-            <circle cx="0" cy="9" r="1.2" fill="#E53935"/>
+        <g transform="translate(740, 0)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="240" height="150" rx="18" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="240" height="150" rx="18" fill="url(#fg-crisis)" stroke="rgba(229,57,53,0.55)" stroke-width="1.5"/>
+          <g transform="translate(36, 75)" stroke="#E53935" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 0 -18 L 18 14 L -18 14 Z"/>
+            <path d="M 0 -7 v 10"/>
+            <circle cx="0" cy="11" r="1.4" fill="#E53935"/>
           </g>
-          <text x="76" y="48" text-anchor="start" fill="#E53935" style="font-size:14px;font-weight:700;font-family:inherit">Drama spotted</text>
-          <text x="76" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">"23 angry comments —</text>
-          <text x="76" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">go check Drinking Memes"</text>
+          <text x="76" y="58" text-anchor="start" fill="#E53935" style="font-size:15px;font-weight:700;font-family:inherit">Drama spotted</text>
+          <text x="76" y="86" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">"23 angry comments</text>
+          <text x="76" y="104" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">on Drinking Memes"</text>
         </g>
 
         <!-- Node 3b: Post going viral (middle-right, y=210-330) - well separated -->
-        <g transform="translate(760, 210)" filter="url(#node-shadow-3d)">
-          <rect x="3" y="3" width="200" height="120" rx="18" fill="rgba(0,0,0,0.3)"/>
-          <rect x="0" y="0" width="200" height="120" rx="18" fill="url(#fg-opp)" stroke="rgba(0,196,160,0.55)" stroke-width="1.5"/>
-          <g transform="translate(36, 60)" stroke="#00C4A0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M 6 -16 L -8 4 L 0 4 L -2 16 L 12 -4 L 4 -4 Z" fill="#00C4A0"/>
+        <g transform="translate(740, 195)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="240" height="150" rx="18" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="240" height="150" rx="18" fill="url(#fg-opp)" stroke="rgba(0,196,160,0.55)" stroke-width="1.5"/>
+          <g transform="translate(36, 75)" stroke="#00C4A0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 7 -18 L -9 5 L 0 5 L -2 18 L 14 -5 L 5 -5 Z" fill="#00C4A0"/>
           </g>
-          <text x="76" y="48" text-anchor="start" fill="#00C4A0" style="font-size:14px;font-weight:700;font-family:inherit">Post going viral</text>
-          <text x="76" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">"Kelpie Daily 6PM at 3.2× —</text>
-          <text x="76" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">share it everywhere now"</text>
+          <text x="76" y="58" text-anchor="start" fill="#00C4A0" style="font-size:15px;font-weight:700;font-family:inherit">Post going viral</text>
+          <text x="76" y="86" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">"6PM post is on fire,</text>
+          <text x="76" y="104" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">share to your pages"</text>
         </g>
 
         <!-- Node 3c: Perfect time to post (bottom-right, y=400-520) - well separated -->
-        <g transform="translate(760, 400)" filter="url(#node-shadow-3d)">
-          <rect x="3" y="3" width="200" height="120" rx="18" fill="rgba(0,0,0,0.3)"/>
-          <rect x="0" y="0" width="200" height="120" rx="18" fill="url(#fg-time)" stroke="rgba(124,92,191,0.55)" stroke-width="1.5"/>
-          <g transform="translate(36, 60)" stroke="#7C5CBF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="0" cy="0" r="14"/>
-            <path d="M 0 -8 v 8 l 6 4"/>
+        <g transform="translate(740, 390)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="240" height="150" rx="18" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="240" height="150" rx="18" fill="url(#fg-time)" stroke="rgba(124,92,191,0.55)" stroke-width="1.5"/>
+          <g transform="translate(36, 75)" stroke="#7C5CBF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="0" cy="0" r="16"/>
+            <path d="M 0 -9 v 9 l 7 5"/>
           </g>
-          <text x="76" y="48" text-anchor="start" fill="#7C5CBF" style="font-size:14px;font-weight:700;font-family:inherit">Perfect time to post</text>
-          <text x="76" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">"Tuesday 6PM — your fans</text>
-          <text x="76" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">are 34% more active now"</text>
+          <text x="76" y="58" text-anchor="start" fill="#7C5CBF" style="font-size:15px;font-weight:700;font-family:inherit">Perfect time to post</text>
+          <text x="76" y="86" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">"Tuesday 6PM, your fans</text>
+          <text x="76" y="104" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">are 34% more active"</text>
         </g>
       </svg>
 
@@ -2095,11 +2441,11 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
       <div class="arte-text">
         <div class="section-eyebrow">// Meet Art-E</div>
         <h2>Meet Art-E — the assistant that <span class="arte-grad">actually does things</span></h2>
-        <p>Most chatbots just talk. Art-E actually does things for you — drafts posts, replies to comments, schedules content, even messages other pages for collabs. You stay in charge. Art-E handles the busywork so you can focus on the fun part.</p>
+        <p>Most chatbots just talk. Art-E actually does things. Drafts posts, replies to comments, schedules content, messages other pages for collabs. You stay in charge.</p>
         <div class="arte-bullet">
           <div class="arte-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="arte-bullet-text">
-            <div class="arte-bullet-title">Tells you if a post will do well — before you hit publish</div>
+            <div class="arte-bullet-title">Tells you if a post will do well before you hit publish</div>
             <div class="arte-bullet-sub">Gives every draft a score from 0 to 100, based on what's worked for you before.</div>
           </div>
         </div>
@@ -2107,14 +2453,14 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
           <div class="arte-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="arte-bullet-text">
             <div class="arte-bullet-title">Writes replies that sound like you</div>
-            <div class="arte-bullet-sub">Learned your tone from a year of your real messages. No more robot-sounding replies.</div>
+            <div class="arte-bullet-sub">Learned your tone from a year of your real messages. No robot replies.</div>
           </div>
         </div>
         <div class="arte-bullet">
           <div class="arte-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="arte-bullet-text">
             <div class="arte-bullet-title">Explains everything in plain English</div>
-            <div class="arte-bullet-sub">Ask "why did reach drop?" and get a real answer. No charts, no jargon — just what happened and how to fix it.</div>
+            <div class="arte-bullet-sub">Ask "why did reach drop?" and get a real answer. What happened, and how to fix it.</div>
           </div>
         </div>
       </div>
@@ -2134,7 +2480,7 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
           <div class="arte-msg bot">
             <div class="who"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
             <div class="bubble">
-              Reach is down about <strong>8% this week</strong>. Three reasons: you missed your best posting time on Tuesday twice, your captions got longer (your fans prefer short and snappy), and Facebook is showing more videos than photos this month.
+              Reach is down <strong>8% this week</strong>. Three reasons: you missed your best Tuesday posting time twice, your captions got longer (your fans prefer short), and Facebook is favouring videos over photos this month.
               <div class="arte-cta-row">
                 <button class="arte-cta-btn"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Fix it for me</button>
                 <button class="arte-cta-btn-secondary">Show me</button>
@@ -2154,7 +2500,7 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
     <div class="section-head cinematic-reveal">
       <div class="section-eyebrow">// The team</div>
       <h2 class="section-title">Built by people who get it</h2>
-      <p class="section-sub">Social media nerds who got tired of missing things — and a few engineers who built the AI to fix it.</p>
+      <p class="section-sub">Social media people who got tired of missing things. Plus the engineers who built the AI to fix it.</p>
     </div>
     <div class="team-grid cinematic-stagger">
       <div class="team-card tilt-3d">
@@ -2208,12 +2554,12 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
   <div class="container">
     <div class="final-cta cinematic-reveal">
       <div class="final-cta-content">
-        <h2>Stop missing the moments<br>that matter on your pages.</h2>
-        <p>Free for 14 days. No credit card needed. Set up in 90 seconds. Cancel anytime.</p>
-        <a href="admin_login.html" class="btn-white">
-          Get started free
+        <h2>Stop missing what matters<br>on your pages.</h2>
+        <p>Get early access while we are building. Free during beta. No credit card.</p>
+        <button type="button" class="btn-white" id="ctaJoinBtn">
+          Join the waitlist
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        </button>
       </div>
     </div>
   </div>
@@ -2226,7 +2572,7 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
       <div class="site-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#nlg2)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#nlg2)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#nlg2)"/><defs><linearGradient id="nlg2" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
       ARTEMIS
     </div>
-    <div class="footer-copy">© 2026 Artemis AI · Built for Facebook page managers</div>
+    <div class="footer-copy">© 2026 Artemis AI</div>
     <div class="footer-links">
       <a href="/privacy">Privacy</a>
       <a href="#">Terms</a>
@@ -2492,6 +2838,167 @@ document.querySelectorAll('.site-nav-links a').forEach(a => {
     document.querySelector('.site-nav-links').classList.remove('open');
   });
 });
+
+/* ════════════════════════════════════════════════════════════════════
+   COMING-SOON MODAL — Get-early-access flow
+   The hero badge ("Coming soon"), the primary CTA ("Get early access"),
+   and the final-CTA button ("Join the waitlist") all open this modal.
+   On the badge click we fire a quick burst, then open the modal with
+   a confetti shower and an email-capture form.
+   ════════════════════════════════════════════════════════════════════ */
+(function initComingSoon(){
+  const modal     = document.getElementById('csModal');
+  const confetti  = document.getElementById('csConfetti');
+  const formView  = modal && modal.querySelector('.cs-form-view');
+  const success   = document.getElementById('csSuccess');
+  const form      = document.getElementById('csForm');
+  const emailIn   = document.getElementById('csEmail');
+  const emailEcho = document.getElementById('csEmailEcho');
+  const badge     = document.getElementById('comingSoonBtn');
+  const earlyBtn  = document.getElementById('getEarlyAccessBtn');
+  const ctaJoin   = document.getElementById('ctaJoinBtn');
+  if (!modal) return;
+
+  // Build a confetti burst inside the modal
+  function buildConfetti(){
+    if (!confetti) return;
+    confetti.innerHTML = '';
+    const colors = ['#00C4A0', '#7C5CBF', '#FF8C42', '#FEBC2E', '#E53935'];
+    for (let i = 0; i < 24; i++){
+      const s = document.createElement('span');
+      const angle = (Math.random() * 2 - 1) * Math.PI;
+      const dist  = 180 + Math.random() * 140;
+      const cx    = Math.cos(angle) * dist;
+      const cy    = Math.sin(angle) * dist - 40; // bias upward a bit
+      const cr    = (Math.random() * 540 - 270) + 'deg';
+      s.style.setProperty('--cx', cx + 'px');
+      s.style.setProperty('--cy', cy + 'px');
+      s.style.setProperty('--cr', cr);
+      s.style.background = colors[i % colors.length];
+      s.style.animationDelay = (Math.random() * 200) + 'ms';
+      confetti.appendChild(s);
+    }
+  }
+
+  function openModal(){
+    // Reset to form view
+    if (success) success.classList.remove('show');
+    if (formView) formView.style.display = '';
+    if (emailIn) emailIn.value = '';
+    buildConfetti();
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => emailIn && emailIn.focus(), 350);
+  }
+
+  function closeModal(){
+    const card = modal.querySelector('.cs-modal-card');
+    if (card) card.classList.add('closing');
+    setTimeout(() => {
+      modal.classList.remove('open');
+      if (card) card.classList.remove('closing');
+      document.body.style.overflow = '';
+    }, 240);
+  }
+
+  // Badge click: brief burst then open modal
+  if (badge){
+    badge.addEventListener('click', (e) => {
+      e.preventDefault();
+      badge.classList.remove('bursting');
+      void badge.offsetWidth; // force reflow so animation restarts
+      badge.classList.add('bursting');
+      setTimeout(() => badge.classList.remove('bursting'), 600);
+      setTimeout(openModal, 280);
+    });
+  }
+  if (earlyBtn) earlyBtn.addEventListener('click', openModal);
+  if (ctaJoin) ctaJoin.addEventListener('click', openModal);
+
+  // Close on backdrop / X / ESC
+  modal.querySelectorAll('[data-close]').forEach(el => {
+    el.addEventListener('click', closeModal);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  // Submit handler — fake success, in production this would POST to a Lambda
+  if (form){
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = (emailIn.value || '').trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailIn.focus();
+        emailIn.style.borderColor = 'var(--crisis)';
+        setTimeout(() => emailIn.style.borderColor = '', 1400);
+        return;
+      }
+      // Persist locally so we know the user joined
+      try { localStorage.setItem('artemis_waitlist_email', email); } catch(e){}
+      if (emailEcho) emailEcho.textContent = email;
+      if (formView) formView.style.display = 'none';
+      if (success) success.classList.add('show');
+      buildConfetti(); // a second burst for the success view
+    });
+  }
+})();
+
+/* ════════════════════════════════════════════════════════════════════
+   PAGE-TRANSITION CURTAIN + SECTION FLASH
+   When user clicks a nav link or pip that targets a section on the
+   current page, sweep a gradient curtain across the screen and
+   "flash" the destination section with a brief brightness/scale pulse
+   so it feels like switching to a fresh tab rather than just scrolling.
+   ════════════════════════════════════════════════════════════════════ */
+(function initSectionTransitions(){
+  const curtain = document.getElementById('pageCurtain');
+  if (!curtain) return;
+
+  // Match clicks on:
+  //   .site-nav-links a[href^="#"]
+  //   .section-pips a[href^="#"]
+  // Excluding plain "#" placeholder.
+  const links = document.querySelectorAll(
+    '.site-nav-links a[href^="#"], .section-pips a[href^="#"]'
+  );
+
+  function flashSection(target){
+    if (!target) return;
+    target.classList.remove('section-flash');
+    void target.offsetWidth;
+    target.classList.add('section-flash');
+    setTimeout(() => target.classList.remove('section-flash'), 1200);
+  }
+
+  function triggerCurtain(){
+    curtain.classList.remove('active');
+    void curtain.offsetWidth;
+    curtain.classList.add('active');
+    setTimeout(() => curtain.classList.remove('active'), 720);
+  }
+
+  links.forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
+    link.addEventListener('click', (e) => {
+      const id = href.replace(/^#/, '');
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      // Curtain sweep + scroll happens during the curtain transit so the
+      // landing feels seamless. Curtain peaks at ~280ms, that's when the
+      // scroll lands and the destination section flashes in.
+      triggerCurtain();
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        flashSection(target);
+      }, 260);
+      // Update URL hash for back-button support
+      try { history.pushState(null, '', '#' + id); } catch(e){}
+    });
+  });
+})();
 </script>
 </body>
 </html>
