@@ -964,6 +964,8 @@ footer{
 .flow-section{
   padding:96px 32px;
   text-align:center;
+  position:relative;
+  overflow:hidden;
 }
 .flow-graph{
   max-width:900px;margin:48px auto 0;
@@ -971,7 +973,9 @@ footer{
 }
 .flow-svg{
   width:100%;height:auto;
-  max-width:900px;
+  max-width:1000px;
+  display:block;
+  margin:0 auto;
 }
 .flow-node-bg{
   fill:var(--bg-elev);
@@ -1136,6 +1140,11 @@ footer{
   position:relative;z-index:1;
 }
 
+
+/* Light-mode flow graph — stronger borders/labels for white bg */
+html[data-theme="light"] .flow-svg text.flow-label{fill:var(--t1)}
+html[data-theme="light"] .flow-svg text.flow-sublabel{fill:var(--t2)}
+
 @media(max-width:980px){
   .live-grid{grid-template-columns:repeat(2, 1fr);gap:16px}
   .team-grid{grid-template-columns:repeat(2, 1fr);gap:16px}
@@ -1157,9 +1166,231 @@ footer{
   .team-name{font-size:var(--fs-md)}
   .team-tag{font-size:var(--fs-xs)}
 }
+
+/* ─── CINEMATIC ANIMATIONS ─── */
+
+/* Scroll progress bar (top) */
+.scroll-progress{
+  position:fixed;top:0;left:0;
+  height:3px;width:0%;
+  background:linear-gradient(90deg, var(--teal), var(--arte-1));
+  z-index:200;
+  transition:width 80ms ease-out;
+  box-shadow:0 0 10px rgba(0,196,160,0.6);
+}
+
+/* 3D perspective for hero mockup */
+.hero-mockup{
+  perspective:1500px;
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+.hero-mockup-tilt{
+  transform-style:preserve-3d;
+  transition:transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Floating animation on mockup cards inside hero */
+.hero-mockup .mockup-card{
+  animation:floatCard 6s ease-in-out infinite;
+  will-change:transform;
+}
+.hero-mockup .mockup-card:nth-child(1){animation-delay:0s}
+.hero-mockup .mockup-card:nth-child(2){animation-delay:1.2s}
+.hero-mockup .mockup-card:nth-child(3){animation-delay:2.4s}
+@keyframes floatCard{
+  0%,100%{transform:translateY(0) translateZ(0)}
+  50%{transform:translateY(-4px) translateZ(8px)}
+}
+
+/* Hero badge subtle bounce on load */
+.hero-badge{
+  animation:fadeSlideDown 800ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes fadeSlideDown{
+  from{opacity:0;transform:translateY(-20px) scale(0.9)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* Hero headline staggered word reveal */
+.hero h1{
+  animation:fadeSlideUp 900ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both;
+}
+.hero-sub{
+  animation:fadeSlideUp 900ms cubic-bezier(0.16, 1, 0.3, 1) 400ms both;
+}
+.hero-cta{
+  animation:fadeSlideUp 900ms cubic-bezier(0.16, 1, 0.3, 1) 600ms both;
+}
+.hero-trust{
+  animation:fadeSlideUp 900ms cubic-bezier(0.16, 1, 0.3, 1) 750ms both;
+}
+.hero-mockup{
+  animation:fadeSlideUp 1100ms cubic-bezier(0.16, 1, 0.3, 1) 900ms both;
+}
+@keyframes fadeSlideUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Section reveal — different per section */
+.cinematic-reveal{opacity:0;will-change:opacity, transform}
+.cinematic-reveal.in-view{animation:cinematicIn 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards}
+@keyframes cinematicIn{
+  from{opacity:0;transform:translateY(60px) scale(0.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* Stagger child animation */
+.cinematic-stagger > *{opacity:0;will-change:opacity, transform}
+.cinematic-stagger.in-view > *{animation:cinematicIn 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards}
+.cinematic-stagger.in-view > *:nth-child(1){animation-delay:0ms}
+.cinematic-stagger.in-view > *:nth-child(2){animation-delay:100ms}
+.cinematic-stagger.in-view > *:nth-child(3){animation-delay:200ms}
+.cinematic-stagger.in-view > *:nth-child(4){animation-delay:300ms}
+.cinematic-stagger.in-view > *:nth-child(5){animation-delay:400ms}
+.cinematic-stagger.in-view > *:nth-child(6){animation-delay:500ms}
+.cinematic-stagger.in-view > *:nth-child(7){animation-delay:600ms}
+.cinematic-stagger.in-view > *:nth-child(8){animation-delay:700ms}
+
+/* 3D tilt cards (live tiles, feature cards, team cards) */
+.tilt-3d{
+  transform-style:preserve-3d;
+  transition:transform 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+             border-color 250ms ease,
+             box-shadow 350ms ease;
+  will-change:transform;
+}
+.tilt-3d:hover{
+  transform:translateY(-6px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+  box-shadow:var(--shadow-lg), 0 0 32px rgba(124,92,191,0.2);
+}
+.tilt-3d > *{transform:translateZ(20px)}
+
+/* Animated gradient border on hover */
+.live-tile{position:relative}
+.live-tile::after{
+  content:'';position:absolute;inset:0;
+  border-radius:inherit;
+  padding:1px;
+  background:linear-gradient(135deg, transparent 30%, var(--teal), var(--arte-1), transparent 70%);
+  background-size:200% 200%;
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity 300ms ease;
+  pointer-events:none;
+}
+.live-tile:hover::after{opacity:1;animation:gradientShift 3s linear infinite}
+@keyframes gradientShift{
+  0%{background-position:0% 0%}
+  100%{background-position:200% 200%}
+}
+
+/* Floating orbs in hero background */
+.hero{position:relative}
+.hero-orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(60px);
+  pointer-events:none;
+  z-index:0;
+  will-change:transform;
+}
+.hero-orb-1{
+  width:280px;height:280px;
+  background:radial-gradient(circle, rgba(124,92,191,0.4), transparent 70%);
+  top:10%;left:5%;
+  animation:floatOrb 12s ease-in-out infinite;
+}
+.hero-orb-2{
+  width:340px;height:340px;
+  background:radial-gradient(circle, rgba(0,196,160,0.35), transparent 70%);
+  top:30%;right:10%;
+  animation:floatOrb 14s ease-in-out infinite reverse;
+}
+.hero-orb-3{
+  width:220px;height:220px;
+  background:radial-gradient(circle, rgba(124,92,191,0.25), transparent 70%);
+  bottom:15%;left:30%;
+  animation:floatOrb 10s ease-in-out infinite 3s;
+}
+@keyframes floatOrb{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(40px,-30px) scale(1.1)}
+  66%{transform:translate(-20px,20px) scale(0.95)}
+}
+html[data-theme="light"] .hero-orb-1{background:radial-gradient(circle, rgba(90,63,160,0.18), transparent 70%)}
+html[data-theme="light"] .hero-orb-2{background:radial-gradient(circle, rgba(0,160,133,0.18), transparent 70%)}
+html[data-theme="light"] .hero-orb-3{background:radial-gradient(circle, rgba(90,63,160,0.12), transparent 70%)}
+
+/* Live-tile number — extra punch */
+.live-tile-num{
+  background:linear-gradient(135deg, var(--t1), var(--t1) 50%, var(--teal));
+  -webkit-background-clip:text;
+  background-clip:text;
+}
+html[data-theme="light"] .live-tile-num{
+  background:linear-gradient(135deg, var(--t1) 0%, var(--t1) 60%, var(--teal-d) 100%);
+  -webkit-background-clip:text;background-clip:text;
+}
+
+/* Team card 3D tilt on hover */
+.team-card{
+  transform-style:preserve-3d;
+  perspective:800px;
+}
+.team-card:hover .team-avatar{transform:translateZ(20px) scale(1.08)}
+.team-card .team-avatar{transition:transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1)}
+
+/* Section title shine effect */
+.section-title, .live-title{
+  position:relative;
+  background:linear-gradient(90deg, var(--t1) 0%, var(--t1) 100%);
+  background-size:200% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:var(--t1);
+}
+
+/* Sticky element for scroll-driven animations (Art-E section) */
+@media(min-width:980px){
+  .arte-showcase .arte-text{position:sticky;top:80px}
+}
+
+/* Final CTA — pulsing glow */
+.final-cta{
+  animation:ctaPulse 4s ease-in-out infinite;
+}
+@keyframes ctaPulse{
+  0%,100%{box-shadow:var(--shadow-xl), 0 0 60px rgba(124,92,191,0.3)}
+  50%{box-shadow:var(--shadow-xl), 0 0 100px rgba(124,92,191,0.5)}
+}
+
+/* Mobile — disable heavy animations */
+@media(max-width:640px){
+  .hero-orb{display:none}
+  .tilt-3d:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .arte-showcase .arte-text{position:static}
+  .final-cta{animation:none}
+  .hero-mockup .mockup-card{animation:none}
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+  }
+  .hero-orb{display:none}
+}
 </style>
 </head>
 <body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
 
 <!-- Sign-out modal -->
 <div id="signout-modal">
@@ -1212,6 +1443,9 @@ footer{
      HOOKED: External trigger answers the user's internal anxiety:
      'I'm missing things on my pages and I don't know it.' -->
 <section class="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
   <div class="hero-content">
     <div class="hero-badge">
       <span class="dot"></span>
@@ -1278,7 +1512,7 @@ footer{
      Hooked: numbers tick up so the user FEELS the platform working.
      Bandwagon effect: large numbers signal safety and value. -->
 <section class="live-section" id="live-numbers">
-  <div class="live-header">
+  <div class="live-header cinematic-reveal">
     <div class="live-pulse">
       <span class="live-pulse-dot"></span>
       Live · Updating right now
@@ -1286,26 +1520,26 @@ footer{
     <h2 class="live-title">Artemis is busy <span style="background:linear-gradient(135deg,var(--teal),var(--arte-1));-webkit-background-clip:text;background-clip:text;color:transparent">right now</span></h2>
     <p class="live-sub">Every second of every day, Artemis is reading comments, spotting trends, and saving page managers from missing important moments.</p>
   </div>
-  <div class="live-grid">
-    <div class="live-tile t1">
+  <div class="live-grid cinematic-stagger">
+    <div class="live-tile tilt-3d t1">
       <div class="live-tile-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
       <div class="live-tile-num" data-target="247832" data-suffix="">0</div>
       <div class="live-tile-lbl">Comments read today across all our customers' pages</div>
       <div class="live-tile-trend"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>Live · counting up</div>
     </div>
-    <div class="live-tile t2">
+    <div class="live-tile tilt-3d t2">
       <div class="live-tile-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div>
       <div class="live-tile-num" data-target="4521" data-suffix="">0</div>
       <div class="live-tile-lbl">Brand-risk moments caught this month before they spread</div>
       <div class="live-tile-trend"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>+18% vs last month</div>
     </div>
-    <div class="live-tile t3">
+    <div class="live-tile tilt-3d t3">
       <div class="live-tile-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
       <div class="live-tile-num" data-target="12847" data-suffix="">0</div>
       <div class="live-tile-lbl">Hours saved this week by Art-E doing the busywork</div>
       <div class="live-tile-trend"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>Growing every minute</div>
     </div>
-    <div class="live-tile t4">
+    <div class="live-tile tilt-3d t4">
       <div class="live-tile-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
       <div class="live-tile-num" data-target="98" data-suffix="%">0</div>
       <div class="live-tile-lbl">Of our customers say Artemis caught something they would have missed</div>
@@ -1317,12 +1551,12 @@ footer{
 <!-- ─── PROBLEM SECTION — internal trigger amplification ─── -->
 <section class="section problem-section">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head cinematic-reveal">
       <div class="section-eyebrow">// The reality</div>
       <h2 class="section-title">Page managers are flying blind</h2>
       <p class="section-sub">If you're not watching every minute, you're missing things. We did the math on what that costs.</p>
     </div>
-    <div class="problem-grid">
+    <div class="problem-grid cinematic-stagger">
       <div class="problem-card">
         <div class="num">73%</div>
         <div class="lbl">of trouble on Facebook pages starts with one comment thread that nobody catches in time</div>
@@ -1342,13 +1576,13 @@ footer{
 <!-- ─── FEATURES — three variable-reward moments ─── -->
 <section class="section" id="features">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head cinematic-reveal">
       <div class="section-eyebrow">// What Artemis does</div>
       <h2 class="section-title">Three things you'll never miss again</h2>
       <p class="section-sub">Artemis watches your pages all day, every day — so you don't have to.</p>
     </div>
-    <div class="features-grid">
-      <div class="feature-card f-crisis">
+    <div class="features-grid cinematic-stagger">
+      <div class="feature-card tilt-3d f-crisis">
         <div class="icon-wrap">
           <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg>
         </div>
@@ -1357,7 +1591,7 @@ footer{
         <p>When angry comments start piling up on your page, Artemis pings you right away — and tells you how serious it is by comparing to past situations. So you can step in before things get out of hand.</p>
         <div class="ex">"Hey, 23 angry comments just showed up on Drinking Memes — looks like the same trouble as last October. Want a reply ready?"</div>
       </div>
-      <div class="feature-card f-virality">
+      <div class="feature-card tilt-3d f-virality">
         <div class="icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
@@ -1366,7 +1600,7 @@ footer{
         <p>When one of your posts starts spreading faster than usual, Artemis tells you immediately — and shows you exactly how to ride the wave. So you never miss the moment your content is hot.</p>
         <div class="ex">"Your 6PM post is 3× hotter than normal. Share it to your other pages now and reach 9,600 more people."</div>
       </div>
-      <div class="feature-card f-tribe">
+      <div class="feature-card tilt-3d f-tribe">
         <div class="icon-wrap">
           <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M11.65 11.65l3.7 3.7"/></svg>
         </div>
@@ -1382,12 +1616,12 @@ footer{
 <!-- ─── HOW IT WORKS — Hooked: action made simple ─── -->
 <section class="section how-section" id="how">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head cinematic-reveal">
       <div class="section-eyebrow">// Get started in 90 seconds</div>
       <h2 class="section-title">How it works (in plain English)</h2>
       <p class="section-sub">No long forms. No sales calls. You're up and running in less than 2 minutes.</p>
     </div>
-    <div class="how-grid">
+    <div class="how-grid cinematic-stagger">
       <div class="how-step">
         <div class="how-num">1</div>
         <h4>Connect your pages</h4>
@@ -1418,93 +1652,174 @@ footer{
      Travelling pulses make it feel alive. -->
 <section class="section flow-section">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head cinematic-reveal">
       <div class="section-eyebrow">// In one picture</div>
       <h2 class="section-title">Here's what happens every minute</h2>
       <p class="section-sub">A quick look at what Artemis is doing while you're getting on with your day.</p>
     </div>
     <div class="flow-graph">
       <!-- Desktop animated SVG -->
-      <svg class="flow-svg" viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg">
-        <!-- Connecting paths between nodes -->
-        <path id="flow-path-1" class="flow-line" d="M 130 140 Q 230 140 330 140"/>
-        <path id="flow-path-2" class="flow-line" d="M 470 140 Q 570 80 670 80"/>
-        <path id="flow-path-3" class="flow-line" d="M 470 140 Q 570 200 670 200"/>
-        <path id="flow-path-4" class="flow-line" d="M 470 140 Q 570 140 670 140"/>
+            <svg class="flow-svg" viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fg-arte" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#00C4A0" stop-opacity="0.2"/>
+          </linearGradient>
+          <linearGradient id="fg-pages" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.08)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+          </linearGradient>
+          <linearGradient id="fg-crisis" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(229,57,53,0.18)"/>
+            <stop offset="100%" stop-color="rgba(229,57,53,0.06)"/>
+          </linearGradient>
+          <linearGradient id="fg-opp" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(0,196,160,0.18)"/>
+            <stop offset="100%" stop-color="rgba(0,196,160,0.06)"/>
+          </linearGradient>
+          <linearGradient id="fg-time" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(124,92,191,0.22)"/>
+            <stop offset="100%" stop-color="rgba(124,92,191,0.08)"/>
+          </linearGradient>
+          <linearGradient id="path-grad-in" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#00C4A0" stop-opacity="0.2"/>
+            <stop offset="50%" stop-color="#00C4A0" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+          </linearGradient>
+          <linearGradient id="path-grad-out-1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#E53935" stop-opacity="0.6"/>
+          </linearGradient>
+          <linearGradient id="path-grad-out-2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#00C4A0" stop-opacity="0.6"/>
+          </linearGradient>
+          <linearGradient id="path-grad-out-3" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0.5"/>
+          </linearGradient>
+          <filter id="node-shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+            <feOffset dx="0" dy="6" result="offsetblur"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow-arte" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
 
-        <!-- Travelling pulses along the paths -->
-        <circle r="5" class="flow-pulse-dot">
-          <animateMotion dur="3s" repeatCount="indefinite" path="M 130 140 Q 230 140 330 140"/>
+        <!-- Background pulse rings around Artemis (centre) -->
+        <circle cx="500" cy="220" r="80" fill="none" stroke="rgba(124,92,191,0.3)" stroke-width="1.5">
+          <animate attributeName="r" values="60;130;60" dur="4s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.6;0;0.6" dur="4s" repeatCount="indefinite"/>
         </circle>
-        <circle r="5" class="flow-pulse-dot">
-          <animateMotion dur="3s" begin="0.5s" repeatCount="indefinite" path="M 130 140 Q 230 140 330 140"/>
-        </circle>
-        <circle r="5" class="flow-pulse-dot">
-          <animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M 130 140 Q 230 140 330 140"/>
-        </circle>
-        <circle r="5" class="flow-pulse-dot">
-          <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite" path="M 130 140 Q 230 140 330 140"/>
+        <circle cx="500" cy="220" r="80" fill="none" stroke="rgba(0,196,160,0.3)" stroke-width="1.5">
+          <animate attributeName="r" values="60;130;60" dur="4s" begin="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.6;0;0.6" dur="4s" begin="2s" repeatCount="indefinite"/>
         </circle>
 
-        <circle r="4" class="flow-pulse-dot purple">
-          <animateMotion dur="2.5s" begin="1.5s" repeatCount="indefinite" path="M 470 140 Q 570 80 670 80"/>
-        </circle>
-        <circle r="4" class="flow-pulse-dot purple">
-          <animateMotion dur="2.5s" begin="2s" repeatCount="indefinite" path="M 470 140 Q 570 200 670 200"/>
-        </circle>
-        <circle r="4" class="flow-pulse-dot purple">
-          <animateMotion dur="2.5s" begin="1.7s" repeatCount="indefinite" path="M 470 140 Q 570 140 670 140"/>
-        </circle>
+        <!-- Connecting paths -->
+        <path id="flow-path-in" d="M 220 220 Q 320 220 420 220" fill="none" stroke="url(#path-grad-in)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.7"/>
+        <path id="flow-path-1" d="M 580 220 C 660 220 660 80 760 80" fill="none" stroke="url(#path-grad-out-1)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.7"/>
+        <path id="flow-path-2" d="M 580 220 C 660 220 680 220 760 220" fill="none" stroke="url(#path-grad-out-2)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.7"/>
+        <path id="flow-path-3" d="M 580 220 C 660 220 660 360 760 360" fill="none" stroke="url(#path-grad-out-3)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.7"/>
 
-        <!-- Node 1: Your pages -->
-        <g transform="translate(70, 100)">
-          <rect class="flow-node-bg" x="0" y="0" width="120" height="80" rx="14"/>
-          <g transform="translate(60, 28)">
-            <path class="flow-icon" d="M -10 0 a 10 10 0 1 0 20 0 a 10 10 0 1 0 -20 0 M -10 0 h 20" />
+        <!-- Travelling pulses along paths -->
+        <g>
+          <circle r="6" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="3s" repeatCount="indefinite" path="M 220 220 Q 320 220 420 220"/>
+          </circle>
+          <circle r="5" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="3s" begin="0.7s" repeatCount="indefinite" path="M 220 220 Q 320 220 420 220"/>
+          </circle>
+          <circle r="5" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="3s" begin="1.4s" repeatCount="indefinite" path="M 220 220 Q 320 220 420 220"/>
+          </circle>
+          <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="3s" begin="2.1s" repeatCount="indefinite" path="M 220 220 Q 320 220 420 220"/>
+          </circle>
+        </g>
+
+        <g>
+          <circle r="5" fill="#E53935" filter="url(#glow-arte)">
+            <animateMotion dur="2.8s" begin="0.5s" repeatCount="indefinite" path="M 580 220 C 660 220 660 80 760 80"/>
+          </circle>
+          <circle r="4" fill="#E53935" filter="url(#glow-arte)">
+            <animateMotion dur="2.8s" begin="2s" repeatCount="indefinite" path="M 580 220 C 660 220 660 80 760 80"/>
+          </circle>
+          <circle r="5" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="2.8s" begin="1s" repeatCount="indefinite" path="M 580 220 C 660 220 680 220 760 220"/>
+          </circle>
+          <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="2.8s" begin="2.4s" repeatCount="indefinite" path="M 580 220 C 660 220 680 220 760 220"/>
+          </circle>
+          <circle r="5" fill="#7C5CBF" filter="url(#glow-arte)">
+            <animateMotion dur="2.8s" begin="1.5s" repeatCount="indefinite" path="M 580 220 C 660 220 660 360 760 360"/>
+          </circle>
+          <circle r="4" fill="#7C5CBF" filter="url(#glow-arte)">
+            <animateMotion dur="2.8s" begin="2.6s" repeatCount="indefinite" path="M 580 220 C 660 220 660 360 760 360"/>
+          </circle>
+        </g>
+
+        <!-- Node 1: Your pages (left) -->
+        <g transform="translate(60, 160)" filter="url(#node-shadow)">
+          <rect x="0" y="0" width="160" height="120" rx="18" fill="url(#fg-pages)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+          <g transform="translate(80, 38)" stroke="#E4E6EB" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="0" cy="0" r="14"/>
+            <path d="M -14 0 h 28 M 0 -14 a 14 6 0 0 1 0 28 a 14 6 0 0 1 0 -28"/>
           </g>
-          <text class="flow-label" x="60" y="60">Your pages</text>
-          <text class="flow-sublabel" x="60" y="74">posts &amp; comments</text>
+          <text class="flow-label" x="80" y="84">Your pages</text>
+          <text class="flow-sublabel" x="80" y="102">posts &amp; comments</text>
         </g>
 
         <!-- Node 2: Artemis Engine (centre) -->
-        <g transform="translate(330, 90)">
-          <rect class="flow-node-bg arte" x="0" y="0" width="140" height="100" rx="14"/>
-          <g transform="translate(70, 32)">
-            <path class="flow-icon arte-fill" d="M 0 -14 L -3 -3 L -14 0 L -3 3 L 0 14 L 3 3 L 14 0 L 3 -3 Z"/>
+        <g transform="translate(420, 140)" filter="url(#node-shadow)">
+          <rect x="0" y="0" width="160" height="160" rx="22" fill="url(#fg-arte)" stroke="rgba(124,92,191,0.5)" stroke-width="2"/>
+          <g transform="translate(80, 60)">
+            <path d="M 0 -22 L -5 -5 L -22 0 L -5 5 L 0 22 L 5 5 L 22 0 L 5 -5 Z" fill="#7C5CBF" filter="url(#glow-arte)">
+              <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="20s" repeatCount="indefinite"/>
+            </path>
           </g>
-          <text class="flow-label" x="70" y="68">Artemis</text>
-          <text class="flow-sublabel" x="70" y="84">reads · learns · understands</text>
+          <text class="flow-label" x="80" y="116" style="font-size:18px">Artemis</text>
+          <text class="flow-sublabel" x="80" y="136">reads · learns · understands</text>
         </g>
 
-        <!-- Node 3a: Crisis alert (top right) -->
-        <g transform="translate(670, 40)">
-          <rect class="flow-node-bg crisis" x="0" y="0" width="160" height="80" rx="14"/>
-          <g transform="translate(28, 28)">
-            <path class="flow-icon crisis" d="M 0 -10 L 12 8 L -12 8 Z M 0 -3 v 6 M 0 6 v 0.1"/>
+        <!-- Node 3a: Drama spotted (top-right) — y=20 to 140 (height 120) -->
+        <g transform="translate(760, 20)" filter="url(#node-shadow)">
+          <rect x="0" y="0" width="200" height="120" rx="18" fill="url(#fg-crisis)" stroke="rgba(229,57,53,0.5)" stroke-width="1.5"/>
+          <g transform="translate(36, 60)" stroke="#E53935" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 0 -16 L 16 12 L -16 12 Z"/>
+            <path d="M 0 -6 v 8"/>
+            <circle cx="0" cy="8" r="0.8" fill="#E53935"/>
           </g>
-          <text class="flow-label" x="100" y="36" text-anchor="start" style="font-size:13px">Drama spotted</text>
-          <text class="flow-sublabel" x="100" y="54" text-anchor="start">"23 angry comments — go check"</text>
+          <text x="76" y="50" text-anchor="start" fill="#E53935" style="font-size:14px;font-weight:700;font-family:inherit">Drama spotted</text>
+          <text x="76" y="74" text-anchor="start" fill="var(--t2,#B0B3B8)" style="font-size:11px;font-family:inherit">"23 angry comments —</text>
+          <text x="76" y="90" text-anchor="start" fill="var(--t2,#B0B3B8)" style="font-size:11px;font-family:inherit">go check Drinking Memes"</text>
         </g>
 
-        <!-- Node 3b: Viral alert (middle right) -->
-        <g transform="translate(670, 100)">
-          <rect class="flow-node-bg opp" x="0" y="0" width="160" height="80" rx="14"/>
-          <g transform="translate(28, 28)">
-            <path class="flow-icon opp" d="M 4 -10 L -6 4 L 0 4 L -2 12 L 8 -2 L 2 -2 Z" stroke-linejoin="miter"/>
+        <!-- Node 3b: Post going viral (middle-right) — y=160 to 280 -->
+        <g transform="translate(760, 160)" filter="url(#node-shadow)">
+          <rect x="0" y="0" width="200" height="120" rx="18" fill="url(#fg-opp)" stroke="rgba(0,196,160,0.5)" stroke-width="1.5"/>
+          <g transform="translate(36, 60)" stroke="#00C4A0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 6 -16 L -8 4 L 0 4 L -2 16 L 12 -4 L 4 -4 Z" fill="#00C4A0"/>
           </g>
-          <text class="flow-label" x="100" y="36" text-anchor="start" style="font-size:13px">Post going viral</text>
-          <text class="flow-sublabel" x="100" y="54" text-anchor="start">"Share it everywhere now"</text>
+          <text x="76" y="50" text-anchor="start" fill="#00C4A0" style="font-size:14px;font-weight:700;font-family:inherit">Post going viral</text>
+          <text x="76" y="74" text-anchor="start" fill="var(--t2,#B0B3B8)" style="font-size:11px;font-family:inherit">"Kelpie Daily 6PM at 3.2× —</text>
+          <text x="76" y="90" text-anchor="start" fill="var(--t2,#B0B3B8)" style="font-size:11px;font-family:inherit">share to your other pages now"</text>
         </g>
 
-        <!-- Node 3c: Best time alert (bottom right) -->
-        <g transform="translate(670, 160)">
-          <rect class="flow-node-bg arte" x="0" y="0" width="160" height="80" rx="14"/>
-          <g transform="translate(28, 28)">
-            <circle class="flow-icon arte" cx="0" cy="0" r="11"/>
-            <path class="flow-icon arte" d="M 0 -6 v 6 l 4 2"/>
+        <!-- Node 3c: Perfect time to post (bottom-right) — y=300 to 420 -->
+        <g transform="translate(760, 300)" filter="url(#node-shadow)">
+          <rect x="0" y="0" width="200" height="120" rx="18" fill="url(#fg-time)" stroke="rgba(124,92,191,0.5)" stroke-width="1.5"/>
+          <g transform="translate(36, 60)" stroke="#7C5CBF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="0" cy="0" r="14"/>
+            <path d="M 0 -8 v 8 l 6 4"/>
           </g>
-          <text class="flow-label" x="100" y="36" text-anchor="start" style="font-size:13px">Perfect time to post</text>
-          <text class="flow-sublabel" x="100" y="54" text-anchor="start">"Your fans are online now"</text>
+          <text x="76" y="50" text-anchor="start" fill="#7C5CBF" style="font-size:14px;font-weight:700;font-family:inherit">Perfect time to post</text>
+          <text x="76" y="74" text-anchor="start" fill="var(--t2,#B0B3B8)" style="font-size:11px;font-family:inherit">"Tuesday 6PM — your fans</text>
+          <text x="76" y="90" text-anchor="start" fill="var(--t2,#B0B3B8)" style="font-size:11px;font-family:inherit">are 34% more active now"</text>
         </g>
       </svg>
 
@@ -1546,7 +1861,7 @@ footer{
 <!-- ─── ART-E SHOWCASE — the variable reward + investment ─── -->
 <section class="section">
   <div class="container">
-    <div class="arte-showcase">
+    <div class="arte-showcase cinematic-reveal">
       <div class="arte-text">
         <div class="section-eyebrow">// Meet Art-E</div>
         <h2>Meet Art-E — the assistant that <span class="arte-grad">actually does things</span></h2>
@@ -1606,49 +1921,49 @@ footer{
 <!-- ─── TEAM SECTION ─── -->
 <section class="team-section" id="team">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head cinematic-reveal">
       <div class="section-eyebrow">// The team</div>
       <h2 class="section-title">Built by people who get it</h2>
       <p class="section-sub">Social media nerds who got tired of missing things — and a few engineers who built the AI to fix it.</p>
     </div>
-    <div class="team-grid">
-      <div class="team-card">
+    <div class="team-grid cinematic-stagger">
+      <div class="team-card tilt-3d">
         <div class="team-avatar"><img src="team-jill.jpg" alt="Jill Male"/></div>
         <div class="team-name">Jill Male</div>
         <div class="team-role">Co-Founder</div>
         <div class="team-tag">Operations &amp; Growth</div>
       </div>
-      <div class="team-card">
+      <div class="team-card tilt-3d">
         <div class="team-avatar">AM</div>
         <div class="team-name">Alex Male</div>
         <div class="team-role">Founder</div>
         <div class="team-tag">Vision &amp; Product Strategy</div>
       </div>
-      <div class="team-card">
+      <div class="team-card tilt-3d">
         <div class="team-avatar"><img src="team-asad.jpg" alt="Asad Ikram"/></div>
         <div class="team-name">Asad Ikram</div>
         <div class="team-role">CTO &amp; Co-Founder</div>
         <div class="team-tag">Architecture &amp; AI Systems</div>
       </div>
-      <div class="team-card">
+      <div class="team-card tilt-3d">
         <div class="team-avatar"><img src="team-lewis.jpg" alt="Lewis Mulhall"/></div>
         <div class="team-name">Lewis Mulhall</div>
         <div class="team-role">Co-Founder</div>
         <div class="team-tag">Social Media &amp; Partnerships</div>
       </div>
-      <div class="team-card">
+      <div class="team-card tilt-3d">
         <div class="team-avatar"><img src="team-faheem.jpg" alt="Faheem Haider"/></div>
         <div class="team-name">Faheem Haider</div>
         <div class="team-role">Founding Data Engineer</div>
         <div class="team-tag">Data Pipelines &amp; ML Ops</div>
       </div>
-      <div class="team-card">
+      <div class="team-card tilt-3d">
         <div class="team-avatar"><img src="team-rafeh.jpg" alt="Abdul Rafeh"/></div>
         <div class="team-name">Abdul Rafeh</div>
         <div class="team-role">Chief Marketing Officer</div>
         <div class="team-tag">Intelligence &amp; Validation</div>
       </div>
-      <div class="team-card">
+      <div class="team-card tilt-3d">
         <div class="team-avatar"><img src="team-filza.jpg" alt="Syeda Filza Bukhari"/></div>
         <div class="team-name">Syeda Filza Bukhari</div>
         <div class="team-role">Chief Legal Officer</div>
@@ -1777,25 +2092,103 @@ function animateCounter(el, target, suffix, duration){
   }
 })();
 
-/* ─── Scroll-reveal for cards (fade-in-up on enter viewport) ─── */
-(function initScrollReveal(){
+/* ─── CINEMATIC SCROLL ANIMATIONS ─── */
+
+/* Scroll progress bar */
+(function initScrollProgress(){
+  const bar = document.getElementById('scrollProgress');
+  if(!bar) return;
+  let ticking = false;
+  function update(){
+    const h = document.documentElement;
+    const scrolled = h.scrollTop;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (scrolled / max) * 100 : 0;
+    bar.style.width = pct + '%';
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if(!ticking){ requestAnimationFrame(update); ticking = true; }
+  }, {passive:true});
+  update();
+})();
+
+/* Cinematic reveal — adds .in-view class when element enters viewport.
+   The CSS handles the actual animation per class (cinematic-reveal,
+   cinematic-stagger). Once revealed, we unobserve so animations don't
+   re-trigger. */
+(function initCinematicReveal(){
   if(!('IntersectionObserver' in window)) return;
-  const targets = document.querySelectorAll('.feature-card, .team-card, .live-tile, .arte-bullet, .how-step, .problem-card, .mockup-card');
-  targets.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 600ms ease-out, transform 600ms ease-out';
-  });
+  const targets = document.querySelectorAll('.cinematic-reveal, .cinematic-stagger');
+  if(!targets.length) return;
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if(e.isIntersecting){
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
+        e.target.classList.add('in-view');
         obs.unobserve(e.target);
       }
     });
-  }, {threshold: 0.15});
+  }, {threshold: 0.15, rootMargin: '0px 0px -10% 0px'});
   targets.forEach(el => obs.observe(el));
+})();
+
+/* 3D parallax tilt on mouse move (hero mockup + tilt-3d cards).
+   Subtle — max ±5deg rotateX/Y based on cursor position relative to the
+   element. Returns to neutral on mouseleave. */
+(function initTilt3D(){
+  // Hero mockup gets stronger tilt (it's the focal product preview)
+  const heroMockup = document.querySelector('.hero-mockup');
+  if(heroMockup){
+    let raf;
+    heroMockup.addEventListener('mousemove', (e) => {
+      const r = heroMockup.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      const rotY = (x - 0.5) * 8;  // ±4deg
+      const rotX = -(y - 0.5) * 6; // ±3deg
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        heroMockup.style.transform = 'perspective(1500px) rotateX('+rotX+'deg) rotateY('+rotY+'deg)';
+      });
+    });
+    heroMockup.addEventListener('mouseleave', () => {
+      heroMockup.style.transform = 'perspective(1500px) rotateX(0) rotateY(0)';
+    });
+  }
+
+  // Other tilt-3d elements get subtle hover tilt (CSS handles base, JS adds mouse-tracked)
+  document.querySelectorAll('.tilt-3d').forEach(card => {
+    if(card === heroMockup) return;
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      const rotY = (x - 0.5) * 4;
+      const rotX = -(y - 0.5) * 4;
+      card.style.transform = 'translateY(-6px) rotateX('+rotX+'deg) rotateY('+rotY+'deg) scale(1.02)';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+})();
+
+/* Hero floating orbs — gentle parallax with scroll */
+(function initHeroOrbs(){
+  const orbs = document.querySelectorAll('.hero-orb');
+  if(!orbs.length) return;
+  let ticking = false;
+  function update(){
+    const y = window.scrollY;
+    orbs.forEach((orb, i) => {
+      const speed = (i + 1) * 0.15;
+      orb.style.transform = 'translateY(' + (y * speed) + 'px)';
+    });
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if(!ticking){ requestAnimationFrame(update); ticking = true; }
+  }, {passive:true});
 })();
 
 /* Auth state — show user info if signed in */
