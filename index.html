@@ -1659,113 +1659,125 @@ html[data-theme="light"] .live-tile-num{
     </div>
     <div class="flow-graph">
       <!-- Desktop animated SVG -->
-            <svg class="flow-svg" viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg">
+            <svg class="flow-svg" viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 20px 40px rgba(0,0,0,0.3))">
         <defs>
           <linearGradient id="fg-arte" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.3"/>
-            <stop offset="100%" stop-color="#00C4A0" stop-opacity="0.2"/>
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#00C4A0" stop-opacity="0.18"/>
           </linearGradient>
           <linearGradient id="fg-pages" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="rgba(255,255,255,0.08)"/>
+            <stop offset="0%" stop-color="rgba(255,255,255,0.10)"/>
             <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
           </linearGradient>
           <linearGradient id="fg-crisis" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="rgba(229,57,53,0.18)"/>
+            <stop offset="0%" stop-color="rgba(229,57,53,0.22)"/>
             <stop offset="100%" stop-color="rgba(229,57,53,0.06)"/>
           </linearGradient>
           <linearGradient id="fg-opp" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="rgba(0,196,160,0.18)"/>
+            <stop offset="0%" stop-color="rgba(0,196,160,0.22)"/>
             <stop offset="100%" stop-color="rgba(0,196,160,0.06)"/>
           </linearGradient>
           <linearGradient id="fg-time" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="rgba(124,92,191,0.22)"/>
+            <stop offset="0%" stop-color="rgba(124,92,191,0.26)"/>
             <stop offset="100%" stop-color="rgba(124,92,191,0.08)"/>
           </linearGradient>
           <linearGradient id="path-grad-in" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="#00C4A0" stop-opacity="0.2"/>
-            <stop offset="50%" stop-color="#00C4A0" stop-opacity="0.7"/>
             <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0.7"/>
           </linearGradient>
-          <linearGradient id="path-grad-out-1" x1="0" y1="0" x2="1" y2="0">
+          <linearGradient id="path-grad-crisis" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
             <stop offset="100%" stop-color="#E53935" stop-opacity="0.6"/>
           </linearGradient>
-          <linearGradient id="path-grad-out-2" x1="0" y1="0" x2="1" y2="0">
+          <linearGradient id="path-grad-opp" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
             <stop offset="100%" stop-color="#00C4A0" stop-opacity="0.6"/>
           </linearGradient>
-          <linearGradient id="path-grad-out-3" x1="0" y1="0" x2="1" y2="0">
+          <linearGradient id="path-grad-time" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
             <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0.5"/>
           </linearGradient>
-          <filter id="node-shadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
-            <feOffset dx="0" dy="6" result="offsetblur"/>
-            <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+          <filter id="node-shadow-3d" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+            <feOffset dx="0" dy="10" result="offsetblur"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer>
             <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
           <filter id="glow-arte" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="6" result="blur"/>
             <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
+          <filter id="glow-strong" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="10" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
         </defs>
 
-        <!-- Background pulse rings around Artemis (centre) -->
-        <circle cx="500" cy="220" r="80" fill="none" stroke="rgba(124,92,191,0.3)" stroke-width="1.5">
-          <animate attributeName="r" values="60;130;60" dur="4s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.6;0;0.6" dur="4s" repeatCount="indefinite"/>
+        <!-- Three concentric pulse rings around Artemis (centre) -->
+        <circle cx="500" cy="270" r="80" fill="none" stroke="rgba(124,92,191,0.35)" stroke-width="1.5">
+          <animate attributeName="r" values="60;150;60" dur="4s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="4s" repeatCount="indefinite"/>
         </circle>
-        <circle cx="500" cy="220" r="80" fill="none" stroke="rgba(0,196,160,0.3)" stroke-width="1.5">
-          <animate attributeName="r" values="60;130;60" dur="4s" begin="2s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.6;0;0.6" dur="4s" begin="2s" repeatCount="indefinite"/>
+        <circle cx="500" cy="270" r="80" fill="none" stroke="rgba(0,196,160,0.35)" stroke-width="1.5">
+          <animate attributeName="r" values="60;150;60" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="500" cy="270" r="80" fill="none" stroke="rgba(124,92,191,0.35)" stroke-width="1.5">
+          <animate attributeName="r" values="60;150;60" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="4s" begin="2.6s" repeatCount="indefinite"/>
         </circle>
 
-        <!-- Connecting paths -->
-        <path id="flow-path-in" d="M 220 220 Q 320 220 420 220" fill="none" stroke="url(#path-grad-in)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.7"/>
-        <path id="flow-path-1" d="M 580 220 C 660 220 660 80 760 80" fill="none" stroke="url(#path-grad-out-1)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.7"/>
-        <path id="flow-path-2" d="M 580 220 C 660 220 680 220 760 220" fill="none" stroke="url(#path-grad-out-2)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.7"/>
-        <path id="flow-path-3" d="M 580 220 C 660 220 660 360 760 360" fill="none" stroke="url(#path-grad-out-3)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.7"/>
+        <!-- Connecting paths — increased vertical separation: top y=80, mid y=270, bot y=460 -->
+        <path id="flow-path-in" d="M 220 270 Q 320 270 420 270" fill="none" stroke="url(#path-grad-in)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-1" d="M 580 270 C 660 270 660 80 760 80" fill="none" stroke="url(#path-grad-crisis)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-2" d="M 580 270 C 660 270 680 270 760 270" fill="none" stroke="url(#path-grad-opp)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-3" d="M 580 270 C 660 270 660 460 760 460" fill="none" stroke="url(#path-grad-time)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
 
-        <!-- Travelling pulses along paths -->
+        <!-- Travelling pulses on input path (4 staggered teal dots) -->
         <g>
-          <circle r="6" fill="#00C4A0" filter="url(#glow-arte)">
-            <animateMotion dur="3s" repeatCount="indefinite" path="M 220 220 Q 320 220 420 220"/>
+          <circle r="6" fill="#00C4A0" filter="url(#glow-strong)">
+            <animateMotion dur="3s" repeatCount="indefinite" path="M 220 270 Q 320 270 420 270"/>
           </circle>
           <circle r="5" fill="#00C4A0" filter="url(#glow-arte)">
-            <animateMotion dur="3s" begin="0.7s" repeatCount="indefinite" path="M 220 220 Q 320 220 420 220"/>
+            <animateMotion dur="3s" begin="0.7s" repeatCount="indefinite" path="M 220 270 Q 320 270 420 270"/>
           </circle>
           <circle r="5" fill="#00C4A0" filter="url(#glow-arte)">
-            <animateMotion dur="3s" begin="1.4s" repeatCount="indefinite" path="M 220 220 Q 320 220 420 220"/>
+            <animateMotion dur="3s" begin="1.4s" repeatCount="indefinite" path="M 220 270 Q 320 270 420 270"/>
           </circle>
           <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
-            <animateMotion dur="3s" begin="2.1s" repeatCount="indefinite" path="M 220 220 Q 320 220 420 220"/>
+            <animateMotion dur="3s" begin="2.1s" repeatCount="indefinite" path="M 220 270 Q 320 270 420 270"/>
           </circle>
         </g>
 
+        <!-- Travelling pulses on output paths (each path gets 2 dots) -->
         <g>
-          <circle r="5" fill="#E53935" filter="url(#glow-arte)">
-            <animateMotion dur="2.8s" begin="0.5s" repeatCount="indefinite" path="M 580 220 C 660 220 660 80 760 80"/>
+          <circle r="5" fill="#E53935" filter="url(#glow-strong)">
+            <animateMotion dur="2.8s" begin="0.5s" repeatCount="indefinite" path="M 580 270 C 660 270 660 80 760 80"/>
           </circle>
           <circle r="4" fill="#E53935" filter="url(#glow-arte)">
-            <animateMotion dur="2.8s" begin="2s" repeatCount="indefinite" path="M 580 220 C 660 220 660 80 760 80"/>
+            <animateMotion dur="2.8s" begin="1.9s" repeatCount="indefinite" path="M 580 270 C 660 270 660 80 760 80"/>
           </circle>
-          <circle r="5" fill="#00C4A0" filter="url(#glow-arte)">
-            <animateMotion dur="2.8s" begin="1s" repeatCount="indefinite" path="M 580 220 C 660 220 680 220 760 220"/>
+
+          <circle r="5" fill="#00C4A0" filter="url(#glow-strong)">
+            <animateMotion dur="2.8s" begin="1s" repeatCount="indefinite" path="M 580 270 C 660 270 680 270 760 270"/>
           </circle>
           <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
-            <animateMotion dur="2.8s" begin="2.4s" repeatCount="indefinite" path="M 580 220 C 660 220 680 220 760 220"/>
+            <animateMotion dur="2.8s" begin="2.4s" repeatCount="indefinite" path="M 580 270 C 660 270 680 270 760 270"/>
           </circle>
-          <circle r="5" fill="#7C5CBF" filter="url(#glow-arte)">
-            <animateMotion dur="2.8s" begin="1.5s" repeatCount="indefinite" path="M 580 220 C 660 220 660 360 760 360"/>
+
+          <circle r="5" fill="#7C5CBF" filter="url(#glow-strong)">
+            <animateMotion dur="2.8s" begin="1.5s" repeatCount="indefinite" path="M 580 270 C 660 270 660 460 760 460"/>
           </circle>
           <circle r="4" fill="#7C5CBF" filter="url(#glow-arte)">
-            <animateMotion dur="2.8s" begin="2.6s" repeatCount="indefinite" path="M 580 220 C 660 220 660 360 760 360"/>
+            <animateMotion dur="2.8s" begin="2.6s" repeatCount="indefinite" path="M 580 270 C 660 270 660 460 760 460"/>
           </circle>
         </g>
 
-        <!-- Node 1: Your pages (left) -->
-        <g transform="translate(60, 160)" filter="url(#node-shadow)">
-          <rect x="0" y="0" width="160" height="120" rx="18" fill="url(#fg-pages)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <!-- Node 1: Your pages (left, centred at y=270) -->
+        <g transform="translate(60, 210)" filter="url(#node-shadow-3d)">
+          <!-- 3D back-shadow for depth -->
+          <rect x="3" y="3" width="160" height="120" rx="18" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="160" height="120" rx="18" fill="url(#fg-pages)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
           <g transform="translate(80, 38)" stroke="#E4E6EB" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="0" cy="0" r="14"/>
             <path d="M -14 0 h 28 M 0 -14 a 14 6 0 0 1 0 28 a 14 6 0 0 1 0 -28"/>
@@ -1774,11 +1786,13 @@ html[data-theme="light"] .live-tile-num{
           <text class="flow-sublabel" x="80" y="102">posts &amp; comments</text>
         </g>
 
-        <!-- Node 2: Artemis Engine (centre) -->
-        <g transform="translate(420, 140)" filter="url(#node-shadow)">
-          <rect x="0" y="0" width="160" height="160" rx="22" fill="url(#fg-arte)" stroke="rgba(124,92,191,0.5)" stroke-width="2"/>
+        <!-- Node 2: Artemis Engine (centre, y=270) -->
+        <g transform="translate(420, 190)" filter="url(#node-shadow-3d)">
+          <!-- 3D back-shadow -->
+          <rect x="4" y="4" width="160" height="160" rx="22" fill="rgba(0,0,0,0.35)"/>
+          <rect x="0" y="0" width="160" height="160" rx="22" fill="url(#fg-arte)" stroke="rgba(124,92,191,0.6)" stroke-width="2"/>
           <g transform="translate(80, 60)">
-            <path d="M 0 -22 L -5 -5 L -22 0 L -5 5 L 0 22 L 5 5 L 22 0 L 5 -5 Z" fill="#7C5CBF" filter="url(#glow-arte)">
+            <path d="M 0 -22 L -5 -5 L -22 0 L -5 5 L 0 22 L 5 5 L 22 0 L 5 -5 Z" fill="#7C5CBF" filter="url(#glow-strong)">
               <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="20s" repeatCount="indefinite"/>
             </path>
           </g>
@@ -1786,40 +1800,43 @@ html[data-theme="light"] .live-tile-num{
           <text class="flow-sublabel" x="80" y="136">reads · learns · understands</text>
         </g>
 
-        <!-- Node 3a: Drama spotted (top-right) — y=20 to 140 (height 120) -->
-        <g transform="translate(760, 20)" filter="url(#node-shadow)">
-          <rect x="0" y="0" width="200" height="120" rx="18" fill="url(#fg-crisis)" stroke="rgba(229,57,53,0.5)" stroke-width="1.5"/>
+        <!-- Node 3a: Drama spotted (top-right, y=20-140) - well separated from middle -->
+        <g transform="translate(760, 20)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="200" height="120" rx="18" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="200" height="120" rx="18" fill="url(#fg-crisis)" stroke="rgba(229,57,53,0.55)" stroke-width="1.5"/>
           <g transform="translate(36, 60)" stroke="#E53935" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path d="M 0 -16 L 16 12 L -16 12 Z"/>
             <path d="M 0 -6 v 8"/>
-            <circle cx="0" cy="8" r="0.8" fill="#E53935"/>
+            <circle cx="0" cy="9" r="1.2" fill="#E53935"/>
           </g>
-          <text x="76" y="50" text-anchor="start" fill="#E53935" style="font-size:14px;font-weight:700;font-family:inherit">Drama spotted</text>
-          <text x="76" y="74" text-anchor="start" fill="var(--t2,#B0B3B8)" style="font-size:11px;font-family:inherit">"23 angry comments —</text>
-          <text x="76" y="90" text-anchor="start" fill="var(--t2,#B0B3B8)" style="font-size:11px;font-family:inherit">go check Drinking Memes"</text>
+          <text x="76" y="48" text-anchor="start" fill="#E53935" style="font-size:14px;font-weight:700;font-family:inherit">Drama spotted</text>
+          <text x="76" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">"23 angry comments —</text>
+          <text x="76" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">go check Drinking Memes"</text>
         </g>
 
-        <!-- Node 3b: Post going viral (middle-right) — y=160 to 280 -->
-        <g transform="translate(760, 160)" filter="url(#node-shadow)">
-          <rect x="0" y="0" width="200" height="120" rx="18" fill="url(#fg-opp)" stroke="rgba(0,196,160,0.5)" stroke-width="1.5"/>
+        <!-- Node 3b: Post going viral (middle-right, y=210-330) - well separated -->
+        <g transform="translate(760, 210)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="200" height="120" rx="18" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="200" height="120" rx="18" fill="url(#fg-opp)" stroke="rgba(0,196,160,0.55)" stroke-width="1.5"/>
           <g transform="translate(36, 60)" stroke="#00C4A0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path d="M 6 -16 L -8 4 L 0 4 L -2 16 L 12 -4 L 4 -4 Z" fill="#00C4A0"/>
           </g>
-          <text x="76" y="50" text-anchor="start" fill="#00C4A0" style="font-size:14px;font-weight:700;font-family:inherit">Post going viral</text>
-          <text x="76" y="74" text-anchor="start" fill="var(--t2,#B0B3B8)" style="font-size:11px;font-family:inherit">"Kelpie Daily 6PM at 3.2× —</text>
-          <text x="76" y="90" text-anchor="start" fill="var(--t2,#B0B3B8)" style="font-size:11px;font-family:inherit">share to your other pages now"</text>
+          <text x="76" y="48" text-anchor="start" fill="#00C4A0" style="font-size:14px;font-weight:700;font-family:inherit">Post going viral</text>
+          <text x="76" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">"Kelpie Daily 6PM at 3.2× —</text>
+          <text x="76" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">share it everywhere now"</text>
         </g>
 
-        <!-- Node 3c: Perfect time to post (bottom-right) — y=300 to 420 -->
-        <g transform="translate(760, 300)" filter="url(#node-shadow)">
-          <rect x="0" y="0" width="200" height="120" rx="18" fill="url(#fg-time)" stroke="rgba(124,92,191,0.5)" stroke-width="1.5"/>
+        <!-- Node 3c: Perfect time to post (bottom-right, y=400-520) - well separated -->
+        <g transform="translate(760, 400)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="200" height="120" rx="18" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="200" height="120" rx="18" fill="url(#fg-time)" stroke="rgba(124,92,191,0.55)" stroke-width="1.5"/>
           <g transform="translate(36, 60)" stroke="#7C5CBF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="0" cy="0" r="14"/>
             <path d="M 0 -8 v 8 l 6 4"/>
           </g>
-          <text x="76" y="50" text-anchor="start" fill="#7C5CBF" style="font-size:14px;font-weight:700;font-family:inherit">Perfect time to post</text>
-          <text x="76" y="74" text-anchor="start" fill="var(--t2,#B0B3B8)" style="font-size:11px;font-family:inherit">"Tuesday 6PM — your fans</text>
-          <text x="76" y="90" text-anchor="start" fill="var(--t2,#B0B3B8)" style="font-size:11px;font-family:inherit">are 34% more active now"</text>
+          <text x="76" y="48" text-anchor="start" fill="#7C5CBF" style="font-size:14px;font-weight:700;font-family:inherit">Perfect time to post</text>
+          <text x="76" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">"Tuesday 6PM — your fans</text>
+          <text x="76" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">are 34% more active now"</text>
         </g>
       </svg>
 
