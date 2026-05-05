@@ -2482,7 +2482,7 @@ html[data-theme="light"] .hb-metric{
     </div>
     <div class="flow-graph">
       <!-- Desktop animated SVG -->
-            <svg class="flow-svg" viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 20px 40px rgba(0,0,0,0.3))">
+            <svg class="flow-svg" viewBox="0 0 1100 540" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 20px 40px rgba(0,0,0,0.3))">
         <defs>
           <linearGradient id="fg-arte" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.35"/>
@@ -2504,7 +2504,6 @@ html[data-theme="light"] .hb-metric{
             <stop offset="0%" stop-color="rgba(124,92,191,0.26)"/>
             <stop offset="100%" stop-color="rgba(124,92,191,0.08)"/>
           </linearGradient>
-          <!-- New end-node gradients for notification channels -->
           <linearGradient id="fg-email" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="rgba(0,196,160,0.22)"/>
             <stop offset="100%" stop-color="rgba(0,196,160,0.06)"/>
@@ -2521,6 +2520,18 @@ html[data-theme="light"] .hb-metric{
             <stop offset="0%" stop-color="#00C4A0" stop-opacity="0.2"/>
             <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0.7"/>
           </linearGradient>
+          <linearGradient id="path-grad-crisis" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#E53935" stop-opacity="0.6"/>
+          </linearGradient>
+          <linearGradient id="path-grad-opp" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#00C4A0" stop-opacity="0.6"/>
+          </linearGradient>
+          <linearGradient id="path-grad-time" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0.5"/>
+          </linearGradient>
           <linearGradient id="path-grad-email" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
             <stop offset="100%" stop-color="#00C4A0" stop-opacity="0.6"/>
@@ -2533,6 +2544,11 @@ html[data-theme="light"] .hb-metric{
             <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
             <stop offset="100%" stop-color="#25D366" stop-opacity="0.7"/>
           </linearGradient>
+          <radialGradient id="hub-grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.95"/>
+            <stop offset="60%" stop-color="#00C4A0" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0.3"/>
+          </radialGradient>
           <filter id="node-shadow-3d" x="-30%" y="-30%" width="160%" height="160%">
             <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
             <feOffset dx="0" dy="10" result="offsetblur"/>
@@ -2549,70 +2565,121 @@ html[data-theme="light"] .hb-metric{
           </filter>
         </defs>
 
-        <!-- Three concentric pulse rings around Artemis (centre) -->
-        <circle cx="500" cy="270" r="80" fill="none" stroke="rgba(124,92,191,0.35)" stroke-width="1.5">
-          <animate attributeName="r" values="60;150;60" dur="4s" repeatCount="indefinite"/>
+        <!-- Three concentric pulse rings around Artemis (centre at x=300, y=270) -->
+        <circle cx="300" cy="270" r="80" fill="none" stroke="rgba(124,92,191,0.35)" stroke-width="1.5">
+          <animate attributeName="r" values="60;130;60" dur="4s" repeatCount="indefinite"/>
           <animate attributeName="opacity" values="0.7;0;0.7" dur="4s" repeatCount="indefinite"/>
         </circle>
-        <circle cx="500" cy="270" r="80" fill="none" stroke="rgba(0,196,160,0.35)" stroke-width="1.5">
-          <animate attributeName="r" values="60;150;60" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+        <circle cx="300" cy="270" r="80" fill="none" stroke="rgba(0,196,160,0.35)" stroke-width="1.5">
+          <animate attributeName="r" values="60;130;60" dur="4s" begin="1.3s" repeatCount="indefinite"/>
           <animate attributeName="opacity" values="0.7;0;0.7" dur="4s" begin="1.3s" repeatCount="indefinite"/>
         </circle>
-        <circle cx="500" cy="270" r="80" fill="none" stroke="rgba(124,92,191,0.35)" stroke-width="1.5">
-          <animate attributeName="r" values="60;150;60" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+        <circle cx="300" cy="270" r="80" fill="none" stroke="rgba(124,92,191,0.35)" stroke-width="1.5">
+          <animate attributeName="r" values="60;130;60" dur="4s" begin="2.6s" repeatCount="indefinite"/>
           <animate attributeName="opacity" values="0.7;0;0.7" dur="4s" begin="2.6s" repeatCount="indefinite"/>
         </circle>
 
-        <!-- Connecting paths — increased vertical separation: top y=80, mid y=270, bot y=460 -->
-        <path id="flow-path-in" d="M 220 270 Q 320 270 420 270" fill="none" stroke="url(#path-grad-in)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
-        <path id="flow-path-1" d="M 580 270 C 660 270 660 75 740 75" fill="none" stroke="url(#path-grad-email)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
-        <path id="flow-path-2" d="M 580 270 C 660 270 680 270 740 270" fill="none" stroke="url(#path-grad-phone)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
-        <path id="flow-path-3" d="M 580 270 C 660 270 660 465 740 465" fill="none" stroke="url(#path-grad-whatsapp)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <!-- ═══ CONNECTING PATHS ═══ -->
+        <!-- Stage 1: pages → Artemis -->
+        <path id="flow-path-in" d="M 200 270 Q 260 270 300 270" fill="none" stroke="url(#path-grad-in)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
 
-        <!-- Travelling pulses on input path (4 staggered teal dots) -->
+        <!-- Stage 2: Artemis (380, 270) → 3 alerts (440, 135 / 275 / 415) -->
+        <path id="flow-path-a1" d="M 380 270 C 410 270 410 135 440 135" fill="none" stroke="url(#path-grad-crisis)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-a2" d="M 380 270 C 410 270 420 275 440 275" fill="none" stroke="url(#path-grad-opp)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-a3" d="M 380 270 C 410 270 410 415 440 415" fill="none" stroke="url(#path-grad-time)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+
+        <!-- Stage 3: 3 alerts (right edge x=660) → hub at (760, 270) -->
+        <path id="flow-path-h1" d="M 660 135 C 700 135 720 270 760 270" fill="none" stroke="rgba(124,92,191,0.55)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.8"/>
+        <path id="flow-path-h2" d="M 660 275 C 700 275 720 270 760 270" fill="none" stroke="rgba(124,92,191,0.55)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.8"/>
+        <path id="flow-path-h3" d="M 660 415 C 700 415 720 270 760 270" fill="none" stroke="rgba(124,92,191,0.55)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.8"/>
+
+        <!-- Stage 4: hub (760, 270) → 3 channels (820, 135 / 275 / 415) -->
+        <path id="flow-path-c1" d="M 760 270 C 790 270 790 135 820 135" fill="none" stroke="url(#path-grad-email)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-c2" d="M 760 270 C 790 270 800 275 820 275" fill="none" stroke="url(#path-grad-phone)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-c3" d="M 760 270 C 790 270 790 415 820 415" fill="none" stroke="url(#path-grad-whatsapp)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+
+        <!-- ═══ TRAVELLING PULSES ═══ -->
+        <!-- Stage 1: input dots (4 teal, staggered) -->
         <g>
           <circle r="6" fill="#00C4A0" filter="url(#glow-strong)">
-            <animateMotion dur="3s" repeatCount="indefinite" path="M 220 270 Q 320 270 420 270"/>
+            <animateMotion dur="3s" repeatCount="indefinite" path="M 200 270 Q 260 270 300 270"/>
           </circle>
           <circle r="5" fill="#00C4A0" filter="url(#glow-arte)">
-            <animateMotion dur="3s" begin="0.7s" repeatCount="indefinite" path="M 220 270 Q 320 270 420 270"/>
+            <animateMotion dur="3s" begin="0.7s" repeatCount="indefinite" path="M 200 270 Q 260 270 300 270"/>
           </circle>
           <circle r="5" fill="#00C4A0" filter="url(#glow-arte)">
-            <animateMotion dur="3s" begin="1.4s" repeatCount="indefinite" path="M 220 270 Q 320 270 420 270"/>
+            <animateMotion dur="3s" begin="1.4s" repeatCount="indefinite" path="M 200 270 Q 260 270 300 270"/>
           </circle>
           <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
-            <animateMotion dur="3s" begin="2.1s" repeatCount="indefinite" path="M 220 270 Q 320 270 420 270"/>
+            <animateMotion dur="3s" begin="2.1s" repeatCount="indefinite" path="M 200 270 Q 260 270 300 270"/>
           </circle>
         </g>
 
-        <!-- Travelling pulses on output paths (each path gets 2 dots) -->
-        <!-- Top → Email (teal), Middle → Phone (purple), Bottom → WhatsApp (green) -->
+        <!-- Stage 2: Artemis → alerts (3 colored dots, one per path) -->
         <g>
+          <circle r="5" fill="#E53935" filter="url(#glow-strong)">
+            <animateMotion dur="2.4s" begin="0.3s" repeatCount="indefinite" path="M 380 270 C 410 270 410 135 440 135"/>
+          </circle>
+          <circle r="4" fill="#E53935" filter="url(#glow-arte)">
+            <animateMotion dur="2.4s" begin="1.5s" repeatCount="indefinite" path="M 380 270 C 410 270 410 135 440 135"/>
+          </circle>
+
           <circle r="5" fill="#00C4A0" filter="url(#glow-strong)">
-            <animateMotion dur="2.8s" begin="0.5s" repeatCount="indefinite" path="M 580 270 C 660 270 660 75 740 75"/>
+            <animateMotion dur="2.4s" begin="0.6s" repeatCount="indefinite" path="M 380 270 C 410 270 420 275 440 275"/>
           </circle>
           <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
-            <animateMotion dur="2.8s" begin="1.9s" repeatCount="indefinite" path="M 580 270 C 660 270 660 75 740 75"/>
+            <animateMotion dur="2.4s" begin="1.8s" repeatCount="indefinite" path="M 380 270 C 410 270 420 275 440 275"/>
           </circle>
 
           <circle r="5" fill="#7C5CBF" filter="url(#glow-strong)">
-            <animateMotion dur="2.8s" begin="1s" repeatCount="indefinite" path="M 580 270 C 660 270 680 270 740 270"/>
+            <animateMotion dur="2.4s" begin="0.9s" repeatCount="indefinite" path="M 380 270 C 410 270 410 415 440 415"/>
           </circle>
           <circle r="4" fill="#7C5CBF" filter="url(#glow-arte)">
-            <animateMotion dur="2.8s" begin="2.4s" repeatCount="indefinite" path="M 580 270 C 660 270 680 270 740 270"/>
-          </circle>
-
-          <circle r="5" fill="#25D366" filter="url(#glow-strong)">
-            <animateMotion dur="2.8s" begin="1.5s" repeatCount="indefinite" path="M 580 270 C 660 270 660 465 740 465"/>
-          </circle>
-          <circle r="4" fill="#25D366" filter="url(#glow-arte)">
-            <animateMotion dur="2.8s" begin="2.6s" repeatCount="indefinite" path="M 580 270 C 660 270 660 465 740 465"/>
+            <animateMotion dur="2.4s" begin="2.1s" repeatCount="indefinite" path="M 380 270 C 410 270 410 415 440 415"/>
           </circle>
         </g>
 
+        <!-- Stage 3: alerts → hub (3 dots, one per merge path, in their alert color) -->
+        <g>
+          <circle r="4" fill="#E53935" filter="url(#glow-arte)">
+            <animateMotion dur="2.2s" begin="0.5s" repeatCount="indefinite" path="M 660 135 C 700 135 720 270 760 270"/>
+          </circle>
+          <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="2.2s" begin="1.0s" repeatCount="indefinite" path="M 660 275 C 700 275 720 270 760 270"/>
+          </circle>
+          <circle r="4" fill="#7C5CBF" filter="url(#glow-arte)">
+            <animateMotion dur="2.2s" begin="1.5s" repeatCount="indefinite" path="M 660 415 C 700 415 720 270 760 270"/>
+          </circle>
+        </g>
+
+        <!-- Stage 4: hub → channels (3 colored dots in channel colors) -->
+        <g>
+          <circle r="5" fill="#00C4A0" filter="url(#glow-strong)">
+            <animateMotion dur="2.4s" begin="0.4s" repeatCount="indefinite" path="M 760 270 C 790 270 790 135 820 135"/>
+          </circle>
+          <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="2.4s" begin="1.6s" repeatCount="indefinite" path="M 760 270 C 790 270 790 135 820 135"/>
+          </circle>
+
+          <circle r="5" fill="#7C5CBF" filter="url(#glow-strong)">
+            <animateMotion dur="2.4s" begin="0.7s" repeatCount="indefinite" path="M 760 270 C 790 270 800 275 820 275"/>
+          </circle>
+          <circle r="4" fill="#7C5CBF" filter="url(#glow-arte)">
+            <animateMotion dur="2.4s" begin="1.9s" repeatCount="indefinite" path="M 760 270 C 790 270 800 275 820 275"/>
+          </circle>
+
+          <circle r="5" fill="#25D366" filter="url(#glow-strong)">
+            <animateMotion dur="2.4s" begin="1.0s" repeatCount="indefinite" path="M 760 270 C 790 270 790 415 820 415"/>
+          </circle>
+          <circle r="4" fill="#25D366" filter="url(#glow-arte)">
+            <animateMotion dur="2.4s" begin="2.2s" repeatCount="indefinite" path="M 760 270 C 790 270 790 415 820 415"/>
+          </circle>
+        </g>
+
+        <!-- ═══ NODES ═══ -->
+
         <!-- Node 1: Your pages (left, centred at y=270) -->
-        <g transform="translate(60, 210)" filter="url(#node-shadow-3d)">
-          <!-- 3D back-shadow for depth -->
+        <g transform="translate(40, 210)" filter="url(#node-shadow-3d)">
           <rect x="3" y="3" width="160" height="120" rx="18" fill="rgba(0,0,0,0.3)"/>
           <rect x="0" y="0" width="160" height="120" rx="18" fill="url(#fg-pages)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
           <g transform="translate(80, 38)" stroke="#E4E6EB" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -2623,9 +2690,8 @@ html[data-theme="light"] .hb-metric{
           <text class="flow-sublabel" x="80" y="102">posts &amp; comments</text>
         </g>
 
-        <!-- Node 2: Artemis Engine (centre, y=270) -->
-        <g transform="translate(420, 190)" filter="url(#node-shadow-3d)">
-          <!-- 3D back-shadow -->
+        <!-- Node 2: Artemis (centre, y=270) -->
+        <g transform="translate(220, 190)" filter="url(#node-shadow-3d)">
           <rect x="4" y="4" width="160" height="160" rx="22" fill="rgba(0,0,0,0.35)"/>
           <rect x="0" y="0" width="160" height="160" rx="22" fill="url(#fg-arte)" stroke="rgba(124,92,191,0.6)" stroke-width="2"/>
           <g transform="translate(80, 60)">
@@ -2637,47 +2703,102 @@ html[data-theme="light"] .hb-metric{
           <text class="flow-sublabel" x="80" y="136">reads · learns · understands</text>
         </g>
 
-        <!-- Node 3a: Email (top-right) -->
-        <g transform="translate(740, 0)" filter="url(#node-shadow-3d)">
-          <rect x="3" y="3" width="240" height="150" rx="18" fill="rgba(0,0,0,0.3)"/>
-          <rect x="0" y="0" width="240" height="150" rx="18" fill="url(#fg-email)" stroke="rgba(0,196,160,0.55)" stroke-width="1.5"/>
-          <!-- Envelope icon -->
-          <g transform="translate(36, 75)" stroke="#00C4A0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="-18" y="-13" width="36" height="26" rx="3"/>
-            <path d="M -18 -10 L 0 4 L 18 -10"/>
+        <!-- ═══ ALERT CARDS (middle column) — 220×130 ═══ -->
+
+        <!-- Alert 1: Drama spotted (top, centred at y=135) -->
+        <g transform="translate(440, 70)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="220" height="130" rx="16" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="220" height="130" rx="16" fill="url(#fg-crisis)" stroke="rgba(229,57,53,0.55)" stroke-width="1.5"/>
+          <g transform="translate(34, 65)" stroke="#E53935" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 0 -16 L 16 12 L -16 12 Z"/>
+            <path d="M 0 -6 v 8"/>
+            <circle cx="0" cy="9" r="1.4" fill="#E53935"/>
           </g>
-          <text x="76" y="58" text-anchor="start" fill="#00C4A0" style="font-size:15px;font-weight:700;font-family:inherit">Email</text>
-          <text x="76" y="86" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">Daily digest plus</text>
-          <text x="76" y="104" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">urgent alerts</text>
+          <text x="68" y="50" text-anchor="start" fill="#E53935" style="font-size:14px;font-weight:700;font-family:inherit">Drama spotted</text>
+          <text x="68" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">"23 angry comments</text>
+          <text x="68" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">on Drinking Memes"</text>
         </g>
 
-        <!-- Node 3b: Phone push (middle-right) -->
-        <g transform="translate(740, 195)" filter="url(#node-shadow-3d)">
-          <rect x="3" y="3" width="240" height="150" rx="18" fill="rgba(0,0,0,0.3)"/>
-          <rect x="0" y="0" width="240" height="150" rx="18" fill="url(#fg-phone)" stroke="rgba(124,92,191,0.55)" stroke-width="1.5"/>
-          <!-- Phone icon -->
-          <g transform="translate(36, 75)" stroke="#7C5CBF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="-11" y="-19" width="22" height="38" rx="4"/>
-            <line x1="-3" y1="14" x2="3" y2="14"/>
-            <line x1="-7" y1="-15" x2="7" y2="-15"/>
+        <!-- Alert 2: Post going viral (middle, centred at y=275) -->
+        <g transform="translate(440, 210)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="220" height="130" rx="16" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="220" height="130" rx="16" fill="url(#fg-opp)" stroke="rgba(0,196,160,0.55)" stroke-width="1.5"/>
+          <g transform="translate(34, 65)" stroke="#00C4A0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 6 -16 L -8 4 L 0 4 L -2 16 L 12 -4 L 4 -4 Z" fill="#00C4A0"/>
           </g>
-          <text x="76" y="58" text-anchor="start" fill="#7C5CBF" style="font-size:15px;font-weight:700;font-family:inherit">Phone</text>
-          <text x="76" y="86" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">Push notifications</text>
-          <text x="76" y="104" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">the moment it happens</text>
+          <text x="68" y="50" text-anchor="start" fill="#00C4A0" style="font-size:14px;font-weight:700;font-family:inherit">Post going viral</text>
+          <text x="68" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">"6PM post is on fire,</text>
+          <text x="68" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">share to your pages"</text>
         </g>
 
-        <!-- Node 3c: WhatsApp (bottom-right) -->
-        <g transform="translate(740, 390)" filter="url(#node-shadow-3d)">
-          <rect x="3" y="3" width="240" height="150" rx="18" fill="rgba(0,0,0,0.3)"/>
-          <rect x="0" y="0" width="240" height="150" rx="18" fill="url(#fg-whatsapp)" stroke="rgba(37,211,102,0.55)" stroke-width="1.5"/>
-          <!-- WhatsApp chat-bubble icon (simplified) -->
-          <g transform="translate(36, 75)" stroke="#25D366" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M -16 -8 a 16 16 0 1 1 6 14 L -16 14 L -12 4 a 16 16 0 0 1 -4 -12 z"/>
-            <path d="M -5 -2 q 0 6 6 6 q 3 0 4 -2" stroke-width="2"/>
+        <!-- Alert 3: Perfect time to post (bottom, centred at y=415) -->
+        <g transform="translate(440, 350)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="220" height="130" rx="16" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="220" height="130" rx="16" fill="url(#fg-time)" stroke="rgba(124,92,191,0.55)" stroke-width="1.5"/>
+          <g transform="translate(34, 65)" stroke="#7C5CBF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="0" cy="0" r="14"/>
+            <path d="M 0 -8 v 8 l 6 4"/>
           </g>
-          <text x="76" y="58" text-anchor="start" fill="#25D366" style="font-size:15px;font-weight:700;font-family:inherit">WhatsApp</text>
-          <text x="76" y="86" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">Chat with Art-E</text>
-          <text x="76" y="104" text-anchor="start" fill="#B0B3B8" style="font-size:12px;font-family:inherit">like a friend</text>
+          <text x="68" y="50" text-anchor="start" fill="#7C5CBF" style="font-size:14px;font-weight:700;font-family:inherit">Perfect time to post</text>
+          <text x="68" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">"Tuesday 6PM, your fans</text>
+          <text x="68" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">are 34% more active"</text>
+        </g>
+
+        <!-- ═══ HUB MERGE NODE (where all alerts converge) ═══ -->
+        <g>
+          <!-- Outer halo pulse -->
+          <circle cx="760" cy="270" r="32" fill="none" stroke="rgba(124,92,191,0.4)" stroke-width="1.5">
+            <animate attributeName="r" values="22;38;22" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Solid core -->
+          <circle cx="760" cy="270" r="22" fill="url(#hub-grad)" stroke="rgba(124,92,191,0.7)" stroke-width="1.5" filter="url(#glow-arte)"/>
+          <!-- Centre dot -->
+          <circle cx="760" cy="270" r="4" fill="#fff" filter="url(#glow-strong)">
+            <animate attributeName="opacity" values="0.7;1;0.7" dur="1.6s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+
+        <!-- ═══ CHANNEL CARDS (right column) — 220×130 ═══ -->
+
+        <!-- Channel 1: Email (top) -->
+        <g transform="translate(820, 70)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="220" height="130" rx="16" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="220" height="130" rx="16" fill="url(#fg-email)" stroke="rgba(0,196,160,0.55)" stroke-width="1.5"/>
+          <g transform="translate(34, 65)" stroke="#00C4A0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="-16" y="-12" width="32" height="24" rx="3"/>
+            <path d="M -16 -9 L 0 4 L 16 -9"/>
+          </g>
+          <text x="68" y="50" text-anchor="start" fill="#00C4A0" style="font-size:14px;font-weight:700;font-family:inherit">Email</text>
+          <text x="68" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">Daily digest plus</text>
+          <text x="68" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">urgent alerts</text>
+        </g>
+
+        <!-- Channel 2: Phone (middle) -->
+        <g transform="translate(820, 210)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="220" height="130" rx="16" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="220" height="130" rx="16" fill="url(#fg-phone)" stroke="rgba(124,92,191,0.55)" stroke-width="1.5"/>
+          <g transform="translate(34, 65)" stroke="#7C5CBF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="-10" y="-17" width="20" height="34" rx="3"/>
+            <line x1="-3" y1="12" x2="3" y2="12"/>
+            <line x1="-6" y1="-13" x2="6" y2="-13"/>
+          </g>
+          <text x="68" y="50" text-anchor="start" fill="#7C5CBF" style="font-size:14px;font-weight:700;font-family:inherit">Phone</text>
+          <text x="68" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">Push notifications</text>
+          <text x="68" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">the moment it happens</text>
+        </g>
+
+        <!-- Channel 3: WhatsApp (bottom) -->
+        <g transform="translate(820, 350)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="220" height="130" rx="16" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="220" height="130" rx="16" fill="url(#fg-whatsapp)" stroke="rgba(37,211,102,0.55)" stroke-width="1.5"/>
+          <g transform="translate(34, 65)" stroke="#25D366" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M -14 -7 a 14 14 0 1 1 5 12 L -14 12 L -10 4 a 14 14 0 0 1 -4 -11 z"/>
+            <path d="M -4 -2 q 0 5 5 5 q 3 0 4 -2" stroke-width="2"/>
+          </g>
+          <text x="68" y="50" text-anchor="start" fill="#25D366" style="font-size:14px;font-weight:700;font-family:inherit">WhatsApp</text>
+          <text x="68" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">Chat with Art-E</text>
+          <text x="68" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">like a friend</text>
         </g>
       </svg>
 
