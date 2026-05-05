@@ -992,23 +992,229 @@ body{
   z-index:-1;
 }
 
-/* Mobile responsive */
+/* ═══════════════════════════════════════════════════════════ */
+/* MOBILE-FIRST RESPONSIVE STACK — phone, tablet, desktop      */
+/* ═══════════════════════════════════════════════════════════ */
+
+/* Tablet — collapse sidebar text, keep right rail */
 @media(max-width:1280px){
   .app{grid-template-columns:80px 1fr 320px}
   .brand-name,.sidebar-title,.nav-item span,.page-meta,.search{display:none}
   .left-sidebar{padding:16px 8px}
   .nav-item{justify-content:center;padding:8px}
 }
+
+/* Small tablet — drop right rail */
 @media(max-width:980px){
   .app{grid-template-columns:80px 1fr;grid-template-areas:"topnav topnav" "left feed"}
   .right-sidebar{display:none}
 }
+
+/* Phone — full mobile experience */
 @media(max-width:640px){
-  .app{grid-template-columns:1fr;grid-template-areas:"topnav" "feed"}
+  /* Layout: single column, bottom nav */
+  .app{
+    grid-template-columns:1fr;
+    grid-template-areas:"topnav" "feed";
+    grid-template-rows:auto 1fr;
+  }
   .left-sidebar{display:none}
-  .feed-inner{padding:0 12px}
-  .topnav{padding:0 12px}
+  .feed-col{padding:0 0 76px 0}
+  .feed-inner{padding:0 8px;max-width:100%}
+  
+  /* Topnav — compact mobile */
+  .topnav{
+    padding:0 10px;
+    height:54px;
+    grid-area:topnav;
+  }
+  .topnav-spacer{display:none}
   .brand-block{min-width:auto}
+  .brand-mark{width:30px;height:30px}
+  .brand-mark svg{width:30px;height:30px}
+  .search{display:none}
+  .icon-btn{width:34px;height:34px}
+  .icon-btn svg{width:16px;height:16px}
+  .theme-pill{display:none}
+  .user-avatar{width:30px;height:30px;font-size:11px}
+  
+  /* Feed tabs — fixed below topnav */
+  .feed-tabs{
+    position:sticky;top:54px;z-index:40;
+    background:var(--bg);
+    margin:0 -8px 10px -8px;padding:6px 8px;
+    border-bottom:1px solid var(--bdr-soft);
+  }
+  .feed-tab{font-size:12px;padding:8px 6px;gap:5px}
+  .feed-tab svg{width:13px;height:13px}
+  
+  /* Insight posts — full-bleed look on phone */
+  .insight-post{
+    margin:0 -8px 10px -8px;
+    border-radius:0;
+    border-top:1px solid var(--bdr-soft);
+    border-bottom:1px solid var(--bdr-soft);
+  }
+  .insight-post:first-child{border-top:none}
+  .insight-post-head{padding:11px 12px 8px;gap:8px}
+  .insight-post-avatar{width:36px;height:36px;font-size:13px}
+  .insight-post-title{font-size:13.5px}
+  .insight-post-byline{font-size:11px}
+  .insight-post-tag{font-size:9px;padding:2px 7px}
+  .insight-post-body{padding:0 12px 12px;font-size:13.5px;line-height:1.5}
+  .insight-post-image{height:180px}
+  .insight-post-stats{margin:0 12px 10px;padding:10px 8px;gap:4px}
+  .insight-post-stat-val{font-size:15px}
+  .insight-post-stat-lbl{font-size:9px;letter-spacing:0.02em}
+  .insight-post-action{font-size:12px;padding:9px 6px;gap:4px}
+  .insight-post-action svg{width:13px;height:13px}
+  .meme-caption{font-size:15px;padding:24px 12px 10px}
+  
+  /* Composer */
+  .composer-wrap{margin:0 -8px 10px -8px;border-radius:0}
+  .composer-input{font-size:13px}
+  .composer-action{font-size:12px;padding:9px 6px}
+  .composer-action svg{width:13px;height:13px}
+  
+  /* Stories — already horizontally scrollable, just compact */
+  .stories-strip{margin:0 -8px 10px -8px;padding:0 8px}
+  .story-tile{width:90px;height:140px}
+  .story-page-avatar{width:30px;height:30px;font-size:10px}
+  
+  /* Art-E briefing strip */
+  .arte-strip{margin:0 -8px 10px -8px;border-radius:0;font-size:13px;padding:11px 12px}
+  
+  /* Briefing card / reward cards */
+  .card{margin:0 -8px 10px -8px;border-radius:0;border-left:none;border-right:none}
+  .briefing-card{margin:0 -8px 10px -8px;border-radius:0}
+  .alert-banner{margin:0 -8px 10px -8px;border-radius:0;padding:12px}
+  
+  /* MVP rail — 5 caps in a 5-col grid is tight; let it wrap */
+  .mvp-rail{margin:0 -8px 10px -8px;border-radius:0;padding:12px}
+  .mvp-rail-grid{grid-template-columns:repeat(3,1fr)}
+  .mvp-cap{padding:8px 6px}
+  .mvp-cap-name{font-size:11px}
+  .mvp-cap-status{font-size:9px}
+  
+  /* Page-level pages (analytics, advanced, etc.) */
+  .page-header{flex-direction:column;align-items:flex-start;gap:10px}
+  .page-title{font-size:22px}
+  .page-sub{font-size:12px}
+  .page-actions{flex-wrap:wrap;width:100%}
+  .page-actions .btn{flex:1;justify-content:center;min-width:0}
+  .panel{margin-bottom:10px;padding:12px}
+  .panel-title{font-size:14px}
+  .panel-sub{font-size:11px}
+  .stat-tile{padding:14px}
+  .stat-tile .val{font-size:24px}
+  .three-col,.two-col,.four-col{grid-template-columns:1fr;gap:10px}
+  .data-table{font-size:11px}
+  .data-table th,.data-table td{padding:7px 8px}
+  
+  /* Calendar */
+  .cal-grid{grid-template-columns:46px repeat(7,1fr);gap:2px;font-size:10px}
+  .cal-hour-label{font-size:9px;padding:3px 2px}
+  .cal-day-header{padding:5px 2px;font-size:9px}
+  .cal-day-header .day-num{font-size:13px}
+  .cal-cell{aspect-ratio:1.1/1;border-radius:4px}
+  .cal-cell-pct{font-size:8px}
+  .cal-legend{font-size:10px;flex-direction:column;align-items:flex-start;gap:6px}
+  
+  /* Subtabs in analytics — horizontally scrollable */
+  .subtabs{
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;flex-wrap:nowrap;
+  }
+  .subtabs::-webkit-scrollbar{display:none}
+  .subtab{flex-shrink:0;font-size:12px;padding:7px 12px}
+  .subtab svg{width:13px;height:13px}
+  
+  /* Profile sub-tabs */
+  .prof-panel .panel{padding:14px 12px}
+  .settings-row{flex-direction:column;align-items:flex-start;gap:6px}
+  .settings-label{width:auto}
+  
+  /* Drafts / Saved / Reports rows */
+  .draft-row,.saved-row,.report-row,.schedule-row{
+    flex-wrap:wrap;padding:12px;
+  }
+  
+  /* Modal — full-width on mobile */
+  .modal-overlay{padding:0}
+  .modal{
+    width:100%;max-width:none;max-height:90vh;
+    border-radius:14px 14px 0 0;
+    margin:auto 0 0 0;
+  }
+  
+  /* Art-E chat — full-screen on phone */
+  .arte-chat-host{
+    width:100vw !important;height:100vh !important;
+    bottom:0 !important;right:0 !important;
+    border-radius:0 !important;
+  }
+  
+  /* Hide status bar on mobile — bottom nav has the Art-E button instead */
+  .arte-status-bar{display:none !important}
+  
+  /* Hide FAB on mobile — bottom nav has Art-E */
+  .arte-fab,.fab-arte{display:none !important}
+  
+  /* Hint bubble — above bottom nav */
+  .arte-hint-bubble{
+    bottom:80px !important;right:14px !important;
+    max-width:220px;font-size:11.5px;padding:8px 11px;
+    z-index:49;
+  }
+  
+  /* Right rail content displayed inline on mobile would be too much.
+     Surface key bits via the bottom nav. */
+  
+  /* MOBILE BOTTOM NAV — fixed bottom tab bar */
+  .mobile-bottom-nav{
+    display:flex !important;
+    position:fixed;bottom:0;left:0;right:0;z-index:48;
+    background:var(--bg-elev);
+    border-top:1px solid var(--bdr-soft);
+    padding:6px 4px env(safe-area-inset-bottom, 6px);
+    justify-content:space-around;align-items:center;
+    backdrop-filter:blur(10px);
+  }
+  .mb-nav-btn{
+    flex:1;background:transparent;border:none;color:var(--t2);
+    font-family:inherit;font-size:9.5px;font-weight:600;
+    padding:5px 2px;border-radius:8px;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+    transition:color .12s, background .12s;
+  }
+  .mb-nav-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .mb-nav-btn.active{color:var(--teal)}
+  .mb-nav-btn.arte{
+    color:white;
+    background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+    width:46px;height:46px;
+    border-radius:50%;
+    margin-top:-12px;
+    box-shadow:0 4px 14px rgba(124,92,191,0.5);
+  }
+  .mb-nav-btn.arte svg{width:18px;height:18px;fill:white;stroke:white}
+  .mb-nav-btn.arte .mb-nav-lbl{display:none}
+  .mb-nav-btn .badge-dot{
+    position:absolute;top:4px;right:25%;
+    width:8px;height:8px;border-radius:50%;
+    background:var(--crisis);
+  }
+}
+
+/* Show mobile-bottom-nav only on mobile */
+.mobile-bottom-nav{display:none}
+
+/* Tiny phones */
+@media(max-width:380px){
+  .feed-tab{font-size:11px}
+  .insight-post-byline{font-size:10px}
+  .insight-post-stat-val{font-size:14px}
+  .arte-hint-bubble{max-width:170px;font-size:11px}
 }
 
 /* ─── PAGE-LEVEL ENTRANCE ANIMATION ──────────── */
@@ -1046,6 +1252,7 @@ body{
   border:1px solid var(--bdr-soft);
   padding:5px 10px;
   border-radius:9999px;
+  pointer-events:none;
 }
 
 
@@ -2523,6 +2730,131 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}
 }
+
+/* Brand link → admin */
+a.brand-block{transition:opacity .15s}
+a.brand-block:hover{opacity:0.85}
+a.brand-block:hover .brand-mark{transform:scale(1.05)}
+.brand-mark{transition:transform .15s}
+
+/* ─── ART-E AGENT UI (re-injected) ─────────────────────── */
+
+/* Typing dots */
+.typing-dots{display:inline-flex;gap:3px;align-items:center;padding:2px 0}
+.typing-dots span{
+  width:6px;height:6px;border-radius:50%;background:var(--arte-1);opacity:0.4;
+  animation:typingDot 1.2s ease-in-out infinite;
+}
+.typing-dots span:nth-child(2){animation-delay:0.18s}
+.typing-dots span:nth-child(3){animation-delay:0.36s}
+@keyframes typingDot{
+  0%,60%,100%{opacity:0.4;transform:translateY(0)}
+  30%{opacity:1;transform:translateY(-3px)}
+}
+
+/* Agent CTA inside reply bubble */
+.agent-cta{
+  margin-top:10px;padding:8px 10px;
+  background:linear-gradient(90deg, rgba(124,92,191,0.10), rgba(0,196,160,0.08));
+  border:1px solid rgba(124,92,191,0.25);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.agent-cta-text{
+  font-size:11px;color:var(--arte-1);font-weight:600;
+  display:flex;align-items:center;gap:5px;
+  text-transform:uppercase;letter-spacing:0.04em;
+}
+.agent-cta-btn{
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  color:white;border:none;border-radius:9999px;
+  font-size:12px;font-weight:700;
+  padding:6px 14px;cursor:pointer;font-family:inherit;
+  transition:transform .12s, box-shadow .15s;
+  flex-shrink:0;white-space:nowrap;
+}
+.agent-cta-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(124,92,191,0.4)}
+
+/* Agent running pulse */
+.agent-running{
+  display:flex;align-items:center;gap:8px;
+  font-style:italic;color:var(--t2);
+}
+.agent-pulse{
+  width:8px;height:8px;border-radius:50%;background:var(--arte-1);
+  animation:agentPulseAnim 1.2s ease-in-out infinite;
+}
+@keyframes agentPulseAnim{
+  0%,100%{box-shadow:0 0 0 0 rgba(124,92,191,0.5)}
+  50%{box-shadow:0 0 0 8px rgba(124,92,191,0)}
+}
+
+/* Follow-up chips */
+.arte-followup{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.arte-followup-chip{
+  background:var(--bg-input);border:1px solid var(--bdr-soft);
+  color:var(--t2);font-family:inherit;font-size:11.5px;font-weight:600;
+  padding:5px 11px;border-radius:9999px;cursor:pointer;
+  transition:all .12s;
+}
+.arte-followup-chip:hover{background:var(--bg-elev-2);border-color:var(--arte-1);color:var(--t1);transform:translateY(-1px)}
+
+/* Agent search bar at top of chat */
+.arte-agent-bar{
+  padding:8px 12px;
+  background:var(--bg-elev-2);
+  border-bottom:1px solid var(--bdr-soft);
+  flex-shrink:0;
+}
+.arte-agent-search{
+  position:relative;
+  background:var(--bg-input);
+  border:1px solid transparent;
+  border-radius:9999px;
+  padding:7px 10px 7px 36px;
+  display:flex;align-items:center;gap:8px;
+  cursor:text;transition:border-color .15s;
+}
+.arte-agent-search:focus-within{border-color:var(--arte-1)}
+.arte-agent-search-icon{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  width:14px;height:14px;color:var(--arte-1);flex-shrink:0;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.arte-agent-search-icon svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+.arte-agent-search input{
+  flex:1;min-width:0;background:transparent;border:none;color:var(--t1);outline:none;
+  font-family:inherit;font-size:13px;
+}
+.arte-agent-search input::placeholder{color:var(--t3)}
+.arte-agent-shortcut{
+  background:var(--bg-elev);border:1px solid var(--bdr-soft);
+  color:var(--t3);font-size:10px;font-weight:700;
+  padding:2px 6px;border-radius:4px;flex-shrink:0;
+}
+
+/* Quick action chips row — single horizontal scroll */
+.arte-agent-quickrow{
+  display:flex;gap:6px;margin-top:8px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding-bottom:2px;
+}
+.arte-agent-quickrow::-webkit-scrollbar{display:none}
+.arte-agent-quick{
+  flex-shrink:0;white-space:nowrap;
+  background:var(--bg-elev);border:1px solid var(--bdr-soft);
+  color:var(--t2);font-family:inherit;font-size:11px;font-weight:600;
+  padding:4px 10px;border-radius:9999px;cursor:pointer;
+  transition:all .12s;display:inline-flex;align-items:center;gap:4px;
+}
+.arte-agent-quick:hover{background:var(--bg-input);color:var(--arte-1);border-color:var(--arte-1)}
+.arte-agent-quick svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0}
+
+/* Art-E chat sizing — only DISPLAY when .open is added */
+.arte-chat-host{height:560px}
+.arte-chat-host.open{display:flex !important;flex-direction:column;animation:slideUp .3s ease both}
+
 </style>
 </head>
 <body>
@@ -2530,7 +2862,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
 
   <!-- ─── TOP NAV ─────────────────────────── -->
   <header class="topnav">
-    <div class="brand-block">
+    <a href="admin_panel.html" class="brand-block" title="Back to admin panel" style="text-decoration:none;color:inherit;cursor:pointer">
       <div class="brand-mark">
         <svg viewBox="0 0 36 36" fill="none">
           <rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#blg)" stroke-width="2"/>
@@ -2540,7 +2872,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
         </svg>
       </div>
       <div class="brand-name">ARTEMIS</div>
-    </div>
+    </a>
     <input type="text" class="search" placeholder="Search posts, pages, people, topics">
     <div class="topnav-spacer"></div>
 
@@ -3157,7 +3489,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           </div>
           <div class="insight-post-actions">
             <button class="insight-post-action primary" onclick="handleAction('view-page','briefing')"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg> Read full briefing</button>
-            <button class="insight-post-action arte" onclick="openArteChat('Walk me through this morning briefing')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
+            <button class="insight-post-action arte" onclick="openArteChat('Walk me through this morning briefing', {intent:'briefing-explain'})"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
             <button class="insight-post-action" onclick="toast('info','Shared to team')"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Share</button>
           </div>
         </div>
@@ -3187,7 +3519,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           <div class="insight-post-actions">
             <button class="insight-post-action primary" onclick="handleAction('reshare')"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg> Reshare</button>
             <button class="insight-post-action" onclick="handleAction('why-it-worked')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg> Why it worked</button>
-            <button class="insight-post-action arte" onclick="openArteChat('How can I capture more from this viral post?')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
+            <button class="insight-post-action arte" onclick="openArteChat('How can I capture more from this viral Drinking Memes post?', {intent:'reshare-viral'})"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
           </div>
         </div>
 
@@ -3211,7 +3543,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           <div class="insight-post-actions">
             <button class="insight-post-action primary" onclick="handleAction('respond')" style="color:var(--crisis)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Respond now</button>
             <button class="insight-post-action" onclick="handleAction('mute')"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg> Mute 24h</button>
-            <button class="insight-post-action arte" onclick="openArteChat('Help me draft a response to the brand risk')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Draft with Art-E</button>
+            <button class="insight-post-action arte" onclick="openArteChat('Help me respond to the brand risk', {intent:'crisis'})"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Draft with Art-E</button>
           </div>
         </div>
 
@@ -3235,7 +3567,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           <div class="insight-post-actions">
             <button class="insight-post-action primary" onclick="handleAction('connect')"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2M22 11l-3 3 3 3M22 14h-7"/></svg> Connect</button>
             <button class="insight-post-action" onclick="navigateTo('discovery',document.querySelector('[data-page=&quot;discovery&quot;]'))"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> View page</button>
-            <button class="insight-post-action arte" onclick="openArteChat('Tell me more about Fri Night Chaos as a collab')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
+            <button class="insight-post-action arte" onclick="openArteChat('Help me decide on Fri Night Chaos collab', {intent:'collab-fnc'})"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
           </div>
         </div>
 
@@ -3259,7 +3591,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           <div class="insight-post-actions">
             <button class="insight-post-action primary" onclick="handleAction('draft-post')"><svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg> Draft a post</button>
             <button class="insight-post-action" onclick="handleAction('see-trend')"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg> See trend data</button>
-            <button class="insight-post-action arte" onclick="openArteChat('Help me write something for the prison drama trend')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
+            <button class="insight-post-action arte" onclick="openArteChat('Help me ride the prison drama trend', {intent:'trend-uk'})"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
           </div>
         </div>
 
@@ -3283,7 +3615,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           <div class="insight-post-actions">
             <button class="insight-post-action primary" onclick="handleAction('post-now')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Post now</button>
             <button class="insight-post-action" onclick="navigateTo('calendar',null)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Schedule</button>
-            <button class="insight-post-action arte" onclick="openArteChat('What should I post on Prison Biscuit today?')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
+            <button class="insight-post-action arte" onclick="openArteChat('Post for Prison Biscuit today (extend streak)', {intent:'streak'})"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
           </div>
         </div>
 
@@ -3307,7 +3639,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           <div class="insight-post-actions">
             <button class="insight-post-action primary" onclick="handleAction('view-live')"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View live</button>
             <button class="insight-post-action" onclick="handleAction('reshare')"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg> Reshare</button>
-            <button class="insight-post-action arte" onclick="openArteChat('What is driving this sentiment lift?')"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
+            <button class="insight-post-action arte" onclick="openArteChat('Why is Kelpie Daily sentiment up?', {intent:'kelpie-sentiment'})"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>
           </div>
         </div>
 
@@ -3382,7 +3714,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
                 <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
                 Export
               </button>
-              <button class="btn arte" onclick="openArteChat('Explain my analytics this week')">
+              <button class="btn arte" onclick="openArteChat('Explain my numbers', {intent:'explain-numbers'})">
                 <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
                 Ask Art-E
               </button>
@@ -3640,7 +3972,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
                 <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
                 Export full report
               </button>
-              <button class="btn arte" onclick="openArteChat('Walk me through my advanced analytics this week')">
+              <button class="btn arte" onclick="openArteChat('Walk me through my advanced analytics', {intent:'tour-cascade'})">
                 <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
                 Explain with Art-E
               </button>
@@ -3838,7 +4170,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
             </div>
             <div class="page-actions">
               <button class="btn" onclick="toast('info','Filter by niche')"><svg viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54z"/></svg> Filter</button>
-              <button class="btn arte" onclick="openArteChat('Help me prioritise these collab matches')">
+              <button class="btn arte" onclick="openArteChat('Triage my collab matches', {intent:'discovery-triage'})">
                 <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Triage
               </button>
             </div>
@@ -3938,7 +4270,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
               <button class="btn" onclick="toast('info','Filter — All pages')">
                 <svg viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54z"/></svg> All pages
               </button>
-              <button class="btn arte" onclick="openArteChat('Help me triage my inbox')">
+              <button class="btn arte" onclick="openArteChat('Triage my to-do list', {intent:'todo-triage'})">
                 <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Triage with Art-E
               </button>
             </div>
@@ -4024,7 +4356,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
               <div class="page-sub">Asad Ikram · asad@artemisai.co.uk · Pro account</div>
             </div>
             <div class="page-actions">
-              <button class="btn arte" onclick="openArteChat('Help me set up my profile')">
+              <button class="btn arte" onclick="openArteChat('Help me set up my profile', {intent:'config'})">
                 <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
                 Ask Art-E
               </button>
@@ -4293,7 +4625,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
               </div>
               <div style="display:flex;align-items:center;gap:14px">
                 <div style="text-align:center"><div style="font-size:22px;font-weight:800;color:var(--warn)">71</div><div style="font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:0.04em">AI score</div></div>
-                <button class="btn arte" onclick="openArteChat('How can I improve the prison tea draft?')">Improve</button>
+                <button class="btn arte" onclick="openArteChat('Score and improve my drafts', {intent:'score-drafts'})">Improve</button>
                 <button class="btn" onclick="toast('info','Editing draft')">Edit</button>
               </div>
             </div>
@@ -4510,7 +4842,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
                 <option value="uk">UK Jail News</option>
                 <option value="pb">Prison Biscuit</option>
               </select>
-              <button class="btn arte" onclick="openArteChat('Walk me through my best posting windows this week')">
+              <button class="btn arte" onclick="openArteChat('Walk me through my best windows', {intent:'best-windows'})">
                 <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
                 Explain
               </button>
@@ -4701,7 +5033,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
 </button>
 
 <!-- Art-E contextual hint bubble — appears next to FAB suggesting context-aware help -->
-<div class="arte-hint-bubble show" id="arteHintBubble" onclick="openArteChat()">
+<div class="arte-hint-bubble show" id="arteHintBubble" onclick="arteFollowHint()">
   <div class="arte-hint-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
   <div class="arte-hint-text">Want me to draft tomorrow's posts?</div>
   <div class="arte-hint-close" onclick="event.stopPropagation();document.getElementById('arteHintBubble').classList.remove('show')">
@@ -4713,6 +5045,33 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
 <button class="fab-arte" title="Ask Art-E" onclick="openArteChat()">
   <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg>
 </button>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- MOBILE BOTTOM NAV — only visible on phones, replaces sidebar -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<nav class="mobile-bottom-nav">
+  <button class="mb-nav-btn active" data-mb-page="home" onclick="navigateTo('home',document.querySelector('[data-page=&quot;home&quot;]'));mbSelect(this)">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="mb-nav-lbl">Home</span>
+  </button>
+  <button class="mb-nav-btn" data-mb-page="analytics" onclick="navigateTo('analytics',document.querySelector('[data-page=&quot;analytics&quot;]'));mbSelect(this)">
+    <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l3-3 4 4 5-6"/></svg>
+    <span class="mb-nav-lbl">Analytics</span>
+  </button>
+  <button class="mb-nav-btn arte" title="Ask Art-E" onclick="openArteChat()">
+    <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+    <span class="mb-nav-lbl">Art-E</span>
+  </button>
+  <button class="mb-nav-btn" data-mb-page="discovery" onclick="navigateTo('discovery',document.querySelector('[data-page=&quot;discovery&quot;]'));mbSelect(this)">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <span class="mb-nav-lbl">Discover</span>
+  </button>
+  <button class="mb-nav-btn" data-mb-page="inbox" onclick="navigateTo('inbox',document.querySelector('[data-page=&quot;inbox&quot;]'));mbSelect(this)" style="position:relative">
+    <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+    <span class="mb-nav-lbl">To-do</span>
+    <span class="badge-dot"></span>
+  </button>
+</nav>
 
 <!-- Story viewer (Instagram-style) -->
 <div class="story-viewer" id="storyViewer" onclick="if(event.target===this)closeStoryViewer()">
@@ -4762,10 +5121,26 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
   <div class="arte-chat-head">
     <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
     <div>
-      <div class="arte-chat-title">Art-E</div>
-      <div class="arte-chat-sub">● Online · Knows your 5 pages</div>
+      <div class="arte-chat-title">Art-E · Agent</div>
+      <div class="arte-chat-sub">● Ready · Can act on your behalf</div>
     </div>
     <button class="modal-close" onclick="closeArteChat()" style="margin-left:auto"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  </div>
+
+  <!-- Agent bar — search + quick tasks -->
+  <div class="arte-agent-bar">
+    <label class="arte-agent-search">
+      <span class="arte-agent-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+      <input type="text" id="arteAgentSearch" placeholder="Ask Art-E or describe a task…" onkeydown="if(event.key===\'Enter\'){sendArteMsg(this.value);this.value=\'\'}"/>
+      <span class="arte-agent-shortcut">⏎</span>
+    </label>
+    <div class="arte-agent-quickrow">
+      <button class="arte-agent-quick" onclick="sendArteMsg(\'Plan today\\\'s posts\')"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Plan today</button>
+      <button class="arte-agent-quick" onclick="sendArteMsg(\'Triage my to-do list\')"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg> Triage to-do</button>
+      <button class="arte-agent-quick" onclick="sendArteMsg(\'Find me my best windows this week\')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Best windows</button>
+      <button class="arte-agent-quick" onclick="sendArteMsg(\'Draft a post about the prison drama trend\')"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg> Draft post</button>
+      <button class="arte-agent-quick" onclick="sendArteMsg(\'Explain my numbers\')"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg> Explain numbers</button>
+    </div>
   </div>
   <div class="arte-chat-msgs" id="arteChatMsgs">
     <div class="msg arte">
@@ -4823,6 +5198,8 @@ function navigateTo(pageName, navItem){
   }
   // Update contextual Art-E prompt for current page
   updateArteContextHint(pageName);
+  // Re-bind hover hints (new page elements may need them)
+  setTimeout(bindHoverHints, 200);
 }
 
 /* ─── TOASTS ──────────────────────────────────── */
@@ -4855,11 +5232,20 @@ function openModal(title, body, actions){
 function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); }
 
 /* ─── ART-E CHAT ──────────────────────────────────── */
-function openArteChat(prompt){
+function openArteChat(prompt, taskCtx){
+  // taskCtx is an optional object: { type:'reshare', data:{...} }
+  // When provided, Art-E offers to execute the task on the user's behalf.
   document.getElementById('arteChatHost').classList.add('open');
-  if(prompt){ setTimeout(()=>sendArteMsg(prompt), 300); }
+  // Also store pending task context so the reply can render an Agent CTA
+  window._arteTaskCtx = taskCtx || null;
+  if(prompt){
+    setTimeout(()=>sendArteMsg(prompt, taskCtx), 280);
+  }
 }
-function closeArteChat(){ document.getElementById('arteChatHost').classList.remove('open'); }
+function closeArteChat(){
+  document.getElementById('arteChatHost').classList.remove('open');
+  window._arteTaskCtx = null;
+}
 
 function openNotificationHistory(){
   const html = `
@@ -4960,18 +5346,103 @@ function openNotificationHistory(){
   openModal('All notifications', html, '<button class="btn" onclick="toast(\'success\',\'All marked as read\')">Mark all read</button><button class="btn primary" onclick="closeModal()">Close</button>');
 }
 
-function sendArteMsg(text){
+function sendArteMsg(text, taskCtx){
   if(!text || !text.trim()) return;
   const msgs = document.getElementById('arteChatMsgs');
   msgs.insertAdjacentHTML('beforeend',
     `<div class="msg user"><div class="msg-avatar-mini">A</div><div class="msg-bubble">${escapeHtml(text)}</div></div>`);
   msgs.scrollTop = msgs.scrollHeight;
+  taskCtx = taskCtx || window._arteTaskCtx || null;
+  // Show typing indicator
+  msgs.insertAdjacentHTML('beforeend',
+    `<div class="msg arte typing-row" id="arteTyping"><div class="msg-avatar-mini" style="background:linear-gradient(135deg,var(--arte-1),var(--arte-2));color:white"><svg viewBox="0 0 24 24" width="10" height="10" fill="white"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div><div class="msg-bubble"><span class="typing-dots"><span></span><span></span><span></span></span></div></div>`);
+  msgs.scrollTop = msgs.scrollHeight;
   setTimeout(()=>{
-    const reply = arteReply(text);
+    document.getElementById('arteTyping')?.remove();
+    const replyData = arteReply(text, taskCtx);
+    const reply = typeof replyData === 'string' ? {text:replyData} : replyData;
+    let agentCTA = '';
+    if(reply.agentAction){
+      agentCTA = `<div class="agent-cta"><div class="agent-cta-text"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;color:var(--arte-1)"><circle cx="12" cy="12" r="3"/><path d="M3 12h2M19 12h2M12 3v2M12 19v2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4l1.4-1.4M17 7l1.4-1.4"/></svg> I can do this for you</div><button class="agent-cta-btn" onclick="executeAgentTask('${reply.agentAction}', ${JSON.stringify(reply.agentData||{}).replace(/"/g,'&quot;')})">${reply.agentLabel || 'Run it'} ↗</button></div>`;
+    }
+    let chips = '';
+    if(reply.followups && reply.followups.length){
+      chips = `<div class="arte-followup">${reply.followups.map(f=>`<button class="arte-followup-chip" onclick="sendArteMsg('${f.replace(/'/g,"\\'")}')">${f}</button>`).join('')}</div>`;
+    }
     msgs.insertAdjacentHTML('beforeend',
-      `<div class="msg arte"><div class="msg-avatar-mini">A</div><div class="msg-bubble">${reply}</div></div>`);
+      `<div class="msg arte"><div class="msg-avatar-mini" style="background:linear-gradient(135deg,var(--arte-1),var(--arte-2));color:white"><svg viewBox="0 0 24 24" width="10" height="10" fill="white"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div><div class="msg-bubble">${reply.text}${agentCTA}${chips}</div></div>`);
     msgs.scrollTop = msgs.scrollHeight;
-  }, 700);
+    window._arteTaskCtx = null;
+  }, 850);
+}
+
+/* When user clicks the Agent CTA, Art-E performs the task */
+function executeAgentTask(actionId, data){
+  const msgs = document.getElementById('arteChatMsgs');
+  // Quick confirmation + simulated work
+  msgs.insertAdjacentHTML('beforeend',
+    `<div class="msg arte"><div class="msg-avatar-mini" style="background:linear-gradient(135deg,var(--arte-1),var(--arte-2));color:white"><svg viewBox="0 0 24 24" width="10" height="10" fill="white"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div><div class="msg-bubble agent-running"><span class="agent-pulse"></span> Working on it…</div></div>`);
+  msgs.scrollTop = msgs.scrollHeight;
+  setTimeout(()=>{
+    let resultText, sideEffect;
+    switch(actionId){
+      case 'reshare-viral':
+        resultText = '<strong>Done.</strong> Reshared the Drinking Memes 6PM post to your other 4 pages, with each caption rewritten to match that page\'s voice. Estimated extra reach: <strong>+9.6K</strong>. I\'ll watch for the next 60 minutes and ping you if anything trends differently.';
+        sideEffect = ()=>toast('success','Reshared to 4 pages · Art-E running');
+        break;
+      case 'respond-crisis':
+        resultText = '<strong>Sent.</strong> Posted the crisis response template to the Drinking Memes thread. Hidden the 23 flagged comments. I\'ve also updated your auto-mute rule to catch this troll cluster pattern faster next time. Sentiment should recover within 4 hours based on similar past events.';
+        sideEffect = ()=>toast('success','Crisis response sent · 23 comments hidden');
+        break;
+      case 'draft-trend-post':
+        resultText = '<strong>Drafted three options for "prison drama" trend on UK Jail News.</strong> All scored 78–84. Saved to your Drafts. Tap any to edit or post. The 4-hour trend window is still open.';
+        sideEffect = ()=>{ toast('success','3 drafts ready in Drafts'); setTimeout(()=>navigateTo('drafts',null), 1200); };
+        break;
+      case 'connect-collab':
+        resultText = '<strong>Sent.</strong> Connection request fired to Fri Night Chaos with a personalised intro about your audience overlap. Also added them to your Discovery flywheel. They typically reply within 6 hours.';
+        sideEffect = ()=>toast('success','Connection request sent · added to flywheel');
+        break;
+      case 'post-streak':
+        resultText = '<strong>Posted.</strong> Used your highest-scoring draft for Prison Biscuit (76/100, "Inmates rank prison tea quality" — lighter take). Streak now <strong>7 days</strong>. Want me to schedule tomorrow\'s too?';
+        sideEffect = ()=>toast('success','Streak extended to 7 · post live');
+        break;
+      case 'schedule-window':
+        resultText = '<strong>Scheduled.</strong> Drinking Memes will publish in your Tue 6PM window (predicted +34% lift, AI score forecast 89). I\'ll auto-pause the schedule if a brand risk fires within 30 minutes of go-time.';
+        sideEffect = ()=>toast('success','Scheduled · Tue 6PM');
+        break;
+      case 'find-best-time':
+        resultText = '<strong>Found.</strong> Tomorrow your top window is <strong>Tue 6PM</strong> (+34% lift). I\'ve added a calendar reminder for 5:30 PM and prepped a draft. Want me to also queue something for the Thu 8PM secondary slot?';
+        sideEffect = ()=>toast('success','Reminder set · Tue 5:30 PM');
+        break;
+      case 'explain-numbers':
+        resultText = '<strong>Here\'s the read.</strong> Engagement +12% is real (not a vanity metric) — driven by your Tuesday 6PM run. Reach +8.3% lags engagement by ~1 day, which is normal. The one watch-out: posting cadence dipped over the weekend; if you re-up frequency on FN Chaos this week, expect another +6%.';
+        sideEffect = null;
+        break;
+      case 'triage-todo':
+        resultText = '<strong>Done.</strong> I sorted your 7 to-do items by priority + my confidence. Top 3 actually need you (I marked them); the bottom 4 I can handle — say the word.';
+        sideEffect = ()=>{ toast('success','To-do triaged · 3 priority'); setTimeout(()=>navigateTo('inbox',document.querySelector('[data-page="inbox"]')), 1200); };
+        break;
+      case 'open-calendar':
+        resultText = '<strong>Opening Best Times for you.</strong> Your top untaken windows this week: Tue 6PM, Thu 8PM, Sun 10AM.';
+        sideEffect = ()=>setTimeout(()=>navigateTo('calendar',null), 800);
+        break;
+      case 'open-advanced':
+        resultText = '<strong>Opening Advanced Analytics</strong> in a new tab — full virality model, predictions, demographics, network discovery, 50+ charts.';
+        sideEffect = ()=>setTimeout(()=>window.open('mockup_advanced.html','_blank'), 600);
+        break;
+      case 'open-messages':
+        resultText = '<strong>Opening Messages</strong> in a new tab. Your active collab thread (Fri Night Chaos) has 2 unread.';
+        sideEffect = ()=>setTimeout(()=>window.open('mockup_messages.html','_blank'), 600);
+        break;
+      default:
+        resultText = '<strong>Done.</strong> Task complete. Anything else?';
+        sideEffect = ()=>toast('success','Art-E completed the task');
+    }
+    msgs.insertAdjacentHTML('beforeend',
+      `<div class="msg arte"><div class="msg-avatar-mini" style="background:linear-gradient(135deg,var(--arte-1),var(--arte-2));color:white"><svg viewBox="0 0 24 24" width="10" height="10" fill="white"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div><div class="msg-bubble">${resultText}</div></div>`);
+    msgs.scrollTop = msgs.scrollHeight;
+    if(sideEffect) sideEffect();
+  }, 1100);
 }
 
 function switchFeedTab(name){
@@ -5034,19 +5505,237 @@ function switchFeedTab(name){
   }
 }
 
-function arteReply(text){
+function arteReply(text, taskCtx){
   const t = text.toLowerCase();
-  if(t.includes('post today') || t.includes('what should i'))
-    return 'Today I\'d push <strong>Drinking Memes at 6PM</strong> — your audience is +34% more active than weekly average. The pub-culture angle is also peaking right now (+340% mentions). Want me to draft three caption options?';
-  if(t.includes('why') && (t.includes('well') || t.includes('worked')))
-    return 'Your last post hit 91/100 because: (1) the hook landed in the first 8 words, (2) you posted in your top time slot (Tue 6PM), and (3) it was a question CTA — your highest-converting format this month.';
-  if(t.includes('time') || t.includes('when'))
-    return 'For <strong>Drinking Memes</strong>: best times are Tue 6PM (+34%), Thu 8PM (+28%), Sun 10AM (+19%). Avoid Mon mornings — engagement drops 41%.';
-  if(t.includes('analytics') || t.includes('explain') || t.includes('week'))
-    return 'This week: engagement <strong>+12%</strong>, reach <strong>+8.3%</strong>, sentiment stable at 0.82. The big win was Tue 6PM — your top post crossed 12K shares overnight. Virality dipped slightly because you posted less frequently on weekends. Want me to break down by page?';
-  if(t.includes('drinking') || t.includes('kelpie') || t.includes('chaos'))
-    return 'Pulling that page\'s data… Most engaging recent posts: the meme on the 22nd (94 score) and the question CTA on the 19th (89 score). Both used images + question hooks. Pattern is clear: that\'s your formula.';
-  return 'Good question. Based on your 5 pages, the strongest signal I\'m seeing this week is that <strong>question CTAs</strong> are outperforming statement posts by 1.6×. Want me to dig into which questions specifically?';
+  // If a taskCtx was passed (from a button), it overrides the keyword route
+  if(taskCtx && taskCtx.intent){
+    return arteIntentReply(taskCtx);
+  }
+  // Reshare / capture / wave
+  if(t.includes('capture') || t.includes('reshare') || t.includes('viral') && t.includes('more')){
+    return {
+      text: 'Got it — I\'ll cross-post your <strong>Drinking Memes 6PM hit</strong> to Kelpie Daily, Fri Night Chaos, UK Jail News, and Prison Biscuit. Each one gets its own caption rewritten in that page\'s voice. Predicted extra reach: <strong>+9.6K</strong>.',
+      agentAction:'reshare-viral', agentLabel:'Reshare to 4 pages',
+      followups:['Show me the predicted lift per page','Why it worked']
+    };
+  }
+  // Crisis response
+  if(t.includes('crisis') || t.includes('respond') || t.includes('brand risk') || (t.includes('draft') && t.includes('respons'))){
+    return {
+      text: 'Reading the 23 flagged comments now. Same troll-cluster pattern as October. The high-ground response template (78% better than generic) is ready: <em>"Hey everyone — we hear you. Taking the post down while we review. Open to feedback in DMs."</em> I can post it, hide the comments, and tighten the auto-mute rule.',
+      agentAction:'respond-crisis', agentLabel:'Send response + hide comments',
+      followups:['Show me the comments first','What worked last time?']
+    };
+  }
+  // Trend draft
+  if(t.includes('prison drama') || (t.includes('draft') && (t.includes('trend') || t.includes('post')))){
+    return {
+      text: 'On it. <strong>"Prison drama" trend</strong> is at +340% mentions, peak window 4 hours. UK Jail News is your fit. I\'ll write three options — one tabloid, one listicle, one observational — all scored against your audience.',
+      agentAction:'draft-trend-post', agentLabel:'Draft 3 options',
+      followups:['Skip listicle, do meme format','Use my last successful caption']
+    };
+  }
+  // Collab
+  if(t.includes('fri night') || t.includes('collab') || t.includes('connect')){
+    return {
+      text: 'Fri Night Chaos is the strongest match I\'ve seen this month — 94% audience overlap, 7 of their top 10 topics in your top 15. I\'ll draft a personalised intro pointing out the shared audience and your Tue 6PM alignment, then send it.',
+      agentAction:'connect-collab', agentLabel:'Send connection request',
+      followups:['Show me their last 5 posts','Draft a different intro']
+    };
+  }
+  // Streak / Prison Biscuit
+  if(t.includes('streak') || t.includes('prison biscuit') || (t.includes('post') && t.includes('today'))){
+    return {
+      text: 'Your <strong>6-day Prison Biscuit streak</strong> needs one post today to reach 7. Your highest-ranked draft for that page is "Inmates rank prison tea quality" (76/100, lighter take). I can post it now, or schedule it for the 10AM window.',
+      agentAction:'post-streak', agentLabel:'Post the draft now',
+      followups:['Schedule it for 10AM instead','Show me other drafts']
+    };
+  }
+  // Schedule / find best time
+  if(t.includes('schedule') || t.includes('best time') || t.includes('best window') || t.includes('when should')){
+    return {
+      text: 'Your <strong>top untaken windows</strong> this week: Tue 6PM (+34%), Thu 8PM (+28%), Sun 10AM (+19%). Mon 7AM is your worst slot (-41%) — avoid. I can prep a draft for Tue 6PM and queue it.',
+      agentAction:'find-best-time', agentLabel:'Schedule for Tue 6PM',
+      followups:['Show me Thu 8PM','What about weekends?']
+    };
+  }
+  // Numbers / analytics
+  if(t.includes('analytics') || t.includes('explain') || t.includes('numbers') || t.includes('week')){
+    return {
+      text: 'This week: engagement <strong>+12%</strong>, reach <strong>+8.3%</strong>, sentiment stable at 0.82. Big win was Tue 6PM — your top post crossed 12K shares overnight. The wobble is FN Chaos posting cadence dropped weekend-on-weekend. Want me to dig deeper, or open the full Advanced view?',
+      agentAction:'open-advanced', agentLabel:'Open Advanced Analytics',
+      followups:['Break it down by page','Just explain in plain English']
+    };
+  }
+  // Why it worked
+  if(t.includes('why') && (t.includes('well') || t.includes('worked') || t.includes('viral') || t.includes('lift'))){
+    return {
+      text: 'The 6PM Drinking Memes post hit 91/100 because: (1) hook landed in the first 8 words, (2) Tue 6PM is your top slot, (3) question-style CTA — your highest-converting format. Engagement curve crossed the viral threshold at minute 47. Repeat the formula next Tuesday.',
+      followups:['Reshare it across pages','Save to my insights']
+    };
+  }
+  // Triage
+  if(t.includes('triage') || t.includes('to-do') || t.includes('inbox') || t.includes('priority')){
+    return {
+      text: 'Going through your 7 to-do items now. Top 3 need you (crisis response, viral capture, collab reply). Bottom 4 I can handle: thank-you replies, link verifications, alert-rule tuning, and the weekly report email. Want me to clear the bottom 4?',
+      agentAction:'triage-todo', agentLabel:'Clear the bottom 4',
+      followups:['Show me the top 3','What\'s the crisis status?']
+    };
+  }
+  // Calendar / Best times
+  if(t.includes('calendar') || t.includes('best windows')){
+    return {
+      text: 'Opening Best Times. Your week has <strong>11 high-confidence windows</strong>; 8 are still untaken. Tue 6PM is the standout (+34%).',
+      agentAction:'open-calendar', agentLabel:'Open Best Times',
+      followups:['Just queue posts for the top 3','Show me last week instead']
+    };
+  }
+  // Messages
+  if(t.includes('message') || t.includes('chat')){
+    return {
+      text: 'You have 1 active collab thread (Fri Night Chaos, 2 unread) and a #social-team thread that needs your sign-off on the crisis response. Want me to open the messages page or summarise both threads here?',
+      agentAction:'open-messages', agentLabel:'Open Messages',
+      followups:['Summarise the FN Chaos thread','Draft a reply to FN Chaos']
+    };
+  }
+  // Page-specific
+  if(t.includes('drinking memes') || t.includes('drinking ')){
+    return {
+      text: 'Drinking Memes this week: 4 posts, 2 over the viral threshold, sentiment 0.78 (steady). Top format is photo + question CTA. Brand risk is currently active — 23 negative comments on the 6PM post. Want me to handle that first?',
+      agentAction:'respond-crisis', agentLabel:'Handle the brand risk',
+      followups:['Just show me the data','Plan tomorrow\'s post']
+    };
+  }
+  if(t.includes('kelpie')){
+    return {
+      text: 'Kelpie Daily is on a tear — sentiment up 18% overnight, the customer-service post crossed 38K reach. Joy + trust dominate the comments. Best format right now is photo set + observational caption.',
+      followups:['Reshare the top post','Plan the next 3 posts']
+    };
+  }
+  // Page selection
+  if(t.includes('which page') || t.includes('all pages') || t.includes('5 pages')){
+    return {
+      text: 'Here\'s the read across all 5: Kelpie Daily up (+24%), Drinking Memes up (+12%, brand-risk active), Fri Night Chaos down (-8%, posting cadence dropped), UK Jail News steady, Prison Biscuit growing (12 new followers). Where do you want to focus?',
+      followups:['Fix Fri Night Chaos','Plan Drinking Memes today']
+    };
+  }
+  // Story
+  if(t.includes('story') || t.includes('explain this')){
+    return {
+      text: 'This story is showing you a moment Art-E noticed: a post broke its predicted score early, sentiment shifted, or a window opened. Tap "Repost" if it suggests one, or "View live" to see the post in real time.',
+      followups:['Show me what triggered this','Mute stories like this for 24h']
+    };
+  }
+  // Default
+  return {
+    text: 'Good question. Across your 5 pages, the strongest signal this week is <strong>question CTAs outperforming statements 1.6×</strong>. I can break that down by page, draft a question-led post, or move on to whatever you want.',
+    followups:['Draft a question-CTA post','Break it down by page','Open Advanced Analytics']
+  };
+}
+
+/* When a button passes a structured intent, Art-E gives a tight reply with the right Agent action */
+function arteIntentReply(ctx){
+  switch(ctx.intent){
+    case 'briefing-explain':
+      return {
+        text:'Morning briefing summary: <strong>+18% network reach</strong>, Kelpie Daily led, brand risk on Drinking Memes, Tue 6PM window opens at 6:00 sharp. Three actions today: respond to the brand risk, reshare Kelpie\'s viral, post Drinking Memes at 6PM. I can run the first two now.',
+        agentAction:'reshare-viral', agentLabel:'Run the first two for me',
+        followups:['Just the brand risk','Open the full briefing']
+      };
+    case 'reshare-viral':
+      return {
+        text:'I\'ll cross-post the 6PM Drinking Memes hit to your other 4 pages with each caption rewritten. Predicted extra reach <strong>+9.6K</strong>.',
+        agentAction:'reshare-viral', agentLabel:'Reshare now',
+        followups:['Show me the caption rewrites first']
+      };
+    case 'crisis':
+      return {
+        text:'Pattern is the October troll cluster. The high-ground response template will perform 78% better. I can post it, hide the 23 comments, and tighten the auto-mute rule.',
+        agentAction:'respond-crisis', agentLabel:'Send + hide + tighten rule',
+        followups:['Show me the comments first']
+      };
+    case 'collab-fnc':
+      return {
+        text:'Fri Night Chaos · 94% overlap, 7/10 topics shared. I\'ll draft a personalised intro pointing out the shared audience and your Tue 6PM alignment, then fire it.',
+        agentAction:'connect-collab', agentLabel:'Send connection request',
+        followups:['Show me their last 5 posts']
+      };
+    case 'trend-uk':
+      return {
+        text:'"Prison drama" is at +340% mentions with a 4-hour peak window. UK Jail News is your fit. I\'ll draft three options scored against your audience.',
+        agentAction:'draft-trend-post', agentLabel:'Draft 3 options',
+        followups:['Just one tabloid take']
+      };
+    case 'streak':
+      return {
+        text:'Your highest-ranked Prison Biscuit draft is "Inmates rank prison tea quality" (76/100). Posting it now extends your streak to 7.',
+        agentAction:'post-streak', agentLabel:'Post the draft',
+        followups:['Show me other drafts']
+      };
+    case 'kelpie-sentiment':
+      return {
+        text:'+18% sentiment overnight on Kelpie Daily. The "Australian heeler customer service" post crossed 38K reach, joy + trust dominate. I can reshare it across your 4 other pages.',
+        agentAction:'reshare-viral', agentLabel:'Reshare to all pages',
+        followups:['Why did it work?']
+      };
+    case 'config':
+      return {
+        text:'I can walk you through Profile setup. Most people start with: connect Slack for crisis alerts, set timezone, and enable the daily morning briefing.',
+        followups:['Connect Slack','Set my timezone','Enable morning briefing']
+      };
+    case 'tour-cascade':
+      return {
+        text:'The cascade view shows how your viral post hopped from your page → first 50 fans → super sharers → their networks → the FB algorithm. The bottleneck is usually Step 2 (super sharers); your share-multiplier on the 6PM post was 3.4×.',
+        agentAction:'open-advanced', agentLabel:'Open Advanced Analytics',
+        followups:['What\'s a super sharer?']
+      };
+    case 'discovery-triage':
+      return {
+        text:'You have 9 collab matches on the flywheel. The top three by overlap × momentum: Fri Night Chaos (94%, hot), Northern Banter (86%, warm), Cocktail Confessions (81%, fresh). Connect with Fri Night Chaos first — they\'re online now.',
+        agentAction:'connect-collab', agentLabel:'Connect with Fri Night Chaos',
+        followups:['Show me Northern Banter','Pass on all three']
+      };
+    case 'todo-triage':
+      return {
+        text:'Sorted. Top 3 need you (crisis response, viral capture, collab reply). Bottom 4 I can handle: thank-you replies, link verifications, alert-rule tuning, weekly report email.',
+        agentAction:'triage-todo', agentLabel:'Clear the bottom 4',
+        followups:['Show me the top 3']
+      };
+    case 'score-drafts':
+      return {
+        text:'Re-scored your 3 drafts: <strong>Friday plans (89)</strong>, <strong>Kelpie Bunnings (82)</strong>, <strong>Prison tea (71)</strong>. The prison-tea one needs work — the hook is buried. I can rewrite it.',
+        agentAction:'draft-trend-post', agentLabel:'Rewrite the weak one',
+        followups:['What\'s wrong with the prison tea draft?']
+      };
+    case 'saved-insights':
+      return {
+        text:'Surfacing your 7 saved insights. The most relevant right now: <strong>Question CTAs lift virality 1.6×</strong> — your 6PM post used this. Want me to lift more from your archive?',
+        followups:['Tell me the top 3 saved insights']
+      };
+    case 'reports-custom':
+      return {
+        text:'I can generate a custom report. Most useful right now: a "this week vs last week" comparison highlighting the +12% engagement and the FN Chaos drop. ETA 30 seconds, sent to your email.',
+        agentAction:'open-advanced', agentLabel:'Generate report',
+        followups:['Make it monthly instead']
+      };
+    case 'best-windows':
+      return {
+        text:'Top untaken windows: <strong>Tue 6PM (+34%)</strong>, Thu 8PM (+28%), Sun 10AM (+19%). I can queue posts for all three using your highest-scoring drafts.',
+        agentAction:'find-best-time', agentLabel:'Queue all three',
+        followups:['Just Tue 6PM']
+      };
+    case 'story-explain':
+      return {
+        text:'This story shows: <strong>'+(ctx.title||'an Art-E moment')+'</strong>. The trigger was '+(ctx.trigger||'a model pattern')+'. The recommended next action is the one shown in the story button.',
+        agentAction: ctx.agentAction || null, agentLabel: ctx.agentLabel || null,
+        followups:['Why does this matter?','Mute stories like this']
+      };
+    default:
+      return {
+        text:'Got it — what would you like me to do about it?',
+        followups:['Tell me more','Just show me the data']
+      };
+  }
 }
 function escapeHtml(s){ return s.replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]); }
 
@@ -5260,7 +5949,12 @@ function openStoryByIndex(i){
     const sv = a.svg ? `<svg viewBox="0 0 24 24" fill="currentColor" stroke="none">${a.svg}</svg>` : '';
     return `<button class="${cls}" onclick="closeStoryViewer();handleAction('${a.act}')">${sv}${a.label}</button>`;
   }).join('');
-  const arteBtnHtml = `<button class="story-viewer-btn arte" onclick="closeStoryViewer();openArteChat('Tell me more about: ${s.headline}')"><svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E</button>`;
+  const intent = (s.mvp||'').toLowerCase().includes('virality') ? 'reshare-viral'
+              : (s.mvp||'').toLowerCase().includes('crisis') ? 'crisis'
+              : (s.mvp||'').toLowerCase().includes('match') ? 'collab-fnc'
+              : (s.mvp||'').toLowerCase().includes('trend') ? 'trend-uk'
+              : 'story-explain';
+  const arteBtnHtml = `<button class="story-viewer-btn arte" onclick="closeStoryViewer();openArteChat('Help me with: ${s.headline.replace(/'/g, '&apos;')}', {intent:'${intent}', title:'${s.headline.replace(/'/g, '&apos;')}', trigger:'${(s.mvp||'').replace(/'/g, '&apos;')}'})"><svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask Art-E to handle this</button>`;
   document.getElementById('svActions').innerHTML = actionsHtml + arteBtnHtml;
   // progress bars
   const prog = document.getElementById('storyProgress');
@@ -5276,14 +5970,14 @@ function openStoryByIndex(i){
 function openStoryViewer(idx){
   document.getElementById('storyViewer').classList.add('open');
   openStoryByIndex(idx);
-  // Update Art-E hint to story-specific
-  const bubble = document.getElementById('arteHintBubble');
-  if(bubble){
-    bubble.querySelector('.arte-hint-text').textContent = 'Let me explain this story';
-    bubble.classList.remove('show');
-    void bubble.offsetWidth;
-    bubble.classList.add('show');
-  }
+  const s = STORIES_DATA[idx];
+  // Update Art-E hint to be story-specific and clickable
+  const intent = (s.mvp||'').toLowerCase().includes('virality') ? 'reshare-viral'
+              : (s.mvp||'').toLowerCase().includes('crisis') ? 'crisis'
+              : (s.mvp||'').toLowerCase().includes('match') ? 'collab-fnc'
+              : (s.mvp||'').toLowerCase().includes('trend') ? 'trend-uk'
+              : 'story-explain';
+  setBubbleHint('Let me handle this for you', 'Help me with: '+s.headline, intent);
 }
 function closeStoryViewer(){
   document.getElementById('storyViewer').classList.remove('open');
@@ -5581,6 +6275,96 @@ function updateArteContextHint(pageName){
     bubble.classList.remove('show');
     void bubble.offsetWidth;
     bubble.classList.add('show');
+  }
+}
+
+
+
+
+
+/* Mobile bottom nav state */
+function mbSelect(el){
+  document.querySelectorAll('.mb-nav-btn').forEach(b=>b.classList.remove('active'));
+  if(el && !el.classList.contains('arte')) el.classList.add('active');
+}
+/* ─── REAL-TIME ART-E HOVER HINTS ───────────────────────────── */
+/* When user hovers different surfaces, the Art-E bubble swaps to a context-relevant hint.
+   When user clicks the bubble, the hint becomes the prompt sent to Art-E (with intent context). */
+
+const HOVER_HINTS = [
+  {sel:'.insight-post:has(.insight-post-tag.crisis)', hint:'Want me to handle the brand risk?', intent:'crisis', prompt:'Help me respond to the brand risk'},
+  {sel:'.insight-post:has(.insight-post-tag.opp)',    hint:'Should I reshare this for you?',     intent:'reshare-viral', prompt:'Reshare this viral post for me'},
+  {sel:'.insight-post:has(.insight-post-tag.briefing)', hint:'Want me to walk through this briefing?', intent:'briefing-explain', prompt:'Walk me through this briefing'},
+  {sel:'.insight-post:has(.insight-post-tag.match)',  hint:'Want me to send the connection request?', intent:'collab-fnc', prompt:'Send the connection to Fri Night Chaos'},
+  {sel:'.insight-post:has(.insight-post-tag.warn)',   hint:'Want me to draft for this trend?', intent:'trend-uk', prompt:'Draft a post for the trending topic'},
+  {sel:'[data-page-id="dm"]',     hint:'Plan today for Drinking Memes?', prompt:'Plan today for Drinking Memes'},
+  {sel:'[data-page-id="kd"]',     hint:'Reshare Kelpie Daily\'s viral?', intent:'kelpie-sentiment', prompt:'Help me capture more from Kelpie'},
+  {sel:'[data-page-id="fn"]',     hint:'Help me fix Fri Night Chaos?', prompt:'Why is Fri Night Chaos performing poorly?'},
+  {sel:'[data-page-id="uk"]',     hint:'Want to ride the prison drama trend?', intent:'trend-uk', prompt:'Help me on UK Jail News today'},
+  {sel:'[data-page-id="pb"]',     hint:'Extend your Prison Biscuit streak?', intent:'streak', prompt:'Help me extend my streak'},
+  {sel:'[data-quick="drafts"]',   hint:'Want me to score your drafts?', intent:'score-drafts', prompt:'Score my drafts'},
+  {sel:'[data-quick="calendar"]', hint:'Plan posts in your top windows?', intent:'best-windows', prompt:'Find my best windows'},
+  {sel:'[data-quick="reports"]',  hint:'Generate a custom report?', intent:'reports-custom', prompt:'Generate me a custom report'},
+  {sel:'[data-quick="saved"]',    hint:'Surface insights you forgot?', intent:'saved-insights', prompt:'Surface my saved insights'},
+  {sel:'[data-page="discovery"]', hint:'Triage your collab matches?', intent:'discovery-triage', prompt:'Triage my collab matches'},
+  {sel:'[data-page="inbox"]',     hint:'Triage your to-do list?', intent:'todo-triage', prompt:'Triage my to-do list'},
+  {sel:'[data-page="analytics"]', hint:'Explain your numbers in plain English?', intent:'explain-numbers', prompt:'Explain my numbers'},
+  {sel:'[data-page="advanced"]',  hint:'Walk through the cascade analysis?', intent:'tour-cascade', prompt:'Walk me through Advanced Analytics'},
+  {sel:'.story-tile',             hint:'Let me explain this story?', intent:'story-explain', prompt:'Explain this story'},
+  {sel:'.user-avatar',            hint:'Help with profile setup?', intent:'config', prompt:'Help me set up my profile'},
+  {sel:'.search',                 hint:'Search your data with Art-E?', prompt:'Search my data'},
+  {sel:'.icon-btn[title="Notifications"]',   hint:'Triage your notifications?', intent:'todo-triage', prompt:'Triage my notifications'},
+  {sel:'.icon-btn[title="Direct messages"]', hint:'Summarise your active threads?', prompt:'Summarise my active message threads'}
+];
+
+let _hoverTimer = null;
+let _activeHint = null; // {prompt, intent}
+
+function setBubbleHint(text, prompt, intent){
+  const bubble = document.getElementById('arteHintBubble');
+  if(!bubble) return;
+  const txt = bubble.querySelector('.arte-hint-text');
+  if(txt) txt.textContent = text;
+  _activeHint = {prompt, intent};
+  bubble.dataset.live = '1';
+  // Re-pulse
+  bubble.classList.remove('show');
+  void bubble.offsetWidth;
+  bubble.classList.add('show');
+}
+
+function bindHoverHints(){
+  HOVER_HINTS.forEach(h => {
+    let nodes;
+    try { nodes = document.querySelectorAll(h.sel); } catch(e) { return; }
+    nodes.forEach(node => {
+      if(node._arteBound) return;
+      node._arteBound = true;
+      node.addEventListener('mouseenter', () => {
+        if(_hoverTimer) clearTimeout(_hoverTimer);
+        _hoverTimer = setTimeout(() => {
+          setBubbleHint(h.hint, h.prompt, h.intent);
+        }, 220);
+      });
+      node.addEventListener('mouseleave', () => {
+        if(_hoverTimer) clearTimeout(_hoverTimer);
+      });
+    });
+  });
+}
+
+// Re-bind on every page nav (new elements may appear)
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(bindHoverHints, 600);
+});
+
+/* When user clicks the hint bubble, route through Art-E with the hover\'s context */
+function arteFollowHint(){
+  if(_activeHint && _activeHint.prompt){
+    const ctx = _activeHint.intent ? {intent:_activeHint.intent} : null;
+    openArteChat(_activeHint.prompt, ctx);
+  } else {
+    openArteChat();
   }
 }
 

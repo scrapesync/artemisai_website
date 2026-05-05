@@ -329,6 +329,7 @@ html[data-theme="light"] .cascade-host{background:var(--bg-input)}
   <button class="section-nav-chip" data-jump="cascade">Cascade & Reach</button>
   <button class="section-nav-chip" data-jump="audience">Audience Clusters</button>
   <button class="section-nav-chip" data-jump="demographics">Demographics</button>
+  <button class="section-nav-chip" data-jump="galaxy">Orbital Graphs</button>
   <button class="section-nav-chip" data-jump="discovery">Network Discovery</button>
   <button class="section-nav-chip" data-jump="ai-activity">AI Activity</button>
   <button class="section-nav-chip" data-jump="raw">Raw Data</button>
@@ -803,6 +804,101 @@ html[data-theme="light"] .cascade-host{background:var(--bg-input)}
     </div>
   </div>
 
+  
+  <!-- ════ ORBITAL & NETWORK GRAPHS ════ -->
+  <div class="section" id="sec-galaxy">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">
+          <span class="section-title-icon" style="background:var(--arte-bg);color:var(--arte-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="6"/></svg></span>
+          Orbital & Network Graphs
+        </h2>
+        <div class="section-sub">Page constellation, collab flywheel, post cascade — visual data exploration</div>
+      </div>
+    </div>
+
+    <div class="insight-callout">
+      <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+      <div class="insight-callout-text">Your <strong>5-page constellation</strong> orbits at the centre; <strong>4 active collabs</strong> sit in the inner ring; <strong>11 prospects</strong> in the outer ring. The strongest pull right now is <strong>Fri Night Chaos</strong> at 94% gravitational match.</div>
+    </div>
+
+    <!-- Page Constellation (orbital/planet view) -->
+    <div class="panel" style="padding:0;overflow:hidden">
+      <div class="panel-header" style="padding:16px 16px 0">
+        <div><div class="panel-title">Page Constellation</div><div class="panel-sub">Your 5 pages orbit the centre · ring distance = engagement velocity</div></div>
+        <span class="panel-tag">Live</span>
+      </div>
+      <div class="cascade-host" style="height:480px;background:radial-gradient(ellipse at center, rgba(124,92,191,0.06), transparent 70%)">
+        <svg id="constellationSvg" viewBox="0 0 800 480" style="width:100%;height:100%"></svg>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <!-- Collaboration Flywheel — orbital -->
+      <div class="panel" style="padding:0;overflow:hidden">
+        <div class="panel-header" style="padding:16px 16px 0">
+          <div><div class="panel-title">Collaboration Flywheel</div><div class="panel-sub">Active collabs orbit · ring = momentum strength</div></div>
+        </div>
+        <div class="cascade-host" style="height:380px;background:radial-gradient(circle at center, rgba(0,196,160,0.06), transparent 70%)">
+          <svg id="flywheelSvg" viewBox="0 0 500 380" style="width:100%;height:100%"></svg>
+        </div>
+      </div>
+
+      <!-- Page Network — force-directed -->
+      <div class="panel" style="padding:0;overflow:hidden">
+        <div class="panel-header" style="padding:16px 16px 0">
+          <div><div class="panel-title">Audience Connection Network</div><div class="panel-sub">Force-directed · edge thickness = overlap %</div></div>
+        </div>
+        <div class="cascade-host" style="height:380px">
+          <svg id="networkSvg" viewBox="0 0 500 380" style="width:100%;height:100%"></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post Cascade Graph -->
+    <div class="panel" style="padding:0;overflow:hidden">
+      <div class="panel-header" style="padding:16px 16px 0">
+        <div><div class="panel-title">Post Cascade Graph</div><div class="panel-sub">How your last viral post propagated · each node = a sharer · edge = direct share</div></div>
+        <span class="panel-tag">Drinking Memes 6PM</span>
+      </div>
+      <div class="cascade-host" style="height:420px">
+        <svg id="postCascadeSvg" viewBox="0 0 800 420" style="width:100%;height:100%"></svg>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <!-- Topic Galaxy (TF-IDF) -->
+      <div class="panel" style="padding:0;overflow:hidden">
+        <div class="panel-header" style="padding:16px 16px 0">
+          <div><div class="panel-title">Topic Galaxy</div><div class="panel-sub">TF-IDF clusters · circle size = volume, distance = topic similarity</div></div>
+        </div>
+        <div class="cascade-host" style="height:380px;background:radial-gradient(ellipse at center, rgba(96,165,250,0.04), transparent 70%)">
+          <svg id="topicGalaxySvg" viewBox="0 0 500 380" style="width:100%;height:100%"></svg>
+        </div>
+      </div>
+
+      <!-- Sentiment Solar System -->
+      <div class="panel" style="padding:0;overflow:hidden">
+        <div class="panel-header" style="padding:16px 16px 0">
+          <div><div class="panel-title">Sentiment Solar System</div><div class="panel-sub">Emotion clusters orbit the post · planet size = comment count</div></div>
+        </div>
+        <div class="cascade-host" style="height:380px;background:radial-gradient(circle at center, rgba(245,158,11,0.05), transparent 70%)">
+          <svg id="sentimentSolarSvg" viewBox="0 0 500 380" style="width:100%;height:100%"></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comment Network -->
+    <div class="panel" style="padding:0;overflow:hidden">
+      <div class="panel-header" style="padding:16px 16px 0">
+        <div><div class="panel-title">Commenter Influence Network</div><div class="panel-sub">Who replies to whom · biggest nodes = super sharers · red = flagged</div></div>
+      </div>
+      <div class="cascade-host" style="height:420px">
+        <svg id="commenterNetSvg" viewBox="0 0 800 420" style="width:100%;height:100%"></svg>
+      </div>
+    </div>
+  </div>
+
   <!-- ════ NETWORK DISCOVERY ════ -->
   <div class="section" id="sec-discovery">
     <div class="section-header">
@@ -968,7 +1064,7 @@ document.querySelectorAll('[data-jump]').forEach(chip=>{
   });
 });
 // Update chip active state on scroll
-const sections = ['overview','virality','predictions','patterns','timing','cascade','audience','demographics','discovery','ai-activity','raw'];
+const sections = ['overview','virality','predictions','patterns','timing','cascade','audience','demographics','galaxy','discovery','ai-activity','raw'];
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
@@ -1417,6 +1513,335 @@ function renderAll(){
 
 }
 
+
+
+/* ─── ORBITAL & NETWORK SVG RENDERERS ───────────────────── */
+
+function renderConstellation(){
+  const svg = document.getElementById('constellationSvg');
+  if(!svg) return;
+  const cx = 400, cy = 240;
+  // Orbit rings
+  let html = '';
+  [80, 140, 200, 270].forEach(r => {
+    html += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(124,92,191,0.15)" stroke-dasharray="2 4"/>`;
+  });
+  // Centre — Brand
+  html += `
+    <defs>
+      <radialGradient id="brandGlow"><stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.6"/><stop offset="100%" stop-color="#7C5CBF" stop-opacity="0"/></radialGradient>
+      <radialGradient id="dmGlow"><stop offset="0%" stop-color="#FBBF24" stop-opacity="0.5"/><stop offset="100%" stop-color="#FBBF24" stop-opacity="0"/></radialGradient>
+      <radialGradient id="kdGlow"><stop offset="0%" stop-color="#22C55E" stop-opacity="0.5"/><stop offset="100%" stop-color="#22C55E" stop-opacity="0"/></radialGradient>
+      <radialGradient id="fnGlow"><stop offset="0%" stop-color="#60A5FA" stop-opacity="0.5"/><stop offset="100%" stop-color="#60A5FA" stop-opacity="0"/></radialGradient>
+    </defs>
+    <circle cx="${cx}" cy="${cy}" r="60" fill="url(#brandGlow)"/>
+    <circle cx="${cx}" cy="${cy}" r="32" fill="#7C5CBF"/>
+    <text x="${cx}" y="${cy+5}" text-anchor="middle" fill="white" font-size="13" font-weight="800">YOU</text>
+    <text x="${cx}" y="${cy+22}" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="10">5 pages</text>
+  `;
+  // 5 pages on inner orbit (r=80)
+  const pages = [
+    {name:'DM', label:'Drinking Memes', color:'#FBBF24', glow:'dmGlow', angle:-90, r:80},
+    {name:'KD', label:'Kelpie Daily',   color:'#22C55E', glow:'kdGlow', angle:-18, r:80},
+    {name:'FN', label:'Fri Night',      color:'#60A5FA', glow:'fnGlow', angle:54,  r:80},
+    {name:'UK', label:'UK Jail News',   color:'#A78BFA', glow:null,     angle:126, r:80},
+    {name:'PB', label:'Prison Biscuit', color:'#00C4A0', glow:null,     angle:198, r:80}
+  ];
+  pages.forEach(p => {
+    const x = cx + p.r*Math.cos(p.angle*Math.PI/180);
+    const y = cy + p.r*Math.sin(p.angle*Math.PI/180);
+    if(p.glow) html += `<circle cx="${x}" cy="${y}" r="36" fill="url(#${p.glow})"/>`;
+    html += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(124,92,191,0.25)" stroke-width="1"/>`;
+    html += `<circle cx="${x}" cy="${y}" r="20" fill="${p.color}"/>`;
+    html += `<text x="${x}" y="${y+4}" text-anchor="middle" fill="#0a1410" font-size="11" font-weight="800">${p.name}</text>`;
+    html += `<text x="${x}" y="${y+38}" text-anchor="middle" fill="#B0B3B8" font-size="10">${p.label}</text>`;
+  });
+  // 4 active collabs on r=140
+  const collabs = [
+    {name:'Fri Night Chaos', color:'#00C4A0', angle:30, r:140, overlap:'94%'},
+    {name:'Northern Banter', color:'#00C4A0', angle:110, r:140, overlap:'86%'},
+    {name:'Cocktail',        color:'#22C55E', angle:200, r:140, overlap:'81%'},
+    {name:'Memetic Studies', color:'#60A5FA', angle:300, r:140, overlap:'72%'}
+  ];
+  collabs.forEach(co => {
+    const x = cx + co.r*Math.cos(co.angle*Math.PI/180);
+    const y = cy + co.r*Math.sin(co.angle*Math.PI/180);
+    html += `<circle cx="${x}" cy="${y}" r="14" fill="${co.color}" opacity="0.85"/>`;
+    html += `<text x="${x}" y="${y+3}" text-anchor="middle" fill="#0a1410" font-size="9" font-weight="700">${co.overlap}</text>`;
+    html += `<text x="${x}" y="${y+28}" text-anchor="middle" fill="#B0B3B8" font-size="9">${co.name}</text>`;
+  });
+  // 11 prospects on r=200,270
+  const prospects = [
+    {a:0,r:200},{a:50,r:200},{a:130,r:200},{a:175,r:200},{a:225,r:200},{a:280,r:200},{a:330,r:200},
+    {a:25,r:270},{a:90,r:270},{a:160,r:270},{a:255,r:270}
+  ];
+  prospects.forEach(pr => {
+    const x = cx + pr.r*Math.cos(pr.a*Math.PI/180);
+    const y = cy + pr.r*Math.sin(pr.a*Math.PI/180);
+    html += `<circle cx="${x}" cy="${y}" r="6" fill="rgba(124,92,191,0.4)"/>`;
+  });
+  // Legend
+  html += `
+    <g font-size="11" fill="#B0B3B8">
+      <circle cx="40" cy="30" r="6" fill="#7C5CBF"/><text x="55" y="34">You · 5 pages</text>
+      <circle cx="40" cy="55" r="6" fill="#00C4A0"/><text x="55" y="59">Active collabs · 4</text>
+      <circle cx="40" cy="80" r="4" fill="rgba(124,92,191,0.4)"/><text x="55" y="84">Prospects · 11</text>
+    </g>
+  `;
+  svg.innerHTML = html;
+}
+
+function renderFlywheel(){
+  const svg = document.getElementById('flywheelSvg');
+  if(!svg) return;
+  const cx = 250, cy = 190;
+  let html = '';
+  // 3 orbital rings with rotation marks
+  html += `<defs><radialGradient id="flyGlow"><stop offset="0%" stop-color="#00C4A0" stop-opacity="0.4"/><stop offset="100%" stop-color="#00C4A0" stop-opacity="0"/></radialGradient></defs>`;
+  [70,120,165].forEach((r,i)=>{
+    html += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(0,196,160,${0.3-i*0.08})" stroke-dasharray="3 6"/>`;
+  });
+  // Centre
+  html += `<circle cx="${cx}" cy="${cy}" r="50" fill="url(#flyGlow)"/>`;
+  html += `<circle cx="${cx}" cy="${cy}" r="28" fill="#00C4A0"/>`;
+  html += `<text x="${cx}" y="${cy-2}" text-anchor="middle" fill="#0a1410" font-size="11" font-weight="800">FLYWHEEL</text>`;
+  html += `<text x="${cx}" y="${cy+12}" text-anchor="middle" fill="#0a1410" font-size="14" font-weight="900">+18%</text>`;
+  // 4 partners orbit
+  const partners = [
+    {name:'Fri Night Chaos', val:'94%', angle:0, r:120, hot:true},
+    {name:'Northern Banter', val:'86%', angle:90, r:120, hot:true},
+    {name:'Cocktail',        val:'81%', angle:180, r:120, hot:false},
+    {name:'Memetic Studies', val:'72%', angle:270, r:120, hot:false}
+  ];
+  partners.forEach(p=>{
+    const x = cx + p.r*Math.cos(p.angle*Math.PI/180);
+    const y = cy + p.r*Math.sin(p.angle*Math.PI/180);
+    const fill = p.hot ? '#22C55E' : '#7C5CBF';
+    html += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(0,196,160,0.3)" stroke-width="2" stroke-dasharray="2 3"/>`;
+    html += `<circle cx="${x}" cy="${y}" r="22" fill="${fill}" opacity="0.85"/>`;
+    html += `<text x="${x}" y="${y+4}" text-anchor="middle" fill="white" font-size="11" font-weight="800">${p.val}</text>`;
+    html += `<text x="${x}" y="${y+40}" text-anchor="middle" fill="#B0B3B8" font-size="10">${p.name}</text>`;
+  });
+  // Outer prospects (small)
+  for(let i=0;i<8;i++){
+    const angle = i*45+22;
+    const r = 165;
+    const x = cx + r*Math.cos(angle*Math.PI/180);
+    const y = cy + r*Math.sin(angle*Math.PI/180);
+    html += `<circle cx="${x}" cy="${y}" r="5" fill="rgba(0,196,160,0.4)"/>`;
+  }
+  svg.innerHTML = html;
+}
+
+function renderNetwork(){
+  const svg = document.getElementById('networkSvg');
+  if(!svg) return;
+  // Force-directed-ish — pre-baked positions
+  const nodes = [
+    {id:'you', x:250, y:190, r:30, color:'#7C5CBF', label:'You'},
+    {id:'fn',  x:130, y:120, r:22, color:'#22C55E', label:'FN Chaos'},
+    {id:'nb',  x:130, y:240, r:20, color:'#22C55E', label:'Northern'},
+    {id:'kd',  x:380, y:130, r:18, color:'#00C4A0', label:'Kelpie'},
+    {id:'dm',  x:380, y:250, r:20, color:'#FBBF24', label:'Drink. M'},
+    {id:'uk',  x:250, y:60,  r:14, color:'#A78BFA', label:'UK Jail'},
+    {id:'pb',  x:250, y:330, r:14, color:'#00C4A0', label:'Prison Bisc'},
+    {id:'ck',  x:60,  y:180, r:12, color:'#60A5FA', label:'Cocktail'},
+    {id:'ms',  x:440, y:200, r:12, color:'#60A5FA', label:'Memetic'},
+    {id:'tt',  x:200, y:300, r:10, color:'#F59E0B', label:'Tea Time'}
+  ];
+  const edges = [
+    ['you','fn',3.8],['you','nb',3.4],['you','kd',2.5],['you','dm',2.8],['you','uk',1.8],['you','pb',1.6],
+    ['fn','nb',2.2],['kd','dm',1.4],['fn','ck',1.0],['ms','dm',0.9],['nb','tt',0.8],['fn','uk',1.2]
+  ];
+  let html = '';
+  // Edges
+  edges.forEach(([a,b,w])=>{
+    const na = nodes.find(n=>n.id===a);
+    const nb = nodes.find(n=>n.id===b);
+    html += `<line x1="${na.x}" y1="${na.y}" x2="${nb.x}" y2="${nb.y}" stroke="rgba(0,196,160,${0.25+w*0.1})" stroke-width="${w}"/>`;
+  });
+  // Nodes
+  nodes.forEach(n=>{
+    html += `<circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="${n.color}" opacity="0.9"/>`;
+    html += `<text x="${n.x}" y="${n.y+n.r+14}" text-anchor="middle" fill="#B0B3B8" font-size="10">${n.label}</text>`;
+  });
+  svg.innerHTML = html;
+}
+
+function renderPostCascade(){
+  const svg = document.getElementById('postCascadeSvg');
+  if(!svg) return;
+  // Multi-level cascade: post → super-sharers → networks → algo
+  let html = '';
+  const levels = [
+    {x:80,  count:1, label:'Post', color:'#FBBF24', size:24},
+    {x:200, count:5, label:'First fans', color:'#00C4A0', size:14},
+    {x:340, count:9, label:'Super sharers', color:'#22C55E', size:12},
+    {x:500, count:18, label:'Their networks', color:'rgba(34,197,94,0.7)', size:8},
+    {x:660, count:32, label:'2nd-degree', color:'rgba(34,197,94,0.5)', size:6},
+    {x:760, count:1, label:'FB algo', color:'#FBBF24', size:30}
+  ];
+  // Layout nodes per level
+  const allNodes = [];
+  levels.forEach((lev, li) => {
+    for(let i=0;i<lev.count;i++){
+      const yStep = lev.count > 1 ? 320/(lev.count-1) : 0;
+      const y = lev.count === 1 ? 210 : 50 + i*yStep;
+      allNodes.push({x:lev.x, y, r:lev.size, color:lev.color, level:li});
+    }
+  });
+  // Edges between adjacent levels
+  for(let li=0; li<levels.length-1; li++){
+    const cur = allNodes.filter(n=>n.level===li);
+    const nxt = allNodes.filter(n=>n.level===li+1);
+    cur.forEach(c => {
+      // each node connects to ~3 in next level (or all if next is small)
+      const targets = nxt.length <= 3 ? nxt : [
+        nxt[Math.min(nxt.length-1, Math.floor(c.y/(420/nxt.length)))],
+        nxt[Math.max(0, Math.floor(c.y/(420/nxt.length))-1)],
+        nxt[Math.min(nxt.length-1, Math.floor(c.y/(420/nxt.length))+1)]
+      ];
+      targets.forEach(t => {
+        if(t) html += `<line x1="${c.x}" y1="${c.y}" x2="${t.x}" y2="${t.y}" stroke="rgba(0,196,160,${li===levels.length-2?0.35:0.18})" stroke-width="${li===levels.length-2?2:1}"/>`;
+      });
+    });
+  }
+  // Nodes
+  allNodes.forEach(n=>{
+    html += `<circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="${n.color}"/>`;
+  });
+  // Level labels
+  levels.forEach(lev => {
+    html += `<text x="${lev.x}" y="395" text-anchor="middle" fill="#B0B3B8" font-size="11" font-weight="600">${lev.label}</text>`;
+    html += `<text x="${lev.x}" y="410" text-anchor="middle" fill="#5C6470" font-size="10">n=${lev.count}</text>`;
+  });
+  // Final big algo
+  html += `<text x="760" y="195" text-anchor="middle" fill="#0a1410" font-size="11" font-weight="800">FB</text>`;
+  // Stat overlay
+  html += `<text x="80" y="195" text-anchor="middle" fill="#0a1410" font-size="10" font-weight="800">DM</text>`;
+  svg.innerHTML = html;
+}
+
+function renderTopicGalaxy(){
+  const svg = document.getElementById('topicGalaxySvg');
+  if(!svg) return;
+  const topics = [
+    {name:'Pub humour', x:230, y:160, r:42, color:'#00C4A0'},
+    {name:'Memes',      x:130, y:100, r:36, color:'#22C55E'},
+    {name:'Animals',    x:340, y:120, r:32, color:'#7C5CBF'},
+    {name:'News',       x:360, y:240, r:28, color:'#F59E0B'},
+    {name:'Banter',     x:140, y:230, r:26, color:'#22C55E'},
+    {name:'Lifestyle',  x:280, y:300, r:20, color:'#60A5FA'},
+    {name:'Sport',      x:80,  y:160, r:18, color:'#A78BFA'},
+    {name:'Culture',    x:420, y:180, r:16, color:'#60A5FA'},
+    {name:'Politics',   x:440, y:300, r:12, color:'#E53935'}
+  ];
+  let html = '';
+  // Connection lines between similar topics
+  const sims = [['Pub humour','Banter'],['Pub humour','Memes'],['Memes','Animals'],['Animals','Lifestyle'],['News','Politics'],['Banter','Sport'],['Culture','Lifestyle']];
+  sims.forEach(([a,b])=>{
+    const na = topics.find(t=>t.name===a), nb = topics.find(t=>t.name===b);
+    html += `<line x1="${na.x}" y1="${na.y}" x2="${nb.x}" y2="${nb.y}" stroke="rgba(96,165,250,0.2)" stroke-width="1" stroke-dasharray="2 3"/>`;
+  });
+  topics.forEach(t=>{
+    html += `<circle cx="${t.x}" cy="${t.y}" r="${t.r}" fill="${t.color}" opacity="0.65"/>`;
+    html += `<circle cx="${t.x}" cy="${t.y}" r="${t.r-3}" fill="${t.color}" opacity="0.3"/>`;
+    html += `<text x="${t.x}" y="${t.y+4}" text-anchor="middle" fill="white" font-size="${Math.max(9, t.r/3)}" font-weight="700">${t.name}</text>`;
+  });
+  svg.innerHTML = html;
+}
+
+function renderSentimentSolar(){
+  const svg = document.getElementById('sentimentSolarSvg');
+  if(!svg) return;
+  const cx = 250, cy = 190;
+  let html = '';
+  // Orbit ring
+  [60, 110, 160].forEach(r=>{
+    html += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(245,158,11,0.15)" stroke-dasharray="2 5"/>`;
+  });
+  // Sun = post
+  html += `<defs><radialGradient id="sunGlow"><stop offset="0%" stop-color="#FBBF24" stop-opacity="0.6"/><stop offset="100%" stop-color="#FBBF24" stop-opacity="0"/></radialGradient></defs>`;
+  html += `<circle cx="${cx}" cy="${cy}" r="55" fill="url(#sunGlow)"/>`;
+  html += `<circle cx="${cx}" cy="${cy}" r="32" fill="#F59E0B"/>`;
+  html += `<text x="${cx}" y="${cy-3}" text-anchor="middle" fill="white" font-size="11" font-weight="800">POST</text>`;
+  html += `<text x="${cx}" y="${cy+11}" text-anchor="middle" fill="white" font-size="13" font-weight="900">2.4K</text>`;
+  // Emotion planets
+  const emotions = [
+    {name:'Joy',     count:884, color:'#22C55E', angle:-50,  r:90},
+    {name:'Trust',   count:486, color:'#22C55E', angle:30,   r:90},
+    {name:'Excite',  count:524, color:'#22C55E', angle:110,  r:90},
+    {name:'Surprise',count:312, color:'#F59E0B', angle:170,  r:90},
+    {name:'Sadness', count:148, color:'#60A5FA', angle:230,  r:90},
+    {name:'Anger',   count:96,  color:'#E53935', angle:290,  r:90},
+    {name:'Fear',    count:42,  color:'#E53935', angle:340,  r:90}
+  ];
+  emotions.forEach(e=>{
+    const x = cx + e.r*Math.cos(e.angle*Math.PI/180);
+    const y = cy + e.r*Math.sin(e.angle*Math.PI/180);
+    const planetR = Math.max(8, Math.min(20, Math.sqrt(e.count)/2));
+    html += `<circle cx="${x}" cy="${y}" r="${planetR}" fill="${e.color}" opacity="0.85"/>`;
+    html += `<text x="${x}" y="${y+planetR+13}" text-anchor="middle" fill="#B0B3B8" font-size="10" font-weight="600">${e.name}</text>`;
+    html += `<text x="${x}" y="${y+planetR+25}" text-anchor="middle" fill="#5C6470" font-size="9">${e.count}</text>`;
+  });
+  svg.innerHTML = html;
+}
+
+function renderCommenterNet(){
+  const svg = document.getElementById('commenterNetSvg');
+  if(!svg) return;
+  // Hub-and-spoke with super-sharers as larger nodes
+  const nodes = [
+    {id:'h1', x:200, y:120, r:18, color:'#22C55E', label:'@kev_uk'},
+    {id:'h2', x:600, y:140, r:16, color:'#22C55E', label:'@suzy_t'},
+    {id:'h3', x:400, y:300, r:18, color:'#22C55E', label:'@dave_m'},
+    {id:'r1', x:80,  y:80,  r:8,  color:'#3A3B3C'},
+    {id:'r2', x:120, y:200, r:8,  color:'#3A3B3C'},
+    {id:'r3', x:300, y:80,  r:8,  color:'#3A3B3C'},
+    {id:'r4', x:280, y:180, r:8,  color:'#3A3B3C'},
+    {id:'r5', x:520, y:80,  r:8,  color:'#3A3B3C'},
+    {id:'r6', x:680, y:80,  r:8,  color:'#3A3B3C'},
+    {id:'r7', x:720, y:200, r:8,  color:'#3A3B3C'},
+    {id:'r8', x:540, y:240, r:8,  color:'#3A3B3C'},
+    {id:'r9', x:300, y:340, r:8,  color:'#3A3B3C'},
+    {id:'r10',x:480, y:360, r:8,  color:'#3A3B3C'},
+    {id:'r11',x:160, y:300, r:8,  color:'#3A3B3C'},
+    // Flagged trolls (red)
+    {id:'t1', x:60,  y:380, r:10, color:'#E53935', label:'flagged'},
+    {id:'t2', x:740, y:340, r:10, color:'#E53935', label:'flagged'},
+    {id:'t3', x:400, y:380, r:10, color:'#E53935'}
+  ];
+  const edges = [
+    ['h1','r1'],['h1','r2'],['h1','r3'],['h1','r4'],['h1','r11'],
+    ['h2','r5'],['h2','r6'],['h2','r7'],['h2','r8'],
+    ['h3','r4'],['h3','r8'],['h3','r9'],['h3','r10'],
+    ['t1','t3'],['t2','t3'],['t1','r11'],
+    ['h1','h3'],['h2','h3']
+  ];
+  let html = '';
+  edges.forEach(([a,b])=>{
+    const na = nodes.find(n=>n.id===a);
+    const nb = nodes.find(n=>n.id===b);
+    if(!na || !nb) return;
+    const isTroll = a.startsWith('t') || b.startsWith('t');
+    html += `<line x1="${na.x}" y1="${na.y}" x2="${nb.x}" y2="${nb.y}" stroke="${isTroll?'rgba(229,57,53,0.4)':'rgba(0,196,160,0.18)'}" stroke-width="${isTroll?2:1}"/>`;
+  });
+  nodes.forEach(n=>{
+    html += `<circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="${n.color}" opacity="${n.color==='#3A3B3C'?0.55:0.85}"/>`;
+    if(n.label) html += `<text x="${n.x}" y="${n.y-n.r-5}" text-anchor="middle" fill="#B0B3B8" font-size="10" font-weight="600">${n.label}</text>`;
+  });
+  // Legend
+  html += `
+    <g font-size="11" fill="#B0B3B8">
+      <circle cx="40" cy="30" r="6" fill="#22C55E"/><text x="55" y="34">Super sharer · 3</text>
+      <circle cx="40" cy="55" r="5" fill="#3A3B3C"/><text x="55" y="59">Regular · 11</text>
+      <circle cx="40" cy="80" r="5" fill="#E53935"/><text x="55" y="84">Flagged · 3</text>
+    </g>
+  `;
+  svg.innerHTML = html;
+}
+
+
 /* ── Cascade SVG ── */
 function renderCascade(){
   const svg = document.getElementById('cascadeSvg');
@@ -1555,6 +1980,13 @@ window.addEventListener('load', ()=>{
   try { renderActivity(); } catch(e) {}
   try { renderRawData(); } catch(e) {}
   try { renderPredLog(); } catch(e) {}
+  try { renderConstellation(); } catch(e) {}
+  try { renderFlywheel(); } catch(e) {}
+  try { renderNetwork(); } catch(e) {}
+  try { renderPostCascade(); } catch(e) {}
+  try { renderTopicGalaxy(); } catch(e) {}
+  try { renderSentimentSolar(); } catch(e) {}
+  try { renderCommenterNet(); } catch(e) {}
 });
 
 function renderPredLog(){
