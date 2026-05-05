@@ -979,9 +979,9 @@ body{
   display:flex;
   align-items:center;
   border-top:1px solid var(--bdr-soft);
-  margin:14px -20px -16px;
-  padding:14px 16px;
-  gap:12px;  /* generous gap between distinct buttons */
+  margin:18px 0 0;          /* sit inside the card padding, no negative margins */
+  padding:16px 0 4px;       /* breathing room above + below pills */
+  gap:14px;                 /* generous, comfortable gap */
 }
 .composer-btn{
   flex:1;
@@ -1257,9 +1257,9 @@ body.arte-suggestions-off .arte-chat-head .silence-link{
   /* Composer */
   .composer-wrap{margin:0 -8px 10px -8px;border-radius:0}
   .composer-input{font-size:13px}
-  .composer-btn{font-size:12px;padding:10px 8px;gap:5px;min-height:40px}
+  .composer-btn{font-size:12px;padding:10px 6px;gap:5px;min-height:40px}
   .composer-btn svg{width:15px;height:15px}
-  .composer-actions{padding:10px 12px;gap:6px;margin:10px -16px -12px}
+  .composer-actions{padding:12px 0 0;gap:8px;margin:14px 0 0}
   .composer-input{font-size:13px;padding:11px 16px}
   /* svg sizing handled in .composer-btn rule above */
   
@@ -3955,8 +3955,8 @@ html[data-theme="light"] .kpi-card-v2.reach-hero{
         <!--           Ask Art-E (chat).                                 -->
         <!-- Schedule moved to inside Predict modal as a follow-up.      -->
         <!-- ═══════════════════════════════════════════════════════════ -->
-        <div class="composer-wrap card" style="padding:0">
-          <div style="display:flex;align-items:center;gap:12px;padding:16px 20px">
+        <div class="composer-wrap card" style="padding:20px 24px 18px">
+          <div style="display:flex;align-items:center;gap:14px;padding:0 0 4px">
             <div class="composer-avatar">A</div>
             <button class="composer-input">Draft a post — Art-E will score it before you publish</button>
           </div>
