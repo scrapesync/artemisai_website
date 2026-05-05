@@ -1214,12 +1214,59 @@ body{
     margin:auto 0 0 0;
   }
   
-  /* Art-E chat — full-screen on phone */
+  /* Art-E chat — full-screen on phone, properly anchored */
   .arte-chat-host{
-    width:100vw !important;height:100vh !important;
-    bottom:0 !important;right:0 !important;
+    width:100vw !important;height:100dvh !important;
+    top:0 !important;left:0 !important;
+    bottom:auto !important;right:auto !important;
     border-radius:0 !important;
+    z-index:200 !important;
   }
+  /* Mobile chat header — larger, safe-area-aware, close button impossible to miss */
+  .arte-chat-host .arte-chat-head{
+    padding:14px 16px;
+    padding-top:max(14px, env(safe-area-inset-top, 14px));
+    flex-shrink:0;
+    background:var(--bg-elev);
+    border-bottom:1px solid var(--bdr-soft);
+    position:relative;
+    z-index:5;
+  }
+  .arte-chat-host .arte-chat-head .modal-close{
+    width:44px !important;height:44px !important;
+    background:var(--bg-input) !important;
+    border:1px solid var(--bdr-soft) !important;
+    border-radius:50% !important;
+    flex-shrink:0;
+    color:var(--t1) !important;
+  }
+  .arte-chat-host .arte-chat-head .modal-close:hover{
+    background:var(--bg-elev-2) !important;
+  }
+  .arte-chat-host .arte-chat-head .modal-close svg{width:22px !important;height:22px !important;stroke-width:2.5 !important}
+  /* Silence-tips link compact on mobile — icon only */
+  .arte-chat-host .arte-chat-head .silence-link{
+    width:38px !important;height:38px !important;
+    padding:0 !important;
+    border-radius:50% !important;
+    justify-content:center;
+  }
+  .arte-chat-host .arte-chat-head .silence-link .silence-lbl{display:none !important}
+  .arte-chat-host .arte-chat-head .silence-link svg{width:16px !important;height:16px !important}
+  /* Title block flex squish */
+  .arte-chat-host .arte-chat-head .arte-chat-title{font-size:15px}
+  .arte-chat-host .arte-chat-head .arte-chat-sub{font-size:11px}
+  /* Subtle Art-E silence shortcut inside the chat header */
+  .arte-chat-head .silence-link{
+    font-size:11px;color:var(--t3);font-weight:600;
+    padding:4px 8px;border-radius:6px;
+    border:1px solid var(--bdr-soft);
+    cursor:pointer;background:transparent;font-family:inherit;
+    margin-left:auto;margin-right:6px;
+    display:inline-flex;align-items:center;gap:4px;
+  }
+  .arte-chat-head .silence-link:hover{background:var(--bg-elev-2);color:var(--t1)}
+  .arte-chat-head .silence-link svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2}
   
   /* Hide status bar on mobile — bottom nav has the Art-E button instead */
   .arte-status-bar{display:none !important}
@@ -2734,84 +2781,65 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
 .insight-post-action.arte:hover{background:rgba(124,92,191,0.10)}
 .insight-post-action svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
 
-/* ─── Reach-prominent engagement strip — bottom of every post ─── */
+/* ─── Engagement bar — bottom of every post — balanced 4-up grid ─── */
 .post-engagement-bar{
-  display:flex;align-items:center;gap:0;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:0;
   padding:0;margin:0 16px 12px;
   background:var(--bg);border-radius:10px;
   overflow:hidden;border:1px solid var(--bdr-soft);
 }
-.post-eng-reach{
-  flex:1.4;
-  padding:10px 14px;
-  background:linear-gradient(90deg, var(--teal-bg), transparent);
-  border-right:1px solid var(--bdr-soft);
-  display:flex;flex-direction:column;align-items:flex-start;gap:1px;
-}
-.post-eng-reach .label{
-  font-size:9.5px;color:var(--teal);font-weight:700;
-  text-transform:uppercase;letter-spacing:0.06em;
-  display:flex;align-items:center;gap:4px;
-}
-.post-eng-reach .label svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:2.5}
-.post-eng-reach .val{
-  font-size:18px;font-weight:800;color:var(--t1);
-  font-variant-numeric:tabular-nums;
-  letter-spacing:-0.5px;line-height:1.05;
-}
-.post-eng-reach .delta{
-  font-size:10.5px;color:var(--opp);font-weight:600;
-  margin-top:1px;
-}
-.post-eng-reach .delta.dn{color:var(--crisis)}
-.post-eng-secondary{
-  flex:1.6;
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-}
 .post-eng-cell{
-  padding:8px 10px;
-  display:flex;flex-direction:column;align-items:center;gap:1px;
+  padding:9px 8px;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
   border-right:1px solid var(--bdr-soft);
+  position:relative;
 }
 .post-eng-cell:last-child{border-right:none}
 .post-eng-cell .icon{
   width:14px;height:14px;color:var(--t2);
   margin-bottom:1px;
+  display:inline-flex;align-items:center;justify-content:center;
 }
 .post-eng-cell .icon svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
 .post-eng-cell .num{
-  font-size:13px;font-weight:700;color:var(--t1);
+  font-size:14px;font-weight:800;color:var(--t1);
   font-variant-numeric:tabular-nums;line-height:1.1;
+  letter-spacing:-0.3px;
 }
 .post-eng-cell .lbl{
   font-size:9px;color:var(--t3);font-weight:600;
   text-transform:uppercase;letter-spacing:0.04em;
 }
-/* Light theme nudge */
+.post-eng-cell .delta{
+  font-size:9.5px;font-weight:700;color:var(--opp);
+  margin-top:1px;line-height:1;
+}
+.post-eng-cell .delta.dn{color:var(--crisis)}
+.post-eng-cell .delta.neu{color:var(--t3)}
+
+/* The reach cell gets a subtle teal accent — still distinct, not dominant */
+.post-eng-cell.reach{
+  background:linear-gradient(180deg, rgba(0,196,160,0.06), transparent);
+}
+.post-eng-cell.reach .icon{color:var(--teal)}
+.post-eng-cell.reach .lbl{color:var(--teal)}
+
 html[data-theme="light"] .post-engagement-bar{background:var(--bg-elev-2)}
 
-/* Mobile — stack reach above the secondary row, smaller everything */
+/* Mobile — keep 4-up on phones too, just tighter spacing */
 @media(max-width:640px){
-  .post-engagement-bar{margin:0 12px 10px;flex-direction:column}
-  .post-eng-reach{
-    width:100%;flex:none;
-    border-right:none;
-    border-bottom:1px solid var(--bdr-soft);
-    flex-direction:row;align-items:center;justify-content:space-between;
-    padding:8px 12px;
-  }
-  .post-eng-reach .val{font-size:17px}
-  .post-eng-reach .delta{margin-top:0}
-  .post-eng-secondary{width:100%;flex:none}
-  .post-eng-cell{padding:7px 8px}
-  .post-eng-cell .num{font-size:12.5px}
-  .post-eng-cell .lbl{font-size:8.5px}
+  .post-engagement-bar{margin:0 12px 10px}
+  .post-eng-cell{padding:8px 4px}
+  .post-eng-cell .num{font-size:13px}
+  .post-eng-cell .lbl{font-size:8.5px;letter-spacing:0.02em}
+  .post-eng-cell .delta{font-size:9px}
 }
-
-/* Tiny dropped-in helper for inline icons */
-.icon-react{}
-.icon-comment{}
-.icon-share{}
+@media(max-width:380px){
+  .post-eng-cell .lbl{font-size:8px}
+  .post-eng-cell .num{font-size:12px}
+}
 
 /* ─── PERFORMANCE PATCH — make everything feel snappy ── */
 *{
@@ -2995,94 +3023,142 @@ a.brand-block:hover .brand-mark{transform:scale(1.05)}
 
 
 /* ─── Reach headline card in right rail ─── */
-.reach-headline{
+/* 7-day snapshot card — 4 metrics with mini sparklines */
+.week-snapshot{
   grid-column:span 2;
-  background:linear-gradient(135deg, var(--teal-bg), rgba(124,92,191,0.06));
-  border:1px solid rgba(0,196,160,0.2);
+  background:var(--bg-input);
+  border:1px solid var(--bdr-soft);
   border-radius:10px;
-  padding:10px 12px;
+  padding:10px;
   margin-bottom:8px;
-  cursor:pointer;
-  transition:transform .12s, box-shadow .15s;
 }
-.reach-headline:hover{
-  transform:translateY(-1px);
-  box-shadow:0 4px 14px rgba(0,196,160,0.18);
-  border-color:var(--teal);
-}
-.reach-headline-row{
-  display:flex;align-items:flex-start;justify-content:space-between;gap:8px;
-  margin-bottom:6px;
-}
-.reach-headline-lbl{
-  font-size:10px;color:var(--teal);font-weight:700;
+.week-snapshot-head{
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:10px;color:var(--t3);font-weight:700;
   text-transform:uppercase;letter-spacing:0.06em;
-  display:flex;align-items:center;gap:5px;
+  margin-bottom:8px;padding:0 2px;
 }
-.reach-headline-lbl svg{width:11px;height:11px}
-.reach-headline-val{
-  font-size:24px;font-weight:800;color:var(--t1);
-  letter-spacing:-0.5px;line-height:1.05;margin-top:2px;
+.week-snapshot-head .ws-period{color:var(--t3)}
+.week-snapshot-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:8px;
 }
-.reach-headline-delta{
-  font-size:11px;font-weight:700;
-  padding:2px 8px;border-radius:9999px;
-  flex-shrink:0;
+.ws-tile{
+  background:var(--bg);
+  border:1px solid var(--bdr-soft);
+  border-radius:8px;
+  padding:8px 10px;
+  cursor:pointer;
+  transition:all .12s;
+  position:relative;overflow:hidden;
 }
-.reach-headline-delta.opp{background:var(--opp-bg);color:var(--opp)}
-.reach-headline-delta.crisis{background:var(--crisis-bg);color:var(--crisis)}
-.reach-spark{
-  display:block;width:100%;height:30px;
+.ws-tile:hover{border-color:var(--arte-1);transform:translateY(-1px)}
+.ws-tile-lbl{
+  font-size:9px;color:var(--t3);font-weight:700;
+  text-transform:uppercase;letter-spacing:0.04em;
+  display:flex;align-items:center;gap:3px;
+  margin-bottom:2px;
+}
+.ws-tile-lbl svg{width:9px;height:9px;fill:none;stroke:currentColor;stroke-width:2}
+.ws-tile.reach .ws-tile-lbl{color:var(--teal)}
+.ws-tile-row{
+  display:flex;align-items:baseline;justify-content:space-between;gap:6px;
+}
+.ws-tile-val{
+  font-size:15px;font-weight:800;color:var(--t1);
+  font-variant-numeric:tabular-nums;letter-spacing:-0.3px;line-height:1.05;
+}
+.ws-tile-delta{
+  font-size:10px;font-weight:700;flex-shrink:0;
+}
+.ws-tile-delta.up{color:var(--opp)}
+.ws-tile-delta.dn{color:var(--crisis)}
+.ws-tile-delta.neu{color:var(--t3)}
+.ws-tile-spark{
+  display:block;width:100%;height:18px;margin-top:4px;
 }
 
-/* Reach hero card in KPI grid — emphasised treatment */
+/* Reach KPI — subtle teal accent, no PRIMARY pill, no size boost */
 .kpi-card-v2.reach-hero{
-  background:linear-gradient(135deg, var(--teal-bg), rgba(124,92,191,0.04));
-  border:1px solid rgba(0,196,160,0.25);
+  background:linear-gradient(135deg, rgba(0,196,160,0.04), transparent);
+  border:1px solid var(--bdr-soft);
   position:relative;
 }
 .kpi-card-v2.reach-hero:hover{
-  border-color:var(--teal);
-  box-shadow:0 6px 18px rgba(0,196,160,0.18);
-  transform:translateY(-2px);
+  border-color:rgba(0,196,160,0.3);
+  box-shadow:0 4px 14px rgba(0,196,160,0.12);
+  transform:translateY(-1px);
 }
-.kpi-card-v2.reach-hero::before{
-  content:'PRIMARY';
-  position:absolute;top:8px;right:8px;
-  font-size:8.5px;font-weight:800;letter-spacing:0.08em;
-  color:var(--teal);
-  background:var(--bg-elev);border:1px solid rgba(0,196,160,0.35);
-  padding:2px 7px;border-radius:9999px;
-}
+.kpi-card-v2.reach-hero .label{color:var(--teal)}
 
-/* Art-E suggestion toggle in topnav */
+
+/* Art-E tips toggle in topnav — labeled pill, easy to spot */
 .arte-suggest-toggle{
-  width:36px;height:36px;border-radius:50%;
-  background:transparent;border:none;
-  display:grid;place-items:center;
-  cursor:pointer;color:var(--arte-1);
-  transition:background .12s, opacity .12s;
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 10px 5px 5px;
+  background:var(--arte-bg);
+  border:1px solid rgba(124,92,191,0.25);
+  border-radius:9999px;
+  color:var(--arte-1);
+  font-family:inherit;font-size:11px;font-weight:700;
+  cursor:pointer;flex-shrink:0;
+  transition:all .12s;
   position:relative;
+  text-transform:uppercase;letter-spacing:0.04em;
+  white-space:nowrap;
+  height:32px;
 }
-.arte-suggest-toggle svg{width:18px;height:18px}
-.arte-suggest-toggle:hover{background:var(--arte-bg)}
+.arte-suggest-toggle:hover{
+  border-color:var(--arte-1);
+  background:rgba(124,92,191,0.16);
+  transform:translateY(-1px);
+}
+.arte-suggest-toggle .arte-toggle-orb{
+  width:18px;height:18px;border-radius:50%;
+  background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+  display:grid;place-items:center;flex-shrink:0;
+}
+.arte-suggest-toggle .arte-toggle-orb svg{width:9px;height:9px;fill:white}
 .arte-suggest-toggle.arte-off{
+  background:var(--bg-input);
+  border-color:var(--bdr-soft);
   color:var(--t3);
-  opacity:0.6;
 }
-.arte-suggest-toggle.arte-off::after{
+.arte-suggest-toggle.arte-off .arte-toggle-orb{
+  background:var(--t3);
+  opacity:0.7;
+}
+.arte-suggest-toggle.arte-off .arte-toggle-orb::after{
   content:'';
   position:absolute;
-  top:6px;left:6px;right:6px;bottom:6px;
-  border-bottom:1.5px solid var(--t3);
+  width:14px;height:1.5px;background:white;
   transform:rotate(-45deg);
-  transform-origin:50% 50%;
-  pointer-events:none;
+  border-radius:1px;
 }
+
 
 /* When suggestions are off, hide the floating hint bubble + status bar suggestions */
 body.arte-suggestions-off .arte-hint-bubble{display:none !important}
 body.arte-suggestions-off .arte-status-bar{display:none !important}
+
+@media(max-width:640px){
+  .arte-suggest-toggle{
+    padding:4px 9px 4px 4px;
+    font-size:9.5px;letter-spacing:0.02em;
+    height:30px;
+  }
+  .arte-suggest-toggle .arte-toggle-orb{width:22px;height:22px}
+  .arte-suggest-toggle .arte-toggle-orb svg{width:10px;height:10px}
+  .arte-suggest-toggle .arte-toggle-state{
+    display:inline-block;
+    line-height:1;
+  }
+}
+/* Below 380px, hide the label, keep the pill compact */
+@media(max-width:380px){
+  .arte-suggest-toggle .arte-toggle-state{display:none}
+  .arte-suggest-toggle{padding:4px;border-radius:50%}
+}
 </style>
 </head>
 <body>
@@ -3114,8 +3190,9 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22a2.5 2.5 0 002.5-2.5h-5A2.5 2.5 0 0012 22zm6.5-7v-4.5a6.5 6.5 0 10-13 0V15L4 17v1h16v-1z"/></svg>
       <span class="badge">3</span>
     </button>
-    <button class="icon-btn arte-suggest-toggle" id="arteSuggestToggle" title="Art-E suggestions on" onclick="toggleArteSuggestions()">
-      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" id="arteToggleIcon"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+    <button class="arte-suggest-toggle" id="arteSuggestToggle" title="Art-E tips: ON · click to silence" onclick="toggleArteSuggestions()" aria-label="Toggle Art-E suggestions">
+      <span class="arte-toggle-orb"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" id="arteToggleIcon"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></span>
+      <span class="arte-toggle-state" id="arteToggleState">Tips on</span>
     </button>
     <button class="theme-toggle" id="themeToggle" title="Switch theme">
       <span class="theme-toggle-opt active" data-theme-set="dark" title="Dark"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
@@ -3719,27 +3796,26 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
             <div class="insight-post-stat"><div class="insight-post-stat-val">91</div><div class="insight-post-stat-lbl">Avg AI score</div></div>
           </div>
           <div class="post-engagement-bar">
-            <div class="post-eng-reach" title="Reach — unique people who saw this">
-              <div class="label"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Reach</div>
-              <div class="val">142.8K</div>
-              <div class="delta ">+18%</div>
+            <div class="post-eng-cell reach">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+              <span class="num">142.8K</span>
+              <span class="lbl">Reach</span>
+              <span class="delta ">+18%</span>
             </div>
-            <div class="post-eng-secondary">
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
-                <span class="num">8.4K</span>
-                <span class="lbl">Reactions</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
-                <span class="num">672</span>
-                <span class="lbl">Comments</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
-                <span class="num">1.2K</span>
-                <span class="lbl">Shares</span>
-              </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+              <span class="num">8.4K</span>
+              <span class="lbl">Reactions</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+              <span class="num">672</span>
+              <span class="lbl">Comments</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
+              <span class="num">1.2K</span>
+              <span class="lbl">Shares</span>
             </div>
           </div>
           <div class="insight-post-actions">
@@ -3766,27 +3842,26 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
             Reach hit <strong>24.5K in 90 minutes</strong> — your strongest velocity this month. The question CTA pattern + Impact-style caption was the trigger. Art-E predicts 2.4× more reach in the next 4 hours if you reshare to your other pages now.
           </div>
           <div class="post-engagement-bar">
-            <div class="post-eng-reach" title="Reach — unique people who saw this">
-              <div class="label"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Reach</div>
-              <div class="val">24.5K</div>
-              <div class="delta ">+312%</div>
+            <div class="post-eng-cell reach">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+              <span class="num">24.5K</span>
+              <span class="lbl">Reach</span>
+              <span class="delta ">+312%</span>
             </div>
-            <div class="post-eng-secondary">
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
-                <span class="num">2.4K</span>
-                <span class="lbl">Reactions</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
-                <span class="num">184</span>
-                <span class="lbl">Comments</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
-                <span class="num">312</span>
-                <span class="lbl">Shares</span>
-              </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+              <span class="num">2.4K</span>
+              <span class="lbl">Reactions</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+              <span class="num">184</span>
+              <span class="lbl">Comments</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
+              <span class="num">312</span>
+              <span class="lbl">Shares</span>
             </div>
           </div>
           
@@ -3815,27 +3890,26 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
             <div class="insight-post-stat"><div class="insight-post-stat-val">0.89</div><div class="insight-post-stat-lbl">Risk score</div></div>
           </div>
           <div class="post-engagement-bar">
-            <div class="post-eng-reach" title="Reach — unique people who saw this">
-              <div class="label"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Reach</div>
-              <div class="val">24.5K</div>
-              <div class="delta ">+312%</div>
+            <div class="post-eng-cell reach">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+              <span class="num">24.5K</span>
+              <span class="lbl">Reach</span>
+              <span class="delta ">+312%</span>
             </div>
-            <div class="post-eng-secondary">
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
-                <span class="num">2.4K</span>
-                <span class="lbl">Reactions</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
-                <span class="num">207</span>
-                <span class="lbl">Comments</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
-                <span class="num">298</span>
-                <span class="lbl">Shares</span>
-              </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+              <span class="num">2.4K</span>
+              <span class="lbl">Reactions</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+              <span class="num">207</span>
+              <span class="lbl">Comments</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
+              <span class="num">298</span>
+              <span class="lbl">Shares</span>
             </div>
           </div>
           <div class="insight-post-actions">
@@ -3863,27 +3937,26 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
             <div class="insight-post-stat"><div class="insight-post-stat-val opp">+18%</div><div class="insight-post-stat-lbl">Est. lift</div></div>
           </div>
           <div class="post-engagement-bar">
-            <div class="post-eng-reach" title="Reach — unique people who saw this">
-              <div class="label"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Reach</div>
-              <div class="val">89.2K</div>
-              <div class="delta ">Their avg</div>
+            <div class="post-eng-cell reach">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+              <span class="num">89.2K</span>
+              <span class="lbl">Reach</span>
+              <span class="delta neu">Their avg</span>
             </div>
-            <div class="post-eng-secondary">
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
-                <span class="num">5.2K</span>
-                <span class="lbl">Reactions</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
-                <span class="num">418</span>
-                <span class="lbl">Comments</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
-                <span class="num">684</span>
-                <span class="lbl">Shares</span>
-              </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+              <span class="num">5.2K</span>
+              <span class="lbl">Reactions</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+              <span class="num">418</span>
+              <span class="lbl">Comments</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
+              <span class="num">684</span>
+              <span class="lbl">Shares</span>
             </div>
           </div>
           <div class="insight-post-actions">
@@ -3911,27 +3984,26 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
             <div class="insight-post-stat"><div class="insight-post-stat-val teal">92</div><div class="insight-post-stat-lbl">Predicted score</div></div>
           </div>
           <div class="post-engagement-bar">
-            <div class="post-eng-reach" title="Reach — unique people who saw this">
-              <div class="label"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Reach</div>
-              <div class="val">18.6K</div>
-              <div class="delta ">+24%</div>
+            <div class="post-eng-cell reach">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+              <span class="num">18.6K</span>
+              <span class="lbl">Reach</span>
+              <span class="delta ">+24%</span>
             </div>
-            <div class="post-eng-secondary">
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
-                <span class="num">1.4K</span>
-                <span class="lbl">Reactions</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
-                <span class="num">152</span>
-                <span class="lbl">Comments</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
-                <span class="num">167</span>
-                <span class="lbl">Shares</span>
-              </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+              <span class="num">1.4K</span>
+              <span class="lbl">Reactions</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+              <span class="num">152</span>
+              <span class="lbl">Comments</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
+              <span class="num">167</span>
+              <span class="lbl">Shares</span>
             </div>
           </div>
           <div class="insight-post-actions">
@@ -3959,27 +4031,26 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
             <div class="insight-post-stat"><div class="insight-post-stat-val opp">+12</div><div class="insight-post-stat-lbl">New followers</div></div>
           </div>
           <div class="post-engagement-bar">
-            <div class="post-eng-reach" title="Reach — unique people who saw this">
-              <div class="label"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Reach</div>
-              <div class="val">4.2K</div>
-              <div class="delta ">+6 days</div>
+            <div class="post-eng-cell reach">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+              <span class="num">4.2K</span>
+              <span class="lbl">Reach</span>
+              <span class="delta neu">+6 days</span>
             </div>
-            <div class="post-eng-secondary">
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
-                <span class="num">380</span>
-                <span class="lbl">Reactions</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
-                <span class="num">42</span>
-                <span class="lbl">Comments</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
-                <span class="num">52</span>
-                <span class="lbl">Shares</span>
-              </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+              <span class="num">380</span>
+              <span class="lbl">Reactions</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+              <span class="num">42</span>
+              <span class="lbl">Comments</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
+              <span class="num">52</span>
+              <span class="lbl">Shares</span>
             </div>
           </div>
           <div class="insight-post-actions">
@@ -4007,27 +4078,26 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
             <div class="insight-post-stat"><div class="insight-post-stat-val">94</div><div class="insight-post-stat-lbl">AI Score</div></div>
           </div>
           <div class="post-engagement-bar">
-            <div class="post-eng-reach" title="Reach — unique people who saw this">
-              <div class="label"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Reach</div>
-              <div class="val">38.2K</div>
-              <div class="delta ">3.2× avg</div>
+            <div class="post-eng-cell reach">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+              <span class="num">38.2K</span>
+              <span class="lbl">Reach</span>
+              <span class="delta neu">3.2× avg</span>
             </div>
-            <div class="post-eng-secondary">
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
-                <span class="num">3.8K</span>
-                <span class="lbl">Reactions</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
-                <span class="num">298</span>
-                <span class="lbl">Comments</span>
-              </div>
-              <div class="post-eng-cell">
-                <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
-                <span class="num">489</span>
-                <span class="lbl">Shares</span>
-              </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+              <span class="num">3.8K</span>
+              <span class="lbl">Reactions</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+              <span class="num">298</span>
+              <span class="lbl">Comments</span>
+            </div>
+            <div class="post-eng-cell">
+              <span class="icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
+              <span class="num">489</span>
+              <span class="lbl">Shares</span>
             </div>
           </div>
           <div class="insight-post-actions">
@@ -4144,8 +4214,8 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
 
             <div class="kpi-grid">
               <div class="kpi-card-v2 reach-hero" onclick="openArteChat('Explain my reach', {intent:'explain-numbers'})" style="cursor:pointer">
-                <div class="label" style="color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px;display:inline-block;vertical-align:-1px;margin-right:4px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>People Reached · 7 days</div>
-                <div class="value accent" style="font-size:30px">847K</div>
+                <div class="label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px;height:10px;display:inline-block;vertical-align:-1px;margin-right:4px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>People Reached</div>
+                <div class="value">847K</div>
                 <div class="delta up">↑ 12.4% vs last week</div>
                 <canvas id="sp2"></canvas>
               </div>
@@ -4861,6 +4931,38 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
                 <div class="settings-toggle off"></div>
               </div>
             </div>
+
+            <div class="panel" style="margin-top:14px">
+              <div class="panel-title" style="margin-bottom:4px">Art-E preferences</div>
+              <div class="panel-sub" style="margin-bottom:14px;font-size:12px;color:var(--t2)">How chatty should Art-E be? You can also toggle this from the topnav at any time.</div>
+              <div class="settings-toggle-row" id="arteSuggestSettingRow" onclick="toggleArteSuggestionsFromSettings(this)">
+                <div class="settings-toggle-info">
+                  <div class="settings-toggle-title">Floating tip bubble</div>
+                  <div class="settings-toggle-sub">Art-E suggests an action as you hover · tap the ✕ on any tip to silence</div>
+                </div>
+                <div class="settings-toggle on" id="arteSuggestSettingSwitch"></div>
+              </div>
+              <div class="settings-toggle-row" onclick="toggleSetting(this)">
+                <div class="settings-toggle-info">
+                  <div class="settings-toggle-title">Art-E status bar</div>
+                  <div class="settings-toggle-sub">Bottom-of-screen "monitoring 5 pages" pulse</div>
+                </div>
+                <div class="settings-toggle on"></div>
+              </div>
+              <div class="settings-toggle-row" onclick="toggleSetting(this)">
+                <div class="settings-toggle-info">
+                  <div class="settings-toggle-title">Auto-execute trusted tasks</div>
+                  <div class="settings-toggle-sub">Reshares, mute rules, and triage — without asking each time</div>
+                </div>
+                <div class="settings-toggle off"></div>
+              </div>
+              <div class="settings-toggle-row" onclick="toggleSetting(this)">
+                <div class="settings-toggle-info">
+                  <div class="settings-toggle-title">Art-E voice</div>
+                  <div class="settings-toggle-sub">Concise · plain English · no jargon</div>
+                </div>
+                <div class="settings-toggle on"></div>
+              </div>
           </div>
 
           <div class="prof-panel" id="prof-integrations">
@@ -5427,12 +5529,12 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
 </button>
 
 <!-- Art-E contextual hint bubble — appears next to FAB suggesting context-aware help -->
-<div class="arte-hint-bubble show" id="arteHintBubble" onclick="arteFollowHint()">
+<div class="arte-hint-bubble show" id="arteHintBubble" onclick="arteFollowHint()" title="Tap to ask Art-E · ✕ silences tips for 24h">
   <div class="arte-hint-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
   <div class="arte-hint-text">Want me to draft tomorrow's posts?</div>
-  <div class="arte-hint-close" onclick="event.stopPropagation();document.getElementById('arteHintBubble').classList.remove('show')">
+  <button class="arte-hint-close" onclick="event.stopPropagation();silenceArteFor24h()" title="Silence Art-E tips for 24h">
     <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
-  </div>
+  </button>
 </div>
 
 <!-- Floating Art-E button — Investment engine, always one tap away -->
@@ -5514,11 +5616,15 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
 <div class="arte-chat-host" id="arteChatHost">
   <div class="arte-chat-head">
     <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
-    <div>
+    <div style="flex:1;min-width:0">
       <div class="arte-chat-title">Art-E · Agent</div>
       <div class="arte-chat-sub">● Ready · Can act on your behalf</div>
     </div>
-    <button class="modal-close" onclick="closeArteChat()" style="margin-left:auto"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <button class="silence-link" onclick="toggleArteSuggestions()" title="Turn floating tip bubble on or off">
+      <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M23 9l-6 6M17 9l6 6"/></svg>
+      <span class="silence-lbl">Silence tips</span>
+    </button>
+    <button class="modal-close" onclick="closeArteChat()" title="Close Art-E"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   </div>
 
   <!-- Agent bar — search + quick tasks -->
@@ -6634,23 +6740,30 @@ function updateLiveStats(pageId){
   if(ctx) ctx.textContent = data.name;
   const grid = document.getElementById('liveGrid');
   if(!grid) return;
-  // Build the reach headline card with sparkline, then the 4 secondary stats
-  const sparkPath = buildSparklinePath(data.reachSpark, 220, 30);
-  const sparkColor = data.reach7dUp ? 'var(--opp)' : 'var(--crisis)';
-  const deltaCls = data.reach7dUp ? 'opp' : 'crisis';
-  const reachCardHtml = `
-    <div class="reach-headline" onclick="openArteChat('Explain my reach', {intent:'explain-numbers'})" title="Tap to ask Art-E about your reach">
-      <div class="reach-headline-row">
-        <div>
-          <div class="reach-headline-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Reach · 7 days</div>
-          <div class="reach-headline-val">${data.reach7d}</div>
-        </div>
-        <div class="reach-headline-delta ${deltaCls}">${data.reach7dDelta}</div>
+  // Build the multi-metric 7-day snapshot card (reach + engagement + sentiment + shares)
+  const metrics = data.weekly || defaultWeeklyMetrics(data);
+  const tileHtml = (m) => {
+    const sp = buildSparklinePath(m.spark || [], 110, 18);
+    const sparkClr = m.up ? 'var(--opp)' : (m.up === false ? 'var(--crisis)' : 'var(--t3)');
+    const deltaCls = m.up ? 'up' : (m.up === false ? 'dn' : 'neu');
+    return `<div class="ws-tile ${m.id||''}" onclick="openArteChat('Explain my ${m.label.toLowerCase()}', {intent:'explain-numbers'})" title="Ask Art-E about ${m.label.toLowerCase()}">
+      <div class="ws-tile-lbl">${m.icon||''} ${m.label}</div>
+      <div class="ws-tile-row">
+        <div class="ws-tile-val">${m.val}</div>
+        <div class="ws-tile-delta ${deltaCls}">${m.delta || ''}</div>
       </div>
-      <svg class="reach-spark" viewBox="0 0 220 32" preserveAspectRatio="none">
-        <path d="${sparkPath.area}" fill="${sparkColor}" opacity="0.18"/>
-        <path d="${sparkPath.line}" fill="none" stroke="${sparkColor}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <svg class="ws-tile-spark" viewBox="0 0 110 18" preserveAspectRatio="none">
+        <path d="${sp.area}" fill="${sparkClr}" opacity="0.16"/>
+        <path d="${sp.line}" fill="none" stroke="${sparkClr}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
+    </div>`;
+  };
+  const reachCardHtml = `
+    <div class="week-snapshot">
+      <div class="week-snapshot-head"><span>This week's snapshot</span><span class="ws-period">7 days</span></div>
+      <div class="week-snapshot-grid">
+        ${metrics.map(tileHtml).join('')}
+      </div>
     </div>
   `;
   const statsHtml = data.stats.map(s => {
@@ -6663,6 +6776,32 @@ function updateLiveStats(pageId){
     </div>`;
   }).join('');
   grid.innerHTML = reachCardHtml + statsHtml;
+}
+
+/* Default weekly metrics from PAGE_LIVE_DATA — reach + engagement + shares + sentiment */
+function defaultWeeklyMetrics(data){
+  return [
+    {
+      id:'reach', label:'Reach', val:data.reach7d || '—', delta:data.reach7dDelta || '',
+      up:data.reach7dUp, spark:data.reachSpark || [],
+      icon:'<svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'
+    },
+    {
+      id:'eng', label:'Engagement', val:data.eng7d || '4.8%', delta:data.eng7dDelta || '+0.4',
+      up:data.eng7dUp !== false, spark:data.engSpark || [4.1,4.3,4.2,4.5,4.6,4.7,4.8],
+      icon:'<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>'
+    },
+    {
+      id:'shares', label:'Shares', val:data.shares7d || '12.4K', delta:data.shares7dDelta || '+18%',
+      up:data.shares7dUp !== false, spark:data.sharesSpark || [1.2,1.5,1.8,1.6,2.1,1.9,2.3],
+      icon:'<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>'
+    },
+    {
+      id:'sent', label:'Sentiment', val:data.sent7d || '0.82', delta:data.sent7dDelta || 'Stable',
+      up:null, spark:data.sentSpark || [0.78,0.80,0.79,0.81,0.82,0.83,0.82],
+      icon:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>'
+    }
+  ];
 }
 
 /* Build SVG sparkline path from array of values · returns {line, area} */
@@ -6742,7 +6881,22 @@ function mbSelect(el){
   if(el && !el.classList.contains('arte')) el.classList.add('active');
 }
 
-/* ─── ART-E SUGGESTION TOGGLE — silences the hint bubble ─── */
+/* ─── ART-E SILENCE / TOGGLE — multiple paths to silence Art-E ─── */
+function silenceArteFor24h(){
+  localStorage.setItem('artemis_v2_arte_off', '1');
+  applyArteSuggestState();
+  if(typeof toast === 'function') toast('info','Art-E tips silenced · re-enable from the pill in the topnav');
+}
+function toggleArteSuggestionsFromSettings(row){
+  toggleArteSuggestions();
+  // Sync the settings page switch with the new state
+  const switchEl = document.getElementById('arteSuggestSettingSwitch');
+  if(switchEl){
+    const off = localStorage.getItem('artemis_v2_arte_off') === '1';
+    switchEl.classList.toggle('on', !off);
+    switchEl.classList.toggle('off', off);
+  }
+}
 function toggleArteSuggestions(){
   const off = localStorage.getItem('artemis_v2_arte_off') === '1';
   if(off){
@@ -6757,13 +6911,25 @@ function toggleArteSuggestions(){
 function applyArteSuggestState(){
   const off = localStorage.getItem('artemis_v2_arte_off') === '1';
   const btn = document.getElementById('arteSuggestToggle');
+  const lbl = document.getElementById('arteToggleState');
+  const settingSwitch = document.getElementById('arteSuggestSettingSwitch');
   if(off){
     document.body.classList.add('arte-suggestions-off');
-    if(btn){ btn.classList.add('arte-off'); btn.title = 'Art-E suggestions OFF · click to enable'; }
+    if(btn){ btn.classList.add('arte-off'); btn.title = 'Art-E tips: OFF · click to turn on'; }
+    if(lbl) lbl.textContent = 'Tips off';
+    if(settingSwitch){ settingSwitch.classList.remove('on'); settingSwitch.classList.add('off'); }
   } else {
     document.body.classList.remove('arte-suggestions-off');
-    if(btn){ btn.classList.remove('arte-off'); btn.title = 'Art-E suggestions ON · click to silence'; }
+    if(btn){ btn.classList.remove('arte-off'); btn.title = 'Art-E tips: ON · click to silence'; }
+    if(lbl) lbl.textContent = 'Tips on';
+    if(settingSwitch){ settingSwitch.classList.add('on'); settingSwitch.classList.remove('off'); }
   }
+}
+
+function toggleArteSuggestionsFromSettings(rowEl){
+  // Same as topnav toggle but originated from settings page
+  toggleArteSuggestions();
+  // Re-sync the visual switch (applyArteSuggestState already handled by toggle)
 }
 document.addEventListener('DOMContentLoaded', applyArteSuggestState);
 
