@@ -959,26 +959,19 @@ body{
   align-items:center;
   gap:10px;
 }
-.composer-avatar{
-  width:40px;height:40px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#FFA500,#FF6B00);
-  display:grid;place-items:center;
-  font-weight:700;
-  color:white;
-  flex-shrink:0;
-}
+.composer-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#FF8C42,#FF6B00);display:grid;place-items:center;font-weight:700;font-size:16px;color:white;flex-shrink:0}
 .composer-input{
   flex:1;
   background:var(--bg-input);
   border:none;
   border-radius:9999px;
-  padding:10px 16px;
+  padding:14px 20px;
   color:var(--t2);
   font-family:inherit;
-  font-size:15px;
+  font-size:var(--fs-lg);
   cursor:pointer;
   text-align:left;
+  transition:background var(--t-base);
 }
 .composer-input:hover{background:var(--bg-elev-2)}
 
@@ -986,9 +979,9 @@ body{
   display:flex;
   align-items:center;
   border-top:1px solid var(--bdr-soft);
-  margin:10px -16px -12px;
-  padding:10px 12px;
-  gap:10px;  /* clear gap between distinct buttons */
+  margin:14px -20px -16px;
+  padding:14px 16px;
+  gap:12px;  /* generous gap between distinct buttons */
 }
 .composer-btn{
   flex:1;
@@ -996,15 +989,16 @@ body{
   border:1px solid var(--bdr-soft);
   color:var(--t1);
   font-family:inherit;
-  font-size:var(--fs-base);
+  font-size:var(--fs-md);
   font-weight:var(--fw-semibold);
-  padding:9px 12px;
-  border-radius:9999px;  /* pill shape — distinct, tappable */
+  padding:13px 16px;  /* taller, more comfortable target */
+  border-radius:9999px;
   cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:7px;
+  display:flex;align-items:center;justify-content:center;gap:9px;
   transition:all var(--t-base);
   white-space:nowrap;
   min-width:0;
+  min-height:44px;  /* iOS minimum tappable height */
 }
 .composer-btn:hover{
   background:var(--hover-bg-strong);
@@ -1016,7 +1010,7 @@ body{
   background:var(--hover-bg-pressed);
 }
 .composer-btn svg{
-  width:16px;height:16px;
+  width:18px;height:18px;
   fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0;
 }
 .composer-btn.predict svg{color:var(--teal)}
@@ -1263,8 +1257,10 @@ body.arte-suggestions-off .arte-chat-head .silence-link{
   /* Composer */
   .composer-wrap{margin:0 -8px 10px -8px;border-radius:0}
   .composer-input{font-size:13px}
-  .composer-btn{font-size:11px;padding:8px 10px;gap:5px}
-  .composer-btn svg{width:14px;height:14px}
+  .composer-btn{font-size:12px;padding:10px 8px;gap:5px;min-height:40px}
+  .composer-btn svg{width:15px;height:15px}
+  .composer-actions{padding:10px 12px;gap:6px;margin:10px -16px -12px}
+  .composer-input{font-size:13px;padding:11px 16px}
   /* svg sizing handled in .composer-btn rule above */
   
   /* Stories — already horizontally scrollable, just compact */
@@ -3960,7 +3956,7 @@ html[data-theme="light"] .kpi-card-v2.reach-hero{
         <!-- Schedule moved to inside Predict modal as a follow-up.      -->
         <!-- ═══════════════════════════════════════════════════════════ -->
         <div class="composer-wrap card" style="padding:0">
-          <div style="display:flex;align-items:center;gap:10px;padding:12px 16px">
+          <div style="display:flex;align-items:center;gap:12px;padding:16px 20px">
             <div class="composer-avatar">A</div>
             <button class="composer-input">Draft a post — Art-E will score it before you publish</button>
           </div>
