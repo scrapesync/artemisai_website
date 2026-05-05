@@ -1123,7 +1123,25 @@ body{
 .panel-title{font-size:15px;font-weight:700;color:var(--t1);margin:0;display:flex;align-items:center;gap:8px}
 .panel-sub{font-size:12px;color:var(--t2);margin-top:2px}
 .panel-body{position:relative}
-.panel canvas{max-width:100%}
+
+/* CRITICAL chart sizing fix — Chart.js with responsive+maintainAspectRatio:false
+   needs a parent with fixed height, otherwise canvas grows every resize tick.
+   We give every chart canvas in a panel a defined wrapper height by setting
+   the canvas itself to fixed display block + explicit height. */
+.panel canvas{
+  display:block;
+  max-width:100%;
+  width:100% !important;
+  /* canvas height attribute ensures Chart.js has a stable target */
+}
+.panel canvas[height]{height:auto}
+
+/* KPI sparklines have a fixed 32px slot */
+.kpi-card-v2 canvas{
+  height:32px !important;
+  width:100% !important;
+  margin-top:6px;
+}
 .arte-badge{
   background:var(--arte-bg);color:var(--arte-1);font-size:10px;font-weight:700;
   padding:2px 6px;border-radius:9999px;text-transform:uppercase;letter-spacing:0.04em;
@@ -2341,6 +2359,13 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
 @media(max-width:640px){
   .arte-hint-bubble{right:74px;bottom:86px;max-width:180px;font-size:11px}
 }
+
+/* Each chart sits inside a sized wrapper to prevent infinite resize */
+.chart-wrap{position:relative;width:100%}
+.chart-wrap.h-sm{height:130px}
+.chart-wrap.h-md{height:170px}
+.chart-wrap.h-lg{height:220px}
+.chart-wrap.h-xl{height:260px}
 </style>
 </head>
 <body>
@@ -3030,7 +3055,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
             <button class="subtab" data-sub="trends"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Trends</button>
             <button class="subtab" data-sub="sentiment"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8z"/></svg> Sentiment</button>
           </div>
-          <div style="background:linear-gradient(90deg,rgba(124,92,191,0.12),rgba(0,196,160,0.06));border:1px solid rgba(124,92,191,0.2);border-radius:12px;padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;cursor:pointer" onclick="navigateTo('advanced',document.querySelector('[data-page=&quot;advanced&quot;]'))">
+          <div style="background:linear-gradient(90deg,rgba(124,92,191,0.12),rgba(0,196,160,0.06));border:1px solid rgba(124,92,191,0.2);border-radius:12px;padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;cursor:pointer" onclick="window.open('mockup_advanced.html','_blank')">
             <div style="width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--arte-1),var(--arte-2));display:grid;place-items:center;flex-shrink:0">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
             </div>
@@ -3038,7 +3063,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
               <div style="font-size:13px;font-weight:700;color:var(--t1)">Need to go deeper?</div>
               <div style="font-size:12px;color:var(--t2);margin-top:1px">Open Advanced Analytics for virality models, cascade analysis, flagged comments, audience clustering and more.</div>
             </div>
-            <button class="btn arte" style="flex-shrink:0" onclick="event.stopPropagation();navigateTo('advanced',document.querySelector('[data-page=&quot;advanced&quot;]'))">
+            <button class="btn arte" style="flex-shrink:0" onclick="event.stopPropagation();window.open('mockup_advanced.html','_blank')">
               Open <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
             </button>
           </div>
@@ -3085,7 +3110,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
                 </div>
                 <span class="arte-badge"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Art-E</span>
               </div>
-              <canvas id="mainEng" height="120"></canvas>
+              <div class="chart-wrap h-sm"><canvas id="mainEng"></canvas></div>
             </div>
 
             <div class="two-col">
@@ -3094,7 +3119,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
                   <div><div class="panel-title">Sentiment Split</div><div class="panel-sub">847 posts · last 30 days</div></div>
                 </div>
                 <div style="display:flex;justify-content:center;padding:8px 0">
-                  <canvas id="sentDonut" width="180" height="180"></canvas>
+                  <div style="position:relative;height:200px;width:200px;margin:0 auto"><canvas id="sentDonut"></canvas></div>
                 </div>
                 <div class="sent-summary">
                   <span><span class="dot" style="background:#22C55E"></span> Positive 60%</span>
@@ -3107,7 +3132,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
                 <div class="panel-header">
                   <div><div class="panel-title">Format Performance</div><div class="panel-sub">Avg engagement by type</div></div>
                 </div>
-                <canvas id="fmtChart" height="170"></canvas>
+                <div class="chart-wrap h-md"><canvas id="fmtChart"></canvas></div>
               </div>
             </div>
 
@@ -3122,11 +3147,11 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
             <div class="two-col">
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">This Week vs Last</div><div class="panel-sub">Key metric comparison</div></div></div>
-                <canvas id="weekComp" height="170"></canvas>
+                <div class="chart-wrap h-md"><canvas id="weekComp"></canvas></div>
               </div>
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Emotion Radar</div><div class="panel-sub">This week vs last</div></div></div>
-                <canvas id="emotionRadar" height="170"></canvas>
+                <div class="chart-wrap h-md"><canvas id="emotionRadar"></canvas></div>
               </div>
             </div>
 
@@ -3181,21 +3206,21 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
             </div>
             <div class="panel">
               <div class="panel-header"><div><div class="panel-title">90-Day Multi-Metric Trend</div><div class="panel-sub">Engagement rate · reach · posts published</div></div></div>
-              <canvas id="trend90" height="130"></canvas>
+              <div class="chart-wrap h-sm"><canvas id="trend90"></canvas></div>
             </div>
             <div class="two-col">
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Day of Week</div><div class="panel-sub">Avg engagement</div></div></div>
-                <canvas id="dowChart" height="170"></canvas>
+                <div class="chart-wrap h-md"><canvas id="dowChart"></canvas></div>
               </div>
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Best Posting Hours</div><div class="panel-sub">Avg engagement by hour</div></div></div>
-                <canvas id="hourlyChart" height="170"></canvas>
+                <div class="chart-wrap h-md"><canvas id="hourlyChart"></canvas></div>
               </div>
             </div>
             <div class="panel">
               <div class="panel-header"><div><div class="panel-title">Reach vs Engagement Scatter</div><div class="panel-sub">60 posts · correlation analysis</div></div></div>
-              <canvas id="scatterChart" height="170"></canvas>
+              <div class="chart-wrap h-md"><canvas id="scatterChart"></canvas></div>
             </div>
           </div>
 
@@ -3207,21 +3232,21 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
             </div>
             <div class="panel">
               <div class="panel-header"><div><div class="panel-title">Sentiment Over Time — 30 Days</div><div class="panel-sub">Positive and negative rate daily</div></div></div>
-              <canvas id="sentTime" height="140"></canvas>
+              <div class="chart-wrap h-sm"><canvas id="sentTime"></canvas></div>
             </div>
             <div class="two-col">
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Emotion Breakdown</div><div class="panel-sub">Comment classification</div></div></div>
-                <canvas id="emotionBar" height="160"></canvas>
+                <div class="chart-wrap h-md"><canvas id="emotionBar"></canvas></div>
               </div>
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Sentiment by Page vs Benchmark</div><div class="panel-sub">Industry baseline = 0.65</div></div></div>
-                <canvas id="sentByPage" height="160"></canvas>
+                <div class="chart-wrap h-md"><canvas id="sentByPage"></canvas></div>
               </div>
             </div>
             <div class="panel">
               <div class="panel-header"><div><div class="panel-title">Sentiment → Engagement</div><div class="panel-sub">60-post scatter correlation</div></div></div>
-              <canvas id="sentEng" height="170"></canvas>
+              <div class="chart-wrap h-md"><canvas id="sentEng"></canvas></div>
             </div>
           </div>
 
@@ -3303,21 +3328,21 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
             </div>
             <div class="panel">
               <div class="panel-header"><div><div class="panel-title">Share Velocity — 48h</div><div class="panel-sub">Shares per hour · red line = viral threshold (200/hr)</div></div></div>
-              <canvas id="velChart" height="140"></canvas>
+              <div class="chart-wrap h-sm"><canvas id="velChart"></canvas></div>
             </div>
             <div class="two-col">
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Virality Score Distribution</div><div class="panel-sub">All posts this month</div></div></div>
-                <canvas id="viralDist" height="160"></canvas>
+                <div class="chart-wrap h-md"><canvas id="viralDist"></canvas></div>
               </div>
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Viral Triggers</div><div class="panel-sub">Impact ranking</div></div></div>
-                <canvas id="triggerChart" height="160"></canvas>
+                <div class="chart-wrap h-md"><canvas id="triggerChart"></canvas></div>
               </div>
             </div>
             <div class="panel">
               <div class="panel-header"><div><div class="panel-title">Probability by Day &amp; Time</div><div class="panel-sub">% chance of crossing viral threshold</div></div></div>
-              <canvas id="viralHeat" height="180"></canvas>
+              <div class="chart-wrap h-md"><canvas id="viralHeat"></canvas></div>
             </div>
           </div>
 
@@ -3334,30 +3359,30 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
             <div class="three-col">
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Caption Length</div><div class="panel-sub">Engagement by char count</div></div></div>
-                <canvas id="captionLenChart" height="160"></canvas>
+                <div class="chart-wrap h-md"><canvas id="captionLenChart"></canvas></div>
               </div>
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Emoji Sweet Spot</div><div class="panel-sub">Reactions by emoji count</div></div></div>
-                <canvas id="emojiChart" height="160"></canvas>
+                <div class="chart-wrap h-md"><canvas id="emojiChart"></canvas></div>
               </div>
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Volatility Index</div><div class="panel-sub">Variance per page</div></div></div>
-                <canvas id="volatilityChart" height="160"></canvas>
+                <div class="chart-wrap h-md"><canvas id="volatilityChart"></canvas></div>
               </div>
             </div>
             <div class="two-col">
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Share Multiplier</div><div class="panel-sub">Cumulative reach effect</div></div></div>
-                <canvas id="shareMultChart" height="160"></canvas>
+                <div class="chart-wrap h-md"><canvas id="shareMultChart"></canvas></div>
               </div>
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Frequency vs Engagement</div><div class="panel-sub">Diminishing returns curve</div></div></div>
-                <canvas id="freqEngChart" height="160"></canvas>
+                <div class="chart-wrap h-md"><canvas id="freqEngChart"></canvas></div>
               </div>
             </div>
             <div class="panel">
               <div class="panel-header"><div><div class="panel-title">Engagement Funnel</div><div class="panel-sub">Reach → reaction → comment → share</div></div></div>
-              <canvas id="funnelChart" height="140"></canvas>
+              <div class="chart-wrap h-sm"><canvas id="funnelChart"></canvas></div>
             </div>
           </div>
 
@@ -3378,7 +3403,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
             <div class="two-col">
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Hour × Day Engagement Matrix</div><div class="panel-sub">Heatmap drill-down · all 168 windows</div></div></div>
-                <canvas id="hourDayMatrix" height="260"></canvas>
+                <div class="chart-wrap h-xl"><canvas id="hourDayMatrix"></canvas></div>
               </div>
               <div class="panel">
                 <div class="panel-header">
@@ -3392,7 +3417,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
               <div class="panel-header">
                 <div><div class="panel-title">Multi-Page Performance Comparison</div><div class="panel-sub">All metrics across all pages · last 7 days</div></div>
               </div>
-              <canvas id="multiPageChart" height="200"></canvas>
+              <div class="chart-wrap h-lg"><canvas id="multiPageChart"></canvas></div>
             </div>
           </div>
 
@@ -3405,22 +3430,22 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
             <div class="three-col">
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Topic Distribution</div><div class="panel-sub">DeBERTa-v3 zero-shot</div></div></div>
-                <canvas id="topicDistChart" height="200"></canvas>
+                <div class="chart-wrap h-lg"><canvas id="topicDistChart"></canvas></div>
               </div>
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Toxicity Index</div><div class="panel-sub">Per page · 30 days</div></div></div>
-                <canvas id="toxicityChart" height="200"></canvas>
+                <div class="chart-wrap h-lg"><canvas id="toxicityChart"></canvas></div>
               </div>
               <div class="panel">
                 <div class="panel-header"><div><div class="panel-title">Crisis Detection Log</div><div class="panel-sub">Sentiment spikes · 30d</div></div></div>
-                <canvas id="crisisLogChart" height="200"></canvas>
+                <div class="chart-wrap h-lg"><canvas id="crisisLogChart"></canvas></div>
               </div>
             </div>
             <div class="panel">
               <div class="panel-header">
                 <div><div class="panel-title">Audience Cluster Map</div><div class="panel-sub">K-Means clustering · cross-page topic embeddings</div></div>
               </div>
-              <canvas id="clusterMap" height="220"></canvas>
+              <div class="chart-wrap h-lg"><canvas id="clusterMap"></canvas></div>
             </div>
           </div>
 
@@ -4377,6 +4402,7 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
 <script>
 /* ─── ROUTER ──────────────────────────────────── */
 function navigateTo(pageName, navItem){
+  if(pageName !== 'advanced') window._lastPageName = pageName;
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const target = document.getElementById('page-'+pageName);
   if(target) target.classList.add('active');
@@ -4390,8 +4416,16 @@ function navigateTo(pageName, navItem){
   if(pageName === 'analytics' && !window._analyticsLoaded){
     setTimeout(()=>{ initAnalytics(); window._analyticsLoaded = true; }, 50);
   }
-  if(pageName === 'advanced' && !window._advancedLoaded){
-    setTimeout(()=>{ initAdvanced(); window._advancedLoaded = true; }, 50);
+  // Advanced Analytics opens in a new tab — full standalone page
+  if(pageName === 'advanced'){
+    window.open('mockup_advanced.html', '_blank');
+    // Don't actually navigate the SPA — return to previous page
+    setTimeout(()=>{
+      const prev = window._lastPageName || 'home';
+      const prevNav = document.querySelector(`[data-page="${prev}"]`);
+      navigateTo(prev, prevNav);
+    }, 100);
+    return;
   }
   if(pageName === 'discovery' && !window._discoveryLoaded){
     setTimeout(()=>{ initFlywheel(); window._discoveryLoaded = true; }, 50);
@@ -5313,6 +5347,9 @@ const C = {
 
 const baseOpts = {
   responsive:true, maintainAspectRatio:false,
+  // Critical: disable resize-loop animations that cause growth bug
+  resizeDelay:200,
+  animation:{duration:400},
   plugins:{
     legend:{display:false},
     tooltip:{
