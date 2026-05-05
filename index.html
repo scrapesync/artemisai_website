@@ -1837,83 +1837,63 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
   isolation:isolate;
 }
 
-/* Left half — red restless storm (covers left 55% of hero) */
-.hb-left{
+/* Unified atmospheric wash — single layered background that flows
+   smoothly from warm-left to cool-right with no seams or split. All
+   blobs live in the same coordinate system so there's no left/right
+   handoff to break across viewport sizes. */
+.hb-left,
+.hb-right{
   position:absolute;
-  top:0;left:0;bottom:0;width:55%;
+  inset:0;
   z-index:1;
   overflow:hidden;
+  pointer-events:none;
 }
+
+/* Layer 1 — wide ellipses placed across the full hero width. The
+   percentages span the entire 0-100% range so on any viewport
+   (390px mobile or 1640px desktop) the gradient flows continuously. */
 .hb-left::before{
   content:'';
-  position:absolute;inset:-20%;
+  position:absolute;inset:-15%;
   background:
-    radial-gradient(ellipse 50% 70% at 20% 30%, rgba(229,57,53,0.18) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 50% at 40% 70%, rgba(124,92,191,0.28) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 40% at 60% 40%, rgba(229,57,53,0.12) 0%, transparent 55%);
-  filter:blur(60px);
-  animation:hbChaosShift 5s ease-in-out infinite alternate;
+    radial-gradient(ellipse 55% 70% at 12% 35%, rgba(229,57,53,0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 30% 75%, rgba(124,92,191,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 70% at 70% 50%, rgba(0,196,160,0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 65% at 88% 35%, rgba(79,195,247,0.14) 0%, transparent 60%);
+  filter:blur(70px);
+  animation:hbAtmosphere 12s ease-in-out infinite alternate;
 }
+
+/* Layer 2 — accents (orange + light-blue) that gently breathe. Uses
+   mix-blend-mode:screen so colors compound rather than darken. */
 .hb-left::after{
   content:'';
   position:absolute;inset:-10%;
   background:
-    radial-gradient(ellipse 30% 40% at 30% 60%, rgba(255,140,66,0.10) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 30% at 70% 30%, rgba(229,57,53,0.12) 0%, transparent 55%);
-  filter:blur(80px);
-  animation:hbChaosShift 7s ease-in-out infinite alternate-reverse;
-  mix-blend-mode:screen;
-}
-@keyframes hbChaosShift{
-  0%{transform:translate(0,0) scale(1);opacity:0.85}
-  33%{transform:translate(-4%,2%) scale(1.05);opacity:1}
-  66%{transform:translate(3%,-3%) scale(0.97);opacity:0.95}
-  100%{transform:translate(-2%,4%) scale(1.03);opacity:0.9}
-}
-
-/* Right half — blue calm aurora (covers right 55% of hero, left:45% so they overlap and blend) */
-.hb-right{
-  position:absolute;
-  top:0;right:0;bottom:0;width:55%;
-  left:45%;
-  z-index:1;
-  overflow:hidden;
-}
-.hb-right::before{
-  content:'';
-  position:absolute;inset:-20%;
-  background:
-    radial-gradient(ellipse 70% 80% at 60% 50%, rgba(79,195,247,0.16) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 60% at 80% 40%, rgba(0,196,160,0.18) 0%, transparent 60%);
-  filter:blur(70px);
-  animation:hbCalmBreathe 8s ease-in-out infinite;
-}
-.hb-right::after{
-  content:'';
-  position:absolute;inset:-10%;
-  background:
-    radial-gradient(ellipse 40% 50% at 70% 60%, rgba(125,211,252,0.13) 0%, transparent 65%);
+    radial-gradient(ellipse 40% 50% at 20% 65%, rgba(255,140,66,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 55% at 80% 60%, rgba(125,211,252,0.10) 0%, transparent 65%);
   filter:blur(90px);
-  animation:hbCalmBreathe 10s ease-in-out infinite reverse;
+  animation:hbAtmosphere 16s ease-in-out infinite alternate-reverse;
   mix-blend-mode:screen;
 }
-@keyframes hbCalmBreathe{
-  0%,100%{opacity:0.85;transform:scale(1)}
-  50%{opacity:1;transform:scale(1.04)}
+
+/* The .hb-right element keeps the markup compatible with existing HTML
+   but no longer paints anything — the unified wash above handles
+   everything. */
+.hb-right::before,
+.hb-right::after{display:none}
+
+@keyframes hbAtmosphere{
+  0%{transform:translate(0,0) scale(1);opacity:0.92}
+  33%{transform:translate(-2%,1%) scale(1.03);opacity:1}
+  66%{transform:translate(2%,-1%) scale(0.99);opacity:0.96}
+  100%{transform:translate(-1%,2%) scale(1.02);opacity:0.94}
 }
 
-/* Soft blend zone in the middle — no hard seam between red and blue */
-.hb-blend{
-  position:absolute;
-  top:0;bottom:0;
-  left:35%;right:35%;
-  z-index:2;
-  background:radial-gradient(ellipse 60% 100% at 50% 50%,
-    rgba(0,0,0,0.4) 0%,
-    transparent 70%
-  );
-  pointer-events:none;
-}
+/* The blend zone is no longer needed — the unified wash has no seam
+   to soften. Keep the markup hook so HTML stays unchanged. */
+.hb-blend{display:none}
 
 /* Horizon glow line at the bottom of the hero — color story in one stripe */
 .hb-horizon{
@@ -1922,24 +1902,19 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
   height:1px;
   background:linear-gradient(90deg,
     transparent 0%,
-    rgba(229,57,53,0.25) 15%,
-    rgba(255,140,66,0.22) 30%,
-    rgba(124,92,191,0.3) 45%,
-    rgba(0,196,160,0.32) 55%,
-    rgba(79,195,247,0.28) 70%,
-    rgba(96,165,250,0.2) 85%,
+    rgba(229,57,53,0.22) 18%,
+    rgba(124,92,191,0.32) 42%,
+    rgba(0,196,160,0.32) 58%,
+    rgba(79,195,247,0.22) 82%,
     transparent 100%
   );
   z-index:5;
-  filter:drop-shadow(0 0 4px rgba(124,92,191,0.25));
+  filter:drop-shadow(0 0 4px rgba(124,92,191,0.22));
 }
 
-/* Light theme — even softer overlay opacity so colors stay subtle on white */
-html[data-theme="light"] .hb-left::before{opacity:0.35}
-html[data-theme="light"] .hb-left::after{opacity:0.28}
-html[data-theme="light"] .hb-right::before{opacity:0.35}
-html[data-theme="light"] .hb-right::after{opacity:0.28}
-html[data-theme="light"] .hb-blend{background:radial-gradient(ellipse 60% 100% at 50% 50%, rgba(255,255,255,0.4) 0%, transparent 70%)}
+/* Light theme — softer overall opacity so the unified wash stays subtle on white */
+html[data-theme="light"] .hb-left::before{opacity:0.45}
+html[data-theme="light"] .hb-left::after{opacity:0.35}
 
 /* ═══════════════════════════════════════════════════════════════════════
    HERO PUNCHLINE — headline + metric pills floating on the color story
