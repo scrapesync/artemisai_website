@@ -1141,9 +1141,19 @@ footer{
 }
 
 
-/* Light-mode flow graph — stronger borders/labels for white bg */
+/* Light-mode flow graph — stronger contrast on tinted backgrounds.
+   The SVG uses direct hex fills (#E53935 / #00C4A0 / #7C5CBF / #B0B3B8)
+   instead of CSS vars, so we override per-fill with darker variants
+   that read clearly on light tinted card backgrounds. */
 html[data-theme="light"] .flow-svg text.flow-label{fill:var(--t1)}
 html[data-theme="light"] .flow-svg text.flow-sublabel{fill:var(--t2)}
+html[data-theme="light"] .flow-svg text[fill="#E53935"]{fill:#B71C1C}
+html[data-theme="light"] .flow-svg text[fill="#00C4A0"]{fill:#00695C}
+html[data-theme="light"] .flow-svg text[fill="#7C5CBF"]{fill:#4527A0}
+/* Body grey on tinted backgrounds: deeper grey for legibility */
+html[data-theme="light"] .flow-svg text[fill="#B0B3B8"]{fill:#424242}
+/* Outer card text "Your pages": ensure it's dark on light card */
+html[data-theme="light"] .flow-svg text[fill="#E4E6EB"]{fill:#050505}
 
 @media(max-width:980px){
   .live-grid{grid-template-columns:repeat(2, 1fr);gap:16px}
@@ -1241,9 +1251,58 @@ html[data-theme="light"] .flow-svg text.flow-sublabel{fill:var(--t2)}
   to{opacity:1;transform:translateY(0) scale(1)}
 }
 
-/* Stagger child animation */
-.cinematic-stagger > *{opacity:0;will-change:opacity, transform}
-.cinematic-stagger.in-view > *{animation:cinematicIn 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards}
+/* Stagger child animation — base (fadeSlideUp with rotateX 3D entry) */
+.cinematic-stagger{perspective:1200px}
+.cinematic-stagger > *{opacity:0;will-change:opacity, transform;transform:translateY(60px) rotateX(-12deg);transform-origin:center top}
+.cinematic-stagger.in-view > *{animation:cinematicChildIn 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards}
+@keyframes cinematicChildIn{
+  from{opacity:0;transform:translateY(60px) rotateX(-12deg)}
+  to{opacity:1;transform:translateY(0) rotateX(0)}
+}
+
+/* Section-specific variants. Each section feels distinct on entry. */
+
+/* Live counters — scale-bounce in (like coins landing) */
+.live-grid.cinematic-stagger > *{transform:scale(0.7);transform-origin:center}
+.live-grid.cinematic-stagger.in-view > *{animation:liveScaleIn 800ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards}
+@keyframes liveScaleIn{
+  from{opacity:0;transform:scale(0.7) translateY(20px)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+
+/* Features — door-opening (rotateY 3D swing) */
+.features-grid.cinematic-stagger > *{transform-origin:left center;transform:rotateY(-25deg) translateZ(0)}
+.features-grid.cinematic-stagger.in-view > *{animation:featureSwingIn 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards}
+@keyframes featureSwingIn{
+  from{opacity:0;transform:rotateY(-25deg) translateX(-30px)}
+  to{opacity:1;transform:rotateY(0) translateX(0)}
+}
+
+/* How-it-works — sequential rise with rotation */
+.how-grid.cinematic-stagger > *{transform:translateY(40px) rotateX(-20deg);transform-origin:center bottom}
+.how-grid.cinematic-stagger.in-view > *{animation:howRiseIn 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards}
+@keyframes howRiseIn{
+  from{opacity:0;transform:translateY(40px) rotateX(-20deg)}
+  to{opacity:1;transform:translateY(0) rotateX(0)}
+}
+
+/* Team — tilted slide-up from below */
+.team-grid.cinematic-stagger > *{transform:translateY(50px) rotateX(-15deg) scale(0.94);transform-origin:center bottom}
+.team-grid.cinematic-stagger.in-view > *{animation:teamRiseIn 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards}
+@keyframes teamRiseIn{
+  from{opacity:0;transform:translateY(50px) rotateX(-15deg) scale(0.94)}
+  to{opacity:1;transform:translateY(0) rotateX(0) scale(1)}
+}
+
+/* Problem cards — counter-roll up with bounce */
+.problem-grid.cinematic-stagger > *{transform:translateY(30px) scale(0.85)}
+.problem-grid.cinematic-stagger.in-view > *{animation:problemRollIn 700ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards}
+@keyframes problemRollIn{
+  from{opacity:0;transform:translateY(30px) scale(0.85)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* Stagger delays (apply to all variants) */
 .cinematic-stagger.in-view > *:nth-child(1){animation-delay:0ms}
 .cinematic-stagger.in-view > *:nth-child(2){animation-delay:100ms}
 .cinematic-stagger.in-view > *:nth-child(3){animation-delay:200ms}
@@ -1252,6 +1311,35 @@ html[data-theme="light"] .flow-svg text.flow-sublabel{fill:var(--t2)}
 .cinematic-stagger.in-view > *:nth-child(6){animation-delay:500ms}
 .cinematic-stagger.in-view > *:nth-child(7){animation-delay:600ms}
 .cinematic-stagger.in-view > *:nth-child(8){animation-delay:700ms}
+
+/* Final CTA — zoom-in with shadow expansion */
+.final-cta{
+  opacity:0;
+  transform:scale(0.85);
+  transition:opacity 1000ms cubic-bezier(0.16, 1, 0.3, 1), transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.final-cta.in-view{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* Flow graph — paths draw in (stroke-dashoffset reveal) */
+.flow-svg path[stroke-dasharray]{
+  stroke-dashoffset:0;
+  transition:stroke-dashoffset 1400ms ease-out;
+}
+.flow-section:not(.in-view) .flow-svg path[stroke-dasharray]{
+  stroke-dashoffset:1000;
+}
+.flow-svg g rect{
+  opacity:1;
+  transition:opacity 600ms ease-out;
+}
+.flow-section:not(.in-view) .flow-svg > g{opacity:0}
+.flow-section.in-view .flow-svg > g{
+  opacity:1;
+  transition:opacity 800ms ease-out;
+}
 
 /* 3D tilt cards (live tiles, feature cards, team cards) */
 .tilt-3d{
@@ -1386,11 +1474,136 @@ html[data-theme="light"] .live-tile-num{
   }
   .hero-orb{display:none}
 }
+
+/* ─── SECTION PIPS — right-edge scroll indicator ─── */
+.section-pips{
+  position:fixed;
+  right:24px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:90;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding:14px 10px;
+  background:rgba(14,17,22,0.6);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:1px solid var(--bdr-soft);
+  border-radius:9999px;
+}
+html[data-theme="light"] .section-pips{
+  background:rgba(255,255,255,0.7);
+  border-color:var(--bdr-soft);
+  box-shadow:var(--shadow-sm);
+}
+.section-pips a{
+  position:relative;
+  width:10px;height:10px;
+  display:grid;place-items:center;
+  text-decoration:none;
+}
+.section-pips .pip{
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--bdr);
+  transition:all var(--t-base);
+  display:block;
+}
+.section-pips a:hover .pip{
+  background:var(--t2);
+  transform:scale(1.3);
+}
+.section-pips a.active .pip{
+  background:var(--teal);
+  transform:scale(1.4);
+  box-shadow:0 0 12px rgba(0,196,160,0.6);
+}
+.section-pips .pip-label{
+  position:absolute;
+  right:24px;
+  top:50%;
+  transform:translateY(-50%) translateX(8px);
+  background:var(--bg-elev);
+  color:var(--t1);
+  font-size:var(--fs-xs);
+  font-weight:var(--fw-semibold);
+  padding:4px 10px;
+  border-radius:6px;
+  border:1px solid var(--bdr-soft);
+  box-shadow:var(--shadow-sm);
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity var(--t-base), transform var(--t-base);
+}
+.section-pips a:hover .pip-label{
+  opacity:1;
+  transform:translateY(-50%) translateX(0);
+}
+@media(max-width:980px){
+  .section-pips{display:none}
+}
+
+/* ─── HERO MOCKUP — each alert card hovers at different Z-depth ─── */
+.hero-mockup{transform-style:preserve-3d}
+.hero-mockup .mockup-card:nth-child(1){
+  transform:translateZ(24px);
+}
+.hero-mockup .mockup-card:nth-child(2){
+  transform:translateZ(12px);
+}
+.hero-mockup .mockup-card:nth-child(3){
+  transform:translateZ(0);
+}
+/* Override the float keyframe to keep Z-depths */
+@keyframes floatCard{
+  0%,100%{transform:translateY(0) translateZ(var(--z, 0))}
+  50%{transform:translateY(-4px) translateZ(calc(var(--z, 0) + 8px))}
+}
+.hero-mockup .mockup-card:nth-child(1){--z:24px}
+.hero-mockup .mockup-card:nth-child(2){--z:12px}
+.hero-mockup .mockup-card:nth-child(3){--z:0px}
+
+/* ─── Section title — animated gradient underline on view ─── */
+.section-title::after, .live-title::after{
+  content:'';
+  display:block;
+  width:0;
+  height:3px;
+  margin:14px auto 0;
+  background:linear-gradient(90deg, var(--teal), var(--arte-1));
+  border-radius:2px;
+  transition:width 1000ms cubic-bezier(0.16, 1, 0.3, 1) 200ms;
+}
+.cinematic-reveal.in-view .section-title::after,
+.cinematic-reveal.in-view .live-title::after{
+  width:64px;
+}
+
+/* ─── Live tile numbers — gradient text glow ─── */
+.live-tile-num{
+  text-shadow:0 0 30px rgba(0,196,160,0.15);
+}
+
+/* ─── Smooth scroll for pip links ─── */
+html{scroll-behavior:smooth;scroll-padding-top:80px}
 </style>
 </head>
 <body>
 
 <div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Section navigation pips on right edge — show scroll position -->
+<nav class="section-pips" id="sectionPips" aria-label="Section navigation">
+  <a href="#" data-section="hero" class="active" aria-label="Hero"><span class="pip"></span><span class="pip-label">Top</span></a>
+  <a href="#live-numbers" data-section="live" aria-label="Live numbers"><span class="pip"></span><span class="pip-label">Live</span></a>
+  <a href="#features" data-section="features" aria-label="Features"><span class="pip"></span><span class="pip-label">Features</span></a>
+  <a href="#how" data-section="how" aria-label="How it works"><span class="pip"></span><span class="pip-label">How</span></a>
+  <a href="#team" data-section="team" aria-label="Team"><span class="pip"></span><span class="pip-label">Team</span></a>
+  <a href="#contact" data-section="contact" aria-label="Get started"><span class="pip"></span><span class="pip-label">Start</span></a>
+</nav>
+
 
 <!-- Sign-out modal -->
 <div id="signout-modal">
@@ -1442,7 +1655,7 @@ html[data-theme="light"] .live-tile-num{
 <!-- ─── HERO ───
      HOOKED: External trigger answers the user's internal anxiety:
      'I'm missing things on my pages and I don't know it.' -->
-<section class="hero">
+<section class="hero" id="hero">
   <div class="hero-orb hero-orb-1"></div>
   <div class="hero-orb hero-orb-2"></div>
   <div class="hero-orb hero-orb-3"></div>
@@ -1650,7 +1863,7 @@ html[data-theme="light"] .live-tile-num{
 <!-- ─── ANIMATED FLOW GRAPH — how Artemis works visually ─── 
      Hooked: shows the "trigger → action → reward" loop in motion. 
      Travelling pulses make it feel alive. -->
-<section class="section flow-section">
+<section class="section flow-section cinematic-reveal">
   <div class="container">
     <div class="section-head cinematic-reveal">
       <div class="section-eyebrow">// In one picture</div>
@@ -1993,7 +2206,7 @@ html[data-theme="light"] .live-tile-num{
 <!-- ─── FINAL CTA ─── -->
 <section class="section" id="contact">
   <div class="container">
-    <div class="final-cta">
+    <div class="final-cta cinematic-reveal">
       <div class="final-cta-content">
         <h2>Stop missing the moments<br>that matter on your pages.</h2>
         <p>Free for 14 days. No credit card needed. Set up in 90 seconds. Cancel anytime.</p>
@@ -2206,6 +2419,35 @@ function animateCounter(el, target, suffix, duration){
   window.addEventListener('scroll', () => {
     if(!ticking){ requestAnimationFrame(update); ticking = true; }
   }, {passive:true});
+})();
+
+/* Section pips — highlight the current section as user scrolls */
+(function initSectionPips(){
+  const pips = document.querySelectorAll('.section-pips a[data-section]');
+  if(!pips.length) return;
+  // Map data-section keys to actual elements on the page
+  const mapping = {
+    hero: document.getElementById('hero'),
+    live: document.getElementById('live-numbers'),
+    features: document.getElementById('features'),
+    how: document.getElementById('how'),
+    team: document.getElementById('team'),
+    contact: document.getElementById('contact')
+  };
+  let ticking = false;
+  function update(){
+    const scrollY = window.scrollY + 200;
+    let activeKey = 'hero';
+    Object.entries(mapping).forEach(([k, el]) => {
+      if(el && el.offsetTop <= scrollY) activeKey = k;
+    });
+    pips.forEach(p => p.classList.toggle('active', p.dataset.section === activeKey));
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if(!ticking){ requestAnimationFrame(update); ticking = true; }
+  }, {passive:true});
+  update();
 })();
 
 /* Auth state — show user info if signed in */
