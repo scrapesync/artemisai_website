@@ -305,6 +305,15 @@ body{
   width:100%;
   max-width:680px;
   padding:0 16px;
+  transition:max-width .25s ease;
+}
+/* Wider canvas when on analytics/advanced/discovery/inbox/arte */
+.feed-inner:has(#page-analytics.active),
+.feed-inner:has(#page-advanced.active),
+.feed-inner:has(#page-discovery.active),
+.feed-inner:has(#page-inbox.active),
+.feed-inner:has(#page-arte.active){
+  max-width:1180px;
 }
 
 /* Activity tab strip — subtle, FB-like */
@@ -1037,9 +1046,8 @@ body{
 
 /* ─── PAGE ROUTING ──────────────────────────── */
 .page{display:none}
-.page.active{display:contents}
-.feed-col .page{display:none}
-.feed-col .page.active{display:block}
+.feed-inner > .page{display:none}
+.feed-inner > .page.active{display:block}
 
 /* ─── ANALYTICS PAGE ──────────────────────────── */
 .analytics-wrap{padding:0 16px;max-width:1100px;margin:0 auto}
@@ -1817,6 +1825,238 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
 .notif-row-text strong{font-weight:600}
 .notif-row-time{font-size:11px;color:var(--t2);margin-top:2px}
 
+
+/* ─── ADVANCED ANALYTICS PAGE ──────────── */
+.adv-nav{
+  display:flex;gap:6px;
+  padding:4px;background:var(--bg-elev);
+  border-radius:9999px;
+  margin-bottom:18px;
+  overflow-x:auto;
+  position:sticky;top:8px;z-index:10;
+  box-shadow:0 4px 12px rgba(0,0,0,0.18);
+  width:fit-content;max-width:100%;
+}
+.adv-nav-chip{
+  background:transparent;border:none;color:var(--t2);
+  font-family:inherit;font-size:13px;font-weight:600;
+  padding:7px 14px;border-radius:9999px;cursor:pointer;
+  white-space:nowrap;transition:all .15s;
+}
+.adv-nav-chip:hover{background:var(--bg-elev-2);color:var(--t1)}
+.adv-nav-chip.active{background:var(--teal-bg);color:var(--teal)}
+.adv-section{margin-bottom:36px;scroll-margin-top:80px}
+.adv-section-title{
+  font-size:18px;font-weight:800;color:var(--t1);
+  margin:0 0 14px;letter-spacing:-0.3px;
+  display:flex;align-items:center;gap:10px;
+}
+.adv-section-title svg{width:22px;height:22px}
+
+/* ─── FLYWHEEL DISCOVERY ──────────────── */
+.flywheel-section{
+  background:var(--bg-elev);
+  border-radius:var(--r-lg);
+  padding:20px;
+  margin-top:8px;
+  position:relative;
+}
+.flywheel-progress{
+  height:3px;background:var(--bg-input);
+  border-radius:2px;overflow:hidden;margin-bottom:6px;
+}
+.flywheel-progress-bar{
+  height:100%;
+  background:linear-gradient(90deg,var(--teal),var(--arte-1));
+  border-radius:2px;transition:width .35s ease;
+}
+.flywheel-counter{
+  font-size:11px;color:var(--t2);text-align:center;margin-bottom:14px;
+  font-family:ui-monospace,monospace;
+}
+.flywheel-stage{
+  position:relative;
+  height:520px;
+  perspective:1200px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Each card */
+.fw-card{
+  position:absolute;width:90%;max-width:480px;height:100%;
+  background:var(--bg-elev-2);
+  border:1px solid var(--bdr-soft);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  box-shadow:0 12px 32px rgba(0,0,0,0.35);
+  cursor:grab;
+  transition:transform .35s cubic-bezier(0.2,0.8,0.2,1), opacity .35s;
+  user-select:none;
+}
+.fw-card:active{cursor:grabbing;transition:none}
+
+/* Card stack levels — top is fully visible, others scaled and offset behind */
+.fw-card[data-stack="0"]{transform:translateY(0) scale(1);opacity:1;z-index:5}
+.fw-card[data-stack="1"]{transform:translateY(14px) scale(0.96);opacity:0.65;z-index:4}
+.fw-card[data-stack="2"]{transform:translateY(28px) scale(0.92);opacity:0.35;z-index:3}
+.fw-card[data-stack="3"]{transform:translateY(42px) scale(0.88);opacity:0.15;z-index:2}
+.fw-card[data-stack="hide"]{opacity:0;pointer-events:none}
+
+/* Swipe-out animations */
+.fw-card.swipe-left{transform:translateX(-130%) rotate(-15deg);opacity:0}
+.fw-card.swipe-right{transform:translateX(130%) rotate(15deg);opacity:0}
+.fw-card.swipe-down{transform:translateY(120%) scale(0.9);opacity:0}
+
+/* Card content */
+.fw-hero{
+  height:200px;position:relative;
+  background:linear-gradient(160deg,#1a2a3e 0%,#0c1729 50%,#0a1410 100%);
+}
+.fw-hero::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(80% 60% at 30% 30%,var(--page-tint, rgba(0,196,160,0.25)) 0%,transparent 65%);
+}
+.fw-hero-content{
+  position:absolute;inset:0;padding:18px;
+  display:flex;flex-direction:column;justify-content:space-between;color:white;
+}
+.fw-hero-top{display:flex;align-items:center;gap:10px}
+.fw-page-avatar{
+  width:48px;height:48px;border-radius:12px;
+  background:rgba(0,0,0,0.55);backdrop-filter:blur(8px);
+  display:grid;place-items:center;
+  font-weight:800;font-size:17px;
+  border:2px solid var(--page-ring,#00C4A0);
+  flex-shrink:0;
+}
+.fw-page-avatar.dm{color:#FBBF24}
+.fw-page-avatar.kd{color:#22C55E}
+.fw-page-avatar.fn{color:#60A5FA}
+.fw-page-avatar.uk{color:#A78BFA}
+.fw-page-avatar.pb{color:#00C4A0}
+.fw-page-avatar.am{color:#F472B6}
+.fw-hero-meta{flex:1;min-width:0}
+.fw-page-name{font-size:18px;font-weight:800;letter-spacing:-0.3px;margin-bottom:2px}
+.fw-page-handle{font-size:12px;opacity:0.7;font-family:ui-monospace,monospace}
+.fw-overlap-badge{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 10px;background:rgba(0,196,160,0.25);
+  border:1px solid rgba(0,196,160,0.5);
+  border-radius:9999px;backdrop-filter:blur(8px);
+  flex-shrink:0;
+}
+.fw-overlap-val{font-size:18px;font-weight:800;color:#00C4A0;font-variant-numeric:tabular-nums}
+.fw-overlap-lbl{font-size:9px;text-transform:uppercase;letter-spacing:0.06em;opacity:0.85}
+
+.fw-hero-bottom{display:flex;justify-content:space-between;align-items:flex-end}
+.fw-followers{font-size:13px;opacity:0.85;font-weight:600}
+.fw-followers strong{font-weight:800;font-size:15px}
+.fw-niche-pill{
+  display:inline-block;font-size:10px;font-weight:700;
+  background:rgba(255,255,255,0.18);
+  padding:4px 10px;border-radius:9999px;
+  letter-spacing:0.04em;text-transform:uppercase;
+  backdrop-filter:blur(8px);
+}
+
+/* Card body */
+.fw-body{
+  padding:16px 18px;flex:1;
+  display:flex;flex-direction:column;gap:10px;
+}
+.fw-tagline{font-size:13px;color:var(--t2);line-height:1.5}
+.fw-match-list{display:flex;flex-direction:column;gap:7px}
+.fw-match-row{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 10px;border-radius:8px;
+  background:var(--bg);
+  cursor:pointer;
+  transition:background .15s;
+}
+.fw-match-row:hover{background:var(--bg-input)}
+.fw-match-row svg{width:14px;height:14px;flex-shrink:0;color:var(--teal)}
+.fw-match-label{flex:1;font-size:12px;color:var(--t1);font-weight:500}
+.fw-match-bar{
+  flex:0 0 80px;height:5px;background:var(--bdr-soft);
+  border-radius:9999px;overflow:hidden;
+}
+.fw-match-fill{height:100%;background:linear-gradient(90deg,var(--teal),#00e8c0);border-radius:9999px}
+.fw-match-pct{font-size:12px;font-weight:700;color:var(--teal);font-variant-numeric:tabular-nums;min-width:32px;text-align:right}
+
+.fw-shared-topics{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+.fw-topic-chip{
+  font-size:10px;font-weight:600;padding:3px 9px;
+  background:var(--bg);border:1px solid var(--bdr-soft);
+  border-radius:9999px;color:var(--t2);
+}
+
+.fw-arte-tip{
+  background:linear-gradient(90deg,rgba(124,92,191,0.10),rgba(0,196,160,0.05));
+  border:1px solid rgba(124,92,191,0.22);
+  border-radius:10px;padding:9px 12px;
+  display:flex;align-items:center;gap:9px;font-size:12px;color:var(--t1);line-height:1.45;
+  margin-top:auto;
+}
+.fw-arte-tip .arte-orb{width:24px;height:24px;flex-shrink:0;animation:none}
+.fw-arte-tip .arte-orb svg{width:12px;height:12px}
+.fw-arte-tip strong{color:var(--arte-1);font-weight:700}
+
+/* Hover-reveal "match details" overlay */
+.fw-card .fw-detail-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,15,26,0.97),rgba(10,15,26,0.99));
+  padding:20px;
+  display:flex;flex-direction:column;gap:12px;
+  opacity:0;pointer-events:none;
+  transition:opacity .25s;
+  overflow-y:auto;
+}
+.fw-card:hover .fw-detail-overlay{opacity:1;pointer-events:auto}
+.fw-detail-title{font-size:16px;font-weight:800;color:var(--t1);display:flex;align-items:center;gap:8px}
+.fw-detail-title svg{width:18px;height:18px;fill:var(--teal)}
+.fw-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fw-detail-cell{
+  background:var(--bg-elev-2);border:1px solid var(--bdr-soft);
+  border-radius:8px;padding:10px;
+}
+.fw-detail-cell-label{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.05em;font-weight:700;margin-bottom:4px}
+.fw-detail-cell-value{font-size:14px;color:var(--t1);font-weight:700}
+.fw-detail-cell-value.teal{color:var(--teal)}
+.fw-detail-cell-value.warn{color:var(--warn)}
+.fw-detail-why{font-size:12px;color:var(--t2);line-height:1.55}
+.fw-detail-why strong{color:var(--t1)}
+
+/* Swipe action buttons */
+.flywheel-controls{
+  display:flex;justify-content:center;gap:10px;margin-top:18px;
+}
+.flywheel-btn{
+  width:54px;height:54px;border-radius:50%;
+  background:var(--bg-elev-2);border:1px solid var(--bdr-soft);
+  display:grid;place-items:center;cursor:pointer;
+  transition:all .15s;color:var(--t2);
+}
+.flywheel-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2}
+.flywheel-btn.pass:hover{background:rgba(229,57,53,0.15);border-color:var(--crisis);color:var(--crisis);transform:scale(1.08)}
+.flywheel-btn.save:hover{background:rgba(245,158,11,0.15);border-color:var(--warn);color:var(--warn);transform:scale(1.08)}
+.flywheel-btn.arte{background:linear-gradient(135deg,rgba(124,92,191,0.15),rgba(0,196,160,0.10));border-color:rgba(124,92,191,0.35)}
+.flywheel-btn.arte:hover{background:linear-gradient(135deg,var(--arte-1),var(--arte-2));border-color:var(--arte-1);color:white;transform:scale(1.08)}
+.flywheel-btn.connect:hover{background:rgba(34,197,94,0.15);border-color:var(--opp);color:var(--opp);transform:scale(1.08)}
+.flywheel-btn.chat:hover{background:rgba(96,165,250,0.15);border-color:#60A5FA;color:#60A5FA;transform:scale(1.08)}
+
+/* End-of-stack state */
+.flywheel-end{
+  text-align:center;padding:60px 20px;color:var(--t2);
+}
+.flywheel-end svg{width:48px;height:48px;margin-bottom:14px;color:var(--teal)}
+.flywheel-end h3{font-size:18px;color:var(--t1);margin-bottom:6px}
+
+@media(max-width:780px){
+  .flywheel-stage{height:560px}
+  .fw-card{width:96%}
+  .flywheel-btn{width:48px;height:48px}
+}
+
 </style>
 </head>
 <body>
@@ -1866,6 +2106,10 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
       <a class="nav-item">
         <span class="nav-item-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg></span>
         <span>Analytics</span>
+      </a>
+      <a class="nav-item">
+        <span class="nav-item-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 7v8M7 11h8"/></svg></span>
+        <span>Advanced</span>
       </a>
       <a class="nav-item">
         <span class="nav-item-icon arte"><svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></span>
@@ -2479,10 +2723,19 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
           <div class="subtabs" id="analyticsSubtabs">
             <button class="subtab active" data-sub="kpis"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg> KPIs</button>
             <button class="subtab" data-sub="trends"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Trends</button>
-            <button class="subtab" data-sub="virality"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg> Virality</button>
             <button class="subtab" data-sub="sentiment"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8z"/></svg> Sentiment</button>
-            <button class="subtab" data-sub="deepdive"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 7v8M7 11h8"/></svg> Deep Dive</button>
-            <button class="subtab" data-sub="advanced"><svg viewBox="0 0 24 24"><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg> Advanced</button>
+          </div>
+          <div style="background:linear-gradient(90deg,rgba(124,92,191,0.12),rgba(0,196,160,0.06));border:1px solid rgba(124,92,191,0.2);border-radius:12px;padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;cursor:pointer" onclick="navigateTo('advanced',document.querySelector('[data-page=&quot;advanced&quot;]'))">
+            <div style="width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--arte-1),var(--arte-2));display:grid;place-items:center;flex-shrink:0">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+            </div>
+            <div style="flex:1">
+              <div style="font-size:13px;font-weight:700;color:var(--t1)">Need to go deeper?</div>
+              <div style="font-size:12px;color:var(--t2);margin-top:1px">Open Advanced Analytics for virality models, cascade analysis, flagged comments, audience clustering and more.</div>
+            </div>
+            <button class="btn arte" style="flex-shrink:0" onclick="event.stopPropagation();navigateTo('advanced',document.querySelector('[data-page=&quot;advanced&quot;]'))">
+              Open <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
           </div>
 
           <!-- ─── KPIs PANEL ─────────────── -->
@@ -2641,32 +2894,6 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
             </div>
           </div>
 
-          <!-- ─── VIRALITY PANEL ─────────────── -->
-          <div class="subpanel" id="sub-virality">
-            <div class="insight-callout">
-              <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
-              <div class="insight-callout-text">Your virality threshold is <strong>200 shares/hour</strong>. Two posts crossed it this month — both used the question CTA pattern with humour-led visuals.</div>
-            </div>
-            <div class="panel">
-              <div class="panel-header"><div><div class="panel-title">Share Velocity — 48h</div><div class="panel-sub">Shares per hour · red line = viral threshold (200/hr)</div></div></div>
-              <canvas id="velChart" height="140"></canvas>
-            </div>
-            <div class="two-col">
-              <div class="panel">
-                <div class="panel-header"><div><div class="panel-title">Virality Score Distribution</div><div class="panel-sub">All posts this month</div></div></div>
-                <canvas id="viralDist" height="160"></canvas>
-              </div>
-              <div class="panel">
-                <div class="panel-header"><div><div class="panel-title">Viral Triggers</div><div class="panel-sub">Impact ranking</div></div></div>
-                <canvas id="triggerChart" height="160"></canvas>
-              </div>
-            </div>
-            <div class="panel">
-              <div class="panel-header"><div><div class="panel-title">Probability by Day &amp; Time</div><div class="panel-sub">% chance of crossing viral threshold</div></div></div>
-              <canvas id="viralHeat" height="180"></canvas>
-            </div>
-          </div>
-
           <!-- ─── SENTIMENT PANEL ─────────────── -->
           <div class="subpanel" id="sub-sentiment">
             <div class="insight-callout">
@@ -2693,116 +2920,6 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
             </div>
           </div>
 
-          <!-- ─── DEEP DIVE PANEL ─────────────── -->
-          <div class="subpanel" id="sub-deepdive">
-            <div class="insight-callout">
-              <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
-              <div class="insight-callout-text">Caption length sweet spot is <strong>80-120 characters</strong>. Posts in this range have 2.3× the engagement of short captions (&lt;40 chars) and 1.6× of long captions (&gt;200 chars).</div>
-            </div>
-            <div class="three-col">
-              <div class="panel">
-                <div class="panel-header"><div><div class="panel-title">Caption Length</div><div class="panel-sub">Engagement by char count</div></div></div>
-                <canvas id="captionLenChart" height="160"></canvas>
-              </div>
-              <div class="panel">
-                <div class="panel-header"><div><div class="panel-title">Emoji Sweet Spot</div><div class="panel-sub">Reactions by emoji count</div></div></div>
-                <canvas id="emojiChart" height="160"></canvas>
-              </div>
-              <div class="panel">
-                <div class="panel-header"><div><div class="panel-title">Volatility Index</div><div class="panel-sub">Variance per page</div></div></div>
-                <canvas id="volatilityChart" height="160"></canvas>
-              </div>
-            </div>
-            <div class="two-col">
-              <div class="panel">
-                <div class="panel-header"><div><div class="panel-title">Share Multiplier</div><div class="panel-sub">Cumulative reach effect</div></div></div>
-                <canvas id="shareMultChart" height="160"></canvas>
-              </div>
-              <div class="panel">
-                <div class="panel-header"><div><div class="panel-title">Post Frequency vs Engagement</div><div class="panel-sub">Diminishing returns curve</div></div></div>
-                <canvas id="freqEngChart" height="160"></canvas>
-              </div>
-            </div>
-            <div class="panel">
-              <div class="panel-header"><div><div class="panel-title">Engagement Funnel</div><div class="panel-sub">Reach → reaction → comment → share</div></div></div>
-              <canvas id="funnelChart" height="140"></canvas>
-            </div>
-            <div class="panel">
-              <div class="panel-header"><div><div class="panel-title">Raw Data — Last 12 Posts</div><div class="panel-sub">Click any row for full details</div></div></div>
-              <table class="data-table" id="rawDataTable">
-                <thead><tr><th>Page</th><th>Posted</th><th>Reach</th><th>React</th><th>Shares</th><th>AI Score</th></tr></thead>
-                <tbody id="rawDataBody"></tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- ─── ADVANCED PANEL — exhaustive charts from old dashboard ─── -->
-          <div class="subpanel" id="sub-advanced">
-            <div class="insight-callout">
-              <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
-              <div class="insight-callout-text">Power-user view. Cascade analysis, flagged comments, hour×day matrix and AI activity feed — all the deep slicing tools from the original dashboard.</div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-header">
-                <div><div class="panel-title">AI Activity Feed</div><div class="panel-sub">Real-time intelligence — what Art-E is doing right now</div></div>
-                <span class="arte-badge"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Live</span>
-              </div>
-              <div id="aiActivityFeed" style="display:flex;flex-direction:column;gap:8px"></div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-header">
-                <div><div class="panel-title">Super Sharer Cascade — Last Viral Post</div><div class="panel-sub">Pathway from initial post to algorithm pickup</div></div>
-              </div>
-              <div id="cascadeChart" style="position:relative;height:220px;background:var(--bg);border-radius:8px;padding:16px;overflow:hidden">
-                <svg id="cascadeSvg" viewBox="0 0 800 200" style="width:100%;height:100%"></svg>
-              </div>
-            </div>
-
-            <div class="two-col">
-              <div class="panel">
-                <div class="panel-header"><div><div class="panel-title">Hour × Day Engagement Matrix</div><div class="panel-sub">Heatmap drill-down · all 168 windows</div></div></div>
-                <canvas id="hourDayMatrix" height="260"></canvas>
-              </div>
-              <div class="panel">
-                <div class="panel-header">
-                  <div><div class="panel-title">Flagged Comments</div><div class="panel-sub">AI risk-scored · respond directly</div></div>
-                  <span style="font-size:11px;font-weight:600;background:var(--crisis-bg);color:var(--crisis);padding:3px 9px;border-radius:9999px">3 unreviewed</span>
-                </div>
-                <div id="flaggedComments" style="display:flex;flex-direction:column;gap:8px"></div>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-header">
-                <div><div class="panel-title">Multi-Page Performance Comparison</div><div class="panel-sub">All metrics across all pages · last 7 days</div></div>
-              </div>
-              <canvas id="multiPageChart" height="200"></canvas>
-            </div>
-
-            <div class="three-col">
-              <div class="panel">
-                <div class="panel-header"><div><div class="panel-title">Topic Distribution</div><div class="panel-sub">DeBERTa-v3 zero-shot</div></div></div>
-                <canvas id="topicDistChart" height="200"></canvas>
-              </div>
-              <div class="panel">
-                <div class="panel-header"><div><div class="panel-title">Toxicity Index</div><div class="panel-sub">Per page · 30 days</div></div></div>
-                <canvas id="toxicityChart" height="200"></canvas>
-              </div>
-              <div class="panel">
-                <div class="panel-header"><div><div class="panel-title">Crisis Detection Log</div><div class="panel-sub">Sentiment spikes · 30d</div></div></div>
-                <canvas id="crisisLogChart" height="200"></canvas>
-              </div>
-            </div>
-
-            <div class="panel">
-              <div class="panel-header">
-                <div><div class="panel-title">Audience Cluster Map</div><div class="panel-sub">K-Means clustering · cross-page topic embeddings</div></div>
-              </div>
-              <canvas id="clusterMap" height="220"></canvas>
-            </div>
-          </div>
 
         </div>
       </div><!-- /page-analytics -->
@@ -2832,18 +2949,312 @@ html[data-theme="light"] .story-mvp-badge{background:rgba(0,0,0,0.65)}
         </div>
       </div>
 
+      <!-- ════════════════════════════════════════ -->
+      <!-- ADVANCED ANALYTICS PAGE — power-user view  -->
+      <!-- ════════════════════════════════════════ -->
+      <div class="page" id="page-advanced">
+        <div class="analytics-wrap">
+
+          <div class="page-header">
+            <div class="page-title-block">
+              <h1 class="page-title">Advanced Analytics</h1>
+              <div class="page-sub">Power-user view · Deep slicing across virality, content patterns, audience clusters and AI activity</div>
+            </div>
+            <div class="page-actions">
+              <button class="btn" onclick="navigateTo('analytics',document.querySelector('[data-page=&quot;analytics&quot;]'))">
+                <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+                Back to Analytics
+              </button>
+              <button class="btn" onclick="toast('success','Full report exported as PDF (32 pages)')">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                Export full report
+              </button>
+              <button class="btn arte" onclick="openArteChat('Walk me through my advanced analytics this week')">
+                <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+                Explain with Art-E
+              </button>
+            </div>
+          </div>
+
+          <!-- Section nav (sticky chips for fast jumping) -->
+          <div class="adv-nav">
+            <button class="adv-nav-chip active" data-jump="virality">Virality</button>
+            <button class="adv-nav-chip" data-jump="patterns">Content Patterns</button>
+            <button class="adv-nav-chip" data-jump="cascade">Cascade & Reach</button>
+            <button class="adv-nav-chip" data-jump="audience">Audience Clusters</button>
+            <button class="adv-nav-chip" data-jump="ai-activity">AI Activity</button>
+            <button class="adv-nav-chip" data-jump="raw">Raw Data</button>
+          </div>
+
+          <!-- VIRALITY -->
+          <div class="adv-section" id="adv-virality">
+            <h2 class="adv-section-title">
+              <svg viewBox="0 0 24 24" fill="#FBBF24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+              Virality Analysis
+            </h2>
+            <div class="insight-callout">
+              <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+              <div class="insight-callout-text">Your virality threshold is <strong>200 shares/hour</strong>. Two posts crossed it this month — both used the question CTA pattern with humour-led visuals.</div>
+            </div>
+            <div class="panel">
+              <div class="panel-header"><div><div class="panel-title">Share Velocity — 48h</div><div class="panel-sub">Shares per hour · red line = viral threshold (200/hr)</div></div></div>
+              <canvas id="velChart" height="140"></canvas>
+            </div>
+            <div class="two-col">
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Virality Score Distribution</div><div class="panel-sub">All posts this month</div></div></div>
+                <canvas id="viralDist" height="160"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Viral Triggers</div><div class="panel-sub">Impact ranking</div></div></div>
+                <canvas id="triggerChart" height="160"></canvas>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-header"><div><div class="panel-title">Probability by Day &amp; Time</div><div class="panel-sub">% chance of crossing viral threshold</div></div></div>
+              <canvas id="viralHeat" height="180"></canvas>
+            </div>
+          </div>
+
+          <!-- CONTENT PATTERNS -->
+          <div class="adv-section" id="adv-patterns">
+            <h2 class="adv-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#7C5CBF" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              Content Patterns
+            </h2>
+            <div class="insight-callout">
+              <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+              <div class="insight-callout-text">Caption length sweet spot is <strong>80-120 characters</strong>. Posts in this range have 2.3× the engagement of short captions and 1.6× of long ones.</div>
+            </div>
+            <div class="three-col">
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Caption Length</div><div class="panel-sub">Engagement by char count</div></div></div>
+                <canvas id="captionLenChart" height="160"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Emoji Sweet Spot</div><div class="panel-sub">Reactions by emoji count</div></div></div>
+                <canvas id="emojiChart" height="160"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Volatility Index</div><div class="panel-sub">Variance per page</div></div></div>
+                <canvas id="volatilityChart" height="160"></canvas>
+              </div>
+            </div>
+            <div class="two-col">
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Share Multiplier</div><div class="panel-sub">Cumulative reach effect</div></div></div>
+                <canvas id="shareMultChart" height="160"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Frequency vs Engagement</div><div class="panel-sub">Diminishing returns curve</div></div></div>
+                <canvas id="freqEngChart" height="160"></canvas>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-header"><div><div class="panel-title">Engagement Funnel</div><div class="panel-sub">Reach → reaction → comment → share</div></div></div>
+              <canvas id="funnelChart" height="140"></canvas>
+            </div>
+          </div>
+
+          <!-- CASCADE -->
+          <div class="adv-section" id="adv-cascade">
+            <h2 class="adv-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00C4A0" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M6 9v3a3 3 0 003 3h6a3 3 0 003-3V9"/></svg>
+              Cascade & Reach
+            </h2>
+            <div class="panel">
+              <div class="panel-header">
+                <div><div class="panel-title">Super Sharer Cascade — Last Viral Post</div><div class="panel-sub">Pathway from initial post to algorithm pickup</div></div>
+              </div>
+              <div id="cascadeChart" style="position:relative;height:240px;background:var(--bg);border-radius:8px;padding:16px;overflow:hidden">
+                <svg id="cascadeSvg" viewBox="0 0 800 200" style="width:100%;height:100%"></svg>
+              </div>
+            </div>
+            <div class="two-col">
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Hour × Day Engagement Matrix</div><div class="panel-sub">Heatmap drill-down · all 168 windows</div></div></div>
+                <canvas id="hourDayMatrix" height="260"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header">
+                  <div><div class="panel-title">Flagged Comments</div><div class="panel-sub">AI risk-scored · respond directly</div></div>
+                  <span style="font-size:11px;font-weight:600;background:var(--crisis-bg);color:var(--crisis);padding:3px 9px;border-radius:9999px">3 unreviewed</span>
+                </div>
+                <div id="flaggedComments" style="display:flex;flex-direction:column;gap:8px"></div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-header">
+                <div><div class="panel-title">Multi-Page Performance Comparison</div><div class="panel-sub">All metrics across all pages · last 7 days</div></div>
+              </div>
+              <canvas id="multiPageChart" height="200"></canvas>
+            </div>
+          </div>
+
+          <!-- AUDIENCE CLUSTERS -->
+          <div class="adv-section" id="adv-audience">
+            <h2 class="adv-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M11.65 11.65l3.7 3.7"/></svg>
+              Audience Clusters
+            </h2>
+            <div class="three-col">
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Topic Distribution</div><div class="panel-sub">DeBERTa-v3 zero-shot</div></div></div>
+                <canvas id="topicDistChart" height="200"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Toxicity Index</div><div class="panel-sub">Per page · 30 days</div></div></div>
+                <canvas id="toxicityChart" height="200"></canvas>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><div><div class="panel-title">Crisis Detection Log</div><div class="panel-sub">Sentiment spikes · 30d</div></div></div>
+                <canvas id="crisisLogChart" height="200"></canvas>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-header">
+                <div><div class="panel-title">Audience Cluster Map</div><div class="panel-sub">K-Means clustering · cross-page topic embeddings</div></div>
+              </div>
+              <canvas id="clusterMap" height="220"></canvas>
+            </div>
+          </div>
+
+          <!-- AI ACTIVITY -->
+          <div class="adv-section" id="adv-ai-activity">
+            <h2 class="adv-section-title">
+              <svg viewBox="0 0 24 24" fill="#7C5CBF"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+              AI Activity
+            </h2>
+            <div class="panel">
+              <div class="panel-header">
+                <div><div class="panel-title">Real-time AI Activity Feed</div><div class="panel-sub">What Art-E is doing right now across your 5 pages</div></div>
+                <span class="arte-badge"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Live</span>
+              </div>
+              <div id="aiActivityFeed" style="display:flex;flex-direction:column;gap:8px"></div>
+            </div>
+          </div>
+
+          <!-- RAW DATA -->
+          <div class="adv-section" id="adv-raw">
+            <h2 class="adv-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#B0B3B8" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Raw Data Explorer
+            </h2>
+            <div class="panel">
+              <div class="panel-header">
+                <div><div class="panel-title">Last 12 Posts</div><div class="panel-sub">Click any row for full details · Export to CSV</div></div>
+                <button class="btn" onclick="toast('success','12 rows exported as CSV')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Export CSV</button>
+              </div>
+              <table class="data-table" id="rawDataTable">
+                <thead><tr><th>Page</th><th>Posted</th><th>Reach</th><th>React</th><th>Shares</th><th>AI Score</th></tr></thead>
+                <tbody id="rawDataBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /page-advanced -->
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- DISCOVERY PAGE — Collab Flywheel, swipeable -->
+      <!-- ════════════════════════════════════════ -->
       <div class="page" id="page-discovery">
         <div class="analytics-wrap">
-          <div class="page-header"><div class="page-title-block"><h1 class="page-title">Discovery</h1><div class="page-sub">Your collaboration network</div></div></div>
+          <div class="page-header">
+            <div class="page-title-block">
+              <h1 class="page-title">Discovery</h1>
+              <div class="page-sub">Pages that match your audience · Swipe to evaluate · Hover any card to see why it matches</div>
+            </div>
+            <div class="page-actions">
+              <button class="btn" onclick="toast('info','Filter by niche')"><svg viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54z"/></svg> Filter</button>
+              <button class="btn arte" onclick="openArteChat('Help me prioritise these collab matches')">
+                <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Triage
+              </button>
+            </div>
+          </div>
+
           <div class="insight-callout">
             <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
-            <div class="insight-callout-text"><strong>3 new collab matches</strong> in your niche this week. The strongest match is Fri Night Chaos with 94% audience overlap.</div>
+            <div class="insight-callout-text"><strong>9 collab matches</strong> found this week by K-Means audience clustering. Top match: <strong>Fri Night Chaos</strong> at 94% overlap.</div>
           </div>
-          <div class="panel" style="text-align:center;padding:60px 20px;color:var(--t2)">
-            Discovery — collab flywheel, page network graph, post cascade, group chats. Coming in v2.1.
+
+          <!-- Tabs: Matches / My Collabs / Saved -->
+          <div class="feed-tabs" style="margin-bottom:16px">
+            <button class="feed-tab active" data-disc-tab="matches">
+              <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M11.65 11.65l3.7 3.7"/></svg>
+              Matches <span class="badge-mini" style="background:var(--teal)">9</span>
+            </button>
+            <button class="feed-tab" data-disc-tab="active">
+              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              Active collabs
+            </button>
+            <button class="feed-tab" data-disc-tab="saved">
+              <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              Saved
+            </button>
           </div>
+
+          <!-- FLYWHEEL CARD STACK -->
+          <div class="flywheel-section">
+            <div class="flywheel-progress">
+              <div class="flywheel-progress-bar" id="flywheelProgress" style="width:11%"></div>
+            </div>
+            <div class="flywheel-counter">
+              <span id="flywheelCount">1</span> of <span id="flywheelTotal">9</span> matches · 
+              <strong style="color:var(--teal)">Use ← → keys</strong> or drag to swipe
+            </div>
+
+            <div class="flywheel-stage" id="flywheelStage">
+              <!-- Cards injected by JS -->
+            </div>
+
+            <div class="flywheel-controls">
+              <button class="flywheel-btn pass" onclick="flywheelSwipe('pass')" title="Pass (←)">
+                <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              </button>
+              <button class="flywheel-btn save" onclick="flywheelSwipe('save')" title="Save for later (↓)">
+                <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+              <button class="flywheel-btn arte" onclick="flywheelArteAsk()" title="Ask Art-E">
+                <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+              </button>
+              <button class="flywheel-btn connect" onclick="flywheelSwipe('connect')" title="Connect (→)">
+                <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              </button>
+              <button class="flywheel-btn chat" onclick="flywheelChat()" title="Open chat">
+                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+            <div style="text-align:center;margin-top:8px;font-size:11px;color:var(--t3);display:flex;justify-content:center;gap:14px;flex-wrap:wrap">
+              <span><span style="color:#E53935;font-weight:700">✕</span> Pass</span>
+              <span><span style="color:#FBBF24;font-weight:700">↓</span> Save</span>
+              <span><span style="color:#7C5CBF;font-weight:700">✦</span> Ask Art-E</span>
+              <span><span style="color:#22C55E;font-weight:700">✓</span> Connect</span>
+              <span><span style="color:#60A5FA;font-weight:700">💬</span> Chat</span>
+            </div>
+          </div>
+
+          <!-- After-flywheel summary stats -->
+          <div class="three-col" style="margin-top:24px">
+            <div class="panel">
+              <div class="panel-sub">This week</div>
+              <div style="font-size:24px;font-weight:800;color:var(--teal);margin-top:4px">9</div>
+              <div style="font-size:12px;color:var(--t2);margin-top:2px">New matches</div>
+            </div>
+            <div class="panel">
+              <div class="panel-sub">All time</div>
+              <div style="font-size:24px;font-weight:800;color:var(--arte-1);margin-top:4px">4</div>
+              <div style="font-size:12px;color:var(--t2);margin-top:2px">Active collabs</div>
+            </div>
+            <div class="panel">
+              <div class="panel-sub">Avg overlap</div>
+              <div style="font-size:24px;font-weight:800;color:var(--warn);margin-top:4px">76%</div>
+              <div style="font-size:12px;color:var(--t2);margin-top:2px">Audience similarity</div>
+            </div>
+          </div>
+
         </div>
-      </div>
+      </div><!-- /page-discovery -->
 
       <div class="page" id="page-inbox">
         <div class="analytics-wrap">
@@ -3150,9 +3561,15 @@ function navigateTo(pageName, navItem){
 
   document.querySelector('.feed-col').scrollTop = 0;
 
-  // Init analytics charts on first nav
+  // Lazy init per page
   if(pageName === 'analytics' && !window._analyticsLoaded){
     setTimeout(()=>{ initAnalytics(); window._analyticsLoaded = true; }, 50);
+  }
+  if(pageName === 'advanced' && !window._advancedLoaded){
+    setTimeout(()=>{ initAdvanced(); window._advancedLoaded = true; }, 50);
+  }
+  if(pageName === 'discovery' && !window._discoveryLoaded){
+    setTimeout(()=>{ initFlywheel(); window._discoveryLoaded = true; }, 50);
   }
 }
 
@@ -3604,7 +4021,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   // Sidebar nav
   const navMap = [
-    [0,'home'],[1,'analytics'],[2,'arte'],[3,'discovery'],[4,'inbox']
+    [0,'home'],[1,'analytics'],[2,'advanced'],[3,'arte'],[4,'discovery'],[5,'inbox']
   ];
   const navItems = document.querySelectorAll('.left-sidebar .sidebar-section:first-child .nav-item');
   navItems.forEach((item, i) => {
@@ -3849,7 +4266,6 @@ function initSub(sub){
   window._initedSubs[sub] = true;
 
   if(sub==='kpis'){
-    // sparklines
     [['sp1',[3.2,3.4,3.5,3.8,4.0,4.2,4.5,4.2],C.teal],
      ['sp2',[18,19,20,22,23,24,25,24.5],C.teal],
      ['sp3',[0.78,0.80,0.81,0.83,0.82,0.81,0.84,0.82],C.opp],
@@ -3858,36 +4274,15 @@ function initSub(sub){
       const el = document.getElementById(id); if(!el) return;
       new Chart(el,{type:'line',data:{labels:data.map((_,i)=>i),datasets:[{data,borderColor:color,backgroundColor:color+'30',fill:true,tension:0.4,pointRadius:0,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}}}});
     });
-
-    // mainEng
     const days = Array.from({length:30},(_,i)=>'D'+(i+1));
     new Chart(document.getElementById('mainEng'),{type:'line',data:{labels:days,datasets:[
       {label:'Engagement %',data:days.map((_,i)=>3+Math.sin(i/3)*0.8+i*0.04+Math.random()*0.5),borderColor:C.teal,backgroundColor:'rgba(0,196,160,0.10)',fill:true,tension:0.4,pointRadius:0,borderWidth:2,yAxisID:'y'},
       {label:'Reach (K)',data:days.map((_,i)=>18+Math.cos(i/4)*2.5+i*0.2),borderColor:C.arte,backgroundColor:'rgba(124,92,191,0.08)',fill:true,tension:0.4,pointRadius:0,borderWidth:2,yAxisID:'y1'}]},
       options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8,boxHeight:8}}},
       scales:{x:baseOpts.scales.x,y:{...baseOpts.scales.y,position:'left'},y1:{...baseOpts.scales.y,position:'right',grid:{display:false}}}}});
-
-    // sentDonut
     new Chart(document.getElementById('sentDonut'),{type:'doughnut',data:{labels:['Positive','Neutral','Mixed','Negative'],datasets:[{data:[60,18,11,11],backgroundColor:[C.opp,C.blue,C.warn,C.crisis],borderWidth:0}]},
       options:{responsive:true,maintainAspectRatio:false,cutout:'70%',plugins:{legend:{display:false},tooltip:baseOpts.plugins.tooltip}}});
-
-    // fmtChart
     new Chart(document.getElementById('fmtChart'),{type:'bar',data:{labels:['Photo','Video','Reel','Carousel','Text'],datasets:[{label:'Engagement %',data:[3.2,5.8,7.4,4.6,2.1],backgroundColor:[C.teal,C.teal,C.warn,C.teal,C.text],borderRadius:6,borderSkipped:false}]},options:baseOpts});
-
-    // weekComp
-    new Chart(document.getElementById('weekComp'),{type:'bar',data:{labels:['Reach','React','Comments','Shares','Score'],datasets:[
-      {label:'Last week',data:[100,100,100,100,100],backgroundColor:'rgba(176,179,184,0.4)',borderRadius:6},
-      {label:'This week',data:[112,118,108,105,103],backgroundColor:C.teal,borderRadius:6}]},
-      options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8,boxHeight:8}}}}});
-
-    // emotionRadar
-    new Chart(document.getElementById('emotionRadar'),{type:'radar',data:{labels:['Joy','Excitement','Surprise','Trust','Anticipation','Anger','Sadness','Fear'],datasets:[
-      {label:'Last',data:[58,62,40,55,48,15,18,12],borderColor:C.text,backgroundColor:'rgba(176,179,184,0.15)',pointRadius:0,borderWidth:1.5},
-      {label:'This',data:[70,68,52,68,55,12,14,8],borderColor:C.teal,backgroundColor:'rgba(0,196,160,0.18)',pointRadius:0,borderWidth:2}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}},tooltip:baseOpts.plugins.tooltip},
-      scales:{r:{angleLines:{color:C.grid},grid:{color:C.grid},pointLabels:{color:C.text,font:{...C.font,size:10}},ticks:{display:false},suggestedMin:0,suggestedMax:80}}}});
-
-    // heatmap
     const heat = document.getElementById('heatmapEl');
     if(heat){
       const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
@@ -3909,6 +4304,15 @@ function initSub(sub){
       heat.innerHTML = html;
       heat.querySelectorAll('.heat-cell').forEach(c=>c.addEventListener('click',()=>toast('info', c.title)));
     }
+    new Chart(document.getElementById('weekComp'),{type:'bar',data:{labels:['Reach','React','Comments','Shares','Score'],datasets:[
+      {label:'Last week',data:[100,100,100,100,100],backgroundColor:'rgba(176,179,184,0.4)',borderRadius:6},
+      {label:'This week',data:[112,118,108,105,103],backgroundColor:C.teal,borderRadius:6}]},
+      options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8,boxHeight:8}}}}});
+    new Chart(document.getElementById('emotionRadar'),{type:'radar',data:{labels:['Joy','Excitement','Surprise','Trust','Anticipation','Anger','Sadness','Fear'],datasets:[
+      {label:'Last',data:[58,62,40,55,48,15,18,12],borderColor:C.text,backgroundColor:'rgba(176,179,184,0.15)',pointRadius:0,borderWidth:1.5},
+      {label:'This',data:[70,68,52,68,55,12,14,8],borderColor:C.teal,backgroundColor:'rgba(0,196,160,0.18)',pointRadius:0,borderWidth:2}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}},tooltip:baseOpts.plugins.tooltip},
+      scales:{r:{angleLines:{color:C.grid},grid:{color:C.grid},pointLabels:{color:C.text,font:{...C.font,size:10}},ticks:{display:false},suggestedMin:0,suggestedMax:80}}}});
   }
 
   if(sub==='trends'){
@@ -3918,40 +4322,10 @@ function initSub(sub){
       {label:'Reach',data:days90.map((_,i)=>18+Math.cos(i/12)*4+i*0.05),borderColor:C.arte,fill:false,tension:0.4,pointRadius:0,borderWidth:2,yAxisID:'y1'},
       {label:'Posts',data:days90.map((_,i)=>2+Math.floor(Math.random()*3)),borderColor:C.warn,fill:false,tension:0.2,pointRadius:0,borderWidth:1.5,yAxisID:'y2',hidden:false}]},
       options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}}},scales:{x:baseOpts.scales.x,y:baseOpts.scales.y,y1:{...baseOpts.scales.y,position:'right',grid:{display:false}},y2:{display:false}}}});
-
     new Chart(document.getElementById('dowChart'),{type:'bar',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{label:'Engagement %',data:[3.1,5.8,4.2,5.4,3.8,2.9,3.2],backgroundColor:['#3A3B3C',C.teal,'#3A3B3C',C.teal,'#3A3B3C','#3A3B3C','#3A3B3C'],borderRadius:6}]},options:baseOpts});
-
     const points = Array.from({length:60},()=>({x:Math.random()*30+5,y:Math.random()*8+1}));
     new Chart(document.getElementById('scatterChart'),{type:'scatter',data:{datasets:[{label:'Posts',data:points,backgroundColor:C.teal,pointRadius:4}]},options:{...baseOpts,scales:{x:{...baseOpts.scales.x,title:{display:true,text:'Reach (K)',color:C.text}},y:{...baseOpts.scales.y,title:{display:true,text:'Engagement %',color:C.text}}}}});
-
     new Chart(document.getElementById('hourlyChart'),{type:'bar',data:{labels:Array.from({length:24},(_,i)=>i+'h'),datasets:[{label:'Eng',data:Array.from({length:24},(_,h)=>{if(h>=18&&h<=20)return 7+Math.random();if(h>=12&&h<=14)return 4+Math.random();if(h>=8&&h<=10)return 3+Math.random();return 1+Math.random()*2}),backgroundColor:C.teal,borderRadius:4}]},options:baseOpts});
-  }
-
-  if(sub==='virality'){
-    const hrs = Array.from({length:48},(_,i)=>i+'h');
-    new Chart(document.getElementById('velChart'),{type:'line',data:{labels:hrs,datasets:[
-      {label:'Shares/hr',data:hrs.map((_,i)=>{if(i>=18&&i<=24)return 80+Math.sin(i)*30+i*5;return 20+Math.random()*40}),borderColor:C.teal,backgroundColor:'rgba(0,196,160,0.15)',fill:true,tension:0.4,pointRadius:0,borderWidth:2},
-      {label:'Threshold',data:hrs.map(()=>200),borderColor:C.crisis,borderDash:[5,5],fill:false,pointRadius:0,borderWidth:1.5}]},
-      options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}}}}});
-
-    new Chart(document.getElementById('viralDist'),{type:'bar',data:{labels:['0-20','20-40','40-60','60-80','80-100'],datasets:[{label:'Posts',data:[12,28,42,38,18],backgroundColor:[C.text,C.text,C.warn,C.teal,C.opp],borderRadius:6}]},options:baseOpts});
-
-    new Chart(document.getElementById('triggerChart'),{type:'bar',data:{labels:['Question CTA','Humour','Visual hook','Emotional','Trend tie-in','Length<80c'],datasets:[{label:'Lift',data:[1.6,1.4,1.3,1.25,1.2,1.15],backgroundColor:C.arte,borderRadius:6}]},options:{...baseOpts,indexAxis:'y'}});
-
-    // viralHeat — generate heatmap-style chart with bubble
-    const probData = [];
-    const wkdays = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-    const hrLabels = ['12a','6a','12p','6p','9p'];
-    wkdays.forEach((d,di)=>{
-      hrLabels.forEach((h,hi)=>{
-        let p; if((di===1&&hi===3)||(di===3&&hi===3))p=85;
-        else if((di>=1&&di<=4)&&(hi>=2&&hi<=3))p=55+Math.random()*15;
-        else p=10+Math.random()*30;
-        probData.push({x:hi,y:di,r:p/4});
-      });
-    });
-    new Chart(document.getElementById('viralHeat'),{type:'bubble',data:{datasets:[{label:'% chance',data:probData,backgroundColor:probData.map(p=>{const v=p.r*4;return v>70?'#22C55E':v>40?C.warn:C.text})}]},
-      options:{...baseOpts,scales:{x:{...baseOpts.scales.x,ticks:{color:C.text,callback:(v)=>hrLabels[v]||''},min:-0.5,max:hrLabels.length-0.5},y:{...baseOpts.scales.y,ticks:{color:C.text,callback:(v)=>wkdays[v]||''},min:-0.5,max:wkdays.length-0.5,reverse:true}}}});
   }
 
   if(sub==='sentiment'){
@@ -3960,143 +4334,518 @@ function initSub(sub){
       {label:'Positive %',data:sd.map((_,i)=>60+Math.sin(i/3)*5),borderColor:C.opp,backgroundColor:'rgba(34,197,94,0.10)',fill:true,tension:0.4,pointRadius:0,borderWidth:2},
       {label:'Negative %',data:sd.map((_,i)=>{if(i===17||i===18)return 22-i*0.1;return 8+Math.cos(i/4)*3}),borderColor:C.crisis,backgroundColor:'rgba(229,57,53,0.10)',fill:true,tension:0.4,pointRadius:0,borderWidth:2}]},
       options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}}}}});
-
     new Chart(document.getElementById('emotionBar'),{type:'bar',data:{labels:['Joy','Excite','Trust','Surprise','Sad','Anger','Fear'],datasets:[{label:'Comments %',data:[32,24,18,12,7,5,2],backgroundColor:[C.opp,C.opp,C.opp,C.warn,C.text,C.crisis,C.crisis],borderRadius:6}]},options:baseOpts});
-
     new Chart(document.getElementById('sentByPage'),{type:'bar',data:{labels:['Drinking Memes','Kelpie','Fri Night','UK Jail','Prison B'],datasets:[
       {label:'Score',data:[0.78,0.85,0.71,0.82,0.79],backgroundColor:C.teal,borderRadius:6},
       {label:'Benchmark',data:[0.65,0.65,0.65,0.65,0.65],backgroundColor:'rgba(176,179,184,0.4)',borderRadius:6}]},
       options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}}}}});
-
     const sePoints = Array.from({length:60},()=>({x:Math.random()*0.5+0.4,y:Math.random()*8+1}));
     new Chart(document.getElementById('sentEng'),{type:'scatter',data:{datasets:[{label:'Posts',data:sePoints,backgroundColor:C.arte,pointRadius:4}]},options:{...baseOpts,scales:{x:{...baseOpts.scales.x,title:{display:true,text:'Sentiment',color:C.text}},y:{...baseOpts.scales.y,title:{display:true,text:'Engagement %',color:C.text}}}}});
   }
-
-  if(sub==='advanced'){
-    // AI Activity Feed
-    const feed = document.getElementById('aiActivityFeed');
-    if(feed){
-      const events = [
-        {t:'2 sec ago',cap:'Sentiment',col:'#22C55E',msg:'Classified 18 new comments on Drinking Memes — 14 positive, 3 neutral, 1 negative'},
-        {t:'1 min ago',cap:'Virality',col:'#FBBF24',msg:'Re-scored 47 posts with updated 52-feature model · 6 crossed viral threshold'},
-        {t:'3 min ago',cap:'Crisis',col:'#E53935',msg:'Spike detected on Drinking Memes — sentiment dropped from 0.78 to 0.42 in 4 min'},
-        {t:'8 min ago',cap:'Timing',col:'#7C5CBF',msg:'Refreshed optimal posting windows for all 5 pages · Tuesday 6PM remains top slot'},
-        {t:'14 min ago',cap:'Topic',col:'#60A5FA',msg:'Detected new trending topic in your niche: "prison drama" +340% mentions'},
-        {t:'22 min ago',cap:'Match',col:'#00C4A0',msg:'K-Means found new collab match — Fri Night Chaos · 94% audience overlap'}
-      ];
-      feed.innerHTML = events.map(e=>`<div style="display:flex;gap:10px;padding:10px;border-radius:8px;background:var(--bg)"><div style="width:6px;border-radius:3px;background:${e.col}"></div><div style="flex:1"><div style="font-size:11px;font-weight:700;color:${e.col};text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px">${e.cap} · ${e.t}</div><div style="font-size:13px;color:var(--t1);line-height:1.45">${e.msg}</div></div></div>`).join('');
-    }
-    // Cascade SVG
-    const svg = document.getElementById('cascadeSvg');
-    if(svg){
-      svg.innerHTML = `
-        <defs><linearGradient id="cgr" x1="0" x2="1"><stop stop-color="#00C4A0" stop-opacity="0.7"/><stop offset="1" stop-color="#00C4A0" stop-opacity="0.1"/></linearGradient></defs>
-        <line x1="50" y1="100" x2="180" y2="100" stroke="#00C4A0" stroke-width="2"/>
-        <line x1="180" y1="100" x2="320" y2="60" stroke="#00C4A0" stroke-width="2"/>
-        <line x1="180" y1="100" x2="320" y2="140" stroke="#00C4A0" stroke-width="2"/>
-        <line x1="320" y1="60" x2="460" y2="40" stroke="#00C4A0" stroke-width="1.5"/>
-        <line x1="320" y1="60" x2="460" y2="80" stroke="#00C4A0" stroke-width="1.5"/>
-        <line x1="320" y1="140" x2="460" y2="120" stroke="#00C4A0" stroke-width="1.5"/>
-        <line x1="320" y1="140" x2="460" y2="160" stroke="#00C4A0" stroke-width="1.5"/>
-        <line x1="460" y1="40" x2="600" y2="30" stroke="rgba(0,196,160,0.5)" stroke-width="1"/>
-        <line x1="460" y1="80" x2="600" y2="70" stroke="rgba(0,196,160,0.5)" stroke-width="1"/>
-        <line x1="460" y1="120" x2="600" y2="100" stroke="rgba(0,196,160,0.5)" stroke-width="1"/>
-        <line x1="460" y1="120" x2="600" y2="130" stroke="rgba(0,196,160,0.5)" stroke-width="1"/>
-        <line x1="460" y1="160" x2="600" y2="160" stroke="rgba(0,196,160,0.5)" stroke-width="1"/>
-        <line x1="600" y1="100" x2="740" y2="100" stroke="#FBBF24" stroke-width="3"/>
-        <circle cx="50" cy="100" r="14" fill="#00C4A0"/><text x="50" y="105" text-anchor="middle" fill="#0a1410" font-size="11" font-weight="700">DM</text>
-        <text x="50" y="135" text-anchor="middle" fill="#B0B3B8" font-size="10">Post</text>
-        <circle cx="180" cy="100" r="10" fill="rgba(0,196,160,0.5)"/><text x="180" y="135" text-anchor="middle" fill="#B0B3B8" font-size="10">First 50 fans</text>
-        <circle cx="320" cy="60" r="9" fill="rgba(0,196,160,0.6)"/>
-        <circle cx="320" cy="140" r="9" fill="rgba(0,196,160,0.6)"/>
-        <text x="320" y="180" text-anchor="middle" fill="#B0B3B8" font-size="10">Super sharers</text>
-        <circle cx="460" cy="40" r="7" fill="rgba(0,196,160,0.4)"/>
-        <circle cx="460" cy="80" r="7" fill="rgba(0,196,160,0.4)"/>
-        <circle cx="460" cy="120" r="7" fill="rgba(0,196,160,0.4)"/>
-        <circle cx="460" cy="160" r="7" fill="rgba(0,196,160,0.4)"/>
-        <text x="460" y="195" text-anchor="middle" fill="#B0B3B8" font-size="10">Their networks</text>
-        <circle cx="600" cy="30" r="5" fill="rgba(0,196,160,0.3)"/>
-        <circle cx="600" cy="70" r="5" fill="rgba(0,196,160,0.3)"/>
-        <circle cx="600" cy="100" r="5" fill="rgba(0,196,160,0.3)"/>
-        <circle cx="600" cy="130" r="5" fill="rgba(0,196,160,0.3)"/>
-        <circle cx="600" cy="160" r="5" fill="rgba(0,196,160,0.3)"/>
-        <circle cx="740" cy="100" r="18" fill="#FBBF24"/>
-        <text x="740" y="105" text-anchor="middle" fill="#0a1410" font-size="11" font-weight="700">FB</text>
-        <text x="740" y="135" text-anchor="middle" fill="#FBBF24" font-size="11" font-weight="700">Algorithm pickup</text>
-      `;
-    }
-
-    // Hour x Day Matrix - heatmap as colored bars
-    new Chart(document.getElementById('hourDayMatrix'),{type:'bubble',data:{datasets:[{
-      data:(()=>{const d=[];const wkdays=7;const hrs=24;for(let i=0;i<wkdays;i++){for(let j=0;j<hrs;j++){let v;if((i===1||i===3)&&(j===18||j===19))v=85;else if(i>=1&&i<=4&&(j>=12&&j<=14||j>=17&&j<=20))v=40+Math.random()*30;else if(i>=5)v=10+Math.random()*20;else v=5+Math.random()*15;d.push({x:j,y:i,r:v/8});}}return d;})(),
-      backgroundColor:(ctx)=>{const v=ctx.raw.r*8;return v>70?'#22C55E':v>40?'#FBBF24':v>20?'#7C5CBF':C.text}
-    }]},options:{...baseOpts,scales:{x:{...baseOpts.scales.x,min:-0.5,max:23.5,ticks:{color:C.text,stepSize:3,callback:(v)=>v+'h'}},y:{...baseOpts.scales.y,min:-0.5,max:6.5,reverse:true,ticks:{color:C.text,stepSize:1,callback:(v)=>['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][v]||''}}}}});
-
-    // Flagged comments
-    const fc = document.getElementById('flaggedComments');
-    if(fc){
-      const items = [
-        {risk:0.89,user:'@kevinmcginty',text:'This is the worst take I\'ve seen all week. Unfollowing.',page:'Drinking Memes'},
-        {risk:0.81,user:'@suzy_t',text:'You guys really lost the plot here. Disappointed.',page:'Drinking Memes'},
-        {risk:0.74,user:'@jaketheok',text:'Reported. This shouldn\'t be allowed on the platform.',page:'Drinking Memes'}
-      ];
-      fc.innerHTML = items.map(i=>`<div style="padding:10px;background:var(--crisis-bg);border:1px solid rgba(229,57,53,0.2);border-radius:8px;cursor:pointer" onclick="toast('info','Opening response composer for ${i.user}')"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><strong style="font-size:12px;color:var(--t1)">${i.user}</strong><span style="font-size:10px;font-weight:700;color:var(--crisis);background:rgba(229,57,53,0.15);padding:2px 7px;border-radius:9999px">RISK ${i.risk}</span></div><div style="font-size:12px;color:var(--t2);line-height:1.4;margin-bottom:4px">"${i.text}"</div><div style="font-size:11px;color:var(--t3)">${i.page}</div></div>`).join('');
-    }
-
-    // Multi-Page comparison
-    new Chart(document.getElementById('multiPageChart'),{type:'bar',data:{labels:['Drinking Memes','Kelpie Daily','Fri Night Chaos','UK Jail News','Prison Biscuit'],datasets:[
-      {label:'Engagement %',data:[4.8,5.4,3.2,3.9,2.8],backgroundColor:C.teal,borderRadius:6,yAxisID:'y'},
-      {label:'AI Score',data:[91,94,82,87,71],backgroundColor:C.arte,borderRadius:6,yAxisID:'y1'},
-      {label:'Sentiment',data:[78,94,71,82,79],backgroundColor:C.opp,borderRadius:6,yAxisID:'y'}]},
-      options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}}},scales:{x:baseOpts.scales.x,y:{...baseOpts.scales.y,position:'left'},y1:{...baseOpts.scales.y,position:'right',grid:{display:false}}}}});
-
-    // Topic distribution
-    new Chart(document.getElementById('topicDistChart'),{type:'doughnut',data:{labels:['Memes','Educational','BTS','Promotion','News','Other'],datasets:[{data:[42,18,12,10,12,6],backgroundColor:[C.teal,C.arte,C.warn,C.opp,C.blue,C.text],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:true,position:'bottom',labels:{color:C.text,font:C.font,boxWidth:8,padding:6}},tooltip:baseOpts.plugins.tooltip}}});
-
-    // Toxicity per page
-    new Chart(document.getElementById('toxicityChart'),{type:'bar',data:{labels:['Drinking M','Kelpie','Fri Night','UK Jail','Prison'],datasets:[{label:'Toxicity',data:[0.18,0.04,0.12,0.21,0.08],backgroundColor:[C.warn,C.opp,C.warn,C.crisis,C.opp],borderRadius:6}]},options:{...baseOpts,indexAxis:'y'}});
-
-    // Crisis log
-    new Chart(document.getElementById('crisisLogChart'),{type:'line',data:{labels:Array.from({length:30},(_,i)=>'D'+(i+1)),datasets:[{label:'Sentiment dips',data:Array.from({length:30},(_,i)=>{if(i===17||i===22)return 8;return Math.random()*2}),borderColor:C.crisis,backgroundColor:'rgba(229,57,53,0.15)',fill:true,tension:0.4,pointRadius:Array.from({length:30},(_,i)=>{return (i===17||i===22)?5:0}),pointBackgroundColor:C.crisis,borderWidth:2}]},options:baseOpts});
-
-    // Cluster map
-    new Chart(document.getElementById('clusterMap'),{type:'scatter',data:{datasets:[
-      {label:'Cluster A · Pub humour',data:Array.from({length:25},()=>({x:0.3+Math.random()*0.3,y:0.6+Math.random()*0.3})),backgroundColor:C.teal,pointRadius:5},
-      {label:'Cluster B · Animal content',data:Array.from({length:18},()=>({x:0.65+Math.random()*0.3,y:0.5+Math.random()*0.4})),backgroundColor:C.arte,pointRadius:5},
-      {label:'Cluster C · News/serious',data:Array.from({length:22},()=>({x:0.2+Math.random()*0.3,y:0.1+Math.random()*0.3})),backgroundColor:C.warn,pointRadius:5},
-      {label:'Cluster D · Niche/long-tail',data:Array.from({length:14},()=>({x:0.65+Math.random()*0.3,y:0.05+Math.random()*0.3})),backgroundColor:C.crisis,pointRadius:5}
-    ]},options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}}},scales:{x:{...baseOpts.scales.x,min:0,max:1,title:{display:true,text:'Topic axis',color:C.text}},y:{...baseOpts.scales.y,min:0,max:1,title:{display:true,text:'Engagement axis',color:C.text}}}}});
-  }
-
-  if(sub==='deepdive'){
-    new Chart(document.getElementById('captionLenChart'),{type:'bar',data:{labels:['<40','40-80','80-120','120-200','200+'],datasets:[{label:'Eng',data:[2.1,4.2,7.3,4.8,3.1],backgroundColor:[C.text,C.warn,C.teal,C.warn,C.text],borderRadius:6}]},options:baseOpts});
-    new Chart(document.getElementById('emojiChart'),{type:'bar',data:{labels:['0','1-2','3-4','5-7','8+'],datasets:[{label:'Reactions',data:[1.4,2.8,4.6,3.2,1.8],backgroundColor:C.arte,borderRadius:6}]},options:baseOpts});
-    new Chart(document.getElementById('volatilityChart'),{type:'bar',data:{labels:['Drinking M','Kelpie','Fri Night','UK Jail','Prison'],datasets:[{label:'σ',data:[2.4,1.8,3.2,2.1,1.5],backgroundColor:[C.crisis,C.warn,C.crisis,C.warn,C.opp],borderRadius:6}]},options:baseOpts});
-    new Chart(document.getElementById('shareMultChart'),{type:'line',data:{labels:Array.from({length:14},(_,i)=>'D'+(i+1)),datasets:[{label:'Reach',data:Array.from({length:14},(_,i)=>1*Math.pow(1.18,i)),borderColor:C.teal,backgroundColor:'rgba(0,196,160,0.15)',fill:true,tension:0.4,pointRadius:2,borderWidth:2}]},options:baseOpts});
-    new Chart(document.getElementById('freqEngChart'),{type:'line',data:{labels:['1','2','3','4','5','6','7','8','9'],datasets:[{label:'Eng',data:[3.1,4.6,5.8,6.2,5.9,5.4,4.8,4.1,3.4],borderColor:C.warn,backgroundColor:'rgba(245,158,11,0.15)',fill:true,tension:0.4,pointRadius:3,borderWidth:2}]},options:baseOpts});
-    new Chart(document.getElementById('funnelChart'),{type:'bar',data:{labels:['Reach','React','Comment','Share'],datasets:[{label:'Count',data:[24500,2400,184,312],backgroundColor:[C.teal,C.warn,C.arte,C.opp],borderRadius:6}]},options:{...baseOpts,indexAxis:'y'}});
-
-    // raw data table
-    const tbody = document.getElementById('rawDataBody');
-    if(tbody){
-      const rows = [
-        ['Drinking Memes','2h ago','24.5K','2,400','312','94'],
-        ['Kelpie Daily','4h ago','38.2K','3,800','489','92'],
-        ['UK Jail News','6h ago','19.8K','1,920','234','87'],
-        ['Fri Night Chaos','1d ago','12.4K','1,420','178','82'],
-        ['Drinking Memes','1d ago','21.6K','1,780','201','79'],
-        ['Prison Biscuit','2d ago','8.3K','620','89','71'],
-        ['Kelpie Daily','2d ago','28.4K','2,100','312','85'],
-        ['UK Jail News','3d ago','15.2K','1,340','167','78'],
-        ['Drinking Memes','3d ago','19.4K','1,920','198','83'],
-        ['Fri Night Chaos','4d ago','9.8K','840','98','68'],
-        ['Kelpie Daily','4d ago','22.1K','2,180','248','81'],
-        ['Prison Biscuit','5d ago','6.4K','480','62','64']
-      ];
-      tbody.innerHTML = rows.map(r=>`<tr style="cursor:pointer" onclick="toast('info','Opening ${r[0]} post')"><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td><strong style="color:var(--teal)">${r[5]}</strong></td></tr>`).join('');
-    }
-  }
 }
+
+function initAdvanced(){
+  // VIRALITY
+  const hrs = Array.from({length:48},(_,i)=>i+'h');
+  new Chart(document.getElementById('velChart'),{type:'line',data:{labels:hrs,datasets:[
+    {label:'Shares/hr',data:hrs.map((_,i)=>{if(i>=18&&i<=24)return 80+Math.sin(i)*30+i*5;return 20+Math.random()*40}),borderColor:C.teal,backgroundColor:'rgba(0,196,160,0.15)',fill:true,tension:0.4,pointRadius:0,borderWidth:2},
+    {label:'Threshold',data:hrs.map(()=>200),borderColor:C.crisis,borderDash:[5,5],fill:false,pointRadius:0,borderWidth:1.5}]},
+    options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}}}}});
+  new Chart(document.getElementById('viralDist'),{type:'bar',data:{labels:['0-20','20-40','40-60','60-80','80-100'],datasets:[{label:'Posts',data:[12,28,42,38,18],backgroundColor:[C.text,C.text,C.warn,C.teal,C.opp],borderRadius:6}]},options:baseOpts});
+  new Chart(document.getElementById('triggerChart'),{type:'bar',data:{labels:['Question CTA','Humour','Visual hook','Emotional','Trend tie-in','Length<80c'],datasets:[{label:'Lift',data:[1.6,1.4,1.3,1.25,1.2,1.15],backgroundColor:C.arte,borderRadius:6}]},options:{...baseOpts,indexAxis:'y'}});
+  const wkdays = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const hrLabels = ['12a','6a','12p','6p','9p'];
+  const probData = [];
+  wkdays.forEach((d,di)=>{
+    hrLabels.forEach((h,hi)=>{
+      let p; if((di===1&&hi===3)||(di===3&&hi===3))p=85;
+      else if((di>=1&&di<=4)&&(hi>=2&&hi<=3))p=55+Math.random()*15;
+      else p=10+Math.random()*30;
+      probData.push({x:hi,y:di,r:p/4});
+    });
+  });
+  new Chart(document.getElementById('viralHeat'),{type:'bubble',data:{datasets:[{label:'% chance',data:probData,backgroundColor:probData.map(p=>{const v=p.r*4;return v>70?'#22C55E':v>40?C.warn:C.text})}]},
+    options:{...baseOpts,scales:{x:{...baseOpts.scales.x,ticks:{color:C.text,callback:(v)=>hrLabels[v]||''},min:-0.5,max:hrLabels.length-0.5},y:{...baseOpts.scales.y,ticks:{color:C.text,callback:(v)=>wkdays[v]||''},min:-0.5,max:wkdays.length-0.5,reverse:true}}}});
+
+  // CONTENT PATTERNS (was Deep Dive)
+  new Chart(document.getElementById('captionLenChart'),{type:'bar',data:{labels:['<40','40-80','80-120','120-200','200+'],datasets:[{label:'Eng',data:[2.1,4.2,7.3,4.8,3.1],backgroundColor:[C.text,C.warn,C.teal,C.warn,C.text],borderRadius:6}]},options:baseOpts});
+  new Chart(document.getElementById('emojiChart'),{type:'bar',data:{labels:['0','1-2','3-4','5-7','8+'],datasets:[{label:'Reactions',data:[1.4,2.8,4.6,3.2,1.8],backgroundColor:C.arte,borderRadius:6}]},options:baseOpts});
+  new Chart(document.getElementById('volatilityChart'),{type:'bar',data:{labels:['Drinking M','Kelpie','Fri Night','UK Jail','Prison'],datasets:[{label:'σ',data:[2.4,1.8,3.2,2.1,1.5],backgroundColor:[C.crisis,C.warn,C.crisis,C.warn,C.opp],borderRadius:6}]},options:baseOpts});
+  new Chart(document.getElementById('shareMultChart'),{type:'line',data:{labels:Array.from({length:14},(_,i)=>'D'+(i+1)),datasets:[{label:'Reach',data:Array.from({length:14},(_,i)=>1*Math.pow(1.18,i)),borderColor:C.teal,backgroundColor:'rgba(0,196,160,0.15)',fill:true,tension:0.4,pointRadius:2,borderWidth:2}]},options:baseOpts});
+  new Chart(document.getElementById('freqEngChart'),{type:'line',data:{labels:['1','2','3','4','5','6','7','8','9'],datasets:[{label:'Eng',data:[3.1,4.6,5.8,6.2,5.9,5.4,4.8,4.1,3.4],borderColor:C.warn,backgroundColor:'rgba(245,158,11,0.15)',fill:true,tension:0.4,pointRadius:3,borderWidth:2}]},options:baseOpts});
+  new Chart(document.getElementById('funnelChart'),{type:'bar',data:{labels:['Reach','React','Comment','Share'],datasets:[{label:'Count',data:[24500,2400,184,312],backgroundColor:[C.teal,C.warn,C.arte,C.opp],borderRadius:6}]},options:{...baseOpts,indexAxis:'y'}});
+
+  // CASCADE SVG
+  const svg = document.getElementById('cascadeSvg');
+  if(svg){
+    svg.innerHTML = `
+      <line x1="50" y1="100" x2="180" y2="100" stroke="#00C4A0" stroke-width="2"/>
+      <line x1="180" y1="100" x2="320" y2="60" stroke="#00C4A0" stroke-width="2"/>
+      <line x1="180" y1="100" x2="320" y2="140" stroke="#00C4A0" stroke-width="2"/>
+      <line x1="320" y1="60" x2="460" y2="40" stroke="#00C4A0" stroke-width="1.5"/>
+      <line x1="320" y1="60" x2="460" y2="80" stroke="#00C4A0" stroke-width="1.5"/>
+      <line x1="320" y1="140" x2="460" y2="120" stroke="#00C4A0" stroke-width="1.5"/>
+      <line x1="320" y1="140" x2="460" y2="160" stroke="#00C4A0" stroke-width="1.5"/>
+      <line x1="460" y1="40" x2="600" y2="30" stroke="rgba(0,196,160,0.5)" stroke-width="1"/>
+      <line x1="460" y1="80" x2="600" y2="70" stroke="rgba(0,196,160,0.5)" stroke-width="1"/>
+      <line x1="460" y1="120" x2="600" y2="100" stroke="rgba(0,196,160,0.5)" stroke-width="1"/>
+      <line x1="460" y1="120" x2="600" y2="130" stroke="rgba(0,196,160,0.5)" stroke-width="1"/>
+      <line x1="460" y1="160" x2="600" y2="160" stroke="rgba(0,196,160,0.5)" stroke-width="1"/>
+      <line x1="600" y1="100" x2="740" y2="100" stroke="#FBBF24" stroke-width="3"/>
+      <circle cx="50" cy="100" r="14" fill="#00C4A0"/><text x="50" y="105" text-anchor="middle" fill="#0a1410" font-size="11" font-weight="700">DM</text>
+      <text x="50" y="135" text-anchor="middle" fill="#B0B3B8" font-size="10">Post</text>
+      <circle cx="180" cy="100" r="10" fill="rgba(0,196,160,0.5)"/><text x="180" y="135" text-anchor="middle" fill="#B0B3B8" font-size="10">First 50 fans</text>
+      <circle cx="320" cy="60" r="9" fill="rgba(0,196,160,0.6)"/>
+      <circle cx="320" cy="140" r="9" fill="rgba(0,196,160,0.6)"/>
+      <text x="320" y="180" text-anchor="middle" fill="#B0B3B8" font-size="10">Super sharers</text>
+      <circle cx="460" cy="40" r="7" fill="rgba(0,196,160,0.4)"/>
+      <circle cx="460" cy="80" r="7" fill="rgba(0,196,160,0.4)"/>
+      <circle cx="460" cy="120" r="7" fill="rgba(0,196,160,0.4)"/>
+      <circle cx="460" cy="160" r="7" fill="rgba(0,196,160,0.4)"/>
+      <text x="460" y="195" text-anchor="middle" fill="#B0B3B8" font-size="10">Their networks</text>
+      <circle cx="600" cy="30" r="5" fill="rgba(0,196,160,0.3)"/>
+      <circle cx="600" cy="70" r="5" fill="rgba(0,196,160,0.3)"/>
+      <circle cx="600" cy="100" r="5" fill="rgba(0,196,160,0.3)"/>
+      <circle cx="600" cy="130" r="5" fill="rgba(0,196,160,0.3)"/>
+      <circle cx="600" cy="160" r="5" fill="rgba(0,196,160,0.3)"/>
+      <circle cx="740" cy="100" r="18" fill="#FBBF24"/>
+      <text x="740" y="105" text-anchor="middle" fill="#0a1410" font-size="11" font-weight="700">FB</text>
+      <text x="740" y="135" text-anchor="middle" fill="#FBBF24" font-size="11" font-weight="700">Algorithm pickup</text>
+    `;
+  }
+
+  // Hour x Day Matrix
+  new Chart(document.getElementById('hourDayMatrix'),{type:'bubble',data:{datasets:[{
+    data:(()=>{const d=[];for(let i=0;i<7;i++){for(let j=0;j<24;j++){let v;if((i===1||i===3)&&(j===18||j===19))v=85;else if(i>=1&&i<=4&&(j>=12&&j<=14||j>=17&&j<=20))v=40+Math.random()*30;else if(i>=5)v=10+Math.random()*20;else v=5+Math.random()*15;d.push({x:j,y:i,r:v/8});}}return d;})(),
+    backgroundColor:(ctx)=>{const v=ctx.raw.r*8;return v>70?'#22C55E':v>40?'#FBBF24':v>20?'#7C5CBF':C.text}
+  }]},options:{...baseOpts,scales:{x:{...baseOpts.scales.x,min:-0.5,max:23.5,ticks:{color:C.text,stepSize:3,callback:(v)=>v+'h'}},y:{...baseOpts.scales.y,min:-0.5,max:6.5,reverse:true,ticks:{color:C.text,stepSize:1,callback:(v)=>['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][v]||''}}}}});
+
+  // Flagged comments
+  const fc = document.getElementById('flaggedComments');
+  if(fc){
+    const items = [
+      {risk:0.89,user:'@kevinmcginty',text:"This is the worst take I've seen all week. Unfollowing.",page:'Drinking Memes'},
+      {risk:0.81,user:'@suzy_t',text:"You guys really lost the plot here. Disappointed.",page:'Drinking Memes'},
+      {risk:0.74,user:'@jaketheok',text:"Reported. This shouldn't be allowed on the platform.",page:'Drinking Memes'}
+    ];
+    fc.innerHTML = items.map(i=>`<div style="padding:10px;background:var(--crisis-bg);border:1px solid rgba(229,57,53,0.2);border-radius:8px;cursor:pointer" onclick="toast('info','Opening response composer for ${i.user}')"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><strong style="font-size:12px;color:var(--t1)">${i.user}</strong><span style="font-size:10px;font-weight:700;color:var(--crisis);background:rgba(229,57,53,0.15);padding:2px 7px;border-radius:9999px">RISK ${i.risk}</span></div><div style="font-size:12px;color:var(--t2);line-height:1.4;margin-bottom:4px">"${i.text}"</div><div style="font-size:11px;color:var(--t3)">${i.page}</div></div>`).join('');
+  }
+
+  // Multi-page comparison
+  new Chart(document.getElementById('multiPageChart'),{type:'bar',data:{labels:['Drinking Memes','Kelpie Daily','Fri Night Chaos','UK Jail News','Prison Biscuit'],datasets:[
+    {label:'Engagement %',data:[4.8,5.4,3.2,3.9,2.8],backgroundColor:C.teal,borderRadius:6,yAxisID:'y'},
+    {label:'AI Score',data:[91,94,82,87,71],backgroundColor:C.arte,borderRadius:6,yAxisID:'y1'},
+    {label:'Sentiment',data:[78,94,71,82,79],backgroundColor:C.opp,borderRadius:6,yAxisID:'y'}]},
+    options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}}},scales:{x:baseOpts.scales.x,y:{...baseOpts.scales.y,position:'left'},y1:{...baseOpts.scales.y,position:'right',grid:{display:false}}}}});
+
+  // Topic distribution
+  new Chart(document.getElementById('topicDistChart'),{type:'doughnut',data:{labels:['Memes','Educational','BTS','Promotion','News','Other'],datasets:[{data:[42,18,12,10,12,6],backgroundColor:[C.teal,C.arte,C.warn,C.opp,C.blue,C.text],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:true,position:'bottom',labels:{color:C.text,font:C.font,boxWidth:8,padding:6}},tooltip:baseOpts.plugins.tooltip}}});
+
+  // Toxicity per page
+  new Chart(document.getElementById('toxicityChart'),{type:'bar',data:{labels:['Drinking M','Kelpie','Fri Night','UK Jail','Prison'],datasets:[{label:'Toxicity',data:[0.18,0.04,0.12,0.21,0.08],backgroundColor:[C.warn,C.opp,C.warn,C.crisis,C.opp],borderRadius:6}]},options:{...baseOpts,indexAxis:'y'}});
+
+  // Crisis log
+  new Chart(document.getElementById('crisisLogChart'),{type:'line',data:{labels:Array.from({length:30},(_,i)=>'D'+(i+1)),datasets:[{label:'Sentiment dips',data:Array.from({length:30},(_,i)=>{if(i===17||i===22)return 8;return Math.random()*2}),borderColor:C.crisis,backgroundColor:'rgba(229,57,53,0.15)',fill:true,tension:0.4,pointRadius:Array.from({length:30},(_,i)=>{return (i===17||i===22)?5:0}),pointBackgroundColor:C.crisis,borderWidth:2}]},options:baseOpts});
+
+  // Cluster map
+  new Chart(document.getElementById('clusterMap'),{type:'scatter',data:{datasets:[
+    {label:'Cluster A · Pub humour',data:Array.from({length:25},()=>({x:0.3+Math.random()*0.3,y:0.6+Math.random()*0.3})),backgroundColor:C.teal,pointRadius:5},
+    {label:'Cluster B · Animal content',data:Array.from({length:18},()=>({x:0.65+Math.random()*0.3,y:0.5+Math.random()*0.4})),backgroundColor:C.arte,pointRadius:5},
+    {label:'Cluster C · News/serious',data:Array.from({length:22},()=>({x:0.2+Math.random()*0.3,y:0.1+Math.random()*0.3})),backgroundColor:C.warn,pointRadius:5},
+    {label:'Cluster D · Niche/long-tail',data:Array.from({length:14},()=>({x:0.65+Math.random()*0.3,y:0.05+Math.random()*0.3})),backgroundColor:C.crisis,pointRadius:5}
+  ]},options:{...baseOpts,plugins:{...baseOpts.plugins,legend:{display:true,labels:{color:C.text,font:C.font,boxWidth:8}}},scales:{x:{...baseOpts.scales.x,min:0,max:1,title:{display:true,text:'Topic axis',color:C.text}},y:{...baseOpts.scales.y,min:0,max:1,title:{display:true,text:'Engagement axis',color:C.text}}}}});
+
+  // AI Activity Feed
+  const feed = document.getElementById('aiActivityFeed');
+  if(feed){
+    const events = [
+      {t:'2 sec ago',cap:'Sentiment',col:'#22C55E',msg:'Classified 18 new comments on Drinking Memes — 14 positive, 3 neutral, 1 negative'},
+      {t:'1 min ago',cap:'Virality',col:'#FBBF24',msg:'Re-scored 47 posts with updated 52-feature model · 6 crossed viral threshold'},
+      {t:'3 min ago',cap:'Crisis',col:'#E53935',msg:'Spike detected on Drinking Memes — sentiment dropped from 0.78 to 0.42 in 4 min'},
+      {t:'8 min ago',cap:'Timing',col:'#7C5CBF',msg:'Refreshed optimal posting windows for all 5 pages · Tuesday 6PM remains top slot'},
+      {t:'14 min ago',cap:'Topic',col:'#60A5FA',msg:'Detected new trending topic in your niche: "prison drama" +340% mentions'},
+      {t:'22 min ago',cap:'Match',col:'#00C4A0',msg:'K-Means found new collab match — Fri Night Chaos · 94% audience overlap'}
+    ];
+    feed.innerHTML = events.map(e=>`<div style="display:flex;gap:10px;padding:10px;border-radius:8px;background:var(--bg)"><div style="width:6px;border-radius:3px;background:${e.col}"></div><div style="flex:1"><div style="font-size:11px;font-weight:700;color:${e.col};text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px">${e.cap} · ${e.t}</div><div style="font-size:13px;color:var(--t1);line-height:1.45">${e.msg}</div></div></div>`).join('');
+  }
+
+  // Raw data table
+  const tbody = document.getElementById('rawDataBody');
+  if(tbody){
+    const rows = [
+      ['Drinking Memes','2h ago','24.5K','2,400','312','94'],
+      ['Kelpie Daily','4h ago','38.2K','3,800','489','92'],
+      ['UK Jail News','6h ago','19.8K','1,920','234','87'],
+      ['Fri Night Chaos','1d ago','12.4K','1,420','178','82'],
+      ['Drinking Memes','1d ago','21.6K','1,780','201','79'],
+      ['Prison Biscuit','2d ago','8.3K','620','89','71'],
+      ['Kelpie Daily','2d ago','28.4K','2,100','312','85'],
+      ['UK Jail News','3d ago','15.2K','1,340','167','78'],
+      ['Drinking Memes','3d ago','19.4K','1,920','198','83'],
+      ['Fri Night Chaos','4d ago','9.8K','840','98','68'],
+      ['Kelpie Daily','4d ago','22.1K','2,180','248','81'],
+      ['Prison Biscuit','5d ago','6.4K','480','62','64']
+    ];
+    tbody.innerHTML = rows.map(r=>`<tr style="cursor:pointer" onclick="toast('info','Opening ${r[0]} post')"><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td><strong style="color:var(--teal)">${r[5]}</strong></td></tr>`).join('');
+  }
+
+  // Section nav scroll behaviour
+  document.querySelectorAll('.adv-nav-chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      const target = document.getElementById('adv-'+chip.dataset.jump);
+      if(target){
+        document.querySelectorAll('.adv-nav-chip').forEach(c=>c.classList.remove('active'));
+        chip.classList.add('active');
+        target.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+  });
+}
+
+// ─── DISCOVERY FLYWHEEL ───────────────────────────────
+const FW_PAGES = [
+  {
+    page:'Fri Night Chaos', avatar:'FN', avatarClass:'fn', handle:'@frinightchaos',
+    followers:'89K', niche:'Pub humour · UK',
+    pageTint:'rgba(96,165,250,0.30)', pageRing:'#60A5FA',
+    overlap:94,
+    tagline:"Your audience is 94% the same. Their meme cadence (5/week) matches yours, and 7 of their top 10 topics are in your top 15.",
+    matches:[
+      {label:'Audience overlap', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>', pct:94},
+      {label:'Topic similarity', icon:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/>', pct:78},
+      {label:'Posting time alignment', icon:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>', pct:65},
+      {label:'Tone & sentiment match', icon:'<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/>', pct:88}
+    ],
+    sharedTopics:['pub culture','memes','UK humour','Friday','drinking','quiz nights','football'],
+    arteTip:"Their last 3 posts crossed your virality threshold. <strong>Strong reciprocal upside</strong> — connecting could lift both pages by 15-20% reach.",
+    detail:{stats:[{k:'Engagement Rate',v:'5.1%',c:'teal'},{k:'AI Score',v:'87',c:'teal'},{k:'Avg shares',v:'412',c:''},{k:'Posting cadence',v:'5/wk',c:''}],why:"K-Means clustering placed Fri Night Chaos in <strong>Cluster A (Pub Humour)</strong> alongside your Drinking Memes. Topic embedding cosine similarity = 0.87. They've never collaborated with anyone in your niche before — clean slate."}
+  },
+  {
+    page:'UK Jail News', avatar:'UK', avatarClass:'uk', handle:'@ukjailnews',
+    followers:'124K', niche:'News · True crime',
+    pageTint:'rgba(167,139,250,0.30)', pageRing:'#A78BFA',
+    overlap:78,
+    tagline:"Massive audience but only 78% overlap. Strong cross-promotion potential since their followers don't overlap heavily with your other 4 pages.",
+    matches:[
+      {label:'Audience overlap', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>', pct:78},
+      {label:'Topic similarity', icon:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/>', pct:62},
+      {label:'New audience reach', icon:'<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>', pct:91},
+      {label:'Tone & sentiment match', icon:'<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/>', pct:71}
+    ],
+    sharedTopics:['true crime','UK news','prison drama','viral'],
+    arteTip:"<strong>+91% new audience reach</strong> — their followers haven't seen your content before. Best for pages looking to break out of their bubble.",
+    detail:{stats:[{k:'Engagement Rate',v:'3.9%',c:''},{k:'AI Score',v:'81',c:''},{k:'Avg shares',v:'687',c:'teal'},{k:'Reach lift',v:'+91%',c:'teal'}],why:"Lower topic overlap is actually the upside here — their audience is fresh territory. Topic 'prison drama' is currently <strong>+340% trending</strong> in your niche which gives this collab a time-sensitive window."}
+  },
+  {
+    page:'Australian Memes Daily', avatar:'AM', avatarClass:'am', handle:'@aussiememes',
+    followers:'67K', niche:'Memes · Australia',
+    pageTint:'rgba(244,114,182,0.30)', pageRing:'#F472B6',
+    overlap:68,
+    tagline:"Geographic expansion play. Your humour translates well to AU audience — 4 of your top 10 posts have AU engagement above UK average.",
+    matches:[
+      {label:'Audience overlap', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>', pct:68},
+      {label:'Topic similarity', icon:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/>', pct:84},
+      {label:'Geographic expansion', icon:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20"/>', pct:96},
+      {label:'Tone & sentiment match', icon:'<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/>', pct:79}
+    ],
+    sharedTopics:['memes','irreverent humour','drinking','Friday','sports'],
+    arteTip:"Geographic match — opens Australian market. Your <strong>'Friday plans hierarchy'</strong> post performed 2.3× better in AU than UK.",
+    detail:{stats:[{k:'Engagement Rate',v:'4.4%',c:''},{k:'AI Score',v:'78',c:''},{k:'AU audience',v:'92%',c:'teal'},{k:'Lang match',v:'EN-AU',c:''}],why:"Your humour archetype maps to <strong>'larrikin/dry'</strong> which is the dominant AU meme tone. Cross-pollination opens timezone arbitrage — they post when you sleep."}
+  },
+  {
+    page:'Cocktail Confessions', avatar:'CC', avatarClass:'dm', handle:'@cocktailconf',
+    followers:'45K', niche:'Drinking culture',
+    pageTint:'rgba(251,191,36,0.30)', pageRing:'#FBBF24',
+    overlap:81,
+    tagline:"Niche-adjacent. They cover the lifestyle side of drinking culture, you cover the humour side. Strong topic-pair match.",
+    matches:[
+      {label:'Audience overlap', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>', pct:81},
+      {label:'Topic similarity', icon:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/>', pct:73},
+      {label:'Posting time alignment', icon:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>', pct:88},
+      {label:'Lifestyle/humour balance', icon:'<path d="M9 11l3 3L22 4"/>', pct:91}
+    ],
+    sharedTopics:['cocktails','drinking','weekend','lifestyle','UK'],
+    arteTip:"Adjacent niche fills your <strong>'lifestyle' content gap</strong>. Their followers are 1.8× more likely to engage with your weekend posts.",
+    detail:{stats:[{k:'Engagement Rate',v:'4.1%',c:''},{k:'AI Score',v:'76',c:''},{k:'Posting overlap',v:'88%',c:'teal'},{k:'Avg likes',v:'1.2K',c:''}],why:"Lifestyle + humour is a high-conversion content pair. K-Means cluster shows they sit one cluster over from yours — adjacency play."}
+  },
+  {
+    page:'Memetic Studies UK', avatar:'MS', avatarClass:'kd', handle:'@memestudies',
+    followers:'31K', niche:'Meme analysis · Academic',
+    pageTint:'rgba(34,197,94,0.30)', pageRing:'#22C55E',
+    overlap:72,
+    tagline:"Smaller but highly engaged. Their academic angle on memes adds credibility crossover. Their followers are 2.4× more likely to share long-form content.",
+    matches:[
+      {label:'Audience overlap', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>', pct:72},
+      {label:'Topic similarity', icon:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/>', pct:84},
+      {label:'Engagement quality', icon:'<path d="M3 3v18h18M7 14l3-3 4 4 5-6"/>', pct:94},
+      {label:'Tone & sentiment match', icon:'<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/>', pct:62}
+    ],
+    sharedTopics:['memes','UK','analysis','culture'],
+    arteTip:"Their followers comment 3× more than yours. <strong>Engagement-quality lift</strong> — smaller reach, deeper conversation.",
+    detail:{stats:[{k:'Engagement Rate',v:'7.2%',c:'teal'},{k:'AI Score',v:'83',c:''},{k:'Comments/post',v:'412',c:'teal'},{k:'Avg comment len',v:'48 chars',c:''}],why:"Highest engagement-quality score in your match list. Their academic framing of memes lifts perceived value of crossovers."}
+  },
+  {
+    page:'Sunday Roast Society', avatar:'SR', avatarClass:'fn', handle:'@sundayroastsoc',
+    followers:'58K', niche:'UK lifestyle · Food',
+    pageTint:'rgba(96,165,250,0.30)', pageRing:'#60A5FA',
+    overlap:64,
+    tagline:"Lifestyle adjacency. Your audience overlaps on 'UK weekend culture' but they own a different content vertical — food + family.",
+    matches:[
+      {label:'Audience overlap', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>', pct:64},
+      {label:'Topic similarity', icon:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/>', pct:51},
+      {label:'New audience reach', icon:'<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>', pct:84},
+      {label:'Lifestyle relevance', icon:'<path d="M9 11l3 3L22 4"/>', pct:79}
+    ],
+    sharedTopics:['UK','weekend','Sunday','tradition'],
+    arteTip:"Different niche but shared <strong>'UK weekend ritual'</strong> theme. Best for one-off content swap rather than ongoing collab.",
+    detail:{stats:[{k:'Engagement Rate',v:'3.6%',c:''},{k:'AI Score',v:'69',c:''},{k:'New audience',v:'+84%',c:'teal'},{k:'Demographic',v:'25-44 UK',c:''}],why:"Different content vertical = clean exposure to a fresh audience. Best as a single themed crossover post (e.g. 'Sunday roast survival memes')."}
+  },
+  {
+    page:'Northern Banter', avatar:'NB', avatarClass:'pb', handle:'@northern_banter',
+    followers:'92K', niche:'Regional humour · UK North',
+    pageTint:'rgba(0,196,160,0.30)', pageRing:'#00C4A0',
+    overlap:86,
+    tagline:"Strong overlap. Same humour DNA, regional flavour adds variety. Their North-of-England audience is 41% of yours, the rest is fresh.",
+    matches:[
+      {label:'Audience overlap', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>', pct:86},
+      {label:'Topic similarity', icon:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/>', pct:81},
+      {label:'Posting time alignment', icon:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>', pct:73},
+      {label:'Tone & sentiment match', icon:'<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/>', pct:92}
+    ],
+    sharedTopics:['UK humour','memes','pub culture','northern','banter'],
+    arteTip:"Tone match is <strong>92%</strong> — practically the same voice with regional variance. Easy collab, low risk.",
+    detail:{stats:[{k:'Engagement Rate',v:'4.6%',c:''},{k:'AI Score',v:'85',c:''},{k:'Tone match',v:'92%',c:'teal'},{k:'New audience',v:'59%',c:''}],why:"Highest tone-match score in your queue. Their North-of-England flavour is a 'safe variant' on your voice — regional sub-genre."}
+  },
+  {
+    page:'Banterversity', avatar:'BV', avatarClass:'kd', handle:'@banterversity',
+    followers:'113K', niche:'Student humour · UK',
+    pageTint:'rgba(34,197,94,0.30)', pageRing:'#22C55E',
+    overlap:75,
+    tagline:"Younger demographic skew. Your 25-34 audience peaks here, theirs is 18-24. Demographic broadening play.",
+    matches:[
+      {label:'Audience overlap', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>', pct:75},
+      {label:'Topic similarity', icon:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/>', pct:69},
+      {label:'Demographic broadening', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>', pct:88},
+      {label:'Tone & sentiment match', icon:'<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/>', pct:81}
+    ],
+    sharedTopics:['student life','memes','drinking','UK','young'],
+    arteTip:"<strong>Younger audience entry point</strong> — their 18-24 demographic is your weakest segment. This collab opens that bracket.",
+    detail:{stats:[{k:'Engagement Rate',v:'5.8%',c:'teal'},{k:'AI Score',v:'80',c:''},{k:'18-24 share',v:'68%',c:'teal'},{k:'Posting cadence',v:'7/wk',c:''}],why:"Demographic gap-filler. Your audience pyramid is light at the top (18-24) — Banterversity is heavy there. Posting cadence higher than yours, so they'll reciprocate often."}
+  },
+  {
+    page:'Tea Time Tales', avatar:'TT', avatarClass:'am', handle:'@teatimetales',
+    followers:'29K', niche:'Storytelling · UK lifestyle',
+    pageTint:'rgba(244,114,182,0.30)', pageRing:'#F472B6',
+    overlap:58,
+    tagline:"Smallest match — but highest niche-novelty score. Their long-form storytelling adds variety your feed lacks.",
+    matches:[
+      {label:'Audience overlap', icon:'<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>', pct:58},
+      {label:'Topic similarity', icon:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/>', pct:43},
+      {label:'Niche novelty', icon:'<path d="M2 12h2l3-9 6 18 3-9h6"/>', pct:96},
+      {label:'Tone & sentiment match', icon:'<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/>', pct:74}
+    ],
+    sharedTopics:['UK','storytelling','lifestyle'],
+    arteTip:"Long-form play. Their <strong>15-min retention rate is 4× yours</strong>. Best for slow-burn narrative collabs.",
+    detail:{stats:[{k:'Engagement Rate',v:'6.2%',c:'teal'},{k:'AI Score',v:'72',c:''},{k:'Avg post length',v:'1840 chars',c:''},{k:'Read-through',v:'62%',c:'teal'}],why:"Outlier match — low overlap means highest 'novelty surprise' for your existing audience. Their long-form approach also opens your demo to a slower-paced format you've never tried."}
+  }
+];
+
+let _fwIdx = 0;
+let _fwSwipingId = null;
+
+function initFlywheel(){
+  document.getElementById('flywheelTotal').textContent = FW_PAGES.length;
+  renderFlywheel();
+  // Keyboard shortcuts
+  document.addEventListener('keydown', flywheelKey);
+  // Discovery sub-tabs
+  document.querySelectorAll('[data-disc-tab]').forEach(t=>{
+    t.addEventListener('click', e=>{
+      document.querySelectorAll('[data-disc-tab]').forEach(o=>o.classList.remove('active'));
+      t.classList.add('active');
+      const tab = t.dataset.discTab;
+      if(tab==='matches'){ renderFlywheel(); }
+      else if(tab==='active'){ renderFlywheelEmpty('You have <strong>3 active collabs</strong> — Drinking Memes ↔ Fri Night Chaos, Kelpie Daily ↔ Northern Banter, UK Jail News ↔ Memetic Studies UK.'); }
+      else if(tab==='saved'){ renderFlywheelEmpty('You have <strong>2 saved matches</strong> — Tea Time Tales, Sunday Roast Society. Decide later when you have bandwidth.'); }
+    });
+  });
+}
+
+function flywheelKey(e){
+  if(!document.getElementById('page-discovery').classList.contains('active')) return;
+  if(document.getElementById('arteChatHost').classList.contains('open')) return;
+  if(document.getElementById('modalOverlay').classList.contains('open')) return;
+  if(e.key==='ArrowLeft'){ e.preventDefault(); flywheelSwipe('pass'); }
+  else if(e.key==='ArrowRight'){ e.preventDefault(); flywheelSwipe('connect'); }
+  else if(e.key==='ArrowDown'){ e.preventDefault(); flywheelSwipe('save'); }
+}
+
+function renderFlywheel(){
+  const stage = document.getElementById('flywheelStage');
+  if(!stage) return;
+  if(_fwIdx >= FW_PAGES.length){
+    stage.innerHTML = `<div class="flywheel-end">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+      <h3>All caught up!</h3>
+      <p>You've reviewed all 9 matches this week. Art-E will surface new ones as it finds them.</p>
+      <button class="btn primary" style="margin-top:14px" onclick="_fwIdx=0;renderFlywheel()">Review again</button>
+    </div>`;
+    document.getElementById('flywheelProgress').style.width = '100%';
+    document.getElementById('flywheelCount').textContent = FW_PAGES.length;
+    return;
+  }
+  document.getElementById('flywheelCount').textContent = _fwIdx + 1;
+  document.getElementById('flywheelProgress').style.width = ((_fwIdx+1)/FW_PAGES.length*100)+'%';
+
+  // Show 4 cards stacked: current + next 3
+  let html = '';
+  for(let s=3;s>=0;s--){
+    const i = _fwIdx + s;
+    if(i >= FW_PAGES.length) continue;
+    const p = FW_PAGES[i];
+    html += renderFlywheelCard(p, s);
+  }
+  stage.innerHTML = html;
+  attachFlywheelDrag();
+}
+
+function renderFlywheelCard(p, stackPos){
+  const matchesHtml = p.matches.map(m=>`
+    <div class="fw-match-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${m.icon}</svg>
+      <span class="fw-match-label">${m.label}</span>
+      <div class="fw-match-bar"><div class="fw-match-fill" style="width:${m.pct}%"></div></div>
+      <span class="fw-match-pct">${m.pct}%</span>
+    </div>
+  `).join('');
+  const topicsHtml = p.sharedTopics.map(t=>`<span class="fw-topic-chip">#${t}</span>`).join('');
+  const detailStats = p.detail.stats.map(s=>`<div class="fw-detail-cell"><div class="fw-detail-cell-label">${s.k}</div><div class="fw-detail-cell-value ${s.c||''}">${s.v}</div></div>`).join('');
+  return `
+    <div class="fw-card" data-stack="${stackPos}" data-page="${p.page}" style="display:flex;flex-direction:column;--page-tint:${p.pageTint};--page-ring:${p.pageRing}">
+      <div class="fw-hero">
+        <div class="fw-hero-content">
+          <div class="fw-hero-top">
+            <div class="fw-page-avatar ${p.avatarClass}">${p.avatar}</div>
+            <div class="fw-hero-meta">
+              <div class="fw-page-name">${p.page}</div>
+              <div class="fw-page-handle">${p.handle}</div>
+            </div>
+            <div class="fw-overlap-badge">
+              <div class="fw-overlap-val">${p.overlap}%</div>
+              <div class="fw-overlap-lbl">overlap</div>
+            </div>
+          </div>
+          <div class="fw-hero-bottom">
+            <div class="fw-followers"><strong>${p.followers}</strong> followers</div>
+            <span class="fw-niche-pill">${p.niche}</span>
+          </div>
+        </div>
+      </div>
+      <div class="fw-body">
+        <div class="fw-tagline">${p.tagline}</div>
+        <div class="fw-match-list">${matchesHtml}</div>
+        <div class="fw-shared-topics">${topicsHtml}</div>
+        <div class="fw-arte-tip">
+          <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
+          <div>${p.arteTip}</div>
+        </div>
+      </div>
+      <div class="fw-detail-overlay">
+        <div class="fw-detail-title"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Why this match?</div>
+        <div class="fw-detail-grid">${detailStats}</div>
+        <div class="fw-detail-why">${p.detail.why}</div>
+        <div style="display:flex;gap:6px;margin-top:auto;padding-top:8px">
+          <button class="btn arte" style="flex:1" onclick="event.stopPropagation();flywheelArteAsk()">
+            <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Ask more
+          </button>
+          <button class="btn" style="flex:1" onclick="event.stopPropagation();flywheelChat()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> Open chat
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderFlywheelEmpty(msg){
+  document.getElementById('flywheelStage').innerHTML = `<div class="flywheel-end">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+    <h3>Nothing new here</h3>
+    <p style="font-size:13px;line-height:1.5;max-width:400px;margin:0 auto 16px">${msg}</p>
+  </div>`;
+}
+
+function flywheelSwipe(action){
+  const card = document.querySelector('.fw-card[data-stack="0"]');
+  if(!card) return;
+  const cls = action==='pass' ? 'swipe-left' : action==='connect' ? 'swipe-right' : 'swipe-down';
+  card.classList.add(cls);
+  const p = FW_PAGES[_fwIdx];
+  setTimeout(()=>{
+    if(action==='pass') toast('info', `${p.page} skipped — won't show again for 30 days`);
+    else if(action==='connect') toast('success', `Connection request sent to ${p.page}`);
+    else if(action==='save') toast('info', `${p.page} saved for later`);
+    _fwIdx++;
+    renderFlywheel();
+  }, 300);
+}
+function flywheelArteAsk(){
+  const p = FW_PAGES[_fwIdx];
+  if(!p) return;
+  openArteChat('Tell me more about ' + p.page + ' as a collab match — should I connect?');
+}
+function flywheelChat(){
+  const p = FW_PAGES[_fwIdx];
+  if(!p) return;
+  openModal('Send a message to ' + p.page,
+    `<p>Start a conversation about a potential collab. Art-E can draft an opening message tuned to your voice.</p>
+    <textarea id="fwChatMsg" style="width:100%;height:90px;background:var(--bg-input);border:1px solid var(--bdr-soft);border-radius:8px;padding:10px;color:var(--t1);font-family:inherit;font-size:14px;outline:none;margin-top:8px" placeholder="Hey ${p.handle}, ..."></textarea>
+    <div style="display:flex;gap:6px;margin-top:8px">
+      <button class="btn arte" style="font-size:12px;padding:6px 10px" onclick="document.getElementById('fwChatMsg').value=\`Hey ${p.handle} — Art-E flagged your page as a 94% audience match. Loved your last post. Open to a meme swap this week?\`">
+        <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Draft with Art-E
+      </button>
+    </div>`,
+    `<button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="closeModal();toast('success','Message sent to ${p.page}')">Send</button>`
+  );
+}
+
+// Drag-to-swipe on top card
+function attachFlywheelDrag(){
+  const card = document.querySelector('.fw-card[data-stack="0"]');
+  if(!card) return;
+  let sx=0,sy=0,dx=0,dy=0,dragging=false;
+  const onDown = e=>{
+    if(e.target.closest('button') || e.target.closest('.fw-detail-overlay')) return;
+    dragging=true;
+    sx=e.touches?e.touches[0].clientX:e.clientX;
+    sy=e.touches?e.touches[0].clientY:e.clientY;
+    card.style.transition='none';
+  };
+  const onMove = e=>{
+    if(!dragging) return;
+    const cx = e.touches?e.touches[0].clientX:e.clientX;
+    const cy = e.touches?e.touches[0].clientY:e.clientY;
+    dx = cx - sx; dy = cy - sy;
+    card.style.transform = `translate(${dx}px, ${dy*0.4}px) rotate(${dx*0.06}deg)`;
+  };
+  const onUp = ()=>{
+    if(!dragging) return;
+    dragging=false;
+    card.style.transition='';
+    if(dx > 120){ flywheelSwipe('connect'); }
+    else if(dx < -120){ flywheelSwipe('pass'); }
+    else if(dy > 100){ flywheelSwipe('save'); }
+    else { card.style.transform=''; }
+  };
+  card.addEventListener('mousedown', onDown);
+  card.addEventListener('mousemove', onMove);
+  card.addEventListener('mouseup', onUp);
+  card.addEventListener('mouseleave', onUp);
+  card.addEventListener('touchstart', onDown, {passive:true});
+  card.addEventListener('touchmove', onMove, {passive:true});
+  card.addEventListener('touchend', onUp);
+}
+
 </script>
 
 </body>
