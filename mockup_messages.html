@@ -7,9 +7,27 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 :root{
+  /* ─── FB-ALIGNED TYPOGRAPHY SCALE ─── */
+  --fs-xs:   11px;  /* tiny labels, badge text, captions */
+  --fs-sm:   12px;  /* secondary metadata, time stamps, sub-labels */
+  --fs-base: 13px;  /* default body / FB main text size */
+  --fs-md:   14px;  /* post body, primary UI body */
+  --fs-lg:   15px;  /* subtitles, secondary headings */
+  --fs-xl:   17px;  /* card titles, panel titles */
+  --fs-2xl:  22px;  /* page headings */
+  --fs-3xl:  28px;  /* hero numbers / KPI values */
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold:600;
+  --fw-bold:    700;
+
+  --lh-tight:   1.16; /* headings */
+  --lh-snug:    1.33; /* body */
+  --lh-relaxed: 1.5;  /* long-form reading */
+
   --bg:#0e1116;--bg-elev:#16191f;--bg-elev-2:#1c2128;--bg-input:#222831;
   --teal:#00C4A0;--teal-d:#00a085;--teal-bg:rgba(0,196,160,0.10);
   --arte-1:#7C5CBF;--arte-2:#00C4A0;--arte-bg:rgba(124,92,191,0.08);
@@ -26,11 +44,15 @@ html[data-theme="light"]{
 *{box-sizing:border-box;margin:0;padding:0}
 *::selection{background:var(--teal);color:#0a0e13}
 body{
-  font-family:'Inter',-apple-system,system-ui,sans-serif;
-  background:var(--bg);color:var(--t1);
-  font-size:14px;line-height:1.45;
+  background:var(--bg);
+  color:var(--t1);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Roboto,Helvetica,Arial,sans-serif;
+  font-size:var(--fs-md);
+  line-height:var(--lh-snug);
+  font-weight:var(--fw-regular);
+  margin:0;padding:0;
   -webkit-font-smoothing:antialiased;
-  height:100vh;overflow:hidden;
+  letter-spacing:-0.003em;
 }
 
 /* Topbar */

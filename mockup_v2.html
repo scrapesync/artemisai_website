@@ -7,11 +7,29 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Facebook uses SF Pro Display / Helvetica / system fonts. We use Inter (closest open-source equivalent) + Optimistic-style display. -->
+<!-- FB-aligned typography: native system font stack (San Francisco / Segoe UI / Roboto / Helvetica Neue) — same approach FB uses on web. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
+  /* ─── FB-ALIGNED TYPOGRAPHY SCALE ─── */
+  --fs-xs:   11px;  /* tiny labels, badge text, captions */
+  --fs-sm:   12px;  /* secondary metadata, time stamps, sub-labels */
+  --fs-base: 13px;  /* default body / FB main text size */
+  --fs-md:   14px;  /* post body, primary UI body */
+  --fs-lg:   15px;  /* subtitles, secondary headings */
+  --fs-xl:   17px;  /* card titles, panel titles */
+  --fs-2xl:  22px;  /* page headings */
+  --fs-3xl:  28px;  /* hero numbers / KPI values */
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold:600;
+  --fw-bold:    700;
+
+  --lh-tight:   1.16; /* headings */
+  --lh-snug:    1.33; /* body */
+  --lh-relaxed: 1.5;  /* long-form reading */
+
   /* Facebook-inspired neutral palette adapted to dark mode */
   --bg:#0e1116;            /* Deep neutral, like FB dark */
   --bg-elev:#16191f;       /* Card surface */
@@ -63,10 +81,12 @@ html,body{
   height:100%;
   background:var(--bg);
   color:var(--t1);
-  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
-  /* Facebook system text: 15px body. We use 14px for compactness, scale via vars. */
-  font-size:14px;
-  line-height:1.34;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Roboto,Helvetica,Arial,sans-serif;
+  /* FB body text: 14px / 1.33. Use --fs-* tokens for consistent scale. */
+  font-size:var(--fs-md);
+  line-height:var(--lh-snug);
+  font-weight:var(--fw-regular);
+  letter-spacing:-0.003em;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
@@ -3219,11 +3239,14 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
 }
 .arte-agent-pill .arte-agent-orb{
   width:22px;height:22px;border-radius:50%;
-  background:rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.95);
   display:grid;place-items:center;flex-shrink:0;
-  animation:orbPulse 2.4s infinite;
+  /* No animation — the gradient pill itself is the visual emphasis */
 }
-.arte-agent-pill .arte-agent-orb svg{width:11px;height:11px}
+.arte-agent-pill .arte-agent-orb svg{
+  width:12px;height:12px;
+  fill:var(--arte-1);
+}
 .arte-agent-pill .arte-agent-caret{display:inline-flex;align-items:center;flex-shrink:0}
 .arte-agent-pill .arte-agent-caret svg{width:10px;height:10px}
 
@@ -5227,6 +5250,7 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
           </div>
 
         </div>
+      </div><!-- /analytics-wrap close -->
       </div><!-- /page-profile -->
 
       <!-- ════════════════════════════════════════ -->
@@ -7495,7 +7519,7 @@ const C = {
   arte:'#7C5CBF', arteDim:'rgba(124,92,191,0.15)',
   warn:'#F59E0B', crisis:'#E53935', opp:'#22C55E',
   blue:'#60A5FA', text:'#B0B3B8', grid:'rgba(255,255,255,0.05)',
-  font:{family:'Inter',size:11}
+  font:{family:'system-ui',size:11}
 };
 
 const baseOpts = {
@@ -7508,8 +7532,8 @@ const baseOpts = {
     tooltip:{
       backgroundColor:'#1c2128',titleColor:'#E4E6EB',bodyColor:'#B0B3B8',
       borderColor:'#3A3B3C',borderWidth:1,padding:10,
-      titleFont:{family:'Inter',size:12,weight:'700'},
-      bodyFont:{family:'Inter',size:12}
+      titleFont:{family:'system-ui',size:12,weight:'700'},
+      bodyFont:{family:'system-ui',size:12}
     }
   },
   scales:{
