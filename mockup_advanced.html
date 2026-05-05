@@ -180,7 +180,142 @@ html[data-theme="light"] .section-nav{background:rgba(240,242,245,0.85)}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
 .four-col{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
-@media(max-width:980px){.two-col,.three-col,.four-col{grid-template-columns:1fr}}
+@media(max-width:980px){
+  .two-col,.three-col,.four-col{grid-template-columns:1fr}
+}
+
+/* ──────────────────────────────────────────────────────── */
+/* MOBILE — Advanced Analytics                              */
+/* ──────────────────────────────────────────────────────── */
+@media(max-width:640px){
+  body{font-size:14px}
+  
+  /* Topbar — stack into 2 rows */
+  .topbar{
+    height:auto;
+    padding:10px 12px;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+  }
+  .brand-mark{width:30px;height:30px;flex-shrink:0}
+  .brand-mark svg{width:30px;height:30px}
+  .brand-name{font-size:13px}
+  .crumb{
+    width:100%;order:99;
+    margin:0;padding:6px 0 0;
+    border-left:none;border-top:1px solid var(--bdr-soft);
+    font-size:12px;
+  }
+  .topbar-actions{
+    margin-left:auto;
+    display:flex;gap:6px;
+    flex-shrink:0;
+  }
+  .topbar-actions .btn{
+    padding:6px 10px;font-size:11.5px;
+    white-space:nowrap;
+  }
+  .topbar-actions .btn svg{width:12px;height:12px}
+  /* Hide "Back to ArtemisAI" text, keep arrow */
+  .topbar-actions .btn:first-child .lbl-full{display:none}
+  
+  /* Section nav — horizontal scroll */
+  .section-nav{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    flex-wrap:nowrap;
+    padding:8px 12px;
+    gap:6px;
+    position:sticky;top:0;
+    z-index:40;
+    background:var(--bg);
+    border-bottom:1px solid var(--bdr-soft);
+  }
+  .section-nav::-webkit-scrollbar{display:none}
+  .section-nav-chip{
+    flex-shrink:0;white-space:nowrap;
+    font-size:12px;padding:6px 12px;
+  }
+  
+  /* Section header — stack */
+  .section-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:6px;
+    margin-bottom:14px;
+  }
+  .section-title{font-size:18px}
+  .section-title-icon{width:28px;height:28px}
+  .section-title-icon svg{width:14px;height:14px}
+  .section-sub{font-size:11.5px}
+  
+  /* Insight callout — full width */
+  .insight-callout{
+    flex-direction:row;align-items:flex-start;gap:10px;
+    padding:11px 12px;font-size:12.5px;
+    line-height:1.5;
+  }
+  .insight-callout .arte-orb{flex-shrink:0;width:26px;height:26px}
+  .insight-callout .arte-orb svg{width:11px;height:11px}
+  
+  /* Stat tiles — 2 columns instead of 4 */
+  .four-col{grid-template-columns:1fr 1fr;gap:8px}
+  .stat-tile{padding:12px;border-radius:10px}
+  .stat-tile .lbl{font-size:9.5px}
+  .stat-tile .val{font-size:21px;letter-spacing:-0.5px}
+  .stat-tile .sub,.stat-tile .delta{font-size:10.5px}
+  
+  /* Panels — full width, tighter */
+  .two-col,.three-col{grid-template-columns:1fr;gap:10px}
+  .panel{
+    padding:14px 12px;
+    border-radius:12px;
+    margin-bottom:10px;
+  }
+  .panel-header{
+    flex-direction:column;align-items:flex-start;
+    gap:4px;margin-bottom:10px;
+  }
+  .panel-title{font-size:13.5px}
+  .panel-sub{font-size:11px}
+  .panel-tag{font-size:9px;padding:2px 7px}
+  
+  /* Charts — adjust heights for mobile */
+  .chart-wrap.h-sm{height:140px}
+  .chart-wrap.h-md{height:170px}
+  .chart-wrap.h-lg{height:210px}
+  .chart-wrap.h-xl{height:240px}
+  
+  /* SVG visualisations — keep proportions */
+  .cascade-host{height:280px !important}
+  
+  /* Data tables — horizontal scroll */
+  .data-table{font-size:11px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap}
+  .data-table thead, .data-table tbody{display:table;width:100%}
+  .data-table th,.data-table td{padding:7px 8px}
+  
+  /* Page-content wrapper */
+  .content{padding:0 12px 24px}
+  
+  /* Hide the giant Galaxy SVGs on tiny phones — show just the cascade */
+  /* Actually keep them but constrain better */
+  
+  /* Ask Art-E button — keep visible but compact */
+  .topbar-actions .btn.arte{
+    background:linear-gradient(135deg,var(--arte-1),var(--arte-2));
+    color:white;border-color:transparent;
+  }
+}
+
+@media(max-width:380px){
+  .topbar-actions .btn{padding:5px 8px;font-size:11px}
+  .topbar-actions .btn .lbl-full{display:none}
+  .four-col{grid-template-columns:1fr 1fr;gap:6px}
+  .stat-tile{padding:10px}
+  .stat-tile .val{font-size:18px}
+}
 
 /* KPI stat tile */
 .stat-tile{
@@ -306,15 +441,15 @@ html[data-theme="light"] .cascade-host{background:var(--bg-input)}
     </div>
     <button class="btn" onclick="window.close()">
       <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-      Back to ArtemisAI
+      <span class="lbl-full">Back to ArtemisAI</span>
     </button>
     <button class="btn" onclick="exportFullReport()">
       <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-      Export full report
+      <span class="lbl-full">Export full report</span>
     </button>
     <button class="btn arte" onclick="askArte()">
       <svg viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
-      Explain with Art-E
+      <span class="lbl-full">Explain with Art-E</span>
     </button>
   </div>
 </div>

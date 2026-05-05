@@ -1012,41 +1012,108 @@ body{
 
 /* Phone — full mobile experience */
 @media(max-width:640px){
-  /* Layout: single column, bottom nav */
+  /* ─────────────────────────────────────────────────────── */
+  /* MOBILE — professional, polished, Hooked-aligned        */
+  /* ─────────────────────────────────────────────────────── */
+  
+  /* Layout: single column, sticky topnav, bottom nav at footer */
+  body{overflow:hidden}
   .app{
     grid-template-columns:1fr;
     grid-template-areas:"topnav" "feed";
     grid-template-rows:auto 1fr;
+    height:100vh;height:100dvh;
+    overflow:hidden;
   }
   .left-sidebar{display:none}
-  .feed-col{padding:0 0 76px 0}
+  .feed-col{
+    padding:0 0 72px 0;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;
+    height:100%;
+    grid-area:feed;
+  }
   .feed-inner{padding:0 8px;max-width:100%}
   
-  /* Topnav — compact mobile */
+  /* TOPNAV — properly distributed icons, no left-bunching */
   .topnav{
-    padding:0 10px;
-    height:54px;
+    padding:0 12px;
+    height:56px;
     grid-area:topnav;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:var(--bg-elev);
+    border-bottom:1px solid var(--bdr-soft);
+    position:relative;
+    z-index:60;
   }
-  .topnav-spacer{display:none}
-  .brand-block{min-width:auto}
+  .topnav-spacer{display:block !important;flex:1 !important}
+  .brand-block{min-width:auto;gap:6px;flex-shrink:0}
   .brand-mark{width:30px;height:30px}
   .brand-mark svg{width:30px;height:30px}
+  .brand-name{display:none}
   .search{display:none}
-  .icon-btn{width:34px;height:34px}
-  .icon-btn svg{width:16px;height:16px}
-  .theme-pill{display:none}
-  .user-avatar{width:30px;height:30px;font-size:11px}
   
-  /* Feed tabs — fixed below topnav */
+  /* Hide some topnav buttons on phone to prevent bunching */
+  .icon-btn[title="Discovery"],
+  .icon-btn[title="Group chats"]{display:none}
+  
+  .icon-btn{
+    width:38px;height:38px;
+    border-radius:50%;
+    flex-shrink:0;
+    display:grid;place-items:center;
+  }
+  .icon-btn svg{width:18px;height:18px}
+  .icon-btn .badge{
+    position:absolute;top:4px;right:4px;
+    background:var(--crisis);color:white;
+    font-size:9px;font-weight:800;padding:1px 5px;
+    border-radius:9999px;min-width:14px;
+  }
+  .arte-suggest-toggle{width:38px;height:38px;flex-shrink:0}
+  .arte-suggest-toggle svg{width:17px;height:17px}
+  
+  .theme-pill{display:none}
+  /* Theme toggle — compact on mobile */
+  .theme-toggle{
+    height:32px;padding:2px;
+    border-radius:9999px;
+    flex-shrink:0;
+  }
+  .theme-toggle-opt{width:26px;height:26px}
+  .theme-toggle-opt svg{width:12px;height:12px}
+  
+  .user-avatar{width:32px;height:32px;font-size:12px;flex-shrink:0}
+  
+  /* FEED TABS — sticky pinned at top below topnav */
   .feed-tabs{
-    position:sticky;top:54px;z-index:40;
+    position:sticky;
+    top:0;
+    z-index:50;
     background:var(--bg);
-    margin:0 -8px 10px -8px;padding:6px 8px;
+    margin:0 -8px 10px -8px;
+    padding:8px 8px 6px;
+    border-bottom:1px solid var(--bdr-soft);
+    box-shadow:0 4px 8px rgba(0,0,0,0.15);
+  }
+  .feed-tab{
+    font-size:12.5px;
+    padding:9px 6px;
+    gap:5px;
+    font-weight:700;
+  }
+  .feed-tab svg{width:13px;height:13px}
+  /* Inner page panels (analytics, advanced, etc) get sticky subtabs */
+  .subtabs{
+    position:sticky;
+    top:0;
+    z-index:45;
+    background:var(--bg);
+    margin:0 -8px 12px -8px;
+    padding:8px 8px;
     border-bottom:1px solid var(--bdr-soft);
   }
-  .feed-tab{font-size:12px;padding:8px 6px;gap:5px}
-  .feed-tab svg{width:13px;height:13px}
   
   /* Insight posts — full-bleed look on phone */
   .insight-post{
@@ -2987,6 +3054,35 @@ a.brand-block:hover .brand-mark{transform:scale(1.05)}
   background:var(--bg-elev);border:1px solid rgba(0,196,160,0.35);
   padding:2px 7px;border-radius:9999px;
 }
+
+/* Art-E suggestion toggle in topnav */
+.arte-suggest-toggle{
+  width:36px;height:36px;border-radius:50%;
+  background:transparent;border:none;
+  display:grid;place-items:center;
+  cursor:pointer;color:var(--arte-1);
+  transition:background .12s, opacity .12s;
+  position:relative;
+}
+.arte-suggest-toggle svg{width:18px;height:18px}
+.arte-suggest-toggle:hover{background:var(--arte-bg)}
+.arte-suggest-toggle.arte-off{
+  color:var(--t3);
+  opacity:0.6;
+}
+.arte-suggest-toggle.arte-off::after{
+  content:'';
+  position:absolute;
+  top:6px;left:6px;right:6px;bottom:6px;
+  border-bottom:1.5px solid var(--t3);
+  transform:rotate(-45deg);
+  transform-origin:50% 50%;
+  pointer-events:none;
+}
+
+/* When suggestions are off, hide the floating hint bubble + status bar suggestions */
+body.arte-suggestions-off .arte-hint-bubble{display:none !important}
+body.arte-suggestions-off .arte-status-bar{display:none !important}
 </style>
 </head>
 <body>
@@ -3017,6 +3113,9 @@ a.brand-block:hover .brand-mark{transform:scale(1.05)}
     <button class="icon-btn" title="Notifications">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22a2.5 2.5 0 002.5-2.5h-5A2.5 2.5 0 0012 22zm6.5-7v-4.5a6.5 6.5 0 10-13 0V15L4 17v1h16v-1z"/></svg>
       <span class="badge">3</span>
+    </button>
+    <button class="icon-btn arte-suggest-toggle" id="arteSuggestToggle" title="Art-E suggestions on" onclick="toggleArteSuggestions()">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" id="arteToggleIcon"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
     </button>
     <button class="theme-toggle" id="themeToggle" title="Switch theme">
       <span class="theme-toggle-opt active" data-theme-set="dark" title="Dark"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
@@ -5455,7 +5554,7 @@ a.brand-block:hover .brand-mark{transform:scale(1.05)}
 </div>
 
 <!-- Spec watermark -->
-<div class="spec-watermark">v2 · Hooked applied · May 2026</div>
+<!-- watermark removed -->
 
 <script>
 /* ─── ROUTER ──────────────────────────────────── */
@@ -6642,6 +6741,32 @@ function mbSelect(el){
   document.querySelectorAll('.mb-nav-btn').forEach(b=>b.classList.remove('active'));
   if(el && !el.classList.contains('arte')) el.classList.add('active');
 }
+
+/* ─── ART-E SUGGESTION TOGGLE — silences the hint bubble ─── */
+function toggleArteSuggestions(){
+  const off = localStorage.getItem('artemis_v2_arte_off') === '1';
+  if(off){
+    localStorage.removeItem('artemis_v2_arte_off');
+    if(typeof toast === 'function') toast('arte','Art-E suggestions ON');
+  } else {
+    localStorage.setItem('artemis_v2_arte_off', '1');
+    if(typeof toast === 'function') toast('info','Art-E suggestions OFF · tap orb anytime');
+  }
+  applyArteSuggestState();
+}
+function applyArteSuggestState(){
+  const off = localStorage.getItem('artemis_v2_arte_off') === '1';
+  const btn = document.getElementById('arteSuggestToggle');
+  if(off){
+    document.body.classList.add('arte-suggestions-off');
+    if(btn){ btn.classList.add('arte-off'); btn.title = 'Art-E suggestions OFF · click to enable'; }
+  } else {
+    document.body.classList.remove('arte-suggestions-off');
+    if(btn){ btn.classList.remove('arte-off'); btn.title = 'Art-E suggestions ON · click to silence'; }
+  }
+}
+document.addEventListener('DOMContentLoaded', applyArteSuggestState);
+
 /* ─── REAL-TIME ART-E HOVER HINTS ───────────────────────────── */
 /* When user hovers different surfaces, the Art-E bubble swaps to a context-relevant hint.
    When user clicks the bubble, the hint becomes the prompt sent to Art-E (with intent context). */
