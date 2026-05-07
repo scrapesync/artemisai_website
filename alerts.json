@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Monthly budget breach",
+    "type": "monthly_budget",
+    "budget": 650.00,
+    "enabled": true,
+    "_doc": "Fires if forecast end-of-month spend exceeds $650."
+  },
+  {
+    "name": "Daily spike — 2× weekly average",
+    "type": "daily_spike",
+    "multiplier": 2.0,
+    "enabled": true,
+    "_doc": "Fires if today's spend is 2× or more than the 7-day rolling average."
+  },
+  {
+    "name": "Redshift > $200 MTD",
+    "type": "service_threshold",
+    "service": "Redshift",
+    "threshold": 200.00,
+    "enabled": true,
+    "_doc": "Fires if Redshift month-to-date exceeds $200."
+  },
+  {
+    "name": "New service appeared in bill",
+    "type": "service_appears",
+    "service": "any",
+    "min_cost": 0.50,
+    "enabled": true,
+    "_doc": "Fires if a service that had no spend in the prior 14 days starts incurring cost. Catches accidental services left running."
+  }
+]

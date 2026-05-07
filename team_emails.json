@@ -1,0 +1,7 @@
+{
+  "_doc": "Recipients for cost-monitor email alerts. Add or remove entries as needed and commit. The GitHub Action picks this up automatically on the next run.",
+  "emails": [
+    "asad@artemisai.co.uk",
+    "alex@artemisai.co.uk"
+  ]
+}
