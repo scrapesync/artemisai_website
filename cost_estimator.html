@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cost Estimator — ArtemisAI Admin</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0c1221; --bg-elev:#151b27; --bg-elev-2:#1c2128; --bg-input:#222831;
+  --teal:#00C4A0; --teal-d:#00a085; --teal-bg:rgba(0,196,160,0.10);
+  --arte-1:#7C5CBF; --arte-bg:rgba(124,92,191,0.08);
+  --crisis:#E53935; --crisis-bg:rgba(229,57,53,0.10);
+  --warn:#F59E0B; --warn-bg:rgba(245,158,11,0.10);
+  --opp:#22C55E; --opp-bg:rgba(34,197,94,0.10);
+  --t1:#E4E6EB; --t2:#B0B3B8; --t3:#65676B;
+  --bdr:#3A3B3C; --bdr-soft:#2D2E30;
+  --shadow:0 4px 12px rgba(0,0,0,0.35);
+  --shadow-lg:0 12px 32px rgba(0,0,0,0.45);
+}
+html[data-theme="light"]{
+  --bg:#FFFFFF; --bg-elev:#FFFFFF; --bg-elev-2:#F5FAF9; --bg-input:#F5FAF9;
+  --teal:#006B5A; --teal-d:#004F42; --teal-bg:rgba(0,107,90,0.10);
+  --arte-1:#5A3FA0; --arte-bg:rgba(90,63,160,0.06);
+  --crisis:#C9263F; --crisis-bg:rgba(201,38,63,0.07);
+  --warn:#A06600; --warn-bg:rgba(160,102,0,0.07);
+  --opp:#0D6B3D; --opp-bg:rgba(13,107,61,0.07);
+  --t1:#0A1F1B; --t2:#4F6660; --t3:#7A8B85;
+  --bdr:#D6E3DF; --bdr-soft:#E8EFEC;
+  --shadow:0 4px 12px rgba(0,107,90,0.08);
+  --shadow-lg:0 12px 32px rgba(0,107,90,0.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg);
+  color:var(--t1);
+  font-size:14px;
+  line-height:1.5;
+  min-height:100vh;
+}
+.topbar{
+  display:flex;align-items:center;gap:16px;
+  padding:14px 28px;
+  background:var(--bg-elev);
+  border-bottom:1px solid var(--bdr-soft);
+  position:sticky;top:0;z-index:50;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:0.05em}
+.brand-mark{
+  width:30px;height:30px;border-radius:8px;
+  background:linear-gradient(135deg,var(--teal),var(--arte-1));
+  display:grid;place-items:center;
+}
+.brand-mark svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2}
+.brand-sub{color:var(--t2);font-weight:500;font-size:13px;letter-spacing:0.02em}
+.spacer{flex:1}
+.theme-toggle{
+  display:flex;align-items:center;gap:6px;
+  background:var(--bg-elev-2);border:1px solid var(--bdr-soft);
+  border-radius:9999px;padding:4px;cursor:pointer;
+}
+.theme-toggle svg{width:14px;height:14px;fill:none;stroke:var(--t2);stroke-width:2;padding:2px}
+.theme-toggle .active{background:var(--teal-bg);border-radius:50%}
+.theme-toggle .active svg{stroke:var(--teal)}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:9999px;
+  background:var(--bg-elev-2);border:1px solid var(--bdr-soft);
+  color:var(--t1);font-weight:600;font-size:13px;font-family:inherit;
+  cursor:pointer;text-decoration:none;
+  transition:background 0.15s;
+}
+.btn:hover{background:var(--bg-input)}
+.btn.primary{
+  background:var(--teal);border-color:var(--teal);color:#fff;
+}
+.btn.primary:hover{background:var(--teal-d)}
+.btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+.back-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--t2);text-decoration:none;font-size:13px;font-weight:600;
+}
+.back-btn:hover{color:var(--t1)}
+
+.page{max-width:1400px;margin:0 auto;padding:28px}
+
+.page-header{
+  display:flex;align-items:flex-start;gap:20px;margin-bottom:24px;
+}
+.page-header-text{flex:1}
+.page-title{font-size:28px;font-weight:800;letter-spacing:-0.02em;margin-bottom:6px}
+.page-title .month-pill{
+  display:inline-flex;align-items:center;gap:4px;
+  margin-left:10px;padding:4px 10px;border-radius:9999px;
+  background:var(--teal-bg);color:var(--teal);
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;
+  vertical-align:middle;
+}
+.page-sub{color:var(--t2);font-size:13px}
+.page-actions{display:flex;gap:8px}
+
+/* KPI strip */
+.kpi-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;
+}
+.kpi-card{
+  background:var(--bg-elev);border:1px solid var(--bdr-soft);
+  border-radius:14px;padding:16px;position:relative;overflow:hidden;
+}
+.kpi-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--accent,var(--teal));opacity:0.7;
+}
+.kpi-card.mtd{--accent:var(--teal)}
+.kpi-card.forecast{--accent:var(--arte-1)}
+.kpi-card.vs-last{--accent:var(--opp)}
+.kpi-card.services{--accent:var(--warn)}
+.kpi-label{
+  font-size:10px;color:var(--t2);
+  text-transform:uppercase;letter-spacing:0.06em;font-weight:700;
+  margin-bottom:6px;display:flex;align-items:center;gap:6px;
+}
+.kpi-label svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2}
+.kpi-value{
+  font-size:26px;font-weight:800;letter-spacing:-0.02em;
+  font-variant-numeric:tabular-nums;
+  color:var(--accent,var(--t1));
+  margin-bottom:4px;
+}
+.kpi-meta{font-size:11px;color:var(--t2)}
+.kpi-meta strong{color:var(--t1)}
+.kpi-meta.up{color:var(--crisis)}
+.kpi-meta.down{color:var(--opp)}
+.kpi-budget-bar{
+  margin-top:8px;height:5px;background:var(--bg-input);border-radius:9999px;overflow:hidden;
+}
+.kpi-budget-bar > div{height:100%;background:var(--accent);border-radius:9999px}
+
+/* Panels */
+.panel{
+  background:var(--bg-elev);border:1px solid var(--bdr-soft);
+  border-radius:14px;padding:18px;margin-bottom:18px;
+}
+.panel-header{
+  display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;
+}
+.panel-header-text{flex:1}
+.panel-title{font-size:16px;font-weight:700;letter-spacing:-0.01em}
+.panel-sub{color:var(--t2);font-size:12px;margin-top:2px}
+.panel-actions{display:flex;gap:6px}
+.panel-actions .btn{padding:5px 10px;font-size:12px}
+
+/* Two-column layout for trend chart + breakdown */
+.row{display:grid;gap:18px;margin-bottom:18px}
+.row.split-2{grid-template-columns:2fr 1fr}
+.row.split-1-1{grid-template-columns:1fr 1fr}
+@media(max-width:900px){
+  .row.split-2,.row.split-1-1{grid-template-columns:1fr}
+  .kpi-strip{grid-template-columns:repeat(2,1fr)}
+  .page{padding:16px}
+}
+
+.chart-host{position:relative;height:280px}
+.chart-host.tall{height:320px}
+.chart-host.short{height:220px}
+
+/* Service breakdown table */
+.svc-table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+.svc-table th{
+  text-align:left;font-size:10px;color:var(--t2);
+  text-transform:uppercase;letter-spacing:0.06em;font-weight:700;
+  padding:8px 10px;border-bottom:1px solid var(--bdr-soft);
+}
+.svc-table th.right{text-align:right}
+.svc-table td{padding:10px;border-bottom:1px solid var(--bdr-soft)}
+.svc-table td.right{text-align:right}
+.svc-table tr:last-child td{border-bottom:none}
+.svc-table tr:hover{background:var(--bg-elev-2)}
+.svc-cell{display:flex;align-items:center;gap:10px}
+.svc-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.svc-name{font-weight:600;color:var(--t1)}
+.svc-meta{font-size:11px;color:var(--t2);margin-top:1px}
+.svc-cost{font-weight:700;color:var(--t1)}
+.svc-pct{
+  display:inline-block;font-size:11px;color:var(--t2);
+  background:var(--bg-input);padding:2px 6px;border-radius:9999px;
+  margin-left:6px;
+}
+.svc-trend{font-size:11px;font-weight:600;font-variant-numeric:tabular-nums}
+.svc-trend.up{color:var(--crisis)}
+.svc-trend.down{color:var(--opp)}
+.svc-trend.flat{color:var(--t2)}
+
+/* Alert rules — mirrors mockup_v2.html pattern */
+.alert-row{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;border-bottom:1px solid var(--bdr-soft);
+}
+.alert-row:last-child{border-bottom:none}
+.bell-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:grid;place-items:center;flex-shrink:0;
+}
+.bell-icon svg{width:18px;height:18px}
+.bell-icon.crisis{background:var(--crisis-bg);color:var(--crisis)}
+.bell-icon.warn{background:var(--warn-bg);color:var(--warn)}
+.bell-icon.opp{background:var(--opp-bg);color:var(--opp)}
+.bell-icon.teal{background:var(--teal-bg);color:var(--teal)}
+.bell-icon.arte{background:var(--arte-bg);color:var(--arte-1)}
+.alert-body{flex:1}
+.alert-title{font-size:13px;font-weight:700;color:var(--t1)}
+.alert-desc{font-size:11px;color:var(--t2);margin-top:2px}
+.alert-status{font-size:11px;font-weight:600}
+.alert-status.active{color:var(--opp)}
+.alert-status.paused{color:var(--t3)}
+
+/* Toggle (matches mockup_v2 settings-toggle) */
+.toggle{
+  width:36px;height:20px;border-radius:9999px;
+  background:var(--bg-input);position:relative;cursor:pointer;
+  transition:background 0.2s;flex-shrink:0;
+}
+.toggle::after{
+  content:'';position:absolute;left:2px;top:2px;
+  width:16px;height:16px;border-radius:50%;background:#fff;
+  transition:left 0.2s;
+}
+.toggle.on{background:var(--teal)}
+.toggle.on::after{left:18px}
+
+/* Optimization suggestions (Art-E nudges) */
+.tip-row{
+  display:flex;gap:12px;padding:12px 14px;
+  border-bottom:1px solid var(--bdr-soft);
+  align-items:flex-start;
+}
+.tip-row:last-child{border-bottom:none}
+.tip-icon{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--teal),var(--arte-1));
+  display:grid;place-items:center;flex-shrink:0;
+}
+.tip-icon svg{width:14px;height:14px;fill:#fff}
+.tip-body{flex:1}
+.tip-title{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:2px}
+.tip-desc{font-size:12px;color:var(--t2);line-height:1.5}
+.tip-saving{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--opp-bg);color:var(--opp);
+  padding:2px 8px;border-radius:9999px;
+  font-size:11px;font-weight:700;margin-top:6px;
+  font-variant-numeric:tabular-nums;
+}
+.tip-actions{display:flex;gap:6px;flex-shrink:0;align-self:center}
+.tip-actions .btn{padding:5px 10px;font-size:11px}
+
+/* Top-driver list */
+.driver-list{display:flex;flex-direction:column;gap:10px}
+.driver-row{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 0;border-bottom:1px solid var(--bdr-soft);
+}
+.driver-row:last-child{border-bottom:none}
+.driver-rank{
+  width:24px;height:24px;border-radius:6px;
+  background:var(--bg-input);
+  display:grid;place-items:center;
+  font-size:11px;font-weight:800;color:var(--t2);
+  flex-shrink:0;
+}
+.driver-row:nth-child(1) .driver-rank{background:var(--teal-bg);color:var(--teal)}
+.driver-row:nth-child(2) .driver-rank{background:var(--arte-bg);color:var(--arte-1)}
+.driver-row:nth-child(3) .driver-rank{background:var(--warn-bg);color:var(--warn)}
+.driver-name{flex:1;font-weight:600;font-size:13px}
+.driver-bar{
+  flex:1;height:5px;background:var(--bg-input);border-radius:9999px;overflow:hidden;
+}
+.driver-bar > div{height:100%;background:var(--teal);border-radius:9999px}
+.driver-row:nth-child(2) .driver-bar > div{background:var(--arte-1)}
+.driver-row:nth-child(3) .driver-bar > div{background:var(--warn)}
+.driver-cost{font-weight:700;font-size:13px;font-variant-numeric:tabular-nums;width:70px;text-align:right}
+
+/* Anomaly badge inline in chart panel */
+.anomaly-pill{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--crisis-bg);color:var(--crisis);
+  padding:3px 8px;border-radius:9999px;
+  font-size:11px;font-weight:700;
+}
+.anomaly-pill svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2.5}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="admin_panel.html" class="back-btn">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to Admin
+  </a>
+  <div class="brand">
+    <div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M12 2L20 22H4L12 2Z"/></svg></div>
+    <span>ARTEMIS</span>
+    <span class="brand-sub">· Cost Estimator</span>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn" onclick="alert('Refreshing AWS Cost Explorer data...')">
+    <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+    Refresh
+  </button>
+  <button class="btn" onclick="alert('Exporting last 30 days as CSV...')">
+    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+    Export
+  </button>
+  <button class="btn primary" onclick="document.getElementById('newAlertModal').style.display='flex'">
+    <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    New alert
+  </button>
+  <div class="theme-toggle" onclick="toggleTheme()">
+    <span id="dark-pip" class="active"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></span>
+    <span id="light-pip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- ─── Page header ─── -->
+  <div class="page-header">
+    <div class="page-header-text">
+      <div class="page-title">AWS Cost Estimator <span class="month-pill">● May 2026</span></div>
+      <div class="page-sub">Live spend across all ArtemisAI infrastructure · Last refreshed 4 minutes ago · Cost Explorer API</div>
+    </div>
+  </div>
+
+  <!-- ─── KPI strip ─── -->
+  <div class="kpi-strip">
+    <div class="kpi-card mtd">
+      <div class="kpi-label">
+        <svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        Month-to-date
+      </div>
+      <div class="kpi-value">$348.62</div>
+      <div class="kpi-meta">of <strong>$650</strong> budget</div>
+      <div class="kpi-budget-bar"><div style="width:53.6%"></div></div>
+    </div>
+    <div class="kpi-card forecast">
+      <div class="kpi-label">
+        <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        Projected month-end
+      </div>
+      <div class="kpi-value">$612.40</div>
+      <div class="kpi-meta">−5.8% under budget · trending stable</div>
+      <div class="kpi-budget-bar"><div style="width:94%"></div></div>
+    </div>
+    <div class="kpi-card vs-last">
+      <div class="kpi-label">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        vs Last month
+      </div>
+      <div class="kpi-value">+$47</div>
+      <div class="kpi-meta up">↑ +8.3% vs April ($565.41)</div>
+      <div class="kpi-budget-bar"><div style="width:8.3%"></div></div>
+    </div>
+    <div class="kpi-card services">
+      <div class="kpi-label">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Active services
+      </div>
+      <div class="kpi-value">11</div>
+      <div class="kpi-meta">across 2 AWS accounts (prod + Ford LENS)</div>
+      <div class="kpi-budget-bar"><div style="width:91%"></div></div>
+    </div>
+  </div>
+
+  <!-- ─── Daily spend trend (full width) ─── -->
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-header-text">
+        <div class="panel-title">Daily spend — last 30 days</div>
+        <div class="panel-sub">
+          Daily AWS spend with monthly budget threshold ($21.67/day target)
+          <span class="anomaly-pill" style="margin-left:8px"><svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg> 1 anomaly · Apr 28</span>
+        </div>
+      </div>
+      <div class="panel-actions">
+        <button class="btn" onclick="alert('Switching to weekly view')">Daily</button>
+        <button class="btn">Weekly</button>
+        <button class="btn">Monthly</button>
+      </div>
+    </div>
+    <div class="chart-host tall">
+      <canvas id="dailyChart"></canvas>
+    </div>
+  </div>
+
+  <!-- ─── Service breakdown + Top drivers ─── -->
+  <div class="row split-2">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-header-text">
+          <div class="panel-title">Service breakdown — May 2026</div>
+          <div class="panel-sub">All 11 active AWS services + 3rd-party APIs</div>
+        </div>
+      </div>
+      <table class="svc-table">
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th class="right">Month-to-date</th>
+            <th class="right">% of total</th>
+            <th class="right">Forecast</th>
+            <th class="right">vs Last month</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="svc-cell">
+                <div class="svc-dot" style="background:#FF9900"></div>
+                <div>
+                  <div class="svc-name">Amazon Redshift</div>
+                  <div class="svc-meta">Serverless · 8 RPU base · 47 concurrent queries</div>
+                </div>
+              </div>
+            </td>
+            <td class="right svc-cost">$142.18</td>
+            <td class="right"><span class="svc-pct">40.8%</span></td>
+            <td class="right svc-cost">$249.30</td>
+            <td class="right svc-trend up">↑ +12.4%</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="svc-cell">
+                <div class="svc-dot" style="background:#7C5CBF"></div>
+                <div>
+                  <div class="svc-name">AWS Lambda</div>
+                  <div class="svc-meta">10 functions · 4.2M invocations · 280ms avg</div>
+                </div>
+              </div>
+            </td>
+            <td class="right svc-cost">$58.40</td>
+            <td class="right"><span class="svc-pct">16.8%</span></td>
+            <td class="right svc-cost">$102.50</td>
+            <td class="right svc-trend up">↑ +6.1%</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="svc-cell">
+                <div class="svc-dot" style="background:#00C4A0"></div>
+                <div>
+                  <div class="svc-name">RDS Aurora Serverless v2</div>
+                  <div class="svc-meta">Ford LENS scraping · 0.5 ACU min · 4 ACU peak</div>
+                </div>
+              </div>
+            </td>
+            <td class="right svc-cost">$48.92</td>
+            <td class="right"><span class="svc-pct">14.0%</span></td>
+            <td class="right svc-cost">$86.00</td>
+            <td class="right svc-trend flat">~ stable</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="svc-cell">
+                <div class="svc-dot" style="background:#F59E0B"></div>
+                <div>
+                  <div class="svc-name">DynamoDB</div>
+                  <div class="svc-meta">8 tables · on-demand · 1.2M reads, 340K writes</div>
+                </div>
+              </div>
+            </td>
+            <td class="right svc-cost">$24.18</td>
+            <td class="right"><span class="svc-pct">6.9%</span></td>
+            <td class="right svc-cost">$42.50</td>
+            <td class="right svc-trend up">↑ +18%</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="svc-cell">
+                <div class="svc-dot" style="background:#E53935"></div>
+                <div>
+                  <div class="svc-name">ECS Fargate</div>
+                  <div class="svc-meta">Ford LENS scraping cluster · 2 tasks 0.5 vCPU</div>
+                </div>
+              </div>
+            </td>
+            <td class="right svc-cost">$22.60</td>
+            <td class="right"><span class="svc-pct">6.5%</span></td>
+            <td class="right svc-cost">$39.40</td>
+            <td class="right svc-trend flat">~ stable</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="svc-cell">
+                <div class="svc-dot" style="background:#22C55E"></div>
+                <div>
+                  <div class="svc-name">DeepSeek API</div>
+                  <div class="svc-meta">Sprint 4 NLP labelling · 12K posts in progress</div>
+                </div>
+              </div>
+            </td>
+            <td class="right svc-cost">$18.74</td>
+            <td class="right"><span class="svc-pct">5.4%</span></td>
+            <td class="right svc-cost">$32.80</td>
+            <td class="right svc-trend up">↑ NEW</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="svc-cell">
+                <div class="svc-dot" style="background:#3B82F6"></div>
+                <div>
+                  <div class="svc-name">Application Load Balancer</div>
+                  <div class="svc-meta">2 ALBs · ford-lens + artemis-api</div>
+                </div>
+              </div>
+            </td>
+            <td class="right svc-cost">$11.20</td>
+            <td class="right"><span class="svc-pct">3.2%</span></td>
+            <td class="right svc-cost">$19.60</td>
+            <td class="right svc-trend flat">~ stable</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="svc-cell">
+                <div class="svc-dot" style="background:#06B6D4"></div>
+                <div>
+                  <div class="svc-name">Amazon S3</div>
+                  <div class="svc-meta">12 buckets · 240 GB stored · 18 GB egress</div>
+                </div>
+              </div>
+            </td>
+            <td class="right svc-cost">$8.94</td>
+            <td class="right"><span class="svc-pct">2.6%</span></td>
+            <td class="right svc-cost">$15.70</td>
+            <td class="right svc-trend down">↓ −3.2%</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="svc-cell">
+                <div class="svc-dot" style="background:#A855F7"></div>
+                <div>
+                  <div class="svc-name">Anthropic API (Claude)</div>
+                  <div class="svc-meta">Phase 1 NLP labels · 5,972 posts (done)</div>
+                </div>
+              </div>
+            </td>
+            <td class="right svc-cost">$6.82</td>
+            <td class="right"><span class="svc-pct">2.0%</span></td>
+            <td class="right svc-cost">$12.00</td>
+            <td class="right svc-trend down">↓ −62%</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="svc-cell">
+                <div class="svc-dot" style="background:#EC4899"></div>
+                <div>
+                  <div class="svc-name">CloudFront</div>
+                  <div class="svc-meta">2 distributions · 14 GB egress · cached 92%</div>
+                </div>
+              </div>
+            </td>
+            <td class="right svc-cost">$3.42</td>
+            <td class="right"><span class="svc-pct">1.0%</span></td>
+            <td class="right svc-cost">$6.00</td>
+            <td class="right svc-trend flat">~ stable</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="svc-cell">
+                <div class="svc-dot" style="background:#65676B"></div>
+                <div>
+                  <div class="svc-name">CloudWatch + Other</div>
+                  <div class="svc-meta">Logs, metrics, X-Ray, IAM, Route 53</div>
+                </div>
+              </div>
+            </td>
+            <td class="right svc-cost">$3.22</td>
+            <td class="right"><span class="svc-pct">0.9%</span></td>
+            <td class="right svc-cost">$5.60</td>
+            <td class="right svc-trend flat">~ stable</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-header-text">
+          <div class="panel-title">Cost split</div>
+          <div class="panel-sub">Top services by spend</div>
+        </div>
+      </div>
+      <div class="chart-host short">
+        <canvas id="donutChart"></canvas>
+      </div>
+      <div style="margin-top:14px">
+        <div style="font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:8px">Top 3 cost drivers</div>
+        <div class="driver-list">
+          <div class="driver-row">
+            <div class="driver-rank">1</div>
+            <div class="driver-name">Redshift</div>
+            <div class="driver-bar"><div style="width:100%"></div></div>
+            <div class="driver-cost">$142.18</div>
+          </div>
+          <div class="driver-row">
+            <div class="driver-rank">2</div>
+            <div class="driver-name">Lambda</div>
+            <div class="driver-bar"><div style="width:41%"></div></div>
+            <div class="driver-cost">$58.40</div>
+          </div>
+          <div class="driver-row">
+            <div class="driver-rank">3</div>
+            <div class="driver-name">Aurora v2</div>
+            <div class="driver-bar"><div style="width:34%"></div></div>
+            <div class="driver-cost">$48.92</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Month-over-month + Per-service trend ─── -->
+  <div class="row split-1-1">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-header-text">
+          <div class="panel-title">Month-over-month</div>
+          <div class="panel-sub">Last 6 months · total spend</div>
+        </div>
+      </div>
+      <div class="chart-host"><canvas id="monthlyChart"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-header-text">
+          <div class="panel-title">Top 5 services — 30 day trend</div>
+          <div class="panel-sub">Daily spend per service</div>
+        </div>
+      </div>
+      <div class="chart-host"><canvas id="serviceTrendChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ─── Cost alerts (mirrors mockup_v2 alerts pattern) ─── -->
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-header-text">
+        <div class="panel-title">Cost alert rules</div>
+        <div class="panel-sub">Custom budget rules · checked every 6 hours · pings via in-app, email, or Slack</div>
+      </div>
+    </div>
+    <div style="margin:0 -18px">
+      <div class="alert-row">
+        <div class="bell-icon crisis"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 6v6m0 4h.01"/></svg></div>
+        <div class="alert-body">
+          <div class="alert-title">Monthly budget breach · $650 cap</div>
+          <div class="alert-desc">Forecast exceeds budget → ping in-app + email + Slack <span class="alert-status active">● Active</span></div>
+        </div>
+        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        <button class="btn" onclick="alert('Edit alert rule')">Edit</button>
+      </div>
+      <div class="alert-row">
+        <div class="bell-icon warn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg></div>
+        <div class="alert-body">
+          <div class="alert-title">Daily anomaly · 2× baseline</div>
+          <div class="alert-desc">Daily spend exceeds 2× 7-day rolling average → ping in-app + Slack <span class="alert-status active">● Active</span></div>
+        </div>
+        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        <button class="btn" onclick="alert('Edit alert rule')">Edit</button>
+      </div>
+      <div class="alert-row">
+        <div class="bell-icon warn"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div class="alert-body">
+          <div class="alert-title">Service breach · Redshift &gt; 50% of budget</div>
+          <div class="alert-desc">Single service exceeds 50% of monthly budget → ping in-app <span class="alert-status active">● Active</span></div>
+        </div>
+        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        <button class="btn" onclick="alert('Edit alert rule')">Edit</button>
+      </div>
+      <div class="alert-row">
+        <div class="bell-icon teal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div class="alert-body">
+          <div class="alert-title">DeepSeek API · token surge</div>
+          <div class="alert-desc">DeepSeek daily spend &gt; $5 → ping in-app (Sprint 4 labelling running) <span class="alert-status active">● Active</span></div>
+        </div>
+        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        <button class="btn" onclick="alert('Edit alert rule')">Edit</button>
+      </div>
+      <div class="alert-row">
+        <div class="bell-icon arte"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+        <div class="alert-body">
+          <div class="alert-title">Forecast notification — week 4</div>
+          <div class="alert-desc">If month-end forecast &gt; 90% of budget → ping in-app + email <span class="alert-status paused">● Paused</span></div>
+        </div>
+        <div class="toggle" onclick="this.classList.toggle('on')"></div>
+        <button class="btn" onclick="alert('Edit alert rule')">Edit</button>
+      </div>
+      <div class="alert-row">
+        <div class="bell-icon opp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <div class="alert-body">
+          <div class="alert-title">Free-tier expiry · S3 + CloudFront</div>
+          <div class="alert-desc">First 12-month free tier ends → ping in-app + email <span class="alert-status active">● Active</span></div>
+        </div>
+        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+        <button class="btn" onclick="alert('Edit alert rule')">Edit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Optimization suggestions (Art-E nudges) ─── -->
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-header-text">
+        <div class="panel-title">Optimization suggestions</div>
+        <div class="panel-sub">Art-E reviews your usage patterns and suggests savings</div>
+      </div>
+    </div>
+    <div style="margin:0 -18px">
+      <div class="tip-row">
+        <div class="tip-icon"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+        <div class="tip-body">
+          <div class="tip-title">Pause Redshift Serverless overnight</div>
+          <div class="tip-desc">
+            Redshift is idle 73% of nights (10 PM – 6 AM UK). Auto-pausing would cut RPU charges
+            during this window without affecting daytime queries or the Sprinklr ETL run at 6:00 AM.
+          </div>
+          <span class="tip-saving">↓ Save ~$42/mo</span>
+        </div>
+        <div class="tip-actions">
+          <button class="btn">Dismiss</button>
+          <button class="btn primary">Configure</button>
+        </div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+        <div class="tip-body">
+          <div class="tip-title">Switch DynamoDB to provisioned capacity</div>
+          <div class="tip-desc">
+            On-demand reads are 31% above the steady-state threshold. Switching to provisioned
+            capacity (with auto-scaling 5–25 RCU) would cost less for the same workload.
+          </div>
+          <span class="tip-saving">↓ Save ~$11/mo</span>
+        </div>
+        <div class="tip-actions">
+          <button class="btn">Dismiss</button>
+          <button class="btn primary">Configure</button>
+        </div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+        <div class="tip-body">
+          <div class="tip-title">Reserved Instance for Aurora Serverless v2</div>
+          <div class="tip-desc">
+            Aurora v2 has run continuously for 60+ days. A 1-year reserved commitment at 0.5 ACU
+            base saves 31% vs on-demand. Worth doing once Ford LENS Phase 2 traffic settles.
+          </div>
+          <span class="tip-saving">↓ Save ~$15/mo</span>
+        </div>
+        <div class="tip-actions">
+          <button class="btn">Dismiss</button>
+          <button class="btn primary">Configure</button>
+        </div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+        <div class="tip-body">
+          <div class="tip-title">Lifecycle policy on raw-scrape S3 bucket</div>
+          <div class="tip-desc">
+            Raw scrape JSON files older than 30 days haven't been read in 90+ days. Move them to
+            S3 Glacier Instant Retrieval to drop storage cost from $0.023/GB to $0.004/GB.
+          </div>
+          <span class="tip-saving">↓ Save ~$3.20/mo</span>
+        </div>
+        <div class="tip-actions">
+          <button class="btn">Dismiss</button>
+          <button class="btn primary">Configure</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- New alert modal (simple fade overlay) -->
+<div id="newAlertModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:100;align-items:center;justify-content:center" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:var(--bg-elev);border:1px solid var(--bdr-soft);border-radius:14px;padding:24px;max-width:480px;width:90%">
+    <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
+      <div style="flex:1">
+        <h3 style="font-size:18px;margin-bottom:4px">Create cost alert rule</h3>
+        <p style="font-size:13px;color:var(--t2)">Art-E will check every 6 hours and notify you when triggered.</p>
+      </div>
+      <button onclick="document.getElementById('newAlertModal').style.display='none'" style="background:none;border:none;color:var(--t2);cursor:pointer;font-size:20px;padding:0;line-height:1">&times;</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <label style="font-size:11px;color:var(--t2);font-weight:700;text-transform:uppercase;letter-spacing:0.06em">When this happens</label>
+      <select style="background:var(--bg-input);border:1px solid var(--bdr);border-radius:8px;padding:10px;color:var(--t1);font-family:inherit;font-size:13px">
+        <option>Monthly forecast exceeds budget</option>
+        <option>Daily spend &gt; 2× rolling average</option>
+        <option>Single service exceeds X% of budget</option>
+        <option>Free-tier expiry approaching</option>
+        <option>New service first appearance in bill</option>
+        <option>3rd-party API tokens spike</option>
+      </select>
+      <label style="font-size:11px;color:var(--t2);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-top:6px">Threshold</label>
+      <input type="text" placeholder="e.g. 90% or $500" style="background:var(--bg-input);border:1px solid var(--bdr);border-radius:8px;padding:10px;color:var(--t1);font-family:inherit;font-size:13px"/>
+      <label style="font-size:11px;color:var(--t2);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-top:6px">Notify me via</label>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="checkbox" checked/> In-app</label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="checkbox"/> Email</label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="checkbox" checked/> Slack</label>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:18px">
+      <button class="btn" onclick="document.getElementById('newAlertModal').style.display='none'">Cancel</button>
+      <button class="btn primary" onclick="document.getElementById('newAlertModal').style.display='none';alert('Alert rule created')">Create rule</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── Theme toggle ─────────────────────────────
+function toggleTheme(){
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme') || 'dark';
+  const next = cur === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('artemis_theme', next);
+  document.getElementById('dark-pip').classList.toggle('active', next === 'dark');
+  document.getElementById('light-pip').classList.toggle('active', next === 'light');
+  // Re-render charts for theme colours
+  Object.values(_charts).forEach(c => c && c.destroy());
+  initCharts();
+}
+(function initTheme(){
+  const saved = localStorage.getItem('artemis_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.getElementById('dark-pip').classList.toggle('active', saved === 'dark');
+  document.getElementById('light-pip').classList.toggle('active', saved === 'light');
+})();
+
+// ─── Charts ─────────────────────────────
+const _charts = {};
+
+function getChartColors(){
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  return {
+    grid: isLight ? 'rgba(0,107,90,0.08)' : 'rgba(255,255,255,0.06)',
+    text: isLight ? '#4F6660' : '#B0B3B8',
+    teal: isLight ? '#006B5A' : '#00C4A0',
+    purple: isLight ? '#5A3FA0' : '#7C5CBF',
+    crisis: isLight ? '#C9263F' : '#E53935',
+    warn: isLight ? '#A06600' : '#F59E0B',
+  };
+}
+
+function initCharts(){
+  const colors = getChartColors();
+  const days = [];
+  const today = 6; // we're on May 6
+  for(let i=29; i>=0; i--){
+    const d = new Date(2026, 3, 6 + (today - i));  // backwards from today
+    days.push(d.getDate() + '/' + (d.getMonth()+1));
+  }
+  // Realistic-looking daily spend pattern (weekdays higher, weekends lower, one anomaly)
+  const dailyData = [
+    18.20, 19.10, 14.40, 13.80, 19.60, 21.20, 22.40,  // 7 days
+    20.10, 19.80, 14.20, 13.40, 21.10, 23.50, 22.80,  // 7 days
+    21.40, 22.60, 15.10, 14.90, 23.20, 24.80, 47.20,  // ← anomaly (Apr 28)
+    22.10, 21.80, 15.60, 14.20, 22.90, 23.40, 21.80,  // 7 days
+    22.10, 21.40                                       // last 2 days
+  ];
+  const budgetLine = Array(30).fill(21.67); // $650 / 30
+
+  _charts.daily = new Chart(document.getElementById('dailyChart'), {
+    type: 'line',
+    data: {
+      labels: days,
+      datasets: [
+        {
+          label: 'Daily spend',
+          data: dailyData,
+          borderColor: colors.teal,
+          backgroundColor: colors.teal + '22',
+          borderWidth: 2.5,
+          tension: 0.35,
+          fill: true,
+          pointRadius: dailyData.map(v => v > 35 ? 6 : 0),
+          pointBackgroundColor: dailyData.map(v => v > 35 ? colors.crisis : colors.teal),
+          pointBorderColor: dailyData.map(v => v > 35 ? colors.crisis : colors.teal),
+          pointHoverRadius: 6,
+        },
+        {
+          label: 'Budget threshold ($21.67/day)',
+          data: budgetLine,
+          borderColor: colors.warn,
+          borderWidth: 1.5,
+          borderDash: [6, 4],
+          pointRadius: 0,
+          fill: false,
+          tension: 0,
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { intersect: false, mode: 'index' },
+      plugins: {
+        legend: { labels: { color: colors.text, font: { size: 11 } } },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toFixed(2)
+          }
+        }
+      },
+      scales: {
+        x: { grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 10 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 10 } },
+        y: { grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 10 }, callback: v => '$' + v }, beginAtZero: true }
+      }
+    }
+  });
+
+  // Donut — service breakdown
+  _charts.donut = new Chart(document.getElementById('donutChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Redshift', 'Lambda', 'Aurora v2', 'DynamoDB', 'ECS Fargate', 'DeepSeek API', 'ALB', 'S3', 'Other'],
+      datasets: [{
+        data: [142.18, 58.40, 48.92, 24.18, 22.60, 18.74, 11.20, 8.94, 13.46],
+        backgroundColor: ['#FF9900', '#7C5CBF', '#00C4A0', '#F59E0B', '#E53935', '#22C55E', '#3B82F6', '#06B6D4', '#65676B'],
+        borderWidth: 0,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '62%',
+      plugins: {
+        legend: { position: 'bottom', labels: { color: colors.text, font: { size: 10 }, padding: 8, boxWidth: 10, boxHeight: 10 } },
+        tooltip: { callbacks: { label: ctx => ctx.label + ': $' + ctx.parsed.toFixed(2) } }
+      }
+    }
+  });
+
+  // Monthly comparison
+  _charts.monthly = new Chart(document.getElementById('monthlyChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May (proj)'],
+      datasets: [{
+        label: 'Total spend',
+        data: [389.20, 412.50, 478.60, 521.40, 565.41, 612.40],
+        backgroundColor: [colors.teal + '88', colors.teal + '88', colors.teal + '88', colors.teal + '88', colors.teal + '88', colors.purple + 'AA'],
+        borderRadius: 6,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.y.toFixed(2) } }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: colors.text, font: { size: 10 } } },
+        y: { grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 10 }, callback: v => '$' + v }, beginAtZero: true }
+      }
+    }
+  });
+
+  // Per-service trend (top 5)
+  _charts.serviceTrend = new Chart(document.getElementById('serviceTrendChart'), {
+    type: 'line',
+    data: {
+      labels: days,
+      datasets: [
+        { label: 'Redshift', data: dailyData.map(v => v * 0.41), borderColor: '#FF9900', backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointRadius: 0 },
+        { label: 'Lambda', data: dailyData.map(v => v * 0.17), borderColor: '#7C5CBF', backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointRadius: 0 },
+        { label: 'Aurora v2', data: dailyData.map(v => v * 0.14), borderColor: '#00C4A0', backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointRadius: 0 },
+        { label: 'DynamoDB', data: dailyData.map(v => v * 0.07), borderColor: '#F59E0B', backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointRadius: 0 },
+        { label: 'ECS', data: dailyData.map(v => v * 0.065), borderColor: '#E53935', backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointRadius: 0 },
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { intersect: false, mode: 'index' },
+      plugins: {
+        legend: { labels: { color: colors.text, font: { size: 10 }, padding: 8, boxWidth: 10, boxHeight: 10 } },
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toFixed(2) } }
+      },
+      scales: {
+        x: { grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 9 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 8 } },
+        y: { grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 10 }, callback: v => '$' + v }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+// init
+window.addEventListener('load', () => {
+  setTimeout(initCharts, 100);
+});
+</script>
+</body>
+</html>
