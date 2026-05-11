@@ -1,0 +1,47 @@
+name: Refresh QA health data
+
+# 9 AM Pakistan Standard Time = 04:00 UTC
+on:
+  schedule:
+    - cron: '0 4 * * *'  # 9 AM PKT daily
+  workflow_dispatch:      # allow manual trigger from Actions tab
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write     # bot commits qa_history.json back
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install psycopg2-binary
+
+      - name: Run QA fetcher
+        env:
+          REDSHIFT_HOST:     ${{ secrets.REDSHIFT_HOST }}
+          REDSHIFT_PORT:     ${{ secrets.REDSHIFT_PORT }}
+          REDSHIFT_DB:       ${{ secrets.REDSHIFT_DB }}
+          REDSHIFT_USER:     ${{ secrets.REDSHIFT_USER }}
+          REDSHIFT_PASSWORD: ${{ secrets.REDSHIFT_PASSWORD }}
+          SMTP_USER:         ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD:     ${{ secrets.SMTP_PASSWORD }}
+        run: python scripts/fetch_qa_health.py
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name  "artemis-qa-bot"
+          git config user.email "actions@artemisai.co.uk"
+          git add data/qa_history.json
+          if git diff --staged --quiet; then
+            echo "No data changes — skipping commit"
+          else
+            git commit -m "data: refresh qa_history.json [skip ci]"
+            git push
+          fi

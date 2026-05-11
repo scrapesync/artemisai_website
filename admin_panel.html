@@ -649,33 +649,25 @@ h1 span{
       <div class="dest-desc">Query Redshift tables directly, export CSV data, explore post sentiments, engagement metrics and ML outputs.</div>
       <span class="dest-tag">Live Redshift data</span>
     </a>
-    <a href="cost_estimator.html" class="dest-card" style="--cc:#22c55e;--ci:rgba(34,197,94,0.08);--cb:rgba(34,197,94,0.2)">
+    <a href="qa_dashboard.html" class="dest-card" style="--cc:#22c55e;--ci:rgba(34,197,94,0.08);--cb:rgba(34,197,94,0.2)">
       <span class="dest-arrow">↗</span>
       <div class="dest-icon" style="overflow:hidden">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- dollar coin with rising bars behind it -->
-          <rect x="3" y="16" width="3" height="8" rx="0.8" fill="#22c55e" opacity="0.55">
-            <animate attributeName="height" values="8;12;8" dur="2.2s" repeatCount="indefinite"/>
-            <animate attributeName="y" values="16;12;16" dur="2.2s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="8" y="12" width="3" height="12" rx="0.8" fill="#22c55e" opacity="0.75">
-            <animate attributeName="height" values="12;16;12" dur="2.6s" repeatCount="indefinite"/>
-            <animate attributeName="y" values="12;8;12" dur="2.6s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="13" y="8" width="3" height="16" rx="0.8" fill="#22c55e">
-            <animate attributeName="height" values="16;20;16" dur="1.9s" repeatCount="indefinite"/>
-            <animate attributeName="y" values="8;4;8" dur="1.9s" repeatCount="indefinite"/>
-          </rect>
-          <circle cx="22" cy="10" r="5" fill="#22c55e" opacity="0.18"/>
-          <circle cx="22" cy="10" r="5" fill="none" stroke="#22c55e" stroke-width="1.6"/>
-          <text x="22" y="13" text-anchor="middle" fill="#22c55e" font-family="Inter,sans-serif" font-size="7" font-weight="800">$</text>
+          <!-- heartbeat / pulse line with a checkmark accent -->
+          <path d="M2 14 L7 14 L9 8 L12 20 L15 11 L17 14 L22 14"
+                stroke="#22c55e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <animate attributeName="stroke-dasharray" values="0 60;30 60;60 60" dur="2.4s" repeatCount="indefinite"/>
+          </path>
+          <circle cx="24" cy="8" r="4" fill="#22c55e" opacity="0.18"/>
+          <circle cx="24" cy="8" r="4" fill="none" stroke="#22c55e" stroke-width="1.6"/>
+          <path d="M22 8 L23.5 9.5 L26 7" stroke="#22c55e" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <div class="dest-title">Cost Estimator</div>
-      <div class="dest-desc">Real-time AWS spend across all 11 services. Budget alerts, anomaly detection, forecasts, and Art-E optimization tips.</div>
-      <span class="dest-tag">AWS</span>
-      <span class="dest-tag">11 services</span>
-      <span class="dest-tag">Live</span>
+      <div class="dest-title">QA Dashboard</div>
+      <div class="dest-desc">Daily health check of the rdl Redshift schema. Freshness, row counts, load history, anomaly alerts emailed to the team.</div>
+      <span class="dest-tag">Redshift</span>
+      <span class="dest-tag">5 tables</span>
+      <span class="dest-tag">Daily 9AM PKT</span>
     </a>
     <a href="learning_hub.html" class="dest-card" style="--cc:#a78bfa;--ci:rgba(167,139,250,0.08);--cb:rgba(167,139,250,0.2)">
       <span class="dest-arrow">↗</span>

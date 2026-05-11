@@ -1,0 +1,25 @@
+[
+  {
+    "name": "Any table stale > 2 days",
+    "type": "stale_table",
+    "tables": "all",
+    "max_days": 2,
+    "enabled": true,
+    "_doc": "Fires if any tracked table hasn't been loaded in the last 2 days."
+  },
+  {
+    "name": "No load today — page_posts",
+    "type": "no_load_today",
+    "tables": ["page_posts"],
+    "enabled": true,
+    "_doc": "page_posts is the most critical table — fire if it didn't load today."
+  },
+  {
+    "name": "Row count dropped > 50%",
+    "type": "row_count_drop",
+    "tables": "all",
+    "drop_pct": 0.5,
+    "enabled": true,
+    "_doc": "Fires if total rows today is < 50% of the 7-day average. Catches truncated loads."
+  }
+]

@@ -1,0 +1,974 @@
+{
+  "last_updated": "2026-05-11T16:27:37.140924Z",
+  "placeholder": true,
+  "_doc": "Placeholder data. Real data written by scripts/fetch_qa_health.py via GitHub Actions.",
+  "today": [
+    {
+      "table_name": "page_posts",
+      "total_rows": 48664,
+      "latest_load": "2026-05-11",
+      "earliest_load": "2025-08-01",
+      "days_since_last_load": 0
+    },
+    {
+      "table_name": "page_info",
+      "total_rows": 119,
+      "latest_load": "2026-05-11",
+      "earliest_load": "2025-08-01",
+      "days_since_last_load": 0
+    },
+    {
+      "table_name": "page_daily_insights",
+      "total_rows": 21002,
+      "latest_load": "2026-05-11",
+      "earliest_load": "2025-08-01",
+      "days_since_last_load": 0
+    },
+    {
+      "table_name": "post_daily_insights",
+      "total_rows": 160689,
+      "latest_load": "2026-05-11",
+      "earliest_load": "2025-08-01",
+      "days_since_last_load": 0
+    },
+    {
+      "table_name": "post_label_predictions",
+      "total_rows": 43779,
+      "latest_load": "2026-05-11",
+      "earliest_load": "2025-08-01",
+      "days_since_last_load": 0
+    }
+  ],
+  "history": [
+    {
+      "date": "2026-04-20",
+      "taken_at": "2026-04-20T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 44920,
+          "latest_load": "2026-04-20",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-04-20",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 18527,
+          "latest_load": "2026-04-20",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 141392,
+          "latest_load": "2026-04-20",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 38513,
+          "latest_load": "2026-04-20",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-21",
+      "taken_at": "2026-04-21T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 45119,
+          "latest_load": "2026-04-21",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-04-21",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 18621,
+          "latest_load": "2026-04-21",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 142239,
+          "latest_load": "2026-04-21",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 38724,
+          "latest_load": "2026-04-21",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-22",
+      "taken_at": "2026-04-22T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 45164,
+          "latest_load": "2026-04-22",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-04-22",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 18725,
+          "latest_load": "2026-04-22",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 144270,
+          "latest_load": "2026-04-22",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 38853,
+          "latest_load": "2026-04-22",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-23",
+      "taken_at": "2026-04-23T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 45413,
+          "latest_load": "2026-04-23",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 120,
+          "latest_load": "2026-04-23",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 18944,
+          "latest_load": "2026-04-23",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 144811,
+          "latest_load": "2026-04-23",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 39209,
+          "latest_load": "2026-04-23",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-24",
+      "taken_at": "2026-04-24T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 45937,
+          "latest_load": "2026-04-24",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-04-24",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 19048,
+          "latest_load": "2026-04-24",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 145293,
+          "latest_load": "2026-04-24",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 39359,
+          "latest_load": "2026-04-24",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-25",
+      "taken_at": "2026-04-25T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 45724,
+          "latest_load": "2026-04-25",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-04-25",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 19160,
+          "latest_load": "2026-04-25",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 146032,
+          "latest_load": "2026-04-25",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 39782,
+          "latest_load": "2026-04-25",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-26",
+      "taken_at": "2026-04-26T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 46144,
+          "latest_load": "2026-04-26",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-04-26",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 19229,
+          "latest_load": "2026-04-26",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 146755,
+          "latest_load": "2026-04-26",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 39823,
+          "latest_load": "2026-04-26",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-27",
+      "taken_at": "2026-04-27T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 46123,
+          "latest_load": "2026-04-27",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 120,
+          "latest_load": "2026-04-27",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 19325,
+          "latest_load": "2026-04-27",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 148024,
+          "latest_load": "2026-04-27",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 40284,
+          "latest_load": "2026-04-27",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-28",
+      "taken_at": "2026-04-28T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 46418,
+          "latest_load": "2026-04-28",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-04-28",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 19517,
+          "latest_load": "2026-04-28",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 149496,
+          "latest_load": "2026-04-28",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 40396,
+          "latest_load": "2026-04-28",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-29",
+      "taken_at": "2026-04-29T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 46654,
+          "latest_load": "2026-04-29",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 120,
+          "latest_load": "2026-04-29",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 19653,
+          "latest_load": "2026-04-29",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 150444,
+          "latest_load": "2026-04-29",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 40663,
+          "latest_load": "2026-04-29",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-04-30",
+      "taken_at": "2026-04-30T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 47024,
+          "latest_load": "2026-04-30",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-04-30",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 19683,
+          "latest_load": "2026-04-30",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 151388,
+          "latest_load": "2026-04-30",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 40857,
+          "latest_load": "2026-04-30",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-01",
+      "taken_at": "2026-05-01T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 46974,
+          "latest_load": "2026-05-01",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-05-01",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 19853,
+          "latest_load": "2026-05-01",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 152301,
+          "latest_load": "2026-05-01",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 41280,
+          "latest_load": "2026-05-01",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-02",
+      "taken_at": "2026-05-02T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 47337,
+          "latest_load": "2026-05-02",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-05-02",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 19978,
+          "latest_load": "2026-05-02",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 152944,
+          "latest_load": "2026-05-02",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 41533,
+          "latest_load": "2026-05-02",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-03",
+      "taken_at": "2026-05-03T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 47319,
+          "latest_load": "2026-05-03",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 120,
+          "latest_load": "2026-05-03",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 20149,
+          "latest_load": "2026-05-03",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 153660,
+          "latest_load": "2026-05-03",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 41818,
+          "latest_load": "2026-05-03",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-04",
+      "taken_at": "2026-05-04T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 47311,
+          "latest_load": "2026-05-04",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 120,
+          "latest_load": "2026-05-04",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 20209,
+          "latest_load": "2026-05-04",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 155362,
+          "latest_load": "2026-05-04",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 42135,
+          "latest_load": "2026-05-04",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-05",
+      "taken_at": "2026-05-05T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 47597,
+          "latest_load": "2026-05-05",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-05-05",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 20334,
+          "latest_load": "2026-05-05",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 154757,
+          "latest_load": "2026-05-05",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 42233,
+          "latest_load": "2026-05-05",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-06",
+      "taken_at": "2026-05-06T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 47721,
+          "latest_load": "2026-05-06",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-05-06",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 20329,
+          "latest_load": "2026-05-06",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 156819,
+          "latest_load": "2026-05-06",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 42342,
+          "latest_load": "2026-05-06",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-07",
+      "taken_at": "2026-05-07T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 47880,
+          "latest_load": "2026-05-06",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-05-07",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 20616,
+          "latest_load": "2026-05-07",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 156640,
+          "latest_load": "2026-05-07",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 42728,
+          "latest_load": "2026-05-07",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-08",
+      "taken_at": "2026-05-08T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 48263,
+          "latest_load": "2026-05-08",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 120,
+          "latest_load": "2026-05-08",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 20725,
+          "latest_load": "2026-05-08",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 158775,
+          "latest_load": "2026-05-08",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 42904,
+          "latest_load": "2026-05-08",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-09",
+      "taken_at": "2026-05-09T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 48378,
+          "latest_load": "2026-05-09",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-05-09",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 20859,
+          "latest_load": "2026-05-09",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 159828,
+          "latest_load": "2026-05-09",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 43099,
+          "latest_load": "2026-05-09",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-10",
+      "taken_at": "2026-05-10T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 48442,
+          "latest_load": "2026-05-10",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-05-10",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 20844,
+          "latest_load": "2026-05-10",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 159975,
+          "latest_load": "2026-05-10",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 43538,
+          "latest_load": "2026-05-10",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": null
+        }
+      ]
+    },
+    {
+      "date": "2026-05-11",
+      "taken_at": "2026-05-11T04:00:00Z",
+      "tables": [
+        {
+          "table_name": "page_posts",
+          "total_rows": 48664,
+          "latest_load": "2026-05-11",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": 0
+        },
+        {
+          "table_name": "page_info",
+          "total_rows": 119,
+          "latest_load": "2026-05-11",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": 0
+        },
+        {
+          "table_name": "page_daily_insights",
+          "total_rows": 21002,
+          "latest_load": "2026-05-11",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": 0
+        },
+        {
+          "table_name": "post_daily_insights",
+          "total_rows": 160689,
+          "latest_load": "2026-05-11",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": 0
+        },
+        {
+          "table_name": "post_label_predictions",
+          "total_rows": 43779,
+          "latest_load": "2026-05-11",
+          "earliest_load": "2025-08-01",
+          "days_since_last_load": 0
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "name": "Any table stale > 2 days",
+      "type": "stale_table",
+      "tables": "all",
+      "max_days": 2,
+      "enabled": true,
+      "_doc": "Fires if any tracked table hasn't been loaded in the last 2 days."
+    },
+    {
+      "name": "No load today \u2014 page_posts",
+      "type": "no_load_today",
+      "tables": [
+        "page_posts"
+      ],
+      "enabled": true,
+      "_doc": "page_posts is the most critical table \u2014 fire if it didn't load today."
+    },
+    {
+      "name": "Row count dropped > 50%",
+      "type": "row_count_drop",
+      "tables": "all",
+      "drop_pct": 0.5,
+      "enabled": true,
+      "_doc": "Fires if total rows today is < 50% of the 7-day average. Catches truncated loads."
+    }
+  ],
+  "fired": []
+}
