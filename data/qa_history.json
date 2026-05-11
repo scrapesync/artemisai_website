@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-11T16:44:30.972276Z",
+  "last_updated": "2026-05-11T17:42:03.949490Z",
   "placeholder": true,
   "_doc": "Placeholder data. Real data written by scripts/fetch_qa_health.py via GitHub Actions.",
   "today": [
@@ -972,6 +972,2136 @@
   ],
   "fired": [],
   "analysis": {
+    "sentiment_trend__day": [
+      {
+        "bucket": "2026-04-12",
+        "label": "positive",
+        "count": 409
+      },
+      {
+        "bucket": "2026-04-12",
+        "label": "neutral",
+        "count": 254
+      },
+      {
+        "bucket": "2026-04-12",
+        "label": "negative",
+        "count": 127
+      },
+      {
+        "bucket": "2026-04-12",
+        "label": "mixed",
+        "count": 75
+      },
+      {
+        "bucket": "2026-04-13",
+        "label": "positive",
+        "count": 402
+      },
+      {
+        "bucket": "2026-04-13",
+        "label": "neutral",
+        "count": 227
+      },
+      {
+        "bucket": "2026-04-13",
+        "label": "negative",
+        "count": 111
+      },
+      {
+        "bucket": "2026-04-13",
+        "label": "mixed",
+        "count": 65
+      },
+      {
+        "bucket": "2026-04-14",
+        "label": "positive",
+        "count": 459
+      },
+      {
+        "bucket": "2026-04-14",
+        "label": "neutral",
+        "count": 221
+      },
+      {
+        "bucket": "2026-04-14",
+        "label": "negative",
+        "count": 122
+      },
+      {
+        "bucket": "2026-04-14",
+        "label": "mixed",
+        "count": 64
+      },
+      {
+        "bucket": "2026-04-15",
+        "label": "positive",
+        "count": 413
+      },
+      {
+        "bucket": "2026-04-15",
+        "label": "neutral",
+        "count": 239
+      },
+      {
+        "bucket": "2026-04-15",
+        "label": "negative",
+        "count": 131
+      },
+      {
+        "bucket": "2026-04-15",
+        "label": "mixed",
+        "count": 71
+      },
+      {
+        "bucket": "2026-04-16",
+        "label": "positive",
+        "count": 384
+      },
+      {
+        "bucket": "2026-04-16",
+        "label": "neutral",
+        "count": 230
+      },
+      {
+        "bucket": "2026-04-16",
+        "label": "negative",
+        "count": 111
+      },
+      {
+        "bucket": "2026-04-16",
+        "label": "mixed",
+        "count": 75
+      },
+      {
+        "bucket": "2026-04-17",
+        "label": "positive",
+        "count": 467
+      },
+      {
+        "bucket": "2026-04-17",
+        "label": "neutral",
+        "count": 261
+      },
+      {
+        "bucket": "2026-04-17",
+        "label": "negative",
+        "count": 131
+      },
+      {
+        "bucket": "2026-04-17",
+        "label": "mixed",
+        "count": 73
+      },
+      {
+        "bucket": "2026-04-18",
+        "label": "positive",
+        "count": 481
+      },
+      {
+        "bucket": "2026-04-18",
+        "label": "neutral",
+        "count": 260
+      },
+      {
+        "bucket": "2026-04-18",
+        "label": "negative",
+        "count": 114
+      },
+      {
+        "bucket": "2026-04-18",
+        "label": "mixed",
+        "count": 75
+      },
+      {
+        "bucket": "2026-04-19",
+        "label": "positive",
+        "count": 433
+      },
+      {
+        "bucket": "2026-04-19",
+        "label": "neutral",
+        "count": 258
+      },
+      {
+        "bucket": "2026-04-19",
+        "label": "negative",
+        "count": 123
+      },
+      {
+        "bucket": "2026-04-19",
+        "label": "mixed",
+        "count": 68
+      },
+      {
+        "bucket": "2026-04-20",
+        "label": "positive",
+        "count": 420
+      },
+      {
+        "bucket": "2026-04-20",
+        "label": "neutral",
+        "count": 239
+      },
+      {
+        "bucket": "2026-04-20",
+        "label": "negative",
+        "count": 116
+      },
+      {
+        "bucket": "2026-04-20",
+        "label": "mixed",
+        "count": 63
+      },
+      {
+        "bucket": "2026-04-21",
+        "label": "positive",
+        "count": 468
+      },
+      {
+        "bucket": "2026-04-21",
+        "label": "neutral",
+        "count": 261
+      },
+      {
+        "bucket": "2026-04-21",
+        "label": "negative",
+        "count": 135
+      },
+      {
+        "bucket": "2026-04-21",
+        "label": "mixed",
+        "count": 72
+      },
+      {
+        "bucket": "2026-04-22",
+        "label": "positive",
+        "count": 440
+      },
+      {
+        "bucket": "2026-04-22",
+        "label": "neutral",
+        "count": 258
+      },
+      {
+        "bucket": "2026-04-22",
+        "label": "negative",
+        "count": 111
+      },
+      {
+        "bucket": "2026-04-22",
+        "label": "mixed",
+        "count": 72
+      },
+      {
+        "bucket": "2026-04-23",
+        "label": "positive",
+        "count": 429
+      },
+      {
+        "bucket": "2026-04-23",
+        "label": "neutral",
+        "count": 224
+      },
+      {
+        "bucket": "2026-04-23",
+        "label": "negative",
+        "count": 113
+      },
+      {
+        "bucket": "2026-04-23",
+        "label": "mixed",
+        "count": 69
+      },
+      {
+        "bucket": "2026-04-24",
+        "label": "positive",
+        "count": 409
+      },
+      {
+        "bucket": "2026-04-24",
+        "label": "neutral",
+        "count": 241
+      },
+      {
+        "bucket": "2026-04-24",
+        "label": "negative",
+        "count": 124
+      },
+      {
+        "bucket": "2026-04-24",
+        "label": "mixed",
+        "count": 67
+      },
+      {
+        "bucket": "2026-04-25",
+        "label": "positive",
+        "count": 396
+      },
+      {
+        "bucket": "2026-04-25",
+        "label": "neutral",
+        "count": 243
+      },
+      {
+        "bucket": "2026-04-25",
+        "label": "negative",
+        "count": 114
+      },
+      {
+        "bucket": "2026-04-25",
+        "label": "mixed",
+        "count": 65
+      },
+      {
+        "bucket": "2026-04-26",
+        "label": "positive",
+        "count": 403
+      },
+      {
+        "bucket": "2026-04-26",
+        "label": "neutral",
+        "count": 235
+      },
+      {
+        "bucket": "2026-04-26",
+        "label": "negative",
+        "count": 109
+      },
+      {
+        "bucket": "2026-04-26",
+        "label": "mixed",
+        "count": 72
+      },
+      {
+        "bucket": "2026-04-27",
+        "label": "positive",
+        "count": 482
+      },
+      {
+        "bucket": "2026-04-27",
+        "label": "neutral",
+        "count": 237
+      },
+      {
+        "bucket": "2026-04-27",
+        "label": "negative",
+        "count": 128
+      },
+      {
+        "bucket": "2026-04-27",
+        "label": "mixed",
+        "count": 76
+      },
+      {
+        "bucket": "2026-04-28",
+        "label": "positive",
+        "count": 387
+      },
+      {
+        "bucket": "2026-04-28",
+        "label": "neutral",
+        "count": 222
+      },
+      {
+        "bucket": "2026-04-28",
+        "label": "negative",
+        "count": 130
+      },
+      {
+        "bucket": "2026-04-28",
+        "label": "mixed",
+        "count": 75
+      },
+      {
+        "bucket": "2026-04-29",
+        "label": "positive",
+        "count": 449
+      },
+      {
+        "bucket": "2026-04-29",
+        "label": "neutral",
+        "count": 223
+      },
+      {
+        "bucket": "2026-04-29",
+        "label": "negative",
+        "count": 119
+      },
+      {
+        "bucket": "2026-04-29",
+        "label": "mixed",
+        "count": 75
+      },
+      {
+        "bucket": "2026-04-30",
+        "label": "positive",
+        "count": 475
+      },
+      {
+        "bucket": "2026-04-30",
+        "label": "neutral",
+        "count": 261
+      },
+      {
+        "bucket": "2026-04-30",
+        "label": "negative",
+        "count": 113
+      },
+      {
+        "bucket": "2026-04-30",
+        "label": "mixed",
+        "count": 75
+      },
+      {
+        "bucket": "2026-05-01",
+        "label": "positive",
+        "count": 421
+      },
+      {
+        "bucket": "2026-05-01",
+        "label": "neutral",
+        "count": 256
+      },
+      {
+        "bucket": "2026-05-01",
+        "label": "negative",
+        "count": 111
+      },
+      {
+        "bucket": "2026-05-01",
+        "label": "mixed",
+        "count": 77
+      },
+      {
+        "bucket": "2026-05-02",
+        "label": "positive",
+        "count": 445
+      },
+      {
+        "bucket": "2026-05-02",
+        "label": "neutral",
+        "count": 256
+      },
+      {
+        "bucket": "2026-05-02",
+        "label": "negative",
+        "count": 113
+      },
+      {
+        "bucket": "2026-05-02",
+        "label": "mixed",
+        "count": 71
+      },
+      {
+        "bucket": "2026-05-03",
+        "label": "positive",
+        "count": 443
+      },
+      {
+        "bucket": "2026-05-03",
+        "label": "neutral",
+        "count": 248
+      },
+      {
+        "bucket": "2026-05-03",
+        "label": "negative",
+        "count": 117
+      },
+      {
+        "bucket": "2026-05-03",
+        "label": "mixed",
+        "count": 73
+      },
+      {
+        "bucket": "2026-05-04",
+        "label": "positive",
+        "count": 418
+      },
+      {
+        "bucket": "2026-05-04",
+        "label": "neutral",
+        "count": 231
+      },
+      {
+        "bucket": "2026-05-04",
+        "label": "negative",
+        "count": 111
+      },
+      {
+        "bucket": "2026-05-04",
+        "label": "mixed",
+        "count": 72
+      },
+      {
+        "bucket": "2026-05-05",
+        "label": "positive",
+        "count": 394
+      },
+      {
+        "bucket": "2026-05-05",
+        "label": "neutral",
+        "count": 227
+      },
+      {
+        "bucket": "2026-05-05",
+        "label": "negative",
+        "count": 109
+      },
+      {
+        "bucket": "2026-05-05",
+        "label": "mixed",
+        "count": 71
+      },
+      {
+        "bucket": "2026-05-06",
+        "label": "positive",
+        "count": 440
+      },
+      {
+        "bucket": "2026-05-06",
+        "label": "neutral",
+        "count": 246
+      },
+      {
+        "bucket": "2026-05-06",
+        "label": "negative",
+        "count": 108
+      },
+      {
+        "bucket": "2026-05-06",
+        "label": "mixed",
+        "count": 68
+      },
+      {
+        "bucket": "2026-05-07",
+        "label": "positive",
+        "count": 418
+      },
+      {
+        "bucket": "2026-05-07",
+        "label": "neutral",
+        "count": 219
+      },
+      {
+        "bucket": "2026-05-07",
+        "label": "negative",
+        "count": 107
+      },
+      {
+        "bucket": "2026-05-07",
+        "label": "mixed",
+        "count": 77
+      },
+      {
+        "bucket": "2026-05-08",
+        "label": "positive",
+        "count": 395
+      },
+      {
+        "bucket": "2026-05-08",
+        "label": "neutral",
+        "count": 231
+      },
+      {
+        "bucket": "2026-05-08",
+        "label": "negative",
+        "count": 115
+      },
+      {
+        "bucket": "2026-05-08",
+        "label": "mixed",
+        "count": 71
+      },
+      {
+        "bucket": "2026-05-09",
+        "label": "positive",
+        "count": 390
+      },
+      {
+        "bucket": "2026-05-09",
+        "label": "neutral",
+        "count": 241
+      },
+      {
+        "bucket": "2026-05-09",
+        "label": "negative",
+        "count": 117
+      },
+      {
+        "bucket": "2026-05-09",
+        "label": "mixed",
+        "count": 75
+      },
+      {
+        "bucket": "2026-05-10",
+        "label": "positive",
+        "count": 383
+      },
+      {
+        "bucket": "2026-05-10",
+        "label": "neutral",
+        "count": 233
+      },
+      {
+        "bucket": "2026-05-10",
+        "label": "negative",
+        "count": 121
+      },
+      {
+        "bucket": "2026-05-10",
+        "label": "mixed",
+        "count": 77
+      },
+      {
+        "bucket": "2026-05-11",
+        "label": "positive",
+        "count": 436
+      },
+      {
+        "bucket": "2026-05-11",
+        "label": "neutral",
+        "count": 242
+      },
+      {
+        "bucket": "2026-05-11",
+        "label": "negative",
+        "count": 126
+      },
+      {
+        "bucket": "2026-05-11",
+        "label": "mixed",
+        "count": 66
+      }
+    ],
+    "sentiment_trend__week": [
+      {
+        "bucket": "2026-02-23",
+        "label": "positive",
+        "count": 2707
+      },
+      {
+        "bucket": "2026-02-23",
+        "label": "neutral",
+        "count": 1708
+      },
+      {
+        "bucket": "2026-02-23",
+        "label": "negative",
+        "count": 938
+      },
+      {
+        "bucket": "2026-02-23",
+        "label": "mixed",
+        "count": 515
+      },
+      {
+        "bucket": "2026-03-02",
+        "label": "positive",
+        "count": 2873
+      },
+      {
+        "bucket": "2026-03-02",
+        "label": "neutral",
+        "count": 1783
+      },
+      {
+        "bucket": "2026-03-02",
+        "label": "negative",
+        "count": 925
+      },
+      {
+        "bucket": "2026-03-02",
+        "label": "mixed",
+        "count": 459
+      },
+      {
+        "bucket": "2026-03-09",
+        "label": "positive",
+        "count": 3114
+      },
+      {
+        "bucket": "2026-03-09",
+        "label": "neutral",
+        "count": 1648
+      },
+      {
+        "bucket": "2026-03-09",
+        "label": "negative",
+        "count": 801
+      },
+      {
+        "bucket": "2026-03-09",
+        "label": "mixed",
+        "count": 463
+      },
+      {
+        "bucket": "2026-03-16",
+        "label": "positive",
+        "count": 2833
+      },
+      {
+        "bucket": "2026-03-16",
+        "label": "neutral",
+        "count": 1646
+      },
+      {
+        "bucket": "2026-03-16",
+        "label": "negative",
+        "count": 759
+      },
+      {
+        "bucket": "2026-03-16",
+        "label": "mixed",
+        "count": 476
+      },
+      {
+        "bucket": "2026-03-23",
+        "label": "positive",
+        "count": 2747
+      },
+      {
+        "bucket": "2026-03-23",
+        "label": "neutral",
+        "count": 1813
+      },
+      {
+        "bucket": "2026-03-23",
+        "label": "negative",
+        "count": 874
+      },
+      {
+        "bucket": "2026-03-23",
+        "label": "mixed",
+        "count": 429
+      },
+      {
+        "bucket": "2026-03-30",
+        "label": "positive",
+        "count": 3250
+      },
+      {
+        "bucket": "2026-03-30",
+        "label": "neutral",
+        "count": 1581
+      },
+      {
+        "bucket": "2026-03-30",
+        "label": "negative",
+        "count": 850
+      },
+      {
+        "bucket": "2026-03-30",
+        "label": "mixed",
+        "count": 494
+      },
+      {
+        "bucket": "2026-04-06",
+        "label": "positive",
+        "count": 2927
+      },
+      {
+        "bucket": "2026-04-06",
+        "label": "neutral",
+        "count": 1621
+      },
+      {
+        "bucket": "2026-04-06",
+        "label": "negative",
+        "count": 840
+      },
+      {
+        "bucket": "2026-04-06",
+        "label": "mixed",
+        "count": 445
+      },
+      {
+        "bucket": "2026-04-13",
+        "label": "positive",
+        "count": 3316
+      },
+      {
+        "bucket": "2026-04-13",
+        "label": "neutral",
+        "count": 1548
+      },
+      {
+        "bucket": "2026-04-13",
+        "label": "negative",
+        "count": 920
+      },
+      {
+        "bucket": "2026-04-13",
+        "label": "mixed",
+        "count": 455
+      },
+      {
+        "bucket": "2026-04-20",
+        "label": "positive",
+        "count": 2906
+      },
+      {
+        "bucket": "2026-04-20",
+        "label": "neutral",
+        "count": 1662
+      },
+      {
+        "bucket": "2026-04-20",
+        "label": "negative",
+        "count": 758
+      },
+      {
+        "bucket": "2026-04-20",
+        "label": "mixed",
+        "count": 444
+      },
+      {
+        "bucket": "2026-04-27",
+        "label": "positive",
+        "count": 2948
+      },
+      {
+        "bucket": "2026-04-27",
+        "label": "neutral",
+        "count": 1684
+      },
+      {
+        "bucket": "2026-04-27",
+        "label": "negative",
+        "count": 931
+      },
+      {
+        "bucket": "2026-04-27",
+        "label": "mixed",
+        "count": 545
+      },
+      {
+        "bucket": "2026-05-04",
+        "label": "positive",
+        "count": 2715
+      },
+      {
+        "bucket": "2026-05-04",
+        "label": "neutral",
+        "count": 1722
+      },
+      {
+        "bucket": "2026-05-04",
+        "label": "negative",
+        "count": 778
+      },
+      {
+        "bucket": "2026-05-04",
+        "label": "mixed",
+        "count": 523
+      },
+      {
+        "bucket": "2026-05-11",
+        "label": "positive",
+        "count": 2920
+      },
+      {
+        "bucket": "2026-05-11",
+        "label": "neutral",
+        "count": 1869
+      },
+      {
+        "bucket": "2026-05-11",
+        "label": "negative",
+        "count": 863
+      },
+      {
+        "bucket": "2026-05-11",
+        "label": "mixed",
+        "count": 444
+      }
+    ],
+    "sentiment_trend__month": [
+      {
+        "bucket": "2025-06-01",
+        "label": "positive",
+        "count": 11455
+      },
+      {
+        "bucket": "2025-06-01",
+        "label": "neutral",
+        "count": 6839
+      },
+      {
+        "bucket": "2025-06-01",
+        "label": "negative",
+        "count": 3961
+      },
+      {
+        "bucket": "2025-06-01",
+        "label": "mixed",
+        "count": 1905
+      },
+      {
+        "bucket": "2025-07-01",
+        "label": "positive",
+        "count": 12934
+      },
+      {
+        "bucket": "2025-07-01",
+        "label": "neutral",
+        "count": 7055
+      },
+      {
+        "bucket": "2025-07-01",
+        "label": "negative",
+        "count": 3504
+      },
+      {
+        "bucket": "2025-07-01",
+        "label": "mixed",
+        "count": 2230
+      },
+      {
+        "bucket": "2025-08-01",
+        "label": "positive",
+        "count": 12106
+      },
+      {
+        "bucket": "2025-08-01",
+        "label": "neutral",
+        "count": 7661
+      },
+      {
+        "bucket": "2025-08-01",
+        "label": "negative",
+        "count": 3785
+      },
+      {
+        "bucket": "2025-08-01",
+        "label": "mixed",
+        "count": 2297
+      },
+      {
+        "bucket": "2025-09-01",
+        "label": "positive",
+        "count": 13062
+      },
+      {
+        "bucket": "2025-09-01",
+        "label": "neutral",
+        "count": 8014
+      },
+      {
+        "bucket": "2025-09-01",
+        "label": "negative",
+        "count": 3588
+      },
+      {
+        "bucket": "2025-09-01",
+        "label": "mixed",
+        "count": 2116
+      },
+      {
+        "bucket": "2025-10-01",
+        "label": "positive",
+        "count": 13376
+      },
+      {
+        "bucket": "2025-10-01",
+        "label": "neutral",
+        "count": 7873
+      },
+      {
+        "bucket": "2025-10-01",
+        "label": "negative",
+        "count": 3987
+      },
+      {
+        "bucket": "2025-10-01",
+        "label": "mixed",
+        "count": 1887
+      },
+      {
+        "bucket": "2025-11-01",
+        "label": "positive",
+        "count": 11867
+      },
+      {
+        "bucket": "2025-11-01",
+        "label": "neutral",
+        "count": 7339
+      },
+      {
+        "bucket": "2025-11-01",
+        "label": "negative",
+        "count": 3912
+      },
+      {
+        "bucket": "2025-11-01",
+        "label": "mixed",
+        "count": 2096
+      },
+      {
+        "bucket": "2025-12-01",
+        "label": "positive",
+        "count": 12374
+      },
+      {
+        "bucket": "2025-12-01",
+        "label": "neutral",
+        "count": 8086
+      },
+      {
+        "bucket": "2025-12-01",
+        "label": "negative",
+        "count": 3463
+      },
+      {
+        "bucket": "2025-12-01",
+        "label": "mixed",
+        "count": 1873
+      },
+      {
+        "bucket": "2026-01-01",
+        "label": "positive",
+        "count": 11602
+      },
+      {
+        "bucket": "2026-01-01",
+        "label": "neutral",
+        "count": 6459
+      },
+      {
+        "bucket": "2026-01-01",
+        "label": "negative",
+        "count": 3838
+      },
+      {
+        "bucket": "2026-01-01",
+        "label": "mixed",
+        "count": 1883
+      },
+      {
+        "bucket": "2026-02-01",
+        "label": "positive",
+        "count": 13674
+      },
+      {
+        "bucket": "2026-02-01",
+        "label": "neutral",
+        "count": 7920
+      },
+      {
+        "bucket": "2026-02-01",
+        "label": "negative",
+        "count": 4076
+      },
+      {
+        "bucket": "2026-02-01",
+        "label": "mixed",
+        "count": 2234
+      },
+      {
+        "bucket": "2026-03-01",
+        "label": "positive",
+        "count": 12763
+      },
+      {
+        "bucket": "2026-03-01",
+        "label": "neutral",
+        "count": 7493
+      },
+      {
+        "bucket": "2026-03-01",
+        "label": "negative",
+        "count": 3931
+      },
+      {
+        "bucket": "2026-03-01",
+        "label": "mixed",
+        "count": 2187
+      },
+      {
+        "bucket": "2026-04-01",
+        "label": "positive",
+        "count": 12346
+      },
+      {
+        "bucket": "2026-04-01",
+        "label": "neutral",
+        "count": 7737
+      },
+      {
+        "bucket": "2026-04-01",
+        "label": "negative",
+        "count": 3298
+      },
+      {
+        "bucket": "2026-04-01",
+        "label": "mixed",
+        "count": 1984
+      },
+      {
+        "bucket": "2026-05-01",
+        "label": "positive",
+        "count": 14547
+      },
+      {
+        "bucket": "2026-05-01",
+        "label": "neutral",
+        "count": 7229
+      },
+      {
+        "bucket": "2026-05-01",
+        "label": "negative",
+        "count": 3437
+      },
+      {
+        "bucket": "2026-05-01",
+        "label": "mixed",
+        "count": 2222
+      }
+    ],
+    "agreement_nlp_vs_ds__day": [
+      {
+        "bucket": "2026-04-12",
+        "agree": 740,
+        "total": 861
+      },
+      {
+        "bucket": "2026-04-13",
+        "agree": 694,
+        "total": 788
+      },
+      {
+        "bucket": "2026-04-14",
+        "agree": 785,
+        "total": 840
+      },
+      {
+        "bucket": "2026-04-15",
+        "agree": 766,
+        "total": 826
+      },
+      {
+        "bucket": "2026-04-16",
+        "agree": 831,
+        "total": 931
+      },
+      {
+        "bucket": "2026-04-17",
+        "agree": 879,
+        "total": 955
+      },
+      {
+        "bucket": "2026-04-18",
+        "agree": 763,
+        "total": 867
+      },
+      {
+        "bucket": "2026-04-19",
+        "agree": 804,
+        "total": 863
+      },
+      {
+        "bucket": "2026-04-20",
+        "agree": 766,
+        "total": 876
+      },
+      {
+        "bucket": "2026-04-21",
+        "agree": 761,
+        "total": 848
+      },
+      {
+        "bucket": "2026-04-22",
+        "agree": 739,
+        "total": 816
+      },
+      {
+        "bucket": "2026-04-23",
+        "agree": 729,
+        "total": 788
+      },
+      {
+        "bucket": "2026-04-24",
+        "agree": 706,
+        "total": 814
+      },
+      {
+        "bucket": "2026-04-25",
+        "agree": 782,
+        "total": 885
+      },
+      {
+        "bucket": "2026-04-26",
+        "agree": 843,
+        "total": 937
+      },
+      {
+        "bucket": "2026-04-27",
+        "agree": 809,
+        "total": 873
+      },
+      {
+        "bucket": "2026-04-28",
+        "agree": 754,
+        "total": 820
+      },
+      {
+        "bucket": "2026-04-29",
+        "agree": 800,
+        "total": 895
+      },
+      {
+        "bucket": "2026-04-30",
+        "agree": 817,
+        "total": 949
+      },
+      {
+        "bucket": "2026-05-01",
+        "agree": 813,
+        "total": 933
+      },
+      {
+        "bucket": "2026-05-02",
+        "agree": 810,
+        "total": 929
+      },
+      {
+        "bucket": "2026-05-03",
+        "agree": 712,
+        "total": 792
+      },
+      {
+        "bucket": "2026-05-04",
+        "agree": 831,
+        "total": 944
+      },
+      {
+        "bucket": "2026-05-05",
+        "agree": 787,
+        "total": 867
+      },
+      {
+        "bucket": "2026-05-06",
+        "agree": 744,
+        "total": 825
+      },
+      {
+        "bucket": "2026-05-07",
+        "agree": 702,
+        "total": 784
+      },
+      {
+        "bucket": "2026-05-08",
+        "agree": 811,
+        "total": 915
+      },
+      {
+        "bucket": "2026-05-09",
+        "agree": 709,
+        "total": 821
+      },
+      {
+        "bucket": "2026-05-10",
+        "agree": 808,
+        "total": 904
+      },
+      {
+        "bucket": "2026-05-11",
+        "agree": 865,
+        "total": 942
+      }
+    ],
+    "agreement_nlp_vs_ds__week": [
+      {
+        "bucket": "2026-02-23",
+        "agree": 5236,
+        "total": 5612
+      },
+      {
+        "bucket": "2026-03-02",
+        "agree": 6131,
+        "total": 6626
+      },
+      {
+        "bucket": "2026-03-09",
+        "agree": 5947,
+        "total": 6504
+      },
+      {
+        "bucket": "2026-03-16",
+        "agree": 5817,
+        "total": 6369
+      },
+      {
+        "bucket": "2026-03-23",
+        "agree": 5468,
+        "total": 6210
+      },
+      {
+        "bucket": "2026-03-30",
+        "agree": 5189,
+        "total": 5652
+      },
+      {
+        "bucket": "2026-04-06",
+        "agree": 5374,
+        "total": 6217
+      },
+      {
+        "bucket": "2026-04-13",
+        "agree": 5700,
+        "total": 6272
+      },
+      {
+        "bucket": "2026-04-20",
+        "agree": 5637,
+        "total": 6114
+      },
+      {
+        "bucket": "2026-04-27",
+        "agree": 5840,
+        "total": 6559
+      },
+      {
+        "bucket": "2026-05-04",
+        "agree": 5834,
+        "total": 6483
+      },
+      {
+        "bucket": "2026-05-11",
+        "agree": 5525,
+        "total": 6187
+      }
+    ],
+    "agreement_nlp_vs_ds__month": [
+      {
+        "bucket": "2025-06-01",
+        "agree": 25300,
+        "total": 28251
+      },
+      {
+        "bucket": "2025-07-01",
+        "agree": 25149,
+        "total": 28352
+      },
+      {
+        "bucket": "2025-08-01",
+        "agree": 25094,
+        "total": 26896
+      },
+      {
+        "bucket": "2025-09-01",
+        "agree": 23989,
+        "total": 26954
+      },
+      {
+        "bucket": "2025-10-01",
+        "agree": 21382,
+        "total": 23804
+      },
+      {
+        "bucket": "2025-11-01",
+        "agree": 23640,
+        "total": 25554
+      },
+      {
+        "bucket": "2025-12-01",
+        "agree": 25798,
+        "total": 27478
+      },
+      {
+        "bucket": "2026-01-01",
+        "agree": 22971,
+        "total": 25728
+      },
+      {
+        "bucket": "2026-02-01",
+        "agree": 24225,
+        "total": 26333
+      },
+      {
+        "bucket": "2026-03-01",
+        "agree": 20891,
+        "total": 23815
+      },
+      {
+        "bucket": "2026-04-01",
+        "agree": 21403,
+        "total": 24158
+      },
+      {
+        "bucket": "2026-05-01",
+        "agree": 23398,
+        "total": 24959
+      }
+    ],
+    "claude_trigger_rate__day": [
+      {
+        "bucket": "2026-04-12",
+        "triggered": 141,
+        "total": 819
+      },
+      {
+        "bucket": "2026-04-13",
+        "triggered": 83,
+        "total": 834
+      },
+      {
+        "bucket": "2026-04-14",
+        "triggered": 84,
+        "total": 952
+      },
+      {
+        "bucket": "2026-04-15",
+        "triggered": 74,
+        "total": 802
+      },
+      {
+        "bucket": "2026-04-16",
+        "triggered": 94,
+        "total": 794
+      },
+      {
+        "bucket": "2026-04-17",
+        "triggered": 78,
+        "total": 819
+      },
+      {
+        "bucket": "2026-04-18",
+        "triggered": 117,
+        "total": 785
+      },
+      {
+        "bucket": "2026-04-19",
+        "triggered": 81,
+        "total": 791
+      },
+      {
+        "bucket": "2026-04-20",
+        "triggered": 148,
+        "total": 881
+      },
+      {
+        "bucket": "2026-04-21",
+        "triggered": 135,
+        "total": 897
+      },
+      {
+        "bucket": "2026-04-22",
+        "triggered": 144,
+        "total": 904
+      },
+      {
+        "bucket": "2026-04-23",
+        "triggered": 88,
+        "total": 931
+      },
+      {
+        "bucket": "2026-04-24",
+        "triggered": 112,
+        "total": 792
+      },
+      {
+        "bucket": "2026-04-25",
+        "triggered": 115,
+        "total": 873
+      },
+      {
+        "bucket": "2026-04-26",
+        "triggered": 89,
+        "total": 919
+      },
+      {
+        "bucket": "2026-04-27",
+        "triggered": 110,
+        "total": 905
+      },
+      {
+        "bucket": "2026-04-28",
+        "triggered": 89,
+        "total": 856
+      },
+      {
+        "bucket": "2026-04-29",
+        "triggered": 114,
+        "total": 831
+      },
+      {
+        "bucket": "2026-04-30",
+        "triggered": 150,
+        "total": 879
+      },
+      {
+        "bucket": "2026-05-01",
+        "triggered": 125,
+        "total": 831
+      },
+      {
+        "bucket": "2026-05-02",
+        "triggered": 116,
+        "total": 799
+      },
+      {
+        "bucket": "2026-05-03",
+        "triggered": 134,
+        "total": 810
+      },
+      {
+        "bucket": "2026-05-04",
+        "triggered": 100,
+        "total": 950
+      },
+      {
+        "bucket": "2026-05-05",
+        "triggered": 94,
+        "total": 923
+      },
+      {
+        "bucket": "2026-05-06",
+        "triggered": 75,
+        "total": 836
+      },
+      {
+        "bucket": "2026-05-07",
+        "triggered": 77,
+        "total": 859
+      },
+      {
+        "bucket": "2026-05-08",
+        "triggered": 124,
+        "total": 905
+      },
+      {
+        "bucket": "2026-05-09",
+        "triggered": 129,
+        "total": 856
+      },
+      {
+        "bucket": "2026-05-10",
+        "triggered": 93,
+        "total": 823
+      },
+      {
+        "bucket": "2026-05-11",
+        "triggered": 67,
+        "total": 846
+      }
+    ],
+    "claude_trigger_rate__week": [
+      {
+        "bucket": "2026-02-23",
+        "triggered": 583,
+        "total": 6571
+      },
+      {
+        "bucket": "2026-03-02",
+        "triggered": 896,
+        "total": 5613
+      },
+      {
+        "bucket": "2026-03-09",
+        "triggered": 809,
+        "total": 6488
+      },
+      {
+        "bucket": "2026-03-16",
+        "triggered": 563,
+        "total": 6004
+      },
+      {
+        "bucket": "2026-03-23",
+        "triggered": 725,
+        "total": 5491
+      },
+      {
+        "bucket": "2026-03-30",
+        "triggered": 550,
+        "total": 5787
+      },
+      {
+        "bucket": "2026-04-06",
+        "triggered": 540,
+        "total": 6594
+      },
+      {
+        "bucket": "2026-04-13",
+        "triggered": 920,
+        "total": 5932
+      },
+      {
+        "bucket": "2026-04-20",
+        "triggered": 580,
+        "total": 6401
+      },
+      {
+        "bucket": "2026-04-27",
+        "triggered": 871,
+        "total": 6395
+      },
+      {
+        "bucket": "2026-05-04",
+        "triggered": 1090,
+        "total": 6258
+      },
+      {
+        "bucket": "2026-05-11",
+        "triggered": 904,
+        "total": 6464
+      }
+    ],
+    "claude_trigger_rate__month": [
+      {
+        "bucket": "2025-06-01",
+        "triggered": 3539,
+        "total": 27403
+      },
+      {
+        "bucket": "2025-07-01",
+        "triggered": 4248,
+        "total": 26268
+      },
+      {
+        "bucket": "2025-08-01",
+        "triggered": 3131,
+        "total": 26621
+      },
+      {
+        "bucket": "2025-09-01",
+        "triggered": 3736,
+        "total": 23506
+      },
+      {
+        "bucket": "2025-10-01",
+        "triggered": 3093,
+        "total": 25168
+      },
+      {
+        "bucket": "2025-11-01",
+        "triggered": 3374,
+        "total": 24895
+      },
+      {
+        "bucket": "2025-12-01",
+        "triggered": 4164,
+        "total": 25484
+      },
+      {
+        "bucket": "2026-01-01",
+        "triggered": 3598,
+        "total": 26489
+      },
+      {
+        "bucket": "2026-02-01",
+        "triggered": 3407,
+        "total": 27471
+      },
+      {
+        "bucket": "2026-03-01",
+        "triggered": 4060,
+        "total": 26189
+      },
+      {
+        "bucket": "2026-04-01",
+        "triggered": 4192,
+        "total": 27157
+      },
+      {
+        "bucket": "2026-05-01",
+        "triggered": 3806,
+        "total": 28032
+      }
+    ],
+    "impressions_reactions__day": [
+      {
+        "bucket": "2026-04-12",
+        "impressions": 42607,
+        "reactions": 1945
+      },
+      {
+        "bucket": "2026-04-13",
+        "impressions": 53822,
+        "reactions": 2854
+      },
+      {
+        "bucket": "2026-04-14",
+        "impressions": 59015,
+        "reactions": 3952
+      },
+      {
+        "bucket": "2026-04-15",
+        "impressions": 49819,
+        "reactions": 2515
+      },
+      {
+        "bucket": "2026-04-16",
+        "impressions": 63881,
+        "reactions": 3434
+      },
+      {
+        "bucket": "2026-04-17",
+        "impressions": 66063,
+        "reactions": 2959
+      },
+      {
+        "bucket": "2026-04-18",
+        "impressions": 45691,
+        "reactions": 2418
+      },
+      {
+        "bucket": "2026-04-19",
+        "impressions": 111238,
+        "reactions": 4281
+      },
+      {
+        "bucket": "2026-04-20",
+        "impressions": 57081,
+        "reactions": 3658
+      },
+      {
+        "bucket": "2026-04-21",
+        "impressions": 63780,
+        "reactions": 3630
+      },
+      {
+        "bucket": "2026-04-22",
+        "impressions": 57486,
+        "reactions": 2366
+      },
+      {
+        "bucket": "2026-04-23",
+        "impressions": 63055,
+        "reactions": 3366
+      },
+      {
+        "bucket": "2026-04-24",
+        "impressions": 63557,
+        "reactions": 3709
+      },
+      {
+        "bucket": "2026-04-25",
+        "impressions": 40421,
+        "reactions": 2677
+      },
+      {
+        "bucket": "2026-04-26",
+        "impressions": 36566,
+        "reactions": 2514
+      },
+      {
+        "bucket": "2026-04-27",
+        "impressions": 50694,
+        "reactions": 3501
+      },
+      {
+        "bucket": "2026-04-28",
+        "impressions": 60790,
+        "reactions": 3248
+      },
+      {
+        "bucket": "2026-04-29",
+        "impressions": 67825,
+        "reactions": 3755
+      },
+      {
+        "bucket": "2026-04-30",
+        "impressions": 59209,
+        "reactions": 2474
+      },
+      {
+        "bucket": "2026-05-01",
+        "impressions": 65040,
+        "reactions": 3848
+      },
+      {
+        "bucket": "2026-05-02",
+        "impressions": 38101,
+        "reactions": 1653
+      },
+      {
+        "bucket": "2026-05-03",
+        "impressions": 40678,
+        "reactions": 2768
+      },
+      {
+        "bucket": "2026-05-04",
+        "impressions": 66510,
+        "reactions": 3589
+      },
+      {
+        "bucket": "2026-05-05",
+        "impressions": 49681,
+        "reactions": 3222
+      },
+      {
+        "bucket": "2026-05-06",
+        "impressions": 53035,
+        "reactions": 3284
+      },
+      {
+        "bucket": "2026-05-07",
+        "impressions": 59028,
+        "reactions": 4067
+      },
+      {
+        "bucket": "2026-05-08",
+        "impressions": 51936,
+        "reactions": 3314
+      },
+      {
+        "bucket": "2026-05-09",
+        "impressions": 44965,
+        "reactions": 1821
+      },
+      {
+        "bucket": "2026-05-10",
+        "impressions": 42753,
+        "reactions": 2088
+      },
+      {
+        "bucket": "2026-05-11",
+        "impressions": 62977,
+        "reactions": 4335
+      }
+    ],
+    "impressions_reactions__week": [
+      {
+        "bucket": "2026-02-23",
+        "impressions": 436722,
+        "reactions": 23941
+      },
+      {
+        "bucket": "2026-03-02",
+        "impressions": 427921,
+        "reactions": 20308
+      },
+      {
+        "bucket": "2026-03-09",
+        "impressions": 408713,
+        "reactions": 17776
+      },
+      {
+        "bucket": "2026-03-16",
+        "impressions": 1155471,
+        "reactions": 44767
+      },
+      {
+        "bucket": "2026-03-23",
+        "impressions": 417088,
+        "reactions": 18929
+      },
+      {
+        "bucket": "2026-03-30",
+        "impressions": 422195,
+        "reactions": 17604
+      },
+      {
+        "bucket": "2026-04-06",
+        "impressions": 346594,
+        "reactions": 20361
+      },
+      {
+        "bucket": "2026-04-13",
+        "impressions": 444253,
+        "reactions": 29608
+      },
+      {
+        "bucket": "2026-04-20",
+        "impressions": 438298,
+        "reactions": 30623
+      },
+      {
+        "bucket": "2026-04-27",
+        "impressions": 362857,
+        "reactions": 21359
+      },
+      {
+        "bucket": "2026-05-04",
+        "impressions": 432514,
+        "reactions": 19576
+      },
+      {
+        "bucket": "2026-05-11",
+        "impressions": 362457,
+        "reactions": 17112
+      }
+    ],
+    "impressions_reactions__month": [
+      {
+        "bucket": "2025-06-01",
+        "impressions": 1273378,
+        "reactions": 81006
+      },
+      {
+        "bucket": "2025-07-01",
+        "impressions": 1911993,
+        "reactions": 109281
+      },
+      {
+        "bucket": "2025-08-01",
+        "impressions": 1526202,
+        "reactions": 94098
+      },
+      {
+        "bucket": "2025-09-01",
+        "impressions": 4656730,
+        "reactions": 193809
+      },
+      {
+        "bucket": "2025-10-01",
+        "impressions": 1855511,
+        "reactions": 87894
+      },
+      {
+        "bucket": "2025-11-01",
+        "impressions": 1180842,
+        "reactions": 63220
+      },
+      {
+        "bucket": "2025-12-01",
+        "impressions": 1936519,
+        "reactions": 83667
+      },
+      {
+        "bucket": "2026-01-01",
+        "impressions": 1748439,
+        "reactions": 82270
+      },
+      {
+        "bucket": "2026-02-01",
+        "impressions": 1337078,
+        "reactions": 86206
+      },
+      {
+        "bucket": "2026-03-01",
+        "impressions": 1161562,
+        "reactions": 71543
+      },
+      {
+        "bucket": "2026-04-01",
+        "impressions": 1761570,
+        "reactions": 81964
+      },
+      {
+        "bucket": "2026-05-01",
+        "impressions": 1646853,
+        "reactions": 92452
+      }
+    ],
+    "emotion_distribution__day": [
+      {
+        "label": "joy",
+        "count": 722
+      },
+      {
+        "label": "neutral",
+        "count": 520
+      },
+      {
+        "label": "surprise",
+        "count": 296
+      },
+      {
+        "label": "sadness",
+        "count": 248
+      },
+      {
+        "label": "anger",
+        "count": 175
+      },
+      {
+        "label": "fear",
+        "count": 80
+      },
+      {
+        "label": "disgust",
+        "count": 33
+      }
+    ],
+    "emotion_distribution__week": [
+      {
+        "label": "joy",
+        "count": 1918
+      },
+      {
+        "label": "neutral",
+        "count": 1458
+      },
+      {
+        "label": "surprise",
+        "count": 849
+      },
+      {
+        "label": "sadness",
+        "count": 638
+      },
+      {
+        "label": "anger",
+        "count": 504
+      },
+      {
+        "label": "fear",
+        "count": 223
+      },
+      {
+        "label": "disgust",
+        "count": 91
+      }
+    ],
+    "emotion_distribution__month": [
+      {
+        "label": "joy",
+        "count": 8793
+      },
+      {
+        "label": "neutral",
+        "count": 5909
+      },
+      {
+        "label": "surprise",
+        "count": 3738
+      },
+      {
+        "label": "sadness",
+        "count": 2941
+      },
+      {
+        "label": "anger",
+        "count": 2141
+      },
+      {
+        "label": "fear",
+        "count": 1026
+      },
+      {
+        "label": "disgust",
+        "count": 403
+      }
+    ],
+    "topic_top10__day": [
+      {
+        "label": "lifestyle",
+        "count": 343
+      },
+      {
+        "label": "humor",
+        "count": 321
+      },
+      {
+        "label": "food",
+        "count": 231
+      },
+      {
+        "label": "fashion",
+        "count": 195
+      },
+      {
+        "label": "entertainment",
+        "count": 173
+      },
+      {
+        "label": "travel",
+        "count": 161
+      },
+      {
+        "label": "sports",
+        "count": 140
+      },
+      {
+        "label": "tech",
+        "count": 113
+      },
+      {
+        "label": "health",
+        "count": 93
+      },
+      {
+        "label": "business",
+        "count": 73
+      }
+    ],
+    "topic_top10__week": [
+      {
+        "label": "lifestyle",
+        "count": 986
+      },
+      {
+        "label": "humor",
+        "count": 877
+      },
+      {
+        "label": "food",
+        "count": 671
+      },
+      {
+        "label": "fashion",
+        "count": 552
+      },
+      {
+        "label": "entertainment",
+        "count": 488
+      },
+      {
+        "label": "travel",
+        "count": 460
+      },
+      {
+        "label": "sports",
+        "count": 352
+      },
+      {
+        "label": "tech",
+        "count": 324
+      },
+      {
+        "label": "health",
+        "count": 240
+      },
+      {
+        "label": "business",
+        "count": 209
+      }
+    ],
+    "topic_top10__month": [
+      {
+        "label": "lifestyle",
+        "count": 4192
+      },
+      {
+        "label": "humor",
+        "count": 3604
+      },
+      {
+        "label": "food",
+        "count": 2904
+      },
+      {
+        "label": "fashion",
+        "count": 2277
+      },
+      {
+        "label": "entertainment",
+        "count": 2023
+      },
+      {
+        "label": "travel",
+        "count": 1830
+      },
+      {
+        "label": "sports",
+        "count": 1614
+      },
+      {
+        "label": "tech",
+        "count": 1380
+      },
+      {
+        "label": "health",
+        "count": 1040
+      },
+      {
+        "label": "business",
+        "count": 879
+      }
+    ],
     "sentiment_distribution_today": [
       {
         "label": "positive",
@@ -994,1156 +3124,56 @@
         "count": 18
       }
     ],
-    "sentiment_trend_30d": [
-      {
-        "day": "2026-04-12",
-        "label": "positive",
-        "count": 394
-      },
-      {
-        "day": "2026-04-12",
-        "label": "neutral",
-        "count": 285
-      },
-      {
-        "day": "2026-04-12",
-        "label": "negative",
-        "count": 146
-      },
-      {
-        "day": "2026-04-12",
-        "label": "mixed",
-        "count": 59
-      },
-      {
-        "day": "2026-04-13",
-        "label": "positive",
-        "count": 400
-      },
-      {
-        "day": "2026-04-13",
-        "label": "neutral",
-        "count": 287
-      },
-      {
-        "day": "2026-04-13",
-        "label": "negative",
-        "count": 117
-      },
-      {
-        "day": "2026-04-13",
-        "label": "mixed",
-        "count": 60
-      },
-      {
-        "day": "2026-04-14",
-        "label": "positive",
-        "count": 415
-      },
-      {
-        "day": "2026-04-14",
-        "label": "neutral",
-        "count": 304
-      },
-      {
-        "day": "2026-04-14",
-        "label": "negative",
-        "count": 114
-      },
-      {
-        "day": "2026-04-14",
-        "label": "mixed",
-        "count": 56
-      },
-      {
-        "day": "2026-04-15",
-        "label": "positive",
-        "count": 350
-      },
-      {
-        "day": "2026-04-15",
-        "label": "neutral",
-        "count": 306
-      },
-      {
-        "day": "2026-04-15",
-        "label": "negative",
-        "count": 137
-      },
-      {
-        "day": "2026-04-15",
-        "label": "mixed",
-        "count": 51
-      },
-      {
-        "day": "2026-04-16",
-        "label": "positive",
-        "count": 457
-      },
-      {
-        "day": "2026-04-16",
-        "label": "neutral",
-        "count": 319
-      },
-      {
-        "day": "2026-04-16",
-        "label": "negative",
-        "count": 136
-      },
-      {
-        "day": "2026-04-16",
-        "label": "mixed",
-        "count": 62
-      },
-      {
-        "day": "2026-04-17",
-        "label": "positive",
-        "count": 358
-      },
-      {
-        "day": "2026-04-17",
-        "label": "neutral",
-        "count": 239
-      },
-      {
-        "day": "2026-04-17",
-        "label": "negative",
-        "count": 131
-      },
-      {
-        "day": "2026-04-17",
-        "label": "mixed",
-        "count": 52
-      },
-      {
-        "day": "2026-04-18",
-        "label": "positive",
-        "count": 362
-      },
-      {
-        "day": "2026-04-18",
-        "label": "neutral",
-        "count": 258
-      },
-      {
-        "day": "2026-04-18",
-        "label": "negative",
-        "count": 111
-      },
-      {
-        "day": "2026-04-18",
-        "label": "mixed",
-        "count": 59
-      },
-      {
-        "day": "2026-04-19",
-        "label": "positive",
-        "count": 392
-      },
-      {
-        "day": "2026-04-19",
-        "label": "neutral",
-        "count": 308
-      },
-      {
-        "day": "2026-04-19",
-        "label": "negative",
-        "count": 130
-      },
-      {
-        "day": "2026-04-19",
-        "label": "mixed",
-        "count": 62
-      },
-      {
-        "day": "2026-04-20",
-        "label": "positive",
-        "count": 399
-      },
-      {
-        "day": "2026-04-20",
-        "label": "neutral",
-        "count": 293
-      },
-      {
-        "day": "2026-04-20",
-        "label": "negative",
-        "count": 128
-      },
-      {
-        "day": "2026-04-20",
-        "label": "mixed",
-        "count": 56
-      },
-      {
-        "day": "2026-04-21",
-        "label": "positive",
-        "count": 459
-      },
-      {
-        "day": "2026-04-21",
-        "label": "neutral",
-        "count": 321
-      },
-      {
-        "day": "2026-04-21",
-        "label": "negative",
-        "count": 143
-      },
-      {
-        "day": "2026-04-21",
-        "label": "mixed",
-        "count": 63
-      },
-      {
-        "day": "2026-04-22",
-        "label": "positive",
-        "count": 377
-      },
-      {
-        "day": "2026-04-22",
-        "label": "neutral",
-        "count": 257
-      },
-      {
-        "day": "2026-04-22",
-        "label": "negative",
-        "count": 121
-      },
-      {
-        "day": "2026-04-22",
-        "label": "mixed",
-        "count": 52
-      },
-      {
-        "day": "2026-04-23",
-        "label": "positive",
-        "count": 431
-      },
-      {
-        "day": "2026-04-23",
-        "label": "neutral",
-        "count": 271
-      },
-      {
-        "day": "2026-04-23",
-        "label": "negative",
-        "count": 143
-      },
-      {
-        "day": "2026-04-23",
-        "label": "mixed",
-        "count": 57
-      },
-      {
-        "day": "2026-04-24",
-        "label": "positive",
-        "count": 454
-      },
-      {
-        "day": "2026-04-24",
-        "label": "neutral",
-        "count": 309
-      },
-      {
-        "day": "2026-04-24",
-        "label": "negative",
-        "count": 110
-      },
-      {
-        "day": "2026-04-24",
-        "label": "mixed",
-        "count": 54
-      },
-      {
-        "day": "2026-04-25",
-        "label": "positive",
-        "count": 449
-      },
-      {
-        "day": "2026-04-25",
-        "label": "neutral",
-        "count": 277
-      },
-      {
-        "day": "2026-04-25",
-        "label": "negative",
-        "count": 148
-      },
-      {
-        "day": "2026-04-25",
-        "label": "mixed",
-        "count": 58
-      },
-      {
-        "day": "2026-04-26",
-        "label": "positive",
-        "count": 348
-      },
-      {
-        "day": "2026-04-26",
-        "label": "neutral",
-        "count": 290
-      },
-      {
-        "day": "2026-04-26",
-        "label": "negative",
-        "count": 140
-      },
-      {
-        "day": "2026-04-26",
-        "label": "mixed",
-        "count": 55
-      },
-      {
-        "day": "2026-04-27",
-        "label": "positive",
-        "count": 350
-      },
-      {
-        "day": "2026-04-27",
-        "label": "neutral",
-        "count": 265
-      },
-      {
-        "day": "2026-04-27",
-        "label": "negative",
-        "count": 148
-      },
-      {
-        "day": "2026-04-27",
-        "label": "mixed",
-        "count": 64
-      },
-      {
-        "day": "2026-04-28",
-        "label": "positive",
-        "count": 354
-      },
-      {
-        "day": "2026-04-28",
-        "label": "neutral",
-        "count": 258
-      },
-      {
-        "day": "2026-04-28",
-        "label": "negative",
-        "count": 114
-      },
-      {
-        "day": "2026-04-28",
-        "label": "mixed",
-        "count": 52
-      },
-      {
-        "day": "2026-04-29",
-        "label": "positive",
-        "count": 435
-      },
-      {
-        "day": "2026-04-29",
-        "label": "neutral",
-        "count": 252
-      },
-      {
-        "day": "2026-04-29",
-        "label": "negative",
-        "count": 132
-      },
-      {
-        "day": "2026-04-29",
-        "label": "mixed",
-        "count": 59
-      },
-      {
-        "day": "2026-04-30",
-        "label": "positive",
-        "count": 362
-      },
-      {
-        "day": "2026-04-30",
-        "label": "neutral",
-        "count": 299
-      },
-      {
-        "day": "2026-04-30",
-        "label": "negative",
-        "count": 115
-      },
-      {
-        "day": "2026-04-30",
-        "label": "mixed",
-        "count": 62
-      },
-      {
-        "day": "2026-05-01",
-        "label": "positive",
-        "count": 353
-      },
-      {
-        "day": "2026-05-01",
-        "label": "neutral",
-        "count": 273
-      },
-      {
-        "day": "2026-05-01",
-        "label": "negative",
-        "count": 118
-      },
-      {
-        "day": "2026-05-01",
-        "label": "mixed",
-        "count": 55
-      },
-      {
-        "day": "2026-05-02",
-        "label": "positive",
-        "count": 456
-      },
-      {
-        "day": "2026-05-02",
-        "label": "neutral",
-        "count": 305
-      },
-      {
-        "day": "2026-05-02",
-        "label": "negative",
-        "count": 122
-      },
-      {
-        "day": "2026-05-02",
-        "label": "mixed",
-        "count": 66
-      },
-      {
-        "day": "2026-05-03",
-        "label": "positive",
-        "count": 365
-      },
-      {
-        "day": "2026-05-03",
-        "label": "neutral",
-        "count": 271
-      },
-      {
-        "day": "2026-05-03",
-        "label": "negative",
-        "count": 143
-      },
-      {
-        "day": "2026-05-03",
-        "label": "mixed",
-        "count": 62
-      },
-      {
-        "day": "2026-05-04",
-        "label": "positive",
-        "count": 352
-      },
-      {
-        "day": "2026-05-04",
-        "label": "neutral",
-        "count": 321
-      },
-      {
-        "day": "2026-05-04",
-        "label": "negative",
-        "count": 118
-      },
-      {
-        "day": "2026-05-04",
-        "label": "mixed",
-        "count": 55
-      },
-      {
-        "day": "2026-05-05",
-        "label": "positive",
-        "count": 432
-      },
-      {
-        "day": "2026-05-05",
-        "label": "neutral",
-        "count": 265
-      },
-      {
-        "day": "2026-05-05",
-        "label": "negative",
-        "count": 122
-      },
-      {
-        "day": "2026-05-05",
-        "label": "mixed",
-        "count": 52
-      },
-      {
-        "day": "2026-05-06",
-        "label": "positive",
-        "count": 350
-      },
-      {
-        "day": "2026-05-06",
-        "label": "neutral",
-        "count": 286
-      },
-      {
-        "day": "2026-05-06",
-        "label": "negative",
-        "count": 119
-      },
-      {
-        "day": "2026-05-06",
-        "label": "mixed",
-        "count": 61
-      },
-      {
-        "day": "2026-05-07",
-        "label": "positive",
-        "count": 384
-      },
-      {
-        "day": "2026-05-07",
-        "label": "neutral",
-        "count": 276
-      },
-      {
-        "day": "2026-05-07",
-        "label": "negative",
-        "count": 147
-      },
-      {
-        "day": "2026-05-07",
-        "label": "mixed",
-        "count": 59
-      },
-      {
-        "day": "2026-05-08",
-        "label": "positive",
-        "count": 408
-      },
-      {
-        "day": "2026-05-08",
-        "label": "neutral",
-        "count": 310
-      },
-      {
-        "day": "2026-05-08",
-        "label": "negative",
-        "count": 117
-      },
-      {
-        "day": "2026-05-08",
-        "label": "mixed",
-        "count": 53
-      },
-      {
-        "day": "2026-05-09",
-        "label": "positive",
-        "count": 449
-      },
-      {
-        "day": "2026-05-09",
-        "label": "neutral",
-        "count": 306
-      },
-      {
-        "day": "2026-05-09",
-        "label": "negative",
-        "count": 120
-      },
-      {
-        "day": "2026-05-09",
-        "label": "mixed",
-        "count": 54
-      },
-      {
-        "day": "2026-05-10",
-        "label": "positive",
-        "count": 428
-      },
-      {
-        "day": "2026-05-10",
-        "label": "neutral",
-        "count": 316
-      },
-      {
-        "day": "2026-05-10",
-        "label": "negative",
-        "count": 118
-      },
-      {
-        "day": "2026-05-10",
-        "label": "mixed",
-        "count": 68
-      },
-      {
-        "day": "2026-05-11",
-        "label": "positive",
-        "count": 445
-      },
-      {
-        "day": "2026-05-11",
-        "label": "neutral",
-        "count": 288
-      },
-      {
-        "day": "2026-05-11",
-        "label": "negative",
-        "count": 126
-      },
-      {
-        "day": "2026-05-11",
-        "label": "mixed",
-        "count": 52
-      }
-    ],
-    "emotion_distribution_30d": [
-      {
-        "label": "joy",
-        "count": 8400
-      },
-      {
-        "label": "neutral",
-        "count": 6200
-      },
-      {
-        "label": "surprise",
-        "count": 3800
-      },
-      {
-        "label": "sadness",
-        "count": 2900
-      },
-      {
-        "label": "anger",
-        "count": 2100
-      },
-      {
-        "label": "fear",
-        "count": 980
-      },
-      {
-        "label": "disgust",
-        "count": 420
-      }
-    ],
-    "topic_top10_30d": [
-      {
-        "label": "lifestyle",
-        "count": 4100
-      },
-      {
-        "label": "humor",
-        "count": 3700
-      },
-      {
-        "label": "food",
-        "count": 2800
-      },
-      {
-        "label": "fashion",
-        "count": 2300
-      },
-      {
-        "label": "entertainment",
-        "count": 2100
-      },
-      {
-        "label": "travel",
-        "count": 1900
-      },
-      {
-        "label": "sports",
-        "count": 1600
-      },
-      {
-        "label": "tech",
-        "count": 1400
-      },
-      {
-        "label": "health",
-        "count": 1100
-      },
-      {
-        "label": "business",
-        "count": 900
-      }
-    ],
-    "agreement_nlp_vs_ds_30d": [
-      {
-        "day": "2026-04-12",
-        "agree": 728,
-        "total": 809
-      },
-      {
-        "day": "2026-04-13",
-        "agree": 760,
-        "total": 865
-      },
-      {
-        "day": "2026-04-14",
-        "agree": 873,
-        "total": 980
-      },
-      {
-        "day": "2026-04-15",
-        "agree": 839,
-        "total": 907
-      },
-      {
-        "day": "2026-04-16",
-        "agree": 856,
-        "total": 952
-      },
-      {
-        "day": "2026-04-17",
-        "agree": 815,
-        "total": 933
-      },
-      {
-        "day": "2026-04-18",
-        "agree": 923,
-        "total": 984
-      },
-      {
-        "day": "2026-04-19",
-        "agree": 730,
-        "total": 832
-      },
-      {
-        "day": "2026-04-20",
-        "agree": 860,
-        "total": 943
-      },
-      {
-        "day": "2026-04-21",
-        "agree": 870,
-        "total": 957
-      },
-      {
-        "day": "2026-04-22",
-        "agree": 763,
-        "total": 871
-      },
-      {
-        "day": "2026-04-23",
-        "agree": 783,
-        "total": 852
-      },
-      {
-        "day": "2026-04-24",
-        "agree": 720,
-        "total": 817
-      },
-      {
-        "day": "2026-04-25",
-        "agree": 804,
-        "total": 914
-      },
-      {
-        "day": "2026-04-26",
-        "agree": 708,
-        "total": 811
-      },
-      {
-        "day": "2026-04-27",
-        "agree": 806,
-        "total": 894
-      },
-      {
-        "day": "2026-04-28",
-        "agree": 722,
-        "total": 833
-      },
-      {
-        "day": "2026-04-29",
-        "agree": 777,
-        "total": 835
-      },
-      {
-        "day": "2026-04-30",
-        "agree": 806,
-        "total": 884
-      },
-      {
-        "day": "2026-05-01",
-        "agree": 880,
-        "total": 976
-      },
-      {
-        "day": "2026-05-02",
-        "agree": 757,
-        "total": 835
-      },
-      {
-        "day": "2026-05-03",
-        "agree": 721,
-        "total": 804
-      },
-      {
-        "day": "2026-05-04",
-        "agree": 816,
-        "total": 891
-      },
-      {
-        "day": "2026-05-05",
-        "agree": 696,
-        "total": 808
-      },
-      {
-        "day": "2026-05-06",
-        "agree": 833,
-        "total": 962
-      },
-      {
-        "day": "2026-05-07",
-        "agree": 750,
-        "total": 817
-      },
-      {
-        "day": "2026-05-08",
-        "agree": 767,
-        "total": 881
-      },
-      {
-        "day": "2026-05-09",
-        "agree": 708,
-        "total": 818
-      },
-      {
-        "day": "2026-05-10",
-        "agree": 835,
-        "total": 939
-      },
-      {
-        "day": "2026-05-11",
-        "agree": 755,
-        "total": 811
-      }
-    ],
     "avg_confidence_by_dimension": [
       {
         "dimension": "sentiment",
-        "avg_conf": 0.892
+        "avg_conf": 0.892,
+        "std_conf": 0.058,
+        "min_conf": 0.42,
+        "max_conf": 1.0,
+        "p50": 0.91,
+        "p25": 0.86,
+        "p75": 0.94
       },
       {
         "dimension": "emotion",
-        "avg_conf": 0.834
+        "avg_conf": 0.834,
+        "std_conf": 0.094,
+        "min_conf": 0.35,
+        "max_conf": 0.99,
+        "p50": 0.85,
+        "p25": 0.78,
+        "p75": 0.91
       },
       {
         "dimension": "topic",
-        "avg_conf": 0.761
+        "avg_conf": 0.761,
+        "std_conf": 0.123,
+        "min_conf": 0.3,
+        "max_conf": 0.99,
+        "p50": 0.78,
+        "p25": 0.68,
+        "p75": 0.87
       },
       {
         "dimension": "intent",
-        "avg_conf": 0.812
+        "avg_conf": 0.812,
+        "std_conf": 0.087,
+        "min_conf": 0.38,
+        "max_conf": 0.99,
+        "p50": 0.83,
+        "p25": 0.76,
+        "p75": 0.88
       },
       {
         "dimension": "toxicity",
-        "avg_conf": 0.948
-      }
-    ],
-    "claude_trigger_rate_30d": [
-      {
-        "day": "2026-04-12",
-        "triggered": 151,
-        "total": 988
-      },
-      {
-        "day": "2026-04-13",
-        "triggered": 132,
-        "total": 833
-      },
-      {
-        "day": "2026-04-14",
-        "triggered": 102,
-        "total": 887
-      },
-      {
-        "day": "2026-04-15",
-        "triggered": 124,
-        "total": 975
-      },
-      {
-        "day": "2026-04-16",
-        "triggered": 136,
-        "total": 819
-      },
-      {
-        "day": "2026-04-17",
-        "triggered": 158,
-        "total": 906
-      },
-      {
-        "day": "2026-04-18",
-        "triggered": 134,
-        "total": 807
-      },
-      {
-        "day": "2026-04-19",
-        "triggered": 77,
-        "total": 946
-      },
-      {
-        "day": "2026-04-20",
-        "triggered": 114,
-        "total": 969
-      },
-      {
-        "day": "2026-04-21",
-        "triggered": 77,
-        "total": 949
-      },
-      {
-        "day": "2026-04-22",
-        "triggered": 72,
-        "total": 818
-      },
-      {
-        "day": "2026-04-23",
-        "triggered": 88,
-        "total": 963
-      },
-      {
-        "day": "2026-04-24",
-        "triggered": 145,
-        "total": 865
-      },
-      {
-        "day": "2026-04-25",
-        "triggered": 111,
-        "total": 986
-      },
-      {
-        "day": "2026-04-26",
-        "triggered": 147,
-        "total": 988
-      },
-      {
-        "day": "2026-04-27",
-        "triggered": 113,
-        "total": 917
-      },
-      {
-        "day": "2026-04-28",
-        "triggered": 82,
-        "total": 938
-      },
-      {
-        "day": "2026-04-29",
-        "triggered": 130,
-        "total": 992
-      },
-      {
-        "day": "2026-04-30",
-        "triggered": 123,
-        "total": 879
-      },
-      {
-        "day": "2026-05-01",
-        "triggered": 75,
-        "total": 923
-      },
-      {
-        "day": "2026-05-02",
-        "triggered": 89,
-        "total": 978
-      },
-      {
-        "day": "2026-05-03",
-        "triggered": 141,
-        "total": 999
-      },
-      {
-        "day": "2026-05-04",
-        "triggered": 97,
-        "total": 924
-      },
-      {
-        "day": "2026-05-05",
-        "triggered": 93,
-        "total": 802
-      },
-      {
-        "day": "2026-05-06",
-        "triggered": 123,
-        "total": 836
-      },
-      {
-        "day": "2026-05-07",
-        "triggered": 112,
-        "total": 851
-      },
-      {
-        "day": "2026-05-08",
-        "triggered": 169,
-        "total": 992
-      },
-      {
-        "day": "2026-05-09",
-        "triggered": 167,
-        "total": 968
-      },
-      {
-        "day": "2026-05-10",
-        "triggered": 156,
-        "total": 927
-      },
-      {
-        "day": "2026-05-11",
-        "triggered": 106,
-        "total": 883
-      }
-    ],
-    "impressions_reactions_30d": [
-      {
-        "day": "2026-04-12",
-        "impressions": 36008,
-        "reactions": 2125
-      },
-      {
-        "day": "2026-04-13",
-        "impressions": 65162,
-        "reactions": 4081
-      },
-      {
-        "day": "2026-04-14",
-        "impressions": 52997,
-        "reactions": 2460
-      },
-      {
-        "day": "2026-04-15",
-        "impressions": 53386,
-        "reactions": 3610
-      },
-      {
-        "day": "2026-04-16",
-        "impressions": 53191,
-        "reactions": 2342
-      },
-      {
-        "day": "2026-04-17",
-        "impressions": 56031,
-        "reactions": 3746
-      },
-      {
-        "day": "2026-04-18",
-        "impressions": 33185,
-        "reactions": 1391
-      },
-      {
-        "day": "2026-04-19",
-        "impressions": 45816,
-        "reactions": 2962
-      },
-      {
-        "day": "2026-04-20",
-        "impressions": 51234,
-        "reactions": 2773
-      },
-      {
-        "day": "2026-04-21",
-        "impressions": 67622,
-        "reactions": 4390
-      },
-      {
-        "day": "2026-04-22",
-        "impressions": 56672,
-        "reactions": 3150
-      },
-      {
-        "day": "2026-04-23",
-        "impressions": 62510,
-        "reactions": 3843
-      },
-      {
-        "day": "2026-04-24",
-        "impressions": 65932,
-        "reactions": 3873
-      },
-      {
-        "day": "2026-04-25",
-        "impressions": 36945,
-        "reactions": 2396
-      },
-      {
-        "day": "2026-04-26",
-        "impressions": 36377,
-        "reactions": 2118
-      },
-      {
-        "day": "2026-04-27",
-        "impressions": 62633,
-        "reactions": 3033
-      },
-      {
-        "day": "2026-04-28",
-        "impressions": 56100,
-        "reactions": 3336
-      },
-      {
-        "day": "2026-04-29",
-        "impressions": 60331,
-        "reactions": 3573
-      },
-      {
-        "day": "2026-04-30",
-        "impressions": 57128,
-        "reactions": 2610
-      },
-      {
-        "day": "2026-05-01",
-        "impressions": 64467,
-        "reactions": 3093
-      },
-      {
-        "day": "2026-05-02",
-        "impressions": 43113,
-        "reactions": 2755
-      },
-      {
-        "day": "2026-05-03",
-        "impressions": 45865,
-        "reactions": 1993
-      },
-      {
-        "day": "2026-05-04",
-        "impressions": 142000,
-        "reactions": 12400
-      },
-      {
-        "day": "2026-05-05",
-        "impressions": 61860,
-        "reactions": 3158
-      },
-      {
-        "day": "2026-05-06",
-        "impressions": 50531,
-        "reactions": 2321
-      },
-      {
-        "day": "2026-05-07",
-        "impressions": 65568,
-        "reactions": 3126
-      },
-      {
-        "day": "2026-05-08",
-        "impressions": 63358,
-        "reactions": 3969
-      },
-      {
-        "day": "2026-05-09",
-        "impressions": 39828,
-        "reactions": 1636
-      },
-      {
-        "day": "2026-05-10",
-        "impressions": 35683,
-        "reactions": 2260
-      },
-      {
-        "day": "2026-05-11",
-        "impressions": 59840,
-        "reactions": 4093
+        "avg_conf": 0.948,
+        "std_conf": 0.041,
+        "min_conf": 0.62,
+        "max_conf": 1.0,
+        "p50": 0.96,
+        "p25": 0.93,
+        "p75": 0.98
       }
     ],
     "reaction_mix_today": [
@@ -2174,64 +3204,64 @@
     ],
     "top_posts_week": [
       {
-        "page_name": "Kelpie Daily",
+        "page_name": "Bantersity",
         "message_snippet": "Tagging your friend who definitely owes you a pint after Saturday",
-        "impressions": 120014,
-        "reactions": 10782
-      },
-      {
-        "page_name": "Kelpie Daily",
-        "message_snippet": "Things that just hit different on a Tuesday evening",
-        "impressions": 110358,
-        "reactions": 8784
-      },
-      {
-        "page_name": "UK Jail News",
-        "message_snippet": "Anyone else convinced their kelpie has a secret second job?",
-        "impressions": 101422,
-        "reactions": 8671
-      },
-      {
-        "page_name": "Kelpie Daily",
-        "message_snippet": "POV: you remembered you said you would do it tomorrow yesterday",
-        "impressions": 99427,
-        "reactions": 6216
-      },
-      {
-        "page_name": "UK Jail News",
-        "message_snippet": "BREAKING: Lad still claiming he'll fix the gate \"next weekend\"",
-        "impressions": 96064,
-        "reactions": 8378
-      },
-      {
-        "page_name": "Bantersity",
-        "message_snippet": "When the meme matches the energy of the group chat exactly",
-        "impressions": 94888,
-        "reactions": 8220
-      },
-      {
-        "page_name": "Prison Biscuit",
-        "message_snippet": "Friday plans hierarchy: pub > dinner > existential crisis",
-        "impressions": 94246,
-        "reactions": 6845
-      },
-      {
-        "page_name": "Kelpie Daily",
-        "message_snippet": "Update: the cat won the staring contest. Again.",
-        "impressions": 85255,
-        "reactions": 3936
-      },
-      {
-        "page_name": "Bantersity",
-        "message_snippet": "Confession time \u2014 who actually folds their laundry the same day?",
-        "impressions": 84910,
-        "reactions": 6870
+        "impressions": 137085,
+        "reactions": 8721
       },
       {
         "page_name": "Drinking Memes",
+        "message_snippet": "When the meme matches the energy of the group chat exactly",
+        "impressions": 111943,
+        "reactions": 5653
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "message_snippet": "POV: you remembered you said you would do it tomorrow yesterday",
+        "impressions": 106036,
+        "reactions": 7897
+      },
+      {
+        "page_name": "UK Jail News",
+        "message_snippet": "Things that just hit different on a Tuesday evening",
+        "impressions": 98518,
+        "reactions": 6503
+      },
+      {
+        "page_name": "Drinking Memes",
+        "message_snippet": "Friday plans hierarchy: pub > dinner > existential crisis",
+        "impressions": 97002,
+        "reactions": 6436
+      },
+      {
+        "page_name": "Bantersity",
+        "message_snippet": "BREAKING: Lad still claiming he'll fix the gate \"next weekend\"",
+        "impressions": 96080,
+        "reactions": 7410
+      },
+      {
+        "page_name": "UK Jail News",
         "message_snippet": "Three-step recipe to ruin a Sunday before noon",
-        "impressions": 79437,
-        "reactions": 7079
+        "impressions": 91525,
+        "reactions": 3665
+      },
+      {
+        "page_name": "Drinking Memes",
+        "message_snippet": "Anyone else convinced their kelpie has a secret second job?",
+        "impressions": 83392,
+        "reactions": 7280
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "message_snippet": "Update: the cat won the staring contest. Again.",
+        "impressions": 72676,
+        "reactions": 3512
+      },
+      {
+        "page_name": "Drinking Memes",
+        "message_snippet": "Confession time \u2014 who actually folds their laundry the same day?",
+        "impressions": 70858,
+        "reactions": 6238
       }
     ],
     "sentiment_vs_impressions_today": [
@@ -2254,6 +3284,4629 @@
         "sentiment": "negative",
         "avg_impressions": 1980,
         "n": 612
+      }
+    ],
+    "topic_sentiment_crosstab": [
+      {
+        "topic": "lifestyle",
+        "sentiment": "positive",
+        "count": 2460
+      },
+      {
+        "topic": "lifestyle",
+        "sentiment": "neutral",
+        "count": 1025
+      },
+      {
+        "topic": "lifestyle",
+        "sentiment": "negative",
+        "count": 328
+      },
+      {
+        "topic": "lifestyle",
+        "sentiment": "mixed",
+        "count": 287
+      },
+      {
+        "topic": "humor",
+        "sentiment": "positive",
+        "count": 2590
+      },
+      {
+        "topic": "humor",
+        "sentiment": "neutral",
+        "count": 666
+      },
+      {
+        "topic": "humor",
+        "sentiment": "negative",
+        "count": 185
+      },
+      {
+        "topic": "humor",
+        "sentiment": "mixed",
+        "count": 259
+      },
+      {
+        "topic": "food",
+        "sentiment": "positive",
+        "count": 1820
+      },
+      {
+        "topic": "food",
+        "sentiment": "neutral",
+        "count": 700
+      },
+      {
+        "topic": "food",
+        "sentiment": "negative",
+        "count": 140
+      },
+      {
+        "topic": "food",
+        "sentiment": "mixed",
+        "count": 140
+      },
+      {
+        "topic": "fashion",
+        "sentiment": "positive",
+        "count": 1265
+      },
+      {
+        "topic": "fashion",
+        "sentiment": "neutral",
+        "count": 690
+      },
+      {
+        "topic": "fashion",
+        "sentiment": "negative",
+        "count": 161
+      },
+      {
+        "topic": "fashion",
+        "sentiment": "mixed",
+        "count": 184
+      },
+      {
+        "topic": "entertainment",
+        "sentiment": "positive",
+        "count": 1050
+      },
+      {
+        "topic": "entertainment",
+        "sentiment": "neutral",
+        "count": 588
+      },
+      {
+        "topic": "entertainment",
+        "sentiment": "negative",
+        "count": 273
+      },
+      {
+        "topic": "entertainment",
+        "sentiment": "mixed",
+        "count": 189
+      },
+      {
+        "topic": "travel",
+        "sentiment": "positive",
+        "count": 1292
+      },
+      {
+        "topic": "travel",
+        "sentiment": "neutral",
+        "count": 418
+      },
+      {
+        "topic": "travel",
+        "sentiment": "negative",
+        "count": 76
+      },
+      {
+        "topic": "travel",
+        "sentiment": "mixed",
+        "count": 114
+      },
+      {
+        "topic": "sports",
+        "sentiment": "positive",
+        "count": 720
+      },
+      {
+        "topic": "sports",
+        "sentiment": "neutral",
+        "count": 400
+      },
+      {
+        "topic": "sports",
+        "sentiment": "negative",
+        "count": 352
+      },
+      {
+        "topic": "sports",
+        "sentiment": "mixed",
+        "count": 128
+      },
+      {
+        "topic": "tech",
+        "sentiment": "positive",
+        "count": 588
+      },
+      {
+        "topic": "tech",
+        "sentiment": "neutral",
+        "count": 560
+      },
+      {
+        "topic": "tech",
+        "sentiment": "negative",
+        "count": 168
+      },
+      {
+        "topic": "tech",
+        "sentiment": "mixed",
+        "count": 84
+      },
+      {
+        "topic": "health",
+        "sentiment": "positive",
+        "count": 418
+      },
+      {
+        "topic": "health",
+        "sentiment": "neutral",
+        "count": 352
+      },
+      {
+        "topic": "health",
+        "sentiment": "negative",
+        "count": 242
+      },
+      {
+        "topic": "health",
+        "sentiment": "mixed",
+        "count": 88
+      },
+      {
+        "topic": "business",
+        "sentiment": "positive",
+        "count": 270
+      },
+      {
+        "topic": "business",
+        "sentiment": "neutral",
+        "count": 342
+      },
+      {
+        "topic": "business",
+        "sentiment": "negative",
+        "count": 198
+      },
+      {
+        "topic": "business",
+        "sentiment": "mixed",
+        "count": 90
+      }
+    ],
+    "pipeline_funnel": [
+      {
+        "stage": "Posts inserted",
+        "count": 26100,
+        "sort_order": 1
+      },
+      {
+        "stage": "DeepSeek labelled",
+        "count": 25840,
+        "sort_order": 2
+      },
+      {
+        "stage": "NLP labelled",
+        "count": 24310,
+        "sort_order": 3
+      },
+      {
+        "stage": "High confidence (>0.80)",
+        "count": 20180,
+        "sort_order": 4
+      },
+      {
+        "stage": "Claude escalated",
+        "count": 3140,
+        "sort_order": 5
+      }
+    ],
+    "page_week_sentiment": [
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-03-23",
+        "sentiment": "positive",
+        "count": 72
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-03-23",
+        "sentiment": "neutral",
+        "count": 21
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-03-23",
+        "sentiment": "negative",
+        "count": 8
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-03-23",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-03-30",
+        "sentiment": "positive",
+        "count": 65
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-03-30",
+        "sentiment": "neutral",
+        "count": 17
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-03-30",
+        "sentiment": "negative",
+        "count": 8
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-03-30",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-06",
+        "sentiment": "positive",
+        "count": 53
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-06",
+        "sentiment": "neutral",
+        "count": 17
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-06",
+        "sentiment": "negative",
+        "count": 9
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-06",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-13",
+        "sentiment": "positive",
+        "count": 73
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-13",
+        "sentiment": "neutral",
+        "count": 22
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-13",
+        "sentiment": "negative",
+        "count": 10
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-13",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-20",
+        "sentiment": "positive",
+        "count": 71
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-20",
+        "sentiment": "neutral",
+        "count": 17
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-20",
+        "sentiment": "negative",
+        "count": 11
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-20",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-27",
+        "sentiment": "positive",
+        "count": 53
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-27",
+        "sentiment": "neutral",
+        "count": 21
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-27",
+        "sentiment": "negative",
+        "count": 8
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-04-27",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-05-04",
+        "sentiment": "positive",
+        "count": 74
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-05-04",
+        "sentiment": "neutral",
+        "count": 19
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-05-04",
+        "sentiment": "negative",
+        "count": 9
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-05-04",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-05-11",
+        "sentiment": "positive",
+        "count": 53
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-05-11",
+        "sentiment": "neutral",
+        "count": 19
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-05-11",
+        "sentiment": "negative",
+        "count": 10
+      },
+      {
+        "page_name": "Drinking Memes",
+        "week": "2026-05-11",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-03-23",
+        "sentiment": "positive",
+        "count": 55
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-03-23",
+        "sentiment": "neutral",
+        "count": 23
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-03-23",
+        "sentiment": "negative",
+        "count": 8
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-03-23",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-03-30",
+        "sentiment": "positive",
+        "count": 60
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-03-30",
+        "sentiment": "neutral",
+        "count": 17
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-03-30",
+        "sentiment": "negative",
+        "count": 8
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-03-30",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-06",
+        "sentiment": "positive",
+        "count": 62
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-06",
+        "sentiment": "neutral",
+        "count": 17
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-06",
+        "sentiment": "negative",
+        "count": 10
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-06",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-13",
+        "sentiment": "positive",
+        "count": 69
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-13",
+        "sentiment": "neutral",
+        "count": 23
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-13",
+        "sentiment": "negative",
+        "count": 9
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-13",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-20",
+        "sentiment": "positive",
+        "count": 62
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-20",
+        "sentiment": "neutral",
+        "count": 18
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-20",
+        "sentiment": "negative",
+        "count": 9
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-20",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-27",
+        "sentiment": "positive",
+        "count": 59
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-27",
+        "sentiment": "neutral",
+        "count": 21
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-27",
+        "sentiment": "negative",
+        "count": 9
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-04-27",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-05-04",
+        "sentiment": "positive",
+        "count": 55
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-05-04",
+        "sentiment": "neutral",
+        "count": 22
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-05-04",
+        "sentiment": "negative",
+        "count": 9
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-05-04",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-05-11",
+        "sentiment": "positive",
+        "count": 68
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-05-11",
+        "sentiment": "neutral",
+        "count": 21
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-05-11",
+        "sentiment": "negative",
+        "count": 9
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "week": "2026-05-11",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-03-23",
+        "sentiment": "positive",
+        "count": 28
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-03-23",
+        "sentiment": "neutral",
+        "count": 25
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-03-23",
+        "sentiment": "negative",
+        "count": 29
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-03-23",
+        "sentiment": "mixed",
+        "count": 16
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-03-30",
+        "sentiment": "positive",
+        "count": 26
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-03-30",
+        "sentiment": "neutral",
+        "count": 29
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-03-30",
+        "sentiment": "negative",
+        "count": 29
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-03-30",
+        "sentiment": "mixed",
+        "count": 22
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-06",
+        "sentiment": "positive",
+        "count": 34
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-06",
+        "sentiment": "neutral",
+        "count": 21
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-06",
+        "sentiment": "negative",
+        "count": 27
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-06",
+        "sentiment": "mixed",
+        "count": 16
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-13",
+        "sentiment": "positive",
+        "count": 34
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-13",
+        "sentiment": "neutral",
+        "count": 23
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-13",
+        "sentiment": "negative",
+        "count": 24
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-13",
+        "sentiment": "mixed",
+        "count": 20
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-20",
+        "sentiment": "positive",
+        "count": 26
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-20",
+        "sentiment": "neutral",
+        "count": 25
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-20",
+        "sentiment": "negative",
+        "count": 28
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-20",
+        "sentiment": "mixed",
+        "count": 19
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-27",
+        "sentiment": "positive",
+        "count": 29
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-27",
+        "sentiment": "neutral",
+        "count": 23
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-27",
+        "sentiment": "negative",
+        "count": 21
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-04-27",
+        "sentiment": "mixed",
+        "count": 18
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-05-04",
+        "sentiment": "positive",
+        "count": 34
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-05-04",
+        "sentiment": "neutral",
+        "count": 29
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-05-04",
+        "sentiment": "negative",
+        "count": 23
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-05-04",
+        "sentiment": "mixed",
+        "count": 18
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-05-11",
+        "sentiment": "positive",
+        "count": 28
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-05-11",
+        "sentiment": "neutral",
+        "count": 28
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-05-11",
+        "sentiment": "negative",
+        "count": 22
+      },
+      {
+        "page_name": "Fri Night Chaos",
+        "week": "2026-05-11",
+        "sentiment": "mixed",
+        "count": 17
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-03-23",
+        "sentiment": "positive",
+        "count": 18
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-03-23",
+        "sentiment": "neutral",
+        "count": 20
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-03-23",
+        "sentiment": "negative",
+        "count": 38
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-03-23",
+        "sentiment": "mixed",
+        "count": 8
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-03-30",
+        "sentiment": "positive",
+        "count": 21
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-03-30",
+        "sentiment": "neutral",
+        "count": 29
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-03-30",
+        "sentiment": "negative",
+        "count": 40
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-03-30",
+        "sentiment": "mixed",
+        "count": 9
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-06",
+        "sentiment": "positive",
+        "count": 20
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-06",
+        "sentiment": "neutral",
+        "count": 20
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-06",
+        "sentiment": "negative",
+        "count": 37
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-06",
+        "sentiment": "mixed",
+        "count": 10
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-13",
+        "sentiment": "positive",
+        "count": 19
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-13",
+        "sentiment": "neutral",
+        "count": 23
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-13",
+        "sentiment": "negative",
+        "count": 43
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-13",
+        "sentiment": "mixed",
+        "count": 8
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-20",
+        "sentiment": "positive",
+        "count": 18
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-20",
+        "sentiment": "neutral",
+        "count": 21
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-20",
+        "sentiment": "negative",
+        "count": 40
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-20",
+        "sentiment": "mixed",
+        "count": 8
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-27",
+        "sentiment": "positive",
+        "count": 22
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-27",
+        "sentiment": "neutral",
+        "count": 20
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-27",
+        "sentiment": "negative",
+        "count": 43
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-04-27",
+        "sentiment": "mixed",
+        "count": 8
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-05-04",
+        "sentiment": "positive",
+        "count": 17
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-05-04",
+        "sentiment": "neutral",
+        "count": 27
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-05-04",
+        "sentiment": "negative",
+        "count": 53
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-05-04",
+        "sentiment": "mixed",
+        "count": 11
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-05-11",
+        "sentiment": "positive",
+        "count": 18
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-05-11",
+        "sentiment": "neutral",
+        "count": 25
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-05-11",
+        "sentiment": "negative",
+        "count": 43
+      },
+      {
+        "page_name": "UK Jail News",
+        "week": "2026-05-11",
+        "sentiment": "mixed",
+        "count": 8
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-03-23",
+        "sentiment": "positive",
+        "count": 19
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-03-23",
+        "sentiment": "neutral",
+        "count": 26
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-03-23",
+        "sentiment": "negative",
+        "count": 43
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-03-23",
+        "sentiment": "mixed",
+        "count": 11
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-03-30",
+        "sentiment": "positive",
+        "count": 19
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-03-30",
+        "sentiment": "neutral",
+        "count": 22
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-03-30",
+        "sentiment": "negative",
+        "count": 52
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-03-30",
+        "sentiment": "mixed",
+        "count": 10
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-06",
+        "sentiment": "positive",
+        "count": 18
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-06",
+        "sentiment": "neutral",
+        "count": 29
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-06",
+        "sentiment": "negative",
+        "count": 44
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-06",
+        "sentiment": "mixed",
+        "count": 10
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-13",
+        "sentiment": "positive",
+        "count": 19
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-13",
+        "sentiment": "neutral",
+        "count": 28
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-13",
+        "sentiment": "negative",
+        "count": 49
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-13",
+        "sentiment": "mixed",
+        "count": 9
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-20",
+        "sentiment": "positive",
+        "count": 18
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-20",
+        "sentiment": "neutral",
+        "count": 27
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-20",
+        "sentiment": "negative",
+        "count": 51
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-20",
+        "sentiment": "mixed",
+        "count": 10
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-27",
+        "sentiment": "positive",
+        "count": 22
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-27",
+        "sentiment": "neutral",
+        "count": 25
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-27",
+        "sentiment": "negative",
+        "count": 43
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-04-27",
+        "sentiment": "mixed",
+        "count": 9
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-05-04",
+        "sentiment": "positive",
+        "count": 18
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-05-04",
+        "sentiment": "neutral",
+        "count": 21
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-05-04",
+        "sentiment": "negative",
+        "count": 52
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-05-04",
+        "sentiment": "mixed",
+        "count": 10
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-05-11",
+        "sentiment": "positive",
+        "count": 16
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-05-11",
+        "sentiment": "neutral",
+        "count": 22
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-05-11",
+        "sentiment": "negative",
+        "count": 43
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "week": "2026-05-11",
+        "sentiment": "mixed",
+        "count": 11
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-03-23",
+        "sentiment": "positive",
+        "count": 74
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-03-23",
+        "sentiment": "neutral",
+        "count": 22
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-03-23",
+        "sentiment": "negative",
+        "count": 9
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-03-23",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-03-30",
+        "sentiment": "positive",
+        "count": 76
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-03-30",
+        "sentiment": "neutral",
+        "count": 19
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-03-30",
+        "sentiment": "negative",
+        "count": 10
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-03-30",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-06",
+        "sentiment": "positive",
+        "count": 64
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-06",
+        "sentiment": "neutral",
+        "count": 20
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-06",
+        "sentiment": "negative",
+        "count": 11
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-06",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-13",
+        "sentiment": "positive",
+        "count": 71
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-13",
+        "sentiment": "neutral",
+        "count": 18
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-13",
+        "sentiment": "negative",
+        "count": 11
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-13",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-20",
+        "sentiment": "positive",
+        "count": 53
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-20",
+        "sentiment": "neutral",
+        "count": 19
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-20",
+        "sentiment": "negative",
+        "count": 10
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-20",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-27",
+        "sentiment": "positive",
+        "count": 58
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-27",
+        "sentiment": "neutral",
+        "count": 22
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-27",
+        "sentiment": "negative",
+        "count": 8
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-04-27",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-05-04",
+        "sentiment": "positive",
+        "count": 52
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-05-04",
+        "sentiment": "neutral",
+        "count": 19
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-05-04",
+        "sentiment": "negative",
+        "count": 11
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-05-04",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-05-11",
+        "sentiment": "positive",
+        "count": 54
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-05-11",
+        "sentiment": "neutral",
+        "count": 23
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-05-11",
+        "sentiment": "negative",
+        "count": 11
+      },
+      {
+        "page_name": "Bantersity",
+        "week": "2026-05-11",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-03-23",
+        "sentiment": "positive",
+        "count": 27
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-03-23",
+        "sentiment": "neutral",
+        "count": 22
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-03-23",
+        "sentiment": "negative",
+        "count": 27
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-03-23",
+        "sentiment": "mixed",
+        "count": 20
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-03-30",
+        "sentiment": "positive",
+        "count": 29
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-03-30",
+        "sentiment": "neutral",
+        "count": 26
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-03-30",
+        "sentiment": "negative",
+        "count": 20
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-03-30",
+        "sentiment": "mixed",
+        "count": 19
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-06",
+        "sentiment": "positive",
+        "count": 34
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-06",
+        "sentiment": "neutral",
+        "count": 29
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-06",
+        "sentiment": "negative",
+        "count": 24
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-06",
+        "sentiment": "mixed",
+        "count": 22
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-13",
+        "sentiment": "positive",
+        "count": 34
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-13",
+        "sentiment": "neutral",
+        "count": 25
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-13",
+        "sentiment": "negative",
+        "count": 21
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-13",
+        "sentiment": "mixed",
+        "count": 16
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-20",
+        "sentiment": "positive",
+        "count": 32
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-20",
+        "sentiment": "neutral",
+        "count": 23
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-20",
+        "sentiment": "negative",
+        "count": 25
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-20",
+        "sentiment": "mixed",
+        "count": 16
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-27",
+        "sentiment": "positive",
+        "count": 35
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-27",
+        "sentiment": "neutral",
+        "count": 22
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-27",
+        "sentiment": "negative",
+        "count": 26
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-04-27",
+        "sentiment": "mixed",
+        "count": 20
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-05-04",
+        "sentiment": "positive",
+        "count": 28
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-05-04",
+        "sentiment": "neutral",
+        "count": 22
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-05-04",
+        "sentiment": "negative",
+        "count": 25
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-05-04",
+        "sentiment": "mixed",
+        "count": 18
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-05-11",
+        "sentiment": "positive",
+        "count": 24
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-05-11",
+        "sentiment": "neutral",
+        "count": 21
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-05-11",
+        "sentiment": "negative",
+        "count": 20
+      },
+      {
+        "page_name": "Memetic Studies UK",
+        "week": "2026-05-11",
+        "sentiment": "mixed",
+        "count": 23
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-03-23",
+        "sentiment": "positive",
+        "count": 57
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-03-23",
+        "sentiment": "neutral",
+        "count": 23
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-03-23",
+        "sentiment": "negative",
+        "count": 10
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-03-23",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-03-30",
+        "sentiment": "positive",
+        "count": 64
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-03-30",
+        "sentiment": "neutral",
+        "count": 18
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-03-30",
+        "sentiment": "negative",
+        "count": 8
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-03-30",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-06",
+        "sentiment": "positive",
+        "count": 70
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-06",
+        "sentiment": "neutral",
+        "count": 21
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-06",
+        "sentiment": "negative",
+        "count": 11
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-06",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-13",
+        "sentiment": "positive",
+        "count": 68
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-13",
+        "sentiment": "neutral",
+        "count": 21
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-13",
+        "sentiment": "negative",
+        "count": 11
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-13",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-20",
+        "sentiment": "positive",
+        "count": 76
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-20",
+        "sentiment": "neutral",
+        "count": 16
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-20",
+        "sentiment": "negative",
+        "count": 10
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-20",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-27",
+        "sentiment": "positive",
+        "count": 65
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-27",
+        "sentiment": "neutral",
+        "count": 17
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-27",
+        "sentiment": "negative",
+        "count": 9
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-04-27",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-05-04",
+        "sentiment": "positive",
+        "count": 64
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-05-04",
+        "sentiment": "neutral",
+        "count": 19
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-05-04",
+        "sentiment": "negative",
+        "count": 8
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-05-04",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-05-11",
+        "sentiment": "positive",
+        "count": 64
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-05-11",
+        "sentiment": "neutral",
+        "count": 23
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-05-11",
+        "sentiment": "negative",
+        "count": 11
+      },
+      {
+        "page_name": "Northern Banter",
+        "week": "2026-05-11",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-03-23",
+        "sentiment": "positive",
+        "count": 31
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-03-23",
+        "sentiment": "neutral",
+        "count": 42
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-03-23",
+        "sentiment": "negative",
+        "count": 13
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-03-23",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-03-30",
+        "sentiment": "positive",
+        "count": 28
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-03-30",
+        "sentiment": "neutral",
+        "count": 42
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-03-30",
+        "sentiment": "negative",
+        "count": 15
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-03-30",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-06",
+        "sentiment": "positive",
+        "count": 30
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-06",
+        "sentiment": "neutral",
+        "count": 58
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-06",
+        "sentiment": "negative",
+        "count": 15
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-06",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-13",
+        "sentiment": "positive",
+        "count": 26
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-13",
+        "sentiment": "neutral",
+        "count": 51
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-13",
+        "sentiment": "negative",
+        "count": 16
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-13",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-20",
+        "sentiment": "positive",
+        "count": 28
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-20",
+        "sentiment": "neutral",
+        "count": 45
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-20",
+        "sentiment": "negative",
+        "count": 17
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-20",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-27",
+        "sentiment": "positive",
+        "count": 31
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-27",
+        "sentiment": "neutral",
+        "count": 54
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-27",
+        "sentiment": "negative",
+        "count": 13
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-04-27",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-05-04",
+        "sentiment": "positive",
+        "count": 24
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-05-04",
+        "sentiment": "neutral",
+        "count": 52
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-05-04",
+        "sentiment": "negative",
+        "count": 17
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-05-04",
+        "sentiment": "mixed",
+        "count": 5
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-05-11",
+        "sentiment": "positive",
+        "count": 32
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-05-11",
+        "sentiment": "neutral",
+        "count": 57
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-05-11",
+        "sentiment": "negative",
+        "count": 14
+      },
+      {
+        "page_name": "Tomato Times",
+        "week": "2026-05-11",
+        "sentiment": "mixed",
+        "count": 4
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-03-23",
+        "sentiment": "positive",
+        "count": 18
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-03-23",
+        "sentiment": "neutral",
+        "count": 28
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-03-23",
+        "sentiment": "negative",
+        "count": 48
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-03-23",
+        "sentiment": "mixed",
+        "count": 10
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-03-30",
+        "sentiment": "positive",
+        "count": 22
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-03-30",
+        "sentiment": "neutral",
+        "count": 29
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-03-30",
+        "sentiment": "negative",
+        "count": 36
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-03-30",
+        "sentiment": "mixed",
+        "count": 8
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-06",
+        "sentiment": "positive",
+        "count": 19
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-06",
+        "sentiment": "neutral",
+        "count": 27
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-06",
+        "sentiment": "negative",
+        "count": 40
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-06",
+        "sentiment": "mixed",
+        "count": 9
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-13",
+        "sentiment": "positive",
+        "count": 21
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-13",
+        "sentiment": "neutral",
+        "count": 22
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-13",
+        "sentiment": "negative",
+        "count": 48
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-13",
+        "sentiment": "mixed",
+        "count": 8
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-20",
+        "sentiment": "positive",
+        "count": 19
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-20",
+        "sentiment": "neutral",
+        "count": 26
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-20",
+        "sentiment": "negative",
+        "count": 51
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-20",
+        "sentiment": "mixed",
+        "count": 10
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-27",
+        "sentiment": "positive",
+        "count": 21
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-27",
+        "sentiment": "neutral",
+        "count": 26
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-27",
+        "sentiment": "negative",
+        "count": 47
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-04-27",
+        "sentiment": "mixed",
+        "count": 9
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-05-04",
+        "sentiment": "positive",
+        "count": 18
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-05-04",
+        "sentiment": "neutral",
+        "count": 21
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-05-04",
+        "sentiment": "negative",
+        "count": 51
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-05-04",
+        "sentiment": "mixed",
+        "count": 11
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-05-11",
+        "sentiment": "positive",
+        "count": 21
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-05-11",
+        "sentiment": "neutral",
+        "count": 27
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-05-11",
+        "sentiment": "negative",
+        "count": 41
+      },
+      {
+        "page_name": "The Daily Roast",
+        "week": "2026-05-11",
+        "sentiment": "mixed",
+        "count": 8
+      }
+    ],
+    "posting_time_heatmap": [
+      {
+        "day_of_week": 0,
+        "hour_of_day": 0,
+        "avg_impressions": 720,
+        "n": 37
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 1,
+        "avg_impressions": 794,
+        "n": 10
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 2,
+        "avg_impressions": 793,
+        "n": 33
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 3,
+        "avg_impressions": 778,
+        "n": 33
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 4,
+        "avg_impressions": 728,
+        "n": 39
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 5,
+        "avg_impressions": 616,
+        "n": 14
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 6,
+        "avg_impressions": 2396,
+        "n": 39
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 7,
+        "avg_impressions": 2647,
+        "n": 14
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 8,
+        "avg_impressions": 2189,
+        "n": 10
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 9,
+        "avg_impressions": 2087,
+        "n": 37
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 10,
+        "avg_impressions": 2084,
+        "n": 35
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 11,
+        "avg_impressions": 2410,
+        "n": 15
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 12,
+        "avg_impressions": 3270,
+        "n": 43
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 13,
+        "avg_impressions": 4374,
+        "n": 29
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 14,
+        "avg_impressions": 3807,
+        "n": 10
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 15,
+        "avg_impressions": 2725,
+        "n": 27
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 16,
+        "avg_impressions": 2520,
+        "n": 15
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 17,
+        "avg_impressions": 2601,
+        "n": 25
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 18,
+        "avg_impressions": 4732,
+        "n": 16
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 19,
+        "avg_impressions": 5762,
+        "n": 42
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 20,
+        "avg_impressions": 5328,
+        "n": 33
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 21,
+        "avg_impressions": 4787,
+        "n": 19
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 22,
+        "avg_impressions": 2657,
+        "n": 19
+      },
+      {
+        "day_of_week": 0,
+        "hour_of_day": 23,
+        "avg_impressions": 2203,
+        "n": 45
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 0,
+        "avg_impressions": 941,
+        "n": 39
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 1,
+        "avg_impressions": 840,
+        "n": 24
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 2,
+        "avg_impressions": 909,
+        "n": 15
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 3,
+        "avg_impressions": 884,
+        "n": 31
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 4,
+        "avg_impressions": 801,
+        "n": 29
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 5,
+        "avg_impressions": 854,
+        "n": 45
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 6,
+        "avg_impressions": 2724,
+        "n": 21
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 7,
+        "avg_impressions": 2644,
+        "n": 42
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 8,
+        "avg_impressions": 3216,
+        "n": 8
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 9,
+        "avg_impressions": 2881,
+        "n": 15
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 10,
+        "avg_impressions": 2848,
+        "n": 10
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 11,
+        "avg_impressions": 3374,
+        "n": 36
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 12,
+        "avg_impressions": 4401,
+        "n": 12
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 13,
+        "avg_impressions": 5586,
+        "n": 13
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 14,
+        "avg_impressions": 5660,
+        "n": 32
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 15,
+        "avg_impressions": 2930,
+        "n": 44
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 16,
+        "avg_impressions": 2818,
+        "n": 43
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 17,
+        "avg_impressions": 2932,
+        "n": 18
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 18,
+        "avg_impressions": 6867,
+        "n": 27
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 19,
+        "avg_impressions": 6474,
+        "n": 22
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 20,
+        "avg_impressions": 6769,
+        "n": 8
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 21,
+        "avg_impressions": 7685,
+        "n": 11
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 22,
+        "avg_impressions": 2738,
+        "n": 36
+      },
+      {
+        "day_of_week": 1,
+        "hour_of_day": 23,
+        "avg_impressions": 2718,
+        "n": 13
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 0,
+        "avg_impressions": 806,
+        "n": 21
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 1,
+        "avg_impressions": 888,
+        "n": 38
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 2,
+        "avg_impressions": 916,
+        "n": 27
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 3,
+        "avg_impressions": 826,
+        "n": 40
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 4,
+        "avg_impressions": 1007,
+        "n": 30
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 5,
+        "avg_impressions": 933,
+        "n": 14
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 6,
+        "avg_impressions": 3034,
+        "n": 14
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 7,
+        "avg_impressions": 3475,
+        "n": 15
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 8,
+        "avg_impressions": 2951,
+        "n": 11
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 9,
+        "avg_impressions": 3460,
+        "n": 45
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 10,
+        "avg_impressions": 3065,
+        "n": 44
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 11,
+        "avg_impressions": 3228,
+        "n": 23
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 12,
+        "avg_impressions": 4562,
+        "n": 38
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 13,
+        "avg_impressions": 5265,
+        "n": 37
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 14,
+        "avg_impressions": 5232,
+        "n": 22
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 15,
+        "avg_impressions": 3342,
+        "n": 40
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 16,
+        "avg_impressions": 3295,
+        "n": 26
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 17,
+        "avg_impressions": 3041,
+        "n": 28
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 18,
+        "avg_impressions": 7024,
+        "n": 30
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 19,
+        "avg_impressions": 7779,
+        "n": 22
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 20,
+        "avg_impressions": 7733,
+        "n": 9
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 21,
+        "avg_impressions": 6491,
+        "n": 20
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 22,
+        "avg_impressions": 2734,
+        "n": 21
+      },
+      {
+        "day_of_week": 2,
+        "hour_of_day": 23,
+        "avg_impressions": 3266,
+        "n": 15
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 0,
+        "avg_impressions": 819,
+        "n": 42
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 1,
+        "avg_impressions": 1003,
+        "n": 13
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 2,
+        "avg_impressions": 936,
+        "n": 25
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 3,
+        "avg_impressions": 949,
+        "n": 27
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 4,
+        "avg_impressions": 825,
+        "n": 32
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 5,
+        "avg_impressions": 951,
+        "n": 32
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 6,
+        "avg_impressions": 2898,
+        "n": 16
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 7,
+        "avg_impressions": 2722,
+        "n": 12
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 8,
+        "avg_impressions": 2859,
+        "n": 18
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 9,
+        "avg_impressions": 3131,
+        "n": 38
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 10,
+        "avg_impressions": 3175,
+        "n": 15
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 11,
+        "avg_impressions": 3054,
+        "n": 40
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 12,
+        "avg_impressions": 4508,
+        "n": 17
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 13,
+        "avg_impressions": 4729,
+        "n": 18
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 14,
+        "avg_impressions": 5388,
+        "n": 15
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 15,
+        "avg_impressions": 3059,
+        "n": 32
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 16,
+        "avg_impressions": 3531,
+        "n": 39
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 17,
+        "avg_impressions": 2872,
+        "n": 42
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 18,
+        "avg_impressions": 6236,
+        "n": 24
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 19,
+        "avg_impressions": 6794,
+        "n": 19
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 20,
+        "avg_impressions": 5850,
+        "n": 22
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 21,
+        "avg_impressions": 6075,
+        "n": 44
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 22,
+        "avg_impressions": 3240,
+        "n": 38
+      },
+      {
+        "day_of_week": 3,
+        "hour_of_day": 23,
+        "avg_impressions": 3498,
+        "n": 37
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 0,
+        "avg_impressions": 930,
+        "n": 41
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 1,
+        "avg_impressions": 848,
+        "n": 24
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 2,
+        "avg_impressions": 939,
+        "n": 17
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 3,
+        "avg_impressions": 825,
+        "n": 27
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 4,
+        "avg_impressions": 863,
+        "n": 42
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 5,
+        "avg_impressions": 1032,
+        "n": 12
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 6,
+        "avg_impressions": 2779,
+        "n": 17
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 7,
+        "avg_impressions": 3184,
+        "n": 26
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 8,
+        "avg_impressions": 3177,
+        "n": 27
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 9,
+        "avg_impressions": 3322,
+        "n": 38
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 10,
+        "avg_impressions": 3092,
+        "n": 17
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 11,
+        "avg_impressions": 3355,
+        "n": 31
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 12,
+        "avg_impressions": 5663,
+        "n": 37
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 13,
+        "avg_impressions": 5013,
+        "n": 34
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 14,
+        "avg_impressions": 4378,
+        "n": 45
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 15,
+        "avg_impressions": 3313,
+        "n": 32
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 16,
+        "avg_impressions": 2909,
+        "n": 40
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 17,
+        "avg_impressions": 2969,
+        "n": 14
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 18,
+        "avg_impressions": 6694,
+        "n": 36
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 19,
+        "avg_impressions": 7148,
+        "n": 36
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 20,
+        "avg_impressions": 6249,
+        "n": 8
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 21,
+        "avg_impressions": 6976,
+        "n": 8
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 22,
+        "avg_impressions": 2781,
+        "n": 12
+      },
+      {
+        "day_of_week": 4,
+        "hour_of_day": 23,
+        "avg_impressions": 2871,
+        "n": 18
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 0,
+        "avg_impressions": 1056,
+        "n": 17
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 1,
+        "avg_impressions": 823,
+        "n": 13
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 2,
+        "avg_impressions": 799,
+        "n": 11
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 3,
+        "avg_impressions": 895,
+        "n": 44
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 4,
+        "avg_impressions": 910,
+        "n": 29
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 5,
+        "avg_impressions": 885,
+        "n": 9
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 6,
+        "avg_impressions": 3501,
+        "n": 33
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 7,
+        "avg_impressions": 2981,
+        "n": 18
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 8,
+        "avg_impressions": 3222,
+        "n": 32
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 9,
+        "avg_impressions": 2941,
+        "n": 15
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 10,
+        "avg_impressions": 3255,
+        "n": 18
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 11,
+        "avg_impressions": 2695,
+        "n": 36
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 12,
+        "avg_impressions": 4823,
+        "n": 33
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 13,
+        "avg_impressions": 4970,
+        "n": 16
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 14,
+        "avg_impressions": 4521,
+        "n": 35
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 15,
+        "avg_impressions": 2921,
+        "n": 13
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 16,
+        "avg_impressions": 2722,
+        "n": 27
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 17,
+        "avg_impressions": 3296,
+        "n": 22
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 18,
+        "avg_impressions": 6778,
+        "n": 10
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 19,
+        "avg_impressions": 5905,
+        "n": 24
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 20,
+        "avg_impressions": 5807,
+        "n": 19
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 21,
+        "avg_impressions": 6943,
+        "n": 42
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 22,
+        "avg_impressions": 3232,
+        "n": 40
+      },
+      {
+        "day_of_week": 5,
+        "hour_of_day": 23,
+        "avg_impressions": 3401,
+        "n": 32
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 0,
+        "avg_impressions": 933,
+        "n": 31
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 1,
+        "avg_impressions": 797,
+        "n": 10
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 2,
+        "avg_impressions": 888,
+        "n": 36
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 3,
+        "avg_impressions": 739,
+        "n": 45
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 4,
+        "avg_impressions": 884,
+        "n": 12
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 5,
+        "avg_impressions": 884,
+        "n": 27
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 6,
+        "avg_impressions": 3208,
+        "n": 45
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 7,
+        "avg_impressions": 3042,
+        "n": 14
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 8,
+        "avg_impressions": 2423,
+        "n": 29
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 9,
+        "avg_impressions": 2713,
+        "n": 45
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 10,
+        "avg_impressions": 3052,
+        "n": 26
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 11,
+        "avg_impressions": 2763,
+        "n": 40
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 12,
+        "avg_impressions": 4849,
+        "n": 36
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 13,
+        "avg_impressions": 4364,
+        "n": 45
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 14,
+        "avg_impressions": 4309,
+        "n": 11
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 15,
+        "avg_impressions": 3031,
+        "n": 23
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 16,
+        "avg_impressions": 3134,
+        "n": 45
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 17,
+        "avg_impressions": 2652,
+        "n": 29
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 18,
+        "avg_impressions": 6754,
+        "n": 40
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 19,
+        "avg_impressions": 5567,
+        "n": 34
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 20,
+        "avg_impressions": 6817,
+        "n": 45
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 21,
+        "avg_impressions": 5854,
+        "n": 21
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 22,
+        "avg_impressions": 2566,
+        "n": 17
+      },
+      {
+        "day_of_week": 6,
+        "hour_of_day": 23,
+        "avg_impressions": 3218,
+        "n": 38
+      }
+    ],
+    "calendar_heatmap": [
+      {
+        "day": "2025-05-12",
+        "count": 0
+      },
+      {
+        "day": "2025-05-13",
+        "count": 93
+      },
+      {
+        "day": "2025-05-14",
+        "count": 84
+      },
+      {
+        "day": "2025-05-15",
+        "count": 93
+      },
+      {
+        "day": "2025-05-16",
+        "count": 96
+      },
+      {
+        "day": "2025-05-17",
+        "count": 63
+      },
+      {
+        "day": "2025-05-18",
+        "count": 74
+      },
+      {
+        "day": "2025-05-19",
+        "count": 61
+      },
+      {
+        "day": "2025-05-20",
+        "count": 92
+      },
+      {
+        "day": "2025-05-21",
+        "count": 97
+      },
+      {
+        "day": "2025-05-22",
+        "count": 95
+      },
+      {
+        "day": "2025-05-23",
+        "count": 100
+      },
+      {
+        "day": "2025-05-24",
+        "count": 43
+      },
+      {
+        "day": "2025-05-25",
+        "count": 60
+      },
+      {
+        "day": "2025-05-26",
+        "count": 91
+      },
+      {
+        "day": "2025-05-27",
+        "count": 77
+      },
+      {
+        "day": "2025-05-28",
+        "count": 86
+      },
+      {
+        "day": "2025-05-29",
+        "count": 87
+      },
+      {
+        "day": "2025-05-30",
+        "count": 98
+      },
+      {
+        "day": "2025-05-31",
+        "count": 77
+      },
+      {
+        "day": "2025-06-01",
+        "count": 60
+      },
+      {
+        "day": "2025-06-02",
+        "count": 73
+      },
+      {
+        "day": "2025-06-03",
+        "count": 108
+      },
+      {
+        "day": "2025-06-04",
+        "count": 80
+      },
+      {
+        "day": "2025-06-05",
+        "count": 94
+      },
+      {
+        "day": "2025-06-06",
+        "count": 93
+      },
+      {
+        "day": "2025-06-07",
+        "count": 76
+      },
+      {
+        "day": "2025-06-08",
+        "count": 65
+      },
+      {
+        "day": "2025-06-09",
+        "count": 86
+      },
+      {
+        "day": "2025-06-10",
+        "count": 77
+      },
+      {
+        "day": "2025-06-11",
+        "count": 81
+      },
+      {
+        "day": "2025-06-12",
+        "count": 106
+      },
+      {
+        "day": "2025-06-13",
+        "count": 99
+      },
+      {
+        "day": "2025-06-14",
+        "count": 71
+      },
+      {
+        "day": "2025-06-15",
+        "count": 46
+      },
+      {
+        "day": "2025-06-16",
+        "count": 72
+      },
+      {
+        "day": "2025-06-17",
+        "count": 88
+      },
+      {
+        "day": "2025-06-18",
+        "count": 77
+      },
+      {
+        "day": "2025-06-19",
+        "count": 0
+      },
+      {
+        "day": "2025-06-20",
+        "count": 83
+      },
+      {
+        "day": "2025-06-21",
+        "count": 65
+      },
+      {
+        "day": "2025-06-22",
+        "count": 47
+      },
+      {
+        "day": "2025-06-23",
+        "count": 92
+      },
+      {
+        "day": "2025-06-24",
+        "count": 65
+      },
+      {
+        "day": "2025-06-25",
+        "count": 70
+      },
+      {
+        "day": "2025-06-26",
+        "count": 72
+      },
+      {
+        "day": "2025-06-27",
+        "count": 71
+      },
+      {
+        "day": "2025-06-28",
+        "count": 72
+      },
+      {
+        "day": "2025-06-29",
+        "count": 46
+      },
+      {
+        "day": "2025-06-30",
+        "count": 104
+      },
+      {
+        "day": "2025-07-01",
+        "count": 86
+      },
+      {
+        "day": "2025-07-02",
+        "count": 59
+      },
+      {
+        "day": "2025-07-03",
+        "count": 69
+      },
+      {
+        "day": "2025-07-04",
+        "count": 64
+      },
+      {
+        "day": "2025-07-05",
+        "count": 70
+      },
+      {
+        "day": "2025-07-06",
+        "count": 65
+      },
+      {
+        "day": "2025-07-07",
+        "count": 83
+      },
+      {
+        "day": "2025-07-08",
+        "count": 92
+      },
+      {
+        "day": "2025-07-09",
+        "count": 92
+      },
+      {
+        "day": "2025-07-10",
+        "count": 105
+      },
+      {
+        "day": "2025-07-11",
+        "count": 94
+      },
+      {
+        "day": "2025-07-12",
+        "count": 57
+      },
+      {
+        "day": "2025-07-13",
+        "count": 0
+      },
+      {
+        "day": "2025-07-14",
+        "count": 76
+      },
+      {
+        "day": "2025-07-15",
+        "count": 106
+      },
+      {
+        "day": "2025-07-16",
+        "count": 65
+      },
+      {
+        "day": "2025-07-17",
+        "count": 58
+      },
+      {
+        "day": "2025-07-18",
+        "count": 94
+      },
+      {
+        "day": "2025-07-19",
+        "count": 67
+      },
+      {
+        "day": "2025-07-20",
+        "count": 0
+      },
+      {
+        "day": "2025-07-21",
+        "count": 78
+      },
+      {
+        "day": "2025-07-22",
+        "count": 96
+      },
+      {
+        "day": "2025-07-23",
+        "count": 68
+      },
+      {
+        "day": "2025-07-24",
+        "count": 61
+      },
+      {
+        "day": "2025-07-25",
+        "count": 61
+      },
+      {
+        "day": "2025-07-26",
+        "count": 58
+      },
+      {
+        "day": "2025-07-27",
+        "count": 75
+      },
+      {
+        "day": "2025-07-28",
+        "count": 91
+      },
+      {
+        "day": "2025-07-29",
+        "count": 62
+      },
+      {
+        "day": "2025-07-30",
+        "count": 75
+      },
+      {
+        "day": "2025-07-31",
+        "count": 96
+      },
+      {
+        "day": "2025-08-01",
+        "count": 78
+      },
+      {
+        "day": "2025-08-02",
+        "count": 45
+      },
+      {
+        "day": "2025-08-03",
+        "count": 68
+      },
+      {
+        "day": "2025-08-04",
+        "count": 81
+      },
+      {
+        "day": "2025-08-05",
+        "count": 91
+      },
+      {
+        "day": "2025-08-06",
+        "count": 92
+      },
+      {
+        "day": "2025-08-07",
+        "count": 101
+      },
+      {
+        "day": "2025-08-08",
+        "count": 81
+      },
+      {
+        "day": "2025-08-09",
+        "count": 48
+      },
+      {
+        "day": "2025-08-10",
+        "count": 60
+      },
+      {
+        "day": "2025-08-11",
+        "count": 105
+      },
+      {
+        "day": "2025-08-12",
+        "count": 100
+      },
+      {
+        "day": "2025-08-13",
+        "count": 88
+      },
+      {
+        "day": "2025-08-14",
+        "count": 78
+      },
+      {
+        "day": "2025-08-15",
+        "count": 68
+      },
+      {
+        "day": "2025-08-16",
+        "count": 62
+      },
+      {
+        "day": "2025-08-17",
+        "count": 72
+      },
+      {
+        "day": "2025-08-18",
+        "count": 85
+      },
+      {
+        "day": "2025-08-19",
+        "count": 104
+      },
+      {
+        "day": "2025-08-20",
+        "count": 106
+      },
+      {
+        "day": "2025-08-21",
+        "count": 64
+      },
+      {
+        "day": "2025-08-22",
+        "count": 83
+      },
+      {
+        "day": "2025-08-23",
+        "count": 73
+      },
+      {
+        "day": "2025-08-24",
+        "count": 76
+      },
+      {
+        "day": "2025-08-25",
+        "count": 66
+      },
+      {
+        "day": "2025-08-26",
+        "count": 101
+      },
+      {
+        "day": "2025-08-27",
+        "count": 97
+      },
+      {
+        "day": "2025-08-28",
+        "count": 78
+      },
+      {
+        "day": "2025-08-29",
+        "count": 94
+      },
+      {
+        "day": "2025-08-30",
+        "count": 69
+      },
+      {
+        "day": "2025-08-31",
+        "count": 49
+      },
+      {
+        "day": "2025-09-01",
+        "count": 63
+      },
+      {
+        "day": "2025-09-02",
+        "count": 93
+      },
+      {
+        "day": "2025-09-03",
+        "count": 88
+      },
+      {
+        "day": "2025-09-04",
+        "count": 93
+      },
+      {
+        "day": "2025-09-05",
+        "count": 107
+      },
+      {
+        "day": "2025-09-06",
+        "count": 52
+      },
+      {
+        "day": "2025-09-07",
+        "count": 54
+      },
+      {
+        "day": "2025-09-08",
+        "count": 101
+      },
+      {
+        "day": "2025-09-09",
+        "count": 106
+      },
+      {
+        "day": "2025-09-10",
+        "count": 76
+      },
+      {
+        "day": "2025-09-11",
+        "count": 98
+      },
+      {
+        "day": "2025-09-12",
+        "count": 66
+      },
+      {
+        "day": "2025-09-13",
+        "count": 68
+      },
+      {
+        "day": "2025-09-14",
+        "count": 57
+      },
+      {
+        "day": "2025-09-15",
+        "count": 101
+      },
+      {
+        "day": "2025-09-16",
+        "count": 60
+      },
+      {
+        "day": "2025-09-17",
+        "count": 71
+      },
+      {
+        "day": "2025-09-18",
+        "count": 66
+      },
+      {
+        "day": "2025-09-19",
+        "count": 73
+      },
+      {
+        "day": "2025-09-20",
+        "count": 61
+      },
+      {
+        "day": "2025-09-21",
+        "count": 54
+      },
+      {
+        "day": "2025-09-22",
+        "count": 99
+      },
+      {
+        "day": "2025-09-23",
+        "count": 61
+      },
+      {
+        "day": "2025-09-24",
+        "count": 69
+      },
+      {
+        "day": "2025-09-25",
+        "count": 79
+      },
+      {
+        "day": "2025-09-26",
+        "count": 79
+      },
+      {
+        "day": "2025-09-27",
+        "count": 48
+      },
+      {
+        "day": "2025-09-28",
+        "count": 45
+      },
+      {
+        "day": "2025-09-29",
+        "count": 85
+      },
+      {
+        "day": "2025-09-30",
+        "count": 100
+      },
+      {
+        "day": "2025-10-01",
+        "count": 76
+      },
+      {
+        "day": "2025-10-02",
+        "count": 97
+      },
+      {
+        "day": "2025-10-03",
+        "count": 93
+      },
+      {
+        "day": "2025-10-04",
+        "count": 63
+      },
+      {
+        "day": "2025-10-05",
+        "count": 48
+      },
+      {
+        "day": "2025-10-06",
+        "count": 101
+      },
+      {
+        "day": "2025-10-07",
+        "count": 77
+      },
+      {
+        "day": "2025-10-08",
+        "count": 76
+      },
+      {
+        "day": "2025-10-09",
+        "count": 64
+      },
+      {
+        "day": "2025-10-10",
+        "count": 81
+      },
+      {
+        "day": "2025-10-11",
+        "count": 51
+      },
+      {
+        "day": "2025-10-12",
+        "count": 59
+      },
+      {
+        "day": "2025-10-13",
+        "count": 98
+      },
+      {
+        "day": "2025-10-14",
+        "count": 69
+      },
+      {
+        "day": "2025-10-15",
+        "count": 94
+      },
+      {
+        "day": "2025-10-16",
+        "count": 66
+      },
+      {
+        "day": "2025-10-17",
+        "count": 86
+      },
+      {
+        "day": "2025-10-18",
+        "count": 68
+      },
+      {
+        "day": "2025-10-19",
+        "count": 72
+      },
+      {
+        "day": "2025-10-20",
+        "count": 77
+      },
+      {
+        "day": "2025-10-21",
+        "count": 102
+      },
+      {
+        "day": "2025-10-22",
+        "count": 93
+      },
+      {
+        "day": "2025-10-23",
+        "count": 80
+      },
+      {
+        "day": "2025-10-24",
+        "count": 75
+      },
+      {
+        "day": "2025-10-25",
+        "count": 66
+      },
+      {
+        "day": "2025-10-26",
+        "count": 74
+      },
+      {
+        "day": "2025-10-27",
+        "count": 100
+      },
+      {
+        "day": "2025-10-28",
+        "count": 65
+      },
+      {
+        "day": "2025-10-29",
+        "count": 94
+      },
+      {
+        "day": "2025-10-30",
+        "count": 85
+      },
+      {
+        "day": "2025-10-31",
+        "count": 85
+      },
+      {
+        "day": "2025-11-01",
+        "count": 70
+      },
+      {
+        "day": "2025-11-02",
+        "count": 73
+      },
+      {
+        "day": "2025-11-03",
+        "count": 84
+      },
+      {
+        "day": "2025-11-04",
+        "count": 81
+      },
+      {
+        "day": "2025-11-05",
+        "count": 74
+      },
+      {
+        "day": "2025-11-06",
+        "count": 78
+      },
+      {
+        "day": "2025-11-07",
+        "count": 66
+      },
+      {
+        "day": "2025-11-08",
+        "count": 66
+      },
+      {
+        "day": "2025-11-09",
+        "count": 62
+      },
+      {
+        "day": "2025-11-10",
+        "count": 63
+      },
+      {
+        "day": "2025-11-11",
+        "count": 101
+      },
+      {
+        "day": "2025-11-12",
+        "count": 99
+      },
+      {
+        "day": "2025-11-13",
+        "count": 80
+      },
+      {
+        "day": "2025-11-14",
+        "count": 107
+      },
+      {
+        "day": "2025-11-15",
+        "count": 76
+      },
+      {
+        "day": "2025-11-16",
+        "count": 66
+      },
+      {
+        "day": "2025-11-17",
+        "count": 67
+      },
+      {
+        "day": "2025-11-18",
+        "count": 74
+      },
+      {
+        "day": "2025-11-19",
+        "count": 103
+      },
+      {
+        "day": "2025-11-20",
+        "count": 64
+      },
+      {
+        "day": "2025-11-21",
+        "count": 88
+      },
+      {
+        "day": "2025-11-22",
+        "count": 70
+      },
+      {
+        "day": "2025-11-23",
+        "count": 59
+      },
+      {
+        "day": "2025-11-24",
+        "count": 60
+      },
+      {
+        "day": "2025-11-25",
+        "count": 90
+      },
+      {
+        "day": "2025-11-26",
+        "count": 104
+      },
+      {
+        "day": "2025-11-27",
+        "count": 88
+      },
+      {
+        "day": "2025-11-28",
+        "count": 93
+      },
+      {
+        "day": "2025-11-29",
+        "count": 58
+      },
+      {
+        "day": "2025-11-30",
+        "count": 0
+      },
+      {
+        "day": "2025-12-01",
+        "count": 89
+      },
+      {
+        "day": "2025-12-02",
+        "count": 101
+      },
+      {
+        "day": "2025-12-03",
+        "count": 96
+      },
+      {
+        "day": "2025-12-04",
+        "count": 78
+      },
+      {
+        "day": "2025-12-05",
+        "count": 67
+      },
+      {
+        "day": "2025-12-06",
+        "count": 64
+      },
+      {
+        "day": "2025-12-07",
+        "count": 66
+      },
+      {
+        "day": "2025-12-08",
+        "count": 73
+      },
+      {
+        "day": "2025-12-09",
+        "count": 107
+      },
+      {
+        "day": "2025-12-10",
+        "count": 103
+      },
+      {
+        "day": "2025-12-11",
+        "count": 107
+      },
+      {
+        "day": "2025-12-12",
+        "count": 97
+      },
+      {
+        "day": "2025-12-13",
+        "count": 74
+      },
+      {
+        "day": "2025-12-14",
+        "count": 58
+      },
+      {
+        "day": "2025-12-15",
+        "count": 88
+      },
+      {
+        "day": "2025-12-16",
+        "count": 87
+      },
+      {
+        "day": "2025-12-17",
+        "count": 106
+      },
+      {
+        "day": "2025-12-18",
+        "count": 84
+      },
+      {
+        "day": "2025-12-19",
+        "count": 62
+      },
+      {
+        "day": "2025-12-20",
+        "count": 56
+      },
+      {
+        "day": "2025-12-21",
+        "count": 72
+      },
+      {
+        "day": "2025-12-22",
+        "count": 89
+      },
+      {
+        "day": "2025-12-23",
+        "count": 76
+      },
+      {
+        "day": "2025-12-24",
+        "count": 89
+      },
+      {
+        "day": "2025-12-25",
+        "count": 75
+      },
+      {
+        "day": "2025-12-26",
+        "count": 82
+      },
+      {
+        "day": "2025-12-27",
+        "count": 66
+      },
+      {
+        "day": "2025-12-28",
+        "count": 67
+      },
+      {
+        "day": "2025-12-29",
+        "count": 81
+      },
+      {
+        "day": "2025-12-30",
+        "count": 60
+      },
+      {
+        "day": "2025-12-31",
+        "count": 91
+      },
+      {
+        "day": "2026-01-01",
+        "count": 104
+      },
+      {
+        "day": "2026-01-02",
+        "count": 93
+      },
+      {
+        "day": "2026-01-03",
+        "count": 68
+      },
+      {
+        "day": "2026-01-04",
+        "count": 76
+      },
+      {
+        "day": "2026-01-05",
+        "count": 60
+      },
+      {
+        "day": "2026-01-06",
+        "count": 73
+      },
+      {
+        "day": "2026-01-07",
+        "count": 66
+      },
+      {
+        "day": "2026-01-08",
+        "count": 60
+      },
+      {
+        "day": "2026-01-09",
+        "count": 108
+      },
+      {
+        "day": "2026-01-10",
+        "count": 67
+      },
+      {
+        "day": "2026-01-11",
+        "count": 54
+      },
+      {
+        "day": "2026-01-12",
+        "count": 67
+      },
+      {
+        "day": "2026-01-13",
+        "count": 101
+      },
+      {
+        "day": "2026-01-14",
+        "count": 60
+      },
+      {
+        "day": "2026-01-15",
+        "count": 66
+      },
+      {
+        "day": "2026-01-16",
+        "count": 59
+      },
+      {
+        "day": "2026-01-17",
+        "count": 76
+      },
+      {
+        "day": "2026-01-18",
+        "count": 50
+      },
+      {
+        "day": "2026-01-19",
+        "count": 64
+      },
+      {
+        "day": "2026-01-20",
+        "count": 96
+      },
+      {
+        "day": "2026-01-21",
+        "count": 70
+      },
+      {
+        "day": "2026-01-22",
+        "count": 78
+      },
+      {
+        "day": "2026-01-23",
+        "count": 100
+      },
+      {
+        "day": "2026-01-24",
+        "count": 71
+      },
+      {
+        "day": "2026-01-25",
+        "count": 49
+      },
+      {
+        "day": "2026-01-26",
+        "count": 106
+      },
+      {
+        "day": "2026-01-27",
+        "count": 103
+      },
+      {
+        "day": "2026-01-28",
+        "count": 71
+      },
+      {
+        "day": "2026-01-29",
+        "count": 92
+      },
+      {
+        "day": "2026-01-30",
+        "count": 75
+      },
+      {
+        "day": "2026-01-31",
+        "count": 65
+      },
+      {
+        "day": "2026-02-01",
+        "count": 46
+      },
+      {
+        "day": "2026-02-02",
+        "count": 65
+      },
+      {
+        "day": "2026-02-03",
+        "count": 96
+      },
+      {
+        "day": "2026-02-04",
+        "count": 72
+      },
+      {
+        "day": "2026-02-05",
+        "count": 65
+      },
+      {
+        "day": "2026-02-06",
+        "count": 108
+      },
+      {
+        "day": "2026-02-07",
+        "count": 72
+      },
+      {
+        "day": "2026-02-08",
+        "count": 49
+      },
+      {
+        "day": "2026-02-09",
+        "count": 99
+      },
+      {
+        "day": "2026-02-10",
+        "count": 76
+      },
+      {
+        "day": "2026-02-11",
+        "count": 86
+      },
+      {
+        "day": "2026-02-12",
+        "count": 81
+      },
+      {
+        "day": "2026-02-13",
+        "count": 108
+      },
+      {
+        "day": "2026-02-14",
+        "count": 73
+      },
+      {
+        "day": "2026-02-15",
+        "count": 74
+      },
+      {
+        "day": "2026-02-16",
+        "count": 95
+      },
+      {
+        "day": "2026-02-17",
+        "count": 93
+      },
+      {
+        "day": "2026-02-18",
+        "count": 91
+      },
+      {
+        "day": "2026-02-19",
+        "count": 70
+      },
+      {
+        "day": "2026-02-20",
+        "count": 92
+      },
+      {
+        "day": "2026-02-21",
+        "count": 73
+      },
+      {
+        "day": "2026-02-22",
+        "count": 58
+      },
+      {
+        "day": "2026-02-23",
+        "count": 70
+      },
+      {
+        "day": "2026-02-24",
+        "count": 100
+      },
+      {
+        "day": "2026-02-25",
+        "count": 61
+      },
+      {
+        "day": "2026-02-26",
+        "count": 60
+      },
+      {
+        "day": "2026-02-27",
+        "count": 61
+      },
+      {
+        "day": "2026-02-28",
+        "count": 57
+      },
+      {
+        "day": "2026-03-01",
+        "count": 55
+      },
+      {
+        "day": "2026-03-02",
+        "count": 95
+      },
+      {
+        "day": "2026-03-03",
+        "count": 86
+      },
+      {
+        "day": "2026-03-04",
+        "count": 86
+      },
+      {
+        "day": "2026-03-05",
+        "count": 84
+      },
+      {
+        "day": "2026-03-06",
+        "count": 86
+      },
+      {
+        "day": "2026-03-07",
+        "count": 59
+      },
+      {
+        "day": "2026-03-08",
+        "count": 73
+      },
+      {
+        "day": "2026-03-09",
+        "count": 97
+      },
+      {
+        "day": "2026-03-10",
+        "count": 70
+      },
+      {
+        "day": "2026-03-11",
+        "count": 102
+      },
+      {
+        "day": "2026-03-12",
+        "count": 81
+      },
+      {
+        "day": "2026-03-13",
+        "count": 110
+      },
+      {
+        "day": "2026-03-14",
+        "count": 80
+      },
+      {
+        "day": "2026-03-15",
+        "count": 104
+      },
+      {
+        "day": "2026-03-16",
+        "count": 100
+      },
+      {
+        "day": "2026-03-17",
+        "count": 97
+      },
+      {
+        "day": "2026-03-18",
+        "count": 104
+      },
+      {
+        "day": "2026-03-19",
+        "count": 118
+      },
+      {
+        "day": "2026-03-20",
+        "count": 111
+      },
+      {
+        "day": "2026-03-21",
+        "count": 108
+      },
+      {
+        "day": "2026-03-22",
+        "count": 79
+      },
+      {
+        "day": "2026-03-23",
+        "count": 151
+      },
+      {
+        "day": "2026-03-24",
+        "count": 174
+      },
+      {
+        "day": "2026-03-25",
+        "count": 141
+      },
+      {
+        "day": "2026-03-26",
+        "count": 127
+      },
+      {
+        "day": "2026-03-27",
+        "count": 129
+      },
+      {
+        "day": "2026-03-28",
+        "count": 92
+      },
+      {
+        "day": "2026-03-29",
+        "count": 103
+      },
+      {
+        "day": "2026-03-30",
+        "count": 166
+      },
+      {
+        "day": "2026-03-31",
+        "count": 113
+      },
+      {
+        "day": "2026-04-01",
+        "count": 167
+      },
+      {
+        "day": "2026-04-02",
+        "count": 124
+      },
+      {
+        "day": "2026-04-03",
+        "count": 101
+      },
+      {
+        "day": "2026-04-04",
+        "count": 116
+      },
+      {
+        "day": "2026-04-05",
+        "count": 112
+      },
+      {
+        "day": "2026-04-06",
+        "count": 103
+      },
+      {
+        "day": "2026-04-07",
+        "count": 120
+      },
+      {
+        "day": "2026-04-08",
+        "count": 159
+      },
+      {
+        "day": "2026-04-09",
+        "count": 145
+      },
+      {
+        "day": "2026-04-10",
+        "count": 120
+      },
+      {
+        "day": "2026-04-11",
+        "count": 114
+      },
+      {
+        "day": "2026-04-12",
+        "count": 82
+      },
+      {
+        "day": "2026-04-13",
+        "count": 156
+      },
+      {
+        "day": "2026-04-14",
+        "count": 119
+      },
+      {
+        "day": "2026-04-15",
+        "count": 167
+      },
+      {
+        "day": "2026-04-16",
+        "count": 107
+      },
+      {
+        "day": "2026-04-17",
+        "count": 108
+      },
+      {
+        "day": "2026-04-18",
+        "count": 111
+      },
+      {
+        "day": "2026-04-19",
+        "count": 91
+      },
+      {
+        "day": "2026-04-20",
+        "count": 96
+      },
+      {
+        "day": "2026-04-21",
+        "count": 131
+      },
+      {
+        "day": "2026-04-22",
+        "count": 135
+      },
+      {
+        "day": "2026-04-23",
+        "count": 139
+      },
+      {
+        "day": "2026-04-24",
+        "count": 97
+      },
+      {
+        "day": "2026-04-25",
+        "count": 69
+      },
+      {
+        "day": "2026-04-26",
+        "count": 0
+      },
+      {
+        "day": "2026-04-27",
+        "count": 94
+      },
+      {
+        "day": "2026-04-28",
+        "count": 124
+      },
+      {
+        "day": "2026-04-29",
+        "count": 166
+      },
+      {
+        "day": "2026-04-30",
+        "count": 156
+      },
+      {
+        "day": "2026-05-01",
+        "count": 128
+      },
+      {
+        "day": "2026-05-02",
+        "count": 79
+      },
+      {
+        "day": "2026-05-03",
+        "count": 87
+      },
+      {
+        "day": "2026-05-04",
+        "count": 95
+      },
+      {
+        "day": "2026-05-05",
+        "count": 124
+      },
+      {
+        "day": "2026-05-06",
+        "count": 163
+      },
+      {
+        "day": "2026-05-07",
+        "count": 112
+      },
+      {
+        "day": "2026-05-08",
+        "count": 158
+      },
+      {
+        "day": "2026-05-09",
+        "count": 71
+      },
+      {
+        "day": "2026-05-10",
+        "count": 119
+      },
+      {
+        "day": "2026-05-11",
+        "count": 138
       }
     ]
   }

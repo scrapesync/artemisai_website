@@ -162,6 +162,15 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .tab-content{display:none}
 .tab-content.active{display:block}
 
+/* ─── Granularity filter ──────────────────────────────── */
+.granularity-bar{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding:10px 14px;background:var(--bg-elev);border:1px solid var(--bdr-soft);border-radius:10px}
+.granularity-label{font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:0.06em;font-weight:700}
+.granularity-pills{display:inline-flex;background:var(--bg-input);border-radius:9999px;padding:3px;gap:2px}
+.gran-pill{padding:5px 14px;background:none;border:none;color:var(--t2);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;border-radius:9999px;transition:all .15s}
+.gran-pill:hover{color:var(--t1)}
+.gran-pill.active{background:var(--teal);color:#fff}
+.gran-info{font-size:11px;color:var(--t3);margin-left:auto}
+
 /* ─── Analysis sub-sections ─── */
 .subsec-strip{display:flex;gap:6px;margin:0 0 14px 0;flex-wrap:wrap}
 .subsec-btn{padding:6px 14px;background:var(--bg-elev);border:1px solid var(--bdr-soft);color:var(--t2);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;border-radius:9999px;display:inline-flex;align-items:center;gap:6px;transition:all .15s}
@@ -184,7 +193,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .top-post-stats{display:flex;gap:14px;font-size:11px;color:var(--t2);margin-top:4px;font-variant-numeric:tabular-nums}
 .top-post-stat strong{color:var(--t1)}
 
-/* ─── Confidence row ─── */
+/* ─── Confidence row + box plots ─── */
 .conf-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bdr-soft)}
 .conf-row:last-child{border-bottom:none}
 .conf-label{width:90px;font-size:12px;font-weight:600;color:var(--t1);text-transform:capitalize}
@@ -194,6 +203,50 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .conf-bar.med > div{background:var(--warn)}
 .conf-bar.low > div{background:var(--crisis)}
 .conf-val{font-size:13px;font-weight:700;color:var(--t1);font-variant-numeric:tabular-nums;width:54px;text-align:right}
+
+/* Box plot row — rendered with inline SVG per row */
+.box-row{display:grid;grid-template-columns:90px 1fr 100px;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bdr-soft)}
+.box-row:last-child{border-bottom:none}
+.box-label{font-size:12px;font-weight:600;color:var(--t1);text-transform:capitalize}
+.box-svg{width:100%;height:32px;display:block}
+.box-stats{font-size:11px;color:var(--t2);text-align:right;font-variant-numeric:tabular-nums}
+.box-stats strong{color:var(--t1)}
+
+/* ─── Generic heatmap (used for topic×sentiment, page×week, time-of-day) ── */
+.heat-table{display:grid;gap:2px;font-size:11px;font-variant-numeric:tabular-nums}
+.heat-cell{aspect-ratio:1;border-radius:3px;display:grid;place-items:center;color:#fff;font-weight:600;min-width:32px;min-height:32px;cursor:default}
+.heat-cell:hover{outline:2px solid var(--teal);outline-offset:1px;z-index:1;position:relative}
+.heat-cell.empty{background:var(--bdr-soft);color:var(--t3)}
+.heat-row-label,.heat-col-label{font-size:11px;color:var(--t2);font-weight:600}
+.heat-row-label{text-align:right;padding-right:6px}
+.heat-col-label{text-align:center;font-size:10px}
+.heat-legend{display:flex;gap:8px;align-items:center;font-size:11px;color:var(--t2);margin-top:10px}
+.heat-legend-grad{flex:1;max-width:260px;height:8px;border-radius:9999px}
+
+/* ─── Funnel chart ─── */
+.funnel-list{display:flex;flex-direction:column;gap:6px}
+.funnel-row{display:grid;grid-template-columns:170px 1fr 100px;align-items:center;gap:12px}
+.funnel-row-label{font-size:13px;color:var(--t1);font-weight:600}
+.funnel-bar-host{height:36px;background:var(--bg-input);border-radius:6px;overflow:hidden;position:relative}
+.funnel-bar{height:100%;border-radius:6px;display:flex;align-items:center;padding:0 12px;color:#fff;font-weight:700;font-size:12px;font-variant-numeric:tabular-nums;transition:width .4s}
+.funnel-bar-stage-1{background:linear-gradient(90deg,#00C4A0,#00a085)}
+.funnel-bar-stage-2{background:linear-gradient(90deg,#22C55E,#1ca54e)}
+.funnel-bar-stage-3{background:linear-gradient(90deg,#7C5CBF,#6347a8)}
+.funnel-bar-stage-4{background:linear-gradient(90deg,#3B82F6,#2563eb)}
+.funnel-bar-stage-5{background:linear-gradient(90deg,#F59E0B,#d97706)}
+.funnel-row-stat{font-size:12px;color:var(--t2);text-align:right;font-variant-numeric:tabular-nums}
+.funnel-row-stat strong{color:var(--t1);font-size:13px}
+.funnel-row-drop{font-size:10px;color:var(--crisis);margin-top:2px}
+
+/* ─── Calendar heatmap (GitHub-style) ─── */
+.cal-container{overflow-x:auto;padding-bottom:6px}
+.cal-grid{display:inline-grid;grid-template-columns:24px repeat(53, 11px);grid-template-rows:14px repeat(7, 11px);gap:2px;align-items:center}
+.cal-day-label{font-size:9px;color:var(--t2);text-align:right;padding-right:4px;line-height:1}
+.cal-month-label{font-size:9px;color:var(--t2);text-align:left;grid-row:1}
+.cal-cell{width:11px;height:11px;border-radius:2px;background:var(--bdr-soft);cursor:default}
+.cal-cell:hover{outline:1.5px solid var(--teal);outline-offset:1px}
+.cal-legend{display:flex;gap:4px;align-items:center;font-size:10px;color:var(--t2);margin-top:8px;justify-content:flex-end}
+.cal-legend-cell{width:10px;height:10px;border-radius:2px}
 </style>
 </head>
 <body>
@@ -253,6 +306,16 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
         <div class="page-title">QA Health <span class="month-pill" id="date-pill">●</span></div>
         <div class="page-sub" id="overview-sub">Loading...</div>
       </div>
+    </div>
+
+    <div class="granularity-bar">
+      <span class="granularity-label">View by</span>
+      <div class="granularity-pills">
+        <button class="gran-pill" data-gran="day" onclick="setGranularity('overview','day')">Day</button>
+        <button class="gran-pill active" data-gran="week" onclick="setGranularity('overview','week')">Week</button>
+        <button class="gran-pill" data-gran="month" onclick="setGranularity('overview','month')">Month</button>
+      </div>
+      <span class="gran-info" id="gran-info-overview">Last 12 weeks</span>
     </div>
 
     <div class="kpi-strip">
@@ -332,6 +395,17 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
         <div class="page-sub">Per-table row counts over the last 21 days — sudden drops = pipeline issues</div>
       </div>
     </div>
+
+    <div class="granularity-bar">
+      <span class="granularity-label">View by</span>
+      <div class="granularity-pills">
+        <button class="gran-pill" data-gran="day" onclick="setGranularity('history','day')">Day</button>
+        <button class="gran-pill active" data-gran="week" onclick="setGranularity('history','week')">Week</button>
+        <button class="gran-pill" data-gran="month" onclick="setGranularity('history','month')">Month</button>
+      </div>
+      <span class="gran-info" id="gran-info-history">Last 12 weeks</span>
+    </div>
+
     <div class="panel">
       <div class="panel-header">
         <div class="panel-header-text">
@@ -368,8 +442,18 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
     <div class="page-header">
       <div class="page-header-text">
         <div class="page-title">Content analysis</div>
-        <div class="page-sub">What the data actually contains — NLP labels, model agreement, engagement signals from the last 30 days</div>
+        <div class="page-sub">What the data actually contains — NLP labels, model agreement, engagement signals</div>
       </div>
+    </div>
+
+    <div class="granularity-bar">
+      <span class="granularity-label">View by</span>
+      <div class="granularity-pills">
+        <button class="gran-pill" data-gran="day" onclick="setGranularity('analysis','day')">Day</button>
+        <button class="gran-pill active" data-gran="week" onclick="setGranularity('analysis','week')">Week</button>
+        <button class="gran-pill" data-gran="month" onclick="setGranularity('analysis','month')">Month</button>
+      </div>
+      <span class="gran-info" id="gran-info-analysis">Last 12 weeks</span>
     </div>
 
     <div class="subsec-strip">
@@ -429,6 +513,16 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
         </div>
         <div class="chart-host"><canvas id="topicBar"></canvas></div>
       </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-text">
+            <div class="panel-title">Topic × sentiment cross-tab</div>
+            <div class="panel-sub">For the top 10 topics, which sentiments dominate · darker = more posts</div>
+          </div>
+        </div>
+        <div id="topicSentHeat"></div>
+      </div>
     </div>
 
     <!-- ─── Model QA sub-section ─── -->
@@ -462,6 +556,26 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
           </div>
         </div>
         <div id="conf-list"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-text">
+            <div class="panel-title">Confidence distribution per dimension</div>
+            <div class="panel-sub">Box plots showing the spread (min · p25 · median · p75 · max) · narrower = more consistent</div>
+          </div>
+        </div>
+        <div id="box-list"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-text">
+            <div class="panel-title">Pipeline funnel — last 30 days</div>
+            <div class="panel-sub">How many posts make it through each stage · sharp drops indicate bottlenecks</div>
+          </div>
+        </div>
+        <div id="funnel-host"></div>
       </div>
     </div>
 
@@ -507,6 +621,45 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
         </div>
         <div id="top-posts-list"></div>
       </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-text">
+            <div class="panel-title">Page × week sentiment</div>
+            <div class="panel-sub">Top 10 pages over last 8 weeks · cell color = dominant sentiment · cell value = post count</div>
+          </div>
+        </div>
+        <div id="pageWeekHeat"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-text">
+            <div class="panel-title">Posting-time heatmap</div>
+            <div class="panel-sub">Day-of-week × hour · color = avg impressions · last 90 days</div>
+          </div>
+        </div>
+        <div id="postTimeHeat"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-text">
+            <div class="panel-title">Activity calendar — last 12 months</div>
+            <div class="panel-sub">Daily post count · GitHub-style contribution grid</div>
+          </div>
+        </div>
+        <div class="cal-container"><div id="calendar-grid" class="cal-grid"></div></div>
+        <div class="cal-legend">
+          <span>Less</span>
+          <span class="cal-legend-cell" style="background:var(--bdr-soft)"></span>
+          <span class="cal-legend-cell" style="background:var(--teal);opacity:0.25"></span>
+          <span class="cal-legend-cell" style="background:var(--teal);opacity:0.5"></span>
+          <span class="cal-legend-cell" style="background:var(--teal);opacity:0.75"></span>
+          <span class="cal-legend-cell" style="background:var(--teal)"></span>
+          <span>More</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -551,6 +704,15 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 <script>
 let DATA = null;
 const CHARTS = {};
+// Per-tab granularity state. Default is 'week' since the pipeline
+// runs weekly. Each tab can be set independently — the filter at the
+// top of each tab only affects that tab's granularity-aware charts.
+const GRANULARITY = { overview: 'week', history: 'week', analysis: 'week' };
+const GRAN_LABELS = {
+  day:   'Last 30 days',
+  week:  'Last 12 weeks',
+  month: 'Last 12 months',
+};
 const TABLE_COLORS = {
   'page_posts':              '#00C4A0',
   'page_info':               '#7C5CBF',
@@ -970,17 +1132,59 @@ const REACTION_COLORS = {
 
 function renderAnalysis(){
   const a = DATA.analysis || {};
+  const g = GRANULARITY.analysis;
+  // Update info pill
+  const info = document.getElementById('gran-info-analysis');
+  if (info) info.textContent = GRAN_LABELS[g];
+
+  // Granularity-aware charts read from `<chart>__<g>` keys
   renderSentDonut(a.sentiment_distribution_today);
-  renderEmotionBar(a.emotion_distribution_30d);
-  renderSentTrend(a.sentiment_trend_30d);
-  renderTopicBar(a.topic_top10_30d);
-  renderAgreeChart(a.agreement_nlp_vs_ds_30d);
-  renderTriggerChart(a.claude_trigger_rate_30d);
+  renderEmotionBar(a['emotion_distribution__' + g]);
+  renderSentTrend(a['sentiment_trend__' + g]);
+  renderTopicBar(a['topic_top10__' + g]);
+  renderTopicSentHeat(a.topic_sentiment_crosstab);
+
+  renderAgreeChart(a['agreement_nlp_vs_ds__' + g]);
+  renderTriggerChart(a['claude_trigger_rate__' + g]);
   renderConfidenceList(a.avg_confidence_by_dimension);
-  renderImpReacChart(a.impressions_reactions_30d);
+  renderConfBoxPlots(a.avg_confidence_by_dimension);
+  renderFunnel(a.pipeline_funnel);
+
+  renderImpReacChart(a['impressions_reactions__' + g]);
   renderReactDonut(a.reaction_mix_today);
   renderSentImpChart(a.sentiment_vs_impressions_today);
   renderTopPosts(a.top_posts_week);
+  renderPageWeekHeat(a.page_week_sentiment);
+  renderPostTimeHeat(a.posting_time_heatmap);
+  renderCalendarHeatmap(a.calendar_heatmap);
+}
+
+function setGranularity(tab, g){
+  GRANULARITY[tab] = g;
+  // Update pill active state inside that tab only
+  document.querySelectorAll('#tab-' + tab + ' .gran-pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.gran === g);
+  });
+  const info = document.getElementById('gran-info-' + tab);
+  if (info) info.textContent = GRAN_LABELS[g];
+
+  // Re-render only the charts owned by that tab. Destroy ALL Chart.js
+  // instances in that tab so canvases redraw cleanly. (We use a name
+  // prefix convention: analysis charts use specific keys we know about.)
+  if (tab === 'analysis') {
+    // All analysis-tab Chart.js instances
+    ['sentDonut', 'emotionBar', 'sentTrend', 'topicBar', 'agreeChart',
+     'triggerChart', 'impReacChart', 'reactDonut', 'sentImpChart']
+      .forEach(k => { if (CHARTS[k]) { CHARTS[k].destroy(); delete CHARTS[k]; } });
+    renderAnalysis();
+  } else if (tab === 'overview') {
+    renderKPIs();
+  } else if (tab === 'history') {
+    ['rows', 'delta', 'rolling'].forEach(k => { if (CHARTS[k]) { CHARTS[k].destroy(); delete CHARTS[k]; } });
+    renderRowsChart();
+    renderDeltaChart();
+    renderRollingChart();
+  }
 }
 
 function emptyMsg(canvasId, msg){
@@ -1049,12 +1253,13 @@ function renderEmotionBar(rows){
 function renderSentTrend(rows){
   if (!rows || !rows.length || rows.error) return emptyMsg('sentTrend', 'No sentiment trend data yet');
   const colors = getColors();
-  // Pivot: rows are {day, label, count} — build {day → {label → count}}
+  // Pivot: rows are {bucket, label, count} — build {bucket → {label → count}}
   const byDay = {};
   const labels = new Set();
   rows.forEach(r => {
-    if (!byDay[r.day]) byDay[r.day] = {};
-    byDay[r.day][r.label] = r.count;
+    const k = r.bucket || r.day;
+    if (!byDay[k]) byDay[k] = {};
+    byDay[k][r.label] = r.count;
     labels.add(r.label);
   });
   const days = Object.keys(byDay).sort();
@@ -1118,7 +1323,7 @@ function renderTopicBar(rows){
 function renderAgreeChart(rows){
   if (!rows || !rows.length || rows.error) return emptyMsg('agreeChart', 'No agreement data yet');
   const colors = getColors();
-  const days = rows.map(r => formatDay(r.day));
+  const days = rows.map(r => formatDay(r.bucket || r.day));
   const pct = rows.map(r => r.total > 0 ? (r.agree / r.total * 100) : 0);
   CHARTS.agreeChart = new Chart(document.getElementById('agreeChart'), {
     type: 'line',
@@ -1149,7 +1354,7 @@ function renderAgreeChart(rows){
 function renderTriggerChart(rows){
   if (!rows || !rows.length || rows.error) return emptyMsg('triggerChart', 'No trigger data yet');
   const colors = getColors();
-  const days = rows.map(r => formatDay(r.day));
+  const days = rows.map(r => formatDay(r.bucket || r.day));
   const pct = rows.map(r => r.total > 0 ? (r.triggered / r.total * 100) : 0);
   CHARTS.triggerChart = new Chart(document.getElementById('triggerChart'), {
     type: 'bar',
@@ -1202,7 +1407,7 @@ function renderImpReacChart(rows){
   CHARTS.impReacChart = new Chart(document.getElementById('impReacChart'), {
     type: 'line',
     data: {
-      labels: rows.map(r => formatDay(r.day)),
+      labels: rows.map(r => formatDay(r.bucket || r.day)),
       datasets: [
         {
           label: 'Impressions',
@@ -1315,6 +1520,282 @@ function renderTopPosts(rows){
       </div>
     </div>
   `).join('');
+}
+
+// ─── NEW CHART RENDERERS ─────────────────────────────────────
+
+function renderTopicSentHeat(rows){
+  const host = document.getElementById('topicSentHeat');
+  if (!host) return;
+  if (!rows || !rows.length || rows.error) {
+    host.innerHTML = '<div style="padding:20px;color:var(--t2);font-size:13px;text-align:center">No topic×sentiment data yet</div>';
+    return;
+  }
+  // Build {topic → {sentiment → count}}
+  const matrix = {};
+  rows.forEach(r => {
+    if (!matrix[r.topic]) matrix[r.topic] = {};
+    matrix[r.topic][r.sentiment] = (matrix[r.topic][r.sentiment] || 0) + r.count;
+  });
+  const topics = Object.keys(matrix);
+  const sentiments = ['positive', 'neutral', 'mixed', 'negative'];
+
+  // Find max for color scaling
+  let maxVal = 0;
+  topics.forEach(t => sentiments.forEach(s => { maxVal = Math.max(maxVal, matrix[t][s] || 0); }));
+
+  // Layout: grid with topic labels left + sentiment cols + col-headers top
+  const cols = `120px repeat(${sentiments.length}, minmax(60px, 1fr))`;
+  let html = `<div class="heat-table" style="grid-template-columns:${cols}">`;
+  // header row
+  html += `<div></div>`;
+  sentiments.forEach(s => {
+    html += `<div class="heat-col-label" style="text-transform:capitalize">${s}</div>`;
+  });
+  // data rows
+  topics.forEach(t => {
+    html += `<div class="heat-row-label">${t}</div>`;
+    sentiments.forEach(s => {
+      const v = matrix[t][s] || 0;
+      const intensity = maxVal > 0 ? v / maxVal : 0;
+      const base = SENT_COLORS[s] || '#999';
+      // Mix sentiment color with intensity (alpha + lightness shift)
+      const alpha = 0.18 + intensity * 0.82;
+      html += `<div class="heat-cell" style="background:${base};opacity:${alpha.toFixed(2)};color:${intensity > 0.5 ? '#fff' : 'var(--t1)'}" title="${t} / ${s}: ${v.toLocaleString()} posts">${v.toLocaleString()}</div>`;
+    });
+  });
+  html += `</div>`;
+  host.innerHTML = html;
+}
+
+function renderConfBoxPlots(rows){
+  const host = document.getElementById('box-list');
+  if (!host) return;
+  if (!rows || !rows.length || rows.error) {
+    host.innerHTML = '<div style="padding:20px;color:var(--t2);font-size:13px;text-align:center">No confidence distribution data yet</div>';
+    return;
+  }
+  // Range: 0 to 1 for confidence values
+  host.innerHTML = rows.map(r => {
+    const min = r.min_conf || 0, max = r.max_conf || 1;
+    const p25 = r.p25 || 0, p50 = r.p50 || 0, p75 = r.p75 || 0;
+    // Convert each to a 0-100 position on the 0-1 confidence scale
+    const pct = v => (v * 100).toFixed(1);
+    return `
+      <div class="box-row">
+        <div class="box-label">${r.dimension}</div>
+        <svg class="box-svg" viewBox="0 0 100 32" preserveAspectRatio="none">
+          <!-- whisker line -->
+          <line x1="${pct(min)}" y1="16" x2="${pct(max)}" y2="16" stroke="var(--t3)" stroke-width="0.5"/>
+          <!-- min/max ticks -->
+          <line x1="${pct(min)}" y1="11" x2="${pct(min)}" y2="21" stroke="var(--t3)" stroke-width="0.5"/>
+          <line x1="${pct(max)}" y1="11" x2="${pct(max)}" y2="21" stroke="var(--t3)" stroke-width="0.5"/>
+          <!-- box p25–p75 -->
+          <rect x="${pct(p25)}" y="6" width="${pct(p75 - p25)}" height="20" fill="var(--teal)" opacity="0.35" stroke="var(--teal)" stroke-width="0.5"/>
+          <!-- median tick -->
+          <line x1="${pct(p50)}" y1="6" x2="${pct(p50)}" y2="26" stroke="var(--teal)" stroke-width="1.4"/>
+          <!-- mean dot -->
+          <circle cx="${pct(r.avg_conf)}" cy="16" r="1.6" fill="var(--arte-1)"/>
+        </svg>
+        <div class="box-stats">μ <strong>${pct(r.avg_conf)}%</strong><br><span>σ ${pct(r.std_conf || 0)}%</span></div>
+      </div>`;
+  }).join('');
+}
+
+function renderFunnel(rows){
+  const host = document.getElementById('funnel-host');
+  if (!host) return;
+  if (!rows || !rows.length || rows.error) {
+    host.innerHTML = '<div style="padding:20px;color:var(--t2);font-size:13px;text-align:center">No funnel data yet</div>';
+    return;
+  }
+  const sorted = [...rows].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+  const maxCount = Math.max(...sorted.map(r => r.count));
+  let html = '<div class="funnel-list">';
+  sorted.forEach((r, i) => {
+    const width = (r.count / maxCount * 100).toFixed(1);
+    const prev = i > 0 ? sorted[i-1].count : null;
+    let dropHtml = '';
+    if (prev !== null && prev > 0) {
+      const dropPct = ((1 - r.count / prev) * 100);
+      if (dropPct > 5) {
+        dropHtml = `<div class="funnel-row-drop">↓ ${dropPct.toFixed(0)}% drop</div>`;
+      }
+    }
+    html += `
+      <div class="funnel-row">
+        <div class="funnel-row-label">${r.stage}</div>
+        <div class="funnel-bar-host">
+          <div class="funnel-bar funnel-bar-stage-${(r.sort_order || (i+1))}" style="width:${width}%">${r.count.toLocaleString()}</div>
+        </div>
+        <div class="funnel-row-stat">
+          <strong>${r.count.toLocaleString()}</strong>
+          ${dropHtml}
+        </div>
+      </div>`;
+  });
+  html += '</div>';
+  host.innerHTML = html;
+}
+
+function renderPageWeekHeat(rows){
+  const host = document.getElementById('pageWeekHeat');
+  if (!host) return;
+  if (!rows || !rows.length || rows.error) {
+    host.innerHTML = '<div style="padding:20px;color:var(--t2);font-size:13px;text-align:center">No page×week data yet</div>';
+    return;
+  }
+  // Build {page → {week → {sentiment → count}}}
+  const grid = {};
+  const pagesSet = new Set();
+  const weeksSet = new Set();
+  rows.forEach(r => {
+    if (!grid[r.page_name]) grid[r.page_name] = {};
+    if (!grid[r.page_name][r.week]) grid[r.page_name][r.week] = {};
+    grid[r.page_name][r.week][r.sentiment] = (grid[r.page_name][r.week][r.sentiment] || 0) + r.count;
+    pagesSet.add(r.page_name);
+    weeksSet.add(r.week);
+  });
+  const pages = Array.from(pagesSet);
+  const weeks = Array.from(weeksSet).sort();
+
+  // For each cell, pick the dominant sentiment + total count
+  const cols = `140px repeat(${weeks.length}, minmax(50px, 1fr))`;
+  let html = `<div class="heat-table" style="grid-template-columns:${cols}">`;
+  html += `<div></div>`;
+  weeks.forEach(w => {
+    const d = new Date(w);
+    const lbl = `${d.getDate()}/${d.getMonth()+1}`;
+    html += `<div class="heat-col-label">${lbl}</div>`;
+  });
+  pages.forEach(p => {
+    html += `<div class="heat-row-label">${p}</div>`;
+    weeks.forEach(w => {
+      const cell = grid[p] && grid[p][w];
+      if (!cell) {
+        html += '<div class="heat-cell empty">—</div>';
+        return;
+      }
+      // dominant sentiment
+      let bestSent = 'neutral', bestCount = 0;
+      Object.entries(cell).forEach(([s, c]) => { if (c > bestCount) { bestSent = s; bestCount = c; } });
+      const total = Object.values(cell).reduce((a, b) => a + b, 0);
+      const base = SENT_COLORS[bestSent] || '#999';
+      // Tooltip with breakdown
+      const breakdown = ['positive', 'neutral', 'mixed', 'negative']
+        .map(s => `${s}: ${cell[s]||0}`).join(' · ');
+      html += `<div class="heat-cell" style="background:${base};opacity:0.85;color:#fff" title="${p} / week ${w}: ${total} posts (${breakdown})">${total}</div>`;
+    });
+  });
+  html += `</div>`;
+  // Legend
+  html += `<div class="heat-legend">
+    <span>Dominant sentiment:</span>
+    <span class="cal-legend-cell" style="background:${SENT_COLORS.positive}"></span><span>positive</span>
+    <span class="cal-legend-cell" style="background:${SENT_COLORS.neutral}"></span><span>neutral</span>
+    <span class="cal-legend-cell" style="background:${SENT_COLORS.mixed}"></span><span>mixed</span>
+    <span class="cal-legend-cell" style="background:${SENT_COLORS.negative}"></span><span>negative</span>
+  </div>`;
+  host.innerHTML = html;
+}
+
+function renderPostTimeHeat(rows){
+  const host = document.getElementById('postTimeHeat');
+  if (!host) return;
+  if (!rows || !rows.length || rows.error) {
+    host.innerHTML = '<div style="padding:20px;color:var(--t2);font-size:13px;text-align:center">No posting-time data yet</div>';
+    return;
+  }
+  // Grid: 7 days × 24 hours. Redshift DOW: 0=Sunday, 1=Monday...6=Saturday
+  const dows = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const lookup = {};
+  let maxImp = 0;
+  rows.forEach(r => {
+    const key = `${r.day_of_week}_${r.hour_of_day}`;
+    lookup[key] = r.avg_impressions;
+    if (r.avg_impressions > maxImp) maxImp = r.avg_impressions;
+  });
+
+  const cols = `40px repeat(24, minmax(20px, 1fr))`;
+  let html = `<div class="heat-table" style="grid-template-columns:${cols}">`;
+  // header: hours 0..23
+  html += `<div></div>`;
+  for (let h = 0; h < 24; h++) {
+    html += `<div class="heat-col-label">${h.toString().padStart(2, '0')}</div>`;
+  }
+  // rows: 7 dows. Re-order to Mon-Sun (more natural)
+  const dowOrder = [1, 2, 3, 4, 5, 6, 0];
+  dowOrder.forEach(dow => {
+    html += `<div class="heat-row-label">${dows[dow]}</div>`;
+    for (let h = 0; h < 24; h++) {
+      const v = lookup[`${dow}_${h}`] || 0;
+      const intensity = maxImp > 0 ? v / maxImp : 0;
+      const opacity = 0.15 + intensity * 0.85;
+      html += `<div class="heat-cell" style="background:var(--teal);opacity:${opacity.toFixed(2)};min-width:0;font-size:9px;color:${intensity > 0.5 ? '#fff' : 'var(--t1)'}" title="${dows[dow]} ${h}:00 — avg ${Math.round(v).toLocaleString()} impressions">${intensity > 0.5 ? (v/1000).toFixed(0)+'K' : ''}</div>`;
+    }
+  });
+  html += `</div>`;
+  host.innerHTML = html;
+}
+
+function renderCalendarHeatmap(rows){
+  const host = document.getElementById('calendar-grid');
+  if (!host) return;
+  if (!rows || !rows.length || rows.error) {
+    host.innerHTML = '<div style="padding:20px;color:var(--t2);font-size:13px;text-align:center;grid-column:1/-1">No calendar data yet</div>';
+    return;
+  }
+  // Sort by date ascending
+  const sorted = [...rows].sort((a, b) => a.day.localeCompare(b.day));
+  const maxCount = Math.max(...sorted.map(r => r.count));
+
+  // Build week-based grid. Each cell is at (col=week_index, row=dow+1, since row=1 is month labels)
+  // Start from sorted[0].day, place each in correct column and row.
+  let html = '';
+
+  // Day labels in first column (Mon/Wed/Fri only to save space)
+  html += `<div></div>`; // top-left corner
+  // 53 week headers — month labels at first week of each month
+  let lastMonth = -1;
+  for (let w = 0; w < 53; w++) {
+    // Find first date in this week column from the data
+    const idx = w * 7;
+    if (idx < sorted.length) {
+      const d = new Date(sorted[idx].day);
+      const m = d.getMonth();
+      if (m !== lastMonth) {
+        const monNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        html += `<div class="cal-month-label">${monNames[m]}</div>`;
+        lastMonth = m;
+      } else {
+        html += `<div></div>`;
+      }
+    } else {
+      html += `<div></div>`;
+    }
+  }
+  // 7 rows (dow), each starts with day label
+  const dayNames = ['Sun', '', 'Tue', '', 'Thu', '', 'Sat'];
+  for (let dow = 0; dow < 7; dow++) {
+    html += `<div class="cal-day-label">${dayNames[dow]}</div>`;
+    for (let w = 0; w < 53; w++) {
+      const idx = w * 7 + dow;
+      if (idx >= sorted.length) {
+        html += `<div></div>`;
+        continue;
+      }
+      const r = sorted[idx];
+      const intensity = maxCount > 0 ? r.count / maxCount : 0;
+      let bg;
+      if (r.count === 0) bg = 'var(--bdr-soft)';
+      else {
+        const op = 0.25 + intensity * 0.75;
+        bg = `color-mix(in srgb, var(--teal) ${(op * 100).toFixed(0)}%, transparent)`;
+      }
+      html += `<div class="cal-cell" style="background:${bg}" title="${r.day}: ${r.count.toLocaleString()} posts"></div>`;
+    }
+  }
+  host.innerHTML = html;
 }
 
 function chartOpts(colors){

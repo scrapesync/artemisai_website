@@ -165,9 +165,110 @@ def run_freshness_query(conn):
 #                            page_name, created_time, message, load_date
 #   page_posts:              id, page_id, page_name, load_date
 
-ANALYSIS_QUERIES = {
+ANALYSIS_GRANULARITIES = ['day', 'week', 'month']
 
-    # ─── NLP Output ─────────────────────────────────────────────
+# Time windows per granularity (how much history to pull for each).
+# day  → 30 days, week → 12 weeks (84 days), month → 12 months (~365 days)
+GRANULARITY_DAYS = {'day': 30, 'week': 84, 'month': 365}
+
+# Redshift expressions to truncate timestamps to the right bucket per granularity.
+def _trunc(col, g):
+    if g == 'day':
+        return f"{col}::date"
+    # DATE_TRUNC returns timestamp, cast to date for cleaner JSON
+    return f"DATE_TRUNC('{g}', {col})::date"
+
+
+def _build_time_series_queries(g):
+    """Build the granularity-dependent queries for a given bucket size.
+    These are the charts where the granularity filter actually changes the
+    SQL output. Static queries (donut for yesterday, top posts this week,
+    etc.) are kept out and added once in build_static_queries()."""
+    days_back = GRANULARITY_DAYS[g]
+    trunc_inserted = _trunc('inserted_at', g)
+    trunc_load = _trunc('load_date', g)
+    return {
+
+        f'sentiment_trend__{g}': f"""
+            SELECT
+              {trunc_inserted} AS bucket,
+              COALESCE(nlp_sentiment, 'unknown') AS label,
+              COUNT(*) AS count
+            FROM rdl.post_label_predictions
+            WHERE inserted_at >= DATEADD(day, -{days_back}, SYSDATE)
+            GROUP BY 1, 2
+            ORDER BY 1, 2;
+        """,
+
+        f'agreement_nlp_vs_ds__{g}': f"""
+            SELECT
+              {trunc_inserted} AS bucket,
+              SUM(CASE WHEN nlp_sentiment = ds_sentiment THEN 1 ELSE 0 END) AS agree,
+              COUNT(*) AS total
+            FROM rdl.post_label_predictions
+            WHERE inserted_at >= DATEADD(day, -{days_back}, SYSDATE)
+              AND nlp_sentiment IS NOT NULL
+              AND ds_sentiment IS NOT NULL
+            GROUP BY 1
+            ORDER BY 1;
+        """,
+
+        f'claude_trigger_rate__{g}': f"""
+            SELECT
+              {trunc_inserted} AS bucket,
+              SUM(CASE WHEN cl_triggered THEN 1 ELSE 0 END) AS triggered,
+              COUNT(*) AS total
+            FROM rdl.post_label_predictions
+            WHERE inserted_at >= DATEADD(day, -{days_back}, SYSDATE)
+            GROUP BY 1
+            ORDER BY 1;
+        """,
+
+        f'impressions_reactions__{g}': f"""
+            SELECT
+              {trunc_load} AS bucket,
+              SUM(post_impressions) AS impressions,
+              SUM(COALESCE(post_reactions_like_total, 0)
+                + COALESCE(post_reactions_love_total, 0)
+                + COALESCE(post_reactions_wow_total, 0)
+                + COALESCE(post_reactions_haha_total, 0)
+                + COALESCE(post_reactions_sorry_total, 0)
+                + COALESCE(post_reactions_anger_total, 0)) AS reactions
+            FROM rdl.post_daily_insights
+            WHERE load_date >= (SYSDATE - INTERVAL '{days_back} days')::date
+            GROUP BY 1
+            ORDER BY 1;
+        """,
+
+        f'emotion_distribution__{g}': f"""
+            SELECT
+              COALESCE(nlp_emotion, 'unknown') AS label,
+              COUNT(*) AS count
+            FROM rdl.post_label_predictions
+            WHERE inserted_at >= DATEADD(day, -{days_back}, SYSDATE)
+              AND nlp_emotion IS NOT NULL
+            GROUP BY 1
+            ORDER BY 2 DESC;
+        """,
+
+        f'topic_top10__{g}': f"""
+            SELECT
+              COALESCE(nlp_topic, 'unknown') AS label,
+              COUNT(*) AS count
+            FROM rdl.post_label_predictions
+            WHERE inserted_at >= DATEADD(day, -{days_back}, SYSDATE)
+              AND nlp_topic IS NOT NULL
+            GROUP BY 1
+            ORDER BY 2 DESC
+            LIMIT 10;
+        """,
+    }
+
+
+# Static queries — same regardless of granularity (always "today" or "this week")
+STATIC_QUERIES = {
+
+    # Sentiment donut — yesterday only (single point in time, no granularity)
     'sentiment_distribution_today': """
         SELECT
           COALESCE(nlp_sentiment, 'unknown') AS label,
@@ -178,114 +279,66 @@ ANALYSIS_QUERIES = {
         ORDER BY 2 DESC;
     """,
 
-    'sentiment_trend_30d': """
-        SELECT
-          inserted_at::date AS day,
-          COALESCE(nlp_sentiment, 'unknown') AS label,
-          COUNT(*) AS count
-        FROM rdl.post_label_predictions
-        WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
-        GROUP BY 1, 2
-        ORDER BY 1, 2;
-    """,
-
-    'emotion_distribution_30d': """
-        SELECT
-          COALESCE(nlp_emotion, 'unknown') AS label,
-          COUNT(*) AS count
-        FROM rdl.post_label_predictions
-        WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
-          AND nlp_emotion IS NOT NULL
-        GROUP BY 1
-        ORDER BY 2 DESC;
-    """,
-
-    'topic_top10_30d': """
-        SELECT
-          COALESCE(nlp_topic, 'unknown') AS label,
-          COUNT(*) AS count
-        FROM rdl.post_label_predictions
-        WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
-          AND nlp_topic IS NOT NULL
-        GROUP BY 1
-        ORDER BY 2 DESC
-        LIMIT 10;
-    """,
-
-    # ─── Model QA ───────────────────────────────────────────────
-    'agreement_nlp_vs_ds_30d': """
-        SELECT
-          inserted_at::date AS day,
-          SUM(CASE WHEN nlp_sentiment = ds_sentiment THEN 1 ELSE 0 END) AS agree,
-          COUNT(*) AS total
-        FROM rdl.post_label_predictions
-        WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
-          AND nlp_sentiment IS NOT NULL
-          AND ds_sentiment IS NOT NULL
-        GROUP BY 1
-        ORDER BY 1;
-    """,
-
+    # Average confidence per dimension — single snapshot of last 30 days
     'avg_confidence_by_dimension': """
         SELECT
           'sentiment' AS dimension,
-          AVG(nlp_sentiment_confidence) AS avg_conf
+          AVG(nlp_sentiment_confidence) AS avg_conf,
+          STDDEV(nlp_sentiment_confidence) AS std_conf,
+          MIN(nlp_sentiment_confidence) AS min_conf,
+          MAX(nlp_sentiment_confidence) AS max_conf,
+          APPROXIMATE PERCENTILE_DISC(0.50) WITHIN GROUP (ORDER BY nlp_sentiment_confidence) AS p50,
+          APPROXIMATE PERCENTILE_DISC(0.25) WITHIN GROUP (ORDER BY nlp_sentiment_confidence) AS p25,
+          APPROXIMATE PERCENTILE_DISC(0.75) WITHIN GROUP (ORDER BY nlp_sentiment_confidence) AS p75
         FROM rdl.post_label_predictions
         WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_sentiment_confidence IS NOT NULL
-        UNION ALL SELECT 'emotion',  AVG(nlp_emotion_confidence)  FROM rdl.post_label_predictions
-          WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_emotion_confidence IS NOT NULL
-        UNION ALL SELECT 'topic',    AVG(nlp_topic_confidence)    FROM rdl.post_label_predictions
-          WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_topic_confidence IS NOT NULL
-        UNION ALL SELECT 'intent',   AVG(nlp_intent_confidence)   FROM rdl.post_label_predictions
-          WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_intent_confidence IS NOT NULL
-        UNION ALL SELECT 'toxicity', AVG(nlp_toxicity_confidence) FROM rdl.post_label_predictions
-          WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_toxicity_confidence IS NOT NULL;
+        UNION ALL SELECT 'emotion',
+          AVG(nlp_emotion_confidence), STDDEV(nlp_emotion_confidence),
+          MIN(nlp_emotion_confidence), MAX(nlp_emotion_confidence),
+          APPROXIMATE PERCENTILE_DISC(0.50) WITHIN GROUP (ORDER BY nlp_emotion_confidence),
+          APPROXIMATE PERCENTILE_DISC(0.25) WITHIN GROUP (ORDER BY nlp_emotion_confidence),
+          APPROXIMATE PERCENTILE_DISC(0.75) WITHIN GROUP (ORDER BY nlp_emotion_confidence)
+        FROM rdl.post_label_predictions WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_emotion_confidence IS NOT NULL
+        UNION ALL SELECT 'topic',
+          AVG(nlp_topic_confidence), STDDEV(nlp_topic_confidence),
+          MIN(nlp_topic_confidence), MAX(nlp_topic_confidence),
+          APPROXIMATE PERCENTILE_DISC(0.50) WITHIN GROUP (ORDER BY nlp_topic_confidence),
+          APPROXIMATE PERCENTILE_DISC(0.25) WITHIN GROUP (ORDER BY nlp_topic_confidence),
+          APPROXIMATE PERCENTILE_DISC(0.75) WITHIN GROUP (ORDER BY nlp_topic_confidence)
+        FROM rdl.post_label_predictions WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_topic_confidence IS NOT NULL
+        UNION ALL SELECT 'intent',
+          AVG(nlp_intent_confidence), STDDEV(nlp_intent_confidence),
+          MIN(nlp_intent_confidence), MAX(nlp_intent_confidence),
+          APPROXIMATE PERCENTILE_DISC(0.50) WITHIN GROUP (ORDER BY nlp_intent_confidence),
+          APPROXIMATE PERCENTILE_DISC(0.25) WITHIN GROUP (ORDER BY nlp_intent_confidence),
+          APPROXIMATE PERCENTILE_DISC(0.75) WITHIN GROUP (ORDER BY nlp_intent_confidence)
+        FROM rdl.post_label_predictions WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_intent_confidence IS NOT NULL
+        UNION ALL SELECT 'toxicity',
+          AVG(nlp_toxicity_confidence), STDDEV(nlp_toxicity_confidence),
+          MIN(nlp_toxicity_confidence), MAX(nlp_toxicity_confidence),
+          APPROXIMATE PERCENTILE_DISC(0.50) WITHIN GROUP (ORDER BY nlp_toxicity_confidence),
+          APPROXIMATE PERCENTILE_DISC(0.25) WITHIN GROUP (ORDER BY nlp_toxicity_confidence),
+          APPROXIMATE PERCENTILE_DISC(0.75) WITHIN GROUP (ORDER BY nlp_toxicity_confidence)
+        FROM rdl.post_label_predictions WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_toxicity_confidence IS NOT NULL;
     """,
 
-    'claude_trigger_rate_30d': """
-        SELECT
-          inserted_at::date AS day,
-          SUM(CASE WHEN cl_triggered THEN 1 ELSE 0 END) AS triggered,
-          COUNT(*) AS total
-        FROM rdl.post_label_predictions
-        WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
-        GROUP BY 1
-        ORDER BY 1;
-    """,
-
-    # ─── Engagement ─────────────────────────────────────────────
-    'impressions_reactions_30d': """
-        SELECT
-          load_date AS day,
-          SUM(post_impressions) AS impressions,
-          SUM(COALESCE(post_reactions_like_total, 0)
-            + COALESCE(post_reactions_love_total, 0)
-            + COALESCE(post_reactions_wow_total, 0)
-            + COALESCE(post_reactions_haha_total, 0)
-            + COALESCE(post_reactions_sorry_total, 0)
-            + COALESCE(post_reactions_anger_total, 0)) AS reactions
-        FROM rdl.post_daily_insights
-        WHERE load_date >= (SYSDATE - INTERVAL '30 days')::date
-        GROUP BY 1
-        ORDER BY 1;
-    """,
-
+    # Yesterday's reaction mix
     'reaction_mix_today': """
-        SELECT
-          'like'   AS reaction, SUM(post_reactions_like_total)  AS count FROM rdl.post_daily_insights
-            WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
-        UNION ALL SELECT 'love',  SUM(post_reactions_love_total)  FROM rdl.post_daily_insights
-            WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
-        UNION ALL SELECT 'wow',   SUM(post_reactions_wow_total)   FROM rdl.post_daily_insights
-            WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
-        UNION ALL SELECT 'haha',  SUM(post_reactions_haha_total)  FROM rdl.post_daily_insights
-            WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
-        UNION ALL SELECT 'sorry', SUM(post_reactions_sorry_total) FROM rdl.post_daily_insights
-            WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
-        UNION ALL SELECT 'anger', SUM(post_reactions_anger_total) FROM rdl.post_daily_insights
-            WHERE load_date = (SYSDATE - INTERVAL '1 day')::date;
+        SELECT 'like' AS reaction, SUM(post_reactions_like_total) AS count
+            FROM rdl.post_daily_insights WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
+        UNION ALL SELECT 'love', SUM(post_reactions_love_total)
+            FROM rdl.post_daily_insights WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
+        UNION ALL SELECT 'wow', SUM(post_reactions_wow_total)
+            FROM rdl.post_daily_insights WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
+        UNION ALL SELECT 'haha', SUM(post_reactions_haha_total)
+            FROM rdl.post_daily_insights WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
+        UNION ALL SELECT 'sorry', SUM(post_reactions_sorry_total)
+            FROM rdl.post_daily_insights WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
+        UNION ALL SELECT 'anger', SUM(post_reactions_anger_total)
+            FROM rdl.post_daily_insights WHERE load_date = (SYSDATE - INTERVAL '1 day')::date;
     """,
 
+    # Top 10 posts this week
     'top_posts_week': """
         SELECT
           page_name,
@@ -304,6 +357,7 @@ ANALYSIS_QUERIES = {
         LIMIT 10;
     """,
 
+    # Sentiment vs impressions, last 7 days
     'sentiment_vs_impressions_today': """
         SELECT
           COALESCE(p.nlp_sentiment, 'unknown') AS sentiment,
@@ -317,18 +371,131 @@ ANALYSIS_QUERIES = {
         GROUP BY 1
         ORDER BY 2 DESC;
     """,
+
+    # ─── NEW: Topic × sentiment cross-tab (last 30 days) ───
+    # For each top topic, count posts by sentiment. Frontend renders as heatmap.
+    'topic_sentiment_crosstab': """
+        WITH top_topics AS (
+          SELECT nlp_topic
+          FROM rdl.post_label_predictions
+          WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
+            AND nlp_topic IS NOT NULL
+          GROUP BY 1
+          ORDER BY COUNT(*) DESC
+          LIMIT 10
+        )
+        SELECT
+          p.nlp_topic AS topic,
+          COALESCE(p.nlp_sentiment, 'unknown') AS sentiment,
+          COUNT(*) AS count
+        FROM rdl.post_label_predictions p
+        JOIN top_topics t ON p.nlp_topic = t.nlp_topic
+        WHERE p.inserted_at >= DATEADD(day, -30, SYSDATE)
+        GROUP BY 1, 2
+        ORDER BY 1, 2;
+    """,
+
+    # ─── NEW: Pipeline funnel ───
+    # Counts at each stage of the labelling pipeline, last 30 days
+    'pipeline_funnel': """
+        SELECT 'Posts inserted' AS stage,
+               COUNT(*) AS count, 1 AS sort_order
+            FROM rdl.post_label_predictions
+            WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
+        UNION ALL SELECT 'DeepSeek labelled',
+            COUNT(CASE WHEN ds_sentiment IS NOT NULL THEN 1 END), 2
+            FROM rdl.post_label_predictions
+            WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
+        UNION ALL SELECT 'NLP labelled',
+            COUNT(CASE WHEN nlp_sentiment IS NOT NULL THEN 1 END), 3
+            FROM rdl.post_label_predictions
+            WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
+        UNION ALL SELECT 'High confidence (>0.80)',
+            COUNT(CASE WHEN nlp_sentiment_confidence >= 0.80 THEN 1 END), 4
+            FROM rdl.post_label_predictions
+            WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
+        UNION ALL SELECT 'Claude escalated',
+            COUNT(CASE WHEN cl_triggered THEN 1 END), 5
+            FROM rdl.post_label_predictions
+            WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
+        ORDER BY sort_order;
+    """,
+
+    # ─── NEW: Page × week sentiment heatmap (8 weeks × top 10 pages) ───
+    # For each page, for each week, the count of each sentiment.
+    # Frontend reduces to a single dominant-sentiment cell per (page, week).
+    'page_week_sentiment': """
+        WITH top_pages AS (
+          SELECT i.page_name
+          FROM rdl.post_daily_insights i
+          WHERE i.load_date >= (SYSDATE - INTERVAL '56 days')::date
+            AND i.page_name IS NOT NULL
+          GROUP BY 1
+          ORDER BY COUNT(*) DESC
+          LIMIT 10
+        )
+        SELECT
+          i.page_name AS page_name,
+          DATE_TRUNC('week', p.inserted_at)::date AS week,
+          COALESCE(p.nlp_sentiment, 'unknown') AS sentiment,
+          COUNT(*) AS count
+        FROM rdl.post_label_predictions p
+        JOIN rdl.post_daily_insights i ON p.post_id = i.post_id
+        JOIN top_pages tp ON i.page_name = tp.page_name
+        WHERE p.inserted_at >= DATEADD(day, -56, SYSDATE)
+          AND p.nlp_sentiment IS NOT NULL
+        GROUP BY 1, 2, 3
+        ORDER BY 1, 2;
+    """,
+
+    # ─── NEW: Posting time heatmap (day-of-week × hour-of-day) ───
+    # Avg impressions per (DOW, hour) bucket, last 90 days.
+    # EXTRACT DOW: 0=Sunday in Redshift, so we'll handle that frontend-side.
+    'posting_time_heatmap': """
+        SELECT
+          EXTRACT(DOW FROM created_time) AS day_of_week,
+          EXTRACT(HOUR FROM created_time) AS hour_of_day,
+          AVG(post_impressions) AS avg_impressions,
+          COUNT(*) AS n
+        FROM rdl.post_daily_insights
+        WHERE created_time >= DATEADD(day, -90, SYSDATE)
+          AND post_impressions IS NOT NULL
+        GROUP BY 1, 2
+        ORDER BY 1, 2;
+    """,
+
+    # ─── NEW: Calendar heatmap (12 months daily post counts) ───
+    # GitHub-style contribution grid. Daily granularity, 365 days.
+    'calendar_heatmap': """
+        SELECT
+          inserted_at::date AS day,
+          COUNT(*) AS count
+        FROM rdl.post_label_predictions
+        WHERE inserted_at >= DATEADD(day, -365, SYSDATE)
+        GROUP BY 1
+        ORDER BY 1;
+    """,
 }
 
 
+def build_all_analysis_queries():
+    """Combine all time-series queries (one set per granularity) with the
+    static queries. Returns a flat dict that run_analysis() executes."""
+    queries = dict(STATIC_QUERIES)
+    for g in ANALYSIS_GRANULARITIES:
+        queries.update(_build_time_series_queries(g))
+    return queries
+
+
 def run_analysis(conn):
-    """Run all analysis queries. Each returns rows; we shape them so the
-    front-end gets a predictable structure per chart. Failures on a single
-    query don't kill the rest — the page just won't have that chart."""
+    """Run every analysis query against the connection. Per-query failure
+    is caught so one broken column doesn't blank the whole tab — that one
+    chart shows 'no data yet'."""
     out = {}
-    for name, sql in ANALYSIS_QUERIES.items():
+    queries = build_all_analysis_queries()
+    for name, sql in queries.items():
         try:
             rows = _query(conn, sql)
-            # JSON-safe conversion of every value
             cleaned = []
             for r in rows:
                 cleaned.append({k: _json_safe(v) for k, v in r.items()})
