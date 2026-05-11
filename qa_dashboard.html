@@ -161,6 +161,39 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 
 .tab-content{display:none}
 .tab-content.active{display:block}
+
+/* ─── Analysis sub-sections ─── */
+.subsec-strip{display:flex;gap:6px;margin:0 0 14px 0;flex-wrap:wrap}
+.subsec-btn{padding:6px 14px;background:var(--bg-elev);border:1px solid var(--bdr-soft);color:var(--t2);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;border-radius:9999px;display:inline-flex;align-items:center;gap:6px;transition:all .15s}
+.subsec-btn:hover{color:var(--t1);border-color:var(--bdr)}
+.subsec-btn.active{color:var(--teal);border-color:var(--teal);background:var(--teal-bg)}
+.subsec-btn svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2}
+.subsec-content{display:none}
+.subsec-content.active{display:block}
+
+/* ─── Top posts table ─── */
+.top-post-row{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--bdr-soft)}
+.top-post-row:last-child{border-bottom:none}
+.top-post-rank{width:24px;height:24px;border-radius:6px;background:var(--bg-input);display:grid;place-items:center;font-size:11px;font-weight:800;color:var(--t2);flex-shrink:0;font-variant-numeric:tabular-nums}
+.top-post-row:nth-child(1) .top-post-rank{background:var(--teal-bg);color:var(--teal)}
+.top-post-row:nth-child(2) .top-post-rank{background:var(--arte-bg);color:var(--arte-1)}
+.top-post-row:nth-child(3) .top-post-rank{background:var(--warn-bg);color:var(--warn)}
+.top-post-body{flex:1;min-width:0}
+.top-post-page{font-size:11px;color:var(--teal);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px}
+.top-post-msg{font-size:13px;color:var(--t1);line-height:1.4;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.top-post-stats{display:flex;gap:14px;font-size:11px;color:var(--t2);margin-top:4px;font-variant-numeric:tabular-nums}
+.top-post-stat strong{color:var(--t1)}
+
+/* ─── Confidence row ─── */
+.conf-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bdr-soft)}
+.conf-row:last-child{border-bottom:none}
+.conf-label{width:90px;font-size:12px;font-weight:600;color:var(--t1);text-transform:capitalize}
+.conf-bar{flex:1;height:8px;background:var(--bg-input);border-radius:9999px;overflow:hidden;position:relative}
+.conf-bar > div{height:100%;border-radius:9999px;transition:width .3s}
+.conf-bar.high > div{background:var(--opp)}
+.conf-bar.med > div{background:var(--warn)}
+.conf-bar.low > div{background:var(--crisis)}
+.conf-val{font-size:13px;font-weight:700;color:var(--t1);font-variant-numeric:tabular-nums;width:54px;text-align:right}
 </style>
 </head>
 <body>
@@ -195,6 +228,10 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   <button class="tab-btn" data-tab="history" onclick="switchTab('history')">
     <svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg>
     History
+  </button>
+  <button class="tab-btn" data-tab="analysis" onclick="switchTab('analysis')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    Analysis
   </button>
   <button class="tab-btn" data-tab="alerts" onclick="switchTab('alerts')">
     <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
@@ -326,6 +363,153 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
     </div>
   </div>
 
+  <!-- ═══ ANALYSIS TAB ═══ -->
+  <div id="tab-analysis" class="tab-content">
+    <div class="page-header">
+      <div class="page-header-text">
+        <div class="page-title">Content analysis</div>
+        <div class="page-sub">What the data actually contains — NLP labels, model agreement, engagement signals from the last 30 days</div>
+      </div>
+    </div>
+
+    <div class="subsec-strip">
+      <button class="subsec-btn active" data-subsec="nlp" onclick="switchSubsec('nlp')">
+        <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+        NLP Output
+      </button>
+      <button class="subsec-btn" data-subsec="modelqa" onclick="switchSubsec('modelqa')">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        Model QA
+      </button>
+      <button class="subsec-btn" data-subsec="engagement" onclick="switchSubsec('engagement')">
+        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        Engagement
+      </button>
+    </div>
+
+    <!-- ─── NLP Output sub-section ─── -->
+    <div id="subsec-nlp" class="subsec-content active">
+      <div class="row split-1-1">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-header-text">
+              <div class="panel-title">Sentiment distribution — yesterday</div>
+              <div class="panel-sub">Labels from nlp_sentiment on posts inserted in the last 24h</div>
+            </div>
+          </div>
+          <div class="chart-host" style="height:240px"><canvas id="sentDonut"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-header-text">
+              <div class="panel-title">Emotion distribution — 30 days</div>
+              <div class="panel-sub">nlp_emotion counts across all labelled posts</div>
+            </div>
+          </div>
+          <div class="chart-host" style="height:240px"><canvas id="emotionBar"></canvas></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-text">
+            <div class="panel-title">Sentiment trend — 30 days</div>
+            <div class="panel-sub">Daily share of each sentiment label · stacked area</div>
+          </div>
+        </div>
+        <div class="chart-host tall"><canvas id="sentTrend"></canvas></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-text">
+            <div class="panel-title">Top topics — 30 days</div>
+            <div class="panel-sub">Top 10 from nlp_topic by post volume</div>
+          </div>
+        </div>
+        <div class="chart-host"><canvas id="topicBar"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ─── Model QA sub-section ─── -->
+    <div id="subsec-modelqa" class="subsec-content">
+      <div class="row split-1-1">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-header-text">
+              <div class="panel-title">nlp ↔ ds agreement — 30 days</div>
+              <div class="panel-sub">% of posts where nlp_sentiment matches ds_sentiment · drops mean model drift</div>
+            </div>
+          </div>
+          <div class="chart-host"><canvas id="agreeChart"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-header-text">
+              <div class="panel-title">Claude trigger rate — 30 days</div>
+              <div class="panel-sub">% of posts where cl_triggered = true · should be low if NLP+DS are confident</div>
+            </div>
+          </div>
+          <div class="chart-host"><canvas id="triggerChart"></canvas></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-text">
+            <div class="panel-title">Average confidence per dimension</div>
+            <div class="panel-sub">Mean nlp_*_confidence over the last 30 days · green &gt; 0.85 · amber 0.70-0.85 · red &lt; 0.70</div>
+          </div>
+        </div>
+        <div id="conf-list"></div>
+      </div>
+    </div>
+
+    <!-- ─── Engagement sub-section ─── -->
+    <div id="subsec-engagement" class="subsec-content">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-text">
+            <div class="panel-title">Impressions &amp; reactions — 30 days</div>
+            <div class="panel-sub">Daily totals from post_daily_insights · dual-axis</div>
+          </div>
+        </div>
+        <div class="chart-host tall"><canvas id="impReacChart"></canvas></div>
+      </div>
+
+      <div class="row split-1-1">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-header-text">
+              <div class="panel-title">Reaction mix — yesterday</div>
+              <div class="panel-sub">Like / love / haha / wow / sorry / anger</div>
+            </div>
+          </div>
+          <div class="chart-host" style="height:240px"><canvas id="reactDonut"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-header-text">
+              <div class="panel-title">Sentiment vs impressions</div>
+              <div class="panel-sub">Avg post_impressions per sentiment label · last 7 days</div>
+            </div>
+          </div>
+          <div class="chart-host" style="height:240px"><canvas id="sentImpChart"></canvas></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-text">
+            <div class="panel-title">Top 10 posts by impressions — this week</div>
+            <div class="panel-sub">From post_daily_insights joined with page_posts</div>
+          </div>
+        </div>
+        <div id="top-posts-list"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══ ALERTS TAB ═══ -->
   <div id="tab-alerts" class="tab-content">
     <div class="page-header">
@@ -449,7 +633,15 @@ function renderAll(){
   renderRowsChart();
   renderDeltaChart();
   renderRollingChart();
+  renderAnalysis();
   renderAlerts();
+}
+
+function switchSubsec(name){
+  document.querySelectorAll('.subsec-btn').forEach(b => b.classList.toggle('active', b.dataset.subsec === name));
+  document.querySelectorAll('.subsec-content').forEach(c => c.classList.toggle('active', c.id === 'subsec-' + name));
+  // Force chart resize since they were drawn in hidden divs
+  Object.values(CHARTS).forEach(c => c && c.resize());
 }
 
 function renderHeader(){
@@ -764,6 +956,365 @@ function renderAlerts(){
 function formatDay(iso){
   const d = new Date(iso);
   return d.getDate() + '/' + (d.getMonth()+1);
+}
+
+// ═══ ANALYSIS TAB ═══════════════════════════════════════════
+const SENT_COLORS = {
+  'positive': '#22C55E', 'neutral': '#65676B', 'negative': '#E53935',
+  'mixed':    '#F59E0B', 'unknown': '#9CA3AF',
+};
+const REACTION_COLORS = {
+  'like':  '#3B82F6', 'love':  '#EC4899', 'haha':  '#F59E0B',
+  'wow':   '#7C5CBF', 'sorry': '#06B6D4', 'anger': '#E53935',
+};
+
+function renderAnalysis(){
+  const a = DATA.analysis || {};
+  renderSentDonut(a.sentiment_distribution_today);
+  renderEmotionBar(a.emotion_distribution_30d);
+  renderSentTrend(a.sentiment_trend_30d);
+  renderTopicBar(a.topic_top10_30d);
+  renderAgreeChart(a.agreement_nlp_vs_ds_30d);
+  renderTriggerChart(a.claude_trigger_rate_30d);
+  renderConfidenceList(a.avg_confidence_by_dimension);
+  renderImpReacChart(a.impressions_reactions_30d);
+  renderReactDonut(a.reaction_mix_today);
+  renderSentImpChart(a.sentiment_vs_impressions_today);
+  renderTopPosts(a.top_posts_week);
+}
+
+function emptyMsg(canvasId, msg){
+  // Replace canvas with a "no data" placeholder
+  const c = document.getElementById(canvasId);
+  if (!c) return;
+  const parent = c.parentNode;
+  parent.innerHTML = `<div style="height:100%;display:grid;place-items:center;color:var(--t2);font-size:13px;text-align:center;padding:20px">${msg}</div>`;
+}
+
+function renderSentDonut(rows){
+  if (!rows || !rows.length || rows.error) return emptyMsg('sentDonut', 'No sentiment data yet');
+  const colors = getColors();
+  CHARTS.sentDonut = new Chart(document.getElementById('sentDonut'), {
+    type: 'doughnut',
+    data: {
+      labels: rows.map(r => r.label),
+      datasets: [{
+        data: rows.map(r => r.count),
+        backgroundColor: rows.map(r => SENT_COLORS[r.label] || '#999'),
+        borderWidth: 0,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '58%',
+      plugins: {
+        legend: { position: 'bottom', labels: { color: colors.text, font: { size: 10 }, padding: 6, boxWidth: 10, boxHeight: 10 } },
+        tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.parsed.toLocaleString() } }
+      }
+    }
+  });
+}
+
+function renderEmotionBar(rows){
+  if (!rows || !rows.length || rows.error) return emptyMsg('emotionBar', 'No emotion data yet');
+  const colors = getColors();
+  const EMOTION_COLORS = {
+    joy: '#F59E0B', anger: '#E53935', sadness: '#3B82F6', fear: '#7C5CBF',
+    surprise: '#EC4899', disgust: '#22C55E', neutral: '#65676B'
+  };
+  CHARTS.emotionBar = new Chart(document.getElementById('emotionBar'), {
+    type: 'bar',
+    data: {
+      labels: rows.map(r => r.label),
+      datasets: [{
+        data: rows.map(r => r.count),
+        backgroundColor: rows.map(r => EMOTION_COLORS[r.label] || colors.teal),
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ctx.parsed.x.toLocaleString() + ' posts' } }
+      },
+      scales: {
+        x: { grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 10 }, callback: v => v.toLocaleString() } },
+        y: { grid: { display: false }, ticks: { color: colors.text, font: { size: 11 } } }
+      }
+    }
+  });
+}
+
+function renderSentTrend(rows){
+  if (!rows || !rows.length || rows.error) return emptyMsg('sentTrend', 'No sentiment trend data yet');
+  const colors = getColors();
+  // Pivot: rows are {day, label, count} — build {day → {label → count}}
+  const byDay = {};
+  const labels = new Set();
+  rows.forEach(r => {
+    if (!byDay[r.day]) byDay[r.day] = {};
+    byDay[r.day][r.label] = r.count;
+    labels.add(r.label);
+  });
+  const days = Object.keys(byDay).sort();
+  const labelOrder = ['positive', 'neutral', 'mixed', 'negative', 'unknown'].filter(l => labels.has(l));
+
+  CHARTS.sentTrend = new Chart(document.getElementById('sentTrend'), {
+    type: 'line',
+    data: {
+      labels: days.map(formatDay),
+      datasets: labelOrder.map(lbl => ({
+        label: lbl,
+        data: days.map(d => byDay[d][lbl] || 0),
+        borderColor: SENT_COLORS[lbl] || '#999',
+        backgroundColor: (SENT_COLORS[lbl] || '#999') + '55',
+        borderWidth: 2, tension: 0.3, pointRadius: 0, fill: true,
+      }))
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { intersect: false, mode: 'index' },
+      plugins: {
+        legend: { labels: { color: colors.text, font: { size: 11 }, padding: 8, boxWidth: 10, boxHeight: 10 } },
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString() } }
+      },
+      scales: {
+        x: { stacked: false, grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 9 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 10 } },
+        y: { stacked: true, grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 10 } }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+function renderTopicBar(rows){
+  if (!rows || !rows.length || rows.error) return emptyMsg('topicBar', 'No topic data yet');
+  const colors = getColors();
+  CHARTS.topicBar = new Chart(document.getElementById('topicBar'), {
+    type: 'bar',
+    data: {
+      labels: rows.map(r => r.label),
+      datasets: [{
+        data: rows.map(r => r.count),
+        backgroundColor: colors.teal,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ctx.parsed.x.toLocaleString() + ' posts' } }
+      },
+      scales: {
+        x: { grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 10 }, callback: v => v.toLocaleString() } },
+        y: { grid: { display: false }, ticks: { color: colors.text, font: { size: 11 } } }
+      }
+    }
+  });
+}
+
+function renderAgreeChart(rows){
+  if (!rows || !rows.length || rows.error) return emptyMsg('agreeChart', 'No agreement data yet');
+  const colors = getColors();
+  const days = rows.map(r => formatDay(r.day));
+  const pct = rows.map(r => r.total > 0 ? (r.agree / r.total * 100) : 0);
+  CHARTS.agreeChart = new Chart(document.getElementById('agreeChart'), {
+    type: 'line',
+    data: {
+      labels: days,
+      datasets: [{
+        label: 'Agreement %',
+        data: pct,
+        borderColor: colors.teal,
+        backgroundColor: colors.teal + '22',
+        borderWidth: 2.5, tension: 0.35, fill: true, pointRadius: 0,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + '%' } }
+      },
+      scales: {
+        x: { grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 9 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 8 } },
+        y: { grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 10 }, callback: v => v + '%' }, min: 70, max: 100 }
+      }
+    }
+  });
+}
+
+function renderTriggerChart(rows){
+  if (!rows || !rows.length || rows.error) return emptyMsg('triggerChart', 'No trigger data yet');
+  const colors = getColors();
+  const days = rows.map(r => formatDay(r.day));
+  const pct = rows.map(r => r.total > 0 ? (r.triggered / r.total * 100) : 0);
+  CHARTS.triggerChart = new Chart(document.getElementById('triggerChart'), {
+    type: 'bar',
+    data: {
+      labels: days,
+      datasets: [{
+        label: 'Claude trigger %',
+        data: pct,
+        backgroundColor: colors.purple,
+        borderRadius: 2,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + '%' } }
+      },
+      scales: {
+        x: { grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 9 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 8 } },
+        y: { grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 10 }, callback: v => v + '%' }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+function renderConfidenceList(rows){
+  const container = document.getElementById('conf-list');
+  if (!container) return;
+  if (!rows || !rows.length || rows.error) {
+    container.innerHTML = '<div style="padding:20px;color:var(--t2);font-size:13px;text-align:center">No confidence data yet</div>';
+    return;
+  }
+  container.innerHTML = rows.map(r => {
+    const conf = r.avg_conf || 0;
+    const pct = (conf * 100).toFixed(1);
+    const cls = conf >= 0.85 ? 'high' : (conf >= 0.70 ? 'med' : 'low');
+    return `
+      <div class="conf-row">
+        <div class="conf-label">${r.dimension}</div>
+        <div class="conf-bar ${cls}"><div style="width:${pct}%"></div></div>
+        <div class="conf-val">${pct}%</div>
+      </div>`;
+  }).join('');
+}
+
+function renderImpReacChart(rows){
+  if (!rows || !rows.length || rows.error) return emptyMsg('impReacChart', 'No engagement data yet');
+  const colors = getColors();
+  CHARTS.impReacChart = new Chart(document.getElementById('impReacChart'), {
+    type: 'line',
+    data: {
+      labels: rows.map(r => formatDay(r.day)),
+      datasets: [
+        {
+          label: 'Impressions',
+          data: rows.map(r => r.impressions),
+          borderColor: colors.teal,
+          backgroundColor: colors.teal + '22',
+          borderWidth: 2.5, tension: 0.3, pointRadius: 0, fill: true,
+          yAxisID: 'y',
+        },
+        {
+          label: 'Reactions',
+          data: rows.map(r => r.reactions),
+          borderColor: colors.purple,
+          backgroundColor: 'transparent',
+          borderWidth: 2, tension: 0.3, pointRadius: 0,
+          yAxisID: 'y1',
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { intersect: false, mode: 'index' },
+      plugins: {
+        legend: { labels: { color: colors.text, font: { size: 11 }, padding: 8, boxWidth: 10, boxHeight: 10 } },
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString() } }
+      },
+      scales: {
+        x: { grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 9 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 10 } },
+        y:  { position: 'left',  grid: { color: colors.grid }, ticks: { color: colors.teal, font: { size: 10 }, callback: v => (v/1000).toFixed(0) + 'K' }, beginAtZero: true },
+        y1: { position: 'right', grid: { display: false }, ticks: { color: colors.purple, font: { size: 10 }, callback: v => (v/1000).toFixed(1) + 'K' }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+function renderReactDonut(rows){
+  if (!rows || !rows.length || rows.error) return emptyMsg('reactDonut', 'No reaction data yet');
+  const colors = getColors();
+  const nonZero = rows.filter(r => (r.count || 0) > 0);
+  CHARTS.reactDonut = new Chart(document.getElementById('reactDonut'), {
+    type: 'doughnut',
+    data: {
+      labels: nonZero.map(r => r.reaction),
+      datasets: [{
+        data: nonZero.map(r => r.count),
+        backgroundColor: nonZero.map(r => REACTION_COLORS[r.reaction] || '#999'),
+        borderWidth: 0,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '58%',
+      plugins: {
+        legend: { position: 'bottom', labels: { color: colors.text, font: { size: 10 }, padding: 6, boxWidth: 10, boxHeight: 10 } },
+        tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.parsed.toLocaleString() } }
+      }
+    }
+  });
+}
+
+function renderSentImpChart(rows){
+  if (!rows || !rows.length || rows.error) return emptyMsg('sentImpChart', 'No data yet');
+  const colors = getColors();
+  CHARTS.sentImpChart = new Chart(document.getElementById('sentImpChart'), {
+    type: 'bar',
+    data: {
+      labels: rows.map(r => r.sentiment),
+      datasets: [{
+        label: 'Avg impressions',
+        data: rows.map(r => r.avg_impressions),
+        backgroundColor: rows.map(r => SENT_COLORS[r.sentiment] || '#999'),
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => 'Avg impressions: ' + Math.round(ctx.parsed.y).toLocaleString(),
+            afterLabel: ctx => 'n = ' + (rows[ctx.dataIndex].n || 0).toLocaleString() + ' posts',
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: colors.text, font: { size: 11 } } },
+        y: { grid: { color: colors.grid }, ticks: { color: colors.text, font: { size: 10 }, callback: v => (v/1000).toFixed(1) + 'K' }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+function renderTopPosts(rows){
+  const container = document.getElementById('top-posts-list');
+  if (!container) return;
+  if (!rows || !rows.length || rows.error) {
+    container.innerHTML = '<div style="padding:20px;color:var(--t2);font-size:13px;text-align:center">No top-posts data yet</div>';
+    return;
+  }
+  container.innerHTML = rows.map((p, i) => `
+    <div class="top-post-row">
+      <div class="top-post-rank">${i+1}</div>
+      <div class="top-post-body">
+        <div class="top-post-page">${p.page_name || '—'}</div>
+        <div class="top-post-msg">${(p.message_snippet || '').replace(/</g, '&lt;')}</div>
+        <div class="top-post-stats">
+          <span class="top-post-stat"><strong>${(p.impressions||0).toLocaleString()}</strong> impressions</span>
+          <span class="top-post-stat"><strong>${(p.reactions||0).toLocaleString()}</strong> reactions</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
 }
 
 function chartOpts(colors){

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-11T16:27:37.140924Z",
+  "last_updated": "2026-05-11T16:44:30.972276Z",
   "placeholder": true,
   "_doc": "Placeholder data. Real data written by scripts/fetch_qa_health.py via GitHub Actions.",
   "today": [
@@ -970,5 +970,1291 @@
       "_doc": "Fires if total rows today is < 50% of the 7-day average. Catches truncated loads."
     }
   ],
-  "fired": []
+  "fired": [],
+  "analysis": {
+    "sentiment_distribution_today": [
+      {
+        "label": "positive",
+        "count": 412
+      },
+      {
+        "label": "neutral",
+        "count": 287
+      },
+      {
+        "label": "negative",
+        "count": 134
+      },
+      {
+        "label": "mixed",
+        "count": 61
+      },
+      {
+        "label": "unknown",
+        "count": 18
+      }
+    ],
+    "sentiment_trend_30d": [
+      {
+        "day": "2026-04-12",
+        "label": "positive",
+        "count": 394
+      },
+      {
+        "day": "2026-04-12",
+        "label": "neutral",
+        "count": 285
+      },
+      {
+        "day": "2026-04-12",
+        "label": "negative",
+        "count": 146
+      },
+      {
+        "day": "2026-04-12",
+        "label": "mixed",
+        "count": 59
+      },
+      {
+        "day": "2026-04-13",
+        "label": "positive",
+        "count": 400
+      },
+      {
+        "day": "2026-04-13",
+        "label": "neutral",
+        "count": 287
+      },
+      {
+        "day": "2026-04-13",
+        "label": "negative",
+        "count": 117
+      },
+      {
+        "day": "2026-04-13",
+        "label": "mixed",
+        "count": 60
+      },
+      {
+        "day": "2026-04-14",
+        "label": "positive",
+        "count": 415
+      },
+      {
+        "day": "2026-04-14",
+        "label": "neutral",
+        "count": 304
+      },
+      {
+        "day": "2026-04-14",
+        "label": "negative",
+        "count": 114
+      },
+      {
+        "day": "2026-04-14",
+        "label": "mixed",
+        "count": 56
+      },
+      {
+        "day": "2026-04-15",
+        "label": "positive",
+        "count": 350
+      },
+      {
+        "day": "2026-04-15",
+        "label": "neutral",
+        "count": 306
+      },
+      {
+        "day": "2026-04-15",
+        "label": "negative",
+        "count": 137
+      },
+      {
+        "day": "2026-04-15",
+        "label": "mixed",
+        "count": 51
+      },
+      {
+        "day": "2026-04-16",
+        "label": "positive",
+        "count": 457
+      },
+      {
+        "day": "2026-04-16",
+        "label": "neutral",
+        "count": 319
+      },
+      {
+        "day": "2026-04-16",
+        "label": "negative",
+        "count": 136
+      },
+      {
+        "day": "2026-04-16",
+        "label": "mixed",
+        "count": 62
+      },
+      {
+        "day": "2026-04-17",
+        "label": "positive",
+        "count": 358
+      },
+      {
+        "day": "2026-04-17",
+        "label": "neutral",
+        "count": 239
+      },
+      {
+        "day": "2026-04-17",
+        "label": "negative",
+        "count": 131
+      },
+      {
+        "day": "2026-04-17",
+        "label": "mixed",
+        "count": 52
+      },
+      {
+        "day": "2026-04-18",
+        "label": "positive",
+        "count": 362
+      },
+      {
+        "day": "2026-04-18",
+        "label": "neutral",
+        "count": 258
+      },
+      {
+        "day": "2026-04-18",
+        "label": "negative",
+        "count": 111
+      },
+      {
+        "day": "2026-04-18",
+        "label": "mixed",
+        "count": 59
+      },
+      {
+        "day": "2026-04-19",
+        "label": "positive",
+        "count": 392
+      },
+      {
+        "day": "2026-04-19",
+        "label": "neutral",
+        "count": 308
+      },
+      {
+        "day": "2026-04-19",
+        "label": "negative",
+        "count": 130
+      },
+      {
+        "day": "2026-04-19",
+        "label": "mixed",
+        "count": 62
+      },
+      {
+        "day": "2026-04-20",
+        "label": "positive",
+        "count": 399
+      },
+      {
+        "day": "2026-04-20",
+        "label": "neutral",
+        "count": 293
+      },
+      {
+        "day": "2026-04-20",
+        "label": "negative",
+        "count": 128
+      },
+      {
+        "day": "2026-04-20",
+        "label": "mixed",
+        "count": 56
+      },
+      {
+        "day": "2026-04-21",
+        "label": "positive",
+        "count": 459
+      },
+      {
+        "day": "2026-04-21",
+        "label": "neutral",
+        "count": 321
+      },
+      {
+        "day": "2026-04-21",
+        "label": "negative",
+        "count": 143
+      },
+      {
+        "day": "2026-04-21",
+        "label": "mixed",
+        "count": 63
+      },
+      {
+        "day": "2026-04-22",
+        "label": "positive",
+        "count": 377
+      },
+      {
+        "day": "2026-04-22",
+        "label": "neutral",
+        "count": 257
+      },
+      {
+        "day": "2026-04-22",
+        "label": "negative",
+        "count": 121
+      },
+      {
+        "day": "2026-04-22",
+        "label": "mixed",
+        "count": 52
+      },
+      {
+        "day": "2026-04-23",
+        "label": "positive",
+        "count": 431
+      },
+      {
+        "day": "2026-04-23",
+        "label": "neutral",
+        "count": 271
+      },
+      {
+        "day": "2026-04-23",
+        "label": "negative",
+        "count": 143
+      },
+      {
+        "day": "2026-04-23",
+        "label": "mixed",
+        "count": 57
+      },
+      {
+        "day": "2026-04-24",
+        "label": "positive",
+        "count": 454
+      },
+      {
+        "day": "2026-04-24",
+        "label": "neutral",
+        "count": 309
+      },
+      {
+        "day": "2026-04-24",
+        "label": "negative",
+        "count": 110
+      },
+      {
+        "day": "2026-04-24",
+        "label": "mixed",
+        "count": 54
+      },
+      {
+        "day": "2026-04-25",
+        "label": "positive",
+        "count": 449
+      },
+      {
+        "day": "2026-04-25",
+        "label": "neutral",
+        "count": 277
+      },
+      {
+        "day": "2026-04-25",
+        "label": "negative",
+        "count": 148
+      },
+      {
+        "day": "2026-04-25",
+        "label": "mixed",
+        "count": 58
+      },
+      {
+        "day": "2026-04-26",
+        "label": "positive",
+        "count": 348
+      },
+      {
+        "day": "2026-04-26",
+        "label": "neutral",
+        "count": 290
+      },
+      {
+        "day": "2026-04-26",
+        "label": "negative",
+        "count": 140
+      },
+      {
+        "day": "2026-04-26",
+        "label": "mixed",
+        "count": 55
+      },
+      {
+        "day": "2026-04-27",
+        "label": "positive",
+        "count": 350
+      },
+      {
+        "day": "2026-04-27",
+        "label": "neutral",
+        "count": 265
+      },
+      {
+        "day": "2026-04-27",
+        "label": "negative",
+        "count": 148
+      },
+      {
+        "day": "2026-04-27",
+        "label": "mixed",
+        "count": 64
+      },
+      {
+        "day": "2026-04-28",
+        "label": "positive",
+        "count": 354
+      },
+      {
+        "day": "2026-04-28",
+        "label": "neutral",
+        "count": 258
+      },
+      {
+        "day": "2026-04-28",
+        "label": "negative",
+        "count": 114
+      },
+      {
+        "day": "2026-04-28",
+        "label": "mixed",
+        "count": 52
+      },
+      {
+        "day": "2026-04-29",
+        "label": "positive",
+        "count": 435
+      },
+      {
+        "day": "2026-04-29",
+        "label": "neutral",
+        "count": 252
+      },
+      {
+        "day": "2026-04-29",
+        "label": "negative",
+        "count": 132
+      },
+      {
+        "day": "2026-04-29",
+        "label": "mixed",
+        "count": 59
+      },
+      {
+        "day": "2026-04-30",
+        "label": "positive",
+        "count": 362
+      },
+      {
+        "day": "2026-04-30",
+        "label": "neutral",
+        "count": 299
+      },
+      {
+        "day": "2026-04-30",
+        "label": "negative",
+        "count": 115
+      },
+      {
+        "day": "2026-04-30",
+        "label": "mixed",
+        "count": 62
+      },
+      {
+        "day": "2026-05-01",
+        "label": "positive",
+        "count": 353
+      },
+      {
+        "day": "2026-05-01",
+        "label": "neutral",
+        "count": 273
+      },
+      {
+        "day": "2026-05-01",
+        "label": "negative",
+        "count": 118
+      },
+      {
+        "day": "2026-05-01",
+        "label": "mixed",
+        "count": 55
+      },
+      {
+        "day": "2026-05-02",
+        "label": "positive",
+        "count": 456
+      },
+      {
+        "day": "2026-05-02",
+        "label": "neutral",
+        "count": 305
+      },
+      {
+        "day": "2026-05-02",
+        "label": "negative",
+        "count": 122
+      },
+      {
+        "day": "2026-05-02",
+        "label": "mixed",
+        "count": 66
+      },
+      {
+        "day": "2026-05-03",
+        "label": "positive",
+        "count": 365
+      },
+      {
+        "day": "2026-05-03",
+        "label": "neutral",
+        "count": 271
+      },
+      {
+        "day": "2026-05-03",
+        "label": "negative",
+        "count": 143
+      },
+      {
+        "day": "2026-05-03",
+        "label": "mixed",
+        "count": 62
+      },
+      {
+        "day": "2026-05-04",
+        "label": "positive",
+        "count": 352
+      },
+      {
+        "day": "2026-05-04",
+        "label": "neutral",
+        "count": 321
+      },
+      {
+        "day": "2026-05-04",
+        "label": "negative",
+        "count": 118
+      },
+      {
+        "day": "2026-05-04",
+        "label": "mixed",
+        "count": 55
+      },
+      {
+        "day": "2026-05-05",
+        "label": "positive",
+        "count": 432
+      },
+      {
+        "day": "2026-05-05",
+        "label": "neutral",
+        "count": 265
+      },
+      {
+        "day": "2026-05-05",
+        "label": "negative",
+        "count": 122
+      },
+      {
+        "day": "2026-05-05",
+        "label": "mixed",
+        "count": 52
+      },
+      {
+        "day": "2026-05-06",
+        "label": "positive",
+        "count": 350
+      },
+      {
+        "day": "2026-05-06",
+        "label": "neutral",
+        "count": 286
+      },
+      {
+        "day": "2026-05-06",
+        "label": "negative",
+        "count": 119
+      },
+      {
+        "day": "2026-05-06",
+        "label": "mixed",
+        "count": 61
+      },
+      {
+        "day": "2026-05-07",
+        "label": "positive",
+        "count": 384
+      },
+      {
+        "day": "2026-05-07",
+        "label": "neutral",
+        "count": 276
+      },
+      {
+        "day": "2026-05-07",
+        "label": "negative",
+        "count": 147
+      },
+      {
+        "day": "2026-05-07",
+        "label": "mixed",
+        "count": 59
+      },
+      {
+        "day": "2026-05-08",
+        "label": "positive",
+        "count": 408
+      },
+      {
+        "day": "2026-05-08",
+        "label": "neutral",
+        "count": 310
+      },
+      {
+        "day": "2026-05-08",
+        "label": "negative",
+        "count": 117
+      },
+      {
+        "day": "2026-05-08",
+        "label": "mixed",
+        "count": 53
+      },
+      {
+        "day": "2026-05-09",
+        "label": "positive",
+        "count": 449
+      },
+      {
+        "day": "2026-05-09",
+        "label": "neutral",
+        "count": 306
+      },
+      {
+        "day": "2026-05-09",
+        "label": "negative",
+        "count": 120
+      },
+      {
+        "day": "2026-05-09",
+        "label": "mixed",
+        "count": 54
+      },
+      {
+        "day": "2026-05-10",
+        "label": "positive",
+        "count": 428
+      },
+      {
+        "day": "2026-05-10",
+        "label": "neutral",
+        "count": 316
+      },
+      {
+        "day": "2026-05-10",
+        "label": "negative",
+        "count": 118
+      },
+      {
+        "day": "2026-05-10",
+        "label": "mixed",
+        "count": 68
+      },
+      {
+        "day": "2026-05-11",
+        "label": "positive",
+        "count": 445
+      },
+      {
+        "day": "2026-05-11",
+        "label": "neutral",
+        "count": 288
+      },
+      {
+        "day": "2026-05-11",
+        "label": "negative",
+        "count": 126
+      },
+      {
+        "day": "2026-05-11",
+        "label": "mixed",
+        "count": 52
+      }
+    ],
+    "emotion_distribution_30d": [
+      {
+        "label": "joy",
+        "count": 8400
+      },
+      {
+        "label": "neutral",
+        "count": 6200
+      },
+      {
+        "label": "surprise",
+        "count": 3800
+      },
+      {
+        "label": "sadness",
+        "count": 2900
+      },
+      {
+        "label": "anger",
+        "count": 2100
+      },
+      {
+        "label": "fear",
+        "count": 980
+      },
+      {
+        "label": "disgust",
+        "count": 420
+      }
+    ],
+    "topic_top10_30d": [
+      {
+        "label": "lifestyle",
+        "count": 4100
+      },
+      {
+        "label": "humor",
+        "count": 3700
+      },
+      {
+        "label": "food",
+        "count": 2800
+      },
+      {
+        "label": "fashion",
+        "count": 2300
+      },
+      {
+        "label": "entertainment",
+        "count": 2100
+      },
+      {
+        "label": "travel",
+        "count": 1900
+      },
+      {
+        "label": "sports",
+        "count": 1600
+      },
+      {
+        "label": "tech",
+        "count": 1400
+      },
+      {
+        "label": "health",
+        "count": 1100
+      },
+      {
+        "label": "business",
+        "count": 900
+      }
+    ],
+    "agreement_nlp_vs_ds_30d": [
+      {
+        "day": "2026-04-12",
+        "agree": 728,
+        "total": 809
+      },
+      {
+        "day": "2026-04-13",
+        "agree": 760,
+        "total": 865
+      },
+      {
+        "day": "2026-04-14",
+        "agree": 873,
+        "total": 980
+      },
+      {
+        "day": "2026-04-15",
+        "agree": 839,
+        "total": 907
+      },
+      {
+        "day": "2026-04-16",
+        "agree": 856,
+        "total": 952
+      },
+      {
+        "day": "2026-04-17",
+        "agree": 815,
+        "total": 933
+      },
+      {
+        "day": "2026-04-18",
+        "agree": 923,
+        "total": 984
+      },
+      {
+        "day": "2026-04-19",
+        "agree": 730,
+        "total": 832
+      },
+      {
+        "day": "2026-04-20",
+        "agree": 860,
+        "total": 943
+      },
+      {
+        "day": "2026-04-21",
+        "agree": 870,
+        "total": 957
+      },
+      {
+        "day": "2026-04-22",
+        "agree": 763,
+        "total": 871
+      },
+      {
+        "day": "2026-04-23",
+        "agree": 783,
+        "total": 852
+      },
+      {
+        "day": "2026-04-24",
+        "agree": 720,
+        "total": 817
+      },
+      {
+        "day": "2026-04-25",
+        "agree": 804,
+        "total": 914
+      },
+      {
+        "day": "2026-04-26",
+        "agree": 708,
+        "total": 811
+      },
+      {
+        "day": "2026-04-27",
+        "agree": 806,
+        "total": 894
+      },
+      {
+        "day": "2026-04-28",
+        "agree": 722,
+        "total": 833
+      },
+      {
+        "day": "2026-04-29",
+        "agree": 777,
+        "total": 835
+      },
+      {
+        "day": "2026-04-30",
+        "agree": 806,
+        "total": 884
+      },
+      {
+        "day": "2026-05-01",
+        "agree": 880,
+        "total": 976
+      },
+      {
+        "day": "2026-05-02",
+        "agree": 757,
+        "total": 835
+      },
+      {
+        "day": "2026-05-03",
+        "agree": 721,
+        "total": 804
+      },
+      {
+        "day": "2026-05-04",
+        "agree": 816,
+        "total": 891
+      },
+      {
+        "day": "2026-05-05",
+        "agree": 696,
+        "total": 808
+      },
+      {
+        "day": "2026-05-06",
+        "agree": 833,
+        "total": 962
+      },
+      {
+        "day": "2026-05-07",
+        "agree": 750,
+        "total": 817
+      },
+      {
+        "day": "2026-05-08",
+        "agree": 767,
+        "total": 881
+      },
+      {
+        "day": "2026-05-09",
+        "agree": 708,
+        "total": 818
+      },
+      {
+        "day": "2026-05-10",
+        "agree": 835,
+        "total": 939
+      },
+      {
+        "day": "2026-05-11",
+        "agree": 755,
+        "total": 811
+      }
+    ],
+    "avg_confidence_by_dimension": [
+      {
+        "dimension": "sentiment",
+        "avg_conf": 0.892
+      },
+      {
+        "dimension": "emotion",
+        "avg_conf": 0.834
+      },
+      {
+        "dimension": "topic",
+        "avg_conf": 0.761
+      },
+      {
+        "dimension": "intent",
+        "avg_conf": 0.812
+      },
+      {
+        "dimension": "toxicity",
+        "avg_conf": 0.948
+      }
+    ],
+    "claude_trigger_rate_30d": [
+      {
+        "day": "2026-04-12",
+        "triggered": 151,
+        "total": 988
+      },
+      {
+        "day": "2026-04-13",
+        "triggered": 132,
+        "total": 833
+      },
+      {
+        "day": "2026-04-14",
+        "triggered": 102,
+        "total": 887
+      },
+      {
+        "day": "2026-04-15",
+        "triggered": 124,
+        "total": 975
+      },
+      {
+        "day": "2026-04-16",
+        "triggered": 136,
+        "total": 819
+      },
+      {
+        "day": "2026-04-17",
+        "triggered": 158,
+        "total": 906
+      },
+      {
+        "day": "2026-04-18",
+        "triggered": 134,
+        "total": 807
+      },
+      {
+        "day": "2026-04-19",
+        "triggered": 77,
+        "total": 946
+      },
+      {
+        "day": "2026-04-20",
+        "triggered": 114,
+        "total": 969
+      },
+      {
+        "day": "2026-04-21",
+        "triggered": 77,
+        "total": 949
+      },
+      {
+        "day": "2026-04-22",
+        "triggered": 72,
+        "total": 818
+      },
+      {
+        "day": "2026-04-23",
+        "triggered": 88,
+        "total": 963
+      },
+      {
+        "day": "2026-04-24",
+        "triggered": 145,
+        "total": 865
+      },
+      {
+        "day": "2026-04-25",
+        "triggered": 111,
+        "total": 986
+      },
+      {
+        "day": "2026-04-26",
+        "triggered": 147,
+        "total": 988
+      },
+      {
+        "day": "2026-04-27",
+        "triggered": 113,
+        "total": 917
+      },
+      {
+        "day": "2026-04-28",
+        "triggered": 82,
+        "total": 938
+      },
+      {
+        "day": "2026-04-29",
+        "triggered": 130,
+        "total": 992
+      },
+      {
+        "day": "2026-04-30",
+        "triggered": 123,
+        "total": 879
+      },
+      {
+        "day": "2026-05-01",
+        "triggered": 75,
+        "total": 923
+      },
+      {
+        "day": "2026-05-02",
+        "triggered": 89,
+        "total": 978
+      },
+      {
+        "day": "2026-05-03",
+        "triggered": 141,
+        "total": 999
+      },
+      {
+        "day": "2026-05-04",
+        "triggered": 97,
+        "total": 924
+      },
+      {
+        "day": "2026-05-05",
+        "triggered": 93,
+        "total": 802
+      },
+      {
+        "day": "2026-05-06",
+        "triggered": 123,
+        "total": 836
+      },
+      {
+        "day": "2026-05-07",
+        "triggered": 112,
+        "total": 851
+      },
+      {
+        "day": "2026-05-08",
+        "triggered": 169,
+        "total": 992
+      },
+      {
+        "day": "2026-05-09",
+        "triggered": 167,
+        "total": 968
+      },
+      {
+        "day": "2026-05-10",
+        "triggered": 156,
+        "total": 927
+      },
+      {
+        "day": "2026-05-11",
+        "triggered": 106,
+        "total": 883
+      }
+    ],
+    "impressions_reactions_30d": [
+      {
+        "day": "2026-04-12",
+        "impressions": 36008,
+        "reactions": 2125
+      },
+      {
+        "day": "2026-04-13",
+        "impressions": 65162,
+        "reactions": 4081
+      },
+      {
+        "day": "2026-04-14",
+        "impressions": 52997,
+        "reactions": 2460
+      },
+      {
+        "day": "2026-04-15",
+        "impressions": 53386,
+        "reactions": 3610
+      },
+      {
+        "day": "2026-04-16",
+        "impressions": 53191,
+        "reactions": 2342
+      },
+      {
+        "day": "2026-04-17",
+        "impressions": 56031,
+        "reactions": 3746
+      },
+      {
+        "day": "2026-04-18",
+        "impressions": 33185,
+        "reactions": 1391
+      },
+      {
+        "day": "2026-04-19",
+        "impressions": 45816,
+        "reactions": 2962
+      },
+      {
+        "day": "2026-04-20",
+        "impressions": 51234,
+        "reactions": 2773
+      },
+      {
+        "day": "2026-04-21",
+        "impressions": 67622,
+        "reactions": 4390
+      },
+      {
+        "day": "2026-04-22",
+        "impressions": 56672,
+        "reactions": 3150
+      },
+      {
+        "day": "2026-04-23",
+        "impressions": 62510,
+        "reactions": 3843
+      },
+      {
+        "day": "2026-04-24",
+        "impressions": 65932,
+        "reactions": 3873
+      },
+      {
+        "day": "2026-04-25",
+        "impressions": 36945,
+        "reactions": 2396
+      },
+      {
+        "day": "2026-04-26",
+        "impressions": 36377,
+        "reactions": 2118
+      },
+      {
+        "day": "2026-04-27",
+        "impressions": 62633,
+        "reactions": 3033
+      },
+      {
+        "day": "2026-04-28",
+        "impressions": 56100,
+        "reactions": 3336
+      },
+      {
+        "day": "2026-04-29",
+        "impressions": 60331,
+        "reactions": 3573
+      },
+      {
+        "day": "2026-04-30",
+        "impressions": 57128,
+        "reactions": 2610
+      },
+      {
+        "day": "2026-05-01",
+        "impressions": 64467,
+        "reactions": 3093
+      },
+      {
+        "day": "2026-05-02",
+        "impressions": 43113,
+        "reactions": 2755
+      },
+      {
+        "day": "2026-05-03",
+        "impressions": 45865,
+        "reactions": 1993
+      },
+      {
+        "day": "2026-05-04",
+        "impressions": 142000,
+        "reactions": 12400
+      },
+      {
+        "day": "2026-05-05",
+        "impressions": 61860,
+        "reactions": 3158
+      },
+      {
+        "day": "2026-05-06",
+        "impressions": 50531,
+        "reactions": 2321
+      },
+      {
+        "day": "2026-05-07",
+        "impressions": 65568,
+        "reactions": 3126
+      },
+      {
+        "day": "2026-05-08",
+        "impressions": 63358,
+        "reactions": 3969
+      },
+      {
+        "day": "2026-05-09",
+        "impressions": 39828,
+        "reactions": 1636
+      },
+      {
+        "day": "2026-05-10",
+        "impressions": 35683,
+        "reactions": 2260
+      },
+      {
+        "day": "2026-05-11",
+        "impressions": 59840,
+        "reactions": 4093
+      }
+    ],
+    "reaction_mix_today": [
+      {
+        "reaction": "like",
+        "count": 3142
+      },
+      {
+        "reaction": "love",
+        "count": 941
+      },
+      {
+        "reaction": "haha",
+        "count": 562
+      },
+      {
+        "reaction": "wow",
+        "count": 218
+      },
+      {
+        "reaction": "sorry",
+        "count": 84
+      },
+      {
+        "reaction": "anger",
+        "count": 47
+      }
+    ],
+    "top_posts_week": [
+      {
+        "page_name": "Kelpie Daily",
+        "message_snippet": "Tagging your friend who definitely owes you a pint after Saturday",
+        "impressions": 120014,
+        "reactions": 10782
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "message_snippet": "Things that just hit different on a Tuesday evening",
+        "impressions": 110358,
+        "reactions": 8784
+      },
+      {
+        "page_name": "UK Jail News",
+        "message_snippet": "Anyone else convinced their kelpie has a secret second job?",
+        "impressions": 101422,
+        "reactions": 8671
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "message_snippet": "POV: you remembered you said you would do it tomorrow yesterday",
+        "impressions": 99427,
+        "reactions": 6216
+      },
+      {
+        "page_name": "UK Jail News",
+        "message_snippet": "BREAKING: Lad still claiming he'll fix the gate \"next weekend\"",
+        "impressions": 96064,
+        "reactions": 8378
+      },
+      {
+        "page_name": "Bantersity",
+        "message_snippet": "When the meme matches the energy of the group chat exactly",
+        "impressions": 94888,
+        "reactions": 8220
+      },
+      {
+        "page_name": "Prison Biscuit",
+        "message_snippet": "Friday plans hierarchy: pub > dinner > existential crisis",
+        "impressions": 94246,
+        "reactions": 6845
+      },
+      {
+        "page_name": "Kelpie Daily",
+        "message_snippet": "Update: the cat won the staring contest. Again.",
+        "impressions": 85255,
+        "reactions": 3936
+      },
+      {
+        "page_name": "Bantersity",
+        "message_snippet": "Confession time \u2014 who actually folds their laundry the same day?",
+        "impressions": 84910,
+        "reactions": 6870
+      },
+      {
+        "page_name": "Drinking Memes",
+        "message_snippet": "Three-step recipe to ruin a Sunday before noon",
+        "impressions": 79437,
+        "reactions": 7079
+      }
+    ],
+    "sentiment_vs_impressions_today": [
+      {
+        "sentiment": "positive",
+        "avg_impressions": 4280,
+        "n": 1840
+      },
+      {
+        "sentiment": "mixed",
+        "avg_impressions": 3920,
+        "n": 312
+      },
+      {
+        "sentiment": "neutral",
+        "avg_impressions": 2410,
+        "n": 1240
+      },
+      {
+        "sentiment": "negative",
+        "avg_impressions": 1980,
+        "n": 612
+      }
+    ]
+  }
 }

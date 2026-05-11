@@ -103,11 +103,9 @@ ORDER BY days_since_last_load DESC;
 """
 
 
-def run_freshness_query():
-    """Connect to Redshift and execute the freshness query.
-    Returns list of dicts: [{table_name, total_rows, latest_load,
-    earliest_load, days_since_last_load}, ...]"""
-    conn = psycopg2.connect(
+def _get_conn():
+    """Open a Redshift connection. Caller is responsible for closing."""
+    return psycopg2.connect(
         host=os.environ['REDSHIFT_HOST'],
         port=int(os.environ.get('REDSHIFT_PORT', 5439)),
         dbname=os.environ['REDSHIFT_DB'],
@@ -115,26 +113,229 @@ def run_freshness_query():
         password=os.environ['REDSHIFT_PASSWORD'],
         connect_timeout=30,
     )
-    try:
-        with conn.cursor() as cur:
-            cur.execute(FRESHNESS_SQL)
-            cols = [d[0] for d in cur.description]
-            rows = cur.fetchall()
-    finally:
-        conn.close()
 
+
+def _query(conn, sql):
+    """Run a SQL query, return list of dicts keyed by column name."""
+    with conn.cursor() as cur:
+        cur.execute(sql)
+        cols = [d[0] for d in cur.description]
+        rows = cur.fetchall()
+    return [dict(zip(cols, r)) for r in rows]
+
+
+def _json_safe(val):
+    """Convert dates/decimals/etc to JSON-safe primitives."""
+    if val is None:
+        return None
+    if hasattr(val, 'isoformat'):
+        return val.isoformat()
+    # Decimal → float
+    try:
+        from decimal import Decimal
+        if isinstance(val, Decimal):
+            return float(val)
+    except ImportError:
+        pass
+    return val
+
+
+def run_freshness_query(conn):
+    """Run the freshness query, return list of dicts."""
+    rows = _query(conn, FRESHNESS_SQL)
     out = []
-    for row in rows:
-        d = dict(zip(cols, row))
-        # Convert dates to ISO strings (json-safe)
+    for d in rows:
         for k in ('latest_load', 'earliest_load'):
-            if d[k] is not None:
-                d[k] = d[k].isoformat() if hasattr(d[k], 'isoformat') else str(d[k])
+            d[k] = _json_safe(d[k])
         d['total_rows'] = int(d['total_rows']) if d['total_rows'] is not None else 0
         d['days_since_last_load'] = (
             int(d['days_since_last_load']) if d['days_since_last_load'] is not None else None
         )
         out.append(d)
+    return out
+
+
+# ─── Analysis queries ─────────────────────────────────────────────────
+# All queries scope to the last 30 days of data unless noted.
+# Column names match the actual rdl schema:
+#   post_label_predictions:  nlp_sentiment, nlp_emotion, nlp_topic, nlp_toxicity,
+#                            ds_sentiment, nlp_*_confidence, ds_*_confidence,
+#                            cl_triggered, processing_time_ms, inserted_at
+#   post_daily_insights:     post_impressions, post_reactions_*_total, page_id,
+#                            page_name, created_time, message, load_date
+#   page_posts:              id, page_id, page_name, load_date
+
+ANALYSIS_QUERIES = {
+
+    # ─── NLP Output ─────────────────────────────────────────────
+    'sentiment_distribution_today': """
+        SELECT
+          COALESCE(nlp_sentiment, 'unknown') AS label,
+          COUNT(*) AS count
+        FROM rdl.post_label_predictions
+        WHERE inserted_at::date = (SYSDATE - INTERVAL '1 day')::date
+        GROUP BY 1
+        ORDER BY 2 DESC;
+    """,
+
+    'sentiment_trend_30d': """
+        SELECT
+          inserted_at::date AS day,
+          COALESCE(nlp_sentiment, 'unknown') AS label,
+          COUNT(*) AS count
+        FROM rdl.post_label_predictions
+        WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
+        GROUP BY 1, 2
+        ORDER BY 1, 2;
+    """,
+
+    'emotion_distribution_30d': """
+        SELECT
+          COALESCE(nlp_emotion, 'unknown') AS label,
+          COUNT(*) AS count
+        FROM rdl.post_label_predictions
+        WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
+          AND nlp_emotion IS NOT NULL
+        GROUP BY 1
+        ORDER BY 2 DESC;
+    """,
+
+    'topic_top10_30d': """
+        SELECT
+          COALESCE(nlp_topic, 'unknown') AS label,
+          COUNT(*) AS count
+        FROM rdl.post_label_predictions
+        WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
+          AND nlp_topic IS NOT NULL
+        GROUP BY 1
+        ORDER BY 2 DESC
+        LIMIT 10;
+    """,
+
+    # ─── Model QA ───────────────────────────────────────────────
+    'agreement_nlp_vs_ds_30d': """
+        SELECT
+          inserted_at::date AS day,
+          SUM(CASE WHEN nlp_sentiment = ds_sentiment THEN 1 ELSE 0 END) AS agree,
+          COUNT(*) AS total
+        FROM rdl.post_label_predictions
+        WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
+          AND nlp_sentiment IS NOT NULL
+          AND ds_sentiment IS NOT NULL
+        GROUP BY 1
+        ORDER BY 1;
+    """,
+
+    'avg_confidence_by_dimension': """
+        SELECT
+          'sentiment' AS dimension,
+          AVG(nlp_sentiment_confidence) AS avg_conf
+        FROM rdl.post_label_predictions
+        WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_sentiment_confidence IS NOT NULL
+        UNION ALL SELECT 'emotion',  AVG(nlp_emotion_confidence)  FROM rdl.post_label_predictions
+          WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_emotion_confidence IS NOT NULL
+        UNION ALL SELECT 'topic',    AVG(nlp_topic_confidence)    FROM rdl.post_label_predictions
+          WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_topic_confidence IS NOT NULL
+        UNION ALL SELECT 'intent',   AVG(nlp_intent_confidence)   FROM rdl.post_label_predictions
+          WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_intent_confidence IS NOT NULL
+        UNION ALL SELECT 'toxicity', AVG(nlp_toxicity_confidence) FROM rdl.post_label_predictions
+          WHERE inserted_at >= DATEADD(day, -30, SYSDATE) AND nlp_toxicity_confidence IS NOT NULL;
+    """,
+
+    'claude_trigger_rate_30d': """
+        SELECT
+          inserted_at::date AS day,
+          SUM(CASE WHEN cl_triggered THEN 1 ELSE 0 END) AS triggered,
+          COUNT(*) AS total
+        FROM rdl.post_label_predictions
+        WHERE inserted_at >= DATEADD(day, -30, SYSDATE)
+        GROUP BY 1
+        ORDER BY 1;
+    """,
+
+    # ─── Engagement ─────────────────────────────────────────────
+    'impressions_reactions_30d': """
+        SELECT
+          load_date AS day,
+          SUM(post_impressions) AS impressions,
+          SUM(COALESCE(post_reactions_like_total, 0)
+            + COALESCE(post_reactions_love_total, 0)
+            + COALESCE(post_reactions_wow_total, 0)
+            + COALESCE(post_reactions_haha_total, 0)
+            + COALESCE(post_reactions_sorry_total, 0)
+            + COALESCE(post_reactions_anger_total, 0)) AS reactions
+        FROM rdl.post_daily_insights
+        WHERE load_date >= (SYSDATE - INTERVAL '30 days')::date
+        GROUP BY 1
+        ORDER BY 1;
+    """,
+
+    'reaction_mix_today': """
+        SELECT
+          'like'   AS reaction, SUM(post_reactions_like_total)  AS count FROM rdl.post_daily_insights
+            WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
+        UNION ALL SELECT 'love',  SUM(post_reactions_love_total)  FROM rdl.post_daily_insights
+            WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
+        UNION ALL SELECT 'wow',   SUM(post_reactions_wow_total)   FROM rdl.post_daily_insights
+            WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
+        UNION ALL SELECT 'haha',  SUM(post_reactions_haha_total)  FROM rdl.post_daily_insights
+            WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
+        UNION ALL SELECT 'sorry', SUM(post_reactions_sorry_total) FROM rdl.post_daily_insights
+            WHERE load_date = (SYSDATE - INTERVAL '1 day')::date
+        UNION ALL SELECT 'anger', SUM(post_reactions_anger_total) FROM rdl.post_daily_insights
+            WHERE load_date = (SYSDATE - INTERVAL '1 day')::date;
+    """,
+
+    'top_posts_week': """
+        SELECT
+          page_name,
+          LEFT(COALESCE(message, ''), 120) AS message_snippet,
+          post_impressions AS impressions,
+          (COALESCE(post_reactions_like_total, 0)
+            + COALESCE(post_reactions_love_total, 0)
+            + COALESCE(post_reactions_wow_total, 0)
+            + COALESCE(post_reactions_haha_total, 0)
+            + COALESCE(post_reactions_sorry_total, 0)
+            + COALESCE(post_reactions_anger_total, 0)) AS reactions
+        FROM rdl.post_daily_insights
+        WHERE created_time >= DATEADD(day, -7, SYSDATE)
+          AND post_impressions IS NOT NULL
+        ORDER BY post_impressions DESC NULLS LAST
+        LIMIT 10;
+    """,
+
+    'sentiment_vs_impressions_today': """
+        SELECT
+          COALESCE(p.nlp_sentiment, 'unknown') AS sentiment,
+          AVG(i.post_impressions) AS avg_impressions,
+          COUNT(*) AS n
+        FROM rdl.post_label_predictions p
+        JOIN rdl.post_daily_insights i ON p.post_id = i.post_id
+        WHERE p.inserted_at >= DATEADD(day, -7, SYSDATE)
+          AND i.post_impressions IS NOT NULL
+          AND p.nlp_sentiment IS NOT NULL
+        GROUP BY 1
+        ORDER BY 2 DESC;
+    """,
+}
+
+
+def run_analysis(conn):
+    """Run all analysis queries. Each returns rows; we shape them so the
+    front-end gets a predictable structure per chart. Failures on a single
+    query don't kill the rest — the page just won't have that chart."""
+    out = {}
+    for name, sql in ANALYSIS_QUERIES.items():
+        try:
+            rows = _query(conn, sql)
+            # JSON-safe conversion of every value
+            cleaned = []
+            for r in rows:
+                cleaned.append({k: _json_safe(v) for k, v in r.items()})
+            out[name] = cleaned
+        except Exception as e:
+            print(f'  WARNING: analysis query "{name}" failed: {e}')
+            out[name] = {'error': str(e)}
     return out
 
 
@@ -348,33 +549,44 @@ def load_json(path, default):
 def main():
     print(f'[{datetime.datetime.now().isoformat()}] starting QA refresh')
 
-    # 1. Pull freshness data from Redshift
-    freshness = run_freshness_query()
-    print(f'  fetched freshness for {len(freshness)} tables')
+    # Open ONE Redshift connection, reuse for freshness + analysis
+    conn = _get_conn()
+    try:
+        # 1. Pull freshness data
+        freshness = run_freshness_query(conn)
+        print(f'  fetched freshness for {len(freshness)} tables')
 
-    # 2. Load history, append today's snapshot
+        # 2. Run analysis queries (heavier — ~10-30s total on Redshift)
+        analysis = run_analysis(conn)
+        ok = sum(1 for v in analysis.values() if not (isinstance(v, dict) and 'error' in v))
+        print(f'  ran {len(analysis)} analysis queries, {ok} succeeded')
+    finally:
+        conn.close()
+
+    # 3. Load history, append today's snapshot
     history = load_history()
     history = append_snapshot(history, freshness)
     print(f'  history now has {len(history["snapshots"])} snapshots')
 
-    # 3. Evaluate rules
+    # 4. Evaluate rules
     rules = load_rules()
     fired = evaluate_rules(freshness, history, rules)
     print(f'  evaluated {len(rules)} rules, {len(fired)} fired')
 
-    # 4. Write the data file the page reads
+    # 5. Write the data file the page reads
     output = {
         'last_updated': datetime.datetime.utcnow().isoformat() + 'Z',
         'today': freshness,
         'history': history['snapshots'],
         'rules': rules,
         'fired': fired,
+        'analysis': analysis,
     }
     HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
-    HISTORY_FILE.write_text(json.dumps(output, indent=2))
+    HISTORY_FILE.write_text(json.dumps(output, indent=2, default=str))
     print(f'  wrote {HISTORY_FILE}')
 
-    # 5. Email if anything fired
+    # 6. Email if anything fired
     if fired:
         recipients = load_json(TEAM_FILE, {'emails': []}).get('emails', [])
         subject = f'[ArtemisAI QA] {len(fired)} alert{"s" if len(fired) > 1 else ""} — {datetime.date.today().isoformat()}'

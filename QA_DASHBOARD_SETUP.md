@@ -66,6 +66,8 @@ GRANT SELECT ON rdl.post_label_predictions TO github_qa_reader;
 
 Save the password somewhere safe — you'll add it to GitHub in Step 3.
 
+> **Note on analysis queries:** The Analysis tab runs 11 additional queries on top of the freshness check (sentiment trends, model agreement, engagement aggregates, etc.). They use the same SELECT permissions you've just granted — no extra setup needed. The whole refresh job takes 10-30 seconds total on Redshift Serverless (the freshness check alone is ~2 seconds).
+
 ### Verify it works
 
 From your machine, try connecting as the new user and running the freshness query:
