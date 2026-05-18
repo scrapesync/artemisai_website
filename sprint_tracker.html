@@ -1681,6 +1681,10 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
     <button class="tab-btn" onclick="switchTab('mockup',event)">Mockup Alignment</button>
   </div>
   <div style="display:flex;align-items:center;gap:8px;justify-self:end;">
+    <button id="viewer-chip" onclick="promptViewerName()" title="Click to change your display name" style="display:flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid rgba(99,102,241,.32);border-radius:6px;background:rgba(99,102,241,.08);color:#a5b4fc;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.5a5 5 0 0110 0"/></svg>
+      <span>Workspace · <span id="viewer-chip-name">Anonymous</span></span>
+    </button>
     <span id="sync-indicator" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);display:none;align-items:center;gap:5px;">
       <span id="sync-dot" style="width:6px;height:6px;border-radius:50%;background:var(--muted);display:inline-block"></span>
       <span id="sync-text">Syncing...</span>
@@ -2929,37 +2933,112 @@ function exportSprintCSV(){
 ═══ */
 
 const SYNC_ENABLED = true;
-const SYNC_USER_ID = 'asad';
+const WORKSPACE_ID = 'artemis';     // Shared workspace — everyone reads/writes the same record set
+const SYNC_USER_ID = WORKSPACE_ID;  // Legacy alias; kept so older code paths still work
 const API_BASE = 'https://g6zr0b5lwe.execute-api.eu-west-2.amazonaws.com/default/lambda_save';
+
+// ─── shared-workspace polling state ───────────────────────────────────────
+const POLL_INTERVAL_MS  = 8000;     // Pull from DynamoDB every 8s
+const POLL_PAUSE_MS     = 6000;     // Pause polling for 6s after a local edit
+let _lastServerStamp    = 0;         // Max updatedAt seen on this client
+let _pollHandle         = null;
+let _editPausedUntil    = 0;
+let _pollInFlight       = false;
+let _saveQueue          = Promise.resolve(); // Serialise saves to avoid races
+
+function _now(){return Date.now();}
+function _pauseAfterEdit(){_editPausedUntil=_now()+POLL_PAUSE_MS;}
+function _userIsTyping(){
+  const a=document.activeElement;
+  if(!a)return false;
+  const tag=(a.tagName||'').toLowerCase();
+  return tag==='input'||tag==='textarea'||a.isContentEditable;
+}
 
 
 async function syncLoadAll(){
   if(!SYNC_ENABLED)return;
-  setSyncStatus('syncing','Loading from DynamoDB...');
+  setSyncStatus('syncing','Loading workspace...');
   try{
-    const res=await fetch(`${API_BASE}?action=load&userId=${SYNC_USER_ID}`);
+    const res=await fetch(`${API_BASE}?action=load&userId=${WORKSPACE_ID}`);
     const items=await res.json();
     if(items.length===0){
       // DB is empty — show push button to seed it
-      setSyncStatus('ok','DynamoDB empty');
+      setSyncStatus('ok','Workspace empty');
       const btn=document.getElementById('push-all-btn');
       if(btn)btn.style.display='block';
-      console.log('DynamoDB is empty. Click "Push to DynamoDB" to seed it from localStorage.');
+      console.log('Workspace is empty. Click "Push to DynamoDB" to seed it from localStorage.');
+      startPolling();
       return;
     }
     items.forEach(item=>{
       const{userId,sprintName,updatedAt,...data}=item;
       ST[sprintName]=data;
+      if(updatedAt && updatedAt > _lastServerStamp) _lastServerStamp = updatedAt;
     });
     saveST();
     renderLaunch();renderSprintTrackBar();renderTeamProgress();
     if(currentTab==='sprint')renderSprintPage();
     if(currentTab==='mockup')renderMockupPage();
-    setSyncStatus('ok',`Loaded ${items.length} sprints ✓`);
-    console.log('Loaded',items.length,'sprints from DynamoDB');
+    setSyncStatus('ok',`Workspace · ${items.length} sprints loaded`);
+    console.log('Loaded',items.length,'sprints from workspace');
+    startPolling();
   }catch(e){
     setSyncStatus('error','Load failed — using localStorage');
-    console.warn('DynamoDB load failed, using localStorage:',e);
+    console.warn('Workspace load failed, using localStorage:',e);
+    startPolling(); // still try to recover via polling
+  }
+}
+
+/* Real-time-ish: pull workspace every POLL_INTERVAL_MS; only re-render if
+   the server has newer data AND the user isn't mid-edit. */
+function startPolling(){
+  if(_pollHandle)return;
+  _pollHandle = setInterval(pollTick, POLL_INTERVAL_MS);
+  // also poll once when the tab regains focus (we may have missed updates)
+  window.addEventListener('focus', ()=>{pollTick(true);});
+  document.addEventListener('visibilitychange', ()=>{
+    if(document.visibilityState==='visible') pollTick(true);
+  });
+}
+
+async function pollTick(force){
+  if(!SYNC_ENABLED || _pollInFlight) return;
+  if(!force){
+    if(_now() < _editPausedUntil) return;   // paused after a local edit
+    if(_userIsTyping()) return;             // don't clobber typing
+  }
+  _pollInFlight = true;
+  try{
+    const res = await fetch(`${API_BASE}?action=load&userId=${WORKSPACE_ID}`);
+    const items = await res.json();
+    if(!Array.isArray(items) || items.length===0){ _pollInFlight=false; return; }
+
+    let maxStamp = 0, latestBy = null;
+    items.forEach(item=>{
+      if(item.updatedAt && item.updatedAt > maxStamp){
+        maxStamp = item.updatedAt;
+        latestBy = item.updatedByName || item.updatedBy || null;
+      }
+    });
+
+    if(maxStamp <= _lastServerStamp){ _pollInFlight=false; return; } // nothing new
+
+    // Server has newer data — hydrate and re-render
+    items.forEach(item=>{
+      const{userId,sprintName,updatedAt,updatedBy,updatedByName,...data}=item;
+      ST[sprintName]=data;
+    });
+    _lastServerStamp = maxStamp;
+    saveST();
+    renderLaunch(); renderSprintTrackBar(); renderTeamProgress();
+    if(currentTab==='sprint') renderSprintPage();
+    if(currentTab==='mockup') renderMockupPage();
+    setSyncStatus('ok', latestBy ? `Updated by ${latestBy} · synced` : 'Updated · synced');
+  }catch(e){
+    // soft fail — keep polling
+  }finally{
+    _pollInFlight = false;
   }
 }
 
@@ -2977,30 +3056,98 @@ function setSyncStatus(status,text){
 
 async function syncSaveSprint(sn){
   if(!SYNC_ENABLED)return;
+  _pauseAfterEdit();
+  maybePromptName();
+  // Serialise saves so cascadeFrom doesn't fire 23 parallel POSTs
+  _saveQueue = _saveQueue.then(() => _doSaveSprint(sn)).catch(()=>{});
+  return _saveQueue;
+}
+
+async function _doSaveSprint(sn){
   setSyncStatus('syncing','Saving '+sn+'...');
   try{
     const ss=gss(sn);
     const resp=await fetch(API_BASE,{
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({userId:SYNC_USER_ID,sprintName:sn,action:'save',data:ss})
+      body:JSON.stringify({
+        userId: WORKSPACE_ID,
+        sprintName: sn,
+        action: 'save',
+        data: ss,
+        updatedBy: getViewerId(),
+        updatedByName: getViewerName(),
+      })
     });
     const data=await resp.json();
-    if(data.ok)setSyncStatus('ok','Saved ✓');
-    else setSyncStatus('error','Save failed');
+    if(data.ok){
+      setSyncStatus('ok','Saved ✓');
+      // Bump our local stamp so the next poll tick doesn't re-apply our own write
+      if(data.updatedAt && data.updatedAt > _lastServerStamp){
+        _lastServerStamp = data.updatedAt;
+      } else {
+        _lastServerStamp = Math.max(_lastServerStamp, _now());
+      }
+    } else {
+      setSyncStatus('error','Save failed');
+    }
   }catch(e){setSyncStatus('error','Offline');}
+}
+
+/* Viewer identity — set once per browser via prompt-on-first-edit so the
+   "Updated by ..." attribution works even before the proper auth in S5. */
+function getViewerId(){
+  let id = localStorage.getItem('artemis_viewer_id');
+  if(!id){
+    id = 'v_' + Math.random().toString(36).slice(2, 10);
+    localStorage.setItem('artemis_viewer_id', id);
+  }
+  return id;
+}
+function getViewerName(){
+  return localStorage.getItem('artemis_viewer_name') || 'Anonymous';
+}
+function setViewerName(name){
+  const n = (name||'').trim();
+  if(n){
+    localStorage.setItem('artemis_viewer_name', n);
+    renderViewerChip();
+  }
+}
+function renderViewerChip(){
+  const el = document.getElementById('viewer-chip-name');
+  if(el) el.textContent = getViewerName();
+}
+function promptViewerName(){
+  const cur = getViewerName();
+  const next = prompt('Your display name (so the team knows who made changes):', cur==='Anonymous'?'':cur);
+  if(next !== null) setViewerName(next || 'Anonymous');
+}
+/* On first edit, gently ask for a name once if still Anonymous. */
+let _askedOnce = false;
+function maybePromptName(){
+  if(_askedOnce) return;
+  if(getViewerName() !== 'Anonymous') return;
+  _askedOnce = true;
+  setTimeout(promptViewerName, 50);
 }
 
 async function pushAllToDynamo(){
   const btn=document.getElementById('push-all-btn');
   if(btn){btn.disabled=true;btn.textContent='Pushing...';}
-  setSyncStatus('syncing','Pushing all sprints...');
+  setSyncStatus('syncing','Pushing all sprints to workspace...');
   try{
     const resp=await fetch(API_BASE,{
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({action:'save-all',userId:SYNC_USER_ID,state:ST})
+      body:JSON.stringify({
+        action:'save-all',
+        userId: WORKSPACE_ID,
+        state: ST,
+        updatedBy: getViewerId(),
+        updatedByName: getViewerName(),
+      })
     });
     const data=await resp.json();
-    if(data.ok){setSyncStatus('ok','Pushed '+data.count+' sprints ✓');if(btn)btn.style.display='none';}
+    if(data.ok){setSyncStatus('ok','Pushed '+data.count+' sprints to workspace ✓');if(btn)btn.style.display='none';}
     else{setSyncStatus('error','Push failed');if(btn){btn.disabled=false;btn.textContent='⬆ Push to DynamoDB';}}
   }catch(e){setSyncStatus('error','Network error');if(btn){btn.disabled=false;btn.textContent='⬆ Push to DynamoDB';}}
 }
@@ -3308,6 +3455,7 @@ saveST();
 renderLaunch();
 renderSprintTrackBar();
 renderTeamProgress();
+renderViewerChip();
 syncLoadAll();
 if(CVS) requestAnimationFrame(frame); /* skip animation in clean view */
 </script>
