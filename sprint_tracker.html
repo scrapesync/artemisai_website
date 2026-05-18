@@ -1500,6 +1500,107 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
   background: linear-gradient(180deg,#6366f1,#8b5cf6);
   border-radius: 2px;
 }
+.section-head-filter-note {
+  font-size: 13px;
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: 0;
+}
+
+/* ── Filter strip: people chips above Task Board ─────────────────────── */
+.filter-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 0 16px;
+  margin: 4px 0 0;
+}
+.filter-lbl {
+  font-family: 'Inter','SF Pro Display',sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #6b7d99;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  margin-right: 4px;
+}
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px 6px 11px;
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 999px;
+  color: #cbd5e1;
+  font-family: 'Inter','SF Pro Display',sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .12s, border-color .12s, color .12s, transform .08s;
+  white-space: nowrap;
+}
+.filter-chip:hover {
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.16);
+  color: #f1f5f9;
+}
+.filter-chip:active { transform: scale(.97); }
+.filter-chip.active { font-weight: 700; }
+.filter-chip .fc-name { line-height: 1; }
+.filter-chip .fc-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 9px;
+  background: rgba(255,255,255,.06);
+  color: #94a3b8;
+  font-family: 'JetBrains Mono','SF Mono',monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.filter-empty {
+  background: rgba(99,102,241,.06);
+  border: 1px dashed rgba(99,102,241,.28);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 6px 0 14px;
+  font-family: 'Inter','SF Pro Display',sans-serif;
+  font-size: 13px;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.filter-empty-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  background: rgba(99,102,241,.16);
+  border: 1px solid rgba(99,102,241,.4);
+  border-radius: 6px;
+  color: #a5b4fc;
+  font-family: 'Inter',sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .12s;
+}
+.filter-empty-clear:hover { background: rgba(99,102,241,.28); }
+
+@media (max-width: 640px){
+  .filter-strip { padding: 8px 0 12px; gap: 5px; }
+  .filter-chip { padding: 5px 9px; font-size: 11.5px; }
+  .filter-chip .fc-num { min-width: 18px; height: 16px; font-size: 10px; }
+}
 
 /* Mockup Alignment ticket rows — let long labels wrap, give them breathing room */
 #mockup-page .ma-ticket-row {
@@ -2116,6 +2217,59 @@ function renderSidebar(){
 
 function mkid(t,s){return(t+'-'+s).replace(/[^a-zA-Z0-9]/g,'-');}
 
+/* ── Filter by assignee (shared between Task Board kanban + Task Details) ──
+   Stored in localStorage so it persists across sprint switches + reloads.
+   '' = show every task. */
+let _assigneeFilter = localStorage.getItem('artemis_assignee_filter') || '';
+const FILTER_PEOPLE = [
+  { id:'',         label:'Everyone',  accent:'#a5b4fc', matches:()=>true },
+  { id:'CTO',      label:'Asad',      accent:'#6366f1', matches:a => a==='CTO' },
+  { id:'AI Eng',   label:'Faheem',    accent:'#00d4aa', matches:a => a==='AI Engineer'||a==='AI Eng' },
+  { id:'Analyst',  label:'Rafeh',     accent:'#f59e0b', matches:a => a==='Analyst' },
+  { id:'CEO',      label:'Alex',      accent:'#ec4899', matches:a => a==='CEO' },
+  { id:'CO',       label:'Lewis',     accent:'#38bdf8', matches:a => a==='CO' },
+  { id:'Ops',      label:'Jill',      accent:'#10b981', matches:a => a==='Ops' },
+  { id:'CLO',      label:'Filza',     accent:'#a78bfa', matches:a => a==='CLO' },
+];
+function setAssigneeFilter(val){
+  _assigneeFilter = val || '';
+  if(_assigneeFilter) localStorage.setItem('artemis_assignee_filter', _assigneeFilter);
+  else localStorage.removeItem('artemis_assignee_filter');
+  if(currentSprint) renderMain(currentSprint);
+}
+function _filterMatches(sn, task){
+  if(!_assigneeFilter) return true;
+  const person = FILTER_PEOPLE.find(p => p.id === _assigneeFilter);
+  if(!person) return true;
+  const a = getEffectiveAssignee(sn, task.ticket, task.assignee);
+  return person.matches(a);
+}
+function _filterCountForSprint(sn, personId){
+  const ss = gss(sn);
+  const deleted = ss.deletedTasks || [];
+  const allTasks = [...(SPRINT_DATA[sn]||[]), ...(ss.customTasks||[])].filter(t => !deleted.includes(t.ticket));
+  if(!personId) return allTasks.length;
+  const person = FILTER_PEOPLE.find(p => p.id === personId);
+  if(!person) return 0;
+  return allTasks.filter(t => person.matches(getEffectiveAssignee(sn, t.ticket, t.assignee))).length;
+}
+function renderFilterStrip(sn){
+  return `<div class="filter-strip" role="toolbar" aria-label="Filter tasks by assignee">
+    <span class="filter-lbl">Show</span>
+    ${FILTER_PEOPLE.map(p => {
+      const n = _filterCountForSprint(sn, p.id);
+      const active = (_assigneeFilter||'') === p.id;
+      const safe = p.id.replace(/'/g,"\\'");
+      return `<button class="filter-chip ${active?'active':''}"
+        style="${active?`background:${p.accent}22;border-color:${p.accent};color:${p.accent};box-shadow:0 0 0 1px ${p.accent}55 inset;`:''}"
+        onclick="setAssigneeFilter('${safe}')">
+        <span class="fc-name">${p.label}</span>
+        <span class="fc-num" style="${active?`background:${p.accent}33;color:${p.accent};`:''}">${n}</span>
+      </button>`;
+    }).join('')}
+  </div>`;
+}
+
 function renderMain(sn){
   const main=document.getElementById('sprint-main');
   const tasks=SPRINT_DATA[sn]||[];const c=getPhaseColor(sn);const sp=calcSP(sn);
@@ -2159,11 +2313,18 @@ function renderMain(sn){
     <div class="fi-row"><textarea class="fi" id="ntc-${safe}" placeholder="Checklist items (one per line)" rows="3" style="flex:1;resize:vertical"></textarea></div>
     <div style="display:flex;gap:6px;justify-content:flex-end"><button class="btn btn-o btn-sm" onclick="hideATF('${safe}')">Cancel</button><button class="btn btn-a btn-sm" onclick="addTask('${sn}','${safe}')">Add Task</button></div>
   </div>`;
-  const deleted=ss.deletedTasks||[];const all=[...tasks.map(t=>({...t,_orig:true})),...(ss.customTasks||[]).map(t=>({...t,_orig:false}))].filter(t=>!deleted.includes(t.ticket));
-  h+=`<div class="section-head">📋 Task Board</div>`;
+  const deleted=ss.deletedTasks||[];
+  const allUnfiltered=[...tasks.map(t=>({...t,_orig:true})),...(ss.customTasks||[]).map(t=>({...t,_orig:false}))].filter(t=>!deleted.includes(t.ticket));
+  const all = allUnfiltered.filter(t => _filterMatches(sn, t));
+  h+=renderFilterStrip(sn);
+  h+=`<div class="section-head">📋 Task Board${_assigneeFilter?` <span class="section-head-filter-note">· filtered to ${FILTER_PEOPLE.find(p=>p.id===_assigneeFilter)?.label||_assigneeFilter}</span>`:''}</div>`;
   h+=renderKanban(sn,c);
   h+=`<div class="section-head" style="margin-top:24px;">📝 Task Details & Checklists</div>`;
-  all.forEach(task=>{h+=renderTC(sn,task,c);});
+  if(all.length===0 && allUnfiltered.length>0){
+    h+=`<div class="filter-empty">No tasks for ${FILTER_PEOPLE.find(p=>p.id===_assigneeFilter)?.label||_assigneeFilter} in ${sn}. <button class="filter-empty-clear" onclick="setAssigneeFilter('')">Show all tasks</button></div>`;
+  } else {
+    all.forEach(task=>{h+=renderTC(sn,task,c);});
+  }
   main.innerHTML=h;
   const exp=ss.exp||{};
   Object.keys(exp).forEach(tk=>{if(exp[tk]){const el=document.getElementById('task-'+mkid(tk,sn));if(el)el.classList.add('open');}});
@@ -2430,7 +2591,9 @@ const KANBAN_COLS=[
 function renderKanban(sn,color){
   const ss=gss(sn);
   const deleted=ss.deletedTasks||[];
-  const allTasks=[...(SPRINT_DATA[sn]||[]),...(ss.customTasks||[])].filter(t=>!deleted.includes(t.ticket));
+  const allTasks=[...(SPRINT_DATA[sn]||[]),...(ss.customTasks||[])]
+    .filter(t=>!deleted.includes(t.ticket))
+    .filter(t=>_filterMatches(sn,t));
 
   // Build columns
   const cols={todo:[],inprog:[],blocker:[],done:[]};
