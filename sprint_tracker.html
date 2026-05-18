@@ -998,6 +998,309 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
   .strat-phase-dates { text-align: left; }
   .strat-kpi-value { font-size: 28px; }
 }
+
+
+/* ═══════════════════════ SPRINT TRACKER + MOCKUP ALIGNMENT — same look as Strategy ═══════════════════════ */
+
+/* ── Sprint Tracker (#sprint-page) ── */
+#sprint-page, #sprint-page * {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+/* Keep ticket codes and small mono labels in JetBrains Mono */
+#sprint-page .tc-ticket,
+#sprint-page .tc-who,
+#sprint-page .tc-cnt,
+#sprint-page .sb-snum,
+#sprint-page .sb-pct,
+#sprint-page .sb-section,
+#sprint-page .sb-title,
+#sprint-page .date-input,
+#sprint-page .date-lbl,
+#sprint-page .prog-lbl,
+#sprint-page .cl-title,
+#sprint-page .tag {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Sidebar: stronger contrast on labels and section heads */
+#sprint-page .sb-title { color: #94a3b8; font-weight: 600; font-size: 10px; letter-spacing: 2px; }
+#sprint-page .sb-section { color: #64748b; font-weight: 600; font-size: 9px; letter-spacing: 1.8px; }
+#sprint-page .sb-btn { color: #cbd5e1; font-size: 12px; font-weight: 500; }
+#sprint-page .sb-btn:hover { background: rgba(255,255,255,.06); color: #ffffff; }
+#sprint-page .sb-btn.active { background: rgba(0,212,170,.14); color: #ffffff; }
+#sprint-page .sb-btn.active .sb-snum { color: #5eead4; }
+#sprint-page .sb-pct { color: #94a3b8; font-weight: 500; }
+#sprint-page .sb-snum { color: #cbd5e1; font-weight: 600; }
+
+/* Sprint header: bigger, stronger title */
+#sprint-page .sm-title h2 { color: #ffffff; font-weight: 700; font-size: 26px; letter-spacing: -0.4px; }
+#sprint-page .sm-phase { color: #94a3b8; font-size: 11px; font-weight: 600; letter-spacing: 1.3px; text-transform: uppercase; }
+
+/* Tag pills — match Strategy chip style */
+#sprint-page .tag { font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 5px; letter-spacing: 0.4px; }
+#sprint-page .tag-a { background: rgba(0,212,170,.14); color: #5eead4; }
+#sprint-page .tag-g { background: rgba(34,197,94,.14); color: #86efac; }
+#sprint-page .tag-i { background: rgba(99,102,241,.14); color: #a5b4fc; }
+#sprint-page .tag-d { background: rgba(255,255,255,.06); color: #cbd5e1; }
+
+/* Progress KPI cards in tracker — match Strategy KPI style */
+#sprint-page .prog-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 14px;
+  text-align: left;
+}
+#sprint-page .prog-big {
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+#sprint-page .prog-lbl {
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+}
+
+/* Task cards (kanban tiles) — refined contrast + Inter */
+#sprint-page .tc {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+#sprint-page .tc:hover { border-color: rgba(0,212,170,.25); }
+#sprint-page .tc.open { border-color: rgba(0,212,170,.4); }
+#sprint-page .tc-ticket {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #5eead4;
+  background: rgba(0,212,170,.14);
+  padding: 3px 8px;
+}
+#sprint-page .tc-name { color: #ffffff; font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+#sprint-page .tc-who {
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: rgba(255,255,255,.04);
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+#sprint-page .tc-cnt { font-size: 10px; font-weight: 700; padding: 3px 8px; }
+#sprint-page .tc-cnt.done { background: rgba(34,197,94,.14); color: #86efac; }
+
+/* Checklist items */
+#sprint-page .cl-title { color: #94a3b8; font-weight: 700; font-size: 10px; letter-spacing: 1.8px; }
+#sprint-page .ci-text { color: #cbd5e1; font-size: 13px; font-weight: 400; line-height: 1.55; }
+#sprint-page .ci-text.done { color: #64748b; }
+#sprint-page .cb {
+  width: 16px; height: 16px;
+  border: 1.5px solid #475569;
+  border-radius: 4px;
+}
+#sprint-page .cb:hover { border-color: var(--accent); }
+#sprint-page .cb.on { background: var(--accent); border-color: var(--accent); }
+#sprint-page .cb.on::after { content: "✓"; color: #020609; font-size: 10px; font-weight: 800; }
+
+/* Input fields */
+#sprint-page .fi, #sprint-page .ai {
+  background: var(--card2);
+  border: 1px solid var(--border);
+  color: #e2e8f0;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+#sprint-page .fi:focus, #sprint-page .ai:focus { border-color: var(--accent); }
+#sprint-page .fi::placeholder, #sprint-page .ai::placeholder { color: #64748b; }
+#sprint-page .date-input { color: #e2e8f0; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; }
+#sprint-page .date-lbl { color: #94a3b8; font-size: 10px; font-weight: 600; letter-spacing: 1.2px; }
+
+/* Buttons */
+#sprint-page .btn { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12.5px; }
+#sprint-page .btn-a { background: var(--accent); color: #020609; font-weight: 700; }
+#sprint-page .btn-a:hover { background: #00f5c4; transform: translateY(-1px); }
+#sprint-page .btn-o { color: #cbd5e1; }
+#sprint-page .btn-o:hover { color: #ffffff; border-color: var(--accent); }
+
+
+/* ── Mockup Alignment (#mockup-page) ── */
+#mockup-page, #mockup-page * {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+/* Keep mono on ticket codes / date pills / status pills */
+#mockup-page .ma-title,
+#mockup-page .ma-view-btn,
+#mockup-page .ma-tr-ticket,
+#mockup-page .ma-tr-sprint,
+#mockup-page .ma-tr-status,
+#mockup-page .ma-date-pill,
+#mockup-page .gantt-month-label,
+#mockup-page .gantt-bar {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+#mockup-page .ma-title {
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+/* View toggle (Grid / Gantt buttons) */
+#mockup-page .ma-view-btn {
+  color: #cbd5e1;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  background: transparent;
+}
+#mockup-page .ma-view-btn:hover { color: #ffffff; border-color: rgba(0,212,170,.3); }
+#mockup-page .ma-view-btn.active {
+  background: var(--accent);
+  color: #020609;
+  border-color: var(--accent);
+  font-weight: 700;
+}
+
+/* Feature cards — clean, white text, phase-coloured accents */
+#mockup-page .ma-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .18s, transform .18s;
+}
+#mockup-page .ma-card:hover {
+  border-color: rgba(0,212,170,.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,.2);
+}
+#mockup-page .ma-card-top { padding: 18px 20px 14px; }
+#mockup-page .ma-icon {
+  width: 38px; height: 38px;
+  border-radius: 9px;
+  font-size: 18px;
+  font-weight: 600;
+  /* background applied inline; force white text */
+  color: #ffffff !important;
+}
+#mockup-page .ma-page-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.2px;
+}
+#mockup-page .ma-desc {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: #cbd5e1;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+/* Date pills */
+#mockup-page .ma-date-pill {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 10px;
+  letter-spacing: 0.4px;
+}
+#mockup-page .ma-date-pill.first { color: #5eead4; border-color: rgba(0,212,170,.4); background: rgba(0,212,170,.06); }
+#mockup-page .ma-date-pill.final { color: #cbd5e1; border-color: rgba(255,255,255,.12); }
+#mockup-page .ma-date-pill.ready { color: #86efac; border-color: rgba(34,197,94,.4); background: rgba(34,197,94,.1); }
+
+/* Ticket rows inside cards */
+#mockup-page .ma-ticket-row {
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+#mockup-page .ma-ticket-row:hover { background: rgba(255,255,255,.03); }
+#mockup-page .ma-tr-ticket {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  color: #5eead4;
+  background: rgba(0,212,170,.14);
+}
+#mockup-page .ma-tr-ticket.test { color: #fbbf24; background: rgba(245,158,11,.14); }
+#mockup-page .ma-tr-label {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #e2e8f0;
+  line-height: 1.45;
+}
+#mockup-page .ma-tr-sprint {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  letter-spacing: 0.3px;
+  /* phase color applied inline — force white text */
+  color: #ffffff !important;
+}
+#mockup-page .ma-tr-status {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+#mockup-page .ma-tr-status.done { background: rgba(34,197,94,.16); color: #86efac; }
+#mockup-page .ma-tr-status.active { background: rgba(245,158,11,.16); color: #fbbf24; }
+#mockup-page .ma-tr-status.upcoming { background: rgba(255,255,255,.06); color: #cbd5e1; }
+
+/* Gantt view */
+#mockup-page .gantt-month-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 1.2px;
+}
+#mockup-page .gantt-label-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+#mockup-page .gantt-label-icon { font-size: 15px; }
+#mockup-page .gantt-track {
+  background: rgba(255,255,255,.04);
+  border-radius: 5px;
+  height: 28px;
+}
+#mockup-page .gantt-bar {
+  height: 24px;
+  top: 2px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #ffffff !important;
+  letter-spacing: 0.3px;
+  padding: 0 10px;
+  text-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+#mockup-page .gantt-bar:hover { transform: scaleY(1.08); }
+#mockup-page .gantt-bar.wip { opacity: .7; }
+#mockup-page .gantt-bar.upcoming { opacity: .35; }
+#mockup-page .gantt-today-line {
+  width: 2px;
+  background: rgba(248,113,113,.9);
+}
+#mockup-page .gantt-today-line::before {
+  font-size: 9px;
+  font-weight: 700;
+  color: #fda4af;
+  letter-spacing: 1.2px;
+}
+
 </style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RCP8LMKYK"></script>
@@ -2117,7 +2420,7 @@ function renderMockupCards(){
     const anyActive=webT.some(t=>getSprintStatus(t.s)==='active');
     const statusLabel=allDone?'Complete':anyActive?'In Progress':'Planned';
     const statusStyle=allDone?'done':anyActive?'active':'upcoming';
-    h+=`<div class="ma-card">
+    h+=`<div class="ma-card" style="border-top:3px solid ${f.color};">
       <div class="ma-card-top">
         <div class="ma-card-header">
           <div class="ma-icon" style="background:${f.color}18;">${f.icon}</div>
@@ -2177,7 +2480,7 @@ function renderMockupGantt(){
       <div class="gantt-track">
         ${months.map(m=>`<div class="gantt-bg-line" style="left:${m.pct}%"></div>`).join('')}
         ${today>=ganttStart&&today<=ganttEnd?`<div class="gantt-today-line" style="left:${todayPct}%"></div>`:''}
-        <div class="gantt-bar ${st}" style="left:${barL}%;width:${barW}%;background:${f.color}${opac};color:${textCol}"
+        <div class="gantt-bar ${st}" style="left:${barL}%;width:${barW}%;background:${f.color};"
           onclick="setMockupView('cards')" title="${f.page} • ${sprRange}">${f.page} <span style="opacity:.7">${sprRange}</span></div>
       </div>
     </div>`;
