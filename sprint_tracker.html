@@ -386,17 +386,48 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 
 /* ── TEAM PROGRESS ── */
 .team-progress-section{position:relative;z-index:2;padding:0 64px 40px;max-width:1380px;margin:0 auto;}
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
 .team-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:20px 22px;position:relative;overflow:hidden;}
 .team-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--tc,#00d4aa);}
 .tc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
 .tc-role{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--muted2);}
 .tc-name{font-size:16px;font-weight:700;color:white;margin-bottom:14px;}
-.tc-meter-wrap{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin-bottom:8px;}
+.tc-meter-wrap{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin-bottom:12px;}
 .tc-meter-fill{height:100%;border-radius:3px;transition:width .6s ease;background:var(--tc,#00d4aa);box-shadow:0 0 8px var(--tc,#00d4aa);}
+
+/* Ticket count chips — Assigned / Done / Overdue per person */
+.tc-tickets{display:flex;gap:8px;margin-bottom:10px;}
+.tc-tk{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:8px 6px;border-radius:8px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+}
+.tc-tk-num{
+  font-family:'Inter','SF Pro Display',sans-serif;
+  font-size:18px;font-weight:700;color:#ffffff;line-height:1;
+}
+.tc-tk-lbl{
+  font-family:'Inter','SF Pro Display',sans-serif;
+  font-size:9.5px;font-weight:600;color:#94a3b8;
+  letter-spacing:.6px;text-transform:uppercase;
+}
+.tc-tk-done{
+  background:rgba(16,185,129,.10);
+  border-color:rgba(16,185,129,.22);
+}
+.tc-tk-done .tc-tk-num{color:#34d399;}
+.tc-tk-over{
+  background:rgba(239,68,68,.12);
+  border-color:rgba(239,68,68,.32);
+}
+.tc-tk-over .tc-tk-num{color:#f87171;}
+.tc-tk-over .tc-tk-lbl{color:#fca5a5;}
+.tc-tk-zero{opacity:.85;}
+
 .tc-stats{display:flex;gap:16px;flex-wrap:wrap;}
-.tc-stat{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted2);}
-.tc-stat strong{color:white;font-size:12px;display:block;font-weight:700;}
+.tc-stat{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);}
+.tc-stat strong{color:white;font-size:12px;display:inline;font-weight:700;margin-right:4px;}
 .tc-pct-big{font-size:28px;font-weight:800;color:var(--tc,#00d4aa);line-height:1;}
 
 /* ── KANBAN BOARD ── */
@@ -2235,32 +2266,54 @@ function isTestTask(name){return name.includes('\u{1F9EA}')||name.includes('TEST
 function isWebTask(name){return name.includes('🌐')||name.includes('WEB VD-')||name.includes('🧪')||name.includes('TEST VD-');}
 
 function calcTeamProgress(){
-  const roles={
-    cto:{name:'CTO',role:'Web Developer',color:'#6366f1',total:0,done:0},
-    ai:{name:'Faheem',role:'AI Engineer',color:'#00d4aa',total:0,done:0},
-    analyst:{name:'Rafeh',role:'Analyst / QA',color:'#f59e0b',total:0,done:0},
+  // Per-person stats: assigned (total tickets), done, overdue, plus
+  // checklist-item progress for the meter bar.
+  // Overdue = ticket's sprint end-date is in the past AND ticket is not 'done'.
+  const today = new Date(); today.setHours(0,0,0,0);
+  const roles = {
+    cto:     {name:'Asad',   role:'CTO / Full Stack',     color:'#6366f1', match:a => a==='CTO',                              assigned:0, done:0, overdue:0, ciTotal:0, ciDone:0},
+    ai:      {name:'Faheem', role:'AI Engineer',          color:'#00d4aa', match:a => a==='AI Engineer'||a==='AI Eng',         assigned:0, done:0, overdue:0, ciTotal:0, ciDone:0},
+    analyst: {name:'Rafeh',  role:'Analyst / QA',         color:'#f59e0b', match:a => a==='Analyst',                           assigned:0, done:0, overdue:0, ciTotal:0, ciDone:0},
+    ceo:     {name:'Alex',   role:'CEO / Strategy',       color:'#ec4899', match:a => a==='CEO',                               assigned:0, done:0, overdue:0, ciTotal:0, ciDone:0},
+    co:      {name:'Lewis',  role:'Chief Operations',     color:'#38bdf8', match:a => a==='CO',                                assigned:0, done:0, overdue:0, ciTotal:0, ciDone:0},
+    clo:     {name:'Filza',  role:'Chief Legal',          color:'#a78bfa', match:a => a==='CLO',                               assigned:0, done:0, overdue:0, ciTotal:0, ciDone:0},
+    ops:     {name:'Jill',   role:'Operations / Finance', color:'#10b981', match:a => a==='Ops',                               assigned:0, done:0, overdue:0, ciTotal:0, ciDone:0},
   };
-  Object.keys(SPRINT_DATA).forEach(sn=>{
-    const ss=gss(sn);
-    const deleted=ss.deletedTasks||[];
-    const allTasks=[...(SPRINT_DATA[sn]||[]),...(ss.customTasks||[])].filter(t=>!deleted.includes(t.ticket));
-    allTasks.forEach(task=>{
-      const ts=gts(sn,task.ticket);
-      let t=0,d=0;
-      task.checklist.forEach((_,i)=>{t++;if(ts.checks[i])d++;});
-      (ts.cc||[]).forEach(c=>{t++;if(c.done)d++;});
-      const name=task.name||'';
-      const effectiveAssignee=getEffectiveAssignee(sn,task.ticket,task.assignee);
-      if(effectiveAssignee==='CTO'||isWebTask(name)&&effectiveAssignee==='CTO'){
-        roles.cto.total+=t;roles.cto.done+=d;
-      } else if(effectiveAssignee.includes('Analyst')&&!effectiveAssignee.includes('AI Engineer')){
-        roles.analyst.total+=t;roles.analyst.done+=d;
-      } else if(effectiveAssignee.includes('AI Engineer')){
-        roles.ai.total+=t;roles.ai.done+=d;
-      }
+
+  Object.keys(SPRINT_DATA).forEach(sn => {
+    const ss = gss(sn);
+    const deleted = ss.deletedTasks || [];
+    const allTasks = [...(SPRINT_DATA[sn]||[]), ...(ss.customTasks||[])].filter(t => !deleted.includes(t.ticket));
+    const endStr = getSprintEndDate(sn);
+    const sprintEnd = endStr ? new Date(endStr+'T00:00:00') : null;
+    const isPast = sprintEnd && sprintEnd < today;
+
+    allTasks.forEach(task => {
+      const ts = gts(sn, task.ticket);
+      const eff = getEffectiveAssignee(sn, task.ticket, task.assignee);
+      const status = getKanbanStatus(sn, task.ticket);
+
+      // checklist-item rollup for the meter
+      let ciT = 0, ciD = 0;
+      task.checklist.forEach((_, i) => { ciT++; if(ts.checks[i]) ciD++; });
+      (ts.cc||[]).forEach(c => { ciT++; if(c.done) ciD++; });
+
+      // Find which role this ticket belongs to (single owner — the effective assignee)
+      const role = Object.values(roles).find(r => r.match(eff));
+      if (!role) return;
+
+      role.assigned += 1;
+      role.ciTotal += ciT;
+      role.ciDone  += ciD;
+      if (status === 'done') role.done += 1;
+      else if (isPast)        role.overdue += 1;
     });
   });
-  Object.values(roles).forEach(r=>{r.pct=r.total?Math.round(r.done/r.total*100):0;});
+
+  Object.values(roles).forEach(r => {
+    r.pct       = r.ciTotal ? Math.round(r.ciDone / r.ciTotal * 100) : 0;
+    r.remaining = Math.max(0, r.assigned - r.done);
+  });
   return roles;
 }
 
@@ -2279,10 +2332,15 @@ function renderTeamProgress(){
         <div class="tc-pct-big">${r.pct}%</div>
       </div>
       <div class="tc-meter-wrap"><div class="tc-meter-fill" style="width:${r.pct}%"></div></div>
+      <div class="tc-tickets">
+        <div class="tc-tk"><span class="tc-tk-num">${r.assigned}</span><span class="tc-tk-lbl">Assigned</span></div>
+        <div class="tc-tk tc-tk-done"><span class="tc-tk-num">${r.done}</span><span class="tc-tk-lbl">Done</span></div>
+        <div class="tc-tk ${r.overdue>0?'tc-tk-over':'tc-tk-zero'}">
+          <span class="tc-tk-num">${r.overdue}</span><span class="tc-tk-lbl">Overdue</span>
+        </div>
+      </div>
       <div class="tc-stats">
-        <div class="tc-stat"><strong>${r.done}</strong>done</div>
-        <div class="tc-stat"><strong>${r.total-r.done}</strong>remaining</div>
-        <div class="tc-stat"><strong>${r.total}</strong>total checks</div>
+        <div class="tc-stat"><strong>${r.ciDone}</strong>/${r.ciTotal} checks</div>
       </div>
     </div>`).join('');
 } catch(e){/* DOM element removed in clean view */}
