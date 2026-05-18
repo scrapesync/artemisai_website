@@ -1226,9 +1226,42 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 #sprint-page .tc-cnt.done { background: rgba(34,197,94,.14); color: #86efac; }
 
 /* Checklist items */
-#sprint-page .cl-title { color: #94a3b8; font-weight: 700; font-size: 10px; letter-spacing: 1.8px; }
-#sprint-page .ci-text { color: #cbd5e1; font-size: 13px; font-weight: 400; line-height: 1.55; }
+#sprint-page .cl-title { color: #e2e8f0; font-weight: 600; font-size: 12px; letter-spacing: .3px; text-transform: none; }
+#sprint-page .ci-text { color: #f1f5f9; font-size: 13.5px; font-weight: 400; line-height: 1.55; }
 #sprint-page .ci-text.done { color: #64748b; }
+
+/* Kanban column headers — readable, not tiny mono */
+#sprint-page .kc-title {
+  font-family: 'Inter','SF Pro Display',-apple-system,sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+#sprint-page .kc-count {
+  font-family: 'JetBrains Mono','SF Mono',monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #e2e8f0;
+  padding: 2px 8px;
+}
+#sprint-page .kanban-col.col-todo .kc-title { color: #cbd5e1; }
+#sprint-page .kanban-col.col-inprog .kc-title { color: #fbbf24; }
+#sprint-page .kanban-col.col-blocker .kc-title { color: #f87171; }
+#sprint-page .kanban-col.col-done .kc-title { color: #6ee7b7; }
+
+/* Kanban task cards — readable task names */
+#sprint-page .ktc-name { font-size: 12.5px; font-weight: 600; color: #f1f5f9; line-height: 1.4; }
+#sprint-page .ktc-ticket {
+  font-family: 'JetBrains Mono','SF Mono',monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  padding: 2px 7px;
+  color: #5eead4;
+  background: rgba(0,212,170,.14);
+}
+#sprint-page .ktc-who { font-size: 10px; color: #94a3b8; font-weight: 500; }
 #sprint-page .cb {
   width: 16px; height: 16px;
   border: 1.5px solid #475569;
@@ -1277,10 +1310,12 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 }
 
 #mockup-page .ma-title {
-  color: #94a3b8;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
+  font-family: 'Inter','SF Pro Display',-apple-system,sans-serif;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  text-transform: none;
 }
 
 /* View toggle (Grid / Gantt buttons) */
@@ -1324,16 +1359,19 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
   color: #ffffff !important;
 }
 #mockup-page .ma-page-name {
-  font-size: 16px;
+  font-family: 'Inter','SF Pro Display',-apple-system,sans-serif;
+  font-size: 18px;
   font-weight: 700;
   color: #ffffff;
-  letter-spacing: -0.2px;
+  letter-spacing: -0.3px;
+  line-height: 1.25;
 }
 #mockup-page .ma-desc {
-  font-size: 12.5px;
+  font-family: 'Inter','SF Pro Display',-apple-system,sans-serif;
+  font-size: 13px;
   font-weight: 400;
-  color: #cbd5e1;
-  line-height: 1.5;
+  color: #e2e8f0;
+  line-height: 1.55;
   margin-bottom: 12px;
 }
 
@@ -1348,26 +1386,77 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 #mockup-page .ma-date-pill.final { color: #cbd5e1; border-color: rgba(255,255,255,.12); }
 #mockup-page .ma-date-pill.ready { color: #86efac; border-color: rgba(34,197,94,.4); background: rgba(34,197,94,.1); }
 
-/* Ticket rows inside cards */
-#mockup-page .ma-ticket-row {
-  padding: 9px 0;
-  border-bottom: 1px solid rgba(255,255,255,.05);
-}
-#mockup-page .ma-ticket-row:hover { background: rgba(255,255,255,.03); }
-#mockup-page .ma-tr-ticket {
-  font-size: 10px;
+/* Section headings inside sprint detail (Task Board, Task Details & Checklists) */
+#sprint-page .section-head {
+  font-family: 'Inter','SF Pro Display',-apple-system,sans-serif;
+  font-size: 17px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  color: #ffffff;
+  letter-spacing: -0.2px;
+  margin: 6px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(99,102,241,.18);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#sprint-page .section-head::before {
+  content: '';
+  display: inline-block;
+  width: 4px; height: 18px;
+  background: linear-gradient(180deg,#6366f1,#8b5cf6);
+  border-radius: 2px;
+}
+
+/* Mockup Alignment ticket rows — let long labels wrap, give them breathing room */
+#mockup-page .ma-ticket-row {
+  display: flex;
+  align-items: flex-start;          /* tops align when label wraps */
+  flex-wrap: wrap;
+  row-gap: 6px;
+  column-gap: 10px;
+  padding: 11px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  border-radius: 8px;
+}
+#mockup-page .ma-ticket-row:hover {
+  background: rgba(99,102,241,.06);
+}
+#mockup-page .ma-tr-icon {
+  font-size: 13px;
+  line-height: 1.45;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+#mockup-page .ma-tr-ticket {
+  font-family: 'JetBrains Mono','SF Mono',monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
   padding: 3px 8px;
+  border-radius: 5px;
+  flex-shrink: 0;
+  white-space: nowrap;
   color: #5eead4;
   background: rgba(0,212,170,.14);
 }
-#mockup-page .ma-tr-ticket.test { color: #fbbf24; background: rgba(245,158,11,.14); }
+#mockup-page .ma-tr-ticket.test {
+  color: #fbbf24;
+  background: rgba(245,158,11,.14);
+}
 #mockup-page .ma-tr-label {
-  font-size: 12.5px;
+  flex: 1 1 100%;                    /* take a full row when needed */
+  min-width: 200px;
+  font-size: 13.5px;
   font-weight: 500;
-  color: #e2e8f0;
-  line-height: 1.45;
+  color: #f1f5f9;
+  line-height: 1.55;
+  word-break: break-word;
+  margin-top: 2px;
+}
+#mockup-page .ma-tr-sprint,
+#mockup-page .ma-tr-status {
+  flex-shrink: 0;
 }
 #mockup-page .ma-tr-sprint {
   font-size: 10px;
@@ -1967,9 +2056,9 @@ function renderMain(sn){
     <div style="display:flex;gap:6px;justify-content:flex-end"><button class="btn btn-o btn-sm" onclick="hideATF('${safe}')">Cancel</button><button class="btn btn-a btn-sm" onclick="addTask('${sn}','${safe}')">Add Task</button></div>
   </div>`;
   const deleted=ss.deletedTasks||[];const all=[...tasks.map(t=>({...t,_orig:true})),...(ss.customTasks||[]).map(t=>({...t,_orig:false}))].filter(t=>!deleted.includes(t.ticket));
-  h+=`<div style="font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--muted2);margin-bottom:10px;margin-top:4px;">📋 Task Board</div>`;
+  h+=`<div class="section-head">📋 Task Board</div>`;
   h+=renderKanban(sn,c);
-  h+=`<div style="font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--muted2);margin:18px 0 10px;">📝 Task Details & Checklists</div>`;
+  h+=`<div class="section-head" style="margin-top:24px;">📝 Task Details & Checklists</div>`;
   all.forEach(task=>{h+=renderTC(sn,task,c);});
   main.innerHTML=h;
   const exp=ss.exp||{};
