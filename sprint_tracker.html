@@ -6,6 +6,7 @@
 <title>ArtemisAI</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
 :root{
   --bg:#020609;--bg2:#050d18;--card:#091220;--card2:#0d1828;
@@ -84,9 +85,9 @@ body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-he
 .sc-footer{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);}
 
 /* SPRINT PAGE */
-#sprint-page{min-height:100vh;padding-top:190px;}
-.sprint-layout{display:flex;height:calc(100vh - 138px);overflow:hidden;}
-.sprint-sidebar{width:240px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);overflow-y:auto;padding:16px 10px;}
+#sprint-page{min-height:100vh;padding-top:190px;display:flex;flex-direction:column;}
+.sprint-layout{display:flex;flex:1;min-height:0;overflow:hidden;height:calc(100vh - 190px);}
+.sprint-sidebar{width:240px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);overflow-y:auto;overflow-x:hidden;padding:16px 10px;min-height:0;}
 .sb-title{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);padding:0 8px;margin-bottom:10px;}
 .sb-section{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:8px 8px 4px;margin-top:4px;}
 .sb-btn{width:100%;display:flex;align-items:center;gap:8px;padding:9px 10px;border:none;border-radius:8px;background:transparent;color:var(--muted2);cursor:pointer;transition:all .15s;text-align:left;margin-bottom:2px;}
@@ -1742,6 +1743,13 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
     <button class="tab-btn" onclick="switchTab('mockup',event)">Mockup Alignment</button>
   </div>
   <div style="display:flex;align-items:center;gap:8px;justify-self:end;">
+    <button onclick="exportAllSprintsExcel()" title="Download every sprint, every task, every check as Excel-friendly CSV"
+            style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid rgba(52,211,153,.45);border-radius:6px;background:linear-gradient(135deg,rgba(52,211,153,.18),rgba(16,185,129,.10));color:#34d399;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:700;cursor:pointer;transition:all .15s;letter-spacing:.2px;"
+            onmouseover="this.style.background='linear-gradient(135deg,rgba(52,211,153,.28),rgba(16,185,129,.18))';this.style.borderColor='rgba(52,211,153,.7)'"
+            onmouseout="this.style.background='linear-gradient(135deg,rgba(52,211,153,.18),rgba(16,185,129,.10))';this.style.borderColor='rgba(52,211,153,.45)'">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>Download Excel</span>
+    </button>
     <button id="viewer-chip" onclick="promptViewerName()" title="Click to change your display name" style="display:flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid rgba(99,102,241,.32);border-radius:6px;background:rgba(99,102,241,.08);color:#a5b4fc;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;">
       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.5a5 5 0 0110 0"/></svg>
       <span>Workspace · <span id="viewer-chip-name">Anonymous</span></span>
@@ -3005,6 +3013,86 @@ function exportSprintCSV(){
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download='artemisai_sprint_plan_'+stamp+'.csv';
   document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+
+/* True XLSX export with 3 named sheets: Summary, Tasks, Checklists.
+   Uses SheetJS (CDN). Falls back to CSV if SheetJS isn't loaded for any reason. */
+function exportAllSprintsExcel(){
+  if(typeof XLSX === 'undefined'){
+    console.warn('SheetJS not loaded — falling back to CSV');
+    return exportSprintCSV();
+  }
+  const phaseMap = {};
+  PHASES.forEach(p => p.sprints.forEach(s => phaseMap[s] = p.name + ' — ' + p.sub));
+
+  // ── Sheet 1: Sprint Summary ───────────────────────────────────────
+  const summaryRows = [['Sprint','Phase','Start Date','End Date','Duration','Tasks','Checks Done','Checks Total','% Complete','Status']];
+  Object.keys(SPRINT_DATA).forEach(sn => {
+    const ss = gss(sn);
+    const sp = calcSP(sn);
+    const dates = getSprintDates(sn);
+    const deleted = ss.deletedTasks || [];
+    const taskCount = [...(SPRINT_DATA[sn]||[]), ...(ss.customTasks||[])].filter(t => !deleted.includes(t.ticket)).length;
+    const dur = dates.start && dates.end ? getDurationLabel(dates.start, dates.end) : '';
+    const status = sp.pct === 100 ? 'Done' : sp.pct > 0 ? 'In Progress' : 'Upcoming';
+    summaryRows.push([sn, phaseMap[sn] || '', dates.start || '', dates.end || '', dur, taskCount, sp.d, sp.t, sp.pct + '%', status]);
+  });
+  const wsSummary = XLSX.utils.aoa_to_sheet(summaryRows);
+  wsSummary['!cols'] = [{wch:11},{wch:42},{wch:13},{wch:13},{wch:11},{wch:7},{wch:12},{wch:13},{wch:12},{wch:13}];
+
+  // ── Sheet 2: Task Detail ──────────────────────────────────────────
+  const taskRows = [['Sprint','Phase','Start Date','End Date','Ticket','Task Name','Assignee','Kanban Status','Checks Done','Checks Total','% Complete']];
+  Object.keys(SPRINT_DATA).forEach(sn => {
+    const ss = gss(sn);
+    const deleted = ss.deletedTasks || [];
+    const allTasks = [...(SPRINT_DATA[sn]||[]), ...(ss.customTasks||[])].filter(t => !deleted.includes(t.ticket));
+    const dates = getSprintDates(sn);
+    allTasks.forEach(task => {
+      const tp = calcTaskProgress(sn, task.ticket);
+      const assignee = getEffectiveAssignee(sn, task.ticket, task.assignee);
+      const kanban = getKanbanStatus(sn, task.ticket);
+      const kanbanLabel = kanban === 'done' ? 'Done' : kanban === 'inprog' ? 'In Progress' : kanban === 'blocker' ? 'Blocker' : 'Yet to Do';
+      taskRows.push([sn, phaseMap[sn] || '', dates.start || '', dates.end || '', task.ticket,
+        (task.name || '').replace(/[\u{1F300}-\u{1FFFF}]/gu,'').trim(),
+        assignee, kanbanLabel, tp.d, tp.t, tp.pct + '%']);
+    });
+  });
+  const wsTasks = XLSX.utils.aoa_to_sheet(taskRows);
+  wsTasks['!cols'] = [{wch:11},{wch:42},{wch:13},{wch:13},{wch:22},{wch:65},{wch:14},{wch:14},{wch:12},{wch:13},{wch:12}];
+
+  // ── Sheet 3: Checklist Detail ─────────────────────────────────────
+  const chkRows = [['Sprint','Ticket','Task Name','Checklist Item','Done','Assignee']];
+  Object.keys(SPRINT_DATA).forEach(sn => {
+    const ss = gss(sn);
+    const deleted = ss.deletedTasks || [];
+    const allTasks = [...(SPRINT_DATA[sn]||[]), ...(ss.customTasks||[])].filter(t => !deleted.includes(t.ticket));
+    allTasks.forEach(task => {
+      const ts = gts(sn, task.ticket);
+      const assignee = getEffectiveAssignee(sn, task.ticket, task.assignee);
+      const name = (task.name || '').replace(/[\u{1F300}-\u{1FFFF}]/gu,'').trim();
+      const isDoneSeeded = task.status === 'done';
+      const userTouched = (ts.checks && Object.values(ts.checks).some(v => v===false))
+                       || (Array.isArray(ts.cc) && ts.cc.some(c => c && c.done===false));
+      (task.checklist || []).forEach((item, i) => {
+        const text = ts.overrides?.[i] || item;
+        const done = (isDoneSeeded && !userTouched) || !!(ts.checks && ts.checks[i]);
+        chkRows.push([sn, task.ticket, name, text, done ? 'Yes' : 'No', assignee]);
+      });
+      (ts.cc || []).forEach(c => {
+        chkRows.push([sn, task.ticket, name, c.text, c.done ? 'Yes' : 'No', assignee]);
+      });
+    });
+  });
+  const wsChk = XLSX.utils.aoa_to_sheet(chkRows);
+  wsChk['!cols'] = [{wch:11},{wch:22},{wch:65},{wch:90},{wch:6},{wch:14}];
+
+  // ── Workbook + download ──────────────────────────────────────────
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, wsSummary, 'Summary');
+  XLSX.utils.book_append_sheet(wb, wsTasks, 'Tasks');
+  XLSX.utils.book_append_sheet(wb, wsChk, 'Checklists');
+  const stamp = new Date().toISOString().slice(0,10);
+  XLSX.writeFile(wb, 'artemisai_sprint_plan_' + stamp + '.xlsx');
 }
 
 /* ═══ DYNAMODB SYNC BLUEPRINT ═══
