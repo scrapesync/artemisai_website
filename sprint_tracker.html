@@ -851,26 +851,41 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 .strat-team-card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 16px 18px;
   border-left: 3px solid var(--accent);
 }
+.strat-team-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.strat-team-chip {
+  font-family: 'JetBrains Mono','SF Mono',monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
 .strat-team-name {
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
   letter-spacing: -0.1px;
 }
 .strat-team-role {
   font-family: 'Inter', sans-serif;
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 600;
-  color: var(--accent);
+  color: #94a3b8;
   text-transform: uppercase;
-  letter-spacing: 1.4px;
-  margin-bottom: 10px;
+  letter-spacing: 1.2px;
 }
 .strat-team-desc {
   font-family: 'Inter', sans-serif;
@@ -878,7 +893,53 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
   font-weight: 400;
   color: #cbd5e1;
   line-height: 1.5;
+  margin-bottom: 14px;
 }
+
+/* Per-person stats row */
+.strat-team-stats {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+.stm-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 9px 6px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.stm-num {
+  font-family: 'Inter','SF Pro Display',sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+.stm-lbl {
+  font-family: 'Inter','SF Pro Display',sans-serif;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+}
+.stm-done {
+  background: rgba(16,185,129,.10);
+  border-color: rgba(16,185,129,.22);
+}
+.stm-done .stm-num { color: #34d399; }
+.stm-over {
+  background: rgba(239,68,68,.12);
+  border-color: rgba(239,68,68,.32);
+}
+.stm-over .stm-num { color: #f87171; }
+.stm-over .stm-lbl { color: #fca5a5; }
+
 .strat-team-meta {
   display: flex;
   justify-content: space-between;
@@ -2548,10 +2609,19 @@ function findCurrentSprint() {
 
 function computeSprintProgress(sn) {
   let total=0, done=0;
-  SPRINT_DATA[sn].forEach(task => {
+  const ss = (typeof gss === 'function') ? gss(sn) : {};
+  const deleted = (ss.deletedTasks)||[];
+  SPRINT_DATA[sn].filter(t => !deleted.includes(t.ticket)).forEach(task => {
     const ts = gts(sn, task.ticket);
+    // If task seeded as 'done' and user hasn't actively unchecked, count all items done
+    const userTouched = (ts.checks && Object.values(ts.checks).some(v => v===false))
+                     || (Array.isArray(ts.cc) && ts.cc.some(c => c && c.done===false));
+    if (task.status === 'done' && !userTouched) {
+      const t = (task.checklist||[]).length + ((ts.cc||[]).length);
+      total += t; done += t; return;
+    }
     task.checklist.forEach((_,i) => { total++; if(ts.checks[i]) done++; });
-    if(ts.cc) ts.cc.forEach((_,i) => { total++; if(ts.checks["c"+i]) done++; });
+    if(ts.cc) ts.cc.forEach(c => { total++; if(c && c.done) done++; });
   });
   return { total, done, pct: total > 0 ? Math.round(done/total*100) : 0 };
 }
@@ -2591,38 +2661,69 @@ function renderPhaseTimeline() {
 }
 
 const TEAM_ROLES = [
-  { name: "Asad Ikram", role: "CTO · Co-Founder", chip: "CTO", desc: "Architecture, frontend (React+Vite), AWS, sprint strategy.", tag: "" },
-  { name: "Faheem", role: "AI Engineer", chip: "AI Eng", desc: "NLP pipelines, SageMaker, fine-tuning, ML pipelines.", tag: "" },
-  { name: "Rafeh", role: "Analyst", chip: "Analyst", desc: "Forward-looking QA: defines criteria before the engineer builds, validates output, anticipates failure modes.", tag: "analyst" },
-  { name: "Alex Male", role: "CEO · Founder", chip: "CEO", desc: "Vision, positioning, network theory direction, product strategy.", tag: "team" },
-  { name: "Lewis", role: "Co-Founder", chip: "CO", desc: "Facebook permissions, account access, ops support.", tag: "team" },
-  { name: "Jill Male", role: "Co-Founder", chip: "CO", desc: "Operations, partnerships, holding-company structure.", tag: "team" },
-  { name: "Hannah", role: "Coordinator", chip: "Team", desc: "Sprint coordination, comms, scheduling.", tag: "team" },
-  { name: "Filza", role: "Chief Legal Officer", chip: "CLO", desc: "GDPR, terms, privacy, equity, FB compliance reviews.", tag: "team" }
+  { name: "Asad Ikram", role: "CTO · Co-Founder",   chip: "CTO",     accent:"#6366f1", desc: "Architecture, frontend (React+Vite), AWS, sprint strategy.",        match: a => a==='CTO' },
+  { name: "Faheem",     role: "AI Engineer",         chip: "AI Eng",  accent:"#00d4aa", desc: "NLP pipelines, SageMaker, fine-tuning, ML pipelines.",             match: a => a==='AI Engineer'||a==='AI Eng' },
+  { name: "Rafeh",      role: "Analyst",             chip: "Analyst", accent:"#f59e0b", desc: "Forward-QA: defines criteria before build, validates output, anticipates failure modes.", match: a => a==='Analyst' },
+  { name: "Alex Male",  role: "CEO · Founder",       chip: "CEO",     accent:"#ec4899", desc: "Vision, positioning, network theory direction, product strategy.", match: a => a==='CEO' },
+  { name: "Lewis",      role: "Chief Operations",    chip: "CO",      accent:"#38bdf8", desc: "Facebook permissions, account access, ops support.",              match: a => a==='CO' },
+  { name: "Jill Male",  role: "Operations / Finance",chip: "Ops",     accent:"#10b981", desc: "Budgets, vendors, billing, runway, partnerships.",                match: a => a==='Ops' },
+  { name: "Filza",      role: "Chief Legal Officer", chip: "CLO",     accent:"#a78bfa", desc: "GDPR, T&Cs, privacy, equity, FB compliance reviews.",             match: a => a==='CLO' },
 ];
+
+function _personStats(person){
+  const today = new Date(); today.setHours(0,0,0,0);
+  let assigned=0, done=0, overdue=0;
+  Object.keys(SPRINT_DATA).forEach(sn => {
+    const ss = gss(sn);
+    const deleted = ss.deletedTasks || [];
+    const all = [...(SPRINT_DATA[sn]||[]), ...(ss.customTasks||[])].filter(t => !deleted.includes(t.ticket));
+    const endStr = getSprintEndDate(sn);
+    const sprintEnd = endStr ? new Date(endStr+'T00:00:00') : null;
+    const isPast = sprintEnd && sprintEnd < today;
+    all.forEach(task => {
+      const eff = getEffectiveAssignee(sn, task.ticket, task.assignee);
+      if(!person.match(eff)) return;
+      assigned += 1;
+      const status = getKanbanStatus(sn, task.ticket);
+      if(status === 'done') done += 1;
+      else if(isPast)        overdue += 1;
+    });
+  });
+  return { assigned, done, overdue };
+}
 
 function renderTeamPanel() {
   const wrap = document.getElementById("strat-team-grid");
   if(!wrap) return;
   wrap.innerHTML = "";
-  /* count proactive Analyst tickets across all sprints */
-  let analystCount = 0;
-  Object.keys(SPRINT_DATA).forEach(sn => {
-    SPRINT_DATA[sn].forEach(t => {
-      t.checklist.forEach(item => { if(item.includes("[Analyst]")) analystCount++; });
-    });
-  });
   TEAM_ROLES.forEach(person => {
+    const stats = _personStats(person);
     const card = document.createElement("div");
     card.className = "strat-team-card";
-    if(person.tag === "analyst") card.style.borderLeftColor = "#f43f5e";
-    if(person.tag === "team") card.style.borderLeftColor = "#a78bfa";
-    const extra = person.chip === "Analyst" ? `<div class="strat-team-meta"><span>Forward QA items</span><strong>${analystCount}</strong></div>` : "";
+    card.style.borderLeftColor = person.accent;
     card.innerHTML = `
-      <div class="strat-team-name">${person.name}</div>
-      <div class="strat-team-role">${person.role}</div>
+      <div class="strat-team-head">
+        <div>
+          <div class="strat-team-name">${person.name}</div>
+          <div class="strat-team-role">${person.role}</div>
+        </div>
+        <span class="strat-team-chip" style="background:${person.accent}22;color:${person.accent};border:1px solid ${person.accent}55;">${person.chip}</span>
+      </div>
       <div class="strat-team-desc">${person.desc}</div>
-      ${extra}
+      <div class="strat-team-stats">
+        <div class="stm-stat">
+          <div class="stm-num">${stats.assigned}</div>
+          <div class="stm-lbl">Assigned</div>
+        </div>
+        <div class="stm-stat stm-done">
+          <div class="stm-num">${stats.done}</div>
+          <div class="stm-lbl">Done</div>
+        </div>
+        <div class="stm-stat ${stats.overdue>0?'stm-over':''}">
+          <div class="stm-num">${stats.overdue}</div>
+          <div class="stm-lbl">Overdue</div>
+        </div>
+      </div>
     `;
     wrap.appendChild(card);
   });
