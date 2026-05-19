@@ -3483,96 +3483,96 @@ function perfPersonCard(person){
     const colorMap = {'ahead':'#34d399', 'on-track':'#60a5fa', 'behind':'#f87171'};
     const labelMap = {'ahead':'Ahead of pace', 'on-track':'On track', 'behind':'Behind pace'};
     const c = colorMap[current.paceStatus] || '#94a3b8';
-    paceBadge = `<span style="display:inline-block;padding:2px 10px;border-radius:999px;font-size:10.5px;font-weight:700;background:${c}22;color:${c};border:1px solid ${c}55;">${labelMap[current.paceStatus]||'—'}</span>`;
+    paceBadge = `<span style="display:inline-block;padding:4px 14px;border-radius:999px;font-size:12px;font-weight:700;background:${c}22;color:${c};border:1px solid ${c}55;">${labelMap[current.paceStatus]||'—'}</span>`;
   } else if(current && current.noWork){
-    paceBadge = `<span style="display:inline-block;padding:2px 10px;border-radius:999px;font-size:10.5px;font-weight:700;background:#94a3b822;color:#94a3b8;border:1px solid #94a3b855;">No tasks in current sprint</span>`;
+    paceBadge = `<span style="display:inline-block;padding:4px 14px;border-radius:999px;font-size:12px;font-weight:700;background:#94a3b822;color:#94a3b8;border:1px solid #94a3b855;">No tasks in current sprint</span>`;
   }
 
   const currentBlock = current && !current.noWork ? `
-    <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:10px 12px;margin-top:10px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#94a3b8;margin-bottom:6px;">
-        <span>Current sprint · ${current.sn}</span>
+    <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:14px 16px;margin-top:14px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:#94a3b8;margin-bottom:8px;">
+        <span>Current sprint · <b style="color:#e5e7eb">${current.sn}</b></span>
         ${paceBadge}
       </div>
-      <div style="display:flex;gap:14px;font-size:12px;color:#e5e7eb;">
-        <span><b style="color:${person.color}">${current.completionPct}%</b> complete · ${current.doneCount}/${current.totalCount} checks</span>
-        ${current.time ? `<span style="color:#94a3b8">Sprint elapsed: <b style="color:#e5e7eb">${current.time.pct}%</b></span>` : ''}
+      <div style="display:flex;gap:20px;font-size:13.5px;color:#e5e7eb;">
+        <span><b style="color:${person.color};font-size:15px;">${current.completionPct}%</b> complete · ${current.doneCount}/${current.totalCount} checks</span>
+        ${current.time ? `<span style="color:#94a3b8">Sprint elapsed: <b style="color:#e5e7eb">${current.time.pct}%</b> (day ${current.time.elapsed}/${current.time.total})</span>` : ''}
       </div>
-      <div style="position:relative;height:6px;background:rgba(255,255,255,.06);border-radius:3px;margin-top:8px;overflow:hidden;">
-        <div style="position:absolute;left:0;top:0;height:100%;background:${person.color};width:${current.completionPct}%;border-radius:3px;"></div>
-        ${current.time ? `<div style="position:absolute;left:${current.time.pct}%;top:-2px;width:2px;height:10px;background:#fff;opacity:.4;" title="Today"></div>` : ''}
+      <div style="position:relative;height:10px;background:rgba(255,255,255,.06);border-radius:5px;margin-top:10px;overflow:hidden;">
+        <div style="position:absolute;left:0;top:0;height:100%;background:${person.color};width:${current.completionPct}%;border-radius:5px;transition:width .4s;"></div>
+        ${current.time ? `<div style="position:absolute;left:${current.time.pct}%;top:-3px;width:2px;height:16px;background:#fff;opacity:.55;" title="Today"></div>` : ''}
       </div>
     </div>` : '';
 
   const sprintBarRow = sprintBars.length ? `
-    <div style="margin-top:14px;">
-      <div style="font-size:11px;color:#94a3b8;margin-bottom:8px;letter-spacing:.3px;text-transform:uppercase;">Sprint-by-sprint progress</div>
-      <div style="display:grid;grid-template-columns:repeat(${Math.min(sprintBars.length, 12)},1fr);gap:3px;">
+    <div style="margin-top:18px;">
+      <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;letter-spacing:.4px;text-transform:uppercase;font-weight:600;">Sprint-by-sprint progress</div>
+      <div style="display:grid;grid-template-columns:repeat(${sprintBars.length},minmax(0,1fr));gap:5px;">
         ${sprintBars.map(b=>`
-          <div title="${b.sn}: ${b.d}/${b.t} checks · ${b.tasks} tasks · ${b.pct}%" style="position:relative;height:34px;background:rgba(255,255,255,.04);border-radius:3px;overflow:hidden;cursor:default;">
-            <div style="position:absolute;bottom:0;left:0;right:0;height:${b.pct}%;background:${person.color};opacity:.85;"></div>
-            <div style="position:absolute;top:2px;left:0;right:0;text-align:center;font-size:8.5px;color:#cbd5e1;font-weight:600;">${b.sn.replace('Sprint ','S')}</div>
-            <div style="position:absolute;bottom:1px;left:0;right:0;text-align:center;font-size:8.5px;color:${b.pct>40?'#fff':'#94a3b8'};font-weight:700;">${b.pct}%</div>
+          <div title="${b.sn}: ${b.d}/${b.t} checks · ${b.tasks} tasks · ${b.pct}%" style="position:relative;height:64px;background:rgba(255,255,255,.04);border-radius:5px;overflow:hidden;cursor:default;border:1px solid rgba(255,255,255,.05);">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:${b.pct}%;background:${person.color};opacity:.85;transition:height .3s;"></div>
+            <div style="position:absolute;top:4px;left:0;right:0;text-align:center;font-size:10px;color:#cbd5e1;font-weight:700;letter-spacing:.3px;">${b.sn.replace('Sprint ','S')}</div>
+            <div style="position:absolute;bottom:3px;left:0;right:0;text-align:center;font-size:10px;color:${b.pct>40?'#fff':'#94a3b8'};font-weight:700;">${b.pct}%</div>
           </div>`).join('')}
       </div>
     </div>` : '';
 
   const surfaceBlock = surfaces.length ? `
-    <div style="margin-top:14px;">
-      <div style="font-size:11px;color:#94a3b8;margin-bottom:8px;letter-spacing:.3px;text-transform:uppercase;">Mockup surfaces owned</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;">
+    <div style="margin-top:18px;">
+      <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;letter-spacing:.4px;text-transform:uppercase;font-weight:600;">Mockup surfaces owned</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
         ${surfaces.map(s=>`
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:11px;color:#cbd5e1;">
-            <span style="color:#94a3b8;">${s.name}</span>
-            <span style="color:#94a3b8;">·</span>
-            <span style="color:${person.color};font-weight:600;">${s.tickets}</span>
-            <span style="color:#94a3b8;font-size:10px;">(${s.pct}%)</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:12.5px;color:#cbd5e1;">
+            <span style="color:#cbd5e1;font-weight:500;">${s.name}</span>
+            <span style="color:#475569;">·</span>
+            <span style="color:${person.color};font-weight:700;">${s.tickets} ticket${s.tickets===1?'':'s'}</span>
+            <span style="color:#64748b;font-size:11.5px;">(${s.pct}%)</span>
           </span>`).join('')}
       </div>
     </div>` : '';
 
   const cycleBlock = cycle.totalCompletedChecks > 0 ? `
-    <div style="margin-top:14px;display:flex;gap:18px;font-size:11px;color:#94a3b8;">
+    <div style="margin-top:16px;display:flex;gap:24px;font-size:12.5px;color:#94a3b8;">
       <span>Checks completed: <b style="color:#e5e7eb">${cycle.totalCompletedChecks}</b></span>
       <span>Last 7 days: <b style="color:${person.color}">${cycle.lastWeekCompletedChecks}</b></span>
     </div>` : `
-    <div style="margin-top:14px;font-size:10.5px;color:#64748b;font-style:italic;">
+    <div style="margin-top:16px;font-size:12px;color:#64748b;font-style:italic;">
       No completion timestamps yet — velocity stats will appear once tasks are checked off.
     </div>`;
 
   return `
-    <div style="background:linear-gradient(135deg,${person.color}08,${person.color}03);border:1px solid ${person.color}33;border-radius:12px;padding:18px 20px;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+    <div style="background:linear-gradient(135deg,${person.color}08,${person.color}03);border:1px solid ${person.color}33;border-radius:14px;padding:24px 28px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;">
         <div style="flex:1;min-width:0;">
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${person.color};"></span>
-            <h3 style="margin:0;font-size:17px;color:#f1f5f9;font-weight:700;letter-spacing:.2px;">${person.key}</h3>
-            <span style="font-size:11px;color:#94a3b8;font-weight:500;">· ${person.role}</span>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${person.color};box-shadow:0 0 12px ${person.color}66;"></span>
+            <h3 style="margin:0;font-size:22px;color:#f1f5f9;font-weight:700;letter-spacing:.2px;">${person.key}</h3>
+            <span style="font-size:13px;color:#94a3b8;font-weight:500;">· ${person.role}</span>
           </div>
-          <div style="font-size:11px;color:#64748b;margin-top:2px;">${person.sub}</div>
+          <div style="font-size:12.5px;color:#64748b;margin-top:4px;">${person.sub}</div>
         </div>
         <div style="text-align:right;">
-          <div style="font-size:24px;color:${person.color};font-weight:700;line-height:1;">${pctOverall}%</div>
-          <div style="font-size:10px;color:#64748b;letter-spacing:.5px;text-transform:uppercase;margin-top:2px;">Overall complete</div>
+          <div style="font-size:34px;color:${person.color};font-weight:700;line-height:1;">${pctOverall}%</div>
+          <div style="font-size:11px;color:#64748b;letter-spacing:.5px;text-transform:uppercase;margin-top:4px;">Overall complete</div>
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px;">
-        <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:6px;padding:8px 10px;">
-          <div style="font-size:18px;color:#e5e7eb;font-weight:700;line-height:1.1;">${totalTasks}</div>
-          <div style="font-size:10px;color:#64748b;letter-spacing:.3px;text-transform:uppercase;margin-top:3px;">Tickets</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px;">
+        <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:8px;padding:12px 14px;">
+          <div style="font-size:24px;color:#e5e7eb;font-weight:700;line-height:1.1;">${totalTasks}</div>
+          <div style="font-size:11px;color:#64748b;letter-spacing:.3px;text-transform:uppercase;margin-top:4px;">Tickets</div>
         </div>
-        <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:6px;padding:8px 10px;">
-          <div style="font-size:18px;color:#e5e7eb;font-weight:700;line-height:1.1;">${tasksDone}<span style="font-size:11px;color:#64748b;font-weight:500;">/${totalTasks}</span></div>
-          <div style="font-size:10px;color:#64748b;letter-spacing:.3px;text-transform:uppercase;margin-top:3px;">Done</div>
+        <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:8px;padding:12px 14px;">
+          <div style="font-size:24px;color:#e5e7eb;font-weight:700;line-height:1.1;">${tasksDone}<span style="font-size:14px;color:#64748b;font-weight:500;">/${totalTasks}</span></div>
+          <div style="font-size:11px;color:#64748b;letter-spacing:.3px;text-transform:uppercase;margin-top:4px;">Done</div>
         </div>
-        <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:6px;padding:8px 10px;">
-          <div style="font-size:18px;color:#34d399;font-weight:700;line-height:1.1;">${successRate}%</div>
-          <div style="font-size:10px;color:#64748b;letter-spacing:.3px;text-transform:uppercase;margin-top:3px;">Ticket success</div>
+        <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:8px;padding:12px 14px;">
+          <div style="font-size:24px;color:#34d399;font-weight:700;line-height:1.1;">${successRate}%</div>
+          <div style="font-size:11px;color:#64748b;letter-spacing:.3px;text-transform:uppercase;margin-top:4px;">Ticket success</div>
         </div>
-        <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:6px;padding:8px 10px;">
-          <div style="font-size:18px;color:#e5e7eb;font-weight:700;line-height:1.1;">${totalChecks}</div>
-          <div style="font-size:10px;color:#64748b;letter-spacing:.3px;text-transform:uppercase;margin-top:3px;">Checks total</div>
+        <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:8px;padding:12px 14px;">
+          <div style="font-size:24px;color:#e5e7eb;font-weight:700;line-height:1.1;">${totalChecks}</div>
+          <div style="font-size:11px;color:#64748b;letter-spacing:.3px;text-transform:uppercase;margin-top:4px;">Checks total</div>
         </div>
       </div>
 
@@ -3616,25 +3616,25 @@ function renderPerformancePage(){
   });
 
   let h = `
-    <div style="margin-bottom:20px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;">
+    <div style="margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;">
       <div>
-        <h2 style="margin:0;font-size:22px;color:#f1f5f9;font-weight:700;letter-spacing:.3px;">📈 Team Performance</h2>
-        <div style="font-size:12px;color:#94a3b8;margin-top:4px;">
+        <h2 style="margin:0;font-size:26px;color:#f1f5f9;font-weight:700;letter-spacing:.3px;">📈 Team Performance</h2>
+        <div style="font-size:13px;color:#94a3b8;margin-top:6px;">
           Per-individual completion rate, sprint pace, and mockup surface ownership. Pace measured against sprint dates.
         </div>
       </div>
-      <div style="display:flex;gap:14px;font-size:12px;color:#94a3b8;">
+      <div style="display:flex;gap:18px;font-size:13px;color:#94a3b8;">
         <div>Active sprint: <b style="color:#e5e7eb">${activeSprintLabel}</b></div>
         <div>Tickets done: <b style="color:#34d399">${totalCompletedTasks}</b><span style="color:#64748b"> / ${totalTasksOverall}</span></div>
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(560px,1fr));gap:14px;">
+    <div style="display:grid;grid-template-columns:1fr;gap:18px;">
       ${PERF_PEOPLE.map(perfPersonCard).join('')}
     </div>
 
-    <div style="margin-top:24px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 18px;">
-      <div style="font-size:12px;color:#94a3b8;line-height:1.6;">
+    <div style="margin-top:28px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:18px 22px;">
+      <div style="font-size:13px;color:#94a3b8;line-height:1.7;">
         <b style="color:#cbd5e1;">How to read this:</b><br>
         <b style="color:#e5e7eb">Overall complete</b> — % of all checks done across every sprint.<br>
         <b style="color:#e5e7eb">Ticket success</b> — % of tickets fully closed out (all checks done).<br>
@@ -4523,7 +4523,7 @@ if(typeof CVS !== 'undefined' && CVS && typeof frame === 'function') requestAnim
 </div>
 
 <div id="performance-page" class="page">
-  <div id="performance-content" style="padding:24px 36px 60px;max-width:1380px;margin:0 auto;"></div>
+  <div id="performance-content" style="padding:24px 36px 60px;max-width:1800px;margin:0 auto;"></div>
 </div>
 
 <script>
