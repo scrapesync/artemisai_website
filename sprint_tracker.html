@@ -3766,10 +3766,9 @@ function getViewerId(){
   return id;
 }
 function getViewerName(){
-  // Priority 1: explicit override the user set on the chip
-  const override = localStorage.getItem('artemis_viewer_name');
-  if (override) return override;
-  // Priority 2: logged-in user from admin auth session
+  // Priority 1: logged-in user from auth session (always wins — a real
+  // login should be reflected immediately, even if a prior user once set
+  // their own display name on this browser).
   try {
     const raw = localStorage.getItem('artemis_session') || localStorage.getItem('artemis_sprint_session') || sessionStorage.getItem('artemis_sprint_session');
     if (raw) {
@@ -3779,6 +3778,9 @@ function getViewerName(){
       if (u.email) return u.email.split('@')[0];
     }
   } catch(e){}
+  // Priority 2: explicit manual override (only used when no one is logged in)
+  const override = localStorage.getItem('artemis_viewer_name');
+  if (override) return override;
   return 'Anonymous';
 }
 function setViewerName(name){
@@ -4091,6 +4093,10 @@ async function attemptLogin(){
       };
       localStorage.setItem(AUTH_KEY, JSON.stringify(sess));
       localStorage.setItem(UNIFIED_SK, JSON.stringify(sess));
+      // Clear any sticky display-name override from a previous user on this
+      // browser, then refresh the Workspace chip so it shows the new user.
+      localStorage.removeItem('artemis_viewer_name');
+      if (typeof renderViewerChip === 'function') renderViewerChip();
       hideLoginOverlay();
       const el=document.getElementById('user-display');
       const nm=document.getElementById('user-name');
@@ -4117,7 +4123,7 @@ function showLoginError(msg){
   if(card){card.style.animation='none';requestAnimationFrame(()=>{card.style.animation='loginShake 0.35s ease';});}
 }
 
-function handleLogout(){_showSignoutModal(function(){localStorage.removeItem("artemis_sprint_session");localStorage.removeItem("artemis_session");window.location.href="index.html";});}
+function handleLogout(){_showSignoutModal(function(){localStorage.removeItem("artemis_sprint_session");localStorage.removeItem("artemis_session");localStorage.removeItem("artemis_viewer_name");window.location.href="index.html";});}
 
 
 if(!checkAuth()){
