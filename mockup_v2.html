@@ -1175,6 +1175,12 @@ body.arte-suggestions-off .arte-chat-head .silence-link{
   .icon-btn[title="Discovery"],
   .icon-btn[title="Group chats"]{display:none}
   
+  /* Hide the 'Tips on/off' sparkle button on mobile — the Art-E Agent
+     pill is the only Art-E entry point needed in topnav. Two sparkle
+     icons next to each other was confusing (which is which?). Tips
+     toggle is still reachable via Settings → Notifications. */
+  .arte-suggest-toggle{display:none !important}
+  
   .icon-btn{
     width:38px;height:38px;
     border-radius:50%;
@@ -1192,14 +1198,9 @@ body.arte-suggestions-off .arte-chat-head .silence-link{
   .arte-suggest-toggle svg{width:17px;height:17px}
   
   .theme-pill{display:none}
-  /* Theme toggle — compact on mobile */
-  .theme-toggle{
-    height:32px;padding:2px;
-    border-radius:9999px;
-    flex-shrink:0;
-  }
-  .theme-toggle-opt{width:26px;height:26px}
-  .theme-toggle-opt svg{width:12px;height:12px}
+  /* Theme toggle moves to the More drawer on mobile to free up topnav space.
+     The drawer surfaces both options at full size for better tap targets. */
+  .theme-toggle{display:none !important}
   
   .user-avatar{width:32px;height:32px;font-size:12px;flex-shrink:0}
   
@@ -1265,10 +1266,13 @@ body.arte-suggestions-off .arte-chat-head .silence-link{
   .composer-input{font-size:13px;padding:11px 16px}
   /* svg sizing handled in .composer-btn rule above */
   
-  /* Stories — already horizontally scrollable, just compact */
-  .stories-strip{margin:0 -8px 10px -8px;padding:0 8px}
-  .story-tile{width:90px;height:140px}
+  /* Stories — already horizontally scrollable, just compact.
+     Width 90px was clipping headlines like "+18% positive comments" mid-word.
+     120px gives each headline enough space to read as a single thought. */
+  .stories-strip{margin:0 -8px 10px -8px;padding:0 12px 0 8px;scroll-padding-right:16px}
+  .story-tile{flex:0 0 120px !important;width:120px;height:150px}
   .story-page-avatar{width:30px;height:30px;font-size:10px}
+  .story-headline{font-size:12px !important;line-height:1.3 !important}
   
   /* Art-E briefing strip */
   .arte-strip{margin:0 -8px 10px -8px;border-radius:0;font-size:13px;padding:11px 12px}
@@ -1290,7 +1294,7 @@ body.arte-suggestions-off .arte-chat-head .silence-link{
   .page-title{font-size:22px}
   .page-sub{font-size:12px}
   .page-actions{flex-wrap:wrap;width:100%}
-  .page-actions .btn{flex:1;justify-content:center;min-width:0}
+  .page-actions .btn{flex:1;justify-content:center;min-width:0;white-space:nowrap}
   .panel{margin-bottom:10px;padding:12px}
   .panel-title{font-size:14px}
   .panel-sub{font-size:11px}
@@ -1385,11 +1389,11 @@ body.arte-suggestions-off .arte-chat-head .silence-link{
   /* Hide FAB on mobile — bottom nav has Art-E */
   .arte-fab,.fab-arte{display:none !important}
   
-  /* Hint bubble — above bottom nav */
+  /* Hint bubble — HIDDEN on mobile (overlaps content). 
+     The bottom-nav Art-E button + the More drawer's Ask Art-E item 
+     give users the same one-tap access without covering the screen. */
   .arte-hint-bubble{
-    bottom:80px !important;right:14px !important;
-    max-width:220px;font-size:11.5px;padding:8px 11px;
-    z-index:49;
+    display:none !important;
   }
   
   /* Right rail content displayed inline on mobile would be too much.
@@ -1429,7 +1433,308 @@ body.arte-suggestions-off .arte-chat-head .silence-link{
     width:8px;height:8px;border-radius:50%;
     background:var(--crisis);
   }
+
+  /* ─── PAGE-SPECIFIC MOBILE FIXES ──────────────────────────────
+     These fix layout issues found while testing the actual mobile
+     screenshots — content overlap, narrow text wrapping, off-screen
+     cards. All within the 640px breakpoint so desktop is untouched. */
+
+  /* Analytics KPI cards: 4-up on desktop → 2-up on phone.
+     Three columns at 393px clipped "PEOPLE REACHED" off the right edge. */
+  .kpi-grid{
+    grid-template-columns:repeat(2,1fr) !important;
+    gap:8px;
+  }
+  .kpi-card-v2{padding:11px}
+  .kpi-card-v2 .value{font-size:22px}
+  .kpi-card-v2 .label{font-size:10px}
+
+  /* Discovery match card: page name was rendering on top of the audience
+     overlap text because the absolute-positioned avatar overlapped the
+     description column at narrow widths. Force a vertical stack so the
+     avatar sits above its text, never on top of it. */
+  .discovery-card,
+  .match-card{
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    text-align:left !important;
+  }
+  .discovery-card .page-avatar,
+  .match-card .page-avatar{position:relative !important;margin-bottom:8px}
+  /* If a Discovery card uses a positioned overlay for the avatar, neutralise it */
+  .fw-card-avatar-abs,
+  .match-card-avatar-abs{
+    position:relative !important;top:auto !important;left:auto !important;
+    margin-bottom:8px !important;
+  }
+  
+  /* Flywheel card stack — on mobile, all 4 cards were rendering on top
+     of each other (position:absolute, similar height) so back cards
+     bled through the top card's content. Hide back stack entirely
+     on mobile — user sees one card at a time, swipes to advance. */
+  .flywheel-stage{
+    height:auto !important;
+    min-height:540px;
+    perspective:none;
+  }
+  .fw-card{
+    position:relative !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:520px;
+  }
+  .fw-card[data-stack="1"],
+  .fw-card[data-stack="2"],
+  .fw-card[data-stack="3"]{
+    display:none !important;
+  }
+  /* Tighten the card hero header on mobile so "Fri Night Chaos" sits
+     on a single line. Smaller avatar + smaller pill leaves room for
+     the page name to breathe. */
+  .fw-hero{height:170px}
+  .fw-hero-content{padding:14px}
+  .fw-hero-top{gap:8px}
+  .fw-page-avatar{width:40px;height:40px;font-size:14px;border-radius:10px}
+  .fw-page-name{font-size:16px !important;line-height:1.2}
+  .fw-page-handle{font-size:11px}
+  .fw-overlap-badge{padding:5px 9px;gap:4px}
+  .fw-overlap-val{font-size:15px}
+  .fw-overlap-lbl{font-size:8.5px}
+  .fw-followers{font-size:12px}
+  .fw-followers strong{font-size:13px}
+  .fw-niche-pill{font-size:9px;padding:3px 8px}
+
+  /* Profile card on Settings page: avatar + name + button were in a row
+     causing tight wrapping. Stack on mobile so the name sits below avatar
+     with full width to breathe. */
+  .profile-hero,
+  .profile-card,
+  .settings-profile{
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    gap:12px !important;
+  }
+  .profile-hero .profile-name,
+  .profile-card .profile-name,
+  .settings-profile .profile-name{
+    white-space:normal !important;
+    width:100% !important;
+  }
+  /* Change-photo button should now sit below + go full width */
+  .settings-profile > .btn{
+    width:100% !important;
+    justify-content:center !important;
+  }
+
+  /* Drafts + Reports rows: each row has body text on left + a heavy
+     metadata block (AI score + Edit + Publish, or Date + Download) on
+     the right. On mobile this squeezed body text into a narrow column.
+     Stack vertically: body on top, actions row below.
+     
+     .saved-row is NOT in this rule — it uses a different pattern
+     (icon + body + single button) that fits horizontally on mobile. */
+  .draft-row,
+  .report-row,
+  .schedule-row{
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:12px !important;
+  }
+  .draft-row > div:last-child,
+  .report-row > div:last-child,
+  .schedule-row > div:last-child{
+    justify-content:space-between !important;
+    border-top:1px solid var(--bdr-soft);
+    padding-top:12px;
+  }
+  .draft-row .btn,
+  .report-row .btn,
+  .schedule-row .btn{padding:8px 14px;font-size:13px}
+
+  /* Home metric / story cards row: prevent the last one being clipped at
+     the right edge. The row scrolls horizontally — give it proper padding. */
+  .home-story-row,
+  .home-metric-row{
+    padding-right:16px;
+    scroll-padding-right:16px;
+  }
+
+  /* Feed tabs: keep "Action items" on one line by reducing label size
+     and disallowing wrap. Was wrapping to 2 lines next to "Briefings". */
+  .feed-tab{
+    white-space:nowrap !important;
+    font-size:12px !important;
+    padding:8px 10px !important;
+  }
+  .feed-tab .feed-tab-badge{font-size:10px;padding:1px 6px;margin-left:6px}
+
+  /* Reports page: "+ New report" button text was wrapping awkwardly.
+     Also tighten card padding. */
+  .report-card,
+  .quick-template-card{padding:14px}
+
+  /* Settings sub-tabs: the row of tabs (Account/Notifications/etc) needs
+     to scroll horizontally instead of squeezing every tab on one line.
+     This also makes the active state more visible.
+     Same fix applied to .subtabs (Analytics + Advanced pages had the
+     same problem — "Audience Mood" tab was getting clipped to "Audier..."). */
+  .settings-tabs,
+  .profile-tabs,
+  .subtabs{
+    display:flex !important;
+    overflow-x:auto !important;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;
+    gap:6px !important;
+    padding-bottom:4px;
+    margin-bottom:14px;
+  }
+  .settings-tabs::-webkit-scrollbar,
+  .profile-tabs::-webkit-scrollbar,
+  .subtabs::-webkit-scrollbar{display:none}
+  .settings-tabs > *,
+  .profile-tabs > *,
+  .subtabs > *{
+    flex-shrink:0 !important;
+    scroll-snap-align:start;
+    white-space:nowrap;
+  }
+
+  /* To-do inbox rows: action button (Reply/Respond/Reshare) was on the
+     right of body text, squeezing the title + message text into a 220px
+     column. Stack so message reads full width, action goes below. */
+  .inbox-row{
+    flex-wrap:wrap;
+  }
+  .inbox-body{flex:1 1 100%;min-width:0}
+  .inbox-actions{flex:0 0 auto;align-self:flex-end;margin-top:8px}
+
+  /* Best Times Q&A: 'Triage with Art-E' wrapped to two lines because
+     of the 'Art-/E' hyphenation. Always keep button labels intact. */
+  .btn,
+  .btn.arte{white-space:nowrap}
+
+  /* Calendar lead-text apostrophe escape bugfix — already correct in HTML,
+     but ensure the line height + spacing don't squash the callout */
+  .insight-callout{padding:12px 14px}
 }
+
+/* ════════════════════════════════════════════════════════════
+   MORE DRAWER — Material Design bottom-sheet pattern.
+   Shows when user taps the "More" tab in the bottom nav.
+   Hosts secondary destinations (Advanced, Drafts, Best Times,
+   Saved, Reports, Settings, Theme toggle) so the bottom nav
+   stays at 5 items max while every destination is one tap away.
+   ════════════════════════════════════════════════════════════ */
+.more-drawer-overlay{
+  display:none;
+  position:fixed;inset:0;
+  z-index:200;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(4px);
+  align-items:flex-end;
+  animation:moreOverlayIn .18s ease;
+}
+.more-drawer-overlay.show{display:flex}
+@keyframes moreOverlayIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+.more-drawer{
+  width:100%;
+  background:var(--bg-elev);
+  border-top:1px solid var(--bdr-soft);
+  border-radius:18px 18px 0 0;
+  padding:8px 16px max(env(safe-area-inset-bottom,12px),16px);
+  max-height:88vh;
+  overflow-y:auto;
+  box-shadow:0 -12px 40px rgba(0,0,0,0.45);
+  animation:moreDrawerIn .22s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes moreDrawerIn{
+  from{transform:translateY(100%)}
+  to{transform:translateY(0)}
+}
+.more-drawer-handle{
+  width:44px;height:4px;border-radius:2px;
+  background:var(--bdr);
+  margin:6px auto 12px;
+}
+.more-drawer-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 4px 12px;
+  border-bottom:1px solid var(--bdr-soft);
+  margin-bottom:14px;
+}
+.more-drawer-title{
+  font-size:16px;font-weight:700;color:var(--t1);
+}
+.more-drawer-close{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--bg-elev-2);border:1px solid var(--bdr-soft);
+  color:var(--t2);cursor:pointer;
+  display:grid;place-items:center;
+  transition:background .15s;
+}
+.more-drawer-close:active{background:var(--bg)}
+.more-drawer-close svg{width:14px;height:14px}
+.more-section-label{
+  font-size:10.5px;font-weight:700;
+  letter-spacing:.6px;text-transform:uppercase;
+  color:var(--t3);
+  padding:14px 4px 8px;
+}
+.more-section-label:first-of-type{padding-top:2px}
+.more-grid{
+  display:grid;gap:8px;
+}
+.more-tile{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;
+  background:var(--bg-elev-2);
+  border:1px solid var(--bdr-soft);
+  border-radius:12px;
+  color:var(--t1);
+  font-family:inherit;
+  text-align:left;
+  cursor:pointer;
+  width:100%;
+  transition:background .15s, border-color .15s, transform .1s;
+  min-height:60px;  /* WCAG 2.2 / Material — comfortable tap target */
+}
+.more-tile:active{
+  background:var(--bg);
+  transform:scale(0.985);
+}
+.more-tile-icon{
+  width:38px;height:38px;flex-shrink:0;
+  border-radius:9px;
+  background:var(--bg);
+  color:var(--teal);
+  display:grid;place-items:center;
+}
+.more-tile-icon svg{width:18px;height:18px}
+.more-tile-text{
+  flex:1;min-width:0;
+  display:flex;flex-direction:column;gap:2px;
+}
+.more-tile-name{
+  font-size:14px;font-weight:600;color:var(--t1);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.more-tile-sub{
+  font-size:11.5px;color:var(--t3);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.more-tile-badge{
+  font-size:11px;font-weight:800;
+  background:var(--crisis);color:white;
+  padding:3px 8px;border-radius:9999px;
+  flex-shrink:0;
+}
+
+/* Light theme variant */
+html[data-theme="light"] .more-tile-icon{background:rgba(0,0,0,0.04)}
 
 /* Show mobile-bottom-nav only on mobile */
 .mobile-bottom-nav{display:none}
@@ -1923,6 +2228,18 @@ html[data-theme="light"] .spec-watermark{background:var(--bg-elev);box-shadow:va
   align-self:flex-start;
 }
 html[data-theme="light"] .story-page-avatar{background:rgba(255,255,255,0.85)}
+/* Story tiles in light mode: the page-tint overlay was too saturated
+   (dark yellow / dark red / dark green), making the white tile look
+   nearly black with dark headlines on top — unreadable.
+   Force a softer overlay + ensure headline text reads on the tile. */
+html[data-theme="light"] .story-tile.page-story{
+  background:linear-gradient(160deg,#F8FBFA 0%,#EEF5F3 100%);
+  border:1px solid var(--bdr-soft);
+}
+html[data-theme="light"] .story-tile.page-story::before{
+  opacity:0.4;  /* soften the tint dramatically — was opaque dark gradient */
+}
+html[data-theme="light"] .story-headline{color:var(--t1)}
 .story-mvp-badge{
   display:inline-flex;align-items:center;gap:3px;
   font-size:9px;font-weight:700;letter-spacing:0.02em;
@@ -3342,20 +3659,19 @@ body.arte-suggestions-off .arte-status-bar{display:none !important}
 /* Active state when menu is open */
 .arte-agent-pill.menu-open .arte-agent-caret svg{transform:rotate(180deg)}
 
-/* Mobile — keep agent pill visible (this is the user's primary entry point) */
+/* Mobile — collapse Art-E Agent to a circle icon (the bottom-nav Art-E button
+   is already prominent; the topnav version becomes just a quick re-entry). */
 @media(max-width:640px){
-  .arte-agent-pill{
-    padding:6px 10px 6px 6px;
-    font-size:11px;
-    gap:5px;
-  }
-  .arte-agent-pill .arte-agent-orb{width:20px;height:20px}
-  .arte-agent-pill .arte-agent-orb svg{width:9px;height:9px}
-  .arte-agent-pill .arte-agent-caret{display:none}
-}
-@media(max-width:380px){
   .arte-agent-pill .arte-agent-lbl{display:none}
-  .arte-agent-pill{padding:6px;border-radius:50%;width:34px;height:34px;justify-content:center}
+  .arte-agent-pill{
+    padding:6px;border-radius:50%;
+    width:34px;height:34px;
+    justify-content:center;
+    gap:0;
+  }
+  .arte-agent-pill .arte-agent-orb{width:22px;height:22px}
+  .arte-agent-pill .arte-agent-orb svg{width:10px;height:10px}
+  .arte-agent-pill .arte-agent-caret{display:none}
 }
 
 /* ─── ART-E AGENT MENU — dropdown of common tasks ─── */
@@ -5305,9 +5621,9 @@ html[data-theme="light"] .kpi-card-v2.reach-hero{
           </div>
 
           <!-- Profile card -->
-          <div class="panel" style="display:flex;align-items:center;gap:18px">
+          <div class="panel settings-profile" style="display:flex;align-items:center;gap:18px">
             <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#FFA500,#FF6B00);display:grid;place-items:center;font-size:30px;font-weight:800;color:white;flex-shrink:0">A</div>
-            <div style="flex:1">
+            <div style="flex:1" class="profile-name">
               <div style="font-size:18px;font-weight:800;color:var(--t1)">Asad Ikram</div>
               <div style="font-size:13px;color:var(--t2);margin-top:2px">@asad_artemis · Joined March 2026 · UK</div>
               <div style="font-size:12px;color:var(--teal);margin-top:6px;font-weight:600">● Pro plan · 5 of 10 pages connected</div>
@@ -5825,7 +6141,7 @@ html[data-theme="light"] .kpi-card-v2.reach-hero{
 
           <div class="insight-callout">
             <div class="arte-orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z" fill="white"/></svg></div>
-            <div class="insight-callout-text">Your audience peaks <strong>Tuesday 6PM</strong> (+34% lift) and <strong>Thursday 8PM</strong> (+28% lift). Three windows this week haven\'t been used yet.</div>
+            <div class="insight-callout-text">Your audience peaks <strong>Tuesday 6PM</strong> (+34% lift) and <strong>Thursday 8PM</strong> (+28% lift). Three windows this week haven't been used yet.</div>
           </div>
 
           <!-- This week summary -->
@@ -6040,12 +6356,117 @@ html[data-theme="light"] .kpi-card-v2.reach-hero{
     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <span class="mb-nav-lbl">Discover</span>
   </button>
-  <button class="mb-nav-btn" data-mb-page="inbox" onclick="navigateTo('inbox',document.querySelector('[data-page=&quot;inbox&quot;]'));mbSelect(this)" style="position:relative">
-    <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-    <span class="mb-nav-lbl">To-do</span>
-    <span class="badge-dot"></span>
+  <button class="mb-nav-btn" id="mbMoreBtn" onclick="openMoreDrawer()" style="position:relative">
+    <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
+    <span class="mb-nav-lbl">More</span>
+    <span class="badge-dot" id="mbMoreBadge"></span>
   </button>
 </nav>
+
+<!-- ════════════════════════════════════════════════════════════════════
+  MORE DRAWER — bottom sheet showing all secondary destinations.
+  Pattern: Material Design "bottom sheet" / Meta Business Suite "More" tab.
+  Use when more than 5 top-level destinations exist (we have 11).
+  ════════════════════════════════════════════════════════════════════ -->
+<div class="more-drawer-overlay" id="moreDrawerOverlay" onclick="if(event.target===this)closeMoreDrawer()">
+  <div class="more-drawer">
+    <div class="more-drawer-handle"></div>
+    <div class="more-drawer-header">
+      <div class="more-drawer-title">All sections</div>
+      <button class="more-drawer-close" onclick="closeMoreDrawer()" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Primary work sections, deeper than the bottom-nav tabs -->
+    <div class="more-section-label">Get things done</div>
+    <div class="more-grid">
+      <button class="more-tile" onclick="closeMoreDrawer();navigateTo('inbox',document.querySelector('[data-page=&quot;inbox&quot;]'));mbSelect(document.querySelector('#mbMoreBtn'))">
+        <span class="more-tile-icon" style="background:rgba(229,57,53,.12);color:#E53935">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">To-do</span>
+          <span class="more-tile-sub">7 items need input</span>
+        </span>
+        <span class="more-tile-badge">7</span>
+      </button>
+      <button class="more-tile" onclick="closeMoreDrawer();var d=document.querySelector('[data-quick=&quot;drafts&quot;]');if(d)navigateTo('drafts',d);mbSelect(document.querySelector('#mbMoreBtn'))">
+        <span class="more-tile-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">Drafts</span>
+          <span class="more-tile-sub">3 drafts · scored</span>
+        </span>
+      </button>
+      <button class="more-tile" onclick="closeMoreDrawer();var c=document.querySelector('[data-quick=&quot;calendar&quot;]');if(c)navigateTo('calendar',c);mbSelect(document.querySelector('#mbMoreBtn'))">
+        <span class="more-tile-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">Best times</span>
+          <span class="more-tile-sub">Tue 6PM · +34% lift</span>
+        </span>
+      </button>
+    </div>
+
+    <!-- Deeper analysis tools -->
+    <div class="more-section-label">Go deeper</div>
+    <div class="more-grid">
+      <button class="more-tile" onclick="closeMoreDrawer();window.open('mockup_advanced.html','_blank')">
+        <span class="more-tile-icon" style="background:rgba(124,92,191,.12);color:#7C5CBF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 7v8M7 11h8"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">Advanced analytics</span>
+          <span class="more-tile-sub">Virality · cascade · clusters</span>
+        </span>
+      </button>
+      <button class="more-tile" onclick="closeMoreDrawer();var s=document.querySelector('[data-quick=&quot;saved&quot;]');if(s)navigateTo('saved',s);mbSelect(document.querySelector('#mbMoreBtn'))">
+        <span class="more-tile-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">Saved insights</span>
+          <span class="more-tile-sub">7 bookmarked</span>
+        </span>
+      </button>
+      <button class="more-tile" onclick="closeMoreDrawer();var r=document.querySelector('[data-quick=&quot;reports&quot;]');if(r)navigateTo('reports',r);mbSelect(document.querySelector('#mbMoreBtn'))">
+        <span class="more-tile-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">Reports &amp; alerts</span>
+          <span class="more-tile-sub">Weekly · monthly · risk</span>
+        </span>
+      </button>
+    </div>
+
+    <!-- Account-level -->
+    <div class="more-section-label">Account</div>
+    <div class="more-grid">
+      <button class="more-tile" onclick="closeMoreDrawer();var p=document.querySelector('[data-quick=&quot;profile&quot;]');if(p)navigateTo('profile',p);mbSelect(document.querySelector('#mbMoreBtn'))">
+        <span class="more-tile-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">Settings</span>
+          <span class="more-tile-sub">Account · billing · team</span>
+        </span>
+      </button>
+      <button class="more-tile" onclick="toggleThemeFromDrawer()">
+        <span class="more-tile-icon" id="moreThemeIcon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name" id="moreThemeName">Light mode</span>
+          <span class="more-tile-sub">Switch theme</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- Story viewer (Instagram-style) -->
 <div class="story-viewer" id="storyViewer" onclick="if(event.target===this)closeStoryViewer()">
@@ -7357,6 +7778,48 @@ function updateArteContextHint(pageName){
 function mbSelect(el){
   document.querySelectorAll('.mb-nav-btn').forEach(b=>b.classList.remove('active'));
   if(el && !el.classList.contains('arte')) el.classList.add('active');
+}
+
+/* ─── MORE DRAWER — bottom sheet for secondary destinations ──────
+   Pattern: Material bottom sheet / Meta Business Suite "More" tab.
+   With 11 destinations, the bottom nav can only hold 4 + the drawer.
+*/
+function openMoreDrawer(){
+  const overlay = document.getElementById('moreDrawerOverlay');
+  if(!overlay) return;
+  // Sync the theme tile label/icon with current theme
+  updateMoreThemeTile();
+  overlay.classList.add('show');
+  // Visually mark the More tab as active while drawer is open
+  document.querySelectorAll('.mb-nav-btn').forEach(b=>b.classList.remove('active'));
+  const moreBtn = document.getElementById('mbMoreBtn');
+  if(moreBtn) moreBtn.classList.add('active');
+  // Lock body scroll while drawer is open
+  document.body.style.overflow = 'hidden';
+}
+function closeMoreDrawer(){
+  const overlay = document.getElementById('moreDrawerOverlay');
+  if(!overlay) return;
+  overlay.classList.remove('show');
+  document.body.style.overflow = '';
+}
+function toggleThemeFromDrawer(){
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+  try{ localStorage.setItem('artemis_theme', isLight ? 'dark' : 'light'); }catch(e){}
+  updateMoreThemeTile();
+}
+function updateMoreThemeTile(){
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const nameEl = document.getElementById('moreThemeName');
+  const iconEl = document.getElementById('moreThemeIcon');
+  if(nameEl) nameEl.textContent = isLight ? 'Dark mode' : 'Light mode';
+  if(iconEl){
+    // Sun when in dark mode (offer light); moon when in light mode (offer dark)
+    iconEl.innerHTML = isLight
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  }
 }
 
 
