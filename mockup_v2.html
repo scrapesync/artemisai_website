@@ -4078,13 +4078,13 @@ html[data-theme="light"] .kpi-card-v2.reach-hero{
     <input type="text" class="search" placeholder="Search posts, pages, people, topics">
     <div class="topnav-spacer"></div>
 
-    <button class="icon-btn" title="Discovery">
+    <button class="icon-btn" title="Discovery" onclick="navigateTo('discovery',document.querySelectorAll('.nav-item')[4])">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     </button>
-    <button class="icon-btn" title="Group chats">
+    <button class="icon-btn" title="Group chats" onclick="openMessagesPanel()">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM7 9h10v2H7zm6 5H7v-2h6zm4-6H7V6h10z"/></svg>
     </button>
-    <button class="icon-btn" title="Notifications">
+    <button class="icon-btn" title="Notifications" onclick="openNotificationsPanel()">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22a2.5 2.5 0 002.5-2.5h-5A2.5 2.5 0 0012 22zm6.5-7v-4.5a6.5 6.5 0 10-13 0V15L4 17v1h16v-1z"/></svg>
       <span class="badge">3</span>
     </button>
@@ -6499,6 +6499,16 @@ html[data-theme="light"] .kpi-card-v2.reach-hero{
           <span class="more-tile-sub">7 items need input</span>
         </span>
         <span class="more-tile-badge">7</span>
+      </button>
+      <button class="more-tile" onclick="closeMoreDrawer();openMessagesPanel();mbSelect(document.querySelector('#mbMoreBtn'))">
+        <span class="more-tile-icon" style="background:rgba(99,102,241,.12);color:#818CF8">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">Group chats</span>
+          <span class="more-tile-sub">Team threads · 2 unread</span>
+        </span>
+        <span class="more-tile-badge">2</span>
       </button>
       <button class="more-tile" onclick="closeMoreDrawer();var d=document.querySelector('[data-quick=&quot;drafts&quot;]');if(d)navigateTo('drafts',d);mbSelect(document.querySelector('#mbMoreBtn'))">
         <span class="more-tile-icon">
