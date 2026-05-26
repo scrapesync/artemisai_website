@@ -6487,6 +6487,47 @@ html[data-theme="light"] .kpi-card-v2.reach-hero{
       </button>
     </div>
 
+    <!-- Quick actions — common tasks, not just navigation -->
+    <div class="more-section-label">Quick actions</div>
+    <div class="more-grid">
+      <button class="more-tile" onclick="closeMoreDrawer();handleAction('composer')">
+        <span class="more-tile-icon" style="background:rgba(0,196,160,.12);color:#00C4A0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">New post</span>
+          <span class="more-tile-sub">Draft · Art-E scores it</span>
+        </span>
+      </button>
+      <button class="more-tile" onclick="closeMoreDrawer();handleAction('predict-score')">
+        <span class="more-tile-icon" style="background:rgba(99,102,241,.12);color:#818CF8">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 4 4 5-6"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">Predict score</span>
+          <span class="more-tile-sub">Test a caption first</span>
+        </span>
+      </button>
+      <button class="more-tile" onclick="closeMoreDrawer();handleAction('find-best-time')">
+        <span class="more-tile-icon" style="background:rgba(245,158,11,.12);color:#FBBF24">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">Best time to post</span>
+          <span class="more-tile-sub">Tue 6PM · +34% lift</span>
+        </span>
+      </button>
+      <button class="more-tile" onclick="closeMoreDrawer();openArteChat()">
+        <span class="more-tile-icon" style="background:linear-gradient(135deg,#6366F1,#00C4A0);color:#fff">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">Ask Art-E</span>
+          <span class="more-tile-sub">Your AI assistant</span>
+        </span>
+      </button>
+    </div>
+
     <!-- Primary work sections, deeper than the bottom-nav tabs -->
     <div class="more-section-label">Get things done</div>
     <div class="more-grid">
@@ -6581,6 +6622,24 @@ html[data-theme="light"] .kpi-card-v2.reach-hero{
         <span class="more-tile-text">
           <span class="more-tile-name" id="moreThemeName">Light mode</span>
           <span class="more-tile-sub">Switch theme</span>
+        </span>
+      </button>
+      <button class="more-tile" onclick="closeMoreDrawer();openArteChat('How do I use ArtemisAI? Walk me through the basics.')">
+        <span class="more-tile-icon" style="background:rgba(56,189,248,.12);color:#38BDF8">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">Help &amp; support</span>
+          <span class="more-tile-sub">Guides · ask Art-E</span>
+        </span>
+      </button>
+      <button class="more-tile" onclick="closeMoreDrawer();toast('info','Signing out…')">
+        <span class="more-tile-icon" style="background:rgba(229,57,53,.12);color:#E53935">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>
+        </span>
+        <span class="more-tile-text">
+          <span class="more-tile-name">Sign out</span>
+          <span class="more-tile-sub">asad@artemisai.co.uk</span>
         </span>
       </button>
     </div>
