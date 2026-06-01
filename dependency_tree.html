@@ -282,11 +282,12 @@ function renderMap(){
     const ntk=(TD.feat_tickets[page]||[]).length;
     html+=`<div class="maprow">
       <div class="feathead">${icon[page]||''} ${page} <span style="font-weight:600;color:var(--mut);font-size:10px">· ${ntk} tickets</span></div>
-      <div class="sprintpills">${sprints.map(n=>`<span class="spill ${n<=5?'done':''}">S${n}${n<=5?' ✓':''}</span>`).join('')||'<span style="color:var(--mut);font-size:10px">—</span>'}</div>
+      <div class="sprintpills">${sprints.map(n=>`<span class="spill ${n<=5?'done':''}" data-sn="${n}" style="cursor:pointer">S${n}${n<=5?' ✓':''}</span>`).join('')||'<span style="color:var(--mut);font-size:10px">—</span>'}</div>
     </div>`;
   });
-  html+='</div><div style="font-size:10.5px;color:var(--mut);padding:10px">Each row is a mockup feature and the sprints whose tickets build it. Green = already delivered (Sprints 1–5). Click the Sprint Flow tab to see ticket-level detail per sprint.</div>';
+  html+='</div><div style="font-size:10.5px;color:var(--mut);padding:10px">Each row is a mockup feature and the sprints whose tickets build it. Green = already delivered (Sprints 1–5). <b style="color:var(--ink)">Tap any sprint pill</b> to see that sprint\'s tickets, prerequisites and what it unlocks.</div>';
   document.getElementById('canvas').innerHTML=html;
+  document.querySelectorAll('.spill[data-sn]').forEach(el=>el.onclick=()=>sprintPanel(+el.dataset.sn));
 }
 
 function openPanel(){document.getElementById('panel').classList.add('open');}

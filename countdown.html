@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtemisAI · Countdown to Launch</title>
+<style>
+  :root{ --bg:#05080f; --panel:#0d1320; --panel2:#141c30; --line:#1d2840; --ink:#eaf0fb; --mut:#8493ad;
+    --teal:#00e7bd; --indigo:#7d74ff; --amber:#ffb13b; --coral:#ff6f61; --green:#3ee08a; --violet:#b18bff; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'DM Sans','Outfit',Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden}
+  /* animated star/grid backdrop */
+  .bgwrap{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+  .grid-bg{position:absolute;inset:-2px;background-image:linear-gradient(rgba(0,231,189,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,231,189,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 75% 65% at 50% 35%,#000,transparent)}
+  .glow{position:absolute;border-radius:50%;filter:blur(120px);opacity:.5}
+  .g1{width:600px;height:600px;background:radial-gradient(circle,rgba(125,116,255,.5),transparent 70%);top:-200px;right:-120px;animation:float1 14s ease-in-out infinite}
+  .g2{width:520px;height:520px;background:radial-gradient(circle,rgba(0,231,189,.4),transparent 70%);bottom:-200px;left:-120px;animation:float2 17s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,40px)}}
+  @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-30px)}}
+  .content{position:relative;z-index:1;padding:26px 22px 70px;max-width:1100px;margin:0 auto}
+  .logo{font-weight:900;letter-spacing:3px;font-size:11px;text-align:center}.logo b{color:var(--teal)}
+  .eyebrow{text-align:center;font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-top:18px}
+  h1{text-align:center;font-size:30px;font-weight:900;letter-spacing:-.5px;margin-top:6px}
+  .target{text-align:center;color:var(--mut);font-size:13px;margin-top:5px}
+  .target b{color:var(--ink)}
+  /* countdown clock */
+  .clock{display:flex;justify-content:center;gap:14px;margin:26px 0 8px;flex-wrap:wrap}
+  .unit{background:linear-gradient(160deg,#101a2e,#0a1120);border:1px solid var(--line);border-radius:18px;padding:18px 8px 12px;min-width:118px;text-align:center;position:relative;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.4)}
+  .unit::before{content:"";position:absolute;top:0;left:18%;width:64%;height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);opacity:.6}
+  .unit .n{font-size:52px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-1px;background:linear-gradient(180deg,#fff,#9fb0cc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .unit .l{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut);margin-top:8px}
+  .unit.sec .n{background:linear-gradient(180deg,var(--teal),#0aa88a);-webkit-background-clip:text;background-clip:text}
+  .tick{text-align:center;font-size:11px;color:var(--mut);margin-top:6px}
+  .tick b{color:var(--teal)}
+  /* progress ring + stats */
+  .row{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;background:rgba(13,19,32,.7);border:1px solid var(--line);border-radius:20px;padding:22px 26px;margin-top:26px;backdrop-filter:blur(8px)}
+  .ring{position:relative;width:150px;height:150px}.ring svg{transform:rotate(-90deg)}
+  .ring .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .ring .pct{font-size:34px;font-weight:900}.ring .pl{font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:1px}
+  .statcols{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .stat .v{font-size:24px;font-weight:900}.stat .k{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+  /* progress bar of journey */
+  .journey{margin-top:24px;background:rgba(13,19,32,.7);border:1px solid var(--line);border-radius:20px;padding:20px 24px}
+  .journey h3{font-size:13px;font-weight:800;margin-bottom:14px}
+  .jbar{height:34px;border-radius:10px;background:#0a1120;border:1px solid var(--line);display:flex;overflow:hidden;position:relative}
+  .jseg{display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:800;color:#06110d;white-space:nowrap;overflow:hidden}
+  .jmark{position:absolute;top:-6px;bottom:-6px;width:2px;background:#fff}
+  .jmark span{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:8px;font-weight:800;color:#fff;white-space:nowrap}
+  .jlabels{display:flex;justify-content:space-between;font-size:9px;color:var(--mut);margin-top:8px}
+  /* two columns: done / left */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+  .card{background:rgba(13,19,32,.7);border:1px solid var(--line);border-radius:18px;padding:18px 20px;backdrop-filter:blur(8px)}
+  .card h3{font-size:13px;font-weight:800;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .li{font-size:11px;color:var(--mut);padding:4px 0 4px 16px;position:relative;line-height:1.45}
+  .li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}
+  .li.todo:before{content:"→";color:var(--amber)}
+  .routes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+  .route{background:rgba(13,19,32,.7);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+  .route.r1{border-color:rgba(0,231,189,.35)}.route.r2{border-color:rgba(125,116,255,.35)}
+  .route .rt{font-size:12px;font-weight:800}.route .rd{font-size:22px;font-weight:900;margin-top:4px}
+  .route.r1 .rd{color:var(--teal)}.route.r2 .rd{color:var(--indigo)}
+  .route .rs{font-size:10px;color:var(--mut);margin-top:2px}
+  .quick{display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+  .qlink{font-size:11.5px;font-weight:700;padding:9px 15px;border-radius:10px;border:1px solid var(--line);background:rgba(13,19,32,.7);color:var(--ink);text-decoration:none}
+  .qlink:hover{border-color:var(--teal);color:var(--teal)}
+  @media(max-width:760px){
+    .row{grid-template-columns:1fr;text-align:center}.ring{margin:0 auto}
+    .statcols{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}.routes{grid-template-columns:1fr}
+    h1{font-size:23px}.unit{min-width:72px;padding:14px 6px 10px}.unit .n{font-size:36px}.clock{gap:9px}
+  }
+
+/* ===== shared site header (sn-*) — matches other ArtemisAI pages ===== */
+nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}
+nav.site-nav *{box-sizing:border-box}
+.sn-logo{font-size:1rem;font-weight:800;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.55rem;flex-shrink:0}
+.sn-logo-mark{width:26px;height:26px;flex-shrink:0}.sn-logo-mark svg{width:100%;height:100%}
+.sn-links{display:flex;align-items:center;gap:1rem;list-style:none;margin:0;padding:0}
+.sn-pill{padding:.4rem 1rem;border:1px solid rgba(0,212,170,.3);border-radius:7px;color:#00d4aa!important;font-size:.8rem;text-decoration:none;background:transparent;transition:all .2s;white-space:nowrap}
+.sn-pill:hover{background:rgba(0,212,170,.07)!important;border-color:rgba(0,212,170,.6)!important}
+.sn-chip{display:none;align-items:center;gap:7px;padding:.28rem .8rem .28rem .4rem;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);border-radius:20px}
+.sn-avatar{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#00d4aa,#6366f1);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#060a13;flex-shrink:0}
+.sn-name{font-size:.78rem;color:#e8ecf4;font-weight:600}
+.sn-logout{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.8rem;padding:.26rem .6rem;cursor:pointer;transition:all .2s}
+.sn-logout:hover{border-color:rgba(248,113,113,.4);color:#f87171}
+#signout-modal{display:none;position:fixed;inset:0;z-index:99998;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif}
+#signout-modal.open{display:flex}
+#signout-backdrop{position:absolute;inset:0;background:rgba(2,5,12,.7);backdrop-filter:blur(4px)}
+#signout-card{position:relative;z-index:1;background:#0f1729;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem 2rem;max-width:340px;width:90%;box-shadow:0 30px 60px rgba(0,0,0,0.5);text-align:center}
+.signout-icon svg{width:34px;height:34px;stroke:#f87171;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-bottom:.5rem}
+.signout-title{font-size:1.05rem;font-weight:800;color:#e8ecf4}
+.signout-sub{font-size:.82rem;color:#8a96ad;margin:.4rem 0 1.1rem}
+.signout-btns{display:flex;gap:8px}
+.signout-cancel{flex:1;padding:.6rem;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:9px;color:#cdd5ee;font-family:inherit;font-size:.82rem;cursor:pointer}
+.signout-confirm{flex:1;padding:.6rem;background:#f87171;border:none;border-radius:9px;color:#2a0a0a;font-family:inherit;font-weight:700;font-size:.82rem;cursor:pointer}
+body{padding-top:52px!important}
+@media(max-width:768px){nav.site-nav{height:48px!important;padding:0 12px!important}.sn-pill{padding:.3rem .75rem!important;font-size:.7rem!important}.sn-name{max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}body{padding-top:48px!important}}
+
+</style></head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="sn-logo">
+    <div class="sn-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#slg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#slg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#slg)"/><defs><linearGradient id="slg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
+    ARTEMISAI
+  </a>
+  <ul class="sn-links">
+    <li><a href="admin_panel.html" class="sn-pill">&larr; Admin Panel</a></li>
+    <li><div class="sn-chip" id="sn-chip" style="display:none"><div class="sn-avatar" id="sn-avatar">?</div><span class="sn-name" id="sn-name"></span></div></li>
+    <li><button class="sn-logout" id="sn-logout-btn" onclick="handleLogout()" style="display:none">&#9211;</button></li>
+  </ul>
+</nav>
+<div id="signout-modal">
+  <div id="signout-backdrop" onclick="_closeSignoutModal()"></div>
+  <div id="signout-card">
+    <div class="signout-icon"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+    <div class="signout-title">Sign out?</div>
+    <div class="signout-sub">You'll need to sign back in to access the Admin Panel.</div>
+    <div class="signout-btns"><button class="signout-cancel" onclick="_closeSignoutModal()">Cancel</button><button class="signout-confirm" onclick="_doSignout()">Sign Out</button></div>
+  </div>
+</div>
+
+<div class="bgwrap"><div class="grid-bg"></div><div class="glow g1"></div><div class="glow g2"></div></div>
+<div class="content">
+  <div class="logo">ARTEMIS<b>AI</b></div>
+  <div class="eyebrow">Mission Control · Road to Launch</div>
+  <h1>Countdown to MVP Launch</h1>
+  <div class="target">Target window: <b>October 2026</b> · committed deadline <b>31 Oct 2026</b></div>
+
+  <div class="clock" id="clock">
+    <div class="unit"><div class="n" id="d">--</div><div class="l">Days</div></div>
+    <div class="unit"><div class="n" id="h">--</div><div class="l">Hours</div></div>
+    <div class="unit"><div class="n" id="m">--</div><div class="l">Minutes</div></div>
+    <div class="unit sec"><div class="n" id="s">--</div><div class="l">Seconds</div></div>
+  </div>
+  <div class="tick">⏱ <b id="weeksleft">--</b> working weeks left · launch builds every day from here</div>
+
+  <div class="row">
+    <div class="ring">
+      <svg width="150" height="150" viewBox="0 0 150 150">
+        <circle cx="75" cy="75" r="66" fill="none" stroke="#16203a" stroke-width="13"/>
+        <circle id="ringFill" cx="75" cy="75" r="66" fill="none" stroke="url(#rg)" stroke-width="13" stroke-linecap="round" stroke-dasharray="414.7" stroke-dashoffset="414.7"/>
+        <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00e7bd"/><stop offset="1" stop-color="#7d74ff"/></linearGradient></defs>
+      </svg>
+      <div class="mid"><div class="pct" id="pct">12%</div><div class="pl">plan complete</div></div>
+    </div>
+    <div class="statcols">
+      <div class="stat"><div class="v" style="color:var(--green)">5 / 23</div><div class="k">sprints done</div></div>
+      <div class="stat"><div class="v">198</div><div class="k">items shipped</div></div>
+      <div class="stat"><div class="v" style="color:var(--amber)">18</div><div class="k">sprints left</div></div>
+      <div class="stat"><div class="v" id="elapsed">--</div><div class="k">weeks in so far</div></div>
+    </div>
+  </div>
+
+  <div class="journey">
+    <h3>📍 Where we are on the road</h3>
+    <div class="jbar" id="jbar"></div>
+    <div class="jlabels"><span>Jan 2026 · kickoff</span><span>Today</span><span>Oct 2026 · launch</span></div>
+  </div>
+
+  <div class="two">
+    <div class="card">
+      <h3 style="color:var(--green)">✓ What we've done (Sprints 1–5)</h3>
+      <div class="li">AWS infra + crawlers online; 2-year Facebook backfill for every pilot page</div>
+      <div class="li">Data warehouse + standard tables built</div>
+      <div class="li">5 post-level NLP models live (sentiment, emotion, topic, intent, toxicity)</div>
+      <div class="li">Comment MTL DeBERTa model trained + gold set</div>
+      <div class="li">App shell + login + 5 pages with real signals</div>
+      <div class="li">CI/CD + infrastructure-as-code baseline; OAuth groundwork</div>
+      <div class="li">End-to-end pipeline test (text + image + alerts)</div>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--amber)">→ What's left to launch (Sprints 6–23)</h3>
+      <div class="li todo">Image / video understanding on posts (S6–7)</div>
+      <div class="li todo">Draft virality scoring + post traction (S8–9)</div>
+      <div class="li todo">Crisis detector + alerts engine (S11)</div>
+      <div class="li todo">The 7 MVP surfaces wired to live data</div>
+      <div class="li todo">Art-E grounded Q&A — tool-use + citations (pulled forward)</div>
+      <div class="li todo">Production hardening — the 5 pillars + scale test</div>
+      <div class="li todo">Facebook OAuth Live-Mode flip → 5 pilots live (the final task)</div>
+    </div>
+  </div>
+
+  <div class="routes">
+    <div class="route r1"><div class="rt">🚀 Route 1 · Faheem full-time + new AI engineer</div><div class="rd" id="r1date">~22 Sep 2026</div><div class="rs">projected arrival · ~5–6 weeks buffer before the deadline · ~£3k/mo</div></div>
+    <div class="route r2"><div class="rt">⚡ Route 2 · Only Faheem full-time</div><div class="rd" id="r2date">~18 Oct 2026</div><div class="rs">projected arrival · ~2 weeks buffer · lowest cash · ~£2k/mo</div></div>
+  </div>
+
+  <div class="quick">
+    <a class="qlink" href="launch_command.html">🎯 Launch Command</a>
+    <a class="qlink" href="mvp_proposal_board.html">🗂️ MVP Scoping Board</a>
+    <a class="qlink" href="dependency_tree.html">🔗 Dependency Tree</a>
+    <a class="qlink" href="sprint_tracker.html">📅 Sprint Tracker</a>
+  </div>
+</div>
+
+<script>
+const LAUNCH=new Date('2026-10-31T18:00:00');   // committed deadline
+const KICKOFF=new Date('2026-01-19T00:00:00');
+const R1=new Date('2026-09-22'), R2=new Date('2026-10-18');
+function pad(n){return String(n).padStart(2,'0');}
+function tickClock(){
+  const now=new Date();
+  let diff=Math.max(0,LAUNCH-now);
+  const d=Math.floor(diff/86400000); diff-=d*86400000;
+  const h=Math.floor(diff/3600000); diff-=h*3600000;
+  const m=Math.floor(diff/60000); diff-=m*60000;
+  const s=Math.floor(diff/1000);
+  document.getElementById('d').textContent=d;
+  document.getElementById('h').textContent=pad(h);
+  document.getElementById('m').textContent=pad(m);
+  document.getElementById('s').textContent=pad(s);
+  document.getElementById('weeksleft').textContent=Math.round(d/7*5/7); // ~working weeks
+  // elapsed
+  const elapsedWk=Math.round((now-KICKOFF)/(7*86400000));
+  document.getElementById('elapsed').textContent=elapsedWk;
+}
+function setup(){
+  // ring 12%
+  const pct=12; const C=414.7;
+  document.getElementById('ringFill').style.transition='stroke-dashoffset 1.4s ease';
+  setTimeout(()=>{document.getElementById('ringFill').style.strokeDashoffset=C*(1-pct/100);},150);
+  // journey bar — proportion of calendar time elapsed kickoff→launch, plus phase segments
+  const now=new Date();
+  const total=LAUNCH-KICKOFF; const doneFrac=Math.min(1,Math.max(0,(now-KICKOFF)/total));
+  const segs=[['Foundation',(new Date('2026-06-13')-KICKOFF)/total,'#3ee08a'],
+              ['Intelligence',(new Date('2026-08-30')-new Date('2026-06-13'))/total,'#7d74ff'],
+              ['Product + LLM',(new Date('2026-10-08')-new Date('2026-08-30'))/total,'#00e7bd'],
+              ['Launch',(LAUNCH-new Date('2026-10-08'))/total,'#ffb13b']];
+  let bar='';
+  segs.forEach(([nm,fr,col])=>{bar+=`<div class="jseg" style="width:${fr*100}%;background:${col}">${fr>0.12?nm:''}</div>`;});
+  const jb=document.getElementById('jbar'); jb.innerHTML=bar;
+  // "today" marker
+  const mk=document.createElement('div'); mk.className='jmark'; mk.style.left=(doneFrac*100)+'%';
+  mk.innerHTML='<span>● today</span>'; jb.appendChild(mk);
+  // route markers
+  [['R1',R1,'#00e7bd'],['R2',R2,'#7d74ff']].forEach(([lbl,dt,col])=>{
+    const fr=(dt-KICKOFF)/total; const m=document.createElement('div'); m.className='jmark'; m.style.left=(fr*100)+'%'; m.style.background=col;
+    m.innerHTML=`<span style="color:${col};top:auto;bottom:-18px">${lbl}</span>`; jb.appendChild(m);
+  });
+  document.getElementById('r1date').textContent='~'+R1.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  document.getElementById('r2date').textContent='~'+R2.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+}
+tickClock(); setInterval(tickClock,1000); setup();
+</script>
+
+<script>
+(function(){
+  try{
+    var sess = localStorage.getItem('artemis_session') || localStorage.getItem('artemis_sprint_session') || localStorage.getItem('artemis_app_session');
+    if(sess){
+      var user = JSON.parse(sess);
+      var chip=document.getElementById('sn-chip'), av=document.getElementById('sn-avatar'), nm=document.getElementById('sn-name'), lb=document.getElementById('sn-logout-btn');
+      if(chip) chip.style.display='flex';
+      var who=user.name||user.username||'';
+      if(av && who) av.textContent=who.charAt(0).toUpperCase();
+      if(nm && who) nm.textContent=who;
+      if(lb) lb.style.display='';
+    }
+  }catch(e){}
+})();
+var _signoutFn=null;
+function handleLogout(){_showSignoutModal(function(){localStorage.removeItem('artemis_session');localStorage.removeItem('artemis_sprint_session');localStorage.removeItem('artemis_app_session');localStorage.removeItem('artemis_viewer_name');window.location.href='index.html';});}
+function _showSignoutModal(fn){_signoutFn=fn||function(){localStorage.removeItem('artemis_session');window.location.href='index.html';};document.getElementById('signout-modal').classList.add('open');}
+function _closeSignoutModal(){document.getElementById('signout-modal').classList.remove('open');}
+function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
+</script>
+
+</body></html>
