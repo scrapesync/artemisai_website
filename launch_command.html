@@ -64,6 +64,27 @@
   .gate .verdict{font-size:18px;font-weight:900}
   @media(max-width:1000px){.grid{grid-template-columns:1fr 1fr}.hero{grid-template-columns:1fr}.phases{grid-template-columns:1fr 1fr}}
   @media(max-width:680px){.grid{grid-template-columns:1fr}}
+  /* ---------- MOBILE ---------- */
+  @media(max-width:680px){
+    body{padding:14px 12px 60px}
+    h1{font-size:20px}
+    .top{flex-direction:column;align-items:stretch;gap:10px}
+    .ctrls{margin-left:0;flex-wrap:wrap}
+    .ctrls select,.ctrls button{flex:1 1 auto}
+    .hero{padding:16px 16px;gap:16px;text-align:center}
+    .ring{margin:0 auto}
+    .hero-mid .big{font-size:24px}
+    .countdown{justify-content:center;gap:14px}
+    .routes{min-width:0}
+    .phases{grid-template-columns:1fr 1fr;gap:7px}
+    #laterStrip{grid-template-columns:1fr 1fr!important;gap:8px!important}
+    .gate{flex-direction:column;text-align:center;gap:10px}
+  }
+  @media(max-width:420px){
+    .phases{grid-template-columns:1fr}
+    #laterStrip{grid-template-columns:1fr!important}
+    .countdown{flex-wrap:wrap}
+  }
 
 /* ===== shared site header (sn-*) — matches other ArtemisAI pages ===== */
 nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}

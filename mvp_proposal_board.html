@@ -72,6 +72,39 @@
   .cmvp{background:rgba(0,214,174,.16);color:var(--teal)} .cfast{background:rgba(245,166,35,.16);color:var(--amber)} .clater{background:rgba(167,139,250,.16);color:var(--violet)}
   .agreement{font-size:11px;color:var(--mut);margin-top:8px}
   .hidden{display:none}
+  /* tap-to-move action sheet (works on touch where drag does not) */
+  #moveSheet{display:none;position:fixed;inset:0;z-index:2000;align-items:flex-end;justify-content:center}
+  #moveSheet.open{display:flex}
+  #moveBackdrop{position:absolute;inset:0;background:rgba(2,5,12,.6);backdrop-filter:blur(3px)}
+  #moveCard{position:relative;z-index:1;background:#0f1729;border:1px solid var(--line);border-radius:18px 18px 0 0;width:100%;max-width:520px;padding:18px 18px 26px;box-shadow:0 -20px 50px rgba(0,0,0,.5)}
+  #moveCard .mt{font-size:13px;font-weight:800;margin-bottom:2px}
+  #moveCard .ms{font-size:11px;color:var(--mut);margin-bottom:14px}
+  .mbtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .mbtn{padding:14px 8px;border-radius:12px;border:1px solid var(--line);background:#121a2e;font-size:12px;font-weight:800;cursor:pointer;text-align:center}
+  .mbtn.mvp{border-color:var(--teal);color:var(--teal)} .mbtn.fast{border-color:var(--amber);color:var(--amber)} .mbtn.later{border-color:var(--violet);color:var(--violet)}
+  .mcancel{margin-top:10px;width:100%;padding:11px;border-radius:11px;border:1px solid var(--line);background:transparent;color:var(--mut);font-size:12px;font-weight:700;cursor:pointer}
+  .taphint{display:none}
+  @media(min-width:861px){ #moveSheet{align-items:center} #moveCard{border-radius:18px} }
+  /* ---------- MOBILE ---------- */
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr;gap:10px}
+    .source{position:static;max-height:300px}
+    .cols{grid-template-columns:1fr 1fr;gap:8px}
+    .proj{grid-template-columns:1fr;gap:12px;text-align:left}
+    .proj .date{font-size:26px}
+    .tk{cursor:pointer}
+    .taphint{display:block;font-size:9px;color:var(--mut);padding:0 6px 6px}
+  }
+  @media(max-width:560px){
+    body{padding:14px 12px 70px}
+    h1{font-size:18px}.sub{font-size:11px}
+    .cols{grid-template-columns:1fr}
+    .toolbar{gap:6px}
+    .toolbar select,.toolbar button{font-size:11px;padding:7px 9px;flex:1 1 auto}
+    .seg{width:100%}.seg button{flex:1}
+    .col{min-height:auto}
+    table{min-width:520px}
+  }
 
 /* ===== shared site header (sn-*) — matches other ArtemisAI pages ===== */
 nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}
@@ -125,7 +158,7 @@ body{padding-top:52px!important}
 
 <div class="logo">ARTEMIS<b>AI</b></div>
 <h1>MVP Scoping Board — every sprint ticket</h1>
-<div class="sub">All 402 sprint tickets are here. Drag any ticket into <b style="color:var(--teal)">MVP</b>, <b style="color:var(--amber)">Fast-follow</b> or <b style="color:var(--violet)">Later</b>. The board projects your launch date from the two-route capacity model. Save your call, then open <b>"Who chose what"</b> to compare everyone. <b style="color:var(--green)">Sprints 1–5 are done.</b></div>
+<div class="sub">All 402 sprint tickets are here. <b>Tap or drag</b> any ticket into <b style="color:var(--teal)">MVP</b>, <b style="color:var(--amber)">Fast-follow</b> or <b style="color:var(--violet)">Later</b>. The board projects your launch date from the two-route capacity model. Save your call, then open <b>"Who chose what"</b> to compare everyone. <b style="color:var(--green)">Sprints 1–5 are done.</b></div>
 
 <div class="toolbar">
   <div class="seg" id="viewSeg">
@@ -185,6 +218,20 @@ body{padding-top:52px!important}
     <div style="font-size:11px;color:var(--mut);margin-bottom:12px">Each person's saved board, side by side. See where the team agrees and where it splits — that's where the scoping conversation needs to happen.</div>
     <table id="whoTable"></table>
     <div class="agreement" id="agreement"></div>
+  </div>
+</div>
+
+<!-- tap-to-move action sheet (mobile-friendly) -->
+<div id="moveSheet"><div id="moveBackdrop"></div>
+  <div id="moveCard">
+    <div class="mt" id="moveTitle">Move ticket</div>
+    <div class="ms" id="moveSub"></div>
+    <div class="mbtns">
+      <button class="mbtn mvp" data-b="mvp">→ MVP</button>
+      <button class="mbtn fast" data-b="fast">→ Fast-follow</button>
+      <button class="mbtn later" data-b="later">→ Later</button>
+    </div>
+    <button class="mcancel" id="moveCancel">Cancel</button>
   </div>
 </div>
 
@@ -275,21 +322,37 @@ function project(){
 }
 function getCss(v){return getComputedStyle(document.documentElement).getPropertyValue(v);}
 
-// ---- drag & drop ----
+// ---- drag & drop + tap-to-move ----
 let dragId=null;
 function bindDrag(){
   document.querySelectorAll('.tk[draggable="true"]').forEach(el=>{
     el.ondragstart=e=>{dragId=el.dataset.id;e.dataTransfer.effectAllowed='move';};
+    el.onclick=()=>openMove(el.dataset.id);  // tap to move (works on touch + desktop)
   });
   document.querySelectorAll('.drop').forEach(d=>{
     d.ondragover=e=>{e.preventDefault();d.classList.add('dragover');};
     d.ondragleave=()=>d.classList.remove('dragover');
     d.ondrop=async e=>{e.preventDefault();d.classList.remove('dragover');
       if(!dragId)return; const b=d.dataset.b;
-      if(state[dragId]==='done' || b==='done'){dragId=null;return;} // can't move done items or into done
+      if(state[dragId]==='done' || b==='done'){dragId=null;return;}
       state[dragId]=b; await save(curOwner(),state); renderBoard(); renderSource();};
   });
 }
+let moveId=null;
+function openMove(id){
+  if(state[id]==='done')return;
+  moveId=id; const t=TICKETS.find(x=>x.id===id);
+  document.getElementById('moveTitle').textContent=id;
+  document.getElementById('moveSub').textContent=(t?t.name:'').slice(0,90)+'  ·  currently in '+(state[id]||'later').toUpperCase();
+  document.getElementById('moveSheet').classList.add('open');
+}
+function closeMove(){document.getElementById('moveSheet').classList.remove('open');moveId=null;}
+document.getElementById('moveBackdrop').onclick=closeMove;
+document.getElementById('moveCancel').onclick=closeMove;
+document.querySelectorAll('#moveCard .mbtn').forEach(btn=>btn.onclick=async()=>{
+  if(!moveId)return; state[moveId]=btn.dataset.b; const o=curOwner(); closeMove();
+  await save(o,state); renderBoard(); renderSource();
+});
 
 // ---- who chose what ----
 async function renderWho(){
