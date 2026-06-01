@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtemisAI · Launch Command</title>
+<style>
+  :root{
+    --bg:#080b14; --panel:#0f1320; --panel2:#151c30; --line:#212b45;
+    --ink:#e9eef8; --mut:#8793ab; --teal:#00D6AE; --indigo:#6d63ff; --violet:#a78bfa;
+    --amber:#f5a623; --coral:#ff6b5e; --green:#34d399; --red:#f0556a; --cyan:#22d3ee;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;background:
+     radial-gradient(1200px 640px at 88% -12%, rgba(109,99,255,.2), transparent 60%),
+     radial-gradient(1000px 560px at -12% 112%, rgba(0,214,174,.15), transparent 55%), var(--bg);
+     color:var(--ink); min-height:100vh; padding:24px 28px 70px;}
+  .logo{font-weight:900;letter-spacing:2px;font-size:12px}.logo b{color:var(--teal)}
+  h1{font-size:27px;font-weight:900;letter-spacing:-.5px;margin-top:4px}
+  .sub{color:var(--mut);font-size:13px;margin-top:4px;max-width:60em}
+  /* hero */
+  .hero{display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:center;
+    background:linear-gradient(135deg,#0c1322,#141a30);border:1px solid var(--line);border-radius:20px;padding:22px 26px;margin:18px 0}
+  .ring{position:relative;width:128px;height:128px}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .pct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .ring .pct .n{font-size:30px;font-weight:900}
+  .ring .pct .l{font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:.8px}
+  .hero-mid h2{font-size:15px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:1px}
+  .hero-mid .big{font-size:30px;font-weight:900;margin-top:2px}
+  .countdown{display:flex;gap:18px;margin-top:12px}
+  .cd{text-align:center}.cd .n{font-size:24px;font-weight:900;color:var(--teal)}.cd .l{font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  .routes{display:flex;flex-direction:column;gap:8px;min-width:230px}
+  .route{border:1px solid var(--line);border-radius:11px;padding:9px 12px;cursor:pointer;transition:.15s;background:#0c1322}
+  .route:hover{border-color:var(--teal)}
+  .route.active{border-color:var(--teal);background:rgba(0,214,174,.08)}
+  .route .rn{font-size:11.5px;font-weight:800}
+  .route .rm{font-size:10px;color:var(--mut);margin-top:2px;display:flex;gap:10px}
+  .route .rm b{color:var(--teal)}
+  /* phase strip */
+  .phases{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px}
+  .phase{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+  .phase .m{font-size:13px;font-weight:900}.phase .d{font-size:9.5px;color:var(--mut);margin-top:3px;line-height:1.4}
+  .phase.live{border-color:var(--teal);background:rgba(0,214,174,.07)}
+  /* readiness groups */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .gcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+  .ghead{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+  .gicon{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px}
+  .gtitle{font-weight:800;font-size:13px;flex:1}
+  .gpct{font-size:12px;font-weight:900}
+  .gbar{height:5px;background:#0c1322;border-radius:4px;overflow:hidden;border:1px solid var(--line);margin:7px 0 10px}
+  .gbar i{display:block;height:100%;border-radius:4px;transition:width .3s}
+  .item{display:flex;align-items:flex-start;gap:8px;padding:5px 0;cursor:pointer;border-bottom:1px solid rgba(33,43,69,.5)}
+  .item:last-child{border-bottom:none}
+  .box{width:16px;height:16px;border-radius:5px;border:1.6px solid var(--line);flex:0 0 auto;margin-top:1px;transition:.15s;display:flex;align-items:center;justify-content:center;font-size:11px;color:#06110d}
+  .item.done .box{background:var(--green);border-color:var(--green)}
+  .item .tx{font-size:10.5px;line-height:1.4;color:var(--ink)}
+  .item.done .tx{color:var(--mut);text-decoration:line-through}
+  .top{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+  .ctrls{margin-left:auto;display:flex;gap:8px;align-items:center}
+  select,button{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:8px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+  button:hover,select:hover{border-color:var(--teal)}
+  .save-state{font-size:11px;color:var(--mut)}
+  .sectitle{font-size:13px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin:8px 0 12px}
+  .gate{background:linear-gradient(135deg,#0c1322,#161a30);border:1.5px solid var(--line);border-radius:16px;padding:16px 20px;margin-top:16px;display:flex;align-items:center;gap:18px}
+  .gate .verdict{font-size:18px;font-weight:900}
+  @media(max-width:1000px){.grid{grid-template-columns:1fr 1fr}.hero{grid-template-columns:1fr}.phases{grid-template-columns:1fr 1fr}}
+  @media(max-width:680px){.grid{grid-template-columns:1fr}}
+</style></head>
+<body>
+  <div class="top">
+    <div>
+      <div class="logo">ARTEMIS<b>AI</b></div>
+      <h1>Launch Command — everything for the October MVP</h1>
+      <div class="sub">One page that covers the whole launch: scope, the two routes, production readiness with verification, Facebook approval, pilots, and the go/no-go gate. Tick items as they land — the rings update live and everyone sees the same board.</div>
+    </div>
+    <div class="ctrls">
+      <span class="save-state" id="saveState"></span>
+      <select id="owner"><option value="team">★ Team board (shared)</option><option value="Rafeh">Rafeh (PM)</option><option value="Asad">Asad</option><option value="Faheem">Faheem</option><option value="Alex">Alex</option></select>
+      <button id="resetBtn">Reset</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="ring">
+      <svg width="128" height="128" viewBox="0 0 128 128">
+        <circle cx="64" cy="64" r="56" fill="none" stroke="#1a2236" stroke-width="12"/>
+        <circle id="ringFill" cx="64" cy="64" r="56" fill="none" stroke="#00D6AE" stroke-width="12" stroke-linecap="round" stroke-dasharray="352" stroke-dashoffset="352"/>
+      </svg>
+      <div class="pct"><div class="n" id="overallPct">0%</div><div class="l">launch ready</div></div>
+    </div>
+    <div class="hero-mid">
+      <h2>Target launch</h2>
+      <div class="big">October 2026</div>
+      <div class="countdown" id="countdown"></div>
+    </div>
+    <div class="routes" id="routes"></div>
+  </div>
+
+  <div class="phases">
+    <div class="phase"><div class="m">Jun–Jul</div><div class="d">Build site on manual connect · shell, auth, pages, NLP</div></div>
+    <div class="phase"><div class="m">Aug</div><div class="d">Finish features · virality, crisis, Art-E brain</div></div>
+    <div class="phase"><div class="m">Sep</div><div class="d">Harden + verify all 5 pillars · submit to Facebook</div></div>
+    <div class="phase"><div class="m">Oct</div><div class="d">OAuth approved · flip to live · pilots on</div></div>
+    <div class="phase live"><div class="m" style="color:var(--teal)">LIVE</div><div class="d">5 paying pilots · launch comms out</div></div>
+  </div>
+
+  <div class="sectitle">Launch readiness — tick as each lands</div>
+  <div class="grid" id="grid"></div>
+
+  <div class="gate" id="gate">
+    <div style="font-size:30px">✅</div>
+    <div style="flex:1"><div style="font-size:11px;color:var(--mut);font-weight:800;letter-spacing:.5px;text-transform:uppercase">Go / No-Go gate</div>
+      <div class="verdict" id="gateVerdict">Not ready — keep shipping</div>
+      <div style="font-size:10.5px;color:var(--mut);margin-top:3px">All five production pillars must be green and pilots signed off before OAuth flips live. This is the single decision for October.</div></div>
+    <div style="text-align:center"><div style="font-size:26px;font-weight:900" id="gatePct">0%</div><div style="font-size:9px;color:var(--mut)">of gate items</div></div>
+  </div>
+
+  <div class="sectitle" style="margin-top:18px">What we deliver later — not in October</div>
+  <div id="laterStrip" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px"></div>
+
+<script>
+const L = {"target": "October 2026", "today": "1 Jun 2026", "routes": [{"k": "R1", "name": "Route 1 \u00b7 Faheem full-time + new AI engineer", "lands": "~22 Sep", "buffer": "5\u20136 wks", "cost": "~\u00a33k/mo"}, {"k": "R2", "name": "Route 2 \u00b7 Only Faheem full-time", "lands": "~18 Oct", "buffer": "~2 wks", "cost": "~\u00a32k/mo"}], "groups": [{"name": "Product \u2014 MVP surfaces live", "icon": "\ud83e\udde9", "color": "#00D6AE", "items": ["Profile & Settings \u2014 login, page connect, notifications, data delete", "Home Feed \u2014 morning answer, live pulse, action list, stories rail", "Analytics \u2014 engagement, reach, sentiment split, top posts", "Best Times \u2014 heatmap + Art-E slot recommendations", "Drafts \u2014 inline virality scoring before publish", "To-do / Inbox \u2014 crisis detection + alerts (problem + action)", "Art-E \u2014 chat on your data, tool-use, citations, memory"]}, {"name": "Security", "icon": "\ud83d\udd12", "color": "#f0556a", "items": ["Cognito auth + JWT per-tenant isolation", "FB tokens encrypted (KMS), least-privilege scopes", "Data export + 30-day delete (GDPR/DSAR)", "Privacy policy, terms, AI disclaimers live (Filza)", "OWASP ZAP scan \u2014 zero high/critical", "Tenant-isolation test passes (A cannot read B)"]}, {"name": "Scalability", "icon": "\ud83d\udcc8", "color": "#5b54f0", "items": ["Auto-scaling pipeline verified", "Per-tenant spend caps + cost alarms", "API Gateway + WAF in front", "Load test: 100 tenants \u00d7 100K posts/day, p95 ok"]}, {"name": "Reliability", "icon": "\ud83d\udee1\ufe0f", "color": "#00A88A", "items": ["E2E suite green in CI on the 5 critical flows", "One-command rollback + canary deploy", "Daily backup + restore drill passed", "Staging = production clone", "Synthetic monitor every 5 min"]}, {"name": "Performance", "icon": "\u26a1", "color": "#f5a623", "items": ["Lighthouse \u2265 90 enforced in CI", "Art-E p95 first-token < 2s under load", "Page p95 load < 2.5s on mobile", "Redis cache + CDN live"]}, {"name": "Model accuracy", "icon": "\ud83c\udfaf", "color": "#a78bfa", "items": ["Comment NLP F1 > 0.80 (Rafeh gate)", "Virality model validated vs 24h outcomes", "200-question Art-E golden set + nightly regression", "Hallucination detector + citation gate on every reply", "Crisis detector alerts < 15 min (20-event replay)"]}, {"name": "Facebook App Review", "icon": "\ud83d\udcd8", "color": "#06b6d4", "items": ["FB app created + Business Verification started (June)", "Privacy policy URL + data-deletion + deauthorize callbacks live", "Dev-mode app \u2014 5 pilots added as testers (real OAuth, no review)", "App Review screencast recorded on the working site", "Submitted to Facebook (early Sep)", "App Review passed \u2192 switch to Live Mode (the final task)"]}, {"name": "Pilots & go-to-market", "icon": "\ud83d\ude80", "color": "#ff6b5e", "items": ["5 pilot pages recruited (Alex)", "Pilots onboarded on manual connect (Aug)", "Weekly pilot check-ins running (Rafeh)", "Launch comms + customer stories ready", "Pricing + invoicing decided"]}, {"name": "Production plumbing (CTO must-adds)", "icon": "\ud83d\udd27", "color": "#06b6d4", "items": ["Observability: Sentry + logs + uptime + status page + Slack alerts", "Resumable 2-year ingestion + Facebook rate-limit backoff + data-quality gate", "LLM circuit breaker + per-tenant spend cap + caching + streaming", "Secrets in a manager (not repo) + Dependabot + secret-scanning in CI", "Tested rollback + restore drill (RPO \u2264 24h / RTO \u2264 1h)", "Top-10 failure-mode runbook + on-call rota"]}, {"name": "Pilot ops, legal & freezes", "icon": "\ud83d\udccb", "color": "#f5a623", "items": ["Pilot agreement + DPA signed before any data flows (Filza)", "Manual invoicing process for 5 pilots \u2014 Stripe deferred (Jill)", "Support inbox + in-app feedback widget + Loom walkthrough", "Feature freeze (end Aug) + code freeze (mid-Sep) agreed", "Contingency cut-list agreed (drops to fast-follow if behind by mid-Sep)"]}, {"name": "Launch gate (go/no-go)", "icon": "\u2705", "color": "#0f9d58", "items": ["All 5 production pillars green on Rafeh scorecard", "UAT signed off with 5 pilots", "Rollback plan rehearsed", "War-room + incident comms ready", "Final go/no-go decision \u2014 Alex + Rafeh + Asad"]}], "later": {"intro": "Deliberately NOT in October \u2014 sequenced after 5 live pilots.", "waves": [["Fast-follow", "Public open signup (after Live Mode proven) \u00b7 Saved Insights \u00b7 scheduled reports + email digests"], ["Depth", "Advanced analytics \u00b7 audience segmentation \u00b7 self-hosted Art-E (10\u00d7 cheaper) \u00b7 Stripe billing"], ["The moat", "Discovery + cross-page graph \u00b7 structural intelligence layer \u00b7 public API/SDK \u00b7 video understanding"], ["Ongoing", "2FA / SOC 2 \u00b7 chaos engineering \u00b7 mobile/PWA + i18n \u00b7 proactive personalization"]]}};
+let state={};  // "g-i" -> bool
+let route='R1';
+
+function allKeys(){const k=[];L.groups.forEach((g,gi)=>g.items.forEach((_,ii)=>k.push(gi+'-'+ii)));return k;}
+function defaultState(){const s={};allKeys().forEach(k=>s[k]=false);return s;}
+function keyFor(o){return o==='team'?'launchpage:team':'launchpage:user:'+o;}
+async function load(o){try{const sh=o==='team';const r=await window.storage.get(keyFor(o),sh);if(r&&r.value)return JSON.parse(r.value);}catch(e){}return defaultState();}
+async function save(o,st){const sh=o==='team';setSave('Saving…');try{await window.storage.set(keyFor(o),JSON.stringify(st),sh);setSave('Saved ✓');}catch(e){setSave('Save failed');}}
+function setSave(t){document.getElementById('saveState').textContent=t;if(t==='Saved ✓')setTimeout(()=>document.getElementById('saveState').textContent='',1300);}
+function curOwner(){return document.getElementById('owner').value;}
+
+function countdown(){
+  const target=new Date('2026-10-31'); const now=new Date('2026-06-01');
+  const days=Math.round((target-now)/86400000);
+  const wks=Math.floor(days/7);
+  document.getElementById('countdown').innerHTML=
+    `<div class="cd"><div class="n">${wks}</div><div class="l">weeks left</div></div>
+     <div class="cd"><div class="n">${days}</div><div class="l">days left</div></div>
+     <div class="cd"><div class="n">7</div><div class="l">surfaces</div></div>
+     <div class="cd"><div class="n">5</div><div class="l">pilots</div></div>`;
+}
+function renderRoutes(){
+  document.getElementById('routes').innerHTML=L.routes.map(r=>`
+    <div class="route ${r.k===route?'active':''}" data-r="${r.k}">
+      <div class="rn">${r.name}</div>
+      <div class="rm"><span>lands <b>${r.lands}</b></span><span>buffer ${r.buffer}</span><span>${r.cost}</span></div>
+    </div>`).join('');
+  document.querySelectorAll('.route').forEach(el=>el.onclick=()=>{route=el.dataset.r;renderRoutes();});
+}
+function render(){
+  const grid=document.getElementById('grid');
+  grid.innerHTML=L.groups.map((g,gi)=>{
+    const done=g.items.filter((_,ii)=>state[gi+'-'+ii]).length;
+    const pct=Math.round(done/g.items.length*100);
+    return `<div class="gcard">
+      <div class="ghead"><div class="gicon" style="background:${g.color}22">${g.icon}</div>
+        <div class="gtitle">${g.name}</div><div class="gpct" style="color:${g.color}">${pct}%</div></div>
+      <div class="gbar"><i style="width:${pct}%;background:${g.color}"></i></div>
+      ${g.items.map((it,ii)=>{const d=state[gi+'-'+ii];return `<div class="item ${d?'done':''}" data-k="${gi}-${ii}">
+        <div class="box">${d?'✓':''}</div><div class="tx">${it}</div></div>`;}).join('')}
+    </div>`;}).join('');
+  grid.querySelectorAll('.item').forEach(el=>el.onclick=async()=>{
+    state[el.dataset.k]=!state[el.dataset.k];render();await save(curOwner(),state);});
+  updateOverall();
+}
+function updateOverall(){
+  const keys=allKeys(); const done=keys.filter(k=>state[k]).length;
+  const pct=Math.round(done/keys.length*100);
+  document.getElementById('overallPct').textContent=pct+'%';
+  document.getElementById('ringFill').style.strokeDashoffset=352*(1-pct/100);
+  document.getElementById('ringFill').style.stroke = pct>=85?'#34d399':(pct>=50?'#00D6AE':'#6d63ff');
+  // gate = last group (go/no-go)
+  const gi=L.groups.length-1; const g=L.groups[gi];
+  const gdone=g.items.filter((_,ii)=>state[gi+'-'+ii]).length; const gpct=Math.round(gdone/g.items.length*100);
+  document.getElementById('gatePct').textContent=gpct+'%';
+  const v=document.getElementById('gateVerdict');
+  if(gpct===100 && pct>=90){v.textContent='✓ GO — cleared for launch';v.style.color='#34d399';}
+  else if(pct>=70){v.textContent='Almost — close the gate items';v.style.color='#f5a623';}
+  else {v.textContent='Not ready — keep shipping';v.style.color='#8793ab';}
+}
+document.getElementById('owner').onchange=async()=>{state=await load(curOwner());render();};
+document.getElementById('resetBtn').onclick=async()=>{state=defaultState();render();await save(curOwner(),state);};
+
+countdown(); renderRoutes();
+// later/roadmap strip
+if(L.later){
+  document.getElementById('laterStrip').innerHTML = L.later.waves.map((w,i)=>{
+    const colors=['#00D6AE','#5b54f0','#8b5cf6','#f5a623'];
+    return `<div style="background:var(--panel);border:1px solid var(--line);border-top:3px solid ${colors[i]};border-radius:12px;padding:12px 14px">
+      <div style="font-size:11px;font-weight:800;color:${colors[i]}">${w[0]}</div>
+      <div style="font-size:9.5px;color:var(--mut);margin-top:5px;line-height:1.5">${w[1]}</div></div>`;
+  }).join('');
+}
+(async()=>{state=await load('team');render();})();
+</script>
+</body></html>
