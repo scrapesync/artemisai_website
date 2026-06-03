@@ -3959,7 +3959,12 @@ function exportAllSprintsExcel(){
    };
 ═══ */
 
-const SYNC_ENABLED = true;
+// Only attempt the shared-workspace backend when served over http(s) from a real host.
+// On file:// or localhost previews there is no path to AWS, so we skip sync entirely
+// (the page still works fully on localStorage) instead of logging a fetch failure.
+const _IS_LOCAL_PREVIEW = (location.protocol === 'file:') ||
+  ['localhost','127.0.0.1','0.0.0.0',''].includes(location.hostname);
+const SYNC_ENABLED = !_IS_LOCAL_PREVIEW;
 const WORKSPACE_ID = 'artemis';     // Shared workspace — everyone reads/writes the same record set
 const SYNC_USER_ID = WORKSPACE_ID;  // Legacy alias; kept so older code paths still work
 const API_BASE = 'https://g6zr0b5lwe.execute-api.eu-west-2.amazonaws.com/default/lambda_save';
@@ -4011,9 +4016,10 @@ async function syncLoadAll(){
     console.log('Loaded',items.length,'sprints from workspace');
     startPolling();
   }catch(e){
-    setSyncStatus('error','Load failed — using localStorage');
-    console.warn('Workspace load failed, using localStorage:',e);
-    startPolling(); // still try to recover via polling
+    setSyncStatus('error','Offline — saving locally');
+    console.info('Team-sync backend not reachable; using local storage (this is fine — your progress is saved on this device).');
+    // Don't hammer the backend every 8s while it's unreachable; retry once after 60s.
+    setTimeout(()=>{ try{ syncLoadAll(); }catch(_){} }, 60000);
   }
 }
 
