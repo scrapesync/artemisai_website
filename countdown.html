@@ -178,9 +178,10 @@ body{padding-top:52px!important}
   </div>
 
   <div class="routes">
-    <div class="route r1"><div class="rt">🚀 Route 1 · Faheem full-time + new AI engineer</div><div class="rd" id="r1date">~22 Sep 2026</div><div class="rs">projected arrival · ~5–6 weeks buffer before the deadline · ~£3k/mo</div></div>
-    <div class="route r2"><div class="rt">⚡ Route 2 · Only Faheem full-time</div><div class="rd" id="r2date">~18 Oct 2026</div><div class="rs">projected arrival · ~2 weeks buffer · lowest cash · ~£2k/mo</div></div>
+    <div class="route r1"><div class="rt">🚀 Route 1 · Faheem full-time + new AI engineer</div><div class="rd" id="r1date">~7 Oct 2026</div><div class="rs">projected arrival at current MVP scope · ~3 weeks buffer · ~£3k/mo</div></div>
+    <div class="route r2"><div class="rt">⚡ Route 2 · Only Faheem full-time</div><div class="rd" id="r2date" style="color:var(--coral)">~6 Nov 2026 ✗</div><div class="rs">at current scope this slips past October — focusing the MVP (see Launch Command) pulls it to ~10 Sep</div></div>
   </div>
+  <div style="text-align:center;font-size:11px;color:var(--mut);margin-top:10px;max-width:640px;margin-left:auto;margin-right:auto">Dates reflect the <b style="color:var(--ink)">current MVP scope (171 tickets)</b>. The MVP-focus decision can pull both routes into <b style="color:var(--ink)">Aug–Sep</b>. Scope, not engineering, is what now governs the date.</div>
 
   <div class="quick">
     <a class="qlink" href="launch_command.html">🎯 Launch Command</a>
@@ -193,7 +194,7 @@ body{padding-top:52px!important}
 <script>
 const LAUNCH=new Date('2026-10-31T18:00:00');   // committed deadline
 const KICKOFF=new Date('2026-01-19T00:00:00');
-const R1=new Date('2026-09-22'), R2=new Date('2026-10-18');
+const R1=new Date('2026-10-07'), R2=new Date('2026-11-06');
 function pad(n){return String(n).padStart(2,'0');}
 function tickClock(){
   const now=new Date();
@@ -230,12 +231,11 @@ function setup(){
   const mk=document.createElement('div'); mk.className='jmark'; mk.style.left=(doneFrac*100)+'%';
   mk.innerHTML='<span>● today</span>'; jb.appendChild(mk);
   // route markers
-  [['R1',R1,'#00e7bd'],['R2',R2,'#7d74ff']].forEach(([lbl,dt,col])=>{
-    const fr=(dt-KICKOFF)/total; const m=document.createElement('div'); m.className='jmark'; m.style.left=(fr*100)+'%'; m.style.background=col;
+  // route markers on the journey bar (R2 may sit past the deadline)
+  [['R1',R1,'#00e7bd'],['R2',R2,'#ff6f61']].forEach(([lbl,dt,col])=>{
+    const fr=Math.min(1,(dt-KICKOFF)/total); const m=document.createElement('div'); m.className='jmark'; m.style.left=(fr*100)+'%'; m.style.background=col;
     m.innerHTML=`<span style="color:${col};top:auto;bottom:-18px">${lbl}</span>`; jb.appendChild(m);
   });
-  document.getElementById('r1date').textContent='~'+R1.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-  document.getElementById('r2date').textContent='~'+R2.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
 }
 tickClock(); setInterval(tickClock,1000); setup();
 </script>

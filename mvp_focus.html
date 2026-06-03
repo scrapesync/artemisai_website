@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtemisAI · MVP Focus — Alex's Plan vs Scope</title>
+<style>
+  :root{ --bg:#070b13; --panel:#0e1422; --panel2:#151d30; --line:#202a44; --ink:#e9eef8; --mut:#8492ab;
+    --teal:#00D6AE; --indigo:#6d63ff; --amber:#f5a623; --coral:#ff6b5e; --green:#34d399; --violet:#a78bfa; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'DM Sans','Outfit',Arial,sans-serif;background:
+    radial-gradient(1000px 560px at 88% -8%, rgba(109,99,255,.13), transparent 60%),
+    radial-gradient(820px 460px at -8% 108%, rgba(0,214,174,.10), transparent 55%), var(--bg);
+    color:var(--ink); min-height:100vh; padding:24px 22px 80px; line-height:1.5;}
+  .wrap{max-width:1000px;margin:0 auto}
+  .logo{font-weight:900;letter-spacing:2px;font-size:11px}.logo b{color:var(--teal)}
+  .eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-top:14px}
+  h1{font-size:26px;font-weight:900;margin-top:4px;letter-spacing:-.4px}
+  .lead{color:var(--mut);font-size:13px;margin-top:8px;max-width:62em}
+  .lead b{color:var(--ink)}
+  .for{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;color:var(--mut);background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:5px 13px}
+  h2{font-size:16px;font-weight:800;margin:26px 0 10px;display:flex;align-items:center;gap:9px}
+  h2 .n{width:24px;height:24px;border-radius:7px;background:var(--teal);color:#05221c;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:900}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+  .core{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .core .it{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:9px;padding:11px 13px}
+  .core .it b{font-size:13px}.core .it span{font-size:11px;color:var(--mut);display:block;margin-top:2px}
+  .chk{font-size:8px;font-weight:800;padding:1px 7px;border-radius:10px;background:rgba(52,211,153,.16);color:var(--green);margin-left:6px}
+  /* timeline compare */
+  .tl{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+  .tlbox{border:1px solid var(--line);border-radius:13px;padding:15px 17px}
+  .tlbox.now{border-color:rgba(255,107,94,.4);background:linear-gradient(160deg,rgba(255,107,94,.06),transparent)}
+  .tlbox.lean{border-color:rgba(52,211,153,.4);background:linear-gradient(160deg,rgba(52,211,153,.06),transparent)}
+  .tlbox h3{font-size:13px;font-weight:800;margin-bottom:3px}
+  .tlbox .sz{font-size:11px;color:var(--mut);margin-bottom:10px}
+  .rt{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-top:1px solid var(--line);font-size:12px}
+  .rt .d{font-weight:800}
+  .ok{color:var(--green)} .bad{color:var(--coral)} .warn{color:var(--amber)}
+  table{border-collapse:collapse;width:100%;font-size:12px;margin-top:4px}
+  th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  .pill{font-size:8px;font-weight:800;padding:1px 7px;border-radius:10px;white-space:nowrap}
+  .mvp{background:rgba(0,214,174,.16);color:var(--teal)} .fast{background:rgba(245,166,35,.16);color:var(--amber)} .later{background:rgba(167,139,250,.16);color:var(--violet)} .keep{background:rgba(52,211,153,.16);color:var(--green)}
+  .rec{font-weight:700}
+  .decision{background:linear-gradient(160deg,#101a2e,#0c1322);border:1px solid var(--indigo);border-radius:14px;padding:16px 18px;margin-top:8px}
+  .decision h3{font-size:13px;font-weight:800;color:var(--indigo);margin-bottom:8px}
+  .q{font-size:12px;padding:7px 0;border-top:1px solid var(--line)}
+  .q b{color:var(--ink)}
+  ul{margin:6px 0 0 18px}li{font-size:12px;margin-bottom:4px;color:var(--mut)}li b{color:var(--ink)}
+  .foot{font-size:11px;color:var(--mut);margin-top:18px;border-top:1px solid var(--line);padding-top:12px}
+  @media(max-width:720px){.core,.tl{grid-template-columns:1fr}h1{font-size:21px}body{padding:16px 13px 70px}table{font-size:11px}}
+
+/* ===== shared site header (sn-*) — matches other ArtemisAI pages ===== */
+nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}
+nav.site-nav *{box-sizing:border-box}
+.sn-logo{font-size:1rem;font-weight:800;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.55rem;flex-shrink:0}
+.sn-logo-mark{width:26px;height:26px;flex-shrink:0}.sn-logo-mark svg{width:100%;height:100%}
+.sn-links{display:flex;align-items:center;gap:1rem;list-style:none;margin:0;padding:0}
+.sn-pill{padding:.4rem 1rem;border:1px solid rgba(0,212,170,.3);border-radius:7px;color:#00d4aa!important;font-size:.8rem;text-decoration:none;background:transparent;transition:all .2s;white-space:nowrap}
+.sn-pill:hover{background:rgba(0,212,170,.07)!important;border-color:rgba(0,212,170,.6)!important}
+.sn-chip{display:none;align-items:center;gap:7px;padding:.28rem .8rem .28rem .4rem;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);border-radius:20px}
+.sn-avatar{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#00d4aa,#6366f1);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#060a13;flex-shrink:0}
+.sn-name{font-size:.78rem;color:#e8ecf4;font-weight:600}
+.sn-logout{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.8rem;padding:.26rem .6rem;cursor:pointer;transition:all .2s}
+.sn-logout:hover{border-color:rgba(248,113,113,.4);color:#f87171}
+#signout-modal{display:none;position:fixed;inset:0;z-index:99998;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif}
+#signout-modal.open{display:flex}
+#signout-backdrop{position:absolute;inset:0;background:rgba(2,5,12,.7);backdrop-filter:blur(4px)}
+#signout-card{position:relative;z-index:1;background:#0f1729;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem 2rem;max-width:340px;width:90%;box-shadow:0 30px 60px rgba(0,0,0,0.5);text-align:center}
+.signout-icon svg{width:34px;height:34px;stroke:#f87171;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-bottom:.5rem}
+.signout-title{font-size:1.05rem;font-weight:800;color:#e8ecf4}
+.signout-sub{font-size:.82rem;color:#8a96ad;margin:.4rem 0 1.1rem}
+.signout-btns{display:flex;gap:8px}
+.signout-cancel{flex:1;padding:.6rem;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:9px;color:#cdd5ee;font-family:inherit;font-size:.82rem;cursor:pointer}
+.signout-confirm{flex:1;padding:.6rem;background:#f87171;border:none;border-radius:9px;color:#2a0a0a;font-family:inherit;font-weight:700;font-size:.82rem;cursor:pointer}
+body{padding-top:52px!important}
+@media(max-width:768px){nav.site-nav{height:48px!important;padding:0 12px!important}.sn-pill{padding:.3rem .75rem!important;font-size:.7rem!important}.sn-name{max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}body{padding-top:48px!important}}
+
+</style></head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="sn-logo">
+    <div class="sn-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#slg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#slg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#slg)"/><defs><linearGradient id="slg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
+    ARTEMISAI
+  </a>
+  <ul class="sn-links">
+    <li><a href="admin_panel.html" class="sn-pill">&larr; Admin Panel</a></li>
+    <li><div class="sn-chip" id="sn-chip" style="display:none"><div class="sn-avatar" id="sn-avatar">?</div><span class="sn-name" id="sn-name"></span></div></li>
+    <li><button class="sn-logout" id="sn-logout-btn" onclick="handleLogout()" style="display:none">&#9211;</button></li>
+  </ul>
+</nav>
+<div id="signout-modal">
+  <div id="signout-backdrop" onclick="_closeSignoutModal()"></div>
+  <div id="signout-card">
+    <div class="signout-icon"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+    <div class="signout-title">Sign out?</div>
+    <div class="signout-sub">You'll need to sign back in to access the Admin Panel.</div>
+    <div class="signout-btns"><button class="signout-cancel" onclick="_closeSignoutModal()">Cancel</button><button class="signout-confirm" onclick="_doSignout()">Sign Out</button></div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="logo">ARTEMIS<b>AI</b></div>
+  <div class="eyebrow">One-pager · Product Focus</div>
+  <h1>Alex's "Path to Simplicity" vs Current MVP Scope</h1>
+  <div class="lead">Alex's note argues <b>less features, more intelligence</b> — get our first users genuine value with zero friction, and give them a reason to invite others. This page reconciles his core MVP against what's currently tagged MVP, shows the <b>timeline impact</b>, and lists the decisions for <b>Asad (CTO), Alex (CEO) and Rafeh (PM)</b> to make together.</div>
+  <span class="for">Owners of this decision: Asad · Alex · Rafeh</span>
+
+  <h2><span class="n">1</span>Alex's core MVP — and it already aligns</h2>
+  <div class="card">
+    <div class="core">
+      <div class="it"><b>Art-E — grounded Q&A<span class="chk">MVP ✓</span></b><span>The explainer + predictor. Takes the stress off the user; no graph-reading required.</span></div>
+      <div class="it"><b>Alerts → act now<span class="chk">MVP ✓</span></b><span>"This is happening" — positive (viral) / negative (brand risk). The watch-your-back promise.</span></div>
+      <div class="it"><b>Intelligence feed<span class="chk">MVP ✓</span></b><span>Audience, content, mood — "this is what happened, this is what to do".</span></div>
+      <div class="it"><b>Optimal timing<span class="chk">MVP ✓</span></b><span>When to post — explained by Art-E if needed.</span></div>
+      <div class="it"><b>Virality & predictions<span class="chk">MVP ✓</span></b><span>Predicted score + reach before posting.</span></div>
+      <div class="it"><b>Discovery (preview)<span class="chk">MVP ✓ now</span></b><span>View-only page + invite hook. Full matching/collab engine stays Phase-2.</span></div>
+    </div>
+    <div style="font-size:12px;color:var(--mut);margin-top:12px">Flow he drew — <b style="color:var(--ink)">Connect (OAuth) → Artemis pipelines (OCR/NLP) → Art-E welcome → 2-year analysis → {Virality · Intelligence feed + Discovery · Alerts to phone}</b> — is exactly the foundation→OAuth→Art-E chain we built. <b style="color:var(--green)">His five must-haves are all already MVP.</b> The disagreement isn't direction — it's <b style="color:var(--ink)">how much else rides alongside them.</b></div>
+  </div>
+
+  <h2><span class="n">2</span>The timeline impact — this is the real reason to focus</h2>
+  <div class="tl">
+    <div class="tlbox now">
+      <h3 style="color:var(--coral)">Current MVP scope</h3>
+      <div class="sz">171 MVP tickets · everything currently tagged MVP</div>
+      <div class="rt"><span>Route 1 · Faheem + new AI engineer</span><span class="d warn">~7 Oct</span></div>
+      <div class="rt"><span>Route 2 · Faheem only</span><span class="d bad">~6 Nov ✗</span></div>
+      <div style="font-size:11px;color:var(--coral);margin-top:9px">Route 2 (no new hire) now <b>misses the October deadline</b>, and Route 1's buffer is down to ~3 weeks.</div>
+    </div>
+    <div class="tlbox lean">
+      <h3 style="color:var(--green)">Lean — Alex's core</h3>
+      <div class="sz">~114 MVP tickets · his five + the infra/legal that must ship</div>
+      <div class="rt"><span>Route 1 · Faheem + new AI engineer</span><span class="d ok">~22 Aug</span></div>
+      <div class="rt"><span>Route 2 · Faheem only</span><span class="d ok">~10 Sep</span></div>
+      <div style="font-size:11px;color:var(--green);margin-top:9px">Both routes land comfortably — <b>even the no-new-hire route has ~7 weeks buffer</b>. Cutting ~57 tickets buys back the whole risk margin.</div>
+    </div>
+  </div>
+  <div style="font-size:11px;color:var(--mut);margin-top:8px">Estimates from the board's two-route capacity model (~1 engineer-day/ticket). The point isn't the exact dates — it's that <b style="color:var(--ink)">scope, not engineering, is what now threatens October.</b></div>
+
+  <h2><span class="n">3</span>Candidates to cut from MVP → Fast-follow</h2>
+  <div class="card" style="padding:6px 14px">
+    <table>
+      <thead><tr><th>Feature</th><th>Now</th><th>Recommendation</th><th>Why it can wait</th></tr></thead>
+      <tbody>
+        <tr><td>Drafts — inline virality score</td><td><span class="pill mvp">MVP</span></td><td class="rec" style="color:var(--amber)">→ Fast-follow</td><td>The Predictions surface already exposes the virality model; the in-editor version is a delighter, not core. (Cut-order #2.)</td></tr>
+        <tr><td>Settings — Billing & Integrations tabs</td><td><span class="pill mvp">MVP</span></td><td class="rec" style="color:var(--amber)">→ Fast-follow</td><td>Keep Account / Notifications / Art-E / Data tabs. Billing is manual at 5 pilots; integrations are Phase-2.</td></tr>
+        <tr><td>Benchmark vs category</td><td><span class="pill fast">FAST</span></td><td class="rec ok">Already fast ✓</td><td>Needs category baselines that mature with data. Good post-launch.</td></tr>
+        <tr><td>Date-range / post comparison</td><td><span class="pill fast">FAST</span></td><td class="rec ok">Already fast ✓</td><td>Enhancement on the core charts.</td></tr>
+        <tr><td>Post detail drill-down</td><td><span class="pill mvp">MVP</span></td><td class="rec" style="color:var(--green)">Keep (lite)</td><td>Alex wants content analysis — keep a basic drill-down; defer the heavy version.</td></tr>
+        <tr><td>Image / video understanding</td><td><span class="pill mvp">MVP</span></td><td class="rec" style="color:var(--green)">Keep image · video already later</td><td>Image enriches Art-E + analysis (Alex's content analysis). Video is already Phase-2.</td></tr>
+        <tr><td>Onboarding tour, empty/error states, accessibility</td><td><span class="pill mvp">MVP</span></td><td class="rec" style="color:var(--green)">Keep</td><td>These <i>are</i> Alex's "zero friction" — they reduce friction, so they stay.</td></tr>
+        <tr><td>Tenant isolation, monitoring, security, GDPR/cookie</td><td><span class="pill mvp">MVP</span></td><td class="rec" style="color:var(--green)">Keep (non-negotiable)</td><td>Alex assumes the engine just works. These are what make that true — never cut.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="font-size:11px;color:var(--mut);margin-top:6px">Trimming Drafts + the heavier surface/settings work (not the infra) is what moves 171 → ~114 and restores the buffer above.</div>
+
+  <h2><span class="n">4</span>Two things Alex treats as MVP that we currently defer</h2>
+  <div class="card">
+    <ul style="margin-left:16px">
+      <li><b>"Direct to phone" alerts.</b> Alex wants the alert pushed to the phone in the MVP. We have crisis <i>detection</i> as MVP but the push <i>channel</i> (email/SMS/WhatsApp) as Fast/Later. <b style="color:var(--ink)">Decision:</b> if "act now on your phone" is core, move at least email/push delivery into MVP (~3–4d).</li>
+      <li><b>Audience breakdowns.</b> He implies audience analysis at launch; we have basic mood/content as MVP but <b>audience segmentation & demographics as Later</b>. <b style="color:var(--ink)">Decision:</b> agree how much audience depth is "MVP" — a light demographic snapshot vs full behavioural segments.</li>
+    </ul>
+  </div>
+
+  <h2><span class="n">5</span>Gamification — added, staged Later</h2>
+  <div class="card">
+    <div style="font-size:12px;color:var(--mut)">Alex's variable-rewards thinking is now a tracked <b style="color:var(--ink)">"Engagement &amp; Rewards"</b> category (5 features): achievement scores + mastery, social validation (star/save pages), variable reward feed, rewards-of-the-hunt, and Art-E suggestion completion/streaks — all <span class="pill later">LATER</span> per the team call. <b style="color:var(--ink)">One to revisit:</b> Alex frames variable rewards as the <i>invite-loop</i> driver, so a light <b>social-validation / starring</b> mechanic might deserve to ride alongside the Discovery preview rather than wait.</div>
+  </div>
+
+  <div class="decision">
+    <h3>⚑ Decisions for Asad · Alex · Rafeh</h3>
+    <div class="q"><b>1. Focus the MVP?</b> Adopt Alex's lean core (cut Drafts + heavy surface/settings work → ~114 tickets) to buy back ~7 weeks of buffer and keep Route 2 viable.</div>
+    <div class="q"><b>2. Push-to-phone:</b> in MVP or fast-follow?</div>
+    <div class="q"><b>3. Audience depth:</b> light demographic snapshot at launch, or keep full segmentation as Phase-2?</div>
+    <div class="q"><b>4. One gamification piece (social validation) alongside Discovery preview</b> for the invite loop — yes or hold?</div>
+    <div class="q"><b>5. Hire decision:</b> Route 1 (new AI engineer, +£1k/mo) gives margin even at fuller scope; Route 2 only works if we focus. Tie this to decision 1.</div>
+  </div>
+
+  <div class="foot">Sources: Alex's "Path to Simplicity and MVP" note (4 pages) + the live dependency tree (118 capabilities) and MVP scoping board (458 tickets). Dates are planning estimates from the two-route model, not commitments — Rafeh to confirm the cut-list and Faheem/Asad to size the survivors. Nothing here has been silently re-tagged; the cuts are proposals for this meeting.</div>
+</div>
+<script>
+(function(){
+  try{
+    var sess = localStorage.getItem('artemis_session') || localStorage.getItem('artemis_sprint_session') || localStorage.getItem('artemis_app_session');
+    if(sess){
+      var user = JSON.parse(sess);
+      var chip=document.getElementById('sn-chip'), av=document.getElementById('sn-avatar'), nm=document.getElementById('sn-name'), lb=document.getElementById('sn-logout-btn');
+      if(chip) chip.style.display='flex';
+      var who=user.name||user.username||'';
+      if(av && who) av.textContent=who.charAt(0).toUpperCase();
+      if(nm && who) nm.textContent=who;
+      if(lb) lb.style.display='';
+    }
+  }catch(e){}
+})();
+var _signoutFn=null;
+function handleLogout(){_showSignoutModal(function(){localStorage.removeItem('artemis_session');localStorage.removeItem('artemis_sprint_session');localStorage.removeItem('artemis_app_session');localStorage.removeItem('artemis_viewer_name');window.location.href='index.html';});}
+function _showSignoutModal(fn){_signoutFn=fn||function(){localStorage.removeItem('artemis_session');window.location.href='index.html';};document.getElementById('signout-modal').classList.add('open');}
+function _closeSignoutModal(){document.getElementById('signout-modal').classList.remove('open');}
+function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
+</script>
+
+</body></html>
