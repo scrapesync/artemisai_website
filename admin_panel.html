@@ -556,6 +556,23 @@ h1 span{
       <span class="dest-tag">Oct 2026</span>
     </a>
 
+    <a href="dependency_tree.html" class="dest-card" style="--cc:#a78bfa;--ci:rgba(167,139,250,0.08);--cb:rgba(167,139,250,0.2)">
+      <span class="dest-arrow">↗</span>
+      <div class="dest-icon" style="overflow:hidden">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="6" cy="6" r="3" fill="#a78bfa"/><circle cx="6" cy="22" r="3" fill="#a78bfa" opacity="0.6"/>
+          <circle cx="22" cy="9" r="3" fill="#00d4aa"/><circle cx="22" cy="20" r="3" fill="#00d4aa" opacity="0.7"/>
+          <path d="M9 6.5 C 15 7, 16 9, 19 9" stroke="#a78bfa" stroke-width="1.4" fill="none"/>
+          <path d="M9 21 C 15 20, 16 20, 19 20" stroke="#a78bfa" stroke-width="1.4" fill="none" opacity="0.6"/>
+          <path d="M9 7 C 14 12, 16 18, 19 19.5" stroke="#6366f1" stroke-width="1.2" fill="none" opacity="0.7"/>
+        </svg>
+      </div>
+      <div class="dest-title">Master Plan</div>
+      <div class="dest-desc">The single source of truth — every capability we're building, mapped end to end. 218 features across 20 categories, each tagged MVP / fast-follow / later, slotted into its sprint, with every dependency wired up. Click any node for detail.</div>
+      <span class="dest-tag">218 capabilities</span>
+      <span class="dest-tag">source of truth</span>
+    </a>
+
     <a href="mvp_focus.html" class="dest-card" style="--cc:#6d63ff;--ci:rgba(109,99,255,0.10);--cb:rgba(109,99,255,0.28)">
       <span class="dest-arrow">↗</span>
       <div class="dest-icon" style="overflow:hidden">
@@ -780,24 +797,6 @@ h1 span{
       <span class="dest-tag">drag &amp; drop</span>
       <span class="dest-tag">delivery date</span>
     </a>
-
-    <a href="dependency_tree.html" class="dest-card" style="--cc:#a78bfa;--ci:rgba(167,139,250,0.08);--cb:rgba(167,139,250,0.2)">
-      <span class="dest-arrow">↗</span>
-      <div class="dest-icon" style="overflow:hidden">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="6" cy="6" r="3" fill="#a78bfa"/><circle cx="6" cy="22" r="3" fill="#a78bfa" opacity="0.6"/>
-          <circle cx="22" cy="9" r="3" fill="#00d4aa"/><circle cx="22" cy="20" r="3" fill="#00d4aa" opacity="0.7"/>
-          <path d="M9 6.5 C 15 7, 16 9, 19 9" stroke="#a78bfa" stroke-width="1.4" fill="none"/>
-          <path d="M9 21 C 15 20, 16 20, 19 20" stroke="#a78bfa" stroke-width="1.4" fill="none" opacity="0.6"/>
-          <path d="M9 7 C 14 12, 16 18, 19 19.5" stroke="#6366f1" stroke-width="1.2" fill="none" opacity="0.7"/>
-        </svg>
-      </div>
-      <div class="dest-title">Dependency Tree</div>
-      <div class="dest-desc">Connected-tree view of how the work links up: which sprint ticket builds which mockup feature, which sprint is a prerequisite of which, and which feature depends on which. Click any node for detail.</div>
-      <span class="dest-tag">sprint ↔ feature</span>
-      <span class="dest-tag">prerequisites</span>
-    </a>
-</a>
   </div>
   <div class="signout-row">
     <button class="signout-btn" onclick="doLogout()">⏻ Sign Out</button>
@@ -892,5 +891,35 @@ function _doSignout(){
 }
 function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
 </script>
+<style>
+.af-footer{margin-top:56px;padding:30px 1.6rem;border-top:1px solid rgba(255,255,255,.07);background:rgba(6,10,19,.45);font-family:'DM Sans','Outfit',system-ui,sans-serif}
+.af-footer-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.af-brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.12em;color:#e8ecf4;font-size:.9rem}
+.af-brand svg{width:24px!important;height:24px!important;min-width:0!important;flex-shrink:0}
+.af-copy{font-size:.8rem;color:#7c89a3}
+.af-links{display:flex;gap:20px;flex-wrap:wrap}
+.af-links a{font-size:.8rem;color:#9aa6bd;text-decoration:none;transition:color .2s}
+.af-links a:hover{color:#00d4aa}
+html[data-theme="light"] .af-footer{background:#ffffff;border-top:1px solid rgba(0,0,0,.08)}
+html[data-theme="light"] .af-brand{color:#0b1b18}
+html[data-theme="light"] .af-copy{color:#65676B}
+html[data-theme="light"] .af-links a{color:#65676B}
+html[data-theme="light"] .af-links a:hover{color:#00A085}
+@media(max-width:640px){.af-footer-in{flex-direction:column;text-align:center;gap:12px}.af-footer{margin-top:40px}}
+</style>
+<footer class="af-footer">
+  <div class="af-footer-in">
+    <div class="af-brand">
+      <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#aflg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#aflg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#aflg)"/><defs><linearGradient id="aflg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
+      ARTEMISAI
+    </div>
+    <div class="af-copy">&copy; 2026 Artemis AI &middot; Internal preview</div>
+    <div class="af-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="mailto:hello@artemisai.co.uk">Contact</a>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
