@@ -121,7 +121,7 @@ body{padding-top:52px!important}
   <div class="logo">ARTEMIS<b>AI</b></div>
   <div class="eyebrow">Mission Control · Road to Launch</div>
   <h1>Countdown to MVP Launch</h1>
-  <div class="target">Target window: <b>October 2026</b> · committed deadline <b>31 Oct 2026</b></div>
+  <div class="target">Target window: <b>Late November 2026</b> · committed deadline <b>28 Nov 2026</b></div>
 
   <div class="clock" id="clock">
     <div class="unit"><div class="n" id="d">--</div><div class="l">Days</div></div>
@@ -138,7 +138,7 @@ body{padding-top:52px!important}
         <circle id="ringFill" cx="75" cy="75" r="66" fill="none" stroke="url(#rg)" stroke-width="13" stroke-linecap="round" stroke-dasharray="414.7" stroke-dashoffset="414.7"/>
         <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00e7bd"/><stop offset="1" stop-color="#7d74ff"/></linearGradient></defs>
       </svg>
-      <div class="mid"><div class="pct" id="pct">12%</div><div class="pl">plan complete</div></div>
+      <div class="mid"><div class="pct" id="pct">22%</div><div class="pl">plan complete</div></div>
     </div>
     <div class="statcols">
       <div class="stat"><div class="v" style="color:var(--green)">5 / 23</div><div class="k">sprints done</div></div>
@@ -151,7 +151,7 @@ body{padding-top:52px!important}
   <div class="journey">
     <h3>📍 Where we are on the road</h3>
     <div class="jbar" id="jbar"></div>
-    <div class="jlabels"><span>Jan 2026 · kickoff</span><span>Today</span><span>Oct 2026 · launch</span></div>
+    <div class="jlabels"><span>Jan 2026 · kickoff</span><span>Today</span><span>Late Nov 2026 · launch</span></div>
   </div>
 
   <div class="two">
@@ -178,23 +178,21 @@ body{padding-top:52px!important}
   </div>
 
   <div class="routes">
-    <div class="route r1"><div class="rt">🚀 Route 1 · Faheem full-time + new AI engineer</div><div class="rd" id="r1date">~7 Oct 2026</div><div class="rs">projected arrival at current MVP scope · ~3 weeks buffer · ~£3k/mo</div></div>
-    <div class="route r2"><div class="rt">⚡ Route 2 · Only Faheem full-time</div><div class="rd" id="r2date" style="color:var(--coral)">~6 Nov 2026 ✗</div><div class="rs">at current scope this slips past October — focusing the MVP (see Launch Command) pulls it to ~10 Sep</div></div>
+    <div class="route r1"><div class="rt">🚀 Decided route · Faheem full-time + new AI engineer</div><div class="rd" id="r1date">~28 Nov 2026</div><div class="rs">projected arrival for the full MVP — 258 build-days / 218 features in the Master Plan · the new hire is what makes late November reachable · ~£3k/mo</div></div>
   </div>
-  <div style="text-align:center;font-size:11px;color:var(--mut);margin-top:10px;max-width:640px;margin-left:auto;margin-right:auto">Dates reflect the <b style="color:var(--ink)">current MVP scope (171 tickets)</b>. The MVP-focus decision can pull both routes into <b style="color:var(--ink)">Aug–Sep</b>. Scope, not engineering, is what now governs the date.</div>
+  <div style="text-align:center;font-size:11px;color:var(--mut);margin-top:10px;max-width:660px;margin-left:auto;margin-right:auto">Dates reflect the <b style="color:var(--ink)">locked MVP scope (258 build-days, 218 features in the Master Plan)</b>. Late November is the committed ceiling — it holds on this route if the new engineer ramps fast and nothing major slips. Faheem-only would slip into December.</div>
 
   <div class="quick">
     <a class="qlink" href="launch_command.html">🎯 Launch Command</a>
-    <a class="qlink" href="mvp_proposal_board.html">🗂️ MVP Scoping Board</a>
-    <a class="qlink" href="dependency_tree.html">🔗 Dependency Tree</a>
+    <a class="qlink" href="dependency_tree.html">🔗 Master Plan</a>
     <a class="qlink" href="sprint_tracker.html">📅 Sprint Tracker</a>
   </div>
 </div>
 
 <script>
-const LAUNCH=new Date('2026-10-31T18:00:00');   // committed deadline
+const LAUNCH=new Date('2026-11-28T18:00:00');   // committed deadline (late November ceiling)
 const KICKOFF=new Date('2026-01-19T00:00:00');
-const R1=new Date('2026-10-07'), R2=new Date('2026-11-06');
+const R1=new Date('2026-11-28');
 function pad(n){return String(n).padStart(2,'0');}
 function tickClock(){
   const now=new Date();
@@ -214,7 +212,7 @@ function tickClock(){
 }
 function setup(){
   // ring 12%
-  const pct=12; const C=414.7;
+  const pct=22; const C=414.7;
   document.getElementById('ringFill').style.transition='stroke-dashoffset 1.4s ease';
   setTimeout(()=>{document.getElementById('ringFill').style.strokeDashoffset=C*(1-pct/100);},150);
   // journey bar — proportion of calendar time elapsed kickoff→launch, plus phase segments
@@ -222,8 +220,8 @@ function setup(){
   const total=LAUNCH-KICKOFF; const doneFrac=Math.min(1,Math.max(0,(now-KICKOFF)/total));
   const segs=[['Foundation',(new Date('2026-06-13')-KICKOFF)/total,'#3ee08a'],
               ['Intelligence',(new Date('2026-08-30')-new Date('2026-06-13'))/total,'#7d74ff'],
-              ['Product + LLM',(new Date('2026-10-08')-new Date('2026-08-30'))/total,'#00e7bd'],
-              ['Launch',(LAUNCH-new Date('2026-10-08'))/total,'#ffb13b']];
+              ['Product + LLM',(new Date('2026-11-07')-new Date('2026-08-30'))/total,'#00e7bd'],
+              ['Launch',(LAUNCH-new Date('2026-11-07'))/total,'#ffb13b']];
   let bar='';
   segs.forEach(([nm,fr,col])=>{bar+=`<div class="jseg" style="width:${fr*100}%;background:${col}">${fr>0.12?nm:''}</div>`;});
   const jb=document.getElementById('jbar'); jb.innerHTML=bar;
@@ -232,7 +230,7 @@ function setup(){
   mk.innerHTML='<span>● today</span>'; jb.appendChild(mk);
   // route markers
   // route markers on the journey bar (R2 may sit past the deadline)
-  [['R1',R1,'#00e7bd'],['R2',R2,'#ff6f61']].forEach(([lbl,dt,col])=>{
+  [['MVP',R1,'#00e7bd']].forEach(([lbl,dt,col])=>{
     const fr=Math.min(1,(dt-KICKOFF)/total); const m=document.createElement('div'); m.className='jmark'; m.style.left=(fr*100)+'%'; m.style.background=col;
     m.innerHTML=`<span style="color:${col};top:auto;bottom:-18px">${lbl}</span>`; jb.appendChild(m);
   });
