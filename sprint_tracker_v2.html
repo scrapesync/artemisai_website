@@ -702,6 +702,25 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
     justify-content: stretch !important;
   }
   .tab-bar-title { display: none !important; }
+  .tab-bar-left {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    gap: 0 !important;
+    order: -1 !important;
+  }
+  .tab-bar-left .gstage {
+    width: 100% !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+  }
+  .tab-bar-left .gstage-chip {
+    flex: 1 1 0 !important;
+    justify-content: center !important;
+    padding: 7px 4px !important;
+    min-height: 34px !important;
+  }
+  .tab-bar-left .gstage-chip span:first-child { display: inline !important; }
+  .tab-bar-left .gstage-chip { font-size: 9px !important; }
   .tab-bar-tabs {
     flex: 1 1 100% !important;
     width: 100% !important;
