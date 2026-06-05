@@ -190,6 +190,23 @@ nav.site-nav *{box-sizing:border-box}
 body{padding-top:52px!important}
 @media(max-width:768px){nav.site-nav{height:48px!important;padding:0 12px!important}.sn-pill{padding:.3rem .75rem!important;font-size:.7rem!important}.sn-name{max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}body{padding-top:48px!important}}
 
+
+/* ===== shared site footer (af-*) — matches ArtemisAI pages ===== */
+.af-footer{margin-top:56px;padding:30px 1.6rem;border-top:1px solid rgba(255,255,255,.07);background:rgba(6,10,19,.45);font-family:'DM Sans','Outfit',system-ui,sans-serif}
+.af-footer-in{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.af-brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.12em;color:#e8ecf4;font-size:.9rem}
+.af-brand svg{width:24px!important;height:24px!important;min-width:0!important;flex-shrink:0}
+.af-copy{font-size:.8rem;color:#7c89a3}
+.af-links{display:flex;gap:20px;flex-wrap:wrap}
+.af-links a{font-size:.8rem;color:#9aa6bd;text-decoration:none;transition:color .2s}
+.af-links a:hover{color:#00d4aa}
+html[data-theme="light"] .af-footer{background:#ffffff;border-top:1px solid rgba(0,0,0,.08)}
+html[data-theme="light"] .af-brand{color:#0b1b18}
+html[data-theme="light"] .af-copy{color:#65676B}
+html[data-theme="light"] .af-links a{color:#65676B}
+html[data-theme="light"] .af-links a:hover{color:#00A085}
+@media(max-width:640px){.af-footer-in{flex-direction:column;text-align:center;gap:12px}.af-footer{margin-top:40px}}
+
 </style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RCP8LMKYK"></script>
@@ -524,6 +541,22 @@ function _showSignoutModal(fn){_signoutFn=fn||function(){localStorage.removeItem
 function _closeSignoutModal(){document.getElementById('signout-modal').classList.remove('open');}
 function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
 </script>
+
+
+<footer class="af-footer">
+  <div class="af-footer-in">
+    <div class="af-brand">
+      <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#aflg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#aflg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#aflg)"/><defs><linearGradient id="aflg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
+      ARTEMISAI
+    </div>
+    <div class="af-copy">&copy; 2026 Artemis AI &middot; Internal preview</div>
+    <div class="af-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="mailto:hello@artemisai.co.uk">Contact</a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
