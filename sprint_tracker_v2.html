@@ -1026,6 +1026,7 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 @media (max-width: 360px) {
   /* Smallest phones (iPhone SE 1st gen) */
   .tab-btn { padding: 6px 10px !important; font-size: 11px !important; }
+  .flow-two-col { grid-template-columns: 1fr !important; }
   .strat-kpis { grid-template-columns: 1fr !important; }
 }
 
@@ -2265,6 +2266,7 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
     <button class="tab-btn" onclick="switchTab('sprint',event)">Sprint Tracker</button>
     <button class="tab-btn" onclick="switchTab('mockup',event)">Mockup Alignment</button>
     <button class="tab-btn" onclick="switchTab('bystage',event)">By Stage</button>
+    <button class="tab-btn" onclick="switchTab('flow',event)">Flow &amp; Risk</button>
     <button class="tab-btn" onclick="switchTab('performance',event)">Performance</button>
   </div>
   <div style="display:flex;align-items:center;gap:8px;justify-self:end;">
@@ -2497,6 +2499,7 @@ function switchTab(tab,e){
   if(tab==='mockup')renderMockupPage();
   if(tab==='performance')renderPerformancePage();
   if(tab==='bystage')renderByStagePage();
+  if(tab==='flow')renderFlowPage();
 }
 
 function renderSprintTrackBar(){
@@ -3921,6 +3924,184 @@ function perfPersonCard(person){
     </div>`;
 }
 
+function renderFlowPage(){
+  const el = document.getElementById('flow-content');
+  if(!el) return;
+
+  // ---- gather MVP tickets across S6-S23 ----
+  const mvp = [];
+  Object.keys(SPRINT_DATA).forEach(sn=>{
+    SPRINT_DATA[sn].forEach(t=>{ if(t.stage==='mvp') mvp.push(Object.assign({sprint:sn}, t)); });
+  });
+  const total = mvp.length;
+  const doneCount = mvp.filter(t=>t.status==='done').length;
+
+  // ---- per dated MVP bucket (1..8): planned load + cumulative ----
+  const buckets = {};
+  for(let b=1;b<=8;b++) buckets[b]={planned:0,done:0,end:(TRACK_DATES.mvp[b]||{}).end||''};
+  mvp.forEach(t=>{ const b=t.track_sprint||1; if(buckets[b]){ buckets[b].planned++; if(t.status==='done') buckets[b].done++; }});
+  // cumulative planned scope line
+  let cum=0; const cumPlanned=[]; for(let b=1;b<=8;b++){ cum+=buckets[b].planned; cumPlanned.push(cum); }
+  let cumD=0; const cumDone=[]; for(let b=1;b<=8;b++){ cumD+=buckets[b].done; cumDone.push(cumD); }
+
+  // ---- per-person WIP load ----
+  const byPerson={};
+  mvp.forEach(t=>{ byPerson[t.assignee]=(byPerson[t.assignee]||0)+1; });
+  const people=Object.keys(byPerson).sort((a,b)=>byPerson[b]-byPerson[a]);
+  const maxP=Math.max(...Object.values(byPerson));
+  const topPerson=people[0], topCount=byPerson[topPerson], topPct=Math.round(topCount/total*100);
+
+  // ---- back-loading: last 3 source sprints ----
+  const last3 = mvp.filter(t=>['Sprint 21','Sprint 22','Sprint 23'].includes(t.sprint)).length;
+  const last3Pct = Math.round(last3/total*100);
+  const first8 = mvp.filter(t=>{const n=parseInt(t.sprint.split(' ')[1],10); return n>=6&&n<=13;}).length;
+
+  // ---- WIP per dated bucket (concurrent load = the queue) ----
+  const maxBucket = Math.max(...Object.values(buckets).map(b=>b.planned));
+
+  function clr(p){ // person -> colour
+    if(p==='CTO') return '#8b5cf6';
+    if(p==='AI Engineer') return '#00d4aa';
+    if(p==='AI Engineer 2') return '#06b6d4';
+    if(p==='Product Manager') return '#f5a623';
+    if(p==='CLO') return '#ec4899';
+    return '#64748b';
+  }
+
+  // ===== build cumulative-flow SVG =====
+  const W=820, H=300, padL=44, padR=20, padT=20, padB=46;
+  const innerW=W-padL-padR, innerH=H-padT-padB;
+  const xAt=i=>padL + (i/(7))*innerW;
+  const yMax=Math.ceil(total/10)*10;
+  const yAt=v=>padT + innerH - (v/yMax)*innerH;
+  const ptsPlanned=cumPlanned.map((v,i)=>`${xAt(i)},${yAt(v)}`).join(' ');
+  const areaPlanned=`${padL},${yAt(0)} ${ptsPlanned} ${xAt(7)},${yAt(0)}`;
+  const ptsDone=cumDone.map((v,i)=>`${xAt(i)},${yAt(v)}`).join(' ');
+  const areaDone=`${padL},${yAt(0)} ${ptsDone} ${xAt(7)},${yAt(0)}`;
+  // gridlines
+  let grid='';
+  for(let g=0; g<=yMax; g+=Math.max(10,Math.round(yMax/5/10)*10)){
+    grid+=`<line x1="${padL}" y1="${yAt(g)}" x2="${W-padR}" y2="${yAt(g)}" stroke="rgba(255,255,255,.06)"/>`+
+          `<text x="${padL-8}" y="${yAt(g)+4}" text-anchor="end" font-size="10" fill="#64748b" font-family="monospace">${g}</text>`;
+  }
+  let xlab='';
+  for(let i=0;i<8;i++){
+    const end=(TRACK_DATES.mvp[i+1]||{}).end||'';
+    const d=end?end.slice(5):'';
+    xlab+=`<text x="${xAt(i)}" y="${H-padB+16}" text-anchor="middle" font-size="9" fill="#8793ab" font-family="monospace">B${i+1}</text>`+
+          `<text x="${xAt(i)}" y="${H-padB+28}" text-anchor="middle" font-size="8" fill="#566076" font-family="monospace">${d}</text>`;
+  }
+
+  const cfSvg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;">
+    ${grid}
+    <polygon points="${areaPlanned}" fill="rgba(0,212,170,.10)" stroke="none"/>
+    <polyline points="${ptsPlanned}" fill="none" stroke="#00d4aa" stroke-width="2"/>
+    <polygon points="${areaDone}" fill="rgba(139,92,246,.18)" stroke="none"/>
+    <polyline points="${ptsDone}" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+    ${cumPlanned.map((v,i)=>`<circle cx="${xAt(i)}" cy="${yAt(v)}" r="3" fill="#00d4aa"/>`).join('')}
+    ${xlab}
+    <line x1="${padL}" y1="${yAt(0)}" x2="${W-padR}" y2="${yAt(0)}" stroke="rgba(255,255,255,.18)"/>
+  </svg>`;
+
+  // ===== per-person WIP bars =====
+  const personBars = people.map(p=>{
+    const c=byPerson[p], w=Math.round(c/maxP*100), col=clr(p);
+    const danger = (p===topPerson && topPct>=30);
+    return `<div style="display:flex;align-items:center;gap:10px;margin:7px 0;">
+      <div style="width:120px;font-size:12px;color:#cdd5ee;text-align:right;">${escH(p)}</div>
+      <div style="flex:1;background:rgba(255,255,255,.04);border-radius:5px;height:22px;position:relative;overflow:hidden;">
+        <div style="width:${w}%;height:100%;background:${col};opacity:${danger?1:.65};border-radius:5px;"></div>
+        <span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:11px;font-weight:700;color:#fff;font-family:monospace;">${c}</span>
+      </div>
+      ${danger?'<span style="font-size:9px;font-weight:800;letter-spacing:.04em;padding:2px 7px;border-radius:10px;background:rgba(245,90,90,.16);color:#f87171;border:1px solid rgba(245,90,90,.4);">BUS-FACTOR</span>':''}
+    </div>`;
+  }).join('');
+
+  // ===== concurrent-WIP per bucket (the queue view) =====
+  const wipBars = [];
+  for(let b=1;b<=8;b++){
+    const v=buckets[b].planned, w=Math.round(v/maxBucket*100);
+    const hot = v>maxBucket*0.85;
+    wipBars.push(`<div style="display:flex;align-items:center;gap:10px;margin:5px 0;">
+      <div style="width:90px;font-size:11px;color:#8793ab;text-align:right;font-family:monospace;">Bucket ${b}</div>
+      <div style="flex:1;background:rgba(255,255,255,.04);border-radius:5px;height:18px;position:relative;overflow:hidden;">
+        <div style="width:${w}%;height:100%;background:${hot?'#f5a623':'#00d4aa'};opacity:.7;border-radius:5px;"></div>
+        <span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:700;color:#fff;font-family:monospace;">${v}</span>
+      </div>
+      <div style="width:74px;font-size:9px;color:#566076;font-family:monospace;">${(TRACK_DATES.mvp[b]||{}).end||''}</div>
+    </div>`);
+  }
+
+  // ===== conditions of go =====
+  const conds = [
+    ['Bus-factor plan for the AI critical path', `${topPerson} owns ${topCount} of ${total} MVP tickets (${topPct}%). Name a fallback owner and minimum-viable-model gates before the crunch.`, topPct>=30?'risk':'ok'],
+    ['Pull OAuth + security audit out of the final crunch', `${last3} of ${total} MVP tickets (${last3Pct}%) land in S21-23. Move Facebook OAuth integration and the security audit into mid-track dev-mode work.`, last3Pct>=25?'risk':'ok'],
+    ['Limit WIP and watch the queue, not the Gantt', `This page is that control: the cumulative-flow line shows scope, the per-bucket bars show concurrent load. Review weekly so a slip shows up in week one, not at launch.`, 'watch'],
+    ['Name one experience architect', `Ownership is split across web / ML / backend / product. Name a single owner of the end-to-end product experience so the surfaces stay one product, not four.`, 'watch'],
+    ['Pre-named November cut list', `Decide now, while calm, which ~15 tickets drop on a date-driven trigger. The plan already names cut-order #1 (Best Times) and #2 (virality / Drafts) - extend it to a full list.`, 'watch'],
+  ];
+  const condRows = conds.map((c,i)=>{
+    const col = c[2]==='risk'?'#f87171':(c[2]==='watch'?'#f5a623':'#22c55e');
+    const tag = c[2]==='risk'?'NEEDS ACTION':(c[2]==='watch'?'IN PROGRESS':'OK');
+    return `<div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);">
+      <div style="width:26px;height:26px;border-radius:50%;flex-shrink:0;background:${col}22;border:1px solid ${col}66;color:${col};display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;font-family:monospace;">${i+1}</div>
+      <div style="flex:1;">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:3px;">
+          <span style="font-size:13.5px;font-weight:700;color:#e9eef8;">${escH(c[0])}</span>
+          <span style="font-size:8.5px;font-weight:800;letter-spacing:.05em;padding:2px 7px;border-radius:10px;background:${col}1f;color:${col};border:1px solid ${col}55;">${tag}</span>
+        </div>
+        <div style="font-size:12px;color:#8793ab;line-height:1.5;">${escH(c[1])}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div style="margin-bottom:6px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#00d4aa;">MVP focus &middot; flow &amp; risk</div>
+    <h1 style="font-size:24px;font-weight:900;letter-spacing:-.4px;margin:0 0 6px;color:#e9eef8;">Flow &amp; Risk</h1>
+    <p style="font-size:13px;color:#8793ab;line-height:1.55;max-width:760px;margin:0 0 24px;">A queue-and-risk view of the ${total} MVP tickets, not a Gantt. It surfaces the three things a plan hides: how work piles up over the eight dated buckets to 23 Nov, who carries too much of the critical path, and how much is stacked into the final crunch.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:26px;">
+      <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:11px;padding:14px 16px;">
+        <div style="font-size:24px;font-weight:900;color:#00d4aa;font-family:monospace;">${total}</div>
+        <div style="font-size:11px;color:#8793ab;margin-top:2px;">MVP tickets to 23 Nov</div></div>
+      <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:11px;padding:14px 16px;">
+        <div style="font-size:24px;font-weight:900;color:${topPct>=30?'#f87171':'#e9eef8'};font-family:monospace;">${topPct}%</div>
+        <div style="font-size:11px;color:#8793ab;margin-top:2px;">on ${escH(topPerson)} (${topCount} tickets)</div></div>
+      <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:11px;padding:14px 16px;">
+        <div style="font-size:24px;font-weight:900;color:${last3Pct>=25?'#f5a623':'#e9eef8'};font-family:monospace;">${last3Pct}%</div>
+        <div style="font-size:11px;color:#8793ab;margin-top:2px;">in the final 3 sprints</div></div>
+      <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:11px;padding:14px 16px;">
+        <div style="font-size:24px;font-weight:900;color:#e9eef8;font-family:monospace;">${doneCount}</div>
+        <div style="font-size:11px;color:#8793ab;margin-top:2px;">MVP done so far</div></div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:13px;padding:20px 22px;margin-bottom:22px;">
+      <div style="font-size:14px;font-weight:800;color:#e9eef8;margin-bottom:3px;">Cumulative MVP scope to launch</div>
+      <div style="font-size:11.5px;color:#8793ab;margin-bottom:14px;">Teal = total MVP scope committed by each dated bucket (B1 to B8, ending 23 Nov 2026). Purple = completed. The gap between the lines is the open queue. If teal climbs but purple stays flat, work is arriving faster than it clears.</div>
+      ${cfSvg}
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px;" class="flow-two-col">
+      <div style="background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:13px;padding:20px 22px;">
+        <div style="font-size:14px;font-weight:800;color:#e9eef8;margin-bottom:3px;">Critical-path load per person</div>
+        <div style="font-size:11.5px;color:#8793ab;margin-bottom:14px;">MVP tickets owned. A single owner above ~30% of launch-critical work is a bus-factor risk: if they slip, the date slips, and adding people late makes it later.</div>
+        ${personBars}
+      </div>
+      <div style="background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:13px;padding:20px 22px;">
+        <div style="font-size:14px;font-weight:800;color:#e9eef8;margin-bottom:3px;">Concurrent load per bucket (WIP)</div>
+        <div style="font-size:11.5px;color:#8793ab;margin-bottom:14px;">MVP tickets due in each 3-week bucket. Amber bars are the busiest buckets - the ones most likely to queue. Smaller, even batches clear faster than big ones.</div>
+        ${wipBars.join('')}
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:13px;padding:20px 24px;">
+      <div style="font-size:14px;font-weight:800;color:#e9eef8;margin-bottom:3px;">Conditions of go</div>
+      <div style="font-size:11.5px;color:#8793ab;margin-bottom:8px;">The five things a FAANG-style review board would require before approving this plan. Status reflects what the live data shows right now.</div>
+      ${condRows}
+    </div>
+  `;
+}
+
 function renderByStagePage(){
   const el = document.getElementById('bystage-content');
   if(!el) return;
@@ -5032,6 +5213,10 @@ if(typeof CVS !== 'undefined' && CVS && typeof frame === 'function') requestAnim
 
 <div id="bystage-page" class="page">
   <div id="bystage-content" style="padding:24px 36px 60px;max-width:1800px;margin:0 auto;"></div>
+</div>
+
+<div id="flow-page" class="page">
+  <div id="flow-content" style="padding:24px 36px 60px;max-width:1400px;margin:0 auto;"></div>
 </div>
 
 <script>
