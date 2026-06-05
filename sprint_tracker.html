@@ -22,10 +22,11 @@
   .badge{font-size:9.5px;font-weight:800;letter-spacing:.05em;padding:3px 9px;border-radius:20px;text-transform:uppercase}
   .badge.cur{background:rgba(0,214,174,.12);color:var(--teal);border:1px solid rgba(0,214,174,.35)}
   .badge.wip{background:rgba(245,166,35,.12);color:var(--amber);border:1px solid rgba(245,166,35,.4)}
+  .badge.ready{background:rgba(34,197,94,.13);color:#22c55e;border:1px solid rgba(34,197,94,.4)}
   .arrow{position:absolute;top:20px;right:20px;color:var(--mut);font-size:16px}
   @media(max-width:680px){.cards{grid-template-columns:1fr}.hd h1{font-size:23px}body{padding:14px 12px 60px}}
 
-/* ===== shared site header (sn-*) — matches other ArtemisAI pages ===== */
+/* ===== shared site header (sn-*) matches other ArtemisAI pages ===== */
 nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}
 nav.site-nav *{box-sizing:border-box}
 .sn-logo{font-size:1rem;font-weight:800;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.55rem;flex-shrink:0}
@@ -52,7 +53,7 @@ body{padding-top:52px!important}
 @media(max-width:768px){nav.site-nav{height:48px!important;padding:0 12px!important}.sn-pill{padding:.3rem .75rem!important;font-size:.7rem!important}.sn-name{max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}body{padding-top:48px!important}}
 
 
-/* ===== shared site footer (af-*) — matches ArtemisAI pages ===== */
+/* ===== shared site footer (af-*) matches ArtemisAI pages ===== */
 .af-footer{margin-top:56px;padding:30px 1.6rem;border-top:1px solid rgba(255,255,255,.07);background:rgba(6,10,19,.45);font-family:'DM Sans','Outfit',system-ui,sans-serif}
 .af-footer-in{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
 .af-brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.12em;color:#e8ecf4;font-size:.9rem}
@@ -95,7 +96,7 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
 <div class="hd">
   <div class="eyebrow">Mission Control · Sprint Tracker</div>
   <h1>Choose a Sprint Tracker</h1>
-  <div class="sub">We're rebuilding the sprint plan around the locked late-November MVP. Until the new one is ready, both versions live here.</div>
+  <div class="sub">The sprint plan rebuilt around the locked late-November MVP. The new tracker is ready; the previous version is kept for reference.</div>
 </div>
 <div class="cards">
   <a class="pick" href="sprint_tracker_v1.html" style="--cc:#00D6AE;--ci:rgba(0,214,174,.12)">
@@ -104,11 +105,11 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
     <h2>Current tracker <span class="badge cur">In use</span></h2>
     <p>The existing 22-sprint tracker as it stands today &mdash; Sprints 1&ndash;5 complete, S6&ndash;23 planned against the pre-lock scope. Kept intact for reference.</p>
   </a>
-  <a class="pick" href="sprint_tracker_v2.html" style="--cc:#f5a623;--ci:rgba(245,166,35,.12)">
+  <a class="pick" href="sprint_tracker_v2.html" style="--cc:#00D6AE;--ci:rgba(0,214,174,.12)">
     <span class="arrow">&#8599;</span>
     <div class="ic">&#129517;</div>
-    <h2>New MVP tracker <span class="badge wip">In progress</span></h2>
-    <p>The rebuilt plan, re-sequenced around the locked MVP (258 build-days / 218 features) and the late-November target on the Faheem + AI engineer route. Being built now.</p>
+    <h2>New MVP tracker <span class="badge ready">Ready</span></h2>
+    <p>The rebuilt plan, re-sequenced around the locked MVP (218 features / 402 tickets across 23 sprints) and the late-November target. Four views: MVP, Fast-follow, Later, and Roles &amp; Responsibilities, with per-sprint progress and check-off tracking.</p>
   </a>
 </div>
 
