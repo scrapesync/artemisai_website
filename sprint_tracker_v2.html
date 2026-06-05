@@ -2105,6 +2105,13 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 .ma-card-cat { font-size:10px; color:var(--muted); }
 .ma-card-sp { font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--accent); background:var(--accent-dim); padding:1px 7px; border-radius:5px; }
 @media (max-width:860px){ .ma-split{grid-template-columns:1fr;} .ma-left{position:static;max-height:none;} }
+/* ---- Global header stage selector ---- */
+.gstage { display:flex; gap:4px; align-items:center; background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:8px; padding:3px; }
+.gstage-chip { display:flex; align-items:center; gap:5px; padding:5px 9px; border:1px solid transparent; border-radius:6px; background:transparent; color:var(--muted2); font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700; cursor:pointer; transition:all .12s; text-transform:uppercase; letter-spacing:.5px; white-space:nowrap; }
+.gstage-chip:hover { color:#e8eaf2; }
+.gstage-chip.active { font-weight:800; }
+.gstage-n { font-size:9px; padding:1px 5px; border-radius:7px; background:rgba(255,255,255,.07); }
+@media (max-width:1100px){ .gstage-chip span:first-child{ display:none; } .gstage-chip{ padding:5px 7px; } }
 </style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RCP8LMKYK"></script>
@@ -2237,6 +2244,7 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
     <button class="tab-btn" onclick="switchTab('performance',event)">Performance</button>
   </div>
   <div style="display:flex;align-items:center;gap:8px;justify-self:end;">
+    <div class="gstage" id="gstage"></div>
     <button onclick="exportAllSprintsExcel()" title="Download every sprint, every task, every check as Excel-friendly CSV"
             style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid rgba(52,211,153,.45);border-radius:6px;background:linear-gradient(135deg,rgba(52,211,153,.18),rgba(16,185,129,.10));color:#34d399;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:700;cursor:pointer;transition:all .15s;letter-spacing:.2px;"
             onmouseover="this.style.background='linear-gradient(135deg,rgba(52,211,153,.28),rgba(16,185,129,.18))';this.style.borderColor='rgba(52,211,153,.7)'"
@@ -2295,10 +2303,9 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
       <div class="cc-head-row">
         <div>
           <h1 class="cc-title">Command Center</h1>
-          <p class="cc-sub">Who owns what, every ticket, across the whole plan. Switch the stage view to re-flow every stat below.</p>
+          <p class="cc-sub">Who owns what, every ticket, across the whole plan. The stage selector (top right) re-flows every stat below and every tab.</p>
         </div>
       </div>
-      <div class="cc-stage-bar" id="cc-stage-bar"></div>
     </section>
 
     <!-- KPI STRIP (stage-aware) -->
@@ -2661,7 +2668,8 @@ function setStageFilter(val){
   renderMain(currentSprint); renderSidebar();
 }
 function _stageOf(task){ return task.stage || (task.status==='done'?'done':''); }
-function renderStageStrip(sn){
+function renderStageStrip(sn){ return ''; /* stage now driven by the global header selector */ }
+function _renderStageStrip_unused(sn){
   const counts = {mvp:0,fast:0,later:0};
   (SPRINT_DATA[sn]||[]).forEach(t=>{ if(counts[_stageOf(t)]!==undefined) counts[_stageOf(t)]++; });
   return `<div class="filter-strip stage-strip" role="toolbar" aria-label="Filter tasks by stage">
@@ -2791,8 +2799,7 @@ function renderMain(sn){
   const all = allUnfiltered.filter(t => _filterMatches(sn, t));
   h+=renderStageStrip(sn);
   h+=renderFilterStrip(sn);
-  const _stageNote=_stageFilter?` · ${STAGE_LABEL[_stageFilter]||_stageFilter}`:'';
-  h+=`<div class="section-head">📋 Task Board${(_assigneeFilter||_stageFilter)?` <span class="section-head-filter-note">· filtered${_assigneeFilter?` to ${FILTER_PEOPLE.find(p=>p.id===_assigneeFilter)?.label||_assigneeFilter}`:''}${_stageNote}</span>`:''}</div>`;
+  h+=`<div class="section-head">📋 Task Board${(_assigneeFilter||_stageFilter)?` <span class="section-head-filter-note">· filtered${_assigneeFilter?` to ${FILTER_PEOPLE.find(p=>p.id===_assigneeFilter)?.label||_assigneeFilter}`:''}${_stageFilter?` · ${STAGE_LABEL[_stageFilter]||_stageFilter}`:''}</span>`:''}</div>`;
   h+=renderKanban(sn,c);
   h+=`<div class="section-head" style="margin-top:24px;">📝 Task Details & Checklists</div>`;
   if(all.length===0 && allUnfiltered.length>0){
@@ -3227,7 +3234,7 @@ function toggleSidebar(){
 /* ═══════════════════════════════════════════════════════════════ */
 
 function renderStrategyTab() {
-  renderCcStageBar();
+  renderGlobalStage();
   const overall = computeOverall();
   const stageDef = CC_STAGES.find(s=>s.id===_ccStage) || CC_STAGES[0];
   const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
@@ -3319,8 +3326,16 @@ function setCcStage(v){
   _ccStage = v || '';
   if(_ccStage) localStorage.setItem('artemis_cc_stage', _ccStage);
   else localStorage.removeItem('artemis_cc_stage');
-  renderStrategyTab();
-  if(currentTab==='performance') renderPerformancePage();
+  // keep the Sprint Tracker's in-board stage filter in sync with the global stage
+  if(typeof _stageFilter !== 'undefined') _stageFilter = _ccStage;
+  if(typeof _byStageAssignee !== 'undefined'){ /* By Stage keeps its own assignee filter */ }
+  renderGlobalStage();
+  // re-render whichever tab is active so every tab reacts to the stage change
+  if(currentTab==='launch') renderStrategyTab();
+  else if(currentTab==='sprint') renderSprintPage();
+  else if(currentTab==='mockup') renderMockupPage();
+  else if(currentTab==='bystage') renderByStagePage();
+  else if(currentTab==='performance') renderPerformancePage();
 }
 /* stage match: done sprints (no stage) always count under 'All'; otherwise match tag */
 function _ccTaskInStage(task){
@@ -3328,22 +3343,23 @@ function _ccTaskInStage(task){
   const st = task.stage || (task.status==='done'?'done':'');
   return st === _ccStage;
 }
-function renderCcStageBar(){
-  const bar=document.getElementById('cc-stage-bar'); if(!bar) return;
+/* GLOBAL stage selector, lives in the header, drives every tab */
+function renderGlobalStage(){
+  const bar=document.getElementById('gstage'); if(!bar) return;
   bar.innerHTML = CC_STAGES.map(s=>{
     const active=(_ccStage||'')===s.id;
-    // count tickets in this stage across all sprints
     let n=0; Object.keys(SPRINT_DATA).forEach(sn=>SPRINT_DATA[sn].forEach(t=>{
       const st=t.stage||(t.status==='done'?'done':'');
       if(s.id==='' || st===s.id) n++;
     }));
-    return `<button class="cc-stage-chip ${active?'active':''}"
-      style="${active?`background:${s.accent}22;border-color:${s.accent};color:${s.accent};`:''}"
-      onclick="setCcStage('${s.id}')">
-      <span>${s.label}</span><span class="cc-stage-n" style="${active?`background:${s.accent}33;color:${s.accent};`:''}">${n}</span>
+    return `<button class="gstage-chip ${active?'active':''}"
+      style="${active?`background:${s.accent}26;border-color:${s.accent};color:${s.accent};`:''}"
+      onclick="setCcStage('${s.id}')" title="${s.label} (${n} tickets)">
+      <span>${s.label==='All work'?'All':s.label}</span><span class="gstage-n">${n}</span>
     </button>`;
   }).join('');
 }
+function renderCcStageBar(){ /* deprecated, replaced by renderGlobalStage */ }
 
 function computeOverall() {
   let totalChecks=0, checksDone=0, totalTasks=0, tasksDone=0;
@@ -3393,15 +3409,34 @@ function computeSprintProgress(sn) {
   return { total, done, pct: total > 0 ? Math.round(done/total*100) : 0 };
 }
 
+/* stage-aware variant: only counts tickets in the active global stage */
+function computeSprintProgressStage(sn){
+  if(!_ccStage){ const p=computeSprintProgress(sn); p.tix=(SPRINT_DATA[sn]||[]).length; return p; }
+  let total=0, done=0, tix=0;
+  const ss=(typeof gss==='function')?gss(sn):{};
+  const deleted=(ss.deletedTasks)||[];
+  (SPRINT_DATA[sn]||[]).filter(t=>!deleted.includes(t.ticket)).forEach(task=>{
+    if(!_ccTaskInStage(task)) return;
+    tix++;
+    const ts=gts(sn,task.ticket);
+    const userTouched=(ts.checks&&Object.values(ts.checks).some(v=>v===false))||(Array.isArray(ts.cc)&&ts.cc.some(c=>c&&c.done===false));
+    if(task.status==='done'&&!userTouched){ const t=(task.checklist||[]).length+((ts.cc||[]).length); total+=t; done+=t; return; }
+    (task.checklist||[]).forEach((_,i)=>{ total++; if(ts.checks[i]) done++; });
+    if(ts.cc) ts.cc.forEach(c=>{ total++; if(c&&c.done) done++; });
+  });
+  return { total, done, tix, pct: total>0?Math.round(done/total*100):0 };
+}
+
 function renderPhaseTimeline() {
   const wrap = document.getElementById("strat-phases");
   if(!wrap) return;
   wrap.innerHTML = "";
+  const stageDef = (typeof CC_STAGES!=='undefined') ? (CC_STAGES.find(s=>s.id===_ccStage)||CC_STAGES[0]) : {id:'',label:'All'};
   PHASES.forEach(phase => {
-    let total=0, done=0;
+    let total=0, done=0, tix=0;
     phase.sprints.forEach(sn => {
-      const p = computeSprintProgress(sn);
-      total += p.total; done += p.done;
+      const p = computeSprintProgressStage(sn);
+      total += p.total; done += p.done; tix += p.tix;
     });
     const pct = total > 0 ? Math.round(done/total*100) : 0;
     const firstSn = phase.sprints[0];
@@ -3411,10 +3446,12 @@ function renderPhaseTimeline() {
     const row = document.createElement("div");
     row.className = "strat-phase-row";
     row.style.borderLeftColor = phase.color;
+    // when a stage is active, dim phases with no tickets in that stage
+    if(_ccStage && tix===0) row.style.opacity = .35;
     row.innerHTML = `
       <div class="strat-phase-label">
         <div class="strat-phase-name">${phase.name}</div>
-        <div class="strat-phase-sub">${phase.sub} · ${phase.sprints.length} sprints</div>
+        <div class="strat-phase-sub">${phase.sub} · ${_ccStage? tix+' '+stageDef.label : phase.sprints.length+' sprints'}</div>
       </div>
       <div class="strat-phase-bar-wrap">
         <div class="strat-phase-bar-fill" style="width:${pct}%;background:${phase.color};">
@@ -3506,17 +3543,19 @@ function renderSprintGrid() {
   PHASES.forEach(phase => {
     const group = document.createElement("div");
     group.className = "strat-phase-group";
-    let groupTotal=0, groupDone=0;
+    let groupTotal=0, groupDone=0, groupTix=0;
     phase.sprints.forEach(sn => {
-      const p = computeSprintProgress(sn);
-      groupTotal += p.total; groupDone += p.done;
+      const p = computeSprintProgressStage(sn);
+      groupTotal += p.total; groupDone += p.done; groupTix += (p.tix||0);
     });
     const groupPct = groupTotal > 0 ? Math.round(groupDone/groupTotal*100) : 0;
+    // hide whole phase group if nothing in this stage
+    if(_ccStage && groupTix===0) return;
     group.innerHTML = `
       <div class="strat-phase-group-head" style="background:${phase.color};">
         <div class="strat-phase-group-dot"></div>
         <div class="strat-phase-group-name">${phase.name}, ${phase.sub}</div>
-        <div class="strat-phase-group-sub">${groupPct}% · ${phase.sprints.length} sprints</div>
+        <div class="strat-phase-group-sub">${_ccStage? groupTix+' tickets' : groupPct+'% · '+phase.sprints.length+' sprints'}</div>
       </div>
       <div class="strat-sprint-cards" id="sprint-cards-${phase.id}"></div>
     `;
@@ -4940,6 +4979,9 @@ ALL_DONE.forEach(sn=>{
   tasks.forEach(task=>{const ts=gts(sn,task.ticket);task.checklist.forEach((_,i)=>{ts.checks[i]=true;});});
 });
 saveST();
+/* keep the in-board sprint stage filter in sync with the global stage at boot */
+try{ if(typeof _stageFilter!=='undefined') _stageFilter = _ccStage; }catch(e){}
+renderGlobalStage();
 renderLaunch();
 renderSprintTrackBar();
 renderTeamProgress();
