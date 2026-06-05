@@ -19,7 +19,7 @@
 body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 
 /* TAB BAR */
-.tab-bar{position:fixed;top:52px;left:0;right:0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:8px 24px;background:rgba(2,6,9,0.96);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);}
+.tab-bar{position:fixed;top:52px;left:0;right:0;z-index:100;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:8px 24px;background:rgba(2,6,9,0.96);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);}
 .tab-bar-title{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;opacity:.7}
 .tab-bar-tabs{display:flex;align-items:center;gap:6px;justify-content:center;}
 .tab-btn{padding:7px 20px;border:1px solid var(--border);border-radius:7px;background:transparent;color:var(--muted2);font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:1.2px;}
@@ -2106,12 +2106,14 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 .ma-card-sp { font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--accent); background:var(--accent-dim); padding:1px 7px; border-radius:5px; }
 @media (max-width:860px){ .ma-split{grid-template-columns:1fr;} .ma-left{position:static;max-height:none;} }
 /* ---- Global header stage selector ---- */
-.gstage { display:flex; gap:4px; align-items:center; background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:8px; padding:3px; }
-.gstage-chip { display:flex; align-items:center; gap:5px; padding:5px 9px; border:1px solid transparent; border-radius:6px; background:transparent; color:var(--muted2); font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700; cursor:pointer; transition:all .12s; text-transform:uppercase; letter-spacing:.5px; white-space:nowrap; }
-.gstage-chip:hover { color:#e8eaf2; }
-.gstage-chip.active { font-weight:800; }
-.gstage-n { font-size:9px; padding:1px 5px; border-radius:7px; background:rgba(255,255,255,.07); }
-@media (max-width:1100px){ .gstage-chip span:first-child{ display:none; } .gstage-chip{ padding:5px 7px; } }
+.tab-bar-left { display:flex; align-items:center; gap:22px; min-width:0; }
+.gstage { display:flex; gap:5px; align-items:center; background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:9px; padding:4px; }
+.gstage-chip { display:flex; align-items:center; gap:5px; padding:5px 10px; border:1px solid transparent; border-radius:7px; background:transparent; color:var(--muted2); font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700; cursor:pointer; transition:all .18s; text-transform:uppercase; letter-spacing:.5px; white-space:nowrap; }
+.gstage-chip:hover { color:#e8eaf2; border-color:rgba(255,255,255,.18); box-shadow:0 0 10px rgba(255,255,255,.1); }
+.gstage-chip.active { font-weight:800; box-shadow:0 0 14px -1px var(--gs-glow,rgba(0,214,174,.55)), 0 0 0 1px var(--gs-glow,rgba(0,214,174,.4)) inset; animation:gstagePulse 2.4s ease-in-out infinite; }
+.gstage-n { font-size:9px; padding:1px 6px; border-radius:8px; background:rgba(255,255,255,.08); }
+@keyframes gstagePulse { 0%,100%{ filter:brightness(1); } 50%{ filter:brightness(1.18); } }
+@media (max-width:1340px){ .tab-bar-left{ gap:12px; } .gstage-chip span:first-child{ display:none; } .gstage-chip{ padding:5px 8px; } }
 </style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RCP8LMKYK"></script>
@@ -2235,7 +2237,10 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 
 
 <div class="tab-bar">
-  <span class="tab-bar-title">Sprint Command</span>
+  <div class="tab-bar-left">
+    <span class="tab-bar-title">Sprint Command</span>
+    <div class="gstage" id="gstage"></div>
+  </div>
   <div class="tab-bar-tabs">
     <button class="tab-btn active" onclick="switchTab('launch',event)">Command Center</button>
     <button class="tab-btn" onclick="switchTab('sprint',event)">Sprint Tracker</button>
@@ -2244,7 +2249,6 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
     <button class="tab-btn" onclick="switchTab('performance',event)">Performance</button>
   </div>
   <div style="display:flex;align-items:center;gap:8px;justify-self:end;">
-    <div class="gstage" id="gstage"></div>
     <button onclick="exportAllSprintsExcel()" title="Download every sprint, every task, every check as Excel-friendly CSV"
             style="display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid rgba(52,211,153,.45);border-radius:6px;background:linear-gradient(135deg,rgba(52,211,153,.18),rgba(16,185,129,.10));color:#34d399;font-family:'Inter',sans-serif;font-size:11.5px;font-weight:700;cursor:pointer;transition:all .15s;letter-spacing:.2px;"
             onmouseover="this.style.background='linear-gradient(135deg,rgba(52,211,153,.28),rgba(16,185,129,.18))';this.style.borderColor='rgba(52,211,153,.7)'"
@@ -3353,7 +3357,7 @@ function renderGlobalStage(){
       if(s.id==='' || st===s.id) n++;
     }));
     return `<button class="gstage-chip ${active?'active':''}"
-      style="${active?`background:${s.accent}26;border-color:${s.accent};color:${s.accent};`:''}"
+      style="${active?`background:${s.accent}26;border-color:${s.accent};color:${s.accent};--gs-glow:${s.accent}99;`:''}"
       onclick="setCcStage('${s.id}')" title="${s.label} (${n} tickets)">
       <span>${s.label==='All work'?'All':s.label}</span><span class="gstage-n">${n}</span>
     </button>`;
