@@ -30,6 +30,8 @@
   .badge.cur{background:rgba(0,214,174,.12);color:var(--teal);border:1px solid rgba(0,214,174,.35)}
   .badge.wip{background:rgba(245,166,35,.12);color:var(--amber);border:1px solid rgba(245,166,35,.4)}
   .badge.ready{background:rgba(34,197,94,.13);color:#22c55e;border:1px solid rgba(34,197,94,.4)}
+  .badge.dep{background:rgba(100,116,139,.13);color:#94a3b8;border:1px solid rgba(100,116,139,.4)}
+  .pick.deprecated:hover{opacity:.85!important}
   .arrow{position:absolute;top:20px;right:20px;color:var(--mut);font-size:16px}
   @media(max-width:680px){.cards,.cards.three{grid-template-columns:1fr}.hd h1{font-size:23px}body{padding:14px 12px 60px}}
 
@@ -130,11 +132,11 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
 
 <div class="section-label">Full plan</div>
 <div class="cards">
-  <a class="pick" href="sprint_tracker_v2.html" style="--cc:#00D6AE;--ci:rgba(0,214,174,.12)">
+  <a class="pick deprecated" href="sprint_tracker_v2.html" style="--cc:#64748b;--ci:rgba(100,116,139,.12);opacity:.62">
     <span class="arrow">&#8599;</span>
     <div class="ic">&#129517;</div>
-    <h2>Full tracker <span class="badge ready">Ready</span></h2>
-    <p>Everything in one place: all 398 tickets across MVP, Fast Track and Later, with the in-page stage selector to switch between them. The complete Sprint Command tracker across 23 sprints.</p>
+    <h2>Full tracker <span class="badge dep">Deprecated</span></h2>
+    <p>Superseded by the three stage trackers above (MVP / Fast Track / Later). This combined view is kept only so existing links keep working &mdash; use the MVP tracker for launch planning.</p>
   </a>
   <a class="pick" href="sprint_tracker_v1.html" style="--cc:#64748b;--ci:rgba(100,116,139,.12)">
     <span class="arrow">&#8599;</span>

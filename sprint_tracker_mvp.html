@@ -2460,8 +2460,11 @@ function cascadeFrom(sn){
 }
 
 function calcSP(sn){
-  const tasks=SPRINT_DATA[sn]||[];let t=0,d=0;
+  let tasks=SPRINT_DATA[sn]||[];let t=0,d=0;
   const ss=gss(sn);const deleted=ss.deletedTasks||[];
+  // Respect the active stage filter so progress %, done and remaining reflect the
+  // stage being viewed (this file defaults to the MVP stage) rather than all 398 tickets.
+  if(_stageFilter) tasks = tasks.filter(task => _stageOf(task) === _stageFilter);
   tasks.filter(task=>!deleted.includes(task.ticket)).forEach(task=>{
     const ts=gts(sn,task.ticket);
     // If task seeded as 'done' and user hasn't actively unchecked, count all items done
@@ -2753,7 +2756,9 @@ function _filterMatches(sn, task){
 function _filterCountForSprint(sn, personId){
   const ss = gss(sn);
   const deleted = ss.deletedTasks || [];
-  const allTasks = [...(SPRINT_DATA[sn]||[]), ...(ss.customTasks||[])].filter(t => !deleted.includes(t.ticket));
+  let allTasks = [...(SPRINT_DATA[sn]||[]), ...(ss.customTasks||[])].filter(t => !deleted.includes(t.ticket));
+  // Respect the active stage filter so per-person counts match the visible (stage-filtered) list.
+  if(_stageFilter) allTasks = allTasks.filter(t => _stageOf(t) === _stageFilter);
   if(!personId) return allTasks.length;
   const person = FILTER_PEOPLE.find(p => p.id === personId);
   if(!person) return 0;
@@ -2778,14 +2783,18 @@ function renderFilterStrip(sn){
 
 function renderMain(sn){
   const main=document.getElementById('sprint-main');
-  const tasks=SPRINT_DATA[sn]||[];const c=getPhaseColor(sn);const sp=calcSP(sn);
+  const tasksAll=SPRINT_DATA[sn]||[];
+  // Stage-aware task list for headline counts (this file is the MVP view).
+  const tasks=_stageFilter? tasksAll.filter(t=>_stageOf(t)===_stageFilter) : tasksAll;
+  const c=getPhaseColor(sn);const sp=calcSP(sn);
   const ss=gss(sn);const safe=sn.replace(/\s/g,'-');const dates=getSprintDates(sn);const meta=SPRINT_META[sn]||{};const allDone=sp.pct===100;
+  const _customInStage=(ss.customTasks||[]).filter(t=>!_stageFilter||_stageOf(t)===_stageFilter);
   let h=`<div class="sm-header">
     <div>
       <div class="sm-title"><h2 style="color:${c}">${sn}</h2></div>
       <div class="sm-phase">${getPhaseName(sn)}</div>
       <div class="sm-tags">
-        <span class="tag tag-a">${tasks.length+(ss.customTasks||[]).length} tasks</span>
+        <span class="tag tag-a">${tasks.length+_customInStage.length} tasks</span>
         <span class="tag tag-g">${sp.d} done</span>
         <span class="tag tag-i">${sp.pct}%</span>
       </div>
@@ -2812,7 +2821,7 @@ function renderMain(sn){
     <div class="prog-card"><span class="prog-big" style="color:${c}">${sp.pct}%</span><span class="prog-lbl">Complete</span></div>
     <div class="prog-card"><span class="prog-big">${sp.d}</span><span class="prog-lbl">Done</span></div>
     <div class="prog-card"><span class="prog-big">${sp.t-sp.d}</span><span class="prog-lbl">Remaining</span></div>
-    <div class="prog-card"><span class="prog-big">${tasks.length+(ss.customTasks||[]).length}</span><span class="prog-lbl">Tasks</span></div>
+    <div class="prog-card"><span class="prog-big">${tasks.length+_customInStage.length}</span><span class="prog-lbl">Tasks</span></div>
   </div>
   <div class="atf" id="atf-${safe}">
     <div style="font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:10px;">New Task</div>
