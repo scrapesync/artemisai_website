@@ -2265,7 +2265,6 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
     <button class="tab-btn active" onclick="switchTab('launch',event)">Command Center</button>
     <button class="tab-btn" onclick="switchTab('sprint',event)">Sprint Tracker</button>
     <button class="tab-btn" onclick="switchTab('mockup',event)">Mockup Alignment</button>
-    <button class="tab-btn" onclick="switchTab('bystage',event)">By Stage</button>
     <button class="tab-btn" onclick="switchTab('flow',event)">Flow &amp; Risk</button>
     <button class="tab-btn" onclick="switchTab('performance',event)">Performance</button>
   </div>
@@ -2507,7 +2506,6 @@ function switchTab(tab,e){
   if(tab==='launch')renderLaunch();
   if(tab==='mockup')renderMockupPage();
   if(tab==='performance')renderPerformancePage();
-  if(tab==='bystage')renderByStagePage();
   if(tab==='flow')renderFlowPage();
 }
 
@@ -2724,12 +2722,12 @@ function _renderStageStrip_unused(sn){
 function renderMixBar(sn){
   const b = (typeof BREAKDOWN!=='undefined' && BREAKDOWN[sn]) || null;
   if(!b) return '';
-  const seg=[['done',b.done,'#34d399'],['mvp',b.mvp,'#00D6AE'],['fast',b.fast,'#f5a623'],['later',b.later,'#a78bfa']].filter(s=>s[1]>0);
+  const seg=[['done',b.done,'#34d399'],['mvp',b.mvp,'#00D6AE']].filter(s=>s[1]>0); /* MVP-only tracker: fast/later excluded */
   const total=seg.reduce((a,s)=>a+s[1],0); if(!total) return '';
   const bars=seg.map(s=>`<span title="${s[1]} ${STAGE_LABEL[s[0]]||s[0]}" style="flex:${s[1]};background:${s[2]};"></span>`).join('');
   const pills=seg.map(s=>`<span class="mix-pill" style="border-color:${s[2]};color:${s[2]}">${s[1]} ${s[0]==='done'?'done':STAGE_LABEL[s[0]]}</span>`).join('');
   return `<div class="mix-wrap">
-    <div class="mix-head">Stage mix of this sprint <span class="mix-note">from master plan</span></div>
+    <div class="mix-head">MVP tickets in this sprint <span class="mix-note">done vs remaining</span></div>
     <div class="mix-bar">${bars}</div>
     <div class="mix-pills">${pills}</div>
   </div>`;
@@ -3375,7 +3373,6 @@ function setCcStage(v){
   if(currentTab==='launch') renderStrategyTab();
   else if(currentTab==='sprint') renderSprintPage();
   else if(currentTab==='mockup') renderMockupPage();
-  else if(currentTab==='bystage') renderByStagePage();
   else if(currentTab==='performance') renderPerformancePage();
 }
 /* stage match: done sprints (no stage) always count under 'All'; otherwise match tag */
@@ -4130,6 +4127,7 @@ function renderFlowPage(){
 
 function renderByStagePage(){
   const el = document.getElementById('bystage-content');
+  if(!el) return; /* By Stage tab removed - MVP-only tracker */
   if(!el) return;
   const STAGES = [
     {id:'mvp',  label:'MVP',        accent:'#00D6AE', note:'Launch-core. The minimum that proves value.'},
@@ -4218,6 +4216,8 @@ function renderPerformancePage(){
     const deleted = ss.deletedTasks || [];
     const all = [...(SPRINT_DATA[sn]||[]), ...(ss.customTasks||[])].filter(t=>!deleted.includes(t.ticket));
     all.forEach(task=>{
+      const _st = task.stage || (task.status==="done"?"done":"");
+      if(_st!=="mvp" && _st!=="done") return; /* MVP-only tracker */
       totalTasksOverall++;
       const ts = gts(sn, task.ticket);
       let d=0,t=0;
@@ -4273,10 +4273,10 @@ function renderPerformancePage(){
 
 let _maSurface = null;   // selected surface cat (null = all)
 let _maFeature = null;   // selected feature id (null = all in surface)
-let _maStage = '';       // '' = all stages
+let _maStage = 'mvp';     // LOCKED to MVP, this is an MVP-only tracker
 function setMaSurface(c){ _maSurface = (_maSurface===c? null : c); _maFeature=null; renderMockupPage(); }
 function setMaFeature(id){ _maFeature = (_maFeature===id? null : id); renderMockupPage(); }
-function setMaStage(s){ _maStage = s||''; renderMockupPage(); }
+function setMaStage(v){ _maStage="mvp"; renderMockupPage(); } /* locked MVP */
 
 function renderMockupPage(){
   const el=document.getElementById('mockup-content');if(!el)return;
@@ -4340,7 +4340,7 @@ function renderMockupPage(){
         <div class="ma-scope">${scopeLabel}</div>
         <div class="ma-scope-sub">${shown.length} feature${shown.length===1?'':'s'}${_maStage?' · '+(STAGES.find(s=>s.id===_maStage).label):''}${(_maSurface||_maFeature)?' · <a class="ma-clear" onclick="setMaSurface(null)">show all</a>':''}</div>
       </div>
-      <div class="filter-strip" style="padding:0;margin:0;">${stageStrip}</div>
+      <!-- stage filter removed: MVP-only tracker -->
     </div>
     <div class="ma-cards">`;
   if(shown.length===0){
@@ -5271,9 +5271,7 @@ if(typeof CVS !== 'undefined' && CVS && typeof frame === 'function') requestAnim
   <div id="performance-content" style="padding:24px 36px 60px;max-width:1800px;margin:0 auto;"></div>
 </div>
 
-<div id="bystage-page" class="page">
-  <div id="bystage-content" style="padding:24px 36px 60px;max-width:1800px;margin:0 auto;"></div>
-</div>
+
 
 <div id="flow-page" class="page">
   <div id="flow-content" style="padding:24px 36px 60px;max-width:1400px;margin:0 auto;"></div>
