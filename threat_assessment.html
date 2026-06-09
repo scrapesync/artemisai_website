@@ -165,6 +165,25 @@ table.cmp td.uscell,table.cmp th.us{background:rgba(0,214,174,.06)}
 
 .src{font-size:10.5px;color:#5a6478;font-style:italic}
 
+/* META PRODUCT CARDS */
+.mp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mp{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;overflow:hidden}
+.mp::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--mpc)}
+.mp-top{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.mp-ico{font-size:22px}
+.mp-name{font-size:15px;font-weight:800}
+.mp-date{font-size:10px;font-weight:700;color:var(--mut);font-family:var(--mono);margin-left:auto;white-space:nowrap}
+.mp-what{font-size:12.5px;color:#c3cee0;line-height:1.6;margin:8px 0 10px}
+.mp-what b{color:var(--ink)}
+.mp-row{display:flex;gap:8px;font-size:11.5px;line-height:1.5;padding:6px 0;border-top:1px solid rgba(255,255,255,.05)}
+.mp-row .k{color:var(--mut);font-weight:700;flex-shrink:0;width:62px}
+.mp-row .val{color:#c3cee0}
+.mp-verdict{margin-top:10px;padding:9px 12px;border-radius:8px;font-size:11.5px;line-height:1.5}
+.mp-verdict.part{background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.25);color:#f5c45e}
+.mp-verdict.gap{background:rgba(0,214,174,.08);border:1px solid rgba(0,214,174,.25);color:#5fe3c6}
+.mp-verdict b{color:#fff}
+@media(max-width:720px){.mp-grid{grid-template-columns:1fr}}
+
 /* BRUTAL TRUTH block */
 .brutal{background:linear-gradient(135deg,rgba(244,63,94,.07),rgba(245,166,35,.04));border:1px solid rgba(244,63,94,.3);border-radius:16px;padding:26px 28px}
 .brutal h3{font-size:18px;font-weight:900;margin-bottom:6px;color:#fff}
@@ -327,18 +346,46 @@ table.cmp td.uscell,table.cmp th.us{background:rgba(0,214,174,.06)}
     </div>
   </div>
 
-  <!-- WHAT META SHIPPED (compact table) -->
-  <div class="section-label"><span class="n">1</span> What Meta shipped</div>
-  <div class="tbl-wrap">
-    <table class="cmp">
-      <thead><tr><th>Launch</th><th>What it is</th><th>Threat to us</th></tr></thead>
-      <tbody>
-        <tr><td class="rowname">Creator Assistant<br><span class="src">Jun 4</span></td><td>Free in-Facebook AI: explains past performance, "when should I post"</td><td><span class="v-part">Real overlap — but backward-looking &amp; own-page only</span></td></tr>
-        <tr><td class="rowname">Business Agent<br><span class="src">Jun 3</span></td><td>The "respond to customers 24/7" prompt Lewis saw — customer-service chat</td><td><span class="v-gap">Adjacent, not us (the inbox, not the feed)</span></td></tr>
-        <tr><td class="rowname">Ads MCP<br><span class="src">Apr 29</span></td><td>Lets AI manage Meta <em>ad</em> campaigns</td><td><span class="v-part">Opens ad data while tightening organic data</span></td></tr>
-        <tr><td class="rowname">Muse Spark<br><span class="src">Apr 8</span></td><td>Meta's own frontier model, locked to Meta apps</td><td><span class="v-gap">No public API — inward-facing, not sold to us</span></td></tr>
-      </tbody>
-    </table>
+  <!-- WHAT META SHIPPED (detailed cards) -->
+  <div class="section-label"><span class="n">1</span> What Meta shipped — in detail</div>
+  <div class="mp-grid">
+
+    <div class="mp" style="--mpc:#f43f5e">
+      <div class="mp-top"><span class="mp-ico">🟥</span><span class="mp-name">Creator Assistant</span><span class="mp-date">Jun 4, 2026</span></div>
+      <div class="mp-what">A <b>free, conversational AI built into Facebook</b> for creators (US/Canada/India first). You chat with it about your own page and it explains your audience, your engagement, and why your content performed the way it did — then suggests ideas.</div>
+      <div class="mp-row"><span class="k">Does</span><span class="val">Answers "when should I post?", "what are people saying in my comments?", brainstorms ideas from trending audio &amp; cultural moments, adapts to your goal (growth/engagement/money)</span></div>
+      <div class="mp-row"><span class="k">Does NOT</span><span class="val">Predict how a <em>draft</em> will do before you post · show anything about <em>other</em> pages · do competitive benchmarking</span></div>
+      <div class="mp-row"><span class="k">Why</span><span class="val">Meta paid creators ~$3B in 2025 and wants to keep them inside Facebook so they don't "turn to third-party tools" (like us)</span></div>
+      <div class="mp-verdict part"><b>Verdict:</b> the real overlap — but it's backward-looking and own-page only. The exact gaps we fill (prediction + cross-page) are wide open.</div>
+    </div>
+
+    <div class="mp" style="--mpc:#f5a623">
+      <div class="mp-top"><span class="mp-ico">🟧</span><span class="mp-name">Business Agent</span><span class="mp-date">Jun 3, 2026</span></div>
+      <div class="mp-what">This is the <b>"respond to customers 24/7" prompt Lewis screenshotted.</b> It's an AI <b>customer-service / sales chat agent</b> that talks to <em>your buyers</em> across WhatsApp, Messenger &amp; Instagram on your behalf.</div>
+      <div class="mp-row"><span class="k">Does</span><span class="val">Answers buyer questions, recommends products from your catalog, books appointments, qualifies leads, closes sales. 1M+ businesses already use it; ~10M advertiser conversations/week</span></div>
+      <div class="mp-row"><span class="k">Does NOT</span><span class="val">Predict post performance · recommend organic content strategy · give cross-page intelligence. It lives in the inbox, not the feed</span></div>
+      <div class="mp-row"><span class="k">Heading</span><span class="val">Free now, moving to paid tiers (Meta One); Meta hints at "competitive intelligence" later but it's not shipped</span></div>
+      <div class="mp-verdict gap"><b>Verdict:</b> adjacent, not a direct competitor. This is the inbox; we're the feed. We don't chase customer-service chat — that's Meta's lane.</div>
+    </div>
+
+    <div class="mp" style="--mpc:#38bdf8">
+      <div class="mp-top"><span class="mp-ico">🟦</span><span class="mp-name">Ads MCP</span><span class="mp-date">Apr 29, 2026</span></div>
+      <div class="mp-what">An official <b>"AI connector" for Meta's ads platform</b> (~29 tools, hosted at mcp.ads.meta.com). It lets AI assistants like Claude or ChatGPT <b>plug straight into a business's <em>ad</em> account</b> to read and manage campaigns by chat.</div>
+      <div class="mp-row"><span class="k">Does</span><span class="val">Create, analyse &amp; optimise paid ad campaigns via an AI assistant; single-click Business login; free in beta</span></div>
+      <div class="mp-row"><span class="k">Does NOT</span><span class="val">Open up organic page insights — it's ads-only. (Google + TikTok + Amazon shipped similar ad MCPs around the same time)</span></div>
+      <div class="mp-row"><span class="k">Signal</span><span class="val">The telling part: Meta is <em>opening</em> ad data to AI while <em>tightening</em> the organic data we rely on</span></div>
+      <div class="mp-verdict part"><b>Verdict:</b> not a competitor to us, but the direction matters — Meta rewards the ad ecosystem and squeezes organic third-party access.</div>
+    </div>
+
+    <div class="mp" style="--mpc:#a78bfa">
+      <div class="mp-top"><span class="mp-ico">🟪</span><span class="mp-name">Muse Spark</span><span class="mp-date">Apr 8, 2026</span></div>
+      <div class="mp-what">Meta's <b>first proprietary frontier AI model</b> — their answer to GPT and Claude. Meta abandoned open-source (the old Llama approach) and built this closed model via the <b>$14.3B Scale AI deal</b> (which brought in Alexandr Wang as Chief AI Officer).</div>
+      <div class="mp-row"><span class="k">Power</span><span class="val">Scored 52 on the AA Intelligence Index — 4th place, behind Gemini 3.1 Pro, GPT-5.4 and Claude Opus 4.6. It powers Meta AI for 3B+ users</span></div>
+      <div class="mp-row"><span class="k">Catch</span><span class="val">No public API — it makes <em>Meta's own apps</em> smarter; it is not sold to builders like us</span></div>
+      <div class="mp-row"><span class="k">For us</span><span class="val">We can't use it and don't need to — we stay model-agnostic (Claude / GPT / Gemini), swappable any time</span></div>
+      <div class="mp-verdict gap"><b>Verdict:</b> inward-facing, not a threat to our product. Meta's billions go here — into their model, not into a tool that competes with us.</div>
+    </div>
+
   </div>
   <div class="alert danger" style="margin-top:14px">
     <div class="alert-head">🔒 And they're closing the door on our data <span class="alert-tag">the real risk</span></div>
@@ -474,7 +521,14 @@ table.cmp td.uscell,table.cmp th.us{background:rgba(0,214,174,.06)}
       As a Facebook-only assistant competing with a free Meta feature — <strong>low odds.</strong> As a multi-platform, cross-page tool for agencies — <strong>genuinely viable.</strong> We're not dead; we're standing in the wrong spot, with five months to move.
     </div>
     <div class="for-alex">
-      <b>📋 For Alex, in one breath:</b> "Meta made part of our product free and we depend entirely on their data. The fix isn't to out-build them — it's two moves: get off Facebook-only data, and re-aim the product at what Meta won't build (prediction, cross-page intelligence, collaboration), sold to agencies. Same team, same tech. The only open question is whether our runway and the Nov 28 timeline let us start now."
+      <b>📋 The full picture for Alex</b>
+      <p style="margin:10px 0 0">Here's where we stand and what I think we do, covering everything:</p>
+      <p style="margin:10px 0 0"><b>The situation:</b> Meta just spent the spring shipping AI. Most of it isn't aimed at us — Business Agent is customer-service chat, Muse Spark is their own model with no public API, Ads MCP is for paid ads. But on June 4 they shipped <b>Creator Assistant</b>, a free in-Facebook AI that explains analytics and tells creators what and when to post. That overlaps a real part of what we planned — and it's free, native, and zero-friction. We cannot win those basic-analytics features anymore.</p>
+      <p style="margin:10px 0 0"><b>The bigger danger:</b> we depend 100% on Meta's data through their API. They're already removing organic metrics on a schedule (Nov 2025, June 2026) and they've killed analytics tools wholesale before (CrowdTangle, Groups API). They wouldn't even need to target us — one policy change for unrelated reasons could break our product in a quarter. We can't out-execute that. We can only stop being so exposed to it.</p>
+      <p style="margin:10px 0 0"><b>What we still own — and Meta won't build:</b> (1) <b>prediction before posting</b> — Creator Assistant only explains the past; (2) <b>cross-page / network intelligence</b> — Meta only ever shows you your own page, never the neighbourhood; (3) <b>real-time crisis &amp; virality alerts</b>; and (4) <b>agencies</b>, who manage many pages, pay the most, and are ignored by Meta's single-page consumer tools. That's a real, defensible business — just narrower than "an AI assistant for your page."</p>
+      <p style="margin:10px 0 0"><b>So the plan is two moves, not more features:</b> first, <b>get off Facebook-only data</b> — add Instagram (nearly free, same API), then a genuinely independent source like TikTok or LinkedIn, so no single Meta decision can end us. Second, <b>re-aim the product</b> at the four things above and sell it to agencies, with <b>collaboration/matchmaking</b> as the marketing hook that makes people invite others (the one thing Meta structurally won't copy). We keep the same team and the same tech — we just point them at defensible ground.</p>
+      <p style="margin:10px 0 0"><b>And the safety net:</b> even worst case, we've built a reusable machine — team + pipeline + trainable models. If Facebook ever closes entirely, we re-aim it (multi-platform, agency tool, brand monitoring, a data/API business, a new industry vertical, or paid services as a cash bridge). <b>The company surviving is not the question — only which product we point it at.</b></p>
+      <p style="margin:10px 0 0"><b>The one real decision for us:</b> whether our <b>runway and the Nov 28 timeline</b> let us start the second-platform work now, or whether we narrow scope, move the date, or raise to fund it. That's the call you and I need to make together — everything else here is just clearing the path to it.</p>
     </div>
     <div class="caveat" style="margin-top:16px">
       <b>Honest caveats:</b>
