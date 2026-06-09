@@ -5272,6 +5272,50 @@ document.body.setAttribute('data-tab', currentTab);
   if(tb && currentTab !== 'sprint') tb.style.display = 'none';
 })();
 syncLoadAll();
+/* Deep-link: ?sprint=<key>&ticket=<id> opens the Sprint Tracker at that sprint
+   (and scrolls to the ticket if given). Lets the Master Plan link straight in.
+   Runs on a short delay AND re-applies after a beat so the async workspace load
+   (syncLoadAll) can't clobber the selection. */
+(function(){
+  try{
+    var qs=new URLSearchParams(location.search);
+    var wantSprint=qs.get('sprint');
+    var wantTicket=qs.get('ticket');
+    if(!wantSprint && !wantTicket) return;
+    function resolveKey(k){
+      if(!k) return null;
+      if(SPRINT_DATA[k]) return k;
+      if(SPRINT_DATA['Sprint '+k]) return 'Sprint '+k;
+      return null;
+    }
+    var key=resolveKey(wantSprint);
+    if(!key && wantTicket){
+      Object.keys(SPRINT_DATA).some(function(sn){
+        if((SPRINT_DATA[sn]||[]).some(function(t){return t.ticket===wantTicket;})){ key=sn; return true; }
+        return false;
+      });
+    }
+    if(!key) return;
+    if(typeof SPRINTS_LIST!=='undefined' && SPRINTS_LIST.indexOf(key)===-1) return;
+    function applyDeepLink(){
+      switchTab('sprint', null);
+      if(typeof selSprint==='function') selSprint(key); else { currentSprint=key; renderSprintPage(); renderSprintTrackBar(); }
+      if(wantTicket){
+        setTimeout(function(){
+          try{
+            var el=[].slice.call(document.querySelectorAll('[data-ticket],[id]')).find(function(n){
+              return (n.getAttribute&&n.getAttribute('data-ticket')===wantTicket) || (n.textContent&&n.textContent.indexOf(wantTicket)>-1 && n.textContent.length<140);
+            });
+            if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); el.style.transition='background .3s'; var o=el.style.background; el.style.background='rgba(0,214,170,.22)'; setTimeout(function(){el.style.background=o;},1800); }
+          }catch(_){}
+        }, 400);
+      }
+    }
+    /* apply now, then again after the workspace load + its re-render settle */
+    setTimeout(applyDeepLink, 50);
+    setTimeout(applyDeepLink, 1200);
+  }catch(e){}
+})();
 if(typeof CVS !== 'undefined' && CVS && typeof frame === 'function') requestAnimationFrame(frame); /* skip animation in clean view */
 </script>
 

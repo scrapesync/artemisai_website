@@ -236,7 +236,7 @@ function featurePanel(fid){
     ${f.stage!=='done'&&f.days?`<span class="pbadge" style="background:#1c2541;color:#cdd5ee;margin:8px 0 0 6px;display:inline-block;font-weight:800">~${f.days} build-days</span>`:''}
     ${f.cut?`<span class="pbadge" style="background:#ff6f6122;color:#ff6f61;margin:8px 0 0 6px;display:inline-block">✂ cut order ${f.cut}</span>`:''}
     ${f.why?`<div class="sectlabel">Why it's ${({done:'done',mvp:'in the MVP',fast:'fast-follow',later:'later'})[f.stage]}</div><div style="font-size:10.5px;line-height:1.5;color:var(--ink);background:${stageColor[f.stage]}14;border:1px solid ${stageColor[f.stage]}40;border-radius:9px;padding:9px 11px">${f.why}</div>`:''}
-    ${(f.sprints&&f.sprints.length)?`<div class="sectlabel">Built in sprints</div><div class="sprintpills">${f.sprints.map(s=>`<span class="spill ${s<=5?'done':''}">S${s}${s<=5?' ✓':''}</span>`).join('')}</div>`:''}
+    ${(f.sprints&&f.sprints.length)?`<div class="sectlabel">Built in sprints</div><div class="sprintpills">${f.sprints.map(s=>`<a class="spill ${s<=5?'done':''}" href="${trackerLink(String(s))}" target="_blank" rel="noopener" style="text-decoration:none;cursor:pointer">${sprintLabel(s)}${s<=5?' ✓':''}</a>`).join('')}</div>`:''}
     <div class="sectlabel">Needs first (prerequisites)</div>
     ${prereqs.length?prereqs.map(p=>`<div class="prow">${nm(p)}</div>`).join(''):'<div style="font-size:11px;color:var(--mut)">None — this is a root.</div>'}
     <div class="sectlabel">Unlocks (depends on this)</div>
@@ -278,6 +278,26 @@ function renderSprintDAG(){
   document.getElementById('canvas').innerHTML=`<svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">${adefs()}${labels}${edges}${nodeSvg}</svg>`;
   document.querySelectorAll('.node').forEach(g=>g.onclick=()=>sprintPanel(g.dataset.sn));
 }
+/* Map a sprint id to its stage-split tracker file + a deep-link URL.
+   Numeric S1-23 and Planning live in the MVP tracker; FT-* in fast; L-* in later. */
+function trackerFileFor(sid){
+  sid=String(sid);
+  if(/^FT-/.test(sid)) return 'sprint_tracker_fast.html';
+  if(/^L-/.test(sid))  return 'sprint_tracker_later.html';
+  return 'sprint_tracker_mvp.html'; /* numeric sprints + Planning */
+}
+function trackerLink(sid, ticket){
+  let u=trackerFileFor(sid)+'?sprint='+encodeURIComponent(sid);
+  if(ticket) u+='&ticket='+encodeURIComponent(ticket);
+  return u;
+}
+/* Friendly sprint label matching the tracker: S6 / Plan / FT-1 / L-1 */
+function sprintLabel(sid){
+  sid=String(sid);
+  if(sid==='Planning') return 'Plan';
+  if(/^[0-9]+$/.test(sid)) return 'S'+sid;
+  return sid; /* FT-1, L-1 */
+}
 function sprintPanel(n){
   n=String(n);
   const s=G.sprints.find(x=>String(x.id)===n);
@@ -289,9 +309,9 @@ function sprintPanel(n){
   const tks=Object.keys(TD.tk_sprint).filter(t=>TD.tk_sprint[t]===n);
   const featColor={};G.features.forEach(f=>featColor[f.name]=f.color);
   const ticketsHtml=tks.slice(0,40).map(t=>{const feat=TD.tk_feature[t]||'—';
-    return `<div class="ticketmini"><b>${t}</b> — ${(TD.tk_name[t]||'').slice(0,46)} <span class="ptag">${feat}</span></div>`;}).join('');
+    return `<a class="ticketmini" href="${trackerLink(n,t)}" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;cursor:pointer"><b>${t}</b> — ${(TD.tk_name[t]||'').slice(0,46)} <span class="ptag">${feat}</span></a>`;}).join('');
   document.getElementById('panelBody').innerHTML=`
-    <h3>Sprint ${n}${s.done?' ✓':''}</h3>
+    <h3>${sprintLabel(n)}${s.done?' ✓':''} <a href="${trackerLink(n)}" target="_blank" rel="noopener" style="font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:${stageColor[s.stage]};border:1px solid ${stageColor[s.stage]}66;border-radius:6px;padding:2px 8px;margin-left:8px;text-decoration:none;vertical-align:middle">Open in tracker &rarr;</a></h3>
     <div style="font-size:11px;color:var(--mut)">${s.phase} · ${s.theme} · ${s.items} checklist items</div>
     <span class="pbadge" style="background:${stageColor[s.stage]}22;color:${stageColor[s.stage]};margin-top:8px;display:inline-block">${({done:'DONE',mvp:'MVP',fast:'Fast-follow',later:'Later (Phase 2)'})[s.stage]}</span>
     ${s.why?`<div class="sectlabel">Why it's ${({done:'done',mvp:'in the MVP',fast:'fast-follow',later:'later'})[s.stage]}</div><div style="font-size:10.5px;line-height:1.5;color:var(--ink);background:${stageColor[s.stage]}14;border:1px solid ${stageColor[s.stage]}40;border-radius:9px;padding:9px 11px">${s.why}</div>`:''}
@@ -303,9 +323,9 @@ function sprintPanel(n){
         ${s.breakdown.later?`<span class="spill" style="border-color:${stageColor.later};color:${stageColor.later}">${s.breakdown.later} later</span>`:''}
       </div>`:''}
     <div class="sectlabel">Sprint prerequisites</div>
-    ${prereqs.length?prereqs.map(p=>`<div class="prow">Sprint ${p} <span class="ptag">${(G.sprints.find(z=>String(z.id)===String(p))||{}).theme||''}</span></div>`).join(''):'<div style="font-size:11px;color:var(--mut)">None.</div>'}
+    ${prereqs.length?prereqs.map(p=>`<div class="prow">${sprintLabel(p)} <span class="ptag">${(G.sprints.find(z=>String(z.id)===String(p))||{}).theme||''}</span></div>`).join(''):'<div style="font-size:11px;color:var(--mut)">None.</div>'}
     <div class="sectlabel">Unlocks sprints</div>
-    ${enables.length?enables.map(p=>`<div class="prow">Sprint ${p} <span class="ptag">${(G.sprints.find(z=>String(z.id)===String(p))||{}).theme||''}</span></div>`).join(''):'<div style="font-size:11px;color:var(--mut)">—</div>'}
+    ${enables.length?enables.map(p=>`<div class="prow">${sprintLabel(p)} <span class="ptag">${(G.sprints.find(z=>String(z.id)===String(p))||{}).theme||''}</span></div>`).join(''):'<div style="font-size:11px;color:var(--mut)">—</div>'}
     <div class="sectlabel">Tickets in this sprint → feature (${tks.length})</div>
     ${ticketsHtml||'<div style="font-size:11px;color:var(--mut)">No tickets.</div>'}`;
   openPanel();
@@ -331,7 +351,7 @@ function renderMap(){
     return `<div class="maprow" data-fid="${f.id}" style="cursor:pointer">
       <div class="feathead">${f.icon} ${f.name}
         <span class="pbadge" style="background:${c}22;color:${c};font-size:8px;padding:1px 7px;border-radius:10px">${stageTag[f.stage]}</span></div>
-      <div class="sprintpills"><span style="margin-right:8px">${dchip}</span>${sprints.length?sprints.map(n=>{const ss=(TD.sprint_stage&&TD.sprint_stage[String(n)])||'later';const sc=stageColor[n<=5?'done':ss];return `<span class="spill ${n<=5?'done':''}" data-sn="${n}" style="cursor:pointer;border-color:${sc}66">S${n}${n<=5?' \u2713':''}</span>`;}).join(''):'<span style="color:var(--mut);font-size:10px">cross-sprint</span>'}</div>
+      <div class="sprintpills"><span style="margin-right:8px">${dchip}</span>${sprints.length?sprints.map(n=>{const ss=(TD.sprint_stage&&TD.sprint_stage[String(n)])||'later';const sc=stageColor[n<=5?'done':ss];return `<span class="spill ${n<=5?'done':''}" data-sn="${n}" style="cursor:pointer;border-color:${sc}66">${sprintLabel(n)}${n<=5?' \u2713':''}</span>`;}).join(''):'<span style="color:var(--mut);font-size:10px">cross-sprint</span>'}</div>
     </div>`;
   }
   if(mapGroup==='cat'){
