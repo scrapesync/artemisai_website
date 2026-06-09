@@ -186,7 +186,7 @@ a{color:inherit;text-decoration:none}
   <div class="hero-eyebrow">CEO &amp; CO-FOUNDER · STRATEGIC NOTES</div>
   <h1 class="hero-title">Alex's <span>Vision</span></h1>
   <p class="hero-sub">Everything Alex has written — from hand-sketched February notes to June strategic memos — synthesised into one page. This is the direction he wants the product, company, and team to go.</p>
-  <div class="hero-date">📅 Sources: Feb 2026 → Jun 2026 &nbsp;·&nbsp; 8 documents &nbsp;·&nbsp; 4 themes</div>
+  <div class="hero-date">📅 Sources: Feb 2026 → Jun 2026 &nbsp;·&nbsp; 12 documents &nbsp;·&nbsp; 6 themes</div>
 </div>
 
 <div class="page-body">
@@ -587,6 +587,157 @@ a{color:inherit;text-decoration:none}
 <hr class="divider">
 
 <!-- ════════════════════════════════════
+     5b. THE MVP USER FLOW (June 3 sketch)
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5b</div>
+    <div>
+      <div class="section-title">The MVP User Flow — Alex's Own Diagram</div>
+      <div class="section-sub">Hand-drawn in his June 3 "Path to Simplicity and MVP" note. This is the exact journey he wants a new user to experience.</div>
+    </div>
+  </div>
+
+  <div class="graph-wrap">
+    <svg viewBox="0 0 760 460" width="100%" style="max-width:800px">
+      <defs>
+        <marker id="fa" markerWidth="9" markerHeight="7" refX="4.5" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#64748b"/></marker>
+      </defs>
+
+      <!-- vertical spine -->
+      <!-- 1 OAuth -->
+      <rect x="290" y="14" width="180" height="40" rx="9" fill="#0d2a24" stroke="#00D6AE" stroke-width="1.6"/>
+      <text x="380" y="33" text-anchor="middle" font-size="12" font-weight="700" fill="#00D6AE">Connect via OAuth</text>
+      <text x="380" y="47" text-anchor="middle" font-size="9" fill="#64748b">user links their Facebook page</text>
+      <line x1="380" y1="54" x2="380" y2="74" stroke="#64748b" stroke-width="1.5" marker-end="url(#fa)"/>
+
+      <!-- 2 pipelines -->
+      <rect x="280" y="76" width="200" height="40" rx="9" fill="#0d1f2e" stroke="#38bdf8" stroke-width="1.6"/>
+      <text x="380" y="95" text-anchor="middle" font-size="12" font-weight="700" fill="#38bdf8">Artemis Pipelines</text>
+      <text x="380" y="109" text-anchor="middle" font-size="9" fill="#64748b">OCR, NLP, enrichment kick in</text>
+      <line x1="380" y1="116" x2="380" y2="136" stroke="#64748b" stroke-width="1.5" marker-end="url(#fa)"/>
+
+      <!-- 3 art-e welcome -->
+      <rect x="285" y="138" width="190" height="40" rx="9" fill="#1a1028" stroke="#a78bfa" stroke-width="1.6"/>
+      <text x="380" y="157" text-anchor="middle" font-size="12" font-weight="700" fill="#a78bfa">Art-E: Welcome</text>
+      <text x="380" y="171" text-anchor="middle" font-size="9" fill="#64748b">witty engagement while it loads</text>
+      <line x1="380" y1="178" x2="380" y2="198" stroke="#64748b" stroke-width="1.5" marker-end="url(#fa)"/>
+
+      <!-- 4 2yr analysis -->
+      <rect x="295" y="200" width="170" height="40" rx="9" fill="#1a1a0d" stroke="#f5a623" stroke-width="1.6"/>
+      <text x="380" y="219" text-anchor="middle" font-size="12" font-weight="700" fill="#f5a623">⏱ 2-Year Analysis</text>
+      <text x="380" y="233" text-anchor="middle" font-size="9" fill="#64748b">full historical backfill processed</text>
+
+      <!-- split to 3 branches -->
+      <line x1="380" y1="240" x2="380" y2="258" stroke="#64748b" stroke-width="1.5"/>
+      <line x1="140" y1="258" x2="620" y2="258" stroke="#64748b" stroke-width="1.5"/>
+      <line x1="140" y1="258" x2="140" y2="278" stroke="#64748b" stroke-width="1.5" marker-end="url(#fa)"/>
+      <line x1="380" y1="258" x2="380" y2="278" stroke="#64748b" stroke-width="1.5" marker-end="url(#fa)"/>
+      <line x1="620" y1="258" x2="620" y2="278" stroke="#64748b" stroke-width="1.5" marker-end="url(#fa)"/>
+
+      <!-- Branch A: Virality/Predictions -->
+      <rect x="40" y="280" width="200" height="92" rx="10" fill="#111827" stroke="#00D6AE" stroke-width="1.4"/>
+      <text x="140" y="302" text-anchor="middle" font-size="11" font-weight="800" fill="#00D6AE">Virality + Predictions</text>
+      <text x="140" y="320" text-anchor="middle" font-size="9" fill="#94a3b8">delivered via Art-E</text>
+      <text x="140" y="338" text-anchor="middle" font-size="8.5" fill="#64748b">"this post will likely</text>
+      <text x="140" y="350" text-anchor="middle" font-size="8.5" fill="#64748b">underperform — change</text>
+      <text x="140" y="362" text-anchor="middle" font-size="8.5" fill="#64748b">the hook"</text>
+
+      <!-- Branch B: Art-E breakdown + Discovery -->
+      <rect x="280" y="280" width="200" height="92" rx="10" fill="#111827" stroke="#a78bfa" stroke-width="1.4"/>
+      <text x="380" y="300" text-anchor="middle" font-size="11" font-weight="800" fill="#a78bfa">Art-E Breakdown</text>
+      <text x="380" y="316" text-anchor="middle" font-size="8.5" fill="#94a3b8">+ Intelligence Feed + Discovery</text>
+      <text x="380" y="333" text-anchor="middle" font-size="8.5" fill="#64748b">"this is what happened,</text>
+      <text x="380" y="345" text-anchor="middle" font-size="8.5" fill="#64748b">this is what to do, this</text>
+      <text x="380" y="357" text-anchor="middle" font-size="8.5" fill="#64748b">is the potential outcome"</text>
+
+      <!-- Branch C: Alerts -->
+      <rect x="520" y="280" width="200" height="92" rx="10" fill="#111827" stroke="#f5a623" stroke-width="1.4"/>
+      <text x="620" y="302" text-anchor="middle" font-size="11" font-weight="800" fill="#f5a623">Alert System</text>
+      <text x="620" y="320" text-anchor="middle" font-size="9" fill="#94a3b8">via Art-E, direct to phone</text>
+      <text x="620" y="338" text-anchor="middle" font-size="8.5" fill="#64748b">"this is happening, act now"</text>
+      <text x="620" y="350" text-anchor="middle" font-size="8.5" fill="#64748b">positive = viral,</text>
+      <text x="620" y="362" text-anchor="middle" font-size="8.5" fill="#64748b">negative = brand risk</text>
+
+      <!-- MVP feature list footer -->
+      <text x="380" y="404" text-anchor="middle" font-size="10" font-weight="700" fill="#94a3b8" letter-spacing=".05em">THE 5 MVP SURFACES</text>
+      <g font-size="9.5" fill="#64748b">
+        <rect x="95" y="416" width="110" height="24" rx="12" fill="rgba(0,214,174,.08)" stroke="#00D6AE" stroke-width=".8"/><text x="150" y="431" text-anchor="middle" fill="#00D6AE">Art-E</text>
+        <rect x="213" y="416" width="110" height="24" rx="12" fill="rgba(245,166,35,.08)" stroke="#f5a623" stroke-width=".8"/><text x="268" y="431" text-anchor="middle" fill="#f5a623">Alerts</text>
+        <rect x="331" y="416" width="130" height="24" rx="12" fill="rgba(167,139,250,.08)" stroke="#a78bfa" stroke-width=".8"/><text x="396" y="431" text-anchor="middle" fill="#a78bfa">Discovery feed</text>
+        <rect x="469" y="416" width="140" height="24" rx="12" fill="rgba(99,102,241,.08)" stroke="#6366f1" stroke-width=".8"/><text x="539" y="431" text-anchor="middle" fill="#93c5fd">Intelligence feed</text>
+      </g>
+      <rect x="305" y="444" width="150" height="22" rx="11" fill="rgba(56,189,248,.08)" stroke="#38bdf8" stroke-width=".8"/><text x="380" y="459" text-anchor="middle" font-size="9.5" fill="#38bdf8">Optimal timing</text>
+    </svg>
+  </div>
+
+  <div class="alex-note" style="margin-top:20px">
+    <div class="alex-avatar">A</div>
+    <div class="alex-text">"If a user enters, gets a 2-year breakdown of analysis from Art-E, is told how to optimise, shown hidden patterns, and presented with campaign and collaboration opportunities — then there is no confusion. They need <em>zero new skills</em>, just the ability to use social media and connect to Artemis. I believe this is success."<br><em style="font-size:11px;margin-top:4px;display:block">— Path to Simplicity and MVP (June 3, 2026)</em></div>
+  </div>
+
+  <div class="quote" style="margin-top:8px">
+    "We need to get out of the thought process of 'more features are better' and start thinking that less is more. <strong>More intelligence, less features.</strong> The most important question right now: what is going to be valuable to our first set of target users, and what will get them to invite others? Anything else at the moment is noise."
+    <cite>— Alex, June 3, 2026</cite>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     5c. VARIABLE REWARDS
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5c</div>
+    <div>
+      <div class="section-title">The Variable Rewards Model</div>
+      <div class="section-sub">Alex's psychological-engagement framework from the June 3 note — how to make Artemis a habit that keeps users coming back.</div>
+    </div>
+  </div>
+
+  <div class="cards-grid col3">
+    <div class="card accent-purple">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">Rewards of the Tribe?</div>
+      <div class="card-body"><strong>Changing AI feed.</strong> A constantly-changing intelligence feed so the user never sees the same thing twice when they open the app. Novelty drives the daily return.</div>
+    </div>
+    <div class="card accent-teal">
+      <div class="card-icon">⭐</div>
+      <div class="card-title">Social Rewards</div>
+      <div class="card-body"><strong>Starring / saving pages for collab.</strong> Gives a user validation that their page and audience are sought after by others. Status as a reward.</div>
+    </div>
+    <div class="card accent-amber">
+      <div class="card-icon">🔍</div>
+      <div class="card-title">Rewards of the Hunt</div>
+      <div class="card-body"><strong>Searching for intelligence + actionable insights</strong>, and relevant pages in the Discovery feed. The reward is psychological — finding what they're looking for, so they can decide to act.</div>
+    </div>
+    <div class="card accent-blue">
+      <div class="card-icon">🏅</div>
+      <div class="card-title">Rewards of the Self</div>
+      <div class="card-body"><strong>Validation from AI.</strong> Scores for completing Art-E suggestions, rewards for mastery and competence within the platform. Progress the user feels.</div>
+    </div>
+    <div class="card accent-teal">
+      <div class="card-icon">🕊️</div>
+      <div class="card-title">Autonomy</div>
+      <div class="card-body"><strong>No new skills needed. Never forcing use.</strong> They want to use it. The product earns the open, it doesn't demand it.</div>
+    </div>
+    <div class="card" style="border-color:rgba(244,63,94,.2);background:rgba(244,63,94,.04)">
+      <div class="card-icon">⚠️</div>
+      <div class="card-title">The Warning</div>
+      <div class="card-body">"<strong>Limited variability becomes boring and predictable.</strong> To maintain interest we need rewards that vary — so they're not predictable — in a super-easy, super-simple, but variable and attractive way."</div>
+    </div>
+  </div>
+
+  <div class="alex-note" style="margin-top:20px">
+    <div class="alex-avatar">A</div>
+    <div class="alex-text">Note for the team: most of these reward mechanics are staged for <em>after</em> MVP launch in the current plan (gamification sits in the Later track). Alex flags them here as the retention engine the product should grow into — the "why would they open it tomorrow?" answer.</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
      6. THE INTELLIGENCE ARCHITECTURE
 ═══════════════════════════════════════ -->
 <div class="section">
@@ -953,7 +1104,7 @@ a{color:inherit;text-decoration:none}
 </div><!-- /page-body -->
 
 <div class="page-footer">
-  ArtemisAI — Alex's Vision &nbsp;·&nbsp; Synthesised from 8 documents across Feb–Jun 2026 &nbsp;·&nbsp; For internal team use only
+  ArtemisAI — Alex's Vision &nbsp;·&nbsp; Synthesised from 12 documents across Feb–Jun 2026 &nbsp;·&nbsp; For internal team use only
 </div>
 
 </body>
