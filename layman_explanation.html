@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>What We're Building (In Plain English) — ArtemisAI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
 <style>
 :root{
   --bg:#0b0f1a;--card:#111827;--border:#1e2d44;
@@ -90,6 +91,18 @@ nav.site-nav *{box-sizing:border-box}
 .mvp-game{font-size:12px;color:#cdd5ee;line-height:1.55;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)}
 .mvp-game b{color:var(--mc-text)}
 @media(max-width:640px){.mvp-grid{grid-template-columns:1fr}}
+/* REVENUE GROWTH */
+.rev-wrap{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px 26px}
+.rev-wrap svg{display:block;width:100%;max-width:860px;margin:0 auto;height:auto}
+.rev-legend{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--mut)}
+.rev-legend span{display:inline-flex;align-items:center;gap:6px}
+.rev-dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+.rev-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
+.rev-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.rev-stage{font-size:11px;color:var(--mut);margin-bottom:4px}
+.rev-amt{font-size:20px;font-weight:900;font-family:'Inter';letter-spacing:-.02em}
+.rev-note{font-size:12px;color:var(--mut);text-align:center;margin-top:14px;line-height:1.6;font-style:italic}
+
 
 /* SIMPLE FLOW STRIP */
 .flowstrip{display:flex;align-items:stretch;gap:0;flex-wrap:nowrap;overflow-x:auto;padding:6px 0}
@@ -400,6 +413,91 @@ nav.site-nav *{box-sizing:border-box}
         <div class="why-item-text">Who tell their friends — and the circle repeats.</div>
       </div>
     </div>
+  </div>
+
+  <!-- REVENUE GROWTH -->
+  <div class="section-label">Where the money comes from — and how it grows</div>
+  <div class="rev-wrap">
+    <svg viewBox="0 0 860 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Projected revenue growth chart">
+      <defs>
+        <linearGradient id="revfill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#00D6AE" stop-opacity=".45"/>
+          <stop offset="100%" stop-color="#00D6AE" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="revline" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#00D6AE"/>
+          <stop offset="60%" stop-color="#38bdf8"/>
+          <stop offset="100%" stop-color="#a78bfa"/>
+        </linearGradient>
+      </defs>
+
+      <!-- axes -->
+      <line x1="70" y1="40" x2="70" y2="310" stroke="#1e2d44" stroke-width="1.5"/>
+      <line x1="70" y1="310" x2="810" y2="310" stroke="#1e2d44" stroke-width="1.5"/>
+
+      <!-- y gridlines (log-ish: £6K, £900K, £108M, £1.18B) -->
+      <line x1="70" y1="250" x2="810" y2="250" stroke="#1e2d44" stroke-width=".7" stroke-dasharray="3 6" opacity=".5"/>
+      <line x1="70" y1="180" x2="810" y2="180" stroke="#1e2d44" stroke-width=".7" stroke-dasharray="3 6" opacity=".5"/>
+      <line x1="70" y1="110" x2="810" y2="110" stroke="#1e2d44" stroke-width=".7" stroke-dasharray="3 6" opacity=".5"/>
+      <text x="62" y="313" text-anchor="end" font-size="10" fill="#64748b" font-family="Inter">£6K</text>
+      <text x="62" y="253" text-anchor="end" font-size="10" fill="#64748b" font-family="Inter">£900K</text>
+      <text x="62" y="183" text-anchor="end" font-size="10" fill="#64748b" font-family="Inter">£10M</text>
+      <text x="62" y="113" text-anchor="end" font-size="10" fill="#64748b" font-family="Inter">£100M</text>
+      <text x="62" y="48" text-anchor="end" font-size="10" fill="#64748b" font-family="Inter">£1B+</text>
+
+      <!-- data points (x evenly spaced, y on log scale) -->
+      <!-- 10c=£6K(y300) 100c=£72K(y262) 1Kc=£900K(y250→adjust) ... use smooth climb -->
+      <!-- positions: x: 130,260,390,520,650,780 -->
+      <!-- y for: £6K=300, £72K=275, £900K=240, £10.2M=178, £108M=108, £1.18B=42 -->
+      <polygon points="130,300 260,275 390,240 520,178 650,108 780,42 780,310 130,310" fill="url(#revfill)"/>
+      <polyline points="130,300 260,275 390,240 520,178 650,108 780,42" fill="none" stroke="url(#revline)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+
+      <!-- points + labels -->
+      <g font-family="Inter">
+        <circle cx="130" cy="300" r="5" fill="#00D6AE"/>
+        <text x="130" y="332" text-anchor="middle" font-size="11" fill="#94a3b8">10 clients</text>
+        <text x="130" y="290" text-anchor="middle" font-size="10.5" font-weight="800" fill="#00D6AE">£6K/yr</text>
+
+        <circle cx="260" cy="275" r="5" fill="#00D6AE"/>
+        <text x="260" y="332" text-anchor="middle" font-size="11" fill="#94a3b8">100 clients</text>
+        <text x="260" y="265" text-anchor="middle" font-size="10.5" font-weight="800" fill="#00D6AE">£72K/yr</text>
+
+        <circle cx="390" cy="240" r="5.5" fill="#38bdf8"/>
+        <text x="390" y="332" text-anchor="middle" font-size="11" fill="#94a3b8">1,000 clients</text>
+        <text x="390" y="230" text-anchor="middle" font-size="10.5" font-weight="800" fill="#38bdf8">£900K/yr</text>
+
+        <circle cx="520" cy="178" r="6" fill="#38bdf8"/>
+        <text x="520" y="332" text-anchor="middle" font-size="11" fill="#94a3b8">10,000 clients</text>
+        <text x="520" y="168" text-anchor="middle" font-size="10.5" font-weight="800" fill="#38bdf8">£10.2M/yr</text>
+
+        <circle cx="650" cy="108" r="6.5" fill="#a78bfa"/>
+        <text x="650" y="332" text-anchor="middle" font-size="11" fill="#94a3b8">100,000 clients</text>
+        <text x="650" y="98" text-anchor="middle" font-size="10.5" font-weight="800" fill="#a78bfa">£108M/yr</text>
+
+        <circle cx="780" cy="42" r="8" fill="#a78bfa"/>
+        <text x="780" y="332" text-anchor="middle" font-size="11" fill="#94a3b8">1,000,000</text>
+        <text x="780" y="30" text-anchor="middle" font-size="11.5" font-weight="900" fill="#a78bfa">£1.18B/yr</text>
+      </g>
+
+      <!-- "we are here" -->
+      <line x1="130" y1="40" x2="130" y2="310" stroke="#00D6AE" stroke-width="1" stroke-dasharray="3 4" opacity=".5"/>
+      <text x="136" y="54" font-size="10" font-weight="800" fill="#00D6AE">← We start here</text>
+
+      <text x="440" y="362" text-anchor="middle" font-size="11" fill="#64748b" font-family="Inter">Number of paying customers (each pays roughly £50–£99 per month)</text>
+    </svg>
+    <div class="rev-legend">
+      <span><span class="rev-dot" style="background:#00D6AE"></span> Early days</span>
+      <span><span class="rev-dot" style="background:#38bdf8"></span> Growing</span>
+      <span><span class="rev-dot" style="background:#a78bfa"></span> At scale</span>
+    </div>
+
+    <div class="rev-cards">
+      <div class="rev-card"><div class="rev-stage">Simple idea</div><div class="rev-amt" style="color:#00D6AE">£50–99</div><div class="rev-stage" style="margin-top:4px">per page, per month</div></div>
+      <div class="rev-card"><div class="rev-stage">Year 1–2 goal</div><div class="rev-amt" style="color:#00D6AE">100s</div><div class="rev-stage" style="margin-top:4px">of pages paying</div></div>
+      <div class="rev-card"><div class="rev-stage">The big lever</div><div class="rev-amt" style="color:#38bdf8">Agencies</div><div class="rev-stage" style="margin-top:4px">bring 20+ pages each</div></div>
+      <div class="rev-card"><div class="rev-stage">Bonus value</div><div class="rev-amt" style="color:#a78bfa">The data</div><div class="rev-stage" style="margin-top:4px">is worth money on its own</div></div>
+    </div>
+    <div class="rev-note">It's simple: each page pays a small monthly fee. The magic is that costs barely rise as we add customers — so the more pages join, the more it adds up. And because every customer also makes the whole system smarter, the business is worth far more than just the monthly fees. <strong style="color:#cdd5ee">(These are long-term projections, not promises — but they show the shape of the opportunity.)</strong></div>
   </div>
 
   <!-- THE GOAL -->

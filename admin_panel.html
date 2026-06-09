@@ -285,6 +285,13 @@ h1 span{
 }
 @media(min-width:700px){.cards{grid-template-columns:repeat(3, 1fr)}}
 @media(min-width:1100px){.cards{grid-template-columns:repeat(4, 1fr)}}
+.reorder-hint{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;max-width:1280px;margin:0 auto 14px;padding:9px 16px;border-radius:10px;background:rgba(0,212,170,0.05);border:1px solid rgba(0,212,170,0.18);font-size:12.5px;color:var(--txt-soft,#9aa6bd)}
+.reorder-reset{padding:5px 12px;border-radius:7px;border:1px solid var(--bdr,rgba(255,255,255,.14));background:transparent;color:#9aa6bd;font-size:11.5px;font-family:inherit;cursor:pointer;transition:all .2s;white-space:nowrap}
+.reorder-reset:hover{border-color:rgba(0,212,170,.5);color:#00d4aa}
+.dest-card{cursor:grab}
+.dest-card.dragging{opacity:.45;cursor:grabbing;transform:scale(.98)}
+.dest-card.drag-over{outline:2px dashed rgba(0,212,170,.55);outline-offset:3px}
+.dest-card a,.dest-card{user-select:none}
 
 .dest-card{
   background:var(--bg-elev);
@@ -535,7 +542,11 @@ h1 span{
     <h1>Welcome back, <span id="user-first">there</span></h1>
     <p class="sub" id="user-role-line">Where would you like to go today?</p>
   </div>
-  <div class="cards">
+  <div class="reorder-hint" id="reorder-hint">
+    <span>✦ Tip: drag any card to rearrange this page just how you like it. Your layout is saved on this device.</span>
+    <button class="reorder-reset" id="reorder-reset" onclick="resetCardOrder()" style="display:none">↺ Reset order</button>
+  </div>
+  <div class="cards" id="cards-grid">
     <a href="countdown.html" class="dest-card" style="--cc:#00e7bd;--ci:rgba(0,231,189,0.10);--cb:rgba(0,231,189,0.28)">
       <span class="dest-arrow">↗</span>
       <div class="dest-icon" style="overflow:hidden">
@@ -797,6 +808,76 @@ h1 span{
     <button class="signout-btn" onclick="doLogout()">⏻ Sign Out</button>
   </div>
 </div>
+
+<script>
+/* ===== Drag-to-reorder cards (saved per-device) ===== */
+(function(){
+  var GRID_ID='cards-grid', KEY='artemis_card_order_v1';
+  function cards(){return Array.prototype.slice.call(document.querySelectorAll('#'+GRID_ID+' .dest-card'));}
+  function keyOf(c){ // stable id = href filename
+    var h=c.getAttribute('href')||''; return h.split('/').pop();
+  }
+  function applySavedOrder(){
+    var grid=document.getElementById(GRID_ID); if(!grid) return;
+    var saved; try{ saved=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){ saved=null; }
+    if(!saved || !saved.length){ return; }
+    var map={}; cards().forEach(function(c){ map[keyOf(c)]=c; });
+    saved.forEach(function(k){ if(map[k]) grid.appendChild(map[k]); });
+    // any cards not in saved list (new pages added later) stay at the end in source order
+    cards().forEach(function(c){ if(saved.indexOf(keyOf(c))===-1) grid.appendChild(c); });
+    showResetIfCustom();
+  }
+  function saveOrder(){
+    try{ localStorage.setItem(KEY, JSON.stringify(cards().map(keyOf))); }catch(e){}
+    showResetIfCustom();
+  }
+  function showResetIfCustom(){
+    var btn=document.getElementById('reorder-reset'); if(!btn) return;
+    btn.style.display = localStorage.getItem(KEY) ? 'inline-block' : 'none';
+  }
+  window.resetCardOrder=function(){
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    location.reload();
+  };
+
+  var dragEl=null, didDrag=false;
+  function onDragStart(e){
+    dragEl=this; didDrag=true; this.classList.add('dragging');
+    try{ e.dataTransfer.effectAllowed='move'; e.dataTransfer.setData('text/plain',keyOf(this)); }catch(_){}
+  }
+  function onDragEnd(){
+    if(dragEl) dragEl.classList.remove('dragging');
+    cards().forEach(function(c){ c.classList.remove('drag-over'); });
+    dragEl=null; saveOrder();
+    setTimeout(function(){ didDrag=false; }, 50);
+  }
+  function onDragOver(e){
+    e.preventDefault();
+    if(!dragEl || this===dragEl) return;
+    this.classList.add('drag-over');
+    var grid=document.getElementById(GRID_ID);
+    var rect=this.getBoundingClientRect();
+    var after=(e.clientY-rect.top)/rect.height>0.5 || (e.clientX-rect.left)/rect.width>0.5;
+    if(after){ grid.insertBefore(dragEl, this.nextSibling); }
+    else{ grid.insertBefore(dragEl, this); }
+  }
+  function onDragLeave(){ this.classList.remove('drag-over'); }
+  function onClickGuard(e){ if(didDrag){ e.preventDefault(); } }
+
+  function wire(){
+    applySavedOrder();
+    cards().forEach(function(c){
+      c.setAttribute('draggable','true');
+      c.addEventListener('dragstart',onDragStart);
+      c.addEventListener('dragend',onDragEnd);
+      c.addEventListener('dragover',onDragOver);
+      c.addEventListener('dragleave',onDragLeave);
+      c.addEventListener('click',onClickGuard);
+    });
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',wire); } else { wire(); }
+})();
+</script>
 
 <script>
 /* Theme toggle (matches index.html + mockup_v2.html) */
