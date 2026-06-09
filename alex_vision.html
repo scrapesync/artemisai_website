@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alex's Vision — ArtemisAI</title>
+<style>
+:root{
+  --bg:#0b0f1a;--card:#111827;--card2:#151e2e;--border:#1e2d44;
+  --teal:#00D6AE;--purple:#a78bfa;--amber:#f5a623;--blue:#6366f1;
+  --rose:#f43f5e;--emerald:#10b981;--sky:#38bdf8;
+  --ink:#e2e8f0;--mut:#64748b;--mut2:#475569;
+  --font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;border-bottom:1px solid var(--border);background:rgba(11,15,26,.96);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}
+.topbar-logo{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.topbar-back{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);border:1px solid var(--border);padding:5px 12px;border-radius:6px;transition:color .2s,border-color .2s}
+.topbar-back:hover{color:var(--teal);border-color:var(--teal)}
+
+/* HERO */
+.hero{padding:72px 40px 56px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(0,214,174,.07) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.hero-title{font-size:clamp(28px,5vw,48px);font-weight:900;line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
+.hero-title span{background:linear-gradient(135deg,var(--teal),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:15px;color:var(--mut);max-width:640px;margin:0 auto 32px;line-height:1.7}
+.hero-date{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--mut);font-family:var(--mono);background:rgba(255,255,255,.04);border:1px solid var(--border);padding:4px 10px;border-radius:20px}
+
+/* LAYOUT */
+.page-body{max-width:1200px;margin:0 auto;padding:0 28px 80px}
+.section{margin-bottom:72px}
+.section-header{display:flex;align-items:flex-end;gap:14px;margin-bottom:32px}
+.section-num{font-family:var(--mono);font-size:11px;font-weight:800;color:var(--teal);opacity:.6;letter-spacing:.1em;padding-top:4px}
+.section-title{font-size:22px;font-weight:800;letter-spacing:-.01em}
+.section-sub{font-size:13px;color:var(--mut);margin-top:4px;line-height:1.6;max-width:600px}
+
+/* CARDS */
+.cards-grid{display:grid;gap:16px}
+.cards-grid.col2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.cards-grid.col3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px}
+.card.accent-teal{border-color:rgba(0,214,174,.2);background:rgba(0,214,174,.04)}
+.card.accent-purple{border-color:rgba(167,139,250,.2);background:rgba(167,139,250,.04)}
+.card.accent-amber{border-color:rgba(245,166,35,.2);background:rgba(245,166,35,.04)}
+.card.accent-blue{border-color:rgba(99,102,241,.2);background:rgba(99,102,241,.04)}
+.card.accent-rose{border-color:rgba(244,63,94,.2);background:rgba(244,63,94,.04)}
+.card-icon{font-size:24px;margin-bottom:10px}
+.card-title{font-size:14px;font-weight:700;margin-bottom:8px}
+.card-body{font-size:13px;color:var(--mut);line-height:1.7}
+.card-body strong{color:var(--ink)}
+
+/* QUOTE BLOCKS */
+.quote{border-left:3px solid var(--teal);background:rgba(0,214,174,.05);border-radius:0 10px 10px 0;padding:14px 18px;margin:0 0 12px;font-size:13px;line-height:1.7;font-style:italic;color:var(--ink)}
+.quote.warn{border-color:var(--amber);background:rgba(245,166,35,.05)}
+.quote.danger{border-color:var(--rose);background:rgba(244,63,94,.05)}
+.quote cite{display:block;font-size:11px;font-style:normal;color:var(--mut);margin-top:6px;font-family:var(--mono)}
+
+/* FLYWHEEL DIAGRAM */
+.flywheel-wrap{display:flex;justify-content:center;align-items:center;padding:32px 0;position:relative}
+.flywheel-wrap svg{overflow:visible}
+
+/* VALUATION TABLE */
+.val-table{width:100%;border-collapse:collapse;font-size:13px}
+.val-table th{text-align:left;padding:10px 14px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--border);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.val-table td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.val-table tr:hover td{background:rgba(255,255,255,.02)}
+.val-pill{display:inline-block;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:700;font-family:var(--mono)}
+
+/* LAYER DIAGRAM */
+.layers{display:flex;flex-direction:column;gap:0}
+.layer-row{display:flex;align-items:stretch;border:1px solid var(--border);border-radius:0;background:var(--card);position:relative;transition:transform .15s}
+.layer-row:first-child{border-radius:12px 12px 0 0}
+.layer-row:last-child{border-radius:0 0 12px 12px}
+.layer-row+.layer-row{border-top:none}
+.layer-row:hover{transform:translateX(4px);z-index:2}
+.layer-label{width:160px;flex-shrink:0;padding:18px 20px;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
+.layer-name{font-size:13px;font-weight:800;margin-bottom:4px}
+.layer-tag{font-size:10px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;opacity:.6}
+.layer-content{flex:1;padding:18px 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid transparent}
+.pill.teal{color:var(--teal);border-color:rgba(0,214,174,.3);background:rgba(0,214,174,.08)}
+.pill.purple{color:var(--purple);border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.08)}
+.pill.amber{color:var(--amber);border-color:rgba(245,166,35,.3);background:rgba(245,166,35,.08)}
+.pill.blue{color:#93c5fd;border-color:rgba(99,102,241,.3);background:rgba(99,102,241,.08)}
+.pill.rose{color:var(--rose);border-color:rgba(244,63,94,.3);background:rgba(244,63,94,.08)}
+.pill.emerald{color:var(--emerald);border-color:rgba(16,185,129,.3);background:rgba(16,185,129,.08)}
+
+/* HABIT LOOP */
+.loop-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.loop-step{background:var(--card);border:1px solid var(--border);padding:20px 16px;text-align:center;position:relative}
+.loop-step:first-child{border-radius:12px 0 0 12px}
+.loop-step:last-child{border-radius:0 12px 12px 0}
+.loop-step+.loop-step{border-left:none}
+.loop-step-num{font-family:var(--mono);font-size:10px;color:var(--mut);margin-bottom:6px}
+.loop-step-icon{font-size:22px;margin-bottom:8px}
+.loop-step-title{font-size:12px;font-weight:800;margin-bottom:6px}
+.loop-step-body{font-size:11px;color:var(--mut);line-height:1.6}
+.loop-arrow{position:absolute;right:-14px;top:50%;transform:translateY(-50%);color:var(--teal);font-size:16px;z-index:3;background:var(--bg);padding:2px}
+@media(max-width:700px){
+  .loop-steps{grid-template-columns:1fr 1fr;border-radius:12px;overflow:hidden}
+  .loop-step:first-child{border-radius:0}.loop-step:last-child{border-radius:0}
+  .loop-step+.loop-step{border-left:1px solid var(--border);border-top:none}
+  .loop-arrow{display:none}
+  .layer-label{width:120px}
+}
+
+/* GRAPH viz */
+.graph-wrap{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;overflow:hidden}
+.graph-wrap svg{display:block;margin:0 auto}
+
+/* ALERT EXAMPLES */
+.alert-compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.alert-box{padding:14px 16px;border-radius:10px;font-size:13px;line-height:1.6}
+.alert-box.bad{background:rgba(244,63,94,.06);border:1px solid rgba(244,63,94,.2)}
+.alert-box.good{background:rgba(0,214,174,.06);border:1px solid rgba(0,214,174,.25)}
+.alert-label{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.alert-box.bad .alert-label{color:var(--rose)}
+.alert-box.good .alert-label{color:var(--teal)}
+
+/* WHAT NOT WHAT */
+.wvw{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.wvw-col{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px}
+.wvw-label{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.wvw-col.not .wvw-label{color:var(--rose)}
+.wvw-col.is .wvw-label{color:var(--teal)}
+.wvw-item{font-size:12px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--mut);display:flex;align-items:center;gap:7px}
+.wvw-item:last-child{border-bottom:none}
+.wvw-item span{flex:1}
+
+/* PERMISSION LADDER */
+.ladder{display:flex;flex-direction:column;gap:0}
+.rung{display:flex;align-items:stretch;background:var(--card);border:1px solid var(--border);position:relative}
+.rung:first-child{border-radius:12px 12px 0 0}
+.rung:last-child{border-radius:0 0 12px 12px}
+.rung+.rung{border-top:none}
+.rung-phase{width:100px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;border-right:1px solid var(--border);font-size:10px;font-weight:800;text-align:center;letter-spacing:.06em;text-transform:uppercase;gap:4px}
+.rung-items{flex:1;padding:14px 18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;color:var(--mut)}
+.rung-note{width:200px;flex-shrink:0;padding:12px 14px;border-left:1px solid var(--border);font-size:11px;color:var(--mut);display:flex;align-items:center;font-style:italic;line-height:1.5}
+@media(max-width:700px){.rung-note{display:none}.rung-phase{width:72px}}
+
+/* NARRATOR BOXES */
+.alex-note{display:flex;gap:14px;background:rgba(167,139,250,.05);border:1px solid rgba(167,139,250,.2);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+.alex-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--blue));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0;color:#fff}
+.alex-text{font-size:13px;line-height:1.7;color:var(--ink)}
+.alex-text em{color:var(--purple);font-style:normal;font-weight:700}
+
+/* DIVIDER */
+.divider{border:none;border-top:1px solid var(--border);margin:56px 0}
+
+/* TAGS ROW */
+.tags-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+
+/* BIG NUMBERS */
+.bignums{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+.bignum{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center}
+.bignum-n{font-size:28px;font-weight:900;font-family:var(--mono);letter-spacing:-.03em;background:linear-gradient(135deg,var(--teal),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bignum-label{font-size:11px;color:var(--mut);margin-top:4px;line-height:1.4}
+
+/* TIMELINE BAR */
+.timeline{display:flex;gap:0;border-radius:12px;overflow:hidden;height:52px;position:relative;border:1px solid var(--border)}
+.tbar-seg{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;text-align:center;letter-spacing:.04em;padding:4px 8px;transition:filter .2s;cursor:default}
+.tbar-seg:hover{filter:brightness(1.2)}
+
+/* FOOTER */
+.page-footer{text-align:center;padding:40px;font-size:11px;color:var(--mut);border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <svg width="22" height="22" viewBox="0 0 28 28"><circle cx="14" cy="14" r="12" fill="none" stroke="#00D6AE" stroke-width="2.2"/><circle cx="14" cy="14" r="4" fill="#00D6AE"/><path d="M14 2v4M14 22v4M2 14h4M22 14h4" stroke="#00D6AE" stroke-width="2" stroke-linecap="round"/></svg>
+    ARTEMISAI
+  </div>
+  <a href="admin_panel.html" class="topbar-back">← Admin Panel</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">CEO &amp; CO-FOUNDER · STRATEGIC NOTES</div>
+  <h1 class="hero-title">Alex's <span>Vision</span></h1>
+  <p class="hero-sub">Everything Alex has written — from hand-sketched February notes to June strategic memos — synthesised into one page. This is the direction he wants the product, company, and team to go.</p>
+  <div class="hero-date">📅 Sources: Feb 2026 → Jun 2026 &nbsp;·&nbsp; 8 documents &nbsp;·&nbsp; 4 themes</div>
+</div>
+
+<div class="page-body">
+
+<!-- ════════════════════════════════════
+     1. THE CORE THESIS
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div>
+      <div class="section-title">The Core Thesis — This is Not a SaaS</div>
+      <div class="section-sub">Alex's most repeated, most emphatic point across every document: you are not building software.</div>
+    </div>
+  </div>
+
+  <div class="alex-note">
+    <div class="alex-avatar">A</div>
+    <div class="alex-text">"What you are really trying to value is not a SaaS product. Most founders accidentally value only the software layer and completely miss the value of the data layer, intelligence layer, and network layer. <em>Artemis potentially contains all four.</em>"</div>
+  </div>
+
+  <div class="cards-grid col2" style="margin-top:20px">
+    <div class="card accent-teal">
+      <div class="card-icon">🗄️</div>
+      <div class="card-title">1. Software Asset</div>
+      <div class="card-body">Dashboards, analytics, Art-E, ingestion systems, recommendation engines, discovery. <strong>Creates subscription revenue and retention.</strong> Most companies stop here.</div>
+    </div>
+    <div class="card accent-blue">
+      <div class="card-icon">📦</div>
+      <div class="card-title">2. Data Asset</div>
+      <div class="card-body">150,000+ structured posts, 3.5M labelled comments today. Every post, reaction, comment, click becomes AI-ready. <strong>Raw data is worthless. Structured, labelled, continuously-updating data is exponentially valuable.</strong></div>
+    </div>
+    <div class="card accent-purple">
+      <div class="card-icon">🧠</div>
+      <div class="card-title">3. Intelligence Asset</div>
+      <div class="card-body">The models that turn data into predictions, content recommendations, audience matching, trend detection. <strong>Gets stronger with every customer, every post, every interaction.</strong></div>
+    </div>
+    <div class="card accent-amber">
+      <div class="card-icon">🕸️</div>
+      <div class="card-title">4. Network Asset</div>
+      <div class="card-body">Every creator, agency, marketplace becomes a node. As the graph grows, recommendations improve, switching costs rise. <strong>This is where valuation accelerates dramatically.</strong></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     2. THE DATA FLYWHEEL
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div>
+      <div class="section-title">The Compounding Flywheel</div>
+      <div class="section-sub">Alex's single most important economic insight: every customer makes the platform more valuable for every future customer.</div>
+    </div>
+  </div>
+
+  <div class="flywheel-wrap">
+    <svg viewBox="0 0 520 300" width="100%" style="max-width:620px">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#00D6AE" opacity=".8"/>
+        </marker>
+        <filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <radialGradient id="cg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#00D6AE" stop-opacity=".15"/>
+          <stop offset="100%" stop-color="#00D6AE" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- glow center -->
+      <circle cx="260" cy="150" r="90" fill="url(#cg)"/>
+
+      <!-- outer ring -->
+      <circle cx="260" cy="150" r="100" fill="none" stroke="#1e2d44" stroke-width="1" stroke-dasharray="4 6"/>
+
+      <!-- spinning animation circle -->
+      <circle cx="260" cy="150" r="100" fill="none" stroke="#00D6AE" stroke-width="1.5" stroke-dasharray="20 200" stroke-dashoffset="0" opacity=".5">
+        <animateTransform attributeName="transform" type="rotate" from="0 260 150" to="360 260 150" dur="8s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- 4 nodes on the ring -->
+      <!-- Top: More Creators -->
+      <circle cx="260" cy="48" r="36" fill="#0d2a24" stroke="#00D6AE" stroke-width="1.8"/>
+      <text x="260" y="43" text-anchor="middle" font-size="18">👥</text>
+      <text x="260" y="57" text-anchor="middle" font-size="9.5" font-weight="700" fill="#00D6AE">More Creators</text>
+      <text x="260" y="69" text-anchor="middle" font-size="8" fill="#64748b">join the platform</text>
+
+      <!-- Right: More Data -->
+      <circle cx="362" cy="150" r="36" fill="#0d1f2e" stroke="#38bdf8" stroke-width="1.8"/>
+      <text x="362" y="145" text-anchor="middle" font-size="18">📊</text>
+      <text x="362" y="159" text-anchor="middle" font-size="9.5" font-weight="700" fill="#38bdf8">More Data</text>
+      <text x="362" y="171" text-anchor="middle" font-size="8" fill="#64748b">posts, signals, behaviours</text>
+
+      <!-- Bottom: Better Intelligence -->
+      <circle cx="260" cy="252" r="36" fill="#1a1028" stroke="#a78bfa" stroke-width="1.8"/>
+      <text x="260" y="247" text-anchor="middle" font-size="18">🧠</text>
+      <text x="260" y="261" text-anchor="middle" font-size="9.5" font-weight="700" fill="#a78bfa">Better Intelligence</text>
+      <text x="260" y="273" text-anchor="middle" font-size="8" fill="#64748b">models improve, predictions sharpen</text>
+
+      <!-- Left: Better Outcomes -->
+      <circle cx="158" cy="150" r="36" fill="#1a1a0d" stroke="#f5a623" stroke-width="1.8"/>
+      <text x="158" y="145" text-anchor="middle" font-size="18">🚀</text>
+      <text x="158" y="159" text-anchor="middle" font-size="9.5" font-weight="700" fill="#f5a623">Better Outcomes</text>
+      <text x="158" y="171" text-anchor="middle" font-size="8" fill="#64748b">engagement, growth, ROI</text>
+
+      <!-- Arrows: clockwise top→right→bottom→left→top -->
+      <path d="M290 60 Q340 80 348 114" fill="none" stroke="#00D6AE" stroke-width="1.8" marker-end="url(#arr)" opacity=".8"/>
+      <path d="M360 186 Q352 230 293 245" fill="none" stroke="#38bdf8" stroke-width="1.8" marker-end="url(#arr)" opacity=".8"/>
+      <path d="M227 248 Q185 238 166 186" fill="none" stroke="#a78bfa" stroke-width="1.8" marker-end="url(#arr)" opacity=".8"/>
+      <path d="M160 114 Q178 72 228 57" fill="none" stroke="#f5a623" stroke-width="1.8" marker-end="url(#arr)" opacity=".8"/>
+
+      <!-- Center label -->
+      <text x="260" y="143" text-anchor="middle" font-size="11" font-weight="900" fill="#00D6AE">ARTEMIS</text>
+      <text x="260" y="158" text-anchor="middle" font-size="9" fill="#64748b">compounds daily</text>
+    </svg>
+  </div>
+
+  <div class="alex-note" style="margin-top:0">
+    <div class="alex-avatar">A</div>
+    <div class="alex-text">"Most SaaS businesses grow linearly. Artemis has the potential to grow exponentially because <em>every customer increases the future value of the dataset.</em> This is where traditional SaaS valuation starts to become inadequate."</div>
+  </div>
+
+  <div class="bignums" style="margin-top:20px">
+    <div class="bignum"><div class="bignum-n">150K+</div><div class="bignum-label">structured posts already in the warehouse</div></div>
+    <div class="bignum"><div class="bignum-n">3.5M</div><div class="bignum-label">labelled comments — AI-ready today</div></div>
+    <div class="bignum"><div class="bignum-n">600K</div><div class="bignum-label">posts + comments per creator per year</div></div>
+    <div class="bignum"><div class="bignum-n">1.2M</div><div class="bignum-label">annual data points from a single agency (20 pages)</div></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     3. VALUATION LADDER
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div>
+      <div class="section-title">The Valuation Ladder</div>
+      <div class="section-sub">Alex's 7-scenario model. Revenue is not the primary driver — data, network, and intelligence are.</div>
+    </div>
+  </div>
+
+  <div class="graph-wrap">
+    <svg viewBox="0 0 760 280" width="100%" style="max-width:800px">
+      <defs>
+        <linearGradient id="vg1" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#00D6AE" stop-opacity=".8"/>
+          <stop offset="100%" stop-color="#00D6AE" stop-opacity=".1"/>
+        </linearGradient>
+        <linearGradient id="vg2" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#a78bfa" stop-opacity=".7"/>
+          <stop offset="100%" stop-color="#a78bfa" stop-opacity=".1"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Grid lines -->
+      <line x1="60" y1="20" x2="60" y2="230" stroke="#1e2d44" stroke-width="1"/>
+      <line x1="60" y1="230" x2="740" y2="230" stroke="#1e2d44" stroke-width="1"/>
+      <line x1="60" y1="150" x2="740" y2="150" stroke="#1e2d44" stroke-width=".5" stroke-dasharray="4 6" opacity=".5"/>
+      <line x1="60" y1="85"  x2="740" y2="85"  stroke="#1e2d44" stroke-width=".5" stroke-dasharray="4 6" opacity=".5"/>
+      <text x="52" y="234" text-anchor="end" font-size="9" fill="#475569">£1M</text>
+      <text x="52" y="154" text-anchor="end" font-size="9" fill="#475569">£100M</text>
+      <text x="52" y="89"  text-anchor="end" font-size="9" fill="#475569">£1B</text>
+
+      <!-- Area paths (two lines: low and high estimate) -->
+      <!-- Scenario data: x positions for 7 scenarios -->
+      <!-- S1=sprint, S2=10c, S3=100c, S4=1K, S5=10K, S6=100K, S7=1M -->
+      <!-- y = log scale: £1M=230, £5M=200, £8M=195, £15M=180, £40M=160, £200M=130, £2B=80, £20B=30 -->
+
+      <!-- Range band -->
+      <polygon points="100,220 200,205 300,185 400,165 500,135 620,88 720,38
+                       720,32 620,78 500,122 400,150 300,170 200,195 100,208"
+               fill="url(#vg1)" opacity=".3"/>
+
+      <!-- Low line -->
+      <polyline points="100,220 200,205 300,185 400,165 500,135 620,88 720,38"
+                fill="none" stroke="#00D6AE" stroke-width="2.2" stroke-linejoin="round"/>
+      <!-- High line -->
+      <polyline points="100,208 200,195 300,170 400,150 500,122 620,78 720,32"
+                fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="5 3" opacity=".7"/>
+
+      <!-- Dots + labels -->
+      <g font-size="9" fill="#64748b">
+        <!-- S1 -->
+        <circle cx="100" cy="220" r="4" fill="#00D6AE"/>
+        <text x="100" y="244" text-anchor="middle" font-size="9" fill="#64748b">Sprint</text>
+        <text x="100" y="254" text-anchor="middle" font-size="8.5" fill="#475569">complete</text>
+        <text x="100" y="200" text-anchor="middle" font-size="9.5" font-weight="700" fill="#00D6AE">£1-5M</text>
+        <!-- S2 -->
+        <circle cx="200" cy="205" r="4" fill="#00D6AE"/>
+        <text x="200" y="244" text-anchor="middle" font-size="9" fill="#64748b">10</text>
+        <text x="200" y="254" text-anchor="middle" font-size="8.5" fill="#475569">clients</text>
+        <text x="200" y="188" text-anchor="middle" font-size="9.5" font-weight="700" fill="#00D6AE">£2-8M</text>
+        <!-- S3 -->
+        <circle cx="300" cy="185" r="4" fill="#00D6AE"/>
+        <text x="300" y="244" text-anchor="middle" font-size="9" fill="#64748b">100</text>
+        <text x="300" y="254" text-anchor="middle" font-size="8.5" fill="#475569">clients</text>
+        <text x="300" y="168" text-anchor="middle" font-size="9.5" font-weight="700" fill="#00D6AE">£5-15M</text>
+        <!-- S4 -->
+        <circle cx="400" cy="165" r="4.5" fill="#f5a623"/>
+        <text x="400" y="244" text-anchor="middle" font-size="9" fill="#64748b">1,000</text>
+        <text x="400" y="254" text-anchor="middle" font-size="8.5" fill="#475569">clients</text>
+        <text x="400" y="147" text-anchor="middle" font-size="9.5" font-weight="700" fill="#f5a623">£10-40M</text>
+        <!-- S5 -->
+        <circle cx="500" cy="135" r="5" fill="#a78bfa"/>
+        <text x="500" y="244" text-anchor="middle" font-size="9" fill="#64748b">10K</text>
+        <text x="500" y="254" text-anchor="middle" font-size="8.5" fill="#475569">clients</text>
+        <text x="500" y="116" text-anchor="middle" font-size="9.5" font-weight="700" fill="#a78bfa">£50-200M</text>
+        <!-- S6 -->
+        <circle cx="620" cy="88" r="5.5" fill="#a78bfa"/>
+        <text x="620" y="244" text-anchor="middle" font-size="9" fill="#64748b">100K</text>
+        <text x="620" y="254" text-anchor="middle" font-size="8.5" fill="#475569">clients</text>
+        <text x="620" y="70" text-anchor="middle" font-size="9.5" font-weight="700" fill="#a78bfa">£500M-2B</text>
+        <!-- S7 -->
+        <circle cx="720" cy="38" r="7" fill="#f43f5e"/>
+        <text x="720" y="244" text-anchor="middle" font-size="9" fill="#64748b">1M</text>
+        <text x="720" y="254" text-anchor="middle" font-size="8.5" fill="#475569">clients</text>
+        <text x="720" y="21" text-anchor="middle" font-size="10" font-weight="900" fill="#f43f5e">£5-20B</text>
+      </g>
+
+      <!-- WE ARE HERE -->
+      <line x1="100" y1="20" x2="100" y2="230" stroke="#00D6AE" stroke-width="1" stroke-dasharray="3 4" opacity=".5"/>
+      <text x="104" y="33" font-size="8" font-weight="800" fill="#00D6AE" opacity=".8">← WE ARE HERE</text>
+
+      <!-- Legend -->
+      <line x1="480" y1="265" x2="505" y2="265" stroke="#00D6AE" stroke-width="2"/>
+      <text x="508" y="268" font-size="9" fill="#64748b">Low estimate</text>
+      <line x1="580" y1="265" x2="605" y2="265" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="608" y="268" font-size="9" fill="#64748b">High estimate</text>
+    </svg>
+  </div>
+
+  <div class="alex-note" style="margin-top:20px">
+    <div class="alex-avatar">A</div>
+    <div class="alex-text">"A pre-revenue Artemis with completed infrastructure, working product, active creator adoption, millions of labelled interactions, and functioning intelligence models could reasonably justify a valuation in the <em>low millions on replacement cost and future strategic value alone</em> — not current revenue."</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     4. THE PRODUCT PHILOSOPHY
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div>
+      <div class="section-title">The Product Philosophy — One Question</div>
+      <div class="section-sub">From Alex's June 2026 planning note and the System Redesign. His most pointed critique of product direction.</div>
+    </div>
+  </div>
+
+  <div class="quote danger" style="margin-bottom:20px">
+    "If you execute your current version → users will try it, feel overwhelmed, and leave. If you execute the simplified version → users will rely on it daily."
+    <cite>— Alex, System Redesign (June 2026)</cite>
+  </div>
+
+  <!-- What not what -->
+  <div class="wvw">
+    <div class="wvw-col not">
+      <div class="wvw-label">❌ Not Building</div>
+      <div class="wvw-item"><span>Hootsuite competitor</span></div>
+      <div class="wvw-item"><span>Analytics dashboard</span></div>
+      <div class="wvw-item"><span>AI tool</span></div>
+      <div class="wvw-item"><span>Scheduling platform</span></div>
+      <div class="wvw-item"><span>Reporting suite</span></div>
+      <div class="wvw-item"><span>A collection of features</span></div>
+    </div>
+    <div class="wvw-col is">
+      <div class="wvw-label">✅ Building This</div>
+      <div class="wvw-item"><span>A real-time decision engine for attention and behaviour</span></div>
+      <div class="wvw-item"><span>A system that tells users what to do next</span></div>
+      <div class="wvw-item"><span>A daily habit that reduces thinking</span></div>
+      <div class="wvw-item"><span>An intelligence layer that creators can't live without</span></div>
+      <div class="wvw-item"><span>A platform where every output = insight + action</span></div>
+    </div>
+  </div>
+
+  <!-- The 3 Layers -->
+  <div style="margin-top:28px;margin-bottom:10px;font-size:12px;font-weight:700;color:var(--mut);letter-spacing:.08em;text-transform:uppercase">The Correct 3-Layer Structure</div>
+  <div class="layers">
+    <div class="layer-row">
+      <div class="layer-label">
+        <div class="layer-name" style="color:var(--teal)">Layer 1</div>
+        <div class="layer-tag">Art-E</div>
+      </div>
+      <div class="layer-content">
+        <div class="pill teal">Decision Engine</div>
+        <div class="pill teal">NOT a chatbot</div>
+        <div class="pill teal">The interface to the system</div>
+        <div class="pill teal">Explains everything</div>
+        <div class="pill teal">Recommends actions</div>
+        <div class="pill teal">Everything routes through it</div>
+      </div>
+    </div>
+    <div class="layer-row">
+      <div class="layer-label">
+        <div class="layer-name" style="color:var(--amber)">Layer 2</div>
+        <div class="layer-tag">Alerts</div>
+      </div>
+      <div class="layer-content">
+        <div class="pill amber">Re-engagement Engine</div>
+        <div class="pill amber">Only fires when action needed</div>
+        <div class="pill amber">Problem + implied solution</div>
+        <div class="pill amber">Urgency + curiosity</div>
+        <div class="pill amber">Opens Art-E on tap</div>
+      </div>
+    </div>
+    <div class="layer-row">
+      <div class="layer-label">
+        <div class="layer-name" style="color:var(--purple)">Layer 3</div>
+        <div class="layer-tag">Feed</div>
+      </div>
+      <div class="layer-content">
+        <div class="pill purple">Passive / Scrollable Brain</div>
+        <div class="pill purple">Short, clear, actionable</div>
+        <div class="pill purple">Every item = "why does this matter?"</div>
+        <div class="pill purple">No raw metrics</div>
+        <div class="pill purple">No dashboards as default</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     5. THE HABIT LOOP
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div>
+      <div class="section-title">The Artemis Habit Loop</div>
+      <div class="section-sub">Alex's blueprint for daily retention. This loop must repeat every day.</div>
+    </div>
+  </div>
+
+  <div class="loop-steps">
+    <div class="loop-step">
+      <div class="loop-step-num">01</div>
+      <div class="loop-step-icon">🔔</div>
+      <div class="loop-step-title" style="color:var(--amber)">Trigger</div>
+      <div class="loop-step-body"><strong>Alert fires:</strong> "Your audience is shifting — act now." Creates urgency + curiosity.</div>
+      <div class="loop-arrow">→</div>
+    </div>
+    <div class="loop-step">
+      <div class="loop-step-num">02</div>
+      <div class="loop-step-icon">📲</div>
+      <div class="loop-step-title" style="color:var(--blue)">Entry</div>
+      <div class="loop-step-body">User opens app. Lands in Art-E or the Intelligence Feed. <strong>Not a dashboard.</strong></div>
+      <div class="loop-arrow">→</div>
+    </div>
+    <div class="loop-step">
+      <div class="loop-step-num">03</div>
+      <div class="loop-step-icon">🧠</div>
+      <div class="loop-step-title" style="color:var(--teal)">Clarity</div>
+      <div class="loop-step-body">Art-E: "What's happening?" — explains simply, gives context, <strong>removes uncertainty.</strong></div>
+      <div class="loop-arrow">→</div>
+    </div>
+    <div class="loop-step">
+      <div class="loop-step-num">04</div>
+      <div class="loop-step-icon">⚡</div>
+      <div class="loop-step-title" style="color:var(--purple)">Action</div>
+      <div class="loop-step-body">Art-E: "Post this. At 6pm. Target this cluster." <strong>One clear next step.</strong></div>
+      <div class="loop-arrow">→</div>
+    </div>
+    <div class="loop-step">
+      <div class="loop-step-num">05</div>
+      <div class="loop-step-icon">🏆</div>
+      <div class="loop-step-title" style="color:var(--emerald)">Reward</div>
+      <div class="loop-step-body">Engagement increases. User feels in control. <strong>Sees cause → effect. Trusts the system.</strong></div>
+    </div>
+  </div>
+
+  <div style="margin-top:24px">
+    <div style="font-size:12px;font-weight:700;color:var(--mut);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px">Alert quality: the difference</div>
+    <div class="alert-compare">
+      <div class="alert-box bad">
+        <div class="alert-label">Bad Alert</div>
+        "Your sentiment is down"
+        <div style="margin-top:8px;font-size:12px;color:var(--mut)">Observation only. No action. Creates anxiety, not engagement.</div>
+      </div>
+      <div class="alert-box good">
+        <div class="alert-label">Good Alert</div>
+        "Your last 3 posts are underperforming — here's what to fix"
+        <div style="margin-top:8px;font-size:12px;color:var(--mut)">Problem + implied solution. Creates urgency. Opens Art-E naturally.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     6. THE INTELLIGENCE ARCHITECTURE
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div>
+      <div class="section-title">The Intelligence Architecture (Graph Theory)</div>
+      <div class="section-sub">From Alex's Graph Theory V3 document and Sprint 3/4 input notes. This is the technical moat he's been describing since February 2026.</div>
+    </div>
+  </div>
+
+  <div class="alex-note">
+    <div class="alex-avatar">A</div>
+    <div class="alex-text">"Traditional analytics tools look at individual metrics. Graph-based systems ask deeper questions: <em>who interacts with whom, which communities form, which users bridge groups, and how ideas move through the network.</em> Standard metrics measure performance. Graph theory explains why that performance occurs."</div>
+  </div>
+
+  <!-- Graph concepts visual -->
+  <div class="graph-wrap" style="margin-top:20px">
+    <svg viewBox="0 0 700 320" width="100%" style="max-width:760px">
+      <defs>
+        <radialGradient id="ng1"><stop offset="0%" stop-color="#00D6AE" stop-opacity=".3"/><stop offset="100%" stop-color="#00D6AE" stop-opacity="0"/></radialGradient>
+        <radialGradient id="ng2"><stop offset="0%" stop-color="#a78bfa" stop-opacity=".25"/><stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/></radialGradient>
+        <radialGradient id="ng3"><stop offset="0%" stop-color="#f5a623" stop-opacity=".25"/><stop offset="100%" stop-color="#f5a623" stop-opacity="0"/></radialGradient>
+      </defs>
+
+      <!-- Community 1 (teal) -->
+      <circle cx="155" cy="130" r="85" fill="url(#ng1)" stroke="#00D6AE" stroke-width="1" stroke-dasharray="5 5" opacity=".5"/>
+      <text x="155" y="38" text-anchor="middle" font-size="10" font-weight="700" fill="#00D6AE">Community A</text>
+      <text x="155" y="50" text-anchor="middle" font-size="8.5" fill="#64748b">Brand page + fans</text>
+
+      <!-- Community 2 (purple) -->
+      <circle cx="420" cy="130" r="85" fill="url(#ng2)" stroke="#a78bfa" stroke-width="1" stroke-dasharray="5 5" opacity=".5"/>
+      <text x="420" y="38" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa">Community B</text>
+      <text x="420" y="50" text-anchor="middle" font-size="8.5" fill="#64748b">Competitor + overlap</text>
+
+      <!-- Community 3 (amber) -->
+      <circle cx="580" cy="220" r="65" fill="url(#ng3)" stroke="#f5a623" stroke-width="1" stroke-dasharray="5 5" opacity=".5"/>
+      <text x="580" y="162" text-anchor="middle" font-size="10" font-weight="700" fill="#f5a623">Community C</text>
+      <text x="580" y="174" text-anchor="middle" font-size="8.5" fill="#64748b">Niche micro</text>
+
+      <!-- Nodes community A -->
+      <circle cx="130" cy="105" r="9" fill="#00D6AE" opacity=".8"/>
+      <circle cx="175" cy="95" r="7" fill="#00D6AE" opacity=".6"/>
+      <circle cx="115" cy="150" r="6" fill="#00D6AE" opacity=".5"/>
+      <circle cx="165" cy="155" r="7" fill="#00D6AE" opacity=".7"/>
+      <circle cx="145" cy="130" r="12" fill="#00D6AE" stroke="#0b0f1a" stroke-width="2"/><!-- hub -->
+      <text x="145" y="134" text-anchor="middle" font-size="7" font-weight="700" fill="#0b0f1a">HIGH°</text>
+
+      <!-- Nodes community B -->
+      <circle cx="400" cy="105" r="9" fill="#a78bfa" opacity=".8"/>
+      <circle cx="445" cy="100" r="7" fill="#a78bfa" opacity=".6"/>
+      <circle cx="390" cy="155" r="6" fill="#a78bfa" opacity=".5"/>
+      <circle cx="440" cy="155" r="7" fill="#a78bfa" opacity=".7"/>
+      <circle cx="418" cy="130" r="12" fill="#a78bfa" stroke="#0b0f1a" stroke-width="2"/>
+      <text x="418" y="134" text-anchor="middle" font-size="7" font-weight="700" fill="#0b0f1a">HIGH°</text>
+
+      <!-- Nodes community C -->
+      <circle cx="565" cy="210" r="8" fill="#f5a623" opacity=".7"/>
+      <circle cx="595" cy="200" r="6" fill="#f5a623" opacity=".6"/>
+      <circle cx="578" cy="235" r="7" fill="#f5a623" opacity=".5"/>
+
+      <!-- Internal edges A -->
+      <line x1="145" y1="130" x2="130" y2="105" stroke="#00D6AE" stroke-width="1.2" opacity=".4"/>
+      <line x1="145" y1="130" x2="175" y2="95" stroke="#00D6AE" stroke-width="1.2" opacity=".4"/>
+      <line x1="145" y1="130" x2="115" y2="150" stroke="#00D6AE" stroke-width="1.2" opacity=".4"/>
+      <line x1="145" y1="130" x2="165" y2="155" stroke="#00D6AE" stroke-width="1.2" opacity=".4"/>
+
+      <!-- Internal edges B -->
+      <line x1="418" y1="130" x2="400" y2="105" stroke="#a78bfa" stroke-width="1.2" opacity=".4"/>
+      <line x1="418" y1="130" x2="445" y2="100" stroke="#a78bfa" stroke-width="1.2" opacity=".4"/>
+      <line x1="418" y1="130" x2="390" y2="155" stroke="#a78bfa" stroke-width="1.2" opacity=".4"/>
+      <line x1="418" y1="130" x2="440" y2="155" stroke="#a78bfa" stroke-width="1.2" opacity=".4"/>
+
+      <!-- BRIDGE NODE (between A and B) — betweenness centrality star -->
+      <circle cx="287" cy="130" r="14" fill="#f43f5e" stroke="#0b0f1a" stroke-width="2"/>
+      <text x="287" y="134" text-anchor="middle" font-size="8" font-weight="900" fill="white">BRIDGE</text>
+      <line x1="287" y1="130" x2="165" y2="130" stroke="#f43f5e" stroke-width="2" stroke-dasharray="5 3" opacity=".7"/>
+      <line x1="287" y1="130" x2="390" y2="130" stroke="#f43f5e" stroke-width="2" stroke-dasharray="5 3" opacity=".7"/>
+      <line x1="287" y1="130" x2="565" y2="210" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="5 3" opacity=".5"/>
+      <text x="287" y="154" text-anchor="middle" font-size="8" fill="#f43f5e" font-weight="700">Super-Sharer</text>
+      <text x="287" y="164" text-anchor="middle" font-size="7.5" fill="#64748b">High betweenness centrality</text>
+
+      <!-- Cross-community overlap area label -->
+      <text x="287" y="200" text-anchor="middle" font-size="9.5" font-weight="700" fill="#38bdf8">Jaccard Overlap</text>
+      <text x="287" y="213" text-anchor="middle" font-size="8" fill="#64748b">Audience similarity between pages</text>
+
+      <!-- Legend bottom -->
+      <circle cx="60" cy="275" r="5" fill="#00D6AE"/><text x="70" y="279" font-size="9" fill="#64748b">Hub (high degree)</text>
+      <circle cx="170" cy="275" r="7" fill="#f43f5e"/><text x="182" y="279" font-size="9" fill="#64748b">Bridge (betweenness centrality)</text>
+      <circle cx="340" cy="275" r="5" fill="#64748b"/><text x="350" y="279" font-size="9" fill="#64748b">Standard node</text>
+      <line x1="420" y1="275" x2="445" y2="275" stroke="#f43f5e" stroke-width="2" stroke-dasharray="4 3"/><text x="450" y="279" font-size="9" fill="#64748b">Cross-community path</text>
+    </svg>
+  </div>
+
+  <div class="cards-grid col3" style="margin-top:20px">
+    <div class="card accent-teal">
+      <div class="card-title">Betweenness Centrality</div>
+      <div class="card-body">Finds the bridge nodes — users who connect otherwise separate communities. These are the <strong>Super-Sharers</strong> Alex identified in Sprint 3. High betweenness = high virality potential.</div>
+    </div>
+    <div class="card accent-purple">
+      <div class="card-title">Louvain Community Detection</div>
+      <div class="card-body">Groups users by behavioural interaction patterns, not demographics. <strong>"Segments everything"</strong> — content archetypes, audience reactions, posting patterns, niche fingerprints.</div>
+    </div>
+    <div class="card accent-amber">
+      <div class="card-title">Node2Vec + GraphSAGE</div>
+      <div class="card-body">Converts the entire creator graph into ML-ready vectors. Enables cross-page recommendations and the <strong>Master System</strong> — the platform watching itself and learning globally.</div>
+    </div>
+  </div>
+
+  <div class="alex-note" style="margin-top:20px">
+    <div class="alex-avatar">A</div>
+    <div class="alex-text">"Artemis creates <em>fingerprints</em> of content, audiences, and reactions. If a segment crosses over 80% match to another page's fingerprint, Artemis can give in-depth insights about that crossover. The system learns anonymised, and gives positive insights to all users with similar patterns."<br><em style="font-size:11px;margin-top:4px;display:block">— Feb 2026, Sprint 3 input notes</em></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     7. META OAUTH STRATEGY
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">07</div>
+    <div>
+      <div class="section-title">The Facebook OAuth Strategy</div>
+      <div class="section-sub">Alex's most immediately operational note. The approval is about trust, not tech.</div>
+    </div>
+  </div>
+
+  <div class="alex-note">
+    <div class="alex-avatar">A</div>
+    <div class="alex-text">"Meta is not primarily evaluating your technical sophistication. They are evaluating <em>risk, legitimacy, compliance, and intent.</em> The entire approval process is essentially a trust-verification system."</div>
+  </div>
+
+  <div style="margin-top:24px;margin-bottom:10px;font-size:12px;font-weight:700;color:var(--mut);letter-spacing:.08em;text-transform:uppercase">The Permission Ladder — Incremental, Not Maximalist</div>
+  <div class="ladder">
+    <div class="rung">
+      <div class="rung-phase" style="color:var(--teal)">Phase 1<br>NOW</div>
+      <div class="rung-items">
+        <div class="pill teal">Login authentication</div>
+        <div class="pill teal">Page identity</div>
+        <div class="pill teal">Page selection</div>
+        <div class="pill teal">Read-only analytics</div>
+        <div class="pill teal">Creator discovery</div>
+      </div>
+      <div class="rung-note">Easiest to justify. Maps to built features. Gets us in the door.</div>
+    </div>
+    <div class="rung">
+      <div class="rung-phase" style="color:var(--amber)">Phase 2<br>POST-TRUST</div>
+      <div class="rung-items">
+        <div class="pill amber">Publishing permissions</div>
+        <div class="pill amber">Messaging access</div>
+        <div class="pill amber">Agency workflows</div>
+        <div class="pill amber">Page management</div>
+      </div>
+      <div class="rung-note">Only request once trust + usage + business verification are established.</div>
+    </div>
+    <div class="rung">
+      <div class="rung-phase" style="color:var(--purple)">Phase 3<br>SCALE</div>
+      <div class="rung-items">
+        <div class="pill purple">Marketplace integrations</div>
+        <div class="pill purple">Collaboration automation</div>
+        <div class="pill purple">Monetisation tooling</div>
+        <div class="pill purple">Ad account access</div>
+      </div>
+      <div class="rung-note">Only viable after Meta becomes cooperative through demonstrated stable use.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px">
+    <div style="font-size:12px;font-weight:700;color:var(--mut);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px">The Critical Narrative Firewall</div>
+    <div class="alert-compare">
+      <div class="alert-box bad">
+        <div class="alert-label">⚠️ Never say this to Meta</div>
+        "AI-powered behavioural intelligence system"<br>
+        "Creator graph infrastructure"<br>
+        "Influence propagation engine"<br>
+        "Network intelligence layer"<br>
+        "Viral optimisation platform"
+        <div style="margin-top:8px;font-size:12px;color:var(--mut)">Triggers manipulation/profiling/scraping risk flags. Instant rejection.</div>
+      </div>
+      <div class="alert-box good">
+        <div class="alert-label">✅ Say this to Meta</div>
+        "Creator collaboration platform"<br>
+        "Page analytics tool"<br>
+        "Publishing workflow software"<br>
+        "Campaign coordination system"<br>
+        "Audience engagement insights"
+        <div style="margin-top:8px;font-size:12px;color:var(--mut)">Sounds conservative, operational, safe. Gets approved faster.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     8. EARLY VISION (FEB 2026)
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">08</div>
+    <div>
+      <div class="section-title">Where It Started — February 2026 Notes</div>
+      <div class="section-sub">Alex's hand-written sketches and early Sprint 3 input. Many ideas from here are still core to the product.</div>
+    </div>
+  </div>
+
+  <div class="cards-grid col2">
+    <div class="card accent-teal">
+      <div class="card-icon">📱</div>
+      <div class="card-title">UX Vision (Feb 2026 sketch)</div>
+      <div class="card-body">Home screen: KPI executive dashboard first, swipe up for trends, swipe up again for virality and sentiment. <strong>Swipe-based navigation, single clicks, simplicity.</strong> "Always assume our users are non-tech — simple, easy-to-use dashboards cater to everyone."</div>
+    </div>
+    <div class="card accent-purple">
+      <div class="card-icon">🎡</div>
+      <div class="card-title">Discovery Flywheel (Feb 2026 sketch)</div>
+      <div class="card-body">Discovery feed as a <strong>"constantly slow-moving flywheel"</strong> showing every analysed page with metrics. In early days, show all pages. As more subscribe, show "PLY — People Like You" — matching audiences, consent, niche. Centre card bold, fades as wheel turns.</div>
+    </div>
+    <div class="card accent-amber">
+      <div class="card-icon">🤖</div>
+      <div class="card-title">Art-E Vision (Feb 2026)</div>
+      <div class="card-body">Art-E should <strong>know what screen you're on</strong> and give context-relevant advice. Floating on mobile, full-screen on demand. On the Discovery feed: "Yes, audience match 76%, very positive, X engagements — is this a good fit for collaboration?" <strong>Art-E as your always-on advisor, not a separate tool.</strong></div>
+    </div>
+    <div class="card accent-blue">
+      <div class="card-icon">💡</div>
+      <div class="card-title">The Sentence (Feb 2026)</div>
+      <div class="card-body">"Imagine <em>Microsoft Copilot for your social media data</em> — conversational like ChatGPT or Claude on an AI-integrated platform that increases its knowledge with every post and every interaction. A platform that learns everything, and uses all internal questions, answers, and platform usage to optimise your business strategy."</div>
+    </div>
+  </div>
+
+  <div class="alex-note" style="margin-top:20px">
+    <div class="alex-avatar">A</div>
+    <div class="alex-text">"We are a predictive, multi-client intelligence layer that learns across first-party data and amplifies human decisions in real time. <em>Competitors explain the past. We predict the future.</em> Static ML and no cross-client learning — each competitor client is siloed. We gain from every client."<br><em style="font-size:11px;margin-top:4px;display:block">— Sprint 4 input notes, April 2026</em></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     9. THE COMPETITIVE POSITION
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">09</div>
+    <div>
+      <div class="section-title">Competitive Position</div>
+      <div class="section-sub">Alex's competitor analysis — where the gaps are and how to exploit them.</div>
+    </div>
+  </div>
+
+  <div class="cards-grid col2">
+    <div class="card" style="border-color:rgba(244,63,94,.2);background:rgba(244,63,94,.03)">
+      <div class="card-title" style="color:var(--rose)">Where Competitors Fail</div>
+      <div class="card-body">
+        <div class="pill rose" style="margin:3px 2px 3px 0;display:inline-flex">Static rules, no continuous learning</div>
+        <div class="pill rose" style="margin:3px 2px;display:inline-flex">Report on the past, not the future</div>
+        <div class="pill rose" style="margin:3px 2px;display:inline-flex">Each client siloed — no cross-learning</div>
+        <div class="pill rose" style="margin:3px 2px;display:inline-flex">Hourly/daily data polling</div>
+        <div class="pill rose" style="margin:3px 2px;display:inline-flex">Poor behavioural segmentation</div>
+        <div class="pill rose" style="margin:3px 2px;display:inline-flex">No predictive API</div>
+        <div class="pill rose" style="margin:3px 2px;display:inline-flex">No network effects</div>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(0,214,174,.2);background:rgba(0,214,174,.03)">
+      <div class="card-title" style="color:var(--teal)">Artemis Advantage</div>
+      <div class="card-body">
+        <div class="pill teal" style="margin:3px 2px 3px 0;display:inline-flex">Self-learning per post, page, niche</div>
+        <div class="pill teal" style="margin:3px 2px;display:inline-flex">Predicts before the algorithm decides</div>
+        <div class="pill teal" style="margin:3px 2px;display:inline-flex">Cross-client network learning</div>
+        <div class="pill teal" style="margin:3px 2px;display:inline-flex">Minutes-level real-time velocity</div>
+        <div class="pill teal" style="margin:3px 2px;display:inline-flex">Behavioural fingerprints, not demographics</div>
+        <div class="pill teal" style="margin:3px 2px;display:inline-flex">Predictive API + data licensing (future)</div>
+        <div class="pill teal" style="margin:3px 2px;display:inline-flex">Gets harder to replicate over time</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alex-note" style="margin-top:20px">
+    <div class="alex-avatar">A</div>
+    <div class="alex-text">"Potential licensing model: we can sell <em>predictive indices, benchmarks, forecast outputs, API access to machine ratings, behavioural trend datasets</em> to hedge funds, ad networks, media buyers, brand strategists, political analysts, AI labs. A much higher-margin product than SaaS — and not served well by competitors."</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     10. THE STORY
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div>
+      <div class="section-title">The Story We Tell</div>
+      <div class="section-sub">From Alex's April 2026 notes — the emotional and philosophical dimension of the brand.</div>
+    </div>
+  </div>
+
+  <div class="quote" style="font-size:14px;line-height:1.8;padding:20px 24px">
+    "We believe in change. Change of social media with data-driven decisions. Professional, affordable tools. Taking power back from the big players. Most people find change hard — change is painful — we make it easy. Artemis AI is the only platform that truly believes in change: change your decision making, change your strategy, change your life. Are you ready for change?"
+    <cite>— Alex, Sprint 4 input notes (April 2026)</cite>
+  </div>
+
+  <div class="cards-grid col3" style="margin-top:20px">
+    <div class="card accent-teal">
+      <div class="card-icon">📊</div>
+      <div class="card-title">The Landing Page</div>
+      <div class="card-body">"Don't overcomplicate. People don't care what we do behind the scenes — they only care that it works. <strong>Use proven use cases, short clips, screenshots.</strong> Show the system saving a brand. Show real-time counters of posts analysed, comments processed — not static numbers."</div>
+    </div>
+    <div class="card accent-purple">
+      <div class="card-icon">✨</div>
+      <div class="card-title">The First Experience</div>
+      <div class="card-body">"Once analysis loads, Art-E says: 'This may look complicated — let me break it down for you.' <strong>Showcase the complexity, then immediately explain it in plain English.</strong> This is the first major inflection point — the user must feel: I want to share this."</div>
+    </div>
+    <div class="card accent-amber">
+      <div class="card-icon">🎯</div>
+      <div class="card-title">Customer Respect</div>
+      <div class="card-body">"The customer needs to feel important. <strong>Show appreciation of effort.</strong> 'Great work, yesterday's reach was fantastic.' Consistency and positivity. Positive nudges: 'You've implemented 15 recommendations with 21% uplift — what can I do for you today?'"</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     11. SUMMARY — NORTH STAR
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div>
+      <div class="section-title">The North Star</div>
+      <div class="section-sub">If Alex could boil it all down to the essential directives for the team.</div>
+    </div>
+  </div>
+
+  <div class="layers">
+    <div class="layer-row" style="background:rgba(0,214,174,.05);border-color:rgba(0,214,174,.2)">
+      <div class="layer-label"><div class="layer-name" style="color:var(--teal)">Product</div></div>
+      <div class="layer-content" style="font-size:13px;color:var(--ink)">"We are removing complexity. Art-E is the main product. Every output must include an action. We prioritise importance, not volume. We design for daily use. Ask: why would they open this tomorrow?"</div>
+    </div>
+    <div class="layer-row" style="background:rgba(167,139,250,.05);border-color:rgba(167,139,250,.2)">
+      <div class="layer-label"><div class="layer-name" style="color:var(--purple)">Company</div></div>
+      <div class="layer-content" style="font-size:13px;color:var(--ink)">"This is not a SaaS. Four compounding assets. Density before scale. Every new creator you onboard is not just a subscription — it is a long-term increase in the intelligence and strategic value of the entire platform."</div>
+    </div>
+    <div class="layer-row" style="background:rgba(245,166,35,.05);border-color:rgba(245,166,35,.2)">
+      <div class="layer-label"><div class="layer-name" style="color:var(--amber)">GTM</div></div>
+      <div class="layer-content" style="font-size:13px;color:var(--ink)">"Narrow wedge first. Dense niche. Minimal OAuth permissions. Conservative public language. Invest in the network moat underneath while staying operationally humble on top."</div>
+    </div>
+    <div class="layer-row" style="background:rgba(244,63,94,.05);border-color:rgba(244,63,94,.2)">
+      <div class="layer-label"><div class="layer-name" style="color:var(--rose)">Long-term</div></div>
+      <div class="layer-content" style="font-size:13px;color:var(--ink)">"The ultimate opportunity is not to build another creator tool. It is to create the intelligence layer for the creator economy. A platform where the value compounds daily through data, models, and network growth."</div>
+    </div>
+  </div>
+
+  <div class="bignums" style="margin-top:24px">
+    <div class="bignum"><div class="bignum-n">£1-5M</div><div class="bignum-label">valuation at sprint completion (no revenue needed)</div></div>
+    <div class="bignum"><div class="bignum-n">28 Nov</div><div class="bignum-label">MVP launch — the starting gun, not the finish line</div></div>
+    <div class="bignum"><div class="bignum-n">£5-20B</div><div class="bignum-label">ceiling scenario at 1M clients with network effects</div></div>
+    <div class="bignum"><div class="bignum-n">4</div><div class="bignum-label">compounding assets most startups only have 1</div></div>
+  </div>
+</div>
+
+</div><!-- /page-body -->
+
+<div class="page-footer">
+  ArtemisAI — Alex's Vision &nbsp;·&nbsp; Synthesised from 8 documents across Feb–Jun 2026 &nbsp;·&nbsp; For internal team use only
+</div>
+
+</body>
+</html>
