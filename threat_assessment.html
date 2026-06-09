@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Threat Assessment — Meta vs ArtemisAI</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
+<style>
+:root{
+  --bg:#0b0f1a;--card:#111827;--card2:#151e2e;--border:#1e2d44;
+  --teal:#00D6AE;--purple:#a78bfa;--amber:#f5a623;--blue:#6366f1;
+  --rose:#f43f5e;--emerald:#10b981;--sky:#38bdf8;
+  --ink:#e2e8f0;--mut:#8793ab;
+  --font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:100vh;overflow-x:hidden;padding-top:52px}
+a{color:inherit;text-decoration:none}
+
+/* ===== shared site header ===== */
+nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}
+nav.site-nav *{box-sizing:border-box}
+.sn-logo{font-size:1rem;font-weight:800;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.55rem;flex-shrink:0}
+.sn-logo-mark{width:26px;height:26px;flex-shrink:0}.sn-logo-mark svg{width:100%;height:100%}
+.sn-links{display:flex;align-items:center;gap:1rem;list-style:none;margin:0;padding:0}
+.sn-pill{padding:.4rem 1rem;border:1px solid rgba(0,212,170,.3);border-radius:7px;color:#00d4aa!important;font-size:.8rem;text-decoration:none;background:transparent;transition:all .2s;white-space:nowrap}
+.sn-pill:hover{background:rgba(0,212,170,.07)!important;border-color:rgba(0,212,170,.6)!important}
+.sn-chip{display:none;align-items:center;gap:7px;padding:.28rem .8rem .28rem .4rem;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);border-radius:20px}
+.sn-avatar{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#00d4aa,#6366f1);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#060a13;flex-shrink:0}
+.sn-name{font-size:.78rem;color:#e8ecf4;font-weight:600}
+.sn-logout{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.8rem;padding:.26rem .6rem;cursor:pointer;transition:all .2s}
+.sn-logout:hover{border-color:rgba(248,113,113,.4);color:#f87171}
+#signout-modal{display:none;position:fixed;inset:0;z-index:99998;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif}
+#signout-modal.open{display:flex}
+#signout-backdrop{position:absolute;inset:0;background:rgba(2,5,12,.7);backdrop-filter:blur(4px)}
+#signout-card{position:relative;z-index:1;background:#0f1729;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem 2rem;max-width:340px;width:90%;box-shadow:0 30px 60px rgba(0,0,0,0.5);text-align:center}
+.signout-icon svg{width:34px;height:34px;stroke:#f87171;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-bottom:.5rem}
+.signout-title{font-size:1.05rem;font-weight:800;color:#e8ecf4}
+.signout-sub{font-size:.82rem;color:#8a96ad;margin:.4rem 0 1.1rem}
+.signout-btns{display:flex;gap:8px}
+.signout-cancel{flex:1;padding:.6rem;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:9px;color:#cdd5ee;font-family:inherit;font-size:.82rem;cursor:pointer}
+.signout-confirm{flex:1;padding:.6rem;background:#f87171;border:none;border-radius:9px;color:#2a0a0a;font-family:inherit;font-weight:700;font-size:.82rem;cursor:pointer}
+@media(max-width:768px){nav.site-nav{height:48px!important;padding:0 12px!important}.sn-pill{padding:.3rem .75rem!important;font-size:.7rem!important}body{padding-top:48px}}
+
+/* HERO */
+.hero{padding:60px 28px 36px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(244,63,94,.10) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);margin-bottom:14px;display:inline-flex;align-items:center;gap:8px}
+.hero-eyebrow .pulse{width:9px;height:9px;border-radius:50%;background:var(--rose);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(244,63,94,.5)}50%{opacity:.6;box-shadow:0 0 0 6px rgba(244,63,94,0)}}
+.hero-title{font-size:clamp(28px,5vw,46px);font-weight:900;line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
+.hero-title span{background:linear-gradient(135deg,var(--rose),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:15.5px;color:var(--mut);max-width:660px;margin:0 auto;line-height:1.7}
+.hero-meta{font-size:11.5px;color:var(--mut);margin-top:18px;font-family:var(--mono)}
+
+.wrap{max-width:1020px;margin:0 auto;padding:0 24px 70px}
+.section-label{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin:46px 0 18px;display:flex;align-items:center;gap:10px}
+.section-label .n{width:24px;height:24px;border-radius:7px;background:rgba(0,214,174,.12);color:var(--teal);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:900}
+
+/* VERDICT BANNER */
+.verdict{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+.vbox{border-radius:14px;padding:20px;border:1px solid var(--border);background:var(--card)}
+.vbox .vlabel{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+.vbox .vbig{font-size:26px;font-weight:900;letter-spacing:-.02em;line-height:1.1}
+.vbox .vsub{font-size:12px;color:var(--mut);margin-top:6px;line-height:1.5}
+.vbox.red{border-color:rgba(244,63,94,.3);background:rgba(244,63,94,.05)}.vbox.red .vbig{color:var(--rose)}
+.vbox.amber{border-color:rgba(245,166,35,.3);background:rgba(245,166,35,.05)}.vbox.amber .vbig{color:var(--amber)}
+.vbox.teal{border-color:rgba(0,214,174,.3);background:rgba(0,214,174,.05)}.vbox.teal .vbig{color:var(--teal)}
+@media(max-width:720px){.verdict{grid-template-columns:1fr}}
+
+/* ALERT / SOLUTION BOXES */
+.alert{border-radius:14px;padding:20px 22px;margin-bottom:16px;border:1px solid;position:relative;overflow:hidden}
+.alert::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.alert.danger{background:rgba(244,63,94,.05);border-color:rgba(244,63,94,.22)}.alert.danger::before{background:var(--rose)}
+.alert.warn{background:rgba(245,166,35,.05);border-color:rgba(245,166,35,.22)}.alert.warn::before{background:var(--amber)}
+.alert.ok{background:rgba(0,214,174,.05);border-color:rgba(0,214,174,.22)}.alert.ok::before{background:var(--teal)}
+.alert-head{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;margin-bottom:6px}
+.alert-tag{font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:5px;margin-left:auto}
+.alert.danger .alert-tag{background:rgba(244,63,94,.15);color:var(--rose)}
+.alert.warn .alert-tag{background:rgba(245,166,35,.15);color:var(--amber)}
+.alert.ok .alert-tag{background:rgba(0,214,174,.15);color:var(--teal)}
+.alert-body{font-size:13.5px;color:#c3cee0;line-height:1.65}
+.alert-body strong{color:var(--ink)}
+.alert-fix{margin-top:12px;padding:12px 14px;border-radius:9px;background:rgba(0,214,174,.06);border:1px dashed rgba(0,214,174,.3);font-size:13px;line-height:1.6;color:#cdd5ee}
+.alert-fix b{color:var(--teal)}
+
+/* GENERIC CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px}
+.lead{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 26px;font-size:14.5px;line-height:1.75;color:#c3cee0}
+.lead strong{color:var(--ink)}
+.lead .big{color:var(--rose);font-weight:800}
+
+/* STAT STRIP */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center}
+.stat .num{font-size:24px;font-weight:900;letter-spacing:-.02em}
+.stat .cap{font-size:11px;color:var(--mut);margin-top:5px;line-height:1.45}
+@media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--border);background:var(--card)}
+table.cmp{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+table.cmp th{text-align:left;padding:13px 15px;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);border-bottom:1px solid var(--border)}
+table.cmp th.us{color:var(--teal)}
+table.cmp td{padding:12px 15px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--mut);vertical-align:top;line-height:1.5}
+table.cmp tr:last-child td{border-bottom:none}
+table.cmp .rowname{color:var(--ink);font-weight:600}
+table.cmp td.uscell,table.cmp th.us{background:rgba(0,214,174,.06)}
+.v-gap{color:var(--teal);font-weight:700}.v-lose{color:var(--rose);font-weight:700}.v-part{color:var(--amber);font-weight:700}
+
+/* FLOW DIAGRAM wrapper */
+.diagram{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+.diagram svg{display:block;width:100%;height:auto;max-width:960px;margin:0 auto}
+.diagram-cap{font-size:12px;color:var(--mut);text-align:center;margin-top:12px;font-style:italic;line-height:1.5}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:18px}
+.tl-dot{position:absolute;left:-28px;top:3px;width:16px;height:16px;border-radius:50%;border:3px solid var(--bg);background:var(--rose)}
+.tl-dot.amber{background:var(--amber)}.tl-dot.teal{background:var(--teal)}
+.tl-date{font-size:11px;font-weight:800;color:var(--mut);font-family:var(--mono);margin-bottom:3px}
+.tl-title{font-size:14px;font-weight:700;margin-bottom:3px}
+.tl-text{font-size:12.5px;color:var(--mut);line-height:1.6}
+
+/* PILLAR/STRATEGY CARDS */
+.moat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.moat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;overflow:hidden}
+.moat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--mc)}
+.moat .mhead{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.moat .mico{font-size:22px}
+.moat .mname{font-size:15px;font-weight:800}
+.moat .mwhy{font-size:12.5px;color:var(--mut);line-height:1.6;margin-bottom:10px}
+.moat .maction{font-size:12px;color:#cdd5ee;line-height:1.55;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)}
+.moat .maction b{color:var(--mc-text)}
+
+/* TRIGGER table */
+.trigger{display:flex;gap:14px;align-items:flex-start;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.trigger:last-child{border-bottom:none}
+.trigger .tif{flex:1;font-size:13px;color:#c3cee0;line-height:1.55}
+.trigger .tif b{color:var(--amber)}
+.trigger .tthen{flex:1;font-size:13px;color:#c3cee0;line-height:1.55}
+.trigger .tthen b{color:var(--teal)}
+.trigger .tarrow{color:var(--mut);font-size:18px;padding-top:2px}
+@media(max-width:640px){.trigger{flex-direction:column;gap:6px}.trigger .tarrow{transform:rotate(90deg)}}
+
+/* roadmap stages */
+.stage{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:14px}
+.stage-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.stage-badge{font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:5px 11px;border-radius:20px}
+.stage-badge.now{background:rgba(244,63,94,.14);color:var(--rose)}
+.stage-badge.launch{background:rgba(245,166,35,.14);color:var(--amber)}
+.stage-badge.after{background:rgba(0,214,174,.14);color:var(--teal)}
+.stage-title{font-size:15px;font-weight:800}
+.stage ul{list-style:none;padding:0;margin:0}
+.stage li{font-size:13px;color:#c3cee0;line-height:1.6;padding:7px 0 7px 26px;position:relative;border-top:1px solid rgba(255,255,255,.04)}
+.stage li:first-child{border-top:none}
+.stage li::before{content:'→';position:absolute;left:4px;color:var(--teal);font-weight:700}
+.stage li b{color:var(--ink)}
+
+/* caveat */
+.caveat{background:rgba(245,166,35,.04);border:1px solid rgba(245,166,35,.18);border-radius:12px;padding:18px 20px;font-size:12.5px;color:#c3cee0;line-height:1.7}
+.caveat b{color:var(--amber)}
+.caveat ul{margin:8px 0 0;padding-left:18px}.caveat li{margin-bottom:6px}
+
+.src{font-size:10.5px;color:#5a6478;font-style:italic}
+
+/* footer */
+.af-footer{margin-top:0;padding:30px 1.6rem;border-top:1px solid rgba(255,255,255,.07);background:rgba(6,10,19,.45);font-family:'DM Sans','Outfit',system-ui,sans-serif}
+.af-footer-in{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.af-brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.12em;color:#e8ecf4;font-size:.9rem}
+.af-brand svg{width:24px!important;height:24px!important;flex-shrink:0}
+.af-copy{font-size:.8rem;color:#7c89a3}
+.af-links{display:flex;gap:20px;flex-wrap:wrap}
+.af-links a{font-size:.8rem;color:#9aa6bd;text-decoration:none}
+.af-links a:hover{color:#00d4aa}
+@media(max-width:640px){.af-footer-in{flex-direction:column;text-align:center;gap:12px}}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="sn-logo">
+    <div class="sn-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#slg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#slg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#slg)"/><defs><linearGradient id="slg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
+    ARTEMISAI
+  </a>
+  <ul class="sn-links">
+    <li><a href="admin_panel.html" class="sn-pill">&larr; Admin Panel</a></li>
+    <li><div class="sn-chip" id="sn-chip" style="display:none"><div class="sn-avatar" id="sn-avatar">?</div><span class="sn-name" id="sn-name"></span></div></li>
+    <li><button class="sn-logout" id="sn-logout-btn" onclick="handleLogout()" style="display:none">&#9211;</button></li>
+  </ul>
+</nav>
+<div id="signout-modal">
+  <div id="signout-backdrop" onclick="_closeSignoutModal()"></div>
+  <div id="signout-card">
+    <div class="signout-icon"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+    <div class="signout-title">Sign out?</div>
+    <div class="signout-sub">You'll need to sign back in to access the Admin Panel.</div>
+    <div class="signout-btns"><button class="signout-cancel" onclick="_closeSignoutModal()">Cancel</button><button class="signout-confirm" onclick="_doSignout()">Sign Out</button></div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow"><span class="pulse"></span> Competitive Threat Assessment</div>
+  <h1 class="hero-title">Meta vs <span>ArtemisAI</span></h1>
+  <p class="hero-sub">Meta is spending more on AI in a single quarter than we could raise in a lifetime — and on June 4 they shipped a free creator AI that overlaps part of our pitch. Here is the clear-eyed picture of the threat, and exactly how we reshape our direction to win the ground Meta structurally cannot take.</p>
+  <div class="hero-meta">Compiled June 9, 2026 &nbsp;·&nbsp; for Alex, Asad, Jill &amp; Lewis &nbsp;·&nbsp; MVP launch: 28 Nov 2026</div>
+</div>
+
+<div class="wrap">
+
+  <!-- VERDICT -->
+  <div class="section-label"><span class="n">★</span> The bottom line</div>
+  <div class="verdict">
+    <div class="vbox red">
+      <div class="vlabel">Threat level</div>
+      <div class="vbig">#1 Threat</div>
+      <div class="vsub">Meta is the single most serious competitor we face — and it just got real this month.</div>
+    </div>
+    <div class="vbox amber">
+      <div class="vlabel">The real risk</div>
+      <div class="vbig">Platform</div>
+      <div class="vsub">Not feature parity — our entire data supply runs through Meta's API, at Meta's discretion.</div>
+    </div>
+    <div class="vbox teal">
+      <div class="vlabel">Can we win?</div>
+      <div class="vbig">Yes — if</div>
+      <div class="vsub">We commit now to prediction + cross-page intelligence + agencies, and reduce Facebook-only dependency.</div>
+    </div>
+  </div>
+
+  <div class="lead" style="margin-top:16px">
+    <strong>In one paragraph:</strong> On June 4, 2026 Meta launched <strong>"Creator Assistant,"</strong> a free, in-Facebook conversational AI that explains page performance and recommends what and when to post — overlapping a chunk of Art-E's pitch. <span class="big">But it is strictly backward-looking (no pre-publish prediction) and shows you only your own page (no cross-page intelligence)</span> — which is exactly where we plant our flag. The deeper danger is that we build on rented land: Meta has a documented history of shutting down analytics tools, and is restricting organic data access right now. We win a defensible niche if we commit to the three things Meta will not build, and urgently reduce our single-platform dependency. If we try to out-feature Meta on basic single-page analytics, we lose.
+  </div>
+
+  <!-- META SCALE -->
+  <div class="section-label"><span class="n">1</span> The scale of what we're up against</div>
+  <div class="stats">
+    <div class="stat"><div class="num" style="color:var(--rose)">$125–145B</div><div class="cap">Meta's 2026 AI capex guidance — roughly 2× 2025</div></div>
+    <div class="stat"><div class="num" style="color:var(--amber)">$72.2B</div><div class="cap">Meta's actual 2025 capex (up ~$30B over 2024)</div></div>
+    <div class="stat"><div class="num" style="color:var(--sky)">$56.3B</div><div class="cap">Q1 2026 revenue, up 33% YoY — fastest since 2021</div></div>
+    <div class="stat"><div class="num" style="color:var(--purple)">1M+</div><div class="cap">businesses already using Meta's Business AI agents</div></div>
+  </div>
+  <div class="alert warn" style="margin-top:16px">
+    <div class="alert-head">⚠️ The Financial Times story Alex flagged <span class="alert-tag">context</span></div>
+    <div class="alert-body">On <strong>June 5, 2026</strong> the FT reported Meta is weighing an equity raise of <strong>"tens of billions of dollars"</strong> to fund AI (led by CFO Susan Li &amp; President Dina Powell McCormick). Meta called it <strong>"pure speculation"</strong> and has not hired banks — shares fell 5.5% to $593 on the news. It followed Alphabet's $84.75B raise days earlier. Alex is right that this is "all about Meta and billions" — they are pouring it into <strong>their own frontier AI (Muse Spark), not into a product that competes with us directly.</strong></div>
+    <div class="alert-fix"><b>What this means for us:</b> We will never win on model capability, compute, or data scale — so we don't try. We stay model-agnostic (Claude / GPT / Gemini) and compete on focus, speed, and the data Meta won't show people.</div>
+  </div>
+
+  <!-- WHAT META BUILT -->
+  <div class="section-label"><span class="n">2</span> What Meta actually shipped (and what it does NOT do)</div>
+
+  <div class="alert danger">
+    <div class="alert-head">🟥 Creator Assistant — the real overlap <span class="alert-tag">June 4, 2026</span></div>
+    <div class="alert-body">A free, conversational, in-dashboard AI for Facebook creators (US/Canada/India first). It analyses your audience and past content, answers <em>"When should I post?"</em> and <em>"What are people saying in my comments?"</em>, and brainstorms content ideas. Meta's explicit motive: keep creators inside its ecosystem so they don't "turn to third-party tools." Meta paid creators nearly <strong>$3B in 2025</strong>.<br><br><strong>The two things it does NOT do:</strong> (1) it is <strong>strictly retrospective</strong> — no forward-looking prediction on a specific draft before you post; (2) it offers <strong>zero cross-page / competitive intelligence</strong> — scoped only to your own presence.</div>
+    <div class="alert-fix"><b>Our answer:</b> Lead with genuine <b>pre-publish prediction</b> and <b>cross-page network intelligence</b> — the exact two gaps Creator Assistant leaves wide open.</div>
+  </div>
+
+  <div class="alert warn">
+    <div class="alert-head">🟧 Meta Business Agent — adjacent, not direct <span class="alert-tag">June 3, 2026</span></div>
+    <div class="alert-body">This is the in-app prompt Lewis screenshotted ("Get your own AI agent that can respond to customers 24/7"). It's a <strong>customer-service / sales chat agent</strong> across WhatsApp / Messenger / Instagram — it answers buyer questions, recommends products, books appointments, closes sales. Over 1M businesses use it; Meta's business AI handles ~10M advertiser conversations/week.</div>
+    <div class="alert-fix"><b>Our read:</b> This focuses on <b>the inbox, not the feed.</b> It is adjacent to us, not a direct competitor. We don't pivot toward customer-service chat — that's Meta's lane and a race to the bottom.</div>
+  </div>
+
+  <div class="alert warn">
+    <div class="alert-head">🟧 Meta Ads MCP — opening ads data, tightening organic <span class="alert-tag">Apr 29, 2026</span></div>
+    <div class="alert-body">Meta shipped an official Ads MCP server (~29 tools, lets Claude/ChatGPT manage <em>ad</em> campaigns). The "MCP for ads" Jill mentioned is real — but it's <strong>ads-centric, not organic page insights.</strong> At the same time Meta is <strong>deprecating organic Page Insights metrics</strong> (impressions &amp; page_fans gone Nov 15, 2025; reach/viewer metrics changing by June 15, 2026).</div>
+    <div class="alert-fix"><b>The pattern to watch:</b> Meta opens <b>ad</b> data to AI while restricting <b>organic</b> data. Our product lives on organic data — so API compliance and a portability plan are not optional.</div>
+  </div>
+
+  <div class="alert ok">
+    <div class="alert-head">🟩 Muse Spark — Meta's frontier model, locked to Meta <span class="alert-tag">Apr 8, 2026</span></div>
+    <div class="alert-body">Meta abandoned open-source and launched its first closed-weight frontier model, Muse Spark (scored 52 on the AA Intelligence Index — 4th, behind Gemini 3.1 Pro, GPT-5.4, Claude Opus 4.6). Built via the $14.3B Scale AI deal. It powers Meta AI for 3B+ users but has <strong>no public API</strong> — it makes Meta's own apps smarter, it isn't sold to builders like us.</div>
+    <div class="alert-fix"><b>Good for us:</b> Meta's model strategy is inward-facing. We treat Muse Spark as inaccessible and keep our model layer swappable.</div>
+  </div>
+
+  <!-- FEATURE MAP TABLE -->
+  <div class="section-label"><span class="n">3</span> Feature-by-feature: where we win, where we lose</div>
+  <div class="tbl-wrap">
+    <table class="cmp">
+      <thead><tr>
+        <th>Capability</th>
+        <th>Meta native (June 2026)</th>
+        <th class="us">ArtemisAI</th>
+        <th>Verdict</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="rowname">Predict a post's performance BEFORE publishing</td><td>None — Creator Assistant is retrospective</td><td class="uscell">Core feature (Art-E)</td><td><span class="v-gap">✓ Defensible gap</span></td></tr>
+        <tr><td class="rowname">Real-time virality / crisis / brand-risk alerts</td><td>None for organic feed</td><td class="uscell">Core feature</td><td><span class="v-gap">✓ Defensible gap</span></td></tr>
+        <tr><td class="rowname">Cross-page / network intelligence + benchmarking</td><td>None (own-page only; shallow 28-day "Businesses to Watch")</td><td class="uscell">The flywheel moat</td><td><span class="v-gap">✓ Strongest moat</span></td></tr>
+        <tr><td class="rowname">Collaboration suggestions between pages</td><td>Partial (ad-oriented creator marketplace)</td><td class="uscell">Discovery</td><td><span class="v-part">~ Partial overlap</span></td></tr>
+        <tr><td class="rowname">Explain analytics in plain language</td><td>Creator Assistant does this, free</td><td class="uscell">Art-E does this</td><td><span class="v-lose">✗ Commoditized</span></td></tr>
+        <tr><td class="rowname">Recommend what / when to post</td><td>Creator Assistant does this, free</td><td class="uscell">Art-E does this</td><td><span class="v-lose">✗ Commoditized</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="src" style="margin-top:10px">The pattern: plain-language analytics and "what/when to post" are now <strong style="color:#c3cee0">free native commodities</strong>. Our durable value concentrates in prediction, alerting, cross-page intelligence and the agency use case — the things Meta structurally avoids.</p>
+
+  <!-- WHY META WON'T BUILD IT -->
+  <div class="section-label"><span class="n">4</span> Why Meta structurally won't take our ground</div>
+  <div class="diagram">
+    <svg viewBox="0 0 920 300" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="ar" markerWidth="9" markerHeight="7" refX="4.5" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#64748b"/></marker></defs>
+      <!-- Meta incentive -->
+      <rect x="20" y="40" width="240" height="220" rx="14" fill="#1a1024" stroke="#a78bfa" stroke-width="1.4"/>
+      <text x="140" y="68" text-anchor="middle" font-size="14" font-weight="800" fill="#a78bfa">META'S INCENTIVES</text>
+      <text x="140" y="100" text-anchor="middle" font-size="11" fill="#94a3b8">~98% of revenue = ads</text>
+      <text x="140" y="124" text-anchor="middle" font-size="11" fill="#94a3b8">Goal: keep users + creators</text>
+      <text x="140" y="140" text-anchor="middle" font-size="11" fill="#94a3b8">inside the ecosystem</text>
+      <text x="140" y="172" text-anchor="middle" font-size="11" fill="#94a3b8">Privacy posture: don't show</text>
+      <text x="140" y="188" text-anchor="middle" font-size="11" fill="#94a3b8">one page another's data</text>
+      <text x="140" y="220" text-anchor="middle" font-size="11" fill="#94a3b8">Self-serve, consumer-grade,</text>
+      <text x="140" y="236" text-anchor="middle" font-size="11" fill="#94a3b8">single-page tools</text>
+
+      <!-- arrow -->
+      <line x1="265" y1="150" x2="340" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#ar)"/>
+      <text x="302" y="142" text-anchor="middle" font-size="9.5" fill="#64748b">leaves</text>
+      <text x="302" y="166" text-anchor="middle" font-size="9.5" fill="#64748b">gaps</text>
+
+      <!-- gaps = our moat -->
+      <rect x="350" y="20" width="250" height="74" rx="12" fill="#0d2a24" stroke="#00D6AE" stroke-width="1.4"/>
+      <text x="475" y="48" text-anchor="middle" font-size="12.5" font-weight="800" fill="#00D6AE">Pre-publish prediction</text>
+      <text x="475" y="70" text-anchor="middle" font-size="10" fill="#94a3b8">Meta only explains the past</text>
+
+      <rect x="350" y="113" width="250" height="74" rx="12" fill="#0d2a24" stroke="#00D6AE" stroke-width="1.4"/>
+      <text x="475" y="141" text-anchor="middle" font-size="12.5" font-weight="800" fill="#00D6AE">Cross-page intelligence</text>
+      <text x="475" y="163" text-anchor="middle" font-size="10" fill="#94a3b8">Meta shows you only your page</text>
+
+      <rect x="350" y="206" width="250" height="74" rx="12" fill="#0d2a24" stroke="#00D6AE" stroke-width="1.4"/>
+      <text x="475" y="234" text-anchor="middle" font-size="12.5" font-weight="800" fill="#00D6AE">The agency segment</text>
+      <text x="475" y="256" text-anchor="middle" font-size="10" fill="#94a3b8">Meta's tools are single-page</text>
+
+      <!-- arrow to us -->
+      <line x1="605" y1="150" x2="680" y2="150" stroke="#00D6AE" stroke-width="2" marker-end="url(#ar)"/>
+
+      <!-- our position -->
+      <rect x="690" y="60" width="210" height="180" rx="14" fill="#0d1f2e" stroke="#38bdf8" stroke-width="1.6"/>
+      <text x="795" y="92" text-anchor="middle" font-size="14" font-weight="800" fill="#38bdf8">OUR GROUND</text>
+      <text x="795" y="124" text-anchor="middle" font-size="11" fill="#cdd5ee">Predict before posting</text>
+      <text x="795" y="148" text-anchor="middle" font-size="11" fill="#cdd5ee">See the whole neighbourhood</text>
+      <text x="795" y="172" text-anchor="middle" font-size="11" fill="#cdd5ee">Built for agencies</text>
+      <text x="795" y="196" text-anchor="middle" font-size="11" fill="#cdd5ee">Real-time crisis alerts</text>
+      <text x="795" y="224" text-anchor="middle" font-size="10.5" fill="#64748b">— where Meta won't follow</text>
+    </svg>
+    <div class="diagram-cap">Meta's own incentives (ads revenue + privacy posture + consumer-grade single-page tools) leave three structural gaps. Those gaps are our moat.</div>
+  </div>
+
+  <!-- PLATFORM RISK / SHERLOCKING -->
+  <div class="section-label"><span class="n">5</span> The existential risk: we build on rented land</div>
+  <div class="alert danger">
+    <div class="alert-head">🟥 "Sherlocking" — Meta has killed analytics tools before <span class="alert-tag">existential</span></div>
+    <div class="alert-body">Our entire data supply runs through Meta's Graph API, which Meta controls. Their track record:
+    <br>• <strong>CrowdTangle</strong> (Meta's own FB/IG analytics tool) — shut down <strong>Aug 14, 2024</strong>, replaced by a Content Library restricted to academic/nonprofit researchers.
+    <br>• <strong>Facebook Groups API</strong> — cut off in 2024; third-party businesses with "7 years of work, 10,000+ customers" wiped out overnight.
+    <br>• <strong>Instagram Basic Display API</strong> — killed Dec 2024.
+    <br>• Page Insights metrics being deprecated through <strong>June 15, 2026</strong>.</div>
+    <div class="alert-fix"><b>The lethal combination is feature-replication + data-restriction.</b> We can't stop Meta — but we can make ourselves resilient: diversify platforms, harden API compliance, and own our intelligence layer so no single API change kills us.</div>
+  </div>
+
+  <div class="diagram" style="margin-top:6px">
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">AUG 14, 2024</div><div class="tl-title">CrowdTangle shut down</div><div class="tl-text">Meta retired its own public-content analytics tool, restricting the replacement to researchers — a preview of how Meta treats analytics access.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2024</div><div class="tl-title">Groups API + IG Basic Display killed</div><div class="tl-text">Third-party developers lost access overnight. "This is platform risk in real time."</div></div>
+      <div class="tl-item"><div class="tl-dot amber"></div><div class="tl-date">NOV 15, 2025</div><div class="tl-title">Page Insights deprecations begin</div><div class="tl-text">impressions &amp; page_fans removed from the Page Insights API.</div></div>
+      <div class="tl-item"><div class="tl-dot amber"></div><div class="tl-date">JUN 15, 2026</div><div class="tl-title">Reach/viewer metrics change</div><div class="tl-text">Legacy metrics replaced by Media Views + a unified Page Viewer Metric. Our pipeline must not break on this.</div></div>
+      <div class="tl-item"><div class="tl-dot teal"></div><div class="tl-date">NOV 28, 2026</div><div class="tl-title">Our MVP launch</div><div class="tl-text">We launch into this environment — with a compliance + portability plan already in place.</div></div>
+    </div>
+  </div>
+
+  <!-- THE MOATS / SOLUTIONS -->
+  <div class="section-label"><span class="n">6</span> How we reshape direction — our defensible moats</div>
+  <div class="moat-grid">
+    <div class="moat" style="--mc:#00D6AE;--mc-text:#00D6AE">
+      <div class="mhead"><span class="mico">🔮</span><span class="mname">Lead with prediction</span></div>
+      <div class="mwhy">Creator Assistant can't tell you how a <em>draft</em> will do. Art-E can. Make the predicted-performance score the first thing a user sees.</div>
+      <div class="maction"><b>Do now:</b> Make prediction the headline. Invest disproportionately in <b>provable accuracy</b> — competitors (FeedHive, Predis) claim prediction too, and their accuracy is publicly criticised. Publish our hit-rate. This wedge only works if it actually works.</div>
+    </div>
+    <div class="moat" style="--mc:#38bdf8;--mc-text:#38bdf8">
+      <div class="mhead"><span class="mico">🌐</span><span class="mname">Cross-page intelligence = THE moat</span></div>
+      <div class="mwhy">"Meta shows you your own page; we show you the whole neighbourhood." Competitive benchmarking + the cross-client data flywheel are things Meta structurally won't offer.</div>
+      <div class="maction"><b>Do now:</b> Build the MVP <b>around</b> cross-page intelligence, not as a footnote. This is the single most important differentiator.</div>
+    </div>
+    <div class="moat" style="--mc:#a78bfa;--mc-text:#a78bfa">
+      <div class="mhead"><span class="mico">🏢</span><span class="mname">Win the agency segment</span></div>
+      <div class="mwhy">Meta's tools are single-page, self-serve, consumer-grade. Agencies managing dozens of client pages are underserved — and have the highest willingness to pay.</div>
+      <div class="maction"><b>Do now:</b> Multi-page dashboards, approval workflows, white-label reporting, cross-client benchmarking. This is our beachhead.</div>
+    </div>
+    <div class="moat" style="--mc:#f5a623;--mc-text:#f5a623">
+      <div class="mhead"><span class="mico">🚨</span><span class="mname">Own real-time alerting</span></div>
+      <div class="mwhy">There is no native Meta equivalent for organic-feed crisis detection. It pairs naturally with the prediction engine.</div>
+      <div class="maction"><b>Do now:</b> Keep virality + brand-risk + crisis alerts prominent. Every alert = a problem + a suggested action.</div>
+    </div>
+    <div class="moat" style="--mc:#f43f5e;--mc-text:#f87171">
+      <div class="mhead"><span class="mico">🪢</span><span class="mname">Escape single-platform risk</span></div>
+      <div class="mwhy">Facebook-only OAuth is the most exposed position possible. Cross-platform is the <em>proven</em> survival strategy against Meta (it's how Hootsuite/Sprout coexist with free native tools).</div>
+      <div class="maction"><b>Do next:</b> Roadmap to Instagram (same API, cheap), then a genuinely different source (LinkedIn / TikTok / YouTube / Threads).</div>
+    </div>
+    <div class="moat" style="--mc:#10b981;--mc-text:#34d399">
+      <div class="mhead"><span class="mico">🛡️</span><span class="mname">Harden + own our data layer</span></div>
+      <div class="mwhy">The value should live in OUR aggregated intelligence, not in a live dependency on one Meta field.</div>
+      <div class="maction"><b>Do next:</b> Finish App Review + Business Verification early. Build an abstraction layer so a metric swap is a config change, not a rewrite. Store learned cross-page signals in our own models.</div>
+    </div>
+  </div>
+
+  <!-- ROADMAP -->
+  <div class="section-label"><span class="n">7</span> The action plan — staged to our deadline</div>
+  <div class="stage">
+    <div class="stage-head"><span class="stage-badge now">Stage 0 — before Nov 28</span><span class="stage-title">Reposition around the gaps Meta won't fill</span></div>
+    <ul>
+      <li><b>Lead with pre-publish prediction</b> as the headline feature — and prove the accuracy publicly.</li>
+      <li><b>Make cross-page / network intelligence the core of the MVP</b>, not a footnote. This is the moat.</li>
+      <li><b>Target agencies &amp; multi-page operators</b> as the beachhead — highest willingness to pay, weakest Meta coverage.</li>
+      <li><b>Keep real-time crisis / virality alerting prominent</b> — no native Meta equivalent exists.</li>
+    </ul>
+  </div>
+  <div class="stage">
+    <div class="stage-head"><span class="stage-badge launch">Stage 1 — at / just after launch</span><span class="stage-title">De-risk the platform dependency</span></div>
+    <ul>
+      <li><b>Treat Facebook OAuth as rented land</b> — roadmap Instagram next, then a genuinely different platform.</li>
+      <li><b>Harden API compliance now</b> — App Review, Business Verification, Data Use Checkup; survive the June 15 metric changes.</li>
+      <li><b>Architect the data flywheel for portability</b> — value lives in our aggregated intelligence, not one live Meta field.</li>
+    </ul>
+  </div>
+  <div class="stage">
+    <div class="stage-head"><span class="stage-badge after">Stage 2 — post-launch growth</span><span class="stage-title">Position as complementary, watch for bundling</span></div>
+    <ul>
+      <li><b>Position as complementary to Meta's free tools</b> — "use Creator Assistant for ideas; use Artemis to know what will work before you post and how you stack up."</li>
+      <li><b>Watch for paid bundling</b> — Meta is moving toward paid creator tiers (Meta One). If predictive/cross-page features get bundled in, accelerate cross-platform + agency focus.</li>
+    </ul>
+  </div>
+
+  <!-- TRIGGERS -->
+  <div class="section-label"><span class="n">8</span> Early-warning triggers — what changes our strategy</div>
+  <div class="card">
+    <div class="trigger"><div class="tif"><b>IF</b> Meta adds pre-publish prediction to Creator Assistant</div><div class="tarrow">→</div><div class="tthen"><b>THEN</b> our #1 wedge erodes — accelerate the cross-page + agency moat and cross-platform expansion immediately.</div></div>
+    <div class="trigger"><div class="tif"><b>IF</b> Meta adds competitor / cross-page benchmarking (it has hinted at "competitive intelligence")</div><div class="tarrow">→</div><div class="tthen"><b>THEN</b> our core moat is under direct attack — lean hard into multi-platform + agency workflow depth Meta won't replicate.</div></div>
+    <div class="trigger"><div class="tif"><b>IF</b> Meta further restricts the Page Insights / Graph API</div><div class="tarrow">→</div><div class="tthen"><b>THEN</b> existential — having a second platform already live is the insurance policy. This is why diversification can't wait.</div></div>
+    <div class="trigger"><div class="tif"><b>IF</b> Meta keeps Business AI focused on customer-service chat (most likely near-term)</div><div class="tarrow">→</div><div class="tthen"><b>THEN</b> we have clear air on the organic-prediction / intelligence side — press the advantage hard.</div></div>
+  </div>
+
+  <!-- CAVEATS -->
+  <div class="section-label"><span class="n">9</span> Honest caveats — read before acting</div>
+  <div class="caveat">
+    <b>Where this assessment is solid vs. speculative:</b>
+    <ul>
+      <li>The June 5 FT equity-raise story is explicitly <b>"pure speculation" per Meta</b>, no banks hired — treat the raise as possible, not decided. Capex figures and the Creator Assistant / Business Agent launches are from Meta's own announcements and tier-1 outlets, and are solid.</li>
+      <li>Several Meta roadmap items are <b>forward-looking statements, not shipped features</b> — Business Agent's promised "competitive intelligence," campaign creation, Muse Spark's public API. Plan for them; don't assume timing.</li>
+      <li><b>"Sherlocking" is directional, not deterministic.</b> Meta replicating a feature doesn't always kill third parties — Hootsuite/Sprout have coexisted with free native tools for years. The lethal mix is replication <em>plus</em> data-restriction, which is why platform diversification matters more than feature differentiation alone.</li>
+      <li><b>Pre-publish prediction is not unique to us</b> — FeedHive, Predis.ai claim it, and accuracy is contested. Our edge must be demonstrably-better accuracy + the cross-page flywheel, not the mere existence of prediction.</li>
+      <li>Creator Assistant is <b>US/Canada/India first</b> — international markets may face native competition later, giving us a possible early-timing advantage abroad.</li>
+      <li>This assessment did not factor in <b>our own funding, runway, or team capacity</b> — the cross-platform and agency pivots carry real engineering cost that must be weighed against the Nov 28 deadline.</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer class="af-footer">
+  <div class="af-footer-in">
+    <div class="af-brand">
+      <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#aflg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#aflg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#aflg)"/><defs><linearGradient id="aflg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
+      ARTEMISAI
+    </div>
+    <div class="af-copy">Threat Assessment &middot; Compiled June 9, 2026 &middot; Internal strategy &mdash; not for distribution</div>
+    <div class="af-links">
+      <a href="admin_panel.html">Admin Panel</a>
+      <a href="alex_vision.html">Alex's Vision</a>
+      <a href="layman_explanation.html">How Artemis Works</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  try{
+    var sess = localStorage.getItem('artemis_session') || localStorage.getItem('artemis_sprint_session') || localStorage.getItem('artemis_app_session');
+    if(sess){
+      var user = JSON.parse(sess);
+      var chip=document.getElementById('sn-chip'), av=document.getElementById('sn-avatar'), nm=document.getElementById('sn-name'), lb=document.getElementById('sn-logout-btn');
+      if(chip) chip.style.display='flex';
+      var who=user.name||user.username||'';
+      if(av && who) av.textContent=who.charAt(0).toUpperCase();
+      if(nm && who) nm.textContent=who;
+      if(lb) lb.style.display='';
+    }
+  }catch(e){}
+})();
+var _signoutFn=null;
+function handleLogout(){_showSignoutModal(function(){localStorage.removeItem('artemis_session');localStorage.removeItem('artemis_sprint_session');localStorage.removeItem('artemis_app_session');localStorage.removeItem('artemis_viewer_name');window.location.href='index.html';});}
+function _showSignoutModal(fn){_signoutFn=fn||function(){localStorage.removeItem('artemis_session');window.location.href='index.html';};document.getElementById('signout-modal').classList.add('open');}
+function _closeSignoutModal(){document.getElementById('signout-modal').classList.remove('open');}
+function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
+</script>
+
+</body>
+</html>
