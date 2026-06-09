@@ -3469,6 +3469,15 @@ function renderPhaseTimeline() {
   if(!wrap) return;
   wrap.innerHTML = "";
   const stageDef = (typeof CC_STAGES!=='undefined') ? (CC_STAGES.find(s=>s.id===_ccStage)||CC_STAGES[0]) : {id:'',label:'All'};
+  // Subtitle reflects the active stage view (this file is locked to MVP)
+  const subEl = document.getElementById("cc-phase-sub");
+  if(subEl){
+    let stageTotal=0;
+    PHASES.forEach(ph=>ph.sprints.forEach(sn=>{ stageTotal += computeSprintProgressStage(sn).tix; }));
+    subEl.textContent = _ccStage
+      ? `${PHASES.length} phases · ${stageTotal} ${stageDef.label} tickets across ${SPRINTS_LIST.length} sprints`
+      : `${PHASES.length} phases across ${SPRINTS_LIST.length} sprints`;
+  }
   PHASES.forEach(phase => {
     let total=0, done=0, tix=0;
     phase.sprints.forEach(sn => {
