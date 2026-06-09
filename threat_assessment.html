@@ -216,6 +216,31 @@ table.cmp td.uscell,table.cmp th.us{background:rgba(0,214,174,.06)}
 .for-alex{margin-top:16px;padding:18px 20px;border-radius:12px;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.25);font-size:13px;line-height:1.7;color:#c3cee0}
 .for-alex b{color:#a5b4fc}
 
+/* PIVOT / BACKUP PLANS */
+.assets-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.asset{background:var(--card);border:1px solid rgba(0,214,174,.25);border-radius:12px;padding:16px;text-align:center}
+.asset .aico{font-size:24px;margin-bottom:7px}
+.asset .aname{font-size:13px;font-weight:800;color:var(--teal)}
+.asset .adesc{font-size:11px;color:var(--mut);margin-top:4px;line-height:1.45}
+@media(max-width:720px){.assets-bar{grid-template-columns:repeat(2,1fr)}}
+.pivot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--pc)}
+.pcard .pchead{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.pcard .pcico{font-size:24px}
+.pcard .pcname{font-size:15px;font-weight:800;line-height:1.2}
+.pcard .pctag{font-size:9px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:5px;background:var(--pcbg);color:var(--pc);margin-left:auto;white-space:nowrap}
+.pcard .pcwhat{font-size:12.5px;color:#c3cee0;line-height:1.6;margin-bottom:10px}
+.pcard .pcreuse{font-size:11px;color:var(--mut);line-height:1.5;margin-bottom:12px}
+.pcard .pcreuse b{color:#cdd5ee}
+.pcard .pcrev{margin-top:auto;padding-top:12px;border-top:1px solid rgba(255,255,255,.06)}
+.pcard .pcrev .rlabel{font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--pc);margin-bottom:6px}
+.pcard .pcrev ul{list-style:none;margin:0;padding:0}
+.pcard .pcrev li{font-size:11.5px;color:#c3cee0;line-height:1.5;padding:3px 0 3px 16px;position:relative}
+.pcard .pcrev li::before{content:'£';position:absolute;left:0;color:var(--pc);font-weight:800}
+.pivot-note{font-size:12.5px;color:#c3cee0;line-height:1.7;background:rgba(0,214,174,.05);border:1px solid rgba(0,214,174,.2);border-radius:12px;padding:16px 18px;margin-top:16px}
+.pivot-note b{color:#fff}
+
 /* footer */
 .af-footer{margin-top:0;padding:30px 1.6rem;border-top:1px solid rgba(255,255,255,.07);background:rgba(6,10,19,.45);font-family:'DM Sans','Outfit',system-ui,sans-serif}
 .af-footer-in{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
@@ -576,6 +601,196 @@ table.cmp td.uscell,table.cmp th.us{background:rgba(0,214,174,.06)}
     </ul>
   </div>
 
+  <!-- PLAN B / PIVOTS -->
+  <div class="section-label"><span class="n">⤴</span> Plan B — backup &amp; pivot options for Alex</div>
+  <div class="lead" style="margin-bottom:18px">
+    <strong>The reassuring part:</strong> even in the worst case — Meta locks the Graph API and the Facebook product becomes unviable — <span class="big" style="color:var(--teal)">we do not start from zero.</span> What we've actually built is a <strong>team, a data-ingestion pipeline, and a set of trainable models</strong>. Those are general-purpose assets. We can point them at almost any data-heavy industry. The Facebook product is one <em>application</em> of our machine — not the machine itself. Below: what's reusable, and the businesses we could redeploy it into, each with revenue options.
+  </div>
+
+  <!-- reusable assets -->
+  <div class="assets-bar">
+    <div class="asset"><div class="aico">👥</div><div class="aname">The team</div><div class="adesc">Ships ML + data products fast</div></div>
+    <div class="asset"><div class="aico">🔧</div><div class="aname">Data pipeline</div><div class="adesc">Ingest → clean → enrich → store, at scale</div></div>
+    <div class="asset"><div class="aico">🧠</div><div class="aname">The models</div><div class="adesc">Sentiment, emotion, topic, prediction — retrainable on anything</div></div>
+    <div class="asset"><div class="aico">🖥️</div><div class="aname">The product shell</div><div class="adesc">Auth, dashboards, Art-E chat, alerts, admin</div></div>
+  </div>
+
+  <!-- FAN-OUT FLOW DIAGRAM -->
+  <div class="diagram">
+    <svg viewBox="0 0 960 470" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="ar2" markerWidth="9" markerHeight="7" refX="4.5" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#475569"/></marker></defs>
+
+      <!-- core engine -->
+      <rect x="350" y="20" width="260" height="84" rx="14" fill="#0d2a24" stroke="#00D6AE" stroke-width="1.8"/>
+      <text x="480" y="50" text-anchor="middle" font-size="14" font-weight="800" fill="#00D6AE">OUR REUSABLE ENGINE</text>
+      <text x="480" y="72" text-anchor="middle" font-size="10.5" fill="#94a3b8">Team + data pipeline + trainable models</text>
+      <text x="480" y="90" text-anchor="middle" font-size="10.5" fill="#94a3b8">+ product shell (auth, dashboards, Art-E, alerts)</text>
+
+      <!-- distribution line -->
+      <line x1="480" y1="104" x2="480" y2="130" stroke="#475569" stroke-width="2"/>
+      <line x1="110" y1="130" x2="850" y2="130" stroke="#475569" stroke-width="2"/>
+
+      <!-- 6 branch stems -->
+      <line x1="110" y1="130" x2="110" y2="158" stroke="#475569" stroke-width="2" marker-end="url(#ar2)"/>
+      <line x1="258" y1="130" x2="258" y2="158" stroke="#475569" stroke-width="2" marker-end="url(#ar2)"/>
+      <line x1="406" y1="130" x2="406" y2="158" stroke="#475569" stroke-width="2" marker-end="url(#ar2)"/>
+      <line x1="554" y1="130" x2="554" y2="158" stroke="#475569" stroke-width="2" marker-end="url(#ar2)"/>
+      <line x1="702" y1="130" x2="702" y2="158" stroke="#475569" stroke-width="2" marker-end="url(#ar2)"/>
+      <line x1="850" y1="130" x2="850" y2="158" stroke="#475569" stroke-width="2" marker-end="url(#ar2)"/>
+
+      <!-- branch boxes -->
+      <g font-family="Inter">
+        <!-- A multi-platform -->
+        <rect x="30" y="160" width="160" height="96" rx="11" fill="#0d1f2e" stroke="#38bdf8" stroke-width="1.3"/>
+        <text x="110" y="184" text-anchor="middle" font-size="11.5" font-weight="800" fill="#38bdf8">Multi-platform</text>
+        <text x="110" y="200" text-anchor="middle" font-size="9" fill="#94a3b8">Same product, but</text>
+        <text x="110" y="214" text-anchor="middle" font-size="9" fill="#94a3b8">IG + TikTok + LinkedIn</text>
+        <text x="110" y="234" text-anchor="middle" font-size="8.5" fill="#64748b">closest to today</text>
+        <text x="110" y="247" text-anchor="middle" font-size="8.5" fill="#64748b">— lowest risk</text>
+
+        <!-- B agencies -->
+        <rect x="178" y="160" width="160" height="96" rx="11" fill="#1a1024" stroke="#a78bfa" stroke-width="1.3"/>
+        <text x="258" y="184" text-anchor="middle" font-size="11.5" font-weight="800" fill="#a78bfa">Agency intel tool</text>
+        <text x="258" y="200" text-anchor="middle" font-size="9" fill="#94a3b8">White-label B2B</text>
+        <text x="258" y="214" text-anchor="middle" font-size="9" fill="#94a3b8">for marketing agencies</text>
+        <text x="258" y="234" text-anchor="middle" font-size="8.5" fill="#64748b">high willingness</text>
+        <text x="258" y="247" text-anchor="middle" font-size="8.5" fill="#64748b">to pay</text>
+
+        <!-- C brand listening -->
+        <rect x="326" y="160" width="160" height="96" rx="11" fill="#111827" stroke="#f5a623" stroke-width="1.3"/>
+        <text x="406" y="184" text-anchor="middle" font-size="11.5" font-weight="800" fill="#f5a623">Brand &amp; reputation</text>
+        <text x="406" y="200" text-anchor="middle" font-size="9" fill="#94a3b8">Listening + crisis</text>
+        <text x="406" y="214" text-anchor="middle" font-size="9" fill="#94a3b8">alerts for enterprises</text>
+        <text x="406" y="234" text-anchor="middle" font-size="8.5" fill="#64748b">our alert engine,</text>
+        <text x="406" y="247" text-anchor="middle" font-size="8.5" fill="#64748b">repurposed</text>
+
+        <!-- D data/API -->
+        <rect x="474" y="160" width="160" height="96" rx="11" fill="#111827" stroke="#10b981" stroke-width="1.3"/>
+        <text x="554" y="184" text-anchor="middle" font-size="11.5" font-weight="800" fill="#34d399">Data / API business</text>
+        <text x="554" y="200" text-anchor="middle" font-size="9" fill="#94a3b8">Sell the pipeline +</text>
+        <text x="554" y="214" text-anchor="middle" font-size="9" fill="#94a3b8">models as a service</text>
+        <text x="554" y="234" text-anchor="middle" font-size="8.5" fill="#64748b">B2B, no consumer</text>
+        <text x="554" y="247" text-anchor="middle" font-size="8.5" fill="#64748b">app needed</text>
+
+        <!-- E vertical AI -->
+        <rect x="622" y="160" width="160" height="96" rx="11" fill="#111827" stroke="#f43f5e" stroke-width="1.3"/>
+        <text x="702" y="184" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fb7185">Vertical AI tool</text>
+        <text x="702" y="200" text-anchor="middle" font-size="9" fill="#94a3b8">Retrain models for</text>
+        <text x="702" y="214" text-anchor="middle" font-size="9" fill="#94a3b8">a different industry</text>
+        <text x="702" y="234" text-anchor="middle" font-size="8.5" fill="#64748b">e-commerce, real</text>
+        <text x="702" y="247" text-anchor="middle" font-size="8.5" fill="#64748b">estate, finance…</text>
+
+        <!-- F services -->
+        <rect x="770" y="160" width="160" height="96" rx="11" fill="#111827" stroke="#cbd5e1" stroke-width="1.3"/>
+        <text x="850" y="184" text-anchor="middle" font-size="11.5" font-weight="800" fill="#cbd5e1">Build-for-others</text>
+        <text x="850" y="200" text-anchor="middle" font-size="9" fill="#94a3b8">Data/AI consultancy</text>
+        <text x="850" y="214" text-anchor="middle" font-size="9" fill="#94a3b8">+ scraping projects</text>
+        <text x="850" y="234" text-anchor="middle" font-size="8.5" fill="#64748b">cash now, funds</text>
+        <text x="850" y="247" text-anchor="middle" font-size="8.5" fill="#64748b">the product</text>
+      </g>
+
+      <!-- revenue layer -->
+      <line x1="480" y1="256" x2="480" y2="284" stroke="#475569" stroke-width="1.5" stroke-dasharray="3 4"/>
+      <text x="480" y="304" text-anchor="middle" font-size="11.5" font-weight="800" fill="#94a3b8" letter-spacing=".06em">EVERY BRANCH MONETISES THE SAME FEW WAYS</text>
+      <g font-family="Inter">
+        <rect x="70" y="320" width="150" height="58" rx="10" fill="rgba(0,214,174,.06)" stroke="#00D6AE" stroke-width="1"/>
+        <text x="145" y="344" text-anchor="middle" font-size="11" font-weight="700" fill="#00D6AE">Subscription</text>
+        <text x="145" y="361" text-anchor="middle" font-size="9" fill="#94a3b8">monthly SaaS, per seat/page</text>
+
+        <rect x="240" y="320" width="150" height="58" rx="10" fill="rgba(56,189,248,.06)" stroke="#38bdf8" stroke-width="1"/>
+        <text x="315" y="344" text-anchor="middle" font-size="11" font-weight="700" fill="#38bdf8">Usage / API</text>
+        <text x="315" y="361" text-anchor="middle" font-size="9" fill="#94a3b8">pay per call or per record</text>
+
+        <rect x="410" y="320" width="150" height="58" rx="10" fill="rgba(167,139,250,.06)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="485" y="344" text-anchor="middle" font-size="11" font-weight="700" fill="#a78bfa">Enterprise / license</text>
+        <text x="485" y="361" text-anchor="middle" font-size="9" fill="#94a3b8">big annual contracts</text>
+
+        <rect x="580" y="320" width="150" height="58" rx="10" fill="rgba(245,166,35,.06)" stroke="#f5a623" stroke-width="1"/>
+        <text x="655" y="344" text-anchor="middle" font-size="11" font-weight="700" fill="#f5a623">Data licensing</text>
+        <text x="655" y="361" text-anchor="middle" font-size="9" fill="#94a3b8">sell aggregated insight</text>
+
+        <rect x="750" y="320" width="150" height="58" rx="10" fill="rgba(203,213,225,.06)" stroke="#cbd5e1" stroke-width="1"/>
+        <text x="825" y="344" text-anchor="middle" font-size="11" font-weight="700" fill="#cbd5e1">Services / retainer</text>
+        <text x="825" y="361" text-anchor="middle" font-size="9" fill="#94a3b8">project + consulting fees</text>
+      </g>
+      <text x="480" y="404" text-anchor="middle" font-size="10.5" fill="#64748b" font-style="italic">The engine is the asset. The Facebook app is just the first thing we plugged into it.</text>
+    </svg>
+    <div class="diagram-cap">Our team + pipeline + models + product shell fan out into six possible businesses — and every one of them monetises through the same handful of proven revenue models. We are not locked to Facebook.</div>
+  </div>
+
+  <!-- PIVOT DETAIL CARDS -->
+  <div class="pivot-grid" style="margin-top:18px">
+    <div class="pcard" style="--pc:#38bdf8;--pcbg:rgba(56,189,248,.14)">
+      <div class="pchead"><span class="pcico">🪢</span><span class="pcname">A. Multi-platform Artemis</span><span class="pctag">easiest</span></div>
+      <div class="pcwhat">The exact same product, but pulling from Instagram, TikTok, LinkedIn, YouTube — not just Facebook. The cross-platform creator/agency intelligence tool.</div>
+      <div class="pcreuse"><b>Reuses:</b> ~95% of everything. Only the data connectors change.</div>
+      <div class="pcrev"><div class="rlabel">Revenue</div><ul>
+        <li>Monthly SaaS, £50–99 / page (as planned)</li>
+        <li>Agency tiers, £200–500 / month for many pages</li>
+        <li>The Facebook risk is diluted across 4+ platforms</li>
+      </ul></div>
+    </div>
+
+    <div class="pcard" style="--pc:#a78bfa;--pcbg:rgba(167,139,250,.14)">
+      <div class="pchead"><span class="pcico">🏢</span><span class="pcname">B. Agency intelligence platform</span><span class="pctag">high $</span></div>
+      <div class="pcwhat">Stop selling to individual creators; sell a white-label intelligence + reporting tool to marketing agencies who manage dozens of client pages.</div>
+      <div class="pcreuse"><b>Reuses:</b> all models + dashboards; add multi-tenant + white-label.</div>
+      <div class="pcrev"><div class="rlabel">Revenue</div><ul>
+        <li>£500–2,000 / month per agency</li>
+        <li>Per-client add-on pricing</li>
+        <li>Annual contracts — far higher willingness to pay than creators</li>
+      </ul></div>
+    </div>
+
+    <div class="pcard" style="--pc:#f5a623;--pcbg:rgba(245,166,35,.14)">
+      <div class="pchead"><span class="pcico">🛡️</span><span class="pcname">C. Brand &amp; reputation monitor</span><span class="pctag">enterprise</span></div>
+      <div class="pcwhat">Point the sentiment + crisis-alert engine at <em>brands</em>: watch what's said about a company across social, flag reputation risks in real time. (This is close to what Asad already built at Fluency.)</div>
+      <div class="pcreuse"><b>Reuses:</b> sentiment/emotion/toxicity models + alert engine directly.</div>
+      <div class="pcrev"><div class="rlabel">Revenue</div><ul>
+        <li>Enterprise SaaS, £1,000–10,000 / month</li>
+        <li>Crisis-response retainers</li>
+        <li>PR/comms agencies as resellers</li>
+      </ul></div>
+    </div>
+
+    <div class="pcard" style="--pc:#10b981;--pcbg:rgba(16,185,129,.14)">
+      <div class="pchead"><span class="pcico">🔌</span><span class="pcname">D. Data / API-as-a-service</span><span class="pctag">no app</span></div>
+      <div class="pcwhat">Don't build a consumer app at all — sell the pipeline and models as an API. Other companies pay to send us data and get back sentiment, topics, predictions.</div>
+      <div class="pcreuse"><b>Reuses:</b> the pipeline + models; skip the whole front-end.</div>
+      <div class="pcrev"><div class="rlabel">Revenue</div><ul>
+        <li>Usage-based — pay per API call / per record</li>
+        <li>Monthly volume tiers</li>
+        <li>Lowest build cost of any pivot — infra already exists</li>
+      </ul></div>
+    </div>
+
+    <div class="pcard" style="--pc:#f43f5e;--pcbg:rgba(244,63,94,.14)">
+      <div class="pchead"><span class="pcico">🎯</span><span class="pcname">E. Vertical AI for another industry</span><span class="pctag">biggest swing</span></div>
+      <div class="pcwhat">Retrain the models on a completely different domain. The machine doesn't care if it's social posts or product reviews, property listings, or financial filings. Pick a data-rich industry that's underserved by AI.</div>
+      <div class="pcreuse"><b>Reuses:</b> pipeline + product shell + ML expertise; retrain models on new data.</div>
+      <div class="pcrev"><div class="rlabel">Revenue · candidate verticals</div><ul>
+        <li>E-commerce: predict which products will sell</li>
+        <li>Real estate: predict listing performance / pricing</li>
+        <li>Recruitment, reviews, support tickets — all data-heavy SaaS</li>
+      </ul></div>
+    </div>
+
+    <div class="pcard" style="--pc:#cbd5e1;--pcbg:rgba(203,213,225,.14)">
+      <div class="pchead"><span class="pcico">🛠️</span><span class="pcname">F. Build-for-others (cash bridge)</span><span class="pctag">cash now</span></div>
+      <div class="pcwhat">Use the team's scraping + data + ML skills as a paid service — data pipelines, scraping projects, custom AI builds for clients. Not the dream, but it funds the dream and keeps the team together. (Asad already does projects like this.)</div>
+      <div class="pcreuse"><b>Reuses:</b> the team's skills directly — no product build needed.</div>
+      <div class="pcrev"><div class="rlabel">Revenue</div><ul>
+        <li>Project fees, £5k–50k per build</li>
+        <li>Monthly retainers for ongoing pipelines</li>
+        <li>Funds runway while a product pivot is built in parallel</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="pivot-note">
+    <b>How to think about these, Alex:</b> they're roughly ordered by distance from where we are today. <b>A and B are not really "pivots" at all</b> — they're the survival moves we already recommended, and they keep almost everything we've built. <b>C and D</b> reuse the engine with a new coat of paint and are realistic fallbacks if the consumer play stalls. <b>E</b> is the big swing — same team and infrastructure, totally new market — worth keeping in the back pocket. <b>F is the safety net under everything</b>: if revenue is ever tight, the team's skills are immediately sellable, which means <b>the company surviving is never actually in question — only which product it's pointed at.</b> That's the real message: we've built a machine, not just one app. Worst case, we re-aim it.
+  </div>
+
   <!-- CONCLUSION -->
   <div class="section-label"><span class="n">✓</span> In-depth conclusion — everything in one place</div>
   <div class="concl">
@@ -589,6 +804,7 @@ table.cmp td.uscell,table.cmp th.us{background:rgba(0,214,174,.06)}
       <li><b>The collaborator-app idea is a great wedge, not a whole company.</b> Meta is least likely to copy matchmaking, and it's a natural network effect — so make it the marketing spear-tip and growth engine. But build daily retention on prediction + alerts, because collaboration alone is occasional-use and won't carry a subscription.</li>
       <li><b>Two non-negotiable pivots to survive:</b> (a) <em>stop being a Facebook-only company</em> — get a second platform live (Instagram is nearly free, then something independent); (b) <em>narrow the wedge</em> to prediction + cross-page intelligence, sold to agencies. Drop the "AI assistant for your page" framing — that's now a free Meta feature.</li>
       <li><b>The instinct to avoid:</b> racing Meta by adding more features. The survival move is the opposite — subtraction and diversification. Own a niche so specific Meta has no reason to enter it.</li>
+      <li><b>The company surviving is not actually in question — only which product it's pointed at.</b> We've built a reusable machine (team + data pipeline + trainable models + product shell), not just one app. If Facebook ever closes, we re-aim it: multi-platform, agency tool, brand monitoring, a data/API business, a different industry vertical, or paid services as a cash bridge. See the Plan B options above.</li>
     </ol>
 
     <div class="takeaway">
