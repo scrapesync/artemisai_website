@@ -2286,6 +2286,7 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
       <span id="sync-text">Syncing...</span>
     </span>
     <button id="push-all-btn" onclick="pushAllToDynamo()" style="display:none;padding:5px 12px;border:1px solid rgba(52,211,153,.4);border-radius:6px;background:transparent;color:#34d399;font-family:'JetBrains Mono',monospace;font-size:9px;cursor:pointer;text-transform:uppercase;letter-spacing:1px;">⬆ Push to DynamoDB</button>
+    <button id="reset-dates-btn" onclick="resetDatesToPlan()" title="Clear dragged/saved dates so the planned schedule (S6 8 Jul to S23 28 Nov 2026) shows for everyone. Keeps checkboxes and custom tasks." style="padding:5px 12px;border:1px solid rgba(245,158,11,.4);border-radius:6px;background:transparent;color:#f59e0b;font-family:'JetBrains Mono',monospace;font-size:9px;cursor:pointer;text-transform:uppercase;letter-spacing:1px;">↺ Reset dates to plan</button>
   </div>
   
   </div>
@@ -4894,6 +4895,40 @@ async function pushAllToDynamo(){
     if(data.ok){setSyncStatus('ok','Pushed '+data.count+' sprints to workspace ✓');if(btn)btn.style.display='none';}
     else{setSyncStatus('error','Push failed');if(btn){btn.disabled=false;btn.textContent='⬆ Push to DynamoDB';}}
   }catch(e){setSyncStatus('error','Network error');if(btn){btn.disabled=false;btn.textContent='⬆ Push to DynamoDB';}}
+}
+
+/* Strip saved date overrides from every sprint so the corrected DEFAULT_DATES take effect,
+   then push the cleaned state to the shared workspace for all users. Checkbox/custom-task
+   progress is preserved; only the per-sprint date overrides are cleared. */
+async function resetDatesToPlan(){
+  if(!confirm('Reset all sprint dates to the planned schedule (S6 8 Jul to S23 28 Nov 2026)?\n\nThis clears any dragged/saved dates for everyone. Checkboxes and custom tasks are kept.')) return;
+  let cleared=0;
+  Object.keys(ST).forEach(sn=>{
+    const ss=ST[sn]; if(!ss) return;
+    if('startDate' in ss){delete ss.startDate;cleared++;}
+    if('endDate' in ss)  delete ss.endDate;
+    if('_manual' in ss)  delete ss._manual;
+  });
+  saveST();
+  setSyncStatus('syncing','Resetting dates for the workspace...');
+  try{
+    const resp=await fetch(API_BASE,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        action:'save-all',
+        userId: WORKSPACE_ID,
+        state: ST,
+        updatedBy: getViewerId(),
+        updatedByName: getViewerName(),
+      })
+    });
+    const data=await resp.json();
+    if(data.ok){
+      setSyncStatus('ok','Dates reset to plan for everyone ✓');
+      renderLaunch();renderSprintTrackBar();renderTeamProgress();
+      if(currentTab==='sprint')renderSprintPage();
+    } else { setSyncStatus('error','Reset failed'); }
+  }catch(e){ setSyncStatus('error','Network error'); }
 }
 
 
