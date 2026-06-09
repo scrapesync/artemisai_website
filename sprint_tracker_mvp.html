@@ -2421,6 +2421,11 @@ const PHASES = [
   {id:5,key:'p5',color:'#15803d',name:'Phase 4B',sub:'Launch',      sprints:['Sprint 20','Sprint 21','Sprint 22','Sprint 23']}
 ];
 const SPRINTS_LIST = Object.keys(SPRINT_DATA);
+// Display label for a sprint key. Numeric sprints -> the number; the non-numeric "Planning"
+// block shows its own short label so it does not render as "SPPlanning".
+function sprintNum(sn){ return sn==="Planning" ? "Plan" : sn.replace("Sprint ",""); }
+function sprintTag(sn){ return sn==="Planning" ? "Plan" : "SP"+sn.replace("Sprint ",""); }
+function sprintShort(sn){ return sn==="Planning" ? "Plan" : sn.replace("Sprint ","S"); }
 const PHASE_COLORS_MAP = {0:'#475569',1:'#0891b2',2:'#4f46e5',3:'#7c3aed',4:'#d97706',5:'#15803d'};
 
 
@@ -2557,11 +2562,11 @@ function renderSprintTrackBar(){
     const xPct=i/(total-1)*100;
     const isDone=pct===100;const isActive=pct>0&&pct<100;
     const cls=isDone?'done':isActive?'active':'';
-    const num=sn.replace('Sprint ','');
+    const num=sprintNum(sn);
     const dm=getSprintDates(sn);
     return`<div class="stb-dot-wrap ${cls}" style="left:${xPct}%;--dc:${col}" onclick="goToSprint('${sn}')">
       <div class="stb-dot ${cls}" style="--dc:${col}"></div>
-      <div class="stb-dot-label">S${num}</div>
+      <div class="stb-dot-label">${sn==='Planning'?'Plan':'S'+num}</div>
       <div class="stb-tooltip">
         <div class="stb-tt-name">${sn}</div>
         <div class="stb-tt-row">${sp.d}/${sp.t} checks · ${pct}%</div>
@@ -2616,7 +2621,7 @@ function renderPGrid(){
       </div>
       <div class="phase-bar"><div class="phase-bar-fill" style="width:${pp.pct}%;background:${p.color}"></div></div>`;
     p.sprints.forEach(sn=>{
-      const sp=calcSP(sn);const num=sn.replace('Sprint ','');
+      const sp=calcSP(sn);const num=sprintNum(sn);
       const dates=getSprintDates(sn);const meta=SPRINT_META[sn]||{};
       let cls='',badge='',bs='';
       if(sp.pct===100){cls='s-done';badge='✓ Done';bs=`background:rgba(52,211,153,.1);color:#34d399`;}
@@ -2658,7 +2663,7 @@ function renderSidebar(){
       const c=p.color;const sp=calcSP(sn);const isDone=sp.pct===100;
       const cls=`sb-btn ${sn===currentSprint?'active':''} ${isDone?'done':''}`;
       h+=`<button class="${cls}" onclick="selSprint('${sn}')">
-        <span class="sb-snum" style="${isDone?'':'color:'+c}">SP${sn.replace('Sprint ','')}</span>
+        <span class="sb-snum" style="${isDone?'':'color:'+c}">${sprintTag(sn)}</span>
         <div class="sb-pw">
           <div class="sb-bar"><div class="sb-bar-fill" style="width:${sp.pct}%;background:${c};color:${c}"></div></div>
           <div class="sb-pct">${sp.pct}% · ${sp.d}/${sp.t}</div>
@@ -3873,7 +3878,7 @@ function perfPersonCard(person){
         ${sprintBars.map(b=>`
           <div title="${b.sn}: ${b.d}/${b.t} checks · ${b.tasks} tasks · ${b.pct}%" style="position:relative;height:64px;background:rgba(255,255,255,.04);border-radius:5px;overflow:hidden;cursor:default;border:1px solid rgba(255,255,255,.05);">
             <div style="position:absolute;bottom:0;left:0;right:0;height:${b.pct}%;background:${person.color};opacity:.85;transition:height .3s;"></div>
-            <div style="position:absolute;top:4px;left:0;right:0;text-align:center;font-size:10px;color:#cbd5e1;font-weight:700;letter-spacing:.3px;">${b.sn.replace('Sprint ','S')}</div>
+            <div style="position:absolute;top:4px;left:0;right:0;text-align:center;font-size:10px;color:#cbd5e1;font-weight:700;letter-spacing:.3px;">${sprintShort(b.sn)}</div>
             <div style="position:absolute;bottom:3px;left:0;right:0;text-align:center;font-size:10px;color:${b.pct>40?'#fff':'#94a3b8'};font-weight:700;">${b.pct}%</div>
           </div>`).join('')}
       </div>
