@@ -65,6 +65,32 @@ nav.site-nav *{box-sizing:border-box}
 
 .section-label{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin:40px 0 18px;text-align:center}
 
+/* COMPETITOR TABLE */
+.cmp-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--border);background:var(--card)}
+.cmp{width:100%;border-collapse:collapse;font-size:13px;min-width:680px}
+.cmp th{text-align:left;padding:13px 14px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);border-bottom:1px solid var(--border);vertical-align:bottom}
+.cmp th.us{color:var(--teal)}
+.cmp td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--mut);vertical-align:top;line-height:1.45}
+.cmp tr:last-child td{border-bottom:none}
+.cmp .rowname{color:var(--ink);font-weight:600;font-size:12.5px}
+.cmp .rowsub{color:var(--mut);font-size:11px;display:block;margin-top:2px}
+.cmp col.uscol,.cmp td.uscell,.cmp th.us{background:rgba(0,214,174,.06)}
+.cmp .yes{color:var(--teal);font-weight:700}
+.cmp .no{color:#6b7280}
+.cmp .part{color:var(--amber)}
+.cmp-note{font-size:12px;color:var(--mut);text-align:center;margin-top:12px;line-height:1.6;font-style:italic}
+
+/* MVP FEATURES */
+.mvp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.mvp-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;position:relative;overflow:hidden}
+.mvp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--mc)}
+.mvp-ico{font-size:26px;margin-bottom:10px}
+.mvp-name{font-size:15px;font-weight:800;margin-bottom:7px}
+.mvp-what{font-size:13px;color:var(--mut);line-height:1.6;margin-bottom:10px}
+.mvp-game{font-size:12px;color:#cdd5ee;line-height:1.55;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)}
+.mvp-game b{color:var(--mc-text)}
+@media(max-width:640px){.mvp-grid{grid-template-columns:1fr}}
+
 /* SIMPLE FLOW STRIP */
 .flowstrip{display:flex;align-items:stretch;gap:0;flex-wrap:nowrap;overflow-x:auto;padding:6px 0}
 .flowcard{flex:1;min-width:130px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 12px;text-align:center;position:relative}
@@ -243,6 +269,107 @@ nav.site-nav *{box-sizing:border-box}
       <div class="ba-item">💬 <span>Explains everything in <b>plain English</b> and tells you exactly what to do.</span></div>
       <div class="ba-item">🌐 <span>Gets <b>smarter with every page</b> that joins — everyone benefits.</span></div>
       <div class="ba-item">⚡ <span>Watches in <b>real time</b> and warns you within minutes.</span></div>
+    </div>
+  </div>
+
+  <!-- COMPETITOR COMPARISON -->
+  <div class="section-label">How we compare to the tools out there</div>
+  <div class="cmp-wrap">
+    <table class="cmp">
+      <colgroup><col><col><col><col><col class="uscol"></colgroup>
+      <thead>
+        <tr>
+          <th>What it does</th>
+          <th>Buffer<span class="rowsub">free–$12/mo</span></th>
+          <th>Hootsuite<span class="rowsub">~$99–249/mo</span></th>
+          <th>Sprout Social<span class="rowsub">~$199–249/mo</span></th>
+          <th class="us">Artemis<span class="rowsub">our MVP</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rowname">Schedule &amp; post content</span></td>
+          <td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td>
+          <td class="uscell part">Later (not the focus)</td>
+        </tr>
+        <tr>
+          <td><span class="rowname">Show charts of past performance</span></td>
+          <td class="part">Basic</td><td class="yes">Yes</td><td class="yes">Yes</td>
+          <td class="uscell yes">Yes — but hidden behind Art-E</td>
+        </tr>
+        <tr>
+          <td><span class="rowname">Tell you what to do, in plain English</span></td>
+          <td class="no">No</td><td class="no">No</td><td class="part">AI hints</td>
+          <td class="uscell yes">Yes — the whole point</td>
+        </tr>
+        <tr>
+          <td><span class="rowname">Predict how a post will do before you post</span></td>
+          <td class="no">No</td><td class="no">No</td><td class="part">Limited</td>
+          <td class="uscell yes">Yes — core feature</td>
+        </tr>
+        <tr>
+          <td><span class="rowname">Warn you about a brewing comment crisis</span></td>
+          <td class="no">No</td><td class="part">Listening add-on</td><td class="part">Listening</td>
+          <td class="uscell yes">Yes — real-time alerts</td>
+        </tr>
+        <tr>
+          <td><span class="rowname">Get smarter from every other page on the platform</span></td>
+          <td class="no">No</td><td class="no">No</td><td class="no">No</td>
+          <td class="uscell yes">Yes — the network effect</td>
+        </tr>
+        <tr>
+          <td><span class="rowname">Suggest who to collaborate with</span></td>
+          <td class="no">No</td><td class="no">No</td><td class="no">No</td>
+          <td class="uscell yes">Yes — Discovery</td>
+        </tr>
+        <tr>
+          <td><span class="rowname">Built for non-technical people</span></td>
+          <td class="part">Simple but shallow</td><td class="no">Built for pros</td><td class="no">Built for big teams</td>
+          <td class="uscell yes">Yes — from the ground up</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="cmp-note">Honest note: a few newer tools (like Dash Social or small "viral score" apps) can also predict performance, and the big players keep adding AI. What no one else combines is <b>all of the above at once</b> — a plain-English advisor, prediction, real-time alerts, and a platform that learns across everyone — at a price normal creators can afford.</div>
+
+  <!-- MVP FEATURES — HOW WE CHANGE THE GAME -->
+  <div class="section-label">Our first features — and how each one changes the game</div>
+  <div class="mvp-grid">
+    <div class="mvp-card" style="--mc:#a78bfa;--mc-text:#a78bfa">
+      <div class="mvp-ico">🤖</div>
+      <div class="mvp-name">Art-E, your AI advisor</div>
+      <div class="mvp-what">Ask it anything about your page in normal language and it answers clearly — and always tells you what to do next.</div>
+      <div class="mvp-game"><b>The game-changer:</b> other tools hand you data. Art-E hands you decisions.</div>
+    </div>
+    <div class="mvp-card" style="--mc:#00D6AE;--mc-text:#00D6AE">
+      <div class="mvp-ico">🔮</div>
+      <div class="mvp-name">Post predictions</div>
+      <div class="mvp-what">Before you publish, Artemis estimates how well a post will do and suggests how to make it better.</div>
+      <div class="mvp-game"><b>The game-changer:</b> stop guessing. Fix a weak post <b>before</b> it flops, not after.</div>
+    </div>
+    <div class="mvp-card" style="--mc:#f5a623;--mc-text:#f5a623">
+      <div class="mvp-ico">🚨</div>
+      <div class="mvp-name">Real-time alerts</div>
+      <div class="mvp-what">A heads-up the moment something needs you — a post taking off, or comments turning nasty. Every alert comes with a fix.</div>
+      <div class="mvp-game"><b>The game-changer:</b> catch a viral moment or a PR fire in minutes, not next week's report.</div>
+    </div>
+    <div class="mvp-card" style="--mc:#38bdf8;--mc-text:#38bdf8">
+      <div class="mvp-ico">📰</div>
+      <div class="mvp-name">Intelligence feed</div>
+      <div class="mvp-what">A simple, scrollable stream of short insights about your page — each one explaining why it matters and what to do.</div>
+      <div class="mvp-game"><b>The game-changer:</b> your page's "brain," readable in 10 seconds — no dashboards to decode.</div>
+    </div>
+    <div class="mvp-card" style="--mc:#34d399;--mc-text:#34d399">
+      <div class="mvp-ico">🔭</div>
+      <div class="mvp-name">Discovery</div>
+      <div class="mvp-what">Artemis spots other pages whose audience overlaps with yours and suggests collaborations that could grow you both.</div>
+      <div class="mvp-game"><b>The game-changer:</b> growth through partnership — something a chart could never suggest.</div>
+    </div>
+    <div class="mvp-card" style="--mc:#6366f1;--mc-text:#93c5fd">
+      <div class="mvp-ico">📅</div>
+      <div class="mvp-name">Best times to post</div>
+      <div class="mvp-what">Tells you the exact moments your specific audience is most likely to be watching.</div>
+      <div class="mvp-game"><b>The game-changer:</b> tailored to <b>your</b> audience, not a generic "post at 9am" rule.</div>
     </div>
   </div>
 
