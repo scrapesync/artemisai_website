@@ -236,7 +236,31 @@ function featurePanel(fid){
     ${f.stage!=='done'&&f.days?`<span class="pbadge" style="background:#1c2541;color:#cdd5ee;margin:8px 0 0 6px;display:inline-block;font-weight:800">~${f.days} build-days</span>`:''}
     ${f.cut?`<span class="pbadge" style="background:#ff6f6122;color:#ff6f61;margin:8px 0 0 6px;display:inline-block">✂ cut order ${f.cut}</span>`:''}
     ${f.why?`<div class="sectlabel">Why it's ${({done:'done',mvp:'in the MVP',fast:'fast-follow',later:'later'})[f.stage]}</div><div style="font-size:10.5px;line-height:1.5;color:var(--ink);background:${stageColor[f.stage]}14;border:1px solid ${stageColor[f.stage]}40;border-radius:9px;padding:9px 11px">${f.why}</div>`:''}
-    ${(f.sprints&&f.sprints.length)?`<div class="sectlabel">Built in sprints</div><div class="sprintpills">${f.sprints.map(s=>`<a class="spill ${s<=5?'done':''}" href="${trackerLink(String(s))}" target="_blank" rel="noopener" style="text-decoration:none;cursor:pointer">${sprintLabel(s)}${s<=5?' ✓':''}</a>`).join('')}</div>`:''}
+    ${(function(){
+      // Derive "Built in sprints" from the feature's actual mapped tickets so the
+      // pills always match the ticket list below. Fall back to the (possibly stale)
+      // f.sprints only if the feature has no mapped tickets.
+      var tks=(TD.feat_tickets&&TD.feat_tickets[f.name])||[];
+      var pills=[];
+      if(tks.length){
+        var count={};
+        tks.forEach(function(t){var sid=TD.tk_sprint[t]; if(sid) count[sid]=(count[sid]||0)+1;});
+        var sids=Object.keys(count);
+        // if several sprints, drop ones backed by a single ticket (keyword false-matches)
+        if(sids.length>3) sids=sids.filter(function(s){return count[s]>=2;});
+        // order by tracker order
+        var order=G.sprints.map(function(s){return String(s.id);});
+        sids.sort(function(a,b){return order.indexOf(a)-order.indexOf(b);});
+        pills=sids;
+      } else {
+        pills=(f.sprints||[]).map(String);
+      }
+      if(!pills.length) return '';
+      return '<div class="sectlabel">Built in sprints</div><div class="sprintpills">'+
+        pills.map(function(s){var done=/^[0-9]+$/.test(s)&&(+s<=5);
+          return '<a class="spill '+(done?'done':'')+'" href="'+trackerLink(s)+'" target="_blank" rel="noopener" style="text-decoration:none;cursor:pointer">'+sprintLabel(s)+(done?' \u2713':'')+'</a>';
+        }).join('')+'</div>';
+    })()}
     ${(function(){
       var tks=(TD.feat_tickets&&TD.feat_tickets[f.name])||[];
       if(!tks.length) return '';
