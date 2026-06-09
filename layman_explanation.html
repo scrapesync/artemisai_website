@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What We're Building (In Plain English) — ArtemisAI</title>
+<style>
+:root{
+  --bg:#0b0f1a;--card:#111827;--border:#1e2d44;
+  --teal:#00D6AE;--purple:#a78bfa;--amber:#f5a623;--blue:#6366f1;
+  --rose:#f43f5e;--emerald:#10b981;--sky:#38bdf8;
+  --ink:#e2e8f0;--mut:#8793ab;
+  --font:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:100vh;overflow-x:hidden;padding-top:52px}
+a{color:inherit;text-decoration:none}
+
+/* ===== shared site header ===== */
+nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}
+nav.site-nav *{box-sizing:border-box}
+.sn-logo{font-size:1rem;font-weight:800;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.55rem;flex-shrink:0}
+.sn-logo-mark{width:26px;height:26px;flex-shrink:0}.sn-logo-mark svg{width:100%;height:100%}
+.sn-links{display:flex;align-items:center;gap:1rem;list-style:none;margin:0;padding:0}
+.sn-pill{padding:.4rem 1rem;border:1px solid rgba(0,212,170,.3);border-radius:7px;color:#00d4aa!important;font-size:.8rem;text-decoration:none;background:transparent;transition:all .2s;white-space:nowrap}
+.sn-pill:hover{background:rgba(0,212,170,.07)!important;border-color:rgba(0,212,170,.6)!important}
+.sn-chip{display:none;align-items:center;gap:7px;padding:.28rem .8rem .28rem .4rem;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);border-radius:20px}
+.sn-avatar{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#00d4aa,#6366f1);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#060a13;flex-shrink:0}
+.sn-name{font-size:.78rem;color:#e8ecf4;font-weight:600}
+.sn-logout{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.8rem;padding:.26rem .6rem;cursor:pointer;transition:all .2s}
+.sn-logout:hover{border-color:rgba(248,113,113,.4);color:#f87171}
+#signout-modal{display:none;position:fixed;inset:0;z-index:99998;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif}
+#signout-modal.open{display:flex}
+#signout-backdrop{position:absolute;inset:0;background:rgba(2,5,12,.7);backdrop-filter:blur(4px)}
+#signout-card{position:relative;z-index:1;background:#0f1729;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem 2rem;max-width:340px;width:90%;box-shadow:0 30px 60px rgba(0,0,0,0.5);text-align:center}
+.signout-icon svg{width:34px;height:34px;stroke:#f87171;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-bottom:.5rem}
+.signout-title{font-size:1.05rem;font-weight:800;color:#e8ecf4}
+.signout-sub{font-size:.82rem;color:#8a96ad;margin:.4rem 0 1.1rem}
+.signout-btns{display:flex;gap:8px}
+.signout-cancel{flex:1;padding:.6rem;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:9px;color:#cdd5ee;font-family:inherit;font-size:.82rem;cursor:pointer}
+.signout-confirm{flex:1;padding:.6rem;background:#f87171;border:none;border-radius:9px;color:#2a0a0a;font-family:inherit;font-weight:700;font-size:.82rem;cursor:pointer}
+@media(max-width:768px){nav.site-nav{height:48px!important;padding:0 12px!important}.sn-pill{padding:.3rem .75rem!important;font-size:.7rem!important}body{padding-top:48px}}
+
+/* HERO */
+.hero{padding:64px 28px 44px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(0,214,174,.08) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.hero-title{font-size:clamp(28px,5vw,44px);font-weight:900;line-height:1.12;letter-spacing:-.02em;margin-bottom:16px}
+.hero-title span{background:linear-gradient(135deg,var(--teal),var(--sky));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:16px;color:var(--mut);max-width:600px;margin:0 auto;line-height:1.7}
+
+.body-wrap{max-width:920px;margin:0 auto;padding:0 24px 60px}
+.step{margin-bottom:20px}
+
+/* BIG NUMBERED STEP CARDS */
+.bigstep{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px;display:flex;gap:24px;align-items:flex-start}
+.bigstep-num{width:54px;height:54px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;font-family:var(--font)}
+.bigstep-body{flex:1}
+.bigstep-title{font-size:20px;font-weight:800;margin-bottom:10px}
+.bigstep-text{font-size:15px;color:var(--mut);line-height:1.75}
+.bigstep-text strong{color:var(--ink)}
+.bigstep-analogy{margin-top:14px;padding:13px 16px;border-radius:10px;background:rgba(255,255,255,.03);border-left:3px solid var(--amber);font-size:14px;line-height:1.65;color:#cdd5ee}
+.bigstep-analogy b{color:var(--amber);font-weight:700}
+@media(max-width:640px){.bigstep{flex-direction:column;gap:16px;padding:22px}.bigstep-num{width:46px;height:46px;font-size:20px}}
+
+.section-label{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin:40px 0 18px;text-align:center}
+
+/* SIMPLE FLOW STRIP */
+.flowstrip{display:flex;align-items:stretch;gap:0;flex-wrap:nowrap;overflow-x:auto;padding:6px 0}
+.flowcard{flex:1;min-width:130px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 12px;text-align:center;position:relative}
+.flowcard+.flowcard{margin-left:26px}
+.flowcard-arrow{position:absolute;left:-22px;top:50%;transform:translateY(-50%);color:var(--teal);font-size:18px;z-index:2}
+.flowcard-icon{font-size:28px;margin-bottom:8px}
+.flowcard-title{font-size:13px;font-weight:800;margin-bottom:5px}
+.flowcard-text{font-size:11.5px;color:var(--mut);line-height:1.5}
+
+/* BEFORE / AFTER */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ba-col{border-radius:14px;padding:22px}
+.ba-col.before{background:rgba(244,63,94,.05);border:1px solid rgba(244,63,94,.2)}
+.ba-col.after{background:rgba(0,214,174,.05);border:1px solid rgba(0,214,174,.25)}
+.ba-label{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.ba-col.before .ba-label{color:var(--rose)}
+.ba-col.after .ba-label{color:var(--teal)}
+.ba-item{font-size:14px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);color:var(--mut);display:flex;gap:9px;line-height:1.5}
+.ba-item:last-child{border-bottom:none}
+.ba-item b{color:var(--ink);font-weight:600}
+@media(max-width:640px){.ba{grid-template-columns:1fr}}
+
+/* WHO IS IT FOR */
+.who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.who-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center}
+.who-icon{font-size:32px;margin-bottom:10px}
+.who-title{font-size:15px;font-weight:800;margin-bottom:6px}
+.who-text{font-size:13px;color:var(--mut);line-height:1.6}
+
+/* ART-E SPOTLIGHT */
+.arte{background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(99,102,241,.05));border:1px solid rgba(167,139,250,.25);border-radius:18px;padding:30px;text-align:center}
+.arte-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--blue));display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 16px}
+.arte h3{font-size:22px;font-weight:800;margin-bottom:12px}
+.arte p{font-size:15px;color:var(--mut);line-height:1.75;max-width:600px;margin:0 auto 18px}
+.arte-bubbles{display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto;text-align:left}
+.bubble{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px 14px 14px 4px;padding:12px 16px;font-size:14px;line-height:1.55}
+.bubble b{color:var(--purple)}
+
+/* WHY IT MATTERS */
+.why{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px}
+.why h3{font-size:20px;font-weight:800;margin-bottom:8px;text-align:center}
+.why-sub{font-size:14px;color:var(--mut);text-align:center;margin-bottom:24px;line-height:1.6}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.why-item{text-align:center;padding:16px}
+.why-emoji{font-size:30px;margin-bottom:8px}
+.why-item-title{font-size:14px;font-weight:700;margin-bottom:5px}
+.why-item-text{font-size:12.5px;color:var(--mut);line-height:1.55}
+
+/* footer */
+.af-footer{margin-top:0;padding:30px 1.6rem;border-top:1px solid rgba(255,255,255,.07);background:rgba(6,10,19,.45);font-family:'DM Sans','Outfit',system-ui,sans-serif}
+.af-footer-in{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.af-brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.12em;color:#e8ecf4;font-size:.9rem}
+.af-brand svg{width:24px!important;height:24px!important;flex-shrink:0}
+.af-copy{font-size:.8rem;color:#7c89a3}
+.af-links{display:flex;gap:20px;flex-wrap:wrap}
+.af-links a{font-size:.8rem;color:#9aa6bd;text-decoration:none}
+.af-links a:hover{color:#00d4aa}
+@media(max-width:640px){.af-footer-in{flex-direction:column;text-align:center;gap:12px}}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="sn-logo">
+    <div class="sn-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#slg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#slg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#slg)"/><defs><linearGradient id="slg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
+    ARTEMISAI
+  </a>
+  <ul class="sn-links">
+    <li><a href="admin_panel.html" class="sn-pill">&larr; Admin Panel</a></li>
+    <li><div class="sn-chip" id="sn-chip" style="display:none"><div class="sn-avatar" id="sn-avatar">?</div><span class="sn-name" id="sn-name"></span></div></li>
+    <li><button class="sn-logout" id="sn-logout-btn" onclick="handleLogout()" style="display:none">&#9211;</button></li>
+  </ul>
+</nav>
+<div id="signout-modal">
+  <div id="signout-backdrop" onclick="_closeSignoutModal()"></div>
+  <div id="signout-card">
+    <div class="signout-icon"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+    <div class="signout-title">Sign out?</div>
+    <div class="signout-sub">You'll need to sign back in to access the Admin Panel.</div>
+    <div class="signout-btns"><button class="signout-cancel" onclick="_closeSignoutModal()">Cancel</button><button class="signout-confirm" onclick="_doSignout()">Sign Out</button></div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">For everyone on the team</div>
+  <h1 class="hero-title">What We're Building,<br><span>In Plain English</span></h1>
+  <p class="hero-sub">No jargon, no tech-speak. If someone asked you "so what does Artemis actually do?" at a dinner party — this page is the answer.</p>
+</div>
+
+<div class="body-wrap">
+
+  <!-- ONE LINE -->
+  <div class="bigstep" style="border-color:rgba(0,214,174,.3);background:rgba(0,214,174,.04)">
+    <div class="bigstep-num" style="background:rgba(0,214,174,.15);color:var(--teal)">💡</div>
+    <div class="bigstep-body">
+      <div class="bigstep-title">The one-sentence version</div>
+      <div class="bigstep-text"><strong>Artemis is a smart assistant for people who run Facebook pages.</strong> It watches how their posts do, figures out what's working and what isn't, and simply tells them what to do next to grow — in language anyone can understand.</div>
+      <div class="bigstep-analogy">🍽️ <b>Think of it like this:</b> a personal trainer, but for your social media page. It looks at your "performance," spots what you're doing right and wrong, and gives you a clear plan — instead of just handing you a stack of confusing charts.</div>
+    </div>
+  </div>
+
+  <!-- WHO -->
+  <div class="section-label">Who is it for?</div>
+  <div class="who-grid">
+    <div class="who-card">
+      <div class="who-icon">📸</div>
+      <div class="who-title">Influencers</div>
+      <div class="who-text">People who post content and want more followers, more engagement, and more income.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">🏪</div>
+      <div class="who-title">Businesses</div>
+      <div class="who-text">Brands and shops running a Facebook page who want to reach more customers and avoid PR disasters.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">🧑‍💼</div>
+      <div class="who-title">Agencies</div>
+      <div class="who-text">Teams that manage lots of pages for lots of clients, and need results for all of them at once.</div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section-label">How it works — in 4 simple steps</div>
+  <div class="flowstrip">
+    <div class="flowcard">
+      <div class="flowcard-icon">🔗</div>
+      <div class="flowcard-title">1. Connect</div>
+      <div class="flowcard-text">You link your Facebook page to Artemis with one click. Safe and permission-based.</div>
+    </div>
+    <div class="flowcard">
+      <div class="flowcard-arrow">→</div>
+      <div class="flowcard-icon">🔬</div>
+      <div class="flowcard-title">2. Analyse</div>
+      <div class="flowcard-text">Artemis reads your last 2 years of posts, comments, photos and videos behind the scenes.</div>
+    </div>
+    <div class="flowcard">
+      <div class="flowcard-arrow">→</div>
+      <div class="flowcard-icon">🧠</div>
+      <div class="flowcard-title">3. Understand</div>
+      <div class="flowcard-text">It finds the hidden patterns — what your audience loves, when they're active, what's about to go viral.</div>
+    </div>
+    <div class="flowcard">
+      <div class="flowcard-arrow">→</div>
+      <div class="flowcard-icon">💬</div>
+      <div class="flowcard-title">4. Advise</div>
+      <div class="flowcard-text">Art-E (our AI helper) tells you, in plain words, exactly what to post and when.</div>
+    </div>
+  </div>
+
+  <!-- ART-E SPOTLIGHT -->
+  <div class="section-label">Meet Art-E — the heart of the product</div>
+  <div class="arte">
+    <div class="arte-avatar">🤖</div>
+    <h3>Art-E is your AI guide</h3>
+    <p>All the clever maths happens in the background. The user never has to read a chart if they don't want to. Instead, they just talk to <strong>Art-E</strong> — like texting a really smart friend who happens to know everything about their page.</p>
+    <div class="arte-bubbles">
+      <div class="bubble"><b>Art-E:</b> "Your last 3 posts did worse than usual. They went up at 9am — your audience is most active at 7pm. Try posting later today."</div>
+      <div class="bubble"><b>Art-E:</b> "Heads up — the comments on your newest post are turning negative fast. Here's how to respond before it becomes a problem."</div>
+      <div class="bubble"><b>Art-E:</b> "This draft you're about to post will probably do really well. Go for it! 🚀"</div>
+    </div>
+  </div>
+
+  <!-- WHAT MAKES IT DIFFERENT -->
+  <div class="section-label">What makes us different</div>
+  <div class="ba">
+    <div class="ba-col before">
+      <div class="ba-label">😩 Other tools</div>
+      <div class="ba-item">📉 <span>Show you <b>what already happened</b> last week or last month.</span></div>
+      <div class="ba-item">🔢 <span>Dump <b>confusing numbers and charts</b> on you and leave you to figure it out.</span></div>
+      <div class="ba-item">🧩 <span>Treat every customer separately — they <b>don't learn</b> from each other.</span></div>
+      <div class="ba-item">🐌 <span>Update slowly — once a day or once an hour.</span></div>
+    </div>
+    <div class="ba-col after">
+      <div class="ba-label">✨ Artemis</div>
+      <div class="ba-item">🔮 <span>Tells you <b>what's going to happen</b> — before you even post.</span></div>
+      <div class="ba-item">💬 <span>Explains everything in <b>plain English</b> and tells you exactly what to do.</span></div>
+      <div class="ba-item">🌐 <span>Gets <b>smarter with every page</b> that joins — everyone benefits.</span></div>
+      <div class="ba-item">⚡ <span>Watches in <b>real time</b> and warns you within minutes.</span></div>
+    </div>
+  </div>
+
+  <!-- THE FLYWHEEL (simple) -->
+  <div class="section-label">Why it gets better over time</div>
+  <div class="why">
+    <h3>The snowball effect ❄️</h3>
+    <div class="why-sub">Artemis is unusual: the more people use it, the better it gets for everyone. Like a snowball rolling downhill, it keeps growing.</div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-emoji">👥</div>
+        <div class="why-item-title">More pages join</div>
+        <div class="why-item-text">Each new page brings new posts and reactions.</div>
+      </div>
+      <div class="why-item">
+        <div class="why-emoji">📚</div>
+        <div class="why-item-title">More learning</div>
+        <div class="why-item-text">Artemis sees more examples of what works.</div>
+      </div>
+      <div class="why-item">
+        <div class="why-emoji">🎯</div>
+        <div class="why-item-title">Better advice</div>
+        <div class="why-item-text">Its predictions get sharper for everyone.</div>
+      </div>
+      <div class="why-item">
+        <div class="why-emoji">😍</div>
+        <div class="why-item-title">Happier users</div>
+        <div class="why-item-text">Who tell their friends — and the circle repeats.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE GOAL -->
+  <div class="bigstep" style="margin-top:20px;border-color:rgba(245,166,35,.3);background:rgba(245,166,35,.04)">
+    <div class="bigstep-num" style="background:rgba(245,166,35,.15);color:var(--amber)">🎯</div>
+    <div class="bigstep-body">
+      <div class="bigstep-title">What we're aiming for</div>
+      <div class="bigstep-text">We launch the first version (the <strong>"MVP"</strong> — the smallest useful version) on <strong>28 November 2026</strong>, starting with 5 real pages as our first users. From there, the goal is simple: become the tool that page owners <strong>can't imagine posting without</strong>.</div>
+      <div class="bigstep-analogy">🧭 <b>In one line:</b> we want Artemis to be the daily habit that helps creators grow — the first thing they check before they post anything.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="af-footer">
+  <div class="af-footer-in">
+    <div class="af-brand">
+      <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#aflg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#aflg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#aflg)"/><defs><linearGradient id="aflg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
+      ARTEMISAI
+    </div>
+    <div class="af-copy">What We're Building &middot; A plain-English guide for the whole team</div>
+    <div class="af-links">
+      <a href="admin_panel.html">Admin Panel</a>
+      <a href="alex_vision.html">Alex's Vision</a>
+      <a href="mailto:hello@artemisai.co.uk">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  try{
+    var sess = localStorage.getItem('artemis_session') || localStorage.getItem('artemis_sprint_session') || localStorage.getItem('artemis_app_session');
+    if(sess){
+      var user = JSON.parse(sess);
+      var chip=document.getElementById('sn-chip'), av=document.getElementById('sn-avatar'), nm=document.getElementById('sn-name'), lb=document.getElementById('sn-logout-btn');
+      if(chip) chip.style.display='flex';
+      var who=user.name||user.username||'';
+      if(av && who) av.textContent=who.charAt(0).toUpperCase();
+      if(nm && who) nm.textContent=who;
+      if(lb) lb.style.display='';
+    }
+  }catch(e){}
+})();
+var _signoutFn=null;
+function handleLogout(){_showSignoutModal(function(){localStorage.removeItem('artemis_session');localStorage.removeItem('artemis_sprint_session');localStorage.removeItem('artemis_app_session');localStorage.removeItem('artemis_viewer_name');window.location.href='index.html';});}
+function _showSignoutModal(fn){_signoutFn=fn||function(){localStorage.removeItem('artemis_session');window.location.href='index.html';};document.getElementById('signout-modal').classList.add('open');}
+function _closeSignoutModal(){document.getElementById('signout-modal').classList.remove('open');}
+function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
+</script>
+
+</body>
+</html>
