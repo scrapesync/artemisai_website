@@ -136,6 +136,9 @@ tbody tr.pending-row td{opacity:.8}
 
 /* EXPORT */
 .exp-btn{font-size:10px;padding:2px 9px;border-radius:5px;border:1px solid var(--bda);background:var(--adim);color:var(--accent);cursor:pointer;font-family:'Outfit',sans-serif;display:inline-flex;align-items:center;gap:4px;transition:.15s}
+.lvl-btn{font-size:12px;font-weight:600;padding:6px 14px;border-radius:8px;border:none;background:transparent;color:var(--t2);cursor:pointer;font-family:'Outfit',sans-serif;transition:.15s}
+.lvl-btn:hover{color:var(--t1)}
+.lvl-btn.active{background:var(--accent);color:#06231d}
 .exp-btn:hover{background:rgba(0,212,170,.18)}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
@@ -250,6 +253,17 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
       <div style="font-size:9px;color:var(--t2);font-family:'JetBrains Mono',monospace">Last updated</div>
       <div id="lastUpdated" style="font-size:13px;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--accent)">26 Apr 2026</div>
     </div>
+  </div>
+
+  <!-- LEVEL VIEW TOGGLE: Post vs Comment NLP -->
+  <div style="display:flex;align-items:center;gap:14px;margin:2px 0 18px;flex-wrap:wrap">
+    <span style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t2)">NLP level</span>
+    <div id="levelToggle" style="display:inline-flex;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:3px;gap:2px">
+      <button class="lvl-btn active" data-level="post" onclick="setLevel('post')">Post NLP</button>
+      <button class="lvl-btn" data-level="comment" onclick="setLevel('comment')">Comment NLP</button>
+      <button class="lvl-btn" data-level="both" onclick="setLevel('both')">Both</button>
+    </div>
+    <span id="levelHint" style="font-size:11px;color:var(--t2)"></span>
   </div>
 
   <!-- HOW IT WORKS BANNER -->
@@ -486,10 +500,17 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
 
     <input type="hidden" id="fId">
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
       <div class="fg">
         <label>Model Name *</label>
-        <input id="fVersion" placeholder="e.g. Our NLP v5, DeepSeek V3…">
+        <input id="fVersion" placeholder="e.g. Our NLP v5, Comment v2…">
+      </div>
+      <div class="fg">
+        <label>NLP Level</label>
+        <select id="fLevel">
+          <option value="post">Post NLP</option>
+          <option value="comment">Comment NLP</option>
+        </select>
       </div>
       <div class="fg">
         <label>Date</label>
@@ -535,6 +556,10 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
           <option>vs DeepSeek V3</option>
           <option>Sprint 4 gate</option>
           <option>vs self</option>
+          <option>vs AI labels (val)</option>
+          <option>vs Claude (200 comments)</option>
+          <option>vs human gold (blind)</option>
+          <option>Comment gate</option>
         </select>
       </div>
       <div class="fg">
@@ -581,11 +606,54 @@ function setStatus(state, msg) {
 // ── ENTRIES: live array, always authoritative ──
 let ENTRIES = [];
 
+// ── LEVEL VIEW STATE: 'post' | 'comment' | 'both' ──
+let _level = 'post';
+function entryLevel(e){ return e.level || 'post'; } // legacy entries = post
+function setLevel(lv){
+  _level = lv;
+  document.querySelectorAll('.lvl-btn').forEach(b=>b.classList.toggle('active', b.dataset.level===lv));
+  const hints={
+    post:'Showing post-level NLP models (NEBULA pipeline).',
+    comment:'Showing comment-level NLP models (single-task DeBERTa with post context).',
+    both:'Showing post and comment NLP together.'
+  };
+  const h=document.getElementById('levelHint'); if(h)h.textContent=hints[lv]||'';
+  try{ localStorage.setItem('artemis_nlp_level', lv); }catch(_){}
+  renderAll();
+}
+// entries visible under the current level view (target/reference always pass through, tagged to their level)
+function viewEntries(){
+  if(_level==='both') return ENTRIES;
+  return ENTRIES.filter(e=> entryLevel(e)===_level );
+}
+
 // ── HELPER FUNCTIONS ──
 function avg(e){ const v=TASKS.map(t=>e[t]).filter(x=>x!=null&&!isNaN(Number(x))); return v.length?v.reduce((a,b)=>Number(a)+Number(b),0)/v.length:null; }
 function sc(v){ if(v==null)return'm'; if(v>=80)return'g'; if(v>=65)return'a'; return'r'; }
 function pct(v){ if(v==null)return'<span style="color:var(--t3)">—</span>'; const cl=sc(v); const cols={g:'#34d399',a:'#fbbf24',r:'#f87171',m:'#4a5568'}; return`<span style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px;color:${cols[cl]}">${Number(v)%1===0?Number(v).toFixed(0):Number(v).toFixed(1)}%</span>`; }
 function badgeStyle(ver){ const v=ver.toLowerCase(); if(v.includes('claude'))return'border:1px solid rgba(0,212,170,.3);background:rgba(0,212,170,.08);color:#00d4aa'; if(v.includes('deepseek'))return'border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.08);color:#a78bfa'; if(v.includes('target'))return'border:1px solid rgba(52,211,153,.3);background:rgba(52,211,153,.08);color:#34d399'; if(v.includes('v4')||v.includes('latest'))return'border:1px solid rgba(251,191,36,.35);background:rgba(251,191,36,.08);color:#fbbf24'; if(v.includes('v0')||v.includes('baseline'))return'border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:#7b8ba8'; return'border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#60a5fa'; }
+
+// ── Ensure Sprint-5 comment-level entries exist (merge into DB-backed data, persist if new) ──
+function commentSeedEntries(){
+  return getDefaultEntries().filter(e=>e.level==='comment');
+}
+function ensureCommentSeeds(){
+  const seeds=commentSeedEntries();
+  let added=false;
+  seeds.forEach(seed=>{
+    if(!ENTRIES.some(e=>e.id===seed.id)){
+      const ti=ENTRIES.findIndex(e=>e.isTarget && entryLevel(e)==='post');
+      if(ti>=0) ENTRIES.splice(ti,0,seed); else ENTRIES.push(seed);
+      added=true;
+      // persist to DynamoDB so the comment data is permanent, not just local
+      if(_dbAvailable){
+        fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({action:'nlp_save_entry',entry:seed})}).catch(()=>{});
+      }
+    }
+  });
+  if(added) localStorage.setItem('artemis_nlp_v2', JSON.stringify(ENTRIES));
+}
 
 // ── LOAD: try DynamoDB first, fall back to localStorage ──
 async function loadEntries() {
@@ -611,6 +679,10 @@ async function loadEntries() {
           body: JSON.stringify({action: 'nlp_seed'})
         }).catch(()=>{});
       }
+      // Legacy entries (seeded before comment-level existed) have no `level` → treat as post.
+      ENTRIES.forEach(e=>{ if(!e.level) e.level='post'; });
+      // One-time: ensure the Sprint-5 comment-level entries exist; persist them to DynamoDB if missing.
+      ensureCommentSeeds();
       localStorage.setItem('artemis_nlp_v2', JSON.stringify(ENTRIES));
       setStatus('synced', 'DynamoDB · ' + ENTRIES.length + ' entries');
     } else {
@@ -621,6 +693,8 @@ async function loadEntries() {
     _dbAvailable = false;
     const cached = localStorage.getItem('artemis_nlp_v2');
     ENTRIES = cached ? JSON.parse(cached) : getDefaultEntries();
+    ENTRIES.forEach(e=>{ if(!e.level) e.level='post'; });
+    ensureCommentSeeds();
     setStatus('local', 'Local only');
   }
   // Render once, mark ready for orbital system
@@ -682,14 +756,20 @@ async function dbDeleteEntry(id) {
 // ── DEFAULT ENTRIES (seed data, used if DynamoDB and localStorage both empty) ──
 function getDefaultEntries(){
   return [
-    {id:'nlp_v0',sort_order:1,version:'Our NLP v0 (Baseline)',date:null,desc:'Pre-trained base models, no fine-tuning',Sentiment:null,Emotion:null,Topic:null,Intent:null,Toxicity:null,benchmark:'vs Claude (97 posts)',notes:'cardiffnlp XLM-R, DistilBERT, DeBERTa-v3, Detoxify'},
-    {id:'nlp_ds3',sort_order:2,version:'DeepSeek V3 (Teacher)',date:'2026-03-26',desc:'Teacher model trained on Claude labels — all 5 tasks',Sentiment:80.4,Emotion:74.2,Topic:75.3,Intent:72.2,Toxicity:94.8,benchmark:'vs Claude (97 posts)',notes:'Knowledge distillation source. Cost $0.000206/post.'},
-    {id:'nlp_claude',sort_order:3,version:'Claude Sonnet (Reference)',date:'2026-03-26',desc:'Ground truth reference — used to label training data',Sentiment:100,Emotion:100,Topic:100,Intent:100,Toxicity:100,benchmark:'vs self (97 posts)',notes:'Ground truth. Claude labels → DeepSeek → our models.',isReference:true},
-    {id:'nlp_v1',sort_order:4,version:'Our NLP v1',date:null,desc:'Fine-tuned on 2,545 DeepSeek labels',Sentiment:77.3,Emotion:59.3,Topic:50,Intent:45,Toxicity:92,benchmark:"vs Rafeh's GT (97 posts)",notes:'Pending — run in Colab (T4 GPU)',pending:true},
-    {id:'nlp_v2',sort_order:5,version:'Our NLP v2',date:null,desc:'v1 + Rafeh ground truth labels merged',Sentiment:75.5,Emotion:52.4,Topic:56,Intent:55,Toxicity:93,benchmark:'vs Rafeh GT (97 posts)',notes:'Emotion v2→v3: 52.4%→69.3%',pending:true},
-    {id:'nlp_v3',sort_order:6,version:'Our NLP v3',date:null,desc:'v2 + Q2 retrain with Tier 3 corrections',Sentiment:72.6,Emotion:72.3,Topic:61,Intent:60,Toxicity:92,benchmark:'vs Rafeh GT (97 posts)',notes:'Q2 2026 quarterly retrain',pending:true},
-    {id:'nlp_v4',sort_order:7,version:'Our NLP v4 (Latest)',date:'2026-04-26',desc:'Latest fine-tune run — DeepSeek weekly loop',Sentiment:88,Emotion:80,Topic:76,Intent:75,Toxicity:90,benchmark:'vs Claude (97 posts)',notes:'Working on resolving Toxicity — target 95%'},
-    {id:'nlp_target',sort_order:99,version:'Production Target',date:null,desc:'Sprint 4 gate: all tasks ≥ 80%, agreement ≥ 85%',Sentiment:80,Emotion:80,Topic:80,Intent:80,Toxicity:95,benchmark:'Sprint 4 gate',notes:'Target thresholds from labelling strategy doc.',isTarget:true},
+    {level:'post',id:'nlp_v0',sort_order:1,version:'Our NLP v0 (Baseline)',date:null,desc:'Pre-trained base models, no fine-tuning',Sentiment:null,Emotion:null,Topic:null,Intent:null,Toxicity:null,benchmark:'vs Claude (97 posts)',notes:'cardiffnlp XLM-R, DistilBERT, DeBERTa-v3, Detoxify'},
+    {level:'post',id:'nlp_ds3',sort_order:2,version:'DeepSeek V3 (Teacher)',date:'2026-03-26',desc:'Teacher model trained on Claude labels — all 5 tasks',Sentiment:80.4,Emotion:74.2,Topic:75.3,Intent:72.2,Toxicity:94.8,benchmark:'vs Claude (97 posts)',notes:'Knowledge distillation source. Cost $0.000206/post.'},
+    {level:'post',id:'nlp_claude',sort_order:3,version:'Claude Sonnet (Reference)',date:'2026-03-26',desc:'Ground truth reference — used to label training data',Sentiment:100,Emotion:100,Topic:100,Intent:100,Toxicity:100,benchmark:'vs self (97 posts)',notes:'Ground truth. Claude labels → DeepSeek → our models.',isReference:true},
+    {level:'post',id:'nlp_v1',sort_order:4,version:'Our NLP v1',date:null,desc:'Fine-tuned on 2,545 DeepSeek labels',Sentiment:77.3,Emotion:59.3,Topic:50,Intent:45,Toxicity:92,benchmark:"vs Rafeh's GT (97 posts)",notes:'Pending — run in Colab (T4 GPU)',pending:true},
+    {level:'post',id:'nlp_v2',sort_order:5,version:'Our NLP v2',date:null,desc:'v1 + Rafeh ground truth labels merged',Sentiment:75.5,Emotion:52.4,Topic:56,Intent:55,Toxicity:93,benchmark:'vs Rafeh GT (97 posts)',notes:'Emotion v2→v3: 52.4%→69.3%',pending:true},
+    {level:'post',id:'nlp_v3',sort_order:6,version:'Our NLP v3',date:null,desc:'v2 + Q2 retrain with Tier 3 corrections',Sentiment:72.6,Emotion:72.3,Topic:61,Intent:60,Toxicity:92,benchmark:'vs Rafeh GT (97 posts)',notes:'Q2 2026 quarterly retrain',pending:true},
+    {level:'post',id:'nlp_v4',sort_order:7,version:'Our NLP v4 (Latest)',date:'2026-04-26',desc:'Latest fine-tune run — DeepSeek weekly loop',Sentiment:88,Emotion:80,Topic:76,Intent:75,Toxicity:90,benchmark:'vs Claude (97 posts)',notes:'Working on resolving Toxicity — target 95%'},
+    {id:'nlp_target',sort_order:99,version:'Production Target',date:null,desc:'Sprint 4 gate: all tasks ≥ 80%, agreement ≥ 85%',Sentiment:80,Emotion:80,Topic:80,Intent:80,Toxicity:95,benchmark:'Sprint 4 gate',notes:'Target thresholds from labelling strategy doc.',isTarget:true,level:'post'},
+
+    // ───────── COMMENT-LEVEL NLP (Sprint 5) ─────────
+    {id:'cmt_mtl',sort_order:201,level:'comment',version:'Comment MTL (Baseline)',date:null,desc:'Multi-task model — plateaued, subjective tasks stuck low',Sentiment:null,Emotion:null,Topic:49,Intent:null,Toxicity:null,benchmark:'vs AI labels (val)',notes:'MTL plateau. Topic stalled ~0.49; no post context.'},
+    {id:'cmt_st_locked',sort_order:202,level:'comment',version:'Comment Single-Task (Locked)',date:'2026-06-01',desc:'5 dedicated DeBERTa-v3 models, [comment | post] paired encoding',Sentiment:86,Emotion:84,Topic:92,Intent:79,Toxicity:93,benchmark:'vs AI labels (val)',notes:'Sprint 5 locked. Topic 0.95 vs early gold. Toxic-class recall ~0.74 (watch). Post context was the missing ingredient.'},
+    {id:'cmt_fresh200',sort_order:203,level:'comment',version:'Comment vs Claude (200 fresh)',date:'2026-06-01',desc:'5 models on 200 fresh comments — independent Claude labelling',Sentiment:78,Emotion:73.5,Topic:74.5,Intent:74.5,Toxicity:93.5,benchmark:'vs Claude (200 comments)',notes:'Agreement-with-Claude (label fidelity), avg 78.8% — NOT yet true accuracy. Needs blind human gold set.'},
+    {id:'cmt_target',sort_order:299,level:'comment',version:'Comment Target',date:null,desc:'Comment gate: subjective tasks ≥ 80%, blind human gold validated',Sentiment:80,Emotion:80,Topic:80,Intent:80,Toxicity:95,benchmark:'Comment gate',notes:'Next step: shared rubric + blind human gold set to convert agreement → true accuracy.',isTarget:true},
   ];
 }
 
@@ -697,17 +777,18 @@ function getDefaultEntries(){
 // ─── TABLE ───
 function renderTable(){
   const body=document.getElementById('tableBody');
-  const base=ENTRIES.find(e=>e.id==='nlp_v0'||e.id===1||e.sort_order===1); const baseAvg=base?avg(base):0;
-  body.innerHTML=ENTRIES.map((e,idx)=>{
+  const VIEW=viewEntries();
+  const base=VIEW.find(e=>e.id==='nlp_v0'||e.id===1||e.sort_order===1)||VIEW.find(e=>!e.isTarget&&!e.isReference&&avg(e)!=null); const baseAvg=base?avg(base):0;
+  body.innerHTML=VIEW.map((e,idx)=>{
     const a=avg(e);
     // trend vs previous real entry
-    const prev=ENTRIES.slice(0,idx).reverse().find(x=>!x.isTarget&&avg(x)!=null);
+    const prev=VIEW.slice(0,idx).reverse().find(x=>!x.isTarget&&avg(x)!=null);
     const trend=a!=null&&prev&&avg(prev)!=null?(a>avg(prev)?'<span class="trend up">▲</span>':a<avg(prev)?'<span class="trend dn">▼</span>':'<span class="trend eq">→</span>'):'';
     const delta=a!=null&&baseAvg&&!e.isTarget?`<span class="delta" style="color:${a>=baseAvg?'#34d399':'#f87171'}">${a>=baseAvg?'+':''}${(a-baseAvg).toFixed(1)}pp</span>`:'<span class="sc m">—</span>';
     const avgHtml=a!=null?`<span class="avg-sc" style="color:${a>=80?'#34d399':a>=65?'#fbbf24':'#f87171'}">${a.toFixed(1)}%</span>${trend}`:'<span class="sc m">—</span>';
     const editable=!e.isTarget&&!e.isReference;
     return`<tr class="${e.isTarget?'target-row':e.pending?'pending-row':''}">
-      <td><span class="vbadge" style="${badgeStyle(e.version)}">${e.version}</span></td>
+      <td><span class="vbadge" style="${badgeStyle(e.version)}">${e.version}</span>${_level==='both'?` <span style="font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;margin-left:4px;${entryLevel(e)==='comment'?'background:rgba(167,139,250,.14);color:#a78bfa':'background:rgba(96,165,250,.14);color:#60a5fa'}">${entryLevel(e)==='comment'?'COMMENT':'POST'}</span>`:''}</td>
       <td style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--t2)">${e.date||'<span style="color:var(--t3)">Pending</span>'}</td>
       <td>${pct(e.Sentiment)}</td>
       <td>${pct(e.Emotion)}</td>
@@ -727,8 +808,9 @@ function renderTable(){
 
 // ─── KPIs ───
 function renderKPIs(){
+  const VIEW=viewEntries();
   TASKS.forEach(t=>{
-    const candidates=ENTRIES.filter(e=>!e.isTarget&&!e.isReference&&e[t]!=null);
+    const candidates=VIEW.filter(e=>!e.isTarget&&!e.isReference&&e[t]!=null);
     const latest=candidates[candidates.length-1];
     const prev=candidates[candidates.length-2];
     if(!latest)return;
@@ -748,7 +830,7 @@ function renderKPIs(){
 // ─── LOG ───
 function renderLog(){
   const el=document.getElementById('logEl');
-  el.innerHTML=[...ENTRIES].filter(e=>!e.isTarget).reverse().map(e=>{
+  el.innerHTML=[...viewEntries()].filter(e=>!e.isTarget).reverse().map(e=>{
     const a=avg(e);
     return`<div style="display:flex;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.03)">
       <div style="width:7px;height:7px;border-radius:50%;background:${a!=null&&a>=80?'#34d399':a!=null&&a>=65?'#fbbf24':a!=null?'#f87171':'#4a5568'};flex-shrink:0;margin-top:4px"></div>
@@ -778,30 +860,48 @@ Chart.defaults.plugins.tooltip.bodyColor='#9aa5b8';
 Chart.defaults.plugins.tooltip.titleFont={size:11,weight:'600',family:"'JetBrains Mono',monospace"};
 Chart.defaults.plugins.tooltip.callbacks={label:ctx=>{const v=ctx.parsed.y;const ds=ctx.dataset.label||'';return ds+(ds?': ':'')+( v!=null?v.toFixed(1)+'%':'—');}};
 
-const _c={};
+var _c=window._c||(window._c={});
 function mk(id,cfg){if(_c[id])_c[id].destroy();const el=document.getElementById(id);if(el)_c[id]=new Chart(el,cfg);}
 
 function buildCharts(){
-  // Entries with real scores (not reference, not target), sorted by date
-  const real=ENTRIES.filter(e=>!e.isTarget&&!e.isReference&&avg(e)!=null);
-  const labels=real.map(e=>e.version.replace('Our NLP ','v').replace(' (Latest)','').replace(' (Baseline)','').replace('DeepSeek V3 (Teacher)','DS V3').replace('Claude Sonnet (Reference)','Claude'));
+  // Entries with real scores (not reference, not target), sorted by date — filtered to current level
+  const VIEW=viewEntries();
+  const real=VIEW.filter(e=>!e.isTarget&&!e.isReference&&avg(e)!=null);
+  const labels=real.map(e=>e.version.replace('Our NLP ','v').replace(' (Latest)','').replace(' (Baseline)','').replace('DeepSeek V3 (Teacher)','DS V3').replace('Claude Sonnet (Reference)','Claude').replace('Comment ','C·').replace(' (Locked)','').replace(' (200 fresh)',' 200'));
 
   // ── LINE: all tasks over versions ──
-  mk('lineChart',{type:'line',data:{labels,datasets:[
-    ...TASKS.map(t=>({
-      label:t,data:real.map(e=>e[t]),
-      borderColor:TCOL[t],backgroundColor:'transparent',
-      borderWidth:2.5,pointRadius:5,pointHoverRadius:7,
-      pointBackgroundColor:TCOL[t],pointBorderColor:'#0c1221',pointBorderWidth:2,
-      spanGaps:false,tension:0.3
-    })),
-    {label:'Target 80%',data:real.map(()=>80),borderColor:'rgba(255,255,255,.18)',borderDash:[5,4],borderWidth:1.5,pointRadius:0,fill:false}
-  ]},options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
-    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10},padding:10}}},
-    scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:15}},
-      y:{grid:{color:'rgba(255,255,255,.05)'},min:0,max:105,
-        ticks:{callback:v=>v+'%',font:{size:9}},
-        title:{display:true,text:'Accuracy %',font:{size:9}}}}}});
+  // In 'both' mode, also overlay post-avg vs comment-avg as two bold lines for direct comparison.
+  let lineDatasets;
+  if(_level==='both'){
+    const postReal=ENTRIES.filter(e=>entryLevel(e)==='post'&&!e.isTarget&&!e.isReference&&avg(e)!=null);
+    const cmtReal=ENTRIES.filter(e=>entryLevel(e)==='comment'&&!e.isTarget&&!e.isReference&&avg(e)!=null);
+    const maxLen=Math.max(postReal.length,cmtReal.length);
+    const idxLabels=Array.from({length:maxLen},(_,i)=>'#'+(i+1));
+    lineDatasets=[
+      {label:'Post NLP (avg)',data:postReal.map(e=>avg(e)),borderColor:'#60a5fa',backgroundColor:'transparent',borderWidth:2.5,pointRadius:5,pointHoverRadius:7,pointBackgroundColor:'#60a5fa',pointBorderColor:'#0c1221',pointBorderWidth:2,tension:0.3},
+      {label:'Comment NLP (avg)',data:cmtReal.map(e=>avg(e)),borderColor:'#a78bfa',backgroundColor:'transparent',borderWidth:2.5,pointRadius:5,pointHoverRadius:7,pointBackgroundColor:'#a78bfa',pointBorderColor:'#0c1221',pointBorderWidth:2,tension:0.3},
+      {label:'Target 80%',data:idxLabels.map(()=>80),borderColor:'rgba(255,255,255,.18)',borderDash:[5,4],borderWidth:1.5,pointRadius:0,fill:false}
+    ];
+    mk('lineChart',{type:'line',data:{labels:idxLabels,datasets:lineDatasets},options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10},padding:10}}},
+      scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'rgba(255,255,255,.05)'},min:0,max:105,ticks:{callback:v=>v+'%',font:{size:9}},title:{display:true,text:'Avg accuracy %',font:{size:9}}}}}});
+  } else {
+    mk('lineChart',{type:'line',data:{labels,datasets:[
+      ...TASKS.map(t=>({
+        label:t,data:real.map(e=>e[t]),
+        borderColor:TCOL[t],backgroundColor:'transparent',
+        borderWidth:2.5,pointRadius:5,pointHoverRadius:7,
+        pointBackgroundColor:TCOL[t],pointBorderColor:'#0c1221',pointBorderWidth:2,
+        spanGaps:false,tension:0.3
+      })),
+      {label:'Target 80%',data:real.map(()=>80),borderColor:'rgba(255,255,255,.18)',borderDash:[5,4],borderWidth:1.5,pointRadius:0,fill:false}
+    ]},options:{responsive:true,maintainAspectRatio:true,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10},padding:10}}},
+      scales:{x:{grid:{display:false},ticks:{font:{size:9},maxRotation:15}},
+        y:{grid:{color:'rgba(255,255,255,.05)'},min:0,max:105,
+          ticks:{callback:v=>v+'%',font:{size:9}},
+          title:{display:true,text:'Accuracy %',font:{size:9}}}}}});
+  }
 
   // ── BAR: avg per version, colour = improving/declining ──
   const avgs=real.map(e=>avg(e));
@@ -819,7 +919,7 @@ function buildCharts(){
 
   // ── RADAR: sprint gate ──
   const bestOurs=Object.fromEntries(TASKS.map(t=>[t,
-    Math.max(...ENTRIES.filter(e=>!e.isTarget&&!e.isReference&&e[t]!=null).map(e=>e[t]).filter(x=>!isNaN(x)),0)
+    Math.max(...VIEW.filter(e=>!e.isTarget&&!e.isReference&&e[t]!=null).map(e=>e[t]).filter(x=>!isNaN(x)),0)
   ]));
   mk('radarChart',{type:'radar',data:{labels:TASKS,datasets:[
     {label:'Best achieved',data:TASKS.map(t=>bestOurs[t]),backgroundColor:'rgba(0,212,170,.12)',borderColor:'rgba(0,212,170,.7)',borderWidth:2,pointRadius:4,pointBackgroundColor:'#00d4aa'},
@@ -871,8 +971,8 @@ function buildCharts(){
 
 // ─── MODAL ───
 let _eid=null;
-function openAdd(){ _eid=null; document.getElementById('modalTitle').textContent='Add New Entry'; document.getElementById('modalSub').textContent='Record accuracy scores after a fine-tuning run'; document.getElementById('delBtn').style.display='none'; document.getElementById('fId').value=''; ['fVersion','fDesc','fSentiment','fEmotion','fTopic','fIntent','fToxicity','fNotes'].forEach(i=>document.getElementById(i).value=''); document.getElementById('fDate').value=new Date().toISOString().slice(0,10); document.getElementById('modal').classList.add('open'); }
-function openEdit(id){ const e=ENTRIES.find(x=>x.id===id);if(!e)return; _eid=id; document.getElementById('modalTitle').textContent='Edit Entry'; document.getElementById('modalSub').textContent=e.version; document.getElementById('delBtn').style.display='inline-flex'; document.getElementById('fId').value=id; document.getElementById('fVersion').value=e.version||''; document.getElementById('fDate').value=e.date||''; document.getElementById('fDesc').value=e.desc||''; document.getElementById('fSentiment').value=e.Sentiment!=null?e.Sentiment:''; document.getElementById('fEmotion').value=e.Emotion!=null?e.Emotion:''; document.getElementById('fTopic').value=e.Topic!=null?e.Topic:''; document.getElementById('fIntent').value=e.Intent!=null?e.Intent:''; document.getElementById('fToxicity').value=e.Toxicity!=null?e.Toxicity:''; document.getElementById('fBenchmark').value=e.benchmark||'vs Claude (97 posts)'; document.getElementById('fNotes').value=e.notes||''; document.getElementById('modal').classList.add('open'); }
+function openAdd(){ _eid=null; document.getElementById('modalTitle').textContent='Add New Entry'; document.getElementById('modalSub').textContent='Record accuracy scores after a fine-tuning run'; document.getElementById('delBtn').style.display='none'; document.getElementById('fId').value=''; ['fVersion','fDesc','fSentiment','fEmotion','fTopic','fIntent','fToxicity','fNotes'].forEach(i=>document.getElementById(i).value=''); if(document.getElementById('fLevel'))document.getElementById('fLevel').value=(_level==='comment'?'comment':'post'); document.getElementById('fDate').value=new Date().toISOString().slice(0,10); document.getElementById('modal').classList.add('open'); }
+function openEdit(id){ const e=ENTRIES.find(x=>x.id===id);if(!e)return; _eid=id; document.getElementById('modalTitle').textContent='Edit Entry'; document.getElementById('modalSub').textContent=e.version; document.getElementById('delBtn').style.display='inline-flex'; document.getElementById('fId').value=id; document.getElementById('fVersion').value=e.version||''; document.getElementById('fDate').value=e.date||''; document.getElementById('fDesc').value=e.desc||''; document.getElementById('fSentiment').value=e.Sentiment!=null?e.Sentiment:''; document.getElementById('fEmotion').value=e.Emotion!=null?e.Emotion:''; document.getElementById('fTopic').value=e.Topic!=null?e.Topic:''; document.getElementById('fIntent').value=e.Intent!=null?e.Intent:''; document.getElementById('fToxicity').value=e.Toxicity!=null?e.Toxicity:''; document.getElementById('fBenchmark').value=e.benchmark||'vs Claude (97 posts)'; if(document.getElementById('fLevel'))document.getElementById('fLevel').value=entryLevel(e); document.getElementById('fNotes').value=e.notes||''; document.getElementById('modal').classList.add('open'); }
 function closeModal(){ document.getElementById('modal').classList.remove('open'); _eid=null; }
 document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal();});
 
@@ -884,6 +984,7 @@ async function saveEntry(){
   const formData={
     version:ver, date:document.getElementById('fDate').value||null,
     desc:document.getElementById('fDesc').value.trim(),
+    level:(document.getElementById('fLevel')?document.getElementById('fLevel').value:'post')||'post',
     Sentiment:num('fSentiment'), Emotion:num('fEmotion'),
     Topic:num('fTopic'), Intent:num('fIntent'), Toxicity:num('fToxicity'),
     benchmark:document.getElementById('fBenchmark').value,
@@ -895,7 +996,7 @@ async function saveEntry(){
     entry={...existing,...formData,id:String(_eid)};
   } else {
     const maxOrder=Math.max(...ENTRIES.filter(e=>!e.isTarget).map(e=>e.sort_order||0),0);
-    entry={id:'nlp_'+Date.now(),sort_order:maxOrder+1,created_at:Date.now(),...formData};
+    entry={level:'post',id:'nlp_'+Date.now(),sort_order:maxOrder+1,created_at:Date.now(),...formData};
     if(formData.date) document.getElementById('lastUpdated').textContent=formData.date;
   }
   closeModal();
@@ -927,6 +1028,8 @@ function dl(rows,fn){ const csv=rows.map(r=>r.map(c=>{const s=String(c).replace(
 function renderAll(){ renderTable();renderKPIs();renderLog();buildCharts(); }
 
 // Load from DynamoDB ONCE on page load — renderAll called inside loadEntries
+try{ const _sl=localStorage.getItem('artemis_nlp_level'); if(_sl){ _level=_sl; document.querySelectorAll('.lvl-btn').forEach(b=>b.classList.toggle('active', b.dataset.level===_sl)); } }catch(_){}
+{ const hints={post:'Showing post-level NLP models (NEBULA pipeline).',comment:'Showing comment-level NLP models (single-task DeBERTa with post context).',both:'Showing post and comment NLP together.'}; const h=document.getElementById('levelHint'); if(h)h.textContent=hints[_level]||''; }
 loadEntries();
 
 // Auth — check both session keys
