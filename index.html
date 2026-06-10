@@ -2909,43 +2909,43 @@ html[data-theme="light"] .hb-metric{
     </div>
     <div class="team-grid cinematic-stagger">
       <div class="team-card tilt-3d">
-        <div class="team-avatar" data-initials="JM"><img src="team-jill.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Jill Male"/></div>
+        <div class="team-avatar" data-initials="JM"><img loading="lazy" decoding="async" src="team-jill.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Jill Male"/></div>
         <div class="team-name">Jill Male</div>
         <div class="team-role">Co-Founder</div>
         <div class="team-tag">Operations &amp; Growth</div>
       </div>
       <div class="team-card tilt-3d">
-        <div class="team-avatar" data-initials="AM"><img src="team-alex.jpg" alt="Alex Male" onerror="this.closest('.team-avatar').classList.add('noimg')"/></div>
+        <div class="team-avatar" data-initials="AM"><img loading="lazy" decoding="async" src="team-alex.jpg" alt="Alex Male" onerror="this.closest('.team-avatar').classList.add('noimg')"/></div>
         <div class="team-name">Alex Male</div>
         <div class="team-role">Founder</div>
         <div class="team-tag">Vision &amp; Product Strategy</div>
       </div>
       <div class="team-card tilt-3d">
-        <div class="team-avatar" data-initials="AI"><img src="team-asad.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Asad Ikram"/></div>
+        <div class="team-avatar" data-initials="AI"><img loading="lazy" decoding="async" src="team-asad.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Asad Ikram"/></div>
         <div class="team-name">Asad Ikram</div>
         <div class="team-role">CTO &amp; Co-Founder</div>
         <div class="team-tag">Architecture &amp; AI Systems</div>
       </div>
       <div class="team-card tilt-3d">
-        <div class="team-avatar" data-initials="LM"><img src="team-lewis.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Lewis Mulhall"/></div>
+        <div class="team-avatar" data-initials="LM"><img loading="lazy" decoding="async" src="team-lewis.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Lewis Mulhall"/></div>
         <div class="team-name">Lewis Mulhall</div>
         <div class="team-role">Co-Founder</div>
         <div class="team-tag">Social Media &amp; Partnerships</div>
       </div>
       <div class="team-card tilt-3d">
-        <div class="team-avatar" data-initials="FH"><img src="team-faheem.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Faheem Haider"/></div>
+        <div class="team-avatar" data-initials="FH"><img loading="lazy" decoding="async" src="team-faheem.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Faheem Haider"/></div>
         <div class="team-name">Faheem Haider</div>
         <div class="team-role">Founding Data Engineer</div>
         <div class="team-tag">Data Pipelines &amp; ML Ops</div>
       </div>
       <div class="team-card tilt-3d">
-        <div class="team-avatar" data-initials="AR"><img src="team-rafeh.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Abdul Rafeh"/></div>
+        <div class="team-avatar" data-initials="AR"><img loading="lazy" decoding="async" src="team-rafeh.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Abdul Rafeh"/></div>
         <div class="team-name">Abdul Rafeh</div>
         <div class="team-role">Chief Marketing Officer</div>
         <div class="team-tag">Intelligence &amp; Validation</div>
       </div>
       <div class="team-card tilt-3d">
-        <div class="team-avatar" data-initials="SF"><img src="team-filza.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Syeda Filza Bukhari"/></div>
+        <div class="team-avatar" data-initials="SF"><img loading="lazy" decoding="async" src="team-filza.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Syeda Filza Bukhari"/></div>
         <div class="team-name">Syeda Filza Bukhari</div>
         <div class="team-role">Chief Legal Officer</div>
         <div class="team-tag">Compliance &amp; Legal</div>
@@ -3046,6 +3046,7 @@ function animateCounter(el, target, suffix, duration){
     // page feels alive when the user keeps scrolling/coming back.
     setTimeout(() => {
       setInterval(() => {
+        if(window._liveOff) return;
         tiles.forEach((el, i) => {
           if(i === 3) return; // skip the 98% one (it's a fixed stat)
           const cur = parseFloat(el.textContent.replace(/[^\d.]/g,'')) || 0;
@@ -3058,7 +3059,7 @@ function animateCounter(el, target, suffix, duration){
           const next = increments[i]();
           el.textContent = formatNum(next, el.dataset.suffix || '');
         });
-      }, 1400);
+      }, 2000);
     }, 2400);
   }
   // IntersectionObserver to trigger on scroll into view
@@ -3122,15 +3123,24 @@ function animateCounter(el, target, suffix, duration){
   // visualization has been replaced with the static-color banner so
   // there's no orbital tilt target anymore.
   document.querySelectorAll('.tilt-3d').forEach(card => {
+    let rect = null, raf = 0, lx = 0, ly = 0;
+    card.addEventListener('mouseenter', () => { rect = card.getBoundingClientRect(); });
     card.addEventListener('mousemove', (e) => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width;
-      const y = (e.clientY - r.top) / r.height;
-      const rotY = (x - 0.5) * 4;
-      const rotX = -(y - 0.5) * 4;
-      card.style.transform = 'translateY(-6px) rotateX('+rotX+'deg) rotateY('+rotY+'deg) scale(1.02)';
+      lx = e.clientX; ly = e.clientY;
+      if(raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        if(!rect) rect = card.getBoundingClientRect();
+        const x = (lx - rect.left) / rect.width;
+        const y = (ly - rect.top) / rect.height;
+        const rotY = (x - 0.5) * 4;
+        const rotX = -(y - 0.5) * 4;
+        card.style.transform = 'translateY(-6px) rotateX('+rotX+'deg) rotateY('+rotY+'deg) scale(1.02)';
+      });
     });
     card.addEventListener('mouseleave', () => {
+      rect = null;
+      if(raf){ cancelAnimationFrame(raf); raf = 0; }
       card.style.transform = '';
     });
   });
@@ -3391,7 +3401,7 @@ document.querySelectorAll('.site-nav-links a').forEach(a => {
      + nav/pills/team polish + scroll magic. Theme-safe, reduced-motion safe. -->
 <style id="fable-enhance">
 /* ── Scroll progress hairline ── */
-.fbl-progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:9999;
+.fbl-progress{position:fixed;top:0;left:0;height:2px;width:100%;transform:scaleX(0);transform-origin:left;will-change:transform;z-index:9999;
   background:linear-gradient(90deg,var(--teal),var(--arte-1));
   box-shadow:0 0 8px rgba(0,196,160,.45);pointer-events:none}
 
@@ -3493,7 +3503,7 @@ document.querySelectorAll('.site-nav-links a').forEach(a => {
 .nav-pill-solid:hover .npa{transform:translateX(3px)}
 .site-nav{transition:background .25s ease,box-shadow .25s ease,backdrop-filter .25s ease}
 .site-nav.fbl-scrolled{background:color-mix(in srgb,var(--bg) 78%,transparent);
-  backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);
+  backdrop-filter:blur(8px) saturate(1.2);-webkit-backdrop-filter:blur(8px) saturate(1.2);
   box-shadow:0 1px 0 var(--bdr-soft),0 8px 28px rgba(0,0,0,.25)}
 
 /* ── Team avatars: photo ring + initials fallback ── */
@@ -3509,10 +3519,11 @@ document.querySelectorAll('.site-nav-links a').forEach(a => {
 .apipe-spine{position:absolute;left:29px;top:28px;bottom:28px;width:2px;
   background:linear-gradient(180deg,var(--teal),var(--arte-1) 38%,var(--warn) 66%,var(--opp));
   opacity:.35;border-radius:2px;overflow:visible}
-.apipe-flow{position:absolute;left:-2px;width:6px;height:6px;border-radius:50%;
+.apipe-flow{animation-play-state:paused;position:absolute;left:-2px;width:6px;height:6px;border-radius:50%;
   background:var(--teal);box-shadow:0 0 8px var(--teal);
   animation:apipeFlow 3.2s linear infinite}
 .apipe-flow.f2{animation-delay:1.05s}.apipe-flow.f3{animation-delay:2.1s}
+.apipe.apipe-on .apipe-flow{animation-play-state:running}
 @keyframes apipeFlow{0%{top:-2%;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:101%;opacity:0}}
 .apipe-step{display:flex;gap:14px;align-items:center;position:relative;text-align:left}
 .apipe-step>div:last-child{flex:1}
@@ -3597,7 +3608,7 @@ document.querySelectorAll('.site-nav-links a').forEach(a => {
     requestAnimationFrame(function(){
       var h=document.documentElement,y=h.scrollTop;
       var max=h.scrollHeight-h.clientHeight;
-      bar.style.width=(max>0?(y/max)*100:0)+'%';
+      bar.style.transform='scaleX('+(max>0?(y/max):0)+')';
       if(nav)nav.classList.toggle('fbl-scrolled',y>24);
       if(punch&&!reduced){var r=punch.getBoundingClientRect();
         if(r.top<innerHeight&&r.bottom>0){punch.style.transform='translateY('+((r.top-innerHeight*0.55)*-0.06).toFixed(1)+'px)';}}
@@ -3668,11 +3679,12 @@ document.querySelectorAll('.site-nav-links a').forEach(a => {
       new IntersectionObserver(function(en){
         en.forEach(function(e){
           if(e.isIntersecting&&!pt){
+            pipe.classList.add('apipe-on');
             pt=setInterval(function(){
               steps.forEach(function(s,j){s.classList.toggle('fbl-live-step',j===pi);});
               pi=(pi+1)%steps.length;
             },1100);
-          } else if(!e.isIntersecting&&pt){clearInterval(pt);pt=null;}
+          } else if(!e.isIntersecting&&pt){clearInterval(pt);pt=null;pipe.classList.remove('apipe-on');}
         });
       },{threshold:0.3}).observe(pipe);
     }
@@ -3748,13 +3760,13 @@ document.querySelectorAll('.site-nav-links a').forEach(a => {
     var typed=msg.querySelector('#fblTyped'),i=0;
     (function step(){
       if(g!==gen)return;
-      if(i<=text.length){typed.textContent=text.slice(0,i);i++;
-        typeTimer=setTimeout(step,9+Math.random()*8);}
+      if(i<=text.length){typed.textContent=text.slice(0,i);i+=2;
+        typeTimer=requestAnimationFrame(step);}
       else{var c=msg.querySelector('.fbl-caret');if(c)c.remove();done();}
     })();
   }
   function play(i){
-    var g=++gen;clearTimeout(timer);clearTimeout(typeTimer);
+    var g=++gen;clearTimeout(timer);cancelAnimationFrame(typeTimer);clearTimeout(typeTimer);
     idx=i;setDots(i);var a=ALERTS[i];
     card.classList.remove('fbl-in');stamp.classList.remove('fbl-on');
     timer=setTimeout(function(){
@@ -3771,12 +3783,71 @@ document.querySelectorAll('.site-nav-links a').forEach(a => {
     },240);
   }
   document.addEventListener('visibilitychange',function(){
-    if(document.hidden){gen++;clearTimeout(timer);clearTimeout(typeTimer);}
+    if(document.hidden){gen++;clearTimeout(timer);cancelAnimationFrame(typeTimer);clearTimeout(typeTimer);}
     else play(idx);
   });
+  var hero=document.querySelector('.hero');
+  if(hero&&'IntersectionObserver' in window){
+    new IntersectionObserver(function(en){
+      en.forEach(function(e){
+        if(e.isIntersecting)play(idx);
+        else{gen++;clearTimeout(timer);cancelAnimationFrame(typeTimer);clearTimeout(typeTimer);}
+      });
+    },{threshold:0.05}).observe(hero);
+  }
   play(0);
 })();
 </script>
 
-</body>
+
+<!-- ═══ FABLE PERF LAYER: render less, animate only what's visible ═══ -->
+<style id="fable-perf">
+/* Skip rendering below-fold sections until needed (huge first-paint win) */
+.cv-auto{content-visibility:auto;contain-intrinsic-size:auto 760px}
+/* Release GPU layers once reveal animations finish */
+.cinematic-stagger.in-view > *{will-change:auto}
+.cinematic-reveal.in-view{will-change:auto}
+/* Touch devices: skip hover-only effects entirely */
+@media(hover:none){
+  .fbl-spot{display:none}
+  .btn-primary .fbl-sheen{display:none}
+  .tilt-3d:hover{transform:none}
+}
+</style>
+<script id="fable-perf-js">
+(function(){
+  "use strict";
+  /* 1) content-visibility on everything below the fold */
+  var below=['.problem-section','#features','#how','.flow-section','#team','#contact','footer'];
+  below.forEach(function(sel){
+    document.querySelectorAll(sel).forEach(function(el){el.classList.add('cv-auto');});
+  });
+  /* the Art-E section is a plain .section between flow and team */
+  var arte=document.getElementById('arteDemoBody');
+  if(arte){var sec=arte.closest('section');if(sec)sec.classList.add('cv-auto');}
+
+  if(!('IntersectionObserver' in window))return;
+
+  /* 2) Pause the 29 SMIL animations in the flow graph when off-screen */
+  var fsvg=document.querySelector('.flow-section svg');
+  if(fsvg&&fsvg.pauseAnimations){
+    fsvg.pauseAnimations();
+    new IntersectionObserver(function(en){
+      en.forEach(function(e){
+        try{ e.isIntersecting?fsvg.unpauseAnimations():fsvg.pauseAnimations(); }catch(_){}
+      });
+    },{threshold:0.05}).observe(fsvg);
+  }
+
+  /* 3) Live counters only tick while the section is visible */
+  var liveSec=document.querySelector('.live-section');
+  if(liveSec){
+    window._liveOff=true;
+    new IntersectionObserver(function(en){
+      en.forEach(function(e){window._liveOff=!e.isIntersecting;});
+    },{threshold:0.1}).observe(liveSec);
+  }
+})();
+</script>
+\n</body>
 </html>
