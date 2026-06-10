@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actions &amp; Results — ArtemisAI</title>
+<style>
+:root{--bg:#0E1320;--bg-elev:#161D2E;--bg-elev-2:#1C2436;--bdr:#2A3447;--bdr-soft:#222B3D;
+ --t1:#E8ECF4;--t2:#A8B3C7;--t3:#6E7A91;--teal:#00C4A0;--opp:#34D399;--opp-bg:rgba(52,211,153,.1);
+ --warn:#F5A623;--warn-bg:rgba(245,166,35,.1);--crisis:#EF4456;--crisis-bg:rgba(239,68,86,.1);--arte:#A78BFA}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;padding:26px 22px 60px}
+.wrap{max-width:1080px;margin:0 auto}
+a.back{color:var(--teal);text-decoration:none;font-weight:700;font-size:13px}
+h1{font-size:24px;font-weight:800;letter-spacing:-.02em;margin:10px 0 4px}
+.sub{font-size:13px;color:var(--t3);margin-bottom:22px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+@media(max-width:820px){.tiles{grid-template-columns:repeat(2,1fr)}}
+.tile{background:var(--bg-elev);border:1px solid var(--bdr-soft);border-radius:14px;padding:14px 16px}
+.tile b{display:block;font-size:23px;font-weight:800;letter-spacing:-.02em}
+.tile b.up{color:var(--opp)}.tile b.teal{color:var(--teal)}
+.tile span{font-size:11px;color:var(--t3)}
+.graphs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+@media(max-width:820px){.graphs{grid-template-columns:1fr}}
+.graph{background:var(--bg-elev);border:1px solid var(--bdr-soft);border-radius:14px;padding:14px 16px 10px}
+.graph h5{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--t3);text-transform:uppercase;margin-bottom:10px}
+.graph svg{width:100%;height:auto;display:block;font-family:inherit}
+.fbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.fbar .lbl{font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--t3);text-transform:uppercase;margin-right:2px}
+.pill{border:1px solid var(--bdr);background:var(--bg-elev);color:var(--t2);font-family:inherit;cursor:pointer;
+ font-size:12px;font-weight:700;padding:6px 13px;border-radius:9999px}
+.pill.on{background:var(--teal);border-color:var(--teal);color:#04211a}
+select{background:var(--bg-elev);border:1px solid var(--bdr);color:var(--t1);font-family:inherit;
+ font-size:12px;font-weight:700;padding:6px 10px;border-radius:10px;margin-left:auto}
+.list{background:var(--bg-elev);border:1px solid var(--bdr-soft);border-radius:14px;overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--bdr-soft)}
+.row:last-child{border-bottom:none}
+.row .when{width:74px;flex-shrink:0;font-size:11px;color:var(--t3)}
+.tchip{flex-shrink:0;font-size:10px;font-weight:800;letter-spacing:.05em;padding:3px 9px;border-radius:9999px;text-transform:uppercase}
+.tchip.crisis{color:var(--crisis);background:var(--crisis-bg)}
+.tchip.sched{color:var(--warn);background:var(--warn-bg)}
+.tchip.draft{color:var(--arte);background:rgba(167,139,250,.12)}
+.tchip.reshare{color:var(--teal);background:rgba(0,196,160,.12)}
+.tchip.reply{color:#7DB8FF;background:rgba(125,184,255,.12)}
+.tchip.ignored{color:var(--t3);background:var(--bg-elev-2)}
+.row .what{flex:1;min-width:0;font-size:13px;font-weight:600}
+.row .what small{display:block;font-weight:500;font-size:11px;color:var(--t3);margin-top:1px}
+.rchip{flex-shrink:0;font-size:11.5px;font-weight:800;padding:5px 11px;border-radius:9999px}
+.rchip.up{color:var(--opp);background:var(--opp-bg)}
+.rchip.wait{color:var(--warn);background:var(--warn-bg)}
+.rchip.neut{color:var(--t2);background:var(--bg-elev-2);border:1px solid var(--bdr-soft)}
+.ibar{width:84px;height:6px;border-radius:6px;background:var(--bdr-soft);overflow:hidden;flex-shrink:0}
+.ibar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--teal),var(--opp))}
+.empty{padding:26px;text-align:center;color:var(--t3);font-size:13px;display:none}
+.count{font-size:12px;color:var(--t3);margin:0 0 8px}
+</style>
+</head>
+<body><div class="wrap">
+<a class="back" href="mockup_fable.html">← Back to Artemis</a>
+<h1>Actions &amp; Results · full history</h1>
+<div class="sub">Every action you (or Art-E on your behalf) took, and what it did to your numbers · last 30 days · tracked automatically</div>
+
+<div class="tiles">
+ <div class="tile"><b>28</b><span>actions taken · 30 days</span></div>
+ <div class="tile"><b class="up">82%</b><span>grew the metric they targeted</span></div>
+ <div class="tile"><b class="teal">+1.6M</b><span>total reach added by actions</span></div>
+ <div class="tile"><b>3.2h</b><span>median time to first result</span></div>
+</div>
+
+<div class="graphs">
+ <div class="graph"><h5>Win rate by week</h5><svg viewBox="0 0 300 110">
+  <path d="M20 92 L90 78 160 84 230 58 290 44" stroke="#00C4A0" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <g fill="#00C4A0"><circle cx="20" cy="92" r="4"/><circle cx="90" cy="78" r="4"/><circle cx="160" cy="84" r="4"/><circle cx="230" cy="58" r="4"/><circle cx="290" cy="44" r="4"/></g>
+  <g font-size="10" fill="#6E7A91"><text x="20" y="106" text-anchor="middle">W1·60%</text><text x="90" y="106" text-anchor="middle">W2·71%</text><text x="160" y="106" text-anchor="middle">W3·68%</text><text x="230" y="106" text-anchor="middle">W4·86%</text><text x="290" y="106" text-anchor="middle">now·92%</text></g></svg></div>
+ <div class="graph"><h5>Reach impact by action type</h5><svg viewBox="0 0 300 110">
+  <g font-size="10.5" fill="#A8B3C7">
+  <text x="0" y="14">Reshares</text><rect x="62" y="5" width="170" height="12" rx="6" fill="#00C4A0"/><text x="238" y="14" fill="#00C4A0" font-weight="700">+412K</text>
+  <text x="0" y="36">Scheduling</text><rect x="62" y="27" width="160" height="12" rx="6" fill="#34D399"/><text x="228" y="36" fill="#34D399" font-weight="700">+389K</text>
+  <text x="0" y="58">Drafts</text><rect x="62" y="49" width="102" height="12" rx="6" fill="#A78BFA"/><text x="170" y="58" fill="#A78BFA" font-weight="700">+247K</text>
+  <text x="0" y="80">Replies</text><rect x="62" y="71" width="40" height="12" rx="6" fill="#7DB8FF"/><text x="108" y="80" fill="#7DB8FF" font-weight="700">+96K</text>
+  <text x="0" y="102">Crisis</text><rect x="62" y="93" width="20" height="12" rx="6" fill="#EF4456"/><text x="88" y="102" fill="#EF4456" font-weight="700">~31K protected</text></g></svg></div>
+ <div class="graph"><h5>Cumulative reach added</h5><svg viewBox="0 0 300 110">
+  <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00C4A0" stop-opacity=".35"/><stop offset="1" stop-color="#00C4A0" stop-opacity="0"/></linearGradient></defs>
+  <path d="M14 96 L60 88 110 76 150 68 190 48 240 34 290 16 L290 100 14 100 Z" fill="url(#cg)"/>
+  <path d="M14 96 L60 88 110 76 150 68 190 48 240 34 290 16" stroke="#00C4A0" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <text x="290" y="12" font-size="11" font-weight="800" fill="#00C4A0" text-anchor="end">+1.6M</text></svg></div>
+ <div class="graph"><h5>What your actions were</h5><svg viewBox="0 0 300 110">
+  <g transform="translate(60 55)">
+   <circle r="38" fill="none" stroke="#222B3D" stroke-width="16"/>
+   <circle r="38" fill="none" stroke="#F5A623" stroke-width="16" stroke-dasharray="74 240" transform="rotate(-90)"/>
+   <circle r="38" fill="none" stroke="#00C4A0" stroke-width="16" stroke-dasharray="57 240" stroke-dashoffset="-74" transform="rotate(-90)"/>
+   <circle r="38" fill="none" stroke="#A78BFA" stroke-width="16" stroke-dasharray="48 240" stroke-dashoffset="-131" transform="rotate(-90)"/>
+   <circle r="38" fill="none" stroke="#7DB8FF" stroke-width="16" stroke-dasharray="36 240" stroke-dashoffset="-179" transform="rotate(-90)"/>
+   <circle r="38" fill="none" stroke="#EF4456" stroke-width="16" stroke-dasharray="24 240" stroke-dashoffset="-215" transform="rotate(-90)"/>
+  </g>
+  <g font-size="10.5" fill="#A8B3C7" transform="translate(130 22)">
+   <circle cx="0" cy="0" r="4" fill="#F5A623"/><text x="10" y="3">Scheduling · 9</text>
+   <circle cx="0" cy="18" r="4" fill="#00C4A0"/><text x="10" y="21">Reshares · 7</text>
+   <circle cx="0" cy="36" r="4" fill="#A78BFA"/><text x="10" y="39">Drafts · 6</text>
+   <circle cx="0" cy="54" r="4" fill="#7DB8FF"/><text x="10" y="57">Replies · 4</text>
+   <circle cx="0" cy="72" r="4" fill="#EF4456"/><text x="10" y="75">Crisis · 2</text></g></svg></div>
+</div>
+
+<div class="fbar"><span class="lbl">Type</span>
+ <button class="pill on" data-type="all">All</button>
+ <button class="pill" data-type="crisis">Crisis</button>
+ <button class="pill" data-type="sched">Scheduling</button>
+ <button class="pill" data-type="draft">Drafts</button>
+ <button class="pill" data-type="reshare">Reshares</button>
+ <button class="pill" data-type="reply">Replies</button>
+ <button class="pill" data-type="ignored">Ignored</button>
+</div>
+<div class="fbar"><span class="lbl">Result</span>
+ <button class="pill on" data-res="all">Any</button>
+ <button class="pill" data-res="up">Grew</button>
+ <button class="pill" data-res="neut">No change</button>
+ <button class="pill" data-res="wait">Pending</button>
+ <select id="sortSel"><option value="ts">Newest first</option><option value="impact">Highest impact</option></select>
+</div>
+<div class="count" id="cnt"></div>
+<div class="list" id="list"></div>
+<div class="empty" id="empty">Nothing matches these filters.</div>
+
+<script>
+"use strict";
+var DATA=[
+ {ts:29,type:'sched',what:'Scheduled the 6PM post on Drinking Memes',pg:'DM · yesterday 5:58 PM',res:'up',chip:'▲ +9.6K reach',imp:62},
+ {ts:28,type:'crisis',what:'Sent Art-E’s crisis reply on the angry thread',pg:'DM · Tue 11:42 AM',res:'up',chip:'● contained in 38 min',imp:80},
+ {ts:27,type:'reshare',what:'Reshared the Kelpie viral post to 4 pages',pg:'KD · Mon 9:14 PM',res:'up',chip:'▲ +2.1K followers',imp:88},
+ {ts:26,type:'draft',what:'Approved Art-E’s trimmed Friday draft',pg:'DM · Fri 4:30 PM',res:'up',chip:'▲ score 61 → 83',imp:55},
+ {ts:25,type:'ignored',what:'Ignored: 7AM posting suggestion',pg:'control · last week',res:'neut',chip:'● no change',imp:5},
+ {ts:24,type:'reply',what:'Answered top 5 comments via Art-E drafts',pg:'UK · last week',res:'up',chip:'▲ +31% reply rate',imp:40},
+ {ts:23,type:'sched',what:'Moved Prison Biscuit slot to 7PM',pg:'PB · last week',res:'up',chip:'▲ +18% engagement',imp:44},
+ {ts:22,type:'reshare',what:'Cross-posted meme to Fri Night Chaos',pg:'FN · 2 wks ago',res:'neut',chip:'● flat — audience mismatch',imp:8},
+ {ts:21,type:'draft',what:'Used Art-E hook rewrite on caption',pg:'KD · 2 wks ago',res:'up',chip:'▲ +27% CTR',imp:51},
+ {ts:20,type:'crisis',what:'Muted troll cluster + auto-rule update',pg:'DM · 2 wks ago',res:'up',chip:'● sentiment +0.18',imp:66},
+ {ts:19,type:'sched',what:'Locked Tue 6PM as weekly anchor slot',pg:'DM · 3 wks ago',res:'up',chip:'▲ +34% avg window lift',imp:74},
+ {ts:18,type:'reply',what:'Pinned Art-E’s FAQ reply on viral post',pg:'KD · 3 wks ago',res:'up',chip:'▲ −40% repeat questions',imp:37},
+ {ts:17,type:'draft',what:'Rejected low-score draft (48/100)',pg:'FN · 3 wks ago',res:'up',chip:'● avoided a likely flop',imp:30},
+ {ts:16,type:'reshare',what:'Reshared prison-drama trend take',pg:'UK · 3 wks ago',res:'up',chip:'▲ +64K reach',imp:70},
+ {ts:15,type:'ignored',what:'Ignored: weekend posting nudge',pg:'control · 4 wks ago',res:'neut',chip:'● −6% vs projection',imp:12},
+ {ts:14,type:'sched',what:'Queued tonight’s 6PM post',pg:'DM · just now',res:'wait',chip:'⏳ tracking · first read ~2h',imp:20}
+];
+var fType='all',fRes='all',sortBy='ts';
+function render(){
+ var list=document.getElementById('list');
+ var rows=DATA.filter(function(d){return (fType==='all'||d.type===fType)&&(fRes==='all'||d.res===fRes);});
+ rows.sort(function(a,b){return sortBy==='impact'?b.imp-a.imp:b.ts-a.ts;});
+ var T={crisis:'Crisis',sched:'Sched',draft:'Draft',reshare:'Reshare',reply:'Reply',ignored:'Ignored'};
+ list.innerHTML=rows.map(function(d){
+  return '<div class="row"><span class="when">'+d.pg.split('·')[1].trim()+'</span>'
+   +'<span class="tchip '+d.type+'">'+T[d.type]+'</span>'
+   +'<div class="what">'+d.what+'<small>'+d.pg+'</small></div>'
+   +'<span class="ibar"><i style="width:'+d.imp+'%"></i></span>'
+   +'<span class="rchip '+d.res+'">'+d.chip+'</span></div>';
+ }).join('');
+ document.getElementById('cnt').textContent=rows.length+' of '+DATA.length+' actions';
+ document.getElementById('empty').style.display=rows.length?'none':'block';
+}
+document.querySelectorAll('[data-type]').forEach(function(p){p.onclick=function(){
+ document.querySelectorAll('[data-type]').forEach(function(x){x.classList.remove('on');});
+ p.classList.add('on');fType=p.dataset.type;render();};});
+document.querySelectorAll('[data-res]').forEach(function(p){p.onclick=function(){
+ document.querySelectorAll('[data-res]').forEach(function(x){x.classList.remove('on');});
+ p.classList.add('on');fRes=p.dataset.res;render();};});
+document.getElementById('sortSel').onchange=function(){sortBy=this.value;render();};
+render();
+</script>
+</div></body></html>

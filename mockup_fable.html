@@ -11269,5 +11269,138 @@ function visualBriefs(){
 })();
 </script>
 
+
+<!-- FABLE DESIGN PASS 11: full history page wired from To-do, categorised
+     compact Briefings + categorised Action items, Ask Art-E everywhere. -->
+<style id="fable-design11">
+/* compact, direct briefing boxes */
+.fbl-brief{padding:14px 16px!important;border-radius:14px}
+.fbl-brief h3{font-size:14.5px;margin:4px 0 6px}
+.fbl-brief .bk{font-size:9.5px}
+.fbl-bstat{padding:9px 11px}
+.fbl-bstat b{font-size:18px}
+.fbl-brow{gap:8px;margin:8px 0}
+.fbl-bchart{padding:9px 11px 5px;margin-bottom:8px}
+.fbl-brief .tk{font-size:12px;margin-top:6px}
+/* category section headers */
+.fbl-sec{display:flex;align-items:center;gap:8px;margin:16px 2px 8px;
+  font-size:11px;font-weight:800;letter-spacing:.09em;color:var(--t3);text-transform:uppercase}
+.fbl-sec::after{content:"";flex:1;height:1px;background:var(--bdr-soft)}
+/* Ask Art-E mini button */
+.fbl-askarte{display:inline-flex;align-items:center;gap:5px;cursor:pointer;flex-shrink:0;
+  border:1px solid color-mix(in srgb,var(--arte-1) 40%,transparent);background:var(--arte-bg);
+  color:var(--arte-1);font-family:inherit;font-size:11px;font-weight:800;
+  padding:5px 11px;border-radius:9999px;transition:filter .15s}
+.fbl-askarte:hover{filter:brightness(1.15)}
+.fbl-askarte svg{width:11px;height:11px;fill:currentColor}
+.fbl-brief .fbl-askarte{margin-top:8px}
+.fbl-actions .fbl-move .fbl-askarte{margin-right:6px}
+/* history link button */
+.fbl-histbtn{margin-left:8px;border:1px solid var(--bdr);background:transparent;color:var(--teal);
+  cursor:pointer;font-family:inherit;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:9999px}
+.fbl-histbtn:hover{border-color:var(--teal)}
+</style>
+<script id="fable-design11-js">
+(function(){
+"use strict";
+var SPARK='<svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>';
+function ask(q){return '<button class="fbl-askarte" data-ask="'+q+'">'+SPARK+'Ask Art-E</button>';}
+
+/* ═══ Ask Art-E delegation (capture beats the cards' own listeners) ═══ */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.fbl-askarte');
+  if(!b)return;
+  e.stopPropagation();e.preventDefault();
+  if(typeof openArteChat==='function')openArteChat();
+  setTimeout(function(){
+    if(typeof sendArteMsg==='function')sendArteMsg(b.dataset.ask||'Tell me more about this');
+  },350);
+},true);
+
+/* ═══ To-do: wire the full-history page ═══ */
+(function(){
+  var rh=document.querySelector('#page-inbox .fbl-results .rh');
+  if(!rh)return;
+  var btn=document.createElement('button');
+  btn.className='fbl-histbtn';btn.textContent='Full history \u2192';
+  btn.onclick=function(){window.open('mockup_actions_history.html','_blank');};
+  rh.appendChild(btn);
+  var panel=document.querySelector('#page-inbox .fbl-results');
+  if(panel){panel.style.cursor='default';
+    panel.addEventListener('click',function(e){
+      if(e.target.closest('.fbl-rrow'))window.open('mockup_actions_history.html','_blank');
+    });}
+})();
+
+/* ═══ Briefings: categorised + compact + Ask Art-E ═══ */
+function bstat(v,cls,lbl){return '<div class="fbl-bstat"><b class="'+cls+'">'+v+'</b><span>'+lbl+'</span></div>';}
+function hbar(lbl,pct,val,lit){
+  return '<g><text x="0" y="11" font-size="11" fill="var(--t3)" font-family="inherit">'+lbl+'</text>'
+   +'<rect x="44" y="2" width="'+(pct*1.7)+'" height="11" rx="5" fill="'+(lit?'var(--teal)':'color-mix(in srgb,var(--t3) 28%,transparent)')+'"/>'
+   +'<text x="'+(50+pct*1.7)+'" y="11" font-size="10.5" font-weight="700" fill="'+(lit?'var(--teal)':'var(--t3)')+'" font-family="inherit">'+val+'</text></g>';}
+function catBriefs(){
+  var pages=[['KD',58,1],['DM',21,0],['FN',9,0],['UK',8,0],['PB',4,0]];
+  var em=[['0',44,0],['1',61,0],['2',86,1],['3+',70,0]];
+  return '<div class="fbl-sec">\ud83d\udcc8 This week</div>'
+   +'<div class="fbl-brief"><div class="bk">Weekly recap</div><h3>Kelpie\u2019s viral run carried the week</h3>'
+   +'<div class="fbl-brow">'+bstat('+12.4%','up','Network reach \u25b2')+bstat('0.82','','Sentiment \u00b7 held')+bstat('4 wks','purp','UK growth streak')+'</div>'
+   +'<div class="fbl-bchart"><h5>Share of reach growth</h5><svg viewBox="0 0 270 95">'
+   +pages.map(function(p,i){return '<g transform="translate(0 '+(i*19)+')">'+hbar(p[0],p[1],p[1]+'%',p[2])+'</g>';}).join('')+'</svg></div>'
+   +ask('Walk me through this week\u2019s recap \u2014 what changed and why?')+'</div>'
+   +'<div class="fbl-sec">\ud83c\udfa8 Content patterns</div>'
+   +'<div class="fbl-brief"><div class="bk">Monthly read</div><h3>Two emojis, under 90 chars, open with a question</h3>'
+   +'<div class="fbl-bchart"><h5>Engagement by emoji count</h5><svg viewBox="0 0 270 96">'
+   +em.map(function(d,i){var h=d[1]*0.72,x=30+i*60,lit=d[2];
+     return '<rect x="'+x+'" y="'+(76-h)+'" width="34" height="'+h+'" rx="6" fill="'+(lit?'var(--teal)':'color-mix(in srgb,var(--t3) 28%,transparent)')+'"/>'
+      +(lit?'<text x="'+(x+17)+'" y="'+(68-h)+'" font-size="11" font-weight="800" fill="var(--teal)" text-anchor="middle" font-family="inherit">+41%</text>':'')
+      +'<text x="'+(x+17)+'" y="90" font-size="10.5" fill="'+(lit?'var(--teal)':'var(--t3)')+'" font-weight="'+(lit?'800':'500')+'" text-anchor="middle" font-family="inherit">'+d[0]+'</text>';}).join('')+'</svg></div>'
+   +'<div class="fbl-brow">'+bstat('+41%','up','2 emojis vs zero')+bstat('<90','','chars wins 6/7 days')+bstat('1.6\u00d7','purp','question-first')+'</div>'
+   +ask('Which of my recent posts broke the emoji and length rules?')+'</div>'
+   +'<div class="fbl-sec">\ud83c\udfc1 Benchmarks</div>'
+   +'<div class="fbl-brief"><div class="bk">Vs your category</div><h3>Top 9% on quality \u2014 cadence is the gap</h3>'
+   +'<div class="fbl-brow">'+bstat('top 9%','up','engagement \u00b7 UK humour pages')+bstat('3.8 vs 5.2','','posts/wk \u00b7 you vs leaders')+bstat('+210K','up','monthly reach if you close it')+'</div>'
+   +'<div class="fbl-bchart"><h5>Posting cadence</h5><svg viewBox="0 0 270 52">'
+   +'<g transform="translate(0 2)">'+hbar('You',62,'3.8',0)+'</g><g transform="translate(0 24)">'+hbar('Top',86,'5.2',1)+'</g></svg></div>'
+   +ask('Build me a posting plan that closes the cadence gap')+'</div>';
+}
+/* ═══ Action items: categorised + Ask Art-E per item ═══ */
+function actRow(c,ic,t,s,b,q){
+  return '<div class="fbl-move" style="--mc:'+c+'">'
+   +'<div class="ic"><svg viewBox="0 0 24 24">'+ic+'</svg></div>'
+   +'<div class="tt">'+t+'<small>'+s+'</small></div>'
+   +ask(q)+'<button>'+b+'</button></div>';
+}
+function catActions(){
+  return '<div class="fbl-moves-head"><div><div class="mt">Everything that needs you</div>'
+   +'<div class="ms">7 items \u00b7 grouped by urgency \u00b7 each one is a single tap</div></div></div>'
+   +'<div class="fbl-sec" style="margin-top:8px">\ud83d\udd25 Urgent \u00b7 needs you now</div>'
+   +actRow('var(--crisis)','<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>','Reply to the crisis thread on Drinking Memes','23 angry comments \u00b7 Art-E\u2019s draft is ready','Send reply','What\u2019s happening in the Drinking Memes crisis thread?')
+   +actRow('var(--crisis)','<path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v6h-6"/>','Fri Night Chaos score down 8% this week','Captions running long \u00b7 1-tap fix suggested','See fix','Why is Fri Night Chaos slipping and what\u2019s the fix?')
+   +'<div class="fbl-sec">\ud83d\udcc5 Today</div>'
+   +actRow('var(--warn)','<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>','Schedule the 6PM post on Drinking Memes','Best window tonight \u00b7 +34% audience','Schedule','Why is 6PM the best window tonight?')
+   +actRow('var(--arte-1)','<path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/>','Approve the trimmed Friday draft','Art-E cut it to 84 chars \u00b7 score 61 \u2192 83','Approve','Show me what changed in the Friday draft trim')
+   +actRow('var(--teal)','<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75M9 11a4 4 0 100-8 4 4 0 000 8z"/>','Review the collab request from Fri Night Chaos','94% audience match \u00b7 reply within 6h typical','Review','Is the Fri Night Chaos collab worth it?')
+   +'<div class="fbl-sec">\ud83e\uddf9 Housekeeping</div>'
+   +actRow('var(--warn)','<path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8z"/>','14 unanswered comments on UK Jail News','Oldest 6h \u00b7 top 5 replies pre-drafted','Open inbox','Summarise the unanswered comments for me')
+   +actRow('var(--opp)','<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>','Facebook page token renews in 5 days','One tap keeps all 5 pages connected','Renew','What happens if the token expires?');
+}
+(function(){
+  var prev=window.switchFeedTab;
+  if(typeof prev!=='function')return;
+  window.switchFeedTab=function(name){
+    prev.apply(this,arguments);
+    if(name==='briefings'){
+      var w=document.querySelector('.fbl-briefs');
+      if(w&&!w.dataset.v3){w.dataset.v3='1';w.innerHTML=catBriefs();}
+    }
+    if(name==='actions'){
+      var c=document.querySelector('.fbl-actions');
+      if(c&&!c.dataset.v2){c.dataset.v2='1';c.innerHTML=catActions();}
+    }
+  };
+})();
+})();
+</script>
+
 </body>
 </html>
