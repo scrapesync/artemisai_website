@@ -79,14 +79,15 @@ body{
 
 /* Cards */
 .cards{
-  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:960px;margin:0 auto;
 }
-@media(max-width:780px){.cards{grid-template-columns:1fr}}
+@media(max-width:920px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.cards{grid-template-columns:1fr}}
 
 .choice{
   background:var(--bg-card);
   border:1px solid var(--bdr);
-  border-radius:20px;
+  border-radius:14px;
   overflow:hidden;
   cursor:pointer;
   transition:transform .25s, border-color .2s, box-shadow .25s;
@@ -95,15 +96,15 @@ body{
   position:relative;
 }
 .choice:hover{
-  transform:translateY(-4px);
+  transform:translateY(-3px);
   border-color:var(--teal);
-  box-shadow:0 12px 40px rgba(0,212,170,0.15);
+  box-shadow:0 10px 28px rgba(0,212,170,0.14);
 }
-.choice.new:hover{border-color:var(--teal);box-shadow:0 12px 40px rgba(0,212,170,0.18)}
-.choice.old:hover{border-color:var(--arte-1);box-shadow:0 12px 40px rgba(124,92,191,0.15)}
+.choice.new:hover{border-color:var(--teal);box-shadow:0 10px 28px rgba(0,212,170,0.16)}
+.choice.old:hover{border-color:var(--arte-1);box-shadow:0 10px 28px rgba(124,92,191,0.14)}
 
 .choice-hero{
-  height:200px;
+  height:104px;
   position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
 }
@@ -121,21 +122,21 @@ body{
 }
 
 .hero-icon{
-  width:88px;height:88px;border-radius:24px;
+  width:54px;height:54px;border-radius:15px;
   display:grid;place-items:center;
   background:rgba(0,0,0,0.35);backdrop-filter:blur(8px);
   border:1px solid rgba(255,255,255,0.06);
 }
 .choice.new .hero-icon{background:linear-gradient(135deg, rgba(0,212,170,0.3), rgba(0,168,138,0.1));border-color:rgba(0,212,170,0.3)}
 .choice.old .hero-icon{background:linear-gradient(135deg, rgba(124,92,191,0.3), rgba(96,165,250,0.1));border-color:rgba(124,92,191,0.3)}
-.hero-icon svg{width:42px;height:42px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.hero-icon svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .choice.new .hero-icon svg{color:var(--teal)}
 .choice.old .hero-icon svg{color:#a78bfa}
 
 .badge{
-  position:absolute;top:14px;right:14px;
-  font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;
-  padding:5px 11px;border-radius:9999px;
+  position:absolute;top:11px;right:11px;
+  font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;
+  padding:4px 9px;border-radius:9999px;
 }
 .badge.new{
   background:linear-gradient(135deg,var(--teal),var(--arte-1));
@@ -149,55 +150,47 @@ body{
 }
 
 .choice-body{
-  padding:24px;flex:1;display:flex;flex-direction:column;
+  padding:16px;flex:1;display:flex;flex-direction:column;
 }
 .choice-eyebrow{
-  font-size:11px;font-weight:700;color:var(--t3);
-  text-transform:uppercase;letter-spacing:0.08em;
-  margin-bottom:6px;
+  font-size:10px;font-weight:700;color:var(--t3);
+  text-transform:uppercase;letter-spacing:0.07em;
+  margin-bottom:5px;
 }
 .choice.new .choice-eyebrow{color:var(--teal)}
 .choice.old .choice-eyebrow{color:#a78bfa}
 
 .choice-title{
-  font-size:22px;font-weight:800;letter-spacing:-0.3px;
-  margin-bottom:8px;
+  font-size:16px;font-weight:800;letter-spacing:-0.2px;
+  margin-bottom:6px;line-height:1.2;
 }
 .choice-desc{
-  font-size:14px;color:var(--t2);line-height:1.55;
-  margin-bottom:16px;
+  font-size:12.5px;color:var(--t2);line-height:1.5;
+  margin-bottom:12px;
 }
 
 .choice-features{
-  display:flex;flex-direction:column;gap:6px;
-  margin-bottom:18px;
+  display:flex;flex-direction:column;gap:5px;
+  margin-bottom:14px;
 }
 .feature{
-  display:flex;align-items:center;gap:8px;
-  font-size:13px;color:var(--t2);
+  display:flex;align-items:center;gap:7px;
+  font-size:12px;color:var(--t2);line-height:1.35;
 }
 .feature svg{
-  width:14px;height:14px;flex-shrink:0;
+  width:13px;height:13px;flex-shrink:0;
   color:var(--teal);
 }
 .choice.old .feature svg{color:#a78bfa}
 
 .choice-cta{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-top:auto;padding-top:14px;
+  display:flex;align-items:center;
+  margin-top:auto;padding-top:12px;
   border-top:1px solid var(--bdr-soft);
 }
-.cta-text{font-size:13px;font-weight:700;color:var(--t1)}
-.cta-arrow{
-  width:32px;height:32px;border-radius:50%;
-  display:grid;place-items:center;
-  background:rgba(255,255,255,0.04);
-  transition:transform .2s, background .2s;
-}
-.choice:hover .cta-arrow{transform:translateX(4px)}
-.choice.new:hover .cta-arrow{background:var(--teal-bg)}
-.choice.old:hover .cta-arrow{background:rgba(124,92,191,0.10)}
-.cta-arrow svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+.cta-text{font-size:12.5px;font-weight:700;color:var(--t1)}
+.choice.new .cta-text{color:var(--teal)}
+.choice.old .cta-text{color:#a78bfa}
 
 .tiny-print{
   text-align:center;color:var(--t3);font-size:12px;
@@ -249,11 +242,9 @@ body{
             <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Pre-publish prediction with live gauge</div>
             <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Alerts that pair problem + action</div>
             <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Sprint map: what ships when (S6–S8)</div>
-            <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Working Art-E chat + Discovery cards</div>
           </div>
           <div class="choice-cta">
-            <span class="cta-text">Open MVP mockup</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <span class="cta-text">Open MVP mockup &rarr;</span>
           </div>
         </div>
       </a>
@@ -273,13 +264,9 @@ body{
             <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> FB-style activity feed with insight posts</div>
             <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Contextual Art-E hint bubble per page</div>
             <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Tinder-style collab Discovery flywheel</div>
-            <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Standalone Advanced Analytics + Messages</div>
           </div>
           <div class="choice-cta">
-            <span class="cta-text">Open new mockup</span>
-            <span class="cta-arrow">
-              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
+            <span class="cta-text">Open new mockup &rarr;</span>
           </div>
         </div>
       </a>
@@ -299,13 +286,9 @@ body{
             <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Dashboard-first layout with sidebar</div>
             <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Full virality + prediction analytics</div>
             <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Sprinklr-style multi-page management</div>
-            <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Audience clustering + topic deep-dive</div>
           </div>
           <div class="choice-cta">
-            <span class="cta-text">Open original mockup</span>
-            <span class="cta-arrow">
-              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
+            <span class="cta-text">Open original mockup &rarr;</span>
           </div>
         </div>
       </a>
