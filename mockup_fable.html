@@ -9613,5 +9613,120 @@ document.querySelectorAll('.arte-chat-head').forEach(function(h){
 })();
 })();
 </script>
+
+<!-- FABLE DESIGN PASS 2: feedback (no dead clicks), action hierarchy,
+     count-up reward, story entrance, milestone moment, a11y, dark elevation -->
+<style id="fable-design2">
+/* Refactoring UI: one primary action, the rest recede */
+.briefing-actions .briefing-btn{background:transparent;border:1px solid var(--bdr-soft);color:var(--t2)}
+.briefing-actions .briefing-btn:hover{border-color:var(--bdr);color:var(--t1)}
+.briefing-actions .briefing-btn.primary{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:700}
+.briefing-actions .briefing-btn.primary:hover{filter:brightness(1.07)}
+.briefing-actions .briefing-btn.primary svg{stroke:#fff}
+
+/* Dark elevation: inner top highlight, the subtle depth trick */
+html:not([data-theme="light"]) :is(.insight-post,.briefing-card,.fbl-health){
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 1px 3px rgba(0,0,0,.28)}
+
+/* Stories: staggered entrance (40ms steps), once */
+@keyframes fblStoryIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.stories-strip .story-tile{animation:fblStoryIn .38s cubic-bezier(.2,.7,.2,1) both}
+.stories-strip .story-tile:nth-child(2){animation-delay:.04s}
+.stories-strip .story-tile:nth-child(3){animation-delay:.08s}
+.stories-strip .story-tile:nth-child(4){animation-delay:.12s}
+.stories-strip .story-tile:nth-child(5){animation-delay:.16s}
+.stories-strip .story-tile:nth-child(6){animation-delay:.20s}
+.stories-strip .story-tile:nth-child(7){animation-delay:.24s}
+.stories-strip .story-tile:nth-child(8){animation-delay:.28s}
+
+/* Milestone moment (Fast-follow): celebrate, dismissible, one action */
+.fbl-milestone{display:flex;align-items:center;gap:12px;margin:0 0 14px;padding:12px 16px;
+  border-radius:14px;background:linear-gradient(100deg,var(--teal-bg),var(--arte-bg));
+  border:1px solid color-mix(in srgb,var(--teal) 25%,transparent)}
+.fbl-milestone .em{font-size:22px}
+.fbl-milestone .tt{font-size:13px;font-weight:700;color:var(--t1)}
+.fbl-milestone .ts{font-size:11.5px;color:var(--t3);margin-top:1px}
+.fbl-milestone button.share{margin-left:auto;flex-shrink:0;border:none;cursor:pointer;
+  background:var(--teal);color:#fff;font-weight:700;font-size:12px;padding:7px 14px;
+  border-radius:9999px;font-family:inherit}
+.fbl-milestone button.x{border:none;background:none;cursor:pointer;color:var(--t3);
+  font-size:16px;padding:4px 6px;flex-shrink:0}
+html[data-theme="light"] .fbl-milestone{background:linear-gradient(100deg,rgba(0,107,90,.07),rgba(90,63,160,.05))}
+@media(prefers-reduced-motion:reduce){.stories-strip .story-tile{animation:none}}
+</style>
+<script id="fable-design2-js">
+(function(){
+"use strict";
+var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Norman: every visible action gives feedback — wire the unwired */
+document.querySelectorAll('.briefing-btn:not([onclick])').forEach(function(b){
+  var t=b.textContent.trim().toLowerCase();
+  if(t.indexOf('read full')>-1)b.onclick=function(){
+    var body=b.closest('.briefing-card');body=body&&body.querySelector('.briefing-body');
+    if(body){body.classList.remove('fbl-clamp');body.style.webkitLineClamp='unset';body.style.display='block';}
+    if(window.fblToast)fblToast('Full briefing expanded \u00b7 4-min read','info');
+  };
+  else if(t.indexOf('art-e')>-1)b.onclick=function(){if(window.openArteChat)openArteChat();};
+});
+
+/* Doherty + variable reward: stat numbers count up once, in view */
+function countUp(el){
+  var raw=el.textContent.trim();
+  var m=raw.match(/^([+\-\u2212]?)(\d+(?:\.\d+)?)(K|%|\u00d7|x)?$/);
+  if(!m)return;
+  var sign=m[1]||'',target=parseFloat(m[2]),suf=m[3]||'',dec=(m[2].indexOf('.')>-1)?1:0;
+  var t0=null;
+  function step(ts){
+    if(!t0)t0=ts;
+    var k=Math.min(1,(ts-t0)/650);k=1-Math.pow(1-k,3);
+    el.textContent=sign+(target*k).toFixed(dec)+suf;
+    if(k<1)requestAnimationFrame(step);else el.textContent=raw;
+  }
+  requestAnimationFrame(step);
+}
+if(!reduced&&'IntersectionObserver' in window){
+  var seen=new WeakSet();
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){
+      if(e.isIntersecting&&!seen.has(e.target)){seen.add(e.target);countUp(e.target);io.unobserve(e.target);}
+    });
+  },{threshold:0.6});
+  document.querySelectorAll('.briefing-stat-val,.insight-post-stat-val').forEach(function(el){io.observe(el);});
+}
+
+/* Milestone celebration (Fast-follow) — the reward beat of the Hook */
+(function(){
+  var strip=document.getElementById('storiesStrip');
+  if(!strip)return;
+  var d=document.createElement('div');d.className='fbl-milestone';
+  d.innerHTML='<span class="em">\ud83c\udf89</span>'
+   +'<div><div class="tt">Milestone \u2014 Kelpie Daily crossed 100K followers</div>'
+   +'<div class="ts">Up 12K this month \u00b7 your fastest-growing page</div></div>'
+   +'<button class="share">Share the win</button>'
+   +'<button class="x" aria-label="Dismiss">\u00d7</button>';
+  var chip=document.createElement('span');chip.className='fbl-stage fast sm';chip.textContent='FAST';
+  d.querySelector('.ts').appendChild(chip);
+  d.querySelector('.share').onclick=function(){if(window.fblToast)fblToast('Celebration post drafted \u2014 review it in Drafts','info');};
+  d.querySelector('.x').onclick=function(){d.style.display='none';if(window.fblToast)fblToast('Dismissed \u2014 milestones live in Saved Insights','info');};
+  strip.parentNode.insertBefore(d,strip.nextSibling);
+})();
+
+/* A11y: icon-only controls get names; palette becomes a dialog */
+document.querySelectorAll('header button:not([aria-label]),header .user-avatar').forEach(function(b){
+  var t=b.getAttribute('title')||b.className||'';
+  if(/search/i.test(t))b.setAttribute('aria-label','Search');
+  else if(/msg|message|chat/i.test(t))b.setAttribute('aria-label','Messages');
+  else if(/notif|bell/i.test(t))b.setAttribute('aria-label','Notifications');
+  else if(/avatar|user/i.test(t))b.setAttribute('aria-label','Your account');
+  else if(/theme/i.test(t))b.setAttribute('aria-label','Switch theme');
+});
+var fab=document.querySelector('.fab-arte');if(fab&&!fab.getAttribute('aria-label'))fab.setAttribute('aria-label','Open Art-E assistant');
+var pal=document.getElementById('fblPalWrap');
+if(pal){pal.setAttribute('role','dialog');pal.setAttribute('aria-modal','true');
+  var pin=document.getElementById('fblPalIn');if(pin)pin.setAttribute('aria-label','Jump to a page or run an action');}
+})();
+</script>
+
 </body>
 </html>
