@@ -8438,6 +8438,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   document.querySelectorAll('.subtab').forEach(tab=>{
     tab.addEventListener('click', ()=>{
       const sub = tab.dataset.sub;
+      if(!sub) return; // profile subtabs use data-prof-sub; not ours
       document.querySelectorAll('.subtab').forEach(t=>t.classList.remove('active'));
       tab.classList.add('active');
       document.querySelectorAll('.subpanel').forEach(p=>p.classList.remove('active'));
@@ -10022,6 +10023,145 @@ document.querySelectorAll('.story-tile.page-story').forEach(function(tile,i){
    +'</svg></div>');
   tile.insertBefore(art,tile.firstChild);
 });
+})();
+</script>
+
+
+<!-- FABLE DESIGN PASS 5: Art-E chat repair + readability, billing dashboard,
+     Data & Privacy tab, hierarchy trims -->
+<style id="fable-design5">
+/* ═══ Art-E chat: repaired header ═══ */
+.arte-chat-head{display:flex;align-items:center;gap:10px}
+.arte-chat-title,.arte-chat-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.arte-chat-head .silence-link,.arte-chat-head .modal-close{flex-shrink:0}
+.fbl-arte-stagebar{display:flex;align-items:center;gap:7px;padding:7px 14px;
+  font-size:10.5px;color:var(--t3);background:var(--arte-bg);
+  border-bottom:1px solid var(--bdr-soft)}
+.fbl-arte-stagebar .fbl-stage{margin-left:0}
+/* ═══ Chat readability ═══ */
+.arte-chat-host{border-radius:18px;box-shadow:0 18px 60px rgba(0,0,0,.45)}
+.arte-chat-msgs .msg{display:flex;gap:8px;margin-bottom:12px;align-items:flex-end}
+.arte-chat-msgs .msg-bubble{font-size:13.5px;line-height:1.55;padding:10px 13px;
+  border-radius:14px;max-width:88%}
+.arte-chat-msgs .msg.user{flex-direction:row-reverse}
+.arte-chat-msgs .msg.user .msg-bubble{background:var(--teal-bg);
+  border:1px solid color-mix(in srgb,var(--teal) 35%,transparent);
+  border-bottom-right-radius:4px}
+.arte-chat-msgs .msg.arte .msg-bubble{border-bottom-left-radius:4px}
+.arte-agent-quickrow,.arte-prompts{display:flex;flex-wrap:nowrap;overflow-x:auto;
+  gap:7px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.arte-agent-quickrow::-webkit-scrollbar,.arte-prompts::-webkit-scrollbar{display:none}
+.arte-agent-quick,.arte-prompt-chip{flex-shrink:0;white-space:nowrap}
+.arte-chat-input{font-size:13.5px}
+.arte-chat-input-row{padding:10px 12px}
+/* agent CTA card inside chat: never let the label crush */
+.agent-cta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.agent-cta-text{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;flex-shrink:0}
+.agent-cta-btn{flex-shrink:0;white-space:nowrap}
+/* ═══ Hierarchy: the moves card is the page's primary object ═══ */
+.fbl-moves{border-left:3px solid var(--teal)}
+/* ═══ Billing dashboard ═══ */
+.fbl-bill{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+@media(max-width:900px){.fbl-bill{grid-template-columns:1fr}}
+.fbl-bill .panel-mini{background:var(--bg-elev);border:1px solid var(--bdr-soft);
+  border-radius:14px;padding:14px 16px}
+html[data-theme="light"] .fbl-bill .panel-mini{background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.06)}
+.fbl-bill h4{font-size:12px;font-weight:800;letter-spacing:.05em;color:var(--t3);
+  text-transform:uppercase;margin:0 0 10px;display:flex;align-items:center;justify-content:space-between}
+.fbl-bill .plan-line{font-size:20px;font-weight:800;color:var(--t1)}
+.fbl-bill .plan-sub{font-size:11.5px;color:var(--t3);margin-top:3px;line-height:1.5}
+.fbl-usage{margin-top:10px}
+.fbl-usage .ul{display:flex;justify-content:space-between;font-size:11.5px;color:var(--t2);margin-bottom:4px}
+.fbl-usage .ul b{color:var(--t1)}
+.fbl-usage .ub{height:7px;border-radius:7px;background:var(--bdr-soft);overflow:hidden;margin-bottom:10px}
+.fbl-usage .ub i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--teal),var(--arte-1))}
+</style>
+<script id="fable-design5-js">
+(function(){
+"use strict";
+
+/* ═══ 1. Art-E chat: move stage chips out of the crushed header ═══ */
+(function(){
+  var head=document.querySelector('.arte-chat-head');
+  var chips=document.querySelector('.arte-chat-head .fbl-arte-stages');
+  if(!head)return;
+  var bar=document.createElement('div');bar.className='fbl-arte-stagebar';
+  bar.innerHTML='<span>Grounded Q&A ships in the MVP \u00b7 the autonomous agent is Phase 2</span>';
+  if(chips){chips.style.margin='0';chips.style.marginLeft='auto';bar.appendChild(chips);}
+  else{
+    var c1=document.createElement('span');c1.className='fbl-stage mvp sm';c1.textContent='Q&A \u00b7 MVP';
+    var c2=document.createElement('span');c2.className='fbl-stage later sm';c2.textContent='AGENT \u00b7 LATER';
+    var w=document.createElement('span');w.style.cssText='margin-left:auto;display:inline-flex;gap:6px';
+    w.appendChild(c1);w.appendChild(c2);bar.appendChild(w);
+  }
+  head.parentNode.insertBefore(bar,head.nextSibling);
+})();
+
+/* ═══ 2. Billing tab: graphs + plan + usage quotas ═══ */
+(function(){
+  var pane=document.getElementById('prof-billing');
+  if(!pane)return;
+  var spend=[149,149,163,149,178,149]; /* Jan-Jun, overage months */
+  var months=['Jan','Feb','Mar','Apr','May','Jun'];
+  var max=200,W=470,H=150,bw=52,gap=18,x0=24;
+  var bars=spend.map(function(v,i){
+    var h=Math.round(v/max*(H-44)),x=x0+i*(bw+gap),cur=(i===5);
+    return '<rect x="'+x+'" y="'+(H-24-h)+'" width="'+bw+'" height="'+h+'" rx="7" fill="'
+      +(cur?'var(--teal)':'color-mix(in srgb,var(--t3) 26%,transparent)')+'"/>'
+      +'<text x="'+(x+bw/2)+'" y="'+(H-30-h)+'" text-anchor="middle" font-size="11.5" font-weight="700" fill="'+(cur?'var(--teal)':'var(--t3)')+'" font-family="inherit">\u00a3'+v+'</text>'
+      +'<text x="'+(x+bw/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="11" fill="var(--t3)" font-family="inherit">'+months[i]+'</text>';
+  }).join('');
+  var d=document.createElement('div');d.className='fbl-bill';
+  d.innerHTML=
+   '<div class="panel-mini"><h4>Current plan</h4>'
+   +'<div class="plan-line">Pilot \u00b7 \u00a3149/mo</div>'
+   +'<div class="plan-sub">Invoiced manually during the pilot \u00b7 next invoice <b style="color:var(--t1)">1 Jul 2026</b> \u00b7 5 pages included</div>'
+   +'<div class="fbl-usage" style="margin-top:14px">'
+   +'<div class="ul"><span>Art-E queries</span><b>312 / 1,000</b></div><div class="ub"><i style="width:31%"></i></div>'
+   +'<div class="ul"><span>Predictions run</span><b>47 / 200</b></div><div class="ub"><i style="width:23%"></i></div>'
+   +'<div class="ul"><span>Pages connected</span><b>5 / 5</b></div><div class="ub"><i style="width:100%"></i></div>'
+   +'</div></div>'
+   +'<div class="panel-mini"><h4>Spend \u00b7 last 6 months <span style="font-weight:600;letter-spacing:0;text-transform:none;color:var(--t3)">overage = extra Art-E use</span></h4>'
+   +'<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block">'+bars+'</svg></div>';
+  pane.insertBefore(d,pane.firstChild);
+})();
+
+/* ═══ 3. New Data & Privacy tab (MVP: export, retention, deletion, consent) ═══ */
+(function(){
+  var tabs=document.querySelector('#page-profile .subtabs');
+  var anyPane=document.getElementById('prof-billing');
+  if(!tabs||!anyPane)return;
+  var btn=document.createElement('button');btn.className='subtab';
+  btn.setAttribute('data-prof-sub','data');btn.textContent='Data & Privacy';
+  var chip=document.createElement('span');chip.className='fbl-stage mvp sm';chip.textContent='MVP';
+  btn.appendChild(chip);
+  tabs.appendChild(btn);
+  var pane=document.createElement('div');pane.className='prof-panel';pane.id='prof-data';
+  function row(t,s,btnLbl,danger,msg){
+    return '<div class="fbl-row"><div style="flex:1"><div style="font-size:13.5px;color:var(--t1);font-weight:600">'+t
+     +'</div><div style="font-size:12px;color:var(--t3)">'+s+'</div></div>'
+     +'<button class="fbl-btn ghost'+(danger?' fbl-danger':'')+'" onclick="fblToast(\''+msg+'\',\'info\')">'+btnLbl+'</button></div>';
+  }
+  pane.innerHTML='<div class="panel"><div class="panel-title" style="margin-bottom:12px">Your data, your control</div><div class="fbl-panel" style="border:none;padding:0;background:transparent">'
+   +row('Export all my data','Full GDPR export \u00b7 JSON + CSV \u00b7 link by email within 24h','Export',0,'Export queued \u2014 download link by email within 24h')
+   +row('Data retention','Platform data auto-deletes when you leave \u00b7 90-day window','View policy',0,'Retention: 90 days after disconnect, then full erasure')
+   +row('Cookie preferences','Consent choices \u00b7 UK GDPR + PECR compliant','Manage',0,'Cookie preferences panel opens')
+   +row('Privacy Policy & Terms','Versioned \u00b7 you accepted v2.1 on 2 Jun 2026','Read',0,'Legal documents open')
+   +row('Facebook data-deletion callback','Meta-required \u00b7 deleting on Facebook deletes here too','Details',0,'Deletion callback: live, Meta-verified')
+   +row('Delete account & all data','Erases everything \u00b7 14-day grace period \u00b7 cannot be undone','Delete\u2026',1,'Deletion flow opens with 14-day grace period')
+   +'</div></div>';
+  anyPane.parentNode.appendChild(pane);
+  btn.onclick=function(e){
+    e.stopPropagation();
+    tabs.querySelectorAll('.subtab').forEach(function(x){x.classList.toggle('active',x===btn);});
+    document.querySelectorAll('#page-profile .prof-panel').forEach(function(p){p.classList.toggle('active',p===pane);});
+  };
+  /* other tabs were wired at init before this pane existed; ensure they hide it */
+  tabs.addEventListener('click',function(e){
+    var t=e.target.closest('.subtab');
+    if(t&&t!==btn)pane.classList.remove('active');
+  });
+})();
 })();
 </script>
 
