@@ -52,6 +52,13 @@ select{background:var(--bg-elev);border:1px solid var(--bdr);color:var(--t1);fon
 .ibar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--teal),var(--opp))}
 .empty{padding:26px;text-align:center;color:var(--t3);font-size:13px;display:none}
 .count{font-size:12px;color:var(--t3);margin:0 0 8px}
+input[type=date]{background:var(--bg-elev);border:1px solid var(--bdr);color:var(--t1);
+ font-family:inherit;font-size:12px;font-weight:600;padding:5px 9px;border-radius:10px;color-scheme:dark}
+.pager{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:14px}
+.pager button{border:1px solid var(--bdr);background:var(--bg-elev);color:var(--t2);font-family:inherit;
+ cursor:pointer;font-size:12px;font-weight:700;min-width:34px;padding:7px 10px;border-radius:10px}
+.pager button.on{background:var(--teal);border-color:var(--teal);color:#04211a}
+.pager button:disabled{opacity:.35;cursor:default}
 </style>
 </head>
 <body><div class="wrap">
@@ -116,9 +123,20 @@ select{background:var(--bg-elev);border:1px solid var(--bdr);color:var(--t1);fon
  <button class="pill" data-res="wait">Pending</button>
  <select id="sortSel"><option value="ts">Newest first</option><option value="impact">Highest impact</option></select>
 </div>
+<div class="fbar"><span class="lbl">Date</span>
+ <button class="pill on" data-days="">All time</button>
+ <button class="pill" data-days="7">Last 7d</button>
+ <button class="pill" data-days="14">Last 14d</button>
+ <button class="pill" data-days="30">Last 30d</button>
+ <span class="lbl" style="margin-left:8px">Range</span>
+ <input type="date" id="dFrom" min="2026-05-12" max="2026-06-11">
+ <span style="color:var(--t3);font-size:12px">to</span>
+ <input type="date" id="dTo" min="2026-05-12" max="2026-06-11">
+</div>
 <div class="count" id="cnt"></div>
 <div class="list" id="list"></div>
 <div class="empty" id="empty">Nothing matches these filters.</div>
+<div class="pager" id="pager"></div>
 
 <script>
 "use strict";
@@ -140,29 +158,68 @@ var DATA=[
  {ts:15,type:'ignored',what:'Ignored: weekend posting nudge',pg:'control · 4 wks ago',res:'neut',chip:'● −6% vs projection',imp:12},
  {ts:14,type:'sched',what:'Queued tonight’s 6PM post',pg:'DM · just now',res:'wait',chip:'⏳ tracking · first read ~2h',imp:20}
 ];
-var fType='all',fRes='all',sortBy='ts';
+DATA.forEach(function(d){d.days=29-d.ts<=1?29-d.ts:Math.round((29-d.ts)*1.9);});
+var fType='all',fRes='all',sortBy='ts',fFrom=null,fTo=null,page=1,PAGE=6;
+function applyPreset(days){fFrom=days==null?null:days;fTo=null;
+  document.getElementById('dFrom').value='';document.getElementById('dTo').value='';}
+var TODAY=new Date('2026-06-11T12:00:00');
+function daysAgoOf(dateStr){var d=new Date(dateStr+'T12:00:00');return Math.round((TODAY-d)/86400000);}
 function render(){
  var list=document.getElementById('list');
- var rows=DATA.filter(function(d){return (fType==='all'||d.type===fType)&&(fRes==='all'||d.res===fRes);});
+ var fromIn=document.getElementById('dFrom').value,toIn=document.getElementById('dTo').value;
+ var maxDays=(fFrom!=null)?fFrom:null;            /* preset: last N days */
+ var loD=toIn?daysAgoOf(toIn):null;               /* custom: newest bound */
+ var hiD=fromIn?daysAgoOf(fromIn):null;           /* custom: oldest bound */
+ var rows=DATA.filter(function(d){
+  if(fType!=='all'&&d.type!==fType)return false;
+  if(fRes!=='all'&&d.res!==fRes)return false;
+  if(maxDays!=null&&d.days>maxDays)return false;
+  if(hiD!=null&&d.days>hiD)return false;
+  if(loD!=null&&d.days<loD)return false;
+  return true;
+ });
  rows.sort(function(a,b){return sortBy==='impact'?b.imp-a.imp:b.ts-a.ts;});
+ var pages=Math.max(1,Math.ceil(rows.length/PAGE));
+ if(page>pages)page=pages;
+ var start=(page-1)*PAGE,slice=rows.slice(start,start+PAGE);
  var T={crisis:'Crisis',sched:'Sched',draft:'Draft',reshare:'Reshare',reply:'Reply',ignored:'Ignored'};
- list.innerHTML=rows.map(function(d){
+ list.innerHTML=slice.map(function(d){
   return '<div class="row"><span class="when">'+d.pg.split('·')[1].trim()+'</span>'
    +'<span class="tchip '+d.type+'">'+T[d.type]+'</span>'
-   +'<div class="what">'+d.what+'<small>'+d.pg+'</small></div>'
+   +'<div class="what">'+d.what+'<small>'+d.pg+' · '+(d.days===0?'today':d.days+'d ago')+'</small></div>'
    +'<span class="ibar"><i style="width:'+d.imp+'%"></i></span>'
    +'<span class="rchip '+d.res+'">'+d.chip+'</span></div>';
  }).join('');
- document.getElementById('cnt').textContent=rows.length+' of '+DATA.length+' actions';
+ document.getElementById('cnt').textContent=rows.length
+  ?('Showing '+(start+1)+'–'+Math.min(start+PAGE,rows.length)+' of '+rows.length+' actions')
+  :'0 actions';
  document.getElementById('empty').style.display=rows.length?'none':'block';
+ var pg=document.getElementById('pager');
+ if(pages<=1){pg.innerHTML='';return;}
+ var btns='<button '+(page===1?'disabled':'')+' data-pg="prev">←</button>';
+ for(var i=1;i<=pages;i++)btns+='<button class="'+(i===page?'on':'')+'" data-pg="'+i+'">'+i+'</button>';
+ btns+='<button '+(page===pages?'disabled':'')+' data-pg="next">→</button>';
+ pg.innerHTML=btns;
 }
+document.getElementById('pager').addEventListener('click',function(e){
+ var b=e.target.closest('button[data-pg]');if(!b||b.disabled)return;
+ var v=b.dataset.pg;
+ page=v==='prev'?page-1:v==='next'?page+1:+v;
+ render();
+});
+document.querySelectorAll('[data-days]').forEach(function(p){p.onclick=function(){
+ document.querySelectorAll('[data-days]').forEach(function(x){x.classList.remove('on');});
+ p.classList.add('on');applyPreset(p.dataset.days===''?null:+p.dataset.days);page=1;render();};});
+document.getElementById('dFrom').onchange=document.getElementById('dTo').onchange=function(){
+ document.querySelectorAll('[data-days]').forEach(function(x){x.classList.remove('on');});
+ document.querySelector('[data-days=""]').classList.add('on');fFrom=null;page=1;render();};
 document.querySelectorAll('[data-type]').forEach(function(p){p.onclick=function(){
  document.querySelectorAll('[data-type]').forEach(function(x){x.classList.remove('on');});
- p.classList.add('on');fType=p.dataset.type;render();};});
+ p.classList.add('on');fType=p.dataset.type;page=1;render();};});
 document.querySelectorAll('[data-res]').forEach(function(p){p.onclick=function(){
  document.querySelectorAll('[data-res]').forEach(function(x){x.classList.remove('on');});
- p.classList.add('on');fRes=p.dataset.res;render();};});
-document.getElementById('sortSel').onchange=function(){sortBy=this.value;render();};
+ p.classList.add('on');fRes=p.dataset.res;page=1;render();};});
+document.getElementById('sortSel').onchange=function(){sortBy=this.value;page=1;render();};
 render();
 </script>
 </div></body></html>
