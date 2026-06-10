@@ -9434,5 +9434,184 @@ setTimeout(function(){fblToast('Press \u2318K to jump anywhere \u00b7 1-9 for qu
 })();
 </script>
 
+
+<!-- FABLE DESIGN PASS: light-mode rework, story visuals, calm briefing,
+     stage clarity, Hooked-model surfaces (health score, checklist, streak) -->
+<style id="fable-design">
+/* ═══ 1. LIGHT MODE REWORK — Meta surface hierarchy ═══
+   Was: pure white page + pure white cards = flat, nothing separates.
+   Now: soft neutral canvas, white chrome + cards that lift with shadow. */
+html[data-theme="light"]{
+  --bg:#F0F2F5;
+  --bg-elev:#FFFFFF;
+  --bg-elev-2:#F6F7F9;
+  --bg-input:#EFF1F4;
+  --bdr:#D8DBE0;
+  --bdr-soft:#E7E9ED;
+}
+html[data-theme="light"] header,
+html[data-theme="light"] .left-sidebar{background:#FFFFFF}
+html[data-theme="light"] .left-sidebar{border-right:1px solid var(--bdr-soft)}
+html[data-theme="light"] :is(.briefing-card,.insight-post,.story-tile,.feed-tabs,.page-card,.action-item,.fbl-stat,.fbl-feat,.fbl-pal,.fbl-health){
+  box-shadow:0 1px 2px rgba(16,24,40,.07),0 1px 8px rgba(16,24,40,.04);
+  border-color:var(--bdr-soft);
+}
+html[data-theme="light"] :is(.briefing-card,.insight-post,.story-tile,.feed-tabs){background:#FFFFFF}
+/* chip readability on light (teal goes dark in light theme) */
+html[data-theme="light"] .fbl-stage.mvp,
+html[data-theme="light"] .fbl-stage.plan{color:#FFFFFF}
+html[data-theme="light"] .fbl-byfable{color:#FFFFFF;background:linear-gradient(135deg,#006B5A,#0D9488)}
+html[data-theme="light"] .story-mvp-badge{filter:saturate(1.1) brightness(.92)}
+
+/* ═══ 2. STORIES — story-grade visuals ═══ */
+.story-tile{transition:transform .18s cubic-bezier(.2,.7,.2,1),box-shadow .18s ease}
+.story-tile:hover{transform:translateY(-3px)}
+.story-tile.page-story{position:relative;overflow:hidden}
+.story-tile.page-story::before{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,var(--page-tint),transparent 58%);pointer-events:none}
+.story-tile.page-story::after{content:"";position:absolute;top:7px;left:10px;right:10px;height:3px;
+  border-radius:3px;pointer-events:none;opacity:.85;
+  background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--t1) 70%,transparent) 0 22px,transparent 22px 27px)}
+.story-page-avatar{position:relative;z-index:1}
+.story-page-avatar::after{content:"";position:absolute;inset:-5px;border-radius:50%;padding:2px;
+  background:conic-gradient(from 210deg,var(--page-ring,#00C4A0),var(--arte-1),var(--page-ring,#00C4A0));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude}
+.story-metric{font-size:21px;font-weight:800;letter-spacing:-.02em}
+
+/* ═══ 3. CALM BRIEFING + ACTION ITEMS ═══ */
+.briefing-body.fbl-clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.fbl-more{background:none;border:none;cursor:pointer;color:var(--teal);font-weight:700;
+  font-size:12px;padding:4px 0 0;font-family:inherit}
+.briefing-actions .briefing-btn:nth-child(3){display:none}
+.briefing-stats{gap:8px}
+.action-item{align-items:center}
+
+/* ═══ 4. STAGE CLARITY ═══ */
+.fbl-stage.sm{font-size:8px;padding:1.5px 6px;letter-spacing:.06em;margin-left:6px}
+.fbl-arte-stages{display:flex;gap:6px;align-items:center;margin-left:auto;margin-right:8px}
+
+/* ═══ 5. HOOKED SURFACES ═══ */
+.fbl-health{background:var(--bg-elev);border:1px solid var(--bdr-soft);border-radius:14px;
+  padding:14px 16px;margin-bottom:14px;display:flex;gap:14px;align-items:center}
+.fbl-health .ring{position:relative;width:62px;height:62px;border-radius:50%;flex-shrink:0;
+  background:conic-gradient(var(--teal) calc(var(--v)*1%),var(--bdr-soft) 0);display:grid;place-items:center}
+.fbl-health .ring::before{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--bg-elev)}
+.fbl-health .ring b{position:relative;font-size:17px;font-weight:800;color:var(--t1)}
+.fbl-health .hl{font-size:13px;font-weight:700;color:var(--t1);display:flex;align-items:center}
+.fbl-health .hs{font-size:11.5px;color:var(--t3);margin-top:3px}
+.fbl-health .hd{font-size:11.5px;font-weight:700;color:var(--opp);margin-top:3px}
+.fbl-checklist{margin:10px 8px 4px;padding:12px 14px;border-radius:12px;cursor:pointer;
+  background:var(--teal-bg);border:1px solid color-mix(in srgb,var(--teal) 24%,transparent);
+  transition:transform .15s ease}
+.fbl-checklist:hover{transform:translateY(-1px)}
+.fbl-checklist .ct{font-size:12px;font-weight:700;color:var(--t1);display:flex;align-items:center;justify-content:space-between}
+.fbl-checklist .cs{font-size:11px;color:var(--t3);margin-top:2px}
+.fbl-checklist .bar{height:6px;border-radius:6px;background:var(--bdr-soft);overflow:hidden;margin-top:9px}
+.fbl-checklist .bar i{display:block;height:100%;width:66%;border-radius:6px;
+  background:linear-gradient(90deg,var(--teal),var(--arte-1))}
+.fbl-streak{display:inline-flex;align-items:center;gap:5px;margin-left:10px;font-size:11px;
+  font-weight:700;color:var(--warn);background:var(--warn-bg);padding:4px 10px;border-radius:9999px;flex-shrink:0}
+@media(max-width:900px){.fbl-streak{display:none}}
+@media(prefers-reduced-motion:reduce){.story-tile,.fbl-checklist{transition:none}}
+</style>
+<script id="fable-design-js">
+(function(){
+"use strict";
+
+/* Briefing: clamp to 2 lines with a More toggle (calm by default) */
+document.querySelectorAll('.briefing-body, .insight-post-body').forEach(function(b){
+  if(b.textContent.trim().length<140)return;
+  b.classList.add('fbl-clamp');
+  b.style.display='-webkit-box';
+  b.style.webkitBoxOrient='vertical';
+  b.style.webkitLineClamp='2';
+  b.style.overflow='hidden';
+  b.style.paddingBottom='2px';
+  b._fblPadB=b.style.paddingBottom;
+  var m=document.createElement('button');m.className='fbl-more';m.textContent='More';
+  m.style.margin='2px 16px 10px';
+  m.onclick=function(){
+    var open=b.classList.toggle('fbl-clamp')===false;
+    b.style.webkitLineClamp=open?'unset':'2';
+    b.style.display=open?'block':'-webkit-box';
+    m.textContent=open?'Less':'More';
+  };
+  b.parentNode.insertBefore(m,b.nextSibling);
+});
+
+/* Action items: clamp the longest text line per item */
+document.querySelectorAll('.action-item').forEach(function(it){
+  var best=null,len=0;
+  it.querySelectorAll('div,p,span').forEach(function(el){
+    if(el.children.length===0&&el.textContent.length>len){len=el.textContent.length;best=el;}
+  });
+  if(best&&len>70){
+    best.style.display='-webkit-box';
+    best.style.webkitBoxOrient='vertical';
+    best.style.webkitLineClamp='1';
+    best.style.overflow='hidden';
+  }
+});
+
+/* Stage chips where the question actually gets asked */
+function chip(st,lbl,sm){
+  var s=document.createElement('span');
+  s.className='fbl-stage '+st+(sm?' sm':'');s.textContent=lbl;return s;
+}
+document.querySelectorAll('.feed-tab').forEach(function(t){
+  var k=t.getAttribute('data-feed-tab');
+  if(k==='briefings')t.appendChild(chip('fast','FAST',1));
+  if(k==='actions')t.appendChild(chip('mvp','MVP',1));
+});
+/* Art-E chat: grounded Q&A ships in the MVP; the autonomous agent is Phase 2 */
+document.querySelectorAll('.arte-chat-head').forEach(function(h){
+  if(h.querySelector('.fbl-arte-stages'))return;
+  var w=document.createElement('span');w.className='fbl-arte-stages';
+  w.title='Art-E grounded Q&A with citations ships in the MVP. The autonomous agent that acts for you is Phase 2 (Later).';
+  var c1=chip('mvp','Q&A \u00b7 MVP',1),c2=chip('later','AGENT \u00b7 LATER',1);
+  w.appendChild(c1);w.appendChild(c2);
+  var close=h.querySelector('.modal-close');
+  if(close)h.insertBefore(w,close);else h.appendChild(w);
+});
+
+/* Page Health Score (Fast-follow) — variable reward, one number to check */
+(function(){
+  var rail=document.querySelector('.right-sidebar');
+  if(!rail)return;
+  var d=document.createElement('div');d.className='fbl-health';d.style.setProperty('--v',82);
+  d.innerHTML='<div class="ring"><b>82</b></div>'
+   +'<div style="flex:1"><div class="hl">Page Health Score</div>'
+   +'<div class="hd">\u25b2 +4 this week \u00b7 best in 3 months</div>'
+   +'<div class="hs">Reach, sentiment, consistency \u00b7 across 5 pages</div></div>';
+  d.appendChild(chip('fast','FAST',1));
+  d.style.cursor='pointer';
+  d.onclick=function(){if(window.fblToast)fblToast('Health breakdown ships fast-follow \u2014 reach 86, sentiment 91, consistency 68','info');};
+  rail.insertBefore(d,rail.firstElementChild);
+})();
+
+/* Activation checklist (MVP) — the investment step of the Hook */
+(function(){
+  var sb=document.querySelector('.left-sidebar');
+  if(!sb)return;
+  var d=document.createElement('div');d.className='fbl-checklist';
+  d.innerHTML='<div class="ct">Getting set up <span style="color:var(--teal)">4 of 6</span></div>'
+   +'<div class="cs">Next: turn on WhatsApp alerts \u00b7 2 min</div>'
+   +'<div class="bar"><i></i></div>';
+  d.onclick=function(){if(window.fblToast)fblToast('2 steps left: WhatsApp alerts, invite a teammate','info');};
+  sb.appendChild(d);
+})();
+
+/* Streak (Later) — habit loop, kept quiet in the header */
+(function(){
+  var bf=document.querySelector('.fbl-byfable');
+  if(!bf)return;
+  var s=document.createElement('span');s.className='fbl-streak';
+  s.title='Daily-use streak \u00b7 ships Later (engagement set)';
+  s.innerHTML='\ud83d\udd25 6-day streak';
+  bf.parentNode.insertBefore(s,bf.nextSibling);
+})();
+})();
+</script>
 </body>
 </html>
