@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtemisAI — MVP Preview</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+/* ───────────────────────── DESIGN SYSTEM (mirrors mockup_v2) ───────────────────────── */
+:root{
+  --fs-xs:11px; --fs-sm:12px; --fs-base:13px; --fs-md:14px; --fs-lg:15px; --fs-xl:17px; --fs-2xl:22px; --fs-3xl:28px;
+  --bg:#0e1116; --bg-elev:#16191f; --bg-elev-2:#1c2128; --bg-input:#222831;
+  --teal:#00C4A0; --teal-d:#00a085; --teal-bg:rgba(0,196,160,0.10);
+  --arte-1:#7C5CBF; --arte-2:#00C4A0; --arte-bg:rgba(124,92,191,0.08);
+  --crisis:#E53935; --crisis-bg:rgba(229,57,53,0.10);
+  --warn:#F5A623; --warn-bg:rgba(245,166,35,0.10);
+  --blue:#4A90D9; --blue-bg:rgba(74,144,217,0.10);
+  --t1:#E7EAF0; --t2:#9AA4B2; --t3:#5F6B7A;
+  --line:rgba(255,255,255,0.07); --line-strong:rgba(255,255,255,0.12);
+  --hover-bg:rgba(255,255,255,0.04); --hover-bg-strong:rgba(255,255,255,0.07); --hover-border:rgba(255,255,255,0.16);
+  --shadow-sm:0 2px 8px rgba(0,0,0,0.25); --shadow-md:0 8px 28px rgba(0,0,0,0.35);
+  --r-sm:8px; --r-md:12px; --r-lg:16px;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scrollbar-color:#2a3340 var(--bg)}
+body{background:var(--bg);color:var(--t1);font-family:var(--font);font-size:var(--fs-base);line-height:1.33;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none;cursor:pointer}
+button{font-family:inherit;cursor:pointer}
+
+/* ── TOPBAR ── */
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;z-index:200;display:flex;align-items:center;gap:14px;padding:0 16px;background:rgba(14,17,22,0.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.1em;font-size:14px;flex-shrink:0}
+.brand svg{width:26px;height:26px}
+.mvp-badge{font-size:10px;font-weight:800;letter-spacing:.08em;color:#0a1410;background:var(--teal);padding:3px 9px;border-radius:9999px;text-transform:uppercase}
+.search{flex:1;max-width:420px;display:flex;align-items:center;gap:8px;background:var(--bg-input);border:1px solid var(--line);border-radius:9999px;padding:7px 14px;color:var(--t3);font-size:var(--fs-base);transition:border-color .2s}
+.search:focus-within{border-color:var(--teal)}
+.search input{flex:1;background:none;border:none;outline:none;color:var(--t1);font-size:var(--fs-base);font-family:inherit}
+.search svg{width:15px;height:15px;stroke:var(--t3);fill:none;stroke-width:2;flex-shrink:0}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.page-chip{display:flex;align-items:center;gap:8px;background:var(--bg-elev);border:1px solid var(--line);border-radius:9999px;padding:5px 12px 5px 5px;font-size:var(--fs-sm);font-weight:600;color:var(--t1);transition:border-color .2s}
+.page-chip:hover{border-color:var(--hover-border)}
+.page-chip .pc-av{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#26344a,#11161f);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#9fc1ff}
+.icon-btn{position:relative;width:38px;height:38px;border-radius:50%;background:var(--bg-elev);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--t2);transition:all .2s}
+.icon-btn:hover{background:var(--hover-bg-strong);color:var(--t1)}
+.icon-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.icon-btn .dot{position:absolute;top:7px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--crisis);border:2px solid var(--bg)}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--teal),#4A90D9);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#0a1410;flex-shrink:0}
+
+/* ── LAYOUT ── */
+.shell{display:grid;grid-template-columns:240px minmax(0,1fr) 300px;gap:20px;max-width:1340px;margin:0 auto;padding:72px 16px 40px}
+@media(max-width:1180px){.shell{grid-template-columns:220px minmax(0,1fr)}.right-rail{display:none}}
+@media(max-width:860px){.shell{grid-template-columns:minmax(0,1fr)}.left-rail{display:none}.mobile-nav{display:flex}body{padding-bottom:64px}}
+
+/* ── LEFT RAIL ── */
+.left-rail{position:sticky;top:72px;height:fit-content}
+.nav-item{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:var(--r-sm);font-size:var(--fs-md);font-weight:600;color:var(--t2);transition:all .15s;margin-bottom:2px}
+.nav-item:hover{background:var(--hover-bg);color:var(--t1);transform:translateX(2px)}
+.nav-item.active{background:var(--bg-elev);color:var(--teal)}
+.nav-icon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:var(--bg-elev);flex-shrink:0;transition:all .15s}
+.nav-item.active .nav-icon{background:var(--teal-bg);color:var(--teal)}
+.nav-icon svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav-icon.arte{background:linear-gradient(135deg,var(--arte-1),var(--arte-2))}
+.nav-icon.arte svg{stroke:white;fill:white}
+.nav-count{margin-left:auto;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:9999px}
+.nav-count.crisis{color:var(--crisis);background:var(--crisis-bg)}
+.rail-divider{height:1px;background:var(--line);margin:14px 4px}
+.rail-title{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);padding:0 12px;margin-bottom:8px}
+.scope-card{background:var(--bg-elev);border:1px solid var(--line);border-radius:var(--r-md);padding:13px 14px;margin:0 2px}
+.scope-row{display:flex;align-items:center;gap:8px;font-size:var(--fs-sm);color:var(--t2);padding:4px 0}
+.scope-row svg{width:13px;height:13px;flex-shrink:0;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.scope-row.in svg{stroke:var(--teal)}
+.scope-row.out{color:var(--t3)}
+.scope-row.out svg{stroke:var(--t3)}
+.countdown-chip{margin-top:12px;background:var(--teal-bg);border:1px solid rgba(0,196,160,.25);border-radius:var(--r-sm);padding:9px 12px;text-align:center}
+.countdown-chip .cd-num{font-size:20px;font-weight:800;color:var(--teal);font-variant-numeric:tabular-nums}
+.countdown-chip .cd-lbl{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+
+/* ── CARDS / SHARED ── */
+.card{background:var(--bg-elev);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;transition:border-color .2s}
+.card:hover{border-color:var(--line-strong)}
+.card-title{font-size:var(--fs-xl);font-weight:700;letter-spacing:-.2px}
+.card-sub{font-size:var(--fs-sm);color:var(--t2);margin-top:3px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 15px;border-radius:var(--r-sm);background:var(--bg-elev-2);border:1px solid var(--line);color:var(--t1);font-size:var(--fs-base);font-weight:600;transition:all .18s}
+.btn:hover{background:var(--hover-bg-strong);border-color:var(--hover-border);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.btn.primary{background:var(--teal);color:#0a1410;border-color:var(--teal)}
+.btn.primary:hover{background:#00d4b0}
+.btn.arte{background:linear-gradient(135deg,var(--arte-1),var(--arte-2));color:white;border:none}
+.btn.sm{padding:5px 11px;font-size:var(--fs-sm)}
+.btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:9999px;letter-spacing:.02em}
+.pill.teal{color:var(--teal);background:var(--teal-bg)}
+.pill.crisis{color:#ff7a73;background:var(--crisis-bg)}
+.pill.warn{color:var(--warn);background:var(--warn-bg)}
+.pill.blue{color:#7ab4f5;background:var(--blue-bg)}
+.pill.arte{color:#c9b8f0;background:var(--arte-bg)}
+
+/* page switching */
+.page{display:none;animation:fadeUp .28s ease}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.page-head h1{font-size:var(--fs-2xl);font-weight:800;letter-spacing:-.4px}
+.page-head .ph-sub{font-size:var(--fs-base);color:var(--t2);margin-top:3px}
+
+/* ── KPIs ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+@media(max-width:680px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--bg-elev);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;transition:all .2s}
+.kpi:hover{border-color:var(--teal);transform:translateY(-1px)}
+.kpi .k-label{font-size:var(--fs-xs);color:var(--t2);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.kpi .k-value{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.4px;margin-top:4px}
+.kpi .k-delta{font-size:var(--fs-sm);font-weight:700;margin-top:2px}
+.kpi .k-delta.up{color:var(--teal)} .kpi .k-delta.down{color:#ff7a73}
+
+/* ── FEED ── */
+.feed-card{background:var(--bg-elev);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;margin-bottom:14px;transition:all .2s}
+.feed-card:hover{border-color:var(--line-strong);box-shadow:var(--shadow-sm)}
+.fc-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.fc-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fc-ico svg{width:18px;height:18px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fc-meta{flex:1;min-width:0}
+.fc-title{font-size:var(--fs-md);font-weight:700}
+.fc-time{font-size:var(--fs-xs);color:var(--t3);margin-top:1px}
+.fc-body{font-size:var(--fs-md);color:var(--t2);line-height:1.5}
+.fc-body b{color:var(--t1)}
+.fc-action{margin-top:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.confidence{margin-left:auto;font-size:var(--fs-xs);color:var(--t3)}
+.confidence b{color:var(--teal)}
+
+/* ── ART-E CHAT ── */
+.arte-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.chat-card{background:var(--bg-elev);border:1px solid var(--line);border-radius:var(--r-lg);display:flex;flex-direction:column;min-height:540px;overflow:hidden}
+.chat-head{display:flex;align-items:center;gap:11px;padding:14px 18px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,rgba(124,92,191,.10),rgba(0,196,160,.06))}
+.arte-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--arte-1),var(--arte-2));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 0 3px rgba(124,92,191,.18)}
+.arte-av svg{width:19px;height:19px;fill:white}
+.chat-body{flex:1;padding:18px;display:flex;flex-direction:column;gap:14px;overflow-y:auto}
+.msg{max-width:78%;padding:11px 15px;border-radius:14px;font-size:var(--fs-md);line-height:1.5}
+.msg.arte{background:var(--bg-elev-2);border:1px solid var(--line);border-top-left-radius:4px;align-self:flex-start}
+.msg.user{background:var(--teal);color:#0a1410;font-weight:500;border-top-right-radius:4px;align-self:flex-end}
+.msg .score-line{display:flex;align-items:center;gap:10px;margin:10px 0 6px}
+.score-bar{flex:1;height:7px;background:var(--bg-input);border-radius:9999px;overflow:hidden}
+.score-bar i{display:block;height:100%;border-radius:9999px;background:linear-gradient(90deg,var(--warn),var(--teal));width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.score-num{font-size:18px;font-weight:800;color:var(--teal);font-variant-numeric:tabular-nums}
+.chips{display:flex;gap:8px;flex-wrap:wrap;padding:0 18px 12px}
+.chip{font-size:var(--fs-sm);font-weight:600;color:var(--t2);background:var(--bg-elev-2);border:1px solid var(--line);border-radius:9999px;padding:7px 13px;transition:all .18s}
+.chip:hover{color:var(--teal);border-color:var(--teal)}
+.chat-input{display:flex;gap:10px;padding:12px 14px;border-top:1px solid var(--line)}
+.chat-input input{flex:1;background:var(--bg-input);border:1px solid var(--line);border-radius:9999px;padding:10px 16px;color:var(--t1);font-size:var(--fs-md);font-family:inherit;outline:none;transition:border-color .2s}
+.chat-input input:focus{border-color:var(--arte-1)}
+.send-btn{width:42px;height:42px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--arte-1),var(--arte-2));display:flex;align-items:center;justify-content:center;transition:transform .15s}
+.send-btn:hover{transform:scale(1.06)}
+.send-btn svg{width:17px;height:17px;fill:none;stroke:white;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── PREDICTIONS ── */
+.pred-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px}
+@media(max-width:900px){.pred-grid{grid-template-columns:minmax(0,1fr)}}
+.composer textarea{width:100%;min-height:120px;background:var(--bg-input);border:1px solid var(--line);border-radius:var(--r-sm);padding:13px 15px;color:var(--t1);font-size:var(--fs-md);font-family:inherit;line-height:1.5;resize:vertical;outline:none;transition:border-color .2s}
+.composer textarea:focus{border-color:var(--teal)}
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;padding:6px 0 2px}
+.gauge{position:relative;width:170px;height:100px;overflow:hidden}
+.gauge svg{width:170px;height:170px}
+.gauge .g-num{position:absolute;left:0;right:0;bottom:2px;text-align:center;font-size:34px;font-weight:800;color:var(--teal);font-variant-numeric:tabular-nums;letter-spacing:-1px}
+.g-verdict{font-size:var(--fs-md);font-weight:700;color:var(--teal);margin-top:2px}
+.factor{margin-bottom:11px}
+.factor .f-row{display:flex;justify-content:space-between;font-size:var(--fs-sm);margin-bottom:5px}
+.factor .f-row b{color:var(--t1);font-weight:600}
+.factor .f-row span{color:var(--t3);font-variant-numeric:tabular-nums}
+.f-bar{height:6px;background:var(--bg-input);border-radius:9999px;overflow:hidden}
+.f-bar i{display:block;height:100%;border-radius:9999px;width:0;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.sched-row{display:flex;align-items:center;gap:12px;padding:12px 4px;border-top:1px solid var(--line);font-size:var(--fs-base)}
+.sched-row:first-of-type{border-top:none}
+.sched-score{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums;font-size:var(--fs-lg)}
+
+/* ── ALERTS ── */
+.alert-card{display:flex;gap:13px;background:var(--bg-elev);border:1px solid var(--line);border-left-width:3px;border-radius:var(--r-md);padding:15px 17px;margin-bottom:12px;transition:all .2s}
+.alert-card:hover{box-shadow:var(--shadow-sm)}
+.alert-card.viral{border-left-color:var(--teal)}
+.alert-card.crisis{border-left-color:var(--crisis)}
+.alert-card.warn{border-left-color:var(--warn)}
+.al-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.al-ico svg{width:18px;height:18px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.al-body{flex:1;min-width:0}
+.al-title{font-size:var(--fs-md);font-weight:700;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.al-text{font-size:var(--fs-base);color:var(--t2);margin-top:4px;line-height:1.5}
+.al-text b{color:var(--t1)}
+.al-fix{margin-top:9px;font-size:var(--fs-base);color:var(--t1);background:var(--bg-elev-2);border:1px dashed var(--line-strong);border-radius:var(--r-sm);padding:9px 12px;line-height:1.5}
+.al-fix b{color:var(--teal)}
+.al-actions{display:flex;gap:9px;margin-top:11px}
+.spark{width:110px;height:34px;flex-shrink:0;align-self:center}
+
+/* ── DISCOVERY ── */
+.preview-banner{display:flex;align-items:center;gap:10px;background:var(--blue-bg);border:1px solid rgba(74,144,217,.3);border-radius:var(--r-sm);padding:10px 14px;font-size:var(--fs-base);color:#a8cdf5;margin-bottom:16px}
+.preview-banner svg{width:16px;height:16px;flex-shrink:0;fill:none;stroke:#7ab4f5;stroke-width:2}
+.disc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:13px}
+.disc-card{background:var(--bg-elev);border:1px solid var(--line);border-radius:var(--r-md);padding:16px;transition:all .2s;position:relative}
+.disc-card:hover{border-color:var(--teal);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.disc-av{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;margin-bottom:10px}
+.disc-name{font-size:var(--fs-md);font-weight:700}
+.disc-niche{font-size:var(--fs-xs);color:var(--t3);margin-top:1px}
+.overlap{margin:11px 0 9px}
+.overlap .o-row{display:flex;justify-content:space-between;font-size:var(--fs-xs);color:var(--t2);margin-bottom:4px}
+.overlap .o-row b{color:var(--teal);font-variant-numeric:tabular-nums}
+.disc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+.dtag{font-size:10px;color:var(--t2);background:var(--bg-elev-2);border:1px solid var(--line);border-radius:9999px;padding:2px 8px}
+.star-btn{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--bg-elev-2);display:flex;align-items:center;justify-content:center;transition:all .18s}
+.star-btn svg{width:14px;height:14px;fill:none;stroke:var(--t3);stroke-width:2}
+.star-btn.on{border-color:var(--warn);background:var(--warn-bg)}
+.star-btn.on svg{fill:var(--warn);stroke:var(--warn)}
+
+/* ── ANALYTICS (thin) ── */
+.subtabs{display:flex;gap:6px;background:var(--bg-elev);border:1px solid var(--line);border-radius:9999px;padding:4px;width:fit-content;margin-bottom:16px}
+.subtab{font-size:var(--fs-sm);font-weight:700;color:var(--t2);padding:7px 16px;border-radius:9999px;transition:all .18s}
+.subtab:hover{color:var(--t1)}
+.subtab.active{background:var(--teal);color:#0a1410}
+.an-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px}
+@media(max-width:900px){.an-grid{grid-template-columns:minmax(0,1fr)}}
+.chart-box{position:relative;height:240px}
+.thin-note{display:flex;align-items:center;gap:9px;font-size:var(--fs-sm);color:var(--t3);margin-top:14px}
+.thin-note svg{width:14px;height:14px;flex-shrink:0;fill:none;stroke:var(--arte-1);stroke-width:2}
+
+/* ── RIGHT RAIL ── */
+.right-rail{position:sticky;top:72px;height:fit-content;display:flex;flex-direction:column;gap:14px}
+.rr-card{background:var(--bg-elev);border:1px solid var(--line);border-radius:var(--r-md);padding:16px}
+.rr-title{font-size:var(--fs-sm);font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);margin-bottom:11px}
+.map-row{display:flex;align-items:center;gap:9px;font-size:var(--fs-sm);color:var(--t2);padding:5px 0}
+.map-row .sprint-tag{margin-left:auto;font-size:10px;font-weight:800;color:var(--teal);background:var(--teal-bg);border-radius:5px;padding:2px 7px;font-variant-numeric:tabular-nums}
+.map-row svg{width:13px;height:13px;flex-shrink:0;fill:none;stroke:var(--teal);stroke-width:2.4;stroke-linecap:round}
+.heat{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:4px}
+.heat i{aspect-ratio:1;border-radius:4px;background:var(--teal);display:block}
+.heat-lbls{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:5px;font-size:9px;color:var(--t3);text-align:center}
+
+/* ── MOBILE NAV ── */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(14,17,22,0.96);backdrop-filter:blur(18px);border-top:1px solid var(--line);justify-content:space-around;padding:7px 4px calc(7px + env(safe-area-inset-bottom))}
+.mnav-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9.5px;font-weight:700;color:var(--t3);padding:4px 8px;border-radius:8px}
+.mnav-item.active{color:var(--teal)}
+.mnav-item svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.mock-foot{text-align:center;font-size:var(--fs-xs);color:var(--t3);padding:26px 0 6px}
+.mock-foot a{color:var(--teal)}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ TOPBAR ═══════════ -->
+<header class="topbar">
+  <a class="brand" href="admin_panel.html" title="Back to Admin Panel">
+    <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="#00C4A0" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="#00C4A0" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="#00C4A0"/></svg>
+    ARTEMISAI <span class="mvp-badge">MVP Preview</span>
+  </a>
+  <div class="search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input placeholder="Ask Art-E anything…" onkeydown="if(event.key==='Enter'){goPage('arte');this.value=''}">
+  </div>
+  <div class="topbar-right">
+    <a class="page-chip"><span class="pc-av">BF</span> The British Feed</a>
+    <button class="icon-btn" onclick="goPage('alerts')" title="Alerts">
+      <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
+      <span class="dot"></span>
+    </button>
+    <div class="avatar">A</div>
+  </div>
+</header>
+
+<div class="shell">
+
+  <!-- ═══════════ LEFT RAIL ═══════════ -->
+  <aside class="left-rail">
+    <nav>
+      <a class="nav-item active" data-page="feed" onclick="goPage('feed')">
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span> Feed
+      </a>
+      <a class="nav-item" data-page="arte" onclick="goPage('arte')">
+        <span class="nav-icon arte"><svg viewBox="0 0 24 24" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></span> Art-E
+      </a>
+      <a class="nav-item" data-page="predict" onclick="goPage('predict')">
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg></span> Predictions
+      </a>
+      <a class="nav-item" data-page="alerts" onclick="goPage('alerts')">
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg></span> Alerts
+        <span class="nav-count crisis">3</span>
+      </a>
+      <a class="nav-item" data-page="discovery" onclick="goPage('discovery')">
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M9 12v3a2 2 0 002 2h3"/></svg></span> Discovery
+      </a>
+      <a class="nav-item" data-page="analytics" onclick="goPage('analytics')">
+        <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="8" rx="1"/><rect x="10" y="6" width="4" height="14" rx="1"/><rect x="17" y="9" width="4" height="11" rx="1"/></svg></span> Analytics
+      </a>
+    </nav>
+
+    <div class="rail-divider"></div>
+    <div class="rail-title">MVP scope · 28 Nov 2026</div>
+    <div class="scope-card">
+      <div class="scope-row in"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Pre-publish prediction</div>
+      <div class="scope-row in"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Real-time alerts</div>
+      <div class="scope-row in"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Intelligence feed</div>
+      <div class="scope-row in"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Discovery (view-only)</div>
+      <div class="scope-row in"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Art-E advisor</div>
+      <div class="scope-row out"><svg viewBox="0 0 24 24"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg> Full collab engine → Phase 2</div>
+      <div class="scope-row out"><svg viewBox="0 0 24 24"><path d="M12 8v4M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg> Best Times page → Fast-Follow</div>
+      <div class="countdown-chip"><div class="cd-num" id="cdNum">172</div><div class="cd-lbl">days to launch</div></div>
+    </div>
+  </aside>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <main>
+
+    <!-- ── FEED ── -->
+    <section class="page active" id="page-feed">
+      <div class="page-head">
+        <div><h1>Good afternoon, Asad 👋</h1><div class="ph-sub">Here's what Artemis found on <b style="color:var(--t1)">The British Feed</b> today.</div></div>
+        <button class="btn arte" onclick="goPage('predict')"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg> Score a draft</button>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi"><div class="k-label">Reach · 7d</div><div class="k-value">1.42M</div><div class="k-delta up">▲ 12.4%</div></div>
+        <div class="kpi"><div class="k-label">Engagement · 7d</div><div class="k-value">86.3K</div><div class="k-delta up">▲ 8.1%</div></div>
+        <div class="kpi"><div class="k-label">Sentiment</div><div class="k-value" style="color:var(--teal)">+71</div><div class="k-delta up">▲ 3 pts</div></div>
+        <div class="kpi"><div class="k-label">Predicted next post</div><div class="k-value" style="color:var(--warn)">62<span style="font-size:14px;color:var(--t3)">/100</span></div><div class="k-delta down">▼ needs work</div></div>
+      </div>
+
+      <div class="feed-card">
+        <div class="fc-top">
+          <div class="fc-ico" style="background:var(--warn-bg)"><svg viewBox="0 0 24 24" stroke="var(--warn)"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></div>
+          <div class="fc-meta"><div class="fc-title">Your scheduled post for tomorrow looks weak</div><div class="fc-time">Predictions · just now</div></div>
+          <span class="pill warn">Heads-up</span>
+        </div>
+        <div class="fc-body">The 9:00 AM post <b>"Top 10 castles to visit"</b> is predicted at <b>62/100</b> — below your 30-day average of 74. The hook is generic and the image is text-heavy, which your audience scrolls past.</div>
+        <div class="fc-action">
+          <button class="btn primary sm" onclick="goPage('predict')">Improve the draft</button>
+          <button class="btn sm" onclick="goPage('arte')">Ask Art-E why</button>
+          <span class="confidence">Confidence <b>87%</b></span>
+        </div>
+      </div>
+
+      <div class="feed-card">
+        <div class="fc-top">
+          <div class="fc-ico" style="background:var(--teal-bg)"><svg viewBox="0 0 24 24" stroke="var(--teal)"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.5-3.5L6 23"/></svg></div>
+          <div class="fc-meta"><div class="fc-title">Sunset photos are quietly carrying your page</div><div class="fc-time">Image signals · 2h ago</div></div>
+          <span class="pill teal">Insight</span>
+        </div>
+        <div class="fc-body">Posts with <b>warm outdoor imagery</b> earned <b>2.3×</b> the reach of everything else this month. Your audience reacts to golden-hour photography even with simple captions.</div>
+        <div class="fc-action">
+          <button class="btn sm">See the 6 posts</button>
+          <span class="confidence">Confidence <b>92%</b></span>
+        </div>
+      </div>
+
+      <div class="feed-card">
+        <div class="fc-top">
+          <div class="fc-ico" style="background:var(--arte-bg)"><svg viewBox="0 0 24 24" stroke="var(--arte-1)"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+          <div class="fc-meta"><div class="fc-title">Your reels hold attention 41% longer than page average</div><div class="fc-time">Video intelligence · 5h ago</div></div>
+          <span class="pill arte">Video</span>
+        </div>
+        <div class="fc-body">Viewers stay past the 3-second mark when you open on a <b>moving landscape shot</b>. Reels opening with talking-head intros lose 60% of viewers immediately.</div>
+        <div class="fc-action">
+          <button class="btn sm" onclick="goPage('arte')">Get a reel formula</button>
+          <span class="confidence">Confidence <b>84%</b></span>
+        </div>
+      </div>
+
+      <div class="feed-card">
+        <div class="fc-top">
+          <div class="fc-ico" style="background:var(--blue-bg)"><svg viewBox="0 0 24 24" stroke="#7ab4f5"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M9 12v3a2 2 0 002 2h3"/></svg></div>
+          <div class="fc-meta"><div class="fc-title">3 pages with strong audience overlap joined Discovery</div><div class="fc-time">Discovery · yesterday</div></div>
+          <span class="pill blue">Collab</span>
+        </div>
+        <div class="fc-body"><b>Hidden Britain</b> shares 64% of your active audience. A collaboration could expose you to ~180K new followers in your exact niche.</div>
+        <div class="fc-action">
+          <button class="btn sm" onclick="goPage('discovery')">View matches</button>
+          <span class="confidence">Confidence <b>78%</b></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ART-E ── -->
+    <section class="page" id="page-arte">
+      <div class="page-head">
+        <div><h1>Art-E</h1><div class="ph-sub">Your predictor and advisor — ask anything, get an answer with a recommendation.</div></div>
+      </div>
+      <div class="chat-card">
+        <div class="chat-head">
+          <div class="arte-av"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+          <div><div style="font-weight:700;font-size:var(--fs-md)">Art-E</div><div style="font-size:var(--fs-xs);color:var(--teal)">● Watching The British Feed in real time</div></div>
+        </div>
+        <div class="chat-body" id="chatBody">
+          <div class="msg arte">Afternoon, Asad. I've gone through today's numbers — want the quick version, or shall I score the draft you saved last night?</div>
+          <div class="msg user">Score my draft</div>
+          <div class="msg arte">
+            Here's my read on <b>"Top 10 castles to visit"</b>:
+            <div class="score-line"><div class="score-bar"><i id="arteScore"></i></div><span class="score-num">62</span></div>
+            It'll likely <b>underperform</b> your average. The hook is a generic listicle opener, and list posts without a striking lead image have dropped 28% on your page since April. <br><br><b>My suggestion:</b> open with your Bamburgh sunset shot and reframe the hook to <i>"The castle even locals don't know about…"</i> — that pattern is running at <b>+38% reach</b> for you. Predicted score after the change: <b style="color:var(--teal)">81</b>.
+          </div>
+        </div>
+        <div class="chips">
+          <button class="chip" onclick="arteAsk(this)">When should I post next?</button>
+          <button class="chip" onclick="arteAsk(this)">Why did Monday's reel spike?</button>
+          <button class="chip" onclick="arteAsk(this)">What's my audience mood this week?</button>
+        </div>
+        <div class="chat-input">
+          <input id="arteInput" placeholder="Ask Art-E…" onkeydown="if(event.key==='Enter')arteSend()">
+          <button class="send-btn" onclick="arteSend()"><svg viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PREDICTIONS ── -->
+    <section class="page" id="page-predict">
+      <div class="page-head">
+        <div><h1>Predictions</h1><div class="ph-sub">Know how a post will do — before you publish it.</div></div>
+        <span class="pill teal">Core MVP · the wedge</span>
+      </div>
+      <div class="pred-grid">
+        <div class="card composer">
+          <div class="card-title" style="margin-bottom:4px">Draft a post</div>
+          <div class="card-sub" style="margin-bottom:12px">Artemis scores it live as you type.</div>
+          <textarea id="draftTa" oninput="liveScore()">Top 10 castles to visit in Northumberland this summer 🏰 Which one is your favourite? Let us know below! #castles #northumberland</textarea>
+          <div style="display:flex;gap:9px;margin-top:12px;flex-wrap:wrap">
+            <button class="btn sm"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.5-3.5L6 23"/></svg> Add image</button>
+            <button class="btn sm"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg> Add video</button>
+            <button class="btn primary sm" style="margin-left:auto" onclick="goPage('arte')">Ask Art-E to improve it</button>
+          </div>
+          <div style="border-top:1px solid var(--line);margin-top:16px;padding-top:14px">
+            <div class="card-sub" style="margin-bottom:10px;font-weight:700;color:var(--t1)">Why this score</div>
+            <div class="factor"><div class="f-row"><b>Hook strength</b><span id="f1n">41/100</span></div><div class="f-bar"><i id="f1" style="background:var(--warn)"></i></div></div>
+            <div class="factor"><div class="f-row"><b>Visual appeal</b><span id="f2n">55/100</span></div><div class="f-bar"><i id="f2" style="background:var(--warn)"></i></div></div>
+            <div class="factor"><div class="f-row"><b>Topic fit for your audience</b><span id="f3n">88/100</span></div><div class="f-bar"><i id="f3" style="background:var(--teal)"></i></div></div>
+            <div class="factor" style="margin-bottom:0"><div class="f-row"><b>Timing (9:00 AM slot)</b><span id="f4n">58/100</span></div><div class="f-bar"><i id="f4" style="background:var(--warn)"></i></div></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="card">
+            <div class="card-title">Predicted performance</div>
+            <div class="gauge-wrap">
+              <div class="gauge">
+                <svg viewBox="0 0 170 170">
+                  <path d="M 15 85 A 70 70 0 0 1 155 85" fill="none" stroke="#222831" stroke-width="14" stroke-linecap="round"/>
+                  <path id="gaugeArc" d="M 15 85 A 70 70 0 0 1 155 85" fill="none" stroke="url(#gg)" stroke-width="14" stroke-linecap="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+                  <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#F5A623"/><stop offset="100%" stop-color="#00C4A0"/></linearGradient></defs>
+                </svg>
+                <div class="g-num" id="gNum">62</div>
+              </div>
+              <div class="g-verdict" id="gVerdict" style="color:var(--warn)">Below your average — fixable</div>
+              <div style="font-size:var(--fs-xs);color:var(--t3);margin-top:4px">vs your 30-day average of 74</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="font-size:var(--fs-md)">Scheduled this week</div>
+            <div style="margin-top:8px">
+              <div class="sched-row"><span style="color:var(--t3);font-size:var(--fs-sm);width:54px">Tue 9am</span> Castles listicle <span class="sched-score" style="color:var(--warn)">62</span></div>
+              <div class="sched-row"><span style="color:var(--t3);font-size:var(--fs-sm);width:54px">Wed 7pm</span> Coastal reel <span class="sched-score" style="color:var(--teal)">85</span></div>
+              <div class="sched-row"><span style="color:var(--t3);font-size:var(--fs-sm);width:54px">Fri 6pm</span> Pub quiz post <span class="sched-score" style="color:var(--teal)">79</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ALERTS ── -->
+    <section class="page" id="page-alerts">
+      <div class="page-head">
+        <div><h1>Alerts</h1><div class="ph-sub">Artemis watches your page in real time — every alert comes with a suggested action.</div></div>
+        <span class="pill crisis">3 need attention</span>
+      </div>
+
+      <div class="alert-card viral">
+        <div class="al-ico" style="background:var(--teal-bg)"><svg viewBox="0 0 24 24" stroke="var(--teal)"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+        <div class="al-body">
+          <div class="al-title">Your coastal reel is going viral <span class="pill teal">happening now</span></div>
+          <div class="al-text">Shares are running at <b>6.2× normal velocity</b> — currently 11.4K reactions in 90 minutes. Trajectory suggests <b>800K–1.1M reach</b> in 24h.</div>
+          <div class="al-fix"><b>Act now:</b> reply to the top 5 comments in the next hour (replies during a spike lift reach ~15%), and pin your best-performing follow-up reel to the page.</div>
+          <div class="al-actions"><button class="btn primary sm">Open the post</button><button class="btn sm" onclick="goPage('arte')">Art-E, draft replies</button></div>
+        </div>
+        <canvas class="spark" id="spark1"></canvas>
+      </div>
+
+      <div class="alert-card crisis">
+        <div class="al-ico" style="background:var(--crisis-bg)"><svg viewBox="0 0 24 24" stroke="var(--crisis)"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></div>
+        <div class="al-body">
+          <div class="al-title">Comments turning negative fast on yesterday's post <span class="pill crisis">brand risk</span></div>
+          <div class="al-text">Negative sentiment jumped from <b>8% → 34%</b> in 3 hours on <b>"New parking charges"</b>. Toxicity is rising and two local news pages have shared it.</div>
+          <div class="al-fix"><b>Act now:</b> post a short clarifying comment from the page (a draft is ready in Art-E), and turn on comment moderation for the next 12 hours.</div>
+          <div class="al-actions"><button class="btn primary sm">Review comments</button><button class="btn sm" onclick="goPage('arte')">See Art-E's draft</button></div>
+        </div>
+        <canvas class="spark" id="spark2"></canvas>
+      </div>
+
+      <div class="alert-card warn">
+        <div class="al-ico" style="background:var(--warn-bg)"><svg viewBox="0 0 24 24" stroke="var(--warn)"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <div class="al-body">
+          <div class="al-title">You haven't posted in 3 days — momentum is cooling</div>
+          <div class="al-text">Your reach decays ~9% per silent day. The audience is most active <b>tonight 7–9 PM</b>.</div>
+          <div class="al-fix"><b>Suggestion:</b> the coastal reel follow-up scores <b>85</b> — schedule it for 7:15 PM tonight.</div>
+          <div class="al-actions"><button class="btn primary sm" onclick="goPage('predict')">Schedule it</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── DISCOVERY ── -->
+    <section class="page" id="page-discovery">
+      <div class="page-head">
+        <div><h1>Discovery</h1><div class="ph-sub">Pages whose audience overlaps yours — potential collaborations that grow you both.</div></div>
+      </div>
+      <div class="preview-banner">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+        MVP preview — browse and save pages now. Matching, messaging and the full collaboration engine arrive in Phase 2.
+      </div>
+      <div class="disc-grid" id="discGrid"></div>
+    </section>
+
+    <!-- ── ANALYTICS (thin) ── -->
+    <section class="page" id="page-analytics">
+      <div class="page-head">
+        <div><h1>Analytics</h1><div class="ph-sub">The essentials at a glance — Art-E carries the deep analysis.</div></div>
+      </div>
+      <div class="subtabs">
+        <button class="subtab active" onclick="anTab(this,'overview')">Overview</button>
+        <button class="subtab" onclick="anTab(this,'video')">Video</button>
+        <button class="subtab" onclick="anTab(this,'virality')">Virality</button>
+      </div>
+      <div class="an-grid">
+        <div class="card">
+          <div class="card-title" id="anChartTitle">Reach · last 30 days</div>
+          <div class="chart-box"><canvas id="reachChart"></canvas></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="card">
+            <div class="card-title" style="font-size:var(--fs-md)">Sentiment split</div>
+            <div class="chart-box" style="height:180px"><canvas id="sentChart"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="font-size:var(--fs-md)">This week</div>
+            <div style="margin-top:10px;display:grid;gap:9px">
+              <div style="display:flex;justify-content:space-between;font-size:var(--fs-base)"><span style="color:var(--t2)">Best post</span><b>Coastal reel · 85</b></div>
+              <div style="display:flex;justify-content:space-between;font-size:var(--fs-base)"><span style="color:var(--t2)">New followers</span><b style="color:var(--teal)">+4,218</b></div>
+              <div style="display:flex;justify-content:space-between;font-size:var(--fs-base)"><span style="color:var(--t2)">Avg. prediction accuracy</span><b style="color:var(--teal)">±9 pts</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="thin-note">
+        <svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>
+        Thin by design — for anything deeper, just ask Art-E. "Why did reach dip last Tuesday?" beats any chart.
+      </div>
+    </section>
+
+    <div class="mock-foot">MVP mockup · mirrors the master-plan MVP scope (S6–S8 surfaces) · launches 28 Nov 2026 · <a href="mockup_chooser.html">other mockups</a></div>
+  </main>
+
+  <!-- ═══════════ RIGHT RAIL ═══════════ -->
+  <aside class="right-rail">
+    <div class="rr-card">
+      <div class="rr-title">What ships in the MVP</div>
+      <div class="map-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Intelligence feed + image signals <span class="sprint-tag">S6</span></div>
+      <div class="map-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Virality score + Predictions <span class="sprint-tag">S7</span></div>
+      <div class="map-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Video intelligence panel <span class="sprint-tag">S7</span></div>
+      <div class="map-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Draft scoring before publish <span class="sprint-tag">S8</span></div>
+      <div class="map-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Weak-post warnings <span class="sprint-tag">S8</span></div>
+      <div class="map-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Real-time alerts <span class="sprint-tag">MVP</span></div>
+      <div class="map-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Discovery (view-only) <span class="sprint-tag">MVP</span></div>
+    </div>
+    <div class="rr-card">
+      <div class="rr-title">Your audience is awake</div>
+      <div style="font-size:var(--fs-sm);color:var(--t2);margin-bottom:8px">Tonight's peak: <b style="color:var(--teal)">7–9 PM</b></div>
+      <div class="heat" id="heatRow"></div>
+      <div class="heat-lbls"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+    </div>
+    <div class="rr-card" style="background:linear-gradient(135deg,rgba(124,92,191,.10),rgba(0,196,160,.07))">
+      <div class="rr-title" style="color:#c9b8f0">Art-E says</div>
+      <div style="font-size:var(--fs-base);color:var(--t1);line-height:1.55">"Fix tomorrow's draft and ride tonight's viral spike — those two moves alone are worth more than everything else this week."</div>
+      <button class="btn arte sm" style="margin-top:11px" onclick="goPage('arte')">Open Art-E</button>
+    </div>
+  </aside>
+</div>
+
+<!-- ═══════════ MOBILE NAV ═══════════ -->
+<nav class="mobile-nav">
+  <a class="mnav-item active" data-page="feed" onclick="goPage('feed')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Feed</a>
+  <a class="mnav-item" data-page="arte" onclick="goPage('arte')"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>Art-E</a>
+  <a class="mnav-item" data-page="predict" onclick="goPage('predict')"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l3-3 4 4 5-6"/></svg>Predict</a>
+  <a class="mnav-item" data-page="alerts" onclick="goPage('alerts')"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>Alerts</a>
+  <a class="mnav-item" data-page="discovery" onclick="goPage('discovery')"><svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="17" r="3"/><path d="M9 12v3a2 2 0 002 2h3"/></svg>Discover</a>
+</nav>
+
+<script>
+/* ── PAGE SWITCHING ── */
+function goPage(p){
+  document.querySelectorAll('.page').forEach(s=>s.classList.toggle('active', s.id==='page-'+p));
+  document.querySelectorAll('.nav-item,.mnav-item').forEach(n=>n.classList.toggle('active', n.dataset.page===p));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(p==='predict') setTimeout(animatePredict,120);
+  if(p==='arte') setTimeout(()=>{const b=document.getElementById('arteScore'); if(b) b.style.width='62%';},150);
+  if(p==='analytics') setTimeout(initCharts,80);
+  if(p==='alerts') setTimeout(drawSparks,80);
+}
+
+/* ── COUNTDOWN ── */
+(function(){
+  const days=Math.max(0,Math.ceil((new Date('2026-11-28')-new Date())/86400000));
+  document.getElementById('cdNum').textContent=days;
+})();
+
+/* ── ART-E ── */
+const ARTE_REPLIES={
+ "When should I post next?":"Tonight, <b>7:15 PM</b>. Your audience peaks 7–9 PM on weekdays, and you have an 85-scoring reel ready. Posting in that window has historically added <b>+22% reach</b> for you.",
+ "Why did Monday's reel spike?":"Three things lined up: a <b>moving landscape opener</b> (your strongest 3-second hook), posting at 7:40 PM (peak), and a question caption that pulled <b>3.1× comments</b>. The model weights the opener highest — replicate that first.",
+ "What's my audience mood this week?":"Warmer than usual — sentiment is <b>+71</b>, up 3 points. Nostalgia and local-pride topics are driving it. One watch-out: the parking-charges post is pulling the average down, see <b>Alerts</b>."
+};
+function arteReply(q){
+  const body=document.getElementById('chatBody');
+  const u=document.createElement('div');u.className='msg user';u.textContent=q;body.appendChild(u);
+  const a=document.createElement('div');a.className='msg arte';
+  a.innerHTML=ARTE_REPLIES[q]||"Good question — in the live product I'd pull your page data and answer with a recommendation. (This is the mockup, so my crystal ball is cardboard. 🔮)";
+  setTimeout(()=>{body.appendChild(a);body.scrollTop=body.scrollHeight;},420);
+  body.scrollTop=body.scrollHeight;
+}
+function arteAsk(el){arteReply(el.textContent.trim());}
+function arteSend(){const i=document.getElementById('arteInput');const v=i.value.trim();if(!v)return;i.value='';arteReply(v);}
+
+/* ── PREDICTIONS ── */
+function animatePredict(){
+  setGauge(62);
+  setFactor('f1',41,'warn');setFactor('f2',55,'warn');setFactor('f3',88,'teal');setFactor('f4',58,'warn');
+}
+function setGauge(v){
+  const arc=document.getElementById('gaugeArc');
+  arc.style.transition='stroke-dashoffset 1.1s cubic-bezier(.2,.8,.2,1)';
+  arc.style.strokeDashoffset=220-(220*v/100);
+  document.getElementById('gNum').textContent=v;
+  const verdict=document.getElementById('gVerdict');
+  if(v>=75){verdict.textContent='Strong — publish with confidence';verdict.style.color='var(--teal)';}
+  else if(v>=60){verdict.textContent='Below your average — fixable';verdict.style.color='var(--warn)';}
+  else{verdict.textContent='Likely to underperform';verdict.style.color='var(--crisis)';}
+}
+function setFactor(id,v,c){
+  const bar=document.getElementById(id);
+  bar.style.width=v+'%';
+  bar.style.background=c==='teal'?'var(--teal)':'var(--warn)';
+  document.getElementById(id+'n').textContent=v+'/100';
+}
+let scoreTimer=null;
+function liveScore(){
+  clearTimeout(scoreTimer);
+  scoreTimer=setTimeout(()=>{
+    const len=document.getElementById('draftTa').value.length;
+    const v=Math.max(35,Math.min(90, 40 + Math.round(len/6)));
+    setGauge(v);
+  },350);
+}
+
+/* ── DISCOVERY ── */
+const DISC=[
+ {n:'Hidden Britain',i:'HB',c:'#4A90D9',niche:'Travel · 412K followers',o:64,tags:['castles','coastal','history']},
+ {n:'Coastal Walks UK',i:'CW',c:'#00C4A0',niche:'Outdoors · 268K followers',o:57,tags:['walking','beaches','photography']},
+ {n:'British Banter',i:'BB',c:'#F5A623',niche:'Humour · 890K followers',o:51,tags:['memes','local pride']},
+ {n:'Pub Finds',i:'PF',c:'#7C5CBF',niche:'Food & drink · 195K followers',o:48,tags:['pubs','reviews']},
+ {n:'Yorkshire Life',i:'YL',c:'#E53935',niche:'Regional · 330K followers',o:44,tags:['yorkshire','community']},
+ {n:'Rail Adventures',i:'RA',c:'#4A90D9',niche:'Travel · 122K followers',o:39,tags:['trains','day trips']},
+];
+(function(){
+  const g=document.getElementById('discGrid');
+  g.innerHTML=DISC.map((d,ix)=>`
+   <div class="disc-card">
+     <button class="star-btn" onclick="this.classList.toggle('on')" title="Save for collab"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+     <div class="disc-av" style="background:${d.c}22;color:${d.c}">${d.i}</div>
+     <div class="disc-name">${d.n}</div>
+     <div class="disc-niche">${d.niche}</div>
+     <div class="overlap">
+       <div class="o-row"><span>Audience overlap</span><b>${d.o}%</b></div>
+       <div class="f-bar"><i style="width:${d.o}%;background:var(--teal)"></i></div>
+     </div>
+     <div class="disc-tags">${d.tags.map(t=>`<span class="dtag">${t}</span>`).join('')}</div>
+     <button class="btn sm" style="width:100%;justify-content:center">View page</button>
+   </div>`).join('');
+})();
+
+/* ── HEATMAP ── */
+(function(){
+  const vals=[0.35,0.5,0.45,0.6,0.8,1,0.7];
+  document.getElementById('heatRow').innerHTML=vals.map(v=>`<i style="opacity:${0.15+v*0.85}"></i>`).join('');
+})();
+
+/* ── CHARTS ── */
+let _charts={};
+function initCharts(){
+  if(typeof Chart==='undefined')return;
+  if(!_charts.reach){
+    const ctx=document.getElementById('reachChart');
+    const days=[...Array(30)].map((_,i)=>i+1);
+    const data=days.map(i=>34+Math.sin(i/3.2)*9+Math.random()*7+(i>24?14:0));
+    _charts.reach=new Chart(ctx,{type:'line',data:{labels:days,datasets:[{data,borderColor:'#00C4A0',backgroundColor:'rgba(0,196,160,0.10)',fill:true,tension:.4,pointRadius:0,borderWidth:2}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{x:{display:false},y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#5F6B7A',font:{size:10},callback:v=>v+'K'}}}}});
+  }
+  if(!_charts.sent){
+    const ctx2=document.getElementById('sentChart');
+    _charts.sent=new Chart(ctx2,{type:'doughnut',data:{labels:['Positive','Neutral','Negative'],datasets:[{data:[58,31,11],backgroundColor:['#00C4A0','#3a4452','#E53935'],borderWidth:0}]},
+      options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{position:'bottom',labels:{color:'#9AA4B2',font:{size:10},boxWidth:9,padding:10}}}}});
+  }
+}
+function anTab(el,which){
+  document.querySelectorAll('.subtab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  const titles={overview:'Reach · last 30 days',video:'Video watch-through · last 30 days',virality:'Virality score trend · last 30 days'};
+  document.getElementById('anChartTitle').textContent=titles[which];
+}
+
+/* ── ALERT SPARKLINES ── */
+function drawSparks(){
+  const draw=(id,vals,color)=>{
+    const c=document.getElementById(id);if(!c||c._drawn)return;c._drawn=true;
+    const dpr=window.devicePixelRatio||1, w=c.clientWidth*dpr, h=c.clientHeight*dpr;
+    c.width=w;c.height=h;
+    const ctx=c.getContext('2d');const max=Math.max(...vals);
+    ctx.strokeStyle=color;ctx.lineWidth=2*dpr;ctx.lineJoin='round';ctx.beginPath();
+    vals.forEach((v,i)=>{const x=(i/(vals.length-1))*(w-4)+2, y=h-4-(v/max)*(h-8); i?ctx.lineTo(x,y):ctx.moveTo(x,y);});
+    ctx.stroke();
+  };
+  draw('spark1',[2,3,3,5,8,14,22,38,61,90],'#00C4A0');
+  draw('spark2',[4,5,6,9,15,19,28,34],'#E53935');
+}
+</script>
+</body>
+</html>
