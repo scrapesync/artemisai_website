@@ -628,5 +628,75 @@ document.querySelectorAll('[data-tab]').forEach(t => {
 renderConvList('all');
 selectConv('fn');
 </script>
+
+<!-- FABLE: Art-E group-chat popup (bottom-left) -->
+<style id="fbl-msg-arte">
+.fbl-gpop{position:fixed;left:20px;bottom:20px;z-index:300;font-family:inherit}
+.fbl-gpop .pill{display:flex;align-items:center;gap:8px;cursor:pointer;border:none;font-family:inherit;
+  background:linear-gradient(135deg,#5A3FA0,#00A085);color:#fff;font-weight:800;font-size:13px;
+  padding:10px 18px 10px 12px;border-radius:9999px;box-shadow:0 10px 28px rgba(90,63,160,.45);
+  transition:transform .15s ease}
+.fbl-gpop .pill:hover{transform:translateY(-2px)}
+.fbl-gpop .orb{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center}
+.fbl-gpop .orb svg{width:13px;height:13px;fill:#fff}
+.fbl-gcard{position:absolute;left:0;bottom:54px;width:290px;border-radius:16px;overflow:hidden;
+  background:var(--bg-elev,#1c2230);border:1px solid var(--bdr,#323a4d);
+  box-shadow:0 18px 50px rgba(0,0,0,.5);opacity:0;transform:translateY(8px) scale(.97);
+  pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+.fbl-gpop.open .fbl-gcard{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.fbl-gcard .gh{display:flex;align-items:center;gap:8px;padding:11px 14px;
+  background:rgba(90,63,160,.14);border-bottom:1px solid var(--bdr,#323a4d)}
+.fbl-gcard .gh b{font-size:13px;color:var(--t1,#e8ecf4)}
+.fbl-gcard .gh .lt{margin-left:auto;font-size:8.5px;font-weight:800;letter-spacing:.07em;
+  color:#1b1230;background:#a78bfa;padding:2px 7px;border-radius:9999px}
+.fbl-gcard button.act{display:flex;align-items:center;gap:9px;width:100%;text-align:left;cursor:pointer;
+  background:none;border:none;border-bottom:1px solid var(--bdr,#323a4d);font-family:inherit;
+  padding:11px 14px;font-size:12.5px;font-weight:600;color:var(--t1,#e8ecf4)}
+.fbl-gcard button.act:hover{background:rgba(255,255,255,.04)}
+.fbl-gcard button.act svg{width:14px;height:14px;stroke:#00C4A0;stroke-width:2;fill:none;flex-shrink:0}
+.fbl-gcard .ans{display:none;padding:12px 14px;font-size:12.5px;line-height:1.55;color:var(--t2,#aab4c6)}
+.fbl-gcard .ans b{color:var(--t1,#e8ecf4)}
+.fbl-gcard.answered button.act{display:none}
+.fbl-gcard.answered .ans{display:block}
+.fbl-gcard .back{display:none;border:none;background:none;cursor:pointer;color:#00C4A0;
+  font-weight:700;font-size:11.5px;padding:0 14px 12px;font-family:inherit}
+.fbl-gcard.answered .back{display:block}
+</style>
+<div class="fbl-gpop" id="fblGpop">
+  <div class="fbl-gcard" id="fblGcard">
+    <div class="gh"><b>Art-E \u00b7 this chat</b><span class="lt">LATER</span></div>
+    <button class="act" data-a="sum"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/></svg>Summarise the chat</button>
+    <button class="act" data-a="draft"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Draft a reply for me</button>
+    <button class="act" data-a="need"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>What needs me here?</button>
+    <div class="ans" id="fblGans"></div>
+    <button class="back" id="fblGback">\u2190 back</button>
+  </div>
+  <button class="pill" id="fblGpill" aria-label="Ask Art-E about this chat">
+    <span class="orb"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></span>
+    Art-E
+  </button>
+</div>
+<script id="fbl-msg-arte-js">
+(function(){
+"use strict";
+var pop=document.getElementById('fblGpop'),card=document.getElementById('fblGcard'),
+    ans=document.getElementById('fblGans');
+var ANSWERS={
+ sum:'<b>Summary of the last 24h:</b> Jill confirmed the 6PM slot for Drinking Memes, Faheem flagged the crisis thread is cooling (\u22128 comments/hr), and the Kelpie collab brief is waiting on one approval. 14 messages, 2 decisions made, 1 pending.',
+ draft:'<b>Draft reply (in your voice):</b> \u201cAgreed on 6PM \u2014 locking it in. I\u2019ll take the crisis thread reply now and report back within the hour. Kelpie brief: approving with one caption tweak.\u201d \u00b7 Tap send in the composer to use it.',
+ need:'<b>2 things need you:</b> approve the Kelpie collab brief (waiting 6h), and confirm tomorrow\u2019s posting window \u2014 Jill asked twice. Everything else is handled or cooling.'
+};
+document.getElementById('fblGpill').onclick=function(){pop.classList.toggle('open');card.classList.remove('answered');};
+card.addEventListener('click',function(e){
+  var b=e.target.closest('button.act');
+  if(b){ans.innerHTML=ANSWERS[b.dataset.a]||'';card.classList.add('answered');}
+});
+document.getElementById('fblGback').onclick=function(){card.classList.remove('answered');};
+document.addEventListener('click',function(e){
+  if(!pop.contains(e.target))pop.classList.remove('open');
+});
+})();
+</script>
+
 </body>
 </html>

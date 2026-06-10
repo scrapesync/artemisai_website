@@ -11063,5 +11063,211 @@ function tokens(text){
 })();
 </script>
 
+
+<!-- FABLE DESIGN PASS 10: visual briefings (numbers, not prose), story
+     viewer carries the poster art, flame guarantee + hard containment on
+     predict, Actions & Results tracker in To-do, group-chat Art-E popup
+     (in mockup_messages.html). -->
+<style id="fable-design10">
+/* hard containment: nothing escapes the predict bubble, ever */
+.fbl-predict :is(div,span,b,small,button,a){min-width:0;overflow-wrap:anywhere}
+.fbl-predict svg{max-width:100%;height:auto}
+.fbl-predict .fbl-tok{overflow-wrap:normal;word-break:keep-all}
+/* story viewer: poster art layer behind content */
+.story-viewer-body{position:relative;overflow:hidden}
+.fbl-sv-art{position:absolute;inset:0;z-index:0;pointer-events:none}
+.fbl-sv-art svg{width:100%;height:100%;display:block}
+.story-viewer-body>*:not(.fbl-sv-art){position:relative;z-index:1}
+/* visual briefings */
+.fbl-brow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+@media(max-width:680px){.fbl-brow{grid-template-columns:1fr}}
+.fbl-bstat{border:1px solid var(--bdr-soft);border-radius:12px;padding:12px 14px;background:var(--bg-elev-2)}
+.fbl-bstat b{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--t1)}
+.fbl-bstat b.up{color:var(--opp)}.fbl-bstat b.purp{color:var(--arte-1)}
+.fbl-bstat span{font-size:11px;color:var(--t3)}
+.fbl-bchart{border:1px solid var(--bdr-soft);border-radius:12px;padding:12px 14px 8px;background:var(--bg-elev-2);margin-bottom:10px}
+.fbl-bchart h5{margin:0 0 8px;font-size:10px;font-weight:800;letter-spacing:.07em;color:var(--t3);text-transform:uppercase}
+.fbl-bchart svg{width:100%;height:auto;display:block}
+.fbl-brief .tk{font-size:12.5px;color:var(--t2);margin:8px 0 0}
+.fbl-brief .tk::first-letter{font-size:inherit;float:none;padding:0;color:inherit;font-weight:inherit;line-height:inherit}
+.fbl-brief .tk b{color:var(--t1)}
+/* Actions & results */
+.fbl-results{background:var(--bg-elev);border:1px solid var(--bdr-soft);border-left:3px solid var(--opp);
+  border-radius:16px;padding:18px 20px;margin-bottom:18px}
+html[data-theme="light"] .fbl-results{background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.06)}
+.fbl-results .rh{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.fbl-results .rh b{font-size:15px;font-weight:800;color:var(--t1)}
+.fbl-results .rsum{display:grid;grid-template-columns:auto 1fr 1fr;gap:14px;align-items:center;margin-bottom:14px}
+@media(max-width:760px){.fbl-results .rsum{grid-template-columns:1fr}}
+.fbl-results .wring{position:relative;width:74px;height:74px;border-radius:50%;
+  background:conic-gradient(var(--opp) calc(var(--v)*1%),var(--bdr-soft) 0);display:grid;place-items:center}
+.fbl-results .wring::before{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--bg-elev)}
+html[data-theme="light"] .fbl-results .wring::before{background:#fff}
+.fbl-results .wring b{position:relative;font-size:17px;font-weight:800;color:var(--t1)}
+.fbl-rrow{display:flex;align-items:center;gap:11px;padding:10px 2px;border-top:1px solid var(--bdr-soft)}
+.fbl-rrow .ic{width:30px;height:30px;border-radius:9px;flex-shrink:0;display:grid;place-items:center;
+  color:var(--rc);background:color-mix(in srgb,var(--rc) 12%,transparent)}
+.fbl-rrow .ic svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none}
+.fbl-rrow .tt{flex:1;font-size:13px;font-weight:600;color:var(--t1)}
+.fbl-rrow .tt small{display:block;font-weight:500;font-size:11px;color:var(--t3)}
+.fbl-rchip{flex-shrink:0;font-size:11.5px;font-weight:800;padding:5px 11px;border-radius:9999px}
+.fbl-rchip.up{color:var(--opp);background:var(--opp-bg)}
+.fbl-rchip.wait{color:var(--warn);background:var(--warn-bg)}
+.fbl-rchip.neut{color:var(--t2);background:var(--bg-elev-2);border:1px solid var(--bdr-soft)}
+</style>
+<script id="fable-design10-js">
+(function(){
+"use strict";
+function el(h){var d=document.createElement('div');d.innerHTML=h;return d.firstElementChild;}
+
+/* ═══ 1. Story viewer carries the poster art ═══ */
+var SVSCENES=[
+ {g1:'#7a4a00',g2:'#2a1500',em:'\ud83c\udf7a',fx:'rays'},
+ {g1:'#7a1020',g2:'#2a0508',em:'\ud83d\udea8',fx:'pulse'},
+ {g1:'#0c5c34',g2:'#06281a',em:'\ud83d\ude0a',fx:'burst'},
+ {g1:'#3b2a6d',g2:'#160f2e',em:'\u23f0',fx:'rays'},
+ {g1:'#0c3a5c',g2:'#061a2e',em:'\ud83e\udd1d',fx:'links'},
+ {g1:'#5c0c3a',g2:'#2e0620',em:'\ud83d\udcc8',fx:'burst'}
+];
+function sceneSVG(s,id){
+  var fx='';
+  if(s.fx==='rays')for(var r=0;r<7;r++)fx+='<rect x="188" y="-80" width="9" height="320" fill="rgba(255,255,255,.05)" transform="rotate('+(r*26)+' 195 120)"/>';
+  if(s.fx==='burst')for(var b2=0;b2<12;b2++)fx+='<circle cx="'+(40+b2*30)+'" cy="'+(50+(b2%4)*60)+'" r="4" fill="rgba(255,255,255,.13)"/>';
+  if(s.fx==='pulse')fx='<circle cx="195" cy="170" r="70" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="3"/><circle cx="195" cy="170" r="110" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="3"/>';
+  if(s.fx==='links')fx='<path d="M60 120 L195 190 L330 110 M95 280 L195 190 L310 290" stroke="rgba(255,255,255,.15)" stroke-width="3" fill="none"/><circle cx="60" cy="120" r="8" fill="rgba(255,255,255,.28)"/><circle cx="330" cy="110" r="8" fill="rgba(255,255,255,.28)"/><circle cx="195" cy="190" r="10" fill="rgba(255,255,255,.38)"/>';
+  return '<svg viewBox="0 0 390 600" preserveAspectRatio="xMidYMid slice">'
+   +'<defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+s.g1+'"/><stop offset="1" stop-color="'+s.g2+'"/></linearGradient></defs>'
+   +'<rect width="390" height="600" fill="url(#'+id+')"/>'+fx
+   +'<text x="195" y="190" font-size="84" text-anchor="middle" opacity="0.85">'+s.em+'</text></svg>';
+}
+(function(){
+  var orig=window.openStoryByIndex;
+  if(typeof orig!=='function')return;
+  window.openStoryByIndex=function(i){
+    orig.apply(this,arguments);
+    var body=document.getElementById('svBody');
+    if(!body)return;
+    var s=SVSCENES[i%SVSCENES.length];
+    var art=body.querySelector('.fbl-sv-art');
+    if(!art){art=el('<div class="fbl-sv-art"></div>');body.insertBefore(art,body.firstChild);}
+    art.innerHTML=sceneSVG(s,'svsc'+i);
+  };
+})();
+
+/* ═══ 2. Flame guarantee on predict (top words always burn) ═══ */
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.composer-btn.predict'))return;
+  setTimeout(function(){
+    var card=document.querySelector('.fbl-predict.done');
+    if(!card)return;
+    var toks=Array.from(card.querySelectorAll('.fbl-tok'));
+    if(!toks.length)return;
+    if(!toks.some(function(t){return t.classList.contains('good');})){
+      toks.slice(0,2).forEach(function(t){t.classList.add('good');t.title='\ud83d\udd25 Strongest words in this caption';});
+    }
+    if(!toks.some(function(t){return t.classList.contains('bad');})){
+      var longest=toks.reduce(function(a,b){return b.textContent.length>a.textContent.length?b:a;});
+      if(!longest.classList.contains('good')){longest.classList.add('bad');longest.title='Weakest word \u2014 consider trimming';}
+    }
+  },2450);
+},true);
+
+/* ═══ 3. Briefings go visual: numbers and charts, not prose ═══ */
+function bstat(v,cls,lbl){return '<div class="fbl-bstat"><b class="'+cls+'">'+v+'</b><span>'+lbl+'</span></div>';}
+function hbar(lbl,pct,val,lit){
+  return '<g><text x="0" y="11" font-size="11" fill="var(--t3)" font-family="inherit">'+lbl+'</text>'
+   +'<rect x="44" y="2" width="'+(pct*1.7)+'" height="11" rx="5" fill="'+(lit?'var(--teal)':'color-mix(in srgb,var(--t3) 28%,transparent)')+'"/>'
+   +'<text x="'+(50+pct*1.7)+'" y="11" font-size="10.5" font-weight="700" fill="'+(lit?'var(--teal)':'var(--t3)')+'" font-family="inherit">'+val+'</text></g>';}
+function visualBriefs(){
+  /* 1 · weekly recap */
+  var pages=[['KD',58,1],['DM',21,0],['FN',9,0],['UK',8,0],['PB',4,0]];
+  var b1='<div class="fbl-brief"><div class="bk">Weekly recap \u00b7 what changed</div><h3>Your network, week on week</h3>'
+   +'<div class="fbl-brow">'+bstat('+12.4%','up','Network reach \u25b2')+bstat('0.82','','Sentiment \u00b7 held through the crisis')+bstat('4 wks','purp','UK Jail News growth streak')+'</div>'
+   +'<div class="fbl-bchart"><h5>Who carried the week \u00b7 share of reach growth</h5><svg viewBox="0 0 270 95">'
+   +pages.map(function(p,i){return '<g transform="translate(0 '+(i*19)+')">'+hbar(p[0],p[1],p[1]+'%',p[2])+'</g>';}).join('')
+   +'</svg></div>'
+   +'<p class="tk">One line: <b>Kelpie Daily\u2019s viral run carried the week</b> \u2014 and UK Jail News is quietly compounding without a single viral hit.</p></div>';
+  /* 2 · emoji sweet spot */
+  var em=[['0',44,0],['1',61,0],['2',86,1],['3+',70,0]];
+  var b2='<div class="fbl-brief"><div class="bk">Content patterns \u00b7 monthly read</div><h3>The emoji sweet spot is two</h3>'
+   +'<div class="fbl-bchart"><h5>Engagement index by emoji count</h5><svg viewBox="0 0 270 96">'
+   +em.map(function(d,i){var h=d[1]*0.72,x=30+i*60,lit=d[2];
+     return '<rect x="'+x+'" y="'+(76-h)+'" width="34" height="'+h+'" rx="6" fill="'+(lit?'var(--teal)':'color-mix(in srgb,var(--t3) 28%,transparent)')+'"/>'
+      +(lit?'<text x="'+(x+17)+'" y="'+(68-h)+'" font-size="11" font-weight="800" fill="var(--teal)" text-anchor="middle" font-family="inherit">+41%</text>':'')
+      +'<text x="'+(x+17)+'" y="90" font-size="10.5" fill="'+(lit?'var(--teal)':'var(--t3)')+'" font-weight="'+(lit?'800':'500')+'" text-anchor="middle" font-family="inherit">'+d[0]+'</text>';}).join('')
+   +'</svg></div>'
+   +'<div class="fbl-brow">'+bstat('+41%','up','2 emojis vs zero')+bstat('<90','','characters wins 6 of 7 days')+bstat('1.6\u00d7','purp','question-first captions \u00b7 4th month')+'</div>'
+   +'<p class="tk">One line: <b>two emojis, under 90 characters, open with a question.</b></p></div>';
+  /* 3 · benchmark */
+  var b3='<div class="fbl-brief"><div class="bk">Benchmark \u00b7 vs your category</div><h3>Where you sit among UK meme pages</h3>'
+   +'<div class="fbl-brow">'
+   +'<div class="fbl-bstat" style="display:flex;align-items:center;gap:12px"><div class="wring" style="--v:91;position:relative;width:58px;height:58px;border-radius:50%;background:conic-gradient(var(--opp) 91%,var(--bdr-soft) 0);display:grid;place-items:center;flex-shrink:0"><span style="position:absolute;inset:6px;border-radius:50%;background:var(--bg-elev-2)"></span><b style="position:relative;font-size:13px">top 9%</b></div><span>engagement rate 4.8% \u00b7 UK humour pages your size</span></div>'
+   +bstat('3.8 vs 5.2','','posts/week \u00b7 you vs category leaders')+bstat('+210K','up','projected monthly reach if you close the gap')+'</div>'
+   +'<div class="fbl-bchart"><h5>Posting consistency \u00b7 you vs leaders</h5><svg viewBox="0 0 270 52">'
+   +'<g transform="translate(0 2)">'+hbar('You',62,'3.8',0)+'</g><g transform="translate(0 24)">'+hbar('Top',86,'5.2',1)+'</g>'
+   +'</svg></div>'
+   +'<p class="tk">One line: <b>quality is elite, cadence is the gap</b> \u2014 1.4 more posts a week is worth ~210K monthly reach.</p></div>';
+  return b1+b2+b3;
+}
+(function(){
+  var prev=window.switchFeedTab;
+  if(typeof prev!=='function')return;
+  window.switchFeedTab=function(name){
+    prev.apply(this,arguments);
+    if(name!=='briefings')return;
+    var w=document.querySelector('.fbl-briefs');
+    if(w&&!w.dataset.v2){w.dataset.v2='1';w.innerHTML=visualBriefs();}
+  };
+})();
+
+/* ═══ 4. Actions & Results tracker (To-do) ═══ */
+(function(){
+  var page=document.getElementById('page-inbox');
+  if(!page)return;
+  var header=page.querySelector('.page-header');
+  if(!header)return;
+  var weeks=[['W1',5,8],['W2',8,11],['W3',6,9],['W4',12,18]];
+  var panel=el('<div class="fbl-results">'
+   +'<div class="rh"><b>Your actions &amp; their results</b><span class="fbl-stage fast sm">FAST</span>'
+   +'<span style="margin-left:auto;font-size:11px;color:var(--t3)">last 30 days \u00b7 tracked automatically</span></div>'
+   +'<div class="rsum">'
+   +'<div class="wring" style="--v:83"><b>83%</b></div>'
+   +'<div><div style="font-size:13px;font-weight:700;color:var(--t1)">10 of 12 actions grew the metric they targeted</div>'
+   +'<div style="font-size:11.5px;color:var(--t3);margin-top:3px">Acting on Art-E\u2019s calls is outperforming ignoring them by <b style="color:var(--opp)">3.1\u00d7</b></div></div>'
+   +'<div class="fbl-bchart" style="margin:0"><h5>Actions taken vs reach growth %</h5><svg viewBox="0 0 270 80">'
+   +weeks.map(function(w,i){var x=24+i*62;
+     return '<rect x="'+x+'" y="'+(60-w[1]*3)+'" width="16" height="'+(w[1]*3)+'" rx="4" fill="color-mix(in srgb,var(--t3) 30%,transparent)"/>'
+      +'<rect x="'+(x+19)+'" y="'+(60-w[2]*3)+'" width="16" height="'+(w[2]*3)+'" rx="4" fill="var(--opp)"/>'
+      +'<text x="'+(x+18)+'" y="74" font-size="9.5" fill="var(--t3)" text-anchor="middle" font-family="inherit">'+w[0]+'</text>';}).join('')
+   +'<circle cx="190" cy="8" r="4" fill="color-mix(in srgb,var(--t3) 30%,transparent)"/><text x="198" y="11" font-size="9" fill="var(--t3)" font-family="inherit">actions</text>'
+   +'<circle cx="236" cy="8" r="4" fill="var(--opp)"/><text x="244" y="11" font-size="9" fill="var(--t3)" font-family="inherit">growth</text>'
+   +'</svg></div></div>'
+   +'<div id="fblRrows">'
+   +rrow('var(--warn)','<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>','Scheduled the 6PM post on Drinking Memes','Yesterday 5:58 PM','up','\u25b2 +9.6K reach')
+   +rrow('var(--crisis)','<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>','Sent Art-E\u2019s crisis reply on the angry thread','Tue \u00b7 11:42 AM','up','\u25cf contained in 38 min')
+   +rrow('var(--teal)','<path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/>','Reshared the Kelpie viral post to 4 pages','Mon \u00b7 9:14 PM','up','\u25b2 +2.1K followers')
+   +rrow('var(--arte-1)','<path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/>','Approved Art-E\u2019s trimmed Friday draft','Fri \u00b7 4:30 PM','up','\u25b2 score 61 \u2192 83 \u00b7 +18% eng')
+   +rrow('var(--t3)','<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>','Ignored: 7AM posting suggestion','last week','neut','\u25cf no change \u2014 control')
+   +'</div></div>');
+  function rrow(c,ic,t,when,cls,chip){
+    return '<div class="fbl-rrow" style="--rc:'+c+'"><div class="ic"><svg viewBox="0 0 24 24">'+ic+'</svg></div>'
+     +'<div class="tt">'+t+'<small>'+when+'</small></div><span class="fbl-rchip '+cls+'">'+chip+'</span></div>';
+  }
+  header.parentNode.insertBefore(panel,header.nextSibling);
+  /* live: completing a move logs a tracked action */
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest('.fbl-move button');if(!btn)return;
+    var row=btn.closest('.fbl-move');
+    if(!row||row.classList.contains('done'))return; /* fires before handlers mark done */
+    var title=(row.querySelector('.tt')||{}).childNodes;
+    var t=title&&title[0]?title[0].textContent.trim():'Action';
+    var holder=document.getElementById('fblRrows');
+    if(holder)holder.insertAdjacentHTML('afterbegin',
+      rrow('var(--teal)','<path d="M9 11l3 3L22 4"/>',t,'just now','wait','\u23f3 tracking \u00b7 first read in ~2h'));
+  },true);
+})();
+})();
+</script>
+
 </body>
 </html>
