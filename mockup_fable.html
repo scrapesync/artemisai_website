@@ -10379,5 +10379,176 @@ document.querySelectorAll('.story-tile.page-story').forEach(function(tile,i){
 })();
 </script>
 
+
+<!-- FABLE DESIGN PASS 7: one job per tab (Krug) + the Predict flow.
+     Feed = browse (posts, stories, visuals). Briefings = read (full text,
+     document mode, no post chrome). Action items = do (prioritised
+     checklist, no posts). Predict = EDGE #1 made tangible: loading ->
+     analysis -> score -> auto-saved to Drafts with a popup. -->
+<style id="fable-design7">
+/* ── Tab scoping ── */
+#page-home.fbl-tab-briefings .fbl-hero,#page-home.fbl-tab-briefings .fbl-post,
+#page-home.fbl-tab-briefings .fbl-greet,#page-home.fbl-tab-briefings .fbl-moves,
+#page-home.fbl-tab-briefings .fbl-milestone,#page-home.fbl-tab-briefings .post-engagement-bar,
+#page-home.fbl-tab-actions .fbl-hero,#page-home.fbl-tab-actions .fbl-post,
+#page-home.fbl-tab-actions .fbl-greet,#page-home.fbl-tab-actions .fbl-milestone,
+#page-home.fbl-tab-actions .post-engagement-bar,#page-home.fbl-tab-actions .insight-post-stats,
+#page-home.fbl-tab-actions .fbl-predict,#page-home.fbl-tab-briefings .fbl-predict{display:none!important}
+/* Briefings: reading mode */
+#page-home.fbl-tab-briefings .briefing-body,
+#page-home.fbl-tab-briefings .insight-post-body{font-size:14px;line-height:1.7}
+#page-home.fbl-tab-briefings .briefing-card,
+#page-home.fbl-tab-briefings .insight-post{border-left:3px solid var(--arte-1)}
+.fbl-tabhead{display:flex;align-items:baseline;gap:10px;margin:2px 2px 12px}
+.fbl-tabhead h2{font-size:18px;font-weight:800;color:var(--t1);margin:0;letter-spacing:-.01em}
+.fbl-tabhead span{font-size:12px;color:var(--t3)}
+/* Action items: checklist mode */
+#page-home.fbl-tab-actions .insight-post{padding-bottom:6px}
+#page-home.fbl-tab-actions .insight-post-body{display:-webkit-box!important;-webkit-box-orient:vertical;
+  -webkit-line-clamp:1!important;overflow:hidden;font-size:12.5px}
+#page-home.fbl-tab-actions .insight-post:has(.insight-post-tag.crisis){border-left:3px solid var(--crisis)}
+#page-home.fbl-tab-actions .insight-post:has(.insight-post-tag.opp){border-left:3px solid var(--opp)}
+#page-home.fbl-tab-actions .fbl-more{display:none}
+/* ── Predict flow card ── */
+.fbl-predict{margin-top:14px;border:1px solid color-mix(in srgb,var(--teal) 30%,transparent);
+  border-radius:14px;padding:16px;background:var(--bg-elev)}
+html[data-theme="light"] .fbl-predict{background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.07)}
+.fbl-predict .ld{display:flex;align-items:center;gap:12px}
+.fbl-predict .spin{width:30px;height:30px;border-radius:50%;flex-shrink:0;
+  border:3px solid var(--bdr-soft);border-top-color:var(--teal);animation:fblSpin .8s linear infinite}
+@keyframes fblSpin{to{transform:rotate(360deg)}}
+.fbl-predict .lt{font-size:13px;font-weight:700;color:var(--t1)}
+.fbl-predict .ls{font-size:12px;color:var(--t3);margin-top:2px;min-height:16px}
+.fbl-predict .res{display:none;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.fbl-predict.done .ld{display:none}
+.fbl-predict.done .res{display:grid}
+.fbl-predict .ring{position:relative;width:88px;height:88px;border-radius:50%;
+  background:conic-gradient(var(--teal) calc(var(--v)*1%),var(--bdr-soft) 0);display:grid;place-items:center}
+.fbl-predict .ring::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--bg-elev)}
+html[data-theme="light"] .fbl-predict .ring::before{background:#fff}
+.fbl-predict .ring b{position:relative;font-size:26px;font-weight:800;color:var(--t1)}
+.fbl-predict .ring small{position:absolute;bottom:14px;font-size:8.5px;color:var(--t3);font-weight:700;letter-spacing:.06em}
+.fbl-predict .verdict{font-size:14.5px;font-weight:800;color:var(--t1)}
+.fbl-predict .reach{font-size:12px;color:var(--t2);margin:3px 0 10px}
+.fbl-predict .reach b{color:var(--teal)}
+.fbl-predict .fac{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--t2);margin-bottom:6px}
+.fbl-predict .fac .fb{flex:1;height:5px;border-radius:5px;background:var(--bdr-soft);overflow:hidden}
+.fbl-predict .fac .fb i{display:block;height:100%;border-radius:5px}
+.fbl-predict .fac b{width:34px;text-align:right;font-size:11.5px}
+.fbl-predict .saved{display:none;align-items:center;gap:7px;margin-top:12px;font-size:12.5px;
+  font-weight:700;color:var(--opp)}
+.fbl-predict.tod .saved{display:flex}
+.fbl-predict .saved a{color:var(--teal);cursor:pointer;font-weight:700}
+</style>
+<script id="fable-design7-js">
+(function(){
+"use strict";
+function el(h){var d=document.createElement('div');d.innerHTML=h;return d.firstElementChild;}
+
+/* ═══ A. One job per tab ═══ */
+(function(){
+  var orig=window.switchFeedTab;
+  if(typeof orig!=='function')return;
+  var head=null;
+  window.switchFeedTab=function(name){
+    orig.apply(this,arguments);
+    var home=document.getElementById('page-home');
+    if(!home)return;
+    home.classList.remove('fbl-tab-briefings','fbl-tab-actions');
+    var greet=home.querySelector('.fbl-greet'),moves=home.querySelector('.fbl-moves'),
+        mile=home.querySelector('.fbl-milestone');
+    if(head){head.remove();head=null;}
+    if(name==='feed'){
+      if(greet)greet.style.display='';
+      if(moves)moves.style.display='';
+      if(mile&&mile.dataset.dismissed!=='1')mile.style.display='';
+    }else{
+      if(greet)greet.style.display='none';
+      if(mile)mile.style.display='none';
+      home.classList.add(name==='briefings'?'fbl-tab-briefings':'fbl-tab-actions');
+      if(name==='briefings'){
+        if(moves)moves.style.display='none';
+        head=el('<div class="fbl-tabhead"><h2>Briefings</h2><span>Plain-English reads \u00b7 newest first \u00b7 nothing to act on here</span></div>');
+        /* reading mode: unclamp everything visible */
+        home.querySelectorAll('.briefing-body,.insight-post-body').forEach(function(b){
+          b.style.webkitLineClamp='unset';b.style.display='block';
+        });
+        home.querySelectorAll('.fbl-more').forEach(function(m){m.style.display='none';});
+      }else{
+        if(moves)moves.style.display='';
+        head=el('<div class="fbl-tabhead"><h2>Action items</h2><span>Sorted by impact \u00b7 everything here needs a decision from you</span></div>');
+      }
+      var anchor=home.querySelector('.feed-tabs');
+      if(anchor)anchor.parentNode.insertBefore(head,anchor.nextSibling);
+    }
+    if(name==='feed'){
+      /* restore feed clamps + visuals */
+      home.querySelectorAll('.insight-post-body.fbl-clamp,.briefing-body.fbl-clamp').forEach(function(b){
+        b.style.webkitLineClamp='2';b.style.display='-webkit-box';
+      });
+      home.querySelectorAll('.fbl-more').forEach(function(m){m.style.display='';});
+    }
+  };
+  /* milestone dismiss should remember across tab switches */
+  var x=document.querySelector('.fbl-milestone .x');
+  if(x){var ox=x.onclick;x.onclick=function(){document.querySelector('.fbl-milestone').dataset.dismissed='1';if(ox)ox();};}
+})();
+
+/* ═══ B. The Predict flow — EDGE #1, made tangible ═══ */
+(function(){
+  var btn=document.querySelector('.composer-btn.predict');
+  if(!btn)return;
+  var clean=btn.cloneNode(true);
+  btn.parentNode.replaceChild(clean,btn);
+  var card=null;
+  clean.addEventListener('click',function(e){
+    e.stopPropagation();e.stopImmediatePropagation();
+    var wrap=document.querySelector('.composer-wrap');
+    if(!wrap)return;
+    if(card)card.remove();
+    card=el('<div class="fbl-predict" aria-live="polite">'
+     +'<div class="ld"><div class="spin"></div><div><div class="lt">Art-E is predicting\u2026</div><div class="ls"></div></div></div>'
+     +'<div class="res"><div class="ring" style="--v:0"><b>0</b><small>/100</small></div>'
+     +'<div><div class="verdict">Strong \u2014 post it tonight</div>'
+     +'<div class="reach"><b>31K\u201338K predicted reach</b> \u00b7 top 12% of your posts \u00b7 page average is 22K</div>'
+     +'<div class="fac"><span style="width:108px">Timing (Tue 6PM)</span><span class="fb"><i style="width:86%;background:var(--teal)"></i></span><b style="color:var(--teal)">+12</b></div>'
+     +'<div class="fac"><span style="width:108px">Format (image)</span><span class="fb"><i style="width:74%;background:var(--teal)"></i></span><b style="color:var(--teal)">+9</b></div>'
+     +'<div class="fac"><span style="width:108px">Emoji balance</span><span class="fb"><i style="width:52%;background:var(--teal)"></i></span><b style="color:var(--teal)">+4</b></div>'
+     +'<div class="fac"><span style="width:108px">Caption length</span><span class="fb"><i style="width:30%;background:var(--warn)"></i></span><b style="color:var(--warn)">\u22124</b></div>'
+     +'<div class="saved"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>'
+     +'Saved to Drafts \u00b7 <a>open Drafts to schedule \u2192</a></div>'
+     +'</div></div>');
+    wrap.appendChild(card);
+    card.scrollIntoView({behavior:'smooth',block:'nearest'});
+    var steps=['Reading 2 years of Drinking Memes data\u2026','Scoring caption, emoji, image and format\u2026','Checking the Tuesday 6PM window\u2026'];
+    var ls=card.querySelector('.ls');
+    steps.forEach(function(s,i){setTimeout(function(){if(ls)ls.textContent=s;},i*560);});
+    setTimeout(function(){
+      card.classList.add('done');
+      /* animate score count-up + ring fill */
+      var ring=card.querySelector('.ring'),b=ring.querySelector('b'),t0=null;
+      function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/700);k=1-Math.pow(1-k,3);
+        var v=Math.round(83*k);ring.style.setProperty('--v',v);b.textContent=v;
+        if(k<1)requestAnimationFrame(step);}
+      requestAnimationFrame(step);
+      /* then: auto-save to Drafts + popup + sidebar badge bump */
+      setTimeout(function(){
+        card.classList.add('tod');
+        var link=card.querySelector('.saved a');
+        if(link)link.onclick=function(){navigateTo('drafts',document.querySelector('[data-page="drafts"]'));};
+        if(typeof toast==='function')toast('success','Saved to Drafts \u00b7 scored 83/100 \u2014 ready to schedule');
+        /* bump the Drafts count in Quick Access */
+        document.querySelectorAll('.left-sidebar *').forEach(function(n){
+          if(n.children.length===0&&/^\s*3\s*$/.test(n.textContent)&&/drafts/i.test((n.parentNode.textContent||''))&&!n._fblBumped){
+            n._fblBumped=true;n.textContent='4';
+          }
+        });
+      },1500);
+    },1750);
+  });
+})();
+})();
+</script>
+
 </body>
 </html>
