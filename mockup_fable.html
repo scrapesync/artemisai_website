@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtemisAI — MVP</title>
+<title>ArtemisAI — Product · by Fable</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -4136,7 +4136,7 @@ html[data-theme="light"] .kpi-card-v2.reach-hero{
       </div>
       <div class="brand-name">ARTEMIS</div>
     </a>
-    <span style="font-size:10px;font-weight:800;letter-spacing:.08em;color:#0a1410;background:var(--teal);padding:3px 10px;border-radius:9999px;text-transform:uppercase;flex-shrink:0">MVP</span>
+    <span style="font-size:10px;font-weight:800;letter-spacing:.08em;color:#0a1410;background:var(--teal);padding:3px 10px;border-radius:9999px;text-transform:uppercase;flex-shrink:0;background:linear-gradient(135deg,#7C5CBF,#00C4A0);color:#fff">BY FABLE</span>
     <input type="text" class="search" placeholder="Search posts, pages, topics — or just ask Art-E" onkeydown="if(event.key==='Enter'&&this.value.trim()){openArteChat(this.value.trim());this.value=''}">
     <div class="topnav-spacer"></div>
 
@@ -4841,5 +4841,509 @@ document.getElementById('themeToggle').addEventListener('click',function(e){
   document.documentElement.setAttribute('data-theme', opt.dataset.themeSet);
 });
 </script>
+<!-- ═══════════ FABLE PRODUCT LAYER ═══════════
+     Builds on the MVP mockup: adds every master-plan surface,
+     command palette, toasts, skeletons, smooth transitions. -->
+<style id="fable-app">
+/* ── Stage chips in nav ── */
+.fbl-stage{margin-left:auto;font-size:9px;font-weight:800;letter-spacing:.07em;padding:2px 7px;border-radius:9999px;flex-shrink:0}
+.fbl-stage.mvp{color:#06231d;background:var(--teal)}
+.fbl-stage.fast{color:#241500;background:#f5a623}
+.fbl-stage.later{color:#1b1230;background:#a78bfa}
+.fbl-stage.plan{color:#fff;background:linear-gradient(135deg,var(--arte-1),var(--teal))}
+.fbl-stage.preview{color:var(--t2);background:var(--bg-input)}
+
+/* ── Page transition ── */
+@keyframes fblPageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.page.active.fbl-anim{animation:fblPageIn .26s cubic-bezier(.2,.7,.2,1)}
+
+/* ── Skeleton shimmer ── */
+.fbl-skel{position:relative;overflow:hidden}
+.fbl-skel::after{content:"";position:absolute;inset:0;z-index:5;
+  background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.045) 50%,transparent 70%) var(--bg);
+  background-size:200% 100%;animation:fblShimmer .9s linear infinite}
+@keyframes fblShimmer{from{background-position:160% 0}to{background-position:-60% 0}}
+
+/* ── Toasts ── */
+.fbl-toasts{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:9000;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+.fbl-toast{display:flex;align-items:center;gap:9px;padding:10px 16px;border-radius:12px;
+  background:var(--bg-elev-2);border:1px solid var(--bdr,rgba(255,255,255,.08));color:var(--t1);
+  font-size:var(--fs-base);font-weight:var(--fw-semibold);box-shadow:0 12px 32px rgba(0,0,0,.45);
+  opacity:0;transform:translateY(12px) scale(.96);transition:opacity .22s ease,transform .22s cubic-bezier(.34,1.4,.5,1)}
+.fbl-toast.on{opacity:1;transform:translateY(0) scale(1)}
+.fbl-toast svg{width:15px;height:15px;flex-shrink:0;stroke-width:2.4;fill:none}
+.fbl-toast.ok svg{stroke:var(--opp)}.fbl-toast.info svg{stroke:var(--teal)}.fbl-toast.warn svg{stroke:var(--warn)}
+
+/* ── Command palette ── */
+.fbl-pal-wrap{position:fixed;inset:0;z-index:9500;display:none;align-items:flex-start;justify-content:center;padding-top:14vh;
+  background:rgba(8,10,14,.55);backdrop-filter:blur(4px)}
+.fbl-pal-wrap.open{display:flex}
+.fbl-pal{width:min(620px,92vw);background:var(--bg-elev);border:1px solid rgba(255,255,255,.1);border-radius:16px;
+  box-shadow:0 24px 70px rgba(0,0,0,.6);overflow:hidden;animation:fblPalIn .18s cubic-bezier(.2,.7,.2,1)}
+@keyframes fblPalIn{from{opacity:0;transform:scale(.97) translateY(-6px)}to{opacity:1;transform:none}}
+.fbl-pal-input{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.07)}
+.fbl-pal-input svg{width:16px;height:16px;stroke:var(--t3);stroke-width:2;fill:none;flex-shrink:0}
+.fbl-pal-input input{flex:1;background:none;border:none;outline:none;color:var(--t1);font-size:var(--fs-lg);font-family:inherit}
+.fbl-pal-input kbd{font-size:10px;color:var(--t3);border:1px solid rgba(255,255,255,.12);border-radius:5px;padding:2px 6px}
+.fbl-pal-list{max-height:46vh;overflow-y:auto;padding:6px}
+.fbl-pal-item{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;cursor:pointer;color:var(--t1);font-size:var(--fs-md)}
+.fbl-pal-item .ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:var(--bg-input);font-size:13px;flex-shrink:0}
+.fbl-pal-item .lbl{flex:1}
+.fbl-pal-item .hint{font-size:var(--fs-xs);color:var(--t3)}
+.fbl-pal-item.sel{background:var(--teal-bg);outline:1px solid rgba(0,196,160,.3)}
+.fbl-pal-empty{padding:22px;text-align:center;color:var(--t3);font-size:var(--fs-base)}
+
+/* ── Shared bits for new pages ── */
+.fbl-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fbl-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.fbl-grid2,.fbl-grid3{grid-template-columns:1fr}}
+.fbl-panel{background:var(--bg-elev);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px}
+.fbl-panel h3{font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--t1);margin:0 0 4px}
+.fbl-panel .sub{font-size:var(--fs-sm);color:var(--t3);margin-bottom:12px}
+.fbl-btn{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:9999px;border:none;cursor:pointer;
+  font-size:var(--fs-base);font-weight:var(--fw-bold);font-family:inherit;color:#06231d;background:var(--teal);transition:transform .12s,box-shadow .12s}
+.fbl-btn:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(0,196,160,.35)}
+.fbl-btn.ghost{background:var(--bg-input);color:var(--t1)}
+.fbl-btn.purple{background:linear-gradient(135deg,var(--arte-1),var(--teal));color:#fff}
+.fbl-row{display:flex;align-items:center;gap:11px;padding:11px 4px;border-bottom:1px solid rgba(255,255,255,.05)}
+.fbl-row:last-child{border-bottom:none}
+.fbl-tgl{width:36px;height:20px;border-radius:9999px;background:var(--bg-input);position:relative;cursor:pointer;flex-shrink:0;transition:background .18s}
+.fbl-tgl::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--t2);transition:transform .18s,background .18s}
+.fbl-tgl.on{background:var(--teal)}
+.fbl-tgl.on::after{transform:translateX(16px);background:#06231d}
+
+/* ── Best Times heatmap ── */
+.fbl-heat{display:grid;grid-template-columns:34px repeat(24,1fr);gap:2px;font-size:9px;color:var(--t3)}
+.fbl-heat .hd{display:grid;place-items:center;height:14px}
+.fbl-heat .dy{display:grid;place-items:center}
+.fbl-heat .cl{aspect-ratio:1.35;border-radius:3px;background:rgba(0,196,160,calc(var(--v)*0.85 + 0.04));cursor:pointer;transition:transform .1s}
+.fbl-heat .cl:hover{transform:scale(1.25);outline:1px solid var(--teal)}
+.fbl-heat .cl.best{outline:1.5px solid #fff;box-shadow:0 0 8px rgba(0,196,160,.6)}
+.fbl-slot{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:var(--bg-input);margin-bottom:9px}
+.fbl-slot .tm{font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--teal);min-width:86px}
+.fbl-slot .why{flex:1;font-size:var(--fs-sm);color:var(--t2)}
+
+/* ── Drafts score ring ── */
+.fbl-ring{position:relative;width:104px;height:104px;flex-shrink:0}
+.fbl-ring svg{transform:rotate(-90deg)}
+.fbl-ring .bgc{stroke:var(--bg-input)}
+.fbl-ring .fgc{stroke:var(--teal);stroke-linecap:round;transition:stroke-dashoffset .5s cubic-bezier(.2,.7,.2,1),stroke .3s}
+.fbl-ring .num{position:absolute;inset:0;display:grid;place-items:center;font-size:26px;font-weight:800;color:var(--t1)}
+.fbl-draft-ta{width:100%;min-height:110px;background:var(--bg-input);border:1px solid rgba(255,255,255,.07);border-radius:12px;
+  color:var(--t1);font-family:inherit;font-size:var(--fs-md);line-height:1.45;padding:12px;resize:vertical;outline:none}
+.fbl-draft-ta:focus{border-color:rgba(0,196,160,.4)}
+.fbl-sugg{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:10px;background:var(--bg-input);margin-bottom:7px;font-size:var(--fs-sm);color:var(--t2)}
+.fbl-sugg b{color:var(--t1)}
+.fbl-sugg .pl{margin-left:auto;color:var(--opp);font-weight:700;flex-shrink:0}
+.fbl-ailabel{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:var(--fs-xs);color:var(--t3)}
+.fbl-ailabel svg{width:12px;height:12px;stroke:var(--arte-1);stroke-width:2;fill:none}
+
+/* ── Inbox / Action Center ── */
+.fbl-inb{display:flex;align-items:flex-start;gap:12px;padding:13px;border-radius:12px;background:var(--bg-elev);border:1px solid rgba(255,255,255,.06);margin-bottom:9px;transition:opacity .3s,transform .3s}
+.fbl-inb.done{opacity:.38;transform:scale(.99)}
+.fbl-inb.done .ti{text-decoration:line-through}
+.fbl-inb .ck{width:20px;height:20px;border-radius:7px;border:1.5px solid var(--t3);cursor:pointer;flex-shrink:0;display:grid;place-items:center;margin-top:1px;transition:all .15s}
+.fbl-inb .ck svg{width:12px;height:12px;stroke:#06231d;stroke-width:3;fill:none;opacity:0}
+.fbl-inb.done .ck{background:var(--teal);border-color:var(--teal)}
+.fbl-inb.done .ck svg{opacity:1}
+.fbl-inb .ti{font-size:var(--fs-md);font-weight:var(--fw-semibold);color:var(--t1)}
+.fbl-inb .sb{font-size:var(--fs-sm);color:var(--t3);margin-top:2px}
+.fbl-tag{font-size:9.5px;font-weight:800;letter-spacing:.05em;padding:2.5px 8px;border-radius:9999px;flex-shrink:0;margin-left:auto}
+.fbl-tag.crisis{color:var(--crisis);background:var(--crisis-bg)}
+.fbl-tag.opp{color:var(--opp);background:var(--opp-bg)}
+.fbl-tag.warn{color:var(--warn);background:var(--warn-bg)}
+.fbl-tag.collab{color:var(--arte-1);background:var(--arte-bg)}
+
+/* ── Roadmap ── */
+.fbl-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+@media(max-width:900px){.fbl-stats{grid-template-columns:1fr 1fr}}
+.fbl-stat{background:var(--bg-elev);border:1px solid rgba(255,255,255,.06);border-radius:13px;padding:14px}
+.fbl-stat .v{font-size:24px;font-weight:800;color:var(--t1)}
+.fbl-stat .l{font-size:var(--fs-xs);color:var(--t3);margin-top:2px}
+.fbl-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.fbl-fpill{padding:6px 13px;border-radius:9999px;font-size:var(--fs-sm);font-weight:700;cursor:pointer;background:var(--bg-input);color:var(--t2);border:1px solid transparent;transition:all .14s}
+.fbl-fpill.on{color:#06231d;background:var(--teal)}
+.fbl-fpill[data-st="done"].on{background:#34d399}
+.fbl-fpill[data-st="fast"].on{background:#f5a623}
+.fbl-fpill[data-st="later"].on{background:#a78bfa}
+.fbl-fsearch{margin-left:auto;background:var(--bg-input);border:1px solid rgba(255,255,255,.07);border-radius:9999px;padding:7px 14px;color:var(--t1);font-family:inherit;font-size:var(--fs-sm);outline:none;width:200px}
+.fbl-cat{margin-bottom:18px}
+.fbl-cat-h{display:flex;align-items:baseline;gap:9px;margin-bottom:9px}
+.fbl-cat-h h4{font-size:var(--fs-lg);font-weight:var(--fw-bold);color:var(--t1);margin:0}
+.fbl-cat-h .ct{font-size:var(--fs-xs);color:var(--t3)}
+.fbl-feats{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:8px}
+.fbl-feat{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:11px;background:var(--bg-elev);border:1px solid rgba(255,255,255,.05);cursor:default;transition:transform .12s,border-color .12s}
+.fbl-feat:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.14)}
+.fbl-feat .em{font-size:15px;flex-shrink:0}
+.fbl-feat .nm{font-size:var(--fs-sm);font-weight:600;color:var(--t1);line-height:1.25;flex:1}
+.fbl-feat .dt{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.fbl-feat .dd{font-size:9.5px;color:var(--t3);flex-shrink:0}
+
+/* ── Settings tabs ── */
+.fbl-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.fbl-tab{padding:7px 14px;border-radius:9999px;font-size:var(--fs-sm);font-weight:700;cursor:pointer;background:var(--bg-input);color:var(--t2);transition:all .14s}
+.fbl-tab.on{background:var(--teal);color:#06231d}
+.fbl-tabpane{display:none}.fbl-tabpane.on{display:block;animation:fblPageIn .2s ease}
+.fbl-danger{color:var(--crisis)!important}
+
+/* ── Reports & Saved ── */
+.fbl-tpl{padding:14px;border-radius:13px;background:var(--bg-elev);border:1px solid rgba(255,255,255,.06);cursor:pointer;transition:transform .13s,border-color .13s}
+.fbl-tpl:hover{transform:translateY(-2px);border-color:rgba(0,196,160,.35)}
+.fbl-tpl .em{font-size:20px}
+.fbl-tpl .nm{font-size:var(--fs-md);font-weight:700;color:var(--t1);margin:7px 0 3px}
+.fbl-tpl .ds{font-size:var(--fs-sm);color:var(--t3)}
+.fbl-saved{padding:14px;border-radius:13px;background:var(--bg-elev);border:1px solid rgba(255,255,255,.06)}
+.fbl-saved .tp{font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--arte-1)}
+.fbl-saved .tx{font-size:var(--fs-md);color:var(--t1);margin:7px 0 11px;line-height:1.4}
+@media(prefers-reduced-motion:reduce){
+  .page.active.fbl-anim{animation:none}
+  .fbl-skel::after{animation:none;display:none}
+  .fbl-pal{animation:none}
+}
+</style>
+<script id="fable-app-js">
+(function(){
+"use strict";
+var PLAN={"feats":[{"n":"Data foundation","i":"🗄️","s":"done","c":"Foundation & Data","d":"Warehouse + 2-year backfill (S1–2)","y":0,"cut":null},{"n":"Post NLP models","i":"🧠","s":"done","c":"Foundation & Data","d":"5 post-level models (S3–4)","y":0,"cut":null},{"n":"Comment NLP (MTL)","i":"💬","s":"done","c":"Foundation & Data","d":"MTL DeBERTa on comments (S5)","y":0,"cut":null},{"n":"Image / video understanding","i":"🖼️","s":"mvp","c":"Foundation & Data","d":"OCR/CLIP + video (S6–7)","y":10,"cut":null},{"n":"Virality model","i":"📈","s":"mvp","c":"Predictions & Drafts","d":"24h reach/shares prediction (S8–9)","y":8,"cut":"#2"},{"n":"App shell + auth","i":"🧱","s":"done","c":"Foundation & Data","d":"Sidebar + login + 5 pages (S5)","y":0,"cut":null},{"n":"Profile & Settings","i":"⚙","s":"mvp","c":"Facebook Connection & Account","d":"Connect, notifications, data delete","y":4,"cut":null},{"n":"Home Feed","i":"🏠","s":"mvp","c":"Home & Experience","d":"Daily answer + pulse + tiles","y":7,"cut":null},{"n":"Analytics","i":"📊","s":"mvp","c":"Analytics & Insights","d":"Engagement, reach, sentiment","y":7,"cut":null},{"n":"Best Times","i":"📅","s":"mvp","c":"Analytics & Insights","d":"Heatmap + Art-E slot rec","y":3,"cut":"#1"},{"n":"Drafts","i":"📝","s":"mvp","c":"Predictions & Drafts","d":"Virality score before publish","y":4,"cut":"#2"},{"n":"Crisis & Alerts","i":"✅","s":"mvp","c":"Crisis & Alerts","d":"Toxic-comment detection + actions","y":8,"cut":null},{"n":"Art-E (grounded Q&A)","i":"✨","s":"mvp","c":"Art-E (AI assistant)","d":"RAG + tool-use + citations","y":12,"cut":null},{"n":"Facebook OAuth (Live Mode)","i":"🔑","s":"mvp","c":"Facebook Connection & Account","d":"The final task — public login","y":5,"cut":null},{"n":"Topic / meme clustering","i":"🧩","s":"later","c":"Discovery & Network","d":"Group similar posts","y":6,"cut":null},{"n":"Cross-page graph / network theory","i":"🔭","s":"later","c":"Discovery & Network","d":"The moat — Phase 2","y":14,"cut":null},{"n":"Art-E agent (autonomous)","i":"🤖","s":"later","c":"Art-E (AI assistant)","d":"Multi-step actions — Phase 2","y":12,"cut":null},{"n":"Advanced analytics","i":"📊","s":"later","c":"Analytics & Insights","d":"Cascade, super-sharer — Phase 2","y":8,"cut":null},{"n":"Real-time pipeline + alarms","i":"⚙️","s":"mvp","c":"Foundation & Data","d":"Freshness + cost alarms (S6+)","y":5,"cut":null},{"n":"Webhooks / alerts plumbing","i":"🔔","s":"mvp","c":"Crisis & Alerts","d":"Crisis + draft-scored events (S14)","y":4,"cut":null},{"n":"Security + pen-test + GDPR","i":"🔒","s":"mvp","c":"Security","d":"Audit, isolation, DSAR (S19,21)","y":8,"cut":null},{"n":"Performance + scale test","i":"⚡","s":"mvp","c":"Scalability","d":"1000-tenant test, Lighthouse (S18,22)","y":6,"cut":null},{"n":"UAT + 5 paying pilots","i":"🚀","s":"mvp","c":"Launch & Pilots","d":"UAT → paid conversion (S22)","y":5,"cut":null},{"n":"Launch / go-live","i":"🎉","s":"mvp","c":"Launch & Pilots","d":"Go-live + monitoring (S23)","y":4,"cut":null},{"n":"Public API / SDK","i":"🔌","s":"later","c":"Platform & Billing","d":"REST + SDKs (L-4, L-5)","y":8,"cut":null},{"n":"Proactive insight engine","i":"📡","s":"later","c":"Art-E (AI assistant)","d":"Unprompted nudges (L-1, L-2)","y":6,"cut":null},{"n":"Self-hosted Art-E","i":"🦙","s":"later","c":"Art-E (AI assistant)","d":"LLaMA fine-tune, 10× cheaper (L-2, L-7)","y":10,"cut":null},{"n":"Stripe billing","i":"💳","s":"later","c":"Platform & Billing","d":"Self-serve subscriptions (L-7)","y":4,"cut":null},{"n":"Reports & digests","i":"📄","s":"fast","c":"Crisis & Alerts","d":"Scheduled PDF + email (FT-5)","y":4,"cut":null},{"n":"Saved Insights","i":"📌","s":"fast","c":"Home & Experience","d":"Pin + share (FT-3, FT-5, FT-6)","y":3,"cut":null},{"n":"Top-bar search","i":"🔍","s":"fast","c":"Home & Experience","d":"Search across posts, comments, insights","y":3,"cut":null},{"n":"Inbox triage","i":"🗂️","s":"fast","c":"Crisis & Alerts","d":"Assignee + priority + bulk actions on alerts","y":3,"cut":null},{"n":"WhatsApp integration","i":"💚","s":"later","c":"Crisis & Alerts","d":"Rich crisis alerts + two-way replies/commands in WhatsApp","y":4,"cut":null},{"n":"Team Messages / collaboration","i":"👥","s":"later","c":"Collaboration & Team","d":"Internal chat about insights & drafts","y":5,"cut":null},{"n":"Share-by-link + audit log","i":"🔗","s":"fast","c":"Home & Experience","d":"Share an insight/report by link","y":2,"cut":null},{"n":"Draft scheduling + reminder","i":"⏰","s":"later","c":"Predictions & Drafts","d":"Schedule a draft + reminder","y":3,"cut":null},{"n":"Draft templates + versions","i":"📋","s":"later","c":"Predictions & Drafts","d":"Template library + version history","y":3,"cut":null},{"n":"Onboarding tour","i":"🧭","s":"mvp","c":"Home & Experience","d":"First-time user guided tour","y":2,"cut":null},{"n":"Accessibility (WCAG 2.1 AA)","i":"♿","s":"mvp","c":"Home & Experience","d":"Keyboard, contrast, screen-reader","y":3,"cut":null},{"n":"AI disclaimers + explainability","i":"⚖️","s":"mvp","c":"Art-E (AI assistant)","d":"\"Why did Art-E say X\" + AI-output labels","y":2,"cut":null},{"n":"Art-E memory controls","i":"🧠","s":"mvp","c":"Art-E (AI assistant)","d":"Conversation memory + \"forget this\"","y":3,"cut":null},{"n":"2FA + active sessions","i":"🔐","s":"fast","c":"Facebook Connection & Account","d":"Two-factor auth + session management","y":2,"cut":null},{"n":"Connected-Pages UI + sync","i":"🔌","s":"mvp","c":"Facebook Connection & Account","d":"See connected pages + trigger a sync","y":3,"cut":null},{"n":"Benchmark vs category","i":"📊","s":"fast","c":"Analytics & Insights","d":"How a post performs vs its category","y":3,"cut":null},{"n":"Image-context fusion","i":"🖼️","s":"mvp","c":"Foundation & Data","d":"Combine CLIP + OCR + text into one signal","y":4,"cut":null},{"n":"Weekly \"what changed\" recap","i":"🗞️","s":"fast","c":"Analytics & Insights","d":"A plain-English weekly diff of your page","y":3,"cut":null},{"n":"Competitor / peer page tracking","i":"🏁","s":"later","c":"Discovery & Network","d":"Track a few public peer pages","y":8,"cut":null},{"n":"Urgent alert push (email/SMS)","i":"📨","s":"later","c":"Crisis & Alerts","d":"Push urgent crises via email/SMS beyond in-app","y":4,"cut":null},{"n":"Page Health Score","i":"❤️","s":"fast","c":"Analytics & Insights","d":"One 0–100 number for page health","y":3,"cut":null},{"n":"Per-tenant cost guardrails","i":"🛡️","s":"mvp","c":"Scalability","d":"Hard quotas + circuit breaker on LLM spend","y":3,"cut":null},{"n":"Audience segmentation & demographics","i":"👤","s":"later","c":"Analytics & Insights","d":"Who your audience is + behavioural segments","y":8,"cut":null},{"n":"Community detection per page","i":"🕸️","s":"later","c":"Discovery & Network","d":"Find sub-communities in your audience","y":8,"cut":null},{"n":"Discovery feed (business cards)","i":"🔭","s":"later","c":"Discovery & Network","d":"Cross-page discovery + auto business cards","y":8,"cut":null},{"n":"Collaboration matching (flywheel)","i":"🤝","s":"later","c":"Discovery & Network","d":"Match pages to collaborate + outreach flow","y":8,"cut":null},{"n":"Multi-page / team accounts","i":"🏢","s":"later","c":"Collaboration & Team","d":"Agencies managing many pages + seats","y":8,"cut":null},{"n":"Manual invoicing (pilots)","i":"🧾","s":"mvp","c":"Platform & Billing","d":"Invoice the 5 pilots by hand","y":1,"cut":null},{"n":"Feed prioritisation algorithm","i":"📶","s":"later","c":"Home & Experience","d":"Rank Home Feed items by importance v2","y":4,"cut":null},{"n":"Guardrails + citation gate","i":"🛡️","s":"mvp","c":"Art-E (AI assistant)","d":"Hallucination block + every number cited","y":4,"cut":null},{"n":"Group Chats (Discovery)","i":"💬","s":"later","c":"Discovery & Network","d":"Multi-page community chats — \"atomic networks\"","y":6,"cut":null},{"n":"Page Connection Network","i":"🕸️","s":"later","c":"Discovery & Network","d":"Visual graph: node=page, edge=overlap","y":6,"cut":null},{"n":"Post Cascade Graph","i":"🌊","s":"later","c":"Discovery & Network","d":"How a post spreads across pages (R0)","y":6,"cut":null},{"n":"Audience overlap (Jaccard)","i":"🔗","s":"later","c":"Discovery & Network","d":"Ranked audience overlap between pages","y":5,"cut":null},{"n":"Collaboration Flywheel","i":"♻️","s":"later","c":"Discovery & Network","d":"Collab performance loop + best collab times","y":6,"cut":null},{"n":"Settings — full 7-tab page","i":"⚙️","s":"mvp","c":"Facebook Connection & Account","d":"Account/Notif/Billing/Security/Art-E/Data/Integrations","y":4,"cut":null},{"n":"Integrations hub","i":"🧩","s":"later","c":"Platform & Billing","d":"Slack / Zapier / connector marketplace","y":6,"cut":null},{"n":"Reports & Alerts page","i":"📄","s":"fast","c":"Crisis & Alerts","d":"Scheduled PDF/CSV reports + the alert rules list","y":4,"cut":null},{"n":"Alert rules builder","i":"🎚️","s":"mvp","c":"Crisis & Alerts","d":"Create-rule + per-archetype thresholds","y":3,"cut":null},{"n":"Content Strategy Score","i":"🎯","s":"fast","c":"Analytics & Insights","d":"AI composite 0–100 for your strategy","y":2,"cut":null},{"n":"Predictions — Content Lab + Timing","i":"🔮","s":"mvp","c":"Predictions & Drafts","d":"Predictor + Content Lab + Timing + History","y":6,"cut":null},{"n":"Commenter Influence Network","i":"🗣️","s":"later","c":"Discovery & Network","d":"Who are your most influential commenters","y":5,"cut":null},{"n":"Churn / fatigue risk","i":"📉","s":"later","c":"Discovery & Network","d":"Audience churn / engagement-fatigue risk","y":5,"cut":null},{"n":"Content pattern insights","i":"🎨","s":"fast","c":"Analytics & Insights","d":"Emoji sweet-spot, caption length, format","y":3,"cut":null},{"n":"Mobile / responsive (PWA)","i":"📱","s":"mvp","c":"Home & Experience","d":"Works on phones; installable PWA","y":5,"cut":null},{"n":"Custom alert subscriptions","i":"🔔","s":"fast","c":"Crisis & Alerts","d":"Subscribe to any metric/event you choose","y":4,"cut":null},{"n":"Notification prefs + quiet hours","i":"🔕","s":"mvp","c":"Facebook Connection & Account","d":"Email/push/in-app toggles + do-not-disturb","y":2,"cut":null},{"n":"Appearance / theme (light-dark)","i":"🎨","s":"fast","c":"Facebook Connection & Account","d":"Light/dark + colour-palette (in the mockup)","y":2,"cut":null},{"n":"Art-E answer feedback (thumbs)","i":"👍","s":"mvp","c":"Art-E (AI assistant)","d":"Thumbs up/down on every Art-E answer","y":2,"cut":null},{"n":"Empty / loading / error states","i":"🪧","s":"mvp","c":"Home & Experience","d":"Skeletons, empty states, graceful errors","y":3,"cut":null},{"n":"Account basics (photo, password)","i":"🪪","s":"mvp","c":"Facebook Connection & Account","d":"Change photo/password, delete account","y":3,"cut":null},{"n":"In-app 'What's new' / changelog","i":"📣","s":"fast","c":"Home & Experience","d":"Tell users what shipped","y":1,"cut":null},{"n":"Help & support centre","i":"🆘","s":"fast","c":"Home & Experience","d":"Docs, FAQ, contact support","y":3,"cut":null},{"n":"Multi-language (i18n)","i":"🌐","s":"later","c":"Home & Experience","d":"UI translation / localisation","y":6,"cut":null},{"n":"Keyboard shortcuts / command palette","i":"⌨️","s":"later","c":"Home & Experience","d":"Power-user navigation","y":3,"cut":null},{"n":"Post detail / drill-down","i":"🔎","s":"mvp","c":"Analytics & Insights","d":"Click a post to see its full breakdown","y":3,"cut":null},{"n":"Full data export (GDPR)","i":"📤","s":"mvp","c":"Facebook Connection & Account","d":"Export all my data on request","y":2,"cut":null},{"n":"Cookie consent + GDPR banner","i":"🍪","s":"mvp","c":"Facebook Connection & Account","d":"Consent banner + tracking choices","y":2,"cut":null},{"n":"Crisis response templates","i":"📑","s":"fast","c":"Crisis & Alerts","d":"Ready-made responses for a crisis","y":3,"cut":null},{"n":"Goals / targets tracking","i":"🎯","s":"fast","c":"Analytics & Insights","d":"Set a follower/engagement goal, track it","y":3,"cut":null},{"n":"Date-range / post comparison","i":"⚖️","s":"fast","c":"Analytics & Insights","d":"Compare two periods or two posts","y":3,"cut":null},{"n":"Invite teammate / seats","i":"➕","s":"later","c":"Collaboration & Team","d":"Invite a colleague to the account","y":3,"cut":null},{"n":"Multi-tenant isolation","i":"🚧","s":"mvp","c":"Security","d":"Hard data separation between tenants","y":5,"cut":null},{"n":"Secrets & encryption (KMS)","i":"🔑","s":"mvp","c":"Security","d":"Encrypted tokens, KMS, no secrets in code","y":3,"cut":null},{"n":"Rate limiting + abuse protection","i":"🚦","s":"mvp","c":"Security","d":"Throttle abuse + protect the API","y":3,"cut":null},{"n":"Audit / activity log","i":"📜","s":"fast","c":"Security","d":"Record who did what, when","y":3,"cut":null},{"n":"SOC 2 readiness","i":"🏅","s":"later","c":"Security","d":"Evidence collection toward SOC 2","y":8,"cut":null},{"n":"Role-based access control","i":"👮","s":"later","c":"Security","d":"Roles & permissions within an account","y":5,"cut":null},{"n":"Auto-scaling infrastructure","i":"📈","s":"mvp","c":"Scalability","d":"ECS Fargate scales with load","y":4,"cut":null},{"n":"Caching layer (Redis)","i":"⚡","s":"mvp","c":"Scalability","d":"Cache hot reads + computed results","y":3,"cut":null},{"n":"Async job queues (SQS)","i":"🧵","s":"mvp","c":"Scalability","d":"Background processing + retries","y":4,"cut":null},{"n":"DB read-replicas + partitioning","i":"🗃️","s":"fast","c":"Scalability","d":"Tenant-partitioned tables + read replicas","y":5,"cut":null},{"n":"Multi-region / HA","i":"🌍","s":"later","c":"Scalability","d":"Active-active across regions","y":8,"cut":null},{"n":"Load + soak testing (1000-tenant)","i":"🏋️","s":"later","c":"Scalability","d":"Prove it holds at 1000 tenants","y":5,"cut":null},{"n":"Monitoring + alerting (Sentry/uptime)","i":"📡","s":"mvp","c":"Reliability","d":"Errors, uptime, dashboards, on-call ping","y":3,"cut":null},{"n":"Centralised logging","i":"🪵","s":"mvp","c":"Reliability","d":"Structured logs, searchable","y":2,"cut":null},{"n":"Backups + disaster recovery","i":"💾","s":"fast","c":"Reliability","d":"Automated backups + restore drill","y":3,"cut":null},{"n":"Staging + canary + rollback","i":"🚀","s":"mvp","c":"Reliability","d":"Staging clone, canary deploy, 1-cmd rollback","y":3,"cut":null},{"n":"Status page / uptime SLA","i":"🟢","s":"fast","c":"Reliability","d":"Public status + incident history","y":2,"cut":null},{"n":"Chaos / failure testing","i":"🧨","s":"later","c":"Reliability","d":"Deliberately break things to test resilience","y":4,"cut":null},{"n":"Dead-letter queue + retries","i":"📨","s":"mvp","c":"Reliability","d":"Failed jobs retried, then parked safely","y":2,"cut":null},{"n":"Real-time AI Activity feed","i":"🟣","s":"fast","c":"Art-E (AI assistant)","d":"Live feed of what the AI is doing","y":3,"cut":null},{"n":"Toxicity Index","i":"☣️","s":"fast","c":"Analytics & Insights","d":"A tracked toxicity score over time","y":2,"cut":null},{"n":"Multi-page performance comparison","i":"📊","s":"later","c":"Analytics & Insights","d":"Compare metrics across your pages","y":4,"cut":null},{"n":"Discovery page (view-only preview)","i":"🔭","s":"mvp","c":"Discovery & Network","d":"A visible Discovery page — browse only, limited functionality","y":3,"cut":null},{"n":"Achievement scores + mastery","i":"🏆","s":"later","c":"Engagement & Rewards","d":"Scores for completing Art-E suggestions; mastery rewards","y":4,"cut":null},{"n":"Social validation (star/save pages)","i":"⭐","s":"later","c":"Engagement & Rewards","d":"Star/save pages — signal your audience is sought after","y":3,"cut":null},{"n":"Variable reward feed","i":"🎰","s":"later","c":"Engagement & Rewards","d":"A feed that varies each open so it never feels the same","y":3,"cut":null},{"n":"Rewards of the hunt (discovery search)","i":"🔦","s":"later","c":"Engagement & Rewards","d":"Satisfaction of searching the feed/discovery for insights & pages","y":3,"cut":null},{"n":"Art-E suggestion completion + streaks","i":"✅","s":"later","c":"Engagement & Rewards","d":"Track & reward acting on Art-E's recommendations","y":3,"cut":null},{"n":"Internal admin console","i":"🛠️","s":"mvp","c":"Internal Admin & Ops","d":"Tenant & user list, search, read-only impersonation, suspend (S20–21)","y":7,"cut":null},{"n":"Feature flags / kill switches","i":"🚩","s":"mvp","c":"Internal Admin & Ops","d":"Per-tenant flags + remote kill switches (S20)","y":3,"cut":null},{"n":"Admin roles + admin audit log","i":"🔑","s":"fast","c":"Internal Admin & Ops","d":"Tiered internal roles; tamper-evident staff action log","y":3,"cut":null},{"n":"Model-Ops dashboard","i":"📈","s":"mvp","c":"Internal Admin & Ops","d":"Per-task F1 over time, drift, model version in prod (S18)","y":4,"cut":null},{"n":"Label-review & gold-set console","i":"🏷️","s":"mvp","c":"Internal Admin & Ops","d":"Human-in-loop label QA, gold-set eval, disagreement adjudication (S6)","y":5,"cut":null},{"n":"Prompt & version registry","i":"📜","s":"mvp","c":"Internal Admin & Ops","d":"Manage/version Claude+DeepSeek prompts, staged rollout (S6)","y":3,"cut":null},{"n":"LLM cost & usage dashboard","i":"💸","s":"fast","c":"Internal Admin & Ops","d":"Per-tenant, per-model spend, team-facing (FT-1, FT-4)","y":2,"cut":null},{"n":"Pipeline run console","i":"⚙️","s":"fast","c":"Internal Admin & Ops","d":"View NEBULA/GALACTUS runs, reprocess, DLQ, backfill (FT-2, FT-6)","y":3,"cut":null},{"n":"Internal metrics dashboard","i":"📊","s":"fast","c":"Internal Admin & Ops","d":"Signups, activation, usage, pilot MRR (FT-3, FT-6)","y":2,"cut":null},{"n":"Product-analytics instrumentation","i":"🔬","s":"mvp","c":"Lifecycle & Retention","d":"Per-tenant/user event tracking; foundation for activation + health (S19)","y":4,"cut":null},{"n":"Activation checklist + progress","i":"✅","s":"mvp","c":"Lifecycle & Retention","d":"Guided setup with progress bar to first value (S21)","y":3,"cut":null},{"n":"Customer health score","i":"❤️","s":"fast","c":"Lifecycle & Retention","d":"Predicts pilot churn from usage signals (FT-3, FT-6)","y":3,"cut":null},{"n":"Lifecycle email + inbox digest","i":"📧","s":"fast","c":"Lifecycle & Retention","d":"Welcome, first-value, re-engagement, weekly digest to inbox","y":4,"cut":null},{"n":"In-app NPS / CSAT + feedback","i":"🗳️","s":"fast","c":"Lifecycle & Retention","d":"Survey + feedback capture beyond Art-E thumbs","y":2,"cut":null},{"n":"Per-insight model provenance","i":"🧬","s":"fast","c":"Art-E (AI assistant)","d":"Every insight shows model, confidence, data window","y":3,"cut":null},{"n":"Prediction-accuracy loop","i":"🎯","s":"fast","c":"Predictions & Drafts","d":"Log predicted vs actual virality; track accuracy over time (FT-2)","y":3,"cut":null},{"n":"AI usage metering","i":"🔢","s":"fast","c":"Platform & Billing","d":"Per-user Art-E queries + predictions run; underpins billing","y":2,"cut":null},{"n":"Value-realised score","i":"🌟","s":"fast","c":"Analytics & Insights","d":"Value delivered per page: alerts caught, insights acted on","y":3,"cut":null},{"n":"Feedback → retraining queue","i":"🔁","s":"later","c":"Foundation & Data","d":"Route thumbs + low-confidence (GALACTUS T3) into labelled retrain set (L-2)","y":3,"cut":null},{"n":"Login streak + reward","i":"🔥","s":"later","c":"Engagement & Rewards","d":"Daily-use streak with rewards to build habit","y":2,"cut":null},{"n":"Milestone celebrations","i":"🎉","s":"fast","c":"Engagement & Rewards","d":"Celebrate first page connected, first insight, etc.","y":2,"cut":null},{"n":"Referral / invite reward","i":"🎁","s":"later","c":"Engagement & Rewards","d":"Reward inviting a peer; powers Discovery loop","y":2,"cut":null},{"n":"Account & data deletion","i":"🗑️","s":"mvp","c":"Facebook Connection & Account","d":"Self-service account close + full data erasure (S19)","y":3,"cut":null},{"n":"Notification centre","i":"🔔","s":"fast","c":"Facebook Connection & Account","d":"Unified in-app inbox of all notifications","y":3,"cut":null},{"n":"Accent-colour customisation","i":"🎨","s":"fast","c":"Facebook Connection & Account","d":"User-choosable accent colour on top of light/dark","y":1,"cut":null},{"n":"Timezone & locale","i":"🌐","s":"fast","c":"Facebook Connection & Account","d":"Per-user timezone + locale settings","y":1,"cut":null},{"n":"Alert / digest scheduling","i":"⏰","s":"fast","c":"Crisis & Alerts","d":"Frequency, time, channel per alert","y":2,"cut":null},{"n":"Scheduled reports + PDF export","i":"🗓️","s":"fast","c":"Crisis & Alerts","d":"Email-delivered + PDF-exportable reports (FT-2)","y":3,"cut":null},{"n":"Anomaly-detection alerts","i":"📡","s":"fast","c":"Crisis & Alerts","d":"Auto-flag unusual spikes/drops","y":3,"cut":null},{"n":"Slack / Teams alerts","i":"💬","s":"fast","c":"Crisis & Alerts","d":"Push crisis alerts to Slack/Teams (FT-4)","y":2,"cut":null},{"n":"Facebook data-deletion callback","i":"♻️","s":"mvp","c":"Security","d":"Meta-required deletion-request endpoint + user deletion path (S21)","y":3,"cut":null},{"n":"Privacy Policy + Terms (versioned)","i":"📄","s":"mvp","c":"Security","d":"In-product ToS + Privacy, versioned, acceptance tracked (S19)","y":3,"cut":null},{"n":"Vulnerability reporting path","i":"🛡️","s":"mvp","c":"Security","d":"security.txt + report-a-vulnerability route (S21)","y":1,"cut":null},{"n":"Data retention + auto-deletion","i":"🧹","s":"mvp","c":"Security","d":"Retention windows + auto-delete on pilot end (S19)","y":3,"cut":null},{"n":"Data Use Checkup / DPA readiness","i":"📋","s":"mvp","c":"Security","d":"Meta DUC + Data Protection Assessment evidence binder (S22)","y":3,"cut":null},{"n":"Sub-processor list + vendor DPAs","i":"🔗","s":"fast","c":"Security","d":"AWS/Anthropic/DeepSeek list + signed DPAs (FT-4)","y":2,"cut":null},{"n":"Customer DPA template","i":"🤝","s":"fast","c":"Security","d":"Productised processor DPA for pilot pages","y":2,"cut":null},{"n":"Breach notification + runbook","i":"🚨","s":"fast","c":"Security","d":"Breach notify (incl. Meta) + incident response runbook","y":2,"cut":null},{"n":"Consent + restricted-data policy","i":"☑️","s":"fast","c":"Security","d":"Processing consent + restricted-platform-data handling","y":2,"cut":null},{"n":"Share of voice vs peers","i":"🗣️","s":"later","c":"Analytics & Insights","d":"Comparative share vs peer pages","y":3,"cut":null},{"n":"Custom / executive dashboard","i":"🧩","s":"later","c":"Analytics & Insights","d":"Saveable widget views for execs (L-4)","y":4,"cut":null},{"n":"Advocate / top-fan ID","i":"🏅","s":"fast","c":"Analytics & Insights","d":"Surface your biggest supporters","y":2,"cut":null},{"n":"Plans / tiers + usage metering","i":"🧾","s":"later","c":"Platform & Billing","d":"Tiered plans + metered usage","y":4,"cut":null},{"n":"Trial + paywall + upgrade","i":"🚪","s":"later","c":"Platform & Billing","d":"Trial management, paywall, upgrade/downgrade","y":3,"cut":null},{"n":"Marketing / landing site","i":"🌐","s":"mvp","c":"Marketing & Growth","d":"Public marketing site, separate from the app (S22)","y":6,"cut":null},{"n":"Waitlist + referral mechanics","i":"📝","s":"mvp","c":"Marketing & Growth","d":"Pre-launch waitlist with built-in referral (S22)","y":3,"cut":null},{"n":"Public pricing page","i":"🏷️","s":"mvp","c":"Marketing & Growth","d":"Public tiers + pricing (S22)","y":2,"cut":null},{"n":"Interactive demo / sandbox","i":"🕹️","s":"fast","c":"Marketing & Growth","d":"Try with seeded sample data, no FB connection (FT-6)","y":4,"cut":null},{"n":"Marketing attribution","i":"📐","s":"fast","c":"Marketing & Growth","d":"GA4 + Meta pixel + UTM tracking (FT-4)","y":2,"cut":null},{"n":"SEO / GEO foundation","i":"🔎","s":"fast","c":"Marketing & Growth","d":"Sitemap, structured data, AI-search optimisation","y":3,"cut":null},{"n":"Case studies / testimonials","i":"⭐","s":"fast","c":"Marketing & Growth","d":"Social proof from the pilots (FT-6)","y":2,"cut":null},{"n":"Comparison / 'alternative' pages","i":"🆚","s":"later","c":"Marketing & Growth","d":"'[competitor] alternative' SEO pages","y":2,"cut":null},{"n":"Blog / content hub","i":"📰","s":"later","c":"Marketing & Growth","d":"Educational content marketing","y":3,"cut":null},{"n":"Product Hunt / press launch kit","i":"🚀","s":"fast","c":"Marketing & Growth","d":"PH assets, demo video, press kit (FT-2, FT-3, FT-6)","y":2,"cut":null},{"n":"Public roadmap + feedback board","i":"🗺️","s":"fast","c":"Marketing & Growth","d":"Public roadmap + feature requests (FT-2, FT-3)","y":2,"cut":null},{"n":"Book-a-demo + CRM capture","i":"📅","s":"fast","c":"Marketing & Growth","d":"Demo booking + lead capture into CRM","y":2,"cut":null},{"n":"Trust Center","i":"🏛️","s":"fast","c":"Marketing & Growth","d":"Public security/privacy/compliance hub","y":3,"cut":null},{"n":"Report / flag content","i":"🚩","s":"fast","c":"Trust & Safety","d":"Categorised user reports (spam, harassment, scam)","y":2,"cut":null},{"n":"Block / mute users","i":"🚫","s":"fast","c":"Trust & Safety","d":"User-level block and mute","y":2,"cut":null},{"n":"Community guidelines","i":"📕","s":"fast","c":"Trust & Safety","d":"Documented rules with examples","y":1,"cut":null},{"n":"Moderation queue","i":"🗂️","s":"later","c":"Trust & Safety","d":"Review + action flagged content","y":3,"cut":null},{"n":"Harm content-scoring","i":"🌡️","s":"later","c":"Trust & Safety","d":"Score UGC harm — reuse toxicity model (L-2, L-6, L-7)","y":3,"cut":null},{"n":"Spam / bot / anti-raid","i":"🤖","s":"later","c":"Trust & Safety","d":"Spam-wave + coordinated-abuse detection (L-6)","y":3,"cut":null},{"n":"Appeals flow + audit trail","i":"⚖️","s":"later","c":"Trust & Safety","d":"Request review of moderation actions","y":2,"cut":null},{"n":"Social rate-limits + verified pages","i":"✅","s":"fast","c":"Trust & Safety","d":"Throttle connect/invite/chat; verify pages","y":2,"cut":null},{"n":"Automated E2E + regression suite","i":"🧪","s":"fast","c":"QA & Test Engineering","d":"Critical-flow E2E in CI, under 30 min (FT-1)","y":5,"cut":null},{"n":"CI test gates + coverage","i":"🚦","s":"fast","c":"QA & Test Engineering","d":"Block merge on failing tests; show on PRs (FT-4)","y":2,"cut":null},{"n":"API contract tests","i":"🔌","s":"fast","c":"QA & Test Engineering","d":"Guard the Facebook Graph API + internal APIs","y":3,"cut":null},{"n":"Automated accessibility testing","i":"♿","s":"fast","c":"QA & Test Engineering","d":"Accessibility scanning in CI","y":2,"cut":null},{"n":"Visual regression testing","i":"🖼️","s":"fast","c":"QA & Test Engineering","d":"Screenshot diffing across browsers","y":2,"cut":null},{"n":"Cross-browser / device testing","i":"🧭","s":"fast","c":"QA & Test Engineering","d":"Chrome/Safari/Firefox/Edge + mobile (FT-3)","y":2,"cut":null},{"n":"Continuous security scanning","i":"🛂","s":"fast","c":"QA & Test Engineering","d":"SAST/DAST/dependency/secret scans in CI","y":3,"cut":null},{"n":"Performance budgets in CI","i":"⚡","s":"later","c":"QA & Test Engineering","d":"Fail builds that regress performance","y":2,"cut":null},{"n":"Bug tracking + QA metrics","i":"🐞","s":"fast","c":"QA & Test Engineering","d":"Triage workflow + quality dashboard (FT-3, FT-4, FT-6)","y":2,"cut":null},{"n":"Closed beta / UAT program","i":"🧑‍🔬","s":"later","c":"QA & Test Engineering","d":"Structured pre-launch beta cohort (L-7)","y":2,"cut":null},{"n":"AI-generated content labelling","i":"🏷️","s":"mvp","c":"Security","d":"Mark Drafts + Art-E output as AI-generated (EU AI Act) (S19)","y":2,"cut":null},{"n":"Emotion-recognition disclosure","i":"🙂","s":"mvp","c":"Security","d":"Disclose + Article-5 screen the emotion model (S19)","y":1,"cut":null},{"n":"AI use policy + AI literacy","i":"📘","s":"fast","c":"Security","d":"Documented AI use policy + team training (Article 4)","y":1,"cut":null},{"n":"AI Act risk classification","i":"📋","s":"fast","c":"Security","d":"Classify systems + maintain documentation","y":2,"cut":null},{"n":"Acceptable Use Policy","i":"📃","s":"fast","c":"Security","d":"Permitted/prohibited use terms","y":1,"cut":null},{"n":"SLA / uptime commitment","i":"📈","s":"fast","c":"Security","d":"Published uptime commitment","y":1,"cut":null},{"n":"Accessibility statement","i":"♿","s":"fast","c":"Security","d":"Public WCAG conformance statement (FT-3)","y":1,"cut":null},{"n":"DMCA / copyright takedown","i":"©️","s":"fast","c":"Security","d":"Copyright + takedown process","y":1,"cut":null},{"n":"Refund / cancellation policy","i":"💱","s":"fast","c":"Security","d":"Refund + cancellation terms","y":1,"cut":null},{"n":"Knowledge base / docs portal","i":"📚","s":"fast","c":"Home & Experience","d":"Self-serve help articles","y":3,"cut":null},{"n":"In-app support chat","i":"💬","s":"fast","c":"Home & Experience","d":"Contact / chat widget in-app","y":2,"cut":null},{"n":"API documentation portal","i":"📖","s":"later","c":"Home & Experience","d":"Public API reference + guides (L-4)","y":3,"cut":null},{"n":"Transactional email + deliverability","i":"📧","s":"fast","c":"Reliability","d":"Email infra + SPF/DKIM/DMARC + branded templates","y":3,"cut":null},{"n":"Tax (VAT) + dunning","i":"🧾","s":"later","c":"Platform & Billing","d":"VAT/sales tax + failed-payment recovery","y":3,"cut":null},{"n":"Design system / component library","i":"🎨","s":"fast","c":"Foundation & Data","d":"Shared tokens + components (app + marketing)","y":4,"cut":null},{"n":"Action Center / To-do","i":"✅","s":"mvp","c":"Home & Experience","d":"Unified, Art-E-prioritised action queue (S11)","y":4,"cut":null},{"n":"Insight Stories (home)","i":"📸","s":"fast","c":"Home & Experience","d":"Tappable stories-style insight cards on home","y":3,"cut":null},{"n":"Contextual tips / coach marks","i":"💡","s":"fast","c":"Home & Experience","d":"Toggleable in-product tips beyond first-run (FT-3)","y":2,"cut":null},{"n":"Daily briefing / digest","i":"📰","s":"fast","c":"Analytics & Insights","d":"Auto daily AI summary across pages","y":2,"cut":null},{"n":"Cross-page reshare / repost","i":"🔁","s":"fast","c":"Predictions & Drafts","d":"Reshare a winning post to your other pages","y":2,"cut":null},{"n":"Live real-time counters","i":"⚡","s":"later","c":"Analytics & Insights","d":"Reach-right-now + engagements/min live tiles (L-1, L-5, L-6)","y":2,"cut":null},{"n":"Snooze / mute alerts","i":"🔕","s":"fast","c":"Crisis & Alerts","d":"Mute / snooze an alert or crisis for N hours (FT-2)","y":1,"cut":null},{"n":"Report templates","i":"🧾","s":"fast","c":"Crisis & Alerts","d":"Prebuilt report types: weekly / monthly / brand-risk","y":1,"cut":null},{"n":"Match score breakdown","i":"🔍","s":"fast","c":"Discovery & Network","d":"Per-factor match sub-scores + why-this-match","y":2,"cut":null},{"n":"Post 'why it worked' post-mortem","i":"🔬","s":"fast","c":"Analytics & Insights","d":"Per-post performance attribution","y":2,"cut":null}],"cats":["Foundation & Data","Predictions & Drafts","Facebook Connection & Account","Home & Experience","Analytics & Insights","Crisis & Alerts","Art-E (AI assistant)","Discovery & Network","Security","Scalability","Launch & Pilots","Platform & Billing","Collaboration & Team","Reliability","Engagement & Rewards","Internal Admin & Ops","Lifecycle & Retention","Marketing & Growth","Trust & Safety","QA & Test Engineering"],"counts":{"done":4,"mvp":66,"fast":88,"later":60},"sprints":37,"tickets":530};
+var STC={done:'#34d399',mvp:'#00D6AE',fast:'#f5a623',later:'#a78bfa'};
+var STL={done:'Done',mvp:'MVP',fast:'Fast-follow',later:'Later'};
+
+/* ═══ Toasts ═══ */
+var tw=document.createElement('div');tw.className='fbl-toasts';document.body.appendChild(tw);
+window.fblToast=function(msg,type){
+  type=type||'ok';
+  var ic=type==='ok'?'<polyline points="20 6 9 17 4 12"/>':type==='warn'?'<path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h16.9a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/>':'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>';
+  var t=document.createElement('div');t.className='fbl-toast '+type;
+  t.innerHTML='<svg viewBox="0 0 24 24">'+ic+'</svg>'+msg;
+  tw.appendChild(t);requestAnimationFrame(function(){t.classList.add('on');});
+  setTimeout(function(){t.classList.remove('on');setTimeout(function(){t.remove();},250);},2600);
+};
+
+/* ═══ New nav items + stage chips ═══ */
+var navSection=document.querySelector('.sidebar-section');
+var NEWNAV=[
+ {p:'besttimes',st:'mvp',lbl:'Best Times',ic:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>'},
+ {p:'drafts',st:'mvp',lbl:'Drafts',ic:'<path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/>'},
+ {p:'inbox',st:'mvp',lbl:'To-do / Inbox',ic:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.1L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.5-6.9A2 2 0 0016.8 4H7.2a2 2 0 00-1.7 1.1z"/>'},
+ {p:'saved',st:'fast',lbl:'Saved Insights',ic:'<path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>'},
+ {p:'reports',st:'fast',lbl:'Reports',ic:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15l2 2 4-5"/>'},
+ {p:'settings',st:'mvp',lbl:'Settings',ic:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 008.6 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H2.7a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h.01a1.65 1.65 0 001-1.51V2.7a2 2 0 114 0v.09a1.65 1.65 0 001 1.51h.01a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v.01a1.65 1.65 0 001.51 1H21.3a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/>'},
+ {p:'roadmap',st:'plan',lbl:'Master Plan',ic:'<polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>'}
+];
+function navItem(d){
+  var a=document.createElement('a');a.className='nav-item';a.setAttribute('data-page',d.p);
+  a.onclick=function(){navigateTo(d.p,a);};
+  a.innerHTML='<span class="nav-item-icon"><svg viewBox="0 0 24 24">'+d.ic+'</svg></span>'+d.lbl
+   +'<span class="fbl-stage '+d.st+'">'+(d.st==='plan'?'PLAN':d.st==='fast'?'FAST':d.st.toUpperCase())+'</span>';
+  return a;
+}
+if(navSection){
+  var anchor=navSection.querySelector('[data-page="analytics"]');
+  NEWNAV.forEach(function(d){
+    var el=navItem(d);
+    if(anchor&&anchor.nextSibling)navSection.insertBefore(el,anchor.nextSibling.nextSibling||null);
+    else navSection.appendChild(el);
+    anchor=el;
+  });
+  /* tag existing items */
+  ['home','predictions','alerts','analytics'].forEach(function(p){
+    var n=navSection.querySelector('[data-page="'+p+'"]');
+    if(n&&!n.querySelector('.fbl-stage')){var s=document.createElement('span');s.className='fbl-stage mvp';s.textContent='MVP';n.appendChild(s);}
+  });
+  var disc=navSection.querySelector('[data-page="discovery"]');
+  if(disc&&!disc.querySelector('.fbl-stage')){var s2=document.createElement('span');s2.className='fbl-stage preview';s2.textContent='PREVIEW';disc.appendChild(s2);}
+}
+
+/* ═══ New pages ═══ */
+var pagesHost=document.getElementById('page-home')?document.getElementById('page-home').parentNode:null;
+function addPage(id,html){
+  var d=document.createElement('div');d.className='page';d.id='page-'+id;d.innerHTML=html;
+  if(pagesHost)pagesHost.appendChild(d);
+}
+function head(t,s){return '<div class="page-header"><div class="page-title-block"><h1 class="page-title">'+t+'</h1><div class="page-sub">'+s+'</div></div></div>';}
+
+/* Best Times */
+addPage('besttimes',head('Best Times','When your audience is actually awake — heatmap from 2 years of your data · Core MVP')
+ +'<div class="fbl-grid2"><div class="fbl-panel"><h3>Engagement heatmap</h3><div class="sub">7 days × 24 hours · darker teal = more of your fans online</div><div class="fbl-heat" id="fblHeat"></div></div>'
+ +'<div class="fbl-panel"><h3>This week\u2019s best slots</h3><div class="sub">Art-E picked these from the model, ranked by predicted reach</div>'
+ +'<div class="fbl-slot"><div class="tm">Tue 6:00 PM</div><div class="why">Your single strongest window. Posts here average <b style="color:var(--t1)">2.3\u00d7</b> your normal reach.</div><button class="fbl-btn" onclick="fblToast(\'Tuesday 6PM reserved for 4 weeks\')">Reserve</button></div>'
+ +'<div class="fbl-slot"><div class="tm">Thu 8:30 PM</div><div class="why">Evening scroll peak. Video posts do especially well in this slot.</div><button class="fbl-btn ghost" onclick="fblToast(\'Thursday 8:30PM reserved\')">Reserve</button></div>'
+ +'<div class="fbl-slot"><div class="tm">Sun 11:00 AM</div><div class="why">Weekend brunch window. Light, funny content lands best here.</div><button class="fbl-btn ghost" onclick="fblToast(\'Sunday 11AM reserved\')">Reserve</button></div>'
+ +'<div class="fbl-ailabel"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>Prophet timing model \u00b7 retrained weekly \u00b7 confidence 91%</div></div></div>');
+
+/* Drafts */
+addPage('drafts',head('Drafts','Score a post before you publish it — Artemis tells you if it will flop · Core MVP')
+ +'<div class="fbl-grid2"><div class="fbl-panel"><h3>New draft</h3><div class="sub">The score updates live as you type</div>'
+ +'<textarea class="fbl-draft-ta" id="fblDraftTa">When you say \u201cone last drink\u201d and the bartender already knows it\u2019s a lie \ud83d\ude02\ud83c\udf7a</textarea>'
+ +'<div style="display:flex;align-items:center;gap:18px;margin-top:14px"><div class="fbl-ring"><svg width="104" height="104"><circle class="bgc" cx="52" cy="52" r="44" fill="none" stroke-width="9"/><circle class="fgc" id="fblRingFg" cx="52" cy="52" r="44" fill="none" stroke-width="9" stroke-dasharray="276.5" stroke-dashoffset="276.5"/></svg><div class="num" id="fblRingNum">0</div></div>'
+ +'<div style="flex:1"><div id="fblSuggs"></div></div></div>'
+ +'<div style="display:flex;gap:9px;margin-top:14px"><button class="fbl-btn" onclick="fblToast(\'Draft saved with score\')">Save draft</button><button class="fbl-btn ghost" onclick="fblToast(\'Copied — paste it into Facebook\',\'info\')">Copy to Facebook</button></div>'
+ +'<div class="fbl-ailabel"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg>AI-assisted suggestions are labelled \u00b7 EU AI Act compliant</div></div>'
+ +'<div class="fbl-panel"><h3>Recent drafts</h3><div class="sub">Scored and ready</div>'
+ +'<div class="fbl-row"><div style="flex:1"><div style="font-size:var(--fs-md);color:var(--t1);font-weight:600">Friday night plans: fridge, blanket, regret \ud83d\udecb\ufe0f</div><div style="font-size:var(--fs-sm);color:var(--t3)">Saved 2h ago</div></div><span class="fbl-tag opp">87 \u00b7 STRONG</span></div>'
+ +'<div class="fbl-row"><div style="flex:1"><div style="font-size:var(--fs-md);color:var(--t1);font-weight:600">Beer is proof the weekend loves us</div><div style="font-size:var(--fs-sm);color:var(--t3)">Saved yesterday</div></div><span class="fbl-tag warn">61 \u00b7 OKAY</span></div>'
+ +'<div class="fbl-row"><div style="flex:1"><div style="font-size:var(--fs-md);color:var(--t1);font-weight:600">Our 2026 product announcement and roadmap thread</div><div style="font-size:var(--fs-sm);color:var(--t3)">Saved Mon</div></div><span class="fbl-tag crisis">34 \u00b7 WILL FLOP</span></div>'
+ +'<div style="margin-top:13px;font-size:var(--fs-sm);color:var(--t3)">Prediction history feeds the accuracy loop \u2014 every score is checked against what actually happened.</div></div></div>');
+
+/* Inbox */
+addPage('inbox',head('To-do / Inbox','One prioritised queue — Art-E triages everything into what to act on next · Core MVP')
+ +'<div style="max-width:760px" id="fblInbox"></div>');
+
+/* Saved Insights */
+addPage('saved',head('Saved Insights','Pin the answers that matter, share them with the team · Fast-follow')
+ +'<div class="fbl-grid2">'
+ +'<div class="fbl-saved"><div class="tp">TIMING</div><div class="tx">Tuesday 6PM posts average 2.3\u00d7 reach \u2014 reserve the slot weekly and treat it as prime inventory.</div><button class="fbl-btn ghost" onclick="fblToast(\'Share link copied\',\'info\')">Share link</button></div>'
+ +'<div class="fbl-saved"><div class="tp">CONTENT</div><div class="tx">Captions under 90 characters outperform long ones by 41% on this page. Short and punchy wins.</div><button class="fbl-btn ghost" onclick="fblToast(\'Share link copied\',\'info\')">Share link</button></div>'
+ +'<div class="fbl-saved"><div class="tp">CRISIS</div><div class="tx">October-style pile-ons start with 3+ angry replies inside 10 minutes \u2014 the alert threshold is tuned to that fingerprint.</div><button class="fbl-btn ghost" onclick="fblToast(\'Share link copied\',\'info\')">Share link</button></div>'
+ +'<div class="fbl-saved"><div class="tp">AUDIENCE</div><div class="tx">Your super-sharers are 4% of fans but drive 38% of reach. Friday content is what activates them.</div><button class="fbl-btn ghost" onclick="fblToast(\'Share link copied\',\'info\')">Share link</button></div>'
+ +'</div>');
+
+/* Reports */
+addPage('reports',head('Reports & Alerts','Scheduled digests that come to you — PDF, email, Slack · Fast-follow')
+ +'<div class="fbl-grid3" style="margin-bottom:16px">'
+ +'<div class="fbl-tpl" onclick="fblGenReport(this,\'Weekly performance\')"><div class="em">\ud83d\uddde\ufe0f</div><div class="nm">Weekly performance</div><div class="ds">What changed, what worked, what to do next week</div></div>'
+ +'<div class="fbl-tpl" onclick="fblGenReport(this,\'Monthly deep-dive\')"><div class="em">\ud83d\udcca</div><div class="nm">Monthly deep-dive</div><div class="ds">Trends, content patterns, audience movement</div></div>'
+ +'<div class="fbl-tpl" onclick="fblGenReport(this,\'Brand-risk audit\')"><div class="em">\ud83d\udee1\ufe0f</div><div class="nm">Brand-risk audit</div><div class="ds">Toxicity index, crisis near-misses, exposure</div></div></div>'
+ +'<div class="fbl-panel"><h3>Scheduled</h3><div class="sub">Delivered automatically</div>'
+ +'<div class="fbl-row"><div style="flex:1"><div style="font-size:var(--fs-md);color:var(--t1);font-weight:600">Weekly recap \u2192 email</div><div style="font-size:var(--fs-sm);color:var(--t3)">Mondays 8:00 AM \u00b7 PDF attached</div></div><div class="fbl-tgl on" onclick="fblTgl(this)"></div></div>'
+ +'<div class="fbl-row"><div style="flex:1"><div style="font-size:var(--fs-md);color:var(--t1);font-weight:600">Crisis alerts \u2192 Slack</div><div style="font-size:var(--fs-sm);color:var(--t3)">#social-alerts \u00b7 instant</div></div><div class="fbl-tgl on" onclick="fblTgl(this)"></div></div>'
+ +'<div class="fbl-row"><div style="flex:1"><div style="font-size:var(--fs-md);color:var(--t1);font-weight:600">Daily briefing \u2192 in-app</div><div style="font-size:var(--fs-sm);color:var(--t3)">Every morning \u00b7 4-min read</div></div><div class="fbl-tgl" onclick="fblTgl(this)"></div></div></div>');
+
+/* Settings (7 tabs) */
+addPage('settings',head('Settings','Account, notifications, Art-E, data — everything in your control · Core MVP')
+ +'<div class="fbl-tabs" id="fblTabs"></div><div id="fblPanes"></div>');
+
+/* Roadmap / Master plan */
+addPage('roadmap',head('Master Plan','Every capability in the build — '+PLAN.feats.length+' features, ticket-for-ticket with the sprint tracker')
+ +'<div class="fbl-stats">'
+ +'<div class="fbl-stat"><div class="v">'+PLAN.feats.length+'</div><div class="l">Capabilities mapped</div></div>'
+ +'<div class="fbl-stat"><div class="v">'+PLAN.tickets+'</div><div class="l">Tickets \u00b7 '+PLAN.sprints+' sprints</div></div>'
+ +'<div class="fbl-stat"><div class="v" style="color:var(--teal)">'+PLAN.counts.mvp+'</div><div class="l">MVP \u00b7 launch-core</div></div>'
+ +'<div class="fbl-stat"><div class="v">28 Nov</div><div class="l">Go-live \u00b7 2026</div></div></div>'
+ +'<div class="fbl-filters" id="fblFilters">'
+ +'<span class="fbl-fpill on" data-st="all">All '+PLAN.feats.length+'</span>'
+ +'<span class="fbl-fpill" data-st="done">Done '+PLAN.counts.done+'</span>'
+ +'<span class="fbl-fpill" data-st="mvp">MVP '+PLAN.counts.mvp+'</span>'
+ +'<span class="fbl-fpill" data-st="fast">Fast-follow '+PLAN.counts.fast+'</span>'
+ +'<span class="fbl-fpill" data-st="later">Later '+PLAN.counts.later+'</span>'
+ +'<input class="fbl-fsearch" id="fblFSearch" placeholder="Filter features\u2026"></div>'
+ +'<div id="fblRoadmap"></div>');
+
+/* ═══ Renderers ═══ */
+function rnd(seed){return function(){seed=(seed*9301+49297)%233280;return seed/233280;};}
+
+/* Heatmap */
+(function(){
+  var h=document.getElementById('fblHeat');if(!h)return;
+  var days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],r=rnd(42),html='<div class="hd"></div>';
+  for(var c=0;c<24;c++)html+='<div class="hd">'+(c%6===0?c:'')+'</div>';
+  for(var d=0;d<7;d++){html+='<div class="dy">'+days[d]+'</div>';
+    for(var hr=0;hr<24;hr++){
+      var v=0.08+r()*0.3;
+      if(hr>=17&&hr<=21)v+=0.32;if(hr>=11&&hr<=13)v+=0.18;if(hr<7)v=0.04;
+      if(d===1&&hr===18)v=1;if(d===3&&hr===20)v=0.92;if(d===6&&hr===11)v=0.85;
+      var best=(d===1&&hr===18)||(d===3&&hr===20)||(d===6&&hr===11);
+      html+='<div class="cl'+(best?' best':'')+'" style="--v:'+v.toFixed(2)+'" title="'+days[d]+' '+hr+':00 \u00b7 '+Math.round(v*100)+'% of peak"></div>';
+    }}
+  h.innerHTML=html;
+})();
+
+/* Draft live scoring */
+(function(){
+  var ta=document.getElementById('fblDraftTa'),fg=document.getElementById('fblRingFg'),
+      num=document.getElementById('fblRingNum'),sg=document.getElementById('fblSuggs');
+  if(!ta)return;
+  var C=276.5;
+  function score(t){
+    var s=50,L=t.length;
+    if(L>0&&L<=90)s+=22;else if(L<=140)s+=8;else s-=Math.min(28,(L-140)/6);
+    if(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(t))s+=9;
+    if(/\?/.test(t))s+=5;
+    if(/\b(announcement|roadmap|thread|update)\b/i.test(t))s-=18;
+    if(/\b(drink|beer|bar|hangover|weekend|friday)\b/i.test(t))s+=8;
+    return Math.max(5,Math.min(98,Math.round(s)));
+  }
+  function paint(){
+    var t=ta.value,s=score(t);
+    num.textContent=s;
+    fg.style.strokeDashoffset=(C-(C*s/100)).toFixed(1);
+    fg.style.stroke=s>=75?'var(--teal)':s>=50?'var(--warn)':'var(--crisis)';
+    var sug=[];
+    if(t.length>90)sug.push(['Shorten the caption','your fans prefer under 90 chars','+9']);
+    if(!/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(t))sug.push(['Add one emoji','lifts engagement on this page','+6']);
+    if(!/\?/.test(t))sug.push(['End with a question','invites replies, feeds the algorithm','+5']);
+    if(sug.length===0)sug.push(['Looking strong','post it in your Tuesday 6PM slot','\u2605']);
+    sg.innerHTML=sug.map(function(x){return '<div class="fbl-sugg"><b>'+x[0]+'</b> \u00b7 '+x[1]+'<span class="pl">'+x[2]+'</span></div>';}).join('');
+  }
+  var deb;ta.addEventListener('input',function(){clearTimeout(deb);deb=setTimeout(paint,180);});
+  window._fblPaintDraft=paint;
+})();
+
+/* Inbox */
+(function(){
+  var host=document.getElementById('fblInbox');if(!host)return;
+  var items=[
+   ['crisis','CRISIS','Reply to the angry thread on last night\u2019s post','23 angry comments in 11 min \u00b7 Art-E drafted a response in your voice'],
+   ['opp','VIRAL','Cross-post the 6PM banger to your second page','Shares running 3.2\u00d7 normal \u00b7 ~9,600 extra reach if done in 40 min'],
+   ['warn','WINDOW','Tonight 7:40 PM slot is open','Your audience peaks \u00b7 one scored draft is ready to go'],
+   ['collab','COLLAB','Meme Machine UK wants to collaborate','74% audience overlap \u00b7 match breakdown attached'],
+   ['warn','REVIEW','Approve the auto-trimmed Friday draft','Art-E shortened it to 84 chars \u00b7 score went 61 \u2192 83'],
+   ['opp','RECAP','Read your weekly recap','Reach +12%, sentiment steady, one near-miss crisis caught']
+  ];
+  host.innerHTML=items.map(function(x,i){
+    return '<div class="fbl-inb" data-i="'+i+'"><div class="ck" onclick="fblInbDone(this)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>'
+     +'<div style="flex:1"><div class="ti">'+x[2]+'</div><div class="sb">'+x[3]+'</div></div><span class="fbl-tag '+x[0]+'">'+x[1]+'</span></div>';
+  }).join('');
+})();
+window.fblInbDone=function(ck){
+  var row=ck.closest('.fbl-inb');row.classList.toggle('done');
+  if(row.classList.contains('done'))fblToast('Done \u2014 nice. Art-E logged it.');
+};
+window.fblTgl=function(t){t.classList.toggle('on');fblToast(t.classList.contains('on')?'Turned on':'Turned off','info');};
+window.fblGenReport=function(el,name){
+  fblToast('Generating '+name+'\u2026','info');
+  setTimeout(function(){fblToast(name+' ready \u2014 PDF in your email');},1400);
+};
+
+/* Settings tabs */
+(function(){
+  var tabs=document.getElementById('fblTabs'),panes=document.getElementById('fblPanes');if(!tabs)return;
+  function rows(arr){return '<div class="fbl-panel">'+arr.map(function(r){
+    var right=r[2]==='tgl'?'<div class="fbl-tgl'+(r[3]?' on':'')+'" onclick="fblTgl(this)"></div>'
+      :r[2]==='btn'?'<button class="fbl-btn ghost'+(r[4]?' fbl-danger':'')+'" onclick="fblToast(\''+r[3]+'\',\'info\')">'+(r[5]||'Open')+'</button>':'';
+    return '<div class="fbl-row"><div style="flex:1"><div style="font-size:var(--fs-md);color:var(--t1);font-weight:600">'+r[0]+'</div><div style="font-size:var(--fs-sm);color:var(--t3)">'+r[1]+'</div></div>'+right+'</div>';
+  }).join('')+'</div>';}
+  var T={
+   'Account':rows([['Profile photo & name','Asad \u00b7 asad@artemisai.co.uk','btn','Profile editor opens',0,'Edit'],['Change password','Last changed 3 months ago','btn','Password flow opens',0,'Change'],['Delete account','Erases all data \u00b7 GDPR right to be forgotten','btn','Deletion flow with 14-day grace period',1,'Delete']]),
+   'Notifications':rows([['Crisis alerts','Email + push + WhatsApp \u00b7 instant','tgl',1],['Viral opportunities','Push only','tgl',1],['Quiet hours','11 PM \u2013 7 AM \u00b7 nothing but crises gets through','tgl',1],['Weekly digest email','Mondays 8 AM','tgl',1]]),
+   'Connected Pages':rows([['Drinking Memes','Connected \u00b7 synced 4 min ago \u00b7 142K fans','btn','Re-sync started','0','Sync'],['Sober Sundays','Connected \u00b7 synced 1h ago \u00b7 18K fans','btn','Re-sync started',0,'Sync'],['Connect another page','Facebook OAuth \u00b7 read-only permissions','btn','OAuth flow opens',0,'Connect']]),
+   'Art-E':rows([['Conversation memory','Art-E remembers context within a session','tgl',1],['Forget this conversation','Wipes the current thread from memory','btn','Conversation forgotten',0,'Forget'],['Answer feedback','Thumbs on every answer train your Art-E','tgl',1],['Why did Art-E say that?','Every answer shows its sources and citations','tgl',1]]),
+   'Data & Privacy':rows([['Export all my data','Full GDPR export \u00b7 JSON + CSV','btn','Export queued \u2014 link by email within 24h',0,'Export'],['Data retention','Platform data auto-deletes when you leave','btn','Retention policy opens',0,'View'],['Cookie preferences','Consent choices \u00b7 UK/EU compliant','btn','Cookie settings open',0,'Manage'],['Privacy Policy & Terms','Versioned \u00b7 you accepted v2.1 on 2 Jun 2026','btn','Legal docs open',0,'Read']]),
+   'Billing':rows([['Pilot plan','Invoiced manually during the pilot \u00b7 \u00a3149/mo','btn','Invoice history opens',0,'Invoices'],['Usage','Art-E queries: 312 this month \u00b7 predictions: 47','btn','Usage detail opens',0,'Detail']]),
+   'Appearance':rows([['Theme','Dark \u00b7 light toggle in the top bar','tgl',1],['Accent colour','Artemis teal (more coming fast-follow)','btn','Accent picker is a fast-follow',0,'Soon'],['Timezone','Europe/London \u00b7 best times shown in your local time','btn','Timezone picker opens',0,'Change']])
+  };
+  var names=Object.keys(T);
+  tabs.innerHTML=names.map(function(n,i){return '<span class="fbl-tab'+(i===0?' on':'')+'" data-t="'+i+'">'+n+'</span>';}).join('');
+  panes.innerHTML=names.map(function(n,i){return '<div class="fbl-tabpane'+(i===0?' on':'')+'" data-p="'+i+'">'+T[n]+'</div>';}).join('');
+  tabs.addEventListener('click',function(e){
+    var t=e.target.closest('.fbl-tab');if(!t)return;
+    tabs.querySelectorAll('.fbl-tab').forEach(function(x){x.classList.toggle('on',x===t);});
+    panes.querySelectorAll('.fbl-tabpane').forEach(function(x){x.classList.toggle('on',x.dataset.p===t.dataset.t);});
+  });
+})();
+
+/* Roadmap render + filters */
+(function(){
+  var host=document.getElementById('fblRoadmap');if(!host)return;
+  var st='all',q='';
+  function render(){
+    var html='';
+    PLAN.cats.forEach(function(cat){
+      var fs=PLAN.feats.filter(function(f){return f.c===cat&&(st==='all'||f.s===st)&&(!q||f.n.toLowerCase().indexOf(q)>-1||(f.d||'').toLowerCase().indexOf(q)>-1);});
+      if(!fs.length)return;
+      html+='<div class="fbl-cat"><div class="fbl-cat-h"><h4>'+cat+'</h4><span class="ct">'+fs.length+'</span></div><div class="fbl-feats">'
+       +fs.map(function(f){return '<div class="fbl-feat" title="'+(f.d||'').replace(/"/g,'&quot;')+' \u00b7 '+STL[f.s]+(f.y?' \u00b7 ~'+f.y+'d':'')+(f.cut?' \u00b7 cut order '+f.cut:'')+'">'
+         +'<span class="em">'+f.i+'</span><span class="nm">'+f.n+'</span>'
+         +(f.y?'<span class="dd">'+f.y+'d</span>':'')
+         +'<span class="dt" style="background:'+STC[f.s]+'"></span></div>';}).join('')
+       +'</div></div>';
+    });
+    host.innerHTML=html||'<div class="fbl-pal-empty">Nothing matches.</div>';
+  }
+  document.getElementById('fblFilters').addEventListener('click',function(e){
+    var p=e.target.closest('.fbl-fpill');if(!p)return;
+    document.querySelectorAll('#fblFilters .fbl-fpill').forEach(function(x){x.classList.toggle('on',x===p);});
+    st=p.dataset.st;render();
+  });
+  document.getElementById('fblFSearch').addEventListener('input',function(){q=this.value.trim().toLowerCase();render();});
+  window._fblRoadmapRender=render;
+  render();
+})();
+
+/* ═══ Smooth transitions + skeleton on navigate ═══ */
+(function(){
+  var orig=window.navigateTo;
+  if(typeof orig!=='function')return;
+  window.navigateTo=function(p,el){
+    orig(p,el);
+    var pg=document.getElementById('page-'+p);
+    if(pg){
+      pg.classList.remove('fbl-anim');void pg.offsetWidth;pg.classList.add('fbl-anim');
+      if((p==='roadmap'||p==='besttimes')&&!pg._fblWarm){
+        pg._fblWarm=true;pg.classList.add('fbl-skel');
+        setTimeout(function(){pg.classList.remove('fbl-skel');},340);
+      }
+      if(p==='drafts'&&window._fblPaintDraft)setTimeout(window._fblPaintDraft,180);
+    }
+    var pal=document.getElementById('fblPalWrap');if(pal)pal.classList.remove('open');
+  };
+})();
+
+/* ═══ Command palette (Cmd/Ctrl+K) ═══ */
+(function(){
+  var wrap=document.createElement('div');wrap.className='fbl-pal-wrap';wrap.id='fblPalWrap';
+  wrap.innerHTML='<div class="fbl-pal"><div class="fbl-pal-input">'
+   +'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>'
+   +'<input id="fblPalIn" placeholder="Jump to a page or run an action\u2026" autocomplete="off">'
+   +'<kbd>esc</kbd></div><div class="fbl-pal-list" id="fblPalList"></div></div>';
+  document.body.appendChild(wrap);
+  var input=wrap.querySelector('#fblPalIn'),list=wrap.querySelector('#fblPalList');
+  function nav(p){return function(){var el=document.querySelector('[data-page="'+p+'"]');navigateTo(p,el);};}
+  var CMDS=[
+   {i:'\ud83c\udfe0',l:'Home Feed',h:'Page \u00b7 MVP',f:nav('home')},
+   {i:'\ud83d\udd2e',l:'Predictions',h:'Page \u00b7 MVP',f:nav('predictions')},
+   {i:'\ud83d\udd14',l:'Alerts',h:'Page \u00b7 MVP',f:nav('alerts')},
+   {i:'\ud83d\udcc5',l:'Best Times',h:'Page \u00b7 MVP',f:nav('besttimes')},
+   {i:'\ud83d\udcdd',l:'Drafts',h:'Page \u00b7 MVP',f:nav('drafts')},
+   {i:'\ud83d\udce5',l:'To-do / Inbox',h:'Page \u00b7 MVP',f:nav('inbox')},
+   {i:'\ud83d\udcca',l:'Analytics',h:'Page \u00b7 MVP',f:nav('analytics')},
+   {i:'\ud83d\udccc',l:'Saved Insights',h:'Page \u00b7 Fast-follow',f:nav('saved')},
+   {i:'\ud83d\uddde\ufe0f',l:'Reports & Alerts',h:'Page \u00b7 Fast-follow',f:nav('reports')},
+   {i:'\ud83d\udd2d',l:'Discovery',h:'Page \u00b7 Preview',f:nav('discovery')},
+   {i:'\u2699\ufe0f',l:'Settings',h:'Page \u00b7 MVP',f:nav('settings')},
+   {i:'\ud83e\udded',l:'Master Plan',h:'Every capability \u00b7 530 tickets',f:nav('roadmap')},
+   {i:'\u2728',l:'Ask Art-E',h:'Action',f:function(){if(window.openArteChat)openArteChat();}},
+   {i:'\ud83d\uddde\ufe0f',l:'Generate weekly report',h:'Action',f:function(){fblGenReport(null,'Weekly performance');}},
+   {i:'\ud83c\udf17',l:'Toggle theme',h:'Action',f:function(){var cur=document.documentElement.getAttribute('data-theme');document.documentElement.setAttribute('data-theme',cur==='light'?'dark':'light');fblToast('Theme switched','info');}}
+  ];
+  var filtered=CMDS,sel=0;
+  function render(){
+    if(!filtered.length){list.innerHTML='<div class="fbl-pal-empty">No matches \u2014 try \u201creport\u201d or \u201cdrafts\u201d</div>';return;}
+    list.innerHTML=filtered.map(function(c,i){return '<div class="fbl-pal-item'+(i===sel?' sel':'')+'" data-i="'+i+'"><span class="ic">'+c.i+'</span><span class="lbl">'+c.l+'</span><span class="hint">'+c.h+'</span></div>';}).join('');
+  }
+  function open(){wrap.classList.add('open');input.value='';filtered=CMDS;sel=0;render();setTimeout(function(){input.focus();},30);}
+  function close(){wrap.classList.remove('open');}
+  function run(i){var c=filtered[i];if(c){close();c.f();}}
+  input.addEventListener('input',function(){
+    var q=this.value.trim().toLowerCase();sel=0;
+    filtered=q?CMDS.filter(function(c){return c.l.toLowerCase().indexOf(q)>-1||c.h.toLowerCase().indexOf(q)>-1;}):CMDS;
+    render();
+  });
+  input.addEventListener('keydown',function(e){
+    if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(sel+1,filtered.length-1);render();}
+    else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(sel-1,0);render();}
+    else if(e.key==='Enter'){e.preventDefault();run(sel);}
+    else if(e.key==='Escape'){close();}
+  });
+  list.addEventListener('click',function(e){var it=e.target.closest('.fbl-pal-item');if(it)run(+it.dataset.i);});
+  wrap.addEventListener('click',function(e){if(e.target===wrap)close();});
+  document.addEventListener('keydown',function(e){
+    if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();wrap.classList.contains('open')?close():open();}
+    else if(e.key==='Escape'&&wrap.classList.contains('open'))close();
+    else if(/^[1-9]$/.test(e.key)&&!e.metaKey&&!e.ctrlKey&&!e.altKey){
+      var tag=(document.activeElement&&document.activeElement.tagName)||'';
+      if(tag==='INPUT'||tag==='TEXTAREA')return;
+      var order=['home','predictions','alerts','besttimes','drafts','inbox','analytics','saved','roadmap'];
+      var p=order[+e.key-1];if(p){var el=document.querySelector('[data-page="'+p+'"]');navigateTo(p,el);}
+    }
+  });
+  window._fblPalOpen=open;
+})();
+
+/* Welcome toast */
+setTimeout(function(){fblToast('Press \u2318K to jump anywhere','info');},900);
+})();
+</script>
+
 </body>
 </html>
