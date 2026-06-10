@@ -2245,8 +2245,7 @@ html[data-theme="light"] .hb-metric{
         <button data-theme-set="light" aria-label="Light"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button>
       </div>
     </li>
-    <li><a href="admin_login.html" class="nav-pill-outline" id="nav-admin-link">Admin Panel</a></li>
-    <li><a href="admin_login.html" class="nav-pill-solid" id="launch-app-link">Launch App →</a></li>
+    <li><a href="admin_login.html" class="nav-pill-solid" id="launch-app-link">Launch App<svg class="npa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
   </ul>
 </nav>
 
@@ -2280,11 +2279,11 @@ html[data-theme="light"] .hb-metric{
       </a>
     </div>
     <div class="hero-trust">
-      <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Facebook ready</span>
-      <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Instagram next</span>
-      <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> TikTok next</span>
-      <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> X next</span>
-      <span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> YouTube next</span>
+      <span class="plat-pill ready"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>Facebook<em>Ready</em></span>
+      <span class="plat-pill"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none"/></svg>Instagram<em>Next</em></span>
+      <span class="plat-pill"><svg viewBox="0 0 24 24"><path d="M9 18.5a3.5 3.5 0 103.5 3.5V8.7a6.3 6.3 0 005 2V7.2a4.8 4.8 0 01-5-4.7H9z" transform="translate(1 -1.5)"/></svg>TikTok<em>Next</em></span>
+      <span class="plat-pill"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></svg>X<em>Next</em></span>
+      <span class="plat-pill"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4"/><polygon points="10 9 16 12 10 15 10 9" fill="currentColor" stroke="none"/></svg>YouTube<em>Next</em></span>
     </div>
   </div>
 
@@ -2789,31 +2788,32 @@ html[data-theme="light"] .hb-metric{
         </g>
       </svg>
 
-      <!-- Mobile vertical version -->
-      <div class="flow-mobile">
-        <div class="flow-mobile-step s1">
-          <div class="flow-mobile-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div>
+      <!-- Animated pipeline: pages → reads → spots → reaches you -->
+      <div class="flow-mobile apipe">
+        <div class="apipe-spine" aria-hidden="true"><i class="apipe-flow"></i><i class="apipe-flow f2"></i><i class="apipe-flow f3"></i></div>
+        <div class="apipe-step" data-step="0" style="--ac:var(--teal);--acbg:var(--teal-bg)">
+          <div class="apipe-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg><span class="apipe-ring"></span></div>
           <div>
             <div class="flow-mobile-text-title">Your pages</div>
             <div class="flow-mobile-text-sub">Posts and comments coming in all day</div>
           </div>
         </div>
-        <div class="flow-mobile-step s3">
-          <div class="flow-mobile-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+        <div class="apipe-step" data-step="1" style="--ac:var(--arte-1);--acbg:var(--arte-bg)">
+          <div class="apipe-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg><span class="apipe-ring"></span></div>
           <div>
             <div class="flow-mobile-text-title">Artemis reads everything</div>
             <div class="flow-mobile-text-sub">Learns your style, your audience, what's normal</div>
           </div>
         </div>
-        <div class="flow-mobile-step s2">
-          <div class="flow-mobile-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg></div>
+        <div class="apipe-step" data-step="2" style="--ac:var(--warn);--acbg:rgba(245,158,11,0.12)">
+          <div class="apipe-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg><span class="apipe-ring"></span></div>
           <div>
             <div class="flow-mobile-text-title">Spots what matters</div>
             <div class="flow-mobile-text-sub">Drama, viral posts, perfect moments to post</div>
           </div>
         </div>
-        <div class="flow-mobile-step s4">
-          <div class="flow-mobile-icon"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 11-12 0 6 6 0 0112 0zM18 14v8M6 14v8M14 22h8M-2 22h8" stroke="currentColor"/><path d="M22 16.92V21a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 3h4.09a2 2 0 012 1.72c.13.96.37 1.9.7 2.81a2 2 0 01-.45 2.11L8.91 11.09a16 16 0 006 6l1.45-1.45a2 2 0 012.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+        <div class="apipe-step" data-step="3" style="--ac:var(--opp);--acbg:var(--opp-bg)">
+          <div class="apipe-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92V21a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 3h4.09a2 2 0 012 1.72c.13.96.37 1.9.7 2.81a2 2 0 01-.45 2.11L8.91 11.09a16 16 0 006 6l1.45-1.45a2 2 0 012.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg><span class="apipe-ring"></span></div>
           <div>
             <div class="flow-mobile-text-title">Reaches you anywhere</div>
             <div class="flow-mobile-text-sub">Email, phone, or WhatsApp. You decide</div>
@@ -2854,7 +2854,7 @@ html[data-theme="light"] .hb-metric{
           </div>
         </div>
       </div>
-      <div class="arte-demo">
+      <div class="arte-demo arte-demo-big">
         <div class="arte-demo-head">
           <div class="arte-orb-demo"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
           <div>
@@ -2862,12 +2862,13 @@ html[data-theme="light"] .hb-metric{
             <div class="arte-demo-sub">Ready · Can act on your behalf</div>
           </div>
         </div>
-        <div class="arte-demo-body">
-          <div class="arte-msg user">
+        <div class="arte-demo-body" id="arteDemoBody">
+          <div class="arte-msg user" data-arte="1">
             <div class="who">A</div>
             <div class="bubble">Why is reach down on Drinking Memes this week?</div>
           </div>
-          <div class="arte-msg bot">
+          <div class="arte-typing" id="arteTyping" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="arte-msg bot" data-arte="2">
             <div class="who"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
             <div class="bubble">
               Reach is down <strong>8% this week</strong>. Three reasons: you missed your best Tuesday posting time twice, your captions got longer (your fans prefer short), and Facebook is favouring videos over photos this month.
@@ -2875,6 +2876,20 @@ html[data-theme="light"] .hb-metric{
                 <button class="arte-cta-btn"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Fix it for me</button>
                 <button class="arte-cta-btn-secondary">Show me</button>
               </div>
+            </div>
+          </div>
+          <div class="arte-msg user" data-arte="3">
+            <div class="who">A</div>
+            <div class="bubble">Fix it for me. And keep my captions short from now on.</div>
+          </div>
+          <div class="arte-msg bot" data-arte="4">
+            <div class="who"><svg viewBox="0 0 24 24"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg></div>
+            <div class="bubble">
+              Done. Here is what I set up:
+              <div class="arte-done"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Tuesday 6PM slots reserved for the next 4 weeks</div>
+              <div class="arte-done"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Captions capped at 90 characters, drafts auto-trimmed</div>
+              <div class="arte-done"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>2 video drafts queued for your review</div>
+              <div class="arte-score">Predicted reach recovery <strong>+11%</strong> · Confidence 87% · Undo anytime</div>
             </div>
           </div>
         </div>
@@ -2894,43 +2909,43 @@ html[data-theme="light"] .hb-metric{
     </div>
     <div class="team-grid cinematic-stagger">
       <div class="team-card tilt-3d">
-        <div class="team-avatar"><img src="team-jill.jpg" alt="Jill Male"/></div>
+        <div class="team-avatar" data-initials="JM"><img src="team-jill.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Jill Male"/></div>
         <div class="team-name">Jill Male</div>
         <div class="team-role">Co-Founder</div>
         <div class="team-tag">Operations &amp; Growth</div>
       </div>
       <div class="team-card tilt-3d">
-        <div class="team-avatar">AM</div>
+        <div class="team-avatar" data-initials="AM"><img src="team-alex.jpg" alt="Alex Male" onerror="this.closest('.team-avatar').classList.add('noimg')"/></div>
         <div class="team-name">Alex Male</div>
         <div class="team-role">Founder</div>
         <div class="team-tag">Vision &amp; Product Strategy</div>
       </div>
       <div class="team-card tilt-3d">
-        <div class="team-avatar"><img src="team-asad.jpg" alt="Asad Ikram"/></div>
+        <div class="team-avatar" data-initials="AI"><img src="team-asad.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Asad Ikram"/></div>
         <div class="team-name">Asad Ikram</div>
         <div class="team-role">CTO &amp; Co-Founder</div>
         <div class="team-tag">Architecture &amp; AI Systems</div>
       </div>
       <div class="team-card tilt-3d">
-        <div class="team-avatar"><img src="team-lewis.jpg" alt="Lewis Mulhall"/></div>
+        <div class="team-avatar" data-initials="LM"><img src="team-lewis.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Lewis Mulhall"/></div>
         <div class="team-name">Lewis Mulhall</div>
         <div class="team-role">Co-Founder</div>
         <div class="team-tag">Social Media &amp; Partnerships</div>
       </div>
       <div class="team-card tilt-3d">
-        <div class="team-avatar"><img src="team-faheem.jpg" alt="Faheem Haider"/></div>
+        <div class="team-avatar" data-initials="FH"><img src="team-faheem.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Faheem Haider"/></div>
         <div class="team-name">Faheem Haider</div>
         <div class="team-role">Founding Data Engineer</div>
         <div class="team-tag">Data Pipelines &amp; ML Ops</div>
       </div>
       <div class="team-card tilt-3d">
-        <div class="team-avatar"><img src="team-rafeh.jpg" alt="Abdul Rafeh"/></div>
+        <div class="team-avatar" data-initials="AR"><img src="team-rafeh.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Abdul Rafeh"/></div>
         <div class="team-name">Abdul Rafeh</div>
         <div class="team-role">Chief Marketing Officer</div>
         <div class="team-tag">Intelligence &amp; Validation</div>
       </div>
       <div class="team-card tilt-3d">
-        <div class="team-avatar"><img src="team-filza.jpg" alt="Syeda Filza Bukhari"/></div>
+        <div class="team-avatar" data-initials="SF"><img src="team-filza.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Syeda Filza Bukhari"/></div>
         <div class="team-name">Syeda Filza Bukhari</div>
         <div class="team-role">Chief Legal Officer</div>
         <div class="team-tag">Compliance &amp; Legal</div>
@@ -3371,5 +3386,397 @@ document.querySelectorAll('.site-nav-links a').forEach(a => {
   });
 })();
 </script>
+<!-- ═══════════ FABLE ENHANCEMENT LAYER v2 ═══════════
+     Additive. Signature hero card + animated pipeline + Art-E chat reveal
+     + nav/pills/team polish + scroll magic. Theme-safe, reduced-motion safe. -->
+<style id="fable-enhance">
+/* ── Scroll progress hairline ── */
+.fbl-progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:9999;
+  background:linear-gradient(90deg,var(--teal),var(--arte-1));
+  box-shadow:0 0 8px rgba(0,196,160,.45);pointer-events:none}
+
+/* ── Faster cinematic reveals (speed pass) ── */
+.cinematic-reveal.in-view{animation-duration:520ms!important}
+.cinematic-stagger.in-view > *{animation-duration:460ms!important}
+.live-grid.cinematic-stagger.in-view > *{animation-duration:480ms!important}
+.features-grid.cinematic-stagger.in-view > *{animation-duration:520ms!important}
+.how-grid.cinematic-stagger.in-view > *{animation-duration:420ms!important}
+.team-grid.cinematic-stagger.in-view > *{animation-duration:460ms!important}
+
+/* ── H1 word-stagger reveal ── */
+.fbl-w{display:inline-block;opacity:0;transform:translateY(0.5em);
+  animation:fblWordUp .42s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes fblWordUp{to{opacity:1;transform:translateY(0)}}
+.hero h1 .highlight.fbl-ink{
+  display:inline-block;opacity:0;
+  background:linear-gradient(100deg,var(--teal) 0%,var(--arte-1) 45%,var(--teal) 90%);
+  background-size:220% 100%;background-position:120% 0;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:fblWordUp .42s .32s cubic-bezier(.2,.7,.2,1) forwards,
+            fblInk 1s .5s cubic-bezier(.3,.6,.2,1) forwards}
+@keyframes fblInk{to{background-position:0% 0}}
+
+/* ── CTA sheen ── */
+.btn-primary{position:relative;overflow:hidden}
+.btn-primary .fbl-sheen{position:absolute;top:0;left:-130%;width:60%;height:100%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:skewX(-18deg);pointer-events:none;transition:left .45s ease}
+.btn-primary:hover .fbl-sheen{left:160%}
+
+/* ── Feature card spotlight ── */
+.feature-card{position:relative}
+.feature-card .fbl-spot{position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  opacity:0;transition:opacity .2s ease;
+  background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),var(--spot,rgba(0,196,160,.14)),transparent 70%)}
+.feature-card:hover .fbl-spot{opacity:1}
+.feature-card.f-crisis{--spot:rgba(229,57,53,.13)}
+.feature-card.f-virality{--spot:rgba(0,196,160,.15)}
+.feature-card.f-tribe{--spot:rgba(124,92,191,.16)}
+
+/* ── SIGNATURE: Artemis Live ── */
+.fbl-live{max-width:560px;margin:26px auto 0;text-align:left}
+.fbl-live-head{display:flex;align-items:center;gap:8px;margin-bottom:9px;
+  font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:.12em;color:var(--t2)}
+.fbl-live-head .fbl-pulse{width:7px;height:7px;border-radius:50%;background:var(--teal);
+  box-shadow:0 0 0 0 rgba(0,196,160,.5);animation:fblPulse 1.8s ease-out infinite}
+@keyframes fblPulse{0%{box-shadow:0 0 0 0 rgba(0,196,160,.5)}70%{box-shadow:0 0 0 9px rgba(0,196,160,0)}100%{box-shadow:0 0 0 0 rgba(0,196,160,0)}}
+.fbl-live-head .fbl-live-sub{font-weight:var(--fw-medium);letter-spacing:0;color:var(--t3);text-transform:none;margin-left:2px}
+.fbl-card{position:relative;background:var(--bg-elev);border:1px solid var(--bdr-soft);
+  border-radius:var(--r-lg);box-shadow:var(--shadow-lg);padding:15px 17px 14px 19px;
+  min-height:112px;overflow:hidden;
+  opacity:0;transform:translateY(8px);transition:opacity .25s ease,transform .25s cubic-bezier(.2,.7,.2,1)}
+.fbl-card.fbl-in{opacity:1;transform:translateY(0)}
+.fbl-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--fbl-accent,var(--teal));border-radius:3px 0 0 3px}
+.fbl-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.fbl-chip{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:var(--fw-bold);
+  letter-spacing:.07em;padding:3px 9px;border-radius:9999px;
+  color:var(--fbl-accent,var(--teal));background:var(--fbl-accent-bg,var(--teal-bg))}
+.fbl-time{font-family:'SF Mono',Menlo,monospace;font-size:10.5px;color:var(--t3)}
+.fbl-msg{font-size:var(--fs-md);line-height:var(--lh-snug);color:var(--t1);min-height:42px}
+.fbl-caret{display:inline-block;width:7px;height:1.05em;vertical-align:-0.18em;margin-left:2px;
+  background:var(--fbl-accent,var(--teal));animation:fblBlink .8s steps(1) infinite}
+@keyframes fblBlink{50%{opacity:0}}
+.fbl-stamp{display:inline-flex;align-items:center;gap:6px;margin-top:10px;
+  font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--opp);
+  opacity:0;transform:scale(.92);transition:opacity .22s ease,transform .22s cubic-bezier(.34,1.4,.5,1)}
+.fbl-stamp.fbl-on{opacity:1;transform:scale(1)}
+.fbl-stamp svg{width:13px;height:13px;stroke:var(--opp);stroke-width:2.6;fill:none}
+.fbl-dots{display:flex;gap:6px;justify-content:center;margin-top:11px}
+.fbl-dot{width:5px;height:5px;border-radius:50%;background:var(--bdr);transition:background .25s,transform .25s}
+.fbl-dot.fbl-on{background:var(--teal);transform:scale(1.25)}
+@media(max-width:560px){.fbl-card{min-height:126px}}
+
+/* ── Platform pills ── */
+.hero-trust{gap:10px}
+.plat-pill{display:inline-flex;align-items:center;gap:7px;
+  padding:7px 13px;border-radius:9999px;font-size:var(--fs-sm);font-weight:var(--fw-semibold);
+  color:var(--t2);background:var(--bg-elev);border:1px solid var(--bdr-soft);
+  transition:transform .15s ease,border-color .15s ease,color .15s ease;cursor:default}
+.plat-pill svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.8;fill:none}
+.plat-pill em{font-style:normal;font-size:10px;font-weight:var(--fw-bold);letter-spacing:.05em;
+  text-transform:uppercase;color:var(--t3);padding:2px 7px;border-radius:9999px;background:var(--hover-bg)}
+.plat-pill:hover{transform:translateY(-1px);border-color:var(--hover-border);color:var(--t1)}
+.plat-pill.ready{color:var(--teal);border-color:rgba(0,196,160,.35);background:var(--teal-bg)}
+.plat-pill.ready em{color:#0a1410;background:var(--teal)}
+@media(max-width:600px){.hero-trust{flex-direction:row;flex-wrap:wrap;justify-content:center}}
+
+/* ── Nav: single Launch App button + glass on scroll ── */
+.nav-pill-solid{display:inline-flex;align-items:center;gap:7px;
+  background:linear-gradient(135deg,var(--teal),var(--teal-d))!important;
+  color:#06231d!important;font-weight:var(--fw-bold)!important;
+  padding:9px 18px!important;border-radius:9999px!important;
+  box-shadow:0 4px 14px rgba(0,196,160,.35);
+  transition:transform .15s ease,box-shadow .15s ease!important}
+.nav-pill-solid .npa{width:15px;height:15px;transition:transform .15s ease}
+.nav-pill-solid:hover{transform:translateY(-1px);box-shadow:0 7px 22px rgba(0,196,160,.5)}
+.nav-pill-solid:hover .npa{transform:translateX(3px)}
+.site-nav{transition:background .25s ease,box-shadow .25s ease,backdrop-filter .25s ease}
+.site-nav.fbl-scrolled{background:color-mix(in srgb,var(--bg) 78%,transparent);
+  backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);
+  box-shadow:0 1px 0 var(--bdr-soft),0 8px 28px rgba(0,0,0,.25)}
+
+/* ── Team avatars: photo ring + initials fallback ── */
+.team-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.team-avatar{border:2px solid transparent;
+  background:linear-gradient(var(--bg-elev),var(--bg-elev)) padding-box,
+             linear-gradient(135deg,var(--teal),var(--arte-1)) border-box}
+.team-avatar.noimg img{display:none}
+.team-avatar.noimg::after{content:attr(data-initials);font-size:24px;font-weight:var(--fw-bold);color:var(--teal)}
+
+/* ── Animated pipeline (flow-mobile upgrade) ── */
+.apipe{position:relative;padding-left:6px}
+.apipe-spine{position:absolute;left:29px;top:28px;bottom:28px;width:2px;
+  background:linear-gradient(180deg,var(--teal),var(--arte-1) 38%,var(--warn) 66%,var(--opp));
+  opacity:.35;border-radius:2px;overflow:visible}
+.apipe-flow{position:absolute;left:-2px;width:6px;height:6px;border-radius:50%;
+  background:var(--teal);box-shadow:0 0 8px var(--teal);
+  animation:apipeFlow 3.2s linear infinite}
+.apipe-flow.f2{animation-delay:1.05s}.apipe-flow.f3{animation-delay:2.1s}
+@keyframes apipeFlow{0%{top:-2%;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:101%;opacity:0}}
+.apipe-step{display:flex;gap:14px;align-items:center;position:relative;text-align:left}
+.apipe-step>div:last-child{flex:1}
+.apipe-icon{position:relative;width:48px;height:48px;border-radius:14px;flex-shrink:0;
+  display:grid;place-items:center;color:var(--ac);background:var(--acbg);
+  border:1px solid color-mix(in srgb,var(--ac) 35%,transparent);
+  transition:transform .3s cubic-bezier(.34,1.4,.5,1),box-shadow .3s ease;z-index:1}
+.apipe-icon svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.8;fill:none}
+.apipe-icon svg[fill="currentColor"]{fill:currentColor;stroke:none}
+.apipe-ring{position:absolute;inset:-1px;border-radius:14px;border:1.5px solid var(--ac);
+  opacity:0;transform:scale(1)}
+.apipe-step.fbl-live-step .apipe-icon{transform:scale(1.1);box-shadow:0 0 22px color-mix(in srgb,var(--ac) 45%,transparent)}
+.apipe-step.fbl-live-step .apipe-ring{animation:apipeRing 1.1s ease-out}
+@keyframes apipeRing{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.55)}}
+.apipe-step.fbl-live-step .flow-mobile-text-title{color:var(--ac)}
+.flow-mobile-text-title{transition:color .3s ease}
+/* pipeline is the mobile view by default; CSS already handles display */
+
+/* ── Art-E: bigger chat ── */
+@media(min-width:961px){
+  .arte-showcase{grid-template-columns:0.92fr 1.08fr;gap:56px}
+  .arte-demo-big .arte-demo-body{padding:20px;min-height:430px}
+}
+.arte-demo-big .arte-msg{margin-bottom:14px}
+.arte-demo-big .arte-msg .bubble{font-size:var(--fs-md);line-height:1.45}
+.arte-msg[data-arte]{opacity:0;transform:translateY(10px);
+  transition:opacity .3s ease,transform .3s cubic-bezier(.2,.7,.2,1)}
+.arte-msg.fbl-show{opacity:1;transform:translateY(0)}
+.arte-typing{display:none;align-items:center;gap:4px;margin:2px 0 14px 40px;
+  padding:10px 14px;border-radius:14px;background:var(--bg-input);width:max-content}
+.arte-typing.fbl-show{display:inline-flex}
+.arte-typing span{width:6px;height:6px;border-radius:50%;background:var(--arte-1);
+  animation:arteDot 1s ease-in-out infinite}
+.arte-typing span:nth-child(2){animation-delay:.15s}
+.arte-typing span:nth-child(3){animation-delay:.3s}
+@keyframes arteDot{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-4px);opacity:1}}
+.arte-done{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:var(--fs-sm);color:var(--t1)}
+.arte-done svg{width:14px;height:14px;stroke:var(--opp);stroke-width:2.6;fill:none;flex-shrink:0}
+.arte-score{margin-top:12px;padding:8px 12px;border-radius:10px;font-size:var(--fs-xs);
+  color:var(--t2);background:var(--arte-bg);border:1px solid color-mix(in srgb,var(--arte-1) 30%,transparent)}
+.arte-score strong{color:var(--teal)}
+
+/* ── Scroll magic: punchline ignite + hero parallax ── */
+.hb-calm{transition:text-shadow .5s ease}
+.hb-calm.fbl-ignite{
+  background:linear-gradient(100deg,var(--teal),var(--arte-1) 60%,var(--teal));
+  background-size:200% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:fblIgnite 1.1s cubic-bezier(.3,.6,.2,1) forwards;
+  text-shadow:0 0 42px rgba(0,196,160,.35)}
+@keyframes fblIgnite{from{background-position:130% 0}to{background-position:0% 0}}
+.hero-punchline{will-change:transform}
+
+/* ── Reduced motion ── */
+@media(prefers-reduced-motion:reduce){
+  .fbl-w{animation:none;opacity:1;transform:none}
+  .hero h1 .highlight.fbl-ink{animation:none;opacity:1;background-position:0% 0}
+  .btn-primary .fbl-sheen{display:none}
+  .fbl-live-head .fbl-pulse{animation:none}
+  .fbl-caret{animation:none;display:none}
+  .fbl-card{opacity:1;transform:none;transition:none}
+  .apipe-flow{animation:none;display:none}
+  .apipe-step.fbl-live-step .apipe-ring{animation:none}
+  .arte-msg[data-arte]{opacity:1;transform:none;transition:none}
+  .arte-typing{display:none!important}
+  .hb-calm.fbl-ignite{animation:none;background-position:0 0}
+  .cinematic-reveal.in-view,.cinematic-stagger.in-view > *{animation-duration:1ms!important}
+}
+</style>
+
+<script id="fable-enhance-js">
+(function(){
+  "use strict";
+  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── Scroll progress + nav glass (one rAF) ── */
+  var bar=document.createElement('div');bar.className='fbl-progress';document.body.appendChild(bar);
+  var nav=document.getElementById('site-nav'),tick=false;
+  var punch=document.querySelector('.hero-punchline');
+  function onScroll(){
+    if(tick)return;tick=true;
+    requestAnimationFrame(function(){
+      var h=document.documentElement,y=h.scrollTop;
+      var max=h.scrollHeight-h.clientHeight;
+      bar.style.width=(max>0?(y/max)*100:0)+'%';
+      if(nav)nav.classList.toggle('fbl-scrolled',y>24);
+      if(punch&&!reduced){var r=punch.getBoundingClientRect();
+        if(r.top<innerHeight&&r.bottom>0){punch.style.transform='translateY('+((r.top-innerHeight*0.55)*-0.06).toFixed(1)+'px)';}}
+      tick=false;
+    });
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  /* ── H1 word-stagger ── */
+  var h1=document.querySelector('.hero h1');
+  if(h1&&!reduced){
+    var hl=h1.querySelector('.highlight');if(hl)hl.classList.add('fbl-ink');
+    var wi=0;
+    (function split(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(k){
+        if(k.nodeType===3&&k.textContent.trim()){
+          var f=document.createDocumentFragment();
+          k.textContent.split(/(\s+)/).forEach(function(part){
+            if(!part)return;
+            if(/^\s+$/.test(part)){f.appendChild(document.createTextNode(part));return;}
+            var s=document.createElement('span');s.className='fbl-w';s.textContent=part;
+            s.style.animationDelay=(0.05+wi*0.045)+'s';wi++;f.appendChild(s);
+          });
+          node.replaceChild(f,k);
+        } else if(k.nodeType===1&&!k.classList.contains('highlight')&&k.tagName!=='BR'){split(k);}
+      });
+    })(h1);
+  }
+
+  /* ── CTA sheen + magnetic ── */
+  var cta=document.querySelector('.hero .btn-primary');
+  if(cta){
+    var sh=document.createElement('span');sh.className='fbl-sheen';cta.appendChild(sh);
+    if(!reduced&&matchMedia('(pointer:fine)').matches){
+      cta.addEventListener('mousemove',function(e){
+        var r=cta.getBoundingClientRect();
+        cta.style.transform='translate('+(((e.clientX-r.left)/r.width-0.5)*5)+'px,'+(((e.clientY-r.top)/r.height-0.5)*4)+'px)';
+      });
+      cta.addEventListener('mouseleave',function(){cta.style.transform='';});
+    }
+  }
+
+  /* ── Feature spotlights ── */
+  document.querySelectorAll('.feature-card').forEach(function(c){
+    var s=document.createElement('div');s.className='fbl-spot';c.appendChild(s);
+    c.addEventListener('mousemove',function(e){
+      var r=c.getBoundingClientRect();
+      c.style.setProperty('--mx',(e.clientX-r.left)+'px');
+      c.style.setProperty('--my',(e.clientY-r.top)+'px');
+    });
+  });
+
+  /* ── Punchline ignite on scroll ── */
+  var calm=document.querySelector('.hb-calm');
+  if(calm&&'IntersectionObserver' in window){
+    new IntersectionObserver(function(en,obs){
+      en.forEach(function(e){if(e.isIntersecting){calm.classList.add('fbl-ignite');obs.disconnect();}});
+    },{threshold:0.6}).observe(calm);
+  }
+
+  /* ── Animated pipeline sequencer ── */
+  var pipe=document.querySelector('.apipe');
+  if(pipe){
+    var steps=pipe.querySelectorAll('.apipe-step');
+    if(reduced){steps.forEach(function(s){s.classList.add('fbl-live-step');});}
+    else if('IntersectionObserver' in window){
+      var pi=0,pt=null;
+      new IntersectionObserver(function(en){
+        en.forEach(function(e){
+          if(e.isIntersecting&&!pt){
+            pt=setInterval(function(){
+              steps.forEach(function(s,j){s.classList.toggle('fbl-live-step',j===pi);});
+              pi=(pi+1)%steps.length;
+            },1100);
+          } else if(!e.isIntersecting&&pt){clearInterval(pt);pt=null;}
+        });
+      },{threshold:0.3}).observe(pipe);
+    }
+  }
+
+  /* ── Art-E sequential chat reveal ── */
+  var demo=document.getElementById('arteDemoBody');
+  if(demo){
+    var msgs=demo.querySelectorAll('.arte-msg[data-arte]');
+    var typing=document.getElementById('arteTyping');
+    if(reduced){msgs.forEach(function(m){m.classList.add('fbl-show');});}
+    else if('IntersectionObserver' in window){
+      var played=false;
+      new IntersectionObserver(function(en,obs){
+        en.forEach(function(e){
+          if(!e.isIntersecting||played)return;
+          played=true;obs.disconnect();
+          var seq=[
+            function(n){msgs[0].classList.add('fbl-show');setTimeout(n,650);},
+            function(n){if(typing){demo.insertBefore(typing,msgs[1]);typing.classList.add('fbl-show');}setTimeout(n,950);},
+            function(n){if(typing)typing.classList.remove('fbl-show');msgs[1].classList.add('fbl-show');setTimeout(n,1050);},
+            function(n){msgs[2].classList.add('fbl-show');setTimeout(n,700);},
+            function(n){if(typing){demo.insertBefore(typing,msgs[3]);typing.classList.add('fbl-show');}setTimeout(n,900);},
+            function(n){if(typing)typing.classList.remove('fbl-show');msgs[3].classList.add('fbl-show');n&&n();}
+          ];
+          (function run(i){if(i<seq.length)seq[i](function(){run(i+1);});})(0);
+        });
+      },{threshold:0.35}).observe(demo);
+    }
+  }
+
+  /* ── SIGNATURE: Artemis Live (speed-tuned) ── */
+  var heroContent=document.querySelector('.hero-content');
+  if(!heroContent)return;
+  var ALERTS=[
+    {accent:'var(--crisis)',accentBg:'var(--crisis-bg)',chip:'CRISIS · Drinking Memes',time:'4 min ago',
+     msg:'23 angry comments in 11 minutes on last night\u2019s post. Same pattern as October. A reply draft is ready.',
+     stamp:'Sent to WhatsApp'},
+    {accent:'var(--opp)',accentBg:'var(--opp-bg)',chip:'GOING VIRAL · 6PM post',time:'just now',
+     msg:'Shares are running 3.2x above normal. Cross-post in the next 40 minutes to reach about 9,600 more people.',
+     stamp:'Sent to Email'},
+    {accent:'var(--warn)',accentBg:'rgba(245,158,11,0.12)',chip:'BEST WINDOW · Tonight',time:'7:40 PM',
+     msg:'Your audience peaks at 7:40pm tonight and one slot is open. Want Artemis to schedule the draft?',
+     stamp:'Sent to Phone'}
+  ];
+  var live=document.createElement('div');live.className='fbl-live';
+  live.innerHTML='<div class="fbl-live-head"><span class="fbl-pulse"></span>ARTEMIS LIVE'+
+    '<span class="fbl-live-sub">· what it catches, as it happens</span></div>'+
+    '<div class="fbl-card" id="fblCard">'+
+      '<div class="fbl-card-top"><span class="fbl-chip" id="fblChip"></span><span class="fbl-time" id="fblTime"></span></div>'+
+      '<div class="fbl-msg" id="fblMsg"></div>'+
+      '<div class="fbl-stamp" id="fblStamp"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span id="fblStampTxt"></span></div>'+
+    '</div>'+
+    '<div class="fbl-dots" id="fblDots">'+ALERTS.map(function(){return '<span class="fbl-dot"></span>';}).join('')+'</div>';
+  var trust=heroContent.querySelector('.hero-trust');
+  if(trust&&trust.nextSibling)heroContent.insertBefore(live,trust.nextSibling);else heroContent.appendChild(live);
+
+  var card=live.querySelector('#fblCard'),chip=live.querySelector('#fblChip'),
+      timeEl=live.querySelector('#fblTime'),msg=live.querySelector('#fblMsg'),
+      stamp=live.querySelector('#fblStamp'),stampTxt=live.querySelector('#fblStampTxt'),
+      dots=live.querySelectorAll('.fbl-dot');
+  function chrome(a){card.style.setProperty('--fbl-accent',a.accent);
+    card.style.setProperty('--fbl-accent-bg',a.accentBg);
+    chip.textContent=a.chip;timeEl.textContent=a.time;stampTxt.textContent=a.stamp;}
+  function setDots(i){dots.forEach(function(d,j){d.classList.toggle('fbl-on',j===i);});}
+
+  if(reduced){var a0=ALERTS[0];chrome(a0);msg.textContent=a0.msg;
+    card.classList.add('fbl-in');stamp.classList.add('fbl-on');setDots(0);return;}
+
+  var idx=0,timer=null,typeTimer=null,gen=0;
+  function typeOut(g,text,done){
+    msg.innerHTML='<span id="fblTyped"></span><span class="fbl-caret"></span>';
+    var typed=msg.querySelector('#fblTyped'),i=0;
+    (function step(){
+      if(g!==gen)return;
+      if(i<=text.length){typed.textContent=text.slice(0,i);i++;
+        typeTimer=setTimeout(step,9+Math.random()*8);}
+      else{var c=msg.querySelector('.fbl-caret');if(c)c.remove();done();}
+    })();
+  }
+  function play(i){
+    var g=++gen;clearTimeout(timer);clearTimeout(typeTimer);
+    idx=i;setDots(i);var a=ALERTS[i];
+    card.classList.remove('fbl-in');stamp.classList.remove('fbl-on');
+    timer=setTimeout(function(){
+      if(g!==gen)return;
+      chrome(a);msg.textContent='';card.classList.add('fbl-in');
+      timer=setTimeout(function(){
+        if(g!==gen)return;
+        typeOut(g,a.msg,function(){
+          if(g!==gen)return;
+          stamp.classList.add('fbl-on');
+          timer=setTimeout(function(){if(g!==gen)return;play((i+1)%ALERTS.length);},1600);
+        });
+      },220);
+    },240);
+  }
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){gen++;clearTimeout(timer);clearTimeout(typeTimer);}
+    else play(idx);
+  });
+  play(0);
+})();
+</script>
+
 </body>
 </html>
