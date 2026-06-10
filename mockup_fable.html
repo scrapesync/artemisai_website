@@ -9865,5 +9865,165 @@ html[data-theme="light"] .fbl-moves-head .ring::before{background:#fff}
 })();
 </script>
 
+
+<!-- FABLE DESIGN PASS 4: the selling pass.
+     From the threat assessment: shine on the 3 things Meta won't build —
+     prediction BEFORE posting, cross-page intelligence, multi-page/agencies.
+     Plus: visual feed heroes so every item reads at a glance. -->
+<style id="fable-design4">
+/* EDGE badge — used on exactly 3 surfaces, nowhere else (Von Restorff) */
+.fbl-edge{display:inline-flex;align-items:center;gap:4px;font-size:8.5px;font-weight:800;
+  letter-spacing:.08em;padding:2.5px 8px;border-radius:9999px;margin-left:8px;cursor:help;
+  color:#3a2a00;background:linear-gradient(135deg,#FFD66B,#F5A623);flex-shrink:0;vertical-align:middle}
+.fbl-edge svg{width:9px;height:9px;fill:#3a2a00}
+html[data-theme="light"] .fbl-edge{color:#3a2a00}
+
+/* Feed hero visuals */
+.fbl-hero{margin:0 16px 12px;border-radius:12px;overflow:hidden;position:relative;
+  border:1px solid var(--bdr-soft)}
+.fbl-hero svg{display:block;width:100%;height:auto}
+.fbl-hero .tag{position:absolute;top:10px;left:10px;display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:800;letter-spacing:.06em;padding:4px 10px;border-radius:9999px;
+  color:#fff;background:rgba(10,14,20,.55);backdrop-filter:blur(6px)}
+.fbl-hero .tag svg{width:11px;height:11px;stroke:#fff;stroke-width:2.4;fill:none;display:inline}
+
+/* Story cover art */
+.story-tile.page-story .fbl-story-art{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.95}
+.story-tile.page-story .fbl-story-art svg{width:100%;height:100%;display:block}
+.story-tile.page-story > *:not(.fbl-story-art){position:relative;z-index:1}
+
+/* Value delivered card */
+.fbl-value{background:linear-gradient(135deg,var(--teal-bg),var(--arte-bg));
+  border:1px solid color-mix(in srgb,var(--teal) 28%,transparent);
+  border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.fbl-value .vt{font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--teal);display:flex;align-items:center}
+.fbl-value .big{font-size:24px;font-weight:800;color:var(--t1);letter-spacing:-.02em;margin:6px 0 2px}
+.fbl-value .vs{font-size:11.5px;color:var(--t2);line-height:1.5}
+.fbl-value .vs b{color:var(--t1)}
+html[data-theme="light"] .fbl-value{background:linear-gradient(135deg,rgba(0,107,90,.06),rgba(90,63,160,.05));box-shadow:0 1px 2px rgba(16,24,40,.06)}
+</style>
+<script id="fable-design4-js">
+(function(){
+"use strict";
+function el(html){var d=document.createElement('div');d.innerHTML=html;return d.firstElementChild;}
+var star='<svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6L22 9.3l-5 4.9 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.3l7.1-.7z"/></svg>';
+function edge(tip){var e=el('<span class="fbl-edge" title="'+tip+'">'+star+'EDGE</span>');return e;}
+
+/* ═══ A. EDGE badges — the 3 things Meta won't build ═══ */
+/* 1. Prediction BEFORE posting */
+(function(){
+  var moves=document.querySelector('.fbl-moves-head .mt');
+  if(moves)moves.appendChild(edge('Meta tells you after you post. Artemis tells you before \u2014 every draft is scored pre-publish.'));
+  document.querySelectorAll('.composer-btn').forEach(function(b){
+    if(/predict score/i.test(b.textContent))b.appendChild(edge('Meta tells you after. Artemis tells you before.'));
+  });
+})();
+/* 2. Cross-page intelligence — the moat (nav gets data-page late; retry) */
+(function(){
+  var tries=0;
+  function attempt(){
+    var disc=document.querySelector('[data-page="discovery"]');
+    if(!disc){if(++tries<12)setTimeout(attempt,300);return;}
+    if(disc.querySelector('.fbl-edge'))return;
+    var e=edge('Meta shows your page. Artemis shows the whole neighbourhood \u2014 cross-page intelligence Meta will not build.');
+    var chip=disc.querySelector('.fbl-stage');disc.insertBefore(e,chip);
+  }
+  setTimeout(attempt,150);
+})();
+/* 3. Multi-page / agencies */
+(function(){
+  var titles=document.querySelectorAll('.left-sidebar .sidebar-title');
+  titles.forEach(function(t){
+    if(/your pages/i.test(t.textContent))t.insertBefore(edge('One inbox, five pages. Meta\u2019s tools are single-page \u2014 agencies live here.'),t.querySelector('a'));
+  });
+})();
+
+/* ═══ B. Value delivered (outcomes sell) ═══ */
+(function(){
+  var rail=document.querySelector('.right-sidebar');if(!rail)return;
+  var d=el('<div class="fbl-value"><div class="vt">VALUE DELIVERED \u00b7 THIS MONTH</div>'
+   +'<div class="big">842K extra reach</div>'
+   +'<div class="vs"><b>11 crises</b> caught before they spread \u00b7 <b>3 viral windows</b> hit in time \u00b7 <b>9 drafts</b> improved pre-publish</div></div>');
+  var chip=el('<span class="fbl-stage fast sm">FAST</span>');d.querySelector('.vt').appendChild(chip);
+  var health=rail.querySelector('.fbl-health');
+  rail.insertBefore(d,health?health.nextSibling:rail.firstElementChild);
+})();
+
+/* ═══ C. Feed heroes — every insight reads at a glance ═══ */
+function heroChart(){return '<svg viewBox="0 0 600 150" preserveAspectRatio="none">'
+ +'<defs><linearGradient id="fg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00C4A0" stop-opacity=".34"/><stop offset="1" stop-color="#00C4A0" stop-opacity="0"/></linearGradient></defs>'
+ +'<rect width="600" height="150" fill="var(--bg-elev-2)"/>'
+ +'<path d="M0 118 L75 108 150 112 225 92 300 96 375 70 450 78 525 44 600 30" stroke="var(--bdr)" stroke-width="2" fill="none" stroke-dasharray="5 5"/>'
+ +'<path d="M0 122 L75 112 150 100 225 104 300 80 375 62 450 50 525 34 600 18 600 150 0 150 Z" fill="url(#fg1)"/>'
+ +'<path d="M0 122 L75 112 150 100 225 104 300 80 375 62 450 50 525 34 600 18" stroke="#00C4A0" stroke-width="3" fill="none" stroke-linecap="round"/>'
+ +'<circle cx="600" cy="18" r="5" fill="#00C4A0"/>'
+ +'<text x="455" y="115" font-size="12" fill="var(--t3)" font-family="inherit">last week</text></svg>';}
+function heroMeme(){return '<svg viewBox="0 0 600 150" preserveAspectRatio="none">'
+ +'<defs><linearGradient id="fg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a1f3d"/><stop offset="1" stop-color="#1a2f2a"/></linearGradient></defs>'
+ +'<rect width="600" height="150" fill="url(#fg2)"/>'
+ +'<text x="36" y="64" font-size="26" font-weight="800" fill="#fff" font-family="inherit">\u201cone last drink\u201d \ud83c\udf7a\ud83d\ude02</text>'
+ +'<text x="36" y="96" font-size="15" fill="rgba(255,255,255,.75)" font-family="inherit">the bartender already knows it\u2019s a lie</text>'
+ +'<g stroke="#FBBF24" stroke-width="2.4" fill="none" stroke-linecap="round">'
+ +'<path d="M468 96 L504 60 M504 60 l-12 2 M504 60 l-2 12"/><path d="M498 110 L540 68 M540 68 l-13 2 M540 68 l-2 13"/><path d="M528 122 L578 72 M578 72 l-15 3 M578 72 l-3 15"/></g>'
+ +'<text x="466" y="138" font-size="13" font-weight="700" fill="#FBBF24" font-family="inherit">3.2\u00d7 shares</text></svg>';}
+function heroCrisis(){return '<svg viewBox="0 0 600 150" preserveAspectRatio="none">'
+ +'<rect width="600" height="150" fill="var(--bg-elev-2)"/>'
+ +'<g font-family="inherit">'
+ +'<rect x="30" y="18" rx="13" width="330" height="34" fill="rgba(229,57,53,.14)" stroke="rgba(229,57,53,.4)"/>'
+ +'<text x="48" y="40" font-size="14" fill="var(--t1)">\ud83d\ude20 this is actually so out of touch\u2026</text>'
+ +'<rect x="58" y="60" rx="13" width="300" height="34" fill="rgba(229,57,53,.18)" stroke="rgba(229,57,53,.45)"/>'
+ +'<text x="76" y="82" font-size="14" fill="var(--t1)">unfollowing after this one ngl</text>'
+ +'<rect x="86" y="102" rx="13" width="262" height="34" fill="rgba(229,57,53,.22)" stroke="rgba(229,57,53,.5)"/>'
+ +'<text x="104" y="124" font-size="14" fill="var(--t1)">+20 more in 11 minutes\u2026</text>'
+ +'<rect x="408" y="48" rx="14" width="166" height="56" fill="rgba(0,196,160,.12)" stroke="rgba(0,196,160,.45)"/>'
+ +'<text x="424" y="72" font-size="12.5" font-weight="700" fill="#00C4A0">Art-E\u2019s reply draft</text>'
+ +'<text x="424" y="92" font-size="12" fill="var(--t2)">ready \u00b7 in your voice</text></g></svg>';}
+function heroWindow(){return '<svg viewBox="0 0 600 150" preserveAspectRatio="none">'
+ +'<rect width="600" height="150" fill="var(--bg-elev-2)"/>'
+ +'<g>'+[28,44,38,52,60,74,96,118,92,70,48,36].map(function(h,i){
+    var x=40+i*44,best=(i===7);
+    return '<rect x="'+x+'" y="'+(132-h)+'" width="26" height="'+h+'" rx="5" fill="'+(best?'#F5A623':'color-mix(in srgb,var(--t3) 28%,transparent)')+'"/>'
+     +(best?'<text x="'+(x+13)+'" y="'+(120-h)+'" font-size="13" font-weight="800" fill="#F5A623" text-anchor="middle" font-family="inherit">6PM</text>':'');
+  }).join('')+'</g></svg>';}
+
+var HEROES=[
+ {match:/daily summary|briefing/i,svg:heroChart,lbl:'TREND',ic:'<path d="M3 17l6-6 4 4 8-8"/>'},
+ {match:/viral|coastal reel|going viral/i,svg:heroMeme,lbl:'VIRAL POST',ic:'<path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>'},
+ {match:/brand risk|crisis|negative/i,svg:heroCrisis,lbl:'CRISIS',ic:'<path d="M12 2L1 21h22L12 2z"/>'},
+ {match:/window|best time|6pm/i,svg:heroWindow,lbl:'BEST WINDOW',ic:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'}
+];
+var used={},count=0;
+document.querySelectorAll('.insight-post').forEach(function(post){
+  if(count>=4)return;
+  var t=(post.querySelector('.insight-post-title,.insight-post-tag')||{}).textContent||'';
+  t+=' '+((post.querySelector('.insight-post-body')||{}).textContent||'').slice(0,80);
+  for(var i=0;i<HEROES.length;i++){
+    var h=HEROES[i];
+    if(h.match.test(t)&&!used[h.lbl]){
+      used[h.lbl]=1;count++;
+      var hero=el('<div class="fbl-hero">'+h.svg()
+        +'<span class="tag"><svg viewBox="0 0 24 24">'+h.ic+'</svg>'+h.lbl+'</span></div>');
+      var head=post.querySelector('.insight-post-head');
+      if(head)head.parentNode.insertBefore(hero,head.nextSibling);
+      break;
+    }
+  }
+});
+
+/* ═══ D. Story cover art — poster behind each tile ═══ */
+var COVERS=['\ud83c\udf7a','\ud83d\udea8','\ud83d\ude0a','\u23f0','\ud83e\udd1d','\ud83d\udcc8'];
+document.querySelectorAll('.story-tile.page-story').forEach(function(tile,i){
+  if(tile.querySelector('.fbl-story-art'))return;
+  var em=COVERS[i%COVERS.length];
+  var art=el('<div class="fbl-story-art"><svg viewBox="0 0 120 200" preserveAspectRatio="xMidYMid slice">'
+   +'<defs><radialGradient id="sg'+i+'" cx="0.5" cy="0.25" r="1"><stop offset="0" stop-color="rgba(255,255,255,.07)"/><stop offset="1" stop-color="rgba(0,0,0,0)"/></radialGradient></defs>'
+   +'<rect width="120" height="200" fill="url(#sg'+i+')"/>'
+   +'<text x="96" y="186" font-size="44" text-anchor="middle" opacity="0.16" font-family="inherit">'+em+'</text>'
+   +'</svg></div>');
+  tile.insertBefore(art,tile.firstChild);
+});
+})();
+</script>
+
 </body>
 </html>
