@@ -10550,5 +10550,267 @@ function el(h){var d=document.createElement('div');d.innerHTML=h;return d.firstE
 })();
 </script>
 
+
+<!-- FABLE DESIGN PASS 8: tabs do what they say (briefings = magazine reads,
+     actions = pure action banners, moves lives on Home only), inline composer
+     (no popup), Predict with word-level breakdown + graphs, Best-time flow,
+     Ask Art-E handoff — and every flow lands a real draft in Drafts. -->
+<style id="fable-design8">
+/* Briefings: magazine format, no performance-post cards */
+#page-home.fbl-tab-briefings .card .reward-chip{display:none}
+#page-home.fbl-tab-briefings .briefing-card{padding:24px 28px}
+#page-home.fbl-tab-briefings .briefing-body::first-letter{
+  font-size:2.1em;font-weight:800;float:left;line-height:.95;padding:3px 8px 0 0;color:var(--arte-1)}
+.fbl-kicker{display:none;font-size:10.5px;font-weight:800;letter-spacing:.12em;color:var(--t3);
+  text-transform:uppercase;margin:2px 2px 8px}
+#page-home.fbl-tab-briefings .fbl-kicker{display:block}
+/* Actions: banner consistency, action buttons pop */
+#page-home.fbl-tab-actions .insight-post{padding:12px 16px;margin-bottom:10px}
+#page-home.fbl-tab-actions .insight-post-action.primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+#page-home.fbl-tab-actions .reward-chip{display:none}
+/* Inline composer */
+.fbl-compose{width:100%;min-height:76px;resize:vertical;background:var(--bg-input);
+  border:1px solid var(--bdr);border-radius:14px;padding:12px 14px;font-family:inherit;
+  font-size:14px;line-height:1.5;color:var(--t1);outline:none;transition:border-color .15s}
+.fbl-compose:focus{border-color:var(--teal)}
+.fbl-compose-hint{font-size:11px;color:var(--t3);margin-top:6px}
+/* Word-level breakdown */
+.fbl-tok{display:inline-block;margin:0 3px 5px 0;padding:3px 8px;border-radius:8px;
+  font-size:12.5px;border:1px solid var(--bdr-soft);color:var(--t2)}
+.fbl-tok.good{background:var(--opp-bg);border-color:color-mix(in srgb,var(--opp) 35%,transparent);color:var(--t1);font-weight:600}
+.fbl-tok.bad{background:var(--warn-bg);border-color:color-mix(in srgb,var(--warn) 40%,transparent);color:var(--t1)}
+.fbl-legend{font-size:10.5px;color:var(--t3);margin:2px 0 10px}
+.fbl-legend i{display:inline-block;width:8px;height:8px;border-radius:3px;margin:0 4px 0 10px}
+.fbl-flowgraphs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+@media(max-width:760px){.fbl-flowgraphs{grid-template-columns:1fr}}
+.fbl-graph{border:1px solid var(--bdr-soft);border-radius:10px;padding:10px 12px 6px;background:var(--bg-elev-2)}
+.fbl-graph h5{margin:0 0 6px;font-size:10px;font-weight:800;letter-spacing:.07em;color:var(--t3);text-transform:uppercase}
+.fbl-graph svg{width:100%;height:auto;display:block}
+</style>
+<script id="fable-design8-js">
+(function(){
+"use strict";
+function el(h){var d=document.createElement('div');d.innerHTML=h;return d.firstElementChild;}
+window._fblDraft='';
+
+/* ═══ A. Tabs do what they say ═══ */
+(function(){
+  var prev=window.switchFeedTab;
+  if(typeof prev!=='function')return;
+  var kicker=null;
+  window.switchFeedTab=function(name){
+    prev.apply(this,arguments);
+    var home=document.getElementById('page-home');if(!home)return;
+    var moves=home.querySelector('.fbl-moves');
+    if(moves)moves.style.display=(name==='feed')?'':'none'; /* moves lives on Home only */
+    if(name==='briefings'){
+      /* performance/reward post cards are not briefings */
+      home.querySelectorAll('.card').forEach(function(c){
+        if(c.querySelector('.reward-chip')&&!c.classList.contains('briefing-card'))c.style.display='none';
+      });
+      home.querySelectorAll('.insight-post').forEach(function(p){
+        if(p.offsetParent&&!p.querySelector('.insight-post-tag.briefing'))p.style.display='none';
+      });
+      if(!kicker){
+        kicker=el('<div class="fbl-kicker">Today \u00b7 '+new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'})+'</div>');
+        var bc=home.querySelector('.briefing-card');
+        if(bc)bc.parentNode.insertBefore(kicker,bc);
+      }
+    }
+    if(name==='actions'){
+      /* every visible item must be an action: hide pure-performance posts */
+      home.querySelectorAll('.insight-post').forEach(function(p){
+        if(p.offsetParent&&!p.querySelector('.insight-post-action'))p.style.display='none';
+      });
+    }
+  };
+})();
+
+/* ═══ B. Drafts integration: flows land real drafts ═══ */
+window._fblAddDraft=function(text,score,when){
+  var page=document.getElementById('page-drafts');if(!page)return;
+  var panel=page.querySelector('.draft-row');panel=panel&&panel.parentNode;if(!panel)return;
+  var title=text.split(/\s+/).slice(0,5).join(' ');if(text.split(/\s+/).length>5)title+='\u2026';
+  var row=el('<div class="draft-row" style="background:color-mix(in srgb,var(--teal) 5%,transparent)">'
+   +'<div style="flex:1"><div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:4px">'+title
+   +' <span class="fbl-stage mvp sm" style="vertical-align:middle">NEW</span></div>'
+   +'<div style="font-size:13px;color:var(--t2);line-height:1.45"></div>'
+   +'<div style="font-size:11px;color:var(--t3);margin-top:6px">Drinking Memes \u00b7 just now \u00b7 '+(when?'best window '+when:'sent to Art-E')+'</div></div>'
+   +'<div style="display:flex;align-items:center;gap:14px">'
+   +'<div style="text-align:center"><div style="font-size:22px;font-weight:800;color:var(--teal)">'+(score||'\u2014')+'</div>'
+   +'<div style="font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:0.04em">AI score</div></div>'
+   +'<button class="btn" onclick="toast(\'info\',\'Editing draft\')">Edit</button>'
+   +'<button class="btn primary" onclick="toast(\'success\',\'Scheduled for Tue 6PM\')">Schedule</button></div></div>');
+  row.querySelector('div[style*="line-height:1.45"]').textContent=text;
+  panel.insertBefore(row,panel.firstChild);
+  var sub=page.querySelector('.page-sub');
+  if(sub){var m=sub.textContent.match(/(\d+)\s+drafts/);if(m)sub.textContent=sub.textContent.replace(m[1]+' drafts',(+m[1]+1)+' drafts');}
+  document.querySelectorAll('.left-sidebar *').forEach(function(n){
+    if(n.children.length===0&&/^\s*\d+\s*$/.test(n.textContent)&&/drafts/i.test((n.parentNode.textContent||''))){
+      n.textContent=String(+n.textContent.trim()+1);return;
+    }
+  });
+};
+function draftText(){return (window._fblDraft||'').trim()||'One last drink they said \ud83c\udf7a\ud83d\ude02 tag your enabler';}
+
+/* ═══ C. Inline composer — no popup, the box just grows ═══ */
+(function(){
+  var inp=document.querySelector('.composer-input');
+  if(!inp)return;
+  var clean=inp.cloneNode(true);
+  inp.parentNode.replaceChild(clean,inp);
+  clean.addEventListener('click',function(e){
+    e.stopPropagation();e.stopImmediatePropagation();
+    var ta=document.createElement('textarea');
+    ta.className='fbl-compose';
+    ta.placeholder='What\u2019s on your mind? Art-E scores it before you publish\u2026';
+    ta.addEventListener('input',function(){window._fblDraft=ta.value;});
+    var hint=el('<div class="fbl-compose-hint">Tip: questions in the first sentence score 1.6\u00d7 higher on your pages</div>');
+    clean.parentNode.replaceChild(ta,clean);
+    ta.parentNode.insertBefore(hint,ta.nextSibling);
+    ta.focus();
+  });
+})();
+
+/* ═══ Shared flow card ═══ */
+var flowCard=null;
+function runFlow(steps,buildHTML,after){
+  var wrap=document.querySelector('.composer-wrap');if(!wrap)return;
+  if(flowCard)flowCard.remove();
+  flowCard=el('<div class="fbl-predict" aria-live="polite">'
+   +'<div class="ld"><div class="spin"></div><div><div class="lt">Art-E is working\u2026</div><div class="ls"></div></div></div>'
+   +'<div class="res" style="grid-template-columns:1fr"></div></div>');
+  wrap.appendChild(flowCard);
+  flowCard.scrollIntoView({behavior:'smooth',block:'nearest'});
+  var ls=flowCard.querySelector('.ls');
+  steps.forEach(function(s,i){setTimeout(function(){if(ls)ls.textContent=s;},i*560);});
+  setTimeout(function(){
+    flowCard.querySelector('.res').innerHTML=buildHTML();
+    flowCard.classList.add('done');
+    if(after)after(flowCard);
+  },steps.length*560+520);
+}
+function curve24(peakHour,color){
+  var pts='';var W=270,H=90;
+  for(var h=0;h<=24;h++){
+    var v=18+30*Math.exp(-Math.pow(h-peakHour,2)/14)+12*Math.exp(-Math.pow(h-12,2)/20);
+    pts+=(h===0?'M':'L')+(10+h*(W-20)/24)+' '+(H-12-v*1.1)+' ';
+  }
+  var px=10+peakHour*(W-20)/24;
+  return '<svg viewBox="0 0 '+W+' '+H+'">'
+   +'<path d="'+pts+'" stroke="'+color+'" stroke-width="2.5" fill="none" stroke-linecap="round"/>'
+   +'<circle cx="'+px+'" cy="'+(H-12-(18+30+12*Math.exp(-Math.pow(peakHour-12,2)/20))*1.1+0)+'" r="4" fill="'+color+'"/>'
+   +'<text x="'+px+'" y="'+(H-2)+'" font-size="10" font-weight="700" fill="'+color+'" text-anchor="middle" font-family="inherit">'+(peakHour>12?(peakHour-12)+'PM':peakHour+'AM')+'</text>'
+   +'<text x="10" y="'+(H-2)+'" font-size="9" fill="var(--t3)" font-family="inherit">12AM</text>'
+   +'<text x="'+(W-10)+'" y="'+(H-2)+'" font-size="9" fill="var(--t3)" text-anchor="end" font-family="inherit">11PM</text></svg>';
+}
+function weekBars(best){
+  var days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],vals=[52,86,48,71,64,38,42];
+  return '<svg viewBox="0 0 270 90">'+days.map(function(d,i){
+    var h=vals[i]*0.62,x=14+i*37,b=(i===best);
+    return '<rect x="'+x+'" y="'+(70-h)+'" width="24" height="'+h+'" rx="5" fill="'+(b?'var(--teal)':'color-mix(in srgb,var(--t3) 26%,transparent)')+'"/>'
+     +'<text x="'+(x+12)+'" y="84" font-size="9.5" fill="'+(b?'var(--teal)':'var(--t3)')+'" font-weight="'+(b?'800':'500')+'" text-anchor="middle" font-family="inherit">'+d+'</text>';
+  }).join('')+'</svg>';
+}
+function tokens(text){
+  var HOOK=/^(one|last|pov|nobody|me|tag|your|when|why)$/i;
+  return text.split(/\s+/).map(function(w,i){
+    var cls='',tip='';
+    if(/\p{Extended_Pictographic}/u.test(w)){cls='good';tip='Emoji lifts engagement on your pages (+4)';}
+    else if(HOOK.test(w.replace(/[^\w]/g,''))&&i<6){cls='good';tip='Hook word \u2014 strong opener pattern (+)';}
+    else if(w.replace(/[^\w]/g,'').length>=10){cls='bad';tip='Long word slows the scroll-stop (\u2212)';}
+    if(!cls)return '<span class="fbl-tok">'+w+'</span>';
+    return '<span class="fbl-tok '+cls+'" title="'+tip+'">'+w+'</span>';
+  }).join('');
+}
+
+/* ═══ D. Predict score — word breakdown + graphs + lands in Drafts ═══ */
+(function(){
+  var btn=document.querySelector('.composer-btn.predict');
+  if(!btn)return;
+  var clean=btn.cloneNode(true);btn.parentNode.replaceChild(clean,btn);
+  clean.addEventListener('click',function(e){
+    e.stopPropagation();e.stopImmediatePropagation();
+    var text=draftText();
+    runFlow(['Reading 2 years of Drinking Memes data\u2026','Scoring every word, emoji and format choice\u2026','Checking the Tuesday 6PM window\u2026'],
+    function(){
+      return '<div style="display:flex;gap:16px;align-items:start;flex-wrap:wrap">'
+       +'<div class="ring" style="--v:0;flex-shrink:0"><b>0</b><small>/100</small></div>'
+       +'<div style="flex:1;min-width:240px"><div class="verdict">Strong \u2014 post it tonight</div>'
+       +'<div class="reach"><b>31K\u201338K predicted reach</b> \u00b7 top 12% of your posts \u00b7 page average 22K</div>'
+       +'<div style="margin:8px 0 2px">'+tokens(text)+'</div>'
+       +'<div class="fbl-legend">word-by-word:<i style="background:var(--opp)"></i>lifts the score<i style="background:var(--warn)"></i>drags it down</div>'
+       +'<div class="fac"><span style="width:108px">Timing (Tue 6PM)</span><span class="fb"><i style="width:86%;background:var(--teal)"></i></span><b style="color:var(--teal)">+12</b></div>'
+       +'<div class="fac"><span style="width:108px">Format (image)</span><span class="fb"><i style="width:74%;background:var(--teal)"></i></span><b style="color:var(--teal)">+9</b></div>'
+       +'<div class="fac"><span style="width:108px">Emoji balance</span><span class="fb"><i style="width:52%;background:var(--teal)"></i></span><b style="color:var(--teal)">+4</b></div>'
+       +'<div class="fac"><span style="width:108px">Caption length</span><span class="fb"><i style="width:30%;background:var(--warn)"></i></span><b style="color:var(--warn)">\u22124</b></div>'
+       +'</div></div>'
+       +'<div class="fbl-flowgraphs"><div class="fbl-graph"><h5>Predicted reach over 24h</h5>'+curve24(18,'var(--teal)')+'</div>'
+       +'<div class="fbl-graph"><h5>Engagement by weekday</h5>'+weekBars(1)+'</div></div>'
+       +'<div class="saved"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Saved to Drafts \u00b7 <a>open Drafts \u2192</a></div>';
+    },
+    function(card){
+      var ring=card.querySelector('.ring'),b=ring.querySelector('b'),t0=null;
+      (function step(ts){if(!t0&&ts)t0=ts;var k=t0?Math.min(1,(ts-t0)/700):0;k=1-Math.pow(1-k,3);
+        var v=Math.round(83*k);ring.style.setProperty('--v',v);b.textContent=v;
+        if(k<1)requestAnimationFrame(step);})();
+      setTimeout(function(){
+        card.classList.add('tod');
+        _fblAddDraft(text,83,'Tue 6PM');
+        var a=card.querySelector('.saved a');
+        if(a)a.onclick=function(){navigateTo('drafts',document.querySelector('[data-page="drafts"]'));};
+        if(typeof toast==='function')toast('success','Saved to Drafts \u00b7 scored 83/100 \u2014 ready to schedule');
+      },1500);
+    });
+  });
+})();
+
+/* ═══ E. Find best time — graphs, then lands in Drafts ═══ */
+(function(){
+  var btn=document.querySelector('.composer-btn.timing');
+  if(!btn)return;
+  var clean=btn.cloneNode(true);btn.parentNode.replaceChild(clean,btn);
+  clean.addEventListener('click',function(e){
+    e.stopPropagation();e.stopImmediatePropagation();
+    var text=draftText();
+    runFlow(['Scanning 90 days of engagement\u2026','Comparing weekday windows\u2026','Cross-checking your audience\u2019s active hours\u2026'],
+    function(){
+      return '<div class="verdict">Tuesday 6PM \u2014 your strongest window</div>'
+       +'<div class="reach"><b>+34% vs your average</b> \u00b7 runner-up Thursday 8PM (+21%) \u00b7 avoid 7AM (\u221241%)</div>'
+       +'<div class="fbl-flowgraphs"><div class="fbl-graph"><h5>Audience active hours (Tue)</h5>'+curve24(18,'var(--warn)')+'</div>'
+       +'<div class="fbl-graph"><h5>Engagement by weekday</h5>'+weekBars(1)+'</div></div>'
+       +'<div class="saved"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Draft saved with the Tue 6PM slot \u00b7 <a>open Drafts \u2192</a></div>';
+    },
+    function(card){
+      setTimeout(function(){
+        card.classList.add('tod');
+        _fblAddDraft(text,null,'Tue 6PM');
+        var a=card.querySelector('.saved a');
+        if(a)a.onclick=function(){navigateTo('drafts',document.querySelector('[data-page="drafts"]'));};
+        if(typeof toast==='function')toast('success','Best window: Tue 6PM \u00b7 draft saved with the slot');
+      },900);
+    });
+  });
+})();
+
+/* ═══ F. Ask Art-E — takes the text to Art-E AND to Drafts ═══ */
+(function(){
+  var btn=document.querySelector('.composer-btn.arte');
+  if(!btn)return;
+  var clean=btn.cloneNode(true);btn.parentNode.replaceChild(clean,btn);
+  clean.addEventListener('click',function(e){
+    e.stopPropagation();e.stopImmediatePropagation();
+    var text=draftText();
+    if(typeof openArteChat==='function')openArteChat();
+    setTimeout(function(){
+      if(typeof sendArteMsg==='function')sendArteMsg('Improve this draft: \u201c'+text+'\u201d');
+    },350);
+    _fblAddDraft(text,null,null);
+    if(typeof toast==='function')toast('success','Draft saved \u00b7 Art-E is on it');
+  });
+})();
+})();
+</script>
+
 </body>
 </html>
