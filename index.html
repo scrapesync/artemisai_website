@@ -1163,6 +1163,15 @@ footer{
   line-height:var(--lh-snug);
   position:relative;z-index:1;
 }
+.team-li{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:8px;margin-top:10px;
+  background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.25);
+  color:var(--accent,#00d4aa);position:relative;z-index:2;
+  transition:background .15s,transform .15s;
+}
+.team-li:hover{background:rgba(0,212,170,0.18);transform:translateY(-1px)}
+.team-li svg{width:14px;height:14px;fill:currentColor}
 
 
 /* Light-mode flow graph — stronger contrast on tinted backgrounds.
@@ -2925,6 +2934,7 @@ html[data-theme="light"] .hb-metric{
         <div class="team-name">Asad Ikram</div>
         <div class="team-role">CTO &amp; Co-Founder</div>
         <div class="team-tag">Architecture &amp; AI Systems</div>
+        <a class="team-li" href="https://www.linkedin.com/in/asad-ikram98/" target="_blank" rel="noopener" aria-label="Asad Ikram on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-8.5c0-2.03-.04-4.64-2.83-4.64-2.83 0-3.27 2.2-3.27 4.5V24H8V8z"/></svg></a>
       </div>
       <div class="team-card tilt-3d">
         <div class="team-avatar" data-initials="LM"><img loading="lazy" decoding="async" src="team-lewis.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Lewis Mulhall"/></div>
@@ -2937,24 +2947,28 @@ html[data-theme="light"] .hb-metric{
         <div class="team-name">Faheem Haider</div>
         <div class="team-role">Founding Data Engineer</div>
         <div class="team-tag">Data Pipelines &amp; ML Ops</div>
+        <a class="team-li" href="https://www.linkedin.com/in/the-faheem-haider/" target="_blank" rel="noopener" aria-label="Faheem Haider on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-8.5c0-2.03-.04-4.64-2.83-4.64-2.83 0-3.27 2.2-3.27 4.5V24H8V8z"/></svg></a>
       </div>
       <div class="team-card tilt-3d">
         <div class="team-avatar" data-initials="MM"><img loading="lazy" decoding="async" src="team-muteeb.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Muteeb Masood"/></div>
         <div class="team-name">Muteeb Masood</div>
         <div class="team-role">Founding AI Engineer</div>
         <div class="team-tag">NLP &amp; Model Training</div>
+        <a class="team-li" href="https://www.linkedin.com/in/muteebmasood/" target="_blank" rel="noopener" aria-label="Muteeb Masood on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-8.5c0-2.03-.04-4.64-2.83-4.64-2.83 0-3.27 2.2-3.27 4.5V24H8V8z"/></svg></a>
       </div>
       <div class="team-card tilt-3d">
         <div class="team-avatar" data-initials="AR"><img loading="lazy" decoding="async" src="team-rafeh.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Abdul Rafeh"/></div>
         <div class="team-name">Abdul Rafeh</div>
         <div class="team-role">Chief Marketing Officer</div>
         <div class="team-tag">Intelligence &amp; Validation</div>
+        <a class="team-li" href="https://www.linkedin.com/in/abdur-rafeh-rizwan/" target="_blank" rel="noopener" aria-label="Abdul Rafeh on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-8.5c0-2.03-.04-4.64-2.83-4.64-2.83 0-3.27 2.2-3.27 4.5V24H8V8z"/></svg></a>
       </div>
       <div class="team-card tilt-3d">
         <div class="team-avatar" data-initials="SF"><img loading="lazy" decoding="async" src="team-filza.jpg" onerror="this.closest('.team-avatar').classList.add('noimg')" alt="Syeda Filza Bukhari"/></div>
         <div class="team-name">Syeda Filza Bukhari</div>
         <div class="team-role">Chief Legal Officer</div>
         <div class="team-tag">Compliance &amp; Legal</div>
+        <a class="team-li" href="https://www.linkedin.com/in/syeda-filza-bukhari-0785701b6/" target="_blank" rel="noopener" aria-label="Syeda Filza Bukhari on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-8.5c0-2.03-.04-4.64-2.83-4.64-2.83 0-3.27 2.2-3.27 4.5V24H8V8z"/></svg></a>
       </div>
     </div>
   </div>
