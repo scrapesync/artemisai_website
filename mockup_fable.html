@@ -11403,5 +11403,71 @@ function catActions(){
 })();
 </script>
 
+
+<style id="fable-design12">
+/* ── Pass 12: stage-chip honesty on v2-inherited non-MVP elements ── */
+.fbl-flagrow{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--t3);margin:12px 2px 6px}
+.fbl-flagrow .fbl-stage{margin-left:0}
+.fbl-srchchip{margin-left:-6px;pointer-events:none;flex-shrink:0;align-self:center}
+#fblPalWrap .fbl-pal-input .fbl-stage{margin-left:0;margin-right:8px}
+.fbl-stories-flagwrap{margin:2px 2px -6px}
+@media(max-width:1280px){.fbl-srchchip{display:none}}
+</style>
+<script id="fable-design12-js">
+(function(){
+  'use strict';
+  function chip(st,lbl){var s=document.createElement('span');s.className='fbl-stage '+st+' sm';s.textContent=lbl;return s;}
+
+  /* 1 ── Right-rail live counters → LATER (PLAN: Live real-time counters, L-1/L-5/L-6) */
+  function flagLive(){
+    var g=document.getElementById('liveGrid'); if(!g) return false;
+    if(g.querySelector('.fbl-flagrow')) return true;
+    var first=g.querySelector('.live-stat'); if(!first) return false;
+    var d=document.createElement('div'); d.className='fbl-flagrow';
+    d.appendChild(document.createTextNode('Live counters'));
+    d.appendChild(chip('later','LATER'));
+    g.insertBefore(d, first); return true;
+  }
+  if(typeof window.updateLiveStats==='function'){
+    var _uls=window.updateLiveStats;
+    window.updateLiveStats=function(p){ _uls(p); flagLive(); };
+  }
+
+  /* 2 ── Top-bar search → FAST (PLAN: Top-bar search) */
+  function flagSearch(){
+    var inp=document.querySelector('.topnav .search, input.search'); if(!inp) return false;
+    if(inp.nextElementSibling && inp.nextElementSibling.classList && inp.nextElementSibling.classList.contains('fbl-srchchip')) return true;
+    var c=chip('fast','FAST'); c.classList.add('fbl-srchchip');
+    inp.parentNode.insertBefore(c, inp.nextSibling); return true;
+  }
+
+  /* 3 ── Cmd+K command palette → LATER (PLAN: Keyboard shortcuts / command palette) */
+  function flagPal(){
+    var row=document.querySelector('#fblPalWrap .fbl-pal-input'); if(!row) return false;
+    if(row.querySelector('.fbl-stage')) return true;
+    var kbd=row.querySelector('kbd');
+    row.insertBefore(chip('later','LATER'), kbd||null); return true;
+  }
+
+  /* 4 ── Insight Stories strip → FAST (PLAN: Insight Stories (home)) */
+  function flagStories(){
+    var strip=document.getElementById('storiesStrip'); if(!strip) return false;
+    if(strip.previousElementSibling && strip.previousElementSibling.classList && strip.previousElementSibling.classList.contains('fbl-stories-flagwrap')) return true;
+    var d=document.createElement('div'); d.className='fbl-flagrow fbl-stories-flagwrap';
+    d.appendChild(document.createTextNode('Insight Stories'));
+    d.appendChild(chip('fast','FAST'));
+    strip.parentNode.insertBefore(d, strip); return true;
+  }
+
+  /* retry loop: v2 deferred init may rebuild surfaces after layers load */
+  var tries=0, iv=setInterval(function(){
+    tries++;
+    var ok = flagLive() & flagSearch() & flagPal() & flagStories();
+    if(ok || tries>24) clearInterval(iv);
+  }, 280);
+})();
+</script>
+
 </body>
 </html>
