@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plan Drift v2 — Network-First MVP Proposal</title>
+<title>Plan Drift — Network-First MVP</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><circle cx='12' cy='13' r='3.5' fill='%2300d4aa'/><circle cx='25' cy='10' r='2.5' fill='%23a78bfa'/><circle cx='22' cy='25' r='3' fill='%23f5a623'/><path d='M14.8 14.8L20 22.6M15.3 11.9L22.6 10.6M24 12.4L22.8 22' stroke='%235a6680' stroke-width='1.3'/></svg>" type="image/svg+xml">
 <style>
-:root{
-  --bg:#0b0f1a;--card:#111827;--card2:#151e2e;--border:#1e2d44;
-  --teal:#00D6AE;--purple:#a78bfa;--amber:#f5a623;--blue:#6366f1;
-  --rose:#f43f5e;--emerald:#10b981;--sky:#38bdf8;
-  --ink:#e9eef8;--mut:#8793ab;--dim:#5a6680;
-}
+:root{--bg:#0b0f1a;--card:#111827;--card2:#151e2e;--border:#1e2d44;--teal:#00D6AE;--purple:#a78bfa;--amber:#f5a623;--rose:#f43f5e;--emerald:#10b981;--sky:#38bdf8;--ink:#e9eef8;--mut:#8793ab;--dim:#5a6680}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans','Outfit',Arial,sans-serif;background:
-  radial-gradient(1100px 600px at 88% -8%, rgba(167,139,250,.10), transparent 60%),
-  radial-gradient(900px 520px at -8% 108%, rgba(0,214,174,.10), transparent 55%), var(--bg);
-  color:var(--ink);min-height:100vh}
+ radial-gradient(1100px 600px at 88% -8%, rgba(167,139,250,.10), transparent 60%),
+ radial-gradient(900px 520px at -8% 108%, rgba(0,214,174,.10), transparent 55%), var(--bg);
+ color:var(--ink);min-height:100vh}
 .site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}
 nav.site-nav *{box-sizing:border-box}
 .sn-logo{font-size:1rem;font-weight:800;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.55rem;flex-shrink:0}
@@ -49,131 +44,137 @@ nav.site-nav{height:48px!important;padding:0 12px!important}
 .af-links a{font-size:.8rem;color:#9aa6bd;text-decoration:none}
 .af-links a:hover{color:#00d4aa}
 .af-footer-in{flex-direction:column;text-align:center;gap:12px}
-.wrap{max-width:1060px;margin:0 auto;padding:26px 20px 70px}
+.wrap{max-width:1020px;margin:0 auto;padding:22px 20px 70px}
 
-/* hero */
-.hero{text-align:center;margin:28px auto 26px;max-width:780px}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--purple);margin-bottom:12px}
+/* hero — minimal */
+.hero{text-align:center;margin:24px auto 18px;max-width:720px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--purple);margin-bottom:10px}
 .pulse{width:8px;height:8px;border-radius:50%;background:var(--purple);animation:pls 1.6s infinite}
 @keyframes pls{0%,100%{box-shadow:0 0 0 0 rgba(167,139,250,.5)}55%{box-shadow:0 0 0 8px rgba(167,139,250,0)}}
-.hero h1{font-size:33px;font-weight:900;letter-spacing:-.6px;line-height:1.16}
+.hero h1{font-size:30px;font-weight:900;letter-spacing:-.6px;line-height:1.16}
 .hero h1 em{font-style:normal;color:var(--teal)}
-.hero .sub{color:var(--mut);font-size:14px;line-height:1.65;margin-top:10px}
-.hero .meta{font-size:12px;color:var(--dim);margin-top:10px}
+.hero .meta{font-size:11.5px;color:var(--dim);margin-top:8px}
 
-/* network hero svg */
-.nethero{display:flex;justify-content:center;margin:16px 0 4px}
-.nethero svg{width:300px;height:110px;overflow:visible}
-.nh-edge{stroke:#2a3a5c;stroke-width:1.4;stroke-dasharray:60;stroke-dashoffset:60;animation:draw 2.4s ease forwards}
-.nh-edge.e2{animation-delay:.5s}.nh-edge.e3{animation-delay:1s}.nh-edge.e4{animation-delay:1.4s}.nh-edge.e5{animation-delay:1.8s}
-@keyframes draw{to{stroke-dashoffset:0}}
-.nh-node{animation:nodein .6s ease backwards}
-.nh-node.n2{animation-delay:.4s}.nh-node.n3{animation-delay:.8s}.nh-node.n4{animation-delay:1.2s}.nh-node.n5{animation-delay:1.6s}
-@keyframes nodein{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+/* ACTION STRIP */
+.dothis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 8px}
+.dt{position:relative;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;overflow:hidden}
+.dt::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c)}
+.dt .k{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
+.dt .big{font-size:26px;font-weight:900;letter-spacing:-.6px;margin:6px 0 2px}
+.dt .s{font-size:11.5px;color:var(--mut);line-height:1.45}
+.dt .icon{position:absolute;right:12px;top:12px;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 14%,transparent)}
+.dt .icon svg{width:16px;height:16px;stroke:var(--c);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
-/* countdown chips */
-.clockrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 0}
-.clock{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:9px 14px;display:flex;align-items:center;gap:9px}
-.clock .n{font-size:19px;font-weight:900;letter-spacing:-.5px}
-.clock .l{font-size:10.5px;color:var(--mut);line-height:1.3;text-align:left}
+/* clocks inline small */
+.clockrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0 0}
+.clock{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:7px 12px;display:flex;align-items:center;gap:8px}
+.clock .n{font-size:17px;font-weight:900}
+.clock .l{font-size:10px;color:var(--mut);line-height:1.25;text-align:left}
 .clock.red{border-color:rgba(244,63,94,.5)}.clock.red .n{color:var(--rose)}
 .clock.amb .n{color:var(--amber)}.clock.teal .n{color:var(--teal)}
 
-/* question sections */
-.qsec{margin:36px 0 0}
-.qtag{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#06231d;background:var(--teal);padding:4px 11px;border-radius:9999px;margin-bottom:10px}
-.qsec.q2 .qtag{background:var(--amber);color:#241500}
-.qsec.q3 .qtag{background:var(--sky);color:#04222e}
-.qsec.q4 .qtag{background:var(--purple);color:#1b1230}
-.qsec h2{font-size:21px;font-weight:900;letter-spacing:-.3px;margin-bottom:6px}
-.qsec .qsub{font-size:13px;color:var(--mut);line-height:1.65;max-width:820px}
+/* section header — tiny */
+.qh{display:flex;align-items:center;gap:10px;margin:32px 0 12px}
+.qh .qn{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:900;font-size:13px;background:color-mix(in srgb,var(--c) 16%,transparent);color:var(--c);flex-shrink:0}
+.qh h2{font-size:17px;font-weight:900;letter-spacing:-.2px}
+.qh::after{content:"";flex:1;height:1px;background:var(--border)}
 
 /* calculator */
-.calc{background:var(--card);border:1px solid var(--border);border-radius:18px;margin-top:16px;overflow:hidden}
-.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.calc-col{padding:18px 20px}
+.calc{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr}
+.calc-col{padding:15px 16px}
 .calc-col+.calc-col{border-left:1px solid var(--border)}
-.calc h3{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:11px}
-.scn{border:1px solid var(--border);border-radius:13px;padding:13px 14px;margin-bottom:10px;cursor:pointer;transition:.15s;background:var(--card2)}
+.calc h3{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:9px}
+.scn{border:1px solid var(--border);border-radius:12px;padding:11px 12px;margin-bottom:8px;cursor:pointer;transition:.15s;background:var(--card2);display:flex;align-items:center;gap:11px}
 .scn:hover{border-color:var(--dim)}
-.scn.sel{border-color:var(--teal);background:rgba(0,214,174,.06)}
-.scn .st{font-size:14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.scn .st .pill{font-size:9.5px;font-weight:800;letter-spacing:.05em;padding:2px 9px;border-radius:9999px;background:rgba(167,139,250,.14);color:var(--purple);white-space:nowrap}
-.scn .sd{font-size:11.8px;color:var(--mut);line-height:1.55;margin-top:5px}
-.scn .sd b{color:var(--ink)}
-.cutlist{display:flex;flex-direction:column;gap:8px}
-.cut{display:flex;align-items:center;gap:11px;border:1px solid var(--border);border-radius:11px;padding:10px 13px;cursor:pointer;background:var(--card2);transition:.15s}
+.scn.sel{border-color:var(--teal);background:rgba(0,214,174,.07)}
+.scn .ring{width:17px;height:17px;border-radius:50%;border:2px solid var(--dim);flex-shrink:0;display:grid;place-items:center}
+.scn.sel .ring{border-color:var(--teal)}
+.scn.sel .ring::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--teal)}
+.scn .st{font-size:13px;font-weight:800;flex:1}
+.scn .st small{display:block;font-weight:600;font-size:10.5px;color:var(--mut);margin-top:2px}
+.scn .pm{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--purple);white-space:nowrap}
+.scn .rec{font-size:8.5px;font-weight:900;letter-spacing:.06em;background:var(--teal);color:#06231d;padding:2px 7px;border-radius:9999px}
+.cut{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:11px;padding:9px 12px;cursor:pointer;background:var(--card2);transition:.15s;margin-bottom:8px}
 .cut:hover{border-color:var(--dim)}
-.cut.on{border-color:var(--amber);background:rgba(245,166,35,.06)}
-.cut .box{width:17px;height:17px;border-radius:5px;border:1.5px solid var(--dim);display:grid;place-items:center;font-size:11px;color:#241500;flex-shrink:0}
+.cut.on{border-color:var(--amber);background:rgba(245,166,35,.07)}
+.cut .box{width:16px;height:16px;border-radius:5px;border:1.5px solid var(--dim);display:grid;place-items:center;font-size:10px;color:#241500;flex-shrink:0}
 .cut.on .box{background:var(--amber);border-color:var(--amber)}
-.cut .ct{font-size:12.8px;font-weight:700;flex:1}
-.cut .cn{font-size:11px;color:var(--mut)}
-.cut .sz{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--amber);white-space:nowrap}
-.cut.warn .ct::after{content:" ⚠";color:var(--rose)}
-.cutnote{font-size:10.8px;color:var(--dim);margin-top:8px;line-height:1.5}
+.cut .ct{font-size:12.5px;font-weight:700;flex:1}
+.cut .ct small{display:block;font-weight:600;font-size:10px;color:var(--mut);margin-top:1px}
+.cut .sz{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--amber)}
+.cut .warnico{color:var(--rose);font-size:11px}
 
-/* date readout */
-.readout{border-top:1px solid var(--border);background:linear-gradient(135deg,rgba(0,214,174,.05),rgba(167,139,250,.05));padding:18px 20px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
-.ro-date{text-align:center}
-.ro-date .big{font-size:30px;font-weight:900;letter-spacing:-.8px;transition:color .2s}
-.ro-date .lbl{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:2px}
-.ro-math{flex:1;min-width:230px;font-size:12px;color:var(--mut);line-height:1.7}
-.ro-math b{color:var(--ink)}
-.ro-bar{height:10px;border-radius:9999px;background:#0d1322;border:1px solid var(--border);overflow:hidden;margin-top:7px;position:relative}
-.ro-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--amber));transition:width .25s}
-.ro-flag{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--rose);left:78%}
+/* timeline readout */
+.readout{border-top:1px solid var(--border);background:linear-gradient(135deg,rgba(0,214,174,.05),rgba(167,139,250,.05));padding:16px 20px 20px}
+.ro-top{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.ro-top .big{font-size:34px;font-weight:900;letter-spacing:-1px;transition:color .2s}
+.ro-top .dl{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.ro-top .net{margin-left:auto;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--mut)}
 .ok .big{color:var(--teal)}.tight .big{color:var(--amber)}.late .big{color:var(--rose)}
+.tl{position:relative;height:58px}
+.tl-axis{position:absolute;left:0;right:0;top:30px;height:6px;border-radius:9999px;background:#0d1322;border:1px solid var(--border)}
+.tl-fill{position:absolute;left:0;top:30px;height:6px;border-radius:9999px;background:linear-gradient(90deg,var(--teal),var(--amber));transition:width .3s;max-width:100%}
+.tl-flag{position:absolute;top:18px;width:2px;height:30px;background:var(--rose)}
+.tl-flag span{position:absolute;top:-17px;left:50%;transform:translateX(-50%);font-size:9.5px;font-weight:800;color:var(--rose);white-space:nowrap}
+.tl-dot{position:absolute;top:33px;width:16px;height:16px;border-radius:50%;background:var(--ink);border:3px solid var(--teal);transform:translate(-50%,-50%);transition:left .3s,border-color .2s;box-shadow:0 0 0 4px rgba(0,214,174,.15)}
+.late .tl-dot{border-color:var(--rose);box-shadow:0 0 0 4px rgba(244,63,94,.15)}
+.tight .tl-dot{border-color:var(--amber);box-shadow:0 0 0 4px rgba(245,166,35,.15)}
+.tl-tick{position:absolute;top:40px;font-size:9.5px;color:var(--dim);transform:translateX(-50%)}
 
-/* what's in the slice */
-.slice{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:14px}
-.sl{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px}
-.sl .t{font-size:12.6px;font-weight:800;margin-bottom:3px;display:flex;gap:7px;align-items:center}
-.sl .t .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.sl .d{font-size:11.3px;color:var(--mut);line-height:1.5}
-.sl .d .tkt{font-size:10px}
-.sl.excl{opacity:.55}
-.tkt{font-family:ui-monospace,Menlo,monospace;font-size:11px;background:rgba(0,214,174,.08);color:var(--teal);border:1px solid rgba(0,214,174,.25);padding:1px 6px;border-radius:6px;white-space:nowrap}
+/* verdict cards row (Q2/Q3) */
+.vrow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.vcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;position:relative;overflow:hidden}
+.stamp{position:absolute;top:14px;right:14px;font-size:10px;font-weight:900;letter-spacing:.1em;padding:5px 12px;border-radius:9999px;transform:rotate(3deg)}
+.stamp.go{background:rgba(16,185,129,.16);color:var(--emerald);border:1.5px solid var(--emerald)}
+.stamp.keep{background:rgba(56,189,248,.14);color:var(--sky);border:1.5px solid var(--sky)}
+.vcard h3{font-size:15px;font-weight:900;margin-bottom:10px;padding-right:80px}
+.steps{display:flex;flex-direction:column;gap:0;margin:6px 0 2px}
+.step{display:flex;gap:11px;align-items:flex-start}
+.step .nd{width:22px;display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.step .nd i{width:10px;height:10px;border-radius:50%;background:var(--c);margin-top:3px}
+.step .nd b{width:2px;flex:1;background:var(--border);min-height:16px}
+.step:last-child .nd b{display:none}
+.step .tx{font-size:12px;color:var(--mut);line-height:1.5;padding-bottom:11px}
+.step .tx b{color:var(--ink)}
+.tkt{font-family:ui-monospace,Menlo,monospace;font-size:10px;background:rgba(0,214,174,.08);color:var(--teal);border:1px solid rgba(0,214,174,.25);padding:1px 5px;border-radius:5px;white-space:nowrap}
+/* donut */
+.donutbox{display:flex;align-items:center;gap:16px}
+.donutbox svg{width:110px;height:110px;flex-shrink:0}
+.donutbox .dn{font-size:12px;color:var(--mut);line-height:1.6}
+.donutbox .dn b{color:var(--ink)}
+.dleg{display:flex;flex-direction:column;gap:5px;margin-top:8px;font-size:11px;color:var(--mut)}
+.dleg i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:7px}
 
-/* generic answer card */
-.acard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:17px 20px;margin-top:14px}
-.acard .verdict{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border-radius:9999px;margin-bottom:9px}
-.acard p{font-size:13px;color:var(--mut);line-height:1.68}
-.acard p b{color:var(--ink)}
-.acard p+p{margin-top:8px}
-.v-yes{background:rgba(16,185,129,.14);color:var(--emerald);border:1px solid rgba(16,185,129,.4)}
-.v-go{background:rgba(245,166,35,.14);color:var(--amber);border:1px solid rgba(245,166,35,.4)}
+/* Q4 one-liner rows */
+.el{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:11px 15px;display:flex;gap:12px;align-items:center;margin-bottom:9px}
+.el .ico{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;background:color-mix(in srgb,var(--c) 14%,transparent)}
+.el .ico svg{width:16px;height:16px;stroke:var(--c);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.el .t{font-size:13px;font-weight:800;flex:1;min-width:180px}
+.el .t small{display:block;font-weight:600;font-size:11px;color:var(--mut);margin-top:1px}
+.el .chipline{display:flex;gap:6px;align-items:center}
+.stg{font-size:9px;font-weight:800;letter-spacing:.05em;padding:3px 8px;border-radius:9999px;white-space:nowrap}
+.stg.later{color:#1b1230;background:var(--purple)}.stg.fast{color:#241500;background:var(--amber)}
+.stg.now{color:#fff;background:var(--rose)}.stg.okk{color:#04231b;background:var(--emerald)}
+.arr{color:var(--dim);font-weight:900;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
 
-/* what else list */
-.elselist{display:flex;flex-direction:column;gap:10px;margin-top:14px}
-.el{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:13px 16px;display:flex;gap:13px;align-items:flex-start}
-.el .badge{font-size:9.5px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border-radius:9999px;flex-shrink:0;margin-top:1px}
-.el.u .badge{background:rgba(244,63,94,.14);color:var(--rose);border:1px solid rgba(244,63,94,.4)}
-.el.h .badge{background:rgba(245,166,35,.14);color:var(--amber);border:1px solid rgba(245,166,35,.4)}
-.el.ok .badge{background:rgba(16,185,129,.12);color:var(--emerald);border:1px solid rgba(16,185,129,.35)}
-.el .t{font-size:13.2px;font-weight:800;margin-bottom:3px}
-.el .d{font-size:12px;color:var(--mut);line-height:1.6}
-.el .d b{color:var(--ink)}
-
-/* decision strips */
-.ddecide{margin-top:13px;padding:11px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card2);border:1px solid var(--border);border-radius:12px}
-.ddecide .q{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-right:auto}
-.dbtn{font-family:inherit;font-size:11.5px;font-weight:800;padding:6px 14px;border-radius:9999px;border:1px solid var(--border);background:var(--card);color:var(--mut);cursor:pointer;transition:.15s}
+/* decisions */
+.ddecide{margin-top:12px;padding:10px 15px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;background:var(--card2);border:1px solid var(--border);border-radius:12px}
+.ddecide .q{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-right:auto}
+.dbtn{font-family:inherit;font-size:11px;font-weight:800;padding:6px 13px;border-radius:9999px;border:1px solid var(--border);background:var(--card);color:var(--mut);cursor:pointer;transition:.15s}
 .dbtn:hover{border-color:var(--dim);color:var(--ink)}
 .dbtn.on-approve{background:rgba(16,185,129,.15);border-color:var(--emerald);color:var(--emerald)}
 .dbtn.on-modify{background:rgba(245,166,35,.15);border-color:var(--amber);color:var(--amber)}
 .dbtn.on-hold{background:rgba(244,63,94,.12);border-color:var(--rose);color:var(--rose)}
 .dstate{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
 
-/* toolbar */
 .toolbar{position:sticky;top:48px;z-index:50;margin-top:48px;background:rgba(11,15,26,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:9px 20px;display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap}
-.toolbar .tcount{font-size:12px;color:var(--mut)}
-.toolbar .tcount b{color:var(--teal)}
-.toolbar .tdate{font-size:12px;color:var(--mut)}
-.toolbar .tdate b{color:var(--amber)}
+.toolbar .tcount{font-size:12px;color:var(--mut)}.toolbar .tcount b{color:var(--teal)}
+.toolbar .tdate{font-size:12px;color:var(--mut)}.toolbar .tdate b{color:var(--amber)}
 .copybtn{font-family:inherit;font-size:11.5px;font-weight:800;padding:7px 16px;border-radius:9999px;border:1px solid rgba(0,214,174,.45);background:rgba(0,214,174,.1);color:var(--teal);cursor:pointer}
 .copybtn:hover{background:rgba(0,214,174,.18)}
-@media(max-width:760px){.calc-grid{grid-template-columns:1fr}.calc-col+.calc-col{border-left:none;border-top:1px solid var(--border)}.hero h1{font-size:25px}}
+@media(max-width:760px){.calc-grid{grid-template-columns:1fr}.calc-col+.calc-col{border-left:none;border-top:1px solid var(--border)}.dothis{grid-template-columns:1fr}.vrow{grid-template-columns:1fr}.hero h1{font-size:24px}}
 </style>
 </head>
 <body>
@@ -202,135 +203,171 @@ nav.site-nav{height:48px!important;padding:0 12px!important}
 <div class="toolbar">
   <span class="tcount" id="tcount">0 of 5 decided</span>
   <span class="tdate">Projected launch: <b id="tdate">28 Nov</b></span>
-  <button class="copybtn" onclick="copySummary(this)">Copy decision summary for Alex</button>
+  <button class="copybtn" onclick="copySummary(this)">Copy summary for Alex</button>
 </div>
 
 <div class="wrap">
 
 <div class="hero">
-  <div class="hero-eyebrow"><span class="pulse"></span> Plan Drift v2 · network-first proposal · awaiting Alex</div>
-  <h1>Move the moat <em>into</em> the MVP:<br>collaboration + discovery at launch</h1>
-  <div class="nethero" aria-hidden="true">
-    <svg viewBox="0 0 300 110">
-      <line class="nh-edge"    x1="60"  y1="55" x2="140" y2="30"/>
-      <line class="nh-edge e2" x1="60"  y1="55" x2="130" y2="85"/>
-      <line class="nh-edge e3" x1="140" y1="30" x2="130" y2="85"/>
-      <line class="nh-edge e4" x1="140" y1="30" x2="235" y2="50"/>
-      <line class="nh-edge e5" x1="130" y1="85" x2="235" y2="50"/>
-      <circle class="nh-node"    cx="60"  cy="55" r="11" fill="#00D6AE"/>
-      <circle class="nh-node n2" cx="140" cy="30" r="9"  fill="#a78bfa"/>
-      <circle class="nh-node n3" cx="130" cy="85" r="9"  fill="#f5a623"/>
-      <circle class="nh-node n4" cx="235" cy="50" r="11" fill="#38bdf8"/>
-      <circle class="nh-node n5" cx="282" cy="78" r="6"  fill="#5a6680"/>
-    </svg>
-  </div>
-  <div class="sub">v1 of this page protected the date. The assessment's strongest line ("build the MVP around cross-page intelligence, it's the moat") points the other way, so v2 asks the real question: what does it cost to ship the network at launch, and what do we trade for it? Numbers below come from the live sprint board: 227 remaining MVP tickets across 18 sprints, a measured velocity of ~12.6 tickets per week.</div>
-  <div class="meta">Compiled June 12, 2026 · sources: threat_assessment.html · mockup_fable PLAN · sprint trackers · Internal, not for distribution</div>
+  <div class="hero-eyebrow"><span class="pulse"></span> Plan Drift · network-first proposal · awaiting Alex</div>
+  <h1>Move the moat <em>into</em> the MVP</h1>
+  <div class="meta">Threat assessment → master plan · 227 tickets left · velocity 12.6/week · June 12, 2026 · internal</div>
   <div class="clockrow">
-    <div class="clock red"><span class="n" id="d15">3</span><span class="l">days until Meta replaces<br>reach / viewer metrics (Jun 15)</span></div>
-    <div class="clock amb"><span class="n" id="dv20">~14</span><span class="l">weeks until Graph API v20<br>retires (Sept 2026)</span></div>
-    <div class="clock teal"><span class="n" id="d28">169</span><span class="l">days to the current<br>launch date (28 Nov)</span></div>
+    <div class="clock red"><span class="n" id="d15">3</span><span class="l">days · Meta metric<br>swap (Jun 15)</span></div>
+    <div class="clock amb"><span class="n" id="dv20">~14</span><span class="l">weeks · API v20<br>retires</span></div>
+    <div class="clock teal"><span class="n" id="d28">169</span><span class="l">days · launch<br>(28 Nov)</span></div>
   </div>
 </div>
 
-<!-- ─────────── Q1 ─────────── -->
-<div class="qsec q1">
-  <span class="qtag">Question 1 · the big one</span>
-  <h2>Network theory in the MVP: what it costs, what we trade</h2>
-  <div class="qsub">The Phase 2 backlog holds 15 network tickets; deduped, that is <b style="color:var(--ink)">7 real epics</b>. Two of them (graph-of-graphs via Node2Vec, global GraphSAGE) are research, not launch features, and stay in Phase 2 under any scenario. The rest convert to roughly 4 MVP-grade tickets per epic. Pick a scenario on the left, toggle cuts on the right, and the launch date recomputes from real velocity.</div>
-
-  <div class="calc">
-    <div class="calc-grid">
-      <div class="calc-col">
-        <h3>Step 1 · how much network ships at launch</h3>
-        <div class="scn" data-scn="lite" data-add="14">
-          <div class="st">C · Network-lite <span class="pill">+14 tickets · recommended</span></div>
-          <div class="sd">Discovery becomes <b>real, not a preview</b>: similar-pages from the cross-page graph (<span class="tkt">VD-AI-013A</span>), a live match list with scores (<span class="tkt">VD-AI-013B</span>), benchmark vs neighbourhood. No business cards, no collab workflow yet; the intro / outreach flow goes to Fast-Track week 1.</div>
-        </div>
-        <div class="scn" data-scn="full" data-add="28">
-          <div class="st">B · Full collab slice <span class="pill">+28 tickets</span></div>
-          <div class="sd">Everything in C <b>plus</b> Discovery v1 with Matches / My Collabs / Saved (<span class="tkt">VD-218</span>), auto business cards (<span class="tkt">VD-DISC-015</span>), Art-E suggesting collabs (<span class="tkt">VD-219</span>), affinity graph (<span class="tkt">VD-AFFINITY-011</span>). The full marketing story is true on day one.</div>
-        </div>
-        <div class="scn" data-scn="none" data-add="0">
-          <div class="st">A · Keep preview only <span class="pill">+0 · status quo</span></div>
-          <div class="sd">Discovery stays the S13 view-only preview. No delay, no trade, and the moat stays a promise until Phase 2.</div>
-        </div>
-        <div class="cutnote">Cold start is covered either way: the corpus already holds <b style="color:var(--ink)">111,796 posts and 3.28M comments</b> across pilot and competitor pages, so the graph has neighbours on day one. One caution: surfacing other pages' data must stay public-metrics-only to survive Meta App Review (S19 narrative firewall extends to Discovery copy).</div>
-      </div>
-      <div class="calc-col">
-        <h3>Step 2 · what we remove to pay for it</h3>
-        <div class="cutlist">
-          <div class="cut" data-cut="besttimes" data-sz="14">
-            <span class="box">✓</span><span class="ct">Best Times <span class="cn">· already cut #1 · now free inside Facebook</span></span><span class="sz">−14</span>
-          </div>
-          <div class="cut" data-cut="reports" data-sz="8">
-            <span class="box">✓</span><span class="ct">Reports engine, trim to digest-only <span class="cn">· PDF/scheduled to FT</span></span><span class="sz">−8</span>
-          </div>
-          <div class="cut warn" data-cut="video" data-sz="8">
-            <span class="box">✓</span><span class="ct">Video deep-analysis, ship basic only <span class="cn">· hurts differentiation</span></span><span class="sz">−8</span>
-          </div>
-          <div class="cut warn" data-cut="draftsv" data-sz="5">
-            <span class="box">✓</span><span class="ct">Draft virality gate <span class="cn">· cut #2 territory · hurts prediction story</span></span><span class="sz">−5</span>
-          </div>
-        </div>
-        <div class="cutnote">⚠ items contradict the assessment's "lead with prediction" play; they are listed because they are real options, not because they are good ones. Reports trim has a cost too: agencies (the beachhead) love reports.</div>
-      </div>
-    </div>
-    <div class="readout ok" id="readout">
-      <div class="ro-date"><div class="big" id="roDate">28 Nov</div><div class="lbl" id="roDelta">on plan</div></div>
-      <div class="ro-math">
-        <span id="roMath"><b>+0</b> tickets added, <b>−0</b> removed · net <b>0</b> · at <b>12.6 tickets/week</b> that is <b>0 days</b> of movement.</span>
-        <div class="ro-bar"><i id="roBar" style="width:78%"></i><span class="ro-flag" title="Nov 28"></span></div>
-      </div>
-    </div>
+<div class="dothis">
+  <div class="dt" style="--c:var(--rose)">
+    <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg></div>
+    <div class="k">Do now · no sign-off needed</div>
+    <div class="big">Fix metrics by Jun 15</div>
+    <div class="s">LOKI reads metrics Meta kills Sunday. Out-of-cadence ticket, owner Faheem / Muteeb.</div>
   </div>
-
-  <div class="slice">
-    <div class="sl"><div class="t"><span class="dot" style="background:var(--teal)"></span>In the lite slice</div><div class="d">Cross-page graph + Jaccard overlap, match algorithm + scores, similar-pages on Discovery, benchmark vs neighbourhood. <span class="tkt">VD-AI-013A</span> <span class="tkt">VD-AI-013B</span></div></div>
-    <div class="sl"><div class="t"><span class="dot" style="background:var(--purple)"></span>Added by the full slice</div><div class="d">Discovery v1 (Matches / My Collabs / Saved), auto business cards, Art-E collab suggestions, affinity graph. <span class="tkt">VD-218</span> <span class="tkt">VD-DISC-015</span> <span class="tkt">VD-219</span></div></div>
-    <div class="sl excl"><div class="t"><span class="dot" style="background:var(--dim)"></span>Stays Phase 2 regardless</div><div class="d">Graph-of-graphs (Node2Vec), global GraphSAGE, cross-client intelligence, cascade graphs, commenter influence. Research, privacy review, scale work.</div></div>
+  <div class="dt" style="--c:var(--teal)">
+    <div class="icon"><svg viewBox="0 0 24 24"><circle cx="5" cy="6" r="3"/><circle cx="19" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M7.5 7.5l3 8M16.5 7.5l-3 8M8 6h8"/></svg></div>
+    <div class="k">Decide · the big one</div>
+    <div class="big">Network-lite swap</div>
+    <div class="s">Real Discovery in, Best Times out. Date holds at 28 Nov. Calculator below.</div>
   </div>
-
-  <div class="ddecide" data-key="network"><span class="q">Alex's call · the network move (your scenario + cuts are saved with it)</span><span class="dstate" data-state></span><button class="dbtn" data-set="approve">Approve</button><button class="dbtn" data-set="modify">Modify</button><button class="dbtn" data-set="hold">Hold</button></div>
+  <div class="dt" style="--c:var(--amber)">
+    <div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></div>
+    <div class="k">One line · before App Review</div>
+    <div class="big">Add IG scopes now</div>
+    <div class="s">Request Instagram permissions in the same Meta review. Build lands FT-1, zero delay.</div>
+  </div>
 </div>
 
-<!-- ─────────── Q2 ─────────── -->
-<div class="qsec q2">
-  <span class="qtag">Question 2</span>
-  <h2>Instagram pages → Fast-Track</h2>
-  <div class="acard">
-    <span class="verdict v-yes">Yes · zero MVP delay · one trick to do now</span>
-    <p><b>Build it in FT-1, the week after launch</b>, as <span class="tkt">VD-IG-001..003</span>: IG ingestion reuses LOKI, the same Graph API tokens and largely the same schema, so it is the cheapest platform we will ever add. TikTok and LinkedIn stay LATER.</p>
-    <p><b>The trick that must happen before launch:</b> add <b>instagram_basic + instagram_manage_insights</b> to the scopes requested in the S19/S21 Meta App Review (<span class="tkt">VD-OAUTH-BE-021</span>, one checklist line). Same review, no second cycle, and IG switches on in Fast-Track without going back to Meta. Miss this and FT-1 waits weeks on a fresh review.</p>
+<!-- Q1 -->
+<div class="qh" style="--c:var(--teal)"><span class="qn">1</span><h2>Network in the MVP · pick scope, pick cuts, watch the date</h2></div>
+<div class="calc">
+  <div class="calc-grid">
+    <div class="calc-col">
+      <h3>Network at launch</h3>
+      <div class="scn" data-scn="lite" data-add="14">
+        <span class="ring"></span>
+        <span class="st">Network-lite <span class="rec">RECOMMENDED</span><small>Real matches + similar pages + benchmark <span class="tkt">VD-AI-013A/B</span></small></span>
+        <span class="pm">+14</span>
+      </div>
+      <div class="scn" data-scn="full" data-add="28">
+        <span class="ring"></span>
+        <span class="st">Full collab slice<small>+ business cards, My Collabs, Art-E collabs <span class="tkt">VD-218</span> <span class="tkt">VD-219</span></small></span>
+        <span class="pm">+28</span>
+      </div>
+      <div class="scn" data-scn="none" data-add="0">
+        <span class="ring"></span>
+        <span class="st">Keep preview only<small>Status quo · moat stays Phase 2</small></span>
+        <span class="pm">+0</span>
+      </div>
+    </div>
+    <div class="calc-col">
+      <h3>Pay for it · remove</h3>
+      <div class="cut" data-cut="besttimes" data-sz="14">
+        <span class="box">✓</span><span class="ct">Best Times<small>cut #1 · free inside Facebook now</small></span><span class="sz">−14</span>
+      </div>
+      <div class="cut" data-cut="reports" data-sz="8">
+        <span class="box">✓</span><span class="ct">Reports → digest-only<small>PDF / scheduled goes Fast-Track</small></span><span class="sz">−8</span>
+      </div>
+      <div class="cut" data-cut="video" data-sz="8">
+        <span class="box">✓</span><span class="ct">Video deep-analysis <span class="warnico">⚠</span><small>hurts differentiation</small></span><span class="sz">−8</span>
+      </div>
+      <div class="cut" data-cut="draftsv" data-sz="5">
+        <span class="box">✓</span><span class="ct">Draft virality gate <span class="warnico">⚠</span><small>hurts the prediction story</small></span><span class="sz">−5</span>
+      </div>
+    </div>
   </div>
+  <div class="readout ok" id="readout">
+    <div class="ro-top">
+      <span class="big" id="roDate">28 Nov</span>
+      <span class="dl" id="roDelta">on plan</span>
+      <span class="net" id="roMath">+14 −14 · net 0 · 0 days</span>
+    </div>
+    <div class="tl">
+      <div class="tl-axis"></div>
+      <div class="tl-fill" id="tlFill" style="width:72%"></div>
+      <div class="tl-flag" style="left:72%"><span>28 Nov target</span></div>
+      <div class="tl-dot" id="tlDot" style="left:72%"></div>
+      <span class="tl-tick" style="left:0%">today</span>
+      <span class="tl-tick" style="left:36%">Sept</span>
+      <span class="tl-tick" style="left:86%">15 Dec</span>
+      <span class="tl-tick" style="left:100%">Jan</span>
+    </div>
+  </div>
+</div>
+<div class="ddecide" data-key="network"><span class="q">Alex's call · network move (scenario + cuts saved with it)</span><span class="dstate" data-state></span><button class="dbtn" data-set="approve">Approve</button><button class="dbtn" data-set="modify">Modify</button><button class="dbtn" data-set="hold">Hold</button></div>
+
+<!-- Q2 + Q3 side by side -->
+<div class="qh" style="--c:var(--amber)"><span class="qn">2·3</span><h2>Instagram · basic analytics</h2></div>
+<div class="vrow">
+  <div class="vcard" style="--c:var(--amber)">
+    <span class="stamp go">GO · FT-1</span>
+    <h3>Instagram pages</h3>
+    <div class="steps">
+      <div class="step"><span class="nd"><i></i><b></b></span><span class="tx"><b>Now:</b> one checklist line in <span class="tkt">VD-OAUTH-BE-021</span>, request <b>instagram_basic + insights</b> scopes in the same Meta App Review. Miss it = weeks on a second review.</span></div>
+      <div class="step"><span class="nd"><i></i><b></b></span><span class="tx"><b>Launch week +1:</b> build <span class="tkt">VD-IG-001..003</span> in Fast-Track. Reuses LOKI, same tokens, near-same schema.</span></div>
+      <div class="step"><span class="nd"><i></i></span><span class="tx"><b>MVP delay: zero.</b> TikTok / LinkedIn stay LATER.</span></div>
+    </div>
+  </div>
+  <div class="vcard" style="--c:var(--sky)">
+    <span class="stamp keep">KEEP</span>
+    <h3>Basic analytics in MVP?</h3>
+    <div class="donutbox">
+      <svg viewBox="0 0 42 42">
+        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#1e2d44" stroke-width="6"/>
+        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#38bdf8" stroke-width="6"
+          stroke-dasharray="4 96" stroke-dashoffset="25" stroke-linecap="round"/>
+        <text x="21" y="20" text-anchor="middle" font-size="8.5" font-weight="900" fill="#e9eef8">4%</text>
+        <text x="21" y="28" text-anchor="middle" font-size="3.6" fill="#8793ab">of remaining build</text>
+      </svg>
+      <div class="dn"><b>9 tickets ≈ 0.7 weeks.</b> Pipeline shipped in S1–5; this is wiring data to finished designs.
+        <div class="dleg">
+          <span><i style="background:#38bdf8"></i>Analytics left: 9 tickets</span>
+          <span><i style="background:#1e2d44"></i>Everything else: 218</span>
+        </div>
+        Cutting saves days, loses parity with free FB insights. Sell the neighbourhood, not the charts.
+      </div>
+    </div>
+  </div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
   <div class="ddecide" data-key="instagram"><span class="q">Alex's call</span><span class="dstate" data-state></span><button class="dbtn" data-set="approve">Approve</button><button class="dbtn" data-set="modify">Modify</button><button class="dbtn" data-set="hold">Hold</button></div>
-</div>
-
-<!-- ─────────── Q3 ─────────── -->
-<div class="qsec q3">
-  <span class="qtag">Question 3</span>
-  <h2>Do we need basic analytics in the MVP?</h2>
-  <div class="acard">
-    <span class="verdict v-yes">Keep it · it is only 9 tickets (~0.7 weeks)</span>
-    <p><b>Yes, but it is smaller than it sounds.</b> The heavy lifting (pipeline, warehouse, NLP) sits in Sprints 1–5, already done. What remains tagged analytics in S6–S23 is <b>9 tickets across 7 sprints</b>, mostly wiring existing warehouse data to already-designed pages: roughly 4% of the remaining build. Cutting it would save days, not weeks, and pilots would immediately compare us unfavourably to free Facebook insights.</p>
-    <p><b>The real change is positioning, not scope:</b> analytics is the container predictions and insights live in, never the headline. Creator Assistant gives plain-language analytics away free; we keep parity quietly and sell what it cannot do, the neighbourhood.</p>
-  </div>
   <div class="ddecide" data-key="analytics"><span class="q">Alex's call</span><span class="dstate" data-state></span><button class="dbtn" data-set="approve">Approve</button><button class="dbtn" data-set="modify">Modify</button><button class="dbtn" data-set="hold">Hold</button></div>
 </div>
 
-<!-- ─────────── Q4 ─────────── -->
-<div class="qsec q4">
-  <span class="qtag">Question 4</span>
-  <h2>What else the assessment demands</h2>
-  <div class="elselist">
-    <div class="el u"><span class="badge">Urgent · 3 days</span><div><div class="t">June 15: Meta replaces the reach / viewer metrics LOKI reads</div><div class="d">Still no ticket. Out-of-cadence fix this week (owner Faheem or Muteeb): migrate LOKI + RDL to replacement metrics, pin Graph API v21+, add a deprecation watch to <span class="tkt">VD-INFRA-012</span>. This does not wait for Alex.</div></div></div>
-    <div class="el h"><span class="badge">High</span><div><div class="t">Agencies are the beachhead, and the network move strengthens it</div><div class="d">Promote <b>multi-page / team accounts</b> LATER → FAST, point the 5 → 15 pilot expansion (<span class="tkt">VD-RAFEH-019C</span>) at agencies, add an agency tier to the S22 site. An agency running 12 pages gets 12 nodes in the graph on day one; discovery is worth more to them than to anyone.</div></div></div>
-    <div class="el h"><span class="badge">High</span><div><div class="t">Positioning sweep: never headline what Creator Assistant gives free</div><div class="d">Rewrite the locked one-liner (<span class="tkt">VD-STRAT-018MVP</span>) and S22 site copy to lead with the neighbourhood / collaboration story. If the network move is approved, product and pitch finally say the same thing.</div></div></div>
-    <div class="el h"><span class="badge">Watch</span><div><div class="t">App Review risk extends to Discovery</div><div class="d">Showing other pages' data is the one MVP surface Meta could object to. Public metrics only, no competitor framing in UI copy, and the S19 narrative firewall (<span class="tkt">VD-NARRATIVE-019</span>) must review every Discovery string before submission.</div></div></div>
-    <div class="el ok"><span class="badge">Aligned</span><div><div class="t">Already matching the assessment, no change</div><div class="d">Prediction as the wedge (S7), retention on prediction + alerts (S11/S14), fingerprint capture compounding the moat's data (<span class="tkt">VD-MLP-010</span>), Plan B documented. The $125–145B capex point is answered by the network move itself: we stop competing where they spend.</div></div></div>
-  </div>
-  <div class="ddecide" data-key="agencies"><span class="q">Alex's call · agencies + positioning bundle</span><span class="dstate" data-state></span><button class="dbtn" data-set="approve">Approve</button><button class="dbtn" data-set="modify">Modify</button><button class="dbtn" data-set="hold">Hold</button></div>
-  <div class="ddecide" data-key="api_deadline"><span class="q">Acknowledge · June 15 metric migration (proceeding regardless)</span><span class="dstate" data-state></span><button class="dbtn" data-set="approve">Approve</button><button class="dbtn" data-set="modify">Modify</button><button class="dbtn" data-set="hold">Hold</button></div>
+<!-- Q4 -->
+<div class="qh" style="--c:var(--purple)"><span class="qn">4</span><h2>Everything else the assessment demands</h2></div>
+
+<div class="el" style="--c:var(--rose)">
+  <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+  <span class="t">Jun 15 metric migration<small>LOKI + RDL to new metrics · pin API v21+ · watch in <span class="tkt">VD-INFRA-012</span></small></span>
+  <span class="chipline"><span class="stg now">THIS WEEK</span></span>
+</div>
+<div class="el" style="--c:var(--amber)">
+  <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/><circle cx="9" cy="7" r="4"/></svg></span>
+  <span class="t">Agencies = beachhead<small>multi-page accounts up a stage · pilots 5→15 aimed at agencies · 12 pages = 12 graph nodes</small></span>
+  <span class="chipline"><span class="stg later">LATER</span><span class="arr">→</span><span class="stg fast">FAST</span></span>
+</div>
+<div class="el" style="--c:var(--amber)">
+  <span class="ico"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg></span>
+  <span class="t">Pitch sweep<small>lead with the neighbourhood story · never headline what Creator Assistant gives free · <span class="tkt">VD-STRAT-018MVP</span></small></span>
+  <span class="chipline"><span class="stg fast">COPY ONLY</span></span>
+</div>
+<div class="el" style="--c:var(--sky)">
+  <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+  <span class="t">App Review risk now covers Discovery<small>public metrics only · narrative firewall reviews every Discovery string · <span class="tkt">VD-NARRATIVE-019</span></small></span>
+  <span class="chipline"><span class="stg fast">WATCH</span></span>
+</div>
+<div class="el" style="--c:var(--emerald)">
+  <span class="ico"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+  <span class="t">Already aligned<small>prediction wedge (S7) · retention loop (S11/S14) · fingerprint capture (<span class="tkt">VD-MLP-010</span>) · Plan B documented</small></span>
+  <span class="chipline"><span class="stg okk">NO CHANGE</span></span>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+  <div class="ddecide" data-key="agencies"><span class="q">Alex's call · agencies + pitch</span><span class="dstate" data-state></span><button class="dbtn" data-set="approve">Approve</button><button class="dbtn" data-set="modify">Modify</button><button class="dbtn" data-set="hold">Hold</button></div>
+  <div class="ddecide" data-key="api_deadline"><span class="q">Acknowledge · Jun 15 fix</span><span class="dstate" data-state></span><button class="dbtn" data-set="approve">Approve</button><button class="dbtn" data-set="modify">Modify</button><button class="dbtn" data-set="hold">Hold</button></div>
 </div>
 
 </div>
@@ -374,42 +411,52 @@ function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
 
 
 
-/* ── v2 calculator + decisions ── */
 (function(){
   var KEY='artemis_drift_v2';
-  var VEL=12.6;                      /* tickets per week, measured */
-  var BASE=new Date('2026-11-28');
-  var TITLES={network:'Network move (Q1)',instagram:'Instagram to Fast-Track (Q2)',analytics:'Keep basic analytics (Q3)',agencies:'Agencies + positioning (Q4)',api_deadline:'June 15 metric migration (Q4)'};
-  var SCN_NAMES={lite:'C Network-lite (+14)',full:'B Full collab slice (+28)',none:'A Keep preview (+0)'};
+  var VEL=12.6, BASE=new Date('2026-11-28');
+  var TODAY=new Date('2026-06-12'), TLEND=new Date('2027-01-10'); /* timeline axis: today → Jan 10 */
+  var TITLES={network:'Network move (Q1)',instagram:'Instagram to Fast-Track (Q2)',analytics:'Keep basic analytics (Q3)',agencies:'Agencies + pitch (Q4)',api_deadline:'Jun 15 metric migration (Q4)'};
+  var SCN_NAMES={lite:'Network-lite (+14)',full:'Full collab slice (+28)',none:'Keep preview (+0)'};
   function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
   var state=load();
   if(!state.scn) state.scn='lite';
-  if(!state.cuts) state.cuts={besttimes:true};   /* sensible default */
+  if(!state.cuts) state.cuts={besttimes:true};
 
   function fmt(d){return d.getDate()+' '+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];}
+  function pos(d){return Math.min(100,Math.max(0,(d-TODAY)/(TLEND-TODAY)*100));}
 
   function recompute(){
-    var add=0; document.querySelectorAll('.scn').forEach(function(s){
+    var add=0;
+    document.querySelectorAll('.scn').forEach(function(s){
       var on=s.getAttribute('data-scn')===state.scn; s.classList.toggle('sel',on);
       if(on) add=parseInt(s.getAttribute('data-add'),10);
     });
-    var rem=0; document.querySelectorAll('.cut').forEach(function(c){
+    var rem=0;
+    document.querySelectorAll('.cut').forEach(function(c){
       var k=c.getAttribute('data-cut'), on=!!state.cuts[k];
       c.classList.toggle('on',on); if(on) rem+=parseInt(c.getAttribute('data-sz'),10);
     });
     var net=add-rem, days=Math.round(net/VEL*7);
-    var d=new Date(BASE); d.setDate(d.getDate()+Math.max(days,0)); /* finishing early banks buffer, date stays */
+    var d=new Date(BASE); d.setDate(d.getDate()+Math.max(days,0));
     var ro=document.getElementById('readout');
     ro.className='readout '+(days<=0?'ok':days<=7?'tight':'late');
     document.getElementById('roDate').textContent=fmt(d);
-    document.getElementById('roDelta').textContent= days<=0 ? (net<0? (Math.abs(days)+' days of buffer banked') : 'on plan') : ('+'+days+' days');
-    document.getElementById('roMath').innerHTML='<b>+'+add+'</b> tickets added, <b>\u2212'+rem+'</b> removed \u00b7 net <b>'+net+'</b> \u00b7 at <b>'+VEL+' tickets/week</b> that is <b>'+days+' days</b> of movement.';
-    var pct=Math.min(100,Math.max(8, 78 + days/30*22 ));
-    document.getElementById('roBar').style.width=pct+'%';
+    document.getElementById('roDelta').textContent= days<=0 ? (net<0?Math.abs(days)+' days buffer banked':'on plan') : '+'+days+' days';
+    document.getElementById('roMath').textContent='+'+add+' \u2212'+rem+' \u00b7 net '+net+' \u00b7 '+days+' days';
+    var p=pos(d);
+    document.getElementById('tlDot').style.left=p+'%';
+    document.getElementById('tlFill').style.width=p+'%';
     var td=document.getElementById('tdate'); if(td) td.textContent=fmt(d);
     return {add:add,rem:rem,net:net,days:days,date:fmt(d)};
   }
+  /* place the Nov-28 flag + ticks precisely */
+  (function(){
+    var flag=document.querySelector('.tl-flag'); flag.style.left=pos(BASE)+'%';
+    var ticks=document.querySelectorAll('.tl-tick');
+    ticks[1].style.left=pos(new Date('2026-09-01'))+'%';
+    ticks[2].style.left=pos(new Date('2026-12-15'))+'%';
+  })();
 
   function paintDecisions(){
     var decided=0;
@@ -420,41 +467,32 @@ function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
         if(v && b.getAttribute('data-set')===v) b.classList.add('on-'+v);
       });
       var lbl=row.querySelector('[data-state]');
-      lbl.textContent = v ? (v==='approve'?'Approved':v==='modify'?'Approve with changes':'On hold') : 'Pending';
+      lbl.textContent = v ? (v==='approve'?'Approved':v==='modify'?'W/ changes':'On hold') : 'Pending';
       lbl.style.color = v ? (v==='approve'?'var(--emerald)':v==='modify'?'var(--amber)':'var(--rose)') : 'var(--dim)';
       if(v) decided++;
     });
     document.getElementById('tcount').innerHTML='<b>'+decided+' of 5</b> decided';
   }
 
-  document.querySelectorAll('.scn').forEach(function(s){
-    s.addEventListener('click',function(){state.scn=s.getAttribute('data-scn');save();recompute();});
-  });
-  document.querySelectorAll('.cut').forEach(function(c){
-    c.addEventListener('click',function(){var k=c.getAttribute('data-cut');state.cuts[k]=!state.cuts[k];save();recompute();});
-  });
+  document.querySelectorAll('.scn').forEach(function(s){s.addEventListener('click',function(){state.scn=s.getAttribute('data-scn');save();recompute();});});
+  document.querySelectorAll('.cut').forEach(function(c){c.addEventListener('click',function(){var k=c.getAttribute('data-cut');state.cuts[k]=!state.cuts[k];save();recompute();});});
   document.querySelectorAll('.ddecide[data-key]').forEach(function(row){
     var k=row.getAttribute('data-key');
     row.querySelectorAll('.dbtn').forEach(function(b){
-      b.addEventListener('click',function(){
-        state.dec=state.dec||{};
-        var v=b.getAttribute('data-set');
-        state.dec[k]=(state.dec[k]===v)?null:v;
-        save();paintDecisions();
-      });
+      b.addEventListener('click',function(){state.dec=state.dec||{};var v=b.getAttribute('data-set');state.dec[k]=(state.dec[k]===v)?null:v;save();paintDecisions();});
     });
   });
 
   window.copySummary=function(btn){
     var r=recompute();
-    var cutNames={besttimes:'Best Times (\u221214)',reports:'Reports trim (\u22128)',video:'Video deep-analysis (\u22128)',draftsv:'Draft virality gate (\u22125)'};
+    var cutNames={besttimes:'Best Times (\u221214)',reports:'Reports trim (\u22128)',video:'Video deep (\u22128)',draftsv:'Virality gate (\u22125)'};
     var cuts=Object.keys(state.cuts).filter(function(k){return state.cuts[k]}).map(function(k){return cutNames[k]});
-    var lines=['ArtemisAI \u00b7 Plan Drift v2 decisions \u00b7 '+new Date().toLocaleDateString('en-GB')];
+    var lines=['ArtemisAI \u00b7 Plan Drift decisions \u00b7 '+new Date().toLocaleDateString('en-GB')];
     lines.push('Scenario: '+SCN_NAMES[state.scn]+' \u00b7 cuts: '+(cuts.length?cuts.join(', '):'none'));
     lines.push('Projected launch: '+r.date+' ('+(r.days<=0?'on plan':'+'+r.days+' days')+')');
     Object.keys(TITLES).forEach(function(k){
       var v=(state.dec||{})[k];
-      lines.push((v?(v==='approve'?'[APPROVED] ':v==='modify'?'[APPROVE W/ CHANGES] ':'[HOLD] '):'[PENDING] ')+TITLES[k]);
+      lines.push((v?(v==='approve'?'[APPROVED] ':v==='modify'?'[W/ CHANGES] ':'[HOLD] '):'[PENDING] ')+TITLES[k]);
     });
     lines.push('Full detail: artemisai.co.uk/plan_drift.html');
     var txt=lines.join('\n');
@@ -464,10 +502,10 @@ function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
   };
 
   var now=new Date();
-  function days(d){return Math.max(0,Math.ceil((d-now)/86400000));}
-  var e=document.getElementById('d15'); if(e) e.textContent=days(new Date('2026-06-15'));
-  e=document.getElementById('d28'); if(e) e.textContent=days(new Date('2026-11-28'));
-  e=document.getElementById('dv20'); if(e) e.textContent='~'+Math.round(days(new Date('2026-09-15'))/7);
+  function dd(d){return Math.max(0,Math.ceil((d-now)/86400000));}
+  var e=document.getElementById('d15'); if(e) e.textContent=dd(new Date('2026-06-15'));
+  e=document.getElementById('d28'); if(e) e.textContent=dd(new Date('2026-11-28'));
+  e=document.getElementById('dv20'); if(e) e.textContent='~'+Math.round(dd(new Date('2026-09-15'))/7);
 
   recompute(); paintDecisions();
 })();
