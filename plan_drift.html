@@ -95,6 +95,8 @@ nav.site-nav{height:48px!important;padding:0 12px!important}
 .scn .st small{display:block;font-weight:600;font-size:10.5px;color:var(--mut);margin-top:2px}
 .scn .pm{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--purple);white-space:nowrap}
 .scn .rec{font-size:8.5px;font-weight:900;letter-spacing:.06em;background:var(--teal);color:#06231d;padding:2px 7px;border-radius:9999px}
+.cgroup{font-size:9px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:10px 1px 6px}
+.cgroup:first-child{margin-top:0}
 .cut{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:11px;padding:9px 12px;cursor:pointer;background:var(--card2);transition:.15s;margin-bottom:8px}
 .cut:hover{border-color:var(--dim)}
 .cut.on{border-color:var(--amber);background:rgba(245,166,35,.07)}
@@ -229,8 +231,8 @@ nav.site-nav{height:48px!important;padding:0 12px!important}
   <div class="dt" style="--c:var(--teal)">
     <div class="icon"><svg viewBox="0 0 24 24"><circle cx="5" cy="6" r="3"/><circle cx="19" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M7.5 7.5l3 8M16.5 7.5l-3 8M8 6h8"/></svg></div>
     <div class="k">Decide · the big one</div>
-    <div class="big">Network-lite swap</div>
-    <div class="s">Real Discovery in, Best Times out. Date holds at 28 Nov. Calculator below.</div>
+    <div class="big">Full collab swap</div>
+    <div class="s">Full Discovery + collabs in (+28); Best Times, Reports trim, Art-E memory and live-typing out (−28). Date holds at 28 Nov.</div>
   </div>
   <div class="dt" style="--c:var(--amber)">
     <div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></div>
@@ -248,12 +250,12 @@ nav.site-nav{height:48px!important;padding:0 12px!important}
       <h3>Network at launch</h3>
       <div class="scn" data-scn="lite" data-add="14">
         <span class="ring"></span>
-        <span class="st">Network-lite <span class="rec">RECOMMENDED</span><small>Real matches + similar pages + benchmark <span class="tkt">VD-AI-013A/B</span></small></span>
+        <span class="st">Network-lite<small>Real matches + similar pages + benchmark <span class="tkt">VD-AI-013A/B</span></small></span>
         <span class="pm">+14</span>
       </div>
       <div class="scn" data-scn="full" data-add="28">
         <span class="ring"></span>
-        <span class="st">Full collab slice<small>+ business cards, My Collabs, Art-E collabs <span class="tkt">VD-218</span> <span class="tkt">VD-219</span></small></span>
+        <span class="st">Full collab slice <span class="rec">CHOSEN</span><small>+ business cards, My Collabs, Art-E collabs <span class="tkt">VD-218</span> <span class="tkt">VD-219</span></small></span>
         <span class="pm">+28</span>
       </div>
       <div class="scn" data-scn="none" data-add="0">
@@ -264,12 +266,36 @@ nav.site-nav{height:48px!important;padding:0 12px!important}
     </div>
     <div class="calc-col">
       <h3>Pay for it · remove</h3>
+      <div class="cgroup">Safe · nobody misses these at launch</div>
       <div class="cut" data-cut="besttimes" data-sz="14">
         <span class="box">✓</span><span class="ct">Best Times<small>cut #1 · free inside Facebook now</small></span><span class="sz">−14</span>
       </div>
       <div class="cut" data-cut="reports" data-sz="8">
         <span class="box">✓</span><span class="ct">Reports → digest-only<small>PDF / scheduled goes Fast-Track</small></span><span class="sz">−8</span>
       </div>
+      <div class="cut" data-cut="livetyping" data-sz="2">
+        <span class="box">✓</span><span class="ct">Live as-you-type draft scoring<small>score on click instead · mockup already works this way</small></span><span class="sz">−2</span>
+      </div>
+      <div class="cut" data-cut="rawtable" data-sz="1">
+        <span class="box">✓</span><span class="ct">Raw post table + export<small>power-user surface · FT</small></span><span class="sz">−1</span>
+      </div>
+      <div class="cut" data-cut="docs" data-sz="1">
+        <span class="box">✓</span><span class="ct">Full docs → quickstart only<small>5 pilots get white-glove anyway</small></span><span class="sz">−1</span>
+      </div>
+      <div class="cgroup">Medium · fine for 5 pilots, revisit at scale</div>
+      <div class="cut" data-cut="artememory" data-sz="4">
+        <span class="box">✓</span><span class="ct">Art-E week-to-week memory<small>grounded Q&amp;A + citations stay · memory goes FT</small></span><span class="sz">−4</span>
+      </div>
+      <div class="cut" data-cut="frontier" data-sz="2">
+        <span class="box">✓</span><span class="ct">Art-E frontier-model upgrade<small>current model must still pass the accuracy gate</small></span><span class="sz">−2</span>
+      </div>
+      <div class="cut" data-cut="webhooks" data-sz="1">
+        <span class="box">✓</span><span class="ct">Public outbound webhooks<small>internal alert emails unaffected</small></span><span class="sz">−1</span>
+      </div>
+      <div class="cut" data-cut="audiencegw" data-sz="1">
+        <span class="box">✓</span><span class="ct">Audience-feature groundwork<small>for a LATER page · backfillable from stored raw</small></span><span class="sz">−1</span>
+      </div>
+      <div class="cgroup">Hurts the strategy · listed for honesty</div>
       <div class="cut" data-cut="video" data-sz="8">
         <span class="box">✓</span><span class="ct">Video deep-analysis <span class="warnico">⚠</span><small>hurts differentiation</small></span><span class="sz">−8</span>
       </div>
@@ -412,7 +438,7 @@ function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
 
 
 (function(){
-  var KEY='artemis_drift_v2';
+  var KEY='artemis_drift_v3';
   var VEL=12.6, BASE=new Date('2026-11-28');
   var TODAY=new Date('2026-06-12'), TLEND=new Date('2027-01-10'); /* timeline axis: today → Jan 10 */
   var TITLES={network:'Network move (Q1)',instagram:'Instagram to Fast-Track (Q2)',analytics:'Keep basic analytics (Q3)',agencies:'Agencies + pitch (Q4)',api_deadline:'Jun 15 metric migration (Q4)'};
@@ -420,8 +446,8 @@ function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
   function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
   var state=load();
-  if(!state.scn) state.scn='lite';
-  if(!state.cuts) state.cuts={besttimes:true};
+  if(!state.scn) state.scn='full';
+  if(!state.cuts) state.cuts={besttimes:true,reports:true,artememory:true,livetyping:true};
 
   function fmt(d){return d.getDate()+' '+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];}
   function pos(d){return Math.min(100,Math.max(0,(d-TODAY)/(TLEND-TODAY)*100));}
@@ -485,7 +511,7 @@ function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
 
   window.copySummary=function(btn){
     var r=recompute();
-    var cutNames={besttimes:'Best Times (\u221214)',reports:'Reports trim (\u22128)',video:'Video deep (\u22128)',draftsv:'Virality gate (\u22125)'};
+    var cutNames={besttimes:'Best Times (\u221214)',reports:'Reports trim (\u22128)',livetyping:'Live-typing scoring (\u22122)',rawtable:'Raw table (\u22121)',docs:'Docs trim (\u22121)',artememory:'Art-E memory (\u22124)',frontier:'Frontier upgrade (\u22122)',webhooks:'Public webhooks (\u22121)',audiencegw:'Audience groundwork (\u22121)',video:'Video deep (\u22128)',draftsv:'Virality gate (\u22125)'};
     var cuts=Object.keys(state.cuts).filter(function(k){return state.cuts[k]}).map(function(k){return cutNames[k]});
     var lines=['ArtemisAI \u00b7 Plan Drift decisions \u00b7 '+new Date().toLocaleDateString('en-GB')];
     lines.push('Scenario: '+SCN_NAMES[state.scn]+' \u00b7 cuts: '+(cuts.length?cuts.join(', '):'none'));
