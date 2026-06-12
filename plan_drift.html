@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plan Drift — Network-First MVP</title>
+<title>Plan Drift — Approved</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><circle cx='12' cy='13' r='3.5' fill='%2300d4aa'/><circle cx='25' cy='10' r='2.5' fill='%23a78bfa'/><circle cx='22' cy='25' r='3' fill='%23f5a623'/><path d='M14.8 14.8L20 22.6M15.3 11.9L22.6 10.6M24 12.4L22.8 22' stroke='%235a6680' stroke-width='1.3'/></svg>" type="image/svg+xml">
 <style>
 :root{--bg:#0b0f1a;--card:#111827;--card2:#151e2e;--border:#1e2d44;--teal:#00D6AE;--purple:#a78bfa;--amber:#f5a623;--rose:#f43f5e;--emerald:#10b981;--sky:#38bdf8;--ink:#e9eef8;--mut:#8793ab;--dim:#5a6680}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans','Outfit',Arial,sans-serif;background:
- radial-gradient(1100px 600px at 88% -8%, rgba(167,139,250,.10), transparent 60%),
- radial-gradient(900px 520px at -8% 108%, rgba(0,214,174,.10), transparent 55%), var(--bg);
+ radial-gradient(1000px 560px at 85% -8%, rgba(0,214,174,.10), transparent 60%),
+ radial-gradient(900px 520px at -8% 108%, rgba(167,139,250,.10), transparent 55%), var(--bg);
  color:var(--ink);min-height:100vh}
 .site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}
 nav.site-nav *{box-sizing:border-box}
@@ -44,143 +44,62 @@ nav.site-nav{height:48px!important;padding:0 12px!important}
 .af-links a{font-size:.8rem;color:#9aa6bd;text-decoration:none}
 .af-links a:hover{color:#00d4aa}
 .af-footer-in{flex-direction:column;text-align:center;gap:12px}
-.wrap{max-width:1020px;margin:0 auto;padding:22px 20px 70px}
-
-/* hero — minimal */
-.hero{text-align:center;margin:24px auto 18px;max-width:720px}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--purple);margin-bottom:10px}
-.pulse{width:8px;height:8px;border-radius:50%;background:var(--purple);animation:pls 1.6s infinite}
-@keyframes pls{0%,100%{box-shadow:0 0 0 0 rgba(167,139,250,.5)}55%{box-shadow:0 0 0 8px rgba(167,139,250,0)}}
-.hero h1{font-size:30px;font-weight:900;letter-spacing:-.6px;line-height:1.16}
+.wrap{max-width:880px;margin:0 auto;padding:74px 20px 70px}
+.hero{text-align:center;margin:14px auto 26px}
+.appr{display:inline-flex;align-items:center;gap:9px;background:rgba(16,185,129,.12);border:1.5px solid var(--emerald);color:var(--emerald);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:9999px;margin-bottom:14px}
+.appr .tk{width:16px;height:16px;border-radius:50%;background:var(--emerald);color:#04231b;display:grid;place-items:center;font-size:10px}
+.hero h1{font-size:30px;font-weight:900;letter-spacing:-.6px;line-height:1.15}
 .hero h1 em{font-style:normal;color:var(--teal)}
-.hero .meta{font-size:11.5px;color:var(--dim);margin-top:8px}
+.hero .meta{font-size:11.5px;color:var(--dim);margin-top:9px}
 
-/* ACTION STRIP */
-.dothis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 8px}
-.dt{position:relative;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;overflow:hidden}
-.dt::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c)}
-.dt .k{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
-.dt .big{font-size:26px;font-weight:900;letter-spacing:-.6px;margin:6px 0 2px}
-.dt .s{font-size:11.5px;color:var(--mut);line-height:1.45}
-.dt .icon{position:absolute;right:12px;top:12px;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 14%,transparent)}
-.dt .icon svg{width:16px;height:16px;stroke:var(--c);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* network grows animation */
+.net{display:flex;justify-content:center;margin:18px 0 8px}
+.net svg{width:340px;height:120px;overflow:visible}
+.ne{stroke:#2a3a5c;stroke-width:1.5;stroke-dasharray:80;stroke-dashoffset:80;animation:dr 1.6s ease forwards}
+.ne.b{animation-delay:.4s}.ne.c{animation-delay:.8s}.ne.d{animation-delay:1.2s}.ne.e{animation-delay:1.6s}.ne.f{animation-delay:2s}
+@keyframes dr{to{stroke-dashoffset:0}}
+.nn{animation:ni .5s ease backwards}
+.nn.b{animation-delay:.3s}.nn.c{animation-delay:.7s}.nn.d{animation-delay:1.1s}.nn.e{animation-delay:1.5s}.nn.f{animation-delay:1.9s}
+@keyframes ni{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
 
-/* clocks inline small */
-.clockrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0 0}
-.clock{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:7px 12px;display:flex;align-items:center;gap:8px}
-.clock .n{font-size:17px;font-weight:900}
-.clock .l{font-size:10px;color:var(--mut);line-height:1.25;text-align:left}
-.clock.red{border-color:rgba(244,63,94,.5)}.clock.red .n{color:var(--rose)}
-.clock.amb .n{color:var(--amber)}.clock.teal .n{color:var(--teal)}
+/* big stat tiles */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0 26px}
+.stt{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;text-align:center}
+.stt .n{font-size:30px;font-weight:900;letter-spacing:-.8px;color:var(--c)}
+.stt .l{font-size:11px;color:var(--mut);margin-top:3px;line-height:1.45}
 
-/* section header — tiny */
-.qh{display:flex;align-items:center;gap:10px;margin:32px 0 12px}
-.qh .qn{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:900;font-size:13px;background:color-mix(in srgb,var(--c) 16%,transparent);color:var(--c);flex-shrink:0}
-.qh h2{font-size:17px;font-weight:900;letter-spacing:-.2px}
-.qh::after{content:"";flex:1;height:1px;background:var(--border)}
-
-/* calculator */
-.calc{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden}
-.calc-grid{display:grid;grid-template-columns:1fr 1fr}
-.calc-col{padding:15px 16px}
-.calc-col+.calc-col{border-left:1px solid var(--border)}
-.calc h3{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:9px}
-.scn{border:1px solid var(--border);border-radius:12px;padding:11px 12px;margin-bottom:8px;cursor:pointer;transition:.15s;background:var(--card2);display:flex;align-items:center;gap:11px}
-.scn:hover{border-color:var(--dim)}
-.scn.sel{border-color:var(--teal);background:rgba(0,214,174,.07)}
-.scn .ring{width:17px;height:17px;border-radius:50%;border:2px solid var(--dim);flex-shrink:0;display:grid;place-items:center}
-.scn.sel .ring{border-color:var(--teal)}
-.scn.sel .ring::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--teal)}
-.scn .st{font-size:13px;font-weight:800;flex:1}
-.scn .st small{display:block;font-weight:600;font-size:10.5px;color:var(--mut);margin-top:2px}
-.scn .pm{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--purple);white-space:nowrap}
-.scn .rec{font-size:8.5px;font-weight:900;letter-spacing:.06em;background:var(--teal);color:#06231d;padding:2px 7px;border-radius:9999px}
-.cgroup{font-size:9px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:10px 1px 6px}
-.cgroup:first-child{margin-top:0}
-.cut{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:11px;padding:9px 12px;cursor:pointer;background:var(--card2);transition:.15s;margin-bottom:8px}
-.cut:hover{border-color:var(--dim)}
-.cut.on{border-color:var(--amber);background:rgba(245,166,35,.07)}
-.cut .box{width:16px;height:16px;border-radius:5px;border:1.5px solid var(--dim);display:grid;place-items:center;font-size:10px;color:#241500;flex-shrink:0}
-.cut.on .box{background:var(--amber);border-color:var(--amber)}
-.cut .ct{font-size:12.5px;font-weight:700;flex:1}
-.cut .ct small{display:block;font-weight:600;font-size:10px;color:var(--mut);margin-top:1px}
-.cut .sz{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--amber)}
-.cut .warnico{color:var(--rose);font-size:11px}
-
-/* timeline readout */
-.readout{border-top:1px solid var(--border);background:linear-gradient(135deg,rgba(0,214,174,.05),rgba(167,139,250,.05));padding:16px 20px 20px}
-.ro-top{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:12px}
-.ro-top .big{font-size:34px;font-weight:900;letter-spacing:-1px;transition:color .2s}
-.ro-top .dl{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
-.ro-top .net{margin-left:auto;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--mut)}
-.ok .big{color:var(--teal)}.tight .big{color:var(--amber)}.late .big{color:var(--rose)}
-.tl{position:relative;height:58px}
-.tl-axis{position:absolute;left:0;right:0;top:30px;height:6px;border-radius:9999px;background:#0d1322;border:1px solid var(--border)}
-.tl-fill{position:absolute;left:0;top:30px;height:6px;border-radius:9999px;background:linear-gradient(90deg,var(--teal),var(--amber));transition:width .3s;max-width:100%}
-.tl-flag{position:absolute;top:18px;width:2px;height:30px;background:var(--rose)}
-.tl-flag span{position:absolute;top:-17px;left:50%;transform:translateX(-50%);font-size:9.5px;font-weight:800;color:var(--rose);white-space:nowrap}
-.tl-dot{position:absolute;top:33px;width:16px;height:16px;border-radius:50%;background:var(--ink);border:3px solid var(--teal);transform:translate(-50%,-50%);transition:left .3s,border-color .2s;box-shadow:0 0 0 4px rgba(0,214,174,.15)}
-.late .tl-dot{border-color:var(--rose);box-shadow:0 0 0 4px rgba(244,63,94,.15)}
-.tight .tl-dot{border-color:var(--amber);box-shadow:0 0 0 4px rgba(245,166,35,.15)}
-.tl-tick{position:absolute;top:40px;font-size:9.5px;color:var(--dim);transform:translateX(-50%)}
-
-/* verdict cards row (Q2/Q3) */
-.vrow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.vcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;position:relative;overflow:hidden}
-.stamp{position:absolute;top:14px;right:14px;font-size:10px;font-weight:900;letter-spacing:.1em;padding:5px 12px;border-radius:9999px;transform:rotate(3deg)}
-.stamp.go{background:rgba(16,185,129,.16);color:var(--emerald);border:1.5px solid var(--emerald)}
-.stamp.keep{background:rgba(56,189,248,.14);color:var(--sky);border:1.5px solid var(--sky)}
-.vcard h3{font-size:15px;font-weight:900;margin-bottom:10px;padding-right:80px}
-.steps{display:flex;flex-direction:column;gap:0;margin:6px 0 2px}
-.step{display:flex;gap:11px;align-items:flex-start}
-.step .nd{width:22px;display:flex;flex-direction:column;align-items:center;flex-shrink:0}
-.step .nd i{width:10px;height:10px;border-radius:50%;background:var(--c);margin-top:3px}
-.step .nd b{width:2px;flex:1;background:var(--border);min-height:16px}
-.step:last-child .nd b{display:none}
-.step .tx{font-size:12px;color:var(--mut);line-height:1.5;padding-bottom:11px}
-.step .tx b{color:var(--ink)}
-.tkt{font-family:ui-monospace,Menlo,monospace;font-size:10px;background:rgba(0,214,174,.08);color:var(--teal);border:1px solid rgba(0,214,174,.25);padding:1px 5px;border-radius:5px;white-space:nowrap}
-/* donut */
-.donutbox{display:flex;align-items:center;gap:16px}
-.donutbox svg{width:110px;height:110px;flex-shrink:0}
-.donutbox .dn{font-size:12px;color:var(--mut);line-height:1.6}
-.donutbox .dn b{color:var(--ink)}
-.dleg{display:flex;flex-direction:column;gap:5px;margin-top:8px;font-size:11px;color:var(--mut)}
-.dleg i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:7px}
-
-/* Q4 one-liner rows */
-.el{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:11px 15px;display:flex;gap:12px;align-items:center;margin-bottom:9px}
-.el .ico{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;background:color-mix(in srgb,var(--c) 14%,transparent)}
-.el .ico svg{width:16px;height:16px;stroke:var(--c);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.el .t{font-size:13px;font-weight:800;flex:1;min-width:180px}
-.el .t small{display:block;font-weight:600;font-size:11px;color:var(--mut);margin-top:1px}
-.el .chipline{display:flex;gap:6px;align-items:center}
-.stg{font-size:9px;font-weight:800;letter-spacing:.05em;padding:3px 8px;border-radius:9999px;white-space:nowrap}
+/* before -> after rows */
+.sh{font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:24px 0 10px;display:flex;align-items:center;gap:10px}
+.sh::after{content:"";flex:1;height:1px;background:var(--border)}
+.mv{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:13px 16px;display:flex;align-items:center;gap:13px;margin-bottom:9px}
+.mv .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;font-size:16px;background:color-mix(in srgb,var(--c) 14%,transparent)}
+.mv .t{font-size:13.5px;font-weight:800;flex:1;min-width:170px}
+.mv .t small{display:block;font-weight:600;font-size:11px;color:var(--mut);margin-top:2px}
+.chips{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.stg{font-size:9.5px;font-weight:800;letter-spacing:.05em;padding:4px 10px;border-radius:9999px;white-space:nowrap}
 .stg.later{color:#1b1230;background:var(--purple)}.stg.fast{color:#241500;background:var(--amber)}
-.stg.now{color:#fff;background:var(--rose)}.stg.okk{color:#04231b;background:var(--emerald)}
-.arr{color:var(--dim);font-weight:900;animation:nudge 1.6s ease-in-out infinite}
-@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+.stg.mvp{color:#06231d;background:var(--teal)}.stg.prev{color:var(--mut);background:#1a2336;border:1px solid var(--border)}
+.stg.none{color:var(--rose);background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.35)}
+.stg.same{color:#04231b;background:var(--emerald)}
+.arr{color:var(--dim);font-weight:900;animation:nd 1.6s ease-in-out infinite}
+@keyframes nd{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
 
-/* decisions */
-.ddecide{margin-top:12px;padding:10px 15px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;background:var(--card2);border:1px solid var(--border);border-radius:12px}
-.ddecide .q{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-right:auto}
-.dbtn{font-family:inherit;font-size:11px;font-weight:800;padding:6px 13px;border-radius:9999px;border:1px solid var(--border);background:var(--card);color:var(--mut);cursor:pointer;transition:.15s}
-.dbtn:hover{border-color:var(--dim);color:var(--ink)}
-.dbtn.on-approve{background:rgba(16,185,129,.15);border-color:var(--emerald);color:var(--emerald)}
-.dbtn.on-modify{background:rgba(245,166,35,.15);border-color:var(--amber);color:var(--amber)}
-.dbtn.on-hold{background:rgba(244,63,94,.12);border-color:var(--rose);color:var(--rose)}
-.dstate{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
-
-.toolbar{position:sticky;top:48px;z-index:50;margin-top:48px;background:rgba(11,15,26,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:9px 20px;display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap}
-.toolbar .tcount{font-size:12px;color:var(--mut)}.toolbar .tcount b{color:var(--teal)}
-.toolbar .tdate{font-size:12px;color:var(--mut)}.toolbar .tdate b{color:var(--amber)}
-.copybtn{font-family:inherit;font-size:11.5px;font-weight:800;padding:7px 16px;border-radius:9999px;border:1px solid rgba(0,214,174,.45);background:rgba(0,214,174,.1);color:var(--teal);cursor:pointer}
-.copybtn:hover{background:rgba(0,214,174,.18)}
-@media(max-width:760px){.calc-grid{grid-template-columns:1fr}.calc-col+.calc-col{border-left:none;border-top:1px solid var(--border)}.dothis{grid-template-columns:1fr}.vrow{grid-template-columns:1fr}.hero h1{font-size:24px}}
+/* date bar */
+.datebar{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px 22px;margin-top:24px}
+.datebar .row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.datebar .big{font-size:30px;font-weight:900;color:var(--teal);letter-spacing:-.8px}
+.datebar .dl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.tl{position:relative;height:46px}
+.tl-axis{position:absolute;left:0;right:0;top:22px;height:6px;border-radius:9999px;background:#0d1322;border:1px solid var(--border)}
+.tl-fill{position:absolute;left:0;top:22px;height:6px;border-radius:9999px;background:linear-gradient(90deg,var(--teal),var(--emerald));width:72%}
+.tl-dot{position:absolute;top:25px;left:72%;width:16px;height:16px;border-radius:50%;background:var(--ink);border:3px solid var(--teal);transform:translate(-50%,-50%);box-shadow:0 0 0 4px rgba(0,214,174,.15)}
+.tl-flag{position:absolute;top:10px;left:72%;width:2px;height:30px;background:var(--emerald)}
+.tl-flag span{position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-size:9.5px;font-weight:800;color:var(--emerald);white-space:nowrap}
+.tl-tick{position:absolute;top:32px;font-size:9.5px;color:var(--dim);transform:translateX(-50%)}
+@media(max-width:640px){.stats{grid-template-columns:1fr}.hero h1{font-size:24px}}
 </style>
 </head>
 <body>
-
 <nav class="site-nav">
   <a href="index.html" class="sn-logo">
     <div class="sn-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#slg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#slg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#slg)"/><defs><linearGradient id="slg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
@@ -201,196 +120,81 @@ nav.site-nav{height:48px!important;padding:0 12px!important}
     <div class="signout-btns"><button class="signout-cancel" onclick="_closeSignoutModal()">Cancel</button><button class="signout-confirm" onclick="_doSignout()">Sign Out</button></div>
   </div>
 </div>
-
-<div class="toolbar">
-  <span class="tcount" id="tcount">0 of 5 decided</span>
-  <span class="tdate">Projected launch: <b id="tdate">28 Nov</b></span>
-  <button class="copybtn" onclick="copySummary(this)">Copy summary for Alex</button>
-</div>
-
 <div class="wrap">
 
 <div class="hero">
-  <div class="hero-eyebrow"><span class="pulse"></span> Plan Drift · network-first proposal · awaiting Alex</div>
-  <h1>Move the moat <em>into</em> the MVP</h1>
-  <div class="meta">Threat assessment → master plan · 227 tickets left · velocity 12.6/week · June 12, 2026 · internal</div>
-  <div class="clockrow">
-    <div class="clock red"><span class="n" id="d15">3</span><span class="l">days · Meta metric<br>swap (Jun 15)</span></div>
-    <div class="clock amb"><span class="n" id="dv20">~14</span><span class="l">weeks · API v20<br>retires</span></div>
-    <div class="clock teal"><span class="n" id="d28">169</span><span class="l">days · launch<br>(28 Nov)</span></div>
+  <div class="appr"><span class="tk">✓</span> Approved · 12 June 2026</div>
+  <h1>The network moved <em>into</em> the MVP</h1>
+  <div class="net" aria-hidden="true">
+    <svg viewBox="0 0 340 120">
+      <line class="ne"   x1="55"  y1="60" x2="135" y2="32"/>
+      <line class="ne b" x1="55"  y1="60" x2="128" y2="90"/>
+      <line class="ne c" x1="135" y1="32" x2="128" y2="90"/>
+      <line class="ne d" x1="135" y1="32" x2="225" y2="55"/>
+      <line class="ne e" x1="128" y1="90" x2="225" y2="55"/>
+      <line class="ne f" x1="225" y1="55" x2="292" y2="82"/>
+      <circle class="nn"   cx="55"  cy="60" r="12" fill="#00D6AE"/>
+      <circle class="nn b" cx="135" cy="32" r="9"  fill="#a78bfa"/>
+      <circle class="nn c" cx="128" cy="90" r="9"  fill="#f5a623"/>
+      <circle class="nn d" cx="225" cy="55" r="11" fill="#38bdf8"/>
+      <circle class="nn f" cx="292" cy="82" r="7"  fill="#10b981"/>
+    </svg>
+  </div>
+  <div class="meta">Zero scope cuts · compensated by capacity + process · full detail in the sprint tracker and master plan</div>
+</div>
+
+<div class="stats">
+  <div class="stt" style="--c:var(--teal)"><div class="n">+28</div><div class="l">network tickets moved<br>into the MVP build</div></div>
+  <div class="stt" style="--c:var(--purple)"><div class="n">0</div><div class="l">tasks cut · everything<br>already planned still ships</div></div>
+  <div class="stt" style="--c:var(--emerald)"><div class="n">28 Nov</div><div class="l">launch unchanged<br>2 days of headroom</div></div>
+</div>
+
+<div class="sh">What drifted</div>
+<div class="mv" style="--c:var(--teal)">
+  <span class="ic">🔭</span>
+  <span class="t">Discovery page<small>Matches · My Collabs · Saved · auto business cards · S13</small></span>
+  <span class="chips"><span class="stg prev">VIEW-ONLY PREVIEW</span><span class="arr">→</span><span class="stg mvp">FULL V1 · MVP</span></span>
+</div>
+<div class="mv" style="--c:var(--purple)">
+  <span class="ic">🕸</span>
+  <span class="t">Cross-page graph + collab matching<small>the moat · graph S6–S9, matching S9–S16 · owner Muteeb</small></span>
+  <span class="chips"><span class="stg later">LATER · PHASE 2</span><span class="arr">→</span><span class="stg mvp">MVP</span></span>
+</div>
+<div class="mv" style="--c:var(--amber)">
+  <span class="ic">📸</span>
+  <span class="t">Instagram pages<small>scopes requested in the same Meta App Review · build week +1</small></span>
+  <span class="chips"><span class="stg none">NOT IN PLAN</span><span class="arr">→</span><span class="stg fast">FAST-TRACK 1</span></span>
+</div>
+<div class="mv" style="--c:var(--sky)">
+  <span class="ic">⚡</span>
+  <span class="t">How we pay for it<small>Muteeb owns the slice · graph starts now · QA batched from S14 · S10+S12 merged</small></span>
+  <span class="chips"><span class="stg same">CAPACITY, NOT CUTS</span></span>
+</div>
+<div class="mv" style="--c:var(--emerald)">
+  <span class="ic">📊</span>
+  <span class="t">Best Times · Reports · Analytics · Art-E<small>everything previously in the MVP</small></span>
+  <span class="chips"><span class="stg same">UNCHANGED</span></span>
+</div>
+
+<div class="datebar">
+  <div class="row"><span class="big">28 Nov 2026</span><span class="dl">launch · unchanged</span></div>
+  <div class="tl">
+    <div class="tl-axis"></div><div class="tl-fill"></div>
+    <div class="tl-flag"><span>launch</span></div><div class="tl-dot"></div>
+    <span class="tl-tick" style="left:0%">today</span>
+    <span class="tl-tick" style="left:37%">Sept</span>
+    <span class="tl-tick" style="left:100%">Jan</span>
   </div>
 </div>
 
-<div class="dothis">
-  <div class="dt" style="--c:var(--rose)">
-    <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg></div>
-    <div class="k">Do now · no sign-off needed</div>
-    <div class="big">Fix metrics by Jun 15</div>
-    <div class="s">LOKI reads metrics Meta kills Sunday. Out-of-cadence ticket, owner Faheem / Muteeb.</div>
-  </div>
-  <div class="dt" style="--c:var(--teal)">
-    <div class="icon"><svg viewBox="0 0 24 24"><circle cx="5" cy="6" r="3"/><circle cx="19" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M7.5 7.5l3 8M16.5 7.5l-3 8M8 6h8"/></svg></div>
-    <div class="k">Decide · the big one</div>
-    <div class="big">Full collab, zero cuts</div>
-    <div class="s">+28 network tickets absorbed by Muteeb + faster process. Every existing task stays. 28 Nov holds with 2 days of headroom.</div>
-  </div>
-  <div class="dt" style="--c:var(--amber)">
-    <div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></div>
-    <div class="k">One line · before App Review</div>
-    <div class="big">Add IG scopes now</div>
-    <div class="s">Request Instagram permissions in the same Meta review. Build lands FT-1, zero delay.</div>
-  </div>
 </div>
-
-<!-- Q1 -->
-<div class="qh" style="--c:var(--teal)"><span class="qn">1</span><h2>Network in the MVP · pick scope, pick speed levers, watch the date</h2></div>
-<div class="calc">
-  <div class="calc-grid">
-    <div class="calc-col">
-      <h3>Network at launch</h3>
-      <div class="scn" data-scn="lite" data-add="14">
-        <span class="ring"></span>
-        <span class="st">Network-lite<small>Real matches + similar pages + benchmark <span class="tkt">VD-AI-013A/B</span></small></span>
-        <span class="pm">+14</span>
-      </div>
-      <div class="scn" data-scn="full" data-add="28">
-        <span class="ring"></span>
-        <span class="st">Full collab slice <span class="rec">CHOSEN</span><small>+ business cards, My Collabs, Art-E collabs <span class="tkt">VD-218</span> <span class="tkt">VD-219</span></small></span>
-        <span class="pm">+28</span>
-      </div>
-      <div class="scn" data-scn="none" data-add="0">
-        <span class="ring"></span>
-        <span class="st">Keep preview only<small>Status quo · moat stays Phase 2</small></span>
-        <span class="pm">+0</span>
-      </div>
-    </div>
-    <div class="calc-col">
-      <h3>Compensate · go faster, cut nothing</h3>
-      <div class="cgroup">Capacity · the big lever</div>
-      <div class="cut" data-cut="muteeb" data-sz="24">
-        <span class="box">✓</span><span class="ct">Muteeb owns the network slice<small>new FDE, not in the velocity baseline · ~1.2 tkts/wk × 22 wks, ramp + Faheem onboarding tax included</small></span><span class="sz">−24</span>
-      </div>
-      <div class="cut" data-cut="parallel" data-sz="2">
-        <span class="box">✓</span><span class="ct">Start graph work next week<small>needs only the existing corpus · runs beside S6–S9, no dependency wait</small></span><span class="sz">−2</span>
-      </div>
-      <div class="cgroup">Process · same tasks, fewer days</div>
-      <div class="cut" data-cut="qabatch" data-sz="3">
-        <span class="box">✓</span><span class="ct">Batch QA sign-offs from S14<small>dashboard is built once · later per-sprint gates are lighter than estimated</small></span><span class="sz">−3</span>
-      </div>
-      <div class="cut" data-cut="sprintmerge" data-sz="2">
-        <span class="box">✓</span><span class="ct">Merge S10 + S12 maintenance<small>one retrain dry-run + benchmark refresh, not two</small></span><span class="sz">−2</span>
-      </div>
-      <div class="cgroup">Last resort · spends safety</div>
-      <div class="cut" data-cut="buffer" data-sz="3">
-        <span class="box">✓</span><span class="ct">Spend the S23 launch buffer <span class="warnico">⚠</span><small>zero slack in launch week</small></span><span class="sz">−3</span>
-      </div>
-      <div class="cut" data-cut="overtime" data-sz="4">
-        <span class="box">✓</span><span class="ct">Crunch S16–S18 <span class="warnico">⚠</span><small>quality risk in the Art-E trust sprints</small></span><span class="sz">−4</span>
-      </div>
-    </div>
-    </div>
-  </div>
-  <div class="readout ok" id="readout">
-    <div class="ro-top">
-      <span class="big" id="roDate">28 Nov</span>
-      <span class="dl" id="roDelta">on plan</span>
-      <span class="net" id="roMath">+14 −14 · net 0 · 0 days</span>
-    </div>
-    <div class="tl">
-      <div class="tl-axis"></div>
-      <div class="tl-fill" id="tlFill" style="width:72%"></div>
-      <div class="tl-flag" style="left:72%"><span>28 Nov target</span></div>
-      <div class="tl-dot" id="tlDot" style="left:72%"></div>
-      <span class="tl-tick" style="left:0%">today</span>
-      <span class="tl-tick" style="left:36%">Sept</span>
-      <span class="tl-tick" style="left:86%">15 Dec</span>
-      <span class="tl-tick" style="left:100%">Jan</span>
-    </div>
-  </div>
-</div>
-<div class="ddecide" data-key="network"><span class="q">Alex's call · network move (scenario + cuts saved with it)</span><span class="dstate" data-state></span><button class="dbtn" data-set="approve">Approve</button><button class="dbtn" data-set="modify">Modify</button><button class="dbtn" data-set="hold">Hold</button></div>
-
-<!-- Q2 + Q3 side by side -->
-<div class="qh" style="--c:var(--amber)"><span class="qn">2·3</span><h2>Instagram · basic analytics</h2></div>
-<div class="vrow">
-  <div class="vcard" style="--c:var(--amber)">
-    <span class="stamp go">GO · FT-1</span>
-    <h3>Instagram pages</h3>
-    <div class="steps">
-      <div class="step"><span class="nd"><i></i><b></b></span><span class="tx"><b>Now:</b> one checklist line in <span class="tkt">VD-OAUTH-BE-021</span>, request <b>instagram_basic + insights</b> scopes in the same Meta App Review. Miss it = weeks on a second review.</span></div>
-      <div class="step"><span class="nd"><i></i><b></b></span><span class="tx"><b>Launch week +1:</b> build <span class="tkt">VD-IG-001..003</span> in Fast-Track. Reuses LOKI, same tokens, near-same schema.</span></div>
-      <div class="step"><span class="nd"><i></i></span><span class="tx"><b>MVP delay: zero.</b> TikTok / LinkedIn stay LATER.</span></div>
-    </div>
-  </div>
-  <div class="vcard" style="--c:var(--sky)">
-    <span class="stamp keep">KEEP</span>
-    <h3>Basic analytics in MVP?</h3>
-    <div class="donutbox">
-      <svg viewBox="0 0 42 42">
-        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#1e2d44" stroke-width="6"/>
-        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#38bdf8" stroke-width="6"
-          stroke-dasharray="4 96" stroke-dashoffset="25" stroke-linecap="round"/>
-        <text x="21" y="20" text-anchor="middle" font-size="8.5" font-weight="900" fill="#e9eef8">4%</text>
-        <text x="21" y="28" text-anchor="middle" font-size="3.6" fill="#8793ab">of remaining build</text>
-      </svg>
-      <div class="dn"><b>9 tickets ≈ 0.7 weeks.</b> Pipeline shipped in S1–5; this is wiring data to finished designs.
-        <div class="dleg">
-          <span><i style="background:#38bdf8"></i>Analytics left: 9 tickets</span>
-          <span><i style="background:#1e2d44"></i>Everything else: 218</span>
-        </div>
-        Cutting saves days, loses parity with free FB insights. Sell the neighbourhood, not the charts.
-      </div>
-    </div>
-  </div>
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-  <div class="ddecide" data-key="instagram"><span class="q">Alex's call</span><span class="dstate" data-state></span><button class="dbtn" data-set="approve">Approve</button><button class="dbtn" data-set="modify">Modify</button><button class="dbtn" data-set="hold">Hold</button></div>
-  <div class="ddecide" data-key="analytics"><span class="q">Alex's call</span><span class="dstate" data-state></span><button class="dbtn" data-set="approve">Approve</button><button class="dbtn" data-set="modify">Modify</button><button class="dbtn" data-set="hold">Hold</button></div>
-</div>
-
-<!-- Q4 -->
-<div class="qh" style="--c:var(--purple)"><span class="qn">4</span><h2>Everything else the assessment demands</h2></div>
-
-<div class="el" style="--c:var(--rose)">
-  <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
-  <span class="t">Jun 15 metric migration<small>LOKI + RDL to new metrics · pin API v21+ · watch in <span class="tkt">VD-INFRA-012</span></small></span>
-  <span class="chipline"><span class="stg now">THIS WEEK</span></span>
-</div>
-<div class="el" style="--c:var(--amber)">
-  <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/><circle cx="9" cy="7" r="4"/></svg></span>
-  <span class="t">Agencies = beachhead<small>multi-page accounts up a stage · pilots 5→15 aimed at agencies · 12 pages = 12 graph nodes</small></span>
-  <span class="chipline"><span class="stg later">LATER</span><span class="arr">→</span><span class="stg fast">FAST</span></span>
-</div>
-<div class="el" style="--c:var(--amber)">
-  <span class="ico"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg></span>
-  <span class="t">Pitch sweep<small>lead with the neighbourhood story · never headline what Creator Assistant gives free · <span class="tkt">VD-STRAT-018MVP</span></small></span>
-  <span class="chipline"><span class="stg fast">COPY ONLY</span></span>
-</div>
-<div class="el" style="--c:var(--sky)">
-  <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-  <span class="t">App Review risk now covers Discovery<small>public metrics only · narrative firewall reviews every Discovery string · <span class="tkt">VD-NARRATIVE-019</span></small></span>
-  <span class="chipline"><span class="stg fast">WATCH</span></span>
-</div>
-<div class="el" style="--c:var(--emerald)">
-  <span class="ico"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
-  <span class="t">Already aligned<small>prediction wedge (S7) · retention loop (S11/S14) · fingerprint capture (<span class="tkt">VD-MLP-010</span>) · Plan B documented</small></span>
-  <span class="chipline"><span class="stg okk">NO CHANGE</span></span>
-</div>
-
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-  <div class="ddecide" data-key="agencies"><span class="q">Alex's call · agencies + pitch</span><span class="dstate" data-state></span><button class="dbtn" data-set="approve">Approve</button><button class="dbtn" data-set="modify">Modify</button><button class="dbtn" data-set="hold">Hold</button></div>
-  <div class="ddecide" data-key="api_deadline"><span class="q">Acknowledge · Jun 15 fix</span><span class="dstate" data-state></span><button class="dbtn" data-set="approve">Approve</button><button class="dbtn" data-set="modify">Modify</button><button class="dbtn" data-set="hold">Hold</button></div>
-</div>
-
-</div>
-
 <footer class="af-footer">
   <div class="af-footer-in">
     <div class="af-brand">
       <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#aflg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#aflg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#aflg)"/><defs><linearGradient id="aflg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
       ARTEMISAI
     </div>
-    <div class="af-copy">Plan Drift Report &middot; Compiled June 12, 2026 &middot; Internal strategy &mdash; not for distribution</div>
+    <div class="af-copy">Plan Drift &middot; Approved 12 June 2026 &middot; Internal strategy &mdash; not for distribution</div>
     <div class="af-links">
       <a href="admin_panel.html">Admin Panel</a>
       <a href="alex_vision.html">Alex's Vision</a>
@@ -398,7 +202,6 @@ nav.site-nav{height:48px!important;padding:0 12px!important}
     </div>
   </div>
 </footer>
-
 <script>
 (function(){
   try{
@@ -422,104 +225,5 @@ function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
 
 
 
-
-(function(){
-  var KEY='artemis_drift_v4';
-  var VEL=12.6, BASE=new Date('2026-11-28');
-  var TODAY=new Date('2026-06-12'), TLEND=new Date('2027-01-10'); /* timeline axis: today → Jan 10 */
-  var TITLES={network:'Network move (Q1)',instagram:'Instagram to Fast-Track (Q2)',analytics:'Keep basic analytics (Q3)',agencies:'Agencies + pitch (Q4)',api_deadline:'Jun 15 metric migration (Q4)'};
-  var SCN_NAMES={lite:'Network-lite (+14)',full:'Full collab slice (+28)',none:'Keep preview (+0)'};
-  function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}}
-  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
-  var state=load();
-  if(!state.scn) state.scn='full';
-  if(!state.cuts) state.cuts={muteeb:true,parallel:true,qabatch:true,sprintmerge:true};
-
-  function fmt(d){return d.getDate()+' '+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];}
-  function pos(d){return Math.min(100,Math.max(0,(d-TODAY)/(TLEND-TODAY)*100));}
-
-  function recompute(){
-    var add=0;
-    document.querySelectorAll('.scn').forEach(function(s){
-      var on=s.getAttribute('data-scn')===state.scn; s.classList.toggle('sel',on);
-      if(on) add=parseInt(s.getAttribute('data-add'),10);
-    });
-    var rem=0;
-    document.querySelectorAll('.cut').forEach(function(c){
-      var k=c.getAttribute('data-cut'), on=!!state.cuts[k];
-      c.classList.toggle('on',on); if(on) rem+=parseInt(c.getAttribute('data-sz'),10);
-    });
-    var net=add-rem, days=Math.round(net/VEL*7);
-    var d=new Date(BASE); d.setDate(d.getDate()+Math.max(days,0));
-    var ro=document.getElementById('readout');
-    ro.className='readout '+(days<=0?'ok':days<=7?'tight':'late');
-    document.getElementById('roDate').textContent=fmt(d);
-    document.getElementById('roDelta').textContent= days<=0 ? (net<0?Math.abs(days)+(Math.abs(days)===1?' day':' days')+' of headroom':'on plan') : '+'+days+' days';
-    document.getElementById('roMath').textContent='+'+add+' \u2212'+rem+' \u00b7 net '+net+' \u00b7 '+days+' days';
-    var p=pos(d);
-    document.getElementById('tlDot').style.left=p+'%';
-    document.getElementById('tlFill').style.width=p+'%';
-    var td=document.getElementById('tdate'); if(td) td.textContent=fmt(d);
-    return {add:add,rem:rem,net:net,days:days,date:fmt(d)};
-  }
-  /* place the Nov-28 flag + ticks precisely */
-  (function(){
-    var flag=document.querySelector('.tl-flag'); flag.style.left=pos(BASE)+'%';
-    var ticks=document.querySelectorAll('.tl-tick');
-    ticks[1].style.left=pos(new Date('2026-09-01'))+'%';
-    ticks[2].style.left=pos(new Date('2026-12-15'))+'%';
-  })();
-
-  function paintDecisions(){
-    var decided=0;
-    document.querySelectorAll('.ddecide[data-key]').forEach(function(row){
-      var k=row.getAttribute('data-key'), v=(state.dec||{})[k];
-      row.querySelectorAll('.dbtn').forEach(function(b){
-        b.classList.remove('on-approve','on-modify','on-hold');
-        if(v && b.getAttribute('data-set')===v) b.classList.add('on-'+v);
-      });
-      var lbl=row.querySelector('[data-state]');
-      lbl.textContent = v ? (v==='approve'?'Approved':v==='modify'?'W/ changes':'On hold') : 'Pending';
-      lbl.style.color = v ? (v==='approve'?'var(--emerald)':v==='modify'?'var(--amber)':'var(--rose)') : 'var(--dim)';
-      if(v) decided++;
-    });
-    document.getElementById('tcount').innerHTML='<b>'+decided+' of 5</b> decided';
-  }
-
-  document.querySelectorAll('.scn').forEach(function(s){s.addEventListener('click',function(){state.scn=s.getAttribute('data-scn');save();recompute();});});
-  document.querySelectorAll('.cut').forEach(function(c){c.addEventListener('click',function(){var k=c.getAttribute('data-cut');state.cuts[k]=!state.cuts[k];save();recompute();});});
-  document.querySelectorAll('.ddecide[data-key]').forEach(function(row){
-    var k=row.getAttribute('data-key');
-    row.querySelectorAll('.dbtn').forEach(function(b){
-      b.addEventListener('click',function(){state.dec=state.dec||{};var v=b.getAttribute('data-set');state.dec[k]=(state.dec[k]===v)?null:v;save();paintDecisions();});
-    });
-  });
-
-  window.copySummary=function(btn){
-    var r=recompute();
-    var cutNames={muteeb:'Muteeb on network (\u221224)',parallel:'Parallel graph start (\u22122)',qabatch:'QA batching (\u22123)',sprintmerge:'S10+S12 merge (\u22122)',buffer:'S23 buffer spent (\u22123)',overtime:'S16-18 crunch (\u22124)'};
-    var cuts=Object.keys(state.cuts).filter(function(k){return state.cuts[k]}).map(function(k){return cutNames[k]});
-    var lines=['ArtemisAI \u00b7 Plan Drift decisions \u00b7 '+new Date().toLocaleDateString('en-GB')];
-    lines.push('Scenario: '+SCN_NAMES[state.scn]+' \u00b7 no scope cuts \u00b7 levers: '+(cuts.length?cuts.join(', '):'none'));
-    lines.push('Projected launch: '+r.date+' ('+(r.days<=0?'on plan':'+'+r.days+' days')+')');
-    Object.keys(TITLES).forEach(function(k){
-      var v=(state.dec||{})[k];
-      lines.push((v?(v==='approve'?'[APPROVED] ':v==='modify'?'[W/ CHANGES] ':'[HOLD] '):'[PENDING] ')+TITLES[k]);
-    });
-    lines.push('Full detail: artemisai.co.uk/plan_drift.html');
-    var txt=lines.join('\n');
-    function done(){var o=btn.textContent;btn.textContent='Copied \u2713';setTimeout(function(){btn.textContent=o},1400);}
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,function(){fb()});}else fb();
-    function fb(){var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(e){}document.body.removeChild(ta);}
-  };
-
-  var now=new Date();
-  function dd(d){return Math.max(0,Math.ceil((d-now)/86400000));}
-  var e=document.getElementById('d15'); if(e) e.textContent=dd(new Date('2026-06-15'));
-  e=document.getElementById('d28'); if(e) e.textContent=dd(new Date('2026-11-28'));
-  e=document.getElementById('dv20'); if(e) e.textContent='~'+Math.round(dd(new Date('2026-09-15'))/7);
-
-  recompute(); paintDecisions();
-})();
 </script>
 </body></html>
