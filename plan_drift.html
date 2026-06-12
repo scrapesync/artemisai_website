@@ -84,6 +84,42 @@ nav.site-nav{height:48px!important;padding:0 12px!important}
 .arr{color:var(--dim);font-weight:900;animation:nd 1.6s ease-in-out infinite}
 @keyframes nd{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
 
+/* before / after */
+.ba{display:grid;grid-template-columns:1fr 34px 1fr;gap:0;align-items:stretch;margin-bottom:10px}
+.bapanel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 14px 12px;display:flex;flex-direction:column;gap:10px}
+.bapanel.before{opacity:.92}
+.bapanel.after{border-color:rgba(0,214,174,.45);box-shadow:0 0 0 1px rgba(0,214,174,.12), 0 12px 34px -18px rgba(0,214,174,.35)}
+.bahead{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.bahead .bt{font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+.before .bt{color:var(--dim)}.after .bt{color:var(--teal)}
+.bahead .cnts{display:flex;gap:5px}
+.cnt{font-size:9px;font-weight:800;padding:3px 8px;border-radius:9999px}
+.cnt.m{background:rgba(0,214,174,.13);color:var(--teal)}
+.cnt.l{background:rgba(167,139,250,.13);color:var(--purple)}
+.babox{border:1px solid var(--border);border-radius:12px;padding:10px 11px;background:var(--card2)}
+.babox h4{font-size:9.5px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;display:flex;justify-content:space-between}
+.babox h4 i{font-style:normal;font-weight:800}
+.pillrow{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:9999px;border:1px solid var(--border);color:var(--mut);background:var(--card)}
+.pill.new{border-color:var(--teal);color:var(--teal);background:rgba(0,214,174,.08);animation:pin .5s ease backwards}
+.pill.new:nth-child(2){animation-delay:.08s}.pill.new:nth-child(3){animation-delay:.16s}.pill.new:nth-child(4){animation-delay:.24s}.pill.new:nth-child(5){animation-delay:.32s}
+@keyframes pin{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+.pill.gone{border-style:dashed;color:var(--dim);text-decoration:line-through;text-decoration-color:rgba(244,63,94,.6)}
+.pill.was{border-color:rgba(167,139,250,.4);color:var(--purple);background:rgba(167,139,250,.07)}
+.pill.ig{border-color:var(--amber);color:var(--amber);background:rgba(245,166,35,.08)}
+.bamid{display:flex;align-items:center;justify-content:center}
+.bamid .bigarr{font-size:20px;color:var(--teal);font-weight:900;animation:nd 1.6s ease-in-out infinite}
+/* sprint strip */
+.strip{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 16px 18px;margin-bottom:10px}
+.strip h4{font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+.srow{display:flex;gap:4px}
+.scell{flex:1;text-align:center;position:relative}
+.scell .bx{height:26px;border-radius:7px;background:var(--card2);border:1px solid var(--border)}
+.scell.hit .bx{background:rgba(0,214,174,.14);border-color:rgba(0,214,174,.55)}
+.scell .lb{font-size:8.5px;color:var(--dim);margin-top:4px}
+.scell.hit .lb{color:var(--teal);font-weight:800}
+.scell .dotn{position:absolute;top:-7px;left:50%;transform:translateX(-50%);min-width:16px;height:16px;border-radius:9999px;background:var(--teal);color:#06231d;font-size:9px;font-weight:900;display:grid;place-items:center;padding:0 3px;box-shadow:0 0 0 3px rgba(0,214,174,.18)}
+@media(max-width:680px){.ba{grid-template-columns:1fr}.bamid{transform:rotate(90deg);padding:4px 0}}
 /* date bar */
 .datebar{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px 22px;margin-top:24px}
 .datebar .row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
@@ -149,31 +185,75 @@ nav.site-nav{height:48px!important;padding:0 12px!important}
   <div class="stt" style="--c:var(--emerald)"><div class="n">28 Nov</div><div class="l">launch unchanged<br>2 days of headroom</div></div>
 </div>
 
-<div class="sh">What drifted</div>
-<div class="mv" style="--c:var(--teal)">
-  <span class="ic">🔭</span>
-  <span class="t">Discovery page<small>Matches · My Collabs · Saved · auto business cards · S13</small></span>
-  <span class="chips"><span class="stg prev">VIEW-ONLY PREVIEW</span><span class="arr">→</span><span class="stg mvp">FULL V1 · MVP</span></span>
+<div class="sh">Before → after</div>
+<div class="ba">
+  <div class="bapanel before">
+    <div class="bahead"><span class="bt">Before · 11 Jun</span><span class="cnts"><span class="cnt m">66 MVP</span><span class="cnt l">60 LATER</span></span></div>
+    <div class="babox">
+      <h4>MVP · launches 28 Nov</h4>
+      <div class="pillrow">
+        <span class="pill">Analytics</span><span class="pill">Prediction</span><span class="pill">Art-E Q&amp;A</span><span class="pill">Crisis &amp; Alerts</span><span class="pill">Best Times</span><span class="pill">Reports</span><span class="pill gone">Discovery · view-only preview</span>
+      </div>
+    </div>
+    <div class="babox">
+      <h4>Phase 2 · someday</h4>
+      <div class="pillrow">
+        <span class="pill was">Cross-page graph</span><span class="pill was">Match algorithm</span><span class="pill was">Discovery v1</span><span class="pill was">Business cards</span><span class="pill was">Art-E collabs</span><span class="pill">Graph research</span>
+      </div>
+    </div>
+    <div class="babox">
+      <h4>Fast-Track</h4>
+      <div class="pillrow"><span class="pill">Health Score</span><span class="pill">Briefings</span><span class="pill gone">no Instagram</span></div>
+    </div>
+  </div>
+  <div class="bamid"><span class="bigarr">→</span></div>
+  <div class="bapanel after">
+    <div class="bahead"><span class="bt">After · approved 12 Jun</span><span class="cnts"><span class="cnt m">69 MVP</span><span class="cnt l">57 LATER</span></span></div>
+    <div class="babox">
+      <h4>MVP · still launches 28 Nov <i style="color:var(--teal)">+28 tickets</i></h4>
+      <div class="pillrow">
+        <span class="pill">Analytics</span><span class="pill">Prediction</span><span class="pill">Art-E Q&amp;A</span><span class="pill">Crisis &amp; Alerts</span><span class="pill">Best Times</span><span class="pill">Reports</span><span class="pill new">Discovery · full v1</span><span class="pill new">Cross-page graph</span><span class="pill new">Match algorithm</span><span class="pill new">Business cards</span><span class="pill new">Art-E collabs</span>
+      </div>
+    </div>
+    <div class="babox">
+      <h4>Phase 2 · research only now</h4>
+      <div class="pillrow"><span class="pill">Graph-of-graphs</span><span class="pill">GraphSAGE</span><span class="pill">Cross-client intel</span></div>
+    </div>
+    <div class="babox">
+      <h4>Fast-Track</h4>
+      <div class="pillrow"><span class="pill">Health Score</span><span class="pill">Briefings</span><span class="pill ig">Instagram · week +1</span></div>
+    </div>
+  </div>
 </div>
-<div class="mv" style="--c:var(--purple)">
-  <span class="ic">🕸</span>
-  <span class="t">Cross-page graph + collab matching<small>the moat · graph S6–S9, matching S9–S16 · owner Muteeb</small></span>
-  <span class="chips"><span class="stg later">LATER · PHASE 2</span><span class="arr">→</span><span class="stg mvp">MVP</span></span>
+
+<div class="strip">
+  <h4>Where the new work landed · Sprints 6 → 23 · owner Muteeb</h4>
+  <div class="srow">
+    <div class="scell hit"><span class="dotn">+1</span><div class="bx"></div><div class="lb">S6<br>graph</div></div>
+    <div class="scell hit"><span class="dotn">+1</span><div class="bx"></div><div class="lb">S7<br>affinity</div></div>
+    <div class="scell"><div class="bx"></div><div class="lb">S8</div></div>
+    <div class="scell hit"><span class="dotn">+1</span><div class="bx"></div><div class="lb">S9<br>matching</div></div>
+    <div class="scell"><div class="bx"></div><div class="lb">S10</div></div>
+    <div class="scell"><div class="bx"></div><div class="lb">S11</div></div>
+    <div class="scell hit"><span class="dotn">+1</span><div class="bx"></div><div class="lb">S12<br>cards</div></div>
+    <div class="scell hit"><span class="dotn">+2</span><div class="bx"></div><div class="lb">S13<br>Discovery</div></div>
+    <div class="scell"><div class="bx"></div><div class="lb">S14</div></div>
+    <div class="scell"><div class="bx"></div><div class="lb">S15</div></div>
+    <div class="scell hit"><span class="dotn">+1</span><div class="bx"></div><div class="lb">S16<br>Art-E</div></div>
+    <div class="scell"><div class="bx"></div><div class="lb">S17</div></div>
+    <div class="scell"><div class="bx"></div><div class="lb">S18</div></div>
+    <div class="scell"><div class="bx"></div><div class="lb">S19</div></div>
+    <div class="scell"><div class="bx"></div><div class="lb">S20</div></div>
+    <div class="scell"><div class="bx"></div><div class="lb">S21</div></div>
+    <div class="scell"><div class="bx"></div><div class="lb">S22</div></div>
+    <div class="scell"><div class="bx"></div><div class="lb">S23</div></div>
+  </div>
 </div>
-<div class="mv" style="--c:var(--amber)">
-  <span class="ic">📸</span>
-  <span class="t">Instagram pages<small>scopes requested in the same Meta App Review · build week +1</small></span>
-  <span class="chips"><span class="stg none">NOT IN PLAN</span><span class="arr">→</span><span class="stg fast">FAST-TRACK 1</span></span>
-</div>
+
 <div class="mv" style="--c:var(--sky)">
   <span class="ic">⚡</span>
   <span class="t">How we pay for it<small>Muteeb owns the slice · graph starts now · QA batched from S14 · S10+S12 merged</small></span>
   <span class="chips"><span class="stg same">CAPACITY, NOT CUTS</span></span>
-</div>
-<div class="mv" style="--c:var(--emerald)">
-  <span class="ic">📊</span>
-  <span class="t">Best Times · Reports · Analytics · Art-E<small>everything previously in the MVP</small></span>
-  <span class="chips"><span class="stg same">UNCHANGED</span></span>
 </div>
 
 <div class="datebar">
