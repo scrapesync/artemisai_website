@@ -261,7 +261,8 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
     <div id="levelToggle" style="display:inline-flex;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:3px;gap:2px">
       <button class="lvl-btn active" data-level="post" onclick="setLevel('post')">Post NLP</button>
       <button class="lvl-btn" data-level="comment" onclick="setLevel('comment')">Comment NLP</button>
-      <button class="lvl-btn" data-level="both" onclick="setLevel('both')">Both</button>
+      <button class="lvl-btn" data-level="ocr" onclick="setLevel('ocr')">OCR Images</button>
+      <button class="lvl-btn" data-level="both" onclick="setLevel('both')">All</button>
     </div>
     <span id="levelHint" style="font-size:11px;color:var(--t2)"></span>
   </div>
@@ -297,35 +298,35 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
   <!-- KPI STRIP -->
   <div class="kpi-row">
     <div class="kpi" style="--kc:#00d4aa">
-      <div class="kpi-label">Sentiment</div>
+      <div class="kpi-label" id="kl_Sentiment">Sentiment</div>
       <div class="kpi-val" id="kSentiment">—</div>
       <div class="kpi-model" id="kSentimentM">—</div>
       <div class="kpi-delta" id="kSentimentD"></div>
       <div class="kpi-prog"><div class="kpi-prog-fill" id="kbSentiment" style="width:0%"></div></div>
     </div>
     <div class="kpi" style="--kc:#a78bfa">
-      <div class="kpi-label">Emotion</div>
+      <div class="kpi-label" id="kl_Emotion">Emotion</div>
       <div class="kpi-val" id="kEmotion">—</div>
       <div class="kpi-model" id="kEmotionM">—</div>
       <div class="kpi-delta" id="kEmotionD"></div>
       <div class="kpi-prog"><div class="kpi-prog-fill" id="kbEmotion" style="width:0%;background:var(--purple)"></div></div>
     </div>
     <div class="kpi" style="--kc:#60a5fa">
-      <div class="kpi-label">Topic</div>
+      <div class="kpi-label" id="kl_Topic">Topic</div>
       <div class="kpi-val" id="kTopic">—</div>
       <div class="kpi-model" id="kTopicM">—</div>
       <div class="kpi-delta" id="kTopicD"></div>
       <div class="kpi-prog"><div class="kpi-prog-fill" id="kbTopic" style="width:0%;background:var(--blue)"></div></div>
     </div>
     <div class="kpi" style="--kc:#f87171">
-      <div class="kpi-label">Intent</div>
+      <div class="kpi-label" id="kl_Intent">Intent</div>
       <div class="kpi-val" id="kIntent">—</div>
       <div class="kpi-model" id="kIntentM">—</div>
       <div class="kpi-delta" id="kIntentD"></div>
       <div class="kpi-prog"><div class="kpi-prog-fill" id="kbIntent" style="width:0%;background:var(--red)"></div></div>
     </div>
     <div class="kpi" style="--kc:#34d399">
-      <div class="kpi-label">Toxicity</div>
+      <div class="kpi-label" id="kl_Toxicity">Toxicity</div>
       <div class="kpi-val" id="kToxicity">—</div>
       <div class="kpi-model" id="kToxicityM">—</div>
       <div class="kpi-delta" id="kToxicityD"></div>
@@ -340,7 +341,7 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
       <div class="card-head">
         <div>
           <div class="card-title">Model Version History</div>
-          <div class="card-sub">All 6 models · Accuracy % · ▲▼ = change vs previous version</div>
+          <div class="card-sub" id="tableCardSub">All 6 models · Accuracy % · ▲▼ = change vs previous version</div>
         </div>
         <div style="display:flex;align-items:center;gap:10px">
           <div class="legend">
@@ -357,11 +358,11 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
             <tr>
               <th>Model</th>
               <th>Date</th>
-              <th style="color:#00d4aa">Sentiment %</th>
-              <th style="color:#a78bfa">Emotion %</th>
-              <th style="color:#60a5fa">Topic %</th>
-              <th style="color:#f87171">Intent %</th>
-              <th style="color:#34d399">Toxicity %</th>
+              <th id="th_Sentiment" style="color:#00d4aa">Sentiment %</th>
+              <th id="th_Emotion" style="color:#a78bfa">Emotion %</th>
+              <th id="th_Topic" style="color:#60a5fa">Topic %</th>
+              <th id="th_Intent" style="color:#f87171">Intent %</th>
+              <th id="th_Toxicity" style="color:#34d399">Toxicity %</th>
               <th>Avg %</th>
               <th>vs v0</th>
               <th>Benchmark</th>
@@ -510,6 +511,7 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
         <select id="fLevel">
           <option value="post">Post NLP</option>
           <option value="comment">Comment NLP</option>
+          <option value="ocr">OCR Images</option>
         </select>
       </div>
       <div class="fg">
@@ -523,26 +525,26 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
       <input id="fDesc" placeholder="e.g. Fine-tuned on 3K DeepSeek labels + Rafeh GT">
     </div>
 
-    <div style="margin-bottom:6px;font-size:10px;color:var(--t2);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.07em">Accuracy % (0–100 · leave blank if not evaluated yet)</div>
+    <div id="metricBlockHead" style="margin-bottom:6px;font-size:10px;color:var(--t2);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.07em">Accuracy % (0–100 · leave blank if not evaluated yet)</div>
     <div class="scores-grid">
       <div class="score-inp">
-        <label style="color:#00d4aa">Sentiment</label>
+        <label id="fl_Sentiment" style="color:#00d4aa">Sentiment</label>
         <input id="fSentiment" type="number" min="0" max="100" step="0.1" placeholder="—">
       </div>
       <div class="score-inp">
-        <label style="color:#a78bfa">Emotion</label>
+        <label id="fl_Emotion" style="color:#a78bfa">Emotion</label>
         <input id="fEmotion" type="number" min="0" max="100" step="0.1" placeholder="—">
       </div>
       <div class="score-inp">
-        <label style="color:#60a5fa">Topic</label>
+        <label id="fl_Topic" style="color:#60a5fa">Topic</label>
         <input id="fTopic" type="number" min="0" max="100" step="0.1" placeholder="—">
       </div>
       <div class="score-inp">
-        <label style="color:#f87171">Intent</label>
+        <label id="fl_Intent" style="color:#f87171">Intent</label>
         <input id="fIntent" type="number" min="0" max="100" step="0.1" placeholder="—">
       </div>
       <div class="score-inp">
-        <label style="color:#34d399">Toxicity</label>
+        <label id="fl_Toxicity" style="color:#34d399">Toxicity</label>
         <input id="fToxicity" type="number" min="0" max="100" step="0.1" placeholder="—">
       </div>
     </div>
@@ -558,6 +560,9 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
           <option>vs self</option>
           <option>vs AI labels (val)</option>
           <option>vs Claude (200 comments)</option>
+          <option>vs gold set (150 images)</option>
+          <option>vs human GT (OCR)</option>
+          <option>Sprint 6 gate</option>
           <option>vs human gold (blind)</option>
           <option>Comment gate</option>
         </select>
@@ -580,8 +585,26 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
 // ═══════════════════════════════════════════
 // DATA — from source Excel (all in % already)
 // ═══════════════════════════════════════════
-const TASKS = ['Sentiment','Emotion','Topic','Intent','Toxicity'];
+// Metric sets per level. OCR images use different metrics than NLP, but share the same 5 physical storage slots (m1..m5 map onto Sentiment/Emotion/Topic/Intent/Toxicity keys) so storage, charts and CSV keep working unchanged.
+const METRIC_SETS = {
+  nlp: {
+    keys:   ['Sentiment','Emotion','Topic','Intent','Toxicity'],
+    labels: ['Sentiment','Emotion','Topic','Intent','Toxicity'],
+    col:    {Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#f87171',Toxicity:'#34d399'},
+    target: {Sentiment:80,Emotion:80,Topic:80,Intent:80,Toxicity:95}
+  },
+  ocr: {
+    keys:   ['Sentiment','Emotion','Topic','Intent','Toxicity'],
+    labels: ['Word Acc','Char Acc','Escal. Rate','VLM Win','Fusion F1'],
+    col:    {Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#f87171',Toxicity:'#34d399'},
+    target: {Sentiment:90,Emotion:95,Topic:75,Intent:80,Toxicity:90}
+  }
+};
+function metricSet(lv){ lv=lv||_level; return (lv==='ocr')?METRIC_SETS.ocr:METRIC_SETS.nlp; }
+const TASKS = ['Sentiment','Emotion','Topic','Intent','Toxicity']; // physical slots (constant)
+function taskLabel(key){ const m=metricSet(); const i=m.keys.indexOf(key); return i>=0?m.labels[i]:key; }
 const TCOL  = {Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#f87171',Toxicity:'#34d399'};
+function curTarget(){ return metricSet().target; }
 const TARGET = {Sentiment:80,Emotion:80,Topic:80,Intent:80,Toxicity:95};
 
 // ── DynamoDB via existing Lambda endpoint ──
@@ -615,11 +638,35 @@ function setLevel(lv){
   const hints={
     post:'Showing post-level NLP models (NEBULA pipeline).',
     comment:'Showing comment-level NLP models (single-task DeBERTa with post context).',
-    both:'Showing post and comment NLP together.'
+    ocr:'Showing image OCR + fusion models (the Sprint 6 image pipeline). Metrics: word/char accuracy, escalation rate, VLM win rate, fusion Macro-F1.',
+    both:'Showing post, comment and OCR-image models together.'
   };
   const h=document.getElementById('levelHint'); if(h)h.textContent=hints[lv]||'';
+  relabelMetrics();
   try{ localStorage.setItem('artemis_nlp_level', lv); }catch(_){}
   renderAll();
+}
+// Re-label the table headers, KPI cards and modal inputs to match the active metric set (NLP vs OCR).
+function relabelMetrics(){
+  const m=metricSet();
+  m.keys.forEach((k,i)=>{
+    const lbl=m.labels[i];
+    const th=document.getElementById('th_'+k); if(th) th.textContent=lbl+(_level==='ocr'?'':' %');
+    const kl=document.getElementById('kl_'+k); if(kl) kl.textContent=lbl;
+    const fl=document.getElementById('fl_'+k); if(fl) fl.textContent=lbl;
+  });
+  // metric-block heading in the add/edit modal
+  const mh=document.getElementById('metricBlockHead');
+  if(mh) mh.textContent=(_level==='ocr')
+    ? 'OCR / fusion metrics (0–100 · word & char accuracy, escalation rate, VLM win rate, fusion Macro-F1 ×100)'
+    : 'Accuracy % (0–100 · leave blank if not evaluated yet)';
+  // table card subtitle
+  const sub=document.getElementById('tableCardSub');
+  if(sub) sub.textContent=(_level==='ocr')
+    ? 'OCR engines + fusion classifier · word/char accuracy, escalation, VLM win, fusion F1 · Sprint 6 pipeline'
+    : (_level==='comment') ? 'Comment-level models · Accuracy % · ▲▼ = change vs previous version'
+    : (_level==='both') ? 'Post, comment & OCR models · Accuracy % · ▲▼ = change vs previous'
+    : 'Post-level models · Accuracy % · ▲▼ = change vs previous version';
 }
 // entries visible under the current level view (target/reference always pass through, tagged to their level)
 function viewEntries(){
@@ -646,6 +693,26 @@ function ensureCommentSeeds(){
       if(ti>=0) ENTRIES.splice(ti,0,seed); else ENTRIES.push(seed);
       added=true;
       // persist to DynamoDB so the comment data is permanent, not just local
+      if(_dbAvailable){
+        fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({action:'nlp_save_entry',entry:seed})}).catch(()=>{});
+      }
+    }
+  });
+  if(added) localStorage.setItem('artemis_nlp_v2', JSON.stringify(ENTRIES));
+}
+
+// ── Ensure Sprint-6 OCR-image entries exist (merge into DB-backed data, persist if new) ──
+function ocrSeedEntries(){
+  return getDefaultEntries().filter(e=>e.level==='ocr');
+}
+function ensureOcrSeeds(){
+  const seeds=ocrSeedEntries();
+  let added=false;
+  seeds.forEach(seed=>{
+    if(!ENTRIES.some(e=>e.id===seed.id)){
+      ENTRIES.push(seed);
+      added=true;
       if(_dbAvailable){
         fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
           body:JSON.stringify({action:'nlp_save_entry',entry:seed})}).catch(()=>{});
@@ -683,6 +750,7 @@ async function loadEntries() {
       ENTRIES.forEach(e=>{ if(!e.level) e.level='post'; });
       // One-time: ensure the Sprint-5 comment-level entries exist; persist them to DynamoDB if missing.
       ensureCommentSeeds();
+      ensureOcrSeeds();
       localStorage.setItem('artemis_nlp_v2', JSON.stringify(ENTRIES));
       setStatus('synced', 'DynamoDB · ' + ENTRIES.length + ' entries');
     } else {
@@ -695,6 +763,7 @@ async function loadEntries() {
     ENTRIES = cached ? JSON.parse(cached) : getDefaultEntries();
     ENTRIES.forEach(e=>{ if(!e.level) e.level='post'; });
     ensureCommentSeeds();
+    ensureOcrSeeds();
     setStatus('local', 'Local only');
   }
   // Render once, mark ready for orbital system
@@ -770,6 +839,12 @@ function getDefaultEntries(){
     {id:'cmt_st_locked',sort_order:202,level:'comment',version:'Comment Single-Task (Locked)',date:'2026-06-01',desc:'5 dedicated DeBERTa-v3 models, [comment | post] paired encoding',Sentiment:86,Emotion:84,Topic:92,Intent:79,Toxicity:93,benchmark:'vs AI labels (val)',notes:'Sprint 5 locked. Topic 0.95 vs early gold. Toxic-class recall ~0.74 (watch). Post context was the missing ingredient.'},
     {id:'cmt_fresh200',sort_order:203,level:'comment',version:'Comment vs Claude (200 fresh)',date:'2026-06-01',desc:'5 models on 200 fresh comments — independent Claude labelling',Sentiment:78,Emotion:73.5,Topic:74.5,Intent:74.5,Toxicity:93.5,benchmark:'vs Claude (200 comments)',notes:'Agreement-with-Claude (label fidelity), avg 78.8% — NOT yet true accuracy. Needs blind human gold set.'},
     {id:'cmt_target',sort_order:299,level:'comment',version:'Comment Target',date:null,desc:'Comment gate: subjective tasks ≥ 80%, blind human gold validated',Sentiment:80,Emotion:80,Topic:80,Intent:80,Toxicity:95,benchmark:'Comment gate',notes:'Next step: shared rubric + blind human gold set to convert agreement → true accuracy.',isTarget:true},
+    // ── OCR IMAGES (Sprint 6 image pipeline) ── slots map: Sentiment=Word Acc, Emotion=Char Acc, Topic=Escalation Rate, Intent=VLM Win Rate, Toxicity=Fusion Macro-F1 (×100)
+    {id:'ocr_easyocr',sort_order:401,level:'ocr',version:'EasyOCR (fast engine)',date:'2026-06-14',desc:'Fast first-pass engine — handles the easy ~79% of images on its own',Sentiment:79,Emotion:88,Topic:null,Intent:null,Toxicity:null,benchmark:'vs gold set (150 images)',notes:'Cheap CPU/GPU pass. Type-aware preprocessing (skip on screenshots). Confidence routes the hard tail to the VLM.'},
+    {id:'ocr_paddle',sort_order:402,level:'ocr',version:'PaddleOCR-VL-1.5 (VLM fallback)',date:'2026-06-14',desc:'0.9B vision-language fallback on the escalated hard cases (stylised fonts, memes)',Sentiment:91,Emotion:95,Topic:72,Intent:68,Toxicity:null,benchmark:'vs gold set (150 images)',notes:'~72% escalation rate on the hardest batches; ≤250 images/SageMaker job. Swapguard reverts hallucination/repetition loops.'},
+    {id:'ocr_hybrid',sort_order:403,level:'ocr',version:'OCR Hybrid (production)',date:'2026-06-18',desc:'EasyOCR + PaddleOCR-VL cascade as deployed — the live OCR pipeline',Sentiment:93,Emotion:96,Topic:72,Intent:68,Toxicity:null,benchmark:'vs gold set (150 images)',notes:'Weekly SageMaker batch. Word/char accuracy after swapguard. Escalation = % sent to VLM; VLM win = % where VLM beat EasyOCR.'},
+    {id:'fusion_v1',sort_order:404,level:'ocr',version:'Fusion Classifier v1',date:'2026-06-18',desc:'CLIP image + OCR text + caption → 1 of 5 content types',Sentiment:null,Emotion:null,Topic:null,Intent:null,Toxicity:93,benchmark:'vs gold set (150 images)',notes:'Macro F1 0.93 across 5 classes (val acc 81.7%, honest on rare classes). 1536→256→64→5 MLP, 2,593 training samples. Weekly Lambda.'},
+    {id:'ocr_target',sort_order:499,level:'ocr',version:'OCR + Fusion Target',date:null,desc:'Sprint 6 gate: strong word/char accuracy, fusion Macro-F1 ≥ 0.90',Sentiment:90,Emotion:95,Topic:75,Intent:80,Toxicity:90,benchmark:'Sprint 6 gate',notes:'Targets: word ≥90, char ≥95, escalation ≤75 (lower is better), VLM win ≥80, fusion F1 ≥90. Fine-tuned local OCR later cuts escalation.',isTarget:true},
   ];
 }
 
@@ -788,7 +863,7 @@ function renderTable(){
     const avgHtml=a!=null?`<span class="avg-sc" style="color:${a>=80?'#34d399':a>=65?'#fbbf24':'#f87171'}">${a.toFixed(1)}%</span>${trend}`:'<span class="sc m">—</span>';
     const editable=!e.isTarget&&!e.isReference;
     return`<tr class="${e.isTarget?'target-row':e.pending?'pending-row':''}">
-      <td><span class="vbadge" style="${badgeStyle(e.version)}">${e.version}</span>${_level==='both'?` <span style="font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;margin-left:4px;${entryLevel(e)==='comment'?'background:rgba(167,139,250,.14);color:#a78bfa':'background:rgba(96,165,250,.14);color:#60a5fa'}">${entryLevel(e)==='comment'?'COMMENT':'POST'}</span>`:''}</td>
+      <td><span class="vbadge" style="${badgeStyle(e.version)}">${e.version}</span>${_level==='both'?` <span style="font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;margin-left:4px;${entryLevel(e)==='comment'?'background:rgba(167,139,250,.14);color:#a78bfa':entryLevel(e)==='ocr'?'background:rgba(0,212,170,.14);color:#00d4aa':'background:rgba(96,165,250,.14);color:#60a5fa'}">${entryLevel(e)==='comment'?'COMMENT':entryLevel(e)==='ocr'?'OCR':'POST'}</span>`:''}</td>
       <td style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--t2)">${e.date||'<span style="color:var(--t3)">Pending</span>'}</td>
       <td>${pct(e.Sentiment)}</td>
       <td>${pct(e.Emotion)}</td>
@@ -888,7 +963,7 @@ function buildCharts(){
   } else {
     mk('lineChart',{type:'line',data:{labels,datasets:[
       ...TASKS.map(t=>({
-        label:t,data:real.map(e=>e[t]),
+        label:taskLabel(t),data:real.map(e=>e[t]),
         borderColor:TCOL[t],backgroundColor:'transparent',
         borderWidth:2.5,pointRadius:5,pointHoverRadius:7,
         pointBackgroundColor:TCOL[t],pointBorderColor:'#0c1221',pointBorderWidth:2,
@@ -921,9 +996,9 @@ function buildCharts(){
   const bestOurs=Object.fromEntries(TASKS.map(t=>[t,
     Math.max(...VIEW.filter(e=>!e.isTarget&&!e.isReference&&e[t]!=null).map(e=>e[t]).filter(x=>!isNaN(x)),0)
   ]));
-  mk('radarChart',{type:'radar',data:{labels:TASKS,datasets:[
+  mk('radarChart',{type:'radar',data:{labels:TASKS.map(taskLabel),datasets:[
     {label:'Best achieved',data:TASKS.map(t=>bestOurs[t]),backgroundColor:'rgba(0,212,170,.12)',borderColor:'rgba(0,212,170,.7)',borderWidth:2,pointRadius:4,pointBackgroundColor:'#00d4aa'},
-    {label:'Target',data:TASKS.map(t=>TARGET[t]),backgroundColor:'rgba(251,191,36,.06)',borderColor:'rgba(251,191,36,.5)',borderWidth:1.5,borderDash:[4,3],pointRadius:3}
+    {label:'Target',data:TASKS.map(t=>curTarget()[t]),backgroundColor:'rgba(251,191,36,.06)',borderColor:'rgba(251,191,36,.5)',borderWidth:1.5,borderDash:[4,3],pointRadius:3}
   ]},options:{responsive:true,maintainAspectRatio:true,
     plugins:{legend:{position:'bottom',labels:{boxWidth:8,font:{size:9},padding:8}},
       tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.r.toFixed(1)+'%'}}},
@@ -932,21 +1007,21 @@ function buildCharts(){
   // Gate grid
   const gg=document.getElementById('gateGrid');
   if(gg)gg.innerHTML=TASKS.map(t=>{
-    const v=bestOurs[t]; const pct=v>0?Math.min((v/TARGET[t])*100,100).toFixed(0):0;
-    const col=v>=TARGET[t]?'#34d399':v>=65?'#fbbf24':'#f87171';
+    const TG=curTarget(); const v=bestOurs[t]; const pct=v>0?Math.min((v/TG[t])*100,100).toFixed(0):0;
+    const col=v>=TG[t]?'#34d399':v>=65?'#fbbf24':'#f87171';
     return`<div class="mini-tile">
-      <div class="mini-label" style="color:${col}">${t}</div>
+      <div class="mini-label" style="color:${col}">${taskLabel(t)}</div>
       <div class="mini-val" style="color:${col}">${v>0?(v%1===0?v.toFixed(0):v.toFixed(1))+'%':'—'}</div>
-      <div class="mini-sub">Target ${TARGET[t]}% · ${pct}% there</div>
+      <div class="mini-sub">Target ${TG[t]}% · ${pct}% there</div>
     </div>`;
   }).join('');
 
   // ── Per-task mini sparklines ──
   const mkSpark=(id,task,col)=>{
     const d=real.map(e=>e[task]);
-    const tgt=TARGET[task]||80;
+    const tgt=curTarget()[task]||80;
     mk(id,{type:'line',data:{labels,datasets:[
-      {label:task,data:d,borderColor:col,backgroundColor:col+'18',borderWidth:2,pointRadius:4,pointHoverRadius:6,pointBackgroundColor:col,pointBorderColor:'#0c1221',pointBorderWidth:2,fill:true,tension:0.35},
+      {label:taskLabel(task),data:d,borderColor:col,backgroundColor:col+'18',borderWidth:2,pointRadius:4,pointHoverRadius:6,pointBackgroundColor:col,pointBorderColor:'#0c1221',pointBorderWidth:2,fill:true,tension:0.35},
       {label:'Target '+tgt+'%',data:real.map(()=>tgt),borderColor:'rgba(255,255,255,.2)',borderDash:[4,3],borderWidth:1,pointRadius:0,fill:false}
     ]},options:{responsive:true,maintainAspectRatio:true,
       plugins:{legend:{display:true,position:'top',labels:{boxWidth:8,font:{size:8},padding:6}},
@@ -1029,6 +1104,7 @@ function renderAll(){ renderTable();renderKPIs();renderLog();buildCharts(); }
 
 // Load from DynamoDB ONCE on page load — renderAll called inside loadEntries
 try{ const _sl=localStorage.getItem('artemis_nlp_level'); if(_sl){ _level=_sl; document.querySelectorAll('.lvl-btn').forEach(b=>b.classList.toggle('active', b.dataset.level===_sl)); } }catch(_){}
+try{ relabelMetrics(); }catch(_){}
 { const hints={post:'Showing post-level NLP models (NEBULA pipeline).',comment:'Showing comment-level NLP models (single-task DeBERTa with post context).',both:'Showing post and comment NLP together.'}; const h=document.getElementById('levelHint'); if(h)h.textContent=hints[_level]||''; }
 loadEntries();
 
