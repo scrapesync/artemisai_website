@@ -241,6 +241,17 @@ input,textarea{font-family:var(--body)}
 .toast b{color:var(--arte);font-weight:600}
 
 
+/* rhythm pass */
+.mini-label{font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);margin:0 0 8px}
+.sched-row,.setup-pill{background:transparent;border-style:dashed}
+.view.on > .card{animation:rise .45s cubic-bezier(.22,.68,.22,1) both}
+.view.on > .card:nth-of-type(1){animation-delay:.02s}
+.view.on > .card:nth-of-type(2){animation-delay:.06s}
+.view.on > .card:nth-of-type(3){animation-delay:.10s}
+.view.on > .card:nth-of-type(n+4){animation-delay:.14s}
+html{scroll-behavior:smooth}
+.btn-primary{background-image:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0) 42%), linear-gradient(135deg,#00d4aa,#00a88a)}
+
 /* ═══ craft pass ═══ */
 .card,.btn,.chip,.tpill,.story,.mbtn,.askA,.ptab,.rpill,.move,.set-row,.rule{transition-timing-function:cubic-bezier(.22,.68,.22,1)}
 .vh{letter-spacing:-1.3px}
@@ -1054,6 +1065,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
   <h3>New post</h3>
   <p class="m-sub">Write it, watch the score. Art-E reads the draft as you type.</p>
   <div class="dchips">
+    <div class="mini-label">Drafts &middot; tap to load</div>
     <button class="dchip" onclick="loadDraft(0)">Pasta reel v2 <b>75</b></button>
     <button class="dchip" onclick="loadDraft(1)">3-ingredient tease <b>78</b></button>
     <button class="dchip" onclick="loadDraft(2)">Weekend prep note <b>50</b></button>
@@ -1069,6 +1081,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       <div class="sr2" id="sread2">Drivers: <b>save-bait phrasing</b> + <b>reel format</b> + <b>food trend</b>. Add a number to the promise for a further lift.</div>
     </div>
   </div>
+  <div class="mini-label">Best times &middot; pick a window</div>
   <div class="timepills">
     <button class="tpill on" onclick="pickTime(this,0)"><b>Today 6:40pm</b><span>2.4x &middot; 87% conf.</span></button>
     <button class="tpill" onclick="pickTime(this,1)"><b>Thu 8:00pm</b><span>2.1x &middot; 81% conf.</span></button>

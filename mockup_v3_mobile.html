@@ -213,6 +213,20 @@ input,textarea{font-family:var(--body)}
 .toast{position:absolute;bottom:104px;left:50%;transform:translate(-50%,60px);background:var(--surface2);border:1px solid rgba(0,196,160,.4);border-radius:13px;padding:11px 17px;font-size:12.5px;font-weight:600;display:flex;gap:9px;align-items:center;z-index:120;transition:.35s cubic-bezier(.34,1.4,.5,1);opacity:0;width:max-content;max-width:86%}
 .toast.on{transform:translate(-50%,0);opacity:1}
 
+/* rhythm pass mobile */
+.mini-label{font-size:9.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--t3);margin:0 0 7px}
+.sched-row,.setup-pill{background:transparent;border-style:dashed;padding:8px 12px;margin-bottom:10px}
+.sched-row{margin-top:-4px}
+.setup-pill{margin-bottom:14px}
+#scr-today .card{animation:rise .45s cubic-bezier(.22,.68,.22,1) both}
+#scr-today .card:nth-of-type(1){animation-delay:.02s}
+#scr-today .card:nth-of-type(2){animation-delay:.06s}
+#scr-today .card:nth-of-type(3){animation-delay:.10s}
+#scr-today .card:nth-of-type(4){animation-delay:.14s}
+#scr-today .card:nth-of-type(n+5){animation-delay:.18s}
+html{scroll-behavior:smooth}
+.btn-primary{background-image:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0) 40%), linear-gradient(135deg,#00d4aa,#00a88a)}
+
 /* craft pass mobile */
 .card,.btn,.chip,.tpill,.story,.hbtn,.wsrow,.notif{transition-timing-function:cubic-bezier(.22,.68,.22,1)}
 .hero{position:relative;overflow:hidden}
@@ -426,6 +440,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       <button class="wschip" id="wsChipM" onclick="show('ws')"><span style="width:7px;height:7px;border-radius:50%;background:var(--act);display:inline-block"></span><span id="wsLabelM">All pages</span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button>
       <div class="grow"></div>
       <button class="hbtn" onclick="show('compose')" aria-label="New post"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+      <button class="hbtn" onclick="show('data')" aria-label="Analytics"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></button>
       <button class="hbtn" onclick="nav('inbox')" aria-label="Inbox"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span class="bdg" id="inboxBdg">2</span></button>
       <button class="hbtn" onclick="nav('discover')" aria-label="Discover"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5l-1.8 4.2-4.2 1.8 1.8-4.2 4.2-1.8z"/></svg></button>
       <button class="hbtn" onclick="nav('alerts')" aria-label="Alerts"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg><span class="bdg">3</span></button>
@@ -571,6 +586,9 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <button class="btn btn-ghost" style="padding:8px 12px;font-size:11.5px" onclick="toast('Weekly report PDF downloading.')">Download</button>
         <button class="btn btn-ghost" style="padding:8px 12px;font-size:11.5px" onclick="toast('Share link copied. Read-only.')">Link</button>
       </div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Weekly &middot; 30 Jun</div><div class="rl2">Reach +38%, two storms calmed</div></div><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Report PDF downloading.')">PDF</button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Monthly &middot; June</div><div class="rl2">Full month across 5 pages</div></div><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Report PDF downloading.')">PDF</button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Brand risk &middot; 12 Jun</div><div class="rl2">The Shorts cluster, cause and fix</div></div><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Report PDF downloading.')">PDF</button></div>
       <div class="rate">
         <p><b>Was the 6:40pm advice useful?</b><br>Every rating sharpens the next one.</p>
         <div class="rate-btns"><button class="rate-btn" onclick="rate(this)">&#128077; Useful</button><button class="rate-btn" onclick="rate(this)">&#128078; Not really</button></div>
@@ -662,7 +680,8 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     <h4>New post</h4>
     <p class="s-sub">Write it, watch the score. Art-E reads the draft as you type.</p>
     <div class="dchips">
-      <button class="dchip" onclick="loadDraft(0)">Pasta reel v2 <b>75</b></button>
+      <div class="mini-label">Drafts &middot; tap to load</div>
+    <button class="dchip" onclick="loadDraft(0)">Pasta reel v2 <b>75</b></button>
       <button class="dchip" onclick="loadDraft(1)">3-ingredient <b>78</b></button>
       <button class="dchip" onclick="loadDraft(2)">Weekend note <b>50</b></button>
     </div>
@@ -677,6 +696,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <div class="sr2" id="sread2">Drivers: <b>save-bait</b> + <b>reel format</b> + <b>food trend</b>. Add a number for a further lift.</div>
       </div>
     </div>
+    <div class="mini-label">Best times &middot; pick a window</div>
     <div class="timepills">
       <button class="tpill on" onclick="pickTime(this,0)"><b>Today 6:40pm</b><span>2.4x &middot; 87%</span></button>
       <button class="tpill" onclick="pickTime(this,1)"><b>Thu 8pm</b><span>2.1x &middot; 81%</span></button>
@@ -719,6 +739,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     <div class="set-row"><div><div class="sl">WhatsApp alerts</div><div class="sd2">Ships post-launch.</div></div><button class="tog" id="waTog" onclick="this.classList.toggle('on')"></button></div>
     <div class="set-row"><div><div class="sl">Storm &amp; viral alerts</div><div class="sd2">Comment storms within minutes, viral moments as they break.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
     <div class="set-row"><div><div class="sl">Creator match alerts</div><div class="sd2">Only above 25% real overlap.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+    <div class="set-row"><div><div class="sl">Analytics</div><div class="sd2">Overview plus What takes off: drivers, flagged comments, every post.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="hideSheets();setTimeout(()=>show('data'),150)">Open</button></div>
     <div class="set-row"><div><div class="sl">Master plan &amp; scope</div><div class="sd2">218 features staged: 69 MVP, 88 fast, 57 later.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="show('plan');planRenderM()">Open</button></div>
     <div class="set-row"><div><div class="sl">Two-factor authentication</div><div class="sd2">App check at sign-in.</div></div><button class="tog" onclick="this.classList.toggle('on');toast(this.classList.contains('on')?'Two-factor on.':'Two-factor off.')"></button></div>
     <div class="set-row"><div><div class="sl">Active sessions</div><div class="sd2">2 devices.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="toast('Session list opens here.')">View</button></div>
@@ -760,6 +781,13 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       </div>
     </div>
     <div id="mdOv">
+    <div class="dcard"><h5>Best times <b>peak Tue 6:40pm</b></h5>
+      <div style="display:flex;gap:7px;margin-top:2px">
+        <button class="chip" style="margin:0" onclick="hideSheets();show('compose');setTimeIdx(0)">Today 6:40pm &middot; 2.4x</button>
+        <button class="chip" style="margin:0" onclick="hideSheets();show('compose');setTimeIdx(1)">Thu 8pm &middot; 2.1x</button>
+        <button class="chip" style="margin:0" onclick="hideSheets();show('compose');setTimeIdx(2)">Sun 10am</button>
+      </div>
+    </div>
     <p class="s-sub">Summoned by Art-E, not a default view. Every chart backs a sentence it has said.</p>
     <div class="dcard"><h5>Engaged followers by hour <b>May vs July</b></h5>
       <svg width="100%" height="70" viewBox="0 0 340 70" preserveAspectRatio="none"><path d="M0,46 C40,36 75,16 115,21 C155,27 195,54 250,57 C290,59 320,56 340,54" fill="none" stroke="#3A4557" stroke-width="2" stroke-dasharray="4 4"/><path d="M0,57 C55,57 115,53 170,46 C220,40 255,19 290,12 C310,8 328,10 340,11" fill="none" stroke="#8B7BFF" stroke-width="2.5"/><circle cx="290" cy="12" r="3.5" fill="#8B7BFF"/></svg></div>
@@ -980,6 +1008,7 @@ const RANGESM={7:'M0,48 L48,43 L96,50 L144,38 L192,42 L240,29 L288,19 L340,16',1
 function setRangeM(btn,d){ [...btn.parentElement.children].forEach(x=>{x.classList.remove('on');x.style.color='var(--t3)';x.style.borderColor='var(--line)';x.style.background='';}); btn.classList.add('on'); btn.style.color='var(--act)'; btn.style.borderColor='rgba(0,196,160,.4)'; btn.style.background='rgba(0,196,160,.07)'; const p=document.getElementById('reachPathM'); if(p) p.setAttribute('d', RANGESM[d]); }
 const TIMES=['Today 6:40pm','Thu 8pm','Sun 10am'];
 let schedSel=0;
+function setTimeIdx(i){ schedSel=i; const ps=[...document.querySelectorAll('#sh-compose .tpill')]; ps.forEach((t,x)=>t.classList.toggle('on',x===i)); const b=document.getElementById('schedBtn'); if(b) b.textContent='Schedule for '+TIMES[i]; }
 function pickTime(el,i){ schedSel=i; document.querySelectorAll('.tpill').forEach(t=>t.classList.remove('on')); el.classList.add('on');
   document.getElementById('schedBtn').textContent='Schedule for '+TIMES[i]; }
 const MDISCO={
