@@ -435,6 +435,7 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
         <div class="card-line">Tuesday's reel beat its prediction by <b>31%</b></div>
         <p class="card-why">You followed the timing advice. 4 of your last 5 followed recommendations beat baseline.</p>
         <span class="card-act goldc">See your wins &rarr;</span>
+        <span class="card-act" style="margin-left:14px;color:var(--sky)" onclick="event.stopPropagation();toast('Reshared to Quick Bites and Midnight Munchies.')">Reshare &rarr;</span>
       </button>
       <p class="quiet">That is everything that needs you today.<br><b>Charts live behind Art-E, ask when you need them.</b></p>
     </div>
@@ -502,6 +503,7 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
         <span class="ri">&#128196;</span>
         <div style="flex:1"><div class="rt1">Weekly report</div><div class="rt2">Mondays 9am &middot; last one 2 days ago</div></div>
         <button class="btn btn-ghost" style="padding:8px 12px;font-size:11.5px" onclick="toast('Weekly report PDF downloading.')">Download</button>
+        <button class="btn btn-ghost" style="padding:8px 12px;font-size:11.5px" onclick="toast('Share link copied. Read-only.')">Link</button>
       </div>
       <div class="rate">
         <p><b>Was the 6:40pm advice useful?</b><br>Every rating sharpens the next one.</p>
@@ -541,7 +543,7 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
       <div class="rule"><div style="flex:1"><div class="rl1">Post beats 2x prediction</div><div class="rl2">Ride it while it moves</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
       <div class="rule"><div style="flex:1"><div class="rl1">Match above 25% overlap</div><div class="rl2">Real overlap, never hashtags</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
       <button class="btn btn-ghost" style="width:100%;margin-top:4px" onclick="markAllReadM()">Mark all read</button>
-      <p class="quiet">Alerts only interrupt when action is needed.<br><b>Tune this under Settings.</b></p>
+      <p class="quiet">Alerts only interrupt when action is needed. Assignees, priority and bulk triage ship fast-follow.<br><b>Tune this under Settings.</b></p>
     </div>
   </section>
 
@@ -635,7 +637,7 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
     <div class="set-row"><div><div class="sl">Quiet hours 10pm to 8am</div><div class="sd2">Overnight findings wait for the morning.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
     <div class="set-row"><div><div class="sl">Evidence with every answer</div><div class="sd2">Sources + confidence on all AI output. Always on.</div></div><button class="tog on" style="opacity:.75;cursor:not-allowed"></button></div>
     <div class="set-row"><div><div class="sl">Learn from my ratings</div><div class="sd2">Thumbs train what Art-E surfaces next.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
-    <div class="set-row"><div><div class="sl">Theme</div><div class="sd2">Dark by default. Light for bright rooms.</div></div>
+    <div class="set-row"><div><div class="sl">Theme</div><div class="sd2">Dark by default. Light for bright rooms. Accent colours arrive fast-follow.</div></div>
       <div class="seg" id="themeSeg" style="display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:3px"><button class="on" style="padding:6px 11px;border-radius:7px;font-size:11px;font-weight:600" onclick="setTheme('dark');segPickM(this)">Dark</button><button style="padding:6px 11px;border-radius:7px;font-size:11px;font-weight:600;color:var(--t3)" onclick="setTheme('light');segPickM(this)">Light</button></div></div>
     <div class="set-row"><div><div class="sl">Voice replies</div><div class="sd2">Arrives with the live app.</div></div><button class="tog" onclick="this.classList.toggle('on');toast('Voice replies switch on in the live app.')"></button></div>
     <div class="set-row"><div><div class="sl">Auto-act on trusted tasks</div><div class="sd2">Off by default. Art-E always asks first.</div></div><button class="tog" onclick="this.classList.toggle('on')"></button></div>
@@ -643,6 +645,11 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
     <div class="set-row"><div><div class="sl">Storm &amp; viral alerts</div><div class="sd2">Comment storms within minutes, viral moments as they break.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
     <div class="set-row"><div><div class="sl">Creator match alerts</div><div class="sd2">Only above 25% real overlap.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
     <div class="set-row"><div><div class="sl">Master plan &amp; scope</div><div class="sd2">218 features staged: 69 MVP, 88 fast, 57 later.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="show('plan');planRenderM()">Open</button></div>
+    <div class="set-row"><div><div class="sl">Two-factor authentication</div><div class="sd2">App check at sign-in.</div></div><button class="tog" onclick="this.classList.toggle('on');toast(this.classList.contains('on')?'Two-factor on.':'Two-factor off.')"></button></div>
+    <div class="set-row"><div><div class="sl">Active sessions</div><div class="sd2">2 devices.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="toast('Session list opens here.')">View</button></div>
+    <div class="set-row"><div><div class="sl">Timezone</div><div class="sd2">Europe/London.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="toast('Timezone picker opens here.')">Change</button></div>
+    <div class="set-row"><div><div class="sl">What's new</div><div class="sd2">The changelog.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="toast('Latest: Discover matches + light theme.')">Open</button></div>
+    <div class="set-row"><div><div class="sl">Rate Artemis</div><div class="sd2">30-second NPS, shapes the roadmap.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="toast('Thanks. Survey opens in the live product.')">Rate</button></div>
     <div class="set-row"><div><div class="sl">Help &amp; support</div><div class="sd2">Docs, FAQ, support chat.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="toast('Help centre opens in the live product.')">Open</button></div>
     <div class="set-row"><div><div class="sl">Pro plan &middot; &pound;99/mo</div><div class="sd2">5 of 10 pages &middot; renews 1 Aug &middot; invoices by email</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="toast('Plan &amp; invoices open here in the live product.')">Manage</button></div>
     <h4 style="margin-top:16px;font-size:15px">Your pages</h4>
@@ -661,10 +668,13 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
     <p class="s-sub">Summoned by Art-E, not a default view. Every chart backs a sentence it has said.</p>
     <div class="dcard"><h5>Engaged followers by hour <b>May vs July</b></h5>
       <svg width="100%" height="70" viewBox="0 0 340 70" preserveAspectRatio="none"><path d="M0,46 C40,36 75,16 115,21 C155,27 195,54 250,57 C290,59 320,56 340,54" fill="none" stroke="#3A4557" stroke-width="2" stroke-dasharray="4 4"/><path d="M0,57 C55,57 115,53 170,46 C220,40 255,19 290,12 C310,8 328,10 340,11" fill="none" stroke="#8B7BFF" stroke-width="2.5"/><circle cx="290" cy="12" r="3.5" fill="#8B7BFF"/></svg></div>
-    <div class="dcard"><h5>Reach, last 14 days <b>Sana's Kitchen</b></h5>
-      <svg width="100%" height="70" viewBox="0 0 340 70" preserveAspectRatio="none"><path d="M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17" fill="none" stroke="#00C4A0" stroke-width="2.5"/><circle cx="312" cy="12" r="3.5" fill="#00C4A0"/></svg></div>
+    <div class="dcard"><h5>Reach <span style="display:inline-flex;gap:5px;margin-left:6px"><button class="rpill" style="font-size:9px;font-weight:700;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 8px" onclick="setRangeM(this,7)">7d</button><button class="rpill on" style="font-size:9px;font-weight:700;color:var(--act);border:1px solid rgba(0,196,160,.4);border-radius:99px;padding:2px 8px;background:rgba(0,196,160,.07)" onclick="setRangeM(this,14)">14d</button><button class="rpill" style="font-size:9px;font-weight:700;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 8px" onclick="setRangeM(this,30)">30d</button></span><b>Sana's Kitchen</b></h5>
+      <svg width="100%" height="70" viewBox="0 0 340 70" preserveAspectRatio="none"><path id="reachPathM" d="M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17" fill="none" stroke="#00C4A0" stroke-width="2.5"/><circle cx="312" cy="12" r="3.5" fill="#00C4A0"/></svg></div>
     <div class="dcard"><h5>Content mix that works <b>saves-weighted</b></h5>
       <svg width="100%" height="70" viewBox="0 0 340 70"><rect x="14" y="16" width="44" height="48" rx="6" fill="rgba(0,196,160,.75)"/><rect x="80" y="27" width="44" height="37" rx="6" fill="rgba(0,196,160,.45)"/><rect x="146" y="36" width="44" height="28" rx="6" fill="rgba(139,123,255,.5)"/><rect x="212" y="45" width="44" height="19" rx="6" fill="rgba(87,181,240,.45)"/><rect x="278" y="52" width="44" height="12" rx="6" fill="rgba(94,104,117,.5)"/><text x="16" y="11" font-size="8.5" fill="#9AA3B2">reels</text><text x="82" y="22" font-size="8.5" fill="#9AA3B2">cards</text><text x="148" y="31" font-size="8.5" fill="#9AA3B2">carousel</text><text x="214" y="40" font-size="8.5" fill="#9AA3B2">photos</text><text x="280" y="47" font-size="8.5" fill="#9AA3B2">text</text></svg></div>
+    <div class="sigrow" style="border-top:none"><span>&#127941;</span><span><b>Top supporters:</b> 3 fans drive 11% of shares</span></div>
+    <div class="sigrow"><span>&#9762;&#65039;</span><span><b>Toxicity 0.14</b> &middot; stable, under the 0.3 line</span></div>
+    <button class="chip" style="margin:4px 0 10px" onclick="hideSheets();nav('arte');askArteM('Why did my last post perform like that?')">&#10022; Why did my last post do well?</button>
     <div class="sigrow" style="border-top:none"><span class="ldot"></span><span><b>187 people</b> on your posts right now &middot; live counters ship in Phase 2</span></div>
     <button class="btn btn-ghost" style="width:100%" onclick="hideSheets()">Back to Art-E</button>
   </div>
@@ -835,6 +845,8 @@ function doWhats(){ const w=document.getElementById('waTog'); if(w) w.classList.
 function fbk(btn,v){ btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); toast(v?'Noted, more like this.':'Noted, less of this.'); }
 let MTH0=null;
 function clearChat(){ const th=document.getElementById('mthread'); if(MTH0===null) MTH0=th.innerHTML; th.innerHTML=MTH0; th.insertAdjacentHTML('afterbegin','<div class="msg m-arte"><p>Cleared. I keep no memory of that conversation.</p></div>'); toast('Forgotten.'); }
+const RANGESM={7:'M0,48 L48,43 L96,50 L144,38 L192,42 L240,29 L288,19 L340,16',14:'M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17',30:'M0,40 L42,45 L84,38 L126,47 L168,42 L210,49 L252,44 L294,30 L340,17'};
+function setRangeM(btn,d){ [...btn.parentElement.children].forEach(x=>{x.classList.remove('on');x.style.color='var(--t3)';x.style.borderColor='var(--line)';x.style.background='';}); btn.classList.add('on'); btn.style.color='var(--act)'; btn.style.borderColor='rgba(0,196,160,.4)'; btn.style.background='rgba(0,196,160,.07)'; const p=document.getElementById('reachPathM'); if(p) p.setAttribute('d', RANGESM[d]); }
 const TIMES=['Today 6:40pm','Thu 8pm','Sun 10am'];
 let schedSel=0;
 function pickTime(el,i){ schedSel=i; document.querySelectorAll('.tpill').forEach(t=>t.classList.remove('on')); el.classList.add('on');
