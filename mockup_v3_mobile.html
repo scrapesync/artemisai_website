@@ -213,6 +213,29 @@ input,textarea{font-family:var(--body)}
 .toast{position:absolute;bottom:104px;left:50%;transform:translate(-50%,60px);background:var(--surface2);border:1px solid rgba(0,196,160,.4);border-radius:13px;padding:11px 17px;font-size:12.5px;font-weight:600;display:flex;gap:9px;align-items:center;z-index:120;transition:.35s cubic-bezier(.34,1.4,.5,1);opacity:0;width:max-content;max-width:86%}
 .toast.on{transform:translate(-50%,0);opacity:1}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
+
+/* ═══ FABLE MAGIC (mobile) ═══ */
+.moves{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:4px 14px 6px;margin:-8px 0 20px}
+.moves-h{display:flex;align-items:center;justify-content:space-between;padding:9px 0 3px}
+.moves-h h3{font-size:10.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3)}
+.moves-h span{font-family:var(--mono);font-size:10px;color:var(--act)}
+.move{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.move .mtick{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:transparent;font-size:11px;transition:.2s}
+.move .mtxt{flex:1;min-width:0}
+.move .mt1{font-size:12.5px;font-weight:600;line-height:1.3}
+.move .mt2{font-size:10px;color:var(--t3);margin-top:1px}
+.move .btn{padding:7px 12px;font-size:11.5px;border-radius:10px;flex:none}
+.move.done .mtick{background:rgba(0,196,160,.15);border-color:var(--act);color:var(--act)}
+.move.done .mt1{color:var(--t3);text-decoration:line-through}
+.move.done .btn{opacity:.35;pointer-events:none}
+.ctag.brief{color:var(--sky);background:rgba(87,181,240,.09);border:1px solid rgba(87,181,240,.28)}
+.vband{display:flex;gap:8px;margin-bottom:11px}
+.vb{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 6px;text-align:center}
+.vb .vn{font-family:var(--disp);font-size:15px;font-weight:800;color:var(--gold);letter-spacing:-.3px}
+.vb .vl{font-size:8.5px;color:var(--t2);margin-top:2px;line-height:1.3}
+.dchips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px}
+.dchip{font-size:11px;font-weight:600;color:var(--t2);background:var(--surface);border:1px solid var(--line);padding:7px 11px;border-radius:11px;display:inline-flex;gap:7px;align-items:center}
+.dchip b{font-family:var(--mono);font-size:9.5px;color:var(--act);font-weight:600}
 </style>
 </head>
 <body>
@@ -241,7 +264,28 @@ input,textarea{font-family:var(--body)}
           <button class="btn btn-ghost" style="color:var(--arte)" onclick="nav('arte');arteExplain('timing')">Why?</button>
         </div>
       </div>
+      <div class="moves">
+        <div class="moves-h"><h3>Moves today</h3><span id="movecount">0 of 3 done</span></div>
+        <div class="move" id="mv1"><span class="mtick">&#10003;</span><span class="mtxt"><span class="mt1">Schedule the pasta reel, 6:40pm</span><span class="mt2">2.4x predicted &middot; one tap</span></span><button class="btn btn-primary" onclick="doMove('mv1','Scheduled for 6:40pm.')">Go</button></div>
+        <div class="move" id="mv2"><span class="mtick">&#10003;</span><span class="mtxt"><span class="mt1">Send the drafted Shorts reply</span><span class="mt2">in your voice</span></span><button class="btn btn-ghost" onclick="doMove('mv2','Reply sent on the thread.')">Send</button></div>
+        <div class="move" id="mv3"><span class="mtick">&#10003;</span><span class="mtxt"><span class="mt1">Approve the Friday draft</span><span class="mt2">score 61 &rarr; 83</span></span><button class="btn btn-ghost" onclick="doMove('mv3','Friday draft approved.')">OK</button></div>
+      </div>
+
       <div class="feed-label"><h3>While you were away</h3><span class="newchip">&#10022; 3 new</span></div>
+
+      <button class="card" onclick="nav('arte');arteExplain('briefing')">
+        <div class="card-top"><span class="ctag brief">Briefing</span><span class="card-page">All pages</span><span class="card-time">7:02am</span></div>
+        <div class="card-line">Your morning briefing, <b>2-minute read</b></div>
+        <p class="card-why">Overnight: +2,100 reach while you slept, one thing needs you, one opportunity appeared.</p>
+        <span class="card-act violet">Read it with Art-E &rarr;</span>
+      </button>
+
+      <button class="card win-card" onclick="toast('Milestone shared to your page story. &#127881;')">
+        <div class="card-top"><span class="ctag win">Milestone</span><span class="card-page">Sana's Kitchen</span><span class="card-time">this week</span></div>
+        <div class="card-line">Crossed <b>128k followers</b></div>
+        <p class="card-why">Up 9k this month, your fastest-growing page. Worth celebrating in public.</p>
+        <span class="card-act goldc">Share the win &rarr;</span>
+      </button>
       <button class="card" onclick="show('disco')">
         <div class="card-top"><span class="ctag opp">Opportunity</span><span class="card-page">Sana's Kitchen</span><span class="card-time">2h</span></div>
         <div class="card-line">Creator match: <b>@HomeCookedDaily</b></div>
@@ -300,6 +344,12 @@ input,textarea{font-family:var(--body)}
         <div class="wh-big">+38%<small>avg reach on followed advice</small></div>
         <p class="wh-line">Yesterday's reel hit <b>2.9&times; usual reach</b>, beating its 2.4&times; forecast.</p>
       </div>
+      <div class="vband">
+        <div class="vb"><div class="vn">+842K</div><div class="vl">extra reach<br>this month</div></div>
+        <div class="vb"><div class="vn">3</div><div class="vl">viral windows<br>hit</div></div>
+        <div class="vb"><div class="vn">9</div><div class="vl">drafts<br>improved</div></div>
+        <div class="vb"><div class="vn">1</div><div class="vl">risk caught<br>early</div></div>
+      </div>
       <div class="trust">
         <div class="trust-top"><h4>Art-E's track record with you</h4><span>30 days</span></div>
         <div class="tbar"><i style="width:66%;background:var(--act)"></i><i style="width:17%;background:#3A4557"></i><i style="width:17%;background:var(--surface2)"></i></div>
@@ -352,6 +402,11 @@ input,textarea{font-family:var(--body)}
     <div class="grab"></div>
     <h4>New post</h4>
     <p class="s-sub">Write it, watch the score. Art-E reads the draft as you type.</p>
+    <div class="dchips">
+      <button class="dchip" onclick="loadDraft(0)">Pasta reel v2 <b>75</b></button>
+      <button class="dchip" onclick="loadDraft(1)">3-ingredient <b>78</b></button>
+      <button class="dchip" onclick="loadDraft(2)">Weekend note <b>50</b></button>
+    </div>
     <textarea class="compose-ta" id="draft" oninput="scoreDraft(this.value)">POV: you thought pasta night couldn't get better. 20-second creamy garlic recipe, save this for Friday.</textarea>
     <div class="score-row">
       <div class="gauge">
@@ -489,6 +544,24 @@ function rate(btn){ btn.parentElement.querySelectorAll('.rate-btn').forEach(b=>b
 let toastT; function toast(m){ const t=document.getElementById('toast'); document.getElementById('toastmsg').innerHTML=m; t.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('on'),3200); }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') hideSheets(); });
 const t=new Date(); document.getElementById('sbtime').textContent=String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');
+
+/* ═══ FABLE MAGIC (mobile) ═══ */
+let movesDone=0;
+function doMove(id,msg){ const m=document.getElementById(id); if(m.classList.contains('done')) return;
+  m.classList.add('done'); movesDone++;
+  document.getElementById('movecount').textContent=movesDone+' of 3 done'; toast(msg); }
+const DRAFTS=[
+"POV: you thought pasta night couldn't get better. 20-second creamy garlic recipe, save this for Friday.",
+"3-ingredient midnight toastie. Nobody believes the third one. Save it for your next late shift.",
+"New video going up on the page later this week. Hope you like it!"];
+function loadDraft(i){ const ta=document.getElementById('draft'); ta.value=DRAFTS[i]; scoreDraft(ta.value); }
+A.briefing={ q:'This morning\u2019s briefing',
+ html:`<p><b>Good morning. Two minutes, three things.</b></p>
+ <p><span class="hl">While you slept:</span> +2,100 reach, the toastie reel resurfaced through saves.</p>
+ <p><span class="hl">Needs you:</span> the pasta reel window is tonight, 6:40pm, 2.4x predicted.</p>
+ <p><span class="hl">Opportunity:</span> @HomeCookedDaily strengthened to 41% overlap.</p>
+ <div class="ground"><b>Overnight scan:</b> 5 pages \u00b7 comments, saves, shares \u00b7 nothing else needs attention</div>`,
+ rec:{line:'Start with the reel', why:'One tap and today\u2019s main move is done.', cta:'Schedule for 6:40pm', act:"toast('Scheduled for 6:40pm. Art-E reports back tomorrow.')"} };
 </script>
 </body>
 </html>
