@@ -10,7 +10,7 @@
 <style>
 :root{
   --bg:#07090D; --shell:#0B0E14; --surface:#10141B; --surface2:#161C26; --line:#232B38;
-  --t1:#F2F4F8; --t2:#9AA3B2; --t3:#5E6875;
+  --t1:#F2F4F8; --t2:#9AA3B2; --t3:#76829B;
   --act:#00C4A0; --arte:#8B7BFF; --gold:#FFC24B; --rose:#FF5C74; --sky:#57B5F0;
   --disp:'Bricolage Grotesque','Outfit',system-ui,sans-serif;
   --body:'Outfit',system-ui,-apple-system,sans-serif;
@@ -213,6 +213,16 @@ input,textarea{font-family:var(--body)}
 .toast{position:absolute;bottom:104px;left:50%;transform:translate(-50%,60px);background:var(--surface2);border:1px solid rgba(0,196,160,.4);border-radius:13px;padding:11px 17px;font-size:12.5px;font-weight:600;display:flex;gap:9px;align-items:center;z-index:120;transition:.35s cubic-bezier(.34,1.4,.5,1);opacity:0;width:max-content;max-width:86%}
 .toast.on{transform:translate(-50%,0);opacity:1}
 
+/* flawless pass mobile */
+:focus-visible{outline:2px solid var(--act);outline-offset:2px;border-radius:6px}
+::selection{background:rgba(0,196,160,.28);color:var(--t1)}
+.btn,.chip,.tpill,.hbtn,.story,.ckbtn,.ptab,.rpill{transition:transform .12s ease, background .15s ease, border-color .15s ease, color .15s ease}
+.btn:active,.chip:active,.tpill:active,.story:active{transform:scale(.97)}
+.scroll,#plistM,.sheet{scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+#plistM::-webkit-scrollbar,.scroll::-webkit-scrollbar{width:7px}
+#plistM::-webkit-scrollbar-thumb,.scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+
+
 /* registry mobile */
 .stories{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 0 16px;padding-bottom:2px}
 .stories::-webkit-scrollbar{display:none}
@@ -320,8 +330,8 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
 .move{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
 .move .mtick{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:transparent;font-size:11px;transition:.2s}
 .move .mtxt{flex:1;min-width:0}
-.move .mt1{font-size:12.5px;font-weight:600;line-height:1.3}
-.move .mt2{font-size:10px;color:var(--t3);margin-top:1px}
+.move .mt1{display:block;font-size:12.5px;font-weight:600;line-height:1.3}
+.move .mt2{display:block;font-size:10px;color:var(--t3);margin-top:2px}
 .move .btn{padding:7px 12px;font-size:11.5px;border-radius:10px;flex:none}
 .move.done .mtick{background:rgba(0,196,160,.15);border-color:var(--act);color:var(--act)}
 .move.done .mt1{color:var(--t3);text-decoration:line-through}
@@ -334,6 +344,18 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
 .dchips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px}
 .dchip{font-size:11px;font-weight:600;color:var(--t2);background:var(--surface);border:1px solid var(--line);padding:7px 11px;border-radius:11px;display:inline-flex;gap:7px;align-items:center}
 .dchip b{font-family:var(--mono);font-size:9.5px;color:var(--act);font-weight:600}
+
+/* light legibility overrides (must cascade last) */
+body.light{--t3:#5F6B7E; --rose:#D42A4C; --arte:#5B45D9}
+body.light .pstage.later{color:#FFFFFF}
+body.light .card-act{color:#5B45D9}
+body.light .card-act.goldc{color:#8A6100}
+body.light .ai-cta{color:#5B45D9}
+body.light .arec b{color:#5B45D9}
+body.light .story b,body.light .tpill.on span,body.light .sched-row .mono,body.light .moves-h span,body.light .dchip b,body.light .setup-pill .mono{color:#00705A}
+body.light .hl{color:#00705A}
+body.light .milestone .mtx b{color:#8A6100}
+body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,125,99,.3)}
 </style>
 </head>
 <body>

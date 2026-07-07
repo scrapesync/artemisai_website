@@ -10,7 +10,7 @@
 <style>
 :root{
   --bg:#07090D; --shell:#0B0E14; --surface:#10141B; --surface2:#161C26; --line:#232B38;
-  --t1:#F2F4F8; --t2:#9AA3B2; --t3:#5E6875;
+  --t1:#F2F4F8; --t2:#9AA3B2; --t3:#76829B;
   --act:#00C4A0; --arte:#8B7BFF; --gold:#FFC24B; --rose:#FF5C74; --sky:#57B5F0;
   --disp:'Bricolage Grotesque','Outfit',system-ui,sans-serif;
   --body:'Outfit',system-ui,-apple-system,sans-serif;
@@ -241,6 +241,22 @@ input,textarea{font-family:var(--body)}
 .toast b{color:var(--arte);font-weight:600}
 
 
+/* ═══ flawless pass ═══ */
+:focus-visible{outline:2px solid var(--act);outline-offset:2px;border-radius:6px}
+::selection{background:rgba(0,196,160,.28);color:var(--t1)}
+.btn,.chip,.tpill,.ibtn,.bell,.story,.mbtn,.askA,.ptab,.rpill{transition:transform .12s ease, background .15s ease, border-color .15s ease, color .15s ease, box-shadow .18s ease}
+.btn:active,.chip:active,.tpill:active,.story:active,.mbtn:active{transform:scale(.98)}
+.card{transition:border-color .18s ease, transform .18s ease, box-shadow .22s ease}
+.card:hover{transform:translateY(-1px);box-shadow:0 12px 26px -18px rgba(0,0,0,.6)}
+body.light .card:hover{box-shadow:0 12px 26px -18px rgba(18,26,40,.18)}
+.plan-list,.pl-list,#athread,.main{scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.plan-list::-webkit-scrollbar,.pl-list::-webkit-scrollbar,#athread::-webkit-scrollbar,.main::-webkit-scrollbar{width:8px}
+.plan-list::-webkit-scrollbar-thumb,.pl-list::-webkit-scrollbar-thumb,#athread::-webkit-scrollbar-thumb,.main::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+.plan-list::-webkit-scrollbar-track,.pl-list::-webkit-scrollbar-track,#athread::-webkit-scrollbar-track,.main::-webkit-scrollbar-track{background:transparent}
+@media (max-width:1380px){.kbd-hint{display:none}}
+.arte-wm{margin:56px auto;text-align:center;color:var(--t3);font-size:11px;line-height:1.8;max-width:210px;opacity:.75;animation:vfade .5s ease}
+.arte-wm svg{display:block;margin:0 auto 10px;opacity:.5}
+
 /* ═══ registry gap-closures ═══ */
 .stories{display:flex;gap:9px;overflow-x:auto;scrollbar-width:none;margin:0 0 20px;padding-bottom:2px}
 .stories::-webkit-scrollbar{display:none}
@@ -407,8 +423,8 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
 .move{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
 .move .mtick{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:transparent;transition:.2s}
 .move .mtxt{flex:1}
-.move .mt1{font-size:13.5px;font-weight:600;line-height:1.35}
-.move .mt2{font-size:11px;color:var(--t3);margin-top:1px}
+.move .mt1{display:block;font-size:13.5px;font-weight:600;line-height:1.35}
+.move .mt2{display:block;font-size:11px;color:var(--t3);margin-top:2px}
 .move .btn{padding:8px 15px;font-size:12.5px;border-radius:11px}
 .move.done .mtick{background:rgba(0,196,160,.15);border-color:var(--act);color:var(--act)}
 .move.done .mt1{color:var(--t3);text-decoration:line-through}
@@ -468,6 +484,19 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
 .pl-item{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 18px;font-size:13.5px;font-weight:600;color:var(--t2);transition:.1s}
 .pl-item:hover,.pl-item.hot{background:rgba(0,196,160,.07);color:var(--t1)}
 .pl-item .pk{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--t3);border:1px solid var(--line);border-radius:5px;padding:1px 7px}
+
+/* light legibility overrides (must cascade last) */
+body.light{--t3:#5F6B7E; --rose:#D42A4C; --arte:#5B45D9}
+body.light .pstage.later{color:#FFFFFF}
+body.light .card-act{color:#5B45D9}
+body.light .card-act.goldc{color:#8A6100}
+body.light .ai-cta{color:#5B45D9}
+body.light .askA{color:#5B45D9;border-color:rgba(91,69,217,.35);background:rgba(91,69,217,.07)}
+body.light .arec b{color:#5B45D9}
+body.light .story b,body.light .tpill.on span,body.light .sched-row .mono,body.light .moves-h span,body.light .dchip b,body.light .setup-pill .mono{color:#00705A}
+body.light .hl{color:#00705A}
+body.light .milestone .mtx b{color:#8A6100}
+body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,125,99,.3)}
 </style>
 </head>
 <body>
@@ -977,6 +1006,7 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
     </div>
     <div class="athread" id="athread">
       <div class="msg m-arte"><p>Evening, Sana. One thing needs you today: the pasta reel timing. Everything else can wait, but ask me anything.</p></div>
+      <div class="arte-wm" id="arteWm"><svg width="26" height="26" viewBox="0 0 36 36" fill="none"><path d="M18 8L26 28H10L18 8Z" stroke="#76829B" stroke-width="2" stroke-linejoin="round"/></svg>Grounded on 41 posts &middot; 12,400 interactions<br>Ask anything about your pages</div>
     </div>
     <div class="chips" id="achips">
       <button class="chip" onclick="arteExplain('timing')">Why did my posts dip?</button>
@@ -1181,7 +1211,7 @@ const A = {
     rec: {line:'Repeat the pattern Friday', why:'Same window, same save-bait phrasing, new dish.', cta:'Plan Friday\u2019s post', act:()=>{closeAllOverlays();openCompose();}}
   }
 };
-function arteExplain(key){
+function arteExplain(key){ const _wm=document.getElementById('arteWm'); if(_wm) _wm.style.display='none';
   const t=A[key]; if(!t) return;
   const th=document.getElementById('athread');
   th.insertAdjacentHTML('beforeend', `<div class="msg m-user">${t.q}</div>`);
@@ -1210,7 +1240,7 @@ function routeAsk(v){
   return null;
 }
 function freeAsk(inp){
-  const v=inp.value.trim(); if(!v) return; inp.value='';
+  const v=inp.value.trim(); if(!v) return; inp.value=''; const _wm=document.getElementById('arteWm'); if(_wm) _wm.style.display='none';
   const key=routeAsk(v);
   if(key && A[key]){ arteExplainQ(key, v); return; }
   const th=document.getElementById('athread');
@@ -1372,7 +1402,7 @@ A.briefing = { q:'This morning\u2019s briefing',
  rec:{line:'Start with the reel', why:'One tap and today\u2019s main move is done.', cta:'Schedule for 6:40pm', act:()=>{doMove('mv1','Scheduled for 6:40pm. Art-E will report back tomorrow.');}} };
 
 /* ── registry gap fns ── */
-function clearChat(){ document.getElementById('athread').innerHTML='<div class="msg m-arte"><p>Cleared. I keep no memory of that conversation. Ask me anything.</p></div>'; toast('Forgotten. Memory controls, working as promised.'); }
+function clearChat(){ document.getElementById('athread').innerHTML='<div class="msg m-arte"><p>Cleared. I keep no memory of that conversation. Ask me anything.</p></div>'; const w=document.getElementById('arteWm'); if(w){document.getElementById('athread').appendChild(w); w.style.display='';} toast('Forgotten. Memory controls, working as promised.'); }
 let setupDone=4;
 function updateSetup(){ const t=setupDone+' of 6'; document.getElementById('ckCount').textContent=t; const sc=document.getElementById('setupCount'); if(sc) sc.textContent=t; document.getElementById('ckBar').style.width=(setupDone/6*100)+'%'; }
 function ckDone(id){ const r=document.getElementById(id); if(r.classList.contains('done')) return; r.classList.add('done'); r.querySelector('.ckbtn')?.remove(); setupDone++; updateSetup(); }
