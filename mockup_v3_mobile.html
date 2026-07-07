@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtemisAI v3 · Mobile App · by Fable</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090D; --shell:#0B0E14; --surface:#10141B; --surface2:#161C26; --line:#232B38;
+  --t1:#F2F4F8; --t2:#9AA3B2; --t3:#5E6875;
+  --act:#00C4A0; --arte:#8B7BFF; --gold:#FFC24B; --rose:#FF5C74; --sky:#57B5F0;
+  --disp:'Bricolage Grotesque','Outfit',system-ui,sans-serif;
+  --body:'Outfit',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--t1);font-family:var(--body);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  background:radial-gradient(900px 500px at 70% 15%, rgba(139,123,255,.05), transparent 60%),radial-gradient(700px 500px at 25% 90%, rgba(0,196,160,.04), transparent 60%), var(--bg)}
+button{font-family:var(--body);cursor:pointer;border:none;background:none;color:inherit}
+input,textarea{font-family:var(--body)}
+:focus-visible{outline:2px solid var(--act);outline-offset:2px;border-radius:6px}
+.caption{font-size:12px;color:var(--t3);display:flex;gap:16px;align-items:center}
+.caption b{color:var(--t2);font-weight:600}
+.caption .k{font-family:var(--mono);font-size:10px;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:1px 7px;color:var(--t2)}
+
+/* phone */
+.phone{width:392px;height:826px;background:#000;border-radius:54px;padding:11px;box-shadow:0 0 0 1.5px #2a2f3a, 0 42px 90px -22px rgba(0,0,0,.85), 0 0 120px -40px rgba(139,123,255,.13);position:relative;flex-shrink:0}
+.screen{width:100%;height:100%;background:var(--bg);border-radius:44px;overflow:hidden;position:relative}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:110px;height:30px;background:#000;border-radius:99px;z-index:80}
+.statusbar{position:absolute;top:0;left:0;right:0;height:52px;display:flex;justify-content:space-between;align-items:center;padding:16px 28px 0;z-index:70;font-size:13.5px;font-weight:600}
+.sb-icons{display:flex;gap:5px;align-items:center;font-size:11px;color:var(--t2)}
+.homebar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:130px;height:5px;border-radius:99px;background:rgba(255,255,255,.25);z-index:80}
+
+/* app screens */
+.scr{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .3s ease, transform .3s ease;transform:translateX(14px);display:flex;flex-direction:column}
+.scr.on{opacity:1;pointer-events:auto;transform:none}
+.scroll{flex:1;overflow-y:auto;scrollbar-width:none;padding:64px 20px 110px}
+.scroll::-webkit-scrollbar{display:none}
+.apphead{position:absolute;top:52px;left:0;right:0;z-index:40;display:flex;align-items:center;gap:11px;padding:8px 20px 10px;background:linear-gradient(to bottom, var(--bg) 70%, transparent)}
+.apphead .amark{width:30px;height:30px}
+.apphead .amark svg{width:30px;height:30px}
+.apphead .grow{flex:1}
+.hbtn{width:38px;height:38px;border-radius:12px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--t2);position:relative}
+.hbtn .bdg{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;border-radius:99px;background:var(--rose);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid var(--bg)}
+.pav-s{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#F0A66B,#D96D6D);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#3A1E12}
+.pad-head{padding-top:118px !important}
+
+/* shared card language (from v3) */
+.greet{font-size:13px;color:var(--t2)}
+.vh{font-family:var(--disp);font-size:26px;font-weight:800;letter-spacing:-.4px;margin:2px 0 16px}
+.hero{background:linear-gradient(160deg,#0F2A24 0%, #0C1720 58%, var(--surface) 100%);border:1px solid rgba(0,196,160,.32);border-radius:24px;padding:20px 19px 17px;position:relative;overflow:hidden;margin-bottom:22px}
+.hero::after{content:"";position:absolute;top:-70px;right:-70px;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle, rgba(0,196,160,.14), transparent 68%)}
+.hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--act);margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--act);animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero-title{font-family:var(--disp);font-size:21px;font-weight:700;line-height:1.24;letter-spacing:-.2px;margin-bottom:9px}
+.hero-why{font-size:13px;color:var(--t2);line-height:1.55;margin-bottom:15px}
+.hero-why b{color:var(--t1);font-weight:600}
+.conf{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;color:var(--act);background:rgba(0,196,160,.10);border:1px solid rgba(0,196,160,.25);padding:3px 9px;border-radius:99px;margin-left:7px;vertical-align:2px}
+.hero-actions{display:flex;gap:9px;position:relative;z-index:1}
+.btn{border-radius:14px;padding:12px 16px;font-size:14px;font-weight:700;transition:transform .14s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--act);color:#052019;flex:1;box-shadow:0 6px 22px -6px rgba(0,196,160,.5)}
+.btn-ghost{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--t1)}
+.feed-label{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px}
+.feed-label h3{font-size:11.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--t3)}
+.newchip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--gold);background:rgba(255,194,75,.09);border:1px solid rgba(255,194,75,.25);padding:4px 11px;border-radius:99px}
+.card{display:block;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:11px;transition:border-color .18s}
+.card:active{border-color:#33405280}
+.card-top{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.ctag{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 9px;border-radius:99px}
+.ctag.opp{color:var(--arte);background:rgba(139,123,255,.10);border:1px solid rgba(139,123,255,.3)}
+.ctag.sig{color:var(--sky);background:rgba(87,181,240,.09);border:1px solid rgba(87,181,240,.28)}
+.ctag.win{color:var(--gold);background:rgba(255,194,75,.09);border:1px solid rgba(255,194,75,.3)}
+.ctag.pred{color:var(--act);background:rgba(0,196,160,.09);border:1px solid rgba(0,196,160,.3)}
+.card-page{font-size:10px;color:var(--t3);font-weight:600}
+.card-time{margin-left:auto;font-size:10px;color:var(--t3)}
+.card-line{font-size:14.5px;font-weight:600;line-height:1.42}
+.card-why{font-size:12.5px;color:var(--t2);line-height:1.5;margin-top:6px}
+.card-act{margin-top:11px;font-size:13px;font-weight:700;color:var(--act);display:inline-flex;gap:6px}
+.card-act.violet{color:var(--arte)}
+.card-act.goldc{color:var(--gold)}
+.card.win-card{background:linear-gradient(150deg, rgba(255,194,75,.05), var(--surface) 55%)}
+.quiet{text-align:center;font-size:11.5px;color:var(--t3);padding:14px 0 4px;line-height:1.6}
+.quiet b{color:var(--t2);font-weight:600}
+
+/* nav */
+.nav{position:absolute;bottom:0;left:0;right:0;height:92px;background:linear-gradient(to top, rgba(7,9,13,.97) 60%, rgba(7,9,13,0));display:flex;align-items:flex-start;justify-content:space-around;padding-top:14px;z-index:60}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10.5px;font-weight:600;color:var(--t3);width:76px;transition:color .18s}
+.nav-item.on{color:var(--t1)}
+.nav-ic{width:24px;height:24px;display:flex;align-items:center;justify-content:center}
+.orb{width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 32% 28%, #A99BFF, var(--arte) 55%, #5A47D6);margin-top:-14px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px -6px rgba(139,123,255,.65);animation:breathe 3.6s ease-in-out infinite}
+.orb svg{width:26px;height:26px}
+@keyframes breathe{0%,100%{box-shadow:0 8px 30px -6px rgba(139,123,255,.55)}50%{box-shadow:0 8px 42px -4px rgba(139,123,255,.85)}}
+
+/* Art-E chat */
+.arte-head{position:absolute;top:52px;left:0;right:0;padding:10px 20px 12px;display:flex;align-items:center;gap:11px;background:linear-gradient(to bottom, var(--bg) 72%, transparent);z-index:40}
+.arte-avatar{width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 32% 28%, #A99BFF, var(--arte) 55%, #5A47D6);display:flex;align-items:center;justify-content:center}
+.arte-avatar svg{width:18px;height:18px}
+.arte-name{font-size:15px;font-weight:700}
+.arte-status{font-size:10.5px;color:var(--arte);display:flex;align-items:center;gap:5px}
+.arte-status::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--arte)}
+.msg{max-width:88%;margin-bottom:12px;animation:rise .35s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.m-arte{background:var(--surface);border:1px solid var(--line);border-left:2.5px solid var(--arte);border-radius:5px 18px 18px 18px;padding:13px 15px}
+.m-user{margin-left:auto;background:rgba(0,196,160,.13);border:1px solid rgba(0,196,160,.3);border-radius:18px 5px 18px 18px;padding:11px 15px;font-size:13.5px;font-weight:500}
+.msg p{font-size:13.5px;line-height:1.58;color:var(--t1)}
+.msg p+p{margin-top:9px}
+.msg .hl{color:var(--arte);font-weight:600}
+.spark{margin:11px 0 4px;background:#0B0F16;border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+.spark-label{font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:flex;justify-content:space-between}
+.spark-label b{color:var(--act);letter-spacing:0;text-transform:none;font-family:var(--mono);font-size:10px}
+.ground{margin-top:11px;padding-top:10px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:9.8px;color:var(--t3);line-height:1.65}
+.ground b{color:var(--t2);font-weight:600}
+.m-rec{background:linear-gradient(160deg,#141030,#10141B 70%);border:1px solid rgba(139,123,255,.35);border-radius:18px;padding:14px 15px;margin-bottom:12px;animation:rise .35s .1s ease both}
+.rec-eyebrow{font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--arte);margin-bottom:7px}
+.rec-line{font-size:14.5px;font-weight:700;line-height:1.4;margin-bottom:4px}
+.rec-why{font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;padding:6px 0 10px}
+.chip{font-size:12px;font-weight:600;color:var(--t2);background:var(--surface);border:1px solid var(--line);padding:8px 14px;border-radius:99px}
+.arte-inputbar{position:absolute;bottom:0;left:0;right:0;padding:12px 16px 26px;background:linear-gradient(to top, var(--bg) 78%, transparent);display:flex;gap:9px;align-items:center;z-index:60}
+.arte-input{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:13px 18px;font-size:13px;color:var(--t1)}
+.arte-input::placeholder{color:var(--t3)}
+.asend{width:44px;height:44px;border-radius:50%;background:var(--arte);display:flex;align-items:center;justify-content:center;color:#100C2E;flex-shrink:0}
+.typing{display:inline-flex;gap:4px;padding:4px 2px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--arte);animation:tp 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.18s}.typing i:nth-child(3){animation-delay:.36s}
+@keyframes tp{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+/* wins */
+.wins-hero{background:linear-gradient(160deg, rgba(255,194,75,.10), var(--surface) 62%);border:1px solid rgba(255,194,75,.3);border-radius:24px;padding:19px;margin-bottom:12px}
+.wh-eyebrow{font-size:10px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.wh-big{font-family:var(--disp);font-size:34px;font-weight:800;letter-spacing:-1px;line-height:1}
+.wh-big small{font-size:14px;font-weight:600;color:var(--t2);letter-spacing:0;margin-left:6px}
+.wh-line{font-size:13px;color:var(--t2);line-height:1.55;margin-top:8px}
+.wh-line b{color:var(--t1);font-weight:600}
+.trust{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:11px}
+.trust-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:11px}
+.trust-top h4{font-size:13.5px;font-weight:700}
+.trust-top span{font-family:var(--mono);font-size:10px;color:var(--t3)}
+.tbar{height:9px;border-radius:99px;background:var(--surface2);overflow:hidden;display:flex}
+.tbar i{display:block;height:100%}
+.tlegend{display:flex;gap:13px;margin-top:9px;font-size:10.5px;color:var(--t2);flex-wrap:wrap}
+.tlegend b{display:inline-block;width:8px;height:8px;border-radius:2.5px;margin-right:5px}
+.streak{display:flex;gap:7px;margin-top:12px}
+.sd{flex:1;height:34px;border-radius:9px;background:var(--surface2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--t3)}
+.sd.hit{background:rgba(255,194,75,.10);border-color:rgba(255,194,75,.4);color:var(--gold)}
+.rate{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px}
+.rate p{font-size:13px;color:var(--t2);line-height:1.5}
+.rate p b{color:var(--t1);font-weight:600}
+.rate-btns{display:flex;gap:9px;margin-top:12px}
+.rate-btn{flex:1;padding:11px;border-radius:13px;background:var(--surface2);border:1px solid var(--line);font-size:13px;font-weight:600;color:var(--t2)}
+.rate-btn.chosen{background:rgba(0,196,160,.12);border-color:var(--act);color:var(--act)}
+.rate-thanks{font-size:11.5px;color:var(--act);margin-top:10px;display:none}
+.rate-thanks.show{display:block;animation:rise .3s ease}
+
+/* alerts inbox */
+.alert-item{display:block;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:15px 16px;margin-bottom:10px}
+.ai-top{display:flex;gap:8px;align-items:center;margin-bottom:5px}
+.ai-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.ai-title{font-size:14px;font-weight:700;line-height:1.35}
+.ai-body{font-size:12.5px;color:var(--t2);line-height:1.5}
+.ai-body b{color:var(--arte);font-weight:600}
+.ai-cta{font-size:12.5px;font-weight:700;color:var(--act);margin-top:8px;display:inline-block}
+.back{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--t2)}
+
+/* pages + settings inside sheet */
+.page-card{display:flex;align-items:center;gap:13px;background:var(--surface);border:1px solid var(--line);border-radius:17px;padding:13px 15px;margin-bottom:10px}
+.pav{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:14px;flex-shrink:0}
+.pinfo{flex:1;text-align:left}
+.pname{font-size:14px;font-weight:700}
+.pstat{font-size:11px;color:var(--t2);margin-top:2px;display:flex;align-items:center;gap:6px}
+.hdot{width:7px;height:7px;border-radius:50%}
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 2px;border-top:1px solid var(--line)}
+.set-row .sl{font-size:13.5px;font-weight:600}
+.set-row .sd2{font-size:11px;color:var(--t2);margin-top:2px;line-height:1.45}
+.tog{width:44px;height:25px;border-radius:99px;background:var(--surface2);border:1px solid var(--line);position:relative;transition:.2s;flex-shrink:0}
+.tog::after{content:"";position:absolute;top:2px;left:2px;width:19px;height:19px;border-radius:50%;background:var(--t3);transition:.2s}
+.tog.on{background:rgba(0,196,160,.25);border-color:var(--act)}
+.tog.on::after{left:21px;background:var(--act)}
+
+/* sheets (compose, discovery, settings, data) */
+.veil{position:absolute;inset:0;background:rgba(4,6,10,.62);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:.28s;z-index:90;border-radius:44px}
+.veil.on{opacity:1;pointer-events:auto}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:88%;overflow-y:auto;background:var(--surface2);border-radius:30px 30px 44px 44px;padding:14px 20px 34px;transform:translateY(105%);transition:transform .38s cubic-bezier(.32,.72,.22,1);z-index:95;scrollbar-width:none}
+.sheet::-webkit-scrollbar{display:none}
+.sheet.on{transform:none}
+.grab{width:42px;height:5px;border-radius:99px;background:var(--line);margin:0 auto 16px}
+.sheet h4{font-family:var(--disp);font-size:19px;font-weight:800;margin-bottom:4px}
+.sheet .s-sub{font-size:12.5px;color:var(--t2);line-height:1.55;margin-bottom:14px}
+.compose-ta{width:100%;min-height:96px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:13.5px;color:var(--t1);resize:none;line-height:1.6}
+.compose-ta:focus{outline:none;border-color:var(--act)}
+.score-row{display:flex;gap:13px;align-items:center;margin:14px 0}
+.gauge{width:84px;height:84px;position:relative;flex-shrink:0}
+.gauge svg{transform:rotate(-90deg)}
+.gauge .gv{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gauge .gn{font-family:var(--disp);font-size:22px;font-weight:800;line-height:1}
+.gauge .gl{font-size:8px;color:var(--t3);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.score-read{flex:1}
+.score-read .sr1{font-size:13.5px;font-weight:700;line-height:1.4}
+.score-read .sr2{font-size:11.5px;color:var(--t2);line-height:1.5;margin-top:4px}
+.score-read .sr2 b{color:var(--t1)}
+.besttime{display:flex;align-items:center;gap:8px;background:rgba(0,196,160,.07);border:1px solid rgba(0,196,160,.28);border-radius:12px;padding:10px 13px;font-size:12px;margin-bottom:14px}
+.besttime b{font-weight:700}
+.besttime .mono{font-family:var(--mono);font-size:10px;color:var(--act);margin-left:auto}
+.dcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px;margin-bottom:10px}
+.dcard h5{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:8px;display:flex;justify-content:space-between}
+.dcard h5 b{color:var(--t1);font-family:var(--mono);font-size:10px;letter-spacing:0}
+.toast{position:absolute;bottom:104px;left:50%;transform:translate(-50%,60px);background:var(--surface2);border:1px solid rgba(0,196,160,.4);border-radius:13px;padding:11px 17px;font-size:12.5px;font-weight:600;display:flex;gap:9px;align-items:center;z-index:120;transition:.35s cubic-bezier(.34,1.4,.5,1);opacity:0;width:max-content;max-width:86%}
+.toast.on{transform:translate(-50%,0);opacity:1}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
+</style>
+</head>
+<body>
+<div class="phone"><div class="screen">
+  <div class="island"></div>
+  <div class="statusbar"><span id="sbtime">18:22</span><span class="sb-icons">&#9679;&#9679;&#9679; &nbsp;&#9889;</span></div>
+
+  <!-- ═══ TODAY ═══ -->
+  <section class="scr on" id="scr-today">
+    <div class="apphead">
+      <span class="amark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lgm)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lgm)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lgm)"/><defs><linearGradient id="lgm" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></span>
+      <div class="grow"></div>
+      <button class="hbtn" onclick="show('compose')" aria-label="New post"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+      <button class="hbtn" onclick="nav('alerts')" aria-label="Alerts"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg><span class="bdg">3</span></button>
+      <button class="pav-s" onclick="show('settings')" aria-label="Settings">S</button>
+    </div>
+    <div class="scroll pad-head">
+      <div class="greet">Good evening, Sana</div>
+      <h2 class="vh">Today</h2>
+      <div class="hero">
+        <div class="hero-eyebrow"><span class="pulse"></span>Your next move</div>
+        <div class="hero-title">Post the pasta reel at 6:40pm today</div>
+        <p class="hero-why">Art-E predicts <b>2.4&times; your usual reach</b><span class="conf">87% conf.</span></p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="toast('Scheduled for 6:40pm. Art-E reports back tomorrow.')">Schedule it</button>
+          <button class="btn btn-ghost" style="color:var(--arte)" onclick="nav('arte');arteExplain('timing')">Why?</button>
+        </div>
+      </div>
+      <div class="feed-label"><h3>While you were away</h3><span class="newchip">&#10022; 3 new</span></div>
+      <button class="card" onclick="show('disco')">
+        <div class="card-top"><span class="ctag opp">Opportunity</span><span class="card-page">Sana's Kitchen</span><span class="card-time">2h</span></div>
+        <div class="card-line">Creator match: <b>@HomeCookedDaily</b></div>
+        <p class="card-why">41% audience overlap, they post when you are quiet. One collab is worth ~+12k reach.</p>
+        <span class="card-act violet">See the match &rarr;</span>
+      </button>
+      <button class="card" onclick="nav('arte');arteExplain('timing')">
+        <div class="card-top"><span class="ctag sig">Signal</span><span class="card-page">All pages</span><span class="card-time">today</span></div>
+        <div class="card-line">Your audience shifted to <b>evenings</b></div>
+        <p class="card-why">62% of engaged followers are now most active 6 to 8pm. This is why recent posts dipped.</p>
+        <span class="card-act violet">Art-E explains &rarr;</span>
+      </button>
+      <button class="card" onclick="show('compose')">
+        <div class="card-top"><span class="ctag pred">Prediction</span><span class="card-page">Quick Bites UK</span><span class="card-time">today</span></div>
+        <div class="card-line">Friday looks strong for a <b>15-sec recipe short</b></div>
+        <p class="card-why">Short-form food is up 22% across your network this week. Draft it now and ride it.</p>
+        <span class="card-act">Draft with a live score &rarr;</span>
+      </button>
+      <button class="card win-card" onclick="nav('wins')">
+        <div class="card-top"><span class="ctag win">Win</span><span class="card-page">Sana's Kitchen</span><span class="card-time">1d</span></div>
+        <div class="card-line">Tuesday's reel beat its prediction by <b>31%</b></div>
+        <p class="card-why">You followed the timing advice. 4 of your last 5 followed recommendations beat baseline.</p>
+        <span class="card-act goldc">See your wins &rarr;</span>
+      </button>
+      <p class="quiet">That is everything that needs you today.<br><b>Charts live behind Art-E, ask when you need them.</b></p>
+    </div>
+  </section>
+
+  <!-- ═══ ART-E ═══ -->
+  <section class="scr" id="scr-arte">
+    <div class="arte-head">
+      <div class="arte-avatar"><svg viewBox="0 0 36 36" fill="none"><path d="M18 8L26 28H10L18 8Z" stroke="#100C2E" stroke-width="2.4" fill="none"/><circle cx="18" cy="20" r="3" fill="#100C2E"/></svg></div>
+      <div><div class="arte-name">Art-E</div><div class="arte-status">grounded on your data</div></div>
+    </div>
+    <div class="scroll pad-head" id="mthread" style="padding-bottom:150px">
+      <div class="msg m-arte"><p>Evening, Sana. One thing needs you today: the pasta reel timing. Ask me anything else.</p></div>
+      <div class="chips">
+        <button class="chip" onclick="arteExplain('timing')">Why did my posts dip?</button>
+        <button class="chip" onclick="arteExplain('friday')">What should I post Friday?</button>
+        <button class="chip" onclick="show('data')">Show the full data</button>
+      </div>
+    </div>
+    <div class="arte-inputbar">
+      <input class="arte-input" placeholder="Ask anything&hellip;" onkeydown="if(event.key==='Enter')freeAsk(this)">
+      <button class="asend" onclick="freeAsk(document.querySelector('.arte-input'))" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+    </div>
+  </section>
+
+  <!-- ═══ WINS ═══ -->
+  <section class="scr" id="scr-wins">
+    <div class="scroll" style="padding-top:70px">
+      <div class="greet">Because you acted on Art-E's advice</div>
+      <h2 class="vh">Your wins</h2>
+      <div class="wins-hero">
+        <div class="wh-eyebrow">This week</div>
+        <div class="wh-big">+38%<small>avg reach on followed advice</small></div>
+        <p class="wh-line">Yesterday's reel hit <b>2.9&times; usual reach</b>, beating its 2.4&times; forecast.</p>
+      </div>
+      <div class="trust">
+        <div class="trust-top"><h4>Art-E's track record with you</h4><span>30 days</span></div>
+        <div class="tbar"><i style="width:66%;background:var(--act)"></i><i style="width:17%;background:#3A4557"></i><i style="width:17%;background:var(--surface2)"></i></div>
+        <div class="tlegend"><span><b style="background:var(--act)"></b>8 beat baseline</span><span><b style="background:#3A4557"></b>2 matched</span><span><b style="background:var(--surface2)"></b>2 skipped</span></div>
+        <div class="streak"><div class="sd hit">W1</div><div class="sd hit">W2</div><div class="sd hit">W3</div><div class="sd">W4</div></div>
+      </div>
+      <div class="rate">
+        <p><b>Was the 6:40pm advice useful?</b><br>Every rating sharpens the next one.</p>
+        <div class="rate-btns"><button class="rate-btn" onclick="rate(this)">&#128077; Useful</button><button class="rate-btn" onclick="rate(this)">&#128078; Not really</button></div>
+        <div class="rate-thanks" id="rateThanks">Noted. This trains what Art-E shows you next.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ALERTS ═══ -->
+  <section class="scr" id="scr-alerts">
+    <div class="scroll" style="padding-top:70px">
+      <button class="back" onclick="nav('today')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>Today</button>
+      <h2 class="vh" style="margin-top:10px">Needs you</h2>
+      <button class="alert-item" onclick="nav('arte');arteExplain('timing')">
+        <div class="ai-top"><span class="ai-dot" style="background:var(--rose)"></span><span class="ai-title">Your last 3 posts underperformed</span></div>
+        <div class="ai-body">Your audience moved to evenings. <b>One change recommended.</b></div>
+        <span class="ai-cta">Open in Art-E &rarr;</span>
+      </button>
+      <button class="alert-item" onclick="nav('arte');arteExplain('collab')">
+        <div class="ai-top"><span class="ai-dot" style="background:var(--arte)"></span><span class="ai-title">Strong creator match found</span></div>
+        <div class="ai-body">@HomeCookedDaily overlaps 41% of your audience. <b>Intro drafted.</b></div>
+        <span class="ai-cta">Open in Art-E &rarr;</span>
+      </button>
+      <button class="alert-item" onclick="nav('wins')">
+        <div class="ai-top"><span class="ai-dot" style="background:var(--gold)"></span><span class="ai-title">Yesterday's reel beat its prediction</span></div>
+        <div class="ai-body">2.9&times; usual reach against a 2.4&times; forecast.</div>
+        <span class="ai-cta">See the win &rarr;</span>
+      </button>
+      <p class="quiet">Alerts only interrupt when action is needed.<br><b>Tune this under Settings.</b></p>
+    </div>
+  </section>
+
+  <!-- ═══ NAV (shared) ═══ -->
+  <nav class="nav" id="mainnav">
+    <button class="nav-item on" data-n="today" onclick="nav('today')"><span class="nav-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>Today</button>
+    <button class="nav-item" data-n="arte" onclick="nav('arte')"><span class="orb"><svg viewBox="0 0 36 36" fill="none"><path d="M18 8L26 28H10L18 8Z" stroke="#100C2E" stroke-width="2.6" fill="none"/><circle cx="18" cy="20" r="3" fill="#100C2E"/></svg></span>Art-E</button>
+    <button class="nav-item" data-n="wins" onclick="nav('wins')"><span class="nav-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M6 3h12v6a6 6 0 01-12 0V3z"/><path d="M18 5h3v2a4 4 0 01-4 4M6 5H3v2a4 4 0 004 4"/></svg></span>Wins</button>
+  </nav>
+
+  <!-- ═══ SHEETS ═══ -->
+  <div class="veil" id="veil" onclick="hideSheets()"></div>
+
+  <div class="sheet" id="sh-compose">
+    <div class="grab"></div>
+    <h4>New post</h4>
+    <p class="s-sub">Write it, watch the score. Art-E reads the draft as you type.</p>
+    <textarea class="compose-ta" id="draft" oninput="scoreDraft(this.value)">POV: you thought pasta night couldn't get better. 20-second creamy garlic recipe, save this for Friday.</textarea>
+    <div class="score-row">
+      <div class="gauge">
+        <svg width="84" height="84" viewBox="0 0 84 84"><circle cx="42" cy="42" r="34" stroke="#161C26" stroke-width="8" fill="none"/><circle id="garc" cx="42" cy="42" r="34" stroke="#00C4A0" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="53.4" style="transition:stroke-dashoffset .6s ease, stroke .4s"/></svg>
+        <div class="gv"><div class="gn" id="gnum">75</div><div class="gl">virality</div></div>
+      </div>
+      <div class="score-read">
+        <div class="sr1" id="sread1">Strong draft. The hook lands early.</div>
+        <div class="sr2" id="sread2">Drivers: <b>save-bait</b> + <b>reel format</b> + <b>food trend</b>. Add a number for a further lift.</div>
+      </div>
+    </div>
+    <div class="besttime"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00C4A0" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span>Best window: <b>today 6:40pm</b></span><span class="mono">2.4x &middot; 87%</span></div>
+    <button class="btn btn-primary" style="width:100%" onclick="hideSheets();toast('Scheduled for 6:40pm. Art-E reports back tomorrow.')">Schedule for 6:40pm</button>
+  </div>
+
+  <div class="sheet" id="sh-disco">
+    <div class="grab"></div>
+    <span class="ctag opp" style="display:inline-block;margin-bottom:11px">Opportunity &middot; found by the network</span>
+    <h4>@HomeCookedDaily</h4>
+    <p class="s-sub">Family cooking, 96k followers. Found through audience overlap, not hashtags. You have never interacted, your audiences already do.</p>
+    <div class="dcard"><h5>Audience overlap <b>41% &middot; 8,200 people</b></h5>
+      <svg width="100%" height="76" viewBox="0 0 340 76"><circle cx="120" cy="38" r="30" fill="rgba(0,196,160,.16)" stroke="#00C4A0" stroke-width="1.5"/><circle cx="172" cy="38" r="30" fill="rgba(139,123,255,.16)" stroke="#8B7BFF" stroke-width="1.5"/><text x="88" y="42" font-size="10" fill="#F2F4F8" font-weight="700">You</text><text x="186" y="42" font-size="10" fill="#F2F4F8" font-weight="700">Them</text><text x="238" y="34" font-size="9.5" fill="#9AA3B2">8,200 shared</text><text x="238" y="50" font-size="9" fill="#5E6875" font-family="monospace">de-identified</text></svg></div>
+    <div class="dcard"><h5>Why this works</h5><div style="font-size:12.5px;color:var(--t2);line-height:1.65">Tone <b style="color:var(--t1)">high match</b> (home cooking, family). Their strong hours are <b style="color:var(--t1)">1 to 3pm</b>, your quiet window. Estimated <b style="color:var(--act)">+12k reach</b> from one collab reel.</div></div>
+    <button class="btn btn-primary" style="width:100%" onclick="hideSheets();nav('arte');arteExplain('collab')">Ask Art-E to draft an intro</button>
+    <button class="btn btn-ghost" style="width:100%;margin-top:9px" onclick="hideSheets();toast('Saved under Opportunities in your feed.')">Save for later</button>
+  </div>
+
+  <div class="sheet" id="sh-settings">
+    <div class="grab"></div>
+    <h4>Settings</h4>
+    <p class="s-sub">Keep it calm. Alerts stay rare and valuable by default.</p>
+    <div class="set-row" style="border-top:none"><div><div class="sl">Interrupt me only for action</div><div class="sd2">Everything else waits in the morning briefing.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+    <div class="set-row"><div><div class="sl">Quiet hours 10pm to 8am</div><div class="sd2">Overnight findings wait for the morning.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+    <div class="set-row"><div><div class="sl">Evidence with every answer</div><div class="sd2">Sources + confidence on all AI output. Always on.</div></div><button class="tog on" style="opacity:.75;cursor:not-allowed"></button></div>
+    <div class="set-row"><div><div class="sl">Learn from my ratings</div><div class="sd2">Thumbs train what Art-E surfaces next.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+    <h4 style="margin-top:16px;font-size:15px">Your pages</h4>
+    <div style="margin-top:10px">
+      <div class="page-card"><div class="pav" style="background:rgba(0,196,160,.12);color:var(--act)">SK</div><div class="pinfo"><div class="pname">Sana's Kitchen</div><div class="pstat"><span class="hdot" style="background:var(--act)"></span>Healthy &middot; 128k</div></div></div>
+      <div class="page-card"><div class="pav" style="background:rgba(87,181,240,.12);color:var(--sky)">QB</div><div class="pinfo"><div class="pname">Quick Bites UK</div><div class="pstat"><span class="hdot" style="background:var(--act)"></span>Healthy &middot; 64k</div></div></div>
+      <div class="page-card"><div class="pav" style="background:rgba(255,92,116,.12);color:var(--rose)">SS</div><div class="pinfo"><div class="pname">Sana Shorts</div><div class="pstat"><span class="hdot" style="background:var(--rose)"></span>Needs you &middot; Art-E has a fix</div></div></div>
+    </div>
+    <button class="btn btn-ghost" style="width:100%;margin-top:6px" onclick="hideSheets();toast('Facebook connect flow opens here in the live product.')">+ Connect another page</button>
+  </div>
+
+  <div class="sheet" id="sh-data">
+    <div class="grab"></div>
+    <h4>The full data</h4>
+    <p class="s-sub">Summoned by Art-E, not a default view. Every chart backs a sentence it has said.</p>
+    <div class="dcard"><h5>Engaged followers by hour <b>May vs July</b></h5>
+      <svg width="100%" height="70" viewBox="0 0 340 70" preserveAspectRatio="none"><path d="M0,46 C40,36 75,16 115,21 C155,27 195,54 250,57 C290,59 320,56 340,54" fill="none" stroke="#3A4557" stroke-width="2" stroke-dasharray="4 4"/><path d="M0,57 C55,57 115,53 170,46 C220,40 255,19 290,12 C310,8 328,10 340,11" fill="none" stroke="#8B7BFF" stroke-width="2.5"/><circle cx="290" cy="12" r="3.5" fill="#8B7BFF"/></svg></div>
+    <div class="dcard"><h5>Reach, last 14 days <b>Sana's Kitchen</b></h5>
+      <svg width="100%" height="70" viewBox="0 0 340 70" preserveAspectRatio="none"><path d="M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17" fill="none" stroke="#00C4A0" stroke-width="2.5"/><circle cx="312" cy="12" r="3.5" fill="#00C4A0"/></svg></div>
+    <div class="dcard"><h5>Content mix that works <b>saves-weighted</b></h5>
+      <svg width="100%" height="70" viewBox="0 0 340 70"><rect x="14" y="16" width="44" height="48" rx="6" fill="rgba(0,196,160,.75)"/><rect x="80" y="27" width="44" height="37" rx="6" fill="rgba(0,196,160,.45)"/><rect x="146" y="36" width="44" height="28" rx="6" fill="rgba(139,123,255,.5)"/><rect x="212" y="45" width="44" height="19" rx="6" fill="rgba(87,181,240,.45)"/><rect x="278" y="52" width="44" height="12" rx="6" fill="rgba(94,104,117,.5)"/><text x="16" y="11" font-size="8.5" fill="#9AA3B2">reels</text><text x="82" y="22" font-size="8.5" fill="#9AA3B2">cards</text><text x="148" y="31" font-size="8.5" fill="#9AA3B2">carousel</text><text x="214" y="40" font-size="8.5" fill="#9AA3B2">photos</text><text x="280" y="47" font-size="8.5" fill="#9AA3B2">text</text></svg></div>
+    <button class="btn btn-ghost" style="width:100%" onclick="hideSheets()">Back to Art-E</button>
+  </div>
+
+  <div class="toast" id="toast"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00C4A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span id="toastmsg">Done</span></div>
+  <div class="homebar"></div>
+</div></div>
+
+<div class="caption"><b>ArtemisAI v3 &middot; mobile</b><span>Today &middot; Art-E &middot; Wins, plus alerts, compose scoring, discovery, settings</span><span class="k">interactive</span></div>
+
+<script>
+/* nav */
+function nav(n){
+  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+  document.getElementById('scr-'+n).classList.add('on');
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('on', b.dataset.n===n));
+  hideSheets();
+}
+/* sheets */
+function show(id){ document.getElementById('veil').classList.add('on'); document.getElementById('sh-'+id).classList.add('on'); if(id==='compose') scoreDraft(document.getElementById('draft').value); }
+function hideSheets(){ document.getElementById('veil').classList.remove('on'); document.querySelectorAll('.sheet').forEach(s=>s.classList.remove('on')); }
+
+/* Art-E engine (same canned answers as web) */
+const A = {
+  timing:{ q:'Why did my last three posts underperform?',
+    html:`<p><b>Your audience moved, your posting time did not.</b></p>
+    <p>62% of your engaged followers are now most active <span class="hl">6 to 8pm</span>. In May it was 1 to 3pm. Your last three posts went out at lunchtime, into the quiet.</p>
+    <div class="spark"><div class="spark-label"><span>Engaged followers by hour</span><b>May &rarr; July</b></div>
+    <svg width="100%" height="50" viewBox="0 0 280 50" preserveAspectRatio="none"><path d="M0,34 C30,27 55,12 82,16 C110,20 140,39 170,41 C200,43 240,41 280,39" fill="none" stroke="#3A4557" stroke-width="2" stroke-dasharray="4 4"/><path d="M0,41 C40,41 80,39 120,35 C160,31 190,16 224,10 C246,6 266,8 280,10" fill="none" stroke="#8B7BFF" stroke-width="2.5"/><circle cx="224" cy="10" r="3.5" fill="#8B7BFF"/></svg>
+    <div class="ground"><b>Why I believe this:</b> 41 posts &middot; 12,400 interactions &middot; 3 similar pages &middot; confidence 87%</div></div>`,
+    rec:{line:'Move today\u2019s reel to 6:40pm', why:'Predicted 2.4\u00d7 usual reach. I will report back tomorrow.', cta:'Schedule for 6:40pm', act:"toast('Scheduled for 6:40pm. Art-E reports back tomorrow.')"} },
+  collab:{ q:'Draft an intro to @HomeCookedDaily',
+    html:`<p>Here is a first draft, in your voice:</p>
+    <p style="border-left:2px solid var(--line);padding-left:11px;color:var(--t2)">"Hi! Artemis flagged that our audiences overlap a lot, 8k of your followers already watch my pasta reels. Fancy a one-reel collab?"</p>
+    <div class="ground"><b>Why this match:</b> 41% overlap &middot; tone high &middot; their 1-3pm fills your quiet window &middot; est. +12k reach</div>`,
+    rec:{line:'Send it, or edit first', why:'Nothing sends without you.', cta:'Copy the draft', act:"toast('Draft copied. Send from your page inbox.')"} },
+  friday:{ q:'What should I post Friday?',
+    html:`<p><b>A 15-second recipe short, lead with a number.</b></p>
+    <p>Short-form food is up <span class="hl">22% across your network</span> this week, and your saves-per-view peaks on sub-20-second reels.</p>
+    <div class="ground"><b>Why I believe this:</b> your 5 pages + 214 similar &middot; last 60 posts &middot; confidence 81%</div>`,
+    rec:{line:'Draft it with a live score', why:'The composer scores as you type and books the window.', cta:'Open the composer', act:"show('compose')"} }
+};
+function arteExplain(key){
+  const t=A[key]; if(!t) return;
+  const th=document.getElementById('mthread');
+  th.insertAdjacentHTML('beforeend', `<div class="msg m-user">${t.q}</div>`);
+  th.insertAdjacentHTML('beforeend', `<div class="msg m-arte" id="think"><span class="typing"><i></i><i></i><i></i></span></div>`);
+  th.scrollTop=th.scrollHeight;
+  setTimeout(()=>{
+    document.getElementById('think')?.remove();
+    th.insertAdjacentHTML('beforeend', `<div class="msg m-arte">${t.html}</div>`);
+    th.insertAdjacentHTML('beforeend', `<div class="m-rec"><div class="rec-eyebrow">Recommendation</div><div class="rec-line">${t.rec.line}</div><p class="rec-why">${t.rec.why}</p><button class="btn btn-primary" style="width:100%" onclick="${t.rec.act}">${t.rec.cta}</button></div>`);
+    th.scrollTop=th.scrollHeight;
+  }, 850);
+}
+function freeAsk(inp){
+  const v=inp.value.trim(); if(!v) return; inp.value='';
+  const th=document.getElementById('mthread');
+  th.insertAdjacentHTML('beforeend', `<div class="msg m-user">${v.replace(/</g,'&lt;')}</div>`);
+  th.insertAdjacentHTML('beforeend', `<div class="msg m-arte"><p>In the live product I answer this from your data with sources. Try the chips above to see the real patterns.</p></div>`);
+  th.scrollTop=th.scrollHeight;
+}
+
+/* draft scorer */
+function scoreDraft(text){
+  let s=42; const t=text.toLowerCase();
+  if(t.length>40)s+=8; if(/\b(save|save this)\b/.test(t))s+=12; if(/\b(pov|hook|secret|nobody)\b/.test(t))s+=8;
+  if(/\b\d+\b/.test(t))s+=10; if(/(second|sec|quick|minute)/.test(t))s+=7; if(/(recipe|pasta|garlic|food)/.test(t))s+=6;
+  if(t.length>220)s-=6; s=Math.max(15,Math.min(96,s));
+  const arc=document.getElementById('garc'), C=213.6;
+  arc.style.strokeDashoffset=C*(1-s/100);
+  arc.style.stroke = s>=70?'#00C4A0': s>=45?'#FFC24B':'#FF5C74';
+  document.getElementById('gnum').textContent=s;
+  const r1=document.getElementById('sread1'), r2=document.getElementById('sread2');
+  if(s>=70){r1.textContent='Strong draft. The hook lands early.'; r2.innerHTML='Drivers: <b>save-bait</b> + <b>reel format</b> + <b>food trend</b>. Add a number for a further lift.';}
+  else if(s>=45){r1.textContent='Decent, the middle of your range.'; r2.innerHTML='Add a <b>save prompt</b> or a <b>number</b> ("3-ingredient") to push it higher.';}
+  else {r1.textContent='Likely under your baseline.'; r2.innerHTML='Lead with the payoff in six words, give a reason to <b>save it</b>.';}
+}
+
+/* misc */
+function rate(btn){ btn.parentElement.querySelectorAll('.rate-btn').forEach(b=>b.classList.remove('chosen')); btn.classList.add('chosen'); document.getElementById('rateThanks').classList.add('show'); }
+let toastT; function toast(m){ const t=document.getElementById('toast'); document.getElementById('toastmsg').innerHTML=m; t.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('on'),3200); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') hideSheets(); });
+const t=new Date(); document.getElementById('sbtime').textContent=String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');
+</script>
+</body>
+</html>
