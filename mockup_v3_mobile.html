@@ -210,8 +210,50 @@ input,textarea{font-family:var(--body)}
 .dcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px;margin-bottom:10px}
 .dcard h5{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:8px;display:flex;justify-content:space-between}
 .dcard h5 b{color:var(--t1);font-family:var(--mono);font-size:10px;letter-spacing:0}
-.toast{position:absolute;bottom:104px;left:50%;transform:translate(-50%,60px);background:var(--surface2);border:1px solid rgba(0,196,160,.4);border-radius:13px;padding:11px 17px;font-size:12.5px;font-weight:600;display:flex;gap:9px;align-items:center;z-index:120;transition:.35s cubic-bezier(.34,1.4,.5,1);opacity:0;width:max-content;max-width:86%}
+.toast{pointer-events:none;position:absolute;bottom:104px;left:50%;transform:translate(-50%,60px);background:var(--surface2);border:1px solid rgba(0,196,160,.4);border-radius:13px;padding:11px 17px;font-size:12.5px;font-weight:600;display:flex;gap:9px;align-items:center;z-index:120;transition:.35s cubic-bezier(.34,1.4,.5,1);opacity:0;width:max-content;max-width:86%}
 .toast.on{transform:translate(-50%,0);opacity:1}
+
+
+/* ═══ stories, the real thing ═══ */
+.stories{margin:0 0 16px;padding:2px 2px 4px}
+.story{flex-direction:column;background:transparent;border:none;padding:0;gap:6px;width:60px}
+.story .sring{width:56px;height:56px;border-radius:50%;padding:2.5px;display:flex}
+.story .se{width:100%;height:100%;border-radius:50%;background:var(--surface);border:2.5px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:19px}
+.story .slabel{font-size:9px;font-weight:600;color:var(--t2);text-align:center;line-height:1.2;letter-spacing:0}
+.story b{display:none}
+.storyv{position:absolute;inset:0;z-index:180;background:#07090D;border-radius:inherit;display:none;flex-direction:column;overflow:hidden}
+.storyv.on{display:flex;animation:vfade .25s ease}
+.sv-bars{display:flex;gap:5px;padding:56px 16px 0}
+.sv-bars i{flex:1;height:3px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden;position:relative}
+.sv-bars i::after{content:'';position:absolute;inset:0;background:#fff;border-radius:99px;transform:scaleX(0);transform-origin:left}
+.sv-bars i.done::after{transform:scaleX(1)}
+.sv-bars i.run::after{animation:svfill 4s linear forwards}
+@keyframes svfill{to{transform:scaleX(1)}}
+.sv-head{display:flex;align-items:center;gap:9px;padding:12px 16px}
+.sv-head .se{width:30px;height:30px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:14px}
+.sv-head b{font-size:12px}
+.sv-head span{font-size:10px;color:var(--t3)}
+.sv-head .svx{margin-left:auto;font-size:20px;color:var(--t2);padding:4px 8px}
+.sv-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 30px;position:relative}
+.sv-glow{position:absolute;top:16%;left:50%;transform:translateX(-50%);width:240px;height:240px;border-radius:50%;filter:blur(46px);opacity:.32}
+.sv-kick{font-size:10.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;position:relative}
+.sv-stat{font-family:var(--disp);font-size:52px;font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:12px;position:relative}
+.sv-line{font-size:15px;line-height:1.55;color:var(--t1);margin-bottom:12px;position:relative}
+.sv-line b{font-weight:700}
+.sv-ground{font-size:10.5px;color:var(--t3);line-height:1.6;position:relative}
+.sv-cta{margin:0 30px 30px;position:relative}
+.sv-tap{position:absolute;top:90px;bottom:110px;width:50%;z-index:5}
+body.light .storyv{background:#F5F7FB}
+body.light .sv-bars i{background:rgba(18,26,40,.14)}
+body.light .sv-bars i::after{background:#12161F}
+
+/* header redesign */
+.newpill{display:flex;align-items:center;gap:5px;background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0) 42%), linear-gradient(135deg,#00d4aa,#00a88a);color:#04352B;font-weight:800;font-size:12px;border-radius:99px;padding:8px 13px 8px 10px;box-shadow:0 6px 16px -8px rgba(0,196,160,.55)}
+.hbtn-lg{width:38px;height:38px}
+.nav .nav-item{font-size:9.5px;min-width:56px}
+.nav-launch{color:var(--t3)}
+.wschip{margin-left:8px;max-width:132px}
+.wschip span:nth-child(2){white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* micro-nice */
 .nav-item.on{color:var(--act)}
@@ -434,11 +476,12 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
 
     <div class="shade" id="shade">
       <div class="shade-head"><b>Notifications</b><span>Artemis &middot; today</span></div>
+      <button class="notif" onclick="closeShade();openChatM()"><span class="nico" style="background:rgba(0,196,160,.15)">&#128172;</span><span class="nbody"><b>Maya replied in your collab chat</b><span>"Tuesday works! What time?" &middot; 12m</span></span><span class="cunread" style="margin-left:auto">2</span></button>
       <button class="notif" onclick="closeShade();nav('arte');arteExplain('crisis')"><span class="nico" style="background:rgba(255,92,116,.15)">&#9888;&#65039;</span><span class="nbody"><b>Comment cluster turning negative</b><span>Sana Shorts &middot; calm reply drafted &middot; 18m</span></span></button>
       <button class="notif" onclick="closeShade();nav('wins')"><span class="nico" style="background:rgba(255,194,75,.15)">&#128200;</span><span class="nbody"><b>Toastie reel beat its forecast 2.9x</b><span>Sana's Kitchen &middot; worth resharing &middot; 2h</span></span></button>
       <button class="notif" onclick="closeShade();nav('discover')"><span class="nico" style="background:rgba(139,123,255,.15)">&#129309;</span><span class="nbody"><b>New creator match at 41% overlap</b><span>@HomeCookedDaily &middot; intro drafted &middot; 4h</span></span></button>
       <button class="notif" onclick="closeShade();nav('arte');arteExplain('briefing')"><span class="nico" style="background:rgba(0,196,160,.15)">&#9728;&#65039;</span><span class="nbody"><b>Morning briefing ready</b><span>All pages &middot; 2-min read &middot; 7:02am</span></span></button>
-      <div class="shade-foot"><button onclick="clearShade()">Clear all</button><button onclick="closeShade()">Close</button></div>
+      <div class="shade-foot"><button onclick="closeShade();nav('inbox')">Open inbox</button><button onclick="clearShade()">Clear all</button><button onclick="closeShade()">Close</button></div>
     </div>
 
   <!-- ═══ TODAY ═══ -->
@@ -447,11 +490,8 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       <span class="amark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lgm)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lgm)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lgm)"/><defs><linearGradient id="lgm" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></span>
       <button class="wschip" id="wsChipM" onclick="show('ws')"><span style="width:7px;height:7px;border-radius:50%;background:var(--act);display:inline-block"></span><span id="wsLabelM">All pages</span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button>
       <div class="grow"></div>
-      <button class="hbtn" onclick="show('compose')" aria-label="New post"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
-      <button class="hbtn" onclick="show('data')" aria-label="Analytics"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></button>
-      <button class="hbtn" onclick="nav('inbox')" aria-label="Inbox"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span class="bdg" id="inboxBdg">2</span></button>
-      <button class="hbtn" onclick="nav('discover')" aria-label="Discover"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5l-1.8 4.2-4.2 1.8 1.8-4.2 4.2-1.8z"/></svg></button>
-      <button class="hbtn" onclick="nav('alerts')" aria-label="Alerts"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg><span class="bdg">3</span></button>
+      <button class="newpill" onclick="show('compose')" aria-label="New post"><span style="font-size:15px;line-height:1">+</span> New</button>
+      <button class="hbtn hbtn-lg" onclick="toggleShade()" aria-label="Notifications"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg><span class="bdg" id="bellBdg">5</span></button>
       <button class="pav-s" onclick="show('settings')" aria-label="Settings">S</button>
     </div>
     <div class="scroll pad-head">
@@ -483,11 +523,12 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <span class="bnum"><b>+18%</b><span>overnight</span></span>
       </button>
 
-      <div class="stories">
-        <button class="story" onclick="nav('arte');arteExplain('timing')"><span class="se">&#128200;</span>Evenings <b>62%</b></button>
-        <button class="story" onclick="fillMD('homecooked');show('disco')"><span class="se">&#129309;</span>Match <b>41%</b></button>
-        <button class="story" onclick="nav('arte');arteExplain('crisis')"><span class="se">&#128737;&#65039;</span>Contained <b>0.84</b></button>
-        <button class="story" onclick="show('compose')"><span class="se">&#127909;</span>Shorts <b>+22%</b></button>
+      <div class="stories" aria-label="Insight stories">
+        <button class="story" onclick="openStory(0)"><span class="sring" style="background:conic-gradient(#FFC24B,#FF8A3D,#FFC24B)"><span class="se">&#11088;</span></span><span class="slabel">Reel 2.9x</span></button>
+        <button class="story" onclick="openStory(1)"><span class="sring" style="background:conic-gradient(#57B5F0,#3D7BFF,#57B5F0)"><span class="se">&#128200;</span></span><span class="slabel">Evenings</span></button>
+        <button class="story" onclick="openStory(2)"><span class="sring" style="background:conic-gradient(#8B7BFF,#B49BFF,#8B7BFF)"><span class="se">&#129309;</span></span><span class="slabel">Match 41%</span></button>
+        <button class="story" onclick="openStory(3)"><span class="sring" style="background:conic-gradient(#FF5C74,#FF8CA0,#FF5C74)"><span class="se">&#128737;&#65039;</span></span><span class="slabel">Contained</span></button>
+        <button class="story" onclick="openStory(4)"><span class="sring" style="background:conic-gradient(#00C4A0,#4DE3C6,#00C4A0)"><span class="se">&#127916;</span></span><span class="slabel">Shorts +22%</span></button>
       </div>
 
       <div class="feed-label"><h3>While you were away</h3><span class="newchip">&#10022; 3 new</span></div>
@@ -664,6 +705,21 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     </div>
   </section>
 
+  <div class="storyv" id="storyv">
+    <div class="sv-bars" id="svBars"></div>
+    <div class="sv-head"><span class="se" id="svIc">&#11088;</span><span><b style="display:block">Artemis insight</b><span>grounded on your data</span></span><button class="svx" onclick="closeStory()" aria-label="Close">&times;</button></div>
+    <div class="sv-body">
+      <div class="sv-glow" id="svGlow"></div>
+      <div class="sv-kick" id="svKick"></div>
+      <div class="sv-stat" id="svStat"></div>
+      <div class="sv-line" id="svLine"></div>
+      <div class="sv-ground" id="svGround"></div>
+      <button class="sv-tap" style="left:0" onclick="prevStory()" aria-label="Previous"></button>
+      <button class="sv-tap" style="right:0" onclick="nextStory()" aria-label="Next"></button>
+    </div>
+    <button class="btn btn-primary sv-cta" id="svCta"></button>
+  </div>
+
   <div class="signout-veil" id="signoutV">
     <div>
       <svg width="40" height="40" viewBox="0 0 36 36" fill="none" style="margin:0 auto;display:block"><rect x="2" y="2" width="32" height="32" rx="9" stroke="#00C4A0" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="#00C4A0" stroke-width="2" stroke-linejoin="round"/><circle cx="18" cy="20" r="3" fill="#00C4A0"/></svg>
@@ -676,7 +732,9 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
   <!-- ═══ NAV (shared) ═══ -->
   <nav class="nav" id="mainnav">
     <button class="nav-item on" data-n="today" onclick="nav('today')"><span class="nav-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>Today</button>
+    <button class="nav-item" data-n="discover" onclick="nav('discover')"><span class="nav-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5l-1.8 4.2-4.2 1.8 1.8-4.2 4.2-1.8z"/></svg></span>Discover</button>
     <button class="nav-item" data-n="arte" onclick="nav('arte')"><span class="orb"><svg viewBox="0 0 36 36" fill="none"><path d="M18 8L26 28H10L18 8Z" stroke="#100C2E" stroke-width="2.6" fill="none"/><circle cx="18" cy="20" r="3" fill="#100C2E"/></svg></span>Art-E</button>
+    <button class="nav-item nav-launch" onclick="show('data')"><span class="nav-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>Analytics</button>
     <button class="nav-item" data-n="wins" onclick="nav('wins')"><span class="nav-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M6 3h12v6a6 6 0 01-12 0V3z"/><path d="M18 5h3v2a4 4 0 01-4 4M6 5H3v2a4 4 0 004 4"/></svg></span>Wins</button>
   </nav>
 
@@ -989,9 +1047,33 @@ function doWhats(){ const w=document.getElementById('waTog'); if(w) w.classList.
 function fbk(btn,v){ btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); toast(v?'Noted, more like this.':'Noted, less of this.'); }
 let MTH0=null;
 function clearChat(){ const th=document.getElementById('mthread'); if(MTH0===null) MTH0=th.innerHTML; th.innerHTML=MTH0; th.insertAdjacentHTML('afterbegin','<div class="msg m-arte"><p>Cleared. I keep no memory of that conversation.</p></div>'); toast('Forgotten.'); }
+
+const STORIES=[
+ {k:'gold',ic:'\u2b50',kick:'This week\u2019s win',stat:'2.9x',line:'The pasta reel beat its own forecast, <b>saves led it</b>, not likes.',ground:'Forecast 2.4x at 87% confidence \u00b7 actual 2.9x \u00b7 41 posts benchmarked',cta:'Why it worked',act:function(){closeStory();nav('arte');arteExplain('win')}},
+ {k:'sky',ic:'\ud83d\udcc8',kick:'Audience shift',stat:'62%',line:'Your engaged followers now peak <b>6 to 8pm</b>. In May it was lunchtime.',ground:'12,400 interactions across 5 pages \u00b7 trailing 30 days',cta:'What to change',act:function(){closeStory();nav('arte');arteExplain('timing')}},
+ {k:'violet',ic:'\ud83e\udd1d',kick:'Found by the network',stat:'41%',line:'<b>@HomeCookedDaily</b> shares 8,200 of your people and posts when you are quiet.',ground:'Comment overlap, matched anonymously \u00b7 est. +12k reach',cta:'See the match',act:function(){closeStory();fillMD('homecooked');show('disco')}},
+ {k:'rose',ic:'\ud83d\udee1\ufe0f',kick:'Storm contained',stat:'3h',line:'The March comment cluster settled in three hours after <b>one calm reply</b>.',ground:'Same pattern as last night\u2019s cluster \u00b7 confidence 84%',cta:'See the drafted reply',act:function(){closeStory();nav('arte');arteExplain('crisis')}},
+ {k:'teal',ic:'\ud83c\udfac',kick:'Riding a trend',stat:'+22%',line:'15-second recipe shorts are climbing <b>across your network</b> this week.',ground:'96 posts benchmarked \u00b7 your network, not global averages',cta:'Draft one now',act:function(){closeStory();show('compose')}}];
+const SCOLOR={gold:'#FFC24B',sky:'#57B5F0',violet:'#8B7BFF',rose:'#FF5C74',teal:'#00C4A0'};
+let sIdx=0,sTimer=null;
+function openStory(i){ sIdx=i; document.getElementById('storyv').classList.add('on'); renderStory(); }
+function renderStory(){ const st=STORIES[sIdx], c=SCOLOR[st.k];
+  document.getElementById('svBars').innerHTML=STORIES.map((_,x)=>`<i class="${x<sIdx?'done':x===sIdx?'run':''}"></i>`).join('');
+  document.getElementById('svIc').textContent=st.ic;
+  const g=document.getElementById('svGlow'); g.style.background=c;
+  const kick=document.getElementById('svKick'); kick.textContent=st.kick; kick.style.color=c;
+  document.getElementById('svStat').textContent=st.stat;
+  document.getElementById('svLine').innerHTML=st.line;
+  document.getElementById('svGround').textContent=st.ground;
+  const b=document.getElementById('svCta'); b.textContent=st.cta; b.onclick=st.act;
+  clearTimeout(sTimer); sTimer=setTimeout(nextStory,4000); }
+function nextStory(){ if(sIdx<STORIES.length-1){ sIdx++; renderStory(); } else closeStory(); }
+function prevStory(){ if(sIdx>0){ sIdx--; renderStory(); } }
+function closeStory(){ clearTimeout(sTimer); document.getElementById('storyv').classList.remove('on'); }
+
 function toggleShade(){ document.getElementById('shade').classList.toggle('on'); }
 function closeShade(){ document.getElementById('shade').classList.remove('on'); }
-function clearShade(){ document.querySelectorAll('.shade .notif').forEach(n=>n.remove()); closeShade(); toast('Cleared. New alerts will land here.'); }
+function clearShade(){ document.querySelectorAll('.shade .notif').forEach(n=>n.remove()); const b=document.getElementById('bellBdg'); if(b) b.style.display='none'; closeShade(); toast('Cleared. New alerts will land here.'); }
 const HEROM={
  all:['Post the pasta reel at 6:40pm today','Art-E predicts <b>2.4&times; your usual reach</b>'],
  sk:['Post the pasta reel at 6:40pm today','Art-E predicts <b>2.4&times; your usual reach</b>'],

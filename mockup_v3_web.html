@@ -236,10 +236,44 @@ input,textarea{font-family:var(--body)}
 .dcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px}
 .dcard h5{font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);margin-bottom:10px;display:flex;justify-content:space-between}
 .dcard h5 b{color:var(--t1);font-family:var(--mono);font-size:11px;letter-spacing:0}
-.toast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,80px);background:var(--surface2);border:1px solid rgba(0,196,160,.4);border-radius:14px;padding:13px 20px;font-size:13.5px;font-weight:600;display:flex;gap:10px;align-items:center;z-index:120;transition:.35s cubic-bezier(.34,1.4,.5,1);opacity:0}
+.toast{pointer-events:none;position:fixed;bottom:26px;left:50%;transform:translate(-50%,80px);background:var(--surface2);border:1px solid rgba(0,196,160,.4);border-radius:14px;padding:13px 20px;font-size:13.5px;font-weight:600;display:flex;gap:10px;align-items:center;z-index:120;transition:.35s cubic-bezier(.34,1.4,.5,1);opacity:0}
 .toast.on{transform:translate(-50%,0);opacity:1}
 .toast b{color:var(--arte);font-weight:600}
 
+
+
+/* ═══ stories, the real thing ═══ */
+.stories{margin:0 0 16px;padding:2px 2px 4px}
+.story{flex-direction:column;background:transparent;border:none;padding:0;gap:7px;width:66px}
+.story .sring{width:56px;height:56px;border-radius:50%;padding:2.5px;display:flex}
+.story .se{width:100%;height:100%;border-radius:50%;background:var(--surface);border:2.5px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:19px}
+.story .slabel{font-size:9px;font-weight:600;color:var(--t2);text-align:center;line-height:1.2;letter-spacing:0}
+.story b{display:none}
+.storyv{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(400px,92vw);height:min(660px,88vh);z-index:180;background:#0A0D13;border:1px solid var(--line);border-radius:26px;box-shadow:0 40px 110px -30px rgba(0,0,0,.85);display:none;flex-direction:column;overflow:hidden}
+.storyv.on{display:flex;animation:vfade .25s ease}
+.sv-bars{display:flex;gap:5px;padding:18px 16px 0}
+.sv-bars i{flex:1;height:3px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden;position:relative}
+.sv-bars i::after{content:'';position:absolute;inset:0;background:#fff;border-radius:99px;transform:scaleX(0);transform-origin:left}
+.sv-bars i.done::after{transform:scaleX(1)}
+.sv-bars i.run::after{animation:svfill 4s linear forwards}
+@keyframes svfill{to{transform:scaleX(1)}}
+.sv-head{display:flex;align-items:center;gap:9px;padding:12px 16px}
+.sv-head .se{width:30px;height:30px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:14px}
+.sv-head b{font-size:12px}
+.sv-head span{font-size:10px;color:var(--t3)}
+.sv-head .svx{margin-left:auto;font-size:20px;color:var(--t2);padding:4px 8px}
+.sv-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 30px;position:relative}
+.sv-glow{position:absolute;top:16%;left:50%;transform:translateX(-50%);width:240px;height:240px;border-radius:50%;filter:blur(46px);opacity:.32}
+.sv-kick{font-size:10.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;position:relative}
+.sv-stat{font-family:var(--disp);font-size:52px;font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:12px;position:relative}
+.sv-line{font-size:15px;line-height:1.55;color:var(--t1);margin-bottom:12px;position:relative}
+.sv-line b{font-weight:700}
+.sv-ground{font-size:10.5px;color:var(--t3);line-height:1.6;position:relative}
+.sv-cta{margin:0 30px 30px;position:relative}
+.sv-tap{position:absolute;top:90px;bottom:110px;width:50%;z-index:5}
+body.light .storyv{background:#F5F7FB}
+body.light .sv-bars i{background:rgba(18,26,40,.14)}
+body.light .sv-bars i::after{background:#12161F}
 
 /* rhythm pass */
 .mini-label{font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);margin:0 0 8px}
@@ -649,11 +683,11 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       </button>
 
       <div class="stories" aria-label="Insight stories">
-        <button class="story" onclick="arteExplain('win')"><span class="se">&#11088;</span>Reel hit 2.9x <b>+31%</b></button>
-        <button class="story" onclick="arteExplain('timing')"><span class="se">&#128200;</span>Evenings shift <b>62%</b></button>
-        <button class="story" onclick="openDiscovery('homecooked')"><span class="se">&#129309;</span>New match <b>41%</b></button>
-        <button class="story" onclick="arteExplain('crisis')"><span class="se">&#128737;&#65039;</span>Cluster contained <b>0.84</b></button>
-        <button class="story" onclick="arteExplain('friday')"><span class="se">&#127909;</span>Shorts trend <b>+22%</b></button>
+        <button class="story" onclick="openStory(0)"><span class="sring" style="background:conic-gradient(#FFC24B,#FF8A3D,#FFC24B)"><span class="se">&#11088;</span></span><span class="slabel">Reel 2.9x</span></button>
+        <button class="story" onclick="openStory(1)"><span class="sring" style="background:conic-gradient(#57B5F0,#3D7BFF,#57B5F0)"><span class="se">&#128200;</span></span><span class="slabel">Evenings 62%</span></button>
+        <button class="story" onclick="openStory(2)"><span class="sring" style="background:conic-gradient(#8B7BFF,#B49BFF,#8B7BFF)"><span class="se">&#129309;</span></span><span class="slabel">Match 41%</span></button>
+        <button class="story" onclick="openStory(3)"><span class="sring" style="background:conic-gradient(#FF5C74,#FF8CA0,#FF5C74)"><span class="se">&#128737;&#65039;</span></span><span class="slabel">Contained</span></button>
+        <button class="story" onclick="openStory(4)"><span class="sring" style="background:conic-gradient(#00C4A0,#4DE3C6,#00C4A0)"><span class="se">&#127916;</span></span><span class="slabel">Shorts +22%</span></button>
       </div>
 
       <div class="feed-label"><h3>While you were away</h3><span class="newchip">&#10022; 3 new</span></div>
@@ -1163,6 +1197,21 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
   <button class="btn btn-ghost" style="margin-top:12px" onclick="closeAllOverlays()">Done</button>
 </div>
 
+<div class="storyv" id="storyv">
+    <div class="sv-bars" id="svBars"></div>
+    <div class="sv-head"><span class="se" id="svIc">&#11088;</span><span><b style="display:block">Artemis insight</b><span>grounded on your data</span></span><button class="svx" onclick="closeStory()" aria-label="Close">&times;</button></div>
+    <div class="sv-body">
+      <div class="sv-glow" id="svGlow"></div>
+      <div class="sv-kick" id="svKick"></div>
+      <div class="sv-stat" id="svStat"></div>
+      <div class="sv-line" id="svLine"></div>
+      <div class="sv-ground" id="svGround"></div>
+      <button class="sv-tap" style="left:0" onclick="prevStory()" aria-label="Previous"></button>
+      <button class="sv-tap" style="right:0" onclick="nextStory()" aria-label="Next"></button>
+    </div>
+    <button class="btn btn-primary sv-cta" id="svCta"></button>
+  </div>
+
 <div class="signout-veil" id="signoutV">
   <div class="so-in">
     <svg width="44" height="44" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="9" stroke="#00C4A0" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="#00C4A0" stroke-width="2" stroke-linejoin="round"/><circle cx="18" cy="20" r="3" fill="#00C4A0"/></svg>
@@ -1307,7 +1356,7 @@ function closeAllOverlays(){
   document.getElementById('veil').classList.remove('on');
   ['compose','disco','pagepanel','connectm','billingm','planm'].forEach(id=>{const el=document.getElementById(id); if(el) el.classList.remove('on');});
 }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeAllOverlays(); closePop(); closePalette(); closeWs(); }});
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeAllOverlays(); closePop(); closePalette(); closeWs(); closeStory(); }});
 
 /* ── live draft scorer (Sprint 8 pattern) ── */
 function scoreDraft(text){
@@ -1479,6 +1528,30 @@ function planRender(){
 /* ── deep-parity helpers ── */
 function showSignout(){ document.getElementById('signoutV').classList.add('on'); }
 function hideSignout(){ document.getElementById('signoutV').classList.remove('on'); toast('Welcome back, Sana.'); }
+
+const STORIES=[
+ {k:'gold',ic:'\u2b50',kick:'This week\u2019s win',stat:'2.9x',line:'The pasta reel beat its own forecast, <b>saves led it</b>, not likes.',ground:'Forecast 2.4x at 87% confidence \u00b7 actual 2.9x \u00b7 41 posts benchmarked',cta:'Why it worked',act:function(){closeStory();arteExplain('win')}},
+ {k:'sky',ic:'\ud83d\udcc8',kick:'Audience shift',stat:'62%',line:'Your engaged followers now peak <b>6 to 8pm</b>. In May it was lunchtime.',ground:'12,400 interactions across 5 pages \u00b7 trailing 30 days',cta:'What to change',act:function(){closeStory();arteExplain('timing')}},
+ {k:'violet',ic:'\ud83e\udd1d',kick:'Found by the network',stat:'41%',line:'<b>@HomeCookedDaily</b> shares 8,200 of your people and posts when you are quiet.',ground:'Comment overlap, matched anonymously \u00b7 est. +12k reach',cta:'See the match',act:function(){closeStory();openDiscovery('homecooked')}},
+ {k:'rose',ic:'\ud83d\udee1\ufe0f',kick:'Storm contained',stat:'3h',line:'The March comment cluster settled in three hours after <b>one calm reply</b>.',ground:'Same pattern as last night\u2019s cluster \u00b7 confidence 84%',cta:'See the drafted reply',act:function(){closeStory();arteExplain('crisis')}},
+ {k:'teal',ic:'\ud83c\udfac',kick:'Riding a trend',stat:'+22%',line:'15-second recipe shorts are climbing <b>across your network</b> this week.',ground:'96 posts benchmarked \u00b7 your network, not global averages',cta:'Draft one now',act:function(){closeStory();openCompose()}}];
+const SCOLOR={gold:'#FFC24B',sky:'#57B5F0',violet:'#8B7BFF',rose:'#FF5C74',teal:'#00C4A0'};
+let sIdx=0,sTimer=null;
+function openStory(i){ sIdx=i; document.getElementById('storyv').classList.add('on'); renderStory(); }
+function renderStory(){ const st=STORIES[sIdx], c=SCOLOR[st.k];
+  document.getElementById('svBars').innerHTML=STORIES.map((_,x)=>`<i class="${x<sIdx?'done':x===sIdx?'run':''}"></i>`).join('');
+  document.getElementById('svIc').textContent=st.ic;
+  const g=document.getElementById('svGlow'); g.style.background=c;
+  const kick=document.getElementById('svKick'); kick.textContent=st.kick; kick.style.color=c;
+  document.getElementById('svStat').textContent=st.stat;
+  document.getElementById('svLine').innerHTML=st.line;
+  document.getElementById('svGround').textContent=st.ground;
+  const b=document.getElementById('svCta'); b.textContent=st.cta; b.onclick=st.act;
+  clearTimeout(sTimer); sTimer=setTimeout(nextStory,4000); }
+function nextStory(){ if(sIdx<STORIES.length-1){ sIdx++; renderStory(); } else closeStory(); }
+function prevStory(){ if(sIdx>0){ sIdx--; renderStory(); } }
+function closeStory(){ clearTimeout(sTimer); document.getElementById('storyv').classList.remove('on'); }
+
 function setTheme(t){
   const b=document.body;
   const to = t || (b.classList.contains('light')?'dark':'light');
