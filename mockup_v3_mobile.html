@@ -213,11 +213,19 @@ input,textarea{font-family:var(--body)}
 .toast{position:absolute;bottom:104px;left:50%;transform:translate(-50%,60px);background:var(--surface2);border:1px solid rgba(0,196,160,.4);border-radius:13px;padding:11px 17px;font-size:12.5px;font-weight:600;display:flex;gap:9px;align-items:center;z-index:120;transition:.35s cubic-bezier(.34,1.4,.5,1);opacity:0;width:max-content;max-width:86%}
 .toast.on{transform:translate(-50%,0);opacity:1}
 
+/* micro-nice */
+.nav-item.on{color:var(--act)}
+.nav-item.on svg{filter:drop-shadow(0 0 8px rgba(0,196,160,.5))}
+.grab{transition:width .25s ease}
+.sheet.on .grab{width:44px}
+.card-act{transition:transform .18s cubic-bezier(.22,.68,.22,1)}
+.card:active .card-act{transform:translateX(3px)}
+
 /* rhythm pass mobile */
 .mini-label{font-size:9.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--t3);margin:0 0 7px}
 .sched-row,.setup-pill{background:transparent;border-style:dashed;padding:8px 12px;margin-bottom:10px}
-.sched-row{margin-top:-4px}
-.setup-pill{margin-bottom:14px}
+.sched-row{margin-top:-2px;margin-bottom:14px}
+.setup-pill{margin:6px 0 16px}
 #scr-today .card{animation:rise .45s cubic-bezier(.22,.68,.22,1) both}
 #scr-today .card:nth-of-type(1){animation-delay:.02s}
 #scr-today .card:nth-of-type(2){animation-delay:.06s}
@@ -274,7 +282,7 @@ html{scroll-behavior:smooth}
 
 
 /* registry mobile */
-.stories{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 0 16px;padding-bottom:2px}
+.stories{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 0 14px;padding-bottom:2px}
 .stories::-webkit-scrollbar{display:none}
 .story{flex-shrink:0;display:flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:7px 12px 7px 8px;font-size:11px;font-weight:600}
 .story .se{width:24px;height:24px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:12px}
@@ -337,12 +345,12 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
 .sched-row .mono{font-family:var(--mono);font-size:9px;color:var(--act)}
 
 /* fable-magic mobile */
-.milestone{display:flex;align-items:center;gap:10px;background:linear-gradient(140deg, rgba(255,194,75,.10), var(--surface) 70%);border:1px solid rgba(255,194,75,.35);border-radius:15px;padding:11px 13px;margin:0 0 18px}
+.milestone{display:flex;align-items:center;gap:9px;background:linear-gradient(140deg, rgba(255,194,75,.10), var(--surface) 70%);border:1px solid rgba(255,194,75,.35);border-radius:14px;padding:8px 8px 8px 12px;margin:0 0 14px}
 .milestone .mtx{flex:1;font-size:12px;line-height:1.4}
 .milestone .mtx b{color:var(--gold);font-weight:700}
 .milestone .btn{padding:7px 12px;font-size:11.5px;border-radius:10px}
 .milestone .mx{color:var(--t3);font-size:14px;padding:2px 6px}
-.brief-card{display:flex;align-items:center;gap:11px;background:linear-gradient(150deg,#141030 0%, var(--surface) 65%);border:1px solid rgba(139,123,255,.3);border-radius:16px;padding:13px 14px;margin-bottom:18px;width:100%;text-align:left}
+.brief-card{display:flex;align-items:center;gap:10px;background:linear-gradient(150deg,#141030 0%, var(--surface) 65%);border:1px solid rgba(139,123,255,.3);border-radius:15px;padding:10px 12px;margin-bottom:14px;width:100%;text-align:left}
 .brief-card .bico{width:34px;height:34px;border-radius:11px;background:rgba(139,123,255,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
 .brief-card .bt1{font-size:13.5px;font-weight:700}
 .brief-card .bt2{font-size:11px;color:var(--t2);margin-top:2px}
@@ -373,11 +381,11 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
 
 /* ═══ FABLE MAGIC (mobile) ═══ */
-.moves{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:4px 14px 6px;margin:-8px 0 20px}
+.moves{padding-bottom:2px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:4px 14px 6px;margin:-8px 0 20px}
 .moves-h{display:flex;align-items:center;justify-content:space-between;padding:9px 0 3px}
 .moves-h h3{font-size:10.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3)}
 .moves-h span{font-family:var(--mono);font-size:10px;color:var(--act)}
-.move{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.move{display:flex;align-items:center;padding-top:9px;padding-bottom:9px;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
 .move .mtick{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:transparent;font-size:11px;transition:.2s}
 .move .mtxt{flex:1;min-width:0}
 .move .mt1{display:block;font-size:12.5px;font-weight:600;line-height:1.3}
@@ -465,11 +473,9 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <div class="move" id="mv3"><span class="mtick">&#10003;</span><span class="mtxt"><span class="mt1">Approve the Friday draft</span><span class="mt2">score 61 &rarr; 83</span></span><button class="btn btn-ghost" onclick="doMove('mv3','Friday draft approved.')">OK</button></div>
       </div>
 
-      <button class="setup-pill" onclick="show('settings')"><span>&#9989;</span><span><b>Getting set up</b> &middot; <span id="setupCount">4 of 6</span></span><span class="mono">~4 min &rarr;</span></button>
-
       <div class="sched-row"><span>&#128197;</span><span style="flex:1">Scheduled: <b>pasta reel</b> &middot; 6:40pm</span><span class="mono">2.4x</span><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="show('compose')">Edit</button></div>
 
-      <div class="milestone" id="milestone"><span style="font-size:15px">&#127942;</span><div class="mtx"><b>Quick Bites crossed 64k.</b> Fastest grower this quarter.</div><button class="btn btn-primary" onclick="toast('Win shared to your team feed.')">Share</button><button class="mx" onclick="document.getElementById('milestone').style.display='none'" aria-label="Dismiss">&times;</button></div>
+      <div class="milestone" id="milestone"><span style="font-size:15px">&#127942;</span><div class="mtx"><b>Quick Bites crossed 64k</b> &middot; fastest grower</div><button class="btn btn-primary" onclick="toast('Win shared to your team feed.')">Share</button><button class="mx" onclick="document.getElementById('milestone').style.display='none'" aria-label="Dismiss">&times;</button></div>
 
       <button class="brief-card" onclick="nav('arte');arteExplain('briefing')">
         <span class="bico">&#9728;&#65039;</span>
@@ -518,6 +524,8 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <span class="card-act goldc">See your wins &rarr;</span>
         <span class="card-act" style="margin-left:14px;color:var(--sky)" onclick="event.stopPropagation();toast('Reshared to Quick Bites and Midnight Munchies.')">Reshare &rarr;</span>
       </button>
+      <button class="setup-pill" onclick="show('settings')"><span>&#9989;</span><span><b>Getting set up</b> &middot; <span id="setupCount">4 of 6</span></span><span class="mono">~4 min &rarr;</span></button>
+
       <p class="quiet">That is everything that needs you today.<br><b>Charts live behind Art-E, ask when you need them.</b></p>
     </div>
   </section>
