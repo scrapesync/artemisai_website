@@ -212,6 +212,41 @@ input,textarea{font-family:var(--body)}
 .dcard h5 b{color:var(--t1);font-family:var(--mono);font-size:10px;letter-spacing:0}
 .toast{position:absolute;bottom:104px;left:50%;transform:translate(-50%,60px);background:var(--surface2);border:1px solid rgba(0,196,160,.4);border-radius:13px;padding:11px 17px;font-size:12.5px;font-weight:600;display:flex;gap:9px;align-items:center;z-index:120;transition:.35s cubic-bezier(.34,1.4,.5,1);opacity:0;width:max-content;max-width:86%}
 .toast.on{transform:translate(-50%,0);opacity:1}
+
+/* fable-magic mobile */
+.milestone{display:flex;align-items:center;gap:10px;background:linear-gradient(140deg, rgba(255,194,75,.10), var(--surface) 70%);border:1px solid rgba(255,194,75,.35);border-radius:15px;padding:11px 13px;margin:0 0 18px}
+.milestone .mtx{flex:1;font-size:12px;line-height:1.4}
+.milestone .mtx b{color:var(--gold);font-weight:700}
+.milestone .btn{padding:7px 12px;font-size:11.5px;border-radius:10px}
+.milestone .mx{color:var(--t3);font-size:14px;padding:2px 6px}
+.brief-card{display:flex;align-items:center;gap:11px;background:linear-gradient(150deg,#141030 0%, var(--surface) 65%);border:1px solid rgba(139,123,255,.3);border-radius:16px;padding:13px 14px;margin-bottom:18px;width:100%;text-align:left}
+.brief-card .bico{width:34px;height:34px;border-radius:11px;background:rgba(139,123,255,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
+.brief-card .bt1{font-size:13.5px;font-weight:700}
+.brief-card .bt2{font-size:11px;color:var(--t2);margin-top:2px}
+.brief-card .bnum{margin-left:auto;text-align:right}
+.brief-card .bnum b{display:block;font-family:var(--disp);font-size:15px;font-weight:800}
+.brief-card .bnum span{font-size:8.5px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase}
+.ctag.crisis{color:var(--rose);background:rgba(255,92,116,.09);border:1px solid rgba(255,92,116,.3)}
+.card.crisis-card{background:linear-gradient(150deg, rgba(255,92,116,.06), var(--surface) 55%);border-color:rgba(255,92,116,.35)}
+.value-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.vitem{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:11px;text-align:center}
+.vitem b{display:block;font-family:var(--disp);font-size:17px;font-weight:800;color:var(--t1)}
+.vitem span{font-size:9px;color:var(--t3);line-height:1.35;display:block;margin-top:3px}
+.report-row{display:flex;align-items:center;gap:11px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:13px 14px;margin-bottom:11px}
+.report-row .ri{width:34px;height:34px;border-radius:10px;background:rgba(87,181,240,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.report-row .rt1{font-size:13px;font-weight:700}
+.report-row .rt2{font-size:10.5px;color:var(--t3);margin-top:1px;line-height:1.4}
+.timepills{display:flex;gap:7px;margin-bottom:14px}
+.tpill{flex:1;border:1px solid var(--line);background:var(--surface);border-radius:11px;padding:9px 5px;text-align:center}
+.tpill b{display:block;font-size:11px;font-weight:700}
+.tpill span{font-family:var(--mono);font-size:8.5px;color:var(--t3)}
+.tpill.on{border-color:rgba(0,196,160,.5);background:rgba(0,196,160,.07)}
+.tpill.on span{color:var(--act)}
+.mrow{display:flex;align-items:center;gap:11px}
+.mrow .ovl{margin-left:auto;text-align:right}
+.mrow .ovl b{font-family:var(--disp);font-size:16px;font-weight:800;color:var(--arte)}
+.mrow .ovl span{display:block;font-size:8.5px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px}
+
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
 
 /* ═══ FABLE MAGIC (mobile) ═══ */
@@ -249,6 +284,7 @@ input,textarea{font-family:var(--body)}
       <span class="amark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lgm)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lgm)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lgm)"/><defs><linearGradient id="lgm" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></span>
       <div class="grow"></div>
       <button class="hbtn" onclick="show('compose')" aria-label="New post"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+      <button class="hbtn" onclick="nav('discover')" aria-label="Discover"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5l-1.8 4.2-4.2 1.8 1.8-4.2 4.2-1.8z"/></svg></button>
       <button class="hbtn" onclick="nav('alerts')" aria-label="Alerts"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg><span class="bdg">3</span></button>
       <button class="pav-s" onclick="show('settings')" aria-label="Settings">S</button>
     </div>
@@ -271,6 +307,14 @@ input,textarea{font-family:var(--body)}
         <div class="move" id="mv3"><span class="mtick">&#10003;</span><span class="mtxt"><span class="mt1">Approve the Friday draft</span><span class="mt2">score 61 &rarr; 83</span></span><button class="btn btn-ghost" onclick="doMove('mv3','Friday draft approved.')">OK</button></div>
       </div>
 
+      <div class="milestone" id="milestone"><span style="font-size:15px">&#127942;</span><div class="mtx"><b>Quick Bites crossed 64k.</b> Fastest grower this quarter.</div><button class="btn btn-primary" onclick="toast('Win shared to your team feed.')">Share</button><button class="mx" onclick="document.getElementById('milestone').style.display='none'" aria-label="Dismiss">&times;</button></div>
+
+      <button class="brief-card" onclick="nav('arte');arteExplain('briefing')">
+        <span class="bico">&#9728;&#65039;</span>
+        <span><span class="bt1" style="display:block">Morning briefing</span><span class="bt2" style="display:block">7:02am &middot; 2-min read &middot; open in Art-E</span></span>
+        <span class="bnum"><b>+18%</b><span>overnight</span></span>
+      </button>
+
       <div class="feed-label"><h3>While you were away</h3><span class="newchip">&#10022; 3 new</span></div>
 
       <button class="card" onclick="nav('arte');arteExplain('briefing')">
@@ -286,7 +330,14 @@ input,textarea{font-family:var(--body)}
         <p class="card-why">Up 9k this month, your fastest-growing page. Worth celebrating in public.</p>
         <span class="card-act goldc">Share the win &rarr;</span>
       </button>
-      <button class="card" onclick="show('disco')">
+      <button class="card crisis-card" onclick="nav('arte');arteExplain('crisis')">
+        <div class="card-top"><span class="ctag crisis">Needs a reply</span><span class="card-page">Sana Shorts</span><span class="card-time">18m</span></div>
+        <div class="card-line">A comment cluster is turning <b>negative</b></div>
+        <p class="card-why">14 negative comments in 30 minutes. Art-E drafted a calm reply in your voice.</p>
+        <span class="card-act" style="color:var(--rose)">See the drafted reply &rarr;</span>
+      </button>
+
+      <button class="card" onclick="fillMD('homecooked');show('disco')">
         <div class="card-top"><span class="ctag opp">Opportunity</span><span class="card-page">Sana's Kitchen</span><span class="card-time">2h</span></div>
         <div class="card-line">Creator match: <b>@HomeCookedDaily</b></div>
         <p class="card-why">41% audience overlap, they post when you are quiet. One collab is worth ~+12k reach.</p>
@@ -356,6 +407,20 @@ input,textarea{font-family:var(--body)}
         <div class="tlegend"><span><b style="background:var(--act)"></b>8 beat baseline</span><span><b style="background:#3A4557"></b>2 matched</span><span><b style="background:var(--surface2)"></b>2 skipped</span></div>
         <div class="streak"><div class="sd hit">W1</div><div class="sd hit">W2</div><div class="sd hit">W3</div><div class="sd">W4</div></div>
       </div>
+      <div class="trust">
+        <div class="trust-top"><h4>Value delivered</h4><span>this month</span></div>
+        <div class="value-grid">
+          <div class="vitem"><b>+412k</b><span>extra reach from advice</span></div>
+          <div class="vitem"><b>2</b><span>comment storms calmed</span></div>
+          <div class="vitem"><b>3</b><span>viral windows hit</span></div>
+          <div class="vitem"><b>9</b><span>drafts improved</span></div>
+        </div>
+      </div>
+      <div class="report-row">
+        <span class="ri">&#128196;</span>
+        <div style="flex:1"><div class="rt1">Weekly report</div><div class="rt2">Mondays 9am &middot; last one 2 days ago</div></div>
+        <button class="btn btn-ghost" style="padding:8px 12px;font-size:11.5px" onclick="toast('Weekly report PDF downloading.')">Download</button>
+      </div>
       <div class="rate">
         <p><b>Was the 6:40pm advice useful?</b><br>Every rating sharpens the next one.</p>
         <div class="rate-btns"><button class="rate-btn" onclick="rate(this)">&#128077; Useful</button><button class="rate-btn" onclick="rate(this)">&#128078; Not really</button></div>
@@ -369,6 +434,11 @@ input,textarea{font-family:var(--body)}
     <div class="scroll" style="padding-top:70px">
       <button class="back" onclick="nav('today')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>Today</button>
       <h2 class="vh" style="margin-top:10px">Needs you</h2>
+      <button class="alert-item" onclick="nav('arte');arteExplain('crisis')">
+        <div class="ai-top"><span class="ai-dot" style="background:var(--rose)"></span><span class="ai-title">Comment cluster turning negative</span></div>
+        <div class="ai-body">Sana Shorts, 14 in 30 minutes. <b>Calm reply drafted.</b></div>
+        <span class="ai-cta">Open in Art-E &rarr;</span>
+      </button>
       <button class="alert-item" onclick="nav('arte');arteExplain('timing')">
         <div class="ai-top"><span class="ai-dot" style="background:var(--rose)"></span><span class="ai-title">Your last 3 posts underperformed</span></div>
         <div class="ai-body">Your audience moved to evenings. <b>One change recommended.</b></div>
@@ -385,6 +455,20 @@ input,textarea{font-family:var(--body)}
         <span class="ai-cta">See the win &rarr;</span>
       </button>
       <p class="quiet">Alerts only interrupt when action is needed.<br><b>Tune this under Settings.</b></p>
+    </div>
+  </section>
+
+  <!-- ═══ DISCOVER ═══ -->
+  <section class="scr" id="scr-discover">
+    <div class="scroll" style="padding-top:70px">
+      <button class="back" onclick="nav('today')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>Today</button>
+      <h2 class="vh" style="margin-top:10px">Discover</h2>
+      <p style="font-size:12px;color:var(--t2);line-height:1.55;margin:-8px 0 14px">Found by real audience overlap across your 5 pages, not hashtags. The best ones alert you.</p>
+      <button class="card" onclick="fillMD('homecooked');show('disco')"><div class="mrow"><div><div class="card-line">@HomeCookedDaily</div><p class="card-why" style="margin-top:3px">Family cooking &middot; 96k &middot; fills your quiet 1-3pm</p></div><div class="ovl"><b>41%</b><span>overlap</span></div></div></button>
+      <button class="card" onclick="fillMD('spiceroute');show('disco')"><div class="mrow"><div><div class="card-line">@SpiceRouteStories</div><p class="card-why" style="margin-top:3px">Weeknight curries &middot; 71k &middot; morning crowd</p></div><div class="ovl"><b>33%</b><span>overlap</span></div></div></button>
+      <button class="card" onclick="fillMD('budgetbites');show('disco')"><div class="mrow"><div><div class="card-line">@BudgetBites</div><p class="card-why" style="margin-top:3px">Student meals &middot; 52k &middot; strong under-25s</p></div><div class="ovl"><b>28%</b><span>overlap</span></div></div></button>
+      <button class="card" onclick="fillMD('plantplates');show('disco')"><div class="mrow"><div><div class="card-line">@PlantPlates</div><p class="card-why" style="margin-top:3px">Veg swaps &middot; 44k &middot; Sunday mornings</p></div><div class="ovl"><b>24%</b><span>overlap</span></div></div></button>
+      <p class="quiet">Matches surface automatically.<br><b>Manual creator search arrives after launch.</b></p>
     </div>
   </section>
 
@@ -418,18 +502,22 @@ input,textarea{font-family:var(--body)}
         <div class="sr2" id="sread2">Drivers: <b>save-bait</b> + <b>reel format</b> + <b>food trend</b>. Add a number for a further lift.</div>
       </div>
     </div>
-    <div class="besttime"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00C4A0" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span>Best window: <b>today 6:40pm</b></span><span class="mono">2.4x &middot; 87%</span></div>
-    <button class="btn btn-primary" style="width:100%" onclick="hideSheets();toast('Scheduled for 6:40pm. Art-E reports back tomorrow.')">Schedule for 6:40pm</button>
+    <div class="timepills">
+      <button class="tpill on" onclick="pickTime(this,0)"><b>Today 6:40pm</b><span>2.4x &middot; 87%</span></button>
+      <button class="tpill" onclick="pickTime(this,1)"><b>Thu 8pm</b><span>2.1x &middot; 81%</span></button>
+      <button class="tpill" onclick="pickTime(this,2)"><b>Sun 10am</b><span>1.7x &middot; 74%</span></button>
+    </div>
+    <button class="btn btn-primary" style="width:100%" id="schedBtn" onclick="hideSheets();toast('Scheduled for '+TIMES[schedSel]+'. Art-E reports back after it runs.')">Schedule for Today 6:40pm</button>
   </div>
 
   <div class="sheet" id="sh-disco">
     <div class="grab"></div>
     <span class="ctag opp" style="display:inline-block;margin-bottom:11px">Opportunity &middot; found by the network</span>
-    <h4>@HomeCookedDaily</h4>
-    <p class="s-sub">Family cooking, 96k followers. Found through audience overlap, not hashtags. You have never interacted, your audiences already do.</p>
-    <div class="dcard"><h5>Audience overlap <b>41% &middot; 8,200 people</b></h5>
+    <h4 id="md-name">@HomeCookedDaily</h4>
+    <p class="s-sub" id="md-sub">Family cooking, 96k followers. Found through audience overlap, not hashtags. You have never interacted, your audiences already do.</p>
+    <div class="dcard"><h5>Audience overlap <b id="md-ovl">41% &middot; 8,200 people</b></h5>
       <svg width="100%" height="76" viewBox="0 0 340 76"><circle cx="120" cy="38" r="30" fill="rgba(0,196,160,.16)" stroke="#00C4A0" stroke-width="1.5"/><circle cx="172" cy="38" r="30" fill="rgba(139,123,255,.16)" stroke="#8B7BFF" stroke-width="1.5"/><text x="88" y="42" font-size="10" fill="#F2F4F8" font-weight="700">You</text><text x="186" y="42" font-size="10" fill="#F2F4F8" font-weight="700">Them</text><text x="238" y="34" font-size="9.5" fill="#9AA3B2">8,200 shared</text><text x="238" y="50" font-size="9" fill="#5E6875" font-family="monospace">de-identified</text></svg></div>
-    <div class="dcard"><h5>Why this works</h5><div style="font-size:12.5px;color:var(--t2);line-height:1.65">Tone <b style="color:var(--t1)">high match</b> (home cooking, family). Their strong hours are <b style="color:var(--t1)">1 to 3pm</b>, your quiet window. Estimated <b style="color:var(--act)">+12k reach</b> from one collab reel.</div></div>
+    <div class="dcard"><h5>Why this works</h5><div style="font-size:12.5px;color:var(--t2);line-height:1.65" id="md-why">Tone <b style="color:var(--t1)">high match</b> (home cooking, family). Their strong hours are <b style="color:var(--t1)">1 to 3pm</b>, your quiet window. Estimated <b style="color:var(--act)">+12k reach</b> from one collab reel.</div></div>
     <button class="btn btn-primary" style="width:100%" onclick="hideSheets();nav('arte');arteExplain('collab')">Ask Art-E to draft an intro</button>
     <button class="btn btn-ghost" style="width:100%;margin-top:9px" onclick="hideSheets();toast('Saved under Opportunities in your feed.')">Save for later</button>
   </div>
@@ -442,6 +530,10 @@ input,textarea{font-family:var(--body)}
     <div class="set-row"><div><div class="sl">Quiet hours 10pm to 8am</div><div class="sd2">Overnight findings wait for the morning.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
     <div class="set-row"><div><div class="sl">Evidence with every answer</div><div class="sd2">Sources + confidence on all AI output. Always on.</div></div><button class="tog on" style="opacity:.75;cursor:not-allowed"></button></div>
     <div class="set-row"><div><div class="sl">Learn from my ratings</div><div class="sd2">Thumbs train what Art-E surfaces next.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+    <div class="set-row"><div><div class="sl">Auto-act on trusted tasks</div><div class="sd2">Off by default. Art-E always asks first.</div></div><button class="tog" onclick="this.classList.toggle('on')"></button></div>
+    <div class="set-row"><div><div class="sl">Storm &amp; viral alerts</div><div class="sd2">Comment storms within minutes, viral moments as they break.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+    <div class="set-row"><div><div class="sl">Creator match alerts</div><div class="sd2">Only above 25% real overlap.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+    <div class="set-row"><div><div class="sl">Pro plan &middot; &pound;99/mo</div><div class="sd2">5 of 10 pages &middot; renews 1 Aug &middot; invoices by email</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="toast('Plan &amp; invoices open here in the live product.')">Manage</button></div>
     <h4 style="margin-top:16px;font-size:15px">Your pages</h4>
     <div style="margin-top:10px">
       <div class="page-card"><div class="pav" style="background:rgba(0,196,160,.12);color:var(--act)">SK</div><div class="pinfo"><div class="pname">Sana's Kitchen</div><div class="pstat"><span class="hdot" style="background:var(--act)"></span>Healthy &middot; 128k</div></div></div>
@@ -468,7 +560,7 @@ input,textarea{font-family:var(--body)}
   <div class="homebar"></div>
 </div></div>
 
-<div class="caption"><b>ArtemisAI v3 &middot; mobile</b><span>Today &middot; Art-E &middot; Wins, plus alerts, compose scoring, discovery, settings</span><span class="k">interactive</span></div>
+<div class="caption"><b>ArtemisAI v3 &middot; mobile</b><span>Today &middot; Art-E &middot; Wins &middot; Discover, plus crisis replies, briefing, alerts, scoring, reports, settings</span><span class="k">interactive</span></div>
 
 <script>
 /* nav */
@@ -484,6 +576,18 @@ function hideSheets(){ document.getElementById('veil').classList.remove('on'); d
 
 /* Art-E engine (same canned answers as web) */
 const A = {
+  crisis:{ q:'What is happening on Sana Shorts?',
+    html:`<p><b>A comment cluster turned negative, and it is containable.</b></p>
+    <p>14 negative comments in 30 minutes, sentiment 0.78 to <span class="hl">0.51</span>. One cluster reacting to the thumbnail wording, not a broad shift.</p>
+    <p style="border-left:2px solid var(--line);padding-left:11px;color:var(--t2)">"Fair point, the caption oversold it. Full method is in the pinned comment, next week's version fixes exactly this. Thanks for keeping me honest."</p>
+    <div class="ground"><b>Why I believe this:</b> 214 comments read &middot; cluster of 9 accounts &middot; matches the March pattern &middot; confidence 84%</div>`,
+    rec:{line:'Send the drafted reply', why:'Replying inside the hour settled the March case in 3 hours. Nothing sends without you.', cta:'Send the reply', act:"doMove('mv2','Reply sent on the thread.')"} },
+  briefing:{ q:'Morning briefing',
+    html:`<p><b>Good morning. Two things worth knowing, one to do.</b></p>
+    <p><span class="hl">Overnight:</span> +2,100 reach while you slept, network up 18% on last Tuesday, Quick Bites led it.</p>
+    <p><span class="hl">Needs you:</span> the pasta reel timing. <span class="hl">Worth a look:</span> a 41% overlap creator match.</p>
+    <div class="ground"><b>Sources:</b> overnight sync, 5 pages &middot; 96 posts benchmarked &middot; 7:02am</div>`,
+    rec:{line:'Start with the reel', why:'One tap and the main move is done.', cta:'Schedule for 6:40pm', act:"doMove('mv1','Scheduled for 6:40pm.')"} },
   timing:{ q:'Why did my last three posts underperform?',
     html:`<p><b>Your audience moved, your posting time did not.</b></p>
     <p>62% of your engaged followers are now most active <span class="hl">6 to 8pm</span>. In May it was 1 to 3pm. Your last three posts went out at lunchtime, into the quiet.</p>
@@ -543,6 +647,20 @@ function scoreDraft(text){
 function rate(btn){ btn.parentElement.querySelectorAll('.rate-btn').forEach(b=>b.classList.remove('chosen')); btn.classList.add('chosen'); document.getElementById('rateThanks').classList.add('show'); }
 let toastT; function toast(m){ const t=document.getElementById('toast'); document.getElementById('toastmsg').innerHTML=m; t.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('on'),3200); }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') hideSheets(); });
+const TIMES=['Today 6:40pm','Thu 8pm','Sun 10am'];
+let schedSel=0;
+function pickTime(el,i){ schedSel=i; document.querySelectorAll('.tpill').forEach(t=>t.classList.remove('on')); el.classList.add('on');
+  document.getElementById('schedBtn').textContent='Schedule for '+TIMES[i]; }
+const MDISCO={
+ homecooked:{n:'@HomeCookedDaily',s:'Family cooking, 96k followers. Found through audience overlap, not hashtags. You have never interacted, your audiences already do.',o:'41% \u00b7 8,200 people',w:'Tone <b style="color:var(--t1)">high match</b> (home cooking, family). Their strong hours are <b style="color:var(--t1)">1 to 3pm</b>, your quiet window. Estimated <b style="color:var(--act)">+12k reach</b> from one collab reel.'},
+ spiceroute:{n:'@SpiceRouteStories',s:'Weeknight curries, 71k followers. Their morning crowd barely overlaps your evening peak, which is exactly the point.',o:'33% \u00b7 6,100 people',w:'Tone <b style="color:var(--t1)">high match</b>. Their <b style="color:var(--t1)">8 to 10am</b> strength complements your evenings. Estimated <b style="color:var(--act)">+8k reach</b>.'},
+ budgetbites:{n:'@BudgetBites',s:'Student meals, 52k followers. Strongest with your under-25 segment, the one you reach least.',o:'28% \u00b7 4,400 people',w:'Their under-25 core is <b style="color:var(--t1)">your thinnest segment</b>. One duet-style short is the natural format. Estimated <b style="color:var(--act)">+6k reach</b>.'},
+ plantplates:{n:'@PlantPlates',s:'Veg swaps, 44k followers. A Sunday-morning audience your pages barely touch.',o:'24% \u00b7 3,600 people',w:'<b style="color:var(--t1)">Sunday 9 to 11am</b> is theirs and empty for you. A veg-swap of your pasta reel fits both. Estimated <b style="color:var(--act)">+5k reach</b>.'}};
+function fillMD(k){ const m=MDISCO[k]; if(!m) return;
+  document.getElementById('md-name').textContent=m.n;
+  document.getElementById('md-sub').textContent=m.s;
+  document.getElementById('md-ovl').textContent=m.o;
+  document.getElementById('md-why').innerHTML=m.w; }
 const t=new Date(); document.getElementById('sbtime').textContent=String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');
 
 /* ═══ FABLE MAGIC (mobile) ═══ */

@@ -239,6 +239,50 @@ input,textarea{font-family:var(--body)}
 .toast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,80px);background:var(--surface2);border:1px solid rgba(0,196,160,.4);border-radius:14px;padding:13px 20px;font-size:13.5px;font-weight:600;display:flex;gap:10px;align-items:center;z-index:120;transition:.35s cubic-bezier(.34,1.4,.5,1);opacity:0}
 .toast.on{transform:translate(-50%,0);opacity:1}
 .toast b{color:var(--arte);font-weight:600}
+
+/* ═══ fable-magic additions ═══ */
+.milestone{display:flex;align-items:center;gap:12px;background:linear-gradient(140deg, rgba(255,194,75,.10), var(--surface) 70%);border:1px solid rgba(255,194,75,.35);border-radius:16px;padding:12px 16px;margin:0 0 22px}
+.milestone .mtx{flex:1;font-size:13.5px}
+.milestone .mtx b{color:var(--gold);font-weight:700}
+.milestone .btn{padding:8px 15px;font-size:12.5px}
+.milestone .mx{color:var(--t3);font-size:15px;padding:4px 8px}
+.brief-card{display:flex;align-items:center;gap:14px;background:linear-gradient(150deg,#141030 0%, var(--surface) 65%);border:1px solid rgba(139,123,255,.3);border-radius:18px;padding:15px 17px;margin-bottom:22px;width:100%;text-align:left;transition:.15s;cursor:pointer}
+.brief-card:hover{border-color:rgba(139,123,255,.55)}
+.brief-card .bico{width:38px;height:38px;border-radius:12px;background:rgba(139,123,255,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px}
+.brief-card .bt1{font-size:14px;font-weight:700}
+.brief-card .bt2{font-size:12px;color:var(--t2);margin-top:2px}
+.brief-card .bstats{margin-left:auto;display:flex;gap:18px}
+.brief-card .bs{text-align:right}
+.brief-card .bs b{display:block;font-family:var(--disp);font-size:16px;font-weight:800;color:var(--t1)}
+.brief-card .bs span{font-size:9px;color:var(--t3);letter-spacing:.6px;text-transform:uppercase}
+.ctag.crisis{color:var(--rose);background:rgba(255,92,116,.09);border:1px solid rgba(255,92,116,.3)}
+.card.crisis-card{background:linear-gradient(150deg, rgba(255,92,116,.06), var(--surface) 55%);border-color:rgba(255,92,116,.35)}
+.value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.vitem{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:13px;padding:12px;text-align:center}
+.vitem b{display:block;font-family:var(--disp);font-size:19px;font-weight:800;color:var(--t1)}
+.vitem span{font-size:9.5px;color:var(--t3);line-height:1.35;display:block;margin-top:4px}
+.report-row{display:flex;align-items:center;gap:13px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:15px 17px;margin-bottom:12px}
+.report-row .ri{width:38px;height:38px;border-radius:11px;background:rgba(87,181,240,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.report-row .rt1{font-size:14px;font-weight:700}
+.report-row .rt2{font-size:11.5px;color:var(--t3);margin-top:1px}
+.ring{position:relative;width:44px;height:44px;flex-shrink:0}
+.ring svg{transform:rotate(-90deg)}
+.ring .rn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-size:12.5px;font-weight:800}
+.timepills{display:flex;gap:8px;margin-bottom:16px}
+.tpill{flex:1;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 8px;text-align:center;transition:.15s;cursor:pointer}
+.tpill b{display:block;font-size:12.5px;font-weight:700}
+.tpill span{font-family:var(--mono);font-size:9.5px;color:var(--t3)}
+.tpill.on{border-color:rgba(0,196,160,.5);background:rgba(0,196,160,.07)}
+.tpill.on span{color:var(--act)}
+.inv-row{display:flex;align-items:center;justify-content:space-between;padding:11px 2px;border-top:1px solid var(--line);font-size:13px}
+.inv-row span{color:var(--t2)}
+.inv-row .paid{font-size:10px;font-weight:700;color:var(--act);background:rgba(0,196,160,.08);border:1px solid rgba(0,196,160,.3);border-radius:99px;padding:2px 9px;margin:0 10px}
+.ppbar{margin-bottom:11px}
+.ppbar .pl{display:flex;justify-content:space-between;font-size:11.5px;color:var(--t2);margin-bottom:5px}
+.ppbar .pl b{color:var(--t1);font-family:var(--mono);font-size:10.5px}
+.ppbar .pt{height:7px;border-radius:99px;background:var(--surface2);overflow:hidden}
+.ppbar .pt i{display:block;height:100%;border-radius:99px}
+
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
 @media (max-width:1180px){.app{grid-template-columns:76px 1fr}.arail{display:none}}
 
@@ -396,8 +440,8 @@ input,textarea{font-family:var(--body)}
       <h1 class="vh">Today</h1>
       <div class="hero">
         <div class="hero-eyebrow"><span class="pulse"></span>Your next move</div>
-        <div class="hero-title">Post the pasta reel at 6:40pm today</div>
-        <p class="hero-why">Art-E predicts <b>2.4&times; your usual reach</b><span class="conf">87% confident</span></p>
+        <div class="hero-title" id="heroTitle">Post the pasta reel at 6:40pm today</div>
+        <p class="hero-why" id="heroWhy">Art-E predicts <b>2.4&times; your usual reach</b><span class="conf">87% confident</span></p>
         <div class="hero-actions">
           <button class="btn btn-primary" onclick="toast('Scheduled for 6:40pm. Art-E will report back tomorrow.')">Schedule it</button>
           <button class="btn btn-ghost" style="color:var(--arte)" onclick="arteExplain('timing')">Why?</button>
@@ -423,44 +467,45 @@ input,textarea{font-family:var(--body)}
         </div>
       </div>
 
+      <div class="milestone" id="milestone"><span style="font-size:18px">&#127942;</span><div class="mtx"><b>Quick Bites UK crossed 64k followers.</b> Your fastest-growing page this quarter.</div><button class="btn btn-primary" onclick="toast('Win shared to your team feed.')">Share the win</button><button class="mx" onclick="document.getElementById('milestone').style.display='none'" aria-label="Dismiss">&times;</button></div>
+
+      <button class="brief-card" onclick="arteExplain('briefing')">
+        <span class="bico">&#9728;&#65039;</span>
+        <span><span class="bt1" style="display:block">Morning briefing ready</span><span class="bt2" style="display:block">7:02am &middot; all 5 pages &middot; 2-min read &middot; open in Art-E</span></span>
+        <span class="bstats"><span class="bs"><b>+18%</b><span>network reach</span></span><span class="bs"><b>3.4k</b><span>shares overnight</span></span><span class="bs"><b>2</b><span>moves today</span></span></span>
+      </button>
+
       <div class="feed-label"><h3>While you were away</h3><span class="newchip">&#10022; 3 new</span></div>
 
-      <button class="card" onclick="arteExplain('briefing')">
-        <div class="card-top"><span class="ctag brief">Briefing</span><span class="card-page">All pages</span><span class="card-time">7:02am</span></div>
-        <div class="card-line">Your morning briefing is ready, <b>2-minute read</b></div>
-        <p class="card-why">Overnight: +2,100 reach while you slept, one thing needs you, one opportunity appeared.</p>
-        <span class="card-act violet">Read it with Art-E &rarr;</span>
+      <button class="card crisis-card" data-page="ss" onclick="arteExplain('crisis')">
+        <div class="card-top"><span class="ctag crisis">Needs a reply</span><span class="card-page">Sana Shorts</span><span class="card-time">18m ago</span></div>
+        <div class="card-line">A comment cluster is turning <b>negative</b> on last night's short</div>
+        <p class="card-why">14 negative comments in 30 minutes, sentiment dipped from 0.78 to 0.51. Art-E has drafted a calm reply in your voice. Replying inside the hour usually settles it.</p>
+        <span class="card-act" style="color:var(--rose)">See the drafted reply &rarr;</span>
       </button>
 
-      <button class="card win-card" onclick="toast('Milestone card shared to your page story. &#127881;')">
-        <div class="card-top"><span class="ctag win">Milestone</span><span class="card-page">Sana's Kitchen</span><span class="card-time">this week</span></div>
-        <div class="card-line">Sana's Kitchen crossed <b>128k followers</b></div>
-        <p class="card-why">Up 9k this month, your fastest-growing page. Worth celebrating in public.</p>
-        <span class="card-act goldc">Share the win &rarr;</span>
-      </button>
-
-      <button class="card" onclick="openDiscovery('homecooked')">
+      <button class="card" data-page="sk" onclick="openDiscovery('homecooked')">
         <div class="card-top"><span class="ctag opp">Opportunity</span><span class="card-page">Sana's Kitchen</span><span class="card-time">2h ago</span></div>
         <div class="card-line">Creator match found: <b>@HomeCookedDaily</b></div>
         <p class="card-why">41% of their audience overlaps yours, and they post when you are quiet. One collab is worth an estimated +12k reach.</p>
         <span class="card-act violet">See the match &rarr;</span>
       </button>
 
-      <button class="card" onclick="arteExplain('timing')">
+      <button class="card" data-page="all" onclick="arteExplain('timing')">
         <div class="card-top"><span class="ctag sig">Signal</span><span class="card-page">All pages</span><span class="card-time">today</span></div>
         <div class="card-line">Your audience shifted to <b>evenings</b></div>
         <p class="card-why">62% of your engaged followers are now most active 6 to 8pm. In May it was lunchtime. This is why recent posts dipped.</p>
         <span class="card-act violet">Art-E explains &rarr;</span>
       </button>
 
-      <button class="card" onclick="openCompose()">
+      <button class="card" data-page="qb" onclick="openCompose()">
         <div class="card-top"><span class="ctag pred">Prediction</span><span class="card-page">Quick Bites UK</span><span class="card-time">today</span></div>
         <div class="card-line">Friday looks strong for a <b>15-second recipe short</b></div>
         <p class="card-why">Short-form food content is trending up 22% across your network this week. A draft scored now would ride it.</p>
         <span class="card-act">Draft it with a live score &rarr;</span>
       </button>
 
-      <button class="card win-card" onclick="setView('wins')">
+      <button class="card win-card" data-page="sk" onclick="setView('wins')">
         <div class="card-top"><span class="ctag win">Win</span><span class="card-page">Sana's Kitchen</span><span class="card-time">yesterday</span></div>
         <div class="card-line">Tuesday's reel beat its prediction by <b>31%</b></div>
         <p class="card-why">You followed the timing advice. 4 of your last 5 followed recommendations beat your baseline.</p>
@@ -503,6 +548,23 @@ input,textarea{font-family:var(--body)}
         <p class="card-why">You took the recipe-card format suggestion. Saves predict repeat reach for this page.</p>
         <span class="card-act goldc">Ask Art-E what worked &rarr;</span>
       </button>
+      <div class="trust" style="margin-bottom:12px">
+        <div class="trust-top"><h4>Value delivered</h4><span>this month</span></div>
+        <div class="value-grid">
+          <div class="vitem"><b>+412k</b><span>extra reach from followed advice</span></div>
+          <div class="vitem"><b>2</b><span>comment storms calmed early</span></div>
+          <div class="vitem"><b>3</b><span>viral windows hit on time</span></div>
+          <div class="vitem"><b>9</b><span>drafts improved before publish</span></div>
+        </div>
+      </div>
+
+      <div class="report-row">
+        <span class="ri">&#128196;</span>
+        <div style="flex:1"><div class="rt1">Weekly report</div><div class="rt2">Mondays 9am &middot; reach, wins, and what Art-E changed &middot; last one 2 days ago</div></div>
+        <button class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px" onclick="toast('Weekly report PDF downloading.')">Download</button>
+        <button class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px" onclick="toast('Fresh report generating, ready in a minute.')">Generate new</button>
+      </div>
+
       <div class="rate">
         <p><b>Was the 6:40pm advice useful?</b><br>Every rating sharpens your next recommendation.</p>
         <div class="rate-btns">
@@ -521,12 +583,12 @@ input,textarea{font-family:var(--body)}
         <div style="text-align:left"><div style="font-size:15px;font-weight:700">Combined view</div><div style="font-size:12.5px;color:var(--t2);margin-top:2px">Art-E reads all five pages as one network: overlap, spillover, cross-posting windows.</div></div>
         <button class="tog on" onclick="this.classList.toggle('on')" aria-label="Combined view"></button>
       </div>
-      <div class="page-card"><div class="pav" style="background:rgba(0,196,160,.12);color:var(--act)">SK</div><div class="pinfo"><div class="pname">Sana's Kitchen</div><div class="pstat"><span class="hdot" style="background:var(--act)"></span>Healthy &middot; next move ready &middot; 128k followers</div></div><span class="pchev">&rsaquo;</span></div>
-      <div class="page-card"><div class="pav" style="background:rgba(87,181,240,.12);color:var(--sky)">QB</div><div class="pinfo"><div class="pname">Quick Bites UK</div><div class="pstat"><span class="hdot" style="background:var(--act)"></span>Healthy &middot; short-form trend rising &middot; 64k</div></div><span class="pchev">&rsaquo;</span></div>
-      <div class="page-card"><div class="pav" style="background:rgba(255,194,75,.12);color:var(--gold)">FF</div><div class="pinfo"><div class="pname">Family Feasts</div><div class="pstat"><span class="hdot" style="background:var(--gold)"></span>Watch &middot; engagement dipped 8% this week</div></div><span class="pchev">&rsaquo;</span></div>
-      <div class="page-card"><div class="pav" style="background:rgba(139,123,255,.12);color:var(--arte)">MM</div><div class="pinfo"><div class="pname">Midnight Munchies</div><div class="pstat"><span class="hdot" style="background:var(--act)"></span>Healthy &middot; strong 10pm window</div></div><span class="pchev">&rsaquo;</span></div>
-      <div class="page-card"><div class="pav" style="background:rgba(255,92,116,.12);color:var(--rose)">SS</div><div class="pinfo"><div class="pname">Sana Shorts</div><div class="pstat"><span class="hdot" style="background:var(--rose)"></span>Needs you &middot; 3 posts under baseline, Art-E has a fix</div></div><span class="pchev">&rsaquo;</span></div>
-      <button class="btn btn-ghost" style="width:100%;margin-top:6px" onclick="toast('Facebook connect flow opens here in the live product.')">+ Connect another page</button>
+      <button class="page-card" style="width:100%;text-align:left" onclick="openPagePanel('sk')"><div class="pav" style="background:rgba(0,196,160,.12);color:var(--act)">SK</div><div class="pinfo"><div class="pname">Sana's Kitchen</div><div class="pstat"><span class="hdot" style="background:var(--act)"></span>Healthy &middot; next move ready &middot; 128k followers</div></div><span class="ring"><svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" stroke="var(--surface2)" stroke-width="5" fill="none"/><circle cx="22" cy="22" r="17" stroke="var(--act)" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="106.8" stroke-dashoffset="15.0"/></svg><span class="rn">86</span></span><span class="pchev">&rsaquo;</span></button>
+      <button class="page-card" style="width:100%;text-align:left" onclick="openPagePanel('qb')"><div class="pav" style="background:rgba(87,181,240,.12);color:var(--sky)">QB</div><div class="pinfo"><div class="pname">Quick Bites UK</div><div class="pstat"><span class="hdot" style="background:var(--act)"></span>Healthy &middot; short-form trend rising &middot; 64k</div></div><span class="ring"><svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" stroke="var(--surface2)" stroke-width="5" fill="none"/><circle cx="22" cy="22" r="17" stroke="var(--sky)" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="106.8" stroke-dashoffset="20.3"/></svg><span class="rn">81</span></span><span class="pchev">&rsaquo;</span></button>
+      <button class="page-card" style="width:100%;text-align:left" onclick="openPagePanel('ff')"><div class="pav" style="background:rgba(255,194,75,.12);color:var(--gold)">FF</div><div class="pinfo"><div class="pname">Family Feasts</div><div class="pstat"><span class="hdot" style="background:var(--gold)"></span>Watch &middot; engagement dipped 8% this week</div></div><span class="ring"><svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" stroke="var(--surface2)" stroke-width="5" fill="none"/><circle cx="22" cy="22" r="17" stroke="var(--gold)" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="106.8" stroke-dashoffset="27.8"/></svg><span class="rn">74</span></span><span class="pchev">&rsaquo;</span></button>
+      <button class="page-card" style="width:100%;text-align:left" onclick="openPagePanel('mm')"><div class="pav" style="background:rgba(139,123,255,.12);color:var(--arte)">MM</div><div class="pinfo"><div class="pname">Midnight Munchies</div><div class="pstat"><span class="hdot" style="background:var(--act)"></span>Healthy &middot; strong 10pm window</div></div><span class="ring"><svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" stroke="var(--surface2)" stroke-width="5" fill="none"/><circle cx="22" cy="22" r="17" stroke="var(--arte)" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="106.8" stroke-dashoffset="18.2"/></svg><span class="rn">83</span></span><span class="pchev">&rsaquo;</span></button>
+      <button class="page-card" style="width:100%;text-align:left" onclick="openPagePanel('ss')"><div class="pav" style="background:rgba(255,92,116,.12);color:var(--rose)">SS</div><div class="pinfo"><div class="pname">Sana Shorts</div><div class="pstat"><span class="hdot" style="background:var(--rose)"></span>Needs you &middot; 3 posts under baseline, Art-E has a fix</div></div><span class="ring"><svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" stroke="var(--surface2)" stroke-width="5" fill="none"/><circle cx="22" cy="22" r="17" stroke="var(--rose)" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="106.8" stroke-dashoffset="44.9"/></svg><span class="rn">58</span></span><span class="pchev">&rsaquo;</span></button>
+      <button class="btn btn-ghost" style="width:100%;margin-top:6px" onclick="openConnect()">+ Connect another page</button>
     </section>
 
     <!-- ═══ VIEW: SETTINGS ═══ -->
@@ -544,11 +606,29 @@ input,textarea{font-family:var(--body)}
         <h4>Art-E &amp; your data</h4>
         <div class="set-row"><div><div class="sl">Show evidence with every answer</div><div class="sd2">Sources, sample size and confidence on all AI output. Always on, it is how Artemis works.</div></div><button class="tog on locked" aria-label="Evidence always on" title="Always on"></button></div>
         <div class="set-row"><div><div class="sl">Learn from my ratings</div><div class="sd2">Your thumbs up and down train what Art-E surfaces for you next.</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Learn from ratings"></button></div>
-        <div class="set-row"><div><div class="sl">Connected account</div><div class="sd2">Facebook &middot; Sana Rahman &middot; 5 pages authorised</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="toast('Manage connection opens the Facebook permissions flow.')">Manage</button></div>
+        <div class="set-row"><div><div class="sl">Auto-act on trusted tasks</div><div class="sd2">Off by default. Art-E always asks first; turn on only if you want reshares and mutes handled automatically.</div></div><button class="tog" onclick="this.classList.toggle('on')" aria-label="Auto act"></button></div>
+        <div class="set-row"><div><div class="sl">Connected account</div><div class="sd2">Facebook &middot; Sana Rahman &middot; 5 pages authorised</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="openConnect()">Manage</button></div>
+      </div>
+      <div class="set-group">
+        <h4>Notifications</h4>
+        <div class="set-row"><div><div class="sl">Comment storms &amp; brand risk</div><div class="sd2">The one interruption worth having. Within minutes, with the drafted reply attached.</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Crisis alerts"></button></div>
+        <div class="set-row"><div><div class="sl">Going-viral moments</div><div class="sd2">When a post beats 2x its prediction, so you can ride it.</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Viral alerts"></button></div>
+        <div class="set-row"><div><div class="sl">New creator matches</div><div class="sd2">Only matches above 25% real audience overlap.</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Match alerts"></button></div>
+        <div class="set-row"><div><div class="sl">Weekly report ready</div><div class="sd2">Mondays 9am, one email, no pings.</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Weekly report"></button></div>
+      </div>
+      <div class="set-group">
+        <h4>Account &amp; plan</h4>
+        <div class="set-row"><div><div class="sl">Pro plan &middot; &pound;99/mo</div><div class="sd2">5 of 10 pages connected &middot; Art-E unlimited &middot; renews 1 Aug</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="openBilling()">Manage</button></div>
+        <div class="set-row"><div><div class="sl">Team</div><div class="sd2">Just you for now. Invite an editor or an agency seat.</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="toast('Invite sent flow opens here in the live product.')">Invite</button></div>
+        <div class="set-row"><div><div class="sl">Two-factor authentication</div><div class="sd2">Recommended. Adds an app check at sign-in.</div></div><button class="tog" onclick="this.classList.toggle('on');toast(this.classList.contains('on')?'Two-factor on.':'Two-factor off.')" aria-label="Two factor"></button></div>
+        <div class="set-row"><div><div class="sl">Export my data</div><div class="sd2">Everything Artemis holds about your pages, as CSV + JSON.</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="toast('Export started, we will email the archive.')">Export</button></div>
+        <div class="set-row"><div><div class="sl" style="color:var(--rose)">Delete account</div><div class="sd2">Removes pages, history, and trained preferences. No undo.</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px;color:var(--rose)" onclick="toast('Deletion needs email confirmation, check your inbox.')">Delete</button></div>
       </div>
       <p class="quiet" style="text-align:left">AI outputs are predictions with stated confidence, not guarantees. Artemis shows its sources so you can judge for yourself.</p>
 
     <!-- ═══ VIEW: DISCOVERY ═══ -->
+    </section>
+
     <section class="view" id="v-discovery">
       <div class="greet">Found by the network, not by hashtags</div>
       <h1 class="vh">Discovery</h1>
@@ -657,6 +737,7 @@ input,textarea{font-family:var(--body)}
     <div class="chips" id="achips">
       <button class="chip" onclick="arteExplain('timing')">Why did my posts dip?</button>
       <button class="chip" onclick="arteExplain('friday')">What should I post Friday?</button>
+      <button class="chip" onclick="arteExplain('briefing')">Morning briefing</button>
       <button class="chip" onclick="openFullData()">Show me the full data</button>
     </div>
     <div class="abar">
@@ -687,8 +768,12 @@ input,textarea{font-family:var(--body)}
       <div class="sr2" id="sread2">Drivers: <b>save-bait phrasing</b> + <b>reel format</b> + <b>food trend</b>. Add a number to the promise for a further lift.</div>
     </div>
   </div>
-  <div class="besttime"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00C4A0" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span>Best window: <b>today 6:40pm</b></span><span class="mono">2.4x predicted &middot; 87% conf.</span></div>
-  <div style="display:flex;gap:10px"><button class="btn btn-primary" style="flex:1" onclick="closeAllOverlays();toast('Scheduled for 6:40pm. Art-E will report back tomorrow.')">Schedule for 6:40pm</button><button class="btn btn-ghost" onclick="closeAllOverlays()">Save draft</button></div>
+  <div class="timepills">
+    <button class="tpill on" onclick="pickTime(this,0)"><b>Today 6:40pm</b><span>2.4x &middot; 87% conf.</span></button>
+    <button class="tpill" onclick="pickTime(this,1)"><b>Thu 8:00pm</b><span>2.1x &middot; 81% conf.</span></button>
+    <button class="tpill" onclick="pickTime(this,2)"><b>Sun 10:00am</b><span>1.7x &middot; 74% conf.</span></button>
+  </div>
+  <div style="display:flex;gap:10px"><button class="btn btn-primary" style="flex:1" id="schedBtn" onclick="closeAllOverlays();toast('Scheduled for '+TIMES[schedSel][0]+'. Art-E will report back after it runs.')">Schedule for Today 6:40pm</button><button class="btn btn-ghost" onclick="closeAllOverlays()">Save draft</button></div>
 </div>
 
 <!-- ═══ DISCOVERY SLIDE-OVER ═══ -->
@@ -711,6 +796,46 @@ input,textarea{font-family:var(--body)}
   <div id="plist"></div>
 </div>
 
+<!-- ═══ PAGE PANEL ═══ -->
+<div class="slideover" id="pagepanel">
+  <button class="so-close" onclick="closeAllOverlays()">&times;</button>
+  <span class="ctag pred" style="display:inline-block;margin-bottom:14px">Page health &middot; explained, not just scored</span>
+  <h3 style="font-family:var(--disp);font-size:22px;font-weight:800;letter-spacing:-.3px;margin-bottom:4px" id="pp-name">Page</h3>
+  <p style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:16px" id="pp-sub"></p>
+  <div class="dcard" style="margin-bottom:11px"><h5>What makes the score <b id="pp-score"></b></h5>
+    <div class="ppbar"><div class="pl"><span>Timing discipline</span><b id="pp-t1"></b></div><div class="pt"><i id="pp-b1" style="background:var(--act)"></i></div></div>
+    <div class="ppbar"><div class="pl"><span>Content strength</span><b id="pp-t2"></b></div><div class="pt"><i id="pp-b2" style="background:var(--sky)"></i></div></div>
+    <div class="ppbar" style="margin-bottom:0"><div class="pl"><span>Consistency</span><b id="pp-t3"></b></div><div class="pt"><i id="pp-b3" style="background:var(--arte)"></i></div></div>
+  </div>
+  <div class="dcard" style="margin-bottom:11px"><h5>Last win</h5><div style="font-size:12.5px;color:var(--t2);line-height:1.6" id="pp-win"></div></div>
+  <div class="dcard" style="margin-bottom:14px"><h5>Next move</h5><div style="font-size:12.5px;color:var(--t2);line-height:1.6" id="pp-next"></div></div>
+  <button class="btn btn-primary" style="width:100%" onclick="closeAllOverlays();arteExplain('health')">Ask Art-E about this page</button>
+</div>
+
+<!-- ═══ CONNECT ═══ -->
+<div class="modal" id="connectm">
+  <h3>Connections</h3>
+  <p class="m-sub">Artemis reads pages you authorise, nothing more. Revoke any time.</p>
+  <div class="set-row" style="border-top:none"><div><div class="sl">Facebook Pages</div><div class="sd2">Sana Rahman &middot; 5 of 10 pages authorised</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="toast('Facebook permissions window opens here.')">Manage</button></div>
+  <div class="set-row"><div><div class="sl">Instagram</div><div class="sd2">Bring reels and stories into the same feed.</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="toast('Instagram connect flow opens here.')">Connect</button></div>
+  <div class="set-row"><div><div class="sl">X</div><div class="sd2">Cross-post signals, on the roadmap.</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px;opacity:.6" onclick="toast('X support lands after launch.')">Soon</button></div>
+  <div class="set-row"><div><div class="sl">Slack alerts</div><div class="sd2">Send comment-storm alerts to a channel.</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="toast('Slack webhook setup opens here.')">Set up</button></div>
+  <button class="btn btn-ghost" style="width:100%;margin-top:14px" onclick="closeAllOverlays()">Done</button>
+</div>
+
+<!-- ═══ BILLING ═══ -->
+<div class="modal" id="billingm">
+  <h3>Plan &amp; billing</h3>
+  <p class="m-sub">Pro &middot; &pound;99/month &middot; renews 1 Aug 2026 &middot; 5 of 10 pages used</p>
+  <div class="dcard" style="margin-bottom:12px"><h5>Included</h5><div style="font-size:12.5px;color:var(--t2);line-height:1.7">Up to 10 pages &middot; Art-E unlimited &middot; full data on demand &middot; weekly reports &middot; comment-storm alerts</div></div>
+  <div class="dcard"><h5>Recent invoices</h5>
+    <div class="inv-row" style="border-top:none"><span>1 Jul 2026</span><span style="margin-left:auto;color:var(--t1);font-weight:600">&pound;99.00</span><span class="paid">Paid</span><button class="btn btn-ghost" style="padding:6px 12px;font-size:11.5px" onclick="toast('Invoice PDF downloading.')">PDF</button></div>
+    <div class="inv-row"><span>1 Jun 2026</span><span style="margin-left:auto;color:var(--t1);font-weight:600">&pound;99.00</span><span class="paid">Paid</span><button class="btn btn-ghost" style="padding:6px 12px;font-size:11.5px" onclick="toast('Invoice PDF downloading.')">PDF</button></div>
+    <div class="inv-row"><span>1 May 2026</span><span style="margin-left:auto;color:var(--t1);font-weight:600">&pound;99.00</span><span class="paid">Paid</span><button class="btn btn-ghost" style="padding:6px 12px;font-size:11.5px" onclick="toast('Invoice PDF downloading.')">PDF</button></div>
+  </div>
+  <div style="display:flex;gap:10px;margin-top:14px"><button class="btn btn-ghost" style="flex:1" onclick="toast('Plan change flow opens here.')">Change plan</button><button class="btn btn-ghost" style="flex:1" onclick="closeAllOverlays()">Done</button></div>
+</div>
+
 <div class="toast" id="toast"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00C4A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span id="toastmsg">Done</span></div>
 
 <script>
@@ -729,6 +854,29 @@ document.addEventListener('click', e=>{ if(!e.target.closest('.pop') && !e.targe
 
 /* ── Art-E conversation engine (canned, grounded) ── */
 const A = {
+  crisis: {
+    q: 'What is happening on Sana Shorts?',
+    html: `<p><b>A comment cluster turned negative, and it is containable.</b></p>
+      <p>14 negative comments in 30 minutes on last night's short, sentiment dipped from 0.78 to <span class="hl">0.51</span>. It is one cluster reacting to the thumbnail wording, not a broad shift, the rest of the comments are normal.</p>
+      <p style="border-left:2px solid var(--line);padding-left:11px;color:var(--t2)">"Fair point, the caption oversold it. The full method is in the pinned comment, and next week's version fixes exactly this. Thanks for keeping me honest."</p>
+      <div class="ground"><b>Why I believe this:</b> 214 comments read &middot; cluster of 9 accounts &middot; matches a pattern from March that settled after one calm reply &middot; confidence 84%</div>`,
+    rec: {line:'Send the drafted reply, or edit first', why:'Replying inside the hour settled the March case in 3 hours. Nothing sends without you.', cta:'Send the reply', act:()=>toast('Reply posted to the thread. I will watch sentiment and report back.')}
+  },
+  briefing: {
+    q: 'Morning briefing',
+    html: `<p><b>Good morning. Two things worth knowing, one thing to do.</b></p>
+      <p><span class="hl">Overnight:</span> +2,100 reach while you slept, network reach up 18% on last Tuesday. Quick Bites led it, the 15-second format keeps working.</p>
+      <p><span class="hl">Needs you:</span> the pasta reel timing (your next move, one tap). <span class="hl">Worth a look:</span> a new creator match at 41% overlap.</p>
+      <div class="ground"><b>Sources:</b> overnight sync across 5 pages &middot; 96 posts benchmarked &middot; generated 7:02am</div>`,
+    rec: {line:'Start with the reel', why:'One tap and the main move is done, the rest can wait.', cta:'Schedule for 6:40pm', act:()=>toast('Scheduled for 6:40pm. Art-E will report back tomorrow.')}
+  },
+  health: {
+    q: 'Why is my page health 82?',
+    html: `<p><b>82 means healthy with one drag: consistency.</b></p>
+      <p>Timing discipline is strong (you post in recommended windows 8 times out of 10) and content strength is top quartile. The drag is <span class="hl">consistency</span>, two gaps of 4+ quiet days this month, and reach dips about 12% after each gap.</p>
+      <div class="ground"><b>How it is scored:</b> timing 40% &middot; content 35% &middot; consistency 25% &middot; trailing 30 days &middot; your pages only, no vanity benchmark</div>`,
+    rec: {line:'Close the gaps, not more volume', why:'One light post in each quiet stretch protects the score. The composer can draft it.', cta:'Draft a gap-filler', act:()=>{closeAllOverlays();openCompose();}}
+  },
   timing: {
     q: 'Why did my last three posts underperform?',
     html: `<p><b>Your audience moved, your posting time did not.</b></p>
@@ -787,8 +935,7 @@ function openDiscovery(key){ curDisco=key||'homecooked'; fillDisco(curDisco); ve
 function veilOn(){ document.getElementById('veil').classList.add('on'); }
 function closeAllOverlays(){
   document.getElementById('veil').classList.remove('on');
-  document.getElementById('compose').classList.remove('on');
-  document.getElementById('disco').classList.remove('on');
+  ['compose','disco','pagepanel','connectm','billingm'].forEach(id=>{const el=document.getElementById(id); if(el) el.classList.remove('on');});
 }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeAllOverlays(); closePop(); closePalette(); closeWs(); }});
 
@@ -827,7 +974,19 @@ function toggleWs(e){ e.stopPropagation(); closePop(); document.getElementById('
 function closeWs(){ document.getElementById('wpop').classList.remove('on'); }
 function pickWs(k){ const w=WS[k]; const btn=document.getElementById('wsbtn');
   btn.innerHTML='<span class="dot" style="background:var(--'+w[1]+')"></span>'+w[0]+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>';
-  closeWs(); toast('Viewing '+w[0]+'. Feed and analytics follow the selection.'); }
+  closeWs();
+  const HERO={
+    all:['Post the pasta reel at 6:40pm today','Art-E predicts <b>2.4&times; your usual reach</b><span class="conf">87% confident</span>'],
+    sk:['Post the pasta reel at 6:40pm today','Art-E predicts <b>2.4&times; your usual reach</b><span class="conf">87% confident</span>'],
+    qb:['Draft Friday\u2019s 15-second short now','Short-form is up <b>22% across your network</b><span class="conf">81% confident</span>'],
+    ff:['One roast-format post this weekend','Recovers this week\u2019s <b>8% engagement dip</b><span class="conf">76% confident</span>'],
+    mm:['Protect the 10pm window tonight','It has beaten baseline <b>6 weeks straight</b><span class="conf">88% confident</span>'],
+    ss:['Send the drafted reply on last night\u2019s short','Replying inside the hour <b>settles the cluster</b><span class="conf">84% confident</span>']};
+  const h=HERO[k]||HERO.all;
+  document.getElementById('heroTitle').innerHTML=h[0];
+  document.getElementById('heroWhy').innerHTML=h[1];
+  document.querySelectorAll('#v-today .card').forEach(c=>{ const p=c.dataset.page; c.style.display=(k==='all'||!p||p==='all'||p===k)?'':'none'; });
+  toast('Viewing '+w[0]+'.'); }
 document.addEventListener('click', e=>{ if(!e.target.closest('#wpop') && !e.target.closest('#wsbtn')) closeWs(); });
 
 /* moves */
@@ -913,6 +1072,29 @@ A.briefing = { q:'This morning\u2019s briefing',
  <p><span class="hl">Opportunity:</span> @HomeCookedDaily match strengthened to 41% overlap. Intro drafted when you want it.</p>
  <div class="ground"><b>Overnight scan:</b> 5 pages \u00b7 comments, saves, shares \u00b7 nothing else needs attention</div>`,
  rec:{line:'Start with the reel', why:'One tap and today\u2019s main move is done.', cta:'Schedule for 6:40pm', act:()=>{doMove('mv1','Scheduled for 6:40pm. Art-E will report back tomorrow.');}} };
+
+/* ── fable-magic helpers ── */
+const TIMES=[['Today 6:40pm','2.4x'],['Thu 8:00pm','2.1x'],['Sun 10:00am','1.7x']];
+let schedSel=0;
+function pickTime(el,i){ schedSel=i; document.querySelectorAll('.tpill').forEach(t=>t.classList.remove('on')); el.classList.add('on');
+  document.getElementById('schedBtn').textContent='Schedule for '+TIMES[i][0]; }
+
+const PAGEDATA={
+ sk:{name:"Sana's Kitchen",score:86,sub:'128k followers. Your anchor page, healthy and compounding.',t:[88,90,74],win:'The pasta reel, 2.9x usual reach against a 2.4x forecast, saves led it.',next:'Keep the 6:40pm window. A recipe-card carousel would suit Sunday.'},
+ qb:{name:'Quick Bites UK',score:81,sub:'64k followers. Fastest grower this quarter, short-form is the engine.',t:[84,86,66],win:'Crossed 64k this week, up 9k in a month on 15-second formats.',next:'Ride the short-form trend Friday, the composer has a scored draft ready.'},
+ ff:{name:'Family Feasts',score:74,sub:'38k followers. Engagement dipped 8% this week, worth a nudge, not a worry.',t:[70,82,64],win:'Sunday-roast carousel doubled its usual saves two weeks ago.',next:'One roast-format post this weekend recovers the dip, Art-E can draft it.'},
+ mm:{name:'Midnight Munchies',score:83,sub:'41k followers. A loyal 10pm crowd, small but the most consistent engagement.',t:[86,78,80],win:'The 10pm window has beaten baseline 6 weeks straight.',next:'Protect the 10pm slot, do not move it for cross-posting.'},
+ ss:{name:'Sana Shorts',score:58,sub:'22k followers. Needs you: 3 posts under baseline and a comment cluster to answer.',t:[52,74,48],win:'The March reply pattern settled a similar cluster in 3 hours.',next:'Send the drafted reply first, then one strong short resets the run.'}};
+function openPagePanel(k){ const p=PAGEDATA[k]; if(!p) return;
+  document.getElementById('pp-name').textContent=p.name;
+  document.getElementById('pp-sub').textContent=p.sub;
+  document.getElementById('pp-score').textContent=p.score+' / 100';
+  ['1','2','3'].forEach((n,i)=>{ document.getElementById('pp-t'+n).textContent=p.t[i]; document.getElementById('pp-b'+n).style.width=p.t[i]+'%'; });
+  document.getElementById('pp-win').textContent=p.win;
+  document.getElementById('pp-next').textContent=p.next;
+  veilOn(); document.getElementById('pagepanel').classList.add('on'); }
+function openConnect(){ veilOn(); document.getElementById('connectm').classList.add('on'); }
+function openBilling(){ veilOn(); document.getElementById('billingm').classList.add('on'); }
 </script>
 </body>
 </html>
