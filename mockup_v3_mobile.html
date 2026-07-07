@@ -213,6 +213,36 @@ input,textarea{font-family:var(--body)}
 .toast{position:absolute;bottom:104px;left:50%;transform:translate(-50%,60px);background:var(--surface2);border:1px solid rgba(0,196,160,.4);border-radius:13px;padding:11px 17px;font-size:12.5px;font-weight:600;display:flex;gap:9px;align-items:center;z-index:120;transition:.35s cubic-bezier(.34,1.4,.5,1);opacity:0;width:max-content;max-width:86%}
 .toast.on{transform:translate(-50%,0);opacity:1}
 
+/* deep-parity mobile */
+body.light{--bg:#F3F5F9; --shell:#FFFFFF; --surface:#FFFFFF; --surface2:#EDF1F6; --line:#DCE2EB; --t1:#12161F; --t2:#4E5A6B; --t3:#8B96A6}
+body.light .hero{background:linear-gradient(160deg,#E4F7F1 0%, #F2FBF8 58%, var(--surface) 100%);border-color:rgba(0,150,122,.35)}
+body.light .crisis-card{background:linear-gradient(150deg, rgba(255,92,116,.08), var(--surface) 55%)}
+body.light .brief-card{background:linear-gradient(150deg,#EFEBFF 0%, var(--surface) 65%)}
+body.light .m-rec{background:linear-gradient(160deg,#F0EDFF,#FFFFFF 70%)}
+body.light .wins-hero{background:linear-gradient(160deg, rgba(255,194,75,.18), var(--surface) 62%)}
+body.light .milestone{background:linear-gradient(140deg, rgba(255,194,75,.16), var(--surface) 70%)}
+body.light .spark{background:#F6F8FB}
+body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
+.cav{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:13px;flex-shrink:0}
+.cmeta{flex:1;text-align:left;min-width:0}
+.cname{font-size:13.5px;font-weight:700}
+.clast{font-size:11px;color:var(--t2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cunread{min-width:19px;height:19px;border-radius:99px;background:var(--act);color:#052019;font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 5px}
+.tb{max-width:82%;padding:10px 13px;border-radius:14px;font-size:12.5px;line-height:1.5;margin-bottom:8px}
+.tb.them{background:var(--surface);border:1px solid var(--line);border-radius:4px 14px 14px 14px}
+.tb.me{margin-left:auto;background:rgba(0,196,160,.13);border:1px solid rgba(0,196,160,.3);border-radius:14px 4px 14px 14px}
+.tb .who{display:block;font-size:9px;color:var(--t3);margin-bottom:2px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+.arec{display:flex;align-items:center;gap:8px;background:linear-gradient(150deg,#141030,var(--surface) 70%);border:1px solid rgba(139,123,255,.35);border-radius:12px;padding:9px 11px;margin:10px 0;font-size:11.5px;line-height:1.4}
+.arec b{color:var(--arte)}
+.chatbar{display:flex;gap:8px;margin-top:10px}
+.chatbar input{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:11px 15px;font-size:12.5px;color:var(--t1)}
+.rule{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:11px 13px;margin-bottom:9px}
+.rule .rl1{font-size:12.5px;font-weight:700}
+.rule .rl2{font-size:10.5px;color:var(--t3);margin-top:1px;line-height:1.35}
+.sched-row{display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 13px;margin:-6px 0 16px;font-size:11.5px}
+.sched-row b{font-weight:700}
+.sched-row .mono{font-family:var(--mono);font-size:9px;color:var(--act)}
+
 /* fable-magic mobile */
 .milestone{display:flex;align-items:center;gap:10px;background:linear-gradient(140deg, rgba(255,194,75,.10), var(--surface) 70%);border:1px solid rgba(255,194,75,.35);border-radius:15px;padding:11px 13px;margin:0 0 18px}
 .milestone .mtx{flex:1;font-size:12px;line-height:1.4}
@@ -284,6 +314,7 @@ input,textarea{font-family:var(--body)}
       <span class="amark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lgm)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lgm)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lgm)"/><defs><linearGradient id="lgm" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></span>
       <div class="grow"></div>
       <button class="hbtn" onclick="show('compose')" aria-label="New post"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+      <button class="hbtn" onclick="nav('inbox')" aria-label="Inbox"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span class="bdg" id="inboxBdg">2</span></button>
       <button class="hbtn" onclick="nav('discover')" aria-label="Discover"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5l-1.8 4.2-4.2 1.8 1.8-4.2 4.2-1.8z"/></svg></button>
       <button class="hbtn" onclick="nav('alerts')" aria-label="Alerts"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg><span class="bdg">3</span></button>
       <button class="pav-s" onclick="show('settings')" aria-label="Settings">S</button>
@@ -306,6 +337,8 @@ input,textarea{font-family:var(--body)}
         <div class="move" id="mv2"><span class="mtick">&#10003;</span><span class="mtxt"><span class="mt1">Send the drafted Shorts reply</span><span class="mt2">in your voice</span></span><button class="btn btn-ghost" onclick="doMove('mv2','Reply sent on the thread.')">Send</button></div>
         <div class="move" id="mv3"><span class="mtick">&#10003;</span><span class="mtxt"><span class="mt1">Approve the Friday draft</span><span class="mt2">score 61 &rarr; 83</span></span><button class="btn btn-ghost" onclick="doMove('mv3','Friday draft approved.')">OK</button></div>
       </div>
+
+      <div class="sched-row"><span>&#128197;</span><span style="flex:1">Scheduled: <b>pasta reel</b> &middot; 6:40pm</span><span class="mono">2.4x</span><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="show('compose')">Edit</button></div>
 
       <div class="milestone" id="milestone"><span style="font-size:15px">&#127942;</span><div class="mtx"><b>Quick Bites crossed 64k.</b> Fastest grower this quarter.</div><button class="btn btn-primary" onclick="toast('Win shared to your team feed.')">Share</button><button class="mx" onclick="document.getElementById('milestone').style.display='none'" aria-label="Dismiss">&times;</button></div>
 
@@ -381,6 +414,7 @@ input,textarea{font-family:var(--body)}
     </div>
     <div class="arte-inputbar">
       <input class="arte-input" placeholder="Ask anything&hellip;" onkeydown="if(event.key==='Enter')freeAsk(this)">
+      <button class="mic" style="width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--t2);flex-shrink:0" onclick="toast('Voice input arrives in the live app.')" aria-label="Voice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 19v3"/></svg></button>
       <button class="asend" onclick="freeAsk(document.querySelector('.arte-input'))" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
     </div>
   </section>
@@ -454,7 +488,23 @@ input,textarea{font-family:var(--body)}
         <div class="ai-body">2.9&times; usual reach against a 2.4&times; forecast.</div>
         <span class="ai-cta">See the win &rarr;</span>
       </button>
+      <div class="feed-label" style="margin-top:18px"><h3>Alert rules</h3><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Rule builder opens here in the live product.')">+ Rule</button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Comment storm on any page</div><div class="rl2">Within minutes, reply attached</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Post beats 2x prediction</div><div class="rl2">Ride it while it moves</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Match above 25% overlap</div><div class="rl2">Real overlap, never hashtags</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+      <button class="btn btn-ghost" style="width:100%;margin-top:4px" onclick="markAllReadM()">Mark all read</button>
       <p class="quiet">Alerts only interrupt when action is needed.<br><b>Tune this under Settings.</b></p>
+    </div>
+  </section>
+
+  <!-- ═══ INBOX ═══ -->
+  <section class="scr" id="scr-inbox">
+    <div class="scroll" style="padding-top:70px">
+      <button class="back" onclick="nav('today')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>Today</button>
+      <h2 class="vh" style="margin-top:10px">Inbox</h2>
+      <button class="card" style="display:flex;align-items:center;gap:11px" onclick="openChatM()"><span class="cav" style="background:rgba(139,123,255,.14);color:var(--arte)">HC</span><span class="cmeta"><span class="cname" style="display:block">Collab: @HomeCookedDaily</span><span class="clast" style="display:block">Maya: Tuesday works! What time?</span></span><span class="cunread">2</span></button>
+      <button class="card" style="display:flex;align-items:center;gap:11px" onclick="toast('This thread opens the same way. One chat is wired in this mockup.')"><span class="cav" style="background:rgba(87,181,240,.14);color:var(--sky)">QB</span><span class="cmeta"><span class="cname" style="display:block">Quick Bites editors</span><span class="clast" style="display:block">You: Friday short drafted, scoring 78.</span></span></button>
+      <p class="quiet">Chats live here, alerts under the bell.<br><b>Art-E reads a thread only when you invite it.</b></p>
     </div>
   </section>
 
@@ -507,6 +557,7 @@ input,textarea{font-family:var(--body)}
       <button class="tpill" onclick="pickTime(this,1)"><b>Thu 8pm</b><span>2.1x &middot; 81%</span></button>
       <button class="tpill" onclick="pickTime(this,2)"><b>Sun 10am</b><span>1.7x &middot; 74%</span></button>
     </div>
+    <button class="btn btn-ghost" style="width:100%;color:var(--arte);margin-bottom:9px" onclick="improveDraftM()">Improve with Art-E</button>
     <button class="btn btn-primary" style="width:100%" id="schedBtn" onclick="hideSheets();toast('Scheduled for '+TIMES[schedSel]+'. Art-E reports back after it runs.')">Schedule for Today 6:40pm</button>
   </div>
 
@@ -530,6 +581,9 @@ input,textarea{font-family:var(--body)}
     <div class="set-row"><div><div class="sl">Quiet hours 10pm to 8am</div><div class="sd2">Overnight findings wait for the morning.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
     <div class="set-row"><div><div class="sl">Evidence with every answer</div><div class="sd2">Sources + confidence on all AI output. Always on.</div></div><button class="tog on" style="opacity:.75;cursor:not-allowed"></button></div>
     <div class="set-row"><div><div class="sl">Learn from my ratings</div><div class="sd2">Thumbs train what Art-E surfaces next.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+    <div class="set-row"><div><div class="sl">Theme</div><div class="sd2">Dark by default. Light for bright rooms.</div></div>
+      <div class="seg" id="themeSeg" style="display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:3px"><button class="on" style="padding:6px 11px;border-radius:7px;font-size:11px;font-weight:600" onclick="setTheme('dark');segPickM(this)">Dark</button><button style="padding:6px 11px;border-radius:7px;font-size:11px;font-weight:600;color:var(--t3)" onclick="setTheme('light');segPickM(this)">Light</button></div></div>
+    <div class="set-row"><div><div class="sl">Voice replies</div><div class="sd2">Arrives with the live app.</div></div><button class="tog" onclick="this.classList.toggle('on');toast('Voice replies switch on in the live app.')"></button></div>
     <div class="set-row"><div><div class="sl">Auto-act on trusted tasks</div><div class="sd2">Off by default. Art-E always asks first.</div></div><button class="tog" onclick="this.classList.toggle('on')"></button></div>
     <div class="set-row"><div><div class="sl">Storm &amp; viral alerts</div><div class="sd2">Comment storms within minutes, viral moments as they break.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
     <div class="set-row"><div><div class="sl">Creator match alerts</div><div class="sd2">Only above 25% real overlap.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
@@ -557,6 +611,19 @@ input,textarea{font-family:var(--body)}
     <button class="btn btn-ghost" style="width:100%" onclick="hideSheets()">Back to Art-E</button>
   </div>
 
+  <div class="sheet" id="sh-chat">
+    <div class="grab"></div>
+    <h4>Collab: @HomeCookedDaily</h4>
+    <p class="s-sub">Maya &middot; usually replies fast</p>
+    <div class="tb them"><span class="who">Maya</span>Loved the pasta reel! Artemis pinged us about the overlap too. Keen to try a joint one.</div>
+    <div class="tb me"><span class="who">You</span>Same here. One reel, both audiences, split the edit?</div>
+    <div class="tb them"><span class="who">Maya</span>Tuesday works! What time were you thinking?</div>
+    <div class="arec"><span><b>Art-E recommends:</b> Tuesday 6:40pm, both audiences peak then, +12k combined.</span><button class="btn btn-primary" style="padding:6px 11px;font-size:10.5px;margin-left:auto;flex-shrink:0" onclick="useRecM()">Use</button></div>
+    <div id="chatmsgs"></div>
+    <div class="chatbar"><input id="chatinput" placeholder="Message Maya&hellip;" onkeydown="if(event.key==='Enter')sendChatM()"><button class="asend" onclick="sendChatM()" aria-label="Send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button></div>
+    <button class="chip" style="margin-top:11px" onclick="hideSheets();nav('arte');askArteM('Summarise this chat and suggest the next step')">&#10022; Ask Art-E about this chat</button>
+  </div>
+
   <div class="toast" id="toast"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00C4A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span id="toastmsg">Done</span></div>
   <div class="homebar"></div>
 </div></div>
@@ -577,6 +644,16 @@ function hideSheets(){ document.getElementById('veil').classList.remove('on'); d
 
 /* Art-E engine (same canned answers as web) */
 const A = {
+  chat:{ q:'Summarise this chat and suggest the next step',
+    html:`<p><b>Maya is in, the only open question is timing.</b></p>
+    <p>She agreed to a joint reel and asked for a time. Both audiences peak <span class="hl">Tuesday 6 to 8pm</span>.</p>
+    <div class="ground"><b>Read from:</b> this thread &middot; both pages' hourly engagement &middot; the 41% overlap map</div>`,
+    rec:{line:'Propose Tuesday 6:40pm', why:'I will put the message in your chat box.', cta:'Fill the reply', act:"openChatM();useRecM()"} },
+  improve:{ q:'Improve my draft',
+    html:`<p><b>Two changes lift it: a number in the promise, payoff first.</b></p>
+    <p>"3-ingredient" promises outperform on your pages, and saves peak when the hook lands in the first six words.</p>
+    <div class="ground"><b>Based on:</b> your last 60 posts &middot; save-rate by hook position &middot; confidence 79%</div>`,
+    rec:{line:'Apply it in the composer', why:'One tap rewrites the draft and rescores it.', cta:'Improve the draft', act:"show('compose');improveDraftM()"} },
   crisis:{ q:'What is happening on Sana Shorts?',
     html:`<p><b>A comment cluster turned negative, and it is containable.</b></p>
     <p>14 negative comments in 30 minutes, sentiment 0.78 to <span class="hl">0.51</span>. One cluster reacting to the thumbnail wording, not a broad shift.</p>
@@ -620,13 +697,27 @@ function arteExplain(key){
     th.scrollTop=th.scrollHeight;
   }, 850);
 }
+function routeAsk(v){
+  const t=v.toLowerCase();
+  if(/(dip|underperform|drop|why.*(post|reach)|timing|when.*post|best time)/.test(t)) return 'timing';
+  if(/(friday|what.*post|content idea|trend)/.test(t)) return 'friday';
+  if(/(collab|match|intro|creator|overlap|homecooked)/.test(t)) return 'collab';
+  if(/(crisis|negative|comment|storm|angry|reply)/.test(t)) return 'crisis';
+  if(/(brief|morning|overnight)/.test(t)) return 'briefing';
+  if(/(chat|maya|thread|next step)/.test(t)) return 'chat';
+  if(/(improve|better draft|rewrite)/.test(t)) return 'improve';
+  return null;
+}
 function freeAsk(inp){
   const v=inp.value.trim(); if(!v) return; inp.value='';
+  const key=routeAsk(v);
+  if(key && A[key]){ const orig=A[key].q; A[key].q=v; arteExplain(key); A[key].q=orig; return; }
   const th=document.getElementById('mthread');
   th.insertAdjacentHTML('beforeend', `<div class="msg m-user">${v.replace(/</g,'&lt;')}</div>`);
-  th.insertAdjacentHTML('beforeend', `<div class="msg m-arte"><p>In the live product I answer this from your data with sources. Try the chips above to see the real patterns.</p></div>`);
+  th.insertAdjacentHTML('beforeend', `<div class="msg m-arte"><p>In the live product I answer anything from your data, with sources. Angle it at timing, Friday content, the match, the Shorts cluster, or the briefing and I will show you the pattern.</p></div>`);
   th.scrollTop=th.scrollHeight;
 }
+function askArteM(q){ const i=document.querySelector('.arte-input'); i.value=q; freeAsk(i); }
 
 /* draft scorer */
 function scoreDraft(text){
@@ -648,6 +739,17 @@ function scoreDraft(text){
 function rate(btn){ btn.parentElement.querySelectorAll('.rate-btn').forEach(b=>b.classList.remove('chosen')); btn.classList.add('chosen'); document.getElementById('rateThanks').classList.add('show'); }
 let toastT; function toast(m){ const t=document.getElementById('toast'); document.getElementById('toastmsg').innerHTML=m; t.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('on'),3200); }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') hideSheets(); });
+function setTheme(t){ const b=document.body; const to=t||(b.classList.contains('light')?'dark':'light'); b.classList.toggle('light',to==='light'); toast(to==='light'?'Light theme on.':'Dark theme on.'); }
+function segPickM(btn){ [...btn.parentElement.children].forEach(x=>{x.classList.remove('on');x.style.color='var(--t3)';}); btn.classList.add('on'); btn.style.color=''; }
+function openChatM(){ hideSheets(); nav('inbox'); const bd=document.getElementById('inboxBdg'); if(bd) bd.style.display='none'; setTimeout(()=>show('chat'), 120); }
+function sendChatM(){ const i=document.getElementById('chatinput'); const v=i.value.trim(); if(!v) return; i.value='';
+  document.getElementById('chatmsgs').insertAdjacentHTML('beforeend', `<div class="tb me"><span class="who">You</span>${v.replace(/</g,'&lt;')}</div>`);
+  setTimeout(()=>{ document.getElementById('chatmsgs').insertAdjacentHTML('beforeend', `<div class="tb them"><span class="who">Maya</span>Perfect, locking it in. See you Tuesday!</div>`); }, 900); }
+function useRecM(){ const i=document.getElementById('chatinput'); i.value='Shall we say Tuesday 6:40pm? Artemis says both our audiences peak then.'; i.focus(); }
+function markAllReadM(){ document.querySelectorAll('.hbtn .bdg').forEach(b=>b.style.display='none'); toast('All read. Quiet until something needs you.'); }
+function improveDraftM(){ const ta=document.getElementById('draft');
+  ta.value="3-ingredient creamy garlic pasta, 20 seconds start to finish. Save this for Friday night, your future self says thanks.";
+  scoreDraft(ta.value); toast('Art-E tightened the hook and added the number.'); }
 const TIMES=['Today 6:40pm','Thu 8pm','Sun 10am'];
 let schedSel=0;
 function pickTime(el,i){ schedSel=i; document.querySelectorAll('.tpill').forEach(t=>t.classList.remove('on')); el.classList.add('on');

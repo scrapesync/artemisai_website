@@ -240,6 +240,48 @@ input,textarea{font-family:var(--body)}
 .toast.on{transform:translate(-50%,0);opacity:1}
 .toast b{color:var(--arte);font-weight:600}
 
+
+/* ═══ light theme ═══ */
+body.light{--bg:#F3F5F9; --shell:#FFFFFF; --surface:#FFFFFF; --surface2:#EDF1F6; --line:#DCE2EB; --t1:#12161F; --t2:#4E5A6B; --t3:#8B96A6}
+body.light .hero{background:linear-gradient(160deg,#E4F7F1 0%, #F2FBF8 58%, var(--surface) 100%);border-color:rgba(0,150,122,.35)}
+body.light .crisis-card{background:linear-gradient(150deg, rgba(255,92,116,.08), var(--surface) 55%)}
+body.light .brief-card{background:linear-gradient(150deg,#EFEBFF 0%, var(--surface) 65%)}
+body.light .m-rec{background:linear-gradient(160deg,#F0EDFF,#FFFFFF 70%)}
+body.light .wins-hero{background:linear-gradient(160deg, rgba(255,194,75,.18), var(--surface) 62%)}
+body.light .milestone{background:linear-gradient(140deg, rgba(255,194,75,.16), var(--surface) 70%)}
+body.light .stage-area, body.light .main{background:var(--bg)}
+body.light .spark{background:#F6F8FB}
+body.light .btn-primary{color:#04352B}
+body.light .arail::before{background:radial-gradient(500px 300px at 80% 0%, rgba(139,123,255,.08), transparent 65%)}
+/* ═══ inbox / chat ═══ */
+.chatlist .card{display:flex;align-items:center;gap:13px}
+.cav{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:14px;flex-shrink:0}
+.cmeta{flex:1;text-align:left}
+.cname{font-size:14.5px;font-weight:700}
+.clast{font-size:12px;color:var(--t2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:380px}
+.cunread{min-width:20px;height:20px;border-radius:99px;background:var(--act);color:#052019;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 6px}
+.thread{display:none}
+.thread.on{display:block;animation:vfade .25s ease}
+.tb{max-width:78%;padding:10px 14px;border-radius:15px;font-size:13.5px;line-height:1.5;margin-bottom:9px}
+.tb.them{background:var(--surface);border:1px solid var(--line);border-radius:4px 15px 15px 15px}
+.tb.me{margin-left:auto;background:rgba(0,196,160,.13);border:1px solid rgba(0,196,160,.3);border-radius:15px 4px 15px 15px}
+.tb .who{display:block;font-size:10px;color:var(--t3);margin-bottom:3px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.arec{display:flex;align-items:center;gap:10px;background:linear-gradient(150deg,#141030,var(--surface) 70%);border:1px solid rgba(139,123,255,.35);border-radius:13px;padding:10px 13px;margin:12px 0;font-size:12.5px}
+body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
+.arec b{color:var(--arte)}
+.chatbar{display:flex;gap:9px;margin-top:12px}
+.chatbar input{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:12px 17px;font-size:13px;color:var(--t1)}
+/* ═══ alert rules + misc ═══ */
+.rule{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:13px 16px;margin-bottom:10px}
+.rule .rl1{font-size:13.5px;font-weight:700}
+.rule .rl2{font-size:11.5px;color:var(--t3);margin-top:1px}
+.rule .paused{font-size:9.5px;font-weight:700;color:var(--gold);background:rgba(255,194,75,.09);border:1px solid rgba(255,194,75,.3);border-radius:99px;padding:3px 9px}
+.askA{margin-top:9px;font-size:11px;font-weight:700;color:var(--arte);background:rgba(139,123,255,.08);border:1px solid rgba(139,123,255,.3);border-radius:99px;padding:5px 11px;display:inline-flex;align-items:center;gap:5px}
+.askA:hover{background:rgba(139,123,255,.15)}
+.sched-row{display:flex;align-items:center;gap:11px;background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:11px 15px;margin:-10px 0 22px;font-size:12.5px}
+.sched-row b{font-weight:700}
+.sched-row .mono{font-family:var(--mono);font-size:10px;color:var(--act)}
+
 /* ═══ fable-magic additions ═══ */
 .milestone{display:flex;align-items:center;gap:12px;background:linear-gradient(140deg, rgba(255,194,75,.10), var(--surface) 70%);border:1px solid rgba(255,194,75,.35);border-radius:16px;padding:12px 16px;margin:0 0 22px}
 .milestone .mtx{flex:1;font-size:13.5px}
@@ -408,6 +450,8 @@ input,textarea{font-family:var(--body)}
       <div class="grow"></div>
       <button class="sbtn" onclick="openPalette()" aria-label="Search, Cmd K"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
       <button class="newpost" onclick="openCompose()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>New post</button>
+      <button class="bell" onclick="setTheme()" aria-label="Toggle light or dark" id="themeBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/></svg></button>
+      <button class="bell" onclick="setView('inbox')" aria-label="Inbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span class="bdg" id="inboxBdg">2</span></button>
       <button class="bell" onclick="togglePop(event)" aria-label="Alerts"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg><span class="bdg">3</span></button>
     </div>
 
@@ -429,7 +473,7 @@ input,textarea{font-family:var(--body)}
         <div class="ai-body">2.9&times; your usual reach against a 2.4&times; forecast. Worth a look.</div>
         <span class="ai-cta">See the win &rarr;</span>
       </button>
-      <button class="foot">Alerts only interrupt when action is needed. Tune this in Settings.</button>
+      <button class="foot" onclick="closePop();setView('alerts')">Open the alerts page: history, rules, quiet hours &rarr;</button>
     </div>
 
     <!-- workspace popover -->
@@ -475,6 +519,8 @@ input,textarea{font-family:var(--body)}
           <button class="btn btn-ghost" onclick="doMove('mv3','Friday draft approved and queued.')">Approve</button>
         </div>
       </div>
+
+      <div class="sched-row"><span>&#128197;</span><span style="flex:1">Scheduled: <b>pasta reel</b> &middot; today 6:40pm</span><span class="mono">2.4x &middot; 87%</span><button class="btn btn-ghost" style="padding:7px 13px;font-size:11.5px" onclick="openCompose()">Edit</button></div>
 
       <div class="milestone" id="milestone"><span style="font-size:18px">&#127942;</span><div class="mtx"><b>Quick Bites UK crossed 64k followers.</b> Your fastest-growing page this quarter.</div><button class="btn btn-primary" onclick="toast('Win shared to your team feed.')">Share the win</button><button class="mx" onclick="document.getElementById('milestone').style.display='none'" aria-label="Dismiss">&times;</button></div>
 
@@ -573,6 +619,9 @@ input,textarea{font-family:var(--body)}
         <button class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px" onclick="toast('Weekly report PDF downloading.')">Download</button>
         <button class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px" onclick="toast('Fresh report generating, ready in a minute.')">Generate new</button>
       </div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Weekly &middot; 30 Jun</div><div class="rl2">Reach +38%, two storms calmed, PDF &middot; 6 pages</div></div><button class="btn btn-ghost" style="padding:7px 13px;font-size:11.5px" onclick="toast('Report PDF downloading.')">Download</button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Monthly &middot; June</div><div class="rl2">Full-month picture across 5 pages &middot; 11 pages</div></div><button class="btn btn-ghost" style="padding:7px 13px;font-size:11.5px" onclick="toast('Report PDF downloading.')">Download</button></div>
+      <div class="rule" style="margin-bottom:12px"><div style="flex:1"><div class="rl1">Brand risk &middot; 12 Jun</div><div class="rl2">The Shorts cluster, cause and resolution &middot; 3 pages</div></div><button class="btn btn-ghost" style="padding:7px 13px;font-size:11.5px" onclick="toast('Report PDF downloading.')">Download</button></div>
 
       <div class="rate">
         <p><b>Was the 6:40pm advice useful?</b><br>Every rating sharpens your next recommendation.</p>
@@ -585,6 +634,59 @@ input,textarea{font-family:var(--body)}
     </section>
 
     <!-- ═══ VIEW: PAGES ═══ -->
+    <!-- ═══ VIEW: ALERTS ═══ -->
+    <section class="view" id="v-alerts">
+      <div class="greet">Interruptions, on your terms</div>
+      <h1 class="vh">Alerts</h1>
+      <div style="display:flex;gap:10px;margin:-8px 0 16px">
+        <button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="markAllRead()">Mark all read</button>
+        <button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="setView('settings')">Quiet hours &amp; channels</button>
+      </div>
+      <button class="alert-item" style="border:1px solid var(--line);border-radius:15px;margin-bottom:10px" onclick="arteExplain('crisis')">
+        <div class="ai-top"><span class="ai-dot" style="background:var(--rose)"></span><span class="ai-title">Comment cluster turning negative</span></div>
+        <div class="ai-body">Sana Shorts, 14 in 30 minutes. <b>Calm reply drafted.</b></div><span class="ai-cta">Open in Art-E &rarr;</span>
+      </button>
+      <button class="alert-item" style="border:1px solid var(--line);border-radius:15px;margin-bottom:10px" onclick="arteExplain('timing')">
+        <div class="ai-top"><span class="ai-dot" style="background:var(--rose)"></span><span class="ai-title">Your last 3 posts underperformed</span></div>
+        <div class="ai-body">Audience moved to evenings. <b>One change recommended.</b></div><span class="ai-cta">Open in Art-E &rarr;</span>
+      </button>
+      <button class="alert-item" style="border:1px solid var(--line);border-radius:15px;margin-bottom:10px" onclick="arteExplain('collab')">
+        <div class="ai-top"><span class="ai-dot" style="background:var(--arte)"></span><span class="ai-title">Strong creator match found</span></div>
+        <div class="ai-body">@HomeCookedDaily, 41% overlap. <b>Intro drafted.</b></div><span class="ai-cta">Open in Art-E &rarr;</span>
+      </button>
+      <button class="alert-item" style="border:1px solid var(--line);border-radius:15px;margin-bottom:22px" onclick="setView('wins')">
+        <div class="ai-top"><span class="ai-dot" style="background:var(--gold)"></span><span class="ai-title">Weekly report ready</span></div>
+        <div class="ai-body">Reach, wins, and what Art-E changed. <b>2-minute read.</b></div><span class="ai-cta">See it in Wins &rarr;</span>
+      </button>
+      <div class="feed-label"><h3>Alert rules</h3><button class="btn btn-ghost" style="padding:7px 14px;font-size:12px" onclick="toast('Rule builder opens here in the live product.')">+ Create rule</button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Comment storm on any page</div><div class="rl2">Within minutes, drafted reply attached</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Storm rule"></button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Post beats 2x its prediction</div><div class="rl2">So you can ride it while it moves</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Viral rule"></button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Creator match above 25% overlap</div><div class="rl2">Only real overlap, never hashtag noise</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Match rule"></button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Engagement dips 10% week on week</div><div class="rl2">Per page, with the likely cause</div></div><span class="paused">Paused</span><button class="btn btn-ghost" style="padding:7px 13px;font-size:11.5px" onclick="toast('Rule editor opens here.')">Edit</button></div>
+      <p class="quiet" style="text-align:left">An alert is a problem with its solution attached, never information alone. Rules above the line interrupt, everything else waits for the morning briefing.</p>
+    </section>
+
+    <!-- ═══ VIEW: INBOX ═══ -->
+    <section class="view" id="v-inbox">
+      <div class="greet">Collaboration, with Art-E in the room</div>
+      <h1 class="vh">Inbox</h1>
+      <div id="chatlist" class="chatlist">
+        <button class="card" onclick="openChat()"><span class="cav" style="background:rgba(139,123,255,.14);color:var(--arte)">HC</span><span class="cmeta"><span class="cname" style="display:block">Collab: @HomeCookedDaily &times; Sana's Kitchen</span><span class="clast" style="display:block">Maya: Tuesday works! What time were you thinking?</span></span><span class="cunread">2</span></button>
+        <button class="card" onclick="toast('This thread opens the same way. One chat is wired in this mockup.')"><span class="cav" style="background:rgba(87,181,240,.14);color:var(--sky)">QB</span><span class="cmeta"><span class="cname" style="display:block">Quick Bites editors</span><span class="clast" style="display:block">You: Friday short is drafted, scoring 78, review when free.</span></span><span class="pchev">&rsaquo;</span></button>
+        <p class="quiet">Chats live here, alerts live under the bell.<br><b>Art-E reads a thread only when you invite it.</b></p>
+      </div>
+      <div id="chatthread" class="thread">
+        <button class="back" style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--t2);margin-bottom:14px" onclick="closeChat()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>All chats</button>
+        <div class="tb them"><span class="who">Maya &middot; HomeCookedDaily</span>Loved the pasta reel! Artemis pinged us about the overlap too. Keen to try a joint one.</div>
+        <div class="tb me"><span class="who">You</span>Same here. One reel, both audiences, split the edit?</div>
+        <div class="tb them"><span class="who">Maya</span>Tuesday works! What time were you thinking?</div>
+        <div class="arec"><b>Art-E recommends:</b>&nbsp;propose Tuesday 6:40pm, both audiences peak then. Predicted +12k combined reach.&nbsp;<button class="btn btn-primary" style="padding:7px 13px;font-size:11.5px;margin-left:auto" onclick="useRec()">Use it</button></div>
+        <div id="chatmsgs"></div>
+        <div class="chatbar"><input id="chatinput" placeholder="Message Maya&hellip;" onkeydown="if(event.key==='Enter')sendChat()"><button class="asend" onclick="sendChat()" aria-label="Send"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button></div>
+        <button class="askA" style="margin-top:12px" onclick="askArte('Summarise this chat and suggest the next step')">&#10022; Ask Art-E about this chat</button>
+      </div>
+    </section>
+
     <section class="view" id="v-pages">
       <div class="greet">Your creator network</div>
       <h1 class="vh">Pages</h1>
@@ -606,6 +708,8 @@ input,textarea{font-family:var(--body)}
       <h1 class="vh">Settings</h1>
       <div class="set-group">
         <h4>Alerts</h4>
+        <div class="set-row"><div><div class="sl">Theme</div><div class="sd2">Dark keeps evenings calm. Light for bright rooms. Same app either way.</div></div>
+          <div class="seg" id="themeSeg"><button class="on" onclick="setTheme('dark')">Dark</button><button onclick="setTheme('light')">Light</button></div></div>
         <div class="set-row"><div><div class="sl">Interrupt me for</div><div class="sd2">Only what needs action keeps alerts rare and valuable. That is the default for a reason.</div></div>
           <div class="seg"><button class="on" onclick="segPick(this)">Only what needs action</button><button onclick="segPick(this)">Everything</button></div></div>
         <div class="set-row"><div><div class="sl">Quiet hours</div><div class="sd2">No pings 10pm to 8am. Overnight findings wait in the morning briefing.</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Quiet hours"></button></div>
@@ -615,6 +719,10 @@ input,textarea{font-family:var(--body)}
         <h4>Art-E &amp; your data</h4>
         <div class="set-row"><div><div class="sl">Show evidence with every answer</div><div class="sd2">Sources, sample size and confidence on all AI output. Always on, it is how Artemis works.</div></div><button class="tog on locked" aria-label="Evidence always on" title="Always on"></button></div>
         <div class="set-row"><div><div class="sl">Learn from my ratings</div><div class="sd2">Your thumbs up and down train what Art-E surfaces for you next.</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Learn from ratings"></button></div>
+        <div class="set-row"><div><div class="sl">Reply style</div><div class="sd2">How much Art-E says before the recommendation.</div></div>
+          <div class="seg"><button onclick="segPick(this)">Concise</button><button class="on" onclick="segPick(this)">Balanced</button><button onclick="segPick(this)">Detailed</button></div></div>
+        <div class="set-row"><div><div class="sl">Voice replies</div><div class="sd2">Hear answers read aloud. Arrives with the live app.</div></div><button class="tog" onclick="this.classList.toggle('on');toast('Voice replies will switch on in the live app.')" aria-label="Voice"></button></div>
+        <div class="set-row"><div><div class="sl">Product tips</div><div class="sd2">Gentle pointers while you learn the app. Off keeps it silent.</div></div><button class="tog" onclick="this.classList.toggle('on')" aria-label="Tips"></button></div>
         <div class="set-row"><div><div class="sl">Auto-act on trusted tasks</div><div class="sd2">Off by default. Art-E always asks first; turn on only if you want reshares and mutes handled automatically.</div></div><button class="tog" onclick="this.classList.toggle('on')" aria-label="Auto act"></button></div>
         <div class="set-row"><div><div class="sl">Connected account</div><div class="sd2">Facebook &middot; Sana Rahman &middot; 5 pages authorised</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="openConnect()">Manage</button></div>
       </div>
@@ -691,7 +799,10 @@ input,textarea{font-family:var(--body)}
         <div class="dgrid" style="grid-template-columns:1fr 1fr">
           <div class="dcard"><h5>Reach, last 14 days <b>Sana's Kitchen</b></h5>
             <svg width="100%" height="100" viewBox="0 0 400 100" preserveAspectRatio="none"><path d="M0,72 L30,67 L60,76 L90,63 L120,68 L150,79 L180,81 L210,78 L240,83 L270,54 L300,47 L330,34 L360,18 L400,23" fill="none" stroke="#00C4A0" stroke-width="2.5"/><circle cx="360" cy="18" r="4" fill="#00C4A0"/><text x="286" y="12" font-size="10" fill="#00C4A0" font-family="monospace">2.9x reel</text></svg></div>
-          <div class="dcard"><h5>Best posting times <b>peak Tue 6:40pm</b></h5>
+          <div class="dcard"><h5>Your network, week on week <b>benchmark</b></h5>
+        <div style="font-size:12.5px;color:var(--t2);line-height:1.7">Top 9% on content quality among UK food pages. Cadence is the gap: two 4-day quiet stretches this month. Caption sweet spot on your pages: <b style="color:var(--t1)">two emojis, under 90 characters, open with a question.</b></div>
+        <button class="askA" onclick="arteExplain('health')">&#10022; Ask Art-E about the gap</button></div>
+      <div class="dcard"><h5>Best posting times <b>peak Tue 6:40pm</b></h5>
         <svg width="100%" height="96" viewBox="0 0 400 96">
           <g font-size="8" fill="#5E6875" font-family="monospace">
             <text x="2" y="16">Mon</text><text x="2" y="31">Tue</text><text x="2" y="46">Wed</text><text x="2" y="61">Thu</text><text x="2" y="76">Fri</text><text x="2" y="91">S/S</text>
@@ -706,7 +817,7 @@ input,textarea{font-family:var(--body)}
             <rect x="34" y="84" width="64" height="11" rx="3" fill="rgba(0,196,160,.18)"/><rect x="102" y="84" width="64" height="11" rx="3" fill="rgba(0,196,160,.30)"/><rect x="170" y="84" width="64" height="11" rx="3" fill="rgba(0,196,160,.22)"/><rect x="238" y="84" width="64" height="11" rx="3" fill="rgba(0,196,160,.24)"/><rect x="306" y="84" width="48" height="11" rx="3" fill="rgba(0,196,160,.18)"/><rect x="358" y="84" width="38" height="11" rx="3" fill="rgba(0,196,160,.10)"/>
             <rect x="238" y="24" width="64" height="11" rx="3" fill="none" stroke="#FFC24B" stroke-width="1.5"/>
           </g>
-        </svg></div>
+        </svg><button class="askA" onclick="arteExplain('timing')">&#10022; Why these windows?</button></div>
       <div class="dcard"><h5>Content mix that works <b>saves-weighted</b></h5>
             <svg width="100%" height="100" viewBox="0 0 400 100"><rect x="20" y="26" width="52" height="64" rx="7" fill="rgba(0,196,160,.75)"/><rect x="96" y="41" width="52" height="49" rx="7" fill="rgba(0,196,160,.45)"/><rect x="172" y="52" width="52" height="38" rx="7" fill="rgba(139,123,255,.5)"/><rect x="248" y="65" width="52" height="25" rx="7" fill="rgba(87,181,240,.45)"/><rect x="324" y="74" width="52" height="16" rx="7" fill="rgba(94,104,117,.5)"/><text x="24" y="18" font-size="9.5" fill="#9AA3B2">reels</text><text x="98" y="33" font-size="9.5" fill="#9AA3B2">recipe cards</text><text x="176" y="44" font-size="9.5" fill="#9AA3B2">carousels</text><text x="252" y="57" font-size="9.5" fill="#9AA3B2">photos</text><text x="330" y="66" font-size="9.5" fill="#9AA3B2">text</text></svg></div>
         </div>
@@ -784,6 +895,7 @@ input,textarea{font-family:var(--body)}
     </div>
     <div class="abar">
       <input class="ainput" placeholder="Ask anything about your pages&hellip;" onkeydown="if(event.key==='Enter')freeAsk(this)">
+      <button class="mic" style="width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--t2);flex-shrink:0" onclick="toast('Voice input arrives in the live app.')" aria-label="Voice"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 19v3"/></svg></button>
       <button class="asend" onclick="freeAsk(document.querySelector('.ainput'))" aria-label="Send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
     </div>
   </aside>
@@ -815,7 +927,7 @@ input,textarea{font-family:var(--body)}
     <button class="tpill" onclick="pickTime(this,1)"><b>Thu 8:00pm</b><span>2.1x &middot; 81% conf.</span></button>
     <button class="tpill" onclick="pickTime(this,2)"><b>Sun 10:00am</b><span>1.7x &middot; 74% conf.</span></button>
   </div>
-  <div style="display:flex;gap:10px"><button class="btn btn-primary" style="flex:1" id="schedBtn" onclick="closeAllOverlays();toast('Scheduled for '+TIMES[schedSel][0]+'. Art-E will report back after it runs.')">Schedule for Today 6:40pm</button><button class="btn btn-ghost" onclick="closeAllOverlays()">Save draft</button></div>
+  <div style="display:flex;gap:10px"><button class="btn btn-primary" style="flex:1" id="schedBtn" onclick="closeAllOverlays();toast('Scheduled for '+TIMES[schedSel][0]+'. Art-E will report back after it runs.')">Schedule for Today 6:40pm</button><button class="btn btn-ghost" style="color:var(--arte)" onclick="improveDraft()">Improve</button><button class="btn btn-ghost" onclick="closeAllOverlays()">Save draft</button></div>
 </div>
 
 <!-- ═══ DISCOVERY SLIDE-OVER ═══ -->
@@ -896,6 +1008,20 @@ document.addEventListener('click', e=>{ if(!e.target.closest('.pop') && !e.targe
 
 /* ── Art-E conversation engine (canned, grounded) ── */
 const A = {
+  chat: {
+    q: 'Summarise this chat and suggest the next step',
+    html: `<p><b>Maya is in, the only open question is timing.</b></p>
+      <p>She agreed to a joint reel and asked for a time. Both audiences peak <span class="hl">Tuesday 6 to 8pm</span>, and her 1 to 3pm crowd extends your quiet window either side.</p>
+      <div class="ground"><b>Read from:</b> this thread &middot; both pages' hourly engagement &middot; the 41% overlap map</div>`,
+    rec: {line:'Propose Tuesday 6:40pm', why:'I have put the message in your chat box, send it when ready.', cta:'Fill the reply', act:()=>{setView('inbox');openChat();useRec();}}
+  },
+  improve: {
+    q: 'Improve my draft',
+    html: `<p><b>Two changes lift it: a number in the promise, payoff first.</b></p>
+      <p>"3-ingredient" style promises outperform on your pages, and your saves peak when the hook lands in the first six words.</p>
+      <div class="ground"><b>Based on:</b> your last 60 posts &middot; save-rate by hook position &middot; confidence 79%</div>`,
+    rec: {line:'Apply it in the composer', why:'One click rewrites the draft and rescores it live.', cta:'Open composer and improve', act:()=>{closeAllOverlays();openCompose();improveDraft();}}
+  },
   crisis: {
     q: 'What is happening on Sana Shorts?',
     html: `<p><b>A comment cluster turned negative, and it is containable.</b></p>
@@ -963,13 +1089,31 @@ function arteExplain(key){
     th.scrollTop=th.scrollHeight;
   }, 850);
 }
+function routeAsk(v){
+  const t=v.toLowerCase();
+  if(/(dip|underperform|drop|why.*(post|reach)|timing|when.*post|best time)/.test(t)) return 'timing';
+  if(/(friday|what.*post|content idea|trend)/.test(t)) return 'friday';
+  if(/(collab|match|intro|creator|overlap|homecooked)/.test(t)) return 'collab';
+  if(/(crisis|negative|comment|storm|angry|reply)/.test(t)) return 'crisis';
+  if(/(health|score|82|consistency)/.test(t)) return 'health';
+  if(/(brief|morning|overnight|summary of today)/.test(t)) return 'briefing';
+  if(/(win|worked|2\.9|beat)/.test(t)) return 'win';
+  if(/(chat|maya|thread|next step)/.test(t)) return 'chat';
+  if(/(improve|better draft|rewrite)/.test(t)) return 'improve';
+  return null;
+}
 function freeAsk(inp){
   const v=inp.value.trim(); if(!v) return; inp.value='';
+  const key=routeAsk(v);
+  if(key && A[key]){ arteExplainQ(key, v); return; }
   const th=document.getElementById('athread');
   th.insertAdjacentHTML('beforeend', `<div class="msg m-user">${v.replace(/</g,'&lt;')}</div>`);
-  th.insertAdjacentHTML('beforeend', `<div class="msg m-arte"><p>In the live product I answer this from your data with sources. In this mockup, try the chips below, they show the real answer patterns.</p></div>`);
+  th.insertAdjacentHTML('beforeend', `<div class="msg m-arte"><p>In the live product I answer anything from your data, with sources. In this mockup I can take that question if you angle it at timing, Friday content, the creator match, the Shorts cluster, page health, the briefing, or this week's win, try the chips below.</p></div>`);
   th.scrollTop=th.scrollHeight;
 }
+function askArte(q){ setViewSafe(); const inp=document.querySelector('.ainput'); inp.value=q; freeAsk(inp); }
+function setViewSafe(){ /* rail is always visible on desktop */ }
+function arteExplainQ(key, qtext){ const t=A[key]; const orig=t.q; t.q=qtext||orig; arteExplain(key); t.q=orig; }
 
 /* ── overlays ── */
 function openCompose(){ veilOn(); document.getElementById('compose').classList.add('on'); scoreDraft(document.getElementById('draft').value); }
@@ -1086,7 +1230,10 @@ const PL=[
  ['New post with live score', ()=>openCompose()],
  ['Ask Art-E: why did my posts dip?', ()=>arteExplain('timing')],
  ['Ask Art-E: what should I post Friday?', ()=>arteExplain('friday')],
- ['Ask Art-E: why is my health 82?', ()=>arteExplain('health')]];
+ ['Ask Art-E: why is my health 82?', ()=>arteExplain('health')],
+ ['Open inbox', ()=>setView('inbox')],
+ ['Open alerts page', ()=>setView('alerts')],
+ ['Toggle light or dark theme', ()=>setTheme()]];
 let plHot=0, plCur=[];
 function openPalette(){ document.getElementById('palette').classList.add('on'); const q=document.getElementById('plq'); q.value=''; plFilter(''); setTimeout(()=>q.focus(),60); }
 function closePalette(){ document.getElementById('palette').classList.remove('on'); }
@@ -1114,6 +1261,26 @@ A.briefing = { q:'This morning\u2019s briefing',
  <p><span class="hl">Opportunity:</span> @HomeCookedDaily match strengthened to 41% overlap. Intro drafted when you want it.</p>
  <div class="ground"><b>Overnight scan:</b> 5 pages \u00b7 comments, saves, shares \u00b7 nothing else needs attention</div>`,
  rec:{line:'Start with the reel', why:'One tap and today\u2019s main move is done.', cta:'Schedule for 6:40pm', act:()=>{doMove('mv1','Scheduled for 6:40pm. Art-E will report back tomorrow.');}} };
+
+/* ── deep-parity helpers ── */
+function setTheme(t){
+  const b=document.body;
+  const to = t || (b.classList.contains('light')?'dark':'light');
+  b.classList.toggle('light', to==='light');
+  const seg=document.getElementById('themeSeg');
+  if(seg){ seg.children[0].classList.toggle('on', to==='dark'); seg.children[1].classList.toggle('on', to==='light'); }
+  toast(to==='light'?'Light theme on.':'Dark theme on.');
+}
+function openChat(){ document.getElementById('chatlist').style.display='none'; document.getElementById('chatthread').classList.add('on'); const bd=document.getElementById('inboxBdg'); if(bd) bd.style.display='none'; }
+function closeChat(){ document.getElementById('chatlist').style.display=''; document.getElementById('chatthread').classList.remove('on'); }
+function sendChat(){ const i=document.getElementById('chatinput'); const v=i.value.trim(); if(!v) return; i.value='';
+  document.getElementById('chatmsgs').insertAdjacentHTML('beforeend', `<div class="tb me"><span class="who">You</span>${v.replace(/</g,'&lt;')}</div>`);
+  setTimeout(()=>{ document.getElementById('chatmsgs').insertAdjacentHTML('beforeend', `<div class="tb them"><span class="who">Maya</span>Perfect, locking it in. See you Tuesday!</div>`); }, 900); }
+function useRec(){ const i=document.getElementById('chatinput'); i.value='Shall we say Tuesday 6:40pm? Artemis says both our audiences peak then.'; i.focus(); }
+function markAllRead(){ document.querySelectorAll('.bell .bdg').forEach(b=>b.style.display='none'); toast('All read. The bell stays quiet until something needs you.'); }
+function improveDraft(){ const ta=document.getElementById('draft');
+  ta.value="3-ingredient creamy garlic pasta, 20 seconds start to finish. Save this for Friday night, your future self says thanks.";
+  scoreDraft(ta.value); toast('Art-E tightened the hook and added the number. Score updated.'); }
 
 /* ── fable-magic helpers ── */
 const TIMES=[['Today 6:40pm','2.4x'],['Thu 8:00pm','2.1x'],['Sun 10:00am','1.7x']];
