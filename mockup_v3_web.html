@@ -241,6 +241,23 @@ input,textarea{font-family:var(--body)}
 .toast b{color:var(--arte);font-weight:600}
 
 
+/* ═══ craft pass ═══ */
+.card,.btn,.chip,.tpill,.story,.mbtn,.askA,.ptab,.rpill,.move,.set-row,.rule{transition-timing-function:cubic-bezier(.22,.68,.22,1)}
+.vh{letter-spacing:-1.3px}
+.greet{letter-spacing:.2px}
+.card-line{line-height:1.42}
+.feed-label h3{display:flex;align-items:center;gap:9px}
+.feed-label h3::before{content:'';width:14px;height:2px;background:var(--act);border-radius:2px;opacity:.65}
+.hero{position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-46%;right:-14%;width:360px;height:360px;background:radial-gradient(circle, rgba(0,196,160,.16), transparent 62%);filter:blur(8px);pointer-events:none}
+.hero>*{position:relative}
+.kpi b,.dstat b,.vitem b,.brief-card .bs b{background:linear-gradient(135deg,#FFFFFF 20%,#B7C1D6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.signout-veil{position:fixed;inset:0;background:var(--bg);z-index:300;display:none;align-items:center;justify-content:center;text-align:center;animation:vfade .4s ease}
+.signout-veil.on{display:flex}
+.signout-veil .so-in{max-width:300px}
+.signout-veil svg{margin:0 auto 18px;display:block}
+.signout-veil h2{font-family:var(--disp);font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.signout-veil p{font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:20px}
 /* ═══ flawless pass ═══ */
 :focus-visible{outline:2px solid var(--act);outline-offset:2px;border-radius:6px}
 ::selection{background:rgba(0,196,160,.28);color:var(--t1)}
@@ -486,7 +503,15 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
 .pl-item .pk{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--t3);border:1px solid var(--line);border-radius:5px;padding:1px 7px}
 
 /* light legibility overrides (must cascade last) */
-body.light{--t3:#5F6B7E; --rose:#D42A4C; --arte:#5B45D9}
+body.light{--t3:#5F6B7E; --rose:#D42A4C; --arte:#5B45D9; --bg:#F5F7FB; --surface2:#EEF2F8; --line:#E5EAF2}
+body.light .card,body.light .dcard,body.light .moves,body.light .milestone,body.light .brief-card,body.light .report-row,body.light .rule,body.light .match,body.light .trust,body.light .checklist,body.light .sched-row,body.light .setup-pill,body.light .page-card,body.light .kpi,body.light .dstat,body.light .flag{box-shadow:0 1px 2px rgba(23,32,48,.05), 0 12px 28px -20px rgba(23,32,48,.12)}
+body.light .btn-ghost{background:#FFFFFF;border-color:#DFE6EF}
+body.light .tog{background:#D9E0EB}
+body.light .chip{background:#FFFFFF;border-color:#DFE6EF}
+body.light .msg.m-arte{background:#FFFFFF;border-color:#E5EAF2;box-shadow:0 1px 2px rgba(23,32,48,.05)}
+body.light .kpi b,body.light .dstat b,body.light .vitem b,body.light .brief-card .bs b{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--t1)}
+body.light .hero::before{background:radial-gradient(circle, rgba(0,150,122,.10), transparent 62%)}
+body.light .arte-wm svg path{stroke:#9AA6B8}
 body.light .pstage.later{color:#FFFFFF}
 body.light .card-act{color:#5B45D9}
 body.light .card-act.goldc{color:#8A6100}
@@ -825,7 +850,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       </div>
       <div class="set-group">
         <h4>Art-E &amp; your data</h4>
-        <div class="set-row"><div><div class="sl">Show evidence with every answer</div><div class="sd2">Sources, sample size and confidence on all AI output. Always on, it is how Artemis works.</div></div><button class="tog on locked" aria-label="Evidence always on" title="Always on"></button></div>
+        <div class="set-row"><div><div class="sl">Show evidence with every answer</div><div class="sd2">Sources, sample size and confidence on all AI output. Always on, it is how Artemis works.</div></div><button class="tog on locked" aria-label="Evidence always on" title="Always on" onclick="toast('Evidence stays on. It is the promise the product is built on.')"></button></div>
         <div class="set-row"><div><div class="sl">Learn from my ratings</div><div class="sd2">Your thumbs up and down train what Art-E surfaces for you next.</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Learn from ratings"></button></div>
         <div class="set-row"><div><div class="sl">Reply style</div><div class="sd2">How much Art-E says before the recommendation.</div></div>
           <div class="seg"><button onclick="segPick(this)">Concise</button><button class="on" onclick="segPick(this)">Balanced</button><button onclick="segPick(this)">Detailed</button></div></div>
@@ -855,7 +880,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <div class="set-row"><div><div class="sl">Rate Artemis</div><div class="sd2">A 30-second NPS. It shapes the roadmap you just read.</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="toast('Thanks. Survey opens in the live product.')">Rate</button></div>
         <div class="set-row"><div><div class="sl">Help &amp; support</div><div class="sd2">Docs, FAQ, and in-app support chat.</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="toast('Help centre opens here in the live product.')">Open</button></div>
         <div class="set-row"><div><div class="sl">Change password</div><div class="sd2">We email a secure reset link.</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="toast('Reset link sent to your email.')">Send link</button></div>
-        <div class="set-row"><div><div class="sl">Sign out</div><div class="sd2">On this device only.</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="toast('Signed out. See you at 6:40.')">Sign out</button></div>
+        <div class="set-row"><div><div class="sl">Sign out</div><div class="sd2">On this device only.</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px" onclick="showSignout()">Sign out</button></div>
         <div class="set-row"><div><div class="sl" style="color:var(--rose)">Delete account</div><div class="sd2">Removes pages, history, and trained preferences. No undo.</div></div><button class="btn btn-ghost" style="padding:9px 16px;font-size:12.5px;color:var(--rose)" onclick="toast('Deletion needs email confirmation, check your inbox.')">Delete</button></div>
       </div>
       <p class="quiet" style="text-align:left">AI outputs are predictions with stated confidence, not guarantees. Artemis shows its sources so you can judge for yourself.</p>
@@ -884,7 +909,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <div class="card-line">Saves predict repeat reach better than likes on your pages</div>
         <span class="card-act goldc">Reopen with Art-E &rarr;</span>
       </button>
-      <p class="quiet"><b>Why these:</b> comment co-occurrence graph across your pages, de-identified at ingest.<br>Important matches will alert you, no need to check here daily.</p>
+      <p class="quiet"><b>Why these:</b> people who comment on both pages, matched anonymously.<br>Important matches will alert you, no need to check here daily.</p>
     </section>
 
     <!-- ═══ VIEW: ANALYTICS ═══ -->
@@ -894,8 +919,8 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       <div class="subtabs">
         <button class="subtab on" data-t="ov" onclick="subtab('ov')">Overview</button>
         <button class="subtab" data-t="video" onclick="subtab('video')">Video</button>
-        <button class="subtab" data-t="vir" onclick="subtab('vir')">Virality</button>
-        <button class="subtab" data-t="raw" onclick="subtab('raw')">Raw table</button>
+        <button class="subtab" data-t="vir" onclick="subtab('vir')">What takes off</button>
+        <button class="subtab" data-t="raw" onclick="subtab('raw')">All posts</button>
       </div>
 
       <div class="apanel on" id="at-ov">
@@ -920,7 +945,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       <div class="dcard"><h5>Signals</h5>
         <div class="sigrow"><span class="ldot"></span><span><b>187 people</b> on your posts right now &middot; 2.4k reach in the last hour</span><span class="latertag">LATER &middot; PREVIEW</span></div>
         <div class="sigrow"><span>&#127941;</span><span><b>Top supporters:</b> 3 fans drive 11% of your shares</span><button class="askA" style="margin:0 0 0 auto" onclick="askArte('Who are my top supporters?')">&#10022; Ask</button></div>
-        <div class="sigrow"><span>&#9762;&#65039;</span><span><b>Toxicity index 0.14</b> &middot; stable, well under the 0.3 watch line</span></div>
+        <div class="sigrow"><span>&#9762;&#65039;</span><span><b>Comment negativity 0.14</b> &middot; calm, well under the 0.3 watch line</span></div>
       </div>
       <div class="dcard"><h5>Best posting times <b>peak Tue 6:40pm</b></h5>
         <svg width="100%" height="96" viewBox="0 0 400 96">
@@ -958,7 +983,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <div class="pv"><span class="pvt">Pasta reel &middot; Tue 6:40pm</span><span class="pvn">predicted 2.4x &rarr; actual 2.9x</span><span class="pvb" style="color:var(--act);background:rgba(0,196,160,.1);border:1px solid rgba(0,196,160,.3)">Beat</span></div>
         <div class="pv"><span class="pvt">Roast carousel &middot; Fri 5pm</span><span class="pvn">predicted 1.6x &rarr; actual 1.5x</span><span class="pvb" style="color:var(--t2);background:var(--surface2);border:1px solid var(--line)">Matched</span></div>
         <div class="pv"><span class="pvt">Friday recipe short</span><span class="pvn">predicted 2.0x &rarr; posts Friday</span><span class="pvb" style="color:var(--sky);background:rgba(87,181,240,.09);border:1px solid rgba(87,181,240,.3)">Upcoming</span></div>
-        <div class="dcard" style="margin-top:12px"><h5>What drives your predictions <b>global, SHAP</b></h5>
+        <div class="dcard" style="margin-top:12px"><h5>What makes posts take off <b>the model, in plain words</b></h5>
           <div class="dbar"><span style="width:110px">Hook strength</span><span class="db"><i style="width:34%"></i></span><b>34%</b></div>
           <div class="dbar"><span style="width:110px">Posting time</span><span class="db"><i style="width:27%"></i></span><b>27%</b></div>
           <div class="dbar"><span style="width:110px">Format</span><span class="db"><i style="width:21%"></i></span><b>21%</b></div>
@@ -1123,6 +1148,15 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
   </div>
   <div class="plan-list" id="plist2"></div>
   <button class="btn btn-ghost" style="margin-top:12px" onclick="closeAllOverlays()">Done</button>
+</div>
+
+<div class="signout-veil" id="signoutV">
+  <div class="so-in">
+    <svg width="44" height="44" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="9" stroke="#00C4A0" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="#00C4A0" stroke-width="2" stroke-linejoin="round"/><circle cx="18" cy="20" r="3" fill="#00C4A0"/></svg>
+    <h2>Signed out</h2>
+    <p>See you at 6:40, Sana. Art-E keeps watch and the morning briefing will be ready when you are.</p>
+    <button class="btn btn-primary" style="width:100%" onclick="hideSignout()">Sign back in</button>
+  </div>
 </div>
 
 <div class="toast" id="toast"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00C4A0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span id="toastmsg">Done</span></div>
@@ -1430,6 +1464,8 @@ function planRender(){
 }
 
 /* ── deep-parity helpers ── */
+function showSignout(){ document.getElementById('signoutV').classList.add('on'); }
+function hideSignout(){ document.getElementById('signoutV').classList.remove('on'); toast('Welcome back, Sana.'); }
 function setTheme(t){
   const b=document.body;
   const to = t || (b.classList.contains('light')?'dark':'light');

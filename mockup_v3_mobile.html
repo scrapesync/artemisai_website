@@ -213,6 +213,42 @@ input,textarea{font-family:var(--body)}
 .toast{position:absolute;bottom:104px;left:50%;transform:translate(-50%,60px);background:var(--surface2);border:1px solid rgba(0,196,160,.4);border-radius:13px;padding:11px 17px;font-size:12.5px;font-weight:600;display:flex;gap:9px;align-items:center;z-index:120;transition:.35s cubic-bezier(.34,1.4,.5,1);opacity:0;width:max-content;max-width:86%}
 .toast.on{transform:translate(-50%,0);opacity:1}
 
+/* craft pass mobile */
+.card,.btn,.chip,.tpill,.story,.hbtn,.wsrow,.notif{transition-timing-function:cubic-bezier(.22,.68,.22,1)}
+.hero{position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-52%;right:-22%;width:260px;height:260px;background:radial-gradient(circle, rgba(0,196,160,.16), transparent 62%);filter:blur(8px);pointer-events:none}
+.hero>*{position:relative}
+.feed-label h3{display:flex;align-items:center;gap:8px}
+.feed-label h3::before{content:'';width:12px;height:2px;background:var(--act);border-radius:2px;opacity:.65}
+.vitem b,.brief-card .bnum b{background:linear-gradient(135deg,#FFFFFF 20%,#B7C1D6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav-item[data-n="arte"]{transform:translateY(-12px);z-index:5}
+.orb{margin-top:0 !important;cursor:pointer}
+.wschip{display:flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:7px 11px 7px 9px;font-size:11.5px;font-weight:700;margin-left:9px;color:var(--t1)}
+.wschip svg{color:var(--t3)}
+.wsrow{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:12px 4px;font-size:13.5px;font-weight:600;border-bottom:1px solid var(--line)}
+.wsrow .wd{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.wsrow small{margin-left:auto;font-size:10.5px;color:var(--t3);font-weight:600}
+.shade{position:absolute;top:0;left:0;right:0;z-index:65;background:rgba(9,12,18,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:0 0 26px 26px;padding:58px 16px 12px;transform:translateY(-102%);transition:transform .38s cubic-bezier(.22,.68,.22,1);box-shadow:0 22px 50px -18px rgba(0,0,0,.6)}
+.shade.on{transform:translateY(0)}
+.shade-head{display:flex;align-items:baseline;justify-content:space-between;padding:0 4px 10px}
+.shade-head b{font-size:13px;font-weight:800}
+.shade-head span{font-size:10px;color:var(--t3)}
+.notif{display:flex;align-items:center;gap:11px;width:100%;text-align:left;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:15px;padding:11px 12px;margin-bottom:8px}
+.notif .nico{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.notif .nbody b{display:block;font-size:12.5px;font-weight:700}
+.notif .nbody span{display:block;font-size:10.5px;color:var(--t3);margin-top:2px}
+.shade-foot{display:flex;justify-content:space-between;padding:4px 4px 0}
+.shade-foot button{font-size:11px;font-weight:700;color:var(--t2);padding:7px 10px}
+.drv{margin-bottom:10px}
+.drv .dl{display:flex;justify-content:space-between;font-size:11.5px;color:var(--t2);margin-bottom:4px}
+.drv .dl b{color:var(--t1);font-family:var(--mono);font-size:10px}
+.drv .dt{height:6px;border-radius:99px;background:var(--surface2);overflow:hidden}
+.drv .dt i{display:block;height:100%;border-radius:99px}
+.signout-veil{position:absolute;inset:0;background:var(--bg);z-index:200;display:none;align-items:center;justify-content:center;text-align:center;border-radius:inherit}
+.signout-veil.on{display:flex;animation:vfade .35s ease}
+.signout-veil h2{font-family:var(--disp);font-size:21px;font-weight:800;margin:14px 0 7px}
+.signout-veil p{font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:16px;padding:0 30px}
+
 /* flawless pass mobile */
 :focus-visible{outline:2px solid var(--act);outline-offset:2px;border-radius:6px}
 ::selection{background:rgba(0,196,160,.28);color:var(--t1)}
@@ -346,7 +382,18 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
 .dchip b{font-family:var(--mono);font-size:9.5px;color:var(--act);font-weight:600}
 
 /* light legibility overrides (must cascade last) */
-body.light{--t3:#5F6B7E; --rose:#D42A4C; --arte:#5B45D9}
+body.light{--t3:#5F6B7E; --rose:#D42A4C; --arte:#5B45D9; --bg:#F5F7FB; --surface2:#EEF2F8; --line:#E5EAF2}
+body.light .card,body.light .dcard,body.light .moves,body.light .milestone,body.light .brief-card,body.light .report-row,body.light .rule,body.light .trust,body.light .sched-row,body.light .setup-pill{box-shadow:0 1px 2px rgba(23,32,48,.05), 0 12px 28px -20px rgba(23,32,48,.12)}
+body.light .btn-ghost{background:#FFFFFF;border-color:#DFE6EF}
+body.light .tog{background:#D9E0EB}
+body.light .chip{background:#FFFFFF;border-color:#DFE6EF}
+body.light .msg.m-arte{background:#FFFFFF;border-color:#E5EAF2}
+body.light .vitem b,body.light .brief-card .bnum b{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--t1)}
+body.light .shade{background:rgba(255,255,255,.94);box-shadow:0 22px 50px -18px rgba(23,32,48,.25)}
+body.light .notif{background:#FFFFFF;border-color:#E5EAF2}
+body.light .nav{background:linear-gradient(to top, rgba(245,247,251,.97) 60%, rgba(245,247,251,0))}
+body.light .wschip{background:#FFFFFF;border-color:#DFE6EF}
+body.light .hero::before{background:radial-gradient(circle, rgba(0,150,122,.10), transparent 62%)}
 body.light .pstage.later{color:#FFFFFF}
 body.light .card-act{color:#5B45D9}
 body.light .card-act.goldc{color:#8A6100}
@@ -361,12 +408,22 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
 <body>
 <div class="phone"><div class="screen">
   <div class="island"></div>
-  <div class="statusbar"><span id="sbtime">18:22</span><span class="sb-icons">&#9679;&#9679;&#9679; &nbsp;&#9889;</span></div>
+  <div class="statusbar" onclick="toggleShade()" style="cursor:pointer"><span id="sbtime">18:22</span><span class="sb-icons" style="display:flex;align-items:center;gap:7px"><span id="shadeHint" style="opacity:.6">&#9662;</span>&#9679;&#9679;&#9679; &nbsp;&#9889;</span></div>
+
+    <div class="shade" id="shade">
+      <div class="shade-head"><b>Notifications</b><span>Artemis &middot; today</span></div>
+      <button class="notif" onclick="closeShade();nav('arte');arteExplain('crisis')"><span class="nico" style="background:rgba(255,92,116,.15)">&#9888;&#65039;</span><span class="nbody"><b>Comment cluster turning negative</b><span>Sana Shorts &middot; calm reply drafted &middot; 18m</span></span></button>
+      <button class="notif" onclick="closeShade();nav('wins')"><span class="nico" style="background:rgba(255,194,75,.15)">&#128200;</span><span class="nbody"><b>Toastie reel beat its forecast 2.9x</b><span>Sana's Kitchen &middot; worth resharing &middot; 2h</span></span></button>
+      <button class="notif" onclick="closeShade();nav('discover')"><span class="nico" style="background:rgba(139,123,255,.15)">&#129309;</span><span class="nbody"><b>New creator match at 41% overlap</b><span>@HomeCookedDaily &middot; intro drafted &middot; 4h</span></span></button>
+      <button class="notif" onclick="closeShade();nav('arte');arteExplain('briefing')"><span class="nico" style="background:rgba(0,196,160,.15)">&#9728;&#65039;</span><span class="nbody"><b>Morning briefing ready</b><span>All pages &middot; 2-min read &middot; 7:02am</span></span></button>
+      <div class="shade-foot"><button onclick="clearShade()">Clear all</button><button onclick="closeShade()">Close</button></div>
+    </div>
 
   <!-- ═══ TODAY ═══ -->
   <section class="scr on" id="scr-today">
     <div class="apphead">
       <span class="amark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lgm)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lgm)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lgm)"/><defs><linearGradient id="lgm" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></span>
+      <button class="wschip" id="wsChipM" onclick="show('ws')"><span style="width:7px;height:7px;border-radius:50%;background:var(--act);display:inline-block"></span><span id="wsLabelM">All pages</span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button>
       <div class="grow"></div>
       <button class="hbtn" onclick="show('compose')" aria-label="New post"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
       <button class="hbtn" onclick="nav('inbox')" aria-label="Inbox"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span class="bdg" id="inboxBdg">2</span></button>
@@ -379,8 +436,8 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       <h2 class="vh">Today</h2>
       <div class="hero">
         <div class="hero-eyebrow"><span class="pulse"></span>Your next move</div>
-        <div class="hero-title">Post the pasta reel at 6:40pm today</div>
-        <p class="hero-why">Art-E predicts <b>2.4&times; your usual reach</b><span class="conf">87% conf.</span></p>
+        <div class="hero-title" id="heroTitle">Post the pasta reel at 6:40pm today</div>
+        <p class="hero-why" id="heroWhy">Art-E predicts <b>2.4&times; your usual reach</b><span class="conf">87% conf.</span></p>
         <div class="hero-actions">
           <button class="btn btn-primary" onclick="toast('Scheduled for 6:40pm. Art-E reports back tomorrow.')">Schedule it</button>
           <button class="btn btn-ghost" style="color:var(--arte)" onclick="nav('arte');arteExplain('timing')">Why?</button>
@@ -414,45 +471,32 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
 
       <div class="feed-label"><h3>While you were away</h3><span class="newchip">&#10022; 3 new</span></div>
 
-      <button class="card" onclick="nav('arte');arteExplain('briefing')">
-        <div class="card-top"><span class="ctag brief">Briefing</span><span class="card-page">All pages</span><span class="card-time">7:02am</span></div>
-        <div class="card-line">Your morning briefing, <b>2-minute read</b></div>
-        <p class="card-why">Overnight: +2,100 reach while you slept, one thing needs you, one opportunity appeared.</p>
-        <span class="card-act violet">Read it with Art-E &rarr;</span>
-      </button>
-
-      <button class="card win-card" onclick="toast('Milestone shared to your page story. &#127881;')">
-        <div class="card-top"><span class="ctag win">Milestone</span><span class="card-page">Sana's Kitchen</span><span class="card-time">this week</span></div>
-        <div class="card-line">Crossed <b>128k followers</b></div>
-        <p class="card-why">Up 9k this month, your fastest-growing page. Worth celebrating in public.</p>
-        <span class="card-act goldc">Share the win &rarr;</span>
-      </button>
-      <button class="card crisis-card" onclick="nav('arte');arteExplain('crisis')">
+      <button class="card crisis-card" data-page="ss" onclick="nav('arte');arteExplain('crisis')">
         <div class="card-top"><span class="ctag crisis">Needs a reply</span><span class="card-page">Sana Shorts</span><span class="card-time">18m</span></div>
         <div class="card-line">A comment cluster is turning <b>negative</b></div>
         <p class="card-why">14 negative comments in 30 minutes. Art-E drafted a calm reply in your voice.</p>
         <span class="card-act" style="color:var(--rose)">See the drafted reply &rarr;</span>
       </button>
 
-      <button class="card" onclick="fillMD('homecooked');show('disco')">
+      <button class="card" data-page="sk" onclick="fillMD('homecooked');show('disco')">
         <div class="card-top"><span class="ctag opp">Opportunity</span><span class="card-page">Sana's Kitchen</span><span class="card-time">2h</span></div>
         <div class="card-line">Creator match: <b>@HomeCookedDaily</b></div>
         <p class="card-why">41% audience overlap, they post when you are quiet. One collab is worth ~+12k reach.</p>
         <span class="card-act violet">See the match &rarr;</span>
       </button>
-      <button class="card" onclick="nav('arte');arteExplain('timing')">
+      <button class="card" data-page="all" onclick="nav('arte');arteExplain('timing')">
         <div class="card-top"><span class="ctag sig">Signal</span><span class="card-page">All pages</span><span class="card-time">today</span></div>
         <div class="card-line">Your audience shifted to <b>evenings</b></div>
         <p class="card-why">62% of engaged followers are now most active 6 to 8pm. This is why recent posts dipped.</p>
         <span class="card-act violet">Art-E explains &rarr;</span>
       </button>
-      <button class="card" onclick="show('compose')">
+      <button class="card" data-page="qb" onclick="show('compose')">
         <div class="card-top"><span class="ctag pred">Prediction</span><span class="card-page">Quick Bites UK</span><span class="card-time">today</span></div>
         <div class="card-line">Friday looks strong for a <b>15-sec recipe short</b></div>
         <p class="card-why">Short-form food is up 22% across your network this week. Draft it now and ride it.</p>
         <span class="card-act">Draft with a live score &rarr;</span>
       </button>
-      <button class="card win-card" onclick="nav('wins')">
+      <button class="card win-card" data-page="sk" onclick="nav('wins')">
         <div class="card-top"><span class="ctag win">Win</span><span class="card-page">Sana's Kitchen</span><span class="card-time">1d</span></div>
         <div class="card-line">Tuesday's reel beat its prediction by <b>31%</b></div>
         <p class="card-why">You followed the timing advice. 4 of your last 5 followed recommendations beat baseline.</p>
@@ -594,6 +638,15 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     </div>
   </section>
 
+  <div class="signout-veil" id="signoutV">
+    <div>
+      <svg width="40" height="40" viewBox="0 0 36 36" fill="none" style="margin:0 auto;display:block"><rect x="2" y="2" width="32" height="32" rx="9" stroke="#00C4A0" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="#00C4A0" stroke-width="2" stroke-linejoin="round"/><circle cx="18" cy="20" r="3" fill="#00C4A0"/></svg>
+      <h2>Signed out</h2>
+      <p>See you at 6:40, Sana. Art-E keeps watch and the briefing will be ready when you are.</p>
+      <button class="btn btn-primary" style="width:70%" onclick="hideSignout()">Sign back in</button>
+    </div>
+  </div>
+
   <!-- ═══ NAV (shared) ═══ -->
   <nav class="nav" id="mainnav">
     <button class="nav-item on" data-n="today" onclick="nav('today')"><span class="nav-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>Today</button>
@@ -657,7 +710,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     </div>
     <div class="set-row" style="border-top:none"><div><div class="sl">Interrupt me only for action</div><div class="sd2">Everything else waits in the morning briefing.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
     <div class="set-row"><div><div class="sl">Quiet hours 10pm to 8am</div><div class="sd2">Overnight findings wait for the morning.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
-    <div class="set-row"><div><div class="sl">Evidence with every answer</div><div class="sd2">Sources + confidence on all AI output. Always on.</div></div><button class="tog on" style="opacity:.75;cursor:not-allowed"></button></div>
+    <div class="set-row"><div><div class="sl">Evidence with every answer</div><div class="sd2">Sources + confidence on all AI output. Always on.</div></div><button class="tog on" style="opacity:.75" onclick="toast('Evidence stays on. It is the promise the product is built on.')"></button></div>
     <div class="set-row"><div><div class="sl">Learn from my ratings</div><div class="sd2">Thumbs train what Art-E surfaces next.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
     <div class="set-row"><div><div class="sl">Theme</div><div class="sd2">Dark by default. Light for bright rooms. Accent colours arrive fast-follow.</div></div>
       <div class="seg" id="themeSeg" style="display:flex;background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:3px"><button class="on" style="padding:6px 11px;border-radius:7px;font-size:11px;font-weight:600" onclick="setTheme('dark');segPickM(this)">Dark</button><button style="padding:6px 11px;border-radius:7px;font-size:11px;font-weight:600;color:var(--t3)" onclick="setTheme('light');segPickM(this)">Light</button></div></div>
@@ -681,12 +734,32 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       <div class="page-card"><div class="pav" style="background:rgba(255,92,116,.12);color:var(--rose)">SS</div><div class="pinfo"><div class="pname">Sana Shorts</div><div class="pstat"><span class="hdot" style="background:var(--rose)"></span>Needs you &middot; Art-E has a fix</div></div></div>
     </div>
     <button class="btn btn-ghost" style="width:100%;margin-top:6px" onclick="hideSheets();toast('Facebook connect flow opens here in the live product.')">+ Connect another page</button>
-    <button class="btn btn-ghost" style="width:100%;margin-top:9px" onclick="hideSheets();toast('Signed out. See you at 6:40.')">Sign out</button>
+    <button class="btn btn-ghost" style="width:100%;margin-top:9px" onclick="hideSheets();showSignout()">Sign out</button>
   </div>
 
   <div class="sheet" id="sh-data">
     <div class="grab"></div>
-    <h4>The full data</h4>
+    <h4>Analytics</h4>
+    <div style="display:flex;gap:7px;margin:2px 0 12px"><button class="ptab on" id="mdTabOv" onclick="dataTab('ov')">Overview</button><button class="ptab" id="mdTabAdv" onclick="dataTab('adv')">What takes off</button></div>
+    <div id="mdAdv" style="display:none">
+      <div class="dcard"><h5>What makes posts take off <b>plain words</b></h5>
+        <div class="drv"><div class="dl"><span>A number in the first 6 words</span><b>34%</b></div><div class="dt"><i style="width:34%;background:var(--act)"></i></div></div>
+        <div class="drv"><div class="dl"><span>Posting inside your window</span><b>28%</b></div><div class="dt"><i style="width:28%;background:var(--sky)"></i></div></div>
+        <div class="drv" style="margin-bottom:0"><div class="dl"><span>Save-worthy payoff</span><b>22%</b></div><div class="dt"><i style="width:22%;background:var(--arte)"></i></div></div>
+      </div>
+      <div class="dcard"><h5>Comments that need a look <b>2</b></h5>
+        <div class="sigrow" style="border-top:none"><span style="font-family:var(--mono);font-size:9px;color:var(--rose)">0.89</span><span style="flex:1">"this recipe is a scam, nothing like the thumbnail"</span><button class="ckbtn" onclick="hideSheets();nav('arte');arteExplain('crisis')">Reply</button></div>
+        <div class="sigrow"><span style="font-family:var(--mono);font-size:9px;color:var(--gold)">0.61</span><span style="flex:1">"portions way off for a family of four"</span><button class="ckbtn" onclick="hideSheets();nav('arte');arteExplain('crisis')">Reply</button></div>
+      </div>
+      <div class="dcard"><h5>Every post, the numbers <b>top 4</b></h5>
+        <div class="sigrow" style="border-top:none"><span>&#127860;</span><span style="flex:1"><b>Pasta reel</b> &middot; 84k reach</span><span style="font-family:var(--mono);font-size:9px;color:var(--act)">2.9x</span></div>
+        <div class="sigrow"><span>&#129386;</span><span style="flex:1"><b>Toastie reel</b> &middot; 61k</span><span style="font-family:var(--mono);font-size:9px;color:var(--act)">2.1x</span></div>
+        <div class="sigrow"><span>&#127859;</span><span style="flex:1"><b>Sunday roast carousel</b> &middot; 44k</span><span style="font-family:var(--mono);font-size:9px;color:var(--act)">1.8x</span></div>
+        <div class="sigrow"><span>&#129367;</span><span style="flex:1"><b>Air-fryer short</b> &middot; 38k</span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">1.1x</span></div>
+        <button class="chip" style="margin-top:9px" onclick="toast('CSV export starts in the live product.')">Export CSV</button>
+      </div>
+    </div>
+    <div id="mdOv">
     <p class="s-sub">Summoned by Art-E, not a default view. Every chart backs a sentence it has said.</p>
     <div class="dcard"><h5>Engaged followers by hour <b>May vs July</b></h5>
       <svg width="100%" height="70" viewBox="0 0 340 70" preserveAspectRatio="none"><path d="M0,46 C40,36 75,16 115,21 C155,27 195,54 250,57 C290,59 320,56 340,54" fill="none" stroke="#3A4557" stroke-width="2" stroke-dasharray="4 4"/><path d="M0,57 C55,57 115,53 170,46 C220,40 255,19 290,12 C310,8 328,10 340,11" fill="none" stroke="#8B7BFF" stroke-width="2.5"/><circle cx="290" cy="12" r="3.5" fill="#8B7BFF"/></svg></div>
@@ -695,10 +768,23 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     <div class="dcard"><h5>Content mix that works <b>saves-weighted</b></h5>
       <svg width="100%" height="70" viewBox="0 0 340 70"><rect x="14" y="16" width="44" height="48" rx="6" fill="rgba(0,196,160,.75)"/><rect x="80" y="27" width="44" height="37" rx="6" fill="rgba(0,196,160,.45)"/><rect x="146" y="36" width="44" height="28" rx="6" fill="rgba(139,123,255,.5)"/><rect x="212" y="45" width="44" height="19" rx="6" fill="rgba(87,181,240,.45)"/><rect x="278" y="52" width="44" height="12" rx="6" fill="rgba(94,104,117,.5)"/><text x="16" y="11" font-size="8.5" fill="#9AA3B2">reels</text><text x="82" y="22" font-size="8.5" fill="#9AA3B2">cards</text><text x="148" y="31" font-size="8.5" fill="#9AA3B2">carousel</text><text x="214" y="40" font-size="8.5" fill="#9AA3B2">photos</text><text x="280" y="47" font-size="8.5" fill="#9AA3B2">text</text></svg></div>
     <div class="sigrow" style="border-top:none"><span>&#127941;</span><span><b>Top supporters:</b> 3 fans drive 11% of shares</span></div>
-    <div class="sigrow"><span>&#9762;&#65039;</span><span><b>Toxicity 0.14</b> &middot; stable, under the 0.3 line</span></div>
+    <div class="sigrow"><span>&#9762;&#65039;</span><span><b>Comment negativity 0.14</b> &middot; calm, under the 0.3 line</span></div>
     <button class="chip" style="margin:4px 0 10px" onclick="hideSheets();nav('arte');askArteM('Why did my last post perform like that?')">&#10022; Why did my last post do well?</button>
     <div class="sigrow" style="border-top:none"><span class="ldot"></span><span><b>187 people</b> on your posts right now &middot; live counters ship in Phase 2</span></div>
+    </div>
     <button class="btn btn-ghost" style="width:100%" onclick="hideSheets()">Back to Art-E</button>
+  </div>
+
+  <div class="sheet" id="sh-ws">
+    <div class="grab"></div>
+    <h4>Your pages</h4>
+    <p class="s-sub">Pick a page. The feed, the hero move and analytics follow it.</p>
+    <button class="wsrow" onclick="pickWsM('all','All pages')"><span class="wd" style="background:var(--act)"></span>All pages<small>network view</small></button>
+    <button class="wsrow" onclick="pickWsM('sk',&quot;Sana's Kitchen&quot;)"><span class="wd" style="background:#00C4A0"></span>Sana's Kitchen<small>128k</small></button>
+    <button class="wsrow" onclick="pickWsM('qb','Quick Bites UK')"><span class="wd" style="background:#57B5F0"></span>Quick Bites UK<small>64k</small></button>
+    <button class="wsrow" onclick="pickWsM('ff','Family Feasts')"><span class="wd" style="background:#FFC24B"></span>Family Feasts<small>watch</small></button>
+    <button class="wsrow" onclick="pickWsM('mm','Midnight Munchies')"><span class="wd" style="background:#8B7BFF"></span>Midnight Munchies<small>41k</small></button>
+    <button class="wsrow" onclick="pickWsM('ss','Sana Shorts')"><span class="wd" style="background:#FF5C74"></span>Sana Shorts<small>needs you</small></button>
   </div>
 
   <div class="sheet" id="sh-plan">
@@ -867,6 +953,29 @@ function doWhats(){ const w=document.getElementById('waTog'); if(w) w.classList.
 function fbk(btn,v){ btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); toast(v?'Noted, more like this.':'Noted, less of this.'); }
 let MTH0=null;
 function clearChat(){ const th=document.getElementById('mthread'); if(MTH0===null) MTH0=th.innerHTML; th.innerHTML=MTH0; th.insertAdjacentHTML('afterbegin','<div class="msg m-arte"><p>Cleared. I keep no memory of that conversation.</p></div>'); toast('Forgotten.'); }
+function toggleShade(){ document.getElementById('shade').classList.toggle('on'); }
+function closeShade(){ document.getElementById('shade').classList.remove('on'); }
+function clearShade(){ document.querySelectorAll('.shade .notif').forEach(n=>n.remove()); closeShade(); toast('Cleared. New alerts will land here.'); }
+const HEROM={
+ all:['Post the pasta reel at 6:40pm today','Art-E predicts <b>2.4&times; your usual reach</b>'],
+ sk:['Post the pasta reel at 6:40pm today','Art-E predicts <b>2.4&times; your usual reach</b>'],
+ qb:['Draft Friday\u2019s 15-second short now','Short-form is up <b>22% across your network</b>'],
+ ff:['One roast-format post this weekend','Recovers this week\u2019s <b>8% engagement dip</b>'],
+ mm:['Protect the 10pm window tonight','It has beaten baseline <b>6 weeks straight</b>'],
+ ss:['Send the drafted reply on last night\u2019s short','Replying inside the hour <b>settles the cluster</b>']};
+function pickWsM(k,label){ hideSheets();
+  document.getElementById('wsLabelM').textContent=label;
+  const h=HEROM[k]||HEROM.all;
+  document.getElementById('heroTitle').innerHTML=h[0];
+  document.getElementById('heroWhy').innerHTML=h[1];
+  document.querySelectorAll('#scr-today .card').forEach(c=>{ const p=c.dataset.page; c.style.display=(k==='all'||!p||p==='all'||p===k)?'':'none'; });
+  nav('today'); toast('Viewing '+label+'.'); }
+function dataTab(t){ document.getElementById('mdOv').style.display = t==='ov'?'':'none';
+  document.getElementById('mdAdv').style.display = t==='adv'?'':'none';
+  document.getElementById('mdTabOv').classList.toggle('on', t==='ov');
+  document.getElementById('mdTabAdv').classList.toggle('on', t==='adv'); }
+function showSignout(){ document.getElementById('signoutV').classList.add('on'); }
+function hideSignout(){ document.getElementById('signoutV').classList.remove('on'); toast('Welcome back, Sana.'); }
 const RANGESM={7:'M0,48 L48,43 L96,50 L144,38 L192,42 L240,29 L288,19 L340,16',14:'M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17',30:'M0,40 L42,45 L84,38 L126,47 L168,42 L210,49 L252,44 L294,30 L340,17'};
 function setRangeM(btn,d){ [...btn.parentElement.children].forEach(x=>{x.classList.remove('on');x.style.color='var(--t3)';x.style.borderColor='var(--line)';x.style.background='';}); btn.classList.add('on'); btn.style.color='var(--act)'; btn.style.borderColor='rgba(0,196,160,.4)'; btn.style.background='rgba(0,196,160,.07)'; const p=document.getElementById('reachPathM'); if(p) p.setAttribute('d', RANGESM[d]); }
 const TIMES=['Today 6:40pm','Thu 8pm','Sun 10am'];
