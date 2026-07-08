@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* ═══ ArtemisAI admin family nav (self-contained) ═══ */
+/* ═══ ArtemisAI admin family nav (self-contained, always dark) ═══ */
 .site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.92);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans',sans-serif}
 nav.site-nav *{box-sizing:border-box}
 .sn-logo{font-size:1rem;font-weight:800;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.55rem;flex-shrink:0}
@@ -30,45 +30,57 @@ nav.site-nav *{box-sizing:border-box}
 #signout-modal .sm-yes{background:#f87171;border:none;color:#12060a}
 #signout-modal .sm-no{background:transparent;border:1px solid rgba(255,255,255,.15);color:#c8d0dd}
 @media (max-width:640px){.site-nav{height:48px;padding:0 12px}.sn-pill{padding:.3rem .75rem;font-size:.7rem}}
-/* ═══ QA Dashboard theme ═══ */
+/* ═══ theme tokens ═══ */
 :root{
   --bg:#060A13; --panel:rgba(255,255,255,.028); --panel2:rgba(255,255,255,.055);
   --line:rgba(255,255,255,.07); --line2:rgba(255,255,255,.13);
   --t1:#E8ECF4; --t2:#A3AFC4; --t3:#8A96AC;
-  --teal:#00D4AA; --indigo:#6C7BFB; --gold:#F7BE4F; --rose:#FB5D77; --sky:#57B5F0;
+  --okT:#00D4AA; --badT:#FB5D77; --warnT:#F7BE4F; --skyT:#6FBFF5; --indT:#8A96FF;
   --mono:'JetBrains Mono',ui-monospace,monospace;
   --grad:linear-gradient(120deg,#00D4AA,#6C7BFB);
+  --aur1:rgba(108,123,251,.07); --aur2:rgba(0,212,170,.05);
+  --tipbg:#0B1120; --railbg:rgba(9,13,22,.96);
+}
+body.light{
+  --bg:#F3F5FA; --panel:#FFFFFF; --panel2:#EEF1F8;
+  --line:rgba(14,21,36,.09); --line2:rgba(14,21,36,.17);
+  --t1:#101828; --t2:#3E4C63; --t3:#5C6A83;
+  --okT:#067A60; --badT:#C2274B; --warnT:#8F6400; --skyT:#1F6FA8; --indT:#4650C9;
+  --grad:linear-gradient(120deg,#0B8A6F,#4650C9);
+  --aur1:rgba(70,80,201,.06); --aur2:rgba(11,138,111,.06);
+  --tipbg:#FFFFFF; --railbg:rgba(250,251,254,.97);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scrollbar-color:#232B3C var(--bg);scroll-behavior:smooth}
-body{background:radial-gradient(1200px 500px at 80% -10%, rgba(108,123,251,.07), transparent 60%),
-             radial-gradient(900px 420px at 8% 0%, rgba(0,212,170,.05), transparent 55%), var(--bg);
-     color:var(--t1);font-family:'DM Sans',sans-serif;padding-top:52px;min-height:100vh}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(1200px 500px at 80% -10%, var(--aur1), transparent 60%),
+             radial-gradient(900px 420px at 8% 0%, var(--aur2), transparent 55%), var(--bg);
+     color:var(--t1);font-family:'DM Sans',sans-serif;padding-top:52px;min-height:100vh;transition:background .25s,color .25s}
 a{color:inherit} button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
-button:focus-visible,[draggable]:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:8px}
+button:focus-visible,[draggable]:focus-visible{outline:2px solid var(--okT);outline-offset:2px;border-radius:8px}
 .wrap{max-width:1460px;margin:0 auto;padding:30px 30px 90px;position:relative}
-/* header */
 .ph{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;margin-bottom:24px}
 .ph .kick{font-size:10.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:block;margin-bottom:7px}
 .ph h1{font-size:32px;font-weight:800;letter-spacing:-.8px;line-height:1}
 .ph h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .ph .sub{font-size:13px;color:var(--t2);margin-top:9px}
 .ph .sub b{color:var(--t1);font-family:var(--mono);font-weight:700;font-size:12px}
+.ph .sub .gok{color:var(--okT)}
 .ph .tools{margin-left:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .rangep{display:inline-flex;gap:3px;background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:3px}
 .rp{font-size:11.5px;font-weight:800;padding:7px 15px;border-radius:99px;color:var(--t3);transition:.15s}
-.rp:hover{color:var(--t1)} .rp.on{background:rgba(255,255,255,.09);color:var(--t1)}
-.tbtn{font-size:12px;font-weight:800;padding:9px 17px;border-radius:11px;border:1px solid var(--line);color:var(--t2);transition:.15s;background:var(--panel)}
+.rp:hover{color:var(--t1)} .rp.on{background:var(--panel2);color:var(--t1)}
+body.light .rp.on{background:#101828;color:#fff}
+.tbtn{font-size:12px;font-weight:800;padding:9px 15px;border-radius:11px;border:1px solid var(--line);color:var(--t2);transition:.15s;background:var(--panel)}
 .tbtn:hover{color:var(--t1);border-color:var(--line2)}
-.tbtn.pri{background:var(--grad);color:#04110D;border:none}
-body.edit .tbtn.pri{filter:saturate(1.2)}
-/* board */
+.tbtn.pri{background:var(--grad);color:#FFFFFF;border:none}
+body:not(.light) .tbtn.pri{color:#04110D}
 .board{display:grid;grid-template-columns:repeat(12,1fr);gap:15px;align-items:start;transition:margin .25s}
 body.edit .board{margin-right:292px}
 .widget{grid-column:span 6;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px 17px 15px;position:relative;min-height:100px;box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+body.light .widget{box-shadow:0 1px 2px rgba(14,21,36,.04), 0 8px 26px -18px rgba(14,21,36,.18)}
 .widget.s3{grid-column:span 3}.widget.s6{grid-column:span 6}.widget.s12{grid-column:span 12}
 .widget.dragging{opacity:.35}
-.widget.dropbefore::before{content:'';position:absolute;left:-10px;top:8px;bottom:8px;width:3px;border-radius:3px;background:var(--teal);box-shadow:0 0 12px rgba(0,212,170,.6)}
+.widget.dropbefore::before{content:'';position:absolute;left:-10px;top:8px;bottom:8px;width:3px;border-radius:3px;background:var(--okT);box-shadow:0 0 12px rgba(0,212,170,.5)}
 .whead{display:flex;align-items:center;gap:8px;margin-bottom:11px;min-height:22px}
 .whead .grab{display:none;color:var(--t3);font-size:13px;cursor:grab;letter-spacing:-1px;padding:2px 5px;margin-left:-5px}
 body.edit .whead .grab{display:inline-block}
@@ -78,79 +90,71 @@ body.edit .whead .grab{display:inline-block}
 .wctl{display:flex;gap:4px;align-items:center}
 .wctl button{width:24px;height:22px;border-radius:7px;font-size:10.5px;color:var(--t3);border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700}
 .wctl button:hover{color:var(--t1);border-color:var(--line);background:var(--panel2)}
-.wctl button.on{color:var(--teal)}
+.wctl button.on{color:var(--okT)}
 .wctl .kill{display:none}
 body.edit .wctl .kill{display:inline-flex}
-.wctl .kill:hover{color:var(--rose);border-color:rgba(251,93,119,.4)}
+.wctl .kill:hover{color:var(--badT);border-color:rgba(251,93,119,.4)}
 .wbody{min-height:44px}
 .wbody svg{display:block;width:100%;overflow:visible}
-/* animated draw-in */
 @keyframes dashin{to{stroke-dashoffset:0}}
 .anim path.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:dashin 1s cubic-bezier(.4,0,.2,1) forwards}
 .anim .fadein{opacity:0;animation:fin .7s .45s forwards}
 @keyframes fin{to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.anim path.draw{animation:none;stroke-dashoffset:0}.anim .fadein{animation:none;opacity:1}}
-/* kpi */
 .kpi{display:flex;flex-direction:column;gap:7px}
 .kpi .kv{font-family:var(--mono);font-size:31px;font-weight:700;letter-spacing:-1px;line-height:1;display:flex;align-items:baseline;gap:4px}
 .kpi .kv small{font-size:14px;color:var(--t3);font-weight:600}
 .kpi .kd{font-size:11px;color:var(--t3)} .kpi .kd b{font-family:var(--mono);font-weight:700;color:var(--t2)}
 .kdelta{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:800;font-family:var(--mono);padding:3px 9px;border-radius:99px;background:var(--panel2);width:fit-content}
-.kdelta.up{color:var(--teal)} .kdelta.dn{color:var(--rose)} .kdelta.flat{color:var(--t3)}
-.kspark{margin-top:2px}
-/* radial score */
+.kdelta.up{color:var(--okT)} .kdelta.dn{color:var(--badT)} .kdelta.flat{color:var(--t3)}
 .radial{display:flex;align-items:center;gap:16px}
-.radial .rnum{font-family:var(--mono);font-size:34px;font-weight:700;letter-spacing:-1.4px}
 .radial .rlab{font-size:11px;color:var(--t3);line-height:1.55}
 .radial .rlab b{color:var(--t2)}
-/* readiness */
-.ready-verdict{display:flex;align-items:center;gap:12px;background:linear-gradient(120deg,rgba(0,212,170,.14),rgba(108,123,251,.12));border:1px solid rgba(0,212,170,.3);border-radius:13px;padding:12px 15px;margin-bottom:12px}
-.ready-verdict .rv{font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:1px;color:var(--teal)}
+.ready-verdict{display:flex;align-items:center;gap:12px;background:linear-gradient(120deg,rgba(0,212,170,.13),rgba(108,123,251,.11));border:1px solid rgba(0,212,170,.32);border-radius:13px;padding:12px 15px;margin-bottom:12px}
+body.light .ready-verdict{background:linear-gradient(120deg,rgba(11,138,111,.09),rgba(70,80,201,.08));border-color:rgba(11,138,111,.32)}
+.ready-verdict .rv{font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:1px;color:var(--okT)}
 .ready-verdict span{font-size:11.5px;color:var(--t2)}
 .rrow{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--line);font-size:12.5px}
 .rrow:last-child{border-bottom:none}
 .rrow .rname{color:var(--t2);flex:1}
 .rrow .rval{font-family:var(--mono);font-size:11.5px;color:var(--t1)}
 .rpass{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex:0 0 auto}
-.rpass.ok{background:rgba(0,212,170,.16);color:var(--teal)}
-.rpass.no{background:rgba(251,93,119,.16);color:var(--rose)}
-/* tables */
+.rpass.ok{background:rgba(0,212,170,.15);color:var(--okT)}
+.rpass.no{background:rgba(251,93,119,.15);color:var(--badT)}
 table.qt{width:100%;border-collapse:collapse;font-size:12px}
 table.qt th{font-size:10px;letter-spacing:.9px;text-transform:uppercase;color:var(--t3);text-align:left;font-weight:800;padding:0 8px 9px 0;border-bottom:1px solid var(--line)}
 table.qt td{padding:9px 8px 9px 0;border-bottom:1px solid var(--line);color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
 table.qt td.m{font-family:var(--mono);font-size:11.5px;color:var(--t1)}
 table.qt tr:last-child td{border-bottom:none}
 .pillst{font-size:10px;font-weight:800;padding:3px 10px;border-radius:99px;font-family:var(--mono)}
-.pillst.ok{color:var(--teal);background:rgba(0,212,170,.13)}
-.pillst.bad{color:var(--rose);background:rgba(251,93,119,.13)}
-.pillst.warn{color:var(--gold);background:rgba(247,190,79,.13)}
+.pillst.ok{color:var(--okT);background:rgba(0,196,160,.12)}
+.pillst.bad{color:var(--badT);background:rgba(251,93,119,.12)}
+.pillst.warn{color:var(--warnT);background:rgba(247,190,79,.14)}
 .ownchip{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--t2)}
-.ownchip i{width:18px;height:18px;border-radius:50%;background:var(--grad);color:#04110D;font-size:8.5px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-style:normal}
-/* legends + heat */
+.ownchip i{width:18px;height:18px;border-radius:50%;background:var(--grad);color:#fff;font-size:8.5px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-style:normal}
+body:not(.light) .ownchip i{color:#04110D}
 .leg{display:flex;gap:12px;flex-wrap:wrap;margin-top:9px}
 .leg span{font-size:10.5px;color:var(--t3);display:inline-flex;align-items:center;gap:6px}
 .leg i{width:9px;height:9px;border-radius:3px;display:inline-block}
 .heatwrap{display:grid;gap:6px}
 .hcell{border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;height:36px;cursor:default}
 .hlab{font-size:10px;color:var(--t3);font-weight:800;letter-spacing:.6px;text-transform:uppercase;display:flex;align-items:center}
-/* palette rail */
-.palette{position:fixed;top:52px;right:0;bottom:0;width:278px;background:rgba(9,13,22,.96);backdrop-filter:blur(18px);border-left:1px solid var(--line);padding:20px 17px 34px;overflow-y:auto;transform:translateX(100%);transition:transform .25s, visibility 0s .25s;visibility:hidden;z-index:60}
+.palette{position:fixed;top:52px;right:0;bottom:0;width:278px;background:var(--railbg);backdrop-filter:blur(18px);border-left:1px solid var(--line);padding:20px 17px 34px;overflow-y:auto;transform:translateX(100%);transition:transform .25s, visibility 0s .25s;visibility:hidden;z-index:60}
 body.edit .palette{transform:none;visibility:visible;transition:transform .25s, visibility 0s 0s}
 .palette h4{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--t3);font-weight:800;margin-bottom:12px}
 .pgroup{font-size:10px;letter-spacing:.9px;text-transform:uppercase;color:var(--t3);font-weight:800;margin:17px 0 8px}
 .pchipq{display:flex;align-items:center;gap:9px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);margin-bottom:7px;cursor:grab;font-size:12px;font-weight:700;color:var(--t1);transition:.15s;user-select:none}
-.pchipq:hover{border-color:var(--teal);transform:translateX(-2px)}
-.pchipq i{width:8px;height:8px;border-radius:3px;background:var(--pc,var(--teal));flex:0 0 auto}
+.pchipq:hover{border-color:var(--okT);transform:translateX(-2px)}
+.pchipq i{width:8px;height:8px;border-radius:3px;background:var(--pc,var(--okT));flex:0 0 auto}
 .pchipq small{margin-left:auto;color:var(--t3);font-size:9.5px;font-family:var(--mono)}
 .pnote{font-size:10.5px;color:var(--t3);line-height:1.65;margin-top:15px;border-top:1px solid var(--line);padding-top:13px}
 .boardend{grid-column:span 12;border:1.5px dashed transparent;border-radius:14px;min-height:8px}
 body.edit .boardend{border-color:var(--line2);min-height:64px;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:11.5px;font-weight:700}
-body.edit .boardend.hot{border-color:var(--teal);color:var(--teal)}
-/* tooltip + toast */
-#tip{position:fixed;z-index:120;background:#0B1120;border:1px solid var(--line2);border-radius:10px;padding:7px 11px;font-size:11px;font-family:var(--mono);color:var(--t1);pointer-events:none;transform:translate(-50%,-130%);opacity:0;transition:opacity .12s;box-shadow:0 14px 40px -10px rgba(0,0,0,.6);white-space:nowrap}
+body.edit .boardend.hot{border-color:var(--okT);color:var(--okT)}
+#tip{position:fixed;z-index:120;background:var(--tipbg);border:1px solid var(--line2);border-radius:10px;padding:7px 11px;font-size:11px;font-family:var(--mono);color:var(--t1);pointer-events:none;transform:translate(-50%,-130%);opacity:0;transition:opacity .12s;box-shadow:0 14px 40px -10px rgba(0,0,0,.45);white-space:nowrap}
 #tip.on{opacity:1}
-#tip b{color:var(--teal)}
-.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(90px);background:#0B1120;border:1px solid var(--line2);color:var(--t1);font-size:12.5px;font-weight:700;padding:11px 19px;border-radius:12px;transition:.3s;z-index:90;box-shadow:0 18px 50px -12px rgba(0,0,0,.6)}
+#tip b{color:var(--okT)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(90px);background:var(--tipbg);border:1px solid var(--line2);color:var(--t1);font-size:12.5px;font-weight:700;padding:11px 19px;border-radius:12px;transition:.3s;z-index:90;box-shadow:0 18px 50px -12px rgba(0,0,0,.4)}
 .toast.on{transform:translateX(-50%) translateY(0)}
 @media (max-width:1100px){ body.edit .board{margin-right:0} .palette{width:min(86vw,300px)} }
 @media (max-width:820px){ .widget,.widget.s3,.widget.s6{grid-column:span 12} .ph h1{font-size:25px} .wrap{padding:22px 16px 70px} }
@@ -180,16 +184,17 @@ body.edit .boardend.hot{border-color:var(--teal);color:var(--teal)}
 <main class="wrap">
   <div class="ph">
     <div>
-      <span class="kick">Admin &middot; Quality &middot; Sprint 7 shipped</span>
+      <span class="kick">Admin &middot; Quality</span>
       <h1><em>QA</em> Dashboard</h1>
-      <div class="sub">Everything the suite knows, S1 through S7 &middot; <b>1,284</b> tests &middot; <b>214</b> pipeline runs &middot; gate <b style="color:var(--teal)">GREEN</b></div>
+      <div class="sub">Everything the suite knows &middot; <b>1,284</b> tests &middot; <b>214</b> pipeline runs &middot; gate <b class="gok">GREEN</b></div>
     </div>
     <div class="tools">
       <span class="rangep" role="tablist" aria-label="Time range">
         <button class="rp" data-r="runs" onclick="setRange('runs')">Last 10 runs</button>
-        <button class="rp on" data-r="s67" onclick="setRange('s67')">S6&ndash;S7</button>
-        <button class="rp" data-r="all" onclick="setRange('all')">S1&ndash;S7</button>
+        <button class="rp" data-r="d30" onclick="setRange('d30')">30 days</button>
+        <button class="rp on" data-r="q" onclick="setRange('q')">Quarter</button>
       </span>
+      <button class="tbtn" id="themeBtn" onclick="toggleTheme()" title="Light / dark">&#9789;</button>
       <button class="tbtn" onclick="resetLayout()" title="Restore the default board">&#8634; Reset</button>
       <button class="tbtn pri" id="editBtn" onclick="toggleEdit()">&#10022; Customize</button>
     </div>
@@ -200,7 +205,7 @@ body.edit .boardend.hot{border-color:var(--teal);color:var(--teal)}
   <aside class="palette" id="palette" aria-label="Add graphs">
     <h4>Drag onto the board</h4>
     <div id="palList"></div>
-    <div class="pnote">Drag a metric anywhere on the board, or click it to append. Drag a widget by its &#10247; handle to rearrange. S / M / L cycles width. Layout saves to this browser.</div>
+    <div class="pnote">Drag a metric anywhere on the board, or click it to append. Drag a widget by its &#10247; handle to rearrange. S / M / L cycles width. Layout and theme save to this browser.</div>
   </aside>
 </main>
 <div class="toast" id="toast"></div>
@@ -228,283 +233,397 @@ function _closeSignoutModal(){document.getElementById('signout-modal').classList
 function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
 </script>
 <script>
-/* ═════════ QA DASHBOARD v2 · sprint 1–7 seed ═════════ */
-const S = ['S1','S2','S3','S4','S5','S6','S7'];
-const RUNS = ['#205','#206','#207','#208','#209','#210','#211','#212','#213','#214'];
-const D = {
-  passrate: { s:[91.2,93.5,94.1,95.0,95.8,96.9,97.6], runs:[96.8,97.1,95.9,97.4,97.6,98.0,97.2,97.8,98.1,97.6] },
-  coverage: { s:[52,58,63,68,72,79,84], runs:[80,80,81,81,82,82,83,83,84,84] },
-  duration: { s:[4.2,5.1,6.4,7.8,8.9,10.6,11.5], runs:[10.9,11.2,11.8,10.7,11.4,12.1,11.0,11.6,11.3,11.5] },
-  visreg:   { s:[0,0,3,5,4,6,2], runs:[1,0,2,0,3,1,0,2,0,2] },
-  mttr:     { s:[3.1,2.6,2.4,2.2,1.9,1.6,1.4], runs:[1.6,1.5,1.5,1.4,1.5,1.3,1.4,1.4,1.3,1.4] },
-  burn:     { opened:[6,14,25,38,52,71,89], closed:[2,9,19,31,47,63,84] },
-  bugssev:  { p1:[1,0,1,1,0,1,0], p2:[2,1,3,2,3,4,2], p3:[2,3,4,6,5,7,6], p4:[1,2,3,3,5,6,5] },
-  aging:    [['under 3 days',9],['3 to 7 days',7],['1 to 2 weeks',4],['over 2 weeks',3]],
-  a11y:     [['Contrast',0],['Names and roles',2],['Focus order',1],['Landmarks',1],['Touch targets',3]],
-  sec:      [['SAST',0],['DAST',1],['Dependencies',4],['Secrets',0]],
-  covarea:  [['Unit',91],['Integration',78],['E2E',71],['Visual',64]],
-  pyramid:  [['Unit',964],['Integration',236],['E2E',84]],
-  browsers: { rows:['Chrome','Safari','Firefox','Edge'], cols:['Desktop','Mobile','Tablet'],
-              v:[[100,99,100],[98,96,97],[99,98,99],[100,99,99]] },
-  lighthouse:[['Web &middot; Perf',92],['Web &middot; A11y',100],['Web &middot; BP',96],['Web &middot; SEO',98],
-              ['Mobile &middot; Perf',88],['Mobile &middot; A11y',100],['Mobile &middot; BP',95],['Mobile &middot; SEO',97]],
-  passfail: [['Passed',1268,'#00D4AA'],['Skipped',16,'#8A96AC'],['Failed',0,'#FB5D77']],
-  ready: [
-    ['Coverage &ge; 80%','84%',true],
-    ['Open P1 bugs = 0','0',true],
-    ['Axe critical = 0','0 critical',true],
-    ['Lighthouse perf &ge; 85','88 mobile',true],
-    ['Security high = 0','0 high',true],
-    ['Flaky &le; 5 tests','5',true],
-  ],
-  flaky: [
-    ['discovery.swipe.drag-right','3 / 20','run #212','FA'],
-    ['arte.chat.stream-cancel','2 / 20','run #209','MU'],
-    ['analytics.heatmap.hover','2 / 20','run #206','FA'],
-    ['compose.predict.debounce','1 / 20','run #201','AS'],
-    ['alerts.mute-24h.timer','1 / 20','run #198','MU'],
-  ],
-  slow: [
-    ['e2e.full-onboarding-flow','94s','&#9650; 6s'],
-    ['e2e.analytics-all-tabs','71s','&#9660; 3s'],
-    ['e2e.discovery-collab-maya','58s','&#9650; 2s'],
-    ['api.contract.graph-suite','44s','&#8212;'],
-    ['e2e.crisis-storm-drill','39s','&#9660; 5s'],
-  ],
-  runsT: [
-    ['#214','today 09:12','pass','11m 32s','0'],
-    ['#213','yesterday 18:40','pass','11m 18s','0'],
-    ['#212','yesterday 09:05','flaky','11m 41s','1 retried'],
-    ['#211','2 days ago','pass','11m 02s','0'],
-    ['#210','2 days ago','fail','12m 06s','2'],
-    ['#209','3 days ago','pass','11m 27s','0'],
-  ],
+/* ═════════ QA DASHBOARD v3 · calendar time, every analysis ═════════ */
+const WKS=['14 Apr','21 Apr','28 Apr','05 May','12 May','19 May','26 May','02 Jun','09 Jun','16 Jun','23 Jun','30 Jun','07 Jul'];
+const RUNS=['#205','#206','#207','#208','#209','#210','#211','#212','#213','#214'];
+const D30L=(()=>{const out=[];const d=new Date('2026-06-09');for(let i=0;i<30;i++){const x=new Date(d);x.setDate(d.getDate()+i);out.push(x.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}));}return out;})();
+const wig=(base,amp,n,seed)=>Array.from({length:n},(_,i)=>+(base+Math.sin(i*1.7+seed)*amp+ i*0.001).toFixed(1));
+const D={
+  passrate:{q:[91.8,92.6,93.1,93.9,94.4,94.9,95.3,95.8,96.2,96.6,97.0,97.3,97.6],
+            d30:wig(97.2,0.7,30,1).map((v,i)=>+(v+i*0.013).toFixed(1)),
+            runs:[96.8,97.1,95.9,97.4,97.6,98.0,97.2,97.8,98.1,97.6]},
+  coverage:{q:[58,61,64,66,69,71,73,75,78,80,81,83,84], d30:Array.from({length:30},(_,i)=>80+Math.floor(i/7)), runs:[80,80,81,81,82,82,83,83,84,84]},
+  duration:{q:[5.8,6.3,6.9,7.4,7.9,8.6,9.1,9.7,10.2,10.7,11.0,11.3,11.5], d30:wig(11.3,0.6,30,2), runs:[10.9,11.2,11.8,10.7,11.4,12.1,11.0,11.6,11.3,11.5]},
+  visreg:{q:[1,0,2,4,3,5,2,4,3,6,2,3,2], d30:Array.from({length:30},(_,i)=>[0,1,0,2,1,0,3][i%7]), runs:[1,0,2,0,3,1,0,2,0,2]},
+  mttr:{q:[2.9,2.7,2.6,2.4,2.3,2.1,2.0,1.9,1.8,1.6,1.5,1.5,1.4], d30:wig(1.45,0.12,30,3), runs:[1.6,1.5,1.5,1.4,1.5,1.3,1.4,1.4,1.3,1.4]},
+  burn:{opened:[8,15,23,31,40,48,57,64,71,77,82,86,89], closed:[3,9,16,25,33,42,50,58,66,72,78,82,84]},
+  bugssev:{p1:[1,0,0,1,0,1,0,0,1,0,0,0,0], p2:[1,2,1,2,1,2,3,2,1,2,2,1,1], p3:[2,1,3,2,3,2,4,3,3,4,2,3,2], p4:[1,1,2,2,1,3,2,3,2,3,2,2,2]},
+  layers:{unit:[610,642,671,703,731,762,790,821,852,884,912,940,964],
+          integ:[150,158,166,173,181,189,196,204,212,219,226,231,236],
+          e2e:[40,44,47,51,55,59,63,67,71,75,78,81,84]},
+  pctile:{med:[5.8,6.3,6.9,7.4,7.9,8.6,9.1,9.7,10.2,10.7,11.0,11.3,11.5]},
+  aging:[['under 3 days',9],['3 to 7 days',7],['1 to 2 weeks',4],['over 2 weeks',3]],
+  a11y:[['Contrast',0],['Names and roles',2],['Focus order',1],['Landmarks',1],['Touch targets',3]],
+  sec:[['SAST',0],['DAST',1],['Dependencies',4],['Secrets',0]],
+  covarea:[['Unit',91],['Integration',78],['E2E',71],['Visual',64]],
+  pyramid:[['Unit',964],['Integration',236],['E2E',84]],
+  histo:[['&lt;1s',612],['1&ndash;3s',388],['3&ndash;10s',196],['10&ndash;30s',64],['&gt;30s',24]],
+  pareto:[['Selector drift',9],['Timing waits',6],['Test data',4],['Env config',3],['Regression',3]],
+  radar:{axes:['Coverage','Stability','Speed','A11y','Security','Compat'], v:[84,96,78,93,97,99]},
+  scatter:{pts:[[10.4,97.9],[10.7,97.4],[10.9,96.8],[11.0,97.2],[11.1,98.0],[11.2,97.1],[11.3,97.6],[11.3,98.1],[11.4,97.5],[11.4,96.4],[11.5,97.6],[11.6,97.8],[11.6,96.9],[11.7,97.0],[11.8,95.9],[11.9,97.3],[12.0,96.6],[12.1,98.0],[12.3,96.2]], out:[12.6,93.8]},
+  browsers:{rows:['Chrome','Safari','Firefox','Edge'], cols:['Desktop','Mobile','Tablet'], v:[[100,99,100],[98,96,97],[99,98,99],[100,99,99]]},
+  lighthouse:[['Web &middot; Perf',92],['Web &middot; A11y',100],['Web &middot; BP',96],['Web &middot; SEO',98],['Mobile &middot; Perf',88],['Mobile &middot; A11y',100],['Mobile &middot; BP',95],['Mobile &middot; SEO',97]],
+  passfail:[['Passed',1268],['Skipped',16],['Failed',0]],
+  ready:[['Coverage &ge; 80%','84%',true],['Open P1 bugs = 0','0',true],['Axe critical = 0','0 critical',true],['Lighthouse perf &ge; 85','88 mobile',true],['Security high = 0','0 high',true],['Flaky &le; 5 tests','5',true]],
+  flaky:[['discovery.swipe.drag-right','3 / 20','run #212','FA'],['arte.chat.stream-cancel','2 / 20','run #209','MU'],['analytics.heatmap.hover','2 / 20','run #206','FA'],['compose.predict.debounce','1 / 20','run #201','AS'],['alerts.mute-24h.timer','1 / 20','run #198','MU']],
+  slow:[['e2e.full-onboarding-flow','94s','&#9650; 6s'],['e2e.analytics-all-tabs','71s','&#9660; 3s'],['e2e.discovery-collab-maya','58s','&#9650; 2s'],['api.contract.graph-suite','44s','&#8212;'],['e2e.crisis-storm-drill','39s','&#9660; 5s']],
+  runsT:[['#214','today 09:12','pass','11m 32s','0'],['#213','yesterday 18:40','pass','11m 18s','0'],['#212','yesterday 09:05','flaky','11m 41s','1 retried'],['#211','2 days ago','pass','11m 02s','0'],['#210','2 days ago','fail','12m 06s','2'],['#209','3 days ago','pass','11m 27s','0']],
 };
-const C = {teal:'#00D4AA', indigo:'#6C7BFB', gold:'#F7BE4F', sky:'#57B5F0', rose:'#FB5D77', t3:'#8A96AC'};
-
-const SRC = {
-  score:     {t:'Quality score', c:C.teal, viz:['radial'], def:'radial'},
-  ready:     {t:'Release readiness', c:C.teal, viz:['check'], def:'check'},
-  passrate:  {t:'E2E pass rate', c:C.teal, viz:['line','kpi'], def:'line', u:'%'},
-  coverage:  {t:'Coverage', c:C.sky, viz:['line','kpi'], def:'line', u:'%', target:80},
-  duration:  {t:'Suite duration', c:C.indigo, viz:['line','bars','kpi'], def:'line', u:'min'},
-  gate:      {t:'CI gate', c:C.teal, viz:['kpi'], def:'kpi'},
-  passfail:  {t:'Last run split', c:C.teal, viz:['donut'], def:'donut'},
-  mttr:      {t:'Mean time to fix', c:C.gold, viz:['line','kpi'], def:'line', u:'d'},
-  visreg:    {t:'Visual diffs', c:C.gold, viz:['line','kpi'], def:'line', u:''},
-  burn:      {t:'Bugs opened vs closed', c:C.rose, viz:['line2'], def:'line2'},
-  bugssev:   {t:'Bugs by severity', c:C.rose, viz:['stack'], def:'stack'},
-  aging:     {t:'Open bug age', c:C.gold, viz:['bars'], def:'bars'},
-  a11y:      {t:'A11y scan', c:C.sky, viz:['bars','kpi'], def:'bars', u:''},
-  sec:       {t:'Security scans', c:C.rose, viz:['bars'], def:'bars'},
-  covarea:   {t:'Coverage by layer', c:C.sky, viz:['bars'], def:'bars'},
-  pyramid:   {t:'Test pyramid', c:C.indigo, viz:['bars'], def:'bars'},
-  browsers:  {t:'Browser matrix', c:C.teal, viz:['heat'], def:'heat'},
-  lighthouse:{t:'Lighthouse', c:C.indigo, viz:['bars'], def:'bars'},
-  flaky:     {t:'Flaky tests', c:C.gold, viz:['table'], def:'table'},
-  slow:      {t:'Slowest tests', c:C.indigo, viz:['table'], def:'table'},
-  runsT:     {t:'Recent runs', c:C.sky, viz:['table'], def:'table'},
+/* theme palettes for chart inks */
+const THEMES={
+  dark:{teal:'#00D4AA',indigo:'#6C7BFB',gold:'#F7BE4F',sky:'#57B5F0',rose:'#FB5D77',p4:'#556179',
+        ink:'#E8ECF4',mut:'#8A96AC',grid:'rgba(255,255,255,.06)',track:'rgba(255,255,255,.07)',
+        heat:['#0E8F76','#17A386','#8A6A22','#B23B52'],skip:'#8A96AC',
+        g1:'#00D4AA',g2:'#6C7BFB'},
+  light:{teal:'#0B8A6F',indigo:'#4650C9',gold:'#B07500',sky:'#1F6FA8',rose:'#C2274B',p4:'#7A879C',
+        ink:'#101828',mut:'#5C6A83',grid:'rgba(14,21,36,.08)',track:'rgba(14,21,36,.08)',
+        heat:['#0E8F76','#2AA88C','#B98A17','#C2496A'],skip:'#5C6A83',
+        g1:'#0B8A6F',g2:'#4650C9'},
 };
+let TH=THEMES.dark, THEME='dark';
 
-const DEFAULT_LAYOUT = [
-  {src:'score', viz:'radial', span:3}, {src:'passrate', viz:'kpi', span:3},
-  {src:'coverage', viz:'kpi', span:3}, {src:'gate', viz:'kpi', span:3},
-  {src:'ready', viz:'check', span:6}, {src:'passfail', viz:'donut', span:3}, {src:'mttr', viz:'kpi', span:3},
-  {src:'passrate', viz:'line', span:6}, {src:'coverage', viz:'line', span:6},
-  {src:'bugssev', viz:'stack', span:6}, {src:'burn', viz:'line2', span:6},
-  {src:'browsers', viz:'heat', span:6}, {src:'sec', viz:'bars', span:6},
-  {src:'a11y', viz:'bars', span:6}, {src:'lighthouse', viz:'bars', span:6},
-  {src:'pyramid', viz:'bars', span:6}, {src:'covarea', viz:'bars', span:6},
-  {src:'flaky', viz:'table', span:6}, {src:'runsT', viz:'table', span:6},
-  {src:'duration', viz:'line', span:6}, {src:'slow', viz:'table', span:6},
+const SRC={
+  score:{t:'Quality score', ck:'teal', viz:['radial'], def:'radial'},
+  ready:{t:'Release readiness', ck:'teal', viz:['check'], def:'check'},
+  gate:{t:'CI gate', ck:'teal', viz:['kpi'], def:'kpi'},
+  passfail:{t:'Last run split', ck:'teal', viz:['donut'], def:'donut'},
+  passrate:{t:'E2E pass rate', ck:'teal', viz:['line','kpi'], def:'line', u:'%'},
+  coverage:{t:'Coverage', ck:'sky', viz:['line','kpi'], def:'line', u:'%', target:80},
+  duration:{t:'Suite duration', ck:'indigo', viz:['line','kpi'], def:'line', u:'min'},
+  mttr:{t:'Mean time to fix', ck:'gold', viz:['line','kpi'], def:'line', u:'d'},
+  visreg:{t:'Visual diffs', ck:'gold', viz:['line','kpi'], def:'line', u:''},
+  burn:{t:'Bugs opened vs closed', ck:'rose', viz:['line2'], def:'line2'},
+  bugssev:{t:'Bugs by severity', ck:'rose', viz:['stack'], def:'stack'},
+  aging:{t:'Open bug age', ck:'gold', viz:['bars'], def:'bars'},
+  pareto:{t:'Flake root causes', ck:'rose', viz:['pareto'], def:'pareto'},
+  histo:{t:'Test duration spread', ck:'indigo', viz:['histo'], def:'histo'},
+  pctile:{t:'Suite p10&ndash;p90 band', ck:'indigo', viz:['band'], def:'band'},
+  scatter:{t:'Runtime vs pass rate', ck:'sky', viz:['scatter'], def:'scatter'},
+  layers:{t:'Tests by layer', ck:'sky', viz:['sarea'], def:'sarea'},
+  covarea:{t:'Coverage by layer', ck:'sky', viz:['bars'], def:'bars'},
+  pyramid:{t:'Test pyramid', ck:'indigo', viz:['bars'], def:'bars'},
+  radar:{t:'Quality radar', ck:'teal', viz:['radar'], def:'radar'},
+  a11y:{t:'A11y scan', ck:'sky', viz:['bars','kpi'], def:'bars', u:''},
+  sec:{t:'Security scans', ck:'rose', viz:['bars'], def:'bars'},
+  browsers:{t:'Browser matrix', ck:'teal', viz:['heat'], def:'heat'},
+  lighthouse:{t:'Lighthouse vs target', ck:'indigo', viz:['bullet'], def:'bullet'},
+  flaky:{t:'Flaky tests', ck:'gold', viz:['table'], def:'table'},
+  slow:{t:'Slowest tests', ck:'indigo', viz:['table'], def:'table'},
+  runsT:{t:'Recent runs', ck:'sky', viz:['table'], def:'table'},
+};
+const DEFAULT_LAYOUT=[
+  {src:'score',viz:'radial',span:3},{src:'passrate',viz:'kpi',span:3},{src:'coverage',viz:'kpi',span:3},{src:'gate',viz:'kpi',span:3},
+  {src:'ready',viz:'check',span:6},{src:'radar',viz:'radar',span:6},
+  {src:'passrate',viz:'line',span:6},{src:'coverage',viz:'line',span:6},
+  {src:'scatter',viz:'scatter',span:6},{src:'pctile',viz:'band',span:6},
+  {src:'bugssev',viz:'stack',span:6},{src:'burn',viz:'line2',span:6},
+  {src:'pareto',viz:'pareto',span:6},{src:'histo',viz:'histo',span:6},
+  {src:'layers',viz:'sarea',span:6},{src:'browsers',viz:'heat',span:6},
+  {src:'sec',viz:'bars',span:6},{src:'a11y',viz:'bars',span:6},
+  {src:'lighthouse',viz:'bullet',span:6},{src:'passfail',viz:'donut',span:3},{src:'mttr',viz:'kpi',span:3},
+  {src:'flaky',viz:'table',span:6},{src:'runsT',viz:'table',span:6},
+  {src:'duration',viz:'line',span:6},{src:'slow',viz:'table',span:6},
 ];
-
-let LAY=[], RANGE='s67', UID=0, EDIT=false;
-const KEY='ARTEMIS_QA_DASH_V2';
-function newW(src, viz){ const def=SRC[src].def; return {id:'w'+(++UID), src, viz: viz||def, span:(def==='kpi'||def==='radial'||def==='donut')?3:6}; }
+let LAY=[], RANGE='q', UID=0, EDIT=false;
+const KEY='ARTEMIS_QA_DASH_V3';
+const col=k=>TH[k];
+function newW(src,viz){const def=SRC[src].def;return{id:'w'+(++UID),src,viz:viz||def,span:(['kpi','radial','donut'].includes(def))?3:6};}
 function boot(){
-  try{ const s=JSON.parse(localStorage.getItem(KEY));
-    if(s && Array.isArray(s.lay) && s.lay.length){ LAY=s.lay.filter(w=>SRC[w.src]).map(w=>({...w,id:'w'+(++UID)})); RANGE=s.range||'s67'; }
+  try{const s=JSON.parse(localStorage.getItem(KEY));
+    if(s){ if(Array.isArray(s.lay)&&s.lay.length){LAY=s.lay.filter(w=>SRC[w.src]).map(w=>({...w,id:'w'+(++UID)}));}
+      if(['runs','d30','q'].includes(s.range)) RANGE=s.range;
+      if(s.theme==='light'){THEME='light';} }
   }catch(e){}
-  if(!LAY.length) LAY = DEFAULT_LAYOUT.map(w=>({...newW(w.src,w.viz), span:w.span}));
-  document.querySelectorAll('.rp').forEach(b=>b.classList.toggle('on', b.dataset.r===RANGE));
+  if(!LAY.length) LAY=DEFAULT_LAYOUT.map(w=>({...newW(w.src,w.viz),span:w.span}));
+  applyTheme(); document.querySelectorAll('.rp').forEach(b=>b.classList.toggle('on',b.dataset.r===RANGE));
   buildPalette(); render();
 }
-function save(){ localStorage.setItem(KEY, JSON.stringify({lay:LAY.map(({src,viz,span})=>({src,viz,span})), range:RANGE})); }
-function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('on'); clearTimeout(t._x); t._x=setTimeout(()=>t.classList.remove('on'),2200); }
+function applyTheme(){ TH=THEMES[THEME]; document.body.classList.toggle('light',THEME==='light');
+  document.getElementById('themeBtn').innerHTML = THEME==='light'?'&#9788;':'&#9789;'; }
+function toggleTheme(){ THEME=THEME==='light'?'dark':'light'; applyTheme(); render(); toast(THEME==='light'?'Light theme.':'Dark theme.'); }
+function save(){ localStorage.setItem(KEY, JSON.stringify({lay:LAY.map(({src,viz,span})=>({src,viz,span})),range:RANGE,theme:THEME})); }
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('on'),2200);}
+function labels(){return RANGE==='runs'?RUNS:(RANGE==='d30'?D30L:WKS);}
+function ser(k){return RANGE==='runs'?D[k].runs:(RANGE==='d30'?D[k].d30:D[k].q);}
+function subRange(){return RANGE==='runs'?'last 10 runs':(RANGE==='d30'?'last 30 days':'last quarter');}
 
-/* ── smooth path helper (Catmull-Rom → bezier) ── */
-function smooth(pts){
-  if(pts.length<3) return 'M'+pts.map(p=>p.join(',')).join(' L');
-  let d='M'+pts[0].join(',');
-  for(let i=0;i<pts.length-1;i++){
-    const p0=pts[i-1]||pts[i], p1=pts[i], p2=pts[i+1], p3=pts[i+2]||p2;
-    const c1=[p1[0]+(p2[0]-p0[0])/6, p1[1]+(p2[1]-p0[1])/6];
-    const c2=[p2[0]-(p3[0]-p1[0])/6, p2[1]-(p3[1]-p1[1])/6];
-    d+=` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
-  }
-  return d;
-}
+function smooth(pts){ if(pts.length<3) return 'M'+pts.map(p=>p.join(',')).join(' L');
+  let d='M'+pts[0].map(v=>v.toFixed(1)).join(',');
+  for(let i=0;i<pts.length-1;i++){const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+    const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6],c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];
+    d+=` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;}
+  return d;}
 let GID=0;
-function lineSVG(series, color, labels, unit, target, note){
-  const h=156, w=560, pl=36, pr=12, pt=14, pb=24, gid='g'+(++GID);
-  let mx=Math.max(...series), mn=Math.min(...series);
-  if(target!==undefined){ mx=Math.max(mx,target); mn=Math.min(mn,target); }
-  const pad=(mx-mn)*0.15||1; mx+=pad; mn=Math.max(0,mn-pad);
-  const X=i=>pl+(w-pl-pr)*i/(series.length-1||1), Y=v=>pt+(h-pt-pb)*(1-(v-mn)/((mx-mn)||1));
-  const pts=series.map((v,i)=>[X(i),Y(v)]);
-  const d=smooth(pts);
+function frame(w,h,pl,pr,pt,pb,mx,mn,unit){
+  const grid=[0,.5,1].map(t=>`<line x1="${pl}" x2="${w-pr}" y1="${pt+(h-pt-pb)*t}" y2="${pt+(h-pt-pb)*t}" stroke="${TH.grid}"/>`).join('');
+  const gl=[mx,(mx+mn)/2,mn].map((v,i)=>`<text x="${pl-7}" y="${pt+(h-pt-pb)*(i/2)+3.5}" fill="${TH.mut}" font-size="10" text-anchor="end" font-family="JetBrains Mono">${v.toFixed(v<10?1:0)}</text>`).join('');
+  return grid+gl;
+}
+function xTicks(lbls,X,h){ const step=lbls.length>16?5:(lbls.length>9?2:1);
+  return lbls.map((l,i)=> i%step?'':`<text x="${X(i)}" y="${h-7}" fill="${TH.mut}" font-size="10" text-anchor="middle" font-family="JetBrains Mono">${l}</text>`).join(''); }
+function lineSVG(series,color,lbls,unit,target){
+  const h=156,w=560,pl=36,pr=12,pt=14,pb=24,gid='g'+(++GID);
+  let mx=Math.max(...series),mn=Math.min(...series);
+  if(target!==undefined){mx=Math.max(mx,target);mn=Math.min(mn,target);}
+  const pad=(mx-mn)*0.15||1;mx+=pad;mn=Math.max(0,mn-pad);
+  const X=i=>pl+(w-pl-pr)*i/(series.length-1||1),Y=v=>pt+(h-pt-pb)*(1-(v-mn)/((mx-mn)||1));
+  const d=smooth(series.map((v,i)=>[X(i),Y(v)]));
   const area=d+` L${X(series.length-1).toFixed(1)},${h-pb} L${pl},${h-pb} Z`;
-  const grid=[0,.5,1].map(t=>`<line x1="${pl}" x2="${w-pr}" y1="${pt+(h-pt-pb)*t}" y2="${pt+(h-pt-pb)*t}" stroke="rgba(255,255,255,.06)"/>`).join('');
-  const gl=[mx,(mx+mn)/2,mn].map((v,i)=>`<text x="${pl-7}" y="${pt+(h-pt-pb)*(i/2)+3.5}" fill="${C.t3}" font-size="10" text-anchor="end" font-family="JetBrains Mono">${v.toFixed(v<10?1:0)}</text>`).join('');
-  const xt=labels.map((l,i)=>(labels.length>8&&i%2)?'':`<text x="${X(i)}" y="${h-7}" fill="${C.t3}" font-size="10" text-anchor="middle" font-family="JetBrains Mono">${l}</text>`).join('');
-  const tgt = target!==undefined? `<line x1="${pl}" x2="${w-pr}" y1="${Y(target)}" y2="${Y(target)}" stroke="${C.gold}" stroke-width="1.2" stroke-dasharray="4 5" opacity=".8"/><text x="${w-pr}" y="${Y(target)-5}" fill="${C.gold}" font-size="9.5" text-anchor="end" font-family="JetBrains Mono">gate ${target}${unit}</text>`:'';
-  const nt = note? `<g class="fadein"><circle cx="${X(series.length-1)}" cy="${Y(series[series.length-1])-1}" r="9" fill="none" stroke="${color}" opacity=".35"/><text x="${X(series.length-1)}" y="${Y(series[series.length-1])-16}" fill="${C.t3}" font-size="9.5" text-anchor="end" font-family="DM Sans" font-weight="700">${note}</text></g>`:'';
+  const tgt=target!==undefined?`<line x1="${pl}" x2="${w-pr}" y1="${Y(target)}" y2="${Y(target)}" stroke="${TH.gold}" stroke-width="1.2" stroke-dasharray="4 5" opacity=".85"/><text x="${w-pr}" y="${Y(target)-5}" fill="${TH.gold}" font-size="9.5" text-anchor="end" font-family="JetBrains Mono">gate ${target}${unit}</text>`:'';
   const last=series[series.length-1];
-  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="height:${h}px" class="hasline" data-pts='${JSON.stringify({labels,series,unit:unit||''})}'>
-    <defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${color}" stop-opacity=".26"/><stop offset="1" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>
-    ${grid}${gl}${tgt}
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="height:${h}px" class="hasline" data-pts='${JSON.stringify({labels:lbls,series,unit:unit||''})}'>
+    <defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${color}" stop-opacity=".25"/><stop offset="1" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>
+    ${frame(w,h,pl,pr,pt,pb,mx,mn,unit)}${tgt}
     <path d="${area}" fill="url(#${gid})" class="fadein"/>
     <path d="${d}" fill="none" stroke="${color}" stroke-width="2.6" stroke-linecap="round" class="draw" pathLength="1"/>
     <circle cx="${X(series.length-1)}" cy="${Y(last)}" r="4.2" fill="${color}" class="fadein"/>
-    <text class="fadein" x="${X(series.length-1)-9}" y="${Y(last)-10}" fill="#E8ECF4" font-size="11.5" font-weight="700" text-anchor="end" font-family="JetBrains Mono">${last}${unit||''}</text>
-    <circle class="hover" r="4.5" fill="#fff" stroke="${color}" stroke-width="2" opacity="0"/>${xt}${nt}</svg>`;
+    <text class="fadein" x="${X(series.length-1)-9}" y="${Y(last)-10}" fill="${TH.ink}" font-size="11.5" font-weight="700" text-anchor="end" font-family="JetBrains Mono">${last}${unit||''}</text>
+    <circle class="hover" r="4.5" fill="#fff" stroke="${color}" stroke-width="2" opacity="0"/>${xTicks(lbls,X,h)}</svg>`;
 }
-function line2SVG(a, b2, la, lb, labels){
-  const h=156, w=560, pl=36, pr=12, pt=14, pb=24;
+function line2SVG(a,b2,la,lb,lbls){
+  const h=156,w=560,pl=36,pr=12,pt=14,pb=24;
   const mx=Math.max(...a,...b2)*1.1||1;
-  const X=i=>pl+(w-pl-pr)*i/(a.length-1), Y=v=>pt+(h-pt-pb)*(1-v/mx);
+  const X=i=>pl+(w-pl-pr)*i/(a.length-1),Y=v=>pt+(h-pt-pb)*(1-v/mx);
   const mk=(s,c)=>`<path class="draw" pathLength="1" d="${smooth(s.map((v,i)=>[X(i),Y(v)]))}" fill="none" stroke="${c}" stroke-width="2.6" stroke-linecap="round"/>`;
-  const grid=[0,.5,1].map(t=>`<line x1="${pl}" x2="${w-pr}" y1="${pt+(h-pt-pb)*t}" y2="${pt+(h-pt-pb)*t}" stroke="rgba(255,255,255,.06)"/>`).join('');
-  const xt=labels.map((l,i)=>`<text x="${X(i)}" y="${h-7}" fill="${C.t3}" font-size="10" text-anchor="middle" font-family="JetBrains Mono">${l}</text>`).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="height:156px" class="hasline" data-pts='${JSON.stringify({labels,series:a,series2:b2,names:[la,lb]})}'>${grid}${mk(a,C.rose)}${mk(b2,C.teal)}${xt}
-    <text class="fadein" x="${w-pr}" y="16" text-anchor="end" fill="${C.t3}" font-size="10" font-family="JetBrains Mono">open gap: ${a[a.length-1]-b2[b2.length-1]}</text>
-    <circle class="hover" r="4.5" fill="#fff" stroke="${C.rose}" stroke-width="2" opacity="0"/>
-    <circle class="hover2" r="4.5" fill="#fff" stroke="${C.teal}" stroke-width="2" opacity="0"/></svg>`
-    + `<div class="leg"><span><i style="background:${C.rose}"></i>${la}</span><span><i style="background:${C.teal}"></i>${lb}</span></div>`;
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="height:156px" class="hasline" data-pts='${JSON.stringify({labels:lbls,series:a,series2:b2,names:[la,lb]})}'>${frame(w,h,pl,pr,pt,pb,mx,0)}${mk(a,TH.rose)}${mk(b2,TH.teal)}${xTicks(lbls,X,h)}
+    <text class="fadein" x="${w-pr}" y="16" text-anchor="end" fill="${TH.mut}" font-size="10" font-family="JetBrains Mono">open gap: ${a[a.length-1]-b2[b2.length-1]}</text>
+    <circle class="hover" r="4.5" fill="#fff" stroke="${TH.rose}" stroke-width="2" opacity="0"/>
+    <circle class="hover2" r="4.5" fill="#fff" stroke="${TH.teal}" stroke-width="2" opacity="0"/></svg>`
+    +`<div class="leg"><span><i style="background:${TH.rose}"></i>${la}</span><span><i style="background:${TH.teal}"></i>${lb}</span></div>`;
 }
-function barsSVG(pairs, color){
-  const h=pairs.length*31+8, w=560, pl=6, lw=176, gid='g'+(++GID);
+function bandSVG(){
+  const med=D.pctile.med, lo=med.map(v=>+(v*0.8).toFixed(1)), hi=med.map(v=>+(v*1.25).toFixed(1));
+  const h=156,w=560,pl=36,pr=12,pt=14,pb=24;
+  const mx=Math.max(...hi)*1.08, mn=Math.min(...lo)*0.9;
+  const X=i=>pl+(w-pl-pr)*i/(med.length-1),Y=v=>pt+(h-pt-pb)*(1-(v-mn)/(mx-mn));
+  const top=smooth(hi.map((v,i)=>[X(i),Y(v)]));
+  const botPts=lo.map((v,i)=>[X(i),Y(v)]).reverse();
+  const bot=botPts.map((p,i)=>(i?'L':'L')+p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="height:156px" class="anim">
+    ${frame(w,h,pl,pr,pt,pb,mx,mn)}
+    <path class="fadein" d="${top} ${bot} Z" fill="${TH.indigo}22"/>
+    <path class="draw" pathLength="1" d="${smooth(med.map((v,i)=>[X(i),Y(v)]))}" fill="none" stroke="${TH.indigo}" stroke-width="2.6" stroke-linecap="round"/>
+    ${xTicks(WKS,X,h)}
+    <text class="fadein" x="${w-pr}" y="16" text-anchor="end" fill="${TH.mut}" font-size="10" font-family="JetBrains Mono">band = p10 to p90 &middot; line = median</text></svg>`;
+}
+function sareaSVG(){
+  const L=D.layers, n=L.unit.length, h=166,w=560,pl=38,pr=12,pt=14,pb=24;
+  const tot=L.unit.map((v,i)=>v+L.integ[i]+L.e2e[i]); const mx=Math.max(...tot)*1.06;
+  const X=i=>pl+(w-pl-pr)*i/(n-1),Y=v=>pt+(h-pt-pb)*(1-v/mx);
+  const cum1=L.e2e, cum2=L.e2e.map((v,i)=>v+L.integ[i]), cum3=tot;
+  const area=(topArr,botArr,c)=>{const t=smooth(topArr.map((v,i)=>[X(i),Y(v)]));
+    const b=botArr.map((v,i)=>[X(i),Y(v)]).reverse().map(p=>'L'+p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+    return `<path class="fadein" d="${t} ${b} Z" fill="${c}"/>`;};
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="height:166px" class="anim">
+    ${frame(w,h,pl,pr,pt,pb,mx,0)}
+    ${area(cum3,cum2,TH.sky+'55')}${area(cum2,cum1,TH.indigo+'66')}${area(cum1,cum1.map(()=>0),TH.teal+'77')}
+    <path class="draw" pathLength="1" d="${smooth(cum3.map((v,i)=>[X(i),Y(v)]))}" fill="none" stroke="${TH.sky}" stroke-width="2"/>
+    ${xTicks(WKS,X,h)}
+    <text class="fadein" x="${w-pr}" y="16" text-anchor="end" fill="${TH.ink}" font-size="11" font-family="JetBrains Mono" font-weight="700">${tot[n-1]} tests</text></svg>`
+   +`<div class="leg"><span><i style="background:${TH.teal}"></i>E2E</span><span><i style="background:${TH.indigo}"></i>Integration</span><span><i style="background:${TH.sky}"></i>Unit</span></div>`;
+}
+function scatterSVG(){
+  const P=D.scatter.pts, O=D.scatter.out, h=166,w=560,pl=38,pr=14,pt=14,pb=26;
+  const xs=P.map(p=>p[0]).concat([O[0]]), ys=P.map(p=>p[1]).concat([O[1]]);
+  const mxx=Math.max(...xs)+0.2,mnx=Math.min(...xs)-0.2,mxy=Math.max(...ys)+0.5,mny=Math.min(...ys)-0.5;
+  const X=v=>pl+(w-pl-pr)*(v-mnx)/(mxx-mnx),Y=v=>pt+(h-pt-pb)*(1-(v-mny)/(mxy-mny));
+  const dots=P.map(p=>`<circle class="fadein" cx="${X(p[0]).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="4.5" fill="${TH.sky}" opacity=".85"><title>${p[0]}min &middot; ${p[1]}%</title></circle>`).join('');
+  const grid=[0,.5,1].map(t=>`<line x1="${pl}" x2="${w-pr}" y1="${pt+(h-pt-pb)*t}" y2="${pt+(h-pt-pb)*t}" stroke="${TH.grid}"/>`).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" style="height:166px" class="anim">${grid}
+    <text x="${pl-7}" y="${pt+4}" fill="${TH.mut}" font-size="10" text-anchor="end" font-family="JetBrains Mono">${mxy.toFixed(0)}%</text>
+    <text x="${pl-7}" y="${h-pb+4}" fill="${TH.mut}" font-size="10" text-anchor="end" font-family="JetBrains Mono">${mny.toFixed(0)}%</text>
+    <text x="${pl}" y="${h-7}" fill="${TH.mut}" font-size="10" font-family="JetBrains Mono">${mnx.toFixed(1)}m</text>
+    <text x="${w-pr}" y="${h-7}" fill="${TH.mut}" font-size="10" text-anchor="end" font-family="JetBrains Mono">${mxx.toFixed(1)}m</text>
+    ${dots}
+    <circle class="fadein" cx="${X(O[0])}" cy="${Y(O[1])}" r="5.5" fill="${TH.rose}"><title>run #210 &middot; ${O[0]}min &middot; ${O[1]}%</title></circle>
+    <text class="fadein" x="${X(O[0])-9}" y="${Y(O[1])+4}" fill="${TH.rose}" font-size="9.5" text-anchor="end" font-family="DM Sans" font-weight="700">run #210</text>
+    <text class="fadein" x="${w-pr}" y="16" text-anchor="end" fill="${TH.mut}" font-size="10" font-family="JetBrains Mono">each dot = one run &middot; last 20</text></svg>`;
+}
+function histoSVG(){
+  const H=D.histo, h=166,w=560,pl=14,pr=10,pt=16,pb=26;
+  const mx=Math.max(...H.map(x=>x[1]))*1.12, bw=(w-pl-pr)/H.length*0.56;
+  const cols=H.map((x,i)=>{const cx=pl+(w-pl-pr)*(i+.5)/H.length; const hh=(h-pt-pb)*x[1]/mx;
+    return `<rect class="fadein" x="${cx-bw/2}" y="${h-pb-hh}" width="${bw}" height="${hh}" rx="5" fill="${TH.indigo}"><title>${x[0]}: ${x[1]} tests</title></rect>
+      <text x="${cx}" y="${h-pb-hh-6}" fill="${TH.ink}" font-size="10.5" text-anchor="middle" font-family="JetBrains Mono" font-weight="700">${x[1]}</text>
+      <text x="${cx}" y="${h-8}" fill="${TH.mut}" font-size="10" text-anchor="middle" font-family="JetBrains Mono">${x[0]}</text>`;}).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" style="height:166px" class="anim">${cols}</svg>`;
+}
+function paretoSVG(){
+  const P=D.pareto, h=166,w=560,pl=14,pr=40,pt=16,pb=26;
+  const tot=P.reduce((s,x)=>s+x[1],0); const mx=Math.max(...P.map(x=>x[1]))*1.15;
+  let run=0; const cum=P.map(x=>{run+=x[1];return run/tot*100;});
+  const bw=(w-pl-pr)/P.length*0.52;
+  const X=i=>pl+(w-pl-pr)*(i+.5)/P.length;
+  const Yc=v=>pt+(h-pt-pb)*(1-v/100);
+  const cols=P.map((x,i)=>{const hh=(h-pt-pb)*x[1]/mx;
+    return `<rect class="fadein" x="${X(i)-bw/2}" y="${h-pb-hh}" width="${bw}" height="${hh}" rx="5" fill="${TH.rose}"><title>${x[0]}: ${x[1]}</title></rect>
+      <text x="${X(i)}" y="${h-8}" fill="${TH.mut}" font-size="9.5" text-anchor="middle" font-family="DM Sans" font-weight="700">${x[0].split(' ')[0]}</text>`;}).join('');
+  const cumPath=smooth(cum.map((v,i)=>[X(i),Yc(v)]));
+  const cumDots=cum.map((v,i)=>`<circle class="fadein" cx="${X(i)}" cy="${Yc(v)}" r="3.4" fill="${TH.gold}"/>`).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" style="height:166px" class="anim">${cols}
+    <path class="draw" pathLength="1" d="${cumPath}" fill="none" stroke="${TH.gold}" stroke-width="2.2" stroke-dasharray="none"/>${cumDots}
+    <text x="${w-6}" y="${Yc(100)+4}" fill="${TH.gold}" font-size="9.5" text-anchor="end" font-family="JetBrains Mono">100%</text>
+    <text x="${w-6}" y="${Yc(cum[1])+4}" fill="${TH.gold}" font-size="9.5" text-anchor="end" font-family="JetBrains Mono">${cum[1].toFixed(0)}%</text></svg>`
+   +`<div class="leg"><span><i style="background:${TH.rose}"></i>occurrences</span><span><i style="background:${TH.gold}"></i>cumulative %</span></div>`;
+}
+function radarSVG(){
+  const R=D.radar, n=R.axes.length, cx=110, cy=92, rad=68;
+  const ang=i=>-Math.PI/2 + i*2*Math.PI/n;
+  const pt=(i,f)=>[cx+Math.cos(ang(i))*rad*f, cy+Math.sin(ang(i))*rad*f];
+  const rings=[0.33,0.66,1].map(f=>'<polygon points="'+R.axes.map((_,i)=>pt(i,f).map(v=>v.toFixed(1)).join(',')).join(' ')+`" fill="none" stroke="${TH.grid}"/>`).join('');
+  const spokes=R.axes.map((_,i)=>{const [x,y]=pt(i,1);return `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="${TH.grid}"/>`;}).join('');
+  const poly=R.axes.map((_,i)=>pt(i,R.v[i]/100).map(v=>v.toFixed(1)).join(',')).join(' ');
+  const labs=R.axes.map((a,i)=>{const [x,y]=pt(i,1.24);return `<text x="${x.toFixed(1)}" y="${(y+3).toFixed(1)}" fill="${TH.mut}" font-size="9.5" text-anchor="middle" font-family="DM Sans" font-weight="700">${a}</text>`;}).join('');
+  const vals=R.axes.map((a,i)=>`<span><i style="background:${TH.teal}"></i>${a} <b style="font-family:var(--mono);color:var(--t1);margin-left:3px">${R.v[i]}</b></span>`).join('');
+  return `<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+    <svg width="220" height="184" viewBox="0 0 220 184" class="anim">${rings}${spokes}
+      <polygon class="fadein" points="${poly}" fill="${TH.teal}2E" stroke="${TH.teal}" stroke-width="2.2"/>${labs}</svg>
+    <div class="leg" style="flex-direction:column;gap:7px;margin:0;font-size:10.5px">${vals}</div></div>`;
+}
+function bulletSVG(){
+  const T=90, rows=D.lighthouse, h=rows.length*30+6, w=560, lw=150;
+  const body=rows.map((r,i)=>{const y=i*30+4; const full=w-lw-46; const bw=full*r[1]/100; const tx=lw+full*T/100;
+    const c = r[1]>=T? TH.teal : TH.gold;
+    return `<text x="4" y="${y+13}" fill="${TH.mut}" font-size="11" font-family="DM Sans" font-weight="600">${r[0]}</text>
+      <rect x="${lw}" y="${y+3}" width="${full}" height="12" rx="6" fill="${TH.track}"/>
+      <rect class="fadein" x="${lw}" y="${y+3}" width="${Math.max(bw,3)}" height="12" rx="6" fill="${c}"><title>${r[0]}: ${r[1]} (target ${T})</title></rect>
+      <line x1="${tx}" x2="${tx}" y1="${y}" y2="${y+18}" stroke="${TH.ink}" stroke-width="2"/>
+      <text x="${w-4}" y="${y+13}" fill="${TH.ink}" font-size="11" text-anchor="end" font-family="JetBrains Mono" font-weight="700">${r[1]}</text>`;}).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" style="height:${h}px" class="anim">${body}</svg>
+    <div class="leg"><span><i style="background:${TH.ink};width:2px;height:12px;border-radius:1px"></i>target ${T}</span></div>`;
+}
+function barsSVG(pairs,color){
+  const h=pairs.length*31+8,w=560,pl=6,lw=176,gid='g'+(++GID);
   const mx=Math.max(...pairs.map(p=>p[1]))||1;
-  const rows=pairs.map((p,i)=>{const y=i*31+6; const bw=(w-lw-72)*(p[1]/mx);
-    return `<text x="${pl}" y="${y+13}" fill="${'#A3AFC4'}" font-size="11.5" font-family="DM Sans" font-weight="600">${p[0]}</text>
-     <rect x="${lw}" y="${y+3}" width="${w-lw-72}" height="12" rx="6" fill="rgba(255,255,255,.06)"/>
+  const rows=pairs.map((p,i)=>{const y=i*31+6;const bw=(w-lw-72)*(p[1]/mx);
+    return `<text x="${pl}" y="${y+13}" fill="${TH.mut}" font-size="11.5" font-family="DM Sans" font-weight="600">${p[0]}</text>
+     <rect x="${lw}" y="${y+3}" width="${w-lw-72}" height="12" rx="6" fill="${TH.track}"/>
      <rect x="${lw}" y="${y+3}" width="${Math.max(bw,3)}" height="12" rx="6" fill="url(#${gid})" class="fadein"><title>${p[0]}: ${p[1]}</title></rect>
-     <text x="${w-8}" y="${y+13}" fill="#E8ECF4" font-size="11.5" text-anchor="end" font-family="JetBrains Mono" font-weight="700">${p[1]}</text>`;}).join('');
+     <text x="${w-8}" y="${y+13}" fill="${TH.ink}" font-size="11.5" text-anchor="end" font-family="JetBrains Mono" font-weight="700">${p[1]}</text>`;}).join('');
   return `<svg viewBox="0 0 ${w} ${h}" style="height:${h}px" class="anim">
-    <defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${color}"/><stop offset="1" stop-color="${color}99"/></linearGradient></defs>${rows}</svg>`;
+    <defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${color}"/><stop offset="1" stop-color="${color}AA"/></linearGradient></defs>${rows}</svg>`;
 }
 function stackSVG(){
-  const h=176, w=560, pl=30, pr=8, pt=12, pb=24, keys=[['p1',C.rose,'P1'],['p2',C.gold,'P2'],['p3',C.sky,'P3'],['p4','#556179','P4']];
-  const tot=S.map((_,i)=>keys.reduce((s,k)=>s+D.bugssev[k[0]][i],0)); const mx=Math.max(...tot)*1.12;
-  const bw=(w-pl-pr)/S.length*0.5;
-  const cols=S.map((sp,i)=>{let y=h-pb; const X=pl+(w-pl-pr)*(i+.5)/S.length - bw/2;
-    const segs=keys.map(k=>{const v=D.bugssev[k[0]][i]; const hh=(h-pt-pb)*v/mx; y-=hh;
-      return v?`<rect x="${X}" y="${y}" width="${bw}" height="${Math.max(hh-1.5,0)}" rx="3" fill="${k[1]}" class="fadein"><title>${sp} ${k[2]}: ${v}</title></rect>`:'';}).join('');
-    return segs+`<text x="${X+bw/2}" y="${h-7}" fill="${C.t3}" font-size="10" text-anchor="middle" font-family="JetBrains Mono">${sp}</text>
-      <text x="${X+bw/2}" y="${y-5}" fill="#A3AFC4" font-size="10" text-anchor="middle" font-family="JetBrains Mono">${tot[i]}</text>`;}).join('');
+  const h=176,w=560,pl=30,pr=8,pt=12,pb=24,keys=[['p1',TH.rose,'P1'],['p2',TH.gold,'P2'],['p3',TH.sky,'P3'],['p4',TH.p4,'P4']];
+  const tot=WKS.map((_,i)=>keys.reduce((s,k)=>s+D.bugssev[k[0]][i],0));const mx=Math.max(...tot)*1.15;
+  const bw=(w-pl-pr)/WKS.length*0.5;
+  const cols=WKS.map((sp,i)=>{let y=h-pb;const X=pl+(w-pl-pr)*(i+.5)/WKS.length-bw/2;
+    const segs=keys.map(k=>{const v=D.bugssev[k[0]][i];const hh=(h-pt-pb)*v/mx;y-=hh;
+      return v?`<rect x="${X}" y="${y}" width="${bw}" height="${Math.max(hh-1.2,0)}" rx="2.5" fill="${k[1]}" class="fadein"><title>${sp} ${k[2]}: ${v}</title></rect>`:'';}).join('');
+    return segs+((i%2)?'':`<text x="${X+bw/2}" y="${h-7}" fill="${TH.mut}" font-size="9.5" text-anchor="middle" font-family="JetBrains Mono">${sp}</text>`);}).join('');
   return `<svg viewBox="0 0 ${w} ${h}" style="height:176px" class="anim">${cols}</svg>`
-   + `<div class="leg">${keys.map(k=>`<span><i style="background:${k[1]}"></i>${k[2]}</span>`).join('')}</div>`;
+   +`<div class="leg">${keys.map(k=>`<span><i style="background:${k[1]}"></i>${k[2]}</span>`).join('')}</div>`;
 }
 function heatHTML(){
   const B=D.browsers;
   let g=`<div class="heatwrap" style="grid-template-columns:78px repeat(${B.cols.length},1fr)">`;
   g+='<span></span>'+B.cols.map(c=>`<span class="hlab" style="justify-content:center">${c}</span>`).join('');
-  B.rows.forEach((r,i)=>{ g+=`<span class="hlab">${r}</span>`+B.v[i].map((v,ci)=>{
-    const col = v>=100?'#0E8F76': v>=98?'#17A386': v>=96?'#8A6A22':'#B23B52';
-    return `<div class="hcell" style="background:${col};color:#F2F5F9" title="${r} · ${B.cols[ci]}: ${v}%">${v}%</div>`;}).join(''); });
+  B.rows.forEach((r,i)=>{g+=`<span class="hlab">${r}</span>`+B.v[i].map((v,ci)=>{
+    const col=v>=100?TH.heat[0]:v>=98?TH.heat[1]:v>=96?TH.heat[2]:TH.heat[3];
+    return `<div class="hcell" style="background:${col};color:#FFFFFF" title="${r} · ${B.cols[ci]}: ${v}%">${v}%</div>`;}).join('');});
   return g+'</div>';
 }
 function donutHTML(){
+  const cols=[TH.teal,TH.skip,TH.rose];
   const total=D.passfail.reduce((s,p)=>s+p[1],0);
-  const R=44, CIRC=2*Math.PI*R; let off=0;
-  const segs=D.passfail.map(p=>{const frac=p[1]/total; const seg=`<circle cx="60" cy="60" r="${R}" fill="none" stroke="${p[2]}" stroke-width="13" stroke-dasharray="${(CIRC*frac).toFixed(1)} ${CIRC}" stroke-dashoffset="${(-off*CIRC).toFixed(1)}" transform="rotate(-90 60 60)"><title>${p[0]}: ${p[1]}</title></circle>`; off+=frac; return seg;}).join('');
+  const R=44,CIRC=2*Math.PI*R;let off=0;
+  const segs=D.passfail.map((p,i)=>{const frac=p[1]/total;const seg=`<circle cx="60" cy="60" r="${R}" fill="none" stroke="${cols[i]}" stroke-width="13" stroke-dasharray="${(CIRC*frac).toFixed(1)} ${CIRC}" stroke-dashoffset="${(-off*CIRC).toFixed(1)}" transform="rotate(-90 60 60)"><title>${p[0]}: ${p[1]}</title></circle>`;off+=frac;return seg;}).join('');
   const pct=(D.passfail[0][1]/total*100).toFixed(1);
   return `<div style="display:flex;align-items:center;gap:16px">
-    <svg width="120" height="120" viewBox="0 0 120 120" class="anim"><circle cx="60" cy="60" r="${R}" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="13"/>${segs}
-    <text x="60" y="57" text-anchor="middle" fill="#E8ECF4" font-family="JetBrains Mono" font-weight="700" font-size="19">${pct}%</text>
-    <text x="60" y="73" text-anchor="middle" fill="${C.t3}" font-size="9" font-family="DM Sans" font-weight="700">PASSED</text></svg>
-    <div class="leg" style="flex-direction:column;gap:8px;margin:0">${D.passfail.map(p=>`<span><i style="background:${p[2]}"></i>${p[0]} <b style="font-family:var(--mono);color:var(--t1);margin-left:4px">${p[1]}</b></span>`).join('')}</div></div>`;
+    <svg width="120" height="120" viewBox="0 0 120 120" class="anim"><circle cx="60" cy="60" r="${R}" fill="none" stroke="${TH.track}" stroke-width="13"/>${segs}
+    <text x="60" y="57" text-anchor="middle" fill="${TH.ink}" font-family="JetBrains Mono" font-weight="700" font-size="19">${pct}%</text>
+    <text x="60" y="73" text-anchor="middle" fill="${TH.mut}" font-size="9" font-family="DM Sans" font-weight="700">PASSED</text></svg>
+    <div class="leg" style="flex-direction:column;gap:8px;margin:0">${D.passfail.map((p,i)=>`<span><i style="background:${cols[i]}"></i>${p[0]} <b style="font-family:var(--mono);color:var(--t1);margin-left:4px">${p[1]}</b></span>`).join('')}</div></div>`;
 }
 function radialHTML(){
-  const score=93, R=42, CIRC=2*Math.PI*R, gid='g'+(++GID);
+  const score=93,R=42,CIRC=2*Math.PI*R,gid='g'+(++GID);
   return `<div class="radial">
     <svg width="104" height="104" viewBox="0 0 104 104" class="anim">
-      <defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00D4AA"/><stop offset="1" stop-color="#6C7BFB"/></linearGradient></defs>
-      <circle cx="52" cy="52" r="${R}" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="9"/>
+      <defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${TH.g1}"/><stop offset="1" stop-color="${TH.g2}"/></linearGradient></defs>
+      <circle cx="52" cy="52" r="${R}" fill="none" stroke="${TH.track}" stroke-width="9"/>
       <circle cx="52" cy="52" r="${R}" fill="none" stroke="url(#${gid})" stroke-width="9" stroke-linecap="round"
         stroke-dasharray="${(CIRC*score/100).toFixed(1)} ${CIRC}" transform="rotate(-90 52 52)" class="fadein"/>
-      <text x="52" y="59" text-anchor="middle" fill="#E8ECF4" font-family="JetBrains Mono" font-weight="700" font-size="21">${score}</text></svg>
-    <div class="rlab">Composite of pass rate, coverage,<br>open bugs and guard scans.<br><b>Up 4 since sprint 6.</b></div></div>`;
+      <text x="52" y="59" text-anchor="middle" fill="${TH.ink}" font-family="JetBrains Mono" font-weight="700" font-size="21">${score}</text></svg>
+    <div class="rlab">Composite of pass rate, coverage,<br>open bugs and guard scans.<br><b>Up 4 this month.</b></div></div>`;
 }
 function readyHTML(){
   const all=D.ready.every(r=>r[2]);
   return `<div class="ready-verdict"><span class="rv">${all?'&#10003; READY TO SHIP':'&#9888; NOT READY'}</span><span>${all?'All six launch gates pass on run #214.':'Blocked gates below.'}</span></div>`
    + D.ready.map(r=>`<div class="rrow"><span class="rpass ${r[2]?'ok':'no'}">${r[2]?'&#10003;':'&#10005;'}</span><span class="rname">${r[0]}</span><span class="rval">${r[1]}</span></div>`).join('');
 }
-function sparkSVG(arr, color){
-  const w=96,h=26; const mx=Math.max(...arr), mn=Math.min(...arr);
-  const pts=arr.map((v,i)=>[2+(w-4)*i/(arr.length-1), 3+(h-6)*(1-(v-mn)/((mx-mn)||1))]);
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" class="kspark anim"><path class="draw" pathLength="1" d="${smooth(pts)}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round"/></svg>`;
+function sparkSVG(arr,color){
+  const w=96,h=26;const mx=Math.max(...arr),mn=Math.min(...arr);
+  const pts=arr.map((v,i)=>[2+(w-4)*i/(arr.length-1),3+(h-6)*(1-(v-mn)/((mx-mn)||1))]);
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" class="anim"><path class="draw" pathLength="1" d="${smooth(pts)}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round"/></svg>`;
 }
 function kpiHTML(src){
   const s=SRC[src];
-  if(src==='gate') return `<div class="kpi"><span class="kv" style="color:var(--teal)">GREEN</span>
+  if(src==='gate') return `<div class="kpi"><span class="kv" style="color:var(--okT)">GREEN</span>
     <span class="kdelta up">&#10003; run #214 &middot; 0 blocking</span>
     <span class="kd">Merge gate on &middot; coverage floor <b>80%</b> &middot; perf budget <b>ok</b></span></div>`;
-  const arr = RANGE==='runs' ? D[src].runs : D[src].s.slice(RANGE==='s67'?5:0);
-  const last=arr[arr.length-1], prev=arr[arr.length-2]??last, d=+(last-prev).toFixed(1);
-  const lowerBetter = (src==='visreg'||src==='duration'||src==='mttr');
-  const good = d===0?'flat':((d<0)===lowerBetter||d===0? 'up':'dn');
+  const arr=ser(src);
+  const last=arr[arr.length-1],prev=arr[arr.length-2]??last,d=+(last-prev).toFixed(1);
+  const lowerBetter=(src==='visreg'||src==='duration'||src==='mttr');
+  const good=d===0?'flat':((d<0)===lowerBetter?'up':'dn');
   return `<div class="kpi"><span class="kv">${last}<small>${s.u||''}</small></span>
     <span class="kdelta ${good}">${d>0?'&#9650;':(d<0?'&#9660;':'&#8212;')} ${Math.abs(d)}${s.u||''} vs prev</span>
-    ${sparkSVG(RANGE==='runs'?D[src].runs:D[src].s, s.c)}
-    <span class="kd">${RANGE==='runs'?'last 10 pipeline runs':(RANGE==='s67'?'sprints 6&ndash;7':'sprints 1&ndash;7')}</span></div>`;
+    ${sparkSVG(arr,col(s.ck))}
+    <span class="kd">${subRange()}</span></div>`;
 }
 function widgetBody(w){
   const s=SRC[w.src];
-  const lbl = RANGE==='runs'?RUNS:(RANGE==='s67'?S.slice(5):S);
-  const ser = k => RANGE==='runs' ? D[k].runs : D[k].s.slice(RANGE==='s67'?5:0);
   switch(w.viz){
     case 'kpi': return kpiHTML(w.src);
     case 'radial': return radialHTML();
     case 'check': return readyHTML();
     case 'donut': return donutHTML();
-    case 'line': return lineSVG(ser(w.src), s.c, lbl, s.u||'', s.target,
-        (w.src==='passrate'&&RANGE==='all')?'sprint 7 &#10003;':undefined);
-    case 'bars':
-      if(w.src==='duration') return barsSVG(lbl.map((l,i)=>[l, ser('duration')[i]]), s.c);
-      return barsSVG(D[w.src], s.c);
-    case 'line2': return line2SVG(D.burn.opened, D.burn.closed, 'opened (cum.)', 'closed (cum.)', S);
+    case 'radar': return radarSVG();
+    case 'scatter': return scatterSVG();
+    case 'histo': return histoSVG();
+    case 'band': return bandSVG();
+    case 'sarea': return sareaSVG();
+    case 'pareto': return paretoSVG();
+    case 'bullet': return bulletSVG();
+    case 'line': return lineSVG(ser(w.src), col(s.ck), labels(), s.u||'', s.target);
+    case 'bars': return barsSVG(D[w.src], col(s.ck));
+    case 'line2': return line2SVG(D.burn.opened, D.burn.closed,'opened (cum.)','closed (cum.)',WKS);
     case 'stack': return stackSVG();
     case 'heat': return heatHTML();
     case 'table':
-      if(w.src==='flaky') return tableHTML(['Test','Fails','Last','Owner'], D.flaky, [1,2], -1, 3);
-      if(w.src==='slow')  return tableHTML(['Test','p95','&Delta;'], D.slow, [1,2], -1, -1);
-      return tableHTML(['Run','When','Result','Duration','Fails'], D.runsT, [0,3,4], 2, -1);
+      if(w.src==='flaky') return tableHTML(['Test','Fails','Last','Owner'],D.flaky,[1,2],-1,3);
+      if(w.src==='slow') return tableHTML(['Test','p95','&Delta;'],D.slow,[1,2],-1,-1);
+      return tableHTML(['Run','When','Result','Duration','Fails'],D.runsT,[0,3,4],2,-1);
   }
   return '';
 }
-function tableHTML(head, rows, monoCols, statusCol, ownerCol){
+function tableHTML(head,rows,monoCols,statusCol,ownerCol){
   return `<table class="qt"><thead><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`+
     rows.map(r=>'<tr>'+r.map((c,ci)=>{
-      if(ci===statusCol){ const cls=c==='pass'?'ok':(c==='fail'?'bad':'warn'); return `<td><span class="pillst ${cls}">${c}</span></td>`; }
-      if(ci===ownerCol){ return `<td><span class="ownchip"><i>${c}</i>${({FA:'Faheem',MU:'Muteeb',AS:'Asad'})[c]||c}</span></td>`; }
+      if(ci===statusCol){const cls=c==='pass'?'ok':(c==='fail'?'bad':'warn');return `<td><span class="pillst ${cls}">${c}</span></td>`;}
+      if(ci===ownerCol){return `<td><span class="ownchip"><i>${c}</i>${({FA:'Faheem',MU:'Muteeb',AS:'Asad'})[c]||c}</span></td>`;}
       return `<td class="${monoCols.includes(ci)?'m':''}">${c}</td>`;}).join('')+'</tr>').join('')+'</tbody></table>';
 }
-function wsub(w){ if(['kpi','radial','check','donut'].includes(w.viz)) return w.src==='passfail'?'run #214':'';
-  if(w.src==='browsers') return 'pass % · run #214';
-  if(['bugssev','burn','aging','mttr','pyramid','covarea'].includes(w.src) && w.viz!=='line') return 'all sprints';
-  if(w.src==='lighthouse') return 'run #214'; if(w.src==='sec') return 'nightly'; if(w.src==='a11y') return 'axe · #214';
+function wsub(w){
+  if(['kpi','radial','check'].includes(w.viz)) return w.src==='gate'?'':'';
+  if(w.viz==='donut') return 'run #214';
+  if(['radar'].includes(w.viz)) return 'this month';
+  if(['scatter'].includes(w.viz)) return 'last 20 runs';
+  if(['histo'].includes(w.viz)) return 'all 1,284 tests';
+  if(['band','sarea','stack','line2','pareto'].includes(w.viz)) return 'last quarter';
+  if(w.viz==='bullet') return 'run #214 &middot; target 90';
+  if(w.src==='browsers') return 'pass % &middot; run #214';
+  if(w.src==='sec') return 'nightly'; if(w.src==='a11y') return 'axe &middot; #214';
+  if(['aging','covarea','pyramid'].includes(w.src)) return 'now';
   if(['flaky','slow','runsT'].includes(w.src)) return 'last 20 runs';
-  return RANGE==='runs'?'last 10 runs':(RANGE==='s67'?'S6–S7':'S1–S7'); }
-const VIC={line:'&#9581;', kpi:'&#35;', bars:'&#9644;', line2:'&#8767;', stack:'&#9642;', heat:'&#9638;', table:'&#8801;', donut:'&#9678;', radial:'&#9678;', check:'&#9745;'};
+  return subRange();
+}
+const VIC={line:'&#9581;',kpi:'&#35;',bars:'&#9644;',line2:'&#8767;',stack:'&#9642;',heat:'&#9638;',table:'&#8801;',donut:'&#9678;',radial:'&#9678;',check:'&#9745;',scatter:'&#8759;',histo:'&#9601;&#9604;',band:'&#8779;',sarea:'&#9698;',pareto:'&#8623;',radar:'&#9737;',bullet:'&#8677;'};
 
 function render(){
   const b=document.getElementById('board');
-  b.innerHTML = LAY.map(w=>{
+  b.innerHTML=LAY.map(w=>{
     const s=SRC[w.src];
-    const vsw = s.viz.length>1 ? s.viz.map(v=>`<button class="${v===w.viz?'on':''}" title="${v}" aria-label="show as ${v}" onclick="setViz('${w.id}','${v}')">${VIC[v]}</button>`).join('') : '';
+    const vsw=s.viz.length>1?s.viz.map(v=>`<button class="${v===w.viz?'on':''}" title="${v}" aria-label="show as ${v}" onclick="setViz('${w.id}','${v}')">${VIC[v]}</button>`).join(''):'';
     return `<div class="widget s${w.span} anim" id="${w.id}" data-id="${w.id}">
       <div class="whead">
         <span class="grab" draggable="true" title="Drag to move" aria-label="drag ${s.t}">&#10247;</span>
@@ -517,92 +636,85 @@ function render(){
       </div>
       <div class="wbody">${widgetBody(w)}</div>
     </div>`;
-  }).join('') + `<div class="boardend" id="boardend">drop here to add at the end</div>`;
+  }).join('')+`<div class="boardend" id="boardend">drop here to add at the end</div>`;
   bindDnD(); bindHover(); save();
 }
-
-/* API */
-function addWidget(src, idx){ if(!SRC[src]) return; const w=newW(src);
-  if(idx===undefined||idx<0||idx>LAY.length) idx=LAY.length;
-  LAY.splice(idx,0,w); render(); toast(SRC[src].t+' added.'); return w.id; }
-function removeWidget(id){ const i=LAY.findIndex(w=>w.id===id); if(i<0) return; const n=SRC[LAY[i].src].t; LAY.splice(i,1); render(); toast(n+' removed.'); }
-function moveWidget(id, idx){ const i=LAY.findIndex(w=>w.id===id); if(i<0) return; const [w]=LAY.splice(i,1);
-  if(idx>i) idx--; LAY.splice(Math.max(0,Math.min(idx,LAY.length)),0,w); render(); }
-function cycleSpan(id){ const w=LAY.find(x=>x.id===id); if(!w) return; w.span = w.span===3?6:(w.span===6?12:3); render(); }
-function setViz(id,v){ const w=LAY.find(x=>x.id===id); if(!w) return; w.viz=v; if((v==='kpi')&&w.span===12) w.span=3; render(); }
-function resetLayout(){ localStorage.removeItem(KEY); LAY=[]; UID=0; RANGE='s67'; boot(); toast('Default board restored.'); }
-function setRange(r){ RANGE=r; document.querySelectorAll('.rp').forEach(b=>b.classList.toggle('on', b.dataset.r===r)); render(); }
-function toggleEdit(){ EDIT=!EDIT; document.body.classList.toggle('edit', EDIT);
-  document.getElementById('editBtn').innerHTML = EDIT? '&#10003; Done' : '&#10022; Customize'; }
-
-/* drag & drop */
+function addWidget(src,idx){if(!SRC[src])return;const w=newW(src);
+  if(idx===undefined||idx<0||idx>LAY.length)idx=LAY.length;
+  LAY.splice(idx,0,w);render();toast(SRC[src].t+' added.');return w.id;}
+function removeWidget(id){const i=LAY.findIndex(w=>w.id===id);if(i<0)return;const n=SRC[LAY[i].src].t;LAY.splice(i,1);render();toast(n+' removed.');}
+function moveWidget(id,idx){const i=LAY.findIndex(w=>w.id===id);if(i<0)return;const[w]=LAY.splice(i,1);
+  if(idx>i)idx--;LAY.splice(Math.max(0,Math.min(idx,LAY.length)),0,w);render();}
+function cycleSpan(id){const w=LAY.find(x=>x.id===id);if(!w)return;w.span=w.span===3?6:(w.span===6?12:3);render();}
+function setViz(id,v){const w=LAY.find(x=>x.id===id);if(!w)return;w.viz=v;if(v==='kpi'&&w.span===12)w.span=3;render();}
+function resetLayout(){localStorage.removeItem(KEY);LAY=[];UID=0;RANGE='q';boot();toast('Default board restored.');}
+function setRange(r){RANGE=r;document.querySelectorAll('.rp').forEach(b=>b.classList.toggle('on',b.dataset.r===r));render();}
+function toggleEdit(){EDIT=!EDIT;document.body.classList.toggle('edit',EDIT);
+  document.getElementById('editBtn').innerHTML=EDIT?'&#10003; Done':'&#10022; Customize';}
 function buildPalette(){
   const groups=[['Verdict',['score','ready','gate','passfail']],
                 ['Delivery',['passrate','coverage','duration','mttr']],
-                ['Bugs',['bugssev','burn','aging']],
-                ['Guards',['a11y','visreg','sec','browsers','lighthouse']],
+                ['Bugs',['bugssev','burn','aging','pareto']],
+                ['Distribution',['histo','pctile','scatter','layers']],
+                ['Guards',['a11y','visreg','sec','browsers','lighthouse','radar']],
                 ['Structure',['pyramid','covarea']],
                 ['Tables',['flaky','slow','runsT']]];
-  document.getElementById('palList').innerHTML = groups.map(([g,items])=>
+  document.getElementById('palList').innerHTML=groups.map(([g,items])=>
     `<div class="pgroup">${g}</div>`+items.map(k=>
-      `<div class="pchipq" draggable="true" tabindex="0" data-src="${k}" style="--pc:${SRC[k].c}" onclick="addWidget('${k}')"><i></i>${SRC[k].t}<small>${SRC[k].def}</small></div>`).join('')).join('');
+      `<div class="pchipq" draggable="true" tabindex="0" data-src="${k}" style="--pc:${THEMES.dark[SRC[k].ck]}" onclick="addWidget('${k}')"><i></i>${SRC[k].t}<small>${SRC[k].def}</small></div>`).join('')).join('');
   document.querySelectorAll('.pchipq').forEach(ch=>{
-    ch.addEventListener('dragstart', e=>{ e.dataTransfer.setData('text/plain','add:'+ch.dataset.src); e.dataTransfer.effectAllowed='copy'; });
+    ch.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain','add:'+ch.dataset.src);e.dataTransfer.effectAllowed='copy';});
   });
 }
 function bindDnD(){
   document.querySelectorAll('.widget .grab').forEach(g=>{
-    g.addEventListener('dragstart', e=>{ const w=g.closest('.widget'); w.classList.add('dragging');
-      e.dataTransfer.setData('text/plain','move:'+w.dataset.id); e.dataTransfer.effectAllowed='move'; });
-    g.addEventListener('dragend', ()=> document.querySelectorAll('.widget').forEach(x=>x.classList.remove('dragging','dropbefore')));
+    g.addEventListener('dragstart',e=>{const w=g.closest('.widget');w.classList.add('dragging');
+      e.dataTransfer.setData('text/plain','move:'+w.dataset.id);e.dataTransfer.effectAllowed='move';});
+    g.addEventListener('dragend',()=>document.querySelectorAll('.widget').forEach(x=>x.classList.remove('dragging','dropbefore')));
   });
   document.querySelectorAll('.widget').forEach(w=>{
-    w.addEventListener('dragover', e=>{ e.preventDefault(); document.querySelectorAll('.widget').forEach(x=>x.classList.remove('dropbefore')); w.classList.add('dropbefore'); });
-    w.addEventListener('dragleave', ()=> w.classList.remove('dropbefore'));
-    w.addEventListener('drop', e=>{ e.preventDefault(); w.classList.remove('dropbefore');
-      handleDrop(e.dataTransfer.getData('text/plain'), LAY.findIndex(x=>x.id===w.dataset.id)); });
+    w.addEventListener('dragover',e=>{e.preventDefault();document.querySelectorAll('.widget').forEach(x=>x.classList.remove('dropbefore'));w.classList.add('dropbefore');});
+    w.addEventListener('dragleave',()=>w.classList.remove('dropbefore'));
+    w.addEventListener('drop',e=>{e.preventDefault();w.classList.remove('dropbefore');
+      handleDrop(e.dataTransfer.getData('text/plain'),LAY.findIndex(x=>x.id===w.dataset.id));});
   });
   const end=document.getElementById('boardend');
-  end.addEventListener('dragover', e=>{ e.preventDefault(); end.classList.add('hot'); });
-  end.addEventListener('dragleave', ()=> end.classList.remove('hot'));
-  end.addEventListener('drop', e=>{ e.preventDefault(); end.classList.remove('hot');
-    handleDrop(e.dataTransfer.getData('text/plain'), LAY.length); });
-  document.getElementById('board').addEventListener('dragover', e=> e.preventDefault());
+  end.addEventListener('dragover',e=>{e.preventDefault();end.classList.add('hot');});
+  end.addEventListener('dragleave',()=>end.classList.remove('hot'));
+  end.addEventListener('drop',e=>{e.preventDefault();end.classList.remove('hot');
+    handleDrop(e.dataTransfer.getData('text/plain'),LAY.length);});
+  document.getElementById('board').addEventListener('dragover',e=>e.preventDefault());
 }
-function handleDrop(payload, idx){ if(!payload) return;
-  const [op,val]=payload.split(':');
-  if(op==='add') addWidget(val, idx);
-  else if(op==='move') moveWidget(val, idx);
-}
-/* chart hover tooltips */
+function handleDrop(payload,idx){if(!payload)return;const[op,val]=payload.split(':');
+  if(op==='add')addWidget(val,idx);else if(op==='move')moveWidget(val,idx);}
 function bindHover(){
   const tip=document.getElementById('tip');
   document.querySelectorAll('svg.hasline').forEach(svg=>{
     const meta=JSON.parse(svg.dataset.pts);
-    const pl=36, pr=12, pt=14, pb=24, w=560, h=156;
-    svg.addEventListener('pointermove', e=>{
+    const pl=36,pr=12,pt=14,pb=24,w=560,h=156;
+    svg.addEventListener('pointermove',e=>{
       const r=svg.getBoundingClientRect();
       const fx=(e.clientX-r.left)/r.width*w;
       const n=meta.series.length;
-      let i=Math.round((fx-pl)/((w-pl-pr)/(n-1))); i=Math.max(0,Math.min(n-1,i));
+      let i=Math.round((fx-pl)/((w-pl-pr)/(n-1)));i=Math.max(0,Math.min(n-1,i));
       const X=pl+(w-pl-pr)*i/(n-1);
-      let mx=Math.max(...meta.series, ...(meta.series2||[])), mn=Math.min(...meta.series, ...(meta.series2||[]));
-      if(meta.series2){ mx*=1.1; mn=0; } else { const pad=(mx-mn)*0.15||1; mx+=pad; mn=Math.max(0,mn-pad); }
+      let mx=Math.max(...meta.series,...(meta.series2||[])),mn=Math.min(...meta.series,...(meta.series2||[]));
+      if(meta.series2){mx*=1.1;mn=0;}else{const pad=(mx-mn)*0.15||1;mx+=pad;mn=Math.max(0,mn-pad);}
       const Y=v=>pt+(h-pt-pb)*(1-(v-mn)/((mx-mn)||1));
-      const hv=svg.querySelector('.hover'); if(hv){ hv.setAttribute('cx',X); hv.setAttribute('cy',Y(meta.series[i])); hv.setAttribute('opacity','1'); }
-      const hv2=svg.querySelector('.hover2'); if(hv2&&meta.series2){ hv2.setAttribute('cx',X); hv2.setAttribute('cy',Y(meta.series2[i])); hv2.setAttribute('opacity','1'); }
-      tip.innerHTML = meta.series2
-        ? `${meta.labels[i]} &middot; <b>${meta.series[i]}</b> ${meta.names[0].split(' ')[0]} / <b style="color:var(--teal)">${meta.series2[i]}</b> ${meta.names[1].split(' ')[0]}`
-        : `${meta.labels[i]} &middot; <b>${meta.series[i]}${meta.unit}</b>`;
-      tip.style.left=(r.left + X/w*r.width)+'px';
-      tip.style.top=(r.top + Y(meta.series[i])/h*r.height)+'px';
+      const hv=svg.querySelector('.hover');if(hv){hv.setAttribute('cx',X);hv.setAttribute('cy',Y(meta.series[i]));hv.setAttribute('opacity','1');}
+      const hv2=svg.querySelector('.hover2');if(hv2&&meta.series2){hv2.setAttribute('cx',X);hv2.setAttribute('cy',Y(meta.series2[i]));hv2.setAttribute('opacity','1');}
+      tip.innerHTML=meta.series2
+        ?`${meta.labels[i]} &middot; <b>${meta.series[i]}</b> opened / <b>${meta.series2[i]}</b> closed`
+        :`${meta.labels[i]} &middot; <b>${meta.series[i]}${meta.unit}</b>`;
+      tip.style.left=(r.left+X/w*r.width)+'px';
+      tip.style.top=(r.top+Y(meta.series[i])/h*r.height)+'px';
       tip.classList.add('on');
     });
-    svg.addEventListener('pointerleave', ()=>{ tip.classList.remove('on');
-      svg.querySelectorAll('.hover,.hover2').forEach(c=>c.setAttribute('opacity','0')); });
+    svg.addEventListener('pointerleave',()=>{tip.classList.remove('on');
+      svg.querySelectorAll('.hover,.hover2').forEach(c=>c.setAttribute('opacity','0'));});
   });
 }
-window.addEventListener('load', boot);
+window.addEventListener('load',boot);
 </script>
 </body>
 </html>
