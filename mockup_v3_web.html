@@ -819,6 +819,59 @@ body.light .hl{color:#00705A}
 body.light .milestone .mtx b{color:#8A6100}
 body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,125,99,.3)}
 
+/* discovery vNext: scouting report */
+#v-discovery{max-width:1000px}
+.dpipe{display:flex;gap:14px;align-items:center;font-size:12.5px;color:var(--t3);padding:11px 2px;border-bottom:1px solid var(--line);margin:2px 0 20px}
+.dpipe button{color:var(--t2);font-weight:700;transition:.15s}
+.dpipe button:hover{color:var(--t1)}
+.dpipe b{color:var(--t1);font-family:var(--mono);font-size:12.5px;margin-right:4px}
+.dpipe .dot{color:var(--line)}
+.spot{position:relative;padding:22px 2px 26px;border-bottom:1px solid var(--line)}
+.spot::before{content:'';position:absolute;top:0;left:2px;width:74px;height:3px;border-radius:3px;background:var(--sc,#00C4A0)}
+.spot-top{display:flex;align-items:flex-start;gap:18px}
+.spot-ring{position:relative;width:76px;height:76px;flex:0 0 auto}
+.spot-ring svg{position:absolute;inset:0}
+.spot-av{position:absolute;inset:8px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:23px;color:#fff;background:var(--sc)}
+.spot-id{min-width:0;flex:1;padding-top:6px}
+.spot-id b{font-family:var(--disp);font-size:22px;letter-spacing:-.4px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spot-id .ssub{font-size:12.5px;color:var(--t2);display:block;margin-top:3px}
+.spot-big{text-align:right;flex:0 0 auto}
+.spot-big b{font-family:var(--disp);font-size:54px;font-weight:800;letter-spacing:-2.5px;line-height:.95;color:var(--t1)}
+.spot-big small{display:block;font-size:9.5px;letter-spacing:1.1px;color:var(--t3);font-weight:800;margin-top:5px;text-transform:uppercase}
+.spot-why{font-size:14px;color:var(--t2);line-height:1.65;margin:15px 0 0;max-width:660px}
+.spot-meters{display:flex;gap:34px;margin:18px 0 0}
+.smet{font-size:10px;color:var(--t3);font-weight:800;letter-spacing:.7px;text-transform:uppercase}
+.smet b{display:block;font-family:var(--mono);font-size:15px;color:var(--t1);margin-bottom:6px}
+.smet .sb{display:block;width:126px;height:5px;border-radius:99px;background:var(--surface2);margin-top:7px}
+.smet .sb i{display:block;height:100%;border-radius:99px;background:var(--sc)}
+.spot-chips{display:flex;gap:8px;margin:17px 0 0;flex-wrap:wrap}
+.spot-chips span{font-size:12px;color:var(--t2);background:var(--surface);border:1px solid var(--line);padding:6px 13px;border-radius:99px}
+.spot-cta{display:flex;gap:10px;margin:21px 0 0;align-items:center;flex-wrap:wrap}
+.spot-cta .sstat{margin-left:auto;font-size:12px;color:var(--t3)}
+.spot-cta .sstat b{color:var(--t2);font-family:var(--mono);font-weight:700}
+.sbtn{border-radius:12px;padding:12px 20px;font-weight:800;font-size:13.5px;transition:.15s}
+.sbtn.pri{background:var(--t1);color:#0B0E14}
+.sbtn.pri:hover{transform:translateY(-1px)}
+.sbtn.pri:disabled{opacity:.7;transform:none}
+body.light .sbtn.pri{background:#101828;color:#fff}
+.sbtn.gho{background:transparent;border:1px solid var(--line);color:var(--t2)}
+.sbtn.gho:hover{border-color:#33405280;color:var(--t1)}
+.mrow{display:flex;align-items:center;gap:14px;padding:15px 2px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s;text-align:left;width:100%}
+.mrow:hover{background:rgba(255,255,255,.02)}
+body.light .mrow:hover{background:rgba(16,24,40,.03)}
+.mrow .rk{font-family:var(--mono);font-size:11px;color:var(--t3);width:16px}
+.mrow .rav{width:38px;height:38px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;background:var(--mc);box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--mc)}
+.mrow .rid{min-width:0;flex:1}
+.mrow .rid b{display:block;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mrow .rid b em{font-style:normal;color:var(--act);font-size:11px;font-weight:800;margin-left:8px}
+.mrow .rid span{font-size:11.5px;color:var(--t3);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.mrow .rbar{width:132px;height:5px;border-radius:99px;background:var(--surface2)}
+.mrow .rbar i{display:block;height:100%;border-radius:99px;background:var(--mc)}
+.mrow .rpc{font-family:var(--mono);font-size:12.5px;color:var(--t1);width:42px;text-align:right}
+.mrow .rx{opacity:0;transition:.15s;color:var(--t3);font-size:12px;padding:6px 8px}
+.mrow:hover .rx{opacity:1}
+.mrow .rx:hover{color:var(--rose)}
+.mrow.sent{opacity:.55}
 /* collab v4 */
 .pipe{display:flex;gap:9px;max-width:660px;margin:0 auto 12px}
 .pchip{flex:1;display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 14px;text-align:left;transition:.15s}
@@ -1261,42 +1314,22 @@ body.light .card:hover{box-shadow:none}
     <section class="view" id="v-discovery">
       <div class="greet">Found by the network, not by hashtags</div>
       <h1 class="vh">Discover</h1>
-      <div class="dtabs">
-        <button class="dtab on" onclick="discTab(this,'others')"><span style='margin-right:6px'>&#129309;</span>Other creators</button>
-        <button class="dtab" onclick="discTab(this,'mine')"><span style='margin-right:6px'>&#128260;</span>Between your pages</button>
-        <button class="dtab" onclick="discTab(this,'x')"><span style='margin-right:6px'>&#127760;</span>Across platforms</button>
+      <div class="dpipe">
+        <span style="font-weight:800;letter-spacing:.6px;font-size:10.5px;text-transform:uppercase;color:var(--t3)">Pipeline</span>
+        <button onclick="pipeInfo('saved')"><b id="pipeSavedN">0</b> saved</button><span class="dot">&middot;</span>
+        <button onclick="pipeInfo('intro')"><b id="pipeIntroN">0</b> intros sent</button><span class="dot">&middot;</span>
+        <button onclick="pipeInfo('active')"><b id="pipeActiveN">0</b> active</button>
+        <span style="margin-left:auto;font-size:11.5px;color:var(--t3)">ranked by real audience overlap, refreshed nightly</span>
       </div>
 
-      <!-- OTHER CREATORS: the deck -->
-      <div id="dsc-others">
-        <div class="pipe">
-          <button class="pchip" onclick="pipeInfo('saved')"><small>Saved</small><b id="pipeSavedN">0</b><span class="pwho" id="pipeSavedW">Star a match to keep it</span></button>
-          <button class="pchip" onclick="pipeInfo('intro')"><small>Intros sent</small><b id="pipeIntroN">0</b><span class="pwho" id="pipeIntroW">Request a collab to start</span></button>
-          <button class="pchip hot" onclick="pipeInfo('active')"><small>Active collabs</small><b id="pipeActiveN">0</b><span class="pwho" id="pipeActiveW">Accepted intros land here</span></button>
-        </div>
-        <div class="deck" id="deck"></div>
-        <div class="dacts">
-          <!-- actions live inside the card now -->
-        </div>
-        <div class="deck-count" id="deckCount"></div>
-        <div class="swipe-hint">&#8592; swipe or use the arrows &#8594;</div>
-        <div class="feed-label" style="margin-top:8px"><h3>Saved by you</h3></div>
-        <button class="card" onclick="arteExplain('timing')">
-          <div class="card-top"><span class="ctag sig">Saved insight</span><span class="card-time">last week</span></div>
-          <div class="card-line">Evening shift: 62% of engaged followers now peak 6 to 8pm</div>
-          <span class="card-act violet">Reopen with Art-E &rarr;</span>
-        </button>
-        <button class="card" onclick="arteExplain('win')">
-          <div class="card-top"><span class="ctag win">Saved insight</span><span class="card-time">2 weeks ago</span></div>
-          <div class="card-line">Saves predict repeat reach better than likes on your pages</div>
-          <span class="card-act goldc">Reopen with Art-E &rarr;</span>
-        </button>
-        <p class="quiet"><b>Why these:</b> people who comment on both pages, matched anonymously.<br>Important matches will alert you, no need to check here daily.</p>
-      </div>
+      <div class="feed-label"><h3>Top match</h3></div>
+      <div class="spot" id="spot"></div>
 
-      <!-- BETWEEN YOUR PAGES -->
-      <div id="dsc-mine" style="display:none">
-        <button class="card" data-page="all" onclick="openCompose()">
+      <div class="feed-label" style="margin-top:26px"><h3>More matches</h3></div>
+      <div id="mrows"></div>
+
+      <div class="feed-label" style="margin-top:30px"><h3>Between your pages</h3></div>
+      <button class="card" data-page="all" onclick="openCompose()">
           <div class="card-top"><svg class="venn" width="76" height="46" viewBox="0 0 76 46"><circle cx="28" cy="23" r="18" fill="#00C4A0" opacity=".22"/><circle cx="28" cy="23" r="18" fill="none" stroke="#00C4A0" stroke-width="2"/><circle cx="48" cy="23" r="18" fill="#8B7BFF" opacity=".22"/><circle cx="48" cy="23" r="18" fill="none" stroke="#8B7BFF" stroke-width="2"/><text x="38" y="27" text-anchor="middle" style="font-size:10px;fill:var(--t1)">46%</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:3px"><span><span class="wd" style="background:#00C4A0"></span> Sana's Kitchen</span><span><span class="wd" style="background:#8B7BFF"></span> Midnight Munchies</span></span><span class="card-time" style="margin-left:auto">46% shared</span></div>
           <div class="card-line">The night crowd has not seen the <b>pasta reel</b> yet</div>
           <p class="card-why">46% of Munchies followers also follow Kitchen, but reels rarely cross. A 10pm repost is basically free reach.</p>
@@ -1315,11 +1348,9 @@ body.light .card:hover{box-shadow:none}
           <span class="card-act violet">Ask Art-E about the bridge &rarr;</span>
         </button>
         <p class="quiet">Your five pages, feeding each other on purpose.<br><b>Art-E watches these overlaps weekly.</b></p>
-      </div>
 
-      <!-- ACROSS PLATFORMS -->
-      <div id="dsc-x" style="display:none">
-        <div class="milestone" style="margin-bottom:16px"><span style="font-size:16px">&#128279;</span><div class="mtx"><b>Connect Instagram</b> to act on these. Mapping is modelled from public signals until then.</div><button class="btn btn-primary" onclick="openConnect()">Connect</button></div>
+      <div class="feed-label" style="margin-top:30px"><h3>Across platforms</h3></div>
+      <div class="milestone" style="margin-bottom:16px"><span style="font-size:16px">&#128279;</span><div class="mtx"><b>Connect Instagram</b> to act on these. Mapping is modelled from public signals until then.</div><button class="btn btn-primary" onclick="openConnect()">Connect</button></div>
         <button class="card pstripe" style="position:relative" onclick="toast('Full cross-platform profiles unlock when Instagram is connected.')"><span class="prev-tag">&#128274; Preview</span>
           <div class="card-top"><span class="xbadge ig">&#9679; Instagram</span><span class="card-time" style="margin-left:auto">modelled 31%</span></div>
           <div class="card-line">@plantbased.daily <b>overlaps your Sunday crowd</b></div>
@@ -1333,10 +1364,8 @@ body.light .card:hover{box-shadow:none}
           <span class="card-act">See the mirroring plan &rarr;</span>
         </button>
         <p class="quiet">One brain across platforms is the roadmap.<br><b>Facebook today, Instagram fast-follow, X later.</b></p>
-      </div>
     </section>
 
-    <!-- ═══ VIEW: ANALYTICS ═══ -->
     <section class="view" id="v-analytics">
       <div class="greet">Summoned, not a default view</div>
       <h1 class="vh">Analytics</h1>
@@ -2244,70 +2273,63 @@ function improveDraft(){ const ta=document.getElementById('draft');
 /* ── fable-magic helpers ── */
 const TIMES=[['Today 6:40pm','2.4x'],['Thu 8:00pm','2.1x'],['Sun 10:00am','1.7x']];
 let schedSel=0;
-const DECK=[
+const MATCH=[
  {k:'homecooked',ini:'HC',c:'#8B7BFF',n:'@HomeCookedDaily',sub:'Family cooking &middot; 96k followers &middot; posts 1 to 3pm',ovl:'41%',fol:'96k',est:'+12k',aud:88,tone:92,time:84,hrs:'1-3pm',cap:'8,200 shared people, their peak is your quiet window',posts:[['&#127837;','pasta hacks'],['&#129386;','toasties'],['&#128118;','kid meals']],why:'<b>8,200 of your people</b> already follow them, and their strong hours are exactly your quiet window. Estimated <b>+12k reach</b> from one collab reel.',tags:['Tone: high match','Peak 1-3pm','+12k est.']},
  {k:'spiceroute',ini:'SR',c:'#57B5F0',n:'@SpiceRouteStories',sub:'Weeknight curries &middot; 71k &middot; morning crowd',ovl:'33%',fol:'71k',est:'+8k',aud:74,tone:81,time:90,hrs:'8-10am',cap:'their mornings complete your evenings',posts:[['&#127858;','curries'],['&#127859;','one-pot'],['&#128293;','spice 101']],why:'Their <b>8 to 10am</b> strength complements your evenings, so a collab covers the whole day. Estimated <b>+8k reach</b>.',tags:['Complementary hours','+8k est.']},
  {k:'budgetbites',ini:'BB',c:'#FFC24B',n:'@BudgetBites',sub:'Student meals &middot; 52k &middot; strong under-25s',ovl:'28%',fol:'52k',est:'+6k',aud:69,tone:77,time:72,hrs:'9-11pm',cap:'the under-25 reach you are missing',posts:[['&#127789;','5-min meals'],['&#128176;','under 2 quid'],['&#127860;','dorm hacks']],why:'Their under-25 core is <b>your thinnest segment</b>. One duet-style short is the natural format. Estimated <b>+6k</b>.',tags:['Under-25 reach','Duet format']},
  {k:'plantplates',ini:'PP',c:'#00C4A0',n:'@PlantPlates',sub:'Veg swaps &middot; 44k &middot; Sunday mornings',ovl:'24%',fol:'44k',est:'+5k',aud:66,tone:84,time:88,hrs:'Sun 9-11',cap:'Sunday mornings, theirs and empty for you',posts:[['&#129388;','veg swaps'],['&#127807;','meat-free'],['&#129361;','bowl food']],why:'<b>Sunday 9 to 11am</b> is theirs and empty for you. A veg-swap of your pasta reel fits both audiences. Estimated <b>+5k</b>.',tags:['Sunday window','+5k est.']}];
-let deckIdx=0;
-function deckRender(){ const d=document.getElementById('deck'); if(!d) return;
-  d.innerHTML='';
-  if(!DECK.length){ d.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--t3);font-size:13px;gap:10px"><span style="font-size:30px">&#129309;</span>Deck cleared. New matches will alert you.</div>'; document.getElementById('deckCount').textContent=''; return; }
-  deckIdx=Math.max(0,Math.min(deckIdx,DECK.length-1));
-  [deckIdx-1,deckIdx,deckIdx+1].forEach((di)=>{ if(di<0||di>=DECK.length) return; const m=DECK[di]; const cls=di===deckIdx?'cur':(di<deckIdx?'prev':'next');
-    const pct=parseInt(m.ovl); const mr=(v)=>{const r=17,c=2*Math.PI*r;return `<svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="17" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="3.5"/><circle cx="23" cy="23" r="17" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="${c*v/100} ${c}" transform="rotate(-90 23 23)"/><text x="23" y="27" text-anchor="middle" style="font-size:11px;font-weight:800;fill:#fff">${v}</text></svg>`};
-    d.insertAdjacentHTML('beforeend', `<div class="pcard ${cls}" data-pos="${di===deckIdx?0:9}" style="--hc:${m.c};background:linear-gradient(165deg, ${m.c} 0%, ${m.c}88 34%, #0B0E14 82%)">
-      <div class="qa2"><button class="qab" onclick="deckPass()" aria-label="Pass" title="Pass">&#10005;</button><button class="qab" onclick="deckSave()" aria-label="Save" title="Save">&#9733;</button></div>
-      <div class="drow">
-        <span class="pring"><svg width="58" height="58" viewBox="0 0 96 96"><circle cx="48" cy="48" r="44" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="5"/><circle cx="48" cy="48" r="44" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="${2*Math.PI*44*pct/100} ${2*Math.PI*44}" transform="rotate(-90 48 48)"/></svg><span class="pav-big" style="background:rgba(255,255,255,.16);color:#fff;backdrop-filter:blur(6px)">${m.ini}<span class="pv2">&#10003;</span></span></span>
-        <span class="dnm"><b>${m.n}</b><span>${m.sub}</span></span>
-        <span class="fpill">${m.fol} followers</span>
-      </div>
-      <div class="hero2"><div class="bigpct">${m.ovl}</div><div class="bigcap"><b>real audience overlap</b> &middot; ${m.cap}</div></div>
-      <div class="mrings">
-        <span class="mring2">${mr(m.aud)}<small>Audience</small></span>
-        <span class="mring2">${mr(m.tone)}<small>Tone</small></span>
-        <span class="mring2">${mr(m.time)}<small>Timing</small></span>
-      </div>
-      <div class="postchips">${m.posts.map(p=>'<span>'+p[0]+' '+p[1]+'</span>').join('')}</div>
-      <div class="mstat"><span>est. new reach <b>${m.est}</b></span><span>their peak <b>${m.hrs}</b></span></div>
-      <div class="cta2"><button class="cbtn pri" onclick="deckCollab(this)">&#129309; Request collab</button><button class="cbtn gho" onclick="deckDetails()">Profile</button></div>
-    </div>`); });
-  d.insertAdjacentHTML('beforeend','<button class="dnav l" onclick="goDeck(-1)" aria-label="Previous">&#8249;</button><button class="dnav r" onclick="goDeck(1)" aria-label="Next">&#8250;</button>');
-  const g=document.getElementById('deckGlow')||d.insertAdjacentElement('afterbegin',Object.assign(document.createElement('div'),{className:'deck-glow',id:'deckGlow'}));
-  const top=DECK[deckIdx]; if(top&&g) g.style.background=`radial-gradient(60% 55% at 50% 30%, ${top.c}, transparent 70%)`;
-  initDeckSwipe();
-  document.getElementById('deckCount').innerHTML='<span class="deck-dots">'+DECK.map((_,x)=>'<i class="'+(x===deckIdx?'on':'')+'"></i>').join('')+'</span>';
-  const hint=document.querySelector('.swipe-hint'); if(hint) hint.style.display=DECK.length>1?'':'none';
-}
+let spotK='homecooked';
 const PIPE={saved:[],intro:[],active:[]};
-function renderPipe(){ const f=(a)=>a.length?a[a.length-1]+(a.length>1?' +'+(a.length-1):''):null;
-  const g=(id)=>document.getElementById(id); if(!g('pipeSavedN')) return;
-  g('pipeSavedN').textContent=PIPE.saved.length; g('pipeSavedW').textContent=f(PIPE.saved)||'Star a match to keep it';
-  g('pipeIntroN').textContent=PIPE.intro.length; g('pipeIntroW').textContent=f(PIPE.intro)||'Request a collab to start';
-  g('pipeActiveN').textContent=PIPE.active.length; g('pipeActiveW').textContent=f(PIPE.active)||'Accepted intros land here'; }
+const SENT=new Set();
+function renderPipe(){ const g=(id)=>document.getElementById(id); if(!g('pipeSavedN')) return;
+  g('pipeSavedN').textContent=PIPE.saved.length; g('pipeIntroN').textContent=PIPE.intro.length; g('pipeActiveN').textContent=PIPE.active.length; }
 function pipeInfo(k){ const m={saved:['Saved',PIPE.saved],intro:['Intros sent',PIPE.intro],active:['Active',PIPE.active]}[k];
   if(k==='active'&&PIPE.active.length){ setView('inbox'); openChat(); return; }
-  toast(m[1].length? m[0]+': '+m[1].join(', ') : 'Nothing here yet. The deck is where it starts.'); }
-function goDeck(d){ if(!DECK.length) return; const n=deckIdx+d; if(n<0||n>=DECK.length) return; deckIdx=n; deckRender(); }
-function initDeckSwipe(){ const dk=document.getElementById('deck'); if(!dk||dk.dataset.sw) return; dk.dataset.sw=1;
-  let sx=0, cur=null, dx=0;
-  dk.addEventListener('pointerdown',e=>{ cur=dk.querySelector('.pcard.cur'); if(!cur||e.target.closest('.dnav')) {cur=null;return;} sx=e.clientX; dx=0; cur.classList.add('dragging'); dk.setPointerCapture(e.pointerId); });
-  dk.addEventListener('pointermove',e=>{ if(!cur) return; dx=e.clientX-sx; cur.style.transform=`translateX(calc(-50% + ${dx}px)) rotate(${dx*0.03}deg)`; });
-  const up=e=>{ if(!cur) return; cur.classList.remove('dragging'); cur.style.transform='';
-    if(dx<-70) goDeck(1); else if(dx>70) goDeck(-1); cur=null; };
-  dk.addEventListener('pointerup',up); dk.addEventListener('pointercancel',up);
-}
-function deckPass(){ const top=document.querySelector('.pcard.cur'); if(!top) return; top.classList.add('fly'); toast('Passed. This one stays gone.'); setTimeout(()=>{DECK.splice(deckIdx,1); deckRender();},380); }
-function deckSave(){ const m=DECK[deckIdx]; if(!m) return; if(PIPE.saved.includes(m.n)){ toast('Already saved.'); return;} PIPE.saved.push(m.n); renderPipe(); toast('Saved. It is in your pipeline now.'); goDeck(1); }
-function deckDetails(){ const m=DECK[deckIdx]; if(m) openDiscovery(m.k); }
-function deckCollab(btn){ const m=DECK[deckIdx]; if(!m) return; if(btn){ btn.textContent='\u2713 Intro sent'; btn.disabled=true; } const top=document.querySelector('.pcard.cur');
-  if(m.k==='homecooked'){ PIPE.active.push(m.n); renderPipe(); toast('Intro sent. Maya usually replies fast.'); setTimeout(()=>{ if(top) top.classList.add('fly'); setTimeout(()=>{ DECK.splice(deckIdx,1); deckRender(); setView('inbox'); openChat(); },380); },560); }
-  else { PIPE.intro.push(m.n); renderPipe(); toast('Intro drafted and sent in your voice. Replies land in the Inbox.'); setTimeout(()=>{ if(top) top.classList.add('fly'); setTimeout(()=>{ DECK.splice(deckIdx,1); deckRender(); },380); },560); } }
-function discTab(btn,t){ [...btn.parentElement.children].forEach(x=>x.classList.toggle('on',x===btn));
-  ['others','mine','x'].forEach(k=>{ document.getElementById('dsc-'+k).style.display = (k===t)?'':'none'; });
-  if(t==='others') deckRender(); }
-window.addEventListener('load', deckRender);
+  toast(m[1].length? m[0]+': '+m[1].join(', ') : 'Nothing here yet. The matches below are where it starts.'); }
+function discList(){ return [...MATCH].sort((x,y)=>parseInt(y.ovl)-parseInt(x.ovl)); }
+function renderDisc(){ const spotEl=document.getElementById('spot'); if(!spotEl) return;
+  const list=discList(); if(!list.length){ spotEl.innerHTML='<div style="padding:26px 0;color:var(--t2);font-size:14px">No matches left this week. Art-E refreshes the pool nightly, and hiding is never permanent.</div>'; document.getElementById('mrows').innerHTML=''; renderPipe(); return; }
+  let sp=list.find(m=>m.k===spotK)||list[0]; spotK=sp.k;
+  const R=34,C=2*Math.PI*R,pct=parseInt(sp.ovl),sent=SENT.has(sp.k);
+  spotEl.style.setProperty('--sc', sp.c);
+  spotEl.innerHTML=`
+    <div class="spot-top">
+      <span class="spot-ring"><svg width="76" height="76" viewBox="0 0 76 76"><circle cx="38" cy="38" r="34" fill="none" stroke="var(--surface2)" stroke-width="5"/><circle cx="38" cy="38" r="34" fill="none" stroke="${sp.c}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${C*pct/100} ${C}" transform="rotate(-90 38 38)"/></svg><span class="spot-av">${sp.ini}</span></span>
+      <span class="spot-id"><b>${sp.n}</b><span class="ssub">${sp.sub} &middot; ${sp.fol} followers &middot; verified overlap</span></span>
+      <span class="spot-big"><b>${sp.ovl}</b><small>audience overlap</small></span>
+    </div>
+    <div class="spot-why">${sp.why} <span style="color:var(--t3)">${sp.cap}.</span></div>
+    <div class="spot-meters">
+      <span class="smet"><b>${sp.aud}</b>Audience fit<span class="sb"><i style="width:${sp.aud}%"></i></span></span>
+      <span class="smet"><b>${sp.tone}</b>Tone match<span class="sb"><i style="width:${sp.tone}%"></i></span></span>
+      <span class="smet"><b>${sp.time}</b>Timing<span class="sb"><i style="width:${sp.time}%"></i></span></span>
+    </div>
+    <div class="spot-chips">${sp.posts.map(p=>'<span>'+p[0]+' '+p[1]+'</span>').join('')}</div>
+    <div class="spot-cta">
+      <button class="sbtn pri" onclick="discCollab(this)" ${sent?'disabled':''}>${sent?'\u2713 Intro sent':'\uD83E\uDD1D Request collab'}</button>
+      <button class="sbtn gho" onclick="openDiscovery('${sp.k}')">Full profile</button>
+      <button class="sbtn gho" onclick="discSave()">${PIPE.saved.includes(sp.n)?'\u2605 Saved':'\u2606 Save'}</button>
+      <span class="sstat">est. new reach <b>${sp.est}</b> &nbsp;&middot;&nbsp; their peak <b>${sp.hrs}</b></span>
+    </div>`;
+  document.getElementById('mrows').innerHTML = list.filter(m=>m.k!==sp.k).map((m,x)=>`
+    <button class="mrow ${SENT.has(m.k)?'sent':''}" style="--mc:${m.c}" onclick="promote('${m.k}')">
+      <span class="rk">${x+2}</span>
+      <span class="rav">${m.ini}</span>
+      <span class="rid"><b>${m.n}${SENT.has(m.k)?'<em>intro sent</em>':''}</b><span>${m.sub} &middot; est. ${m.est}</span></span>
+      <span class="rbar"><i style="width:${parseInt(m.ovl)}%"></i></span>
+      <span class="rpc">${m.ovl}</span>
+      <span class="rx" onclick="discHide('${m.k}',event)" title="Hide this match">&#10005; hide</span>
+    </button>`).join('');
+  renderPipe(); }
+function promote(k){ spotK=k; renderDisc(); const sEl=document.getElementById('spot'); if(sEl) sEl.scrollIntoView({behavior:'smooth',block:'start'}); }
+function discSave(){ const sp=MATCH.find(m=>m.k===spotK); if(!sp) return;
+  const i=PIPE.saved.indexOf(sp.n); if(i>=0){ PIPE.saved.splice(i,1); toast('Removed from saved.'); } else { PIPE.saved.push(sp.n); toast('Saved to your pipeline.'); } renderDisc(); }
+function discHide(k,e){ if(e) e.stopPropagation(); const i=MATCH.findIndex(m=>m.k===k); if(i<0) return; const n=MATCH[i].n; MATCH.splice(i,1); if(spotK===k) spotK=null; toast(n+' hidden. The pool refreshes nightly.'); renderDisc(); }
+function discCollab(btn){ const sp=MATCH.find(m=>m.k===spotK); if(!sp||SENT.has(sp.k)) return; SENT.add(sp.k);
+  if(sp.k==='homecooked'){ PIPE.active.push(sp.n); if(btn){btn.textContent='\u2713 Opening your chat'; btn.disabled=true;} toast('Intro sent. Maya usually replies fast.'); setTimeout(()=>{ setView('inbox'); openChat(); renderDisc(); },750); }
+  else { PIPE.intro.push(sp.n); if(btn){btn.textContent='\u2713 Intro sent'; btn.disabled=true;} toast('Intro drafted and sent in your voice. Replies land in the Inbox.'); setTimeout(renderDisc,900); }
+  renderPipe(); }
+window.addEventListener('load', renderDisc);
 
 function setTimeIdxW(i){ schedSel=i; setTimeout(()=>{ const ps=[...document.querySelectorAll('#compose .tpill')]; ps.forEach((t,x)=>t.classList.toggle('on',x===i)); const b=document.getElementById('schedBtn'); if(b) b.textContent='Schedule for '+TIMES[i][0]; },80); }
 function pickTime(el,i){ schedSel=i; document.querySelectorAll('.tpill').forEach(t=>t.classList.remove('on')); el.classList.add('on');
