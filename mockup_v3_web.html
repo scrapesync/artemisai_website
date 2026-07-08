@@ -359,10 +359,10 @@ body.light .dact{background:rgba(255,255,255,.75)}
 #v-planner{max-width:760px}
 .dcard>h5{display:flex;align-items:center;gap:10px}
 .dcard>h5 b{margin-left:auto;font-size:9.5px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;color:var(--t3);background:var(--surface2);border:1px solid var(--line);padding:4px 11px;border-radius:99px;font-family:var(--sans)}
-#at-ov .dcard,#at-vir .dcard{background:transparent;border:none;box-shadow:none;border-radius:0;padding:4px 0 24px;border-bottom:1px solid var(--line)}
-#at-ov .dcard:hover,#at-vir .dcard:hover{transform:none;box-shadow:none}
-#at-ov .dgrid2,#at-vir .dgrid2{gap:0 44px}
-#at-ov .dcard>h5,#at-vir .dcard>h5{font-size:14.5px;margin-bottom:14px}
+#at-ov .dcard,#at-vir .dcard,#at-photo .dcard{background:transparent;border:none;box-shadow:none;border-radius:0;padding:4px 0 24px;border-bottom:1px solid var(--line)}
+#at-ov .dcard:hover,#at-vir .dcard:hover,#at-photo .dcard:hover{transform:none;box-shadow:none}
+#at-ov .dgrid2,#at-vir .dgrid2,#at-photo .dgrid2{gap:0 44px}
+#at-ov .dcard>h5,#at-vir .dcard>h5,#at-photo .dcard>h5{font-size:14.5px;margin-bottom:14px}
 #at-ov .kpis2{background:transparent;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden}
 #at-ov .kpi2{background:transparent;border:none;border-radius:0;border-left:1px solid var(--line);padding:15px 18px 12px}
 #at-ov .kpi2:first-child{border-left:none}
@@ -818,6 +818,40 @@ body.light .hl{color:#00705A}
 body.light .milestone .mtx b{color:#8A6100}
 body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,125,99,.3)}
 
+/* collab v4 */
+.pipe{display:flex;gap:9px;max-width:660px;margin:0 auto 12px}
+.pchip{flex:1;display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 14px;text-align:left;transition:.15s}
+.pchip:hover{border-color:#33405280}
+.pchip b{font-family:var(--disp);font-size:17px;font-weight:800}
+.pchip small{font-size:10px;color:var(--t3);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.pchip .pwho{font-size:10.5px;color:var(--t2)}
+.pchip.hot{border-color:rgba(0,196,160,.4)}
+.qa2{position:absolute;top:14px;right:14px;display:flex;gap:8px;z-index:4}
+.qab{width:34px;height:34px;border-radius:50%;background:rgba(10,13,19,.35);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:13px;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;transition:.15s}
+.qab:hover{background:rgba(10,13,19,.55);transform:scale(1.06)}
+.drow{display:flex;align-items:center;gap:13px;padding:18px 20px 0;position:relative;z-index:2}
+.drow .pring{width:58px;height:58px;margin:0}
+.drow .pring .pav-big{inset:6px;font-size:19px}
+.dnm{color:#fff}
+.dnm b{font-family:var(--disp);font-size:18.5px;font-weight:800;display:block;letter-spacing:-.3px}
+.dnm span{font-size:11px;opacity:.85}
+.fpill{margin-left:auto;margin-right:88px;background:rgba(10,13,19,.35);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:5px 11px;font-size:10.5px;color:#fff;font-weight:700;backdrop-filter:blur(8px)}
+.hero2{padding:16px 20px 0;position:relative;z-index:2;color:#fff}
+.hero2 .bigpct{font-size:52px;margin:0;text-align:left}
+.hero2 .bigcap{max-width:none;text-align:left;margin-top:4px;font-size:11.5px}
+.mrings{display:flex;gap:10px;padding:16px 20px 0;position:relative;z-index:2}
+.mring2{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+.mring2 small{font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.postchips{display:flex;gap:8px;padding:14px 20px 0;position:relative;z-index:2;flex-wrap:wrap}
+.postchips span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:99px;padding:6px 12px;font-size:11px;color:#fff;font-weight:600}
+.mstat{display:flex;gap:16px;padding:12px 20px 0;position:relative;z-index:2;font-size:11px;color:rgba(255,255,255,.8)}
+.mstat b{color:#fff;font-family:var(--mono);font-size:11px}
+.cta2{display:flex;gap:10px;padding:16px 16px 16px;margin-top:auto;position:relative;z-index:2}
+.cbtn{flex:1;border-radius:14px;padding:13px;font-size:13.5px;font-weight:800;transition:.15s}
+.cbtn.pri{background:#fff;color:#0B0E14}
+.cbtn.pri:hover{transform:translateY(-1px)}
+.cbtn.gho{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);color:#fff;flex:0 0 auto;padding:13px 18px}
+.pcard{display:flex;flex-direction:column}
 /* de-widget sitewide (final overrides) */
 .card{background:transparent;border:none;border-radius:0;padding:16px 2px;margin-bottom:0;border-bottom:1px solid var(--line)}
 .card:hover{border-color:var(--line);transform:none;box-shadow:none}
@@ -1234,12 +1268,14 @@ body.light .card:hover{box-shadow:none}
 
       <!-- OTHER CREATORS: the deck -->
       <div id="dsc-others">
+        <div class="pipe">
+          <button class="pchip" onclick="pipeInfo('saved')"><small>Saved</small><b id="pipeSavedN">0</b><span class="pwho" id="pipeSavedW">Star a match to keep it</span></button>
+          <button class="pchip" onclick="pipeInfo('intro')"><small>Intros sent</small><b id="pipeIntroN">0</b><span class="pwho" id="pipeIntroW">Request a collab to start</span></button>
+          <button class="pchip hot" onclick="pipeInfo('active')"><small>Active collabs</small><b id="pipeActiveN">0</b><span class="pwho" id="pipeActiveW">Accepted intros land here</span></button>
+        </div>
         <div class="deck" id="deck"></div>
         <div class="dacts">
-          <span class="dact-l"><button class="dact pass" onclick="deckPass()" aria-label="Pass">&#10005;</button><small>Pass</small></span>
-          <span class="dact-l"><button class="dact" onclick="deckDetails()" aria-label="Details">&#8942;</button><small>Profile</small></span>
-          <span class="dact-l"><button class="dact save" onclick="deckSave()" aria-label="Save">&#9733;</button><small>Save</small></span>
-          <span class="dact-l"><button class="dact collab" onclick="deckCollab()">&#129309; Collab</button><small>&nbsp;</small></span>
+          <!-- actions live inside the card now -->
         </div>
         <div class="deck-count" id="deckCount"></div>
         <div class="swipe-hint">&#8592; swipe or use the arrows &#8594;</div>
@@ -1305,6 +1341,7 @@ body.light .card:hover{box-shadow:none}
       <h1 class="vh">Analytics</h1>
       <div class="subtabs">
         <button class="subtab on" data-t="ov" onclick="subtab('ov')">Overview</button>
+        <button class="subtab" data-t="photo" onclick="subtab('photo')">Photos</button>
         <button class="subtab" data-t="video" onclick="subtab('video')">Video</button>
         <button class="subtab" data-t="vir" onclick="subtab('vir')">Advanced</button>
         <button class="subtab" data-t="raw" onclick="subtab('raw')">All posts</button>
@@ -1444,6 +1481,47 @@ body.light .card:hover{box-shadow:none}
 
         <button class="askA" style="width:100%;justify-content:center;margin:14px 0" onclick="subtab('vir')">&#128300; Open advanced analytics &rarr; patterns, cascade, clusters, AI activity</button>
         <p class="quiet">Every chart backs a sentence Art-E has said. Ask Art-E when you want the story, come here when you want the numbers.</p>
+      </div>
+
+      <div class="apanel" id="at-photo">
+        <div class="asub">Every photo and carousel, read the way the feed reads them.</div>
+        <div class="dgrid2">
+          <div class="dcard span2"><h5>Carousels vs single photos <b>saves per post</b></h5>
+            <div class="hbar"><div class="hl2"><span>&#128444;&#65039; Carousels</span><b style="color:var(--act)">212 saves avg</b></div><div class="ht"><i style="width:92%;background:linear-gradient(90deg,#00C4A0,#4DE3C6)"></i></div></div>
+            <div class="hbar" style="margin-bottom:0"><div class="hl2"><span>&#128247; Single photos</span><b>96 saves avg</b></div><div class="ht"><i style="width:42%;background:#76829B"></i></div></div>
+            <div class="chart-note">A carousel earns 2.2x the saves of a single. The swipe is a small commitment, and commitment predicts the save.</div>
+          </div>
+
+          <div class="dcard"><h5>What is in the frame <b>share of saves</b></h5>
+            <div class="hbar"><div class="hl2"><span>&#127858; Plated close-up</span><b>44%</b></div><div class="ht"><i style="width:44%;background:#00C4A0"></i></div></div>
+            <div class="hbar"><div class="hl2"><span>&#128293; Process shot</span><b>33%</b></div><div class="ht"><i style="width:33%;background:#57B5F0"></i></div></div>
+            <div class="hbar" style="margin-bottom:0"><div class="hl2"><span>&#129348; Flat lay</span><b>23%</b></div><div class="ht"><i style="width:23%;background:#8B7BFF"></i></div></div>
+            <div class="chart-note">Close-ups of the finished plate win. People save the destination, not the map.</div>
+          </div>
+
+          <div class="dcard"><h5>Light and tone <b>saves multiplier</b></h5>
+            <div class="hbar"><div class="hl2"><span>&#127774; Warm-lit</span><b style="color:var(--act)">1.3x</b></div><div class="ht"><i style="width:81%;background:linear-gradient(90deg,#FFC24B,#FF8A5C)"></i></div></div>
+            <div class="hbar" style="margin-bottom:0"><div class="hl2"><span>&#10052;&#65039; Cool-lit</span><b>1.0x</b></div><div class="ht"><i style="width:62%;background:#57B5F0"></i></div></div>
+            <div class="chart-note">Warm-lit plates out-save cool by 30% on your pages. Golden hour is not a myth, it is a multiplier.</div>
+          </div>
+
+          <div class="dcard"><h5>Photo posts, last 8 <b>vs forecast</b></h5>
+            <div class="sigrow" style="border-top:none"><span>&#127859;</span><span style="flex:1">Sunday roast carousel</span><span style="font-family:var(--mono);font-size:10px;color:var(--act)">1.8x</span></div>
+            <div class="sigrow"><span>&#129361;</span><span style="flex:1">Buddha bowls carousel</span><span style="font-family:var(--mono);font-size:10px;color:var(--act)">1.6x</span></div>
+            <div class="sigrow"><span>&#127838;</span><span style="flex:1">Bread basics steps</span><span style="font-family:var(--mono);font-size:10px;color:var(--act)">1.4x</span></div>
+            <div class="sigrow"><span>&#129365;</span><span style="flex:1">Veg prep Sunday</span><span style="font-family:var(--mono);font-size:10px;color:var(--t3)">0.9x</span></div>
+            <div class="sigrow"><span>&#127849;</span><span style="flex:1">Dessert lineup</span><span style="font-family:var(--mono);font-size:10px;color:var(--t3)">0.9x</span></div>
+            <div class="sigrow"><span>&#9749;</span><span style="flex:1">Morning routine</span><span style="font-family:var(--mono);font-size:10px;color:var(--t3)">0.8x</span></div>
+            <div class="sigrow"><span>&#127869;&#65039;</span><span style="flex:1">Behind the scenes</span><span style="font-family:var(--mono);font-size:10px;color:var(--rose)">0.6x</span></div>
+            <div class="sigrow"><span>&#128247;</span><span style="flex:1">Pantry photo</span><span style="font-family:var(--mono);font-size:10px;color:var(--rose)">0.5x</span></div>
+          </div>
+
+          <div class="dcard"><h5>Alt text coverage <b>68% of photos</b></h5>
+            <div class="ht" style="height:18px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:68%;border-radius:99px;background:linear-gradient(90deg,#232B38,#00C4A0)"></i></div>
+            <div class="chart-note">Alt text is read by screen readers and by the algorithm. The 32% without it reach fewer people twice over.</div>
+            <button class="askA" onclick="arteExplain('improve')">&#10022; Draft alt text for the gaps</button>
+          </div>
+        </div>
       </div>
 
       <div class="apanel" id="at-video">
@@ -2176,22 +2254,23 @@ function deckRender(){ const d=document.getElementById('deck'); if(!d) return;
   if(!DECK.length){ d.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--t3);font-size:13px;gap:10px"><span style="font-size:30px">&#129309;</span>Deck cleared. New matches will alert you.</div>'; document.getElementById('deckCount').textContent=''; return; }
   deckIdx=Math.max(0,Math.min(deckIdx,DECK.length-1));
   [deckIdx-1,deckIdx,deckIdx+1].forEach((di)=>{ if(di<0||di>=DECK.length) return; const m=DECK[di]; const cls=di===deckIdx?'cur':(di<deckIdx?'prev':'next');
-    const pct=parseInt(m.ovl); const R=44, C=2*Math.PI*R;
+    const pct=parseInt(m.ovl); const mr=(v)=>{const r=17,c=2*Math.PI*r;return `<svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="17" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="3.5"/><circle cx="23" cy="23" r="17" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="${c*v/100} ${c}" transform="rotate(-90 23 23)"/><text x="23" y="27" text-anchor="middle" style="font-size:11px;font-weight:800;fill:#fff">${v}</text></svg>`};
     d.insertAdjacentHTML('beforeend', `<div class="pcard ${cls}" data-pos="${di===deckIdx?0:9}" style="--hc:${m.c};background:linear-gradient(165deg, ${m.c} 0%, ${m.c}88 34%, #0B0E14 82%)">
-      <div class="pd-top">
-        <span class="pring"><svg width="96" height="96" viewBox="0 0 96 96"><circle cx="48" cy="48" r="44" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="4"/><circle cx="48" cy="48" r="44" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-dasharray="${C*pct/100} ${C}" transform="rotate(-90 48 48)"/></svg><span class="pav-big" style="background:rgba(255,255,255,.16);color:#fff;backdrop-filter:blur(6px)">${m.ini}<span class="pv2">&#10003;</span></span></span>
-        <div class="pn3">${m.n}</div><div class="ps3">${m.sub}</div>
-        <div class="bigpct">${m.ovl}</div>
-        <div class="bigcap"><b>real audience overlap</b> &middot; ${m.cap}</div>
+      <div class="qa2"><button class="qab" onclick="deckPass()" aria-label="Pass" title="Pass">&#10005;</button><button class="qab" onclick="deckSave()" aria-label="Save" title="Save">&#9733;</button></div>
+      <div class="drow">
+        <span class="pring"><svg width="58" height="58" viewBox="0 0 96 96"><circle cx="48" cy="48" r="44" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="5"/><circle cx="48" cy="48" r="44" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="${2*Math.PI*44*pct/100} ${2*Math.PI*44}" transform="rotate(-90 48 48)"/></svg><span class="pav-big" style="background:rgba(255,255,255,.16);color:#fff;backdrop-filter:blur(6px)">${m.ini}<span class="pv2">&#10003;</span></span></span>
+        <span class="dnm"><b>${m.n}</b><span>${m.sub}</span></span>
+        <span class="fpill">${m.fol} followers</span>
       </div>
-      <hr class="pdiv">
-      <div class="glasspanel">
-        <div class="cb"><div class="cl"><span>Audience fit</span><b>${m.aud}%</b></div><div class="ct"><i style="width:${m.aud}%"></i></div></div>
-        <div class="cb"><div class="cl"><span>Tone match</span><b>${m.tone}%</b></div><div class="ct"><i style="width:${m.tone}%"></i></div></div>
-        <div class="cb" style="margin-bottom:11px"><div class="cl"><span>Timing complement</span><b>${m.time}%</b></div><div class="ct"><i style="width:${m.time}%"></i></div></div>
-        <div class="tprow" style="margin-bottom:0">${m.posts.map(p=>'<span class="tpost">'+p[0]+'<small>'+p[1]+'</small></span>').join('')}</div>
-        <div class="pstats" style="margin:11px 0 0"><div class="pstat"><b>${m.fol}</b><span>followers</span></div><div class="pstat hot"><b>${m.est}</b><span>est. reach</span></div><div class="pstat"><b>${m.hrs}</b><span>their peak</span></div></div>
+      <div class="hero2"><div class="bigpct">${m.ovl}</div><div class="bigcap"><b>real audience overlap</b> &middot; ${m.cap}</div></div>
+      <div class="mrings">
+        <span class="mring2">${mr(m.aud)}<small>Audience</small></span>
+        <span class="mring2">${mr(m.tone)}<small>Tone</small></span>
+        <span class="mring2">${mr(m.time)}<small>Timing</small></span>
       </div>
+      <div class="postchips">${m.posts.map(p=>'<span>'+p[0]+' '+p[1]+'</span>').join('')}</div>
+      <div class="mstat"><span>est. new reach <b>${m.est}</b></span><span>their peak <b>${m.hrs}</b></span></div>
+      <div class="cta2"><button class="cbtn pri" onclick="deckCollab(this)">&#129309; Request collab</button><button class="cbtn gho" onclick="deckDetails()">Profile</button></div>
     </div>`); });
   d.insertAdjacentHTML('beforeend','<button class="dnav l" onclick="goDeck(-1)" aria-label="Previous">&#8249;</button><button class="dnav r" onclick="goDeck(1)" aria-label="Next">&#8250;</button>');
   const g=document.getElementById('deckGlow')||d.insertAdjacentElement('afterbegin',Object.assign(document.createElement('div'),{className:'deck-glow',id:'deckGlow'}));
@@ -2200,6 +2279,15 @@ function deckRender(){ const d=document.getElementById('deck'); if(!d) return;
   document.getElementById('deckCount').innerHTML='<span class="deck-dots">'+DECK.map((_,x)=>'<i class="'+(x===deckIdx?'on':'')+'"></i>').join('')+'</span>';
   const hint=document.querySelector('.swipe-hint'); if(hint) hint.style.display=DECK.length>1?'':'none';
 }
+const PIPE={saved:[],intro:[],active:[]};
+function renderPipe(){ const f=(a)=>a.length?a[a.length-1]+(a.length>1?' +'+(a.length-1):''):null;
+  const g=(id)=>document.getElementById(id); if(!g('pipeSavedN')) return;
+  g('pipeSavedN').textContent=PIPE.saved.length; g('pipeSavedW').textContent=f(PIPE.saved)||'Star a match to keep it';
+  g('pipeIntroN').textContent=PIPE.intro.length; g('pipeIntroW').textContent=f(PIPE.intro)||'Request a collab to start';
+  g('pipeActiveN').textContent=PIPE.active.length; g('pipeActiveW').textContent=f(PIPE.active)||'Accepted intros land here'; }
+function pipeInfo(k){ const m={saved:['Saved',PIPE.saved],intro:['Intros sent',PIPE.intro],active:['Active',PIPE.active]}[k];
+  if(k==='active'&&PIPE.active.length){ setView('inbox'); openChat(); return; }
+  toast(m[1].length? m[0]+': '+m[1].join(', ') : 'Nothing here yet. The deck is where it starts.'); }
 function goDeck(d){ if(!DECK.length) return; const n=deckIdx+d; if(n<0||n>=DECK.length) return; deckIdx=n; deckRender(); }
 function initDeckSwipe(){ const dk=document.getElementById('deck'); if(!dk||dk.dataset.sw) return; dk.dataset.sw=1;
   let sx=0, cur=null, dx=0;
@@ -2210,9 +2298,11 @@ function initDeckSwipe(){ const dk=document.getElementById('deck'); if(!dk||dk.d
   dk.addEventListener('pointerup',up); dk.addEventListener('pointercancel',up);
 }
 function deckPass(){ const top=document.querySelector('.pcard.cur'); if(!top) return; top.classList.add('fly'); toast('Passed. This one stays gone.'); setTimeout(()=>{DECK.splice(deckIdx,1); deckRender();},380); }
-function deckSave(){ toast('Saved for later.'); goDeck(1); }
+function deckSave(){ const m=DECK[deckIdx]; if(!m) return; if(PIPE.saved.includes(m.n)){ toast('Already saved.'); return;} PIPE.saved.push(m.n); renderPipe(); toast('Saved. It is in your pipeline now.'); goDeck(1); }
 function deckDetails(){ const m=DECK[deckIdx]; if(m) openDiscovery(m.k); }
-function deckCollab(){ const m=DECK[deckIdx]; if(!m) return; if(m.k==='homecooked'){ toast('Intro sent. Maya usually replies fast.'); setTimeout(()=>{setView('inbox');openChat();},700);} else { toast('Intro drafted and sent in your voice. Replies land in the Inbox.'); DECK.splice(deckIdx,1); deckRender(); } }
+function deckCollab(btn){ const m=DECK[deckIdx]; if(!m) return; if(btn){ btn.textContent='\u2713 Intro sent'; btn.disabled=true; } const top=document.querySelector('.pcard.cur');
+  if(m.k==='homecooked'){ PIPE.active.push(m.n); renderPipe(); toast('Intro sent. Maya usually replies fast.'); setTimeout(()=>{ if(top) top.classList.add('fly'); setTimeout(()=>{ DECK.splice(deckIdx,1); deckRender(); setView('inbox'); openChat(); },380); },560); }
+  else { PIPE.intro.push(m.n); renderPipe(); toast('Intro drafted and sent in your voice. Replies land in the Inbox.'); setTimeout(()=>{ if(top) top.classList.add('fly'); setTimeout(()=>{ DECK.splice(deckIdx,1); deckRender(); },380); },560); } }
 function discTab(btn,t){ [...btn.parentElement.children].forEach(x=>x.classList.toggle('on',x===btn));
   ['others','mine','x'].forEach(k=>{ document.getElementById('dsc-'+k).style.display = (k===t)?'':'none'; });
   if(t==='others') deckRender(); }
