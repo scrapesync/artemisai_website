@@ -275,6 +275,32 @@ body.light .storyv{background:#F5F7FB}
 body.light .sv-bars i{background:rgba(18,26,40,.14)}
 body.light .sv-bars i::after{background:#12161F}
 
+/* deck dossier style */
+.pcard{background:#10141B;border:none}
+.pcard .pd-top{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 22px 0;position:relative;z-index:2}
+.pring{position:relative;width:96px;height:96px;margin-bottom:12px}
+.pring svg{position:absolute;inset:0;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.pring svg{animation:none}}
+.pring .pav-big{position:absolute;inset:9px;width:auto;height:auto;margin:0;border:none;border-radius:50%;font-size:26px}
+.pd-top .pn3{font-family:var(--disp);font-size:23px;font-weight:800;color:#fff;letter-spacing:-.4px;text-shadow:0 2px 14px rgba(0,0,0,.4)}
+.pd-top .ps3{font-size:12px;color:rgba(255,255,255,.85);margin-top:2px}
+.bigpct{font-family:var(--disp);font-size:58px;font-weight:800;letter-spacing:-2.5px;color:#fff;line-height:1;margin:14px 0 2px;text-shadow:0 4px 24px rgba(0,0,0,.35)}
+.bigcap{font-size:11.5px;color:rgba(255,255,255,.9);letter-spacing:.3px;max-width:300px;line-height:1.55}
+.bigcap b{color:#fff}
+.pdiv{border:none;border-top:2px dashed rgba(255,255,255,.28);margin:16px 22px 0;position:relative;z-index:2}
+.glasspanel{margin:14px 14px 14px;background:rgba(10,13,19,.42);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:14px 16px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);position:relative;z-index:2;flex:1;display:flex;flex-direction:column}
+.glasspanel .cb .cl{color:rgba(255,255,255,.75)}
+.glasspanel .cb .cl b{color:#fff}
+.glasspanel .cb .ct{background:rgba(255,255,255,.14)}
+.glasspanel .cb .ct i{background:#fff !important}
+.glasspanel .tpost{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.16)}
+.glasspanel .tpost small{color:rgba(255,255,255,.75)}
+.glasspanel .pstat{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+.glasspanel .pstat b{color:#fff}
+.glasspanel .pstat.hot b{color:#fff}
+.glasspanel .pstat span{color:rgba(255,255,255,.65)}
+body.light .pcard .pd-top .pn3, body.light .bigpct{color:#fff}
 /* discovery v3 */
 .deck{height:460px}
 .deck-glow{position:absolute;inset:-30px -50px;border-radius:40px;filter:blur(40px);opacity:.22;pointer-events:none;transition:background .4s}
@@ -308,43 +334,43 @@ body.light .dact{background:rgba(255,255,255,.75)}
 .kpi2{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:13px 15px 10px}
 .kpi2 .kl{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--t3)}
 .kpi2 .kv{display:flex;align-items:baseline;gap:8px;margin:4px 0 2px}
-.kpi2 .kv b{font-family:var(--disp);font-size:23px;font-weight:800;letter-spacing:-.5px}
+.kpi2 .kv b{font-family:var(--disp);font-size:27px;font-weight:800;letter-spacing:-.5px}
 .kpi2 .kv span{font-family:var(--mono);font-size:10px;font-weight:700}
-.kpi2 svg{display:block;width:100%;height:24px}
+.kpi2 svg{display:block;width:100%;height:32px}
 .dgrid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .dgrid2 .span2{grid-column:1/-1}
 .donut-wrap{display:flex;align-items:center;gap:18px}
-.dleg{font-size:12px;color:var(--t2);line-height:2}
+.dleg{font-size:13.5px;color:var(--t2);line-height:2.1}
 .dleg .sw{width:11px;height:11px;border-radius:4px;display:inline-block;margin-right:8px;vertical-align:-1px}
 .fun-row{margin-bottom:10px}
-.fun-row .fl{display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:4px}
+.fun-row .fl{display:flex;justify-content:space-between;font-size:13px;color:var(--t2);margin-bottom:4px}
 .fun-row .fl b{color:var(--t1);font-family:var(--mono);font-size:11px}
-.fun-row .ft{height:18px;border-radius:7px;background:var(--surface2);overflow:hidden}
+.fun-row .ft{height:24px;border-radius:7px;background:var(--surface2);overflow:hidden}
 .fun-row .ft i{display:block;height:100%;border-radius:7px}
 .adv-jump{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
 .ajc{font-size:11px;font-weight:800;letter-spacing:.4px;color:var(--t2);background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:8px 14px;transition:.15s}
 .ajc:hover{border-color:rgba(139,123,255,.5);color:var(--arte)}
 .shap{margin-bottom:10px}
-.shap .sl2{display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:4px}
+.shap .sl2{display:flex;justify-content:space-between;font-size:13px;color:var(--t2);margin-bottom:4px}
 .shap .sl2 b{font-family:var(--mono);font-size:10.5px}
-.shap .st{height:12px;border-radius:99px;background:var(--surface2);position:relative;overflow:hidden}
+.shap .st{height:16px;border-radius:99px;background:var(--surface2);position:relative;overflow:hidden}
 .shap .st i{position:absolute;top:0;bottom:0;left:50%;border-radius:99px}
 .logrow{display:flex;align-items:center;gap:11px;padding:10px 2px;border-top:1px solid var(--line);font-size:12px}
 .logrow:first-of-type{border-top:none}
 .logrow .lt{font-family:var(--mono);font-size:9.5px;color:var(--t3);min-width:64px}
 .logrow .ls{margin-left:auto;font-size:9.5px;font-weight:800;letter-spacing:.6px;padding:3px 9px;border-radius:99px}
 /* readable charts */
-.chart-note{font-size:12.5px;color:var(--t3);line-height:1.55;margin-top:9px}
+.chart-note{font-size:13.5px;color:var(--t3);line-height:1.55;margin-top:9px}
 .chart-note b{color:var(--t2);font-weight:700}
-.axis{font-family:var(--mono);font-size:10px;fill:var(--t3)}
+.axis{font-family:var(--mono);font-size:11px;fill:var(--t3)}
 .gline{stroke:var(--line);stroke-width:1;stroke-dasharray:2 4}
 .peaktag{font-family:var(--mono);font-size:10.5px;font-weight:700}
 .hbar{margin-bottom:15px}
-.hbar .hl2{display:flex;justify-content:space-between;font-size:13.5px;color:var(--t2);margin-bottom:6px}
+.hbar .hl2{display:flex;justify-content:space-between;font-size:14.5px;color:var(--t2);margin-bottom:7px}
 .hbar .hl2 b{color:var(--t1);font-family:var(--mono);font-size:12px}
-.hbar .ht{height:16px;border-radius:99px;background:var(--surface2);overflow:hidden}
+.hbar .ht{height:21px;border-radius:99px;background:var(--surface2);overflow:hidden}
 .hbar .ht i{display:block;height:100%;border-radius:99px}
-.legend{display:flex;gap:14px;align-items:center;font-size:11.5px;color:var(--t3);margin-top:8px}
+.legend{display:flex;gap:16px;align-items:center;font-size:12.5px;color:var(--t3);margin-top:8px}
 .legend .sw{width:14px;height:9px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
 /* week calendar */
 .cal{display:grid;grid-template-columns:52px repeat(7,1fr);gap:5px;margin-bottom:8px}
@@ -1251,42 +1277,45 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
             <div class="chart-note"><b>Read:</b> higher line, more people saw you. That last climb is the pasta reel, and the dot is your best day.</div>
           </div>
 
-          <div class="dcard"><h5>Engagement rate <b>weekly</b></h5>
-            <svg width="100%" height="150" viewBox="0 0 400 150" preserveAspectRatio="none">
-              <line class="gline" x1="30" y1="20" x2="400" y2="20"/><line class="gline" x1="30" y1="70" x2="400" y2="70"/><line class="gline" x1="30" y1="120" x2="400" y2="120"/>
-              <text class="axis" x="0" y="24">10%</text><text class="axis" x="6" y="74">5%</text><text class="axis" x="10" y="124">0</text>
-              <line x1="30" y1="82" x2="400" y2="82" stroke="#76829B" stroke-width="1.5" stroke-dasharray="5 5" opacity=".6"/><text class="axis" x="336" y="78">avg 4.1%</text>
-              <path d="M30,96 L82,90 L134,98 L186,84 L238,76 L290,58 L342,44 L394,38" fill="none" stroke="#57B5F0" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
-              <circle cx="394" cy="38" r="4" fill="#07090D" stroke="#57B5F0" stroke-width="2"/>
-              <text class="axis" x="32" y="146">8 weeks ago</text><text class="axis" x="356" y="146">this week</text>
+          <div class="dcard span2"><h5>Engagement rate <b>weekly, vs your own average</b></h5>
+            <svg width="100%" height="200" viewBox="0 0 840 200" preserveAspectRatio="none">
+              <line class="gline" x1="44" y1="26" x2="840" y2="26"/><line class="gline" x1="44" y1="94" x2="840" y2="94"/><line class="gline" x1="44" y1="162" x2="840" y2="162"/>
+              <text class="axis" x="0" y="30">10%</text><text class="axis" x="10" y="98">5%</text><text class="axis" x="18" y="166">0</text>
+              <line x1="44" y1="110" x2="840" y2="110" stroke="#76829B" stroke-width="1.5" stroke-dasharray="6 6" opacity=".6"/><text class="axis" x="760" y="105">avg 4.1%</text>
+              <path d="M44,130 L154,122 L264,132 L374,112 L484,102 L594,76 L704,58 L816,50" fill="none" stroke="#57B5F0" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              <circle cx="816" cy="50" r="5" fill="#07090D" stroke="#57B5F0" stroke-width="2.5"/>
+              <text class="peaktag" x="756" y="42" fill="#57B5F0">6.8% now</text>
+              <text class="axis" x="46" y="194">8 weeks ago</text><text class="axis" x="770" y="194">this week</text>
             </svg>
             <div class="chart-note"><b>Read:</b> you are pulling away from your own average. The evening shift did this.</div>
           </div>
 
-          <div class="dcard"><h5>Follower growth <b>90 days</b></h5>
-            <svg width="100%" height="150" viewBox="0 0 400 150" preserveAspectRatio="none">
+          <div class="dcard span2"><h5>Follower growth <b>90 days, all pages</b></h5>
+            <svg width="100%" height="200" viewBox="0 0 840 200" preserveAspectRatio="none">
               <defs><linearGradient id="growFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8B7BFF" stop-opacity=".3"/><stop offset="1" stop-color="#8B7BFF" stop-opacity="0"/></linearGradient></defs>
-              <line class="gline" x1="34" y1="24" x2="400" y2="24"/><line class="gline" x1="34" y1="120" x2="400" y2="120"/>
-              <text class="axis" x="0" y="28">293k</text><text class="axis" x="0" y="124">265k</text>
-              <path d="M34,118 L94,112 L154,104 L214,92 L274,74 L334,52 L394,30 L394,130 L34,130 Z" fill="url(#growFill)"/>
-              <path d="M34,118 L94,112 L154,104 L214,92 L274,74 L334,52 L394,30" fill="none" stroke="#8B7BFF" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
-              <text class="peaktag" x="318" y="26" fill="#8B7BFF">293k today</text>
-              <text class="axis" x="36" y="146">April</text><text class="axis" x="368" y="146">today</text>
+              <line class="gline" x1="52" y1="30" x2="840" y2="30"/><line class="gline" x1="52" y1="158" x2="840" y2="158"/>
+              <text class="axis" x="0" y="34">293k</text><text class="axis" x="0" y="162">265k</text>
+              <path d="M52,156 L180,148 L308,136 L436,118 L564,94 L692,64 L816,36 L816,172 L52,172 Z" fill="url(#growFill)"/>
+              <path d="M52,156 L180,148 L308,136 L436,118 L564,94 L692,64 L816,36" fill="none" stroke="#8B7BFF" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              <circle cx="816" cy="36" r="5" fill="#07090D" stroke="#8B7BFF" stroke-width="2.5"/>
+              <text class="peaktag" x="736" y="30" fill="#8B7BFF">293k today</text>
+              <text class="axis" x="54" y="194">April</text><text class="axis" x="786" y="194">today</text>
             </svg>
             <div class="chart-note"><b>Read:</b> steady climb, steeper since the timing change. 150k on Kitchen by 30 Sept is on track.</div>
           </div>
 
-          <div class="dcard"><h5>Saves vs likes <b>why saves matter</b></h5>
-            <svg width="100%" height="150" viewBox="0 0 400 150" preserveAspectRatio="none">
-              <text class="axis" x="0" y="145">Mon</text><text class="axis" x="58" y="145">Tue</text><text class="axis" x="116" y="145">Wed</text><text class="axis" x="174" y="145">Thu</text><text class="axis" x="232" y="145">Fri</text><text class="axis" x="290" y="145">Sat</text><text class="axis" x="348" y="145">Sun</text>
+          <div class="dcard span2"><h5>Saves vs likes <b>daily, why saves matter</b></h5>
+            <svg width="100%" height="200" viewBox="0 0 840 200" preserveAspectRatio="none">
+              <line class="gline" x1="10" y1="24" x2="840" y2="24"/><line class="gline" x1="10" y1="100" x2="840" y2="100"/>
+              <text class="axis" x="24" y="196">Mon</text><text class="axis" x="140" y="196">Tue</text><text class="axis" x="256" y="196">Wed</text><text class="axis" x="372" y="196">Thu</text><text class="axis" x="488" y="196">Fri</text><text class="axis" x="604" y="196">Sat</text><text class="axis" x="720" y="196">Sun</text>
               <g>
-              <rect x="0" y="86" width="20" height="48" rx="4" fill="#3A4356"/><rect x="24" y="102" width="20" height="32" rx="4" fill="#00C4A0"/>
-              <rect x="58" y="46" width="20" height="88" rx="4" fill="#3A4356"/><rect x="82" y="58" width="20" height="76" rx="4" fill="#00C4A0"/>
-              <rect x="116" y="92" width="20" height="42" rx="4" fill="#3A4356"/><rect x="140" y="108" width="20" height="26" rx="4" fill="#00C4A0"/>
-              <rect x="174" y="66" width="20" height="68" rx="4" fill="#3A4356"/><rect x="198" y="84" width="20" height="50" rx="4" fill="#00C4A0"/>
-              <rect x="232" y="78" width="20" height="56" rx="4" fill="#3A4356"/><rect x="256" y="96" width="20" height="38" rx="4" fill="#00C4A0"/>
-              <rect x="290" y="58" width="20" height="76" rx="4" fill="#3A4356"/><rect x="314" y="72" width="20" height="62" rx="4" fill="#00C4A0"/>
-              <rect x="348" y="70" width="20" height="64" rx="4" fill="#3A4356"/><rect x="372" y="88" width="20" height="46" rx="4" fill="#00C4A0"/>
+              <rect x="14" y="112" width="40" height="64" rx="6" fill="#3A4356"/><rect x="60" y="134" width="40" height="42" rx="6" fill="#00C4A0"/>
+              <rect x="130" y="58" width="40" height="118" rx="6" fill="#3A4356"/><rect x="176" y="74" width="40" height="102" rx="6" fill="#00C4A0"/>
+              <rect x="246" y="120" width="40" height="56" rx="6" fill="#3A4356"/><rect x="292" y="142" width="40" height="34" rx="6" fill="#00C4A0"/>
+              <rect x="362" y="86" width="40" height="90" rx="6" fill="#3A4356"/><rect x="408" y="110" width="40" height="66" rx="6" fill="#00C4A0"/>
+              <rect x="478" y="102" width="40" height="74" rx="6" fill="#3A4356"/><rect x="524" y="126" width="40" height="50" rx="6" fill="#00C4A0"/>
+              <rect x="594" y="76" width="40" height="100" rx="6" fill="#3A4356"/><rect x="640" y="94" width="40" height="82" rx="6" fill="#00C4A0"/>
+              <rect x="710" y="92" width="40" height="84" rx="6" fill="#3A4356"/><rect x="756" y="116" width="40" height="60" rx="6" fill="#00C4A0"/>
               </g>
             </svg>
             <div class="legend"><span><span class="sw" style="background:#3A4356"></span>likes</span><span><span class="sw" style="background:#00C4A0"></span>saves</span></div>
@@ -1322,7 +1351,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
 
           <div class="dcard"><h5>Comment sentiment <b>this week</b></h5>
             <div class="donut-wrap">
-              <svg width="128" height="128" viewBox="0 0 42 42">
+              <svg width="158" height="158" viewBox="0 0 42 42">
                 <circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--surface2)" stroke-width="6"/>
                 <circle cx="21" cy="21" r="15.9" fill="none" stroke="#00C4A0" stroke-width="6" stroke-dasharray="71 29" stroke-dashoffset="25" stroke-linecap="round"/>
                 <circle cx="21" cy="21" r="15.9" fill="none" stroke="#76829B" stroke-width="6" stroke-dasharray="21 79" stroke-dashoffset="-46" stroke-linecap="round"/>
@@ -1389,32 +1418,32 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
           </div>
 
           <div class="dcard"><h5>Caption length <b>sweet spot</b></h5>
-            <svg width="100%" height="150" viewBox="0 0 400 150" preserveAspectRatio="none">
-              <rect x="140" y="14" width="110" height="120" rx="8" fill="rgba(0,196,160,.1)" stroke="rgba(0,196,160,.35)" stroke-dasharray="4 4"/>
-              <path d="M20,120 C80,116 110,52 195,40 C260,32 300,86 388,118" fill="none" stroke="#57B5F0" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
-              <circle cx="195" cy="40" r="4.5" fill="#07090D" stroke="#00C4A0" stroke-width="2.5"/>
-              <text class="peaktag" x="158" y="30" fill="#00C4A0">80 to 140 chars</text>
-              <text class="axis" x="14" y="146">20 chars</text><text class="axis" x="340" y="146">400 chars</text>
+            <svg width="100%" height="195" viewBox="0 0 400 195" preserveAspectRatio="none">
+              <rect x="140" y="16" width="110" height="158" rx="8" fill="rgba(0,196,160,.1)" stroke="rgba(0,196,160,.35)" stroke-dasharray="4 4"/>
+              <path d="M20,158 C80,152 110,66 195,50 C260,40 300,112 388,154" fill="none" stroke="#57B5F0" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
+              <circle cx="195" cy="50" r="5" fill="#07090D" stroke="#00C4A0" stroke-width="2.5"/>
+              <text class="peaktag" x="158" y="36" fill="#00C4A0">80 to 140 chars</text>
+              <text class="axis" x="14" y="190">20 chars</text><text class="axis" x="336" y="190">400 chars</text>
             </svg>
             <div class="chart-note"><b>Read:</b> engagement peaks at 80 to 140 characters on your pages. Long captions lose the scroll.</div>
           </div>
 
           <div class="dcard"><h5>Posting frequency <b>diminishing returns</b></h5>
-            <svg width="100%" height="150" viewBox="0 0 400 150" preserveAspectRatio="none">
-              <path d="M20,128 C90,60 150,38 230,32 C300,28 350,34 388,44" fill="none" stroke="#8B7BFF" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
-              <line x1="196" y1="18" x2="196" y2="134" stroke="#FFC24B" stroke-width="1.5" stroke-dasharray="5 4"/>
-              <text class="peaktag" x="204" y="26" fill="#FFC24B">you: 4 a week</text>
-              <text class="axis" x="14" y="146">1 a week</text><text class="axis" x="340" y="146">14 a week</text>
+            <svg width="100%" height="195" viewBox="0 0 400 195" preserveAspectRatio="none">
+              <path d="M20,168 C90,78 150,48 230,42 C300,36 350,44 388,58" fill="none" stroke="#8B7BFF" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
+              <line x1="196" y1="22" x2="196" y2="176" stroke="#FFC24B" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <text class="peaktag" x="204" y="32" fill="#FFC24B">you: 4 a week</text>
+              <text class="axis" x="14" y="190">1 a week</text><text class="axis" x="336" y="190">14 a week</text>
             </svg>
             <div class="chart-note"><b>Read:</b> past 5 a week the curve flattens. You are at the sweet spot, protect quality over volume.</div>
           </div>
 
           <div class="dcard span2"><h5>Emoji sweet spot <b>engagement by count</b></h5>
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
-              <div style="text-align:center"><div class="ht" style="height:64px;border-radius:10px;background:var(--surface2);display:flex;align-items:flex-end"><i style="display:block;width:100%;height:44%;border-radius:10px;background:rgba(0,196,160,.35)"></i></div><div style="font-size:11px;color:var(--t3);margin-top:6px">none</div></div>
-              <div style="text-align:center"><div class="ht" style="height:64px;border-radius:10px;background:var(--surface2);display:flex;align-items:flex-end;box-shadow:0 0 0 1.5px rgba(255,194,75,.7)"><i style="display:block;width:100%;height:100%;border-radius:10px;background:linear-gradient(180deg,#00d4aa,#00a88a)"></i></div><div style="font-size:11px;color:var(--t1);font-weight:700;margin-top:6px">1 to 2 &#11088;</div></div>
-              <div style="text-align:center"><div class="ht" style="height:64px;border-radius:10px;background:var(--surface2);display:flex;align-items:flex-end"><i style="display:block;width:100%;height:66%;border-radius:10px;background:rgba(0,196,160,.55)"></i></div><div style="font-size:11px;color:var(--t3);margin-top:6px">3 to 4</div></div>
-              <div style="text-align:center"><div class="ht" style="height:64px;border-radius:10px;background:var(--surface2);display:flex;align-items:flex-end"><i style="display:block;width:100%;height:32%;border-radius:10px;background:rgba(255,92,116,.4)"></i></div><div style="font-size:11px;color:var(--t3);margin-top:6px">5 plus</div></div>
+              <div style="text-align:center"><div class="ht" style="height:88px;border-radius:12px;background:var(--surface2);display:flex;align-items:flex-end"><i style="display:block;width:100%;height:44%;border-radius:10px;background:rgba(0,196,160,.35)"></i></div><div style="font-size:11px;color:var(--t3);margin-top:6px">none</div></div>
+              <div style="text-align:center"><div class="ht" style="height:88px;border-radius:12px;background:var(--surface2);display:flex;align-items:flex-end;box-shadow:0 0 0 1.5px rgba(255,194,75,.7)"><i style="display:block;width:100%;height:100%;border-radius:10px;background:linear-gradient(180deg,#00d4aa,#00a88a)"></i></div><div style="font-size:11px;color:var(--t1);font-weight:700;margin-top:6px">1 to 2 &#11088;</div></div>
+              <div style="text-align:center"><div class="ht" style="height:88px;border-radius:12px;background:var(--surface2);display:flex;align-items:flex-end"><i style="display:block;width:100%;height:66%;border-radius:10px;background:rgba(0,196,160,.55)"></i></div><div style="font-size:11px;color:var(--t3);margin-top:6px">3 to 4</div></div>
+              <div style="text-align:center"><div class="ht" style="height:88px;border-radius:12px;background:var(--surface2);display:flex;align-items:flex-end"><i style="display:block;width:100%;height:32%;border-radius:10px;background:rgba(255,92,116,.4)"></i></div><div style="font-size:11px;color:var(--t3);margin-top:6px">5 plus</div></div>
             </div>
             <div class="chart-note"><b>Read:</b> one or two emoji lift engagement, five or more read as spam to your audience.</div>
           </div>
@@ -1441,12 +1470,12 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
           </div>
 
           <div class="dcard span2"><h5>Cumulative reach effect <b>organic vs cascade</b></h5>
-            <svg width="100%" height="140" viewBox="0 0 400 140" preserveAspectRatio="none">
+            <svg width="100%" height="185" viewBox="0 0 400 185" preserveAspectRatio="none">
               <defs><linearGradient id="cas1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00C4A0" stop-opacity=".5"/><stop offset="1" stop-color="#00C4A0" stop-opacity=".08"/></linearGradient><linearGradient id="cas2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8B7BFF" stop-opacity=".5"/><stop offset="1" stop-color="#8B7BFF" stop-opacity=".08"/></linearGradient></defs>
-              <path d="M20,120 L96,112 L172,100 L248,92 L324,86 L392,82 L392,130 L20,130 Z" fill="url(#cas1)"/>
-              <path d="M20,120 L96,104 L172,80 L248,58 L324,40 L392,26 L392,82 L324,86 L248,92 L172,100 L96,112 L20,120 Z" fill="url(#cas2)"/>
-              <text class="axis" x="24" y="136">hour 0</text><text class="axis" x="352" y="136">hour 48</text>
-              <text class="peaktag" x="300" y="76" fill="#00C4A0">organic</text><text class="peaktag" x="290" y="38" fill="#8B7BFF">via sharers</text>
+              <path d="M20,160 L96,148 L172,132 L248,122 L324,114 L392,108 L392,172 L20,172 Z" fill="url(#cas1)"/>
+              <path d="M20,160 L96,136 L172,104 L248,76 L324,52 L392,34 L392,108 L324,114 L248,122 L172,132 L96,148 L20,160 Z" fill="url(#cas2)"/>
+              <text class="axis" x="24" y="180">hour 0</text><text class="axis" x="348" y="180">hour 48</text>
+              <text class="peaktag" x="296" y="102" fill="#00C4A0">organic</text><text class="peaktag" x="286" y="48" fill="#8B7BFF">via sharers</text>
             </svg>
             <div class="chart-note"><b>Read:</b> after hour 6, most new reach comes through sharers, not the algorithm. The network is the engine.</div>
           </div>
@@ -2033,28 +2062,31 @@ function improveDraft(){ const ta=document.getElementById('draft');
 const TIMES=[['Today 6:40pm','2.4x'],['Thu 8:00pm','2.1x'],['Sun 10:00am','1.7x']];
 let schedSel=0;
 const DECK=[
- {k:'homecooked',ini:'HC',c:'#8B7BFF',n:'@HomeCookedDaily',sub:'Family cooking &middot; 96k followers &middot; posts 1 to 3pm',ovl:'41%',fol:'96k',est:'+12k',aud:88,tone:92,time:84,hrs:'1-3pm',posts:[['&#127837;','pasta hacks'],['&#129386;','toasties'],['&#128118;','kid meals']],why:'<b>8,200 of your people</b> already follow them, and their strong hours are exactly your quiet window. Estimated <b>+12k reach</b> from one collab reel.',tags:['Tone: high match','Peak 1-3pm','+12k est.']},
- {k:'spiceroute',ini:'SR',c:'#57B5F0',n:'@SpiceRouteStories',sub:'Weeknight curries &middot; 71k &middot; morning crowd',ovl:'33%',fol:'71k',est:'+8k',aud:74,tone:81,time:90,hrs:'8-10am',posts:[['&#127858;','curries'],['&#127859;','one-pot'],['&#128293;','spice 101']],why:'Their <b>8 to 10am</b> strength complements your evenings, so a collab covers the whole day. Estimated <b>+8k reach</b>.',tags:['Complementary hours','+8k est.']},
- {k:'budgetbites',ini:'BB',c:'#FFC24B',n:'@BudgetBites',sub:'Student meals &middot; 52k &middot; strong under-25s',ovl:'28%',fol:'52k',est:'+6k',aud:69,tone:77,time:72,hrs:'9-11pm',posts:[['&#127789;','5-min meals'],['&#128176;','under 2 quid'],['&#127860;','dorm hacks']],why:'Their under-25 core is <b>your thinnest segment</b>. One duet-style short is the natural format. Estimated <b>+6k</b>.',tags:['Under-25 reach','Duet format']},
- {k:'plantplates',ini:'PP',c:'#00C4A0',n:'@PlantPlates',sub:'Veg swaps &middot; 44k &middot; Sunday mornings',ovl:'24%',fol:'44k',est:'+5k',aud:66,tone:84,time:88,hrs:'Sun 9-11',posts:[['&#129388;','veg swaps'],['&#127807;','meat-free'],['&#129361;','bowl food']],why:'<b>Sunday 9 to 11am</b> is theirs and empty for you. A veg-swap of your pasta reel fits both audiences. Estimated <b>+5k</b>.',tags:['Sunday window','+5k est.']}];
+ {k:'homecooked',ini:'HC',c:'#8B7BFF',n:'@HomeCookedDaily',sub:'Family cooking &middot; 96k followers &middot; posts 1 to 3pm',ovl:'41%',fol:'96k',est:'+12k',aud:88,tone:92,time:84,hrs:'1-3pm',cap:'8,200 shared people, their peak is your quiet window',posts:[['&#127837;','pasta hacks'],['&#129386;','toasties'],['&#128118;','kid meals']],why:'<b>8,200 of your people</b> already follow them, and their strong hours are exactly your quiet window. Estimated <b>+12k reach</b> from one collab reel.',tags:['Tone: high match','Peak 1-3pm','+12k est.']},
+ {k:'spiceroute',ini:'SR',c:'#57B5F0',n:'@SpiceRouteStories',sub:'Weeknight curries &middot; 71k &middot; morning crowd',ovl:'33%',fol:'71k',est:'+8k',aud:74,tone:81,time:90,hrs:'8-10am',cap:'their mornings complete your evenings',posts:[['&#127858;','curries'],['&#127859;','one-pot'],['&#128293;','spice 101']],why:'Their <b>8 to 10am</b> strength complements your evenings, so a collab covers the whole day. Estimated <b>+8k reach</b>.',tags:['Complementary hours','+8k est.']},
+ {k:'budgetbites',ini:'BB',c:'#FFC24B',n:'@BudgetBites',sub:'Student meals &middot; 52k &middot; strong under-25s',ovl:'28%',fol:'52k',est:'+6k',aud:69,tone:77,time:72,hrs:'9-11pm',cap:'the under-25 reach you are missing',posts:[['&#127789;','5-min meals'],['&#128176;','under 2 quid'],['&#127860;','dorm hacks']],why:'Their under-25 core is <b>your thinnest segment</b>. One duet-style short is the natural format. Estimated <b>+6k</b>.',tags:['Under-25 reach','Duet format']},
+ {k:'plantplates',ini:'PP',c:'#00C4A0',n:'@PlantPlates',sub:'Veg swaps &middot; 44k &middot; Sunday mornings',ovl:'24%',fol:'44k',est:'+5k',aud:66,tone:84,time:88,hrs:'Sun 9-11',cap:'Sunday mornings, theirs and empty for you',posts:[['&#129388;','veg swaps'],['&#127807;','meat-free'],['&#129361;','bowl food']],why:'<b>Sunday 9 to 11am</b> is theirs and empty for you. A veg-swap of your pasta reel fits both audiences. Estimated <b>+5k</b>.',tags:['Sunday window','+5k est.']}];
 let deckIdx=0;
 function deckRender(){ const d=document.getElementById('deck'); if(!d) return;
   d.innerHTML='';
   const rest=DECK.slice(deckIdx);
   if(!rest.length){ d.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--t3);font-size:13px;gap:10px"><span style="font-size:30px">&#129309;</span>Deck cleared. New matches will alert you.</div>'; document.getElementById('deckCount').textContent=''; return; }
   rest.slice(0,3).forEach((m,x)=>{
-    const pct=parseInt(m.ovl); const ring=2*Math.PI*15.9;
-    d.insertAdjacentHTML('beforeend', `<div class="pcard" data-pos="${x}" style="z-index:${9-x}">
-      <span class="pcover" style="background:linear-gradient(150deg, ${m.c}, ${m.c}55 60%, #10141B)"></span>
-      <span class="mring"><svg width="56" height="56" viewBox="0 0 42 42"><circle cx="21" cy="21" r="15.9" fill="rgba(7,9,13,.35)" stroke="rgba(255,255,255,.25)" stroke-width="3.5"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="${ring*pct/100} ${ring}" transform="rotate(-90 21 21)"/><text x="21" y="25" text-anchor="middle" style="font-size:10px;font-weight:800;fill:#fff">${m.ovl}</text></svg><small>overlap</small></span>
-      <div class="pid"><span class="pav-big" style="background:${m.c};color:#fff">${m.ini}<span class="pv2">&#10003;</span></span><span class="pn2"><b>${m.n}</b><span>${m.sub}</span></span></div>
-      <div class="pbody">
-        <div class="cb"><div class="cl"><span>Audience fit</span><b>${m.aud}%</b></div><div class="ct"><i style="width:${m.aud}%;background:${m.c}"></i></div></div>
-        <div class="cb"><div class="cl"><span>Tone match</span><b>${m.tone}%</b></div><div class="ct"><i style="width:${m.tone}%;background:${m.c}"></i></div></div>
-        <div class="cb" style="margin-bottom:12px"><div class="cl"><span>Timing complement</span><b>${m.time}%</b></div><div class="ct"><i style="width:${m.time}%;background:${m.c}"></i></div></div>
-        <div class="tprow">${m.posts.map(p=>'<span class="tpost">'+p[0]+'<small>'+p[1]+'</small></span>').join('')}</div>
-        <div class="pwhy" style="flex:1">${m.why}</div>
-        <div class="pstats" style="margin:10px 0 0"><div class="pstat"><b>${m.fol}</b><span>followers</span></div><div class="pstat hot"><b>${m.est}</b><span>est. reach</span></div><div class="pstat"><b>${m.hrs}</b><span>their peak</span></div></div>
+    const pct=parseInt(m.ovl); const R=44, C=2*Math.PI*R;
+    d.insertAdjacentHTML('beforeend', `<div class="pcard" data-pos="${x}" style="z-index:${9-x};background:linear-gradient(165deg, ${m.c} 0%, ${m.c}88 34%, #0B0E14 82%)">
+      <div class="pd-top">
+        <span class="pring"><svg width="96" height="96" viewBox="0 0 96 96"><circle cx="48" cy="48" r="44" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="4"/><circle cx="48" cy="48" r="44" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-dasharray="${C*pct/100} ${C}" transform="rotate(-90 48 48)"/></svg><span class="pav-big" style="background:rgba(255,255,255,.16);color:#fff;backdrop-filter:blur(6px)">${m.ini}<span class="pv2">&#10003;</span></span></span>
+        <div class="pn3">${m.n}</div><div class="ps3">${m.sub}</div>
+        <div class="bigpct">${m.ovl}</div>
+        <div class="bigcap"><b>real audience overlap</b> &middot; ${m.cap}</div>
+      </div>
+      <hr class="pdiv">
+      <div class="glasspanel">
+        <div class="cb"><div class="cl"><span>Audience fit</span><b>${m.aud}%</b></div><div class="ct"><i style="width:${m.aud}%"></i></div></div>
+        <div class="cb"><div class="cl"><span>Tone match</span><b>${m.tone}%</b></div><div class="ct"><i style="width:${m.tone}%"></i></div></div>
+        <div class="cb" style="margin-bottom:11px"><div class="cl"><span>Timing complement</span><b>${m.time}%</b></div><div class="ct"><i style="width:${m.time}%"></i></div></div>
+        <div class="tprow" style="margin-bottom:0">${m.posts.map(p=>'<span class="tpost">'+p[0]+'<small>'+p[1]+'</small></span>').join('')}</div>
+        <div class="pstats" style="margin:11px 0 0"><div class="pstat"><b>${m.fol}</b><span>followers</span></div><div class="pstat hot"><b>${m.est}</b><span>est. reach</span></div><div class="pstat"><b>${m.hrs}</b><span>their peak</span></div></div>
       </div>
     </div>`); });
   const g=document.getElementById('deckGlow')||d.insertAdjacentElement('afterbegin',Object.assign(document.createElement('div'),{className:'deck-glow',id:'deckGlow'}));

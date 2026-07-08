@@ -142,7 +142,7 @@ input,textarea{font-family:var(--body)}
 .trust-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:11px}
 .trust-top h4{font-size:13.5px;font-weight:700}
 .trust-top span{font-family:var(--mono);font-size:10px;color:var(--t3)}
-.tbar{height:9px;border-radius:99px;background:var(--surface2);overflow:hidden;display:flex}
+.tbar{height:12px;border-radius:99px;background:var(--surface2);overflow:hidden;display:flex}
 .tbar i{display:block;height:100%}
 .tlegend{display:flex;gap:13px;margin-top:9px;font-size:10.5px;color:var(--t2);flex-wrap:wrap}
 .tlegend b{display:inline-block;width:8px;height:8px;border-radius:2.5px;margin-right:5px}
@@ -263,6 +263,30 @@ body.light .sv-bars i::after{background:#12161F}
 .card-act{transition:transform .18s cubic-bezier(.22,.68,.22,1)}
 .card:active .card-act{transform:translateX(3px)}
 
+/* dossier m */
+.pcard{background:#10141B;border:none}
+.pcard .pd-top{display:flex;flex-direction:column;align-items:center;text-align:center;padding:17px 15px 0;position:relative;z-index:2}
+.pring{position:relative;width:72px;height:72px;margin-bottom:9px}
+.pring svg{position:absolute;inset:0;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.pring svg{animation:none}}
+.pring .pav-big{position:absolute;inset:7px;width:auto;height:auto;margin:0;border:none;border-radius:50%;font-size:20px}
+.pd-top .pn3{font-family:var(--disp);font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.pd-top .ps3{font-size:10px;color:rgba(255,255,255,.85);margin-top:1px}
+.bigpct{font-family:var(--disp);font-size:44px;font-weight:800;letter-spacing:-2px;color:#fff;line-height:1;margin:10px 0 2px}
+.bigcap{font-size:9.5px;color:rgba(255,255,255,.9);max-width:250px;line-height:1.5}
+.bigcap b{color:#fff}
+.pdiv{border:none;border-top:2px dashed rgba(255,255,255,.28);margin:12px 15px 0;position:relative;z-index:2}
+.glasspanel{margin:11px 11px;background:rgba(10,13,19,.42);border:1px solid rgba(255,255,255,.14);border-radius:15px;padding:11px 12px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);position:relative;z-index:2;flex:1;display:flex;flex-direction:column}
+.glasspanel .cb .cl{color:rgba(255,255,255,.75)}
+.glasspanel .cb .cl b{color:#fff}
+.glasspanel .cb .ct{background:rgba(255,255,255,.14)}
+.glasspanel .cb .ct i{background:#fff !important}
+.glasspanel .tpost{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.16)}
+.glasspanel .tpost small{color:rgba(255,255,255,.75)}
+.glasspanel .pstat{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+.glasspanel .pstat b,.glasspanel .pstat.hot b{color:#fff}
+.glasspanel .pstat span{color:rgba(255,255,255,.65)}
 /* dashboard + disc v3 m */
 .donut-wrap{display:flex;align-items:center;gap:14px}
 .dleg{font-size:10.5px;color:var(--t2);line-height:1.9}
@@ -270,18 +294,18 @@ body.light .sv-bars i::after{background:#12161F}
 .fun-row{margin-bottom:8px}
 .fun-row .fl{display:flex;justify-content:space-between;font-size:10.5px;color:var(--t2);margin-bottom:3px}
 .fun-row .fl b{color:var(--t1);font-family:var(--mono);font-size:9px}
-.fun-row .ft{height:14px;border-radius:6px;background:var(--surface2);overflow:hidden}
+.fun-row .ft{height:19px;border-radius:6px;background:var(--surface2);overflow:hidden}
 .fun-row .ft i{display:block;height:100%;border-radius:6px}
 .shap{margin-bottom:8px}
 .shap .sl2{display:flex;justify-content:space-between;font-size:10.5px;color:var(--t2);margin-bottom:3px}
 .shap .sl2 b{font-family:var(--mono);font-size:9px}
-.shap .st{height:10px;border-radius:99px;background:var(--surface2);position:relative;overflow:hidden}
+.shap .st{height:14px;border-radius:99px;background:var(--surface2);position:relative;overflow:hidden}
 .shap .st i{position:absolute;top:0;bottom:0;left:50%;border-radius:99px}
 .logrow{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line);font-size:10.5px}
 .logrow:first-of-type{border-top:none}
 .logrow .lt{font-family:var(--mono);font-size:8px;color:var(--t3);min-width:44px}
 .logrow .ls{margin-left:auto;font-size:8px;font-weight:800;padding:2px 7px;border-radius:99px}
-.deck{height:412px}
+.deck{height:432px}
 .deck-glow{position:absolute;inset:-24px -32px;border-radius:36px;filter:blur(34px);opacity:.22;pointer-events:none;transition:background .4s}
 .pcard{padding:0;overflow:hidden;border-radius:22px}
 .pcard .pcover{position:absolute;top:0;left:0;right:0;height:120px;border-radius:0;opacity:1}
@@ -307,9 +331,9 @@ body.light .sv-bars i::after{background:#12161F}
 body.light .dact{background:rgba(255,255,255,.75)}
 .venn text{font-family:var(--mono);font-weight:800}
 /* readable charts m */
-.chart-note{font-size:11px;color:var(--t3);line-height:1.5;margin-top:7px}
+.chart-note{font-size:12px;color:var(--t3);line-height:1.5;margin-top:7px}
 .chart-note b{color:var(--t2)}
-.axis{font-family:var(--mono);font-size:8.5px;fill:var(--t3)}
+.axis{font-family:var(--mono);font-size:9.5px;fill:var(--t3)}
 .gline{stroke:var(--line);stroke-width:1;stroke-dasharray:2 3}
 .legend{display:flex;gap:9px;align-items:center;font-size:9.5px;color:var(--t3);margin-top:7px;flex-wrap:wrap}
 .legend .sw{width:12px;height:8px;border-radius:3px;display:inline-block;margin-right:4px;vertical-align:-1px}
@@ -1063,12 +1087,12 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <div class="chart-note"><b>Read:</b> right of centre lifts reach, left drags it. Hooks are your superpower.</div>
       </div>
       <div class="dcard"><h5>Caption length <b>sweet spot</b></h5>
-        <svg width="100%" height="88" viewBox="0 0 340 88" preserveAspectRatio="none">
-          <rect x="118" y="8" width="94" height="70" rx="7" fill="rgba(0,196,160,.1)" stroke="rgba(0,196,160,.35)" stroke-dasharray="3 3"/>
-          <path d="M14,70 C64,66 92,28 164,22 C220,18 258,50 328,68" fill="none" stroke="#57B5F0" stroke-width="2" vector-effect="non-scaling-stroke"/>
-          <circle cx="164" cy="22" r="3.5" fill="#07090D" stroke="#00C4A0" stroke-width="2"/>
-          <text class="axis" x="126" y="17" fill="#00C4A0" style="font-weight:700">80-140 chars</text>
-          <text class="axis" x="10" y="84">20</text><text class="axis" x="310" y="84">400</text>
+        <svg width="100%" height="112" viewBox="0 0 340 112" preserveAspectRatio="none">
+          <rect x="118" y="10" width="94" height="90" rx="7" fill="rgba(0,196,160,.1)" stroke="rgba(0,196,160,.35)" stroke-dasharray="3 3"/>
+          <path d="M14,90 C64,84 92,34 164,27 C220,22 258,64 328,88" fill="none" stroke="#57B5F0" stroke-width="2.3" vector-effect="non-scaling-stroke"/>
+          <circle cx="164" cy="27" r="3.8" fill="#07090D" stroke="#00C4A0" stroke-width="2"/>
+          <text class="axis" x="126" y="21" fill="#00C4A0" style="font-weight:700">80-140 chars</text>
+          <text class="axis" x="10" y="108">20</text><text class="axis" x="306" y="108">400</text>
         </svg>
         <div class="chart-note"><b>Read:</b> engagement peaks at 80 to 140 characters. Long captions lose the scroll.</div>
       </div>
@@ -1090,11 +1114,11 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <div class="chart-note"><b>Read:</b> one post, 14 super-sharers (violet), 4,200 new people. The network is the engine.</div>
       </div>
       <div class="dcard"><h5>Audience clusters <b>your tribes</b></h5>
-        <svg width="100%" height="110" viewBox="0 0 340 110">
-          <circle cx="92" cy="44" r="33" fill="rgba(0,196,160,.16)" stroke="#00C4A0" stroke-width="1.3"/><text x="92" y="42" text-anchor="middle" style="font-size:8.5px;fill:var(--t1);font-weight:700">Foodie families</text><text x="92" y="53" text-anchor="middle" class="axis">38%</text>
-          <circle cx="216" cy="38" r="26" fill="rgba(139,123,255,.16)" stroke="#8B7BFF" stroke-width="1.3"/><text x="216" y="36" text-anchor="middle" style="font-size:8px;fill:var(--t1);font-weight:700">Night snackers</text><text x="216" y="47" text-anchor="middle" class="axis">26%</text>
-          <circle cx="148" cy="88" r="21" fill="rgba(87,181,240,.16)" stroke="#57B5F0" stroke-width="1.3"/><text x="148" y="87" text-anchor="middle" style="font-size:7.5px;fill:var(--t1);font-weight:700">Students</text><text x="148" y="96" text-anchor="middle" class="axis">21%</text>
-          <circle cx="280" cy="86" r="18" fill="rgba(255,194,75,.16)" stroke="#FFC24B" stroke-width="1.3"/><text x="280" y="85" text-anchor="middle" style="font-size:7.5px;fill:var(--t1);font-weight:700">Weekend</text><text x="280" y="94" text-anchor="middle" class="axis">15%</text>
+        <svg width="100%" height="134" viewBox="0 0 340 134">
+          <circle cx="92" cy="54" r="40" fill="rgba(0,196,160,.16)" stroke="#00C4A0" stroke-width="1.3"/><text x="92" y="52" text-anchor="middle" style="font-size:8.5px;fill:var(--t1);font-weight:700">Foodie families</text><text x="92" y="65" text-anchor="middle" class="axis">38%</text>
+          <circle cx="216" cy="46" r="32" fill="rgba(139,123,255,.16)" stroke="#8B7BFF" stroke-width="1.3"/><text x="216" y="44" text-anchor="middle" style="font-size:8px;fill:var(--t1);font-weight:700">Night snackers</text><text x="216" y="57" text-anchor="middle" class="axis">26%</text>
+          <circle cx="148" cy="106" r="25" fill="rgba(87,181,240,.16)" stroke="#57B5F0" stroke-width="1.3"/><text x="148" y="105" text-anchor="middle" style="font-size:7.5px;fill:var(--t1);font-weight:700">Students</text><text x="148" y="115" text-anchor="middle" class="axis">21%</text>
+          <circle cx="280" cy="104" r="22" fill="rgba(255,194,75,.16)" stroke="#FFC24B" stroke-width="1.3"/><text x="280" y="103" text-anchor="middle" style="font-size:7.5px;fill:var(--t1);font-weight:700">Weekend</text><text x="280" y="113" text-anchor="middle" class="axis">15%</text>
         </svg>
         <div class="chart-note"><b>Read:</b> four tribes, de-identified. Night snackers are why Munchies exists.</div>
       </div>
@@ -1131,16 +1155,16 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       <div class="chart-note"><b>Read:</b> darker means your people are there. Post inside the dark blocks.</div>
     </div>
     <div class="dcard"><h5>Your five pages <b>reach</b></h5>
-      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:5px"></span>Kitchen</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">128k</b></div><div style="height:9px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:96%;border-radius:99px;background:#00C4A0"></i></div></div>
-      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:5px"></span>Quick Bites</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">64k</b></div><div style="height:9px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:48%;border-radius:99px;background:#57B5F0"></i></div></div>
-      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:5px"></span>Munchies</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">41k</b></div><div style="height:9px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:31%;border-radius:99px;background:#8B7BFF"></i></div></div>
-      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FFC24B;display:inline-block;margin-right:5px"></span>Feasts</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">38k</b></div><div style="height:9px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:29%;border-radius:99px;background:#FFC24B"></i></div></div>
-      <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FF5C74;display:inline-block;margin-right:5px"></span>Shorts</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">22k</b></div><div style="height:9px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:17%;border-radius:99px;background:#FF5C74"></i></div></div>
+      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:5px"></span>Kitchen</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">128k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:96%;border-radius:99px;background:#00C4A0"></i></div></div>
+      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:5px"></span>Quick Bites</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">64k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:48%;border-radius:99px;background:#57B5F0"></i></div></div>
+      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:5px"></span>Munchies</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">41k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:31%;border-radius:99px;background:#8B7BFF"></i></div></div>
+      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FFC24B;display:inline-block;margin-right:5px"></span>Feasts</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">38k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:29%;border-radius:99px;background:#FFC24B"></i></div></div>
+      <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FF5C74;display:inline-block;margin-right:5px"></span>Shorts</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">22k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:17%;border-radius:99px;background:#FF5C74"></i></div></div>
       <div class="chart-note"><b>Read:</b> Kitchen carries the network. Feasts is the one to watch.</div>
     </div>
     <div class="dcard"><h5>Comment sentiment <b>this week</b></h5>
       <div class="donut-wrap">
-        <svg width="92" height="92" viewBox="0 0 42 42">
+        <svg width="116" height="116" viewBox="0 0 42 42">
           <circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--surface2)" stroke-width="6"/>
           <circle cx="21" cy="21" r="15.9" fill="none" stroke="#00C4A0" stroke-width="6" stroke-dasharray="71 29" stroke-dashoffset="25" stroke-linecap="round"/>
           <circle cx="21" cy="21" r="15.9" fill="none" stroke="#76829B" stroke-width="6" stroke-dasharray="21 79" stroke-dashoffset="-46" stroke-linecap="round"/>
@@ -1156,32 +1180,32 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       </div>
       <div class="chart-note"><b>Read:</b> healthy. Negativity 0.14, well under the 0.3 line.</div></div>
     <div class="dcard"><h5>Reach <span style="display:inline-flex;gap:5px;margin-left:6px"><button class="rpill" style="font-size:9px;font-weight:700;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 8px" onclick="setRangeM(this,7)">7d</button><button class="rpill on" style="font-size:9px;font-weight:700;color:var(--act);border:1px solid rgba(0,196,160,.4);border-radius:99px;padding:2px 8px;background:rgba(0,196,160,.07)" onclick="setRangeM(this,14)">14d</button><button class="rpill" style="font-size:9px;font-weight:700;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 8px" onclick="setRangeM(this,30)">30d</button></span><b>Sana's Kitchen</b></h5>
-      <svg width="100%" height="124" viewBox="0 0 340 124" preserveAspectRatio="none">
+      <svg width="100%" height="150" viewBox="0 0 340 150" preserveAspectRatio="none">
         <defs><linearGradient id="rfm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00C4A0" stop-opacity=".26"/><stop offset="1" stop-color="#00C4A0" stop-opacity="0"/></linearGradient></defs>
-        <line class="gline" x1="30" y1="16" x2="340" y2="16"/><line class="gline" x1="30" y1="56" x2="340" y2="56"/><line class="gline" x1="30" y1="96" x2="340" y2="96"/>
-        <text class="axis" x="0" y="19">120k</text><text class="axis" x="4" y="59">60k</text><text class="axis" x="10" y="99">0</text>
-        <g transform="translate(30,4) scale(0.91,1.35)"><path id="reachAreaM" d="M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17 L340,70 L0,70 Z" fill="url(#rfm)"/><path id="reachPathM" d="M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17" fill="none" stroke="#00C4A0" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/><circle cx="312" cy="12" r="3" fill="#07090D" stroke="#00C4A0" stroke-width="2" vector-effect="non-scaling-stroke"/></g>
-        <text class="peaktag axis" x="282" y="13" fill="#00C4A0" style="font-weight:700">Tue peak</text>
-        <text class="axis" x="32" y="120">14d ago</text><text class="axis" x="306" y="120">today</text>
+        <line class="gline" x1="30" y1="18" x2="340" y2="18"/><line class="gline" x1="30" y1="70" x2="340" y2="70"/><line class="gline" x1="30" y1="122" x2="340" y2="122"/>
+        <text class="axis" x="0" y="22">120k</text><text class="axis" x="4" y="74">60k</text><text class="axis" x="10" y="126">0</text>
+        <g transform="translate(30,6) scale(0.91,1.72)"><path id="reachAreaM" d="M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17 L340,70 L0,70 Z" fill="url(#rfm)"/><path id="reachPathM" d="M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17" fill="none" stroke="#00C4A0" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/><circle cx="312" cy="12" r="3" fill="#07090D" stroke="#00C4A0" stroke-width="2" vector-effect="non-scaling-stroke"/></g>
+        <text class="peaktag axis" x="282" y="16" fill="#00C4A0" style="font-weight:700">Tue peak</text>
+        <text class="axis" x="32" y="146">14d ago</text><text class="axis" x="302" y="146">today</text>
       </svg>
       <div class="chart-note"><b>Read:</b> higher line, more people saw you. The climb is the pasta reel.</div>
     </div>
     <div class="dcard"><h5>Engagement rate <b>8 weeks</b></h5>
-      <svg width="100%" height="96" viewBox="0 0 340 96" preserveAspectRatio="none">
-        <line x1="24" y1="56" x2="340" y2="56" stroke="#76829B" stroke-width="1.2" stroke-dasharray="4 4" opacity=".6"/><text class="axis" x="286" y="52">avg 4.1%</text>
-        <path d="M24,66 L68,62 L112,68 L156,58 L200,52 L244,40 L288,30 L332,26" fill="none" stroke="#57B5F0" stroke-width="2" vector-effect="non-scaling-stroke"/>
-        <circle cx="332" cy="26" r="3.2" fill="#07090D" stroke="#57B5F0" stroke-width="2"/>
-        <text class="axis" x="26" y="92">8w ago</text><text class="axis" x="296" y="92">now</text>
+      <svg width="100%" height="126" viewBox="0 0 340 126" preserveAspectRatio="none">
+        <line x1="24" y1="74" x2="340" y2="74" stroke="#76829B" stroke-width="1.2" stroke-dasharray="4 4" opacity=".6"/><text class="axis" x="282" y="70">avg 4.1%</text>
+        <path d="M24,90 L68,84 L112,92 L156,78 L200,70 L244,52 L288,38 L332,32" fill="none" stroke="#57B5F0" stroke-width="2.4" vector-effect="non-scaling-stroke"/>
+        <circle cx="332" cy="32" r="3.6" fill="#07090D" stroke="#57B5F0" stroke-width="2"/>
+        <text class="axis" x="26" y="122">8w ago</text><text class="axis" x="294" y="122">now</text>
       </svg>
       <div class="chart-note"><b>Read:</b> pulling away from your own average. The evening shift did this.</div>
     </div>
     <div class="dcard"><h5>Follower growth <b>90 days</b></h5>
-      <svg width="100%" height="96" viewBox="0 0 340 96" preserveAspectRatio="none">
+      <svg width="100%" height="126" viewBox="0 0 340 126" preserveAspectRatio="none">
         <defs><linearGradient id="gfm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8B7BFF" stop-opacity=".3"/><stop offset="1" stop-color="#8B7BFF" stop-opacity="0"/></linearGradient></defs>
-        <path d="M24,74 L86,68 L148,60 L210,48 L272,34 L332,20 L332,86 L24,86 Z" fill="url(#gfm)"/>
-        <path d="M24,74 L86,68 L148,60 L210,48 L272,34 L332,20" fill="none" stroke="#8B7BFF" stroke-width="2" vector-effect="non-scaling-stroke"/>
-        <text class="peaktag axis" x="270" y="16" fill="#8B7BFF" style="font-weight:700">293k today</text>
-        <text class="axis" x="26" y="92">April</text><text class="axis" x="304" y="92">now</text>
+        <path d="M24,100 L86,92 L148,80 L210,64 L272,44 L332,26 L332,114 L24,114 Z" fill="url(#gfm)"/>
+        <path d="M24,100 L86,92 L148,80 L210,64 L272,44 L332,26" fill="none" stroke="#8B7BFF" stroke-width="2.4" vector-effect="non-scaling-stroke"/>
+        <text class="peaktag axis" x="266" y="20" fill="#8B7BFF" style="font-weight:700">293k today</text>
+        <text class="axis" x="26" y="122">April</text><text class="axis" x="302" y="122">now</text>
       </svg>
       <div class="chart-note"><b>Read:</b> steeper since the timing change. 150k by 30 Sept is on track.</div></div>
     <div class="dcard"><h5>Content mix that works <b>saves-weighted</b></h5>
@@ -1401,25 +1425,28 @@ function prevStory(){ if(sIdx>0){ sIdx--; renderStory(); } }
 function closeStory(){ clearTimeout(sTimer); document.getElementById('storyv').classList.remove('on'); }
 
 const DECK=[
- {k:'homecooked',ini:'HC',c:'#8B7BFF',n:'@HomeCookedDaily',sub:'Family cooking &middot; 96k &middot; 1-3pm',ovl:'41%',fol:'96k',est:'+12k',aud:88,tone:92,time:84,hrs:'1-3pm',posts:[['&#127837;','pasta'],['&#129386;','toasties'],['&#128118;','kids']],why:'<b>8,200 of your people</b> follow them, their strong hours are your quiet window. <b>+12k est.</b>',tags:['High tone match','Peak 1-3pm']},
- {k:'spiceroute',ini:'SR',c:'#57B5F0',n:'@SpiceRouteStories',sub:'Curries &middot; 71k &middot; mornings',ovl:'33%',fol:'71k',est:'+8k',aud:74,tone:81,time:90,hrs:'8-10am',posts:[['&#127858;','curries'],['&#127859;','one-pot'],['&#128293;','spice']],why:'Their <b>8-10am</b> strength complements your evenings. <b>+8k est.</b>',tags:['Complementary hours']},
- {k:'budgetbites',ini:'BB',c:'#FFC24B',n:'@BudgetBites',sub:'Student meals &middot; 52k',ovl:'28%',fol:'52k',est:'+6k',aud:69,tone:77,time:72,hrs:'9-11pm',posts:[['&#127789;','5-min'],['&#128176;','cheap'],['&#127860;','dorm']],why:'Their under-25 core is <b>your thinnest segment</b>. Duet short fits. <b>+6k est.</b>',tags:['Under-25 reach']},
- {k:'plantplates',ini:'PP',c:'#00C4A0',n:'@PlantPlates',sub:'Veg swaps &middot; 44k &middot; Sundays',ovl:'24%',fol:'44k',est:'+5k',aud:66,tone:84,time:88,hrs:'Sun am',posts:[['&#129388;','swaps'],['&#127807;','no-meat'],['&#129361;','bowls']],why:'<b>Sunday 9-11am</b> is theirs and empty for you. <b>+5k est.</b>',tags:['Sunday window']}];
+ {k:'homecooked',ini:'HC',c:'#8B7BFF',n:'@HomeCookedDaily',sub:'Family cooking &middot; 96k &middot; 1-3pm',ovl:'41%',fol:'96k',est:'+12k',aud:88,tone:92,time:84,hrs:'1-3pm',cap:'8,200 shared people, their peak is your quiet window',posts:[['&#127837;','pasta'],['&#129386;','toasties'],['&#128118;','kids']],why:'<b>8,200 of your people</b> follow them, their strong hours are your quiet window. <b>+12k est.</b>',tags:['High tone match','Peak 1-3pm']},
+ {k:'spiceroute',ini:'SR',c:'#57B5F0',n:'@SpiceRouteStories',sub:'Curries &middot; 71k &middot; mornings',ovl:'33%',fol:'71k',est:'+8k',aud:74,tone:81,time:90,hrs:'8-10am',cap:'their mornings complete your evenings',posts:[['&#127858;','curries'],['&#127859;','one-pot'],['&#128293;','spice']],why:'Their <b>8-10am</b> strength complements your evenings. <b>+8k est.</b>',tags:['Complementary hours']},
+ {k:'budgetbites',ini:'BB',c:'#FFC24B',n:'@BudgetBites',sub:'Student meals &middot; 52k',ovl:'28%',fol:'52k',est:'+6k',aud:69,tone:77,time:72,hrs:'9-11pm',cap:'the under-25 reach you are missing',posts:[['&#127789;','5-min'],['&#128176;','cheap'],['&#127860;','dorm']],why:'Their under-25 core is <b>your thinnest segment</b>. Duet short fits. <b>+6k est.</b>',tags:['Under-25 reach']},
+ {k:'plantplates',ini:'PP',c:'#00C4A0',n:'@PlantPlates',sub:'Veg swaps &middot; 44k &middot; Sundays',ovl:'24%',fol:'44k',est:'+5k',aud:66,tone:84,time:88,hrs:'Sun am',cap:'Sunday mornings, theirs and empty for you',posts:[['&#129388;','swaps'],['&#127807;','no-meat'],['&#129361;','bowls']],why:'<b>Sunday 9-11am</b> is theirs and empty for you. <b>+5k est.</b>',tags:['Sunday window']}];
 let deckIdx=0;
 function deckRender(){ const d=document.getElementById('deck'); if(!d) return; d.innerHTML='';
   const rest=DECK.slice(deckIdx);
   if(!rest.length){ d.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--t3);font-size:11.5px;gap:8px"><span style="font-size:26px">&#129309;</span>Deck cleared. New matches will alert you.</div>'; document.getElementById('deckCount').textContent=''; return; }
-  rest.slice(0,3).forEach((m,x)=>{ const pct=parseInt(m.ovl); const ring=2*Math.PI*15.9;
-  d.insertAdjacentHTML('beforeend', `<div class="pcard" data-pos="${x}" style="z-index:${9-x}">
-    <span class="pcover" style="background:linear-gradient(150deg, ${m.c}, ${m.c}55 60%, #10141B)"></span>
-    <span class="mring"><svg width="44" height="44" viewBox="0 0 42 42"><circle cx="21" cy="21" r="15.9" fill="rgba(7,9,13,.35)" stroke="rgba(255,255,255,.25)" stroke-width="3.5"/><circle cx="21" cy="21" r="15.9" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="${ring*pct/100} ${ring}" transform="rotate(-90 21 21)"/><text x="21" y="25" text-anchor="middle" style="font-size:10px;font-weight:800;fill:#fff">${m.ovl}</text></svg><small>overlap</small></span>
-    <div class="pid"><span class="pav-big" style="background:${m.c};color:#fff">${m.ini}<span class="pv2">&#10003;</span></span><span class="pn2"><b>${m.n}</b><span>${m.sub}</span></span></div>
-    <div class="pbody">
-      <div class="cb"><div class="cl"><span>Audience fit</span><b>${m.aud}%</b></div><div class="ct"><i style="width:${m.aud}%;background:${m.c}"></i></div></div>
-      <div class="cb"><div class="cl"><span>Tone match</span><b>${m.tone}%</b></div><div class="ct"><i style="width:${m.tone}%;background:${m.c}"></i></div></div>
-      <div class="cb" style="margin-bottom:9px"><div class="cl"><span>Timing complement</span><b>${m.time}%</b></div><div class="ct"><i style="width:${m.time}%;background:${m.c}"></i></div></div>
-      <div class="tprow">${m.posts.map(p=>'<span class="tpost">'+p[0]+'<small>'+p[1]+'</small></span>').join('')}</div>
-      <div class="pwhy" style="flex:1">${m.why}</div>
+  rest.slice(0,3).forEach((m,x)=>{ const pct=parseInt(m.ovl); const R=33, C=2*Math.PI*R;
+  d.insertAdjacentHTML('beforeend', `<div class="pcard" data-pos="${x}" style="z-index:${9-x};background:linear-gradient(165deg, ${m.c} 0%, ${m.c}88 34%, #0B0E14 82%)">
+    <div class="pd-top">
+      <span class="pring"><svg width="72" height="72" viewBox="0 0 72 72"><circle cx="36" cy="36" r="33" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="3.5"/><circle cx="36" cy="36" r="33" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="${C*pct/100} ${C}" transform="rotate(-90 36 36)"/></svg><span class="pav-big" style="background:rgba(255,255,255,.16);color:#fff">${m.ini}<span class="pv2">&#10003;</span></span></span>
+      <div class="pn3">${m.n}</div><div class="ps3">${m.sub}</div>
+      <div class="bigpct">${m.ovl}</div>
+      <div class="bigcap"><b>real overlap</b> &middot; ${m.cap}</div>
+    </div>
+    <hr class="pdiv">
+    <div class="glasspanel">
+      <div class="cb"><div class="cl"><span>Audience fit</span><b>${m.aud}%</b></div><div class="ct"><i style="width:${m.aud}%"></i></div></div>
+      <div class="cb"><div class="cl"><span>Tone match</span><b>${m.tone}%</b></div><div class="ct"><i style="width:${m.tone}%"></i></div></div>
+      <div class="cb" style="margin-bottom:8px"><div class="cl"><span>Timing complement</span><b>${m.time}%</b></div><div class="ct"><i style="width:${m.time}%"></i></div></div>
+      <div class="tprow" style="margin-bottom:0">${m.posts.map(p=>'<span class="tpost">'+p[0]+'<small>'+p[1]+'</small></span>').join('')}</div>
       <div class="pstats" style="margin:8px 0 0"><div class="pstat"><b>${m.fol}</b><span>followers</span></div><div class="pstat hot"><b>${m.est}</b><span>est.</span></div><div class="pstat"><b>${m.hrs}</b><span>peak</span></div></div>
     </div></div>`); });
   const g=document.getElementById('deckGlow')||d.insertAdjacentElement('afterbegin',Object.assign(document.createElement('div'),{className:'deck-glow',id:'deckGlow'}));
