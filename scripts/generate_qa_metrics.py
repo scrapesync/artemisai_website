@@ -29,10 +29,19 @@ def connect():
     d=os.environ['REDSHIFT_DB']; u=os.environ['REDSHIFT_USER']; w=os.environ['REDSHIFT_PASSWORD']
     try:
         import redshift_connector
-        return redshift_connector.connect(host=h,port=p,database=d,user=u,password=w)
+        c=redshift_connector.connect(host=h,port=p,database=d,user=u,password=w)
     except ImportError:
         import psycopg2
-        return psycopg2.connect(host=h,port=p,dbname=d,user=u,password=w)
+        c=psycopg2.connect(host=h,port=p,dbname=d,user=u,password=w)
+    # CRITICAL: autocommit. In Redshift one failed query aborts the whole
+    # transaction and every later query dies with 25P02 until rollback.
+    # Autocommit isolates each query so a single permission error cannot
+    # poison the rest of the run.
+    try: c.autocommit=True
+    except Exception: pass
+    return c
+
+CONN=None  # set in main; safe() uses it to rollback if a driver still opens a tx
 
 def q(cur, sql):
     cur.execute(sql); cols=[c[0] for c in cur.description]
@@ -41,7 +50,12 @@ def q(cur, sql):
 def safe(fn,*a):
     try: return fn(*a)
     except Exception as e:
-        print(f"  ! {fn.__name__}: {e}"); return None
+        print(f"  ! {fn.__name__}: {e}")
+        # clear any aborted-transaction state so the next metric can run
+        try:
+            if CONN is not None: CONN.rollback()
+        except Exception: pass
+        return None
 
 START = (dt.date.today()-dt.timedelta(days=WINDOW_DAYS)).isoformat()
 DAYS  = [(dt.date.today()-dt.timedelta(days=WINDOW_DAYS-1-i)) for i in range(WINDOW_DAYS)]
@@ -399,9 +413,74 @@ def ov_volume_trend(cur):
     rows=q(cur,f"SELECT inserted_at::date d,COUNT(*) n FROM rdl.post_label_predictions WHERE inserted_at>='{START}' GROUP BY 1")
     return trend(align_daily(rows,'d','n',0))
 
+# ---- EXPLORE: pre-baked per-table aggregates for the client-side custom graph builder ----
+# The browser cannot query Redshift live (static site), so the nightly job bakes,
+# for every curated table: row count, daily volume, top values per categorical
+# column, and a histogram + average per numeric column. The dashboard's
+# "Build your own graph" picker is driven entirely by this block.
+EXPLORE_TABLES={
+  'rdl.post_label_predictions':{'date':'inserted_at','cats':['nlp_sentiment','ds_sentiment','nlp_emotion','ds_emotion','nlp_topic','nlp_intent','nlp_toxicity'],'nums':['nlp_sentiment_confidence','ds_sentiment_confidence','processing_time_ms']},
+  'rdl.comment_label_predictions':{'date':'created_at','cats':['nlp_sentiment','ds_sentiment','nlp_emotion','nlp_intent'],'nums':['nlp_sentiment_confidence','ds_sentiment_confidence']},
+  'rdl.fusion_predictions':{'date':'processed_at','cats':['fusion_label'],'nums':['confidence','score_meme','score_lifestyle']},
+  'rdl.video_intelligence':{'date':'processed_at','cats':['scene_label','haiku_label'],'nums':['scene_confidence','hook_score','frame_count']},
+  'rdl.page_posts':{'date':'load_date','cats':[],'nums':[]},
+  'rdl.post_comments':{'date':'load_date','cats':[],'nums':[]},
+  'rdl.post_reactions':{'date':'load_date','cats':[],'nums':['reactions_total','reactions_like','reactions_love']},
+  'rdl.post_daily_insights':{'date':'load_date','cats':[],'nums':[]},
+  'rdl.page_daily_insights':{'date':'load_date','cats':[],'nums':[]},
+  'odl.dim_comments':{'date':'load_date','cats':['sentiment_category','comment_level','hierarchy_type'],'nums':['reactions_total']},
+  'odl.comment_sentiments_v2':{'date':'processing_date','cats':['predicted_sentiment','primary_emotion'],'nums':['prediction_confidence','word_count','text_length','emoji_count']},
+  'odl.comment_sentiments':{'date':'processing_date','cats':['predicted_sentiment','bert_sentiment'],'nums':['prediction_confidence','data_quality_score']},
+  'odl.dim_pages':{'date':None,'cats':['influence_tier'],'nums':[]},
+  'odl.dim_posts':{'date':'load_date','cats':[],'nums':[]},
+  'odl.dim_metrics':{'date':None,'cats':['metric_category','metric_type'],'nums':[]},
+  'public.artemis_fb_connections':{'date':'connected_at','cats':['status','connection_type','page_category'],'nums':[]},
+}
+def build_explore(cur):
+    out={}
+    for tbl,spec in EXPLORE_TABLES.items():
+        entry={}
+        try:
+            entry['rows']=int(q(cur,f"SELECT COUNT(*) n FROM {tbl}")[0]['n'] or 0)
+        except Exception as e:
+            print(f"  ! explore {tbl} count: {e}")
+            try:
+                if CONN is not None: CONN.rollback()
+            except Exception: pass
+            continue
+        if spec['date']:
+            try:
+                rows=q(cur,f"SELECT {spec['date']}::date d,COUNT(*) n FROM {tbl} WHERE {spec['date']}>='{START}' GROUP BY 1")
+                entry['daily']=trend(align_daily(rows,'d','n',0))
+            except Exception as e: print(f"  ! explore {tbl} daily: {e}")
+        cats={}
+        for c in spec['cats']:
+            try:
+                rows=q(cur,f"SELECT {c} v,COUNT(*) n FROM {tbl} WHERE {c} IS NOT NULL GROUP BY 1 ORDER BY n DESC LIMIT 12")
+                cats[c]=[[str(r['v'])[:28],int(r['n'])] for r in rows]
+            except Exception as e: print(f"  ! explore {tbl}.{c}: {e}")
+        if cats: entry['cats']=cats
+        nums={}
+        for c in spec['nums']:
+            try:
+                mm=q(cur,f"SELECT MIN({c}) lo,MAX({c}) hi,AVG({c}) av FROM {tbl} WHERE {c} IS NOT NULL")[0]
+                lo,hi,av=float(mm['lo'] or 0),float(mm['hi'] or 0),float(mm['av'] or 0)
+                if hi<=lo: nums[c]={'avg':round(av,2),'buckets':[[str(round(lo,1)),entry['rows']]]}; continue
+                step=(hi-lo)/6.0
+                rows=q(cur,f"""SELECT LEAST(5,FLOOR(({c}-{lo})/{step}))::int b,COUNT(*) n
+                               FROM {tbl} WHERE {c} IS NOT NULL GROUP BY 1 ORDER BY 1""")
+                by={int(r['b']):int(r['n']) for r in rows}
+                lab=lambda i:f"{(lo+i*step):.3g}-{(lo+(i+1)*step):.3g}"
+                nums[c]={'avg':round(av,2),'buckets':[[lab(i),by.get(i,0)] for i in range(6)]}
+            except Exception as e: print(f"  ! explore {tbl}.{c}: {e}")
+        if nums: entry['nums']=nums
+        out[tbl]=entry
+    return out
+
 def main():
+    global CONN
     print("Multi-tab QA metrics - connecting...")
-    conn=connect(); cur=conn.cursor()
+    conn=connect(); CONN=conn; cur=conn.cursor()
     tabs={}
     tabs['overview']={'pipeline':safe(ov_pipeline_status,cur),'scores':safe(ov_scores,cur),
         'today':safe(ov_today,cur),'volume':safe(ov_volume_trend,cur),
@@ -442,12 +521,13 @@ def main():
         totals['comments']=q(cur,"SELECT COUNT(*) n FROM rdl.post_comments")[0]['n']
         totals['pages']=q(cur,"SELECT COUNT(*) n FROM odl.dim_pages")[0]['n']
     except Exception: pass
+    explore=safe(build_explore,cur) or {}
     payload={'generated_at':dt.datetime.utcnow().isoformat()+'Z',
              'window':{'days':WINDOW_DAYS,'start':START,'axis':[d.isoformat() for d in DAYS]},
-             'totals':totals,'tabs':tabs}
+             'totals':totals,'tabs':tabs,'explore':explore}
     with open(OUT_PATH,'w') as f: json.dump(payload,f,separators=(',',':'))
     n=sum(len(v) for v in tabs.values())
-    print(f"Wrote {OUT_PATH}: {n} live metrics across {len(tabs)} tabs at {payload['generated_at']}")
+    print(f"Wrote {OUT_PATH}: {n} live metrics across {len(tabs)} tabs, explore for {len(explore)} tables, at {payload['generated_at']}")
     cur.close(); conn.close()
 
 if __name__=='__main__':

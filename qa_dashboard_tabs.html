@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QA Dashboard · ArtemisAI Admin</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -130,9 +129,6 @@ table.qt tr:last-child td{border-bottom:none}
 .heatwrap{display:grid;gap:5px}
 .hcell{border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;height:38px;cursor:default}
 .hlab{font-size:10px;color:var(--t3);font-weight:800;letter-spacing:.5px;display:flex;align-items:center;justify-content:center}
-.blab{display:block;font-size:9.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);margin:8px 0 4px}
-.bsel{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--t1);font-family:inherit;font-size:11.5px;padding:7px 8px;margin-bottom:2px}
-.bsel:focus{outline:2px solid var(--okT);outline-offset:1px}
 .palette{position:fixed;top:52px;right:0;bottom:0;width:278px;background:var(--railbg);backdrop-filter:blur(18px);border-left:1px solid var(--line);padding:20px 17px 34px;overflow-y:auto;transform:translateX(100%);transition:transform .25s,visibility 0s .25s;visibility:hidden;z-index:60}
 body.edit .palette{transform:none;visibility:visible;transition:transform .25s,visibility 0s 0s}
 .palette h4{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--t3);font-weight:800;margin-bottom:6px}
@@ -154,26 +150,8 @@ body.edit .boardend.hot{border-color:var(--okT);color:var(--okT)}
 </style>
 </head>
 <body>
-<nav class="site-nav">
-  <a href="index.html" class="sn-logo">
-    <div class="sn-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#slg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#slg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#slg)"/><defs><linearGradient id="slg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
-    ARTEMISAI
-  </a>
-  <ul class="sn-links">
-    <li><a href="admin_panel.html" class="sn-pill">&larr; Admin Panel</a></li>
-    <li><div class="sn-chip" id="sn-chip" style="display:none"><div class="sn-avatar" id="sn-avatar">?</div><span class="sn-name" id="sn-name"></span></div></li>
-    <li><button class="sn-logout" id="sn-logout-btn" onclick="handleLogout()" style="display:none">&#9211;</button></li>
-  </ul>
-</nav>
-<div id="signout-modal">
-  <div id="signout-backdrop" onclick="_closeSignoutModal()"></div>
-  <div id="signout-card">
-    <div class="signout-icon"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
-    <div class="signout-title">Sign out?</div>
-    <div class="signout-sub">You'll need to sign back in to access the Admin Panel.</div>
-    <div class="signout-btns"><button class="signout-cancel" onclick="_closeSignoutModal()">Cancel</button><button class="signout-confirm" onclick="_doSignout()">Sign Out</button></div>
-  </div>
-</div>
+{{NAV}}
+{{MODAL}}
 <main class="wrap">
   <div class="ph">
     <div>
@@ -227,25 +205,7 @@ body.edit .boardend.hot{border-color:var(--okT);color:var(--okT)}
 <div class="toast" id="toast"></div>
 <div id="tip"></div>
 
-<script>(function(){
-  try{
-    var sess = localStorage.getItem('artemis_session') || localStorage.getItem('artemis_sprint_session') || localStorage.getItem('artemis_app_session');
-    if(sess){
-      var user = JSON.parse(sess);
-      var chip=document.getElementById('sn-chip'), av=document.getElementById('sn-avatar'), nm=document.getElementById('sn-name'), lb=document.getElementById('sn-logout-btn');
-      if(chip) chip.style.display='flex';
-      var who=user.name||user.username||'';
-      if(av && who) av.textContent=who.charAt(0).toUpperCase();
-      if(nm && who) nm.textContent=who;
-      if(lb) lb.style.display='';
-    }
-  }catch(e){}
-})();
-var _signoutFn=null;
-function handleLogout(){_showSignoutModal(function(){localStorage.removeItem('artemis_session');localStorage.removeItem('artemis_sprint_session');localStorage.removeItem('artemis_app_session');localStorage.removeItem('artemis_viewer_name');window.location.href='index.html';});}
-function _showSignoutModal(fn){_signoutFn=fn||function(){localStorage.removeItem('artemis_session');window.location.href='index.html';};document.getElementById('signout-modal').classList.add('open');}
-function _closeSignoutModal(){document.getElementById('signout-modal').classList.remove('open');}
-function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}</script>
+<script>{{AUTH}}</script>
 <script>
 /* ══════════ ArtemisAI QA Dashboard · four tabs, live Redshift ══════════ */
 const C={teal:'#00D4AA',indigo:'#6C7BFB',gold:'#F7BE4F',sky:'#57B5F0',rose:'#FB5D77',t3:'#8A96AC',p4:'#556179'};
@@ -258,106 +218,61 @@ let TH=THEMES.dark, THEME='dark';
 /* ---- seed fallback (small; live JSON overrides) ---- */
 function flat(v,n){return {day:Array(30).fill(v),week:Array(13).fill(v),month:Array(4).fill(v),quarter:Array(2).fill(v),daily:Array(120).fill(v)};}
 const SEED={
-  overview:{scores:[['Accuracy',88],['Health',83],['Quality',91],['Coverage',99]],
-    pipeline:[['LOKI ingest','—','pass','—'],['NEBULA posts','—','pass','—'],['Fusion','—','pass','—']],
-    today:[['Posts labelled',0,0],['Comments',0,0]],volume:flat(300),load_status:flat(97),
-    freshness:[['page_posts','—','pass','—','on time']],escalation:[['NLP tier',7694],['DeepSeek tier',7638],['Claude tier',0]],
-    conn_status:[['active',20]],copy_jobs:[['success',1284],['failed/other',12]],volume2:flat(28000)},
-  accuracy:{agreement:flat(88),nlp_conf:flat(86),ds_conf:flat(90),comment_agreement:flat(85),
+  accuracy:{agreement:flat(88),nlp_conf:flat(86),ds_conf:flat(90),
     confusion:{rows:['positive','neutral','negative'],cols:['positive','neutral','negative'],v:[[5012,241,24],[198,1720,55],[31,88,447]]},
     conf_buckets:[['<50%',142],['50-70%',588],['70-85%',1663],['85-95%',2894],['95-100%',2407]],
-    per_dim:[['sentiment',88.2],['emotion',79.5],['toxicity',98.1]],dim_conf:[['sentiment',86],['emotion',81],['topic',80],['intent',83],['toxicity',95]],
-    escalation:[['NLP tier',7694],['DeepSeek tier',7638],['Claude tier',0]],proctime:flat(240),
-    fusion_conf:flat(82),video_conf:flat(78),uncertain:[['Confident',38],['Uncertain',3]]},
+    per_dim:[['sentiment',88.2],['emotion',79.5],['toxicity',98.1]],
+    escalation:[['NLP tier',7694],['DeepSeek tier',7638],['Claude tier',0]],proctime:flat(240)},
   health:{freshness:[['page_posts','—','pass','—','on time']],daily_loads:{posts:flat(950),comments:flat(28000)},
-    load_status:flat(97),missing_days:[['no gaps',0]],lag:flat(1.2),rowcount_delta:flat(28000),
-    copy_jobs:[['success',1284],['failed/other',12]],reactions_load:flat(9500),demographics_load:flat(420),
-    staging_drift:[['fusion staging',862],['fusion prod',862]],insights_load:flat(2400)},
+    load_status:flat(97),missing_days:[['no gaps',0]],lag:flat(1.2),rowcount_delta:flat(28000)},
   quality:{completeness:[['sentiment',99.3],['emotion',99.3],['topic',99.1],['intent',99.3],['toxicity',99.4],['ds sentiment',99.3]],
     dupes:[['dim_comments',0],['dim_posts',0],['dim_pages',0]],integrity:[['orphan post facts',0],['orphan comments',12]],
     dq_score:flat(91),highconf:flat(82),validity:[['confidence out of range',0],['negative reactions',0]],
-    text_lengths:[['1-2',612],['3-5',388],['6-10',196],['11-20',64],['20+',24]],
-    null_heat:[['nlp_sentiment',0.7],['cl_sentiment',100],['fusion.label',0]],
-    dim_coverage:[['dim_date',3653],['dim_pages',20],['dim_comments',2700145]],
-    version_drift:{rows:['v1','v2'],cols:['negative','neutral','positive'],v:[[210,1180,4210],[240,1090,4360]]},
-    conn_status:[['active',20]],orphan_trend:flat(8)},
+    text_lengths:[['1-2',612],['3-5',388],['6-10',196],['11-20',64],['20+',24]]},
   analytics:{topic:[['Humour',4299],['Lifestyle',916],['Opinion Poll',878],['Entertainment',582],['Community',310]],
     intent:[['Entertain',4606],['Engage',1624],['Inform',472],['Complain',467]],
     emotion:[['joy',5294],['surprise',1096],['love',547],['sadness',420],['anger',267],['fear',70]],
     fusion:[['lifestyle',253],['meme',252],['text-heavy',222],['screenshot',103],['product_shot',32]],
     tier:[['Established',6],['Growing',6],['Major',3],['Emerging',3],['Mega',2]],
     sentiment_trend:flat(68),reactions:[['Like',48210],['Love',12840],['Haha',9330],['Wow',3120],['Sad',1450],['Angry',890]],
-    emotion_scores:{axes:['Joy','Sadness','Anger','Fear','Surprise','Disgust'],v:[68.8,5.5,3.5,0.9,14.2,2.1]},
-    page_growth:flat(2400000),demographics:[['PK',412000],['US',88000],['IN',64000],['GB',41000]],
-    reaction_sentiment:[['positive',4],['neutral',1],['negative',2]],video_scene:[['talking_head',18],['lifestyle',12]],
-    hook_scores:[['0-20%',4],['20-40%',7],['40-60%',12],['60-80%',9],['80-100%',9]],
-    gpt_recs:[['Post more Humour',22],['Increase video',14],['Engage at 6pm',11]]}
+    emotion_scores:{axes:['Joy','Sadness','Anger','Fear','Surprise','Disgust'],v:[68.8,5.5,3.5,0.9,14.2,2.1]}}
 };
 let DATA=JSON.parse(JSON.stringify(SEED));
 let AXIS=[]; // daily date strings from live window
-let EXPLORE={}; // per-table pre-baked aggregates for the custom graph builder
 
 /* ---- metric catalogue per tab: [key, title, colorKey, allowedVizzes, defaultViz] ---- */
 const TABS={
-  overview:{name:'Overview',desc:'The whole pipeline at a glance: last run status, freshness, today vs yesterday, and top-line scores from every tab.',
+  accuracy:{name:'Accuracy',desc:'No human ground truth, so accuracy = how much the NLP and DeepSeek tiers agree, and how confident they are.',
     metrics:{
-      scores:['Health scores','teal',['scorecards'],'scorecards'],
-      pipeline:['Pipeline run status','teal',['pipeline'],'pipeline'],
-      today:['Today vs yesterday','sky',['deltas'],'deltas'],
-      volume:['Labelling activity/day','teal',['line','kpi'],'line',''],
-      freshness:['Table freshness','indigo',['table'],'table'],
-      load_status:['Load completeness','teal',['line','kpi'],'line','%'],
-      escalation:['Tier routing usage','gold',['bars'],'bars'],
-      conn_status:['FB connections','sky',['bars','donut'],'donut'],
-      copy_jobs:['Ingestion jobs','indigo',['bars','donut'],'donut'],
-      volume2:['Comment volume/day','indigo',['line'],'line',''],
-    }},
-  accuracy:{name:'Accuracy',desc:'No human ground truth, so accuracy = how much the NLP and DeepSeek tiers agree, and how confident they are. Covers posts, comments, fusion and video.',
-    metrics:{
-      agreement:['NLP vs DS agreement (posts)','teal',['line','kpi'],'line','%'],
-      comment_agreement:['NLP vs DS agreement (comments)','sky',['line','kpi'],'line','%'],
+      agreement:['NLP vs DS agreement','teal',['line','kpi'],'line','%'],
       nlp_conf:['NLP confidence','sky',['line','kpi'],'line','%'],
       ds_conf:['DeepSeek confidence','indigo',['line','kpi'],'line','%'],
       confusion:['Sentiment confusion (NLP×DS)','teal',['confusion'],'confusion'],
       conf_buckets:['Confidence distribution','indigo',['histo','bars'],'histo'],
       per_dim:['Agreement by dimension','teal',['bars'],'bars'],
-      dim_conf:['Confidence by dimension','sky',['bars'],'bars'],
       escalation:['Tier routing usage','gold',['bars'],'bars'],
       proctime:['Processing time','indigo',['line','kpi'],'line','ms'],
-      fusion_conf:['Fusion classifier confidence','sky',['line','kpi'],'line','%'],
-      video_conf:['Video scene confidence','gold',['line','kpi'],'line','%'],
-      uncertain:['Video scene certainty','rose',['bars','donut'],'donut'],
     }},
-  health:{name:'Data Health',desc:'Did each load arrive on its date, did anything fail or lag. Covers every ingest table, staging vs prod, and the Redshift copy jobs.',
+  health:{name:'Data Health',desc:'Did each load arrive on its date, did anything fail or lag. Operational QA.',
     metrics:{
       freshness:['Table freshness','teal',['table'],'table'],
       load_status:['Daily load completeness','teal',['line','kpi'],'line','%'],
       daily_loads:['Rows loaded per day','sky',['loads'],'loads'],
       rowcount_delta:['Comment volume/day','indigo',['line','bars'],'line',''],
-      insights_load:['Post insights/day','teal',['line'],'line',''],
-      reactions_load:['Reactions loaded/day','rose',['line'],'line',''],
-      demographics_load:['Demographics loaded/day','sky',['line'],'line',''],
       lag:['Collection→load lag','gold',['line','kpi'],'line','d'],
       missing_days:['Missed load days','rose',['bars'],'bars'],
-      copy_jobs:['Redshift copy jobs','indigo',['bars','donut'],'bars'],
-      staging_drift:['Staging vs prod rows','gold',['bars'],'bars'],
     }},
-  quality:{name:'Data Quality',desc:'How good is the data: completeness, duplicates, referential integrity, validity, and null-rates across every table.',
+  quality:{name:'Data Quality',desc:'How good is the data: completeness, duplicates, referential integrity, validity.',
     metrics:{
       completeness:['Column completeness','teal',['bars'],'bars'],
-      null_heat:['Null-rate by column','rose',['bars'],'bars'],
       dq_score:['Data-quality score','teal',['line','kpi'],'line','%'],
       highconf:['High-confidence share','sky',['line','kpi'],'line','%'],
       dupes:['Duplicate keys','gold',['bars'],'bars'],
       integrity:['Referential integrity','rose',['bars'],'bars'],
-      orphan_trend:['Orphan rows/day','rose',['line'],'line',''],
       validity:['Range validity','rose',['bars'],'bars'],
       text_lengths:['Comment length spread','indigo',['histo'],'histo'],
-      dim_coverage:['Dimension table rows','sky',['bars'],'bars'],
-      version_drift:['Sentiment v1 vs v2','gold',['confusion'],'confusion'],
-      conn_status:['FB connection status','teal',['bars','donut'],'bars'],
     }},
-  analytics:{name:'Analytics',desc:'Everything else: content mix, sentiment, emotion, reactions, pages, demographics, video and GPT recommendations.',
+  analytics:{name:'Analytics',desc:'Everything else: content mix, sentiment, emotion, reactions, pages.',
     metrics:{
       topic:['Topics','teal',['bars'],'bars'],
       intent:['Intents','indigo',['bars'],'bars'],
@@ -366,25 +281,17 @@ const TABS={
       tier:['Influence tiers','indigo',['bars','donut'],'donut'],
       sentiment_trend:['Positive sentiment trend','teal',['line','kpi'],'line','%'],
       reactions:['Reaction mix','rose',['bars','donut'],'bars'],
-      reaction_sentiment:['Reaction sentiment','sky',['bars','donut'],'donut'],
       emotion_scores:['Emotion radar','teal',['radar'],'radar'],
-      page_growth:['Total fan count','teal',['line','kpi'],'line',''],
-      demographics:['Audience by country','indigo',['bars'],'bars'],
-      video_scene:['Video scene labels','gold',['bars','donut'],'bars'],
-      hook_scores:['Video hook scores','sky',['histo'],'histo'],
-      gpt_recs:['GPT recommendations','indigo',['bars'],'bars'],
     }},
 };
 const DEFAULTS={
-  overview:[['scores','scorecards',12],['pipeline','pipeline',8],['today','deltas',4],['volume','line',6],['load_status','line',6],['freshness','table',6],['escalation','bars',6],['conn_status','donut',3],['copy_jobs','donut',3],['volume2','line',6]],
-  accuracy:[['agreement','line',6],['comment_agreement','line',6],['confusion','confusion',6],['conf_buckets','histo',6],['per_dim','bars',6],['dim_conf','bars',6],['nlp_conf','line',6],['ds_conf','line',6],['fusion_conf','line',6],['video_conf','line',6],['escalation','bars',6],['proctime','line',6],['uncertain','donut',3]],
-  health:[['load_status','line',8],['freshness','table',4],['daily_loads','loads',6],['rowcount_delta','line',6],['insights_load','line',6],['reactions_load','line',6],['demographics_load','line',6],['lag','line',6],['copy_jobs','bars',6],['staging_drift','bars',6],['missing_days','bars',6]],
-  quality:[['dq_score','line',6],['highconf','line',6],['completeness','bars',6],['null_heat','bars',6],['text_lengths','histo',6],['dim_coverage','bars',6],['version_drift','confusion',6],['dupes','bars',4],['integrity','bars',4],['validity','bars',4],['orphan_trend','line',6],['conn_status','bars',4]],
-  analytics:[['topic','bars',6],['emotion_scores','radar',6],['emotion','bars',6],['intent','bars',6],['sentiment_trend','line',6],['demographics','bars',6],['page_growth','line',6],['hook_scores','histo',6],['video_scene','bars',6],['tier','donut',3],['fusion','bars',3],['reactions','bars',6],['gpt_recs','bars',6],['reaction_sentiment','donut',3]],
+  accuracy:[['agreement','line',8],['per_dim','bars',4],['confusion','confusion',6],['conf_buckets','histo',6],['nlp_conf','line',6],['ds_conf','line',6],['escalation','bars',6],['proctime','line',6]],
+  health:[['load_status','line',8],['freshness','table',4],['daily_loads','loads',6],['rowcount_delta','line',6],['lag','line',6],['missing_days','bars',6]],
+  quality:[['dq_score','line',6],['highconf','line',6],['completeness','bars',6],['text_lengths','histo',6],['dupes','bars',4],['integrity','bars',4],['validity','bars',4]],
+  analytics:[['topic','bars',6],['emotion_scores','radar',6],['emotion','bars',6],['intent','bars',6],['sentiment_trend','line',6],['tier','donut',3],['fusion','bars',3],['reactions','bars',6]],
 };
 
-
-let TAB='overview', GRAIN='quarter', CUSTOM=null, EDIT=false, UID=0;
+let TAB='accuracy', GRAIN='quarter', CUSTOM=null, EDIT=false, UID=0;
 let BOARDS={}; // per-tab layout
 const KEY='ARTEMIS_QA_TABS_V1';
 
@@ -399,7 +306,6 @@ async function loadLive(){
     if(j&&j.tabs){
       for(const tb in j.tabs){ if(!DATA[tb]) DATA[tb]={}; for(const k in j.tabs[tb]){ if(j.tabs[tb][k]!=null) DATA[tb][k]=j.tabs[tb][k]; } }
       if(j.window&&Array.isArray(j.window.axis)) AXIS=j.window.axis;
-      if(j.explore&&typeof j.explore==='object') EXPLORE=j.explore;
       META={source:'live',generated_at:j.generated_at||null,totals:j.totals||null};
       return true;
     }
@@ -411,19 +317,9 @@ function stampFreshness(){
   const el=document.getElementById('freshness'); if(!el) return;
   if(META.source==='live'&&META.generated_at){
     const d=new Date(META.generated_at);
-    const ageH=(Date.now()-d.getTime())/3.6e6;
-    const ago=ageH<1?Math.round(ageH*60)+'m ago':(ageH<48?Math.round(ageH)+'h ago':Math.round(ageH/24)+'d ago');
-    const stale=ageH>26;
-    el.innerHTML='snapshot '+d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})+' '
-      +d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})
-      +' &middot; '+ago+(stale?' &middot; STALE':'');
-    el.style.color=stale?'var(--warnT)':'var(--okT)';
-    el.title='Nightly Redshift snapshot. Auto-refreshes 01:00 UTC daily; use \u21bb Refresh to re-check. '+(stale?'More than a day old, check the Action.':'');
-  } else {
-    el.textContent='demo data';
-    el.style.color='var(--t3)';
-    el.title='No qa_metrics.json found. Set the REDSHIFT_* secrets and run the Nightly QA metrics Action once.';
-  }
+    el.textContent='snapshot '+d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})+' '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    el.style.color='var(--okT)';
+  } else { el.textContent='demo data'; el.style.color='var(--t3)'; }
 }
 
 /* ---- date-window slicing ---- */
@@ -509,84 +405,17 @@ function donutHTML(pairs,color){
     <text x="60" y="64" text-anchor="middle" fill="${TH.ink}" font-family="JetBrains Mono" font-weight="700" font-size="16">${fmtN(total)}</text></svg>
     <div class="leg" style="flex-direction:column;gap:7px;margin:0">${pairs.map((p,i)=>`<span><i style="background:${cols[i%cols.length]}"></i>${p[0]} <b style="font-family:var(--mono);color:var(--t1);margin-left:4px">${fmtN(p[1])}</b></span>`).join('')}</div></div>`;
 }
-function confusionHTML(m,cornerLabel){
+function confusionHTML(m){
   if(!m||!m.v) return '';
   const mx=Math.max(...m.v.flat())||1;
-  const square=m.rows.length===m.cols.length;
   let g=`<div class="heatwrap" style="grid-template-columns:70px repeat(${m.cols.length},1fr)">`;
-  g+=`<span class="hlab" style="font-size:9px">${cornerLabel||'NLP\\\\DS'}</span>`+m.cols.map(c=>`<span class="hlab">${c.slice(0,5)}</span>`).join('');
-  m.rows.forEach((r,i)=>{g+=`<span class="hlab" style="justify-content:flex-start">${r.slice(0,5)}</span>`+m.v[i].map((v,j)=>{
-    const t=v/mx;const diag=square&&i===j;const bg= diag? mixHeat(t) : `rgba(87,181,240,${(0.10+t*0.62).toFixed(2)})`;
-    return `<div class="hcell" style="background:${bg};color:${t>0.5||diag?'#fff':'var(--t2)'}" title="${r} / ${m.cols[j]}: ${v}">${fmtN(v)}</div>`;}).join('');});
-  const leg = square ? '<span><i style="background:'+TH.teal+'"></i>agree (diagonal)</span><span><i style="background:'+TH.sky+'"></i>off-diagonal</span>'
-                     : '<span><i style="background:'+TH.sky+'"></i>count</span>';
-  return g+'</div><div class="leg">'+leg+'</div>';
+  g+='<span class="hlab" style="font-size:9px">NLP\\DS</span>'+m.cols.map(c=>`<span class="hlab">${c.slice(0,4)}</span>`).join('');
+  m.rows.forEach((r,i)=>{g+=`<span class="hlab" style="justify-content:flex-start">${r.slice(0,4)}</span>`+m.v[i].map((v,j)=>{
+    const t=v/mx;const bg= i===j? mixHeat(t) : `rgba(251,93,119,${(0.12+t*0.6).toFixed(2)})`;
+    return `<div class="hcell" style="background:${bg};color:${t>0.5||i===j?'#fff':'var(--t2)'}" title="NLP ${r} → DS ${m.cols[j]}: ${v}">${fmtN(v)}</div>`;}).join('');});
+  return g+'</div><div class="leg"><span><i style="background:'+TH.teal+'"></i>agree (diagonal)</span><span><i style="background:'+TH.rose+'"></i>disagree</span></div>';
 }
 function mixHeat(t){const h=TH.heat;const idx=Math.min(h.length-1,Math.floor(t*h.length));return h[idx];}
-function paretoSVG(pairs,color){
-  // bars sorted desc + cumulative-% line on a second axis. The classic "which few categories dominate".
-  if(!pairs||!pairs.length) return '';
-  const sorted=[...pairs].sort((a,b)=>b[1]-a[1]).slice(0,10);
-  const total=sorted.reduce((s,p)=>s+p[1],0)||1;
-  const h=190,w=560,pl=14,pr=40,pt=16,pb=42;const mx=Math.max(...sorted.map(x=>x[1]))*1.1||1;
-  const bw=(w-pl-pr)/sorted.length*0.56;
-  let cum=0;const pts=[];
-  const cols=sorted.map((x,i)=>{const cx=pl+(w-pl-pr)*(i+.5)/sorted.length;const hh=(h-pt-pb)*x[1]/mx;
-    cum+=x[1];pts.push([cx,pt+(h-pt-pb)*(1-cum/total)]);
-    return `<rect class="fadein" x="${cx-bw/2}" y="${h-pb-hh}" width="${bw}" height="${hh}" rx="4" fill="${color}" opacity=".85"><title>${x[0]}: ${x[1]}</title></rect>
-      <text x="${cx}" y="${h-pb+13}" fill="${TH.mut}" font-size="9" text-anchor="middle" font-family="DM Sans" transform="rotate(0)">${String(x[0]).slice(0,7)}</text>`;}).join('');
-  const line=smooth(pts);
-  const dots=pts.map((p,i)=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.6" fill="${TH.gold}"/>`).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" style="height:190px" class="anim">${cols}
-    <path class="draw" pathLength="1" d="${line}" fill="none" stroke="${TH.gold}" stroke-width="2.2"/>${dots}
-    <text x="${w-4}" y="${pt+8}" fill="${TH.gold}" font-size="9.5" text-anchor="end" font-family="JetBrains Mono">100%</text>
-    <text x="${w-4}" y="${h-pb}" fill="${TH.mut}" font-size="9.5" text-anchor="end" font-family="JetBrains Mono">0%</text></svg>
-    <div class="leg"><span><i style="background:${color}"></i>count</span><span><i style="background:${TH.gold}"></i>cumulative %</span></div>`;
-}
-function areaSVG(vals,labels,color,unit){
-  // stacked-feel single area: like line but with a heavier fill and baseline
-  if(!vals.length) return '<div style="color:var(--t3);font-size:12px;padding:20px">no data in range</div>';
-  const h=150,w=560,pl=36,pr=12,pt=14,pb=24;
-  let mx=Math.max(...vals),mn=0;mx*=1.12;
-  const X=i=>pl+(w-pl-pr)*i/(vals.length-1||1),Y=v=>pt+(h-pt-pb)*(1-(v-mn)/((mx-mn)||1));
-  const d=smooth(vals.map((v,i)=>[X(i),Y(v)]));
-  const area=d+` L${X(vals.length-1).toFixed(1)},${h-pb} L${pl},${h-pb} Z`;
-  const gid='g'+(++GID);
-  const step=labels.length>16?Math.ceil(labels.length/8):(labels.length>9?2:1);
-  const xt=labels.map((l,i)=>i%step?'':`<text x="${X(i)}" y="${h-7}" fill="${TH.mut}" font-size="9.5" text-anchor="middle" font-family="JetBrains Mono">${l}</text>`).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="height:150px" class="anim">
-    <defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${color}" stop-opacity=".55"/><stop offset="1" stop-color="${color}" stop-opacity=".06"/></linearGradient></defs>
-    <path d="${area}" fill="url(#${gid})" class="fadein"/>
-    <path class="draw" pathLength="1" d="${d}" fill="none" stroke="${color}" stroke-width="2.4"/>
-    <text class="fadein" x="${X(vals.length-1)-6}" y="${Y(vals[vals.length-1])-9}" fill="${TH.ink}" font-size="11.5" font-weight="700" text-anchor="end" font-family="JetBrains Mono">${fmtN(vals[vals.length-1])}${unit||''}</text>${xt}</svg>`;
-}
-/* ---- custom (build-your-own) widgets, driven by EXPLORE ---- */
-const CUSTOM_COLORS=['teal','indigo','sky','gold','rose'];
-function customBody(w){
-  const e=EXPLORE[w.table];
-  if(!e) return '<div style="color:var(--t3);padding:16px">table not in snapshot yet</div>';
-  const color=col(w.colorKey||'teal');
-  if(w.kind==='volume'){
-    const s=seriesFor(e.daily);if(!s.vals.length)return '<div style="color:var(--t3);padding:16px">no daily data</div>';
-    return w.viz==='area'?areaSVG(s.vals,s.labels,color,''):lineSVG(s.vals,s.labels,color,'');
-  }
-  if(w.kind==='rows'){
-    return `<div class="kpi"><span class="kv">${fmtN(e.rows)}</span><span class="kd">total rows &middot; ${w.table.split('.')[1]}</span></div>`;
-  }
-  if(w.kind==='cat'){
-    const pairs=(e.cats||{})[w.col];if(!pairs)return '<div style="color:var(--t3);padding:16px">column not in snapshot</div>';
-    if(w.viz==='donut')return donutHTML(pairs,color);
-    if(w.viz==='pareto')return paretoSVG(pairs,color);
-    if(w.viz==='histo')return histoSVG(pairs.slice(0,8),color);
-    return barsSVG(pairs,color);
-  }
-  if(w.kind==='num'){
-    const nm=(e.nums||{})[w.col];if(!nm)return '<div style="color:var(--t3);padding:16px">column not in snapshot</div>';
-    if(w.viz==='kpi')return `<div class="kpi"><span class="kv">${fmtN(nm.avg)}</span><span class="kd">avg ${w.col}</span></div>`;
-    return histoSVG(nm.buckets,color);
-  }
-  return '';
-}
 function loadsHTML(m){
   // dual daily-load lines: posts + comments, sharing the tab date filter
   const P=seriesFor(m.posts), Cm=seriesFor(m.comments);
@@ -635,104 +464,39 @@ function DATA_tabkey(src){return TABS[TAB].metrics[src][0];}
 function fmtN(v){if(typeof v!=='number')return v;if(v>=1e6)return(v/1e6).toFixed(1)+'M';if(v>=1e3)return(v/1e3).toFixed(1)+'k';return(v%1===0)?v:v.toFixed(1);}
 
 function widgetBody(w){
-  if(w.custom) return customBody(w);
   const m=DATA[TAB][w.src];const meta=TABS[TAB].metrics[w.src];const color=col(meta[1]);
   if(m===undefined) return '<div style="color:var(--t3);padding:16px">no data</div>';
   switch(w.viz){
-    case 'area':{const s=seriesFor(m);return areaSVG(s.vals,s.labels,color,meta[4]||'');}
-    case 'pareto': return paretoSVG(m,color);
     case 'line':{const s=seriesFor(m);return lineSVG(s.vals,s.labels,color,meta[4]||'');}
     case 'kpi': return kpiHTML(w.src,m);
     case 'bars': return barsSVG(m,color);
     case 'histo': return histoSVG(m,color);
     case 'donut': return donutHTML(m,color);
-    case 'confusion': return confusionHTML(m, w.src==='version_drift'?'ver\\\\sent':undefined);
+    case 'confusion': return confusionHTML(m);
     case 'loads': return loadsHTML(m);
     case 'radar': return radarHTML(m);
-    case 'scorecards': return scorecardsHTML(m);
-    case 'pipeline': return pipelineHTML(m);
-    case 'deltas': return deltasHTML(m);
-    case 'table':
-      if(w.src==='pipeline') return pipelineHTML(m);
-      return tableHTML(['Table','Last load','Status','Rows','On time'],m,[1,3],2);
+    case 'table': return tableHTML(['Table','Last load','Status','Rows','On time'],m,[1,3],2);
   }
   return '';
 }
-function scorecardsHTML(pairs){
-  if(!pairs||!pairs.length) return '';
-  const tone=(n)=>n>=90?'ok':(n>=75?'warn':'bad');
-  return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">'+
-    pairs.map(([label,val])=>{
-      const t=tone(val),c=t==='ok'?'var(--okT)':(t==='warn'?'var(--warnT)':'var(--badT)');
-      const R=26,CIRC=2*Math.PI*R,off=CIRC*(1-val/100);
-      return `<div style="background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;align-items:center;gap:13px">
-        <svg width="64" height="64" viewBox="0 0 64 64" class="anim"><circle cx="32" cy="32" r="${R}" fill="none" stroke="var(--track)" stroke-width="6"/>
-          <circle cx="32" cy="32" r="${R}" fill="none" stroke="${c}" stroke-width="6" stroke-linecap="round" stroke-dasharray="${CIRC.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}" transform="rotate(-90 32 32)"/>
-          <text x="32" y="37" text-anchor="middle" fill="var(--t1)" font-family="JetBrains Mono" font-weight="700" font-size="15">${Math.round(val)}</text></svg>
-        <div><div style="font-size:12.5px;font-weight:800;color:var(--t1)">${label}</div>
-        <div style="font-size:10.5px;color:var(--t3);font-family:var(--mono);margin-top:2px">${t==='ok'?'healthy':(t==='warn'?'watch':'attention')}</div></div></div>`;
-    }).join('')+'</div>';
-}
-function pipelineHTML(rows){
-  if(!rows||!rows.length) return '<div style="color:var(--t3);padding:14px">no runs</div>';
-  return '<div style="display:flex;flex-direction:column;gap:8px">'+rows.map((r,i)=>{
-    const st=r[2],cls=st==='pass'?'ok':(st==='fail'?'bad':'warn');
-    const dot=st==='pass'?'var(--okT)':(st==='fail'?'var(--badT)':'var(--warnT)');
-    return `<div style="display:flex;align-items:center;gap:11px;padding:9px 12px;background:var(--panel2);border:1px solid var(--line);border-radius:11px">
-      <span style="width:9px;height:9px;border-radius:50%;background:${dot};flex:0 0 auto;box-shadow:0 0 8px ${dot}"></span>
-      <span style="font-weight:800;font-size:12.5px;color:var(--t1);min-width:120px">${r[0]}</span>
-      <span class="pillst ${cls}">${st}</span>
-      <span style="margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--t3)">${r[1]}</span>
-      <span style="font-family:var(--mono);font-size:11px;color:var(--t2);min-width:70px;text-align:right">${r[3]}</span></div>`;
-  }).join('')+'</div>';
-}
-function deltasHTML(rows){
-  if(!rows||!rows.length) return '<div style="color:var(--t3);padding:14px">no data</div>';
-  return '<div style="display:flex;flex-direction:column;gap:9px">'+rows.map(r=>{
-    const [name,today,yst]=r; const d=today-yst; const pct=yst?Math.round(100*d/yst):0;
-    const up=d>=0; const c=up?'var(--okT)':'var(--badT)';
-    return `<div style="display:flex;align-items:baseline;gap:10px">
-      <span style="font-size:12px;color:var(--t2);min-width:120px">${name}</span>
-      <span style="font-family:var(--mono);font-weight:700;font-size:17px;color:var(--t1)">${fmtN(today)}</span>
-      <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:${c}">${up?'▲':'▼'} ${Math.abs(pct)}%</span>
-      <span style="margin-left:auto;font-size:10px;color:var(--t3);font-family:var(--mono)">y'day ${fmtN(yst)}</span></div>`;
-  }).join('')+'</div>';
-}
 function wsub(w){
   const viz=w.viz;
-  if(w.custom) return w.kind==='volume'?(CUSTOM?'custom range':GRAIN):'snapshot';
-  if(['line','kpi','area'].includes(viz)) return CUSTOM?'custom range':GRAIN;
+  if(['line','kpi'].includes(viz)) return CUSTOM?'custom range':GRAIN;
   if(viz==='loads') return CUSTOM?'custom range':GRAIN;
-  if(['table','pipeline','deltas'].includes(viz)) return 'now';
-  if(viz==='scorecards') return 'live';
-  if(viz==='confusion') return TAB==='quality'?'v1 vs v2':'all labelled';
+  if(viz==='table') return 'now';
+  if(viz==='confusion') return 'all labelled';
   return 'current';
 }
-const VIC={line:'&#9581;',area:'&#9698;',pareto:'&#8599;',kpi:'&#35;',bars:'&#9644;',histo:'&#9601;',donut:'&#9678;',confusion:'&#9638;',loads:'&#8767;',radar:'&#9737;',table:'&#8801;',scorecards:'&#9673;',pipeline:'&#9776;',deltas:'&#8645;'};
+const VIC={line:'&#9581;',kpi:'&#35;',bars:'&#9644;',histo:'&#9601;',donut:'&#9678;',confusion:'&#9638;',loads:'&#8767;',radar:'&#9737;',table:'&#8801;'};
 
-function customVizzes(w){
-  if(w.kind==='volume') return ['line','area'];
-  if(w.kind==='cat') return ['bars','donut','pareto','histo'];
-  if(w.kind==='num') return ['histo','kpi'];
-  return [];
-}
-function customTitle(w){
-  const t=w.table.split('.')[1];
-  if(w.kind==='volume') return t+' · rows/day';
-  if(w.kind==='rows') return t+' · total rows';
-  return t+' · '+w.col;
-}
 function render(){
   const b=document.getElementById('board');const lay=BOARDS[TAB]||[];
   b.innerHTML=lay.map(w=>{
-    let title,vizzes;
-    if(w.custom){ title=customTitle(w); vizzes=customVizzes(w); }
-    else { const meta=TABS[TAB].metrics[w.src]; if(!meta) return ''; title=meta[0]; vizzes=meta[2]; }
-    const vsw=vizzes.length>1?vizzes.map(v=>`<button class="${v===w.viz?'on':''}" title="${v}" onclick="setViz('${w.id}','${v}')">${VIC[v]}</button>`).join(''):'';
-    const badge=w.custom?'<span style="font-size:8.5px;font-weight:800;letter-spacing:.6px;color:var(--indT);border:1px solid var(--line2);padding:1px 6px;border-radius:99px;text-transform:uppercase">custom</span>':'';
+    const meta=TABS[TAB].metrics[w.src];if(!meta) return '';
+    const vsw=meta[2].length>1?meta[2].map(v=>`<button class="${v===w.viz?'on':''}" title="${v}" onclick="setViz('${w.id}','${v}')">${VIC[v]}</button>`).join(''):'';
     return `<div class="widget s${w.span} anim" id="${w.id}" data-id="${w.id}">
       <div class="whead"><span class="grab" draggable="true" title="Drag to move">&#10247;</span>
-        <h3>${title}</h3>${badge}<span class="wsub">${wsub(w)}</span><span class="sp"></span>
+        <h3>${meta[0]}</h3><span class="wsub">${wsub(w)}</span><span class="sp"></span>
         <span class="wctl">${vsw}<button title="Width" onclick="cycleSpan('${w.id}')">${w.span<=3?'S':w.span<=6?'M':'L'}</button>
         <button class="kill" title="Remove" onclick="removeWidget('${w.id}')">&#10005;</button></span></div>
       <div class="wbody">${widgetBody(w)}</div></div>`;
@@ -767,7 +531,7 @@ function syncFilterUI(){
 
 /* ---- widget ops ---- */
 function addWidget(src){const w=newW(TAB,src);(BOARDS[TAB]=BOARDS[TAB]||[]).push(w);render();toast(TABS[TAB].metrics[src][0]+' added.');}
-function removeWidget(id){const l=BOARDS[TAB];const i=l.findIndex(w=>w.id===id);if(i<0)return;const ww=l[i];const n=ww.custom?customTitle(ww):TABS[TAB].metrics[ww.src][0];l.splice(i,1);render();toast(n+' removed.');}
+function removeWidget(id){const l=BOARDS[TAB];const i=l.findIndex(w=>w.id===id);if(i<0)return;const n=TABS[TAB].metrics[l[i].src][0];l.splice(i,1);render();toast(n+' removed.');}
 function moveWidget(id,idx){const l=BOARDS[TAB];const i=l.findIndex(w=>w.id===id);if(i<0)return;const[w]=l.splice(i,1);if(idx>i)idx--;l.splice(Math.max(0,Math.min(idx,l.length)),0,w);render();}
 function cycleSpan(id){const w=BOARDS[TAB].find(x=>x.id===id);if(!w)return;w.span=w.span<=3?4:(w.span===4?6:(w.span===6?8:(w.span===8?12:3)));render();}
 function setViz(id,v){const w=BOARDS[TAB].find(x=>x.id===id);if(!w)return;w.viz=v;render();}
@@ -780,64 +544,10 @@ function toggleTheme(){THEME=THEME==='light'?'dark':'light';applyTheme();render(
 function buildPalette(){
   document.getElementById('palTitle').textContent=TABS[TAB].name+' metrics';
   document.getElementById('palDesc').textContent=TABS[TAB].desc;
-  document.getElementById('palList').innerHTML=builderHTML()+Object.keys(TABS[TAB].metrics).map(k=>{
+  document.getElementById('palList').innerHTML=Object.keys(TABS[TAB].metrics).map(k=>{
     const m=TABS[TAB].metrics[k];
     return `<div class="pchipq" draggable="true" data-src="${k}" style="--pc:${THEMES.dark[m[1]]}" onclick="addWidget('${k}')"><i></i>${m[0]}<small>${m[3]}</small></div>`;}).join('');
   document.querySelectorAll('.pchipq').forEach(ch=>ch.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain','add:'+ch.dataset.src);e.dataTransfer.effectAllowed='copy';}));
-  syncBuilder();
-}
-/* ---- Build-your-own: table -> column -> chart, from the pre-baked explore snapshot ---- */
-function builderHTML(){
-  const tables=Object.keys(EXPLORE);
-  const disabled=tables.length===0;
-  const topts=tables.map(t=>`<option value="${t}">${t.replace('rdl.','rdl · ').replace('odl.','odl · ').replace('public.','pub · ')}</option>`).join('');
-  return `<div style="border:1px solid var(--line2);border-radius:14px;padding:13px 12px;margin-bottom:14px;background:var(--panel)">
-    <div style="font-size:10.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--okT);margin-bottom:9px">&#10022; Build your own</div>
-    ${disabled?'<div style="font-size:11px;color:var(--t3);line-height:1.5">Needs a live snapshot. Run the nightly Action once and every Redshift table + column appears here.</div>':`
-    <label class="blab">Table</label>
-    <select id="bTable" class="bsel" onchange="syncBuilder()">${topts}</select>
-    <label class="blab">Column / measure</label>
-    <select id="bCol" class="bsel" onchange="syncBuilderViz()"></select>
-    <label class="blab">Chart</label>
-    <div id="bViz" style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:11px"></div>
-    <button class="tbtn pri" style="width:100%;justify-content:center;display:inline-flex" onclick="addCustom()">+ Add graph</button>`}
-  </div>`;
-}
-let BVIZ='bars';
-function syncBuilder(){
-  const tsel=document.getElementById('bTable'); if(!tsel) return;
-  const e=EXPLORE[tsel.value]; if(!e) return;
-  const csel=document.getElementById('bCol');
-  let opts='';
-  if(e.daily) opts+=`<option value="__volume__">rows per day (trend)</option>`;
-  opts+=`<option value="__rows__">total rows (KPI)</option>`;
-  for(const c in (e.cats||{})) opts+=`<option value="cat:${c}">${c} (categories)</option>`;
-  for(const c in (e.nums||{})) opts+=`<option value="num:${c}">${c} (numeric)</option>`;
-  csel.innerHTML=opts;
-  syncBuilderViz();
-}
-function syncBuilderViz(){
-  const v=document.getElementById('bCol')?.value; const box=document.getElementById('bViz'); if(!box) return;
-  let vz=[];
-  if(v==='__volume__') vz=['line','area'];
-  else if(v==='__rows__') vz=['kpi'];
-  else if(v?.startsWith('cat:')) vz=['bars','donut','pareto','histo'];
-  else if(v?.startsWith('num:')) vz=['histo','kpi'];
-  if(!vz.includes(BVIZ)) BVIZ=vz[0];
-  box.innerHTML=vz.map(z=>`<button class="qp ${z===BVIZ?'on':''}" onclick="BVIZ='${z}';syncBuilderViz()">${VIC[z]} ${z}</button>`).join('');
-}
-function addCustom(){
-  const table=document.getElementById('bTable')?.value; const cv=document.getElementById('bCol')?.value;
-  if(!table||!cv) return;
-  let kind,colName=null;
-  if(cv==='__volume__') kind='volume';
-  else if(cv==='__rows__') kind='rows';
-  else { const [k,c]=cv.split(':'); kind=k; colName=c; }
-  const w={id:'w'+(++UID),custom:true,table,col:colName,kind,viz:(kind==='rows'?'kpi':BVIZ),
-    colorKey:CUSTOM_COLORS[(BOARDS[TAB]||[]).filter(x=>x.custom).length%CUSTOM_COLORS.length],
-    span:kind==='rows'?3:6};
-  (BOARDS[TAB]=BOARDS[TAB]||[]).push(w);
-  render(); toast(customTitle(w)+' added.');
 }
 function bindDnD(){
   document.querySelectorAll('.widget .grab').forEach(g=>{
@@ -875,10 +585,8 @@ function bindHover(){
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('on'),2200);}
 
 /* ---- persistence ---- */
-let BOOTED=false;
 function save(){
-  if(!BOOTED) return;
-  const boards={};for(const t in BOARDS)boards[t]=BOARDS[t].map(w=>w.custom?{custom:1,table:w.table,col:w.col,kind:w.kind,colorKey:w.colorKey,viz:w.viz,span:w.span}:{src:w.src,viz:w.viz,span:w.span});
+  const boards={};for(const t in BOARDS)boards[t]=BOARDS[t].map(({src,viz,span})=>({src,viz,span}));
   localStorage.setItem(KEY,JSON.stringify({boards,tab:TAB,grain:GRAIN,theme:THEME}));
 }
 function loadState(){
@@ -886,7 +594,7 @@ function loadState(){
     if(s.theme==='light')THEME='light';
     if(['day','week','month','quarter'].includes(s.grain))GRAIN=s.grain;
     if(s.tab&&TABS[s.tab])TAB=s.tab;
-    if(s.boards){for(const t in s.boards){if(TABS[t])BOARDS[t]=s.boards[t].filter(w=>w.custom?w.table:TABS[t].metrics[w.src]).map(w=>({...w,custom:!!w.custom,id:'w'+(++UID)}));}}
+    if(s.boards){for(const t in s.boards){if(TABS[t])BOARDS[t]=s.boards[t].filter(w=>TABS[t].metrics[w.src]).map(w=>({...w,id:'w'+(++UID)}));}}
   }}catch(e){}
 }
 function refreshData(){
@@ -905,7 +613,6 @@ async function boot(){
   applyTheme();buildTabs();buildPalette();syncFilterUI();
   document.querySelectorAll('.gp').forEach(b=>b.classList.toggle('on',b.dataset.g===GRAIN));
   render();stampFreshness();
-  BOOTED=true;save();
 }
 window.addEventListener('load',boot);
 </script>

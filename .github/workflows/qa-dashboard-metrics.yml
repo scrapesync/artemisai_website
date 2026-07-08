@@ -23,6 +23,6 @@ jobs:
         run: |
           git config user.name "qa-metrics-bot"
           git config user.email "bot@artemisai.co.uk"
-          git add qa_metrics.json
+          git add -f qa_metrics.json
           git diff --cached --quiet || git commit -m "chore: nightly QA metrics $(date -u +%FT%TZ)"
           git push
