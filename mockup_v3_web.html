@@ -276,17 +276,17 @@ body.light .sv-bars i{background:rgba(18,26,40,.14)}
 body.light .sv-bars i::after{background:#12161F}
 
 /* readable charts */
-.chart-note{font-size:11px;color:var(--t3);line-height:1.55;margin-top:9px}
+.chart-note{font-size:12.5px;color:var(--t3);line-height:1.55;margin-top:9px}
 .chart-note b{color:var(--t2);font-weight:700}
-.axis{font-family:var(--mono);font-size:8px;fill:var(--t3)}
+.axis{font-family:var(--mono);font-size:10px;fill:var(--t3)}
 .gline{stroke:var(--line);stroke-width:1;stroke-dasharray:2 4}
-.peaktag{font-family:var(--mono);font-size:8.5px;font-weight:700}
-.hbar{margin-bottom:11px}
-.hbar .hl2{display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:5px}
-.hbar .hl2 b{color:var(--t1);font-family:var(--mono);font-size:10.5px}
-.hbar .ht{height:10px;border-radius:99px;background:var(--surface2);overflow:hidden}
+.peaktag{font-family:var(--mono);font-size:10.5px;font-weight:700}
+.hbar{margin-bottom:15px}
+.hbar .hl2{display:flex;justify-content:space-between;font-size:13.5px;color:var(--t2);margin-bottom:6px}
+.hbar .hl2 b{color:var(--t1);font-family:var(--mono);font-size:12px}
+.hbar .ht{height:16px;border-radius:99px;background:var(--surface2);overflow:hidden}
 .hbar .ht i{display:block;height:100%;border-radius:99px}
-.legend{display:flex;gap:14px;align-items:center;font-size:10px;color:var(--t3);margin-top:8px}
+.legend{display:flex;gap:14px;align-items:center;font-size:11.5px;color:var(--t3);margin-top:8px}
 .legend .sw{width:14px;height:9px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
 /* week calendar */
 .cal{display:grid;grid-template-columns:52px repeat(7,1fr);gap:5px;margin-bottom:8px}
@@ -1168,7 +1168,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       <div class="subtabs">
         <button class="subtab on" data-t="ov" onclick="subtab('ov')">Overview</button>
         <button class="subtab" data-t="video" onclick="subtab('video')">Video</button>
-        <button class="subtab" data-t="vir" onclick="subtab('vir')">What takes off</button>
+        <button class="subtab" data-t="vir" onclick="subtab('vir')">Advanced</button>
         <button class="subtab" data-t="raw" onclick="subtab('raw')">All posts</button>
       </div>
 
@@ -1187,13 +1187,13 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         </div>
         <div class="dgrid" style="grid-template-columns:1fr 1fr">
           <div class="dcard"><h5>Reach <span class="rangepills" style="display:inline-flex;gap:5px;margin-left:8px"><button class="rpill" onclick="setRange(this,7)">7d</button><button class="rpill on" onclick="setRange(this,14)">14d</button><button class="rpill" onclick="setRange(this,30)">30d</button></span><b>Sana's Kitchen</b></h5>
-            <svg width="100%" height="128" viewBox="0 0 400 128" preserveAspectRatio="none">
+            <svg width="100%" height="184" viewBox="0 0 400 184" preserveAspectRatio="none">
               <defs><linearGradient id="reachFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00C4A0" stop-opacity=".28"/><stop offset="1" stop-color="#00C4A0" stop-opacity="0"/></linearGradient></defs>
-              <line class="gline" x1="34" y1="18" x2="400" y2="18"/><line class="gline" x1="34" y1="56" x2="400" y2="56"/><line class="gline" x1="34" y1="94" x2="400" y2="94"/>
-              <text class="axis" x="0" y="21">120k</text><text class="axis" x="4" y="59">60k</text><text class="axis" x="10" y="97">0</text>
-              <g transform="translate(34,4) scale(0.915,0.9)"><path id="reachArea" d="M0,80 L30,74 L60,84 L90,70 L120,76 L150,88 L180,90 L210,86 L240,92 L270,60 L300,52 L330,38 L360,20 L400,26 L400,100 L0,100 Z" fill="url(#reachFill)"/><path id="reachPath" d="M0,80 L30,74 L60,84 L90,70 L120,76 L150,88 L180,90 L210,86 L240,92 L270,60 L300,52 L330,38 L360,20 L400,26" fill="none" stroke="#00C4A0" stroke-width="2.5" stroke-linecap="round"/><circle id="reachPeak" cx="360" cy="20" r="4.5" fill="#07090D" stroke="#00C4A0" stroke-width="2.5"/></g>
-              <text class="peaktag" id="reachPeakTag" x="330" y="14" fill="#00C4A0">Tue &middot; 118k</text>
-              <text class="axis" x="36" y="124">14 days ago</text><text class="axis" x="356" y="124">today</text>
+              <line class="gline" x1="38" y1="24" x2="400" y2="24"/><line class="gline" x1="38" y1="86" x2="400" y2="86"/><line class="gline" x1="38" y1="148" x2="400" y2="148"/>
+              <text class="axis" x="0" y="28">120k</text><text class="axis" x="6" y="90">60k</text><text class="axis" x="14" y="152">0</text>
+              <g transform="translate(38,10) scale(0.905,1.5)"><path id="reachArea" d="M0,80 L30,74 L60,84 L90,70 L120,76 L150,88 L180,90 L210,86 L240,92 L270,60 L300,52 L330,38 L360,20 L400,26 L400,100 L0,100 Z" fill="url(#reachFill)"/><path id="reachPath" d="M0,80 L30,74 L60,84 L90,70 L120,76 L150,88 L180,90 L210,86 L240,92 L270,60 L300,52 L330,38 L360,20 L400,26" fill="none" stroke="#00C4A0" stroke-width="2.2" stroke-linecap="round" vector-effect="non-scaling-stroke"/><circle id="reachPeak" cx="360" cy="20" r="3.2" fill="#07090D" stroke="#00C4A0" stroke-width="2" vector-effect="non-scaling-stroke"/></g>
+              <text class="peaktag" id="reachPeakTag" x="326" y="18" fill="#00C4A0">Tue &middot; 118k</text>
+              <text class="axis" x="40" y="179">14 days ago</text><text class="axis" x="352" y="179">today</text>
             </svg>
             <div class="chart-note"><b>Read:</b> higher line, more people saw you. That last climb is the pasta reel, and the dot is your best day.</div></div>
           <div class="dcard"><h5>How you compare <b>your lane, not the whole internet</b></h5>
@@ -1205,7 +1205,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <div class="sigrow"><span>&#9762;&#65039;</span><span><b>Comment negativity 0.14</b> &middot; calm, well under the 0.3 watch line</span></div>
       </div>
       <div class="dcard"><h5>Best posting times <b>peak Tue 6:40pm</b></h5>
-        <svg width="100%" height="96" viewBox="0 0 400 96">
+        <svg width="100%" height="168" viewBox="0 0 400 96" preserveAspectRatio="none">
           <g font-size="8" fill="#5E6875" font-family="monospace">
             <text x="2" y="16">Mon</text><text x="2" y="31">Tue</text><text x="2" y="46">Wed</text><text x="2" y="61">Thu</text><text x="2" y="76">Fri</text><text x="2" y="91">S/S</text>
             <text x="38" y="7">8am</text><text x="106" y="7">12pm</text><text x="174" y="7">3pm</text><text x="242" y="7">6pm</text><text x="310" y="7">8pm</text><text x="360" y="7">10pm</text>
@@ -1229,6 +1229,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
             <div class="hbar" style="margin-bottom:0"><div class="hl2"><span>&#128247; Single photos</span><b>23%</b></div><div class="ht"><i style="width:23%;background:linear-gradient(90deg,#8B7BFF,#B4A6FF)"></i></div></div>
             <div class="chart-note"><b>Read:</b> reels earn nearly half your saves. When in doubt, make it a reel.</div></div>
         </div>
+        <button class="askA" style="width:100%;justify-content:center;margin-bottom:14px" onclick="subtab('vir')">&#128300; Open advanced analytics &rarr; what drives virality, video retention, every post</button>
         <p class="quiet">Every chart backs a sentence Art-E has said. Ask Art-E when you want the story, come here when you want the numbers.</p>
       </div>
 
@@ -1728,7 +1729,7 @@ function setRange(btn,d){ btn.parentElement.querySelectorAll('.rpill').forEach(x
   const pts=RANGES[d].replace(/[ML]/g,'').trim().split(' ').map(x=>x.split(',').map(Number));
   let best=pts[0]; pts.forEach(pt=>{ if(pt[1]<best[1]) best=pt; });
   const c=document.getElementById('reachPeak'); if(c){ c.setAttribute('cx',best[0]); c.setAttribute('cy',best[1]); }
-  const t=document.getElementById('reachPeakTag'); if(t){ t.setAttribute('x', Math.min(34+best[0]*0.915-28, 342)); t.textContent=(d===7?'Tue':'best day')+' peak'; } }
+  const t=document.getElementById('reachPeakTag'); if(t){ t.setAttribute('x', Math.min(38+best[0]*0.905-28, 338)); t.textContent=(d===7?'Tue':'best day')+' peak'; } }
 window.addEventListener('load',()=>{ document.querySelectorAll('#rawtbl tbody tr').forEach(r=>{ r.style.cursor='pointer'; r.title='Why did this post perform like that?'; r.onclick=()=>askArte('Why did this post perform like that?'); }); });
 
 /* ── master plan ── */

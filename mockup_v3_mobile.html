@@ -264,11 +264,11 @@ body.light .sv-bars i::after{background:#12161F}
 .card:active .card-act{transform:translateX(3px)}
 
 /* readable charts m */
-.chart-note{font-size:9.5px;color:var(--t3);line-height:1.5;margin-top:7px}
+.chart-note{font-size:11px;color:var(--t3);line-height:1.5;margin-top:7px}
 .chart-note b{color:var(--t2)}
-.axis{font-family:var(--mono);font-size:7px;fill:var(--t3)}
+.axis{font-family:var(--mono);font-size:8.5px;fill:var(--t3)}
 .gline{stroke:var(--line);stroke-width:1;stroke-dasharray:2 3}
-.legend{display:flex;gap:9px;align-items:center;font-size:8.5px;color:var(--t3);margin-top:7px;flex-wrap:wrap}
+.legend{display:flex;gap:9px;align-items:center;font-size:9.5px;color:var(--t3);margin-top:7px;flex-wrap:wrap}
 .legend .sw{width:12px;height:8px;border-radius:3px;display:inline-block;margin-right:4px;vertical-align:-1px}
 .cal{display:grid;grid-template-columns:34px repeat(7,1fr);gap:3px;margin-bottom:7px}
 .cal-h{font-size:8px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--t3);text-align:center;padding:2px 0}
@@ -1009,7 +1009,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
   <div class="sheet" id="sh-data">
     <div class="grab"></div>
     <h4>Analytics</h4>
-    <div style="display:flex;gap:7px;margin:2px 0 12px"><button class="ptab on" id="mdTabOv" onclick="dataTab('ov')">Overview</button><button class="ptab" id="mdTabAdv" onclick="dataTab('adv')">What takes off</button></div>
+    <div style="display:flex;gap:7px;margin:2px 0 12px"><button class="ptab on" id="mdTabOv" onclick="dataTab('ov')">Overview</button><button class="ptab" id="mdTabAdv" onclick="dataTab('adv')">Advanced</button></div>
     <div id="mdAdv" style="display:none">
       <div class="dcard"><h5>What makes posts take off <b>plain words</b></h5>
         <div class="drv"><div class="dl"><span>A number in the first 6 words</span><b>34%</b></div><div class="dt"><i style="width:34%;background:var(--act)"></i></div></div>
@@ -1038,26 +1038,29 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     </div>
     <p class="s-sub">Summoned by Art-E, not a default view. Every chart backs a sentence it has said.</p>
     <div class="dcard"><h5>Engaged followers by hour <b>May vs July</b></h5>
-      <svg width="100%" height="70" viewBox="0 0 340 70" preserveAspectRatio="none"><path d="M0,46 C40,36 75,16 115,21 C155,27 195,54 250,57 C290,59 320,56 340,54" fill="none" stroke="#3A4557" stroke-width="2" stroke-dasharray="4 4"/><path d="M0,57 C55,57 115,53 170,46 C220,40 255,19 290,12 C310,8 328,10 340,11" fill="none" stroke="#8B7BFF" stroke-width="2.5"/><circle cx="290" cy="12" r="3.5" fill="#8B7BFF"/></svg></div>
+      <svg width="100%" height="108" viewBox="0 0 340 70" preserveAspectRatio="none"><path d="M0,46 C40,36 75,16 115,21 C155,27 195,54 250,57 C290,59 320,56 340,54" fill="none" stroke="#3A4557" stroke-width="2" stroke-dasharray="4 4"/><path d="M0,57 C55,57 115,53 170,46 C220,40 255,19 290,12 C310,8 328,10 340,11" fill="none" stroke="#8B7BFF" stroke-width="2.5"/><circle cx="290" cy="12" r="3.5" fill="#8B7BFF"/></svg>
+      <div class="legend"><span><span class="sw" style="background:rgba(0,196,160,.14)"></span>quiet</span><span><span class="sw" style="background:rgba(0,196,160,.5)"></span>good</span><span><span class="sw" style="background:rgba(0,196,160,.95)"></span>your window</span></div>
+      <div class="chart-note"><b>Read:</b> darker means your people are there. Post inside the dark blocks.</div></div>
     <div class="dcard"><h5>Reach <span style="display:inline-flex;gap:5px;margin-left:6px"><button class="rpill" style="font-size:9px;font-weight:700;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 8px" onclick="setRangeM(this,7)">7d</button><button class="rpill on" style="font-size:9px;font-weight:700;color:var(--act);border:1px solid rgba(0,196,160,.4);border-radius:99px;padding:2px 8px;background:rgba(0,196,160,.07)" onclick="setRangeM(this,14)">14d</button><button class="rpill" style="font-size:9px;font-weight:700;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 8px" onclick="setRangeM(this,30)">30d</button></span><b>Sana's Kitchen</b></h5>
-      <svg width="100%" height="92" viewBox="0 0 340 92" preserveAspectRatio="none">
+      <svg width="100%" height="124" viewBox="0 0 340 124" preserveAspectRatio="none">
         <defs><linearGradient id="rfm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00C4A0" stop-opacity=".26"/><stop offset="1" stop-color="#00C4A0" stop-opacity="0"/></linearGradient></defs>
-        <line class="gline" x1="26" y1="12" x2="340" y2="12"/><line class="gline" x1="26" y1="40" x2="340" y2="40"/><line class="gline" x1="26" y1="68" x2="340" y2="68"/>
-        <text class="axis" x="0" y="14">120k</text><text class="axis" x="3" y="42">60k</text><text class="axis" x="8" y="70">0</text>
-        <g transform="translate(26,2) scale(0.92,0.95)"><path id="reachAreaM" d="M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17 L340,70 L0,70 Z" fill="url(#rfm)"/><path id="reachPathM" d="M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17" fill="none" stroke="#00C4A0" stroke-width="2.2" stroke-linecap="round"/><circle cx="312" cy="12" r="3.8" fill="#07090D" stroke="#00C4A0" stroke-width="2.2"/></g>
-        <text class="peaktag axis" x="288" y="9" fill="#00C4A0" style="font-weight:700">Tue peak</text>
-        <text class="axis" x="28" y="88">14d ago</text><text class="axis" x="312" y="88">today</text>
+        <line class="gline" x1="30" y1="16" x2="340" y2="16"/><line class="gline" x1="30" y1="56" x2="340" y2="56"/><line class="gline" x1="30" y1="96" x2="340" y2="96"/>
+        <text class="axis" x="0" y="19">120k</text><text class="axis" x="4" y="59">60k</text><text class="axis" x="10" y="99">0</text>
+        <g transform="translate(30,4) scale(0.91,1.35)"><path id="reachAreaM" d="M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17 L340,70 L0,70 Z" fill="url(#rfm)"/><path id="reachPathM" d="M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17" fill="none" stroke="#00C4A0" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke"/><circle cx="312" cy="12" r="3" fill="#07090D" stroke="#00C4A0" stroke-width="2" vector-effect="non-scaling-stroke"/></g>
+        <text class="peaktag axis" x="282" y="13" fill="#00C4A0" style="font-weight:700">Tue peak</text>
+        <text class="axis" x="32" y="120">14d ago</text><text class="axis" x="306" y="120">today</text>
       </svg>
       <div class="chart-note"><b>Read:</b> higher line, more people saw you. The climb is the pasta reel.</div></div>
     <div class="dcard"><h5>Content mix that works <b>saves-weighted</b></h5>
-      <div class="hbar" style="margin-bottom:9px"><div class="hl2" style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--t2);margin-bottom:4px"><span>&#127916; Reels</span><b style="font-family:var(--mono);font-size:9px;color:var(--t1)">46%</b></div><div style="height:8px;border-radius:99px;background:var(--surface2);overflow:hidden"><i style="display:block;height:100%;width:46%;border-radius:99px;background:linear-gradient(90deg,#00C4A0,#4DE3C6)"></i></div></div>
-      <div class="hbar" style="margin-bottom:9px"><div class="hl2" style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--t2);margin-bottom:4px"><span>&#128444;&#65039; Carousels</span><b style="font-family:var(--mono);font-size:9px;color:var(--t1)">31%</b></div><div style="height:8px;border-radius:99px;background:var(--surface2);overflow:hidden"><i style="display:block;height:100%;width:31%;border-radius:99px;background:linear-gradient(90deg,#57B5F0,#8CCBF7)"></i></div></div>
-      <div class="hbar" style="margin-bottom:0"><div class="hl2" style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--t2);margin-bottom:4px"><span>&#128247; Photos</span><b style="font-family:var(--mono);font-size:9px;color:var(--t1)">23%</b></div><div style="height:8px;border-radius:99px;background:var(--surface2);overflow:hidden"><i style="display:block;height:100%;width:23%;border-radius:99px;background:linear-gradient(90deg,#8B7BFF,#B4A6FF)"></i></div></div>
+      <div class="hbar" style="margin-bottom:9px"><div class="hl2" style="display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:4px"><span>&#127916; Reels</span><b style="font-family:var(--mono);font-size:10.5px;color:var(--t1)">46%</b></div><div style="height:13px;border-radius:99px;background:var(--surface2);overflow:hidden"><i style="display:block;height:100%;width:46%;border-radius:99px;background:linear-gradient(90deg,#00C4A0,#4DE3C6)"></i></div></div>
+      <div class="hbar" style="margin-bottom:9px"><div class="hl2" style="display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:4px"><span>&#128444;&#65039; Carousels</span><b style="font-family:var(--mono);font-size:10.5px;color:var(--t1)">31%</b></div><div style="height:13px;border-radius:99px;background:var(--surface2);overflow:hidden"><i style="display:block;height:100%;width:31%;border-radius:99px;background:linear-gradient(90deg,#57B5F0,#8CCBF7)"></i></div></div>
+      <div class="hbar" style="margin-bottom:0"><div class="hl2" style="display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:4px"><span>&#128247; Photos</span><b style="font-family:var(--mono);font-size:10.5px;color:var(--t1)">23%</b></div><div style="height:13px;border-radius:99px;background:var(--surface2);overflow:hidden"><i style="display:block;height:100%;width:23%;border-radius:99px;background:linear-gradient(90deg,#8B7BFF,#B4A6FF)"></i></div></div>
       <div class="chart-note"><b>Read:</b> reels earn nearly half your saves. When in doubt, reel.</div></div>
     <div class="sigrow" style="border-top:none"><span>&#127941;</span><span><b>Top supporters:</b> 3 fans drive 11% of shares</span></div>
     <div class="sigrow"><span>&#9762;&#65039;</span><span><b>Comment negativity 0.14</b> &middot; calm, under the 0.3 line</span></div>
     <button class="chip" style="margin:4px 0 10px" onclick="hideSheets();nav('arte');askArteM('Why did my last post perform like that?')">&#10022; Why did my last post do well?</button>
     <div class="sigrow" style="border-top:none"><span class="ldot"></span><span><b>187 people</b> on your posts right now &middot; live counters ship in Phase 2</span></div>
+    <button class="chip" style="width:100%;justify-content:center;margin-top:4px" onclick="dataTab('adv');document.querySelector('#sh-data').scrollTop=0">&#128300; Open advanced analytics &rarr;</button>
     </div>
     <button class="btn btn-ghost" style="width:100%" onclick="hideSheets()">Back to Art-E</button>
   </div>
