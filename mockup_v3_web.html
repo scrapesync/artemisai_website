@@ -275,9 +275,28 @@ body.light .storyv{background:#F5F7FB}
 body.light .sv-bars i{background:rgba(18,26,40,.14)}
 body.light .sv-bars i::after{background:#12161F}
 
+/* carousel deck */
+#dsc-others .deck{height:584px;max-width:660px;margin:6px auto 10px;touch-action:pan-y}
+#dsc-others .pcard{position:absolute;inset:auto;top:6px;bottom:6px;left:50%;width:436px;transform:translateX(-50%);transition:transform .5s cubic-bezier(.22,.68,.22,1), opacity .35s ease;will-change:transform;border-radius:26px}
+#dsc-others .pcard.cur{z-index:5}
+#dsc-others .pcard.prev{transform:translateX(-124%) scale(.86);opacity:.45;z-index:2;pointer-events:none;filter:saturate(.85)}
+#dsc-others .pcard.next{transform:translateX(24%) scale(.86);opacity:.45;z-index:2;pointer-events:none;filter:saturate(.85)}
+#dsc-others .pcard.far{opacity:0;transform:translateX(-50%) scale(.8);pointer-events:none;z-index:1}
+#dsc-others .pcard.dragging{transition:none}
+#dsc-others .pcard.fly{transform:translateX(-200%) rotate(-12deg) !important;opacity:0}
+#dsc-others .pcard::before{content:'';position:absolute;inset:-2.5px;border-radius:29px;z-index:-1;background:linear-gradient(120deg, var(--hc), rgba(255,255,255,.75) 45%, var(--hc) 60%, rgba(255,255,255,.4) 80%, var(--hc));background-size:300% 300%;animation:holo 5.5s ease-in-out infinite}
+#dsc-others .pcard.prev::before,#dsc-others .pcard.next::before{animation:none;background:var(--hc);opacity:.5}
+@keyframes holo{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media (prefers-reduced-motion: reduce){#dsc-others .pcard::before{animation:none}}
+#dsc-others .pcard::after{content:'';position:absolute;inset:0;border-radius:26px;background:linear-gradient(118deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.05) 18%, transparent 32%);pointer-events:none;z-index:3}
+.dnav{position:absolute;top:0;bottom:0;width:15%;z-index:6;display:flex;align-items:center;color:rgba(255,255,255,.0);font-size:26px;transition:color .2s;cursor:pointer;border:none;background:transparent}
+.dnav:hover{color:rgba(255,255,255,.55)}
+.dnav.l{left:0;justify-content:flex-start;padding-left:6px}
+.dnav.r{right:0;justify-content:flex-end;padding-right:6px}
+.swipe-hint{text-align:center;font-size:10.5px;color:var(--t3);margin:-2px 0 10px;letter-spacing:.4px}
 /* deck dossier style */
 .pcard{background:#10141B;border:none}
-.pcard .pd-top{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 22px 0;position:relative;z-index:2}
+.pcard .pd-top{display:flex;flex-direction:column;align-items:center;text-align:center;padding:20px 22px 0;position:relative;z-index:2}
 .pring{position:relative;width:96px;height:96px;margin-bottom:12px}
 .pring svg{position:absolute;inset:0;animation:spin 14s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -285,11 +304,11 @@ body.light .sv-bars i::after{background:#12161F}
 .pring .pav-big{position:absolute;inset:9px;width:auto;height:auto;margin:0;border:none;border-radius:50%;font-size:26px}
 .pd-top .pn3{font-family:var(--disp);font-size:23px;font-weight:800;color:#fff;letter-spacing:-.4px;text-shadow:0 2px 14px rgba(0,0,0,.4)}
 .pd-top .ps3{font-size:12px;color:rgba(255,255,255,.85);margin-top:2px}
-.bigpct{font-family:var(--disp);font-size:58px;font-weight:800;letter-spacing:-2.5px;color:#fff;line-height:1;margin:14px 0 2px;text-shadow:0 4px 24px rgba(0,0,0,.35)}
+.bigpct{font-family:var(--disp);font-size:54px;font-weight:800;letter-spacing:-2.5px;color:#fff;line-height:1;margin:11px 0 2px;text-shadow:0 4px 24px rgba(0,0,0,.35)}
 .bigcap{font-size:11.5px;color:rgba(255,255,255,.9);letter-spacing:.3px;max-width:300px;line-height:1.55}
 .bigcap b{color:#fff}
 .pdiv{border:none;border-top:2px dashed rgba(255,255,255,.28);margin:16px 22px 0;position:relative;z-index:2}
-.glasspanel{margin:14px 14px 14px;background:rgba(10,13,19,.42);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:14px 16px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);position:relative;z-index:2;flex:1;display:flex;flex-direction:column}
+.glasspanel{margin:12px 14px 14px;background:rgba(10,13,19,.42);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:14px 16px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);position:relative;z-index:2;flex:1;display:flex;flex-direction:column}
 .glasspanel .cb .cl{color:rgba(255,255,255,.75)}
 .glasspanel .cb .cl b{color:#fff}
 .glasspanel .cb .ct{background:rgba(255,255,255,.14)}
@@ -331,13 +350,17 @@ body.light .dact{background:rgba(255,255,255,.75)}
 .venn text{font-family:var(--mono);font-weight:800}
 #v-analytics{max-width:1140px}
 #v-planner{max-width:760px}
+.dcard>h5{display:flex;align-items:center;gap:10px}
+.dcard>h5 b{margin-left:auto;font-size:9.5px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;color:var(--t3);background:var(--surface2);border:1px solid var(--line);padding:4px 11px;border-radius:99px;font-family:var(--sans)}
+.sec-label{grid-column:1/-1;margin:8px 0 -2px}
+.asub{font-size:13.5px;color:var(--t3);margin:-2px 0 18px}
 /* dashboard v2 */
 .kpis2{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
 .kpi2{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:13px 15px 10px}
 .kpi2 .kl{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--t3)}
 .kpi2 .kv{display:flex;align-items:baseline;gap:8px;margin:4px 0 2px}
 .kpi2 .kv b{font-family:var(--disp);font-size:27px;font-weight:800;letter-spacing:-.5px}
-.kpi2 .kv span{font-family:var(--mono);font-size:10px;font-weight:700}
+.kpi2 .kv span{font-family:var(--mono);font-size:10px;font-weight:700;background:rgba(0,196,160,.1);padding:3px 9px;border-radius:99px}
 .kpi2 svg{display:block;width:100%;height:32px}
 .dgrid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .dgrid2 .span2{grid-column:1/-1}
@@ -362,7 +385,7 @@ body.light .dact{background:rgba(255,255,255,.75)}
 .logrow .lt{font-family:var(--mono);font-size:9.5px;color:var(--t3);min-width:64px}
 .logrow .ls{margin-left:auto;font-size:9.5px;font-weight:800;letter-spacing:.6px;padding:3px 9px;border-radius:99px}
 /* readable charts */
-.chart-note{font-size:13.5px;color:var(--t3);line-height:1.55;margin-top:9px}
+.chart-note{font-size:13px;color:var(--t2);line-height:1.6;margin-top:11px;padding-left:11px;border-left:2px solid rgba(0,196,160,.45)}
 .chart-note b{color:var(--t2);font-weight:700}
 .axis{font-family:var(--mono);font-size:11px;fill:var(--t3)}
 .gline{stroke:var(--line);stroke-width:1;stroke-dasharray:2 4}
@@ -1191,6 +1214,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
           <span class="dact-l"><button class="dact collab" onclick="deckCollab()">&#129309; Collab</button><small>&nbsp;</small></span>
         </div>
         <div class="deck-count" id="deckCount"></div>
+        <div class="swipe-hint">&#8592; swipe or use the arrows &#8594;</div>
         <div class="feed-label" style="margin-top:8px"><h3>Saved by you</h3></div>
         <button class="card" onclick="arteExplain('timing')">
           <div class="card-top"><span class="ctag sig">Saved insight</span><span class="card-time">last week</span></div>
@@ -1259,6 +1283,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       </div>
 
       <div class="apanel on" id="at-ov">
+        <div class="asub">Your week in one picture, across all five pages. Numbers first, the story lives with Art-E.</div>
         <div class="kpis2">
           <div class="kpi2"><div class="kl">Reach, 7 days</div><div class="kv"><b>284k</b><span style="color:var(--act)">&#9650; 38%</span></div><svg viewBox="0 0 100 24" preserveAspectRatio="none"><path d="M0,18 L14,16 L28,19 L42,14 L56,15 L70,10 L84,6 L100,8" fill="none" stroke="#00C4A0" stroke-width="2" vector-effect="non-scaling-stroke"/></svg></div>
           <div class="kpi2"><div class="kl">Engagement</div><div class="kv"><b>6.8%</b><span style="color:var(--act)">&#9650; 1.2</span></div><svg viewBox="0 0 100 24" preserveAspectRatio="none"><path d="M0,14 L14,15 L28,12 L42,13 L56,10 L70,11 L84,7 L100,6" fill="none" stroke="#57B5F0" stroke-width="2" vector-effect="non-scaling-stroke"/></svg></div>
@@ -1267,6 +1292,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         </div>
 
         <div class="dgrid2">
+          <div class="feed-label sec-label"><h3>Performance</h3></div>
           <div class="dcard span2"><h5>Reach <span class="rangepills" style="display:inline-flex;gap:5px;margin-left:8px"><button class="rpill" onclick="setRange(this,7)">7d</button><button class="rpill on" onclick="setRange(this,14)">14d</button><button class="rpill" onclick="setRange(this,30)">30d</button></span><b>Sana's Kitchen</b></h5>
             <svg width="100%" height="196" viewBox="0 0 840 196" preserveAspectRatio="none">
               <defs><linearGradient id="reachFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00C4A0" stop-opacity=".28"/><stop offset="1" stop-color="#00C4A0" stop-opacity="0"/></linearGradient></defs>
@@ -1276,7 +1302,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
               <text class="peaktag" id="reachPeakTag" x="704" y="24" fill="#00C4A0">Tue &middot; 118k</text>
               <text class="axis" x="48" y="190">14 days ago</text><text class="axis" x="756" y="190">today</text>
             </svg>
-            <div class="chart-note"><b>Read:</b> higher line, more people saw you. That last climb is the pasta reel, and the dot is your best day.</div>
+            <div class="chart-note">higher line, more people saw you. That last climb is the pasta reel, and the dot is your best day.</div>
           </div>
 
           <div class="dcard span2"><h5>Engagement rate <b>weekly, vs your own average</b></h5>
@@ -1289,7 +1315,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
               <text class="peaktag" x="756" y="42" fill="#57B5F0">6.8% now</text>
               <text class="axis" x="46" y="194">8 weeks ago</text><text class="axis" x="770" y="194">this week</text>
             </svg>
-            <div class="chart-note"><b>Read:</b> you are pulling away from your own average. The evening shift did this.</div>
+            <div class="chart-note">you are pulling away from your own average. The evening shift did this.</div>
           </div>
 
           <div class="dcard span2"><h5>Follower growth <b>90 days, all pages</b></h5>
@@ -1303,7 +1329,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
               <text class="peaktag" x="736" y="30" fill="#8B7BFF">293k today</text>
               <text class="axis" x="54" y="194">April</text><text class="axis" x="786" y="194">today</text>
             </svg>
-            <div class="chart-note"><b>Read:</b> steady climb, steeper since the timing change. 150k on Kitchen by 30 Sept is on track.</div>
+            <div class="chart-note">steady climb, steeper since the timing change. 150k on Kitchen by 30 Sept is on track.</div>
           </div>
 
           <div class="dcard span2"><h5>Saves vs likes <b>daily, why saves matter</b></h5>
@@ -1321,14 +1347,15 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
               </g>
             </svg>
             <div class="legend"><span><span class="sw" style="background:#3A4356"></span>likes</span><span><span class="sw" style="background:#00C4A0"></span>saves</span></div>
-            <div class="chart-note"><b>Read:</b> Tuesday's save spike is the pasta reel. Saves predict repeat reach, likes fade in a day.</div>
+            <div class="chart-note">Tuesday's save spike is the pasta reel. Saves predict repeat reach, likes fade in a day.</div>
           </div>
 
+          <div class="feed-label sec-label"><h3>Content &amp; timing</h3></div>
           <div class="dcard"><h5>Content mix that works <b>saves-weighted</b></h5>
             <div class="hbar"><div class="hl2"><span>&#127916; Reels</span><b>46% of your saves</b></div><div class="ht"><i style="width:46%;background:linear-gradient(90deg,#00C4A0,#4DE3C6)"></i></div></div>
             <div class="hbar"><div class="hl2"><span>&#128444;&#65039; Carousels</span><b>31%</b></div><div class="ht"><i style="width:31%;background:linear-gradient(90deg,#57B5F0,#8CCBF7)"></i></div></div>
             <div class="hbar" style="margin-bottom:0"><div class="hl2"><span>&#128247; Single photos</span><b>23%</b></div><div class="ht"><i style="width:23%;background:linear-gradient(90deg,#8B7BFF,#B4A6FF)"></i></div></div>
-            <div class="chart-note"><b>Read:</b> reels earn nearly half your saves. When in doubt, make it a reel.</div>
+            <div class="chart-note">reels earn nearly half your saves. When in doubt, make it a reel.</div>
           </div>
 
           <div class="dcard"><h5>Best posting times <b>engaged followers by hour</b></h5>
@@ -1338,17 +1365,18 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
               <g transform="translate(30,20) scale(0.925,1.28)"><rect x="34" y="9" width="64" height="11" rx="3" fill="rgba(0,196,160,.10)"/><rect x="102" y="9" width="64" height="11" rx="3" fill="rgba(0,196,160,.22)"/><rect x="170" y="9" width="64" height="11" rx="3" fill="rgba(0,196,160,.14)"/><rect x="238" y="9" width="64" height="11" rx="3" fill="rgba(0,196,160,.45)"/><rect x="306" y="9" width="48" height="11" rx="3" fill="rgba(0,196,160,.30)"/><rect x="358" y="9" width="38" height="11" rx="3" fill="rgba(0,196,160,.10)"/><rect x="34" y="24" width="64" height="11" rx="3" fill="rgba(0,196,160,.12)"/><rect x="102" y="24" width="64" height="11" rx="3" fill="rgba(0,196,160,.20)"/><rect x="170" y="24" width="64" height="11" rx="3" fill="rgba(0,196,160,.18)"/><rect x="238" y="24" width="64" height="11" rx="3" fill="rgba(0,196,160,.95)"/><rect x="306" y="24" width="48" height="11" rx="3" fill="rgba(0,196,160,.55)"/><rect x="358" y="24" width="38" height="11" rx="3" fill="rgba(0,196,160,.14)"/><rect x="34" y="39" width="64" height="11" rx="3" fill="rgba(0,196,160,.10)"/><rect x="102" y="39" width="64" height="11" rx="3" fill="rgba(0,196,160,.16)"/><rect x="170" y="39" width="64" height="11" rx="3" fill="rgba(0,196,160,.12)"/><rect x="238" y="39" width="64" height="11" rx="3" fill="rgba(0,196,160,.40)"/><rect x="306" y="39" width="48" height="11" rx="3" fill="rgba(0,196,160,.28)"/><rect x="358" y="39" width="38" height="11" rx="3" fill="rgba(0,196,160,.10)"/><rect x="34" y="54" width="64" height="11" rx="3" fill="rgba(0,196,160,.12)"/><rect x="102" y="54" width="64" height="11" rx="3" fill="rgba(0,196,160,.18)"/><rect x="170" y="54" width="64" height="11" rx="3" fill="rgba(0,196,160,.16)"/><rect x="238" y="54" width="64" height="11" rx="3" fill="rgba(0,196,160,.50)"/><rect x="306" y="54" width="48" height="11" rx="3" fill="rgba(0,196,160,.60)"/><rect x="358" y="54" width="38" height="11" rx="3" fill="rgba(0,196,160,.16)"/><rect x="34" y="69" width="64" height="11" rx="3" fill="rgba(0,196,160,.14)"/><rect x="102" y="69" width="64" height="11" rx="3" fill="rgba(0,196,160,.22)"/><rect x="170" y="69" width="64" height="11" rx="3" fill="rgba(0,196,160,.20)"/><rect x="238" y="69" width="64" height="11" rx="3" fill="rgba(0,196,160,.34)"/><rect x="306" y="69" width="48" height="11" rx="3" fill="rgba(0,196,160,.26)"/><rect x="358" y="69" width="38" height="11" rx="3" fill="rgba(0,196,160,.12)"/><rect x="34" y="84" width="64" height="11" rx="3" fill="rgba(0,196,160,.18)"/><rect x="102" y="84" width="64" height="11" rx="3" fill="rgba(0,196,160,.30)"/><rect x="170" y="84" width="64" height="11" rx="3" fill="rgba(0,196,160,.22)"/><rect x="238" y="84" width="64" height="11" rx="3" fill="rgba(0,196,160,.24)"/><rect x="306" y="84" width="48" height="11" rx="3" fill="rgba(0,196,160,.18)"/><rect x="358" y="84" width="38" height="11" rx="3" fill="rgba(0,196,160,.10)"/><rect x="238" y="24" width="64" height="11" rx="3" fill="none" stroke="#FFC24B" stroke-width="1.5"/></g>
             </svg>
             <div class="legend"><span><span class="sw" style="background:rgba(0,196,160,.14)"></span>quiet</span><span><span class="sw" style="background:rgba(0,196,160,.5)"></span>good</span><span><span class="sw" style="background:rgba(0,196,160,.95)"></span>your window</span><span style="margin-left:auto"><span class="sw" style="background:transparent;border:1.5px solid #FFC24B"></span>#1 this week</span></div>
-            <div class="chart-note"><b>Read:</b> darker means your people are there. The gold ring is Tuesday 6:40pm, this week's number one.</div>
+            <div class="chart-note">darker means your people are there. The gold ring is Tuesday 6:40pm, this week's number one.</div>
             <button class="askA" onclick="arteExplain('timing')">&#10022; Why these windows?</button>
           </div>
 
+          <div class="feed-label sec-label"><h3>Audience &amp; standing</h3></div>
           <div class="dcard"><h5>Your five pages <b>reach this week</b></h5>
             <div class="hbar"><div class="hl2"><span><span class="wd" style="width:9px;height:9px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:7px"></span>Sana's Kitchen</span><b>128k</b></div><div class="ht"><i style="width:96%;background:#00C4A0"></i></div></div>
             <div class="hbar"><div class="hl2"><span><span class="wd" style="width:9px;height:9px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:7px"></span>Quick Bites UK</span><b>64k</b></div><div class="ht"><i style="width:48%;background:#57B5F0"></i></div></div>
             <div class="hbar"><div class="hl2"><span><span class="wd" style="width:9px;height:9px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:7px"></span>Midnight Munchies</span><b>41k</b></div><div class="ht"><i style="width:31%;background:#8B7BFF"></i></div></div>
             <div class="hbar"><div class="hl2"><span><span class="wd" style="width:9px;height:9px;border-radius:50%;background:#FFC24B;display:inline-block;margin-right:7px"></span>Family Feasts</span><b>38k</b></div><div class="ht"><i style="width:29%;background:#FFC24B"></i></div></div>
             <div class="hbar" style="margin-bottom:0"><div class="hl2"><span><span class="wd" style="width:9px;height:9px;border-radius:50%;background:#FF5C74;display:inline-block;margin-right:7px"></span>Sana Shorts</span><b>22k</b></div><div class="ht"><i style="width:17%;background:#FF5C74"></i></div></div>
-            <div class="chart-note"><b>Read:</b> Kitchen carries the network. Family Feasts is the one to watch, its dip started Tuesday.</div>
+            <div class="chart-note">Kitchen carries the network. Family Feasts is the one to watch, its dip started Tuesday.</div>
           </div>
 
           <div class="dcard"><h5>Comment sentiment <b>this week</b></h5>
@@ -1367,7 +1395,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
                 <div><span class="sw" style="background:#FF5C74"></span>Negative <b style="font-family:var(--mono);font-size:11px">8%</b></div>
               </div>
             </div>
-            <div class="chart-note"><b>Read:</b> healthy. Negativity sits at 0.14, well under the 0.3 watch line, and Art-E reads every comment.</div>
+            <div class="chart-note">healthy. Negativity sits at 0.14, well under the 0.3 watch line, and Art-E reads every comment.</div>
           </div>
 
           <div class="dcard"><h5>How you compare <b>UK food pages your size</b></h5>
@@ -1375,7 +1403,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
             <div class="ht" style="height:16px;position:relative;border-radius:99px;background:var(--surface2);overflow:visible"><i style="display:block;height:100%;width:91%;border-radius:99px;background:linear-gradient(90deg,#232B38,#00C4A0)"></i><span style="position:absolute;right:2%;top:-22px;font-family:var(--mono);font-size:10px;color:var(--act);font-weight:700">Top 9%</span></div>
             <div style="margin:16px 0 4px;font-size:12px;color:var(--t2)">Posting consistency</div>
             <div class="ht" style="height:16px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:58%;border-radius:99px;background:linear-gradient(90deg,#232B38,#FFC24B)"></i></div>
-            <div class="chart-note"><b>Read:</b> quality is elite, cadence is the gap. Two 4-day quiet stretches this month cost you the top 5%.</div>
+            <div class="chart-note">quality is elite, cadence is the gap. Two 4-day quiet stretches this month cost you the top 5%.</div>
             <button class="askA" onclick="arteExplain('health')">&#10022; Ask Art-E about the gap</button>
           </div>
         </div>
@@ -1409,14 +1437,15 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
           <button class="ajc" onclick="subtab('raw')">Raw data &rarr;</button>
         </div>
 
-        <div class="dgrid2" id="adv-pat">
+        <div class="feed-label" id="adv-pat"><h3>Content patterns</h3></div>
+        <div class="dgrid2">
           <div class="dcard span2"><h5>What makes posts take off <b>the model, in plain words</b></h5>
             <div class="shap"><div class="sl2"><span>A number in the first 6 words</span><b style="color:var(--act)">+34%</b></div><div class="st"><i style="left:50%;width:34%;background:linear-gradient(90deg,#00C4A0,#4DE3C6)"></i></div></div>
             <div class="shap"><div class="sl2"><span>Posting inside your window</span><b style="color:var(--act)">+28%</b></div><div class="st"><i style="left:50%;width:28%;background:linear-gradient(90deg,#00C4A0,#4DE3C6)"></i></div></div>
             <div class="shap"><div class="sl2"><span>Save-worthy payoff (recipe, list, tip)</span><b style="color:var(--act)">+22%</b></div><div class="st"><i style="left:50%;width:22%;background:linear-gradient(90deg,#00C4A0,#4DE3C6)"></i></div></div>
             <div class="shap"><div class="sl2"><span>More than 4 hashtags</span><b style="color:var(--rose)">&minus;6%</b></div><div class="st"><i style="right:50%;left:auto;width:6%;background:#FF5C74"></i></div></div>
             <div class="shap" style="margin-bottom:0"><div class="sl2"><span>Posting 3&times; in one day</span><b style="color:var(--rose)">&minus;9%</b></div><div class="st"><i style="right:50%;left:auto;width:9%;background:#FF5C74"></i></div></div>
-            <div class="chart-note"><b>Read:</b> bars right of centre push reach up, left drag it down. Your hooks are the superpower, overposting is the leak.</div>
+            <div class="chart-note">bars right of centre push reach up, left drag it down. Your hooks are the superpower, overposting is the leak.</div>
           </div>
 
           <div class="dcard"><h5>Caption length <b>sweet spot</b></h5>
@@ -1427,7 +1456,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
               <text class="peaktag" x="158" y="36" fill="#00C4A0">80 to 140 chars</text>
               <text class="axis" x="14" y="190">20 chars</text><text class="axis" x="336" y="190">400 chars</text>
             </svg>
-            <div class="chart-note"><b>Read:</b> engagement peaks at 80 to 140 characters on your pages. Long captions lose the scroll.</div>
+            <div class="chart-note">engagement peaks at 80 to 140 characters on your pages. Long captions lose the scroll.</div>
           </div>
 
           <div class="dcard"><h5>Posting frequency <b>diminishing returns</b></h5>
@@ -1437,7 +1466,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
               <text class="peaktag" x="204" y="32" fill="#FFC24B">you: 4 a week</text>
               <text class="axis" x="14" y="190">1 a week</text><text class="axis" x="336" y="190">14 a week</text>
             </svg>
-            <div class="chart-note"><b>Read:</b> past 5 a week the curve flattens. You are at the sweet spot, protect quality over volume.</div>
+            <div class="chart-note">past 5 a week the curve flattens. You are at the sweet spot, protect quality over volume.</div>
           </div>
 
           <div class="dcard span2"><h5>Emoji sweet spot <b>engagement by count</b></h5>
@@ -1447,11 +1476,12 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
               <div style="text-align:center"><div class="ht" style="height:88px;border-radius:12px;background:var(--surface2);display:flex;align-items:flex-end"><i style="display:block;width:100%;height:66%;border-radius:10px;background:rgba(0,196,160,.55)"></i></div><div style="font-size:11px;color:var(--t3);margin-top:6px">3 to 4</div></div>
               <div style="text-align:center"><div class="ht" style="height:88px;border-radius:12px;background:var(--surface2);display:flex;align-items:flex-end"><i style="display:block;width:100%;height:32%;border-radius:10px;background:rgba(255,92,116,.4)"></i></div><div style="font-size:11px;color:var(--t3);margin-top:6px">5 plus</div></div>
             </div>
-            <div class="chart-note"><b>Read:</b> one or two emoji lift engagement, five or more read as spam to your audience.</div>
+            <div class="chart-note">one or two emoji lift engagement, five or more read as spam to your audience.</div>
           </div>
         </div>
 
-        <div class="dgrid2" id="adv-cas" style="margin-top:14px">
+        <div class="feed-label" id="adv-cas" style="margin-top:18px"><h3>Cascade &amp; reach</h3></div>
+        <div class="dgrid2">
           <div class="dcard"><h5>How the toastie reel spread <b>cascade</b></h5>
             <svg width="100%" height="170" viewBox="0 0 400 170">
               <line x1="200" y1="85" x2="110" y2="40" stroke="#3A4356" stroke-width="1.5"/><line x1="200" y1="85" x2="290" y2="36" stroke="#3A4356" stroke-width="1.5"/><line x1="200" y1="85" x2="96" y2="126" stroke="#3A4356" stroke-width="1.5"/><line x1="200" y1="85" x2="300" y2="130" stroke="#3A4356" stroke-width="1.5"/>
@@ -1460,7 +1490,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
               <circle cx="110" cy="40" r="9" fill="rgba(139,123,255,.25)" stroke="#8B7BFF" stroke-width="2"/><circle cx="290" cy="36" r="9" fill="rgba(139,123,255,.25)" stroke="#8B7BFF" stroke-width="2"/><circle cx="96" cy="126" r="9" fill="rgba(139,123,255,.25)" stroke="#8B7BFF" stroke-width="2"/><circle cx="300" cy="130" r="9" fill="rgba(139,123,255,.25)" stroke="#8B7BFF" stroke-width="2"/>
               <circle cx="60" cy="18" r="4" fill="#3A4356"/><circle cx="70" cy="60" r="4" fill="#3A4356"/><circle cx="340" cy="16" r="4" fill="#3A4356"/><circle cx="348" cy="52" r="4" fill="#3A4356"/><circle cx="48" cy="146" r="4" fill="#3A4356"/><circle cx="352" cy="150" r="4" fill="#3A4356"/>
             </svg>
-            <div class="chart-note"><b>Read:</b> one post, 14 super-sharers (violet), 4,200 new people. The sharers are the multiplier, keep them close.</div>
+            <div class="chart-note">one post, 14 super-sharers (violet), 4,200 new people. The sharers are the multiplier, keep them close.</div>
           </div>
 
           <div class="dcard"><h5>Engagement funnel <b>pasta reel</b></h5>
@@ -1468,7 +1498,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
             <div class="fun-row"><div class="fl"><span>Engaged</span><b>12,400 &middot; 15%</b></div><div class="ft"><i style="width:62%;background:linear-gradient(90deg,#57B5F0,#8CCBF7)"></i></div></div>
             <div class="fun-row"><div class="fl"><span>Saved</span><b>3,100 &middot; 25% of engaged</b></div><div class="ft"><i style="width:34%;background:linear-gradient(90deg,#8B7BFF,#B4A6FF)"></i></div></div>
             <div class="fun-row" style="margin-bottom:0"><div class="fl"><span>Shared</span><b>1,180</b></div><div class="ft"><i style="width:18%;background:linear-gradient(90deg,#FFC24B,#FFD98A)"></i></div></div>
-            <div class="chart-note"><b>Read:</b> a quarter of engagers saved it. That save rate is why Art-E predicted 2.4x and it landed 2.9x.</div>
+            <div class="chart-note">a quarter of engagers saved it. That save rate is why Art-E predicted 2.4x and it landed 2.9x.</div>
           </div>
 
           <div class="dcard span2"><h5>Cumulative reach effect <b>organic vs cascade</b></h5>
@@ -1479,11 +1509,12 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
               <text class="axis" x="24" y="180">hour 0</text><text class="axis" x="348" y="180">hour 48</text>
               <text class="peaktag" x="296" y="102" fill="#00C4A0">organic</text><text class="peaktag" x="286" y="48" fill="#8B7BFF">via sharers</text>
             </svg>
-            <div class="chart-note"><b>Read:</b> after hour 6, most new reach comes through sharers, not the algorithm. The network is the engine.</div>
+            <div class="chart-note">after hour 6, most new reach comes through sharers, not the algorithm. The network is the engine.</div>
           </div>
         </div>
 
-        <div class="dgrid2" id="adv-aud" style="margin-top:14px">
+        <div class="feed-label" id="adv-aud" style="margin-top:18px"><h3>Audience clusters</h3></div>
+        <div class="dgrid2">
           <div class="dcard"><h5>Audience cluster map <b>who your people are</b></h5>
             <svg width="100%" height="170" viewBox="0 0 400 170">
               <circle cx="120" cy="60" r="44" fill="rgba(0,196,160,.16)" stroke="#00C4A0" stroke-width="1.5"/><text x="120" y="57" text-anchor="middle" style="font-size:11px;fill:var(--t1);font-weight:700">Foodie families</text><text x="120" y="71" text-anchor="middle" class="axis">38%</text>
@@ -1491,7 +1522,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
               <circle cx="176" cy="128" r="30" fill="rgba(87,181,240,.16)" stroke="#57B5F0" stroke-width="1.5"/><text x="176" y="126" text-anchor="middle" style="font-size:10px;fill:var(--t1);font-weight:700">Budget students</text><text x="176" y="139" text-anchor="middle" class="axis">21%</text>
               <circle cx="316" cy="128" r="25" fill="rgba(255,194,75,.16)" stroke="#FFC24B" stroke-width="1.5"/><text x="316" y="126" text-anchor="middle" style="font-size:10px;fill:var(--t1);font-weight:700">Weekend cooks</text><text x="316" y="139" text-anchor="middle" class="axis">15%</text>
             </svg>
-            <div class="chart-note"><b>Read:</b> four tribes, de-identified. Night snackers are why Midnight Munchies exists, weekend cooks are Family Feasts fuel.</div>
+            <div class="chart-note">four tribes, de-identified. Night snackers are why Midnight Munchies exists, weekend cooks are Family Feasts fuel.</div>
           </div>
 
           <div class="dcard"><h5>Closest audiences <b>similarity to Kitchen</b></h5>
@@ -1499,17 +1530,18 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
             <div class="hbar"><div class="hl2"><span><span class="wd" style="width:9px;height:9px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:7px"></span>Quick Bites UK</span><b>39%</b></div><div class="ht"><i style="width:39%;background:#57B5F0"></i></div></div>
             <div class="hbar"><div class="hl2"><span><span class="wd" style="width:9px;height:9px;border-radius:50%;background:#FFC24B;display:inline-block;margin-right:7px"></span>Family Feasts</span><b>31%</b></div><div class="ht"><i style="width:31%;background:#FFC24B"></i></div></div>
             <div class="hbar" style="margin-bottom:0"><div class="hl2"><span><span class="wd" style="width:9px;height:9px;border-radius:50%;background:#FF5C74;display:inline-block;margin-right:7px"></span>Sana Shorts</span><b>12%</b></div><div class="ht"><i style="width:12%;background:#FF5C74"></i></div></div>
-            <div class="chart-note"><b>Read:</b> Munchies shares nearly half of Kitchen's crowd, cross-posting there is close to free. Shorts is its own island, bridge it.</div>
+            <div class="chart-note">Munchies shares nearly half of Kitchen's crowd, cross-posting there is close to free. Shorts is its own island, bridge it.</div>
           </div>
         </div>
 
-        <div class="dgrid2" id="adv-ai" style="margin-top:14px">
+        <div class="feed-label" id="adv-ai" style="margin-top:18px"><h3>AI activity</h3></div>
+        <div class="dgrid2">
           <div class="dcard"><h5>AI activity <b>what ran while you slept</b></h5>
             <div class="logrow"><span class="lt">07:02</span><span>Morning briefing compiled, 5 pages scanned</span><span class="ls" style="background:rgba(0,196,160,.12);color:var(--act)">done</span></div>
             <div class="logrow"><span class="lt">03:41</span><span>Comment cluster on Sana Shorts flagged, reply drafted</span><span class="ls" style="background:rgba(255,194,75,.14);color:var(--gold)">waiting</span></div>
             <div class="logrow"><span class="lt">01:12</span><span>Overnight scan: 1,240 comments read, 2 flagged</span><span class="ls" style="background:rgba(0,196,160,.12);color:var(--act)">done</span></div>
             <div class="logrow"><span class="lt">22:30</span><span>Match model refresh: @HomeCookedDaily up to 41%</span><span class="ls" style="background:rgba(0,196,160,.12);color:var(--act)">done</span></div>
-            <div class="chart-note"><b>Read:</b> every action is logged and reversible. Nothing posts without you unless you turn auto-pilot on.</div>
+            <div class="chart-note">every action is logged and reversible. Nothing posts without you unless you turn auto-pilot on.</div>
           </div>
 
           <div class="dcard"><h5>Flagged comments <b>2 need a look</b></h5>
@@ -2071,11 +2103,11 @@ const DECK=[
 let deckIdx=0;
 function deckRender(){ const d=document.getElementById('deck'); if(!d) return;
   d.innerHTML='';
-  const rest=DECK.slice(deckIdx);
-  if(!rest.length){ d.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--t3);font-size:13px;gap:10px"><span style="font-size:30px">&#129309;</span>Deck cleared. New matches will alert you.</div>'; document.getElementById('deckCount').textContent=''; return; }
-  rest.slice(0,3).forEach((m,x)=>{
+  if(!DECK.length){ d.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--t3);font-size:13px;gap:10px"><span style="font-size:30px">&#129309;</span>Deck cleared. New matches will alert you.</div>'; document.getElementById('deckCount').textContent=''; return; }
+  deckIdx=Math.max(0,Math.min(deckIdx,DECK.length-1));
+  [deckIdx-1,deckIdx,deckIdx+1].forEach((di)=>{ if(di<0||di>=DECK.length) return; const m=DECK[di]; const cls=di===deckIdx?'cur':(di<deckIdx?'prev':'next');
     const pct=parseInt(m.ovl); const R=44, C=2*Math.PI*R;
-    d.insertAdjacentHTML('beforeend', `<div class="pcard" data-pos="${x}" style="z-index:${9-x};background:linear-gradient(165deg, ${m.c} 0%, ${m.c}88 34%, #0B0E14 82%)">
+    d.insertAdjacentHTML('beforeend', `<div class="pcard ${cls}" data-pos="${di===deckIdx?0:9}" style="--hc:${m.c};background:linear-gradient(165deg, ${m.c} 0%, ${m.c}88 34%, #0B0E14 82%)">
       <div class="pd-top">
         <span class="pring"><svg width="96" height="96" viewBox="0 0 96 96"><circle cx="48" cy="48" r="44" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="4"/><circle cx="48" cy="48" r="44" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-dasharray="${C*pct/100} ${C}" transform="rotate(-90 48 48)"/></svg><span class="pav-big" style="background:rgba(255,255,255,.16);color:#fff;backdrop-filter:blur(6px)">${m.ini}<span class="pv2">&#10003;</span></span></span>
         <div class="pn3">${m.n}</div><div class="ps3">${m.sub}</div>
@@ -2091,14 +2123,26 @@ function deckRender(){ const d=document.getElementById('deck'); if(!d) return;
         <div class="pstats" style="margin:11px 0 0"><div class="pstat"><b>${m.fol}</b><span>followers</span></div><div class="pstat hot"><b>${m.est}</b><span>est. reach</span></div><div class="pstat"><b>${m.hrs}</b><span>their peak</span></div></div>
       </div>
     </div>`); });
+  d.insertAdjacentHTML('beforeend','<button class="dnav l" onclick="goDeck(-1)" aria-label="Previous">&#8249;</button><button class="dnav r" onclick="goDeck(1)" aria-label="Next">&#8250;</button>');
   const g=document.getElementById('deckGlow')||d.insertAdjacentElement('afterbegin',Object.assign(document.createElement('div'),{className:'deck-glow',id:'deckGlow'}));
   const top=DECK[deckIdx]; if(top&&g) g.style.background=`radial-gradient(60% 55% at 50% 30%, ${top.c}, transparent 70%)`;
+  initDeckSwipe();
   document.getElementById('deckCount').innerHTML='<span class="deck-dots">'+DECK.map((_,x)=>'<i class="'+(x===deckIdx?'on':'')+'"></i>').join('')+'</span>';
+  const hint=document.querySelector('.swipe-hint'); if(hint) hint.style.display=DECK.length>1?'':'none';
 }
-function deckPass(){ const top=document.querySelector('.pcard[data-pos="0"]'); if(!top) return; top.classList.add('fly'); toast('Passed. This one stays gone.'); setTimeout(()=>{deckIdx++; deckRender();},330); }
-function deckSave(){ toast('Saved for later.'); const top=document.querySelector('.pcard[data-pos="0"]'); if(top){ top.style.transform='translateY(-8px) scale(1.01)'; setTimeout(()=>{deckIdx++; deckRender();},260);} }
+function goDeck(d){ if(!DECK.length) return; const n=deckIdx+d; if(n<0||n>=DECK.length) return; deckIdx=n; deckRender(); }
+function initDeckSwipe(){ const dk=document.getElementById('deck'); if(!dk||dk.dataset.sw) return; dk.dataset.sw=1;
+  let sx=0, cur=null, dx=0;
+  dk.addEventListener('pointerdown',e=>{ cur=dk.querySelector('.pcard.cur'); if(!cur||e.target.closest('.dnav')) {cur=null;return;} sx=e.clientX; dx=0; cur.classList.add('dragging'); dk.setPointerCapture(e.pointerId); });
+  dk.addEventListener('pointermove',e=>{ if(!cur) return; dx=e.clientX-sx; cur.style.transform=`translateX(calc(-50% + ${dx}px)) rotate(${dx*0.03}deg)`; });
+  const up=e=>{ if(!cur) return; cur.classList.remove('dragging'); cur.style.transform='';
+    if(dx<-70) goDeck(1); else if(dx>70) goDeck(-1); cur=null; };
+  dk.addEventListener('pointerup',up); dk.addEventListener('pointercancel',up);
+}
+function deckPass(){ const top=document.querySelector('.pcard.cur'); if(!top) return; top.classList.add('fly'); toast('Passed. This one stays gone.'); setTimeout(()=>{DECK.splice(deckIdx,1); deckRender();},380); }
+function deckSave(){ toast('Saved for later.'); goDeck(1); }
 function deckDetails(){ const m=DECK[deckIdx]; if(m) openDiscovery(m.k); }
-function deckCollab(){ const m=DECK[deckIdx]; if(!m) return; if(m.k==='homecooked'){ toast('Intro sent. Maya usually replies fast.'); setTimeout(()=>{setView('inbox');openChat();},700);} else { toast('Intro drafted and sent in your voice. Replies land in the Inbox.'); deckIdx++; deckRender(); } }
+function deckCollab(){ const m=DECK[deckIdx]; if(!m) return; if(m.k==='homecooked'){ toast('Intro sent. Maya usually replies fast.'); setTimeout(()=>{setView('inbox');openChat();},700);} else { toast('Intro drafted and sent in your voice. Replies land in the Inbox.'); DECK.splice(deckIdx,1); deckRender(); } }
 function discTab(btn,t){ [...btn.parentElement.children].forEach(x=>x.classList.toggle('on',x===btn));
   ['others','mine','x'].forEach(k=>{ document.getElementById('dsc-'+k).style.display = (k===t)?'':'none'; });
   if(t==='others') deckRender(); }

@@ -263,6 +263,23 @@ body.light .sv-bars i::after{background:#12161F}
 .card-act{transition:transform .18s cubic-bezier(.22,.68,.22,1)}
 .card:active .card-act{transform:translateX(3px)}
 
+/* carousel m */
+#dsc-others .deck{height:498px;margin:4px -4px 8px;touch-action:pan-y}
+#dsc-others .pcard{position:absolute;inset:auto;top:4px;bottom:4px;left:50%;width:calc(100% - 48px);transform:translateX(-50%);transition:transform .5s cubic-bezier(.22,.68,.22,1), opacity .35s;will-change:transform;border-radius:22px}
+#dsc-others .pcard.cur{z-index:5}
+#dsc-others .pcard.prev{transform:translateX(-118%) scale(.87);opacity:.45;z-index:2;pointer-events:none}
+#dsc-others .pcard.next{transform:translateX(18%) scale(.87);opacity:.45;z-index:2;pointer-events:none}
+#dsc-others .pcard.far{opacity:0;pointer-events:none;z-index:1}
+#dsc-others .pcard.dragging{transition:none}
+#dsc-others .pcard.fly{transform:translateX(-200%) rotate(-12deg) !important;opacity:0}
+#dsc-others .pcard::before{content:'';position:absolute;inset:-2px;border-radius:24px;z-index:-1;background:linear-gradient(120deg, var(--hc), rgba(255,255,255,.75) 45%, var(--hc) 60%, rgba(255,255,255,.4) 80%, var(--hc));background-size:300% 300%;animation:holo 5.5s ease-in-out infinite}
+#dsc-others .pcard.prev::before,#dsc-others .pcard.next::before{animation:none;background:var(--hc);opacity:.5}
+@keyframes holo{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media (prefers-reduced-motion: reduce){#dsc-others .pcard::before{animation:none}}
+#dsc-others .pcard::after{content:'';position:absolute;inset:0;border-radius:22px;background:linear-gradient(118deg, rgba(255,255,255,.15) 0%, rgba(255,255,255,.05) 18%, transparent 32%);pointer-events:none;z-index:3}
+.dnav{position:absolute;top:0;bottom:0;width:26px;z-index:6;border:none;background:transparent}
+.dnav.l{left:-6px}.dnav.r{right:-6px}
+.swipe-hint{text-align:center;font-size:9px;color:var(--t3);margin:-2px 0 8px;letter-spacing:.4px}
 /* dossier m */
 .pcard{background:#10141B;border:none}
 .pcard .pd-top{display:flex;flex-direction:column;align-items:center;text-align:center;padding:17px 15px 0;position:relative;z-index:2}
@@ -287,6 +304,8 @@ body.light .sv-bars i::after{background:#12161F}
 .glasspanel .pstat{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
 .glasspanel .pstat b,.glasspanel .pstat.hot b{color:#fff}
 .glasspanel .pstat span{color:rgba(255,255,255,.65)}
+.dcard>h5{display:flex;align-items:center;gap:8px}
+.dcard>h5 b{margin-left:auto;font-size:8px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--t3);background:var(--surface2);border:1px solid var(--line);padding:3px 8px;border-radius:99px;font-family:var(--sans)}
 /* dashboard + disc v3 m */
 .donut-wrap{display:flex;align-items:center;gap:14px}
 .dleg{font-size:10.5px;color:var(--t2);line-height:1.9}
@@ -305,7 +324,7 @@ body.light .sv-bars i::after{background:#12161F}
 .logrow:first-of-type{border-top:none}
 .logrow .lt{font-family:var(--mono);font-size:8px;color:var(--t3);min-width:44px}
 .logrow .ls{margin-left:auto;font-size:8px;font-weight:800;padding:2px 7px;border-radius:99px}
-.deck{height:432px}
+
 .deck-glow{position:absolute;inset:-24px -32px;border-radius:36px;filter:blur(34px);opacity:.22;pointer-events:none;transition:background .4s}
 .pcard{padding:0;overflow:hidden;border-radius:22px}
 .pcard .pcover{position:absolute;top:0;left:0;right:0;height:120px;border-radius:0;opacity:1}
@@ -331,7 +350,7 @@ body.light .sv-bars i::after{background:#12161F}
 body.light .dact{background:rgba(255,255,255,.75)}
 .venn text{font-family:var(--mono);font-weight:800}
 /* readable charts m */
-.chart-note{font-size:12px;color:var(--t3);line-height:1.5;margin-top:7px}
+.chart-note{font-size:11.5px;color:var(--t2);line-height:1.55;margin-top:9px;padding-left:9px;border-left:2px solid rgba(0,196,160,.45)}
 .chart-note b{color:var(--t2)}
 .axis{font-family:var(--mono);font-size:9.5px;fill:var(--t3)}
 .gline{stroke:var(--line);stroke-width:1;stroke-dasharray:2 3}
@@ -909,6 +928,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
           <span class="dact-l"><button class="dact collab" onclick="deckCollab()">&#129309; Collab</button><small>&nbsp;</small></span>
         </div>
         <div class="deck-count" id="deckCount"></div>
+        <div class="swipe-hint">&#8592; swipe &#8594;</div>
         <p class="quiet">Found by real overlap, never hashtags.<br><b>The best ones alert you.</b></p>
       </div>
 
@@ -1078,13 +1098,14 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     <h4>Analytics</h4>
     <div style="display:flex;gap:7px;margin:2px 0 12px"><button class="ptab on" id="mdTabOv" onclick="dataTab('ov')">Overview</button><button class="ptab" id="mdTabAdv" onclick="dataTab('adv')">Advanced</button></div>
     <div id="mdAdv" style="display:none">
+      <div class="mini-label">Content patterns</div>
       <div class="dcard"><h5>What makes posts take off <b>plain words</b></h5>
         <div class="shap"><div class="sl2"><span>Number in first 6 words</span><b style="color:var(--act)">+34%</b></div><div class="st"><i style="left:50%;width:34%;background:#00C4A0"></i></div></div>
         <div class="shap"><div class="sl2"><span>Inside your window</span><b style="color:var(--act)">+28%</b></div><div class="st"><i style="left:50%;width:28%;background:#00C4A0"></i></div></div>
         <div class="shap"><div class="sl2"><span>Save-worthy payoff</span><b style="color:var(--act)">+22%</b></div><div class="st"><i style="left:50%;width:22%;background:#00C4A0"></i></div></div>
         <div class="shap"><div class="sl2"><span>4+ hashtags</span><b style="color:var(--rose)">&minus;6%</b></div><div class="st"><i style="right:50%;left:auto;width:6%;background:#FF5C74"></i></div></div>
         <div class="shap" style="margin-bottom:0"><div class="sl2"><span>3&times; posts one day</span><b style="color:var(--rose)">&minus;9%</b></div><div class="st"><i style="right:50%;left:auto;width:9%;background:#FF5C74"></i></div></div>
-        <div class="chart-note"><b>Read:</b> right of centre lifts reach, left drags it. Hooks are your superpower.</div>
+        <div class="chart-note">right of centre lifts reach, left drags it. Hooks are your superpower.</div>
       </div>
       <div class="dcard"><h5>Caption length <b>sweet spot</b></h5>
         <svg width="100%" height="112" viewBox="0 0 340 112" preserveAspectRatio="none">
@@ -1094,14 +1115,15 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
           <text class="axis" x="126" y="21" fill="#00C4A0" style="font-weight:700">80-140 chars</text>
           <text class="axis" x="10" y="108">20</text><text class="axis" x="306" y="108">400</text>
         </svg>
-        <div class="chart-note"><b>Read:</b> engagement peaks at 80 to 140 characters. Long captions lose the scroll.</div>
+        <div class="chart-note">engagement peaks at 80 to 140 characters. Long captions lose the scroll.</div>
       </div>
+      <div class="mini-label" style="margin-top:4px">Cascade &amp; reach</div>
       <div class="dcard"><h5>Engagement funnel <b>pasta reel</b></h5>
         <div class="fun-row"><div class="fl"><span>Reached</span><b>84,000</b></div><div class="ft"><i style="width:100%;background:#00C4A0"></i></div></div>
         <div class="fun-row"><div class="fl"><span>Engaged</span><b>12,400</b></div><div class="ft"><i style="width:62%;background:#57B5F0"></i></div></div>
         <div class="fun-row"><div class="fl"><span>Saved</span><b>3,100</b></div><div class="ft"><i style="width:34%;background:#8B7BFF"></i></div></div>
         <div class="fun-row" style="margin-bottom:0"><div class="fl"><span>Shared</span><b>1,180</b></div><div class="ft"><i style="width:18%;background:#FFC24B"></i></div></div>
-        <div class="chart-note"><b>Read:</b> a quarter of engagers saved it. That is why 2.4x landed at 2.9x.</div>
+        <div class="chart-note">a quarter of engagers saved it. That is why 2.4x landed at 2.9x.</div>
       </div>
       <div class="dcard"><h5>How the toastie reel spread <b>cascade</b></h5>
         <svg width="100%" height="118" viewBox="0 0 340 118">
@@ -1111,8 +1133,9 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
           <circle cx="92" cy="28" r="7" fill="rgba(139,123,255,.25)" stroke="#8B7BFF" stroke-width="1.6"/><circle cx="248" cy="26" r="7" fill="rgba(139,123,255,.25)" stroke="#8B7BFF" stroke-width="1.6"/><circle cx="84" cy="90" r="7" fill="rgba(139,123,255,.25)" stroke="#8B7BFF" stroke-width="1.6"/><circle cx="256" cy="92" r="7" fill="rgba(139,123,255,.25)" stroke="#8B7BFF" stroke-width="1.6"/>
           <circle cx="48" cy="12" r="3" fill="#3A4356"/><circle cx="292" cy="10" r="3" fill="#3A4356"/><circle cx="40" cy="106" r="3" fill="#3A4356"/><circle cx="300" cy="108" r="3" fill="#3A4356"/>
         </svg>
-        <div class="chart-note"><b>Read:</b> one post, 14 super-sharers (violet), 4,200 new people. The network is the engine.</div>
+        <div class="chart-note">one post, 14 super-sharers (violet), 4,200 new people. The network is the engine.</div>
       </div>
+      <div class="mini-label" style="margin-top:4px">Audience</div>
       <div class="dcard"><h5>Audience clusters <b>your tribes</b></h5>
         <svg width="100%" height="134" viewBox="0 0 340 134">
           <circle cx="92" cy="54" r="40" fill="rgba(0,196,160,.16)" stroke="#00C4A0" stroke-width="1.3"/><text x="92" y="52" text-anchor="middle" style="font-size:8.5px;fill:var(--t1);font-weight:700">Foodie families</text><text x="92" y="65" text-anchor="middle" class="axis">38%</text>
@@ -1120,13 +1143,14 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
           <circle cx="148" cy="106" r="25" fill="rgba(87,181,240,.16)" stroke="#57B5F0" stroke-width="1.3"/><text x="148" y="105" text-anchor="middle" style="font-size:7.5px;fill:var(--t1);font-weight:700">Students</text><text x="148" y="115" text-anchor="middle" class="axis">21%</text>
           <circle cx="280" cy="104" r="22" fill="rgba(255,194,75,.16)" stroke="#FFC24B" stroke-width="1.3"/><text x="280" y="103" text-anchor="middle" style="font-size:7.5px;fill:var(--t1);font-weight:700">Weekend</text><text x="280" y="113" text-anchor="middle" class="axis">15%</text>
         </svg>
-        <div class="chart-note"><b>Read:</b> four tribes, de-identified. Night snackers are why Munchies exists.</div>
+        <div class="chart-note">four tribes, de-identified. Night snackers are why Munchies exists.</div>
       </div>
+      <div class="mini-label" style="margin-top:4px">AI activity</div>
       <div class="dcard"><h5>AI activity <b>overnight</b></h5>
         <div class="logrow"><span class="lt">07:02</span><span>Briefing compiled, 5 pages</span><span class="ls" style="background:rgba(0,196,160,.12);color:var(--act)">done</span></div>
         <div class="logrow"><span class="lt">03:41</span><span>Shorts cluster flagged, reply drafted</span><span class="ls" style="background:rgba(255,194,75,.14);color:var(--gold)">waiting</span></div>
         <div class="logrow"><span class="lt">01:12</span><span>1,240 comments read, 2 flagged</span><span class="ls" style="background:rgba(0,196,160,.12);color:var(--act)">done</span></div>
-        <div class="chart-note"><b>Read:</b> every action logged and reversible. Nothing posts without you.</div>
+        <div class="chart-note">every action logged and reversible. Nothing posts without you.</div>
       </div>
       <div class="dcard"><h5>Comments that need a look <b>2</b></h5>
         <div class="sigrow" style="border-top:none"><span style="font-family:var(--mono);font-size:9px;color:var(--rose)">0.89</span><span style="flex:1">"this recipe is a scam, nothing like the thumbnail"</span><button class="ckbtn" onclick="hideSheets();nav('arte');arteExplain('crisis')">Reply</button></div>
@@ -1141,6 +1165,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       </div>
     </div>
     <div id="mdOv">
+    <div class="mini-label">Performance</div>
     <div class="dcard"><h5>Best times <b>peak Tue 6:40pm</b></h5>
       <div style="display:flex;gap:7px;margin-top:2px">
         <button class="chip" style="margin:0" onclick="hideSheets();show('compose');setTimeIdx(0)">Today 6:40pm &middot; 2.4x</button>
@@ -1152,15 +1177,16 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     <div class="dcard"><h5>Engaged followers by hour <b>May vs July</b></h5>
       <svg width="100%" height="108" viewBox="0 0 340 70" preserveAspectRatio="none"><path d="M0,46 C40,36 75,16 115,21 C155,27 195,54 250,57 C290,59 320,56 340,54" fill="none" stroke="#3A4557" stroke-width="2" stroke-dasharray="4 4"/><path d="M0,57 C55,57 115,53 170,46 C220,40 255,19 290,12 C310,8 328,10 340,11" fill="none" stroke="#8B7BFF" stroke-width="2.5"/><circle cx="290" cy="12" r="3.5" fill="#8B7BFF"/></svg>
       <div class="legend"><span><span class="sw" style="background:rgba(0,196,160,.14)"></span>quiet</span><span><span class="sw" style="background:rgba(0,196,160,.5)"></span>good</span><span><span class="sw" style="background:rgba(0,196,160,.95)"></span>your window</span></div>
-      <div class="chart-note"><b>Read:</b> darker means your people are there. Post inside the dark blocks.</div>
+      <div class="chart-note">darker means your people are there. Post inside the dark blocks.</div>
     </div>
+    <div class="mini-label" style="margin-top:4px">Audience</div>
     <div class="dcard"><h5>Your five pages <b>reach</b></h5>
       <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:5px"></span>Kitchen</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">128k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:96%;border-radius:99px;background:#00C4A0"></i></div></div>
       <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:5px"></span>Quick Bites</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">64k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:48%;border-radius:99px;background:#57B5F0"></i></div></div>
       <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:5px"></span>Munchies</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">41k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:31%;border-radius:99px;background:#8B7BFF"></i></div></div>
       <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FFC24B;display:inline-block;margin-right:5px"></span>Feasts</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">38k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:29%;border-radius:99px;background:#FFC24B"></i></div></div>
       <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FF5C74;display:inline-block;margin-right:5px"></span>Shorts</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">22k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:17%;border-radius:99px;background:#FF5C74"></i></div></div>
-      <div class="chart-note"><b>Read:</b> Kitchen carries the network. Feasts is the one to watch.</div>
+      <div class="chart-note">Kitchen carries the network. Feasts is the one to watch.</div>
     </div>
     <div class="dcard"><h5>Comment sentiment <b>this week</b></h5>
       <div class="donut-wrap">
@@ -1178,7 +1204,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
           <div><span class="sw" style="background:#FF5C74"></span>Negative 8%</div>
         </div>
       </div>
-      <div class="chart-note"><b>Read:</b> healthy. Negativity 0.14, well under the 0.3 line.</div></div>
+      <div class="chart-note">healthy. Negativity 0.14, well under the 0.3 line.</div></div>
     <div class="dcard"><h5>Reach <span style="display:inline-flex;gap:5px;margin-left:6px"><button class="rpill" style="font-size:9px;font-weight:700;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 8px" onclick="setRangeM(this,7)">7d</button><button class="rpill on" style="font-size:9px;font-weight:700;color:var(--act);border:1px solid rgba(0,196,160,.4);border-radius:99px;padding:2px 8px;background:rgba(0,196,160,.07)" onclick="setRangeM(this,14)">14d</button><button class="rpill" style="font-size:9px;font-weight:700;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 8px" onclick="setRangeM(this,30)">30d</button></span><b>Sana's Kitchen</b></h5>
       <svg width="100%" height="150" viewBox="0 0 340 150" preserveAspectRatio="none">
         <defs><linearGradient id="rfm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00C4A0" stop-opacity=".26"/><stop offset="1" stop-color="#00C4A0" stop-opacity="0"/></linearGradient></defs>
@@ -1188,7 +1214,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <text class="peaktag axis" x="282" y="16" fill="#00C4A0" style="font-weight:700">Tue peak</text>
         <text class="axis" x="32" y="146">14d ago</text><text class="axis" x="302" y="146">today</text>
       </svg>
-      <div class="chart-note"><b>Read:</b> higher line, more people saw you. The climb is the pasta reel.</div>
+      <div class="chart-note">higher line, more people saw you. The climb is the pasta reel.</div>
     </div>
     <div class="dcard"><h5>Engagement rate <b>8 weeks</b></h5>
       <svg width="100%" height="126" viewBox="0 0 340 126" preserveAspectRatio="none">
@@ -1197,7 +1223,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <circle cx="332" cy="32" r="3.6" fill="#07090D" stroke="#57B5F0" stroke-width="2"/>
         <text class="axis" x="26" y="122">8w ago</text><text class="axis" x="294" y="122">now</text>
       </svg>
-      <div class="chart-note"><b>Read:</b> pulling away from your own average. The evening shift did this.</div>
+      <div class="chart-note">pulling away from your own average. The evening shift did this.</div>
     </div>
     <div class="dcard"><h5>Follower growth <b>90 days</b></h5>
       <svg width="100%" height="126" viewBox="0 0 340 126" preserveAspectRatio="none">
@@ -1207,12 +1233,13 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <text class="peaktag axis" x="266" y="20" fill="#8B7BFF" style="font-weight:700">293k today</text>
         <text class="axis" x="26" y="122">April</text><text class="axis" x="302" y="122">now</text>
       </svg>
-      <div class="chart-note"><b>Read:</b> steeper since the timing change. 150k by 30 Sept is on track.</div></div>
+      <div class="chart-note">steeper since the timing change. 150k by 30 Sept is on track.</div></div>
+    <div class="mini-label" style="margin-top:4px">Content &amp; timing</div>
     <div class="dcard"><h5>Content mix that works <b>saves-weighted</b></h5>
       <div class="hbar" style="margin-bottom:9px"><div class="hl2" style="display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:4px"><span>&#127916; Reels</span><b style="font-family:var(--mono);font-size:10.5px;color:var(--t1)">46%</b></div><div style="height:13px;border-radius:99px;background:var(--surface2);overflow:hidden"><i style="display:block;height:100%;width:46%;border-radius:99px;background:linear-gradient(90deg,#00C4A0,#4DE3C6)"></i></div></div>
       <div class="hbar" style="margin-bottom:9px"><div class="hl2" style="display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:4px"><span>&#128444;&#65039; Carousels</span><b style="font-family:var(--mono);font-size:10.5px;color:var(--t1)">31%</b></div><div style="height:13px;border-radius:99px;background:var(--surface2);overflow:hidden"><i style="display:block;height:100%;width:31%;border-radius:99px;background:linear-gradient(90deg,#57B5F0,#8CCBF7)"></i></div></div>
       <div class="hbar" style="margin-bottom:0"><div class="hl2" style="display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:4px"><span>&#128247; Photos</span><b style="font-family:var(--mono);font-size:10.5px;color:var(--t1)">23%</b></div><div style="height:13px;border-radius:99px;background:var(--surface2);overflow:hidden"><i style="display:block;height:100%;width:23%;border-radius:99px;background:linear-gradient(90deg,#8B7BFF,#B4A6FF)"></i></div></div>
-      <div class="chart-note"><b>Read:</b> reels earn nearly half your saves. When in doubt, reel.</div></div>
+      <div class="chart-note">reels earn nearly half your saves. When in doubt, reel.</div></div>
     <div class="sigrow" style="border-top:none"><span>&#127941;</span><span><b>Top supporters:</b> 3 fans drive 11% of shares</span></div>
     <div class="sigrow"><span>&#9762;&#65039;</span><span><b>Comment negativity 0.14</b> &middot; calm, under the 0.3 line</span></div>
     <button class="chip" style="margin:4px 0 10px" onclick="hideSheets();nav('arte');askArteM('Why did my last post perform like that?')">&#10022; Why did my last post do well?</button>
@@ -1431,10 +1458,10 @@ const DECK=[
  {k:'plantplates',ini:'PP',c:'#00C4A0',n:'@PlantPlates',sub:'Veg swaps &middot; 44k &middot; Sundays',ovl:'24%',fol:'44k',est:'+5k',aud:66,tone:84,time:88,hrs:'Sun am',cap:'Sunday mornings, theirs and empty for you',posts:[['&#129388;','swaps'],['&#127807;','no-meat'],['&#129361;','bowls']],why:'<b>Sunday 9-11am</b> is theirs and empty for you. <b>+5k est.</b>',tags:['Sunday window']}];
 let deckIdx=0;
 function deckRender(){ const d=document.getElementById('deck'); if(!d) return; d.innerHTML='';
-  const rest=DECK.slice(deckIdx);
-  if(!rest.length){ d.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--t3);font-size:11.5px;gap:8px"><span style="font-size:26px">&#129309;</span>Deck cleared. New matches will alert you.</div>'; document.getElementById('deckCount').textContent=''; return; }
-  rest.slice(0,3).forEach((m,x)=>{ const pct=parseInt(m.ovl); const R=33, C=2*Math.PI*R;
-  d.insertAdjacentHTML('beforeend', `<div class="pcard" data-pos="${x}" style="z-index:${9-x};background:linear-gradient(165deg, ${m.c} 0%, ${m.c}88 34%, #0B0E14 82%)">
+  if(!DECK.length){ d.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--t3);font-size:11.5px;gap:8px"><span style="font-size:26px">&#129309;</span>Deck cleared. New matches will alert you.</div>'; document.getElementById('deckCount').textContent=''; return; }
+  deckIdx=Math.max(0,Math.min(deckIdx,DECK.length-1));
+  [deckIdx-1,deckIdx,deckIdx+1].forEach((di)=>{ if(di<0||di>=DECK.length) return; const m=DECK[di]; const cls=di===deckIdx?'cur':(di<deckIdx?'prev':'next'); const pct=parseInt(m.ovl); const R=33, C=2*Math.PI*R;
+  d.insertAdjacentHTML('beforeend', `<div class="pcard ${cls}" data-pos="${di===deckIdx?0:9}" style="--hc:${m.c};background:linear-gradient(165deg, ${m.c} 0%, ${m.c}88 34%, #0B0E14 82%)">
     <div class="pd-top">
       <span class="pring"><svg width="72" height="72" viewBox="0 0 72 72"><circle cx="36" cy="36" r="33" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="3.5"/><circle cx="36" cy="36" r="33" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="${C*pct/100} ${C}" transform="rotate(-90 36 36)"/></svg><span class="pav-big" style="background:rgba(255,255,255,.16);color:#fff">${m.ini}<span class="pv2">&#10003;</span></span></span>
       <div class="pn3">${m.n}</div><div class="ps3">${m.sub}</div>
@@ -1449,13 +1476,23 @@ function deckRender(){ const d=document.getElementById('deck'); if(!d) return; d
       <div class="tprow" style="margin-bottom:0">${m.posts.map(p=>'<span class="tpost">'+p[0]+'<small>'+p[1]+'</small></span>').join('')}</div>
       <div class="pstats" style="margin:8px 0 0"><div class="pstat"><b>${m.fol}</b><span>followers</span></div><div class="pstat hot"><b>${m.est}</b><span>est.</span></div><div class="pstat"><b>${m.hrs}</b><span>peak</span></div></div>
     </div></div>`); });
+  d.insertAdjacentHTML('beforeend','<button class="dnav l" onclick="goDeck(-1)" aria-label="Prev"></button><button class="dnav r" onclick="goDeck(1)" aria-label="Next"></button>');
   const g=document.getElementById('deckGlow')||d.insertAdjacentElement('afterbegin',Object.assign(document.createElement('div'),{className:'deck-glow',id:'deckGlow'}));
   const topc=DECK[deckIdx]; if(topc&&g) g.style.background=`radial-gradient(60% 55% at 50% 28%, ${topc.c}, transparent 70%)`;
-  document.getElementById('deckCount').innerHTML='<span class="deck-dots">'+DECK.map((_,x)=>'<i class="'+(x===deckIdx?'on':'')+'"></i>').join('')+'</span>'; }
-function deckPass(){ const top=document.querySelector('.pcard[data-pos="0"]'); if(!top) return; top.classList.add('fly'); toast('Passed. This one stays gone.'); setTimeout(()=>{deckIdx++; deckRender();},330); }
-function deckSave(){ toast('Saved for later.'); deckIdx++; deckRender(); }
+  initDeckSwipe();
+  document.getElementById('deckCount').innerHTML='<span class="deck-dots">'+DECK.map((_,x)=>'<i class="'+(x===deckIdx?'on':'')+'"></i>').join('')+'</span>'; const hint=document.querySelector('.swipe-hint'); if(hint) hint.style.display=DECK.length>1?'':'none'; }
+function goDeck(d){ if(!DECK.length) return; const n=deckIdx+d; if(n<0||n>=DECK.length) return; deckIdx=n; deckRender(); }
+function initDeckSwipe(){ const dk=document.getElementById('deck'); if(!dk||dk.dataset.sw) return; dk.dataset.sw=1;
+  let sx=0, cur=null, dx=0;
+  dk.addEventListener('pointerdown',e=>{ cur=dk.querySelector('.pcard.cur'); if(!cur){return;} sx=e.clientX; dx=0; cur.classList.add('dragging'); dk.setPointerCapture(e.pointerId); });
+  dk.addEventListener('pointermove',e=>{ if(!cur) return; dx=e.clientX-sx; cur.style.transform=`translateX(calc(-50% + ${dx}px)) rotate(${dx*0.035}deg)`; });
+  const up=e=>{ if(!cur) return; cur.classList.remove('dragging'); cur.style.transform=''; if(dx<-60) goDeck(1); else if(dx>60) goDeck(-1); cur=null; };
+  dk.addEventListener('pointerup',up); dk.addEventListener('pointercancel',up);
+}
+function deckPass(){ const top=document.querySelector('.pcard.cur'); if(!top) return; top.classList.add('fly'); toast('Passed. This one stays gone.'); setTimeout(()=>{DECK.splice(deckIdx,1); deckRender();},380); }
+function deckSave(){ toast('Saved for later.'); goDeck(1); }
 function deckDetails(){ const m=DECK[deckIdx]; if(m){ fillMD(m.k); show('disco'); } }
-function deckCollab(){ const m=DECK[deckIdx]; if(!m) return; if(m.k==='homecooked'){ toast('Intro sent. Maya replies fast.'); setTimeout(()=>openChatM(),650);} else { toast('Intro drafted and sent. Replies land in the Inbox.'); deckIdx++; deckRender(); } }
+function deckCollab(){ const m=DECK[deckIdx]; if(!m) return; if(m.k==='homecooked'){ toast('Intro sent. Maya replies fast.'); setTimeout(()=>openChatM(),650);} else { toast('Intro drafted and sent. Replies land in the Inbox.'); DECK.splice(deckIdx,1); deckRender(); } }
 function discTab(btn,t){ [...btn.parentElement.children].forEach(x=>x.classList.toggle('on',x===btn));
   ['others','mine','x'].forEach(k=>{ document.getElementById('dsc-'+k).style.display=(k===t)?'':'none'; });
   if(t==='others') deckRender(); }
