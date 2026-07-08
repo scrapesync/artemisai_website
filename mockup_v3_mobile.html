@@ -10,7 +10,7 @@
 <style>
 :root{
   --bg:#07090D; --shell:#0B0E14; --surface:#10141B; --surface2:#161C26; --line:#232B38;
-  --t1:#F2F4F8; --t2:#9AA3B2; --t3:#76829B;
+  --t1:#F2F4F8; --t2:#9AA3B2; --t3:#7D8598;--actInk:#5FDCC2;
   --act:#00C4A0; --arte:#8B7BFF; --gold:#FFC24B; --rose:#FF5C74; --sky:#57B5F0;
   --disp:'Bricolage Grotesque','Outfit',system-ui,sans-serif;
   --body:'Outfit',system-ui,-apple-system,sans-serif;
@@ -199,7 +199,7 @@ input,textarea{font-family:var(--body)}
 .gauge svg{transform:rotate(-90deg)}
 .gauge .gv{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .gauge .gn{font-family:var(--disp);font-size:22px;font-weight:800;line-height:1}
-.gauge .gl{font-size:8px;color:var(--t3);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.gauge .gl{font-size:9px;color:var(--t3);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
 .score-read{flex:1}
 .score-read .sr1{font-size:13.5px;font-weight:700;line-height:1.4}
 .score-read .sr2{font-size:11.5px;color:var(--t2);line-height:1.5;margin-top:4px}
@@ -248,7 +248,7 @@ body.light .sv-bars i{background:rgba(18,26,40,.14)}
 body.light .sv-bars i::after{background:#12161F}
 
 /* header redesign */
-.newpill{display:flex;align-items:center;gap:5px;background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0) 42%), linear-gradient(135deg,#00d4aa,#00a88a);color:#04352B;font-weight:800;font-size:12px;border-radius:99px;padding:8px 13px 8px 10px;box-shadow:0 6px 16px -8px rgba(0,196,160,.55)}
+.newpill{display:flex;align-items:center;gap:5px;background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0) 42%), linear-gradient(135deg,#00d4aa,#00a88a);color:var(--actInk);font-weight:800;font-size:12px;border-radius:99px;padding:8px 13px 8px 10px;box-shadow:0 6px 16px -8px rgba(0,196,160,.55)}
 .hbtn-lg{width:38px;height:38px}
 .nav .nav-item{font-size:9.5px;min-width:56px}
 .nav-launch{color:var(--t3)}
@@ -314,7 +314,7 @@ body.light .sv-bars i::after{background:#12161F}
 #mdOv .dcard,#mdAdv .dcard,#mdPhoto .dcard{background:transparent;border:none;box-shadow:none;border-radius:0;padding:2px 0 18px;border-bottom:1px solid var(--line)}
 #mdOv .dcard>h5,#mdAdv .dcard>h5,#mdPhoto .dcard>h5{font-size:13px;margin-bottom:11px}
 .dcard>h5{display:flex;align-items:center;gap:8px}
-.dcard>h5 b{margin-left:auto;font-size:8px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--t3);background:var(--surface2);border:1px solid var(--line);padding:3px 8px;border-radius:99px;font-family:var(--sans)}
+.dcard>h5 b{margin-left:auto;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--t3);background:var(--surface2);border:1px solid var(--line);padding:3px 8px;border-radius:99px;font-family:var(--sans)}
 /* dashboard + disc v3 m */
 .donut-wrap{display:flex;align-items:center;gap:14px}
 .dleg{font-size:10.5px;color:var(--t2);line-height:1.9}
@@ -331,8 +331,8 @@ body.light .sv-bars i::after{background:#12161F}
 .shap .st i{position:absolute;top:0;bottom:0;left:50%;border-radius:99px}
 .logrow{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line);font-size:10.5px}
 .logrow:first-of-type{border-top:none}
-.logrow .lt{font-family:var(--mono);font-size:8px;color:var(--t3);min-width:44px}
-.logrow .ls{margin-left:auto;font-size:8px;font-weight:800;padding:2px 7px;border-radius:99px}
+.logrow .lt{font-family:var(--mono);font-size:9px;color:var(--t3);min-width:44px}
+.logrow .ls{margin-left:auto;font-size:9px;font-weight:800;padding:2px 7px;border-radius:99px}
 
 .deck-glow{position:absolute;inset:-24px -32px;border-radius:36px;filter:blur(34px);opacity:.22;pointer-events:none;transition:background .4s}
 .pcard{padding:0;overflow:hidden;border-radius:22px}
@@ -340,21 +340,21 @@ body.light .sv-bars i::after{background:#12161F}
 .pcard .pcover::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(7,9,13,0) 30%, rgba(13,16,22,.55))}
 .pid{position:absolute;top:70px;left:15px;right:15px;display:flex;align-items:center;gap:10px;z-index:2}
 .pid .pav-big{width:46px;height:46px;border-radius:15px;margin:0;border:2.5px solid rgba(255,255,255,.85);font-size:17px;position:relative}
-.pid .pv2{position:absolute;right:-4px;bottom:-4px;width:15px;height:15px;border-radius:50%;background:var(--act);color:#04352B;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.pid .pv2{position:absolute;right:-4px;bottom:-4px;width:15px;height:15px;border-radius:50%;background:var(--act);color:var(--actInk);font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
 .pid .pn2{color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)}
 .pid .pn2 b{font-family:var(--disp);font-size:15.5px;font-weight:800;display:block}
 .pid .pn2 span{font-size:9px;opacity:.9}
 .mring{position:absolute;top:11px;right:12px;z-index:2;text-align:center}
-.mring small{font-size:6.5px;font-weight:800;letter-spacing:.6px;color:#fff;opacity:.85;text-transform:uppercase}
+.mring small{font-size:9px;font-weight:800;letter-spacing:.6px;color:#fff;opacity:.85;text-transform:uppercase}
 .pbody{margin-top:130px;padding:0 15px 14px;display:flex;flex-direction:column;flex:1}
 .cb{margin-bottom:7px}
 .cb .cl{display:flex;justify-content:space-between;font-size:9px;color:var(--t3);margin-bottom:2px}
-.cb .cl b{font-family:var(--mono);font-size:8px;color:var(--t2)}
+.cb .cl b{font-family:var(--mono);font-size:9px;color:var(--t2)}
 .cb .ct{height:5px;border-radius:99px;background:var(--surface2);overflow:hidden}
 .cb .ct i{display:block;height:100%;border-radius:99px}
 .tprow{display:flex;gap:6px;margin:3px 0 9px}
 .tpost{flex:1;background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:7px 4px;text-align:center;font-size:15px}
-.tpost small{display:block;font-size:6.5px;color:var(--t3);margin-top:2px;font-weight:700}
+.tpost small{display:block;font-size:9px;color:var(--t3);margin-top:2px;font-weight:700}
 .dact{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 body.light .dact{background:rgba(255,255,255,.75)}
 .venn text{font-family:var(--mono);font-weight:800}
@@ -366,34 +366,34 @@ body.light .dact{background:rgba(255,255,255,.75)}
 .legend{display:flex;gap:9px;align-items:center;font-size:9.5px;color:var(--t3);margin-top:7px;flex-wrap:wrap}
 .legend .sw{width:12px;height:8px;border-radius:3px;display:inline-block;margin-right:4px;vertical-align:-1px}
 .cal{display:grid;grid-template-columns:34px repeat(7,1fr);gap:3px;margin-bottom:7px}
-.cal-h{font-size:8px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--t3);text-align:center;padding:2px 0}
+.cal-h{font-size:9px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--t3);text-align:center;padding:2px 0}
 .cal-h.today{color:var(--act)}
-.cal-r{font-size:7.5px;font-weight:700;color:var(--t3);display:flex;align-items:center;justify-content:flex-end;padding-right:4px;text-transform:uppercase}
+.cal-r{font-size:9px;font-weight:700;color:var(--t3);display:flex;align-items:center;justify-content:flex-end;padding-right:4px;text-transform:uppercase}
 .cal-c{background:var(--surface2);border-radius:7px;min-height:44px;position:relative;border:1px solid transparent}
 .cal-c.today{border-color:rgba(0,196,160,.3);background:rgba(0,196,160,.06)}
-.cal-w{position:absolute;inset:3px;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:8.5px;color:#04352B;background:linear-gradient(135deg,#00d4aa,#00a88a)}
-.cal-w span{font-family:var(--mono);font-size:6.5px;opacity:.85}
+.cal-w{position:absolute;inset:3px;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:9.5px;color:var(--actInk);background:linear-gradient(135deg,#00d4aa,#00a88a)}
+.cal-w span{font-family:var(--mono);font-size:9px;opacity:.85}
 .cal-w.soft{background:rgba(0,196,160,.16);color:var(--act);border:1px dashed rgba(0,196,160,.45)}
-.cal-ev{position:absolute;left:3px;right:3px;bottom:3px;border-radius:5px;background:rgba(139,123,255,.16);border:1px solid rgba(139,123,255,.45);color:var(--arte);font-size:6.5px;font-weight:800;padding:2px 3px}
+.cal-ev{position:absolute;left:3px;right:3px;bottom:3px;border-radius:5px;background:rgba(139,123,255,.16);border:1px solid rgba(139,123,255,.45);color:var(--arte);font-size:9px;font-weight:800;padding:2px 3px}
 body.light .cal-c{background:#EDF1F9}
 /* pro deck m */
 .deck::before{content:'';position:absolute;inset:-18px -26px;background:radial-gradient(240px 160px at 50% 16%, rgba(139,123,255,.14), transparent 65%);pointer-events:none;filter:blur(4px)}
 .pcover{position:absolute;top:0;left:0;right:0;height:64px;border-radius:20px 20px 0 0;opacity:.9}
 .pcard{padding-top:0;overflow:hidden}
 .pcard .pav-big{margin:32px 0 8px;border:2.5px solid var(--surface);position:relative}
-.pcard .pverif{position:absolute;top:38px;left:60px;width:15px;height:15px;border-radius:50%;background:var(--act);color:#04352B;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface)}
+.pcard .pverif{position:absolute;top:38px;left:60px;width:15px;height:15px;border-radius:50%;background:var(--act);color:var(--actInk);font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface)}
 .pstats{display:flex;gap:6px;margin:0 0 10px}
 .pstat{flex:1;background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:6px 4px;text-align:center}
 .pstat b{display:block;font-family:var(--disp);font-size:12.5px;font-weight:800}
-.pstat span{font-size:6.5px;color:var(--t3);letter-spacing:.4px;text-transform:uppercase}
+.pstat span{font-size:9px;color:var(--t3);letter-spacing:.4px;text-transform:uppercase}
 .pstat.hot b{color:var(--arte)}
 .dact-l{display:flex;flex-direction:column;align-items:center;gap:4px}
-.dact-l small{font-size:8px;font-weight:700;color:var(--t3)}
+.dact-l small{font-size:9px;font-weight:700;color:var(--t3)}
 .deck-dots{display:flex;gap:5px;justify-content:center}
 .deck-dots i{width:5px;height:5px;border-radius:50%;background:var(--line);transition:.2s}
 .deck-dots i.on{width:15px;border-radius:99px;background:var(--arte)}
 .xbadge.ig{color:#fff;background:linear-gradient(45deg,#F58529,#DD2A7B 55%,#8134AF);border:none}
-.prev-tag{position:absolute;top:9px;right:9px;font-size:7px;font-weight:900;letter-spacing:.8px;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 6px;background:var(--surface)}
+.prev-tag{position:absolute;top:9px;right:9px;font-size:9px;font-weight:900;letter-spacing:.8px;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 6px;background:var(--surface)}
 
 /* studio + deck mobile */
 .deck{position:relative;height:352px;margin:2px 0 12px}
@@ -406,7 +406,7 @@ body.light .cal-c{background:#EDF1F9}
 .pcard .psub{font-size:10.5px;color:var(--t3);margin:2px 0 10px}
 .pcard .pbig{position:absolute;top:16px;right:18px;text-align:right}
 .pcard .pbig b{font-family:var(--disp);font-size:26px;font-weight:800;color:var(--arte);letter-spacing:-1px}
-.pcard .pbig span{display:block;font-size:8px;color:var(--t3);letter-spacing:.8px;text-transform:uppercase}
+.pcard .pbig span{display:block;font-size:9px;color:var(--t3);letter-spacing:.8px;text-transform:uppercase}
 .pcard .pwhy{font-size:11.5px;color:var(--t2);line-height:1.6;flex:1}
 .pcard .pwhy b{color:var(--t1)}
 .pcard .ptags{display:flex;gap:6px;flex-wrap:wrap}
@@ -415,7 +415,7 @@ body.light .cal-c{background:#EDF1F9}
 .dact{width:48px;height:48px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:17px}
 .dact.pass{color:var(--rose);border-color:rgba(255,92,116,.4)}
 .dact.save{color:var(--gold);border-color:rgba(255,194,75,.4)}
-.dact.collab{width:auto;border-radius:99px;padding:0 20px;background:linear-gradient(135deg,#00d4aa,#00a88a);color:#04352B;font-weight:800;font-size:12.5px;gap:7px;border:none}
+.dact.collab{width:auto;border-radius:99px;padding:0 20px;background:linear-gradient(135deg,#00d4aa,#00a88a);color:var(--actInk);font-weight:800;font-size:12.5px;gap:7px;border:none}
 .deck-count{text-align:center;font-family:var(--mono);font-size:9px;color:var(--t3);margin-bottom:12px}
 .dtabs{display:flex;gap:5px;margin:0 0 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;width:fit-content}
 .dtab{padding:7px 11px;border-radius:8px;font-size:10.5px;font-weight:700;color:var(--t3)}
@@ -433,7 +433,7 @@ body.light .cal-c{background:#EDF1F9}
 .win-row .wtime{font-family:var(--disp);font-weight:800;font-size:12.5px;min-width:78px}
 .win-row .wbar{flex:1;height:7px;border-radius:99px;background:var(--surface2);overflow:hidden}
 .win-row .wbar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#00C4A0,#57B5F0)}
-.win-row .wmono{font-family:var(--mono);font-size:8.5px;color:var(--act)}
+.win-row .wmono{font-family:var(--mono);font-size:9.5px;color:var(--act)}
 
 /* rhythm pass mobile */
 .mini-label{font-size:9.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--t3);margin:0 0 7px}
@@ -519,7 +519,7 @@ html{scroll-behavior:smooth}
 .prow{display:flex;align-items:center;gap:9px;padding:8px 4px;border-bottom:1px solid var(--line)}
 .prow .pn{font-size:12px;font-weight:600}
 .prow .pd{font-size:10px;color:var(--t3);margin-top:1px;line-height:1.35}
-.pstage{margin-left:auto;flex-shrink:0;font-size:7.5px;font-weight:800;letter-spacing:.5px;padding:2.5px 7px;border-radius:99px}
+.pstage{margin-left:auto;flex-shrink:0;font-size:9px;font-weight:800;letter-spacing:.5px;padding:2.5px 7px;border-radius:99px}
 .pstage.mvp{color:#052019;background:var(--act)}
 .pstage.fast{color:#241500;background:var(--gold)}
 .pstage.later{color:#17102E;background:var(--arte)}
@@ -570,7 +570,7 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
 .brief-card .bt2{font-size:11px;color:var(--t2);margin-top:2px}
 .brief-card .bnum{margin-left:auto;text-align:right}
 .brief-card .bnum b{display:block;font-family:var(--disp);font-size:15px;font-weight:800}
-.brief-card .bnum span{font-size:8.5px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase}
+.brief-card .bnum span{font-size:9.5px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase}
 .ctag.crisis{color:var(--rose);background:rgba(255,92,116,.09);border:1px solid rgba(255,92,116,.3)}
 .card.crisis-card{background:linear-gradient(150deg, rgba(255,92,116,.06), var(--surface) 55%);border-color:rgba(255,92,116,.35)}
 .value-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
@@ -584,13 +584,13 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
 .timepills{display:flex;gap:7px;margin-bottom:14px}
 .tpill{flex:1;border:1px solid var(--line);background:var(--surface);border-radius:11px;padding:9px 5px;text-align:center}
 .tpill b{display:block;font-size:11px;font-weight:700}
-.tpill span{font-family:var(--mono);font-size:8.5px;color:var(--t3)}
+.tpill span{font-family:var(--mono);font-size:9.5px;color:var(--t3)}
 .tpill.on{border-color:rgba(0,196,160,.5);background:rgba(0,196,160,.07)}
 .tpill.on span{color:var(--act)}
 .mrow{display:flex;align-items:center;gap:11px}
 .mrow .ovl{margin-left:auto;text-align:right}
 .mrow .ovl b{font-family:var(--disp);font-size:16px;font-weight:800;color:var(--arte)}
-.mrow .ovl span{display:block;font-size:8.5px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px}
+.mrow .ovl span{display:block;font-size:9.5px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px}
 
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
 
@@ -612,13 +612,13 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
 .vband{display:flex;gap:8px;margin-bottom:11px}
 .vb{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 6px;text-align:center}
 .vb .vn{font-family:var(--disp);font-size:15px;font-weight:800;color:var(--gold);letter-spacing:-.3px}
-.vb .vl{font-size:8.5px;color:var(--t2);margin-top:2px;line-height:1.3}
+.vb .vl{font-size:9.5px;color:var(--t2);margin-top:2px;line-height:1.3}
 .dchips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px}
 .dchip{font-size:11px;font-weight:600;color:var(--t2);background:var(--surface);border:1px solid var(--line);padding:7px 11px;border-radius:11px;display:inline-flex;gap:7px;align-items:center}
 .dchip b{font-family:var(--mono);font-size:9.5px;color:var(--act);font-weight:600}
 
 /* light legibility overrides (must cascade last) */
-body.light{--t3:#5F6B7E; --rose:#D42A4C; --arte:#5B45D9; --bg:#F1F3FA; --surface:#FBFCFF; --surface2:#E9EDF8; --line:#E0E5F2}
+body.light{--t3:#5C636E;--actInk:#006E5A; --rose:#BB2543; --arte:#5B45D9; --act:#006E5A; --sky:#316586; --gold:#7A5D24; --bg:#F1F3FA; --surface:#FBFCFF; --surface2:#E9EDF8; --line:#E0E5F2}
 body.light .screen{background:
   radial-gradient(340px 260px at 8% -2%, rgba(0,196,160,.11), transparent 60%),
   radial-gradient(380px 300px at 100% 8%, rgba(139,123,255,.11), transparent 62%),
@@ -663,12 +663,12 @@ body.light .wschip{background:#FFFFFF;border-color:#DFE6EF}
 body.light .hero::before{background:radial-gradient(circle, rgba(0,150,122,.10), transparent 62%)}
 body.light .pstage.later{color:#FFFFFF}
 body.light .card-act{color:#5B45D9}
-body.light .card-act.goldc{color:#8A6100}
+body.light .card-act.goldc{color:var(--gold)}
 body.light .ai-cta{color:#5B45D9}
 body.light .arec b{color:#5B45D9}
 body.light .story b,body.light .tpill.on span,body.light .sched-row .mono,body.light .moves-h span,body.light .dchip b,body.light .setup-pill .mono{color:#00705A}
 body.light .hl{color:#00705A}
-body.light .milestone .mtx b{color:#8A6100}
+body.light .milestone .mtx b{color:var(--gold)}
 body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,125,99,.3)}
 
 /* swipe mode + final de-widget m */
@@ -692,17 +692,17 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
 .tc-id span{font-size:9.5px;color:var(--t2);display:block;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tc-big{text-align:right;flex:0 0 auto}
 .tc-big b{font-family:var(--disp);font-size:27px;font-weight:800;letter-spacing:-1.2px;line-height:.95}
-.tc-big small{display:block;font-size:6.5px;letter-spacing:.8px;color:var(--t3);font-weight:800;margin-top:2px;text-transform:uppercase}
+.tc-big small{display:block;font-size:9px;letter-spacing:.8px;color:var(--t3);font-weight:800;margin-top:2px;text-transform:uppercase}
 .tc-why{font-size:10.5px;color:var(--t2);line-height:1.55;margin:11px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .tc-meters{display:flex;justify-content:space-between;margin:12px 0 0}
-.tc-foot{font-size:8.5px;color:var(--t3);margin:10px 0 0}
+.tc-foot{font-size:9.5px;color:var(--t3);margin:10px 0 0}
 .tc-foot b{color:var(--t2);font-family:var(--mono);font-weight:700}
 .tc-cta{display:flex;gap:7px;margin:10px 0 0}
 .swacts{display:flex;gap:12px;justify-content:center;align-items:center;margin:12px 0 0}
 .swb{width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--line);font-size:15px;display:flex;align-items:center;justify-content:center;color:var(--t2)}
 .swb.go{width:auto;height:44px;padding:0 20px;border-radius:99px;font-size:11.5px;font-weight:800;background:var(--t1);color:#0B0E14;border:none}
 body.light .swb.go{background:#101828;color:#fff}
-.swhint{text-align:center;font-size:8.5px;color:var(--t3);margin-top:8px}
+.swhint{text-align:center;font-size:9.5px;color:var(--t3);margin-top:8px}
 .trust,.rule{background:transparent;border:none;border-radius:0;padding:12px 1px;margin:0;border-bottom:1px solid var(--line)}
 .brief-card{background:transparent;border:none;border-left:3px solid var(--arte);border-radius:0;padding:9px 0 9px 12px;margin-bottom:13px;border-bottom:1px solid var(--line)}
 body.light .brief-card{background:transparent}
@@ -719,16 +719,16 @@ body.light .milestone{background:transparent}
 .spot-top{display:flex;align-items:center;gap:12px}
 .spot-ring{position:relative;width:58px;height:58px;flex:0 0 auto}
 .spot-ring svg{position:absolute;inset:0}
-.spot-av{position:absolute;inset:6px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;color:#fff;background:var(--sc)}
+.spot-av{position:absolute;inset:6px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:19px;color:#fff;background:var(--sc)}
 .spot-id{min-width:0;flex:1}
 .spot-id b{font-family:var(--disp);font-size:16.5px;letter-spacing:-.3px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .spot-id .ssub{font-size:10px;color:var(--t2);display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .spot-big{text-align:right;flex:0 0 auto}
 .spot-big b{font-family:var(--disp);font-size:34px;font-weight:800;letter-spacing:-1.6px;line-height:.95;color:var(--t1)}
-.spot-big small{display:block;font-size:7px;letter-spacing:.9px;color:var(--t3);font-weight:800;margin-top:3px;text-transform:uppercase}
+.spot-big small{display:block;font-size:9px;letter-spacing:.9px;color:var(--t3);font-weight:800;margin-top:3px;text-transform:uppercase}
 .spot-why{font-size:11.5px;color:var(--t2);line-height:1.6;margin:12px 0 0}
 .spot-meters{display:flex;justify-content:space-between;margin:13px 0 0}
-.smet{font-size:8px;color:var(--t3);font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.smet{font-size:9px;color:var(--t3);font-weight:800;letter-spacing:.5px;text-transform:uppercase}
 .smet b{display:block;font-family:var(--mono);font-size:12.5px;color:var(--t1);margin-bottom:4px}
 .smet .sb{display:block;width:78px;height:4px;border-radius:99px;background:var(--surface2);margin-top:5px}
 .smet .sb i{display:block;height:100%;border-radius:99px;background:var(--sc)}
@@ -747,7 +747,7 @@ body.light .sbtn.pri{background:#101828;color:#fff}
 .mrow .rav{width:32px;height:32px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff;background:var(--mc);box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--mc)}
 .mrow .rid{min-width:0;flex:1}
 .mrow .rid b{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mrow .rid b em{font-style:normal;color:var(--act);font-size:8.5px;font-weight:800;margin-left:6px}
+.mrow .rid b em{font-style:normal;color:var(--act);font-size:9.5px;font-weight:800;margin-left:6px}
 .mrow .rid span{font-size:9px;color:var(--t3);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
 .mrow .rbar{width:52px;height:4px;border-radius:99px;background:var(--surface2)}
 .mrow .rbar i{display:block;height:100%;border-radius:99px;background:var(--mc)}
@@ -757,8 +757,8 @@ body.light .sbtn.pri{background:#101828;color:#fff}
 .pipe{display:flex;gap:7px;margin:2px 0 10px}
 .pchip{flex:1;display:flex;flex-direction:column;align-items:flex-start;gap:1px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 10px;text-align:left}
 .pchip b{font-family:var(--disp);font-size:14px;font-weight:800}
-.pchip small{font-size:7.5px;color:var(--t3);font-weight:800;letter-spacing:.5px;text-transform:uppercase}
-.pchip .pwho{font-size:8.5px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.pchip small{font-size:9px;color:var(--t3);font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.pchip .pwho{font-size:9.5px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .pchip.hot{border-color:rgba(0,196,160,.4)}
 .qa2{position:absolute;top:10px;right:10px;display:flex;gap:6px;z-index:4}
 .qab{width:29px;height:29px;border-radius:50%;background:rgba(10,13,19,.35);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:11px;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center}
@@ -768,15 +768,15 @@ body.light .sbtn.pri{background:#101828;color:#fff}
 .dnm{color:#fff;min-width:0;flex:1}
 .dnm b{font-family:var(--disp);font-size:14.5px;font-weight:800;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dnm span{font-size:9px;opacity:.85;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fpill{margin-left:auto;white-space:nowrap;background:rgba(10,13,19,.35);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:4px 8px;font-size:8px;color:#fff;font-weight:700}
+.fpill{margin-left:auto;white-space:nowrap;background:rgba(10,13,19,.35);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:4px 8px;font-size:9px;color:#fff;font-weight:700}
 .hero2{padding:12px 14px 0;position:relative;z-index:2;color:#fff}
 .hero2 .bigpct{font-size:40px;margin:0;text-align:left}
 .hero2 .bigcap{max-width:none;text-align:left;margin-top:3px;font-size:9px}
 .mrings{display:flex;gap:8px;padding:12px 14px 0;position:relative;z-index:2}
 .mring2{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
-.mring2 small{font-size:7px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.mring2 small{font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.75)}
 .postchips{display:flex;gap:5px;padding:11px 12px 0;position:relative;z-index:2;flex-wrap:wrap}
-.postchips span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:99px;padding:4px 8px;font-size:8.5px;color:#fff;font-weight:600;white-space:nowrap}
+.postchips span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:99px;padding:4px 8px;font-size:9.5px;color:#fff;font-weight:600;white-space:nowrap}
 .mstat{display:flex;gap:12px;padding:10px 14px 0;position:relative;z-index:2;font-size:9px;color:rgba(255,255,255,.8)}
 .mstat b{color:#fff;font-family:var(--mono);font-size:9px}
 .cta2{display:flex;gap:8px;padding:12px 11px 12px;margin-top:auto;position:relative;z-index:2}
@@ -791,6 +791,17 @@ body.light .sbtn.pri{background:#101828;color:#fff}
 .pstripe{position:relative;padding-left:14px !important}
 .pstripe::before{content:'';position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:3px;background:linear-gradient(180deg,#F58529,#DD2A7B,#8134AF)}
 .pstripe.fbig::before{background:linear-gradient(180deg,#4599FF,#DD2A7B)}
+
+/* readability pass */
+.cal-ev{color:#B3A9FF !important}
+body.light .cal-ev{color:#4636B8 !important}
+.who{color:var(--t2) !important}
+body.light .subtab.on, body.light .newpost, body.light button.on{color:#06231C !important}
+body.light .xbadge{filter:none;color:#3D4B5E !important;background:rgba(61,75,94,.14) !important;border-color:rgba(61,75,94,.25) !important}
+body.light .arte-head, body.light .arte-head b, body.light .arte-head span{color:#AEB6C4}
+
+body.light .nav-item{color:#8E99AC}
+body.light .xbadge{filter:brightness(.62) saturate(1.35)}
 </style>
 </head>
 <body>
@@ -1044,7 +1055,7 @@ body.light .sbtn.pri{background:#101828;color:#fff}
     <div class="scroll" style="padding-top:70px">
       <h2 class="vh" style="margin-top:2px">Discover</h2>
       <div class="dpipe">
-        <span style="font-weight:800;letter-spacing:.5px;font-size:8.5px;text-transform:uppercase;color:var(--t3)">Pipeline</span>
+        <span style="font-weight:800;letter-spacing:.5px;font-size:9.5px;text-transform:uppercase;color:var(--t3)">Pipeline</span>
         <button onclick="pipeInfo('saved')"><b id="pipeSavedN">0</b> saved</button><span class="dot">&middot;</span>
         <button onclick="pipeInfo('intro')"><b id="pipeIntroN">0</b> intros</button><span class="dot">&middot;</span>
         <button onclick="pipeInfo('active')"><b id="pipeActiveN">0</b> active</button>
@@ -1064,19 +1075,19 @@ body.light .sbtn.pri{background:#101828;color:#fff}
       <div id="swhint" class="swhint" style="display:none">&#8592; pass &middot; drag &middot; save &#8594;</div>
       <div class="feed-label" style="margin-top:24px"><h3>Between your pages</h3></div>
       <button class="card" onclick="show('compose')">
-          <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#00C4A0" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#00C4A0" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#8B7BFF" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#8B7BFF" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:8.5px;fill:var(--t1)">46%</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#00C4A0"></span> Kitchen</span><span><span class="wd" style="background:#8B7BFF"></span> Munchies</span></span><span class="card-time" style="margin-left:auto">shared</span></div>
+          <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#00C4A0" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#00C4A0" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#8B7BFF" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#8B7BFF" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:9.5px;fill:var(--t1)">46%</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#00C4A0"></span> Kitchen</span><span><span class="wd" style="background:#8B7BFF"></span> Munchies</span></span><span class="card-time" style="margin-left:auto">shared</span></div>
           <div class="card-line">Night crowd has not seen the <b>pasta reel</b></div>
           <p class="card-why">46% shared audience, reels rarely cross. A 10pm repost is free reach.</p>
           <span class="card-act">Draft the repost &rarr;</span>
         </button>
         <button class="card" onclick="show('compose')">
-          <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#57B5F0" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#57B5F0" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#FFC24B" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#FFC24B" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:8.5px;fill:var(--t1)">1.4x</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#57B5F0"></span> Quick Bites</span><span><span class="wd" style="background:#FFC24B"></span> Feasts</span></span><span class="card-time" style="margin-left:auto">Sunday</span></div>
+          <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#57B5F0" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#57B5F0" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#FFC24B" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#FFC24B" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:9.5px;fill:var(--t1)">1.4x</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#57B5F0"></span> Quick Bites</span><span><span class="wd" style="background:#FFC24B"></span> Feasts</span></span><span class="card-time" style="margin-left:auto">Sunday</span></div>
           <div class="card-line">Your short format would lift <b>Feasts Sundays</b></div>
           <p class="card-why">Sunday crowd engages but gets long posts. One short is the experiment.</p>
           <span class="card-act">Draft it &rarr;</span>
         </button>
         <button class="card" onclick="nav('arte');arteExplain('collab')">
-          <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#FF5C74" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#FF5C74" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#00C4A0" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#00C4A0" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:8.5px;fill:var(--t1)">12%</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#FF5C74"></span> Shorts</span><span><span class="wd" style="background:#00C4A0"></span> Kitchen</span></span><span class="card-time" style="margin-left:auto">the gap</span></div>
+          <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#FF5C74" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#FF5C74" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#00C4A0" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#00C4A0" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:9.5px;fill:var(--t1)">12%</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#FF5C74"></span> Shorts</span><span><span class="wd" style="background:#00C4A0"></span> Kitchen</span></span><span class="card-time" style="margin-left:auto">the gap</span></div>
           <div class="card-line">Shorts viewers <b>rarely find</b> full recipes</div>
           <p class="card-why">A pinned comment on every short is the cheapest bridge you are not using.</p>
           <span class="card-act violet">Ask Art-E &rarr;</span>
@@ -1230,14 +1241,14 @@ body.light .sbtn.pri{background:#101828;color:#fff}
     <div id="mdPhoto" style="display:none">
       <div class="mini-label">Photos &amp; carousels</div>
       <div class="dcard"><h5>Carousels vs singles <b>saves</b></h5>
-        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span>&#128444;&#65039; Carousels</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--act)">212 avg</b></div><div style="height:11px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:92%;border-radius:99px;background:#00C4A0"></i></div></div>
-        <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span>&#128247; Singles</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">96 avg</b></div><div style="height:11px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:42%;border-radius:99px;background:#76829B"></i></div></div>
+        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span>&#128444;&#65039; Carousels</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--act)">212 avg</b></div><div style="height:11px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:92%;border-radius:99px;background:#00C4A0"></i></div></div>
+        <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span>&#128247; Singles</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">96 avg</b></div><div style="height:11px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:42%;border-radius:99px;background:#76829B"></i></div></div>
         <div class="chart-note">A carousel earns 2.2x the saves. The swipe is a commitment.</div>
       </div>
       <div class="dcard"><h5>What is in the frame <b>saves</b></h5>
-        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span>&#127858; Plated close-up</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">44%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:44%;border-radius:99px;background:#00C4A0"></i></div></div>
-        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span>&#128293; Process shot</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">33%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:33%;border-radius:99px;background:#57B5F0"></i></div></div>
-        <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span>&#129348; Flat lay</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">23%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:23%;border-radius:99px;background:#8B7BFF"></i></div></div>
+        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span>&#127858; Plated close-up</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">44%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:44%;border-radius:99px;background:#00C4A0"></i></div></div>
+        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span>&#128293; Process shot</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">33%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:33%;border-radius:99px;background:#57B5F0"></i></div></div>
+        <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span>&#129348; Flat lay</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">23%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:23%;border-radius:99px;background:#8B7BFF"></i></div></div>
         <div class="chart-note">People save the destination, not the map. Close-ups win.</div>
       </div>
       <div class="dcard"><h5>Photo posts, last 6 <b>vs forecast</b></h5>
@@ -1285,10 +1296,10 @@ body.light .sbtn.pri{background:#101828;color:#fff}
         <div class="chart-note">Whoever survives second three stays to the end. Hooks decide everything.</div>
       </div>
       <div class="dcard"><h5>Engagement by page <b>rate</b></h5>
-        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:5px"></span>Munchies</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">7.4%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:74%;border-radius:99px;background:#8B7BFF"></i></div></div>
-        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:5px"></span>Kitchen</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">6.8%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:68%;border-radius:99px;background:#00C4A0"></i></div></div>
-        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:5px"></span>Quick Bites</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">5.9%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:59%;border-radius:99px;background:#57B5F0"></i></div></div>
-        <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FFC24B;display:inline-block;margin-right:5px"></span>Feasts</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">3.1%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:31%;border-radius:99px;background:#FFC24B"></i></div></div>
+        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:5px"></span>Munchies</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">7.4%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:74%;border-radius:99px;background:#8B7BFF"></i></div></div>
+        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:5px"></span>Kitchen</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">6.8%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:68%;border-radius:99px;background:#00C4A0"></i></div></div>
+        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:5px"></span>Quick Bites</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">5.9%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:59%;border-radius:99px;background:#57B5F0"></i></div></div>
+        <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FFC24B;display:inline-block;margin-right:5px"></span>Feasts</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">3.1%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:31%;border-radius:99px;background:#FFC24B"></i></div></div>
         <div class="chart-note">Munchies has the smallest crowd and the loudest one.</div>
       </div>
       <div class="mini-label" style="margin-top:4px">Cascade &amp; reach</div>
@@ -1303,7 +1314,7 @@ body.light .sbtn.pri{background:#101828;color:#fff}
         <svg width="100%" height="118" viewBox="0 0 340 118">
           <line x1="170" y1="59" x2="92" y2="28" stroke="#3A4356" stroke-width="1.3"/><line x1="170" y1="59" x2="248" y2="26" stroke="#3A4356" stroke-width="1.3"/><line x1="170" y1="59" x2="84" y2="90" stroke="#3A4356" stroke-width="1.3"/><line x1="170" y1="59" x2="256" y2="92" stroke="#3A4356" stroke-width="1.3"/>
           <line x1="92" y1="28" x2="48" y2="12" stroke="#232B38" stroke-width="1"/><line x1="248" y1="26" x2="292" y2="10" stroke="#232B38" stroke-width="1"/><line x1="84" y1="90" x2="40" y2="106" stroke="#232B38" stroke-width="1"/><line x1="256" y1="92" x2="300" y2="108" stroke="#232B38" stroke-width="1"/>
-          <circle cx="170" cy="59" r="12" fill="rgba(0,196,160,.2)" stroke="#00C4A0" stroke-width="2"/><text x="170" y="63" text-anchor="middle" style="font-size:8px;fill:#00C4A0;font-weight:800">you</text>
+          <circle cx="170" cy="59" r="12" fill="rgba(0,196,160,.2)" stroke="#00C4A0" stroke-width="2"/><text x="170" y="63" text-anchor="middle" style="font-size:9px;fill:#00C4A0;font-weight:800">you</text>
           <circle cx="92" cy="28" r="7" fill="rgba(139,123,255,.25)" stroke="#8B7BFF" stroke-width="1.6"/><circle cx="248" cy="26" r="7" fill="rgba(139,123,255,.25)" stroke="#8B7BFF" stroke-width="1.6"/><circle cx="84" cy="90" r="7" fill="rgba(139,123,255,.25)" stroke="#8B7BFF" stroke-width="1.6"/><circle cx="256" cy="92" r="7" fill="rgba(139,123,255,.25)" stroke="#8B7BFF" stroke-width="1.6"/>
           <circle cx="48" cy="12" r="3" fill="#3A4356"/><circle cx="292" cy="10" r="3" fill="#3A4356"/><circle cx="40" cy="106" r="3" fill="#3A4356"/><circle cx="300" cy="108" r="3" fill="#3A4356"/>
         </svg>
@@ -1323,10 +1334,10 @@ body.light .sbtn.pri{background:#101828;color:#fff}
       <div class="mini-label" style="margin-top:4px">Audience</div>
       <div class="dcard"><h5>Audience clusters <b>your tribes</b></h5>
         <svg width="100%" height="134" viewBox="0 0 340 134">
-          <circle cx="92" cy="54" r="40" fill="rgba(0,196,160,.16)" stroke="#00C4A0" stroke-width="1.3"/><text x="92" y="52" text-anchor="middle" style="font-size:8.5px;fill:var(--t1);font-weight:700">Foodie families</text><text x="92" y="65" text-anchor="middle" class="axis">38%</text>
-          <circle cx="216" cy="46" r="32" fill="rgba(139,123,255,.16)" stroke="#8B7BFF" stroke-width="1.3"/><text x="216" y="44" text-anchor="middle" style="font-size:8px;fill:var(--t1);font-weight:700">Night snackers</text><text x="216" y="57" text-anchor="middle" class="axis">26%</text>
-          <circle cx="148" cy="106" r="25" fill="rgba(87,181,240,.16)" stroke="#57B5F0" stroke-width="1.3"/><text x="148" y="105" text-anchor="middle" style="font-size:7.5px;fill:var(--t1);font-weight:700">Students</text><text x="148" y="115" text-anchor="middle" class="axis">21%</text>
-          <circle cx="280" cy="104" r="22" fill="rgba(255,194,75,.16)" stroke="#FFC24B" stroke-width="1.3"/><text x="280" y="103" text-anchor="middle" style="font-size:7.5px;fill:var(--t1);font-weight:700">Weekend</text><text x="280" y="113" text-anchor="middle" class="axis">15%</text>
+          <circle cx="92" cy="54" r="40" fill="rgba(0,196,160,.16)" stroke="#00C4A0" stroke-width="1.3"/><text x="92" y="52" text-anchor="middle" style="font-size:9.5px;fill:var(--t1);font-weight:700">Foodie families</text><text x="92" y="65" text-anchor="middle" class="axis">38%</text>
+          <circle cx="216" cy="46" r="32" fill="rgba(139,123,255,.16)" stroke="#8B7BFF" stroke-width="1.3"/><text x="216" y="44" text-anchor="middle" style="font-size:9px;fill:var(--t1);font-weight:700">Night snackers</text><text x="216" y="57" text-anchor="middle" class="axis">26%</text>
+          <circle cx="148" cy="106" r="25" fill="rgba(87,181,240,.16)" stroke="#57B5F0" stroke-width="1.3"/><text x="148" y="105" text-anchor="middle" style="font-size:9px;fill:var(--t1);font-weight:700">Students</text><text x="148" y="115" text-anchor="middle" class="axis">21%</text>
+          <circle cx="280" cy="104" r="22" fill="rgba(255,194,75,.16)" stroke="#FFC24B" stroke-width="1.3"/><text x="280" y="103" text-anchor="middle" style="font-size:9px;fill:var(--t1);font-weight:700">Weekend</text><text x="280" y="113" text-anchor="middle" class="axis">15%</text>
         </svg>
         <div class="chart-note">four tribes, de-identified. Night snackers are why Munchies exists.</div>
       </div>
@@ -1366,11 +1377,11 @@ body.light .sbtn.pri{background:#101828;color:#fff}
     </div>
     <div class="mini-label" style="margin-top:4px">Audience</div>
     <div class="dcard"><h5>Your five pages <b>reach</b></h5>
-      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:5px"></span>Kitchen</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">128k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:96%;border-radius:99px;background:#00C4A0"></i></div></div>
-      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:5px"></span>Quick Bites</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">64k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:48%;border-radius:99px;background:#57B5F0"></i></div></div>
-      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:5px"></span>Munchies</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">41k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:31%;border-radius:99px;background:#8B7BFF"></i></div></div>
-      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FFC24B;display:inline-block;margin-right:5px"></span>Feasts</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">38k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:29%;border-radius:99px;background:#FFC24B"></i></div></div>
-      <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FF5C74;display:inline-block;margin-right:5px"></span>Shorts</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">22k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:17%;border-radius:99px;background:#FF5C74"></i></div></div>
+      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:5px"></span>Kitchen</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">128k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:96%;border-radius:99px;background:#00C4A0"></i></div></div>
+      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:5px"></span>Quick Bites</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">64k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:48%;border-radius:99px;background:#57B5F0"></i></div></div>
+      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:5px"></span>Munchies</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">41k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:31%;border-radius:99px;background:#8B7BFF"></i></div></div>
+      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FFC24B;display:inline-block;margin-right:5px"></span>Feasts</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">38k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:29%;border-radius:99px;background:#FFC24B"></i></div></div>
+      <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FF5C74;display:inline-block;margin-right:5px"></span>Shorts</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">22k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:17%;border-radius:99px;background:#FF5C74"></i></div></div>
       <div class="chart-note">Kitchen carries the network. Feasts is the one to watch.</div>
     </div>
     <div class="dcard"><h5>Comment sentiment <b>this week</b></h5>
@@ -1380,7 +1391,7 @@ body.light .sbtn.pri{background:#101828;color:#fff}
           <circle cx="21" cy="21" r="15.9" fill="none" stroke="#00C4A0" stroke-width="6" stroke-dasharray="71 29" stroke-dashoffset="25" stroke-linecap="round"/>
           <circle cx="21" cy="21" r="15.9" fill="none" stroke="#76829B" stroke-width="6" stroke-dasharray="21 79" stroke-dashoffset="-46" stroke-linecap="round"/>
           <circle cx="21" cy="21" r="15.9" fill="none" stroke="#FF5C74" stroke-width="6" stroke-dasharray="8 92" stroke-dashoffset="-67" stroke-linecap="round"/>
-          <text x="21" y="20.5" text-anchor="middle" style="font-family:var(--disp);font-size:8px;font-weight:800;fill:var(--t1)">71%</text>
+          <text x="21" y="20.5" text-anchor="middle" style="font-family:var(--disp);font-size:9px;font-weight:800;fill:var(--t1)">71%</text>
           <text x="21" y="27" text-anchor="middle" style="font-size:3.4px;fill:var(--t3)">POSITIVE</text>
         </svg>
         <div class="dleg">
@@ -1649,6 +1660,8 @@ const MATCH=[
 let spotK='homecooked';
 const PIPE={saved:[],intro:[],active:[]};
 const SENT=new Set();
+function inkFor(c){c=(c||'').replace('#','');if(c.length<6)return '#fff';const r=parseInt(c.slice(0,2),16),g=parseInt(c.slice(2,4),16),b=parseInt(c.slice(4,6),16);const f=v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)};return (.2126*f(r)+.7152*f(g)+.0722*f(b))>.25?'#0B0E14':'#fff';}
+
 function renderPipe(){ const g=(id)=>document.getElementById(id); if(!g('pipeSavedN')) return;
   g('pipeSavedN').textContent=PIPE.saved.length; g('pipeIntroN').textContent=PIPE.intro.length; g('pipeActiveN').textContent=PIPE.active.length;
   const ml=g('mLabel'); if(ml) ml.textContent = (typeof discMode!=='undefined' && discMode==='swipe') ? ('Matches \u00b7 '+MATCH.length+' this week') : 'More matches'; }
@@ -1663,7 +1676,7 @@ function renderDisc(){ const spotEl=document.getElementById('spot'); if(!spotEl)
   spotEl.style.setProperty('--sc', sp.c);
   spotEl.innerHTML=`
     <div class="spot-top">
-      <span class="spot-ring"><svg width="58" height="58" viewBox="0 0 58 58"><circle cx="29" cy="29" r="26" fill="none" stroke="var(--surface2)" stroke-width="4"/><circle cx="29" cy="29" r="26" fill="none" stroke="${sp.c}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${C*pct/100} ${C}" transform="rotate(-90 29 29)"/></svg><span class="spot-av">${sp.ini}</span></span>
+      <span class="spot-ring"><svg width="58" height="58" viewBox="0 0 58 58"><circle cx="29" cy="29" r="26" fill="none" stroke="var(--surface2)" stroke-width="4"/><circle cx="29" cy="29" r="26" fill="none" stroke="${sp.c}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${C*pct/100} ${C}" transform="rotate(-90 29 29)"/></svg><span class="spot-av" style="color:${inkFor(sp.c)}">${sp.ini}</span></span>
       <span class="spot-id"><b>${sp.n}</b><span class="ssub">${sp.sub} &middot; ${sp.fol} followers</span></span>
       <span class="spot-big"><b>${sp.ovl}</b><small>overlap</small></span>
     </div>
@@ -1683,7 +1696,7 @@ function renderDisc(){ const spotEl=document.getElementById('spot'); if(!spotEl)
   document.getElementById('mrows').innerHTML = list.filter(m=>m.k!==sp.k).map((m,x)=>`
     <button class="mrow ${SENT.has(m.k)?'sent':''}" style="--mc:${m.c}" onclick="promote('${m.k}')">
       <span class="rk">${x+2}</span>
-      <span class="rav">${m.ini}</span>
+      <span class="rav" style="color:${inkFor(m.c)}">${m.ini}</span>
       <span class="rid"><b>${m.n}${SENT.has(m.k)?'<em>sent</em>':''}</b><span>${m.sub}</span></span>
       <span class="rbar"><i style="width:${parseInt(m.ovl)}%"></i></span>
       <span class="rpc">${m.ovl}</span>
@@ -1707,7 +1720,7 @@ function setDiscMode(m){ discMode=m; document.querySelectorAll('.dm').forEach(b=
   if(m==='swipe'){ renderSwipe(); renderPipe(); } else renderDisc(); }
 function swipePool(){ return discList().filter(m=>!SENT.has(m.k) && !SW_SKIP.has(m.k)); }
 function tcardHTML(m,cls){ const R=20,C=2*Math.PI*R,p=parseInt(m.ovl); return `<div class="tcard ${cls}" data-k="${m.k}" style="--tc:${m.c}">
-  <div class="tc-top"><span class="tc-ring"><svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" fill="none" stroke="var(--surface2)" stroke-width="3.5"/><circle cx="23" cy="23" r="20" fill="none" stroke="${m.c}" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="${C*p/100} ${C}" transform="rotate(-90 23 23)"/></svg><span class="tc-av">${m.ini}</span></span>
+  <div class="tc-top"><span class="tc-ring"><svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" fill="none" stroke="var(--surface2)" stroke-width="3.5"/><circle cx="23" cy="23" r="20" fill="none" stroke="${m.c}" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="${C*p/100} ${C}" transform="rotate(-90 23 23)"/></svg><span class="tc-av" style="color:${inkFor(m.c)}">${m.ini}</span></span>
   <span class="tc-id"><b>${m.n}</b><span>${m.sub} &middot; ${m.fol}</span></span>
   <span class="tc-big"><b>${m.ovl}</b><small>overlap</small></span></div>
   <div class="tc-why">${m.why}</div>
