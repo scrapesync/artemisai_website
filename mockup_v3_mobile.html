@@ -1722,7 +1722,7 @@ function bindSwipeTop(){ const t=topT(); if(!t||t.dataset.bound) return; t.datas
   const up=()=>{ if(!drag) return; drag=false; t.classList.remove('dragging'); t.style.transform='';
     if(dx<-70) swAct(-1); else if(dx>70) swAct(1); };
   t.addEventListener('pointerup',up); t.addEventListener('pointercancel',up); }
-window.addEventListener('load', renderDisc);
+window.addEventListener('load', ()=>{ renderDisc(); setDiscMode('swipe'); });
 function toggleShade(){ document.getElementById('shade').classList.toggle('on'); }
 function closeShade(){ document.getElementById('shade').classList.remove('on'); }
 function clearShade(){ document.querySelectorAll('.shade .notif').forEach(n=>n.remove()); const b=document.getElementById('bellBdg'); if(b) b.style.display='none'; closeShade(); toast('All clear. New ones land here.'); }
