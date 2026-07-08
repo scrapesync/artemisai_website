@@ -263,6 +263,12 @@ body.light .sv-bars i::after{background:#12161F}
 .card-act{transition:transform .18s cubic-bezier(.22,.68,.22,1)}
 .card:active .card-act{transform:translateX(3px)}
 
+/* deck clean m */
+#dsc-others .pcard.prev{transform:translateX(-106%) scale(.93);opacity:.5}
+#dsc-others .pcard.next{transform:translateX(6%) scale(.93);opacity:.5}
+#dsc-others .pcard.prev > *,#dsc-others .pcard.next > *{visibility:hidden}
+#dsc-others .pcard.prev::after,#dsc-others .pcard.next::after{display:none}
+#dsc-others .pcard.prev,#dsc-others .pcard.next{box-shadow:inset 0 0 0 200px rgba(11,14,20,.25)}
 /* carousel m */
 #dsc-others .deck{height:498px;margin:4px -4px 8px;touch-action:pan-y}
 #dsc-others .pcard{position:absolute;inset:auto;top:4px;bottom:4px;left:50%;width:calc(100% - 48px);transform:translateX(-50%);transition:transform .5s cubic-bezier(.22,.68,.22,1), opacity .35s;will-change:transform;border-radius:22px}
@@ -272,7 +278,7 @@ body.light .sv-bars i::after{background:#12161F}
 #dsc-others .pcard.far{opacity:0;pointer-events:none;z-index:1}
 #dsc-others .pcard.dragging{transition:none}
 #dsc-others .pcard.fly{transform:translateX(-200%) rotate(-12deg) !important;opacity:0}
-#dsc-others .pcard::before{content:'';position:absolute;inset:-2px;border-radius:24px;z-index:-1;background:linear-gradient(120deg, var(--hc), rgba(255,255,255,.75) 45%, var(--hc) 60%, rgba(255,255,255,.4) 80%, var(--hc));background-size:300% 300%;animation:holo 5.5s ease-in-out infinite}
+#dsc-others .pcard::before{content:'';position:absolute;inset:-2px;border-radius:24px;z-index:-1;background:linear-gradient(120deg, var(--hc), rgba(255,255,255,.5) 45%, var(--hc) 60%, rgba(255,255,255,.25) 80%, var(--hc));background-size:300% 300%;animation:holo 6s ease-in-out infinite}
 #dsc-others .pcard.prev::before,#dsc-others .pcard.next::before{animation:none;background:var(--hc);opacity:.5}
 @keyframes holo{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @media (prefers-reduced-motion: reduce){#dsc-others .pcard::before{animation:none}}
@@ -304,6 +310,8 @@ body.light .sv-bars i::after{background:#12161F}
 .glasspanel .pstat{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
 .glasspanel .pstat b,.glasspanel .pstat.hot b{color:#fff}
 .glasspanel .pstat span{color:rgba(255,255,255,.65)}
+#mdOv .dcard,#mdAdv .dcard{background:transparent;border:none;box-shadow:none;border-radius:0;padding:2px 0 18px;border-bottom:1px solid var(--line)}
+#mdOv .dcard>h5,#mdAdv .dcard>h5{font-size:13px;margin-bottom:11px}
 .dcard>h5{display:flex;align-items:center;gap:8px}
 .dcard>h5 b{margin-left:auto;font-size:8px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--t3);background:var(--surface2);border:1px solid var(--line);padding:3px 8px;border-radius:99px;font-family:var(--sans)}
 /* dashboard + disc v3 m */
@@ -1117,6 +1125,24 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         </svg>
         <div class="chart-note">engagement peaks at 80 to 140 characters. Long captions lose the scroll.</div>
       </div>
+      <div class="dcard"><h5>Video retention <b>your reels</b></h5>
+        <svg width="100%" height="104" viewBox="0 0 340 104" preserveAspectRatio="none">
+          <line class="gline" x1="26" y1="14" x2="340" y2="14"/><line class="gline" x1="26" y1="86" x2="340" y2="86"/>
+          <text class="axis" x="0" y="18">100%</text><text class="axis" x="4" y="90">30%</text>
+          <path d="M26,16 C50,18 62,36 80,50 C108,68 186,78 330,84" fill="none" stroke="#FF8A5C" stroke-width="2.2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+          <line x1="80" y1="8" x2="80" y2="96" stroke="#FFC24B" stroke-width="1.3" stroke-dasharray="4 3"/>
+          <text class="axis" x="86" y="16" fill="#FFC24B" style="font-weight:700">3-second cliff</text>
+          <text class="axis" x="28" y="100">0s</text><text class="axis" x="316" y="100">30s</text>
+        </svg>
+        <div class="chart-note">Whoever survives second three stays to the end. Hooks decide everything.</div>
+      </div>
+      <div class="dcard"><h5>Engagement by page <b>rate</b></h5>
+        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:5px"></span>Munchies</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">7.4%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:74%;border-radius:99px;background:#8B7BFF"></i></div></div>
+        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:5px"></span>Kitchen</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">6.8%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:68%;border-radius:99px;background:#00C4A0"></i></div></div>
+        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:5px"></span>Quick Bites</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">5.9%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:59%;border-radius:99px;background:#57B5F0"></i></div></div>
+        <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FFC24B;display:inline-block;margin-right:5px"></span>Feasts</span><b style="font-family:var(--mono);font-size:8.5px;color:var(--t1)">3.1%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:31%;border-radius:99px;background:#FFC24B"></i></div></div>
+        <div class="chart-note">Munchies has the smallest crowd and the loudest one.</div>
+      </div>
       <div class="mini-label" style="margin-top:4px">Cascade &amp; reach</div>
       <div class="dcard"><h5>Engagement funnel <b>pasta reel</b></h5>
         <div class="fun-row"><div class="fl"><span>Reached</span><b>84,000</b></div><div class="ft"><i style="width:100%;background:#00C4A0"></i></div></div>
@@ -1134,6 +1160,17 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
           <circle cx="48" cy="12" r="3" fill="#3A4356"/><circle cx="292" cy="10" r="3" fill="#3A4356"/><circle cx="40" cy="106" r="3" fill="#3A4356"/><circle cx="300" cy="108" r="3" fill="#3A4356"/>
         </svg>
         <div class="chart-note">one post, 14 super-sharers (violet), 4,200 new people. The network is the engine.</div>
+      </div>
+      <div class="dcard"><h5>Last 8 posts <b>vs forecast</b></h5>
+        <div class="sigrow" style="border-top:none"><span>&#127860;</span><span style="flex:1">Pasta reel</span><span style="font-family:var(--mono);font-size:9px;color:var(--act)">2.9x</span></div>
+        <div class="sigrow"><span>&#129386;</span><span style="flex:1">Toastie reel</span><span style="font-family:var(--mono);font-size:9px;color:var(--act)">2.1x</span></div>
+        <div class="sigrow"><span>&#127859;</span><span style="flex:1">Sunday roast</span><span style="font-family:var(--mono);font-size:9px;color:var(--act)">1.8x</span></div>
+        <div class="sigrow"><span>&#129361;</span><span style="flex:1">Buddha bowls</span><span style="font-family:var(--mono);font-size:9px;color:var(--act)">1.6x</span></div>
+        <div class="sigrow"><span>&#129367;</span><span style="flex:1">Air-fryer short</span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">1.1x</span></div>
+        <div class="sigrow"><span>&#127791;</span><span style="flex:1">Hotdog hacks</span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">1.0x</span></div>
+        <div class="sigrow"><span>&#127869;&#65039;</span><span style="flex:1">Behind the scenes</span><span style="font-family:var(--mono);font-size:9px;color:var(--rose)">0.6x</span></div>
+        <div class="sigrow"><span>&#128247;</span><span style="flex:1">Pantry photo</span><span style="font-family:var(--mono);font-size:9px;color:var(--rose)">0.5x</span></div>
+        <div class="chart-note">The bottom two share a trait: no hook in the first line.</div>
       </div>
       <div class="mini-label" style="margin-top:4px">Audience</div>
       <div class="dcard"><h5>Audience clusters <b>your tribes</b></h5>

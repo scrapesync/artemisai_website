@@ -275,6 +275,13 @@ body.light .storyv{background:#F5F7FB}
 body.light .sv-bars i{background:rgba(18,26,40,.14)}
 body.light .sv-bars i::after{background:#12161F}
 
+/* deck clean */
+#dsc-others .pcard.prev,#dsc-others .pcard.next{width:436px}
+#dsc-others .pcard.prev{transform:translateX(-108%) scale(.92);opacity:.5}
+#dsc-others .pcard.next{transform:translateX(8%) scale(.92);opacity:.5}
+#dsc-others .pcard.prev > *,#dsc-others .pcard.next > *{visibility:hidden}
+#dsc-others .pcard.prev::after,#dsc-others .pcard.next::after{display:none}
+#dsc-others .pcard.prev,#dsc-others .pcard.next{box-shadow:inset 0 0 0 200px rgba(11,14,20,.25)}
 /* carousel deck */
 #dsc-others .deck{height:622px;max-width:660px;margin:6px auto 10px;touch-action:pan-y}
 #dsc-others .pcard{position:absolute;inset:auto;top:6px;bottom:6px;left:50%;width:436px;transform:translateX(-50%);transition:transform .5s cubic-bezier(.22,.68,.22,1), opacity .35s ease;will-change:transform;border-radius:26px}
@@ -284,7 +291,7 @@ body.light .sv-bars i::after{background:#12161F}
 #dsc-others .pcard.far{opacity:0;transform:translateX(-50%) scale(.8);pointer-events:none;z-index:1}
 #dsc-others .pcard.dragging{transition:none}
 #dsc-others .pcard.fly{transform:translateX(-200%) rotate(-12deg) !important;opacity:0}
-#dsc-others .pcard::before{content:'';position:absolute;inset:-2.5px;border-radius:29px;z-index:-1;background:linear-gradient(120deg, var(--hc), rgba(255,255,255,.75) 45%, var(--hc) 60%, rgba(255,255,255,.4) 80%, var(--hc));background-size:300% 300%;animation:holo 5.5s ease-in-out infinite}
+#dsc-others .pcard::before{content:'';position:absolute;inset:-2.5px;border-radius:29px;z-index:-1;background:linear-gradient(120deg, var(--hc), rgba(255,255,255,.5) 45%, var(--hc) 60%, rgba(255,255,255,.25) 80%, var(--hc));background-size:300% 300%;animation:holo 6s ease-in-out infinite}
 #dsc-others .pcard.prev::before,#dsc-others .pcard.next::before{animation:none;background:var(--hc);opacity:.5}
 @keyframes holo{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @media (prefers-reduced-motion: reduce){#dsc-others .pcard::before{animation:none}}
@@ -352,7 +359,14 @@ body.light .dact{background:rgba(255,255,255,.75)}
 #v-planner{max-width:760px}
 .dcard>h5{display:flex;align-items:center;gap:10px}
 .dcard>h5 b{margin-left:auto;font-size:9.5px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;color:var(--t3);background:var(--surface2);border:1px solid var(--line);padding:4px 11px;border-radius:99px;font-family:var(--sans)}
-.sec-label{grid-column:1/-1;margin:8px 0 -2px}
+#at-ov .dcard,#at-vir .dcard{background:transparent;border:none;box-shadow:none;border-radius:0;padding:4px 0 24px;border-bottom:1px solid var(--line)}
+#at-ov .dcard:hover,#at-vir .dcard:hover{transform:none;box-shadow:none}
+#at-ov .dgrid2,#at-vir .dgrid2{gap:0 44px}
+#at-ov .dcard>h5,#at-vir .dcard>h5{font-size:14.5px;margin-bottom:14px}
+#at-ov .kpis2{background:transparent;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+#at-ov .kpi2{background:transparent;border:none;border-radius:0;border-left:1px solid var(--line);padding:15px 18px 12px}
+#at-ov .kpi2:first-child{border-left:none}
+.sec-label{grid-column:1/-1;margin:14px 0 2px}
 .asub{font-size:13.5px;color:var(--t3);margin:-2px 0 18px}
 /* dashboard v2 */
 .kpis2{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
@@ -1467,6 +1481,48 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
               <text class="axis" x="14" y="190">1 a week</text><text class="axis" x="336" y="190">14 a week</text>
             </svg>
             <div class="chart-note">past 5 a week the curve flattens. You are at the sweet spot, protect quality over volume.</div>
+          </div>
+
+          <div class="dcard"><h5>Video retention <b>average of your reels</b>
+            </h5>
+            <svg width="100%" height="180" viewBox="0 0 400 180" preserveAspectRatio="none">
+              <line class="gline" x1="30" y1="22" x2="400" y2="22"/><line class="gline" x1="30" y1="150" x2="400" y2="150"/>
+              <text class="axis" x="0" y="26">100%</text><text class="axis" x="6" y="154">30%</text>
+              <path d="M30,24 C60,26 74,52 96,74 C130,106 220,122 388,132" fill="none" stroke="#FF8A5C" stroke-width="2.6" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              <line x1="96" y1="16" x2="96" y2="164" stroke="#FFC24B" stroke-width="1.5" stroke-dasharray="5 4"/>
+              <text class="peaktag" x="104" y="26" fill="#FFC24B">the 3-second cliff</text>
+              <circle cx="388" cy="132" r="4" fill="#07090D" stroke="#FF8A5C" stroke-width="2"/>
+              <text class="peaktag" x="336" y="126" fill="#FF8A5C">38% finish</text>
+              <text class="axis" x="32" y="176">0s</text><text class="axis" x="370" y="176">30s</text>
+            </svg>
+            <div class="chart-note">Whoever survives second three stays to the end. Your hooks decide everything, the middle barely leaks.</div>
+          </div>
+
+          <div class="dcard"><h5>Engagement by page <b>rate, this month</b></h5>
+            <div class="hbar"><div class="hl2"><span><span style="width:9px;height:9px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:7px"></span>Midnight Munchies</span><b>7.4%</b></div><div class="ht"><i style="width:74%;background:#8B7BFF"></i></div></div>
+            <div class="hbar"><div class="hl2"><span><span style="width:9px;height:9px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:7px"></span>Sana's Kitchen</span><b>6.8%</b></div><div class="ht"><i style="width:68%;background:#00C4A0"></i></div></div>
+            <div class="hbar"><div class="hl2"><span><span style="width:9px;height:9px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:7px"></span>Quick Bites UK</span><b>5.9%</b></div><div class="ht"><i style="width:59%;background:#57B5F0"></i></div></div>
+            <div class="hbar"><div class="hl2"><span><span style="width:9px;height:9px;border-radius:50%;background:#FF5C74;display:inline-block;margin-right:7px"></span>Sana Shorts</span><b>4.4%</b></div><div class="ht"><i style="width:44%;background:#FF5C74"></i></div></div>
+            <div class="hbar" style="margin-bottom:0"><div class="hl2"><span><span style="width:9px;height:9px;border-radius:50%;background:#FFC24B;display:inline-block;margin-right:7px"></span>Family Feasts</span><b>3.1%</b></div><div class="ht"><i style="width:31%;background:#FFC24B"></i></div></div>
+            <div class="chart-note">Munchies has the smallest crowd and the loudest one. Reach and love are different games.</div>
+          </div>
+
+          <div class="dcard span2"><h5>Last 12 posts <b>impact vs forecast</b></h5>
+            <div style="columns:2;column-gap:44px">
+              <div class="hbar" style="break-inside:avoid"><div class="hl2"><span>&#127860; Pasta reel</span><b style="color:var(--act)">2.9x</b></div><div class="ht" style="height:12px"><i style="width:97%;background:#00C4A0"></i></div></div>
+              <div class="hbar" style="break-inside:avoid"><div class="hl2"><span>&#129386; Toastie reel</span><b style="color:var(--act)">2.1x</b></div><div class="ht" style="height:12px"><i style="width:70%;background:#00C4A0"></i></div></div>
+              <div class="hbar" style="break-inside:avoid"><div class="hl2"><span>&#127859; Sunday roast carousel</span><b style="color:var(--act)">1.8x</b></div><div class="ht" style="height:12px"><i style="width:60%;background:#00C4A0"></i></div></div>
+              <div class="hbar" style="break-inside:avoid"><div class="hl2"><span>&#129361; Buddha bowls</span><b style="color:var(--act)">1.6x</b></div><div class="ht" style="height:12px"><i style="width:53%;background:#00C4A0"></i></div></div>
+              <div class="hbar" style="break-inside:avoid"><div class="hl2"><span>&#127838; Bread basics</span><b style="color:var(--act)">1.4x</b></div><div class="ht" style="height:12px"><i style="width:47%;background:#4DE3C6"></i></div></div>
+              <div class="hbar" style="break-inside:avoid"><div class="hl2"><span>&#129367; Air-fryer short</span><b>1.1x</b></div><div class="ht" style="height:12px"><i style="width:37%;background:#76829B"></i></div></div>
+              <div class="hbar" style="break-inside:avoid"><div class="hl2"><span>&#127791; Hotdog hacks</span><b>1.0x</b></div><div class="ht" style="height:12px"><i style="width:33%;background:#76829B"></i></div></div>
+              <div class="hbar" style="break-inside:avoid"><div class="hl2"><span>&#129365; Veg prep Sunday</span><b>0.9x</b></div><div class="ht" style="height:12px"><i style="width:30%;background:#76829B"></i></div></div>
+              <div class="hbar" style="break-inside:avoid"><div class="hl2"><span>&#127849; Dessert poll</span><b>0.9x</b></div><div class="ht" style="height:12px"><i style="width:30%;background:#76829B"></i></div></div>
+              <div class="hbar" style="break-inside:avoid"><div class="hl2"><span>&#9749; Morning routine</span><b>0.8x</b></div><div class="ht" style="height:12px"><i style="width:27%;background:#76829B"></i></div></div>
+              <div class="hbar" style="break-inside:avoid"><div class="hl2"><span>&#127869;&#65039; Behind the scenes</span><b style="color:var(--rose)">0.6x</b></div><div class="ht" style="height:12px"><i style="width:20%;background:#FF5C74"></i></div></div>
+              <div class="hbar" style="break-inside:avoid;margin-bottom:0"><div class="hl2"><span>&#128247; Pantry photo</span><b style="color:var(--rose)">0.5x</b></div><div class="ht" style="height:12px"><i style="width:17%;background:#FF5C74"></i></div></div>
+            </div>
+            <div class="chart-note">Teal beat the forecast, grey matched it, rose fell short. The bottom three share a trait: no hook in the first line.</div>
           </div>
 
           <div class="dcard span2"><h5>Emoji sweet spot <b>engagement by count</b></h5>
