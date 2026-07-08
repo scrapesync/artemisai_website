@@ -548,7 +548,21 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
 .pl-item .pk{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--t3);border:1px solid var(--line);border-radius:5px;padding:1px 7px}
 
 /* light legibility overrides (must cascade last) */
-body.light{--t3:#5F6B7E; --rose:#D42A4C; --arte:#5B45D9; --bg:#F5F7FB; --surface2:#EEF2F8; --line:#E5EAF2}
+body.light{--t3:#5F6B7E; --rose:#D42A4C; --arte:#5B45D9; --bg:#F1F3FA; --surface:#FBFCFF; --surface2:#E9EDF8; --line:#E0E5F2}
+body.light .app{background:
+  radial-gradient(640px 420px at 6% -4%, rgba(0,196,160,.10), transparent 60%),
+  radial-gradient(760px 520px at 98% 6%, rgba(139,123,255,.10), transparent 62%),
+  radial-gradient(640px 460px at 18% 104%, rgba(255,194,75,.08), transparent 60%),
+  #F1F3FA}
+body.light .main,body.light .stage-area{background:transparent}
+body.light .topbar{background:rgba(248,249,253,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+body.light .rail{background:rgba(248,249,253,.9)}
+body.light .arail{background:linear-gradient(180deg,#F6F5FE, #F9FAFE 30%)}
+body.light .arail::before{background:radial-gradient(500px 320px at 80% 0%, rgba(139,123,255,.14), transparent 65%)}
+body.light .hero{background:linear-gradient(160deg,#D9F4EA 0%, #EEFAF5 55%, var(--surface) 100%);border-color:rgba(0,150,122,.4)}
+body.light .milestone{background:linear-gradient(140deg, rgba(255,194,75,.22), var(--surface) 72%)}
+body.light .brief-card{background:linear-gradient(150deg,#ECE7FF 0%, var(--surface) 68%)}
+body.light .wins-hero{background:linear-gradient(160deg, rgba(255,194,75,.24), var(--surface) 64%)}
 body.light .card,body.light .dcard,body.light .moves,body.light .milestone,body.light .brief-card,body.light .report-row,body.light .rule,body.light .match,body.light .trust,body.light .checklist,body.light .sched-row,body.light .setup-pill,body.light .page-card,body.light .kpi,body.light .dstat,body.light .flag{box-shadow:0 1px 2px rgba(23,32,48,.05), 0 12px 28px -20px rgba(23,32,48,.12)}
 body.light .btn-ghost{background:#FFFFFF;border-color:#DFE6EF}
 body.light .tog{background:#D9E0EB}
