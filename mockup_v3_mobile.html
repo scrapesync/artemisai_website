@@ -669,6 +669,14 @@ body.light .story b,body.light .tpill.on span,body.light .sched-row .mono,body.l
 body.light .hl{color:#00705A}
 body.light .milestone .mtx b{color:#8A6100}
 body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,125,99,.3)}
+
+/* de-widget sitewide m (final overrides) */
+.card{background:transparent;border:none;border-radius:0;padding:14px 1px;margin-bottom:0;border-bottom:1px solid var(--line)}
+.card:active{border-color:var(--line);opacity:.86}
+.cal{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 10px 8px}
+.pstripe{position:relative;padding-left:14px !important}
+.pstripe::before{content:'';position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:3px;background:linear-gradient(180deg,#F58529,#DD2A7B,#8134AF)}
+.pstripe.fbig::before{background:linear-gradient(180deg,#4599FF,#DD2A7B)}
 </style>
 </head>
 <body>
@@ -964,13 +972,13 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
 
       <div id="dsc-x" style="display:none">
         <div class="milestone" style="margin-bottom:12px"><span style="font-size:14px">&#128279;</span><div class="mtx"><b>Connect Instagram</b> to act on these</div><button class="btn btn-primary" onclick="toast('Instagram connect flow opens here in the live app.')">Connect</button></div>
-        <button class="card" style="position:relative;border-left:3px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(180deg,#F58529,#DD2A7B,#8134AF) border-box" onclick="toast('Full profiles unlock when Instagram is connected.')"><span class="prev-tag">&#128274; Preview</span>
+        <button class="card pstripe" style="position:relative" onclick="toast('Full profiles unlock when Instagram is connected.')"><span class="prev-tag">&#128274; Preview</span>
           <div class="card-top"><span class="xbadge ig">&#9679; Instagram</span><span class="card-time" style="margin-left:auto">31% modelled</span></div>
           <div class="card-line">@plantbased.daily <b>overlaps your Sunday crowd</b></div>
           <p class="card-why">Their reel audience matches Family Feasts. Cross-platform reaches people Facebook cannot.</p>
           <span class="card-act">Preview &rarr;</span>
         </button>
-        <button class="card" style="position:relative;border-left:3px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(180deg,#4599FF,#DD2A7B) border-box" onclick="toast('Mirroring plan unlocks with Instagram connect.')"><span class="prev-tag">&#128274; Preview</span>
+        <button class="card pstripe fbig" style="position:relative" onclick="toast('Mirroring plan unlocks with Instagram connect.')"><span class="prev-tag">&#128274; Preview</span>
           <div class="card-top"><span class="xbadge fb">f FB</span><span style="color:var(--t3);font-size:10px">&rarr;</span><span class="xbadge ig">&#9679; IG</span><span class="card-time" style="margin-left:auto">+18k est.</span></div>
           <div class="card-line">Mirror top reels to <b>@sanaskitchen on IG</b></div>
           <p class="card-why">Your three best reels fit IG natively. Art-E reposts with tuned captions.</p>

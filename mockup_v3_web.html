@@ -817,6 +817,20 @@ body.light .story b,body.light .tpill.on span,body.light .sched-row .mono,body.l
 body.light .hl{color:#00705A}
 body.light .milestone .mtx b{color:#8A6100}
 body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,125,99,.3)}
+
+/* de-widget sitewide (final overrides) */
+.card{background:transparent;border:none;border-radius:0;padding:16px 2px;margin-bottom:0;border-bottom:1px solid var(--line)}
+.card:hover{border-color:var(--line);transform:none;box-shadow:none}
+body.light .card:hover{box-shadow:none}
+.card.win-card{background:transparent}
+.page-card{background:transparent;border:none;border-radius:0;padding:15px 2px;margin-bottom:0;border-bottom:1px solid var(--line)}
+.page-card:hover{border-color:var(--line)}
+.draft-row{background:transparent;border:none;border-radius:0;padding:14px 2px;margin-bottom:0;border-bottom:1px solid var(--line)}
+.report-row{background:transparent;border:none;border-radius:0;border-bottom:1px solid var(--line)}
+.cal{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 12px 10px}
+.pstripe{position:relative;padding-left:16px !important}
+.pstripe::before{content:'';position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:3px;background:linear-gradient(180deg,#F58529,#DD2A7B,#8134AF)}
+.pstripe.fbig::before{background:linear-gradient(180deg,#4599FF,#DD2A7B)}
 </style>
 </head>
 <body>
@@ -1269,13 +1283,13 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       <!-- ACROSS PLATFORMS -->
       <div id="dsc-x" style="display:none">
         <div class="milestone" style="margin-bottom:16px"><span style="font-size:16px">&#128279;</span><div class="mtx"><b>Connect Instagram</b> to act on these. Mapping is modelled from public signals until then.</div><button class="btn btn-primary" onclick="openConnect()">Connect</button></div>
-        <button class="card" style="position:relative;border-left:3px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(180deg,#F58529,#DD2A7B,#8134AF) border-box" onclick="toast('Full cross-platform profiles unlock when Instagram is connected.')"><span class="prev-tag">&#128274; Preview</span>
+        <button class="card pstripe" style="position:relative" onclick="toast('Full cross-platform profiles unlock when Instagram is connected.')"><span class="prev-tag">&#128274; Preview</span>
           <div class="card-top"><span class="xbadge ig">&#9679; Instagram</span><span class="card-time" style="margin-left:auto">modelled 31%</span></div>
           <div class="card-line">@plantbased.daily <b>overlaps your Sunday crowd</b></div>
           <p class="card-why">Their reel audience matches your Family Feasts profile. A cross-platform collab reaches people Facebook alone cannot.</p>
           <span class="card-act">Preview the match &rarr;</span>
         </button>
-        <button class="card" style="position:relative;border-left:3px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box, linear-gradient(180deg,#4599FF,#DD2A7B) border-box" onclick="toast('Mirroring plan unlocks with Instagram connect.')"><span class="prev-tag">&#128274; Preview</span>
+        <button class="card pstripe fbig" style="position:relative" onclick="toast('Mirroring plan unlocks with Instagram connect.')"><span class="prev-tag">&#128274; Preview</span>
           <div class="card-top"><span class="xbadge fb">f Facebook</span><span style="color:var(--t3);font-size:11px">&rarr;</span><span class="xbadge ig">&#9679; Instagram</span><span class="card-time" style="margin-left:auto">est. +18k</span></div>
           <div class="card-line">Mirror your top reels to <b>@sanaskitchen on IG</b></div>
           <p class="card-why">Your three best Facebook reels fit IG Reels natively. Art-E would repost with tuned captions and track both sides.</p>
