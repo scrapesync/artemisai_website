@@ -1,291 +1,267 @@
 #!/usr/bin/env python3
 """
-ArtemisAI - QA Dashboard nightly metrics generator
-==================================================
-Runs at ~01:00 daily. Queries Redshift, writes qa_metrics.json into the repo
-root, commits and pushes. The dashboard (qa_dashboard.html) fetches that JSON
-on load, so the page is fully static and needs no live DB connection - it just
-reflects last night's snapshot.
+ArtemisAI - QA Dashboard nightly metrics generator (v2, four-tab)
+================================================================
+Runs ~01:00 daily. Queries Redshift across four domains and writes
+qa_metrics.json into the repo root. The dashboard reads it and stays static.
 
-The JSON shape mirrors the dashboard's internal `D` object exactly, keyed per
-widget-source. Every key is optional: whatever this script omits, the dashboard
-falls back to its built-in seed for. So you can roll metrics out incrementally.
+Tabs:
+  accuracy  - NLP vs DeepSeek agreement + confidence (no human ground truth,
+              so 'accuracy' = inter-model agreement and confidence health)
+  health    - did loads arrive on their date, did anything fail/lag (QA/ops)
+  quality   - how good is the data: completeness, dupes, integrity, validity
+  analytics - everything else: content, sentiment, reactions, pages
 
-Focus (per product ask): weekly performance across the whole warehouse. The
-trend arrays are the last 13 ISO weeks so the "Quarter" range shows one dot per
-week; `runs` mirrors the daily view for the "Last 10 runs" pill; `d30` is 30
-daily points for the "30 days" pill.
+Trend metrics are emitted at day/week/month/quarter grains plus a raw daily
+series (last WINDOW_DAYS) so the client can slice any custom date range.
+Every key is optional; missing keys fall back to the dashboard's seed.
 
-ENV expected:
-  REDSHIFT_HOST, REDSHIFT_PORT (5439), REDSHIFT_DB, REDSHIFT_USER, REDSHIFT_PASSWORD
-  (or set REDSHIFT_DSN for a full libpq string)
-Deps: pip install redshift_connector   (or psycopg2-binary)
+ENV: REDSHIFT_HOST/PORT/DB/USER/PASSWORD
+Deps: pip install redshift_connector   (psycopg2 fallback)
 """
-
 import os, json, datetime as dt
-from collections import defaultdict
 
 OUT_PATH = os.path.join(os.path.dirname(__file__), '..', 'qa_metrics.json')
+WINDOW_DAYS = 120
 
-# ----------------------------------------------------------------------------
-# Connection - redshift_connector preferred, psycopg2 fallback
-# ----------------------------------------------------------------------------
 def connect():
-    host=os.environ['REDSHIFT_HOST']; port=int(os.environ.get('REDSHIFT_PORT','5439'))
-    db=os.environ['REDSHIFT_DB']; user=os.environ['REDSHIFT_USER']; pwd=os.environ['REDSHIFT_PASSWORD']
+    h=os.environ['REDSHIFT_HOST']; p=int(os.environ.get('REDSHIFT_PORT','5439'))
+    d=os.environ['REDSHIFT_DB']; u=os.environ['REDSHIFT_USER']; w=os.environ['REDSHIFT_PASSWORD']
     try:
         import redshift_connector
-        return redshift_connector.connect(host=host, port=port, database=db, user=user, password=pwd)
+        return redshift_connector.connect(host=h,port=p,database=d,user=u,password=w)
     except ImportError:
         import psycopg2
-        return psycopg2.connect(host=host, port=port, dbname=db, user=user, password=pwd)
+        return psycopg2.connect(host=h,port=p,dbname=d,user=u,password=w)
 
 def q(cur, sql):
-    cur.execute(sql)
-    cols=[d[0] for d in cur.description]
-    return [dict(zip(cols, r)) for r in cur.fetchall()]
+    cur.execute(sql); cols=[c[0] for c in cur.description]
+    return [dict(zip(cols,r)) for r in cur.fetchall()]
 
-# ----------------------------------------------------------------------------
-# Week scaffolding: last 13 ISO weeks, oldest first
-# ----------------------------------------------------------------------------
-def last_n_weeks(n=13):
-    today=dt.date.today()
-    monday=today - dt.timedelta(days=today.weekday())
-    weeks=[monday - dt.timedelta(weeks=(n-1-i)) for i in range(n)]
-    labels=[w.strftime('%d %b') for w in weeks]
-    return weeks, labels
-
-WEEKS, WK_LABELS = last_n_weeks(13)
-WK_START = WEEKS[0].isoformat()
-
-# ----------------------------------------------------------------------------
-# Metric builders. Each returns the dashboard-shaped structure or None on error,
-# so a single failing query never blanks the whole file.
-# ----------------------------------------------------------------------------
-def safe(fn, *a):
+def safe(fn,*a):
     try: return fn(*a)
     except Exception as e:
-        print(f"  ! {fn.__name__} failed: {e}")
-        return None
+        print(f"  ! {fn.__name__}: {e}"); return None
 
-def weekly_counts(cur, schema_table, ts_col, where=''):
-    """Rows per ISO week over the window, aligned to WEEKS."""
-    sql=f"""
-      SELECT DATE_TRUNC('week', {ts_col})::date AS wk, COUNT(*) AS n
-      FROM {schema_table}
-      WHERE {ts_col} >= '{WK_START}' {('AND '+where) if where else ''}
-      GROUP BY 1 ORDER BY 1
-    """
-    rows=q(cur, sql)
-    by={r['wk'].isoformat() if hasattr(r['wk'],'isoformat') else str(r['wk']): int(r['n']) for r in rows}
-    return [by.get(w.isoformat(), 0) for w in WEEKS]
+START = (dt.date.today()-dt.timedelta(days=WINDOW_DAYS)).isoformat()
+DAYS  = [(dt.date.today()-dt.timedelta(days=WINDOW_DAYS-1-i)) for i in range(WINDOW_DAYS)]
 
-def build_layers(cur):
-    """Cumulative test/label volume by layer, weekly - reuses your prediction tables."""
-    post = weekly_counts(cur, 'rdl.post_label_predictions', 'inserted_at')
-    comm = weekly_counts(cur, 'rdl.comment_label_predictions', 'created_at')
-    fus  = weekly_counts(cur, 'rdl.fusion_predictions', 'processed_at')
-    def cumulative(a):
-        out=[]; run=0
-        for v in a: run+=v; out.append(run)
-        return out
-    return {'unit':cumulative(post), 'integ':cumulative(comm), 'e2e':cumulative(fus)}
-
-def build_coverage(cur):
-    """Share of posts that carry a non-null label = labelling coverage %, weekly."""
-    sql=f"""
-      SELECT DATE_TRUNC('week', inserted_at)::date AS wk,
-             ROUND(100.0*SUM(CASE WHEN nlp_sentiment IS NOT NULL THEN 1 ELSE 0 END)/NULLIF(COUNT(*),0),1) AS pct
-      FROM rdl.post_label_predictions
-      WHERE inserted_at >= '{WK_START}'
-      GROUP BY 1 ORDER BY 1
-    """
-    rows=q(cur, sql)
-    by={r['wk'].isoformat(): float(r['pct'] or 0) for r in rows}
-    q_series=[by.get(w.isoformat(), None) for w in WEEKS]
-    # carry-forward for empty weeks so the line is continuous
-    last=80.0
-    q_series=[ (last:=v) if v is not None else last for v in q_series ]
-    return {'q':q_series, 'd30':q_series[-1:]*30, 'runs':q_series[-10:]}
-
-def build_pass_rate(cur):
-    """Pipeline 'pass rate' = share of posts labelled without hitting the null/error bucket."""
-    sql=f"""
-      SELECT DATE_TRUNC('week', inserted_at)::date AS wk,
-             ROUND(100.0*SUM(CASE WHEN ds_sentiment IS NOT NULL AND nlp_sentiment IS NOT NULL THEN 1 ELSE 0 END)
-                   /NULLIF(COUNT(*),0),1) AS pct
-      FROM rdl.post_label_predictions
-      WHERE inserted_at >= '{WK_START}'
-      GROUP BY 1 ORDER BY 1
-    """
-    rows=q(cur, sql)
-    by={r['wk'].isoformat(): float(r['pct'] or 0) for r in rows}
-    last=97.0
-    series=[ (last:=by.get(w.isoformat(), last)) for w in WEEKS ]
-    return {'q':series, 'd30':series[-1:]*30, 'runs':series[-10:]}
-
-def build_bugs_severity(cur):
-    """'Bugs' = model disagreements between NLP and DS tiers, bucketed by seriousness, weekly.
-       P1 = sentiment flips pos<->neg, P2 = one side neutral, P3 = emotion mismatch, P4 = low-confidence."""
-    sql=f"""
-      SELECT DATE_TRUNC('week', inserted_at)::date AS wk,
-        SUM(CASE WHEN (nlp_sentiment='positive' AND ds_sentiment='negative')
-                   OR (nlp_sentiment='negative' AND ds_sentiment='positive') THEN 1 ELSE 0 END) AS p1,
-        SUM(CASE WHEN nlp_sentiment<>ds_sentiment
-                  AND (nlp_sentiment='neutral' OR ds_sentiment='neutral') THEN 1 ELSE 0 END) AS p2,
-        SUM(CASE WHEN nlp_emotion<>ds_emotion THEN 1 ELSE 0 END) AS p3,
-        SUM(CASE WHEN nlp_sentiment_confidence < 0.60 THEN 1 ELSE 0 END) AS p4
-      FROM rdl.post_label_predictions
-      WHERE inserted_at >= '{WK_START}'
-      GROUP BY 1 ORDER BY 1
-    """
-    rows=q(cur, sql)
-    by={r['wk'].isoformat(): r for r in rows}
-    def col(k): return [ int((by.get(w.isoformat()) or {}).get(k,0) or 0) for w in WEEKS ]
-    return {'p1':col('p1'),'p2':col('p2'),'p3':col('p3'),'p4':col('p4')}
-
-def build_burn(cur):
-    """Opened vs closed cumulative = disagreements found vs auto-resolved by DS threshold, weekly."""
-    opened = build_bugs_severity(cur)
-    tot=[opened['p1'][i]+opened['p2'][i]+opened['p3'][i] for i in range(len(WEEKS))]
-    o=[]; run=0
-    for v in tot: run+=v; o.append(run)
-    # closed = 90% of opened, trailing by one week (illustrative resolution lag)
-    c=[int(x*0.9) for x in ([0]+o[:-1])]
-    return {'opened':o, 'closed':c}
-
-def build_pctile(cur):
-    """Confidence spread proxy: weekly median NLP confidence *100 (p10-p90 band drawn client-side)."""
-    sql=f"""
-      SELECT DATE_TRUNC('week', inserted_at)::date AS wk,
-             ROUND(100*MEDIAN(nlp_sentiment_confidence),1) AS med
-      FROM rdl.post_label_predictions
-      WHERE inserted_at >= '{WK_START}' AND nlp_sentiment_confidence IS NOT NULL
-      GROUP BY 1 ORDER BY 1
-    """
-    rows=q(cur, sql)
-    by={r['wk'].isoformat(): float(r['med'] or 0) for r in rows}
-    last=85.0
-    med=[ (last:=by.get(w.isoformat(), last)) for w in WEEKS ]
-    return {'med':med}
-
-def build_distributions(cur):
-    """Label vocab breakdowns -> feed the bars/pareto/donut widgets. Frequencies, current."""
-    def dist(col, table, limit=15):
-        rows=q(cur, f"""SELECT {col} AS v, COUNT(*) n FROM {table}
-                        WHERE {col} IS NOT NULL GROUP BY 1 ORDER BY n DESC LIMIT {limit}""")
-        return [[str(r['v']), int(r['n'])] for r in rows]
-    return {
-        'topic'    : dist('nlp_topic',   'rdl.post_label_predictions'),
-        'intent'   : dist('nlp_intent',  'rdl.post_label_predictions'),
-        'emotion'  : dist('nlp_emotion', 'rdl.post_label_predictions'),
-        'fusion'   : dist('fusion_label','rdl.fusion_predictions'),
-        'tier'     : dist('influence_tier','odl.dim_pages'),
-    }
-
-def build_pass_split(cur):
-    """Donut: labelled / neutral-uncertain / failed(null) on latest run window."""
-    rows=q(cur, """
-      SELECT
-        SUM(CASE WHEN nlp_sentiment IS NOT NULL AND nlp_toxicity='non_toxic' THEN 1 ELSE 0 END) AS ok,
-        SUM(CASE WHEN nlp_sentiment='neutral' THEN 1 ELSE 0 END) AS skip,
-        SUM(CASE WHEN nlp_sentiment IS NULL THEN 1 ELSE 0 END) AS fail
-      FROM rdl.post_label_predictions""")
-    r=rows[0]
-    return [['Labelled', int(r['ok'] or 0)], ['Neutral', int(r['skip'] or 0)], ['Unlabelled', int(r['fail'] or 0)]]
-
-def build_toxicity_guard(cur):
-    """Security-scan analogue: toxicity findings by severity, current."""
-    rows=q(cur, """SELECT nlp_toxicity v, COUNT(*) n FROM rdl.post_label_predictions
-                   WHERE nlp_toxicity IS NOT NULL GROUP BY 1""")
-    m={r['v']:int(r['n']) for r in rows}
-    return [['Toxic', m.get('toxic',0)], ['Non-toxic sample', 0], ['Flagged for review', m.get('toxic',0)], ['Clean', 0]]
-
-def build_freshness_table(cur):
-    """Recent-runs analogue: per-table last load_date + row delta, newest first."""
-    tables=[('rdl.page_posts','load_date'),('rdl.post_comments','load_date'),
-            ('rdl.post_daily_insights','load_date'),('rdl.post_label_predictions','run_date'),
-            ('rdl.fusion_predictions','processed_at'),('rdl.video_intelligence','processed_at')]
-    out=[]
-    for t,c in tables:
-        try:
-            r=q(cur, f"SELECT MAX({c})::date AS d, COUNT(*) n FROM {t}")[0]
-            d=r['d']; age=(dt.date.today()-d).days if d else None
-            status='pass' if (age is not None and age<=1) else ('flaky' if age==2 else 'fail')
-            out.append([t.split('.')[-1], str(d) if d else 'never',
-                        status, f"{int(r['n']):,} rows", '0' if status=='pass' else f'{age}d stale'])
-        except Exception as e:
-            out.append([t.split('.')[-1],'error','fail','-',str(e)[:20]])
-    out.sort(key=lambda x: x[1], reverse=True)
-    return out
-
-def build_warehouse_table(cur):
-    """Slowest-tests analogue: biggest tables by storage, from svv_table_info."""
-    rows=q(cur, """SELECT "table" t, size mb, tbl_rows n FROM svv_table_info
-                   WHERE "schema" IN ('rdl','odl','public') ORDER BY size DESC LIMIT 6""")
-    out=[]
+def align_daily(rows, keycol, valcol, default=None, carry=False):
+    by={}
     for r in rows:
-        mb=int(r['mb']); n=int(r['n'])
-        bloat='&#9650; bloat' if (n>0 and mb/max(n,1)>0.5 and n<50000) else '&#8212;'
-        out.append([r['t'], f"{mb:,}MB", bloat])
+        k=r[keycol]; k=k.isoformat() if hasattr(k,'isoformat') else str(k)[:10]
+        by[k]=r[valcol]
+    out=[]; last=default
+    for d in DAYS:
+        v=by.get(d.isoformat())
+        if v is None: v=last if carry else default
+        else:
+            try: v=float(v)
+            except (TypeError,ValueError): pass
+            last=v
+        out.append(v)
     return out
 
-def build_ready(cur):
-    """Release-readiness gates computed live."""
-    cov=q(cur, """SELECT ROUND(100.0*SUM(CASE WHEN nlp_sentiment IS NOT NULL THEN 1 ELSE 0 END)/NULLIF(COUNT(*),0),0) p
-                  FROM rdl.post_label_predictions""")[0]['p'] or 0
-    tox=q(cur, "SELECT COUNT(*) n FROM rdl.post_label_predictions WHERE nlp_toxicity='toxic'")[0]['n'] or 0
-    stale=q(cur, "SELECT COUNT(*) n FROM rdl.page_posts WHERE load_date < CURRENT_DATE-1")[0]['n'] or 0
-    conns=q(cur, "SELECT COUNT(*) n FROM public.artemis_fb_connections WHERE status<>'active'")[0]['n'] or 0
-    g=lambda ok: bool(ok)
-    return [
-        ['Labelling coverage &ge; 80%', f'{int(cov)}%', g(cov>=80)],
-        ['All FB connections active', f'{conns} inactive', g(conns==0)],
-        ['Toxic content flagged', f'{tox} toxic', True],
-        ['Posts loaded today', 'fresh' if stale==0 else f'{stale} stale', g(stale==0)],
-        ['Fusion classifier running', 'yes', True],
-        ['No pipeline errors', '0', True],
-    ]
+def roll(series, grain):
+    if grain=='day': return [None if v is None else round(v,1) for v in series[-30:]]
+    size={'week':7,'month':30,'quarter':91}[grain]
+    out=[]; buf=[]
+    for i,v in enumerate(series):
+        buf.append(v if v is not None else 0)
+        if len(buf)==size or i==len(series)-1:
+            out.append(round(sum(buf)/len(buf),1)); buf=[]
+    return out
 
-# ----------------------------------------------------------------------------
+def trend(series):
+    return {'day':roll(series,'day'),'week':roll(series,'week'),
+            'month':roll(series,'month'),'quarter':roll(series,'quarter'),
+            'daily':[None if v is None else round(v,2) for v in series]}
+
+# ---- ACCURACY ----
+def acc_agreement(cur):
+    rows=q(cur,f"""SELECT inserted_at::date d,
+        ROUND(100.0*AVG(CASE WHEN nlp_sentiment=ds_sentiment THEN 1 ELSE 0 END),1) agree
+      FROM rdl.post_label_predictions
+      WHERE inserted_at>='{START}' AND ds_sentiment IS NOT NULL AND nlp_sentiment IS NOT NULL
+      GROUP BY 1""")
+    return trend(align_daily(rows,'d','agree',90,True))
+def acc_confidence(cur,tier='nlp'):
+    rows=q(cur,f"""SELECT inserted_at::date d, ROUND(100*AVG({tier}_sentiment_confidence),1) c
+      FROM rdl.post_label_predictions
+      WHERE inserted_at>='{START}' AND {tier}_sentiment_confidence IS NOT NULL GROUP BY 1""")
+    return trend(align_daily(rows,'d','c',85,True))
+def acc_confusion(cur):
+    rows=q(cur,"""SELECT nlp_sentiment n, ds_sentiment d, COUNT(*) c
+      FROM rdl.post_label_predictions
+      WHERE nlp_sentiment IS NOT NULL AND ds_sentiment IS NOT NULL GROUP BY 1,2""")
+    cats=['positive','neutral','negative']; m={(r['n'],r['d']):int(r['c']) for r in rows}
+    return {'rows':cats,'cols':cats,'v':[[m.get((rr,cc),0) for cc in cats] for rr in cats]}
+def acc_conf_buckets(cur):
+    rows=q(cur,"""SELECT bucket,COUNT(*) c FROM (
+        SELECT CASE WHEN nlp_sentiment_confidence<0.5 THEN '<50%'
+                    WHEN nlp_sentiment_confidence<0.7 THEN '50-70%'
+                    WHEN nlp_sentiment_confidence<0.85 THEN '70-85%'
+                    WHEN nlp_sentiment_confidence<0.95 THEN '85-95%'
+                    ELSE '95-100%' END bucket
+        FROM rdl.post_label_predictions WHERE nlp_sentiment_confidence IS NOT NULL) t GROUP BY 1""")
+    order=['<50%','50-70%','70-85%','85-95%','95-100%']; m={r['bucket']:int(r['c']) for r in rows}
+    return [[b,m.get(b,0)] for b in order]
+def acc_per_dim(cur):
+    dims=[('sentiment','nlp_sentiment','ds_sentiment'),('emotion','nlp_emotion','ds_emotion'),('toxicity','nlp_toxicity','ds_toxicity')]
+    out=[]
+    for name,a,b in dims:
+        r=q(cur,f"SELECT ROUND(100.0*AVG(CASE WHEN {a}={b} THEN 1 ELSE 0 END),1) v FROM rdl.post_label_predictions WHERE {a} IS NOT NULL AND {b} IS NOT NULL")[0]
+        out.append([name,float(r['v'] or 0)])
+    return out
+def acc_escalation(cur):
+    r=q(cur,"""SELECT SUM(CASE WHEN nlp_sentiment IS NOT NULL THEN 1 ELSE 0 END) nlp,
+        SUM(CASE WHEN ds_sentiment IS NOT NULL THEN 1 ELSE 0 END) ds,
+        SUM(CASE WHEN cl_sentiment IS NOT NULL THEN 1 ELSE 0 END) cl
+      FROM rdl.post_label_predictions""")[0]
+    return [['NLP tier',int(r['nlp'] or 0)],['DeepSeek tier',int(r['ds'] or 0)],['Claude tier',int(r['cl'] or 0)]]
+def acc_proctime(cur):
+    rows=q(cur,f"SELECT inserted_at::date d, ROUND(AVG(processing_time_ms)) ms FROM rdl.post_label_predictions WHERE inserted_at>='{START}' AND processing_time_ms IS NOT NULL GROUP BY 1")
+    return trend(align_daily(rows,'d','ms',0,True))
+
+# ---- HEALTH ----
+FRESH_TABLES=[('rdl.page_posts','load_date'),('rdl.post_comments','load_date'),
+              ('rdl.post_daily_insights','load_date'),('rdl.page_daily_insights','load_date'),
+              ('rdl.post_label_predictions','inserted_at'),('rdl.fusion_predictions','processed_at')]
+def hl_freshness_table(cur):
+    out=[]
+    for t,c in FRESH_TABLES:
+        try:
+            r=q(cur,f"SELECT MAX({c})::date d, COUNT(*) n FROM {t}")[0]
+            d=r['d']; age=(dt.date.today()-d).days if d else None
+            st='pass' if (age is not None and age<=1) else ('flaky' if age==2 else 'fail')
+            out.append([t.split('.')[-1],str(d) if d else 'never',st,f"{int(r['n']):,}",'on time' if st=='pass' else f'{age}d late'])
+        except Exception as e:
+            out.append([t.split('.')[-1],'error','fail','-',str(e)[:18]])
+    out.sort(key=lambda x:x[1],reverse=True); return out
+def hl_daily_loads(cur):
+    posts=align_daily(q(cur,f"SELECT load_date d,COUNT(*) n FROM rdl.page_posts WHERE load_date>='{START}' GROUP BY 1"),'d','n',0)
+    comm=align_daily(q(cur,f"SELECT load_date d,COUNT(*) n FROM rdl.post_comments WHERE load_date>='{START}' GROUP BY 1"),'d','n',0)
+    return {'posts':trend(posts),'comments':trend(comm)}
+def hl_load_status(cur):
+    rows=[]
+    for t,c in FRESH_TABLES:
+        rows.append(align_daily(q(cur,f"SELECT {c}::date d,1 v FROM {t} WHERE {c}>='{START}' GROUP BY 1"),'d','v',0))
+    landed=[sum(1 for tb in rows if tb[i]) for i in range(len(DAYS))]
+    return trend([100.0*x/len(FRESH_TABLES) for x in landed])
+def hl_missing_days(cur):
+    daily=align_daily(q(cur,f"SELECT load_date d,COUNT(*) n FROM rdl.page_posts WHERE load_date>='{START}' GROUP BY 1"),'d','n',0)
+    gaps=[[DAYS[i].strftime('%d %b'),0] for i,v in enumerate(daily) if v==0][-12:]
+    return gaps if gaps else [['no gaps',0]]
+def hl_lag(cur):
+    rows=q(cur,f"SELECT load_date d, ROUND(AVG(DATEDIFF(day,date,load_date)),1) lag FROM rdl.post_comments WHERE load_date>='{START}' GROUP BY 1")
+    return trend(align_daily(rows,'d','lag',0,True))
+def hl_rowcount_delta(cur):
+    daily=align_daily(q(cur,f"SELECT load_date d,COUNT(*) n FROM rdl.post_comments WHERE load_date>='{START}' GROUP BY 1"),'d','n',0)
+    return trend(daily)
+
+# ---- QUALITY ----
+def ql_completeness(cur):
+    cols=['nlp_sentiment','nlp_emotion','nlp_topic','nlp_intent','nlp_toxicity','ds_sentiment']
+    tot=q(cur,"SELECT COUNT(*) n FROM rdl.post_label_predictions")[0]['n'] or 1; out=[]
+    for c in cols:
+        nn=q(cur,f"SELECT COUNT({c}) n FROM rdl.post_label_predictions")[0]['n'] or 0
+        out.append([c.replace('nlp_','').replace('ds_','ds '),round(100.0*nn/tot,1)])
+    return out
+def ql_dupes(cur):
+    checks=[('dim_comments','comment_sk','odl'),('dim_posts','post_sk','odl'),('dim_pages','page_sk','odl')]; out=[]
+    for t,k,s in checks:
+        r=q(cur,f"SELECT COUNT(*) tot,COUNT(DISTINCT {k}) uniq FROM {s}.{t}")[0]
+        out.append([t,int(r['tot'])-int(r['uniq'])])
+    return out
+def ql_integrity(cur):
+    out=[]
+    try:
+        r=q(cur,"SELECT COUNT(*) n FROM odl.fact_post_daily_insights f LEFT JOIN odl.dim_posts d ON f.post_sk=d.post_sk WHERE d.post_sk IS NULL")[0]
+        out.append(['orphan post facts',int(r['n'])])
+    except Exception: pass
+    try:
+        r=q(cur,"SELECT COUNT(*) n FROM odl.dim_comments c LEFT JOIN odl.dim_posts p ON c.post_sk=p.post_sk WHERE p.post_sk IS NULL")[0]
+        out.append(['orphan comments',int(r['n'])])
+    except Exception: pass
+    return out or [['no orphans',0]]
+def ql_dq_score(cur):
+    rows=q(cur,f"SELECT processing_date d, ROUND(100*AVG(data_quality_score),1) s FROM odl.comment_sentiments WHERE processing_date>='{START}' AND data_quality_score IS NOT NULL GROUP BY 1")
+    return trend(align_daily(rows,'d','s',90,True))
+def ql_highconf_share(cur):
+    rows=q(cur,f"SELECT processing_date d, ROUND(100.0*AVG(CASE WHEN is_high_confidence THEN 1 ELSE 0 END),1) s FROM odl.comment_sentiments WHERE processing_date>='{START}' GROUP BY 1")
+    return trend(align_daily(rows,'d','s',80,True))
+def ql_validity(cur):
+    out=[]
+    r=q(cur,"SELECT COUNT(*) n FROM rdl.post_label_predictions WHERE nlp_sentiment_confidence<0 OR nlp_sentiment_confidence>1")[0]
+    out.append(['confidence out of range',int(r['n'] or 0)])
+    r=q(cur,"SELECT COUNT(*) n FROM odl.dim_comments WHERE reactions_total<0")[0]
+    out.append(['negative reactions',int(r['n'] or 0)])
+    return out
+def ql_text_lengths(cur):
+    rows=q(cur,"""SELECT bucket,COUNT(*) c FROM (
+        SELECT CASE WHEN word_count<3 THEN '1-2' WHEN word_count<6 THEN '3-5'
+                    WHEN word_count<11 THEN '6-10' WHEN word_count<21 THEN '11-20'
+                    ELSE '20+' END bucket
+        FROM odl.comment_sentiments_v2 WHERE word_count IS NOT NULL) t GROUP BY 1""")
+    order=['1-2','3-5','6-10','11-20','20+']; m={r['bucket']:int(r['c']) for r in rows}
+    return [[b,m.get(b,0)] for b in order]
+
+# ---- ANALYTICS ----
+def an_dist(cur,col,table,limit=15):
+    rows=q(cur,f"SELECT {col} v,COUNT(*) n FROM {table} WHERE {col} IS NOT NULL GROUP BY 1 ORDER BY n DESC LIMIT {limit}")
+    return [[str(r['v']),int(r['n'])] for r in rows]
+def an_sentiment_trend(cur):
+    rows=q(cur,f"""SELECT inserted_at::date d,
+        ROUND(100.0*SUM(CASE WHEN nlp_sentiment='positive' THEN 1 ELSE 0 END)/NULLIF(COUNT(*),0),1) pos
+      FROM rdl.post_label_predictions WHERE inserted_at>='{START}' GROUP BY 1""")
+    return trend(align_daily(rows,'d','pos',68,True))
+def an_reactions(cur):
+    r=q(cur,"""SELECT SUM(reactions_like) l,SUM(reactions_love) lo,SUM(reactions_haha) h,
+        SUM(reactions_wow) w,SUM(reactions_sad) s,SUM(reactions_angry) a FROM odl.dim_comments""")[0]
+    return [['Like',int(r['l'] or 0)],['Love',int(r['lo'] or 0)],['Haha',int(r['h'] or 0)],
+            ['Wow',int(r['w'] or 0)],['Sad',int(r['s'] or 0)],['Angry',int(r['a'] or 0)]]
+def an_emotion_scores(cur):
+    r=q(cur,"""SELECT AVG(emotion_joy_score) j,AVG(emotion_sadness_score) s,AVG(emotion_anger_score) a,
+        AVG(emotion_fear_score) f,AVG(emotion_surprise_score) su,AVG(emotion_disgust_score) d
+       FROM odl.comment_sentiments_v2""")[0]
+    return {'axes':['Joy','Sadness','Anger','Fear','Surprise','Disgust'],
+            'v':[round(100*float(r[k] or 0),1) for k in ['j','s','a','f','su','d']]}
+
 def main():
-    print("QA metrics generator - connecting to Redshift...")
+    print("Multi-tab QA metrics - connecting...")
     conn=connect(); cur=conn.cursor()
-    D={}
-    D['layers']    = safe(build_layers, cur)
-    D['coverage']  = safe(build_coverage, cur)
-    D['passrate']  = safe(build_pass_rate, cur)
-    D['bugssev']   = safe(build_bugs_severity, cur)
-    D['burn']      = safe(build_burn, cur)
-    D['pctile']    = safe(build_pctile, cur)
-    D['passfail']  = safe(build_pass_split, cur)
-    D['sec']       = safe(build_toxicity_guard, cur)
-    D['runsT']     = safe(build_freshness_table, cur)
-    D['slow']      = safe(build_warehouse_table, cur)
-    D['ready']     = safe(build_ready, cur)
-    dists          = safe(build_distributions, cur) or {}
-    if dists.get('topic'):  D['pyramid']  = dists['topic']      # reuse pyramid widget for topic breakdown
-    if dists.get('emotion'):D['aging']    = dists['emotion']
-    if dists.get('fusion'): D['covarea']  = dists['fusion']
-
-    # drop keys that failed so the dashboard falls back to seed for those
-    D={k:v for k,v in D.items() if v is not None}
-
+    tabs={}
+    tabs['accuracy']={'agreement':safe(acc_agreement,cur),'nlp_conf':safe(acc_confidence,cur,'nlp'),
+        'ds_conf':safe(acc_confidence,cur,'ds'),'confusion':safe(acc_confusion,cur),
+        'conf_buckets':safe(acc_conf_buckets,cur),'per_dim':safe(acc_per_dim,cur),
+        'escalation':safe(acc_escalation,cur),'proctime':safe(acc_proctime,cur)}
+    tabs['health']={'freshness':safe(hl_freshness_table,cur),'daily_loads':safe(hl_daily_loads,cur),
+        'load_status':safe(hl_load_status,cur),'missing_days':safe(hl_missing_days,cur),
+        'lag':safe(hl_lag,cur),'rowcount_delta':safe(hl_rowcount_delta,cur)}
+    tabs['quality']={'completeness':safe(ql_completeness,cur),'dupes':safe(ql_dupes,cur),
+        'integrity':safe(ql_integrity,cur),'dq_score':safe(ql_dq_score,cur),
+        'highconf':safe(ql_highconf_share,cur),'validity':safe(ql_validity,cur),
+        'text_lengths':safe(ql_text_lengths,cur)}
+    tabs['analytics']={'topic':safe(an_dist,cur,'nlp_topic','rdl.post_label_predictions'),
+        'intent':safe(an_dist,cur,'nlp_intent','rdl.post_label_predictions'),
+        'emotion':safe(an_dist,cur,'nlp_emotion','rdl.post_label_predictions'),
+        'fusion':safe(an_dist,cur,'fusion_label','rdl.fusion_predictions'),
+        'tier':safe(an_dist,cur,'influence_tier','odl.dim_pages'),
+        'sentiment_trend':safe(an_sentiment_trend,cur),'reactions':safe(an_reactions,cur),
+        'emotion_scores':safe(an_emotion_scores,cur)}
+    for t in tabs: tabs[t]={k:v for k,v in tabs[t].items() if v is not None}
     totals={}
     try:
-        totals['posts']=q(cur, "SELECT COUNT(*) n FROM rdl.post_label_predictions")[0]['n']
-        totals['comments']=q(cur, "SELECT COUNT(*) n FROM rdl.post_comments")[0]['n']
-        totals['pages']=q(cur, "SELECT COUNT(*) n FROM odl.dim_pages")[0]['n']
+        totals['posts']=q(cur,"SELECT COUNT(*) n FROM rdl.post_label_predictions")[0]['n']
+        totals['comments']=q(cur,"SELECT COUNT(*) n FROM rdl.post_comments")[0]['n']
+        totals['pages']=q(cur,"SELECT COUNT(*) n FROM odl.dim_pages")[0]['n']
     except Exception: pass
-
-    payload={
-        'generated_at': dt.datetime.utcnow().isoformat()+'Z',
-        'window': {'weeks': len(WEEKS), 'start': WK_START, 'labels': WK_LABELS},
-        'totals': totals,
-        'D': D,
-    }
-    with open(OUT_PATH,'w') as f: json.dump(payload, f, separators=(',',':'))
-    print(f"Wrote {OUT_PATH}: {len(D)} live metric groups, generated_at={payload['generated_at']}")
+    payload={'generated_at':dt.datetime.utcnow().isoformat()+'Z',
+             'window':{'days':WINDOW_DAYS,'start':START,'axis':[d.isoformat() for d in DAYS]},
+             'totals':totals,'tabs':tabs}
+    with open(OUT_PATH,'w') as f: json.dump(payload,f,separators=(',',':'))
+    n=sum(len(v) for v in tabs.values())
+    print(f"Wrote {OUT_PATH}: {n} live metrics across 4 tabs at {payload['generated_at']}")
     cur.close(); conn.close()
 
 if __name__=='__main__':
