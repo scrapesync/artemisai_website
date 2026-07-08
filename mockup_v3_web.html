@@ -275,6 +275,51 @@ body.light .storyv{background:#F5F7FB}
 body.light .sv-bars i{background:rgba(18,26,40,.14)}
 body.light .sv-bars i::after{background:#12161F}
 
+/* readable charts */
+.chart-note{font-size:11px;color:var(--t3);line-height:1.55;margin-top:9px}
+.chart-note b{color:var(--t2);font-weight:700}
+.axis{font-family:var(--mono);font-size:8px;fill:var(--t3)}
+.gline{stroke:var(--line);stroke-width:1;stroke-dasharray:2 4}
+.peaktag{font-family:var(--mono);font-size:8.5px;font-weight:700}
+.hbar{margin-bottom:11px}
+.hbar .hl2{display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:5px}
+.hbar .hl2 b{color:var(--t1);font-family:var(--mono);font-size:10.5px}
+.hbar .ht{height:10px;border-radius:99px;background:var(--surface2);overflow:hidden}
+.hbar .ht i{display:block;height:100%;border-radius:99px}
+.legend{display:flex;gap:14px;align-items:center;font-size:10px;color:var(--t3);margin-top:8px}
+.legend .sw{width:14px;height:9px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+/* week calendar */
+.cal{display:grid;grid-template-columns:52px repeat(7,1fr);gap:5px;margin-bottom:8px}
+.cal-h{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);text-align:center;padding:4px 0}
+.cal-h.today{color:var(--act)}
+.cal-h.today::after{content:'';display:block;width:16px;height:2px;background:var(--act);border-radius:2px;margin:3px auto 0}
+.cal-r{font-size:9px;font-weight:700;color:var(--t3);display:flex;align-items:center;justify-content:flex-end;padding-right:6px;text-transform:uppercase;letter-spacing:.5px}
+.cal-c{background:var(--surface2);border-radius:10px;min-height:56px;position:relative;border:1px solid transparent}
+.cal-c.today{border-color:rgba(0,196,160,.28);background:rgba(0,196,160,.05)}
+.cal-w{position:absolute;inset:4px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-weight:800;font-size:11px;color:#04352B;background:linear-gradient(135deg,#00d4aa,#00a88a);box-shadow:0 6px 14px -8px rgba(0,196,160,.6);cursor:pointer;transition:.15s}
+.cal-w:hover{transform:translateY(-1px)}
+.cal-w span{font-family:var(--mono);font-size:8px;font-weight:700;opacity:.85}
+.cal-w.soft{background:rgba(0,196,160,.16);color:var(--act);box-shadow:none;border:1px dashed rgba(0,196,160,.45)}
+.cal-ev{position:absolute;left:4px;right:4px;bottom:4px;border-radius:7px;background:rgba(139,123,255,.16);border:1px solid rgba(139,123,255,.45);color:var(--arte);font-size:8.5px;font-weight:800;padding:3px 5px;display:flex;align-items:center;gap:4px}
+body.light .cal-c{background:#EDF1F9}
+/* pro deck */
+.deck::before{content:'';position:absolute;inset:-24px -40px;background:radial-gradient(340px 220px at 50% 18%, rgba(139,123,255,.14), transparent 65%);pointer-events:none;filter:blur(4px)}
+.pcover{position:absolute;top:0;left:0;right:0;height:86px;border-radius:24px 24px 0 0;opacity:.9}
+.pcard{padding-top:0;overflow:hidden}
+.pcard .pav-big{margin:44px 0 10px;border:3px solid var(--surface);position:relative}
+.pcard .pverif{position:absolute;top:52px;left:88px;width:18px;height:18px;border-radius:50%;background:var(--act);color:#04352B;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;border:2.5px solid var(--surface)}
+.pstats{display:flex;gap:8px;margin:0 0 13px}
+.pstat{flex:1;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:8px 6px;text-align:center}
+.pstat b{display:block;font-family:var(--disp);font-size:15px;font-weight:800}
+.pstat span{font-size:8px;color:var(--t3);letter-spacing:.6px;text-transform:uppercase}
+.pstat.hot b{color:var(--arte)}
+.dact-l{display:flex;flex-direction:column;align-items:center;gap:5px}
+.dact-l small{font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.4px}
+.deck-dots{display:flex;gap:6px;justify-content:center;margin-bottom:16px}
+.deck-dots i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:.2s}
+.deck-dots i.on{width:18px;border-radius:99px;background:var(--arte)}
+.xbadge.ig{color:#fff;background:linear-gradient(45deg,#F58529,#DD2A7B 55%,#8134AF);border:none}
+.prev-tag{position:absolute;top:12px;right:12px;font-size:8px;font-weight:900;letter-spacing:1px;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:3px 8px;background:var(--surface)}
 /* studio + deck */
 .deck{position:relative;height:420px;max-width:520px;margin:4px auto 14px}
 .pcard{position:absolute;inset:0;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:26px;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.22,.68,.22,1), opacity .35s}
@@ -1027,9 +1072,14 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       <div class="draft-row" style="margin-bottom:22px"><span class="dsc" style="background:rgba(255,194,75,.1);color:var(--gold)">61</span><div style="flex:1"><div class="dt1">Friday short, first cut</div><div class="dt2">Art-E trimmed it to 84 chars, approve in Moves</div></div><button class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px" onclick="openCompose();loadDraft(2)">Edit</button><button class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px;color:var(--arte)" onclick="openCompose();loadDraft(2);setTimeout(improveDraft,300)">Improve</button></div>
 
       <div class="feed-label"><h3>Best times this week</h3><span class="newchip" style="color:var(--act);border-color:rgba(0,196,160,.4)">from your data</span></div>
-      <div class="win-row"><span class="wtime">Tue 6:40pm</span><span class="wbar"><i style="width:96%"></i></span><span class="wmono">2.4x &middot; 87%</span><button class="btn btn-primary" style="padding:8px 15px;font-size:12px" onclick="openCompose();setTimeIdxW(0)">Use</button></div>
-      <div class="win-row"><span class="wtime">Thu 8:00pm</span><span class="wbar"><i style="width:82%"></i></span><span class="wmono">2.1x &middot; 81%</span><button class="btn btn-ghost" style="padding:8px 15px;font-size:12px" onclick="openCompose();setTimeIdxW(1)">Use</button></div>
-      <div class="win-row" style="margin-bottom:22px"><span class="wtime">Sun 10:00am</span><span class="wbar"><i style="width:64%"></i></span><span class="wmono">1.7x &middot; 74%</span><button class="btn btn-ghost" style="padding:8px 15px;font-size:12px" onclick="openCompose();setTimeIdxW(2)">Use</button></div>
+      <div class="cal">
+        <div></div><div class="cal-h">Mon</div><div class="cal-h today">Tue</div><div class="cal-h">Wed</div><div class="cal-h">Thu</div><div class="cal-h">Fri</div><div class="cal-h">Sat</div><div class="cal-h">Sun</div>
+        <div class="cal-r">Morning</div><div class="cal-c"></div><div class="cal-c today"></div><div class="cal-c"></div><div class="cal-c"></div><div class="cal-c"></div><div class="cal-c"></div><div class="cal-c"><button class="cal-w" onclick="openCompose();setTimeIdxW(2)">10:00am<span>1.7x &middot; 74%</span></button></div>
+        <div class="cal-r">Midday</div><div class="cal-c"></div><div class="cal-c today"></div><div class="cal-c"></div><div class="cal-c"></div><div class="cal-c"></div><div class="cal-c"><button class="cal-w soft" onclick="openCompose();setTimeIdxW(0)">12:30pm<span>1.5x</span></button></div><div class="cal-c"></div>
+        <div class="cal-r">Evening</div><div class="cal-c"></div><div class="cal-c today"><button class="cal-w" onclick="openCompose();setTimeIdxW(0)">6:40pm<span>2.4x &middot; 87%</span></button><span class="cal-ev">&#128197; Pasta reel</span></div><div class="cal-c"><button class="cal-w soft" onclick="openCompose();setTimeIdxW(0)">7:00pm<span>1.6x</span></button></div><div class="cal-c"><button class="cal-w" onclick="openCompose();setTimeIdxW(1)">8:00pm<span>2.1x &middot; 81%</span></button></div><div class="cal-c"></div><div class="cal-c"></div><div class="cal-c"></div>
+        <div class="cal-r">Late</div><div class="cal-c"></div><div class="cal-c today"></div><div class="cal-c"></div><div class="cal-c"></div><div class="cal-c"><button class="cal-w soft" onclick="openCompose();setTimeIdxW(1)">10pm<span>Munchies</span></button></div><div class="cal-c"></div><div class="cal-c"></div>
+      </div>
+      <div class="legend" style="margin-bottom:22px"><span><span class="sw" style="background:linear-gradient(135deg,#00d4aa,#00a88a)"></span>your window, tap to book</span><span><span class="sw" style="background:rgba(0,196,160,.16);border:1px dashed rgba(0,196,160,.45)"></span>decent</span><span><span class="sw" style="background:rgba(139,123,255,.16);border:1px solid rgba(139,123,255,.45)"></span>scheduled</span><span style="margin-left:auto">teal column = today</span></div>
 
       <div class="feed-label"><h3>Scheduled</h3></div>
       <div class="sched-row" style="margin:0 0 8px"><span>&#128197;</span><span style="flex:1">Pasta reel &middot; <b>today 6:40pm</b> &middot; Sana's Kitchen</span><span class="mono">2.4x &middot; 87%</span><button class="btn btn-ghost" style="padding:7px 13px;font-size:11.5px" onclick="openCompose()">Edit</button><button class="btn btn-ghost" style="padding:7px 13px;font-size:11.5px;color:var(--rose)" onclick="toast('Unscheduled. The window stays open until 7pm.')">Cancel</button></div>
@@ -1049,10 +1099,10 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       <div id="dsc-others">
         <div class="deck" id="deck"></div>
         <div class="dacts">
-          <button class="dact pass" onclick="deckPass()" aria-label="Pass" title="Pass">&#10005;</button>
-          <button class="dact" onclick="deckDetails()" aria-label="Details" title="Full profile">&#8942;</button>
-          <button class="dact save" onclick="deckSave()" aria-label="Save" title="Save for later">&#9733;</button>
-          <button class="dact collab" onclick="deckCollab()">&#129309; Collab</button>
+          <span class="dact-l"><button class="dact pass" onclick="deckPass()" aria-label="Pass">&#10005;</button><small>Pass</small></span>
+          <span class="dact-l"><button class="dact" onclick="deckDetails()" aria-label="Details">&#8942;</button><small>Profile</small></span>
+          <span class="dact-l"><button class="dact save" onclick="deckSave()" aria-label="Save">&#9733;</button><small>Save</small></span>
+          <span class="dact-l"><button class="dact collab" onclick="deckCollab()">&#129309; Collab</button><small>&nbsp;</small></span>
         </div>
         <div class="deck-count" id="deckCount"></div>
         <div class="feed-label" style="margin-top:8px"><h3>Saved by you</h3></div>
@@ -1095,13 +1145,13 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
       <!-- ACROSS PLATFORMS -->
       <div id="dsc-x" style="display:none">
         <div class="milestone" style="margin-bottom:16px"><span style="font-size:16px">&#128279;</span><div class="mtx"><b>Connect Instagram</b> to act on these. Mapping is modelled from public signals until then.</div><button class="btn btn-primary" onclick="openConnect()">Connect</button></div>
-        <button class="card" onclick="toast('Full cross-platform profiles unlock when Instagram is connected.')">
+        <button class="card" style="position:relative" onclick="toast('Full cross-platform profiles unlock when Instagram is connected.')"><span class="prev-tag">Preview</span>
           <div class="card-top"><span class="xbadge ig">&#9679; Instagram</span><span class="card-time" style="margin-left:auto">modelled 31%</span></div>
           <div class="card-line">@plantbased.daily <b>overlaps your Sunday crowd</b></div>
           <p class="card-why">Their reel audience matches your Family Feasts profile. A cross-platform collab reaches people Facebook alone cannot.</p>
           <span class="card-act">Preview the match &rarr;</span>
         </button>
-        <button class="card" onclick="toast('Mirroring plan unlocks with Instagram connect.')">
+        <button class="card" style="position:relative" onclick="toast('Mirroring plan unlocks with Instagram connect.')"><span class="prev-tag">Preview</span>
           <div class="card-top"><span class="xbadge fb">f Facebook</span><span style="color:var(--t3);font-size:11px">&rarr;</span><span class="xbadge ig">&#9679; Instagram</span><span class="card-time" style="margin-left:auto">est. +18k</span></div>
           <div class="card-line">Mirror your top reels to <b>@sanaskitchen on IG</b></div>
           <p class="card-why">Your three best Facebook reels fit IG Reels natively. Art-E would repost with tuned captions and track both sides.</p>
@@ -1137,7 +1187,15 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         </div>
         <div class="dgrid" style="grid-template-columns:1fr 1fr">
           <div class="dcard"><h5>Reach <span class="rangepills" style="display:inline-flex;gap:5px;margin-left:8px"><button class="rpill" onclick="setRange(this,7)">7d</button><button class="rpill on" onclick="setRange(this,14)">14d</button><button class="rpill" onclick="setRange(this,30)">30d</button></span><b>Sana's Kitchen</b></h5>
-            <svg width="100%" height="100" viewBox="0 0 400 100" preserveAspectRatio="none"><path id="reachPath" d="M0,72 L30,67 L60,76 L90,63 L120,68 L150,79 L180,81 L210,78 L240,83 L270,54 L300,47 L330,34 L360,18 L400,23" fill="none" stroke="#00C4A0" stroke-width="2.5"/><circle cx="360" cy="18" r="4" fill="#00C4A0"/><text x="286" y="12" font-size="10" fill="#00C4A0" font-family="monospace">2.9x reel</text></svg></div>
+            <svg width="100%" height="128" viewBox="0 0 400 128" preserveAspectRatio="none">
+              <defs><linearGradient id="reachFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00C4A0" stop-opacity=".28"/><stop offset="1" stop-color="#00C4A0" stop-opacity="0"/></linearGradient></defs>
+              <line class="gline" x1="34" y1="18" x2="400" y2="18"/><line class="gline" x1="34" y1="56" x2="400" y2="56"/><line class="gline" x1="34" y1="94" x2="400" y2="94"/>
+              <text class="axis" x="0" y="21">120k</text><text class="axis" x="4" y="59">60k</text><text class="axis" x="10" y="97">0</text>
+              <g transform="translate(34,4) scale(0.915,0.9)"><path id="reachArea" d="M0,80 L30,74 L60,84 L90,70 L120,76 L150,88 L180,90 L210,86 L240,92 L270,60 L300,52 L330,38 L360,20 L400,26 L400,100 L0,100 Z" fill="url(#reachFill)"/><path id="reachPath" d="M0,80 L30,74 L60,84 L90,70 L120,76 L150,88 L180,90 L210,86 L240,92 L270,60 L300,52 L330,38 L360,20 L400,26" fill="none" stroke="#00C4A0" stroke-width="2.5" stroke-linecap="round"/><circle id="reachPeak" cx="360" cy="20" r="4.5" fill="#07090D" stroke="#00C4A0" stroke-width="2.5"/></g>
+              <text class="peaktag" id="reachPeakTag" x="330" y="14" fill="#00C4A0">Tue &middot; 118k</text>
+              <text class="axis" x="36" y="124">14 days ago</text><text class="axis" x="356" y="124">today</text>
+            </svg>
+            <div class="chart-note"><b>Read:</b> higher line, more people saw you. That last climb is the pasta reel, and the dot is your best day.</div></div>
           <div class="dcard"><h5>How you compare <b>your lane, not the whole internet</b></h5>
         <div style="font-size:12.5px;color:var(--t2);line-height:1.7">Top 9% on content quality among UK food pages. Cadence is the gap: two 4-day quiet stretches this month. Caption sweet spot on your pages: <b style="color:var(--t1)">two emojis, under 90 characters, open with a question.</b></div>
         <button class="askA" onclick="arteExplain('health')">&#10022; Ask Art-E about the gap</button></div>
@@ -1161,9 +1219,15 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
             <rect x="34" y="84" width="64" height="11" rx="3" fill="rgba(0,196,160,.18)"/><rect x="102" y="84" width="64" height="11" rx="3" fill="rgba(0,196,160,.30)"/><rect x="170" y="84" width="64" height="11" rx="3" fill="rgba(0,196,160,.22)"/><rect x="238" y="84" width="64" height="11" rx="3" fill="rgba(0,196,160,.24)"/><rect x="306" y="84" width="48" height="11" rx="3" fill="rgba(0,196,160,.18)"/><rect x="358" y="84" width="38" height="11" rx="3" fill="rgba(0,196,160,.10)"/>
             <rect x="238" y="24" width="64" height="11" rx="3" fill="none" stroke="#FFC24B" stroke-width="1.5"/>
           </g>
-        </svg><button class="askA" onclick="arteExplain('timing')">&#10022; Why these windows?</button></div>
+        </svg>
+        <div class="legend"><span><span class="sw" style="background:rgba(0,196,160,.14)"></span>quiet</span><span><span class="sw" style="background:rgba(0,196,160,.5)"></span>good</span><span><span class="sw" style="background:rgba(0,196,160,.95)"></span>your window</span><span style="margin-left:auto"><span class="sw" style="background:transparent;border:1.5px solid #FFC24B"></span>#1 this week</span></div>
+        <div class="chart-note"><b>Read:</b> darker means your people are there. Post inside the dark blocks, the gold ring is this week's number one.</div>
+        <button class="askA" onclick="arteExplain('timing')">&#10022; Why these windows?</button></div>
       <div class="dcard"><h5>Content mix that works <b>saves-weighted</b></h5>
-            <svg width="100%" height="100" viewBox="0 0 400 100"><rect x="20" y="26" width="52" height="64" rx="7" fill="rgba(0,196,160,.75)"/><rect x="96" y="41" width="52" height="49" rx="7" fill="rgba(0,196,160,.45)"/><rect x="172" y="52" width="52" height="38" rx="7" fill="rgba(139,123,255,.5)"/><rect x="248" y="65" width="52" height="25" rx="7" fill="rgba(87,181,240,.45)"/><rect x="324" y="74" width="52" height="16" rx="7" fill="rgba(94,104,117,.5)"/><text x="24" y="18" font-size="9.5" fill="#9AA3B2">reels</text><text x="98" y="33" font-size="9.5" fill="#9AA3B2">recipe cards</text><text x="176" y="44" font-size="9.5" fill="#9AA3B2">carousels</text><text x="252" y="57" font-size="9.5" fill="#9AA3B2">photos</text><text x="330" y="66" font-size="9.5" fill="#9AA3B2">text</text></svg></div>
+            <div class="hbar"><div class="hl2"><span>&#127916; Reels</span><b>46% of your saves</b></div><div class="ht"><i style="width:46%;background:linear-gradient(90deg,#00C4A0,#4DE3C6)"></i></div></div>
+            <div class="hbar"><div class="hl2"><span>&#128444;&#65039; Carousels</span><b>31%</b></div><div class="ht"><i style="width:31%;background:linear-gradient(90deg,#57B5F0,#8CCBF7)"></i></div></div>
+            <div class="hbar" style="margin-bottom:0"><div class="hl2"><span>&#128247; Single photos</span><b>23%</b></div><div class="ht"><i style="width:23%;background:linear-gradient(90deg,#8B7BFF,#B4A6FF)"></i></div></div>
+            <div class="chart-note"><b>Read:</b> reels earn nearly half your saves. When in doubt, make it a reel.</div></div>
         </div>
         <p class="quiet">Every chart backs a sentence Art-E has said. Ask Art-E when you want the story, come here when you want the numbers.</p>
       </div>
@@ -1659,7 +1723,12 @@ function updateSetup(){ const t=setupDone+' of 6'; document.getElementById('ckCo
 function ckDone(id){ const r=document.getElementById(id); if(r.classList.contains('done')) return; r.classList.add('done'); r.querySelector('.ckbtn')?.remove(); setupDone++; updateSetup(); }
 function doWhats(btn){ const w=document.getElementById('waTog'); if(w) w.classList.add('on'); ckDone('ckWa'); toast('WhatsApp alerts on. Crisis pings arrive there too.'); }
 const RANGES={7:'M0,70 L57,64 L114,72 L171,55 L228,60 L285,42 L342,28 L400,24',14:'M0,80 L30,74 L60,84 L90,70 L120,76 L150,88 L180,90 L210,86 L240,92 L270,60 L300,52 L330,38 L360,20 L400,26',30:'M0,60 L40,66 L80,58 L120,70 L160,64 L200,74 L240,66 L280,52 L320,44 L360,30 L400,26'};
-function setRange(btn,d){ btn.parentElement.querySelectorAll('.rpill').forEach(x=>x.classList.remove('on')); btn.classList.add('on'); const p=document.getElementById('reachPath'); if(p) p.setAttribute('d', RANGES[d]); }
+function setRange(btn,d){ btn.parentElement.querySelectorAll('.rpill').forEach(x=>x.classList.remove('on')); btn.classList.add('on'); const p=document.getElementById('reachPath'); if(p) p.setAttribute('d', RANGES[d]);
+  const a=document.getElementById('reachArea'); if(a) a.setAttribute('d', RANGES[d]+' L400,100 L0,100 Z');
+  const pts=RANGES[d].replace(/[ML]/g,'').trim().split(' ').map(x=>x.split(',').map(Number));
+  let best=pts[0]; pts.forEach(pt=>{ if(pt[1]<best[1]) best=pt; });
+  const c=document.getElementById('reachPeak'); if(c){ c.setAttribute('cx',best[0]); c.setAttribute('cy',best[1]); }
+  const t=document.getElementById('reachPeakTag'); if(t){ t.setAttribute('x', Math.min(34+best[0]*0.915-28, 342)); t.textContent=(d===7?'Tue':'best day')+' peak'; } }
 window.addEventListener('load',()=>{ document.querySelectorAll('#rawtbl tbody tr').forEach(r=>{ r.style.cursor='pointer'; r.title='Why did this post perform like that?'; r.onclick=()=>askArte('Why did this post perform like that?'); }); });
 
 /* ── master plan ── */
@@ -1730,10 +1799,10 @@ function improveDraft(){ const ta=document.getElementById('draft');
 const TIMES=[['Today 6:40pm','2.4x'],['Thu 8:00pm','2.1x'],['Sun 10:00am','1.7x']];
 let schedSel=0;
 const DECK=[
- {k:'homecooked',ini:'HC',c:'#8B7BFF',n:'@HomeCookedDaily',sub:'Family cooking &middot; 96k followers &middot; posts 1 to 3pm',ovl:'41%',why:'<b>8,200 of your people</b> already follow them, and their strong hours are exactly your quiet window. Estimated <b>+12k reach</b> from one collab reel.',tags:['Tone: high match','Peak 1-3pm','+12k est.']},
- {k:'spiceroute',ini:'SR',c:'#57B5F0',n:'@SpiceRouteStories',sub:'Weeknight curries &middot; 71k &middot; morning crowd',ovl:'33%',why:'Their <b>8 to 10am</b> strength complements your evenings, so a collab covers the whole day. Estimated <b>+8k reach</b>.',tags:['Complementary hours','+8k est.']},
- {k:'budgetbites',ini:'BB',c:'#FFC24B',n:'@BudgetBites',sub:'Student meals &middot; 52k &middot; strong under-25s',ovl:'28%',why:'Their under-25 core is <b>your thinnest segment</b>. One duet-style short is the natural format. Estimated <b>+6k</b>.',tags:['Under-25 reach','Duet format']},
- {k:'plantplates',ini:'PP',c:'#00C4A0',n:'@PlantPlates',sub:'Veg swaps &middot; 44k &middot; Sunday mornings',ovl:'24%',why:'<b>Sunday 9 to 11am</b> is theirs and empty for you. A veg-swap of your pasta reel fits both audiences. Estimated <b>+5k</b>.',tags:['Sunday window','+5k est.']}];
+ {k:'homecooked',ini:'HC',c:'#8B7BFF',n:'@HomeCookedDaily',sub:'Family cooking &middot; 96k followers &middot; posts 1 to 3pm',ovl:'41%',fol:'96k',est:'+12k',why:'<b>8,200 of your people</b> already follow them, and their strong hours are exactly your quiet window. Estimated <b>+12k reach</b> from one collab reel.',tags:['Tone: high match','Peak 1-3pm','+12k est.']},
+ {k:'spiceroute',ini:'SR',c:'#57B5F0',n:'@SpiceRouteStories',sub:'Weeknight curries &middot; 71k &middot; morning crowd',ovl:'33%',fol:'71k',est:'+8k',why:'Their <b>8 to 10am</b> strength complements your evenings, so a collab covers the whole day. Estimated <b>+8k reach</b>.',tags:['Complementary hours','+8k est.']},
+ {k:'budgetbites',ini:'BB',c:'#FFC24B',n:'@BudgetBites',sub:'Student meals &middot; 52k &middot; strong under-25s',ovl:'28%',fol:'52k',est:'+6k',why:'Their under-25 core is <b>your thinnest segment</b>. One duet-style short is the natural format. Estimated <b>+6k</b>.',tags:['Under-25 reach','Duet format']},
+ {k:'plantplates',ini:'PP',c:'#00C4A0',n:'@PlantPlates',sub:'Veg swaps &middot; 44k &middot; Sunday mornings',ovl:'24%',fol:'44k',est:'+5k',why:'<b>Sunday 9 to 11am</b> is theirs and empty for you. A veg-swap of your pasta reel fits both audiences. Estimated <b>+5k</b>.',tags:['Sunday window','+5k est.']}];
 let deckIdx=0;
 function deckRender(){ const d=document.getElementById('deck'); if(!d) return;
   d.innerHTML='';
@@ -1741,13 +1810,14 @@ function deckRender(){ const d=document.getElementById('deck'); if(!d) return;
   if(!rest.length){ d.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--t3);font-size:13px;gap:10px"><span style="font-size:30px">&#129309;</span>Deck cleared. New matches will alert you.</div>'; document.getElementById('deckCount').textContent=''; return; }
   rest.slice(0,3).forEach((m,x)=>{
     d.insertAdjacentHTML('beforeend', `<div class="pcard" data-pos="${x}" style="z-index:${9-x}">
-      <span class="pav-big" style="background:${m.c}22;color:${m.c}">${m.ini}</span>
-      <div class="pbig"><b>${m.ovl}</b><span>real overlap</span></div>
+      <span class="pcover" style="background:linear-gradient(135deg, ${m.c}44, ${m.c}11 70%)"></span>
+      <span class="pav-big" style="background:${m.c}26;color:${m.c}">${m.ini}</span><span class="pverif" title="Verified by overlap">&#10003;</span>
       <div class="pname">${m.n}</div><div class="psub">${m.sub}</div>
+      <div class="pstats"><div class="pstat"><b>${m.fol}</b><span>followers</span></div><div class="pstat hot"><b>${m.ovl}</b><span>real overlap</span></div><div class="pstat"><b>${m.est}</b><span>est. reach</span></div></div>
       <div class="pwhy">${m.why}</div>
       <div class="ptags">${m.tags.map(t=>'<span class="ptag">'+t+'</span>').join('')}</div>
     </div>`); });
-  document.getElementById('deckCount').textContent=(deckIdx+1)+' of '+DECK.length+' &middot; found this week'.replace('&middot;','·');
+  document.getElementById('deckCount').innerHTML='<span class="deck-dots">'+DECK.map((_,x)=>'<i class="'+(x===deckIdx?'on':'')+'"></i>').join('')+'</span>';
 }
 function deckPass(){ const top=document.querySelector('.pcard[data-pos="0"]'); if(!top) return; top.classList.add('fly'); toast('Passed. This one stays gone.'); setTimeout(()=>{deckIdx++; deckRender();},330); }
 function deckSave(){ toast('Saved for later.'); const top=document.querySelector('.pcard[data-pos="0"]'); if(top){ top.style.transform='translateY(-8px) scale(1.01)'; setTimeout(()=>{deckIdx++; deckRender();},260);} }
