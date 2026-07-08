@@ -364,7 +364,7 @@ body.light .dact{background:rgba(255,255,255,.75)}
 #at-ov .dcard:hover,#at-vir .dcard:hover,#at-photo .dcard:hover{transform:none;box-shadow:none}
 #at-ov .dgrid2,#at-vir .dgrid2,#at-photo .dgrid2{gap:0 44px}
 #at-ov .dcard>h5,#at-vir .dcard>h5,#at-photo .dcard>h5{font-size:14.5px;margin-bottom:14px}
-#at-ov .kpis2{background:transparent;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+#at-ov .kpis2{background:transparent;gap:0;border:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0;overflow:hidden}
 #at-ov .kpi2{background:transparent;border:none;border-radius:0;border-left:1px solid var(--line);padding:15px 18px 12px}
 #at-ov .kpi2:first-child{border-left:none}
 .sec-label{grid-column:1/-1;margin:14px 0 2px}
@@ -819,6 +819,45 @@ body.light .hl{color:#00705A}
 body.light .milestone .mtx b{color:#8A6100}
 body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,125,99,.3)}
 
+/* swipe mode + final de-widget */
+.dmode{display:inline-flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:3px}
+.dm{font-size:11px;font-weight:800;padding:6px 14px;border-radius:99px;color:var(--t3);transition:.15s}
+.dm.on{background:var(--surface2);color:var(--t1)}
+.swdeck{position:relative;height:392px;max-width:520px;margin:16px auto 4px;touch-action:pan-y}
+.tcard{position:absolute;inset:auto;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:484px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 22px 20px;transition:transform .45s cubic-bezier(.22,.68,.22,1), opacity .3s;will-change:transform}
+.tcard::before{content:'';position:absolute;top:-1px;left:22px;right:22px;height:3px;border-radius:0 0 3px 3px;background:var(--tc)}
+.tcard.behind{transform:translateX(-50%) translateY(16px) scale(.96);opacity:.55;z-index:1;pointer-events:none}
+.tcard.top{z-index:3;cursor:grab}
+.tcard.dragging{transition:none;cursor:grabbing}
+.tcard.flyL{transform:translateX(-170%) rotate(-14deg) !important;opacity:0}
+.tcard.flyR{transform:translateX(70%) rotate(14deg) !important;opacity:0}
+.tc-top{display:flex;align-items:center;gap:13px}
+.tc-ring{position:relative;width:56px;height:56px;flex:0 0 auto}
+.tc-ring svg{position:absolute;inset:0}
+.tc-av{position:absolute;inset:6px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;color:#fff;background:var(--tc)}
+.tc-id{min-width:0;flex:1}
+.tc-id b{font-family:var(--disp);font-size:17.5px;letter-spacing:-.3px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tc-id span{font-size:11.5px;color:var(--t2);display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tc-big{text-align:right;flex:0 0 auto}
+.tc-big b{font-family:var(--disp);font-size:34px;font-weight:800;letter-spacing:-1.6px;line-height:.95}
+.tc-big small{display:block;font-size:7.5px;letter-spacing:1px;color:var(--t3);font-weight:800;margin-top:3px;text-transform:uppercase}
+.tc-why{font-size:12.5px;color:var(--t2);line-height:1.6;margin:14px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tc-meters{display:flex;justify-content:space-between;margin:15px 0 0}
+.tc-cta{display:flex;gap:9px;margin:17px 0 0}
+.swacts{display:flex;gap:14px;justify-content:center;align-items:center;margin:14px 0 0}
+.swb{width:50px;height:50px;border-radius:50%;background:var(--surface);border:1px solid var(--line);font-size:18px;display:flex;align-items:center;justify-content:center;transition:.15s;color:var(--t2)}
+.swb:hover{transform:translateY(-2px)}
+.swb.pass:hover{color:var(--rose);border-color:rgba(255,92,116,.5)}
+.swb.save:hover{color:var(--gold);border-color:rgba(255,194,75,.5)}
+.swb.go{width:auto;height:50px;padding:0 24px;border-radius:99px;font-size:13px;font-weight:800;color:var(--t1)}
+.swhint{text-align:center;font-size:10.5px;color:var(--t3);margin-top:10px;letter-spacing:.3px}
+.trust,.moves,.match,.rule{background:transparent;border:none;border-radius:0;padding:14px 2px;margin:0;border-bottom:1px solid var(--line)}
+.moves{padding:6px 2px 12px;margin:0 0 18px}
+.brief-card{background:transparent;border:none;border-left:3px solid var(--arte);border-radius:0;padding:12px 0 12px 15px;margin-bottom:18px;border-bottom:1px solid var(--line)}
+body.light .brief-card{background:transparent}
+.milestone{background:transparent;border:none;border-left:3px solid var(--gold);border-radius:0;padding:11px 0 11px 15px;margin:0 0 18px;border-bottom:1px solid var(--line)}
+body.light .milestone{background:transparent}
+.spot-chips span{background:var(--surface2);border:none}
 /* discovery vNext: scouting report */
 #v-discovery{max-width:1000px}
 .dpipe{display:flex;gap:14px;align-items:center;font-size:12.5px;color:var(--t3);padding:11px 2px;border-bottom:1px solid var(--line);margin:2px 0 20px}
@@ -1325,8 +1364,17 @@ body.light .card:hover{box-shadow:none}
       <div class="feed-label"><h3>Top match</h3></div>
       <div class="spot" id="spot"></div>
 
-      <div class="feed-label" style="margin-top:26px"><h3>More matches</h3></div>
+      <div class="feed-label" style="margin-top:26px;display:flex;align-items:center"><h3>More matches</h3>
+        <span class="dmode" style="margin-left:auto"><button class="dm on" data-m="list" onclick="setDiscMode('list')">&#9776; List</button><button class="dm" data-m="swipe" onclick="setDiscMode('swipe')">&#10084; Swipe</button></span>
+      </div>
       <div id="mrows"></div>
+      <div id="swdeck" class="swdeck" style="display:none"></div>
+      <div id="swacts" class="swacts" style="display:none">
+        <button class="swb pass" onclick="swAct(-1)" title="Pass">&#10005;</button>
+        <button class="swb go" onclick="swCollab(event)">&#129309; Collab</button>
+        <button class="swb save" onclick="swAct(1)" title="Save">&#9733;</button>
+      </div>
+      <div id="swhint" class="swhint" style="display:none">&#8592; pass &nbsp;&middot;&nbsp; drag the card &nbsp;&middot;&nbsp; save &#8594;</div>
 
       <div class="feed-label" style="margin-top:30px"><h3>Between your pages</h3></div>
       <button class="card" data-page="all" onclick="openCompose()">
@@ -2329,6 +2377,43 @@ function discCollab(btn){ const sp=MATCH.find(m=>m.k===spotK); if(!sp||SENT.has(
   if(sp.k==='homecooked'){ PIPE.active.push(sp.n); if(btn){btn.textContent='\u2713 Opening your chat'; btn.disabled=true;} toast('Intro sent. Maya usually replies fast.'); setTimeout(()=>{ setView('inbox'); openChat(); renderDisc(); },750); }
   else { PIPE.intro.push(sp.n); if(btn){btn.textContent='\u2713 Intro sent'; btn.disabled=true;} toast('Intro drafted and sent in your voice. Replies land in the Inbox.'); setTimeout(renderDisc,900); }
   renderPipe(); }
+let discMode='list';
+const SW_SKIP=new Set();
+function setDiscMode(m){ discMode=m; document.querySelectorAll('.dm').forEach(b=>b.classList.toggle('on', b.dataset.m===m));
+  document.getElementById('mrows').style.display = m==='list'?'':'none';
+  ['swdeck','swacts','swhint'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = m==='swipe'?'':'none'; });
+  if(m==='swipe') renderSwipe(); else renderDisc(); }
+function swipePool(){ return discList().filter(m=>!SENT.has(m.k) && !SW_SKIP.has(m.k)); }
+function tcardHTML(m,cls){ const R=25,C=2*Math.PI*R,p=parseInt(m.ovl); return `<div class="tcard ${cls}" data-k="${m.k}" style="--tc:${m.c}">
+  <div class="tc-top"><span class="tc-ring"><svg width="56" height="56" viewBox="0 0 56 56"><circle cx="28" cy="28" r="25" fill="none" stroke="var(--surface2)" stroke-width="4"/><circle cx="28" cy="28" r="25" fill="none" stroke="${m.c}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${C*p/100} ${C}" transform="rotate(-90 28 28)"/></svg><span class="tc-av">${m.ini}</span></span>
+  <span class="tc-id"><b>${m.n}</b><span>${m.sub} &middot; ${m.fol} followers</span></span>
+  <span class="tc-big"><b>${m.ovl}</b><small>overlap</small></span></div>
+  <div class="tc-why">${m.why}</div>
+  <div class="tc-meters"><span class="smet"><b>${m.aud}</b>Audience<span class="sb"><i style="width:${m.aud}%"></i></span></span><span class="smet"><b>${m.tone}</b>Tone<span class="sb"><i style="width:${m.tone}%"></i></span></span><span class="smet"><b>${m.time}</b>Timing<span class="sb"><i style="width:${m.time}%"></i></span></span></div>
+  <div class="tc-cta"><button class="sbtn pri" style="flex:1" onclick="swCollab(event)">&#129309; Request collab</button><button class="sbtn gho" onclick="swProfile(event)">Profile</button></div>
+</div>`; }
+function renderSwipe(){ const d=document.getElementById('swdeck'); if(!d) return; const pool=swipePool();
+  const acts=document.getElementById('swacts');
+  if(!pool.length){ d.innerHTML='<div style="padding:44px 10px;text-align:center;color:var(--t2);font-size:13.5px;line-height:1.7">You have swiped the week clean.<br>Fresh matches land nightly, and the list keeps everything you saved.</div>'; if(acts) acts.style.visibility='hidden'; return; }
+  if(acts) acts.style.visibility='';
+  d.innerHTML = pool.slice(0,2).map((m,i)=>tcardHTML(m, i===0?'top':'behind')).reverse().join('');
+  initSwipe2(); }
+function topT(){ return document.querySelector('.tcard.top'); }
+function swAct(dir){ const t=topT(); if(!t) return; const k=t.dataset.k, m=MATCH.find(x=>x.k===k);
+  t.classList.add(dir<0?'flyL':'flyR');
+  if(dir<0){ toast('Passed. Hidden from this week.'); setTimeout(()=>{ const i=MATCH.findIndex(x=>x.k===k); if(i>=0) MATCH.splice(i,1); if(spotK===k) spotK=null; renderSwipe(); renderPipe(); },360); }
+  else { if(m && !PIPE.saved.includes(m.n)) PIPE.saved.push(m.n); toast('Saved. Right swipe means keeper.'); setTimeout(()=>{ SW_SKIP.add(k); renderSwipe(); renderPipe(); },360); } }
+function swCollab(e){ if(e) e.stopPropagation(); const t=topT(); if(!t) return; spotK=t.dataset.k; t.classList.add('flyR'); discCollab(null); setTimeout(renderSwipe, 420); }
+function swProfile(e){ if(e) e.stopPropagation(); const t=topT(); if(t) openDiscovery(t.dataset.k); }
+function initSwipe2(){ const d=document.getElementById('swdeck'); if(!d||d.dataset.sw) { bindSwipeTop(); return; } d.dataset.sw=1; bindSwipeTop();
+  function noop(){} }
+function bindSwipeTop(){ const d=document.getElementById('swdeck'); const t=topT(); if(!d||!t||t.dataset.bound) return; t.dataset.bound=1;
+  let sx=0,dx=0,drag=false;
+  t.addEventListener('pointerdown',e=>{ if(e.target.closest('button')) return; drag=true; sx=e.clientX; dx=0; t.classList.add('dragging'); t.setPointerCapture(e.pointerId); });
+  t.addEventListener('pointermove',e=>{ if(!drag) return; dx=e.clientX-sx; t.style.transform=`translateX(calc(-50% + ${dx}px)) rotate(${dx*0.05}deg)`; });
+  const up=()=>{ if(!drag) return; drag=false; t.classList.remove('dragging'); t.style.transform='';
+    if(dx<-80) swAct(-1); else if(dx>80) swAct(1); };
+  t.addEventListener('pointerup',up); t.addEventListener('pointercancel',up); }
 window.addEventListener('load', renderDisc);
 
 function setTimeIdxW(i){ schedSel=i; setTimeout(()=>{ const ps=[...document.querySelectorAll('#compose .tpill')]; ps.forEach((t,x)=>t.classList.toggle('on',x===i)); const b=document.getElementById('schedBtn'); if(b) b.textContent='Schedule for '+TIMES[i][0]; },80); }

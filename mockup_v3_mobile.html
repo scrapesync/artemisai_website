@@ -671,6 +671,41 @@ body.light .hl{color:#00705A}
 body.light .milestone .mtx b{color:#8A6100}
 body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,125,99,.3)}
 
+/* swipe mode + final de-widget m */
+.dmode{display:inline-flex;gap:3px;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:2px}
+.dm{font-size:11px;font-weight:800;padding:5px 11px;border-radius:99px;color:var(--t3)}
+.dm.on{background:var(--surface2);color:var(--t1)}
+.swdeck{position:relative;height:314px;margin:12px 0 2px;touch-action:pan-y}
+.tcard{position:absolute;inset:auto;top:0;left:50%;transform:translateX(-50%);width:100%;background:var(--surface);border:1px solid var(--line);border-radius:17px;padding:15px 15px 14px;transition:transform .45s cubic-bezier(.22,.68,.22,1), opacity .3s;will-change:transform}
+.tcard::before{content:'';position:absolute;top:-1px;left:16px;right:16px;height:3px;border-radius:0 0 3px 3px;background:var(--tc)}
+.tcard.behind{transform:translateX(-50%) translateY(12px) scale(.96);opacity:.55;z-index:1;pointer-events:none}
+.tcard.top{z-index:3}
+.tcard.dragging{transition:none}
+.tcard.flyL{transform:translateX(-170%) rotate(-14deg) !important;opacity:0}
+.tcard.flyR{transform:translateX(70%) rotate(14deg) !important;opacity:0}
+.tc-top{display:flex;align-items:center;gap:10px}
+.tc-ring{position:relative;width:46px;height:46px;flex:0 0 auto}
+.tc-ring svg{position:absolute;inset:0}
+.tc-av{position:absolute;inset:5px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;background:var(--tc)}
+.tc-id{min-width:0;flex:1}
+.tc-id b{font-family:var(--disp);font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tc-id span{font-size:9.5px;color:var(--t2);display:block;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tc-big{text-align:right;flex:0 0 auto}
+.tc-big b{font-family:var(--disp);font-size:27px;font-weight:800;letter-spacing:-1.2px;line-height:.95}
+.tc-big small{display:block;font-size:6.5px;letter-spacing:.8px;color:var(--t3);font-weight:800;margin-top:2px;text-transform:uppercase}
+.tc-why{font-size:10.5px;color:var(--t2);line-height:1.55;margin:11px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tc-meters{display:flex;justify-content:space-between;margin:12px 0 0}
+.tc-cta{display:flex;gap:7px;margin:13px 0 0}
+.swacts{display:flex;gap:12px;justify-content:center;align-items:center;margin:12px 0 0}
+.swb{width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--line);font-size:15px;display:flex;align-items:center;justify-content:center;color:var(--t2)}
+.swb.go{width:auto;height:44px;padding:0 18px;border-radius:99px;font-size:11.5px;font-weight:800;color:var(--t1)}
+.swhint{text-align:center;font-size:8.5px;color:var(--t3);margin-top:8px}
+.trust,.rule{background:transparent;border:none;border-radius:0;padding:12px 1px;margin:0;border-bottom:1px solid var(--line)}
+.brief-card{background:transparent;border:none;border-left:3px solid var(--arte);border-radius:0;padding:9px 0 9px 12px;margin-bottom:13px;border-bottom:1px solid var(--line)}
+body.light .brief-card{background:transparent}
+.milestone{background:transparent;border:none;border-left:3px solid var(--gold);border-radius:0;padding:8px 0 8px 12px;margin:0 0 13px;border-bottom:1px solid var(--line)}
+body.light .milestone{background:transparent}
+.spot-chips span{background:var(--surface2);border:none}
 /* discovery vNext m */
 .dpipe{display:flex;gap:10px;align-items:center;font-size:10.5px;color:var(--t3);padding:9px 1px;border-bottom:1px solid var(--line);margin:0 0 14px;flex-wrap:wrap}
 .dpipe button{color:var(--t2);font-weight:700}
@@ -1013,8 +1048,17 @@ body.light .sbtn.pri{background:#101828;color:#fff}
       </div>
       <div class="feed-label"><h3>Top match</h3></div>
       <div class="spot" id="spot"></div>
-      <div class="feed-label" style="margin-top:20px"><h3>More matches</h3></div>
+      <div class="feed-label" style="margin-top:20px;display:flex;align-items:center"><h3>More matches</h3>
+        <span class="dmode" style="margin-left:auto"><button class="dm on" data-m="list" onclick="setDiscMode('list')">&#9776;</button><button class="dm" data-m="swipe" onclick="setDiscMode('swipe')">&#10084;</button></span>
+      </div>
       <div id="mrows"></div>
+      <div id="swdeck" class="swdeck" style="display:none"></div>
+      <div id="swacts" class="swacts" style="display:none">
+        <button class="swb pass" onclick="swAct(-1)">&#10005;</button>
+        <button class="swb go" onclick="swCollab(event)">&#129309; Collab</button>
+        <button class="swb save" onclick="swAct(1)">&#9733;</button>
+      </div>
+      <div id="swhint" class="swhint" style="display:none">&#8592; pass &middot; drag &middot; save &#8594;</div>
       <div class="feed-label" style="margin-top:24px"><h3>Between your pages</h3></div>
       <button class="card" onclick="show('compose')">
           <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#00C4A0" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#00C4A0" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#8B7BFF" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#8B7BFF" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:8.5px;fill:var(--t1)">46%</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#00C4A0"></span> Kitchen</span><span><span class="wd" style="background:#8B7BFF"></span> Munchies</span></span><span class="card-time" style="margin-left:auto">shared</span></div>
@@ -1643,6 +1687,41 @@ function discCollab(btn){ const sp=MATCH.find(m=>m.k===spotK); if(!sp||SENT.has(
   if(sp.k==='homecooked'){ PIPE.active.push(sp.n); if(btn){btn.textContent='\u2713 Opening chat'; btn.disabled=true;} toast('Intro sent. Maya replies fast.'); setTimeout(()=>{ openChatM(); renderDisc(); },700); }
   else { PIPE.intro.push(sp.n); if(btn){btn.textContent='\u2713 Intro sent'; btn.disabled=true;} toast('Intro drafted and sent. Replies land in the Inbox.'); setTimeout(renderDisc,850); }
   renderPipe(); }
+let discMode='list';
+const SW_SKIP=new Set();
+function setDiscMode(m){ discMode=m; document.querySelectorAll('.dm').forEach(b=>b.classList.toggle('on', b.dataset.m===m));
+  document.getElementById('mrows').style.display = m==='list'?'':'none';
+  ['swdeck','swacts','swhint'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = m==='swipe'?'':'none'; });
+  if(m==='swipe') renderSwipe(); else renderDisc(); }
+function swipePool(){ return discList().filter(m=>!SENT.has(m.k) && !SW_SKIP.has(m.k)); }
+function tcardHTML(m,cls){ const R=20,C=2*Math.PI*R,p=parseInt(m.ovl); return `<div class="tcard ${cls}" data-k="${m.k}" style="--tc:${m.c}">
+  <div class="tc-top"><span class="tc-ring"><svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" fill="none" stroke="var(--surface2)" stroke-width="3.5"/><circle cx="23" cy="23" r="20" fill="none" stroke="${m.c}" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="${C*p/100} ${C}" transform="rotate(-90 23 23)"/></svg><span class="tc-av">${m.ini}</span></span>
+  <span class="tc-id"><b>${m.n}</b><span>${m.sub} &middot; ${m.fol}</span></span>
+  <span class="tc-big"><b>${m.ovl}</b><small>overlap</small></span></div>
+  <div class="tc-why">${m.why}</div>
+  <div class="tc-meters"><span class="smet"><b>${m.aud}</b>Audience<span class="sb"><i style="width:${m.aud}%"></i></span></span><span class="smet"><b>${m.tone}</b>Tone<span class="sb"><i style="width:${m.tone}%"></i></span></span><span class="smet"><b>${m.time}</b>Timing<span class="sb"><i style="width:${m.time}%"></i></span></span></div>
+  <div class="tc-cta"><button class="sbtn pri" style="flex:1" onclick="swCollab(event)">&#129309; Request collab</button><button class="sbtn gho" onclick="swProfile(event)">Profile</button></div>
+</div>`; }
+function renderSwipe(){ const d=document.getElementById('swdeck'); if(!d) return; const pool=swipePool();
+  const acts=document.getElementById('swacts');
+  if(!pool.length){ d.innerHTML='<div style="padding:36px 8px;text-align:center;color:var(--t2);font-size:11px;line-height:1.7">You have swiped the week clean.<br>Fresh matches land nightly.</div>'; if(acts) acts.style.visibility='hidden'; return; }
+  if(acts) acts.style.visibility='';
+  d.innerHTML = pool.slice(0,2).map((m,i)=>tcardHTML(m, i===0?'top':'behind')).reverse().join('');
+  bindSwipeTop(); }
+function topT(){ return document.querySelector('.tcard.top'); }
+function swAct(dir){ const t=topT(); if(!t) return; const k=t.dataset.k, m=MATCH.find(x=>x.k===k);
+  t.classList.add(dir<0?'flyL':'flyR');
+  if(dir<0){ toast('Passed. Hidden this week.'); setTimeout(()=>{ const i=MATCH.findIndex(x=>x.k===k); if(i>=0) MATCH.splice(i,1); if(spotK===k) spotK=null; renderSwipe(); renderPipe(); },360); }
+  else { if(m && !PIPE.saved.includes(m.n)) PIPE.saved.push(m.n); toast('Saved.'); setTimeout(()=>{ SW_SKIP.add(k); renderSwipe(); renderPipe(); },360); } }
+function swCollab(e){ if(e) e.stopPropagation(); const t=topT(); if(!t) return; spotK=t.dataset.k; t.classList.add('flyR'); discCollab(null); setTimeout(renderSwipe, 420); }
+function swProfile(e){ if(e) e.stopPropagation(); const t=topT(); if(t){ fillMD(t.dataset.k); show('disco'); } }
+function bindSwipeTop(){ const t=topT(); if(!t||t.dataset.bound) return; t.dataset.bound=1;
+  let sx=0,dx=0,drag=false;
+  t.addEventListener('pointerdown',e=>{ if(e.target.closest('button')) return; drag=true; sx=e.clientX; dx=0; t.classList.add('dragging'); t.setPointerCapture(e.pointerId); });
+  t.addEventListener('pointermove',e=>{ if(!drag) return; dx=e.clientX-sx; t.style.transform=`translateX(calc(-50% + ${dx}px)) rotate(${dx*0.05}deg)`; });
+  const up=()=>{ if(!drag) return; drag=false; t.classList.remove('dragging'); t.style.transform='';
+    if(dx<-70) swAct(-1); else if(dx>70) swAct(1); };
+  t.addEventListener('pointerup',up); t.addEventListener('pointercancel',up); }
 window.addEventListener('load', renderDisc);
 function toggleShade(){ document.getElementById('shade').classList.toggle('on'); }
 function closeShade(){ document.getElementById('shade').classList.remove('on'); }
