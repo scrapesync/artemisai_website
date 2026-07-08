@@ -28,7 +28,7 @@ input,textarea{font-family:var(--body)}
 .caption .k{font-family:var(--mono);font-size:10px;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:1px 7px;color:var(--t2)}
 
 /* phone */
-.phone{width:392px;height:826px;background:#000;border-radius:54px;padding:11px;box-shadow:0 0 0 1.5px #2a2f3a, 0 42px 90px -22px rgba(0,0,0,.85), 0 0 120px -40px rgba(139,123,255,.13);position:relative;flex-shrink:0}
+.phone{width:392px;height:826px;background:#000;border-radius:54px;padding:11px;box-shadow:0 0 0 1.5px #2a2f3a, 0 42px 90px -22px rgba(0,0,0,.85), 0 0 120px -40px rgba(139,123,255,.13);position:relative;flex-shrink:0;overflow:hidden}
 .screen{width:100%;height:100%;background:var(--bg);border-radius:44px;overflow:hidden;position:relative}
 .island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:110px;height:30px;background:#000;border-radius:99px;z-index:80}
 .statusbar{position:absolute;top:0;left:0;right:0;height:52px;display:flex;justify-content:space-between;align-items:center;padding:16px 28px 0;z-index:70;font-size:13.5px;font-weight:600}
@@ -186,9 +186,9 @@ input,textarea{font-family:var(--body)}
 /* sheets (compose, discovery, settings, data) */
 .veil{position:absolute;inset:0;background:rgba(4,6,10,.62);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:.28s;z-index:90;border-radius:44px}
 .veil.on{opacity:1;pointer-events:auto}
-.sheet{position:absolute;left:0;right:0;bottom:0;max-height:88%;overflow-y:auto;background:var(--surface2);border-radius:30px 30px 44px 44px;padding:14px 20px 34px;transform:translateY(105%);transition:transform .38s cubic-bezier(.32,.72,.22,1);z-index:95;scrollbar-width:none}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:88%;overflow-y:auto;background:var(--surface2);border-radius:30px 30px 44px 44px;padding:14px 20px 34px;transform:translateY(105%);transition:transform .38s cubic-bezier(.32,.72,.22,1), visibility 0s .38s;z-index:95;scrollbar-width:none;visibility:hidden}
 .sheet::-webkit-scrollbar{display:none}
-.sheet.on{transform:none}
+.sheet.on{transform:none;visibility:visible;transition:transform .38s cubic-bezier(.32,.72,.22,1), visibility 0s 0s}
 .grab{width:42px;height:5px;border-radius:99px;background:var(--line);margin:0 auto 16px}
 .sheet h4{font-family:var(--disp);font-size:19px;font-weight:800;margin-bottom:4px}
 .sheet .s-sub{font-size:12.5px;color:var(--t2);line-height:1.55;margin-bottom:14px}
