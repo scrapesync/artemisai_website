@@ -275,6 +275,43 @@ body.light .storyv{background:#F5F7FB}
 body.light .sv-bars i{background:rgba(18,26,40,.14)}
 body.light .sv-bars i::after{background:#12161F}
 
+/* studio + deck */
+.deck{position:relative;height:420px;max-width:520px;margin:4px auto 14px}
+.pcard{position:absolute;inset:0;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:26px;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.22,.68,.22,1), opacity .35s}
+.pcard[data-pos="1"]{transform:translateY(14px) scale(.955);opacity:.55;pointer-events:none}
+.pcard[data-pos="2"]{transform:translateY(26px) scale(.91);opacity:.3;pointer-events:none}
+.pcard.fly{transform:translateX(-130%) rotate(-9deg);opacity:0}
+.pcard .pav-big{width:84px;height:84px;border-radius:26px;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:28px;margin-bottom:16px}
+.pcard .pname{font-family:var(--disp);font-size:23px;font-weight:800;letter-spacing:-.4px}
+.pcard .psub{font-size:12.5px;color:var(--t3);margin:3px 0 14px}
+.pcard .pbig{position:absolute;top:24px;right:26px;text-align:right}
+.pcard .pbig b{font-family:var(--disp);font-size:34px;font-weight:800;color:var(--arte);letter-spacing:-1px}
+.pcard .pbig span{display:block;font-size:9px;color:var(--t3);letter-spacing:1px;text-transform:uppercase}
+.pcard .pwhy{font-size:13.5px;color:var(--t2);line-height:1.65;flex:1}
+.pcard .pwhy b{color:var(--t1)}
+.pcard .ptags{display:flex;gap:8px;flex-wrap:wrap}
+.pcard .ptag{font-size:10.5px;font-weight:700;color:var(--t2);background:var(--surface2);border:1px solid var(--line);border-radius:99px;padding:5px 11px}
+.dacts{display:flex;gap:12px;justify-content:center;max-width:520px;margin:0 auto 8px}
+.dact{width:58px;height:58px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:21px;transition:.16s}
+.dact:hover{transform:translateY(-2px)}
+.dact.pass{color:var(--rose);border-color:rgba(255,92,116,.4)}
+.dact.save{color:var(--gold);border-color:rgba(255,194,75,.4)}
+.dact.collab{width:auto;border-radius:99px;padding:0 26px;background:linear-gradient(135deg,#00d4aa,#00a88a);color:#04352B;font-weight:800;font-size:14px;gap:9px;border:none;box-shadow:0 10px 24px -10px rgba(0,196,160,.6)}
+.deck-count{text-align:center;font-family:var(--mono);font-size:10.5px;color:var(--t3);margin-bottom:18px}
+.xbadge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:.6px;border-radius:99px;padding:4px 10px}
+.xbadge.fb{color:#4599FF;background:rgba(69,153,255,.1);border:1px solid rgba(69,153,255,.35)}
+.xbadge.ig{color:#E1559B;background:rgba(225,85,155,.1);border:1px solid rgba(225,85,155,.35)}
+.pagepair{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:var(--t2)}
+.pagepair .wd{width:9px;height:9px;border-radius:50%}
+.draft-row{display:flex;align-items:center;gap:13px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:10px}
+.draft-row .dsc{font-family:var(--disp);font-weight:800;font-size:17px;width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:rgba(0,196,160,.1);color:var(--act);flex-shrink:0}
+.draft-row .dt1{font-size:14px;font-weight:700}
+.draft-row .dt2{font-size:11.5px;color:var(--t3);margin-top:1px}
+.win-row{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:13px 16px;margin-bottom:9px}
+.win-row .wtime{font-family:var(--disp);font-weight:800;font-size:15px;min-width:104px}
+.win-row .wbar{flex:1;height:8px;border-radius:99px;background:var(--surface2);overflow:hidden}
+.win-row .wbar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#00C4A0,#57B5F0)}
+.win-row .wmono{font-family:var(--mono);font-size:10px;color:var(--act);min-width:74px;text-align:right}
 /* rhythm pass */
 .mini-label{font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);margin:0 0 8px}
 .sched-row,.setup-pill{background:transparent;border-style:dashed}
@@ -629,7 +666,8 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     </div>
     <button class="ibtn on" data-v="today" onclick="setView('today')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span class="tip">Today</span></button>
     <button class="ibtn" data-v="discovery" onclick="setView('discovery')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z"/></svg><span class="tip">Discovery</span></button>
-    <button class="ibtn" data-v="analytics" onclick="setView('analytics')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 4 4 5-6"/></svg><span class="tip">Analytics</span></button>
+    <button class="ibtn" data-v="planner" onclick="setView('planner')" aria-label="Studio"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg></button>
+      <button class="ibtn" data-v="analytics" onclick="setView('analytics')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 4 4 5-6"/></svg><span class="tip">Analytics</span></button>
     <button class="ibtn" data-v="wins" onclick="setView('wins')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M6 3h12v6a6 6 0 01-12 0V3z"/><path d="M18 5h3v2a4 4 0 01-4 4M6 5H3v2a4 4 0 004 4"/></svg><span class="tip">Wins</span></button>
     <button class="ibtn" data-v="pages" onclick="setView('pages')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg><span class="tip">Pages</span></button>
     <button class="ibtn" data-v="settings" onclick="setView('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h0a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51h0a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v0a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span class="tip">Settings</span></button>
@@ -715,7 +753,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         </div>
       </div>
 
-      <div class="sched-row"><span>&#128197;</span><span style="flex:1">Scheduled: <b>pasta reel</b> &middot; today 6:40pm</span><span class="mono">2.4x &middot; 87%</span><button class="btn btn-ghost" style="padding:7px 13px;font-size:11.5px" onclick="openCompose()">Edit</button></div>
+      <div class="sched-row"><span>&#128197;</span><span style="flex:1">Scheduled: <b>pasta reel</b> &middot; today 6:40pm</span><span class="mono">2.4x &middot; 87%</span><button class="btn btn-ghost" style="padding:7px 13px;font-size:11.5px" onclick="setView('planner')">Studio &rarr;</button></div>
 
       <button class="setup-pill" onclick="setView('settings')"><span>&#9989;</span><span><b>Getting set up</b> &middot; <span id="setupCount">4 of 6</span> done</span><span class="mono">finish in ~4 min &rarr;</span></button>
 
@@ -978,28 +1016,99 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     <!-- ═══ VIEW: DISCOVERY ═══ -->
     </section>
 
+    <!-- ═══ VIEW: STUDIO ═══ -->
+    <section class="view" id="v-planner">
+      <div class="greet">Drafts, windows, and what is queued</div>
+      <h1 class="vh">Studio</h1>
+
+      <div class="feed-label"><h3>Your drafts</h3><span class="newchip">3 saved</span></div>
+      <div class="draft-row"><span class="dsc">75</span><div style="flex:1"><div class="dt1">Pasta reel v2</div><div class="dt2">Edited yesterday &middot; scores 75, Art-E sees an easy +8</div></div><button class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px" onclick="openCompose();loadDraft(0)">Edit</button><button class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px;color:var(--arte)" onclick="openCompose();loadDraft(0);setTimeout(improveDraft,300)">Improve</button></div>
+      <div class="draft-row"><span class="dsc" style="background:rgba(87,181,240,.1);color:var(--sky)">68</span><div style="flex:1"><div class="dt1">Air-fryer myths carousel</div><div class="dt2">Draft from Tuesday &middot; strong hook, weak payoff</div></div><button class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px" onclick="openCompose();loadDraft(1)">Edit</button><button class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px;color:var(--arte)" onclick="openCompose();loadDraft(1);setTimeout(improveDraft,300)">Improve</button></div>
+      <div class="draft-row" style="margin-bottom:22px"><span class="dsc" style="background:rgba(255,194,75,.1);color:var(--gold)">61</span><div style="flex:1"><div class="dt1">Friday short, first cut</div><div class="dt2">Art-E trimmed it to 84 chars, approve in Moves</div></div><button class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px" onclick="openCompose();loadDraft(2)">Edit</button><button class="btn btn-ghost" style="padding:9px 15px;font-size:12.5px;color:var(--arte)" onclick="openCompose();loadDraft(2);setTimeout(improveDraft,300)">Improve</button></div>
+
+      <div class="feed-label"><h3>Best times this week</h3><span class="newchip" style="color:var(--act);border-color:rgba(0,196,160,.4)">from your data</span></div>
+      <div class="win-row"><span class="wtime">Tue 6:40pm</span><span class="wbar"><i style="width:96%"></i></span><span class="wmono">2.4x &middot; 87%</span><button class="btn btn-primary" style="padding:8px 15px;font-size:12px" onclick="openCompose();setTimeIdxW(0)">Use</button></div>
+      <div class="win-row"><span class="wtime">Thu 8:00pm</span><span class="wbar"><i style="width:82%"></i></span><span class="wmono">2.1x &middot; 81%</span><button class="btn btn-ghost" style="padding:8px 15px;font-size:12px" onclick="openCompose();setTimeIdxW(1)">Use</button></div>
+      <div class="win-row" style="margin-bottom:22px"><span class="wtime">Sun 10:00am</span><span class="wbar"><i style="width:64%"></i></span><span class="wmono">1.7x &middot; 74%</span><button class="btn btn-ghost" style="padding:8px 15px;font-size:12px" onclick="openCompose();setTimeIdxW(2)">Use</button></div>
+
+      <div class="feed-label"><h3>Scheduled</h3></div>
+      <div class="sched-row" style="margin:0 0 8px"><span>&#128197;</span><span style="flex:1">Pasta reel &middot; <b>today 6:40pm</b> &middot; Sana's Kitchen</span><span class="mono">2.4x &middot; 87%</span><button class="btn btn-ghost" style="padding:7px 13px;font-size:11.5px" onclick="openCompose()">Edit</button><button class="btn btn-ghost" style="padding:7px 13px;font-size:11.5px;color:var(--rose)" onclick="toast('Unscheduled. The window stays open until 7pm.')">Cancel</button></div>
+      <p class="quiet" style="text-align:left">Full week calendar arrives fast-follow. For now the windows above are the whole strategy: post inside them.</p>
+    </section>
+
     <section class="view" id="v-discovery">
       <div class="greet">Found by the network, not by hashtags</div>
       <h1 class="vh">Discover</h1>
-      <p style="font-size:13px;color:var(--t2);line-height:1.6;margin:-8px 0 18px">Creators whose fans already overlap yours. Ranked by real overlap, never hashtags, across your 5 pages.</p>
-      <div class="dgridv">
-        <div class="match" role="button" tabindex="0" onclick="openDiscovery('homecooked')"><div class="mn">@HomeCookedDaily</div><div class="mf">Family cooking &middot; 96k</div><div class="ob"><i style="width:41%"></i></div><div class="ol"><span>audience overlap</span><b>41%</b></div><p class="mw">Their 1 to 3pm strength fills your quiet window. Est. +12k reach.</p><div class="macts"><button class="mbtn" onclick="event.stopPropagation();passMatch(this)">Pass</button><button class="mbtn save" onclick="event.stopPropagation();toast('Saved for later.')">Save</button><button class="mbtn" style="margin-left:auto;color:var(--arte)" onclick="event.stopPropagation();openDiscovery('homecooked')">Details &rarr;</button></div></div>
-        <div class="match" role="button" tabindex="0" onclick="openDiscovery('spiceroute')"><div class="mn">@SpiceRouteStories</div><div class="mf">Weeknight curries &middot; 71k</div><div class="ob"><i style="width:33%"></i></div><div class="ol"><span>audience overlap</span><b>33%</b></div><p class="mw">High tone match. Morning audience complements yours. Est. +8k.</p><div class="macts"><button class="mbtn" onclick="event.stopPropagation();passMatch(this)">Pass</button><button class="mbtn save" onclick="event.stopPropagation();toast('Saved for later.')">Save</button><button class="mbtn" style="margin-left:auto;color:var(--arte)" onclick="event.stopPropagation();openDiscovery('spiceroute')">Details &rarr;</button></div></div>
-        <div class="match" role="button" tabindex="0" onclick="openDiscovery('budgetbites')"><div class="mn">@BudgetBites</div><div class="mf">Student meals &middot; 52k</div><div class="ob"><i style="width:28%"></i></div><div class="ol"><span>audience overlap</span><b>28%</b></div><p class="mw">Strong with your under-25 segment. Est. +6k from one collab.</p><div class="macts"><button class="mbtn" onclick="event.stopPropagation();passMatch(this)">Pass</button><button class="mbtn save" onclick="event.stopPropagation();toast('Saved for later.')">Save</button><button class="mbtn" style="margin-left:auto;color:var(--arte)" onclick="event.stopPropagation();openDiscovery('budgetbites')">Details &rarr;</button></div></div>
-        <div class="match" role="button" tabindex="0" onclick="openDiscovery('plantplates')"><div class="mn">@PlantPlates</div><div class="mf">Veg swaps &middot; 44k</div><div class="ob"><i style="width:24%"></i></div><div class="ol"><span>audience overlap</span><b>24%</b></div><p class="mw">Sunday-morning crowd, untouched by your pages. Est. +5k.</p><div class="macts"><button class="mbtn" onclick="event.stopPropagation();passMatch(this)">Pass</button><button class="mbtn save" onclick="event.stopPropagation();toast('Saved for later.')">Save</button><button class="mbtn" style="margin-left:auto;color:var(--arte)" onclick="event.stopPropagation();openDiscovery('plantplates')">Details &rarr;</button></div></div>
+      <div class="dtabs">
+        <button class="dtab on" onclick="discTab(this,'others')">Other creators</button>
+        <button class="dtab" onclick="discTab(this,'mine')">Between your pages</button>
+        <button class="dtab" onclick="discTab(this,'x')">Across platforms</button>
       </div>
-      <div class="feed-label" style="margin-top:22px"><h3>Saved by you</h3></div>
-      <button class="card" onclick="arteExplain('timing')">
-        <div class="card-top"><span class="ctag sig">Saved insight</span><span class="card-time">last week</span></div>
-        <div class="card-line">Evening shift: 62% of engaged followers now peak 6 to 8pm</div>
-        <span class="card-act violet">Reopen with Art-E &rarr;</span>
-      </button>
-      <button class="card" onclick="arteExplain('win')">
-        <div class="card-top"><span class="ctag win">Saved insight</span><span class="card-time">2 weeks ago</span></div>
-        <div class="card-line">Saves predict repeat reach better than likes on your pages</div>
-        <span class="card-act goldc">Reopen with Art-E &rarr;</span>
-      </button>
-      <p class="quiet"><b>Why these:</b> people who comment on both pages, matched anonymously.<br>Important matches will alert you, no need to check here daily.</p>
+
+      <!-- OTHER CREATORS: the deck -->
+      <div id="dsc-others">
+        <div class="deck" id="deck"></div>
+        <div class="dacts">
+          <button class="dact pass" onclick="deckPass()" aria-label="Pass" title="Pass">&#10005;</button>
+          <button class="dact" onclick="deckDetails()" aria-label="Details" title="Full profile">&#8942;</button>
+          <button class="dact save" onclick="deckSave()" aria-label="Save" title="Save for later">&#9733;</button>
+          <button class="dact collab" onclick="deckCollab()">&#129309; Collab</button>
+        </div>
+        <div class="deck-count" id="deckCount"></div>
+        <div class="feed-label" style="margin-top:8px"><h3>Saved by you</h3></div>
+        <button class="card" onclick="arteExplain('timing')">
+          <div class="card-top"><span class="ctag sig">Saved insight</span><span class="card-time">last week</span></div>
+          <div class="card-line">Evening shift: 62% of engaged followers now peak 6 to 8pm</div>
+          <span class="card-act violet">Reopen with Art-E &rarr;</span>
+        </button>
+        <button class="card" onclick="arteExplain('win')">
+          <div class="card-top"><span class="ctag win">Saved insight</span><span class="card-time">2 weeks ago</span></div>
+          <div class="card-line">Saves predict repeat reach better than likes on your pages</div>
+          <span class="card-act goldc">Reopen with Art-E &rarr;</span>
+        </button>
+        <p class="quiet"><b>Why these:</b> people who comment on both pages, matched anonymously.<br>Important matches will alert you, no need to check here daily.</p>
+      </div>
+
+      <!-- BETWEEN YOUR PAGES -->
+      <div id="dsc-mine" style="display:none">
+        <button class="card" data-page="all" onclick="openCompose()">
+          <div class="card-top"><span class="pagepair"><span class="wd" style="background:#00C4A0"></span>Sana's Kitchen<span style="color:var(--t3)">&rarr;</span><span class="wd" style="background:#8B7BFF"></span>Midnight Munchies</span><span class="card-time" style="margin-left:auto">46% shared</span></div>
+          <div class="card-line">The night crowd has not seen the <b>pasta reel</b> yet</div>
+          <p class="card-why">46% of Munchies followers also follow Kitchen, but reels rarely cross. A 10pm repost is basically free reach.</p>
+          <span class="card-act">Draft the 10pm repost &rarr;</span>
+        </button>
+        <button class="card" onclick="openCompose()">
+          <div class="card-top"><span class="pagepair"><span class="wd" style="background:#57B5F0"></span>Quick Bites<span style="color:var(--t3)">&rarr;</span><span class="wd" style="background:#FFC24B"></span>Family Feasts</span><span class="card-time" style="margin-left:auto">est. 1.4x</span></div>
+          <div class="card-line">Your 15-second format would lift <b>Family Feasts Sundays</b></div>
+          <p class="card-why">The Feasts audience engages Sunday mornings but gets long posts. One Quick-Bites-style short there is the experiment worth running.</p>
+          <span class="card-act">Draft it &rarr;</span>
+        </button>
+        <button class="card" onclick="arteExplainQ('collab','How should my own pages feed each other?')">
+          <div class="card-top"><span class="pagepair"><span class="wd" style="background:#FF5C74"></span>Sana Shorts<span style="color:var(--t3)">&rarr;</span><span class="wd" style="background:#00C4A0"></span>Sana's Kitchen</span><span class="card-time" style="margin-left:auto">low overlap</span></div>
+          <div class="card-line">Shorts viewers <b>rarely find</b> the full recipes</div>
+          <p class="card-why">Only 12% cross over. A pinned comment linking the Kitchen page on every short is the cheapest bridge you are not using.</p>
+          <span class="card-act violet">Ask Art-E about the bridge &rarr;</span>
+        </button>
+        <p class="quiet">Your five pages, feeding each other on purpose.<br><b>Art-E watches these overlaps weekly.</b></p>
+      </div>
+
+      <!-- ACROSS PLATFORMS -->
+      <div id="dsc-x" style="display:none">
+        <div class="milestone" style="margin-bottom:16px"><span style="font-size:16px">&#128279;</span><div class="mtx"><b>Connect Instagram</b> to act on these. Mapping is modelled from public signals until then.</div><button class="btn btn-primary" onclick="openConnect()">Connect</button></div>
+        <button class="card" onclick="toast('Full cross-platform profiles unlock when Instagram is connected.')">
+          <div class="card-top"><span class="xbadge ig">&#9679; Instagram</span><span class="card-time" style="margin-left:auto">modelled 31%</span></div>
+          <div class="card-line">@plantbased.daily <b>overlaps your Sunday crowd</b></div>
+          <p class="card-why">Their reel audience matches your Family Feasts profile. A cross-platform collab reaches people Facebook alone cannot.</p>
+          <span class="card-act">Preview the match &rarr;</span>
+        </button>
+        <button class="card" onclick="toast('Mirroring plan unlocks with Instagram connect.')">
+          <div class="card-top"><span class="xbadge fb">f Facebook</span><span style="color:var(--t3);font-size:11px">&rarr;</span><span class="xbadge ig">&#9679; Instagram</span><span class="card-time" style="margin-left:auto">est. +18k</span></div>
+          <div class="card-line">Mirror your top reels to <b>@sanaskitchen on IG</b></div>
+          <p class="card-why">Your three best Facebook reels fit IG Reels natively. Art-E would repost with tuned captions and track both sides.</p>
+          <span class="card-act">See the mirroring plan &rarr;</span>
+        </button>
+        <p class="quiet">One brain across platforms is the roadmap.<br><b>Facebook today, Instagram fast-follow, X later.</b></p>
+      </div>
     </section>
 
     <!-- ═══ VIEW: ANALYTICS ═══ -->
@@ -1512,6 +1621,7 @@ const PL=[
  ['Open inbox', ()=>setView('inbox')],
  ['Open alerts page', ()=>setView('alerts')],
  ['Toggle light or dark theme', ()=>setTheme()],
+ ['Open Studio: drafts and best times', ()=>setView('planner')],
  ['Open the master plan (218 features, staged)', ()=>openPlan()],
  ['Help & support', ()=>toast('Docs, FAQ and support chat open here in the live app.')]];
 let plHot=0, plCur=[];
@@ -1619,6 +1729,36 @@ function improveDraft(){ const ta=document.getElementById('draft');
 /* ── fable-magic helpers ── */
 const TIMES=[['Today 6:40pm','2.4x'],['Thu 8:00pm','2.1x'],['Sun 10:00am','1.7x']];
 let schedSel=0;
+const DECK=[
+ {k:'homecooked',ini:'HC',c:'#8B7BFF',n:'@HomeCookedDaily',sub:'Family cooking &middot; 96k followers &middot; posts 1 to 3pm',ovl:'41%',why:'<b>8,200 of your people</b> already follow them, and their strong hours are exactly your quiet window. Estimated <b>+12k reach</b> from one collab reel.',tags:['Tone: high match','Peak 1-3pm','+12k est.']},
+ {k:'spiceroute',ini:'SR',c:'#57B5F0',n:'@SpiceRouteStories',sub:'Weeknight curries &middot; 71k &middot; morning crowd',ovl:'33%',why:'Their <b>8 to 10am</b> strength complements your evenings, so a collab covers the whole day. Estimated <b>+8k reach</b>.',tags:['Complementary hours','+8k est.']},
+ {k:'budgetbites',ini:'BB',c:'#FFC24B',n:'@BudgetBites',sub:'Student meals &middot; 52k &middot; strong under-25s',ovl:'28%',why:'Their under-25 core is <b>your thinnest segment</b>. One duet-style short is the natural format. Estimated <b>+6k</b>.',tags:['Under-25 reach','Duet format']},
+ {k:'plantplates',ini:'PP',c:'#00C4A0',n:'@PlantPlates',sub:'Veg swaps &middot; 44k &middot; Sunday mornings',ovl:'24%',why:'<b>Sunday 9 to 11am</b> is theirs and empty for you. A veg-swap of your pasta reel fits both audiences. Estimated <b>+5k</b>.',tags:['Sunday window','+5k est.']}];
+let deckIdx=0;
+function deckRender(){ const d=document.getElementById('deck'); if(!d) return;
+  d.innerHTML='';
+  const rest=DECK.slice(deckIdx);
+  if(!rest.length){ d.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--t3);font-size:13px;gap:10px"><span style="font-size:30px">&#129309;</span>Deck cleared. New matches will alert you.</div>'; document.getElementById('deckCount').textContent=''; return; }
+  rest.slice(0,3).forEach((m,x)=>{
+    d.insertAdjacentHTML('beforeend', `<div class="pcard" data-pos="${x}" style="z-index:${9-x}">
+      <span class="pav-big" style="background:${m.c}22;color:${m.c}">${m.ini}</span>
+      <div class="pbig"><b>${m.ovl}</b><span>real overlap</span></div>
+      <div class="pname">${m.n}</div><div class="psub">${m.sub}</div>
+      <div class="pwhy">${m.why}</div>
+      <div class="ptags">${m.tags.map(t=>'<span class="ptag">'+t+'</span>').join('')}</div>
+    </div>`); });
+  document.getElementById('deckCount').textContent=(deckIdx+1)+' of '+DECK.length+' &middot; found this week'.replace('&middot;','·');
+}
+function deckPass(){ const top=document.querySelector('.pcard[data-pos="0"]'); if(!top) return; top.classList.add('fly'); toast('Passed. This one stays gone.'); setTimeout(()=>{deckIdx++; deckRender();},330); }
+function deckSave(){ toast('Saved for later.'); const top=document.querySelector('.pcard[data-pos="0"]'); if(top){ top.style.transform='translateY(-8px) scale(1.01)'; setTimeout(()=>{deckIdx++; deckRender();},260);} }
+function deckDetails(){ const m=DECK[deckIdx]; if(m) openDiscovery(m.k); }
+function deckCollab(){ const m=DECK[deckIdx]; if(!m) return; if(m.k==='homecooked'){ toast('Intro sent. Maya usually replies fast.'); setTimeout(()=>{setView('inbox');openChat();},700);} else { toast('Intro drafted and sent in your voice. Replies land in the Inbox.'); deckIdx++; deckRender(); } }
+function discTab(btn,t){ [...btn.parentElement.children].forEach(x=>x.classList.toggle('on',x===btn));
+  ['others','mine','x'].forEach(k=>{ document.getElementById('dsc-'+k).style.display = (k===t)?'':'none'; });
+  if(t==='others') deckRender(); }
+window.addEventListener('load', deckRender);
+
+function setTimeIdxW(i){ schedSel=i; setTimeout(()=>{ const ps=[...document.querySelectorAll('#compose .tpill')]; ps.forEach((t,x)=>t.classList.toggle('on',x===i)); const b=document.getElementById('schedBtn'); if(b) b.textContent='Schedule for '+TIMES[i][0]; },80); }
 function pickTime(el,i){ schedSel=i; document.querySelectorAll('.tpill').forEach(t=>t.classList.remove('on')); el.classList.add('on');
   document.getElementById('schedBtn').textContent='Schedule for '+TIMES[i][0]; }
 

@@ -263,6 +263,46 @@ body.light .sv-bars i::after{background:#12161F}
 .card-act{transition:transform .18s cubic-bezier(.22,.68,.22,1)}
 .card:active .card-act{transform:translateX(3px)}
 
+/* studio + deck mobile */
+.deck{position:relative;height:352px;margin:2px 0 12px}
+.pcard{position:absolute;inset:0;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.22,.68,.22,1), opacity .35s}
+.pcard[data-pos="1"]{transform:translateY(11px) scale(.955);opacity:.55;pointer-events:none}
+.pcard[data-pos="2"]{transform:translateY(20px) scale(.91);opacity:.28;pointer-events:none}
+.pcard.fly{transform:translateX(-130%) rotate(-9deg);opacity:0}
+.pcard .pav-big{width:60px;height:60px;border-radius:19px;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:21px;margin-bottom:11px}
+.pcard .pname{font-family:var(--disp);font-size:18px;font-weight:800;letter-spacing:-.3px}
+.pcard .psub{font-size:10.5px;color:var(--t3);margin:2px 0 10px}
+.pcard .pbig{position:absolute;top:16px;right:18px;text-align:right}
+.pcard .pbig b{font-family:var(--disp);font-size:26px;font-weight:800;color:var(--arte);letter-spacing:-1px}
+.pcard .pbig span{display:block;font-size:8px;color:var(--t3);letter-spacing:.8px;text-transform:uppercase}
+.pcard .pwhy{font-size:11.5px;color:var(--t2);line-height:1.6;flex:1}
+.pcard .pwhy b{color:var(--t1)}
+.pcard .ptags{display:flex;gap:6px;flex-wrap:wrap}
+.pcard .ptag{font-size:9px;font-weight:700;color:var(--t2);background:var(--surface2);border:1px solid var(--line);border-radius:99px;padding:4px 9px}
+.dacts{display:flex;gap:10px;justify-content:center;margin-bottom:6px}
+.dact{width:48px;height:48px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:17px}
+.dact.pass{color:var(--rose);border-color:rgba(255,92,116,.4)}
+.dact.save{color:var(--gold);border-color:rgba(255,194,75,.4)}
+.dact.collab{width:auto;border-radius:99px;padding:0 20px;background:linear-gradient(135deg,#00d4aa,#00a88a);color:#04352B;font-weight:800;font-size:12.5px;gap:7px;border:none}
+.deck-count{text-align:center;font-family:var(--mono);font-size:9px;color:var(--t3);margin-bottom:12px}
+.dtabs{display:flex;gap:5px;margin:0 0 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;width:fit-content}
+.dtab{padding:7px 11px;border-radius:8px;font-size:10.5px;font-weight:700;color:var(--t3)}
+.dtab.on{background:var(--surface2);color:var(--t1)}
+.xbadge{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:800;border-radius:99px;padding:3px 8px}
+.xbadge.fb{color:#4599FF;background:rgba(69,153,255,.1);border:1px solid rgba(69,153,255,.35)}
+.xbadge.ig{color:#E1559B;background:rgba(225,85,155,.1);border:1px solid rgba(225,85,155,.35)}
+.pagepair{display:flex;align-items:center;gap:6px;font-size:9.5px;font-weight:700;color:var(--t2)}
+.pagepair .wd{width:8px;height:8px;border-radius:50%}
+.draft-row{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:9px}
+.draft-row .dsc{font-family:var(--disp);font-weight:800;font-size:14px;width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(0,196,160,.1);color:var(--act);flex-shrink:0}
+.draft-row .dt1{font-size:12.5px;font-weight:700}
+.draft-row .dt2{font-size:10px;color:var(--t3);margin-top:1px}
+.win-row{display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:10px 12px;margin-bottom:8px}
+.win-row .wtime{font-family:var(--disp);font-weight:800;font-size:12.5px;min-width:78px}
+.win-row .wbar{flex:1;height:7px;border-radius:99px;background:var(--surface2);overflow:hidden}
+.win-row .wbar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#00C4A0,#57B5F0)}
+.win-row .wmono{font-family:var(--mono);font-size:8.5px;color:var(--act)}
+
 /* rhythm pass mobile */
 .mini-label{font-size:9.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--t3);margin:0 0 7px}
 .sched-row,.setup-pill{background:transparent;border-style:dashed;padding:8px 12px;margin-bottom:10px}
@@ -544,7 +584,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
         <div class="move" id="mv3"><span class="mtick">&#10003;</span><span class="mtxt"><span class="mt1">Approve the Friday draft</span><span class="mt2">score 61 &rarr; 83</span></span><button class="btn btn-ghost" onclick="doMove('mv3','Friday draft approved.')">OK</button></div>
       </div>
 
-      <div class="sched-row"><span>&#128197;</span><span style="flex:1">Scheduled: <b>pasta reel</b> &middot; 6:40pm</span><span class="mono">2.4x</span><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="show('compose')">Edit</button></div>
+      <div class="sched-row"><span>&#128197;</span><span style="flex:1">Scheduled: <b>pasta reel</b> &middot; 6:40pm</span><span class="mono">2.4x</span><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="nav('planner')">Studio &rarr;</button></div>
 
       <div class="milestone" id="milestone"><span style="font-size:15px">&#127942;</span><div class="mtx"><b>Quick Bites crossed 64k</b> &middot; fastest grower</div><button class="btn btn-primary" onclick="toast('Shared. Take the victory lap.')">Share</button><button class="mx" onclick="document.getElementById('milestone').style.display='none'" aria-label="Dismiss">&times;</button></div>
 
@@ -722,17 +762,85 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     </div>
   </section>
 
+  <!-- ═══ STUDIO ═══ -->
+  <section class="scr" id="scr-planner">
+    <div class="scroll" style="padding-top:70px">
+      <button class="back" onclick="nav('today')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>Today</button>
+      <h2 class="vh" style="margin-top:10px">Studio</h2>
+      <div class="feed-label"><h3>Your drafts</h3><span class="newchip">3</span></div>
+      <div class="draft-row"><span class="dsc">75</span><div style="flex:1"><div class="dt1">Pasta reel v2</div><div class="dt2">Yesterday &middot; Art-E sees an easy +8</div></div><button class="ckbtn" onclick="show('compose');loadDraft(0)">Edit</button></div>
+      <div class="draft-row"><span class="dsc" style="background:rgba(87,181,240,.1);color:var(--sky)">68</span><div style="flex:1"><div class="dt1">Air-fryer myths</div><div class="dt2">Tuesday &middot; strong hook, weak payoff</div></div><button class="ckbtn" onclick="show('compose');loadDraft(1)">Edit</button></div>
+      <div class="draft-row" style="margin-bottom:16px"><span class="dsc" style="background:rgba(255,194,75,.1);color:var(--gold)">61</span><div style="flex:1"><div class="dt1">Friday short, first cut</div><div class="dt2">Trimmed to 84 chars, approve in Moves</div></div><button class="ckbtn" onclick="show('compose');loadDraft(2)">Edit</button></div>
+      <div class="feed-label"><h3>Best times this week</h3></div>
+      <div class="win-row"><span class="wtime">Tue 6:40pm</span><span class="wbar"><i style="width:96%"></i></span><span class="wmono">2.4x</span><button class="ckbtn" onclick="show('compose');setTimeIdx(0)">Use</button></div>
+      <div class="win-row"><span class="wtime">Thu 8:00pm</span><span class="wbar"><i style="width:82%"></i></span><span class="wmono">2.1x</span><button class="ckbtn" onclick="show('compose');setTimeIdx(1)">Use</button></div>
+      <div class="win-row" style="margin-bottom:16px"><span class="wtime">Sun 10am</span><span class="wbar"><i style="width:64%"></i></span><span class="wmono">1.7x</span><button class="ckbtn" onclick="show('compose');setTimeIdx(2)">Use</button></div>
+      <div class="feed-label"><h3>Scheduled</h3></div>
+      <div class="sched-row" style="margin:0 0 10px"><span>&#128197;</span><span style="flex:1">Pasta reel &middot; <b>6:40pm</b></span><span class="mono">2.4x</span><button class="ckbtn" onclick="show('compose')">Edit</button></div>
+      <p class="quiet">Full calendar arrives fast-follow.<br><b>Post inside the windows, that is the whole strategy.</b></p>
+    </div>
+  </section>
+
   <!-- ═══ DISCOVER ═══ -->
   <section class="scr" id="scr-discover">
     <div class="scroll" style="padding-top:70px">
-      <button class="back" onclick="nav('today')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>Today</button>
-      <h2 class="vh" style="margin-top:10px">Discover</h2>
-      <p style="font-size:12px;color:var(--t2);line-height:1.55;margin:-8px 0 14px">Found by real audience overlap across your 5 pages, not hashtags. The best ones alert you.</p>
-      <button class="card" onclick="fillMD('homecooked');show('disco')"><div class="mrow"><div><div class="card-line">@HomeCookedDaily</div><p class="card-why" style="margin-top:3px">Family cooking &middot; 96k &middot; fills your quiet 1-3pm</p></div><div class="ovl"><b>41%</b><span>overlap</span></div></div></button>
-      <button class="card" onclick="fillMD('spiceroute');show('disco')"><div class="mrow"><div><div class="card-line">@SpiceRouteStories</div><p class="card-why" style="margin-top:3px">Weeknight curries &middot; 71k &middot; morning crowd</p></div><div class="ovl"><b>33%</b><span>overlap</span></div></div></button>
-      <button class="card" onclick="fillMD('budgetbites');show('disco')"><div class="mrow"><div><div class="card-line">@BudgetBites</div><p class="card-why" style="margin-top:3px">Student meals &middot; 52k &middot; strong under-25s</p></div><div class="ovl"><b>28%</b><span>overlap</span></div></div></button>
-      <button class="card" onclick="fillMD('plantplates');show('disco')"><div class="mrow"><div><div class="card-line">@PlantPlates</div><p class="card-why" style="margin-top:3px">Veg swaps &middot; 44k &middot; Sunday mornings</p></div><div class="ovl"><b>24%</b><span>overlap</span></div></div></button>
-      <p class="quiet">Matches surface automatically.<br><b>Manual creator search arrives after launch.</b></p>
+      <h2 class="vh" style="margin-top:2px">Discover</h2>
+      <div class="dtabs">
+        <button class="dtab on" onclick="discTab(this,'others')">Creators</button>
+        <button class="dtab" onclick="discTab(this,'mine')">Your pages</button>
+        <button class="dtab" onclick="discTab(this,'x')">Platforms</button>
+      </div>
+
+      <div id="dsc-others">
+        <div class="deck" id="deck"></div>
+        <div class="dacts">
+          <button class="dact pass" onclick="deckPass()" aria-label="Pass">&#10005;</button>
+          <button class="dact" onclick="deckDetails()" aria-label="Details">&#8942;</button>
+          <button class="dact save" onclick="deckSave()" aria-label="Save">&#9733;</button>
+          <button class="dact collab" onclick="deckCollab()">&#129309; Collab</button>
+        </div>
+        <div class="deck-count" id="deckCount"></div>
+        <p class="quiet">Found by real overlap, never hashtags.<br><b>The best ones alert you.</b></p>
+      </div>
+
+      <div id="dsc-mine" style="display:none">
+        <button class="card" onclick="show('compose')">
+          <div class="card-top"><span class="pagepair"><span class="wd" style="background:#00C4A0"></span>Kitchen<span style="color:var(--t3)">&rarr;</span><span class="wd" style="background:#8B7BFF"></span>Munchies</span><span class="card-time" style="margin-left:auto">46%</span></div>
+          <div class="card-line">Night crowd has not seen the <b>pasta reel</b></div>
+          <p class="card-why">46% shared audience, reels rarely cross. A 10pm repost is free reach.</p>
+          <span class="card-act">Draft the repost &rarr;</span>
+        </button>
+        <button class="card" onclick="show('compose')">
+          <div class="card-top"><span class="pagepair"><span class="wd" style="background:#57B5F0"></span>Quick Bites<span style="color:var(--t3)">&rarr;</span><span class="wd" style="background:#FFC24B"></span>Feasts</span><span class="card-time" style="margin-left:auto">1.4x est.</span></div>
+          <div class="card-line">Your short format would lift <b>Feasts Sundays</b></div>
+          <p class="card-why">Sunday crowd engages but gets long posts. One short is the experiment.</p>
+          <span class="card-act">Draft it &rarr;</span>
+        </button>
+        <button class="card" onclick="nav('arte');arteExplain('collab')">
+          <div class="card-top"><span class="pagepair"><span class="wd" style="background:#FF5C74"></span>Shorts<span style="color:var(--t3)">&rarr;</span><span class="wd" style="background:#00C4A0"></span>Kitchen</span><span class="card-time" style="margin-left:auto">12%</span></div>
+          <div class="card-line">Shorts viewers <b>rarely find</b> full recipes</div>
+          <p class="card-why">A pinned comment on every short is the cheapest bridge you are not using.</p>
+          <span class="card-act violet">Ask Art-E &rarr;</span>
+        </button>
+        <p class="quiet">Your five pages, feeding each other on purpose.</p>
+      </div>
+
+      <div id="dsc-x" style="display:none">
+        <div class="milestone" style="margin-bottom:12px"><span style="font-size:14px">&#128279;</span><div class="mtx"><b>Connect Instagram</b> to act on these</div><button class="btn btn-primary" onclick="toast('Instagram connect flow opens here in the live app.')">Connect</button></div>
+        <button class="card" onclick="toast('Full profiles unlock when Instagram is connected.')">
+          <div class="card-top"><span class="xbadge ig">&#9679; Instagram</span><span class="card-time" style="margin-left:auto">31% modelled</span></div>
+          <div class="card-line">@plantbased.daily <b>overlaps your Sunday crowd</b></div>
+          <p class="card-why">Their reel audience matches Family Feasts. Cross-platform reaches people Facebook cannot.</p>
+          <span class="card-act">Preview &rarr;</span>
+        </button>
+        <button class="card" onclick="toast('Mirroring plan unlocks with Instagram connect.')">
+          <div class="card-top"><span class="xbadge fb">f FB</span><span style="color:var(--t3);font-size:10px">&rarr;</span><span class="xbadge ig">&#9679; IG</span><span class="card-time" style="margin-left:auto">+18k est.</span></div>
+          <div class="card-line">Mirror top reels to <b>@sanaskitchen on IG</b></div>
+          <p class="card-why">Your three best reels fit IG natively. Art-E reposts with tuned captions.</p>
+          <span class="card-act">See the plan &rarr;</span>
+        </button>
+        <p class="quiet">Facebook today, Instagram fast-follow, X later.</p>
+      </div>
     </div>
   </section>
 
@@ -777,7 +885,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     <h4>New post</h4>
     <p class="s-sub">Write it, watch the score. Art-E reads the draft as you type.</p>
     <div class="dchips">
-      <div class="mini-label">Drafts &middot; tap to load</div>
+      <div class="mini-label">Drafts &middot; tap to load &middot; <a style="color:var(--arte);font-weight:700" onclick="hideSheets();nav('planner')">see all &rarr;</a></div>
     <button class="dchip" onclick="loadDraft(0)">Pasta reel v2 <b>75</b></button>
       <button class="dchip" onclick="loadDraft(1)">3-ingredient <b>78</b></button>
       <button class="dchip" onclick="loadDraft(2)">Weekend note <b>50</b></button>
@@ -836,6 +944,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
     <div class="set-row"><div><div class="sl">WhatsApp alerts</div><div class="sd2">Ships post-launch.</div></div><button class="tog" id="waTog" onclick="this.classList.toggle('on')"></button></div>
     <div class="set-row"><div><div class="sl">Storm &amp; viral alerts</div><div class="sd2">Comment storms within minutes, viral moments as they break.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
     <div class="set-row"><div><div class="sl">Creator match alerts</div><div class="sd2">Only above 25% real overlap.</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+    <div class="set-row"><div><div class="sl">Studio</div><div class="sd2">Your drafts, best times, and the schedule.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="hideSheets();setTimeout(()=>nav('planner'),150)">Open</button></div>
     <div class="set-row"><div><div class="sl">Analytics</div><div class="sd2">Overview plus What takes off: drivers, flagged comments, every post.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="hideSheets();setTimeout(()=>show('data'),150)">Open</button></div>
     <div class="set-row"><div><div class="sl">Everything we are building</div><div class="sd2">218 features staged: 69 MVP, 88 fast, 57 later.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="show('plan');planRenderM()">Open</button></div>
     <div class="set-row"><div><div class="sl">Extra sign-in check (2FA)</div><div class="sd2">App check at sign-in.</div></div><button class="tog" onclick="this.classList.toggle('on');toast(this.classList.contains('on')?'Two-factor on.':'Two-factor off.')"></button></div>
@@ -1102,6 +1211,30 @@ function nextStory(){ if(sIdx<STORIES.length-1){ sIdx++; renderStory(); } else c
 function prevStory(){ if(sIdx>0){ sIdx--; renderStory(); } }
 function closeStory(){ clearTimeout(sTimer); document.getElementById('storyv').classList.remove('on'); }
 
+const DECK=[
+ {k:'homecooked',ini:'HC',c:'#8B7BFF',n:'@HomeCookedDaily',sub:'Family cooking &middot; 96k &middot; 1-3pm',ovl:'41%',why:'<b>8,200 of your people</b> follow them, their strong hours are your quiet window. <b>+12k est.</b>',tags:['High tone match','Peak 1-3pm']},
+ {k:'spiceroute',ini:'SR',c:'#57B5F0',n:'@SpiceRouteStories',sub:'Curries &middot; 71k &middot; mornings',ovl:'33%',why:'Their <b>8-10am</b> strength complements your evenings. <b>+8k est.</b>',tags:['Complementary hours']},
+ {k:'budgetbites',ini:'BB',c:'#FFC24B',n:'@BudgetBites',sub:'Student meals &middot; 52k',ovl:'28%',why:'Their under-25 core is <b>your thinnest segment</b>. Duet short fits. <b>+6k est.</b>',tags:['Under-25 reach']},
+ {k:'plantplates',ini:'PP',c:'#00C4A0',n:'@PlantPlates',sub:'Veg swaps &middot; 44k &middot; Sundays',ovl:'24%',why:'<b>Sunday 9-11am</b> is theirs and empty for you. <b>+5k est.</b>',tags:['Sunday window']}];
+let deckIdx=0;
+function deckRender(){ const d=document.getElementById('deck'); if(!d) return; d.innerHTML='';
+  const rest=DECK.slice(deckIdx);
+  if(!rest.length){ d.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--t3);font-size:11.5px;gap:8px"><span style="font-size:26px">&#129309;</span>Deck cleared. New matches will alert you.</div>'; document.getElementById('deckCount').textContent=''; return; }
+  rest.slice(0,3).forEach((m,x)=>{ d.insertAdjacentHTML('beforeend', `<div class="pcard" data-pos="${x}" style="z-index:${9-x}">
+    <span class="pav-big" style="background:${m.c}22;color:${m.c}">${m.ini}</span>
+    <div class="pbig"><b>${m.ovl}</b><span>overlap</span></div>
+    <div class="pname">${m.n}</div><div class="psub">${m.sub}</div>
+    <div class="pwhy">${m.why}</div>
+    <div class="ptags">${m.tags.map(t=>'<span class="ptag">'+t+'</span>').join('')}</div></div>`); });
+  document.getElementById('deckCount').textContent=(deckIdx+1)+' of '+DECK.length; }
+function deckPass(){ const top=document.querySelector('.pcard[data-pos="0"]'); if(!top) return; top.classList.add('fly'); toast('Passed. This one stays gone.'); setTimeout(()=>{deckIdx++; deckRender();},330); }
+function deckSave(){ toast('Saved for later.'); deckIdx++; deckRender(); }
+function deckDetails(){ const m=DECK[deckIdx]; if(m){ fillMD(m.k); show('disco'); } }
+function deckCollab(){ const m=DECK[deckIdx]; if(!m) return; if(m.k==='homecooked'){ toast('Intro sent. Maya replies fast.'); setTimeout(()=>openChatM(),650);} else { toast('Intro drafted and sent. Replies land in the Inbox.'); deckIdx++; deckRender(); } }
+function discTab(btn,t){ [...btn.parentElement.children].forEach(x=>x.classList.toggle('on',x===btn));
+  ['others','mine','x'].forEach(k=>{ document.getElementById('dsc-'+k).style.display=(k===t)?'':'none'; });
+  if(t==='others') deckRender(); }
+window.addEventListener('load', deckRender);
 function toggleShade(){ document.getElementById('shade').classList.toggle('on'); }
 function closeShade(){ document.getElementById('shade').classList.remove('on'); }
 function clearShade(){ document.querySelectorAll('.shade .notif').forEach(n=>n.remove()); const b=document.getElementById('bellBdg'); if(b) b.style.display='none'; closeShade(); toast('All clear. New ones land here.'); }
