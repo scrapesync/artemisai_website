@@ -1,0 +1,28 @@
+name: Nightly QA metrics
+on:
+  schedule:
+    - cron: '0 1 * * *'      # 01:00 UTC daily
+  workflow_dispatch: {}       # allow manual run from the Actions tab
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - run: pip install redshift_connector
+      - name: Generate metrics
+        env:
+          REDSHIFT_HOST: ${{ secrets.REDSHIFT_HOST }}
+          REDSHIFT_PORT: ${{ secrets.REDSHIFT_PORT }}
+          REDSHIFT_DB: ${{ secrets.REDSHIFT_DB }}
+          REDSHIFT_USER: ${{ secrets.REDSHIFT_USER }}
+          REDSHIFT_PASSWORD: ${{ secrets.REDSHIFT_PASSWORD }}
+        run: python scripts/generate_qa_metrics.py
+      - name: Commit snapshot
+        run: |
+          git config user.name "qa-metrics-bot"
+          git config user.email "bot@artemisai.co.uk"
+          git add qa_metrics.json
+          git diff --cached --quiet || git commit -m "chore: nightly QA metrics $(date -u +%FT%TZ)"
+          git push

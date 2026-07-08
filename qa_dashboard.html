@@ -186,7 +186,7 @@ body.edit .boardend.hot{border-color:var(--okT);color:var(--okT)}
     <div>
       <span class="kick">Admin &middot; Quality</span>
       <h1><em>QA</em> Dashboard</h1>
-      <div class="sub">Everything the suite knows &middot; <b>1,284</b> tests &middot; <b>214</b> pipeline runs &middot; gate <b class="gok">GREEN</b></div>
+      <div class="sub">Everything the warehouse knows &middot; <span id="freshness" style="font-family:var(--mono);font-weight:700;font-size:11px;color:var(--okT);border:1px solid var(--line2);padding:2px 9px;border-radius:99px">loading&hellip;</span></div>
     </div>
     <div class="tools">
       <span class="rangep" role="tablist" aria-label="Time range">
@@ -234,7 +234,7 @@ function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
 </script>
 <script>
 /* ═════════ QA DASHBOARD v3 · calendar time, every analysis ═════════ */
-const WKS=['14 Apr','21 Apr','28 Apr','05 May','12 May','19 May','26 May','02 Jun','09 Jun','16 Jun','23 Jun','30 Jun','07 Jul'];
+let WKS=['14 Apr','21 Apr','28 Apr','05 May','12 May','19 May','26 May','02 Jun','09 Jun','16 Jun','23 Jun','30 Jun','07 Jul'];
 const RUNS=['#205','#206','#207','#208','#209','#210','#211','#212','#213','#214'];
 const D30L=(()=>{const out=[];const d=new Date('2026-06-09');for(let i=0;i<30;i++){const x=new Date(d);x.setDate(d.getDate()+i);out.push(x.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}));}return out;})();
 const wig=(base,amp,n,seed)=>Array.from({length:n},(_,i)=>+(base+Math.sin(i*1.7+seed)*amp+ i*0.001).toFixed(1));
@@ -328,7 +328,36 @@ let LAY=[], RANGE='q', UID=0, EDIT=false;
 const KEY='ARTEMIS_QA_DASH_V3';
 const col=k=>TH[k];
 function newW(src,viz){const def=SRC[src].def;return{id:'w'+(++UID),src,viz:viz||def,span:(['kpi','radial','donut'].includes(def))?3:6};}
-function boot(){
+let META={source:'seed'};
+async function loadLive(){
+  // Nightly snapshot: a 1am job writes qa_metrics.json into the repo; the page reads it and stays static.
+  // If the file is missing or malformed, the built-in seed data stays as fallback so the page never breaks.
+  try{
+    const r=await fetch('qa_metrics.json?ts='+Date.now(), {cache:'no-store'});
+    if(!r.ok) return;
+    const j=await r.json();
+    if(j && j.D && typeof j.D==='object'){
+      for(const k in j.D){ if(j.D[k]!=null) D[k]=j.D[k]; }   // merge live over seed, key by key
+      if(j.window && Array.isArray(j.window.labels) && j.window.labels.length===WKS.length){ WKS=j.window.labels; }
+      META={source:'live', generated_at:j.generated_at||null, window:j.window||null, totals:j.totals||null};
+    }
+  }catch(e){ /* keep seed */ }
+}
+function stampFreshness(){
+  const el=document.getElementById('freshness'); if(!el) return;
+  if(META.source==='live' && META.generated_at){
+    const d=new Date(META.generated_at);
+    const day=d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+    const tm=d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    el.innerHTML='live &middot; snapshot '+day+' '+tm;
+    el.title='Nightly Redshift snapshot. Refreshes ~01:00.';
+  } else {
+    el.innerHTML='demo data';
+    el.title='qa_metrics.json not found — showing seeded sample numbers.';
+  }
+}
+async function boot(){
+  await loadLive();
   try{const s=JSON.parse(localStorage.getItem(KEY));
     if(s){ if(Array.isArray(s.lay)&&s.lay.length){LAY=s.lay.filter(w=>SRC[w.src]).map(w=>({...w,id:'w'+(++UID)}));}
       if(['runs','d30','q'].includes(s.range)) RANGE=s.range;
@@ -336,7 +365,7 @@ function boot(){
   }catch(e){}
   if(!LAY.length) LAY=DEFAULT_LAYOUT.map(w=>({...newW(w.src,w.viz),span:w.span}));
   applyTheme(); document.querySelectorAll('.rp').forEach(b=>b.classList.toggle('on',b.dataset.r===RANGE));
-  buildPalette(); render();
+  buildPalette(); render(); stampFreshness();
 }
 function applyTheme(){ TH=THEMES[THEME]; document.body.classList.toggle('light',THEME==='light');
   document.getElementById('themeBtn').innerHTML = THEME==='light'?'&#9788;':'&#9789;'; }
@@ -484,7 +513,7 @@ function bulletSVG(){
   const T=90, rows=D.lighthouse, h=rows.length*30+6, w=560, lw=150;
   const body=rows.map((r,i)=>{const y=i*30+4; const full=w-lw-46; const bw=full*r[1]/100; const tx=lw+full*T/100;
     const c = r[1]>=T? TH.teal : TH.gold;
-    return `<text x="4" y="${y+13}" fill="${TH.mut}" font-size="11" font-family="DM Sans" font-weight="600">${r[0]}</text>
+    return `<text x="4" y="${y+13}" fill="${'#A3AFC4'===TH.mut?TH.mut:TH.mut}" font-size="11" font-family="DM Sans" font-weight="600" fill="${TH.mut}">${r[0]}</text>
       <rect x="${lw}" y="${y+3}" width="${full}" height="12" rx="6" fill="${TH.track}"/>
       <rect class="fadein" x="${lw}" y="${y+3}" width="${Math.max(bw,3)}" height="12" rx="6" fill="${c}"><title>${r[0]}: ${r[1]} (target ${T})</title></rect>
       <line x1="${tx}" x2="${tx}" y1="${y}" y2="${y+18}" stroke="${TH.ink}" stroke-width="2"/>
