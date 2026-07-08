@@ -823,7 +823,7 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
 .dmode{display:inline-flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:3px}
 .dm{font-size:11px;font-weight:800;padding:6px 14px;border-radius:99px;color:var(--t3);transition:.15s}
 .dm.on{background:var(--surface2);color:var(--t1)}
-.swdeck{position:relative;height:420px;max-width:520px;margin:16px auto 4px;touch-action:pan-y}
+.swdeck{position:relative;min-height:140px;max-width:520px;margin:16px auto 4px;touch-action:pan-y}
 .tcard{position:absolute;inset:auto;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:484px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 22px 20px;transition:transform .45s cubic-bezier(.22,.68,.22,1), opacity .3s;will-change:transform}
 .tcard::before{content:'';position:absolute;top:-1px;left:22px;right:22px;height:3px;border-radius:0 0 3px 3px;background:var(--tc)}
 .tcard.behind{transform:translateX(-50%) translateY(16px) scale(.96);opacity:.55;z-index:1;pointer-events:none}
@@ -2401,10 +2401,10 @@ function tcardHTML(m,cls){ const R=25,C=2*Math.PI*R,p=parseInt(m.ovl); return `<
 </div>`; }
 function renderSwipe(){ const d=document.getElementById('swdeck'); if(!d) return; const pool=swipePool();
   const acts=document.getElementById('swacts');
-  if(!pool.length){ d.innerHTML='<div style="padding:44px 10px;text-align:center;color:var(--t2);font-size:13.5px;line-height:1.7">You have swiped the week clean.<br>Fresh matches land nightly, and the list keeps everything you saved.</div>'; if(acts) acts.style.visibility='hidden'; return; }
+  if(!pool.length){ d.innerHTML='<div style="padding:44px 10px;text-align:center;color:var(--t2);font-size:13.5px;line-height:1.7">You have swiped the week clean.<br>Fresh matches land nightly, and the list keeps everything you saved.</div>'; if(acts) acts.style.visibility='hidden'; d.style.height=''; return; }
   if(acts) acts.style.visibility='';
   d.innerHTML = pool.slice(0,2).map((m,i)=>tcardHTML(m, i===0?'top':'behind')).reverse().join('');
-  initSwipe2(); }
+  initSwipe2(); const tc0=d.querySelector('.tcard.top'); if(tc0) d.style.height=(tc0.offsetHeight+18)+'px'; }
 function topT(){ return document.querySelector('.tcard.top'); }
 function swAct(dir){ const t=topT(); if(!t) return; const k=t.dataset.k, m=MATCH.find(x=>x.k===k);
   t.classList.add(dir<0?'flyL':'flyR');
@@ -2421,6 +2421,7 @@ function bindSwipeTop(){ const d=document.getElementById('swdeck'); const t=topT
   const up=()=>{ if(!drag) return; drag=false; t.classList.remove('dragging'); t.style.transform='';
     if(dx<-80) swAct(-1); else if(dx>80) swAct(1); };
   t.addEventListener('pointerup',up); t.addEventListener('pointercancel',up); }
+const _setViewD=setView; setView=function(v){ _setViewD(v); if(v==='discovery' && typeof discMode!=='undefined' && discMode==='swipe') renderSwipe(); };
 window.addEventListener('load', ()=>{ renderDisc(); setDiscMode('swipe'); });
 
 function setTimeIdxW(i){ schedSel=i; setTimeout(()=>{ const ps=[...document.querySelectorAll('#compose .tpill')]; ps.forEach((t,x)=>t.classList.toggle('on',x===i)); const b=document.getElementById('schedBtn'); if(b) b.textContent='Schedule for '+TIMES[i][0]; },80); }
