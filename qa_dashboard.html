@@ -194,6 +194,7 @@ body.edit .boardend.hot{border-color:var(--okT);color:var(--okT)}
         <button class="rp" data-r="d30" onclick="setRange('d30')">30 days</button>
         <button class="rp on" data-r="q" onclick="setRange('q')">Quarter</button>
       </span>
+      <button class="tbtn" id="refreshBtn" onclick="refreshData()" title="Re-fetch the latest nightly snapshot">&#8635; Refresh</button>
       <button class="tbtn" id="themeBtn" onclick="toggleTheme()" title="Light / dark">&#9789;</button>
       <button class="tbtn" onclick="resetLayout()" title="Restore the default board">&#8634; Reset</button>
       <button class="tbtn pri" id="editBtn" onclick="toggleEdit()">&#10022; Customize</button>
@@ -332,16 +333,19 @@ let META={source:'seed'};
 async function loadLive(){
   // Nightly snapshot: a 1am job writes qa_metrics.json into the repo; the page reads it and stays static.
   // If the file is missing or malformed, the built-in seed data stays as fallback so the page never breaks.
+  // Returns true if a snapshot was fetched and merged, false if the fetch failed (data left untouched).
   try{
     const r=await fetch('qa_metrics.json?ts='+Date.now(), {cache:'no-store'});
-    if(!r.ok) return;
+    if(!r.ok) return false;
     const j=await r.json();
     if(j && j.D && typeof j.D==='object'){
       for(const k in j.D){ if(j.D[k]!=null) D[k]=j.D[k]; }   // merge live over seed, key by key
       if(j.window && Array.isArray(j.window.labels) && j.window.labels.length===WKS.length){ WKS=j.window.labels; }
       META={source:'live', generated_at:j.generated_at||null, window:j.window||null, totals:j.totals||null};
+      return true;
     }
-  }catch(e){ /* keep seed */ }
+    return false;
+  }catch(e){ return false; /* keep whatever data we had */ }
 }
 function stampFreshness(){
   const el=document.getElementById('freshness'); if(!el) return;
@@ -355,6 +359,20 @@ function stampFreshness(){
     el.innerHTML='demo data';
     el.title='qa_metrics.json not found — showing seeded sample numbers.';
   }
+}
+let _refreshing=false;
+async function refreshData(){
+  if(_refreshing) return; _refreshing=true;
+  const btn=document.getElementById('refreshBtn');
+  const prevStamp=META.generated_at||null;
+  btn.innerHTML='&#8635; Refreshing&hellip;'; btn.style.opacity='.6'; btn.disabled=true;
+  const ok=await loadLive();             // re-fetch qa_metrics.json (cache-busted inside loadLive)
+  render(); stampFreshness();            // re-bake every widget from the newly merged data
+  btn.innerHTML='&#8635; Refresh'; btn.style.opacity=''; btn.disabled=false; _refreshing=false;
+  if(!ok && META.source!=='live'){ toast('No live snapshot found — still on demo data.'); }
+  else if(!ok){ toast('Could not reach the snapshot — showing last loaded.'); }
+  else if(META.generated_at===prevStamp){ toast('Already up to date &middot; no new snapshot.'); }
+  else { toast('Refreshed to the latest snapshot.'); }
 }
 async function boot(){
   await loadLive();
