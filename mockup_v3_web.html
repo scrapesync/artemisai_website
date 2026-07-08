@@ -329,6 +329,8 @@ body.light .pcard .pd-top .pn3, body.light .bigpct{color:#fff}
 body.light .dact{background:rgba(255,255,255,.75)}
 .venn{flex-shrink:0}
 .venn text{font-family:var(--mono);font-weight:800}
+#v-analytics{max-width:1140px}
+#v-planner{max-width:760px}
 /* dashboard v2 */
 .kpis2{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
 .kpi2{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:13px 15px 10px}
@@ -1266,13 +1268,13 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
 
         <div class="dgrid2">
           <div class="dcard span2"><h5>Reach <span class="rangepills" style="display:inline-flex;gap:5px;margin-left:8px"><button class="rpill" onclick="setRange(this,7)">7d</button><button class="rpill on" onclick="setRange(this,14)">14d</button><button class="rpill" onclick="setRange(this,30)">30d</button></span><b>Sana's Kitchen</b></h5>
-            <svg width="100%" height="184" viewBox="0 0 400 184" preserveAspectRatio="none">
+            <svg width="100%" height="196" viewBox="0 0 840 196" preserveAspectRatio="none">
               <defs><linearGradient id="reachFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00C4A0" stop-opacity=".28"/><stop offset="1" stop-color="#00C4A0" stop-opacity="0"/></linearGradient></defs>
-              <line class="gline" x1="38" y1="24" x2="400" y2="24"/><line class="gline" x1="38" y1="86" x2="400" y2="86"/><line class="gline" x1="38" y1="148" x2="400" y2="148"/>
-              <text class="axis" x="0" y="28">120k</text><text class="axis" x="6" y="90">60k</text><text class="axis" x="14" y="152">0</text>
-              <g transform="translate(38,10) scale(0.905,1.5)"><path id="reachArea" d="M0,80 L30,74 L60,84 L90,70 L120,76 L150,88 L180,90 L210,86 L240,92 L270,60 L300,52 L330,38 L360,20 L400,26 L400,100 L0,100 Z" fill="url(#reachFill)"/><path id="reachPath" d="M0,80 L30,74 L60,84 L90,70 L120,76 L150,88 L180,90 L210,86 L240,92 L270,60 L300,52 L330,38 L360,20 L400,26" fill="none" stroke="#00C4A0" stroke-width="2.2" stroke-linecap="round" vector-effect="non-scaling-stroke"/><circle id="reachPeak" cx="360" cy="20" r="3.2" fill="#07090D" stroke="#00C4A0" stroke-width="2" vector-effect="non-scaling-stroke"/></g>
-              <text class="peaktag" id="reachPeakTag" x="326" y="18" fill="#00C4A0">Tue &middot; 118k</text>
-              <text class="axis" x="40" y="179">14 days ago</text><text class="axis" x="352" y="179">today</text>
+              <line class="gline" x1="46" y1="26" x2="840" y2="26"/><line class="gline" x1="46" y1="92" x2="840" y2="92"/><line class="gline" x1="46" y1="158" x2="840" y2="158"/>
+              <text class="axis" x="0" y="30">120k</text><text class="axis" x="10" y="96">60k</text><text class="axis" x="20" y="162">0</text>
+              <g transform="translate(46,10) scale(1.94,1.56)"><path id="reachArea" d="M0,80 L30,74 L60,84 L90,70 L120,76 L150,88 L180,90 L210,86 L240,92 L270,60 L300,52 L330,38 L360,20 L400,26 L400,100 L0,100 Z" fill="url(#reachFill)"/><path id="reachPath" d="M0,80 L30,74 L60,84 L90,70 L120,76 L150,88 L180,90 L210,86 L240,92 L270,60 L300,52 L330,38 L360,20 L400,26" fill="none" stroke="#00C4A0" stroke-width="2.6" stroke-linecap="round" vector-effect="non-scaling-stroke"/><circle id="reachPeak" cx="360" cy="20" r="2.6" fill="#07090D" stroke="#00C4A0" stroke-width="2.2" vector-effect="non-scaling-stroke"/></g>
+              <text class="peaktag" id="reachPeakTag" x="704" y="24" fill="#00C4A0">Tue &middot; 118k</text>
+              <text class="axis" x="48" y="190">14 days ago</text><text class="axis" x="756" y="190">today</text>
             </svg>
             <div class="chart-note"><b>Read:</b> higher line, more people saw you. That last climb is the pasta reel, and the dot is your best day.</div>
           </div>
@@ -1991,7 +1993,7 @@ function setRange(btn,d){ btn.parentElement.querySelectorAll('.rpill').forEach(x
   const pts=RANGES[d].replace(/[ML]/g,'').trim().split(' ').map(x=>x.split(',').map(Number));
   let best=pts[0]; pts.forEach(pt=>{ if(pt[1]<best[1]) best=pt; });
   const c=document.getElementById('reachPeak'); if(c){ c.setAttribute('cx',best[0]); c.setAttribute('cy',best[1]); }
-  const t=document.getElementById('reachPeakTag'); if(t){ t.setAttribute('x', Math.min(38+best[0]*0.905-28, 338)); t.textContent=(d===7?'Tue':'best day')+' peak'; } }
+  const t=document.getElementById('reachPeakTag'); if(t){ t.setAttribute('x', Math.min(46+best[0]*1.94-34, 776)); t.textContent=(d===7?'Tue':'best day')+' peak'; } }
 window.addEventListener('load',()=>{ document.querySelectorAll('#rawtbl tbody tr').forEach(r=>{ r.style.cursor='pointer'; r.title='Why did this post perform like that?'; r.onclick=()=>askArte('Why did this post perform like that?'); }); });
 
 /* ── master plan ── */
