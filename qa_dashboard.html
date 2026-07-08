@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QA Dashboard · ArtemisAI Admin</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -254,61 +255,105 @@ let TH=THEMES.dark, THEME='dark';
 /* ---- seed fallback (small; live JSON overrides) ---- */
 function flat(v,n){return {day:Array(30).fill(v),week:Array(13).fill(v),month:Array(4).fill(v),quarter:Array(2).fill(v),daily:Array(120).fill(v)};}
 const SEED={
-  accuracy:{agreement:flat(88),nlp_conf:flat(86),ds_conf:flat(90),
+  overview:{scores:[['Accuracy',88],['Health',83],['Quality',91],['Coverage',99]],
+    pipeline:[['LOKI ingest','—','pass','—'],['NEBULA posts','—','pass','—'],['Fusion','—','pass','—']],
+    today:[['Posts labelled',0,0],['Comments',0,0]],volume:flat(300),load_status:flat(97),
+    freshness:[['page_posts','—','pass','—','on time']],escalation:[['NLP tier',7694],['DeepSeek tier',7638],['Claude tier',0]],
+    conn_status:[['active',20]],copy_jobs:[['success',1284],['failed/other',12]],volume2:flat(28000)},
+  accuracy:{agreement:flat(88),nlp_conf:flat(86),ds_conf:flat(90),comment_agreement:flat(85),
     confusion:{rows:['positive','neutral','negative'],cols:['positive','neutral','negative'],v:[[5012,241,24],[198,1720,55],[31,88,447]]},
     conf_buckets:[['<50%',142],['50-70%',588],['70-85%',1663],['85-95%',2894],['95-100%',2407]],
-    per_dim:[['sentiment',88.2],['emotion',79.5],['toxicity',98.1]],
-    escalation:[['NLP tier',7694],['DeepSeek tier',7638],['Claude tier',0]],proctime:flat(240)},
+    per_dim:[['sentiment',88.2],['emotion',79.5],['toxicity',98.1]],dim_conf:[['sentiment',86],['emotion',81],['topic',80],['intent',83],['toxicity',95]],
+    escalation:[['NLP tier',7694],['DeepSeek tier',7638],['Claude tier',0]],proctime:flat(240),
+    fusion_conf:flat(82),video_conf:flat(78),uncertain:[['Confident',38],['Uncertain',3]]},
   health:{freshness:[['page_posts','—','pass','—','on time']],daily_loads:{posts:flat(950),comments:flat(28000)},
-    load_status:flat(97),missing_days:[['no gaps',0]],lag:flat(1.2),rowcount_delta:flat(28000)},
+    load_status:flat(97),missing_days:[['no gaps',0]],lag:flat(1.2),rowcount_delta:flat(28000),
+    copy_jobs:[['success',1284],['failed/other',12]],reactions_load:flat(9500),demographics_load:flat(420),
+    staging_drift:[['fusion staging',862],['fusion prod',862]],insights_load:flat(2400)},
   quality:{completeness:[['sentiment',99.3],['emotion',99.3],['topic',99.1],['intent',99.3],['toxicity',99.4],['ds sentiment',99.3]],
     dupes:[['dim_comments',0],['dim_posts',0],['dim_pages',0]],integrity:[['orphan post facts',0],['orphan comments',12]],
     dq_score:flat(91),highconf:flat(82),validity:[['confidence out of range',0],['negative reactions',0]],
-    text_lengths:[['1-2',612],['3-5',388],['6-10',196],['11-20',64],['20+',24]]},
+    text_lengths:[['1-2',612],['3-5',388],['6-10',196],['11-20',64],['20+',24]],
+    null_heat:[['nlp_sentiment',0.7],['cl_sentiment',100],['fusion.label',0]],
+    dim_coverage:[['dim_date',3653],['dim_pages',20],['dim_comments',2700145]],
+    version_drift:{rows:['v1','v2'],cols:['negative','neutral','positive'],v:[[210,1180,4210],[240,1090,4360]]},
+    conn_status:[['active',20]],orphan_trend:flat(8)},
   analytics:{topic:[['Humour',4299],['Lifestyle',916],['Opinion Poll',878],['Entertainment',582],['Community',310]],
     intent:[['Entertain',4606],['Engage',1624],['Inform',472],['Complain',467]],
     emotion:[['joy',5294],['surprise',1096],['love',547],['sadness',420],['anger',267],['fear',70]],
     fusion:[['lifestyle',253],['meme',252],['text-heavy',222],['screenshot',103],['product_shot',32]],
     tier:[['Established',6],['Growing',6],['Major',3],['Emerging',3],['Mega',2]],
     sentiment_trend:flat(68),reactions:[['Like',48210],['Love',12840],['Haha',9330],['Wow',3120],['Sad',1450],['Angry',890]],
-    emotion_scores:{axes:['Joy','Sadness','Anger','Fear','Surprise','Disgust'],v:[68.8,5.5,3.5,0.9,14.2,2.1]}}
+    emotion_scores:{axes:['Joy','Sadness','Anger','Fear','Surprise','Disgust'],v:[68.8,5.5,3.5,0.9,14.2,2.1]},
+    page_growth:flat(2400000),demographics:[['PK',412000],['US',88000],['IN',64000],['GB',41000]],
+    reaction_sentiment:[['positive',4],['neutral',1],['negative',2]],video_scene:[['talking_head',18],['lifestyle',12]],
+    hook_scores:[['0-20%',4],['20-40%',7],['40-60%',12],['60-80%',9],['80-100%',9]],
+    gpt_recs:[['Post more Humour',22],['Increase video',14],['Engage at 6pm',11]]}
 };
 let DATA=JSON.parse(JSON.stringify(SEED));
 let AXIS=[]; // daily date strings from live window
 
 /* ---- metric catalogue per tab: [key, title, colorKey, allowedVizzes, defaultViz] ---- */
 const TABS={
-  accuracy:{name:'Accuracy',desc:'No human ground truth, so accuracy = how much the NLP and DeepSeek tiers agree, and how confident they are.',
+  overview:{name:'Overview',desc:'The whole pipeline at a glance: last run status, freshness, today vs yesterday, and top-line scores from every tab.',
     metrics:{
-      agreement:['NLP vs DS agreement','teal',['line','kpi'],'line','%'],
+      scores:['Health scores','teal',['scorecards'],'scorecards'],
+      pipeline:['Pipeline run status','teal',['pipeline'],'pipeline'],
+      today:['Today vs yesterday','sky',['deltas'],'deltas'],
+      volume:['Labelling activity/day','teal',['line','kpi'],'line',''],
+      freshness:['Table freshness','indigo',['table'],'table'],
+      load_status:['Load completeness','teal',['line','kpi'],'line','%'],
+      escalation:['Tier routing usage','gold',['bars'],'bars'],
+      conn_status:['FB connections','sky',['bars','donut'],'donut'],
+      copy_jobs:['Ingestion jobs','indigo',['bars','donut'],'donut'],
+      volume2:['Comment volume/day','indigo',['line'],'line',''],
+    }},
+  accuracy:{name:'Accuracy',desc:'No human ground truth, so accuracy = how much the NLP and DeepSeek tiers agree, and how confident they are. Covers posts, comments, fusion and video.',
+    metrics:{
+      agreement:['NLP vs DS agreement (posts)','teal',['line','kpi'],'line','%'],
+      comment_agreement:['NLP vs DS agreement (comments)','sky',['line','kpi'],'line','%'],
       nlp_conf:['NLP confidence','sky',['line','kpi'],'line','%'],
       ds_conf:['DeepSeek confidence','indigo',['line','kpi'],'line','%'],
       confusion:['Sentiment confusion (NLP×DS)','teal',['confusion'],'confusion'],
       conf_buckets:['Confidence distribution','indigo',['histo','bars'],'histo'],
       per_dim:['Agreement by dimension','teal',['bars'],'bars'],
+      dim_conf:['Confidence by dimension','sky',['bars'],'bars'],
       escalation:['Tier routing usage','gold',['bars'],'bars'],
       proctime:['Processing time','indigo',['line','kpi'],'line','ms'],
+      fusion_conf:['Fusion classifier confidence','sky',['line','kpi'],'line','%'],
+      video_conf:['Video scene confidence','gold',['line','kpi'],'line','%'],
+      uncertain:['Video scene certainty','rose',['bars','donut'],'donut'],
     }},
-  health:{name:'Data Health',desc:'Did each load arrive on its date, did anything fail or lag. Operational QA.',
+  health:{name:'Data Health',desc:'Did each load arrive on its date, did anything fail or lag. Covers every ingest table, staging vs prod, and the Redshift copy jobs.',
     metrics:{
       freshness:['Table freshness','teal',['table'],'table'],
       load_status:['Daily load completeness','teal',['line','kpi'],'line','%'],
       daily_loads:['Rows loaded per day','sky',['loads'],'loads'],
       rowcount_delta:['Comment volume/day','indigo',['line','bars'],'line',''],
+      insights_load:['Post insights/day','teal',['line'],'line',''],
+      reactions_load:['Reactions loaded/day','rose',['line'],'line',''],
+      demographics_load:['Demographics loaded/day','sky',['line'],'line',''],
       lag:['Collection→load lag','gold',['line','kpi'],'line','d'],
       missing_days:['Missed load days','rose',['bars'],'bars'],
+      copy_jobs:['Redshift copy jobs','indigo',['bars','donut'],'bars'],
+      staging_drift:['Staging vs prod rows','gold',['bars'],'bars'],
     }},
-  quality:{name:'Data Quality',desc:'How good is the data: completeness, duplicates, referential integrity, validity.',
+  quality:{name:'Data Quality',desc:'How good is the data: completeness, duplicates, referential integrity, validity, and null-rates across every table.',
     metrics:{
       completeness:['Column completeness','teal',['bars'],'bars'],
+      null_heat:['Null-rate by column','rose',['bars'],'bars'],
       dq_score:['Data-quality score','teal',['line','kpi'],'line','%'],
       highconf:['High-confidence share','sky',['line','kpi'],'line','%'],
       dupes:['Duplicate keys','gold',['bars'],'bars'],
       integrity:['Referential integrity','rose',['bars'],'bars'],
+      orphan_trend:['Orphan rows/day','rose',['line'],'line',''],
       validity:['Range validity','rose',['bars'],'bars'],
       text_lengths:['Comment length spread','indigo',['histo'],'histo'],
+      dim_coverage:['Dimension table rows','sky',['bars'],'bars'],
+      version_drift:['Sentiment v1 vs v2','gold',['confusion'],'confusion'],
+      conn_status:['FB connection status','teal',['bars','donut'],'bars'],
     }},
-  analytics:{name:'Analytics',desc:'Everything else: content mix, sentiment, emotion, reactions, pages.',
+  analytics:{name:'Analytics',desc:'Everything else: content mix, sentiment, emotion, reactions, pages, demographics, video and GPT recommendations.',
     metrics:{
       topic:['Topics','teal',['bars'],'bars'],
       intent:['Intents','indigo',['bars'],'bars'],
@@ -317,17 +362,25 @@ const TABS={
       tier:['Influence tiers','indigo',['bars','donut'],'donut'],
       sentiment_trend:['Positive sentiment trend','teal',['line','kpi'],'line','%'],
       reactions:['Reaction mix','rose',['bars','donut'],'bars'],
+      reaction_sentiment:['Reaction sentiment','sky',['bars','donut'],'donut'],
       emotion_scores:['Emotion radar','teal',['radar'],'radar'],
+      page_growth:['Total fan count','teal',['line','kpi'],'line',''],
+      demographics:['Audience by country','indigo',['bars'],'bars'],
+      video_scene:['Video scene labels','gold',['bars','donut'],'bars'],
+      hook_scores:['Video hook scores','sky',['histo'],'histo'],
+      gpt_recs:['GPT recommendations','indigo',['bars'],'bars'],
     }},
 };
 const DEFAULTS={
-  accuracy:[['agreement','line',8],['per_dim','bars',4],['confusion','confusion',6],['conf_buckets','histo',6],['nlp_conf','line',6],['ds_conf','line',6],['escalation','bars',6],['proctime','line',6]],
-  health:[['load_status','line',8],['freshness','table',4],['daily_loads','loads',6],['rowcount_delta','line',6],['lag','line',6],['missing_days','bars',6]],
-  quality:[['dq_score','line',6],['highconf','line',6],['completeness','bars',6],['text_lengths','histo',6],['dupes','bars',4],['integrity','bars',4],['validity','bars',4]],
-  analytics:[['topic','bars',6],['emotion_scores','radar',6],['emotion','bars',6],['intent','bars',6],['sentiment_trend','line',6],['tier','donut',3],['fusion','bars',3],['reactions','bars',6]],
+  overview:[['scores','scorecards',12],['pipeline','pipeline',8],['today','deltas',4],['volume','line',6],['load_status','line',6],['freshness','table',6],['escalation','bars',6],['conn_status','donut',3],['copy_jobs','donut',3],['volume2','line',6]],
+  accuracy:[['agreement','line',6],['comment_agreement','line',6],['confusion','confusion',6],['conf_buckets','histo',6],['per_dim','bars',6],['dim_conf','bars',6],['nlp_conf','line',6],['ds_conf','line',6],['fusion_conf','line',6],['video_conf','line',6],['escalation','bars',6],['proctime','line',6],['uncertain','donut',3]],
+  health:[['load_status','line',8],['freshness','table',4],['daily_loads','loads',6],['rowcount_delta','line',6],['insights_load','line',6],['reactions_load','line',6],['demographics_load','line',6],['lag','line',6],['copy_jobs','bars',6],['staging_drift','bars',6],['missing_days','bars',6]],
+  quality:[['dq_score','line',6],['highconf','line',6],['completeness','bars',6],['null_heat','bars',6],['text_lengths','histo',6],['dim_coverage','bars',6],['version_drift','confusion',6],['dupes','bars',4],['integrity','bars',4],['validity','bars',4],['orphan_trend','line',6],['conn_status','bars',4]],
+  analytics:[['topic','bars',6],['emotion_scores','radar',6],['emotion','bars',6],['intent','bars',6],['sentiment_trend','line',6],['demographics','bars',6],['page_growth','line',6],['hook_scores','histo',6],['video_scene','bars',6],['tier','donut',3],['fusion','bars',3],['reactions','bars',6],['gpt_recs','bars',6],['reaction_sentiment','donut',3]],
 };
 
-let TAB='accuracy', GRAIN='quarter', CUSTOM=null, EDIT=false, UID=0;
+
+let TAB='overview', GRAIN='quarter', CUSTOM=null, EDIT=false, UID=0;
 let BOARDS={}; // per-tab layout
 const KEY='ARTEMIS_QA_TABS_V1';
 
@@ -441,15 +494,18 @@ function donutHTML(pairs,color){
     <text x="60" y="64" text-anchor="middle" fill="${TH.ink}" font-family="JetBrains Mono" font-weight="700" font-size="16">${fmtN(total)}</text></svg>
     <div class="leg" style="flex-direction:column;gap:7px;margin:0">${pairs.map((p,i)=>`<span><i style="background:${cols[i%cols.length]}"></i>${p[0]} <b style="font-family:var(--mono);color:var(--t1);margin-left:4px">${fmtN(p[1])}</b></span>`).join('')}</div></div>`;
 }
-function confusionHTML(m){
+function confusionHTML(m,cornerLabel){
   if(!m||!m.v) return '';
   const mx=Math.max(...m.v.flat())||1;
+  const square=m.rows.length===m.cols.length;
   let g=`<div class="heatwrap" style="grid-template-columns:70px repeat(${m.cols.length},1fr)">`;
-  g+='<span class="hlab" style="font-size:9px">NLP\\DS</span>'+m.cols.map(c=>`<span class="hlab">${c.slice(0,4)}</span>`).join('');
-  m.rows.forEach((r,i)=>{g+=`<span class="hlab" style="justify-content:flex-start">${r.slice(0,4)}</span>`+m.v[i].map((v,j)=>{
-    const t=v/mx;const bg= i===j? mixHeat(t) : `rgba(251,93,119,${(0.12+t*0.6).toFixed(2)})`;
-    return `<div class="hcell" style="background:${bg};color:${t>0.5||i===j?'#fff':'var(--t2)'}" title="NLP ${r} → DS ${m.cols[j]}: ${v}">${fmtN(v)}</div>`;}).join('');});
-  return g+'</div><div class="leg"><span><i style="background:'+TH.teal+'"></i>agree (diagonal)</span><span><i style="background:'+TH.rose+'"></i>disagree</span></div>';
+  g+=`<span class="hlab" style="font-size:9px">${cornerLabel||'NLP\\\\DS'}</span>`+m.cols.map(c=>`<span class="hlab">${c.slice(0,5)}</span>`).join('');
+  m.rows.forEach((r,i)=>{g+=`<span class="hlab" style="justify-content:flex-start">${r.slice(0,5)}</span>`+m.v[i].map((v,j)=>{
+    const t=v/mx;const diag=square&&i===j;const bg= diag? mixHeat(t) : `rgba(87,181,240,${(0.10+t*0.62).toFixed(2)})`;
+    return `<div class="hcell" style="background:${bg};color:${t>0.5||diag?'#fff':'var(--t2)'}" title="${r} / ${m.cols[j]}: ${v}">${fmtN(v)}</div>`;}).join('');});
+  const leg = square ? '<span><i style="background:'+TH.teal+'"></i>agree (diagonal)</span><span><i style="background:'+TH.sky+'"></i>off-diagonal</span>'
+                     : '<span><i style="background:'+TH.sky+'"></i>count</span>';
+  return g+'</div><div class="leg">'+leg+'</div>';
 }
 function mixHeat(t){const h=TH.heat;const idx=Math.min(h.length-1,Math.floor(t*h.length));return h[idx];}
 function loadsHTML(m){
@@ -508,22 +564,68 @@ function widgetBody(w){
     case 'bars': return barsSVG(m,color);
     case 'histo': return histoSVG(m,color);
     case 'donut': return donutHTML(m,color);
-    case 'confusion': return confusionHTML(m);
+    case 'confusion': return confusionHTML(m, w.src==='version_drift'?'ver\\\\sent':undefined);
     case 'loads': return loadsHTML(m);
     case 'radar': return radarHTML(m);
-    case 'table': return tableHTML(['Table','Last load','Status','Rows','On time'],m,[1,3],2);
+    case 'scorecards': return scorecardsHTML(m);
+    case 'pipeline': return pipelineHTML(m);
+    case 'deltas': return deltasHTML(m);
+    case 'table':
+      if(w.src==='pipeline') return pipelineHTML(m);
+      return tableHTML(['Table','Last load','Status','Rows','On time'],m,[1,3],2);
   }
   return '';
+}
+function scorecardsHTML(pairs){
+  if(!pairs||!pairs.length) return '';
+  const tone=(n)=>n>=90?'ok':(n>=75?'warn':'bad');
+  return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">'+
+    pairs.map(([label,val])=>{
+      const t=tone(val),c=t==='ok'?'var(--okT)':(t==='warn'?'var(--warnT)':'var(--badT)');
+      const R=26,CIRC=2*Math.PI*R,off=CIRC*(1-val/100);
+      return `<div style="background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;align-items:center;gap:13px">
+        <svg width="64" height="64" viewBox="0 0 64 64" class="anim"><circle cx="32" cy="32" r="${R}" fill="none" stroke="var(--track)" stroke-width="6"/>
+          <circle cx="32" cy="32" r="${R}" fill="none" stroke="${c}" stroke-width="6" stroke-linecap="round" stroke-dasharray="${CIRC.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}" transform="rotate(-90 32 32)"/>
+          <text x="32" y="37" text-anchor="middle" fill="var(--t1)" font-family="JetBrains Mono" font-weight="700" font-size="15">${Math.round(val)}</text></svg>
+        <div><div style="font-size:12.5px;font-weight:800;color:var(--t1)">${label}</div>
+        <div style="font-size:10.5px;color:var(--t3);font-family:var(--mono);margin-top:2px">${t==='ok'?'healthy':(t==='warn'?'watch':'attention')}</div></div></div>`;
+    }).join('')+'</div>';
+}
+function pipelineHTML(rows){
+  if(!rows||!rows.length) return '<div style="color:var(--t3);padding:14px">no runs</div>';
+  return '<div style="display:flex;flex-direction:column;gap:8px">'+rows.map((r,i)=>{
+    const st=r[2],cls=st==='pass'?'ok':(st==='fail'?'bad':'warn');
+    const dot=st==='pass'?'var(--okT)':(st==='fail'?'var(--badT)':'var(--warnT)');
+    return `<div style="display:flex;align-items:center;gap:11px;padding:9px 12px;background:var(--panel2);border:1px solid var(--line);border-radius:11px">
+      <span style="width:9px;height:9px;border-radius:50%;background:${dot};flex:0 0 auto;box-shadow:0 0 8px ${dot}"></span>
+      <span style="font-weight:800;font-size:12.5px;color:var(--t1);min-width:120px">${r[0]}</span>
+      <span class="pillst ${cls}">${st}</span>
+      <span style="margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--t3)">${r[1]}</span>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--t2);min-width:70px;text-align:right">${r[3]}</span></div>`;
+  }).join('')+'</div>';
+}
+function deltasHTML(rows){
+  if(!rows||!rows.length) return '<div style="color:var(--t3);padding:14px">no data</div>';
+  return '<div style="display:flex;flex-direction:column;gap:9px">'+rows.map(r=>{
+    const [name,today,yst]=r; const d=today-yst; const pct=yst?Math.round(100*d/yst):0;
+    const up=d>=0; const c=up?'var(--okT)':'var(--badT)';
+    return `<div style="display:flex;align-items:baseline;gap:10px">
+      <span style="font-size:12px;color:var(--t2);min-width:120px">${name}</span>
+      <span style="font-family:var(--mono);font-weight:700;font-size:17px;color:var(--t1)">${fmtN(today)}</span>
+      <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:${c}">${up?'▲':'▼'} ${Math.abs(pct)}%</span>
+      <span style="margin-left:auto;font-size:10px;color:var(--t3);font-family:var(--mono)">y'day ${fmtN(yst)}</span></div>`;
+  }).join('')+'</div>';
 }
 function wsub(w){
   const viz=w.viz;
   if(['line','kpi'].includes(viz)) return CUSTOM?'custom range':GRAIN;
   if(viz==='loads') return CUSTOM?'custom range':GRAIN;
-  if(viz==='table') return 'now';
-  if(viz==='confusion') return 'all labelled';
+  if(['table','pipeline','deltas'].includes(viz)) return 'now';
+  if(viz==='scorecards') return 'live';
+  if(viz==='confusion') return TAB==='quality'?'v1 vs v2':'all labelled';
   return 'current';
 }
-const VIC={line:'&#9581;',kpi:'&#35;',bars:'&#9644;',histo:'&#9601;',donut:'&#9678;',confusion:'&#9638;',loads:'&#8767;',radar:'&#9737;',table:'&#8801;'};
+const VIC={line:'&#9581;',kpi:'&#35;',bars:'&#9644;',histo:'&#9601;',donut:'&#9678;',confusion:'&#9638;',loads:'&#8767;',radar:'&#9737;',table:'&#8801;',scorecards:'&#9673;',pipeline:'&#9776;',deltas:'&#8645;'};
 
 function render(){
   const b=document.getElementById('board');const lay=BOARDS[TAB]||[];

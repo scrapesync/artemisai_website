@@ -227,28 +227,214 @@ def an_emotion_scores(cur):
     return {'axes':['Joy','Sadness','Anger','Fear','Surprise','Disgust'],
             'v':[round(100*float(r[k] or 0),1) for k in ['j','s','a','f','su','d']]}
 
+# ---- ACCURACY (extra) ----
+def acc_comment_agreement(cur):
+    rows=q(cur,f"""SELECT created_at::date d,
+        ROUND(100.0*AVG(CASE WHEN nlp_sentiment=ds_sentiment THEN 1 ELSE 0 END),1) a
+      FROM rdl.comment_label_predictions
+      WHERE created_at>='{START}' AND nlp_sentiment IS NOT NULL AND ds_sentiment IS NOT NULL GROUP BY 1""")
+    return trend(align_daily(rows,'d','a',88,True))
+def acc_fusion_conf(cur):
+    rows=q(cur,f"""SELECT processed_at::date d, ROUND(100*AVG(confidence),1) c
+      FROM rdl.fusion_predictions WHERE processed_at>='{START}' AND confidence IS NOT NULL GROUP BY 1""")
+    return trend(align_daily(rows,'d','c',82,True))
+def acc_video_conf(cur):
+    rows=q(cur,f"""SELECT processed_at::date d, ROUND(100*AVG(scene_confidence),1) c
+      FROM rdl.video_intelligence WHERE processed_at>='{START}' AND scene_confidence IS NOT NULL GROUP BY 1""")
+    return trend(align_daily(rows,'d','c',80,True))
+def acc_dim_conf(cur):
+    """Mean confidence per NLP dimension - one bar each."""
+    dims=['sentiment','emotion','topic','intent','toxicity']
+    out=[]
+    for dmn in dims:
+        r=q(cur,f"SELECT ROUND(100*AVG(nlp_{dmn}_confidence),1) v FROM rdl.post_label_predictions WHERE nlp_{dmn}_confidence IS NOT NULL")[0]
+        out.append([dmn,float(r['v'] or 0)])
+    return out
+def acc_uncertain(cur):
+    """Video scenes flagged uncertain vs confident."""
+    r=q(cur,"SELECT SUM(CASE WHEN scene_uncertain THEN 1 ELSE 0 END) u, SUM(CASE WHEN NOT scene_uncertain THEN 1 ELSE 0 END) c FROM rdl.video_intelligence")[0]
+    return [['Confident',int(r['c'] or 0)],['Uncertain',int(r['u'] or 0)]]
+
+# ---- HEALTH (extra) ----
+def hl_copy_jobs(cur):
+    """Redshift auto-copy ingestion outcomes - real load success/fail."""
+    rows=q(cur,"""SELECT CASE ingestion_status WHEN 1 THEN 'success' ELSE 'failed/other' END s, COUNT(*) n
+        FROM pg_auto_copy.copy_job_detail GROUP BY 1""")
+    return [[r['s'],int(r['n'])] for r in rows] or [['no jobs',0]]
+def hl_reactions_load(cur):
+    rows=q(cur,f"SELECT load_date d,COUNT(*) n FROM rdl.post_reactions WHERE load_date>='{START}' GROUP BY 1")
+    return trend(align_daily(rows,'d','n',0))
+def hl_demographics_load(cur):
+    rows=q(cur,f"SELECT load_date d,COUNT(*) n FROM rdl.page_demographics_insights WHERE load_date>='{START}' GROUP BY 1")
+    return trend(align_daily(rows,'d','n',0))
+def hl_staging_drift(cur):
+    """Row counts: staging vs prod for fusion + video (should converge after promote)."""
+    out=[]
+    for name,stg,prod in [('fusion','rdl.fusion_predictions_staging','rdl.fusion_predictions'),
+                          ('video','rdl.video_intelligence_staging','rdl.video_intelligence')]:
+        s=q(cur,f"SELECT COUNT(*) n FROM {stg}")[0]['n'] or 0
+        p=q(cur,f"SELECT COUNT(*) n FROM {prod}")[0]['n'] or 0
+        out.append([name+' staging',int(s)]); out.append([name+' prod',int(p)])
+    return out
+def hl_insights_load(cur):
+    rows=q(cur,f"SELECT load_date d,COUNT(*) n FROM rdl.post_daily_insights WHERE load_date>='{START}' GROUP BY 1")
+    return trend(align_daily(rows,'d','n',0))
+
+# ---- QUALITY (extra) ----
+def ql_null_heat(cur):
+    """Null-rate across critical columns of several tables -> bars (lower=better)."""
+    checks=[('post_label_predictions','nlp_sentiment','rdl'),('post_label_predictions','cl_sentiment','rdl'),
+            ('comment_label_predictions','nlp_sentiment','rdl'),('fusion_predictions','fusion_label','rdl'),
+            ('video_intelligence','scene_label','rdl'),('dim_comments','sentiment_category','odl'),
+            ('comment_sentiments','data_quality_score','odl')]
+    out=[]
+    for tbl,c,s in checks:
+        r=q(cur,f"SELECT ROUND(100.0*SUM(CASE WHEN {c} IS NULL THEN 1 ELSE 0 END)/NULLIF(COUNT(*),0),1) p FROM {s}.{tbl}")[0]
+        out.append([f"{tbl}.{c}"[:26],float(r['p'] or 0)])
+    return out
+def ql_dim_coverage(cur):
+    """Row counts of dimension tables - are the dims populated."""
+    dims=['dim_date','dim_pages','dim_posts','dim_comments','dim_metrics','dim_geographies','dim_reaction_types','dim_page_categories']
+    out=[]
+    for d in dims:
+        try: out.append([d,int(q(cur,f"SELECT COUNT(*) n FROM odl.{d}")[0]['n'] or 0)])
+        except Exception: pass
+    return out
+def ql_version_drift(cur):
+    """comment_sentiments v1 vs v2 sentiment distribution - model-version drift."""
+    def dist(tbl):
+        rows=q(cur,f"SELECT predicted_sentiment v,COUNT(*) n FROM odl.{tbl} WHERE predicted_sentiment IS NOT NULL GROUP BY 1")
+        return {r['v']:int(r['n']) for r in rows}
+    v1,v2=dist('comment_sentiments'),dist('comment_sentiments_v2')
+    keys=sorted(set(v1)|set(v2))
+    return {'rows':['v1','v2'],'cols':keys,'v':[[v1.get(k,0) for k in keys],[v2.get(k,0) for k in keys]]}
+def ql_conn_status(cur):
+    rows=q(cur,"SELECT status v,COUNT(*) n FROM public.artemis_fb_connections GROUP BY 1")
+    return [[r['v'] or 'unknown',int(r['n'])] for r in rows] or [['none',0]]
+def ql_orphan_trend(cur):
+    """Orphan comments over time (FK integrity trend)."""
+    rows=q(cur,f"""SELECT c.load_date d, COUNT(*) n FROM odl.dim_comments c
+        LEFT JOIN odl.dim_posts p ON c.post_sk=p.post_sk
+        WHERE p.post_sk IS NULL AND c.load_date>='{START}' GROUP BY 1""")
+    return trend(align_daily(rows,'d','n',0))
+
+# ---- ANALYTICS (extra) ----
+def an_page_growth(cur):
+    rows=q(cur,f"""SELECT load_date d, SUM(fan_count) f FROM rdl.page_info
+        WHERE load_date>='{START}' GROUP BY 1""")
+    return trend(align_daily(rows,'d','f',0,True))
+def an_demographics(cur):
+    rows=q(cur,"""SELECT country v,SUM(fans_count) n FROM odl.fact_page_daily_demographics_insights
+        WHERE country IS NOT NULL GROUP BY 1 ORDER BY n DESC LIMIT 12""")
+    return [[str(r['v']),int(r['n'] or 0)] for r in rows]
+def an_reaction_sentiment(cur):
+    rows=q(cur,"""SELECT reaction_sentiment v,COUNT(*) n FROM odl.dim_reaction_types
+        WHERE reaction_sentiment IS NOT NULL GROUP BY 1""")
+    return [[str(r['v']),int(r['n'])] for r in rows]
+def an_video_scene(cur):
+    return an_dist(cur,'scene_label','rdl.video_intelligence')
+def an_hook_scores(cur):
+    """Distribution of video hook_score buckets."""
+    rows=q(cur,"""SELECT bucket,COUNT(*) c FROM (
+        SELECT CASE WHEN hook_score<0.2 THEN '0-20%' WHEN hook_score<0.4 THEN '20-40%'
+                    WHEN hook_score<0.6 THEN '40-60%' WHEN hook_score<0.8 THEN '60-80%'
+                    ELSE '80-100%' END bucket
+        FROM rdl.video_intelligence WHERE hook_score IS NOT NULL) t GROUP BY 1""")
+    order=['0-20%','20-40%','40-60%','60-80%','80-100%']; m={r['bucket']:int(r['c']) for r in rows}
+    return [[b,m.get(b,0)] for b in order]
+def an_gpt_recs(cur):
+    rows=q(cur,"""SELECT recommendation v,COUNT(*) n FROM odl.gpt_post_recommendation
+        WHERE recommendation IS NOT NULL GROUP BY 1 ORDER BY n DESC LIMIT 10""")
+    return [[str(r['v'])[:24],int(r['n'])] for r in rows] or [['none',0]]
+
+# ---- OVERVIEW ----
+def ov_pipeline_status(cur):
+    """Per-pipeline-stage last run + status, newest first. The 'did tonight's run work' view."""
+    stages=[('LOKI ingest','rdl.page_posts','load_date'),('NEBULA posts','rdl.post_label_predictions','inserted_at'),
+            ('NEBULA-C comments','rdl.comment_label_predictions','created_at'),('Fusion','rdl.fusion_predictions','processed_at'),
+            ('Video intel','rdl.video_intelligence','processed_at'),('ODL star','odl.dim_comments','load_date')]
+    out=[]
+    for name,tbl,c in stages:
+        try:
+            r=q(cur,f"SELECT MAX({c})::date d, COUNT(*) n FROM {tbl}")[0]
+            d=r['d']; age=(dt.date.today()-d).days if d else None
+            st='pass' if (age is not None and age<=1) else ('flaky' if age==2 else 'fail')
+            out.append([name,str(d) if d else 'never',st,f"{int(r['n']):,}"])
+        except Exception as e:
+            out.append([name,'error','fail','-'])
+    return out
+def ov_scores(cur):
+    """Top-line 0-100 scores for each tab, computed live."""
+    def one(sql,default):
+        try:
+            v=q(cur,sql)[0]['v']; return round(float(v)) if v is not None else default
+        except Exception: return default
+    acc=one("SELECT 100.0*AVG(CASE WHEN nlp_sentiment=ds_sentiment THEN 1 ELSE 0 END) v FROM rdl.post_label_predictions WHERE ds_sentiment IS NOT NULL",88)
+    # health: share of key tables fresh (<=1 day)
+    fresh=0; tot=len(FRESH_TABLES)
+    for tbl,c in FRESH_TABLES:
+        try:
+            d=q(cur,f"SELECT MAX({c})::date d FROM {tbl}")[0]['d']
+            if d and (dt.date.today()-d).days<=1: fresh+=1
+        except Exception: tot-=1
+    health=round(100*fresh/max(tot,1))
+    qual=one("SELECT 100*AVG(data_quality_score) v FROM odl.comment_sentiments WHERE data_quality_score IS NOT NULL",90)
+    cov=one("SELECT 100.0*SUM(CASE WHEN nlp_sentiment IS NOT NULL THEN 1 ELSE 0 END)/NULLIF(COUNT(*),0) v FROM rdl.post_label_predictions",99)
+    return [['Accuracy',acc],['Health',health],['Quality',qual],['Coverage',cov]]
+def ov_today(cur):
+    """Rows added today vs yesterday for headline tables."""
+    out=[]
+    for name,tbl,c in [('Posts labelled','rdl.post_label_predictions','inserted_at'),
+                       ('Comments','rdl.post_comments','load_date'),
+                       ('Fusion','rdl.fusion_predictions','processed_at'),
+                       ('Reactions','rdl.post_reactions','load_date')]:
+        try:
+            t=q(cur,f"SELECT COUNT(*) n FROM {tbl} WHERE {c}::date=CURRENT_DATE")[0]['n'] or 0
+            y=q(cur,f"SELECT COUNT(*) n FROM {tbl} WHERE {c}::date=CURRENT_DATE-1")[0]['n'] or 0
+            out.append([name,int(t),int(y)])
+        except Exception: pass
+    return out
+def ov_volume_trend(cur):
+    """Total labelled rows/day - the master activity line."""
+    rows=q(cur,f"SELECT inserted_at::date d,COUNT(*) n FROM rdl.post_label_predictions WHERE inserted_at>='{START}' GROUP BY 1")
+    return trend(align_daily(rows,'d','n',0))
+
 def main():
     print("Multi-tab QA metrics - connecting...")
     conn=connect(); cur=conn.cursor()
     tabs={}
+    tabs['overview']={'pipeline':safe(ov_pipeline_status,cur),'scores':safe(ov_scores,cur),
+        'today':safe(ov_today,cur),'volume':safe(ov_volume_trend,cur),
+        'freshness':safe(hl_freshness_table,cur),'load_status':safe(hl_load_status,cur),
+        'escalation':safe(acc_escalation,cur),'conn_status':safe(ql_conn_status,cur),
+        'copy_jobs':safe(hl_copy_jobs,cur),'volume2':safe(hl_rowcount_delta,cur)}
     tabs['accuracy']={'agreement':safe(acc_agreement,cur),'nlp_conf':safe(acc_confidence,cur,'nlp'),
         'ds_conf':safe(acc_confidence,cur,'ds'),'confusion':safe(acc_confusion,cur),
         'conf_buckets':safe(acc_conf_buckets,cur),'per_dim':safe(acc_per_dim,cur),
-        'escalation':safe(acc_escalation,cur),'proctime':safe(acc_proctime,cur)}
+        'escalation':safe(acc_escalation,cur),'proctime':safe(acc_proctime,cur),
+        'comment_agreement':safe(acc_comment_agreement,cur),'fusion_conf':safe(acc_fusion_conf,cur),
+        'video_conf':safe(acc_video_conf,cur),'dim_conf':safe(acc_dim_conf,cur),'uncertain':safe(acc_uncertain,cur)}
     tabs['health']={'freshness':safe(hl_freshness_table,cur),'daily_loads':safe(hl_daily_loads,cur),
         'load_status':safe(hl_load_status,cur),'missing_days':safe(hl_missing_days,cur),
-        'lag':safe(hl_lag,cur),'rowcount_delta':safe(hl_rowcount_delta,cur)}
+        'lag':safe(hl_lag,cur),'rowcount_delta':safe(hl_rowcount_delta,cur),
+        'copy_jobs':safe(hl_copy_jobs,cur),'reactions_load':safe(hl_reactions_load,cur),
+        'demographics_load':safe(hl_demographics_load,cur),'staging_drift':safe(hl_staging_drift,cur),
+        'insights_load':safe(hl_insights_load,cur)}
     tabs['quality']={'completeness':safe(ql_completeness,cur),'dupes':safe(ql_dupes,cur),
         'integrity':safe(ql_integrity,cur),'dq_score':safe(ql_dq_score,cur),
         'highconf':safe(ql_highconf_share,cur),'validity':safe(ql_validity,cur),
-        'text_lengths':safe(ql_text_lengths,cur)}
+        'text_lengths':safe(ql_text_lengths,cur),'null_heat':safe(ql_null_heat,cur),
+        'dim_coverage':safe(ql_dim_coverage,cur),'version_drift':safe(ql_version_drift,cur),
+        'conn_status':safe(ql_conn_status,cur),'orphan_trend':safe(ql_orphan_trend,cur)}
     tabs['analytics']={'topic':safe(an_dist,cur,'nlp_topic','rdl.post_label_predictions'),
         'intent':safe(an_dist,cur,'nlp_intent','rdl.post_label_predictions'),
         'emotion':safe(an_dist,cur,'nlp_emotion','rdl.post_label_predictions'),
         'fusion':safe(an_dist,cur,'fusion_label','rdl.fusion_predictions'),
         'tier':safe(an_dist,cur,'influence_tier','odl.dim_pages'),
         'sentiment_trend':safe(an_sentiment_trend,cur),'reactions':safe(an_reactions,cur),
-        'emotion_scores':safe(an_emotion_scores,cur)}
+        'emotion_scores':safe(an_emotion_scores,cur),'page_growth':safe(an_page_growth,cur),
+        'demographics':safe(an_demographics,cur),'reaction_sentiment':safe(an_reaction_sentiment,cur),
+        'video_scene':safe(an_video_scene,cur),'hook_scores':safe(an_hook_scores,cur),'gpt_recs':safe(an_gpt_recs,cur)}
     for t in tabs: tabs[t]={k:v for k,v in tabs[t].items() if v is not None}
     totals={}
     try:
@@ -261,7 +447,7 @@ def main():
              'totals':totals,'tabs':tabs}
     with open(OUT_PATH,'w') as f: json.dump(payload,f,separators=(',',':'))
     n=sum(len(v) for v in tabs.values())
-    print(f"Wrote {OUT_PATH}: {n} live metrics across 4 tabs at {payload['generated_at']}")
+    print(f"Wrote {OUT_PATH}: {n} live metrics across {len(tabs)} tabs at {payload['generated_at']}")
     cur.close(); conn.close()
 
 if __name__=='__main__':
