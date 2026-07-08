@@ -277,11 +277,12 @@ body.light .sv-bars i::after{background:#12161F}
 
 /* deck clean */
 #dsc-others .pcard.prev,#dsc-others .pcard.next{width:436px}
-#dsc-others .pcard.prev{transform:translateX(-108%) scale(.92);opacity:.5}
-#dsc-others .pcard.next{transform:translateX(8%) scale(.92);opacity:.5}
+#dsc-others .pcard.prev{transform:translateX(-115%) scale(.94);opacity:.6}
+#dsc-others .pcard.next{transform:translateX(15%) scale(.94);opacity:.6}
 #dsc-others .pcard.prev > *,#dsc-others .pcard.next > *{visibility:hidden}
 #dsc-others .pcard.prev::after,#dsc-others .pcard.next::after{display:none}
-#dsc-others .pcard.prev,#dsc-others .pcard.next{box-shadow:inset 0 0 0 200px rgba(11,14,20,.25)}
+#dsc-others .pcard.prev,#dsc-others .pcard.next{box-shadow:inset 0 0 0 200px rgba(11,14,20,.18), 0 14px 34px -14px rgba(0,0,0,.55)}
+#dsc-others .pcard.cur{box-shadow:0 22px 54px -20px rgba(0,0,0,.6)}
 /* carousel deck */
 #dsc-others .deck{height:622px;max-width:660px;margin:6px auto 10px;touch-action:pan-y}
 #dsc-others .pcard{position:absolute;inset:auto;top:6px;bottom:6px;left:50%;width:436px;transform:translateX(-50%);transition:transform .5s cubic-bezier(.22,.68,.22,1), opacity .35s ease;will-change:transform;border-radius:26px}
@@ -292,7 +293,7 @@ body.light .sv-bars i::after{background:#12161F}
 #dsc-others .pcard.dragging{transition:none}
 #dsc-others .pcard.fly{transform:translateX(-200%) rotate(-12deg) !important;opacity:0}
 #dsc-others .pcard::before{content:'';position:absolute;inset:-2.5px;border-radius:29px;z-index:-1;background:linear-gradient(120deg, var(--hc), rgba(255,255,255,.5) 45%, var(--hc) 60%, rgba(255,255,255,.25) 80%, var(--hc));background-size:300% 300%;animation:holo 6s ease-in-out infinite}
-#dsc-others .pcard.prev::before,#dsc-others .pcard.next::before{animation:none;background:var(--hc);opacity:.5}
+#dsc-others .pcard.prev::before,#dsc-others .pcard.next::before{animation:none;background:linear-gradient(160deg, rgba(255,255,255,.55), var(--hc) 45%);opacity:.8}
 @keyframes holo{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @media (prefers-reduced-motion: reduce){#dsc-others .pcard::before{animation:none}}
 #dsc-others .pcard::after{content:'';position:absolute;inset:0;border-radius:26px;background:linear-gradient(118deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.05) 18%, transparent 32%);pointer-events:none;z-index:3}
@@ -829,13 +830,13 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
 .qa2{position:absolute;top:14px;right:14px;display:flex;gap:8px;z-index:4}
 .qab{width:34px;height:34px;border-radius:50%;background:rgba(10,13,19,.35);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:13px;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;transition:.15s}
 .qab:hover{background:rgba(10,13,19,.55);transform:scale(1.06)}
-.drow{display:flex;align-items:center;gap:13px;padding:18px 20px 0;position:relative;z-index:2}
+.drow{display:flex;align-items:center;gap:13px;padding:18px 100px 0 20px;position:relative;z-index:2}
 .drow .pring{width:58px;height:58px;margin:0}
 .drow .pring .pav-big{inset:6px;font-size:19px}
-.dnm{color:#fff}
-.dnm b{font-family:var(--disp);font-size:18.5px;font-weight:800;display:block;letter-spacing:-.3px}
-.dnm span{font-size:11px;opacity:.85}
-.fpill{margin-left:auto;margin-right:88px;background:rgba(10,13,19,.35);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:5px 11px;font-size:10.5px;color:#fff;font-weight:700;backdrop-filter:blur(8px)}
+.dnm{color:#fff;min-width:0;flex:1}
+.dnm b{font-family:var(--disp);font-size:18.5px;font-weight:800;display:block;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dnm span{font-size:11px;opacity:.85;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fpill{margin-left:auto;white-space:nowrap;background:rgba(10,13,19,.35);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:5px 11px;font-size:10.5px;color:#fff;font-weight:700;backdrop-filter:blur(8px)}
 .hero2{padding:16px 20px 0;position:relative;z-index:2;color:#fff}
 .hero2 .bigpct{font-size:52px;margin:0;text-align:left}
 .hero2 .bigcap{max-width:none;text-align:left;margin-top:4px;font-size:11.5px}
