@@ -6,8 +6,12 @@ on:
 jobs:
   snapshot:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write        # let GITHUB_TOKEN push the snapshot commit back
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true   # keep the token so the push step is authenticated
       - uses: actions/setup-python@v5
         with: { python-version: '3.11' }
       - run: pip install redshift_connector
