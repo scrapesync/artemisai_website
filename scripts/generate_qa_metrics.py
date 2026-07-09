@@ -143,13 +143,23 @@ FRESH_TABLES=[('rdl.page_posts','load_date'),('rdl.post_comments','load_date'),
               ('rdl.post_label_predictions','inserted_at'),('rdl.fusion_predictions','processed_at')]
 def hl_freshness_table(cur):
     out=[]
+    # WEEK-based pass/fail per the cadence: landed any day this ISO week = pass.
+    today=dt.date.today()
+    week_start=today-dt.timedelta(days=today.weekday())
+    prev_week_start=week_start-dt.timedelta(days=7)
     for t,c in FRESH_TABLES:
         try:
             r=q(cur,f"SELECT MAX({c})::date d, COUNT(*) n FROM {t}")[0]
-            d=r['d']; age=(dt.date.today()-d).days if d else None
-            st='pass' if (age is not None and age<=1) else ('flaky' if age==2 else 'fail')
-            out.append([t.split('.')[-1],str(d) if d else 'never',st,f"{int(r['n']):,}",'on time' if st=='pass' else f'{age}d late'])
+            d=r['d']
+            if not d: st,note='fail','never'
+            elif d>=week_start: st,note='pass','this week'
+            elif d>=prev_week_start: st,note='flaky','last week'
+            else: st,note='fail',f'{(today-d).days}d ago'
+            out.append([t.split('.')[-1],str(d) if d else 'never',st,f"{int(r['n']):,}",note])
         except Exception as e:
+            try:
+                if CONN is not None: CONN.rollback()
+            except Exception: pass
             out.append([t.split('.')[-1],'error','fail','-',str(e)[:18]])
     out.sort(key=lambda x:x[1],reverse=True); return out
 def hl_daily_loads(cur):
@@ -363,20 +373,35 @@ def an_gpt_recs(cur):
 
 # ---- OVERVIEW ----
 def ov_pipeline_status(cur):
-    """Per-pipeline-stage last run + status, newest first. The 'did tonight's run work' view."""
+    """Per-pipeline-stage status, week-based. Landed any day this week = pass."""
     stages=[('LOKI ingest','rdl.page_posts','load_date'),('NEBULA posts','rdl.post_label_predictions','inserted_at'),
             ('NEBULA-C comments','rdl.comment_label_predictions','created_at'),('Fusion','rdl.fusion_predictions','processed_at'),
             ('Video intel','rdl.video_intelligence','processed_at'),('ODL star','odl.dim_comments','load_date')]
+    today=dt.date.today(); week_start=today-dt.timedelta(days=today.weekday()); prev=week_start-dt.timedelta(days=7)
     out=[]
     for name,tbl,c in stages:
         try:
             r=q(cur,f"SELECT MAX({c})::date d, COUNT(*) n FROM {tbl}")[0]
-            d=r['d']; age=(dt.date.today()-d).days if d else None
-            st='pass' if (age is not None and age<=1) else ('flaky' if age==2 else 'fail')
+            d=r['d']
+            st='fail' if not d else ('pass' if d>=week_start else ('flaky' if d>=prev else 'fail'))
             out.append([name,str(d) if d else 'never',st,f"{int(r['n']):,}"])
         except Exception as e:
+            try:
+                if CONN is not None: CONN.rollback()
+            except Exception: pass
             out.append([name,'error','fail','-'])
     return out
+def ov_run_calendar(cur):
+    """Which days the pipeline ran over the window, for a calendar heatmap.
+    A day 'ran' if page_posts landed rows that load_date. Also returns the
+    expected next run (nightly 01:00 UTC) so the UI can mark it."""
+    rows=q(cur,f"SELECT load_date d, COUNT(*) n FROM rdl.page_posts WHERE load_date>='{START}' GROUP BY 1")
+    ran={ (r['d'].isoformat() if hasattr(r['d'],'isoformat') else str(r['d'])[:10]): int(r['n']) for r in rows }
+    days=[{'date':d.isoformat(),'ran':d.isoformat() in ran,'rows':ran.get(d.isoformat(),0)} for d in DAYS]
+    last=max([d for d in ran],default=None)
+    # next expected: tomorrow 01:00 UTC (the cron)
+    nxt=(dt.date.today()+dt.timedelta(days=1)).isoformat()
+    return {'days':days,'last_run':last,'next_run':nxt,'cadence':'nightly 01:00 UTC'}
 def ov_scores(cur):
     """Top-line 0-100 scores for each tab, computed live."""
     def one(sql,default):
@@ -384,13 +409,18 @@ def ov_scores(cur):
             v=q(cur,sql)[0]['v']; return round(float(v)) if v is not None else default
         except Exception: return default
     acc=one("SELECT 100.0*AVG(CASE WHEN nlp_sentiment=ds_sentiment THEN 1 ELSE 0 END) v FROM rdl.post_label_predictions WHERE ds_sentiment IS NOT NULL",88)
-    # health: share of key tables fresh (<=1 day)
+    # health: share of key tables that landed this ISO week
+    _t=dt.date.today(); _ws=_t-dt.timedelta(days=_t.weekday())
     fresh=0; tot=len(FRESH_TABLES)
     for tbl,c in FRESH_TABLES:
         try:
             d=q(cur,f"SELECT MAX({c})::date d FROM {tbl}")[0]['d']
-            if d and (dt.date.today()-d).days<=1: fresh+=1
-        except Exception: tot-=1
+            if d and d>=_ws: fresh+=1
+        except Exception:
+            tot-=1
+            try:
+                if CONN is not None: CONN.rollback()
+            except Exception: pass
     health=round(100*fresh/max(tot,1))
     qual=one("SELECT 100*AVG(data_quality_score) v FROM odl.comment_sentiments WHERE data_quality_score IS NOT NULL",90)
     cov=one("SELECT 100.0*SUM(CASE WHEN nlp_sentiment IS NOT NULL THEN 1 ELSE 0 END)/NULLIF(COUNT(*),0) v FROM rdl.post_label_predictions",99)
@@ -483,7 +513,7 @@ def main():
     conn=connect(); CONN=conn; cur=conn.cursor()
     tabs={}
     tabs['overview']={'pipeline':safe(ov_pipeline_status,cur),'scores':safe(ov_scores,cur),
-        'today':safe(ov_today,cur),'volume':safe(ov_volume_trend,cur),
+        'today':safe(ov_today,cur),'volume':safe(ov_volume_trend,cur),'calendar':safe(ov_run_calendar,cur),
         'freshness':safe(hl_freshness_table,cur),'load_status':safe(hl_load_status,cur),
         'escalation':safe(acc_escalation,cur),'conn_status':safe(ql_conn_status,cur),
         'copy_jobs':safe(hl_copy_jobs,cur),'volume2':safe(hl_rowcount_delta,cur)}

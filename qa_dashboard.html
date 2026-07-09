@@ -179,10 +179,12 @@ body.edit .boardend.hot{border-color:var(--okT);color:var(--okT)}
     <div>
       <span class="kick">Admin &middot; Quality</span>
       <h1><em>QA</em> Dashboard</h1>
-      <div class="sub">Live from Redshift &middot; <span id="freshness">loading&hellip;</span></div>
+      <div class="sub">Live from Redshift &middot; <span id="freshness">loading&hellip;</span> &middot; <span id="sharedInfo" style="font-family:var(--mono);font-size:11px;color:var(--t3)">local layout</span></div>
     </div>
     <div class="tools">
       <button class="tbtn" id="refreshBtn" onclick="refreshData()" title="Re-fetch the latest snapshot">&#8635; Refresh</button>
+      <button class="tbtn" id="keyBtn" onclick="setToken()" title="Set the GitHub token used to publish the shared layout (stored only in this browser)">&#128273;</button>
+      <button class="tbtn" id="pubBtn" onclick="publishLayout()" title="Publish the current layout to the whole team">&#8593; Publish</button>
       <button class="tbtn" id="themeBtn" onclick="toggleTheme()" title="Light / dark">&#9789;</button>
       <button class="tbtn" onclick="resetLayout()" title="Restore this tab's default board">&#8634; Reset tab</button>
       <button class="tbtn pri" id="editBtn" onclick="toggleEdit()">&#10022; Customize</button>
@@ -302,15 +304,16 @@ const TABS={
   overview:{name:'Overview',desc:'The whole pipeline at a glance: last run status, freshness, today vs yesterday, and top-line scores from every tab.',
     metrics:{
       scores:['Health scores','teal',['scorecards'],'scorecards'],
+      calendar:['Run calendar','teal',['calendar'],'calendar'],
       pipeline:['Pipeline run status','teal',['pipeline'],'pipeline'],
       today:['Today vs yesterday','sky',['deltas'],'deltas'],
-      volume:['Labelling activity/day','teal',['line','kpi'],'line',''],
+      volume:['Labelling activity/day','teal',['line','area','kpi'],'line',''],
       freshness:['Table freshness','indigo',['table'],'table'],
-      load_status:['Load completeness','teal',['line','kpi'],'line','%'],
+      load_status:['Load completeness','teal',['line','area','kpi'],'line','%'],
       escalation:['Tier routing usage','gold',['bars'],'bars'],
       conn_status:['FB connections','sky',['bars','donut'],'donut'],
       copy_jobs:['Ingestion jobs','indigo',['bars','donut'],'donut'],
-      volume2:['Comment volume/day','indigo',['line'],'line',''],
+      volume2:['Comment volume/day','indigo',['line','area'],'line',''],
     }},
   accuracy:{name:'Accuracy',desc:'No human ground truth, so accuracy = how much the NLP and DeepSeek tiers agree, and how confident they are. Covers posts, comments, fusion and video.',
     metrics:{
@@ -376,7 +379,7 @@ const TABS={
     }},
 };
 const DEFAULTS={
-  overview:[['scores','scorecards',12],['pipeline','pipeline',8],['today','deltas',4],['volume','line',6],['load_status','line',6],['freshness','table',6],['escalation','bars',6],['conn_status','donut',3],['copy_jobs','donut',3],['volume2','line',6]],
+  overview:[['scores','scorecards',12],['calendar','calendar',8],['pipeline','pipeline',4],['today','deltas',4],['volume','line',4],['load_status','line',4],['freshness','table',6],['escalation','bars',6],['conn_status','donut',3],['copy_jobs','donut',3],['volume2','line',6]],
   accuracy:[['agreement','line',6],['comment_agreement','line',6],['confusion','confusion',6],['conf_buckets','histo',6],['per_dim','bars',6],['dim_conf','bars',6],['nlp_conf','line',6],['ds_conf','line',6],['fusion_conf','line',6],['video_conf','line',6],['escalation','bars',6],['proctime','line',6],['uncertain','donut',3]],
   health:[['load_status','line',8],['freshness','table',4],['daily_loads','loads',6],['rowcount_delta','line',6],['insights_load','line',6],['reactions_load','line',6],['demographics_load','line',6],['lag','line',6],['copy_jobs','bars',6],['staging_drift','bars',6],['missing_days','bars',6]],
   quality:[['dq_score','line',6],['highconf','line',6],['completeness','bars',6],['null_heat','bars',6],['text_lengths','histo',6],['dim_coverage','bars',6],['version_drift','confusion',6],['dupes','bars',4],['integrity','bars',4],['validity','bars',4],['orphan_trend','line',6],['conn_status','bars',4]],
@@ -523,6 +526,62 @@ function confusionHTML(m,cornerLabel){
   return g+'</div><div class="leg">'+leg+'</div>';
 }
 function mixHeat(t){const h=TH.heat;const idx=Math.min(h.length-1,Math.floor(t*h.length));return h[idx];}
+function calendarHTML(m){
+  if(!m||!m.days||!m.days.length) return '<div style="color:var(--t3);padding:14px">no run history yet</div>';
+  const days=m.days.slice(-84);
+  const first=new Date(days[0].date); const pad=(first.getDay()+6)%7;
+  const cells=Array(pad).fill(null).concat(days);
+  const weeks=Math.ceil(cells.length/7);
+  const cw=15,ch=15,gap=4,leftPad=26,topPad=16;
+  const maxRows=Math.max(1,...days.map(d=>d.rows));
+  let sq='';
+  for(let i=0;i<cells.length;i++){
+    const c=cells[i];if(!c)continue;
+    const wk=Math.floor(i/7),dy=i%7;const x=leftPad+wk*(cw+gap),y=topPad+dy*(ch+gap);
+    let fill='var(--track)';
+    if(c.ran){const t=Math.min(1,c.rows/maxRows);const idx=Math.min(TH.heat.length-1,1+Math.floor(t*(TH.heat.length-1)));fill=TH.heat[idx];}
+    const today=c.date===new Date().toISOString().slice(0,10);
+    sq+=`<rect x="${x}" y="${y}" width="${cw}" height="${ch}" rx="3" fill="${fill}" ${today?'stroke="var(--okT)" stroke-width="1.5"':''}><title>${c.date}: ${c.ran?c.rows+' rows':'no run'}</title></rect>`;
+  }
+  const nextWk=weeks, nx=leftPad+nextWk*(cw+gap);
+  const dayLabels=['M','','W','','F','','S'];
+  const dl=dayLabels.map((l,i)=>l?`<text x="${leftPad-7}" y="${topPad+i*(ch+gap)+11}" fill="${TH.mut}" font-size="9" text-anchor="end" font-family="JetBrains Mono">${l}</text>`:'').join('');
+  const W=leftPad+(weeks+1)*(cw+gap)+40, H=topPad+7*(ch+gap)+16;
+  const nextDot=`<rect x="${nx}" y="${topPad}" width="${cw}" height="${ch}" rx="3" fill="none" stroke="var(--indT)" stroke-width="1.5" stroke-dasharray="3 2"><title>next expected run: ${m.next_run}</title></rect>
+    <text x="${nx+cw/2}" y="${topPad+7*(ch+gap)+2}" fill="var(--indT)" font-size="8.5" text-anchor="middle" font-family="JetBrains Mono">next</text>`;
+  const ran=days.filter(d=>d.ran).length;
+  return `<svg viewBox="0 0 ${W} ${H}" style="height:${H}px;max-width:100%" class="anim">${dl}${sq}${nextDot}</svg>
+    <div class="leg" style="margin-top:8px">
+      <span style="color:var(--t2)"><b style="font-family:var(--mono);color:var(--t1)">${ran}</b>/${days.length} days ran</span>
+      <span>last <b style="font-family:var(--mono);color:var(--okT)">${m.last_run||'—'}</b></span>
+      <span>next <b style="font-family:var(--mono);color:var(--indT)">${m.next_run||'—'}</b></span>
+      <span style="color:var(--t3)">${m.cadence||''}</span></div>`;
+}
+function scatterSVG(pairs,color){
+  if(!pairs||!pairs.length) return '';
+  const h=170,w=560,pl=34,pr=14,pt=14,pb=28;const vals=pairs.map(p=>p[1]);
+  const mx=Math.max(...vals)*1.1||1,mn=Math.min(0,...vals);
+  const X=i=>pl+(w-pl-pr)*i/(pairs.length-1||1),Y=v=>pt+(h-pt-pb)*(1-(v-mn)/((mx-mn)||1));
+  const dots=pairs.map((p,i)=>`<circle cx="${X(i).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="4.5" fill="${color}" opacity=".8" class="fadein"><title>${p[0]}: ${p[1]}</title></circle>`).join('');
+  const step=pairs.length>10?Math.ceil(pairs.length/8):1;
+  const xt=pairs.map((p,i)=>i%step?'':`<text x="${X(i)}" y="${h-8}" fill="${TH.mut}" font-size="9" text-anchor="middle" font-family="JetBrains Mono">${String(p[0]).slice(0,6)}</text>`).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" style="height:170px" class="anim">${dots}${xt}</svg>`;
+}
+function stackbarsSVG(pairs){
+  if(!pairs||!pairs.length) return '';
+  const total=pairs.reduce((s,p)=>s+p[1],0)||1;const cols=[TH.teal,TH.indigo,TH.sky,TH.gold,TH.rose,TH.p4];
+  let x=0;const w=560,h=34;
+  const segs=pairs.map((p,i)=>{const bw=(p[1]/total)*w;const seg=`<rect x="${x.toFixed(1)}" y="0" width="${bw.toFixed(1)}" height="${h}" fill="${cols[i%cols.length]}"><title>${p[0]}: ${p[1]} (${(100*p[1]/total).toFixed(1)}%)</title></rect>`;x+=bw;return seg;}).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" style="height:${h}px;border-radius:8px;overflow:hidden" class="anim">${segs}</svg>
+    <div class="leg" style="margin-top:9px">${pairs.map((p,i)=>`<span><i style="background:${cols[i%cols.length]}"></i>${p[0]} <b style="font-family:var(--mono);color:var(--t1)">${(100*p[1]/total).toFixed(0)}%</b></span>`).join('')}</div>`;
+}
+function gaugeSVG(val,color,unit){
+  const v=Math.max(0,Math.min(100,val));const R=52,CIRC=Math.PI*R;const off=CIRC*(1-v/100);
+  return `<div style="display:flex;justify-content:center;padding:6px"><svg width="150" height="92" viewBox="0 0 150 92" class="anim">
+    <path d="M23 82 A52 52 0 0 1 127 82" fill="none" stroke="var(--track)" stroke-width="12" stroke-linecap="round"/>
+    <path d="M23 82 A52 52 0 0 1 127 82" fill="none" stroke="${color}" stroke-width="12" stroke-linecap="round" stroke-dasharray="${CIRC.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}"/>
+    <text x="75" y="72" text-anchor="middle" fill="var(--t1)" font-family="JetBrains Mono" font-weight="700" font-size="24">${Math.round(v)}${unit||''}</text></svg></div>`;
+}
 function paretoSVG(pairs,color){
   // bars sorted desc + cumulative-% line on a second axis. The classic "which few categories dominate".
   if(!pairs||!pairs.length) return '';
@@ -568,7 +627,10 @@ function customBody(w){
   const color=col(w.colorKey||'teal');
   if(w.kind==='volume'){
     const s=seriesFor(e.daily);if(!s.vals.length)return '<div style="color:var(--t3);padding:16px">no daily data</div>';
-    return w.viz==='area'?areaSVG(s.vals,s.labels,color,''):lineSVG(s.vals,s.labels,color,'');
+    if(w.viz==='area')return areaSVG(s.vals,s.labels,color,'');
+    if(w.viz==='scatter')return scatterSVG(s.vals.map((v,i)=>[s.labels[i],v]),color);
+    if(w.viz==='kpi')return `<div class="kpi"><span class="kv">${fmtN(s.vals[s.vals.length-1])}</span><span class="kd">latest &middot; ${w.table.split('.')[1]}</span></div>`;
+    return lineSVG(s.vals,s.labels,color,'');
   }
   if(w.kind==='rows'){
     return `<div class="kpi"><span class="kv">${fmtN(e.rows)}</span><span class="kd">total rows &middot; ${w.table.split('.')[1]}</span></div>`;
@@ -578,11 +640,15 @@ function customBody(w){
     if(w.viz==='donut')return donutHTML(pairs,color);
     if(w.viz==='pareto')return paretoSVG(pairs,color);
     if(w.viz==='histo')return histoSVG(pairs.slice(0,8),color);
+    if(w.viz==='stackbars')return stackbarsSVG(pairs);
+    if(w.viz==='scatter')return scatterSVG(pairs,color);
     return barsSVG(pairs,color);
   }
   if(w.kind==='num'){
     const nm=(e.nums||{})[w.col];if(!nm)return '<div style="color:var(--t3);padding:16px">column not in snapshot</div>';
     if(w.viz==='kpi')return `<div class="kpi"><span class="kv">${fmtN(nm.avg)}</span><span class="kd">avg ${w.col}</span></div>`;
+    if(w.viz==='bars')return barsSVG(nm.buckets,color);
+    if(w.viz==='area')return areaSVG(nm.buckets.map(x=>x[1]),nm.buckets.map(x=>x[0]),color,'');
     return histoSVG(nm.buckets,color);
   }
   return '';
@@ -652,6 +718,10 @@ function widgetBody(w){
     case 'scorecards': return scorecardsHTML(m);
     case 'pipeline': return pipelineHTML(m);
     case 'deltas': return deltasHTML(m);
+    case 'calendar': return calendarHTML(m);
+    case 'scatter': return scatterSVG(m,color);
+    case 'stackbars': return stackbarsSVG(m);
+    case 'gauge': return gaugeSVG(Array.isArray(m)?(m[0]&&m[0][1]||0):m,color,meta[4]||'');
     case 'table':
       if(w.src==='pipeline') return pipelineHTML(m);
       return tableHTML(['Table','Last load','Status','Rows','On time'],m,[1,3],2);
@@ -708,12 +778,12 @@ function wsub(w){
   if(viz==='confusion') return TAB==='quality'?'v1 vs v2':'all labelled';
   return 'current';
 }
-const VIC={line:'&#9581;',area:'&#9698;',pareto:'&#8599;',kpi:'&#35;',bars:'&#9644;',histo:'&#9601;',donut:'&#9678;',confusion:'&#9638;',loads:'&#8767;',radar:'&#9737;',table:'&#8801;',scorecards:'&#9673;',pipeline:'&#9776;',deltas:'&#8645;'};
+const VIC={line:'&#9581;',area:'&#9698;',pareto:'&#8599;',scatter:'&#8943;',stackbars:'&#9646;',gauge:'&#9686;',kpi:'&#35;',bars:'&#9644;',histo:'&#9601;',donut:'&#9678;',confusion:'&#9638;',loads:'&#8767;',radar:'&#9737;',table:'&#8801;',scorecards:'&#9673;',pipeline:'&#9776;',deltas:'&#8645;',calendar:'&#128197;'};
 
 function customVizzes(w){
-  if(w.kind==='volume') return ['line','area'];
-  if(w.kind==='cat') return ['bars','donut','pareto','histo'];
-  if(w.kind==='num') return ['histo','kpi'];
+  if(w.kind==='volume') return ['line','area','scatter','kpi'];
+  if(w.kind==='cat') return ['bars','donut','pareto','histo','stackbars','scatter'];
+  if(w.kind==='num') return ['histo','bars','area','kpi'];
   return [];
 }
 function customTitle(w){
@@ -741,11 +811,42 @@ function render(){
 }
 
 /* ---- tabs ---- */
+let CUSTOM_TABS={}; // id -> {name}. User-created tabs holding only custom widgets.
+function allTabIds(){return Object.keys(TABS).concat(Object.keys(CUSTOM_TABS));}
+function tabName(t){return TABS[t]?TABS[t].name:(CUSTOM_TABS[t]?CUSTOM_TABS[t].name:t);}
+function isCustomTab(t){return !!CUSTOM_TABS[t];}
 function buildTabs(){
-  document.getElementById('tabbar').innerHTML=Object.keys(TABS).map(t=>
+  const built=Object.keys(TABS).map(t=>
     `<button class="tab ${t===TAB?'on':''}" data-t="${t}" onclick="setTab('${t}')"><span class="dot"></span>${TABS[t].name}</button>`).join('');
+  const custom=Object.keys(CUSTOM_TABS).map(t=>
+    `<button class="tab ${t===TAB?'on':''}" data-t="${t}" onclick="setTab('${t}')" ondblclick="renameTab('${t}')" title="Double-click to rename"><span class="dot" style="background:var(--indT)"></span>${CUSTOM_TABS[t].name} <span onclick="event.stopPropagation();deleteTab('${t}')" style="margin-left:5px;color:var(--t3);font-size:11px" title="Delete tab">&#10005;</span></button>`).join('');
+  const addBtn=`<button class="tab" onclick="addTab()" title="New custom tab" style="color:var(--okT)"><span style="font-size:14px">+</span> Tab</button>`;
+  document.getElementById('tabbar').innerHTML=built+custom+addBtn;
 }
 function setTab(t){TAB=t;buildTabs();buildPalette();render();save();}
+function addTab(){
+  const name=prompt('Name your custom tab:','My graphs');
+  if(!name) return;
+  const id='ct'+Date.now().toString(36);
+  CUSTOM_TABS[id]={name:name.slice(0,32)};
+  BOARDS[id]=[];
+  TAB=id;buildTabs();buildPalette();render();save();
+  if(!EDIT)toggleEdit();
+  toast('Tab "'+name+'" created. Build graphs from the panel.');
+}
+function renameTab(t){
+  if(!CUSTOM_TABS[t])return;
+  const name=prompt('Rename tab:',CUSTOM_TABS[t].name);
+  if(!name)return;
+  CUSTOM_TABS[t].name=name.slice(0,32);buildTabs();save();
+}
+function deleteTab(t){
+  if(!CUSTOM_TABS[t])return;
+  if(!confirm('Delete tab "'+CUSTOM_TABS[t].name+'" and its graphs?'))return;
+  delete CUSTOM_TABS[t];delete BOARDS[t];
+  if(TAB===t)TAB='overview';
+  buildTabs();buildPalette();render();save();toast('Tab deleted.');
+}
 
 /* ---- filters ---- */
 function setGrain(g){GRAIN=g;CUSTOM=null;syncFilterUI();render();}
@@ -771,13 +872,22 @@ function removeWidget(id){const l=BOARDS[TAB];const i=l.findIndex(w=>w.id===id);
 function moveWidget(id,idx){const l=BOARDS[TAB];const i=l.findIndex(w=>w.id===id);if(i<0)return;const[w]=l.splice(i,1);if(idx>i)idx--;l.splice(Math.max(0,Math.min(idx,l.length)),0,w);render();}
 function cycleSpan(id){const w=BOARDS[TAB].find(x=>x.id===id);if(!w)return;w.span=w.span<=3?4:(w.span===4?6:(w.span===6?8:(w.span===8?12:3)));render();}
 function setViz(id,v){const w=BOARDS[TAB].find(x=>x.id===id);if(!w)return;w.viz=v;render();}
-function resetLayout(){BOARDS[TAB]=DEFAULTS[TAB].map(([s,v,sp])=>newW(TAB,s,v,sp));render();toast(TABS[TAB].name+' board reset.');}
+function resetLayout(){
+  if(isCustomTab(TAB)){ BOARDS[TAB]=[]; render(); toast('Custom tab cleared.'); return; }
+  BOARDS[TAB]=DEFAULTS[TAB].map(([s,v,sp])=>newW(TAB,s,v,sp));render();toast(TABS[TAB].name+' board reset.');
+}
 function toggleEdit(){EDIT=!EDIT;document.body.classList.toggle('edit',EDIT);document.getElementById('editBtn').innerHTML=EDIT?'&#10003; Done':'&#10022; Customize';}
 function applyTheme(){TH=THEMES[THEME];document.body.classList.toggle('light',THEME==='light');document.getElementById('themeBtn').innerHTML=THEME==='light'?'&#9788;':'&#9789;';}
 function toggleTheme(){THEME=THEME==='light'?'dark':'light';applyTheme();render();toast(THEME==='light'?'Light theme.':'Dark theme.');}
 
 /* ---- palette ---- */
 function buildPalette(){
+  if(isCustomTab(TAB)){
+    document.getElementById('palTitle').textContent=CUSTOM_TABS[TAB].name;
+    document.getElementById('palDesc').textContent='Your custom tab. Build any graph from any Redshift table below; it lives only on this tab.';
+    document.getElementById('palList').innerHTML=builderHTML();
+    syncBuilder();return;
+  }
   document.getElementById('palTitle').textContent=TABS[TAB].name+' metrics';
   document.getElementById('palDesc').textContent=TABS[TAB].desc;
   document.getElementById('palList').innerHTML=builderHTML()+Object.keys(TABS[TAB].metrics).map(k=>{
@@ -819,10 +929,10 @@ function syncBuilder(){
 function syncBuilderViz(){
   const v=document.getElementById('bCol')?.value; const box=document.getElementById('bViz'); if(!box) return;
   let vz=[];
-  if(v==='__volume__') vz=['line','area'];
+  if(v==='__volume__') vz=['line','area','scatter','kpi'];
   else if(v==='__rows__') vz=['kpi'];
-  else if(v?.startsWith('cat:')) vz=['bars','donut','pareto','histo'];
-  else if(v?.startsWith('num:')) vz=['histo','kpi'];
+  else if(v?.startsWith('cat:')) vz=['bars','donut','pareto','histo','stackbars','scatter'];
+  else if(v?.startsWith('num:')) vz=['histo','bars','area','kpi'];
   if(!vz.includes(BVIZ)) BVIZ=vz[0];
   box.innerHTML=vz.map(z=>`<button class="qp ${z===BVIZ?'on':''}" onclick="BVIZ='${z}';syncBuilderViz()">${VIC[z]} ${z}</button>`).join('');
 }
@@ -874,20 +984,85 @@ function bindHover(){
 }
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('on'),2200);}
 
-/* ---- persistence ---- */
+/* ---- persistence: local for instant feel, shared via qa_layout.json in the repo ---- */
 let BOOTED=false;
+function serializeLayout(){
+  const boards={};for(const t in BOARDS)boards[t]=BOARDS[t].map(w=>w.custom?{custom:1,table:w.table,col:w.col,kind:w.kind,colorKey:w.colorKey,viz:w.viz,span:w.span}:{src:w.src,viz:w.viz,span:w.span});
+  return {boards,customTabs:CUSTOM_TABS,tab:TAB,grain:GRAIN,theme:THEME};
+}
 function save(){
   if(!BOOTED) return;
-  const boards={};for(const t in BOARDS)boards[t]=BOARDS[t].map(w=>w.custom?{custom:1,table:w.table,col:w.col,kind:w.kind,colorKey:w.colorKey,viz:w.viz,span:w.span}:{src:w.src,viz:w.viz,span:w.span});
-  localStorage.setItem(KEY,JSON.stringify({boards,tab:TAB,grain:GRAIN,theme:THEME}));
+  localStorage.setItem(KEY,JSON.stringify(serializeLayout()));
+}
+function applyLayout(s,fromShared){
+  if(!s) return;
+  if(s.theme==='light')THEME='light';
+  if(['day','week','month','quarter'].includes(s.grain))GRAIN=s.grain;
+  if(s.customTabs&&typeof s.customTabs==='object') CUSTOM_TABS={...CUSTOM_TABS,...s.customTabs};
+  if(s.boards){for(const t in s.boards){
+    const isCurated=!!TABS[t], isCust=!!CUSTOM_TABS[t];
+    if(!isCurated&&!isCust) continue;
+    BOARDS[t]=s.boards[t].filter(w=>w.custom?w.table:(isCurated&&TABS[t].metrics[w.src])).map(w=>({...w,custom:!!w.custom,id:'w'+(++UID)}));
+  }}
+  if(s.tab&&(TABS[s.tab]||CUSTOM_TABS[s.tab]))TAB=s.tab;
 }
 function loadState(){
-  try{const s=JSON.parse(localStorage.getItem(KEY));if(s){
-    if(s.theme==='light')THEME='light';
-    if(['day','week','month','quarter'].includes(s.grain))GRAIN=s.grain;
-    if(s.tab&&TABS[s.tab])TAB=s.tab;
-    if(s.boards){for(const t in s.boards){if(TABS[t])BOARDS[t]=s.boards[t].filter(w=>w.custom?w.table:TABS[t].metrics[w.src]).map(w=>({...w,custom:!!w.custom,id:'w'+(++UID)}));}}
-  }}catch(e){}
+  try{applyLayout(JSON.parse(localStorage.getItem(KEY)),false);}catch(e){}
+}
+let SHARED_META=null;
+async function loadShared(){
+  // team layout committed to the repo. Everyone reads it; only token holders publish.
+  try{
+    const r=await fetch('qa_layout.json?ts='+Date.now(),{cache:'no-store'});
+    if(!r.ok) return null;
+    const j=await r.json();
+    SHARED_META={published_at:j.published_at||null,by:j.by||null};
+    return j.layout||null;
+  }catch(e){ return null; }
+}
+
+/* ---- publish shared layout to the repo via GitHub API (token-gated) ---- */
+const REPO='scrapesync/artemisai_website', LAYOUT_PATH='qa_layout.json';
+function getToken(){return localStorage.getItem('ARTEMIS_QA_GH_TOKEN')||'';}
+function setToken(){
+  const cur=getToken();
+  const t=prompt('Paste a GitHub token with contents:write on '+REPO+'.\nIt is stored only in THIS browser and never committed. Leave blank to clear.',cur?'••••••••':'');
+  if(t===null)return;
+  if(t===''||t.startsWith('•')){ if(t===''){localStorage.removeItem('ARTEMIS_QA_GH_TOKEN');toast('Token cleared.');} return; }
+  localStorage.setItem('ARTEMIS_QA_GH_TOKEN',t.trim());toast('Token saved in this browser.');
+  updatePublishBtn();
+}
+async function publishLayout(){
+  const token=getToken();
+  if(!token){ toast('Set a save token first (the key button).'); setToken(); return; }
+  const who=(JSON.parse(localStorage.getItem('artemis_session')||'{}').name)||'admin';
+  const payload={published_at:new Date().toISOString(),by:who,layout:serializeLayout()};
+  const btn=document.getElementById('pubBtn');const old=btn.innerHTML;btn.innerHTML='Publishing…';btn.disabled=true;
+  try{
+    // get current sha (if file exists)
+    let sha=null;
+    const head=await fetch(`https://api.github.com/repos/${REPO}/contents/${LAYOUT_PATH}`,{headers:{Authorization:'token '+token,Accept:'application/vnd.github+json'}});
+    if(head.ok){ const h=await head.json(); sha=h.sha; }
+    const body={message:'chore: publish shared QA dashboard layout ('+who+')',
+      content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,0)))),
+      committer:{name:'qa-layout',email:'bot@artemisai.co.uk'}};
+    if(sha)body.sha=sha;
+    const put=await fetch(`https://api.github.com/repos/${REPO}/contents/${LAYOUT_PATH}`,{method:'PUT',
+      headers:{Authorization:'token '+token,Accept:'application/vnd.github+json'},body:JSON.stringify(body)});
+    if(put.ok){ SHARED_META={published_at:payload.published_at,by:who}; toast('Layout published — everyone will see this on next load.'); stampShared(); }
+    else { const e=await put.json(); toast('Publish failed: '+(e.message||put.status)); }
+  }catch(err){ toast('Publish error: '+err.message); }
+  btn.innerHTML=old;btn.disabled=false;
+}
+function stampShared(){
+  const el=document.getElementById('sharedInfo');if(!el)return;
+  if(SHARED_META&&SHARED_META.published_at){
+    const d=new Date(SHARED_META.published_at);
+    el.textContent='shared layout · '+d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})+(SHARED_META.by?(' · by '+SHARED_META.by):'');
+  } else el.textContent='local layout only';
+}
+function updatePublishBtn(){
+  const k=document.getElementById('keyBtn');if(k)k.style.color=getToken()?'var(--okT)':'';
 }
 function refreshData(){
   const btn=document.getElementById('refreshBtn');const prev=META.generated_at;
@@ -900,11 +1075,14 @@ function refreshData(){
 }
 async function boot(){
   await loadLive();
+  const shared=await loadShared();
+  // shared team layout is the base; a local edit (if present) overrides for this browser
+  applyLayout(shared,true);
   loadState();
   for(const t in TABS){ if(!BOARDS[t]) BOARDS[t]=DEFAULTS[t].map(([s,v,sp])=>newW(t,s,v,sp)); }
   applyTheme();buildTabs();buildPalette();syncFilterUI();
   document.querySelectorAll('.gp').forEach(b=>b.classList.toggle('on',b.dataset.g===GRAIN));
-  render();stampFreshness();
+  render();stampFreshness();stampShared();updatePublishBtn();
   BOOTED=true;save();
 }
 window.addEventListener('load',boot);
