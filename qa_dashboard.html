@@ -186,8 +186,7 @@ body.edit .boardend.hot{border-color:var(--okT);color:var(--okT)}
     </div>
     <div class="tools">
       <button class="tbtn" id="liveBtn" onclick="fetchLive()" title="Re-query Redshift now via the pipeline (~2 min)">&#9889; Fetch live</button>
-      <button class="tbtn" id="keyBtn" onclick="setToken()" title="Set the GitHub token used to publish the shared layout (stored only in this browser)">&#128273;</button>
-      <button class="tbtn" id="pubBtn" onclick="publishLayout()" title="Publish the current layout to the whole team">&#8593; Publish</button>
+      <button class="tbtn" id="pubBtn" onclick="publishLayout()" title="Publish the current layout so the whole team sees it">&#8593; Publish</button>
       <button class="tbtn" id="themeBtn" onclick="toggleTheme()" title="Light / dark">&#9789;</button>
       <button class="tbtn" onclick="resetLayout()" title="Restore this tab's default board">&#8634; Reset tab</button>
       <button class="tbtn pri" id="editBtn" onclick="toggleEdit()">&#10022; Customize</button>
@@ -1173,26 +1172,47 @@ function setToken(){
   updatePublishBtn();
 }
 async function publishLayout(){
-  const token=getToken();
-  if(!token){ toast('Set a save token first (the key button).'); setToken(); return; }
-  const who=(JSON.parse(localStorage.getItem('artemis_session')||'{}').name)||'admin';
-  const payload={published_at:new Date().toISOString(),by:who,layout:serializeLayout()};
+  const who=(JSON.parse(localStorage.getItem('artemis_session')||'{}').name)||'someone';
   const btn=document.getElementById('pubBtn');const old=btn.innerHTML;btn.innerHTML='Publishing…';btn.disabled=true;
   try{
-    // get current sha (if file exists)
+    // Server endpoint holds the token; nothing sensitive in the browser.
+    const r=await fetch(SAVE_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({by:who,layout:serializeLayout()})});
+    if(r.ok){
+      const j=await r.json().catch(()=>({}));
+      SHARED_META={published_at:j.published_at||new Date().toISOString(),by:j.by||who};
+      toast('Layout published — everyone sees this on next load.');stampShared();
+    } else if(r.status===500){
+      const e=await r.json().catch(()=>({}));
+      if(e.error==='not_configured'){ toast('Publishing not configured yet. Add GH_DISPATCH_TOKEN in Netlify.'); }
+      else toast('Publish failed: '+(e.message||'server error'));
+    } else {
+      // fallback: local token (dev / endpoint missing)
+      const done=await publishViaToken(who);
+      if(!done){ const e=await r.json().catch(()=>({})); toast('Publish failed: '+(e.message||r.status)); }
+    }
+  }catch(err){
+    const done=await publishViaToken(who);
+    if(!done) toast('Publish error: '+err.message);
+  }
+  btn.innerHTML=old;btn.disabled=false;
+}
+async function publishViaToken(who){
+  // only used if the /api endpoint is unreachable (e.g. local file testing)
+  const token=getToken(); if(!token) return false;
+  try{
+    const payload={published_at:new Date().toISOString(),by:who,layout:serializeLayout()};
     let sha=null;
     const head=await fetch(`https://api.github.com/repos/${REPO}/contents/${LAYOUT_PATH}`,{headers:{Authorization:'token '+token,Accept:'application/vnd.github+json'}});
     if(head.ok){ const h=await head.json(); sha=h.sha; }
     const body={message:'chore: publish shared QA dashboard layout ('+who+')',
-      content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,0)))),
+      content:btoa(unescape(encodeURIComponent(JSON.stringify(payload)))),
       committer:{name:'qa-layout',email:'bot@artemisai.co.uk'}};
     if(sha)body.sha=sha;
-    const put=await fetch(`https://api.github.com/repos/${REPO}/contents/${LAYOUT_PATH}`,{method:'PUT',
-      headers:{Authorization:'token '+token,Accept:'application/vnd.github+json'},body:JSON.stringify(body)});
-    if(put.ok){ SHARED_META={published_at:payload.published_at,by:who}; toast('Layout published — everyone will see this on next load.'); stampShared(); }
-    else { const e=await put.json(); toast('Publish failed: '+(e.message||put.status)); }
-  }catch(err){ toast('Publish error: '+err.message); }
-  btn.innerHTML=old;btn.disabled=false;
+    const put=await fetch(`https://api.github.com/repos/${REPO}/contents/${LAYOUT_PATH}`,{method:'PUT',headers:{Authorization:'token '+token,Accept:'application/vnd.github+json'},body:JSON.stringify(body)});
+    if(put.ok){ SHARED_META={published_at:payload.published_at,by:who}; toast('Layout published — everyone sees this on next load.'); stampShared(); return true; }
+    return false;
+  }catch(e){ return false; }
 }
 function stampShared(){
   const el=document.getElementById('sharedInfo');if(!el)return;
@@ -1201,12 +1221,11 @@ function stampShared(){
     el.textContent='shared layout · '+d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})+(SHARED_META.by?(' · by '+SHARED_META.by):'');
   } else el.textContent='local layout only';
 }
-function updatePublishBtn(){
-  const k=document.getElementById('keyBtn');if(k)k.style.color=getToken()?'var(--okT)':'';
-}
+function updatePublishBtn(){}
 /* ---- Fetch live: ask the server to re-query Redshift, show a progress bar, poll for the new snapshot ---- */
 const WORKFLOW_FILE='qa-dashboard-metrics.yml';
 const LIVE_ENDPOINT='/api/fetch-live';   // Netlify function holds the token server-side
+const SAVE_ENDPOINT='/api/save-layout';  // ditto, for publishing the shared layout
 const EST_SECONDS=140;                    // typical run+commit+deploy time, drives the ETA bar
 let _liveTimer=null;
 function lpShow(on){document.getElementById('liveProgress').style.display=on?'block':'none';}
