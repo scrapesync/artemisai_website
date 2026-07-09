@@ -185,14 +185,24 @@ body.edit .boardend.hot{border-color:var(--okT);color:var(--okT)}
       <div class="sub">Live from Redshift &middot; <span id="freshness">loading&hellip;</span> &middot; <span id="sharedInfo" style="font-family:var(--mono);font-size:11px;color:var(--t3)">local layout</span></div>
     </div>
     <div class="tools">
-      <button class="tbtn" id="refreshBtn" onclick="refreshData()" title="Re-read the last committed snapshot (instant, no Redshift query)">&#8635; Refresh</button>
-      <button class="tbtn" id="liveBtn" onclick="fetchLive()" title="Trigger the GitHub Action to re-query Redshift now (~2 min). Needs the token.">&#9889; Fetch live</button>
+      <button class="tbtn" id="liveBtn" onclick="fetchLive()" title="Re-query Redshift now via the pipeline (~2 min)">&#9889; Fetch live</button>
       <button class="tbtn" id="keyBtn" onclick="setToken()" title="Set the GitHub token used to publish the shared layout (stored only in this browser)">&#128273;</button>
       <button class="tbtn" id="pubBtn" onclick="publishLayout()" title="Publish the current layout to the whole team">&#8593; Publish</button>
       <button class="tbtn" id="themeBtn" onclick="toggleTheme()" title="Light / dark">&#9789;</button>
       <button class="tbtn" onclick="resetLayout()" title="Restore this tab's default board">&#8634; Reset tab</button>
       <button class="tbtn pri" id="editBtn" onclick="toggleEdit()">&#10022; Customize</button>
     </div>
+  </div>
+
+  <div id="liveProgress" style="display:none;margin-bottom:14px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+      <span id="lpLabel" style="font-size:12px;font-weight:700;color:var(--t1)">Fetching live data…</span>
+      <span id="lpEta" style="font-family:var(--mono);font-size:11px;color:var(--t3)"></span>
+    </div>
+    <div style="height:8px;background:var(--panel2);border:1px solid var(--line);border-radius:99px;overflow:hidden">
+      <div id="lpBar" style="height:100%;width:0%;background:var(--grad);border-radius:99px;transition:width .4s ease"></div>
+    </div>
+    <div id="lpStage" style="font-size:10.5px;color:var(--t3);margin-top:5px;font-family:var(--mono)"></div>
   </div>
 
   <div class="tabbar" id="tabbar"></div>
@@ -1194,46 +1204,80 @@ function stampShared(){
 function updatePublishBtn(){
   const k=document.getElementById('keyBtn');if(k)k.style.color=getToken()?'var(--okT)':'';
 }
-function refreshData(){
-  const btn=document.getElementById('refreshBtn');const prev=META.generated_at;
-  btn.textContent='↻ …';btn.disabled=true;
-  loadLive().then(ok=>{btn.innerHTML='&#8635; Refresh';btn.disabled=false;render();stampFreshness();
-    if(!ok&&META.source!=='live')toast('No live snapshot — demo data.');
-    else if(!ok)toast('Could not reach snapshot.');
-    else if(META.generated_at===prev)toast('Already up to date.');
-    else toast('Refreshed to latest snapshot.');});
-}
-/* ---- Fetch live: trigger the GitHub Action to re-query Redshift, then poll for the new snapshot ---- */
+/* ---- Fetch live: ask the server to re-query Redshift, show a progress bar, poll for the new snapshot ---- */
 const WORKFLOW_FILE='qa-dashboard-metrics.yml';
+const LIVE_ENDPOINT='/api/fetch-live';   // Netlify function holds the token server-side
+const EST_SECONDS=140;                    // typical run+commit+deploy time, drives the ETA bar
+let _liveTimer=null;
+function lpShow(on){document.getElementById('liveProgress').style.display=on?'block':'none';}
+function lpSet(pct,label,stage,eta){
+  document.getElementById('lpBar').style.width=Math.min(99,pct)+'%';
+  if(label)document.getElementById('lpLabel').textContent=label;
+  if(stage!=null)document.getElementById('lpStage').textContent=stage;
+  if(eta!=null)document.getElementById('lpEta').textContent=eta;
+}
+async function dispatchRun(){
+  // Prefer the server endpoint (no token in browser). Fall back to a stored token
+  // only if the endpoint is missing (e.g. local file testing).
+  try{
+    const r=await fetch(LIVE_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
+    if(r.status===202||r.ok){ return {ok:true,mode:'server'}; }
+    if(r.status===500){ const e=await r.json().catch(()=>({})); if(e.error==='not_configured') return {ok:false,reason:'The Fetch-live endpoint is not configured yet. Add GH_DISPATCH_TOKEN in Netlify.'}; }
+    const e=await r.json().catch(()=>({})); return {ok:false,reason:e.message||('endpoint '+r.status)};
+  }catch(err){
+    // endpoint unreachable (local dev) -> optional token fallback
+    const token=getToken();
+    if(!token) return {ok:false,reason:'Fetch-live endpoint unreachable and no local token set.'};
+    try{
+      const disp=await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`,{
+        method:'POST',headers:{Authorization:'token '+token,Accept:'application/vnd.github+json'},body:JSON.stringify({ref:'main'})});
+      return disp.status===204?{ok:true,mode:'token'}:{ok:false,reason:'GitHub '+disp.status};
+    }catch(e2){ return {ok:false,reason:e2.message}; }
+  }
+}
 async function fetchLive(){
-  const token=getToken();
-  if(!token){ toast('Set a save token first (the key button) — it needs actions:write.'); setToken(); return; }
+  if(_liveTimer){ toast('A live fetch is already running.'); return; }
   const btn=document.getElementById('liveBtn');const old=btn.innerHTML;
   const before=META.generated_at;
-  btn.disabled=true;btn.innerHTML='&#9889; Dispatching…';
-  try{
-    const disp=await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`,{
-      method:'POST',headers:{Authorization:'token '+token,Accept:'application/vnd.github+json'},
-      body:JSON.stringify({ref:'main'})});
-    if(disp.status!==204){ const e=await disp.json().catch(()=>({})); toast('Could not start the run: '+(e.message||disp.status)); btn.disabled=false;btn.innerHTML=old; return; }
-    toast('Live run started — querying Redshift, ~2 min.');
-    btn.innerHTML='&#9889; Running…';
-    // poll qa_metrics.json until generated_at changes (or timeout ~4 min)
-    let tries=0;const maxTries=48;
-    const poll=async()=>{
+  btn.disabled=true;btn.innerHTML='&#9889; Starting…';
+  lpShow(true);lpSet(3,'Starting live fetch…','requesting pipeline run',fmtEta(EST_SECONDS));
+
+  const res=await dispatchRun();
+  if(!res.ok){ lpShow(false);btn.disabled=false;btn.innerHTML=old; toast(res.reason||'Could not start the run.'); return; }
+
+  toast('Live run started — querying Redshift.');
+  btn.innerHTML='&#9889; Running…';
+  const t0=Date.now();
+  // stages purely for feel, timed against EST_SECONDS
+  const stages=[[0,'Pipeline dispatched'],[0.12,'Connecting to Redshift'],[0.28,'Querying label tables'],
+    [0.5,'Aggregating metrics'],[0.72,'Writing snapshot'],[0.88,'Committing + deploying']];
+  let tries=0;const maxTries=60;
+  const tick=async()=>{
+    const elapsed=(Date.now()-t0)/1000;
+    const frac=Math.min(0.98,elapsed/EST_SECONDS);
+    const stage=stages.filter(s=>frac>=s[0]).pop();
+    const remain=Math.max(0,EST_SECONDS-elapsed);
+    lpSet(5+frac*93,'Fetching live data…',stage?stage[1]:'working',fmtEta(remain));
+    // poll for the new snapshot every ~5s after a 15s head start
+    if(elapsed>15 && tries<maxTries){
       tries++;
       const ok=await loadLive();
       if(ok&&META.generated_at&&META.generated_at!==before){
+        clearInterval(_liveTimer);_liveTimer=null;
+        lpSet(100,'Live data in','snapshot updated','done');
+        setTimeout(()=>lpShow(false),1200);
         render();stampFreshness();btn.disabled=false;btn.innerHTML=old;
         toast('Live data in — snapshot updated.');return;
       }
-      if(tries>=maxTries){ btn.disabled=false;btn.innerHTML=old; toast('Run dispatched; new data not yet visible. It will appear once the Action commits.');return; }
-      btn.innerHTML='&#9889; Running '+Math.round(tries*5/60*10)/10+'m…';
-      setTimeout(poll,5000);
-    };
-    setTimeout(poll,15000); // give the Action time to spin up before first poll
-  }catch(err){ toast('Fetch-live error: '+err.message); btn.disabled=false;btn.innerHTML=old; }
+    }
+    if(elapsed>EST_SECONDS+120){ // hard stop ~4.3 min
+      clearInterval(_liveTimer);_liveTimer=null;lpShow(false);btn.disabled=false;btn.innerHTML=old;
+      toast('Run dispatched; new data will appear once the pipeline commits.');
+    }
+  };
+  _liveTimer=setInterval(tick,2500);tick();
 }
+function fmtEta(sec){sec=Math.round(sec);if(sec<=0)return'~done';const m=Math.floor(sec/60),s=sec%60;return m?`~${m}m ${s}s left`:`~${s}s left`;}
 async function boot(){
   await loadLive();
   const shared=await loadShared();
