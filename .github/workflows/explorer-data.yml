@@ -1,0 +1,33 @@
+name: Data Explorer snapshot
+on:
+  schedule:
+    - cron: '30 1 * * *'      # 01:30 UTC daily (after the QA metrics run at 01:00)
+  workflow_dispatch: {}
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - run: pip install redshift_connector
+      - name: Generate explorer snapshot
+        env:
+          REDSHIFT_HOST: ${{ secrets.REDSHIFT_HOST }}
+          REDSHIFT_PORT: ${{ secrets.REDSHIFT_PORT }}
+          REDSHIFT_DB: ${{ secrets.REDSHIFT_DB }}
+          REDSHIFT_DATABASE: ${{ secrets.REDSHIFT_DATABASE }}
+          REDSHIFT_USER: ${{ secrets.REDSHIFT_USER }}
+          REDSHIFT_PASSWORD: ${{ secrets.REDSHIFT_PASSWORD }}
+        run: python scripts/generate_explorer_data.py
+      - name: Commit snapshot
+        run: |
+          git config user.name "explorer-bot"
+          git config user.email "bot@artemisai.co.uk"
+          git add -f explorer_data.json
+          git diff --cached --quiet || git commit -m "chore: nightly Data Explorer snapshot $(date -u +%FT%TZ)"
+          git push
