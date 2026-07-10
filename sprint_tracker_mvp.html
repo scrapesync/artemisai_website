@@ -2263,10 +2263,9 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
   </div>
   <div class="tab-bar-tabs">
     <button class="tab-btn active" onclick="switchTab('launch',event)">Command Center</button>
+    <button class="tab-btn" onclick="switchTab('sprintoverview',event)">Sprint Overview</button>
     <button class="tab-btn" onclick="switchTab('sprint',event)">Sprint Tracker</button>
     <button class="tab-btn" onclick="switchTab('mockup',event)">Mockup Alignment</button>
-    <button class="tab-btn" onclick="switchTab('sprintoverview',event)">Sprint Overview</button>
-    <button class="tab-btn" onclick="switchTab('flow',event)">Flow &amp; Risk</button>
     <button class="tab-btn" onclick="switchTab('performance',event)">Performance</button>
   </div>
   <div style="display:flex;align-items:center;gap:8px;justify-self:end;">
@@ -2519,7 +2518,6 @@ function switchTab(tab,e){
   if(tab==='launch')renderLaunch();
   if(tab==='mockup')renderMockupPage();
   if(tab==='performance')renderPerformancePage();
-  if(tab==='flow')renderFlowPage();
   if(tab==='sprintoverview')renderSprintOverviewPage();
 }
 
@@ -5331,10 +5329,6 @@ if(typeof CVS !== 'undefined' && CVS && typeof frame === 'function') requestAnim
 </div>
 
 
-
-<div id="flow-page" class="page">
-  <div id="flow-content" style="padding:24px 36px 60px;max-width:1400px;margin:0 auto;"></div>
-</div>
 
 <div id="sprintoverview-page" class="page">
   <div id="sprintoverview-content" style="padding:24px 36px 60px;max-width:1520px;margin:0 auto;"></div>
