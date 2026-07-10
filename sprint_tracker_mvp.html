@@ -2265,6 +2265,7 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
     <button class="tab-btn active" onclick="switchTab('launch',event)">Command Center</button>
     <button class="tab-btn" onclick="switchTab('sprint',event)">Sprint Tracker</button>
     <button class="tab-btn" onclick="switchTab('mockup',event)">Mockup Alignment</button>
+    <button class="tab-btn" onclick="switchTab('sprintoverview',event)">Sprint Overview</button>
     <button class="tab-btn" onclick="switchTab('flow',event)">Flow &amp; Risk</button>
     <button class="tab-btn" onclick="switchTab('performance',event)">Performance</button>
   </div>
@@ -2519,6 +2520,7 @@ function switchTab(tab,e){
   if(tab==='mockup')renderMockupPage();
   if(tab==='performance')renderPerformancePage();
   if(tab==='flow')renderFlowPage();
+  if(tab==='sprintoverview')renderSprintOverviewPage();
 }
 
 function renderSprintTrackBar(){
@@ -5334,6 +5336,10 @@ if(typeof CVS !== 'undefined' && CVS && typeof frame === 'function') requestAnim
   <div id="flow-content" style="padding:24px 36px 60px;max-width:1400px;margin:0 auto;"></div>
 </div>
 
+<div id="sprintoverview-page" class="page">
+  <div id="sprintoverview-content" style="padding:24px 36px 60px;max-width:1520px;margin:0 auto;"></div>
+</div>
+
 <script>
 
 var _signoutFn = null;
@@ -5441,6 +5447,196 @@ function applyDatePopover(){
   renderSprintTrackBar();
   renderLaunch();
   if(currentTab==='mockup') renderMockupPage();
+}
+</script>
+
+<style>
+/* ── Sprint Overview tab ── */
+#sprintoverview-content{color:var(--text,#e8ecf4);}
+.ovv-grid{display:grid;grid-template-columns:1fr 380px;gap:22px;align-items:start;}
+@media(max-width:1080px){.ovv-grid{grid-template-columns:1fr;}}
+.ovv-pills{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;scrollbar-width:thin;}
+.ovv-pill{flex:0 0 auto;padding:7px 13px;border:1px solid var(--border,#1e2a3f);border-radius:9999px;background:transparent;color:var(--muted2,#7b8ba8);font-family:'JetBrains Mono',monospace;font-size:11.5px;cursor:pointer;transition:all .15s;white-space:nowrap;position:relative;}
+.ovv-pill:hover{border-color:rgba(0,212,170,.4);color:var(--accent,#00d4aa);}
+.ovv-pill.sel{background:var(--accent-dim,rgba(0,212,170,.12));border-color:var(--accent,#00d4aa);color:var(--accent,#00d4aa);font-weight:700;}
+.ovv-pill.done-sp{opacity:.55;}
+.ovv-pill .ovv-now{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent,#00d4aa);margin-left:6px;box-shadow:0 0 6px var(--accent,#00d4aa);vertical-align:middle;}
+.ovv-hero{border:1px solid var(--border,#1e2a3f);border-radius:16px;padding:24px 26px;background:linear-gradient(160deg,rgba(0,212,170,.07),rgba(99,102,241,.05) 55%,transparent);position:relative;overflow:hidden;}
+.ovv-hero .ovv-phase{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:9999px;margin-bottom:10px;}
+.ovv-hero h2{font-size:26px;font-weight:800;letter-spacing:-.4px;margin:0 0 4px;}
+.ovv-hero .ovv-dates{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted2,#7b8ba8);margin-bottom:14px;}
+.ovv-hero .ovv-story{font-size:14.5px;line-height:1.65;color:var(--text,#dbe3f0);max-width:760px;}
+.ovv-progress{margin-top:16px;}
+.ovv-progress .bar{height:8px;border-radius:9999px;background:rgba(255,255,255,.07);overflow:hidden;}
+.ovv-progress .fill{height:100%;border-radius:9999px;background:linear-gradient(90deg,var(--accent,#00d4aa),#6366f1);transition:width .5s ease;}
+.ovv-progress .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted2,#7b8ba8);margin-top:6px;}
+.ovv-sec-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--accent,#00d4aa);margin:26px 0 12px;display:flex;align-items:center;gap:8px;}
+.ovv-deliver{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;}
+.ovv-deliver .dcard{border:1px solid var(--border,#1e2a3f);border-radius:12px;padding:13px 15px;background:rgba(255,255,255,.02);font-size:13px;line-height:1.5;}
+.ovv-deliver .dcard b{display:block;font-size:13.5px;margin-bottom:3px;color:var(--text,#e8ecf4);}
+.ovv-deliver .dcard span{color:var(--muted2,#8b9ab5);font-size:12.5px;}
+.ovv-watch{margin-top:14px;border:1px solid rgba(245,166,35,.3);background:rgba(245,166,35,.07);border-radius:12px;padding:12px 15px;font-size:12.5px;line-height:1.55;color:#f0d9ad;}
+.ovv-watch b{color:#f5a623;}
+.ovv-people{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;}
+.ovv-person{border:1px solid var(--border,#1e2a3f);border-radius:14px;padding:15px 16px;background:rgba(255,255,255,.02);}
+.ovv-person .ph{display:flex;align-items:center;gap:11px;margin-bottom:10px;}
+.ovv-person .av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#06121c;flex:0 0 auto;}
+.ovv-person .pn{font-weight:800;font-size:14.5px;}
+.ovv-person .pr{font-size:11px;color:var(--muted2,#7b8ba8);font-family:'JetBrains Mono',monospace;}
+.ovv-person .load{height:5px;border-radius:9999px;background:rgba(255,255,255,.07);margin:2px 0 10px;overflow:hidden;}
+.ovv-person .load i{display:block;height:100%;border-radius:9999px;}
+.ovv-person ul{list-style:none;margin:0;padding:0;}
+.ovv-person li{font-size:12.5px;line-height:1.45;padding:5px 0;border-top:1px dashed rgba(255,255,255,.06);display:flex;gap:8px;align-items:flex-start;}
+.ovv-person li:first-child{border-top:none;}
+.ovv-person li .dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto;margin-top:5px;}
+.ovv-person li .tk{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2,#7b8ba8);display:block;}
+/* sidebar */
+.ovv-side{border:1px solid var(--border,#1e2a3f);border-radius:16px;background:rgba(255,255,255,.015);padding:18px;position:sticky;top:120px;max-height:calc(100vh - 150px);overflow-y:auto;scrollbar-width:thin;}
+.ovv-side h3{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--accent,#00d4aa);margin:0 0 4px;}
+.ovv-side .sub{font-size:12px;color:var(--muted2,#7b8ba8);line-height:1.5;margin-bottom:14px;}
+.ovv-jrow{border:1px solid transparent;border-radius:12px;padding:10px 11px;cursor:pointer;transition:all .15s;margin-bottom:6px;}
+.ovv-jrow:hover{border-color:rgba(0,212,170,.3);background:rgba(0,212,170,.04);}
+.ovv-jrow.sel{border-color:var(--accent,#00d4aa);background:var(--accent-dim,rgba(0,212,170,.1));}
+.ovv-jrow .jh{display:flex;align-items:baseline;justify-content:space-between;gap:8px;}
+.ovv-jrow .js{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:12px;}
+.ovv-jrow .jt{font-size:12px;font-weight:700;color:var(--text,#dbe3f0);flex:1;}
+.ovv-jrow .jc{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2,#7b8ba8);}
+.ovv-jrow .jf{margin-top:5px;font-size:11px;color:var(--muted2,#8b9ab5);line-height:1.5;}
+.ovv-jrow .jf .fdone{color:var(--accent,#00d4aa);}
+.ovv-jrow .jbar{height:4px;border-radius:9999px;background:rgba(255,255,255,.07);margin-top:7px;overflow:hidden;}
+.ovv-jrow .jbar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent,#00d4aa),#6366f1);border-radius:9999px;}
+.ovv-finish{margin-top:10px;border:1px solid rgba(0,212,170,.35);border-radius:12px;background:rgba(0,212,170,.06);padding:12px 13px;font-size:12px;line-height:1.55;}
+.ovv-finish b{color:var(--accent,#00d4aa);}
+</style>
+
+<script>
+/* ══════════ SPRINT OVERVIEW TAB ══════════ */
+const OVV_TEAM = {
+  'CTO':            {name:'Asad',   role:'CTO · Web & Infra',        color:'#00d4aa'},
+  'AI Engineer':    {name:'Faheem', role:'AI Engineer · Models',     color:'#6366f1'},
+  'Muteeb':         {name:'Muteeb', role:'AI Engineer · ML Platform',color:'#a78bfa'},
+  'Product Manager':{name:'Rafeh',  role:'PM · Acceptance & QA',     color:'#f5a623'},
+  'CEO':            {name:'Alex',   role:'CEO · Narrative & GTM',    color:'#38bdf8'},
+  'CLO':            {name:'Filza',  role:'CLO · Legal & Compliance', color:'#f472b6'},
+  'Ops':            {name:'Jill',   role:'Ops · Cost & Guardrails',  color:'#facc15'},
+  'CO':             {name:'Lewis',  role:'CO · Domain & Pilots',     color:'#4ade80'}
+};
+const OVV_ORDER = ['CTO','AI Engineer','Muteeb','Product Manager','CEO','CLO','Ops','CO'];
+
+/* One honest paragraph per sprint: what it's FOR, not just what's in it. */
+const OVV_MISSIONS = {
+ 'Planning':{t:'Lock the runway',s:'Before the 18-sprint build begins, every role signs a readiness gate: scope locked, architecture settled, models known-good, budget capped, legal floor agreed, pilots warm. Nothing in S6+ should be a surprise.',d:[['MVP cut line','139 tickets locked, launch gates named up front'],['Two-track plan','Model science + ML platform run in parallel, non-blocking'],['28 Nov commitment','The date is real because the resourcing is real']],w:'If a readiness gate is skipped here, it becomes a mid-build argument later.'},
+ 'Sprint 6':{t:'Teach Artemis to see',s:'Until now Artemis only reads text. This sprint the image pipeline comes alive (fetch → OCR → CLIP → fusion) and the real React app is born from the mockups. Everything visual through launch builds on these two foundations.',d:[['Image pipeline unlock','Fetch + store pilot images, OCR, CLIP embeddings, fusion model'],['React foundation','Scaffold, design system, shell — the app every screen lives in'],['First live screens','Analytics page, Best-Times heatmap, sparklines, stories rail'],['GALACTUS calibration','Confidence routing made honest with real tier metrics']],w:'VD-IMG-FETCH-006 gates the whole image track — images were never downloaded in the S2 backfill. Legal (image rights) must land before full backfill.'},
+ 'Sprint 7':{t:'Video + the first prediction',s:'The two hardest-to-copy signals arrive: video understanding (scenes, transcripts, hooks) and virality v1 — the first model that predicts the future instead of describing the past. Prediction is the wedge the launch story leans on.',d:[['Video intelligence','Frames + audio + captions understood; hook read on first 3s'],['Virality model v1','Time-split-validated reach prediction with explainable drivers'],['Analytics grows up','Sub-tabs, raw signal table, video panel in post view'],['Affinity graph seed','NetworkX user→user edges start compounding for Discovery']],w:'Define the virality target with Rafeh FIRST — predicting something users don\'t care about wastes the sprint.'},
+ 'Sprint 8':{t:'"Will this flop?" + Art-E is born',s:'The sprint where Artemis starts answering questions. Draft scoring gives page owners the pre-publish moment of truth, and Art-E grounded Q&A v1 ships — plain-English answers with citations to real data. This is the demo magnet and the retention hook in one sprint.',d:[['Draft virality scoring','Paste a draft, get a calibrated score + why, before publishing'],['Drafts page (React)','Live-updating score band: flop / average / strong'],['Art-E grounded Q&A v1','Ask your data anything — every number cited, no hallucination'],['RAG + retraining rails','Tenant-scoped retrieval index; automated retrain + drift pipeline']],w:'Hold the Art-E line: grounded answers + citations ONLY. The autonomous agent is Phase-2. Best Times is cut-order #1, virality #2 if dates slip.'},
+ 'Sprint 9':{t:'Timing advice + the watchdog',s:'Best Times turns two years of history into a concrete repeatable action ("post Thursday 7–9pm") — the daily habit hook. Underneath, the drift watchdog starts guarding every model so quality slippage is caught before a pilot notices.',d:[['Best Times model + page','Prophet seasonality per page, honest confidence, plain English'],['Drift watchdog','Live confidence + label mix tracked vs training baseline'],['Discovery match algo','0–100 match scores over the cross-page graph (Muteeb slice)'],['Pilot KPIs locked','D7/D30 active, alert-engage — the habit-loop scorecard']],w:'Best Times is the first feature cut if the date slips — keep its scope tight and its value provable.'},
+ 'Sprint 10':{t:'Production hygiene + the moat foundation',s:'A deliberately unglamorous sprint: caching, queues, drill-downs, and the structural-fingerprint capture that quietly feeds the cross-page graph — the network moat — while costing almost nothing. The graph moves from idea to persisted reality.',d:[['Caching + queues','Redis hot reads, SQS retries + dead-letter — no silent data loss'],['Post drill-down','Click any post, see the full why (reach, sentiment, signals)'],['Cross-page graph','Jaccard overlap matrix, anonymisation floor enforced at build'],['Retrain dry-run','First quarterly retrain cycle proven repeatable']],w:'De-identification policy (VD-LEGAL-010) must land before any graph surface ships — reverse-identification is a DPIA-level risk.'},
+ 'Sprint 11':{t:'The "watch my back" promise',s:'Crisis detection is the highest-trust feature and a key reason a pilot pays. The detector must fire on real crises and stay quiet on banter — per page archetype — and every alert must state the problem AND the suggested action, with evidence.',d:[['Crisis detector','Toxic-spike + sentiment-swing detection tuned per archetype'],['Alert engine','Problem + action + cited evidence; de-duplicated, rate-limited'],['Alerts UI + rules builder','Pilots tune thresholds themselves or they won\'t trust it'],['Real-time pipeline','Comments scored fast enough that an alert is timely, not next-day']],w:'Lewis\'s domain calibration is the difference between a trusted guardian and a boy who cried wolf.'},
+ 'Sprint 12':{t:'Eyes on production',s:'Observability sprint: monitoring, centralised logging, uptime — the team sees a broken pilot pipeline before the pilot does. Audience-feature groundwork compounds quietly for Phase-2 segmentation without crossing the GDPR Article 9 line.',d:[['Full observability','Sentry, uptime, structured logs, on-call ping on failures'],['Audience groundwork','De-identified commenter features, cohort-limited, cheap append'],['Article 9 review','Confirmed: no special-category inference, ever'],['Discovery cards pipeline','Auto-generated Business Cards from the warehouse']],w:'Hold the Phase-2 line: segmentation, community detection, churn all stay OUT of MVP.'},
+ 'Sprint 13':{t:'Discovery goes live',s:'The network stops being a promise. Discovery v1 ships full: browse, business cards, and ranked Matches with real scores — the engine of the invite/growth loop. The aggregation API also makes every analytics surface faster.',d:[['Discovery v1 (full)','Browse + Business Cards + Matches / My Collabs / Saved tabs'],['Aggregation API','Pre-aggregated tenant-scoped metrics; faster dashboards'],['Anonymisation floor','Minimum cohort of 5, fails closed — legally airtight consent'],['Growth narrative','50-prospect outbound list + distribution partner shortlist']],w:'Every Discovery string gets a narrative-firewall review before Meta App Review sees anything (S19).'},
+ 'Sprint 14':{t:'The daily loop gets real',s:'The Home Feed and Dashboard go fully live on the ML pipeline — the "one thing to do today" retention engine stops being placeholder. Draft scoring becomes live-as-you-type, and lean webhooks let crisis + draft events travel.',d:[['Dashboard + Feed live','Every card and insight is real pipeline data, reconciled'],['Live draft scoring','Score updates as the user types, stable, no jitter'],['Webhooks (lean)','Tenant-scoped delivery + retry; minimal payloads per CLO rule'],['Batched QA mode','Sprint gates now run as one weekly batch review']],w:'Stripe and the public SDK stay Phase-2 — pilots are invoiced by hand, deliberately.'},
+ 'Sprint 15':{t:'Value that comes back to you',s:'Reports make Artemis show up in the pilot\'s week even when they don\'t open the app: weekly/monthly/crisis reports with grounded plain-English narrative, PDF + email, on a schedule. This is the willingness-to-pay proof point.',d:[['Report engine','Data-grounded narrative with citations, reusing Art-E grounding'],['Reports UI','View, PDF download, history, recurring schedule + email'],['User documentation','Plain-English docs for every shipped surface'],['Pricing v3','12-month forecast + first paid-pilot conversion script']],w:'A report must reconcile perfectly with the raw data — one wrong number kills report trust permanently.'},
+ 'Sprint 16':{t:'Memory + the isolation wall',s:'Two trust pillars in one sprint: Art-E gets conversation memory with a legally-required "forget this", and multi-tenant isolation becomes provable — row-level security, per-tenant RAG namespaces, and the red-team test that tenant A can never see tenant B.',d:[['Art-E memory','Within-session + light cross-week; recall measured, not assumed'],['Tenant isolation (launch gate)','RLS + Pinecone namespaces + cross-tenant red-team must pass'],['Cognito auth backend','JWT with tenant claim; full lifecycle incl. failure paths'],['Profile & Settings core','Connect, notifications, data control, forget-this surfaced']],w:'A single cross-tenant leak is fatal. This gate is provable or the launch doesn\'t happen.'},
+ 'Sprint 17':{t:'Art-E learns from feedback',s:'Thumbs on every answer make trust visible and build the labelled dataset for the future self-hosted model. Query understanding improves so Art-E retrieves the right data — and asks a clarifying question instead of guessing.',d:[['Thumbs feedback loop','Every answer rateable; down-votes route to a review queue'],['Query routing quality','Right retrieval for the question; clarify, don\'t guess'],['Harmful-output redlines','Refuses legal/medical/financial advice, wording agreed'],['Launch theme locked','"Are you ready for change?" + 6-week comms calendar']],w:'The design-QA punch-list from Alex\'s mockup comparison must actually get fixed, not filed.'},
+ 'Sprint 18':{t:'The citation gate — core trust',s:'Art-E upgrades to the frontier model, and the non-negotiable trust layer ships: any answer with an un-cited number is blocked, unsupported claims are refused, prompt-injection fails closed. Plus per-tenant cost circuit breakers so no surprise bills.',d:[['Frontier Art-E','Better multi-turn quality without breaking citations or refusals'],['Citation gate (launch gate)','No un-cited number escapes; hallucination = refusal'],['Cost guardrails','Hard per-tenant quotas + circuit breaker on LLM spend'],['Pilot-scale performance','Profile + fix the slow surfaces; good Lighthouse scores']],w:'The 1000-tenant load test is Phase-2 — resist gold-plating; 5–50 pilots is the launch bar.'},
+ 'Sprint 19':{t:'Security + the Meta strategy',s:'The pre-launch hardening sprint: KMS encryption, DSAR + full GDPR export, OWASP sweep, tenant-leakage red-team — and the crucial Meta App Review strategy: narrowest permission set, conservative narrative, screencasts planned, business verification started.',d:[['Security hardening','KMS tokens, secrets vault, account basics, data export UI'],['DSAR + deletion flows','Right-to-be-forgotten end to end, incl. Art-E memory purge'],['App Review strategy','Minimal scopes, operational language, narrative firewall'],['Model security','Prompt-injection + exfiltration hardening as permanent gates']],w:'Investor language (behavioural intelligence, influence graph) must NEVER appear on Meta-facing or public surfaces.'},
+ 'Sprint 20':{t:'Brace for the public',s:'Rate limiting and abuse protection go up before the public login surface exists. The pipeline learns to degrade gracefully under load. Models get their final full audit and versions are locked. Launch-readiness review #1 names the top risks.',d:[['Rate limiting + abuse','Floods, credential stuffing, scraping throttled cleanly'],['Graceful degradation','Back-pressure + honest "processing" states, never a crash'],['Final model audit','All launch-gate thresholds confirmed; versions tagged'],['Readiness review #1','Red/amber/green scorecard + top-5 risks with owners']],w:'The review\'s explicit ask: OAuth and the security audit must NOT still be in the final-week crunch.'},
+ 'Sprint 21':{t:'OAuth Live Mode — the existential gate',s:'The single most important external dependency: Facebook App Review to Live Mode. Without it there is no public product. Asad and Muteeb co-own it so it is not a bus-factor risk. Around it: the full 7-tab Settings, cookie consent, staging + one-command rollback, and the complete legal sweep.',d:[['Facebook OAuth Live Mode','Submission driven to approval; every failure path handled'],['Token backend (co-owned)','Encrypted exchange/refresh/revocation + Meta deletion callback'],['Full Settings + consent','7 tabs, quiet hours, cookie banner, staging + rollback'],['Full legal sweep','T&Cs, Privacy, DPA, ICO registration — launch-ready']],w:'A Review rejection needs a same-week resubmission plan. Lewis walks every pilot through the live connect flow personally.'},
+ 'Sprint 22':{t:'UAT → paying customers',s:'The launch validation: formal UAT with all 5 pilots across the full journey, defects triaged and fixed, and each pilot converts to PAID (manual invoice). Willingness-to-pay is the real test. Ends with the go/no-go decision memo.',d:[['UAT with 5 pilots','Full journey walked against acceptance criteria, evidence attached'],['Paid conversion','Each pilot signs + is invoiced — this IS the launch validation'],['Final perf + cost pass','<250ms APIs, >70% cache hit, cost forecast at 100/500/1000 tenants'],['Go/no-go decision','Explicit criteria + evidence per criterion + recorded decision']],w:'A pilot must reach value UNAIDED. If they can\'t, that\'s a launch-blocker, not a training issue.'},
+ 'Sprint 23':{t:'Launch — 28 November 2026',s:'Go-live. Flip the public product on, smoke every critical flow, keep canary + rollback armed, run the hour-by-hour comms show. Then hold: war-room, model-health watch, pilot support, first-week defect triage — and Roadmap V2 for what comes next.',d:[['Go-live executed','OAuth flow, marketing site, all MVP surfaces in production'],['Launch war-room','Uptime, drift, cost, per-tenant health on one view, on-call paged'],['5 pilots live + paid','The launch proof; first outcomes become case studies'],['Roadmap V2','Fast-follows sequenced; Phase-2 research tier announced']],w:'Launch-day issues get fixed via canary/rollback in minutes — never by breaking a pilot.'}
+};
+
+const OVV_SPRINTS = ['Planning','Sprint 6','Sprint 7','Sprint 8','Sprint 9','Sprint 10','Sprint 11','Sprint 12','Sprint 13','Sprint 14','Sprint 15','Sprint 16','Sprint 17','Sprint 18','Sprint 19','Sprint 20','Sprint 21','Sprint 22','Sprint 23'];
+let ovvSel = localStorage.getItem('ovv_sel') || 'Sprint 8';
+
+function ovvFmtRange(sn){
+  try{
+    const d = getSprintDates(sn); if(!d||!d.start) return '';
+    const f = s=>{const dt=new Date(s+'T00:00:00');return dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'});};
+    return f(d.start)+' – '+f(d.end);
+  }catch(e){return '';}
+}
+function ovvDateCurrent(){
+  const today = new Date().toISOString().slice(0,10); let cur=null;
+  OVV_SPRINTS.forEach(sn=>{ try{const d=getSprintDates(sn); if(d&&d.start&&d.end&&d.start<=today&&today<=d.end) cur=sn;}catch(e){} });
+  return cur;
+}
+function ovvMvpFeatures(){
+  const out=[]; SURFACES.forEach(c=>c.features.forEach(f=>{ if(f.stage==='mvp'||f.stage==='done') out.push(f); }));
+  return out;
+}
+function ovvSelect(sn){ ovvSel=sn; localStorage.setItem('ovv_sel',sn); renderSprintOverviewPage(); }
+
+function renderSprintOverviewPage(){
+  const root = document.getElementById('sprintoverview-content'); if(!root) return;
+  const cur = ovvDateCurrent();
+  const m = OVV_MISSIONS[ovvSel] || {t:ovvSel,s:'',d:[],w:''};
+  const tickets = (SPRINT_DATA[ovvSel]||[]).filter(t=>{const st=t.stage||(t.status==='done'?'done':'');return st==='mvp'||st==='done';});
+  const done = tickets.filter(t=>t.status==='done').length;
+  const pct = tickets.length?Math.round(done/tickets.length*100):0;
+  const pcol = getPhaseColor(ovvSel), pname = getPhaseName(ovvSel);
+
+  /* pills */
+  let pills = '<div class="ovv-pills">'+OVV_SPRINTS.map(sn=>{
+    const tk=(SPRINT_DATA[sn]||[]).filter(t=>{const st=t.stage||(t.status==='done'?'done':'');return st==='mvp'||st==='done';});
+    const allDone = tk.length>0 && tk.every(t=>t.status==='done');
+    return '<button class="ovv-pill'+(sn===ovvSel?' sel':'')+(allDone?' done-sp':'')+'" onclick="ovvSelect(\''+sn+'\')">'+
+      (sn==='Planning'?'Plan':'S'+sprintNum(sn))+(allDone?' ✓':'')+(sn===cur?'<span class="ovv-now"></span>':'')+'</button>';
+  }).join('')+'</div>';
+
+  /* hero */
+  let hero = '<div class="ovv-hero">'+
+    '<span class="ovv-phase" style="color:'+pcol+';background:'+pcol+'22;border:1px solid '+pcol+'55;">'+pname+'</span>'+
+    (ovvSel===cur?'<span class="ovv-phase" style="color:#06121c;background:var(--accent,#00d4aa);margin-left:8px;">HAPPENING NOW</span>':'')+
+    '<h2>'+(ovvSel==='Planning'?'Planning':ovvSel)+' — '+m.t+'</h2>'+
+    '<div class="ovv-dates">'+ovvFmtRange(ovvSel)+' · '+tickets.length+' MVP tickets</div>'+
+    '<div class="ovv-story">'+m.s+'</div>'+
+    '<div class="ovv-progress"><div class="bar"><div class="fill" style="width:'+pct+'%"></div></div>'+
+    '<div class="lbl">'+done+' / '+tickets.length+' tickets done · '+pct+'%</div></div></div>';
+
+  /* deliverables */
+  let deliv = '<div class="ovv-sec-title">🎯 What this sprint must deliver</div><div class="ovv-deliver">'+
+    m.d.map(x=>'<div class="dcard"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('')+'</div>'+
+    (m.w?'<div class="ovv-watch"><b>⚠ Watch out:</b> '+m.w+'</div>':'');
+
+  /* people */
+  const byP = {}; tickets.forEach(t=>{ (byP[t.assignee]=byP[t.assignee]||[]).push(t); });
+  const maxLoad = Math.max(1, ...Object.values(byP).map(a=>a.length));
+  let people = '<div class="ovv-sec-title">👥 Who is doing what</div><div class="ovv-people">'+
+    OVV_ORDER.filter(k=>byP[k]).map(k=>{
+      const p=OVV_TEAM[k]||{name:k,role:k,color:'#7b8ba8'}; const arr=byP[k];
+      const dn=arr.filter(t=>t.status==='done').length;
+      return '<div class="ovv-person"><div class="ph">'+
+        '<div class="av" style="background:'+p.color+';">'+p.name[0]+'</div>'+
+        '<div><div class="pn">'+p.name+'</div><div class="pr">'+p.role+' · '+arr.length+' ticket'+(arr.length>1?'s':'')+(dn?' · '+dn+' done':'')+'</div></div></div>'+
+        '<div class="load"><i style="width:'+Math.round(arr.length/maxLoad*100)+'%;background:'+p.color+';"></i></div>'+
+        '<ul>'+arr.map(t=>'<li><span class="dot" style="background:'+(t.status==='done'?'var(--accent,#00d4aa)':t.status==='upcoming'?'#f5a623':'#6b7a94')+';"></span><span>'+t.name.replace(/\s*\(React.*?\)|\s*\(CLO\)|\s*\(Ops\)|\s*\(ML platform.*?\)|\s*\(CTO.*?\)/g,'')+'<span class="tk">'+t.ticket+'</span></span></li>').join('')+'</ul></div>';
+    }).join('')+'</div>';
+
+  /* ── right sidebar: feature journey ── */
+  const feats = ovvMvpFeatures();
+  const total = feats.length;
+  const doneAtStart = feats.filter(f=>f.stage==='done').length;
+  let rows='';
+  for(let n=6;n<=23;n++){
+    const sn='Sprint '+n;
+    const touched = feats.filter(f=>f.stage==='mvp'&&(f.sprints||[]).includes(n));
+    const completes = touched.filter(f=>Math.max(...f.sprints)===n);
+    const cum = doneAtStart + feats.filter(f=>f.stage==='mvp'&&f.sprints&&f.sprints.length&&Math.max(...f.sprints)<=n).length;
+    const cpct = Math.round(cum/total*100);
+    const mm = OVV_MISSIONS[sn]||{t:''};
+    rows += '<div class="ovv-jrow'+(sn===ovvSel?' sel':'')+'" onclick="ovvSelect(\''+sn+'\')">'+
+      '<div class="jh"><span class="js" style="color:'+getPhaseColor(sn)+';">S'+n+'</span><span class="jt">'+mm.t+'</span><span class="jc">'+cpct+'%</span></div>'+
+      '<div class="jf">'+ (touched.length? touched.slice(0,6).map(f=>(f.icon||'')+' '+f.name.split('(')[0].trim()).join(' · ')+(touched.length>6?' · +'+(touched.length-6)+' more':'') : 'Hardening & readiness')+
+      (completes.length?' <span class="fdone">· ✓ completes '+completes.length+'</span>':'')+'</div>'+
+      '<div class="jbar"><i style="width:'+cpct+'%"></i></div></div>';
+  }
+  let side = '<div class="ovv-side"><h3>🗺 The feature journey</h3>'+
+    '<div class="sub">Every MVP feature from the Master Plan + mockups, mapped to the sprint that finishes it. The bar is cumulative — it must reach 100% by S23. <b>'+doneAtStart+'</b> of <b>'+total+'</b> already done (S1–S5 foundation).</div>'+
+    rows+
+    '<div class="ovv-finish"><b>How it all gets finished:</b> Foundation (S6–7 image/video) → Intelligence (S8–12 predictions, crisis) → Product (S13–15 Discovery, reports) → Trust (S16–19 isolation, citations, security) → Launch (S20–23 OAuth, UAT, go-live). Everything Fast-Track / Later starts 30 Nov, after launch.</div></div>';
+
+  root.innerHTML = pills + '<div class="ovv-grid"><div>' + hero + deliv + people + '</div>' + side + '</div>';
 }
 </script>
 </body>
