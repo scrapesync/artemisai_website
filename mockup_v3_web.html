@@ -679,7 +679,8 @@ body.light .arec{background:linear-gradient(150deg,#F0EDFF,#FFFFFF 70%)}
 .hpill:hover{border-color:var(--act)}
 .hpill .hn{color:var(--act);font-family:var(--disp);font-size:15px}
 .hpill .hd{font-size:10px;color:var(--t3);font-weight:600}
-.sbtn{width:42px;height:42px;border-radius:12px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--t2);transition:.15s}
+.srch{width:42px;height:42px;border-radius:12px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--t2);transition:.15s;padding:0}
+.srch:hover{color:var(--t1);border-color:var(--line2,#33405280)}
 .sbtn:hover{color:var(--t1);border-color:var(--t3)}
 .wpop{left:34px;right:auto;top:66px;width:300px}
 .wp-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:11px 16px;border-top:1px solid var(--line);font-size:13.5px;font-weight:600;transition:.12s}
@@ -1042,7 +1043,7 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
       <button class="wspace" onclick="toggleWs(event)" id="wsbtn"><span class="dot"></span>Sana's Kitchen<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button>
       <button class="hpill" onclick="arteExplain('health')" title="Page health, Art-E explains"><span class="hn">82</span><span>Health<span class="hd" style="display:block">+4 this week</span></span></button>
       <div class="grow"></div>
-      <button class="sbtn" onclick="openPalette()" aria-label="Search, Cmd K"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
+      <button class="srch" onclick="openPalette()" aria-label="Search, Cmd K" title="Search (Cmd K)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
       <button class="newpost" onclick="openCompose()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>New post</button>
       <button class="bell" onclick="setTheme()" aria-label="Toggle light or dark" id="themeBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/></svg></button>
       <button class="bell" onclick="setView('inbox')" aria-label="Inbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span class="bdg" id="inboxBdg">2</span></button>

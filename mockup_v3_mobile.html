@@ -682,6 +682,16 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
 body.light .dsq.on{color:#fff}
 .dgroup{display:none}
 .dgroup.on{display:block}
+.msrch{position:absolute;top:52px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--t2);z-index:26;backdrop-filter:blur(8px)}
+.msrch:active{transform:scale(.94)}
+.srchbox{display:flex;align-items:center;gap:9px;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:10px 13px;margin:2px 0 14px}
+.srchbox svg{flex-shrink:0;color:var(--t3)}
+.srchbox input{flex:1;background:transparent;border:none;outline:none;color:var(--t1);font-family:inherit;font-size:13px}
+.srchbox input::placeholder{color:var(--t3)}
+.srow{display:flex;gap:11px;align-items:center;padding:12px 2px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--t2);width:100%;text-align:left}
+.srow .si{font-size:15px;flex-shrink:0}
+.srow b{color:var(--t1);font-weight:700}
+.srow .sk{margin-left:auto;font-size:9.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--t3);flex-shrink:0}
 .swstage .swsc{margin:0 0 14px}
 .tc-com{margin:12px 0 0;padding:11px 12px;background:var(--surface2);border-radius:12px}
 .tc-com .tcl{font-size:8.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-bottom:7px}
@@ -837,6 +847,7 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
 <div class="phone"><div class="screen">
   <div class="island"></div>
   <div class="statusbar" onclick="toggleShade()" style="cursor:pointer"><span id="sbtime">18:22</span><span class="sb-icons" style="display:flex;align-items:center;gap:7px"><span id="shadeHint" style="opacity:.6">&#9662;</span>&#9679;&#9679;&#9679; &nbsp;&#9889;</span></div>
+  <button class="msrch" id="msrchBtn" onclick="show('search')" aria-label="Search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
 
     <div class="shade" id="shade">
       <div class="shade-head"><b>Notifications</b><span>Artemis &middot; today</span></div>
@@ -1206,6 +1217,20 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
   <!-- ═══ SHEETS ═══ -->
   <div class="veil" id="veil" onclick="hideSheets()"></div>
 
+  <div class="sheet" id="sh-search">
+    <div class="grab"></div>
+    <h4>Search</h4>
+    <div class="srchbox"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="msq" placeholder="Posts, comments, insights, pages&hellip;" oninput="msearch(this.value)"></div>
+    <div class="mini-label">Quick results</div>
+    <div id="msres">
+      <button class="srow" data-t="pasta reel post video" onclick="hideSheets();nav('analytics')"><span class="si">&#127837;</span><span><b>Pasta reel</b> &middot; 2.4x your average</span><span class="sk">post</span></button>
+      <button class="srow" data-t="homecookeddaily match discovery collab" onclick="hideSheets();nav('discover')"><span class="si">&#129309;</span><span><b>@HomeCookedDaily</b> &middot; 41% overlap</span><span class="sk">match</span></button>
+      <button class="srow" data-t="sunday window timing insight best time" onclick="hideSheets();nav('analytics')"><span class="si">&#128161;</span><span><b>Sunday window</b> &middot; untouched 9-11am</span><span class="sk">insight</span></button>
+      <button class="srow" data-t="toxic comment crisis alert" onclick="hideSheets();nav('alerts')"><span class="si">&#9888;</span><span><b>Comment spike</b> &middot; pasta reel thread</span><span class="sk">alert</span></button>
+    </div>
+    <p class="quiet" style="margin-top:12px">Searches across posts, comments, insights and Discovery pages.</p>
+  </div>
+
   <div class="sheet" id="sh-compose">
     <div class="grab"></div>
     <h4>New post</h4>
@@ -1555,8 +1580,11 @@ function nav(n){
   document.getElementById('scr-'+n).classList.add('on');
   document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('on', b.dataset.n===n));
   hideSheets();
+  const sb=document.getElementById('msrchBtn'); if(sb) sb.style.display=(n==='arte')?'none':'flex';
   if(n==='discover' && typeof discMode!=='undefined' && discMode==='swipe') setTimeout(renderSwipe,60);
 }
+function msearch(v){ v=(v||'').toLowerCase();
+  document.querySelectorAll('#msres .srow').forEach(r=>{ r.style.display = (!v || (r.dataset.t+' '+r.textContent).toLowerCase().includes(v)) ? 'flex' : 'none'; }); }
 /* sheets */
 function show(id){ document.getElementById('veil').classList.add('on'); document.getElementById('sh-'+id).classList.add('on'); if(id==='compose') scoreDraft(document.getElementById('draft').value); }
 function hideSheets(){ document.getElementById('veil').classList.remove('on'); document.querySelectorAll('.sheet').forEach(s=>s.classList.remove('on')); }
