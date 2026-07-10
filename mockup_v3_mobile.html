@@ -877,9 +877,28 @@ body.light .feed-label h3{letter-spacing:1.6px;color:var(--t3)}
 body.light .chip,body.light .tcc span{background:#FFFFFF;border:1px solid var(--line)}
 body.light .sheet{background:#FFFFFF;border-radius:24px 24px 0 0}
 body.light .card{border-radius:15px}
+/* ── minimal dark (default) ── */
+body:not(.light){
+  --bg:#0C0F0D; --surface:#141A16; --surface2:#1B211C; --line:#232B25;
+  --t1:#EDF1ED; --t2:#A3AEA6; --t3:#77827A;
+  --act:#3CAE7B; --actInk:#5ECD9C;
+  --arte:#8B7FE8; --gold:#D9A94F; --rose:#E06A7E; --sky:#5FA7D6;
+}
+body:not(.light) .screen{background:var(--bg)}
+body:not(.light) .scroll{background:none}
+body:not(.light) .nav{background:rgba(13,16,14,.97);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line)}
+body:not(.light) .nav-item{color:#6E7971}
+body:not(.light) .nav-item.on{color:var(--act);font-weight:800}
+body:not(.light) .btn-primary{background:var(--act);color:#0A1F16;border:none;border-radius:999px}
+body:not(.light) .swb.go{background:var(--act);color:#0A1F16}
+body:not(.light) .sbtn.pri{background:var(--act);color:#0A1F16}
+body:not(.light) .dsq.on,body:not(.light) .dsub.on{background:var(--act);border-color:var(--act);color:#0A1F16}
+body:not(.light) .card{border-radius:15px}
+body:not(.light) .orb{box-shadow:none}
+body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
 </style>
 </head>
-<body class="light">
+<body>
 <div class="phone"><div class="screen">
   <div class="island"></div>
   <div class="statusbar" onclick="toggleShade()" style="cursor:pointer"><span id="sbtime">18:22</span><span class="sb-icons" style="display:flex;align-items:center;gap:7px"><span id="shadeHint" style="opacity:.6">&#9662;</span>&#9679;&#9679;&#9679; &nbsp;&#9889;</span></div>

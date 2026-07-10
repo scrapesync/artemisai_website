@@ -1062,9 +1062,32 @@ body.light .feed-label h3{font-size:10.5px;letter-spacing:1.7px;color:var(--t3)}
 body.light .greet{color:var(--t3)}
 /* chips sit flat and light */
 body.light .chip,body.light .spot-chips span,body.light .tcc span{background:#FFFFFF;border:1px solid var(--line)}
+/* ── minimal dark (default): same cleanows language on a near-black base ── */
+body:not(.light){
+  --bg:#0C0F0D; --shell:#101411; --surface:#141A16; --surface2:#1B211C;
+  --line:#232B25; --t1:#EDF1ED; --t2:#A3AEA6; --t3:#77827A;
+  --act:#3CAE7B; --actInk:#5ECD9C;
+  --arte:#8B7FE8; --gold:#D9A94F; --rose:#E06A7E; --sky:#5FA7D6;
+}
+body:not(.light) .topbar{background:rgba(12,15,13,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+body:not(.light) .irail{background:var(--shell);border-right:1px solid var(--line)}
+body:not(.light) .irail .mark{background:#0B0E14;border:1px solid var(--line);border-radius:11px;padding:5px;box-sizing:content-box;width:34px;height:34px;display:flex;align-items:center;justify-content:center}
+body:not(.light) .irail .mark svg{width:30px;height:30px}
+body:not(.light) .newpost{background:var(--act);color:#0A1F16;border:none;border-radius:999px;box-shadow:none}
+body:not(.light) .newpost:hover{background:#49BD89}
+body:not(.light) .btn-primary{background:var(--act);color:#0A1F16;border:none;border-radius:999px;box-shadow:none}
+body:not(.light) .swb.go{background:var(--act);color:#0A1F16}
+body:not(.light) .sbtn.pri{background:var(--act);color:#0A1F16}
+body:not(.light) .dsq.on,body:not(.light) .subtab.on{background:var(--act);border-color:var(--act);color:#0A1F16}
+body:not(.light) .card{border-radius:16px}
+body:not(.light) .modal,body:not(.light) .slideover,body:not(.light) .palette{border-radius:20px}
+body:not(.light) .feed-label h3{font-size:10.5px;letter-spacing:1.7px;color:var(--t3)}
+body:not(.light) .orb{box-shadow:none}
+body:not(.light) .wspace,body:not(.light) .hpill,body:not(.light) .bell,body:not(.light) .srch{background:var(--surface);border:1px solid var(--line);box-shadow:none}
+body:not(.light) .hpill .hn{color:var(--act)}
 </style>
 </head>
-<body class="light">
+<body>
 <div class="app">
 
   <!-- ═══ ICON RAIL ═══ -->
