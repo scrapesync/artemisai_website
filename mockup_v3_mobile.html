@@ -842,8 +842,30 @@ body.light .arte-head, body.light .arte-head b, body.light .arte-head span{color
 body.light .nav-item{color:#8E99AC}
 body.light .xbadge{filter:brightness(.62) saturate(1.35)}
 </style>
+
+<style id="cleanows-skin">
+/* ══ Cleanows-inspired minimal skin (mobile): light default, one green accent ══ */
+body.light{
+  --bg:#F6F7F3; --surface:#FFFFFF; --surface2:#EFF2EB; --line:#E3E7DD;
+  --t1:#1B241E; --t2:#4A564D; --t3:#7C877D;
+  --act:#3CAE7B; --actInk:#2E8A61;
+  --arte:#6C63D8; --gold:#C08A2D; --rose:#C65065; --sky:#417FA8;
+}
+body.light .scroll,body.light #scr-wins .scroll,body.light #scr-discover .scroll,
+body.light #scr-alerts .scroll,body.light #scr-today .scroll,body.light #scr-analytics .scroll{background:none}
+body.light .screen{background:var(--bg)}
+body.light .btn-primary{background:var(--act);color:#fff;border:none;border-radius:999px}
+body.light .swb.go{background:var(--act);color:#fff}
+body.light .sbtn.pri{background:var(--act);color:#fff}
+body.light .dsq.on,body.light .dsub.on{background:var(--act);border-color:var(--act);color:#fff}
+body.light .card,body.light .tcard,body.light .sheet{box-shadow:0 1px 2px rgba(20,30,22,.04)}
+body.light .tcard{border-radius:22px}
+body.light .orb{box-shadow:none}
+body.light .nav-item.on{color:var(--act)}
+body.light .msrch{background:rgba(255,255,255,.85);backdrop-filter:blur(8px)}
+</style>
 </head>
-<body>
+<body class="light">
 <div class="phone"><div class="screen">
   <div class="island"></div>
   <div class="statusbar" onclick="toggleShade()" style="cursor:pointer"><span id="sbtime">18:22</span><span class="sb-icons" style="display:flex;align-items:center;gap:7px"><span id="shadeHint" style="opacity:.6">&#9662;</span>&#9679;&#9679;&#9679; &nbsp;&#9889;</span></div>

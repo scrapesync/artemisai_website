@@ -1012,8 +1012,42 @@ body.light .arte-head, body.light .arte-head b, body.light .arte-head span{color
 body.light .nav-item{color:#8E99AC}
 body.light .xbadge{filter:brightness(.62) saturate(1.35)}
 </style>
+
+<style id="cleanows-skin">
+/* ══ Cleanows-inspired minimal skin: light default, one green accent, no glow ══ */
+body.light{
+  --bg:#F6F7F3; --shell:#FDFDFB; --surface:#FFFFFF; --surface2:#EFF2EB; --line:#E3E7DD; --line2:#CFD6C9;
+  --t1:#1B241E; --t2:#4A564D; --t3:#7C877D;
+  --act:#3CAE7B; --actInk:#2E8A61;
+  --arte:#6C63D8; --gold:#C08A2D; --rose:#C65065; --sky:#417FA8;
+}
+/* calm the canvas: no aurora radials anywhere */
+body.light{background:var(--bg)}
+body.light #v-wins,body.light #v-discovery,body.light #v-alerts,body.light #v-inbox,
+body.light #v-analytics,body.light #v-pages{background:none}
+/* airy top bar */
+body.light .topbar{background:rgba(253,253,251,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+/* primary actions become friendly green pills */
+body.light .newpost{background:var(--act);color:#fff;border:none;border-radius:999px;box-shadow:none}
+body.light .newpost:hover{background:var(--actInk)}
+body.light .btn-primary{background:var(--act);color:#fff;border:none;border-radius:999px;box-shadow:none}
+body.light .btn-primary:hover{background:var(--actInk)}
+body.light .swb.go{background:var(--act);color:#fff}
+body.light .sbtn.pri{background:var(--act);color:#fff}
+body.light .dsq.on,body.light .subtab.on{background:var(--act);border-color:var(--act);color:#fff}
+/* soften cards and surfaces: hairlines, generous radius, no heavy shadows */
+body.light .card,body.light .tcard,body.light .kpi2,body.light .spot,body.light .modal,
+body.light .slideover,body.light .palette,body.light .pop{box-shadow:0 1px 2px rgba(20,30,22,.04)}
+body.light .tcard{border-radius:24px}
+/* keep numbers legible but quiet */
+body.light .hpill{background:var(--surface);border:1px solid var(--line)}
+body.light .hpill .hn{color:var(--act)}
+/* accents that used to glow now sit flat */
+body.light .orb{box-shadow:none}
+body.light .prev-tag{background:var(--surface2);color:var(--t2)}
+</style>
 </head>
-<body>
+<body class="light">
 <div class="app">
 
   <!-- ═══ ICON RAIL ═══ -->
