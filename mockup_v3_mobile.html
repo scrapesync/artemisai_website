@@ -897,6 +897,45 @@ body:not(.light) .card{border-radius:15px}
 body:not(.light) .orb{box-shadow:none}
 body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
 </style>
+<style>
+/* ── improved mobile Alerts ── */
+.alm-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:6px 0 14px}
+.alm-stat{border:1px solid var(--line);border-radius:12px;padding:10px 8px;background:var(--surface);position:relative;overflow:hidden;text-align:center}
+.alm-stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+.alm-stat .alm-n{font-size:20px;font-weight:800;line-height:1}
+.alm-stat .alm-l{font-size:9.5px;color:var(--t3);margin-top:3px;font-weight:600}
+.alm-crit::before{background:var(--rose)} .alm-crit .alm-n{color:var(--rose)}
+.alm-opp::before{background:var(--arte)} .alm-opp .alm-n{color:var(--arte)}
+.alm-calm::before{background:var(--act)} .alm-calm .alm-n{color:var(--act)}
+.alm-fchips{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto}
+.alm-fchip{flex:0 0 auto;padding:6px 13px;border:1px solid var(--line);border-radius:99px;background:transparent;color:var(--t3);font-size:11.5px;font-weight:600}
+.alm-fchip.on{background:var(--act);border-color:var(--act);color:#fff}
+.alm-group{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--t2);margin:16px 0 9px}
+.alm-gline{width:18px;height:3px;border-radius:99px}
+.alm-card{border:1px solid var(--line);border-radius:15px;padding:13px 14px;margin-bottom:10px;background:var(--surface);position:relative;overflow:hidden;text-align:left;width:100%;display:block}
+.alm-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ac)}
+.alm-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.alm-sev{font-size:9px;font-weight:800;letter-spacing:.05em;padding:3px 8px;border-radius:99px;border:1px solid}
+.alm-when{font-size:10.5px;color:var(--t3);font-weight:600}
+.alm-h2{font-size:15px;font-weight:800;line-height:1.3;margin-bottom:4px}
+.alm-page{font-size:11.5px;color:var(--t2);display:flex;align-items:center;gap:6px;margin-bottom:9px}
+.alm-pdot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.alm-why{font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:10px;padding:8px 10px;background:var(--surface2);border-radius:9px}
+.alm-why b{color:var(--t1)}
+.alm-draft{border:1px dashed var(--line);border-radius:11px;padding:9px 11px;margin-bottom:10px;background:rgba(139,123,255,.05)}
+.alm-draft-t{font-size:10.5px;font-weight:700;color:var(--arte);margin-bottom:4px}
+.alm-draft-b{font-size:12px;color:var(--t2);line-height:1.5;font-style:italic}
+.alm-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.alm-chip{font-size:10.5px;font-weight:600;color:var(--t2);background:var(--surface2);border:1px solid var(--line);border-radius:99px;padding:3px 9px}
+.alm-acts{display:flex;gap:8px;flex-wrap:wrap}
+.alm-btn{font-size:12px;font-weight:700;color:#fff;background:var(--act);border-radius:9px;padding:8px 14px}
+body.light .alm-btn{color:#fff}
+.alm-btn2{font-size:12px;font-weight:700;color:var(--act);background:transparent;border:1px solid var(--line);border-radius:9px;padding:8px 14px}
+.alm-auto{border:1px solid var(--line);border-radius:15px;padding:13px 14px;margin-top:12px;background:linear-gradient(120deg,rgba(0,196,160,.05),var(--surface) 60%)}
+.alm-auto-h{font-size:12.5px;font-weight:800;margin-bottom:9px;color:var(--act)}
+.alm-auto-row{font-size:11.5px;color:var(--t2);display:flex;align-items:center;gap:8px;padding:3px 0}
+.alm-check{color:var(--act);font-weight:800;flex-shrink:0}
+</style>
 </head>
 <body>
 <div class="phone"><div class="screen">
@@ -906,10 +945,10 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
 
     <div class="shade" id="shade">
       <div class="shade-head"><b>Notifications</b><span>Artemis &middot; today</span></div>
-      <button class="notif" onclick="closeShade();openChatM()"><span class="nico" style="background:rgba(0,196,160,.15)">&#128172;</span><span class="nbody"><b>Maya replied in your collab chat</b><span>"Tuesday works! What time?" &middot; 12m</span></span><span class="cunread" style="margin-left:auto">2</span></button>
-      <button class="notif" onclick="closeShade();nav('arte');arteExplain('crisis')"><span class="nico" style="background:rgba(255,92,116,.15)">&#9888;&#65039;</span><span class="nbody"><b>Comment cluster turning negative</b><span>Sana Shorts &middot; calm reply drafted &middot; 18m</span></span></button>
-      <button class="notif" onclick="closeShade();nav('wins')"><span class="nico" style="background:rgba(255,194,75,.15)">&#128200;</span><span class="nbody"><b>Toastie reel beat its forecast 2.9x</b><span>Sana's Kitchen &middot; worth resharing &middot; 2h</span></span></button>
-      <button class="notif" onclick="closeShade();nav('discover')"><span class="nico" style="background:rgba(139,123,255,.15)">&#129309;</span><span class="nbody"><b>New creator match at 41% overlap</b><span>@HomeCookedDaily &middot; intro drafted &middot; 4h</span></span></button>
+      <button class="notif" onclick="closeShade();openChatM()"><span class="nico" style="background:rgba(0,196,160,.15)">&#128172;</span><span class="nbody"><b>Council Estate Life replied in your collab chat</b><span>"Tuesday works! What time?" &middot; 12m</span></span><span class="cunread" style="margin-left:auto">2</span></button>
+      <button class="notif" onclick="closeShade();nav('arte');arteExplain('crisis')"><span class="nico" style="background:rgba(255,92,116,.15)">&#9888;&#65039;</span><span class="nbody"><b>Comment cluster turning negative</b><span>UK JAIL News &middot; calm reply drafted &middot; 18m</span></span></button>
+      <button class="notif" onclick="closeShade();nav('wins')"><span class="nico" style="background:rgba(255,194,75,.15)">&#128200;</span><span class="nbody"><b>Toastie reel beat its forecast 2.9x</b><span>Drinking Memes &middot; worth resharing &middot; 2h</span></span></button>
+      <button class="notif" onclick="closeShade();nav('discover')"><span class="nico" style="background:rgba(139,123,255,.15)">&#129309;</span><span class="nbody"><b>New creator match at 41% overlap</b><span>@Council Estate Life &middot; intro drafted &middot; 4h</span></span></button>
       <button class="notif" onclick="closeShade();nav('arte');arteExplain('briefing')"><span class="nico" style="background:rgba(0,196,160,.15)">&#9728;&#65039;</span><span class="nbody"><b>Morning briefing ready</b><span>All pages &middot; 2-min read &middot; 7:02am</span></span></button>
       <div class="shade-foot"><button onclick="closeShade();nav('inbox')">Open inbox</button><button onclick="clearShade()">Clear all</button><button onclick="closeShade()">Close</button></div>
     </div>
@@ -925,7 +964,7 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
       <button class="pav-s" onclick="show('settings')" aria-label="Settings">S</button>
     </div>
     <div class="scroll pad-head">
-      <div class="greet">Good evening, Sana</div>
+      <div class="greet">Good evening, Lewis</div>
       <h2 class="vh">Today</h2>
       <div class="hero">
         <div class="hero-eyebrow"><span class="pulse"></span>Your next move</div>
@@ -939,13 +978,13 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
       <div class="moves">
         <div class="moves-h"><h3>Moves today</h3><span id="movecount">0 of 3 done</span></div>
         <div class="move" id="mv1"><span class="mtick">&#10003;</span><span class="mtxt"><span class="mt1">Schedule the pasta reel, 6:40pm</span><span class="mt2">2.4x predicted &middot; one tap</span></span><button class="btn btn-primary" onclick="doMove('mv1','Scheduled for 6:40pm.')">Go</button></div>
-        <div class="move" id="mv2"><span class="mtick">&#10003;</span><span class="mtxt"><span class="mt1">Send the drafted Shorts reply</span><span class="mt2">in your voice</span></span><button class="btn btn-ghost" onclick="doMove('mv2','Reply sent on the thread.')">Send</button></div>
+        <div class="move" id="mv2"><span class="mtick">&#10003;</span><span class="mtxt"><span class="mt1">Send the drafted UK JAIL News reply</span><span class="mt2">in your voice</span></span><button class="btn btn-ghost" onclick="doMove('mv2','Reply sent on the thread.')">Send</button></div>
         <div class="move" id="mv3"><span class="mtick">&#10003;</span><span class="mtxt"><span class="mt1">Approve the Friday draft</span><span class="mt2">score 61 &rarr; 83</span></span><button class="btn btn-ghost" onclick="doMove('mv3','Friday draft approved.')">OK</button></div>
       </div>
 
       <div class="sched-row"><span>&#128197;</span><span style="flex:1">Scheduled: <b>pasta reel</b> &middot; 6:40pm</span><span class="mono">2.4x</span><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="nav('planner')">Studio &rarr;</button></div>
 
-      <div class="milestone" id="milestone"><span style="font-size:15px">&#127942;</span><div class="mtx"><b>Quick Bites crossed 64k</b> &middot; fastest grower</div><button class="btn btn-primary" onclick="toast('Shared. Take the victory lap.')">Share</button><button class="mx" onclick="document.getElementById('milestone').style.display='none'" aria-label="Dismiss">&times;</button></div>
+      <div class="milestone" id="milestone"><span style="font-size:15px">&#127942;</span><div class="mtx"><b>Kelpie Daily crossed 64k</b> &middot; fastest grower</div><button class="btn btn-primary" onclick="toast('Shared. Take the victory lap.')">Share</button><button class="mx" onclick="document.getElementById('milestone').style.display='none'" aria-label="Dismiss">&times;</button></div>
 
       <button class="brief-card" onclick="nav('arte');arteExplain('briefing')">
         <span class="bico">&#9728;&#65039;</span>
@@ -958,21 +997,21 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
         <button class="story" onclick="openStory(1)"><span class="sring" style="background:conic-gradient(#57B5F0,#3D7BFF,#57B5F0)"><span class="se">&#128200;</span></span><span class="slabel">Evenings</span></button>
         <button class="story" onclick="openStory(2)"><span class="sring" style="background:conic-gradient(#8B7BFF,#B49BFF,#8B7BFF)"><span class="se">&#129309;</span></span><span class="slabel">Match 41%</span></button>
         <button class="story" onclick="openStory(3)"><span class="sring" style="background:conic-gradient(#FF5C74,#FF8CA0,#FF5C74)"><span class="se">&#128737;&#65039;</span></span><span class="slabel">Contained</span></button>
-        <button class="story" onclick="openStory(4)"><span class="sring" style="background:conic-gradient(#00C4A0,#4DE3C6,#00C4A0)"><span class="se">&#127916;</span></span><span class="slabel">Shorts +22%</span></button>
+        <button class="story" onclick="openStory(4)"><span class="sring" style="background:conic-gradient(#00C4A0,#4DE3C6,#00C4A0)"><span class="se">&#127916;</span></span><span class="slabel">UK JAIL News +22%</span></button>
       </div>
 
       <div class="feed-label"><h3>While you were away</h3><span class="newchip">&#10022; 3 new</span></div>
 
       <button class="card crisis-card" data-page="ss" onclick="nav('arte');arteExplain('crisis')">
-        <div class="card-top"><span class="ctag crisis">Needs a reply</span><span class="card-page">Sana Shorts</span><span class="card-time">18m</span></div>
+        <div class="card-top"><span class="ctag crisis">Needs a reply</span><span class="card-page">UK JAIL News</span><span class="card-time">18m</span></div>
         <div class="card-line">A comment cluster is turning <b>negative</b></div>
         <p class="card-why">14 negative comments in 30 minutes. Art-E drafted a calm reply in your voice.</p>
         <span class="card-act" style="color:var(--rose)">See the drafted reply &rarr;</span>
       </button>
 
       <button class="card" data-page="sk" onclick="fillMD('homecooked');show('disco')">
-        <div class="card-top"><span class="ctag opp">Opportunity</span><span class="card-page">Sana's Kitchen</span><span class="card-time">2h</span></div>
-        <div class="card-line">Creator match: <b>@HomeCookedDaily</b></div>
+        <div class="card-top"><span class="ctag opp">Opportunity</span><span class="card-page">Drinking Memes</span><span class="card-time">2h</span></div>
+        <div class="card-line">Creator match: <b>@Council Estate Life</b></div>
         <p class="card-why">41% audience overlap, they post when you are quiet. One collab is worth ~+12k reach.</p>
         <span class="card-act violet">See the match &rarr;</span>
       </button>
@@ -983,13 +1022,13 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
         <span class="card-act violet">Art-E explains &rarr;</span>
       </button>
       <button class="card" data-page="qb" onclick="show('compose')">
-        <div class="card-top"><span class="ctag pred">Prediction</span><span class="card-page">Quick Bites UK</span><span class="card-time">today</span></div>
+        <div class="card-top"><span class="ctag pred">Prediction</span><span class="card-page">Kelpie Daily</span><span class="card-time">today</span></div>
         <div class="card-line">Friday looks strong for a <b>15-sec recipe short</b></div>
         <p class="card-why">Short-form food is up 22% across your network this week. Draft it now and ride it.</p>
         <span class="card-act">Draft with a live score &rarr;</span>
       </button>
       <button class="card win-card" data-page="sk" onclick="nav('wins')">
-        <div class="card-top"><span class="ctag win">Win</span><span class="card-page">Sana's Kitchen</span><span class="card-time">1d</span></div>
+        <div class="card-top"><span class="ctag win">Win</span><span class="card-page">Drinking Memes</span><span class="card-time">1d</span></div>
         <div class="card-line">Tuesday's reel beat its prediction by <b>31%</b></div>
         <p class="card-why">You followed the timing advice. 4 of your last 5 followed recommendations beat baseline.</p>
         <span class="card-act goldc">See your wins &rarr;</span>
@@ -1008,7 +1047,7 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
       <div><div class="arte-name">Art-E</div><div class="arte-status">grounded on your data</div></div>
     </div>
     <div class="scroll pad-head" id="mthread" style="padding-bottom:150px">
-      <div class="msg m-arte"><p>Evening, Sana. One thing needs you today: the pasta reel timing. Ask me anything else.</p></div>
+      <div class="msg m-arte"><p>Evening, Lewis. One thing needs you today: the pasta reel timing. Ask me anything else.</p></div>
       <div class="chips">
         <button class="chip" onclick="arteExplain('timing')">Why did my posts dip?</button>
         <button class="chip" onclick="arteExplain('friday')">What should I post Friday?</button>
@@ -1067,7 +1106,7 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
       </div>
       <div class="rule"><div style="flex:1"><div class="rl1">Weekly &middot; 30 Jun</div><div class="rl2">Reach +38%, two storms calmed</div></div><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Report on its way to you.')">PDF</button></div>
       <div class="rule"><div style="flex:1"><div class="rl1">Monthly &middot; June</div><div class="rl2">Full month across 5 pages</div></div><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Report on its way to you.')">PDF</button></div>
-      <div class="rule"><div style="flex:1"><div class="rl1">Brand risk &middot; 12 Jun</div><div class="rl2">The Shorts cluster, cause and fix</div></div><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Report on its way to you.')">PDF</button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Brand risk &middot; 12 Jun</div><div class="rl2">The UK JAIL News cluster, cause and fix</div></div><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Report on its way to you.')">PDF</button></div>
       <div class="rate">
         <p><b>Was the 6:40pm advice useful?</b><br>Every rating sharpens the next one.</p>
         <div class="rate-btns"><button class="rate-btn" onclick="rate(this)">&#128077; Useful</button><button class="rate-btn" onclick="rate(this)">&#128078; Not really</button></div>
@@ -1077,36 +1116,73 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
   </section>
 
   <!-- ═══ ALERTS ═══ -->
-  <section class="scr" id="scr-alerts">
+<section class="scr" id="scr-alerts">
     <div class="scroll" style="padding-top:70px">
       <button class="back" onclick="nav('today')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>Today</button>
-      <h2 class="vh" style="margin-top:10px">Needs you</h2>
-      <button class="alert-item" onclick="nav('arte');arteExplain('crisis')">
-        <div class="ai-top"><span class="ai-dot" style="background:var(--rose)"></span><span class="ai-title">Comment cluster turning negative</span></div>
-        <div class="ai-body">Sana Shorts, 14 in 30 minutes. <b>Calm reply drafted.</b></div>
-        <span class="ai-cta">Open in Art-E &rarr;</span>
-      </button>
-      <button class="alert-item" onclick="nav('arte');arteExplain('timing')">
-        <div class="ai-top"><span class="ai-dot" style="background:var(--rose)"></span><span class="ai-title">Your last 3 posts underperformed</span></div>
-        <div class="ai-body">Your audience moved to evenings. <b>One change recommended.</b></div>
-        <span class="ai-cta">Open in Art-E &rarr;</span>
-      </button>
-      <button class="alert-item" onclick="nav('arte');arteExplain('collab')">
-        <div class="ai-top"><span class="ai-dot" style="background:var(--arte)"></span><span class="ai-title">Strong creator match found</span></div>
-        <div class="ai-body">@HomeCookedDaily overlaps 41% of your audience. <b>Intro drafted.</b></div>
-        <span class="ai-cta">Open in Art-E &rarr;</span>
-      </button>
-      <button class="alert-item" onclick="nav('wins')">
-        <div class="ai-top"><span class="ai-dot" style="background:var(--gold)"></span><span class="ai-title">Yesterday's reel beat its prediction</span></div>
-        <div class="ai-body">2.9&times; usual reach against a 2.4&times; forecast.</div>
-        <span class="ai-cta">See the win &rarr;</span>
-      </button>
-      <div class="feed-label" style="margin-top:18px"><h3>Alert rules</h3><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Rule builder opens here in the live app.')">+ Rule</button></div>
-      <div class="rule"><div style="flex:1"><div class="rl1">Comment storm on any page</div><div class="rl2">Within minutes, reply attached</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
-      <div class="rule"><div style="flex:1"><div class="rl1">Post beats 2x prediction</div><div class="rl2">Ride it while it moves</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
-      <div class="rule"><div style="flex:1"><div class="rl1">Match above 25% overlap</div><div class="rl2">Real overlap, never hashtags</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+      <h2 class="vh" style="margin-top:10px">Alerts</h2>
+
+      <div class="alm-strip">
+        <div class="alm-stat alm-crit"><div class="alm-n">2</div><div class="alm-l">Needs you</div></div>
+        <div class="alm-stat alm-opp"><div class="alm-n">1</div><div class="alm-l">Opportunity</div></div>
+        <div class="alm-stat alm-calm"><div class="alm-n">6</div><div class="alm-l">Auto-handled</div></div>
+      </div>
+
+      <div class="alm-fchips">
+        <button class="alm-fchip on">All</button>
+        <button class="alm-fchip">Needs you</button>
+        <button class="alm-fchip">Opportunities</button>
+      </div>
+
+      <div class="alm-group"><span class="alm-gline" style="background:var(--rose)"></span>Needs you now</div>
+
+      <div class="alm-card" style="--ac:var(--rose)" onclick="nav('arte');arteExplain('crisis')">
+        <div class="alm-head"><span class="alm-sev" style="color:var(--rose);background:rgba(255,92,116,.12);border-color:rgba(255,92,116,.3)">CRISIS</span><span class="alm-when">2 min ago</span></div>
+        <div class="alm-h2">Comment cluster turning negative</div>
+        <div class="alm-page"><span class="alm-pdot" style="background:var(--rose)"></span>UK JAIL News · 14 in 30 min · rising</div>
+        <div class="alm-draft"><div class="alm-draft-t">✦ Calm reply drafted</div><div class="alm-draft-b">"We hear you, and we're looking into this now. Thanks for flagging it."</div></div>
+        <div class="alm-acts"><span class="alm-btn">Review &amp; send</span><span class="alm-btn2">See comments</span></div>
+      </div>
+
+      <div class="alm-card" style="--ac:var(--rose)" onclick="nav('arte');arteExplain('timing')">
+        <div class="alm-head"><span class="alm-sev" style="color:var(--rose);background:rgba(255,92,116,.12);border-color:rgba(255,92,116,.3)">ACTION</span><span class="alm-when">1 hr ago</span></div>
+        <div class="alm-h2">Your last 3 posts underperformed</div>
+        <div class="alm-page"><span class="alm-pdot" style="background:var(--rose)"></span>Drinking Memes · reach 38% below baseline</div>
+        <div class="alm-why"><b>Cause:</b> audience moved to evenings, these went at 1pm. One change fixes it.</div>
+        <div class="alm-acts"><span class="alm-btn">See the fix</span></div>
+      </div>
+
+      <div class="alm-group"><span class="alm-gline" style="background:var(--arte)"></span>Opportunity</div>
+
+      <div class="alm-card" style="--ac:var(--arte)" onclick="nav('arte');arteExplain('collab')">
+        <div class="alm-head"><span class="alm-sev" style="color:var(--arte);background:rgba(139,123,255,.12);border-color:rgba(139,123,255,.3)">MATCH</span><span class="alm-when">Today</span></div>
+        <div class="alm-h2">Strong creator match found</div>
+        <div class="alm-page"><span class="alm-pdot" style="background:var(--arte)"></span>@Council Estate Life · 41% overlap</div>
+        <div class="alm-chips"><span class="alm-chip">41% overlap</span><span class="alm-chip">both peak Tue 6–8pm</span><span class="alm-chip">intro drafted</span></div>
+        <div class="alm-acts"><span class="alm-btn">Open the intro</span></div>
+      </div>
+
+      <div class="alm-group"><span class="alm-gline" style="background:var(--gold)"></span>For your briefing</div>
+
+      <div class="alm-card" style="--ac:var(--gold)" onclick="nav('wins')">
+        <div class="alm-head"><span class="alm-sev" style="color:var(--gold);background:rgba(255,194,75,.12);border-color:rgba(255,194,75,.3)">REPORT</span><span class="alm-when">Ready</span></div>
+        <div class="alm-h2">Weekly report ready</div>
+        <div class="alm-page"><span class="alm-pdot" style="background:var(--gold)"></span>Reach +38%, two storms calmed · 2-min read</div>
+        <div class="alm-acts"><span class="alm-btn2">See it in Wins</span></div>
+      </div>
+
+      <div class="alm-auto">
+        <div class="alm-auto-h">✦ Art-E handled 6 things today</div>
+        <div class="alm-auto-row"><span class="alm-check">✓</span>Replied to 4 routine comments in your voice</div>
+        <div class="alm-auto-row"><span class="alm-check">✓</span>Rescheduled 1 post to an evening slot</div>
+        <div class="alm-auto-row"><span class="alm-check">✓</span>Muted a spam wave on Kelpie Daily</div>
+      </div>
+
+      <div class="feed-label" style="margin-top:20px"><h3>Alert rules</h3><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Rule builder opens here in the live app.')">+ Rule</button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Comment storm on any page</div><div class="rl2">Within minutes, reply attached · interrupts</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Post beats 2x prediction</div><div class="rl2">Ride it while it moves · interrupts</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Match above 25% overlap</div><div class="rl2">Real overlap, never hashtags · briefing</div></div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
       <button class="btn btn-ghost" style="width:100%;margin-top:4px" onclick="markAllReadM()">Mark all read</button>
-      <p class="quiet">Alerts only interrupt when action is needed. Assignees, priority and bulk triage ship fast-follow.<br><b>Tune this under Settings.</b></p>
+      <p class="quiet">Rules above the line interrupt you. Everything else waits for the morning briefing. <b>Tune under Settings.</b></p>
     </div>
   </section>
 
@@ -1115,8 +1191,8 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
     <div class="scroll" style="padding-top:70px">
       <button class="back" onclick="nav('today')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>Today</button>
       <h2 class="vh" style="margin-top:10px">Inbox</h2>
-      <button class="card" style="display:flex;align-items:center;gap:11px" onclick="openChatM()"><span class="cav" style="background:rgba(139,123,255,.14);color:var(--arte)">HC</span><span class="cmeta"><span class="cname" style="display:block">Collab: @HomeCookedDaily</span><span class="clast" style="display:block">Maya: Tuesday works! What time?</span></span><span class="cunread">2</span></button>
-      <button class="card" style="display:flex;align-items:center;gap:11px" onclick="toast('This thread opens the same way. One chat is wired in this mockup.')"><span class="cav" style="background:rgba(87,181,240,.14);color:var(--sky)">QB</span><span class="cmeta"><span class="cname" style="display:block">Quick Bites editors</span><span class="clast" style="display:block">You: Friday short drafted, scoring 78.</span></span></button>
+      <button class="card" style="display:flex;align-items:center;gap:11px" onclick="openChatM()"><span class="cav" style="background:rgba(139,123,255,.14);color:var(--arte)">HC</span><span class="cmeta"><span class="cname" style="display:block">Collab: @Council Estate Life</span><span class="clast" style="display:block">Council Estate Life: Tuesday works! What time?</span></span><span class="cunread">2</span></button>
+      <button class="card" style="display:flex;align-items:center;gap:11px" onclick="toast('This thread opens the same way. One chat is wired in this mockup.')"><span class="cav" style="background:rgba(87,181,240,.14);color:var(--sky)">QB</span><span class="cmeta"><span class="cname" style="display:block">Kelpie Daily editors</span><span class="clast" style="display:block">You: Friday short drafted, scoring 78.</span></span></button>
       <p class="quiet">Chats live here, alerts under the bell.<br><b>Art-E reads a thread only when you invite it.</b></p>
     </div>
   </section>
@@ -1194,20 +1270,20 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
       <div class="dgroup" id="dg-inter">
       <div class="feed-label"><h3>Between your pages</h3></div>
       <button class="card" onclick="show('compose')">
-          <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#00C4A0" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#00C4A0" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#8B7BFF" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#8B7BFF" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:9.5px;fill:var(--t1)">46%</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#00C4A0"></span> Kitchen</span><span><span class="wd" style="background:#8B7BFF"></span> Munchies</span></span><span class="card-time" style="margin-left:auto">shared</span></div>
+          <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#00C4A0" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#00C4A0" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#8B7BFF" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#8B7BFF" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:9.5px;fill:var(--t1)">46%</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#00C4A0"></span> Drinking Memes</span><span><span class="wd" style="background:#8B7BFF"></span> Ketflix Daily</span></span><span class="card-time" style="margin-left:auto">shared</span></div>
           <div class="card-line">Night crowd has not seen the <b>pasta reel</b></div>
           <p class="card-why">46% shared audience, reels rarely cross. A 10pm repost is free reach.</p>
           <span class="card-act">Draft the repost &rarr;</span>
         </button>
         <button class="card" onclick="show('compose')">
-          <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#57B5F0" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#57B5F0" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#FFC24B" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#FFC24B" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:9.5px;fill:var(--t1)">1.4x</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#57B5F0"></span> Quick Bites</span><span><span class="wd" style="background:#FFC24B"></span> Feasts</span></span><span class="card-time" style="margin-left:auto">Sunday</span></div>
+          <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#57B5F0" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#57B5F0" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#FFC24B" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#FFC24B" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:9.5px;fill:var(--t1)">1.4x</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#57B5F0"></span> Kelpie Daily</span><span><span class="wd" style="background:#FFC24B"></span> Feasts</span></span><span class="card-time" style="margin-left:auto">Sunday</span></div>
           <div class="card-line">Your short format would lift <b>Feasts Sundays</b></div>
           <p class="card-why">Sunday crowd engages but gets long posts. One short is the experiment.</p>
           <span class="card-act">Draft it &rarr;</span>
         </button>
         <button class="card" onclick="nav('arte');arteExplain('collab')">
-          <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#FF5C74" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#FF5C74" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#00C4A0" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#00C4A0" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:9.5px;fill:var(--t1)">12%</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#FF5C74"></span> Shorts</span><span><span class="wd" style="background:#00C4A0"></span> Kitchen</span></span><span class="card-time" style="margin-left:auto">the gap</span></div>
-          <div class="card-line">Shorts viewers <b>rarely find</b> full recipes</div>
+          <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#FF5C74" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#FF5C74" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#00C4A0" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#00C4A0" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:9.5px;fill:var(--t1)">12%</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#FF5C74"></span> UK JAIL News</span><span><span class="wd" style="background:#00C4A0"></span> Drinking Memes</span></span><span class="card-time" style="margin-left:auto">the gap</span></div>
+          <div class="card-line">UK JAIL News viewers <b>rarely find</b> full recipes</div>
           <p class="card-why">A pinned comment on every short is the cheapest bridge you are not using.</p>
           <span class="card-act violet">Ask Art-E &rarr;</span>
         </button>
@@ -1225,7 +1301,7 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
         </button>
         <button class="card pstripe fbig" style="position:relative" onclick="toast('Mirroring plan unlocks with Instagram connect.')"><span class="prev-tag">&#128274; Preview</span>
           <div class="card-top"><span class="xbadge fb">f FB</span><span style="color:var(--t3);font-size:10px">&rarr;</span><span class="xbadge ig">&#9679; IG</span><span class="card-time" style="margin-left:auto">+18k est.</span></div>
-          <div class="card-line">Mirror top reels to <b>@sanaskitchen on IG</b></div>
+          <div class="card-line">Mirror top reels to <b>@drinkingmemes on IG</b></div>
           <p class="card-why">Your three best reels fit IG natively. Art-E reposts with tuned captions.</p>
           <span class="card-act">See the plan &rarr;</span>
         </button>
@@ -1255,7 +1331,7 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
     <div>
       <svg width="40" height="40" viewBox="0 0 36 36" fill="none" style="margin:0 auto;display:block"><rect x="2" y="2" width="32" height="32" rx="9" stroke="#00C4A0" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="#00C4A0" stroke-width="2" stroke-linejoin="round"/><circle cx="18" cy="20" r="3" fill="#00C4A0"/></svg>
       <h2>Signed out</h2>
-      <p>See you at 6:40, Sana. Art-E keeps watch and the briefing will be ready when you are.</p>
+      <p>See you at 6:40, Lewis. Art-E keeps watch and the briefing will be ready when you are.</p>
       <button class="btn btn-primary" style="width:70%" onclick="hideSignout()">Sign back in</button>
     </div>
   </div>
@@ -1279,7 +1355,7 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
     <div class="mini-label">Quick results</div>
     <div id="msres">
       <button class="srow" data-t="pasta reel post video" onclick="hideSheets();nav('analytics')"><span class="si">&#127837;</span><span><b>Pasta reel</b> &middot; 2.4x your average</span><span class="sk">post</span></button>
-      <button class="srow" data-t="homecookeddaily match discovery collab" onclick="hideSheets();nav('discover')"><span class="si">&#129309;</span><span><b>@HomeCookedDaily</b> &middot; 41% overlap</span><span class="sk">match</span></button>
+      <button class="srow" data-t="homecookeddaily match discovery collab" onclick="hideSheets();nav('discover')"><span class="si">&#129309;</span><span><b>@Council Estate Life</b> &middot; 41% overlap</span><span class="sk">match</span></button>
       <button class="srow" data-t="sunday window timing insight best time" onclick="hideSheets();nav('analytics')"><span class="si">&#128161;</span><span><b>Sunday window</b> &middot; untouched 9-11am</span><span class="sk">insight</span></button>
       <button class="srow" data-t="toxic comment crisis alert" onclick="hideSheets();nav('alerts')"><span class="si">&#9888;</span><span><b>Comment spike</b> &middot; pasta reel thread</span><span class="sk">alert</span></button>
     </div>
@@ -1320,7 +1396,7 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
   <div class="sheet" id="sh-disco">
     <div class="grab"></div>
     <span class="ctag opp" style="display:inline-block;margin-bottom:11px">Opportunity &middot; found by the network</span>
-    <h4 id="md-name">@HomeCookedDaily</h4>
+    <h4 id="md-name">@Council Estate Life</h4>
     <p class="s-sub" id="md-sub">Family cooking, 96k followers. Found through audience overlap, not hashtags. You have never interacted, your audiences already do.</p>
     <div class="dcard"><h5>Audience overlap <b id="md-ovl">41% &middot; 8,200 people</b></h5>
       <svg width="100%" height="76" viewBox="0 0 340 76"><circle cx="120" cy="38" r="30" fill="rgba(0,196,160,.16)" stroke="#00C4A0" stroke-width="1.5"/><circle cx="172" cy="38" r="30" fill="rgba(139,123,255,.16)" stroke="#8B7BFF" stroke-width="1.5"/><text x="88" y="42" font-size="10" fill="#F2F4F8" font-weight="700">You</text><text x="186" y="42" font-size="10" fill="#F2F4F8" font-weight="700">Them</text><text x="238" y="34" font-size="9.5" fill="#9AA3B2">8,200 shared</text><text x="238" y="50" font-size="9" fill="#5E6875" font-family="monospace">de-identified</text></svg></div>
@@ -1354,7 +1430,7 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
     <div class="set-row"><div><div class="sl">Studio</div><div class="sd2">Your drafts, best times, and the schedule.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="hideSheets();setTimeout(()=>nav('planner'),150)">Open</button></div>
     <div class="set-row"><div><div class="sl">Analytics</div><div class="sd2">Overview plus What takes off: drivers, flagged comments, every post.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="hideSheets();setTimeout(()=>show('data'),150)">Open</button></div>
     <div class="set-row"><div><div class="sl">Everything we are building</div><div class="sd2">218 features staged: 69 MVP, 88 fast, 57 later.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="show('plan');planRenderM()">Open</button></div>
-    <div class="set-row"><div><div class="sl">Facebook connection</div><div class="sd2">Connected as Sana · 5 pages.</div></div><button class="chip" onclick="toast('Re-auth opens here. 30 seconds.')">Reconnect</button></div>
+    <div class="set-row"><div><div class="sl">Facebook connection</div><div class="sd2">Connected as Lewis · 5 pages.</div></div><button class="chip" onclick="toast('Re-auth opens here. 30 seconds.')">Reconnect</button></div>
     <div class="set-row"><div><div class="sl">Extra sign-in check (2FA)</div><div class="sd2">App check at sign-in.</div></div><button class="tog" onclick="this.classList.toggle('on');toast(this.classList.contains('on')?'Two-factor on.':'Two-factor off.')"></button></div>
     <div class="set-row"><div><div class="sl">Where you are signed in</div><div class="sd2">2 devices.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="toast('Session list opens here.')">View</button></div>
     <div class="set-row"><div><div class="sl">Timezone</div><div class="sd2">Europe/London.</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="toast('Timezone picker opens here.')">Change</button></div>
@@ -1364,9 +1440,9 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
     <div class="set-row"><div><div class="sl">Pro plan &middot; &pound;99/mo</div><div class="sd2">5 of 10 pages &middot; renews 1 Aug &middot; invoices by email</div></div><button class="btn btn-ghost" style="padding:8px 13px;font-size:11.5px" onclick="toast('Plan &amp; invoices open here in the live app.')">Manage</button></div>
     <h4 style="margin-top:16px;font-size:15px">Your pages</h4>
     <div style="margin-top:10px">
-      <div class="page-card"><div class="pav" style="background:rgba(0,196,160,.12);color:var(--act)">SK</div><div class="pinfo"><div class="pname">Sana's Kitchen</div><div class="pstat"><span class="hdot" style="background:var(--act)"></span>Healthy &middot; 128k</div></div></div>
-      <div class="page-card"><div class="pav" style="background:rgba(87,181,240,.12);color:var(--sky)">QB</div><div class="pinfo"><div class="pname">Quick Bites UK</div><div class="pstat"><span class="hdot" style="background:var(--act)"></span>Healthy &middot; 64k</div></div></div>
-      <div class="page-card"><div class="pav" style="background:rgba(255,92,116,.12);color:var(--rose)">SS</div><div class="pinfo"><div class="pname">Sana Shorts</div><div class="pstat"><span class="hdot" style="background:var(--rose)"></span>Needs you &middot; Art-E has a fix</div></div></div>
+      <div class="page-card"><div class="pav" style="background:rgba(0,196,160,.12);color:var(--act)">SK</div><div class="pinfo"><div class="pname">Drinking Memes</div><div class="pstat"><span class="hdot" style="background:var(--act)"></span>Healthy &middot; 128k</div></div></div>
+      <div class="page-card"><div class="pav" style="background:rgba(87,181,240,.12);color:var(--sky)">QB</div><div class="pinfo"><div class="pname">Kelpie Daily</div><div class="pstat"><span class="hdot" style="background:var(--act)"></span>Healthy &middot; 64k</div></div></div>
+      <div class="page-card"><div class="pav" style="background:rgba(255,92,116,.12);color:var(--rose)">SS</div><div class="pinfo"><div class="pname">UK JAIL News</div><div class="pstat"><span class="hdot" style="background:var(--rose)"></span>Needs you &middot; Art-E has a fix</div></div></div>
     </div>
     <button class="btn btn-ghost" style="width:100%;margin-top:6px" onclick="hideSheets();toast('Facebook connect flow opens here in the live app.')">+ Connect another page</button>
     <button class="btn btn-ghost" style="width:100%;margin-top:9px" onclick="hideSheets();showSignout()">Sign out</button>
@@ -1434,11 +1510,11 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
         <div class="chart-note">Whoever survives second three stays to the end. Hooks decide everything.</div>
       </div>
       <div class="dcard"><h5>Engagement by page <b>rate</b></h5>
-        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:5px"></span>Munchies</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">7.4%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:74%;border-radius:99px;background:#8B7BFF"></i></div></div>
-        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:5px"></span>Kitchen</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">6.8%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:68%;border-radius:99px;background:#00C4A0"></i></div></div>
-        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:5px"></span>Quick Bites</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">5.9%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:59%;border-radius:99px;background:#57B5F0"></i></div></div>
+        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:5px"></span>Ketflix Daily</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">7.4%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:74%;border-radius:99px;background:#8B7BFF"></i></div></div>
+        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:5px"></span>Drinking Memes</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">6.8%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:68%;border-radius:99px;background:#00C4A0"></i></div></div>
+        <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:5px"></span>Kelpie Daily</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">5.9%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:59%;border-radius:99px;background:#57B5F0"></i></div></div>
         <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FFC24B;display:inline-block;margin-right:5px"></span>Feasts</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">3.1%</b></div><div style="height:10px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:31%;border-radius:99px;background:#FFC24B"></i></div></div>
-        <div class="chart-note">Munchies has the smallest crowd and the loudest one.</div>
+        <div class="chart-note">Ketflix Daily has the smallest crowd and the loudest one.</div>
       </div>
       <div class="mini-label" style="margin-top:4px">Cascade &amp; reach</div>
       <div class="dcard"><h5>Engagement funnel <b>pasta reel</b></h5>
@@ -1477,12 +1553,12 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
           <circle cx="148" cy="106" r="25" fill="rgba(87,181,240,.16)" stroke="#57B5F0" stroke-width="1.3"/><text x="148" y="105" text-anchor="middle" style="font-size:9px;fill:var(--t1);font-weight:700">Students</text><text x="148" y="115" text-anchor="middle" class="axis">21%</text>
           <circle cx="280" cy="104" r="22" fill="rgba(255,194,75,.16)" stroke="#FFC24B" stroke-width="1.3"/><text x="280" y="103" text-anchor="middle" style="font-size:9px;fill:var(--t1);font-weight:700">Weekend</text><text x="280" y="113" text-anchor="middle" class="axis">15%</text>
         </svg>
-        <div class="chart-note">four tribes, de-identified. Night snackers are why Munchies exists.</div>
+        <div class="chart-note">four tribes, de-identified. Night snackers are why Ketflix Daily exists.</div>
       </div>
       <div class="mini-label" style="margin-top:4px">AI activity</div>
       <div class="dcard"><h5>AI activity <b>overnight</b></h5>
         <div class="logrow"><span class="lt">07:02</span><span>Briefing compiled, 5 pages</span><span class="ls" style="background:rgba(0,196,160,.12);color:var(--act)">done</span></div>
-        <div class="logrow"><span class="lt">03:41</span><span>Shorts cluster flagged, reply drafted</span><span class="ls" style="background:rgba(255,194,75,.14);color:var(--gold)">waiting</span></div>
+        <div class="logrow"><span class="lt">03:41</span><span>UK JAIL News cluster flagged, reply drafted</span><span class="ls" style="background:rgba(255,194,75,.14);color:var(--gold)">waiting</span></div>
         <div class="logrow"><span class="lt">01:12</span><span>1,240 comments read, 2 flagged</span><span class="ls" style="background:rgba(0,196,160,.12);color:var(--act)">done</span></div>
         <div class="chart-note">every action logged and reversible. Nothing posts without you.</div>
       </div>
@@ -1515,12 +1591,12 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
     </div>
     <div class="mini-label" style="margin-top:4px">Audience</div>
     <div class="dcard"><h5>Your five pages <b>reach</b></h5>
-      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:5px"></span>Kitchen</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">128k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:96%;border-radius:99px;background:#00C4A0"></i></div></div>
-      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:5px"></span>Quick Bites</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">64k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:48%;border-radius:99px;background:#57B5F0"></i></div></div>
-      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:5px"></span>Munchies</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">41k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:31%;border-radius:99px;background:#8B7BFF"></i></div></div>
+      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#00C4A0;display:inline-block;margin-right:5px"></span>Drinking Memes</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">128k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:96%;border-radius:99px;background:#00C4A0"></i></div></div>
+      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#57B5F0;display:inline-block;margin-right:5px"></span>Kelpie Daily</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">64k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:48%;border-radius:99px;background:#57B5F0"></i></div></div>
+      <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#8B7BFF;display:inline-block;margin-right:5px"></span>Ketflix Daily</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">41k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:31%;border-radius:99px;background:#8B7BFF"></i></div></div>
       <div class="hbar" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FFC24B;display:inline-block;margin-right:5px"></span>Feasts</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">38k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:29%;border-radius:99px;background:#FFC24B"></i></div></div>
-      <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FF5C74;display:inline-block;margin-right:5px"></span>Shorts</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">22k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:17%;border-radius:99px;background:#FF5C74"></i></div></div>
-      <div class="chart-note">Kitchen carries the network. Feasts is the one to watch.</div>
+      <div class="hbar" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t2);margin-bottom:3px"><span><span style="width:7px;height:7px;border-radius:50%;background:#FF5C74;display:inline-block;margin-right:5px"></span>UK JAIL News</span><b style="font-family:var(--mono);font-size:9.5px;color:var(--t1)">22k</b></div><div style="height:12px;border-radius:99px;background:var(--surface2)"><i style="display:block;height:100%;width:17%;border-radius:99px;background:#FF5C74"></i></div></div>
+      <div class="chart-note">Drinking Memes carries the network. Feasts is the one to watch.</div>
     </div>
     <div class="dcard"><h5>Comment sentiment <b>this week</b></h5>
       <div class="donut-wrap">
@@ -1544,7 +1620,7 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
         <div style="display:flex;align-items:center;gap:8px;margin-top:9px"><span style="font-size:9.5px;color:var(--t3);width:92px;flex:0 0 auto">Post quality</span><span style="flex:1;height:4px;border-radius:99px;background:var(--surface2);display:block"><i style="display:block;height:100%;width:91%;border-radius:99px;background:var(--act)"></i></span><b style="font-family:var(--mono);font-size:10.5px;width:20px;text-align:right">91</b></div>
         <div style="display:flex;align-items:center;gap:8px;margin-top:7px"><span style="font-size:9.5px;color:var(--t3);width:92px;flex:0 0 auto">Posting cadence</span><span style="flex:1;height:4px;border-radius:99px;background:var(--surface2);display:block"><i style="display:block;height:100%;width:58%;border-radius:99px;background:var(--gold)"></i></span><b style="font-family:var(--mono);font-size:10.5px;width:20px;text-align:right">58</b></div>
         <div class="chart-note">Top 9% of UK food pages your size on quality. Cadence is the gap worth closing.</div></div>
-    <div class="dcard"><h5>Reach <span style="display:inline-flex;gap:5px;margin-left:6px"><button class="rpill" style="font-size:9px;font-weight:700;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 8px" onclick="setRangeM(this,7)">7d</button><button class="rpill on" style="font-size:9px;font-weight:700;color:var(--act);border:1px solid rgba(0,196,160,.4);border-radius:99px;padding:2px 8px;background:rgba(0,196,160,.07)" onclick="setRangeM(this,14)">14d</button><button class="rpill" style="font-size:9px;font-weight:700;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 8px" onclick="setRangeM(this,30)">30d</button></span><b>Sana's Kitchen</b></h5>
+    <div class="dcard"><h5>Reach <span style="display:inline-flex;gap:5px;margin-left:6px"><button class="rpill" style="font-size:9px;font-weight:700;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 8px" onclick="setRangeM(this,7)">7d</button><button class="rpill on" style="font-size:9px;font-weight:700;color:var(--act);border:1px solid rgba(0,196,160,.4);border-radius:99px;padding:2px 8px;background:rgba(0,196,160,.07)" onclick="setRangeM(this,14)">14d</button><button class="rpill" style="font-size:9px;font-weight:700;color:var(--t3);border:1px solid var(--line);border-radius:99px;padding:2px 8px" onclick="setRangeM(this,30)">30d</button></span><b>Drinking Memes</b></h5>
       <svg width="100%" height="150" viewBox="0 0 340 150" preserveAspectRatio="none">
         <defs><linearGradient id="rfm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00C4A0" stop-opacity=".26"/><stop offset="1" stop-color="#00C4A0" stop-opacity="0"/></linearGradient></defs>
         <line class="gline" x1="30" y1="18" x2="340" y2="18"/><line class="gline" x1="30" y1="70" x2="340" y2="70"/><line class="gline" x1="30" y1="122" x2="340" y2="122"/>
@@ -1593,11 +1669,11 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
     <h4>Your pages</h4>
     <p class="s-sub">Pick a page. The feed, the hero move and analytics follow it.</p>
     <button class="wsrow" onclick="pickWsM('all','All pages')"><span class="wd" style="background:var(--act)"></span>All pages<small>network view</small></button>
-    <button class="wsrow" onclick="pickWsM('sk',&quot;Sana's Kitchen&quot;)"><span class="wd" style="background:#00C4A0"></span>Sana's Kitchen<small>128k</small></button>
-    <button class="wsrow" onclick="pickWsM('qb','Quick Bites UK')"><span class="wd" style="background:#57B5F0"></span>Quick Bites UK<small>64k</small></button>
+    <button class="wsrow" onclick="pickWsM('sk',&quot;Drinking Memes&quot;)"><span class="wd" style="background:#00C4A0"></span>Drinking Memes<small>128k</small></button>
+    <button class="wsrow" onclick="pickWsM('qb','Kelpie Daily')"><span class="wd" style="background:#57B5F0"></span>Kelpie Daily<small>64k</small></button>
     <button class="wsrow" onclick="pickWsM('ff','Family Feasts')"><span class="wd" style="background:#FFC24B"></span>Family Feasts<small>watch</small></button>
-    <button class="wsrow" onclick="pickWsM('mm','Midnight Munchies')"><span class="wd" style="background:#8B7BFF"></span>Midnight Munchies<small>41k</small></button>
-    <button class="wsrow" onclick="pickWsM('ss','Sana Shorts')"><span class="wd" style="background:#FF5C74"></span>Sana Shorts<small>needs you</small></button>
+    <button class="wsrow" onclick="pickWsM('mm','Ketflix Daily')"><span class="wd" style="background:#8B7BFF"></span>Ketflix Daily<small>41k</small></button>
+    <button class="wsrow" onclick="pickWsM('ss','UK JAIL News')"><span class="wd" style="background:#FF5C74"></span>UK JAIL News<small>needs you</small></button>
   </div>
 
   <div class="sheet" id="sh-plan">
@@ -1611,14 +1687,14 @@ body:not(.light) .msrch{background:rgba(20,26,22,.85);backdrop-filter:blur(8px)}
 
   <div class="sheet" id="sh-chat">
     <div class="grab"></div>
-    <h4>Collab: @HomeCookedDaily</h4>
-    <p class="s-sub">Maya &middot; usually replies fast</p>
-    <div class="tb them"><span class="who">Maya</span>Loved the pasta reel! Artemis pinged us about the overlap too. Keen to try a joint one.</div>
+    <h4>Collab: @Council Estate Life</h4>
+    <p class="s-sub">Council Estate Life &middot; usually replies fast</p>
+    <div class="tb them"><span class="who">Council Estate Life</span>Loved the pasta reel! Artemis pinged us about the overlap too. Keen to try a joint one.</div>
     <div class="tb me"><span class="who">You</span>Same here. One reel, both audiences, split the edit?</div>
-    <div class="tb them"><span class="who">Maya</span>Tuesday works! What time were you thinking?</div>
+    <div class="tb them"><span class="who">Council Estate Life</span>Tuesday works! What time were you thinking?</div>
     <div class="arec"><span><b>Art-E recommends:</b> Tuesday 6:40pm, both audiences peak then, +12k combined.</span><button class="btn btn-primary" style="padding:6px 11px;font-size:10.5px;margin-left:auto;flex-shrink:0" onclick="useRecM()">Use</button></div>
     <div id="chatmsgs"></div>
-    <div class="chatbar"><input id="chatinput" placeholder="Message Maya&hellip;" onkeydown="if(event.key==='Enter')sendChatM()"><button class="asend" onclick="sendChatM()" aria-label="Send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button></div>
+    <div class="chatbar"><input id="chatinput" placeholder="Message Council Estate Life&hellip;" onkeydown="if(event.key==='Enter')sendChatM()"><button class="asend" onclick="sendChatM()" aria-label="Send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button></div>
     <button class="chip" style="margin-top:11px" onclick="hideSheets();nav('arte');askArteM('Summarise this chat and suggest the next step')">&#10022; Ask Art-E about this chat</button>
   </div>
 
@@ -1647,7 +1723,7 @@ function hideSheets(){ document.getElementById('veil').classList.remove('on'); d
 /* Art-E engine (same canned answers as web) */
 const A = {
   chat:{ q:'Summarise this chat and suggest the next step',
-    html:`<p><b>Maya is in, the only open question is timing.</b></p>
+    html:`<p><b>Council Estate Life is in, the only open question is timing.</b></p>
     <p>She agreed to a joint reel and asked for a time. Both audiences peak <span class="hl">Tuesday 6 to 8pm</span>.</p>
     <div class="ground"><b>Read from:</b> this thread &middot; both pages' hourly engagement &middot; the 41% overlap map</div>`,
     rec:{line:'Propose Tuesday 6:40pm', why:'I will put the message in your chat box.', cta:'Fill the reply', act:"openChatM();useRecM()"} },
@@ -1656,7 +1732,7 @@ const A = {
     <p>"3-ingredient" promises outperform on your pages, and saves peak when the hook lands in the first six words.</p>
     <div class="ground"><b>Based on:</b> your last 60 posts &middot; save-rate by hook position &middot; confidence 79%</div>`,
     rec:{line:'Apply it in the composer', why:'One tap rewrites the draft and rescores it.', cta:'Improve the draft', act:"show('compose');improveDraftM()"} },
-  crisis:{ q:'What is happening on Sana Shorts?',
+  crisis:{ q:'What is happening on UK JAIL News?',
     html:`<p><b>A comment cluster turned negative, and it is containable.</b></p>
     <p>14 negative comments in 30 minutes, sentiment 0.78 to <span class="hl">0.51</span>. One cluster reacting to the thumbnail wording, not a broad shift.</p>
     <p style="border-left:2px solid var(--line);padding-left:11px;color:var(--t2)">"Fair point, the caption oversold it. Full method is in the pinned comment, next week's version fixes exactly this. Thanks for keeping me honest."</p>
@@ -1664,7 +1740,7 @@ const A = {
     rec:{line:'Send the drafted reply', why:'Replying inside the hour settled it in March. Or mute this thread 24h and I will watch quietly. Nothing sends without you.', cta:'Send the reply', act:"doMove('mv2','Reply sent on the thread.')"} },
   briefing:{ q:'Morning briefing',
     html:`<p><b>Good morning. Two things worth knowing, one to do.</b></p>
-    <p><span class="hl">Overnight:</span> +2,100 reach while you slept, network up 18% on last Tuesday, Quick Bites led it.</p>
+    <p><span class="hl">Overnight:</span> +2,100 reach while you slept, network up 18% on last Tuesday, Kelpie Daily led it.</p>
     <p><span class="hl">Needs you:</span> the pasta reel timing. <span class="hl">Worth a look:</span> a 41% overlap creator match.</p>
     <div class="ground"><b>Sources:</b> overnight sync, 5 pages &middot; 96 posts benchmarked &middot; 7:02am</div>`,
     rec:{line:'Start with the reel', why:'One tap and the main move is done.', cta:'Schedule for 6:40pm', act:"doMove('mv1','Scheduled for 6:40pm.')"} },
@@ -1675,7 +1751,7 @@ const A = {
     <svg width="100%" height="50" viewBox="0 0 280 50" preserveAspectRatio="none"><path d="M0,34 C30,27 55,12 82,16 C110,20 140,39 170,41 C200,43 240,41 280,39" fill="none" stroke="#3A4557" stroke-width="2" stroke-dasharray="4 4"/><path d="M0,41 C40,41 80,39 120,35 C160,31 190,16 224,10 C246,6 266,8 280,10" fill="none" stroke="#8B7BFF" stroke-width="2.5"/><circle cx="224" cy="10" r="3.5" fill="#8B7BFF"/></svg>
     <div class="ground"><b>Why I believe this:</b> 41 posts &middot; 12,400 interactions &middot; 3 similar pages &middot; confidence 87%</div></div>`,
     rec:{line:'Move today\u2019s reel to 6:40pm', why:'Predicted 2.4\u00d7 usual reach. I will report back tomorrow.', cta:'Schedule for 6:40pm', act:"toast('Scheduled for 6:40pm. Art-E reports back tomorrow.')"} },
-  collab:{ q:'Draft an intro to @HomeCookedDaily',
+  collab:{ q:'Draft an intro to @Council Estate Life',
     html:`<p>Here is a first draft, in your voice:</p>
     <p style="border-left:2px solid var(--line);padding-left:11px;color:var(--t2)">"Hi! Artemis flagged that our audiences overlap a lot, 8k of your followers already watch my pasta reels. Fancy a one-reel collab?"</p>
     <div class="ground"><b>Why this match:</b> 41% overlap &middot; tone high &middot; their 1-3pm fills your quiet window &middot; est. +12k reach</div>`,
@@ -1717,7 +1793,7 @@ function freeAsk(inp){
   if(key && A[key]){ const orig=A[key].q; A[key].q=v; arteExplain(key); A[key].q=orig; return; }
   const th=document.getElementById('mthread');
   th.insertAdjacentHTML('beforeend', `<div class="msg m-user">${v.replace(/</g,'&lt;')}</div>`);
-  th.insertAdjacentHTML('beforeend', `<div class="msg m-arte"><p>In the live product I answer anything from your data, with sources. Angle it at timing, Friday content, the match, the Shorts cluster, or the briefing and I will show you the pattern.</p></div>`);
+  th.insertAdjacentHTML('beforeend', `<div class="msg m-arte"><p>In the live product I answer anything from your data, with sources. Angle it at timing, Friday content, the match, the UK JAIL News cluster, or the briefing and I will show you the pattern.</p></div>`);
   th.scrollTop=th.scrollHeight;
 }
 function askArteM(q){ const i=document.querySelector('.arte-input'); i.value=q; freeAsk(i); }
@@ -1747,7 +1823,7 @@ function segPickM(btn){ [...btn.parentElement.children].forEach(x=>{x.classList.
 function openChatM(){ hideSheets(); nav('inbox'); const bd=document.getElementById('inboxBdg'); if(bd) bd.style.display='none'; setTimeout(()=>show('chat'), 120); }
 function sendChatM(){ const i=document.getElementById('chatinput'); const v=i.value.trim(); if(!v) return; i.value='';
   document.getElementById('chatmsgs').insertAdjacentHTML('beforeend', `<div class="tb me"><span class="who">You</span>${v.replace(/</g,'&lt;')}</div>`);
-  setTimeout(()=>{ document.getElementById('chatmsgs').insertAdjacentHTML('beforeend', `<div class="tb them"><span class="who">Maya</span>Perfect, locking it in. See you Tuesday!</div>`); }, 900); }
+  setTimeout(()=>{ document.getElementById('chatmsgs').insertAdjacentHTML('beforeend', `<div class="tb them"><span class="who">Council Estate Life</span>Perfect, locking it in. See you Tuesday!</div>`); }, 900); }
 function useRecM(){ const i=document.getElementById('chatinput'); i.value='Shall we say Tuesday 6:40pm? Artemis says both our audiences peak then.'; i.focus(); }
 function markAllReadM(){ document.querySelectorAll('.hbtn .bdg').forEach(b=>b.style.display='none'); toast('All read. Quiet until something needs you.'); }
 function improveDraftM(){ const ta=document.getElementById('draft');
@@ -1774,7 +1850,7 @@ function clearChat(){ const th=document.getElementById('mthread'); if(MTH0===nul
 const STORIES=[
  {k:'gold',ic:'\u2b50',kick:'This week\u2019s win',stat:'2.9x',line:'The pasta reel beat its own forecast, <b>saves led it</b>, not likes.',ground:'Forecast 2.4x at 87% confidence \u00b7 actual 2.9x \u00b7 41 posts benchmarked',cta:'Why it worked',act:function(){closeStory();nav('arte');arteExplain('win')}},
  {k:'sky',ic:'\ud83d\udcc8',kick:'Audience shift',stat:'62%',line:'Your engaged followers now peak <b>6 to 8pm</b>. In May it was lunchtime.',ground:'12,400 interactions across 5 pages \u00b7 trailing 30 days',cta:'What to change',act:function(){closeStory();nav('arte');arteExplain('timing')}},
- {k:'violet',ic:'\ud83e\udd1d',kick:'Found by the network',stat:'41%',line:'<b>@HomeCookedDaily</b> shares 8,200 of your people and posts when you are quiet.',ground:'Comment overlap, matched anonymously \u00b7 est. +12k reach',cta:'See the match',act:function(){closeStory();fillMD('homecooked');show('disco')}},
+ {k:'violet',ic:'\ud83e\udd1d',kick:'Found by the network',stat:'41%',line:'<b>@Council Estate Life</b> shares 8,200 of your people and posts when you are quiet.',ground:'Comment overlap, matched anonymously \u00b7 est. +12k reach',cta:'See the match',act:function(){closeStory();fillMD('homecooked');show('disco')}},
  {k:'rose',ic:'\ud83d\udee1\ufe0f',kick:'Storm contained',stat:'3h',line:'The March comment cluster settled in three hours after <b>one calm reply</b>.',ground:'Same pattern as last night\u2019s cluster \u00b7 confidence 84%',cta:'See the drafted reply',act:function(){closeStory();nav('arte');arteExplain('crisis')}},
  {k:'teal',ic:'\ud83c\udfac',kick:'Riding a trend',stat:'+22%',line:'15-second recipe shorts are climbing <b>across your network</b> this week.',ground:'96 posts benchmarked \u00b7 your network, not global averages',cta:'Draft one now',act:function(){closeStory();show('compose')}}];
 const SCOLOR={gold:'#FFC24B',sky:'#57B5F0',violet:'#8B7BFF',rose:'#FF5C74',teal:'#00C4A0'};
@@ -1795,7 +1871,7 @@ function prevStory(){ if(sIdx>0){ sIdx--; renderStory(); } }
 function closeStory(){ clearTimeout(sTimer); document.getElementById('storyv').classList.remove('on'); }
 
 const MATCH=[
- {k:'homecooked',ini:'HC',c:'#8B7BFF',n:'@HomeCookedDaily',sub:'Family cooking &middot; 96k &middot; 1-3pm',ovl:'41%',fol:'96k',est:'+12k',aud:88,tone:92,time:84,hrs:'1-3pm',cap:'8,200 shared people, their peak is your quiet window',posts:[['&#127837;','pasta'],['&#129386;','toasties'],['&#128118;','kids']],why:'<b>8,200 of your people</b> follow them, their strong hours are your quiet window. <b>+12k est.</b>',tags:['High tone match','Peak 1-3pm']},
+ {k:'homecooked',ini:'HC',c:'#8B7BFF',n:'@Council Estate Life',sub:'Family cooking &middot; 96k &middot; 1-3pm',ovl:'41%',fol:'96k',est:'+12k',aud:88,tone:92,time:84,hrs:'1-3pm',cap:'8,200 shared people, their peak is your quiet window',posts:[['&#127837;','pasta'],['&#129386;','toasties'],['&#128118;','kids']],why:'<b>8,200 of your people</b> follow them, their strong hours are your quiet window. <b>+12k est.</b>',tags:['High tone match','Peak 1-3pm']},
  {k:'spiceroute',ini:'SR',c:'#57B5F0',n:'@SpiceRouteStories',sub:'Curries &middot; 71k &middot; mornings',ovl:'33%',fol:'71k',est:'+8k',aud:74,tone:81,time:90,hrs:'8-10am',cap:'their mornings complete your evenings',posts:[['&#127858;','curries'],['&#127859;','one-pot'],['&#128293;','spice']],why:'Their <b>8-10am</b> strength complements your evenings. <b>+8k est.</b>',tags:['Complementary hours']},
  {k:'budgetbites',ini:'BB',c:'#FFC24B',n:'@BudgetBites',sub:'Student meals &middot; 52k',ovl:'28%',fol:'52k',est:'+6k',aud:69,tone:77,time:72,hrs:'9-11pm',cap:'the under-25 reach you are missing',posts:[['&#127789;','5-min'],['&#128176;','cheap'],['&#127860;','dorm']],why:'Their under-25 core is <b>your thinnest segment</b>. Duet short fits. <b>+6k est.</b>',tags:['Under-25 reach']},
  {k:'plantplates',ini:'PP',c:'#00C4A0',n:'@PlantPlates',sub:'Veg swaps &middot; 44k &middot; Sundays',ovl:'24%',fol:'44k',est:'+5k',aud:66,tone:84,time:88,hrs:'Sun am',cap:'Sunday mornings, theirs and empty for you',posts:[['&#129388;','swaps'],['&#127807;','no-meat'],['&#129361;','bowls']],why:'<b>Sunday 9-11am</b> is theirs and empty for you. <b>+5k est.</b>',tags:['Sunday window']}];
@@ -1850,19 +1926,19 @@ function discSave(){ const sp=MATCH.find(m=>m.k===spotK); if(!sp) return;
   const i=PIPE.saved.indexOf(sp.n); if(i>=0){ PIPE.saved.splice(i,1); toast('Removed from saved.'); } else { PIPE.saved.push(sp.n); toast('Saved to your pipeline.'); } renderDisc(); }
 function discHide(k,e){ if(e) e.stopPropagation(); const i=MATCH.findIndex(m=>m.k===k); if(i<0) return; const n=MATCH[i].n; MATCH.splice(i,1); if(spotK===k) spotK=null; toast(n+' hidden. The pool refreshes nightly.'); renderDisc(); }
 function discCollab(btn){ const sp=MATCH.find(m=>m.k===spotK); if(!sp||SENT.has(sp.k)) return; SENT.add(sp.k);
-  if(sp.k==='homecooked'){ PIPE.active.push(sp.n); if(btn){btn.textContent='\u2713 Opening chat'; btn.disabled=true;} toast('Intro sent. Maya replies fast.'); setTimeout(()=>{ openChatM(); renderDisc(); },700); }
+  if(sp.k==='homecooked'){ PIPE.active.push(sp.n); if(btn){btn.textContent='\u2713 Opening chat'; btn.disabled=true;} toast('Intro sent. Council Estate Life replies fast.'); setTimeout(()=>{ openChatM(); renderDisc(); },700); }
   else { PIPE.intro.push(sp.n); if(btn){btn.textContent='\u2713 Intro sent'; btn.disabled=true;} toast('Intro drafted and sent. Replies land in the Inbox.'); setTimeout(renderDisc,850); }
   renderPipe(); }
 let discMode='list';
 const SW_SKIP=new Set();
 const SW_SKIP2={inter:new Set(),xplat:new Set()};
 const SW_INTER=[
- {k:'in1',a:['Kitchen','#00C4A0'],b:['Munchies','#8B7BFF'],ovl:'46%',com:[['&#128101;','46% shared audience'],['&#127909;','reels rarely cross'],['&#127769;','their 10pm = your quiet']],why:'<b>46% of Munchies followers</b> also follow Kitchen, but reels rarely cross. A 10pm repost is free reach.',cta:'Draft the repost'},
- {k:'in2',a:['Quick Bites','#57B5F0'],b:['Feasts','#FFC24B'],ovl:'1.4x',com:[['&#9728;','Sunday morning crowd'],['&#128337;','long posts underperform'],['&#9889;','15-sec format wins']],why:'The Feasts audience engages <b>Sunday mornings</b> but gets long posts. One short is the experiment.',cta:'Draft it'},
- {k:'in3',a:['Shorts','#FF5C74'],b:['Kitchen','#00C4A0'],ovl:'12%',com:[['&#128279;','only 12% cross over'],['&#128204;','pinned-comment bridge'],['&#127837;','recipes complete shorts']],why:'Only <b>12% cross over</b>. A pinned comment on every short is the cheapest bridge.',cta:'Draft the comment'}];
+ {k:'in1',a:['Drinking Memes','#00C4A0'],b:['Ketflix Daily','#8B7BFF'],ovl:'46%',com:[['&#128101;','46% shared audience'],['&#127909;','reels rarely cross'],['&#127769;','their 10pm = your quiet']],why:'<b>46% of Ketflix Daily followers</b> also follow Drinking Memes, but reels rarely cross. A 10pm repost is free reach.',cta:'Draft the repost'},
+ {k:'in2',a:['Kelpie Daily','#57B5F0'],b:['Feasts','#FFC24B'],ovl:'1.4x',com:[['&#9728;','Sunday morning crowd'],['&#128337;','long posts underperform'],['&#9889;','15-sec format wins']],why:'The Feasts audience engages <b>Sunday mornings</b> but gets long posts. One short is the experiment.',cta:'Draft it'},
+ {k:'in3',a:['UK JAIL News','#FF5C74'],b:['Drinking Memes','#00C4A0'],ovl:'12%',com:[['&#128279;','only 12% cross over'],['&#128204;','pinned-comment bridge'],['&#127837;','memes complete the feed']],why:'Only <b>12% cross over</b>. A pinned comment on every short is the cheapest bridge.',cta:'Draft the comment'}];
 const SW_XPLAT=[
  {k:'xp1',ini:'PD',c:'#E1306C',n:'@plantbased.daily',sub:'Instagram &middot; Sunday crowd',ovl:'31%',com:[['&#9728;','Sunday reel audience'],['&#128101;','matches Feasts profile'],['&#128202;','modelled from public signals']],why:'Their reel audience <b>matches your Feasts profile</b>. Cross-platform reaches people Facebook cannot.'},
- {k:'xp2',ini:'SK',c:'#E1306C',n:'@sanaskitchen &middot; IG',sub:'FB &rarr; IG &middot; your reels',ovl:'+18k',com:[['&#127909;','3 reels ready to mirror'],['&#9997;','tuned captions by Art-E'],['&#128200;','tracked both sides']],why:'Your <b>three best reels</b> fit IG natively. Art-E reposts with tuned captions.'}];
+ {k:'xp2',ini:'SK',c:'#E1306C',n:'@drinkingmemes &middot; IG',sub:'FB &rarr; IG &middot; your reels',ovl:'+18k',com:[['&#127909;','3 reels ready to mirror'],['&#9997;','tuned captions by Art-E'],['&#128200;','tracked both sides']],why:'Your <b>three best reels</b> fit IG natively. Art-E reposts with tuned captions.'}];
 function interCardHTML(m,cls){ return `<div class="tcard ${cls}" data-k="${m.k}" style="--tc:${m.a[1]}">
   <div class="tc-pair"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="${m.a[1]}" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="${m.a[1]}" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="${m.b[1]}" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="${m.b[1]}" stroke-width="1.8"/></svg>
   <span class="pnames"><b><span class="pw" style="background:${m.a[1]}"></span>${m.a[0]}</b><b><span class="pw" style="background:${m.b[1]}"></span>${m.b[0]}</b></span>
@@ -1959,7 +2035,7 @@ function pickWsM(k,label){ hideSheets();
 function dataTab(t){ ['ov','photo','adv'].forEach(k=>{ const p=document.getElementById('md'+k[0].toUpperCase()+k.slice(1)); if(p) p.style.display = t===k?'':'none';
   const b=document.getElementById('mdTab'+k[0].toUpperCase()+k.slice(1)); if(b) b.classList.toggle('on', t===k); }); }
 function showSignout(){ document.getElementById('signoutV').classList.add('on'); }
-function hideSignout(){ document.getElementById('signoutV').classList.remove('on'); toast('Welcome back, Sana.'); }
+function hideSignout(){ document.getElementById('signoutV').classList.remove('on'); toast('Welcome back, Lewis.'); }
 const RANGESM={7:'M0,48 L48,43 L96,50 L144,38 L192,42 L240,29 L288,19 L340,16',14:'M0,52 L26,48 L52,55 L78,45 L104,50 L130,57 L156,58 L182,56 L208,60 L234,39 L260,34 L286,24 L312,12 L340,17',30:'M0,40 L42,45 L84,38 L126,47 L168,42 L210,49 L252,44 L294,30 L340,17'};
 function setRangeM(btn,d){ [...btn.parentElement.children].forEach(x=>{x.classList.remove('on');x.style.color='var(--t3)';x.style.borderColor='var(--line)';x.style.background='';}); btn.classList.add('on'); btn.style.color='var(--act)'; btn.style.borderColor='rgba(0,196,160,.4)'; btn.style.background='rgba(0,196,160,.07)'; const p=document.getElementById('reachPathM'); if(p) p.setAttribute('d', RANGESM[d]);
   const a=document.getElementById('reachAreaM'); if(a) a.setAttribute('d', RANGESM[d]+' L340,70 L0,70 Z'); }
@@ -1969,7 +2045,7 @@ function setTimeIdx(i){ schedSel=i; const ps=[...document.querySelectorAll('#sh-
 function pickTime(el,i){ schedSel=i; document.querySelectorAll('.tpill').forEach(t=>t.classList.remove('on')); el.classList.add('on');
   document.getElementById('schedBtn').textContent='Schedule for '+TIMES[i]; }
 const MDISCO={
- homecooked:{n:'@HomeCookedDaily',s:'Family cooking, 96k followers. Found through audience overlap, not hashtags. You have never interacted, your audiences already do.',o:'41% \u00b7 8,200 people',w:'Tone <b style="color:var(--t1)">high match</b> (home cooking, family). Their strong hours are <b style="color:var(--t1)">1 to 3pm</b>, your quiet window. Estimated <b style="color:var(--act)">+12k reach</b> from one collab reel.'},
+ homecooked:{n:'@Council Estate Life',s:'Family cooking, 96k followers. Found through audience overlap, not hashtags. You have never interacted, your audiences already do.',o:'41% \u00b7 8,200 people',w:'Tone <b style="color:var(--t1)">high match</b> (home cooking, family). Their strong hours are <b style="color:var(--t1)">1 to 3pm</b>, your quiet window. Estimated <b style="color:var(--act)">+12k reach</b> from one collab reel.'},
  spiceroute:{n:'@SpiceRouteStories',s:'Weeknight curries, 71k followers. Their morning crowd barely overlaps your evening peak, which is exactly the point.',o:'33% \u00b7 6,100 people',w:'Tone <b style="color:var(--t1)">high match</b>. Their <b style="color:var(--t1)">8 to 10am</b> strength complements your evenings. Estimated <b style="color:var(--act)">+8k reach</b>.'},
  budgetbites:{n:'@BudgetBites',s:'Student meals, 52k followers. Strongest with your under-25 segment, the one you reach least.',o:'28% \u00b7 4,400 people',w:'Their under-25 core is <b style="color:var(--t1)">your thinnest segment</b>. One duet-style short is the natural format. Estimated <b style="color:var(--act)">+6k reach</b>.'},
  plantplates:{n:'@PlantPlates',s:'Veg swaps, 44k followers. A Sunday-morning audience your pages barely touch.',o:'24% \u00b7 3,600 people',w:'<b style="color:var(--t1)">Sunday 9 to 11am</b> is theirs and empty for you. A veg-swap of your pasta reel fits both. Estimated <b style="color:var(--act)">+5k reach</b>.'}};
@@ -1994,7 +2070,7 @@ A.briefing={ q:'This morning\u2019s briefing',
  html:`<p><b>Good morning. Two minutes, three things.</b></p>
  <p><span class="hl">While you slept:</span> +2,100 reach, the toastie reel resurfaced through saves.</p>
  <p><span class="hl">Needs you:</span> the pasta reel window is tonight, 6:40pm, 2.4x predicted.</p>
- <p><span class="hl">Opportunity:</span> @HomeCookedDaily strengthened to 41% overlap.</p>
+ <p><span class="hl">Opportunity:</span> @Council Estate Life strengthened to 41% overlap.</p>
  <div class="ground"><b>Overnight scan:</b> 5 pages \u00b7 comments, saves, shares \u00b7 nothing else needs attention</div>`,
  rec:{line:'Start with the reel', why:'One tap and today\u2019s main move is done.', cta:'Schedule for 6:40pm', act:"toast('Scheduled for 6:40pm. Art-E reports back tomorrow.')"} };
 </script>
