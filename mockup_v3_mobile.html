@@ -675,6 +675,19 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
 .dmode{display:inline-flex;gap:3px;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:2px}
 .dm{font-size:11px;font-weight:800;padding:5px 11px;border-radius:99px;color:var(--t3)}
 .dm.on{background:var(--surface2);color:var(--t1)}
+.dsubtabs{display:flex;gap:8px;margin:10px 0 12px}
+.dsub{font-size:12px;font-weight:800;color:var(--t2);background:var(--surface);border:1px solid var(--line);padding:9px 16px;border-radius:99px;flex:1}
+.dsub.on{color:#052019;background:var(--act);border-color:var(--act)}
+body.light .dsub.on{color:#fff}
+.dtab{display:none}
+.dtab.on{display:block}
+/* full-screen swipe stage: deck owns the phone viewport below the tabs */
+.swstage.on{display:flex;flex-direction:column;justify-content:center;min-height:545px}
+.swstage .swdeck{margin:0}
+.swstage .tcard{padding:19px 17px 16px;border-radius:20px}
+.swstage .tc-why{-webkit-line-clamp:3}
+.swstage .swacts{margin:18px 0 0}
+.swstage .swhint{margin-top:12px}
 .swdeck{position:relative;min-height:120px;margin:12px 0 2px;touch-action:pan-y}
 .tcard{position:absolute;inset:auto;top:0;left:50%;transform:translateX(-50%);width:100%;background:var(--surface);border:1px solid var(--line);border-radius:17px;padding:15px 15px 14px;transition:transform .45s cubic-bezier(.22,.68,.22,1), opacity .3s;will-change:transform}
 .tcard::before{content:'';position:absolute;top:-1px;left:16px;right:16px;height:3px;border-radius:0 0 3px 3px;background:var(--tc)}
@@ -1054,6 +1067,24 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
   <section class="scr" id="scr-discover">
     <div class="scroll" style="padding-top:70px">
       <h2 class="vh" style="margin-top:2px">Discover</h2>
+      <div class="dsubtabs">
+        <button class="dsub on" id="dtb-swipe" onclick="discTab('swipe')">&#10084; Swipe</button>
+        <button class="dsub" id="dtb-explore" onclick="discTab('explore')">&#9776; Explore</button>
+      </div>
+
+      <!-- TAB 1: full-screen swipe -->
+      <div id="dt-swipe" class="dtab swstage on">
+        <div id="swdeck" class="swdeck"></div>
+        <div id="swacts" class="swacts">
+          <button class="swb pass" onclick="swAct(-1)">&#10005;</button>
+          <button class="swb go" onclick="swCollab(event)">&#129309; Collab</button>
+          <button class="swb save" onclick="swAct(1)">&#9733;</button>
+        </div>
+        <div id="swhint" class="swhint">&#8592; pass &middot; drag &middot; save &#8594;</div>
+      </div>
+
+      <!-- TAB 2: everything else -->
+      <div id="dt-explore" class="dtab">
       <div class="dpipe">
         <span style="font-weight:800;letter-spacing:.5px;font-size:9.5px;text-transform:uppercase;color:var(--t3)">Pipeline</span>
         <button onclick="pipeInfo('saved')"><b id="pipeSavedN">0</b> saved</button><span class="dot">&middot;</span>
@@ -1062,17 +1093,8 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
       </div>
       <div class="feed-label" id="spotLabel"><h3>Top match</h3></div>
       <div class="spot" id="spot"></div>
-      <div class="feed-label" style="margin-top:20px;display:flex;align-items:center"><h3 id="mLabel">More matches</h3>
-        <span class="dmode" style="margin-left:auto"><button class="dm on" data-m="list" onclick="setDiscMode('list')">&#9776; List</button><button class="dm" data-m="swipe" onclick="setDiscMode('swipe')">&#10084; Swipe</button></span>
-      </div>
+      <div class="feed-label" style="margin-top:20px;display:flex;align-items:center"><h3 id="mLabel">More matches</h3></div>
       <div id="mrows"></div>
-      <div id="swdeck" class="swdeck" style="display:none"></div>
-      <div id="swacts" class="swacts" style="display:none">
-        <button class="swb pass" onclick="swAct(-1)">&#10005;</button>
-        <button class="swb go" onclick="swCollab(event)">&#129309; Collab</button>
-        <button class="swb save" onclick="swAct(1)">&#9733;</button>
-      </div>
-      <div id="swhint" class="swhint" style="display:none">&#8592; pass &middot; drag &middot; save &#8594;</div>
       <div class="feed-label" style="margin-top:24px"><h3>Between your pages</h3></div>
       <button class="card" onclick="show('compose')">
           <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#00C4A0" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#00C4A0" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#8B7BFF" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#8B7BFF" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:9.5px;fill:var(--t1)">46%</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#00C4A0"></span> Kitchen</span><span><span class="wd" style="background:#8B7BFF"></span> Munchies</span></span><span class="card-time" style="margin-left:auto">shared</span></div>
@@ -1108,6 +1130,7 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
           <span class="card-act">See the plan &rarr;</span>
         </button>
         <p class="quiet">Facebook today, Instagram fast-follow, X later.</p>
+      </div><!-- /dt-explore -->
       </div>
     </div>
   </section>
@@ -1497,6 +1520,7 @@ function nav(n){
   document.getElementById('scr-'+n).classList.add('on');
   document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('on', b.dataset.n===n));
   hideSheets();
+  if(n==='discover' && typeof discMode!=='undefined' && discMode==='swipe') setTimeout(renderSwipe,60);
 }
 /* sheets */
 function show(id){ document.getElementById('veil').classList.add('on'); document.getElementById('sh-'+id).classList.add('on'); if(id==='compose') scoreDraft(document.getElementById('draft').value); }
@@ -1713,11 +1737,15 @@ function discCollab(btn){ const sp=MATCH.find(m=>m.k===spotK); if(!sp||SENT.has(
   renderPipe(); }
 let discMode='list';
 const SW_SKIP=new Set();
-function setDiscMode(m){ discMode=m; document.querySelectorAll('.dm').forEach(b=>{ const on=b.dataset.m===m; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on); });
-  document.getElementById('mrows').style.display = m==='list'?'':'none';
-  ['spotLabel','spot'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = m==='list'?'':'none'; });
-  ['swdeck','swacts','swhint'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = m==='swipe'?'':'none'; });
-  if(m==='swipe'){ renderSwipe(); renderPipe(); } else renderDisc(); }
+function discTab(t){ discMode = t==='swipe' ? 'swipe' : 'list';
+  const bs=document.getElementById('dtb-swipe'), be=document.getElementById('dtb-explore');
+  if(bs) bs.classList.toggle('on', t==='swipe');
+  if(be) be.classList.toggle('on', t!=='swipe');
+  const sw=document.getElementById('dt-swipe'), ex=document.getElementById('dt-explore');
+  if(sw) sw.classList.toggle('on', t==='swipe');
+  if(ex) ex.classList.toggle('on', t!=='swipe');
+  if(t==='swipe'){ renderSwipe(); renderPipe(); } else { renderDisc(); renderPipe(); } }
+function setDiscMode(m){ discTab(m==='swipe'?'swipe':'explore'); }
 function swipePool(){ return discList().filter(m=>!SENT.has(m.k) && !SW_SKIP.has(m.k)); }
 function tcardHTML(m,cls){ const R=20,C=2*Math.PI*R,p=parseInt(m.ovl); return `<div class="tcard ${cls}" data-k="${m.k}" style="--tc:${m.c}">
   <div class="tc-top"><span class="tc-ring"><svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" fill="none" stroke="var(--surface2)" stroke-width="3.5"/><circle cx="23" cy="23" r="20" fill="none" stroke="${m.c}" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="${C*p/100} ${C}" transform="rotate(-90 23 23)"/></svg><span class="tc-av" style="color:${inkFor(m.c)}">${m.ini}</span></span>
