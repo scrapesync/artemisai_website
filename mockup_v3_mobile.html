@@ -675,7 +675,13 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
 .dmode{display:inline-flex;gap:3px;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:2px}
 .dm{font-size:11px;font-weight:800;padding:5px 11px;border-radius:99px;color:var(--t3)}
 .dm.on{background:var(--surface2);color:var(--t1)}
-.dsubtabs{display:flex;gap:8px;margin:10px 0 12px}
+.dsubtabs{display:flex;gap:8px;margin:10px 0 12px;position:sticky;top:52px;z-index:20;background:linear-gradient(to bottom, var(--bg) 74%, transparent);padding:6px 0 12px}
+.dscope{display:flex;gap:6px;margin:2px 0 14px;flex-wrap:wrap}
+.dsq{font-size:10.5px;font-weight:800;color:var(--t2);background:var(--surface);border:1px solid var(--line);padding:8px 12px;border-radius:99px;flex:1;white-space:nowrap}
+.dsq.on{color:#052019;background:var(--act);border-color:var(--act)}
+body.light .dsq.on{color:#fff}
+.dgroup{display:none}
+.dgroup.on{display:block}
 .dsub{font-size:12px;font-weight:800;color:var(--t2);background:var(--surface);border:1px solid var(--line);padding:9px 16px;border-radius:99px;flex:1}
 .dsub.on{color:#052019;background:var(--act);border-color:var(--act)}
 body.light .dsub.on{color:#fff}
@@ -1085,6 +1091,13 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
 
       <!-- TAB 2: everything else -->
       <div id="dt-explore" class="dtab">
+      <div class="dscope">
+        <button class="dsq on" id="dsc-cross" onclick="discScope('cross')">&#129309; Cross-page</button>
+        <button class="dsq" id="dsc-inter" onclick="discScope('inter')">&#127968; Inter-page</button>
+        <button class="dsq" id="dsc-xplat" onclick="discScope('xplat')">&#127760; Cross-platform</button>
+      </div>
+
+      <div class="dgroup on" id="dg-cross">
       <div class="dpipe">
         <span style="font-weight:800;letter-spacing:.5px;font-size:9.5px;text-transform:uppercase;color:var(--t3)">Pipeline</span>
         <button onclick="pipeInfo('saved')"><b id="pipeSavedN">0</b> saved</button><span class="dot">&middot;</span>
@@ -1095,7 +1108,10 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
       <div class="spot" id="spot"></div>
       <div class="feed-label" style="margin-top:20px;display:flex;align-items:center"><h3 id="mLabel">More matches</h3></div>
       <div id="mrows"></div>
-      <div class="feed-label" style="margin-top:24px"><h3>Between your pages</h3></div>
+      </div><!-- /dg-cross -->
+
+      <div class="dgroup" id="dg-inter">
+      <div class="feed-label"><h3>Between your pages</h3></div>
       <button class="card" onclick="show('compose')">
           <div class="card-top"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="#00C4A0" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="#00C4A0" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="#8B7BFF" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="#8B7BFF" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" style="font-size:9.5px;fill:var(--t1)">46%</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:2px"><span><span class="wd" style="background:#00C4A0"></span> Kitchen</span><span><span class="wd" style="background:#8B7BFF"></span> Munchies</span></span><span class="card-time" style="margin-left:auto">shared</span></div>
           <div class="card-line">Night crowd has not seen the <b>pasta reel</b></div>
@@ -1115,7 +1131,10 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
           <span class="card-act violet">Ask Art-E &rarr;</span>
         </button>
         <p class="quiet">Your five pages, feeding each other on purpose.</p>
-      <div class="feed-label" style="margin-top:24px"><h3>Across platforms</h3></div>
+      </div><!-- /dg-inter -->
+
+      <div class="dgroup" id="dg-xplat">
+      <div class="feed-label"><h3>Across platforms</h3></div>
       <div class="milestone" style="margin-bottom:12px"><span style="font-size:14px">&#128279;</span><div class="mtx"><b>Connect Instagram</b> to act on these</div><button class="btn btn-primary" onclick="toast('Instagram connect flow opens here in the live app.')">Connect</button></div>
         <button class="card pstripe" style="position:relative" onclick="toast('Full profiles unlock when Instagram is connected.')"><span class="prev-tag">&#128274; Preview</span>
           <div class="card-top"><span class="xbadge ig">&#9679; Instagram</span><span class="card-time" style="margin-left:auto">31% modelled</span></div>
@@ -1130,6 +1149,7 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
           <span class="card-act">See the plan &rarr;</span>
         </button>
         <p class="quiet">Facebook today, Instagram fast-follow, X later.</p>
+      </div><!-- /dg-xplat -->
       </div><!-- /dt-explore -->
       </div>
     </div>
@@ -1737,6 +1757,14 @@ function discCollab(btn){ const sp=MATCH.find(m=>m.k===spotK); if(!sp||SENT.has(
   renderPipe(); }
 let discMode='list';
 const SW_SKIP=new Set();
+let discScopeV='cross';
+function discScope(s){ discScopeV=s;
+  ['cross','inter','xplat'].forEach(k=>{
+    const b=document.getElementById('dsc-'+k), g=document.getElementById('dg-'+k);
+    if(b) b.classList.toggle('on', k===s);
+    if(g) g.classList.toggle('on', k===s);
+  });
+  if(s==='cross'){ renderDisc(); renderPipe(); } }
 function discTab(t){ discMode = t==='swipe' ? 'swipe' : 'list';
   const bs=document.getElementById('dtb-swipe'), be=document.getElementById('dtb-explore');
   if(bs) bs.classList.toggle('on', t==='swipe');

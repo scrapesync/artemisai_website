@@ -864,7 +864,14 @@ body.light .milestone{background:transparent}
 /* discovery vNext: scouting report */
 #v-discovery{max-width:1000px}
 #v-discovery.swfull{max-width:none}
-.dsubtabs{margin:2px 0 6px}
+.dsubtabs{margin:2px 0 6px;position:sticky;top:58px;z-index:20;background:linear-gradient(to bottom, var(--bg) 76%, transparent);padding:6px 0 12px}
+.dscope{display:flex;gap:8px;margin:4px 0 20px;flex-wrap:wrap}
+.dsq{font-size:12px;font-weight:800;color:var(--t2);background:var(--surface);border:1px solid var(--line);padding:8px 16px;border-radius:99px;transition:.15s}
+.dsq:hover{color:var(--t1)}
+.dsq.on{color:#052019;background:var(--act);border-color:var(--act)}
+body.light .dsq.on{color:#fff}
+.dgroup{display:none}
+.dgroup.on{display:block}
 .dtab{display:none}
 .dtab.on{display:block}
 /* full-screen swipe stage: the deck owns the whole viewport below the header */
@@ -1406,6 +1413,13 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
 
       <!-- TAB 2: everything else -->
       <div id="dt-explore" class="dtab">
+      <div class="dscope">
+        <button class="dsq on" id="dsc-cross" onclick="discScope('cross')">&#129309; Cross-page <small style="font-weight:600;opacity:.75">other creators</small></button>
+        <button class="dsq" id="dsc-inter" onclick="discScope('inter')">&#127968; Inter-page <small style="font-weight:600;opacity:.75">your own pages</small></button>
+        <button class="dsq" id="dsc-xplat" onclick="discScope('xplat')">&#127760; Cross-platform <small style="font-weight:600;opacity:.75">IG &amp; beyond</small></button>
+      </div>
+
+      <div class="dgroup on" id="dg-cross">
       <div class="dpipe">
         <span style="font-weight:800;letter-spacing:.6px;font-size:10.5px;text-transform:uppercase;color:var(--t3)">Pipeline</span>
         <button onclick="pipeInfo('saved')"><b id="pipeSavedN">0</b> saved</button><span class="dot">&middot;</span>
@@ -1419,8 +1433,10 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
 
       <div class="feed-label" style="margin-top:26px;display:flex;align-items:center"><h3 id="mLabel">More matches</h3></div>
       <div id="mrows"></div>
+      </div><!-- /dg-cross -->
 
-      <div class="feed-label" style="margin-top:30px"><h3>Between your pages</h3></div>
+      <div class="dgroup" id="dg-inter">
+      <div class="feed-label"><h3>Between your pages</h3></div>
       <button class="card" data-page="all" onclick="openCompose()">
           <div class="card-top"><svg class="venn" width="76" height="46" viewBox="0 0 76 46"><circle cx="28" cy="23" r="18" fill="#00C4A0" opacity=".22"/><circle cx="28" cy="23" r="18" fill="none" stroke="#00C4A0" stroke-width="2"/><circle cx="48" cy="23" r="18" fill="#8B7BFF" opacity=".22"/><circle cx="48" cy="23" r="18" fill="none" stroke="#8B7BFF" stroke-width="2"/><text x="38" y="27" text-anchor="middle" style="font-size:10px;fill:var(--t1)">46%</text></svg><span class="pagepair" style="flex-direction:column;align-items:flex-start;gap:3px"><span><span class="wd" style="background:#00C4A0"></span> Sana's Kitchen</span><span><span class="wd" style="background:#8B7BFF"></span> Midnight Munchies</span></span><span class="card-time" style="margin-left:auto">46% shared</span></div>
           <div class="card-line">The night crowd has not seen the <b>pasta reel</b> yet</div>
@@ -1440,8 +1456,10 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
           <span class="card-act violet">Ask Art-E about the bridge &rarr;</span>
         </button>
         <p class="quiet">Your five pages, feeding each other on purpose.<br><b>Art-E watches these overlaps weekly.</b></p>
+      </div><!-- /dg-inter -->
 
-      <div class="feed-label" style="margin-top:30px"><h3>Across platforms</h3></div>
+      <div class="dgroup" id="dg-xplat">
+      <div class="feed-label"><h3>Across platforms</h3></div>
       <div class="milestone" style="margin-bottom:16px"><span style="font-size:16px">&#128279;</span><div class="mtx"><b>Connect Instagram</b> to act on these. Mapping is modelled from public signals until then.</div><button class="btn btn-primary" onclick="openConnect()">Connect</button></div>
         <button class="card pstripe" style="position:relative" onclick="toast('Full cross-platform profiles unlock when Instagram is connected.')"><span class="prev-tag">&#128274; Preview</span>
           <div class="card-top"><span class="xbadge ig">&#9679; Instagram</span><span class="card-time" style="margin-left:auto">modelled 31%</span></div>
@@ -1456,6 +1474,7 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
           <span class="card-act">See the mirroring plan &rarr;</span>
         </button>
         <p class="quiet">One brain across platforms is the roadmap.<br><b>Facebook today, Instagram fast-follow, X later.</b></p>
+      </div><!-- /dg-xplat -->
       </div><!-- /dt-explore -->
     </section>
 
@@ -2428,6 +2447,14 @@ function discCollab(btn){ const sp=MATCH.find(m=>m.k===spotK); if(!sp||SENT.has(
   renderPipe(); }
 let discMode='list';
 const SW_SKIP=new Set();
+let discScopeV='cross';
+function discScope(s){ discScopeV=s;
+  ['cross','inter','xplat'].forEach(k=>{
+    const b=document.getElementById('dsc-'+k), g=document.getElementById('dg-'+k);
+    if(b) b.classList.toggle('on', k===s);
+    if(g) g.classList.toggle('on', k===s);
+  });
+  if(s==='cross'){ renderDisc(); renderPipe(); } }
 function discTab(t){ discMode = t==='swipe' ? 'swipe' : 'list';
   const bs=document.getElementById('dtb-swipe'), be=document.getElementById('dtb-explore');
   if(bs) bs.classList.toggle('on', t==='swipe');
