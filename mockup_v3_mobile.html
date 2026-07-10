@@ -682,6 +682,16 @@ body.light .conf{color:#00614D;background:rgba(0,125,99,.1);border-color:rgba(0,
 body.light .dsq.on{color:#fff}
 .dgroup{display:none}
 .dgroup.on{display:block}
+.swstage .swsc{margin:0 0 14px}
+.tc-com{margin:12px 0 0;padding:11px 12px;background:var(--surface2);border-radius:12px}
+.tc-com .tcl{font-size:8.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-bottom:7px}
+.tcc{display:flex;gap:5px;flex-wrap:wrap}
+.tcc span{font-size:10px;color:var(--t2);background:var(--surface);border:1px solid var(--line);padding:4px 9px;border-radius:99px}
+.tc-pair{display:flex;align-items:center;gap:11px}
+.tc-pair .pnames{flex:1;min-width:0}
+.tc-pair .pnames b{font-size:13px;display:block;letter-spacing:-.2px;line-height:1.35}
+.tc-pair .pnames .pw{display:inline-block;width:8px;height:8px;border-radius:2.5px;margin-right:6px}
+.tc-lock{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:800;color:var(--gold);background:rgba(255,194,75,.1);border:1px solid rgba(255,194,75,.3);padding:4px 9px;border-radius:99px;margin-top:10px}
 .dsub{font-size:12px;font-weight:800;color:var(--t2);background:var(--surface);border:1px solid var(--line);padding:9px 16px;border-radius:99px;flex:1}
 .dsub.on{color:#052019;background:var(--act);border-color:var(--act)}
 body.light .dsub.on{color:#fff}
@@ -690,7 +700,7 @@ body.light .dsub.on{color:#fff}
 /* full-screen swipe stage: deck owns the phone viewport below the tabs */
 .swstage.on{display:flex;flex-direction:column;justify-content:center;min-height:545px}
 .swstage .swdeck{margin:0}
-.swstage .tcard{padding:19px 17px 16px;border-radius:20px}
+.swstage .tcard{padding:20px 18px 17px;border-radius:21px}
 .swstage .tc-why{-webkit-line-clamp:3}
 .swstage .swacts{margin:18px 0 0}
 .swstage .swhint{margin-top:12px}
@@ -1080,6 +1090,11 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
 
       <!-- TAB 1: full-screen swipe -->
       <div id="dt-swipe" class="dtab swstage on">
+        <div class="dscope swsc">
+          <button class="dsq on" id="dsw-cross" onclick="discScope('cross')">&#129309; Cross</button>
+          <button class="dsq" id="dsw-inter" onclick="discScope('inter')">&#127968; Inter</button>
+          <button class="dsq" id="dsw-xplat" onclick="discScope('xplat')">&#127760; Platform</button>
+        </div>
         <div id="swdeck" class="swdeck"></div>
         <div id="swacts" class="swacts">
           <button class="swb pass" onclick="swAct(-1)">&#10005;</button>
@@ -1757,14 +1772,39 @@ function discCollab(btn){ const sp=MATCH.find(m=>m.k===spotK); if(!sp||SENT.has(
   renderPipe(); }
 let discMode='list';
 const SW_SKIP=new Set();
+const SW_SKIP2={inter:new Set(),xplat:new Set()};
+const SW_INTER=[
+ {k:'in1',a:['Kitchen','#00C4A0'],b:['Munchies','#8B7BFF'],ovl:'46%',com:[['&#128101;','46% shared audience'],['&#127909;','reels rarely cross'],['&#127769;','their 10pm = your quiet']],why:'<b>46% of Munchies followers</b> also follow Kitchen, but reels rarely cross. A 10pm repost is free reach.',cta:'Draft the repost'},
+ {k:'in2',a:['Quick Bites','#57B5F0'],b:['Feasts','#FFC24B'],ovl:'1.4x',com:[['&#9728;','Sunday morning crowd'],['&#128337;','long posts underperform'],['&#9889;','15-sec format wins']],why:'The Feasts audience engages <b>Sunday mornings</b> but gets long posts. One short is the experiment.',cta:'Draft it'},
+ {k:'in3',a:['Shorts','#FF5C74'],b:['Kitchen','#00C4A0'],ovl:'12%',com:[['&#128279;','only 12% cross over'],['&#128204;','pinned-comment bridge'],['&#127837;','recipes complete shorts']],why:'Only <b>12% cross over</b>. A pinned comment on every short is the cheapest bridge.',cta:'Draft the comment'}];
+const SW_XPLAT=[
+ {k:'xp1',ini:'PD',c:'#E1306C',n:'@plantbased.daily',sub:'Instagram &middot; Sunday crowd',ovl:'31%',com:[['&#9728;','Sunday reel audience'],['&#128101;','matches Feasts profile'],['&#128202;','modelled from public signals']],why:'Their reel audience <b>matches your Feasts profile</b>. Cross-platform reaches people Facebook cannot.'},
+ {k:'xp2',ini:'SK',c:'#E1306C',n:'@sanaskitchen &middot; IG',sub:'FB &rarr; IG &middot; your reels',ovl:'+18k',com:[['&#127909;','3 reels ready to mirror'],['&#9997;','tuned captions by Art-E'],['&#128200;','tracked both sides']],why:'Your <b>three best reels</b> fit IG natively. Art-E reposts with tuned captions.'}];
+function interCardHTML(m,cls){ return `<div class="tcard ${cls}" data-k="${m.k}" style="--tc:${m.a[1]}">
+  <div class="tc-pair"><svg class="venn" width="60" height="38" viewBox="0 0 60 38"><circle cx="22" cy="19" r="14" fill="${m.a[1]}" opacity=".22"/><circle cx="22" cy="19" r="14" fill="none" stroke="${m.a[1]}" stroke-width="1.8"/><circle cx="38" cy="19" r="14" fill="${m.b[1]}" opacity=".22"/><circle cx="38" cy="19" r="14" fill="none" stroke="${m.b[1]}" stroke-width="1.8"/></svg>
+  <span class="pnames"><b><span class="pw" style="background:${m.a[1]}"></span>${m.a[0]}</b><b><span class="pw" style="background:${m.b[1]}"></span>${m.b[0]}</b></span>
+  <span class="tc-big"><b>${m.ovl}</b><small>overlap</small></span></div>
+  <div class="tc-why">${m.why}</div>
+  <div class="tc-com"><div class="tcl">What these pages share</div><div class="tcc">${m.com.map(p=>`<span>${p[0]} ${p[1]}</span>`).join('')}</div></div>
+  <div class="tc-cta"><button class="sbtn pri" style="flex:1" onclick="swCollab(event)">&#9997; ${m.cta}</button></div>
+</div>`; }
+function xplatCardHTML(m,cls){ return `<div class="tcard ${cls}" data-k="${m.k}" style="--tc:${m.c}">
+  <div class="tc-top"><span class="tc-ring"><svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" fill="none" stroke="var(--surface2)" stroke-width="3.5"/><circle cx="22" cy="22" r="19" fill="none" stroke="${m.c}" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="82 120" transform="rotate(-90 22 22)"/></svg><span class="tc-av">${m.ini}</span></span>
+  <span class="tc-id"><b>${m.n}</b><span>${m.sub}</span></span>
+  <span class="tc-big"><b>${m.ovl}</b><small>modelled</small></span></div>
+  <div class="tc-why">${m.why}</div>
+  <div class="tc-com"><div class="tcl">What you would share</div><div class="tcc">${m.com.map(p=>`<span>${p[0]} ${p[1]}</span>`).join('')}</div></div>
+  <span class="tc-lock">&#128274; Unlocks with Instagram connect</span>
+</div>`; }
+function cardForScope(m,cls){ if(discScopeV==='inter') return interCardHTML(m,cls); if(discScopeV==='xplat') return xplatCardHTML(m,cls); return tcardHTML(m,cls); }
 let discScopeV='cross';
 function discScope(s){ discScopeV=s;
   ['cross','inter','xplat'].forEach(k=>{
-    const b=document.getElementById('dsc-'+k), g=document.getElementById('dg-'+k);
-    if(b) b.classList.toggle('on', k===s);
-    if(g) g.classList.toggle('on', k===s);
+    ['dsc-','dsw-'].forEach(pre=>{ const b=document.getElementById(pre+k); if(b) b.classList.toggle('on', k===s); });
+    const g=document.getElementById('dg-'+k); if(g) g.classList.toggle('on', k===s);
   });
-  if(s==='cross'){ renderDisc(); renderPipe(); } }
+  if(discMode==='swipe'){ renderSwipe(); }
+  else if(s==='cross'){ renderDisc(); renderPipe(); } }
 function discTab(t){ discMode = t==='swipe' ? 'swipe' : 'list';
   const bs=document.getElementById('dtb-swipe'), be=document.getElementById('dtb-explore');
   if(bs) bs.classList.toggle('on', t==='swipe');
@@ -1774,28 +1814,39 @@ function discTab(t){ discMode = t==='swipe' ? 'swipe' : 'list';
   if(ex) ex.classList.toggle('on', t!=='swipe');
   if(t==='swipe'){ renderSwipe(); renderPipe(); } else { renderDisc(); renderPipe(); } }
 function setDiscMode(m){ discTab(m==='swipe'?'swipe':'explore'); }
-function swipePool(){ return discList().filter(m=>!SENT.has(m.k) && !SW_SKIP.has(m.k)); }
+function swipePool(){
+  if(discScopeV==='inter') return SW_INTER.filter(m=>!SW_SKIP2.inter.has(m.k));
+  if(discScopeV==='xplat') return SW_XPLAT.filter(m=>!SW_SKIP2.xplat.has(m.k));
+  return discList().filter(m=>!SENT.has(m.k) && !SW_SKIP.has(m.k)); }
 function tcardHTML(m,cls){ const R=20,C=2*Math.PI*R,p=parseInt(m.ovl); return `<div class="tcard ${cls}" data-k="${m.k}" style="--tc:${m.c}">
   <div class="tc-top"><span class="tc-ring"><svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" fill="none" stroke="var(--surface2)" stroke-width="3.5"/><circle cx="23" cy="23" r="20" fill="none" stroke="${m.c}" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="${C*p/100} ${C}" transform="rotate(-90 23 23)"/></svg><span class="tc-av" style="color:${inkFor(m.c)}">${m.ini}</span></span>
   <span class="tc-id"><b>${m.n}</b><span>${m.sub} &middot; ${m.fol}</span></span>
   <span class="tc-big"><b>${m.ovl}</b><small>overlap</small></span></div>
   <div class="tc-why">${m.why}</div>
+  <div class="tc-com"><div class="tcl">What you share</div><div class="tcc">${(m.posts||[]).map(p=>`<span>${p[0]} ${p[1]}</span>`).join('')}<span>&#128101; ${m.ovl} shared</span><span>&#9200; peak ${m.hrs}</span></div></div>
   <div class="tc-meters"><span class="smet"><b>${m.aud}</b>Audience<span class="sb"><i style="width:${m.aud}%"></i></span></span><span class="smet"><b>${m.tone}</b>Tone<span class="sb"><i style="width:${m.tone}%"></i></span></span><span class="smet"><b>${m.time}</b>Timing<span class="sb"><i style="width:${m.time}%"></i></span></span></div>
   <div class="tc-foot">est. new reach <b>${m.est}</b> &nbsp;&middot;&nbsp; their peak <b>${m.hrs}</b></div>
   <div class="tc-cta"><button class="sbtn pri" style="flex:1" onclick="swCollab(event)">&#129309; Request collab</button><button class="sbtn gho" onclick="swProfile(event)">Profile</button></div>
 </div>`; }
 function renderSwipe(){ const d=document.getElementById('swdeck'); if(!d) return; const pool=swipePool();
   const acts=document.getElementById('swacts');
-  if(!pool.length){ d.innerHTML='<div style="padding:36px 8px;text-align:center;color:var(--t2);font-size:11px;line-height:1.7">You have swiped the week clean.<br>Fresh matches land nightly.</div>'; if(acts) acts.style.visibility='hidden'; d.style.height=''; return; }
+  if(!pool.length){ const msg = discScopeV==='inter' ? 'All inter-page ideas handled.<br>Art-E refills this weekly.' : (discScopeV==='xplat' ? 'That is every cross-platform preview.<br>Connect Instagram to unlock more.' : 'Swiped clean.<br>Fresh matches land nightly.'); d.innerHTML='<div style="padding:36px 8px;text-align:center;color:var(--t2);font-size:12px;line-height:1.7">'+msg+'</div>'; if(acts) acts.style.visibility='hidden'; d.style.height=''; return; }
   if(acts) acts.style.visibility='';
-  d.innerHTML = pool.slice(0,2).map((m,i)=>tcardHTML(m, i===0?'top':'behind')).reverse().join('');
+  d.innerHTML = pool.slice(0,2).map((m,i)=>cardForScope(m, i===0?'top':'behind')).reverse().join('');
   bindSwipeTop(); const tc0=d.querySelector('.tcard.top'); if(tc0) d.style.height=(tc0.offsetHeight+14)+'px'; }
 function topT(){ return document.querySelector('.tcard.top'); }
-function swAct(dir){ const t=topT(); if(!t) return; const k=t.dataset.k, m=MATCH.find(x=>x.k===k);
+function swAct(dir){ const t=topT(); if(!t) return; const k=t.dataset.k;
+  if(discScopeV!=='cross'){ t.classList.add(dir<0?'flyL':'flyR');
+    toast(dir<0?'Passed.':'Saved to collab ideas.');
+    setTimeout(()=>{ SW_SKIP2[discScopeV].add(k); renderSwipe(); },360); return; }
+  const m=MATCH.find(x=>x.k===k);
   t.classList.add(dir<0?'flyL':'flyR');
   if(dir<0){ toast('Passed. Hidden this week.'); setTimeout(()=>{ const i=MATCH.findIndex(x=>x.k===k); if(i>=0) MATCH.splice(i,1); if(spotK===k) spotK=null; renderSwipe(); renderPipe(); },360); }
   else { if(m && !PIPE.saved.includes(m.n)) PIPE.saved.push(m.n); toast('Saved.'); setTimeout(()=>{ SW_SKIP.add(k); renderSwipe(); renderPipe(); },360); } }
-function swCollab(e){ if(e) e.stopPropagation(); const t=topT(); if(!t) return; spotK=t.dataset.k; t.classList.add('flyR'); discCollab(null); setTimeout(renderSwipe, 420); }
+function swCollab(e){ if(e) e.stopPropagation(); const t=topT(); if(!t) return;
+  if(discScopeV==='inter'){ const k=t.dataset.k; t.classList.add('flyR'); setTimeout(()=>{ SW_SKIP2.inter.add(k); renderSwipe(); show('compose'); },320); return; }
+  if(discScopeV==='xplat'){ toast('Cross-platform collabs unlock when Instagram is connected.'); return; }
+  spotK=t.dataset.k; t.classList.add('flyR'); discCollab(null); setTimeout(renderSwipe, 420); }
 function swProfile(e){ if(e) e.stopPropagation(); const t=topT(); if(t){ fillMD(t.dataset.k); show('disco'); } }
 function bindSwipeTop(){ const t=topT(); if(!t||t.dataset.bound) return; t.dataset.bound=1;
   let sx=0,dx=0,drag=false;
