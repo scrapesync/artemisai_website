@@ -1161,7 +1161,7 @@ body.light .al-fchip.on{color:#fff}
     <button class="ibtn" data-v="pages" onclick="setView('pages')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg><span class="tip">Pages</span></button>
     <button class="ibtn" data-v="settings" onclick="setView('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h0a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51h0a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v0a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span class="tip">Settings</span></button>
     <div class="spacer"></div>
-    <div class="avatar" title="Lewis">S</div>
+    <div class="avatar" title="Lewis">L</div>
   </nav>
 
   <!-- ═══ MAIN ═══ -->
@@ -1607,7 +1607,27 @@ body.light .al-fchip.on{color:#fff}
 
       <div class="feed-label"><h3>Scheduled</h3></div>
       <div class="sched-row" style="margin:0 0 8px"><span>&#128197;</span><span style="flex:1">Pasta reel &middot; <b>today 6:40pm</b> &middot; Drinking Memes</span><span class="mono">2.4x &middot; 87%</span><button class="btn btn-ghost" style="padding:7px 13px;font-size:11.5px" onclick="openCompose()">Edit</button><button class="btn btn-ghost" style="padding:7px 13px;font-size:11.5px;color:var(--rose)" onclick="toast('Unscheduled. The window stays open until 7pm.')">Cancel</button></div>
-      <p class="quiet" style="text-align:left">Full week calendar arrives fast-follow. For now the windows above are the whole strategy: post inside them.</p>
+      <p class="quiet" style="text-align:left;margin-bottom:26px">Full week calendar arrives fast-follow. For now the windows above are the whole strategy: post inside them.</p>
+
+      <!-- ── Alerts, inside Studio ── -->
+      <div class="feed-label"><h3>Alerts &amp; rules</h3><button class="btn btn-ghost" style="padding:7px 14px;font-size:12px" onclick="setView('alerts')">Open full Alerts &rarr;</button></div>
+      <div class="al-strip" style="margin-top:6px">
+        <div class="al-stat al-crit"><div class="al-n">2</div><div class="al-l">Needs you now</div></div>
+        <div class="al-stat al-opp"><div class="al-n">1</div><div class="al-l">Opportunity</div></div>
+        <div class="al-stat al-info"><div class="al-n">1</div><div class="al-l">For your briefing</div></div>
+        <div class="al-stat al-calm"><div class="al-n">6</div><div class="al-l">Auto-handled today</div></div>
+      </div>
+      <div class="al-card al-crit-b" style="margin-top:14px">
+        <div class="al-head"><span class="al-sev al-crit-p">CRISIS</span><span class="al-when">2 min ago</span></div>
+        <div class="al-h2">Comment cluster turning negative</div>
+        <div class="al-page"><span class="al-pdot" style="background:var(--rose)"></span>UK JAIL News · 14 negative comments in 30 min · rising</div>
+        <div class="al-draft"><div class="al-draft-t"><span class="al-arte-i">✦</span> Art-E drafted a calm reply</div><div class="al-draft-b">"We hear you, and we're looking into this now. Thanks for flagging it — updates to follow shortly."</div></div>
+        <div class="al-acts"><button class="btn btn-primary" style="padding:9px 16px;font-size:12.5px" onclick="arteExplain('crisis')">Review &amp; send</button><button class="btn btn-ghost" style="padding:9px 14px;font-size:12.5px" onclick="arteExplain('crisis')">See the comments</button></div>
+      </div>
+      <div class="feed-label" style="margin-top:20px"><h3>Alert rules</h3><button class="btn btn-ghost" style="padding:7px 14px;font-size:12px" onclick="toast('Rule builder opens here in the live app.')">+ Create rule</button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Comment storm on any page</div><div class="rl2">Within minutes, drafted reply attached · interrupts</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Storm rule"></button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Post beats 2x its prediction</div><div class="rl2">So you can ride it while it moves · interrupts</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Viral rule"></button></div>
+      <div class="rule" style="margin-bottom:22px"><div style="flex:1"><div class="rl1">Creator match above 25% overlap</div><div class="rl2">Only real overlap, never hashtag noise · briefing</div></div><button class="tog on" onclick="this.classList.toggle('on')" aria-label="Match rule"></button></div>
     </section>
 
     <section class="view" id="v-discovery">
