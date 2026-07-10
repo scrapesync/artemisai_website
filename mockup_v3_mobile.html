@@ -938,8 +938,8 @@ body.light .alm-btn{color:#fff}
 </style>
 <style>
 /* Studio sub-tabs */
-.stub-tabs{display:flex;gap:7px;margin:6px 0 16px;overflow-x:auto}
-.stub{flex:0 0 auto;padding:8px 14px;border:1px solid var(--line);border-radius:99px;background:transparent;color:var(--t3);font-size:12.5px;font-weight:700;white-space:nowrap}
+.stub-tabs{display:flex;gap:6px;margin:6px 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.stub{flex:0 0 auto;padding:7px 11px;border:1px solid var(--line);border-radius:99px;background:transparent;color:var(--t3);font-size:11.5px;font-weight:700;white-space:nowrap}
 .stub.on{background:var(--act);border-color:var(--act);color:#fff}
 body.light .stub.on{color:#fff}
 .stub-pane{display:none}
@@ -956,7 +956,7 @@ body.light .stub.on{color:#fff}
       <div class="shade-head"><b>Notifications</b><span>Artemis &middot; today</span></div>
       <button class="notif" onclick="closeShade();openChatM()"><span class="nico" style="background:rgba(0,196,160,.15)">&#128172;</span><span class="nbody"><b>Council Estate Life replied in your collab chat</b><span>"Tuesday works! What time?" &middot; 12m</span></span><span class="cunread" style="margin-left:auto">2</span></button>
       <button class="notif" onclick="closeShade();nav('arte');arteExplain('crisis')"><span class="nico" style="background:rgba(255,92,116,.15)">&#9888;&#65039;</span><span class="nbody"><b>Comment cluster turning negative</b><span>UK JAIL News &middot; calm reply drafted &middot; 18m</span></span></button>
-      <button class="notif" onclick="closeShade();nav('wins')"><span class="nico" style="background:rgba(255,194,75,.15)">&#128200;</span><span class="nbody"><b>Toastie reel beat its forecast 2.9x</b><span>Drinking Memes &middot; worth resharing &middot; 2h</span></span></button>
+      <button class="notif" onclick="closeShade();nav('planner');studioTab('wins')"><span class="nico" style="background:rgba(255,194,75,.15)">&#128200;</span><span class="nbody"><b>Toastie reel beat its forecast 2.9x</b><span>Drinking Memes &middot; worth resharing &middot; 2h</span></span></button>
       <button class="notif" onclick="closeShade();nav('discover')"><span class="nico" style="background:rgba(139,123,255,.15)">&#129309;</span><span class="nbody"><b>New creator match at 41% overlap</b><span>@Council Estate Life &middot; intro drafted &middot; 4h</span></span></button>
       <button class="notif" onclick="closeShade();nav('arte');arteExplain('briefing')"><span class="nico" style="background:rgba(0,196,160,.15)">&#9728;&#65039;</span><span class="nbody"><b>Morning briefing ready</b><span>All pages &middot; 2-min read &middot; 7:02am</span></span></button>
       <div class="shade-foot"><button onclick="closeShade();nav('inbox')">Open inbox</button><button onclick="clearShade()">Clear all</button><button onclick="closeShade()">Close</button></div>
@@ -1036,7 +1036,7 @@ body.light .stub.on{color:#fff}
         <p class="card-why">Short-form food is up 22% across your network this week. Draft it now and ride it.</p>
         <span class="card-act">Draft with a live score &rarr;</span>
       </button>
-      <button class="card win-card" data-page="sk" onclick="nav('wins')">
+      <button class="card win-card" data-page="sk" onclick="nav('planner');studioTab('wins')">
         <div class="card-top"><span class="ctag win">Win</span><span class="card-page">Drinking Memes</span><span class="card-time">1d</span></div>
         <div class="card-line">Tuesday's reel beat its prediction by <b>31%</b></div>
         <p class="card-why">You followed the timing advice. 4 of your last 5 followed recommendations beat baseline.</p>
@@ -1072,57 +1072,7 @@ body.light .stub.on{color:#fff}
   </section>
 
   <!-- ═══ WINS ═══ -->
-  <section class="scr" id="scr-wins">
-    <div class="scroll" style="padding-top:70px">
-      <div class="greet">Because you acted on Art-E's advice</div>
-      <h2 class="vh">Your wins</h2>
-      <div class="wins-hero">
-        <div class="wh-eyebrow">This week</div>
-        <div class="wh-big">+38%<small>avg reach on followed advice</small></div>
-        <p class="wh-line">Yesterday's reel hit <b>2.9&times; usual reach</b>, beating its 2.4&times; forecast.</p>
-      </div>
-      <div class="vband">
-        <div class="vb"><div class="vn">+842K</div><div class="vl">extra reach<br>this month</div></div>
-        <div class="vb"><div class="vn">3</div><div class="vl">viral windows<br>hit</div></div>
-        <div class="vb"><div class="vn">9</div><div class="vl">drafts<br>improved</div></div>
-        <div class="vb"><div class="vn">1</div><div class="vl">risk caught<br>early</div></div>
-      </div>
-      <div class="trust">
-        <div class="trust-top"><h4>Art-E's scoreboard with you</h4><span>30 days</span></div>
-        <div class="tbar"><i style="width:66%;background:var(--act)"></i><i style="width:17%;background:#3A4557"></i><i style="width:17%;background:var(--surface2)"></i></div>
-        <div class="tlegend"><span><b style="background:var(--act)"></b>8 beat baseline</span><span><b style="background:#3A4557"></b>2 matched</span><span><b style="background:var(--surface2)"></b>2 skipped</span></div>
-        <div class="streak"><div class="sd hit">W1</div><div class="sd hit">W2</div><div class="sd hit">W3</div><div class="sd">W4</div></div>
-      </div>
-      <div class="trust">
-        <div class="trust-top"><h4>Goal: 150k by 30 Sept</h4><span>85%</span></div>
-        <div class="tbar"><i style="width:85%;background:var(--gold)"></i></div>
-        <div class="tlegend"><span>128k now &middot; on pace, +9k a month</span></div>
-      </div>
-      <div class="trust">
-        <div class="trust-top"><h4>What Artemis earned you</h4><span>this month</span></div>
-        <div class="value-grid">
-          <div class="vitem"><b>+412k</b><span>extra reach from taking the advice</span></div>
-          <div class="vitem"><b>2</b><span>comment storms calmed</span></div>
-          <div class="vitem"><b>3</b><span>viral windows hit</span></div>
-          <div class="vitem"><b>9</b><span>drafts improved</span></div>
-        </div>
-      </div>
-      <div class="report-row">
-        <span class="ri">&#128196;</span>
-        <div style="flex:1"><div class="rt1">Weekly report</div><div class="rt2">Mondays 9am &middot; last one 2 days ago</div></div>
-        <button class="btn btn-ghost" style="padding:8px 12px;font-size:11.5px" onclick="toast('Report on its way to you.')">Download</button>
-        <button class="btn btn-ghost" style="padding:8px 12px;font-size:11.5px" onclick="toast('Link copied. Share away.')">Link</button>
-      </div>
-      <div class="rule"><div style="flex:1"><div class="rl1">Weekly &middot; 30 Jun</div><div class="rl2">Reach +38%, two storms calmed</div></div><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Report on its way to you.')">PDF</button></div>
-      <div class="rule"><div style="flex:1"><div class="rl1">Monthly &middot; June</div><div class="rl2">Full month across 5 pages</div></div><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Report on its way to you.')">PDF</button></div>
-      <div class="rule"><div style="flex:1"><div class="rl1">Brand risk &middot; 12 Jun</div><div class="rl2">The UK JAIL News cluster, cause and fix</div></div><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Report on its way to you.')">PDF</button></div>
-      <div class="rate">
-        <p><b>Was the 6:40pm advice useful?</b><br>Every rating sharpens the next one.</p>
-        <div class="rate-btns"><button class="rate-btn" onclick="rate(this)">&#128077; Useful</button><button class="rate-btn" onclick="rate(this)">&#128078; Not really</button></div>
-        <div class="rate-thanks" id="rateThanks">Noted. This trains what Art-E shows you next.</div>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- ═══ ALERTS ═══ -->
 <section class="scr" id="scr-alerts">
@@ -1172,7 +1122,7 @@ body.light .stub.on{color:#fff}
 
       <div class="alm-group"><span class="alm-gline" style="background:var(--gold)"></span>For your briefing</div>
 
-      <div class="alm-card" style="--ac:var(--gold)" onclick="nav('wins')">
+      <div class="alm-card" style="--ac:var(--gold)" onclick="nav('planner');studioTab('wins')">
         <div class="alm-head"><span class="alm-sev" style="color:var(--gold);background:rgba(255,194,75,.12);border-color:rgba(255,194,75,.3)">REPORT</span><span class="alm-when">Ready</span></div>
         <div class="alm-h2">Weekly report ready</div>
         <div class="alm-page"><span class="alm-pdot" style="background:var(--gold)"></span>Reach +38%, two storms calmed · 2-min read</div>
@@ -1215,6 +1165,7 @@ body.light .stub.on{color:#fff}
         <button class="stub on" id="stub-times" onclick="studioTab('times')">📅 Best Times</button>
         <button class="stub" id="stub-alerts" onclick="studioTab('alerts')">🔔 Alerts</button>
         <button class="stub" id="stub-drafts" onclick="studioTab('drafts')">📝 Drafts</button>
+        <button class="stub" id="stub-wins" onclick="studioTab('wins')">🏆 Wins</button>
       </div>
 
       <!-- ── BEST TIMES ── -->
@@ -1285,6 +1236,56 @@ body.light .stub.on{color:#fff}
         <div class="draft-row" style="margin-bottom:16px"><span class="dsc" style="background:rgba(255,194,75,.1);color:var(--gold)">61</span><div style="flex:1"><div class="dt1">Friday short, first cut</div><div class="dt2">Trimmed to 84 chars, approve in Moves</div></div><button class="ckbtn" onclick="show('compose');loadDraft(2)">Edit</button></div>
         <button class="btn btn-primary" style="width:100%" onclick="show('compose')">+ New draft</button>
       </div>
+
+      <!-- ── WINS (inside Studio) ── -->
+      <div class="stub-pane" id="pane-wins">
+      <div class="wins-hero">
+        <div class="wh-eyebrow">This week</div>
+        <div class="wh-big">+38%<small>avg reach on followed advice</small></div>
+        <p class="wh-line">Yesterday's reel hit <b>2.9&times; usual reach</b>, beating its 2.4&times; forecast.</p>
+      </div>
+      <div class="vband">
+        <div class="vb"><div class="vn">+842K</div><div class="vl">extra reach<br>this month</div></div>
+        <div class="vb"><div class="vn">3</div><div class="vl">viral windows<br>hit</div></div>
+        <div class="vb"><div class="vn">9</div><div class="vl">drafts<br>improved</div></div>
+        <div class="vb"><div class="vn">1</div><div class="vl">risk caught<br>early</div></div>
+      </div>
+      <div class="trust">
+        <div class="trust-top"><h4>Art-E's scoreboard with you</h4><span>30 days</span></div>
+        <div class="tbar"><i style="width:66%;background:var(--act)"></i><i style="width:17%;background:#3A4557"></i><i style="width:17%;background:var(--surface2)"></i></div>
+        <div class="tlegend"><span><b style="background:var(--act)"></b>8 beat baseline</span><span><b style="background:#3A4557"></b>2 matched</span><span><b style="background:var(--surface2)"></b>2 skipped</span></div>
+        <div class="streak"><div class="sd hit">W1</div><div class="sd hit">W2</div><div class="sd hit">W3</div><div class="sd">W4</div></div>
+      </div>
+      <div class="trust">
+        <div class="trust-top"><h4>Goal: 150k by 30 Sept</h4><span>85%</span></div>
+        <div class="tbar"><i style="width:85%;background:var(--gold)"></i></div>
+        <div class="tlegend"><span>128k now &middot; on pace, +9k a month</span></div>
+      </div>
+      <div class="trust">
+        <div class="trust-top"><h4>What Artemis earned you</h4><span>this month</span></div>
+        <div class="value-grid">
+          <div class="vitem"><b>+412k</b><span>extra reach from taking the advice</span></div>
+          <div class="vitem"><b>2</b><span>comment storms calmed</span></div>
+          <div class="vitem"><b>3</b><span>viral windows hit</span></div>
+          <div class="vitem"><b>9</b><span>drafts improved</span></div>
+        </div>
+      </div>
+      <div class="report-row">
+        <span class="ri">&#128196;</span>
+        <div style="flex:1"><div class="rt1">Weekly report</div><div class="rt2">Mondays 9am &middot; last one 2 days ago</div></div>
+        <button class="btn btn-ghost" style="padding:8px 12px;font-size:11.5px" onclick="toast('Report on its way to you.')">Download</button>
+        <button class="btn btn-ghost" style="padding:8px 12px;font-size:11.5px" onclick="toast('Link copied. Share away.')">Link</button>
+      </div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Weekly &middot; 30 Jun</div><div class="rl2">Reach +38%, two storms calmed</div></div><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Report on its way to you.')">PDF</button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Monthly &middot; June</div><div class="rl2">Full month across 5 pages</div></div><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Report on its way to you.')">PDF</button></div>
+      <div class="rule"><div style="flex:1"><div class="rl1">Brand risk &middot; 12 Jun</div><div class="rl2">The UK JAIL News cluster, cause and fix</div></div><button class="btn btn-ghost" style="padding:6px 11px;font-size:10.5px" onclick="toast('Report on its way to you.')">PDF</button></div>
+      <div class="rate">
+        <p><b>Was the 6:40pm advice useful?</b><br>Every rating sharpens the next one.</p>
+        <div class="rate-btns"><button class="rate-btn" onclick="rate(this)">&#128077; Useful</button><button class="rate-btn" onclick="rate(this)">&#128078; Not really</button></div>
+        <div class="rate-thanks" id="rateThanks">Noted. This trains what Art-E shows you next.</div>
+      </div>
+      </div>
+
     </div>
   </section>
 
@@ -1774,15 +1775,17 @@ body.light .stub.on{color:#fff}
 <script>
 /* nav */
 function nav(n){
+  const target=document.getElementById('scr-'+n);
+  if(!target){ return; }
   document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
-  document.getElementById('scr-'+n).classList.add('on');
+  target.classList.add('on');
   document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('on', b.dataset.n===n));
   hideSheets();
   const sb=document.getElementById('msrchBtn'); if(sb) sb.style.display=(n==='arte')?'none':'flex';
   if(n==='discover' && typeof discMode!=='undefined' && discMode==='swipe') setTimeout(renderSwipe,60);
 }
 function studioTab(t){
-  ['times','alerts','drafts'].forEach(x=>{
+  ['times','alerts','drafts','wins'].forEach(x=>{
     document.getElementById('stub-'+x).classList.toggle('on', x===t);
     document.getElementById('pane-'+x).classList.toggle('on', x===t);
   });
