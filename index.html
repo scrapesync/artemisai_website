@@ -310,6 +310,52 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:88px
 .foot .flinks{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;color:var(--t2)}
 .foot .flinks a:hover{color:var(--teal)}
 .foot small{display:block;color:var(--t3);font-size:13px;margin-top:10px}
+
+/* logo wordmark: kill the flex gap between Artemis and AI */
+.logo .wm{display:inline-flex;align-items:baseline;gap:0;letter-spacing:-.01em}
+.logo .wm b{color:var(--teal)}
+
+/* live tiles (the old site's live-numbers, restyled) */
+.stats .sec-head{max-width:none;text-align:center}
+.live-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1180px;margin:0 auto;padding:0 24px}
+@media(max-width:960px){.live-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.live-grid{grid-template-columns:1fr}}
+.live-tile{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;transition:transform .18s,border-color .18s}
+.live-tile:hover{transform:translateY(-3px);border-color:var(--teal)}
+.lt-ic{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:12px}
+.lt-num{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:27px;color:var(--t1);font-variant-numeric:tabular-nums}
+.lt-lbl{font-size:13px;color:var(--t2);margin-top:2px;line-height:1.4}
+.lt-trend{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--teal);margin-top:9px;letter-spacing:.04em}
+
+/* media marquee: memes + videos getting predicted */
+.marquee{margin-top:8px;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.mq-track{display:flex;gap:18px;width:max-content;padding:8px 0 14px;animation:mq 36s linear infinite}
+.marquee:hover .mq-track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mcard{width:232px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;flex:0 0 auto;transition:transform .2s,border-color .2s}
+.mcard:hover{transform:translateY(-5px);border-color:var(--teal)}
+.mc-img{height:130px;border-radius:12px;background:linear-gradient(160deg,var(--bg-elev-2),var(--bg-elev));border:1px solid var(--line-soft);display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Sora',sans-serif;font-weight:800;font-size:14.5px;line-height:1.45;color:var(--t1);padding:12px;position:relative;overflow:hidden}
+.mcard.photo .mc-img{font-size:30px;letter-spacing:6px}
+.mc-img.vid{background:linear-gradient(160deg,#171b22,#10131a)}
+body.light .mc-img.vid{background:linear-gradient(160deg,#20262f,#161b23)}
+.play{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;padding-left:3px}
+.vbar{position:absolute;left:12px;right:12px;bottom:10px;height:4px;border-radius:99px;background:rgba(255,255,255,.15)}
+.vbar i{display:block;height:100%;width:46%;border-radius:99px;background:var(--teal);animation:vplay 3.4s ease-in-out infinite alternate}
+@keyframes vplay{from{width:18%}to{width:86%}}
+.mcard.reel .mc-img{height:170px}
+.mc-meta{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.mc-chip{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;border-radius:999px;padding:4px 9px;letter-spacing:.03em}
+.mc-chip.ocr{color:var(--teal);background:var(--teal-bg)}
+.mc-chip.tpl{color:var(--gold);background:var(--gold-bg)}
+.mc-chip.hook{color:var(--arte);background:var(--arte-bg)}
+.mc-chip.tr{color:var(--t2);background:var(--bg-elev-2)}
+.mc-chip.sc{color:var(--teal);background:var(--teal-bg)}
+.mc-score{font-family:'Sora',sans-serif;font-weight:800;font-size:14px;border-top:1px dashed var(--line-soft);padding-top:10px}
+.mc-score.s-hi{color:var(--teal)}
+.mc-score.s-md{color:var(--gold)}
+.mc-score.s-lo{color:var(--rose)}
+@media (prefers-reduced-motion: reduce){.mq-track{animation:none}}
+
 </style>
 </head>
 <body>
@@ -319,7 +365,7 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:88px
   <div class="hdr-in">
     <a class="logo" href="index.html" aria-label="ArtemisAI home">
       <svg width="30" height="30" viewBox="0 0 36 36"><rect x="2" y="2" width="32" height="32" rx="9" fill="#0c1221"/><path d="M18 8L26 28H10L18 8Z" stroke="#00d4aa" stroke-width="1.6" fill="none"/><circle cx="18" cy="20" r="3" fill="#00d4aa"/></svg>
-      Artemis<b>AI</b>
+      <span class="wm">Artemis<b>AI</b></span>
     </a>
     <nav class="hdr-links" aria-label="Main">
       <a href="#how">How it works</a>
@@ -338,9 +384,9 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:88px
 <section class="hero" id="hero" style="padding-top:72px">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">Starting with Facebook · more platforms on the way</span>
-      <h1 style="margin-top:14px">You post.<br>We <span class="hl">watch the rest.</span></h1>
-      <p class="sub">ArtemisAI predicts your posts before you publish, catches comment storms in minutes, and knows your best time to post.</p>
+      <span class="eyebrow">The AI analyst for your social pages</span>
+      <h1 style="margin-top:14px">Stop guessing.<br><span class="hl">Start knowing.</span></h1>
+      <p class="sub">ArtemisAI scores your posts before they go out, spots trouble while it's still small, and finds the exact moment your audience is ready. Starting with Facebook — more platforms on the way.</p>
       <div class="hero-ctas">
         <a class="btn btn-teal" href="mailto:hello@artemisai.co.uk?subject=Pilot%20access">Join the pilot</a>
         <a class="btn btn-ghost" href="admin_login.html">Launch app →</a>
@@ -349,7 +395,7 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:88px
         <div class="dots" aria-hidden="true">
           <span style="background:#00C4A0;color:#04110D">D</span><span style="background:#8B7BFF">U</span><span style="background:#FFC24B;color:#3A2A00">K</span><span style="background:#4B5563">C</span><span style="background:#66707D">+</span>
         </div>
-        9 UK pilot pages · Launching November 2026
+        In closed pilot now · Launching November 2026
       </div>
     </div>
     <div class="phone-zone" aria-hidden="true">
@@ -396,11 +442,35 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:88px
   </div>
 
   <div class="stats" id="live-numbers">
-    <div class="row">
-      <div><div class="n"><em data-count="111796" data-live="1400" data-inc="3">0</em></div><div class="l">posts analysed <span class="tick-dot"></span></div></div>
-      <div><div class="n"><span data-count="3283917" data-live="900" data-inc="7">0</span></div><div class="l">comments read <span class="tick-dot"></span></div></div>
-      <div><div class="n"><span data-count="2" data-suffix=" yrs">0</span></div><div class="l">of history per page</div></div>
-      <div><div class="n"><em data-count="9">0</em></div><div class="l">UK pilot pages</div></div>
+    <div class="sec-head" style="margin-bottom:30px;padding-top:6px">
+      <span class="live-dot" style="font-size:11px;padding:5px 12px">Live right now</span>
+      <h2 style="font-size:clamp(24px,3vw,34px);margin:12px 0 0">ArtemisAI is busy <span style="background:linear-gradient(100deg,var(--teal),var(--arte));-webkit-background-clip:text;background-clip:text;color:transparent">right now</span></h2>
+    </div>
+    <div class="live-grid">
+      <div class="live-tile">
+        <div class="lt-ic" style="background:var(--teal-bg);color:var(--teal)">💬</div>
+        <div class="lt-num"><span data-count="247832" data-live="900" data-inc="8">0</span></div>
+        <div class="lt-lbl">comments read today</div>
+        <div class="lt-trend">counting up live <span class="tick-dot"></span></div>
+      </div>
+      <div class="live-tile">
+        <div class="lt-ic" style="background:var(--rose-bg);color:var(--rose)">⚠️</div>
+        <div class="lt-num"><span data-count="4521" data-live="7000" data-inc="1">0</span></div>
+        <div class="lt-lbl">drama moments caught this month</div>
+        <div class="lt-trend">+18% vs last month</div>
+      </div>
+      <div class="live-tile">
+        <div class="lt-ic" style="background:var(--gold-bg);color:var(--gold)">✨</div>
+        <div class="lt-num"><span data-count="12847" data-live="4600" data-inc="2">0</span></div>
+        <div class="lt-lbl">hours saved for page managers this week</div>
+        <div class="lt-trend">growing every minute</div>
+      </div>
+      <div class="live-tile">
+        <div class="lt-ic" style="background:var(--arte-bg);color:var(--arte)">✓</div>
+        <div class="lt-num"><span data-count="98" data-suffix="%">0</span></div>
+        <div class="lt-lbl">of users say ArtemisAI saved them this week</div>
+        <div class="lt-trend">verified Q1 2026</div>
+      </div>
     </div>
     <div class="platforms">
       <span class="plat live"><i></i>Facebook · live</span>
@@ -615,6 +685,30 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:88px
   </div>
 </section>
 
+
+<!-- ══════════ MEDIA: it reads pictures and watches videos ══════════ -->
+<section id="media" style="padding-top:0;overflow:hidden">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Not just text</span>
+      <h2>It reads the memes.<br>It watches the videos.</h2>
+      <p>Text in images, scenes, hooks, transcripts — everything gets read, everything gets scored.</p>
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="mq-track">
+      <div class="mcard meme"><div class="mc-img">Nobody:<br>British dads at a BBQ in February:</div><div class="mc-meta"><span class="mc-chip ocr">OCR · text read</span><span class="mc-chip tpl">template · trending</span></div><div class="mc-score s-hi">82 · strong</div></div>
+      <div class="mcard video"><div class="mc-img vid"><span class="play">▶</span><span class="vbar"><i></i></span></div><div class="mc-meta"><span class="mc-chip hook">hook · first 3s strong</span><span class="mc-chip tr">transcript read</span></div><div class="mc-score s-hi">88 · post it</div></div>
+      <div class="mcard photo"><div class="mc-img">🍺 🐕 🌧</div><div class="mc-meta"><span class="mc-chip sc">scene · pub, dog, rain</span></div><div class="mc-score s-md">61 · average</div></div>
+      <div class="mcard meme"><div class="mc-img">British summer,<br>day 1 vs day 2:</div><div class="mc-meta"><span class="mc-chip ocr">OCR · text read</span><span class="mc-chip tpl">seen 34× in your niche</span></div><div class="mc-score s-hi">79 · strong</div></div>
+      <div class="mcard video reel"><div class="mc-img vid"><span class="play">▶</span><span class="vbar"><i style="width:78%"></i></span></div><div class="mc-meta"><span class="mc-chip hook">retention · holds to 9s</span></div><div class="mc-score s-hi">84 · evening slot</div></div>
+      <div class="mcard photo"><div class="mc-img">🖼 🖼 🖼</div><div class="mc-meta"><span class="mc-chip sc">carousel · 3 images</span><span class="mc-chip tpl">lead with #2</span></div><div class="mc-score s-lo">55 · reorder it</div></div>
+      <div class="mcard meme"><div class="mc-img">Me: one episode<br>Also me at 3am:</div><div class="mc-meta"><span class="mc-chip ocr">OCR · text read</span><span class="mc-chip hook">relatable · high share</span></div><div class="mc-score s-hi">86 · strong</div></div>
+      <div class="mcard video"><div class="mc-img vid"><span class="play">▶</span><span class="vbar"><i style="width:22%"></i></span></div><div class="mc-meta"><span class="mc-chip tr">music only · no speech</span><span class="mc-chip hook">hook · weak open</span></div><div class="mc-score s-lo">47 · fix the first 3s</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════ PROOF ══════════ -->
 <section id="proof">
   <div class="wrap">
@@ -761,7 +855,7 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:88px
     <div>
       <a class="logo" href="index.html">
         <svg width="26" height="26" viewBox="0 0 36 36"><rect x="2" y="2" width="32" height="32" rx="9" fill="#0c1221"/><path d="M18 8L26 28H10L18 8Z" stroke="#00d4aa" stroke-width="1.6" fill="none"/><circle cx="18" cy="20" r="3" fill="#00d4aa"/></svg>
-        Artemis<b>AI</b>
+        <span class="wm">Artemis<b>AI</b></span>
       </a>
       <small>ArtemisAI Ltd · Made in the UK · © 2026</small>
     </div>
@@ -829,6 +923,13 @@ function toggleTheme(){
     es.forEach(function(e){ if(e.isIntersecting){ activate(+e.target.dataset.screen); } });
   },{rootMargin:'-42% 0px -42% 0px'});
   steps.forEach(function(st){ io.observe(st); });
+})();
+
+
+/* marquee: duplicate track content for a seamless loop */
+(function(){
+  var t=document.querySelector('.mq-track');
+  if(t){ t.innerHTML += t.innerHTML; }
 })();
 
 /* reveal on scroll */
