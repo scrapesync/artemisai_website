@@ -443,6 +443,25 @@ body.light .sm-inner.vid.novid{background:linear-gradient(120deg,#2a3240,#3b2c58
 @keyframes frowin{0%{opacity:0;transform:translateX(14px)}8%,86%{opacity:1;transform:none}94%,100%{opacity:0}}
 @media(max-width:960px){.proof{grid-template-columns:1fr;max-width:520px}.proof-phone{order:-1}}
 
+
+/* ═══ light theme: ambient colour washes (the aurora) ═══ */
+body.light{
+  background:
+    radial-gradient(1000px 640px at 88% -120px, rgba(0,163,133,.16), transparent 62%),
+    radial-gradient(880px 640px at -140px 30%, rgba(110,91,230,.11), transparent 62%),
+    radial-gradient(760px 560px at 108% 62%, rgba(217,142,11,.10), transparent 62%),
+    radial-gradient(900px 620px at 30% 108%, rgba(0,163,133,.09), transparent 62%),
+    #F7F8F6;
+  background-attachment: fixed;
+}
+/* let the banded sections breathe a little colour instead of flat white */
+body.light .stats{background:linear-gradient(180deg,#FFFFFF, #F2FAF7)}
+body.light .flow-section{background:linear-gradient(180deg,#FFFFFF, #F5F3FC)}
+body.light .team-section{background:linear-gradient(180deg,#FFFFFF, #F2FAF7)}
+body.light .hero::before{background:radial-gradient(circle,rgba(0,163,133,.18),transparent 62%)}
+body.light .cta-banner{background:linear-gradient(140deg,#FFFFFF,#F0F7F4)}
+@media(max-width:760px){body.light{background-attachment:scroll}}
+
 </style>
 </head>
 <body>
