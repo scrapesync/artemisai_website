@@ -408,9 +408,40 @@ body.light .sm-inner.vid.novid{background:linear-gradient(120deg,#2a3240,#3b2c58
 
 
 /* media player */
-.media-player{max-width:720px;margin:0 auto;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#000;line-height:0}
+.media-player{max-width:880px;margin:0 auto;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#000;line-height:0}
 .media-player video{width:100%;display:block}
 @media(max-width:760px){.media-player{border-radius:14px}}
+
+
+/* how: phone + stacked steps */
+.how-grid{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:center;max-width:980px;margin:0 auto}
+.steps-v{display:flex;flex-direction:column;gap:16px}
+.phone-sm{width:252px;height:524px;border-radius:38px;padding:8px;transform:none}
+.phone-sm .scr{border-radius:31px;font-size:11px}
+.hscreens{flex:1;position:relative;overflow:hidden;padding:4px 12px}
+.hscreen{position:absolute;inset:4px 12px;opacity:0;animation:hcyc 12s infinite}
+.hscreen.h2s{animation-delay:4s}
+.hscreen.h3s{animation-delay:8s}
+@keyframes hcyc{0%{opacity:0;transform:translateY(10px)}4%,30%{opacity:1;transform:none}36%,100%{opacity:0}}
+.hbar{height:5px;border-radius:99px;background:#242a33;margin-top:12px;overflow:hidden}
+.hbar i{display:block;height:100%;width:40%;border-radius:99px;background:#00C4A0;animation:hfill 4s ease-in-out infinite}
+@keyframes hfill{0%{width:8%}90%,100%{width:96%}}
+@media(max-width:900px){.how-grid{grid-template-columns:1fr;gap:30px}.how-phone{display:flex;justify-content:center}}
+
+/* proof: phone in the middle, forecast rows looping in */
+.proof{grid-template-columns:1fr 300px 1fr;align-items:center;max-width:1080px}
+.proof-phone{display:flex;justify-content:center}
+.phone-mid{box-shadow:0 0 0 1.5px #2a2f3a, 0 30px 60px -20px rgba(0,0,0,.7), var(--glow)}
+.frow{display:flex;align-items:center;gap:9px;padding:10px 3px;border-bottom:1px solid #1d232c;font-size:11px;opacity:0;animation:frowin 9s infinite}
+.frow b{display:block;font-size:11px}
+.frow small{display:block;color:#66707D;font-size:9.5px}
+.frow .pic{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;flex:0 0 auto}
+.frow .st{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9px;color:#00C4A0}
+.frow.f2{animation-delay:.7s}
+.frow.f3{animation-delay:1.4s}
+.frow.f4{animation-delay:2.1s}
+@keyframes frowin{0%{opacity:0;transform:translateX(14px)}8%,86%{opacity:1;transform:none}94%,100%{opacity:0}}
+@media(max-width:960px){.proof{grid-template-columns:1fr;max-width:520px}.proof-phone{order:-1}}
 
 </style>
 </head>
@@ -546,10 +577,51 @@ body.light .sm-inner.vid.novid{background:linear-gradient(120deg,#2a3240,#3b2c58
       <span class="eyebrow">How it works</span>
       <h2>Connect once. It just runs.</h2>
     </div>
-    <div class="steps">
-      <div class="step reveal"><span class="num">1</span><h3>Connect your page</h3><p>Sign in with Facebook. ArtemisAI reads two years of your history to learn <em>your</em> audience.</p></div>
-      <div class="step reveal"><span class="num">2</span><h3>It watches 24/7</h3><p>Every post and comment, so it knows what a normal day looks like, and notices when it isn't.</p></div>
-      <div class="step reveal"><span class="num">3</span><h3>You get answers</h3><p>One thing to do today, in plain English, with the numbers behind every claim.</p></div>
+    <div class="how-grid">
+      <div class="how-phone reveal" aria-hidden="true">
+        <div class="phone phone-sm">
+          <span class="island"></span>
+          <div class="scr">
+            <div class="stat"><span>9:41</span><span>▾ ●●● ⚡</span></div>
+            <div class="hscreens">
+              <div class="hscreen h1s">
+                <div class="vh" style="font-size:16px;margin:14px 2px 14px">Connect</div>
+                <div class="mv" style="text-align:center;padding:22px 13px">
+                  <div style="font-size:26px;margin-bottom:10px">🔗</div>
+                  <div class="big" style="font-size:13px">Sign in with Facebook</div>
+                  <span class="go" style="margin-top:12px">Connect page</span>
+                </div>
+              </div>
+              <div class="hscreen h2s">
+                <div class="vh" style="font-size:16px;margin:14px 2px 14px">Learning you</div>
+                <div class="mv">
+                  <div class="lbl">Reading your history</div>
+                  <div class="big" style="font-size:12.5px">2 years · posts &amp; comments</div>
+                  <div class="hbar"><i></i></div>
+                </div>
+                <div class="prow" style="margin-top:8px"><span class="pic" style="background:rgba(0,196,160,.12)">👀</span><span><b>Finding your rhythm</b><small>what works, when, for whom</small></span></div>
+              </div>
+              <div class="hscreen h3s">
+                <div class="vh" style="font-size:16px;margin:14px 2px 14px">You're set</div>
+                <div class="mv" style="text-align:center;padding:20px 13px">
+                  <div style="font-size:26px;margin-bottom:8px">✓</div>
+                  <div class="big" style="font-size:13px">ArtemisAI is watching</div>
+                  <span class="live-dot" style="margin-top:10px">watching</span>
+                </div>
+                <div class="prow" style="margin-top:8px"><span class="pic" style="background:rgba(255,194,75,.12)">🔮</span><span><b>First prediction ready</b><small>your next move is waiting</small></span></div>
+              </div>
+            </div>
+            <div class="tabbar">
+              <span class="on"><i>⌂</i>Today</span><span><i>◎</i>Discover</span><span class="arte-orb">A</span><span><i>▤</i>Analytics</span><span><i>✎</i>Studio</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="steps steps-v">
+        <div class="step reveal"><span class="num">1</span><h3>Connect your page</h3><p>Sign in with Facebook. ArtemisAI reads two years of your history to learn <em>your</em> audience.</p></div>
+        <div class="step reveal"><span class="num">2</span><h3>It watches 24/7</h3><p>Every post and comment, so it knows what a normal day looks like, and notices when it isn't.</p></div>
+        <div class="step reveal"><span class="num">3</span><h3>You get answers</h3><p>One thing to do today, in plain English, with the numbers behind every claim.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -814,6 +886,24 @@ body.light .sm-inner.vid.novid{background:linear-gradient(120deg,#2a3240,#3b2c58
           <li>Storms found the next morning</li>
           <li>"Best times" copied from a blog</li>
         </ul>
+      </div>
+      <div class="proof-phone" aria-hidden="true">
+        <div class="phone phone-sm phone-mid">
+          <span class="island"></span>
+          <div class="scr">
+            <div class="stat"><span>9:41</span><span>▾ ●●● ⚡</span></div>
+            <div class="body" style="padding-top:6px">
+              <div class="vh" style="font-size:16px;margin:8px 2px 10px">Tomorrow</div>
+              <div class="frow f1"><span class="pic" style="background:rgba(255,194,75,.12)">🔮</span><span><b>Friday reel: 2.4× expected</b><small>schedule for 6:40pm</small></span><span class="st">set</span></div>
+              <div class="frow f2"><span class="pic" style="background:rgba(0,196,160,.12)">🕓</span><span><b>Best window: Tue evening</b><small>from your two years</small></span><span class="st">2.4×</span></div>
+              <div class="frow f3"><span class="pic" style="background:rgba(255,92,116,.12)">🛡</span><span><b>Storm risk: low</b><small>watching either way</small></span><span class="st">ok</span></div>
+              <div class="frow f4"><span class="pic" style="background:rgba(139,123,255,.12)">✦</span><span><b>Draft ready to score</b><small>paste it, know it</small></span><span class="st">go</span></div>
+            </div>
+            <div class="tabbar">
+              <span class="on"><i>⌂</i>Today</span><span><i>◎</i>Discover</span><span class="arte-orb">A</span><span><i>▤</i>Analytics</span><span><i>✎</i>Studio</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="proof-card after">
         <span class="tag">With ArtemisAI</span>
