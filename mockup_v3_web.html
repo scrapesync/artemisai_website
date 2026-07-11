@@ -2825,6 +2825,6 @@ function openConnect(){ veilOn(); document.getElementById('connectm').classList.
 function openBilling(){ veilOn(); document.getElementById('billingm').classList.add('on'); }
 </script>
 
-<script>try{var v=new URLSearchParams(location.search).get("view");if(v&&typeof setView==="function")setView(v);}catch(e){}</script>
+<script>try{var q=new URLSearchParams(location.search),v=q.get("view");if(v&&document.getElementById("v-"+v)&&typeof setView==="function")setView(v);if(q.get("pop")){var p=document.getElementById("pop");if(p)setTimeout(function(){p.classList.add("on");},300);}}catch(e){}</script>
 </body>
 </html>
