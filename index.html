@@ -314,6 +314,7 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:88px
 
 /* logo wordmark: kill the flex gap between Artemis and AI */
 .logo .wm{display:inline;letter-spacing:0;white-space:nowrap}
+.logo .wm b{color:var(--teal);letter-spacing:.055em;margin-left:2.5px}
 .logo .wm b{color:var(--teal)}
 
 /* live tiles (the old site's live-numbers, restyled) */
@@ -401,6 +402,12 @@ body.light .sm-inner.vid.novid{background:linear-gradient(120deg,#2a3240,#3b2c58
 .odo .strip b{display:block;height:1.18em;line-height:1.18em;font-weight:600}
 .odo .sep{display:inline-block;line-height:1.18em}
 .lt-num{line-height:1.18}
+
+
+/* media player */
+.media-player{max-width:720px;margin:0 auto;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:#000;line-height:0}
+.media-player video{width:100%;display:block}
+@media(max-width:760px){.media-player{border-radius:14px}}
 
 </style>
 </head>
@@ -759,60 +766,11 @@ body.light .sm-inner.vid.novid{background:linear-gradient(120deg,#2a3240,#3b2c58
       <span class="eyebrow">Not just text</span>
       <h2>It reads the memes.<br>It watches the videos.</h2>
     </div>
-    <div class="scanner reveal">
-
-      <div class="scan-set on" data-i="0">
-        <div class="scan-media">
-          <div class="sm-inner meme">Nobody:<br>British dads at a BBQ<br>in February:</div>
-          <span class="scan-line"></span>
-        </div>
-        <div class="scan-panel">
-          <div class="srow"><span class="sk teal">OCR</span>text read from image</div>
-          <div class="srow"><span class="sk gold">TEMPLATE</span>rising in your niche this week</div>
-          <div class="srow"><span class="sk arte">TONE</span>relatable · high share intent</div>
-          <div class="sscore" style="color:var(--teal)">82<small>likely strong · post it</small></div>
-        </div>
-      </div>
-
-      <div class="scan-set" data-i="1">
-        <div class="scan-media">
-          <div class="sm-inner vid" id="scanVid">
-            <video class="scan-video" autoplay muted loop playsinline preload="auto">
-              <source src="assets/scan-demo.webm" type="video/webm">
-              <source src="assets/scan-demo.mp4" type="video/mp4">
-            </video>
-            <span class="play">▶</span><span class="vbar"><i></i></span>
-            <div class="vblobs"><i></i><i></i><i></i></div>
-            <div class="subcap"><span>"right, who told the dog about Fridays"</span><span>"…and THAT'S why we don't trust the group chat"</span><span>"POV: the kettle's on and it's all kicking off"</span></div>
-          </div>
-          <span class="scan-line"></span>
-        </div>
-        <div class="scan-panel">
-          <div class="srow"><span class="sk arte">HOOK</span>first 3 seconds hold attention</div>
-          <div class="srow"><span class="sk teal">TRANSCRIPT</span>speech read, punchline at 0:07</div>
-          <div class="srow"><span class="sk gold">TIMING</span>this format peaks in the evening</div>
-          <div class="sscore" style="color:var(--teal)">88<small>strong · schedule for 6:40pm</small></div>
-        </div>
-      </div>
-
-      <div class="scan-set" data-i="2">
-        <div class="scan-media">
-          <div class="sm-inner car"><i>1</i><i>2</i><i>3</i></div>
-          <span class="scan-line"></span>
-        </div>
-        <div class="scan-panel">
-          <div class="srow"><span class="sk teal">SCENES</span>3 images read · pub, dog, rain</div>
-          <div class="srow"><span class="sk rose">ORDER</span>the strongest image is buried at #2</div>
-          <div class="srow"><span class="sk gold">FIX</span>lead with #2, keep the caption</div>
-          <div class="sscore" style="color:var(--gold)">61<small>average · reorder and rescore</small></div>
-        </div>
-      </div>
-
-      <div class="scan-dots" role="tablist" aria-label="Examples">
-        <button class="sdot on" data-go="0" aria-label="Meme example"></button>
-        <button class="sdot" data-go="1" aria-label="Video example"></button>
-        <button class="sdot" data-go="2" aria-label="Carousel example"></button>
-      </div>
+    <div class="media-player reveal">
+      <video autoplay muted loop playsinline controls preload="metadata" aria-label="ArtemisAI turning content into predictions">
+        <source src="assets/scan-demo.webm" type="video/webm">
+        <source src="assets/scan-demo.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
@@ -1066,15 +1024,7 @@ function toggleTheme(){
   window.addEventListener('resize', remeasure);
 })();
 
-/* scanner video: fall back to the animated scene if no real file is present */
-(function(){
-  var box=document.getElementById('scanVid');
-  if(!box) return;
-  var v=box.querySelector('video');
-  function fallback(){ box.classList.add('novid'); }
-  v.addEventListener('error', fallback, true);
-  setTimeout(function(){ if(v.readyState===0 || v.videoWidth===0) fallback(); }, 2600);
-})();
+
 
 /* scrollspy: highlight the section you're in */
 (function(){
@@ -1108,21 +1058,7 @@ function toggleTheme(){
 })();
 
 
-/* scanner: cycle through examples */
-(function(){
-  var sets=[].slice.call(document.querySelectorAll('.scan-set'));
-  var dots=[].slice.call(document.querySelectorAll('.sdot'));
-  if(!sets.length) return;
-  var i=0, timer=null;
-  function show(n){
-    i=n;
-    sets.forEach(function(el,j){ el.classList.toggle('on', j===n); });
-    dots.forEach(function(el,j){ el.classList.toggle('on', j===n); });
-  }
-  function auto(){ timer=setInterval(function(){ show((i+1)%sets.length); }, 5200); }
-  dots.forEach(function(d){ d.addEventListener('click', function(){ clearInterval(timer); show(+d.dataset.go); auto(); }); });
-  auto();
-})();
+
 
 /* reveal on scroll */
 (function(){
