@@ -2134,6 +2134,18 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 .gstage-n { font-size:9px; padding:1px 6px; border-radius:8px; background:rgba(255,255,255,.08); }
 @keyframes gstagePulse { 0%,100%{ filter:brightness(1); } 50%{ filter:brightness(1.18); } }
 @media (max-width:1340px){ .tab-bar-left{ gap:12px; } .gstage-chip span:first-child{ display:none; } .gstage-chip{ padding:5px 8px; } }
+
+/* Sprint-Mockup map */
+.mm-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px}
+.mm-head b{font-size:13px}
+.mm-what{color:var(--muted2);font-size:12px;line-height:1.5;margin:6px 0 10px}
+.mm-chips{display:flex;gap:6px;flex-wrap:wrap}
+.mm-chip{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-dim);border-radius:99px;padding:5px 10px;text-decoration:none}
+.mm-chip:hover{border-color:var(--accent)}
+.mm-chip.mob{color:#8B7BFF;background:rgba(139,123,255,.12);border-color:rgba(139,123,255,.12)}
+.mm-chip.mob:hover{border-color:#8B7BFF}
+.mm-none{font-size:10.5px;color:var(--muted);font-style:italic}
+
 </style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RCP8LMKYK"></script>
@@ -2663,7 +2675,47 @@ function goToSprint(sn){
 
 let currentSprint='Sprint 1';
 function renderSprintPage(){renderSidebar();renderMain(currentSprint);}
-function selSprint(sn){currentSprint=sn;renderSidebar();renderMain(sn);renderSprintTrackBar();}
+
+/* ═══ Sprint ↔ Mockup map ═══ */
+const MOCKUP_MAP = [
+ {s:"Sprint 6", what:"App shell comes alive: sidebar, topbar and the first real page.", web:[["Analytics","analytics"],["Today feed (shell)","today"]], mob:[["Today","today"]]},
+ {s:"Sprint 7", what:"Virality chips land on posts; the post view gains its video panel.", web:[["Today feed","today"]], mob:[["Today","today"]]},
+ {s:"Sprint 8", what:"Draft scoring before publish, the predictions surface, and Art-E answers with citations.", web:[["Compose / drafts","today"],["Predicted wins","wins"]], mob:[["Art-E","arte"],["Compose","today"]]},
+ {s:"Sprint 9", what:"Best Times: the calendar heatmap with Art-E's slot recommendation.", web:[["Planner","planner"]], mob:[["Planner","planner"]]},
+ {s:"Sprint 10", what:"Post drill-down deepens; the cross-page graph starts feeding it (mostly under the hood).", web:[["Today · post drill-down","today"]], mob:[]},
+ {s:"Sprint 11", what:"Crisis detection ships: the Alerts page, rules builder and problem+action cards.", web:[["Alerts","alerts"]], mob:[["Alerts (via bell)","today"]]},
+ {s:"Sprint 12", what:"Groundwork sprint, pipelines and observability. Nothing new on screen yet.", web:[], mob:[]},
+ {s:"Sprint 13", what:"Discovery v1: browse pages and business cards (view-only in MVP).", web:[["Discovery","discovery"]], mob:[["Discover","discover"]]},
+ {s:"Sprint 14", what:"Everything goes live-data: dashboard, home feed, and Art-E scoring inside compose.", web:[["Today","today"],["Analytics","analytics"]], mob:[["Today","today"]]},
+ {s:"Sprint 15", what:"Reports: weekly and monthly PDFs, rendered and scheduled to your inbox.", web:[["Analytics · reports","analytics"]], mob:[["Today · report card","today"]]},
+ {s:"Sprint 16", what:"Settings core (connect, notifications, data control) and Art-E grows a memory.", web:[["Settings","settings"],["Art-E rail","today"]], mob:[["Art-E","arte"]]},
+ {s:"Sprint 17", what:"Art-E feedback (thumbs) and memory controls appear in the UI.", web:[["Art-E rail","today"],["Settings","settings"]], mob:[["Art-E","arte"]]},
+ {s:"Sprint 18", what:"Quality sprint: speed, scale and Art-E answer trust. Screens get faster, not newer.", web:[], mob:[]},
+ {s:"Sprint 19", what:"Security and isolation. Account basics harden in Settings.", web:[["Settings","settings"]], mob:[]},
+ {s:"Sprint 20", what:"Launch-readiness hardening across every surface.", web:[], mob:[]},
+ {s:"Sprint 21", what:"Facebook OAuth goes live; the full 7-tab Settings ships.", web:[["Settings (7 tabs)","settings"],["Pages / connect","pages"]], mob:[["Workspace","today"]]},
+ {s:"Sprint 22", what:"UAT with pilot pages, login hardening, final website + legal pages.", web:[["Pages","pages"]], mob:[]},
+ {s:"Sprint 23", what:"Launch. Everything you can see, live for the public.", web:[["The whole app","today"]], mob:[["The whole app","today"]]}
+];
+let mockupMapOn=false;
+function showMockupMap(){
+  mockupMapOn=true; currentSprint=null;
+  renderSidebar();
+  const main=document.getElementById('sprint-main');
+  let h='<div style="padding:4px 2px 14px"><div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent)">Sprint &harr; Mockup</div>';
+  h+='<h2 style="margin:6px 0 4px;font-size:20px">What you\'ll see, sprint by sprint</h2>';
+  h+='<div style="color:var(--muted2);font-size:12.5px">Each chip opens the mockup on that exact screen (purple = 📱 mobile app). Sprints without chips are engine rooms: real work, nothing new to click.</div></div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px">';
+  MOCKUP_MAP.forEach(m=>{
+    const chips = m.web.map(([l,v])=>`<a href="mockup_v3_web.html?view=${v}" target="_blank" class="mm-chip">${l}</a>`).join('')
+                + m.mob.map(([l,v])=>`<a href="mockup_v3_mobile.html?screen=${v}" target="_blank" class="mm-chip mob">📱 ${l}</a>`).join('');
+    h+=`<div class="mm-card"><div class="mm-head"><b>${m.s}</b></div><div class="mm-what">${m.what}</div><div class="mm-chips">${chips||'<span class="mm-none">engine-room sprint</span>'}</div></div>`;
+  });
+  h+='</div>';
+  main.innerHTML=h;
+}
+
+function selSprint(sn){mockupMapOn=false;currentSprint=sn;renderSidebar();renderMain(sn);renderSprintTrackBar();}
 
 function renderSidebar(){
   let h='<div class="sb-title">All Sprints</div>';
@@ -2681,6 +2733,8 @@ function renderSidebar(){
       </button>`;
     });
   });
+  h+='<div class="sb-section" style="color:var(--accent)">Mockup</div>';
+  h+=`<button class="sb-btn ${mockupMapOn?'active':''}" onclick="showMockupMap()"><span class="sb-snum">🗺</span><div class="sb-pw" style="font-size:11.5px;color:inherit">Sprint ↔ Mockup</div></button>`;
   document.getElementById('sprint-sidebar').innerHTML=h;
 }
 
