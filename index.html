@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Artemis · You post. Artemis watches the rest.</title>
+<title>ArtemisAI · You post. We watch the rest.</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
-<meta name="description" content="Artemis watches your Facebook pages around the clock: it predicts how a post will do before you publish, catches comment storms early with a drafted reply, and tells you the best time to post. In pilot with 9 UK pages. Launching November 2026.">
+<meta name="description" content="ArtemisAI watches your Facebook pages around the clock: it predicts how a post will do before you publish, catches comment storms early with a drafted reply, and tells you the best time to post. In pilot with 9 UK pages. Launching November 2026.">
 <meta name="theme-color" content="#00C4A0">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Artemis · You post. Artemis watches the rest.">
+<meta property="og:title" content="ArtemisAI · You post. We watch the rest.">
 <meta property="og:description" content="Page analytics that come with answers: predictions before you publish, crisis alerts with a drafted reply, and the best time to post — in plain English.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://artemisai.co.uk">
@@ -208,7 +208,7 @@ section{padding:92px 0}
 .step h3{font-size:19px;margin-bottom:10px}
 .step p{font-size:15px;color:var(--t2)}
 
-/* features — Artemis-coded accents */
+/* features — ArtemisAI-coded accents */
 .features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 @media(max-width:960px){.features{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.features{grid-template-columns:1fr}}
@@ -282,6 +282,213 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
 .foot .flinks{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;color:var(--t2)}
 .foot .flinks a:hover{color:var(--teal)}
 .foot small{display:block;color:var(--t3);font-size:13px;margin-top:10px}
+
+/* ═══ aliases so the original flow CSS runs on the new tokens ═══ */
+:root{
+  --bdr:var(--line); --bdr-soft:var(--line-soft); --bg-input:var(--bg-elev-2);
+  --crisis:#E53935; --crisis-bg:rgba(229,57,53,.10);
+  --arte-1:var(--arte); --warn:var(--gold); --opp:var(--teal); --opp-bg:var(--teal-bg);
+  --fs-md:14px; --fs-sm:12px; --fw-bold:700; --fw-medium:500; --lh-snug:1.33; --r:12px;
+  --t-slow:.3s; --accent:#00d4aa;
+}
+.flow-section{padding:92px 0;background:var(--bg-elev);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+
+/* ═══ platforms strip ═══ */
+.platforms{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:1180px;margin:18px auto 0;padding:0 24px}
+.plat{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;color:var(--t3);border:1px dashed var(--line);border-radius:999px;padding:7px 14px}
+.plat.live{color:var(--teal);border:1px solid rgba(0,196,160,.4);background:var(--teal-bg);display:inline-flex;align-items:center;gap:7px}
+.plat.live i{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+.tick-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--teal);vertical-align:1px;animation:pulse 2.4s infinite}
+
+/* ═══ scroll tour ═══ */
+.tour-grid{display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:start}
+.tour-steps{display:flex;flex-direction:column;gap:4vh}
+.tour-step{min-height:62vh;display:flex;flex-direction:column;justify-content:center;opacity:.28;transition:opacity .35s}
+.tour-step.on{opacity:1}
+.ts-pill{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:.08em;border-radius:999px;padding:6px 13px;display:inline-block;margin-bottom:16px;width:fit-content}
+.tour-step h3{font-size:clamp(22px,2.6vw,30px);margin-bottom:12px}
+.tour-step p{font-size:16px;color:var(--t2);max-width:440px}
+.tour-phone-wrap{position:sticky;top:90px;display:flex;justify-content:center}
+.tour-phone{width:280px;height:580px;transform:rotate(0deg)}
+.tour-phone .scr{position:relative}
+.tour-screens{flex:1;position:relative;overflow:hidden;padding:6px 13px}
+.tscreen{position:absolute;inset:6px 13px;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s;pointer-events:none}
+.tscreen.on{opacity:1;transform:translateY(0)}
+.score-ring{width:82px;height:82px;border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;background:conic-gradient(#00C4A0 0 78%, #242a33 78% 100%);position:relative}
+.score-ring::before{content:"";position:absolute;inset:7px;border-radius:50%;background:#0e1116}
+.score-ring span{position:relative;font-family:'Sora',sans-serif;font-weight:800;font-size:24px;color:#EDF1F5}
+.heat{display:grid;grid-template-columns:26px repeat(7,1fr);gap:4px;font-size:8.5px;color:#66707D;align-items:center}
+.heat b{text-align:center;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:8px}
+.heat i{height:26px;border-radius:6px;background:#1c2128;display:flex;align-items:center;justify-content:center;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:7.5px;color:#04110D;font-weight:700}
+.heat i.h2{background:rgba(0,196,160,.3)}
+.heat i.h3{background:#00C4A0}
+.bub{border-radius:14px;padding:9px 12px;font-size:10.5px;line-height:1.5;margin-bottom:8px;max-width:92%}
+.bub.me{background:#1c2128;color:#C9D2DC;margin-left:auto;border-bottom-right-radius:4px}
+.bub.ae{background:rgba(139,123,255,.1);border:1px solid rgba(139,123,255,.25);color:#C9D2DC;border-bottom-left-radius:4px}
+.cites{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+.cites span{font-family:'JetBrains Mono',monospace;font-size:8px;color:#8B7BFF;background:rgba(139,123,255,.12);border-radius:999px;padding:3px 8px}
+@media(max-width:900px){
+  .tour-grid{display:block}
+  .tour-phone-wrap{position:sticky;top:74px;z-index:5;margin-bottom:24px}
+  .tour-phone{width:240px;height:500px}
+  .tour-step{min-height:52vh;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(3px);border-radius:16px;padding:18px}
+}
+
+/* ─── FLOW GRAPH SECTION — animated SVG showing how Artemis works ─── */
+.flow-section{
+  padding:96px 32px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.flow-graph{
+  max-width:900px;margin:48px auto 0;
+  position:relative;
+}
+.flow-svg{
+  width:100%;height:auto;
+  max-width:1000px;
+  display:block;
+  margin:0 auto;
+}
+.flow-node-bg{
+  fill:var(--bg-elev);
+  stroke:var(--bdr);
+  stroke-width:1.5;
+}
+.flow-node-bg.crisis{stroke:rgba(229,57,53,0.4);fill:var(--crisis-bg)}
+.flow-node-bg.opp{stroke:rgba(0,196,160,0.4);fill:var(--teal-bg)}
+.flow-node-bg.arte{stroke:rgba(124,92,191,0.4);fill:var(--arte-bg)}
+.flow-icon{
+  fill:none;stroke:var(--t1);stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.flow-icon.crisis{stroke:var(--crisis)}
+.flow-icon.opp{stroke:var(--teal)}
+.flow-icon.arte{stroke:var(--arte-1)}
+.flow-icon.arte-fill{fill:var(--arte-1);stroke:none}
+.flow-label{
+  fill:var(--t1);
+  font-size:14px;
+  font-weight:var(--fw-bold);
+  text-anchor:middle;
+  font-family:inherit;
+}
+.flow-sublabel{
+  fill:var(--t2);
+  font-size:11px;
+  text-anchor:middle;
+  font-family:inherit;
+  font-weight:var(--fw-medium);
+}
+.flow-line{
+  fill:none;
+  stroke:var(--bdr);
+  stroke-width:2;
+  stroke-dasharray:4 4;
+}
+/* Pulsing dot animation traveling along path */
+.flow-pulse-dot{
+  fill:var(--teal);
+  filter:drop-shadow(0 0 6px var(--teal));
+}
+.flow-pulse-dot.purple{fill:var(--arte-1);filter:drop-shadow(0 0 6px var(--arte-1))}
+/* Mobile flow graph: stack vertically with arrows */
+.flow-mobile{
+  display:none;
+  flex-direction:column;
+  gap:20px;
+  max-width:440px;margin:36px auto 0;
+}
+.flow-mobile-step{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 18px;
+  background:var(--bg-elev);
+  border:1px solid var(--bdr-soft);
+  border-radius:var(--r);
+  text-align:left;
+  position:relative;
+}
+.flow-mobile-step::after{
+  content:'';
+  position:absolute;
+  bottom:-14px;left:34px;
+  width:2px;height:14px;
+  background:var(--bdr);
+}
+.flow-mobile-step:last-child::after{display:none}
+.flow-mobile-icon{
+  width:40px;height:40px;border-radius:50%;
+  display:grid;place-items:center;flex-shrink:0;
+}
+.flow-mobile-step.s1 .flow-mobile-icon{background:var(--teal-bg);color:var(--teal)}
+.flow-mobile-step.s2 .flow-mobile-icon{background:var(--bg-input);color:var(--t1)}
+.flow-mobile-step.s3 .flow-mobile-icon{background:var(--arte-bg);color:var(--arte-1)}
+.flow-mobile-step.s4 .flow-mobile-icon{background:var(--teal-bg);color:var(--teal)}
+.flow-mobile-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+.flow-mobile-text-title{
+  font-size:var(--fs-md);
+  font-weight:var(--fw-bold);
+  color:var(--t1);
+  margin-bottom:2px;
+}
+.flow-mobile-text-sub{
+  font-size:var(--fs-sm);
+  color:var(--t2);
+  line-height:var(--lh-snug);
+}
+/* Light-mode flow graph — stronger contrast on tinted backgrounds.
+   The SVG uses direct hex fills (#E53935 / #00C4A0 / #7C5CBF / #B0B3B8)
+   instead of CSS vars, so we override per-fill with darker variants
+   that read clearly on light tinted card backgrounds. */
+body.light .flow-svg text.flow-label{fill:var(--t1)}
+body.light .flow-svg text.flow-sublabel{fill:var(--t2)}
+body.light .flow-svg text[fill="#E53935"]{fill:#B71C1C}
+body.light .flow-svg text[fill="#00C4A0"]{fill:#00695C}
+body.light .flow-svg text[fill="#7C5CBF"]{fill:#4527A0}
+/* Body grey on tinted backgrounds: deeper grey for legibility */
+body.light .flow-svg text[fill="#B0B3B8"]{fill:#424242}
+/* Outer card text "Your pages": ensure it's dark on light card */
+body.light .flow-svg text[fill="#E4E6EB"]{fill:#050505}
+/* Flow graph — paths draw in (stroke-dashoffset reveal) */
+.flow-svg path[stroke-dasharray]{
+  stroke-dashoffset:0;
+  transition:stroke-dashoffset 1400ms ease-out;
+}
+.flow-section:not(.in-view) .flow-svg path[stroke-dasharray]{
+  stroke-dashoffset:1000;
+}
+.flow-svg g rect{
+  opacity:1;
+  transition:opacity 600ms ease-out;
+}
+.flow-section:not(.in-view) .flow-svg > g{opacity:0}
+.flow-section.in-view .flow-svg > g{
+  opacity:1;
+  transition:opacity 800ms ease-out;
+}
+
+@media(max-width:980px){
+  .live-grid{grid-template-columns:repeat(2, 1fr);gap:16px}
+  .team-grid{grid-template-columns:repeat(2, 1fr);gap:16px}
+  .flow-svg{display:none}
+  .flow-mobile{display:flex}
+}
+@media(max-width:640px){
+  .live-section{padding:56px 18px}
+  .live-title{font-size:26px}
+  .live-sub{font-size:var(--fs-md)}
+  .live-grid{grid-template-columns:1fr;gap:14px}
+  .live-tile{padding:22px 20px}
+  .live-tile-num{font-size:36px}
+  .flow-section{padding:56px 18px}
+  .team-section{padding:56px 18px}
+  .team-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .team-card{padding:20px 14px 16px}
+  .team-avatar{width:64px;height:64px;font-size:18px;margin-bottom:12px}
+  .team-name{font-size:var(--fs-md)}
+  .team-tag{font-size:var(--fs-xs)}
+}
 </style>
 </head>
 <body>
@@ -289,9 +496,9 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
 <!-- ══════════ NAV ══════════ -->
 <div class="nav-outer">
   <nav class="nav" aria-label="Main">
-    <a class="logo" href="index.html" aria-label="Artemis home">
+    <a class="logo" href="index.html" aria-label="ArtemisAI home">
       <svg width="30" height="30" viewBox="0 0 36 36"><rect x="2" y="2" width="32" height="32" rx="9" fill="#0c1221"/><path d="M18 8L26 28H10L18 8Z" stroke="#00d4aa" stroke-width="1.6" fill="none"/><circle cx="18" cy="20" r="3" fill="#00d4aa"/></svg>
-      Artemis
+      ArtemisAI
     </a>
     <div class="nav-links">
       <a href="#how">How it works</a>
@@ -309,9 +516,9 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
 <header class="hero" id="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">For Facebook page owners</span>
-      <h1 style="margin-top:14px">You post.<br>Artemis <span class="hl">watches the rest.</span></h1>
-      <p class="sub">Artemis keeps an eye on your pages around the clock. It tells you how a post will do <em>before</em> you publish, catches a comment storm early with a calm reply already drafted, and knows the best time to post — all in plain English.</p>
+      <span class="eyebrow">For social page owners &middot; starting with Facebook</span>
+      <h1 style="margin-top:14px">You post.<br>ArtemisAI <span class="hl">watches the rest.</span></h1>
+      <p class="sub">ArtemisAI keeps an eye on your pages around the clock. It tells you how a post will do <em>before</em> you publish, catches a comment storm early with a calm reply already drafted, and knows the best time to post — all in plain English.</p>
       <div class="hero-ctas">
         <a class="btn btn-teal" href="mailto:hello@artemisai.co.uk?subject=Pilot%20access">Request pilot access</a>
         <a class="btn btn-ghost" href="#how">See how it works</a>
@@ -339,7 +546,7 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
             <div class="mv">
               <div class="lbl">Your next move</div>
               <div class="big">Post the Friday reel at 6:40pm</div>
-              <span class="pred">Artemis predicts <b>2.4×</b> usual reach</span><br>
+              <span class="pred">ArtemisAI predicts <b>2.4×</b> usual reach</span><br>
               <span class="go">Schedule it</span>
             </div>
             <div style="margin-top:10px">
@@ -372,10 +579,17 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
   <!-- stats -->
   <div class="stats" id="live-numbers">
     <div class="row">
-      <div><div class="n"><em>111,796</em></div><div class="l">posts analysed</div></div>
-      <div><div class="n">3.28M</div><div class="l">comments read</div></div>
-      <div><div class="n">2 years</div><div class="l">of history per page</div></div>
-      <div><div class="n"><em>9</em></div><div class="l">UK pilot pages</div></div>
+      <div><div class="n"><em data-count="111796" data-live="4200">0</em></div><div class="l">posts analysed <span class="tick-dot"></span></div></div>
+      <div><div class="n"><span data-count="3283917" data-short="1" data-live="2600">0</span></div><div class="l">comments read <span class="tick-dot"></span></div></div>
+      <div><div class="n"><span data-count="2" data-suffix=" years">0</span></div><div class="l">of history per page</div></div>
+      <div><div class="n"><em data-count="9">0</em></div><div class="l">UK pilot pages</div></div>
+    </div>
+    <div class="platforms">
+      <span class="plat live"><i></i>Facebook · live in pilot</span>
+      <span class="plat">Instagram · on the roadmap</span>
+      <span class="plat">TikTok · on the roadmap</span>
+      <span class="plat">YouTube · on the roadmap</span>
+      <span class="plat">X · on the roadmap</span>
     </div>
   </div>
 </header>
@@ -386,17 +600,17 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
     <div class="sec-head">
       <span class="eyebrow">How it works</span>
       <h2>Three steps, then it just runs</h2>
-      <p>No dashboards to learn. Connect once and Artemis starts telling you what matters, when it matters.</p>
+      <p>No dashboards to learn. Connect once and ArtemisAI starts telling you what matters, when it matters.</p>
     </div>
     <div class="steps">
       <div class="step">
         <span class="num">step 1</span>
         <h3>Connect your page</h3>
-        <p>Sign in with Facebook and pick the pages you want watched. Artemis reads two years of your history in the background — that's how it learns what works for <em>your</em> audience, not a generic one.</p>
+        <p>Sign in with Facebook and pick the pages you want watched. ArtemisAI reads two years of your history in the background — that's how it learns what works for <em>your</em> audience, not a generic one.</p>
       </div>
       <div class="step">
         <span class="num">step 2</span>
-        <h3>Artemis watches</h3>
+        <h3>ArtemisAI watches</h3>
         <p>Every post, every comment, around the clock. It learns your page's rhythm: when your audience is active, what they respond to, and what a normal day looks like — so it notices when something isn't.</p>
       </div>
       <div class="step">
@@ -407,6 +621,110 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
     </div>
   </div>
 </section>
+
+<!-- ══════════ SCROLL TOUR: the app, screen by screen ══════════ -->
+<section id="tour" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Take the tour</span>
+      <h2>Scroll. The phone keeps up.</h2>
+      <p>Four moments from a real day with ArtemisAI — the screen changes as you go.</p>
+    </div>
+    <div class="tour-grid">
+      <div class="tour-steps">
+        <div class="tour-step on" data-screen="0">
+          <span class="ts-pill" style="color:var(--gold);background:var(--gold-bg)">01 · Predict</span>
+          <h3>Know before you post</h3>
+          <p>Write a draft and watch the score move as you edit. Flop, average or strong — with the reasons, before you publish. No more guessing which version to post.</p>
+        </div>
+        <div class="tour-step" data-screen="1">
+          <span class="ts-pill" style="color:var(--rose);background:var(--rose-bg)">02 · Protect</span>
+          <h3>Storms caught in minutes</h3>
+          <p>When comments turn fast, ArtemisAI tells you what's happening and hands you a calm reply, already drafted. You review, you send. Sleep is allowed again.</p>
+        </div>
+        <div class="tour-step" data-screen="2">
+          <span class="ts-pill" style="color:var(--teal);background:var(--teal-bg)">03 · Time it</span>
+          <h3>Your best windows, mapped</h3>
+          <p>Two years of your own history turned into a simple weekly grid. Post inside the green windows — that's the whole strategy.</p>
+        </div>
+        <div class="tour-step" data-screen="3">
+          <span class="ts-pill" style="color:var(--arte);background:var(--arte-bg)">04 · Ask</span>
+          <h3>Ask Art-E anything</h3>
+          <p>"Why did reach dip last week?" Plain-English answers grounded in your real numbers — every figure cited to its source, so you can check it.</p>
+        </div>
+      </div>
+      <div class="tour-phone-wrap">
+        <div class="phone tour-phone">
+          <span class="island"></span>
+          <div class="scr">
+            <div class="stat"><span>9:41</span><span>&#9662; &#9679;&#9679;&#9679; &#9889;</span></div>
+            <div class="tour-screens">
+
+              <div class="tscreen on" data-i="0">
+                <div class="vh" style="font-size:17px;margin:8px 2px 10px">Draft</div>
+                <div class="mv" style="background:rgba(255,194,75,.08);border-color:rgba(255,194,75,.3)">
+                  <div class="lbl" style="color:#FFC24B">Your draft</div>
+                  <div style="font-size:11.5px;line-height:1.5;color:#C9D2DC">"Nobody: &hellip; British dads at a barbecue in February:"</div>
+                </div>
+                <div style="text-align:center;margin:16px 0 8px">
+                  <div class="score-ring"><span>78</span></div>
+                  <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:13px;margin-top:8px;color:#00C4A0">Likely strong</div>
+                </div>
+                <div class="prow"><span class="pic" style="background:rgba(0,196,160,.12)">&#10003;</span><span><b>The hook carries it</b><small>short setup, relatable payoff</small></span></div>
+                <div class="prow"><span class="pic" style="background:rgba(255,194,75,.12)">!</span><span><b>Post it in an evening window</b><small>this format dies at lunchtime</small></span></div>
+              </div>
+
+              <div class="tscreen" data-i="1">
+                <div class="vh" style="font-size:17px;margin:8px 2px 10px">Alert</div>
+                <div class="mv" style="background:rgba(255,92,116,.08);border-color:rgba(255,92,116,.35)">
+                  <div class="lbl" style="color:#FF5C74">Crisis &middot; 2 min ago</div>
+                  <div class="big" style="font-size:13.5px">Comment cluster turning negative</div>
+                  <div style="font-size:10px;color:#9AA6B5;margin-top:4px">UK JAIL News &middot; 14 in 30 min &middot; rising</div>
+                </div>
+                <div class="mv" style="margin-top:10px;background:rgba(139,123,255,.08);border-color:rgba(139,123,255,.3)">
+                  <div class="lbl" style="color:#8B7BFF">&#10022; Calm reply drafted</div>
+                  <div style="font-size:11px;line-height:1.5;color:#C9D2DC">"We hear you, and we're looking into this now. Thanks for flagging it."</div>
+                  <span class="go" style="background:#FF5C74;color:#fff">Review &amp; send</span>
+                </div>
+              </div>
+
+              <div class="tscreen" data-i="2">
+                <div class="vh" style="font-size:17px;margin:8px 2px 10px">Best Times</div>
+                <div class="heat">
+                  <i></i><b>M</b><b>T</b><b>W</b><b>T</b><b>F</b><b>S</b><b>S</b>
+                  <b>am</b><i></i><i></i><i></i><i></i><i></i><i class="h2"></i><i class="h3">1.7&times;</i>
+                  <b>noon</b><i></i><i></i><i></i><i></i><i class="h2"></i><i></i><i></i>
+                  <b>eve</b><i></i><i class="h3">2.4&times;</i><i class="h2"></i><i class="h3">2.1&times;</i><i></i><i></i><i></i>
+                  <b>late</b><i></i><i></i><i></i><i class="h2"></i><i></i><i></i><i></i>
+                </div>
+                <div class="prow" style="margin-top:12px"><span class="pic" style="background:rgba(0,196,160,.12)">&#128197;</span><span><b>Tuesday 6:40pm is yours</b><small>from your own two-year history</small></span><span class="st">2.4&times;</span></div>
+              </div>
+
+              <div class="tscreen" data-i="3">
+                <div class="vh" style="font-size:17px;margin:8px 2px 10px">Art-E</div>
+                <div class="bub me">Why did reach dip last week?</div>
+                <div class="bub ae"><b style="color:#8B7BFF">&#10022; Art-E</b><br>Three of your five posts went out at 1pm — your audience moved to evenings in March. Evening posts averaged <b>2.1&times;</b> the reach.
+                  <div class="cites"><span>&#128279; posts 04&ndash;09 Jul</span><span>&#128279; hourly reach</span></div>
+                </div>
+                <div class="bub me" style="opacity:.75">So move Friday's post?</div>
+                <div class="bub ae" style="opacity:.75"><b style="color:#8B7BFF">&#10022; Art-E</b><br>Yes — 6:40pm sits in your strongest window.</div>
+              </div>
+
+            </div>
+            <div class="tabbar">
+              <span class="on"><i>&#8962;</i>Today</span>
+              <span><i>&#9678;</i>Discover</span>
+              <span class="arte-orb">A</span>
+              <span><i>&#9636;</i>Analytics</span>
+              <span><i>&#9998;</i>Studio</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- ══════════ FEATURES ══════════ -->
 <section id="features" style="padding-top:0">
@@ -425,7 +743,7 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
       <div class="feat" style="--ac:var(--rose);--acbg:var(--rose-bg)">
         <div class="fic">🚨</div>
         <h3>Crisis alerts that help</h3>
-        <p>When comments turn negative fast, Artemis tells you what's happening, why, and drafts a calm reply for your review. A problem and its solution, never just a red number.</p>
+        <p>When comments turn negative fast, ArtemisAI tells you what's happening, why, and drafts a calm reply for your review. A problem and its solution, never just a red number.</p>
       </div>
       <div class="feat" style="--ac:var(--arte);--acbg:var(--arte-bg)">
         <div class="fic">✦</div>
@@ -440,7 +758,7 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
       <div class="feat">
         <div class="fic">📬</div>
         <h3>Reports that come to you</h3>
-        <p>A weekly summary you'd actually forward: what changed, why it matters, and what Artemis handled for you — as a PDF in your inbox.</p>
+        <p>A weekly summary you'd actually forward: what changed, why it matters, and what ArtemisAI handled for you — as a PDF in your inbox.</p>
       </div>
       <div class="feat" style="--ac:var(--arte);--acbg:var(--arte-bg)">
         <div class="fic">🤝</div>
@@ -451,13 +769,378 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
   </div>
 </section>
 
+<section class="flow-section" id="flow">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">// In one picture</div>
+      <h2>Here's what happens every minute</h2>
+      <p>A quick look at what ArtemisAI does while you get on with your day.</p>
+    </div>
+    <div class="flow-graph">
+      <!-- Desktop animated SVG -->
+            <svg class="flow-svg" viewBox="0 0 1100 540" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 20px 40px rgba(0,0,0,0.3))">
+        <defs>
+          <linearGradient id="fg-arte" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#00C4A0" stop-opacity="0.18"/>
+          </linearGradient>
+          <linearGradient id="fg-pages" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.10)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+          </linearGradient>
+          <linearGradient id="fg-crisis" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(229,57,53,0.22)"/>
+            <stop offset="100%" stop-color="rgba(229,57,53,0.06)"/>
+          </linearGradient>
+          <linearGradient id="fg-opp" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(0,196,160,0.22)"/>
+            <stop offset="100%" stop-color="rgba(0,196,160,0.06)"/>
+          </linearGradient>
+          <linearGradient id="fg-time" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(124,92,191,0.26)"/>
+            <stop offset="100%" stop-color="rgba(124,92,191,0.08)"/>
+          </linearGradient>
+          <linearGradient id="fg-email" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(0,196,160,0.22)"/>
+            <stop offset="100%" stop-color="rgba(0,196,160,0.06)"/>
+          </linearGradient>
+          <linearGradient id="fg-phone" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(124,92,191,0.26)"/>
+            <stop offset="100%" stop-color="rgba(124,92,191,0.08)"/>
+          </linearGradient>
+          <linearGradient id="fg-whatsapp" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(37,211,102,0.22)"/>
+            <stop offset="100%" stop-color="rgba(37,211,102,0.06)"/>
+          </linearGradient>
+          <linearGradient id="path-grad-in" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#00C4A0" stop-opacity="0.2"/>
+            <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+          </linearGradient>
+          <linearGradient id="path-grad-crisis" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#E53935" stop-opacity="0.6"/>
+          </linearGradient>
+          <linearGradient id="path-grad-opp" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#00C4A0" stop-opacity="0.6"/>
+          </linearGradient>
+          <linearGradient id="path-grad-time" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0.5"/>
+          </linearGradient>
+          <linearGradient id="path-grad-email" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#00C4A0" stop-opacity="0.6"/>
+          </linearGradient>
+          <linearGradient id="path-grad-phone" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0.5"/>
+          </linearGradient>
+          <linearGradient id="path-grad-whatsapp" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#25D366" stop-opacity="0.7"/>
+          </linearGradient>
+          <radialGradient id="hub-grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#7C5CBF" stop-opacity="0.95"/>
+            <stop offset="60%" stop-color="#00C4A0" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#7C5CBF" stop-opacity="0.3"/>
+          </radialGradient>
+          <filter id="node-shadow-3d" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+            <feOffset dx="0" dy="10" result="offsetblur"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow-arte" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow-strong" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="10" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Three concentric pulse rings around ArtemisAI (centre at x=300, y=270) -->
+        <circle cx="300" cy="270" r="80" fill="none" stroke="rgba(124,92,191,0.35)" stroke-width="1.5">
+          <animate attributeName="r" values="60;130;60" dur="4s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="4s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="300" cy="270" r="80" fill="none" stroke="rgba(0,196,160,0.35)" stroke-width="1.5">
+          <animate attributeName="r" values="60;130;60" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="300" cy="270" r="80" fill="none" stroke="rgba(124,92,191,0.35)" stroke-width="1.5">
+          <animate attributeName="r" values="60;130;60" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- ═══ CONNECTING PATHS ═══ -->
+        <!-- Stage 1: pages → ArtemisAI -->
+        <path id="flow-path-in" d="M 200 270 Q 260 270 300 270" fill="none" stroke="url(#path-grad-in)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+
+        <!-- Stage 2: ArtemisAI (380, 270) → 3 alerts (440, 135 / 275 / 415) -->
+        <path id="flow-path-a1" d="M 380 270 C 410 270 410 135 440 135" fill="none" stroke="url(#path-grad-crisis)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-a2" d="M 380 270 C 410 270 420 275 440 275" fill="none" stroke="url(#path-grad-opp)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-a3" d="M 380 270 C 410 270 410 415 440 415" fill="none" stroke="url(#path-grad-time)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+
+        <!-- Stage 3: 3 alerts (right edge x=660) → hub at (760, 270) -->
+        <path id="flow-path-h1" d="M 660 135 C 700 135 720 270 760 270" fill="none" stroke="rgba(124,92,191,0.55)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.8"/>
+        <path id="flow-path-h2" d="M 660 275 C 700 275 720 270 760 270" fill="none" stroke="rgba(124,92,191,0.55)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.8"/>
+        <path id="flow-path-h3" d="M 660 415 C 700 415 720 270 760 270" fill="none" stroke="rgba(124,92,191,0.55)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.8"/>
+
+        <!-- Stage 4: hub (760, 270) → 3 channels (820, 135 / 275 / 415) -->
+        <path id="flow-path-c1" d="M 760 270 C 790 270 790 135 820 135" fill="none" stroke="url(#path-grad-email)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-c2" d="M 760 270 C 790 270 800 275 820 275" fill="none" stroke="url(#path-grad-phone)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+        <path id="flow-path-c3" d="M 760 270 C 790 270 790 415 820 415" fill="none" stroke="url(#path-grad-whatsapp)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+
+        <!-- ═══ TRAVELLING PULSES ═══ -->
+        <!-- Stage 1: input dots (4 teal, staggered) -->
+        <g>
+          <circle r="6" fill="#00C4A0" filter="url(#glow-strong)">
+            <animateMotion dur="3s" repeatCount="indefinite" path="M 200 270 Q 260 270 300 270"/>
+          </circle>
+          <circle r="5" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="3s" begin="0.7s" repeatCount="indefinite" path="M 200 270 Q 260 270 300 270"/>
+          </circle>
+          <circle r="5" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="3s" begin="1.4s" repeatCount="indefinite" path="M 200 270 Q 260 270 300 270"/>
+          </circle>
+          <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="3s" begin="2.1s" repeatCount="indefinite" path="M 200 270 Q 260 270 300 270"/>
+          </circle>
+        </g>
+
+        <!-- Stage 2: ArtemisAI → alerts (3 colored dots, one per path) -->
+        <g>
+          <circle r="5" fill="#E53935" filter="url(#glow-strong)">
+            <animateMotion dur="2.4s" begin="0.3s" repeatCount="indefinite" path="M 380 270 C 410 270 410 135 440 135"/>
+          </circle>
+          <circle r="4" fill="#E53935" filter="url(#glow-arte)">
+            <animateMotion dur="2.4s" begin="1.5s" repeatCount="indefinite" path="M 380 270 C 410 270 410 135 440 135"/>
+          </circle>
+
+          <circle r="5" fill="#00C4A0" filter="url(#glow-strong)">
+            <animateMotion dur="2.4s" begin="0.6s" repeatCount="indefinite" path="M 380 270 C 410 270 420 275 440 275"/>
+          </circle>
+          <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="2.4s" begin="1.8s" repeatCount="indefinite" path="M 380 270 C 410 270 420 275 440 275"/>
+          </circle>
+
+          <circle r="5" fill="#7C5CBF" filter="url(#glow-strong)">
+            <animateMotion dur="2.4s" begin="0.9s" repeatCount="indefinite" path="M 380 270 C 410 270 410 415 440 415"/>
+          </circle>
+          <circle r="4" fill="#7C5CBF" filter="url(#glow-arte)">
+            <animateMotion dur="2.4s" begin="2.1s" repeatCount="indefinite" path="M 380 270 C 410 270 410 415 440 415"/>
+          </circle>
+        </g>
+
+        <!-- Stage 3: alerts → hub (3 dots, one per merge path, in their alert color) -->
+        <g>
+          <circle r="4" fill="#E53935" filter="url(#glow-arte)">
+            <animateMotion dur="2.2s" begin="0.5s" repeatCount="indefinite" path="M 660 135 C 700 135 720 270 760 270"/>
+          </circle>
+          <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="2.2s" begin="1.0s" repeatCount="indefinite" path="M 660 275 C 700 275 720 270 760 270"/>
+          </circle>
+          <circle r="4" fill="#7C5CBF" filter="url(#glow-arte)">
+            <animateMotion dur="2.2s" begin="1.5s" repeatCount="indefinite" path="M 660 415 C 700 415 720 270 760 270"/>
+          </circle>
+        </g>
+
+        <!-- Stage 4: hub → channels (3 colored dots in channel colors) -->
+        <g>
+          <circle r="5" fill="#00C4A0" filter="url(#glow-strong)">
+            <animateMotion dur="2.4s" begin="0.4s" repeatCount="indefinite" path="M 760 270 C 790 270 790 135 820 135"/>
+          </circle>
+          <circle r="4" fill="#00C4A0" filter="url(#glow-arte)">
+            <animateMotion dur="2.4s" begin="1.6s" repeatCount="indefinite" path="M 760 270 C 790 270 790 135 820 135"/>
+          </circle>
+
+          <circle r="5" fill="#7C5CBF" filter="url(#glow-strong)">
+            <animateMotion dur="2.4s" begin="0.7s" repeatCount="indefinite" path="M 760 270 C 790 270 800 275 820 275"/>
+          </circle>
+          <circle r="4" fill="#7C5CBF" filter="url(#glow-arte)">
+            <animateMotion dur="2.4s" begin="1.9s" repeatCount="indefinite" path="M 760 270 C 790 270 800 275 820 275"/>
+          </circle>
+
+          <circle r="5" fill="#25D366" filter="url(#glow-strong)">
+            <animateMotion dur="2.4s" begin="1.0s" repeatCount="indefinite" path="M 760 270 C 790 270 790 415 820 415"/>
+          </circle>
+          <circle r="4" fill="#25D366" filter="url(#glow-arte)">
+            <animateMotion dur="2.4s" begin="2.2s" repeatCount="indefinite" path="M 760 270 C 790 270 790 415 820 415"/>
+          </circle>
+        </g>
+
+        <!-- ═══ NODES ═══ -->
+
+        <!-- Node 1: Your pages (left, centred at y=270) -->
+        <g transform="translate(40, 210)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="160" height="120" rx="18" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="160" height="120" rx="18" fill="url(#fg-pages)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+          <g transform="translate(80, 38)" stroke="#E4E6EB" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="0" cy="0" r="14"/>
+            <path d="M -14 0 h 28 M 0 -14 a 14 6 0 0 1 0 28 a 14 6 0 0 1 0 -28"/>
+          </g>
+          <text class="flow-label" x="80" y="84">Your pages</text>
+          <text class="flow-sublabel" x="80" y="102">posts &amp; comments</text>
+        </g>
+
+        <!-- Node 2: ArtemisAI (centre, y=270) -->
+        <g transform="translate(220, 190)" filter="url(#node-shadow-3d)">
+          <rect x="4" y="4" width="160" height="160" rx="22" fill="rgba(0,0,0,0.35)"/>
+          <rect x="0" y="0" width="160" height="160" rx="22" fill="url(#fg-arte)" stroke="rgba(124,92,191,0.6)" stroke-width="2"/>
+          <g transform="translate(80, 60)">
+            <path d="M 0 -22 L -5 -5 L -22 0 L -5 5 L 0 22 L 5 5 L 22 0 L 5 -5 Z" fill="#7C5CBF" filter="url(#glow-strong)">
+              <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="20s" repeatCount="indefinite"/>
+            </path>
+          </g>
+          <text class="flow-label" x="80" y="116" style="font-size:18px">ArtemisAI</text>
+          <text class="flow-sublabel" x="80" y="136">reads · learns · understands</text>
+        </g>
+
+        <!-- ═══ ALERT CARDS (middle column) — 220×130 ═══ -->
+
+        <!-- Alert 1: Drama spotted (top, centred at y=135) -->
+        <g transform="translate(440, 70)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="220" height="130" rx="16" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="220" height="130" rx="16" fill="url(#fg-crisis)" stroke="rgba(229,57,53,0.55)" stroke-width="1.5"/>
+          <g transform="translate(34, 65)" stroke="#E53935" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 0 -16 L 16 12 L -16 12 Z"/>
+            <path d="M 0 -6 v 8"/>
+            <circle cx="0" cy="9" r="1.4" fill="#E53935"/>
+          </g>
+          <text x="68" y="50" text-anchor="start" fill="#E53935" style="font-size:14px;font-weight:700;font-family:inherit">Drama spotted</text>
+          <text x="68" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">"23 angry comments</text>
+          <text x="68" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">on Drinking Memes"</text>
+        </g>
+
+        <!-- Alert 2: Post going viral (middle, centred at y=275) -->
+        <g transform="translate(440, 210)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="220" height="130" rx="16" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="220" height="130" rx="16" fill="url(#fg-opp)" stroke="rgba(0,196,160,0.55)" stroke-width="1.5"/>
+          <g transform="translate(34, 65)" stroke="#00C4A0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 6 -16 L -8 4 L 0 4 L -2 16 L 12 -4 L 4 -4 Z" fill="#00C4A0"/>
+          </g>
+          <text x="68" y="50" text-anchor="start" fill="#00C4A0" style="font-size:14px;font-weight:700;font-family:inherit">Post going viral</text>
+          <text x="68" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">"6PM post is on fire,</text>
+          <text x="68" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">share to your pages"</text>
+        </g>
+
+        <!-- Alert 3: Perfect time to post (bottom, centred at y=415) -->
+        <g transform="translate(440, 350)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="220" height="130" rx="16" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="220" height="130" rx="16" fill="url(#fg-time)" stroke="rgba(124,92,191,0.55)" stroke-width="1.5"/>
+          <g transform="translate(34, 65)" stroke="#7C5CBF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="0" cy="0" r="14"/>
+            <path d="M 0 -8 v 8 l 6 4"/>
+          </g>
+          <text x="68" y="50" text-anchor="start" fill="#7C5CBF" style="font-size:14px;font-weight:700;font-family:inherit">Perfect time to post</text>
+          <text x="68" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">"Tuesday 6PM, your fans</text>
+          <text x="68" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">are 34% more active"</text>
+        </g>
+
+        <!-- ═══ HUB MERGE NODE (where all alerts converge) ═══ -->
+        <g>
+          <!-- Outer halo pulse -->
+          <circle cx="760" cy="270" r="32" fill="none" stroke="rgba(124,92,191,0.4)" stroke-width="1.5">
+            <animate attributeName="r" values="22;38;22" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Solid core -->
+          <circle cx="760" cy="270" r="22" fill="url(#hub-grad)" stroke="rgba(124,92,191,0.7)" stroke-width="1.5" filter="url(#glow-arte)"/>
+          <!-- Centre dot -->
+          <circle cx="760" cy="270" r="4" fill="#fff" filter="url(#glow-strong)">
+            <animate attributeName="opacity" values="0.7;1;0.7" dur="1.6s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+
+        <!-- ═══ CHANNEL CARDS (right column) — 220×130 ═══ -->
+
+        <!-- Channel 1: Email (top) -->
+        <g transform="translate(820, 70)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="220" height="130" rx="16" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="220" height="130" rx="16" fill="url(#fg-email)" stroke="rgba(0,196,160,0.55)" stroke-width="1.5"/>
+          <g transform="translate(34, 65)" stroke="#00C4A0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="-16" y="-12" width="32" height="24" rx="3"/>
+            <path d="M -16 -9 L 0 4 L 16 -9"/>
+          </g>
+          <text x="68" y="50" text-anchor="start" fill="#00C4A0" style="font-size:14px;font-weight:700;font-family:inherit">Email</text>
+          <text x="68" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">Daily digest plus</text>
+          <text x="68" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">urgent alerts</text>
+        </g>
+
+        <!-- Channel 2: Phone (middle) -->
+        <g transform="translate(820, 210)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="220" height="130" rx="16" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="220" height="130" rx="16" fill="url(#fg-phone)" stroke="rgba(124,92,191,0.55)" stroke-width="1.5"/>
+          <g transform="translate(34, 65)" stroke="#7C5CBF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="-10" y="-17" width="20" height="34" rx="3"/>
+            <line x1="-3" y1="12" x2="3" y2="12"/>
+            <line x1="-6" y1="-13" x2="6" y2="-13"/>
+          </g>
+          <text x="68" y="50" text-anchor="start" fill="#7C5CBF" style="font-size:14px;font-weight:700;font-family:inherit">Phone</text>
+          <text x="68" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">Push notifications</text>
+          <text x="68" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">the moment it happens</text>
+        </g>
+
+        <!-- Channel 3: WhatsApp (bottom) -->
+        <g transform="translate(820, 350)" filter="url(#node-shadow-3d)">
+          <rect x="3" y="3" width="220" height="130" rx="16" fill="rgba(0,0,0,0.3)"/>
+          <rect x="0" y="0" width="220" height="130" rx="16" fill="url(#fg-whatsapp)" stroke="rgba(37,211,102,0.55)" stroke-width="1.5"/>
+          <g transform="translate(34, 65)" stroke="#25D366" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M -14 -7 a 14 14 0 1 1 5 12 L -14 12 L -10 4 a 14 14 0 0 1 -4 -11 z"/>
+            <path d="M -4 -2 q 0 5 5 5 q 3 0 4 -2" stroke-width="2"/>
+          </g>
+          <text x="68" y="50" text-anchor="start" fill="#25D366" style="font-size:14px;font-weight:700;font-family:inherit">WhatsApp</text>
+          <text x="68" y="74" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">Chat with Art-E</text>
+          <text x="68" y="90" text-anchor="start" fill="#B0B3B8" style="font-size:11px;font-family:inherit">like a friend</text>
+        </g>
+      </svg>
+
+      <!-- Animated pipeline: pages → reads → spots → reaches you -->
+      <div class="flow-mobile apipe">
+        <div class="apipe-spine" aria-hidden="true"><i class="apipe-flow"></i><i class="apipe-flow f2"></i><i class="apipe-flow f3"></i></div>
+        <div class="apipe-step" data-step="0" style="--ac:var(--teal);--acbg:var(--teal-bg)">
+          <div class="apipe-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg><span class="apipe-ring"></span></div>
+          <div>
+            <div class="flow-mobile-text-title">Your pages</div>
+            <div class="flow-mobile-text-sub">Posts and comments coming in all day</div>
+          </div>
+        </div>
+        <div class="apipe-step" data-step="1" style="--ac:var(--arte-1);--acbg:var(--arte-bg)">
+          <div class="apipe-icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L9 9 2 12l7 3 3 7 3-7 7-3-7-3z"/></svg><span class="apipe-ring"></span></div>
+          <div>
+            <div class="flow-mobile-text-title">ArtemisAI reads everything</div>
+            <div class="flow-mobile-text-sub">Learns your style, your audience, what's normal</div>
+          </div>
+        </div>
+        <div class="apipe-step" data-step="2" style="--ac:var(--warn);--acbg:rgba(245,158,11,0.12)">
+          <div class="apipe-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg><span class="apipe-ring"></span></div>
+          <div>
+            <div class="flow-mobile-text-title">Spots what matters</div>
+            <div class="flow-mobile-text-sub">Drama, viral posts, perfect moments to post</div>
+          </div>
+        </div>
+        <div class="apipe-step" data-step="3" style="--ac:var(--opp);--acbg:var(--opp-bg)">
+          <div class="apipe-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92V21a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 3h4.09a2 2 0 012 1.72c.13.96.37 1.9.7 2.81a2 2 0 01-.45 2.11L8.91 11.09a16 16 0 006 6l1.45-1.45a2 2 0 012.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg><span class="apipe-ring"></span></div>
+          <div>
+            <div class="flow-mobile-text-title">Reaches you anywhere</div>
+            <div class="flow-mobile-text-sub">Email, phone, or WhatsApp. You decide</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════ PREDICTED VS ACTUAL ══════════ -->
 <section id="proof" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Why it's different</span>
-      <h2>Dashboards describe yesterday.<br>Artemis reads tomorrow.</h2>
-      <p>Every analytics tool can tell you what happened. Artemis is built to tell you what happens next — and to be checkable when it does.</p>
+      <h2>Dashboards describe yesterday.<br>ArtemisAI reads tomorrow.</h2>
+      <p>Every analytics tool can tell you what happened. ArtemisAI is built to tell you what happens next — and to be checkable when it does.</p>
     </div>
     <div class="proof">
       <div class="proof-card before">
@@ -472,7 +1155,7 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
         </ul>
       </div>
       <div class="proof-card after">
-        <span class="tag">With Artemis</span>
+        <span class="tag">With ArtemisAI</span>
         <h3>Answers you can act on</h3>
         <ul>
           <li>One clear thing to do today, every day</li>
@@ -562,11 +1245,11 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
     <div class="faq">
       <details>
         <summary>Do I have to give you my Facebook password?</summary>
-        <div class="a">Never. You connect through Facebook's own official login, the same way you'd sign into any app with Facebook. You can disconnect at any time from your settings, and everything Artemis holds about your page can be exported or deleted on request.</div>
+        <div class="a">Never. You connect through Facebook's own official login, the same way you'd sign into any app with Facebook. You can disconnect at any time from your settings, and everything ArtemisAI holds about your page can be exported or deleted on request.</div>
       </details>
       <details>
-        <summary>Will Artemis post or reply without asking me?</summary>
-        <div class="a">No. Artemis drafts — you decide. A suggested reply or a scheduled post always waits for your review. Anything automatic (like the weekly report) is something you switched on yourself, and one toggle turns it all off.</div>
+        <summary>Will ArtemisAI post or reply without asking me?</summary>
+        <div class="a">No. ArtemisAI drafts — you decide. A suggested reply or a scheduled post always waits for your review. Anything automatic (like the weekly report) is something you switched on yourself, and one toggle turns it all off.</div>
       </details>
       <details>
         <summary>How can it predict how a post will do?</summary>
@@ -588,8 +1271,8 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
 <section id="contact" style="padding-top:0">
   <div class="wrap">
     <div class="cta-banner">
-      <h2>Run your page. Artemis runs the numbers.</h2>
-      <p>Join the pilot and get Artemis watching your page before launch — free during the pilot, and your feedback shapes the product.</p>
+      <h2>Run your page. ArtemisAI runs the numbers.</h2>
+      <p>Join the pilot and get ArtemisAI watching your page before launch — free during the pilot, and your feedback shapes the product.</p>
       <a class="btn btn-teal" href="mailto:hello@artemisai.co.uk?subject=Pilot%20access">Request pilot access</a>
     </div>
   </div>
@@ -601,7 +1284,7 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:92px
     <div>
       <a class="logo" href="index.html">
         <svg width="26" height="26" viewBox="0 0 36 36"><rect x="2" y="2" width="32" height="32" rx="9" fill="#0c1221"/><path d="M18 8L26 28H10L18 8Z" stroke="#00d4aa" stroke-width="1.6" fill="none"/><circle cx="18" cy="20" r="3" fill="#00d4aa"/></svg>
-        Artemis
+        ArtemisAI
       </a>
       <small>ArtemisAI Ltd · Made in the UK · © 2026</small>
     </div>
@@ -630,7 +1313,55 @@ function toggleTheme(){
 (function(){
   var t = null;
   try{ t = localStorage.getItem('artemis-theme'); }catch(e){}
-  applyTheme(t || 'dark');   /* Artemis is dark-first; light is the visitor's choice */
+  applyTheme(t || 'dark');   /* ArtemisAI is dark-first; light is the visitor's choice */
+})();
+</script>
+
+
+<script>
+/* count-up stats, then keep ticking */
+(function(){
+  function fmt(v, el){
+    if(el.dataset.short){ return v>=1e6 ? (v/1e6).toFixed(2)+'M' : Math.round(v).toLocaleString('en-GB'); }
+    var out = Math.round(v).toLocaleString('en-GB');
+    return out + (el.dataset.suffix||'');
+  }
+  function run(el){
+    var target=+el.dataset.count, t0=null, dur=1800;
+    function step(t){
+      if(!t0)t0=t;
+      var p=Math.min((t-t0)/dur,1), e=1-Math.pow(1-p,3);
+      el.textContent=fmt(target*e, el);
+      if(p<1) requestAnimationFrame(step);
+      else if(el.dataset.live){
+        var v=target;
+        setInterval(function(){ v+=1+Math.floor(Math.random()*3); el.textContent=fmt(v,el); }, +el.dataset.live);
+      }
+    }
+    requestAnimationFrame(step);
+  }
+  var seen=new WeakSet();
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting && !seen.has(e.target)){ seen.add(e.target); run(e.target); } });
+  },{threshold:.4});
+  document.querySelectorAll('[data-count]').forEach(function(el){ io.observe(el); });
+})();
+
+/* scroll tour: steps drive the phone */
+(function(){
+  var steps=[].slice.call(document.querySelectorAll('.tour-step'));
+  var screens=[].slice.call(document.querySelectorAll('.tscreen'));
+  if(!steps.length) return;
+  function activate(i){
+    steps.forEach(function(st,j){ st.classList.toggle('on', j===i); });
+    screens.forEach(function(sc,j){ sc.classList.toggle('on', j===i); });
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){ activate(+e.target.dataset.screen); }
+    });
+  },{rootMargin:'-40% 0px -40% 0px'});
+  steps.forEach(function(st){ io.observe(st); });
 })();
 </script>
 
