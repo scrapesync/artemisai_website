@@ -85,10 +85,10 @@ body.light .btn-teal{color:#fff}
 
 /* ═══════════ FULL-WIDTH HEADER ═══════════ */
 .hdr{position:sticky;top:0;z-index:80;width:100%;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--line-soft)}
-.hdr-in{max-width:1440px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:13px 28px}
+.hdr-in{width:100%;display:flex;align-items:center;gap:8px;padding:13px 20px 13px 16px}
 .logo{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:800;font-size:19px;color:var(--t1)}
 .logo b{color:var(--teal);font-weight:800}
-.hdr-links{display:flex;gap:2px;margin-left:auto}
+.hdr-links{flex:1;display:flex;justify-content:space-evenly;margin:0 16px}
 .hdr-links a{font-size:14px;font-weight:600;color:var(--t2);padding:9px 13px;border-radius:999px;transition:background .15s,color .15s}
 .hdr-links a:hover{background:var(--teal-bg);color:var(--t1)}
 .theme-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;margin-left:8px;transition:border-color .15s,color .15s,transform .3s}
@@ -97,7 +97,7 @@ body.light .btn-teal{color:#fff}
 .btn-launch{background:transparent;border:2px solid rgba(0,196,160,.5);color:var(--teal)}
 .btn-launch:hover{background:var(--teal);color:#04110D;border-color:var(--teal)}
 body.light .btn-launch:hover{color:#fff}
-@media(max-width:960px){.hdr-links{display:none}}
+@media(max-width:960px){.hdr-links{display:none}.theme-btn{margin-left:auto}}
 @media(max-width:560px){.hdr .btn-teal{display:none}}
 
 /* ═══════════ HERO ═══════════ */
@@ -327,34 +327,47 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:88px
 .lt-lbl{font-size:13px;color:var(--t2);margin-top:2px;line-height:1.4}
 .lt-trend{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--teal);margin-top:9px;letter-spacing:.04em}
 
-/* media marquee: memes + videos getting predicted */
-.marquee{margin-top:8px;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.mq-track{display:flex;gap:18px;width:max-content;padding:8px 0 14px;animation:mq 36s linear infinite}
-.marquee:hover .mq-track{animation-play-state:paused}
-@keyframes mq{to{transform:translateX(-50%)}}
-.mcard{width:232px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;flex:0 0 auto;transition:transform .2s,border-color .2s}
-.mcard:hover{transform:translateY(-5px);border-color:var(--teal)}
-.mc-img{height:130px;border-radius:12px;background:linear-gradient(160deg,var(--bg-elev-2),var(--bg-elev));border:1px solid var(--line-soft);display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Sora',sans-serif;font-weight:800;font-size:14.5px;line-height:1.45;color:var(--t1);padding:12px;position:relative;overflow:hidden}
-.mcard.photo .mc-img{font-size:30px;letter-spacing:6px}
-.mc-img.vid{background:linear-gradient(160deg,#171b22,#10131a)}
-body.light .mc-img.vid{background:linear-gradient(160deg,#20262f,#161b23)}
-.play{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;padding-left:3px}
-.vbar{position:absolute;left:12px;right:12px;bottom:10px;height:4px;border-radius:99px;background:rgba(255,255,255,.15)}
+/* ═══ the scanner ═══ */
+.scanner{max-width:880px;margin:0 auto;position:relative;min-height:340px;overflow:hidden;border-radius:20px}
+.scan-set{display:grid;grid-template-columns:300px 1fr;gap:36px;align-items:center;opacity:0;position:absolute;inset:0;pointer-events:none;transition:opacity .5s}
+.scan-set.on{opacity:1;position:relative;pointer-events:auto}
+.scan-media{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow-sm)}
+.sm-inner{height:280px;display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Sora',sans-serif;font-weight:800;font-size:19px;line-height:1.5;color:var(--t1);padding:20px;position:relative}
+.sm-inner.vid{background:linear-gradient(160deg,#171b22,#10131a);color:#fff}
+body.light .sm-inner.vid{background:linear-gradient(160deg,#242b35,#171d26)}
+.sm-inner.car{gap:10px}
+.sm-inner.car i{width:72px;height:110px;border-radius:12px;background:var(--bg-elev-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--t3)}
+.sm-inner.car i:nth-child(2){border-color:var(--teal);color:var(--teal);transform:translateY(-8px)}
+.play{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;padding-left:4px}
+.vbar{position:absolute;left:16px;right:16px;bottom:14px;height:4px;border-radius:99px;background:rgba(255,255,255,.15)}
 .vbar i{display:block;height:100%;width:46%;border-radius:99px;background:var(--teal);animation:vplay 3.4s ease-in-out infinite alternate}
 @keyframes vplay{from{width:18%}to{width:86%}}
-.mcard.reel .mc-img{height:170px}
-.mc-meta{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
-.mc-chip{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;border-radius:999px;padding:4px 9px;letter-spacing:.03em}
-.mc-chip.ocr{color:var(--teal);background:var(--teal-bg)}
-.mc-chip.tpl{color:var(--gold);background:var(--gold-bg)}
-.mc-chip.hook{color:var(--arte);background:var(--arte-bg)}
-.mc-chip.tr{color:var(--t2);background:var(--bg-elev-2)}
-.mc-chip.sc{color:var(--teal);background:var(--teal-bg)}
-.mc-score{font-family:'Sora',sans-serif;font-weight:800;font-size:14px;border-top:1px dashed var(--line-soft);padding-top:10px}
-.mc-score.s-hi{color:var(--teal)}
-.mc-score.s-md{color:var(--gold)}
-.mc-score.s-lo{color:var(--rose)}
-@media (prefers-reduced-motion: reduce){.mq-track{animation:none}}
+.scan-line{position:absolute;left:0;right:0;top:-12%;height:12%;background:linear-gradient(180deg,transparent,rgba(0,196,160,.28) 55%,var(--teal));opacity:.85;animation:scan 2.8s ease-in-out infinite;pointer-events:none}
+@keyframes scan{0%{top:-12%}55%{top:100%}100%{top:100%}}
+.scan-panel{display:flex;flex-direction:column;gap:12px}
+.srow{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--t2);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 16px;opacity:0;transform:translateX(16px);transition:opacity .45s,transform .45s}
+.scan-set.on .srow:nth-child(1){transition-delay:.25s}
+.scan-set.on .srow:nth-child(2){transition-delay:.75s}
+.scan-set.on .srow:nth-child(3){transition-delay:1.25s}
+.scan-set.on .srow{opacity:1;transform:none}
+.sk{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;border-radius:999px;padding:4px 10px;flex:0 0 auto}
+.sk.teal{color:var(--teal);background:var(--teal-bg)}
+.sk.gold{color:var(--gold);background:var(--gold-bg)}
+.sk.arte{color:var(--arte);background:var(--arte-bg)}
+.sk.rose{color:var(--rose);background:var(--rose-bg)}
+.sscore{font-family:'Sora',sans-serif;font-weight:800;font-size:44px;display:flex;align-items:baseline;gap:14px;padding:6px 4px 0;opacity:0;transform:scale(.85);transform-origin:left center;transition:opacity .5s,transform .5s;transition-delay:1.8s}
+.scan-set.on .sscore{opacity:1;transform:none}
+.sscore small{font-family:'Inter',sans-serif;font-weight:600;font-size:14.5px;color:var(--t2)}
+.scan-dots{display:flex;gap:8px;justify-content:center;margin-top:26px}
+.sdot{width:9px;height:9px;border-radius:50%;border:none;background:var(--line);cursor:pointer;padding:0;transition:background .2s,transform .2s}
+.sdot.on{background:var(--teal);transform:scale(1.25)}
+@media(max-width:760px){
+  .scan-set{grid-template-columns:1fr;gap:18px}
+  .sm-inner{height:200px;font-size:16px}
+  .sscore{font-size:36px}
+  .scanner{min-height:520px}
+}
+@media (prefers-reduced-motion: reduce){.scan-line{animation:none;display:none}}
 
 </style>
 </head>
@@ -384,9 +397,9 @@ body.light .mc-img.vid{background:linear-gradient(160deg,#20262f,#161b23)}
 <section class="hero" id="hero" style="padding-top:72px">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">The AI analyst for your social pages</span>
-      <h1 style="margin-top:14px">Stop guessing.<br><span class="hl">Start knowing.</span></h1>
-      <p class="sub">ArtemisAI scores your posts before they go out, spots trouble while it's still small, and finds the exact moment your audience is ready. Starting with Facebook — more platforms on the way.</p>
+      <span class="eyebrow">For people who run pages</span>
+      <h1 style="margin-top:14px">Your audience has a rhythm.<br><span class="hl">We know it by heart.</span></h1>
+      <p class="sub">Every post scored before it goes out. Every storm caught small. Facebook today — more platforms next.</p>
       <div class="hero-ctas">
         <a class="btn btn-teal" href="mailto:hello@artemisai.co.uk?subject=Pilot%20access">Join the pilot</a>
         <a class="btn btn-ghost" href="admin_login.html">Launch app →</a>
@@ -686,25 +699,59 @@ body.light .mc-img.vid{background:linear-gradient(160deg,#20262f,#161b23)}
 </section>
 
 
-<!-- ══════════ MEDIA: it reads pictures and watches videos ══════════ -->
-<section id="media" style="padding-top:0;overflow:hidden">
+<!-- ══════════ MEDIA: the scanner ══════════ -->
+<section id="media" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Not just text</span>
       <h2>It reads the memes.<br>It watches the videos.</h2>
-      <p>Text in images, scenes, hooks, transcripts — everything gets read, everything gets scored.</p>
     </div>
-  </div>
-  <div class="marquee" aria-hidden="true">
-    <div class="mq-track">
-      <div class="mcard meme"><div class="mc-img">Nobody:<br>British dads at a BBQ in February:</div><div class="mc-meta"><span class="mc-chip ocr">OCR · text read</span><span class="mc-chip tpl">template · trending</span></div><div class="mc-score s-hi">82 · strong</div></div>
-      <div class="mcard video"><div class="mc-img vid"><span class="play">▶</span><span class="vbar"><i></i></span></div><div class="mc-meta"><span class="mc-chip hook">hook · first 3s strong</span><span class="mc-chip tr">transcript read</span></div><div class="mc-score s-hi">88 · post it</div></div>
-      <div class="mcard photo"><div class="mc-img">🍺 🐕 🌧</div><div class="mc-meta"><span class="mc-chip sc">scene · pub, dog, rain</span></div><div class="mc-score s-md">61 · average</div></div>
-      <div class="mcard meme"><div class="mc-img">British summer,<br>day 1 vs day 2:</div><div class="mc-meta"><span class="mc-chip ocr">OCR · text read</span><span class="mc-chip tpl">seen 34× in your niche</span></div><div class="mc-score s-hi">79 · strong</div></div>
-      <div class="mcard video reel"><div class="mc-img vid"><span class="play">▶</span><span class="vbar"><i style="width:78%"></i></span></div><div class="mc-meta"><span class="mc-chip hook">retention · holds to 9s</span></div><div class="mc-score s-hi">84 · evening slot</div></div>
-      <div class="mcard photo"><div class="mc-img">🖼 🖼 🖼</div><div class="mc-meta"><span class="mc-chip sc">carousel · 3 images</span><span class="mc-chip tpl">lead with #2</span></div><div class="mc-score s-lo">55 · reorder it</div></div>
-      <div class="mcard meme"><div class="mc-img">Me: one episode<br>Also me at 3am:</div><div class="mc-meta"><span class="mc-chip ocr">OCR · text read</span><span class="mc-chip hook">relatable · high share</span></div><div class="mc-score s-hi">86 · strong</div></div>
-      <div class="mcard video"><div class="mc-img vid"><span class="play">▶</span><span class="vbar"><i style="width:22%"></i></span></div><div class="mc-meta"><span class="mc-chip tr">music only · no speech</span><span class="mc-chip hook">hook · weak open</span></div><div class="mc-score s-lo">47 · fix the first 3s</div></div>
+    <div class="scanner reveal">
+
+      <div class="scan-set on" data-i="0">
+        <div class="scan-media">
+          <div class="sm-inner meme">Nobody:<br>British dads at a BBQ<br>in February:</div>
+          <span class="scan-line"></span>
+        </div>
+        <div class="scan-panel">
+          <div class="srow"><span class="sk teal">OCR</span>text read from image</div>
+          <div class="srow"><span class="sk gold">TEMPLATE</span>rising in your niche this week</div>
+          <div class="srow"><span class="sk arte">TONE</span>relatable · high share intent</div>
+          <div class="sscore" style="color:var(--teal)">82<small>likely strong — post it</small></div>
+        </div>
+      </div>
+
+      <div class="scan-set" data-i="1">
+        <div class="scan-media">
+          <div class="sm-inner vid"><span class="play">▶</span><span class="vbar"><i></i></span></div>
+          <span class="scan-line"></span>
+        </div>
+        <div class="scan-panel">
+          <div class="srow"><span class="sk arte">HOOK</span>first 3 seconds hold attention</div>
+          <div class="srow"><span class="sk teal">TRANSCRIPT</span>speech read, punchline at 0:07</div>
+          <div class="srow"><span class="sk gold">TIMING</span>this format peaks in the evening</div>
+          <div class="sscore" style="color:var(--teal)">88<small>strong — schedule for 6:40pm</small></div>
+        </div>
+      </div>
+
+      <div class="scan-set" data-i="2">
+        <div class="scan-media">
+          <div class="sm-inner car"><i>1</i><i>2</i><i>3</i></div>
+          <span class="scan-line"></span>
+        </div>
+        <div class="scan-panel">
+          <div class="srow"><span class="sk teal">SCENES</span>3 images read · pub, dog, rain</div>
+          <div class="srow"><span class="sk rose">ORDER</span>the strongest image is buried at #2</div>
+          <div class="srow"><span class="sk gold">FIX</span>lead with #2, keep the caption</div>
+          <div class="sscore" style="color:var(--gold)">61<small>average — reorder and rescore</small></div>
+        </div>
+      </div>
+
+      <div class="scan-dots" role="tablist" aria-label="Examples">
+        <button class="sdot on" data-go="0" aria-label="Meme example"></button>
+        <button class="sdot" data-go="1" aria-label="Video example"></button>
+        <button class="sdot" data-go="2" aria-label="Carousel example"></button>
+      </div>
     </div>
   </div>
 </section>
@@ -926,10 +973,20 @@ function toggleTheme(){
 })();
 
 
-/* marquee: duplicate track content for a seamless loop */
+/* scanner: cycle through examples */
 (function(){
-  var t=document.querySelector('.mq-track');
-  if(t){ t.innerHTML += t.innerHTML; }
+  var sets=[].slice.call(document.querySelectorAll('.scan-set'));
+  var dots=[].slice.call(document.querySelectorAll('.sdot'));
+  if(!sets.length) return;
+  var i=0, timer=null;
+  function show(n){
+    i=n;
+    sets.forEach(function(el,j){ el.classList.toggle('on', j===n); });
+    dots.forEach(function(el,j){ el.classList.toggle('on', j===n); });
+  }
+  function auto(){ timer=setInterval(function(){ show((i+1)%sets.length); }, 5200); }
+  dots.forEach(function(d){ d.addEventListener('click', function(){ clearInterval(timer); show(+d.dataset.go); auto(); }); });
+  auto();
 })();
 
 /* reveal on scroll */
