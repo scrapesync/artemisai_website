@@ -463,6 +463,28 @@ body.light .hero::before{background:radial-gradient(circle,rgba(0,185,150,.42),t
 body.light .cta-banner{background:linear-gradient(140deg,#FFFFFF,#D8F0E6)}
 @media(max-width:760px){body.light{background-attachment:scroll}}
 
+
+/* pilot waitlist modal */
+.pmodal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}
+.pmodal[hidden]{display:none}
+.pm-overlay{position:absolute;inset:0;background:rgba(6,9,13,.62);backdrop-filter:blur(6px)}
+body.light .pm-overlay{background:rgba(18,24,30,.38)}
+.pm-card{position:relative;width:min(440px,100%);background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow), var(--glow);padding:34px 30px 28px;animation:pmin .3s cubic-bezier(.3,1.4,.6,1)}
+@keyframes pmin{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+.pm-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--t3);cursor:pointer;font-size:14px}
+.pm-x:hover{border-color:var(--rose);color:var(--rose)}
+.pm-card h3{font-size:26px;margin:14px 0 6px}
+.pm-sub{color:var(--t2);font-size:14.5px;margin-bottom:20px}
+.pm-l{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin:14px 0 6px}
+.pm-i{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:13px 15px;font-family:'Inter',sans-serif;font-size:15px;color:var(--t1);transition:border-color .15s,box-shadow .15s}
+.pm-i:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,196,160,.18)}
+.pm-i::placeholder{color:var(--t3)}
+.pm-go{width:100%;justify-content:center;margin-top:20px}
+.pm-note{font-size:12px;color:var(--t3);text-align:center;margin-top:12px}
+.pm-hp{position:absolute;left:-9999px}
+.pm-done,.pm-err{text-align:center}
+.pm-tick{width:64px;height:64px;border-radius:50%;background:var(--teal-bg);border:2px solid var(--teal);color:var(--teal);font-size:28px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:6px auto 4px;animation:pmin .35s .1s both cubic-bezier(.3,1.6,.6,1)}
+
 </style>
 </head>
 <body>
@@ -484,7 +506,7 @@ body.light .cta-banner{background:linear-gradient(140deg,#FFFFFF,#D8F0E6)}
     </nav>
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Switch theme" title="Switch theme">☀️</button>
     <a class="btn btn-launch" href="admin_login.html">Launch app →</a>
-    <a class="btn btn-teal" href="mailto:hello@artemisai.co.uk?subject=Pilot%20access">Join the pilot</a>
+    <button class="btn btn-teal js-pilot" type="button">Join the pilot</button>
   </div>
 </header>
 
@@ -496,7 +518,7 @@ body.light .cta-banner{background:linear-gradient(140deg,#FFFFFF,#D8F0E6)}
       <h1 style="margin-top:14px">Your audience has a rhythm.<br><span class="hl">We know it by heart.</span></h1>
       <p class="sub">Every post scored before it goes out. Every storm caught small. Facebook today, more platforms next.</p>
       <div class="hero-ctas">
-        <a class="btn btn-teal" href="mailto:hello@artemisai.co.uk?subject=Pilot%20access">Join the pilot</a>
+        <button class="btn btn-teal js-pilot" type="button">Join the pilot</button>
         <a class="btn btn-ghost" href="admin_login.html">Launch app →</a>
       </div>
       <div class="hero-note">
@@ -1042,7 +1064,7 @@ body.light .cta-banner{background:linear-gradient(140deg,#FFFFFF,#D8F0E6)}
     <div class="cta-banner reveal">
       <h2>Run your page. We'll run the numbers.</h2>
       <p>Free during the pilot. Your feedback shapes the product.</p>
-      <a class="btn btn-teal" href="mailto:hello@artemisai.co.uk?subject=Pilot%20access">Join the pilot</a>
+      <button class="btn btn-teal js-pilot" type="button">Join the pilot</button>
       <a class="btn btn-ghost" href="admin_login.html">Launch app →</a>
     </div>
   </div>
@@ -1067,6 +1089,43 @@ body.light .cta-banner{background:linear-gradient(140deg,#FFFFFF,#D8F0E6)}
     </div>
   </div>
 </footer>
+
+
+<!-- ══════════ PILOT WAITLIST MODAL ══════════ -->
+<div class="pmodal" id="pilotModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle" hidden>
+  <div class="pm-overlay" data-close></div>
+  <div class="pm-card">
+    <button class="pm-x" data-close aria-label="Close">✕</button>
+    <div class="pm-body" id="pmForm">
+      <span class="eyebrow">Join the pilot</span>
+      <h3 id="pmTitle">Get early access</h3>
+      <p class="pm-sub">Free during the pilot. Your feedback shapes the product.</p>
+      <form name="pilot-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="pilotForm">
+        <input type="hidden" name="form-name" value="pilot-waitlist">
+        <p class="pm-hp"><label>Don't fill this in: <input name="bot-field"></label></p>
+        <label class="pm-l" for="pf-name">Your name</label>
+        <input class="pm-i" id="pf-name" name="name" type="text" placeholder="Alex from Drinking Memes" required autocomplete="name">
+        <label class="pm-l" for="pf-email">Email</label>
+        <input class="pm-i" id="pf-email" name="email" type="email" placeholder="you@yourpage.co.uk" required autocomplete="email">
+        <label class="pm-l" for="pf-loc">Where are you based?</label>
+        <input class="pm-i" id="pf-loc" name="location" type="text" placeholder="Manchester, UK" required>
+        <button class="btn btn-teal pm-go" type="submit">Join the waitlist →</button>
+        <p class="pm-note">We'll only email you about the pilot. No spam, ever.</p>
+      </form>
+    </div>
+    <div class="pm-body pm-done" id="pmDone" hidden>
+      <div class="pm-tick">✓</div>
+      <h3>You're on the list</h3>
+      <p class="pm-sub">We'll be in touch before launch. Keep an eye on your inbox.</p>
+      <button class="btn btn-ghost" data-close type="button">Back to the site</button>
+    </div>
+    <div class="pm-body pm-err" id="pmErr" hidden>
+      <h3>That didn't send</h3>
+      <p class="pm-sub">No worries. Email us instead and we'll add you by hand:</p>
+      <a class="btn btn-teal" href="mailto:hello@artemisai.co.uk?subject=Pilot%20waitlist">hello@artemisai.co.uk</a>
+    </div>
+  </div>
+</div>
 
 <script>
 /* theme */
@@ -1192,6 +1251,29 @@ function toggleTheme(){
 
 
 
+
+
+/* pilot waitlist modal */
+(function(){
+  var modal=document.getElementById('pilotModal');
+  if(!modal) return;
+  var formView=document.getElementById('pmForm'), doneView=document.getElementById('pmDone'), errView=document.getElementById('pmErr');
+  var form=document.getElementById('pilotForm');
+  function open(){ modal.hidden=false; formView.hidden=false; doneView.hidden=true; errView.hidden=true; document.body.style.overflow='hidden'; setTimeout(function(){ document.getElementById('pf-name').focus(); }, 60); }
+  function close(){ modal.hidden=true; document.body.style.overflow=''; }
+  document.querySelectorAll('.js-pilot').forEach(function(b){ b.addEventListener('click', open); });
+  modal.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click', close); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !modal.hidden) close(); });
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn=form.querySelector('.pm-go'); btn.disabled=true; btn.textContent='Joining…';
+    var data=new URLSearchParams(new FormData(form)).toString();
+    fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:data})
+      .then(function(r){ if(!r.ok) throw new Error(r.status); formView.hidden=true; doneView.hidden=false; })
+      .catch(function(){ formView.hidden=true; errView.hidden=false; })
+      .finally(function(){ btn.disabled=false; btn.textContent='Join the waitlist →'; });
+  });
+})();
 
 /* reveal on scroll */
 (function(){
