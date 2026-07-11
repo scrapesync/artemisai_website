@@ -88,9 +88,10 @@ body.light .btn-teal{color:#fff}
 .hdr-in{width:100%;display:flex;align-items:center;gap:8px;padding:13px 20px 13px 16px}
 .logo{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:800;font-size:19px;color:var(--t1)}
 .logo b{color:var(--teal);font-weight:800}
-.hdr-links{flex:1;display:flex;justify-content:space-evenly;margin:0 16px}
-.hdr-links a{font-size:14px;font-weight:600;color:var(--t2);padding:9px 13px;border-radius:999px;transition:background .15s,color .15s}
-.hdr-links a:hover{background:var(--teal-bg);color:var(--t1)}
+.hdr-links{margin:0 auto;display:flex;gap:4px;border:1px solid var(--line);border-radius:999px;padding:5px;background:color-mix(in srgb,var(--bg-elev) 70%,transparent)}
+.hdr-links a{font-size:13.5px;font-weight:600;color:var(--t2);padding:8px 15px;border-radius:999px;border:1px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.hdr-links a:hover{background:var(--teal-bg);color:var(--t1);border-color:rgba(0,196,160,.3)}
+.hdr-links a.cur{background:var(--teal-bg);color:var(--t1);border-color:rgba(0,196,160,.45)}
 .theme-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;margin-left:8px;transition:border-color .15s,color .15s,transform .3s}
 .theme-btn:hover{border-color:var(--teal);color:var(--teal);transform:rotate(20deg)}
 .hdr .btn{padding:10px 18px;font-size:14px;margin-left:8px}
@@ -221,7 +222,7 @@ section{padding:88px 0}
 
 /* ═══════════ FLOW DIAGRAM (new, animated) ═══════════ */
 .flow-section{padding:88px 0;background:var(--bg-elev);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
-.fd-wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+.fd-wrap{max-width:1060px;margin:0 auto;padding:30px 24px;border:1px solid var(--line);border-radius:24px;background:radial-gradient(circle at 1px 1px, var(--line-soft) 1.2px, transparent 1.2px);background-size:24px 24px}
 .fd{width:100%;height:auto;display:block}
 .fd .box{fill:var(--card);stroke:var(--line)}
 .fd .box.core{fill:var(--teal-bg);stroke:rgba(0,196,160,.45)}
@@ -369,6 +370,26 @@ body.light .sm-inner.vid{background:linear-gradient(160deg,#242b35,#171d26)}
 }
 @media (prefers-reduced-motion: reduce){.scan-line{animation:none;display:none}}
 
+/* scanner video: real file if present, animated scene if not */
+.sm-inner.vid{overflow:hidden}
+.scan-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92;z-index:0}
+.sm-inner.vid.novid .scan-video{display:none}
+.sm-inner.vid.novid{background:linear-gradient(120deg,#171b22,#2a1e3f,#0e2c26,#171b22);background-size:300% 300%;animation:vscene 9s ease-in-out infinite}
+body.light .sm-inner.vid.novid{background:linear-gradient(120deg,#2a3240,#3b2c58,#14453b,#2a3240);background-size:300% 300%;animation:vscene 9s ease-in-out infinite}
+@keyframes vscene{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.sm-inner.vid .play,.sm-inner.vid .vbar,.sm-inner.vid .subcap{position:absolute;z-index:2}
+.sm-inner.vid .play{top:50%;left:50%;transform:translate(-50%,-50%)}
+.subcap{left:0;right:0;bottom:26px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.8);letter-spacing:.02em;animation:capfade 5.2s ease-in-out infinite}
+@keyframes capfade{0%,12%{opacity:0;transform:translateY(4px)}20%,85%{opacity:1;transform:none}95%,100%{opacity:0}}
+
+/* split-flap odometer */
+.od{display:inline-flex;align-items:flex-end}
+.od .dgt{display:inline-block;height:1.18em;overflow:hidden}
+.od .strip{display:flex;flex-direction:column;transition:transform .6s cubic-bezier(.35,0,.15,1)}
+.od .strip b{display:block;height:1.18em;line-height:1.18em;font-weight:600}
+.od .sep{display:inline-block;line-height:1.18em}
+.lt-num{line-height:1.18}
+
 </style>
 </head>
 <body>
@@ -462,25 +483,25 @@ body.light .sm-inner.vid{background:linear-gradient(160deg,#242b35,#171d26)}
     <div class="live-grid">
       <div class="live-tile">
         <div class="lt-ic" style="background:var(--teal-bg);color:var(--teal)">💬</div>
-        <div class="lt-num"><span data-count="247832" data-live="900" data-inc="8">0</span></div>
+        <div class="lt-num"><span class="odo" data-count="247832" data-live="900" data-inc="8"></span></div>
         <div class="lt-lbl">comments read today</div>
         <div class="lt-trend">counting up live <span class="tick-dot"></span></div>
       </div>
       <div class="live-tile">
         <div class="lt-ic" style="background:var(--rose-bg);color:var(--rose)">⚠️</div>
-        <div class="lt-num"><span data-count="4521" data-live="7000" data-inc="1">0</span></div>
+        <div class="lt-num"><span class="odo" data-count="4521" data-live="7000" data-inc="1"></span></div>
         <div class="lt-lbl">drama moments caught this month</div>
         <div class="lt-trend">+18% vs last month</div>
       </div>
       <div class="live-tile">
         <div class="lt-ic" style="background:var(--gold-bg);color:var(--gold)">✨</div>
-        <div class="lt-num"><span data-count="12847" data-live="4600" data-inc="2">0</span></div>
+        <div class="lt-num"><span class="odo" data-count="12847" data-live="4600" data-inc="2"></span></div>
         <div class="lt-lbl">hours saved for page managers this week</div>
         <div class="lt-trend">growing every minute</div>
       </div>
       <div class="live-tile">
         <div class="lt-ic" style="background:var(--arte-bg);color:var(--arte)">✓</div>
-        <div class="lt-num"><span data-count="98" data-suffix="%">0</span></div>
+        <div class="lt-num"><span class="odo" data-count="98" data-suffix="%" data-inc="2"></span></div>
         <div class="lt-lbl">of users say ArtemisAI saved them this week</div>
         <div class="lt-trend">verified Q1 2026</div>
       </div>
@@ -655,16 +676,29 @@ body.light .sm-inner.vid{background:linear-gradient(160deg,#242b35,#171d26)}
   </div>
   <div class="fd-wrap reveal">
     <svg class="fd" viewBox="0 0 1060 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ArtemisAI reads your pages and turns them into alerts, windows and predictions">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0L10 5L0 10z" fill="var(--line)"/>
+        </marker>
+        <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
       <!-- wires -->
-      <path class="wire" d="M225 200 H 380"/>
-      <path class="wire" d="M660 160 C 730 160 730 80 800 80"/>
-      <path class="wire" d="M660 200 H 800"/>
-      <path class="wire" d="M660 240 C 730 240 730 320 800 320"/>
+      <path class="wire" d="M225 200 H 374" marker-end="url(#arr)"/>
+      <path class="wire" d="M660 160 C 730 160 730 80 794 80" marker-end="url(#arr)"/>
+      <path class="wire" d="M660 200 H 794" marker-end="url(#arr)"/>
+      <path class="wire" d="M660 240 C 730 240 730 320 794 320" marker-end="url(#arr)"/>
       <!-- animated pulses -->
       <path class="pulseline pl-teal" d="M225 200 H 380"/>
       <path class="pulseline pl-rose" d="M660 160 C 730 160 730 80 800 80"/>
       <path class="pulseline pl-gold" d="M660 200 H 800"/>
       <path class="pulseline pl-arte" d="M660 240 C 730 240 730 320 800 320"/>
+      <!-- travelling packets -->
+      <circle r="4.5" fill="var(--teal)" filter="url(#glow)"><animateMotion dur="2.2s" repeatCount="indefinite" path="M225 200 H 380"/></circle>
+      <circle r="4" fill="var(--rose)" filter="url(#glow)"><animateMotion dur="2.6s" begin="0.2s" repeatCount="indefinite" path="M660 160 C 730 160 730 80 800 80"/></circle>
+      <circle r="4" fill="var(--gold)" filter="url(#glow)"><animateMotion dur="2.6s" begin="0.9s" repeatCount="indefinite" path="M660 200 H 800"/></circle>
+      <circle r="4" fill="var(--arte)" filter="url(#glow)"><animateMotion dur="2.6s" begin="1.6s" repeatCount="indefinite" path="M660 240 C 730 240 730 320 800 320"/></circle>
       <!-- your pages -->
       <rect class="box" x="45" y="150" width="180" height="100" rx="18"/>
       <text x="135" y="188" text-anchor="middle" font-size="15" font-weight="700">Your pages</text>
@@ -672,7 +706,13 @@ body.light .sm-inner.vid{background:linear-gradient(160deg,#242b35,#171d26)}
       <text class="mono" x="135" y="232" text-anchor="middle">9 UK PAGES · 24/7</text>
       <!-- engine -->
       <rect class="box core" x="380" y="130" width="280" height="140" rx="20"/>
-      <circle class="corepulse" cx="420" cy="165" r="7" fill="var(--teal)"/>
+      <circle cx="420" cy="165" r="7" fill="var(--teal)" filter="url(#glow)">
+        <animate attributeName="r" values="6;9;6" dur="2.6s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="420" cy="165" r="12" fill="none" stroke="var(--teal)" stroke-width="1.5" opacity=".5">
+        <animate attributeName="r" values="10;20" dur="2.6s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".5;0" dur="2.6s" repeatCount="indefinite"/>
+      </circle>
       <text x="520" y="172" text-anchor="middle" font-size="16" font-weight="700">ArtemisAI reads everything</text>
       <text class="sub" x="520" y="196" text-anchor="middle">learns your audience and rhythm,</text>
       <text class="sub" x="520" y="214" text-anchor="middle">spots what's about to matter</text>
@@ -723,7 +763,11 @@ body.light .sm-inner.vid{background:linear-gradient(160deg,#242b35,#171d26)}
 
       <div class="scan-set" data-i="1">
         <div class="scan-media">
-          <div class="sm-inner vid"><span class="play">▶</span><span class="vbar"><i></i></span></div>
+          <div class="sm-inner vid" id="scanVid">
+            <video class="scan-video" autoplay muted loop playsinline preload="metadata" src="assets/scan-demo.mp4"></video>
+            <span class="play">▶</span><span class="vbar"><i></i></span>
+            <div class="subcap">"right, who told the dog about Fridays"</div>
+          </div>
           <span class="scan-line"></span>
         </div>
         <div class="scan-panel">
@@ -933,28 +977,89 @@ function toggleTheme(){
   applyTheme(t || 'dark');
 })();
 
-/* counters: count up, then never stop */
+/* split-flap odometer counters: roll up, then never stop */
 (function(){
-  function fmt(v){ return Math.round(v).toLocaleString('en-GB'); }
-  function run(el){
-    var target=+el.dataset.count, t0=null, dur=1700, suf=el.dataset.suffix||'';
-    function step(t){
-      if(!t0)t0=t;
-      var p=Math.min((t-t0)/dur,1), e=1-Math.pow(1-p,3);
-      el.textContent=fmt(target*e)+suf;
-      if(p<1) requestAnimationFrame(step);
-      else if(el.dataset.live){
-        var v=target, inc=+(el.dataset.inc||2);
-        setInterval(function(){ v += 1+Math.floor(Math.random()*inc); el.textContent=fmt(v)+suf; }, +el.dataset.live);
+  function build(el, str){
+    el.innerHTML='';
+    el._digits=[];
+    for(var ch of str){
+      if(ch>='0' && ch<='9'){
+        var d=document.createElement('span'); d.className='dgt';
+        var st=document.createElement('span'); st.className='strip';
+        for(var k=0;k<10;k++){ var c=document.createElement('b'); c.textContent=k; st.appendChild(c); }
+        d.appendChild(st); el.appendChild(d);
+        el._digits.push(st);
+      } else {
+        var sp=document.createElement('span'); sp.className='sep'; sp.textContent=ch; el.appendChild(sp);
+        el._digits.push(null);
       }
     }
-    requestAnimationFrame(step);
   }
-  var seen=new WeakSet();
+  function fmt(el, v){ return Math.round(v).toLocaleString('en-GB') + (el.dataset.suffix||''); }
+  function set(el, v){
+    var str=fmt(el, v);
+    if(!el._str || el._str.length!==str.length){ build(el, str); }
+    var i=0;
+    for(var ch of str){
+      var st=el._digits[i++];
+      if(st) st.style.transform='translateY(-'+(+ch*1.18)+'em)';
+    }
+    el._str=str;
+  }
+  function run(el){
+    var target=+el.dataset.count, inc=+(el.dataset.inc||2);
+    var v=Math.max(0, target - inc*8);
+    set(el, v);
+    var steps=8;
+    var warm=setInterval(function(){
+      v=Math.min(target, v+inc); set(el, v);
+      if(--steps<=0 || v>=target){
+        clearInterval(warm); set(el, target); v=target;
+        if(el.dataset.live){
+          setInterval(function(){ v+=1+Math.floor(Math.random()*inc); set(el, v); }, +el.dataset.live);
+        }
+      }
+    }, 320);
+  }
+  document.querySelectorAll('.odo').forEach(function(el){ set(el, Math.max(0, +el.dataset.count - (+el.dataset.inc||2)*8)); });
+  var stats=document.querySelector('.stats');
+  var fired=false;
   var io=new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting && !seen.has(e.target)){ seen.add(e.target); run(e.target); } });
-  },{threshold:.4});
-  document.querySelectorAll('[data-count]').forEach(function(el){ io.observe(el); });
+    es.forEach(function(e){
+      if(e.isIntersecting && !fired){
+        fired=true;
+        document.querySelectorAll('.odo').forEach(function(el,i){ setTimeout(function(){ run(el); }, i*160); });
+        io.disconnect();
+      }
+    });
+  },{threshold:.15});
+  if(stats) io.observe(stats);
+})();
+
+/* scanner video: fall back to the animated scene if no real file is present */
+(function(){
+  var box=document.getElementById('scanVid');
+  if(!box) return;
+  var v=box.querySelector('video');
+  function fallback(){ box.classList.add('novid'); }
+  v.addEventListener('error', fallback, true);
+  if(v.readyState===0){ setTimeout(function(){ if(v.readyState===0 || v.videoWidth===0) fallback(); }, 1500); }
+})();
+
+/* scrollspy: highlight the section you're in */
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.hdr-links a[href^="#"]'));
+  var map={};
+  links.forEach(function(a){ var id=a.getAttribute('href').slice(1); var sec=document.getElementById(id); if(sec) map[id]=a; });
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(a){ a.classList.remove('cur'); });
+        var a=map[e.target.id]; if(a) a.classList.add('cur');
+      }
+    });
+  },{rootMargin:'-35% 0px -55% 0px'});
+  Object.keys(map).forEach(function(id){ io.observe(document.getElementById(id)); });
 })();
 
 /* scroll tour */
