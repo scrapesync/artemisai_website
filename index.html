@@ -217,10 +217,18 @@ section{padding:88px 0}
 .rep .rl:last-child{border-bottom:none}
 .rep .up{color:#00C4A0}.rep .dn{color:#FF5C74}
 @media(max-width:900px){
-  .tour-grid{display:block}
-  .tour-phone-wrap{position:sticky;top:72px;z-index:5;margin-bottom:20px}
-  .tour-phone{width:238px;height:494px}
-  .tour-step{min-height:48vh;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(3px);border-radius:16px;padding:18px}
+  .tour-grid{display:flex;flex-direction:column}
+  .tour-phone-wrap{order:-1;position:sticky;top:64px;z-index:5;margin-bottom:8px}
+  .tour-phone{width:196px;height:408px;border-radius:30px;padding:6px}
+  .tour-phone .scr{border-radius:25px;font-size:9px}
+  .tour-phone .island{width:60px;height:15px;top:11px}
+  .tour-phone .stat{padding:9px 14px 3px;font-size:8px}
+  .tour-phone .vh{font-size:13px!important}
+  .tour-phone .tabbar{padding:6px 4px 9px}
+  .tour-phone .arte-orb{width:26px;height:26px;font-size:11px}
+  .tour-step{min-height:52vh;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(4px);border-radius:16px;padding:18px;justify-content:flex-end;padding-bottom:22px}
+  .tour-step h3{font-size:21px}
+  .tour-step p{font-size:14px}
 }
 
 /* ═══════════ FLOW DIAGRAM (new, animated) ═══════════ */
@@ -324,7 +332,7 @@ footer{border-top:1px solid var(--line-soft);padding:44px 0 36px;margin-top:88px
 .stats .sec-head{max-width:none;text-align:center}
 .live-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1180px;margin:0 auto;padding:0 24px}
 @media(max-width:960px){.live-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.live-grid{grid-template-columns:1fr}}
+
 .live-tile{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;transition:transform .18s,border-color .18s}
 .live-tile:hover{transform:translateY(-3px);border-color:var(--teal)}
 .lt-ic{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:12px}
@@ -484,6 +492,28 @@ body.light .pm-overlay{background:rgba(18,24,30,.38)}
 .pm-hp{position:absolute;left:-9999px}
 .pm-done,.pm-err{text-align:center}
 .pm-tick{width:64px;height:64px;border-radius:50%;background:var(--teal-bg);border:2px solid var(--teal);color:var(--teal);font-size:28px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:6px auto 4px;animation:pmin .35s .1s both cubic-bezier(.3,1.6,.6,1)}
+
+
+/* mobile polish */
+@media(max-width:760px){
+  section{padding:58px 0}
+  .team-section{padding:64px 0}
+  .flow-section{padding:58px 0}
+  .sec-head{margin-bottom:32px}
+  .hero{padding-top:44px}
+  .hero h1{font-size:clamp(31px,8.6vw,40px)}
+  .hero p.sub{font-size:16.5px}
+  .stats{padding:22px 0 20px}
+  .live-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .live-tile{padding:14px}
+  .lt-ic{width:30px;height:30px;font-size:14px;border-radius:9px;margin-bottom:8px}
+  .lt-num{font-size:18px}
+  .lt-lbl{font-size:11px}
+  .lt-trend{font-size:8.5px}
+  .plat{font-size:9.5px;padding:6px 10px}
+  .cta-banner{padding:46px 22px}
+  footer{padding:32px 0 26px;margin-top:58px}
+}
 
 </style>
 </head>
@@ -1243,10 +1273,26 @@ function toggleTheme(){
     steps.forEach(function(st,j){ st.classList.toggle('on', j===i); });
     screens.forEach(function(sc,j){ sc.classList.toggle('on', j===i); });
   }
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ activate(+e.target.dataset.screen); } });
-  },{rootMargin:'-42% 0px -42% 0px'});
-  steps.forEach(function(st){ io.observe(st); });
+  var mobile = window.matchMedia('(max-width:900px)').matches;
+  var mid = function(){ return innerHeight * (mobile ? 0.66 : 0.5); };
+  var current=-1, ticking=false;
+  function best(){
+    ticking=false;
+    var m=mid(), idx=0, bd=Infinity, contained=false;
+    steps.forEach(function(st,j){
+      var r=st.getBoundingClientRect();
+      if(r.top<=m && r.bottom>=m){ if(!contained){ idx=j; contained=true; } }
+      else if(!contained){
+        var d=Math.min(Math.abs(r.top-m), Math.abs(r.bottom-m));
+        if(d<bd){ bd=d; idx=j; }
+      }
+    });
+    if(idx!==current){ current=idx; activate(idx); }
+  }
+  function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(best); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  best();
 })();
 
 
