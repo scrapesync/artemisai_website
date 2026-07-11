@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ArtemisAI · You post. We watch the rest.</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36' fill='none'><rect x='2' y='2' width='32' height='32' rx='8' stroke='%2300d4aa' stroke-width='2.5'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='2' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
 <meta name="description" content="ArtemisAI watches your social pages around the clock: it predicts posts before you publish, catches comment storms in minutes, and knows your best time to post. Starting with Facebook. Launching November 2026.">
 <meta name="theme-color" content="#00C4A0">
 <meta property="og:title" content="ArtemisAI · You post. We watch the rest.">
@@ -72,7 +72,10 @@ a{color:inherit;text-decoration:none}
 img{max-width:100%}
 :focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:6px}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(0,196,160,.35);background:var(--teal-bg);padding:7px 15px;border-radius:999px}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px rgba(0,196,160,.8)}
+.sec-head h2{position:relative;padding-bottom:18px}
+.sec-head h2::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:52px;height:3px;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--arte))}
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;padding:14px 26px;border-radius:999px;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s,border-color .15s}
 .btn:hover{transform:translateY(-1px)}
 .btn-teal{background:var(--teal);color:#04110D;box-shadow:0 8px 22px -8px rgba(0,196,160,.5)}
@@ -719,6 +722,10 @@ body.light .sm-inner.vid.novid{background:linear-gradient(120deg,#2a3240,#3b2c58
       <circle r="4" fill="var(--rose)"><animateMotion dur="2.6s" begin="0.2s" repeatCount="indefinite" path="M660 160 C 730 160 730 80 800 80"/></circle>
       <circle r="4" fill="var(--gold)"><animateMotion dur="2.6s" begin="0.9s" repeatCount="indefinite" path="M660 200 H 800"/></circle>
       <circle r="4" fill="var(--arte)"><animateMotion dur="2.6s" begin="1.6s" repeatCount="indefinite" path="M660 240 C 730 240 730 320 800 320"/></circle>
+      <circle r="2.5" fill="var(--teal)" opacity=".35"><animateMotion dur="2.2s" begin=".12s" repeatCount="indefinite" path="M225 200 H 380"/></circle>
+      <circle r="2.5" fill="var(--rose)" opacity=".35"><animateMotion dur="2.6s" begin="0.34s" repeatCount="indefinite" path="M660 160 C 730 160 730 80 800 80"/></circle>
+      <circle r="2.5" fill="var(--gold)" opacity=".35"><animateMotion dur="2.6s" begin="1.04s" repeatCount="indefinite" path="M660 200 H 800"/></circle>
+      <circle r="2.5" fill="var(--arte)" opacity=".35"><animateMotion dur="2.6s" begin="1.74s" repeatCount="indefinite" path="M660 240 C 730 240 730 320 800 320"/></circle>
       <!-- your pages -->
       <rect class="box" x="45" y="150" width="180" height="100" rx="18"/>
       <text x="135" y="188" text-anchor="middle" font-size="15" font-weight="700">Your pages</text>
@@ -736,7 +743,7 @@ body.light .sm-inner.vid.novid{background:linear-gradient(120deg,#2a3240,#3b2c58
       <text x="520" y="172" text-anchor="middle" font-size="16" font-weight="700">ArtemisAI reads everything</text>
       <text class="sub" x="520" y="196" text-anchor="middle">learns your audience and rhythm,</text>
       <text class="sub" x="520" y="214" text-anchor="middle">spots what's about to matter</text>
-      <text class="mono" x="520" y="242" text-anchor="middle">EVERY POST · EVERY COMMENT</text>
+      <text class="mono" x="520" y="238" text-anchor="middle">EVERY POST · EVERY COMMENT</text>
       <!-- outputs -->
       <rect class="box crisis" x="800" y="40" width="220" height="82" rx="16"/>
       <text x="910" y="72" text-anchor="middle" font-size="13.5" font-weight="700">⚠ Storm caught</text>
@@ -748,6 +755,22 @@ body.light .sm-inner.vid.novid{background:linear-gradient(120deg,#2a3240,#3b2c58
       <text x="910" y="312" text-anchor="middle" font-size="13.5" font-weight="700">🔮 Draft scored 78</text>
       <text class="sub" x="910" y="334" text-anchor="middle">before you publish</text>
       <!-- you -->
+      
+      <rect x="800" y="40" width="220" height="82" rx="16" fill="var(--rose)" opacity="0">
+        <animate attributeName="opacity" values="0;.18;0" dur="2.6s" begin="2.8s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="800" y="160" width="220" height="82" rx="16" fill="var(--gold)" opacity="0">
+        <animate attributeName="opacity" values="0;.18;0" dur="2.6s" begin="3.5s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="800" y="280" width="220" height="82" rx="16" fill="var(--arte)" opacity="0">
+        <animate attributeName="opacity" values="0;.18;0" dur="2.6s" begin="4.2s" repeatCount="indefinite"/>
+      </rect>
+      <!-- engine status LEDs -->
+      <circle cx="472" cy="256" r="3" fill="var(--teal)"><animate attributeName="opacity" values=".2;1;.2" dur="1.8s" begin="0s" repeatCount="indefinite"/></circle>
+      <circle cx="520" cy="256" r="3" fill="var(--gold)"><animate attributeName="opacity" values=".2;1;.2" dur="1.8s" begin=".6s" repeatCount="indefinite"/></circle>
+      <circle cx="568" cy="256" r="3" fill="var(--arte)"><animate attributeName="opacity" values=".2;1;.2" dur="1.8s" begin="1.2s" repeatCount="indefinite"/></circle>
+      <!-- wire label -->
+      <text class="mono" x="300" y="188" text-anchor="middle" style="font-size:9px">READS</text>
       <text class="mono" x="910" y="386" text-anchor="middle">YOU REVIEW · YOU DECIDE</text>
     </svg>
     <div class="fd-mobile">
@@ -763,8 +786,8 @@ body.light .sm-inner.vid.novid{background:linear-gradient(120deg,#2a3240,#3b2c58
 <section id="media" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Not just text</span>
-      <h2>It reads the memes.<br>It watches the videos.</h2>
+      <span class="eyebrow">Photos, videos, memes</span>
+      <h2>If you can post it,<br>we can score it.</h2>
     </div>
     <div class="media-player reveal">
       <video autoplay muted loop playsinline controls preload="metadata" aria-label="ArtemisAI turning content into predictions">
