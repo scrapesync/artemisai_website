@@ -841,6 +841,17 @@ body.light .arte-head, body.light .arte-head b, body.light .arte-head span{color
 
 body.light .nav-item{color:#8E99AC}
 body.light .xbadge{filter:brightness(.62) saturate(1.35)}
+
+/* ═══ ON A REAL PHONE (≤520px): drop the fake frame, fill the screen ═══ */
+@media (max-width:520px){
+  html,body{margin:0;padding:0;background:#000}
+  body{display:block;min-height:100dvh}
+  .phone{width:100vw;height:100dvh;border-radius:0;padding:0;box-shadow:none;margin:0}
+  .screen{border-radius:0}
+  .island{display:none}
+  .statusbar{padding-top:max(10px, env(safe-area-inset-top))}
+}
+
 </style>
 
 <style id="cleanows-skin">
