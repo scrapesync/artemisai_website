@@ -961,7 +961,7 @@ body.light .stub.on{color:#fff}
 <div class="phone"><div class="screen">
   <div class="island"></div>
   <div class="statusbar" onclick="toggleShade()" style="cursor:pointer"><span id="sbtime">18:22</span><span class="sb-icons" style="display:flex;align-items:center;gap:7px"><span id="shadeHint" style="opacity:.6">&#9662;</span>&#9679;&#9679;&#9679; &nbsp;&#9889;</span></div>
-  <button class="msrch" id="msrchBtn" onclick="show('search')" aria-label="Search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
+  <button class="msrch" id="msrchBtn" onclick="show('search')" aria-label="Search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button><button class="msrch minbox" id="minboxBtn" onclick="nav('inbox')" aria-label="Inbox" style="right:56px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span id="inboxBdg" style="position:absolute;top:-3px;right:-3px;min-width:14px;height:14px;border-radius:99px;background:#FF5C74;color:#fff;font-size:8.5px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 3px;border:2px solid var(--bg,#0e1116)">2</span></button>
 
     <div class="shade" id="shade">
       <div class="shade-head"><b>Notifications</b><span>Artemis &middot; today</span></div>
@@ -1422,7 +1422,6 @@ body.light .stub.on{color:#fff}
     <button class="nav-item" data-n="arte" onclick="nav('arte')"><span class="orb"><svg viewBox="0 0 36 36" fill="none"><path d="M18 8L26 28H10L18 8Z" stroke="#100C2E" stroke-width="2.6" fill="none"/><circle cx="18" cy="20" r="3" fill="#100C2E"/></svg></span>Art-E</button>
     <button class="nav-item nav-launch" onclick="show('data')"><span class="nav-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>Analytics</button>
     <button class="nav-item" data-n="planner" onclick="nav('planner')"><span class="nav-ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg></span>Studio</button>
-    <button class="nav-item" data-n="inbox" onclick="nav('inbox')" style="position:relative"><span class="nav-ic" style="position:relative"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span id="inboxBdg" style="position:absolute;top:-4px;right:-8px;min-width:15px;height:15px;border-radius:99px;background:#FF5C74;color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 3px">2</span></span>Inbox</button>
   </nav>
 
   <!-- ═══ SHEETS ═══ -->
