@@ -857,6 +857,53 @@ body.light .xbadge{filter:brightness(.62) saturate(1.35)}
 #scr-today .apphead{gap:9px}
 .newpill-ic{width:38px;height:38px;padding:0!important;justify-content:center;border-radius:12px;background:var(--surface)!important;border:1px solid var(--line)!important;color:var(--t2)!important;box-shadow:none!important}
 
+
+/* ═══ LIGHT THEME: strong colour identity ═══ */
+body.light .scr{background:
+  radial-gradient(430px 330px at 90% -50px, rgba(0,196,160,.46), transparent 66%),
+  radial-gradient(380px 320px at -70px 26%, rgba(139,123,255,.36), transparent 66%),
+  radial-gradient(330px 270px at 108% 58%, rgba(255,166,40,.28), transparent 66%),
+  radial-gradient(390px 310px at 16% 106%, rgba(0,196,160,.30), transparent 66%),
+  var(--bg)}
+body.light .scr .scroll, body.light .scr .body{background:
+  radial-gradient(430px 330px at 88% -60px, rgba(0,196,160,.42), transparent 66%),
+  radial-gradient(380px 320px at -70px 30%, rgba(139,123,255,.32), transparent 66%),
+  radial-gradient(340px 280px at 106% 62%, rgba(255,166,40,.26), transparent 66%),
+  radial-gradient(390px 310px at 14% 108%, rgba(0,196,160,.28), transparent 66%),
+  transparent}
+body.light .apphead{background:linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.42));backdrop-filter:blur(10px)}
+body.light .tabbar,body.light .nav{background:linear-gradient(180deg, rgba(255,255,255,.88), rgba(226,243,237,.95));backdrop-filter:blur(12px)}
+body.light .card,body.light .mv{background:rgba(255,255,255,.78)!important;backdrop-filter:blur(7px);box-shadow:0 6px 18px -10px rgba(20,50,45,.2)}
+body.light #scr-discover .scroll{background:radial-gradient(430px 340px at 60% -8%, rgba(139,123,255,.40), transparent 64%), radial-gradient(340px 280px at 0% 100%, rgba(0,196,160,.26), transparent 64%), transparent}
+body.light #scr-planner .scroll{background:radial-gradient(430px 340px at 60% -8%, rgba(255,166,40,.34), transparent 64%), radial-gradient(340px 280px at 0% 100%, rgba(139,123,255,.24), transparent 64%), transparent}
+body.light #scr-arte .scroll{background:radial-gradient(430px 340px at 55% -8%, rgba(139,123,255,.42), transparent 62%), radial-gradient(330px 270px at 8% 104%, rgba(0,196,160,.28), transparent 64%), transparent}
+
+/* light aurora v2: per-screen, appended last to win the cascade */
+body.light #scr-today .scroll{background:
+  radial-gradient(430px 340px at 78% -8%, rgba(0,196,160,.42), transparent 64%),
+  radial-gradient(360px 300px at -12% 34%, rgba(139,123,255,.30), transparent 64%),
+  radial-gradient(340px 280px at 106% 64%, rgba(255,166,40,.24), transparent 64%),
+  radial-gradient(380px 300px at 12% 108%, rgba(0,196,160,.26), transparent 64%) !important}
+body.light #scr-discover .scroll{background:
+  radial-gradient(430px 340px at 62% -8%, rgba(139,123,255,.42), transparent 64%),
+  radial-gradient(350px 290px at -8% 70%, rgba(0,196,160,.28), transparent 64%),
+  radial-gradient(320px 260px at 108% 40%, rgba(255,166,40,.20), transparent 64%) !important}
+body.light #scr-planner .scroll{background:
+  radial-gradient(430px 340px at 62% -8%, rgba(255,166,40,.36), transparent 64%),
+  radial-gradient(360px 300px at -10% 60%, rgba(139,123,255,.26), transparent 64%),
+  radial-gradient(330px 270px at 104% 96%, rgba(0,196,160,.26), transparent 64%) !important}
+body.light #scr-arte .scroll{background:
+  radial-gradient(430px 340px at 55% -8%, rgba(139,123,255,.44), transparent 62%),
+  radial-gradient(340px 280px at 6% 104%, rgba(0,196,160,.30), transparent 64%),
+  radial-gradient(300px 250px at 106% 30%, rgba(255,166,40,.20), transparent 64%) !important}
+body.light #scr-alerts .scroll{background:
+  radial-gradient(430px 340px at 60% -8%, rgba(255,92,116,.26), transparent 64%),
+  radial-gradient(360px 300px at -8% 70%, rgba(139,123,255,.24), transparent 64%) !important}
+body.light #scr-inbox .scroll{background:
+  radial-gradient(430px 340px at 60% -8%, rgba(0,196,160,.36), transparent 64%),
+  radial-gradient(350px 290px at -8% 76%, rgba(139,123,255,.26), transparent 64%) !important}
+body.light #scr-planner .body,body.light #scr-today .body{background:transparent!important}
+
 </style>
 
 <style id="cleanows-skin">
