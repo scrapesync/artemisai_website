@@ -2174,6 +2174,14 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 .ovv-mf-stat .todo{color:#f5a623}
 .ovv-mf-stat .done-t{color:var(--accent)}
 
+
+/* solo overview mode (entered via mvp_sprint_overview.html) */
+.solo-ovv .tab-bar{display:none!important}
+.solo-head{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;align-items:center;justify-content:space-between;padding:10px 22px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.solo-head .solo-title{font-weight:800;font-size:14px;letter-spacing:.3px}
+.solo-head .solo-back{font-size:11.5px;color:var(--accent);text-decoration:none;font-family:'JetBrains Mono',monospace}
+.solo-ovv #sprintoverview-page{padding-top:46px}
+
 </style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RCP8LMKYK"></script>
@@ -6003,6 +6011,31 @@ function renderSprintOverviewPage(){
   root.innerHTML=pills+mm+'<div class="ovv-grid">'+left+'<div>'+hero+deliv+people+'</div>'+side+'</div>';
   try{ if(window._ovvUserNav){ document.querySelector('.ovv-mockup-panel, .ovv-grid').scrollIntoView({block:'start'}); } }catch(e){}
 }
+</script>
+
+<script>
+/* deep entry: ?tab=sprintoverview&solo=1 (used by mvp_sprint_overview.html) */
+(function(){
+  var q=new URLSearchParams(location.search), tab=q.get('tab'), solo=q.get('solo');
+  if(!tab) return;
+  if(solo){ document.documentElement.classList.add('solo-ovv'); document.title='MVP Sprint Overview'; }
+  var tries=0, iv=setInterval(function(){
+    tries++;
+    var ready = typeof switchTab==='function' && document.getElementById(tab+'-page');
+    var g=document.getElementById('gstage');
+    if(ready && g && g.children.length){
+      clearInterval(iv);
+      switchTab(tab);
+      document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', (b.getAttribute('onclick')||'').indexOf("'"+tab+"'")>=0); });
+      if(solo){
+        var bar=document.createElement('div'); bar.className='solo-head';
+        bar.innerHTML='<span class="solo-title">🧭 MVP Sprint Overview</span><a class="solo-back" href="sprint_tracker_mvp.html">Open full Sprint Command →</a>';
+        document.body.appendChild(bar);
+      }
+    }
+    if(tries>150) clearInterval(iv);
+  },200);
+})();
 </script>
 </body>
 </html>
