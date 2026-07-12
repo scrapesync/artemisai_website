@@ -2153,6 +2153,27 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 .ovv-mockup-w{color:var(--muted2);font-size:12px;flex:1;min-width:220px}
 .ovv-mockup-chips{display:flex;gap:6px;flex-wrap:wrap}
 
+
+/* Sprint Overview: mockup feature-chain panel */
+.ovv-mockup-panel{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin:12px 0 18px}
+.ovv-mockup-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:4px}
+.ovv-mf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:10px;margin-top:12px}
+.ovv-mf{background:var(--bg);border:1px solid var(--border);border-radius:11px;padding:12px 14px}
+.ovv-mf-name{display:flex;gap:9px;align-items:center;margin-bottom:8px}
+.ovv-mf-name .fi{font-size:16px}
+.ovv-mf-name b{font-size:13px;display:block}
+.ovv-mf-name small{color:var(--muted);font-size:10.5px}
+.ovv-mf-chain{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:9px}
+.ovv-ch{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;border-radius:8px;padding:4px 8px;border:1px solid var(--border);background:transparent;color:var(--muted2);cursor:pointer}
+.ovv-ch.done{background:rgba(0,214,174,.14);border-color:rgba(0,214,174,.35);color:var(--accent)}
+.ovv-ch.active{border-color:#f5a623;color:#f5a623}
+.ovv-ch.here{outline:2px solid var(--accent);outline-offset:1px}
+.ovv-ch-arr{color:var(--muted);font-size:10px}
+.ovv-mf-stat{display:flex;gap:14px;flex-wrap:wrap;font-size:11px}
+.ovv-mf-stat .ok{color:var(--muted2)}
+.ovv-mf-stat .todo{color:#f5a623}
+.ovv-mf-stat .done-t{color:var(--accent)}
+
 </style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RCP8LMKYK"></script>
@@ -5842,7 +5863,7 @@ function ovvMvpFeatures(){
   return out;
 }
 function ovvEsc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-function ovvSelect(sn){ ovvSel=sn; localStorage.setItem('ovv_sel',sn); renderSprintOverviewPage(); }
+function ovvSelect(sn){ ovvSel=sn; localStorage.setItem('ovv_sel',sn); window._ovvUserNav=true; renderSprintOverviewPage(); window._ovvUserNav=false; }
 
 function renderSprintOverviewPage(){
   const root=document.getElementById('sprintoverview-content'); if(!root) return;
@@ -5944,19 +5965,43 @@ function renderSprintOverviewPage(){
     rows+
     '<div class="ovv-finish"><b>How it all gets finished:</b> Foundation (S6–7 image/video) → Intelligence (S8–12 predictions, crisis) → Product (S13–15 Discovery, reports) → Trust (S16–19 isolation, citations, security) → Launch (S20–23 OAuth, UAT, go-live). Everything Fast-Track / Later starts 30 Nov, after launch.</div></div>';
 
-  /* 🗺 In the mockup: which screens this sprint builds (deep links) */
+  /* 🗺 In the mockup: screens + feature prerequisite chains */
   let mm='';
   try{
     const mrec=(typeof MOCKUP_MAP!=='undefined')?MOCKUP_MAP.find(x=>x.s===ovvSel):null;
     if(mrec){
       const chips=mrec.web.map(([l,v])=>'<a class="mm-chip" target="_blank" href="mockup_v3_web.html?view='+v+'">'+l+'</a>').join('')
                  +mrec.mob.map(([l,v])=>'<a class="mm-chip mob" target="_blank" href="mockup_v3_mobile.html?screen='+v+'">📱 '+l+'</a>').join('');
-      mm='<div class="ovv-mockup"><span class="ovv-mockup-t">🗺 In the mockup this sprint</span>'
-        +'<span class="ovv-mockup-w">'+ovvEsc(mrec.what)+'</span>'
-        +'<span class="ovv-mockup-chips">'+(chips||'<span class="mm-none">engine-room sprint, no new screens</span>')+'</span></div>';
+      /* feature rows: every MVP feature this sprint touches, with its full sprint chain */
+      const chainFeats=(ovvSel==='Planning')?[]:feats.filter(f=>f.stage==='mvp'&&(f.sprints||[]).includes(N));
+      let frows='';
+      chainFeats.forEach(f=>{
+        const chain=[...f.sprints].sort((a,b)=>a-b);
+        const doneS=chain.filter(n=>getSprintStatus('Sprint '+n)==='done');
+        const pendS=chain.filter(n=>getSprintStatus('Sprint '+n)!=='done');
+        const prereq=chain.filter(n=>n<N);
+        const prereqDone=prereq.filter(n=>getSprintStatus('Sprint '+n)==='done');
+        const links=chain.map(n=>{
+          const st=getSprintStatus('Sprint '+n);
+          return '<button class="ovv-ch '+st+(n===N?' here':'')+'" onclick="ovvSelect(\'Sprint '+n+'\')" title="Sprint '+n+' · '+st+'">S'+n+(st==='done'?' ✓':'')+'</button>';
+        }).join('<span class="ovv-ch-arr">→</span>');
+        frows+='<div class="ovv-mf">'
+          +'<div class="ovv-mf-name"><span class="fi">'+(f.icon||'•')+'</span><span><b>'+ovvEsc(f.name.split('(')[0].trim())+'</b><small>'+ovvEsc(f._cat||'')+'</small></span></div>'
+          +'<div class="ovv-mf-chain">'+links+'</div>'
+          +'<div class="ovv-mf-stat">'
+          +(prereq.length? '<span class="ok">Pre-req: '+prereqDone.length+'/'+prereq.length+' sprint'+(prereq.length>1?'s':'')+' done'+(prereqDone.length<prereq.length?' ('+prereq.filter(n=>getSprintStatus('Sprint '+n)!=='done').map(n=>'S'+n).join(', ')+' open)':'')+'</span>' : '<span class="ok">Starts here, no pre-req sprints</span>')
+          +(pendS.length? '<span class="todo">Still needs: '+pendS.map(n=>'S'+n).join(', ')+'</span>' : '<span class="done-t">✓ Fully delivered</span>')
+          +'</div></div>';
+      });
+      mm='<div class="ovv-mockup-panel">'
+        +'<div class="ovv-mockup-head"><span class="ovv-mockup-t">🗺 In the mockup this sprint</span><span class="ovv-mockup-w">'+ovvEsc(mrec.what)+'</span><span class="ovv-mockup-chips">'+(chips||'<span class="mm-none">engine-room sprint, no new screens</span>')+'</span></div>'
+        +(frows? '<div class="ovv-mf-grid">'+frows+'</div>'
+               : (ovvSel!=='Planning'&&!chips? '' : ''))
+        +'</div>';
     }
   }catch(e){}
   root.innerHTML=pills+mm+'<div class="ovv-grid">'+left+'<div>'+hero+deliv+people+'</div>'+side+'</div>';
+  try{ if(window._ovvUserNav){ document.querySelector('.ovv-mockup-panel, .ovv-grid').scrollIntoView({block:'start'}); } }catch(e){}
 }
 </script>
 </body>
