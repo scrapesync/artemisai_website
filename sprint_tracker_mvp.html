@@ -2182,6 +2182,19 @@ nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;padding
 .solo-head .solo-back{font-size:11.5px;color:var(--accent);text-decoration:none;font-family:'JetBrains Mono',monospace}
 .solo-ovv #sprintoverview-page{padding-top:46px}
 
+
+/* ticket→mockup breakdown */
+.ovv-tk{margin-top:14px;border-top:1px dashed var(--border);padding-top:12px}
+.ovv-tk-h{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.ovv-tk-sub{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:10px 0 6px}
+.ovv-tk-row{display:grid;grid-template-columns:minmax(220px,38%) 18px 1fr;gap:8px;padding:6px 2px;border-bottom:1px solid color-mix(in srgb,var(--border) 45%,transparent);align-items:baseline}
+.ovv-tk-row .ovv-tk-name{font-size:11.5px;color:var(--t1,inherit);font-weight:600}
+.ovv-tk-row.sys .ovv-tk-name{font-weight:500;color:var(--muted2)}
+.ovv-tk-arr{color:var(--accent);font-size:11px}
+.ovv-tk-what{font-size:11.5px;color:var(--muted2);line-height:1.45}
+.ovv-tk-row.ui .ovv-tk-what{color:inherit}
+@media(max-width:760px){.ovv-tk-row{grid-template-columns:1fr;gap:2px}.ovv-tk-arr{display:none}}
+
 </style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RCP8LMKYK"></script>
@@ -2733,6 +2746,101 @@ const MOCKUP_MAP = [
  {s:"Sprint 22", what:"UAT with pilot pages, login hardening, final website + legal pages.", web:[["Pages","pages"]], mob:[]},
  {s:"Sprint 23", what:"Launch. Everything you can see, live for the public.", web:[["The whole app","today"]], mob:[["The whole app","today"]]}
 ];
+
+/* ticket → mockup-element explanations. Specific rules first, generic fallbacks after. */
+const MOCKUP_TICKET_RULES = [
+ /* ── Sprint 6 ── */
+ [/React app foundation/i,'ui',"The skeleton of everything in the web mockup is born here: left icon rail, top bar, routing and the design system lifted straight from the mockup files."],
+ [/Analytics page, first React/i,'ui',"Builds the Analytics view exactly as mocked: the Engagement / Reach / Sentiment Split cards."],
+ [/Image-side signals .* Home Feed/i,'ui',"Today-feed post cards gain their image badges: what each photo contributes to reach, as shown in the mockup."],
+ [/Best Times heatmap .* first React/i,'ui',"First live version of the Planner tab's 24h × 7d heat grid."],
+ [/Sparklines under every KPI/i,'ui',"The tiny trend lines under every KPI card on Today and Analytics."],
+ [/Stories rail/i,'ui',"The horizontal viral / crisis / sentiment / timing tiles strip at the top of Today."],
+ [/Model-quality dashboard UI/i,'ui',"Internal admin screen (not in the customer mockup) that shows model health."],
+ /* ── Sprint 7 ── */
+ [/Video intelligence panel/i,'ui',"Open any post in the mockup: the video panel (scenes, audio, caption read-out) is this ticket."],
+ [/Virality score shown on posts/i,'ui',"The 'predicted 2.4×' chips on every post card, plus the predictions surface they roll up into."],
+ [/Analytics sub-tabs/i,'ui',"The overview / video / virality tab row inside Analytics, wired to live data."],
+ [/Raw post table/i,'ui',"The sortable, exportable all-signals table at the bottom of Analytics."],
+ /* ── Sprint 8 ── */
+ [/Drafts page, inline virality/i,'ui',"Compose in the mockup: type a draft and the 0-100 score dial fills before you publish. This ticket is that dial."],
+ [/Predictions home \+ weak-post/i,'ui',"The Predicted-wins view: tomorrow's winners ranked, weak posts flagged with warnings."],
+ [/Art-E grounded Q&A v1/i,'ui',"The Art-E rail answers its first real questions, with citations under each answer exactly as mocked."],
+ [/Draft virality scoring model/i,'sys',"The brain behind the compose score dial: adapts the S7 reach model to unpublished text."],
+ /* ── Sprint 9 ── */
+ [/Best Times calendar page/i,'ui',"The Planner view fully realised: the heatmap plus the 'Art-E recommends Tue 6:40pm' slot card."],
+ [/Best Times model \+ Prophet/i,'sys',"Computes the heat behind every cell of that heatmap, with drift detection per page."],
+ [/Discovery feed match algorithm/i,'sys',"Groundwork for Discovery's 'pages like you' matching. Its pixels arrive in S13."],
+ /* ── Sprint 10 ── */
+ [/post drill-down/i,'ui',"Click any post card in Today: the detail drawer with full signals. This ticket hardens and completes it."],
+ [/cross-page graph|Structural-fingerprint/i,'sys',"Feeds the cross-page intelligence graph. No new pixels, more brains behind existing ones."],
+ /* ── Sprint 11 ── */
+ [/Crisis & Alerts UI/i,'ui',"The Alerts page and the bell popover: every alert card shows problem + suggested action, plus the rules builder and the master Art-E toggle."],
+ [/Alert engine/i,'sys',"Generates those problem + action cards the Alerts page displays."],
+ [/Crisis detector/i,'sys',"The watcher that fires them: toxic-comment and sentiment-spike detection per page archetype."],
+ /* ── Sprint 12 ── */
+ [/Discovery Feed data pipeline \+ Business Card/i,'sys',"Builds the data behind Discovery's business cards. You click these cards in S13 when the page ships."],
+ /* ── Sprint 13 ── */
+ [/Discovery page v1, base build/i,'ui',"The Discovery tab as mocked: browse grid plus business cards."],
+ [/Matches \/ My Collabs \/ Saved/i,'ui',"Discovery's three sub-tabs from the mockup."],
+ [/wire Discovery Feed UI to Business Card/i,'ui',"Connects those business cards to real page data."],
+ /* ── Sprint 14 ── */
+ [/Drafts page polish \+ Art-E scoring in context/i,'ui',"Compose reaches its final mockup form: Art-E comments on your draft inline while you write."],
+ [/Live draft-scoring model/i,'sys',"Score updates as you type: the live-dial behaviour behind Compose."],
+ [/Wire the Dashboard \+ Home Feed fully/i,'ui',"Today and Analytics stop using demo data: every number you see in the mockup becomes real."],
+ /* ── Sprint 15 ── */
+ [/Reports surface/i,'ui',"The Reports UI: pick weekly or monthly, preview the PDF, schedule it to email."],
+ [/Report-generation engine/i,'sys',"Writes the actual PDF that preview shows: weekly, monthly and crisis editions."],
+ /* ── Sprint 16 ── */
+ [/Profile & Settings core/i,'ui',"The Settings view: Connect, Notifications and Data Control tabs from the mockup."],
+ [/Art-E conversation memory/i,'sys',"Art-E remembers past chats: the 'as we discussed last week' behaviour in the rail."],
+ [/Art-E follow-up suggestions/i,'ui',"The suggested follow-up chips that appear under Art-E answers."],
+ [/Auth \+ sign-in backend/i,'sys',"The login screen's backend: Cognito, JWT, and the tenant claim everything else trusts."],
+ [/Art-E suggests collabs/i,'sys',"Art-E can recommend collaboration targets inside chat, complementing Discovery."],
+ /* ── Sprint 17 ── */
+ [/Art-E feedback UI \+ memory controls/i,'ui',"Thumbs up/down under every Art-E answer, plus the 'forget this' memory controls in Settings."],
+ /* ── Sprint 18 ── */
+ [/explainability UI/i,'ui',"The 'why did Art-E say X' link under answers, opening the explanation drawer."],
+ [/Performance \+ scale test/i,'sys',"No screen changes: the screens get fast. Lighthouse pass at pilot scale."],
+ [/Citation gate \+ hallucination/i,'sys',"Art-E refuses to show an uncited claim: the trust behaviour behind the rail."],
+ /* ── Sprint 19 ── */
+ [/Security hardening, tenant isolation .* account basics/i,'ui',"Settings' account section (password, sessions) plus invisible tenant walls."],
+ [/Meta App Review/i,'sys',"The Facebook permission submission and screencast: the gatekeeper that lets S21's OAuth button exist."],
+ /* ── Sprint 21 ── */
+ [/Facebook OAuth Live Mode/i,'ui',"The 'Sign in with Facebook' button works for the general public: the mockup's login becomes real."],
+ [/full 7-tab page/i,'ui',"Settings grows to its full seven tabs, including notification preferences and quiet hours."],
+ [/Connected-Pages UI \+ sync \+ onboarding/i,'ui',"The Pages view plus the first-run onboarding tour from the mockup."],
+ [/Cookie consent \+ GDPR banner/i,'ui',"The consent banner visitors see, with canary deploys and rollback behind it."],
+ /* ── Sprint 22 ── */
+ [/Final website launch updates \+ legal pages/i,'ui',"artemisai.co.uk gets its final polish, and privacy/terms pages go live."],
+ [/login system hardening/i,'sys',"Registration, password reset, bcrypt: the unglamorous parts that make the login real."],
+ [/UAT defect fixes \+ final polish/i,'ui',"Whatever UAT finds wrong with the screens gets fixed here."],
+ [/UAT with 5 pilot|UAT across the 5/i,'sys',"Five real page owners run the whole mockup as a product and tell us where it lies."],
+ /* ── Sprint 23 ── */
+ [/Launch \/ go-live/i,'ui',"Everything in both mockups, live for the public."],
+ [/Audience-feature groundwork/i,'sys',"De-identified audience features stored now so Phase-2 segmentation has history to learn from. Nothing on screen yet."],
+ [/Comprehensive user documentation/i,'sys',"The help docs that explain every screen in the mockup to a real customer."],
+ [/Art-E answer feedback loop/i,'sys',"Collects the thumbs from S17's feedback UI and audits answer quality with them."],
+ [/End-to-end test suite, 5 critical/i,'sys',"Robots walk the five core mockup journeys (connect → today → compose → alert → report) before every release."],
+ [/domain questions Art-E must not/i,'sys',"The list of questions where a wrong Art-E answer would be dangerous: feeds the citation gate."],
+ [/citation \+ automated hallucination detection/i,'sys',"Automated tripwire behind the Art-E rail: uncited or invented claims get blocked before display."],
+ [/Facebook OAuth integration, the final/i,'ui',"The very last wiring of the real Facebook login into the product before launch."],
+ [/Launch-day QA watch/i,'sys',"Eyes on every screen through launch day: first-week defects triaged as they appear."],
+ /* ── generic fallbacks (all sprints) ── */
+ [/QA dashboard/i,'sys',"Gatekeeper, not pixels: the acceptance check that the screens above actually work before the sprint closes."],
+ [/[Mm]odel-test suite|model validation|accuracy audit|smoke test/i,'sys',"Invisible guard-rail: regression tests so the numbers on the screens above stay trustworthy."],
+ [/cost|budget|Ops\)|invoicing|unit-econom|MSAs/i,'sys',"Keeps the feature affordable to run. No pixels, but protects the screens above from being switched off."],
+ [/CLO|legal|GDPR|DSAR|rights|consent|terms|DPA|AI Act|compliance|attestation|privacy|red-team/i,'sys',"Legal clearance so what the mockup shows is allowed to ship."],
+ [/[Pp]osition|narrative|story|pitch|press|go-to-market|investor|comms|marketing|wedge|magnet|case-study|Series-A|outbound|partners/i,'sys',"Decides how we talk about these screens, not what they look like."],
+ [/Own .*(product definition|acceptance|cut-line|scope|copy|UAT|sign-off|go\/no-go|onboarding flow)|launch-readiness|go\/no-go|run-of-show|retrospective|Roadmap/i,'sys',"Product ownership: decides exactly which parts of the mockup make the cut, and signs them off."],
+ [/domain read|pilot|page owners|What (do|should|counts)|which pilot|[Ww]ould|Lewis \+ Jill/i,'sys',"Pilot feedback loop: tunes what these screens should say for real pages."],
+ [/pipeline|API|serving|infra|platform|routing|GALACTUS|storage|compute|observab|logging|queue|OCR|CLIP|fusion|embedding|model|retrain|drift|watchdog|inference|transcription|graph|cach|token backend|backup|resilience|Rate limiting|security|isolation|hardening|pen-test|OWASP|monitoring|war-room|freeze|Cognito|Pinecone|RAG|webhook|schedul|anonymis/i,'sys',"Engine room: the data and AI plumbing the screens above read from. Without it the mockup is a picture; with it, it is alive."]
+];
+function mockupTicketNote(name){
+  for(const [re,kind,txt] of MOCKUP_TICKET_RULES){ if(re.test(name)) return {kind,txt}; }
+  return {kind:'sys', txt:"Supporting work for this sprint's screens."};
+}
+
 let mockupMapOn=false;
 function showMockupMap(){
   mockupMapOn=true; currentSprint=null;
@@ -6001,10 +6109,25 @@ function renderSprintOverviewPage(){
           +(pendS.length? '<span class="todo">Still needs: '+pendS.map(n=>'S'+n).join(', ')+'</span>' : '<span class="done-t">✓ Fully delivered</span>')
           +'</div></div>';
       });
+      /* ticket-by-ticket: exactly what each ticket makes in the mockup */
+      let trows='';
+      try{
+        const tks=(SPRINT_DATA[ovvSel]||[]).map(t=>t.name||t.title||'').filter(Boolean);
+        const ui=[], sys=[];
+        tks.forEach(n=>{ const r=mockupTicketNote(n); (r.kind==='ui'?ui:sys).push([n,r.txt]); });
+        const row=(n,txt,cls)=>'<div class="ovv-tk-row '+cls+'"><span class="ovv-tk-name">'+ovvEsc(n)+'</span><span class="ovv-tk-arr">→</span><span class="ovv-tk-what">'+txt+'</span></div>';
+        if(ui.length||sys.length){
+          trows='<div class="ovv-tk"><div class="ovv-tk-h">How this sprint\'s tickets build it</div>';
+          if(ui.length){ trows+='<div class="ovv-tk-sub">On screen, straight into the mockup</div>'+ui.map(([n,t])=>row(n,t,'ui')).join(''); }
+          if(sys.length){ trows+='<div class="ovv-tk-sub">Behind the screen: engine, guard-rails and sign-off</div>'+sys.map(([n,t])=>row(n,t,'sys')).join(''); }
+          trows+='</div>';
+        }
+      }catch(e){}
       mm='<div class="ovv-mockup-panel">'
         +'<div class="ovv-mockup-head"><span class="ovv-mockup-t">🗺 In the mockup this sprint</span><span class="ovv-mockup-w">'+ovvEsc(mrec.what)+'</span><span class="ovv-mockup-chips">'+(chips||'<span class="mm-none">engine-room sprint, no new screens</span>')+'</span></div>'
         +(frows? '<div class="ovv-mf-grid">'+frows+'</div>'
                : (ovvSel!=='Planning'&&!chips? '' : ''))
+        +trows
         +'</div>';
     }
   }catch(e){}
