@@ -2854,8 +2854,6 @@ const MOCKUP_TICKET_RULES = [
 function mockupTicketNote(name){
   for(const r of MOCKUP_TICKET_RULES){ if(r[0].test(name)) return {kind:r[1], purpose:r[2], txt:r[3]}; }
   return {kind:'sys', purpose:'Supporting work.', txt:"Supporting work for this sprint's screens."};
-}; }
-  return {kind:'sys', txt:"Supporting work for this sprint's screens."};
 }
 
 let mockupMapOn=false;
