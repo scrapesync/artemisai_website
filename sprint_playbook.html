@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtemisAI · Sprint Playbook</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
+<style>
+  :root{--bg:#080b14;--panel:#0f1320;--panel2:#131a2c;--line:#212b45;--ink:#e9eef8;--mut:#8793ab;--mut2:#a8b3c9;--teal:#00D6AE;--amber:#f5a623;--violet:#a78bfa;--red:#f87171;--blue:#38bdf8;--green:#34d399}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans','Outfit',Arial,sans-serif;background:
+    radial-gradient(1100px 600px at 85% -10%, rgba(109,99,255,.16), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(0,214,174,.12), transparent 55%), var(--bg);
+    color:var(--ink);min-height:100vh;padding:20px 22px 60px}
+  .wrap{max-width:1060px;margin:0 auto}
+  .hd{text-align:center;max-width:840px;margin:14px auto 10px}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:9px}
+  .hd h1{font-size:30px;font-weight:900;letter-spacing:-.5px;margin-bottom:9px}
+  .hd .sub{color:var(--mut);font-size:13.5px;line-height:1.6;max-width:660px;margin:0 auto}
+  .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0 6px}
+  .chip{font-size:10.5px;font-weight:800;letter-spacing:.05em;padding:5px 12px;border-radius:20px;text-transform:uppercase;border:1px solid var(--line);color:var(--mut2)}
+  .chip.t{border-color:rgba(0,214,174,.4);color:var(--teal);background:rgba(0,214,174,.08)}
+  .chip.a{border-color:rgba(245,166,35,.4);color:var(--amber);background:rgba(245,166,35,.08)}
+  .chip.r{border-color:rgba(248,113,113,.4);color:var(--red);background:rgba(248,113,113,.08)}
+  .chip.v{border-color:rgba(167,139,250,.4);color:var(--violet);background:rgba(167,139,250,.08)}
+
+  section{margin:34px auto 0}
+  .sec-head{display:flex;align-items:center;gap:12px;margin:0 0 14px}
+  .sec-head .n{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--teal);background:rgba(0,214,174,.1);border:1px solid rgba(0,214,174,.3);border-radius:8px;padding:4px 9px;white-space:nowrap}
+  .sec-head h2{font-size:20px;font-weight:900;letter-spacing:-.3px}
+  .sec-head .rule{flex:1;height:1px;background:var(--line)}
+  .sec-sub{color:var(--mut);font-size:13px;line-height:1.6;margin:-6px 0 14px;max-width:860px}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:860px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+
+  /* incident banner */
+  .incident{border:1px solid rgba(248,113,113,.45);background:linear-gradient(180deg,rgba(248,113,113,.10),rgba(248,113,113,.04));border-radius:16px;padding:20px 22px;margin:26px 0 0}
+  .incident h3{font-size:15px;font-weight:900;color:var(--red);display:flex;align-items:center;gap:9px;margin-bottom:8px}
+  .incident p{font-size:13px;color:var(--mut2);line-height:1.65}
+  .incident .acts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  @media(max-width:860px){.incident .acts{grid-template-columns:1fr}}
+  .act{background:rgba(8,11,20,.6);border:1px solid rgba(248,113,113,.3);border-radius:11px;padding:12px 14px}
+  .act b{font-size:12.5px;display:block;margin-bottom:4px}
+  .act > span{font-size:11.5px;color:var(--mut);line-height:1.5;display:block}
+  .act .mono{display:inline;color:var(--teal)}
+  .owner{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:12px;background:rgba(248,113,113,.14);color:var(--red);border:1px solid rgba(248,113,113,.35);margin-top:7px}
+
+  /* stat strip */
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:16px 0 0}
+  @media(max-width:860px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;text-align:center}
+  .stat .v{font-size:21px;font-weight:900;color:var(--teal)}
+  .stat .k{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;margin-top:3px}
+
+  /* sprint rail */
+  .rail{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}
+  .rp{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;padding:7px 13px;border-radius:10px;border:1px solid var(--line);color:var(--mut);background:var(--panel)}
+  .rp.live{border-color:var(--teal);color:var(--teal);background:rgba(0,214,174,.1);box-shadow:0 0 18px rgba(0,214,174,.15)}
+  .rp.lock{opacity:.55}
+
+  /* decision board */
+  .dec{border-left:3px solid var(--amber);background:var(--panel);border-radius:0 12px 12px 0;padding:14px 16px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .dec.blocker{border-left-color:var(--red)}
+  .dec .dt{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:6px}
+  .dec .dt b{font-size:13.5px}
+  .dec .id{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--amber);background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.35);border-radius:7px;padding:2px 7px}
+  .dec.blocker .id{color:var(--red);background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.35)}
+  .dec p{font-size:12px;color:var(--mut);line-height:1.6}
+  .dec .who{margin-top:8px;font-size:11px;color:var(--mut2)}
+  .dec .who b{color:var(--ink);font-weight:700}
+  .decs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.decs{grid-template-columns:1fr}}
+
+  /* workstream */
+  .ws{border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:16px}
+  .ws-head{padding:18px 22px;background:linear-gradient(180deg,rgba(0,214,174,.08),transparent);border-bottom:1px solid var(--line)}
+  .ws-head.b{background:linear-gradient(180deg,rgba(167,139,250,.09),transparent)}
+  .ws-head.r{background:linear-gradient(180deg,rgba(248,113,113,.09),transparent)}
+  .ws-head .tag{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+  .ws-head.b .tag{color:var(--violet)}
+  .ws-head.r .tag{color:var(--red)}
+  .ws-head h3{font-size:19px;font-weight:900;margin-top:4px}
+  .ws-head p{font-size:12.5px;color:var(--mut);margin-top:5px;line-height:1.6;max-width:820px}
+  .ws-body{padding:18px 22px;background:rgba(8,11,20,.35)}
+  .blk{margin:0 0 22px}
+  .blk h4{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:9px;display:flex;align-items:center;gap:8px}
+  .blk h4::after{content:"";flex:1;height:1px;background:var(--line)}
+  .ws .b h4, .blk.vio h4{color:var(--violet)}
+  .plain{font-size:13px;color:var(--mut2);line-height:1.7;max-width:880px}
+  .plain b{color:var(--ink)}
+  .plain .hl{color:var(--teal);font-weight:700}
+
+  table.t{width:100%;border-collapse:collapse;font-size:12px}
+  table.t th{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);text-align:left;padding:7px 10px;border-bottom:1px solid var(--line)}
+  table.t td{padding:8px 10px;border-bottom:1px solid rgba(33,43,69,.55);color:var(--mut2);line-height:1.5;vertical-align:top}
+  table.t td:first-child{color:var(--ink);font-weight:700;white-space:nowrap}
+  table.t tr:last-child td{border-bottom:none}
+  .tw{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+  .mono{font-family:'JetBrains Mono',monospace;font-size:11px}
+  .ok{color:var(--green);font-weight:700}.no{color:var(--red);font-weight:700}.mid{color:var(--amber);font-weight:700}
+
+  .never{border:1px solid rgba(248,113,113,.4);background:rgba(248,113,113,.06);border-radius:12px;padding:13px 16px;font-size:12.5px;color:var(--mut2);line-height:1.65}
+  .never b{color:var(--red)}
+
+  .diagram{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;overflow-x:auto}
+  .diagram svg{display:block;min-width:760px;width:100%;height:auto}
+
+  /* gates */
+  .gates{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:860px){.gates{grid-template-columns:1fr}}
+  .gate{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:11px 14px;font-size:12px;color:var(--mut2);line-height:1.55;display:flex;gap:10px;align-items:flex-start}
+  .gate .gi{color:var(--teal);font-weight:900;font-size:14px;line-height:1.2}
+  .gate b{color:var(--ink)}
+
+  /* research */
+  .paper{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:12px 15px;margin-bottom:9px}
+  .paper .pt{display:flex;gap:9px;align-items:baseline;flex-wrap:wrap}
+  .paper a{color:var(--blue);text-decoration:none;font-weight:700;font-size:12.5px;line-height:1.45}
+  .paper a:hover{text-decoration:underline}
+  .paper .yr{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mut)}
+  .paper p{font-size:11.5px;color:var(--mut);line-height:1.55;margin-top:5px}
+  .paper p b{color:var(--teal);font-weight:700}
+
+  /* person cards */
+  .people{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.people{grid-template-columns:1fr}}
+  .person{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:15px 17px}
+  .person .ph{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+  .person .av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#06101c;flex-shrink:0}
+  .person .ph b{font-size:14px;display:block}
+  .person .ph span{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.07em}
+  .task{border-top:1px solid rgba(33,43,69,.6);padding:9px 0}
+  .task:last-child{padding-bottom:0}
+  .task .tk{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--teal);margin-right:7px}
+  .task b{font-size:12.5px}
+  .task p{font-size:11.5px;color:var(--mut);line-height:1.55;margin-top:3px}
+  .task .done{font-size:11px;color:var(--green);margin-top:4px}
+  .task .done::before{content:"✓ done when: ";font-weight:800}
+
+  /* timeline */
+  .tl{display:grid;grid-template-columns:110px 1fr;gap:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .tl .d{padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--teal);border-bottom:1px solid rgba(33,43,69,.55);background:rgba(0,214,174,.04)}
+  .tl .w{padding:12px 16px;font-size:12.5px;color:var(--mut2);line-height:1.6;border-bottom:1px solid rgba(33,43,69,.55)}
+  .tl .d:last-of-type,.tl .w:last-of-type{border-bottom:none}
+  .tl b{color:var(--ink)}
+
+  .dodlist{list-style:none}
+  .dodlist li{font-size:13px;color:var(--mut2);line-height:1.6;padding:7px 0 7px 30px;position:relative;border-bottom:1px solid rgba(33,43,69,.5)}
+  .dodlist li:last-child{border-bottom:none}
+  .dodlist li::before{content:"☐";position:absolute;left:4px;color:var(--teal);font-size:15px}
+  .dodlist b{color:var(--ink)}
+  .mr{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--violet);background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);border-radius:6px;padding:1px 6px;white-space:nowrap}
+
+  .next{border:1px dashed var(--line);border-radius:14px;padding:18px 20px;color:var(--mut);font-size:13px;line-height:1.65;background:rgba(15,19,32,.5)}
+  .srcs{font-size:11px;color:var(--mut);line-height:1.7;margin-top:10px}
+  .srcs b{color:var(--mut2)}
+
+/* ===== shared site header (sn-*) matches other ArtemisAI pages ===== */
+nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}
+nav.site-nav *{box-sizing:border-box}
+.sn-logo{font-size:1rem;font-weight:800;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.55rem;flex-shrink:0}
+.sn-logo-mark{width:26px;height:26px;flex-shrink:0}.sn-logo-mark svg{width:100%;height:100%;min-width:0!important}
+.sn-links{display:flex;align-items:center;gap:1rem;list-style:none;margin:0;padding:0}
+.sn-pill{padding:.4rem 1rem;border:1px solid rgba(0,212,170,.3);border-radius:7px;color:#00d4aa!important;font-size:.8rem;text-decoration:none;background:transparent;transition:all .2s;white-space:nowrap}
+.sn-pill:hover{background:rgba(0,212,170,.07)!important;border-color:rgba(0,212,170,.6)!important}
+.sn-chip{display:none;align-items:center;gap:7px;padding:.28rem .8rem .28rem .4rem;background:rgba(0,212,170,.07);border:1px solid rgba(0,212,170,.2);border-radius:20px}
+.sn-avatar{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#00d4aa,#6366f1);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#060a13;flex-shrink:0}
+.sn-name{font-size:.78rem;color:#e8ecf4;font-weight:600}
+.sn-logout{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.8rem;padding:.26rem .6rem;cursor:pointer;transition:all .2s}
+.sn-logout:hover{border-color:rgba(248,113,113,.4);color:#f87171}
+#signout-modal{display:none;position:fixed;inset:0;z-index:99998;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif}
+#signout-modal.open{display:flex}
+#signout-backdrop{position:absolute;inset:0;background:rgba(2,5,12,.7);backdrop-filter:blur(4px)}
+#signout-card{position:relative;z-index:1;background:#0f1729;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem 2rem;max-width:340px;width:90%;box-shadow:0 30px 60px rgba(0,0,0,0.5);text-align:center}
+.signout-icon svg{width:34px;height:34px;stroke:#f87171;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-bottom:.5rem}
+.signout-title{font-size:1.05rem;font-weight:800;color:#e8ecf4}
+.signout-sub{font-size:.82rem;color:#8a96ad;margin:.4rem 0 1.1rem}
+.signout-btns{display:flex;gap:8px}
+.signout-cancel{flex:1;padding:.6rem;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:9px;color:#cdd5ee;font-family:inherit;font-size:.82rem;cursor:pointer}
+.signout-confirm{flex:1;padding:.6rem;background:#f87171;border:none;border-radius:9px;color:#2a0a0a;font-family:inherit;font-weight:700;font-size:.82rem;cursor:pointer}
+body{padding-top:52px!important}
+@media(max-width:768px){nav.site-nav{height:48px!important;padding:0 12px!important}.sn-pill{padding:.3rem .75rem!important;font-size:.7rem!important}.sn-name{max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}body{padding-top:48px!important}}
+
+/* ===== shared site footer (af-*) matches ArtemisAI pages ===== */
+.af-footer{margin-top:56px;padding:30px 1.6rem;border-top:1px solid rgba(255,255,255,.07);background:rgba(6,10,19,.45);font-family:'DM Sans','Outfit',system-ui,sans-serif}
+.af-footer-in{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.af-brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.12em;color:#e8ecf4;font-size:.9rem}
+.af-brand svg{width:24px!important;height:24px!important;min-width:0!important;flex-shrink:0}
+.af-copy{font-size:.8rem;color:#7c89a3}
+.af-links{display:flex;gap:20px;flex-wrap:wrap}
+.af-links a{font-size:.8rem;color:#9aa6bd;text-decoration:none;transition:color .2s}
+.af-links a:hover{color:#00d4aa}
+@media(max-width:640px){.af-footer-in{flex-direction:column;text-align:center;gap:12px}.af-footer{margin-top:40px}}
+</style></head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="sn-logo">
+    <div class="sn-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#slg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#slg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#slg)"/><defs><linearGradient id="slg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
+    ARTEMISAI
+  </a>
+  <ul class="sn-links">
+    <li><a href="admin_panel.html" class="sn-pill">&larr; Admin Panel</a></li>
+    <li><div class="sn-chip" id="sn-chip" style="display:none"><div class="sn-avatar" id="sn-avatar">?</div><span class="sn-name" id="sn-name"></span></div></li>
+    <li><button class="sn-logout" id="sn-logout-btn" onclick="handleLogout()" style="display:none">&#9211;</button></li>
+  </ul>
+</nav>
+<div id="signout-modal">
+  <div id="signout-backdrop" onclick="_closeSignoutModal()"></div>
+  <div id="signout-card">
+    <div class="signout-icon"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+    <div class="signout-title">Sign out?</div>
+    <div class="signout-sub">You'll need to sign back in to access the Admin Panel.</div>
+    <div class="signout-btns"><button class="signout-cancel" onclick="_closeSignoutModal()">Cancel</button><button class="signout-confirm" onclick="_doSignout()">Sign Out</button></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="hd">
+  <div class="eyebrow">Mission Control · Sprint Playbook v2</div>
+  <h1>The build, explained one sprint at a time</h1>
+  <div class="sub">The tracker says <b>what</b> and <b>who</b>. The master plan says <b>where it all fits</b>. This page says <b>how and why</b>: what each model eats and produces, the technique behind it, the research it stands on, and the exact work each person does. Built sprint by sprint, starting with Sprint 8.</div>
+  <div class="chips">
+    <span class="chip t">Sprint 8 · live</span>
+    <span class="chip">S9+ added one at a time</span>
+    <span class="chip a">4 decisions to lock</span>
+    <span class="chip r">1 live incident</span>
+    <span class="chip v">research backed</span>
+  </div>
+</div>
+
+<!-- ============ INCIDENT ============ -->
+<div class="incident" id="incident">
+  <h3>⚠ Before anything else: Meta killed our reach metrics, and the target is dead</h3>
+  <p>On <b>15 June 2026</b> Meta deprecated the whole <span class="mono">post_impressions_*</span> family. Our insights feed has been silently dark since <b>14 June</b> (~6 weeks). Reach is recoverable under a new metric (<span class="mono">post_total_media_view_unique</span>, verified live by Faheem). <b>Viral reach is gone for good, no replacement.</b> That kills both candidate targets for the performance model: <span class="mono">viral_reach / reach</span> and <span class="mono">(shares+comments) / post_impressions_unique</span>. Engagement metrics (shares, comments, reactions, clicks) are unaffected. Full detail: Meta_Reach_Deprecation_Escalation, 25 Jul 2026.</p>
+  <div class="acts">
+    <div class="act"><b>Day-zero action 1 · Revive the feed</b><span>Migrate LOKI insights to <span class="mono">post_total_media_view_unique</span> + <span class="mono">post_media_view</span>, drop the dead names. Every dark day is data lost forever, and Meta's ~2-year history window is expiring the oldest posts at the same time.</span><span class="owner">Muteeb + Asad · urgent</span></div>
+    <div class="act"><b>Day-zero action 2 · Redefine the target</b><span>Rebuild the model target around what survives: new reach + shares/comments/reactions. Nothing downstream (ladders, bands, rule tables, training) can be built until this lands. Recommendation and protocol below in Workstream A.</span><span class="owner">Rafeh + Alex · decision needed</span></div>
+  </div>
+</div>
+
+<!-- ============ HOW TO READ ============ -->
+<section>
+  <div class="sec-head"><span class="n">00</span><h2>How to read this page</h2><div class="rule"></div></div>
+  <div class="grid3">
+    <div class="card"><b style="font-size:13px">One sprint, fully explained</b><p class="plain" style="font-size:12px;margin-top:6px">Each sprint gets: the mission, the strategy per workstream, model inputs and outputs, flow diagrams, benchmarks and gates, the research it stands on, and every person's tickets in plain words.</p></div>
+    <div class="card"><b style="font-size:13px">Rules are citable</b><p class="plain" style="font-size:12px;margin-top:6px">Tags like <span class="mr">MR-3.1</span> point into the Model Master Rules (24 Jul 2026). If a ticket and a rule disagree, raise it, don't guess. Open decisions are marked with an owner, never silently resolved here.</p></div>
+    <div class="card"><b style="font-size:13px">Honesty is the strategy</b><p class="plain" style="font-size:12px;margin-top:6px">We predict performance bands, never virality. Every claim ships with reasons and a calibrated probability. If the data is thin, the product says so instead of guessing. That is the moat.</p></div>
+  </div>
+  <div class="rail">
+    <span class="rp live">S8 · Predictions + Art-E</span>
+    <span class="rp lock">S9 · Best Times + velocity</span>
+    <span class="rp lock">S10</span><span class="rp lock">S11</span><span class="rp lock">S12</span><span class="rp lock">S13</span><span class="rp lock">S14</span><span class="rp lock">S15</span><span class="rp lock">S16</span><span class="rp lock">S17</span><span class="rp lock">S18</span><span class="rp lock">S19</span><span class="rp lock">S20</span><span class="rp lock">S21</span><span class="rp lock">S22</span><span class="rp lock">S23 · Launch</span>
+  </div>
+</section>
+
+<!-- ============ S8 OVERVIEW ============ -->
+<section id="s8">
+  <div class="sec-head"><span class="n">S8</span><h2>Sprint 8 · 5 to 18 Aug 2026 · Predictions + a voice</h2><div class="rule"></div></div>
+  <p class="sec-sub"><b>The mission in one sentence:</b> ship the first honest prediction surface (weak-post warnings with reasons, never viral promises) and give the data a voice (Art-E answers questions from your own numbers, every number cited). S6 gave the product eyes, S7 gave it foresight, <b>S8 gives it a voice and puts the foresight in front of the user.</b></p>
+  <div class="stats">
+    <div class="stat"><div class="v">13</div><div class="k">tickets</div></div>
+    <div class="stat"><div class="v">8</div><div class="k">owners</div></div>
+    <div class="stat"><div class="v">2+1</div><div class="k">workstreams + incident</div></div>
+    <div class="stat"><div class="v">4</div><div class="k">decisions to lock</div></div>
+    <div class="stat"><div class="v">2w</div><div class="k">5 Aug to 18 Aug</div></div>
+  </div>
+</section>
+
+<!-- ============ DECISIONS ============ -->
+<section id="decisions">
+  <div class="sec-head"><span class="n">01</span><h2>Lock these first, or the sprint stalls</h2><div class="rule"></div></div>
+  <p class="sec-sub">Four decisions gate the build. Each has one owner and a due day. Everything else on this page assumes they land in week 1.</p>
+  <div class="decs">
+    <div class="dec blocker">
+      <div class="dt"><span class="id">D0</span><b>The new target</b></div>
+      <p>Both old targets died with Meta's metrics. The model cannot train, ladders cannot be built, bands cannot be cut until the new target is chosen. Recommended candidate and back-test protocol are in Workstream A below. Forces Master Rules Conflict #1 closed.</p>
+      <div class="who"><b>Rafeh + Alex</b> (Faheem supplies the distribution pull) · due day 2</div>
+    </div>
+    <div class="dec blocker">
+      <div class="dt"><span class="id">D1</span><b>Interface contracts, day 1</b></div>
+      <p>Draft-score request/response (Faheem + Muteeb + Asad) and the Art-E retrieval schema (Faheem + Muteeb). VD-209 is explicitly blocked until the contract lands; last sprint proved the seam between model and serving is where days get lost.</p>
+      <div class="who"><b>Faheem + Muteeb + Asad</b> · due day 1</div>
+    </div>
+    <div class="dec">
+      <div class="dt"><span class="id">D2</span><b>Flop cut: bottom third or bottom quarter</b></div>
+      <p>Two specs say bottom third (33rd percentile), one flow diagram says quarter. It changes what "weak post" means and how the 75% precision floor is measured. Method is locked (percentile cuts); the number needs one owner to say it once. <span class="mr">MR-8.2</span></p>
+      <div class="who"><b>Rafeh</b> · due with D0, day 2</div>
+    </div>
+    <div class="dec">
+      <div class="dt"><span class="id">D3</span><b>Usable-signal definition + refusal wording</b></div>
+      <p>Below 5 usable signals a draft gets "not enough to score yet", but which inputs count toward the 5 is undefined <span class="mr">MR-2.7</span>. And Art-E's refusal line ("I don't have data for that") is sitting with legal, submitted 11 Jul, not yet signed. <span class="mr">MR-8.7</span></p>
+      <div class="who"><b>Faheem + Asad</b> (signals) · <b>Filza</b> (wording) · due week 1</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORKSTREAM A ============ -->
+<section id="model">
+  <div class="sec-head"><span class="n">02</span><h2>Workstream A · Performance Model v1</h2><div class="rule"></div></div>
+  <div class="ws">
+    <div class="ws-head">
+      <span class="tag">The model · "we play on patterns"</span>
+      <h3>Predict the risk of underperforming. Never promise virality.</h3>
+      <p>The research is unambiguous: the top end of social performance is post-publish luck, and our own A/B proved it (AUC 0.51 on winners, 2 "strong" calls in 971 posts). What IS learnable is the bottom: flop-band posts land a real 20 points lower on their page's own ladder. So the model ranks every draft against <b>its own page's last 12 months</b> and warns when a draft looks like the page's historical bottom third, with three reasons and a calibrated probability. <span class="mr">MR-1.1</span> <span class="mr">MR-1.2</span></p>
+    </div>
+    <div class="ws-body">
+
+      <div class="blk">
+        <h4>Plain english: the ladder</h4>
+        <p class="plain">Take every post the page published in the last 12 months and line them up worst to best by how far people spread them. That line is the page's <b>ladder</b>. A new draft is scored by <span class="hl">where it would probably land on that ladder</span>: bottom third = "at risk", middle = "average", top third = "strong for your page". No global thresholds, ever: one page's "strong" is 10 to 20 times another's, so a shared cutoff would flag everything on one page and nothing on another. <span class="mr">MR-2.2</span> The output is a band and the odds, spoken like a weather forecast: patterns tend to repeat; nothing "will" happen.</p>
+      </div>
+
+      <div class="blk">
+        <h4>Decision zero: the new target (what "spread" means now)</h4>
+        <div class="tw"><table class="t">
+          <tr><th>Metric</th><th>Status after 15 Jun 2026</th><th>Use</th></tr>
+          <tr><td class="mono">post_impressions_viral_unique</td><td><span class="no">GONE</span>, no replacement</td><td>Old target numerator. Dead. <span class="no">Never again</span></td></tr>
+          <tr><td class="mono">post_impressions_unique</td><td><span class="no">DEPRECATED</span></td><td>Old denominator. Dead for new posts</td></tr>
+          <tr><td class="mono">post_total_media_view_unique</td><td><span class="ok">NEW</span>, verified live</td><td>The new reach (unique viewers). Not comparable to pre-June values</td></tr>
+          <tr><td class="mono">shares / comments / reactions</td><td><span class="ok">UNAFFECTED</span></td><td>The purest "what people did" signals we have</td></tr>
+        </table></div>
+        <p class="plain" style="margin-top:10px"><b>Recommended target (for Rafeh + Alex to confirm, not decided here):</b> two candidates, both era-flagged, both run through the same harness. <span class="hl">Candidate A (research-preferred): y = within-page trailing-12-month percentile of log(shares), plus an absolute minimum-engagement floor</span> so pages with near-zero activity cannot mint noise labels (the per-community-percentile-plus-floor pattern is the field standard, and shares alone measured a billion cascades in the structural-virality work with no impression data at all). It needs no denominator, so it is immune to the next metric Meta kills. <span class="hl">Candidate B: percentile of share-rate</span> = <span class="mono">shares / post_total_media_view_unique</span> (new era) and <span class="mono">shares / post_impressions_unique</span> (old era). Closer to the old "spread per viewer" meaning (<span class="mr">MR-1.4</span>) but carries denominator risk and the era discontinuity inside the ratio. <b>Protocol:</b> declare the pass line before looking (same discipline as the NLP baseline test), page-mix check first, run both through the VD-015B A/B harness on the time split, pick once, write it into VD-PM-008. Two era rules from the drift literature regardless of winner: <b>never pool pre and post-break values inside one percentile computation</b>, and <b>refit the isotonic calibration on post-break data</b>.</p>
+      </div>
+
+      <div class="blk">
+        <h4>Inputs · what the model eats</h4>
+        <div class="tw"><table class="t">
+          <tr><th>Group</th><th>Features</th><th>Weight of evidence</th></tr>
+          <tr><td>Picture 🖼</td><td>CLIP embedding compressed to ~100 dims (PCA) + FUSION content_type + confidence. For video: hook_score, scene_type from S7</td><td><span class="ok">The main dish.</span> Content is ~99% images; three posts with identical captions and identical NLP labels scored 13.8% / 3.2% / 0%. Everything that differed was the image. <span class="mr">MR-3.3</span></td></tr>
+          <tr><td>Words</td><td>caption length, is_question, emoji count/type, humour words, caps ratio. NLP labels ride along as cheap features only</td><td><span class="mid">The side dish.</span> Text-NLP added ~0 AUC on our meme-dominated data; it earns nothing new until genuinely text-led pages join. No spend may be justified by it. <span class="mr">MR-3.5</span></td></tr>
+          <tr><td>Timing</td><td>hour of day, day of week, gap since the page's last post</td><td>Real but secondary; timing advice itself stays on Best Times (S9), never on this surface <span class="mr">MR-7.6</span></td></tr>
+          <tr><td>Page state</td><td>page id, rolling 30-day median spread, trend slope (warming/cooling), post frequency. Computed <b>as of each post's date</b>, never from today</td><td>Carries current form into the score. The as-of-date rule prevents back-door leakage through the rolling features</td></tr>
+          <tr><td>World</td><td>topic trend score (Wikipedia pageviews / Google Trends)</td><td>The one winner-side signal knowable at draft time (trend badge)</td></tr>
+        </table></div>
+        <div class="never" style="margin-top:10px"><b>NEVER as inputs:</b> reach, viral reach, likes, comments, shares, clicks, or anything derived from them. They do not exist at draft time. They are the answer. The test for every feature: <b>"could I compute this from the draft alone, before publishing?"</b> If no, it is leakage. <span class="mr">MR-3.1</span> <span class="mr">MR-3.2</span></div>
+      </div>
+
+      <div class="blk">
+        <h4>Outputs · what the user is told</h4>
+        <div class="tw"><table class="t">
+          <tr><th>Field</th><th>Meaning</th><th>Surface</th></tr>
+          <tr><td class="mono">band</td><td>at risk / average / strong <b>for this page</b> (percentile cuts, D2)</td><td>Compose dial (VD-209), feed chips</td></tr>
+          <tr><td class="mono">p_flop</td><td>calibrated probability the draft lands in the page's bottom band. 80% means 80% (isotonic regression)</td><td>Warning threshold; fires only where validated precision ≥75% <span class="mr">MR-8.3</span></td></tr>
+          <tr><td class="mono">reasons</td><td>top 3 drivers (SHAP), in words a media buyer understands</td><td>Under the dial + Art-E's "why will this flop" answer. No reasons, no ship <span class="mr">MR-1.5</span></td></tr>
+          <tr><td class="mono">upside_odds</td><td>"posts like this hit 2x+ the page median N% of the time": historical frequency, unfalsifiable</td><td>Compose</td></tr>
+          <tr><td class="mono">trend_badge</td><td>the draft's topic is spiking right now (external trend data)</td><td>Compose</td></tr>
+          <tr><td class="mono">confidence</td><td>normal / low. Low under 100 posts of page history or under 5 usable signals: say so, never guess <span class="mr">MR-1.7</span> <span class="mr">MR-2.6</span></td><td>Everywhere</td></tr>
+        </table></div>
+        <div class="never" style="margin-top:10px"><b>NEVER as outputs:</b> a viral flag, a reach forecast, "2.4x", or any absolute number. A draft resembling a 13.8%-share post is told "top third for this page", never "13.8%". The gap between the band and the outcome is luck, and we do not sell luck. <span class="mr">MR-1.2</span> Every output carries exactly <b>one</b> suggested action. <span class="mr">MR-8.10</span></div>
+      </div>
+
+      <div class="blk">
+        <h4>Flow · how a draft becomes a warning</h4>
+        <div class="diagram"><svg viewBox="0 0 1180 350" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans,Arial,sans-serif">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3a4a72"/></marker>
+            <marker id="arrT" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#00D6AE"/></marker>
+          </defs>
+          <!-- lane: sources -->
+          <g font-size="11">
+            <rect x="14" y="18" width="170" height="64" rx="10" fill="#0f1320" stroke="#212b45"/>
+            <text x="99" y="42" fill="#e9eef8" text-anchor="middle" font-weight="700">Draft: image + caption</text>
+            <text x="99" y="60" fill="#8793ab" text-anchor="middle">+ planned time slot</text>
+            <rect x="14" y="100" width="170" height="64" rx="10" fill="#0f1320" stroke="#212b45"/>
+            <text x="99" y="124" fill="#e9eef8" text-anchor="middle" font-weight="700">Page history (rdl)</text>
+            <text x="99" y="142" fill="#8793ab" text-anchor="middle">12-month ladder + form</text>
+            <rect x="14" y="182" width="170" height="64" rx="10" fill="#0f1320" stroke="#212b45"/>
+            <text x="99" y="206" fill="#e9eef8" text-anchor="middle" font-weight="700">FUSION + CLIP</text>
+            <text x="99" y="224" fill="#8793ab" text-anchor="middle">content type + ~100 dims</text>
+            <rect x="14" y="264" width="170" height="56" rx="10" fill="#0f1320" stroke="#212b45"/>
+            <text x="99" y="288" fill="#e9eef8" text-anchor="middle" font-weight="700">Trends (Wikipedia)</text>
+            <text x="99" y="304" fill="#8793ab" text-anchor="middle">topic momentum</text>
+          </g>
+          <!-- feature build -->
+          <rect x="252" y="118" width="168" height="96" rx="12" fill="#101c2e" stroke="#38bdf8"/>
+          <text x="336" y="148" fill="#38bdf8" text-anchor="middle" font-size="12" font-weight="800">FEATURE BUILD</text>
+          <text x="336" y="168" fill="#a8b3c9" text-anchor="middle" font-size="10.5">leakage gate: nothing</text>
+          <text x="336" y="184" fill="#a8b3c9" text-anchor="middle" font-size="10.5">post-publish enters</text>
+          <text x="336" y="200" fill="#8793ab" text-anchor="middle" font-size="10">MR-3.1 / MR-3.2</text>
+          <!-- model -->
+          <rect x="488" y="118" width="168" height="96" rx="12" fill="#0d1f1b" stroke="#00D6AE"/>
+          <text x="572" y="146" fill="#00D6AE" text-anchor="middle" font-size="12" font-weight="800">LightGBM</text>
+          <text x="572" y="164" fill="#a8b3c9" text-anchor="middle" font-size="10.5">regression on page-ladder</text>
+          <text x="572" y="180" fill="#a8b3c9" text-anchor="middle" font-size="10.5">percentile · time-split</text>
+          <text x="572" y="198" fill="#8793ab" text-anchor="middle" font-size="10">beats caption-only or no ship</text>
+          <!-- calibrate -->
+          <rect x="724" y="118" width="160" height="96" rx="12" fill="#1a1428" stroke="#a78bfa"/>
+          <text x="804" y="146" fill="#a78bfa" text-anchor="middle" font-size="12" font-weight="800">CALIBRATE + EXPLAIN</text>
+          <text x="804" y="164" fill="#a8b3c9" text-anchor="middle" font-size="10.5">isotonic P(flop)</text>
+          <text x="804" y="180" fill="#a8b3c9" text-anchor="middle" font-size="10.5">3 SHAP reasons</text>
+          <text x="804" y="198" fill="#8793ab" text-anchor="middle" font-size="10">80% must mean 80%</text>
+          <!-- surfaces -->
+          <g font-size="11">
+            <rect x="952" y="40" width="210" height="58" rx="10" fill="#0f1320" stroke="#00D6AE"/>
+            <text x="1057" y="63" fill="#e9eef8" text-anchor="middle" font-weight="700">Compose dial · VD-209</text>
+            <text x="1057" y="81" fill="#8793ab" text-anchor="middle">band + reasons + honest states</text>
+            <rect x="952" y="112" width="210" height="58" rx="10" fill="#0f1320" stroke="#00D6AE"/>
+            <text x="1057" y="135" fill="#e9eef8" text-anchor="middle" font-weight="700">Predictions home · VD-210</text>
+            <text x="1057" y="153" fill="#8793ab" text-anchor="middle">weak-post warnings + 1 fix</text>
+            <rect x="952" y="184" width="210" height="58" rx="10" fill="#0f1320" stroke="#a78bfa"/>
+            <text x="1057" y="207" fill="#e9eef8" text-anchor="middle" font-weight="700">Art-E "why?" · same output</text>
+            <text x="1057" y="225" fill="#8793ab" text-anchor="middle">one source of truth, no 2nd guess</text>
+          </g>
+          <!-- logging loop -->
+          <rect x="488" y="266" width="396" height="60" rx="12" fill="#1f1212" stroke="#f87171"/>
+          <text x="686" y="290" fill="#f87171" text-anchor="middle" font-size="11.5" font-weight="800">LOG EVERYTHING · draft, advice shown, edits, outcome</text>
+          <text x="686" y="308" fill="#a8b3c9" text-anchor="middle" font-size="10.5">launch blocker, not a follow-up: monthly intervention-aware retrain feeds on this (MR-9.x)</text>
+          <!-- arrows -->
+          <g stroke="#3a4a72" stroke-width="1.6" fill="none">
+            <path d="M184 50 C 225 50 225 140 252 148" marker-end="url(#arr)"/>
+            <path d="M184 132 L252 152" marker-end="url(#arr)"/>
+            <path d="M184 214 C 225 214 225 190 252 184" marker-end="url(#arr)"/>
+            <path d="M184 292 C 232 292 230 208 252 200" marker-end="url(#arr)"/>
+            <path d="M656 166 L724 166" marker-end="url(#arr)"/>
+            <path d="M884 150 C 918 140 918 76 952 70" marker-end="url(#arr)"/>
+            <path d="M884 166 L952 152" marker-end="url(#arr)"/>
+            <path d="M884 182 C 918 192 918 208 952 210" marker-end="url(#arr)"/>
+          </g>
+          <g stroke="#00D6AE" stroke-width="1.8" fill="none">
+            <path d="M420 166 L488 166" marker-end="url(#arrT)"/>
+          </g>
+          <g stroke="#f87171" stroke-width="1.5" fill="none" stroke-dasharray="5 4">
+            <path d="M1057 242 C 1057 296 940 296 884 296" marker-end="url(#arr)"/>
+            <path d="M488 296 C 380 296 336 260 336 214" marker-end="url(#arr)"/>
+          </g>
+          <text x="404" y="262" fill="#8793ab" font-size="10">retrain loop: monthly, era-aware</text>
+        </svg></div>
+      </div>
+
+      <div class="blk">
+        <h4>Benchmarks + gates · when is it good enough</h4>
+        <div class="gates">
+          <div class="gate"><span class="gi">1</span><div><b>Beats caption-only</b> on the strict time split (train past, test future, page-stratified). Given the image-primacy finding, tying the caption baseline means the model learned nothing from the image. <span class="mr">MR-10.2</span></div></div>
+          <div class="gate"><span class="gi">2</span><div><b>Flop precision ≥75%, verified.</b> The warning fires only where it is right 3 times in 4. Borderline stays silent: a missed flop is cheaper than a false accusation. Tune the threshold, never the promise. <span class="mr">MR-8.3</span></div></div>
+          <div class="gate"><span class="gi">3</span><div><b>Calibration curve near diagonal</b> on held-out data: when the model says 70% flop risk, ~70% of those drafts actually flop. Isotonic regression, checked per era. <span class="mr">MR-8.4</span></div></div>
+          <div class="gate"><span class="gi">4</span><div><b>Band stability:</b> small edits must not flip the band. Jitter check is part of the VD-QA-AI-008 gate; a dial that flickers between bands teaches users to ignore it. <span class="mr">MR-8.5</span></div></div>
+          <div class="gate"><span class="gi">5</span><div><b>Sample discipline:</b> no rule-table slot reported under 5 posts, no numeric score under 5 usable signals, low confidence surfaced under 100 posts of history. <span class="mr">MR-2.5</span> <span class="mr">MR-2.6</span> <span class="mr">MR-1.7</span></div></div>
+          <div class="gate"><span class="gi">6</span><div><b>Every prediction logged</b> from the first day the dial renders: draft features, model version, the exact score + reasons shown, the user's edits, the outcome. Unlogged advice is contaminated training data that can never be recovered. <span class="mr">MR-9.5</span> <b>Research recommendation (needs Rafeh + Asad sign-off):</b> keep a small advice-free holdout (5 to 10% of drafts see no advice, logged as such) so the precision floor and calibration stay measurable on unconfounded data once our own warnings start changing what pilots publish.</div></div>
+        </div>
+        <p class="plain" style="margin-top:10px"><b>Honest expectations, so nobody oversells:</b> the research ceiling is real. Even with unlimited data, roughly half of success is luck (Martin et al). Our rank correlation is ~0.26: weak but real and honest, and concentrated exactly where the product makes claims (the bottom band). The numbers to quote internally are the flop-band separation (22nd vs 42nd percentile) and the precision floor, never an accuracy percentage.</p>
+      </div>
+
+      <div class="blk" id="research-model">
+        <h4>Research foundation · every link verified 28 Jul 2026</h4>
+        <p class="plain" style="margin-bottom:10px"><b>The ceiling is real, the reframe is standard, the stack is state of practice.</b> Winners of the ACM Social Media Prediction Challenge 2023, 2024 and 2025 are all gradient-boosted trees over frozen embeddings, exactly our architecture. The field's answer to unlearnable heavy-tail targets is exactly our answer: rank within the community, cut into bands.</p>
+        <div class="grid2">
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/1602.01013" target="_blank">Exploring limits to prediction in complex social systems</a><span class="yr">Martin, Hofman, Watts et al · WWW 2016</span></div><p>Even with unlimited data, the best models explain <b>less than half</b> of cascade-size variance. <b>Why we never promise winners.</b></p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2510.05761" target="_blank">Early Multimodal Prediction of Meme Virality (Time-Window Analysis)</a><span class="yr">Dogan et al · 2025</span></div><p>Content-only models plateau at <b>PR AUC ~0.13</b> ("the content ceiling"); 30 min of live engagement lifts to <b>ROC AUC 0.92</b> (PR 0.43; 0.80 at 7h). Our AUC 0.51 on memes is the published pattern, not a failure.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/1403.4608" target="_blank">Can Cascades be Predicted?</a><span class="yr">Cheng, Adamic, Kleinberg, Leskovec · WWW 2014</span></div><p>On Facebook photo shares: content features alone <b>0.558</b> accuracy, early-growth features <b>0.780</b>. Balanced "will it double" reframing makes a power-law target learnable. <b>The blueprint for our band cuts.</b></p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/1709.02541" target="_blank">Beyond Views: Measuring and Predicting Engagement</a><span class="yr">Wu, Rizoiu, Xie · ICWSM 2018</span></div><p>Percentile-normalised <b>relative engagement</b> is stable over time and predictable cold-start (<b>R² 0.77</b>) where raw popularity is promotion-driven noise. <b>The strongest precedent for the D0 percentile target.</b></p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2605.02358" target="_blank">Predicting Post Virality with Temporal Cross-Attention (ViralityNet)</a><span class="yr">Somvanshi et al · 2026</span></div><p>Field-standard target: <b>per-community 90th percentile PLUS an absolute minimum floor</b> so tiny communities cannot mint noise labels. Copy the floor into D0.</p></div>
+          <div class="paper"><div class="pt"><a href="https://5harad.com/papers/twiral.pdf" target="_blank">The Structural Virality of Online Diffusion</a><span class="yr">Goel, Anderson, Hofman, Watts · Mgmt Sci 2016</span></div><p>A billion cascades measured <b>from share structure alone, no impression data</b>. Spread survives the metric apocalypse; the top end is broadcast luck.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/1703.01725" target="_blank">Cats and Captions vs. Creators and the Clock</a><span class="yr">Hessel, Lee, Mimno · WWW 2017</span></div><p>Content signal only emerges once <b>community and timing are controlled in the label</b>. Within-page ranking is why our 0.26 rank-corr is real where absolute AUC was a coin flip.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2004.05785" target="_blank">Learning under Concept Drift: A Review</a><span class="yr">Lu et al · IEEE TKDE 2019</span></div><p>The 15-Jun metric kill is textbook sudden measurement drift: <b>era-stratify, never pool pre/post-break values in one percentile, refit calibration on post-break data.</b></p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2405.10497" target="_blank">SMP Challenge: Overview and Analysis</a><span class="yr">Wu et al · ACM MM 2024</span></div><p>The benchmark closest to our task (log-popularity regression, rank-correlation scoring). Podium recipe every year: <b>GBDT stacks over frozen multimodal embeddings</b>, and the 2024 winner's decisive signal was <b>account-level popularity history</b>: our page-state features.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2207.08815" target="_blank">Why do tree-based models still outperform deep learning on tabular data?</a><span class="yr">Grinsztajn et al · NeurIPS 2022</span></div><p>30K heavy-tailed rows with ~100 embedding dims is exactly the regime where <b>LightGBM wins and tuning beats architecture swaps</b>. Spend the sprint on the target, not the model family.</p></div>
+          <div class="paper"><div class="pt"><a href="https://www.cs.cornell.edu/~alexn/papers/calibration.icml05.crc.rev3.pdf" target="_blank">Predicting Good Probabilities With Supervised Learning</a><span class="yr">Niculescu-Mizil, Caruana · ICML 2005</span></div><p>Boosted trees are sigmoid-distorted; isotonic is safe <b>only above ~1,000 calibration samples</b> (below: Platt). Calibrate globally, never per page, and <b>refit after the target change</b>.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/1905.04610" target="_blank">TreeExplainer: exact SHAP for tree ensembles</a><span class="yr">Lundberg et al · Nat MI 2020</span></div><p>Exact per-prediction attributions cheap enough to serve at draft time; additivity means the ~100 CLIP dims can be <b>summed into one honest "image content" reason</b>.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2101.06535" target="_blank">Dissecting the Meme Magic</a><span class="yr">Ling et al · CSCW 2021</span></div><p>Visual composition separates highly-shared from rarely-shared memes at <b>AUC 0.866</b>: the image really is the content. Its interpretable attributes (close-up, character, short overlay text) are candidate reason strings.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2004.12482" target="_blank">On the Limits to Multi-Modal Popularity Prediction on Instagram</a><span class="yr">Riis et al · 2021</span></div><p>Honesty anchor: once page + timing features are in, full visual semantics adds only <b>+0.009 rank correlation</b>. Sell page + timing + content jointly; never promise a vision miracle.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/1406.6618" target="_blank">When is it Better to Compare than to Score?</a><span class="yr">Shah et al · 2014</span></div><p>Formal proof pairwise comparison beats absolute scoring once per-item noise is high (our regime). <b>The statistical license for Draft Duel</b>: within-page pairs cancel the shared luck term; for groups of 2-3 use a plain pairwise logistic, and only output a pick when the score gap clears a margin.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2002.06673" target="_blank">Performative Prediction</a><span class="yr">Perdomo, Zrnic, Mendler-Dünner, Hardt · ICML 2020</span></div><p>When predictions change the outcomes they predict, retraining chases a moving distribution. With <a href="https://arxiv.org/abs/1710.11214" target="_blank" style="color:var(--blue)">Chaney 2018</a> (feedback loops silently shrink the flop base rate) and <a href="https://arxiv.org/abs/1209.2355" target="_blank" style="color:var(--blue)">Bottou 2013</a> (the logging schema blueprint): <b>log the shown score, reasons, model version and propensity with every prediction</b>.</p></div>
+        </div>
+        <p class="plain" style="margin-top:10px"><b>Three cheap, evidence-backed feature adds for v1:</b> (1) a CLIP image-caption cosine-inconsistency scalar (<a href="https://arxiv.org/abs/2407.00556" target="_blank" style="color:var(--blue)">Hsu et al 2024</a>, doubles as the human-readable reason "caption doesn't match the image"); (2) out-of-fold predictions from caption-only and image-only sub-models stacked as features (the 2023 SMP winner's trick); (3) ablate the CLIP PCA at 50/100/150 dims against the precision floor (<a href="https://arxiv.org/abs/2411.01645" target="_blank" style="color:var(--blue)">Kasneci 2024</a>: ~50 dims often suffices, gains largest under class imbalance).</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORKSTREAM B ============ -->
+<section id="arte">
+  <div class="sec-head"><span class="n">03</span><h2>Workstream B · Art-E grounded Q&amp;A (the LLM strategy)</h2><div class="rule"></div></div>
+  <div class="ws">
+    <div class="ws-head b">
+      <span class="tag">The voice · demo magnet</span>
+      <h3>Ask your data anything. Every number cited. Refuses honestly.</h3>
+      <p>Art-E v1 is a grounded analyst, not a chatbot and not an agent: it answers plain-English questions about <b>your</b> page from <b>your</b> rows in our warehouse, and every number in the answer carries a citation (post id, metric, date) the user can check. If the data is not there, it says so instead of inventing. The autonomous agent stays Phase-2; any scope creep escalates to the CTO same-day. <span class="mr">MR-8.6</span></p>
+    </div>
+    <div class="ws-body">
+
+      <div class="blk vio">
+        <h4>The one rule that makes it trustworthy</h4>
+        <p class="plain"><span class="hl">The LLM never does arithmetic and never remembers numbers.</span> Every number the user sees is computed by the retrieval layer (typed queries over the tenant's Redshift signal tables) and passed to the model as context. The model's job is to <b>choose</b> what to retrieve and <b>narrate</b> what came back. This is why free-form text-to-SQL is not the architecture: benchmark accuracy on enterprise-style databases is nowhere near "never wrong", and a single confidently-wrong number costs more trust than a hundred right ones earn. Constrained tools beat clever generation.</p>
+      </div>
+
+      <div class="blk vio">
+        <h4>Flow · how a question becomes a cited answer</h4>
+        <div class="diagram"><svg viewBox="0 0 1180 260" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans,Arial,sans-serif">
+          <defs><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3a4a72"/></marker></defs>
+          <g font-size="11">
+            <rect x="14" y="80" width="150" height="70" rx="10" fill="#0f1320" stroke="#212b45"/>
+            <text x="89" y="108" fill="#e9eef8" text-anchor="middle" font-weight="700">"Why did reach</text>
+            <text x="89" y="124" fill="#e9eef8" text-anchor="middle" font-weight="700">drop last week?"</text>
+            <rect x="212" y="70" width="180" height="90" rx="12" fill="#1a1428" stroke="#a78bfa"/>
+            <text x="302" y="96" fill="#a78bfa" text-anchor="middle" font-weight="800" font-size="12">ROUTE + RETRIEVE</text>
+            <text x="302" y="114" fill="#a8b3c9" text-anchor="middle" font-size="10.5">typed tools over tenant rows</text>
+            <text x="302" y="130" fill="#a8b3c9" text-anchor="middle" font-size="10.5">posts · metrics · labels · scores</text>
+            <text x="302" y="148" fill="#8793ab" text-anchor="middle" font-size="10">tenant_id on every call · cached</text>
+            <rect x="440" y="70" width="180" height="90" rx="12" fill="#0d1f1b" stroke="#00D6AE"/>
+            <text x="530" y="96" fill="#00D6AE" text-anchor="middle" font-weight="800" font-size="12">GROUNDED ANSWER</text>
+            <text x="530" y="114" fill="#a8b3c9" text-anchor="middle" font-size="10.5">frontier LLM, answers ONLY</text>
+            <text x="530" y="130" fill="#a8b3c9" text-anchor="middle" font-size="10.5">from retrieved context</text>
+            <text x="530" y="148" fill="#8793ab" text-anchor="middle" font-size="10">streamed · per-tenant quota</text>
+            <rect x="668" y="70" width="170" height="90" rx="12" fill="#1f1212" stroke="#f87171"/>
+            <text x="753" y="96" fill="#f87171" text-anchor="middle" font-weight="800" font-size="12">CITATION GATE</text>
+            <text x="753" y="114" fill="#a8b3c9" text-anchor="middle" font-size="10.5">every number must cite a</text>
+            <text x="753" y="130" fill="#a8b3c9" text-anchor="middle" font-size="10.5">retrieved row or it is blocked</text>
+            <text x="753" y="148" fill="#8793ab" text-anchor="middle" font-size="10">uncited number = hard fail</text>
+            <rect x="886" y="24" width="276" height="64" rx="10" fill="#0f1320" stroke="#00D6AE"/>
+            <text x="1024" y="50" fill="#e9eef8" text-anchor="middle" font-weight="700">Answer + sources</text>
+            <text x="1024" y="68" fill="#8793ab" text-anchor="middle">"reach fell 18%, driven by fewer reels ↳ 14 posts, 12-18 May"</text>
+            <rect x="886" y="108" width="276" height="52" rx="10" fill="#0f1320" stroke="#f5a623"/>
+            <text x="1024" y="130" fill="#e9eef8" text-anchor="middle" font-weight="700">Honest refusal</text>
+            <text x="1024" y="148" fill="#8793ab" text-anchor="middle">"I don't have data for that." (wording with Filza)</text>
+            <rect x="212" y="196" width="626" height="48" rx="10" fill="#0f1320" stroke="#38bdf8"/>
+            <text x="525" y="216" fill="#38bdf8" text-anchor="middle" font-weight="800" font-size="11.5">EVAL LOOP · 200-question gold set · factual accuracy · citation coverage · refusal correctness · injection resistance</text>
+            <text x="525" y="234" fill="#8793ab" text-anchor="middle" font-size="10">runs before every model or prompt change (VD-QA-AI-008) · pilots' real questions feed the set (Lewis)</text>
+          </g>
+          <g stroke="#3a4a72" stroke-width="1.6" fill="none">
+            <path d="M164 115 L212 115" marker-end="url(#arr2)"/>
+            <path d="M392 115 L440 115" marker-end="url(#arr2)"/>
+            <path d="M620 115 L668 115" marker-end="url(#arr2)"/>
+            <path d="M838 100 C 862 92 862 64 886 58" marker-end="url(#arr2)"/>
+            <path d="M838 130 L886 133" marker-end="url(#arr2)"/>
+            <path d="M753 160 C 753 220 700 220 838 220" fill="none" opacity="0"/>
+          </g>
+          <g stroke="#38bdf8" stroke-width="1.4" fill="none" stroke-dasharray="5 4">
+            <path d="M525 196 C 525 178 530 172 530 160" marker-end="url(#arr2)"/>
+          </g>
+        </svg></div>
+      </div>
+
+      <div class="blk vio">
+        <h4>LLM strategy · model, cost, guardrails</h4>
+        <div class="tw"><table class="t">
+          <tr><th>Question</th><th>S8 answer</th><th>Later</th></tr>
+          <tr><td>Which model</td><td>Frontier API model (Claude class), few-shot system prompt: answer only from context, cite or refuse</td><td>S19: LLaMA fine-tune A/B for ~10x cost cut, only after real conversation volume exists</td></tr>
+          <tr><td>Retrieval</td><td>Typed retrieval tools over Redshift signal tables via VD-AI-008A; keyword + structured filters. Tenant-scoped on every call</td><td>S16: Pinecone vector index formalises semantic search (namespace per tenant + metadata filter)</td></tr>
+          <tr><td>Cost control</td><td>Per-tenant query quota + monthly ceiling + alarms BEFORE breach (Jill). Answers cached by question hash; draft scores cached by draft hash. Streaming so long answers feel fast</td><td>S17/S18: per-tenant cost attribution + circuit breaker hardening</td></tr>
+          <tr><td>Safety</td><td>Prompt-injection cases in the gold set from day 1; cross-tenant probes must return the neutral line (never confirm other tenants exist <span class="mr">MR-8.8</span>); every answer labelled AI with sources (Filza's disclaimer pattern)</td><td>S16/S19 security audits inherit these tests</td></tr>
+          <tr><td>Narrative</td><td>Internally this is grounded Q&amp;A. Toward Meta: "audience engagement insights". <span class="mr">MR-8.9</span></td><td>applies to App Review pack (S19)</td></tr>
+        </table></div>
+      </div>
+
+      <div class="blk vio" id="research-arte">
+        <h4>Research foundation · every link verified 28 Jul 2026</h4>
+        <p class="plain" style="margin-bottom:10px"><b>The literature says two things loudly:</b> free-form SQL generation is nowhere near a "never state a wrong number" bar, and even polished deployed products fail silently on citation quality. Both are solved by architecture, not by prompting harder.</p>
+        <div class="grid2">
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2005.11401" target="_blank">Retrieval-Augmented Generation for Knowledge-Intensive NLP</a><span class="yr">Lewis et al · NeurIPS 2020</span></div><p>The founding RAG argument: keep the numbers in the store, make the LLM a <b>reader with provenance</b>, not a memory.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2305.03111" target="_blank">BIRD: can LLMs serve as a database interface?</a><span class="yr">Li et al · NeurIPS 2023</span></div><p>Best published pipeline on realistic dirty databases: <b>~82% execution accuracy</b> (humans 93%). Roughly 1 in 5 queries wrong = free-form text-to-SQL is disqualified for Art-E.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2411.07763" target="_blank">Spider 2.0: enterprise text-to-SQL workflows</a><span class="yr">Lei et al · ICLR 2025</span></div><p>On real enterprise warehouses (1,000+ column schemas), a frontier reasoning model solves <b>21.3%</b> vs 91.2% on the academic benchmark. Multi-tenant Redshift with a mid-series metric migration is exactly this regime.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2311.07509" target="_blank">Knowledge graphs and LLM accuracy on enterprise SQL</a><span class="yr">Sequeda et al · 2023</span></div><p>GPT-4 zero-shot on a real enterprise schema: <b>16%</b>. Same questions over a curated semantic layer: <b>54%</b> (3.4x). <b>Why Art-E gets a defined-metric layer + query templates, and the LLM only fills slots.</b></p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2408.09174" target="_blank">TableBench: complex table question answering</a><span class="yr">Wu et al · AAAI 2025</span></div><p>Numerical reasoning over returned tables is a leading LLM failure mode. <b>All arithmetic happens in the warehouse query; the LLM narrates already-computed, citable cells.</b></p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2305.14627" target="_blank">ALCE: enabling LLMs to generate text with citations</a><span class="yr">Gao et al · EMNLP 2023</span></div><p>Off-the-shelf metrics for the gold set: <b>citation recall</b> (is every number backed by a cited row) and <b>citation precision</b> (does the cited row actually contain it). Best models lacked full support ~50% of the time: measure, don't trust.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2304.09848" target="_blank">Evaluating Verifiability in Generative Search Engines</a><span class="yr">Liu, Zhang, Liang · EMNLP 2023</span></div><p>Deployed, polished engines: only <b>51.5%</b> of sentences fully supported, <b>74.5%</b> of citations correct. Fluency hides grounding failure. <b>Justifies a hard citation-precision launch gate, twin of the 75% flop floor.</b></p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2309.15217" target="_blank">RAGAS: automated evaluation of RAG</a><span class="yr">Es et al · EACL 2024</span></div><p>Reference-free faithfulness checking: decompose each answer into claims, verify each against retrieved rows. <b>The nightly monitor on sampled live traffic, beyond the golden set.</b></p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2311.09677" target="_blank">R-Tuning: instructing LLMs to say "I don't know"</a><span class="yr">Zhang et al · NAACL 2024</span></div><p>Refusal must be built and measured, not hoped for. <b>Seed the gold set with unanswerable questions, especially about the deprecated post_impressions_* metrics tenants will keep asking about.</b></p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2302.12173" target="_blank">Compromising LLM apps with indirect prompt injection</a><span class="yr">Greshake et al · CCS 2023</span></div><p>Instructions planted in retrieved data hijack deployed systems. <b>Our retrieved context includes Facebook comments: any commenter is a potential attacker.</b> All retrieved text is data, never instructions.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2403.14720" target="_blank">Spotlighting: defending against indirect injection</a><span class="yr">Hines et al (Microsoft) · 2024</span></div><p>Datamarking retrieved text cut injection success from <b>&gt;50% to &lt;2%</b> at minimal cost. <b>Shippable in S8: mark every caption/comment field that enters the prompt.</b></p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2306.05685" target="_blank">Judging LLM-as-a-judge (MT-Bench)</a><span class="yr">Zheng et al · NeurIPS 2023</span></div><p>LLM judges reach human-level agreement but are position-biased, verbosity-biased and <b>weak at grading arithmetic</b>. Numbers in the gold set are checked programmatically against Redshift, never by a judge.</p></div>
+        </div>
+        <p class="plain" style="margin-top:10px"><b>What this changes in the S8 build:</b> the retrieval layer (VD-AI-008A) exposes a small library of parameterised, pre-tested query templates over defined metrics, not SQL generation; the refusal path detects questions about dead metrics and explains why ("Meta removed that metric in June 2026") instead of silently answering from a proxy; the gold set scores four axes (accuracy · citation recall/precision · refusal correctness · injection resistance) with a citation-precision floor as a launch gate; and datamarking ships in v1 (<a href="https://arxiv.org/abs/2403.15879" target="_blank" style="color:var(--blue)">TrustSQL</a>-style penalty scoring: a wrong cited number costs more than an abstention).</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ INCIDENT WORKSTREAM ============ -->
+<section id="incidentws">
+  <div class="sec-head"><span class="n">04</span><h2>Workstream C · The metric migration (incident carry-in)</h2><div class="rule"></div></div>
+  <div class="ws">
+    <div class="ws-head r">
+      <span class="tag">Incident · owns week 1</span>
+      <h3>Revive the feed, rescue the history, accept the break</h3>
+      <p>Caught proactively by Faheem while testing the post-maturity re-poll (no client noticed). Contained: the backfill script already migrated. What remains is the live pipeline, a possible viral-reach rescue at page level, and making the whole data layer era-aware.</p>
+    </div>
+    <div class="ws-body">
+      <div class="tw"><table class="t">
+        <tr><th>Action</th><th>Detail</th><th>Owner</th><th>Status</th></tr>
+        <tr><td>Migrate live LOKI insights</td><td><span class="mono">post_impressions_*</span> → <span class="mono">post_total_media_view_unique</span> + <span class="mono">post_media_view</span>; drop dead names (one bad metric fails the whole request)</td><td>Muteeb + Asad</td><td><span class="no">URGENT · not started</span></td></tr>
+        <tr><td>Page-level probe</td><td>Is <span class="mono">page_posts_impressions_viral_unique</span> still alive? Docs say valid, post-level equivalents all died. If alive: a partial viral-reach rescue</td><td>Faheem</td><td><span class="mid">NEXT</span></td></tr>
+        <tr><td>Historic re-poll dump</td><td>Re-poll matured posts into <span class="mono">post_insights_history</span> before Meta's ~2-year window expires them</td><td>Faheem</td><td><span class="mid">IN TEST</span></td></tr>
+        <tr><td>Weekly maturity re-poll</td><td>Grade every post at a fixed age (day-120) so ladders compare like with like, instead of snapshotting posts at random ages</td><td>Faheem + Muteeb</td><td><span class="mid">DESIGNED</span></td></tr>
+        <tr><td>Era flag everywhere</td><td>Pre and post 15-Jun reach values are different animals. Training rows, ladders and dashboards must carry the era, and no chart may compare across the break unlabelled</td><td>Muteeb</td><td><span class="mid">TO DO</span></td></tr>
+      </table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PEOPLE ============ -->
+<section id="people">
+  <div class="sec-head"><span class="n">05</span><h2>Who does what · every ticket in plain words</h2><div class="rule"></div></div>
+  <p class="sec-sub">Thirteen tracker tickets plus the incident work. Percentages are the collaboration splits from the tracker. Full checklists live in the Sprint Tracker; this is the version you can read in one sitting.</p>
+  <div class="people">
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#00d4aa,#38bdf8)">F</div><div><b>Faheem</b><span>AI Engineer · the models</span></div></div>
+      <div class="task"><span class="tk">VD-015B</span><b>Performance model v1 (85%)</b><p>Adapt the S7 model to unpublished drafts under the NEW target (D0). LightGBM on image + caption + timing + page-state features, time-split, isotonic calibration, SHAP reasons. Runs the D0 distribution pull and both target candidates through the A/B harness first.</p><div class="done">beats caption-only on the time split, flop precision ≥75% verified, versioned contract handed to VD-AI-008A</div></div>
+      <div class="task"><span class="tk">VD-AI-008C</span><b>Art-E grounded Q&amp;A v1 (80%)</b><p>Grounded answers with per-number citations via Muteeb's retrieval; hard refusal when data is missing; answer-quality metrics emitted to the model dashboard. Biggest creep risk of the sprint: grounded Q&amp;A only.</p><div class="done">demo answers real pilot questions with checkable citations, refuses cleanly, quality metrics visible</div></div>
+      <div class="task"><span class="tk">VD-QA-AI-008</span><b>Model-test suite (90%)</b><p>Gold sets for draft scoring (calibration regression + band-stability jitter) and Art-E (200-Q set: accuracy, citation coverage, refusal correctness, injection + cross-tenant probes).</p><div class="done">one green end-to-end run gates every model or prompt change</div></div>
+      <div class="task"><span class="tk">incident</span><b>Page-level probe + history rescue</b><p>Probe whether page-level viral metrics survived; finish the matured-post re-poll dump before the 2-year window eats the oldest data.</p><div class="done">probe verdict written up; post_insights_history landing</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#38bdf8,#6366f1)">M</div><div><b>Muteeb</b><span>ML platform · data + serving</span></div></div>
+      <div class="task"><span class="tk">incident</span><b>Revive the LOKI feed (with Asad) · first</b><p>Swap the dead metric names for the new ones in the live insights pipeline. Every dark day is unrecoverable data.</p><div class="done">new rows flowing again, era flag stamped on every row</div></div>
+      <div class="task"><span class="tk">VD-AI-008A</span><b>Serving + retrieval API (75%)</b><p>Day-1 contracts, then: draft → media signals → score in one low-latency call, cached by draft hash; the RAG retrieval layer indexing the tenant's posts/comments/labels; tenant scoping on every path.</p><div class="done">contract agreed day 1, Drafts page unblocked, latency + cost inside the Ops budget</div></div>
+      <div class="task"><span class="tk">VD-MLOPS-008A</span><b>Retraining + drift pipeline (85%)</b><p>Reproducible monthly retrains (versioned data snapshot + model + promotion gate), drift detection vs training baselines, active-learning loop for low-confidence cases. Plus the FUSION backfill (critical path <span class="mr">MR-3.6</span>) and the day-one prediction logging table.</p><div class="done">retrain reproducible end to end, drift visible on dashboard, logging table live before the dial renders</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#00d4aa,#a78bfa)">A</div><div><b>Asad</b><span>CTO · the surfaces</span></div></div>
+      <div class="task"><span class="tk">VD-209</span><b>Compose / Drafts page (85%)</b><p>Write a draft, see the band (at risk / average / strong) with the three reasons, debounced live rescoring that never jitters between bands. Honest states: "not enough to score yet" below the signal threshold. Risk-band framing replaces every old 2.4x score chip.</p><div class="done">matches mockup on desktop + mobile, honest states verified, zero band flicker on small edits</div></div>
+      <div class="task"><span class="tk">VD-210</span><b>Predictions home (90%)</b><p>Prediction history + upcoming outlook; feed warnings when a scheduled post looks weak, with the why and ONE suggested fix. Timing advice stays out (that is S9 Best Times, cut order #1).</p><div class="done">weak-post warning renders from live model output with honest empty states</div></div>
+      <div class="task"><span class="tk">incident</span><b>Feed revival (with Muteeb)</b><p>Pair on the LOKI migration and own the era-flag convention on every downstream chart.</p><div class="done">no chart compares across the 15-Jun break unlabelled</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#34d399,#00d4aa)">R</div><div><b>Rafeh</b><span>Product Manager · definitions + gates</span></div></div>
+      <div class="task"><span class="tk">VD-PM-008</span><b>Product definition + cut-line (80%)</b><p>Owns D0 (new target, with Alex) and D2 (flop cut). Writes "what good looks like" for Drafts, Predictions and Art-E before engineering commits, holds the Art-E scope line, signs the refusal wording with Filza. Keeps the cut order visible: Best Times #1, performance model #2.</p><div class="done">definitions written before build starts; D0 + D2 locked by day 2</div></div>
+      <div class="task"><span class="tk">VD-QA-008</span><b>QA dashboard + acceptance (85%)</b><p>Extends the QA board to S8 features, reviews real Art-E answers weekly against the written bar, runs end-of-sprint acceptance on real pilot data.</p><div class="done">per-feature pass/fail with evidence; the go/no-go board current</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#f5a623,#f87171)">A</div><div><b>Alex</b><span>CEO · the wedge</span></div></div>
+      <div class="task"><span class="tk">VD-STRAT-008MVP</span><b>Positioning: the wedge + demo magnet (70%)</b><p>Decide the ONE thing a pilot should believe after S8 (we warn you in time, we protect you, we save you time), position Art-E as the demo magnet without promising the agent, and name the proof-of-value evidence so instrumentation starts now. Co-owns D0. Pricing v2 stays deferred until Jill's unit-cost sheet.</p><div class="done">the wedge written in one sentence and used in the next pilot demo</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#f87171,#a78bfa)">F</div><div><b>Filza</b><span>CLO · the words we may use</span></div></div>
+      <div class="task"><span class="tk">VD-LEGAL-008</span><b>AI disclaimers + EU AI Act readiness (85%)</b><p>The inline "guidance, not a guarantee" pattern for every AI answer and prediction; sign off the refusal wording (D3); the EU AI Act limited-risk note; Art-E audit-log requirements; all filed for the S19 App Review pack.</p><div class="done">disclaimer pattern shipped in the S8 surfaces; refusal wording signed; note on file</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#38bdf8,#34d399)">J</div><div><b>Jill</b><span>Ops · the money</span></div></div>
+      <div class="task"><span class="tk">VD-OPS-008MVP</span><b>LLM cost guardrails + the unit-cost sheet (80%)</b><p>Per-tenant LLM budgets with alarms that fire BEFORE breach; cache-hit-rate target with Muteeb; compute limits on the retrain pipeline before it runs unattended; and the unit-cost sheet (per labelled page, per prediction, per Art-E query, per tenant-month) that unblocks pricing v2.</p><div class="done">first week's actuals reviewed against budget; unit-cost sheet delivered to Alex</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#a78bfa,#38bdf8)">L</div><div><b>Lewis</b><span>CO · the pilot's voice</span></div></div>
+      <div class="task"><span class="tk">VD-LEWIS-008MVP</span><b>Pilot first reactions (90%, light by design)</b><p>Sit in the weekly check-ins as draft scoring and Art-E demo for the first time. Capture who trusts the score, who does not, and the ONE thing that would change their mind. Log the questions pilots actually ask Art-E: they seed the 200-Q gold set.</p><div class="done">half-page read with Rafeh and Alex by sprint end; first real questions in the gold set</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section id="timeline">
+  <div class="sec-head"><span class="n">06</span><h2>The two weeks, day by day</h2><div class="rule"></div></div>
+  <div class="tl">
+    <div class="d">Day 1 · Wed 5 Aug</div><div class="w"><b>Contracts + kickoff.</b> Draft-score contract (Faheem/Muteeb/Asad) and retrieval schema agreed before lunch (D1). Rafeh publishes S8 definitions. Muteeb + Asad start the LOKI migration. Faheem starts the D0 distribution pull.</div>
+    <div class="d">Day 2</div><div class="w"><b>D0 + D2 locked.</b> Rafeh + Alex choose the target off Faheem's pull; flop cut settled. Ladders rebuild starts on the new target. Feed revival lands or escalates.</div>
+    <div class="d">Week 1</div><div class="w"><b>Foundations.</b> Faheem: model v1 on new target. Muteeb: FUSION backfill (newest 12 months first) + retrieval index + logging table. Asad: Compose page skeleton on the mock contract. Filza: refusal wording signed (D3). Jill: budget + alarms live before any LLM traffic.</div>
+    <div class="d">Week 2</div><div class="w"><b>Wire + gate.</b> Model behind the API, calibration + reasons through to the dial; Art-E answering the gold set; jitter + precision gates run; Rafeh's acceptance on real pilot data; Lewis's read delivered. Anything failing a gate ships silent, not wrong.</div>
+    <div class="d">Day 10 · Tue 18 Aug</div><div class="w"><b>Demo + go/no-go.</b> The pilot demo: write a weak draft, watch the warning fire with three reasons, ask Art-E why, check the citation. That single loop is the sprint.</div>
+  </div>
+</section>
+
+<!-- ============ NOT DOING ============ -->
+<section id="notdoing">
+  <div class="sec-head"><span class="n">07</span><h2>What Sprint 8 is deliberately NOT doing</h2><div class="rule"></div></div>
+  <div class="grid2">
+    <div class="never"><b>No winner prediction, no viral promises.</b> No "2.4x", no reach forecasts, no viral badges. At 5% viral prevalence even a decent model is wrong 4 times in 5 when it cries "viral". The old chips in the mockups get reworked under VD-209/210, not copied.</div>
+    <div class="never"><b>No autonomous Art-E.</b> Grounded answers with citations only. The agent that takes actions is Phase-2. Scope creep escalates same-day.</div>
+    <div class="never"><b>No timing advice on the prediction surfaces.</b> Best Times is S9 and cut order #1; the band chip does not get to mention a slot. <span class="mr">MR-7.6</span></div>
+    <div class="never"><b>No Performance Radar yet, and now we know exactly why + what replaces it.</b> The 30/60-minute take-off alarm needs minute-scale engagement (the published 0.92 ROC AUC result is measured at 30 minutes); Meta's insights are daily-grain, so it is not buildable as drawn (Conflict #2). The literature-backed substitute at daily grain: <b>fixed-horizon maturity grading</b>: grade every post at day 2 against its predicted day-30 within-page percentile, using per-page log-linear scaling (Szabo-Huberman) upgraded with the [day-1, day-2] daily-delta vector (Pinto et al: ~21% error cut over plain scaling). Specced properly in S9.</div>
+  </div>
+</section>
+
+<!-- ============ DOD ============ -->
+<section id="dod">
+  <div class="sec-head"><span class="n">08</span><h2>Sprint 8 definition of done</h2><div class="rule"></div></div>
+  <div class="card">
+    <ul class="dodlist">
+      <li><b>Feed alive:</b> LOKI collecting under the new metrics, era flag on every row, no unlabelled cross-break chart anywhere.</li>
+      <li><b>Target locked and written:</b> D0 decided by Rafeh + Alex, recorded in VD-PM-008, ladders rebuilt on it.</li>
+      <li><b>Model:</b> beats caption-only on the time split · flop precision ≥75% verified · calibration curve near diagonal · band stable under small edits. <span class="mr">MR-10.3</span></li>
+      <li><b>Every prediction ships with 3 reasons</b> and exactly one suggested action; no slot under 5 samples reported; low confidence surfaced honestly. <span class="mr">MR-10.4</span></li>
+      <li><b>Logging live from day one:</b> draft, advice shown, edits, outcome, for every prediction rendered. <span class="mr">MR-9.5</span></li>
+      <li><b>Art-E:</b> answers the gold set with citation coverage at bar, refuses correctly, passes injection + cross-tenant probes, refusal wording signed by Filza.</li>
+      <li><b>Surfaces:</b> Compose dial + Predictions home match the mockups on desktop and mobile with honest empty/low states.</li>
+      <li><b>The non-engineer test:</b> a media buyer reads the chip and knows what to do; acts on the warning without asking what it means; checks a citation themselves. <span class="mr">MR-10.5</span></li>
+      <li><b>Money:</b> LLM spend inside budget with alarms proven; unit-cost sheet delivered.</li>
+      <li><b>Evidence:</b> Rafeh's acceptance record on real pilot data; Lewis's half-page pilot read delivered.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ NEXT ============ -->
+<section id="next">
+  <div class="sec-head"><span class="n">09</span><h2>Next up</h2><div class="rule"></div></div>
+  <div class="next">
+    <b style="color:var(--ink)">S9 · Best Times + the honest velocity story</b> arrives here once S8 is reviewed. Preview of what it must resolve: Best Times ships from the page's own 24h × 7d heatmap, normalised per slot, weekly refresh, silent under 5 posts per cell (<span class="mr">MR-7.2</span> <span class="mr">MR-7.4</span>; the academic license exists: personalised per-account schedules beat global defaults with up to 17% reaction gain on Facebook, Spasojevic et al, KDD 2015, and publish timestamps are intraday even though metrics are daily). The cross-page affinity graph lands from S7's AFFINITY-011. And velocity gets settled honestly: minute-scale early warning stays dead on a daily API, so S9 specs the day-2 maturity grader instead (Szabo-Huberman scaling + daily-delta features), with the page-level viral-metric probe deciding whether anything richer is possible. This page grows one sprint at a time, in order, each with the same structure: strategy, flows, gates, research, tickets.
+  </div>
+  <div class="srcs"><b>Sources for this sprint:</b> Model Master Rules (24 Jul 2026, provisional, unreviewed rules marked) · Meta_Reach_Deprecation_Escalation (Faheem, 25 Jul 2026) · VD-PM-008 S8 Product Definitions (Rafeh, 11 Jul 2026) · Performance Model v1 Build Instruction (21 Jul 2026) · VD-015B A/B findings (18 Jul 2026) · Content Is Visual (Faheem) · sprint_tracker_mvp.html (13 S8 tickets) · dependency_tree.html master plan · mockup_v3_web/mobile. Research links below are verified against the live paper pages.</div>
+</section>
+
+</div>
+
+<footer class="af-footer">
+  <div class="af-footer-in">
+    <div class="af-brand">
+      <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#aflg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#aflg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#aflg)"/><defs><linearGradient id="aflg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
+      ARTEMISAI
+    </div>
+    <div class="af-copy">&copy; 2026 Artemis AI &middot; Internal preview</div>
+    <div class="af-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="mailto:hello@artemisai.co.uk">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  try{
+    var sess = localStorage.getItem('artemis_session') || localStorage.getItem('artemis_sprint_session') || localStorage.getItem('artemis_app_session');
+    if(sess){
+      var user = JSON.parse(sess);
+      var chip=document.getElementById('sn-chip'), av=document.getElementById('sn-avatar'), nm=document.getElementById('sn-name'), lb=document.getElementById('sn-logout-btn');
+      if(chip) chip.style.display='flex';
+      var who=user.name||user.username||'';
+      if(av && who) av.textContent=who.charAt(0).toUpperCase();
+      if(nm && who) nm.textContent=who;
+      if(lb) lb.style.display='';
+    }
+  }catch(e){}
+})();
+var _signoutFn=null;
+function handleLogout(){_showSignoutModal(function(){localStorage.removeItem('artemis_session');localStorage.removeItem('artemis_sprint_session');localStorage.removeItem('artemis_app_session');localStorage.removeItem('artemis_viewer_name');window.location.href='index.html';});}
+function _showSignoutModal(fn){_signoutFn=fn||function(){localStorage.removeItem('artemis_session');window.location.href='index.html';};document.getElementById('signout-modal').classList.add('open');}
+function _closeSignoutModal(){document.getElementById('signout-modal').classList.remove('open');}
+function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
+</script>
+
+</body>
+</html>
