@@ -424,6 +424,33 @@ body{padding-top:52px!important}
   </div>
 </section>
 
+<!-- ============ S8 IO ============ -->
+<section id="s8-io">
+  <div class="sec-head"><span class="n">IO</span><h2>What goes in, what comes out</h2><div class="rule"></div></div>
+  <div class="tw"><table class="t">
+    <tr><th style="width:14%">Capability</th><th style="width:26%">What goes in (inputs)</th><th style="width:32%">Features it actually looks at</th><th style="width:28%">What comes out (outputs)</th></tr>
+    <tr>
+      <td>Flop detection<br><span style="font-weight:400;color:var(--mut);font-size:12px">one model, two surfaces: the Compose dial + the warnings feed</span></td>
+      <td>The draft (image + caption + planned slot) · the page's 12-month ladder + current form (supplied by the backend, era-flagged)</td>
+      <td><b>Picture (the main dish):</b> CLIP embedding ~100 dims + FUSION content type · <b>Words:</b> caption length, is_question, emoji, caps (NLP labels ride free) · <b>Timing:</b> hour, weekday, gap since last post · <b>Page state:</b> rolling median, trend slope, frequency · World trend score: optional, v1 ships without it</td>
+      <td><span class="mono">band</span> at risk / average / strong for THIS page · <span class="mono">p_flop</span> calibrated (80% = 4 in 5) · <span class="mono">reasons</span> top 3, plain words · <span class="mono">upside_odds</span> · <span class="mono">confidence</span> normal / low. <b>Never:</b> a viral flag, a reach forecast, any absolute number</td>
+    </tr>
+    <tr>
+      <td>Art-E<br><span style="font-weight:400;color:var(--mut);font-size:12px">grounded Q&amp;A</span></td>
+      <td>A plain-English question · tenant id (injected server-side, never model-supplied)</td>
+      <td>Not features: <b>tools.</b> Pre-tested query templates over defined live metrics (views, shares, comments, reactions, labels, scores). The LLM chooses and narrates; the warehouse does every calculation</td>
+      <td>A streamed answer where <b>every number carries a citation</b> to its source rows · or an honest refusal with the reason. <b>Never:</b> an uncited number, arithmetic done by the LLM, an answer about another tenant</td>
+    </tr>
+    <tr>
+      <td>Data feed repair</td>
+      <td>Graph API insights under the two surviving metrics (<span class="mono">post_total_media_view_unique</span>, <span class="mono">post_media_view</span>) + untouched shares / comments / reactions</td>
+      <td>n/a: plumbing, not a model. The era flag is stamped at ingest</td>
+      <td>Era-flagged rows flowing again, dark window backfilled, loud failures. <b>Never:</b> a silently-empty "completed" day, an unlabelled cross-break chart</td>
+    </tr>
+  </table></div>
+  <p class="plain" style="margin-top:10px"><b>The one law over every input:</b> nothing that exists only after publishing may enter the model. Reach, likes, shares at score time are the answer, not the clue. Test for any proposed feature: "could I compute this from the draft alone, before posting?" <span class="mr">MR-3.1</span> <span class="mr">MR-3.2</span></p>
+</section>
+
 <!-- ============ DECISIONS ============ -->
 <section id="decisions">
   <div class="sec-head"><span class="n">01</span><h2>Lock these first, or the sprint stalls</h2><div class="rule"></div></div>
@@ -893,6 +920,35 @@ body{padding-top:52px!important}
   </div>
 </section>
 
+<!-- ============ S8 PROOF ============ -->
+<section id="s8-proof">
+  <div class="sec-head"><span class="n">PROOF</span><h2>How we prove it: benchmarking + the rules doc</h2><div class="rule"></div></div>
+  <div class="grid2">
+    <div class="card">
+      <h4 style="font-size:14px;font-weight:900;color:var(--teal);margin-bottom:8px">How benchmarking helps us</h4>
+      <p class="plain" style="margin-bottom:8px"><b>It is what lets the demo say "check us" instead of "trust us".</b> Three rings, each catching a different way to fool ourselves:</p>
+      <div class="tw"><table class="t">
+        <tr><td>Ring 1 · before ship</td><td>Strict time split (train on the past, test on the future) + the caption-only baseline. A model that learned nothing from the image cannot ship, and we find out in private, not in a demo</td></tr>
+        <tr><td>Ring 2 · at the door</td><td>The gates: flop precision ≥75% or the warning stays silent · calibration (when we say 80%, it happens 4 times in 5) · band stability under edits · the 200-question Art-E gold set. Pilots never meet a confidently-wrong feature</td></tr>
+        <tr><td>Ring 3 · forever</td><td>Every prediction logged with the advice shown · monthly predicted-vs-actual receipts, on the record for any pilot who asks · the advice-free holdout keeps the numbers honest after our own warnings change what pilots publish</td></tr>
+      </table></div>
+      <p class="plain" style="margin-top:8px">And the discipline that makes all three real: <b>pass lines are written down before anyone sees results.</b> It is the same discipline that caught the NLP zero-lift finding honestly, and it is why our accuracy claims can become a sales asset instead of a liability.</p>
+    </div>
+    <div class="card">
+      <h4 style="font-size:14px;font-weight:900;color:var(--violet);margin-bottom:8px">How Rafeh's Master Rules doc helps us</h4>
+      <p class="plain" style="margin-bottom:8px"><b>It is the constitution: numbered, citable rules that end arguments instead of restarting them.</b> Where it bites in Sprint 8:</p>
+      <div class="tw"><table class="t">
+        <tr><td>Code review</td><td>"This feature violates <span class="mr">MR-3.1</span>" (the leakage ban) ends the discussion. No re-litigating</td></tr>
+        <tr><td>Product copy</td><td><span class="mr">MR-1.2</span> bands not numbers + <span class="mr">MR-8.10</span> exactly one action: applies to every surface INCLUDING Art-E free text. "This will hit 13.8%" can never appear</td></tr>
+        <tr><td>Thresholds</td><td><span class="mr">MR-8.3</span>: tune the threshold, never the promise. Nobody quietly lowers the bar to make the warning fire more</td></tr>
+        <tr><td>QA gates</td><td>Both S8 test suites map their gates to <span class="mr">MR-8.x</span> and <span class="mr">MR-10.x</span> line by line: acceptance is checkable by a non-engineer</td></tr>
+        <tr><td>The incident</td><td>Its conflicts table had already logged the target ambiguity with owners, so Meta's metric kill became a planned decision (D0) instead of a mid-incident scramble</td></tr>
+      </table></div>
+      <p class="plain" style="margin-top:8px"><b>What S8 owes it back:</b> the Alex + Rafeh + Faheem review pass, D0 + D2 written back in, the usable-signal definition <span class="mr">MR-2.7</span>, and Filza's refusal-wording sign-off <span class="mr">MR-8.7</span>. The rules doc is only as strong as its last reconciliation.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ S8 SHIP: LIVE AFTER THIS SPRINT ============ -->
 <section id="s8-ship">
   <div class="sec-head"><span class="n">09</span><h2>What is LIVE after Sprint 8, per the mockup</h2><div class="rule"></div></div>
@@ -1024,6 +1080,32 @@ body{padding-top:52px!important}
     <div class="prow"><span class="pn">4</span><div class="pwhat"><b>Build the drift watchdog</b><span>Compare every model's live behaviour to its training baseline. Alert only on drift AND a quality drop together. Healthy / watch / slipping on the dashboard, trip action written down.</span></div><div class="pmeta"><span class="pwho">Faheem + Asad</span><a class="pgo" href="#s9-watchdog">how ↓</a></div></div>
     <div class="prow"><span class="pn">5</span><div class="pwhat"><b>Build discovery matching, keep it hidden</b><span>The 0-100 "pages that belong together" score behind the API. Lewis judges the top 5 per page before anything is served. Pilots see nothing until the S13 Matches tab, by design.</span></div><div class="pmeta"><span class="pwho">Muteeb + Lewis</span><a class="pgo" href="#s9-match">how ↓</a></div></div>
   </div>
+</section>
+
+<!-- ============ S9 IO ============ -->
+<section id="s9-io">
+  <div class="sec-head"><span class="n">IO</span><h2>What goes in, what comes out</h2><div class="rule"></div></div>
+  <div class="tw"><table class="t">
+    <tr><th style="width:14%">Capability</th><th style="width:26%">What goes in (inputs)</th><th style="width:32%">What it actually looks at</th><th style="width:28%">What comes out (outputs)</th></tr>
+    <tr>
+      <td>Best Times</td>
+      <td>The page's own publish timestamps (intraday, so this works on a daily API) · per-slot engagement outcomes, era-consistent · post format mix · history depth</td>
+      <td>24h × 7d slots, <b>normalised per slot</b> so one viral post cannot fake a hot cell · pooled day-part cells with shrinkage at low volume · Prophet weekly seasonality per page (daily seasonality off, log1p + winsorise first) · changepoints on residuals for drift</td>
+      <td>The heatmap (cells with 5+ posts only) · top slots with <b>confidence + sample count</b> · one plain-English line · a "rhythm changed" drift signal. <b>Never:</b> a recommendation from platform defaults alone, a cell faking precision it does not have, timing advice on any other surface</td>
+    </tr>
+    <tr>
+      <td>Drift watchdog</td>
+      <td>Every production model's live outputs (confidence distributions + label mix) · frozen training baselines, keyed by era · a small stratified sample of human / DeepSeek spot-checks</td>
+      <td>Not a model: statistics. KS tests on the models' own outputs · no-label accuracy estimation (ATC) · the joint rule: alert only on drift AND a quality drop together · false-discovery control across all alerts</td>
+      <td>healthy / watch / slipping per model on the dashboard · the documented trip action (retrain flag + audit routing) · an estimated live accuracy. <b>Never:</b> an alarm on the era break, an alarm on drift alone (that is how alarms get ignored)</td>
+    </tr>
+    <tr>
+      <td>Discovery matching</td>
+      <td>De-identified commenter × page co-occurrence (comments are its raw material) · page category + size</td>
+      <td>The weighted projection (hyperactive commenters diluted) · edges significance-filtered against a null model · Adamic-Adar similarity + Louvain audience communities + category match + size proximity, blended by the frozen v1 recipe</td>
+      <td>A 0-100 match score per candidate pair, each component doubling as a reason string, served tenant-scoped behind the API. <b>Never:</b> a client-facing cross-page claim (until it holds on their own ladder), a stored commenter id after projection</td>
+    </tr>
+  </table></div>
 </section>
 
 <!-- ============ S9 DECISIONS ============ -->
@@ -1363,6 +1445,35 @@ body{padding-top:52px!important}
   </div>
 </section>
 
+<!-- ============ S9 PROOF ============ -->
+<section id="s9-proof">
+  <div class="sec-head"><span class="n">PROOF</span><h2>How we prove it: benchmarking + the rules doc</h2><div class="rule"></div></div>
+  <div class="grid2">
+    <div class="card">
+      <h4 style="font-size:14px;font-weight:900;color:var(--teal);margin-bottom:8px">How benchmarking helps us</h4>
+      <p class="plain" style="margin-bottom:8px"><b>It is what stops us shipping a beautiful, wrong heatmap.</b> Where each S9 feature gets proven:</p>
+      <div class="tw"><table class="t">
+        <tr><td>Best Times</td><td>The lift line is declared before scoring (median within-page lift, held-out weeks, content-controlled). <b>Placebo checks every time:</b> permuted slots and a stale 8-week-old heatmap must show NO lift, or the metric is confounded. Fails the line? Heatmap ships descriptive, recommendation held: stated on the page</td></tr>
+        <tr><td>The watchdog</td><td>It gets benchmarked itself: a <b>seeded drift must trip it</b> within one weekly cycle, pure noise must not, and the era break is structurally incapable of tripping it. An alarm nobody trusts is worse than no alarm</td></tr>
+        <tr><td>Discovery matching</td><td>Expert precision before exposure: Lewis judges the top-5 matches per page against a pre-declared bar, recorded. The moat starts honest or it does not start</td></tr>
+      </table></div>
+      <p class="plain" style="margin-top:8px">The payoff compounds: by launch we hold months of <b>logged predicted-vs-actual receipts</b> across every feature: the exact evidence pilots and investors ask for.</p>
+    </div>
+    <div class="card">
+      <h4 style="font-size:14px;font-weight:900;color:var(--violet);margin-bottom:8px">How Rafeh's Master Rules doc helps us</h4>
+      <p class="plain" style="margin-bottom:8px"><b>For S9 it is nearly a spec:</b> the timing rules were written before the feature, so engineering starts from settled law:</p>
+      <div class="tw"><table class="t">
+        <tr><td><span class="mr">MR-7.1</span></td><td>Platform default windows are a sanity floor only; Art-E never recommends off them alone</td></tr>
+        <tr><td><span class="mr">MR-7.2</span></td><td>The real answer is the account's OWN 24h × 7d heatmap, normalised per slot: the no-viral-hot-cell rule is law, not taste</td></tr>
+        <tr><td><span class="mr">MR-7.3</span> <span class="mr">MR-7.4</span></td><td>Timing tables weekly, content tables monthly (the asymmetry is deliberate); under 5 posts a slot is silent, not greyed out</td></tr>
+        <tr><td><span class="mr">MR-7.6</span></td><td>Timing advice and band prediction are separate surfaces with separate cut order: the band chip never mentions a slot</td></tr>
+        <tr><td><span class="mr">MR-2.9</span></td><td>Cross-page patterns may feed models; they may not become client-facing claims until they hold on the page's own ladder with 5+ samples: the gate on Discovery matching</td></tr>
+      </table></div>
+      <p class="plain" style="margin-top:8px">And the watchdog inherits the S6 monitoring rule the doc canonised: <b>alert on drift AND quality-drop together, never drift alone.</b> When a reviewer asks "why is this cell empty" or "why no alarm", the answer is a rule id, not an opinion.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ S9 SHIP: LIVE AFTER THIS SPRINT ============ -->
 <section id="s9-ship">
   <div class="sec-head"><span class="n">S9·9</span><h2>What is LIVE after Sprint 9, per the mockup</h2><div class="rule"></div></div>
@@ -1480,10 +1591,10 @@ body{padding-top:52px!important}
 var PANE_KEY='artemis_playbook_tab_v1';
 var PANE_MAP={
   start:'pane-start', incident:'pane-start', howto:'pane-start',
-  s8:'pane-s8', 's8-plan':'pane-s8', decisions:'pane-s8', model:'pane-s8', arte:'pane-s8', incidentws:'pane-s8',
+  s8:'pane-s8', 's8-plan':'pane-s8', 's8-io':'pane-s8', 's8-proof':'pane-s8', decisions:'pane-s8', model:'pane-s8', arte:'pane-s8', incidentws:'pane-s8',
   people:'pane-s8', timeline:'pane-s8', notdoing:'pane-s8', dod:'pane-s8', 's8-ship':'pane-s8',
   'research-model':'pane-s8', 'research-arte':'pane-s8', 'build-model':'pane-s8', 'build-arte':'pane-s8',
-  s9:'pane-s9', 's9-plan':'pane-s9', 's9-decisions':'pane-s9', 's9-besttimes':'pane-s9', 's9-watchdog':'pane-s9',
+  s9:'pane-s9', 's9-plan':'pane-s9', 's9-io':'pane-s9', 's9-proof':'pane-s9', 's9-decisions':'pane-s9', 's9-besttimes':'pane-s9', 's9-watchdog':'pane-s9',
   's9-match':'pane-s9', 's9-people':'pane-s9', 's9-timeline':'pane-s9', 's9-notdoing':'pane-s9',
   's9-dod':'pane-s9', 's9-ship':'pane-s9', 'research-besttimes':'pane-s9', 'research-watchdog':'pane-s9',
   'research-match':'pane-s9', next:'pane-s9'
