@@ -192,6 +192,23 @@
   .si-crit li b{color:var(--ink)}
   .ship-loop{border-left:3px solid var(--amber);background:rgba(245,166,35,.07);border-radius:0 11px 11px 0;padding:11px 15px;margin-top:13px;font-size:13.5px;color:var(--mut2);line-height:1.65}
   .ship-loop b{color:var(--amber)}
+  .ship-want{font-size:17px;font-weight:800;color:var(--ink);line-height:1.5;margin:4px 0 6px}
+  .ship-want .hl{color:var(--teal)}
+  .si-grid{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start}
+  .si-grid.mob{grid-template-columns:1fr 200px}
+  @media(max-width:860px){.si-grid,.si-grid.mob{grid-template-columns:1fr}}
+  .si-shot{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#060a13;display:block;text-decoration:none}
+  .si-shot img{display:block;width:100%;height:auto}
+  .si-shot:hover{border-color:var(--teal)}
+  .si-cap{font-size:11px;color:var(--mut);padding:6px 10px;border-top:1px solid rgba(33,43,69,.6);line-height:1.5;display:block}
+  .si-feat{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 9px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+  .si-feat .fl{font-size:12px;color:var(--mut2);white-space:nowrap}
+  .si-feat .fl b{color:var(--ink)}
+  .prog{flex:1;min-width:140px;max-width:280px;height:11px;border-radius:99px;background:rgba(255,255,255,.07);border:1px solid var(--line);overflow:hidden}
+  .prog i{display:block;height:100%;background:linear-gradient(90deg,#00D6AE,#38bdf8);border-radius:99px}
+  .si-feat .pct{font-size:13px;font-weight:900;color:var(--teal);white-space:nowrap}
+  .si-feat .remain{font-size:11.5px;color:var(--mut);width:100%;line-height:1.5}
+  .si-feat .remain b{color:var(--mut2)}
 
   /* ===== sprint tabs ===== */
   .ptabs{position:sticky;top:52px;z-index:900;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:12px 0 10px;margin:14px auto 4px;background:linear-gradient(180deg,var(--bg) 78%,transparent)}
@@ -854,63 +871,96 @@ body{padding-top:52px!important}
   <div class="sec-head"><span class="n">09</span><h2>What is LIVE after Sprint 8, per the mockup</h2><div class="rule"></div></div>
   <div class="ship">
     <span class="ship-badge">⚡ Live after 18 Aug · the deliverables</span>
-    <p class="ship-intro">Three things a pilot can <b>touch</b> when this sprint lands, mapped to the exact mockup screens they were designed against (chips open the mockup views), plus one thing they will <b>feel</b>. Each carries its pass/fail success criteria: if a criterion fails its gate, that feature ships silent or held, never wrong.</p>
+    <p class="ship-want">In one sentence: after this sprint a pilot can <span class="hl">score a draft before posting</span>, get <span class="hl">honest warnings</span>, and <span class="hl">ask Art-E why, with receipts</span>.</p>
+    <p class="ship-intro">Each card: the mockup screen it comes from (screenshot + chips open the live mockup), which master-plan feature it belongs to, how much of that feature ships THIS sprint, and the pass/fail bar for calling it done.</p>
 
     <div class="ship-item">
-      <div class="si-head"><span class="si-ic">🎯</span><b>Compose: the draft risk dial</b>
-        <a class="schip" href="mockup_v3_web.html?view=today" target="_blank">web · today / compose</a>
+      <div class="si-head"><span class="si-ic">🎯</span><b>1 · Score a draft before you post (the risk dial)</b>
+        <a class="schip" href="mockup_v3_web.html?view=planner" target="_blank">web · Studio drafts</a>
+        <a class="schip" href="mockup_v3_web.html?view=today" target="_blank">web · compose</a>
         <a class="schip mob" href="mockup_v3_mobile.html?screen=today" target="_blank">📱 compose sheet</a>
       </div>
-      <p class="si-what">Write or paste a draft, attach the image, and the dial fills in before publishing: a band <b>for this page</b> (at risk / average / strong), the top 3 reasons in plain words, and ONE suggested fix. Re-scores as you edit, without flicker. This replaces every old "2.4x · 87%" chip in the mockup.</p>
-      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
-        <li>Band comes from the <b>live model</b>, which beat the caption-only baseline on the time split before deploying</li>
-        <li><b>Flop warnings are right 3 times in 4</b> (validated ≥75% precision) or they do not fire at all</li>
-        <li>Small edits never flip the band (jitter gate green); warm rescoring lands in <b>~2 seconds</b></li>
-        <li>Thin drafts get <b>"not enough to score yet"</b>, thin pages get low-confidence said out loud, never a fake number</li>
-        <li>No absolute numbers anywhere: bands, odds and reasons only, each with one action</li>
-        <li>Every render is logged (draft, advice shown, edits, outcome) from the first day</li>
-        <li>The media-buyer test: a non-engineer reads the dial and knows what to do, unprompted</li>
-      </ul></div>
-    </div>
-
-    <div class="ship-item">
-      <div class="si-head"><span class="si-ic">📡</span><b>Predictions home: weak-post warnings</b>
-        <a class="schip" href="mockup_v3_web.html?view=wins" target="_blank">web · the wins view, renamed</a>
+      <div class="si-feat">
+        <span class="fl">Feature: <b>Drafts + the performance model</b></span>
+        <div class="prog"><i style="width:70%"></i></div><span class="pct">~70% this sprint</span>
+        <span class="remain"><b>Ships now:</b> write / paste a draft, attach the image, get the band + 3 reasons + 1 fix, re-scores on edit. <b>Left for later:</b> S14 live-as-you-type wiring + thresholds validated against real outcomes; S18 model upgrade pass.</span>
       </div>
-      <p class="si-what">The prediction surface: history of what the model said vs what happened, the outlook for scheduled posts, and a feed warning when an upcoming post looks weak, with the why and one fix. The mockup's "Predicted wins" framing is retired: this surface warns, it never promises winners.</p>
-      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
-        <li>Warnings appear <b>only</b> where the validated precision floor holds; borderline stays silent</li>
-        <li>Honest empty state (no predictions yet) and low-confidence state, wired to the live API</li>
-        <li>Zero winner language anywhere on the surface: no viral badges, no reach forecasts</li>
-        <li>No timing advice on this surface (that is S9's Best Times, deliberately separate)</li>
-      </ul></div>
+      <div class="si-grid">
+        <div>
+          <p class="si-what">The user writes a draft and the dial answers: <b>at risk / average / strong for THIS page</b>, why (3 reasons), and one suggested fix. No score theatre, no promises.</p>
+          <div class="si-crit"><div class="sc-t">Done means (pass / fail)</div><ul>
+            <li>Band comes from the live model, which <b>beat the caption-only baseline</b> on the time split</li>
+            <li><b>Flop warnings right 3 times in 4</b> (validated ≥75% precision) or they do not fire</li>
+            <li>Small edits never flip the band; warm rescoring in <b>~2 seconds</b></li>
+            <li>Thin drafts: <b>"not enough to score yet"</b>; thin pages: low confidence said out loud</li>
+            <li>Every render logged (draft, advice, edits, outcome) from day one</li>
+            <li>A non-engineer reads the dial and knows what to do, unprompted</li>
+          </ul></div>
+        </div>
+        <a class="si-shot" href="mockup_v3_web.html?view=planner" target="_blank"><img src="assets/playbook/s8_drafts_scores.jpg" alt="Studio drafts with score dials in the mockup"><span class="si-cap">The mockup's Studio drafts. The 75 / 68 / 61 dials and "2.4x" chips ship as <b>risk bands + reasons</b> per the pivot: no absolute scores anywhere.</span></a>
+      </div>
     </div>
 
     <div class="ship-item">
-      <div class="si-head"><span class="si-ic">💬</span><b>Art-E: grounded answers with receipts</b>
+      <div class="si-head"><span class="si-ic">📡</span><b>2 · Weak-post warnings (the predictions surface)</b>
+        <a class="schip" href="mockup_v3_web.html?view=wins" target="_blank">web · the wins view</a>
+      </div>
+      <div class="si-feat">
+        <span class="fl">Feature: <b>Predictions surface (Content Lab + Timing)</b></span>
+        <div class="prog"><i style="width:50%"></i></div><span class="pct">~50% this sprint</span>
+        <span class="remain"><b>Ships now:</b> the prediction half: outlook for upcoming posts, warnings with the why + one fix, prediction history filling as outcomes arrive. <b>Left for later:</b> the timing half is S9 Best Times (deliberately separate surface); "wins" framing retires now.</span>
+      </div>
+      <div class="si-grid">
+        <div>
+          <p class="si-what">The surface warns when a scheduled or recent post looks weak <b>for this page</b>, and keeps the honest score-board of what the model said vs what happened.</p>
+          <div class="si-crit"><div class="sc-t">Done means (pass / fail)</div><ul>
+            <li>Warnings appear <b>only</b> where the validated precision floor holds; borderline stays silent</li>
+            <li>Honest empty + low-confidence states, wired to the live API</li>
+            <li><b>Zero winner language</b>: no viral badges, no reach forecasts, no "predicted wins"</li>
+            <li>No timing advice here (that is S9's surface, cut order #1)</li>
+          </ul></div>
+        </div>
+        <a class="si-shot" href="mockup_v3_web.html?view=wins" target="_blank"><img src="assets/playbook/s8_predictions_wins.jpg" alt="The wins view in the mockup"><span class="si-cap">The mockup's "Your wins" view as designed. S8 keeps the receipts idea (predicted vs actual) and <b>retires the winner framing</b>: it becomes the warnings + accuracy surface.</span></a>
+      </div>
+    </div>
+
+    <div class="ship-item">
+      <div class="si-head"><span class="si-ic">💬</span><b>3 · Ask Art-E anything, get receipts</b>
         <a class="schip mob" href="mockup_v3_mobile.html?screen=arte" target="_blank">📱 Art-E orb screen</a>
         <a class="schip" href="mockup_v3_web.html?view=today" target="_blank">web · Art-E rail</a>
       </div>
-      <p class="si-what">Ask a plain-English question about your own page ("why did reach drop last week?") and get an answer where <b>every number carries a citation</b>: tap it and see the exact source rows. If the data is not there, Art-E says so, and for the metrics Meta killed it explains why. Answers stream in live.</p>
-      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
-        <li>The 200-question gold set is green: accuracy bar, <b>citation recall + precision floor</b> (the twin of the flop floor), refusal correctness, injection resistance</li>
-        <li>Every citation resolves to real rows a user can check themselves</li>
-        <li>Dead-metric questions get the honest reason ("Meta removed that metric in June 2026"), never a made-up number</li>
-        <li>Refusal wording is Filza's signed wording; every answer is labelled AI, guidance not guarantee</li>
-        <li>Per-tenant spend quota + alarms proven BEFORE pilot traffic; cross-tenant probes return the neutral line</li>
-        <li>Scope held: grounded Q&amp;A only, no autonomous actions</li>
-      </ul></div>
+      <div class="si-feat">
+        <span class="fl">Feature: <b>Art-E grounded Q&amp;A</b></span>
+        <div class="prog"><i style="width:100%"></i></div><span class="pct">100% of MVP scope</span>
+        <span class="remain"><b>Ships now:</b> the whole MVP feature: grounded answers, per-number citations, honest refusal, streaming. <b>Later sprints add separate features on top:</b> memory controls (S16-17), answer thumbs (S17), the vector index (S16). The autonomous agent stays Phase-2, on purpose.</span>
+      </div>
+      <div class="si-grid mob">
+        <div>
+          <p class="si-what">Plain-English questions about your own page; <b>every number carries a citation</b> you can tap to see the source rows. No data? It says so. Dead metric? It explains why.</p>
+          <div class="si-crit"><div class="sc-t">Done means (pass / fail)</div><ul>
+            <li>200-question gold set green: accuracy, <b>citation recall + precision floor</b>, refusal correctness, injection resistance</li>
+            <li>Citations resolve to real rows a user can check</li>
+            <li>Dead-metric questions get the reason ("Meta removed that metric in June 2026")</li>
+            <li>Filza's signed refusal wording; AI label + guidance-not-guarantee on every answer</li>
+            <li>Per-tenant spend quota + alarms proven BEFORE pilot traffic</li>
+          </ul></div>
+        </div>
+        <a class="si-shot" href="mockup_v3_mobile.html?screen=arte" target="_blank"><img src="assets/playbook/s8_arte_mobile.jpg" alt="Art-E screen in the mobile mockup"><span class="si-cap">The mobile Art-E orb screen: "grounded on your data" is the whole S8 promise.</span></a>
+      </div>
     </div>
 
     <div class="ship-item">
-      <div class="si-head"><span class="si-ic">📈</span><b>Felt, not clicked: the charts are alive again</b>
+      <div class="si-head"><span class="si-ic">📈</span><b>4 · Felt, not clicked: the charts are alive again</b>
         <a class="schip api">engine room · LOKI migration</a>
       </div>
-      <p class="si-what">Analytics stops being frozen at 14 June: the feed collects under the new metrics, the dark window backfills, and any chart crossing 15 June carries the era stamp instead of silently comparing two different units.</p>
-      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
+      <div class="si-feat">
+        <span class="fl">Feature: <b>incident repair (the metric migration)</b></span>
+        <div class="prog"><i style="width:100%"></i></div><span class="pct">100% this sprint</span>
+        <span class="remain"><b>Ships now:</b> feed collecting under the new metrics, dark window backfilled, era stamps on any chart crossing 15 Jun, silent outages made impossible.</span>
+      </div>
+      <div class="si-crit"><div class="sc-t">Done means (pass / fail)</div><ul>
         <li>Rows landing for dates after 13 Jun (PR #7 merged with the guard, ALTERs run, empty partitions cleared)</li>
-        <li>No unlabelled cross-break chart anywhere in the product</li>
-        <li>The next silent outage is impossible: an all-calls-failed day marks itself FAILED and retries</li>
+        <li>No unlabelled cross-break chart anywhere; an all-calls-failed day marks itself FAILED and retries</li>
       </ul></div>
     </div>
 
@@ -1278,47 +1328,65 @@ body{padding-top:52px!important}
   <div class="sec-head"><span class="n">S9·9</span><h2>What is LIVE after Sprint 9, per the mockup</h2><div class="rule"></div></div>
   <div class="ship">
     <span class="ship-badge">⚡ Live after 25 Aug · the deliverables</span>
-    <p class="ship-intro">One big pilot-facing feature (the habit hook), one internal surface that protects everything, and one engine-room capability that stays deliberately invisible until S13. Chips open the mockup screens each was designed against; every deliverable carries its pass/fail success criteria.</p>
+    <p class="ship-want">In one sentence: after this sprint a pilot knows <span class="hl">when to post, from their own rhythm</span>, and we know <span class="hl">the moment any model starts slipping</span>.</p>
+    <p class="ship-intro">One pilot-facing feature (the habit hook), one internal surface that protects everything we have shipped, and one engine deliberately kept invisible until S13. Same format: mockup screen, feature, how much ships now, pass/fail.</p>
 
     <div class="ship-item">
-      <div class="si-head"><span class="si-ic">📅</span><b>Best Times: the calendar heatmap + slot recommendation</b>
-        <a class="schip" href="mockup_v3_web.html?view=planner" target="_blank">web · planner view</a>
+      <div class="si-head"><span class="si-ic">📅</span><b>1 · Best Times: the heatmap + slot recommendation</b>
+        <a class="schip" href="mockup_v3_web.html?view=planner" target="_blank">web · Studio / planner</a>
         <a class="schip mob" href="mockup_v3_mobile.html?screen=planner" target="_blank">📱 planner screen</a>
       </div>
-      <p class="si-what">The page's own rhythm as a 24h × 7d heatmap, with a plain-English recommendation ("your audience is most active Thursday 7 to 9pm") carrying its confidence and the sample count behind it. Sparse pages get an honest "not enough history yet" instead of a misleading grid. Art-E answers "when should I post?" from the same tables, so the chat and the calendar can never disagree.</p>
-      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
-        <li><b>One viral 3am post cannot paint a hot cell</b>: per-slot normalisation verified in the jitter test (the S6 acceptance line, now enforced)</li>
-        <li>Cells under 5 posts are silent, not greyed; low-volume pages show pooled day-part cells with shrinkage, never fake exact-hour precision</li>
-        <li>The recommendation clears the E1 lift line on held-out weeks (within page, content-controlled, placebo-checked). <b>If it does not: the heatmap ships descriptive and the recommendation is held</b>, stated on the page</li>
-        <li>Heatmaps expire weekly; a drift trip forces a rebuild with a visible "rhythm changed, re-learning" state</li>
-        <li>Timing advice lives ONLY here, never on the prediction surfaces; every recommendation carries the guidance-not-guarantee pattern</li>
-        <li>The acceptance moment: a pilot points at the brightest cell and says "post here", unprompted</li>
-      </ul></div>
+      <div class="si-feat">
+        <span class="fl">Feature: <b>Best Times</b></span>
+        <div class="prog"><i style="width:100%"></i></div><span class="pct">100% of MVP scope</span>
+        <span class="remain"><b>Ships now:</b> the full MVP feature (S6 built the calendar foundation, S9 completes the model + recommendation). <b>One honest caveat:</b> if the pre-declared lift line fails on held-out weeks, the heatmap still ships as a descriptive view and the recommendation is held until it earns its confidence, stated on the page.</span>
+      </div>
+      <div class="si-grid">
+        <div>
+          <p class="si-what">The page's own rhythm as a 24h × 7d heatmap plus a plain-English recommendation with its confidence and sample count. Art-E answers "when should I post?" from the same tables, so chat and calendar can never disagree.</p>
+          <div class="si-crit"><div class="sc-t">Done means (pass / fail)</div><ul>
+            <li><b>One viral 3am post cannot paint a hot cell</b> (per-slot normalisation, verified)</li>
+            <li>Cells under 5 posts are silent; low-volume pages get pooled day-part cells, never fake exact-hour precision</li>
+            <li>Recommendation clears the pre-declared lift line on held-out weeks, placebo-checked</li>
+            <li>Heatmaps expire weekly; drift forces a rebuild with a visible "re-learning" state</li>
+            <li>Timing advice lives ONLY here; guidance-not-guarantee on every recommendation</li>
+            <li>The acceptance moment: a pilot points at the brightest cell and says "post here", unprompted</li>
+          </ul></div>
+        </div>
+        <a class="si-shot" href="mockup_v3_web.html?view=planner" target="_blank"><img src="assets/playbook/s9_besttimes_heatmap.jpg" alt="Best Times heatmap in the Studio mockup"><span class="si-cap">The mockup's "Best times this week" grid: teal = your window, tap to book. S9 makes every cell come from the page's own history, honestly.</span></a>
+      </div>
     </div>
 
     <div class="ship-item">
-      <div class="si-head"><span class="si-ic">🩺</span><b>Model-health dashboard: healthy / watch / slipping</b>
+      <div class="si-head"><span class="si-ic">🩺</span><b>2 · The model-health dashboard: healthy / watch / slipping</b>
         <a class="schip api">internal · team login only</a>
       </div>
-      <p class="si-what">Every production model (5 NLP heads, fusion, best-times) gets a health state on the model dashboard, fed by the watchdog: confidence-distribution tests + no-label accuracy estimation + the Prophet drift signal. A degrading model becomes visible to us before a pilot ever notices.</p>
-      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
-        <li>A <b>seeded drift trips the watchdog within one weekly cycle</b>; pure noise does not (false-discovery control across the whole alert family)</li>
-        <li>The 15-Jun era break NEVER reads as organic drift (structurally excluded, not statistically hoped away)</li>
-        <li>"Slipping" is the loudest thing on the page: readable in under two seconds</li>
-        <li>The trip action (retrain flag + audit routing) is documented and rehearsed once, end to end</li>
+      <div class="si-feat">
+        <span class="fl">Feature: <b>Model-Ops dashboard (drift surfacing)</b></span>
+        <div class="prog"><i style="width:100%"></i></div><span class="pct">100% of MVP scope</span>
+        <span class="remain"><b>Ships now:</b> every production model (5 NLP heads, fusion, best-times) gets a live health state fed by the watchdog. No mockup screen: this is our cockpit, not the pilot's.</span>
+      </div>
+      <div class="si-crit"><div class="sc-t">Done means (pass / fail)</div><ul>
+        <li>A <b>seeded drift trips the watchdog within one weekly cycle</b>; pure noise does not</li>
+        <li>The 15-Jun era break NEVER reads as organic drift (structurally excluded)</li>
+        <li>"Slipping" is the loudest thing on the page, readable in under two seconds</li>
+        <li>The trip action (retrain flag + audit routing) documented and rehearsed once, end to end</li>
       </ul></div>
     </div>
 
     <div class="ship-item">
-      <div class="si-head"><span class="si-ic">🕸</span><b>Discovery match scores: built, validated, deliberately invisible</b>
+      <div class="si-head"><span class="si-ic">🕸</span><b>3 · Discovery match scores: built and validated, deliberately invisible</b>
         <a class="schip api">API only · UI lands S13</a>
       </div>
-      <p class="si-what">Every tenant gets ranked candidate pages with a 0-100 match score behind the API: the first working piece of the network moat. No pilot sees it yet (the Matches tab is S13), and that is the plan, not a slip: scores go live to users only after they have survived validation.</p>
-      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
-        <li>The v1 recipe is frozen (E4) before any score is served; edges significance-filtered before scoring</li>
-        <li><b>Lewis's top-5 review clears the pre-declared precision bar</b> and the review is recorded, page by page</li>
-        <li>Serving is tenant-scoped; zero client-facing exposure of cross-page claims until they hold on the page's own ladder</li>
-        <li>Privacy posture verified: only pairwise counts stored after projection, no commenter ids</li>
+      <div class="si-feat">
+        <span class="fl">Feature: <b>Discovery (the network moat)</b></span>
+        <div class="prog"><i style="width:50%"></i></div><span class="pct">engine 100% · pilot-visible 0%</span>
+        <span class="remain"><b>Ships now:</b> the 0-100 match score behind the API, validated by Lewis before anything is served. <b>Left for later:</b> the Matches tab UI (S13) and per-factor breakdowns (Fast-Track). Pilots see nothing yet, by design: scores go live only after surviving validation.</span>
+      </div>
+      <div class="si-crit"><div class="sc-t">Done means (pass / fail)</div><ul>
+        <li>Recipe v1 frozen before any score is served; edges significance-filtered</li>
+        <li><b>Lewis's top-5 review clears the pre-declared precision bar</b>, recorded page by page</li>
+        <li>Tenant-scoped serving; zero client-facing cross-page claims; only pairwise counts stored, no commenter ids</li>
       </ul></div>
     </div>
 
