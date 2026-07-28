@@ -167,6 +167,32 @@
   .bstep .bwho{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet);white-space:nowrap;margin-left:auto;padding-left:10px;margin-top:3px}
   .bstep .mono{color:var(--teal)}
 
+  /* ===== live-after-sprint highlight ===== */
+  .ship{position:relative;border:2px solid rgba(0,214,174,.55);border-radius:20px;padding:26px 24px 18px;margin-top:18px;background:linear-gradient(180deg,rgba(0,214,174,.10),rgba(0,214,174,.02) 45%,rgba(15,19,32,.6)),var(--panel);box-shadow:0 0 44px rgba(0,214,174,.13)}
+  .ship-badge{position:absolute;top:-15px;left:22px;font-size:11.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#06121c;background:linear-gradient(90deg,#00D6AE,#38bdf8);border-radius:20px;padding:7px 18px;box-shadow:0 4px 18px rgba(0,214,174,.4)}
+  .ship-intro{font-size:14.5px;color:var(--mut2);line-height:1.65;margin:2px 0 14px;max-width:900px}
+  .ship-intro b{color:var(--ink)}
+  .ship-item{background:rgba(8,11,20,.55);border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin-bottom:12px}
+  .ship-item:last-of-type{margin-bottom:0}
+  .si-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:7px}
+  .si-head .si-ic{font-size:19px}
+  .si-head b{font-size:15.5px;color:var(--ink)}
+  .schip{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;color:var(--teal);background:rgba(0,214,174,.1);border:1px solid rgba(0,214,174,.35);border-radius:99px;padding:4px 11px;text-decoration:none;white-space:nowrap}
+  .schip:hover{border-color:var(--teal)}
+  .schip.mob{color:#8B7BFF;background:rgba(139,123,255,.12);border-color:rgba(139,123,255,.35)}
+  .schip.mob:hover{border-color:#8B7BFF}
+  .schip.api{color:var(--amber);background:rgba(245,166,35,.1);border-color:rgba(245,166,35,.35);cursor:default}
+  .si-what{font-size:13.5px;color:var(--mut2);line-height:1.65;margin-bottom:9px}
+  .si-what b{color:var(--ink)}
+  .si-crit{background:rgba(0,214,174,.05);border:1px solid rgba(0,214,174,.18);border-radius:10px;padding:9px 13px}
+  .si-crit .sc-t{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:5px}
+  .si-crit ul{list-style:none}
+  .si-crit li{font-size:12.5px;color:var(--mut2);line-height:1.6;padding:2.5px 0 2.5px 20px;position:relative}
+  .si-crit li::before{content:"✓";position:absolute;left:3px;color:var(--teal);font-weight:900}
+  .si-crit li b{color:var(--ink)}
+  .ship-loop{border-left:3px solid var(--amber);background:rgba(245,166,35,.07);border-radius:0 11px 11px 0;padding:11px 15px;margin-top:13px;font-size:13.5px;color:var(--mut2);line-height:1.65}
+  .ship-loop b{color:var(--amber)}
+
   /* ===== sprint tabs ===== */
   .ptabs{position:sticky;top:52px;z-index:900;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:12px 0 10px;margin:14px auto 4px;background:linear-gradient(180deg,var(--bg) 78%,transparent)}
   .ptab{font-family:'DM Sans','Outfit',sans-serif;font-size:15px;font-weight:800;padding:11px 22px;border-radius:13px;border:1px solid var(--line);background:var(--panel);color:var(--mut2);cursor:pointer;transition:.15s;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.2}
@@ -823,6 +849,75 @@ body{padding-top:52px!important}
   </div>
 </section>
 
+<!-- ============ S8 SHIP: LIVE AFTER THIS SPRINT ============ -->
+<section id="s8-ship">
+  <div class="sec-head"><span class="n">09</span><h2>What is LIVE after Sprint 8, per the mockup</h2><div class="rule"></div></div>
+  <div class="ship">
+    <span class="ship-badge">⚡ Live after 18 Aug · the deliverables</span>
+    <p class="ship-intro">Three things a pilot can <b>touch</b> when this sprint lands, mapped to the exact mockup screens they were designed against (chips open the mockup views), plus one thing they will <b>feel</b>. Each carries its pass/fail success criteria: if a criterion fails its gate, that feature ships silent or held, never wrong.</p>
+
+    <div class="ship-item">
+      <div class="si-head"><span class="si-ic">🎯</span><b>Compose: the draft risk dial</b>
+        <a class="schip" href="mockup_v3_web.html?view=today" target="_blank">web · today / compose</a>
+        <a class="schip mob" href="mockup_v3_mobile.html?screen=today" target="_blank">📱 compose sheet</a>
+      </div>
+      <p class="si-what">Write or paste a draft, attach the image, and the dial fills in before publishing: a band <b>for this page</b> (at risk / average / strong), the top 3 reasons in plain words, and ONE suggested fix. Re-scores as you edit, without flicker. This replaces every old "2.4x · 87%" chip in the mockup.</p>
+      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
+        <li>Band comes from the <b>live model</b>, which beat the caption-only baseline on the time split before deploying</li>
+        <li><b>Flop warnings are right 3 times in 4</b> (validated ≥75% precision) or they do not fire at all</li>
+        <li>Small edits never flip the band (jitter gate green); warm rescoring lands in <b>~2 seconds</b></li>
+        <li>Thin drafts get <b>"not enough to score yet"</b>, thin pages get low-confidence said out loud, never a fake number</li>
+        <li>No absolute numbers anywhere: bands, odds and reasons only, each with one action</li>
+        <li>Every render is logged (draft, advice shown, edits, outcome) from the first day</li>
+        <li>The media-buyer test: a non-engineer reads the dial and knows what to do, unprompted</li>
+      </ul></div>
+    </div>
+
+    <div class="ship-item">
+      <div class="si-head"><span class="si-ic">📡</span><b>Predictions home: weak-post warnings</b>
+        <a class="schip" href="mockup_v3_web.html?view=wins" target="_blank">web · the wins view, renamed</a>
+      </div>
+      <p class="si-what">The prediction surface: history of what the model said vs what happened, the outlook for scheduled posts, and a feed warning when an upcoming post looks weak, with the why and one fix. The mockup's "Predicted wins" framing is retired: this surface warns, it never promises winners.</p>
+      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
+        <li>Warnings appear <b>only</b> where the validated precision floor holds; borderline stays silent</li>
+        <li>Honest empty state (no predictions yet) and low-confidence state, wired to the live API</li>
+        <li>Zero winner language anywhere on the surface: no viral badges, no reach forecasts</li>
+        <li>No timing advice on this surface (that is S9's Best Times, deliberately separate)</li>
+      </ul></div>
+    </div>
+
+    <div class="ship-item">
+      <div class="si-head"><span class="si-ic">💬</span><b>Art-E: grounded answers with receipts</b>
+        <a class="schip mob" href="mockup_v3_mobile.html?screen=arte" target="_blank">📱 Art-E orb screen</a>
+        <a class="schip" href="mockup_v3_web.html?view=today" target="_blank">web · Art-E rail</a>
+      </div>
+      <p class="si-what">Ask a plain-English question about your own page ("why did reach drop last week?") and get an answer where <b>every number carries a citation</b>: tap it and see the exact source rows. If the data is not there, Art-E says so, and for the metrics Meta killed it explains why. Answers stream in live.</p>
+      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
+        <li>The 200-question gold set is green: accuracy bar, <b>citation recall + precision floor</b> (the twin of the flop floor), refusal correctness, injection resistance</li>
+        <li>Every citation resolves to real rows a user can check themselves</li>
+        <li>Dead-metric questions get the honest reason ("Meta removed that metric in June 2026"), never a made-up number</li>
+        <li>Refusal wording is Filza's signed wording; every answer is labelled AI, guidance not guarantee</li>
+        <li>Per-tenant spend quota + alarms proven BEFORE pilot traffic; cross-tenant probes return the neutral line</li>
+        <li>Scope held: grounded Q&amp;A only, no autonomous actions</li>
+      </ul></div>
+    </div>
+
+    <div class="ship-item">
+      <div class="si-head"><span class="si-ic">📈</span><b>Felt, not clicked: the charts are alive again</b>
+        <a class="schip api">engine room · LOKI migration</a>
+      </div>
+      <p class="si-what">Analytics stops being frozen at 14 June: the feed collects under the new metrics, the dark window backfills, and any chart crossing 15 June carries the era stamp instead of silently comparing two different units.</p>
+      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
+        <li>Rows landing for dates after 13 Jun (PR #7 merged with the guard, ALTERs run, empty partitions cleared)</li>
+        <li>No unlabelled cross-break chart anywhere in the product</li>
+        <li>The next silent outage is impossible: an all-calls-failed day marks itself FAILED and retries</li>
+      </ul></div>
+    </div>
+
+    <div class="ship-loop"><b>The one-loop acceptance test for the whole sprint:</b> write a deliberately weak draft → the dial warns with three reasons → ask Art-E "why will this flop?" → tap the citation → see the receipt. If that loop runs on real pilot data in the 18 Aug demo, Sprint 8 shipped. If any link in that chain is missing, it did not.</div>
+  </div>
+</section>
+
 </div><!-- /pane-s8 -->
 
 <div class="pane" id="pane-s9">
@@ -1178,6 +1273,59 @@ body{padding-top:52px!important}
   </div>
 </section>
 
+<!-- ============ S9 SHIP: LIVE AFTER THIS SPRINT ============ -->
+<section id="s9-ship">
+  <div class="sec-head"><span class="n">S9·9</span><h2>What is LIVE after Sprint 9, per the mockup</h2><div class="rule"></div></div>
+  <div class="ship">
+    <span class="ship-badge">⚡ Live after 25 Aug · the deliverables</span>
+    <p class="ship-intro">One big pilot-facing feature (the habit hook), one internal surface that protects everything, and one engine-room capability that stays deliberately invisible until S13. Chips open the mockup screens each was designed against; every deliverable carries its pass/fail success criteria.</p>
+
+    <div class="ship-item">
+      <div class="si-head"><span class="si-ic">📅</span><b>Best Times: the calendar heatmap + slot recommendation</b>
+        <a class="schip" href="mockup_v3_web.html?view=planner" target="_blank">web · planner view</a>
+        <a class="schip mob" href="mockup_v3_mobile.html?screen=planner" target="_blank">📱 planner screen</a>
+      </div>
+      <p class="si-what">The page's own rhythm as a 24h × 7d heatmap, with a plain-English recommendation ("your audience is most active Thursday 7 to 9pm") carrying its confidence and the sample count behind it. Sparse pages get an honest "not enough history yet" instead of a misleading grid. Art-E answers "when should I post?" from the same tables, so the chat and the calendar can never disagree.</p>
+      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
+        <li><b>One viral 3am post cannot paint a hot cell</b>: per-slot normalisation verified in the jitter test (the S6 acceptance line, now enforced)</li>
+        <li>Cells under 5 posts are silent, not greyed; low-volume pages show pooled day-part cells with shrinkage, never fake exact-hour precision</li>
+        <li>The recommendation clears the E1 lift line on held-out weeks (within page, content-controlled, placebo-checked). <b>If it does not: the heatmap ships descriptive and the recommendation is held</b>, stated on the page</li>
+        <li>Heatmaps expire weekly; a drift trip forces a rebuild with a visible "rhythm changed, re-learning" state</li>
+        <li>Timing advice lives ONLY here, never on the prediction surfaces; every recommendation carries the guidance-not-guarantee pattern</li>
+        <li>The acceptance moment: a pilot points at the brightest cell and says "post here", unprompted</li>
+      </ul></div>
+    </div>
+
+    <div class="ship-item">
+      <div class="si-head"><span class="si-ic">🩺</span><b>Model-health dashboard: healthy / watch / slipping</b>
+        <a class="schip api">internal · team login only</a>
+      </div>
+      <p class="si-what">Every production model (5 NLP heads, fusion, best-times) gets a health state on the model dashboard, fed by the watchdog: confidence-distribution tests + no-label accuracy estimation + the Prophet drift signal. A degrading model becomes visible to us before a pilot ever notices.</p>
+      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
+        <li>A <b>seeded drift trips the watchdog within one weekly cycle</b>; pure noise does not (false-discovery control across the whole alert family)</li>
+        <li>The 15-Jun era break NEVER reads as organic drift (structurally excluded, not statistically hoped away)</li>
+        <li>"Slipping" is the loudest thing on the page: readable in under two seconds</li>
+        <li>The trip action (retrain flag + audit routing) is documented and rehearsed once, end to end</li>
+      </ul></div>
+    </div>
+
+    <div class="ship-item">
+      <div class="si-head"><span class="si-ic">🕸</span><b>Discovery match scores: built, validated, deliberately invisible</b>
+        <a class="schip api">API only · UI lands S13</a>
+      </div>
+      <p class="si-what">Every tenant gets ranked candidate pages with a 0-100 match score behind the API: the first working piece of the network moat. No pilot sees it yet (the Matches tab is S13), and that is the plan, not a slip: scores go live to users only after they have survived validation.</p>
+      <div class="si-crit"><div class="sc-t">Success means (pass / fail)</div><ul>
+        <li>The v1 recipe is frozen (E4) before any score is served; edges significance-filtered before scoring</li>
+        <li><b>Lewis's top-5 review clears the pre-declared precision bar</b> and the review is recorded, page by page</li>
+        <li>Serving is tenant-scoped; zero client-facing exposure of cross-page claims until they hold on the page's own ladder</li>
+        <li>Privacy posture verified: only pairwise counts stored after projection, no commenter ids</li>
+      </ul></div>
+    </div>
+
+    <div class="ship-loop"><b>The one-loop acceptance test for the whole sprint:</b> open Best Times → point at the brightest cell → hear the plain-English recommendation with its confidence and sample count → then flip to the model dashboard and watch it catch a seeded drift, live. Habit hook plus immune system in one demo on 25 Aug: that is Sprint 9 shipped.</div>
+  </div>
+</section>
+
 <!-- ============ NEXT ============ -->
 <section id="next">
   <div class="sec-head"><span class="n">10</span><h2>Next up</h2><div class="rule"></div></div>
@@ -1225,11 +1373,11 @@ var PANE_KEY='artemis_playbook_tab_v1';
 var PANE_MAP={
   start:'pane-start', incident:'pane-start', howto:'pane-start',
   s8:'pane-s8', decisions:'pane-s8', model:'pane-s8', arte:'pane-s8', incidentws:'pane-s8',
-  people:'pane-s8', timeline:'pane-s8', notdoing:'pane-s8', dod:'pane-s8',
-  'research-model':'pane-s8', 'research-arte':'pane-s8',
+  people:'pane-s8', timeline:'pane-s8', notdoing:'pane-s8', dod:'pane-s8', 's8-ship':'pane-s8',
+  'research-model':'pane-s8', 'research-arte':'pane-s8', 'build-model':'pane-s8', 'build-arte':'pane-s8',
   s9:'pane-s9', 's9-decisions':'pane-s9', 's9-besttimes':'pane-s9', 's9-watchdog':'pane-s9',
   's9-match':'pane-s9', 's9-people':'pane-s9', 's9-timeline':'pane-s9', 's9-notdoing':'pane-s9',
-  's9-dod':'pane-s9', 'research-besttimes':'pane-s9', 'research-watchdog':'pane-s9',
+  's9-dod':'pane-s9', 's9-ship':'pane-s9', 'research-besttimes':'pane-s9', 'research-watchdog':'pane-s9',
   'research-match':'pane-s9', next:'pane-s9'
 };
 function _setPane(paneId){
