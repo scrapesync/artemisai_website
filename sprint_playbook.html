@@ -157,6 +157,67 @@
   .srcs{font-size:11px;color:var(--mut);line-height:1.7;margin-top:10px}
   .srcs b{color:var(--mut2)}
 
+  /* ===== sprint tabs ===== */
+  .ptabs{position:sticky;top:52px;z-index:900;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:12px 0 10px;margin:14px auto 4px;background:linear-gradient(180deg,var(--bg) 78%,transparent)}
+  .ptab{font-family:'DM Sans','Outfit',sans-serif;font-size:15px;font-weight:800;padding:11px 22px;border-radius:13px;border:1px solid var(--line);background:var(--panel);color:var(--mut2);cursor:pointer;transition:.15s;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.2}
+  .ptab small{font-size:11px;color:var(--mut);font-weight:700;letter-spacing:.02em}
+  .ptab:hover{border-color:rgba(0,214,174,.55);color:var(--ink);transform:translateY(-1px)}
+  .ptab.on{background:rgba(0,214,174,.12);border-color:var(--teal);color:var(--teal);box-shadow:0 0 22px rgba(0,214,174,.16)}
+  .ptab.on small{color:rgba(0,214,174,.75)}
+  .ptab.soon{opacity:.4;cursor:default;pointer-events:none}
+  .pane{display:none}
+  .pane.on{display:block;animation:paneIn .25s ease}
+  @keyframes paneIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @media(max-width:768px){.ptabs{top:48px}.ptab{font-size:13px;padding:9px 14px}}
+
+  /* ===== readability bump: bigger type everywhere ===== */
+  .wrap{max-width:1120px}
+  .hd h1{font-size:33px}
+  .hd .sub{font-size:15px;max-width:730px}
+  .chip{font-size:11px}
+  .sec-head h2{font-size:23px}
+  .sec-sub{font-size:15px;line-height:1.65}
+  .sec-head .n{font-size:12px}
+  .incident h3{font-size:17px}
+  .incident p{font-size:14.5px;line-height:1.7}
+  .act b{font-size:14px}
+  .act > span{font-size:13px;line-height:1.6}
+  .owner{font-size:11px}
+  .stat .v{font-size:24px}
+  .stat .k{font-size:11px}
+  .rp{font-size:12.5px}
+  .dec .dt b{font-size:15px}
+  .dec .id{font-size:11px}
+  .dec p{font-size:13.5px;line-height:1.65}
+  .dec .who{font-size:12.5px}
+  .ws-head .tag{font-size:11px}
+  .ws-head h3{font-size:21px}
+  .ws-head p{font-size:14.5px;line-height:1.65}
+  .blk h4{font-size:13px}
+  .plain{font-size:15px;line-height:1.75;max-width:920px}
+  table.t{font-size:13.5px}
+  table.t th{font-size:11px}
+  table.t td{padding:10px 12px;line-height:1.6}
+  .never{font-size:14px;line-height:1.7}
+  .gate{font-size:13.5px;line-height:1.6;padding:13px 15px}
+  .gate .gi{font-size:15px}
+  .paper{padding:14px 16px}
+  .paper a{font-size:14px}
+  .paper .yr{font-size:11px}
+  .paper p{font-size:13px;line-height:1.6;margin-top:6px}
+  .person .ph b{font-size:15.5px}
+  .person .ph span{font-size:11px}
+  .task b{font-size:14px}
+  .task .tk{font-size:11px}
+  .task p{font-size:13px;line-height:1.6}
+  .task .done{font-size:12.5px}
+  .tl .d{font-size:12px}
+  .tl .w{font-size:14px;line-height:1.65}
+  .dodlist li{font-size:15px;line-height:1.65;padding:9px 0 9px 32px}
+  .mr{font-size:11px}
+  .next{font-size:14.5px;line-height:1.7}
+  .srcs{font-size:12px}
+
 /* ===== shared site header (sn-*) matches other ArtemisAI pages ===== */
 nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}
 nav.site-nav *{box-sizing:border-box}
@@ -232,6 +293,15 @@ body{padding-top:52px!important}
   </div>
 </div>
 
+<!-- ============ SPRINT TABS ============ -->
+<div class="ptabs" id="ptabs">
+  <button class="ptab on" data-pane="pane-start" onclick="playbookTab('pane-start')">Start here<small>the incident + how to read</small></button>
+  <button class="ptab" data-pane="pane-s8" onclick="playbookTab('pane-s8')">Sprint 8<small>5 to 18 Aug · predictions + Art-E</small></button>
+  <button class="ptab" data-pane="pane-s9" onclick="playbookTab('pane-s9')">Sprint 9<small>12 to 25 Aug · Best Times + watchdog</small></button>
+  <button class="ptab soon">Sprint 10<small>after S9 review</small></button>
+</div>
+
+<div class="pane on" id="pane-start">
 <!-- ============ INCIDENT ============ -->
 <div class="incident" id="incident">
   <h3>⚠ Before anything else: Meta killed our reach metrics, and the target is dead</h3>
@@ -240,10 +310,11 @@ body{padding-top:52px!important}
     <div class="act"><b>Day-zero action 1 · Revive the feed</b><span>Migrate LOKI insights to <span class="mono">post_total_media_view_unique</span> + <span class="mono">post_media_view</span>, drop the dead names. Every dark day is data lost forever, and Meta's ~2-year history window is expiring the oldest posts at the same time.</span><span class="owner">Muteeb + Asad · urgent</span></div>
     <div class="act"><b>Day-zero action 2 · Redefine the target</b><span>Rebuild the model target around what survives: new reach + shares/comments/reactions. Nothing downstream (ladders, bands, rule tables, training) can be built until this lands. Recommendation and protocol below in Workstream A.</span><span class="owner">Rafeh + Alex · decision needed</span></div>
   </div>
+  <p style="margin-top:12px;font-size:13px"><a href="#model" style="color:var(--teal);font-weight:700;text-decoration:none">→ The recommendation and back-test protocol are in Sprint 8, Workstream A (Decision zero)</a></p>
 </div>
 
 <!-- ============ HOW TO READ ============ -->
-<section>
+<section id="howto">
   <div class="sec-head"><span class="n">00</span><h2>How to read this page</h2><div class="rule"></div></div>
   <div class="grid3">
     <div class="card"><b style="font-size:13px">One sprint, fully explained</b><p class="plain" style="font-size:12px;margin-top:6px">Each sprint gets: the mission, the strategy per workstream, model inputs and outputs, flow diagrams, benchmarks and gates, the research it stands on, and every person's tickets in plain words.</p></div>
@@ -257,6 +328,9 @@ body{padding-top:52px!important}
   </div>
 </section>
 
+</div><!-- /pane-start -->
+
+<div class="pane" id="pane-s8">
 <!-- ============ S8 OVERVIEW ============ -->
 <section id="s8">
   <div class="sec-head"><span class="n">S8</span><h2>Sprint 8 · 5 to 18 Aug 2026 · Predictions + a voice</h2><div class="rule"></div></div>
@@ -692,6 +766,9 @@ body{padding-top:52px!important}
   </div>
 </section>
 
+</div><!-- /pane-s8 -->
+
+<div class="pane" id="pane-s9">
 <!-- ==================================================================== -->
 <!-- ============================ SPRINT 9 ============================== -->
 <!-- ==================================================================== -->
@@ -1052,6 +1129,7 @@ body{padding-top:52px!important}
   </div>
   <div class="srcs"><b>Sources:</b> Model Master Rules (24 Jul 2026, provisional; unreviewed rules marked) · Meta_Reach_Deprecation_Escalation (Faheem, 25 Jul 2026) · VD-PM-008 S8 Product Definitions (Rafeh, 11 Jul 2026) · Performance Model v1 Build Instruction (21 Jul 2026) · VD-015B A/B findings (18 Jul 2026) · Content Is Visual (Faheem) · the 12 Jun 2026 network-first decision (plan_drift) · sprint_tracker_mvp.html (13 S8 + 13 S9 tickets) · dependency_tree.html master plan · mockup_v3_web/mobile · S6/S7 sprint strategy pack. All research links on this page were fetched and verified against the live paper pages on 28 Jul 2026.</div>
 </section>
+</div><!-- /pane-s9 -->
 
 </div>
 
@@ -1085,6 +1163,50 @@ body{padding-top:52px!important}
     }
   }catch(e){}
 })();
+/* ===== sprint tabs ===== */
+var PANE_KEY='artemis_playbook_tab_v1';
+var PANE_MAP={
+  start:'pane-start', incident:'pane-start', howto:'pane-start',
+  s8:'pane-s8', decisions:'pane-s8', model:'pane-s8', arte:'pane-s8', incidentws:'pane-s8',
+  people:'pane-s8', timeline:'pane-s8', notdoing:'pane-s8', dod:'pane-s8',
+  'research-model':'pane-s8', 'research-arte':'pane-s8',
+  s9:'pane-s9', 's9-decisions':'pane-s9', 's9-besttimes':'pane-s9', 's9-watchdog':'pane-s9',
+  's9-match':'pane-s9', 's9-people':'pane-s9', 's9-timeline':'pane-s9', 's9-notdoing':'pane-s9',
+  's9-dod':'pane-s9', 'research-besttimes':'pane-s9', 'research-watchdog':'pane-s9',
+  'research-match':'pane-s9', next:'pane-s9'
+};
+function _setPane(paneId){
+  document.querySelectorAll('.pane').forEach(function(p){p.classList.toggle('on', p.id===paneId);});
+  document.querySelectorAll('.ptab[data-pane]').forEach(function(t){t.classList.toggle('on', t.getAttribute('data-pane')===paneId);});
+  try{localStorage.setItem(PANE_KEY, paneId);}catch(e){}
+}
+function playbookTab(paneId){
+  _setPane(paneId);
+  try{history.replaceState(null,'','#'+(paneId==='pane-start'?'start':paneId==='pane-s8'?'s8':'s9'));}catch(e){}
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function _handleHash(){
+  var h=location.hash.replace('#','');
+  if(!h) return false;
+  var pane=PANE_MAP[h];
+  if(!pane) return false;
+  _setPane(pane);
+  if(h!=='s8' && h!=='s9' && h!=='start'){
+    var el=document.getElementById(h);
+    if(el){
+      var y = el.getBoundingClientRect().top + window.scrollY - 148; /* clear nav + sticky tabs */
+      window.scrollTo({top: Math.max(0,y), behavior:'instant'});
+    }
+  } else { window.scrollTo({top:0,behavior:'instant'}); }
+  return true;
+}
+window.addEventListener('hashchange', _handleHash);
+(function(){
+  if(_handleHash()) return;
+  var saved=null; try{saved=localStorage.getItem(PANE_KEY);}catch(e){}
+  if(saved && document.getElementById(saved)) _setPane(saved);
+})();
+
 var _signoutFn=null;
 function handleLogout(){_showSignoutModal(function(){localStorage.removeItem('artemis_session');localStorage.removeItem('artemis_sprint_session');localStorage.removeItem('artemis_app_session');localStorage.removeItem('artemis_viewer_name');window.location.href='index.html';});}
 function _showSignoutModal(fn){_signoutFn=fn||function(){localStorage.removeItem('artemis_session');window.location.href='index.html';};document.getElementById('signout-modal').classList.add('open');}
