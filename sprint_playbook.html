@@ -224,11 +224,11 @@ body{padding-top:52px!important}
   <h1>The build, explained one sprint at a time</h1>
   <div class="sub">The tracker says <b>what</b> and <b>who</b>. The master plan says <b>where it all fits</b>. This page says <b>how and why</b>: what each model eats and produces, the technique behind it, the research it stands on, and the exact work each person does. Built sprint by sprint, starting with Sprint 8.</div>
   <div class="chips">
-    <span class="chip t">Sprint 8 · live</span>
-    <span class="chip">S9+ added one at a time</span>
-    <span class="chip a">4 decisions to lock</span>
+    <span class="chip t">Sprints 8 + 9 · live</span>
+    <span class="chip">S10+ added one at a time</span>
+    <span class="chip a">decisions marked, never silently resolved</span>
     <span class="chip r">1 live incident</span>
-    <span class="chip v">research backed</span>
+    <span class="chip v">research backed · 50+ verified papers</span>
   </div>
 </div>
 
@@ -251,8 +251,8 @@ body{padding-top:52px!important}
     <div class="card"><b style="font-size:13px">Honesty is the strategy</b><p class="plain" style="font-size:12px;margin-top:6px">We predict performance bands, never virality. Every claim ships with reasons and a calibrated probability. If the data is thin, the product says so instead of guessing. That is the moat.</p></div>
   </div>
   <div class="rail">
-    <span class="rp live">S8 · Predictions + Art-E</span>
-    <span class="rp lock">S9 · Best Times + velocity</span>
+    <a href="#s8" class="rp live" style="text-decoration:none">S8 · Predictions + Art-E</a>
+    <a href="#s9" class="rp live" style="text-decoration:none">S9 · Best Times + watchdog + match</a>
     <span class="rp lock">S10</span><span class="rp lock">S11</span><span class="rp lock">S12</span><span class="rp lock">S13</span><span class="rp lock">S14</span><span class="rp lock">S15</span><span class="rp lock">S16</span><span class="rp lock">S17</span><span class="rp lock">S18</span><span class="rp lock">S19</span><span class="rp lock">S20</span><span class="rp lock">S21</span><span class="rp lock">S22</span><span class="rp lock">S23 · Launch</span>
   </div>
 </section>
@@ -692,13 +692,365 @@ body{padding-top:52px!important}
   </div>
 </section>
 
+<!-- ==================================================================== -->
+<!-- ============================ SPRINT 9 ============================== -->
+<!-- ==================================================================== -->
+<section id="s9">
+  <div class="sec-head"><span class="n">S9</span><h2>Sprint 9 · 12 to 25 Aug 2026 · The habit hook, the watchdog, the quiet moat</h2><div class="rule"></div></div>
+  <p class="sec-sub"><b>The mission in one sentence:</b> turn each page's own rhythm into a concrete repeatable action (Best Times: the daily-habit hook), put a watchdog on every model we have shipped so nothing rots silently, and quietly start the network moat (the Discovery match score, algorithm only, no UI yet). S9 overlaps S8's second week by design: the models build while S8's surfaces wire. <b>Cut-order honesty:</b> Best Times is cut #1 if the date ever slips, so its scope stays tight and its value gets proven, not assumed.</p>
+  <div class="stats">
+    <div class="stat"><div class="v">13</div><div class="k">tickets</div></div>
+    <div class="stat"><div class="v">8</div><div class="k">owners</div></div>
+    <div class="stat"><div class="v">3</div><div class="k">workstreams</div></div>
+    <div class="stat"><div class="v">5</div><div class="k">gates to lock</div></div>
+    <div class="stat"><div class="v">2w</div><div class="k">12 Aug to 25 Aug</div></div>
+  </div>
+</section>
+
+<!-- ============ S9 DECISIONS ============ -->
+<section id="s9-decisions">
+  <div class="sec-head"><span class="n">S9·1</span><h2>Lock these first</h2><div class="rule"></div></div>
+  <div class="decs">
+    <div class="dec blocker">
+      <div class="dt"><span class="id">E0</span><b>Carry-in: the feed and the target</b></div>
+      <p>Best Times outcomes and the match graph read the era-flagged engagement series. If the LOKI migration (S8 day-zero) is not landed by 12 Aug, or D0 is still open, S9's model work has nothing honest to train on. Escalate on day 1, do not build around it.</p>
+      <div class="who"><b>Muteeb + Asad</b> (feed) · <b>Rafeh + Alex</b> (target) · precondition</div>
+    </div>
+    <div class="dec">
+      <div class="dt"><span class="id">E1</span><b>The lift pass line, declared before results</b></div>
+      <p>What counts as "posts in recommended slots did better" on held-out weeks: the metric, the control, and the number, written down before anyone sees the validation output. Same discipline as the NLP baseline test. Includes the confounding control (below).</p>
+      <div class="who"><b>Rafeh + Faheem</b> · due day 2</div>
+    </div>
+    <div class="dec">
+      <div class="dt"><span class="id">E2</span><b>Prophet compute pattern</b></div>
+      <p>Bulk weekly refresh vs on-demand per request. A typical page is cheap; 20 pages x per-request refits is not. The pipeline (VD-MLP-009A) cannot be built until the pattern and its budget are set.</p>
+      <div class="who"><b>Jill + Muteeb</b> · due day 2</div>
+    </div>
+    <div class="dec">
+      <div class="dt"><span class="id">E3</span><b>What a drift trip does</b></div>
+      <p>When the watchdog says a model is slipping: flag for retrain, route more traffic to audit, notify, or all three. Undefined trip actions become ignored alarms. Written into VD-AI-009B and reviewed weekly with Rafeh.</p>
+      <div class="who"><b>Faheem + Rafeh</b> · due week 1</div>
+    </div>
+    <div class="dec">
+      <div class="dt"><span class="id">E4</span><b>Match recipe v1, frozen</b></div>
+      <p>The 0-100 Discovery score's ingredients and weights (audience overlap, affinity, category, size proximity), frozen as v1 before serving. Per-factor breakdown surface stays Fast-Track. Validation protocol: Lewis judges the top 5 matches per pilot page before any score leaves the API.</p>
+      <div class="who"><b>Muteeb + Lewis</b> · due week 1</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S9 WORKSTREAM A ============ -->
+<section id="s9-besttimes">
+  <div class="sec-head"><span class="n">S9·2</span><h2>Workstream A · Best Times (the habit hook)</h2><div class="rule"></div></div>
+  <div class="ws">
+    <div class="ws-head">
+      <span class="tag">The rhythm · cut order #1, so prove it</span>
+      <h3>Your audience has a rhythm. We read it from your own history, honestly.</h3>
+      <p>Platform-default windows are a sanity floor only; Art-E never recommends off them alone <span class="mr">MR-7.1</span>. The real answer is the account's own 24h × 7d heatmap, computed from its own posts and normalised per slot so one viral 3am post can never paint a misleading hot cell <span class="mr">MR-7.2</span>. Publish timestamps are intraday even though Meta's metrics are daily, which is exactly why this feature is buildable when minute-scale velocity is not.</p>
+    </div>
+    <div class="ws-body">
+
+      <div class="blk">
+        <h4>Inputs and outputs</h4>
+        <div class="tw"><table class="t">
+          <tr><th>Direction</th><th>What</th><th>Rules</th></tr>
+          <tr><td>Eats</td><td>The page's publish timestamps (intraday) · per-slot engagement outcomes from the era-flagged series · post format mix per slot · page history depth</td><td>Era rule applies: outcomes never pooled across the 15-Jun break. Leakage-safe windows in the feature pipeline</td></tr>
+          <tr><td>Produces</td><td>The 24h × 7d heatmap · top recommended slots with calibrated confidence · one plain-English line ("your audience is most active Thursday 7 to 9pm") · a drift signal when the rhythm changes</td><td>Cells under 5 posts are silent, not greyed out <span class="mr">MR-7.4</span> <span class="mr">MR-2.5</span>. Sparse pages get "not enough history yet", never a misleading grid</td></tr>
+          <tr><td>Never</td><td>Recommendations from platform defaults alone · timing advice on the Predictions surface (that separation is deliberate <span class="mr">MR-7.6</span>) · a guarantee</td><td>Filza's disclaimer pattern from S8 applies: guidance, not a guarantee (VD-LEGAL-009)</td></tr>
+        </table></div>
+      </div>
+
+      <div class="blk">
+        <h4>Flow · from history to a recommended slot</h4>
+        <div class="diagram"><svg viewBox="0 0 1180 300" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans,Arial,sans-serif">
+          <defs><marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3a4a72"/></marker></defs>
+          <g font-size="11">
+            <rect x="14" y="90" width="164" height="80" rx="10" fill="#0f1320" stroke="#212b45"/>
+            <text x="96" y="118" fill="#e9eef8" text-anchor="middle" font-weight="700">Page history (rdl)</text>
+            <text x="96" y="136" fill="#8793ab" text-anchor="middle">timestamps + outcomes</text>
+            <text x="96" y="152" fill="#8793ab" text-anchor="middle">era-flagged</text>
+            <rect x="226" y="80" width="180" height="100" rx="12" fill="#101c2e" stroke="#38bdf8"/>
+            <text x="316" y="106" fill="#38bdf8" text-anchor="middle" font-weight="800" font-size="12">SLOT AGGREGATION</text>
+            <text x="316" y="124" fill="#a8b3c9" text-anchor="middle" font-size="10.5">24h × 7d cells</text>
+            <text x="316" y="140" fill="#a8b3c9" text-anchor="middle" font-size="10.5">normalised per slot</text>
+            <text x="316" y="158" fill="#8793ab" text-anchor="middle" font-size="10">under 5 posts: silent (MR-7.4)</text>
+            <rect x="454" y="80" width="180" height="100" rx="12" fill="#0d1f1b" stroke="#00D6AE"/>
+            <text x="544" y="106" fill="#00D6AE" text-anchor="middle" font-weight="800" font-size="12">PROPHET FIT</text>
+            <text x="544" y="124" fill="#a8b3c9" text-anchor="middle" font-size="10.5">weekly + daily seasonality</text>
+            <text x="544" y="140" fill="#a8b3c9" text-anchor="middle" font-size="10.5">per page, per metric</text>
+            <text x="544" y="158" fill="#8793ab" text-anchor="middle" font-size="10">bulk weekly refresh (E2)</text>
+            <rect x="682" y="80" width="170" height="100" rx="12" fill="#1a1428" stroke="#a78bfa"/>
+            <text x="767" y="106" fill="#a78bfa" text-anchor="middle" font-weight="800" font-size="12">RANK SLOTS</text>
+            <text x="767" y="124" fill="#a8b3c9" text-anchor="middle" font-size="10.5">top slots + calibrated</text>
+            <text x="767" y="140" fill="#a8b3c9" text-anchor="middle" font-size="10.5">confidence</text>
+            <text x="767" y="158" fill="#8793ab" text-anchor="middle" font-size="10">held-out-week lift vs E1 line</text>
+            <rect x="930" y="24" width="232" height="62" rx="10" fill="#0f1320" stroke="#00D6AE"/>
+            <text x="1046" y="49" fill="#e9eef8" text-anchor="middle" font-weight="700">Best Times calendar · VD-211</text>
+            <text x="1046" y="67" fill="#8793ab" text-anchor="middle">heatmap + plain-English rec</text>
+            <rect x="930" y="100" width="232" height="62" rx="10" fill="#0f1320" stroke="#a78bfa"/>
+            <text x="1046" y="125" fill="#e9eef8" text-anchor="middle" font-weight="700">Art-E slot line</text>
+            <text x="1046" y="143" fill="#8793ab" text-anchor="middle">"post Tue or Thu around 6pm"</text>
+            <rect x="454" y="216" width="398" height="60" rx="12" fill="#1f1212" stroke="#f87171"/>
+            <text x="653" y="240" fill="#f87171" text-anchor="middle" font-size="11.5" font-weight="800">DRIFT DETECTOR · has this page's rhythm changed?</text>
+            <text x="653" y="258" fill="#a8b3c9" text-anchor="middle" font-size="10.5">era break excluded by construction · feeds the watchdog + model dashboard</text>
+          </g>
+          <g stroke="#3a4a72" stroke-width="1.6" fill="none">
+            <path d="M178 130 L226 130" marker-end="url(#arr3)"/>
+            <path d="M406 130 L454 130" marker-end="url(#arr3)"/>
+            <path d="M634 130 L682 130" marker-end="url(#arr3)"/>
+            <path d="M852 110 C 890 100 892 62 930 56" marker-end="url(#arr3)"/>
+            <path d="M852 140 L930 133" marker-end="url(#arr3)"/>
+            <path d="M544 180 L544 216" marker-end="url(#arr3)"/>
+          </g>
+          <text x="352" y="282" fill="#8793ab" font-size="10">weekly refresh: timing tables weekly, content tables monthly, the asymmetry is deliberate (MR-7.3)</text>
+        </svg></div>
+      </div>
+
+      <div class="blk">
+        <h4>The honesty gate: proving lift without fooling ourselves</h4>
+        <p class="plain"><span class="hl">The confounding trap:</span> posts published at good times may simply be better posts, and Facebook's own measurement research shows observational methods mislead even with rich controls. So validation is <b>within page</b>, on held-out weeks, controlling for content type (the FUSION label), against the E1 pass line committed to the repo before scoring (example shape: median within-page lift above zero, positive on at least 13 of 20 pages, sign test p under 0.05, accumulated over 6+ held-out weeks). <b>Placebo checks run every time:</b> permuted slot labels and a stale 8-week-old heatmap must show NO lift, or the metric is confounded. Power reality at ~44 posts/month: single-week checks cannot detect lifts under ~20%, so results report intervals over accumulated weeks, never a one-week verdict.</p>
+        <p class="plain" style="margin-top:8px"><span class="hl">Two spec upgrades from the research:</span> (1) a 168-cell grid needs 4+ months of posts to escape sparsity at our volume, so v1 recommends <b>pooled day-part × day-type cells with shrinkage toward the page mean</b>, weekday and weekend rows kept separate (audiences genuinely shift ~2h later on weekends), exact-hour cells only where the samples exist. (2) <b>Heatmaps are perishable:</b> timing value is relative to current follower feed activity, so cells expire on the weekly refresh, and a drift trip forces a rebuild with an honest "rhythm changed, re-learning" state in the UI. If lift does not clear the line, the heatmap still ships as a descriptive view; the recommendation waits until it earns its confidence.</p>
+      </div>
+
+      <div class="blk" id="research-besttimes">
+        <h4>Research foundation · every link verified 28 Jul 2026</h4>
+        <div class="grid2">
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/1506.02089" target="_blank">When-To-Post on Social Networks</a><span class="yr">Spasojevic et al (Lithium/Klout) · KDD 2015</span></div><p>Personalised per-account schedules from post-to-reaction histories, deployed in production on ~0.5M users: <b>up to 17% reaction gain on Facebook</b> (4% on Twitter). The academic license for Best Times, and the <b>ceiling</b> for our pass line: expect 0 to 15%, never promise 17. Needs only reaction/comment/share timestamps: all survived the metric kill.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/1610.05773" target="_blank">RedQueen: An Online Algorithm for Smart Broadcasting</a><span class="yr">Zarezade et al · WSDM 2017</span></div><p>Timing works by <b>beating feed competition, not hitting a magic clock hour</b>: the optimal moment depends on current follower activity. Why heatmaps are perishable and drift-invalidated, not carved in stone.</p></div>
+          <div class="paper"><div class="pt"><a href="https://cs.stanford.edu/people/jure/pubs/reddit-icwsm13.pdf" target="_blank">What's in a Name? (the resubmission study)</a><span class="yr">Lakkaraju, McAuley, Leskovec · ICWSM 2013</span></div><p>~132K resubmissions of identical images: <b>content dominates; community, title and time are secondary but real</b>. The natural-experiment design (same image, different slot) is the model for our content-confound check on recycled meme formats.</p></div>
+          <div class="paper"><div class="pt"><a href="https://pubmed.ncbi.nlm.nih.gov/21960633/" target="_blank">Diurnal and Seasonal Mood (509M tweets)</a><span class="yr">Golder, Macy · Science 2011</span></div><p>Audience rhythms are stable and circadian, and <b>the morning peak shifts ~2 hours later on weekends</b>. Why weekday and weekend rows never pool.</p></div>
+          <div class="paper"><div class="pt"><a href="https://upcommons.upc.edu/handle/2117/24541" target="_blank">Factors Influencing Popularity of Branded Content in Facebook Fan Pages</a><span class="yr">Sabate et al · EMJ 2014</span></div><p>On real Facebook fan pages, <b>timing moved comments more than likes</b>. Supports per-metric slots (comment-best vs reaction-best) as a v2 candidate, and its tiny sample mirrors our pilot scale: the 5-post silence rule is the right guard.</p></div>
+          <div class="paper"><div class="pt"><a href="https://peerj.com/preprints/3190/" target="_blank">Forecasting at Scale (Prophet)</a><span class="yr">Taylor, Letham · 2017</span></div><p>The fit recipe: piecewise trend + Fourier seasonality, native tolerance for missing days (pages that skip days need no imputation). For us: <b>weekly seasonality only (Fourier order 3), daily seasonality OFF</b> (meaningless on daily-grain metrics; hour-of-day belongs to the timestamp heatmap), yearly only with 2+ years of history.</p></div>
+          <div class="paper"><div class="pt"><a href="https://otexts.com/fpp3/prophet.html" target="_blank">Forecasting: Principles and Practice §12.2</a><span class="yr">Hyndman, Athanasopoulos · 2021</span></div><p>Prophet <b>rarely beats classical baselines</b> (their comparison: RMSE 248 vs ARIMA 216). So every per-page Prophet fit must beat a seasonal-naive / STL baseline on rolling-origin error <b>before its output is shown</b>; ship the simpler decomposition where it loses.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/1812.01767" target="_blank">RobustSTL</a><span class="yr">Wen et al · AAAI 2019</span></div><p>Squared-error decomposition lets one anomaly bend the whole seasonal profile. Meme pages are anomaly generators by design: <b>log1p-transform + winsorise per page before any fit</b>, the series-level twin of per-slot normalisation.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2111.15397" target="_blank">NeuralProphet</a><span class="yr">Triebe et al · 2021</span></div><p>Documented Prophet weakness: no autoregressive context, so it ignores yesterday. For drift purposes: <b>watch residual autocorrelation or add a lagged regressor</b>; a rhythm change shows up there first.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2009.00148" target="_blank">Design and Analysis of Switchback Experiments</a><span class="yr">Bojinov et al · Mgmt Sci 2023</span></div><p>The causal upgrade if pilots opt in: alternate week-blocks of follow-the-recommendation vs business-as-usual on the same page, blocks long relative to viral carryover, randomisation inference for n≈20, analysed intention-to-treat. With <a href="https://pubsonline.informs.org/doi/10.1287/mksc.2018.1135" target="_blank" style="color:var(--blue)">Gordon et al (Facebook, Marketing Sci 2019)</a>: observational lift stays labelled observational, and <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5856500/" target="_blank" style="color:var(--blue)">Nosek et al (PNAS 2018)</a>: the pass line goes in the repo before scoring.</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ S9 WORKSTREAM B ============ -->
+<section id="s9-watchdog">
+  <div class="sec-head"><span class="n">S9·3</span><h2>Workstream B · The model-health watchdog</h2><div class="rule"></div></div>
+  <div class="ws">
+    <div class="ws-head b">
+      <span class="tag">The immune system</span>
+      <h3>Every model we ship can rot silently. From S9, none of them can rot invisibly.</h3>
+      <p>Five NLP heads, the fusion classifier, and now the best-times model run in production with no ground-truth labels arriving. The watchdog monitors what CAN be observed without labels: the live confidence distribution and label mix of every model against its training baseline, with stratified spot-checks turning "drift suspected" into "accuracy measured". The S6 principle holds: <b>alert only on drift AND a quality drop together</b>, never on drift alone, or the team learns to ignore the alarm.</p>
+    </div>
+    <div class="ws-body">
+
+      <div class="blk vio">
+        <h4>Flow · from live predictions to a red light someone acts on</h4>
+        <div class="diagram"><svg viewBox="0 0 1180 250" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans,Arial,sans-serif">
+          <defs><marker id="arr4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3a4a72"/></marker></defs>
+          <g font-size="11">
+            <rect x="14" y="70" width="168" height="90" rx="10" fill="#0f1320" stroke="#212b45"/>
+            <text x="98" y="98" fill="#e9eef8" text-anchor="middle" font-weight="700">Live predictions</text>
+            <text x="98" y="116" fill="#8793ab" text-anchor="middle">5 NLP heads · fusion</text>
+            <text x="98" y="132" fill="#8793ab" text-anchor="middle">best-times · (perf model)</text>
+            <rect x="230" y="60" width="190" height="110" rx="12" fill="#101c2e" stroke="#38bdf8"/>
+            <text x="325" y="88" fill="#38bdf8" text-anchor="middle" font-weight="800" font-size="12">DISTRIBUTIONS</text>
+            <text x="325" y="106" fill="#a8b3c9" text-anchor="middle" font-size="10.5">confidence curve + label mix</text>
+            <text x="325" y="122" fill="#a8b3c9" text-anchor="middle" font-size="10.5">vs training baseline</text>
+            <text x="325" y="140" fill="#8793ab" text-anchor="middle" font-size="10">15-Jun era break annotated,</text>
+            <text x="325" y="154" fill="#8793ab" text-anchor="middle" font-size="10">never counted as organic drift</text>
+            <rect x="468" y="60" width="190" height="110" rx="12" fill="#0d1f1b" stroke="#00D6AE"/>
+            <text x="563" y="88" fill="#00D6AE" text-anchor="middle" font-weight="800" font-size="12">JOINT RULE</text>
+            <text x="563" y="106" fill="#a8b3c9" text-anchor="middle" font-size="10.5">drift AND quality-proxy drop</text>
+            <text x="563" y="122" fill="#a8b3c9" text-anchor="middle" font-size="10.5">together, or no alarm</text>
+            <text x="563" y="140" fill="#8793ab" text-anchor="middle" font-size="10">the S6 rule: cuts false alarms</text>
+            <text x="563" y="154" fill="#8793ab" text-anchor="middle" font-size="10">60-80%</text>
+            <rect x="706" y="60" width="150" height="110" rx="12" fill="#1a1428" stroke="#a78bfa"/>
+            <text x="781" y="88" fill="#a78bfa" text-anchor="middle" font-weight="800" font-size="12">STATE</text>
+            <text x="781" y="110" fill="#34d399" text-anchor="middle" font-size="11" font-weight="700">healthy</text>
+            <text x="781" y="128" fill="#f5a623" text-anchor="middle" font-size="11" font-weight="700">watch</text>
+            <text x="781" y="146" fill="#f87171" text-anchor="middle" font-size="11" font-weight="700">slipping</text>
+            <rect x="920" y="18" width="242" height="56" rx="10" fill="#0f1320" stroke="#00D6AE"/>
+            <text x="1041" y="41" fill="#e9eef8" text-anchor="middle" font-weight="700">Model dashboard · VD-DASH-009</text>
+            <text x="1041" y="59" fill="#8793ab" text-anchor="middle">slipping is the loudest thing on the page</text>
+            <rect x="920" y="88" width="242" height="56" rx="10" fill="#0f1320" stroke="#f5a623"/>
+            <text x="1041" y="111" fill="#e9eef8" text-anchor="middle" font-weight="700">Trip action (E3)</text>
+            <text x="1041" y="129" fill="#8793ab" text-anchor="middle">retrain flag (S8 pipeline) + audit routing</text>
+            <rect x="920" y="158" width="242" height="56" rx="10" fill="#0f1320" stroke="#38bdf8"/>
+            <text x="1041" y="181" fill="#e9eef8" text-anchor="middle" font-weight="700">Spot-checks</text>
+            <text x="1041" y="199" fill="#8793ab" text-anchor="middle">stratified by confidence · human/DeepSeek</text>
+          </g>
+          <g stroke="#3a4a72" stroke-width="1.6" fill="none">
+            <path d="M182 115 L230 115" marker-end="url(#arr4)"/>
+            <path d="M420 115 L468 115" marker-end="url(#arr4)"/>
+            <path d="M658 115 L706 115" marker-end="url(#arr4)"/>
+            <path d="M856 95 C 890 85 888 52 920 46" marker-end="url(#arr4)"/>
+            <path d="M856 115 L920 116" marker-end="url(#arr4)"/>
+            <path d="M856 135 C 890 145 888 180 920 186" marker-end="url(#arr4)"/>
+          </g>
+        </svg></div>
+        <p class="plain" style="margin-top:8px">Drift is measured, not assumed: the stratified spot-check sample (weighted toward low-confidence predictions) is what turns a distribution shift into an estimated accuracy number, cheaply. The watchdog state is per model, and "slipping" must be visible before a pilot notices: that is the whole point of VD-DASH-009.</p>
+      </div>
+
+      <div class="blk vio" id="research-watchdog">
+        <h4>Research foundation · every link verified 28 Jul 2026</h4>
+        <div class="grid2">
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/1810.11953" target="_blank">Failing Loudly: Detecting Dataset Shift</a><span class="yr">Rabanser, Günnemann, Lipton · NeurIPS 2019</span></div><p>The best shift detector in a broad benchmark is the simplest: <b>KS tests on the model's own softmax outputs</b> (BBSDs), Bonferroni-corrected. Exactly what VD-AI-009B monitors: the confidence distribution, per class, vs the training baseline.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/1802.03916" target="_blank">Black-Box Shift Estimation (BBSE)</a><span class="yr">Lipton, Wang, Smola · ICML 2018</span></div><p>Estimates how the live label mix moved using only predictions + the training confusion matrix. For us: a <b>diagnostic reason string</b> ("more toxic-looking comments this week"), not a correction, since meme-culture drift violates its pure-label-shift assumption.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2201.04234" target="_blank">Leveraging Unlabeled Data to Predict Error (ATC)</a><span class="yr">Garg et al · ICLR 2022</span></div><p>Learns a confidence threshold that <b>estimates live accuracy with no labels</b>. The watchdog's quality-proxy half: alert = shift test fires AND ATC-estimated accuracy drops below the pre-declared line. Backtest ATC against the June era break before trusting it.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2103.05331" target="_blank">Active Testing: Sample-Efficient Model Evaluation</a><span class="yr">Kossen et al · ICML 2021</span></div><p>Stratify spot-checks by confidence bucket, over-sample the low-confidence strata, reweight to an unbiased estimate: <b>~4x the effective audit size</b> of the same weekly review budget. The design for our human/DeepSeek spot-check channel.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2007.06299" target="_blank">Monitoring and explainability of models in production</a><span class="yr">Klaise et al (alibi-detect) · ICML W 2020</span></div><p>The architecture template: monitoring runs <b>async on logged outputs, never in the inference path</b>, and the detectors (KS, MMD, BBSD) exist as maintained implementations in alibi-detect. Do not hand-roll the statistics.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/0710.3742" target="_blank">Bayesian Online Changepoint Detection</a><span class="yr">Adams, MacKay · 2007</span></div><p>Maintains P(rhythm changed) online: maps straight onto our odds-with-reasons house style for the Prophet drift signal. <b>Run on residuals, never the raw series</b> (leftover weekly seasonality is the main source of periodic false alarms), with a heavy-tailed observation model so a viral spike is not a mean shift.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/1101.1438" target="_blank">Optimal detection of changepoints (PELT)</a><span class="yr">Killick, Fearnhead, Eckley · JASA 2012</span></div><p>Exact segmentation in linear time: essentially free on our tiny per-page series, so it runs as the <b>offline confirmation pass</b> in the weekly job. The penalty constant is the one pre-declarable false-alarm knob. With <a href="https://arxiv.org/abs/1609.07363" target="_blank" style="color:var(--blue)">Fearnhead + Rigaill 2019</a> (only bounded losses survive extreme outliers) and <a href="https://arxiv.org/abs/1801.00718" target="_blank" style="color:var(--blue)">ruptures</a> as the production library.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/2003.06222" target="_blank">An Evaluation of Change Point Detection Algorithms</a><span class="yr">van den Burg, Williams · 2020</span></div><p>Default hyperparameters demonstrably underperform, and <b>even human annotators disagree on where changepoints are</b>. So: tune the hazard and penalty on a small annotated set of our own pages before launch, and surface drift as a confidence band, never a certainty.</p></div>
+        </div>
+        <p class="plain" style="margin-top:10px"><b>The assembled watchdog recipe:</b> weekly async job per model · era-keyed baselines frozen at training time · BBSDs KS tests + ATC accuracy estimate · alert only on the joint condition against pre-declared lines · false-discovery correction across the whole alert family (5+ models × several tests, or alarm fatigue wins) · forced changepoint at the 15-Jun era boundary so Meta's API change can never masquerade as organic drift · per-page drift verdicts require 50+ observations, the watchdog's twin of the 5-post rule.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ S9 WORKSTREAM C ============ -->
+<section id="s9-match">
+  <div class="sec-head"><span class="n">S9·4</span><h2>Workstream C · Discovery match v1 + the honest velocity spec</h2><div class="rule"></div></div>
+  <div class="ws">
+    <div class="ws-head r">
+      <span class="tag">The quiet moat · approved 12 Jun, owner Muteeb</span>
+      <h3>The match score: which pages belong together, ranked 0 to 100</h3>
+      <p>The network-first decision moved Discovery into the MVP with zero scope cuts elsewhere, paid for by Muteeb owning the slice. S9 builds the <b>algorithm only</b>: the UI (Matches tab, VD-218) lands in S13. Privacy rule inherited from AFFINITY-011: the co-engagement graph is de-identified at ingest, before any data leaves the pipeline.</p>
+    </div>
+    <div class="ws-body">
+      <div class="blk">
+        <h4>How the score is built (VD-AI-013B)</h4>
+        <div class="tw"><table class="t">
+          <tr><th>Step</th><th>What happens</th><th>Notes</th></tr>
+          <tr><td>1 · Graph</td><td>Bipartite commenters × pages graph from de-identified comment co-occurrence (S7 AFFINITY-011), projected to page-page edges weighted by shared audience</td><td>Cross-page graph = VD-AI-013A. Overlap measures must correct for page-size bias (a tiny page overlaps "everything")</td></tr>
+          <tr><td>2 · Score</td><td>Combine audience overlap + affinity strength + category match + size proximity into one 0-100 match score per candidate pair</td><td>Recipe and weights frozen as v1 (E4); per-factor breakdown surface stays Fast-Track</td></tr>
+          <tr><td>3 · Validate</td><td>Lewis judges the top 5 matches per pilot page: do they make domain sense? Recorded review, pass before serving</td><td>Precision-at-5 with a domain expert is the honest metric when no click feedback exists yet</td></tr>
+          <tr><td>4 · Serve</td><td>Scores exposed through the Discovery v1 endpoints (VD-AGG-API-013), tenant-scoped, consumed by the S13 Matches tab</td><td>Cross-page patterns stay model inputs, never client-facing claims about their page <span class="mr">MR-2.9</span></td></tr>
+        </table></div>
+      </div>
+      <div class="blk">
+        <h4>The velocity spec, carried honestly (pending ticket ids)</h4>
+        <p class="plain">From the S8 research: minute-scale early warning is dead on a daily API, and the substitute is specced here so it stops being a hand-wave. <span class="hl">The day-2 maturity grader:</span> grade every post at day 2 against its predicted day-30 within-page percentile, starting with a per-page log-linear scaler (Szabo-Huberman) and upgrading with the [day-1, day-2] daily-delta vector of views + shares + comments + reactions (Pinto et al: ~21% error cut over plain scaling). It depends on the weekly maturity re-poll (Faheem + Muteeb, designed, in the escalation tracker) and on Faheem's page-level viral-metric probe, which decides whether anything richer is ever possible. This is the honest ancestor of Performance Radar: not built this sprint, specced this sprint, so S10 planning can size it with real numbers.</p>
+      </div>
+      <div class="blk" id="research-match">
+        <h4>Research foundation · every link verified 28 Jul 2026</h4>
+        <div class="grid2">
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/0707.0540" target="_blank">How to project a bipartite network?</a><span class="yr">Zhou, Ren, Medo, Zhang · Phys Rev E 2007</span></div><p>Unweighted projections throw away most of the structure. <b>Resource-allocation weighting</b> splits each commenter's contribution across every page they engage, so one hyperactive meme commenter cannot inflate every pairwise overlap.</p></div>
+          <div class="paper"><div class="pt"><a href="https://www.cs.cornell.edu/home/kleinber/link-pred.pdf" target="_blank">The Link Prediction Problem for Social Networks</a><span class="yr">Liben-Nowell, Kleinberg · 2004</span></div><p><b>Adamic-Adar (down-weight shared neighbours by 1/log degree) beats raw common neighbours and Jaccard</b> across every tested network (54.8x random at best). The core graph signal for the 0-100 score, cheap enough for a weekly run over 3.3M comments.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/1010.0725" target="_blank">Link Prediction in Complex Networks: A Survey</a><span class="yr">Lü, Zhou · Physica A 2011</span></div><p>The menu of similarity indices, and one trap flagged for us: <b>the overlap coefficient's min-degree denominator makes every tiny page look identical to any big page that contains its audience</b>. Handle size with an explicit size-proximity feature instead.</p></div>
+          <div class="paper"><div class="pt"><a href="https://academic.oup.com/joc/article/68/1/26/4858530" target="_blank">Networks of Audience Overlap in Digital News</a><span class="yr">Mukerjee et al · J. Communication 2018</span></div><p>The closest published analogue to Discovery, and its central lesson: <b>filter every co-occurrence edge against a null model before scoring</b>: raw overlap counts produced "a completely different ranking" than significance-tested ones. The graph-side twin of the 5-post silence rule.</p></div>
+          <div class="paper"><div class="pt"><a href="https://arxiv.org/abs/0803.0476" target="_blank">Fast unfolding of communities (Louvain)</a><span class="yr">Blondel et al · 2008</span></div><p>Audience communities on the filtered projection: same-cluster membership is both a score component and a human-readable reason ("shares an audience cluster with pages you track"). Wildly overpowered at 20 pages, which means it stays fast as Discovery grows.</p></div>
+          <div class="paper"><div class="pt"><a href="https://cs.uwaterloo.ca/~jimmylin/publications/Satuluri_etal_KDD2020.pdf" target="_blank">SimClusters (Twitter)</a><span class="yr">Satuluri et al · KDD 2020</span></div><p>The production blueprint at scale: sparse, <b>interpretable community vectors</b> from a bipartite graph, similar-producer retrieval by cosine similarity, the community coordinates doubling as reasons. Our upgrade path when candidates outgrow the pilot set.</p></div>
+          <div class="paper"><div class="pt"><a href="https://grouplens.org/site-content/uploads/evaluating-TOIS-20041.pdf" target="_blank">Evaluating Collaborative Filtering Recommender Systems</a><span class="yr">Herlocker et al · ACM TOIS 2004</span></div><p>With zero click feedback before launch, Discovery is a "Find Good Items" task: <b>expert-judged precision-at-k with the pass line declared before results</b> (e.g. at least 60% of top-5 matches judged relevant), one metric, not a battery. That is exactly Lewis's E4 review.</p></div>
+        </div>
+        <p class="plain" style="margin-top:10px"><b>The assembled match recipe:</b> de-identified bipartite graph → resource-allocation weighted projection → significance-filter edges against a hypergeometric null → Adamic-Adar as the graph signal + Louvain community bonus + category match + size proximity → the frozen 0-100 blend, every component doubling as a reason string. Privacy posture: after projection, store only pairwise counts, never commenter ids. One scale honesty note: this literature runs on graphs orders of magnitude larger; at 20 pages, edge significance and honest sparse states matter far more than algorithm choice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S9 PEOPLE ============ -->
+<section id="s9-people">
+  <div class="sec-head"><span class="n">S9·5</span><h2>Who does what in Sprint 9</h2><div class="rule"></div></div>
+  <div class="people">
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#00d4aa,#38bdf8)">F</div><div><b>Faheem</b><span>AI Engineer · the models</span></div></div>
+      <div class="task"><span class="tk">VD-AI-009A</span><b>Best Times model + Prophet drift</b><p>Per-page, per-metric seasonality with Prophet; recommended slots + calibrated confidence; per-slot normalisation so one viral post cannot skew a cell; the drift signal when a page's rhythm changes.</p><div class="done">held-out-week lift clears the E1 line; output handed to VD-MLP-009A with a versioned contract</div></div>
+      <div class="task"><span class="tk">VD-AI-009B</span><b>NLP accuracy-drift watchdog</b><p>Live confidence + label-mix tracking vs training baselines for every production model; thresholds that mean "slipping"; stratified spot-check sampling; the documented trip action (E3).</p><div class="done">a seeded drift is caught, noise is not, and the trip action is written down</div></div>
+      <div class="task"><span class="tk">VD-QA-AI-009</span><b>Model-test suite extension</b><p>Gold sets for best-times (lift regression, sparse pages, strong vs flat rhythms) and the watchdog (seeded-drift sensitivity, false-alarm control).</p><div class="done">one green run gates each model change, wired to both dashboards</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#38bdf8,#6366f1)">M</div><div><b>Muteeb</b><span>ML platform · pipeline + the moat</span></div></div>
+      <div class="task"><span class="tk">VD-MLP-009A</span><b>Best-times pipeline + serving + drift plumbing</b><p>Leakage-safe per-slot feature assembly; tenant-scoped serving API cached per page/week; Prophet on the E2 schedule (bulk, not per request); drift signals through the one metrics API.</p><div class="done">calendar page reads the API; compute inside Jill's budget; tenant isolation verified</div></div>
+      <div class="task"><span class="tk">VD-AI-013B</span><b>Discovery match algorithm (the network slice)</b><p>Page-page similarity over the de-identified co-engagement graph + attribute similarity, combined into the frozen v1 0-100 score; served via the Discovery endpoints for S13.</p><div class="done">Lewis's top-5 review passes and is recorded; scores live behind the tenant-scoped API</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#00d4aa,#a78bfa)">A</div><div><b>Asad</b><span>CTO · the surfaces</span></div></div>
+      <div class="task"><span class="tk">VD-211</span><b>Best Times calendar page</b><p>The 24h × 7d heatmap + the plain-English Art-E slot recommendation with its confidence, shared account/range selector from Analytics, honest "not enough history yet" state.</p><div class="done">matches the mockup on desktop + mobile; a pilot can point at the brightest cell and say "post here" unprompted</div></div>
+      <div class="task"><span class="tk">VD-DASH-009</span><b>Drift surfacing on the model dashboard</b><p>Watchdog state per model (healthy / watch / slipping), the best-times quality + Prophet drift signal alongside the NLP models; slipping is the loudest thing on the page.</p><div class="done">a seeded bad metric is the first thing a reviewer notices, in under two seconds</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#34d399,#00d4aa)">R</div><div><b>Rafeh</b><span>Product Manager · definitions + gates</span></div></div>
+      <div class="task"><span class="tk">VD-RAFEH-009B</span><b>S9 definition + Best Times acceptance + cut-line</b><p>What a useful recommendation looks like, written before build; owns E1 (the pre-declared lift line) with Faheem; runs the weekly drift review; keeps cut-order #1 scope tight.</p><div class="done">acceptance run on real pilot data, pass/fail/defer recorded</div></div>
+      <div class="task"><span class="tk">VD-QA-009</span><b>QA dashboard + S9 sign-off</b><p>Best Times page + watchdog on the QA board with per-feature pass/fail, model QA pulled from Faheem's suite, go/no-go current.</p><div class="done">evidence attached per feature; failures become owned defect tickets</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#f5a623,#f87171)">A</div><div><b>Alex</b><span>CEO · the habit</span></div></div>
+      <div class="task"><span class="tk">VD-STRAT-009MVP</span><b>Pilot KPIs + the daily-habit checklist</b><p>The KPI definition doc (D7 active, D30 active, alert-engage rate, posts-acted-on per week: numerator, denominator, exclusions), and the "why open this tomorrow?" checklist applied to every feature before ship. Confirms Best Times is a concrete repeatable action, the habit hook.</p><div class="done">KPIs written and aligned with Rafeh's pilot synthesis; one feature reviewed against the checklist this sprint</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#f87171,#a78bfa)">F</div><div><b>Filza</b><span>CLO · the words</span></div></div>
+      <div class="task"><span class="tk">VD-LEGAL-009</span><b>Automated-advice legal position</b><p>Posting-time recommendations framed as guidance not guarantee, consistent with the S8 disclaimer pattern; confirm best-times + drift processing adds no new personal-data handling beyond the DPA.</p><div class="done">the concrete disclaimer rule confirmed with engineering, reviewed and filed</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#38bdf8,#34d399)">J</div><div><b>Jill</b><span>Ops · the money</span></div></div>
+      <div class="task"><span class="tk">VD-OPS-009MVP</span><b>Prophet + drift compute cost review</b><p>Per-page Prophet cost, the E2 bulk-vs-on-demand decision with Muteeb, alarms so best-times + drift compute cannot exceed budget, monitoring-subscription waste review, Q3 budget refresh to Alex and Asad.</p><div class="done">first week's actuals reviewed against budget; alarms proven</div></div>
+    </div>
+
+    <div class="person">
+      <div class="ph"><div class="av" style="background:linear-gradient(135deg,#a78bfa,#38bdf8)">L</div><div><b>Lewis</b><span>CO · the domain check</span></div></div>
+      <div class="task"><span class="tk">VD-LEWIS-009</span><b>What "best time" means per page + match sense-check</b><p>Which pilot pages live or die by timing vs where it barely matters; sense-check the model's slots against what each pilot already knows; flag thin-history pages; judge the Discovery top-5 matches (E4); pick the best Best-Times demo pilot.</p><div class="done">findings with Rafeh + the engineers; the match review recorded; demo pilot named</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ S9 TIMELINE ============ -->
+<section id="s9-timeline">
+  <div class="sec-head"><span class="n">S9·6</span><h2>The two weeks</h2><div class="rule"></div></div>
+  <div class="tl">
+    <div class="d">Day 1 · Wed 12 Aug</div><div class="w"><b>Preconditions checked, gates declared.</b> E0 verified (feed alive, target locked) or escalated before anything builds. Rafeh + Faheem write the E1 lift line. Jill + Muteeb settle E2. Lewis starts the timing domain read.</div>
+    <div class="d">Week 1</div><div class="w"><b>Foundations.</b> Muteeb: slot-feature pipeline + serving skeleton + match graph build. Faheem: slot aggregation + Prophet fits + watchdog baselines. Asad: calendar page on the mock contract + dashboard states. E3 trip action and E4 recipe frozen.</div>
+    <div class="d">Week 2</div><div class="w"><b>Validate + wire.</b> Held-out-week lift vs the E1 line; watchdog seeded-drift test; calendar + dashboard wired to live APIs; Lewis's top-5 match review; Filza's disclaimer rule confirmed in the UI; Rafeh's acceptance on real pilot data.</div>
+    <div class="d">Day 10 · Tue 25 Aug</div><div class="w"><b>Demo + go/no-go.</b> The pilot demo: open Best Times, point at the brightest cell, hear the plain-English recommendation with its confidence, then show the model dashboard catching a seeded drift. Habit hook + immune system in one demo.</div>
+  </div>
+</section>
+
+<!-- ============ S9 NOT DOING ============ -->
+<section id="s9-notdoing">
+  <div class="sec-head"><span class="n">S9·7</span><h2>What Sprint 9 is deliberately NOT doing</h2><div class="rule"></div></div>
+  <div class="grid2">
+    <div class="never"><b>No timing advice on the prediction surfaces.</b> The band chip still does not get to mention a slot; Best Times is its own surface with its own cut order. <span class="mr">MR-7.6</span></div>
+    <div class="never"><b>No Discovery UI.</b> The match algorithm ships behind an API; the Matches tab is S13. No cross-page claim reaches a client unless it also holds on their own ladder with 5+ samples. <span class="mr">MR-2.9</span></div>
+    <div class="never"><b>No minute-scale velocity, still.</b> The day-2 maturity grader is specced (S9·4), not built; nothing pretends to be a live take-off alarm.</div>
+    <div class="never"><b>No per-request Prophet, no trend-momentum timing.</b> Compute runs on the E2 schedule; topic-momentum timing (post 2 to 4h after a trend peaks) needs a trend-ingestion pipeline that is not scoped: flagged S11+. <span class="mr">MR-7.5</span></div>
+  </div>
+</section>
+
+<!-- ============ S9 DOD ============ -->
+<section id="s9-dod">
+  <div class="sec-head"><span class="n">S9·8</span><h2>Sprint 9 definition of done</h2><div class="rule"></div></div>
+  <div class="card">
+    <ul class="dodlist">
+      <li><b>Best Times live:</b> heatmap normalised per slot, cells under 5 posts silent, sparse pages honest, recommendation in plain English with confidence and sample count.</li>
+      <li><b>Lift proven or scoped down:</b> held-out-week validation against the pre-declared E1 line, within page, controlling for content type; if it fails, the heatmap ships descriptive and the recommendation waits.</li>
+      <li><b>Watchdog live:</b> every production model has a health state; a seeded drift trips it, noise does not; the era break never reads as organic drift; the trip action is documented and rehearsed.</li>
+      <li><b>Dashboard:</b> slipping is visually unmissable in under two seconds, behind the team login, desktop and mobile.</li>
+      <li><b>Match v1:</b> 0-100 scores served tenant-scoped from the frozen recipe; Lewis's top-5 domain review recorded as a pass.</li>
+      <li><b>The velocity spec written:</b> day-2 maturity grader specced with owners and dependencies, ready to size in S10 planning.</li>
+      <li><b>Money:</b> Prophet + drift compute on the E2 schedule inside budget, alarms proven, Q3 refresh circulated.</li>
+      <li><b>Words:</b> the recommendation disclaimer pattern confirmed in the UI and filed (Filza).</li>
+      <li><b>Evidence:</b> Rafeh's acceptance on real pilot data; Alex's KPI doc + habit checklist in force; Lewis's demo pilot named.</li>
+    </ul>
+  </div>
+</section>
+
 <!-- ============ NEXT ============ -->
 <section id="next">
-  <div class="sec-head"><span class="n">09</span><h2>Next up</h2><div class="rule"></div></div>
+  <div class="sec-head"><span class="n">10</span><h2>Next up</h2><div class="rule"></div></div>
   <div class="next">
-    <b style="color:var(--ink)">S9 · Best Times + the honest velocity story</b> arrives here once S8 is reviewed. Preview of what it must resolve: Best Times ships from the page's own 24h × 7d heatmap, normalised per slot, weekly refresh, silent under 5 posts per cell (<span class="mr">MR-7.2</span> <span class="mr">MR-7.4</span>; the academic license exists: personalised per-account schedules beat global defaults with up to 17% reaction gain on Facebook, Spasojevic et al, KDD 2015, and publish timestamps are intraday even though metrics are daily). The cross-page affinity graph lands from S7's AFFINITY-011. And velocity gets settled honestly: minute-scale early warning stays dead on a daily API, so S9 specs the day-2 maturity grader instead (Szabo-Huberman scaling + daily-delta features), with the page-level viral-metric probe deciding whether anything richer is possible. This page grows one sprint at a time, in order, each with the same structure: strategy, flows, gates, research, tickets.
+    <b style="color:var(--ink)">S10 · Post detail, template clusters and the retrain dry-run</b> arrives here once S9 is reviewed. What it inherits from this pair of sprints: the first monthly retrain rides the S8 pipeline with the watchdog watching; the day-2 maturity grader gets sized with real re-poll numbers; and the pattern tables (format × topic × day × hour, monthly refresh, 5-sample floor) come due as the model's rule-set layer. This page grows one sprint at a time, in order, each with the same structure: strategy, flows, gates, research, tickets.
   </div>
-  <div class="srcs"><b>Sources for this sprint:</b> Model Master Rules (24 Jul 2026, provisional, unreviewed rules marked) · Meta_Reach_Deprecation_Escalation (Faheem, 25 Jul 2026) · VD-PM-008 S8 Product Definitions (Rafeh, 11 Jul 2026) · Performance Model v1 Build Instruction (21 Jul 2026) · VD-015B A/B findings (18 Jul 2026) · Content Is Visual (Faheem) · sprint_tracker_mvp.html (13 S8 tickets) · dependency_tree.html master plan · mockup_v3_web/mobile. Research links below are verified against the live paper pages.</div>
+  <div class="srcs"><b>Sources:</b> Model Master Rules (24 Jul 2026, provisional; unreviewed rules marked) · Meta_Reach_Deprecation_Escalation (Faheem, 25 Jul 2026) · VD-PM-008 S8 Product Definitions (Rafeh, 11 Jul 2026) · Performance Model v1 Build Instruction (21 Jul 2026) · VD-015B A/B findings (18 Jul 2026) · Content Is Visual (Faheem) · the 12 Jun 2026 network-first decision (plan_drift) · sprint_tracker_mvp.html (13 S8 + 13 S9 tickets) · dependency_tree.html master plan · mockup_v3_web/mobile · S6/S7 sprint strategy pack. All research links on this page were fetched and verified against the live paper pages on 28 Jul 2026.</div>
 </section>
 
 </div>
