@@ -210,6 +210,19 @@
   .si-feat .remain{font-size:11.5px;color:var(--mut);width:100%;line-height:1.5}
   .si-feat .remain b{color:var(--mut2)}
 
+  /* ===== the plain plan ===== */
+  .plan{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .prow{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:center;padding:15px 18px;border-bottom:1px solid rgba(33,43,69,.6)}
+  .prow:last-child{border-bottom:none}
+  .prow .pn{width:38px;height:38px;border-radius:50%;background:rgba(0,214,174,.12);border:2px solid rgba(0,214,174,.5);color:var(--teal);font-size:17px;font-weight:900;display:flex;align-items:center;justify-content:center}
+  .pwhat b{font-size:16.5px;color:var(--ink);display:block;margin-bottom:3px}
+  .pwhat span{font-size:13.5px;color:var(--mut);line-height:1.6;display:block}
+  .pmeta{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+  .pwho{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--violet);background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);border-radius:14px;padding:3px 10px;white-space:nowrap}
+  .pgo{font-size:12.5px;color:var(--teal);text-decoration:none;font-weight:700;white-space:nowrap}
+  .pgo:hover{text-decoration:underline}
+  @media(max-width:860px){.prow{grid-template-columns:44px 1fr}.pmeta{grid-column:2;flex-direction:row;align-items:center;justify-content:flex-start}}
+
   /* ===== sprint tabs ===== */
   .ptabs{position:sticky;top:52px;z-index:900;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:12px 0 10px;margin:14px auto 4px;background:linear-gradient(180deg,var(--bg) 78%,transparent)}
   .ptab{font-family:'DM Sans','Outfit',sans-serif;font-size:15px;font-weight:800;padding:11px 22px;border-radius:13px;border:1px solid var(--line);background:var(--panel);color:var(--mut2);cursor:pointer;transition:.15s;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.2}
@@ -397,6 +410,20 @@ body{padding-top:52px!important}
   </div>
 </section>
 
+<!-- ============ S8 PLAN ============ -->
+<section id="s8-plan">
+  <div class="sec-head"><span class="n">PLAN</span><h2>The whole sprint in six moves</h2><div class="rule"></div></div>
+  <p class="sec-sub">Everything below on this tab is detail. This is the sprint: six moves, in order. Each "how" link jumps to the full recipe.</p>
+  <div class="plan">
+    <div class="prow"><span class="pn">1</span><div class="pwhat"><b>Fix the data feed</b><span>Swap the 5 dead Meta metrics for the 2 survivors, delete the empty files blocking the backfill, add the guard so the next failure is loud instead of silent. PR #7 is halfway there.</span></div><div class="pmeta"><span class="pwho">Muteeb + Asad · day 1</span><a class="pgo" href="#incidentws">how ↓</a></div></div>
+    <div class="prow"><span class="pn">2</span><div class="pwhat"><b>Pick the new target</b><span>Decide what "did well" means now that viral reach is gone. Two candidates, pass line declared first, both through the A/B harness, pick once and write it down.</span></div><div class="pmeta"><span class="pwho">Rafeh + Alex · day 2</span><a class="pgo" href="#model">how ↓</a></div></div>
+    <div class="prow"><span class="pn">3</span><div class="pwhat"><b>Build flop detection</b><span>Train LightGBM to rank a draft on its own page's 12-month ladder. Calibrate it so 80% means 80%. Make it explain itself: three reasons per score, one suggested fix.</span></div><div class="pmeta"><span class="pwho">Faheem · wk 1-2</span><a class="pgo" href="#build-model">how ↓</a></div></div>
+    <div class="prow"><span class="pn">4</span><div class="pwhat"><b>Put the dial in Compose</b><span>The serving lambda + the risk dial + weak-post warnings on the predictions surface. Warm score under 2 seconds, every render logged from day one.</span></div><div class="pmeta"><span class="pwho">Muteeb + Asad</span><a class="pgo" href="#build-model">how ↓</a></div></div>
+    <div class="prow"><span class="pn">5</span><div class="pwhat"><b>Build Art-E</b><span>Plain-English questions answered from your own rows via pre-tested query templates (never free SQL), every number cited, honest refusal, injection-proofed.</span></div><div class="pmeta"><span class="pwho">Faheem + Muteeb</span><a class="pgo" href="#arte">how ↓</a></div></div>
+    <div class="prow"><span class="pn">6</span><div class="pwhat"><b>Prove it, then demo it</b><span>Run the six gates + the 200-question gold set + acceptance on real pilot data. Then the one-loop demo: weak draft → warning → ask why → tap citation → receipt.</span></div><div class="pmeta"><span class="pwho">Rafeh + Faheem · wk 2</span><a class="pgo" href="#s8-ship">what ships ↓</a></div></div>
+  </div>
+</section>
+
 <!-- ============ DECISIONS ============ -->
 <section id="decisions">
   <div class="sec-head"><span class="n">01</span><h2>Lock these first, or the sprint stalls</h2><div class="rule"></div></div>
@@ -427,7 +454,7 @@ body{padding-top:52px!important}
 
 <!-- ============ WORKSTREAM A ============ -->
 <section id="model">
-  <div class="sec-head"><span class="n">02</span><h2>Workstream A · Performance Model v1</h2><div class="rule"></div></div>
+  <div class="sec-head"><span class="n">02</span><h2>Workstream A · Flop detection (Performance Model v1)</h2><div class="rule"></div></div>
   <div class="ws">
     <div class="ws-head">
       <span class="tag">The model · "we play on patterns"</span>
@@ -881,7 +908,7 @@ body{padding-top:52px!important}
         <a class="schip mob" href="mockup_v3_mobile.html?screen=today" target="_blank">📱 compose sheet</a>
       </div>
       <div class="si-feat">
-        <span class="fl">Feature: <b>Drafts + the performance model</b></span>
+        <span class="fl">Feature: <b>Flop detection (draft scoring)</b></span>
         <div class="prog"><i style="width:70%"></i></div><span class="pct">~70% this sprint</span>
         <span class="remain"><b>Ships now:</b> write / paste a draft, attach the image, get the band + 3 reasons + 1 fix, re-scores on edit. <b>Left for later:</b> S14 live-as-you-type wiring + thresholds validated against real outcomes; S18 model upgrade pass.</span>
       </div>
@@ -906,7 +933,7 @@ body{padding-top:52px!important}
         <a class="schip" href="mockup_v3_web.html?view=wins" target="_blank">web · the wins view</a>
       </div>
       <div class="si-feat">
-        <span class="fl">Feature: <b>Predictions surface (Content Lab + Timing)</b></span>
+        <span class="fl">Feature: <b>Flop detection (the warnings surface)</b></span>
         <div class="prog"><i style="width:50%"></i></div><span class="pct">~50% this sprint</span>
         <span class="remain"><b>Ships now:</b> the prediction half: outlook for upcoming posts, warnings with the why + one fix, prediction history filling as outcomes arrive. <b>Left for later:</b> the timing half is S9 Best Times (deliberately separate surface); "wins" framing retires now.</span>
       </div>
@@ -930,7 +957,7 @@ body{padding-top:52px!important}
         <a class="schip" href="mockup_v3_web.html?view=today" target="_blank">web · Art-E rail</a>
       </div>
       <div class="si-feat">
-        <span class="fl">Feature: <b>Art-E grounded Q&amp;A</b></span>
+        <span class="fl">Feature: <b>Art-E (grounded Q&amp;A)</b></span>
         <div class="prog"><i style="width:100%"></i></div><span class="pct">100% of MVP scope</span>
         <span class="remain"><b>Ships now:</b> the whole MVP feature: grounded answers, per-number citations, honest refusal, streaming. <b>Later sprints add separate features on top:</b> memory controls (S16-17), answer thumbs (S17), the vector index (S16). The autonomous agent stays Phase-2, on purpose.</span>
       </div>
@@ -954,7 +981,7 @@ body{padding-top:52px!important}
         <a class="schip api">engine room · LOKI migration</a>
       </div>
       <div class="si-feat">
-        <span class="fl">Feature: <b>incident repair (the metric migration)</b></span>
+        <span class="fl">Feature: <b>Data feed repair (Meta metric migration)</b></span>
         <div class="prog"><i style="width:100%"></i></div><span class="pct">100% this sprint</span>
         <span class="remain"><b>Ships now:</b> feed collecting under the new metrics, dark window backfilled, era stamps on any chart crossing 15 Jun, silent outages made impossible.</span>
       </div>
@@ -983,6 +1010,19 @@ body{padding-top:52px!important}
     <div class="stat"><div class="v">3</div><div class="k">workstreams</div></div>
     <div class="stat"><div class="v">5</div><div class="k">gates to lock</div></div>
     <div class="stat"><div class="v">2w</div><div class="k">12 Aug to 25 Aug</div></div>
+  </div>
+</section>
+
+<!-- ============ S9 PLAN ============ -->
+<section id="s9-plan">
+  <div class="sec-head"><span class="n">PLAN</span><h2>The whole sprint in five moves</h2><div class="rule"></div></div>
+  <p class="sec-sub">Everything below on this tab is detail. This is the sprint: five moves, in order.</p>
+  <div class="plan">
+    <div class="prow"><span class="pn">1</span><div class="pwhat"><b>Check the runway</b><span>Feed alive and target locked (both from S8), or escalate on day 1. Best Times has nothing honest to learn from without them.</span></div><div class="pmeta"><span class="pwho">Everyone · day 1</span><a class="pgo" href="#s9-decisions">how ↓</a></div></div>
+    <div class="prow"><span class="pn">2</span><div class="pwhat"><b>Build Best Times</b><span>Aggregate each page's own posting history into day × hour slots, normalise so one viral post cannot fake a hot cell, let Prophet read the weekly rhythm, recommend slots with confidence + sample count.</span></div><div class="pmeta"><span class="pwho">Faheem + Muteeb · wk 1</span><a class="pgo" href="#s9-besttimes">how ↓</a></div></div>
+    <div class="prow"><span class="pn">3</span><div class="pwhat"><b>Ship the calendar</b><span>The heatmap + the plain-English recommendation in the planner, with honest "not enough history yet" states. Prove the lift on held-out weeks against the pre-declared line, or ship the heatmap descriptive and hold the recommendation.</span></div><div class="pmeta"><span class="pwho">Asad · wk 2</span><a class="pgo" href="#s9-besttimes">how ↓</a></div></div>
+    <div class="prow"><span class="pn">4</span><div class="pwhat"><b>Build the drift watchdog</b><span>Compare every model's live behaviour to its training baseline. Alert only on drift AND a quality drop together. Healthy / watch / slipping on the dashboard, trip action written down.</span></div><div class="pmeta"><span class="pwho">Faheem + Asad</span><a class="pgo" href="#s9-watchdog">how ↓</a></div></div>
+    <div class="prow"><span class="pn">5</span><div class="pwhat"><b>Build discovery matching, keep it hidden</b><span>The 0-100 "pages that belong together" score behind the API. Lewis judges the top 5 per page before anything is served. Pilots see nothing until the S13 Matches tab, by design.</span></div><div class="pmeta"><span class="pwho">Muteeb + Lewis</span><a class="pgo" href="#s9-match">how ↓</a></div></div>
   </div>
 </section>
 
@@ -1362,7 +1402,7 @@ body{padding-top:52px!important}
         <a class="schip api">internal · team login only</a>
       </div>
       <div class="si-feat">
-        <span class="fl">Feature: <b>Model-Ops dashboard (drift surfacing)</b></span>
+        <span class="fl">Feature: <b>Model drift watchdog (the health dashboard)</b></span>
         <div class="prog"><i style="width:100%"></i></div><span class="pct">100% of MVP scope</span>
         <span class="remain"><b>Ships now:</b> every production model (5 NLP heads, fusion, best-times) gets a live health state fed by the watchdog. No mockup screen: this is our cockpit, not the pilot's.</span>
       </div>
@@ -1379,7 +1419,7 @@ body{padding-top:52px!important}
         <a class="schip api">API only · UI lands S13</a>
       </div>
       <div class="si-feat">
-        <span class="fl">Feature: <b>Discovery (the network moat)</b></span>
+        <span class="fl">Feature: <b>Discovery matching (the network moat)</b></span>
         <div class="prog"><i style="width:50%"></i></div><span class="pct">engine 100% · pilot-visible 0%</span>
         <span class="remain"><b>Ships now:</b> the 0-100 match score behind the API, validated by Lewis before anything is served. <b>Left for later:</b> the Matches tab UI (S13) and per-factor breakdowns (Fast-Track). Pilots see nothing yet, by design: scores go live only after surviving validation.</span>
       </div>
@@ -1440,10 +1480,10 @@ body{padding-top:52px!important}
 var PANE_KEY='artemis_playbook_tab_v1';
 var PANE_MAP={
   start:'pane-start', incident:'pane-start', howto:'pane-start',
-  s8:'pane-s8', decisions:'pane-s8', model:'pane-s8', arte:'pane-s8', incidentws:'pane-s8',
+  s8:'pane-s8', 's8-plan':'pane-s8', decisions:'pane-s8', model:'pane-s8', arte:'pane-s8', incidentws:'pane-s8',
   people:'pane-s8', timeline:'pane-s8', notdoing:'pane-s8', dod:'pane-s8', 's8-ship':'pane-s8',
   'research-model':'pane-s8', 'research-arte':'pane-s8', 'build-model':'pane-s8', 'build-arte':'pane-s8',
-  s9:'pane-s9', 's9-decisions':'pane-s9', 's9-besttimes':'pane-s9', 's9-watchdog':'pane-s9',
+  s9:'pane-s9', 's9-plan':'pane-s9', 's9-decisions':'pane-s9', 's9-besttimes':'pane-s9', 's9-watchdog':'pane-s9',
   's9-match':'pane-s9', 's9-people':'pane-s9', 's9-timeline':'pane-s9', 's9-notdoing':'pane-s9',
   's9-dod':'pane-s9', 's9-ship':'pane-s9', 'research-besttimes':'pane-s9', 'research-watchdog':'pane-s9',
   'research-match':'pane-s9', next:'pane-s9'
