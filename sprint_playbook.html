@@ -210,6 +210,15 @@
   .si-feat .remain{font-size:11.5px;color:var(--mut);width:100%;line-height:1.5}
   .si-feat .remain b{color:var(--mut2)}
 
+  /* ===== mockup coverage matrix ===== */
+  .cov td:first-child{white-space:normal}
+  .cov .sp{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--teal);background:rgba(0,214,174,.1);border:1px solid rgba(0,214,174,.32);border-radius:6px;padding:2px 7px;white-space:nowrap;text-decoration:none}
+  .cov .sp:hover{border-color:var(--teal)}
+  .cov .sp.ff{color:var(--amber);background:rgba(245,166,35,.1);border-color:rgba(245,166,35,.32)}
+  .cov .sp.later{color:var(--violet);background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.32)}
+  .doneflag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--green);background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.4);border-radius:14px;padding:3px 11px;margin-left:10px;vertical-align:3px}
+  .doneflag.wip{color:var(--amber);background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.4)}
+
   /* ===== the plain plan ===== */
   .plan{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
   .prow{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:center;padding:15px 18px;border-bottom:1px solid rgba(33,43,69,.6)}
@@ -362,6 +371,8 @@ body{padding-top:52px!important}
 <!-- ============ SPRINT TABS ============ -->
 <div class="ptabs" id="ptabs">
   <button class="ptab on" data-pane="pane-start" onclick="playbookTab('pane-start')">Start here<small>incident + how to read</small></button>
+  <button class="ptab" data-pane="pane-s6" onclick="playbookTab('pane-s6')">S6 · Eyes<small>8-21 Jul · shipped</small></button>
+  <button class="ptab" data-pane="pane-s7" onclick="playbookTab('pane-s7')">S7 · Foresight<small>24 Jul-6 Aug · in flight</small></button>
   <button class="ptab" data-pane="pane-s8" onclick="playbookTab('pane-s8')">S8 · Flop detection<small>5-18 Aug</small></button>
   <button class="ptab" data-pane="pane-s9" onclick="playbookTab('pane-s9')">S9 · Best Times<small>12-25 Aug</small></button>
   <button class="ptab" data-pane="pane-s10" onclick="playbookTab('pane-s10')">S10 · Drill-down + graph<small>19 Aug-1 Sep</small></button>
@@ -401,6 +412,8 @@ body{padding-top:52px!important}
     <div class="card"><b style="font-size:13px">Honesty is the strategy</b><p class="plain" style="font-size:12px;margin-top:6px">We predict performance bands, never virality. Every claim ships with reasons and a calibrated probability. If the data is thin, the product says so instead of guessing. That is the moat.</p></div>
   </div>
   <div class="rail">
+    <a href="#s6" class="rp live" style="text-decoration:none">S6 Eyes</a>
+    <a href="#s7" class="rp live" style="text-decoration:none">S7 Foresight</a>
     <a href="#s8" class="rp live" style="text-decoration:none">S8 Flop detection</a>
     <a href="#s9" class="rp live" style="text-decoration:none">S9 Best Times</a>
     <a href="#s10" class="rp live" style="text-decoration:none">S10 Drill-down</a>
@@ -421,8 +434,168 @@ body{padding-top:52px!important}
 </section>
 
 
+<section id="coverage">
+  <div class="sec-head"><span class="n">MAP</span><h2>Every mockup screen, and the sprint that builds it</h2><div class="rule"></div></div>
+  <p class="sec-sub">The honest audit: all 9 web views and all 6 mobile screens in the V3 mockup, each mapped to the sprint that makes it real. <b>Three things in the mockup are deliberately not in the MVP</b>, and they are named here rather than quietly dropped.</p>
+  <div class="tw"><table class="t cov">
+    <tr><th style="width:20%">Mockup screen</th><th style="width:12%">Built in</th><th style="width:68%">What makes it real, and when</th></tr>
+    <tr><td><b>Today</b> (web + mobile)<br><span style="font-weight:400;color:var(--mut);font-size:12px">the daily loop</span></td>
+      <td><a class="sp" href="#s6">S6</a> <a class="sp" href="#s8">S8</a> <a class="sp" href="#s14">S14</a></td>
+      <td>S6 builds the shell, the stories rail and the sparklines. S8 adds the compose risk dial. S14 wires every card to live pipeline data, which is when the daily loop becomes the retention engine it was designed to be.</td></tr>
+    <tr><td><b>Studio / Planner</b> (web + mobile)<br><span style="font-weight:400;color:var(--mut);font-size:12px">drafts + best times</span></td>
+      <td><a class="sp" href="#s6">S6</a> <a class="sp" href="#s8">S8</a> <a class="sp" href="#s9">S9</a> <a class="sp" href="#s14">S14</a></td>
+      <td>S6 builds the first heatmap grid. S8 puts real scores on the drafts. S9 makes the heatmap honest (normalised, silent under 5 posts) and adds the recommendation. S14 makes scoring live as you type.</td></tr>
+    <tr><td><b>Analytics</b> (web)<br><span style="font-weight:400;color:var(--mut);font-size:12px">overview / photos / video / advanced</span></td>
+      <td><a class="sp" href="#s6">S6</a> <a class="sp" href="#s7">S7</a> <a class="sp" href="#s14">S14</a> <span class="sp later">Later</span></td>
+      <td>S6 builds Engagement / Reach / Sentiment on real data. S7 adds the video sub-tab and the sortable raw-signals table. S14 wires it all live. <b>The "Advanced" sub-tab (cascade, super-sharer) is explicitly Later</b>, not MVP.</td></tr>
+    <tr><td><b>Post drill-down</b> (web)<br><span style="font-weight:400;color:var(--mut);font-size:12px">click any post</span></td>
+      <td><a class="sp" href="#s7">S7</a> <a class="sp" href="#s10">S10</a></td>
+      <td>S7 adds the video-intelligence panel to the post view. S10 builds the full drill-down: metrics, sentiment, image and video signals, and our own prediction next to the outcome.</td></tr>
+    <tr><td><b>Predicted wins</b> (web)<br><span style="font-weight:400;color:var(--mut);font-size:12px">the predictions surface</span></td>
+      <td><a class="sp" href="#s7">S7</a> <a class="sp" href="#s8">S8</a></td>
+      <td>S7 puts the first virality score on posts. S8 turns the surface into honest weak-post warnings plus the predicted-vs-actual scoreboard. <b>The "wins" framing retires:</b> it warns, it never promises winners.</td></tr>
+    <tr><td><b>Alerts</b> (web + mobile + popover)<br><span style="font-weight:400;color:var(--mut);font-size:12px">crisis + the bell</span></td>
+      <td><a class="sp" href="#s11">S11</a></td>
+      <td>Built whole in S11: the detector, the alert engine (problem + one action + citations), the alerts page, the live popover and the rules builder.</td></tr>
+    <tr><td><b>Discover</b> (web + mobile)<br><span style="font-weight:400;color:var(--mut);font-size:12px">cards + match scores</span></td>
+      <td><a class="sp" href="#s10">S10</a> <a class="sp" href="#s12">S12</a> <a class="sp" href="#s13">S13</a></td>
+      <td>S10 builds the graph, S12 the business-card pipeline, S13 the page itself with real match scores, the k=5 privacy floor and the opt-in. Nothing is visible to a pilot until S13.</td></tr>
+    <tr><td><b>Art-E</b> (web rail + mobile orb)<br><span style="font-weight:400;color:var(--mut);font-size:12px">grounded Q&amp;A</span></td>
+      <td><a class="sp" href="#s16">S16</a> <a class="sp" href="#s17">S17</a> <a class="sp" href="#s18">S18</a></td>
+      <td>S16 ships it whole (RAG index, citations, memory, refusal) once auth and tenancy exist. S17 adds thumbs, routing and memory controls. S18 upgrades the model and makes the citation gate hard. <b>Moved out of S8 on 29 Jul:</b> it needs foundations that land in S16.</td></tr>
+    <tr><td><b>Settings</b> (web)<br><span style="font-weight:400;color:var(--mut);font-size:12px">7 tabs</span></td>
+      <td><a class="sp" href="#s16">S16</a> <a class="sp" href="#s21">S21</a> <span class="sp ff">FF</span></td>
+      <td>S16 ships the three trust tabs (connect, notifications, data control). S21 completes all 7 plus quiet hours and cookie consent. <b>Inside this screen: the theme toggle is Fast-Follow, and "invite a teammate" and WhatsApp alerts are Later.</b></td></tr>
+    <tr><td><b>Pages</b> (web)<br><span style="font-weight:400;color:var(--mut);font-size:12px">connect + health</span></td>
+      <td><a class="sp" href="#s16">S16</a> <a class="sp" href="#s21">S21</a></td>
+      <td>S16 connects pages on dev-mode tokens. S21 flips to real public OAuth (Live Mode), with connection health, re-sync and the onboarding tour.</td></tr>
+    <tr><td><b>Inbox</b> (web + mobile)<br><span style="font-weight:400;color:var(--mut);font-size:12px">collab chat with Art-E</span></td>
+      <td><span class="sp later">Later</span></td>
+      <td><b>Deliberately not in the MVP.</b> The collaboration chat (Team Messages) is a Later feature and inbox triage is Fast-Follow (<a href="mockup_v3_web.html?view=inbox" target="_blank" style="color:var(--blue)">web</a> · <a href="mockup_v3_mobile.html?screen=inbox" target="_blank" style="color:var(--blue)">mobile</a>). The mockup shows the destination; the MVP delivers the match that starts the conversation (S13 Discovery), and the conversation itself moves to WhatsApp or email until the feature is built. Detail below.</td></tr>
+    <tr><td><b>Cmd-K palette, health score, milestones</b><br><span style="font-weight:400;color:var(--mut);font-size:12px">the chrome</span></td>
+      <td><a class="sp" href="#s6">S6</a> <a class="sp" href="#s14">S14</a></td>
+      <td>Part of the React app foundation and design system in S6, populated with real data in S14. They are chrome around the features, not features themselves.</td></tr>
+  </table></div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="never"><b>The three deliberate gaps, stated plainly.</b> <b>1 · Inbox / collab chat</b> (Later): pilots get matched in S13, then talk on the channels they already use. <b>2 · Advanced analytics</b> (cascade, super-sharer: Later): the basic analytics carry the must-have; this is the upsell layer. <b>3 · Theme toggle, invite-a-teammate, WhatsApp alerts</b> (Fast-Follow / Later): visible in the Settings mockup, not built for launch. Nothing else in the mockup is unaccounted for.</div>
+    <a class="si-shot" href="mockup_v3_web.html?view=inbox" target="_blank"><img src="assets/playbook/later_inbox_web.jpg" alt="The Inbox screen in the mockup"><span class="si-cap">The mockup's Inbox: collaboration chat with Art-E in the room. <b>A Later feature</b>, shown here so nobody mistakes it for a launch commitment.</span></a>
+  </div>
+</section>
+
 <section id="sources"><div class="srcs"><b>Sources:</b> Model Master Rules (24 Jul 2026, provisional; unreviewed rules marked) · Meta_Reach_Deprecation_Escalation (Faheem, 25 Jul 2026) · VD-PM-008 S8 Product Definitions (Rafeh, 11 Jul 2026) · Performance Model v1 Build Instruction (21 Jul 2026) · VD-015B A/B findings (18 Jul 2026) · Content Is Visual (Faheem) · the 12 Jun 2026 network-first decision (plan_drift) · sprint_tracker_mvp.html (13 S8 + 13 S9 tickets) · dependency_tree.html master plan · mockup_v3_web/mobile · S6/S7 sprint strategy pack · the MARVEL repo audit (28 Jul 2026: 4 agents over the production codebase, file:line evidence) + marvel PR #7 review. All research links on this page were fetched and verified against the live paper pages on 28 Jul 2026.</div></section>
 </div><!-- /pane-start -->
+
+<div class="pane" id="pane-s6">
+<section id="s6">
+  <div class="sec-head"><span class="n">S6</span><h2>Sprint 6 · 8 to 21 Jul 2026 · Eyes<span class="doneflag">✓ shipped</span></h2><div class="rule"></div></div>
+  <p class="sec-sub"><b>In one sentence:</b> the product learned to see. Before S6 the pipeline only read the caption a user typed; after it, we read what is actually inside the image, and the first real screens went up on real data. <b>Why it is here:</b> S8 onward stands entirely on this, and the numbers below are what the flop model eats.</p>
+  <div class="stats"><div class="stat"><div class="v">23/23</div><div class="k">tickets delivered</div></div><div class="stat"><div class="v">0.93</div><div class="k">fusion Macro F1</div></div><div class="stat"><div class="v">5</div><div class="k">content types</div></div><div class="stat"><div class="v">weekly</div><div class="k">automated, no manual work</div></div></div>
+</section>
+<section id="s6-io">
+  <div class="sec-head"><span class="n">IO</span><h2>What it built, in and out</h2><div class="rule"></div></div>
+  <div class="tw"><table class="t">
+    <tr><th style="width:16%">Capability</th><th style="width:26%">What goes in</th><th style="width:32%">How it works</th><th style="width:26%">What comes out</th></tr>
+    <tr><td>OCR<br><span style="font-weight:400;color:var(--mut);font-size:12px">read the image</span></td><td>Every post image, downloaded at last (the S6 unlock: the 2-year backfill had only ever pulled text)</td><td><b>A confidence-routed cascade:</b> a fast engine reads the easy ~79%, anything below threshold escalates to a compact vision-language model on GPU. A swapguard reverts the VLM when it hallucinates or loops. Preprocessing is type-aware, because it <i>hurts</i> screenshots</td><td>The text inside the image, plus its confidence. <b>Never:</b> garbled text shown as fact; low confidence is marked</td></tr>
+    <tr><td>Image-context fusion<br><span style="font-weight:400;color:var(--mut);font-size:12px">what kind of post is this</span></td><td>Three vectors: the image, the OCR text, the caption</td><td>CLIP late fusion: concatenate the three into one vector, pass through a small network, trained with modality dropout so it stays right when one input is missing</td><td>One of 5 content types + a calibrated confidence. <b>Macro F1 0.93</b>, strong even on rare classes. <b>This is the picture feature the flop model uses</b></td></tr>
+    <tr><td>The first real screens</td><td>The labelled pipeline output</td><td>React foundation + design system from the mockups; Analytics, the feed image chips, the Best Times grid, sparklines, the stories rail</td><td>Screens on real data for the first time. <b>Never:</b> a signal shown without its confidence</td></tr>
+  </table></div>
+</section>
+<section id="s6-ship">
+  <div class="ship">
+    <span class="ship-badge">✓ Shipped 21 Jul · what it left behind</span>
+    <p class="ship-want">In one sentence: the pipeline stopped being blind, and <span class="hl">every screen after this one has real numbers to show</span>.</p>
+    <p class="ship-intro">S6 is the foundation the rest of the playbook assumes. It is here so nobody has to guess what "the image signals" or "the app shell" refer to.</p>
+    <div class="ship-item">
+      <div class="si-head"><span class="si-ic">👁</span><b>1 · Analytics, the app shell, and the first image signals</b>
+        <a class="schip" href="mockup_v3_web.html?view=analytics" target="_blank">web · analytics</a>
+        <a class="schip" href="mockup_v3_web.html?view=today" target="_blank">web · today shell</a>
+      </div>
+      <div class="si-feat"><span class="fl">Feature: <b>Image understanding + Analytics + app foundation</b></span><div class="prog"><i style="width:100%"></i></div><span class="pct">delivered</span><span class="remain"><b>Shipped:</b> OCR, fusion classifier, CLIP embeddings, GALACTUS routing, the React foundation, Analytics on real data, feed image chips, the Best Times grid, sparklines, the stories rail and the model-quality dashboard. <b>What later sprints add:</b> S7 video, S9 the honest Best Times model, S14 full live wiring.</span></div>
+      <div class="si-grid">
+        <div>
+          <p class="si-what">The sprint that made everything downstream possible: the images were finally fetched and stored, read, classified, and surfaced, and the app got a real foundation instead of a mockup.</p>
+          <div class="si-crit"><div class="sc-t">It cleared these bars</div><ul>
+            <li>23 of 23 tickets delivered across the whole team</li>
+            <li><b>Fusion Macro F1 0.93</b>, the honest metric (meme n=1,326 vs product-shot n=55: accuracy alone would have flattered it)</li>
+            <li>Runs weekly and automatically, with low-confidence cases routed to audit rather than shown</li>
+            <li>The monitoring rule that S9's watchdog inherits: <b>alert on drift AND a quality drop together</b>, never drift alone</li>
+          </ul></div>
+        </div>
+        <a class="si-shot" href="mockup_v3_web.html?view=analytics" target="_blank"><img src="assets/playbook/s6_analytics_web.jpg" alt="The Analytics view in the mockup"><span class="si-cap">Analytics: S6 built this on real data. S7 adds the video sub-tab, S14 wires every number live.</span></a>
+      </div>
+    </div>
+    <div class="ship-loop"><b>What it proved:</b> the same hybrid pattern we reuse everywhere: a cheap fast model for the bulk, a heavier model only on hard cases, with confidence routing between them. Low risk to build, cheap to run, and the shape of every model that follows.</div>
+  </div>
+</section>
+</div><!-- /pane-s6 -->
+
+<div class="pane" id="pane-s7">
+<section id="s7">
+  <div class="sec-head"><span class="n">S7</span><h2>Sprint 7 · 24 Jul to 6 Aug 2026 · Foresight<span class="doneflag wip">in flight</span></h2><div class="rule"></div></div>
+  <p class="sec-sub"><b>In one sentence:</b> teach the pipeline to watch video, and make its first forward-looking prediction. <b>The honest update:</b> the video half landed as designed, and the prediction half is what produced the finding that reshaped the product: winners are not predictable, flops are. S8 exists because of what S7 learned.</p>
+  <div class="stats"><div class="stat"><div class="v">20</div><div class="k">tickets</div></div><div class="stat"><div class="v">46</div><div class="k">videos in total (zero-shot, no training)</div></div><div class="stat"><div class="v">0.51</div><div class="k">AUC on winners: the finding</div></div><div class="stat"><div class="v">2w</div><div class="k">24 Jul to 6 Aug</div></div></div>
+</section>
+<section id="s7-io">
+  <div class="sec-head"><span class="n">IO</span><h2>What it builds, in and out</h2><div class="rule"></div></div>
+  <div class="tw"><table class="t">
+    <tr><th style="width:16%">Capability</th><th style="width:26%">What goes in</th><th style="width:32%">How it works</th><th style="width:26%">What comes out</th></tr>
+    <tr><td>Video intelligence</td><td>The 46 videos in S3 (frames at 0.5 fps, plus audio)</td><td><b>Zero-shot by necessity:</b> 46 videos cannot train a classifier. CLIP for scene type against text labels, the S6 OCR reused on keyframes, Whisper for speech, and a transparent weighted rule for the opening-3-seconds hook score</td><td>Four signals per video: scene, on-screen text, transcript, hook. <b>Never:</b> a trained video model pretending 46 examples was enough</td></tr>
+    <tr><td>Virality model v1</td><td>Content type + scene + hook + timing + page baseline</td><td>Strict time-split (train past, test future), calibrated, SHAP-explainable. <b>The methodology was right; the answer was negative</b></td><td><b>The finding that changed the product:</b> AUC 0.51 on winners, 2 "strong" calls in 971 posts, NLP labels adding ~0 lift. Top-end virality is post-publish luck</td></tr>
+    <tr><td>Affinity graph</td><td>Comment co-occurrence per page, de-identified at ingest</td><td>User-user edges built with NetworkX, running in parallel with no dependency on the model work</td><td>The affinity edges that S10 turns into the cross-page graph</td></tr>
+  </table></div>
+</section>
+<section id="s7-proof">
+  <div class="sec-head"><span class="n">PROOF</span><h2>The finding, and why it was worth having</h2><div class="rule"></div></div>
+  <div class="grid2">
+    <div class="card"><h4 style="font-size:14px;font-weight:900;color:var(--teal);margin-bottom:8px">What S7 actually proved</h4>
+      <p class="plain">The A/B was clean and the discipline held: pass line declared first, strict time split, no leakage. The result was <b>AUC 0.51 on winner prediction, a coin flip</b>, with NLP content labels adding <b>+0.0016 AUC</b>: nothing. Reframed as a per-page percentile regression it worked partially: <b>rank correlation 0.26, with flop-band posts landing a real 20 points lower</b> on their page's own ladder. Weak, but real, and concentrated exactly where the product makes claims.</p>
+      <p class="plain" style="margin-top:8px">The visual finding explained why: our content is <b>~99% single images</b>, and three posts with identical captions and identical NLP labels scored 13.8% / 3.2% / 0%. Everything that differed was the picture. <b>This is why the S8 model eats CLIP embeddings first and treats text as a passenger.</b></p></div>
+    <div class="card"><h4 style="font-size:14px;font-weight:900;color:var(--violet);margin-bottom:8px">Why a negative result was a good sprint</h4>
+      <p class="plain">Because it arrived <b>in July on a benchmark instead of in December in front of a pilot.</b> The published literature says the same thing (models explain under half of success even with unlimited data; content-only meme models plateau near chance), so this was the field's answer, found in our own data, before we shipped a promise we could not keep.</p>
+      <p class="plain" style="margin-top:8px">It converted the whole product from prophecy to patterns: warn honestly about the bottom, look up what is countable, and refuse to forecast the top. Every gate, every band and every "never" in the sprints that follow traces back to this sprint's number.</p></div>
+  </div>
+</section>
+<section id="s7-ship">
+  <div class="ship">
+    <span class="ship-badge">⚡ Live after 6 Aug · the deliverables</span>
+    <p class="ship-want">In one sentence: posts gain <span class="hl">video understanding and their first score</span>, and the team gains the finding that shaped everything after.</p>
+    <p class="ship-intro">Two visible deliverables plus one invisible one, and the most valuable output of the sprint was a number nobody wanted.</p>
+    <div class="ship-item">
+      <div class="si-head"><span class="si-ic">🎬</span><b>1 · Video panel + the analytics sub-tabs and raw table</b>
+        <a class="schip" href="mockup_v3_web.html?view=analytics" target="_blank">web · analytics sub-tabs</a>
+        <a class="schip" href="mockup_v3_web.html?view=today" target="_blank">web · post view</a>
+      </div>
+      <div class="si-feat"><span class="fl">Feature: <b>Video intelligence + Analytics depth</b></span><div class="prog"><i style="width:100%"></i></div><span class="pct">100% of MVP scope</span><span class="remain"><b>Ships now:</b> scene, on-screen text, transcript and hook score per video in the post view, the overview/video/virality sub-tabs, and the sortable exportable raw-signals table. <b>Left for later:</b> a trained video model, once video volume exists to justify it.</span></div>
+      <div class="si-grid">
+        <div>
+          <p class="si-what">Every video post gains four machine-readable signals, and the analytics page gains the depth a power user wants: sub-tabs by signal family, plus one table with every post and every signal, sortable and exportable.</p>
+          <div class="si-crit"><div class="sc-t">Done means (pass / fail)</div><ul>
+            <li>Scene accuracy at bar and transcript word-error-rate under bar on the hand-labelled 46-video gold set</li>
+            <li>Silent, music-only and very short clips handled as <b>explicit cases</b>, not silent failures</li>
+            <li>Raw table numbers reconcile with the charts above them</li>
+            <li><b>Video predictions are low-confidence by construction</b> and say so: with ~46 videos there is no honest per-page video ladder yet</li>
+          </ul></div>
+        </div>
+        <a class="si-shot" href="mockup_v3_web.html?view=analytics" target="_blank"><img src="assets/playbook/s6_analytics_web.jpg" alt="Analytics with sub-tabs in the mockup"><span class="si-cap">The Analytics sub-tabs. S7 fills the video tab and adds the raw signals table beneath.</span></a>
+      </div>
+    </div>
+    <div class="ship-item">
+      <div class="si-head"><span class="si-ic">🎯</span><b>2 · The first score on a post, and the finding underneath it</b>
+        <a class="schip" href="mockup_v3_web.html?view=wins" target="_blank">web · predictions surface</a>
+      </div>
+      <div class="si-feat"><span class="fl">Feature: <b>Flop detection (model v1 groundwork)</b></span><div class="prog"><i style="width:45%"></i></div><span class="pct">~45% · S8 completes it</span><span class="remain"><b>Ships now:</b> the first virality score on posts and the predictions surface skeleton, plus the calibrated, time-split, SHAP-explainable model methodology. <b>Left for S8:</b> the rescoped target, the honest flop bands, the draft-time dial and the 75% precision floor. <b>The winner-prediction half is cancelled outright, on evidence.</b></span></div>
+      <p class="si-what">The sprint delivered a working model and an honest verdict on it. The score exists; what it is allowed to claim shrank to what the data supports.</p>
+      <div class="si-crit"><div class="sc-t">Done means (pass / fail)</div><ul>
+        <li>Strict time split with no leaking features; calibration curve checked, not assumed</li>
+        <li>Top-3 drivers make intuitive sense on manual examples</li>
+        <li><b>The finding is written down and acted on</b> rather than buried: winners are not predictable at draft time, so the product stops claiming they are</li>
+      </ul></div>
+    </div>
+    <div class="ship-loop"><b>The handover to S8:</b> S7 leaves behind a proven modelling methodology, four video signals, the affinity edges S10 needs, and one number (0.51) that redefined the product. S8 rebuilds the target on what survives, and ships the half that actually works.</div>
+  </div>
+</section>
+</div><!-- /pane-s7 -->
+
 
 <div class="pane" id="pane-s8">
 <!-- ============ S8 OVERVIEW ============ -->
@@ -2495,7 +2668,7 @@ var PANE_MAP={
   s9:'pane-s9', 's9-plan':'pane-s9', 's9-io':'pane-s9', 's9-proof':'pane-s9', 's9-decisions':'pane-s9', 's9-besttimes':'pane-s9', 's9-watchdog':'pane-s9',
   's9-match':'pane-s9', 's9-people':'pane-s9', 's9-timeline':'pane-s9', 's9-notdoing':'pane-s9',
   's9-dod':'pane-s9', 's9-ship':'pane-s9', 'research-besttimes':'pane-s9', 'research-watchdog':'pane-s9',
-  'research-match':'pane-s9', sources:'pane-start', 's10':'pane-s10', 's10-plan':'pane-s10', 's10-io':'pane-s10', 's10-flow':'pane-s10', 's10-proof':'pane-s10', 's10-people':'pane-s10', 's10-nd':'pane-s10', 's10-dod':'pane-s10', 's10-ship':'pane-s10', 's10-arte':'pane-s10', 's10-build-arte':'pane-s10', 's10-research-arte':'pane-s10', 's11':'pane-s11', 's11-plan':'pane-s11', 's11-io':'pane-s11', 's11-flow':'pane-s11', 's11-proof':'pane-s11', 's11-people':'pane-s11', 's11-nd':'pane-s11', 's11-dod':'pane-s11', 's11-ship':'pane-s11', 's11-arte':'pane-s11', 's11-build-arte':'pane-s11', 's11-research-arte':'pane-s11', 's12':'pane-s12', 's12-plan':'pane-s12', 's12-io':'pane-s12', 's12-flow':'pane-s12', 's12-proof':'pane-s12', 's12-people':'pane-s12', 's12-nd':'pane-s12', 's12-dod':'pane-s12', 's12-ship':'pane-s12', 's12-arte':'pane-s12', 's12-build-arte':'pane-s12', 's12-research-arte':'pane-s12', 's13':'pane-s13', 's13-plan':'pane-s13', 's13-io':'pane-s13', 's13-flow':'pane-s13', 's13-proof':'pane-s13', 's13-people':'pane-s13', 's13-nd':'pane-s13', 's13-dod':'pane-s13', 's13-ship':'pane-s13', 's13-arte':'pane-s13', 's13-build-arte':'pane-s13', 's13-research-arte':'pane-s13', 's14':'pane-s14', 's14-plan':'pane-s14', 's14-io':'pane-s14', 's14-flow':'pane-s14', 's14-proof':'pane-s14', 's14-people':'pane-s14', 's14-nd':'pane-s14', 's14-dod':'pane-s14', 's14-ship':'pane-s14', 's14-arte':'pane-s14', 's14-build-arte':'pane-s14', 's14-research-arte':'pane-s14', 's15':'pane-s15', 's15-plan':'pane-s15', 's15-io':'pane-s15', 's15-flow':'pane-s15', 's15-proof':'pane-s15', 's15-people':'pane-s15', 's15-nd':'pane-s15', 's15-dod':'pane-s15', 's15-ship':'pane-s15', 's15-arte':'pane-s15', 's15-build-arte':'pane-s15', 's15-research-arte':'pane-s15', 's16':'pane-s16', 's16-plan':'pane-s16', 's16-io':'pane-s16', 's16-flow':'pane-s16', 's16-proof':'pane-s16', 's16-people':'pane-s16', 's16-nd':'pane-s16', 's16-dod':'pane-s16', 's16-ship':'pane-s16', 's16-arte':'pane-s16', 's16-build-arte':'pane-s16', 's16-research-arte':'pane-s16', 's17':'pane-s17', 's17-plan':'pane-s17', 's17-io':'pane-s17', 's17-flow':'pane-s17', 's17-proof':'pane-s17', 's17-people':'pane-s17', 's17-nd':'pane-s17', 's17-dod':'pane-s17', 's17-ship':'pane-s17', 's17-arte':'pane-s17', 's17-build-arte':'pane-s17', 's17-research-arte':'pane-s17', 's18':'pane-s18', 's18-plan':'pane-s18', 's18-io':'pane-s18', 's18-flow':'pane-s18', 's18-proof':'pane-s18', 's18-people':'pane-s18', 's18-nd':'pane-s18', 's18-dod':'pane-s18', 's18-ship':'pane-s18', 's18-arte':'pane-s18', 's18-build-arte':'pane-s18', 's18-research-arte':'pane-s18', 's19':'pane-s19', 's19-plan':'pane-s19', 's19-io':'pane-s19', 's19-flow':'pane-s19', 's19-proof':'pane-s19', 's19-people':'pane-s19', 's19-nd':'pane-s19', 's19-dod':'pane-s19', 's19-ship':'pane-s19', 's19-arte':'pane-s19', 's19-build-arte':'pane-s19', 's19-research-arte':'pane-s19', 's20':'pane-s20', 's20-plan':'pane-s20', 's20-io':'pane-s20', 's20-flow':'pane-s20', 's20-proof':'pane-s20', 's20-people':'pane-s20', 's20-nd':'pane-s20', 's20-dod':'pane-s20', 's20-ship':'pane-s20', 's20-arte':'pane-s20', 's20-build-arte':'pane-s20', 's20-research-arte':'pane-s20', 's21':'pane-s21', 's21-plan':'pane-s21', 's21-io':'pane-s21', 's21-flow':'pane-s21', 's21-proof':'pane-s21', 's21-people':'pane-s21', 's21-nd':'pane-s21', 's21-dod':'pane-s21', 's21-ship':'pane-s21', 's21-arte':'pane-s21', 's21-build-arte':'pane-s21', 's21-research-arte':'pane-s21', 's22':'pane-s22', 's22-plan':'pane-s22', 's22-io':'pane-s22', 's22-flow':'pane-s22', 's22-proof':'pane-s22', 's22-people':'pane-s22', 's22-nd':'pane-s22', 's22-dod':'pane-s22', 's22-ship':'pane-s22', 's22-arte':'pane-s22', 's22-build-arte':'pane-s22', 's22-research-arte':'pane-s22', 's23':'pane-s23', 's23-plan':'pane-s23', 's23-io':'pane-s23', 's23-flow':'pane-s23', 's23-proof':'pane-s23', 's23-people':'pane-s23', 's23-nd':'pane-s23', 's23-dod':'pane-s23', 's23-ship':'pane-s23', 's23-arte':'pane-s23', 's23-build-arte':'pane-s23', 's23-research-arte':'pane-s23'
+  'research-match':'pane-s9', sources:'pane-start', coverage:'pane-start', s6:'pane-s6', 's6-io':'pane-s6', 's6-ship':'pane-s6', s7:'pane-s7', 's7-io':'pane-s7', 's7-proof':'pane-s7', 's7-ship':'pane-s7', 's10':'pane-s10', 's10-plan':'pane-s10', 's10-io':'pane-s10', 's10-flow':'pane-s10', 's10-proof':'pane-s10', 's10-people':'pane-s10', 's10-nd':'pane-s10', 's10-dod':'pane-s10', 's10-ship':'pane-s10', 's10-arte':'pane-s10', 's10-build-arte':'pane-s10', 's10-research-arte':'pane-s10', 's11':'pane-s11', 's11-plan':'pane-s11', 's11-io':'pane-s11', 's11-flow':'pane-s11', 's11-proof':'pane-s11', 's11-people':'pane-s11', 's11-nd':'pane-s11', 's11-dod':'pane-s11', 's11-ship':'pane-s11', 's11-arte':'pane-s11', 's11-build-arte':'pane-s11', 's11-research-arte':'pane-s11', 's12':'pane-s12', 's12-plan':'pane-s12', 's12-io':'pane-s12', 's12-flow':'pane-s12', 's12-proof':'pane-s12', 's12-people':'pane-s12', 's12-nd':'pane-s12', 's12-dod':'pane-s12', 's12-ship':'pane-s12', 's12-arte':'pane-s12', 's12-build-arte':'pane-s12', 's12-research-arte':'pane-s12', 's13':'pane-s13', 's13-plan':'pane-s13', 's13-io':'pane-s13', 's13-flow':'pane-s13', 's13-proof':'pane-s13', 's13-people':'pane-s13', 's13-nd':'pane-s13', 's13-dod':'pane-s13', 's13-ship':'pane-s13', 's13-arte':'pane-s13', 's13-build-arte':'pane-s13', 's13-research-arte':'pane-s13', 's14':'pane-s14', 's14-plan':'pane-s14', 's14-io':'pane-s14', 's14-flow':'pane-s14', 's14-proof':'pane-s14', 's14-people':'pane-s14', 's14-nd':'pane-s14', 's14-dod':'pane-s14', 's14-ship':'pane-s14', 's14-arte':'pane-s14', 's14-build-arte':'pane-s14', 's14-research-arte':'pane-s14', 's15':'pane-s15', 's15-plan':'pane-s15', 's15-io':'pane-s15', 's15-flow':'pane-s15', 's15-proof':'pane-s15', 's15-people':'pane-s15', 's15-nd':'pane-s15', 's15-dod':'pane-s15', 's15-ship':'pane-s15', 's15-arte':'pane-s15', 's15-build-arte':'pane-s15', 's15-research-arte':'pane-s15', 's16':'pane-s16', 's16-plan':'pane-s16', 's16-io':'pane-s16', 's16-flow':'pane-s16', 's16-proof':'pane-s16', 's16-people':'pane-s16', 's16-nd':'pane-s16', 's16-dod':'pane-s16', 's16-ship':'pane-s16', 's16-arte':'pane-s16', 's16-build-arte':'pane-s16', 's16-research-arte':'pane-s16', 's17':'pane-s17', 's17-plan':'pane-s17', 's17-io':'pane-s17', 's17-flow':'pane-s17', 's17-proof':'pane-s17', 's17-people':'pane-s17', 's17-nd':'pane-s17', 's17-dod':'pane-s17', 's17-ship':'pane-s17', 's17-arte':'pane-s17', 's17-build-arte':'pane-s17', 's17-research-arte':'pane-s17', 's18':'pane-s18', 's18-plan':'pane-s18', 's18-io':'pane-s18', 's18-flow':'pane-s18', 's18-proof':'pane-s18', 's18-people':'pane-s18', 's18-nd':'pane-s18', 's18-dod':'pane-s18', 's18-ship':'pane-s18', 's18-arte':'pane-s18', 's18-build-arte':'pane-s18', 's18-research-arte':'pane-s18', 's19':'pane-s19', 's19-plan':'pane-s19', 's19-io':'pane-s19', 's19-flow':'pane-s19', 's19-proof':'pane-s19', 's19-people':'pane-s19', 's19-nd':'pane-s19', 's19-dod':'pane-s19', 's19-ship':'pane-s19', 's19-arte':'pane-s19', 's19-build-arte':'pane-s19', 's19-research-arte':'pane-s19', 's20':'pane-s20', 's20-plan':'pane-s20', 's20-io':'pane-s20', 's20-flow':'pane-s20', 's20-proof':'pane-s20', 's20-people':'pane-s20', 's20-nd':'pane-s20', 's20-dod':'pane-s20', 's20-ship':'pane-s20', 's20-arte':'pane-s20', 's20-build-arte':'pane-s20', 's20-research-arte':'pane-s20', 's21':'pane-s21', 's21-plan':'pane-s21', 's21-io':'pane-s21', 's21-flow':'pane-s21', 's21-proof':'pane-s21', 's21-people':'pane-s21', 's21-nd':'pane-s21', 's21-dod':'pane-s21', 's21-ship':'pane-s21', 's21-arte':'pane-s21', 's21-build-arte':'pane-s21', 's21-research-arte':'pane-s21', 's22':'pane-s22', 's22-plan':'pane-s22', 's22-io':'pane-s22', 's22-flow':'pane-s22', 's22-proof':'pane-s22', 's22-people':'pane-s22', 's22-nd':'pane-s22', 's22-dod':'pane-s22', 's22-ship':'pane-s22', 's22-arte':'pane-s22', 's22-build-arte':'pane-s22', 's22-research-arte':'pane-s22', 's23':'pane-s23', 's23-plan':'pane-s23', 's23-io':'pane-s23', 's23-flow':'pane-s23', 's23-proof':'pane-s23', 's23-people':'pane-s23', 's23-nd':'pane-s23', 's23-dod':'pane-s23', 's23-ship':'pane-s23', 's23-arte':'pane-s23', 's23-build-arte':'pane-s23', 's23-research-arte':'pane-s23'
 };
 function _setPane(paneId){
   document.querySelectorAll('.pane').forEach(function(p){p.classList.toggle('on', p.id===paneId);});
