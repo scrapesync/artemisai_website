@@ -1,14 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QA Dashboard · ArtemisAI Admin</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.92);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans',sans-serif}
+  :root{--bg:#080b14;--panel:#0f1320;--panel2:#141b2d;--line:#212b45;--ink:#e9eef8;--mut:#8793ab;--mut2:#aab4c8;--teal:#00D6AE;--amber:#f5a623;--violet:#a78bfa;--red:#f87171;--blue:#38bdf8;--green:#34d399}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'DM Sans','Outfit',system-ui,Arial,sans-serif;background:
+    radial-gradient(1100px 600px at 85% -10%, rgba(109,99,255,.14), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(0,214,174,.10), transparent 55%), var(--bg);
+    color:var(--ink);min-height:100vh}
+  .wrap{max-width:1200px;margin:0 auto;padding:22px 22px 60px}
+
+  .hd h1{font-size:26px;font-weight:900;letter-spacing:-.4px}
+  .hd p{color:var(--mut);font-size:14px;line-height:1.6;margin-top:6px;max-width:780px}
+  .hd p b{color:var(--mut2)}
+  .stamp{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--mut)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+  .dot.stale{background:var(--amber);box-shadow:0 0 10px var(--amber)}
+  .stamp b{color:var(--mut2);font-weight:700}
+
+  .tabs{display:flex;gap:8px;margin:20px 0 16px;flex-wrap:wrap}
+  .tab{font-family:inherit;font-size:14.5px;font-weight:800;padding:10px 20px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--mut2);cursor:pointer;transition:.15s}
+  .tab:hover{border-color:rgba(0,214,174,.5);color:var(--ink)}
+  .tab.on{background:rgba(0,214,174,.12);border-color:var(--teal);color:var(--teal)}
+  .pane{display:none}.pane.on{display:block}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .card h3{font-size:13px;font-weight:800;color:var(--mut2);letter-spacing:.04em;margin-bottom:10px}
+  .card .big{font-size:32px;font-weight:900;line-height:1.1}
+  .card .sub{font-size:12.5px;color:var(--mut);margin-top:5px;line-height:1.5}
+  .ok{color:var(--green)}.warn{color:var(--amber)}.bad{color:var(--red)}.neutral{color:var(--teal)}
+
+  h2.sec{font-size:17px;font-weight:900;margin:26px 0 10px;display:flex;align-items:center;gap:10px}
+  h2.sec::after{content:"";flex:1;height:1px;background:var(--line)}
+  .pane > h2.sec:first-child{margin-top:0}
+  .hint{font-size:13px;color:var(--mut);line-height:1.6;margin:0 0 12px;max-width:840px}
+  .hint b{color:var(--mut2)}
+
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:10px 12px;border-bottom:1px solid rgba(33,43,69,.55);color:var(--mut2);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  .tw{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:auto}
+  .mono{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:12px}
+  .pill{display:inline-block;font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px;white-space:nowrap}
+  .pill.ok{background:rgba(52,211,153,.13);color:var(--green);border:1px solid rgba(52,211,153,.4)}
+  .pill.bad{background:rgba(248,113,113,.13);color:var(--red);border:1px solid rgba(248,113,113,.4)}
+
+  svg.spark{display:block;width:100%;height:44px;margin-top:10px}
+  .bar{height:9px;border-radius:6px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:9px}
+  .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#00D6AE,#38bdf8)}
+
+  .sqlwrap{display:grid;grid-template-columns:1fr 300px;gap:14px;align-items:start}
+  @media(max-width:900px){.sqlwrap{grid-template-columns:1fr}}
+  textarea#sql{width:100%;min-height:190px;background:#070a11;border:1px solid var(--line);border-radius:12px;color:var(--ink);
+    font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:1.65;padding:14px;resize:vertical;outline:none}
+  textarea#sql:focus{border-color:var(--teal)}
+  .row{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:10px}
+  .btn{font-family:inherit;font-size:13.5px;font-weight:800;padding:9px 18px;border-radius:10px;border:1px solid var(--teal);background:rgba(0,214,174,.14);color:var(--teal);cursor:pointer}
+  .btn:hover{background:rgba(0,214,174,.24)}
+  .btn:disabled{opacity:.55;cursor:default}
+  .btn.ghost{border-color:var(--line);background:transparent;color:var(--mut2)}
+  .btn.ghost:hover{border-color:var(--mut);color:var(--ink)}
+  select{font-family:inherit;font-size:13px;padding:8px 11px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);outline:none}
+  select:focus{border-color:var(--teal)}
+  label.lab{font-size:12px;color:var(--mut)}
+  .err{background:rgba(248,113,113,.09);border:1px solid rgba(248,113,113,.4);color:#ffd9d9;border-radius:11px;padding:12px 15px;font-size:13px;line-height:1.6;margin-top:12px}
+  .err b{color:var(--red)}
+  .snip{display:block;width:100%;text-align:left;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--mut);
+    font-family:inherit;font-size:12.5px;padding:9px 11px;cursor:pointer;margin-bottom:7px;line-height:1.45}
+  .snip:hover{border-color:var(--teal);color:var(--mut2)}
+  .snip b{display:block;color:var(--ink);font-size:13px;margin-bottom:2px;font-weight:700}
+  .saved{display:flex;gap:6px;align-items:center;margin-bottom:4px}
+  .saved button.open{flex:1;text-align:left;background:none;border:none;color:var(--mut2);font-family:inherit;font-size:12.5px;cursor:pointer;padding:6px 8px;border-radius:7px}
+  .saved button.open:hover{background:rgba(255,255,255,.05);color:var(--ink)}
+  .saved button.del{background:none;border:none;color:var(--mut);cursor:pointer;font-size:15px;padding:2px 7px;border-radius:6px}
+  .saved button.del:hover{color:var(--red)}
+  .empty{color:var(--mut);font-size:13px;padding:18px;text-align:center;line-height:1.6}
+
+/* ===== shared site header (sn-*) ===== */
+nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}
 nav.site-nav *{box-sizing:border-box}
 .sn-logo{font-size:1rem;font-weight:800;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.55rem;flex-shrink:0}
 .sn-logo-mark{width:26px;height:26px;flex-shrink:0}.sn-logo-mark svg{width:100%;height:100%;min-width:0!important}
@@ -20,143 +94,32 @@ nav.site-nav *{box-sizing:border-box}
 .sn-name{font-size:.78rem;color:#e8ecf4;font-weight:600;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sn-logout{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-family:inherit;font-size:.8rem;padding:.26rem .6rem;cursor:pointer;transition:all .2s}
 .sn-logout:hover{border-color:rgba(248,113,113,.4);color:#f87171}
-#signout-modal{display:none;position:fixed;inset:0;background:rgba(3,6,12,.7);backdrop-filter:blur(6px);z-index:2000;align-items:center;justify-content:center}
-#signout-modal.on{display:flex}
-#signout-modal .sm-card{background:#0C1220;border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:26px 28px;max-width:340px;text-align:center}
-#signout-modal h3{color:#e8ecf4;font-size:16px;margin:0 0 8px;font-family:'DM Sans',sans-serif}
-#signout-modal p{color:#8a96ac;font-size:13px;margin:0 0 18px;line-height:1.5}
-#signout-modal .sm-row{display:flex;gap:10px;justify-content:center}
-#signout-modal button{padding:9px 18px;border-radius:9px;font-weight:700;font-size:12.5px;cursor:pointer;font-family:inherit}
-#signout-modal .sm-yes{background:#f87171;border:none;color:#12060a}
-#signout-modal .sm-no{background:transparent;border:1px solid rgba(255,255,255,.15);color:#c8d0dd}
-@media (max-width:640px){.site-nav{height:48px;padding:0 12px}.sn-pill{padding:.3rem .75rem;font-size:.7rem}}
-:root{
-  --bg:#060A13;--panel:rgba(255,255,255,.028);--panel2:rgba(255,255,255,.055);
-  --line:rgba(255,255,255,.07);--line2:rgba(255,255,255,.13);
-  --t1:#E8ECF4;--t2:#A3AFC4;--t3:#8A96AC;
-  --okT:#00D4AA;--badT:#FB5D77;--warnT:#F7BE4F;--skyT:#57B5F0;--indT:#8A96FF;
-  --mono:'JetBrains Mono',ui-monospace,monospace;--grad:linear-gradient(120deg,#00D4AA,#6C7BFB);
-  --aur1:rgba(108,123,251,.07);--aur2:rgba(0,212,170,.05);--tipbg:#0B1120;--railbg:rgba(9,13,22,.96);
-}
-body.light{
-  --bg:#F3F5FA;--panel:#FFFFFF;--panel2:#EEF1F8;--line:rgba(14,21,36,.09);--line2:rgba(14,21,36,.17);
-  --t1:#101828;--t2:#3E4C63;--t3:#5C6A83;
-  --okT:#067A60;--badT:#C2274B;--warnT:#8F6400;--skyT:#1F6FA8;--indT:#4650C9;
-  --grad:linear-gradient(120deg,#0B8A6F,#4650C9);--aur1:rgba(70,80,201,.06);--aur2:rgba(11,138,111,.06);
-  --tipbg:#FFFFFF;--railbg:rgba(250,251,254,.97);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:radial-gradient(1200px 500px at 80% -10%,var(--aur1),transparent 60%),radial-gradient(900px 420px at 8% 0%,var(--aur2),transparent 55%),var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;padding-top:52px;min-height:100vh;transition:background .25s,color .25s}
-a{color:inherit}button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
-button:focus-visible,[draggable]:focus-visible{outline:2px solid var(--okT);outline-offset:2px;border-radius:8px}
-.wrap{max-width:1520px;margin:0 auto;padding:26px 30px 90px;position:relative}
-.ph{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;margin-bottom:16px}
-.ph .kick{font-size:10.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:block;margin-bottom:7px}
-.ph h1{font-size:30px;font-weight:800;letter-spacing:-.8px;line-height:1}
-.ph h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.ph .sub{font-size:12.5px;color:var(--t2);margin-top:8px}
-.ph .tools{margin-left:auto;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
-.tbtn{font-size:12px;font-weight:800;padding:9px 15px;border-radius:11px;border:1px solid var(--line);color:var(--t2);transition:.15s;background:var(--panel)}
-.tbtn:hover{color:var(--t1);border-color:var(--line2)}
-.tbtn.pri{background:var(--grad);color:#fff;border:none}
-body:not(.light) .tbtn.pri{color:#04110D}
-#freshness{font-family:var(--mono);font-weight:700;font-size:11px;color:var(--okT);border:1px solid var(--line2);padding:2px 9px;border-radius:99px}
-/* tab bar */
-.tabbar{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:14px;flex-wrap:wrap}
-.tab{font-size:13px;font-weight:800;padding:11px 18px;color:var(--t3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:.15s;display:flex;align-items:center;gap:8px}
-.tab:hover{color:var(--t2)}
-.tab.on{color:var(--t1);border-bottom-color:var(--okT)}
-.tab .dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.5}
-.tab.on .dot{opacity:1;background:var(--okT)}
-/* filter bar */
-.filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:18px;padding:11px 14px;background:var(--panel);border:1px solid var(--line);border-radius:14px}
-.filters .flab{font-size:10.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--t3)}
-.grainp{display:inline-flex;gap:2px;background:var(--panel2);border-radius:99px;padding:3px}
-.gp{font-size:11.5px;font-weight:800;padding:6px 13px;border-radius:99px;color:var(--t3);transition:.15s}
-.gp.on{background:var(--bg);color:var(--t1)}
-body.light .gp.on{background:#fff}
-.quickp{display:inline-flex;gap:6px}
-.qp{font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:9px;border:1px solid var(--line);color:var(--t2);transition:.15s}
-.qp:hover{border-color:var(--line2);color:var(--t1)}
-.qp.on{background:var(--okT);color:#04110D;border-color:transparent;font-weight:800}
-.daterange{display:inline-flex;gap:6px;align-items:center}
-.daterange input{background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--t1);font-family:var(--mono);font-size:11px;padding:6px 8px}
-.filters .sp{margin-left:auto}
-/* board */
-.board{display:grid;grid-template-columns:repeat(12,1fr);gap:15px;align-items:start;transition:margin .25s}
-body.edit .board{margin-right:292px}
-.widget{grid-column:span 6;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px 17px 15px;position:relative;min-height:100px;box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
-body.light .widget{box-shadow:0 1px 2px rgba(14,21,36,.04),0 8px 26px -18px rgba(14,21,36,.18)}
-.widget.s3{grid-column:span 3}.widget.s4{grid-column:span 4}.widget.s6{grid-column:span 6}.widget.s8{grid-column:span 8}.widget.s12{grid-column:span 12}
-.widget.dragging{opacity:.35}
-.widget.dropbefore::before{content:'';position:absolute;left:-10px;top:8px;bottom:8px;width:3px;border-radius:3px;background:var(--okT);box-shadow:0 0 12px rgba(0,212,170,.5)}
-.whead{display:flex;align-items:center;gap:8px;margin-bottom:11px;min-height:22px}
-.whead .grab{display:none;color:var(--t3);font-size:13px;cursor:grab;letter-spacing:-1px;padding:2px 5px;margin-left:-5px}
-body.edit .whead .grab{display:inline-block}
-.whead h3{font-size:12.5px;font-weight:800;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.whead .wsub{font-size:10.5px;color:var(--t3);font-family:var(--mono);white-space:nowrap}
-.whead .sp{margin-left:auto}
-.wctl{display:flex;gap:4px;align-items:center;flex-wrap:wrap;justify-content:flex-end;max-width:100%}
-.whead{flex-wrap:wrap}
-.vizsel{background:var(--panel2);border:1px solid var(--line);border-radius:7px;color:var(--t2);font-family:var(--mono);font-size:10px;padding:3px 4px;max-width:92px}
-.vizsel:focus{outline:2px solid var(--okT);outline-offset:1px}
-.wctl button{width:24px;height:22px;border-radius:7px;font-size:10.5px;color:var(--t3);border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700}
-.wctl button:hover{color:var(--t1);border-color:var(--line);background:var(--panel2)}
-.wctl button.on{color:var(--okT)}
-.wctl .kill{display:none}
-body.edit .wctl .kill{display:inline-flex}
-.wctl .kill:hover{color:var(--badT);border-color:rgba(251,93,119,.4)}
-.wbody{min-height:44px}
-.wbody{overflow:hidden}.wbody svg{display:block;max-width:100%;width:100%;overflow:visible}
-@keyframes dashin{to{stroke-dashoffset:0}}
-.anim path.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:dashin 1s cubic-bezier(.4,0,.2,1) forwards}
-.anim .fadein{opacity:0;animation:fin .7s .4s forwards}
-@keyframes fin{to{opacity:1}}
-@media (prefers-reduced-motion:reduce){.anim path.draw{animation:none;stroke-dashoffset:0}.anim .fadein{animation:none;opacity:1}}
-.kpi{display:flex;flex-direction:column;gap:7px}
-.kpi .kv{font-family:var(--mono);font-size:29px;font-weight:700;letter-spacing:-1px;line-height:1;display:flex;align-items:baseline;gap:4px}
-.kpi .kv small{font-size:14px;color:var(--t3);font-weight:600}
-.kpi .kd{font-size:11px;color:var(--t3)}.kpi .kd b{font-family:var(--mono);font-weight:700;color:var(--t2)}
-.kdelta{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:800;font-family:var(--mono);padding:3px 9px;border-radius:99px;background:var(--panel2);width:fit-content}
-.kdelta.up{color:var(--okT)}.kdelta.dn{color:var(--badT)}.kdelta.flat{color:var(--t3)}
-table.qt{width:100%;border-collapse:collapse;font-size:12px}
-table.qt th{font-size:10px;letter-spacing:.9px;text-transform:uppercase;color:var(--t3);text-align:left;font-weight:800;padding:0 8px 9px 0;border-bottom:1px solid var(--line)}
-table.qt td{padding:9px 8px 9px 0;border-bottom:1px solid var(--line);color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:230px}
-table.qt td.m{font-family:var(--mono);font-size:11.5px;color:var(--t1)}
-table.qt tr:last-child td{border-bottom:none}
-.pillst{font-size:10px;font-weight:800;padding:3px 10px;border-radius:99px;font-family:var(--mono)}
-.pillst.ok{color:var(--okT);background:rgba(0,196,160,.12)}.pillst.bad{color:var(--badT);background:rgba(251,93,119,.12)}.pillst.warn{color:var(--warnT);background:rgba(247,190,79,.14)}
-.leg{display:flex;gap:12px;flex-wrap:wrap;margin-top:9px}
-.leg span{font-size:10.5px;color:var(--t3);display:inline-flex;align-items:center;gap:6px}
-.leg i{width:9px;height:9px;border-radius:3px;display:inline-block}
-.heatwrap{display:grid;gap:5px}
-.hcell{border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;height:38px;cursor:default}
-.hlab{font-size:10px;color:var(--t3);font-weight:800;letter-spacing:.5px;display:flex;align-items:center;justify-content:center}
-.blab{display:block;font-size:9.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--t3);margin:8px 0 4px}
-.bsel{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--t1);font-family:inherit;font-size:11.5px;padding:7px 8px;margin-bottom:2px}
-.bsel:focus{outline:2px solid var(--okT);outline-offset:1px}
-.palette{position:fixed;top:52px;right:0;bottom:0;width:278px;background:var(--railbg);backdrop-filter:blur(18px);border-left:1px solid var(--line);padding:20px 17px 34px;overflow-y:auto;transform:translateX(100%);transition:transform .25s,visibility 0s .25s;visibility:hidden;z-index:60}
-body.edit .palette{transform:none;visibility:visible;transition:transform .25s,visibility 0s 0s}
-.palette h4{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--t3);font-weight:800;margin-bottom:6px}
-.palette .pdesc{font-size:10.5px;color:var(--t3);margin-bottom:12px;line-height:1.5}
-.pchipq{display:flex;align-items:center;gap:9px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);margin-bottom:7px;cursor:grab;font-size:12px;font-weight:700;color:var(--t1);transition:.15s;user-select:none}
-.pchipq:hover{border-color:var(--okT);transform:translateX(-2px)}
-.pchipq i{width:8px;height:8px;border-radius:3px;background:var(--pc,var(--okT));flex:0 0 auto}
-.pchipq small{margin-left:auto;color:var(--t3);font-size:9.5px;font-family:var(--mono)}
-.pnote{font-size:10.5px;color:var(--t3);line-height:1.65;margin-top:15px;border-top:1px solid var(--line);padding-top:13px}
-.boardend{grid-column:span 12;border:1.5px dashed transparent;border-radius:14px;min-height:8px}
-body.edit .boardend{border-color:var(--line2);min-height:60px;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:11.5px;font-weight:700}
-body.edit .boardend.hot{border-color:var(--okT);color:var(--okT)}
-#tip{position:fixed;z-index:120;background:var(--tipbg);border:1px solid var(--line2);border-radius:10px;padding:7px 11px;font-size:11px;font-family:var(--mono);color:var(--t1);pointer-events:none;transform:translate(-50%,-130%);opacity:0;transition:opacity .12s;box-shadow:0 14px 40px -10px rgba(0,0,0,.45);white-space:nowrap}
-#tip.on{opacity:1}#tip b{color:var(--okT)}
-.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(90px);background:var(--tipbg);border:1px solid var(--line2);color:var(--t1);font-size:12.5px;font-weight:700;padding:11px 19px;border-radius:12px;transition:.3s;z-index:90;box-shadow:0 18px 50px -12px rgba(0,0,0,.4)}
-.toast.on{transform:translateX(-50%) translateY(0)}
-@media (max-width:1100px){body.edit .board{margin-right:0}.palette{width:min(86vw,300px)}}
-@media (max-width:820px){.widget,.widget.s3,.widget.s4,.widget.s6,.widget.s8{grid-column:span 12}.ph h1{font-size:24px}.wrap{padding:20px 15px 70px}}
-</style>
-</head>
+#signout-modal{display:none;position:fixed;inset:0;z-index:99998;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif}
+#signout-modal.open{display:flex}
+#signout-backdrop{position:absolute;inset:0;background:rgba(2,5,12,.7);backdrop-filter:blur(4px)}
+#signout-card{position:relative;z-index:1;background:#0f1729;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem 2rem;max-width:340px;width:90%;box-shadow:0 30px 60px rgba(0,0,0,0.5);text-align:center}
+.signout-icon svg{width:34px;height:34px;stroke:#f87171;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-bottom:.5rem}
+.signout-title{font-size:1.05rem;font-weight:800;color:#e8ecf4}
+.signout-sub{font-size:.82rem;color:#8a96ad;margin:.4rem 0 1.1rem}
+.signout-btns{display:flex;gap:8px}
+.signout-cancel{flex:1;padding:.6rem;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:9px;color:#cdd5ee;font-family:inherit;font-size:.82rem;cursor:pointer}
+.signout-confirm{flex:1;padding:.6rem;background:#f87171;border:none;border-radius:9px;color:#2a0a0a;font-family:inherit;font-weight:700;font-size:.82rem;cursor:pointer}
+body{padding-top:52px!important}
+@media(max-width:768px){nav.site-nav{height:48px!important;padding:0 12px!important}.sn-pill{padding:.3rem .75rem!important;font-size:.7rem!important}body{padding-top:48px!important}.wrap{padding:16px 14px 50px}}
+
+/* ===== shared site footer (af-*) ===== */
+.af-footer{margin-top:56px;padding:30px 1.6rem;border-top:1px solid rgba(255,255,255,.07);background:rgba(6,10,19,.45);font-family:'DM Sans','Outfit',system-ui,sans-serif}
+.af-footer-in{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.af-brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.12em;color:#e8ecf4;font-size:.9rem}
+.af-brand svg{width:24px!important;height:24px!important;min-width:0!important;flex-shrink:0}
+.af-copy{font-size:.8rem;color:#7c89a3}
+.af-links{display:flex;gap:20px;flex-wrap:wrap}
+.af-links a{font-size:.8rem;color:#9aa6bd;text-decoration:none;transition:color .2s}
+.af-links a:hover{color:#00d4aa}
+@media(max-width:640px){.af-footer-in{flex-direction:column;text-align:center;gap:12px}.af-footer{margin-top:40px}}
+</style></head>
 <body>
+
 <nav class="site-nav">
   <a href="index.html" class="sn-logo">
     <div class="sn-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#slg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#slg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#slg)"/><defs><linearGradient id="slg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
@@ -177,72 +140,118 @@ body.edit .boardend.hot{border-color:var(--okT);color:var(--okT)}
     <div class="signout-btns"><button class="signout-cancel" onclick="_closeSignoutModal()">Cancel</button><button class="signout-confirm" onclick="_doSignout()">Sign Out</button></div>
   </div>
 </div>
-<main class="wrap">
-  <div class="ph">
-    <div>
-      <span class="kick">Admin &middot; Quality</span>
-      <h1><em>QA</em> Dashboard</h1>
-      <div class="sub">Live from Redshift &middot; <span id="freshness">loading&hellip;</span> &middot; <span id="sharedInfo" style="font-family:var(--mono);font-size:11px;color:var(--t3)">local layout</span></div>
-    </div>
-    <div class="tools">
-      <button class="tbtn" id="liveBtn" onclick="fetchLive()" title="Re-query Redshift now via the pipeline (~2 min)">&#9889; Fetch live</button>
-      <button class="tbtn" id="pubBtn" onclick="publishLayout()" title="Publish the current layout so the whole team sees it">&#8593; Publish</button>
-      <button class="tbtn" id="themeBtn" onclick="toggleTheme()" title="Light / dark">&#9789;</button>
-      <button class="tbtn" onclick="resetLayout()" title="Restore this tab's default board">&#8634; Reset tab</button>
-      <button class="tbtn pri" id="editBtn" onclick="toggleEdit()">&#10022; Customize</button>
+
+<div class="wrap">
+  <div class="hd">
+    <h1>QA Dashboard</h1>
+    <p>Two questions, answered plainly: <b>are the models still accurate</b>, and <b>did the data arrive</b>. Plus a place to write your own SQL and get a chart out of it.</p>
+    <div class="stamp">
+      <span class="dot" id="freshdot"></span>
+      <span id="freshtext">loading…</span>
+      <span style="color:var(--line)">|</span>
+      <span><b id="tPosts">–</b> posts</span>
+      <span><b id="tComments">–</b> comments</span>
+      <span><b id="tPages">–</b> pages</span>
     </div>
   </div>
 
-  <div id="liveProgress" style="display:none;margin-bottom:14px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-      <span id="lpLabel" style="font-size:12px;font-weight:700;color:var(--t1)">Fetching live data…</span>
-      <span id="lpEta" style="font-family:var(--mono);font-size:11px;color:var(--t3)"></span>
-    </div>
-    <div style="height:8px;background:var(--panel2);border:1px solid var(--line);border-radius:99px;overflow:hidden">
-      <div id="lpBar" style="height:100%;width:0%;background:var(--grad);border-radius:99px;transition:width .4s ease"></div>
-    </div>
-    <div id="lpStage" style="font-size:10.5px;color:var(--t3);margin-top:5px;font-family:var(--mono)"></div>
+  <div class="tabs">
+    <button class="tab on" data-pane="p-acc" onclick="showTab('p-acc')">Accuracy</button>
+    <button class="tab" data-pane="p-dq" onclick="showTab('p-dq')">Data quality</button>
+    <button class="tab" data-pane="p-sql" onclick="showTab('p-sql')">Build a chart (SQL)</button>
   </div>
 
-  <div class="tabbar" id="tabbar"></div>
+  <!-- ============ ACCURACY ============ -->
+  <div class="pane on" id="p-acc">
+    <h2 class="sec">Model accuracy</h2>
+    <p class="hint">One card per model we run in production. The big number is where it stands now; the line is the last 30 days. We have no human ground truth in production, so for the NLP models "accuracy" means <b>agreement with the DeepSeek second pass</b>, and for the rest it means <b>the model's own calibrated confidence</b>. Those are the honest measures available without labels. A card reading <b>not measured</b> means the last runs produced no second-pass comparisons to score against, which is different from scoring badly.</p>
+    <div class="grid" id="accCards"></div>
 
-  <div class="filters">
-    <span class="flab">Grain</span>
-    <span class="grainp" id="grainp">
-      <button class="gp" data-g="day" onclick="setGrain('day')">Day</button>
-      <button class="gp" data-g="week" onclick="setGrain('week')">Week</button>
-      <button class="gp" data-g="month" onclick="setGrain('month')">Month</button>
-      <button class="gp on" data-g="quarter" onclick="setGrain('quarter')">Quarter</button>
-    </span>
-    <span class="flab" style="margin-left:8px">Quick</span>
-    <span class="quickp" id="quickp">
-      <button class="qp" data-q="7" onclick="setQuick(7)">7d</button>
-      <button class="qp" data-q="30" onclick="setQuick(30)">30d</button>
-      <button class="qp" data-q="90" onclick="setQuick(90)">90d</button>
-    </span>
-    <span class="flab" style="margin-left:8px">Custom</span>
-    <span class="daterange">
-      <input type="date" id="dfrom" onchange="setCustom()" aria-label="from date">
-      <span style="color:var(--t3);font-size:11px">to</span>
-      <input type="date" id="dto" onchange="setCustom()" aria-label="to date">
-    </span>
-    <span class="sp"></span>
-    <span class="flab" id="rangeInfo" style="font-family:var(--mono);text-transform:none;letter-spacing:0">&mdash;</span>
+    <h2 class="sec">Sentiment: predicted vs second pass</h2>
+    <p class="hint">Where the sentiment model and the second pass disagree. The diagonal is agreement; everything off it is a case worth looking at.</p>
+    <div class="tw" id="confusion"></div>
+
+    <h2 class="sec">Routing: which tier handled the work</h2>
+    <p class="hint">High-confidence predictions commit automatically; the rest escalate. If the escalation share climbs, the models are getting less sure about incoming data.</p>
+    <div class="tw" id="escalation"></div>
   </div>
 
-  <section class="board" id="board" aria-label="QA widgets"></section>
+  <!-- ============ DATA QUALITY ============ -->
+  <div class="pane" id="p-dq">
+    <h2 class="sec">Did the data arrive?</h2>
+    <p class="hint">The weekly run, table by table. <b>Pass</b> means it loaded inside the expected window. Anything else needs a look before the numbers on any other screen can be trusted.</p>
+    <div class="tw" id="freshness"></div>
 
-  <aside class="palette" id="palette" aria-label="Add graphs">
-    <h4 id="palTitle">Add graphs</h4>
-    <div class="pdesc" id="palDesc"></div>
-    <div id="palList"></div>
-    <div class="pnote">Drag a metric onto the board, or click to append. Each tab keeps its own layout. Drag the &#10247; handle to reorder, S/M/L cycles width, and the date filter above applies to every trend on the tab.</div>
-  </aside>
-</main>
-<div class="toast" id="toast"></div>
-<div id="tip"></div>
+    <h2 class="sec">Rows loaded, last 30 days</h2>
+    <p class="hint">The pipeline runs weekly, so most days are zero by design. The spikes are the runs, and <b>a missing spike is the thing to notice</b>.</p>
+    <div class="card"><div id="loadChart"></div></div>
 
-<script>(function(){
+    <h2 class="sec">Quality checks</h2>
+    <p class="hint">Completeness is the share of rows that actually carry a label. The rest count problems, where zero is the goal.</p>
+    <div class="grid" id="qualityCards"></div>
+  </div>
+
+  <!-- ============ SQL ============ -->
+  <div class="pane" id="p-sql">
+    <h2 class="sec">Build your own chart</h2>
+    <p class="hint">Write a read-only <b>SELECT</b> against Redshift and turn the result into a chart or a table. The <b>first column is the x-axis</b> (or the label); every numeric column after it gets plotted. Results cap at 5,000 rows, queries time out at 20 seconds, and nothing but SELECT will run.</p>
+    <div class="sqlwrap">
+      <div>
+        <textarea id="sql" spellcheck="false" placeholder="SELECT date, COUNT(*) AS predictions
+FROM rdl.post_label_predictions
+GROUP BY 1
+ORDER BY 1"></textarea>
+        <div class="row">
+          <button class="btn" onclick="runSQL()" id="runBtn">Run query</button>
+          <label class="lab" for="viz">Chart</label>
+          <select id="viz" onchange="renderResult()">
+            <option value="line">Line</option>
+            <option value="bar">Bar</option>
+            <option value="table">Table only</option>
+          </select>
+          <button class="btn ghost" onclick="saveQuery()">Save</button>
+          <button class="btn ghost" onclick="downloadCSV()">CSV</button>
+          <span id="qmeta" style="font-size:12.5px;color:var(--mut)"></span>
+        </div>
+        <div id="sqlErr"></div>
+        <div id="sqlOut" style="margin-top:14px"></div>
+      </div>
+      <div>
+        <div class="card" style="padding:14px 15px">
+          <h3>Start from an example</h3>
+          <button class="snip" onclick="useSnip(0)"><b>Predictions per day</b>how many posts got labelled each day</button>
+          <button class="snip" onclick="useSnip(1)"><b>Sentiment mix</b>how many posts of each sentiment</button>
+          <button class="snip" onclick="useSnip(2)"><b>Rows per table</b>size of the core tables</button>
+          <button class="snip" onclick="useSnip(3)"><b>Comments per page</b>top pages by comment volume</button>
+          <button class="snip" onclick="useSnip(4)"><b>Confidence spread</b>how sure the model is</button>
+        </div>
+        <div class="card" style="padding:14px 15px;margin-top:12px">
+          <h3>Saved queries</h3>
+          <div id="savedList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="af-footer">
+  <div class="af-footer-in">
+    <div class="af-brand">
+      <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#aflg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#aflg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#aflg)"/><defs><linearGradient id="aflg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
+      ARTEMISAI
+    </div>
+    <div class="af-copy">&copy; 2026 Artemis AI &middot; Internal preview</div>
+    <div class="af-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="mailto:hello@artemisai.co.uk">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- session chrome ---------- */
+(function(){
   try{
     var sess = localStorage.getItem('artemis_session') || localStorage.getItem('artemis_sprint_session') || localStorage.getItem('artemis_app_session');
     if(sess){
@@ -260,1056 +269,339 @@ var _signoutFn=null;
 function handleLogout(){_showSignoutModal(function(){localStorage.removeItem('artemis_session');localStorage.removeItem('artemis_sprint_session');localStorage.removeItem('artemis_app_session');localStorage.removeItem('artemis_viewer_name');window.location.href='index.html';});}
 function _showSignoutModal(fn){_signoutFn=fn||function(){localStorage.removeItem('artemis_session');window.location.href='index.html';};document.getElementById('signout-modal').classList.add('open');}
 function _closeSignoutModal(){document.getElementById('signout-modal').classList.remove('open');}
-function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}</script>
-<script>
-/* ══════════ ArtemisAI QA Dashboard · four tabs, live Redshift ══════════ */
-const C={teal:'#00D4AA',indigo:'#6C7BFB',gold:'#F7BE4F',sky:'#57B5F0',rose:'#FB5D77',t3:'#8A96AC',p4:'#556179'};
-const THEMES={
-  dark:{teal:'#00D4AA',indigo:'#6C7BFB',gold:'#F7BE4F',sky:'#57B5F0',rose:'#FB5D77',p4:'#556179',ink:'#E8ECF4',mut:'#8A96AC',grid:'rgba(255,255,255,.06)',track:'rgba(255,255,255,.07)',heat:['#0E2A24','#0E8F76','#17A386','#3FD0B4'],g1:'#00D4AA',g2:'#6C7BFB'},
-  light:{teal:'#0B8A6F',indigo:'#4650C9',gold:'#B07500',sky:'#1F6FA8',rose:'#C2274B',p4:'#7A879C',ink:'#101828',mut:'#5C6A83',grid:'rgba(14,21,36,.08)',track:'rgba(14,21,36,.08)',heat:['#E4EEF0','#7FC9B8','#2AA88C','#0B8A6F'],g1:'#0B8A6F',g2:'#4650C9'}
-};
-let TH=THEMES.dark, THEME='dark';
+function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
 
-/* ---- seed fallback (small; live JSON overrides) ---- */
-function flat(v,n){return {day:Array(30).fill(v),week:Array(13).fill(v),month:Array(4).fill(v),quarter:Array(2).fill(v),daily:Array(120).fill(v)};}
-const SEED={
-  overview:{scores:[['Accuracy',88],['Health',83],['Quality',91],['Coverage',99]],
-    pipeline:[['LOKI ingest','—','pass','—'],['NEBULA posts','—','pass','—'],['Fusion','—','pass','—']],
-    today:[['Posts labelled',0,0],['Comments',0,0]],volume:flat(300),load_status:flat(97),
-    freshness:[['page_posts','—','pass','—','on time']],escalation:[['NLP tier',7694],['DeepSeek tier',7638],['Claude tier',0]],
-    conn_status:[['active',20]],copy_jobs:[['success',1284],['failed/other',12]],volume2:flat(28000)},
-  accuracy:{agreement:flat(88),nlp_conf:flat(86),ds_conf:flat(90),comment_agreement:flat(85),
-    confusion:{rows:['positive','neutral','negative'],cols:['positive','neutral','negative'],v:[[5012,241,24],[198,1720,55],[31,88,447]]},
-    conf_buckets:[['<50%',142],['50-70%',588],['70-85%',1663],['85-95%',2894],['95-100%',2407]],
-    per_dim:[['sentiment',88.2],['emotion',79.5],['toxicity',98.1]],dim_conf:[['sentiment',86],['emotion',81],['topic',80],['intent',83],['toxicity',95]],
-    escalation:[['NLP tier',7694],['DeepSeek tier',7638],['Claude tier',0]],proctime:flat(240),
-    fusion_conf:flat(82),video_conf:flat(78),uncertain:[['Confident',38],['Uncertain',3]]},
-  health:{freshness:[['page_posts','—','pass','—','on time']],daily_loads:{posts:flat(950),comments:flat(28000)},
-    load_status:flat(97),missing_days:[['no gaps',0]],lag:flat(1.2),rowcount_delta:flat(28000),
-    copy_jobs:[['success',1284],['failed/other',12]],reactions_load:flat(9500),demographics_load:flat(420),
-    staging_drift:[['fusion staging',862],['fusion prod',862]],insights_load:flat(2400)},
-  quality:{completeness:[['sentiment',99.3],['emotion',99.3],['topic',99.1],['intent',99.3],['toxicity',99.4],['ds sentiment',99.3]],
-    dupes:[['dim_comments',0],['dim_posts',0],['dim_pages',0]],integrity:[['orphan post facts',0],['orphan comments',12]],
-    dq_score:flat(91),highconf:flat(82),validity:[['confidence out of range',0],['negative reactions',0]],
-    text_lengths:[['1-2',612],['3-5',388],['6-10',196],['11-20',64],['20+',24]],
-    null_heat:[['nlp_sentiment',0.7],['cl_sentiment',100],['fusion.label',0]],
-    dim_coverage:[['dim_date',3653],['dim_pages',20],['dim_comments',2700145]],
-    version_drift:{rows:['v1','v2'],cols:['negative','neutral','positive'],v:[[210,1180,4210],[240,1090,4360]]},
-    conn_status:[['active',20]],orphan_trend:flat(8)},
-  analytics:{topic:[['Humour',4299],['Lifestyle',916],['Opinion Poll',878],['Entertainment',582],['Community',310]],
-    intent:[['Entertain',4606],['Engage',1624],['Inform',472],['Complain',467]],
-    emotion:[['joy',5294],['surprise',1096],['love',547],['sadness',420],['anger',267],['fear',70]],
-    fusion:[['lifestyle',253],['meme',252],['text-heavy',222],['screenshot',103],['product_shot',32]],
-    tier:[['Established',6],['Growing',6],['Major',3],['Emerging',3],['Mega',2]],
-    sentiment_trend:flat(68),reactions:[['Like',48210],['Love',12840],['Haha',9330],['Wow',3120],['Sad',1450],['Angry',890]],
-    emotion_scores:{axes:['Joy','Sadness','Anger','Fear','Surprise','Disgust'],v:[68.8,5.5,3.5,0.9,14.2,2.1]},
-    page_growth:flat(2400000),demographics:[['PK',412000],['US',88000],['IN',64000],['GB',41000]],
-    reaction_sentiment:[['positive',4],['neutral',1],['negative',2]],video_scene:[['talking_head',18],['lifestyle',12]],
-    hook_scores:[['0-20%',4],['20-40%',7],['40-60%',12],['60-80%',9],['80-100%',9]],
-    gpt_recs:[['Post more Humour',22],['Increase video',14],['Engage at 6pm',11]]}
-};
-let DATA=JSON.parse(JSON.stringify(SEED));
-let AXIS=[]; // daily date strings from live window
-let EXPLORE={}; // per-table pre-baked aggregates for the custom graph builder
-
-/* ---- metric catalogue per tab: [key, title, colorKey, allowedVizzes, defaultViz] ---- */
-const TABS={
-  overview:{name:'Overview',desc:'The whole pipeline at a glance: last run status, freshness, today vs yesterday, and top-line scores from every tab.',
-    metrics:{
-      scores:['Health scores','teal',['scorecards'],'scorecards'],
-      calendar:['Run calendar','teal',['calendar'],'calendar'],
-      pipeline:['Pipeline run status','teal',['pipeline'],'pipeline'],
-      today:['Today vs yesterday','sky',['deltas'],'deltas'],
-      volume:['Labelling activity/day','teal',['line','area','kpi'],'line',''],
-      freshness:['Table freshness','indigo',['table'],'table'],
-      load_status:['Load completeness','teal',['line','area','kpi'],'line','%'],
-      escalation:['Tier routing usage','gold',['bars'],'bars'],
-      conn_status:['FB connections','sky',['bars','donut'],'donut'],
-      copy_jobs:['Ingestion jobs','indigo',['bars','donut'],'donut'],
-      volume2:['Comment volume/day','indigo',['line','area'],'line',''],
-    }},
-  accuracy:{name:'Accuracy',desc:'No human ground truth, so accuracy = how much the NLP and DeepSeek tiers agree, and how confident they are. Covers posts, comments, fusion and video.',
-    metrics:{
-      agreement:['NLP vs DS agreement (posts)','teal',['line','kpi'],'line','%'],
-      comment_agreement:['NLP vs DS agreement (comments)','sky',['line','kpi'],'line','%'],
-      nlp_conf:['NLP confidence','sky',['line','kpi'],'line','%'],
-      ds_conf:['DeepSeek confidence','indigo',['line','kpi'],'line','%'],
-      confusion:['Sentiment confusion (NLP×DS)','teal',['confusion'],'confusion'],
-      conf_buckets:['Confidence distribution','indigo',['histo','bars'],'histo'],
-      per_dim:['Agreement by dimension','teal',['bars'],'bars'],
-      dim_conf:['Confidence by dimension','sky',['bars'],'bars'],
-      escalation:['Tier routing usage','gold',['bars'],'bars'],
-      proctime:['Processing time','indigo',['line','kpi'],'line','ms'],
-      fusion_conf:['Fusion classifier confidence','sky',['line','kpi'],'line','%'],
-      video_conf:['Video scene confidence','gold',['line','kpi'],'line','%'],
-      uncertain:['Video scene certainty','rose',['bars','donut'],'donut'],
-    }},
-  health:{name:'Data Health',desc:'Did each load arrive on its date, did anything fail or lag. Covers every ingest table, staging vs prod, and the Redshift copy jobs.',
-    metrics:{
-      freshness:['Table freshness','teal',['table'],'table'],
-      load_status:['Daily load completeness','teal',['line','kpi'],'line','%'],
-      daily_loads:['Rows loaded per day','sky',['loads'],'loads'],
-      rowcount_delta:['Comment volume/day','indigo',['line','bars'],'line',''],
-      insights_load:['Post insights/day','teal',['line'],'line',''],
-      reactions_load:['Reactions loaded/day','rose',['line'],'line',''],
-      demographics_load:['Demographics loaded/day','sky',['line'],'line',''],
-      lag:['Collection→load lag','gold',['line','kpi'],'line','d'],
-      missing_days:['Missed load days','rose',['bars'],'bars'],
-      copy_jobs:['Redshift copy jobs','indigo',['bars','donut'],'bars'],
-      staging_drift:['Staging vs prod rows','gold',['bars'],'bars'],
-    }},
-  quality:{name:'Data Quality',desc:'How good is the data: completeness, duplicates, referential integrity, validity, and null-rates across every table.',
-    metrics:{
-      completeness:['Column completeness','teal',['bars'],'bars'],
-      null_heat:['Null-rate by column','rose',['bars'],'bars'],
-      dq_score:['Data-quality score','teal',['line','kpi'],'line','%'],
-      highconf:['High-confidence share','sky',['line','kpi'],'line','%'],
-      dupes:['Duplicate keys','gold',['bars'],'bars'],
-      integrity:['Referential integrity','rose',['bars'],'bars'],
-      orphan_trend:['Orphan rows/day','rose',['line'],'line',''],
-      validity:['Range validity','rose',['bars'],'bars'],
-      text_lengths:['Comment length spread','indigo',['histo'],'histo'],
-      dim_coverage:['Dimension table rows','sky',['bars'],'bars'],
-      version_drift:['Sentiment v1 vs v2','gold',['confusion'],'confusion'],
-      conn_status:['FB connection status','teal',['bars','donut'],'bars'],
-    }},
-  analytics:{name:'Analytics',desc:'Everything else: content mix, sentiment, emotion, reactions, pages, demographics, video and GPT recommendations.',
-    metrics:{
-      topic:['Topics','teal',['bars'],'bars'],
-      intent:['Intents','indigo',['bars'],'bars'],
-      emotion:['Emotions','gold',['bars'],'bars'],
-      fusion:['Image classes','sky',['bars','donut'],'bars'],
-      tier:['Influence tiers','indigo',['bars','donut'],'donut'],
-      sentiment_trend:['Positive sentiment trend','teal',['line','kpi'],'line','%'],
-      reactions:['Reaction mix','rose',['bars','donut'],'bars'],
-      reaction_sentiment:['Reaction sentiment','sky',['bars','donut'],'donut'],
-      emotion_scores:['Emotion radar','teal',['radar'],'radar'],
-      page_growth:['Total fan count','teal',['line','kpi'],'line',''],
-      demographics:['Audience by country','indigo',['bars'],'bars'],
-      video_scene:['Video scene labels','gold',['bars','donut'],'bars'],
-      hook_scores:['Video hook scores','sky',['histo'],'histo'],
-      gpt_recs:['GPT recommendations','indigo',['bars'],'bars'],
-    }},
-};
-const DEFAULTS={
-  overview:[['scores','scorecards',12],['calendar','calendar',8],['pipeline','pipeline',4],['today','deltas',4],['volume','line',4],['load_status','line',4],['freshness','table',6],['escalation','bars',6],['conn_status','donut',3],['copy_jobs','donut',3],['volume2','line',6]],
-  accuracy:[['agreement','line',6],['comment_agreement','line',6],['confusion','confusion',6],['conf_buckets','histo',6],['per_dim','bars',6],['dim_conf','bars',6],['nlp_conf','line',6],['ds_conf','line',6],['fusion_conf','line',6],['video_conf','line',6],['escalation','bars',6],['proctime','line',6],['uncertain','donut',3]],
-  health:[['load_status','line',8],['freshness','table',4],['daily_loads','loads',6],['rowcount_delta','line',6],['insights_load','line',6],['reactions_load','line',6],['demographics_load','line',6],['lag','line',6],['copy_jobs','bars',6],['staging_drift','bars',6],['missing_days','bars',6]],
-  quality:[['dq_score','line',6],['highconf','line',6],['completeness','bars',6],['null_heat','bars',6],['text_lengths','histo',6],['dim_coverage','bars',6],['version_drift','confusion',6],['dupes','bars',4],['integrity','bars',4],['validity','bars',4],['orphan_trend','line',6],['conn_status','bars',4]],
-  analytics:[['topic','bars',6],['emotion_scores','radar',6],['emotion','bars',6],['intent','bars',6],['sentiment_trend','line',6],['demographics','bars',6],['page_growth','line',6],['hook_scores','histo',6],['video_scene','bars',6],['tier','donut',3],['fusion','bars',3],['reactions','bars',6],['gpt_recs','bars',6],['reaction_sentiment','donut',3]],
-};
-
-
-let TAB='overview', GRAIN='quarter', CUSTOM=null, EDIT=false, UID=0;
-let BOARDS={}; // per-tab layout
-const KEY='ARTEMIS_QA_TABS_V1';
-
-function col(k){return TH[k];}
-function newW(tab,src,viz,span){const m=TABS[tab].metrics[src];return{id:'w'+(++UID),src,viz:viz||m[3],span:span||(m[3]==='kpi'?3:6)};}
-
-async function loadLive(){
-  try{
-    const r=await fetch('qa_metrics.json?ts='+Date.now(),{cache:'no-store'});
-    if(!r.ok) return false;
-    const j=await r.json();
-    if(j&&j.tabs){
-      for(const tb in j.tabs){ if(!DATA[tb]) DATA[tb]={}; for(const k in j.tabs[tb]){ if(j.tabs[tb][k]!=null) DATA[tb][k]=j.tabs[tb][k]; } }
-      if(j.window&&Array.isArray(j.window.axis)) AXIS=j.window.axis;
-      if(j.explore&&typeof j.explore==='object') EXPLORE=j.explore;
-      META={source:'live',generated_at:j.generated_at||null,totals:j.totals||null};
-      return true;
-    }
-    return false;
-  }catch(e){return false;}
-}
-let META={source:'seed'};
-function stampFreshness(){
-  const el=document.getElementById('freshness'); if(!el) return;
-  if(META.source==='live'&&META.generated_at){
-    const d=new Date(META.generated_at);
-    const ageH=(Date.now()-d.getTime())/3.6e6;
-    const ago=ageH<1?Math.round(ageH*60)+'m ago':(ageH<48?Math.round(ageH)+'h ago':Math.round(ageH/24)+'d ago');
-    const stale=ageH>26;
-    el.innerHTML='snapshot '+d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})+' '
-      +d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})
-      +' &middot; '+ago+(stale?' &middot; STALE':'');
-    el.style.color=stale?'var(--warnT)':'var(--okT)';
-    el.title='Nightly Redshift snapshot. Auto-refreshes 01:00 UTC daily; use \u21bb Refresh to re-check. '+(stale?'More than a day old, check the Action.':'');
-  } else {
-    el.textContent='demo data';
-    el.style.color='var(--t3)';
-    el.title='No qa_metrics.json found. Set the REDSHIFT_* secrets and run the Nightly QA metrics Action once.';
-  }
+/* ---------- helpers ---------- */
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function fmtN(n){ if(n==null||isNaN(n)) return '–'; n=Number(n); return n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'k':String(Math.round(n*10)/10); }
+/* Last real measurement. A run that produced no comparisons writes 0, which is
+   "not measured", not "0% accurate": so an all-zero series returns null and the
+   card says so rather than showing a number that would read as total failure. */
+function lastVal(a){ if(!a||!a.length) return null; for(var i=a.length-1;i>=0;i--){ if(a[i]!=null && a[i]!==0) return a[i]; } return null; }
+function seriesVal(s){ if(!s) return null; var v=lastVal(s.day); if(v==null) v=lastVal(s.week); if(v==null) v=lastVal(s.month); return v; }
+function showTab(id){
+  var panes=document.querySelectorAll('.pane'), tabs=document.querySelectorAll('.tab'), i;
+  for(i=0;i<panes.length;i++) panes[i].classList.toggle('on', panes[i].id===id);
+  for(i=0;i<tabs.length;i++) tabs[i].classList.toggle('on', tabs[i].getAttribute('data-pane')===id);
+  try{ localStorage.setItem('artemis_qa_tab', id); }catch(e){}
 }
 
-/* ---- date-window slicing ---- */
-function sliceDaily(daily){
-  // returns {vals,labels} respecting CUSTOM range or full daily
-  if(!daily) return {vals:[],labels:[]};
-  let vals=daily.slice(), idx=daily.map((_,i)=>i);
-  if(CUSTOM&&AXIS.length===daily.length){
-    const lo=AXIS.findIndex(d=>d>=CUSTOM.from), hiRaw=AXIS.findIndex(d=>d>CUSTOM.to);
-    const hi=hiRaw===-1?AXIS.length:hiRaw;
-    if(lo>=0){ vals=daily.slice(lo,hi); idx=idx.slice(lo,hi); }
-  }
-  const labels=idx.map(i=>AXIS[i]?fmtDate(AXIS[i]):('#'+(i+1)));
-  return {vals,labels};
-}
-function fmtDate(iso){const d=new Date(iso);return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});}
-function seriesFor(metric){
-  // metric may be a trend bundle {day,week,month,quarter,daily} or a plain array
-  if(CUSTOM && metric && metric.daily){ const s=sliceDaily(metric.daily); return s; }
-  if(metric && metric[GRAIN]){ const arr=metric[GRAIN]; 
-    const labels=arr.map((_,i)=>grainLabel(i,arr.length)); return {vals:arr,labels}; }
-  if(Array.isArray(metric)) return {vals:metric,labels:metric.map((_,i)=>'#'+(i+1))};
-  return {vals:[],labels:[]};
-}
-function grainLabel(i,n){
-  const unit={day:'d',week:'w',month:'mo',quarter:'q'}[GRAIN];
-  return (i-n+1)+unit; // e.g. -12w .. 0w
-}
-function rangeInfo(){
-  const el=document.getElementById('rangeInfo'); if(!el) return;
-  if(CUSTOM) el.innerHTML='custom &middot; '+fmtDate(CUSTOM.from)+' → '+fmtDate(CUSTOM.to);
-  else el.innerHTML='grain: '+GRAIN+(AXIS.length?(' &middot; '+AXIS.length+'d loaded'):'');
+function spark(arr, color){
+  var v=(arr||[]).filter(function(x){return x!=null;});
+  if(v.length<2) return '';
+  var mn=Math.min.apply(null,v), mx=Math.max.apply(null,v), rng=(mx-mn)||1, W=280,H=44,P=3;
+  var pts=v.map(function(y,i){ return [P+i*(W-2*P)/(v.length-1), H-P-((y-mn)/rng)*(H-2*P)]; });
+  var d=pts.map(function(p,i){return (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' ');
+  var area=d+' L'+pts[pts.length-1][0].toFixed(1)+' '+H+' L'+pts[0][0].toFixed(1)+' '+H+' Z';
+  var id='g'+Math.random().toString(36).slice(2,8);
+  return '<svg class="spark" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">'
+    +'<defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+color+'" stop-opacity=".28"/><stop offset="1" stop-color="'+color+'" stop-opacity="0"/></linearGradient></defs>'
+    +'<path d="'+area+'" fill="url(#'+id+')"/><path d="'+d+'" fill="none" stroke="'+color+'" stroke-width="2" stroke-linejoin="round"/></svg>';
 }
 
-/* ---- SVG builders ---- */
-let GID=0;
-function smooth(p){if(p.length<3)return'M'+p.map(x=>x.join(',')).join(' L');let d='M'+p[0].map(v=>v.toFixed(1)).join(',');for(let i=0;i<p.length-1;i++){const p0=p[i-1]||p[i],p1=p[i],p2=p[i+1],p3=p[i+2]||p2;const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6],c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];d+=` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;}return d;}
-function lineSVG(vals,labels,color,unit){
-  const h=150,w=560,pl=36,pr=12,pt=14,pb=24;
-  if(!vals.length) return '<div style="color:var(--t3);font-size:12px;padding:20px">no data in range</div>';
-  let mx=Math.max(...vals),mn=Math.min(...vals);const pad=(mx-mn)*0.15||1;mx+=pad;mn=Math.max(0,mn-pad);
-  const X=i=>pl+(w-pl-pr)*i/(vals.length-1||1),Y=v=>pt+(h-pt-pb)*(1-(v-mn)/((mx-mn)||1));
-  const d=smooth(vals.map((v,i)=>[X(i),Y(v)]));const area=d+` L${X(vals.length-1).toFixed(1)},${h-pb} L${pl},${h-pb} Z`;
-  const grid=[0,.5,1].map(t=>`<line x1="${pl}" x2="${w-pr}" y1="${pt+(h-pt-pb)*t}" y2="${pt+(h-pt-pb)*t}" stroke="${TH.grid}"/>`).join('');
-  const gl=[mx,(mx+mn)/2,mn].map((v,i)=>`<text x="${pl-7}" y="${pt+(h-pt-pb)*(i/2)+3.5}" fill="${TH.mut}" font-size="10" text-anchor="end" font-family="JetBrains Mono">${v.toFixed(v<10?1:0)}</text>`).join('');
-  const step=labels.length>16?Math.ceil(labels.length/8):(labels.length>9?2:1);
-  const xt=labels.map((l,i)=>i%step?'':`<text x="${X(i)}" y="${h-7}" fill="${TH.mut}" font-size="9.5" text-anchor="middle" font-family="JetBrains Mono">${l}</text>`).join('');
-  const last=vals[vals.length-1];const gid='g'+(++GID);
-  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="height:${h}px" class="hasline" data-pts='${JSON.stringify({labels,vals,unit:unit||''})}'>
-    <defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${color}" stop-opacity=".25"/><stop offset="1" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>
-    ${grid}${gl}<path d="${area}" fill="url(#${gid})" class="fadein"/>
-    <path d="${d}" fill="none" stroke="${color}" stroke-width="2.6" stroke-linecap="round" class="draw" pathLength="1"/>
-    <circle cx="${X(vals.length-1)}" cy="${Y(last)}" r="4.2" fill="${color}" class="fadein"/>
-    <text class="fadein" x="${X(vals.length-1)-9}" y="${Y(last)-10}" fill="${TH.ink}" font-size="11.5" font-weight="700" text-anchor="end" font-family="JetBrains Mono">${last}${unit||''}</text>
-    <circle class="hover" r="4.5" fill="#fff" stroke="${color}" stroke-width="2" opacity="0"/>${xt}</svg>`;
-}
-function barsSVG(pairs,color,horizontal){
-  if(!pairs||!pairs.length) return '<div style="color:var(--t3);font-size:12px;padding:20px">no data</div>';
-  const h=pairs.length*30+8,w=560,pl=6,lw=160,gid='g'+(++GID);
-  const mx=Math.max(...pairs.map(p=>p[1]))||1;
-  const rows=pairs.map((p,i)=>{const y=i*30+6;const bw=(w-lw-64)*(p[1]/mx);
-    return `<text x="${pl}" y="${y+13}" fill="${TH.mut}" font-size="11.5" font-family="DM Sans" font-weight="600">${p[0]}</text>
-     <rect x="${lw}" y="${y+3}" width="${w-lw-64}" height="12" rx="6" fill="${TH.track}"/>
-     <rect x="${lw}" y="${y+3}" width="${Math.max(bw,2)}" height="12" rx="6" fill="url(#${gid})" class="fadein"><title>${p[0]}: ${p[1]}</title></rect>
-     <text x="${w-6}" y="${y+13}" fill="${TH.ink}" font-size="11.5" text-anchor="end" font-family="JetBrains Mono" font-weight="700">${fmtN(p[1])}</text>`;}).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" style="height:${h}px" class="anim"><defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${color}"/><stop offset="1" stop-color="${color}AA"/></linearGradient></defs>${rows}</svg>`;
-}
-function histoSVG(pairs,color){
-  if(!pairs||!pairs.length) return '';
-  const h=166,w=560,pl=14,pr=10,pt=16,pb=26;const mx=Math.max(...pairs.map(x=>x[1]))*1.12||1;const bw=(w-pl-pr)/pairs.length*0.58;
-  const cols=pairs.map((x,i)=>{const cx=pl+(w-pl-pr)*(i+.5)/pairs.length;const hh=(h-pt-pb)*x[1]/mx;
-    return `<rect class="fadein" x="${cx-bw/2}" y="${h-pb-hh}" width="${bw}" height="${hh}" rx="5" fill="${color}"><title>${x[0]}: ${x[1]}</title></rect>
-      <text x="${cx}" y="${h-pb-hh-6}" fill="${TH.ink}" font-size="10.5" text-anchor="middle" font-family="JetBrains Mono" font-weight="700">${fmtN(x[1])}</text>
-      <text x="${cx}" y="${h-8}" fill="${TH.mut}" font-size="10" text-anchor="middle" font-family="JetBrains Mono">${x[0]}</text>`;}).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" style="height:166px" class="anim">${cols}</svg>`;
-}
-function donutHTML(pairs,color){
-  if(!pairs||!pairs.length) return '';
-  const cols=[TH.teal,TH.indigo,TH.sky,TH.gold,TH.rose,TH.p4];
-  const total=pairs.reduce((s,p)=>s+p[1],0)||1;const R=44,CIRC=2*Math.PI*R;let off=0;
-  const segs=pairs.map((p,i)=>{const frac=p[1]/total;const seg=`<circle cx="60" cy="60" r="${R}" fill="none" stroke="${cols[i%cols.length]}" stroke-width="13" stroke-dasharray="${(CIRC*frac).toFixed(1)} ${CIRC}" stroke-dashoffset="${(-off*CIRC).toFixed(1)}" transform="rotate(-90 60 60)"><title>${p[0]}: ${p[1]}</title></circle>`;off+=frac;return seg;}).join('');
-  return `<div style="display:flex;align-items:center;gap:16px"><svg width="120" height="120" viewBox="0 0 120 120" class="anim"><circle cx="60" cy="60" r="${R}" fill="none" stroke="${TH.track}" stroke-width="13"/>${segs}
-    <text x="60" y="64" text-anchor="middle" fill="${TH.ink}" font-family="JetBrains Mono" font-weight="700" font-size="16">${fmtN(total)}</text></svg>
-    <div class="leg" style="flex-direction:column;gap:7px;margin:0">${pairs.map((p,i)=>`<span><i style="background:${cols[i%cols.length]}"></i>${p[0]} <b style="font-family:var(--mono);color:var(--t1);margin-left:4px">${fmtN(p[1])}</b></span>`).join('')}</div></div>`;
-}
-function confusionHTML(m,cornerLabel){
-  if(!m||!m.v) return '';
-  const mx=Math.max(...m.v.flat())||1;
-  const square=m.rows.length===m.cols.length;
-  let g=`<div class="heatwrap" style="grid-template-columns:70px repeat(${m.cols.length},1fr)">`;
-  g+=`<span class="hlab" style="font-size:9px">${cornerLabel||'NLP\\\\DS'}</span>`+m.cols.map(c=>`<span class="hlab">${c.slice(0,5)}</span>`).join('');
-  m.rows.forEach((r,i)=>{g+=`<span class="hlab" style="justify-content:flex-start">${r.slice(0,5)}</span>`+m.v[i].map((v,j)=>{
-    const t=v/mx;const diag=square&&i===j;const bg= diag? mixHeat(t) : `rgba(87,181,240,${(0.10+t*0.62).toFixed(2)})`;
-    return `<div class="hcell" style="background:${bg};color:${t>0.5||diag?'#fff':'var(--t2)'}" title="${r} / ${m.cols[j]}: ${v}">${fmtN(v)}</div>`;}).join('');});
-  const leg = square ? '<span><i style="background:'+TH.teal+'"></i>agree (diagonal)</span><span><i style="background:'+TH.sky+'"></i>off-diagonal</span>'
-                     : '<span><i style="background:'+TH.sky+'"></i>count</span>';
-  return g+'</div><div class="leg">'+leg+'</div>';
-}
-function mixHeat(t){const h=TH.heat;const idx=Math.min(h.length-1,Math.floor(t*h.length));return h[idx];}
-function calendarHTML(m){
-  if(!m||!m.days||!m.days.length) return '<div style="color:var(--t3);padding:14px">no run history yet</div>';
-  const days=m.days.slice(-84);
-  const first=new Date(days[0].date); const pad=(first.getDay()+6)%7;
-  const cells=Array(pad).fill(null).concat(days);
-  const weeks=Math.ceil(cells.length/7);
-  const cw=15,ch=15,gap=4,leftPad=26,topPad=16;
-  const maxRows=Math.max(1,...days.map(d=>d.rows));
-  let sq='';
-  for(let i=0;i<cells.length;i++){
-    const c=cells[i];if(!c)continue;
-    const wk=Math.floor(i/7),dy=i%7;const x=leftPad+wk*(cw+gap),y=topPad+dy*(ch+gap);
-    let fill='var(--track)';
-    if(c.ran){const t=Math.min(1,c.rows/maxRows);const idx=Math.min(TH.heat.length-1,1+Math.floor(t*(TH.heat.length-1)));fill=TH.heat[idx];}
-    const today=c.date===new Date().toISOString().slice(0,10);
-    sq+=`<rect x="${x}" y="${y}" width="${cw}" height="${ch}" rx="3" fill="${fill}" ${today?'stroke="var(--okT)" stroke-width="1.5"':''}><title>${c.date}: ${c.ran?c.rows+' rows':'no run'}</title></rect>`;
-  }
-  const nextWk=weeks, nx=leftPad+nextWk*(cw+gap);
-  const dayLabels=['M','','W','','F','','S'];
-  const dl=dayLabels.map((l,i)=>l?`<text x="${leftPad-7}" y="${topPad+i*(ch+gap)+11}" fill="${TH.mut}" font-size="9" text-anchor="end" font-family="JetBrains Mono">${l}</text>`:'').join('');
-  const W=leftPad+(weeks+1)*(cw+gap)+40, H=topPad+7*(ch+gap)+16;
-  const nextDot=`<rect x="${nx}" y="${topPad}" width="${cw}" height="${ch}" rx="3" fill="none" stroke="var(--indT)" stroke-width="1.5" stroke-dasharray="3 2"><title>next expected run: ${m.next_run}</title></rect>
-    <text x="${nx+cw/2}" y="${topPad+7*(ch+gap)+2}" fill="var(--indT)" font-size="8.5" text-anchor="middle" font-family="JetBrains Mono">next</text>`;
-  const ran=days.filter(d=>d.ran).length;
-  return `<svg viewBox="0 0 ${W} ${H}" style="height:${H}px;max-width:100%" class="anim">${dl}${sq}${nextDot}</svg>
-    <div class="leg" style="margin-top:8px">
-      <span style="color:var(--t2)"><b style="font-family:var(--mono);color:var(--t1)">${ran}</b>/${days.length} days ran</span>
-      <span>last <b style="font-family:var(--mono);color:var(--okT)">${m.last_run||'—'}</b></span>
-      <span>next <b style="font-family:var(--mono);color:var(--indT)">${m.next_run||'—'}</b></span>
-      <span style="color:var(--t3)">${m.cadence||''}</span></div>`;
-}
-function scatterSVG(pairs,color){
-  if(!pairs||!pairs.length) return '';
-  const h=170,w=560,pl=34,pr=14,pt=14,pb=28;const vals=pairs.map(p=>p[1]);
-  const mx=Math.max(...vals)*1.1||1,mn=Math.min(0,...vals);
-  const X=i=>pl+(w-pl-pr)*i/(pairs.length-1||1),Y=v=>pt+(h-pt-pb)*(1-(v-mn)/((mx-mn)||1));
-  const dots=pairs.map((p,i)=>`<circle cx="${X(i).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="4.5" fill="${color}" opacity=".8" class="fadein"><title>${p[0]}: ${p[1]}</title></circle>`).join('');
-  const step=pairs.length>10?Math.ceil(pairs.length/8):1;
-  const xt=pairs.map((p,i)=>i%step?'':`<text x="${X(i)}" y="${h-8}" fill="${TH.mut}" font-size="9" text-anchor="middle" font-family="JetBrains Mono">${String(p[0]).slice(0,6)}</text>`).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" style="height:170px" class="anim">${dots}${xt}</svg>`;
-}
-function stackbarsSVG(pairs){
-  if(!pairs||!pairs.length) return '';
-  const total=pairs.reduce((s,p)=>s+p[1],0)||1;const cols=[TH.teal,TH.indigo,TH.sky,TH.gold,TH.rose,TH.p4];
-  let x=0;const w=560,h=34;
-  const segs=pairs.map((p,i)=>{const bw=(p[1]/total)*w;const seg=`<rect x="${x.toFixed(1)}" y="0" width="${bw.toFixed(1)}" height="${h}" fill="${cols[i%cols.length]}"><title>${p[0]}: ${p[1]} (${(100*p[1]/total).toFixed(1)}%)</title></rect>`;x+=bw;return seg;}).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" style="height:${h}px;border-radius:8px;overflow:hidden" class="anim">${segs}</svg>
-    <div class="leg" style="margin-top:9px">${pairs.map((p,i)=>`<span><i style="background:${cols[i%cols.length]}"></i>${p[0]} <b style="font-family:var(--mono);color:var(--t1)">${(100*p[1]/total).toFixed(0)}%</b></span>`).join('')}</div>`;
-}
-function gaugeSVG(val,color,unit){
-  const v=Math.max(0,Math.min(100,val));const R=52,CIRC=Math.PI*R;const off=CIRC*(1-v/100);
-  return `<div style="display:flex;justify-content:center;padding:6px"><svg width="150" height="92" viewBox="0 0 150 92" class="anim">
-    <path d="M23 82 A52 52 0 0 1 127 82" fill="none" stroke="var(--track)" stroke-width="12" stroke-linecap="round"/>
-    <path d="M23 82 A52 52 0 0 1 127 82" fill="none" stroke="${color}" stroke-width="12" stroke-linecap="round" stroke-dasharray="${CIRC.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}"/>
-    <text x="75" y="72" text-anchor="middle" fill="var(--t1)" font-family="JetBrains Mono" font-weight="700" font-size="24">${Math.round(v)}${unit||''}</text></svg></div>`;
-}
-/* ---- line/area family: step + spline are handled by lineSVG variants ---- */
-function stepSVG(vals,labels,color,unit){
-  if(!vals.length) return '<div style="color:var(--t3);padding:20px">no data</div>';
-  const h=150,w=560,pl=36,pr=12,pt=14,pb=24;
-  let mx=Math.max(...vals),mn=Math.min(...vals);const pad=(mx-mn)*0.15||1;mx+=pad;mn=Math.max(0,mn-pad);
-  const X=i=>pl+(w-pl-pr)*i/(vals.length-1||1),Y=v=>pt+(h-pt-pb)*(1-(v-mn)/((mx-mn)||1));
-  let d='M'+X(0)+','+Y(vals[0]);
-  for(let i=1;i<vals.length;i++){ d+=` L${X(i).toFixed(1)},${Y(vals[i-1]).toFixed(1)} L${X(i).toFixed(1)},${Y(vals[i]).toFixed(1)}`; }
-  const grid=[0,.5,1].map(t=>`<line x1="${pl}" x2="${w-pr}" y1="${pt+(h-pt-pb)*t}" y2="${pt+(h-pt-pb)*t}" stroke="${TH.grid}"/>`).join('');
-  const step=labels.length>16?Math.ceil(labels.length/8):2;
-  const xt=labels.map((l,i)=>i%step?'':`<text x="${X(i)}" y="${h-7}" fill="${TH.mut}" font-size="9.5" text-anchor="middle" font-family="JetBrains Mono">${l}</text>`).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="height:150px" class="anim">${grid}
-    <path class="draw" pathLength="1" d="${d}" fill="none" stroke="${color}" stroke-width="2.4"/>${xt}</svg>`;
-}
-/* ---- distribution family ---- */
-function boxplotSVG(buckets,color){
-  // approximate a box plot from histogram buckets: derive quartiles by cumulative count
-  if(!buckets||!buckets.length) return '';
-  const mids=buckets.map((b,i)=>i); const counts=buckets.map(b=>b[1]);
-  const total=counts.reduce((a,c)=>a+c,0)||1;
-  const qAt=f=>{let run=0;for(let i=0;i<counts.length;i++){run+=counts[i];if(run/total>=f)return i;}return counts.length-1;};
-  const q1=qAt(0.25),med=qAt(0.5),q3=qAt(0.75),lo=0,hi=buckets.length-1;
-  const h=120,w=560,pl=20,pr=20,pt=30,pb=30;const n=buckets.length;
-  const X=i=>pl+(w-pl-pr)*i/(n-1||1);const cy=pt+(h-pt-pb)/2;
-  const box=`<rect x="${X(q1)}" y="${cy-22}" width="${X(q3)-X(q1)}" height="44" rx="5" fill="${color}22" stroke="${color}" stroke-width="2"/>
-    <line x1="${X(med)}" x2="${X(med)}" y1="${cy-22}" y2="${cy+22}" stroke="${color}" stroke-width="2.5"/>
-    <line x1="${X(lo)}" x2="${X(q1)}" y1="${cy}" y2="${cy}" stroke="${TH.mut}" stroke-width="1.5"/>
-    <line x1="${X(q3)}" x2="${X(hi)}" y1="${cy}" y2="${cy}" stroke="${TH.mut}" stroke-width="1.5"/>
-    <line x1="${X(lo)}" x2="${X(lo)}" y1="${cy-9}" y2="${cy+9}" stroke="${TH.mut}" stroke-width="1.5"/>
-    <line x1="${X(hi)}" x2="${X(hi)}" y1="${cy-9}" y2="${cy+9}" stroke="${TH.mut}" stroke-width="1.5"/>`;
-  const labs=[['min',lo],['Q1',q1],['med',med],['Q3',q3],['max',hi]].map(([t,i])=>`<text x="${X(i)}" y="${pt-8}" fill="${TH.mut}" font-size="9" text-anchor="middle" font-family="JetBrains Mono">${buckets[i][0]}</text>`).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" style="height:120px" class="anim">${box}${labs}</svg>
-    <div class="leg"><span style="color:var(--t3)">box = IQR, line = median, whiskers = range (from bucket distribution)</span></div>`;
-}
-function densitySVG(buckets,color){
-  // smooth density curve over histogram buckets
-  if(!buckets||!buckets.length) return '';
-  const vals=buckets.map(b=>b[1]);const h=160,w=560,pl=16,pr=12,pt=16,pb=28;const mx=Math.max(...vals)*1.15||1;
-  const X=i=>pl+(w-pl-pr)*i/(vals.length-1||1),Y=v=>pt+(h-pt-pb)*(1-v/mx);
-  const pts=vals.map((v,i)=>[X(i),Y(v)]);const d=smooth(pts);
-  const area=d+` L${X(vals.length-1).toFixed(1)},${h-pb} L${pl},${h-pb} Z`;const gid='g'+(++GID);
-  const xt=buckets.map((b,i)=>`<text x="${X(i)}" y="${h-8}" fill="${TH.mut}" font-size="8.5" text-anchor="middle" font-family="JetBrains Mono">${String(b[0]).slice(0,6)}</text>`).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" style="height:160px" class="anim">
-    <defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${color}" stop-opacity=".4"/><stop offset="1" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>
-    <path d="${area}" fill="url(#${gid})" class="fadein"/><path class="draw" pathLength="1" d="${d}" fill="none" stroke="${color}" stroke-width="2.4"/>${xt}</svg>`;
-}
-/* ---- comparison family ---- */
-function lollipopSVG(pairs,color){
-  if(!pairs||!pairs.length) return '';
-  const h=pairs.length*30+8,w=560,lw=150;const mx=Math.max(...pairs.map(p=>p[1]))||1;
-  const rows=pairs.map((p,i)=>{const y=i*30+16;const x=lw+(w-lw-54)*(p[1]/mx);
-    return `<text x="6" y="${y+4}" fill="${TH.mut}" font-size="11.5" font-family="DM Sans" font-weight="600">${p[0]}</text>
-      <line x1="${lw}" x2="${x}" y1="${y}" y2="${y}" stroke="${color}" stroke-width="2" opacity=".5"/>
-      <circle cx="${x}" cy="${y}" r="5.5" fill="${color}" class="fadein"><title>${p[0]}: ${p[1]}</title></circle>
-      <text x="${w-6}" y="${y+4}" fill="${TH.ink}" font-size="11" text-anchor="end" font-family="JetBrains Mono" font-weight="700">${fmtN(p[1])}</text>`;}).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" style="height:${h}px" class="anim">${rows}</svg>`;
-}
-function dotSVG(pairs,color){
-  // cleveland dot plot - dots on a track, sorted
-  const sorted=[...pairs].sort((a,b)=>b[1]-a[1]);
-  return lollipopSVG(sorted,color).replace(/stroke-width="2" opacity=".5"/g,'stroke-width="1" opacity=".25"');
-}
-function groupedBarsSVG(pairs,color){
-  // vertical grouped/columned bars (single series but columnar vs horizontal)
-  if(!pairs||!pairs.length) return '';
-  const h=180,w=560,pl=16,pr=10,pt=18,pb=40;const mx=Math.max(...pairs.map(x=>x[1]))*1.1||1;
-  const bw=(w-pl-pr)/pairs.length*0.62;
-  const cols=pairs.map((x,i)=>{const cx=pl+(w-pl-pr)*(i+.5)/pairs.length;const hh=(h-pt-pb)*x[1]/mx;
-    return `<rect class="fadein" x="${cx-bw/2}" y="${h-pb-hh}" width="${bw}" height="${hh}" rx="4" fill="${color}"><title>${x[0]}: ${x[1]}</title></rect>
-      <text x="${cx}" y="${h-pb-hh-5}" fill="${TH.ink}" font-size="10" text-anchor="middle" font-family="JetBrains Mono" font-weight="700">${fmtN(x[1])}</text>
-      <text x="${cx}" y="${h-pb+13}" fill="${TH.mut}" font-size="9" text-anchor="middle" font-family="DM Sans" transform="rotate(0)">${String(x[0]).slice(0,8)}</text>`;}).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" style="height:180px" class="anim">${cols}</svg>`;
-}
-/* ---- part-to-whole family ---- */
-function treemapHTML(pairs){
-  if(!pairs||!pairs.length) return '';
-  const total=pairs.reduce((s,p)=>s+p[1],0)||1;const cols=[TH.teal,TH.indigo,TH.sky,TH.gold,TH.rose,TH.p4];
-  // simple squarified-ish: sort desc, lay row by row
-  const sorted=[...pairs].sort((a,b)=>b[1]-a[1]).slice(0,10);
-  return `<div style="display:flex;flex-wrap:wrap;gap:3px;height:190px;align-content:stretch">`+
-    sorted.map((p,i)=>{const pct=p[1]/total;const basis=Math.max(18,Math.sqrt(pct)*100);
-      return `<div style="flex:${(pct*100).toFixed(2)} 1 ${basis}px;background:${cols[i%cols.length]};border-radius:7px;padding:8px 9px;display:flex;flex-direction:column;justify-content:flex-end;min-width:44px;overflow:hidden" title="${p[0]}: ${p[1]} (${(pct*100).toFixed(1)}%)">
-        <div style="font-size:10.5px;font-weight:800;color:#fff;line-height:1.15;text-shadow:0 1px 2px rgba(0,0,0,.35)">${p[0]}</div>
-        <div style="font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.85)">${(pct*100).toFixed(1)}%</div></div>`;}).join('')+`</div>`;
-}
-function waffleHTML(pairs){
-  if(!pairs||!pairs.length) return '';
-  const total=pairs.reduce((s,p)=>s+p[1],0)||1;const cols=[TH.teal,TH.indigo,TH.sky,TH.gold,TH.rose,TH.p4];
-  // 100 cells, allocate proportionally
-  const alloc=pairs.map((p,i)=>({c:cols[i%cols.length],n:Math.round(100*p[1]/total),label:p[0]}));
-  let cells=[];alloc.forEach(a=>{for(let k=0;k<a.n;k++)cells.push(a.c);});
-  cells=cells.slice(0,100);while(cells.length<100)cells.push('var(--track)');
-  const grid=cells.map(c=>`<div style="width:100%;padding-bottom:100%;background:${c};border-radius:2px"></div>`).join('');
-  return `<div style="display:grid;grid-template-columns:repeat(10,1fr);gap:3px;max-width:220px;margin-bottom:10px">${grid}</div>
-    <div class="leg">${alloc.map(a=>`<span><i style="background:${a.c}"></i>${a.label} <b style="font-family:var(--mono);color:var(--t1)">${a.n}%</b></span>`).join('')}</div>`;
-}
-function funnelHTML(pairs){
-  if(!pairs||!pairs.length) return '';
-  const sorted=[...pairs].sort((a,b)=>b[1]-a[1]);const mx=sorted[0][1]||1;const cols=[TH.teal,TH.indigo,TH.sky,TH.gold,TH.rose,TH.p4];
-  return '<div style="display:flex;flex-direction:column;gap:5px;align-items:center;padding:4px 0">'+
-    sorted.map((p,i)=>{const wpct=Math.max(12,100*p[1]/mx);
-      return `<div style="width:${wpct}%;background:${cols[i%cols.length]};border-radius:6px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;color:#fff;min-width:0;box-sizing:border-box" title="${p[0]}: ${p[1]}">
-        <span style="font-size:11px;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.3)">${p[0]}</span>
-        <span style="font-family:var(--mono);font-size:11px;font-weight:700">${fmtN(p[1])}</span></div>`;}).join('')+'</div>';
-}
-function paretoSVG(pairs,color){
-  // bars sorted desc + cumulative-% line on a second axis. The classic "which few categories dominate".
-  if(!pairs||!pairs.length) return '';
-  const sorted=[...pairs].sort((a,b)=>b[1]-a[1]).slice(0,10);
-  const total=sorted.reduce((s,p)=>s+p[1],0)||1;
-  const h=190,w=560,pl=14,pr=40,pt=16,pb=42;const mx=Math.max(...sorted.map(x=>x[1]))*1.1||1;
-  const bw=(w-pl-pr)/sorted.length*0.56;
-  let cum=0;const pts=[];
-  const cols=sorted.map((x,i)=>{const cx=pl+(w-pl-pr)*(i+.5)/sorted.length;const hh=(h-pt-pb)*x[1]/mx;
-    cum+=x[1];pts.push([cx,pt+(h-pt-pb)*(1-cum/total)]);
-    return `<rect class="fadein" x="${cx-bw/2}" y="${h-pb-hh}" width="${bw}" height="${hh}" rx="4" fill="${color}" opacity=".85"><title>${x[0]}: ${x[1]}</title></rect>
-      <text x="${cx}" y="${h-pb+13}" fill="${TH.mut}" font-size="9" text-anchor="middle" font-family="DM Sans" transform="rotate(0)">${String(x[0]).slice(0,7)}</text>`;}).join('');
-  const line=smooth(pts);
-  const dots=pts.map((p,i)=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.6" fill="${TH.gold}"/>`).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" style="height:190px" class="anim">${cols}
-    <path class="draw" pathLength="1" d="${line}" fill="none" stroke="${TH.gold}" stroke-width="2.2"/>${dots}
-    <text x="${w-4}" y="${pt+8}" fill="${TH.gold}" font-size="9.5" text-anchor="end" font-family="JetBrains Mono">100%</text>
-    <text x="${w-4}" y="${h-pb}" fill="${TH.mut}" font-size="9.5" text-anchor="end" font-family="JetBrains Mono">0%</text></svg>
-    <div class="leg"><span><i style="background:${color}"></i>count</span><span><i style="background:${TH.gold}"></i>cumulative %</span></div>`;
-}
-function areaSVG(vals,labels,color,unit){
-  // stacked-feel single area: like line but with a heavier fill and baseline
-  if(!vals.length) return '<div style="color:var(--t3);font-size:12px;padding:20px">no data in range</div>';
-  const h=150,w=560,pl=36,pr=12,pt=14,pb=24;
-  let mx=Math.max(...vals),mn=0;mx*=1.12;
-  const X=i=>pl+(w-pl-pr)*i/(vals.length-1||1),Y=v=>pt+(h-pt-pb)*(1-(v-mn)/((mx-mn)||1));
-  const d=smooth(vals.map((v,i)=>[X(i),Y(v)]));
-  const area=d+` L${X(vals.length-1).toFixed(1)},${h-pb} L${pl},${h-pb} Z`;
-  const gid='g'+(++GID);
-  const step=labels.length>16?Math.ceil(labels.length/8):(labels.length>9?2:1);
-  const xt=labels.map((l,i)=>i%step?'':`<text x="${X(i)}" y="${h-7}" fill="${TH.mut}" font-size="9.5" text-anchor="middle" font-family="JetBrains Mono">${l}</text>`).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="height:150px" class="anim">
-    <defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${color}" stop-opacity=".55"/><stop offset="1" stop-color="${color}" stop-opacity=".06"/></linearGradient></defs>
-    <path d="${area}" fill="url(#${gid})" class="fadein"/>
-    <path class="draw" pathLength="1" d="${d}" fill="none" stroke="${color}" stroke-width="2.4"/>
-    <text class="fadein" x="${X(vals.length-1)-6}" y="${Y(vals[vals.length-1])-9}" fill="${TH.ink}" font-size="11.5" font-weight="700" text-anchor="end" font-family="JetBrains Mono">${fmtN(vals[vals.length-1])}${unit||''}</text>${xt}</svg>`;
-}
-/* ---- custom (build-your-own) widgets, driven by EXPLORE ---- */
-const CUSTOM_COLORS=['teal','indigo','sky','gold','rose'];
-function customBody(w){
-  const e=EXPLORE[w.table];
-  if(!e) return '<div style="color:var(--t3);padding:16px">table not in snapshot yet</div>';
-  const color=col(w.colorKey||'teal');
-  if(w.kind==='volume'){
-    const s=seriesFor(e.daily);if(!s.vals.length)return '<div style="color:var(--t3);padding:16px">no daily data</div>';
-    if(w.viz==='area')return areaSVG(s.vals,s.labels,color,'');
-    if(w.viz==='step')return stepSVG(s.vals,s.labels,color,'');
-    if(w.viz==='scatter')return scatterSVG(s.vals.map((v,i)=>[s.labels[i],v]),color);
-    if(w.viz==='kpi')return `<div class="kpi"><span class="kv">${fmtN(s.vals[s.vals.length-1])}</span><span class="kd">latest &middot; ${w.table.split('.')[1]}</span></div>`;
-    return lineSVG(s.vals,s.labels,color,'');
-  }
-  if(w.kind==='rows'){
-    return `<div class="kpi"><span class="kv">${fmtN(e.rows)}</span><span class="kd">total rows &middot; ${w.table.split('.')[1]}</span></div>`;
-  }
-  if(w.kind==='cat'){
-    const pairs=(e.cats||{})[w.col];if(!pairs)return '<div style="color:var(--t3);padding:16px">column not in snapshot</div>';
-    switch(w.viz){
-      case 'donut':return donutHTML(pairs,color);
-      case 'pareto':return paretoSVG(pairs,color);
-      case 'histo':return histoSVG(pairs.slice(0,8),color);
-      case 'stackbars':return stackbarsSVG(pairs);
-      case 'scatter':return scatterSVG(pairs,color);
-      case 'column':return groupedBarsSVG(pairs,color);
-      case 'lollipop':return lollipopSVG(pairs,color);
-      case 'dot':return dotSVG(pairs,color);
-      case 'treemap':return treemapHTML(pairs);
-      case 'waffle':return waffleHTML(pairs);
-      case 'funnel':return funnelHTML(pairs);
-      default:return barsSVG(pairs,color);
-    }
-  }
-  if(w.kind==='num'){
-    const nm=(e.nums||{})[w.col];if(!nm)return '<div style="color:var(--t3);padding:16px">column not in snapshot</div>';
-    switch(w.viz){
-      case 'kpi':return `<div class="kpi"><span class="kv">${fmtN(nm.avg)}</span><span class="kd">avg ${w.col}</span></div>`;
-      case 'bars':return barsSVG(nm.buckets,color);
-      case 'column':return groupedBarsSVG(nm.buckets,color);
-      case 'area':return areaSVG(nm.buckets.map(x=>x[1]),nm.buckets.map(x=>x[0]),color,'');
-      case 'density':return densitySVG(nm.buckets,color);
-      case 'box':return boxplotSVG(nm.buckets,color);
-      case 'gauge':return gaugeSVG(nm.avg<=1?nm.avg*100:nm.avg,color,'');
-      default:return histoSVG(nm.buckets,color);
-    }
-  }
-  return '';
-}
-function loadsHTML(m){
-  // dual daily-load lines: posts + comments, sharing the tab date filter
-  const P=seriesFor(m.posts), Cm=seriesFor(m.comments);
-  const h=150,w=560,pl=40,pr=44,pt=14,pb=24;
-  if(!P.vals.length) return '<div style="color:var(--t3);padding:20px">no data</div>';
-  const mxP=Math.max(...P.vals)||1,mxC=Math.max(...Cm.vals)||1;
-  const X=i=>pl+(w-pl-pr)*i/(P.vals.length-1||1);
-  const Yp=v=>pt+(h-pt-pb)*(1-v/mxP), Yc=v=>pt+(h-pt-pb)*(1-v/mxC);
-  const grid=[0,.5,1].map(t=>`<line x1="${pl}" x2="${w-pr}" y1="${pt+(h-pt-pb)*t}" y2="${pt+(h-pt-pb)*t}" stroke="${TH.grid}"/>`).join('');
-  const pathP=smooth(P.vals.map((v,i)=>[X(i),Yp(v)])), pathC=smooth(Cm.vals.map((v,i)=>[X(i),Yc(v)]));
-  const step=P.labels.length>16?Math.ceil(P.labels.length/8):2;
-  const xt=P.labels.map((l,i)=>i%step?'':`<text x="${X(i)}" y="${h-7}" fill="${TH.mut}" font-size="9.5" text-anchor="middle" font-family="JetBrains Mono">${l}</text>`).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="height:150px" class="anim">${grid}
-    <path class="draw" pathLength="1" d="${pathC}" fill="none" stroke="${TH.indigo}" stroke-width="2.4"/>
-    <path class="draw" pathLength="1" d="${pathP}" fill="none" stroke="${TH.teal}" stroke-width="2.4"/>${xt}</svg>
-    <div class="leg"><span><i style="background:${TH.teal}"></i>posts/day</span><span><i style="background:${TH.indigo}"></i>comments/day</span></div>`;
-}
-function radarHTML(m){
-  if(!m||!m.v) return '';const n=m.axes.length,cx=110,cy=94,rad=68;
-  const ang=i=>-Math.PI/2+i*2*Math.PI/n, pt=(i,f)=>[cx+Math.cos(ang(i))*rad*f,cy+Math.sin(ang(i))*rad*f];
-  const mx=Math.max(...m.v)||1;
-  const rings=[.33,.66,1].map(f=>'<polygon points="'+m.axes.map((_,i)=>pt(i,f).map(v=>v.toFixed(1)).join(',')).join(' ')+`" fill="none" stroke="${TH.grid}"/>`).join('');
-  const spokes=m.axes.map((_,i)=>{const[x,y]=pt(i,1);return`<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="${TH.grid}"/>`;}).join('');
-  const poly=m.axes.map((_,i)=>pt(i,m.v[i]/mx).map(v=>v.toFixed(1)).join(',')).join(' ');
-  const labs=m.axes.map((a,i)=>{const[x,y]=pt(i,1.22);return`<text x="${x.toFixed(1)}" y="${(y+3).toFixed(1)}" fill="${TH.mut}" font-size="9.5" text-anchor="middle" font-family="DM Sans" font-weight="700">${a}</text>`;}).join('');
-  return `<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><svg width="220" height="188" viewBox="0 0 220 188" class="anim">${rings}${spokes}<polygon class="fadein" points="${poly}" fill="${TH.teal}2E" stroke="${TH.teal}" stroke-width="2.2"/>${labs}</svg>
-    <div class="leg" style="flex-direction:column;gap:6px;margin:0;font-size:10.5px">${m.axes.map((a,i)=>`<span><i style="background:${TH.teal}"></i>${a} <b style="font-family:var(--mono);color:var(--t1);margin-left:3px">${m.v[i]}</b></span>`).join('')}</div></div>`;
-}
-function tableHTML(head,rows,monoCols,statusCol){
-  if(!rows||!rows.length) return '<div style="color:var(--t3);padding:16px">no rows</div>';
-  return `<table class="qt"><thead><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`+
-    rows.map(r=>'<tr>'+r.map((c,ci)=>{
-      if(ci===statusCol){const cls=c==='pass'?'ok':(c==='fail'?'bad':'warn');return`<td><span class="pillst ${cls}">${c}</span></td>`;}
-      return`<td class="${monoCols.includes(ci)?'m':''}">${c}</td>`;}).join('')+'</tr>').join('')+'</tbody></table>';
-}
-function kpiHTML(src,m){
-  const s=seriesFor(m);const vals=s.vals;if(!vals.length)return'<div class="kpi"><span class="kv">—</span></div>';
-  const meta=TABS[TAB].metrics[src];const unit=meta[4]||'';
-  const last=vals[vals.length-1],prev=vals[vals.length-2]??last,d=+(last-prev).toFixed(1);
-  const lower=(src==='proctime'||src==='lag');const good=d===0?'flat':((d<0)===lower?'up':'dn');
-  return `<div class="kpi"><span class="kv">${fmtN(last)}<small>${unit}</small></span>
-    <span class="kdelta ${good}">${d>0?'&#9650;':(d<0?'&#9660;':'&#8212;')} ${Math.abs(d)}${unit} vs prev</span>
-    <span class="kd">${CUSTOM?'custom range':GRAIN+' grain'} &middot; ${DATA_tabkey(src)}</span></div>`;
-}
-function DATA_tabkey(src){return TABS[TAB].metrics[src][0];}
-function fmtN(v){if(typeof v!=='number')return v;if(v>=1e6)return(v/1e6).toFixed(1)+'M';if(v>=1e3)return(v/1e3).toFixed(1)+'k';return(v%1===0)?v:v.toFixed(1);}
+/* ---------- load metrics ---------- */
+var M=null;
+fetch('qa_metrics.json?ts='+Date.now(),{cache:'no-store'})
+  .then(function(r){ if(!r.ok) throw new Error('missing'); return r.json(); })
+  .then(function(j){ M=j; render(); })
+  .catch(function(){
+    document.getElementById('freshtext').textContent='qa_metrics.json not found. Run the "Nightly QA metrics" GitHub Action once.';
+    document.getElementById('freshdot').className='dot stale';
+    document.getElementById('accCards').innerHTML='<div class="empty">No snapshot yet.</div>';
+    document.getElementById('freshness').innerHTML='<div class="empty">No snapshot yet.</div>';
+  });
 
-function widgetBody(w){
-  if(w.custom) return customBody(w);
-  const m=DATA[TAB][w.src];const meta=TABS[TAB].metrics[w.src];const color=col(meta[1]);
-  if(m===undefined) return '<div style="color:var(--t3);padding:16px">no data</div>';
-  switch(w.viz){
-    case 'area':{const s=seriesFor(m);return areaSVG(s.vals,s.labels,color,meta[4]||'');}
-    case 'pareto': return paretoSVG(m,color);
-    case 'line':{const s=seriesFor(m);return lineSVG(s.vals,s.labels,color,meta[4]||'');}
-    case 'kpi': return kpiHTML(w.src,m);
-    case 'bars': return barsSVG(m,color);
-    case 'histo': return histoSVG(m,color);
-    case 'donut': return donutHTML(m,color);
-    case 'confusion': return confusionHTML(m, w.src==='version_drift'?'ver\\\\sent':undefined);
-    case 'loads': return loadsHTML(m);
-    case 'radar': return radarHTML(m);
-    case 'scorecards': return scorecardsHTML(m);
-    case 'pipeline': return pipelineHTML(m);
-    case 'deltas': return deltasHTML(m);
-    case 'calendar': return calendarHTML(m);
-    case 'scatter': return scatterSVG(m,color);
-    case 'stackbars': return stackbarsSVG(m);
-    case 'gauge': return gaugeSVG(Array.isArray(m)?(m[0]&&m[0][1]||0):m,color,meta[4]||'');
-    case 'table':
-      if(w.src==='pipeline') return pipelineHTML(m);
-      return tableHTML(['Table','Last load','Status','Rows','On time'],m,[1,3],2);
-  }
-  return '';
-}
-function scorecardsHTML(pairs){
-  if(!pairs||!pairs.length) return '';
-  const tone=(n)=>n>=90?'ok':(n>=75?'warn':'bad');
-  return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">'+
-    pairs.map(([label,val])=>{
-      const t=tone(val),c=t==='ok'?'var(--okT)':(t==='warn'?'var(--warnT)':'var(--badT)');
-      const R=26,CIRC=2*Math.PI*R,off=CIRC*(1-val/100);
-      return `<div style="background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;align-items:center;gap:13px">
-        <svg width="64" height="64" viewBox="0 0 64 64" class="anim"><circle cx="32" cy="32" r="${R}" fill="none" stroke="var(--track)" stroke-width="6"/>
-          <circle cx="32" cy="32" r="${R}" fill="none" stroke="${c}" stroke-width="6" stroke-linecap="round" stroke-dasharray="${CIRC.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}" transform="rotate(-90 32 32)"/>
-          <text x="32" y="37" text-anchor="middle" fill="var(--t1)" font-family="JetBrains Mono" font-weight="700" font-size="15">${Math.round(val)}</text></svg>
-        <div><div style="font-size:12.5px;font-weight:800;color:var(--t1)">${label}</div>
-        <div style="font-size:10.5px;color:var(--t3);font-family:var(--mono);margin-top:2px">${t==='ok'?'healthy':(t==='warn'?'watch':'attention')}</div></div></div>`;
-    }).join('')+'</div>';
-}
-function pipelineHTML(rows){
-  if(!rows||!rows.length) return '<div style="color:var(--t3);padding:14px">no runs</div>';
-  return '<div style="display:flex;flex-direction:column;gap:8px">'+rows.map((r,i)=>{
-    const st=r[2],cls=st==='pass'?'ok':(st==='fail'?'bad':'warn');
-    const dot=st==='pass'?'var(--okT)':(st==='fail'?'var(--badT)':'var(--warnT)');
-    return `<div style="display:flex;align-items:center;gap:11px;padding:9px 12px;background:var(--panel2);border:1px solid var(--line);border-radius:11px">
-      <span style="width:9px;height:9px;border-radius:50%;background:${dot};flex:0 0 auto;box-shadow:0 0 8px ${dot}"></span>
-      <span style="font-weight:800;font-size:12.5px;color:var(--t1);min-width:120px">${r[0]}</span>
-      <span class="pillst ${cls}">${st}</span>
-      <span style="margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--t3)">${r[1]}</span>
-      <span style="font-family:var(--mono);font-size:11px;color:var(--t2);min-width:70px;text-align:right">${r[3]}</span></div>`;
-  }).join('')+'</div>';
-}
-function deltasHTML(rows){
-  if(!rows||!rows.length) return '<div style="color:var(--t3);padding:14px">no data</div>';
-  return '<div style="display:flex;flex-direction:column;gap:9px">'+rows.map(r=>{
-    const [name,today,yst]=r; const d=today-yst; const pct=yst?Math.round(100*d/yst):0;
-    const up=d>=0; const c=up?'var(--okT)':'var(--badT)';
-    return `<div style="display:flex;align-items:baseline;gap:10px">
-      <span style="font-size:12px;color:var(--t2);min-width:120px">${name}</span>
-      <span style="font-family:var(--mono);font-weight:700;font-size:17px;color:var(--t1)">${fmtN(today)}</span>
-      <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:${c}">${up?'▲':'▼'} ${Math.abs(pct)}%</span>
-      <span style="margin-left:auto;font-size:10px;color:var(--t3);font-family:var(--mono)">y'day ${fmtN(yst)}</span></div>`;
-  }).join('')+'</div>';
-}
-function wsub(w){
-  const viz=w.viz;
-  if(w.custom) return w.kind==='volume'?(CUSTOM?'custom range':GRAIN):'snapshot';
-  if(['line','kpi','area'].includes(viz)) return CUSTOM?'custom range':GRAIN;
-  if(viz==='loads') return CUSTOM?'custom range':GRAIN;
-  if(['table','pipeline','deltas'].includes(viz)) return 'now';
-  if(viz==='scorecards') return 'live';
-  if(viz==='confusion') return TAB==='quality'?'v1 vs v2':'all labelled';
-  return 'current';
-}
-const VIC={line:'&#9581;',area:'&#9698;',step:'&#9137;',pareto:'&#8599;',scatter:'&#8943;',stackbars:'&#9646;',column:'&#9624;',lollipop:'&#9679;',dot:'&#8226;',treemap:'&#9636;',waffle:'&#9638;',funnel:'&#9660;',density:'&#8767;',box:'&#9707;',gauge:'&#9686;',kpi:'&#35;',bars:'&#9644;',histo:'&#9601;',donut:'&#9678;',confusion:'&#9638;',loads:'&#8767;',radar:'&#9737;',table:'&#8801;',scorecards:'&#9673;',pipeline:'&#9776;',deltas:'&#8645;',calendar:'&#128197;'};
-
-function customVizzes(w){
-  if(w.kind==='volume') return ['line','area','step','scatter','kpi'];
-  if(w.kind==='cat') return ['bars','column','donut','pareto','histo','stackbars','lollipop','dot','treemap','waffle','funnel','scatter'];
-  if(w.kind==='num') return ['histo','bars','column','area','density','box','gauge','kpi'];
-  return [];
-}
-function customTitle(w){
-  const t=w.table.split('.')[1];
-  if(w.kind==='volume') return t+' · rows/day';
-  if(w.kind==='rows') return t+' · total rows';
-  return t+' · '+w.col;
-}
 function render(){
-  const b=document.getElementById('board');const lay=BOARDS[TAB]||[];
-  b.innerHTML=lay.map(w=>{
-    let title,vizzes;
-    if(w.custom){ title=customTitle(w); vizzes=customVizzes(w); }
-    else { const meta=TABS[TAB].metrics[w.src]; if(!meta) return ''; title=meta[0]; vizzes=meta[2]; }
-    let vsw='';
-    if(vizzes.length>5){
-      vsw=`<select class="vizsel" onchange="setViz('${w.id}',this.value)" title="Chart type">`+
-        vizzes.map(v=>`<option value="${v}" ${v===w.viz?'selected':''}>${v}</option>`).join('')+`</select>`;
-    } else if(vizzes.length>1){
-      vsw=vizzes.map(v=>`<button class="${v===w.viz?'on':''}" title="${v}" onclick="setViz('${w.id}','${v}')">${VIC[v]}</button>`).join('');
-    }
-    const badge=w.custom?'<span style="font-size:8.5px;font-weight:800;letter-spacing:.6px;color:var(--indT);border:1px solid var(--line2);padding:1px 6px;border-radius:99px;text-transform:uppercase">custom</span>':'';
-    return `<div class="widget s${w.span} anim" id="${w.id}" data-id="${w.id}">
-      <div class="whead"><span class="grab" draggable="true" title="Drag to move">&#10247;</span>
-        <h3>${title}</h3>${badge}<span class="wsub">${wsub(w)}</span><span class="sp"></span>
-        <span class="wctl">${vsw}<button title="Width" onclick="cycleSpan('${w.id}')">${w.span<=3?'S':w.span<=6?'M':'L'}</button>
-        <button class="kill" title="Remove" onclick="removeWidget('${w.id}')">&#10005;</button></span></div>
-      <div class="wbody">${widgetBody(w)}</div></div>`;
-  }).join('')+`<div class="boardend" id="boardend">drop here to add at the end</div>`;
-  bindDnD();bindHover();save();rangeInfo();
+  var gen=new Date(M.generated_at);
+  var ageH=Math.round((Date.now()-gen.getTime())/36e5);
+  document.getElementById('freshdot').className='dot'+(ageH>36?' stale':'');
+  document.getElementById('freshtext').innerHTML='Snapshot <b>'+esc(gen.toISOString().slice(0,16).replace('T',' '))+'</b> UTC ('+(ageH<1?'under an hour':ageH+'h')+' old)';
+  var t=M.totals||{};
+  document.getElementById('tPosts').textContent=fmtN(t.posts);
+  document.getElementById('tComments').textContent=fmtN(t.comments);
+  document.getElementById('tPages').textContent=fmtN(t.pages);
+  renderAccuracy();
+  renderQuality();
 }
 
-/* ---- tabs ---- */
-let CUSTOM_TABS={}; // id -> {name}. User-created tabs holding only custom widgets.
-function allTabIds(){return Object.keys(TABS).concat(Object.keys(CUSTOM_TABS));}
-function tabName(t){return TABS[t]?TABS[t].name:(CUSTOM_TABS[t]?CUSTOM_TABS[t].name:t);}
-function isCustomTab(t){return !!CUSTOM_TABS[t];}
-function buildTabs(){
-  const built=Object.keys(TABS).map(t=>
-    `<button class="tab ${t===TAB?'on':''}" data-t="${t}" onclick="setTab('${t}')"><span class="dot"></span>${TABS[t].name}</button>`).join('');
-  const custom=Object.keys(CUSTOM_TABS).map(t=>
-    `<button class="tab ${t===TAB?'on':''}" data-t="${t}" onclick="setTab('${t}')" ondblclick="renameTab('${t}')" title="Double-click to rename"><span class="dot" style="background:var(--indT)"></span>${CUSTOM_TABS[t].name} <span onclick="event.stopPropagation();deleteTab('${t}')" style="margin-left:5px;color:var(--t3);font-size:11px" title="Delete tab">&#10005;</span></button>`).join('');
-  const addBtn=`<button class="tab" onclick="addTab()" title="New custom tab" style="color:var(--okT)"><span style="font-size:14px">+</span> Tab</button>`;
-  document.getElementById('tabbar').innerHTML=built+custom+addBtn;
-}
-function setTab(t){TAB=t;buildTabs();buildPalette();render();save();}
-function addTab(){
-  const name=prompt('Name your custom tab:','My graphs');
-  if(!name) return;
-  const id='ct'+Date.now().toString(36);
-  CUSTOM_TABS[id]={name:name.slice(0,32)};
-  BOARDS[id]=[];
-  TAB=id;buildTabs();buildPalette();render();save();
-  if(!EDIT)toggleEdit();
-  toast('Tab "'+name+'" created. Build graphs from the panel.');
-}
-function renameTab(t){
-  if(!CUSTOM_TABS[t])return;
-  const name=prompt('Rename tab:',CUSTOM_TABS[t].name);
-  if(!name)return;
-  CUSTOM_TABS[t].name=name.slice(0,32);buildTabs();save();
-}
-function deleteTab(t){
-  if(!CUSTOM_TABS[t])return;
-  if(!confirm('Delete tab "'+CUSTOM_TABS[t].name+'" and its graphs?'))return;
-  delete CUSTOM_TABS[t];delete BOARDS[t];
-  if(TAB===t)TAB='overview';
-  buildTabs();buildPalette();render();save();toast('Tab deleted.');
-}
+/* ---------- accuracy ---------- */
+var MODELS=[
+  {key:'agreement',        name:'Post NLP (5 models)',    what:'agreement with the DeepSeek second pass on labelled posts', color:'#00D6AE'},
+  {key:'comment_agreement',name:'Comment NLP (5 models)', what:'agreement with the second pass on labelled comments',       color:'#38bdf8'},
+  {key:'nlp_conf',         name:'NLP confidence',         what:'how sure the NLP models are, averaged over predictions',    color:'#a78bfa'},
+  {key:'fusion_conf',      name:'FUSION (content type)',  what:'confidence of the image content-type classifier',           color:'#f5a623'},
+  {key:'video_conf',       name:'Video intelligence',     what:'confidence of the video scene classifier',                  color:'#34d399'},
+  {key:'ds_conf',          name:'DeepSeek second pass',   what:'confidence of the escalation model itself',                 color:'#6C7BFB'}
+];
+function band(v){ return v==null?'':v>=90?'ok':v>=80?'neutral':v>=70?'warn':'bad'; }
 
-/* ---- filters ---- */
-function setGrain(g){GRAIN=g;CUSTOM=null;syncFilterUI();render();}
-function setQuick(days){
-  if(!AXIS.length){toast('Custom ranges need live data.');return;}
-  const to=AXIS[AXIS.length-1], from=AXIS[Math.max(0,AXIS.length-days)];
-  CUSTOM={from,to};document.getElementById('dfrom').value=from;document.getElementById('dto').value=to;
-  syncFilterUI();render();
-}
-function setCustom(){
-  const f=document.getElementById('dfrom').value,t=document.getElementById('dto').value;
-  if(f&&t){CUSTOM={from:f,to:t};syncFilterUI();render();}
-}
-function syncFilterUI(){
-  document.querySelectorAll('.gp').forEach(b=>b.classList.toggle('on',!CUSTOM&&b.dataset.g===GRAIN));
-  document.querySelectorAll('.qp').forEach(b=>b.classList.remove('on'));
-  rangeInfo();
-}
-
-/* ---- widget ops ---- */
-function addWidget(src){const w=newW(TAB,src);(BOARDS[TAB]=BOARDS[TAB]||[]).push(w);render();toast(TABS[TAB].metrics[src][0]+' added.');}
-function removeWidget(id){const l=BOARDS[TAB];const i=l.findIndex(w=>w.id===id);if(i<0)return;const ww=l[i];const n=ww.custom?customTitle(ww):TABS[TAB].metrics[ww.src][0];l.splice(i,1);render();toast(n+' removed.');}
-function moveWidget(id,idx){const l=BOARDS[TAB];const i=l.findIndex(w=>w.id===id);if(i<0)return;const[w]=l.splice(i,1);if(idx>i)idx--;l.splice(Math.max(0,Math.min(idx,l.length)),0,w);render();}
-function cycleSpan(id){const w=BOARDS[TAB].find(x=>x.id===id);if(!w)return;w.span=w.span<=3?4:(w.span===4?6:(w.span===6?8:(w.span===8?12:3)));render();}
-function setViz(id,v){const w=BOARDS[TAB].find(x=>x.id===id);if(!w)return;w.viz=v;render();}
-function resetLayout(){
-  if(isCustomTab(TAB)){ BOARDS[TAB]=[]; render(); toast('Custom tab cleared.'); return; }
-  BOARDS[TAB]=DEFAULTS[TAB].map(([s,v,sp])=>newW(TAB,s,v,sp));render();toast(TABS[TAB].name+' board reset.');
-}
-function toggleEdit(){EDIT=!EDIT;document.body.classList.toggle('edit',EDIT);document.getElementById('editBtn').innerHTML=EDIT?'&#10003; Done':'&#10022; Customize';}
-function applyTheme(){TH=THEMES[THEME];document.body.classList.toggle('light',THEME==='light');document.getElementById('themeBtn').innerHTML=THEME==='light'?'&#9788;':'&#9789;';}
-function toggleTheme(){THEME=THEME==='light'?'dark':'light';applyTheme();render();toast(THEME==='light'?'Light theme.':'Dark theme.');}
-
-/* ---- palette ---- */
-function buildPalette(){
-  if(isCustomTab(TAB)){
-    document.getElementById('palTitle').textContent=CUSTOM_TABS[TAB].name;
-    document.getElementById('palDesc').textContent='Your custom tab. Build any graph from any Redshift table below; it lives only on this tab.';
-    document.getElementById('palList').innerHTML=builderHTML();
-    syncBuilder();return;
-  }
-  document.getElementById('palTitle').textContent=TABS[TAB].name+' metrics';
-  document.getElementById('palDesc').textContent=TABS[TAB].desc;
-  document.getElementById('palList').innerHTML=builderHTML()+Object.keys(TABS[TAB].metrics).map(k=>{
-    const m=TABS[TAB].metrics[k];
-    return `<div class="pchipq" draggable="true" data-src="${k}" style="--pc:${THEMES.dark[m[1]]}" onclick="addWidget('${k}')"><i></i>${m[0]}<small>${m[3]}</small></div>`;}).join('');
-  document.querySelectorAll('.pchipq').forEach(ch=>ch.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain','add:'+ch.dataset.src);e.dataTransfer.effectAllowed='copy';}));
-  syncBuilder();
-}
-/* ---- Build-your-own: table -> column -> chart, from the pre-baked explore snapshot ---- */
-function builderHTML(){
-  const tables=Object.keys(EXPLORE);
-  const disabled=tables.length===0;
-  const topts=tables.map(t=>`<option value="${t}">${t.replace('rdl.','rdl · ').replace('odl.','odl · ').replace('public.','pub · ')}</option>`).join('');
-  return `<div style="border:1px solid var(--line2);border-radius:14px;padding:13px 12px;margin-bottom:14px;background:var(--panel)">
-    <div style="font-size:10.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--okT);margin-bottom:9px">&#10022; Build your own</div>
-    ${disabled?'<div style="font-size:11px;color:var(--t3);line-height:1.5">Needs a live snapshot. Run the nightly Action once and every Redshift table + column appears here.</div>':`
-    <label class="blab">Table</label>
-    <select id="bTable" class="bsel" onchange="syncBuilder()">${topts}</select>
-    <label class="blab">Column / measure</label>
-    <select id="bCol" class="bsel" onchange="syncBuilderViz()"></select>
-    <label class="blab">Chart</label>
-    <div id="bViz" style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:11px"></div>
-    <button class="tbtn pri" style="width:100%;justify-content:center;display:inline-flex" onclick="addCustom()">+ Add graph</button>`}
-  </div>`;
-}
-let BVIZ='bars';
-function syncBuilder(){
-  const tsel=document.getElementById('bTable'); if(!tsel) return;
-  const e=EXPLORE[tsel.value]; if(!e) return;
-  const csel=document.getElementById('bCol');
-  let opts='';
-  if(e.daily) opts+=`<option value="__volume__">rows per day (trend)</option>`;
-  opts+=`<option value="__rows__">total rows (KPI)</option>`;
-  for(const c in (e.cats||{})) opts+=`<option value="cat:${c}">${c} (categories)</option>`;
-  for(const c in (e.nums||{})) opts+=`<option value="num:${c}">${c} (numeric)</option>`;
-  csel.innerHTML=opts;
-  syncBuilderViz();
-}
-function syncBuilderViz(){
-  const v=document.getElementById('bCol')?.value; const box=document.getElementById('bViz'); if(!box) return;
-  let vz=[];
-  if(v==='__volume__') vz=['line','area','step','scatter','kpi'];
-  else if(v==='__rows__') vz=['kpi'];
-  else if(v?.startsWith('cat:')) vz=['bars','column','donut','pareto','histo','stackbars','lollipop','dot','treemap','waffle','funnel','scatter'];
-  else if(v?.startsWith('num:')) vz=['histo','bars','column','area','density','box','gauge','kpi'];
-  if(!vz.includes(BVIZ)) BVIZ=vz[0];
-  box.innerHTML=vz.map(z=>`<button class="qp ${z===BVIZ?'on':''}" onclick="BVIZ='${z}';syncBuilderViz()">${VIC[z]} ${z}</button>`).join('');
-}
-function addCustom(){
-  const table=document.getElementById('bTable')?.value; const cv=document.getElementById('bCol')?.value;
-  if(!table||!cv) return;
-  let kind,colName=null;
-  if(cv==='__volume__') kind='volume';
-  else if(cv==='__rows__') kind='rows';
-  else { const [k,c]=cv.split(':'); kind=k; colName=c; }
-  const w={id:'w'+(++UID),custom:true,table,col:colName,kind,viz:(kind==='rows'?'kpi':BVIZ),
-    colorKey:CUSTOM_COLORS[(BOARDS[TAB]||[]).filter(x=>x.custom).length%CUSTOM_COLORS.length],
-    span:kind==='rows'?3:6};
-  (BOARDS[TAB]=BOARDS[TAB]||[]).push(w);
-  render(); toast(customTitle(w)+' added.');
-}
-function bindDnD(){
-  document.querySelectorAll('.widget .grab').forEach(g=>{
-    g.addEventListener('dragstart',e=>{const w=g.closest('.widget');w.classList.add('dragging');e.dataTransfer.setData('text/plain','move:'+w.dataset.id);e.dataTransfer.effectAllowed='move';});
-    g.addEventListener('dragend',()=>document.querySelectorAll('.widget').forEach(x=>x.classList.remove('dragging','dropbefore')));
+function renderAccuracy(){
+  var A=(M.tabs&&M.tabs.accuracy)||{}, html='';
+  MODELS.forEach(function(m){
+    var s=A[m.key]; if(!s) return;
+    var days=s.day||[], cur=seriesVal(s);
+    var body = cur==null
+      ? '<div class="big" style="color:var(--mut);font-size:20px">not measured</div>'
+        +'<div class="sub">'+esc(m.what)+'. <b style="color:var(--amber)">No comparisons in this window</b>, so there is nothing to score yet.</div>'
+      : '<div class="big '+band(cur)+'">'+Number(cur).toFixed(1)+'%</div>'
+        +'<div class="bar"><i style="width:'+Math.max(0,Math.min(100,cur))+'%"></i></div>'
+        +'<div class="sub">'+esc(m.what)+'</div>'
+        +spark(days.length?days:(s.week||[]), m.color);
+    html+='<div class="card"><h3>'+esc(m.name)+'</h3>'+body+'</div>';
   });
-  document.querySelectorAll('.widget').forEach(w=>{
-    w.addEventListener('dragover',e=>{e.preventDefault();document.querySelectorAll('.widget').forEach(x=>x.classList.remove('dropbefore'));w.classList.add('dropbefore');});
-    w.addEventListener('dragleave',()=>w.classList.remove('dropbefore'));
-    w.addEventListener('drop',e=>{e.preventDefault();w.classList.remove('dropbefore');handleDrop(e.dataTransfer.getData('text/plain'),BOARDS[TAB].findIndex(x=>x.id===w.dataset.id));});
-  });
-  const end=document.getElementById('boardend');
-  end.addEventListener('dragover',e=>{e.preventDefault();end.classList.add('hot');});
-  end.addEventListener('dragleave',()=>end.classList.remove('hot'));
-  end.addEventListener('drop',e=>{e.preventDefault();end.classList.remove('hot');handleDrop(e.dataTransfer.getData('text/plain'),BOARDS[TAB].length);});
-  document.getElementById('board').addEventListener('dragover',e=>e.preventDefault());
-}
-function handleDrop(p,idx){if(!p)return;const[op,val]=p.split(':');if(op==='add'){const w=newW(TAB,val);BOARDS[TAB].splice(idx,0,w);render();toast(TABS[TAB].metrics[val][0]+' added.');}else if(op==='move')moveWidget(val,idx);}
-function bindHover(){
-  const tip=document.getElementById('tip');
-  document.querySelectorAll('svg.hasline').forEach(svg=>{
-    const meta=JSON.parse(svg.dataset.pts);const pl=36,pr=12,pt=14,pb=24,w=560,h=150;
-    svg.addEventListener('pointermove',e=>{
-      const r=svg.getBoundingClientRect();const fx=(e.clientX-r.left)/r.width*w;const n=meta.vals.length;
-      let i=Math.round((fx-pl)/((w-pl-pr)/(n-1||1)));i=Math.max(0,Math.min(n-1,i));
-      let mx=Math.max(...meta.vals),mn=Math.min(...meta.vals);const pad=(mx-mn)*0.15||1;mx+=pad;mn=Math.max(0,mn-pad);
-      const X=pl+(w-pl-pr)*i/(n-1||1),Y=pt+(h-pt-pb)*(1-(meta.vals[i]-mn)/((mx-mn)||1));
-      const hv=svg.querySelector('.hover');if(hv){hv.setAttribute('cx',X);hv.setAttribute('cy',Y);hv.setAttribute('opacity','1');}
-      tip.innerHTML=`${meta.labels[i]} &middot; <b>${meta.vals[i]}${meta.unit}</b>`;
-      tip.style.left=(r.left+X/w*r.width)+'px';tip.style.top=(r.top+Y/h*r.height)+'px';tip.classList.add('on');
+  var pd=A.per_dim;
+  if(pd && pd.length){
+    html+='<div class="card"><h3>By dimension</h3>';
+    pd.forEach(function(r){
+      var v=Number(r[1]);
+      var cell = v ? '<b class="'+band(v)+'">'+v.toFixed(1)+'%</b>' : '<span style="color:var(--mut)">not measured</span>';
+      html+='<div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(33,43,69,.5)">'
+        +'<span style="color:var(--mut2)">'+esc(r[0])+'</span>'+cell+'</div>';
     });
-    svg.addEventListener('pointerleave',()=>{tip.classList.remove('on');const hv=svg.querySelector('.hover');if(hv)hv.setAttribute('opacity','0');});
+    html+='<div class="sub" style="margin-top:9px">Agreement per label family. A low one here tells you which model to look at first.</div></div>';
+  }
+  document.getElementById('accCards').innerHTML=html||'<div class="empty">No accuracy metrics in this snapshot.</div>';
+
+  var c=A.confusion, ch='';
+  if(c && c.v && c.v.length){
+    ch='<table><tr><th>predicted \\ actual</th>'+c.cols.map(function(x){return '<th>'+esc(x)+'</th>';}).join('')+'</tr>';
+    c.v.forEach(function(row,i){
+      var tot=row.reduce(function(a,b){return a+b;},0)||1;
+      ch+='<tr><td style="color:var(--ink);font-weight:700">'+esc(c.rows[i])+'</td>';
+      row.forEach(function(n,j){
+        var pct=n/tot*100, diag=(i===j);
+        var style=diag?'background:rgba(0,214,174,'+(0.06+pct/380).toFixed(3)+');color:var(--teal);font-weight:700'
+                      :(n>0?'background:rgba(248,113,113,'+(0.04+pct/500).toFixed(3)+')':'');
+        ch+='<td class="mono" style="'+style+'">'+fmtN(n)+'</td>';
+      });
+      ch+='</tr>';
+    });
+    ch+='</table>';
+  }
+  document.getElementById('confusion').innerHTML=ch||'<div class="empty">No confusion matrix in this snapshot.</div>';
+
+  var e=A.escalation, eh='';
+  if(e && e.length){
+    var tot=e.reduce(function(a,b){return a+(b[1]||0);},0)||1;
+    eh='<table><tr><th>Tier</th><th>Predictions</th><th>Share</th><th></th></tr>';
+    e.forEach(function(r){
+      var pct=(r[1]||0)/tot*100;
+      eh+='<tr><td style="color:var(--ink);font-weight:700">'+esc(r[0])+'</td><td class="mono">'+fmtN(r[1])+'</td>'
+        +'<td class="mono">'+pct.toFixed(1)+'%</td><td style="width:45%"><div class="bar" style="margin:0"><i style="width:'+pct.toFixed(1)+'%"></i></div></td></tr>';
+    });
+    eh+='</table>';
+  }
+  document.getElementById('escalation').innerHTML=eh||'<div class="empty">No routing data in this snapshot.</div>';
+}
+
+/* ---------- data quality ---------- */
+function renderQuality(){
+  var H=(M.tabs&&M.tabs.health)||{}, Q=(M.tabs&&M.tabs.quality)||{};
+  var f=H.freshness, fh='';
+  if(f && f.length){
+    fh='<table><tr><th>Table</th><th>Last load</th><th>Status</th><th>Rows</th><th>Arrived</th></tr>';
+    f.forEach(function(r){
+      var pass=String(r[2]).toLowerCase()==='pass';
+      fh+='<tr><td class="mono" style="color:var(--ink)">'+esc(r[0])+'</td><td class="mono">'+esc(r[1])+'</td>'
+        +'<td><span class="pill '+(pass?'ok':'bad')+'">'+esc(r[2])+'</span></td>'
+        +'<td class="mono">'+esc(r[3])+'</td><td>'+esc(r[4])+'</td></tr>';
+    });
+    fh+='</table>';
+  }
+  document.getElementById('freshness').innerHTML=fh||'<div class="empty">No freshness data in this snapshot.</div>';
+
+  var dl=(H.daily_loads&&H.daily_loads.posts&&H.daily_loads.posts.day)||[];
+  var axis=((M.window&&M.window.axis)||[]).slice(-dl.length);
+  document.getElementById('loadChart').innerHTML=dl.length?barsChart(dl,axis,'#00D6AE'):'<div class="empty">No load data.</div>';
+
+  var html='', comp=Q.completeness;
+  if(comp && comp.length){
+    html+='<div class="card"><h3>Label completeness</h3>';
+    comp.forEach(function(r){
+      var v=Number(r[1]);
+      html+='<div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(33,43,69,.5)">'
+        +'<span style="color:var(--mut2)">'+esc(r[0])+'</span><b class="'+(v>=99?'ok':v>=95?'warn':'bad')+'">'+v.toFixed(1)+'%</b></div>';
+    });
+    html+='<div class="sub" style="margin-top:9px">Share of rows carrying this label. Under 100% means rows went unlabelled.</div></div>';
+  }
+  [['dupes','Duplicate rows','Same record loaded twice. Should be zero.'],
+   ['integrity','Orphan records','Rows pointing at something that no longer exists. Should be zero.'],
+   ['validity','Validity checks','Values outside their allowed range. Should be zero.']].forEach(function(spec){
+    var d=Q[spec[0]]; if(!d||!d.length) return;
+    html+='<div class="card"><h3>'+spec[1]+'</h3>';
+    d.forEach(function(r){
+      var n=Number(r[1])||0;
+      html+='<div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(33,43,69,.5)">'
+        +'<span style="color:var(--mut2)">'+esc(r[0])+'</span><b class="'+(n===0?'ok':'bad')+'">'+fmtN(n)+'</b></div>';
+    });
+    html+='<div class="sub" style="margin-top:9px">'+spec[2]+'</div></div>';
   });
-}
-function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('on'),2200);}
-
-/* ---- persistence: local for instant feel, shared via qa_layout.json in the repo ---- */
-let BOOTED=false;
-function serializeLayout(){
-  const boards={};for(const t in BOARDS)boards[t]=BOARDS[t].map(w=>w.custom?{custom:1,table:w.table,col:w.col,kind:w.kind,colorKey:w.colorKey,viz:w.viz,span:w.span}:{src:w.src,viz:w.viz,span:w.span});
-  return {boards,customTabs:CUSTOM_TABS,tab:TAB,grain:GRAIN,theme:THEME};
-}
-function save(){
-  if(!BOOTED) return;
-  localStorage.setItem(KEY,JSON.stringify(serializeLayout()));
-}
-function applyLayout(s,fromShared){
-  if(!s) return;
-  if(s.theme==='light')THEME='light';
-  if(['day','week','month','quarter'].includes(s.grain))GRAIN=s.grain;
-  if(s.customTabs&&typeof s.customTabs==='object') CUSTOM_TABS={...CUSTOM_TABS,...s.customTabs};
-  if(s.boards){for(const t in s.boards){
-    const isCurated=!!TABS[t], isCust=!!CUSTOM_TABS[t];
-    if(!isCurated&&!isCust) continue;
-    BOARDS[t]=s.boards[t].filter(w=>w.custom?w.table:(isCurated&&TABS[t].metrics[w.src])).map(w=>({...w,custom:!!w.custom,id:'w'+(++UID)}));
-  }}
-  if(s.tab&&(TABS[s.tab]||CUSTOM_TABS[s.tab]))TAB=s.tab;
-}
-function loadState(){
-  try{applyLayout(JSON.parse(localStorage.getItem(KEY)),false);}catch(e){}
-}
-let SHARED_META=null;
-async function loadShared(){
-  // team layout committed to the repo. Everyone reads it; only token holders publish.
-  try{
-    const r=await fetch('qa_layout.json?ts='+Date.now(),{cache:'no-store'});
-    if(!r.ok) return null;
-    const j=await r.json();
-    SHARED_META={published_at:j.published_at||null,by:j.by||null};
-    return j.layout||null;
-  }catch(e){ return null; }
+  document.getElementById('qualityCards').innerHTML=html||'<div class="empty">No quality checks in this snapshot.</div>';
 }
 
-/* ---- publish shared layout to the repo via GitHub API (token-gated) ---- */
-const REPO='scrapesync/artemisai_website', LAYOUT_PATH='qa_layout.json';
-function getToken(){return localStorage.getItem('ARTEMIS_QA_GH_TOKEN')||'';}
-function setToken(){
-  const cur=getToken();
-  const t=prompt('Paste a GitHub token with contents:write on '+REPO+'.\nIt is stored only in THIS browser and never committed. Leave blank to clear.',cur?'••••••••':'');
-  if(t===null)return;
-  if(t===''||t.startsWith('•')){ if(t===''){localStorage.removeItem('ARTEMIS_QA_GH_TOKEN');toast('Token cleared.');} return; }
-  localStorage.setItem('ARTEMIS_QA_GH_TOKEN',t.trim());toast('Token saved in this browser.');
-  updatePublishBtn();
-}
-async function publishLayout(){
-  const who=(JSON.parse(localStorage.getItem('artemis_session')||'{}').name)||'someone';
-  const btn=document.getElementById('pubBtn');const old=btn.innerHTML;btn.innerHTML='Publishing…';btn.disabled=true;
-  try{
-    // Server endpoint holds the token; nothing sensitive in the browser.
-    const r=await fetch(SAVE_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({by:who,layout:serializeLayout()})});
-    if(r.ok){
-      const j=await r.json().catch(()=>({}));
-      SHARED_META={published_at:j.published_at||new Date().toISOString(),by:j.by||who};
-      toast('Layout published — everyone sees this on next load.');stampShared();
-    } else if(r.status===500){
-      const e=await r.json().catch(()=>({}));
-      if(e.error==='not_configured'){ toast('Publishing not configured yet. Add GH_DISPATCH_TOKEN in Netlify.'); }
-      else toast('Publish failed: '+(e.message||'server error'));
-    } else {
-      // fallback: local token (dev / endpoint missing)
-      const done=await publishViaToken(who);
-      if(!done){ const e=await r.json().catch(()=>({})); toast('Publish failed: '+(e.message||r.status)); }
-    }
-  }catch(err){
-    const done=await publishViaToken(who);
-    if(!done) toast('Publish error: '+err.message);
+function barsChart(vals, labels, color){
+  var W=900,H=180,P=30,n=vals.length,mx=Math.max.apply(null,vals.concat([1])),bw=(W-2*P)/n;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:180px;display:block">';
+  for(var g=0;g<=3;g++){
+    var y=P+(H-2*P)*g/3;
+    s+='<line x1="'+P+'" y1="'+y.toFixed(1)+'" x2="'+(W-P)+'" y2="'+y.toFixed(1)+'" stroke="#212b45"/>'
+      +'<text x="4" y="'+(y+4).toFixed(1)+'" fill="#8793ab" font-size="10">'+fmtN(mx*(1-g/3))+'</text>';
   }
-  btn.innerHTML=old;btn.disabled=false;
+  vals.forEach(function(v,i){
+    if(!v) return;
+    var h=(H-2*P)*(v/mx), x=P+i*bw+bw*0.18, w=Math.max(2,bw*0.64);
+    s+='<rect x="'+x.toFixed(1)+'" y="'+(H-P-h).toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="2" fill="'+color+'"><title>'+esc((labels[i]||'')+': '+fmtN(v))+'</title></rect>';
+  });
+  var step=Math.max(1,Math.ceil(n/8));
+  labels.forEach(function(l,i){
+    if(i%step) return;
+    s+='<text x="'+(P+i*bw+bw/2).toFixed(1)+'" y="'+(H-8)+'" fill="#8793ab" font-size="10" text-anchor="middle">'+esc(String(l).slice(5))+'</text>';
+  });
+  return s+'</svg>';
 }
-async function publishViaToken(who){
-  // only used if the /api endpoint is unreachable (e.g. local file testing)
-  const token=getToken(); if(!token) return false;
-  try{
-    const payload={published_at:new Date().toISOString(),by:who,layout:serializeLayout()};
-    let sha=null;
-    const head=await fetch(`https://api.github.com/repos/${REPO}/contents/${LAYOUT_PATH}`,{headers:{Authorization:'token '+token,Accept:'application/vnd.github+json'}});
-    if(head.ok){ const h=await head.json(); sha=h.sha; }
-    const body={message:'chore: publish shared QA dashboard layout ('+who+')',
-      content:btoa(unescape(encodeURIComponent(JSON.stringify(payload)))),
-      committer:{name:'qa-layout',email:'bot@artemisai.co.uk'}};
-    if(sha)body.sha=sha;
-    const put=await fetch(`https://api.github.com/repos/${REPO}/contents/${LAYOUT_PATH}`,{method:'PUT',headers:{Authorization:'token '+token,Accept:'application/vnd.github+json'},body:JSON.stringify(body)});
-    if(put.ok){ SHARED_META={published_at:payload.published_at,by:who}; toast('Layout published — everyone sees this on next load.'); stampShared(); return true; }
-    return false;
-  }catch(e){ return false; }
-}
-function stampShared(){
-  const el=document.getElementById('sharedInfo');if(!el)return;
-  if(SHARED_META&&SHARED_META.published_at){
-    const d=new Date(SHARED_META.published_at);
-    el.textContent='shared layout · '+d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})+(SHARED_META.by?(' · by '+SHARED_META.by):'');
-  } else el.textContent='local layout only';
-}
-function updatePublishBtn(){}
-/* ---- Fetch live: ask the server to re-query Redshift, show a progress bar, poll for the new snapshot ---- */
-const WORKFLOW_FILE='qa-dashboard-metrics.yml';
-const LIVE_ENDPOINT='/api/fetch-live';   // Netlify function holds the token server-side
-const SAVE_ENDPOINT='/api/save-layout';  // ditto, for publishing the shared layout
-const EST_SECONDS=140;                    // typical run+commit+deploy time, drives the ETA bar
-let _liveTimer=null;
-function lpShow(on){document.getElementById('liveProgress').style.display=on?'block':'none';}
-function lpSet(pct,label,stage,eta){
-  document.getElementById('lpBar').style.width=Math.min(99,pct)+'%';
-  if(label)document.getElementById('lpLabel').textContent=label;
-  if(stage!=null)document.getElementById('lpStage').textContent=stage;
-  if(eta!=null)document.getElementById('lpEta').textContent=eta;
-}
-async function dispatchRun(){
-  // Prefer the server endpoint (no token in browser). Fall back to a stored token
-  // only if the endpoint is missing (e.g. local file testing).
-  try{
-    const r=await fetch(LIVE_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
-    if(r.status===202||r.ok){ return {ok:true,mode:'server'}; }
-    if(r.status===500){ const e=await r.json().catch(()=>({})); if(e.error==='not_configured') return {ok:false,reason:'The Fetch-live endpoint is not configured yet. Add GH_DISPATCH_TOKEN in Netlify.'}; }
-    const e=await r.json().catch(()=>({})); return {ok:false,reason:e.message||('endpoint '+r.status)};
-  }catch(err){
-    // endpoint unreachable (local dev) -> optional token fallback
-    const token=getToken();
-    if(!token) return {ok:false,reason:'Fetch-live endpoint unreachable and no local token set.'};
-    try{
-      const disp=await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`,{
-        method:'POST',headers:{Authorization:'token '+token,Accept:'application/vnd.github+json'},body:JSON.stringify({ref:'main'})});
-      return disp.status===204?{ok:true,mode:'token'}:{ok:false,reason:'GitHub '+disp.status};
-    }catch(e2){ return {ok:false,reason:e2.message}; }
-  }
-}
-async function fetchLive(){
-  if(_liveTimer){ toast('A live fetch is already running.'); return; }
-  const btn=document.getElementById('liveBtn');const old=btn.innerHTML;
-  const before=META.generated_at;
-  btn.disabled=true;btn.innerHTML='&#9889; Starting…';
-  lpShow(true);lpSet(3,'Starting live fetch…','requesting pipeline run',fmtEta(EST_SECONDS));
 
-  const res=await dispatchRun();
-  if(!res.ok){ lpShow(false);btn.disabled=false;btn.innerHTML=old; toast(res.reason||'Could not start the run.'); return; }
+/* ---------- SQL builder ---------- */
+var SNIPPETS=[
+"SELECT date, COUNT(*) AS predictions\nFROM rdl.post_label_predictions\nGROUP BY 1\nORDER BY 1",
+"SELECT sentiment, COUNT(*) AS posts\nFROM rdl.post_label_predictions\nGROUP BY 1\nORDER BY 2 DESC",
+"SELECT 'page_posts' AS table_name, COUNT(*) AS row_count FROM rdl.page_posts\nUNION ALL SELECT 'post_comments', COUNT(*) FROM rdl.post_comments\nUNION ALL SELECT 'post_label_predictions', COUNT(*) FROM rdl.post_label_predictions",
+"SELECT p.page_name, COUNT(*) AS comments\nFROM rdl.post_comments c\nJOIN rdl.page_posts p ON p.id = c.post_id\nGROUP BY 1\nORDER BY 2 DESC",
+"SELECT ROUND(confidence, 1) AS confidence, COUNT(*) AS n\nFROM rdl.post_label_predictions\nGROUP BY 1\nORDER BY 1"
+];
+var RESULT=null;
+function useSnip(i){ document.getElementById('sql').value=SNIPPETS[i]; }
 
-  toast('Live run started — querying Redshift.');
-  btn.innerHTML='&#9889; Running…';
-  const t0=Date.now();
-  // stages purely for feel, timed against EST_SECONDS
-  const stages=[[0,'Pipeline dispatched'],[0.12,'Connecting to Redshift'],[0.28,'Querying label tables'],
-    [0.5,'Aggregating metrics'],[0.72,'Writing snapshot'],[0.88,'Committing + deploying']];
-  let tries=0;const maxTries=60;
-  const tick=async()=>{
-    const elapsed=(Date.now()-t0)/1000;
-    const frac=Math.min(0.98,elapsed/EST_SECONDS);
-    const stage=stages.filter(s=>frac>=s[0]).pop();
-    const remain=Math.max(0,EST_SECONDS-elapsed);
-    lpSet(5+frac*93,'Fetching live data…',stage?stage[1]:'working',fmtEta(remain));
-    // poll for the new snapshot every ~5s after a 15s head start
-    if(elapsed>15 && tries<maxTries){
-      tries++;
-      const ok=await loadLive();
-      if(ok&&META.generated_at&&META.generated_at!==before){
-        clearInterval(_liveTimer);_liveTimer=null;
-        lpSet(100,'Live data in','snapshot updated','done');
-        setTimeout(()=>lpShow(false),1200);
-        render();stampFreshness();btn.disabled=false;btn.innerHTML=old;
-        toast('Live data in — snapshot updated.');return;
+function runSQL(){
+  var sql=document.getElementById('sql').value.trim();
+  var errEl=document.getElementById('sqlErr'), outEl=document.getElementById('sqlOut'), btn=document.getElementById('runBtn');
+  errEl.innerHTML=''; document.getElementById('qmeta').textContent='';
+  if(!sql){ errEl.innerHTML='<div class="err">Write a SELECT query first.</div>'; return; }
+  btn.disabled=true; btn.textContent='Running…';
+  outEl.innerHTML='<div class="empty">Querying Redshift…</div>';
+  fetch('/api/run-query',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sql:sql})})
+    .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); })
+    .then(function(res){
+      if(!res.ok || res.j.error){
+        RESULT=null; outEl.innerHTML='';
+        errEl.innerHTML='<div class="err"><b>Query failed.</b><br>'+esc(res.j.error||'Unknown error')+'</div>';
+        return;
       }
-    }
-    if(elapsed>EST_SECONDS+120){ // hard stop ~4.3 min
-      clearInterval(_liveTimer);_liveTimer=null;lpShow(false);btn.disabled=false;btn.innerHTML=old;
-      toast('Run dispatched; new data will appear once the pipeline commits.');
-    }
-  };
-  _liveTimer=setInterval(tick,2500);tick();
+      RESULT=res.j;
+      document.getElementById('qmeta').textContent=res.j.row_count+' rows · '+res.j.ms+' ms'+(res.j.truncated?' · capped at 5,000':'');
+      renderResult();
+    })
+    .catch(function(e){
+      RESULT=null; outEl.innerHTML='';
+      errEl.innerHTML='<div class="err"><b>Could not reach the query service.</b><br>This runs through the Netlify function at <span class="mono">/api/run-query</span>, so it works on the deployed site, not from a local file. ('+esc(e.message)+')</div>';
+    })
+    .then(function(){ btn.disabled=false; btn.textContent='Run query'; });
 }
-function fmtEta(sec){sec=Math.round(sec);if(sec<=0)return'~done';const m=Math.floor(sec/60),s=sec%60;return m?`~${m}m ${s}s left`:`~${s}s left`;}
-async function boot(){
-  await loadLive();
-  const shared=await loadShared();
-  // shared team layout is the base; a local edit (if present) overrides for this browser
-  applyLayout(shared,true);
-  loadState();
-  for(const t in TABS){ if(!BOARDS[t]) BOARDS[t]=DEFAULTS[t].map(([s,v,sp])=>newW(t,s,v,sp)); }
-  applyTheme();buildTabs();buildPalette();syncFilterUI();
-  document.querySelectorAll('.gp').forEach(b=>b.classList.toggle('on',b.dataset.g===GRAIN));
-  render();stampFreshness();stampShared();updatePublishBtn();
-  BOOTED=true;save();
+
+function renderResult(){
+  var out=document.getElementById('sqlOut');
+  if(!RESULT){ out.innerHTML=''; return; }
+  var cols=RESULT.columns, rows=RESULT.rows, viz=document.getElementById('viz').value, html='';
+  if(!rows.length){ out.innerHTML='<div class="empty">Query returned no rows.</div>'; return; }
+  if(viz!=='table'){
+    var labels=rows.map(function(r){ return r[cols[0]]; });
+    var numCols=cols.slice(1).filter(function(c){ return rows.some(function(r){ return r[c]!=null && r[c]!=='' && !isNaN(Number(r[c])); }); });
+    if(!numCols.length){
+      html+='<div class="err">Nothing numeric to plot. The first column is the label and at least one column after it must be a number, or switch to "Table only".</div>';
+    } else {
+      var palette=['#00D6AE','#38bdf8','#a78bfa','#f5a623','#34d399'];
+      html+='<div class="card">'+multiChart(labels, numCols.map(function(c,i){
+        return {name:c, color:palette[i%palette.length], vals:rows.map(function(r){ return Number(r[c])||0; })};
+      }), viz)+'</div>';
+    }
+  }
+  html+='<div class="tw" style="margin-top:12px;max-height:430px"><table><tr>'
+    +cols.map(function(c){return '<th>'+esc(c)+'</th>';}).join('')+'</tr>'
+    +rows.slice(0,200).map(function(r){ return '<tr>'+cols.map(function(c){ return '<td class="mono">'+esc(r[c])+'</td>'; }).join('')+'</tr>'; }).join('')
+    +'</table></div>';
+  if(rows.length>200) html+='<div class="hint" style="margin-top:8px">Showing the first 200 of '+rows.length+' rows. Use CSV for the rest.</div>';
+  out.innerHTML=html;
 }
-window.addEventListener('load',boot);
+
+function multiChart(labels, series, kind){
+  var W=900,H=300,P=44,n=labels.length;
+  var all=series.reduce(function(a,s){return a.concat(s.vals);},[]);
+  var mx=Math.max.apply(null,all.concat([1])), mn=Math.min(0,Math.min.apply(null,all)), rng=(mx-mn)||1;
+  function x(i){ return n===1?W/2:P+i*(W-2*P)/(n-1); }
+  function y(v){ return H-P-((v-mn)/rng)*(H-2*P); }
+  var s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:300px;display:block">';
+  for(var g=0;g<=4;g++){
+    var gy=P+(H-2*P)*g/4;
+    s+='<line x1="'+P+'" y1="'+gy.toFixed(1)+'" x2="'+(W-P)+'" y2="'+gy.toFixed(1)+'" stroke="#212b45"/>'
+      +'<text x="6" y="'+(gy+4).toFixed(1)+'" fill="#8793ab" font-size="11">'+fmtN(mx-(rng*g/4))+'</text>';
+  }
+  if(kind==='bar'){
+    var bw=(W-2*P)/n, sw=bw*0.7/series.length;
+    series.forEach(function(sr,si){
+      sr.vals.forEach(function(v,i){
+        var h=Math.abs(y(v)-y(0)), bx=P+i*bw+bw*0.15+si*sw;
+        s+='<rect x="'+bx.toFixed(1)+'" y="'+Math.min(y(v),y(0)).toFixed(1)+'" width="'+Math.max(1.5,sw-1.5).toFixed(1)+'" height="'+Math.max(1,h).toFixed(1)+'" rx="2" fill="'+sr.color+'"><title>'+esc(labels[i]+' · '+sr.name+': '+sr.vals[i])+'</title></rect>';
+      });
+    });
+  } else {
+    series.forEach(function(sr){
+      var d=sr.vals.map(function(v,i){ return (i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1); }).join(' ');
+      s+='<path d="'+d+'" fill="none" stroke="'+sr.color+'" stroke-width="2.4" stroke-linejoin="round"/>';
+      if(n<=60) sr.vals.forEach(function(v,i){
+        s+='<circle cx="'+x(i).toFixed(1)+'" cy="'+y(v).toFixed(1)+'" r="3" fill="'+sr.color+'"><title>'+esc(labels[i]+' · '+sr.name+': '+v)+'</title></circle>';
+      });
+    });
+  }
+  var step=Math.max(1,Math.ceil(n/9));
+  labels.forEach(function(l,i){
+    if(i%step) return;
+    s+='<text x="'+x(i).toFixed(1)+'" y="'+(H-14)+'" fill="#8793ab" font-size="11" text-anchor="middle">'+esc(String(l).slice(0,12))+'</text>';
+  });
+  var lx=P;
+  series.forEach(function(sr){
+    s+='<rect x="'+lx+'" y="10" width="10" height="10" rx="2" fill="'+sr.color+'"/>'
+      +'<text x="'+(lx+15)+'" y="19" fill="#aab4c8" font-size="11">'+esc(sr.name)+'</text>';
+    lx+=25+String(sr.name).length*6.5;
+  });
+  return s+'</svg>';
+}
+
+function downloadCSV(){
+  if(!RESULT){ alert('Run a query first.'); return; }
+  var cols=RESULT.columns;
+  var lines=[cols.join(',')].concat(RESULT.rows.map(function(r){
+    return cols.map(function(c){
+      var v=r[c]==null?'':String(r[c]);
+      return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;
+    }).join(',');
+  }));
+  var blob=new Blob([lines.join('\n')],{type:'text/csv'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='artemis_query.csv'; a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); },1000);
+}
+
+/* saved queries, per device */
+var SKEY='artemis_qa_saved_v1';
+function getSaved(){ try{ return JSON.parse(localStorage.getItem(SKEY)||'[]'); }catch(e){ return []; } }
+function setSaved(a){ try{ localStorage.setItem(SKEY,JSON.stringify(a)); }catch(e){} renderSaved(); }
+function saveQuery(){
+  var sql=document.getElementById('sql').value.trim();
+  if(!sql){ alert('Nothing to save.'); return; }
+  var name=prompt('Name this query:',''); if(!name) return;
+  var a=getSaved(); a.unshift({name:name,sql:sql}); setSaved(a.slice(0,40));
+}
+function renderSaved(){
+  var a=getSaved(), el=document.getElementById('savedList');
+  if(!a.length){ el.innerHTML='<div style="font-size:12.5px;color:var(--mut);line-height:1.55">Nothing saved yet. Write a query and press Save; it is kept on this device.</div>'; return; }
+  el.innerHTML=a.map(function(q,i){
+    return '<div class="saved"><button class="open" onclick="loadSaved('+i+')">'+esc(q.name)+'</button>'
+      +'<button class="del" title="Delete" onclick="delSaved('+i+')">&times;</button></div>';
+  }).join('');
+}
+function loadSaved(i){ var a=getSaved(); if(a[i]) document.getElementById('sql').value=a[i].sql; }
+function delSaved(i){ var a=getSaved(); a.splice(i,1); setSaved(a); }
+renderSaved();
+
+try{ var lt=localStorage.getItem('artemis_qa_tab'); if(lt && document.getElementById(lt)) showTab(lt); }catch(e){}
 </script>
-</body>
-</html>
+</body></html>
