@@ -92,8 +92,15 @@ exports.handler = async (event) => {
   }
 
   const inner = payload.sql.trim().replace(/;\s*$/, "");
-  // Wrap so the cap always applies, even if the user wrote their own LIMIT.
-  const wrapped = `SELECT * FROM (${inner}) AS artemis_q LIMIT ${ROW_CAP}`;
+  // Apply the cap without wrapping the query in a subselect. Wrapping is the
+  // obvious way to force a LIMIT, but a subselect makes the inner ORDER BY
+  // advisory, and a chart whose points arrive in arbitrary order is wrong in a
+  // way that is hard to spot. So: clamp a trailing LIMIT if the author wrote
+  // one, otherwise append ours.
+  const tail = inner.match(/\blimit\s+(\d+)(\s+offset\s+\d+)?\s*$/i);
+  const wrapped = tail
+    ? inner.slice(0, tail.index) + "LIMIT " + Math.min(parseInt(tail[1], 10), ROW_CAP) + (tail[2] || "")
+    : inner + "\nLIMIT " + ROW_CAP;
 
   const client = new Client({
     host: process.env.REDSHIFT_HOST,

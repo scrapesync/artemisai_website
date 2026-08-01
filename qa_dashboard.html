@@ -11,15 +11,19 @@
     radial-gradient(1100px 600px at 85% -10%, rgba(109,99,255,.14), transparent 60%),
     radial-gradient(900px 500px at -10% 110%, rgba(0,214,174,.10), transparent 55%), var(--bg);
     color:var(--ink);min-height:100vh}
-  .wrap{max-width:1200px;margin:0 auto;padding:22px 22px 60px}
+  .wrap{max-width:1320px;margin:0 auto;padding:22px 22px 60px}
 
   .hd h1{font-size:26px;font-weight:900;letter-spacing:-.4px}
-  .hd p{color:var(--mut);font-size:14px;line-height:1.6;margin-top:6px;max-width:780px}
+  .hd p{color:var(--mut);font-size:14px;line-height:1.6;margin-top:6px;max-width:820px}
   .hd p b{color:var(--mut2)}
   .stamp{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--mut)}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
   .dot.stale{background:var(--amber);box-shadow:0 0 10px var(--amber)}
+  .dot.live{background:var(--teal);box-shadow:0 0 12px var(--teal)}
   .stamp b{color:var(--mut2);font-weight:700}
+  .acts{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:12px}
+  #refreshMsg{font-size:12.5px;color:var(--mut);line-height:1.5}
+  #refreshMsg a{color:var(--teal)}
 
   .tabs{display:flex;gap:8px;margin:20px 0 16px;flex-wrap:wrap}
   .tab{font-family:inherit;font-size:14.5px;font-weight:800;padding:10px 20px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--mut2);cursor:pointer;transition:.15s}
@@ -37,7 +41,7 @@
   h2.sec{font-size:17px;font-weight:900;margin:26px 0 10px;display:flex;align-items:center;gap:10px}
   h2.sec::after{content:"";flex:1;height:1px;background:var(--line)}
   .pane > h2.sec:first-child{margin-top:0}
-  .hint{font-size:13px;color:var(--mut);line-height:1.6;margin:0 0 12px;max-width:840px}
+  .hint{font-size:13px;color:var(--mut);line-height:1.6;margin:0 0 12px;max-width:900px}
   .hint b{color:var(--mut2)}
 
   table{width:100%;border-collapse:collapse;font-size:13px}
@@ -54,32 +58,92 @@
   .bar{height:9px;border-radius:6px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:9px}
   .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#00D6AE,#38bdf8)}
 
-  .sqlwrap{display:grid;grid-template-columns:1fr 300px;gap:14px;align-items:start}
-  @media(max-width:900px){.sqlwrap{grid-template-columns:1fr}}
-  textarea#sql{width:100%;min-height:190px;background:#070a11;border:1px solid var(--line);border-radius:12px;color:var(--ink);
-    font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:1.65;padding:14px;resize:vertical;outline:none}
-  textarea#sql:focus{border-color:var(--teal)}
-  .row{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:10px}
   .btn{font-family:inherit;font-size:13.5px;font-weight:800;padding:9px 18px;border-radius:10px;border:1px solid var(--teal);background:rgba(0,214,174,.14);color:var(--teal);cursor:pointer}
   .btn:hover{background:rgba(0,214,174,.24)}
   .btn:disabled{opacity:.55;cursor:default}
   .btn.ghost{border-color:var(--line);background:transparent;color:var(--mut2)}
   .btn.ghost:hover{border-color:var(--mut);color:var(--ink)}
-  select{font-family:inherit;font-size:13px;padding:8px 11px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);outline:none}
-  select:focus{border-color:var(--teal)}
-  label.lab{font-size:12px;color:var(--mut)}
+  .btn.sm{font-size:12.5px;padding:7px 14px;border-radius:9px}
   .err{background:rgba(248,113,113,.09);border:1px solid rgba(248,113,113,.4);color:#ffd9d9;border-radius:11px;padding:12px 15px;font-size:13px;line-height:1.6;margin-top:12px}
   .err b{color:var(--red)}
+  .empty{color:var(--mut);font-size:13px;padding:22px;text-align:center;line-height:1.6}
+
+  /* ===== SQL workspace (schema rail | editor + results | chart settings) ===== */
+  .ws{display:grid;grid-template-columns:216px minmax(0,1fr) 266px;gap:12px;align-items:start}
+  @media(max-width:1240px){.ws{grid-template-columns:1fr}}
+  .rail{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 13px}
+  .rail h4{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--mut);font-weight:800;margin:0 0 8px}
+  .rail h4.mt{margin-top:16px}
+  .railsw{display:flex;gap:3px;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:2px;margin-bottom:11px}
+  .railsw button{flex:1;font-family:inherit;font-size:11.5px;font-weight:700;padding:6px 2px;border-radius:7px;color:var(--mut);border:0;background:none;cursor:pointer}
+  .railsw button.on{background:rgba(0,214,174,.15);color:var(--teal)}
+  .rsec{display:none}.rsec.on{display:block}
+  input.search{width:100%;font-family:inherit;font-size:12.5px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);outline:none;margin-bottom:8px}
+  input.search:focus{border-color:var(--teal)}
+
+  .tree{max-height:520px;overflow:auto;margin:0 -4px}
+  .tsch{color:var(--violet);font-weight:700;padding:6px 4px 2px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.03em}
+  .ttab{display:block;width:100%;text-align:left;background:none;border:0;color:var(--mut2);font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:4px 5px 4px 11px;cursor:pointer;border-radius:6px;word-break:break-all}
+  .ttab:hover{background:rgba(255,255,255,.05);color:var(--teal)}
+  .ttab i{font-style:normal;color:#4d5c7a;margin-right:5px}
+  .tcols{padding:1px 0 5px 19px}
+  .tcol{display:block;width:100%;text-align:left;background:none;border:0;color:var(--mut);font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:2px 4px;cursor:pointer;border-radius:5px;word-break:break-all}
+  .tcol:hover{color:var(--ink);background:rgba(255,255,255,.04)}
+  .tcol span{color:#4d5c7a;margin-left:6px}
+
   .snip{display:block;width:100%;text-align:left;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--mut);
-    font-family:inherit;font-size:12.5px;padding:9px 11px;cursor:pointer;margin-bottom:7px;line-height:1.45}
+    font-family:inherit;font-size:12px;padding:8px 10px;cursor:pointer;margin-bottom:6px;line-height:1.45}
   .snip:hover{border-color:var(--teal);color:var(--mut2)}
-  .snip b{display:block;color:var(--ink);font-size:13px;margin-bottom:2px;font-weight:700}
-  .saved{display:flex;gap:6px;align-items:center;margin-bottom:4px}
-  .saved button.open{flex:1;text-align:left;background:none;border:none;color:var(--mut2);font-family:inherit;font-size:12.5px;cursor:pointer;padding:6px 8px;border-radius:7px}
+  .snip b{display:block;color:var(--ink);font-size:12.5px;margin-bottom:2px;font-weight:700}
+  .saved{display:flex;gap:5px;align-items:center}
+  .saved button.open{flex:1;min-width:0;text-align:left;background:none;border:none;color:var(--mut2);font-family:inherit;font-size:12px;cursor:pointer;padding:6px 7px;border-radius:7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .saved button.open:hover{background:rgba(255,255,255,.05);color:var(--ink)}
-  .saved button.del{background:none;border:none;color:var(--mut);cursor:pointer;font-size:15px;padding:2px 7px;border-radius:6px}
+  .saved button.del{background:none;border:none;color:var(--mut);cursor:pointer;font-size:15px;padding:2px 6px;border-radius:6px}
   .saved button.del:hover{color:var(--red)}
-  .empty{color:var(--mut);font-size:13px;padding:18px;text-align:center;line-height:1.6}
+  .tiny{font-size:11.5px;color:var(--mut);line-height:1.55}
+
+  /* editor */
+  .ed{display:flex;background:#060911;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .ed:focus-within{border-color:var(--teal)}
+  .gut{flex:0 0 44px;padding:12px 9px 12px 0;text-align:right;color:#3d4b68;background:#050810;
+    font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:1.62;overflow:hidden;user-select:none;white-space:pre}
+  .edin{position:relative;flex:1;min-width:0;height:268px}
+  .edin pre,.edin textarea{margin:0;border:0;padding:12px 14px;font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    font-size:13px;line-height:1.62;white-space:pre;overflow:auto;tab-size:2;font-variant-ligatures:none}
+  .edin pre{position:absolute;inset:0;pointer-events:none;color:var(--ink)}
+  .edin textarea{position:absolute;inset:0;width:100%;height:100%;background:transparent;color:transparent;caret-color:var(--teal);resize:none;outline:none}
+  .hl i{font-style:normal}
+  .hl .k{color:#7dd3fc;font-weight:600}
+  .hl .f{color:#c4b5fd}
+  .hl .s{color:#86efac}
+  .hl .n{color:#fbbf24}
+  .hl .c{color:#54648a;font-style:italic}
+
+  .row{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:10px}
+  .vsw{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:2px}
+  .vsw button{font-family:inherit;font-size:12.5px;font-weight:700;padding:6px 15px;border-radius:7px;color:var(--mut);border:0;background:none;cursor:pointer}
+  .vsw button.on{background:rgba(0,214,174,.15);color:var(--teal)}
+  #qmeta{font-size:12px;color:var(--mut);font-family:'JetBrains Mono',monospace}
+
+  /* chart settings */
+  .ctypes{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+  .ct{height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;background:var(--panel2);cursor:pointer;padding:0}
+  .ct svg{width:17px;height:17px;stroke:var(--mut);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .ct:hover{border-color:rgba(0,214,174,.5)}
+  .ct:hover svg{stroke:var(--mut2)}
+  .ct.on{border-color:var(--teal);background:rgba(0,214,174,.13)}
+  .ct.on svg{stroke:var(--teal)}
+  .fld{margin-bottom:9px}
+  .fld label{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin-bottom:4px}
+  .fld select,.fld input{width:100%;font-family:inherit;font-size:12.5px;padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);outline:none}
+  .fld select:focus,.fld input:focus{border-color:var(--teal)}
+  .ylist{max-height:128px;overflow:auto;border:1px solid var(--line);border-radius:8px;padding:5px 8px;background:var(--panel2)}
+  .chk{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--mut2);padding:3px 0;cursor:pointer}
+  /* beats the ".fld label" heading rule: these are column names, not headings */
+  .fld label.chk{text-transform:none;letter-spacing:0;margin-bottom:0}
+  .chk input{width:auto;accent-color:#00D6AE}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  #chartHost{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;overflow:auto}
 
 /* ===== shared site header (sn-*) ===== */
 nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}
@@ -147,11 +211,16 @@ body{padding-top:52px!important}
     <p>Two questions, answered plainly: <b>are the models still accurate</b>, and <b>did the data arrive</b>. Plus a place to write your own SQL and get a chart out of it.</p>
     <div class="stamp">
       <span class="dot" id="freshdot"></span>
-      <span id="freshtext">loading…</span>
+      <span id="freshtext">loading&hellip;</span>
       <span style="color:var(--line)">|</span>
-      <span><b id="tPosts">–</b> posts</span>
-      <span><b id="tComments">–</b> comments</span>
-      <span><b id="tPages">–</b> pages</span>
+      <span><b id="tPosts">&ndash;</b> posts</span>
+      <span><b id="tComments">&ndash;</b> comments</span>
+      <span><b id="tPages">&ndash;</b> pages</span>
+    </div>
+    <div class="acts">
+      <button class="btn sm" id="liveBtn" onclick="refreshLive()">&#8635; Refresh from Redshift</button>
+      <button class="btn ghost sm" id="snapBtn" onclick="rebuildSnapshot()">Rebuild nightly snapshot</button>
+      <span id="refreshMsg">Refresh queries Redshift now and updates this screen only. Rebuild re-runs the nightly GitHub Action, which takes a few minutes and saves the result for everyone.</span>
     </div>
   </div>
 
@@ -194,41 +263,111 @@ body{padding-top:52px!important}
   <!-- ============ SQL ============ -->
   <div class="pane" id="p-sql">
     <h2 class="sec">Build your own chart</h2>
-    <p class="hint">Write a read-only <b>SELECT</b> against Redshift and turn the result into a chart or a table. The <b>first column is the x-axis</b> (or the label); every numeric column after it gets plotted. Results cap at 5,000 rows, queries time out at 20 seconds, and nothing but SELECT will run.</p>
-    <div class="sqlwrap">
-      <div>
-        <textarea id="sql" spellcheck="false" placeholder="SELECT date, COUNT(*) AS predictions
-FROM rdl.post_label_predictions
-GROUP BY 1
-ORDER BY 1"></textarea>
+    <p class="hint">Write a read-only <b>SELECT</b>, run it against Redshift, then shape the result with the controls on the right. Pick the chart, choose which column is the x-axis and which columns are the values, and add a <b>split column</b> to turn one value column into a series per category. Results cap at 5,000 rows, queries time out at 20 seconds, and nothing but SELECT will run. <b>Ctrl/Cmd + Enter</b> runs the query.</p>
+
+    <div class="ws">
+      <!-- left rail -->
+      <div class="rail">
+        <div class="railsw">
+          <button class="on" data-rsec="r-schema" onclick="showRail('r-schema')">Schema</button>
+          <button data-rsec="r-saved" onclick="showRail('r-saved')">Saved</button>
+          <button data-rsec="r-ex" onclick="showRail('r-ex')">Examples</button>
+        </div>
+
+        <div class="rsec on" id="r-schema">
+          <input class="search" id="schemaSearch" placeholder="Find a table or column" oninput="renderTree()">
+          <div class="tree" id="tree"><div class="tiny">Loading the table list&hellip;</div></div>
+          <button class="btn ghost sm" style="width:100%;margin-top:9px" onclick="loadSchema(true)">Reload table list</button>
+        </div>
+
+        <div class="rsec" id="r-saved">
+          <h4>Saved charts</h4>
+          <div id="savedList"></div>
+          <h4 class="mt">Recent queries</h4>
+          <div id="recentList"></div>
+        </div>
+
+        <div class="rsec" id="r-ex">
+          <h4>Start from an example</h4>
+          <div id="exList"></div>
+        </div>
+      </div>
+
+      <!-- centre: editor + results -->
+      <div style="min-width:0">
+        <div class="ed">
+          <div class="gut" id="gut">1</div>
+          <div class="edin">
+            <pre class="hl" id="hl"></pre>
+            <textarea id="sql" wrap="off" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
+          </div>
+        </div>
         <div class="row">
           <button class="btn" onclick="runSQL()" id="runBtn">Run query</button>
-          <label class="lab" for="viz">Chart</label>
-          <select id="viz" onchange="renderResult()">
-            <option value="line">Line</option>
-            <option value="bar">Bar</option>
-            <option value="table">Table only</option>
-          </select>
-          <button class="btn ghost" onclick="saveQuery()">Save</button>
-          <button class="btn ghost" onclick="downloadCSV()">CSV</button>
-          <span id="qmeta" style="font-size:12.5px;color:var(--mut)"></span>
+          <div class="vsw">
+            <button class="on" id="v-chart" onclick="setView('chart')">Chart</button>
+            <button id="v-table" onclick="setView('table')">Table</button>
+          </div>
+          <button class="btn ghost sm" onclick="saveChart()">Save chart</button>
+          <button class="btn ghost sm" onclick="downloadCSV()">CSV</button>
+          <button class="btn ghost sm" onclick="downloadSVG()">SVG</button>
+          <span id="qmeta"></span>
         </div>
         <div id="sqlErr"></div>
-        <div id="sqlOut" style="margin-top:14px"></div>
+        <div id="chartHost" style="margin-top:13px;display:none"></div>
+        <div id="tableHost" style="margin-top:13px;display:none"></div>
       </div>
-      <div>
-        <div class="card" style="padding:14px 15px">
-          <h3>Start from an example</h3>
-          <button class="snip" onclick="useSnip(0)"><b>Predictions per day</b>how many posts got labelled each day</button>
-          <button class="snip" onclick="useSnip(1)"><b>Sentiment mix</b>how many posts of each sentiment</button>
-          <button class="snip" onclick="useSnip(2)"><b>Rows per table</b>size of the core tables</button>
-          <button class="snip" onclick="useSnip(3)"><b>Comments per page</b>top pages by comment volume</button>
-          <button class="snip" onclick="useSnip(4)"><b>Confidence spread</b>how sure the model is</button>
+
+      <!-- right rail: chart settings -->
+      <div class="rail">
+        <h4>Chart type</h4>
+        <div class="ctypes" id="ctypes"></div>
+
+        <h4 class="mt">Data</h4>
+        <div class="fld"><label>X axis / label</label><select id="cfX" onchange="syncCfg()"></select></div>
+        <div class="fld"><label>Values</label><div class="ylist" id="cfY"><div class="tiny">Run a query first.</div></div></div>
+        <div class="fld"><label>Split into series by</label><select id="cfG" onchange="syncCfg()"><option value="">none</option></select></div>
+        <div class="fld"><label>Sort</label>
+          <select id="cfSort" onchange="syncCfg()">
+            <option value="none">query order</option>
+            <option value="x">by label</option>
+            <option value="desc">by value, high to low</option>
+            <option value="asc">by value, low to high</option>
+          </select></div>
+        <div class="two">
+          <div class="fld"><label>Show first</label><input id="cfTop" type="number" min="0" placeholder="all" oninput="syncCfg()"></div>
+          <div class="fld"><label>Decimals</label><input id="cfDec" type="number" min="0" max="4" value="1" oninput="syncCfg()"></div>
         </div>
-        <div class="card" style="padding:14px 15px;margin-top:12px">
-          <h3>Saved queries</h3>
-          <div id="savedList"></div>
+
+        <h4 class="mt">Format</h4>
+        <div class="fld"><label>Numbers</label>
+          <select id="cfFmt" onchange="syncCfg()">
+            <option value="auto">auto</option>
+            <option value="comma">1,234.5</option>
+            <option value="short">1.2k / 3.4M</option>
+            <option value="percent">percent</option>
+            <option value="gbp">pounds</option>
+          </select></div>
+        <div class="fld"><label>Chart title</label><input id="cfTitle" placeholder="none" oninput="syncCfg()"></div>
+        <div class="two">
+          <div class="fld"><label>X label</label><input id="cfXlab" oninput="syncCfg()"></div>
+          <div class="fld"><label>Y label</label><input id="cfYlab" oninput="syncCfg()"></div>
         </div>
+        <div class="two">
+          <div class="fld"><label>Y min</label><input id="cfYmin" placeholder="auto" oninput="syncCfg()"></div>
+          <div class="fld"><label>Y max</label><input id="cfYmax" placeholder="auto" oninput="syncCfg()"></div>
+        </div>
+        <label class="chk"><input type="checkbox" id="cfStack" onchange="syncCfg()"> Stack the series</label>
+        <label class="chk"><input type="checkbox" id="cfLegend" checked onchange="syncCfg()"> Show legend</label>
+        <label class="chk"><input type="checkbox" id="cfGrid" checked onchange="syncCfg()"> Show gridlines</label>
+        <label class="chk"><input type="checkbox" id="cfLabels" onchange="syncCfg()"> Show data labels</label>
+        <div class="fld" style="margin-top:11px"><label>Colours</label>
+          <select id="cfPal" onchange="syncCfg()">
+            <option value="0">Artemis</option>
+            <option value="1">Cool</option>
+            <option value="2">Warm</option>
+            <option value="3">Mono teal</option>
+          </select></div>
       </div>
     </div>
   </div>
@@ -273,7 +412,7 @@ function _doSignout(){_closeSignoutModal();if(_signoutFn)_signoutFn();}
 
 /* ---------- helpers ---------- */
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-function fmtN(n){ if(n==null||isNaN(n)) return '–'; n=Number(n); return n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'k':String(Math.round(n*10)/10); }
+function fmtN(n){ if(n==null||isNaN(n)) return '&ndash;'; n=Number(n); return n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'k':String(Math.round(n*10)/10); }
 /* Last real measurement. A run that produced no comparisons writes 0, which is
    "not measured", not "0% accurate": so an all-zero series returns null and the
    card says so rather than showing a number that would read as total failure. */
@@ -284,6 +423,20 @@ function showTab(id){
   for(i=0;i<panes.length;i++) panes[i].classList.toggle('on', panes[i].id===id);
   for(i=0;i<tabs.length;i++) tabs[i].classList.toggle('on', tabs[i].getAttribute('data-pane')===id);
   try{ localStorage.setItem('artemis_qa_tab', id); }catch(e){}
+  if(id==='p-sql') onSqlTabOpen();
+}
+/* Deep merge for live fragments over the snapshot. Objects merge key by key so a
+   section can send only what it computed; arrays replace wholesale because a
+   half-updated table of rows would be worse than either version on its own. */
+function merge(dst, src){
+  Object.keys(src||{}).forEach(function(k){
+    var v=src[k];
+    if(v && typeof v==='object' && !Array.isArray(v)){
+      if(!dst[k] || typeof dst[k]!=='object' || Array.isArray(dst[k])) dst[k]={};
+      merge(dst[k], v);
+    } else dst[k]=v;
+  });
+  return dst;
 }
 
 function spark(arr, color){
@@ -299,29 +452,94 @@ function spark(arr, color){
     +'<path d="'+area+'" fill="url(#'+id+')"/><path d="'+d+'" fill="none" stroke="'+color+'" stroke-width="2" stroke-linejoin="round"/></svg>';
 }
 
-/* ---------- load metrics ---------- */
-var M=null;
+/* ---------- load the saved snapshot ---------- */
+var M=null, LIVE_AT=null;
 fetch('qa_metrics.json?ts='+Date.now(),{cache:'no-store'})
   .then(function(r){ if(!r.ok) throw new Error('missing'); return r.json(); })
   .then(function(j){ M=j; render(); })
   .catch(function(){
-    document.getElementById('freshtext').textContent='qa_metrics.json not found. Run the "Nightly QA metrics" GitHub Action once.';
+    document.getElementById('freshtext').textContent='No saved snapshot. Press "Refresh from Redshift" for live numbers.';
     document.getElementById('freshdot').className='dot stale';
     document.getElementById('accCards').innerHTML='<div class="empty">No snapshot yet.</div>';
     document.getElementById('freshness').innerHTML='<div class="empty">No snapshot yet.</div>';
   });
 
 function render(){
-  var gen=new Date(M.generated_at);
-  var ageH=Math.round((Date.now()-gen.getTime())/36e5);
-  document.getElementById('freshdot').className='dot'+(ageH>36?' stale':'');
-  document.getElementById('freshtext').innerHTML='Snapshot <b>'+esc(gen.toISOString().slice(0,16).replace('T',' '))+'</b> UTC ('+(ageH<1?'under an hour':ageH+'h')+' old)';
-  var t=M.totals||{};
-  document.getElementById('tPosts').textContent=fmtN(t.posts);
-  document.getElementById('tComments').textContent=fmtN(t.comments);
-  document.getElementById('tPages').textContent=fmtN(t.pages);
+  var dot=document.getElementById('freshdot'), txt=document.getElementById('freshtext');
+  if(LIVE_AT){
+    dot.className='dot live';
+    txt.innerHTML='<b>Live</b> from Redshift at '+esc(LIVE_AT.toTimeString().slice(0,8))+' local. Reload the page to go back to the saved snapshot.';
+  } else if(M && M.generated_at){
+    var gen=new Date(M.generated_at);
+    var ageH=Math.round((Date.now()-gen.getTime())/36e5);
+    dot.className='dot'+(ageH>36?' stale':'');
+    txt.innerHTML='Snapshot <b>'+esc(gen.toISOString().slice(0,16).replace('T',' '))+'</b> UTC ('+(ageH<1?'under an hour':ageH+'h')+' old)';
+  }
+  var t=(M&&M.totals)||{};
+  document.getElementById('tPosts').innerHTML=fmtN(t.posts);
+  document.getElementById('tComments').innerHTML=fmtN(t.comments);
+  document.getElementById('tPages').innerHTML=fmtN(t.pages);
   renderAccuracy();
   renderQuality();
+}
+
+/* ---------- live refresh ----------
+   Three sections in parallel. Each is its own Netlify invocation, so each gets
+   its own time budget and a slow one cannot starve the others. Whatever comes
+   back is merged over the snapshot; whatever does not simply keeps showing the
+   snapshot value, which is why a partial refresh is still useful. */
+function refreshLive(){
+  var btn=document.getElementById('liveBtn'), msg=document.getElementById('refreshMsg');
+  btn.disabled=true; btn.innerHTML='Querying Redshift&hellip;';
+  msg.innerHTML='Running the accuracy, trend and arrival queries&hellip;';
+  if(!M) M={tabs:{},totals:{}};
+  var got=0, problems=[];
+  Promise.all(['core','trends','arrival'].map(function(s){
+    return fetch('/api/live-metrics?section='+s,{cache:'no-store'})
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if(j.error){ problems.push(s+': '+j.error); return; }
+        merge(M, j); got++;
+        if(j.partial) j.partial.forEach(function(p){ problems.push(p.query+': '+p.message); });
+      })
+      .catch(function(e){ problems.push(s+': '+e.message); });
+  })).then(function(){
+    btn.disabled=false; btn.innerHTML='&#8635; Refresh from Redshift';
+    if(!got){
+      msg.innerHTML='<b style="color:var(--red)">Live refresh failed.</b> '+esc(problems[0]||'No response.')
+        +' This runs through the Netlify function at <span class="mono">/api/live-metrics</span>, so it needs the deployed site and the REDSHIFT_* environment variables.';
+      return;
+    }
+    LIVE_AT=new Date(); render();
+    msg.innerHTML = problems.length
+      ? '<b style="color:var(--amber)">'+got+' of 3 sections live.</b> '+problems.length+' quer'+(problems.length===1?'y':'ies')
+        +' could not run, so those numbers are still from the snapshot: '+esc(problems.slice(0,2).join(' · '))
+      : '<b style="color:var(--green)">Live.</b> All three sections came straight from Redshift.';
+  });
+}
+
+/* Re-runs the nightly GitHub Action (qa-dashboard-metrics.yml). That job writes
+   qa_metrics.json back into the repo and Netlify redeploys, so it is the slow
+   path but it is the one that updates the number everyone else sees on load. */
+function rebuildSnapshot(){
+  var btn=document.getElementById('snapBtn'), msg=document.getElementById('refreshMsg');
+  btn.disabled=true; btn.textContent='Starting the job…';
+  fetch('/api/fetch-live',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'})
+    .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); })
+    .then(function(res){
+      btn.disabled=false; btn.textContent='Rebuild nightly snapshot';
+      if(!res.ok || res.j.error){
+        msg.innerHTML='<b style="color:var(--red)">Could not start the job.</b> '+esc(res.j.message||res.j.error||'')
+          +(res.j.error==='not_configured'?' Set GH_DISPATCH_TOKEN in the Netlify environment variables.':'');
+        return;
+      }
+      msg.innerHTML='<b style="color:var(--green)">Job started.</b> It queries Redshift, commits qa_metrics.json and Netlify redeploys, so give it a few minutes and then reload.'
+        +(res.j.run_url?' <a href="'+esc(res.j.run_url)+'" target="_blank" rel="noopener">Watch the run</a>':'');
+    })
+    .catch(function(e){
+      btn.disabled=false; btn.textContent='Rebuild nightly snapshot';
+      msg.innerHTML='<b style="color:var(--red)">Could not reach the dispatch service.</b> '+esc(e.message);
+    });
 }
 
 /* ---------- accuracy ---------- */
@@ -336,7 +554,7 @@ var MODELS=[
 function band(v){ return v==null?'':v>=90?'ok':v>=80?'neutral':v>=70?'warn':'bad'; }
 
 function renderAccuracy(){
-  var A=(M.tabs&&M.tabs.accuracy)||{}, html='';
+  var A=(M&&M.tabs&&M.tabs.accuracy)||{}, html='';
   MODELS.forEach(function(m){
     var s=A[m.key]; if(!s) return;
     var days=s.day||[], cur=seriesVal(s);
@@ -360,7 +578,7 @@ function renderAccuracy(){
     });
     html+='<div class="sub" style="margin-top:9px">Agreement per label family. A low one here tells you which model to look at first.</div></div>';
   }
-  document.getElementById('accCards').innerHTML=html||'<div class="empty">No accuracy metrics in this snapshot.</div>';
+  document.getElementById('accCards').innerHTML=html||'<div class="empty">No accuracy metrics yet.</div>';
 
   var c=A.confusion, ch='';
   if(c && c.v && c.v.length){
@@ -378,7 +596,7 @@ function renderAccuracy(){
     });
     ch+='</table>';
   }
-  document.getElementById('confusion').innerHTML=ch||'<div class="empty">No confusion matrix in this snapshot.</div>';
+  document.getElementById('confusion').innerHTML=ch||'<div class="empty">No confusion matrix yet.</div>';
 
   var e=A.escalation, eh='';
   if(e && e.length){
@@ -391,12 +609,12 @@ function renderAccuracy(){
     });
     eh+='</table>';
   }
-  document.getElementById('escalation').innerHTML=eh||'<div class="empty">No routing data in this snapshot.</div>';
+  document.getElementById('escalation').innerHTML=eh||'<div class="empty">No routing data yet.</div>';
 }
 
 /* ---------- data quality ---------- */
 function renderQuality(){
-  var H=(M.tabs&&M.tabs.health)||{}, Q=(M.tabs&&M.tabs.quality)||{};
+  var H=(M&&M.tabs&&M.tabs.health)||{}, Q=(M&&M.tabs&&M.tabs.quality)||{};
   var f=H.freshness, fh='';
   if(f && f.length){
     fh='<table><tr><th>Table</th><th>Last load</th><th>Status</th><th>Rows</th><th>Arrived</th></tr>';
@@ -408,10 +626,10 @@ function renderQuality(){
     });
     fh+='</table>';
   }
-  document.getElementById('freshness').innerHTML=fh||'<div class="empty">No freshness data in this snapshot.</div>';
+  document.getElementById('freshness').innerHTML=fh||'<div class="empty">No freshness data yet.</div>';
 
   var dl=(H.daily_loads&&H.daily_loads.posts&&H.daily_loads.posts.day)||[];
-  var axis=((M.window&&M.window.axis)||[]).slice(-dl.length);
+  var axis=((M&&M.window&&M.window.axis)||[]).slice(-dl.length);
   document.getElementById('loadChart').innerHTML=dl.length?barsChart(dl,axis,'#00D6AE'):'<div class="empty">No load data.</div>';
 
   var html='', comp=Q.completeness;
@@ -424,11 +642,14 @@ function renderQuality(){
     });
     html+='<div class="sub" style="margin-top:9px">Share of rows carrying this label. Under 100% means rows went unlabelled.</div></div>';
   }
-  [['dupes','Duplicate rows','Same record loaded twice. Should be zero.'],
-   ['integrity','Orphan records','Rows pointing at something that no longer exists. Should be zero.'],
-   ['validity','Validity checks','Values outside their allowed range. Should be zero.']].forEach(function(spec){
-    var d=Q[spec[0]]; if(!d||!d.length) return;
-    html+='<div class="card"><h3>'+spec[1]+'</h3>';
+  /* validity is filled by two different live sections (one scans the predictions
+     table, the other the comment dimension), so the two lists are joined rather
+     than letting whichever landed last overwrite the other. */
+  [['Duplicate rows', Q.dupes, 'Same record loaded twice. Should be zero.'],
+   ['Orphan records', Q.integrity, 'Rows pointing at something that no longer exists. Should be zero.'],
+   ['Validity checks', (Q.validity||[]).concat(Q.validity2||[]), 'Values outside their allowed range. Should be zero.']].forEach(function(spec){
+    var d=spec[1]; if(!d||!d.length) return;
+    html+='<div class="card"><h3>'+spec[0]+'</h3>';
     d.forEach(function(r){
       var n=Number(r[1])||0;
       html+='<div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(33,43,69,.5)">'
@@ -436,7 +657,7 @@ function renderQuality(){
     });
     html+='<div class="sub" style="margin-top:9px">'+spec[2]+'</div></div>';
   });
-  document.getElementById('qualityCards').innerHTML=html||'<div class="empty">No quality checks in this snapshot.</div>';
+  document.getElementById('qualityCards').innerHTML=html||'<div class="empty">No quality checks yet.</div>';
 }
 
 function barsChart(vals, labels, color){
@@ -460,111 +681,659 @@ function barsChart(vals, labels, color){
   return s+'</svg>';
 }
 
-/* ---------- SQL builder ---------- */
-var SNIPPETS=[
-"SELECT date, COUNT(*) AS predictions\nFROM rdl.post_label_predictions\nGROUP BY 1\nORDER BY 1",
-"SELECT sentiment, COUNT(*) AS posts\nFROM rdl.post_label_predictions\nGROUP BY 1\nORDER BY 2 DESC",
-"SELECT 'page_posts' AS table_name, COUNT(*) AS row_count FROM rdl.page_posts\nUNION ALL SELECT 'post_comments', COUNT(*) FROM rdl.post_comments\nUNION ALL SELECT 'post_label_predictions', COUNT(*) FROM rdl.post_label_predictions",
-"SELECT p.page_name, COUNT(*) AS comments\nFROM rdl.post_comments c\nJOIN rdl.page_posts p ON p.id = c.post_id\nGROUP BY 1\nORDER BY 2 DESC",
-"SELECT ROUND(confidence, 1) AS confidence, COUNT(*) AS n\nFROM rdl.post_label_predictions\nGROUP BY 1\nORDER BY 1"
+/* =========================================================================
+   SQL WORKSPACE
+   ========================================================================= */
+
+/* ---------- editor: gutter + syntax highlight behind a transparent textarea ---------- */
+var KW={};
+'SELECT FROM WHERE GROUP BY ORDER HAVING LIMIT OFFSET JOIN LEFT RIGHT INNER OUTER FULL CROSS ON AS AND OR NOT IN IS NULL LIKE ILIKE BETWEEN CASE WHEN THEN ELSE END DISTINCT UNION ALL WITH OVER PARTITION ASC DESC EXISTS ANY SOME INTERVAL CAST'
+  .split(' ').forEach(function(w){ KW[w]=1; });
+var FN={};
+'COUNT SUM AVG MIN MAX ROUND ABS COALESCE NULLIF DATE DATEADD DATEDIFF DATE_TRUNC EXTRACT CURRENT_DATE GETDATE TRUNC LOWER UPPER TRIM LENGTH SUBSTRING SPLIT_PART REPLACE CONCAT ROW_NUMBER RANK DENSE_RANK LAG LEAD PERCENTILE_CONT MEDIAN STDDEV VARIANCE GREATEST LEAST TO_CHAR TO_DATE'
+  .split(' ').forEach(function(w){ FN[w]=1; });
+
+function highlight(src){
+  var out='', re=/(--[^\n]*|\/\*[\s\S]*?\*\/)|('(?:''|[^'])*')|(\b\d+(?:\.\d+)?\b)|([A-Za-z_][A-Za-z0-9_]*)/g, last=0, m;
+  while((m=re.exec(src))!==null){
+    out+=esc(src.slice(last,m.index));
+    if(m[1]) out+='<i class="c">'+esc(m[1])+'</i>';
+    else if(m[2]) out+='<i class="s">'+esc(m[2])+'</i>';
+    else if(m[3]) out+='<i class="n">'+esc(m[3])+'</i>';
+    else {
+      var u=m[4].toUpperCase();
+      out+= KW[u] ? '<i class="k">'+esc(m[4])+'</i>' : (FN[u] ? '<i class="f">'+esc(m[4])+'</i>' : esc(m[4]));
+    }
+    last=re.lastIndex;
+  }
+  return out+esc(src.slice(last))+'\n';
+}
+function paintEditor(){
+  var ta=document.getElementById('sql');
+  document.getElementById('hl').innerHTML=highlight(ta.value);
+  var lines=ta.value.split('\n').length, g='';
+  for(var i=1;i<=lines;i++) g+=i+'\n';
+  document.getElementById('gut').textContent=g;
+  syncScroll();
+}
+function syncScroll(){
+  var ta=document.getElementById('sql');
+  document.getElementById('hl').scrollTop=ta.scrollTop;
+  document.getElementById('hl').scrollLeft=ta.scrollLeft;
+  document.getElementById('gut').scrollTop=ta.scrollTop;
+}
+(function(){
+  var ta=document.getElementById('sql');
+  ta.addEventListener('input', paintEditor);
+  ta.addEventListener('scroll', syncScroll);
+  ta.addEventListener('keydown', function(e){
+    if((e.metaKey||e.ctrlKey) && e.key==='Enter'){ e.preventDefault(); runSQL(); return; }
+    if(e.key==='Tab'){
+      e.preventDefault();
+      var s=ta.selectionStart, t=ta.selectionEnd;
+      ta.value=ta.value.slice(0,s)+'  '+ta.value.slice(t);
+      ta.selectionStart=ta.selectionEnd=s+2;
+      paintEditor();
+    }
+  });
+})();
+function setSQL(text){
+  var ta=document.getElementById('sql');
+  ta.value=text; paintEditor(); ta.focus();
+}
+function insertAtCursor(text){
+  var ta=document.getElementById('sql');
+  var s=ta.selectionStart, e=ta.selectionEnd;
+  ta.value=ta.value.slice(0,s)+text+ta.value.slice(e);
+  ta.selectionStart=ta.selectionEnd=s+text.length;
+  paintEditor(); ta.focus();
+}
+
+/* ---------- left rail ---------- */
+function showRail(id){
+  var secs=document.querySelectorAll('.rsec'), bs=document.querySelectorAll('.railsw button'), i;
+  for(i=0;i<secs.length;i++) secs[i].classList.toggle('on', secs[i].id===id);
+  for(i=0;i<bs.length;i++) bs[i].classList.toggle('on', bs[i].getAttribute('data-rsec')===id);
+}
+
+var EXAMPLES=[
+  {t:'Predictions per day', d:'how many posts got labelled each day',
+   q:"SELECT inserted_at::date AS day, COUNT(*) AS predictions\nFROM rdl.post_label_predictions\nWHERE inserted_at >= DATEADD(day, -60, CURRENT_DATE)\nGROUP BY 1\nORDER BY 1"},
+  {t:'Sentiment mix', d:'how many posts of each sentiment',
+   q:"SELECT nlp_sentiment AS sentiment, COUNT(*) AS posts\nFROM rdl.post_label_predictions\nWHERE nlp_sentiment IS NOT NULL\nGROUP BY 1\nORDER BY 2 DESC"},
+  {t:'Sentiment per day, split', d:'one line per sentiment: use the split column',
+   q:"SELECT inserted_at::date AS day, nlp_sentiment AS sentiment, COUNT(*) AS posts\nFROM rdl.post_label_predictions\nWHERE inserted_at >= DATEADD(day, -30, CURRENT_DATE)\n  AND nlp_sentiment IS NOT NULL\nGROUP BY 1, 2\nORDER BY 1"},
+  {t:'Rows per table', d:'size of the core tables',
+   q:"SELECT 'page_posts' AS table_name, COUNT(*) AS row_count FROM rdl.page_posts\nUNION ALL SELECT 'post_comments', COUNT(*) FROM rdl.post_comments\nUNION ALL SELECT 'post_label_predictions', COUNT(*) FROM rdl.post_label_predictions\nUNION ALL SELECT 'fusion_predictions', COUNT(*) FROM rdl.fusion_predictions"},
+  {t:'Comments per page', d:'top pages by comment volume',
+   q:"SELECT p.page_name, COUNT(*) AS comments\nFROM rdl.post_comments c\nJOIN rdl.page_posts p ON p.id = c.post_id\nGROUP BY 1\nORDER BY 2 DESC\nLIMIT 20"},
+  {t:'Confidence spread', d:'how sure the model is, bucketed',
+   q:"SELECT ROUND(nlp_sentiment_confidence, 1) AS confidence, COUNT(*) AS predictions\nFROM rdl.post_label_predictions\nWHERE nlp_sentiment_confidence IS NOT NULL\nGROUP BY 1\nORDER BY 1"},
+  {t:'Weekly load volume', d:'rows landing per load date',
+   q:"SELECT load_date, COUNT(*) AS rows_loaded\nFROM rdl.page_posts\nWHERE load_date >= DATEADD(day, -90, CURRENT_DATE)\nGROUP BY 1\nORDER BY 1"}
 ];
-var RESULT=null;
-function useSnip(i){ document.getElementById('sql').value=SNIPPETS[i]; }
+document.getElementById('exList').innerHTML=EXAMPLES.map(function(e,i){
+  return '<button class="snip" onclick="useExample('+i+')"><b>'+esc(e.t)+'</b>'+esc(e.d)+'</button>';
+}).join('');
+function useExample(i){ setSQL(EXAMPLES[i].q); }
+
+/* ---------- schema browser ----------
+   Read straight through the same read-only endpoint the query box uses: the
+   table list is just another SELECT, so there is no second thing to secure. */
+var SCHEMA=null, SCHEMA_KEY='artemis_qa_schema_v1', SCHEMA_OPEN={};
+var SCHEMA_SQL="SELECT table_schema, table_name, column_name, data_type\n"
+  +"FROM information_schema.columns\n"
+  +"WHERE table_schema NOT IN ('pg_catalog', 'information_schema', 'pg_internal')\n"
+  +"ORDER BY table_schema, table_name, ordinal_position\nLIMIT 5000";
+
+function loadSchema(force){
+  var el=document.getElementById('tree');
+  if(!force){
+    try{
+      var c=JSON.parse(localStorage.getItem(SCHEMA_KEY)||'null');
+      if(c && c.at && (Date.now()-c.at)<864e5 && c.data){ SCHEMA=c.data; renderTree(); return; }
+    }catch(e){}
+  }
+  el.innerHTML='<div class="tiny">Reading the table list&hellip;</div>';
+  fetch('/api/run-query',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sql:SCHEMA_SQL})})
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if(j.error){ el.innerHTML='<div class="tiny">Table list unavailable: '+esc(j.error)+'</div>'; return; }
+      var by={};
+      j.rows.forEach(function(r){
+        var key=r.table_schema+'.'+r.table_name;
+        (by[key]=by[key]||[]).push([r.column_name, r.data_type]);
+      });
+      SCHEMA=by;
+      try{ localStorage.setItem(SCHEMA_KEY, JSON.stringify({at:Date.now(), data:by})); }catch(e){}
+      renderTree();
+    })
+    .catch(function(e){ el.innerHTML='<div class="tiny">Table list unavailable. The query service only runs on the deployed site. ('+esc(e.message)+')</div>'; });
+}
+
+function renderTree(){
+  var el=document.getElementById('tree');
+  if(!SCHEMA){ el.innerHTML='<div class="tiny">No table list loaded.</div>'; return; }
+  var f=(document.getElementById('schemaSearch').value||'').trim().toLowerCase();
+  var keys=Object.keys(SCHEMA).sort(), bySchema={}, shown=0;
+  keys.forEach(function(k){
+    var cols=SCHEMA[k];
+    var hitTable=!f || k.toLowerCase().indexOf(f)>=0;
+    var hitCols=f ? cols.filter(function(c){ return c[0].toLowerCase().indexOf(f)>=0; }) : [];
+    if(!hitTable && !hitCols.length) return;
+    shown++;
+    var s=k.split('.')[0];
+    (bySchema[s]=bySchema[s]||[]).push({key:k, name:k.split('.').slice(1).join('.'), cols:cols, matched:hitCols});
+  });
+  if(!shown){ el.innerHTML='<div class="tiny">Nothing matches "'+esc(f)+'".</div>'; return; }
+  var html='';
+  Object.keys(bySchema).sort().forEach(function(s){
+    html+='<div class="tsch">'+esc(s)+'</div>';
+    bySchema[s].forEach(function(t){
+      var open=SCHEMA_OPEN[t.key] || (f && t.matched.length);
+      var arg=JSON.stringify(t.key).replace(/"/g,'&quot;');
+      html+='<button class="ttab" onclick="toggleTable('+arg+')"><i>'+(open?'&#9662;':'&#9656;')+'</i>'+esc(t.name)+'</button>';
+      if(open){
+        var list=(f && t.matched.length && !(t.key.toLowerCase().indexOf(f)>=0)) ? t.matched : t.cols;
+        html+='<div class="tcols">';
+        list.forEach(function(c){
+          html+='<button class="tcol" onclick="insertAtCursor('+JSON.stringify(c[0]).replace(/"/g,'&quot;')+')">'+esc(c[0])+'<span>'+esc(String(c[1]).slice(0,12))+'</span></button>';
+        });
+        html+='<button class="tcol" style="color:var(--teal)" onclick="selectAllFrom('+JSON.stringify(t.key).replace(/"/g,'&quot;')+')">&#8618; SELECT * FROM this table</button>';
+        html+='</div>';
+      }
+    });
+  });
+  el.innerHTML=html;
+}
+function toggleTable(k){ SCHEMA_OPEN[k]=!SCHEMA_OPEN[k]; renderTree(); }
+function selectAllFrom(k){ setSQL('SELECT *\nFROM '+k+'\nLIMIT 100'); }
+
+var schemaTried=false;
+function onSqlTabOpen(){
+  paintEditor();
+  if(!schemaTried){ schemaTried=true; loadSchema(false); }
+}
+
+/* ---------- run ---------- */
+var RESULT=null, VIEW='chart';
+function setView(v){
+  VIEW=v;
+  document.getElementById('v-chart').classList.toggle('on', v==='chart');
+  document.getElementById('v-table').classList.toggle('on', v==='table');
+  highlightType(v==='table' ? 'tbl' : CFG.typeBtn);
+  renderResult();
+}
 
 function runSQL(){
   var sql=document.getElementById('sql').value.trim();
-  var errEl=document.getElementById('sqlErr'), outEl=document.getElementById('sqlOut'), btn=document.getElementById('runBtn');
+  var errEl=document.getElementById('sqlErr'), btn=document.getElementById('runBtn');
   errEl.innerHTML=''; document.getElementById('qmeta').textContent='';
   if(!sql){ errEl.innerHTML='<div class="err">Write a SELECT query first.</div>'; return; }
-  btn.disabled=true; btn.textContent='Running…';
-  outEl.innerHTML='<div class="empty">Querying Redshift…</div>';
+  btn.disabled=true; btn.innerHTML='Running&hellip;';
+  document.getElementById('chartHost').style.display='block';
+  document.getElementById('chartHost').innerHTML='<div class="empty">Querying Redshift&hellip;</div>';
+  document.getElementById('tableHost').style.display='none';
   fetch('/api/run-query',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sql:sql})})
     .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); })
     .then(function(res){
       if(!res.ok || res.j.error){
-        RESULT=null; outEl.innerHTML='';
+        RESULT=null;
+        document.getElementById('chartHost').style.display='none';
+        document.getElementById('tableHost').style.display='none';
         errEl.innerHTML='<div class="err"><b>Query failed.</b><br>'+esc(res.j.error||'Unknown error')+'</div>';
         return;
       }
       RESULT=res.j;
+      pushRecent(sql);
       document.getElementById('qmeta').textContent=res.j.row_count+' rows · '+res.j.ms+' ms'+(res.j.truncated?' · capped at 5,000':'');
+      autoMap();
       renderResult();
     })
     .catch(function(e){
-      RESULT=null; outEl.innerHTML='';
+      RESULT=null;
+      document.getElementById('chartHost').style.display='none';
       errEl.innerHTML='<div class="err"><b>Could not reach the query service.</b><br>This runs through the Netlify function at <span class="mono">/api/run-query</span>, so it works on the deployed site, not from a local file. ('+esc(e.message)+')</div>';
     })
     .then(function(){ btn.disabled=false; btn.textContent='Run query'; });
 }
 
-function renderResult(){
-  var out=document.getElementById('sqlOut');
-  if(!RESULT){ out.innerHTML=''; return; }
-  var cols=RESULT.columns, rows=RESULT.rows, viz=document.getElementById('viz').value, html='';
-  if(!rows.length){ out.innerHTML='<div class="empty">Query returned no rows.</div>'; return; }
-  if(viz!=='table'){
-    var labels=rows.map(function(r){ return r[cols[0]]; });
-    var numCols=cols.slice(1).filter(function(c){ return rows.some(function(r){ return r[c]!=null && r[c]!=='' && !isNaN(Number(r[c])); }); });
-    if(!numCols.length){
-      html+='<div class="err">Nothing numeric to plot. The first column is the label and at least one column after it must be a number, or switch to "Table only".</div>';
-    } else {
-      var palette=['#00D6AE','#38bdf8','#a78bfa','#f5a623','#34d399'];
-      html+='<div class="card">'+multiChart(labels, numCols.map(function(c,i){
-        return {name:c, color:palette[i%palette.length], vals:rows.map(function(r){ return Number(r[c])||0; })};
-      }), viz)+'</div>';
-    }
-  }
-  html+='<div class="tw" style="margin-top:12px;max-height:430px"><table><tr>'
-    +cols.map(function(c){return '<th>'+esc(c)+'</th>';}).join('')+'</tr>'
-    +rows.slice(0,200).map(function(r){ return '<tr>'+cols.map(function(c){ return '<td class="mono">'+esc(r[c])+'</td>'; }).join('')+'</tr>'; }).join('')
-    +'</table></div>';
-  if(rows.length>200) html+='<div class="hint" style="margin-top:8px">Showing the first 200 of '+rows.length+' rows. Use CSV for the rest.</div>';
-  out.innerHTML=html;
+/* ---------- chart configuration ---------- */
+var PALETTES=[
+  ['#00D6AE','#38bdf8','#a78bfa','#f5a623','#34d399','#f87171','#6C7BFB','#f0abfc'],
+  ['#38bdf8','#818cf8','#22d3ee','#a78bfa','#60a5fa','#2dd4bf','#c084fc','#7dd3fc'],
+  ['#f5a623','#f87171','#fb923c','#fbbf24','#f472b6','#facc15','#fdba74','#e879f9'],
+  ['#00D6AE','#0ea5a0','#14b8a6','#2dd4bf','#5eead4','#99f6e4','#0d9488','#0f766e']
+];
+/* type is what the renderer draws; typeBtn is which icon is lit. They differ for
+   "Stacked", which is the bar renderer with stacking on rather than a chart of
+   its own, and for Table, which is a view rather than a chart. */
+var CFG={type:'line',typeBtn:'line',x:null,ys:[],group:'',sort:'none',topn:0,dec:1,fmt:'auto',
+         title:'',xlab:'',ylab:'',ymin:'',ymax:'',stacked:false,legend:true,grid:true,labels:false,palette:0};
+
+var CHART_TYPES=[
+  ['line','Line','<path d="M3 17l5-6 4 3 6-8"/>'],
+  ['area','Area','<path d="M3 17l5-6 4 3 6-8v10H3z"/>'],
+  ['bar','Bar','<path d="M4 20h4v-9H4zM10 20h4V5h-4zM16 20h4v-6h-4z"/>'],
+  ['sbar','Stacked','<path d="M4 20h5v-4H4zM4 16h5v-5H4zM14 20h5v-6h-5zM14 14h5v-7h-5z"/>'],
+  ['hbar','Bars across','<path d="M4 5h13v3H4zM4 11h8v3H4zM4 17h16v3H4z"/>'],
+  ['scatter','Scatter','<circle cx="7" cy="16" r="1.7"/><circle cx="12" cy="9" r="1.7"/><circle cx="17" cy="13" r="1.7"/><circle cx="9" cy="6" r="1.7"/>'],
+  ['pie','Pie','<circle cx="12" cy="12" r="8.5"/><path d="M12 3.5V12h8.5"/>'],
+  ['donut','Donut','<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.6"/>'],
+  ['kpi','Big number','<path d="M3 9h18M3 15h11"/>'],
+  ['tbl','Table','<path d="M4 5h16v14H4zM4 10h16M10 10v9"/>']
+];
+document.getElementById('ctypes').innerHTML=CHART_TYPES.map(function(t){
+  return '<button class="ct'+(t[0]===CFG.type?' on':'')+'" data-ct="'+t[0]+'" title="'+esc(t[1])+'" onclick="setType(\''+t[0]+'\')">'
+    +'<svg viewBox="0 0 24 24">'+t[2]+'</svg></button>';
+}).join('');
+function highlightType(t){
+  var bs=document.querySelectorAll('.ct');
+  for(var i=0;i<bs.length;i++) bs[i].classList.toggle('on', bs[i].getAttribute('data-ct')===t);
+}
+function setType(t){
+  if(t==='tbl'){ highlightType('tbl'); setView('table'); return; }
+  CFG.typeBtn=t;
+  CFG.stacked=(t==='sbar');
+  CFG.type=(t==='sbar')?'bar':t;
+  document.getElementById('cfStack').checked=CFG.stacked;
+  highlightType(t);
+  setView('chart');
 }
 
-function multiChart(labels, series, kind){
-  var W=900,H=300,P=44,n=labels.length;
-  var all=series.reduce(function(a,s){return a.concat(s.vals);},[]);
-  var mx=Math.max.apply(null,all.concat([1])), mn=Math.min(0,Math.min.apply(null,all)), rng=(mx-mn)||1;
-  function x(i){ return n===1?W/2:P+i*(W-2*P)/(n-1); }
-  function y(v){ return H-P-((v-mn)/rng)*(H-2*P); }
-  var s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:300px;display:block">';
-  for(var g=0;g<=4;g++){
-    var gy=P+(H-2*P)*g/4;
-    s+='<line x1="'+P+'" y1="'+gy.toFixed(1)+'" x2="'+(W-P)+'" y2="'+gy.toFixed(1)+'" stroke="#212b45"/>'
-      +'<text x="6" y="'+(gy+4).toFixed(1)+'" fill="#8793ab" font-size="11">'+fmtN(mx-(rng*g/4))+'</text>';
+/* Numeric enough to plot: most non-empty values parse as finite numbers. Dates
+   fail this on purpose, which is what makes them good x-axis candidates. */
+function isNumericCol(c){
+  var rows=RESULT.rows, seen=0, num=0;
+  for(var i=0;i<rows.length && seen<50;i++){
+    var v=rows[i][c];
+    if(v==null||v==='') continue;
+    seen++; if(isFinite(Number(v))) num++;
   }
-  if(kind==='bar'){
-    var bw=(W-2*P)/n, sw=bw*0.7/series.length;
-    series.forEach(function(sr,si){
-      sr.vals.forEach(function(v,i){
-        var h=Math.abs(y(v)-y(0)), bx=P+i*bw+bw*0.15+si*sw;
-        s+='<rect x="'+bx.toFixed(1)+'" y="'+Math.min(y(v),y(0)).toFixed(1)+'" width="'+Math.max(1.5,sw-1.5).toFixed(1)+'" height="'+Math.max(1,h).toFixed(1)+'" rx="2" fill="'+sr.color+'"><title>'+esc(labels[i]+' · '+sr.name+': '+sr.vals[i])+'</title></rect>';
+  return seen>0 && num/seen>=0.9;
+}
+
+function autoMap(){
+  if(!RESULT) return;
+  var cols=RESULT.columns;
+  var nums=cols.filter(isNumericCol);
+  var cats=cols.filter(function(c){ return nums.indexOf(c)<0; });
+  CFG.x = cats.length ? cats[0] : cols[0];
+  CFG.ys = nums.filter(function(c){ return c!==CFG.x; });
+  // The Periscope shape: label, category, one value. Split automatically.
+  CFG.group = (cols.length===3 && cats.length===2 && CFG.ys.length===1)
+    ? cats.filter(function(c){ return c!==CFG.x; })[0] : '';
+  buildMapping();
+}
+
+function buildMapping(){
+  var cols=(RESULT&&RESULT.columns)||[];
+  document.getElementById('cfX').innerHTML=cols.map(function(c){
+    return '<option value="'+esc(c)+'"'+(c===CFG.x?' selected':'')+'>'+esc(c)+'</option>'; }).join('');
+  document.getElementById('cfG').innerHTML='<option value="">none</option>'+cols.filter(function(c){ return c!==CFG.x; }).map(function(c){
+    return '<option value="'+esc(c)+'"'+(c===CFG.group?' selected':'')+'>'+esc(c)+'</option>'; }).join('');
+  var ys=cols.filter(function(c){ return c!==CFG.x; });
+  document.getElementById('cfY').innerHTML = ys.length
+    ? ys.map(function(c){
+        return '<label class="chk"><input type="checkbox" value="'+esc(c)+'"'+(CFG.ys.indexOf(c)>=0?' checked':'')+' onchange="syncCfg()"> '+esc(c)+'</label>';
+      }).join('')
+    : '<div class="tiny">Only one column came back.</div>';
+}
+
+function syncCfg(){
+  var g=function(id){ return document.getElementById(id); };
+  CFG.x=g('cfX').value||CFG.x;
+  CFG.ys=[].slice.call(document.querySelectorAll('#cfY input:checked')).map(function(i){ return i.value; });
+  CFG.group=g('cfG').value;
+  CFG.sort=g('cfSort').value;
+  CFG.topn=parseInt(g('cfTop').value||'0',10)||0;
+  CFG.dec=Math.max(0,Math.min(4,parseInt(g('cfDec').value||'1',10)||0));
+  CFG.fmt=g('cfFmt').value;
+  CFG.title=g('cfTitle').value;
+  CFG.xlab=g('cfXlab').value;
+  CFG.ylab=g('cfYlab').value;
+  CFG.ymin=g('cfYmin').value;
+  CFG.ymax=g('cfYmax').value;
+  CFG.stacked=g('cfStack').checked;
+  CFG.legend=g('cfLegend').checked;
+  CFG.grid=g('cfGrid').checked;
+  CFG.labels=g('cfLabels').checked;
+  CFG.palette=parseInt(g('cfPal').value,10)||0;
+  renderResult();
+}
+function applyCfgToForm(){
+  var g=function(id){ return document.getElementById(id); };
+  g('cfSort').value=CFG.sort; g('cfTop').value=CFG.topn||''; g('cfDec').value=CFG.dec;
+  g('cfFmt').value=CFG.fmt; g('cfTitle').value=CFG.title; g('cfXlab').value=CFG.xlab;
+  g('cfYlab').value=CFG.ylab; g('cfYmin').value=CFG.ymin; g('cfYmax').value=CFG.ymax;
+  g('cfStack').checked=CFG.stacked; g('cfLegend').checked=CFG.legend;
+  g('cfGrid').checked=CFG.grid; g('cfLabels').checked=CFG.labels; g('cfPal').value=String(CFG.palette);
+  highlightType(CFG.typeBtn || (CFG.stacked && CFG.type==='bar' ? 'sbar' : CFG.type));
+}
+
+/* ---------- number formatting ---------- */
+function abbrev(n,d){
+  var a=Math.abs(n);
+  if(a>=1e9) return (n/1e9).toFixed(d)+'B';
+  if(a>=1e6) return (n/1e6).toFixed(d)+'M';
+  if(a>=1e3) return (n/1e3).toFixed(d)+'k';
+  return String(Math.round(n*100)/100);
+}
+function fv(v){
+  if(v==null || isNaN(v)) return '';
+  var n=Number(v), d=CFG.dec;
+  if(CFG.fmt==='comma')   return n.toLocaleString('en-GB',{minimumFractionDigits:d,maximumFractionDigits:d});
+  if(CFG.fmt==='percent') return n.toFixed(d)+'%';
+  if(CFG.fmt==='gbp')     return '£'+n.toLocaleString('en-GB',{minimumFractionDigits:d,maximumFractionDigits:d});
+  if(CFG.fmt==='short')   return abbrev(n,d);
+  return Math.abs(n)>=10000 ? abbrev(n,1) : String(Math.round(n*100)/100);
+}
+
+/* ---------- shape the rows into labels + series ---------- */
+function prepData(){
+  if(!RESULT || !RESULT.rows.length) return null;
+  var rows=RESULT.rows, xCol=CFG.x||RESULT.columns[0], pal=PALETTES[CFG.palette]||PALETTES[0];
+  var labels=[], series=[];
+
+  if(CFG.group && CFG.ys.length){
+    var vCol=CFG.ys[0], lset=[], gset=[], cell={};
+    rows.forEach(function(r){
+      var L=String(r[xCol]), G=String(r[CFG.group]);
+      if(lset.indexOf(L)<0) lset.push(L);
+      if(gset.indexOf(G)<0) gset.push(G);
+      var k=L+' '+G;
+      cell[k]=(cell[k]||0)+(Number(r[vCol])||0);
+    });
+    labels=lset;
+    series=gset.map(function(gname,i){
+      return {name:gname, color:pal[i%pal.length], vals:lset.map(function(l){ return cell[l+' '+gname]||0; })};
+    });
+  } else {
+    if(!CFG.ys.length) return null;
+    labels=rows.map(function(r){ return r[xCol]; });
+    series=CFG.ys.map(function(c,i){
+      return {name:c, color:pal[i%pal.length], vals:rows.map(function(r){ return Number(r[c])||0; })};
+    });
+  }
+  if(!series.length) return null;
+
+  if(CFG.sort!=='none'){
+    var idx=labels.map(function(_,i){ return i; });
+    if(CFG.sort==='x'){
+      idx.sort(function(a,b){ return String(labels[a])<String(labels[b])?-1:String(labels[a])>String(labels[b])?1:0; });
+    } else {
+      var dir=CFG.sort==='desc'?-1:1;
+      var tot=function(i){ return series.reduce(function(t,s){ return t+(s.vals[i]||0); },0); };
+      idx.sort(function(a,b){ return (tot(a)-tot(b))*dir; });
+    }
+    labels=idx.map(function(i){ return labels[i]; });
+    series=series.map(function(s){ return {name:s.name,color:s.color,vals:idx.map(function(i){ return s.vals[i]; })}; });
+  }
+  if(CFG.topn>0 && labels.length>CFG.topn){
+    labels=labels.slice(0,CFG.topn);
+    series=series.map(function(s){ return {name:s.name,color:s.color,vals:s.vals.slice(0,CFG.topn)}; });
+  }
+  return {labels:labels, series:series};
+}
+
+/* ---------- renderers ---------- */
+function legendRow(P, x, y){
+  var s='', lx=x;
+  P.series.forEach(function(sr){
+    s+='<rect x="'+lx.toFixed(1)+'" y="'+(y-9)+'" width="10" height="10" rx="2" fill="'+sr.color+'"/>'
+      +'<text x="'+(lx+15).toFixed(1)+'" y="'+y+'" fill="#aab4c8" font-size="11">'+esc(sr.name)+'</text>';
+    lx+=27+String(sr.name).length*6.2;
+  });
+  return s;
+}
+
+function cartSVG(P){
+  var W=940, H=400, S='';
+  var legend=CFG.legend && P.series.length>0;
+  var top=(CFG.title?34:14)+(legend?24:0);
+  var bot=CFG.xlab?66:48, left=CFG.ylab?80:62, right=22;
+  var pw=W-left-right, ph=H-top-bot, n=P.labels.length;
+  var stacked=CFG.stacked && (CFG.type==='bar'||CFG.type==='area');
+
+  var vals=[], i;
+  if(stacked){
+    for(i=0;i<n;i++){
+      var p=0,q=0;
+      P.series.forEach(function(s){ var v=s.vals[i]||0; if(v>=0) p+=v; else q+=v; });
+      vals.push(p,q);
+    }
+  } else P.series.forEach(function(s){ vals=vals.concat(s.vals); });
+  var mx=Math.max.apply(null, vals.concat([0])), mn=Math.min.apply(null, vals.concat([0]));
+  if(CFG.ymax!=='' && isFinite(Number(CFG.ymax))) mx=Number(CFG.ymax);
+  if(CFG.ymin!=='' && isFinite(Number(CFG.ymin))) mn=Number(CFG.ymin);
+  if(mx<=mn) mx=mn+1;
+  var rng=mx-mn;
+  var Y=function(v){ return top+ph-((v-mn)/rng)*ph; };
+  var band=pw/Math.max(1,n);
+  var Xp=function(i){ return n===1 ? left+pw/2 : left+i*pw/(n-1); };
+  var Xb=function(i){ return left+band*(i+0.5); };
+  var X=(CFG.type==='bar')?Xb:Xp;
+
+  S+='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" style="width:100%;height:400px;display:block">';
+  if(CFG.title) S+='<text x="'+left+'" y="22" fill="#e9eef8" font-size="15" font-weight="700">'+esc(CFG.title)+'</text>';
+  if(legend) S+=legendRow(P, left, top-8);
+
+  for(var g=0; g<=4; g++){
+    var gv=mx-rng*g/4, gy=Y(gv);
+    if(CFG.grid) S+='<line x1="'+left+'" y1="'+gy.toFixed(1)+'" x2="'+(W-right)+'" y2="'+gy.toFixed(1)+'" stroke="#212b45"/>';
+    S+='<text x="'+(left-9)+'" y="'+(gy+4).toFixed(1)+'" fill="#8793ab" font-size="11" text-anchor="end">'+esc(fv(gv))+'</text>';
+  }
+  if(mn<0 && mx>0) S+='<line x1="'+left+'" y1="'+Y(0).toFixed(1)+'" x2="'+(W-right)+'" y2="'+Y(0).toFixed(1)+'" stroke="#3a4a6d"/>';
+
+  if(CFG.type==='bar'){
+    var k=P.series.length, bw=band*0.76, sw=stacked?bw:bw/k;
+    var accP=[], accN=[];
+    for(i=0;i<n;i++){ accP.push(0); accN.push(0); }
+    P.series.forEach(function(s,si){
+      s.vals.forEach(function(v,i){
+        v=v||0;
+        var x0=stacked ? Xb(i)-bw/2 : Xb(i)-bw/2+si*sw, yT, yB;
+        if(stacked){
+          if(v>=0){ yB=Y(accP[i]); accP[i]+=v; yT=Y(accP[i]); }
+          else { yB=Y(accN[i]); accN[i]+=v; yT=Y(accN[i]); }
+        } else { yT=Y(Math.max(0,v)); yB=Y(Math.min(0,v)); }
+        var h=Math.max(1,Math.abs(yB-yT));
+        S+='<rect x="'+x0.toFixed(1)+'" y="'+Math.min(yT,yB).toFixed(1)+'" width="'+Math.max(1.5,sw-2).toFixed(1)+'" height="'+h.toFixed(1)+'" rx="2" fill="'+s.color+'">'
+          +'<title>'+esc(P.labels[i]+' · '+s.name+': '+fv(v))+'</title></rect>';
+        if(CFG.labels && n<=30)
+          S+='<text x="'+(x0+sw/2).toFixed(1)+'" y="'+(Math.min(yT,yB)-5).toFixed(1)+'" fill="#aab4c8" font-size="10" text-anchor="middle">'+esc(fv(v))+'</text>';
+      });
+    });
+  } else if(CFG.type==='scatter'){
+    P.series.forEach(function(s){
+      s.vals.forEach(function(v,i){
+        S+='<circle cx="'+Xp(i).toFixed(1)+'" cy="'+Y(v||0).toFixed(1)+'" r="4.5" fill="'+s.color+'" fill-opacity=".82">'
+          +'<title>'+esc(P.labels[i]+' · '+s.name+': '+fv(v))+'</title></circle>';
       });
     });
   } else {
-    series.forEach(function(sr){
-      var d=sr.vals.map(function(v,i){ return (i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1); }).join(' ');
-      s+='<path d="'+d+'" fill="none" stroke="'+sr.color+'" stroke-width="2.4" stroke-linejoin="round"/>';
-      if(n<=60) sr.vals.forEach(function(v,i){
-        s+='<circle cx="'+x(i).toFixed(1)+'" cy="'+y(v).toFixed(1)+'" r="3" fill="'+sr.color+'"><title>'+esc(labels[i]+' · '+sr.name+': '+v)+'</title></circle>';
-      });
+    var base=Y(Math.max(mn,0)), prev=[], acc=[];
+    for(i=0;i<n;i++){ prev.push(base); acc.push(0); }
+    P.series.forEach(function(s){
+      var cur=[];
+      for(var i2=0;i2<n;i2++){
+        if(stacked){ acc[i2]+=(s.vals[i2]||0); cur.push(Y(acc[i2])); }
+        else cur.push(Y(s.vals[i2]||0));
+      }
+      var d=cur.map(function(y,i3){ return (i3?'L':'M')+Xp(i3).toFixed(1)+' '+y.toFixed(1); }).join(' ');
+      if(CFG.type==='area'){
+        var back = stacked
+          ? prev.map(function(y,i4){ return {y:y,i:i4}; }).reverse().map(function(o){ return 'L'+Xp(o.i).toFixed(1)+' '+o.y.toFixed(1); }).join(' ')
+          : 'L'+Xp(n-1).toFixed(1)+' '+base.toFixed(1)+' L'+Xp(0).toFixed(1)+' '+base.toFixed(1);
+        S+='<path d="'+d+' '+back+' Z" fill="'+s.color+'" fill-opacity=".2"/>';
+      }
+      S+='<path d="'+d+'" fill="none" stroke="'+s.color+'" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>';
+      if(n<=80) for(var i5=0;i5<n;i5++)
+        S+='<circle cx="'+Xp(i5).toFixed(1)+'" cy="'+cur[i5].toFixed(1)+'" r="3" fill="'+s.color+'">'
+          +'<title>'+esc(P.labels[i5]+' · '+s.name+': '+fv(s.vals[i5]))+'</title></circle>';
+      if(CFG.labels && n<=25) for(var i6=0;i6<n;i6++)
+        S+='<text x="'+Xp(i6).toFixed(1)+'" y="'+(cur[i6]-9).toFixed(1)+'" fill="#aab4c8" font-size="10" text-anchor="middle">'+esc(fv(s.vals[i6]))+'</text>';
+      prev=cur;
     });
   }
-  var step=Math.max(1,Math.ceil(n/9));
-  labels.forEach(function(l,i){
+
+  var step=Math.max(1, Math.ceil(n/11));
+  P.labels.forEach(function(l,i){
     if(i%step) return;
-    s+='<text x="'+x(i).toFixed(1)+'" y="'+(H-14)+'" fill="#8793ab" font-size="11" text-anchor="middle">'+esc(String(l).slice(0,12))+'</text>';
+    S+='<text x="'+X(i).toFixed(1)+'" y="'+(H-bot+20)+'" fill="#8793ab" font-size="11" text-anchor="middle">'+esc(String(l).slice(0,14))+'</text>';
   });
-  var lx=P;
-  series.forEach(function(sr){
-    s+='<rect x="'+lx+'" y="10" width="10" height="10" rx="2" fill="'+sr.color+'"/>'
-      +'<text x="'+(lx+15)+'" y="19" fill="#aab4c8" font-size="11">'+esc(sr.name)+'</text>';
-    lx+=25+String(sr.name).length*6.5;
-  });
-  return s+'</svg>';
+  if(CFG.xlab) S+='<text x="'+(left+pw/2).toFixed(1)+'" y="'+(H-12)+'" fill="#aab4c8" font-size="12" text-anchor="middle">'+esc(CFG.xlab)+'</text>';
+  if(CFG.ylab) S+='<text transform="translate(18,'+(top+ph/2).toFixed(1)+') rotate(-90)" fill="#aab4c8" font-size="12" text-anchor="middle">'+esc(CFG.ylab)+'</text>';
+  return S+'</svg>';
 }
 
+function hbarSVG(P){
+  var n=P.labels.length, k=P.series.length;
+  var rowH=Math.max(22, Math.min(46, 520/Math.max(1,n)));
+  var top=(CFG.title?34:14)+(CFG.legend&&k>1?24:0), bot=34, left=150, right=70, W=940;
+  var H=Math.max(150, top+bot+n*rowH);
+  var pw=W-left-right;
+  var vals=[]; P.series.forEach(function(s){ vals=vals.concat(s.vals); });
+  var mx=Math.max.apply(null, vals.concat([0])), mn=Math.min.apply(null, vals.concat([0]));
+  if(CFG.ymax!=='' && isFinite(Number(CFG.ymax))) mx=Number(CFG.ymax);
+  if(CFG.ymin!=='' && isFinite(Number(CFG.ymin))) mn=Number(CFG.ymin);
+  if(mx<=mn) mx=mn+1;
+  var rng=mx-mn, Xv=function(v){ return left+((v-mn)/rng)*pw; };
+  var S='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" style="width:100%;height:'+H+'px;display:block">';
+  if(CFG.title) S+='<text x="'+left+'" y="22" fill="#e9eef8" font-size="15" font-weight="700">'+esc(CFG.title)+'</text>';
+  if(CFG.legend && k>1) S+=legendRow(P, left, top-8);
+  if(CFG.grid) for(var g=0; g<=4; g++){
+    var gv=mn+rng*g/4, gx=Xv(gv);
+    S+='<line x1="'+gx.toFixed(1)+'" y1="'+top+'" x2="'+gx.toFixed(1)+'" y2="'+(H-bot)+'" stroke="#212b45"/>'
+      +'<text x="'+gx.toFixed(1)+'" y="'+(H-bot+18)+'" fill="#8793ab" font-size="10" text-anchor="middle">'+esc(fv(gv))+'</text>';
+  }
+  var bh=(rowH-8)/k;
+  P.labels.forEach(function(l,i){
+    var y0=top+i*rowH+4;
+    S+='<text x="'+(left-10)+'" y="'+(y0+rowH/2-2).toFixed(1)+'" fill="#aab4c8" font-size="11.5" text-anchor="end">'+esc(String(l).slice(0,22))+'</text>';
+    P.series.forEach(function(s,si){
+      var v=s.vals[i]||0, x1=Xv(Math.min(v, Math.max(mn,0))), x2=Xv(Math.max(v, Math.max(mn,0)));
+      S+='<rect x="'+x1.toFixed(1)+'" y="'+(y0+si*bh).toFixed(1)+'" width="'+Math.max(1,x2-x1).toFixed(1)+'" height="'+Math.max(2,bh-3).toFixed(1)+'" rx="2" fill="'+s.color+'">'
+        +'<title>'+esc(l+' · '+s.name+': '+fv(v))+'</title></rect>';
+      if(CFG.labels) S+='<text x="'+(x2+6).toFixed(1)+'" y="'+(y0+si*bh+bh/2+2).toFixed(1)+'" fill="#8793ab" font-size="10">'+esc(fv(v))+'</text>';
+    });
+  });
+  return S+'</svg>';
+}
+
+/* Pie and donut show shares of a whole, so a label appearing on several rows is
+   summed into one slice. The cartesian charts stay faithful to the rows the query
+   returned: silently collapsing points there would misrepresent the data. */
+function collapse(P){
+  var sum={}, order=[];
+  P.labels.forEach(function(l,i){
+    var k=String(l);
+    if(!(k in sum)){ sum[k]=0; order.push(k); }
+    sum[k]+=P.series[0].vals[i]||0;
+  });
+  return {labels:order, series:[{name:P.series[0].name, color:P.series[0].color,
+          vals:order.map(function(k){ return sum[k]; })}]};
+}
+
+function pieSVG(P){
+  P=collapse(P);
+  var s=P.series[0], donut=CFG.type==='donut';
+  var W=940, H=400, cx=330, cy=H/2+(CFG.title?10:0), R=Math.min(150, H/2-40), r=donut?R*0.55:0;
+  var total=s.vals.reduce(function(a,b){ return a+Math.max(0,b||0); },0);
+  var S='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" style="width:100%;height:400px;display:block">';
+  if(CFG.title) S+='<text x="40" y="24" fill="#e9eef8" font-size="15" font-weight="700">'+esc(CFG.title)+'</text>';
+  if(!total){ return S+'<text x="'+cx+'" y="'+cy+'" fill="#8793ab" font-size="13" text-anchor="middle">Nothing positive to plot.</text></svg>'; }
+  var pal=PALETTES[CFG.palette]||PALETTES[0], a0=-Math.PI/2;
+  P.labels.forEach(function(l,i){
+    var v=Math.max(0, s.vals[i]||0); if(!v) return;
+    var frac=v/total, a1=a0+frac*Math.PI*2, big=frac>0.5?1:0, col=pal[i%pal.length];
+    var x0=cx+R*Math.cos(a0), y0=cy+R*Math.sin(a0), x1=cx+R*Math.cos(a1), y1=cy+R*Math.sin(a1);
+    var d;
+    if(donut){
+      var ix0=cx+r*Math.cos(a1), iy0=cy+r*Math.sin(a1), ix1=cx+r*Math.cos(a0), iy1=cy+r*Math.sin(a0);
+      d='M'+x0.toFixed(1)+' '+y0.toFixed(1)+' A'+R+' '+R+' 0 '+big+' 1 '+x1.toFixed(1)+' '+y1.toFixed(1)
+        +' L'+ix0.toFixed(1)+' '+iy0.toFixed(1)+' A'+r.toFixed(1)+' '+r.toFixed(1)+' 0 '+big+' 0 '+ix1.toFixed(1)+' '+iy1.toFixed(1)+' Z';
+    } else {
+      d='M'+cx+' '+cy+' L'+x0.toFixed(1)+' '+y0.toFixed(1)+' A'+R+' '+R+' 0 '+big+' 1 '+x1.toFixed(1)+' '+y1.toFixed(1)+' Z';
+    }
+    S+='<path d="'+d+'" fill="'+col+'" stroke="#080b14" stroke-width="1.5"><title>'+esc(l+': '+fv(v)+' ('+(frac*100).toFixed(1)+'%)')+'</title></path>';
+    a0=a1;
+  });
+  if(donut) S+='<text x="'+cx+'" y="'+(cy+6)+'" fill="#e9eef8" font-size="18" font-weight="800" text-anchor="middle">'+esc(fv(total))+'</text>';
+  // legend column on the right, values and shares spelled out
+  var ly=Math.max(60, cy-P.labels.length*11);
+  P.labels.forEach(function(l,i){
+    var v=Math.max(0, s.vals[i]||0); if(!v) return;
+    S+='<rect x="560" y="'+(ly-9)+'" width="10" height="10" rx="2" fill="'+(PALETTES[CFG.palette]||PALETTES[0])[i%8]+'"/>'
+      +'<text x="578" y="'+ly+'" fill="#aab4c8" font-size="12">'+esc(String(l).slice(0,30))+'</text>'
+      +'<text x="900" y="'+ly+'" fill="#8793ab" font-size="12" text-anchor="end">'+esc(fv(v))+'  ·  '+(v/total*100).toFixed(1)+'%</text>';
+    ly+=22;
+  });
+  return S+'</svg>';
+}
+
+function kpiSVG(P){
+  var s=P.series[0], vals=s.vals.filter(function(v){ return v!=null && isFinite(v); });
+  var W=940, H=250, cur=vals.length?vals[vals.length-1]:0, first=vals.length?vals[0]:0;
+  var delta=first ? ((cur-first)/Math.abs(first))*100 : null;
+  var S='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" style="width:100%;height:250px;display:block">';
+  S+='<text x="'+(W/2)+'" y="46" fill="#8793ab" font-size="13" text-anchor="middle">'+esc(CFG.title||s.name)+'</text>';
+  S+='<text x="'+(W/2)+'" y="128" fill="#e9eef8" font-size="66" font-weight="900" text-anchor="middle">'+esc(fv(cur))+'</text>';
+  if(delta!=null && vals.length>1){
+    var up=delta>=0, col=up?'#34d399':'#f87171';
+    S+='<text x="'+(W/2)+'" y="160" fill="'+col+'" font-size="14" font-weight="700" text-anchor="middle">'
+      +(up?'▲ ':'▼ ')+Math.abs(delta).toFixed(1)+'% since '+esc(String(P.labels[0]).slice(0,12))+'</text>';
+  }
+  if(vals.length>1){
+    var mn=Math.min.apply(null,vals), mx=Math.max.apply(null,vals), rng=(mx-mn)||1, L=260, R=W-260, T=180, B=228;
+    var d=vals.map(function(v,i){
+      var x=L+i*(R-L)/(vals.length-1), y=B-((v-mn)/rng)*(B-T);
+      return (i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1);
+    }).join(' ');
+    S+='<path d="'+d+'" fill="none" stroke="'+s.color+'" stroke-width="2.4" stroke-linejoin="round"/>';
+  }
+  return S+'</svg>';
+}
+
+/* ---------- results ---------- */
+function renderResult(){
+  var chartHost=document.getElementById('chartHost'), tableHost=document.getElementById('tableHost');
+  if(!RESULT){ chartHost.style.display='none'; tableHost.style.display='none'; return; }
+  var cols=RESULT.columns, rows=RESULT.rows;
+  if(!rows.length){
+    chartHost.style.display='block'; tableHost.style.display='none';
+    chartHost.innerHTML='<div class="empty">The query ran and returned no rows.</div>';
+    return;
+  }
+
+  if(VIEW==='chart'){
+    chartHost.style.display='block';
+    var P=prepData();
+    if(!P){
+      chartHost.innerHTML='<div class="empty">Nothing to plot yet. Tick at least one value column on the right, or switch to Table.</div>';
+    } else {
+      chartHost.innerHTML = (CFG.type==='pie'||CFG.type==='donut') ? pieSVG(P)
+                          : CFG.type==='kpi'  ? kpiSVG(P)
+                          : CFG.type==='hbar' ? hbarSVG(P)
+                          : cartSVG(P);
+    }
+  } else {
+    chartHost.style.display='none';
+  }
+
+  tableHost.style.display='block';
+  var cap=VIEW==='table'?500:120;
+  var h='<div class="tw" style="max-height:'+(VIEW==='table'?'640px':'320px')+'"><table><tr>'
+    +cols.map(function(c){ return '<th>'+esc(c)+'</th>'; }).join('')+'</tr>'
+    +rows.slice(0,cap).map(function(r){
+        return '<tr>'+cols.map(function(c){ return '<td class="mono">'+esc(r[c])+'</td>'; }).join('')+'</tr>';
+      }).join('')
+    +'</table></div>';
+  if(rows.length>cap) h+='<div class="hint" style="margin-top:8px">Showing the first '+cap+' of '+rows.length+' rows. Use CSV for the rest.</div>';
+  tableHost.innerHTML=h;
+}
+
+/* ---------- exports ---------- */
 function downloadCSV(){
   if(!RESULT){ alert('Run a query first.'); return; }
   var cols=RESULT.columns;
@@ -574,34 +1343,76 @@ function downloadCSV(){
       return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;
     }).join(',');
   }));
-  var blob=new Blob([lines.join('\n')],{type:'text/csv'});
+  saveBlob(lines.join('\n'), 'text/csv', 'artemis_query.csv');
+}
+function downloadSVG(){
+  var host=document.getElementById('chartHost');
+  if(!RESULT || VIEW!=='chart' || !host.querySelector('svg')){ alert('Draw a chart first.'); return; }
+  saveBlob(host.innerHTML, 'image/svg+xml', (CFG.title||'artemis_chart').replace(/[^\w-]+/g,'_')+'.svg');
+}
+function saveBlob(text, type, name){
   var a=document.createElement('a');
-  a.href=URL.createObjectURL(blob); a.download='artemis_query.csv'; a.click();
+  a.href=URL.createObjectURL(new Blob([text],{type:type}));
+  a.download=name; a.click();
   setTimeout(function(){ URL.revokeObjectURL(a.href); },1000);
 }
 
-/* saved queries, per device */
-var SKEY='artemis_qa_saved_v1';
-function getSaved(){ try{ return JSON.parse(localStorage.getItem(SKEY)||'[]'); }catch(e){ return []; } }
+/* ---------- saved charts and recent queries, per device ---------- */
+var SKEY='artemis_qa_saved_v2', RKEY='artemis_qa_recent_v1';
+function getSaved(){
+  try{
+    var v2=JSON.parse(localStorage.getItem(SKEY)||'null');
+    if(v2) return v2;
+    // carry over anything saved before charts had settings attached
+    var v1=JSON.parse(localStorage.getItem('artemis_qa_saved_v1')||'[]');
+    return v1.map(function(q){ return {name:q.name, sql:q.sql, cfg:null}; });
+  }catch(e){ return []; }
+}
 function setSaved(a){ try{ localStorage.setItem(SKEY,JSON.stringify(a)); }catch(e){} renderSaved(); }
-function saveQuery(){
+function saveChart(){
   var sql=document.getElementById('sql').value.trim();
   if(!sql){ alert('Nothing to save.'); return; }
-  var name=prompt('Name this query:',''); if(!name) return;
-  var a=getSaved(); a.unshift({name:name,sql:sql}); setSaved(a.slice(0,40));
+  var name=prompt('Name this chart:', CFG.title||''); if(!name) return;
+  var a=getSaved();
+  a.unshift({name:name, sql:sql, cfg:JSON.parse(JSON.stringify(CFG))});
+  setSaved(a.slice(0,40));
+  showRail('r-saved');
 }
 function renderSaved(){
   var a=getSaved(), el=document.getElementById('savedList');
-  if(!a.length){ el.innerHTML='<div style="font-size:12.5px;color:var(--mut);line-height:1.55">Nothing saved yet. Write a query and press Save; it is kept on this device.</div>'; return; }
-  el.innerHTML=a.map(function(q,i){
-    return '<div class="saved"><button class="open" onclick="loadSaved('+i+')">'+esc(q.name)+'</button>'
+  el.innerHTML = a.length ? a.map(function(q,i){
+    return '<div class="saved"><button class="open" title="'+esc(q.name)+'" onclick="loadSaved('+i+')">'+esc(q.name)+'</button>'
       +'<button class="del" title="Delete" onclick="delSaved('+i+')">&times;</button></div>';
-  }).join('');
+  }).join('') : '<div class="tiny">Nothing saved yet. Build a chart and press "Save chart"; it is kept on this device.</div>';
 }
-function loadSaved(i){ var a=getSaved(); if(a[i]) document.getElementById('sql').value=a[i].sql; }
+function loadSaved(i){
+  var a=getSaved(); if(!a[i]) return;
+  setSQL(a[i].sql);
+  if(a[i].cfg){ CFG=merge(CFG, a[i].cfg); applyCfgToForm(); }
+  runSQL();
+}
 function delSaved(i){ var a=getSaved(); a.splice(i,1); setSaved(a); }
-renderSaved();
 
+function getRecent(){ try{ return JSON.parse(localStorage.getItem(RKEY)||'[]'); }catch(e){ return []; } }
+function pushRecent(sql){
+  var a=getRecent().filter(function(x){ return x!==sql; });
+  a.unshift(sql);
+  try{ localStorage.setItem(RKEY, JSON.stringify(a.slice(0,15))); }catch(e){}
+  renderRecent();
+}
+function renderRecent(){
+  var a=getRecent(), el=document.getElementById('recentList');
+  el.innerHTML = a.length ? a.map(function(q,i){
+    var label=q.replace(/\s+/g,' ').slice(0,44);
+    return '<div class="saved"><button class="open mono" style="font-size:11px" title="'+esc(q)+'" onclick="loadRecent('+i+')">'+esc(label)+'</button></div>';
+  }).join('') : '<div class="tiny">Queries you run show up here.</div>';
+}
+function loadRecent(i){ var a=getRecent(); if(a[i]) setSQL(a[i]); }
+
+/* ---------- boot ---------- */
+renderSaved(); renderRecent();
+setSQL(EXAMPLES[0].q);
+applyCfgToForm();
 try{ var lt=localStorage.getItem('artemis_qa_tab'); if(lt && document.getElementById(lt)) showTab(lt); }catch(e){}
 </script>
 </body></html>
