@@ -102,6 +102,36 @@ function daily30(rows, keyCol, valFn) {
 async function models(run) {
   const out = { window: { axis: dayKeys(30) }, totals: {}, tabs: { accuracy: {}, quality: {} } };
 
+  // Do the two sides of a dimension even speak the same language? The NLP models
+  // and the second pass were trained separately, and toxicity turns out to use
+  // non_toxic/toxic on one side and none/borderline/coded_political on the other.
+  // String equality across those can only ever return 0%, which reads as "the
+  // model is catastrophically wrong" when the truth is "these two cannot be
+  // compared". So the vocabularies are intersected first, and a dimension with no
+  // shared label reports nothing rather than a damning zero.
+  const vocab = await run(
+    "label-vocabularies",
+    `SELECT 'sentiment' AS dim, COUNT(*) AS shared FROM (
+       SELECT DISTINCT nlp_sentiment AS v FROM rdl.post_label_predictions WHERE nlp_sentiment IS NOT NULL
+       INTERSECT
+       SELECT DISTINCT ds_sentiment FROM rdl.post_label_predictions WHERE ds_sentiment IS NOT NULL) a
+     UNION ALL
+     SELECT 'emotion', COUNT(*) FROM (
+       SELECT DISTINCT nlp_emotion AS v FROM rdl.post_label_predictions WHERE nlp_emotion IS NOT NULL
+       INTERSECT
+       SELECT DISTINCT ds_emotion FROM rdl.post_label_predictions WHERE ds_emotion IS NOT NULL) b
+     UNION ALL
+     SELECT 'toxicity', COUNT(*) FROM (
+       SELECT DISTINCT nlp_toxicity AS v FROM rdl.post_label_predictions WHERE nlp_toxicity IS NOT NULL
+       INTERSECT
+       SELECT DISTINCT ds_toxicity FROM rdl.post_label_predictions WHERE ds_toxicity IS NOT NULL) c`
+  );
+  const shared = {};
+  if (vocab) for (const r of vocab) shared[r.dim] = Number(r.shared || 0);
+  // Unknown (the query failed) is treated as comparable: better to show the
+  // number than to hide it because a side check did not run.
+  const comparable = (dim) => shared[dim] === undefined || shared[dim] > 0;
+
   // One scan of the predictions table answers per-dimension agreement, the
   // routing split, label completeness and the confidence range check.
   const agg = await run(
@@ -137,10 +167,16 @@ async function models(run) {
     out.tabs.accuracy.nlp_conf = { month: [r1(a.nlp_conf)] };
     out.tabs.accuracy.ds_conf = { month: [r1(a.ds_conf)] };
 
+    // Rows are [name, value, note]. A null value with a note is the page's cue to
+    // print the reason instead of a percentage.
+    const dim = (name, hit, cmp) =>
+      comparable(name)
+        ? [name, pct(hit, cmp) || 0]
+        : [name, null, "the two models use different labels here, so they cannot be compared"];
     out.tabs.accuracy.per_dim = [
-      ["sentiment", pct(a.hit_sentiment, a.cmp_sentiment) || 0],
-      ["emotion", pct(a.hit_emotion, a.cmp_emotion) || 0],
-      ["toxicity", pct(a.hit_toxicity, a.cmp_toxicity) || 0],
+      dim("sentiment", a.hit_sentiment, a.cmp_sentiment),
+      dim("emotion", a.hit_emotion, a.cmp_emotion),
+      dim("toxicity", a.hit_toxicity, a.cmp_toxicity),
     ];
 
     out.tabs.accuracy.escalation = [

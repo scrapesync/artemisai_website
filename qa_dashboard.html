@@ -573,13 +573,20 @@ function renderAccuracy(){
   var pd=A.per_dim;
   if(pd && pd.length){
     html+='<div class="card"><h3>By dimension</h3>';
+    var notes=[];
     pd.forEach(function(r){
-      var v=Number(r[1]);
-      var cell = v ? '<b class="'+band(v)+'">'+v.toFixed(1)+'%</b>' : '<span style="color:var(--mut)">not measured</span>';
-      html+='<div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(33,43,69,.5)">'
+      var v=(r[1]==null)?null:Number(r[1]);
+      /* A row can carry a third element saying why there is no number. That is a
+         different statement from a low score, so it never renders as a percentage. */
+      var cell;
+      if(v){ cell='<b class="'+band(v)+'">'+v.toFixed(1)+'%</b>'; }
+      else if(r[2]){ cell='<span style="color:var(--amber);font-size:12px">not comparable</span>'; notes.push(r[0]+': '+r[2]); }
+      else { cell='<span style="color:var(--mut)">not measured</span>'; }
+      html+='<div style="display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(33,43,69,.5)">'
         +'<span style="color:var(--mut2)">'+esc(r[0])+'</span>'+cell+'</div>';
     });
-    html+='<div class="sub" style="margin-top:9px">Agreement per label family. A low one here tells you which model to look at first.</div></div>';
+    html+='<div class="sub" style="margin-top:9px">Agreement per label family. A low one here tells you which model to look at first.'
+      +(notes.length?'<br><b style="color:var(--amber)">'+esc(notes.join(' '))+'</b>':'')+'</div></div>';
   }
   document.getElementById('accCards').innerHTML=html||'<div class="empty">No accuracy metrics yet.</div>';
 
