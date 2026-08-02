@@ -2,12 +2,21 @@
 """
 ArtemisAI - QA Dashboard nightly metrics generator (v2, four-tab)
 
-NOTE ON RATES: every agreement/share metric divides with a DECIMAL numerator
-(THEN 1.0 ELSE 0.0), never THEN 1 ELSE 0. Redshift's AVG over an INT expression
-does integer division, so the integer form silently returns 0 for any rate below
-100% and the Accuracy tab reported 0% agreement for months while the real figure
-was around 80%. Verified on production: the integer form gives 0.0, the decimal
-form 80.0, over the same rows.
+NOTE ON RATES: every agreement/share metric casts to FLOAT
+(CASE WHEN ... THEN 1 ELSE 0 END::float). Redshift truncates twice here and both
+traps are easy to walk into. AVG over an INT expression does integer division and
+returns 0 for any rate below 100%, which is why the Accuracy tab reported 0%
+agreement for months while the real figure was 83.2%. Writing THEN 1.0 ELSE 0.0
+fixes that but introduces the second trap: the literal 1.0 has decimal scale 1, so
+AVG keeps one decimal place and 0.832 becomes 0.8, printing a tidy 80.0% that
+looks plausible and is wrong. Measured on production over the same rows:
+
+    THEN 1 ELSE 0                ->  0.0     (integer division)
+    THEN 1.0 ELSE 0.0            -> 80.0     (scale-1 truncation)
+    THEN 1 ELSE 0 END::float     -> 83.2     (correct)
+    SUM(...)::float/COUNT(*)     -> 83.2     (correct)
+
+If you add a rate, cast it, and check the result is not suspiciously round.
 ================================================================
 Runs ~01:00 daily. Queries Redshift across four domains and writes
 qa_metrics.json into the repo root. The dashboard reads it and stays static.
@@ -101,7 +110,7 @@ def trend(series):
 # ---- ACCURACY ----
 def acc_agreement(cur):
     rows=q(cur,f"""SELECT inserted_at::date d,
-        ROUND(100.0*AVG(CASE WHEN nlp_sentiment=ds_sentiment THEN 1.0 ELSE 0.0 END),1) agree
+        ROUND(100.0*AVG(CASE WHEN nlp_sentiment=ds_sentiment THEN 1 ELSE 0 END::float),1) agree
       FROM rdl.post_label_predictions
       WHERE inserted_at>='{START}' AND ds_sentiment IS NOT NULL AND nlp_sentiment IS NOT NULL
       GROUP BY 1""")
@@ -131,7 +140,7 @@ def acc_per_dim(cur):
     dims=[('sentiment','nlp_sentiment','ds_sentiment'),('emotion','nlp_emotion','ds_emotion'),('toxicity','nlp_toxicity','ds_toxicity')]
     out=[]
     for name,a,b in dims:
-        r=q(cur,f"SELECT ROUND(100.0*AVG(CASE WHEN {a}={b} THEN 1.0 ELSE 0.0 END),1) v FROM rdl.post_label_predictions WHERE {a} IS NOT NULL AND {b} IS NOT NULL")[0]
+        r=q(cur,f"SELECT ROUND(100.0*AVG(CASE WHEN {a}={b} THEN 1 ELSE 0 END::float),1) v FROM rdl.post_label_predictions WHERE {a} IS NOT NULL AND {b} IS NOT NULL")[0]
         out.append([name,float(r['v'] or 0)])
     return out
 def acc_escalation(cur):
@@ -219,7 +228,7 @@ def ql_dq_score(cur):
     rows=q(cur,f"SELECT processing_date d, ROUND(100*AVG(data_quality_score),1) s FROM odl.comment_sentiments WHERE processing_date>='{START}' AND data_quality_score IS NOT NULL GROUP BY 1")
     return trend(align_daily(rows,'d','s',90,True))
 def ql_highconf_share(cur):
-    rows=q(cur,f"SELECT processing_date d, ROUND(100.0*AVG(CASE WHEN is_high_confidence THEN 1.0 ELSE 0.0 END),1) s FROM odl.comment_sentiments WHERE processing_date>='{START}' GROUP BY 1")
+    rows=q(cur,f"SELECT processing_date d, ROUND(100.0*AVG(CASE WHEN is_high_confidence THEN 1 ELSE 0 END::float),1) s FROM odl.comment_sentiments WHERE processing_date>='{START}' GROUP BY 1")
     return trend(align_daily(rows,'d','s',80,True))
 def ql_validity(cur):
     out=[]
@@ -261,7 +270,7 @@ def an_emotion_scores(cur):
 # ---- ACCURACY (extra) ----
 def acc_comment_agreement(cur):
     rows=q(cur,f"""SELECT created_at::date d,
-        ROUND(100.0*AVG(CASE WHEN nlp_sentiment=ds_sentiment THEN 1.0 ELSE 0.0 END),1) a
+        ROUND(100.0*AVG(CASE WHEN nlp_sentiment=ds_sentiment THEN 1 ELSE 0 END::float),1) a
       FROM rdl.comment_label_predictions
       WHERE created_at>='{START}' AND nlp_sentiment IS NOT NULL AND ds_sentiment IS NOT NULL GROUP BY 1""")
     return trend(align_daily(rows,'d','a',88,True))
@@ -415,7 +424,7 @@ def ov_scores(cur):
         try:
             v=q(cur,sql)[0]['v']; return round(float(v)) if v is not None else default
         except Exception: return default
-    acc=one("SELECT 100.0*AVG(CASE WHEN nlp_sentiment=ds_sentiment THEN 1.0 ELSE 0.0 END) v FROM rdl.post_label_predictions WHERE ds_sentiment IS NOT NULL",88)
+    acc=one("SELECT 100.0*AVG(CASE WHEN nlp_sentiment=ds_sentiment THEN 1 ELSE 0 END::float) v FROM rdl.post_label_predictions WHERE ds_sentiment IS NOT NULL",88)
     # health: share of key tables that landed this ISO week
     _t=dt.date.today(); _ws=_t-dt.timedelta(days=_t.weekday())
     fresh=0; tot=len(FRESH_TABLES)
