@@ -1525,6 +1525,14 @@ function sessionName(){
 
 function onCustomTabOpen(){ if(!teamLoaded){ teamLoaded=true; loadTeamCharts(false); } }
 
+/* A chart the server has not listed yet. Blobs listings are eventually consistent
+   with a window measured in tens of seconds (measured on production: about 70),
+   so straight after publishing, the authoritative list does not contain your own
+   chart. Carrying it separately means you see it immediately and everyone else
+   picks it up on their next visit, without the page pretending the rest of the
+   list does not exist. */
+var JUST_PUBLISHED=null;
+
 function loadTeamCharts(){
   var msg=document.getElementById('teamMsg'), btn=document.getElementById('teamReload');
   btn.disabled=true; msg.textContent='Fetching the published charts…';
@@ -1538,7 +1546,14 @@ function loadTeamCharts(){
         return;
       }
       TEAM=j.charts||[];
-      msg.textContent='';
+      if(JUST_PUBLISHED && !TEAM.some(function(c){ return c.id===JUST_PUBLISHED.id; })){
+        TEAM.unshift(JUST_PUBLISHED);
+        msg.innerHTML='<span style="color:var(--amber)">Your chart is saved and shown at the top. '
+          +'The shared listing catches up within a minute or so, which is when teammates will see it.</span>';
+      } else {
+        JUST_PUBLISHED=null;
+        msg.textContent='';
+      }
       renderTeamCharts();
     })
     .catch(function(e){
@@ -1633,6 +1648,7 @@ function deleteTeamChart(id){
     .then(function(j){
       if(j.error){ alert('Could not delete: '+(j.message||j.error)); return; }
       TEAM=TEAM.filter(function(x){ return x.id!==id; });
+      if(JUST_PUBLISHED && JUST_PUBLISHED.id===id) JUST_PUBLISHED=null;
       renderTeamCharts();
     })
     .catch(function(e){ alert('Could not delete: '+e.message); });
@@ -1669,7 +1685,9 @@ function doPublish(){
       closePublish();
       /* Re-fetch rather than unshift onto TEAM. Publishing usually happens from
          the SQL tab, where the team list has never been loaded, so appending to
-         it would show the new chart alone and silently hide everyone else's. */
+         it would show the new chart alone and silently hide everyone else's.
+         JUST_PUBLISHED covers the gap while the listing catches up. */
+      JUST_PUBLISHED=j.chart;
       teamLoaded=true;
       showTab('p-custom');
       loadTeamCharts();
