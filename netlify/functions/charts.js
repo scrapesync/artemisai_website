@@ -77,8 +77,10 @@ exports.handler = async (event) => {
     });
   }
 
-  // Run a read, and if strong consistency is not supported in this environment
-  // fall back to the eventual store rather than failing the request.
+  // Only READS go through the strong store. A write is visible to a read by key
+  // immediately whatever the consistency setting, so there is nothing for strong
+  // consistency to buy on the write path, and routing setJSON through it means a
+  // runtime without uncachedEdgeURL fails the save outright. Writes use `weak`.
   let usedConsistency = "strong";
   const read = async (fn) => {
     try { return await fn(store); }
@@ -158,7 +160,7 @@ exports.handler = async (event) => {
         cfg,
         created_at: new Date().toISOString(),
       };
-      await store.setJSON(record.id, record);
+      await weak.setJSON(record.id, record);
       return reply(201, { ok: true, chart: record, consistency: usedConsistency });
     } catch (err) {
       return reply(500, { error: "save_failed", message: String(err.message || err).slice(0, 200) });
@@ -170,7 +172,7 @@ exports.handler = async (event) => {
     const id = (event.queryStringParameters || {}).id;
     if (!id) return reply(400, { error: "no_id" });
     try {
-      await store.delete(id);
+      await weak.delete(id);
       return reply(200, { ok: true, deleted: id });
     } catch (err) {
       return reply(500, { error: "delete_failed", message: String(err.message || err).slice(0, 200) });
