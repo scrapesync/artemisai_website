@@ -97,6 +97,45 @@ table.grid tr:hover td{background:var(--panel2)}
 .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(90px);background:var(--tipbg);border:1px solid var(--line2);color:var(--t1);font-size:12.5px;font-weight:700;padding:11px 19px;border-radius:12px;transition:.3s;z-index:90;box-shadow:0 18px 50px -12px rgba(0,0,0,.4)}
 .toast.on{transform:translateX(-50%) translateY(0)}
 @media (max-width:880px){.layout{grid-template-columns:1fr}.sidebar{position:static;max-height:300px}}
+
+/* ===== grid toolbar: filters, sort, selection, export ===== */
+.gtools{padding:11px 13px;border-bottom:1px solid var(--line);display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.gtools input.q{background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--t1);font-family:var(--mono);font-size:11.5px;padding:7px 9px;flex:1;min-width:150px}
+.gbtn{font-size:11.5px;font-weight:800;padding:7px 12px;border-radius:9px;border:1px solid var(--line);color:var(--t2);background:var(--panel2)}
+.gbtn:hover{color:var(--t1);border-color:var(--line2)}
+.gbtn.on{border-color:var(--okT);color:var(--okT)}
+.gcnt{font-family:var(--mono);font-size:11px;color:var(--t3);margin-left:auto}
+.fbar{padding:0 13px 11px;display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.fchip{display:flex;align-items:center;gap:7px;background:var(--panel2);border:1px solid var(--line2);border-radius:99px;padding:5px 6px 5px 11px;font-size:11.5px;color:var(--t2)}
+.fchip b{color:var(--t1);font-weight:700}
+.fchip em{font-style:normal;color:var(--indT);font-family:var(--mono);font-size:10.5px}
+.fchip button{width:18px;height:18px;border-radius:50%;color:var(--t3);font-size:13px;line-height:1;display:grid;place-items:center}
+.fchip button:hover{background:rgba(251,93,119,.16);color:var(--badT)}
+.fbuild{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:0 13px 11px}
+.fbuild select,.fbuild input{background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--t1);font-family:inherit;font-size:11.5px;padding:6px 8px}
+.fbuild input{font-family:var(--mono);min-width:110px}
+table.grid th.sortable{cursor:pointer;user-select:none}
+table.grid th.sortable:hover{color:var(--t1)}
+table.grid th .sarr{color:var(--okT);font-size:10px;margin-left:4px}
+table.grid th.selcol,table.grid td.selcol{width:34px;text-align:center;padding-left:10px;padding-right:6px}
+table.grid tr.sel td{background:rgba(0,212,170,.09)}
+input[type=checkbox]{accent-color:#00D4AA;cursor:pointer}
+
+/* export dialog */
+#exp-modal{display:none;position:fixed;inset:0;z-index:2100;align-items:center;justify-content:center}
+#exp-modal.on{display:flex}
+#exp-back{position:absolute;inset:0;background:rgba(3,6,12,.72);backdrop-filter:blur(5px)}
+#exp-card{position:relative;z-index:1;background:var(--tipbg);border:1px solid var(--line2);border-radius:16px;padding:22px 24px;max-width:500px;width:92%;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+#exp-card h3{font-size:16.5px;font-weight:800;margin-bottom:4px}
+#exp-card p.sub{font-size:12px;color:var(--t3);line-height:1.55;margin-bottom:14px}
+#exp-card label.lb{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:800;margin:13px 0 5px}
+#exp-card select,#exp-card input{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--t1);font-family:inherit;font-size:12.5px;padding:8px 10px}
+.expnote{font-size:11.5px;color:var(--t3);line-height:1.5;margin-top:9px;padding:9px 11px;border-radius:9px;background:var(--panel2);border-left:2px solid var(--indT)}
+#exp-btns{display:flex;gap:8px;margin-top:18px}
+#exp-btns button{flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:12.5px}
+#exp-cancel{background:transparent;border:1px solid var(--line2);color:var(--t2)}
+#exp-go{background:var(--grad);border:none;color:#04110D}
+body.light #exp-go{color:#fff}
 </style>
 </head>
 <body>
@@ -151,6 +190,32 @@ table.grid tr:hover td{background:var(--panel2)}
   </div>
 </main>
 <div class="toast" id="toast"></div>
+
+<div id="exp-modal">
+  <div id="exp-back" onclick="closeExport()"></div>
+  <div id="exp-card">
+    <h3>Download this table</h3>
+    <p class="sub">Your filters and sort order carry into the file.</p>
+    <label class="lb" for="expScope">Which rows</label>
+    <select id="expScope" onchange="expScopeChanged()"></select>
+    <div id="expLiveWrap" style="display:none">
+      <label class="lb" for="expLimit">How many rows to pull</label>
+      <input id="expLimit" type="number" min="1" max="5000" value="5000">
+    </div>
+    <label class="lb" for="expFmt">Format</label>
+    <select id="expFmt">
+      <option value="csv">CSV (spreadsheets)</option>
+      <option value="json">JSON (array of objects)</option>
+      <option value="ndjson">NDJSON (one object per line)</option>
+      <option value="tsv">TSV (tab separated)</option>
+    </select>
+    <div class="expnote" id="expNote"></div>
+    <div id="exp-btns">
+      <button id="exp-cancel" onclick="closeExport()">Cancel</button>
+      <button id="exp-go" onclick="runExport()">Download</button>
+    </div>
+  </div>
+</div>
 
 <script>(function(){
   try{
@@ -207,12 +272,12 @@ function renderSidebar(){
     html+=`<div class="sb-group">${sc}</div>`;
     for(const t of groups[sc]){
       const id=t.schema+'.'+t.table;
-      html+=`<button class="sb-item ${CUR===id?'on':''}" onclick="selectTable('${id}')">${t.label}<span class="cnt">${t.rows==null?'—':fmtN(t.rows)}</span></button>`;
+      html+=`<button class="sb-item ${CUR===id?'on':''}" onclick="selectTable('${id}')">${t.label}<span class="cnt">${t.rows==null?'?':fmtN(t.rows)}</span></button>`;
     }
   }
   document.getElementById('sbList').innerHTML=html||'<div class="empty" style="padding:16px">No tables match.</div>';
 }
-function selectTable(id){CUR=id;VIEW='preview';renderSidebar();renderMain();}
+function selectTable(id){CUR=id;VIEW='preview';resetGrid();renderSidebar();renderMain();}
 function tableById(id){return DATA.tables.find(t=>t.schema+'.'+t.table===id);}
 
 function renderMain(){
@@ -221,7 +286,7 @@ function renderMain(){
   const t=tableById(CUR);if(!t){m.innerHTML='<div class="empty">Table not in snapshot.</div>';return;}
   const cols=(t.columns||[]).length;
   m.innerHTML=`<div class="thead"><span class="schema-badge">${t.schema}</span><h2>${t.label}</h2>
-      <span class="meta">${t.rows==null?'—':fmtN(t.rows)+' rows'} · ${cols} cols · preview ${(t.preview||[]).length}</span></div>
+      <span class="meta">${t.rows==null?'row count unknown':fmtN(t.rows)+' rows'} · ${cols} cols · preview ${(t.preview||[]).length}</span></div>
     <div class="vtabs">
       <button class="vtab ${VIEW==='preview'?'on':''}" onclick="setView('preview')">Preview</button>
       <button class="vtab ${VIEW==='summary'?'on':''}" onclick="setView('summary')">Summaries</button>
@@ -237,29 +302,426 @@ function renderView(){
   if(VIEW==='preview') vb.innerHTML=previewHTML(t);
   else if(VIEW==='summary') vb.innerHTML=summaryHTML(t);
   else vb.innerHTML=schemaHTML(t);
-  if(VIEW==='preview'){const s=document.getElementById('gridSearch');if(s)s.oninput=()=>filterGrid(t);}
+  if(VIEW==='preview'){
+    paintGrid();
+    const s=document.getElementById('gridSearch');
+    if(s) s.oninput=function(){ GRIDQ=(s.value||'').toLowerCase(); paintGrid(); };
+  }
 }
+/* =======================================================================
+   PREVIEW GRID: per-column typed filters, sorting, selection, export
+   ======================================================================= */
+var SORT={col:null,dir:0}, FILTERS=[], SELECTED=new Set(), GRIDQ='';
+function resetGrid(){ SORT={col:null,dir:0}; FILTERS=[]; SELECTED=new Set(); GRIDQ=''; }
+
+/* A Redshift type decides how a column is compared, filtered and sorted.
+   Getting this wrong is how "9" ends up sorting above "10" and how a date
+   filter silently does string matching. */
+function kindOf(pgType){
+  var s=String(pgType||'').toLowerCase();
+  if(/bool/.test(s)) return 'bool';
+  if(/timestamp|date|time/.test(s)) return 'date';
+  if(/int|numeric|decimal|double|real|float|money/.test(s)) return 'num';
+  return 'text';
+}
+var OPS={
+  text:[['contains','contains'],['ncontains','does not contain'],['eq','is exactly'],['starts','starts with'],['ends','ends with'],['empty','is empty'],['nempty','is not empty']],
+  num :[['eq','='],['ne','is not'],['gt','greater than'],['gte','at least'],['lt','less than'],['lte','at most'],['between','between'],['empty','is empty'],['nempty','is not empty']],
+  date:[['on','on'],['before','before'],['after','after'],['between','between'],['empty','is empty'],['nempty','is not empty']],
+  bool:[['true','is true'],['false','is false'],['empty','is empty'],['nempty','is not empty']]
+};
+var NEEDS2={between:1};
+var NEEDS0={empty:1,nempty:1,'true':1,'false':1};
+
+function colKind(t,name){
+  var c=(t.columns||[]).filter(function(x){return x.name===name;})[0];
+  return kindOf(c&&c.type);
+}
+function isEmptyVal(v){ return v==null || v===''; }
+function asNum(v){ if(isEmptyVal(v)) return null; var n=Number(v); return isNaN(n)?null:n; }
+function asDate(v){ if(isEmptyVal(v)) return null; var d=Date.parse(String(v)); return isNaN(d)?null:d; }
+function asBool(v){ if(v===true||v===false) return v; var s=String(v).toLowerCase(); return s==='true'?true:s==='false'?false:null; }
+
+function passFilter(val, kind, f){
+  if(f.op==='empty')  return isEmptyVal(val);
+  if(f.op==='nempty') return !isEmptyVal(val);
+  if(kind==='bool'){ var b=asBool(val); return f.op==='true' ? b===true : b===false; }
+  if(kind==='num'){
+    var n=asNum(val); if(n===null) return false;
+    var a=Number(f.v1), b2=Number(f.v2);
+    if(f.op==='between') return n>=Math.min(a,b2) && n<=Math.max(a,b2);
+    if(f.op==='eq') return n===a;
+    if(f.op==='ne') return n!==a;
+    if(f.op==='gt') return n>a;
+    if(f.op==='gte') return n>=a;
+    if(f.op==='lt') return n<a;
+    if(f.op==='lte') return n<=a;
+    return true;
+  }
+  if(kind==='date'){
+    var d=asDate(val); if(d===null) return false;
+    var x=asDate(f.v1), y=asDate(f.v2);
+    if(f.op==='on'){ if(x===null) return true;
+      return new Date(d).toISOString().slice(0,10)===new Date(x).toISOString().slice(0,10); }
+    if(f.op==='before') return x!==null && d<x;
+    if(f.op==='after')  return x!==null && d>x;
+    if(f.op==='between') return x!==null && y!==null && d>=Math.min(x,y) && d<=Math.max(x,y);
+    return true;
+  }
+  var s=String(val==null?'':val).toLowerCase(), q=String(f.v1==null?'':f.v1).toLowerCase();
+  if(f.op==='contains')  return s.indexOf(q)>=0;
+  if(f.op==='ncontains') return s.indexOf(q)<0;
+  if(f.op==='eq')        return s===q;
+  if(f.op==='starts')    return s.lastIndexOf(q,0)===0;
+  if(f.op==='ends')      return q==='' || s.slice(-q.length)===q;
+  return true;
+}
+
+/* The rows currently on screen: free-text search, then every filter (ANDed),
+   then the sort. Row identity is the index into t.preview so that a selection
+   survives a re-sort. */
+function viewRows(t){
+  var cols=t.preview_cols||[], all=t.preview||[];
+  var idx=cols.reduce(function(m,c,i){ m[c]=i; return m; },{});
+  var out=[];
+  for(var i=0;i<all.length;i++){
+    var r=all[i];
+    if(GRIDQ){
+      var hit=false;
+      for(var j=0;j<r.length;j++){ if(String(r[j]==null?'':r[j]).toLowerCase().indexOf(GRIDQ)>=0){ hit=true; break; } }
+      if(!hit) continue;
+    }
+    var ok=true;
+    for(var k=0;k<FILTERS.length;k++){
+      var f=FILTERS[k], ci=idx[f.col];
+      if(ci===undefined) continue;
+      if(!passFilter(r[ci], colKind(t,f.col), f)){ ok=false; break; }
+    }
+    if(ok) out.push({i:i, r:r});
+  }
+  if(SORT.col!=null && SORT.dir){
+    var ci2=idx[SORT.col], kind=colKind(t,SORT.col), dir=SORT.dir;
+    out.sort(function(a,b){
+      var va=a.r[ci2], vb=b.r[ci2];
+      var ea=isEmptyVal(va), eb=isEmptyVal(vb);
+      if(ea&&eb) return 0;
+      if(ea) return 1;              // empties sink, whichever direction
+      if(eb) return -1;
+      var x,y;
+      if(kind==='num'){ x=asNum(va); y=asNum(vb); }
+      else if(kind==='date'){ x=asDate(va); y=asDate(vb); }
+      else if(kind==='bool'){ x=asBool(va)?1:0; y=asBool(vb)?1:0; }
+      else { x=String(va).toLowerCase(); y=String(vb).toLowerCase();
+             return dir*x.localeCompare(y, undefined, {numeric:true}); }
+      return x<y?-dir:x>y?dir:0;
+    });
+  }
+  return out;
+}
+
 function previewHTML(t){
-  const cols=t.preview_cols||[];const rows=t.preview||[];
+  var cols=t.preview_cols||[], rows=t.preview||[];
   if(!rows.length) return '<div class="panel"><div class="empty">No preview rows in snapshot for this table.</div></div>';
-  const types={};(t.columns||[]).forEach(c=>types[c.name]=c.type);
-  const head=cols.map(c=>`<th>${esc(c)}<div class="ty">${esc(types[c]||'')}</div></th>`).join('');
-  const body=rows.map(r=>'<tr>'+r.map(v=>`<td title="${esc(v)}">${esc(v)}</td>`).join('')+'</tr>').join('');
-  return `<div class="panel">
-    <div class="searchrow"><input id="gridSearch" placeholder="Filter these ${rows.length} preview rows…">
-      <span class="cnt" id="gridCnt">${rows.length} rows</span></div>
-    <div class="gridwrap"><table class="grid"><thead><tr>${head}</tr></thead><tbody id="gridBody">${body}</tbody></table></div>
-    <div style="padding:10px 13px;font-size:10.5px;color:var(--t3)">Showing the most recent ${rows.length} rows from the nightly snapshot. Full-table browsing runs against the live pipeline; use Fetch live to refresh.</div>
-  </div>`;
+  return '<div class="panel">'
+    + '<div class="gtools">'
+      + '<input class="q" id="gridSearch" placeholder="Search all ' + cols.length + ' columns…" value="' + esc(GRIDQ) + '">'
+      + '<button class="gbtn" onclick="toggleBuilder()" id="fAddBtn">+ Add column filter</button>'
+      + '<button class="gbtn" onclick="clearGrid()">Reset</button>'
+      + '<button class="gbtn on" onclick="openExport()">&#8681; Download</button>'
+      + '<span class="gcnt" id="gridCnt"></span>'
+    + '</div>'
+    + '<div class="fbar" id="fBar"></div>'
+    + '<div class="fbuild" id="fBuild" style="display:none"></div>'
+    + '<div class="gridwrap"><table class="grid"><thead><tr id="gridHead"></tr></thead><tbody id="gridBody"></tbody></table></div>'
+    + '<div id="gridEmpty" style="display:none"></div>'
+    + '<div style="padding:10px 13px;font-size:10.5px;color:var(--t3)" id="gridFoot"></div>'
+  + '</div>';
 }
-function filterGrid(t){
-  const q=(document.getElementById('gridSearch').value||'').toLowerCase();
-  const rows=t.preview||[];let shown=0;
-  const body=rows.filter(r=>!q||r.some(v=>String(v==null?'':v).toLowerCase().includes(q)))
-    .map(r=>{shown++;return '<tr>'+r.map(v=>`<td title="${esc(v)}">${esc(v)}</td>`).join('')+'</tr>';}).join('');
-  document.getElementById('gridBody').innerHTML=body;
-  document.getElementById('gridCnt').textContent=shown+' / '+rows.length+' rows';
+
+function paintGrid(){
+  var t=tableById(CUR); if(!t) return;
+  var cols=t.preview_cols||[], all=t.preview||[], view=viewRows(t);
+  var types={}; (t.columns||[]).forEach(function(c){ types[c.name]=c.type; });
+
+  var allSel = view.length>0 && view.every(function(o){ return SELECTED.has(o.i); });
+  var head='<th class="selcol"><input type="checkbox" id="selAll" ' + (allSel?'checked':'') + ' onclick="toggleAll(this.checked)" title="Select every row shown"></th>';
+  head += cols.map(function(c){
+    var arrow = SORT.col===c ? '<span class="sarr">' + (SORT.dir>0?'&#9650;':'&#9660;') + '</span>' : '';
+    return '<th class="sortable" onclick="sortBy(' + JSON.stringify(c).replace(/"/g,'&quot;') + ')" title="Sort by ' + esc(c) + '">'
+      + esc(c) + arrow + '<div class="ty">' + esc(types[c]||'') + '</div></th>';
+  }).join('');
+  document.getElementById('gridHead').innerHTML=head;
+
+  document.getElementById('gridBody').innerHTML = view.map(function(o){
+    var chk = SELECTED.has(o.i);
+    return '<tr class="' + (chk?'sel':'') + '"><td class="selcol"><input type="checkbox" ' + (chk?'checked':'')
+      + ' onclick="toggleRow(' + o.i + ',this.checked)"></td>'
+      + o.r.map(function(v){ return '<td title="' + esc(v) + '">' + esc(v) + '</td>'; }).join('') + '</tr>';
+  }).join('');
+
+  /* The empty state lives outside the table on purpose. Inside it, a centred
+     message in a td spanning 31 columns is centred across the full scroll width
+     of the grid, which puts it several thousand pixels off the right of the
+     viewport: present in the DOM, readable to innerText, and invisible to the
+     person wondering why the screen went blank. */
+  var emptyEl=document.getElementById('gridEmpty');
+  if(view.length){ emptyEl.style.display='none'; }
+  else {
+    emptyEl.style.display='block';
+    emptyEl.innerHTML='<div class="empty">No rows match '
+      + (FILTERS.length ? ('these ' + FILTERS.length + ' filter' + (FILTERS.length>1?'s':'')) : 'this search')
+      + '.<br><button class="gbtn" style="margin-top:11px" onclick="clearGrid()">Clear and start again</button></div>';
+  }
+
+  document.getElementById('gridCnt').textContent =
+    view.length + ' of ' + all.length + ' rows' + (SELECTED.size ? '  ·  ' + SELECTED.size + ' selected' : '');
+  document.getElementById('gridFoot').textContent =
+    'These ' + all.length + ' rows are the snapshot preview. Filtering, sorting and selecting happen here in the browser; Download can also pull a larger, filtered extract straight from Redshift.';
+  renderChips();
 }
+
+function sortBy(c){
+  if(SORT.col!==c){ SORT={col:c,dir:1}; }
+  else if(SORT.dir===1){ SORT.dir=-1; }
+  else { SORT={col:null,dir:0}; }     // third click clears, so you can get back to load order
+  paintGrid();
+}
+function toggleRow(i,on){ if(on) SELECTED.add(i); else SELECTED.delete(i); paintGrid(); }
+function toggleAll(on){
+  var t=tableById(CUR); if(!t) return;
+  viewRows(t).forEach(function(o){ if(on) SELECTED.add(o.i); else SELECTED.delete(o.i); });
+  paintGrid();
+}
+function clearGrid(){
+  resetGrid();
+  var s=document.getElementById('gridSearch'); if(s) s.value='';
+  var b=document.getElementById('fBuild'); if(b) b.style.display='none';
+  paintGrid();
+}
+
+/* ---------- filter chips ---------- */
+function renderChips(){
+  var bar=document.getElementById('fBar'); if(!bar) return;
+  if(!FILTERS.length){ bar.innerHTML=''; return; }
+  bar.innerHTML=FILTERS.map(function(f,i){
+    var label=(OPS[f.kind].filter(function(o){return o[0]===f.op;})[0]||['',f.op])[1];
+    var val = NEEDS0[f.op] ? '' : (NEEDS2[f.op] ? ' <b>' + esc(f.v1) + '</b> and <b>' + esc(f.v2) + '</b>' : ' <b>' + esc(f.v1) + '</b>');
+    return '<span class="fchip"><em>' + esc(f.col) + '</em> ' + esc(label) + val
+      + '<button onclick="dropFilter(' + i + ')" title="Remove">&times;</button></span>';
+  }).join('');
+}
+function dropFilter(i){ FILTERS.splice(i,1); paintGrid(); }
+
+function toggleBuilder(){
+  var b=document.getElementById('fBuild');
+  if(b.style.display==='none'){ b.style.display='flex'; renderBuilder(); } else { b.style.display='none'; }
+}
+function renderBuilder(){
+  var t=tableById(CUR); if(!t) return;
+  var cols=t.preview_cols||[];
+  var sel=document.getElementById('fCol');
+  var col=sel?sel.value:cols[0];
+  if(cols.indexOf(col)<0) col=cols[0];
+  var kind=colKind(t,col);
+  var opSel=document.getElementById('fOp');
+  var op=(opSel && opSel.dataset.forCol===col) ? opSel.value : OPS[kind][0][0];
+  if(!OPS[kind].some(function(o){ return o[0]===op; })) op=OPS[kind][0][0];
+
+  var inputType = kind==='num' ? 'number' : kind==='date' ? 'date' : 'text';
+  var v1 = NEEDS0[op] ? '' : '<input id="fV1" type="' + inputType + '" placeholder="value">';
+  var v2 = NEEDS2[op] ? '<input id="fV2" type="' + inputType + '" placeholder="and">' : '';
+
+  document.getElementById('fBuild').innerHTML =
+      '<select id="fCol" onchange="renderBuilder()">'
+    + cols.map(function(c){ return '<option value="' + esc(c) + '"' + (c===col?' selected':'') + '>' + esc(c) + '</option>'; }).join('')
+    + '</select>'
+    + '<select id="fOp" data-for-col="' + esc(col) + '" onchange="renderBuilder()">'
+    + OPS[kind].map(function(o){ return '<option value="' + o[0] + '"' + (o[0]===op?' selected':'') + '>' + o[1] + '</option>'; }).join('')
+    + '</select>' + v1 + v2
+    + '<button class="gbtn on" onclick="addFilter()">Apply</button>'
+    + '<span style="font-size:11px;color:var(--t3)">' + esc(col) + ' is <b style="color:var(--indT)">' + kind + '</b></span>';
+  var o=document.getElementById('fOp'); if(o) o.dataset.forCol=col;
+}
+function addFilter(){
+  var t=tableById(CUR); if(!t) return;
+  var col=document.getElementById('fCol').value, op=document.getElementById('fOp').value;
+  var kind=colKind(t,col);
+  var v1el=document.getElementById('fV1'), v2el=document.getElementById('fV2');
+  var v1=v1el?v1el.value:'', v2=v2el?v2el.value:'';
+  if(!NEEDS0[op] && v1===''){ toast('Enter a value to filter on.'); return; }
+  if(NEEDS2[op] && v2===''){ toast('Enter both ends of the range.'); return; }
+  FILTERS.push({col:col, op:op, kind:kind, v1:v1, v2:v2});
+  document.getElementById('fBuild').style.display='none';
+  paintGrid();
+}
+
+/* ---------- export ---------- */
+function openExport(){
+  var t=tableById(CUR); if(!t) return;
+  var view=viewRows(t), all=(t.preview||[]).length;
+  var sc=document.getElementById('expScope');
+  sc.innerHTML =
+      '<option value="view">Rows shown after filtering (' + view.length + ')</option>'
+    + '<option value="sel"' + (SELECTED.size?'':' disabled') + '>Only the rows I ticked (' + SELECTED.size + ')</option>'
+    + '<option value="all">Every preview row (' + all + ')</option>'
+    + '<option value="live">Pull a bigger extract from Redshift</option>';
+  document.getElementById('exp-modal').classList.add('on');
+  expScopeChanged();
+}
+function closeExport(){ document.getElementById('exp-modal').classList.remove('on'); }
+/* Sorting in the warehouse is the expensive part. Measured on production:
+   filtering odl.dim_comments takes about a second, but ORDER BY on the same
+   2.7M rows takes nineteen, which is inside the query service's twenty second
+   ceiling only when nothing else is happening. So the cost is stated before the
+   click rather than discovered as a failure after it. */
+var BIG_TABLE = 250000;
+function expScopeChanged(){
+  var live=document.getElementById('expScope').value==='live';
+  var t=tableById(CUR)||{};
+  document.getElementById('expLiveWrap').style.display=live?'block':'none';
+  var note;
+  if(!live){
+    note='Comes from the snapshot already loaded in your browser, so it downloads instantly and holds at most the '
+       + ((t.preview||[]).length) + ' preview rows.';
+  } else {
+    note='Runs a SELECT against Redshift with the same filters and sort, so you get real rows rather than the '
+       + ((t.preview||[]).length) + ' held in the snapshot. Capped at 5,000 rows by the query service, and it needs the deployed site.';
+    if(SORT.col && SORT.dir && (t.rows||0) > BIG_TABLE){
+      note += '<br><br><b style="color:var(--warnT)">This table has ' + fmtN(t.rows) + ' rows and you have it sorted by '
+           + esc(SORT.col) + '.</b> Sorting that many rows in the warehouse can exceed the 20 second query limit. '
+           + 'If it does, you will be offered the same extract without the sort.';
+    }
+  }
+  document.getElementById('expNote').innerHTML=note;
+}
+
+function toCSV(cols, rows, sep){
+  var q=function(v){
+    var s=v==null?'':String(v);
+    return (s.indexOf(sep)>=0||s.indexOf('"')>=0||/[\r\n]/.test(s)) ? '"'+s.replace(/"/g,'""')+'"' : s;
+  };
+  return [cols.map(q).join(sep)].concat(rows.map(function(r){ return r.map(q).join(sep); })).join('\n');
+}
+function toObjects(cols, rows){
+  return rows.map(function(r){ var o={}; cols.forEach(function(c,i){ o[c]=r[i]; }); return o; });
+}
+function download(text, mime, name){
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([text],{type:mime}));
+  a.download=name; a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1500);
+}
+function serialise(cols, rows, fmt, base){
+  if(fmt==='csv')    return [toCSV(cols,rows,','),  'text/csv', base+'.csv'];
+  if(fmt==='tsv')    return [toCSV(cols,rows,'\t'), 'text/tab-separated-values', base+'.tsv'];
+  if(fmt==='ndjson') return [toObjects(cols,rows).map(function(o){ return JSON.stringify(o); }).join('\n'), 'application/x-ndjson', base+'.ndjson'];
+  return [JSON.stringify(toObjects(cols,rows), null, 2), 'application/json', base+'.json'];
+}
+
+/* Push the filters down to SQL so a live extract means the same thing the screen
+   shows. Identifiers are checked against the real column list and literals are
+   escaped, because this builds a statement rather than binding parameters. */
+function sqlLiteral(v){ return "'" + String(v==null?'':v).replace(/'/g, "''") + "'"; }
+function sqlFor(t, limit, noSort){
+  var cols=t.preview_cols||[];
+  var known={}; cols.forEach(function(c){ known[c]=1; });
+  var where=[];
+  FILTERS.forEach(function(f){
+    if(!known[f.col]) return;
+    var c='"' + f.col.replace(/"/g,'""') + '"', k=f.kind;
+    var num=function(v){ var n=Number(v); return isNaN(n)?null:String(n); };
+    if(f.op==='empty'){ where.push(c+' IS NULL'); return; }
+    if(f.op==='nempty'){ where.push(c+' IS NOT NULL'); return; }
+    if(k==='bool'){ where.push(c+(f.op==='true'?' IS TRUE':' IS FALSE')); return; }
+    if(k==='num'){
+      var a=num(f.v1), b=num(f.v2);
+      if(a===null) return;
+      if(f.op==='between'){ if(b!==null) where.push(c+' BETWEEN '+Math.min(a,b)+' AND '+Math.max(a,b)); return; }
+      var opm={eq:'=',ne:'<>',gt:'>',gte:'>=',lt:'<',lte:'<='}[f.op];
+      if(opm) where.push(c+' '+opm+' '+a);
+      return;
+    }
+    if(k==='date'){
+      if(f.op==='on')     where.push(c+'::date = '+sqlLiteral(f.v1)+'::date');
+      if(f.op==='before') where.push(c+' < '+sqlLiteral(f.v1));
+      if(f.op==='after')  where.push(c+' > '+sqlLiteral(f.v1));
+      if(f.op==='between'&&f.v2) where.push(c+' BETWEEN '+sqlLiteral(f.v1)+' AND '+sqlLiteral(f.v2));
+      return;
+    }
+    var v=String(f.v1==null?'':f.v1);
+    if(f.op==='contains')  where.push(c+'::varchar ILIKE '+sqlLiteral('%'+v+'%'));
+    if(f.op==='ncontains') where.push(c+'::varchar NOT ILIKE '+sqlLiteral('%'+v+'%'));
+    if(f.op==='eq')        where.push(c+'::varchar = '+sqlLiteral(v));
+    if(f.op==='starts')    where.push(c+'::varchar ILIKE '+sqlLiteral(v+'%'));
+    if(f.op==='ends')      where.push(c+'::varchar ILIKE '+sqlLiteral('%'+v));
+  });
+  var sql='SELECT * FROM '+t.schema+'.'+t.table;
+  if(where.length) sql+='\nWHERE '+where.join('\n  AND ');
+  if(!noSort && SORT.col && SORT.dir && known[SORT.col]) sql+='\nORDER BY "'+SORT.col.replace(/"/g,'""')+'" '+(SORT.dir>0?'ASC':'DESC');
+  sql+='\nLIMIT '+limit;
+  return sql;
+}
+
+function runExport(){
+  var t=tableById(CUR); if(!t) return;
+  var scope=document.getElementById('expScope').value;
+  var fmt=document.getElementById('expFmt').value;
+  var base=t.schema+'_'+t.table;
+  var cols=t.preview_cols||[];
+
+  if(scope!=='live'){
+    var rows = scope==='all' ? (t.preview||[])
+             : scope==='sel' ? (t.preview||[]).filter(function(_,i){ return SELECTED.has(i); })
+             : viewRows(t).map(function(o){ return o.r; });
+    if(!rows.length){ toast('No rows to download.'); return; }
+    var out=serialise(cols, rows, fmt, base);
+    download(out[0], out[1], out[2]);
+    closeExport(); toast(rows.length+' rows downloaded.');
+    return;
+  }
+
+  var limit=Math.max(1, Math.min(5000, parseInt(document.getElementById('expLimit').value||'5000',10)));
+  liveExport(t, limit, fmt, base, false);
+}
+
+function liveExport(t, limit, fmt, base, noSort){
+  var go=document.getElementById('exp-go');
+  go.disabled=true; go.textContent='Querying Redshift…';
+  fetch('/api/run-query',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sql:sqlFor(t,limit,noSort)})})
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      go.disabled=false; go.textContent='Download';
+      if(j.error){
+        var sorted = !noSort && SORT.col && SORT.dir;
+        if(sorted && /timeout|timed out|canceled|cancelled/i.test(j.error)){
+          /* Offer the unsorted extract rather than quietly running it: an
+             unsorted 5,000 rows is a different answer from the top 5,000 by
+             that column, and only the person asking can say if that will do. */
+          document.getElementById('expNote').innerHTML =
+              '<b style="color:var(--warnT)">Sorting ' + fmtN(t.rows||0) + ' rows by ' + esc(SORT.col)
+            + ' took longer than the 20 second limit.</b><br><br>The same filters without the sort will return, '
+            + 'but it gives you <b>any</b> ' + limit + ' matching rows rather than the top ' + limit + ' by '
+            + esc(SORT.col) + '. Sort the file after you download it if the order matters.'
+            + '<br><br><button class="gbtn on" onclick="liveExport(tableById(CUR),' + limit + ','
+            + JSON.stringify(fmt) + ',' + JSON.stringify(base) + ',true)">Download without the sort</button>';
+          return;
+        }
+        toast('Query failed: '+j.error);
+        return;
+      }
+      if(!j.rows.length){ toast('That query returned no rows.'); return; }
+      var lcols=j.columns, lrows=j.rows.map(function(o){ return lcols.map(function(c){ return o[c]; }); });
+      var out2=serialise(lcols, lrows, fmt, base+(noSort?'_live_unsorted':'_live'));
+      download(out2[0], out2[1], out2[2]);
+      closeExport();
+      toast(j.row_count+' rows downloaded from Redshift'+(noSort?', unsorted.':'.'));
+    })
+    .catch(function(e){
+      go.disabled=false; go.textContent='Download';
+      toast('Could not reach the query service. It only runs on the deployed site.');
+    });
+}
+
 function summaryHTML(t){
   const s=t.summaries||[];
   if(!s.length) return '<div class="panel"><div class="empty">No column summaries baked for this table.</div></div>';
@@ -310,7 +772,7 @@ async function fetchLive(){
     else {const e=await r.json().catch(()=>({}));res={ok:false,reason:e.message||('endpoint '+r.status)};}
   }catch(err){ res={ok:false,reason:'Endpoint unreachable.'}; }
   if(!res.ok){ lpShow(false);btn.disabled=false;btn.innerHTML=old;toast(res.reason);return; }
-  toast('Live run started — querying Redshift.');btn.innerHTML='&#9889; Running…';
+  toast('Live run started, querying Redshift.');btn.innerHTML='&#9889; Running…';
   const t0=Date.now();const stages=[[0,'Pipeline dispatched'],[.15,'Connecting to Redshift'],[.35,'Reading tables'],[.6,'Baking previews + summaries'],[.85,'Committing + deploying']];
   let tries=0;
   const tick=async()=>{
@@ -322,7 +784,7 @@ async function fetchLive(){
     if(el>15&&tries<60){tries++;const ok=await loadData();if(ok&&META.generated_at&&META.generated_at!==before){
       clearInterval(_timer);_timer=null;document.getElementById('lpBar').style.width='100%';
       setTimeout(()=>lpShow(false),1200);renderSidebar();renderMain();stampFreshness();
-      btn.disabled=false;btn.innerHTML=old;toast('Live data in — snapshot updated.');return;}}
+      btn.disabled=false;btn.innerHTML=old;toast('Live data in. Snapshot updated.');return;}}
     if(el>EST_SECONDS+120){clearInterval(_timer);_timer=null;lpShow(false);btn.disabled=false;btn.innerHTML=old;toast('Run dispatched; new data will appear once the pipeline commits.');}
   };
   _timer=setInterval(tick,2500);tick();
