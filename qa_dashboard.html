@@ -145,6 +145,42 @@
   .two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
   #chartHost{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;overflow:auto}
 
+  /* ===== Custom tab: charts the team published ===== */
+  .tcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin-bottom:14px}
+  .tchead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+  .tctitle{font-size:15.5px;font-weight:800;color:var(--ink);line-height:1.3}
+  .tcmeta{font-size:12px;color:var(--mut);margin-top:3px}
+  .tcmeta b{color:var(--teal);font-weight:700}
+  .tcacts{display:flex;gap:6px;flex-shrink:0}
+  .tcacts button{font-family:inherit;font-size:12px;font-weight:700;padding:5px 11px;border-radius:8px;
+    border:1px solid var(--line);background:transparent;color:var(--mut2);cursor:pointer}
+  .tcacts button:hover{border-color:var(--teal);color:var(--teal)}
+  .tcacts button.del:hover{border-color:var(--red);color:var(--red)}
+  .tcnote{font-size:13px;color:var(--mut2);line-height:1.6;margin-top:10px;padding:9px 12px;
+    background:rgba(0,214,174,.06);border-left:2px solid rgba(0,214,174,.45);border-radius:0 8px 8px 0;white-space:pre-wrap}
+  .tcchart{margin-top:12px}
+  .tcsql{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--mut);
+    background:#070a11;border:1px solid var(--line);border-radius:9px;padding:9px 11px;margin-top:10px;
+    white-space:pre;overflow:auto;max-height:120px}
+
+  /* publish dialog */
+  #pub-modal{display:none;position:fixed;inset:0;z-index:99998;align-items:center;justify-content:center}
+  #pub-modal.open{display:flex}
+  #pub-back{position:absolute;inset:0;background:rgba(2,5,12,.72);backdrop-filter:blur(4px)}
+  #pub-card{position:relative;z-index:1;background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:22px 24px;max-width:470px;width:92%;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+  #pub-card h3{font-size:17px;font-weight:800;margin-bottom:5px}
+  #pub-card p.sub{font-size:12.5px;color:var(--mut);line-height:1.55;margin-bottom:15px}
+  #pub-card label{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:11px 0 4px}
+  #pub-card input,#pub-card textarea{width:100%;font-family:inherit;font-size:13px;padding:9px 11px;border-radius:9px;
+    border:1px solid var(--line);background:var(--panel2);color:var(--ink);outline:none;resize:vertical}
+  #pub-card input:focus,#pub-card textarea:focus{border-color:var(--teal)}
+  #pub-btns{display:flex;gap:8px;margin-top:18px}
+  #pub-btns button{flex:1;padding:10px;border-radius:10px;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer}
+  #pub-cancel{background:transparent;border:1px solid var(--line);color:var(--mut2)}
+  #pub-ok{background:rgba(0,214,174,.16);border:1px solid var(--teal);color:var(--teal)}
+  #pub-err{font-size:12.5px;color:var(--red);margin-top:10px;line-height:1.5}
+
 /* ===== shared site header (sn-*) ===== */
 nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06);font-family:'DM Sans','Outfit',sans-serif}
 nav.site-nav *{box-sizing:border-box}
@@ -228,6 +264,7 @@ body{padding-top:52px!important}
     <button class="tab on" data-pane="p-acc" onclick="showTab('p-acc')">Accuracy</button>
     <button class="tab" data-pane="p-dq" onclick="showTab('p-dq')">Data quality</button>
     <button class="tab" data-pane="p-sql" onclick="showTab('p-sql')">Build a chart (SQL)</button>
+    <button class="tab" data-pane="p-custom" onclick="showTab('p-custom')">Custom<span id="tabCount" style="opacity:.65"></span></button>
   </div>
 
   <!-- ============ ACCURACY ============ -->
@@ -308,7 +345,8 @@ body{padding-top:52px!important}
             <button class="on" id="v-chart" onclick="setView('chart')">Chart</button>
             <button id="v-table" onclick="setView('table')">Table</button>
           </div>
-          <button class="btn ghost sm" onclick="saveChart()">Save chart</button>
+          <button class="btn ghost sm" onclick="openPublish()">Publish to Custom tab</button>
+          <button class="btn ghost sm" onclick="saveChart()">Save on this device</button>
           <button class="btn ghost sm" onclick="downloadCSV()">CSV</button>
           <button class="btn ghost sm" onclick="downloadSVG()">SVG</button>
           <span id="qmeta"></span>
@@ -371,6 +409,37 @@ body{padding-top:52px!important}
       </div>
     </div>
   </div>
+
+  <!-- ============ CUSTOM (team charts) ============ -->
+  <div class="pane" id="p-custom">
+    <h2 class="sec">Charts the team published</h2>
+    <p class="hint">Anything anyone saves from the SQL tab lands here for everybody, with the title and note they wrote. Each card re-runs its query when you open this tab, so the numbers are current rather than a picture of the day it was made. <b>Names are self-declared</b>: the admin sign-in is not verified, so treat the author as "who to ask about this", not as proof of who wrote it.</p>
+    <div class="row" style="margin:0 0 14px">
+      <button class="btn sm" onclick="loadTeamCharts(true)" id="teamReload">Reload</button>
+      <span id="teamMsg" style="font-size:12.5px;color:var(--mut)"></span>
+    </div>
+    <div id="teamList"><div class="empty">Loading&hellip;</div></div>
+  </div>
+</div>
+
+<!-- publish dialog -->
+<div id="pub-modal">
+  <div id="pub-back" onclick="closePublish()"></div>
+  <div id="pub-card">
+    <h3>Publish to the Custom tab</h3>
+    <p class="sub">Everyone with access to this dashboard will see the chart, your note and your name. The query is re-run each time somebody opens the tab.</p>
+    <label for="pubTitle">Title</label>
+    <input id="pubTitle" maxlength="120" placeholder="What does this chart show?">
+    <label for="pubNote">Note (optional)</label>
+    <textarea id="pubNote" rows="3" maxlength="600" placeholder="Why it matters, what to watch for, anything a reader should know."></textarea>
+    <label for="pubAuthor">Your name</label>
+    <input id="pubAuthor" maxlength="60" placeholder="who to ask about this chart">
+    <div id="pub-err"></div>
+    <div id="pub-btns">
+      <button id="pub-cancel" onclick="closePublish()">Cancel</button>
+      <button id="pub-ok" onclick="doPublish()">Publish</button>
+    </div>
+  </div>
 </div>
 
 <footer class="af-footer">
@@ -424,6 +493,7 @@ function showTab(id){
   for(i=0;i<tabs.length;i++) tabs[i].classList.toggle('on', tabs[i].getAttribute('data-pane')===id);
   try{ localStorage.setItem('artemis_qa_tab', id); }catch(e){}
   if(id==='p-sql') onSqlTabOpen();
+  if(id==='p-custom') onCustomTabOpen();
 }
 /* Deep merge for live fragments over the snapshot. Objects merge key by key so a
    section can send only what it computed; arrays replace wholesale because a
@@ -1322,10 +1392,7 @@ function renderResult(){
     if(!P){
       chartHost.innerHTML='<div class="empty">Nothing to plot yet. Tick at least one value column on the right, or switch to Table.</div>';
     } else {
-      chartHost.innerHTML = (CFG.type==='pie'||CFG.type==='donut') ? pieSVG(P)
-                          : CFG.type==='kpi'  ? kpiSVG(P)
-                          : CFG.type==='hbar' ? hbarSVG(P)
-                          : cartSVG(P);
+      chartHost.innerHTML = svgFor(P);
     }
   } else {
     chartHost.style.display='none';
@@ -1341,6 +1408,29 @@ function renderResult(){
     +'</table></div>';
   if(rows.length>cap) h+='<div class="hint" style="margin-top:8px">Showing the first '+cap+' of '+rows.length+' rows. Use CSV for the rest.</div>';
   tableHost.innerHTML=h;
+}
+
+/* Which renderer the current CFG calls for. */
+function svgFor(P){
+  return (CFG.type==='pie'||CFG.type==='donut') ? pieSVG(P)
+       : CFG.type==='kpi'  ? kpiSVG(P)
+       : CFG.type==='hbar' ? hbarSVG(P)
+       : cartSVG(P);
+}
+
+/* Draw somebody else's chart. Every renderer reads the CFG and RESULT globals, so
+   rather than thread a config through nine functions the globals are swapped for
+   the duration and restored in a finally. All of this is synchronous, so nothing
+   else can observe the swap. */
+function renderWith(cfg, result){
+  var keepCfg=CFG, keepRes=RESULT;
+  try{
+    CFG=cfg; RESULT=result;
+    var P=prepData();
+    return P ? svgFor(P) : '<div class="empty">This chart has no plottable columns any more. The query may have changed shape.</div>';
+  } finally {
+    CFG=keepCfg; RESULT=keepRes;
+  }
 }
 
 /* ---------- exports ---------- */
@@ -1418,6 +1508,177 @@ function renderRecent(){
   }).join('') : '<div class="tiny">Queries you run show up here.</div>';
 }
 function loadRecent(i){ var a=getRecent(); if(a[i]) setSQL(a[i]); }
+
+/* =========================================================================
+   CUSTOM TAB: charts the team published
+   ========================================================================= */
+var TEAM=[], teamLoaded=false;
+
+/* Whatever the browser session says. Not verified, and the tab says as much. */
+function sessionName(){
+  try{
+    var s=localStorage.getItem('artemis_session')||localStorage.getItem('artemis_sprint_session')||localStorage.getItem('artemis_app_session');
+    if(s){ var u=JSON.parse(s); return u.name||u.username||''; }
+  }catch(e){}
+  try{ return localStorage.getItem('artemis_viewer_name')||''; }catch(e){ return ''; }
+}
+
+function onCustomTabOpen(){ if(!teamLoaded){ teamLoaded=true; loadTeamCharts(false); } }
+
+function loadTeamCharts(){
+  var msg=document.getElementById('teamMsg'), btn=document.getElementById('teamReload');
+  btn.disabled=true; msg.textContent='Fetching the published charts…';
+  fetch('/api/charts',{cache:'no-store'})
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      btn.disabled=false;
+      if(j.error){
+        msg.innerHTML='<b style="color:var(--red)">Could not load.</b> '+esc(j.message||j.error);
+        document.getElementById('teamList').innerHTML='<div class="empty">Nothing to show.</div>';
+        return;
+      }
+      TEAM=j.charts||[];
+      msg.textContent='';
+      renderTeamCharts();
+    })
+    .catch(function(e){
+      btn.disabled=false;
+      msg.innerHTML='<b style="color:var(--red)">Could not reach the chart store.</b> This runs through the Netlify function at <span class="mono">/api/charts</span>, so it needs the deployed site. ('+esc(e.message)+')';
+      document.getElementById('teamList').innerHTML='';
+    });
+}
+
+function renderTeamCharts(){
+  var el=document.getElementById('teamList');
+  document.getElementById('tabCount').textContent = TEAM.length ? ' ('+TEAM.length+')' : '';
+  if(!TEAM.length){
+    el.innerHTML='<div class="empty">Nothing published yet. Build something on the <b>Build a chart (SQL)</b> tab and press <b>Publish to Custom tab</b>.</div>';
+    return;
+  }
+  el.innerHTML=TEAM.map(function(c){
+    var when=new Date(c.created_at);
+    var stamp=isNaN(when)?'':when.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})
+      +' at '+when.toTimeString().slice(0,5);
+    return '<div class="tcard">'
+      +'<div class="tchead"><div>'
+        +'<div class="tctitle">'+esc(c.title)+'</div>'
+        +'<div class="tcmeta">by <b>'+esc(c.author)+'</b> · '+esc(stamp)+'</div>'
+      +'</div><div class="tcacts">'
+        +'<button onclick="openTeamChart('+JSON.stringify(c.id).replace(/"/g,'&quot;')+')">Open in editor</button>'
+        +'<button class="del" onclick="deleteTeamChart('+JSON.stringify(c.id).replace(/"/g,'&quot;')+')">Delete</button>'
+      +'</div></div>'
+      +(c.note?'<div class="tcnote">'+esc(c.note)+'</div>':'')
+      +'<div class="tcchart" id="tcc-'+esc(c.id)+'"><div class="empty">Running the query…</div></div>'
+      +'<details style="margin-top:10px"><summary style="font-size:12px;color:var(--mut);cursor:pointer">Show the query</summary>'
+        +'<div class="tcsql">'+esc(c.sql)+'</div></details>'
+      +'</div>';
+  }).join('');
+  runTeamCharts();
+}
+
+/* Two at a time. Redshift queues concurrent statements from the same user, and a
+   tab holding a dozen charts firing at once is exactly how the live refresh
+   timed out the first time round. */
+function runTeamCharts(){
+  var i=0, width=Math.min(2, TEAM.length);
+  function next(){
+    if(i>=TEAM.length) return Promise.resolve();
+    var c=TEAM[i++];
+    return fetch('/api/run-query',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sql:c.sql})})
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        var host=document.getElementById('tcc-'+c.id);
+        if(!host) return;
+        if(j.error){ host.innerHTML='<div class="err"><b>This chart no longer runs.</b><br>'+esc(j.error)+'</div>'; return; }
+        if(!j.rows.length){ host.innerHTML='<div class="empty">The query returned no rows.</div>'; return; }
+        host.innerHTML='<div class="card">'+renderWith(mergeCfg(c.cfg), j)+'</div>'
+          +'<div style="font-size:11.5px;color:var(--mut);margin-top:6px;font-family:\'JetBrains Mono\',monospace">'
+          +j.row_count+' rows · '+j.ms+' ms</div>';
+      })
+      .catch(function(e){
+        var host=document.getElementById('tcc-'+c.id);
+        if(host) host.innerHTML='<div class="err">Could not run this chart. '+esc(e.message)+'</div>';
+      })
+      .then(next);
+  }
+  var lanes=[];
+  for(var k=0;k<width;k++) lanes.push(next());
+  return Promise.all(lanes);
+}
+
+/* A stored cfg may predate a setting, so start from the defaults and lay the
+   saved values on top rather than trusting the blob to be complete. */
+function mergeCfg(saved){
+  var base={type:'line',typeBtn:'line',x:null,ys:[],group:'',sort:'none',topn:0,dec:1,fmt:'auto',
+            title:'',xlab:'',ylab:'',ymin:'',ymax:'',stacked:false,legend:true,grid:true,labels:false,palette:0};
+  return merge(base, saved||{});
+}
+
+function openTeamChart(id){
+  var c=TEAM.filter(function(x){ return x.id===id; })[0];
+  if(!c) return;
+  CFG=mergeCfg(c.cfg);
+  showTab('p-sql');
+  setSQL(c.sql);
+  applyCfgToForm();
+  runSQL();
+}
+
+function deleteTeamChart(id){
+  var c=TEAM.filter(function(x){ return x.id===id; })[0];
+  if(!c) return;
+  if(!confirm('Delete "'+c.title+'" from the Custom tab? Everyone loses it.')) return;
+  fetch('/api/charts?id='+encodeURIComponent(id),{method:'DELETE'})
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if(j.error){ alert('Could not delete: '+(j.message||j.error)); return; }
+      TEAM=TEAM.filter(function(x){ return x.id!==id; });
+      renderTeamCharts();
+    })
+    .catch(function(e){ alert('Could not delete: '+e.message); });
+}
+
+/* ---------- publish ---------- */
+function openPublish(){
+  if(!RESULT){ alert('Run a query first, then publish what you see.'); return; }
+  document.getElementById('pubTitle').value=CFG.title||'';
+  document.getElementById('pubNote').value='';
+  document.getElementById('pubAuthor').value=sessionName();
+  document.getElementById('pub-err').textContent='';
+  document.getElementById('pub-modal').classList.add('open');
+  document.getElementById('pubTitle').focus();
+}
+function closePublish(){ document.getElementById('pub-modal').classList.remove('open'); }
+
+function doPublish(){
+  var title=document.getElementById('pubTitle').value.trim();
+  var err=document.getElementById('pub-err'), ok=document.getElementById('pub-ok');
+  if(!title){ err.textContent='Give it a title so people know what they are looking at.'; return; }
+  ok.disabled=true; ok.textContent='Publishing…'; err.textContent='';
+  fetch('/api/charts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    title:title,
+    note:document.getElementById('pubNote').value,
+    author:document.getElementById('pubAuthor').value,
+    sql:document.getElementById('sql').value,
+    cfg:CFG
+  })})
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      ok.disabled=false; ok.textContent='Publish';
+      if(j.error){ err.textContent=j.message||j.error; return; }
+      closePublish();
+      /* Re-fetch rather than unshift onto TEAM. Publishing usually happens from
+         the SQL tab, where the team list has never been loaded, so appending to
+         it would show the new chart alone and silently hide everyone else's. */
+      teamLoaded=true;
+      showTab('p-custom');
+      loadTeamCharts();
+    })
+    .catch(function(e){
+      ok.disabled=false; ok.textContent='Publish';
+      err.textContent='Could not reach the chart store: '+e.message;
+    });
+}
 
 /* ---------- boot ---------- */
 renderSaved(); renderRecent();
