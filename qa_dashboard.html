@@ -484,17 +484,20 @@ function render(){
 }
 
 /* ---------- live refresh ----------
-   Three sections in parallel. Each is its own Netlify invocation, so each gets
-   its own time budget and a slow one cannot starve the others. Whatever comes
-   back is merged over the snapshot; whatever does not simply keeps showing the
-   snapshot value, which is why a partial refresh is still useful. */
+   Two sections in parallel: one asks whether the models are still accurate, the
+   other whether the data arrived. Each is its own Netlify invocation with its own
+   time budget. Two rather than more because concurrent connections queue behind
+   each other in Redshift, and the queue wait, not the query, is what times out.
+   Whatever comes back is merged over the snapshot; whatever does not keeps showing
+   the snapshot value, which is why a partial refresh is still worth having. */
+var LIVE_SECTIONS=['models','data'];
 function refreshLive(){
   var btn=document.getElementById('liveBtn'), msg=document.getElementById('refreshMsg');
   btn.disabled=true; btn.innerHTML='Querying Redshift&hellip;';
-  msg.innerHTML='Running the accuracy, trend and arrival queries&hellip;';
+  msg.innerHTML='Asking Redshift about the models and about the loads&hellip;';
   if(!M) M={tabs:{},totals:{}};
   var got=0, problems=[];
-  Promise.all(['core','trends','arrival'].map(function(s){
+  Promise.all(LIVE_SECTIONS.map(function(s){
     return fetch('/api/live-metrics?section='+s,{cache:'no-store'})
       .then(function(r){ return r.json(); })
       .then(function(j){
@@ -512,9 +515,9 @@ function refreshLive(){
     }
     LIVE_AT=new Date(); render();
     msg.innerHTML = problems.length
-      ? '<b style="color:var(--amber)">'+got+' of 3 sections live.</b> '+problems.length+' quer'+(problems.length===1?'y':'ies')
+      ? '<b style="color:var(--amber)">'+got+' of '+LIVE_SECTIONS.length+' sections live.</b> '+problems.length+' quer'+(problems.length===1?'y':'ies')
         +' could not run, so those numbers are still from the snapshot: '+esc(problems.slice(0,2).join(' · '))
-      : '<b style="color:var(--green)">Live.</b> All three sections came straight from Redshift.';
+      : '<b style="color:var(--green)">Live.</b> Everything on this screen came straight from Redshift.';
   });
 }
 
