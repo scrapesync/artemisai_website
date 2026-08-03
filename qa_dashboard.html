@@ -413,9 +413,10 @@ body{padding-top:52px!important}
   <!-- ============ CUSTOM (team charts) ============ -->
   <div class="pane" id="p-custom">
     <h2 class="sec">Charts the team published</h2>
-    <p class="hint">Anything anyone saves from the SQL tab lands here for everybody, with the title and note they wrote. Each card re-runs its query when you open this tab, so the numbers are current rather than a picture of the day it was made. <b>Names are self-declared</b>: the admin sign-in is not verified, so treat the author as "who to ask about this", not as proof of who wrote it.</p>
+    <p class="hint">Anything anyone saves from the SQL tab lands here for everybody, with the title and note they wrote. Results are <b>cached and shared</b>, so opening this tab costs Redshift nothing: you see the numbers from whenever somebody last refreshed, and each card says when that was. Refresh one card or all of them when you want current figures. <b>Names are self-declared</b>: the admin sign-in is not verified, so treat the author as "who to ask about this", not as proof of who wrote it.</p>
     <div class="row" style="margin:0 0 14px">
-      <button class="btn sm" onclick="loadTeamCharts(true)" id="teamReload">Reload</button>
+      <button class="btn sm" onclick="refreshAllCharts()" id="teamRefreshAll">&#8635; Refresh all from Redshift</button>
+      <button class="btn ghost sm" onclick="loadTeamCharts()" id="teamReload">Reload the list</button>
       <span id="teamMsg" style="font-size:12.5px;color:var(--mut)"></span>
     </div>
     <div id="teamList"><div class="empty">Loading&hellip;</div></div>
@@ -1554,7 +1555,21 @@ function loadTeamCharts(){
         JUST_PUBLISHED=null;
         msg.textContent='';
       }
-      renderTeamCharts();
+      /* Attach the cached results BEFORE the first render. Rendering first would
+         show every chart as never-run, and renderTeamCharts loads never-run
+         charts, so the tab would fire a Redshift query for all of them a moment
+         before the caches it already had landed. Reads by key do not go through
+         list(), so none of this waits on the listing lag or touches Redshift. */
+      msg.textContent=msg.textContent||'Loading the saved results…';
+      Promise.all(TEAM.map(function(c){
+        return fetch('/api/charts?part=cache&id='+encodeURIComponent(c.id),{cache:'no-store'})
+          .then(function(r){ return r.ok?r.json():null; })
+          .then(function(cj){ c._cache=(cj&&cj.cache)||null; })
+          .catch(function(){ c._cache=null; });
+      })).then(function(){
+        if(msg.textContent==='Loading the saved results…') msg.textContent='';
+        renderTeamCharts();
+      });
     })
     .catch(function(e){
       btn.disabled=false;
@@ -1579,11 +1594,12 @@ function renderTeamCharts(){
         +'<div class="tctitle">'+esc(c.title)+'</div>'
         +'<div class="tcmeta">by <b>'+esc(c.author)+'</b> · '+esc(stamp)+'</div>'
       +'</div><div class="tcacts">'
+        +'<button onclick="refreshChart('+JSON.stringify(c.id).replace(/"/g,'&quot;')+')" id="rb-'+esc(c.id)+'">&#8635; Refresh</button>'
         +'<button onclick="openTeamChart('+JSON.stringify(c.id).replace(/"/g,'&quot;')+')">Open in editor</button>'
         +'<button class="del" onclick="deleteTeamChart('+JSON.stringify(c.id).replace(/"/g,'&quot;')+')">Delete</button>'
       +'</div></div>'
       +(c.note?'<div class="tcnote">'+esc(c.note)+'</div>':'')
-      +'<div class="tcchart" id="tcc-'+esc(c.id)+'"><div class="empty">Running the query…</div></div>'
+      +'<div class="tcchart" id="tcc-'+esc(c.id)+'"></div>'
       +'<details style="margin-top:10px"><summary style="font-size:12px;color:var(--mut);cursor:pointer">Show the query</summary>'
         +'<div class="tcsql">'+esc(c.sql)+'</div></details>'
       +'</div>';
@@ -1591,34 +1607,108 @@ function renderTeamCharts(){
   runTeamCharts();
 }
 
+/* How old the cached numbers are, in words. */
+function ago(iso){
+  var then=Date.parse(iso); if(isNaN(then)) return '';
+  var mins=Math.round((Date.now()-then)/60000);
+  if(mins<1) return 'just now';
+  if(mins<60) return mins+' min ago';
+  var hrs=Math.round(mins/60);
+  if(hrs<24) return hrs+(hrs===1?' hour ago':' hours ago');
+  var days=Math.round(hrs/24);
+  return days+(days===1?' day ago':' days ago');
+}
+
+/* Paint one card from whatever it is already holding. No network, no Redshift. */
+function paintChart(c){
+  var host=document.getElementById('tcc-'+c.id);
+  if(!host) return;
+  if(c._busy){ host.innerHTML='<div class="empty">Querying Redshift…</div>'; return; }
+  if(c._error){ host.innerHTML='<div class="err"><b>This chart did not run.</b><br>'+esc(c._error)+'</div>'; return; }
+  var d=c._cache;
+  if(!d){
+    host.innerHTML='<div class="empty">Not loaded yet. Press <b>Refresh</b> on this card, or <b>Refresh all</b> at the top.</div>';
+    return;
+  }
+  if(!d.rows || !d.rows.length){ host.innerHTML='<div class="empty">The query returned no rows.</div>'; return; }
+  host.innerHTML='<div class="card">'+renderWith(mergeCfg(c.cfg), d)+'</div>'
+    +'<div style="font-size:11.5px;color:var(--mut);margin-top:6px;font-family:\'JetBrains Mono\',monospace">'
+    +(d.row_count||d.rows.length)+' rows · '+(d.ms||0)+' ms · '
+    +'<span style="color:var(--mut2)">data from '+esc(ago(d.cached_at))+'</span>'
+    +(d.by?', refreshed by '+esc(d.by):'')
+    +(d.uncached?' · <span style="color:var(--amber)">too large to cache, so this one always runs live</span>':'')
+    +'</div>';
+}
+
+/* Run one chart against Redshift, then share the result with the team. */
+function refreshChart(id){
+  var c=TEAM.filter(function(x){ return x.id===id; })[0];
+  if(!c || c._busy) return Promise.resolve();
+  c._busy=true; c._error=null; paintChart(c);
+  var btn=document.getElementById('rb-'+c.id); if(btn) btn.disabled=true;
+  return fetch('/api/run-query',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sql:c.sql})})
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if(j.error){ c._error=j.error; return; }
+      c._cache={columns:j.columns, rows:j.rows, row_count:j.row_count, ms:j.ms,
+                by:sessionName()||'someone', cached_at:new Date().toISOString()};
+      /* Store it for everyone else. If that fails the chart still shows: a cache
+         that could not be written is a slower next visit, not a broken card. */
+      return fetch('/api/charts?id='+encodeURIComponent(c.id),{method:'PUT',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({columns:j.columns, rows:j.rows, ms:j.ms, by:c._cache.by})})
+        .then(function(r){ return r.json().catch(function(){ return {}; }); })
+        .then(function(pj){ if(pj && pj.error==='too_big') c._cache.uncached=true; })
+        .catch(function(){});
+    })
+    .catch(function(e){ c._error='Could not reach the query service. '+e.message; })
+    .then(function(){
+      c._busy=false;
+      var b=document.getElementById('rb-'+c.id); if(b) b.disabled=false;
+      paintChart(c);
+    });
+}
+
 /* Two at a time. Redshift queues concurrent statements from the same user, and a
-   tab holding a dozen charts firing at once is exactly how the live refresh
-   timed out the first time round. */
-function runTeamCharts(){
-  var i=0, width=Math.min(2, TEAM.length);
+   tab holding a dozen charts firing at once is exactly how the live refresh timed
+   out the first time round. */
+function runQueue(items, worker, width){
+  var i=0;
   function next(){
-    if(i>=TEAM.length) return Promise.resolve();
-    var c=TEAM[i++];
-    return fetch('/api/run-query',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sql:c.sql})})
-      .then(function(r){ return r.json(); })
-      .then(function(j){
-        var host=document.getElementById('tcc-'+c.id);
-        if(!host) return;
-        if(j.error){ host.innerHTML='<div class="err"><b>This chart no longer runs.</b><br>'+esc(j.error)+'</div>'; return; }
-        if(!j.rows.length){ host.innerHTML='<div class="empty">The query returned no rows.</div>'; return; }
-        host.innerHTML='<div class="card">'+renderWith(mergeCfg(c.cfg), j)+'</div>'
-          +'<div style="font-size:11.5px;color:var(--mut);margin-top:6px;font-family:\'JetBrains Mono\',monospace">'
-          +j.row_count+' rows · '+j.ms+' ms</div>';
-      })
-      .catch(function(e){
-        var host=document.getElementById('tcc-'+c.id);
-        if(host) host.innerHTML='<div class="err">Could not run this chart. '+esc(e.message)+'</div>';
-      })
-      .then(next);
+    if(i>=items.length) return Promise.resolve();
+    return worker(items[i++]).then(next);
   }
   var lanes=[];
-  for(var k=0;k<width;k++) lanes.push(next());
+  for(var k=0;k<Math.min(width, items.length);k++) lanes.push(next());
   return Promise.all(lanes);
+}
+
+function refreshAllCharts(){
+  if(!TEAM.length) return;
+  var btn=document.getElementById('teamRefreshAll'), msg=document.getElementById('teamMsg');
+  btn.disabled=true; btn.innerHTML='Refreshing…';
+  msg.textContent='Running '+TEAM.length+' quer'+(TEAM.length===1?'y':'ies')+' against Redshift, two at a time.';
+  runQueue(TEAM.slice(), function(c){ return refreshChart(c.id); }, 2).then(function(){
+    btn.disabled=false; btn.innerHTML='&#8635; Refresh all from Redshift';
+    var bad=TEAM.filter(function(c){ return c._error; }).length;
+    msg.innerHTML = bad
+      ? '<span style="color:var(--amber)">'+(TEAM.length-bad)+' of '+TEAM.length+' refreshed. '+bad+' did not run.</span>'
+      : '<span style="color:var(--green)">All '+TEAM.length+' refreshed just now.</span>';
+  });
+}
+
+/* Charts nobody has ever run have nothing to show, so those load once. Anything
+   already cached is left alone: refreshing is a decision, not a side effect of
+   opening a tab. */
+function runTeamCharts(){
+  TEAM.forEach(paintChart);
+  var cold=TEAM.filter(function(c){ return !c._cache && !c._error; });
+  if(!cold.length) return Promise.resolve();
+  var msg=document.getElementById('teamMsg');
+  if(msg) msg.textContent='Loading '+cold.length+' chart'+(cold.length===1?'':'s')+' for the first time…';
+  return runQueue(cold, function(c){ return refreshChart(c.id); }, 2).then(function(){
+    if(msg) msg.textContent='';
+  });
 }
 
 /* A stored cfg may predate a setting, so start from the defaults and lay the

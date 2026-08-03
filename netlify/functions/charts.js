@@ -21,13 +21,35 @@
 // about this chart" and it is not proof of anything. The page says so too.
 //
 // Routes (via the /api/* redirect in netlify.toml):
-//   GET    /api/charts        list every saved chart, newest first
-//   POST   /api/charts        {title, note, author, sql, cfg} -> saves one
-//   DELETE /api/charts?id=... remove one
+// RESULTS ARE CACHED, AND THE CACHE IS SHARED
+// -------------------------------------------
+// Every viewer re-running every chart meant the Custom tab's cost to Redshift
+// scaled with how often people looked at it, which is the wrong way round for a
+// screen meant to be glanced at. Results now live in a second store, so the tab
+// paints from cache and touches Redshift only when somebody asks it to. Because
+// the cache is shared, one person's refresh spares the whole team rather than
+// just their own browser, and everyone is looking at the same numbers.
+//
+// Cached results are read and written by key, never through list(), so the
+// eventual-consistency lag that affects the chart listing does not apply.
+//
+// Routes (via the /api/* redirect in netlify.toml):
+//   GET    /api/charts                  list every saved chart, newest first
+//   GET    /api/charts?id=..            one chart
+//   GET    /api/charts?id=..&part=cache its last cached result
+//   POST   /api/charts                  {title, note, author, sql, cfg} -> saves one
+//   PUT    /api/charts?id=..            {columns, rows, ms, by} -> stores a result
+//   DELETE /api/charts?id=..            remove the chart and its cached result
 
 const { connectLambda, getStore } = require("@netlify/blobs");
 
 const STORE = "qa-custom-charts";
+// A separate store, not a key prefix in the same one: the chart listing walks
+// list(), and cache entries sharing that namespace would have to be filtered out
+// of it forever, which is the kind of thing someone eventually forgets to do.
+const CACHE_STORE = "qa-custom-chart-cache";
+// A chart returning 5,000 wide rows is not worth storing; it stays live instead.
+const MAX_CACHE_BYTES = 900000;
 
 // Deliberately small ceilings. This endpoint has no authentication, because the
 // admin login is client-side only, so anyone who finds the URL can write to it.
@@ -39,7 +61,7 @@ const LIMITS = { title: 120, note: 600, author: 60, sql: 20000, cfg: 8000 };
 const HEADERS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "Content-Type",
-  "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
   "Content-Type": "application/json",
   "Cache-Control": "no-store",
 };
@@ -56,6 +78,15 @@ function newId() {
   return "c" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 }
 
+// A strong-consistency store where the runtime supports it, the plain one where
+// it does not, so callers never have to care which they got.
+function pair(name) {
+  const weak = getStore(name);
+  let strong = weak;
+  try { strong = getStore({ name, consistency: "strong" }); } catch { /* stays weak */ }
+  return { weak, strong };
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 204, headers: HEADERS };
 
@@ -64,12 +95,11 @@ exports.handler = async (event) => {
   // consistency fixes that, but it needs an 'uncachedEdgeURL' in the runtime
   // context and throws BlobsConsistencyError where that is absent, so it is
   // attempted and then dropped rather than assumed.
-  let store, weak;
+  let charts, cache;
   try {
     connectLambda(event); // hands the Blobs client this invocation's credentials
-    weak = getStore(STORE);
-    try { store = getStore({ name: STORE, consistency: "strong" }); }
-    catch { store = weak; }
+    charts = pair(STORE);
+    cache = pair(CACHE_STORE);
   } catch (err) {
     return reply(500, {
       error: "store_unavailable",
@@ -80,14 +110,14 @@ exports.handler = async (event) => {
   // Only READS go through the strong store. A write is visible to a read by key
   // immediately whatever the consistency setting, so there is nothing for strong
   // consistency to buy on the write path, and routing setJSON through it means a
-  // runtime without uncachedEdgeURL fails the save outright. Writes use `weak`.
+  // runtime without uncachedEdgeURL fails the save outright. Writes use `.weak`.
   let usedConsistency = "strong";
-  const read = async (fn) => {
-    try { return await fn(store); }
+  const read = async (p, fn) => {
+    try { return await fn(p.strong); }
     catch (err) {
       if (String(err && err.name) !== "BlobsConsistencyError") throw err;
       usedConsistency = "eventual";
-      return await fn(weak);
+      return await fn(p.weak);
     }
   };
 
@@ -95,10 +125,19 @@ exports.handler = async (event) => {
   if (event.httpMethod === "GET") {
     // ?id= fetches a single chart by key. Keys are read directly, which is the
     // one path that does not depend on list() having caught up.
-    const wantId = (event.queryStringParameters || {}).id;
+    const q = event.queryStringParameters || {};
+    const wantId = q.id;
+    if (wantId && q.part === "cache") {
+      try {
+        const hit = await read(cache, (s) => s.get(wantId, { type: "json" }));
+        return hit ? reply(200, { cache: hit }) : reply(404, { error: "no_cache", id: wantId });
+      } catch (err) {
+        return reply(500, { error: "cache_read_failed", message: String(err.message || err).slice(0, 200) });
+      }
+    }
     if (wantId) {
       try {
-        const one = await read((s) => s.get(wantId, { type: "json" }));
+        const one = await read(charts, (s) => s.get(wantId, { type: "json" }));
         return one
           ? reply(200, { chart: one, consistency: usedConsistency })
           : reply(404, { error: "not_found", id: wantId, consistency: usedConsistency });
@@ -107,15 +146,15 @@ exports.handler = async (event) => {
       }
     }
     try {
-      const listed = await read((s) => s.list());
+      const listed = await read(charts, (s) => s.list());
       const blobs = listed.blobs || [];
-      const charts = await Promise.all(
+      const found = await Promise.all(
         blobs.map(async (b) => {
-          try { return await read((s) => s.get(b.key, { type: "json" })); }
+          try { return await read(charts, (s) => s.get(b.key, { type: "json" })); }
           catch { return null; }        // a half-written or hand-deleted key is skipped
         })
       );
-      const clean = charts.filter(Boolean).sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
+      const clean = found.filter(Boolean).sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
       return reply(200, { charts: clean, count: clean.length, consistency: usedConsistency });
     } catch (err) {
       return reply(500, { error: "list_failed", message: String(err.message || err).slice(0, 200) });
@@ -144,7 +183,7 @@ exports.handler = async (event) => {
     } catch { cfg = {}; }
 
     try {
-      const listed = await read((s) => s.list());
+      const listed = await read(charts, (s) => s.list());
       if ((listed.blobs || []).length >= MAX_CHARTS) {
         return reply(409, {
           error: "full",
@@ -160,10 +199,42 @@ exports.handler = async (event) => {
         cfg,
         created_at: new Date().toISOString(),
       };
-      await weak.setJSON(record.id, record);
+      await charts.weak.setJSON(record.id, record);
       return reply(201, { ok: true, chart: record, consistency: usedConsistency });
     } catch (err) {
       return reply(500, { error: "save_failed", message: String(err.message || err).slice(0, 200) });
+    }
+  }
+
+  /* ---------- cache a result ---------- */
+  if (event.httpMethod === "PUT") {
+    const id = (event.queryStringParameters || {}).id;
+    if (!id) return reply(400, { error: "no_id" });
+    let body;
+    try { body = JSON.parse(event.body || "{}"); }
+    catch { return reply(400, { error: "Invalid JSON" }); }
+    if (!Array.isArray(body.columns) || !Array.isArray(body.rows)) {
+      return reply(400, { error: "bad_result", message: "Expected columns and rows." });
+    }
+    const record = {
+      columns: body.columns,
+      rows: body.rows,
+      row_count: body.rows.length,
+      ms: Number(body.ms) || 0,
+      by: text(body.by, LIMITS.author) || "someone",
+      cached_at: new Date().toISOString(),
+    };
+    const size = JSON.stringify(record).length;
+    if (size > MAX_CACHE_BYTES) {
+      // Say so rather than half-storing it: the page then keeps running this one
+      // live and the reader knows why it is slower than the others.
+      return reply(413, { error: "too_big", bytes: size, limit: MAX_CACHE_BYTES });
+    }
+    try {
+      await cache.weak.setJSON(id, record);
+      return reply(200, { ok: true, cached_at: record.cached_at, bytes: size });
+    } catch (err) {
+      return reply(500, { error: "cache_write_failed", message: String(err.message || err).slice(0, 200) });
     }
   }
 
@@ -172,7 +243,10 @@ exports.handler = async (event) => {
     const id = (event.queryStringParameters || {}).id;
     if (!id) return reply(400, { error: "no_id" });
     try {
-      await weak.delete(id);
+      await charts.weak.delete(id);
+      // The cached result goes with it. Leaving it behind would mean a later
+      // chart reusing the id inherits a stranger's numbers.
+      try { await cache.weak.delete(id); } catch { /* nothing cached */ }
       return reply(200, { ok: true, deleted: id });
     } catch (err) {
       return reply(500, { error: "delete_failed", message: String(err.message || err).slice(0, 200) });
