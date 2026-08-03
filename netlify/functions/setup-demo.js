@@ -24,7 +24,7 @@ exports.handler = async (event) => {
   catch { return { statusCode: 400, headers, body: JSON.stringify({ error: "bad json" }) }; }
   if (body.key !== SETUP_KEY) return { statusCode: 403, headers, body: JSON.stringify({ error: "no" }) };
   const password = String(body.password || "");
-  if (password.length < 10) return { statusCode: 400, headers, body: JSON.stringify({ error: "password too short" }) };
+  if (body.action !== "diag" && password.length < 10) return { statusCode: 400, headers, body: JSON.stringify({ error: "password too short" }) };
 
   const client = new Client({
     host: process.env.REDSHIFT_HOST,
@@ -39,6 +39,22 @@ exports.handler = async (event) => {
 
   try {
     await client.connect();
+
+    // Diagnostic: the SHAPE of what the login Lambda compares against, never the
+    // values. If team rows hold 32-char hex the Lambda compares md5; 64-char hex
+    // sha256; bcrypt prefixes $2; plaintext shows as mixed/other.
+    if (body.action === "diag") {
+      const rows = await client.query(
+        `SELECT username, role, is_active,
+                LEN(password) AS pw_len,
+                CASE WHEN password ~ '^[0-9a-f]+$' THEN 'lower-hex'
+                     WHEN password LIKE '$2%' THEN 'bcrypt'
+                     ELSE 'other' END AS pw_shape,
+                last_login
+           FROM public.portal_users ORDER BY username`
+      );
+      return { statusCode: 200, headers, body: JSON.stringify({ ok: true, users: rows.rows }) };
+    }
 
     const existing = await client.query(
       "SELECT id, username, role, is_active FROM public.portal_users WHERE username = $1", [DEMO_USER]
