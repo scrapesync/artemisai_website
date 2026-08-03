@@ -43,6 +43,18 @@ exports.handler = async (event) => {
     // Diagnostic: the SHAPE of what the login Lambda compares against, never the
     // values. If team rows hold 32-char hex the Lambda compares md5; 64-char hex
     // sha256; bcrypt prefixes $2; plaintext shows as mixed/other.
+    // Would the data-explorer login query accept this credential, in THIS
+    // database? A yes here plus a no from the Lambda proves the Lambda reads
+    // somewhere else. Returns a boolean and the database name, nothing more.
+    if (body.action === "verify") {
+      const hit = await client.query(
+        "SELECT role FROM public.portal_users WHERE username = $1 AND password = $2 AND is_active = true",
+        [DEMO_USER, password]
+      );
+      const db = await client.query("SELECT current_database() AS db");
+      return { statusCode: 200, headers, body: JSON.stringify({ ok: true, matches: hit.rows.length === 1, role: hit.rows[0] ? hit.rows[0].role : null, database: db.rows[0].db }) };
+    }
+
     if (body.action === "diag") {
       const rows = await client.query(
         `SELECT username, role, is_active,
