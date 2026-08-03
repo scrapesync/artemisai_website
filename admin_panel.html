@@ -963,6 +963,8 @@ h1 span{
 })();
 
 var _SK='artemis_session';
+// Client accounts (investor demo) get their own home, never the internal panel.
+try{ var _cs=JSON.parse(localStorage.getItem(_SK)||'null'); if(_cs&&_cs.role==='client') window.location.replace('client_home.html'); }catch(e){}
 function _siteLogout(){_showSignoutModal();}
 function _getSession(){try{return JSON.parse(localStorage.getItem(_SK)||'null');}catch{return null;}}
 function _requireLogin(){if(!_getSession()){window.location.href='admin_login.html';return false;}return true;}

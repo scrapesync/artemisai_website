@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Welcome · ArtemisAI</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0f1a;--card:#111827;--border:#1e2d44;
+  --teal:#00D6AE;--purple:#a78bfa;--amber:#f5a623;--sky:#38bdf8;
+  --ink:#e2e8f0;--mut:#8793ab;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(ellipse 90% 55% at 50% -5%,rgba(0,214,174,.09) 0%,transparent 65%),var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}
+
+nav{height:56px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(6,10,19,.9)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.12em;font-size:15px}
+.logo svg{width:28px;height:28px}
+.who{display:flex;align-items:center;gap:12px}
+.who-name{font-size:13px;color:var(--mut)}
+.who-name b{color:var(--ink)}
+.logout{border:1px solid rgba(255,255,255,.14);background:transparent;color:var(--mut);font-family:inherit;font-size:13px;font-weight:600;padding:8px 16px;border-radius:9px;cursor:pointer;transition:.15s}
+.logout:hover{border-color:rgba(248,113,113,.5);color:#f87171}
+
+.wrap{flex:1;width:100%;max-width:980px;margin:0 auto;padding:44px 22px 60px}
+.hello{text-align:center;margin-bottom:38px}
+.hello h1{font-size:clamp(26px,5vw,40px);font-weight:900;letter-spacing:-.02em;line-height:1.15}
+.hello h1 span{background:linear-gradient(135deg,var(--teal),var(--sky));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hello p{font-size:15px;color:var(--mut);margin-top:10px;line-height:1.65;max-width:560px;margin-left:auto;margin-right:auto}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:680px){.grid{grid-template-columns:1fr}}
+.tile{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:transform .18s,border-color .18s,box-shadow .18s;display:flex;flex-direction:column}
+.tile:hover{transform:translateY(-3px);border-color:rgba(0,214,174,.4);box-shadow:0 18px 44px -18px rgba(0,214,174,.25)}
+.tile:active{transform:translateY(-1px)}
+.tile-art{height:170px;position:relative;overflow:hidden;background:#0b0f1a;border-bottom:1px solid var(--border)}
+.tile-art img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;opacity:.92}
+.tile-art.pad img{object-fit:contain;padding:10px}
+.tile-art::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(17,24,39,.55),transparent 45%)}
+.tile-kicker{position:absolute;bottom:10px;left:14px;z-index:2;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--tk,#00D6AE);text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.tile-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column}
+.tile-title{font-size:18px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.tile-desc{font-size:13.5px;color:var(--mut);line-height:1.6;flex:1}
+.tile-go{margin-top:14px;font-size:13px;font-weight:700;color:var(--teal);display:flex;align-items:center;gap:6px}
+.tile:hover .tile-go{gap:10px}
+.tile-go i{font-style:normal;transition:.18s}
+
+footer{padding:22px;text-align:center;font-size:12px;color:var(--mut);border-top:1px solid rgba(255,255,255,.05)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="client_home.html">
+    <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
+    ARTEMISAI
+  </a>
+  <div class="who">
+    <span class="who-name" id="whoName"></span>
+    <button class="logout" onclick="doLogout()">Sign out</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="hello">
+    <h1>Welcome to <span>Artemis</span></h1>
+    <p>A guided look at what we are building: the product itself on web and mobile, the vision behind it, and the whole thing in plain English. Tap anything to explore.</p>
+  </div>
+
+  <div class="grid">
+    <a class="tile" href="mockup_v3_web.html" style="--tk:#00D6AE">
+      <div class="tile-art"><img src="assets/playbook/s10_today_web.jpg" alt="The Artemis web app"><span class="tile-kicker">The product · web</span></div>
+      <div class="tile-body">
+        <div class="tile-title">💻 Web App</div>
+        <div class="tile-desc">The full product as a page owner will use it at a desk: the Today screen, predictions, alerts, discovery and Art-E.</div>
+        <div class="tile-go">Open the web app <i>→</i></div>
+      </div>
+    </a>
+
+    <a class="tile" href="mockup_v3_mobile.html" style="--tk:#38bdf8">
+      <div class="tile-art pad"><img src="assets/playbook/s13_discover_mob.jpg" alt="The Artemis mobile app"><span class="tile-kicker">The product · mobile</span></div>
+      <div class="tile-body">
+        <div class="tile-title">📱 Mobile App</div>
+        <div class="tile-desc">The same product in your pocket: check your page, get alerts and talk to Art-E from anywhere.</div>
+        <div class="tile-go">Open the mobile app <i>→</i></div>
+      </div>
+    </a>
+
+    <a class="tile" href="alex_vision.html" style="--tk:#a78bfa">
+      <div class="tile-art pad" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(167,139,250,.12),rgba(99,102,241,.06))">
+        <svg viewBox="0 0 120 80" width="200" style="opacity:.9"><circle cx="28" cy="26" r="16" fill="rgba(0,214,174,.12)" stroke="#00D6AE" stroke-width="1.4"/><circle cx="28" cy="58" r="16" fill="rgba(167,139,250,.12)" stroke="#a78bfa" stroke-width="1.4"/><circle cx="62" cy="42" r="16" fill="rgba(56,189,248,.12)" stroke="#38bdf8" stroke-width="1.4"/><line x1="44" y1="30" x2="80" y2="40" stroke="#64748b" stroke-width="1.2"/><line x1="44" y1="54" x2="80" y2="44" stroke="#64748b" stroke-width="1.2"/><circle cx="97" cy="42" r="17" fill="rgba(245,166,35,.14)" stroke="#f5a623" stroke-width="2"/><text x="97" y="46" text-anchor="middle" font-size="9" font-weight="800" fill="#f5a623">WHY</text></svg>
+        <span class="tile-kicker">The thinking</span>
+      </div>
+      <div class="tile-body">
+        <div class="tile-title">🧭 The Vision</div>
+        <div class="tile-desc">Where this goes: four compounding assets, the data flywheel, and the network intelligence nobody else is building. Told in diagrams.</div>
+        <div class="tile-go">Read the vision <i>→</i></div>
+      </div>
+    </a>
+
+    <a class="tile" href="layman_explanation.html" style="--tk:#f5a623">
+      <div class="tile-art"><img src="assets/playbook/s8_predictions_wins.jpg" alt="Artemis explained simply"><span class="tile-kicker">The short version</span></div>
+      <div class="tile-body">
+        <div class="tile-title">💬 In Plain English</div>
+        <div class="tile-desc">What Artemis does and why it matters, with no jargon: the five-minute read with pictures of every screen.</div>
+        <div class="tile-go">Read the simple version <i>→</i></div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<footer>© 2026 Artemis AI · Private preview</footer>
+
+<script>
+(function(){
+  var s=null;
+  try{ s=JSON.parse(localStorage.getItem('artemis_session')||'null'); }catch(e){}
+  if(!s){ window.location.replace('admin_login.html'); return; }
+  var who=document.getElementById('whoName');
+  var name=s.name||s.username||'';
+  if(name) who.innerHTML='Signed in as <b>'+String(name).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];})+'</b>';
+})();
+function doLogout(){
+  try{
+    localStorage.removeItem('artemis_session');
+    localStorage.removeItem('artemis_sprint_session');
+    localStorage.removeItem('artemis_app_session');
+    localStorage.removeItem('artemis_viewer_name');
+  }catch(e){}
+  window.location.href='index.html';
+}
+</script>
+</body>
+</html>

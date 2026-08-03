@@ -97,12 +97,23 @@ body.light .btn-teal{color:#fff}
 .hdr-links a.cur{background:var(--teal-bg);color:var(--t1);border-color:rgba(0,196,160,.45)}
 .theme-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;margin-left:8px;transition:border-color .15s,color .15s,transform .3s}
 .theme-btn:hover{border-color:var(--teal);color:var(--teal);transform:rotate(20deg)}
-.hdr .btn{padding:10px 18px;font-size:14px;margin-left:8px}
+.hdr .btn{padding:10px 18px;font-size:14px;margin-left:8px;white-space:nowrap}
 .btn-launch{background:transparent;border:2px solid rgba(0,196,160,.5);color:var(--teal)}
 .btn-launch:hover{background:var(--teal);color:#04110D;border-color:var(--teal)}
 body.light .btn-launch:hover{color:#fff}
-@media(max-width:960px){.hdr-links{display:none}.theme-btn{margin-left:auto}}
-@media(max-width:560px){.hdr .btn-teal{display:none}}
+/* mobile menu */
+.hdr-burger{display:none;width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:transparent;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;flex-shrink:0;margin-left:6px}
+.hdr-burger span{display:block;width:18px;height:2px;border-radius:2px;background:var(--t1);transition:transform .2s,opacity .2s}
+.hdr-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hdr-burger.open span:nth-child(2){opacity:0}
+.hdr-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.hdr-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg-elev,#0d1420);border-bottom:1px solid var(--line);box-shadow:0 24px 48px -12px rgba(0,0,0,.5);padding:10px 16px 16px}
+.hdr-menu.open{display:block}
+.hdr-menu a{display:block;padding:13px 10px;font-size:15px;font-weight:600;color:var(--t1);border-bottom:1px solid var(--line-soft);border-radius:8px}
+.hdr-menu a:last-child{border-bottom:none}
+.hdr-menu a:active{background:var(--teal-bg)}
+@media(max-width:960px){.hdr-links{display:none}.theme-btn{margin-left:auto}.hdr-burger{display:flex}}
+@media(max-width:560px){.hdr .btn-teal{display:none}.hdr .theme-btn{display:none}.hdr .btn{padding:9px 14px;font-size:13px;margin-left:auto}.hdr-in{padding:11px 14px 11px 12px}}
 
 /* ═══════════ HERO ═══════════ */
 .hero{padding:72px 0 26px;position:relative;overflow:hidden}
@@ -538,6 +549,15 @@ body.light .pm-overlay{background:rgba(18,24,30,.38)}
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Switch theme" title="Switch theme">☀️</button>
     <a class="btn btn-launch" href="admin_login.html">Launch app →</a>
     <button class="btn btn-teal js-pilot" type="button">Join the pilot</button>
+    <button class="hdr-burger" id="hdrBurger" aria-label="Menu" aria-expanded="false" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+  <div class="hdr-menu" id="hdrMenu">
+    <a href="#how" onclick="toggleMenu()">How it works</a>
+    <a href="#tour" onclick="toggleMenu()">Tour</a>
+    <a href="#media" onclick="toggleMenu()">Media</a>
+    <a href="#flow" onclick="toggleMenu()">Every minute</a>
+    <a href="#team" onclick="toggleMenu()">Team</a>
+    <a href="#faq" onclick="toggleMenu()">FAQ</a>
   </div>
 </header>
 
@@ -1164,6 +1184,12 @@ function applyTheme(t){
   document.body.classList.toggle('light', t==='light');
   var b=document.getElementById('themeBtn');
   if(b){ b.textContent = t==='light' ? '🌙' : '☀️'; b.title = t==='light' ? 'Switch to dark' : 'Switch to light'; }
+}
+function toggleMenu(){
+  var b=document.getElementById('hdrBurger'), m=document.getElementById('hdrMenu');
+  var open=!m.classList.contains('open');
+  m.classList.toggle('open',open); b.classList.toggle('open',open);
+  b.setAttribute('aria-expanded',open?'true':'false');
 }
 function toggleTheme(){
   var t = document.body.classList.contains('light') ? 'dark' : 'light';

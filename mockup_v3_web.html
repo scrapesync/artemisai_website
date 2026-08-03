@@ -2843,5 +2843,20 @@ function openBilling(){ veilOn(); document.getElementById('billingm').classList.
 </script>
 
 <script>try{var q=new URLSearchParams(location.search),v=q.get("view");if(v&&document.getElementById("v-"+v)&&typeof setView==="function")setView(v);if(q.get("pop")){var p=document.getElementById("pop");if(p)setTimeout(function(){p.classList.add("on");},300);}}catch(e){}</script>
+
+<!-- investor demo: a way back to the guest home, only for client sessions -->
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('artemis_session')||'null');
+    if(!s || s.role!=='client') return;
+    var a=document.createElement('a');
+    a.href='client_home.html';
+    a.textContent='\u2190 Back';
+    a.style.cssText='position:fixed;left:14px;bottom:14px;z-index:99999;background:rgba(6,10,19,.92);color:#00d4aa;border:1px solid rgba(0,212,170,.4);border-radius:999px;padding:9px 18px;font:700 13px "DM Sans",system-ui,sans-serif;text-decoration:none;backdrop-filter:blur(8px);box-shadow:0 6px 24px rgba(0,0,0,.45)';
+    document.body.appendChild(a);
+  }catch(e){}
+})();
+</script>
 </body>
 </html>

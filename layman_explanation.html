@@ -196,7 +196,7 @@ nav.site-nav *{box-sizing:border-box}
     ARTEMISAI
   </a>
   <ul class="sn-links">
-    <li><a href="admin_panel.html" class="sn-pill">&larr; Admin Panel</a></li>
+    <li><a href="admin_panel.html" class="sn-pill" id="sn-back">&larr; Admin Panel</a></li>
     <li><div class="sn-chip" id="sn-chip" style="display:none"><div class="sn-avatar" id="sn-avatar">?</div><span class="sn-name" id="sn-name"></span></div></li>
     <li><button class="sn-logout" id="sn-logout-btn" onclick="handleLogout()" style="display:none">&#9211;</button></li>
   </ul>
@@ -613,6 +613,12 @@ nav.site-nav *{box-sizing:border-box}
       if(av && who) av.textContent=who.charAt(0).toUpperCase();
       if(nm && who) nm.textContent=who;
       if(lb) lb.style.display='';
+      /* Client accounts came from their own home, so the back pill goes there
+         rather than to the internal admin panel. */
+      if(user.role==='client'){
+        var bk=document.getElementById('sn-back');
+        if(bk){ bk.setAttribute('href','client_home.html'); bk.innerHTML='&larr; Back'; }
+      }
     }
   }catch(e){}
 })();

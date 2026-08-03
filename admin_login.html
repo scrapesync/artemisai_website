@@ -154,7 +154,7 @@ nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0
 }
 
 /* ─────────────────────────────────────────────────────────
-   ARTEMISAI SHARED MOBILE — injected into all pages
+   ARTEMISAI SHARED MOBILE, injected into all pages
    ───────────────────────────────────────────────────────── */
 @media(max-width:768px){
   nav.site-nav{height:52px!important;padding:0 1rem!important}
@@ -249,9 +249,11 @@ nav.site-nav.scrolled{background:rgba(6,10,19,0.97);box-shadow:0 4px 30px rgba(0
 const SK = 'artemis_session';
 const API = 'https://g6zr0b5lwe.execute-api.eu-west-2.amazonaws.com/default/lambda_save';
 
-// Already logged in → go to panel
+// Already logged in: route by role. Clients land on their own home, not the panel.
+function homeFor(sess){ return (sess && sess.role === 'client') ? 'client_home.html' : 'admin_panel.html'; }
 try{
-  if(localStorage.getItem(SK)) window.location.href = 'admin_panel.html';
+  var _s = JSON.parse(localStorage.getItem(SK) || 'null');
+  if(_s) window.location.href = homeFor(_s);
 }catch{}
 
 document.getElementById('p').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
@@ -268,14 +270,15 @@ async function doLogin(){
     const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'login',username:u,password:p})});
     const d=await r.json();
     if(d.ok&&d.user){
-      localStorage.setItem(SK,JSON.stringify({username:d.user.username,name:d.user.full_name,role:d.user.role,loginAt:new Date().toISOString()}));
-      window.location.href='admin_panel.html';
+      var sess={username:d.user.username,name:d.user.full_name,role:d.user.role,loginAt:new Date().toISOString()};
+      localStorage.setItem(SK,JSON.stringify(sess));
+      window.location.href=homeFor(sess);
     } else {
       showErr(d.error||'Invalid username or password');
       btn.disabled=false; btn.textContent='Sign In';
     }
   } catch(e){
-    showErr('Connection error — please try again');
+    showErr('Connection error. Please try again.');
     btn.disabled=false; btn.textContent='Sign In';
   }
 }
