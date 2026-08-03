@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>What We're Building (In Plain English) — ArtemisAI</title>
+<title>What We're Building (In Plain English) · ArtemisAI</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
 <style>
 :root{
@@ -152,6 +152,30 @@ nav.site-nav *{box-sizing:border-box}
 .why-item-title{font-size:14px;font-weight:700;margin-bottom:5px}
 .why-item-text{font-size:12.5px;color:var(--mut);line-height:1.55}
 
+/* SCREENSHOTS */
+.shotpair{display:grid;grid-template-columns:1fr 260px;gap:16px;align-items:start}
+@media(max-width:700px){.shotpair{grid-template-columns:1fr}}
+.shot{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:10px;overflow:hidden}
+.shot img{display:block;width:100%;border-radius:8px}
+.shot-cap{font-size:12px;color:var(--mut);text-align:center;padding:10px 6px 4px;line-height:1.5}
+.shot-cap b{color:var(--ink)}
+.mvp-shot{margin:12px -4px 0;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#0b0f1a}
+.mvp-shot img{display:block;width:100%}
+.mockup-note{font-size:11.5px;color:var(--mut);text-align:center;margin-top:14px;font-style:italic}
+
+/* PLAN TO LAUNCH */
+.plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.plan-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;position:relative}
+.plan-card.now{border-color:rgba(0,214,174,.45);box-shadow:0 0 24px rgba(0,214,174,.08)}
+.plan-here{position:absolute;top:-11px;left:16px;background:var(--teal);color:#04110d;font-size:10px;font-weight:900;letter-spacing:.06em;padding:3px 10px;border-radius:12px}
+.plan-month{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
+.plan-title{font-size:16px;font-weight:800;margin-bottom:8px}
+.plan-text{font-size:12.5px;color:var(--mut);line-height:1.6;margin-bottom:12px}
+.plan-chips{display:flex;flex-wrap:wrap;gap:6px}
+.plan-chip{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:12px;border:1px solid rgba(0,214,174,.3);color:var(--teal);text-decoration:none}
+.plan-chip:hover{background:rgba(0,214,174,.1)}
+.plan-chip.launch{border-color:rgba(245,166,35,.4);color:var(--amber)}
+
 /* footer */
 .af-footer{margin-top:0;padding:30px 1.6rem;border-top:1px solid rgba(255,255,255,.07);background:rgba(6,10,19,.45);font-family:'DM Sans','Outfit',system-ui,sans-serif}
 .af-footer-in{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
@@ -190,7 +214,7 @@ nav.site-nav *{box-sizing:border-box}
 <div class="hero">
   <div class="hero-eyebrow">For everyone on the team</div>
   <h1 class="hero-title">What We're Building,<br><span>In Plain English</span></h1>
-  <p class="hero-sub">No jargon, no tech-speak. If someone asked you "so what does Artemis actually do?" at a dinner party — this page is the answer.</p>
+  <p class="hero-sub">No jargon, no tech-speak. If someone asked you "so what does Artemis actually do?" at a dinner party, this page is the answer. Now with real pictures of the product we are building.</p>
 </div>
 
 <div class="body-wrap">
@@ -200,8 +224,8 @@ nav.site-nav *{box-sizing:border-box}
     <div class="bigstep-num" style="background:rgba(0,214,174,.15);color:var(--teal)">💡</div>
     <div class="bigstep-body">
       <div class="bigstep-title">The one-sentence version</div>
-      <div class="bigstep-text"><strong>Artemis is a smart assistant for people who run Facebook pages.</strong> It watches how their posts do, figures out what's working and what isn't, and simply tells them what to do next to grow — in language anyone can understand.</div>
-      <div class="bigstep-analogy">🍽️ <b>Think of it like this:</b> a personal trainer, but for your social media page. It looks at your "performance," spots what you're doing right and wrong, and gives you a clear plan — instead of just handing you a stack of confusing charts.</div>
+      <div class="bigstep-text"><strong>Artemis is a smart assistant for people who run Facebook pages.</strong> It watches how their posts do, figures out what's working and what isn't, and simply tells them what to do next to grow, in language anyone can understand.</div>
+      <div class="bigstep-analogy">🍽️ <b>Think of it like this:</b> a personal trainer, but for your social media page. It looks at your "performance", spots what you're doing right and wrong, and gives you a clear plan instead of a stack of confusing charts.</div>
     </div>
   </div>
 
@@ -226,7 +250,7 @@ nav.site-nav *{box-sizing:border-box}
   </div>
 
   <!-- HOW IT WORKS -->
-  <div class="section-label">How it works — in 4 simple steps</div>
+  <div class="section-label">How it works, in 4 simple steps</div>
   <div class="flowstrip">
     <div class="flowcard">
       <div class="flowcard-icon">🔗</div>
@@ -243,7 +267,7 @@ nav.site-nav *{box-sizing:border-box}
       <div class="flowcard-arrow">→</div>
       <div class="flowcard-icon">🧠</div>
       <div class="flowcard-title">3. Understand</div>
-      <div class="flowcard-text">It finds the hidden patterns — what your audience loves, when they're active, what's about to go viral.</div>
+      <div class="flowcard-text">It finds the hidden patterns: what your audience loves, when they're active, what's about to go viral.</div>
     </div>
     <div class="flowcard">
       <div class="flowcard-arrow">→</div>
@@ -253,15 +277,28 @@ nav.site-nav *{box-sizing:border-box}
     </div>
   </div>
 
+  <!-- WHAT IT LOOKS LIKE -->
+  <div class="section-label" id="shots">What it will actually look like</div>
+  <div class="shotpair">
+    <div class="shot">
+      <img src="assets/playbook/s10_today_web.jpg" alt="The Today screen: one clear priority, plain-English cards">
+      <div class="shot-cap"><b>The screen you open every morning.</b> One priority at the top, short cards below it, each saying why it matters and what to do.</div>
+    </div>
+    <div class="shot">
+      <img src="assets/playbook/s8_arte_mobile.jpg" alt="Art-E on a phone">
+      <div class="shot-cap"><b>Art-E on your phone.</b> Ask anything, get an answer in normal words.</div>
+    </div>
+  </div>
+
   <!-- ART-E SPOTLIGHT -->
-  <div class="section-label">Meet Art-E — the heart of the product</div>
+  <div class="section-label">Meet Art-E: the heart of the product</div>
   <div class="arte">
     <div class="arte-avatar">🤖</div>
     <h3>Art-E is your AI guide</h3>
-    <p>All the clever maths happens in the background. The user never has to read a chart if they don't want to. Instead, they just talk to <strong>Art-E</strong> — like texting a really smart friend who happens to know everything about their page.</p>
+    <p>All the clever maths happens in the background. The user never has to read a chart if they don't want to. Instead, they just talk to <strong>Art-E</strong>, like texting a really smart friend who happens to know everything about their page.</p>
     <div class="arte-bubbles">
-      <div class="bubble"><b>Art-E:</b> "Your last 3 posts did worse than usual. They went up at 9am — your audience is most active at 7pm. Try posting later today."</div>
-      <div class="bubble"><b>Art-E:</b> "Heads up — the comments on your newest post are turning negative fast. Here's how to respond before it becomes a problem."</div>
+      <div class="bubble"><b>Art-E:</b> "Your last 3 posts did worse than usual. They went up at 9am, your audience is most active at 7pm. Try posting later today."</div>
+      <div class="bubble"><b>Art-E:</b> "Heads up: the comments on your newest post are turning negative fast. Here's how to respond before it becomes a problem."</div>
       <div class="bubble"><b>Art-E:</b> "This draft you're about to post will probably do really well. Go for it! 🚀"</div>
     </div>
   </div>
@@ -273,14 +310,14 @@ nav.site-nav *{box-sizing:border-box}
       <div class="ba-label">😩 Other tools</div>
       <div class="ba-item">📉 <span>Show you <b>what already happened</b> last week or last month.</span></div>
       <div class="ba-item">🔢 <span>Dump <b>confusing numbers and charts</b> on you and leave you to figure it out.</span></div>
-      <div class="ba-item">🧩 <span>Treat every customer separately — they <b>don't learn</b> from each other.</span></div>
-      <div class="ba-item">🐌 <span>Update slowly — once a day or once an hour.</span></div>
+      <div class="ba-item">🧩 <span>Treat every customer separately, they <b>don't learn</b> from each other.</span></div>
+      <div class="ba-item">🐌 <span>Update slowly: once a day or once an hour.</span></div>
     </div>
     <div class="ba-col after">
       <div class="ba-label">✨ Artemis</div>
-      <div class="ba-item">🔮 <span>Tells you <b>what's going to happen</b> — before you even post.</span></div>
+      <div class="ba-item">🔮 <span>Tells you <b>what's going to happen</b> before you even post.</span></div>
       <div class="ba-item">💬 <span>Explains everything in <b>plain English</b> and tells you exactly what to do.</span></div>
-      <div class="ba-item">🌐 <span>Gets <b>smarter with every page</b> that joins — everyone benefits.</span></div>
+      <div class="ba-item">🌐 <span>Gets <b>smarter with every page</b> that joins, so everyone benefits.</span></div>
       <div class="ba-item">⚡ <span>Watches in <b>real time</b> and warns you within minutes.</span></div>
     </div>
   </div>
@@ -308,81 +345,118 @@ nav.site-nav *{box-sizing:border-box}
         <tr>
           <td><span class="rowname">Show charts of past performance</span></td>
           <td class="part">Basic</td><td class="yes">Yes</td><td class="yes">Yes</td>
-          <td class="uscell yes">Yes — but hidden behind Art-E</td>
+          <td class="uscell yes">Yes, hidden behind Art-E</td>
         </tr>
         <tr>
           <td><span class="rowname">Tell you what to do, in plain English</span></td>
           <td class="no">No</td><td class="no">No</td><td class="part">AI hints</td>
-          <td class="uscell yes">Yes — the whole point</td>
+          <td class="uscell yes">Yes, the whole point</td>
         </tr>
         <tr>
           <td><span class="rowname">Predict how a post will do before you post</span></td>
           <td class="no">No</td><td class="no">No</td><td class="part">Limited</td>
-          <td class="uscell yes">Yes — core feature</td>
+          <td class="uscell yes">Yes, core feature</td>
         </tr>
         <tr>
           <td><span class="rowname">Warn you about a brewing comment crisis</span></td>
           <td class="no">No</td><td class="part">Listening add-on</td><td class="part">Listening</td>
-          <td class="uscell yes">Yes — real-time alerts</td>
+          <td class="uscell yes">Yes, real-time alerts</td>
         </tr>
         <tr>
           <td><span class="rowname">Get smarter from every other page on the platform</span></td>
           <td class="no">No</td><td class="no">No</td><td class="no">No</td>
-          <td class="uscell yes">Yes — the network effect</td>
+          <td class="uscell yes">Yes, the network effect</td>
         </tr>
         <tr>
           <td><span class="rowname">Suggest who to collaborate with</span></td>
           <td class="no">No</td><td class="no">No</td><td class="no">No</td>
-          <td class="uscell yes">Yes — Discovery</td>
+          <td class="uscell yes">Yes, Discovery</td>
         </tr>
         <tr>
           <td><span class="rowname">Built for non-technical people</span></td>
           <td class="part">Simple but shallow</td><td class="no">Built for pros</td><td class="no">Built for big teams</td>
-          <td class="uscell yes">Yes — from the ground up</td>
+          <td class="uscell yes">Yes, from the ground up</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="cmp-note">Honest note: a few newer tools (like Dash Social or small "viral score" apps) can also predict performance, and the big players keep adding AI. What no one else combines is <b>all of the above at once</b> — a plain-English advisor, prediction, real-time alerts, and a platform that learns across everyone — at a price normal creators can afford.</div>
+  <div class="cmp-note">Honest note: a few newer tools (like Dash Social or small "viral score" apps) can also predict performance, and the big players keep adding AI. What no one else combines is <b>all of the above at once</b>, a plain-English advisor, prediction, real-time alerts, and a platform that learns across everyone, at a price normal creators can afford.</div>
 
-  <!-- MVP FEATURES — HOW WE CHANGE THE GAME -->
-  <div class="section-label">Our first features — and how each one changes the game</div>
+  <!-- MVP FEATURES, HOW WE CHANGE THE GAME -->
+  <div class="section-label" id="features">Our first features, and how each one changes the game</div>
   <div class="mvp-grid">
     <div class="mvp-card" style="--mc:#a78bfa;--mc-text:#a78bfa">
       <div class="mvp-ico">🤖</div>
       <div class="mvp-name">Art-E, your AI advisor</div>
-      <div class="mvp-what">Ask it anything about your page in normal language and it answers clearly — and always tells you what to do next.</div>
+      <div class="mvp-what">Ask it anything about your page in normal language and it answers clearly and always tells you what to do next.</div>
       <div class="mvp-game"><b>The game-changer:</b> other tools hand you data. Art-E hands you decisions.</div>
+      <div class="mvp-shot"><img src="assets/playbook/s14_analytics_web.jpg" alt="Analytics that Art-E explains"></div>
     </div>
     <div class="mvp-card" style="--mc:#00D6AE;--mc-text:#00D6AE">
       <div class="mvp-ico">🔮</div>
       <div class="mvp-name">Post predictions</div>
       <div class="mvp-what">Before you publish, Artemis estimates how well a post will do and suggests how to make it better.</div>
       <div class="mvp-game"><b>The game-changer:</b> stop guessing. Fix a weak post <b>before</b> it flops, not after.</div>
+      <div class="mvp-shot"><img src="assets/playbook/s8_drafts_scores.jpg" alt="Draft posts with risk scores"></div>
     </div>
     <div class="mvp-card" style="--mc:#f5a623;--mc-text:#f5a623">
       <div class="mvp-ico">🚨</div>
       <div class="mvp-name">Real-time alerts</div>
-      <div class="mvp-what">A heads-up the moment something needs you — a post taking off, or comments turning nasty. Every alert comes with a fix.</div>
+      <div class="mvp-what">A heads-up the moment something needs you: a post taking off, or comments turning nasty. Every alert comes with a fix.</div>
       <div class="mvp-game"><b>The game-changer:</b> catch a viral moment or a PR fire in minutes, not next week's report.</div>
+      <div class="mvp-shot"><img src="assets/playbook/s11_alertpop_web.jpg" alt="An alert with its recommended fix"></div>
     </div>
     <div class="mvp-card" style="--mc:#38bdf8;--mc-text:#38bdf8">
       <div class="mvp-ico">📰</div>
       <div class="mvp-name">Intelligence feed</div>
-      <div class="mvp-what">A simple, scrollable stream of short insights about your page — each one explaining why it matters and what to do.</div>
-      <div class="mvp-game"><b>The game-changer:</b> your page's "brain," readable in 10 seconds — no dashboards to decode.</div>
+      <div class="mvp-what">A simple, scrollable stream of short insights about your page, each one explaining why it matters and what to do.</div>
+      <div class="mvp-game"><b>The game-changer:</b> your page's "brain", readable in 10 seconds. No dashboards to decode.</div>
+      <div class="mvp-shot"><img src="assets/playbook/s11_alerts_web.jpg" alt="The intelligence stream"></div>
     </div>
     <div class="mvp-card" style="--mc:#34d399;--mc-text:#34d399">
       <div class="mvp-ico">🔭</div>
       <div class="mvp-name">Discovery</div>
       <div class="mvp-what">Artemis spots other pages whose audience overlaps with yours and suggests collaborations that could grow you both.</div>
-      <div class="mvp-game"><b>The game-changer:</b> growth through partnership — something a chart could never suggest.</div>
+      <div class="mvp-game"><b>The game-changer:</b> growth through partnership, something a chart could never suggest.</div>
+      <div class="mvp-shot"><img src="assets/playbook/s13_discovery_web.jpg" alt="Discovery: pages worth collaborating with"></div>
     </div>
     <div class="mvp-card" style="--mc:#6366f1;--mc-text:#93c5fd">
       <div class="mvp-ico">📅</div>
       <div class="mvp-name">Best times to post</div>
       <div class="mvp-what">Tells you the exact moments your specific audience is most likely to be watching.</div>
       <div class="mvp-game"><b>The game-changer:</b> tailored to <b>your</b> audience, not a generic "post at 9am" rule.</div>
+      <div class="mvp-shot"><img src="assets/playbook/s9_besttimes_heatmap.jpg" alt="Best times heatmap"></div>
+    </div>
+  </div>
+  <div class="mockup-note">These are our design mockups, the blueprints the team is building from. The real screens will look like this.</div>
+
+  <!-- THE PLAN TO LAUNCH -->
+  <div class="section-label" id="plan">The plan between now and launch</div>
+  <div class="plan">
+    <div class="plan-card now">
+      <div class="plan-here">WE ARE HERE</div>
+      <div class="plan-month">August</div>
+      <div class="plan-title">It learns to warn you 🔮</div>
+      <div class="plan-text">The prediction engine: spotting a post likely to flop before you publish, and finding your audience's best posting times.</div>
+      <div class="plan-chips"><a class="plan-chip" href="sprint_playbook.html#s7">S7 Foresight</a><a class="plan-chip" href="sprint_playbook.html#s8">S8 Flop detection</a><a class="plan-chip" href="sprint_playbook.html#s9">S9 Best times</a></div>
+    </div>
+    <div class="plan-card">
+      <div class="plan-month">September</div>
+      <div class="plan-title">The daily screens 📱</div>
+      <div class="plan-text">The Today screen, real-time alerts, Discovery, and every number on every screen switching to live data.</div>
+      <div class="plan-chips"><a class="plan-chip" href="sprint_playbook.html#s10">S10 Today</a><a class="plan-chip" href="sprint_playbook.html#s11">S11 Alerts</a><a class="plan-chip" href="sprint_playbook.html#s13">S13 Discovery</a><a class="plan-chip" href="sprint_playbook.html#s14">S14 Live data</a></div>
+    </div>
+    <div class="plan-card">
+      <div class="plan-month">October</div>
+      <div class="plan-title">Art-E learns to talk 🤖</div>
+      <div class="plan-text">The AI advisor arrives, then gets polished until its answers are worth trusting. Plus speed and security hardening.</div>
+      <div class="plan-chips"><a class="plan-chip" href="sprint_playbook.html#s16">S16 Art-E</a><a class="plan-chip" href="sprint_playbook.html#s17">S17 Quality</a><a class="plan-chip" href="sprint_playbook.html#s19">S19 Security</a></div>
+    </div>
+    <div class="plan-card">
+      <div class="plan-month">November</div>
+      <div class="plan-title">Doors open 🚀</div>
+      <div class="plan-text">Real page owners connect their own pages with one click, final testing with real users, and launch on the 28th.</div>
+      <div class="plan-chips"><a class="plan-chip" href="sprint_playbook.html#s21">S21 Connect</a><a class="plan-chip" href="sprint_playbook.html#s22">S22 Testing</a><a class="plan-chip launch" href="sprint_playbook.html#s23">28 Nov LAUNCH</a></div>
     </div>
   </div>
 
@@ -410,13 +484,13 @@ nav.site-nav *{box-sizing:border-box}
       <div class="why-item">
         <div class="why-emoji">😍</div>
         <div class="why-item-title">Happier users</div>
-        <div class="why-item-text">Who tell their friends — and the circle repeats.</div>
+        <div class="why-item-text">Who tell their friends, and the circle repeats.</div>
       </div>
     </div>
   </div>
 
   <!-- REVENUE GROWTH -->
-  <div class="section-label">Where the money comes from — and how it grows</div>
+  <div class="section-label">Where the money comes from, and how it grows</div>
   <div class="rev-wrap">
     <svg viewBox="0 0 860 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Projected revenue growth chart">
       <defs>
@@ -497,7 +571,7 @@ nav.site-nav *{box-sizing:border-box}
       <div class="rev-card"><div class="rev-stage">The big lever</div><div class="rev-amt" style="color:#38bdf8">Agencies</div><div class="rev-stage" style="margin-top:4px">bring 20+ pages each</div></div>
       <div class="rev-card"><div class="rev-stage">Bonus value</div><div class="rev-amt" style="color:#a78bfa">The data</div><div class="rev-stage" style="margin-top:4px">is worth money on its own</div></div>
     </div>
-    <div class="rev-note">It's simple: each page pays a small monthly fee. The magic is that costs barely rise as we add customers — so the more pages join, the more it adds up. And because every customer also makes the whole system smarter, the business is worth far more than just the monthly fees. <strong style="color:#cdd5ee">(These are long-term projections, not promises — but they show the shape of the opportunity.)</strong></div>
+    <div class="rev-note">It's simple: each page pays a small monthly fee. The magic is that costs barely rise as we add customers, so the more pages join, the more it adds up. And because every customer also makes the whole system smarter, the business is worth far more than just the monthly fees. <strong style="color:#cdd5ee">(These are long-term projections, not promises. But they show the shape of the opportunity.)</strong></div>
   </div>
 
   <!-- THE GOAL -->
@@ -505,8 +579,8 @@ nav.site-nav *{box-sizing:border-box}
     <div class="bigstep-num" style="background:rgba(245,166,35,.15);color:var(--amber)">🎯</div>
     <div class="bigstep-body">
       <div class="bigstep-title">What we're aiming for</div>
-      <div class="bigstep-text">We launch the first version (the <strong>"MVP"</strong> — the smallest useful version) on <strong>28 November 2026</strong>, starting with 5 real pages as our first users. From there, the goal is simple: become the tool that page owners <strong>can't imagine posting without</strong>.</div>
-      <div class="bigstep-analogy">🧭 <b>In one line:</b> we want Artemis to be the daily habit that helps creators grow — the first thing they check before they post anything.</div>
+      <div class="bigstep-text">We launch the first version (the <strong>"MVP"</strong>, the smallest useful version) on <strong>28 November 2026</strong>, starting with 5 real pages as our first users. From there, the goal is simple: become the tool that page owners <strong>can't imagine posting without</strong>.</div>
+      <div class="bigstep-analogy">🧭 <b>In one line:</b> we want Artemis to be the daily habit that helps creators grow: the first thing they check before they post anything.</div>
     </div>
   </div>
 
