@@ -266,15 +266,27 @@ async function doLogin(){
   const p=document.getElementById('p').value;
   if(!u||!p){ showErr('Please enter username and password'); return; }
   btn.disabled=true; btn.textContent='Signing in...'; err.style.display='none';
+  // Two validators, same table shape. The AWS Lambda is what the team has
+  // always used, so it goes first and nothing changes for them. The Netlify
+  // endpoint validates against public.portal_users on the warehouse and is
+  // where demo/client accounts live, so it answers when the Lambda says no.
+  async function tryLogin(url){
+    const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'login',username:u,password:p})});
+    const d=await r.json().catch(()=>({}));
+    return ((d.ok||d.success)&&d.user)?d.user:null;
+  }
   try{
-    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'login',username:u,password:p})});
-    const d=await r.json();
-    if(d.ok&&d.user){
-      var sess={username:d.user.username,name:d.user.full_name,role:d.user.role,loginAt:new Date().toISOString()};
+    let user=null;
+    try{ user=await tryLogin(API); }catch(e){ /* lambda unreachable; fall through */ }
+    if(!user){
+      try{ user=await tryLogin('/api/data-explorer'); }catch(e){}
+    }
+    if(user){
+      var sess={username:user.username,name:user.full_name,role:user.role,loginAt:new Date().toISOString()};
       localStorage.setItem(SK,JSON.stringify(sess));
       window.location.href=homeFor(sess);
     } else {
-      showErr(d.error||'Invalid username or password');
+      showErr('Invalid username or password');
       btn.disabled=false; btn.textContent='Sign In';
     }
   } catch(e){
