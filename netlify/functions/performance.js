@@ -58,8 +58,11 @@ exports.handler = async (event) => {
     user: process.env.REDSHIFT_USER,
     password: process.env.REDSHIFT_PASSWORD,
     ssl: { rejectUnauthorized: false },
-    connectionTimeoutMillis: 8000,
-    query_timeout: 12000,
+    // Cold connects to the warehouse were measured taking longer than 8s; a
+    // timeout here reads as a scary error to a legitimate viewer, so give the
+    // connection the room the other functions already proved it needs.
+    connectionTimeoutMillis: 16000,
+    query_timeout: 8000,
   });
 
   try {
