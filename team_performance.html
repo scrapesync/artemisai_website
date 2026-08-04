@@ -66,6 +66,43 @@ nav{height:54px;padding:0 20px;display:flex;align-items:center;justify-content:s
 .honesty{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.25);border-left-width:3px;border-radius:10px;padding:13px 16px;font-size:12.5px;color:#e6d9bf;line-height:1.65;margin-top:26px}
 .honesty b{color:var(--amber)}
 @media(max-width:600px){.p-band{margin-left:0;width:100%}.p-head{gap:10px}}
+
+/* ===== view / edit toggle ===== */
+.modes{display:inline-flex;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:3px;gap:3px}
+.modes button{font-family:inherit;font-size:12.5px;font-weight:800;padding:7px 16px;border-radius:8px;border:0;background:none;color:var(--mut);cursor:pointer}
+.modes button.on{background:rgba(167,139,250,.16);color:var(--purple)}
+
+/* ===== visualisation mode ===== */
+.glance{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.glance h3{font-size:13px;font-weight:800;color:var(--mut);letter-spacing:.05em;text-transform:uppercase;margin-bottom:18px}
+.scale-head{display:grid;grid-template-columns:110px 1fr;gap:12px;margin-bottom:6px}
+.scale-labels{display:grid;grid-template-columns:repeat(4,1fr);font-size:10.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.scale-labels span{text-align:center}
+.scale-labels .l-concern{color:var(--rose)}.scale-labels .l-mixed{color:var(--amber)}
+.scale-labels .l-ontrack{color:var(--sky)}.scale-labels .l-strong{color:var(--teal)}
+.scale-row{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;padding:9px 0}
+.scale-row+.scale-row{border-top:1px solid rgba(255,255,255,.04)}
+.scale-name{font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.scale-name i{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:9px;font-weight:900;color:#04110d;flex-shrink:0}
+.scale-track{position:relative;height:34px;border-radius:9px;overflow:hidden;display:grid;grid-template-columns:repeat(4,1fr)}
+.scale-track b{border-right:1px solid rgba(255,255,255,.06)}
+.scale-track b:nth-child(1){background:rgba(244,63,94,.10)}
+.scale-track b:nth-child(2){background:rgba(245,166,35,.10)}
+.scale-track b:nth-child(3){background:rgba(56,189,248,.10)}
+.scale-track b:nth-child(4){background:rgba(0,214,174,.10);border-right:0}
+.scale-dot{position:absolute;top:50%;transform:translate(-50%,-50%);width:106px;max-width:23%;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:900;letter-spacing:.03em;color:#04110d}
+.scale-none{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--mut);font-style:italic}
+.v-person{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 22px;margin-bottom:14px}
+.v-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.v-chip{margin-left:auto;font-size:12px;font-weight:900;padding:8px 16px;border-radius:20px;letter-spacing:.03em}
+.v-chip.strong{background:rgba(0,214,174,.15);color:var(--teal);border:1px solid rgba(0,214,174,.4)}
+.v-chip.ontrack{background:rgba(56,189,248,.15);color:var(--sky);border:1px solid rgba(56,189,248,.4)}
+.v-chip.mixed{background:rgba(245,166,35,.15);color:var(--amber);border:1px solid rgba(245,166,35,.4)}
+.v-chip.concern{background:rgba(244,63,94,.15);color:var(--rose);border:1px solid rgba(244,63,94,.4)}
+.v-chip.none{background:rgba(255,255,255,.05);color:var(--mut);border:1px solid var(--border)}
+.v-notes{margin-top:12px;font-size:13.5px;line-height:1.7;color:var(--ink);background:var(--card2);border-left:3px solid var(--purple);border-radius:0 10px 10px 0;padding:12px 15px;white-space:pre-wrap}
+.v-notes.empty{color:var(--mut);font-style:italic;border-left-color:var(--border)}
+@media(max-width:600px){.scale-head,.scale-row{grid-template-columns:84px 1fr}.scale-dot{font-size:9px}.v-chip{margin-left:0}}
 </style>
 </head>
 <body>
@@ -101,8 +138,12 @@ nav{height:54px;padding:0 20px;display:flex;align-items:center;justify-content:s
   <div id="content">
     <div class="meta">
       <span id="metaLine"></span>
-      <span style="font-size:11.5px;color:var(--mut)">Bands and notes save for all leadership viewers</span>
+      <div class="modes">
+        <button id="m-view" onclick="setMode('view')">Overview</button>
+        <button id="m-edit" onclick="setMode('edit')">Edit</button>
+      </div>
     </div>
+    <div id="viewhost"></div>
     <div id="people"></div>
     <div class="savebar">
       <button class="savebtn" onclick="saveDoc()" id="saveBtn">Save assessment</button>
@@ -152,12 +193,84 @@ function unlock(){
       document.getElementById('gate').style.display='none';
       document.getElementById('content').style.display='block';
       render();
+      var hasContent = DOC.people && Object.keys(DOC.people).some(function(k){
+        var p=DOC.people[k]||{}; return p.band || (p.notes||'').trim();
+      });
+      setMode(hasContent ? 'view' : 'edit');
     })
     .catch(function(e){
       btn.disabled=false; btn.textContent='Unlock';
       err.textContent='Could not reach the server. This page only works on the deployed site. ('+e.message+')';
       err.style.display='block';
     });
+}
+
+var MODE='view';
+var BAND_META={
+  concern:{label:'Needs attention', color:'#f43f5e', idx:0},
+  mixed:{label:'Mixed', color:'#f5a623', idx:1},
+  ontrack:{label:'On track', color:'#38bdf8', idx:2},
+  strong:{label:'Strong', color:'#00D6AE', idx:3}
+};
+
+function setMode(m){
+  if(m==='view' && MODE==='edit') collectNotes();   // keep unsaved typing visible in the overview
+  MODE=m;
+  document.getElementById('m-view').classList.toggle('on', m==='view');
+  document.getElementById('m-edit').classList.toggle('on', m==='edit');
+  document.getElementById('viewhost').style.display = m==='view'?'block':'none';
+  document.getElementById('people').style.display  = m==='edit'?'block':'none';
+  document.querySelector('.savebar').style.display = m==='edit'?'flex':'none';
+  if(m==='view') renderView();
+}
+
+/* The overview: every person on one shared band scale, then each card read-only.
+   It draws exactly what was entered, nothing derived, nothing invented. */
+function renderView(){
+  var host=document.getElementById('viewhost');
+  var rows=ROSTER.map(function(person){
+    var st=(DOC.people&&DOC.people[person.key])||{};
+    var initials=person.name.split(' ').map(function(w){return w[0];}).join('').slice(0,2);
+    var track;
+    if(st.band && BAND_META[st.band]){
+      var m=BAND_META[st.band];
+      var cx=(m.idx*25)+12.5;
+      track='<b></b><b></b><b></b><b></b>'
+        +'<span class="scale-dot" style="left:'+cx+'%;background:'+m.color+'">'+esc(m.label.toUpperCase())+'</span>';
+    } else {
+      track='<b></b><b></b><b></b><b></b><span class="scale-none">not assessed yet</span>';
+    }
+    return '<div class="scale-row">'
+      +'<div class="scale-name"><i style="background:'+person.color+'">'+esc(initials)+'</i>'+esc(person.name.split(' ')[0])+'</div>'
+      +'<div class="scale-track">'+track+'</div>'
+    +'</div>';
+  }).join('');
+  var cards=ROSTER.map(function(person){
+    var st=(DOC.people&&DOC.people[person.key])||{};
+    var initials=person.name.split(' ').map(function(w){return w[0];}).join('').slice(0,2);
+    var chip = (st.band && BAND_META[st.band])
+      ? '<span class="v-chip '+st.band+'">'+esc(BAND_META[st.band].label)+'</span>'
+      : '<span class="v-chip none">Not assessed</span>';
+    var notes = (st.notes||'').trim();
+    return '<div class="v-person">'
+      +'<div class="v-head">'
+        +'<div class="p-av" style="background:'+person.color+'">'+esc(initials)+'</div>'
+        +'<div><div class="p-name">'+esc(person.name)+'</div><div class="p-role">'+esc(person.role)+'</div></div>'
+        +chip
+      +'</div>'
+      +(notes ? '<div class="v-notes">'+esc(notes)+'</div>'
+              : '<div class="v-notes empty">No notes recorded.</div>')
+    +'</div>';
+  }).join('');
+  host.innerHTML=
+    '<div class="glance"><h3>Team at a glance</h3>'
+      +'<div class="scale-head"><span></span><div class="scale-labels">'
+        +'<span class="l-concern">Needs attention</span><span class="l-mixed">Mixed</span>'
+        +'<span class="l-ontrack">On track</span><span class="l-strong">Strong</span>'
+      +'</div></div>'
+      +rows
+    +'</div>'
+    +cards;
 }
 
 function render(){
@@ -218,7 +331,7 @@ function saveDoc(){
       DOC.updated_at=j.updated_at; DOC.updated_by=CREDS.username;
       msg.textContent='Saved.';
       document.getElementById('metaLine').textContent='Last saved just now by '+CREDS.username;
-      setTimeout(function(){ msg.textContent=''; },2500);
+      setTimeout(function(){ msg.textContent=''; setMode('view'); },700);
     })
     .catch(function(e){ btn.disabled=false; msg.textContent='Could not save: '+e.message; });
 }
