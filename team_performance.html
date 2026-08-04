@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Team Performance · ArtemisAI Leadership</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0f1a;--card:#111827;--card2:#151e2e;--border:#1e2d44;
+  --teal:#00D6AE;--amber:#f5a623;--rose:#f43f5e;--sky:#38bdf8;--purple:#a78bfa;
+  --ink:#e2e8f0;--mut:#8793ab;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(ellipse 90% 50% at 50% -5%,rgba(167,139,250,.08) 0%,transparent 60%),var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;min-height:100vh}
+a{color:inherit;text-decoration:none}
+nav{height:54px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(6,10,19,.92);position:sticky;top:0;z-index:50}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.12em;font-size:14px}
+.logo svg{width:26px;height:26px}
+.back{font-size:13px;color:var(--teal);border:1px solid rgba(0,212,170,.3);border-radius:8px;padding:7px 14px}
+.wrap{max-width:860px;margin:0 auto;padding:36px 20px 70px}
+
+.hd h1{font-size:clamp(24px,4vw,34px);font-weight:900;letter-spacing:-.02em}
+.hd h1 span{color:var(--purple)}
+.hd p{font-size:13.5px;color:var(--mut);margin-top:8px;line-height:1.65;max-width:640px}
+.lockrow{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:12px;color:var(--mut)}
+.lockrow b{color:var(--teal)}
+
+/* auth */
+#gate{max-width:400px;margin:44px auto 0;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px}
+#gate h3{font-size:16px;font-weight:800;margin-bottom:4px}
+#gate p{font-size:12.5px;color:var(--mut);line-height:1.6;margin-bottom:16px}
+#gate label{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);font-weight:800;margin:12px 0 5px}
+#gate input{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:9px;color:var(--ink);font-family:inherit;font-size:14px;padding:11px 12px;outline:none}
+#gate input:focus{border-color:var(--teal)}
+#gate button{width:100%;margin-top:18px;padding:12px;border:none;border-radius:10px;background:linear-gradient(120deg,#00D6AE,#38bdf8);color:#04110d;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer}
+#gate button:disabled{opacity:.6}
+#gateErr{color:var(--rose);font-size:12.5px;margin-top:12px;line-height:1.5;display:none}
+
+/* content */
+#content{display:none}
+.meta{font-size:12px;color:var(--mut);margin:22px 0 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.person{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 22px;margin-bottom:16px}
+.p-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.p-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#04110d;flex-shrink:0}
+.p-name{font-size:17px;font-weight:800}
+.p-role{font-size:12px;color:var(--mut);margin-top:2px}
+.p-band{margin-left:auto}
+.band-sel{display:flex;gap:6px;flex-wrap:wrap}
+.band{font-size:11.5px;font-weight:800;padding:7px 13px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--mut);cursor:pointer;font-family:inherit;transition:.15s}
+.band[data-b="strong"].on{background:rgba(0,214,174,.14);border-color:var(--teal);color:var(--teal)}
+.band[data-b="ontrack"].on{background:rgba(56,189,248,.14);border-color:var(--sky);color:var(--sky)}
+.band[data-b="mixed"].on{background:rgba(245,166,35,.14);border-color:var(--amber);color:var(--amber)}
+.band[data-b="concern"].on{background:rgba(244,63,94,.14);border-color:var(--rose);color:var(--rose)}
+.p-notes{margin-top:14px}
+.p-notes label{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);font-weight:800;display:block;margin-bottom:6px}
+.p-notes textarea{width:100%;min-height:74px;background:var(--card2);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-family:inherit;font-size:13px;line-height:1.6;padding:11px 12px;resize:vertical;outline:none}
+.p-notes textarea:focus{border-color:var(--purple)}
+.savebar{position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 70%,transparent);padding:16px 0 8px;display:flex;gap:10px;align-items:center}
+.savebtn{padding:12px 26px;border:none;border-radius:10px;background:linear-gradient(120deg,#a78bfa,#6366f1);color:#fff;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer}
+.savebtn:disabled{opacity:.6}
+#saveMsg{font-size:12.5px;color:var(--mut)}
+.honesty{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.25);border-left-width:3px;border-radius:10px;padding:13px 16px;font-size:12.5px;color:#e6d9bf;line-height:1.65;margin-top:26px}
+.honesty b{color:var(--amber)}
+@media(max-width:600px){.p-band{margin-left:0;width:100%}.p-head{gap:10px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="admin_panel.html">
+    <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#lg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#lg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#lg)"/><defs><linearGradient id="lg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
+    ARTEMISAI
+  </a>
+  <a class="back" href="admin_panel.html">&larr; Admin Panel</a>
+</nav>
+
+<div class="wrap">
+  <div class="hd">
+    <h1>Team <span>Performance</span></h1>
+    <p>Leadership's working assessment of how each team member is delivering. This is <b>management judgement, recorded as judgement</b>: tickets have not been maintained, so there are no reliable completion counts to show, and this page does not pretend otherwise.</p>
+    <div class="lockrow">🔒 <span>Restricted to <b>Asad, Jill, Alex, Hannah</b>. Content is stored server-side and served only after your password is re-checked. It never appears in the site's source.</span></div>
+  </div>
+
+  <!-- credential gate -->
+  <div id="gate">
+    <h3>Verify it's you</h3>
+    <p>This page re-checks your password every time, because a remembered browser session is not enough for what it contains.</p>
+    <label for="gu">Username</label>
+    <input id="gu" autocomplete="username">
+    <label for="gp">Password</label>
+    <input id="gp" type="password" autocomplete="current-password">
+    <button id="gbtn" onclick="unlock()">Unlock</button>
+    <div id="gateErr"></div>
+  </div>
+
+  <!-- the review, only ever populated from the server -->
+  <div id="content">
+    <div class="meta">
+      <span id="metaLine"></span>
+      <span style="font-size:11.5px;color:var(--mut)">Bands and notes save for all leadership viewers</span>
+    </div>
+    <div id="people"></div>
+    <div class="savebar">
+      <button class="savebtn" onclick="saveDoc()" id="saveBtn">Save assessment</button>
+      <span id="saveMsg"></span>
+    </div>
+    <div class="honesty">
+      <b>Why there are no numbers on this page:</b> the team has not been maintaining tickets, so completion counts do not exist to be shown. What you see are the bands and notes leadership has entered, attributed and dated. When ClickUp is brought up to date, a tracked-tasks view can sit alongside this and the two can be compared honestly.
+    </div>
+  </div>
+</div>
+
+<script>
+/* The roster is the only thing the page ships with: names and roles, which are
+   already public in the sprint playbook. Assessments arrive from the server
+   after authentication and are never present in this file. */
+var ROSTER=[
+  {key:'faheem', name:'Faheem Haider', role:'Full-stack development · MARVEL pipelines', color:'#00D6AE'},
+  {key:'muteeb', name:'Muteeb Masood', role:'Engineering', color:'#38bdf8'},
+  {key:'rafeh',  name:'Abdul Rafeh',   role:'Analyst · CMO', color:'#a78bfa'}
+];
+var BANDS=[['strong','Strong'],['ontrack','On track'],['mixed','Mixed'],['concern','Needs attention']];
+var CREDS=null, DOC=null;
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
+/* prefill username from the session if there is one */
+try{
+  var s=JSON.parse(localStorage.getItem('artemis_session')||'null');
+  if(s&&s.username) document.addEventListener('DOMContentLoaded',function(){document.getElementById('gu').value=s.username;});
+}catch(e){}
+
+function unlock(){
+  var u=document.getElementById('gu').value.trim().toLowerCase();
+  var p=document.getElementById('gp').value;
+  var err=document.getElementById('gateErr'), btn=document.getElementById('gbtn');
+  err.style.display='none';
+  if(!u||!p){ err.textContent='Enter your username and password.'; err.style.display='block'; return; }
+  btn.disabled=true; btn.textContent='Checking…';
+  fetch('/api/performance',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'get',username:u,password:p})})
+    .then(function(r){ return r.json().then(function(j){ return {code:r.status,j:j}; }); })
+    .then(function(res){
+      btn.disabled=false; btn.textContent='Unlock';
+      if(res.code!==200){ err.textContent=res.j.error||'Access denied.'; err.style.display='block'; return; }
+      CREDS={username:u,password:p};
+      DOC=res.j.doc || {people:{}};
+      document.getElementById('gate').style.display='none';
+      document.getElementById('content').style.display='block';
+      render();
+    })
+    .catch(function(e){
+      btn.disabled=false; btn.textContent='Unlock';
+      err.textContent='Could not reach the server. This page only works on the deployed site. ('+e.message+')';
+      err.style.display='block';
+    });
+}
+
+function render(){
+  var meta=document.getElementById('metaLine');
+  meta.textContent = DOC.updated_at
+    ? 'Last saved '+new Date(DOC.updated_at).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+' by '+(DOC.updated_by||'unknown')
+    : 'No assessment saved yet. Set a band for each person and press Save.';
+  var host=document.getElementById('people');
+  host.innerHTML=ROSTER.map(function(person){
+    var st=(DOC.people&&DOC.people[person.key])||{};
+    var initials=person.name.split(' ').map(function(w){return w[0];}).join('').slice(0,2);
+    return '<div class="person" data-key="'+person.key+'">'
+      +'<div class="p-head">'
+        +'<div class="p-av" style="background:'+person.color+'">'+esc(initials)+'</div>'
+        +'<div><div class="p-name">'+esc(person.name)+'</div><div class="p-role">'+esc(person.role)+'</div></div>'
+        +'<div class="p-band"><div class="band-sel">'
+          +BANDS.map(function(b){
+            return '<button class="band'+(st.band===b[0]?' on':'')+'" data-b="'+b[0]+'" onclick="setBand(\''+person.key+'\',\''+b[0]+'\')">'+b[1]+'</button>';
+          }).join('')
+        +'</div></div>'
+      +'</div>'
+      +'<div class="p-notes"><label>Notes (what you have observed, in your words)</label>'
+        +'<textarea data-notes="'+person.key+'" placeholder="e.g. delivery pace, quality, ownership, communication. Written by and attributed to whoever saves.">'+esc(st.notes||'')+'</textarea>'
+      +'</div>'
+    +'</div>';
+  }).join('');
+}
+
+function setBand(key,band){
+  DOC.people=DOC.people||{};
+  DOC.people[key]=DOC.people[key]||{};
+  DOC.people[key].band = (DOC.people[key].band===band) ? null : band;
+  // keep whatever is currently typed in the notes boxes before re-rendering
+  collectNotes();
+  render();
+}
+function collectNotes(){
+  DOC.people=DOC.people||{};
+  var areas=document.querySelectorAll('textarea[data-notes]');
+  for(var i=0;i<areas.length;i++){
+    var k=areas[i].getAttribute('data-notes');
+    DOC.people[k]=DOC.people[k]||{};
+    DOC.people[k].notes=areas[i].value;
+  }
+}
+
+function saveDoc(){
+  if(!CREDS) return;
+  collectNotes();
+  var btn=document.getElementById('saveBtn'), msg=document.getElementById('saveMsg');
+  btn.disabled=true; msg.textContent='Saving…';
+  fetch('/api/performance',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'save',username:CREDS.username,password:CREDS.password,doc:DOC})})
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      btn.disabled=false;
+      if(j.error){ msg.textContent='Could not save: '+j.error; return; }
+      DOC.updated_at=j.updated_at; DOC.updated_by=CREDS.username;
+      msg.textContent='Saved.';
+      document.getElementById('metaLine').textContent='Last saved just now by '+CREDS.username;
+      setTimeout(function(){ msg.textContent=''; },2500);
+    })
+    .catch(function(e){ btn.disabled=false; msg.textContent='Could not save: '+e.message; });
+}
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter' && document.getElementById('gate').style.display!=='none'
+     && (e.target.id==='gu'||e.target.id==='gp')) unlock();
+});
+</script>
+</body>
+</html>
