@@ -180,6 +180,10 @@ body{padding-top:52px}
 .alex-text{font-size:13px;line-height:1.7;color:var(--ink)}
 .alex-text em{color:var(--purple);font-style:normal;font-weight:700}
 
+/* ART-E STYLE BUBBLES (progressive intelligence timeline) */
+.arte-bubbles{display:flex;flex-direction:column;gap:10px;text-align:left}
+.bubble{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px 14px 14px 4px;padding:12px 16px;font-size:13.5px;line-height:1.6;color:var(--ink)}
+
 /* DIVIDER */
 .divider{border:none;border-top:1px solid var(--border);margin:56px 0}
 
@@ -230,7 +234,7 @@ body{padding-top:52px}
   <div class="hero-eyebrow">CEO &amp; CO-FOUNDER · STRATEGIC NOTES</div>
   <h1 class="hero-title">Alex's <span>Vision</span></h1>
   <p class="hero-sub">Everything Alex has written, from hand-sketched February notes to the July 2026 strategy documents, synthesised into one page. This is the direction he wants the product, company, and team to go.</p>
-  <div class="hero-date">📅 Sources: Feb 2026 → Jul 2026 &nbsp;·&nbsp; 19 documents &nbsp;·&nbsp; 8 themes &nbsp;·&nbsp; <span style="color:var(--teal);font-weight:700">updated 3 Aug</span></div>
+  <div class="hero-date">📅 Sources: Feb 2026 → Aug 2026 &nbsp;·&nbsp; 20 documents &nbsp;·&nbsp; 9 themes &nbsp;·&nbsp; <span style="color:var(--teal);font-weight:700">updated 4 Aug</span></div>
 </div>
 
 <div class="page-body">
@@ -782,11 +786,116 @@ body{padding-top:52px}
 <hr class="divider">
 
 <!-- ════════════════════════════════════
+     NEW AUG 2026 · PROGRESSIVE INTELLIGENCE
+═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">08 <span style="color:var(--amber)">· NEW AUG 2026</span></div>
+    <div>
+      <div class="section-title">Progressive Intelligence: Learning, Not Loading</div>
+      <div class="section-sub">Alex's onboarding architecture. The user's excitement peaks the moment they connect a page, so value must arrive in minutes while the deep analysis compounds silently behind them. The platform never appears to finish.</div>
+    </div>
+  </div>
+
+  <div class="alex-note">
+    <div class="alex-avatar">A</div>
+    <div class="alex-text">"The platform should never appear to be <em>loading</em>. It should appear to be <em>learning</em>. Every completed stage unlocks new intelligence. Every new insight makes Artemis more valuable."</div>
+  </div>
+
+  <!-- four phases ramp -->
+  <div class="graph-wrap" style="margin-top:16px">
+    <svg viewBox="0 0 760 250" width="100%" style="max-width:820px">
+      <defs>
+        <marker id="piarr" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto"><path d="M0 0L9 3.5L0 7Z" fill="#475b7e"/></marker>
+      </defs>
+      <line x1="30" y1="196" x2="740" y2="196" stroke="#243352" stroke-width="1.5" marker-end="url(#piarr)"/>
+      <text x="740" y="214" text-anchor="end" font-size="9" fill="#64748b">time since connecting the page</text>
+
+      <circle cx="105" cy="150" r="34" fill="rgba(0,214,174,.10)" stroke="#00D6AE" stroke-width="1.6"/>
+      <text x="105" y="146" text-anchor="middle" font-size="11" font-weight="800" fill="#00D6AE">PHASE 1</text>
+      <text x="105" y="160" text-anchor="middle" font-size="8.5" fill="#94a3b8">last 90 days</text>
+      <text x="105" y="206" text-anchor="middle" font-size="9" font-weight="700" fill="#e2e8f0">minutes</text>
+      <text x="105" y="104" text-anchor="middle" font-size="8.5" fill="#64748b">what is working now,</text>
+      <text x="105" y="115" text-anchor="middle" font-size="8.5" fill="#64748b">what to change this week</text>
+
+      <circle cx="285" cy="140" r="44" fill="rgba(56,189,248,.09)" stroke="#38bdf8" stroke-width="1.6"/>
+      <text x="285" y="136" text-anchor="middle" font-size="11" font-weight="800" fill="#38bdf8">PHASE 2</text>
+      <text x="285" y="150" text-anchor="middle" font-size="8.5" fill="#94a3b8">full history, backwards</text>
+      <text x="285" y="206" text-anchor="middle" font-size="9" font-weight="700" fill="#e2e8f0">hours to days</text>
+      <text x="285" y="82" text-anchor="middle" font-size="8.5" fill="#64748b">seasonal trends, audience shifts,</text>
+      <text x="285" y="93" text-anchor="middle" font-size="8.5" fill="#64748b">identity development</text>
+
+      <circle cx="480" cy="128" r="54" fill="rgba(167,139,250,.09)" stroke="#a78bfa" stroke-width="1.6"/>
+      <text x="480" y="124" text-anchor="middle" font-size="11" font-weight="800" fill="#a78bfa">PHASE 3</text>
+      <text x="480" y="138" text-anchor="middle" font-size="8.5" fill="#94a3b8">across your own pages</text>
+      <text x="480" y="206" text-anchor="middle" font-size="9" font-weight="700" fill="#e2e8f0">weeks</text>
+      <text x="480" y="58" text-anchor="middle" font-size="8.5" fill="#64748b">audience overlap, comparable strategies,</text>
+      <text x="480" y="69" text-anchor="middle" font-size="8.5" fill="#64748b">hidden opportunities</text>
+
+      <circle cx="672" cy="118" r="62" fill="rgba(245,166,35,.10)" stroke="#f5a623" stroke-width="2"/>
+      <text x="672" y="112" text-anchor="middle" font-size="11" font-weight="800" fill="#f5a623">PHASE 4</text>
+      <text x="672" y="126" text-anchor="middle" font-size="8.5" fill="#94a3b8">the whole network</text>
+      <text x="672" y="140" text-anchor="middle" font-size="8" fill="#64748b">denser with every creator</text>
+      <text x="672" y="206" text-anchor="middle" font-size="9" font-weight="700" fill="#e2e8f0">forever</text>
+
+      <line x1="139" y1="150" x2="238" y2="143" stroke="#475b7e" stroke-width="1.3" marker-end="url(#piarr)"/>
+      <line x1="329" y1="138" x2="423" y2="131" stroke="#475b7e" stroke-width="1.3" marker-end="url(#piarr)"/>
+      <line x1="534" y1="126" x2="607" y2="121" stroke="#475b7e" stroke-width="1.3" marker-end="url(#piarr)"/>
+
+      <text x="30" y="32" font-size="10" font-weight="800" fill="#e2e8f0">each phase unlocks while the next one runs, unprompted, in the background</text>
+    </svg>
+  </div>
+
+  <!-- the living feed: Alex's own onboarding timeline -->
+  <div style="margin-top:20px;margin-bottom:10px;font-size:12px;font-weight:700;color:var(--mut);letter-spacing:.08em;text-transform:uppercase">The first day, as Alex wrote it: a series of discoveries, never an "analysis complete"</div>
+  <div class="arte-bubbles" style="max-width:640px">
+    <div class="bubble"><b style="color:var(--teal)">+5 min</b> · "Art-E has finished analysing your recent content. I've already identified three opportunities you can act on today."</div>
+    <div class="bubble"><b style="color:var(--teal)">+10 min</b> · "I've detected a shift in your audience over the last three months. This changes my recommendations."</div>
+    <div class="bubble"><b style="color:var(--sky,#38bdf8)">+30 min</b> · "I've analysed your previous year's content. Seasonal engagement patterns have emerged."</div>
+    <div class="bubble"><b style="color:var(--purple)">+1 hour</b> · "I've discovered another creator whose audience closely overlaps with yours."</div>
+    <div class="bubble"><b style="color:var(--amber)">next morning</b> · "I've identified an emerging trend across similar creators that may be relevant to your audience."</div>
+  </div>
+
+  <!-- the priority ladder -->
+  <div style="margin-top:22px;margin-bottom:10px;font-size:12px;font-weight:700;color:var(--mut);letter-spacing:.08em;text-transform:uppercase">Priority-driven, not chronological: the order Alex set</div>
+  <div class="cards-grid col2">
+    <div class="card accent-teal">
+      <div class="card-title" style="color:var(--teal)">The first hour</div>
+      <div class="card-body">
+        <div class="pill teal" style="margin:3px 2px;display:inline-flex">1 · audience &amp; page identity</div>
+        <div class="pill teal" style="margin:3px 2px;display:inline-flex">2 · top &amp; underperforming posts</div>
+        <div class="pill teal" style="margin:3px 2px;display:inline-flex">3 · content themes &amp; clusters</div>
+        <div class="pill teal" style="margin:3px 2px;display:inline-flex">4 · comment sentiment</div>
+        <div class="pill teal" style="margin:3px 2px;display:inline-flex">5 · cadence &amp; timing</div>
+        <div class="pill teal" style="margin:3px 2px;display:inline-flex">6 · prediction models</div>
+      </div>
+    </div>
+    <div class="card accent-purple">
+      <div class="card-title" style="color:var(--purple)">The background, forever</div>
+      <div class="card-body">
+        <div class="pill purple" style="margin:3px 2px;display:inline-flex">7 · cross-page comparisons</div>
+        <div class="pill purple" style="margin:3px 2px;display:inline-flex">8 · full historical backfill</div>
+        <div class="pill purple" style="margin:3px 2px;display:inline-flex">9 · long-term identity evolution</div>
+        <div class="pill purple" style="margin:3px 2px;display:inline-flex">10 · network &amp; collaboration intel</div>
+        <div style="margin-top:8px;font-size:12px;color:var(--mut)">Meaningful recommendations in minutes, not after every comment, reaction and record is labelled.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alex-note" style="margin-top:20px">
+    <div class="alex-avatar">A</div>
+    <div class="alex-text">"Every new post, every new user, every new collaboration and every new day adds another layer of intelligence. Artemis never feels finished. <em>It feels like a living decision engine that is constantly learning and uncovering new opportunities.</em>"<br><em style="font-size:11px;margin-top:4px;display:block">Progressive Intelligence Architecture, Aug 2026</em></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
      6. THE INTELLIGENCE ARCHITECTURE
 ═══════════════════════════════════════ -->
 <div class="section">
   <div class="section-header">
-    <div class="section-num">08</div>
+    <div class="section-num">09</div>
     <div>
       <div class="section-title">The Intelligence Architecture (Graph Theory)</div>
       <div class="section-sub">From Alex's Graph Theory V3 document and Sprint 3/4 input notes. This is the technical moat he's been describing since February 2026.</div>
@@ -904,7 +1013,7 @@ body{padding-top:52px}
 ═══════════════════════════════════════ -->
 <div class="section">
   <div class="section-header">
-    <div class="section-num">09 <span style="color:var(--amber)">· NEW JUL 2026</span></div>
+    <div class="section-num">10 <span style="color:var(--amber)">· NEW JUL 2026</span></div>
     <div>
       <div class="section-title">Opportunity Theory</div>
       <div class="section-sub">Alex's biggest new idea: fuse three disciplines that answer three different questions, and a fourth capability appears that nobody else has.</div>
@@ -991,7 +1100,7 @@ body{padding-top:52px}
 ═══════════════════════════════════════ -->
 <div class="section">
   <div class="section-header">
-    <div class="section-num">10 <span style="color:var(--amber)">· NEW JUL 2026</span></div>
+    <div class="section-num">11 <span style="color:var(--amber)">· NEW JUL 2026</span></div>
     <div>
       <div class="section-title">Identity Gravity &amp; The Signal Economy</div>
       <div class="section-sub">Two mechanisms inside the Living Creator Graph: creators are collections of identities that drift, and every action carries a learnable weight.</div>
@@ -1057,7 +1166,7 @@ body{padding-top:52px}
 ═══════════════════════════════════════ -->
 <div class="section">
   <div class="section-header">
-    <div class="section-num">11 <span style="color:var(--amber)">· NEW JUL 2026</span></div>
+    <div class="section-num">12 <span style="color:var(--amber)">· NEW JUL 2026</span></div>
     <div>
       <div class="section-title">The Diffusion Path</div>
       <div class="section-sub">Information does not spread evenly. It follows pathways: cluster to bridge to cluster. Artemis learns the pathways.</div>
@@ -1132,7 +1241,7 @@ body{padding-top:52px}
 ═══════════════════════════════════════ -->
 <div class="section">
   <div class="section-header">
-    <div class="section-num">12</div>
+    <div class="section-num">13</div>
     <div>
       <div class="section-title">The Facebook OAuth Strategy</div>
       <div class="section-sub">Alex's most immediately operational note. The approval is about trust, not tech.</div>
@@ -1225,7 +1334,7 @@ body{padding-top:52px}
 ═══════════════════════════════════════ -->
 <div class="section">
   <div class="section-header">
-    <div class="section-num">13 <span style="color:var(--amber)">· NEW JUL 2026</span></div>
+    <div class="section-num">14 <span style="color:var(--amber)">· NEW JUL 2026</span></div>
     <div>
       <div class="section-title">Visibility Is a Network Property</div>
       <div class="section-sub">How the atomic network grows without marketing: not broadcasting, participation. Every valuable action should be socially observable.</div>
@@ -1266,7 +1375,7 @@ body{padding-top:52px}
 ═══════════════════════════════════════ -->
 <div class="section">
   <div class="section-header">
-    <div class="section-num">14 <span style="color:var(--rose)">· ACTION PLAN · JUL 2026</span></div>
+    <div class="section-num">15 <span style="color:var(--rose)">· ACTION PLAN · JUL 2026</span></div>
     <div>
       <div class="section-title">Build the Artemis Graph Before the Product Graph</div>
       <div class="section-sub">Alex's LinkedIn memo, marked immediate and non-negotiable: apply graph thinking to our own company before we sell it to anyone else.</div>
@@ -1344,7 +1453,7 @@ body{padding-top:52px}
 ═══════════════════════════════════════ -->
 <div class="section">
   <div class="section-header">
-    <div class="section-num">15</div>
+    <div class="section-num">16</div>
     <div>
       <div class="section-title">Where It Started: February 2026 Notes</div>
       <div class="section-sub">Alex's hand-written sketches and early Sprint 3 input. Many ideas from here are still core to the product.</div>
@@ -1387,7 +1496,7 @@ body{padding-top:52px}
 ═══════════════════════════════════════ -->
 <div class="section">
   <div class="section-header">
-    <div class="section-num">16</div>
+    <div class="section-num">17</div>
     <div>
       <div class="section-title">Competitive Position</div>
       <div class="section-sub">Alex's competitor analysis, where the gaps are and how to exploit them.</div>
@@ -1439,7 +1548,7 @@ body{padding-top:52px}
 ═══════════════════════════════════════ -->
 <div class="section">
   <div class="section-header">
-    <div class="section-num">17</div>
+    <div class="section-num">18</div>
     <div>
       <div class="section-title">The Story We Tell</div>
       <div class="section-sub">From Alex's April 2026 notes, the emotional and philosophical dimension of the brand.</div>
@@ -1477,7 +1586,7 @@ body{padding-top:52px}
 ═══════════════════════════════════════ -->
 <div class="section">
   <div class="section-header">
-    <div class="section-num">18</div>
+    <div class="section-num">19</div>
     <div>
       <div class="section-title">Vision → Build: Where Each Idea Lands</div>
       <div class="section-sub">Every concept above mapped to the sprint that ships it, per the <a href="sprint_playbook.html" style="color:var(--teal);text-decoration:underline">Sprint Playbook</a>. Launch is 28 Nov; the network layer compounds after it.</div>
@@ -1514,6 +1623,10 @@ body{padding-top:52px}
       <div class="layer-content"><span class="pill rose">after launch</span><span style="font-size:11.5px;color:var(--mut)">needs accumulated network memory; the MVP data layer is what feeds it</span></div>
     </div>
     <div class="layer-row">
+      <div class="layer-label"><div class="layer-name">Progressive onboarding</div><div class="layer-tag">learning, not loading</div></div>
+      <div class="layer-content"><a href="sprint_playbook.html#s21" class="pill amber">S21 · OAuth + onboard</a><span style="font-size:11.5px;color:var(--mut)">the 90-days-first, priority-driven analysis shapes the connect flow</span></div>
+    </div>
+    <div class="layer-row">
       <div class="layer-label"><div class="layer-name">Professional graph</div><div class="layer-tag">LinkedIn playbook</div></div>
       <div class="layer-content"><span class="pill emerald">now · whole team</span><span style="font-size:11.5px;color:var(--mut)">runs alongside every sprint, no engineering needed</span></div>
     </div>
@@ -1527,7 +1640,7 @@ body{padding-top:52px}
 ═══════════════════════════════════════ -->
 <div class="section">
   <div class="section-header">
-    <div class="section-num">19</div>
+    <div class="section-num">20</div>
     <div>
       <div class="section-title">The North Star</div>
       <div class="section-sub">If Alex could boil it all down to the essential directives for the team.</div>
@@ -1569,7 +1682,7 @@ body{padding-top:52px}
       <svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#aflg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#aflg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#aflg)"/><defs><linearGradient id="aflg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg>
       ARTEMISAI
     </div>
-    <div class="af-copy">Alex's Vision &middot; Synthesised from 19 documents (Feb&ndash;Jul 2026) &middot; Internal team use only</div>
+    <div class="af-copy">Alex's Vision &middot; Synthesised from 20 documents (Feb&ndash;Aug 2026) &middot; Internal team use only</div>
     <div class="af-links">
       <a href="admin_panel.html">Admin Panel</a>
       <a href="dependency_tree.html">Master Plan</a>
