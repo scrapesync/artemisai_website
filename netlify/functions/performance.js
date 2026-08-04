@@ -96,9 +96,22 @@ exports.handler = async (event) => {
   }
 
   // save: the whole document, replaced atomically, stamped with who saved it.
+  // doc.people is an object keyed by person ({faheem:{band,notes},...}), which
+  // the first version of this check wrongly demanded be an array and rejected
+  // every legitimate save.
   const doc = body.doc;
-  if (!doc || typeof doc !== "object" || !Array.isArray(doc.people)) {
-    return reply(400, { error: "Expected doc.people" });
+  if (!doc || typeof doc !== "object" || !doc.people || typeof doc.people !== "object" || Array.isArray(doc.people)) {
+    return reply(400, { error: "Expected doc.people as an object" });
+  }
+  const BANDS = ["strong", "ontrack", "mixed", "concern", null];
+  for (const k of Object.keys(doc.people)) {
+    const p = doc.people[k] || {};
+    if (p.band !== undefined && !BANDS.includes(p.band)) {
+      return reply(400, { error: "Unknown band for " + k });
+    }
+    if (p.notes !== undefined && typeof p.notes !== "string") {
+      return reply(400, { error: "Notes must be text" });
+    }
   }
   doc.updated_at = new Date().toISOString();
   doc.updated_by = username;
