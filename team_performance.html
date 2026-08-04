@@ -136,8 +136,7 @@ nav{height:54px;padding:0 20px;display:flex;align-items:center;justify-content:s
 
   <!-- the review, only ever populated from the server -->
   <div id="content">
-    <div class="meta">
-      <span id="metaLine"></span>
+    <div class="meta" style="justify-content:flex-end">
       <div class="modes">
         <button id="m-view" onclick="setMode('view')">Overview</button>
         <button id="m-edit" onclick="setMode('edit')">Edit</button>
@@ -274,10 +273,6 @@ function renderView(){
 }
 
 function render(){
-  var meta=document.getElementById('metaLine');
-  meta.textContent = DOC.updated_at
-    ? 'Last saved '+new Date(DOC.updated_at).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+' by '+(DOC.updated_by||'unknown')
-    : 'No assessment saved yet. Set a band for each person and press Save.';
   var host=document.getElementById('people');
   host.innerHTML=ROSTER.map(function(person){
     var st=(DOC.people&&DOC.people[person.key])||{};
@@ -330,7 +325,6 @@ function saveDoc(){
       if(j.error){ msg.textContent='Could not save: '+j.error; return; }
       DOC.updated_at=j.updated_at; DOC.updated_by=CREDS.username;
       msg.textContent='Saved.';
-      document.getElementById('metaLine').textContent='Last saved just now by '+CREDS.username;
       setTimeout(function(){ msg.textContent=''; setMode('view'); },700);
     })
     .catch(function(e){ btn.disabled=false; msg.textContent='Could not save: '+e.message; });
