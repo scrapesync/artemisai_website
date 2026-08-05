@@ -601,12 +601,12 @@ body{padding-top:52px!important}
 <!-- ============ S8 OVERVIEW ============ -->
 <section id="s8">
   <div class="sec-head"><span class="n">S8</span><h2>Sprint 8 · 5 to 18 Aug 2026 · Predictions + a voice</h2><div class="rule"></div></div>
-  <p class="sec-sub"><b>The mission in one sentence:</b> ship flop detection end to end: an honest score on every draft and weak-post warnings on the feed, with reasons, never viral promises. S6 gave the product eyes, S7 gave it foresight, <b>S8 puts the foresight in front of the user.</b> <span style="color:var(--amber);font-weight:700">Rescoped 29 Jul:</span> Art-E moved to S16 (it needs the real RAG index + tenancy that land there), and the metric migration finishes before this sprint starts (marvel PR #7), so S8 carries neither.</p>
+  <p class="sec-sub"><b>The mission in one sentence:</b> ship flop detection end to end: an honest score on every draft and weak-post warnings on the feed, with reasons, never viral promises. S6 gave the product eyes, S7 gave it foresight, <b>S8 puts the foresight in front of the user.</b> <span style="color:var(--amber);font-weight:700">Rescoped 29 Jul:</span> Art-E moved to S16 (it needs the real RAG index + tenancy that land there), and the metric migration finishes before this sprint starts (marvel PR #7), so S8 carries neither. <span style="color:var(--teal);font-weight:700">Updated 5 Aug:</span> a v1 model already exists before day 1 (VD-015B: LightGBM adopted, image features +10% ranking lift, runs end to end on 27K posts). The sprint's model work is now <b>proof, not construction</b>: re-score the gate at the real flop cut, show the calibration receipt, then freeze v1 on Friday of week 1 and give week 2 to the surfaces.</p>
   <div class="stats">
     <div class="stat"><div class="v">9</div><div class="k">tickets</div></div>
     <div class="stat"><div class="v">8</div><div class="k">owners</div></div>
     <div class="stat"><div class="v">1+2</div><div class="k">model + two surfaces</div></div>
-    <div class="stat"><div class="v">4</div><div class="k">decisions to lock</div></div>
+    <div class="stat"><div class="v">4+3</div><div class="k">decisions + added gates</div></div>
     <div class="stat"><div class="v">2w</div><div class="k">5 Aug to 18 Aug</div></div>
   </div>
 </section>
@@ -648,7 +648,7 @@ body{padding-top:52px!important}
   <div class="decs">
     <div class="dec blocker">
       <div class="dt"><span class="id">D0</span><b>The new target</b></div>
-      <p>Both old targets died with Meta's metrics. The model cannot train, ladders cannot be built, bands cannot be cut until the new target is chosen. Recommended candidate and back-test protocol are in Workstream A below. Forces Master Rules Conflict #1 closed.</p>
+      <p>Both old targets died with Meta's metrics. The candidates are now concrete: <b>shares-percentile</b> (what VD-015B built: deprecation-proof, but measured on our own warehouse 23.3% of all posts have zero shares and two pages have a MEDIAN of zero, so small-page ladders tie at the bottom) vs <b>views-percentile</b> (dense: every post has views). Run the pre-registered A/B with the pass line declared first. Either result keeps Faheem's pipeline; only the label column changes. Forces Master Rules Conflict #1 closed.</p>
       <div class="who"><b>Rafeh + Alex</b> (Faheem supplies the distribution pull) · due day 2</div>
     </div>
     <div class="dec blocker">
@@ -658,13 +658,31 @@ body{padding-top:52px!important}
     </div>
     <div class="dec">
       <div class="dt"><span class="id">D2</span><b>Flop cut: bottom third or bottom quarter</b></div>
-      <p>Two specs say bottom third (33rd percentile), one flow diagram says quarter. It changes what "weak post" means and how the 75% precision floor is measured. Method is locked (percentile cuts); the number needs one owner to say it once. <span class="mr">MR-8.2</span></p>
-      <div class="who"><b>Rafeh</b> · due with D0, day 2</div>
+      <p>Two specs say bottom third (33rd percentile), one flow diagram says quarter. It changes what "weak post" means and how the 75% precision floor is measured. <span style="color:var(--amber);font-weight:700">5 Aug:</span> VD-015B's 75-83% was measured with flop = bottom HALF, an easier base rate than either candidate cut. Decide D2 <b>with the re-scored numbers in hand</b>: same model, same test set, precision and coverage at the 33rd and 25th cuts. One day of work; do not repeat the 75% upstream until it exists. <span class="mr">MR-8.2</span></p>
+      <div class="who"><b>Rafeh decides · Faheem re-scores first</b> · due with D0, day 2</div>
     </div>
     <div class="dec">
       <div class="dt"><span class="id">D3</span><b>Usable-signal definition</b></div>
-      <p>Below 5 usable signals a draft gets "not enough to score yet", but which inputs count toward the 5 is undefined <span class="mr">MR-2.7</span>. Faheem + Asad settle it in week 1 so the honest states are consistent across the model and both surfaces.</p>
+      <p>Below 5 usable signals a draft gets "not enough to score yet", but which inputs count toward the 5 is undefined <span class="mr">MR-2.7</span>. This is not hypothetical: 6K of the 27K modelling posts (22%) lack image coverage today, and production drafts will arrive with missing signals from day 1. Faheem + Asad settle it in week 1 so the honest states are consistent across the model and both surfaces.</p>
       <div class="who"><b>Faheem + Asad</b> · due week 1</div>
+    </div>
+  </div>
+  <p class="sec-sub" style="margin-top:14px"><span style="color:var(--teal);font-weight:700">Added 5 Aug, from the VD-015B measurement review:</span> three build gates that ride with the week-1 freeze.</p>
+  <div class="decs">
+    <div class="dec">
+      <div class="dt"><span class="id">G1</span><b>The calibration receipt</b></div>
+      <p>"Calibrated" is committed in the output spec but no reliability curve exists. The receipt ships WITH the v1 freeze: isotonic fit on the newest window (the model straddles the 15 Jun metric change), reliability curve per page tier, and live warning-precision piped to the QA dashboard from day-1 render logs. Quote precision as a range: the flagged test set is a few hundred posts, so the honest claim carries roughly +/-4 points.</p>
+      <div class="who"><b>Faheem</b> · with the freeze, Friday week 1</div>
+    </div>
+    <div class="dec">
+      <div class="dt"><span class="id">G2</span><b>The reasons design, before the surfaces</b></div>
+      <p>The predictive lift lives in ~100 opaque image-embedding dimensions; the explainable features are the weak ones. Naive SHAP-to-text will explain scores with things that barely moved them. Decide now: grouped attribution (image block vs timing vs caption vs page form) with templated language per group, and the one suggested fix drawn only from groups a user can change.</p>
+      <div class="who"><b>Faheem + Asad</b> · design locked week 1</div>
+    </div>
+    <div class="dec">
+      <div class="dt"><span class="id">G3</span><b>One shared feature-builder</b></div>
+      <p>Training features come from warehouse batch, serving recomputes them live: two codebases computing one definition is how models silently degrade. The D1 contract includes the exact feature vector, and a single shared builder library serves both paths (batch imports it, the lambda imports it). Follower count as of draft time, never today's. Era flags identical on both sides.</p>
+      <div class="who"><b>Faheem + Muteeb</b> · builder shared by end of week 1</div>
     </div>
   </div>
 </section>
@@ -677,6 +695,7 @@ body{padding-top:52px!important}
       <span class="tag">The model · "we play on patterns"</span>
       <h3>Predict the risk of underperforming. Never promise virality.</h3>
       <p>The research is unambiguous: the top end of social performance is post-publish luck, and our own A/B proved it (AUC 0.51 on winners, 2 "strong" calls in 971 posts). What IS learnable is the bottom: flop-band posts land a real 20 points lower on their page's own ladder. So the model ranks every draft against <b>its own page's last 12 months</b> and warns when a draft looks like the page's historical bottom third, with three reasons and a calibrated probability. <span class="mr">MR-1.1</span> <span class="mr">MR-1.2</span></p>
+      <p style="margin-top:10px"><span style="color:var(--teal);font-weight:700">Measured, 4 Aug (VD-015B):</span> text/timing baseline rank-corr 0.153; +image content 0.169 (+10%, and caption semantics add ~0, so the image is where investment goes); XGBoost to LightGBM +1%, adopted; a coverage artifact that made images look useless was caught and reversed by re-testing like for like. Warning precision 75-83% at 10-15% coverage <b>on the interim bottom-half label</b>: re-scoring at the real cut is gate D2, and the number is quoted as a range pending confidence intervals. Raw CLIP embeddings and richer page-history features land later as v1.1 behind the same interface, never at the cost of week 2.</p>
     </div>
     <div class="ws-body">
 
@@ -1679,7 +1698,7 @@ body{padding-top:52px!important}
 <div class="pane" id="pane-s12">
 <section id="s12">
   <div class="sec-head"><span class="n">S12</span><h2>Sprint 12 · 30 Aug to 12 Sep · The boring sprint that saves the launch</h2><div class="rule"></div></div>
-  <p class="sec-sub"><b>In one sentence:</b> nothing new appears on screen. We build the observability that makes every later sprint debuggable, capture audience features so the data compounds while segmentation stays Phase-2, and start the Discovery feed pipeline S13 needs. <b>The honest framing:</b> this is the sprint that buys the other twelve their safety net.</p>
+  <p class="sec-sub"><b>In one sentence:</b> nothing new appears on screen. We build the observability that makes every later sprint debuggable, capture audience features so the data compounds while segmentation stays Phase-2, and start the Discovery feed pipeline S13 needs. <span style="color:var(--teal);font-weight:700">Added 5 Aug:</span> this sprint also lays the plumbing for Alex's Progressive Intelligence architecture: a per-page analysis queue that can run the last 90 days first, then walk history backwards in the background, in his priority order. S21's onboarding flow consumes it; if the queue is not built here, onboarding becomes a big-bang analysis and the "learning, not loading" first hour is lost. <b>The honest framing:</b> this is the sprint that buys the other twelve their safety net.</p>
   <div class="stats"><div class="stat"><div class="v">7</div><div class="k">tickets</div></div><div class="stat"><div class="v">0</div><div class="k">new screens</div></div><div class="stat"><div class="v">3</div><div class="k">things that stop future fires</div></div><div class="stat"><div class="v">2w</div><div class="k">30 Aug to 12 Sep</div></div></div>
 </section>
 <section id="s12-plan">
@@ -2419,7 +2438,7 @@ body{padding-top:52px!important}
 <div class="pane" id="pane-s21">
 <section id="s21">
   <div class="sec-head"><span class="n">S21</span><h2>Sprint 21 · 24 Oct to 6 Nov · The doors open</h2><div class="rule"></div></div>
-  <p class="sec-sub"><b>In one sentence:</b> Facebook OAuth goes to Live Mode so anyone can connect a page for real, the full Settings ships, and a new pilot can go from zero to first value without anyone holding their hand. <b>This is the sprint with the single biggest external dependency:</b> Meta's App Review is not on our schedule.</p>
+  <p class="sec-sub"><b>In one sentence:</b> Facebook OAuth goes to Live Mode so anyone can connect a page for real, the full Settings ships, and a new pilot can go from zero to first value without anyone holding their hand. <span style="color:var(--teal);font-weight:700">Added 5 Aug:</span> "first value" now has a definition, from Alex's Progressive Intelligence doc: the last 90 days analysed first in his priority order (audience identity, top and bottom posts, themes, sentiment, cadence, predictions), real recommendations within minutes, and the connect screen showing "learning", never "loading", while history backfills behind the scenes on the S12 queue. <b>This is the sprint with the single biggest external dependency:</b> Meta's App Review is not on our schedule.</p>
   <div class="stats"><div class="stat"><div class="v">19</div><div class="k">tickets</div></div><div class="stat"><div class="v">2</div><div class="k">screens complete</div></div><div class="stat"><div class="v">1</div><div class="k">external dependency</div></div><div class="stat"><div class="v">2w</div><div class="k">24 Oct to 6 Nov</div></div></div>
 </section>
 <section id="s21-plan">
