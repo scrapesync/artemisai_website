@@ -264,8 +264,12 @@ async function handleMessage(msg, viewer) {
 
   switch (method) {
     case "initialize": {
+      // Echo any date-shaped protocol version the client requests: this server
+      // only uses the tools surface, which is stable across MCP revisions, and
+      // some clients (claude.ai among them) refuse to downgrade — answering
+      // with an older version than they asked for reads as a failed connection.
       const requested = params && params.protocolVersion;
-      const version = PROTOCOL_VERSIONS.includes(requested) ? requested : PROTOCOL_VERSIONS[0];
+      const version = /^\d{4}-\d{2}-\d{2}$/.test(requested || "") ? requested : PROTOCOL_VERSIONS[0];
       return rpcResult(id, {
         protocolVersion: version,
         capabilities: { tools: { listChanged: false } },
