@@ -21,6 +21,7 @@
 //     SELECT/WITH-only statement filtering, row caps, query timeout.
 
 const { Client } = require("pg");
+const { connectLambda, getStore } = require("@netlify/blobs");
 
 const PROTOCOL_VERSIONS = ["2025-06-18", "2025-03-26", "2024-11-05"];
 
@@ -300,8 +301,48 @@ async function handleMessage(msg, viewer) {
   }
 }
 
-exports.handler = async (event) => {
+// Temporary connection-debug capture: records every request (key redacted) so
+// we can see exactly what a failing client sends. Dump with GET ?debug=<key>.
+async function captureRequest(event, status) {
+  try {
+    connectLambda(event);
+    const store = getStore("mcp-debug");
+    const prior = (await store.get("recent", { type: "json" })) || [];
+    const redactedPath = (event.path || "").replace(/\/mcp\/[^/?#]+/, "/mcp/<key>");
+    prior.push({
+      at: new Date().toISOString(),
+      method: event.httpMethod,
+      path: redactedPath,
+      hasQueryKey: Boolean((event.queryStringParameters || {}).key),
+      headers: {
+        "user-agent": event.headers["user-agent"] || "",
+        accept: event.headers.accept || "",
+        "content-type": event.headers["content-type"] || "",
+        "mcp-protocol-version": event.headers["mcp-protocol-version"] || "",
+        "mcp-session-id": event.headers["mcp-session-id"] || "",
+      },
+      body: (event.body || "").slice(0, 300),
+      respondedWith: status,
+    });
+    await store.setJSON("recent", prior.slice(-40));
+  } catch {}
+}
+
+async function respond(event) {
   if (event.httpMethod === "OPTIONS") return { statusCode: 204, headers: HEADERS };
+
+  // Debug dump (requires a valid access key): GET /api/mcp?debug=<key>
+  const debugKey = (event.queryStringParameters || {}).debug;
+  if (event.httpMethod === "GET" && debugKey && keyTable()[debugKey]) {
+    try {
+      connectLambda(event);
+      const store = getStore("mcp-debug");
+      const log = (await store.get("recent", { type: "json" })) || [];
+      return { statusCode: 200, headers: HEADERS, body: JSON.stringify(log) };
+    } catch (err) {
+      return { statusCode: 500, headers: HEADERS, body: JSON.stringify({ error: String(err.message || err) }) };
+    }
+  }
   if (event.httpMethod === "GET" || event.httpMethod === "DELETE") {
     // Stateless server: no SSE stream to open, no session to delete.
     return { statusCode: 405, headers: HEADERS, body: JSON.stringify(rpcError(null, -32000, "Method not allowed")) };
@@ -336,4 +377,11 @@ exports.handler = async (event) => {
   if (!responses.length) return { statusCode: 202, headers: HEADERS, body: "" };
   const body = Array.isArray(parsed) ? responses : responses[0];
   return { statusCode: 200, headers: HEADERS, body: JSON.stringify(body) };
+}
+
+exports.handler = async (event) => {
+  const res = await respond(event);
+  const isDebugDump = event.httpMethod === "GET" && (event.queryStringParameters || {}).debug;
+  if (event.httpMethod !== "OPTIONS" && !isDebugDump) await captureRequest(event, res.statusCode);
+  return res;
 };
