@@ -110,11 +110,13 @@ const TOOLS = [
 
 function keyTable() {
   // MCP_ANALYST_KEYS = "asad:abc123,faheem:def456"
+  // A bare entry with no name ("abc123") also works and is labeled "analyst".
   const raw = process.env.MCP_ANALYST_KEYS || "";
   const map = {};
   for (const pair of raw.split(",")) {
     const i = pair.indexOf(":");
     if (i > 0) map[pair.slice(i + 1).trim()] = pair.slice(0, i).trim();
+    else if (pair.trim()) map[pair.trim()] = "analyst";
   }
   return map;
 }
