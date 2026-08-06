@@ -126,7 +126,12 @@ function authenticate(event) {
   const qs = (event.queryStringParameters || {}).key || "";
   const hdr = event.headers.authorization || event.headers.Authorization || "";
   const bearer = hdr.startsWith("Bearer ") ? hdr.slice(7).trim() : "";
-  return keys[qs] || keys[bearer] || null;
+  // Also accept the key as a path segment (/api/mcp/<key>) — some connector
+  // clients handle query strings poorly, and URLs with special characters
+  // in the query can trip URL validators.
+  const m = (event.path || "").match(/\/mcp\/([^/?#]+)/);
+  const pathKey = m ? decodeURIComponent(m[1]) : "";
+  return keys[qs] || keys[bearer] || keys[pathKey] || null;
 }
 
 // ---------- db ----------
