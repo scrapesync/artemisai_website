@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArtemisAI · Launch Marketing War Room</title>
+<title>ArtemisAI · Marketing — Today's Post</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -11,84 +11,88 @@
 body{font-family:'DM Sans',Arial,sans-serif;background:
  radial-gradient(1100px 600px at 85% -10%, rgba(109,99,255,.14), transparent 60%),
  radial-gradient(900px 500px at -10% 110%, rgba(0,214,174,.10), transparent 55%), var(--bg);
- color:var(--ink);min-height:100vh;padding:20px 22px 60px}
-a{color:inherit}
-.wrap{max-width:1120px;margin:0 auto}
-.hd{text-align:center;max-width:900px;margin:18px auto 10px}
-.eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:9px}
-.hd h1{font-size:32px;font-weight:900;letter-spacing:-.5px;margin-bottom:10px}
-.hd .sub{color:var(--mut);font-size:13.5px;line-height:1.6;max-width:760px;margin:0 auto}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:820px;margin:22px auto 8px}
-.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 10px;text-align:center}
-.stat .v{font-size:22px;font-weight:900;color:var(--teal)}
-.stat .k{font-size:10.5px;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
-.secnav{position:sticky;top:8px;z-index:50;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:20px auto;padding:9px 12px;background:rgba(8,11,20,.9);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:30px;max-width:900px}
-.secnav a{font-size:11.5px;font-weight:700;color:var(--mut);text-decoration:none;padding:6px 12px;border-radius:20px;transition:.15s}
-.secnav a:hover{color:var(--teal);background:rgba(0,214,174,.08)}
-h2.sec{font-size:20px;font-weight:900;margin:44px 0 6px;display:flex;align-items:center;gap:10px}
-h2.sec .n{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--teal);border:1px solid rgba(0,214,174,.4);padding:3px 9px;border-radius:20px}
-p.lede{color:var(--mut);font-size:13px;line-height:1.65;max-width:860px;margin-bottom:18px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.pill-card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px 16px;position:relative;overflow:hidden}
-.pill-card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--cc,#00D6AE);opacity:.85}
-.pill-card h3{font-size:14px;font-weight:800;margin-bottom:7px;display:flex;gap:8px;align-items:center}
-.pill-card p{font-size:12px;color:var(--mut);line-height:1.6}
-.pill-card .why{margin-top:8px;font-size:11px;color:var(--cc,#00D6AE);font-weight:700}
-.rule{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
-.rule b{font-size:12.5px}
-.rule span{display:block;font-size:11.5px;color:var(--mut);line-height:1.55;margin-top:3px}
-.rule .ic{font-size:16px;line-height:1.3}
-.rules{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.phases{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px}
-.phase{border:1px solid var(--line);border-radius:13px;padding:12px;background:var(--panel)}
-.phase b{font-size:12px;display:block}
-.phase i{font-style:normal;font-size:10px;color:var(--mut);display:block;margin:3px 0 6px}
-.phase p{font-size:10.5px;color:var(--mut);line-height:1.5}
-.wk{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:15px 16px;margin-bottom:12px;position:relative}
-.wk.current{border-color:rgba(0,214,174,.65);box-shadow:0 0 0 1px rgba(0,214,174,.35), 0 12px 32px -18px rgba(0,214,174,.4)}
-.wk.past{opacity:.62}
-.wk-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
-.wk-num{font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--teal)}
-.wk-date{font-size:11px;color:var(--mut)}
-.wk-title{font-size:14.5px;font-weight:800;flex:1}
-.chip{font-size:9.5px;font-weight:800;letter-spacing:.05em;padding:3px 9px;border-radius:20px;text-transform:uppercase;white-space:nowrap}
-.chip.ev{background:rgba(245,166,35,.12);color:var(--amber);border:1px solid rgba(245,166,35,.4)}
-.chip.ms{background:rgba(167,139,250,.12);color:var(--violet);border:1px solid rgba(167,139,250,.4)}
-.chip.hot{background:rgba(244,63,94,.13);color:var(--rose);border:1px solid rgba(244,63,94,.45)}
-.chip.now{background:rgba(0,214,174,.13);color:var(--teal);border:1px solid rgba(0,214,174,.45)}
-.posts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.post{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:9px 11px;font-size:11.5px;color:var(--mut);line-height:1.5}
-.post b{color:var(--ink);font-size:11.5px}
-.fmt{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.06em;padding:2px 7px;border-radius:12px;margin-right:6px;text-transform:uppercase}
-.fmt.car{background:rgba(0,214,174,.14);color:var(--teal)}
-.fmt.img{background:rgba(56,189,248,.14);color:var(--sky)}
-.fmt.vid{background:rgba(244,63,94,.14);color:var(--rose)}
-.fmt.txt{background:rgba(167,139,250,.14);color:var(--violet)}
-.fmt.nl{background:rgba(245,166,35,.14);color:var(--amber)}
-.fmt.fdr{background:rgba(244,114,182,.16);color:var(--pink)}
-.ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.ev-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
-.ev-card .d{font-size:10.5px;font-weight:800;color:var(--amber);letter-spacing:.05em}
-.ev-card b{display:block;font-size:12.5px;margin:3px 0 4px}
-.ev-card p{font-size:11px;color:var(--mut);line-height:1.5}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
-.kpi .t{font-size:11px;color:var(--mut);margin-bottom:4px}
-.kpi .g{font-size:15px;font-weight:900;color:var(--teal)}
-.callout{background:linear-gradient(135deg,rgba(0,214,174,.07),rgba(56,189,248,.05));border:1px solid rgba(0,214,174,.3);border-radius:15px;padding:16px 18px;margin:14px 0}
-.callout b{color:var(--teal)}
-.callout{font-size:12.5px;color:var(--mut);line-height:1.65}
-@media(max-width:900px){.grid3,.ev-grid{grid-template-columns:1fr 1fr}.phases{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.rules,.grid2,.posts{grid-template-columns:1fr}}
-@media(max-width:600px){.grid3,.ev-grid{grid-template-columns:1fr}}
-/* shared site header */
+ color:var(--ink);min-height:100vh;padding:76px 20px 60px}
+.wrap{max-width:980px;margin:0 auto}
+/* tabs */
+.tabs{display:flex;gap:8px;justify-content:center;margin:6px 0 26px}
+.tab{font-size:14px;font-weight:800;letter-spacing:.04em;padding:11px 30px;border-radius:14px;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--mut);transition:.15s}
+.tab.on{background:linear-gradient(135deg,rgba(0,214,174,.16),rgba(56,189,248,.10));border-color:rgba(0,214,174,.55);color:var(--teal)}
+.pane{display:none}.pane.on{display:block}
+/* ---------- TODAY ---------- */
+.tod-date{text-align:center;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
+.big{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 26px;margin:0 auto 14px;max-width:720px;position:relative;overflow:hidden}
+.big::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--cc,#00D6AE)}
+.big .top{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.fmt{font-size:10px;font-weight:800;letter-spacing:.08em;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.fmt.car{background:rgba(0,214,174,.15);color:var(--teal)}
+.fmt.img{background:rgba(56,189,248,.15);color:var(--sky)}
+.fmt.vid{background:rgba(244,63,94,.15);color:var(--rose)}
+.fmt.txt{background:rgba(167,139,250,.15);color:var(--violet)}
+.fmt.nl{background:rgba(245,166,35,.15);color:var(--amber)}
+.evchip{font-size:10px;font-weight:800;padding:5px 12px;border-radius:20px;background:rgba(245,166,35,.13);color:var(--amber);border:1px solid rgba(245,166,35,.4)}
+.big h2{font-size:24px;font-weight:900;line-height:1.25;margin-bottom:10px}
+.big .hook{font-size:14px;color:var(--mut);line-height:1.6}
+.big .meta{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.who{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);padding:7px 14px 7px 8px;border-radius:24px;font-size:12px;font-weight:700}
+.av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#06121c}
+.none{max-width:720px;margin:0 auto;text-align:center;background:var(--panel);border:1px dashed var(--line);border-radius:20px;padding:34px 20px;color:var(--mut);font-size:14px}
+.none b{color:var(--ink)}
+.nxt{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);text-align:center;margin:26px 0 10px}
+.weekstrip{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;max-width:720px;margin:26px auto 0}
+.dcell{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:9px 6px;text-align:center;min-height:64px}
+.dcell.today{border-color:rgba(0,214,174,.6)}
+.dcell .dn{font-size:9.5px;font-weight:800;letter-spacing:.08em;color:var(--mut);text-transform:uppercase}
+.dcell .dd{font-size:13px;font-weight:900;margin:2px 0 5px}
+.dot{width:8px;height:8px;border-radius:50%;margin:2px auto 0}
+/* ---------- STRATEGY ---------- */
+.sec-t{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin:38px 0 14px;text-align:center}
+.panelbox{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+svg text{font-family:'DM Sans',Arial,sans-serif}
+.voices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.voice{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 14px;text-align:center}
+.voice .a{width:52px;height:52px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#06121c}
+.voice b{font-size:15px;display:block}
+.voice span{font-size:11px;color:var(--mut);display:block;margin-top:4px;line-height:1.5}
+.support{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.sup{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.sup .a{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#06121c;flex-shrink:0}
+.sup b{font-size:12.5px;display:block}
+.sup span{font-size:10px;color:var(--mut)}
+.tmpl{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:center}
+.mini{width:100%;max-width:300px;aspect-ratio:4/5;background:#070a12;border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+.mini .lg{display:flex;align-items:center;gap:6px;font-size:9px;font-weight:800;letter-spacing:.12em;color:var(--ink)}
+.mini .mk{width:16px;height:16px;border:1.5px solid var(--teal);border-radius:4px;position:relative}
+.mini .hero{font-size:26px;font-weight:900;text-align:center;line-height:1.2}
+.mini .hero i{font-style:normal;background:linear-gradient(90deg,#00D6AE,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.mini .stat{font-size:34px;font-weight:900;color:var(--teal)}
+.mini .cap{font-size:9px;color:var(--mut)}
+.mini .chips{display:flex;gap:5px}
+.mini .c{font-size:7.5px;font-weight:800;color:var(--teal);border:1px solid rgba(0,214,174,.5);padding:2px 7px;border-radius:10px}
+.trules{display:flex;flex-direction:column;gap:9px}
+.trule{display:flex;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:10px 13px;font-size:12px}
+.trule .i{font-size:16px}
+.trule b{color:var(--ink)}
+.mix{display:flex;flex-direction:column;gap:9px}
+.mrow{display:flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700}
+.mrow .lbl{width:120px;color:var(--mut)}
+.mbar{flex:1;height:18px;border-radius:9px;background:rgba(255,255,255,.05);overflow:hidden}
+.mbar i{display:block;height:100%;border-radius:9px}
+.mrow .pc{width:36px;text-align:right;color:var(--ink)}
+.evmonths{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.evm{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:11px}
+.evm b{font-size:11px;letter-spacing:.1em;color:var(--teal);display:block;margin-bottom:8px;text-transform:uppercase;text-align:center}
+.evi{font-size:10.5px;color:var(--mut);line-height:1.45;padding:4px 0;border-top:1px solid rgba(255,255,255,.05)}
+.evi b{display:inline;color:var(--amber);font-size:10.5px;letter-spacing:0;text-transform:none}
+.rulechips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.rc{display:flex;gap:9px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;font-size:11.5px;color:var(--mut)}
+.rc .i{font-size:17px}
+.rc b{color:var(--ink);display:block;font-size:12px}
+@media(max-width:760px){.voices,.support,.rulechips{grid-template-columns:1fr}.evmonths{grid-template-columns:repeat(2,1fr)}.tmpl{grid-template-columns:1fr}.weekstrip{grid-template-columns:repeat(4,1fr)}}
 nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06)}
 .sn-logo{font-size:1rem;font-weight:800;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.55rem}
 .sn-logo-mark{width:26px;height:26px}.sn-logo-mark svg{width:100%;height:100%}
 .sn-links{display:flex;align-items:center;gap:1rem;list-style:none}
-.sn-pill{padding:.4rem 1rem;border:1px solid rgba(0,212,170,.3);border-radius:7px;color:#00d4aa!important;font-size:.8rem;text-decoration:none;transition:all .2s;white-space:nowrap}
-.sn-pill:hover{background:rgba(0,212,170,.07)!important}
-body{padding-top:72px!important}
+.sn-pill{padding:.4rem 1rem;border:1px solid rgba(0,212,170,.3);border-radius:7px;color:#00d4aa!important;font-size:.8rem;text-decoration:none;white-space:nowrap}
 </style></head>
 <body>
 
@@ -102,306 +106,137 @@ body{padding-top:72px!important}
 
 <div class="wrap">
 
-<div class="hd">
-  <div class="eyebrow">Marketing · LinkedIn + beyond · 10 Aug to launch</div>
-  <h1>Launch Marketing War Room 📣</h1>
-  <div class="sub">The full pre-launch playbook: what we post every week, where, in what format, and why. Built on 2026 LinkedIn algorithm data, the waitlist playbooks of Robinhood, Superhuman, Arc and Clay, and every event between now and launch. Target: <b style="color:var(--teal)">maximum warm audience on launch day, Tuesday 1 December 2026.</b></div>
+<div class="tabs">
+  <div class="tab on" data-pane="today" onclick="showPane('today')">📌 TODAY</div>
+  <div class="tab" data-pane="strategy" onclick="showPane('strategy')">🗺 STRATEGY</div>
 </div>
 
-<div class="stats">
-  <div class="stat"><div class="v" id="wk-count">—</div><div class="k">Weeks to launch</div></div>
-  <div class="stat"><div class="v">20</div><div class="k">Planned weeks</div></div>
-  <div class="stat"><div class="v">18</div><div class="k">Event hooks</div></div>
-  <div class="stat"><div class="v" id="phase-now">—</div><div class="k">Current phase</div></div>
+<!-- ================= TODAY ================= -->
+<div class="pane on" id="pane-today">
+  <div class="tod-date" id="tod-date"></div>
+  <div id="tod-posts"></div>
+  <div class="weekstrip" id="weekstrip"></div>
 </div>
 
-<div class="secnav">
-  <a href="#truths">Five truths</a><a href="#pillars">Strategy</a><a href="#cheats">Algorithm rules</a>
-  <a href="#phases">Phases</a><a href="#calendar">Weekly calendar</a><a href="#events">Events</a>
-  <a href="#hype">Hype engine</a><a href="#blogs">Blogs?</a><a href="#kpis">KPIs + rituals</a>
-</div>
+<!-- ================= STRATEGY ================= -->
+<div class="pane" id="pane-strategy">
 
-<!-- ============ FIVE TRUTHS ============ -->
-<h2 class="sec" id="truths"><span class="n">01</span>Five researched truths this whole plan stands on</h2>
-<p class="lede">Everything below follows from these. If someone challenges the plan, challenge these first — each one has a source and a number behind it.</p>
-<div class="rules">
-  <div class="rule"><span class="ic">👤</span><div><b>The company page is not the reach engine. People are.</b><span>Company pages get ~5% of feed allocation vs ~65% for personal profiles; identical content posted by a person gets up to 561% more reach and 8x the engagement. The page is our credibility hub and archive; Asad, Saad, Jill and Hannah posting personally is the distribution.</span></div></div>
-  <div class="rule"><span class="ic">📄</span><div><b>Document carousels and multi-image posts win the feed.</b><span>Native PDF carousels lead every format at ~7% engagement (1.3M-post benchmark); multi-image posts deliver the most impressions for pages under 50K followers. Vertical video is rising (+36% watch time) but must hook in 2 seconds. Polls are dead post the March 2026 authenticity update.</span></div></div>
-  <div class="rule"><span class="ic">🏠</span><div><b>Our audience lives on Facebook, not Discord.</b><span>The community play for page owners is a free Facebook Group + a small WhatsApp circle for beta users, run with our own product visibly doing the work. LinkedIn earns B2B credibility; Facebook is where the buyers actually are.</span></div></div>
-  <div class="rule"><span class="ic">⏳</span><div><b>Waitlist hype has a 30-day half-life.</b><span>~50% of waitlist signups convert if launch comes within 30 days; only ~20% after 90. So we build audience now but open the referral waitlist in mid-October, six weeks out, so it is still hot on 1 December.</span></div></div>
-  <div class="rule"><span class="ic">🐕</span><div><b>Our best content is the product using itself.</b><span>From September, Art-E publicly runs the ArtemisAI Facebook page and we publish its calls and results weekly. The demo and the build-in-public content become the same asset — nobody can copy that story.</span></div></div>
-  <div class="rule"><span class="ic">📊</span><div><b>We own a data goldmine nobody else has.</b><span>99,507 real Facebook posts in the warehouse. Every "what actually drives reach" data post writes itself and positions us as the people who measured it, not guessed it.</span></div></div>
-</div>
-
-<!-- ============ PILLARS ============ -->
-<h2 class="sec" id="pillars"><span class="n">02</span>The six strategy pillars</h2>
-<div class="grid3">
-  <div class="pill-card" style="--cc:#00D6AE"><h3>🎙 Founder-led distribution</h3><p>All four of us post from personal accounts 2-3x/week. Asad: build-in-public + data. Saad: design-in-public (the revamp is a content series). Jill: ops/finance of a bootstrapped AI startup. Hannah: growth experiments. The page reshares nothing bare; people reshare the page <i>with commentary</i> within the first hour.</p><div class="why">Why: 8x engagement, 561% reach vs the page.</div></div>
-  <div class="pill-card" style="--cc:#38bdf8"><h3>🏛 Page as credibility hub</h3><p>The company page posts the polished 2-3x/week: carousels, reveals, pilot stories, event reactions. Complete profile (+30% views), all 250 monthly invite credits spent, newsletter from September. First target: 150 followers, the threshold where LinkedIn's recommendation engine kicks in.</p><div class="why">Why: buyers check the page before they trust the person.</div></div>
-  <div class="pill-card" style="--cc:#f472b6"><h3>🎨 Design-reveal arc</h3><p>Saad's revamp is a ready-made content series: audit findings, direction boards, before/after reveals of the landing page, web app and mobile app through August-September. Design content is the most shareable B2B format and it shows the product getting real.</p><div class="why">Why: reveals = anticipation; before/after = proof.</div></div>
-  <div class="pill-card" style="--cc:#f5a623"><h3>🐕 Dogfood story</h3><p>"Art-E runs our page" from September: every week we publish what the AI told us to do (slot, format, fix) and what happened, real numbers included, wins and misses. Misses build more trust than wins.</p><div class="why">Why: the only demo competitors cannot fake or copy.</div></div>
-  <div class="pill-card" style="--cc:#a78bfa"><h3>🧲 Proof engine (pilots)</h3><p>Recruit 5-10 pilot pages in September. From October, one before/after story a week: "[Page] grew reach 42% in 3 weeks — here is what Art-E told them to change", screenshots included, posted with the pilot's permission so they reshare to their own audience.</p><div class="why">Why: case studies out-persuade discounts; 30% of beta signups come from content.</div></div>
-  <div class="pill-card" style="--cc:#f43f5e"><h3>🚀 Waitlist + countdown engine</h3><p>Mid-October: referral waitlist opens (visible queue position, jump-the-queue referrals, 3-question qualifying survey, founding-member pricing for the first 100 pages). Late November: daily countdown, loss-framed. December: batched access, Clay-style, so feedback stays clean.</p><div class="why">Why: Robinhood got 1M signups from these exact mechanics.</div></div>
-</div>
-
-<!-- ============ ALGORITHM RULES ============ -->
-<h2 class="sec" id="cheats"><span class="n">03</span>LinkedIn algorithm rules we do not break</h2>
-<div class="rules">
-  <div class="rule"><span class="ic">📅</span><div><b>Cadence: page 2-3x/week, founders 2-3x/week, never bursts.</b><span>Weekly consistency alone drives 5.6x follower growth. Sporadic bursts get penalized by follower drop-off.</span></div></div>
-  <div class="rule"><span class="ic">🕑</span><div><b>Post Tue-Thu, 10-11am or 1-2pm UK.</b><span>Wednesday is the strongest day. Weekends are dead for B2B (-50-70%). Exception: founder posts at 7-8am catch decision-makers pre-work.</span></div></div>
-  <div class="rule"><span class="ic">🔗</span><div><b>80% of posts carry no external link.</b><span>In-body links cost 19-60% reach and the first-comment trick is patched (comment links suppressed up to 80%). When we must link, we link and accept the cost — or point at the profile/newsletter.</span></div></div>
-  <div class="rule"><span class="ic">#️⃣</span><div><b>3-5 hashtags max, as labels not reach.</b><span>One broad (#SocialMediaMarketing), one niche (#FacebookMarketing), one branded (#ArtemisAI). Hashtag discovery is dead; classification value remains.</span></div></div>
-  <div class="rule"><span class="ic">📨</span><div><b>Newsletter from September: it bypasses the algorithm.</b><span>Every edition triggers email + push + bell to 100% of subscribers (35-40% open rates) and gets Google-indexed. Biweekly "The Page Owner's Edge", repurposed from our best posts.</span></div></div>
-  <div class="rule"><span class="ic">🤝</span><div><b>The first hour is a team sport.</b><span>When the page posts, every team member reshares with their own added take (never a bare reshare) and comments within 60 minutes. Early engagement decides distribution.</span></div></div>
-  <div class="rule"><span class="ic">✉️</span><div><b>All 250 invite credits spent every month.</b><span>Each admin invites their warmest connections; credits refund on acceptance. Fastest free path to the 150-follower recommendation threshold.</span></div></div>
-  <div class="rule"><span class="ic">💬</span><div><b>15 meaningful comments a day, team-wide.</b><span>Commenting on our audience's and adjacent creators' posts is the cheapest awareness channel there is; thoughtful comments get profile visits.</span></div></div>
-</div>
-
-<!-- ============ PHASES ============ -->
-<h2 class="sec" id="phases"><span class="n">04</span>The five phases</h2>
-<div class="phases">
-  <div class="phase" style="border-color:rgba(0,214,174,.4)"><b>1 · Foundations</b><i>10 Aug – 6 Sep</i><p>Page complete, invites out, founders posting, Saad reveal arc begins, first data posts from the 99K warehouse.</p></div>
-  <div class="phase" style="border-color:rgba(56,189,248,.4)"><b>2 · Proof</b><i>7 Sep – 11 Oct</i><p>Dogfood series starts, pilots recruited, newsletter launches, Meta Connect reaction, first before/after stories.</p></div>
-  <div class="phase" style="border-color:rgba(245,166,35,.4)"><b>3 · Hype</b><i>12 Oct – 22 Nov</i><p>Waitlist opens with referral queue, weekly teaser reveals escalate, event-hook season (Halloween, Web Summit, John Lewis).</p></div>
-  <div class="phase" style="border-color:rgba(244,63,94,.45)"><b>4 · Countdown</b><i>23 Nov – 30 Nov</i><p>BFCM demo blitz for page owners, "MVP done" moment, daily countdown with loss-framed founding-member deadline.</p></div>
-  <div class="phase" style="border-color:rgba(167,139,250,.45)"><b>5 · Launch</b><i>1 Dec onward</i><p>Launch day (PH at 12:01am PT + waitlist email at launch minute), batched access, follow-up wave, gate drops before Christmas.</p></div>
-</div>
-
-<!-- ============ WEEKLY CALENDAR ============ -->
-<h2 class="sec" id="calendar"><span class="n">05</span>Week-by-week: what we actually post</h2>
-<p class="lede">Every week: 2-3 company-page posts (format-tagged) + one founder-post cue. Format tags follow the research: <span class="fmt car">carousel</span> = native PDF document, <span class="fmt img">multi-img</span> = 2-4 images, <span class="fmt vid">video</span> = vertical 9:16 native, <span class="fmt txt">text</span> = text or text+image, <span class="fmt nl">newsletter</span>, <span class="fmt fdr">founder</span> = personal-profile cue. The highlighted card is this week.</p>
-
-<div id="weeks">
-
-<div class="wk" data-start="2026-08-10">
-  <div class="wk-head"><span class="wk-num">WEEK 1</span><span class="wk-date">10–16 Aug</span><span class="wk-title">Set the stage</span><span class="chip ms">Saad joins · S9</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt img">multi-img</span><b>Welcome Saad</b> — the founding designer announcement (poster ready). Team milestone + what he will change.</div>
-    <div class="post"><span class="fmt txt">text</span><b>Page reboot post</b> — "We are building an AI that runs Facebook pages. Follow along to watch it happen." Complete the page profile, spend all invite credits.</div>
-    <div class="post"><span class="fmt fdr">founder</span>Asad: build-in-public #1 — why we are building Art-E, the honest origin story.</div>
+  <div class="sec-t">The road to launch · Tue 1 Dec 2026</div>
+  <div class="panelbox">
+    <svg viewBox="0 0 940 170" width="100%" id="tl">
+      <defs>
+        <linearGradient id="tlg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#00D6AE"/><stop offset="0.35" stop-color="#38bdf8"/>
+          <stop offset="0.7" stop-color="#f5a623"/><stop offset="0.88" stop-color="#f43f5e"/>
+          <stop offset="1" stop-color="#a78bfa"/>
+        </linearGradient>
+      </defs>
+      <!-- phase band -->
+      <rect x="20" y="78" width="900" height="12" rx="6" fill="rgba(255,255,255,.06)"/>
+      <rect x="20" y="78" width="900" height="12" rx="6" fill="url(#tlg)" opacity=".85"/>
+      <!-- phase labels -->
+      <text x="95" y="66" fill="#00D6AE" font-size="12" font-weight="800" text-anchor="middle">FOUNDATIONS</text>
+      <text x="95" y="112" fill="#8793ab" font-size="10" text-anchor="middle">10 Aug – 6 Sep</text>
+      <text x="290" y="66" fill="#38bdf8" font-size="12" font-weight="800" text-anchor="middle">PROOF</text>
+      <text x="290" y="112" fill="#8793ab" font-size="10" text-anchor="middle">7 Sep – 11 Oct</text>
+      <text x="510" y="66" fill="#f5a623" font-size="12" font-weight="800" text-anchor="middle">HYPE</text>
+      <text x="510" y="112" fill="#8793ab" font-size="10" text-anchor="middle">12 Oct – 22 Nov</text>
+      <text x="740" y="66" fill="#f43f5e" font-size="12" font-weight="800" text-anchor="middle">COUNTDOWN</text>
+      <text x="740" y="112" fill="#8793ab" font-size="10" text-anchor="middle">23 – 30 Nov</text>
+      <text x="880" y="66" fill="#a78bfa" font-size="13" font-weight="900" text-anchor="middle">🚀 LAUNCH</text>
+      <text x="880" y="112" fill="#8793ab" font-size="10" text-anchor="middle">1 Dec</text>
+      <!-- milestones -->
+      <g font-size="15" text-anchor="middle">
+        <text x="120" y="145">🎨</text><text x="255" y="145">🐕</text><text x="330" y="145">🥽</text>
+        <text x="455" y="145">🎟</text><text x="600" y="145">🎃</text><text x="700" y="145">🛍</text>
+        <text x="775" y="145">✅</text><text x="880" y="145">🦉</text>
+      </g>
+      <g font-size="8.5" fill="#8793ab" text-anchor="middle">
+        <text x="120" y="158">revamp</text><text x="255" y="158">dogfood</text><text x="330" y="158">Connect</text>
+        <text x="455" y="158">waitlist</text><text x="600" y="158">Halloween</text><text x="700" y="158">BFCM</text>
+        <text x="775" y="158">MVP done</text><text x="880" y="158">launch+PH</text>
+      </g>
+      <!-- NOW marker set by JS -->
+      <g id="nowg"><line id="nowline" x1="20" y1="40" x2="20" y2="100" stroke="#e9eef8" stroke-width="2" stroke-dasharray="4 3"/>
+      <text id="nowtxt" x="20" y="30" fill="#e9eef8" font-size="10" font-weight="800" text-anchor="middle">NOW</text></g>
+    </svg>
   </div>
-</div>
 
-<div class="wk" data-start="2026-08-17">
-  <div class="wk-head"><span class="wk-num">WEEK 2</span><span class="wk-date">17–23 Aug</span><span class="wk-title">First value drops</span><span class="chip ev">📸 World Photography Day 19 Aug</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt car">carousel</span><b>"Your camera roll is a content goldmine"</b> — 7 ways page owners waste photos they already have (Photography Day hook).</div>
-    <div class="post"><span class="fmt img">multi-img</span><b>Design audit sneak</b> — Saad's before-notes on our own landing page. "Even we flunked our own audit."</div>
-    <div class="post"><span class="fmt fdr">founder</span>Saad: design-in-public #1 — what a design audit of an AI product looks like.</div>
+  <div class="sec-t">The hype curve · targets</div>
+  <div class="panelbox">
+    <svg viewBox="0 0 940 190" width="100%">
+      <polyline points="30,160 200,150 380,128 560,92 740,52 880,22" fill="none" stroke="url(#tlg)" stroke-width="4" stroke-linecap="round"/>
+      <g fill="#00D6AE"><circle cx="200" cy="150" r="5"/><circle cx="380" cy="128" r="5"/><circle cx="560" cy="92" r="5"/><circle cx="740" cy="52" r="5"/><circle cx="880" cy="22" r="7"/></g>
+      <g font-size="11" font-weight="800" fill="#e9eef8" text-anchor="middle">
+        <text x="200" y="136">150 followers</text>
+        <text x="380" y="114">pilots + stories</text>
+        <text x="560" y="78">waitlist 500</text>
+        <text x="740" y="38">1,000 followers</text>
+        <text x="880" y="12">LAUNCH</text>
+      </g>
+      <g font-size="9.5" fill="#8793ab" text-anchor="middle">
+        <text x="200" y="176">Sep</text><text x="380" y="176">Oct</text><text x="560" y="176">early Nov</text><text x="740" y="176">late Nov</text><text x="880" y="176">1 Dec</text>
+      </g>
+    </svg>
   </div>
-</div>
 
-<div class="wk" data-start="2026-08-24">
-  <div class="wk-head"><span class="wk-num">WEEK 3</span><span class="wk-date">24–30 Aug</span><span class="wk-title">The data goldmine opens</span><span class="chip ms">Design directions picked</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt car">carousel</span><b>"We analysed 99,507 Facebook posts"</b> — data drop #1: 23.3% got zero shares; what separates the dead posts from the winners.</div>
-    <div class="post"><span class="fmt img">multi-img</span><b>Direction boards</b> — 3 visual directions for the new ArtemisAI, and which one we picked (design content travels).</div>
-    <div class="post"><span class="fmt fdr">founder</span>Asad: "what 99K posts taught me about why pages die" — the analyst's cut of the carousel.</div>
+  <div class="sec-t">Who posts · three voices, one story</div>
+  <div class="voices">
+    <div class="voice"><div class="a" style="background:linear-gradient(135deg,#00D6AE,#38bdf8)">A</div><b>Asad</b><span>The builder 🔧<br>Build-in-public · data drops · demos</span></div>
+    <div class="voice"><div class="a" style="background:linear-gradient(135deg,#a78bfa,#f472b6)">AX</div><b>Alex</b><span>The visionary 🔭<br>Why pages die · the big idea · page-owner truths</span></div>
+    <div class="voice"><div class="a" style="background:linear-gradient(135deg,#f5a623,#f43f5e)">J</div><b>Jill</b><span>The operator 📊<br>Bootstrap honesty · behind the scenes · people</span></div>
   </div>
-</div>
-
-<div class="wk" data-start="2026-08-31">
-  <div class="wk-head"><span class="wk-num">WEEK 4</span><span class="wk-date">31 Aug–6 Sep</span><span class="wk-title">First reveal</span><span class="chip ms">New landing page ships · S10</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt vid">video</span><b>Landing page before/after</b> — 15-second vertical morph of old design into Saad's new one. First real "something is coming" signal.</div>
-    <div class="post"><span class="fmt car">carousel</span><b>"5 things quietly killing your page reach"</b> — pulled from warehouse data, zero product pitch, pure value.</div>
-    <div class="post"><span class="fmt fdr">founder</span>Jill: the unglamorous truth of bootstrapping an AI startup (ops-in-public builds trust).</div>
+  <div class="support">
+    <div class="sup"><div class="a" style="background:#38bdf8">F</div><div><b>Faheem</b><span>model cameos</span></div></div>
+    <div class="sup"><div class="a" style="background:#22c55e">M</div><div><b>Muteeb</b><span>pipeline cameos</span></div></div>
+    <div class="sup"><div class="a" style="background:#f472b6">S</div><div><b>Saad</b><span>design-in-public</span></div></div>
   </div>
-</div>
 
-<div class="wk" data-start="2026-09-07">
-  <div class="wk-head"><span class="wk-num">WEEK 5</span><span class="wk-date">7–13 Sep</span><span class="wk-title">The dogfood era begins</span><span class="chip hot">Art-E takes over our page</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt txt">text</span><b>"From today, our AI runs our Facebook page."</b> — the commitment post. Every week we publish its calls and the results, wins and misses.</div>
-    <div class="post"><span class="fmt img">multi-img</span><b>Web app redesign reveal</b> — Saad's new Today screen next to the old one.</div>
-    <div class="post"><span class="fmt fdr">founder</span>Asad: why we are letting our own product embarrass us in public.</div>
+  <div class="sec-t">One template · every post</div>
+  <div class="panelbox tmpl">
+    <div class="mini">
+      <div class="lg"><div class="mk"></div>ARTEMIS AI</div>
+      <div class="hero">One idea,<br><i>one number.</i></div>
+      <div><div class="stat">99,507</div><div class="cap">posts analysed</div></div>
+      <div class="chips"><span class="c">Flop warnings</span><span class="c">Best times</span></div>
+    </div>
+    <div class="trules">
+      <div class="trule"><span class="i">🌑</span><div><b>Same canvas every time.</b> Dark navy, teal + sky gradient accent, logo top, chips bottom. Instantly ours in the feed.</div></div>
+      <div class="trule"><span class="i">1️⃣</span><div><b>One idea, one number per post.</b> The hero stat or the hero visual — never both fighting.</div></div>
+      <div class="trule"><span class="i">📐</span><div><b>4:5 portrait, 1080×1350.</b> Max feed real estate. Carousels: same cover style, page numbers bottom-right.</div></div>
+      <div class="trule"><span class="i">🤖</span><div><b>Art-E appears in every product post.</b> The mascot is the brand memory hook.</div></div>
+    </div>
   </div>
-</div>
 
-<div class="wk" data-start="2026-09-14">
-  <div class="wk-head"><span class="wk-num">WEEK 6</span><span class="wk-date">14–20 Sep</span><span class="wk-title">Pilot recruitment + newsletter #1</span><span class="chip ms">Newsletter launches</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt nl">newsletter</span><b>"The Page Owner's Edge" #1</b> — biweekly from here; best-of data + tactics. Bypasses the feed algorithm entirely.</div>
-    <div class="post"><span class="fmt txt">text</span><b>Pilot call</b> — "We are picking 10 Facebook pages to grow free for 10 weeks with Art-E. Apply." Scarcity + qualifying questions.</div>
-    <div class="post"><span class="fmt car">carousel</span><b>"The posting-times myth"</b> — what our Best Times model actually found vs the generic advice.</div>
+  <div class="sec-t">Format mix · by measured engagement</div>
+  <div class="panelbox mix">
+    <div class="mrow"><span class="lbl">📄 Carousels</span><div class="mbar"><i style="width:40%;background:linear-gradient(90deg,#00D6AE,#00b894)"></i></div><span class="pc">40%</span></div>
+    <div class="mrow"><span class="lbl">🖼 Multi-image</span><div class="mbar"><i style="width:25%;background:linear-gradient(90deg,#38bdf8,#0ea5e9)"></i></div><span class="pc">25%</span></div>
+    <div class="mrow"><span class="lbl">🎬 Vertical video</span><div class="mbar"><i style="width:15%;background:linear-gradient(90deg,#f43f5e,#e11d48)"></i></div><span class="pc">15%</span></div>
+    <div class="mrow"><span class="lbl">✍️ Text + image</span><div class="mbar"><i style="width:15%;background:linear-gradient(90deg,#a78bfa,#8b5cf6)"></i></div><span class="pc">15%</span></div>
+    <div class="mrow"><span class="lbl">📨 Newsletter</span><div class="mbar"><i style="width:5%;background:linear-gradient(90deg,#f5a623,#d97706)"></i></div><span class="pc">5%</span></div>
   </div>
-</div>
 
-<div class="wk" data-start="2026-09-21">
-  <div class="wk-head"><span class="wk-num">WEEK 7</span><span class="wk-date">21–27 Sep</span><span class="wk-title">Meta Connect week</span><span class="chip ev">🥽 Meta Connect 23–24 Sep</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt car">carousel</span><b>"What Meta Connect means for your page"</b> — same-week translation of the keynote into plain-English actions. Newsjack our exact audience's platform.</div>
-    <div class="post"><span class="fmt txt">text</span><b>Dogfood update #1</b> — Art-E's first week running our page: the calls, the numbers, the one miss.</div>
-    <div class="post"><span class="fmt fdr">founder</span>Asad: hot take on Connect within 24h of the keynote — speed wins the reach on event days.</div>
+  <div class="sec-t">Event ammo · till launch</div>
+  <div class="evmonths">
+    <div class="evm"><b>Aug</b><div class="evi"><b>19</b> 📸 Photography Day</div></div>
+    <div class="evm"><b>Sep</b><div class="evi"><b>23–24</b> 🥽 Meta Connect</div><div class="evi"><b>30</b> 🎙 Podcast Day</div></div>
+    <div class="evm"><b>Oct</b><div class="evi"><b>3</b> 🛒 Marketplace 10y</div><div class="evi"><b>6</b> 📱 Instagram 16y</div><div class="evi"><b>10</b> 🧠 Mental Health Day</div><div class="evi"><b>13–15</b> 🎤 Disrupt</div><div class="evi"><b>19–23</b> 🇬🇧 Birmingham Tech Wk</div><div class="evi"><b>28</b> ♾ Meta rebrand 5y</div><div class="evi"><b>31</b> 🎃 Halloween</div></div>
+    <div class="evm"><b>Nov</b><div class="evi"><b>~4</b> 🎄 John Lewis ad</div><div class="evi"><b>9–12</b> 🌍 Web Summit</div><div class="evi"><b>13</b> 💛 Kindness Day</div><div class="evi"><b>17–19</b> ❄️ Slush</div><div class="evi"><b>27</b> 🛍 Black Friday</div><div class="evi"><b>30</b> 💻 Cyber Monday</div></div>
+    <div class="evm"><b>Dec</b><div class="evi"><b>1</b> 🚀 LAUNCH + 🦉 PH</div><div class="evi"><b>5</b> 🏪 Small Biz Saturday</div><div class="evi"><b>10</b> 🎄 Jumper Day</div><div class="evi"><b>15</b> ⏳ Founding price ends</div></div>
   </div>
-</div>
 
-<div class="wk" data-start="2026-09-28">
-  <div class="wk-head"><span class="wk-num">WEEK 8</span><span class="wk-date">28 Sep–4 Oct</span><span class="wk-title">Mobile reveal + repurposing demo</span><span class="chip ev">🎙 Podcast Day 30 Sep · Marketplace 10th 3 Oct</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt vid">video</span><b>Mobile app reveal</b> — vertical walkthrough of Saad's mobile redesign. Native format for a mobile product.</div>
-    <div class="post"><span class="fmt car">carousel</span><b>"One recording, ten posts"</b> — Podcast Day hook: how AI multiplies one piece of content for time-poor owners.</div>
-    <div class="post"><span class="fmt fdr">founder</span>Saad: the design system behind the revamp — tokens, components, why it will age well.</div>
+  <div class="sec-t">Six rules · never broken</div>
+  <div class="rulechips">
+    <div class="rc"><span class="i">🕑</span><div><b>Tue–Thu · 10:30am</b>weekends are dead</div></div>
+    <div class="rc"><span class="i">🔗</span><div><b>No links in 80% of posts</b>links cost up to 60% reach</div></div>
+    <div class="rc"><span class="i">🤝</span><div><b>First-hour reshares</b>everyone adds their own take</div></div>
+    <div class="rc"><span class="i">💬</span><div><b>15 comments a day</b>team-wide, on audience posts</div></div>
+    <div class="rc"><span class="i">✉️</span><div><b>250 invites monthly</b>every credit, every month</div></div>
+    <div class="rc"><span class="i">👤</span><div><b>People over page</b>personal posts get 8x reach</div></div>
   </div>
-</div>
 
-<div class="wk" data-start="2026-10-05">
-  <div class="wk-head"><span class="wk-num">WEEK 9</span><span class="wk-date">5–11 Oct</span><span class="wk-title">First proof + the human post</span><span class="chip ev">📱 IG turns 16 · 🧠 Mental Health Day 10 Oct</span><span class="chip ms">Pilot story #1</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt img">multi-img</span><b>Pilot story #1</b> — "[Page] grew X% in 3 weeks. Here is exactly what Art-E told them." Screenshots, real numbers, their permission + their reshare.</div>
-    <div class="post"><span class="fmt txt">text</span><b>Burnout post (Fri 9 Oct)</b> — social media burnout among small business owners; AI as reclaiming your evenings, not replacing your voice. Empathy-led, founder-voiced.</div>
-    <div class="post"><span class="fmt fdr">founder</span>Hannah: growth experiment results — what worked and flopped growing our own page (meta-content).</div>
-  </div>
-</div>
-
-<div class="wk" data-start="2026-10-12">
-  <div class="wk-head"><span class="wk-num">WEEK 10</span><span class="wk-date">12–18 Oct</span><span class="wk-title">🚀 WAITLIST OPENS</span><span class="chip hot">The hype switch flips</span><span class="chip ev">Disrupt + SaaStock this week</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt vid">video</span><b>Waitlist open</b> — 20-second teaser + "first 100 pages get founding-member pricing". Queue position, referral jumping, 3-question survey.</div>
-    <div class="post"><span class="fmt txt">text</span><b>Dogfood update</b> — first full month of Art-E running the page: the compounding numbers.</div>
-    <div class="post"><span class="fmt fdr">founder</span>Asad: "what we'd pitch on the Disrupt stage" — investor-visible credibility post during Battlefield week.</div>
-  </div>
-</div>
-
-<div class="wk" data-start="2026-10-19">
-  <div class="wk-head"><span class="wk-num">WEEK 11</span><span class="wk-date">19–25 Oct</span><span class="wk-title">Home turf + teaser #1</span><span class="chip ev">🇬🇧 Birmingham Tech Week 19–23 Oct</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt txt">text</span><b>Building AI in the UK</b> — Birmingham Tech Week angle: proud regional-startup post, daily AI Symposium takeaways if attending.</div>
-    <div class="post"><span class="fmt img">multi-img</span><b>Teaser #1: the blurred chat</b> — Art-E conversation screenshot, key advice blurred. "It told this page one thing that doubled their reach. Waitlist to find out."</div>
-    <div class="post"><span class="fmt car">carousel</span><b>Pilot story #2</b> — second before/after with different page type (variety proves generality).</div>
-  </div>
-</div>
-
-<div class="wk" data-start="2026-10-26">
-  <div class="wk-head"><span class="wk-num">WEEK 12</span><span class="wk-date">26 Oct–1 Nov</span><span class="wk-title">Halloween lead magnet</span><span class="chip ev">🎃 Halloween Sat 31 Oct · Meta rebrand 5th 28 Oct</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt car">carousel</span><b>Spooky post-template giveaway</b> — AI-generated Halloween templates for page owners; get the pack by joining the waitlist (lead magnet).</div>
-    <div class="post"><span class="fmt txt">text</span><b>"5 years of Meta"</b> — contrarian data-backed take: what the rebrand actually changed for the average page owner. Nothing flatters an audience like taking them seriously.</div>
-    <div class="post"><span class="fmt fdr">founder</span>Saad: the redesign retrospective — every screen, before/after, one thread.</div>
-  </div>
-</div>
-
-<div class="wk" data-start="2026-11-02">
-  <div class="wk-head"><span class="wk-num">WEEK 13</span><span class="wk-date">2–8 Nov</span><span class="wk-title">The Christmas starting gun</span><span class="chip ev">🎄 John Lewis ad drops ~4 Nov</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt txt">text</span><b>"When John Lewis posts, your page should too"</b> — the UK festive content starting gun; is your page's December calendar ready?</div>
-    <div class="post"><span class="fmt vid">video</span><b>Teaser #2: crisis alert demo</b> — 20-second vertical clip of the sentiment dip → alert → recovery story (we already built this visual language).</div>
-    <div class="post"><span class="fmt car">carousel</span><b>Pilot story #3</b> + waitlist count milestone ("X pages in the queue").</div>
-  </div>
-</div>
-
-<div class="wk" data-start="2026-11-09">
-  <div class="wk-head"><span class="wk-num">WEEK 14</span><span class="wk-date">9–15 Nov</span><span class="wk-title">Web Summit week</span><span class="chip ev">🌍 Web Summit 9–12 Nov · Kindness Day 13 Nov</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt txt">text</span><b>Web Summit hot takes</b> — daily short reactions to the AI announcements; reliable reach during summit week even without attending.</div>
-    <div class="post"><span class="fmt nl">newsletter</span><b>Newsletter: "The BFCM survival issue"</b> — every page owner's next 3 weeks, mapped.</div>
-    <div class="post"><span class="fmt car">carousel</span><b>Teaser #3: Best Times demo</b> — real heatmap, one page's perfect posting week, "Art-E builds this for you in seconds".</div>
-  </div>
-</div>
-
-<div class="wk" data-start="2026-11-16">
-  <div class="wk-head"><span class="wk-num">WEEK 15</span><span class="wk-date">16–22 Nov</span><span class="wk-title">Founding-member deadline drops</span><span class="chip ev">Slush 17–19 Nov</span><span class="chip hot">Loss-framed pricing announced</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt txt">text</span><b>"Founding-member pricing disappears 15 Dec"</b> — the loss-framed announcement (15-20% higher conversion than gain-framed). Real deadline, real cap.</div>
-    <div class="post"><span class="fmt img">multi-img</span><b>BFCM series #1</b> — "your Black Friday posts, written in 10 minutes": the highest-pressure week in our audience's year, solved.</div>
-    <div class="post"><span class="fmt fdr">founder</span>Asad: Slush-week investor-facing post — what Europe's AI seed scene signals for 2027.</div>
-  </div>
-</div>
-
-<div class="wk" data-start="2026-11-23">
-  <div class="wk-head"><span class="wk-num">WEEK 16</span><span class="wk-date">23–29 Nov</span><span class="wk-title">BFCM blitz + MVP done</span><span class="chip ev">🛍 Black Friday 27 Nov</span><span class="chip hot">MVP complete 28 Nov</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt car">carousel</span><b>BFCM daily micro-tips</b> — Mon-Fri, one 3-slide tip a day for the biggest sales weekend; peak audience-need window.</div>
-    <div class="post"><span class="fmt txt">text</span><b>"We just finished building."</b> — the MVP-done moment, 28 Nov. Team photo, honest numbers, "9 days to launch". Warm the PH supporter network this week.</div>
-    <div class="post"><span class="fmt fdr">founder</span>All four: same-day reshares with personal takes on the finish-line post (first-hour ritual, maximum stack).</div>
-  </div>
-</div>
-
-<div class="wk" data-start="2026-11-30">
-  <div class="wk-head"><span class="wk-num">WEEK 17</span><span class="wk-date">30 Nov–6 Dec</span><span class="wk-title">🎯 LAUNCH WEEK</span><span class="chip hot">Launch Tue 1 Dec</span><span class="chip ev">Cyber Monday 30 Nov · Small Biz Saturday 5 Dec</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt vid">video</span><b>Launch day, Tue 1 Dec</b> — Product Hunt live 12:01am PT; waitlist email at launch minute; the launch film (we have the video pipeline); batch 1 of 100 pages admitted.</div>
-    <div class="post"><span class="fmt txt">text</span><b>Daily countdown Mon + launch-week updates</b> — live numbers build-in-public: signups, first user wins, PH position. Whole team on comment duty in 15-minute shifts.</div>
-    <div class="post"><span class="fmt img">multi-img</span><b>Small Business Saturday</b> — spotlight our pilot pages (our audience IS small business; they reshare).</div>
-  </div>
-</div>
-
-<div class="wk" data-start="2026-12-07">
-  <div class="wk-head"><span class="wk-num">WEEK 18</span><span class="wk-date">7–13 Dec</span><span class="wk-title">The results wave</span><span class="chip ev">🎄 Christmas Jumper Day 10 Dec</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt car">carousel</span><b>Launch week by the numbers</b> — transparent recap: signups, activation, what broke. Radical honesty post-launch reads as confidence.</div>
-    <div class="post"><span class="fmt txt">text</span><b>Batch 2 admitted + day-3 follow-up email</b> — "founding-member pricing ends 15 Dec" final push.</div>
-    <div class="post"><span class="fmt img">multi-img</span><b>Christmas Jumper Day team photo</b> — the human side of an AI startup; light, shareable, end-of-year warm.</div>
-  </div>
-</div>
-
-<div class="wk" data-start="2026-12-14">
-  <div class="wk-head"><span class="wk-num">WEEK 19</span><span class="wk-date">14–20 Dec</span><span class="wk-title">Consolidate</span><span class="chip ms">Founding pricing ends 15 Dec</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt car">carousel</span><b>First user-win stories</b> — launch cohort results, same before/after format that worked pre-launch.</div>
-    <div class="post"><span class="fmt nl">newsletter</span><b>Newsletter: "What 2026 taught page owners"</b> — year-review data issue, evergreen + SEO-indexed.</div>
-    <div class="post"><span class="fmt fdr">founder</span>Asad: "we launched. Here is everything that went wrong." — the post-mortem post always outperforms the victory lap.</div>
-  </div>
-</div>
-
-<div class="wk" data-start="2026-12-21">
-  <div class="wk-head"><span class="wk-num">WEEK 20</span><span class="wk-date">21–27 Dec</span><span class="wk-title">Year close + gate drop</span></div>
-  <div class="posts">
-    <div class="post"><span class="fmt txt">text</span><b>The gate drops</b> — open signup announced (Arc's lesson: prolonged exclusivity reads as unavailability to SMBs; drop it within weeks of launch).</div>
-    <div class="post"><span class="fmt img">multi-img</span><b>"2026: from a data warehouse to a launched product"</b> — the year-in-review story arc, 2027 roadmap tease.</div>
-    <div class="post"><span class="fmt fdr">founder</span>Everyone off. Scheduled posts only. Rest is a strategy too.</div>
-  </div>
-</div>
-
-</div><!-- /weeks -->
-
-<!-- ============ EVENTS ============ -->
-<h2 class="sec" id="events"><span class="n">06</span>Every event hook, on one board</h2>
-<p class="lede">Researched, dated, and each with the angle already decided. Event-day posts get a speed bonus: same-day reactions consistently out-reach considered pieces published a week later.</p>
-<div class="ev-grid">
-  <div class="ev-card"><div class="d">19 AUG</div><b>World Photography Day</b><p>"Your camera roll is a content goldmine" — unused photos into a week of posts.</p></div>
-  <div class="ev-card"><div class="d">23–24 SEP</div><b>Meta Connect 2026</b><p>Same-week keynote translation for page owners. Our single most audience-native event.</p></div>
-  <div class="ev-card"><div class="d">30 SEP</div><b>International Podcast Day</b><p>One 30-min recording → ten posts: the repurposing demo.</p></div>
-  <div class="ev-card"><div class="d">3 OCT</div><b>FB Marketplace turns 10</b><p>Nostalgia + Marketplace-listing-meets-page-content tips.</p></div>
-  <div class="ev-card"><div class="d">6 OCT</div><b>Instagram turns 16</b><p>"Still posting like it's 2010?" — one content piece, native to both Meta platforms.</p></div>
-  <div class="ev-card"><div class="d">10 OCT</div><b>World Mental Health Day</b><p>Founder post on page-owner burnout; AI gives you your evenings back.</p></div>
-  <div class="ev-card"><div class="d">13–15 OCT</div><b>TechCrunch Disrupt</b><p>"What we'd pitch on the Battlefield stage" — investor-visible credibility.</p></div>
-  <div class="ev-card"><div class="d">13–14 OCT</div><b>SaaStock Europe, Dublin</b><p>Nearest big SaaS founder event; AI x ARR commentary for the European scene.</p></div>
-  <div class="ev-card"><div class="d">19–23 OCT</div><b>Birmingham Tech Week</b><p>Home-turf UK credibility: AI Symposium takeaways, proud-to-build-in-the-UK.</p></div>
-  <div class="ev-card"><div class="d">28 OCT</div><b>Meta rebrand turns 5</b><p>Contrarian data post: what actually changed for the average page owner.</p></div>
-  <div class="ev-card"><div class="d">31 OCT</div><b>Halloween (Saturday)</b><p>Spooky template giveaway = lead magnet into the waitlist.</p></div>
-  <div class="ev-card"><div class="d">~4 NOV</div><b>John Lewis ad drops</b><p>The UK Christmas content starting gun — festive calendar urgency.</p></div>
-  <div class="ev-card"><div class="d">9–12 NOV</div><b>Web Summit, Lisbon</b><p>Daily AI hot takes; reliable reach all summit week.</p></div>
-  <div class="ev-card"><div class="d">13 NOV</div><b>World Kindness Day</b><p>"Shout out another small business" templates — community content demo.</p></div>
-  <div class="ev-card"><div class="d">17–19 NOV</div><b>Slush, Helsinki</b><p>Fundraising-season signal post for investor-facing LinkedIn.</p></div>
-  <div class="ev-card"><div class="d">27 + 30 NOV</div><b>Black Friday + Cyber Monday</b><p>Peak content-pressure moment for our audience: the BFCM demo blitz.</p></div>
-  <div class="ev-card"><div class="d">5 DEC</div><b>Small Business Saturday UK</b><p>Champion customer pages — spotlight UGC they will reshare.</p></div>
-  <div class="ev-card"><div class="d">10 DEC</div><b>Christmas Jumper Day UK</b><p>Team photo, human side of an AI startup, end-of-year warmth.</p></div>
-</div>
-
-<!-- ============ HYPE ENGINE ============ -->
-<h2 class="sec" id="hype"><span class="n">07</span>The hype engine: mechanics with receipts</h2>
-<div class="grid2">
-  <div class="pill-card" style="--cc:#00D6AE"><h3>🎟 The waitlist (opens mid-Oct)</h3><p>Robinhood's exact levers, off-the-shelf tooling: visible queue position ("You are #218"), referral queue-jumping with milestone rewards at 1/3/5/10 referrals, one-click prewritten shares. Plus Superhuman's move: a 3-question qualifying survey (page size, posting frequency, biggest struggle) — filters for fit, generates segment data, and makes acceptance feel earned. Private status view, not a public leaderboard (B2B-ish audiences prefer it).</p><div class="why">Robinhood: ~1M signups pre-launch on these mechanics.</div></div>
-  <div class="pill-card" style="--cc:#f5a623"><h3>⏱ The countdown (final week)</h3><p>Countdown timers on the landing page and live in emails: a reliable 30-40% conversion lift. Loss-framed copy ("founding-member pricing disappears 15 Dec") beats gain-framed by 15-20%. The deadline and the 100-page cap are real — manufactured urgency would poison a trust product.</p><div class="why">Cialdini scarcity, measured, with a genuine deadline.</div></div>
-  <div class="pill-card" style="--cc:#a78bfa"><h3>🦉 Product Hunt (launch day, calibrated)</h3><p>Worth ~2-3 team-days for the credibility assets (badge, reviews, backlinks) — not a growth channel in 2026. Playbook: 30 days of genuine PH community activity first, publish 12:01am PT, supporter waves concentrated in the first 2-6 hours (20-30 upvotes in 2 hours or no top-5), comments over upvotes, someone replying within 15 minutes for 24 hours. The waitlist email at launch minute IS our coordinated early wave.</p><div class="why">Expectation set: 50-300 signups = a great B2B outcome.</div></div>
-  <div class="pill-card" style="--cc:#f43f5e"><h3>🚪 Batched access (Clay's lesson)</h3><p>Even at launch, access goes in batches: first 100 pages, then weekly admissions. Four people cannot support an unfiltered influx — the constraint becomes exclusivity, and feedback stays clean enough to act on. Beta users get 3 invites each (Arc's evangelist mechanic). Then the gate drops before Christmas: for SMB audiences, prolonged exclusivity reads as unavailability.</p><div class="why">Clay kept the gate 15 months and 10x'd revenue after.</div></div>
-</div>
-
-<!-- ============ BLOGS ============ -->
-<h2 class="sec" id="blogs"><span class="n">08</span>Should we write blogs?</h2>
-<div class="callout"><b>Yes — but LinkedIn-newsletter-first, SEO second.</b> A classic blog needs 6-12 months for SEO compounding to pay, which is after launch. So: publish on the LinkedIn newsletter first (100% subscriber delivery, 35-40% opens, zero algorithm, Google-indexed anyway). From October, mirror the three strongest editions onto artemisai.co.uk/blog as SEO seeds targeting "how to grow a Facebook page", "best time to post on Facebook", "why is my facebook reach down" — queries our warehouse data answers better than anyone guessing. Every data carousel doubles as a blog section, so the marginal cost is minutes, not days. Post-launch, the blog inherits a working content machine.</div>
-
-<!-- ============ KPIs ============ -->
-<h2 class="sec" id="kpis"><span class="n">09</span>KPIs and the weekly ritual</h2>
-<div class="kpis">
-  <div class="kpi"><div class="t">Page followers</div><div class="g">150 by Sep → 1,000 by launch</div></div>
-  <div class="kpi"><div class="t">Waitlist (opens Oct)</div><div class="g">500+ by 1 Dec</div></div>
-  <div class="kpi"><div class="t">Pilot stories published</div><div class="g">6+ before launch</div></div>
-  <div class="kpi"><div class="t">Newsletter subs</div><div class="g">300 by launch · 35%+ opens</div></div>
-</div>
-<div class="callout" style="margin-top:14px"><b>The Monday ritual (30 min, whole team):</b> review last week's numbers on this page · confirm the week's 3 page posts + owner · confirm each founder's personal post · check the event board for this week's hook · assign first-hour reshare duty. <b>The daily ritual (10 min each):</b> 3-4 meaningful comments on audience/adjacent posts, reshare-with-commentary within an hour of any page post. Consistency is the strategy — everything else is decoration.</div>
-
+</div><!-- /strategy -->
 </div><!-- /wrap -->
 
 <script>
@@ -411,30 +246,153 @@ body{padding-top:72px!important}
     if(!s){ window.location.href = 'admin_login.html'; return; }
   }catch(e){ window.location.href = 'admin_login.html'; }
 })();
+
+function showPane(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('pane-'+id).classList.add('on');
+  document.querySelector('.tab[data-pane="'+id+'"]').classList.add('on');
+}
+
+/* ---------------- THE SCHEDULE ----------------
+   who: page = company page (owner runs it), or a person's founder post.
+   fmt: car(ousel) | img (multi-image) | vid (vertical video) | txt | nl (newsletter)
+------------------------------------------------ */
+const P = {
+  Page:  ['PG','linear-gradient(135deg,#00D6AE,#00b894)'],
+  Asad:  ['A','linear-gradient(135deg,#00D6AE,#38bdf8)'],
+  Alex:  ['AX','linear-gradient(135deg,#a78bfa,#f472b6)'],
+  Jill:  ['J','linear-gradient(135deg,#f5a623,#f43f5e)'],
+  Faheem:['F','#38bdf8'], Muteeb:['M','#22c55e'], Saad:['S','#f472b6'],
+};
+const SCHED = [
+["2026-08-11","Page","img","Say hello to Saad 🎨","Founding designer announcement — poster is ready. Whole team reshares with a personal welcome.",""],
+["2026-08-12","Asad","txt","Build-in-public #1: why Art-E exists","The honest origin story. What page owners told us, what the data said.",""],
+["2026-08-13","Page","txt","We're building an AI that runs Facebook pages","The follow-along post. Profile complete, all 250 invites sent this week.",""],
+["2026-08-18","Page","car","Your camera roll is a content goldmine","7 ways page owners waste photos they already have. Pure value, no pitch.",""],
+["2026-08-19","Jill","txt","Bootstrapping an AI startup, honestly","Ops-in-public: what it really costs. Posted on Photography Day for reach wave.","📸 Photography Day"],
+["2026-08-20","Page","img","Even we flunked our own audit","Saad's audit notes on our landing page. Self-deprecation earns trust.",""],
+["2026-08-25","Page","car","We analysed 99,507 Facebook posts","Data drop #1: 23.3% got zero shares. What separates dead posts from winners.",""],
+["2026-08-26","Asad","txt","What 99K posts taught me about why pages die","The analyst's cut of the carousel. One uncomfortable stat as the hook.",""],
+["2026-08-27","Page","img","3 directions. We picked one.","Saad's design direction boards — design content travels furthest.",""],
+["2026-09-01","Page","vid","The landing page, reborn","15-second vertical morph, old design into new. First 'something is coming' signal.",""],
+["2026-09-02","Alex","txt","Alex: why most pages are flying blind","The vision post — the big idea in page-owner language. Establishes the voice.",""],
+["2026-09-03","Page","car","5 things quietly killing your reach","Warehouse-backed, zero pitch. The save-this-post kind.",""],
+["2026-09-08","Page","txt","From today, our AI runs our page","The dogfood commitment: Art-E's calls + results published weekly, wins AND misses.",""],
+["2026-09-09","Asad","txt","Why we're letting our product embarrass us","The courage angle on the dogfood series. Invite people to watch.",""],
+["2026-09-10","Page","img","The new web app, revealed","Saad's Today screen next to the old one. Before/after is the format.",""],
+["2026-09-15","Page","nl","Newsletter #1 · The Page Owner's Edge","Biweekly. Bypasses the algorithm: email + push to every subscriber.",""],
+["2026-09-16","Jill","txt","We're growing 10 pages for free. Here's why.","The pilot programme logic from the operator's chair.",""],
+["2026-09-17","Page","txt","Pilot applications open — 10 places","Scarcity + 3 qualifying questions. Closes when full.",""],
+["2026-09-22","Page","car","The posting-times myth","What our Best Times model found vs the generic advice everyone repeats.",""],
+["2026-09-23","Asad","txt","Meta Connect, day 1 — the 24-hour take","Speed wins event days. Hot take within hours of the keynote.","🥽 Meta Connect"],
+["2026-09-24","Page","car","What Meta Connect means for your page","Same-week translation into plain-English actions. Our most audience-native event.","🥽 Meta Connect"],
+["2026-09-25","Page","txt","Dogfood week 2: the numbers","Art-E's calls, the results, the one miss. Honesty is the strategy.",""],
+["2026-09-29","Page","vid","The mobile app, revealed","Vertical walkthrough of Saad's mobile redesign — native format for a mobile product.",""],
+["2026-09-30","Page","car","One recording → ten posts","Podcast Day: AI content multiplication for time-poor owners.","🎙 Podcast Day"],
+["2026-10-01","Saad","txt","The design system behind the revamp","Design-in-public: tokens, components, why it will age well.",""],
+["2026-10-06","Page","txt","Instagram is 16. Still posting like it's 2010?","Marketplace 10y + IG 16y week: one piece of content, native to both platforms.","📱 IG turns 16"],
+["2026-10-07","Faheem","txt","The model behind the flop warning","Team cameo: how we predict a flop before you post. Approachable, not academic.",""],
+["2026-10-08","Page","img","Pilot story #1: +X% in 3 weeks","First before/after with real screenshots. The pilot reshares to their audience.",""],
+["2026-10-09","Jill","txt","Page-owner burnout is real","Mental Health Day weekend: AI gives you your evenings back, not your voice away.","🧠 Mental Health Day 10th"],
+["2026-10-13","Page","vid","The waitlist is open 🎟","20-sec teaser. Queue position, referral jumping, first 100 pages get founding pricing.","🚀 WAITLIST OPENS"],
+["2026-10-14","Asad","txt","What we'd pitch on the Disrupt stage","Battlefield-week credibility post, investor-visible.","🎤 Disrupt week"],
+["2026-10-15","Page","txt","One month of Art-E running our page","The compounding dogfood numbers. Waitlist link in profile, not post.",""],
+["2026-10-20","Page","txt","Building AI in the UK 🇬🇧","Birmingham Tech Week: proud regional-startup post + AI Symposium takeaways.","🇬🇧 B'ham Tech Week"],
+["2026-10-21","Muteeb","txt","The pipeline that feeds Art-E","Team cameo: the unsexy plumbing that makes the magic possible.",""],
+["2026-10-22","Page","img","Teaser #1: the blurred chat","Art-E's advice to a real page, blurred. 'Waitlist to see what it said.'",""],
+["2026-10-27","Page","txt","5 years of Meta: what actually changed?","Contrarian, data-backed. Nothing flatters an audience like taking them seriously.","♾ Rebrand 5y 28th"],
+["2026-10-28","Alex","txt","What I'd tell every page owner","Alex voice: the one lesson from building million-follower pages.",""],
+["2026-10-29","Page","car","🎃 Free: AI Halloween templates","Lead magnet — the template pack lands via the waitlist. Saturday Halloween = peak weekend.","🎃 Halloween Sat"],
+["2026-11-03","Page","txt","John Lewis just posted. Did you?","The UK Christmas starting gun: is your December calendar ready?","🎄 JL ad week"],
+["2026-11-04","Asad","txt","The crisis alert story","How Art-E catches comments turning sour — before it becomes a bad week.",""],
+["2026-11-05","Page","vid","Teaser #2: crisis caught live","The sentiment dip → alert → recovery animation. Our best visual asset.",""],
+["2026-11-10","Page","car","Teaser #3: your perfect posting week","Real Best Times heatmap, one page's ideal week. 'Art-E builds this in seconds.'","🌍 Web Summit"],
+["2026-11-11","Jill","txt","The runway maths of launching","Operator honesty three weeks out. Vulnerability posts peak before launches.",""],
+["2026-11-12","Page","nl","Newsletter · BFCM survival issue","Every page owner's next three weeks, mapped. Peak need = peak subscriptions.",""],
+["2026-11-13","Page","txt","💛 Shout out a small business","Kindness Day: community templates — the product does warm, not just clever.","💛 Kindness Day"],
+["2026-11-17","Page","txt","⏳ Founding pricing ends 15 Dec","Loss-framed announcement. Real cap: first 100 pages. Real deadline.",""],
+["2026-11-18","Alex","txt","Slush week: Europe's AI signal","Investor-season commentary from the visionary chair.","❄️ Slush"],
+["2026-11-19","Page","img","BFCM #1: your Black Friday posts in 10 min","The demo blitz begins — the audience's most stressful week, solved.",""],
+["2026-11-24","Page","car","BFCM micro-tip Mon–Fri","One 3-slide tip daily through Black Friday week. Peak-need window.","🛍 BFCM week"],
+["2026-11-26","Page","car","BFCM micro-tip: the last-hours playbook","Thursday edition — tomorrow is the day.","🛍 Black Friday eve"],
+["2026-11-28","Page","img","We just finished building. ✅","MVP done, 28 Nov. Team photo, honest numbers, '3 days to launch.' All four reshare same hour.","✅ MVP DONE"],
+["2026-11-30","Page","txt","Cyber Monday + T-minus 1","Final BFCM value post + countdown begins. PH supporters warmed.","💻 Cyber Monday"],
+["2026-12-01","Page","vid","🚀 WE ARE LIVE","Launch film at 9am UK. Product Hunt live since 8:01am UK. Waitlist email at launch minute. Batch 1 (100 pages) in.","🚀 LAUNCH DAY"],
+["2026-12-02","Asad","txt","Launch day, the inside story","Founder launch story within 24h — the numbers, the panic, the first win.",""],
+["2026-12-03","Page","txt","36 hours in: live numbers","Build-in-public momentum: signups, first user wins, PH position.",""],
+["2026-12-05","Page","img","Small Business Saturday: our pilots 🏪","Spotlight the pilot pages — our audience IS small business. They reshare.","🏪 Small Biz Saturday"],
+["2026-12-08","Page","car","Launch week by the numbers","Transparent recap: signups, activation, what broke. Honesty reads as confidence.",""],
+["2026-12-09","Jill","txt","What broke (and what we fixed)","The operator's launch retro. Trust content.",""],
+["2026-12-10","Page","img","🎄 Christmas Jumper Day","Team photo. The human side of an AI startup.","🎄 Jumper Day"],
+["2026-12-11","Page","txt","Batch 2 is in · pricing ends Tuesday","Final founding-member push, loss-framed, real.",""],
+["2026-12-15","Page","txt","⏳ Founding pricing ends tonight","Last call. Countdown timer in the email.","⏳ Deadline"],
+["2026-12-16","Asad","txt","We launched. Here's everything that went wrong.","The post-mortem always outperforms the victory lap.",""],
+["2026-12-17","Page","nl","Newsletter · What 2026 taught page owners","Year-review data issue. Evergreen + indexed.",""],
+["2026-12-22","Page","txt","The gate drops: open signup","Exclusivity served its purpose. SMBs read prolonged gates as unavailability.",""],
+["2026-12-23","Page","img","2026: warehouse → launched product","The year-in-review story. 2027 tease. Then we rest.",""],
+];
+
+const FMT_LABEL = {car:'📄 Carousel',img:'🖼 Multi-image',vid:'🎬 Vertical video',txt:'✍️ Text post',nl:'📨 Newsletter'};
+const FMT_COLOR = {car:'#00D6AE',img:'#38bdf8',vid:'#f43f5e',txt:'#a78bfa',nl:'#f5a623'};
+
+function iso(d){ return d.toISOString().slice(0,10); }
+function fmtDate(d){ return d.toLocaleDateString('en-GB',{weekday:'long', day:'numeric', month:'long'}); }
+
 (function(){
-  var LAUNCH = new Date('2026-12-01T00:00:00');
-  var now = new Date();
-  var wks = Math.max(0, Math.ceil((LAUNCH - now) / (7*24*3600*1000)));
-  document.getElementById('wk-count').textContent = wks;
-  var phases = [
-    ['2026-08-10','Foundations'],['2026-09-07','Proof'],['2026-10-12','Hype'],
-    ['2026-11-23','Countdown'],['2026-12-01','Launch'],['2026-12-28','Post-launch']
-  ];
-  var cur = 'Pre-plan';
-  for (var i=0;i<phases.length;i++){ if (now >= new Date(phases[i][0])) cur = phases[i][1]; }
-  document.getElementById('phase-now').textContent = cur;
-  var cards = document.querySelectorAll('.wk');
-  cards.forEach(function(c){
-    var start = new Date(c.getAttribute('data-start'));
-    var end = new Date(start.getTime() + 7*24*3600*1000);
-    if (now >= end) c.classList.add('past');
-    else if (now >= start){ c.classList.add('current');
-      var head=c.querySelector('.wk-head');
-      var tag=document.createElement('span'); tag.className='chip now'; tag.textContent='THIS WEEK';
-      head.appendChild(tag);
-    }
-  });
-  var currentEl = document.querySelector('.wk.current');
+  const now = new Date();
+  const today = iso(now);
+  document.getElementById('tod-date').textContent = fmtDate(now);
+
+  const todays = SCHED.filter(r=>r[0]===today);
+  const upcoming = SCHED.filter(r=>r[0]>today);
+  const box = document.getElementById('tod-posts');
+
+  function card(r, big){
+    const [d,who,fmt,title,hook,ev] = r;
+    const [ini,grad] = P[who]||P.Page;
+    const posterName = who==='Page' ? 'Company page' : who+' · personal post';
+    return `<div class="big" style="--cc:${FMT_COLOR[fmt]}">
+      <div class="top"><span class="fmt ${fmt}">${FMT_LABEL[fmt]}</span>${ev?`<span class="evchip">${ev}</span>`:''}</div>
+      <h2>${title}</h2>
+      <div class="hook">${hook}</div>
+      <div class="meta">
+        <span class="who"><span class="av" style="background:${grad}">${ini}</span>${posterName}</span>
+        <span class="who"><span class="av" style="background:rgba(255,255,255,.15);color:#e9eef8">🤝</span>everyone reshares within the hour</span>
+      </div>
+    </div>`;
+  }
+
+  if (todays.length){
+    box.innerHTML = todays.map(r=>card(r,true)).join('');
+  } else {
+    const nxt = upcoming[0];
+    box.innerHTML = `<div class="none"><b>No post today.</b> Engage instead: 3-4 comments each on audience posts.</div>`
+      + (nxt ? `<div class="nxt">Next up · ${fmtDate(new Date(nxt[0]))}</div>${card(nxt,false)}` : '');
+  }
+
+  // week strip Mon-Sun
+  const dow = (now.getDay()+6)%7;
+  const mon = new Date(now); mon.setDate(now.getDate()-dow);
+  let strip = '';
+  for (let i=0;i<7;i++){
+    const d = new Date(mon); d.setDate(mon.getDate()+i);
+    const entries = SCHED.filter(r=>r[0]===iso(d));
+    strip += `<div class="dcell ${iso(d)===today?'today':''}">
+      <div class="dn">${d.toLocaleDateString('en-GB',{weekday:'short'})}</div>
+      <div class="dd">${d.getDate()}</div>
+      ${entries.map(e=>`<div class="dot" style="background:${FMT_COLOR[e[2]]}" title="${e[3]}"></div>`).join('')||''}
+    </div>`;
+  }
+  document.getElementById('weekstrip').innerHTML = strip;
+
+  // timeline NOW marker (20 Aug 10 .. 940-ish Dec 1 span: 20..880)
+  const t0 = new Date('2026-08-10'), t1 = new Date('2026-12-01');
+  let f = (now - t0) / (t1 - t0); f = Math.max(0, Math.min(1.05, f));
+  const x = 20 + f * 860;
+  document.getElementById('nowline').setAttribute('x1', x);
+  document.getElementById('nowline').setAttribute('x2', x);
+  document.getElementById('nowtxt').setAttribute('x', x);
 })();
 </script>
 </body>
