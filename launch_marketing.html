@@ -494,7 +494,7 @@ function renderPostImage(det){
     }
 
     // event chip
-    let cy2 = H-260;
+    let cy2 = H-350;
     if (ev){
       ctx.font = '800 30px "DM Sans"';
       const evW = ctx.measureText(ev).width + 60;
@@ -504,6 +504,18 @@ function renderPostImage(det){
       ctx.fillText(ev, (W-evW)/2+30, cy2);
       cy2 += 100;
     }
+
+    // coming-soon strip (flips to NOW LIVE from launch day)
+    const strip = d >= '2026-12-01' ? 'NOW LIVE' : 'COMING SOON · MVP DECEMBER 2026';
+    ctx.font = '800 34px "DM Sans"';
+    const stW = ctx.measureText(strip).width + 76;
+    const stY = H-238;
+    ctx.strokeStyle = 'rgba(0,214,174,.7)'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.roundRect((W-stW)/2, stY-50, stW, 74, 37); ctx.stroke();
+    const spg = ctx.createLinearGradient((W-stW)/2, 0, (W+stW)/2, 0);
+    spg.addColorStop(0, IC.teal); spg.addColorStop(1, IC.sky);
+    ctx.fillStyle = spg;
+    ctx.fillText(strip, (W-stW)/2+38, stY);
 
     // footer
     ctx.font = '700 32px "DM Sans"'; ctx.fillStyle = IC.teal;
