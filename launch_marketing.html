@@ -41,6 +41,11 @@ body{font-family:'DM Sans',Arial,sans-serif;background:
 .samp summary{cursor:pointer;font-size:11.5px;font-weight:800;letter-spacing:.06em;color:var(--teal);padding:10px 14px;text-transform:uppercase}
 .samp-text{padding:4px 16px 14px;font-size:13px;line-height:1.65;color:var(--ink)}
 .copybtn{position:absolute;top:7px;right:10px;font-family:inherit;font-size:10.5px;font-weight:700;background:rgba(0,214,174,.12);color:var(--teal);border:1px solid rgba(0,214,174,.4);border-radius:8px;padding:4px 10px;cursor:pointer}
+.imgwrap{padding:6px 16px 16px;text-align:center}
+.imgwrap canvas{width:100%;max-width:320px;border-radius:12px;border:1px solid rgba(255,255,255,.1)}
+.imgbtns{display:flex;gap:8px;justify-content:center;margin-top:10px}
+.imgbtn{font-family:inherit;font-size:11px;font-weight:700;background:rgba(0,214,174,.12);color:var(--teal);border:1px solid rgba(0,214,174,.4);border-radius:8px;padding:6px 14px;cursor:pointer}
+.imgbtn:hover{background:rgba(0,214,174,.2)}
 .clock{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
 .ck{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center}
 .ck .d{font-size:9.5px;font-weight:800;letter-spacing:.08em;color:var(--mut);text-transform:uppercase}
@@ -392,6 +397,144 @@ function copySample(btn){
   navigator.clipboard.writeText(t).then(()=>{ btn.textContent='✓ Copied'; setTimeout(()=>btn.textContent='📋 Copy',1500); });
 }
 
+/* ---------- on-brand post image generator (1080x1350, house template) ---------- */
+const IC = {bg:'#080b14', ink:'#e9eef8', mut:'#8793ab', teal:'#00D6AE', sky:'#38bdf8', purp:'rgba(124,92,191,.30)', tealGlow:'rgba(0,214,174,.22)'};
+
+function wrapText(ctx, text, maxW){
+  const words = text.split(' '); const lines=[]; let line='';
+  for (const w of words){
+    const t = line ? line+' '+w : w;
+    if (ctx.measureText(t).width > maxW && line){ lines.push(line); line=w; }
+    else line = t;
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+function drawLogoMark(ctx, cx, cy, r){
+  ctx.strokeStyle = IC.teal; ctx.lineWidth = r*0.12; ctx.lineJoin='round';
+  const rad = r*0.3;
+  ctx.beginPath(); ctx.roundRect(cx-r, cy-r, r*2, r*2, rad); ctx.stroke();
+  ctx.lineWidth = r*0.09;
+  ctx.beginPath(); ctx.moveTo(cx, cy-r*0.50); ctx.lineTo(cx+r*0.50, cy+r*0.42); ctx.lineTo(cx-r*0.50, cy+r*0.42); ctx.closePath(); ctx.stroke();
+  ctx.fillStyle = IC.teal;
+  ctx.beginPath(); ctx.arc(cx, cy+r*0.22, r*0.10, 0, Math.PI*2); ctx.fill();
+}
+
+function renderPostImage(det){
+  const cv = det.querySelector('canvas');
+  if (cv.dataset.done) return;
+  const r = SCHED[parseInt(cv.dataset.idx,10)];
+  const [d,who,fmt,title,hook,ev] = r;
+  const ctx = cv.getContext('2d');
+  const W=1080, H=1350;
+
+  document.fonts.load('900 100px "DM Sans"').then(()=>document.fonts.load('700 40px "DM Sans"')).then(()=>{
+    // bg + glows
+    ctx.fillStyle = IC.bg; ctx.fillRect(0,0,W,H);
+    let g = ctx.createRadialGradient(W*0.35, -100, 50, W*0.35, -100, 700);
+    g.addColorStop(0, IC.tealGlow); g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+    g = ctx.createRadialGradient(W*0.85, H+80, 50, W*0.85, H+80, 800);
+    g.addColorStop(0, IC.purp); g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+    // logo + wordmark
+    drawLogoMark(ctx, W/2 - 118, 96, 22);
+    ctx.fillStyle = IC.ink; ctx.font = '800 30px "DM Sans"'; ctx.textBaseline='middle';
+    let x = W/2 - 84; const wm='ARTEMIS AI';
+    for (const ch of wm){ ctx.fillText(ch, x, 98); x += ctx.measureText(ch).width + 9; }
+
+    // headline: title, wrapped, gradient on the LAST line's last 1-2 words
+    const clean = title.replace(/[🎨🎃🎄🎟🏪🚀📊📱🇬🇧♾💛❄️🛍✅🕛🚪✨👀🔍🤖☕📨🎂⏳🧠]/gu,'').trim();
+    let fs = 92;
+    ctx.font = `900 ${fs}px "DM Sans"`;
+    let lines = wrapText(ctx, clean, W-160);
+    while (lines.length > 4 && fs > 62){ fs -= 6; ctx.font = `900 ${fs}px "DM Sans"`; lines = wrapText(ctx, clean, W-160); }
+    const lh = fs*1.16;
+    let y = 400;
+    ctx.textBaseline='alphabetic';
+    lines.forEach((ln, i)=>{
+      const isLast = i === lines.length-1;
+      const wds = ln.split(' ');
+      const gradCount = isLast ? Math.min(2, wds.length) : 0;
+      const head = wds.slice(0, wds.length-gradCount).join(' ');
+      const tail = wds.slice(wds.length-gradCount).join(' ');
+      const total = ctx.measureText(ln).width;
+      let lx = (W-total)/2;
+      if (head){ ctx.fillStyle = IC.ink; ctx.fillText(head, lx, y); lx += ctx.measureText(head+' ').width; }
+      if (tail){
+        const tg = ctx.createLinearGradient(lx, 0, lx+ctx.measureText(tail).width, 0);
+        tg.addColorStop(0, IC.teal); tg.addColorStop(1, IC.sky);
+        ctx.fillStyle = tg; ctx.fillText(tail, lx, y);
+      }
+      y += lh;
+    });
+
+    // sub-line: audience-facing — second paragraph of the sample copy
+    const paras = (r[6]||'').split('\n\n').map(s=>s.trim()).filter(Boolean);
+    let sub = (paras[1] || paras[0] || hook).split('\n')[0].trim();
+    if (sub.length > 95) sub = sub.slice(0,92)+'…';
+    ctx.font = '500 36px "DM Sans"'; ctx.fillStyle = IC.mut;
+    const subLines = wrapText(ctx, sub, W-220);
+    y += 30;
+    subLines.slice(0,2).forEach(ln=>{
+      ctx.fillText(ln, (W-ctx.measureText(ln).width)/2, y); y += 52;
+    });
+
+    // stat highlight: first big number in title or sample
+    const numMatch = (title+' '+(r[6]||'')).match(/(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?%|\d{2,})/);
+    if (numMatch){
+      const stat = numMatch[1];
+      ctx.font = '900 150px "DM Sans"';
+      const sg = ctx.createLinearGradient(W/2-200, 0, W/2+200, 0);
+      sg.addColorStop(0, IC.teal); sg.addColorStop(1, IC.sky);
+      ctx.fillStyle = sg;
+      ctx.fillText(stat, (W-ctx.measureText(stat).width)/2, H-420);
+    }
+
+    // event chip
+    let cy2 = H-260;
+    if (ev){
+      ctx.font = '800 30px "DM Sans"';
+      const evW = ctx.measureText(ev).width + 60;
+      ctx.strokeStyle = 'rgba(245,166,35,.7)'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.roundRect((W-evW)/2, cy2-46, evW, 66, 33); ctx.stroke();
+      ctx.fillStyle = '#f5a623';
+      ctx.fillText(ev, (W-evW)/2+30, cy2);
+      cy2 += 100;
+    }
+
+    // footer
+    ctx.font = '700 32px "DM Sans"'; ctx.fillStyle = IC.teal;
+    const foot = 'artemisai.co.uk';
+    ctx.fillText(foot, (W-ctx.measureText(foot).width)/2, H-120);
+    ctx.font = '500 26px "DM Sans"'; ctx.fillStyle = IC.mut;
+    const dt = new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+    ctx.fillText(dt, (W-ctx.measureText(dt).width)/2, H-72);
+
+    cv.dataset.done = '1';
+  });
+}
+
+function dlImage(btn, date){
+  const cv = btn.closest('.imgwrap').querySelector('canvas');
+  cv.toBlob(b=>{
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(b);
+    a.download = 'artemis_post_'+date+'.png';
+    a.click(); URL.revokeObjectURL(a.href);
+  }, 'image/png');
+}
+function cpImage(btn){
+  const cv = btn.closest('.imgwrap').querySelector('canvas');
+  cv.toBlob(b=>{
+    navigator.clipboard.write([new ClipboardItem({'image/png': b})])
+      .then(()=>{ btn.textContent='✓ Copied'; setTimeout(()=>btn.textContent='📋 Copy image',1500); })
+      .catch(()=>{ btn.textContent='✗ Use download'; setTimeout(()=>btn.textContent='📋 Copy image',2000); });
+  }, 'image/png');
+}
+
 (function(){
   const now = new Date();
   const today = iso(now);
@@ -414,6 +557,15 @@ function copySample(btn){
       ${sample?`<details class="samp"${isToday?' open':''}><summary>✍️ Sample copy</summary>
         <button class="copybtn" onclick="copySample(this)">📋 Copy</button>
         <div class="samp-text">${sample.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>')}</div>
+      </details>
+      <details class="samp"${isToday?' open':''} ontoggle="if(this.open)renderPostImage(this)"><summary>🖼 Post image</summary>
+        <div class="imgwrap">
+          <canvas width="1080" height="1350" data-idx="${SCHED.indexOf(r)}"></canvas>
+          <div class="imgbtns">
+            <button class="imgbtn" onclick="dlImage(this,'${d}')">⬇ Download PNG</button>
+            <button class="imgbtn" onclick="cpImage(this)">📋 Copy image</button>
+          </div>
+        </div>
       </details>`:''}
     </div>`;
   }
@@ -441,6 +593,7 @@ function copySample(btn){
     if (nxt) html += `<div class="nxt">Next up · ${fmtDate(new Date(nxt[0]))}</div>` + card(nxt,false);
   }
   box.innerHTML = html;
+  box.querySelectorAll('details[open] canvas').forEach(cv=>renderPostImage(cv.closest('details')));
 
   // week strip Mon-Sun
   const dow = (now.getDay()+6)%7;
