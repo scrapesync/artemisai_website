@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtemisAI · Daily Scrum Card</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='1.5' fill='none'/><circle cx='18' cy='20' r='3' fill='%2300d4aa'/></svg>" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080b14;--panel:#0f1320;--card:#131b2e;--line:#243352;--ink:#e9eef8;--mut:#8793ab;
+--teal:#00D6AE;--amber:#f5a623;--violet:#a78bfa;--sky:#38bdf8;--rose:#f43f5e;--pink:#f472b6;--green:#22c55e}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',Arial,sans-serif;background:
+ radial-gradient(1100px 600px at 85% -10%, rgba(109,99,255,.13), transparent 60%),
+ radial-gradient(900px 500px at -10% 110%, rgba(0,214,174,.10), transparent 55%), var(--bg);
+ color:var(--ink);min-height:100vh;padding:74px 18px 60px}
+.wrap{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(340px,420px) 1fr;gap:22px;align-items:start}
+@media(max-width:940px){.wrap{grid-template-columns:1fr}}
+h1{font-size:22px;font-weight:900;margin-bottom:4px}
+.sub{font-size:12.5px;color:var(--mut);margin-bottom:16px;line-height:1.5}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+label{display:block;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:12px 0 5px}
+input,textarea{width:100%;background:#0a0f1c;border:1px solid var(--line);border-radius:9px;color:var(--ink);
+ font-family:inherit;font-size:12.5px;padding:8px 10px;resize:vertical}
+input:focus,textarea:focus{outline:none;border-color:rgba(0,214,174,.55)}
+textarea{line-height:1.45}
+.who{border:1px solid var(--line);border-radius:12px;padding:10px 11px;margin-bottom:9px;background:rgba(255,255,255,.02)}
+.whohead{display:flex;gap:8px;align-items:center;margin-bottom:4px}
+.dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.whohead input{flex:1;font-weight:800;font-size:13px;padding:5px 8px}
+.whohead input.role{flex:1;font-weight:500;font-size:11px;color:var(--mut)}
+.btns{display:flex;gap:9px;margin-top:16px;flex-wrap:wrap}
+button{font-family:inherit;font-weight:800;font-size:12.5px;padding:10px 18px;border-radius:10px;cursor:pointer;border:1px solid transparent}
+.primary{background:linear-gradient(135deg,var(--teal),var(--sky));color:#06121c}
+.ghost{background:transparent;border-color:var(--line);color:var(--mut)}
+.ghost:hover{border-color:var(--teal);color:var(--teal)}
+#prev{width:100%;border-radius:14px;border:1px solid var(--line);display:block}
+.hint{font-size:11px;color:var(--mut);margin-top:9px;line-height:1.5}
+nav.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding:0 1.6rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,10,19,0.95);border-bottom:1px solid rgba(255,255,255,0.06)}
+.sn-logo{font-size:1rem;font-weight:800;letter-spacing:.12em;color:#e8ecf4;text-decoration:none;display:flex;align-items:center;gap:.55rem}
+.sn-logo-mark{width:26px;height:26px}.sn-logo-mark svg{width:100%;height:100%}
+.sn-links{display:flex;align-items:center;gap:1rem;list-style:none}
+.sn-pill{padding:.4rem 1rem;border:1px solid rgba(0,212,170,.3);border-radius:7px;color:#00d4aa!important;font-size:.8rem;text-decoration:none;white-space:nowrap}
+</style></head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="sn-logo">
+    <div class="sn-logo-mark"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="url(#slg)" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="url(#slg)" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="url(#slg)"/><defs><linearGradient id="slg" x1="4" y1="4" x2="32" y2="32"><stop stop-color="#00d4aa"/><stop offset="1" stop-color="#00a88a"/></linearGradient></defs></svg></div>
+    ARTEMISAI
+  </a>
+  <ul class="sn-links"><li><a href="admin_panel.html" class="sn-pill">&larr; Admin Panel</a></li></ul>
+</nav>
+
+<div class="wrap">
+  <!-- ============ EDITOR ============ -->
+  <div>
+    <h1>Daily Scrum Card 🗂</h1>
+    <div class="sub">Fill it in, hit Render, download the PNG and drop it in the group. Everything saves in this browser, so tomorrow you only change what moved.</div>
+    <div class="panel">
+      <label>Date &amp; sprint</label>
+      <div style="display:flex;gap:8px">
+        <input id="f-date" style="flex:2">
+        <input id="f-sprint" style="flex:1.4" placeholder="Sprint 9 · 9–22 Aug">
+      </div>
+
+      <label>The chain (flow diagram · use → between steps)</label>
+      <input id="f-flow" placeholder="Faheem: anatomy → Rafeh: E1 doc → Faheem: pull → Pass/fail recorded">
+
+      <label>Team</label>
+      <div id="people"></div>
+      <button class="ghost" onclick="addPerson()" style="padding:7px 14px;font-size:11.5px">+ add person</button>
+
+      <label>Watch list (one per line)</label>
+      <textarea id="f-watch" rows="4"></textarea>
+
+      <div class="btns">
+        <button class="primary" onclick="render()">↻ Render card</button>
+        <button class="ghost" onclick="dl()">⬇ Download PNG</button>
+        <button class="ghost" onclick="cp()">📋 Copy image</button>
+        <button class="ghost" onclick="resetAll()">Reset</button>
+      </div>
+      <div class="hint">Tip: keep each line short — the card wraps automatically but reads best at a glance. Leave a person's name blank to hide them.</div>
+    </div>
+  </div>
+
+  <!-- ============ PREVIEW ============ -->
+  <div class="panel" style="position:sticky;top:70px">
+    <canvas id="prev" width="1080" height="1500"></canvas>
+  </div>
+</div>
+
+<script>
+(function(){
+  try{
+    var s = localStorage.getItem('artemis_session') || localStorage.getItem('artemis_sprint_session') || localStorage.getItem('artemis_app_session');
+    if(!s){ window.location.href = 'admin_login.html'; return; }
+  }catch(e){ window.location.href = 'admin_login.html'; }
+})();
+
+const C = {bg:'#080b14', card:'#131b2e', line:'#243352', ink:'#e9eef8', mut:'#8793ab',
+           teal:'#00D6AE', sky:'#38bdf8', amber:'#f5a623', violet:'#a78bfa', pink:'#f472b6',
+           green:'#22c55e', rose:'#f43f5e', dim:'#6b7890'};
+const PALETTE = [C.sky, C.amber, C.green, C.pink, C.teal, C.violet];
+
+const DEFAULT = {
+  date:'', sprint:'Sprint 9 · 9–22 Aug',
+  flow:'Faheem: agree anatomy → Rafeh: E1 into S9 doc → Faheem: pull on pilots → Pass / fail / defer',
+  people:[
+    {name:'Faheem', role:'Models', color:C.sky,
+     now:'Finalising benchmarking + label formulation for the flop model. Testing alternative labels (shares vs blended engagement vs per-reach rates) to fix zero-inflation.',
+     next:'Restructure LOKI + GALACTUS from daily to hourly. +24 impression columns per RDL table and an inserted_timestamp. Foundation for best-time-to-post.'},
+    {name:'Rafeh', role:'Product', color:C.amber,
+     now:'Master rules doc extended with S9 limitations and the benchmarking section. Continuing metric-benchmarking analysis so it becomes standing practice.',
+     next:'Lock the master doc with Faheem. Then E1: anatomy agreed → written into S9 doc with empty results column → results filled after the pilot pull.'},
+    {name:'Muteeb', role:'ML Platform', color:C.green,
+     now:'Designed the pipeline for the serving API.',
+     next:'Implement the architecture for a test run.'},
+    {name:'Saad', role:'Design', color:C.pink,
+     now:'Moodboard and inspiration set curated, visual direction locked. 4 hero concepts designed and refined. Competitor takeaways doc lands today.',
+     next:'Lock the final hero section design — today, tomorrow at the latest.'}
+  ],
+  watch:'Rafeh → Faheem: E1 is gated on the anatomy sign-off\nFaheem → Muteeb: hourly schema change affects the serving API design\nBenchmarking: master doc + manual cover the same ground — pick one source\nRafeh finishes 31 Aug — handover to Saad runs through Sprint 10'
+};
+
+function todayStr(){
+  return new Date().toLocaleDateString('en-GB',{weekday:'long', day:'numeric', month:'long', year:'numeric'});
+}
+
+let state = load();
+function load(){
+  try{
+    const s = JSON.parse(localStorage.getItem('artemis_scrum')||'null');
+    if(s && s.people) { s.date = todayStr(); return s; }
+  }catch(e){}
+  const d = JSON.parse(JSON.stringify(DEFAULT)); d.date = todayStr(); return d;
+}
+function save(){ try{ localStorage.setItem('artemis_scrum', JSON.stringify(collect())); }catch(e){} }
+
+function personRow(p,i){
+  return `<div class="who">
+    <div class="whohead">
+      <span class="dot" style="background:${p.color}"></span>
+      <input value="${esc(p.name)}" data-i="${i}" data-k="name" placeholder="Name">
+      <input class="role" value="${esc(p.role)}" data-i="${i}" data-k="role" placeholder="Role">
+    </div>
+    <textarea rows="3" data-i="${i}" data-k="now" placeholder="Now — what they're on today">${esc(p.now)}</textarea>
+    <textarea rows="3" data-i="${i}" data-k="next" placeholder="Next — what's after" style="margin-top:6px">${esc(p.next)}</textarea>
+  </div>`;
+}
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+
+function paint(){
+  document.getElementById('f-date').value = state.date;
+  document.getElementById('f-sprint').value = state.sprint;
+  document.getElementById('f-flow').value = state.flow;
+  document.getElementById('f-watch').value = state.watch;
+  document.getElementById('people').innerHTML = state.people.map(personRow).join('');
+}
+function collect(){
+  const ppl = state.people.map((p,i)=>({...p}));
+  document.querySelectorAll('#people [data-i]').forEach(el=>{
+    ppl[+el.dataset.i][el.dataset.k] = el.value;
+  });
+  return {
+    date: document.getElementById('f-date').value,
+    sprint: document.getElementById('f-sprint').value,
+    flow: document.getElementById('f-flow').value,
+    watch: document.getElementById('f-watch').value,
+    people: ppl
+  };
+}
+function addPerson(){
+  state = collect();
+  state.people.push({name:'', role:'', color:PALETTE[state.people.length % PALETTE.length], now:'', next:''});
+  paint();
+}
+function resetAll(){
+  localStorage.removeItem('artemis_scrum');
+  state = load(); paint(); render();
+}
+
+/* ---------------- canvas ---------------- */
+function wrap(ctx, text, maxW){
+  const out=[];
+  String(text||'').split('\n').forEach(para=>{
+    const words = para.split(' '); let line='';
+    for(const w of words){
+      const t = line ? line+' '+w : w;
+      if(ctx.measureText(t).width > maxW && line){ out.push(line); line=w; }
+      else line=t;
+    }
+    out.push(line);
+  });
+  return out;
+}
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y); ctx.closePath();
+}
+function logoMark(ctx,cx,cy,r){
+  ctx.strokeStyle=C.teal; ctx.lineWidth=r*0.12; ctx.lineJoin='round';
+  roundRect(ctx,cx-r,cy-r,r*2,r*2,r*0.3); ctx.stroke();
+  ctx.lineWidth=r*0.09;
+  ctx.beginPath(); ctx.moveTo(cx,cy-r*0.5); ctx.lineTo(cx+r*0.5,cy+r*0.42); ctx.lineTo(cx-r*0.5,cy+r*0.42); ctx.closePath(); ctx.stroke();
+  ctx.fillStyle=C.teal; ctx.beginPath(); ctx.arc(cx,cy+r*0.22,r*0.1,0,7); ctx.fill();
+}
+function arrow(ctx,x1,y1,x2,y2,col){
+  ctx.strokeStyle=col; ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  const a=Math.atan2(y2-y1,x2-x1), L=13, s=0.4;
+  ctx.fillStyle=col; ctx.beginPath(); ctx.moveTo(x2,y2);
+  ctx.lineTo(x2-L*Math.cos(a-s),y2-L*Math.sin(a-s));
+  ctx.lineTo(x2-L*Math.cos(a+s),y2-L*Math.sin(a+s)); ctx.closePath(); ctx.fill();
+}
+
+function render(){
+  state = collect(); save();
+  const people = state.people.filter(p=>p.name.trim());
+  const watch = state.watch.split('\n').map(s=>s.trim()).filter(Boolean);
+  const cv = document.getElementById('prev'), ctx = cv.getContext('2d');
+  const W=1080, PAD=54, colW=(W-PAD*2-24)/2;
+
+  document.fonts.load('900 44px "DM Sans"').then(()=>document.fonts.load('500 19px "DM Sans"')).then(()=>{
+    // --- measure card heights first
+    ctx.font='500 19px "DM Sans"';
+    const rows = Math.ceil(people.length/2);
+    const cardHs=[];
+    people.forEach(p=>{
+      const nl = wrap(ctx,p.now,colW-40).length;
+      const xl = wrap(ctx,p.next,colW-40).length;
+      cardHs.push(78 + nl*26 + 34 + xl*26 + 20);
+    });
+    let gridH=0;
+    for(let r=0;r<rows;r++) gridH += Math.max(cardHs[r*2]||0, cardHs[r*2+1]||0) + 20;
+
+    const flowSteps = state.flow.split('→').map(s=>s.trim()).filter(Boolean);
+    const flowH = flowSteps.length ? 150 : 0;
+    const watchH = watch.length ? 52 + watch.length*28 : 0;
+    const H = 250 + flowH + gridH + watchH + 96;
+    cv.height = H;
+
+    // --- background
+    ctx.fillStyle=C.bg; ctx.fillRect(0,0,W,H);
+    let g = ctx.createRadialGradient(W*0.8,-60,40,W*0.8,-60,620);
+    g.addColorStop(0,'rgba(0,214,174,.16)'); g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    g = ctx.createRadialGradient(W*0.1,H+40,40,W*0.1,H+40,600);
+    g.addColorStop(0,'rgba(124,92,191,.20)'); g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+
+    // --- header
+    logoMark(ctx,PAD+18,72,18);
+    ctx.fillStyle=C.ink; ctx.font='800 20px "DM Sans"'; ctx.textBaseline='middle';
+    let x=PAD+46; for(const ch of 'ARTEMISAI'){ ctx.fillText(ch,x,73); x+=ctx.measureText(ch).width+5; }
+    ctx.textBaseline='alphabetic';
+    ctx.fillStyle=C.ink; ctx.font='900 52px "DM Sans"';
+    ctx.fillText('Daily Scrum',PAD,150);
+    ctx.fillStyle=C.mut; ctx.font='500 21px "DM Sans"';
+    ctx.fillText(state.date,PAD,182);
+    // sprint chip
+    if(state.sprint.trim()){
+      ctx.font='800 17px "DM Sans"';
+      const sw=ctx.measureText(state.sprint).width+36;
+      ctx.strokeStyle='rgba(0,214,174,.55)'; ctx.lineWidth=2;
+      roundRect(ctx,W-PAD-sw,128,sw,40,20); ctx.stroke();
+      ctx.fillStyle=C.teal; ctx.fillText(state.sprint,W-PAD-sw+18,154);
+    }
+    ctx.strokeStyle='rgba(255,255,255,.09)'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(PAD,208); ctx.lineTo(W-PAD,208); ctx.stroke();
+
+    let y = 232;
+    // --- flow diagram
+    if(flowSteps.length){
+      ctx.fillStyle=C.dim; ctx.font='800 15px "DM Sans"';
+      ctx.fillText('TODAY’S CHAIN',PAD,y+8);
+      y+=26;
+      const n=flowSteps.length, gap=16;
+      const bw=(W-PAD*2-(n-1)*(gap+22))/n, bh=76;
+      flowSteps.forEach((s,i)=>{
+        const bx=PAD+i*(bw+gap+22);
+        const col=PALETTE[i%PALETTE.length];
+        ctx.fillStyle='rgba(255,255,255,.035)'; roundRect(ctx,bx,y,bw,bh,12); ctx.fill();
+        ctx.strokeStyle=col; ctx.lineWidth=2; roundRect(ctx,bx,y,bw,bh,12); ctx.stroke();
+        ctx.fillStyle=col; ctx.font='800 16px "DM Sans"';
+        const parts=s.split(':');
+        const head=parts.length>1?parts[0].trim():'';
+        const body=parts.length>1?parts.slice(1).join(':').trim():s;
+        let ty=y+26;
+        if(head){ ctx.fillText(head,bx+12,ty); ty+=21; }
+        ctx.fillStyle=C.mut; ctx.font='500 14px "DM Sans"';
+        wrap(ctx,body,bw-24).slice(0,2).forEach(ln=>{ ctx.fillText(ln,bx+12,ty); ty+=17; });
+        if(i<n-1) arrow(ctx,bx+bw+7,y+bh/2,bx+bw+gap+15,y+bh/2,'rgba(135,147,171,.75)');
+      });
+      y += bh+34;
+    }
+
+    // --- people grid
+    for(let r=0;r<rows;r++){
+      const rowH = Math.max(cardHs[r*2]||0, cardHs[r*2+1]||0);
+      for(let c2=0;c2<2;c2++){
+        const idx=r*2+c2, p=people[idx];
+        if(!p) continue;
+        const bx=PAD+c2*(colW+24);
+        ctx.fillStyle=C.card; roundRect(ctx,bx,y,colW,rowH,16); ctx.fill();
+        ctx.strokeStyle='rgba(255,255,255,.08)'; ctx.lineWidth=1.5; roundRect(ctx,bx,y,colW,rowH,16); ctx.stroke();
+        // colour bar
+        ctx.fillStyle=p.color; roundRect(ctx,bx,y,colW,5,3); ctx.fill();
+        // avatar
+        ctx.fillStyle=p.color; ctx.beginPath(); ctx.arc(bx+34,y+44,20,0,7); ctx.fill();
+        ctx.fillStyle='#06121c'; ctx.font='900 19px "DM Sans"'; ctx.textAlign='center';
+        ctx.fillText((p.name.trim()[0]||'?').toUpperCase(),bx+34,y+51); ctx.textAlign='left';
+        ctx.fillStyle=C.ink; ctx.font='800 23px "DM Sans"';
+        ctx.fillText(p.name,bx+66,y+42);
+        ctx.fillStyle=p.color; ctx.font='700 14px "DM Sans"';
+        ctx.fillText(String(p.role||'').toUpperCase(),bx+66,y+62);
+
+        let ty=y+96;
+        ctx.fillStyle=C.teal; ctx.font='800 14px "DM Sans"'; ctx.fillText('NOW',bx+20,ty);
+        ty+=22; ctx.fillStyle='#cbd6e8'; ctx.font='500 19px "DM Sans"';
+        wrap(ctx,p.now,colW-40).forEach(ln=>{ ctx.fillText(ln,bx+20,ty); ty+=26; });
+        ty+=12;
+        ctx.fillStyle=C.amber; ctx.font='800 14px "DM Sans"'; ctx.fillText('NEXT',bx+20,ty);
+        ty+=22; ctx.fillStyle=C.mut; ctx.font='500 19px "DM Sans"';
+        wrap(ctx,p.next,colW-40).forEach(ln=>{ ctx.fillText(ln,bx+20,ty); ty+=26; });
+      }
+      y += rowH+20;
+    }
+
+    // --- watch list
+    if(watch.length){
+      y+=12;
+      const bh2 = 44 + watch.length*28;
+      ctx.fillStyle='rgba(244,63,94,.06)'; roundRect(ctx,PAD,y,W-PAD*2,bh2,14); ctx.fill();
+      ctx.strokeStyle='rgba(244,63,94,.4)'; ctx.lineWidth=1.5; roundRect(ctx,PAD,y,W-PAD*2,bh2,14); ctx.stroke();
+      ctx.fillStyle=C.rose; ctx.font='800 15px "DM Sans"';
+      ctx.fillText('WATCH LIST',PAD+20,y+28);
+      let wy=y+54;
+      ctx.font='500 18px "DM Sans"';
+      watch.forEach(t=>{
+        ctx.fillStyle=C.rose; ctx.fillText('•',PAD+20,wy);
+        ctx.fillStyle='#c6d1e2'; ctx.fillText(t,PAD+38,wy); wy+=28;
+      });
+      y+=bh2;
+    }
+
+    // --- footer
+    ctx.fillStyle=C.dim; ctx.font='500 16px "DM Sans"';
+    ctx.fillText('artemisai.co.uk',PAD,H-34);
+    ctx.textAlign='right';
+    ctx.fillStyle=C.teal; ctx.font='800 16px "DM Sans"';
+    ctx.fillText('Launching December 2026',W-PAD,H-34);
+    ctx.textAlign='left';
+  });
+}
+
+function dl(){
+  const cv=document.getElementById('prev');
+  cv.toBlob(b=>{
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(b);
+    a.download='artemis_scrum_'+new Date().toISOString().slice(0,10)+'.png';
+    a.click(); URL.revokeObjectURL(a.href);
+  },'image/png');
+}
+function cp(){
+  const cv=document.getElementById('prev');
+  cv.toBlob(b=>{
+    navigator.clipboard.write([new ClipboardItem({'image/png':b})])
+      .then(()=>alert('Card copied — paste it straight into WhatsApp.'))
+      .catch(()=>alert('Copy blocked by the browser. Use Download PNG instead.'));
+  },'image/png');
+}
+
+paint(); render();
+document.addEventListener('input', e=>{ if(e.target.closest('.wrap')) save(); });
+</script>
+</body>
+</html>
