@@ -60,19 +60,30 @@ const now = () => new Date().toISOString();
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 204, headers: HEADERS };
 
-  let store;
-  try { connectLambda(event); store = getStore(STORE); }
-  catch (err) {
+  // Blobs reads are eventually consistent by default: a tick that is invisible
+  // on the next refresh reads as a tick that was lost. Reads go through a
+  // strong-consistency store and fall back to eventual only where the runtime
+  // throws BlobsConsistencyError (same pattern as charts.js). Writes use the
+  // plain store - a write is visible to a strong read immediately regardless.
+  let store, strong;
+  try {
+    connectLambda(event); store = getStore(STORE); strong = store;
+    try { strong = getStore({ name: STORE, consistency: "strong" }); } catch { /* stays eventual */ }
+  } catch (err) {
     return reply(500, { error: "store_unavailable",
       message: "Netlify Blobs is not available here: " + String(err.message || err).slice(0, 160) });
   }
+  const read = async (fn) => {
+    try { return await fn(strong); }
+    catch (err) { if (String(err && err.name) !== "BlobsConsistencyError") throw err; return await fn(store); }
+  };
   const qs = event.queryStringParameters || {};
 
   /* ---------- read the whole board ---------- */
   if (event.httpMethod === "GET") {
-    const { blobs } = await store.list();
+    const { blobs } = await read((st) => st.list());
     const entries = await Promise.all(blobs.map(async (b) => {
-      try { return [b.key, await store.get(b.key, { type: "json" })]; } catch { return null; }
+      try { return [b.key, await read((st) => st.get(b.key, { type: "json" }))]; } catch { return null; }
     }));
     const state = {}, custom = [];
     for (const e of entries) {
@@ -111,7 +122,7 @@ exports.handler = async (event) => {
 
     if (!okId(body.id)) return reply(400, { error: "bad_id" });
     const key = String(body.id);
-    const prev = (await store.get(key, { type: "json" })) || { status: "todo", checks: {}, note: "", history: [] };
+    const prev = (await read((st) => st.get(key, { type: "json" }))) || { status: "todo", checks: {}, note: "", history: [] };
     const rec = { ...prev };
 
     if (body.status !== undefined) {

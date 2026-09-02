@@ -65,10 +65,13 @@ const slug = (s) =>
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 204, headers: HEADERS };
 
-  let store;
+  // Strong-consistency reads with an eventual fallback, as in charts.js: a run
+  // that is invisible on the next refresh reads as a check that never ran.
+  let store, strong;
   try {
     connectLambda(event);
-    store = getStore(STORE);
+    store = getStore(STORE); strong = store;
+    try { strong = getStore({ name: STORE, consistency: "strong" }); } catch { /* stays eventual */ }
   } catch (err) {
     return reply(500, {
       error: "store_unavailable",
@@ -77,17 +80,21 @@ exports.handler = async (event) => {
   }
 
   const qs = event.queryStringParameters || {};
+  const read = async (fn) => {
+    try { return await fn(strong); }
+    catch (err) { if (String(err && err.name) !== "BlobsConsistencyError") throw err; return await fn(store); }
+  };
 
   /* ---------- read ---------- */
   if (event.httpMethod === "GET") {
     if (qs.name) {
-      const rec = await store.get(slug(qs.name), { type: "json" });
+      const rec = await read((st) => st.get(slug(qs.name), { type: "json" }));
       if (!rec) return reply(404, { error: "not_found" });
       return reply(200, rec);
     }
-    const { blobs } = await store.list();
+    const { blobs } = await read((st) => st.list());
     const all = await Promise.all(
-      blobs.map((b) => store.get(b.key, { type: "json" }).catch(() => null))
+      blobs.map((b) => read((st) => st.get(b.key, { type: "json" })).catch(() => null))
     );
     // A card with no runs at all is still worth showing — "never run" is a
     // finding, not an empty state — so nulls are dropped but empty ones are not.
@@ -129,7 +136,7 @@ exports.handler = async (event) => {
       detail: body.detail === undefined ? null : body.detail,
     };
 
-    const prev = (await store.get(key, { type: "json" })) || { runs: [] };
+    const prev = (await read((st) => st.get(key, { type: "json" }))) || { runs: [] };
     const runs = [run, ...(prev.runs || [])].slice(0, KEEP_RUNS);
 
     // fired_at is kept separately from the run list: once the history rolls past

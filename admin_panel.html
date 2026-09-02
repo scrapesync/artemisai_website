@@ -561,11 +561,11 @@ body.mode-archive .arch-empty.show{display:block}
     <p class="sub" id="user-role-line">Where would you like to go today?</p>
   </div>
   <div class="mode-tabs">
-    <button type="button" class="mode-tab on" id="tab-live" onclick="setMode('live')"><span class="t">Live <span class="n" id="n-live">0</span></span><span class="d">The pages the team uses now. Drag to rearrange.</span></button>
+    <button type="button" class="mode-tab on" id="tab-live" onclick="setMode('live')"><span class="t">Live <span class="n" id="n-live">0</span></span><span class="d">The pages the team uses now. Drag to rearrange, for everyone.</span></button>
     <button type="button" class="mode-tab arch" id="tab-archive" onclick="setMode('archive')"><span class="t">Archive <span class="n" id="n-archive">0</span></span><span class="d">Retired pages, hidden for everyone. Restore any time.</span></button>
   </div>
   <div class="reorder-hint" id="reorder-hint">
-    <span>✦ Tip: drag any card to rearrange this page. Your order is saved on this device; archiving is shared with everyone.</span>
+    <span>✦ Tip: drag any card to rearrange this page. Order and archive are shared with everyone.</span>
     <button class="reorder-reset" id="reorder-reset" onclick="resetCardOrder()" style="display:none">↺ Reset order</button>
   </div>
 
@@ -971,9 +971,6 @@ body.mode-archive .arch-empty.show{display:block}
     </a>
 
   </div>
-  <div class="signout-row">
-    <button class="signout-btn" onclick="doLogout()">⏻ Sign Out</button>
-  </div>
 </div>
 
 <script>
@@ -984,27 +981,46 @@ body.mode-archive .arch-empty.show{display:block}
   function keyOf(c){ // stable id = href filename
     var h=c.getAttribute('href')||''; return h.split('/').pop();
   }
-  function applySavedOrder(){
+  /* The order is SHARED: it comes from /api/admin-archive (the same store as
+     the archive) and localStorage only mirrors it so the page paints in the
+     right order before the network answers. */
+  function applyOrder(saved){
     var grid=document.getElementById(GRID_ID); if(!grid) return;
-    var saved; try{ saved=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){ saved=null; }
-    if(!saved || !saved.length){ return; }
+    if(!saved || !saved.length){ showResetIfCustom(false); return; }
     var map={}; cards().forEach(function(c){ map[keyOf(c)]=c; });
     saved.forEach(function(k){ if(map[k]) grid.appendChild(map[k]); });
-    // any cards not in saved list (new pages added later) stay at the end in source order
+    // any cards not in the saved list (new pages added later) stay at the end in source order
     cards().forEach(function(c){ if(saved.indexOf(keyOf(c))===-1) grid.appendChild(c); });
-    showResetIfCustom();
+    showResetIfCustom(true);
   }
+  function applySavedOrder(){
+    var saved=null; try{ saved=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
+    applyOrder(saved);
+  }
+  window.applySharedOrder=function(order){
+    try{ if(order&&order.length) localStorage.setItem(KEY, JSON.stringify(order)); else localStorage.removeItem(KEY); }catch(e){}
+    applyOrder(order);
+  };
+  var orderTimer=null;
   function saveOrder(){
-    try{ localStorage.setItem(KEY, JSON.stringify(cards().map(keyOf))); }catch(e){}
-    showResetIfCustom();
+    var order=cards().map(keyOf);
+    try{ localStorage.setItem(KEY, JSON.stringify(order)); }catch(e){}
+    showResetIfCustom(true);
+    // one write per drag session, not one per hover
+    clearTimeout(orderTimer);
+    orderTimer=setTimeout(function(){
+      var by='someone'; try{ by=localStorage.getItem('artemis_viewer_name')||by; }catch(e){}
+      fetch('/api/admin-archive',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({order:order,by:by})}).catch(function(){});
+    }, 400);
   }
-  function showResetIfCustom(){
+  function showResetIfCustom(on){
     var btn=document.getElementById('reorder-reset'); if(!btn) return;
-    btn.style.display = localStorage.getItem(KEY) ? 'inline-block' : 'none';
+    btn.style.display = on ? 'inline-block' : 'none';
   }
   window.resetCardOrder=function(){
     try{ localStorage.removeItem(KEY); }catch(e){}
-    location.reload();
+    fetch('/api/admin-archive',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({order:[]})})
+      .catch(function(){}).then(function(){ location.reload(); });
   };
 
   var dragEl=null, didDrag=false;
@@ -1186,14 +1202,14 @@ function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
   function archive(card){
     var href=card.getAttribute('href'), title=((card.querySelector('.dest-title')||{}).textContent||href).trim();
     LIST.push({href:href,title:title,at:new Date().toISOString(),by:who()}); paint();
-    post(href,title).then(function(j){ LIST=(j&&j.archived)||LIST; paint(); })
+    post(href,title).then(function(j){ LIST=(j&&j.archived)||LIST; paint(); if(j&&Array.isArray(j.order)) window.applySharedOrder(j.order); })
       .catch(function(){ LIST=LIST.filter(function(a){return a.href!==href;}); paint(); toast('Could not archive: the store did not respond.'); });
     toast('Archived '+title, function(){ restore(card); });
   }
   function restore(card){
     var href=card.getAttribute('href');
     LIST=LIST.filter(function(a){return a.href!==href;}); paint();
-    del(href).then(function(j){ LIST=(j&&j.archived)||LIST; paint(); })
+    del(href).then(function(j){ LIST=(j&&j.archived)||LIST; paint(); if(j&&Array.isArray(j.order)) window.applySharedOrder(j.order); })
       .catch(function(){ toast('Could not restore: the store did not respond.'); load(); });
   }
   cards().forEach(function(c){
@@ -1203,7 +1219,7 @@ function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
   });
   function load(){
     fetch(API+'?ts='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();})
-      .then(function(j){ LIST=(j&&j.archived)||[]; paint(); })
+      .then(function(j){ LIST=(j&&j.archived)||[]; paint(); if(j&&Array.isArray(j.order)&&window.applySharedOrder) window.applySharedOrder(j.order); })
       .catch(function(){ paint(); document.getElementById('arch-empty').textContent='Could not reach the archive store (/api/admin-archive), so nothing is hidden right now.'; document.getElementById('arch-empty').classList.add('show'); });
   }
   var m='live'; try{ m=localStorage.getItem('artemis_panel_mode')||'live'; }catch(e){}
