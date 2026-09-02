@@ -144,6 +144,28 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .kcard .t{font-size:12.5px;font-weight:500;margin:3px 0 5px}
 .kcard .m{display:flex;gap:6px;align-items:center;font-size:10.5px;color:var(--muted3);flex-wrap:wrap}
 .kcard .who{color:var(--pc,var(--accent));font-weight:600}
+/* ---- sections in the sidebar ---- */
+.side .sec-lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--lc,var(--muted2));margin:12px 0 6px;padding-left:4px;border-left:2px solid var(--lc,var(--muted2))}
+/* ---- backlog ---- */
+.lay{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--lc,var(--accent));border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.lay .lh{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.lay .lh .ph{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--lc,var(--accent))}
+.lay .lh h3{font-size:16px;font-weight:700}
+.lay .lh .n{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted3)}
+.lay .lh .add{margin-left:auto}
+.brow2{display:grid;grid-template-columns:96px 44px 1fr 150px 84px 150px 84px;gap:10px;align-items:center;padding:8px 12px;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;margin-bottom:6px}
+.brow2 .ti{font-size:12.5px;font-weight:500}.brow2 .ti small{display:block;font-size:11px;color:var(--muted3);font-weight:400}
+.brow2 .wave{font-size:10.5px;color:var(--muted3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brow2 select{padding:4px 6px;border-radius:6px;border:1px solid var(--border2);background:var(--card);font-size:11px}
+.brow2 .who{font-size:11px;color:var(--muted3)}
+.xbtn{padding:4px 9px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--muted3);font-size:11px;cursor:pointer}
+.xbtn:hover{border-color:var(--red);color:var(--red)}
+.xbtn.ok:hover{border-color:var(--accent);color:var(--accent)}
+.removed{margin-top:8px;font-size:11.5px;color:var(--muted2)}
+.removed summary{cursor:pointer}
+.removed .r{display:flex;gap:10px;align-items:center;padding:4px 0;color:var(--muted3)}
+.act{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px dashed var(--border2)}
+.act select{padding:5px 8px;border-radius:7px;border:1px solid var(--border2);background:var(--bg2);font-size:11.5px}
 /* ---- performance ---- */
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:14px}
 .pcard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;border-top:3px solid var(--pc,var(--accent))}
@@ -184,6 +206,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   <div class="tabs">
     <button class="tab-btn active" data-tab="overview">Overview</button>
     <button class="tab-btn" data-tab="tracker">Sprint Tracker</button>
+    <button class="tab-btn" data-tab="backlog">Backlog</button>
     <button class="tab-btn" data-tab="performance">Performance</button>
   </div>
   <div class="sp"></div>
@@ -236,6 +259,14 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     </div>
   </section>
 
+  <!-- ================= BACKLOG ================= -->
+  <section id="view-backlog" class="hidden">
+    <div class="eyebrow">Unscheduled work, by layer</div>
+    <div class="h1">Backlog</div>
+    <div class="sub">Everything we intend to build that is not in a sprint yet, grouped by the plan's layers. Seeded from the post-launch roadmap. Move a ticket into a sprint when it is real, remove it when it is not, add what is missing. All shared.</div>
+    <div id="bl-body"></div>
+  </section>
+
   <!-- ================= PERFORMANCE ================= -->
   <section id="view-performance" class="hidden">
     <div class="eyebrow">Delivery per person</div>
@@ -248,6 +279,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 <div class="modal" id="modal"><div class="mbox">
   <h3>Add a ticket</h3>
   <div class="g2"><div><label>Sprint</label><select id="m-sprint"></select></div><div><label>Assignee</label><select id="m-who"></select></div></div>
+  <label>Layer (for backlog tickets)</label><select id="m-layer"></select>
   <label>Title</label><input id="m-title" maxlength="140" placeholder="Imperative, under 70 characters">
   <label>What</label><textarea id="m-what" placeholder="Concrete enough to start tomorrow morning"></textarea>
   <label>Why</label><input id="m-why" placeholder="What slips without it">
@@ -278,6 +310,8 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 
   var D=window.LAUNCH_DATA||{sprints:[],tickets:[]};
   var SPRINTS=D.sprints, ORDER=SPRINTS.map(function(s){return s.id;});
+  var LAYERS=D.layers||[], BACKLOG=D.backlog||[];
+  var LC={}; LAYERS.forEach(function(l){LC[l.id]=l;});
   var PEOPLE=[
     {n:'Asad',   c:'#6366f1', role:'Founder · web/app build'},
     {n:'Faheem', c:'#00d4aa', role:'AI / ML'},
@@ -314,7 +348,12 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   }
 
   /* ---- tickets + state ---- */
-  function all(){ return D.tickets.concat(CUSTOM); }
+  function all(){ return D.tickets.concat(BACKLOG,CUSTOM); }
+  /* A move on the board is an override on the ticket's state; the generated
+     file keeps saying what the plan said. */
+  function sp(t){ return (STATE[t.id]&&STATE[t.id].sprint)||t.sprint; }
+  function ly(t){ var s=sprintOf(sp(t)); return (STATE[t.id]&&STATE[t.id].layer)||t.layer||(s&&s.layer)||'product'; }
+  function inSprints(t){ return counted(t) && sp(t)!=='BL'; }
   function st(id){ return STATE[id]||{status:'todo',checks:{},note:'',history:[]}; }
   function isOpen(t){ var s=st(t.id).status; return s!=='done'&&s!=='dropped'; }
   function isOver(t){ return isOpen(t) && t.due && t.due<TODAY; }
@@ -355,17 +394,17 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   var TAB='overview';
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.addEventListener('click',function(){ showTab(b.getAttribute('data-tab')); }); });
   function showTab(t){ TAB=t; document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active',b.getAttribute('data-tab')===t); });
-    ['overview','tracker','performance'].forEach(function(v){ document.getElementById('view-'+v).classList.toggle('hidden',v!==t); });
+    ['overview','tracker','backlog','performance'].forEach(function(v){ document.getElementById('view-'+v).classList.toggle('hidden',v!==t); });
     try{ localStorage.setItem('artemis_launch_tab',t); }catch(e){} renderAll(); }
 
   /* ================= OVERVIEW ================= */
   function renderOverview(){
-    var T=all().filter(counted), cur=currentSprint();
+    var T=all().filter(inSprints), cur=currentSprint();
     var done=T.filter(function(t){return st(t.id).status==='done';}).length;
     var inprog=T.filter(function(t){return st(t.id).status==='inprog';}).length;
     var blocked=T.filter(function(t){return st(t.id).status==='blocked';}).length;
     var over=T.filter(isOver).length;
-    var curT=T.filter(function(t){return t.sprint===cur.id;}), curDone=curT.filter(function(t){return st(t.id).status==='done';}).length;
+    var curT=T.filter(function(t){return sp(t)===cur.id;}), curDone=curT.filter(function(t){return st(t.id).status==='done';}).length;
     var pct=T.length?Math.round(done/T.length*100):0;
     var toLaunch=days(TODAY,'2026-12-01');
     document.getElementById('ov-tiles').innerHTML=[
@@ -375,10 +414,11 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       tile(cur.id+' progress', (curT.length?Math.round(curDone/curT.length*100):0)+'%', curDone+' of '+curT.length+' · expected ~'+Math.round(expected(cur)*100)+'% by today'),
       tile('In progress', inprog, 'across all sprints','amber'),
       tile('Blocked', blocked, blocked?'needs unblocking':'nothing blocked', blocked?'red':''),
-      tile('Overdue', over, over?'past due, still open':'nothing overdue', over?'red':'')
+      tile('Overdue', over, over?'past due, still open':'nothing overdue', over?'red':''),
+      tile('Backlog', all().filter(function(t){return counted(t)&&sp(t)==='BL';}).length, 'unscheduled, by layer', 'white')
     ].join('');
     document.getElementById('ov-sprints').innerHTML=SPRINTS.map(function(s){
-      var ts=T.filter(function(t){return t.sprint===s.id;}), d=ts.filter(function(t){return st(t.id).status==='done';}).length;
+      var ts=T.filter(function(t){return sp(t)===s.id;}), d=ts.filter(function(t){return st(t.id).status==='done';}).length;
       var ph=sprintPhase(s), p=ts.length?d/ts.length:0;
       return '<div class="scard'+(s.id===cur.id?' active':'')+'" data-s="'+s.id+'">'+
         '<span class="st '+(ph==='live'?'live':ph==='closed'?'done':'')+'">'+ph+'</span>'+
@@ -404,7 +444,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     }).join('');
   }
   function tile(k,v,d,cls){ return '<div class="tile"><div class="k">'+k+'</div><div class="v '+(cls||'')+'">'+v+'</div><div class="d">'+d+'</div></div>'; }
-  function mini(t){ return '<div class="mini"><span class="who" style="color:'+PC[t.assignee]+'">'+esc(t.assignee)+'</span><span class="t"><span class="mono" style="color:var(--accent);font-size:10.5px">'+t.id+'</span> '+esc(t.title)+'</span><span class="due'+(isOver(t)?' over':'')+'">'+fmtS(t.due)+'</span></div>'; }
+  function mini(t){ return '<div class="mini"><span class="who" style="color:'+(PC[t.assignee]||'#5c7a99')+'">'+(t.assignee?esc(t.assignee):'unassigned')+'</span><span class="t"><span class="mono" style="color:var(--accent);font-size:10.5px">'+t.id+'</span> '+esc(t.title)+'</span><span class="due'+(isOver(t)?' over':'')+'">'+fmtS(t.due)+'</span></div>'; }
 
   /* ================= TRACKER ================= */
   var SEL=null, F={who:'',status:'',pr:'',q:''}, VIEW='list', OPEN={};
@@ -414,9 +454,11 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 
   function renderTracker(){
     var T=all(), s=sprintOf(SEL);
-    document.getElementById('side-sprints').innerHTML=SPRINTS.map(function(sp){
-      var ts=T.filter(function(t){return t.sprint===sp.id&&counted(t);}), d=ts.filter(function(t){return st(t.id).status==='done';}).length;
-      return '<div class="sitem'+(sp.id===SEL?' active':'')+'" data-s="'+sp.id+'"><div style="flex:1"><div style="display:flex;gap:8px;align-items:center"><span class="id">'+sp.id+'</span><span class="nm">'+esc(sp.name)+'</span><span class="n">'+d+'/'+ts.length+'</span></div><div class="b"><i style="width:'+(ts.length?Math.round(d/ts.length*100):0)+'%"></i></div></div></div>';
+    var lastSec=null;
+    document.getElementById('side-sprints').innerHTML=SPRINTS.map(function(spr){
+      var ts=T.filter(function(t){return sp(t)===spr.id&&counted(t);}), d=ts.filter(function(t){return st(t.id).status==='done';}).length;
+      var head=''; if(spr.section&&spr.section!==lastSec){ lastSec=spr.section; var col=(LC[spr.layer]||{}).color||'#5c7a99'; head='<div class="sec-lbl" style="--lc:'+col+'">'+esc(spr.section)+'</div>'; }
+      return head+'<div class="sitem'+(spr.id===SEL?' active':'')+'" data-s="'+spr.id+'"><div style="flex:1"><div style="display:flex;gap:8px;align-items:center"><span class="id">'+spr.id+'</span><span class="nm">'+esc(spr.name)+'</span><span class="n">'+d+'/'+ts.length+'</span></div><div class="b"><i style="width:'+(ts.length?Math.round(d/ts.length*100):0)+'%"></i></div></div></div>';
     }).join('');
     document.querySelectorAll('.sitem').forEach(function(el){ el.addEventListener('click',function(){ SEL=el.getAttribute('data-s'); try{localStorage.setItem('artemis_launch_sprint',SEL);}catch(e){} OPEN={}; renderTracker(); }); });
 
@@ -425,7 +467,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       '<div class="meta">'+fmt(s.start)+' &rarr; '+fmt(s.end)+' · '+(ph==='live'?days(TODAY,s.end)+' days left':ph)+' · gate <b style="color:var(--amber)">'+fmt(s.gate_date)+'</b></div>'+
       '<div class="goal">'+esc(s.goal)+'</div><div class="gatebox"><b>Friday gate</b>'+esc(s.gate)+'</div></div>';
 
-    var inS=T.filter(function(t){return t.sprint===SEL;});
+    var inS=T.filter(function(t){return sp(t)===SEL;});
     document.getElementById('people-pills').innerHTML=[{n:'',c:'#a5b4fc',l:'Everyone'}].concat(PEOPLE.map(function(p){return {n:p.n,c:p.c,l:p.n};})).map(function(p){
       var n=p.n?inS.filter(function(t){return t.assignee===p.n&&counted(t);}).length:inS.filter(counted).length;
       return '<button class="pill'+(F.who===p.n?' on':'')+'" data-who="'+p.n+'" style="--pc:'+p.c+'">'+p.l+' <span class="n">'+n+'</span></button>';
@@ -450,10 +492,14 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 
   function prSort(a,b){ return a.priority.localeCompare(b.priority) || (a.due||'').localeCompare(b.due||'') || a.id.localeCompare(b.id); }
   function list(vis){
-    return PEOPLE.filter(function(p){return vis.some(function(t){return t.assignee===p.n;});}).map(function(p){
-      var ts=vis.filter(function(t){return t.assignee===p.n;}).sort(prSort);
-      var d=ts.filter(function(t){return st(t.id).status==='done';}).length;
-      return '<div class="grp"><span class="dot" style="background:'+p.c+'"></span><span class="who" style="color:'+p.c+'">'+p.n+'</span><span class="n">'+d+' / '+ts.length+' done · '+esc(p.role)+'</span></div>'+ts.map(row).join('');
+    /* Grouped by person, plus an Unassigned group at the end so a ticket pulled
+       in from the backlog is never invisible just because nobody owns it yet. */
+    var groups=PEOPLE.map(function(p){return {n:p.n,c:p.c,role:p.role,ts:vis.filter(function(t){return t.assignee===p.n;})};});
+    var known=PEOPLE.map(function(p){return p.n;});
+    groups.push({n:'Unassigned',c:'#5c7a99',role:'needs an owner - open the ticket to assign or move it',ts:vis.filter(function(t){return known.indexOf(t.assignee)<0;})});
+    return groups.filter(function(g){return g.ts.length;}).map(function(g){
+      var ts=g.ts.slice().sort(prSort), d=ts.filter(function(t){return st(t.id).status==='done';}).length;
+      return '<div class="grp"><span class="dot" style="background:'+g.c+'"></span><span class="who" style="color:'+g.c+'">'+g.n+'</span><span class="n">'+d+' / '+ts.length+' done · '+esc(g.role)+'</span></div>'+ts.map(row).join('');
     }).join('');
   }
   function row(t){
@@ -480,14 +526,25 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       '<h4>Note</h4><textarea data-note="'+t.id+'" placeholder="Blocker detail, decision, link…">'+esc(S.note||'')+'</textarea>'+
       '<div class="brow"><button class="hbtn primary" data-savenote="'+t.id+'">Save note</button>'+(String(t.id).startsWith('C-')?'<button class="hbtn" data-del="'+t.id+'" style="color:var(--red)">Delete ticket</button>':'')+'</div>'+
       '<div class="hist">'+((S.history||[]).slice(0,6).map(function(h){return esc(h.by)+' · '+esc(STATUS_LABEL[h.from]||h.from)+' &rarr; '+esc(STATUS_LABEL[h.to]||h.to)+' · '+new Date(h.at).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});}).join('<br>')||'no changes yet')+'</div>'+
+      '<div class="act"><span class="mono" style="font-size:10.5px;color:var(--muted2)">MOVE TO</span>'+moveSel(t)+
+      (S.status==='dropped'?'<button class="xbtn ok" data-restore="'+t.id+'">Restore</button>':'<button class="xbtn" data-drop="'+t.id+'">Remove from plan</button>')+'</div>'+
       '</div></div>';
+  }
+  function moveSel(t){
+    var cur=sp(t);
+    return '<select data-move="'+t.id+'">'+SPRINTS.map(function(s){return '<option value="'+s.id+'"'+(cur===s.id?' selected':'')+'>'+s.id+' · '+esc(s.name)+'</option>';}).join('')+'<option value="BL"'+(cur==='BL'?' selected':'')+'>Backlog</option></select>';
+  }
+  function wireMoves(root){
+    root.querySelectorAll('select[data-move]').forEach(function(s){ s.addEventListener('change',function(){ var id=s.getAttribute('data-move'); save(id,{sprint:s.value}); toast(s.value==='BL'?'Sent '+id+' to the backlog':'Moved '+id+' to '+s.value); }); });
+    root.querySelectorAll('[data-drop]').forEach(function(b){ b.addEventListener('click',function(e){ e.stopPropagation(); var id=b.getAttribute('data-drop'); save(id,{status:'dropped'}); toast('Removed '+id+' (restorable)'); }); });
+    root.querySelectorAll('[data-restore]').forEach(function(b){ b.addEventListener('click',function(e){ e.stopPropagation(); var id=b.getAttribute('data-restore'); save(id,{status:'todo'}); toast('Restored '+id); }); });
   }
   function board(vis){
     var cols=[['todo','To do'],['inprog','In progress'],['blocked','Blocked'],['done','Done']];
     return '<div class="board">'+cols.map(function(c){
       var ts=vis.filter(function(t){return st(t.id).status===c[0];}).sort(prSort);
       return '<div class="kcol c-'+c[0]+'" data-col="'+c[0]+'"><h3><span>'+c[1]+'</span><span>'+ts.length+'</span></h3>'+ts.map(function(t){
-        return '<div class="kcard" draggable="true" data-id="'+t.id+'" style="--pc:'+PC[t.assignee]+'"><div class="m"><span class="mono" style="color:var(--accent)">'+t.id+'</span><span class="pr '+t.priority+'">'+t.priority+'</span></div><div class="t">'+esc(t.title)+'</div><div class="m"><span class="who">'+esc(t.assignee)+'</span><span>'+esc(t.area)+'</span><span class="due'+(isOver(t)?' over':'')+'">'+fmtS(t.due)+'</span></div></div>';
+        return '<div class="kcard" draggable="true" data-id="'+t.id+'" style="--pc:'+(PC[t.assignee]||'#5c7a99')+'"><div class="m"><span class="mono" style="color:var(--accent)">'+t.id+'</span><span class="pr '+t.priority+'">'+t.priority+'</span></div><div class="t">'+esc(t.title)+'</div><div class="m"><span class="who">'+esc(t.assignee)+'</span><span>'+esc(t.area)+'</span><span class="due'+(isOver(t)?' over':'')+'">'+fmtS(t.due)+'</span></div></div>';
       }).join('')+'</div>';
     }).join('')+'</div>';
   }
@@ -499,6 +556,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     body.querySelectorAll('[data-del]').forEach(function(b){ b.addEventListener('click',function(){ var id=b.getAttribute('data-del'); if(!confirm('Delete '+id+'? Only team-added tickets can be deleted.')) return;
       fetch(API+'?id='+encodeURIComponent(id),{method:'DELETE'}).then(function(){ CUSTOM=CUSTOM.filter(function(t){return t.id!==id;}); delete STATE[id]; mirror(); renderAll(); toast('Deleted '+id); }).catch(function(e){ toast('Could not delete: '+e.message,true); }); }); });
     body.querySelectorAll('.det').forEach(function(d){ d.addEventListener('click',function(e){ e.stopPropagation(); }); });
+    wireMoves(body);
     // board drag and drop
     var drag=null;
     body.querySelectorAll('.kcard').forEach(function(c){
@@ -520,18 +578,25 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 
   /* ---- add ticket ---- */
   var M=document.getElementById('modal');
-  document.getElementById('m-sprint').innerHTML=SPRINTS.map(function(s){return '<option value="'+s.id+'">'+s.id+' · '+esc(s.name)+'</option>';}).join('');
-  document.getElementById('m-who').innerHTML=PEOPLE.map(function(p){return '<option>'+p.n+'</option>';}).join('');
+  document.getElementById('m-sprint').innerHTML=SPRINTS.map(function(s){return '<option value="'+s.id+'">'+s.id+' · '+esc(s.name)+'</option>';}).join('')+'<option value="BL">Backlog (unscheduled)</option>';
+  document.getElementById('m-who').innerHTML='<option value="">Unassigned</option>'+PEOPLE.map(function(p){return '<option>'+p.n+'</option>';}).join('');
+  document.getElementById('m-layer').innerHTML=LAYERS.map(function(l){return '<option value="'+l.id+'">'+esc(l.phase)+' · '+esc(l.name)+'</option>';}).join('');
+  function openModal(sprint, layer){
+    document.getElementById('m-sprint').value=sprint||SEL;
+    document.getElementById('m-layer').value=layer||((sprintOf(sprint||SEL)||{}).layer||'product');
+    document.getElementById('m-due').value=sprint==='BL'?'':(sprintOf(sprint||SEL)||{}).gate_date||'';
+    M.classList.add('open');
+  }
   document.getElementById('m-gate').innerHTML='<option value="none">none</option>'+SPRINTS.map(function(s){return '<option value="'+s.id+'">'+s.id+' gate ('+fmtS(s.gate_date)+')</option>';}).join('');
-  document.getElementById('btn-add').addEventListener('click',function(){ document.getElementById('m-sprint').value=SEL; document.getElementById('m-due').value=sprintOf(SEL).gate_date; M.classList.add('open'); });
+  document.getElementById('btn-add').addEventListener('click',function(){ openModal(SEL); });
   document.getElementById('m-cancel').addEventListener('click',function(){ M.classList.remove('open'); });
   document.getElementById('m-save').addEventListener('click',function(){
     var g=function(id){return document.getElementById(id).value.trim();};
     if(!g('m-title')){ toast('A title is required',true); return; }
-    var who=g('m-who'), sp=g('m-sprint');
-    var n=CUSTOM.filter(function(t){return t.sprint===sp&&t.assignee===who;}).length+1;
-    var id='C-'+sp+'-'+who.slice(0,2).toUpperCase()+'-'+String(n).padStart(2,'0');
-    var t={id:id,sprint:sp,assignee:who,title:g('m-title'),what:g('m-what'),why:g('m-why'),area:g('m-area')||'Ops',due:g('m-due'),priority:g('m-pr'),priority_reason:'added by '+VIEWER,depends_on:[],feeds:[],gate:g('m-gate'),source:'team',acceptance:g('m-acc'),checklist:g('m-ck').split('\n').map(function(s){return s.trim();}).filter(Boolean)};
+    var who=g('m-who'), spv=g('m-sprint'), layer=g('m-layer');
+    var n=CUSTOM.filter(function(t){return t.sprint===spv;}).length+1;
+    var id='C-'+spv+'-'+(who?who.slice(0,2).toUpperCase():'XX')+'-'+String(n).padStart(2,'0');
+    var t={id:id,sprint:spv,layer:layer,assignee:who,title:g('m-title'),what:g('m-what'),why:g('m-why'),area:g('m-area')||'Ops',due:g('m-due'),priority:g('m-pr'),priority_reason:'added by '+VIEWER,depends_on:[],feeds:[],gate:g('m-gate'),source:'team',acceptance:g('m-acc'),checklist:g('m-ck').split('\n').map(function(s){return s.trim();}).filter(Boolean)};
     CUSTOM.push(t); mirror(); M.classList.remove('open'); renderAll(); toast('Added '+id);
     if(!OFFLINE) fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({custom:t,by:VIEWER})}).catch(function(e){ toast('Saved on this device only: '+e.message,true); });
     ['m-title','m-what','m-why','m-area','m-acc','m-ck'].forEach(function(i){document.getElementById(i).value='';});
@@ -539,22 +604,45 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 
   /* ---- CSV ---- */
   document.getElementById('btn-csv').addEventListener('click',function(){
-    var T=all().filter(function(t){return t.sprint===SEL;}).sort(function(a,b){return a.assignee.localeCompare(b.assignee)||prSort(a,b);});
+    var T=all().filter(function(t){return sp(t)===SEL;}).sort(function(a,b){return a.assignee.localeCompare(b.assignee)||prSort(a,b);});
     var cols=['id','sprint','assignee','priority','title','area','due','status','checklist_done','checklist_total','gate','depends_on','acceptance','note'];
     var rows=[cols.join(',')].concat(T.map(function(t){ var S=st(t.id); var v={id:t.id,sprint:t.sprint,assignee:t.assignee,priority:t.priority,title:t.title,area:t.area,due:t.due,status:S.status,checklist_done:ckDone(t),checklist_total:(t.checklist||[]).length,gate:t.gate,depends_on:(t.depends_on||[]).join('; '),acceptance:t.acceptance,note:S.note||''};
       return cols.map(function(c){ return '"'+String(v[c]==null?'':v[c]).replace(/"/g,'""')+'"'; }).join(','); }));
     var a=document.createElement('a'); a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(rows.join('\n')); a.download='artemis_'+SEL+'_'+TODAY+'.csv'; a.click();
   });
 
+  /* ================= BACKLOG ================= */
+  function renderBacklog(){
+    var T=all().filter(function(t){return sp(t)==='BL';});
+    var el=document.getElementById('bl-body');
+    el.innerHTML=LAYERS.map(function(L){
+      var ts=T.filter(function(t){return ly(t)===L.id;});
+      var live=ts.filter(counted).sort(function(a,b){return a.priority.localeCompare(b.priority)||a.title.localeCompare(b.title);});
+      var gone=ts.filter(function(t){return !counted(t);});
+      if(!ts.length && L.id==='foundation') return '';
+      return '<div class="lay" style="--lc:'+L.color+'"><div class="lh"><span class="ph">'+esc(L.phase)+'</span><h3>'+esc(L.name)+'</h3><span class="n">'+live.length+' ticket'+(live.length===1?'':'s')+'</span><button class="hbtn primary add" data-addlayer="'+L.id+'">+ Add to '+esc(L.name.split(' ')[0])+'</button></div>'+
+        (live.length?live.map(function(t){
+          return '<div class="brow2"><span class="mono" style="font-size:11px;color:var(--accent)">'+t.id+'</span><span class="pr '+t.priority+'">'+t.priority+'</span>'+
+            '<span class="ti">'+esc(t.title)+'<small>'+esc(t.what).slice(0,140)+(t.what&&t.what.length>140?'…':'')+'</small></span>'+
+            '<span class="wave" title="'+esc(t.area)+'">'+esc(t.area)+'</span><span class="who">'+(t.assignee?esc(t.assignee):'unassigned')+'</span>'+
+            moveSel(t)+'<button class="xbtn" data-drop="'+t.id+'">Remove</button></div>';
+        }).join(''):'<div class="empty">Nothing here. Add one, or move a sprint ticket into the backlog from its detail panel.</div>')+
+        (gone.length?'<details class="removed"><summary>'+gone.length+' removed</summary>'+gone.map(function(t){return '<div class="r"><span class="mono">'+t.id+'</span><span>'+esc(t.title)+'</span><button class="xbtn ok" data-restore="'+t.id+'">Restore</button></div>';}).join('')+'</details>':'')+
+        '</div>';
+    }).join('');
+    wireMoves(el);
+    el.querySelectorAll('[data-addlayer]').forEach(function(b){ b.addEventListener('click',function(){ openModal('BL', b.getAttribute('data-addlayer')); }); });
+  }
+
   /* ================= PERFORMANCE ================= */
   function renderPerf(){
-    var T=all().filter(counted), cur=currentSprint(), exp=expected(cur);
+    var T=all().filter(inSprints), cur=currentSprint(), exp=expected(cur);
     document.getElementById('perf').innerHTML=PEOPLE.map(function(p){
       var ts=T.filter(function(t){return t.assignee===p.n;});
       var done=ts.filter(function(t){return st(t.id).status==='done';}), ip=ts.filter(function(t){return st(t.id).status==='inprog';}).length, bl=ts.filter(function(t){return st(t.id).status==='blocked';}).length, ov=ts.filter(isOver).length;
       var timed=done.filter(function(t){return st(t.id).done_at&&t.due;}), ontime=timed.filter(function(t){return st(t.id).done_at.slice(0,10)<=t.due;}).length;
       var pct=ts.length?Math.round(done.length/ts.length*100):0;
-      var cT=ts.filter(function(t){return t.sprint===cur.id;}), cD=cT.filter(function(t){return st(t.id).status==='done';}).length;
+      var cT=ts.filter(function(t){return sp(t)===cur.id;}), cD=cT.filter(function(t){return st(t.id).status==='done';}).length;
       var cp=cT.length?cD/cT.length:null, pace, cls;
       var ph=sprintPhase(cur);
       if(ph==='upcoming'){ pace='starts '+fmtS(cur.start); cls='na'; }
@@ -565,14 +653,14 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       return '<div class="pcard" style="--pc:'+p.c+'"><div class="top"><h3>'+p.n+'</h3><span class="role">'+esc(p.role)+'</span><span class="pct">'+pct+'%</span></div>'+
         '<div class="pstats">'+pst('Tickets',ts.length)+pst('Done',done.length,'green')+pst('In progress',ip,'amber')+pst('Blocked',bl,bl?'red':'')+pst('Overdue',ov,ov?'red':'')+'</div>'+
         '<div class="pace"><span>'+cur.id+': '+cD+' of '+cT.length+' done · expected ~'+Math.round(exp*100)+'% by today'+(timed.length?' · on time '+ontime+'/'+timed.length:'')+' · '+p0+' P0</span><b class="'+cls+'">'+pace+'</b></div>'+
-        '<div class="sprow">'+SPRINTS.map(function(s){ var a=ts.filter(function(t){return t.sprint===s.id;}), d=a.filter(function(t){return st(t.id).status==='done';}).length; return '<div class="spc'+(s.id===cur.id?' cur':'')+'"><div class="id">'+s.id+'</div><div class="v">'+(a.length?d+'/'+a.length:'-')+'</div></div>'; }).join('')+'</div>'+
+        '<div class="sprow">'+SPRINTS.map(function(s){ var a=ts.filter(function(t){return sp(t)===s.id;}), d=a.filter(function(t){return st(t.id).status==='done';}).length; return '<div class="spc'+(s.id===cur.id?' cur':'')+'"><div class="id">'+s.id+'</div><div class="v">'+(a.length?d+'/'+a.length:'-')+'</div></div>'; }).join('')+'</div>'+
         '<div class="note">On time counts tickets marked done on or before their due date. Overdue is open past due. Pace compares this sprint’s completion with how much of the sprint has elapsed.</div></div>';
     }).join('');
   }
   function pst(k,v,c){ return '<div class="pstat"><div class="k">'+k+'</div><div class="v '+(c||'')+'">'+v+'</div></div>'; }
 
   /* ---- boot ---- */
-  function renderAll(){ if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else renderPerf(); }
+  function renderAll(){ if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='backlog') renderBacklog(); else renderPerf(); }
   document.getElementById('btn-refresh').addEventListener('click',load);
   try{ var lt=localStorage.getItem('artemis_launch_tab'); if(lt) showTab(lt); }catch(e){}
   load();

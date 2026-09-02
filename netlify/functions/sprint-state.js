@@ -28,7 +28,7 @@
 //
 // Routes (via the /api/* redirect in netlify.toml):
 //   GET    /api/sprint-state                      { state: {id: {...}}, custom: [ticket...] }
-//   POST   /api/sprint-state  {id, by, status?, checks?, note?}   merge into one ticket
+//   POST   /api/sprint-state  {id, by, status?, checks?, note?, sprint?, layer?}   merge into one ticket
 //   POST   /api/sprint-state  {custom: ticket, by}                add a team-authored ticket
 //   DELETE /api/sprint-state?id=<custom id>                       remove a custom ticket only
 
@@ -36,6 +36,12 @@ const { connectLambda, getStore } = require("@netlify/blobs");
 
 const STORE = "sprint-state-v2";
 const STATUSES = ["todo", "inprog", "blocked", "done", "dropped"];
+// A ticket can be moved between sprints, or parked in the backlog ("BL"), by
+// anyone on the board. The move is stored as an override on the ticket's state
+// rather than by editing the generated data file, so the file stays the plan
+// and the board stays the team's.
+const SPRINTS = ["N1", "N2", "N3", "N4", "N5", "N6", "LW", "BL"];
+const LAYERS = ["foundation", "intelligence", "product", "llm", "launch"];
 const KEEP_HISTORY = 30;
 
 const HEADERS = {
@@ -89,11 +95,12 @@ exports.handler = async (event) => {
       const t = body.custom;
       if (!okId(t.id) || !String(t.id).startsWith("C-")) return reply(400, { error: "custom_id_must_start_with_C-" });
       const clean = {
-        id: String(t.id), sprint: String(t.sprint || "N1").slice(0, 4), assignee: String(t.assignee || "").slice(0, 40),
+        id: String(t.id), sprint: SPRINTS.includes(String(t.sprint || "").toUpperCase()) ? String(t.sprint).toUpperCase() : "BL", assignee: String(t.assignee || "").slice(0, 40),
         title: String(t.title || "").slice(0, 140), what: String(t.what || "").slice(0, 1200), why: String(t.why || "").slice(0, 600),
         area: String(t.area || "Ops").slice(0, 40), due: String(t.due || "").slice(0, 10), priority: ["P0","P1","P2"].includes(t.priority) ? t.priority : "P1",
         priority_reason: String(t.priority_reason || "").slice(0, 300), depends_on: [], feeds: [], gate: String(t.gate || "none").slice(0, 8),
         source: "team", acceptance: String(t.acceptance || "").slice(0, 400),
+        layer: LAYERS.includes(String(t.layer || "").toLowerCase()) ? String(t.layer).toLowerCase() : null,
         checklist: Array.isArray(t.checklist) ? t.checklist.slice(0, 8).map((s) => String(s).slice(0, 200)) : [],
         created_by: by, created_at: now(),
       };
@@ -124,6 +131,19 @@ exports.handler = async (event) => {
       rec.checks = c;
     }
     if (body.note !== undefined) rec.note = String(body.note).slice(0, 1000);
+    if (body.sprint !== undefined) {
+      const s = String(body.sprint).toUpperCase();
+      if (!SPRINTS.includes(s)) return reply(400, { error: "bad_sprint", expected: SPRINTS });
+      if (s !== (prev.sprint || null)) {
+        rec.history = [{ at: now(), by, from: "sprint:" + (prev.sprint || "plan"), to: "sprint:" + s }, ...(prev.history || [])].slice(0, KEEP_HISTORY);
+      }
+      rec.sprint = s;
+    }
+    if (body.layer !== undefined) {
+      const l = String(body.layer).toLowerCase();
+      if (!LAYERS.includes(l)) return reply(400, { error: "bad_layer", expected: LAYERS });
+      rec.layer = l;
+    }
     rec.by = by; rec.updated_at = now();
     await store.setJSON(key, rec);
     return reply(200, { saved: true, id: key, rec });
