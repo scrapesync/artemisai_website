@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alerts · ArtemisAI Admin</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='2.5' fill='none'/></svg>">
+<style>
+:root{
+  --fs-xs:11px;--fs-sm:12px;--fs-base:13px;--fs-md:14px;--fs-lg:15px;--fs-xl:17px;--fs-2xl:22px;--fs-3xl:28px;
+  --fw-regular:400;--fw-medium:500;--fw-semibold:600;--fw-bold:700;
+  --lh-tight:1.16;--lh-snug:1.33;--lh-relaxed:1.5;
+  --bg:#0e1116;--bg-elev:#16191f;--bg-elev-2:#1c2128;--bg-input:#222831;
+  --teal:#00C4A0;--teal-d:#00a085;--teal-bg:rgba(0,196,160,0.10);
+  --amber:#f5a623;--amber-bg:rgba(245,166,35,0.10);
+  --crisis:#E53935;--crisis-bg:rgba(229,57,53,0.10);
+  --violet:#8B7BFF;--violet-bg:rgba(139,123,255,0.10);
+  --t1:#E4E6EB;--t2:#B0B3B8;--t3:#65676B;
+  --bdr:#3A3B3C;--bdr-soft:#2D2E30;
+  --r-sm:8px;--r:12px;--r-lg:16px;
+  --shadow:0 4px 12px rgba(0,0,0,0.35);
+  --hover-bg:rgba(255,255,255,0.08);--hover-border:rgba(255,255,255,0.18);
+  --t-base:120ms ease-out;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font:var(--fw-regular) var(--fs-base)/var(--lh-relaxed) -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:0 0 60px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--bdr-soft);background:var(--bg-elev);position:sticky;top:0;z-index:20}
+.hbar{display:flex;align-items:center;gap:14px;padding:14px 0}
+.back{color:var(--t2);font-size:var(--fs-sm);padding:6px 10px;border:1px solid var(--bdr-soft);border-radius:var(--r-sm);transition:background var(--t-base)}
+.back:hover{background:var(--hover-bg);border-color:var(--hover-border)}
+h1{font-size:var(--fs-xl);font-weight:var(--fw-semibold);letter-spacing:-.2px}
+.sub{color:var(--t3);font-size:var(--fs-sm)}
+.spacer{flex:1}
+button{font:inherit;cursor:pointer;border-radius:var(--r-sm);border:1px solid var(--bdr-soft);background:var(--bg-elev-2);color:var(--t1);padding:7px 13px;transition:background var(--t-base),border-color var(--t-base)}
+button:hover{background:var(--hover-bg);border-color:var(--hover-border)}
+button.primary{background:var(--teal-bg);border-color:rgba(0,196,160,.35);color:var(--teal)}
+button.primary:hover{background:rgba(0,196,160,.18)}
+button[disabled]{opacity:.5;cursor:default}
+.meta{padding:14px 0 4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;color:var(--t3);font-size:var(--fs-sm)}
+.tally{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 18px}
+.chip{font-size:var(--fs-xs);font-weight:var(--fw-semibold);padding:4px 10px;border-radius:999px;border:1px solid var(--bdr-soft);color:var(--t2)}
+.chip b{font-weight:var(--fw-bold)}
+.chip.ok{color:var(--teal);border-color:rgba(0,196,160,.3);background:var(--teal-bg)}
+.chip.fired{color:var(--crisis);border-color:rgba(229,57,53,.3);background:var(--crisis-bg)}
+.chip.error{color:var(--amber);border-color:rgba(245,166,35,.3);background:var(--amber-bg)}
+.chip.silent{color:var(--violet);border-color:rgba(139,123,255,.3);background:var(--violet-bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.card{background:var(--bg-elev);border:1px solid var(--bdr-soft);border-left:3px solid var(--cc,var(--bdr));border-radius:var(--r);padding:15px 16px}
+.card h2{font-size:var(--fs-md);font-weight:var(--fw-semibold);letter-spacing:-.1px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.pill{font-size:10px;font-weight:var(--fw-bold);letter-spacing:.6px;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--ci,var(--bg-elev-2));color:var(--cc,var(--t2))}
+.msg{color:var(--t2);font-size:var(--fs-sm);margin-top:8px;line-height:var(--lh-snug)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;color:var(--t3);font-size:var(--fs-xs)}
+.spark{display:flex;gap:3px;align-items:flex-end}
+.tick{width:7px;height:16px;border-radius:2px;background:var(--bg-input)}
+.tick.ok{background:var(--teal)}.tick.fired{background:var(--crisis)}.tick.error{background:var(--amber)}
+.note{margin-top:9px;padding:8px 10px;border-radius:var(--r-sm);background:var(--violet-bg);border:1px solid rgba(139,123,255,.28);color:var(--violet);font-size:var(--fs-xs);line-height:var(--lh-snug)}
+.empty{border:1px dashed var(--bdr);border-radius:var(--r);padding:34px 24px;text-align:center;color:var(--t3);font-size:var(--fs-sm);line-height:var(--lh-relaxed)}
+.empty b{color:var(--t1);display:block;margin-bottom:6px;font-size:var(--fs-md)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;background:var(--bg-input);padding:1px 5px;border-radius:4px;color:var(--t2)}
+</style>
+</head><body>
+
+<header><div class="wrap hbar">
+  <a class="back" href="admin_panel.html">&larr; Admin</a>
+  <div><h1>Alerts</h1><div class="sub">Every scheduled check, and whether it actually ran</div></div>
+  <div class="spacer"></div>
+  <button id="refresh" class="primary">Refresh</button>
+</div></header>
+
+<div class="wrap">
+  <div class="meta"><span id="updated">Loading&hellip;</span><span id="src"></span></div>
+  <div class="tally" id="tally"></div>
+  <div id="body"></div>
+</div>
+
+<script>
+/* Every card answers three questions, in this order:
+   did it run, did it pass, and has it ever fired.
+   The third one is here because a check that has never once fired is usually a
+   broken check rather than a quiet system - that is exactly how a safety check
+   sat dead in NEBULA since June without anyone noticing. */
+
+var ENDPOINT = '/api/alert-status';
+var STATE = { alerts: [], at: null };
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){
+  return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
+
+function ago(iso){
+  if(!iso) return 'never';
+  var ms = Date.now() - new Date(iso).getTime();
+  if(isNaN(ms)) return 'unknown';
+  var m = Math.round(ms/60000);
+  if(m < 1) return 'just now';
+  if(m < 60) return m + ' min ago';
+  var h = Math.round(m/60);
+  if(h < 24) return h + (h===1?' hour ago':' hours ago');
+  var d = Math.round(h/24);
+  return d + (d===1?' day ago':' days ago');
+}
+function stamp(iso){
+  if(!iso) return '';
+  var d = new Date(iso);
+  return isNaN(d) ? '' : d.toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+}
+
+/* An alert is overdue when it has missed twice its own schedule. Once is a
+   late run; twice is something stopped. Checks that never told us their
+   schedule cannot be judged this way, and say so rather than guessing. */
+function overdue(a){
+  if(!a.every_minutes || !a.last_run_at) return false;
+  var mins = (Date.now() - new Date(a.last_run_at).getTime())/60000;
+  return mins > a.every_minutes * 2;
+}
+
+function view(a){
+  if(!a.last_run_at) return {k:'never', label:'never run', cc:'var(--violet)', ci:'var(--violet-bg)'};
+  if(overdue(a))     return {k:'stopped', label:'stopped running', cc:'var(--violet)', ci:'var(--violet-bg)'};
+  if(a.status==='fired') return {k:'fired', label:'fired', cc:'var(--crisis)', ci:'var(--crisis-bg)'};
+  if(a.status==='error') return {k:'error', label:'errored', cc:'var(--amber)', ci:'var(--amber-bg)'};
+  return {k:'ok', label:'passing', cc:'var(--teal)', ci:'var(--teal-bg)'};
+}
+
+function card(a){
+  var v = view(a);
+  var runs = (a.runs||[]).slice(0,12).reverse();
+  var ticks = runs.map(function(r){ return '<span class="tick '+esc(r.status)+'" title="'+esc(stamp(r.at)+' - '+r.status)+'"></span>'; }).join('');
+  var never = a.last_run_at && !a.last_fired_at;
+
+  return '<div class="card" style="--cc:'+v.cc+';--ci:'+v.ci+'">' +
+    '<h2>'+esc(a.name)+' <span class="pill">'+esc(v.label)+'</span></h2>' +
+    (a.message ? '<div class="msg">'+esc(a.message)+'</div>' : '') +
+    (v.k==='stopped' ? '<div class="note">Expected every '+a.every_minutes+' min, last seen '+ago(a.last_run_at)+'. The EventBridge rule or the Lambda has stopped, so this check is not protecting anything right now.</div>' : '') +
+    (v.k==='never' ? '<div class="note">This alert has been registered but has never reported a run.</div>' : '') +
+    (never ? '<div class="note">Has never fired since '+stamp(a.first_seen_at)+'. Worth confirming it still can - a check that cannot fire looks identical to a system with no problems.</div>' : '') +
+    '<div class="foot">' +
+      '<span>ran '+ago(a.last_run_at)+(a.last_ms!=null?' &middot; '+a.last_ms+'ms':'')+'</span>' +
+      '<span class="spark">'+ticks+'</span>' +
+    '</div>' +
+  '</div>';
+}
+
+function render(){
+  var el = document.getElementById('body');
+  var a = STATE.alerts;
+  document.getElementById('updated').textContent = 'Updated ' + stamp(STATE.at) + ' (' + ago(STATE.at) + ')';
+
+  if(!a.length){
+    document.getElementById('tally').innerHTML = '';
+    el.innerHTML = '<div class="empty"><b>No alert has reported yet</b>' +
+      'This page shows what the scheduled checks in AWS reported. Once an EventBridge rule runs its Lambda and the Lambda posts to <code>/api/alert-status</code>, a card appears here for each check.<br><br>' +
+      'Setup is in <code>ALERTS_SETUP.md</code>.</div>';
+    return;
+  }
+
+  var n = {ok:0, fired:0, error:0, silent:0};
+  a.forEach(function(x){
+    var v = view(x);
+    if(v.k==='fired') n.fired++;
+    else if(v.k==='error') n.error++;
+    else if(v.k==='ok') n.ok++;
+    if(v.k==='never' || v.k==='stopped') n.silent++;
+  });
+  document.getElementById('tally').innerHTML =
+    '<span class="chip ok"><b>'+n.ok+'</b> passing</span>' +
+    '<span class="chip fired"><b>'+n.fired+'</b> firing</span>' +
+    '<span class="chip error"><b>'+n.error+'</b> erroring</span>' +
+    '<span class="chip silent"><b>'+n.silent+'</b> silent</span>';
+
+  /* Sorted by how much it wants attention, not alphabetically: something that
+     stopped running outranks something that is loudly failing, because the
+     loud one is at least still telling us the truth. */
+  var rank = {stopped:0, never:1, error:2, fired:3, ok:4};
+  var sorted = a.slice().sort(function(x,y){ return rank[view(x).k] - rank[view(y).k]; });
+  el.innerHTML = '<div class="grid">' + sorted.map(card).join('') + '</div>';
+}
+
+function load(){
+  var btn = document.getElementById('refresh');
+  btn.disabled = true; btn.textContent = 'Refreshing…';
+  fetch(ENDPOINT + '?ts=' + Date.now(), {cache:'no-store'})
+    .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+    .then(function(res){
+      if(!res.ok) throw new Error(res.j && res.j.message ? res.j.message : 'HTTP error');
+      STATE.alerts = res.j.alerts || [];
+      STATE.at = res.j.generated_at || new Date().toISOString();
+      document.getElementById('src').textContent = '· ' + STATE.alerts.length + ' checks';
+      render();
+    })
+    .catch(function(e){
+      document.getElementById('updated').textContent = 'Could not load';
+      document.getElementById('body').innerHTML =
+        '<div class="empty"><b>Could not reach the alert store</b>' +
+        'This page reads the Netlify function at <code>/api/alert-status</code>. ' +
+        esc(e.message) + '</div>';
+    })
+    .then(function(){ btn.disabled = false; btn.textContent = 'Refresh'; });
+}
+
+document.getElementById('refresh').addEventListener('click', load);
+load();
+/* Re-rendering on a timer keeps the "3 min ago" labels honest without asking
+   the function for data nobody has changed. Refresh is still manual. */
+setInterval(function(){ if(STATE.alerts.length) render(); }, 60000);
+</script>
+</body></html>

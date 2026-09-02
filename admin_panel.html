@@ -288,6 +288,25 @@ h1 span{
 .reorder-hint{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;max-width:1280px;margin:0 auto 14px;padding:9px 16px;border-radius:10px;background:rgba(0,212,170,0.05);border:1px solid rgba(0,212,170,0.18);font-size:12.5px;color:var(--txt-soft,#9aa6bd)}
 .reorder-reset{padding:5px 12px;border-radius:7px;border:1px solid var(--bdr,rgba(255,255,255,.14));background:transparent;color:#9aa6bd;font-size:11.5px;font-family:inherit;cursor:pointer;transition:all .2s;white-space:nowrap}
 .reorder-reset:hover{border-color:rgba(0,212,170,.5);color:#00d4aa}
+/* ─── ARCHIVE ─── */
+.arch-btn{padding:5px 12px;border-radius:7px;border:1px solid var(--bdr,rgba(255,255,255,.14));background:transparent;color:#9aa6bd;font-size:11.5px;font-family:inherit;cursor:pointer;transition:all .2s;white-space:nowrap}
+.arch-btn:hover{border-color:rgba(139,123,255,.55);color:#8B7BFF}
+/* The dock only exists while something is being dragged. A permanent bin sitting
+   under the grid is a permanent invitation to click it by accident. */
+.arch-dock{display:none;max-width:1280px;margin:0 auto 16px;padding:20px;border-radius:12px;border:2px dashed rgba(139,123,255,.45);background:rgba(139,123,255,.06);color:#8B7BFF;font-size:13px;text-align:center}
+body.dragging-card .arch-dock{display:block}
+.arch-dock.over{background:rgba(139,123,255,.16);border-color:#8B7BFF}
+.arch-panel{display:none;max-width:1280px;margin:0 auto 18px;padding:14px 16px;border-radius:12px;border:1px solid rgba(139,123,255,.25);background:rgba(139,123,255,.05)}
+.arch-panel.open{display:block}
+.arch-panel h3{font-size:13px;font-weight:600;color:#8B7BFF;margin-bottom:4px}
+.arch-panel .hint{font-size:11.5px;color:#9aa6bd;margin-bottom:10px}
+.arch-row{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.07);margin-bottom:6px;font-size:12.5px}
+.arch-row a{color:#E4E6EB;text-decoration:none;font-weight:500}
+.arch-row a:hover{color:#8B7BFF}
+.arch-row .when{color:#65676B;font-size:11px;margin-left:auto;white-space:nowrap}
+.arch-row button{padding:4px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.14);background:transparent;color:#9aa6bd;font-size:11px;font-family:inherit;cursor:pointer}
+.arch-row button:hover{border-color:rgba(0,212,170,.5);color:#00d4aa}
+.dest-card.archived{display:none}
 .dest-card{cursor:grab}
 .dest-card.dragging{opacity:.45;cursor:grabbing;transform:scale(.98)}
 .dest-card.drag-over{outline:2px dashed rgba(0,212,170,.55);outline-offset:3px}
@@ -534,8 +553,20 @@ h1 span{
   </div>
   <div class="reorder-hint" id="reorder-hint">
     <span>✦ Tip: drag any card to rearrange this page just how you like it. Your layout is saved on this device.</span>
-    <button class="reorder-reset" id="reorder-reset" onclick="resetCardOrder()" style="display:none">↺ Reset order</button>
+    <span style="display:flex;gap:8px">
+      <button class="arch-btn" id="arch-toggle" onclick="toggleArchive()">Archive</button>
+      <button class="reorder-reset" id="reorder-reset" onclick="resetCardOrder()" style="display:none">↺ Reset order</button>
+    </span>
   </div>
+
+  <div class="arch-dock" id="arch-dock">Drop here to archive this page</div>
+
+  <div class="arch-panel" id="arch-panel">
+    <h3>Archived pages</h3>
+    <div class="hint">Hidden from the grid for everyone, not deleted. Restore any of them here.</div>
+    <div id="arch-list"></div>
+  </div>
+
   <div class="cards" id="cards-grid">
     <a href="countdown.html" class="dest-card" style="--cc:#00e7bd;--ci:rgba(0,231,189,0.10);--cb:rgba(0,231,189,0.28)">
       <div class="dest-icon" style="overflow:hidden">
@@ -715,6 +746,20 @@ h1 span{
       <span class="dest-tag">accuracy + data quality</span>
       <span class="dest-tag">live refresh</span>
       <span class="dest-tag">write your own SQL</span>
+    </a>
+
+    <a href="alerts.html" class="dest-card" style="--cc:#f5a623;--ci:rgba(245,166,35,0.10);--cb:rgba(245,166,35,0.28)">
+      <div class="dest-icon" style="overflow:hidden">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 5.5c-3.6 0-6 2.6-6 6.2 0 4.6-1.6 5.9-1.6 5.9h15.2S20 16.3 20 11.7c0-3.6-2.4-6.2-6-6.2Z" stroke="#f5a623" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+          <path d="M12 21a2.2 2.2 0 0 0 4 0" stroke="#f5a623" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <circle cx="21" cy="7" r="3.2" fill="#f5a623"/>
+        </svg>
+      </div>
+      <div class="dest-title">Alerts</div>
+      <div class="dest-desc">Every scheduled check from EventBridge and its Lambda, as a card: what passed, what fired, what errored, and which checks have quietly stopped running or have never once fired.</div>
+      <span class="dest-tag">EventBridge</span>
+      <span class="dest-tag">live status</span>
     </a>
 
     <a href="alex_vision.html" class="dest-card" style="--cc:#a78bfa;--ci:rgba(167,139,250,0.06);--cb:rgba(167,139,250,0.18)">
@@ -960,9 +1005,12 @@ h1 span{
   var dragEl=null, didDrag=false;
   function onDragStart(e){
     dragEl=this; didDrag=true; this.classList.add('dragging');
+    document.body.classList.add('dragging-card');
     try{ e.dataTransfer.effectAllowed='move'; e.dataTransfer.setData('text/plain',keyOf(this)); }catch(_){}
   }
   function onDragEnd(){
+    document.body.classList.remove('dragging-card');
+    var dock=document.getElementById('arch-dock'); if(dock) dock.classList.remove('over');
     if(dragEl) dragEl.classList.remove('dragging');
     cards().forEach(function(c){ c.classList.remove('drag-over'); });
     dragEl=null; saveOrder();
@@ -1094,6 +1142,91 @@ function _doSignout(){
   if(_signoutFn) _signoutFn();
 }
 function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
+
+/* ===== Archive: hide a dead page for everyone, reversibly =====
+   Card ORDER is per-device (localStorage above) because the order you like is
+   yours. Archiving is the opposite: "this page is retired" is a fact about the
+   tool, so it is shared through /api/admin-archive and everyone sees it. If the
+   function is unreachable the grid simply shows everything, which is the safe
+   way to fail - a page you can still see is a smaller problem than a page that
+   silently vanished. */
+(function(){
+  var API='/api/admin-archive', LIST=[];
+
+  function who(){
+    try{ return localStorage.getItem('artemis_viewer_name') || 'someone'; }catch(e){ return 'someone'; }
+  }
+  function ago(iso){
+    var ms=Date.now()-new Date(iso).getTime();
+    if(isNaN(ms)) return '';
+    var d=Math.round(ms/86400000);
+    if(d>=1) return d===1?'yesterday':d+' days ago';
+    var h=Math.round(ms/3600000);
+    return h>=1 ? h+'h ago' : 'just now';
+  }
+  function cardFor(href){
+    return document.querySelector('#cards-grid .dest-card[href="'+href+'"]');
+  }
+  function paint(){
+    var grid=document.getElementById('cards-grid');
+    if(grid) Array.prototype.forEach.call(grid.querySelectorAll('.dest-card'),
+      function(c){ c.classList.remove('archived'); });
+    LIST.forEach(function(a){ var c=cardFor(a.href); if(c) c.classList.add('archived'); });
+
+    document.getElementById('arch-toggle').textContent = LIST.length ? 'Archive ('+LIST.length+')' : 'Archive';
+    var box=document.getElementById('arch-list');
+    box.innerHTML = LIST.length ? LIST.map(function(a){
+      return '<div class="arch-row"><a href="'+a.href+'">'+a.title+'</a>'+
+             '<span class="when">'+a.by+' &middot; '+ago(a.at)+'</span>'+
+             '<button onclick="restoreArchived(\''+a.href+'\')">Restore</button></div>';
+    }).join('') : '<div class="hint" style="margin:0">Nothing archived yet. Drag a card onto the drop zone to retire it.</div>';
+  }
+  function load(){
+    fetch(API+'?ts='+Date.now(),{cache:'no-store'})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ LIST=(j&&j.archived)||[]; paint(); })
+      .catch(function(){
+        /* Every card stays visible, which is the safe way to fail. But the panel
+           itself must not open empty and silent, or an unreachable store looks
+           identical to an empty archive. */
+        document.getElementById('arch-list').innerHTML =
+          '<div class="hint" style="margin:0">Could not reach the archive store, so nothing is hidden. ' +
+          'This reads the Netlify function at <code>/api/admin-archive</code>.</div>';
+      });
+  }
+
+  window.toggleArchive=function(){
+    document.getElementById('arch-panel').classList.toggle('open');
+  };
+  window.restoreArchived=function(href){
+    fetch(API+'?href='+encodeURIComponent(href),{method:'DELETE'})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ LIST=(j&&j.archived)||[]; paint(); })
+      .catch(function(){ alert('Could not restore - the archive store did not respond.'); });
+  };
+
+  var dock=document.getElementById('arch-dock');
+  dock.addEventListener('dragover', function(e){ e.preventDefault(); this.classList.add('over'); });
+  dock.addEventListener('dragleave', function(){ this.classList.remove('over'); });
+  dock.addEventListener('drop', function(e){
+    e.preventDefault(); this.classList.remove('over');
+    var href=''; try{ href=e.dataTransfer.getData('text/plain'); }catch(_){}
+    var card=href && cardFor(href);
+    if(!card) return;
+    var title=(card.querySelector('.dest-title')||{}).textContent || href;
+    /* Hidden immediately rather than after the round trip: the drop already
+       told the person it worked, and a card that springs back for a moment
+       reads as a bug. The reload below is the source of truth. */
+    card.classList.add('archived');
+    fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({href:href,title:title.trim(),by:who()})})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ LIST=(j&&j.archived)||[]; paint(); })
+      .catch(function(){ card.classList.remove('archived'); alert('Could not archive - the store did not respond.'); });
+  });
+
+  load();
+})();
 </script>
 <style>
 .af-footer{margin-top:56px;padding:30px 1.6rem;border-top:1px solid rgba(255,255,255,.07);background:rgba(6,10,19,.45);font-family:'DM Sans','Outfit',system-ui,sans-serif}
