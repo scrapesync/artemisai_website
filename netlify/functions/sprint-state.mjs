@@ -32,6 +32,8 @@
 //   GET    /api/sprint-state                       { state, custom, consistency }
 //   POST   /api/sprint-state  {id, by, status?, checks?, note?, sprint?, layer?}
 //   POST   /api/sprint-state  {custom: ticket, by}
+//   POST   /api/sprint-state  {id, by, edits:{title,what,why,due,priority,...}}
+//   POST   /api/sprint-state  {sprints:{N1:{start,end,gate_date,name,goal,gate}}, by}
 //   DELETE /api/sprint-state?id=<custom id>
 
 import { getStore } from "@netlify/blobs";
@@ -41,6 +43,14 @@ const STATUSES = ["todo", "inprog", "blocked", "done", "dropped"];
 const SPRINTS = ["N1", "N2", "N3", "N4", "N5", "N6", "LW", "BL"];
 const LAYERS = ["foundation", "intelligence", "product", "llm", "launch"];
 const KEEP_HISTORY = 30;
+// Anything a person can retype on the board. Stored as an override per ticket
+// rather than by rewriting the generated file, so the file stays the plan and
+// the board stays the team's - and a regenerated plan never silently discards
+// someone's correction.
+const EDITABLE = ["title","what","why","area","due","priority","priority_reason","acceptance","assignee","checklist","depends_on","feeds","gate"];
+const SPRINT_KEY = "__sprints";
+const SPRINT_FIELDS = ["name","start","end","gate_date","gate","goal"];
+const isDate = (s) => /^\d{4}-\d{2}-\d{2}$/.test(String(s || ""));
 const HEADERS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "Content-Type",
@@ -73,17 +83,44 @@ export default async (req) => {
       try { return [b.key, await read((s) => s.get(b.key, { type: "json" }))]; } catch { return null; }
     }));
     const state = {}, custom = [];
+    let sprints = {};
     for (const e of entries) {
       if (!e || !e[1]) continue;
-      if (e[0].startsWith("custom:")) custom.push(e[1]); else state[e[0]] = e[1];
+      if (e[0] === SPRINT_KEY) sprints = e[1].sprints || {};
+      else if (e[0].startsWith("custom:")) custom.push(e[1]);
+      else state[e[0]] = e[1];
     }
-    return reply(200, { generated_at: now(), state, custom, consistency: used });
+    return reply(200, { generated_at: now(), state, custom, sprints, consistency: used });
   }
 
   if (req.method === "POST") {
     let body;
     try { body = await req.json(); } catch { return reply(400, { error: "bad_json" }); }
     const by = String(body?.by || "someone").slice(0, 60);
+
+    // Sprint dates and headings. Dates are the thing everything else is judged
+    // against, so they are validated rather than trusted.
+    if (body?.sprints && typeof body.sprints === "object") {
+      const prev = (await read((s) => s.get(SPRINT_KEY, { type: "json" }))) || { sprints: {} };
+      const out = { ...(prev.sprints || {}) };
+      for (const [sid, patch] of Object.entries(body.sprints).slice(0, 12)) {
+        if (!/^(N[1-6]|LW)$/.test(sid) || !patch || typeof patch !== "object") continue;
+        const clean = { ...(out[sid] || {}) };
+        for (const f of SPRINT_FIELDS) {
+          if (patch[f] === undefined) continue;
+          if (["start", "end", "gate_date"].includes(f)) {
+            if (!isDate(patch[f])) return reply(400, { error: "bad_date", field: f, sprint: sid });
+            clean[f] = patch[f];
+          } else clean[f] = String(patch[f]).slice(0, 600);
+        }
+        if (clean.start && clean.end && clean.start > clean.end)
+          return reply(400, { error: "start_after_end", sprint: sid });
+        clean.by = by; clean.at = now();
+        out[sid] = clean;
+      }
+      await weak.setJSON(SPRINT_KEY, { sprints: out, by, at: now() });
+      return reply(200, { saved: true, sprints: out, consistency: used });
+    }
 
     if (body?.custom && typeof body.custom === "object") {
       const t = body.custom;
@@ -126,6 +163,19 @@ export default async (req) => {
       rec.checks = c;
     }
     if (body.note !== undefined) rec.note = String(body.note).slice(0, 1000);
+    if (body.edits && typeof body.edits === "object") {
+      const e = { ...(prev.edits || {}) };
+      for (const [k, v] of Object.entries(body.edits)) {
+        if (!EDITABLE.includes(k)) continue;
+        if (v === null) { delete e[k]; continue; }            // null clears the override
+        if (k === "due" && v && !isDate(v)) return reply(400, { error: "bad_date", field: "due" });
+        if (k === "priority" && !["P0", "P1", "P2"].includes(v)) return reply(400, { error: "bad_priority" });
+        if (Array.isArray(v)) e[k] = v.slice(0, 12).map((x) => String(x).slice(0, 300));
+        else e[k] = String(v).slice(0, 2000);
+      }
+      rec.edits = e;
+      rec.edited_by = by; rec.edited_at = now();
+    }
     if (body.sprint !== undefined) {
       const s = String(body.sprint).toUpperCase();
       if (!SPRINTS.includes(s)) return reply(400, { error: "bad_sprint", expected: SPRINTS });

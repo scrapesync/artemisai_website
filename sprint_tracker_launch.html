@@ -91,6 +91,8 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .sitem .id{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);width:26px}
 .sitem .nm{flex:1;font-size:12.5px}
 .sitem .n{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted3)}
+.sitem .sdates{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted2);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap}
+.sitem .sdates .g{color:var(--gold)}
 .sitem .b{width:100%;height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin-top:5px;overflow:hidden}
 .sitem .b i{display:block;height:100%;background:var(--accent)}
 .shead{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:14px}
@@ -173,6 +175,20 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .removed .r{display:flex;gap:10px;align-items:center;padding:4px 0;color:var(--muted3)}
 .act{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px dashed var(--border2)}
 .act select{padding:5px 8px;border-radius:7px;border:1px solid var(--border2);background:var(--bg2);font-size:11.5px}
+/* ---- inline editors ---- */
+.editbtn{padding:4px 11px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:inherit;font-size:11.5px;cursor:pointer}
+.editbtn:hover{border-color:var(--gold);color:var(--gold)}
+.efrm{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:8px}
+.efrm label{display:block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted3);margin-bottom:3px}
+.efrm input,.efrm select,.efrm textarea{width:100%;padding:7px 9px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font:inherit;font-size:12.5px}
+.efrm textarea{min-height:62px;resize:vertical}
+.efrm .wide{grid-column:1/-1}
+.erow{display:flex;gap:8px;margin-top:10px;align-items:center}
+.erow .note{color:var(--muted3);font-size:11.5px;margin-left:auto}
+.dchip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;border:1px dashed var(--border);color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:11.5px;cursor:pointer}
+.dchip:hover{border-color:var(--gold);color:var(--gold)}
+.dchip b{color:var(--ink);font-weight:500}
+.edited{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--gold);letter-spacing:.5px}
 /* ---- layer chips ---- */
 .layrow{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:10px 0 2px}
 .layrow .lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted3);margin-right:2px}
@@ -182,10 +198,13 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .subtabs button{padding:8px 18px;border:0;background:transparent;color:var(--muted);border-radius:7px;font-family:'Fraunces',Georgia,serif;font-size:14px;font-weight:600;cursor:pointer}
 .subtabs button.on{background:var(--accent);color:#241611}
 .maphint{color:var(--muted2);font-size:12px;margin-left:auto}
-.mapwrap{position:relative;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:auto;max-height:74vh}
+.mapwrap{position:relative;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:auto;height:56vh;min-height:340px;resize:vertical}
 .mapinner{position:relative}
 .mapcol{position:absolute;top:0;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted2);padding:12px 0 0 4px}
-.mapcol b{display:block;font-family:'Fraunces',Georgia,serif;font-size:15px;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:600;margin-top:2px}
+.mapcol b{display:block;font-family:'Fraunces',Georgia,serif;font-size:15px;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:600;margin-top:2px;line-height:1.25}
+.mapcol em{display:block;font-style:normal;font-size:10px;letter-spacing:.5px;color:var(--muted3);margin-top:3px}
+.grouphead{position:absolute;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--gc);padding:6px 0 0 2px;border-top:1px solid var(--border2)}
+.grouphead span{color:var(--muted3)}
 .node{position:absolute;box-sizing:border-box;background:var(--card2);border:1px solid var(--border);border-left:3px solid var(--nc,var(--stone));border-radius:8px;padding:6px 9px;cursor:pointer;transition:transform .12s,box-shadow .12s,opacity .12s}
 .node:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,0,0,.4);border-color:var(--nc)}
 .node .nid{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--nc,var(--muted))}
@@ -198,7 +217,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .mapsvg path{fill:none;stroke:var(--border);stroke-width:1.2}
 .mapsvg path.on{stroke:var(--gold);stroke-width:2}
 .mapsvg path.out{stroke:var(--sage);stroke-width:2}
-.detpanel{position:sticky;bottom:0;background:var(--bg2);border-top:1px solid var(--border);padding:14px 18px;margin-top:0}
+.detpanel{background:var(--bg2);border:1px solid var(--border);border-top:0;border-radius:0 0 14px 14px;padding:14px 18px;margin-top:-1px;max-height:34vh;overflow:auto}
 .detpanel h4{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted3);margin:9px 0 3px}
 .detpanel h4:first-child{margin-top:0}
 .detpanel .dt{font-family:'Fraunces',Georgia,serif;font-size:17px;font-weight:600;color:var(--ink)}
@@ -384,7 +403,12 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   document.querySelector('#viewer .av').textContent=VIEWER.charAt(0).toUpperCase();
 
   var D=window.LAUNCH_DATA||{sprints:[],tickets:[]};
-  var SPRINTS=D.sprints, ORDER=SPRINTS.map(function(s){return s.id;});
+  var SPRINTS_BASE=JSON.parse(JSON.stringify(D.sprints));
+  var SPRINT_EDITS={}, SPRINTS=D.sprints, ORDER=SPRINTS.map(function(s){return s.id;});
+  function applySprintEdits(){
+    SPRINTS=SPRINTS_BASE.map(function(s){ var e=SPRINT_EDITS[s.id]; return e?Object.assign({},s,e):s; });
+    ORDER=SPRINTS.map(function(s){return s.id;});
+  }
   var LAYERS=D.layers||[], BACKLOG=D.backlog||[];
   var LC={}; LAYERS.forEach(function(l){LC[l.id]=l;});
   /* A ticket's layer comes from its own area, not from its sprint. Attaching one
@@ -441,7 +465,11 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   }
 
   /* ---- tickets + state ---- */
-  function all(){ return D.tickets.concat(BACKLOG,CUSTOM); }
+  /* A ticket as the board currently reads it: the generated plan with anyone's
+     edits laid over the top. Every view reads through here, so a corrected date
+     or title is corrected everywhere at once. */
+  function applyEdits(t){ var e=STATE[t.id]&&STATE[t.id].edits; return e?Object.assign({},t,e):t; }
+  function all(){ return D.tickets.concat(BACKLOG,CUSTOM).map(applyEdits); }
   /* A move on the board is an override on the ticket's state; the generated
      file keeps saying what the plan said. */
   function sp(t){ return (STATE[t.id]&&STATE[t.id].sprint)||t.sprint; }
@@ -453,15 +481,15 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   function counted(t){ return st(t.id).status!=='dropped'; }
   function ckDone(t){ var c=st(t.id).checks||{}; return (t.checklist||[]).filter(function(_,i){return c[String(i)];}).length; }
 
-  function mirror(){ try{ localStorage.setItem(LSK,JSON.stringify({state:STATE,custom:CUSTOM})); }catch(e){} }
+  function mirror(){ try{ localStorage.setItem(LSK,JSON.stringify({state:STATE,custom:CUSTOM,sprints:SPRINT_EDITS})); }catch(e){} }
   function load(){
     var btn=document.getElementById('btn-refresh'); btn.disabled=true;
     return fetch(API+'?ts='+Date.now(),{cache:'no-store'})
       .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-      .then(function(j){ STATE=j.state||{}; CUSTOM=j.custom||[]; OFFLINE=false; mirror(); banner(''); })
+      .then(function(j){ STATE=j.state||{}; CUSTOM=j.custom||[]; SPRINT_EDITS=j.sprints||{}; applySprintEdits(); OFFLINE=false; mirror(); banner(''); })
       .catch(function(e){
         OFFLINE=true;
-        try{ var m=JSON.parse(localStorage.getItem(LSK)||'null'); if(m){ STATE=m.state||{}; CUSTOM=m.custom||[]; } }catch(_){}
+        try{ var m=JSON.parse(localStorage.getItem(LSK)||'null'); if(m){ STATE=m.state||{}; CUSTOM=m.custom||[]; SPRINT_EDITS=m.sprints||{}; applySprintEdits(); } }catch(_){}
         banner('Could not reach the shared board ('+esc(e.message)+'). Showing this device’s last copy; changes you make now save here only until it is back.');
       })
       .then(function(){ btn.disabled=false; renderAll(); });
@@ -479,6 +507,25 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
       .then(function(j){ if(j&&j.rec){ STATE[id]=j.rec; mirror(); } })
       .catch(function(e){ STATE[id]=prev; mirror(); renderAll(); toast('Not saved: '+e.message,true); });
+  }
+  function saveEdits(id,edits){
+    var prev=JSON.parse(JSON.stringify(st(id)));
+    STATE[id]=Object.assign({},prev,{edits:Object.assign({},prev.edits||{},edits)}); mirror(); renderAll();
+    if(OFFLINE) return Promise.resolve();
+    return fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id,by:VIEWER,edits:edits})})
+      .then(function(r){ return r.json().then(function(j){ if(!r.ok) throw new Error(j.error||('HTTP '+r.status)); return j; }); })
+      .then(function(j){ if(j&&j.rec){ STATE[id]=j.rec; mirror(); } toast('Saved'); })
+      .catch(function(e){ STATE[id]=prev; mirror(); renderAll(); toast('Not saved: '+e.message,true); });
+  }
+  function saveSprint(sid,patch){
+    var prev=JSON.parse(JSON.stringify(SPRINT_EDITS));
+    SPRINT_EDITS[sid]=Object.assign({},SPRINT_EDITS[sid]||{},patch); applySprintEdits(); mirror(); renderAll();
+    if(OFFLINE) return Promise.resolve();
+    var body={}; body[sid]=patch;
+    return fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sprints:body,by:VIEWER})})
+      .then(function(r){ return r.json().then(function(j){ if(!r.ok) throw new Error(j.error||('HTTP '+r.status)); return j; }); })
+      .then(function(j){ if(j&&j.sprints){ SPRINT_EDITS=j.sprints; applySprintEdits(); mirror(); } toast('Sprint dates saved'); renderAll(); })
+      .catch(function(e){ SPRINT_EDITS=prev; applySprintEdits(); mirror(); renderAll(); toast('Not saved: '+e.message,true); });
   }
   function banner(msg){ var b=document.getElementById('banner'); b.textContent=msg; b.classList.toggle('hidden',!msg); }
   var tt; function toast(msg,err){ var t=document.getElementById('toast'); t.textContent=msg; t.className='toast show'+(err?' err':''); clearTimeout(tt); tt=setTimeout(function(){t.className='toast';},2600); }
@@ -551,14 +598,22 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     document.getElementById('side-sprints').innerHTML=SPRINTS.map(function(spr){
       var ts=T.filter(function(t){return sp(t)===spr.id&&counted(t);}), d=ts.filter(function(t){return st(t.id).status==='done';}).length;
       var head=''; if(spr.section&&spr.section!==lastSec){ lastSec=spr.section; var col=(LC[spr.layer]||{}).color||'#5c7a99'; head='<div class="sec-lbl" style="--lc:'+col+'">'+esc(spr.section)+'</div>'; }
-      return head+'<div class="sitem'+(spr.id===SEL?' active':'')+'" data-s="'+spr.id+'"><div style="flex:1"><div style="display:flex;gap:8px;align-items:center"><span class="id">'+spr.id+'</span><span class="nm">'+esc(spr.name)+'</span><span class="n">'+d+'/'+ts.length+'</span></div><div class="b"><i style="width:'+(ts.length?Math.round(d/ts.length*100):0)+'%"></i></div></div></div>';
+      return head+'<div class="sitem'+(spr.id===SEL?' active':'')+'" data-s="'+spr.id+'"><div style="flex:1">'+
+        '<div style="display:flex;gap:8px;align-items:center"><span class="id">'+spr.id+'</span><span class="nm">'+esc(spr.name)+'</span><span class="n">'+d+'/'+ts.length+'</span></div>'+
+        '<div class="sdates">'+fmtS(spr.start)+' &rarr; '+fmtS(spr.end)+'<span class="g">gate '+fmtS(spr.gate_date)+'</span></div>'+
+        '<div class="b"><i style="width:'+(ts.length?Math.round(d/ts.length*100):0)+'%"></i></div></div></div>';
     }).join('');
     document.querySelectorAll('.sitem').forEach(function(el){ el.addEventListener('click',function(){ SEL=el.getAttribute('data-s'); try{localStorage.setItem('artemis_launch_sprint',SEL);}catch(e){} OPEN={}; renderTracker(); }); });
 
     var ph=sprintPhase(s);
     document.getElementById('shead').innerHTML='<div style="flex:1"><h2>'+s.id+' · '+esc(s.name)+'</h2>'+
-      '<div class="meta">'+fmt(s.start)+' &rarr; '+fmt(s.end)+' · '+(ph==='live'?days(TODAY,s.end)+' days left':ph)+' · gate <b style="color:var(--amber)">'+fmt(s.gate_date)+'</b></div>'+
+      '<div class="meta" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+
+        '<span class="dchip" id="sd-edit"><b>'+fmt(s.start)+'</b> &rarr; <b>'+fmt(s.end)+'</b> · gate <b style="color:var(--gold)">'+fmt(s.gate_date)+'</b> · edit</span>'+
+        '<span>'+(ph==='live'?days(TODAY,s.end)+' days left':ph)+'</span>'+
+        (SPRINT_EDITS[s.id]?'<span class="edited">edited by '+esc(SPRINT_EDITS[s.id].by||'someone')+'</span>':'')+
+      '</div><div id="sd-form"></div>'+
       '<div class="goal">'+esc(s.goal)+'</div><div class="gatebox"><b>Friday gate</b>'+esc(s.gate)+'</div></div>';
+    document.getElementById('sd-edit').addEventListener('click',function(){ sprintForm(s); });
 
     var inS=T.filter(function(t){return sp(t)===SEL;});
     document.getElementById('people-pills').innerHTML=[{n:'',c:'#a5b4fc',l:'Everyone'}].concat(PEOPLE.map(function(p){return {n:p.n,c:p.c,l:p.n};})).map(function(p){
@@ -590,6 +645,77 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     wire(body);
   }
 
+  function sprintForm(s){
+    var box=document.getElementById('sd-form');
+    if(box.innerHTML){ box.innerHTML=''; return; }
+    box.innerHTML='<div class="efrm">'+
+      '<div><label>Starts</label><input type="date" id="sf-start" value="'+s.start+'"></div>'+
+      '<div><label>Ends</label><input type="date" id="sf-end" value="'+s.end+'"></div>'+
+      '<div><label>Gate date</label><input type="date" id="sf-gate" value="'+s.gate_date+'"></div>'+
+      '<div class="wide"><label>Sprint name</label><input id="sf-name" value="'+esc(s.name)+'"></div>'+
+      '<div class="wide"><label>Sprint goal</label><textarea id="sf-goal">'+esc(s.goal)+'</textarea></div>'+
+      '<div class="wide"><label>What the Friday gate proves</label><textarea id="sf-gt">'+esc(s.gate)+'</textarea></div>'+
+      '</div><div class="erow"><button class="hbtn primary" id="sf-save">Save sprint</button><button class="hbtn" id="sf-cancel">Cancel</button>'+
+      '<span class="note">Dates are shared with the whole team. Ticket due dates are not moved automatically.</span></div>';
+    box.querySelector('#sf-cancel').addEventListener('click',function(){ box.innerHTML=''; });
+    box.querySelector('#sf-save').addEventListener('click',function(){
+      var q=function(x){ return box.querySelector(x).value; };
+      var stt=q('#sf-start'), en=q('#sf-end'), gt=q('#sf-gate');
+      if(!stt||!en||!gt){ toast('All three dates are required',true); return; }
+      if(stt>en){ toast('Start is after end',true); return; }
+      if(gt<stt||gt>en){ toast('The gate date sits outside the sprint',true); return; }
+      var out=all().filter(function(x){ return sp(x)===s.id&&counted(x)&&x.due&&(x.due<stt||x.due>en); });
+      if(out.length&&!confirm(out.length+' ticket'+(out.length===1?'':'s')+' would fall outside the new window. Save anyway? Their due dates stay where they are.')) return;
+      box.innerHTML='';
+      saveSprint(s.id,{start:stt,end:en,gate_date:gt,name:q('#sf-name').trim()||s.name,goal:q('#sf-goal'),gate:q('#sf-gt')});
+    });
+  }
+
+  var EDITING=null;
+  function ticketForm(t){
+    var S=st(t.id), e=S.edits||{};
+    var sel=function(id,opts,val){ return '<select id="'+id+'">'+opts.map(function(o){ return '<option value="'+o+'"'+(o===val?' selected':'')+'>'+o+'</option>'; }).join('')+'</select>'; };
+    return '<div class="efrm">'+
+      '<div class="wide"><label>Title</label><input id="ef-title" maxlength="140" value="'+esc(t.title)+'"></div>'+
+      '<div><label>Owner</label>'+sel('ef-who',PEOPLE.map(function(p){return p.n;}),t.assignee)+'</div>'+
+      '<div><label>Sprint</label>'+sel('ef-sprint',ORDER.concat(['BL']),sp(t))+'</div>'+
+      '<div><label>Due</label><input type="date" id="ef-due" value="'+(t.due||'')+'"></div>'+
+      '<div><label>Priority</label>'+sel('ef-pr',['P0','P1','P2'],t.priority)+'</div>'+
+      '<div><label>Area</label><input id="ef-area" value="'+esc(t.area)+'"></div>'+
+      '<div><label>Gate it serves</label>'+sel('ef-gate',['none'].concat(ORDER),t.gate||'none')+'</div>'+
+      '<div class="wide"><label>What</label><textarea id="ef-what">'+esc(t.what)+'</textarea></div>'+
+      '<div class="wide"><label>Why</label><textarea id="ef-why">'+esc(t.why)+'</textarea></div>'+
+      '<div class="wide"><label>Done when</label><input id="ef-acc" value="'+esc(t.acceptance)+'"></div>'+
+      '<div class="wide"><label>Checklist, one per line</label><textarea id="ef-ck">'+esc((t.checklist||[]).join('\n'))+'</textarea></div>'+
+      '</div><div class="erow"><button class="hbtn primary" data-esave="'+t.id+'">Save</button><button class="hbtn" data-ecancel="'+t.id+'">Cancel</button>'+
+      (Object.keys(e).length?'<button class="hbtn" data-ereset="'+t.id+'" style="color:var(--red)">Undo all edits</button>':'')+
+      '<span class="note">'+(Object.keys(e).length?'Edited by '+esc(S.edited_by||'someone')+' · shared with everyone':'Changes are shared with everyone')+'</span></div>';
+  }
+  function wireTicketForm(root){
+    root.querySelectorAll('[data-esave]').forEach(function(b){ b.addEventListener('click',function(ev){
+      ev.stopPropagation(); var id=b.getAttribute('data-esave'), q=function(s){ return root.querySelector(s); };
+      var due=q('#ef-due').value; if(!due){ toast('A due date is required',true); return; }
+      var target=q('#ef-sprint').value, s=sprintOf(target);
+      if(s&&(due<s.start||due>s.end)&&!confirm('That due date is outside '+target+' ('+fmtS(s.start)+' to '+fmtS(s.end)+'). Save anyway?')) return;
+      var edits={title:q('#ef-title').value.trim(),assignee:q('#ef-who').value,due:due,priority:q('#ef-pr').value,
+        area:q('#ef-area').value.trim(),gate:q('#ef-gate').value,what:q('#ef-what').value.trim(),
+        why:q('#ef-why').value.trim(),acceptance:q('#ef-acc').value.trim(),
+        checklist:q('#ef-ck').value.split('\n').map(function(x){return x.trim();}).filter(Boolean)};
+      if(!edits.title){ toast('A title is required',true); return; }
+      EDITING=null;
+      var moved=target!==sp(BYIDT(id));
+      saveEdits(id,edits).then(function(){ if(moved) save(id,{sprint:target}); });
+    }); });
+    root.querySelectorAll('[data-ecancel]').forEach(function(b){ b.addEventListener('click',function(ev){ ev.stopPropagation(); EDITING=null; renderAll(); }); });
+    root.querySelectorAll('[data-ereset]').forEach(function(b){ b.addEventListener('click',function(ev){
+      ev.stopPropagation(); var id=b.getAttribute('data-ereset');
+      if(!confirm('Undo every edit on '+id+' and go back to the planned wording and dates?')) return;
+      var e=(st(id).edits)||{}, clear={}; Object.keys(e).forEach(function(k){ clear[k]=null; });
+      EDITING=null; saveEdits(id,clear);
+    }); });
+  }
+  function BYIDT(id){ return all().filter(function(t){return t.id===id;})[0]||{}; }
+
   function prSort(a,b){ return a.priority.localeCompare(b.priority) || (a.due||'').localeCompare(b.due||'') || a.id.localeCompare(b.id); }
   function list(vis){
     /* Grouped by person, plus an Unassigned group at the end so a ticket pulled
@@ -615,7 +741,11 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   }
   function detail(t){
     var S=st(t.id);
+    if(EDITING===t.id) return '<div class="det" data-det="'+t.id+'" style="grid-template-columns:1fr">'+ticketForm(t)+'</div>';
+    var edited=S.edits&&Object.keys(S.edits).length;
     return '<div class="det" data-det="'+t.id+'"><div>'+
+      '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><button class="editbtn" data-eopen="'+t.id+'">Edit ticket</button>'+
+      (edited?'<span class="edited">edited by '+esc(S.edited_by||'someone')+'</span>':'')+'</div>'+
       '<h4>What</h4><p>'+esc(t.what)+'</p><h4>Why</h4><p>'+esc(t.why)+'</p><h4>Done when</h4><p>'+esc(t.acceptance)+'</p>'+
       '<h4>Priority</h4><p><span class="pr '+t.priority+'">'+t.priority+'</span> '+esc(t.priority_reason)+'</p>'+
       '<h4>Depends on</h4><p>'+((t.depends_on||[]).length?t.depends_on.map(function(d){return '<span class="tag">'+esc(d)+'</span>';}).join(''):'<span class="tag">nothing</span>')+'</p>'+
@@ -656,6 +786,8 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     body.querySelectorAll('[data-del]').forEach(function(b){ b.addEventListener('click',function(){ var id=b.getAttribute('data-del'); if(!confirm('Delete '+id+'? Only team-added tickets can be deleted.')) return;
       fetch(API+'?id='+encodeURIComponent(id),{method:'DELETE'}).then(function(){ CUSTOM=CUSTOM.filter(function(t){return t.id!==id;}); delete STATE[id]; mirror(); renderAll(); toast('Deleted '+id); }).catch(function(e){ toast('Could not delete: '+e.message,true); }); }); });
     body.querySelectorAll('.det').forEach(function(d){ d.addEventListener('click',function(e){ e.stopPropagation(); }); });
+    body.querySelectorAll('[data-eopen]').forEach(function(b){ b.addEventListener('click',function(e){ e.stopPropagation(); EDITING=b.getAttribute('data-eopen'); OPEN[EDITING]=true; renderTracker(); }); });
+    wireTicketForm(body);
     wireMoves(body);
     // board drag and drop
     var drag=null;
@@ -761,19 +893,34 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   }
   function drawTicketMap(){
     var nodes=mapNodes(), inner=document.getElementById('map-inner');
+    var PEOPLE_N=PEOPLE.map(function(p){return p.n;});
     document.getElementById('map-hint').textContent = MAPWHO
       ? nodes.length+' boxes: '+MAPWHO+"'s tickets and everything they touch"
       : nodes.length+' boxes: only the tickets that hand off between people. Pick a name to see one person in full.';
     if(!nodes.length){ inner.style.height='120px'; inner.innerHTML='<div class="empty" style="padding:40px;text-align:center">Nothing to draw here.</div>'; return; }
-    var COLW=250, NW=214, NH=52, GAP=10, TOP=64, PAD=18;
-    var cols={}, pos={};
-    ORDER.forEach(function(s,i){ cols[s]={i:i,n:0}; });
-    nodes.slice().sort(function(a,b){ return (a.assignee||'').localeCompare(b.assignee||'')||a.due.localeCompare(b.due)||a.id.localeCompare(b.id); })
-      .forEach(function(t){ var c=cols[sp(t)]; if(!c) return; pos[t.id]={x:PAD+c.i*COLW, y:TOP+c.n*(NH+GAP)}; c.n++; });
-    var maxN=Math.max.apply(null,ORDER.map(function(s){return cols[s].n;}));
-    var H=TOP+maxN*(NH+GAP)+PAD, W=PAD+ORDER.length*COLW;
+    /* Generous columns, and each column grouped under the person who owns the
+       work, so a wall of boxes reads as lanes instead of a heap. */
+    var COLW=330, NW=272, NH=62, GAP=14, TOP=96, PAD=26, HEADH=30;
+    var cols={}, pos={}, groupHeads=[];
+    ORDER.forEach(function(s,i){ cols[s]={i:i,y:TOP,n:0}; });
+    var byCol={}; ORDER.forEach(function(s){ byCol[s]=[]; });
+    nodes.forEach(function(t){ if(byCol[sp(t)]) byCol[sp(t)].push(t); });
+    ORDER.forEach(function(s){
+      var c=cols[s], group={};
+      byCol[s].forEach(function(t){ (group[t.assignee||'unassigned']=group[t.assignee||'unassigned']||[]).push(t); });
+      Object.keys(group).sort(function(a,b){ var ia=PEOPLE.map(function(p){return p.n;}).indexOf(a), ib=PEOPLE.map(function(p){return p.n;}).indexOf(b); return (ia<0?99:ia)-(ib<0?99:ib); })
+      .forEach(function(who){
+        groupHeads.push('<div class="grouphead" style="left:'+(PAD+c.i*COLW)+'px;top:'+c.y+'px;width:'+NW+'px;--gc:'+(PC[who]||'#9c8f80')+'">'+esc(who)+' <span>'+group[who].length+'</span></div>');
+        c.y+=HEADH; c.n+=group[who].length;
+        group[who].sort(function(a,b){ return a.due.localeCompare(b.due)||a.id.localeCompare(b.id); }).forEach(function(t){
+          pos[t.id]={x:PAD+c.i*COLW, y:c.y}; c.y+=NH+GAP;
+        });
+        c.y+=10;
+      });
+    });
+    var H=Math.max.apply(null,ORDER.map(function(s){return cols[s].y;}))+PAD, W=PAD+ORDER.length*COLW;
     inner.style.height=H+'px'; inner.style.width=W+'px';
-    var heads=ORDER.map(function(s,i){ var sd=sprintOf(s); return '<div class="mapcol" style="left:'+(PAD+i*COLW)+'px;width:'+NW+'px">'+s+' &middot; '+cols[s].n+'<b>'+esc(sd?sd.name:'')+'</b></div>'; }).join('');
+    var heads=ORDER.map(function(s,i){ var sd=sprintOf(s); return '<div class="mapcol" style="left:'+(PAD+i*COLW)+'px;width:'+NW+'px">'+s+' &middot; '+cols[s].n+' tickets<b>'+esc(sd?sd.name:'')+'</b><em>'+fmtS(sd.start)+' &rarr; '+fmtS(sd.end)+'</em></div>'; }).join('')+groupHeads.join('');
     var paths=[];
     nodes.forEach(function(t){
       depIds(t).forEach(function(d){
