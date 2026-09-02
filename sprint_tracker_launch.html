@@ -114,14 +114,14 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .grp .who{font-weight:700;font-size:14px}
 .grp .dot{width:9px;height:9px;border-radius:50%}
 .grp .n{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted3)}
-.row{display:grid;grid-template-columns:88px 44px 1fr 110px 96px 132px 26px;gap:10px;align-items:center;padding:10px 12px;background:var(--card);border:1px solid var(--border2);border-radius:9px;margin-bottom:6px;cursor:pointer;transition:border-color .15s}
+.row{min-width:0;display:grid;grid-template-columns:88px 44px 1fr 110px 96px 132px 26px;gap:10px;align-items:center;padding:10px 12px;background:var(--card);border:1px solid var(--border2);border-radius:9px;margin-bottom:6px;cursor:pointer;transition:border-color .15s}
 .row:hover{border-color:rgba(0,212,170,.35)}
 .row.open{border-color:var(--accent);border-bottom-left-radius:0;border-bottom-right-radius:0}
 .row.done{opacity:.62}
 .row .id{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent)}
 .pr{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;padding:2px 6px;border-radius:5px;text-align:center}
 .pr.P0{background:rgba(248,113,113,.15);color:var(--red)}.pr.P1{background:rgba(245,158,11,.15);color:var(--amber)}.pr.P2{background:rgba(96,165,250,.15);color:var(--blue)}
-.row .ti{font-size:13px;font-weight:500}
+.row .ti{font-size:13px;font-weight:500;min-width:0}
 .row .ti small{display:block;font-size:11px;color:var(--muted3);font-weight:400;margin-top:1px}
 .area{font-size:10.5px;color:var(--muted3);border:1px solid var(--border2);padding:2px 7px;border-radius:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .due{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted3);white-space:nowrap}
@@ -294,6 +294,96 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .spc .v{font-family:'IBM Plex Mono',monospace;font-size:11.5px;margin-top:2px}
 .spc.cur{border-color:var(--pc,var(--accent))}
 .note{font-size:11.5px;color:var(--muted2);margin-top:10px}
+/* ================= PHONE =================
+   The desktop board is a set of fixed-column grids; on a phone those grids are
+   what force 709px of content into a 375px screen, so each one collapses to a
+   stack rather than being scaled down. Nothing is hidden - a sprint board you
+   cannot read on the way to a meeting is a sprint board nobody reads. */
+@media (max-width:760px){
+  body{overflow-x:hidden}
+  main{padding:16px 14px 28px}
+  .h1{font-size:24px}
+  .sub{font-size:13px}
+  .hwrap{padding:10px 14px;gap:8px;flex-wrap:wrap}
+  .hwrap .brand{font-size:11.5px;letter-spacing:1.6px}
+  .hwrap .brand svg{width:22px;height:22px}
+  .chip{padding:4px 8px;font-size:11px}
+  .hbtn{padding:5px 9px;font-size:11.5px}
+  .tabs{padding:10px 12px;gap:7px}
+  .tab-btn{flex:1 1 40%;min-width:0;padding:11px 8px;font-size:13.5px;border-radius:9px}
+  /* sprints become a horizontal rail you thumb through */
+  .tr{grid-template-columns:1fr;gap:12px}
+  .side{position:static;margin:0 -14px;padding:0 14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .side .sl{display:none}
+  #side-sprints{display:flex;gap:8px;padding-bottom:6px}
+  .side .sec-lbl{display:none}
+  .sitem{flex:0 0 auto;width:172px;margin:0;border:1px solid var(--border2);border-radius:10px;padding:10px 11px}
+  .sitem .sdates{font-size:9.5px}
+  #btn-add{margin-top:8px}
+  .shead h2{font-size:20px}
+  .gatebox,.goal{max-width:none}
+  .fbar,.layrow{gap:6px}
+  .fbar input{min-width:0;flex:1 1 100%}
+  .fbar select{flex:1 1 46%}
+  .vtog{margin-left:0;width:100%}
+  .vtog button{flex:1}
+  .pill{font-size:11.5px;padding:5px 9px}
+  /* a ticket becomes a card: id and priority, then the title, then its meta */
+  .row{grid-template-columns:auto auto 1fr;grid-template-areas:"id pr chev" "ti ti ti" "area due st";gap:6px 8px;padding:11px 12px}
+  .row .id{grid-area:id}.row .pr{grid-area:pr}.row .chev{grid-area:chev;text-align:right}
+  .row .ti{grid-area:ti;min-width:0}
+  .row .area{grid-area:area;justify-self:start}
+  .row .due{grid-area:due;justify-self:start;align-self:center}
+  .row .stsel{grid-area:st;justify-self:end;width:100%;max-width:132px}
+  .det{grid-template-columns:1fr;gap:14px;padding:13px 12px}
+  .efrm{grid-template-columns:1fr}
+  .board{grid-template-columns:1fr}
+  .kcol{min-height:0}
+  /* backlog rows stack the same way */
+  .brow2{grid-template-columns:auto 1fr;grid-template-areas:"id pr" "ti ti" "wave wave" "who sel" "x x";gap:6px 8px}
+  .brow2 .ti{grid-area:ti}.brow2 .wave{grid-area:wave;text-align:left}.brow2 .who{grid-area:who;align-self:center}
+  .brow2 select[data-move]{grid-area:sel;width:100%}
+  .brow2 .xbtn{grid-area:x;width:100%}
+  .lay .lh{flex-wrap:wrap}
+  .lay .lh .add{margin-left:0;width:100%}
+  /* features */
+  .fhead{grid-template-columns:1fr auto;gap:10px;padding:13px 14px}
+  .fname{font-size:15.5px}
+  .flist{grid-template-columns:1fr}
+  .frow{grid-template-columns:auto 1fr;grid-template-areas:"fid fs" "ft ft" "fw fw";gap:3px 8px}
+  .frow .fid{grid-area:fid}.frow .ft{grid-area:ft;white-space:normal}
+  .frow .fw{grid-area:fw;text-align:left}.frow .fs{grid-area:fs;text-align:right}
+  .ftiles,.tiles{grid-template-columns:1fr 1fr;gap:9px}
+  .tile{padding:12px 13px}.tile .v{font-size:25px}
+  /* dependencies */
+  .mapbar{gap:8px}
+  .subtabs{width:100%}.subtabs button{flex:1;font-size:13px;padding:9px 10px}
+  .maphint{margin-left:0;font-size:11.5px;order:9;flex:1 1 100%}
+  .mapwrap{height:52vh;min-height:260px}
+  .detpanel{max-height:none;padding:13px 14px}
+  .detpanel .cols{grid-template-columns:1fr;gap:14px}
+  .smcol{min-width:158px;margin-right:22px}
+  .smcol .arrow{right:-22px;width:22px}
+  /* performance */
+  .pgrid{grid-template-columns:1fr}
+  .pcard{padding:14px}
+  .pcard .top{flex-wrap:wrap;gap:6px}
+  .pcard .top .role{flex:1 1 100%;order:3}
+  .pcard .top .pct{margin-left:auto;order:2}
+  .pstats{grid-template-columns:repeat(3,1fr)}
+  .sprow{grid-template-columns:repeat(4,1fr)}
+  .two{grid-template-columns:1fr}
+  .sgrid{grid-template-columns:1fr}
+  .load{grid-template-columns:56px 1fr 74px}
+  .mbox{padding:16px;width:94vw}
+  .mbox .g2{grid-template-columns:1fr}
+  .toast{left:12px;right:12px;bottom:12px}
+}
+@media (max-width:420px){
+  .tab-btn{flex:1 1 46%;font-size:12.5px;padding:10px 6px}
+  .ftiles,.tiles{grid-template-columns:1fr}
+  .pstats{grid-template-columns:repeat(2,1fr)}
+}
 /* ---- modal / toast ---- */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50}
 .modal.open{display:flex}
