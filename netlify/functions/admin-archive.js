@@ -57,6 +57,19 @@ const cleanHref = (h) => {
   return /^[a-zA-Z0-9._-]+\.html$/.test(s) ? s : null;
 };
 
+// connectLambda(event) rebuilds the Blobs environment from the Lambda event
+// with only deployID/edgeURL/siteID/token - no uncachedEdgeURL - and it
+// OVERWRITES the runtime's own NETLIFY_BLOBS_CONTEXT, which is the one place
+// uncachedEdgeURL comes from. Calling it unconditionally therefore guarantees
+// that strong reads can never work. So: use the runtime context when it is
+// there, and only fall back to connectLambda when it is not.
+function connect(event) {
+  const raw = process.env.NETLIFY_BLOBS_CONTEXT;
+  let ctx = null;
+  if (raw) { try { ctx = JSON.parse(Buffer.from(raw, "base64").toString("utf8")); } catch { ctx = null; } }
+  if (!ctx || !ctx.token) connectLambda(event);
+  return ctx ? Object.keys(ctx) : ["(from event via connectLambda)"];
+}
 function pair(name) {
   const weak = getStore(name);
   let strong = weak;
@@ -67,8 +80,8 @@ function pair(name) {
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 204, headers: HEADERS };
 
-  let s;
-  try { connectLambda(event); s = pair(STORE); }
+  let s, ctxKeys = [];
+  try { ctxKeys = connect(event); s = pair(STORE); }
   catch (err) {
     return reply(500, { error: "store_unavailable",
       message: "Netlify Blobs is not available here: " + String(err.message || err).slice(0, 160) });
@@ -78,10 +91,14 @@ exports.handler = async (event) => {
   // write is visible to a strong read immediately regardless, and routing a
   // write through the strong store fails outright where uncachedEdgeURL is
   // missing.
+  // Reported in every response so a silent fallback to eventual reads shows
+  // up in the JSON instead of as "the archive forgot".
+  let used = "strong";
   const read = async (fn) => {
     try { return await fn(s.strong); }
     catch (err) {
       if (String(err && err.name) !== "BlobsConsistencyError") throw err;
+      used = "eventual";
       return await fn(s.weak);
     }
   };
@@ -98,7 +115,7 @@ exports.handler = async (event) => {
       else if (it[0].startsWith("a:")) archived.push(it[1]);
     }
     archived.sort((a, b) => String(a.at || "").localeCompare(String(b.at || "")));
-    return { archived, order };
+    return { archived, order, consistency: used, context_keys: ctxKeys };
   };
 
   if (event.httpMethod === "GET") return reply(200, await snapshot());
