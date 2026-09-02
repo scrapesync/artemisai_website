@@ -288,25 +288,34 @@ h1 span{
 .reorder-hint{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;max-width:1280px;margin:0 auto 14px;padding:9px 16px;border-radius:10px;background:rgba(0,212,170,0.05);border:1px solid rgba(0,212,170,0.18);font-size:12.5px;color:var(--txt-soft,#9aa6bd)}
 .reorder-reset{padding:5px 12px;border-radius:7px;border:1px solid var(--bdr,rgba(255,255,255,.14));background:transparent;color:#9aa6bd;font-size:11.5px;font-family:inherit;cursor:pointer;transition:all .2s;white-space:nowrap}
 .reorder-reset:hover{border-color:rgba(0,212,170,.5);color:#00d4aa}
-/* ─── ARCHIVE ─── */
-.arch-btn{padding:5px 12px;border-radius:7px;border:1px solid var(--bdr,rgba(255,255,255,.14));background:transparent;color:#9aa6bd;font-size:11.5px;font-family:inherit;cursor:pointer;transition:all .2s;white-space:nowrap}
-.arch-btn:hover{border-color:rgba(139,123,255,.55);color:#8B7BFF}
-/* The dock only exists while something is being dragged. A permanent bin sitting
-   under the grid is a permanent invitation to click it by accident. */
-.arch-dock{display:none;max-width:1280px;margin:0 auto 16px;padding:20px;border-radius:12px;border:2px dashed rgba(139,123,255,.45);background:rgba(139,123,255,.06);color:#8B7BFF;font-size:13px;text-align:center}
-body.dragging-card .arch-dock{display:block}
-.arch-dock.over{background:rgba(139,123,255,.16);border-color:#8B7BFF}
-.arch-panel{display:none;max-width:1280px;margin:0 auto 18px;padding:14px 16px;border-radius:12px;border:1px solid rgba(139,123,255,.25);background:rgba(139,123,255,.05)}
-.arch-panel.open{display:block}
-.arch-panel h3{font-size:13px;font-weight:600;color:#8B7BFF;margin-bottom:4px}
-.arch-panel .hint{font-size:11.5px;color:#9aa6bd;margin-bottom:10px}
-.arch-row{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.07);margin-bottom:6px;font-size:12.5px}
-.arch-row a{color:#E4E6EB;text-decoration:none;font-weight:500}
-.arch-row a:hover{color:#8B7BFF}
-.arch-row .when{color:#65676B;font-size:11px;margin-left:auto;white-space:nowrap}
-.arch-row button{padding:4px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.14);background:transparent;color:#9aa6bd;font-size:11px;font-family:inherit;cursor:pointer}
-.arch-row button:hover{border-color:rgba(0,212,170,.5);color:#00d4aa}
-.dest-card.archived{display:none}
+/* ─── LIVE / ARCHIVE ─── */
+.mode-tabs{display:flex;gap:10px;max-width:1100px;width:100%;margin:0 auto 16px}
+.mode-tab{flex:1;padding:16px 18px;border-radius:12px;border:1px solid var(--bdr-soft);background:var(--bg-elev);font-family:inherit;cursor:pointer;text-align:left;transition:all .2s}
+.mode-tab .t{font-size:16px;font-weight:600;color:var(--t1);display:flex;align-items:center;gap:8px}
+.mode-tab .t .n{font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--t2)}
+.mode-tab .d{display:block;font-size:12px;color:var(--t3);margin-top:3px}
+.mode-tab:hover{border-color:var(--hover-border)}
+.mode-tab.on{border-color:var(--teal);background:var(--teal-bg)}
+.mode-tab.on .t .n{background:var(--teal);color:#0e1116}
+.mode-tab.arch.on{border-color:#8B7BFF;background:rgba(139,123,255,.10)}
+.mode-tab.arch.on .t .n{background:#8B7BFF;color:#0e1116}
+/* one action per card, top right: Archive in Live, Restore in Archive */
+.dest-card{position:relative}
+.card-act{position:absolute;top:12px;right:12px;z-index:4;padding:5px 10px;border-radius:7px;border:1px solid rgba(255,255,255,.14);background:rgba(14,17,22,.88);color:#9aa6bd;font-size:11px;font-family:inherit;cursor:pointer;opacity:0;transition:opacity .15s,border-color .15s,color .15s}
+.dest-card:hover .card-act,.dest-card:focus-within .card-act{opacity:1}
+@media(hover:none){.card-act{opacity:1}}
+.card-act:hover{border-color:#8B7BFF;color:#8B7BFF}
+body.mode-archive .card-act:hover{border-color:var(--teal);color:var(--teal)}
+body.mode-live .dest-card.archived{display:none}
+body.mode-archive .dest-card:not(.archived){display:none}
+body.mode-archive .reorder-hint{display:none}
+.arch-meta{display:block;font-size:11px;color:#8B7BFF;margin-top:10px}
+body.mode-live .arch-meta{display:none}
+.arch-empty{display:none;max-width:1100px;width:100%;margin:0 auto 18px;padding:40px 20px;text-align:center;color:var(--t3);border:1px dashed var(--bdr);border-radius:12px;font-size:13px}
+body.mode-archive .arch-empty.show{display:block}
+.arch-toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--bg-elev-2);border:1px solid var(--bdr);color:var(--t1);padding:10px 14px;border-radius:10px;font-size:12.5px;display:flex;gap:12px;align-items:center;z-index:70;opacity:0;pointer-events:none;transition:all .2s;box-shadow:var(--shadow-lg)}
+.arch-toast.show{opacity:1;pointer-events:auto;transform:translateX(-50%)}
+.arch-toast button{padding:4px 10px;border-radius:6px;border:1px solid var(--teal);background:transparent;color:var(--teal);font-family:inherit;font-size:12px;cursor:pointer}
 .dest-card{cursor:grab}
 .dest-card.dragging{opacity:.45;cursor:grabbing;transform:scale(.98)}
 .dest-card.drag-over{outline:2px dashed rgba(0,212,170,.55);outline-offset:3px}
@@ -551,21 +560,17 @@ body.dragging-card .arch-dock{display:block}
     <h1>Welcome back, <span id="user-first">there</span></h1>
     <p class="sub" id="user-role-line">Where would you like to go today?</p>
   </div>
+  <div class="mode-tabs">
+    <button type="button" class="mode-tab on" id="tab-live" onclick="setMode('live')"><span class="t">Live <span class="n" id="n-live">0</span></span><span class="d">The pages the team uses now. Drag to rearrange.</span></button>
+    <button type="button" class="mode-tab arch" id="tab-archive" onclick="setMode('archive')"><span class="t">Archive <span class="n" id="n-archive">0</span></span><span class="d">Retired pages, hidden for everyone. Restore any time.</span></button>
+  </div>
   <div class="reorder-hint" id="reorder-hint">
-    <span>✦ Tip: drag any card to rearrange this page just how you like it. Your layout is saved on this device.</span>
-    <span style="display:flex;gap:8px">
-      <button class="arch-btn" id="arch-toggle" onclick="toggleArchive()">Archive</button>
-      <button class="reorder-reset" id="reorder-reset" onclick="resetCardOrder()" style="display:none">↺ Reset order</button>
-    </span>
+    <span>✦ Tip: drag any card to rearrange this page. Your order is saved on this device; archiving is shared with everyone.</span>
+    <button class="reorder-reset" id="reorder-reset" onclick="resetCardOrder()" style="display:none">↺ Reset order</button>
   </div>
 
-  <div class="arch-dock" id="arch-dock">Drop here to archive this page</div>
-
-  <div class="arch-panel" id="arch-panel">
-    <h3>Archived pages</h3>
-    <div class="hint">Hidden from the grid for everyone, not deleted. Restore any of them here.</div>
-    <div id="arch-list"></div>
-  </div>
+  <div class="arch-empty" id="arch-empty">Nothing archived. In Live, hover a card and choose Archive to retire it for everyone.</div>
+  <div class="arch-toast" id="arch-toast"></div>
 
   <div class="cards" id="cards-grid">
     <a href="countdown.html" class="dest-card" style="--cc:#00e7bd;--ci:rgba(0,231,189,0.10);--cb:rgba(0,231,189,0.28)">
@@ -671,7 +676,7 @@ body.dragging-card .arch-dock{display:block}
       </svg>
     </div>
       <div class="dest-title">Sprint Tracker</div>
-      <div class="dest-desc">Track all 22 sprints, check off tasks, view team progress, manage the Road to Launch mission control.</div>
+      <div class="dest-desc">The Launch Tracker: six sprints from 3 Sep to the 1 Dec launch on one shared board. Overview stats, a ClickUp-style ticket tracker with checklists and blockers, and per-person delivery. Older trackers are kept under Old.</div>
       <span class="dest-tag">22 sprints</span>
     </a>
 
@@ -1005,12 +1010,9 @@ body.dragging-card .arch-dock{display:block}
   var dragEl=null, didDrag=false;
   function onDragStart(e){
     dragEl=this; didDrag=true; this.classList.add('dragging');
-    document.body.classList.add('dragging-card');
     try{ e.dataTransfer.effectAllowed='move'; e.dataTransfer.setData('text/plain',keyOf(this)); }catch(_){}
   }
   function onDragEnd(){
-    document.body.classList.remove('dragging-card');
-    var dock=document.getElementById('arch-dock'); if(dock) dock.classList.remove('over');
     if(dragEl) dragEl.classList.remove('dragging');
     cards().forEach(function(c){ c.classList.remove('drag-over'); });
     dragEl=null; saveOrder();
@@ -1143,89 +1145,69 @@ function _doSignout(){
 }
 function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
 
-/* ===== Archive: hide a dead page for everyone, reversibly =====
+/* ===== Live / Archive =====
    Card ORDER is per-device (localStorage above) because the order you like is
-   yours. Archiving is the opposite: "this page is retired" is a fact about the
-   tool, so it is shared through /api/admin-archive and everyone sees it. If the
-   function is unreachable the grid simply shows everything, which is the safe
-   way to fail - a page you can still see is a smaller problem than a page that
-   silently vanished. */
+   yours. Archiving is shared through /api/admin-archive because "this page is
+   retired" is a fact about the tool. Two tabs, one button per card, and an
+   Undo on the toast instead of a confirm dialog. If the store is unreachable
+   every card stays visible in Live and the Archive tab says why. */
 (function(){
-  var API='/api/admin-archive', LIST=[];
+  var API='/api/admin-archive', LIST=[], tt=null;
+  function who(){ try{ return localStorage.getItem('artemis_viewer_name')||'someone'; }catch(e){ return 'someone'; } }
+  function ago(iso){ var ms=Date.now()-new Date(iso).getTime(); if(isNaN(ms)) return ''; var d=Math.round(ms/86400000); if(d>=1) return d===1?'yesterday':d+' days ago'; var h=Math.round(ms/3600000); return h>=1?h+'h ago':'just now'; }
+  function cards(){ return Array.prototype.slice.call(document.querySelectorAll('#cards-grid .dest-card')); }
+  function cardFor(href){ return document.querySelector('#cards-grid .dest-card[href="'+href+'"]'); }
 
-  function who(){
-    try{ return localStorage.getItem('artemis_viewer_name') || 'someone'; }catch(e){ return 'someone'; }
-  }
-  function ago(iso){
-    var ms=Date.now()-new Date(iso).getTime();
-    if(isNaN(ms)) return '';
-    var d=Math.round(ms/86400000);
-    if(d>=1) return d===1?'yesterday':d+' days ago';
-    var h=Math.round(ms/3600000);
-    return h>=1 ? h+'h ago' : 'just now';
-  }
-  function cardFor(href){
-    return document.querySelector('#cards-grid .dest-card[href="'+href+'"]');
-  }
   function paint(){
-    var grid=document.getElementById('cards-grid');
-    if(grid) Array.prototype.forEach.call(grid.querySelectorAll('.dest-card'),
-      function(c){ c.classList.remove('archived'); });
-    LIST.forEach(function(a){ var c=cardFor(a.href); if(c) c.classList.add('archived'); });
-
-    document.getElementById('arch-toggle').textContent = LIST.length ? 'Archive ('+LIST.length+')' : 'Archive';
-    var box=document.getElementById('arch-list');
-    box.innerHTML = LIST.length ? LIST.map(function(a){
-      return '<div class="arch-row"><a href="'+a.href+'">'+a.title+'</a>'+
-             '<span class="when">'+a.by+' &middot; '+ago(a.at)+'</span>'+
-             '<button onclick="restoreArchived(\''+a.href+'\')">Restore</button></div>';
-    }).join('') : '<div class="hint" style="margin:0">Nothing archived yet. Drag a card onto the drop zone to retire it.</div>';
+    cards().forEach(function(c){ c.classList.remove('archived'); var m=c.querySelector('.arch-meta'); if(m) m.remove(); });
+    LIST.forEach(function(a){ var c=cardFor(a.href); if(!c) return; c.classList.add('archived');
+      var m=document.createElement('span'); m.className='arch-meta'; m.textContent='Archived by '+a.by+' \u00b7 '+ago(a.at); c.appendChild(m); });
+    var n=LIST.length, total=cards().length;
+    document.getElementById('n-live').textContent=total-n; document.getElementById('n-archive').textContent=n;
+    document.getElementById('arch-empty').classList.toggle('show', n===0);
+    cards().forEach(function(c){ var b=c.querySelector('.card-act'); if(b) b.textContent=c.classList.contains('archived')?'Restore':'Archive'; });
   }
-  function load(){
-    fetch(API+'?ts='+Date.now(),{cache:'no-store'})
-      .then(function(r){ return r.json(); })
-      .then(function(j){ LIST=(j&&j.archived)||[]; paint(); })
-      .catch(function(){
-        /* Every card stays visible, which is the safe way to fail. But the panel
-           itself must not open empty and silent, or an unreachable store looks
-           identical to an empty archive. */
-        document.getElementById('arch-list').innerHTML =
-          '<div class="hint" style="margin:0">Could not reach the archive store, so nothing is hidden. ' +
-          'This reads the Netlify function at <code>/api/admin-archive</code>.</div>';
-      });
+  window.setMode=function(m){
+    document.body.classList.toggle('mode-live',m==='live'); document.body.classList.toggle('mode-archive',m==='archive');
+    document.getElementById('tab-live').classList.toggle('on',m==='live'); document.getElementById('tab-archive').classList.toggle('on',m==='archive');
+    try{ localStorage.setItem('artemis_panel_mode',m); }catch(e){}
+  };
+  function toast(msg,undo){
+    var el=document.getElementById('arch-toast'); el.innerHTML='';
+    el.appendChild(document.createTextNode(msg));
+    if(undo){ var b=document.createElement('button'); b.type='button'; b.textContent='Undo'; b.addEventListener('click',function(){ undo(); hide(); }); el.appendChild(b); }
+    el.classList.add('show'); clearTimeout(tt); tt=setTimeout(hide, undo?7000:2600);
+    function hide(){ el.classList.remove('show'); }
   }
+  function post(href,title){ return fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({href:href,title:title,by:who()})}).then(function(r){return r.json();}); }
+  function del(href){ return fetch(API+'?href='+encodeURIComponent(href),{method:'DELETE'}).then(function(r){return r.json();}); }
 
-  window.toggleArchive=function(){
-    document.getElementById('arch-panel').classList.toggle('open');
-  };
-  window.restoreArchived=function(href){
-    fetch(API+'?href='+encodeURIComponent(href),{method:'DELETE'})
-      .then(function(r){ return r.json(); })
-      .then(function(j){ LIST=(j&&j.archived)||[]; paint(); })
-      .catch(function(){ alert('Could not restore - the archive store did not respond.'); });
-  };
-
-  var dock=document.getElementById('arch-dock');
-  dock.addEventListener('dragover', function(e){ e.preventDefault(); this.classList.add('over'); });
-  dock.addEventListener('dragleave', function(){ this.classList.remove('over'); });
-  dock.addEventListener('drop', function(e){
-    e.preventDefault(); this.classList.remove('over');
-    var href=''; try{ href=e.dataTransfer.getData('text/plain'); }catch(_){}
-    var card=href && cardFor(href);
-    if(!card) return;
-    var title=(card.querySelector('.dest-title')||{}).textContent || href;
-    /* Hidden immediately rather than after the round trip: the drop already
-       told the person it worked, and a card that springs back for a moment
-       reads as a bug. The reload below is the source of truth. */
-    card.classList.add('archived');
-    fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({href:href,title:title.trim(),by:who()})})
-      .then(function(r){ return r.json(); })
-      .then(function(j){ LIST=(j&&j.archived)||[]; paint(); })
-      .catch(function(){ card.classList.remove('archived'); alert('Could not archive - the store did not respond.'); });
+  /* Optimistic both ways: the card moves at once, the store is the truth afterwards. */
+  function archive(card){
+    var href=card.getAttribute('href'), title=((card.querySelector('.dest-title')||{}).textContent||href).trim();
+    LIST.push({href:href,title:title,at:new Date().toISOString(),by:who()}); paint();
+    post(href,title).then(function(j){ LIST=(j&&j.archived)||LIST; paint(); })
+      .catch(function(){ LIST=LIST.filter(function(a){return a.href!==href;}); paint(); toast('Could not archive: the store did not respond.'); });
+    toast('Archived '+title, function(){ restore(card); });
+  }
+  function restore(card){
+    var href=card.getAttribute('href');
+    LIST=LIST.filter(function(a){return a.href!==href;}); paint();
+    del(href).then(function(j){ LIST=(j&&j.archived)||LIST; paint(); })
+      .catch(function(){ toast('Could not restore: the store did not respond.'); load(); });
+  }
+  cards().forEach(function(c){
+    var b=document.createElement('button'); b.type='button'; b.className='card-act'; b.textContent='Archive';
+    b.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); if(c.classList.contains('archived')) restore(c); else archive(c); });
+    c.appendChild(b);
   });
-
-  load();
+  function load(){
+    fetch(API+'?ts='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();})
+      .then(function(j){ LIST=(j&&j.archived)||[]; paint(); })
+      .catch(function(){ paint(); document.getElementById('arch-empty').textContent='Could not reach the archive store (/api/admin-archive), so nothing is hidden right now.'; document.getElementById('arch-empty').classList.add('show'); });
+  }
+  var m='live'; try{ m=localStorage.getItem('artemis_panel_mode')||'live'; }catch(e){}
+  setMode(m==='archive'?'archive':'live'); paint(); load();
 })();
 </script>
 <style>
