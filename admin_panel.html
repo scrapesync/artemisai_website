@@ -978,15 +978,19 @@ body.mode-archive .arch-empty.show{display:block}
 (function(){
   var GRID_ID='cards-grid', KEY='artemis_card_order_v1';
   function cards(){return Array.prototype.slice.call(document.querySelectorAll('#'+GRID_ID+' .dest-card'));}
-  function keyOf(c){ // stable id = href filename
-    var h=c.getAttribute('href')||''; return h.split('/').pop();
-  }
+  /* Canonical page key: "countdown" for "countdown.html", "/countdown" and
+     "https://site/countdown". Netlify rewrites hrefs to the extension-less
+     form on deploy, so anything keyed on the raw href breaks in production. */
+  function pageKey(h){ return String(h||'').split(/[?#]/)[0].replace(/^.*\//,'').replace(/\.html$/i,''); }
+  window.pageKey=pageKey;
+  function keyOf(c){ return pageKey(c.getAttribute('href')||''); }
   /* The order is SHARED: it comes from /api/admin-archive (the same store as
      the archive) and localStorage only mirrors it so the page paints in the
      right order before the network answers. */
   function applyOrder(saved){
     var grid=document.getElementById(GRID_ID); if(!grid) return;
     if(!saved || !saved.length){ showResetIfCustom(false); return; }
+    saved=saved.map(pageKey);
     var map={}; cards().forEach(function(c){ map[keyOf(c)]=c; });
     saved.forEach(function(k){ if(map[k]) grid.appendChild(map[k]); });
     // any cards not in the saved list (new pages added later) stay at the end in source order
@@ -1172,7 +1176,7 @@ function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
   function who(){ try{ return localStorage.getItem('artemis_viewer_name')||'someone'; }catch(e){ return 'someone'; } }
   function ago(iso){ var ms=Date.now()-new Date(iso).getTime(); if(isNaN(ms)) return ''; var d=Math.round(ms/86400000); if(d>=1) return d===1?'yesterday':d+' days ago'; var h=Math.round(ms/3600000); return h>=1?h+'h ago':'just now'; }
   function cards(){ return Array.prototype.slice.call(document.querySelectorAll('#cards-grid .dest-card')); }
-  function cardFor(href){ return document.querySelector('#cards-grid .dest-card[href="'+href+'"]'); }
+  function cardFor(href){ var k=window.pageKey(href); return cards().filter(function(c){return window.pageKey(c.getAttribute('href'))===k;})[0]||null; }
 
   function paint(){
     cards().forEach(function(c){ c.classList.remove('archived'); var m=c.querySelector('.arch-meta'); if(m) m.remove(); });
@@ -1200,16 +1204,16 @@ function _escSignout(e){ if(e.key==='Escape') _closeSignoutModal(); }
 
   /* Optimistic both ways: the card moves at once, the store is the truth afterwards. */
   function archive(card){
-    var href=card.getAttribute('href'), title=((card.querySelector('.dest-title')||{}).textContent||href).trim();
+    var href=window.pageKey(card.getAttribute('href')), title=((card.querySelector('.dest-title')||{}).textContent||href).trim();
     LIST.push({href:href,title:title,at:new Date().toISOString(),by:who()}); paint();
-    post(href,title).then(function(j){ LIST=(j&&j.archived)||LIST; paint(); if(j&&Array.isArray(j.order)) window.applySharedOrder(j.order); })
-      .catch(function(){ LIST=LIST.filter(function(a){return a.href!==href;}); paint(); toast('Could not archive: the store did not respond.'); });
+    post(href,title).then(function(j){ if(!j||!Array.isArray(j.archived)) throw new Error(j&&j.error||'bad response'); LIST=j.archived; paint(); if(Array.isArray(j.order)) window.applySharedOrder(j.order); })
+      .catch(function(){ LIST=LIST.filter(function(a){return window.pageKey(a.href)!==href;}); paint(); toast('Could not archive: the store did not respond.'); });
     toast('Archived '+title, function(){ restore(card); });
   }
   function restore(card){
-    var href=card.getAttribute('href');
-    LIST=LIST.filter(function(a){return a.href!==href;}); paint();
-    del(href).then(function(j){ LIST=(j&&j.archived)||LIST; paint(); if(j&&Array.isArray(j.order)) window.applySharedOrder(j.order); })
+    var href=window.pageKey(card.getAttribute('href'));
+    LIST=LIST.filter(function(a){return window.pageKey(a.href)!==href;}); paint();
+    del(href).then(function(j){ if(!j||!Array.isArray(j.archived)) throw new Error(j&&j.error||'bad response'); LIST=j.archived; paint(); if(Array.isArray(j.order)) window.applySharedOrder(j.order); })
       .catch(function(){ toast('Could not restore: the store did not respond.'); load(); });
   }
   cards().forEach(function(c){

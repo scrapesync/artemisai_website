@@ -40,9 +40,16 @@ const HEADERS = {
   "Content-Type": "application/json",
 };
 const reply = (status, body) => new Response(JSON.stringify(body), { status, headers: HEADERS });
-// Only same-site page links are storable, or the archive becomes a place to
-// park an attacker-supplied URL that the panel would render as a link.
-const cleanHref = (h) => { const s = String(h || "").trim(); return /^[a-zA-Z0-9._-]+\.html$/.test(s) ? s : null; };
+// Pages are keyed by their canonical name: "countdown" for both "countdown.html"
+// and "/countdown". Netlify's Pretty URLs post-processing rewrites the panel's
+// hrefs to the extension-less form at deploy time, so the browser and the repo
+// disagree about the same page - the first version of this function rejected
+// every live write for exactly that reason. Only a bare same-site name is
+// accepted, so the archive cannot become a place to park an arbitrary URL.
+const cleanHref = (h) => {
+  let s = String(h || "").trim().split(/[?#]/)[0].replace(/^\/+/, "").replace(/\.html$/i, "");
+  return /^[a-zA-Z0-9][a-zA-Z0-9._-]{0,80}$/.test(s) && !s.includes("..") ? s : null;
+};
 
 export default async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: HEADERS });
