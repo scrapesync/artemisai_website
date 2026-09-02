@@ -175,6 +175,35 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .removed .r{display:flex;gap:10px;align-items:center;padding:4px 0;color:var(--muted3)}
 .act{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px dashed var(--border2)}
 .act select{padding:5px 8px;border-radius:7px;border:1px solid var(--border2);background:var(--bg2);font-size:11.5px}
+/* ---- MVP features ---- */
+.ftiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:8px}
+.fcard{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--fc,var(--stone));border-radius:13px;margin-bottom:12px;overflow:hidden}
+.fhead{display:grid;grid-template-columns:1fr 168px 128px 34px;gap:16px;align-items:center;padding:15px 18px;cursor:pointer}
+@media(max-width:900px){.fhead{grid-template-columns:1fr 90px 30px}.fhead .fppl{display:none}}
+.fhead:hover{background:rgba(255,255,255,.02)}
+.fname{font-family:'Fraunces',Georgia,serif;font-size:17px;font-weight:600;color:var(--ink)}
+.fwhat{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.45;max-width:640px}
+.fring{display:flex;align-items:center;gap:10px}
+.fring svg{flex:0 0 auto}
+.fring .pc{font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:600;color:var(--fc)}
+.fring .sub{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted3);letter-spacing:.4px}
+.fbarwrap{display:flex;height:9px;border-radius:5px;overflow:hidden;background:rgba(255,255,255,.06)}
+.fbarwrap i{height:100%}
+.fppl{display:flex;gap:3px;flex-wrap:wrap;justify-content:flex-end}
+.fppl span{font-family:'IBM Plex Mono',monospace;font-size:9.5px;padding:2px 6px;border-radius:5px;border:1px solid var(--border2)}
+.fbody{border-top:1px solid var(--border);padding:15px 18px;background:var(--bg2)}
+.fmeta{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:14px}
+.fmeta h5{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted3);margin-bottom:4px}
+.fmeta p{font-size:12.5px;color:var(--text);line-height:1.5}
+.flist{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:6px}
+.frow{display:grid;grid-template-columns:78px 1fr 74px 86px;gap:9px;align-items:center;padding:6px 9px;border-radius:7px;border:1px solid var(--border2);font-size:12px;cursor:pointer}
+.frow:hover{border-color:var(--fc)}
+.frow .fid{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--fc)}
+.frow .ft{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.frow .fw{font-size:10.5px;color:var(--muted2);text-align:right}
+.frow .fs{font-family:'IBM Plex Mono',monospace;font-size:9.5px;text-align:right}
+.frow.done{opacity:.55}
+.fempty{color:var(--gold);font-size:12.5px;padding:8px 0}
 /* ---- inline editors ---- */
 .editbtn{padding:4px 11px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:inherit;font-size:11.5px;cursor:pointer}
 .editbtn:hover{border-color:var(--gold);color:var(--gold)}
@@ -290,6 +319,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 <div class="tabrow"><div class="tabs">
   <button class="tab-btn active" data-tab="overview">Overview</button>
   <button class="tab-btn" data-tab="tracker">Sprint Tracker</button>
+  <button class="tab-btn" data-tab="features">MVP Features</button>
   <button class="tab-btn" data-tab="map">Dependencies</button>
   <button class="tab-btn" data-tab="backlog">Backlog</button>
   <button class="tab-btn" data-tab="performance">Performance</button>
@@ -337,6 +367,18 @@ main{max-width:1500px;margin:0 auto;padding:22px}
         <div id="tr-body"></div>
       </div>
     </div>
+  </section>
+
+  <!-- ================= MVP FEATURES ================= -->
+  <section id="view-features" class="hidden">
+    <div class="eyebrow">What we are committing to</div>
+    <div class="h1">MVP Features</div>
+    <div class="sub">Every feature we have promised for 1 December, with the tickets that build it and how far along it is. Open one and read the tickets: if they would not add up to a working feature, the feature is not planned yet, whatever the percentage says.</div>
+    <div class="ftiles" id="f-tiles"></div>
+    <div class="sec">What the customer gets</div>
+    <div id="f-surfaces"></div>
+    <div class="sec">What it takes to open the doors</div>
+    <div id="f-foundation"></div>
   </section>
 
   <!-- ================= DEPENDENCY MAP ================= -->
@@ -534,7 +576,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   var TAB='overview';
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.addEventListener('click',function(){ showTab(b.getAttribute('data-tab')); }); });
   function showTab(t){ TAB=t; document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active',b.getAttribute('data-tab')===t); });
-    ['overview','tracker','map','backlog','performance'].forEach(function(v){ document.getElementById('view-'+v).classList.toggle('hidden',v!==t); });
+    ['overview','tracker','features','map','backlog','performance'].forEach(function(v){ document.getElementById('view-'+v).classList.toggle('hidden',v!==t); });
     try{ localStorage.setItem('artemis_launch_tab',t); }catch(e){} renderAll(); }
 
   /* ================= OVERVIEW ================= */
@@ -843,6 +885,82 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     var a=document.createElement('a'); a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(rows.join('\n')); a.download='artemis_'+SEL+'_'+TODAY+'.csv'; a.click();
   });
 
+  /* ================= MVP FEATURES =================
+     Percentage is ticket completion, nothing more. It answers "how much of the
+     planned work is done", never "is this feature good" - so the tickets are
+     listed underneath for the team to judge whether they would actually add up
+     to a working feature. */
+  var FEATURES=D.features||[], FOPEN={};
+  function fstats(f){
+    var ts=all().filter(function(t){ return f.tickets.indexOf(t.id)>=0 && counted(t); });
+    var by={done:0,inprog:0,blocked:0,todo:0};
+    ts.forEach(function(t){ var s=st(t.id).status||'todo'; by[s==='dropped'?'todo':s]++; });
+    var pct=ts.length?Math.round(by.done/ts.length*100):0;
+    var ppl={}; ts.forEach(function(t){ ppl[t.assignee]=(ppl[t.assignee]||0)+1; });
+    var late=ts.filter(isOver).length, last=ts.reduce(function(a,t){ return (!a||t.due>a)?t.due:a; },'');
+    return {ts:ts,by:by,pct:pct,ppl:ppl,late:late,last:last};
+  }
+  function ring(pct,col){
+    var r=17,c=2*Math.PI*r,off=c*(1-pct/100);
+    return '<svg width="42" height="42" viewBox="0 0 42 42"><circle cx="21" cy="21" r="'+r+'" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="4"/>'+
+      '<circle cx="21" cy="21" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="4" stroke-linecap="round" stroke-dasharray="'+c+'" stroke-dashoffset="'+off+'" transform="rotate(-90 21 21)"/></svg>';
+  }
+  function featureCard(f){
+    var s=fstats(f), col=LAYER_COL[f.layer]||'#9c8f80', open=FOPEN[f.id];
+    var seg=function(n,c){ return n?'<i style="width:'+(n/s.ts.length*100)+'%;background:'+c+'"></i>':''; };
+    return '<div class="fcard" style="--fc:'+col+'">'+
+      '<div class="fhead" data-f="'+f.id+'">'+
+        '<div><div class="fname">'+esc(f.name)+'</div><div class="fwhat">'+esc(f.what)+'</div></div>'+
+        '<div><div class="fbarwrap">'+seg(s.by.done,'var(--sage)')+seg(s.by.inprog,'var(--gold)')+seg(s.by.blocked,'var(--red)')+'</div>'+
+          '<div class="sub" style="margin-top:5px">'+s.by.done+' done &middot; '+s.by.inprog+' running'+(s.by.blocked?' &middot; '+s.by.blocked+' blocked':'')+(s.late?' &middot; <span style="color:var(--red)">'+s.late+' late</span>':'')+'</div></div>'+
+        '<div class="fring">'+ring(s.pct,col)+'<div><div class="pc">'+s.pct+'%</div><div class="sub">'+s.ts.length+' tickets</div></div></div>'+
+        '<div style="text-align:right;color:var(--muted3);font-size:15px">'+(open?'&#9650;':'&#9660;')+'</div>'+
+      '</div>'+
+      (open?featureBody(f,s,col):'')+'</div>';
+  }
+  function featureBody(f,s,col){
+    var rows=s.ts.slice().sort(function(a,b){ return ORDER.indexOf(a.sprint)-ORDER.indexOf(b.sprint)||a.due.localeCompare(b.due); })
+      .map(function(t){ var S=st(t.id).status||'todo';
+        return '<div class="frow'+(S==='done'?' done':'')+'" data-goto="'+t.id+'"><span class="fid">'+t.id+'</span>'+
+          '<span class="ft" title="'+esc(t.title)+'">'+esc(t.title)+'</span>'+
+          '<span class="fw">'+esc(t.assignee)+'</span>'+
+          '<span class="fs" style="color:'+(S==='done'?'var(--sage)':S==='blocked'?'var(--red)':S==='inprog'?'var(--gold)':'var(--muted3)')+'">'+esc(STATUS_LABEL[S])+'</span></div>'; }).join('');
+    var sprints={}; s.ts.forEach(function(t){ sprints[t.sprint]=(sprints[t.sprint]||0)+1; });
+    return '<div class="fbody"><div class="fmeta">'+
+      '<div><h5>Why it is in the MVP</h5><p>'+esc(f.why||'')+'</p></div>'+
+      '<div><h5>How we know it works</h5><p>'+esc(f.gate||'')+'</p></div>'+
+      '<div><h5>Where the work sits</h5><p>'+Object.keys(sprints).sort(function(a,b){return ORDER.indexOf(a)-ORDER.indexOf(b);}).map(function(k){return k+' ('+sprints[k]+')';}).join(' &middot; ')+
+        (s.last?'<br><span style="color:var(--muted2)">last ticket due '+fmtS(s.last)+'</span>':'')+'</p></div>'+
+      (f.faheem?'<div><h5>Model / data</h5><p>'+esc(f.faheem)+'</p></div>':'')+
+      (f.muteeb?'<div><h5>Serving</h5><p>'+esc(f.muteeb)+'</p></div>':'')+
+      (f.asad?'<div><h5>In the app</h5><p>'+esc(f.asad)+'</p></div>':'')+
+      '</div>'+
+      (s.ts.length<3?'<div class="fempty">Only '+s.ts.length+' ticket'+(s.ts.length===1?'':'s')+' build this. Worth asking whether that is really enough.</div>':'')+
+      '<h5 style="font-family:\'IBM Plex Mono\',monospace;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted3);margin-bottom:7px">The tickets that build it</h5>'+
+      '<div class="flist">'+rows+'</div></div>';
+  }
+  function renderFeatures(){
+    var T=all().filter(function(t){ return counted(t)&&sp(t)!=='BL'; });
+    var done=T.filter(function(t){return st(t.id).status==='done';}).length;
+    var surf=FEATURES.filter(function(f){return f.kind==='surface';}), fnd=FEATURES.filter(function(f){return f.kind!=='surface';});
+    var atRisk=surf.filter(function(f){ var s=fstats(f); return s.late>0||s.by.blocked>0; }).length;
+    document.getElementById('f-tiles').innerHTML=[
+      tile('Features promised', surf.length, 'surfaces a customer touches'),
+      tile('Overall build', (T.length?Math.round(done/T.length*100):0)+'%', done+' of '+T.length+' tickets done'),
+      tile('Feature with least cover', (function(){ var m=surf.slice().sort(function(a,b){return a.tickets.length-b.tickets.length;})[0]; return m?m.tickets.length:0; })(), (function(){ var m=surf.slice().sort(function(a,b){return a.tickets.length-b.tickets.length;})[0]; return m?esc(m.name):''; })()),
+      tile('Features with a problem', atRisk, atRisk?'something late or blocked':'nothing late or blocked', atRisk?'red':'')
+    ].join('');
+    document.getElementById('f-surfaces').innerHTML=surf.map(featureCard).join('');
+    document.getElementById('f-foundation').innerHTML=fnd.map(featureCard).join('');
+    document.querySelectorAll('.fhead').forEach(function(h){ h.addEventListener('click',function(){ var id=h.getAttribute('data-f'); FOPEN[id]=!FOPEN[id]; renderFeatures(); }); });
+    document.querySelectorAll('.frow[data-goto]').forEach(function(r){ r.addEventListener('click',function(e){
+      e.stopPropagation(); var id=r.getAttribute('data-goto'), t=BYIDT(id);
+      SEL=sp(t); OPEN={}; OPEN[id]=true; F={who:'',status:'',pr:'',q:'',layer:''};
+      try{ localStorage.setItem('artemis_launch_sprint',SEL); }catch(_){}
+      showTab('tracker'); setTimeout(function(){ var el=document.querySelector('.row[data-id="'+id+'"]'); if(el) el.scrollIntoView({block:'center'}); },60);
+    }); });
+  }
+
   /* ================= DEPENDENCY MAP =================
      Two readings of the same graph: by ticket (what waits on what, exactly) and
      by sprint (where the pressure sits between sprints). Free-text dependencies
@@ -1082,7 +1200,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   function pst(k,v,c){ return '<div class="pstat"><div class="k">'+k+'</div><div class="v '+(c||'')+'">'+v+'</div></div>'; }
 
   /* ---- boot ---- */
-  function renderAll(){ if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='map') renderMap(); else if(TAB==='backlog') renderBacklog(); else renderPerf(); }
+  function renderAll(){ if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='features') renderFeatures(); else if(TAB==='map') renderMap(); else if(TAB==='backlog') renderBacklog(); else renderPerf(); }
   document.getElementById('btn-refresh').addEventListener('click',load);
   try{ var lt=localStorage.getItem('artemis_launch_tab'); if(lt) showTab(lt); }catch(e){}
   load();
