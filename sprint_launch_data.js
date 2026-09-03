@@ -1,4 +1,4 @@
-// sprint_launch_data.js - regenerated 3 Sep 2026: Phase 0 (S1-S10 record), Art-E + Discovery plans, build-book fixes, web push, app backlog.
+// sprint_launch_data.js - regenerated 3 Sep 2026: Phase 0 (S1-S9 record, founder-corrected), Art-E + Discovery plans, build-book fixes, web push, app backlog.
 window.LAUNCH_DATA = {
  "generated_at": "2026-09-03",
  "layers": [
@@ -1064,7 +1064,9 @@ window.LAUNCH_DATA = {
     "P0-FH-05",
     "P0-FH-03",
     "P0-FH-01",
-    "P0-FH-21"
+    "P0-FH-21",
+    "P0-AS-32",
+    "P0-AS-33"
    ],
    "kind": "surface"
   },
@@ -1159,7 +1161,10 @@ window.LAUNCH_DATA = {
     "N3-MT-04",
     "N4-FH-08",
     "P0-MT-07",
-    "P0-FH-04"
+    "P0-FH-04",
+    "P0-FH-26",
+    "P0-MT-10",
+    "P0-AS-34"
    ],
    "kind": "surface"
   },
@@ -1297,8 +1302,7 @@ window.LAUNCH_DATA = {
     "N6-LW-02",
     "N3-FH-13",
     "N4-SD-16",
-    "N5-SD-13",
-    "P0-MT-09"
+    "N5-SD-13"
    ],
    "kind": "surface"
   },
@@ -1377,7 +1381,8 @@ window.LAUNCH_DATA = {
     "N5-AS-10",
     "N5-AS-13",
     "P0-FH-04",
-    "P0-AS-18"
+    "P0-AS-18",
+    "P0-AS-30"
    ],
    "kind": "surface"
   },
@@ -1702,7 +1707,9 @@ window.LAUNCH_DATA = {
     "P0-MT-02",
     "P0-MT-03",
     "P0-MT-05",
-    "P0-AS-13"
+    "P0-AS-13",
+    "P0-FH-27",
+    "P0-AS-35"
    ],
    "kind": "foundation"
   },
@@ -1887,7 +1894,9 @@ window.LAUNCH_DATA = {
     "P0-AX-03",
     "P0-JL-02",
     "P0-SD-02",
-    "P0-SD-03"
+    "P0-SD-03",
+    "P0-AX-04",
+    "P0-FZ-04"
    ]
   },
   {
@@ -1939,7 +1948,14 @@ window.LAUNCH_DATA = {
     "P0-AS-26",
     "P0-AS-27",
     "P0-AS-28",
-    "P0-AS-29"
+    "P0-AS-29",
+    "P0-AS-30",
+    "P0-AS-31",
+    "P0-AS-32",
+    "P0-AS-33",
+    "P0-AS-34",
+    "P0-AS-35",
+    "P0-SD-04"
    ]
   },
   {
@@ -1989,12 +2005,14 @@ window.LAUNCH_DATA = {
     "P0-MT-07",
     "P0-FH-20",
     "P0-MT-08",
-    "P0-MT-09",
     "P0-FH-21",
     "P0-FH-22",
     "P0-FH-23",
     "P0-FH-24",
-    "P0-FH-25"
+    "P0-FH-25",
+    "P0-FH-26",
+    "P0-MT-10",
+    "P0-FH-27"
    ]
   }
  ],
@@ -2918,7 +2936,7 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Faheem",
    "title": "Publish the FastAPI document and freeze the serving envelope",
-   "what": "Generate the model-serving OpenAPI document from the Pydantic models on the feat/discovery_api branch and check it in as a build artifact, then freeze the response envelope every model endpoint returns: model_version, trained_at, coverage or eligibility flag, an explicit abstain with a reason, confidence, and the cost fields (compute ms, rows or bytes scanned, tokens where an LLM is involved). Confirm on the 4 Sep co-sign that the branch really is FastAPI, on which Python version, and how far behind main it has drifted.",
+   "what": "Generate the model-serving OpenAPI document from the Pydantic models on the feat/discovery_api branch and check it in as a build artifact, then freeze the response envelope every model endpoint returns: model_version, trained_at, coverage or eligibility flag, an explicit abstain with a reason, confidence, and the cost fields (compute ms, rows or bytes scanned, tokens where an LLM is involved). Confirm on the 4 Sep co-sign that the branch really is FastAPI, on which Python version, and how far behind main it has drifted. (The branch is envelope/serving groundwork only - no Discovery matching logic exists yet.)",
    "why": "The mock layer, the contract tests and both front-end developers generate from this document; and a model endpoint that cannot say 'I abstain' forces the UI to invent a confident number, which is the one thing the product promises never to do.",
    "area": "Drafts",
    "due": "2026-09-09",
@@ -4966,7 +4984,7 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Filza",
    "title": "Codify the k=5 floor before the Discovery API",
-   "what": "Write the floor spec Muteeb builds to in N3: k=5 minimum cohort size on every aggregate; the list of dropped and banded fields on cards and profiles; fail-closed behaviour (below floor renders nothing) with a logged event; and the differencing rule (per-query seeded noise, no exact overlap counts that can be subtracted across queries or across weekly recomputes). Sign it with Asad as CTO and hand it to Muteeb as the acceptance spec for hardening the feat/discovery_api branch.",
+   "what": "Write the floor spec Muteeb builds to in N3: k=5 minimum cohort size on every aggregate; the list of dropped and banded fields on cards and profiles; fail-closed behaviour (below floor renders nothing) with a logged event; and the differencing rule (per-query seeded noise, no exact overlap counts that can be subtracted across queries or across weekly recomputes). Sign it with Asad as CTO and hand it to Muteeb as the acceptance spec for the Discovery API build (greenfield in N3).",
    "why": "The floor is the product risk; codified before the API so the endpoint is tested against it rather than retrofitted.",
    "area": "Discovery",
    "due": "2026-09-11",
@@ -5375,7 +5393,8 @@ window.LAUNCH_DATA = {
     "N1-AS-05",
     "Muteeb: production-grade score endpoint with drivers + confidence",
     "Faheem: driver attribution",
-    "Saad: Drafts pack + one-pager"
+    "Saad: Drafts pack + one-pager",
+    "P0-AS-32"
    ],
    "feeds": [
     "N2-AS-08",
@@ -6151,14 +6170,15 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Faheem",
    "title": "Best-times v1 aggregates",
-   "what": "Hour x day engagement aggregates per page, count floor >=10 with a persisted fallback level, strictly-before windows, explicit page timezone, TimeSeriesSplit backtest, and the lookback window written down for Asad's UI note.",
+   "what": "Hour x day engagement aggregates per page, count floor >=10 with a persisted fallback level, strictly-before windows, explicit page timezone, TimeSeriesSplit backtest, and the lookback window written down for Asad's UI note. (S9 shipped this in the old app; this ticket rebuilds and re-validates it in the launch stack.)",
    "why": "Powers the heatmap and the next-move hero's time claims; Muteeb's N3 endpoint reads the table.",
    "area": "Best Times",
    "due": "2026-09-25",
    "priority": "P0",
    "priority_reason": "blocks Muteeb's N3 best-times endpoint on day 1 (28 Sep)",
    "depends_on": [
-    "N1-FH-03"
+    "N1-FH-03",
+    "P0-FH-26"
    ],
    "feeds": [
     "Muteeb: best-times endpoint N3",
@@ -6271,8 +6291,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "blocks Muteeb's N3 day-1 graph work",
    "depends_on": [
     "Filza: de-identification policy + k=5 floor signed",
-    "P0-MT-07",
-    "P0-MT-09"
+    "P0-MT-07"
    ],
    "feeds": [
     "Muteeb: Discovery graph N3"
@@ -8503,7 +8522,7 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Asad",
    "title": "Best Times heatmap with sparse-data honesty and methodology note",
-   "what": "7x24 grid on Muteeb's best-times endpoint, #1-window ring, cells under the count floor suppressed with a 'not enough posts yet' state, page timezone by IANA id so the 25 Oct clock change needs no UI change, and a UI note stating the lookback window and the self-selection caveat.",
+   "what": "7x24 grid on Muteeb's best-times endpoint, #1-window ring, cells under the count floor suppressed with a 'not enough posts yet' state, page timezone by IANA id so the 25 Oct clock change needs no UI change, and a UI note stating the lookback window and the self-selection caveat. (S9 shipped this in the old app; this ticket rebuilds and re-validates it in the launch stack.)",
    "why": "The TIME-IT surface and the source of the hero's '6:40pm' claims; the honesty state matters more than the grid.",
    "area": "Best Times",
    "due": "2026-10-08",
@@ -8512,7 +8531,8 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "Muteeb: best-times endpoint",
     "Faheem: aggregates + count floor",
-    "Saad: Best Times pack + one-pager"
+    "Saad: Best Times pack + one-pager",
+    "P0-AS-34"
    ],
    "feeds": [
     "Saad (acceptance)",
@@ -9134,8 +9154,8 @@ window.LAUNCH_DATA = {
    "id": "N3-MT-02",
    "sprint": "N3",
    "assignee": "Muteeb",
-   "title": "Discovery endpoints from feat/discovery_api: auth, tenant, warehouse, limits",
-   "what": "Absorb the unmerged feat/discovery_api FastAPI branch: add real auth and tenant scoping, replace the CSV source with the warehouse graph, add rate limits, and write differencing tests including week-over-week recompute drift.",
+   "title": "Discovery endpoints greenfield: auth, tenant, warehouse, limits",
+   "what": "Build the Discovery read endpoints from scratch (founder 3 Sep: no prior Discovery work exists to absorb; the unmerged feat/discovery_api branch is serving-envelope groundwork only, not matching logic).",
    "why": "Half-built already; its hard-coded single tenant and no auth do not meet the bar and duplicating it wastes the sprint.",
    "area": "Discovery",
    "due": "2026-10-06",
@@ -9206,7 +9226,8 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "Faheem: best-times v1 aggregates",
     "P0-MT-07",
-    "P0-FH-04"
+    "P0-FH-04",
+    "P0-MT-10"
    ],
    "feeds": [
     "Asad: Best Times N3",
@@ -19497,7 +19518,7 @@ window.LAUNCH_DATA = {
    "sprint": "P0",
    "assignee": "Faheem",
    "title": "S7 video intelligence live, zero-shot",
-   "what": "Scene type (CLIP), on-screen text (S6 OCR on keyframes), Whisper transcripts and a transparent opening-3-seconds hook score across the 46-video set; de-identified co-engagement edges built alongside as Discovery matching groundwork.",
+   "what": "Scene type (CLIP), on-screen text (S6 OCR on keyframes), Whisper transcripts and a transparent opening-3-seconds hook score across the 46-video set; silent, music-only and very short clips handled as explicit cases, not silent failures.",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Models",
    "due": "2026-08-06",
@@ -19559,7 +19580,7 @@ window.LAUNCH_DATA = {
    "sprint": "P0",
    "assignee": "Faheem",
    "title": "Flop-detection model v0 passed its gate",
-   "what": "AUC 0.76 with 75% precision at 55% coverage, cold-start 0.746; ships the Borda gate plus regressor (LambdaRank lost the A/B). The 598-line train.py and reason_map.json sit on feat/vd015b-target-fusion, with the rescue to main queued in N1. VERIFY: the 5 Aug playbook only planned the gate re-score; no document records a pass and no S8 demo record exists.",
+   "what": "AUC 0.76 with 75% precision at 55% coverage, cold-start 0.746; ships the Borda gate plus regressor (LambdaRank lost the A/B). Gate passed and v1 frozen per the S8 definition of done; the 598-line train.py and reason_map.json rescue from feat/vd015b-target-fusion to main stays queued in N1.",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Models",
    "due": "2026-08-08",
@@ -19666,8 +19687,8 @@ window.LAUNCH_DATA = {
    "id": "P0-FH-20",
    "sprint": "P0",
    "assignee": "Faheem",
-   "title": "Model-serving FastAPI app drafted on a branch",
-   "what": "FastAPI serving app with Pydantic models on feat/discovery_api: scoring endpoints and the response-envelope shape (model_version, confidence, explicit abstain) that N1 freezes into the OpenAPI contract. VERIFY OWNER: the 21 Aug status pack assigns the serving API to Muteeb; this row credits Faheem from the git branch.",
+   "title": "Model-serving FastAPI app shipped for draft scoring",
+   "what": "FastAPI serving app with Pydantic models: scoring endpoints and the response-envelope shape (model_version, confidence, explicit abstain) that N1 freezes into the OpenAPI contract. Backs the S8 draft-scoring and warnings surfaces; merge to main queued in N1.",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Models",
    "due": "2026-08-31",
@@ -19888,28 +19909,6 @@ window.LAUNCH_DATA = {
    "priority_reason": "historical record",
    "depends_on": [],
    "feeds": [],
-   "gate": "none",
-   "source": "marvel repo audit 3 Sep",
-   "acceptance": "Shipped and in use.",
-   "checklist": [],
-   "status": "done",
-   "layer": "intelligence"
-  },
-  {
-   "id": "P0-MT-09",
-   "sprint": "P0",
-   "assignee": "Muteeb",
-   "title": "Page affinity feature builder",
-   "what": "Page-to-page affinity features computed from comment behaviour, feeding the Discovery matching work (VD-AI-013A).",
-   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
-   "area": "Data",
-   "due": "2026-07-03",
-   "priority": "P1",
-   "priority_reason": "historical record",
-   "depends_on": [],
-   "feeds": [
-    "N2-FH-18"
-   ],
    "gate": "none",
    "source": "marvel repo audit 3 Sep",
    "acceptance": "Shipped and in use.",
@@ -20178,6 +20177,254 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "status": "done",
    "layer": "intelligence"
+  },
+  {
+   "id": "P0-AS-30",
+   "sprint": "P0",
+   "assignee": "Asad",
+   "title": "S7 analytics video sub-tab and raw-signals table",
+   "what": "Analytics gains overview and video sub-tabs, the four per-video signals in the post view, and one sortable, exportable table with every post and every signal. Table numbers reconcile with the charts above them.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Site",
+   "due": "2026-08-06",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "product"
+  },
+  {
+   "id": "P0-AS-31",
+   "sprint": "P0",
+   "assignee": "Asad",
+   "title": "Predictions surface skeleton with the first post score",
+   "what": "The first model score shown on posts plus the predictions surface skeleton. Winner framing retired on the S7 evidence; the surface carries honest bands only, feeding the S8 warnings build.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Site",
+   "due": "2026-08-06",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "product"
+  },
+  {
+   "id": "P0-AS-32",
+   "sprint": "P0",
+   "assignee": "Asad",
+   "title": "Compose risk dial live: band, three reasons, one fix",
+   "what": "Write or paste a draft, attach the image, get at-risk / average / strong for this page with three reasons and one suggested fix; re-scores on edit in ~2s; thin drafts say 'not enough to score yet'; every render logged from day one.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Site",
+   "due": "2026-08-08",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [
+    "N2-AS-06"
+   ],
+   "gate": "none",
+   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "product"
+  },
+  {
+   "id": "P0-AS-33",
+   "sprint": "P0",
+   "assignee": "Asad",
+   "title": "Weak-post warnings surface with prediction receipts",
+   "what": "Outlook for upcoming posts, warnings shown only where the validated 75% precision floor holds, honest empty and low-confidence states, and the predicted-vs-actual scoreboard filling as outcomes arrive. Zero winner language anywhere.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Site",
+   "due": "2026-08-08",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "product"
+  },
+  {
+   "id": "P0-FH-26",
+   "sprint": "P0",
+   "assignee": "Faheem",
+   "title": "Best Times model with Prophet weekly seasonality",
+   "what": "Per-page day-by-hour slots normalised per slot so one runaway post cannot fake a hot cell; Prophet weekly seasonality per page; recommended slots with calibrated confidence and sample count; a rhythm-change drift signal (VD-AI-009A).",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Models",
+   "due": "2026-08-22",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [
+    "N2-FH-14"
+   ],
+   "gate": "none",
+   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "intelligence"
+  },
+  {
+   "id": "P0-MT-10",
+   "sprint": "P0",
+   "assignee": "Muteeb",
+   "title": "Best Times pipeline and tenant-scoped serving API",
+   "what": "Leakage-safe per-slot feature assembly, the serving API cached per page/week with tenant isolation verified, Prophet run on the bulk E2 schedule inside budget, and drift signals through the one metrics API (VD-MLP-009A).",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Pipelines",
+   "due": "2026-08-22",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [
+    "N3-MT-04"
+   ],
+   "gate": "none",
+   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "intelligence"
+  },
+  {
+   "id": "P0-AS-34",
+   "sprint": "P0",
+   "assignee": "Asad",
+   "title": "Best Times calendar heatmap live in the planner",
+   "what": "The 24h x 7d heatmap plus the plain-English slot recommendation with its confidence and sample count; cells under 5 posts stay silent; honest 'not enough history yet' state; matches the mockup on desktop and mobile (VD-211).",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Site",
+   "due": "2026-08-22",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [
+    "N3-AS-09"
+   ],
+   "gate": "none",
+   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "product"
+  },
+  {
+   "id": "P0-FH-27",
+   "sprint": "P0",
+   "assignee": "Faheem",
+   "title": "Model drift watchdog on every production model",
+   "what": "Live confidence and label-mix tracking against frozen training baselines for the 5 NLP heads, fusion and best-times; alerts only on drift AND a quality drop together; seeded drift caught, the 15-Jun era break structurally excluded; trip action documented (VD-AI-009B).",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "QA",
+   "due": "2026-08-22",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "intelligence"
+  },
+  {
+   "id": "P0-AS-35",
+   "sprint": "P0",
+   "assignee": "Asad",
+   "title": "Model-health dashboard: healthy / watch / slipping",
+   "what": "Watchdog state per model behind the team login, with the best-times quality and Prophet drift signals alongside the NLP models; slipping is the loudest thing on the page, readable in under two seconds (VD-DASH-009).",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Dashboards",
+   "due": "2026-08-22",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "product"
+  },
+  {
+   "id": "P0-SD-04",
+   "sprint": "P0",
+   "assignee": "Saad",
+   "title": "Design audit and landing-page Figma redesign",
+   "what": "Full audit of the landing page and app mockups, visual directions reviewed and one picked, then high-fidelity Figma for the new landing page on desktop and mobile with a token, asset and interaction handoff pack for Asad (VD-DES-009).",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Design",
+   "due": "2026-08-22",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "product"
+  },
+  {
+   "id": "P0-AX-04",
+   "sprint": "P0",
+   "assignee": "Alex",
+   "title": "Pilot KPI definitions and the daily-habit checklist",
+   "what": "The KPI doc (D7/D30 active, alert-engage rate, posts-acted-on per week, each with numerator, denominator and exclusions) plus the 'why open this tomorrow?' checklist applied before ship; confirms Best Times as the repeatable habit hook (VD-STRAT-009MVP).",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Ops",
+   "due": "2026-08-22",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "foundation"
+  },
+  {
+   "id": "P0-FZ-04",
+   "sprint": "P0",
+   "assignee": "Filza",
+   "title": "Automated-advice legal position filed",
+   "what": "Posting-time recommendations framed as guidance not guarantee, consistent with the S8 disclaimer pattern; confirmed best-times and drift processing add no new personal-data handling beyond the DPA (VD-LEGAL-009).",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Ops",
+   "due": "2026-08-22",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "foundation"
   }
  ]
 };
