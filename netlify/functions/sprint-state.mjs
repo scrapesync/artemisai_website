@@ -40,7 +40,7 @@ import { getStore } from "@netlify/blobs";
 
 const STORE = "sprint-state-v2";
 const STATUSES = ["todo", "inprog", "blocked", "done", "dropped"];
-const SPRINTS = ["N1", "N2", "N3", "N4", "N5", "N6", "LW", "BL"];
+const SPRINTS = ["P0", "N1", "N2", "N3", "N4", "N5", "N6", "LW", "BL"];
 const LAYERS = ["foundation", "intelligence", "product", "llm", "launch"];
 const KEEP_HISTORY = 30;
 // Anything a person can retype on the board. Stored as an override per ticket

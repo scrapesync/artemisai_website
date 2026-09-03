@@ -607,7 +607,8 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   function sp(t){ return (STATE[t.id]&&STATE[t.id].sprint)||t.sprint; }
   function ly(t){ var s=sprintOf(sp(t)); return (STATE[t.id]&&STATE[t.id].layer)||t.layer||(s&&s.layer)||'product'; }
   function inSprints(t){ return counted(t) && sp(t)!=='BL'; }
-  function st(id){ return STATE[id]||{status:'todo',checks:{},note:'',history:[]}; }
+  var DEF_STATUS={}; (D.tickets||[]).forEach(function(t){ if(t.status) DEF_STATUS[t.id]=t.status; });
+  function st(id){ return STATE[id]||{status:DEF_STATUS[id]||'todo',checks:{},note:'',history:[]}; }
   function isOpen(t){ var s=st(t.id).status; return s!=='done'&&s!=='dropped'; }
   function isOver(t){ return isOpen(t) && t.due && t.due<TODAY; }
   function counted(t){ return st(t.id).status!=='dropped'; }
@@ -1245,14 +1246,22 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   function renderBacklog(){
     var T=all().filter(function(t){return sp(t)==='BL';});
     var el=document.getElementById('bl-body');
-    el.innerHTML=LAYERS.map(function(L){
+    var live0=T.filter(counted), waves={};
+    live0.forEach(function(t){ var w=(t.area||'').split('\u00b7')[0].trim()||'Other'; waves[w]=(waves[w]||0)+1; });
+    var promoted=live0.filter(function(t){return t.promoted;}).length;
+    var summary='<div class="card" style="margin-bottom:14px;padding:12px 16px;display:flex;gap:18px;flex-wrap:wrap;align-items:center">'+
+      '<b style="font-size:14px">'+live0.length+' parked tickets</b>'+
+      Object.keys(waves).sort().map(function(w){ return '<span style="font-size:12px;color:var(--muted)">'+esc(w)+' \u00b7 <b style="color:var(--ink)">'+waves[w]+'</b></span>'; }).join('')+
+      (promoted?'<span style="font-size:12px;color:var(--green,#3F7A5C)">'+promoted+' promoted into sprints</span>':'')+
+      '<span style="font-size:11.5px;color:var(--muted);flex-basis:100%">Every item here is a decision on record: it has an owner and an acceptance line, and gets re-decided at Roadmap V2 (w/c 7 Dec). The January mobile app workstream lives in its own group below.</span></div>';
+    el.innerHTML=summary+LAYERS.map(function(L){
       var ts=T.filter(function(t){return ly(t)===L.id;});
       var live=ts.filter(counted).sort(function(a,b){return a.priority.localeCompare(b.priority)||a.title.localeCompare(b.title);});
       var gone=ts.filter(function(t){return !counted(t);});
       if(!ts.length && L.id==='foundation') return '';
       return '<div class="lay" style="--lc:'+L.color+'"><div class="lh"><span class="ph">'+esc(L.phase)+'</span><h3>'+esc(L.name)+'</h3><span class="n">'+live.length+' ticket'+(live.length===1?'':'s')+'</span><button class="hbtn primary add" data-addlayer="'+L.id+'">+ Add to '+esc(L.name.split(' ')[0])+'</button></div>'+
         (live.length?live.map(function(t){
-          return '<div class="brow2"><span class="mono" style="font-size:11px;color:var(--accent)">'+t.id+'</span><span class="pr '+t.priority+'">'+t.priority+'</span>'+
+          return '<div class="brow2"><span class="mono" style="font-size:11px;color:var(--accent)">'+t.id+'</span><span class="pr '+t.priority+'">'+t.priority+'</span>'+(t.promoted?'<span class="wave" style="color:#3F7A5C;border-color:#3F7A5C" title="'+esc(t.promoted)+'">promoted</span>':'')+
             '<span class="ti">'+esc(t.title)+'<small>'+esc(t.what).slice(0,140)+(t.what&&t.what.length>140?'…':'')+'</small></span>'+
             '<span class="wave" title="'+esc(t.area)+'">'+esc(t.area)+'</span><span class="who">'+(t.assignee?esc(t.assignee):'unassigned')+'</span>'+
             moveSel(t)+'<button class="xbtn" data-drop="'+t.id+'">Remove</button></div>';
