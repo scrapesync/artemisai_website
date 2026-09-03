@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ArtemisAI · Launch Tracker</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%2300d4aa' stroke-width='2.5' fill='none'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect x='2' y='2' width='32' height='32' rx='8' fill='%230c1221'/><path d='M18 8L26 28H10L18 8Z' stroke='%23d9a441' stroke-width='2.5' fill='none'/></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -395,12 +395,83 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .toast{position:fixed;bottom:18px;right:18px;background:var(--card);border:1px solid var(--accent);color:var(--text);padding:10px 14px;border-radius:9px;font-size:12.5px;z-index:60;box-shadow:0 8px 30px rgba(0,0,0,.5);opacity:0;transform:translateY(8px);transition:all .2s}
 .toast.show{opacity:1;transform:none}
 .toast.err{border-color:var(--red)}
+
+/* ================= v2 polish ================= */
+::selection{background:rgba(217,164,65,.28)}
+*{scrollbar-width:thin;scrollbar-color:var(--raise) transparent}
+::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-thumb{background:var(--raise);border-radius:5px}
+.hcount{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:5px 12px;background:var(--card)}
+.hcount b{color:var(--gold);font-weight:600}
+.tab-btn{border-radius:999px;background:transparent;position:relative}
+.tab-btn.active{box-shadow:0 6px 22px rgba(208,113,79,.30)}
+.hero{display:grid;grid-template-columns:auto auto 1fr auto;gap:26px;align-items:center;background:linear-gradient(135deg,var(--card) 0%,var(--bg2) 100%);border:1px solid var(--border);border-radius:18px;padding:22px 26px;margin-bottom:8px}
+.hring{position:relative;width:112px;height:112px}
+.hring svg{width:112px;height:112px;transform:rotate(-90deg)}
+.hring .bgc{fill:none;stroke:rgba(232,214,190,.09);stroke-width:9}
+.hring .fgc{fill:none;stroke:url(#null),var(--gold);stroke:var(--gold);stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset .8s ease}
+.hrv{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Fraunces',Georgia,serif;font-size:24px;font-weight:700;color:var(--ink)}
+.hrv small{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);font-family:'Inter',sans-serif;font-weight:600}
+.hmain .hk,.hcur .hk{font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted2);font-weight:600;display:flex;align-items:center;gap:8px}
+.hmain .hd{font-family:'Fraunces',Georgia,serif;font-size:52px;font-weight:700;line-height:1.05;color:var(--ink)}
+.hmain .hs{font-size:12px;color:var(--muted)}
+.hmain .hs.dim{color:var(--muted3);font-size:11px;margin-top:2px}
+.hcur{border-left:1px solid var(--border);padding:2px 0 2px 26px;cursor:pointer;min-width:0}
+.hcur:hover .hcn{color:var(--clay)}
+.hcur .hcn{font-family:'Fraunces',Georgia,serif;font-size:21px;font-weight:700;margin:2px 0;transition:color .15s}
+.hcur .hcs{font-size:11.5px;color:var(--muted)}
+.hcur .hcp{font-size:11px;color:var(--muted2);margin-top:4px}
+.pchip{font-size:9.5px;letter-spacing:.8px;text-transform:uppercase;padding:2.5px 9px;border-radius:20px;font-weight:700}
+.pchip.ahead{background:rgba(127,158,106,.16);color:var(--sage)}
+.pchip.on{background:rgba(217,164,65,.14);color:var(--gold)}
+.pchip.behind{background:rgba(201,86,74,.16);color:var(--red)}
+.pchip.na{background:rgba(232,214,190,.07);color:var(--muted2)}
+.hstats{display:grid;grid-template-columns:1fr 1fr;gap:8px;min-width:210px}
+.hst{background:var(--card2);border:1px solid var(--border2);border-radius:11px;padding:8px 12px;display:flex;flex-direction:column}
+.hst b{font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:700;color:var(--ink);line-height:1.1}
+.hst span{font-size:10px;color:var(--muted2);letter-spacing:.4px}
+.hst.red b{color:var(--red)}.hst.amber b{color:var(--gold)}.hst.quiet b{color:var(--muted2)}
+.hbk{grid-column:1/-1;font-size:11px;color:var(--muted);cursor:pointer;padding:5px 2px 0;transition:color .15s}
+.hbk:hover{color:var(--clay)}
+.phead{display:flex;align-items:center;gap:12px;margin:20px 0 10px;font-family:'Fraunces',Georgia,serif;font-size:13.5px;font-weight:600;color:var(--muted)}
+.phead i{flex:1;height:1px;background:var(--border2)}
+.phead b{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted2);font-weight:500}
+.sgrid{margin-bottom:4px}
+.scard{border-radius:15px;transition:border-color .2s,transform .15s,box-shadow .2s}
+.scard:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.28);border-color:var(--muted3)}
+.scard.active{border-color:rgba(208,113,79,.55);box-shadow:0 0 0 1px rgba(208,113,79,.35),0 10px 30px rgba(208,113,79,.10)}
+.scard.past{opacity:.78}
+.scard.past .id::after{content:" \2713";color:var(--sage)}
+.bar{height:7px;border-radius:4px}
+.bar i{background:linear-gradient(90deg,var(--clay),var(--gold));border-radius:4px}
+.bar b{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--ink);opacity:.55;border-radius:1px}
+.bar.big{height:9px;margin:9px 0 3px}
+.tile{border-radius:14px;position:relative;overflow:hidden}
+.tile::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--clay),transparent 70%);opacity:.5}
+.panel{border-radius:15px}
+.panel h3{display:flex;align-items:baseline;gap:8px}
+.mini{border-radius:8px;padding:7px 8px;margin:0 -8px;transition:background .12s}
+.mini:hover{background:var(--card2)}
+.empty{color:var(--muted3);font-style:italic;padding:10px 2px}
+@media (max-width:980px){
+  .hero{grid-template-columns:auto 1fr;gap:18px}
+  .hcur{grid-column:1/-1;border-left:none;border-top:1px solid var(--border);padding:14px 0 0}
+  .hstats{grid-column:1/-1;grid-template-columns:repeat(4,1fr)}
+  .hbk{grid-column:1/-1}
+}
+@media (max-width:560px){
+  .hero{padding:16px}
+  .hmain .hd{font-size:38px}
+  .hring,.hring svg{width:88px;height:88px}
+  .hstats{grid-template-columns:1fr 1fr}
+  .hcount{display:none}
+}
 </style>
 </head><body>
 
 <header><div class="hwrap">
-  <a class="brand" href="admin_panel.html"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="#00d4aa" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="#00d4aa" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="#00d4aa"/></svg>ARTEMISAI</a>
+  <a class="brand" href="admin_panel.html"><svg viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="8" stroke="#d9a441" stroke-width="2"/><path d="M18 8L26 28H10L18 8Z" stroke="#d9a441" stroke-width="1.5" fill="none"/><circle cx="18" cy="20" r="3" fill="#d9a441"/></svg>ARTEMISAI</a>
   <div class="sp"></div>
+  <span class="hcount" id="hdr-count"></span>
   <button class="hbtn" id="btn-csv" title="Export the current sprint as CSV">&#8681; CSV</button>
   <button class="hbtn primary" id="btn-refresh">&#8635; Refresh</button>
   <span class="chip" id="viewer"><span class="av">?</span><span id="viewer-name">…</span></span>
@@ -423,9 +494,9 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     <div class="eyebrow">Launch Tracker · N1 &rarr; 1 December</div>
     <div class="h1">Overview</div>
     <div class="sub">Six sprints and a launch week, one shared board. Everything below is computed from the tickets and the live state, nothing is typed in by hand.</div>
-    <div class="tiles" id="ov-tiles"></div>
+    <div id="ov-hero"></div>
     <div class="sec">The sprints</div>
-    <div class="sgrid" id="ov-sprints"></div>
+    <div id="ov-sprints"></div>
     <div class="two" style="margin-top:18px">
       <div class="panel"><h3>Due in the next 7 days <span id="ov-week-n"></span></h3><div id="ov-week"></div></div>
       <div class="panel"><h3>Overdue <span id="ov-over-n"></span></h3><div id="ov-over"></div></div>
@@ -680,27 +751,54 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     var curT=T.filter(function(t){return sp(t)===cur.id;}), curDone=curT.filter(function(t){return st(t.id).status==='done';}).length;
     var pct=T.length?Math.round(done/T.length*100):0;
     var toLaunch=days(TODAY,'2026-12-01');
-    document.getElementById('ov-tiles').innerHTML=[
-      tile('Days to launch', toLaunch, 'Tue 1 Dec 08:00 UK', toLaunch<14?'amber':''),
-      tile('Overall progress', pct+'%', done+' of '+T.length+' tickets done'),
-      tile('Current sprint', cur.id, sprintPhase(cur)==='upcoming'?'starts '+fmt(cur.start):(days(TODAY,cur.end)+' days left · gate '+fmtS(cur.gate_date)), 'white'),
-      tile(cur.id+' progress', (curT.length?Math.round(curDone/curT.length*100):0)+'%', curDone+' of '+curT.length+' · expected ~'+Math.round(expected(cur)*100)+'% by today'),
-      tile('In progress', inprog, 'across all sprints','amber'),
-      tile('Blocked', blocked, blocked?'needs unblocking':'nothing blocked', blocked?'red':''),
-      tile('Overdue', over, over?'past due, still open':'nothing overdue', over?'red':''),
-      tile('Backlog', all().filter(function(t){return counted(t)&&sp(t)==='BL';}).length, 'unscheduled, by layer', 'white')
-    ].join('');
-    document.getElementById('ov-sprints').innerHTML=SPRINTS.map(function(s){
+    var dueWeekN=T.filter(function(t){ return isOpen(t)&&t.due&&t.due>=TODAY&&days(TODAY,t.due)<=7; }).length;
+    var blN=all().filter(function(t){return counted(t)&&sp(t)==='BL';}).length;
+    var curPct=curT.length?curDone/curT.length:0, exp=expected(cur), ph0=sprintPhase(cur);
+    var pace = ph0!=='live' ? '<span class="pchip na">'+(ph0==='upcoming'?'starts '+fmtS(cur.start):'closed')+'</span>'
+      : curPct>=exp+0.1 ? '<span class="pchip ahead">ahead of pace</span>'
+      : curPct>=exp-0.15 ? '<span class="pchip on">on pace</span>'
+      : '<span class="pchip behind">behind pace</span>';
+    var C=276.46;
+    document.getElementById('ov-hero').innerHTML=
+      '<div class="hero">'+
+        '<div class="hring" title="'+done+' of '+T.length+' tickets done"><svg viewBox="0 0 100 100"><circle class="bgc" cx="50" cy="50" r="44"/><circle class="fgc" cx="50" cy="50" r="44" style="stroke-dasharray:'+C+';stroke-dashoffset:'+(C*(1-pct/100)).toFixed(1)+'"/></svg><div class="hrv">'+pct+'%<small>built</small></div></div>'+
+        '<div class="hmain"><div class="hk">Days to launch</div><div class="hd">'+toLaunch+'</div><div class="hs">Tue 1 Dec &middot; 08:00 UK</div><div class="hs dim">'+done+' of '+T.length+' tickets done</div></div>'+
+        '<div class="hcur" data-s="'+cur.id+'" title="Open '+cur.id+' in the tracker">'+
+          '<div class="hk">Current sprint &middot; <span class="mono">'+cur.id+'</span>'+pace+'</div>'+
+          '<div class="hcn">'+esc(cur.name)+'</div>'+
+          '<div class="hcs">'+(ph0==='upcoming'?('starts '+fmt(cur.start)):(days(TODAY,cur.end)+' days left &middot; gate '+fmtS(cur.gate_date)))+' &middot; expected ~'+Math.round(exp*100)+'% by today</div>'+
+          '<div class="bar big"><i style="width:'+Math.round(curPct*100)+'%"></i><b style="left:'+Math.round(exp*100)+'%" title="where we should be today"></b></div>'+
+          '<div class="hcp">'+curDone+' / '+curT.length+' done</div>'+
+        '</div>'+
+        '<div class="hstats">'+
+          hst('Due in 7 days',dueWeekN,dueWeekN?'':'quiet')+hst('In progress',inprog,'amber')+
+          hst('Blocked',blocked,blocked?'red':'quiet')+hst('Overdue',over,over?'red':'quiet')+
+          '<div class="hbk" data-tab-jump="backlog">'+blN+' in the backlog &rarr;</div>'+
+        '</div>'+
+      '</div>';
+    var hc=document.querySelector('#ov-hero .hcur');
+    if(hc) hc.addEventListener('click',function(){ SEL=hc.getAttribute('data-s'); try{localStorage.setItem('artemis_launch_sprint',SEL);}catch(e){} showTab('tracker'); });
+    var hb=document.querySelector('#ov-hero .hbk');
+    if(hb) hb.addEventListener('click',function(){ showTab('backlog'); });
+    var groups=[]; SPRINTS.forEach(function(sp0){ var g=groups[groups.length-1]; if(!g||g.sec!==sp0.section){ g={sec:sp0.section,items:[]}; groups.push(g);} g.items.push(sp0); });
+    document.getElementById('ov-sprints').innerHTML=groups.map(function(g){
+      var gts=T.filter(function(t){ return g.items.some(function(sp1){return sp1.id===sp(t);}); });
+      var gd=gts.filter(function(t){return st(t.id).status==='done';}).length;
+      return '<div class="phead"><span>'+esc(g.sec)+'</span><i></i><b>'+gd+' / '+gts.length+' done</b></div>'+
+        '<div class="sgrid">'+g.items.map(scardHTML).join('')+'</div>';
+    }).join('');
+    function scardHTML(s){
       var ts=T.filter(function(t){return sp(t)===s.id;}), d=ts.filter(function(t){return st(t.id).status==='done';}).length;
       var ph=sprintPhase(s), p=ts.length?d/ts.length:0;
-      return '<div class="scard'+(s.id===cur.id?' active':'')+'" data-s="'+s.id+'">'+
+      var past = sprintPhase(s)==='closed';
+      return '<div class="scard'+(s.id===cur.id?' active':'')+(past?' past':'')+'" data-s="'+s.id+'">'+
         '<span class="st '+(ph==='live'?'live':ph==='closed'?'done':'')+'">'+ph+'</span>'+
         '<div class="id">'+s.id+'</div><div class="nm">'+esc(s.name)+'</div>'+
         '<div class="dt">'+fmtS(s.start)+' &rarr; '+fmtS(s.end)+' · gate '+fmtS(s.gate_date)+'</div>'+
         '<div class="bar"><i style="width:'+Math.round(p*100)+'%"></i>'+(ph==='live'?'<b style="left:'+Math.round(expected(s)*100)+'%" title="where we should be today"></b>':'')+'</div>'+
         '<div class="nums"><span>'+d+' / '+ts.length+' done</span><span>'+Math.round(p*100)+'%</span></div>'+
         '<div class="gate">'+esc(s.gate)+'</div></div>';
-    }).join('');
+    }
     document.querySelectorAll('#ov-sprints .scard').forEach(function(c){ c.addEventListener('click',function(){ SEL=c.getAttribute('data-s'); try{localStorage.setItem('artemis_launch_sprint',SEL);}catch(e){} showTab('tracker'); }); });
 
     var week=T.filter(function(t){ return isOpen(t)&&t.due&&t.due>=TODAY&&days(TODAY,t.due)<=7; }).sort(function(a,b){return a.due.localeCompare(b.due);});
@@ -716,6 +814,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       return '<div class="load"><span style="color:'+p.c+';font-weight:600">'+p.n+'</span><div class="lb"><i style="width:'+w(d)+'%;background:'+p.c+'"></i><i style="width:'+w(ip)+'%;background:'+p.c+';opacity:.45"></i></div><span class="mono" style="font-size:11px;color:var(--muted3)">'+d+' / '+ip+' / '+o+'</span></div>';
     }).join('');
   }
+  function hst(k,v,cls){ return '<div class="hst '+(cls||'')+'"><b>'+v+'</b><span>'+k+'</span></div>'; }
   function tile(k,v,d,cls){ return '<div class="tile"><div class="k">'+k+'</div><div class="v '+(cls||'')+'">'+v+'</div><div class="d">'+d+'</div></div>'; }
   function mini(t){ return '<div class="mini"><span class="who" style="color:'+(PC[t.assignee]||'#5c7a99')+'">'+(t.assignee?esc(t.assignee):'unassigned')+'</span><span class="t"><span class="mono" style="color:var(--accent);font-size:10.5px">'+t.id+'</span> '+esc(t.title)+'</span><span class="due'+(isOver(t)?' over':'')+'">'+fmtS(t.due)+'</span></div>'; }
 
@@ -1299,6 +1398,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   function pst(k,v,c){ return '<div class="pstat"><div class="k">'+k+'</div><div class="v '+(c||'')+'">'+v+'</div></div>'; }
 
   /* ---- boot ---- */
+  (function(){ var n=days(TODAY,'2026-12-01'); var el=document.getElementById('hdr-count'); if(el) el.innerHTML='<b>'+n+'</b> days &middot; 1 Dec'; })();
   function renderAll(){ if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='features') renderFeatures(); else if(TAB==='map') renderMap(); else if(TAB==='backlog') renderBacklog(); else renderPerf(); }
   document.getElementById('btn-refresh').addEventListener('click',load);
   try{ var lt=localStorage.getItem('artemis_launch_tab'); if(lt) showTab(lt); }catch(e){}
