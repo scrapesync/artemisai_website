@@ -465,6 +465,16 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   .hstats{grid-template-columns:1fr 1fr}
   .hcount{display:none}
 }
+
+.mock{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:14px 18px;margin:12px 0 4px;cursor:pointer;transition:border-color .2s}
+.mock:hover{border-color:var(--muted3)}
+.mkh{display:flex;align-items:center;gap:12px}
+.mkh b{font-family:'Fraunces',Georgia,serif;font-size:16px;color:var(--ink)}
+.mkd{font-size:11px;color:var(--gold)}
+.mkp{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.mkpill{font-size:10.5px;padding:3.5px 10px;border-radius:20px;border:1px solid var(--border);color:var(--muted2);background:var(--bg2)}
+.mkpill.on{color:var(--sage);border-color:rgba(127,158,106,.45);background:rgba(127,158,106,.10)}
+.mkn{font-size:10.5px;color:var(--muted3);margin-top:8px}
 </style>
 </head><body>
 
@@ -495,6 +505,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     <div class="h1">Overview</div>
     <div class="sub">Six sprints and a launch week, one shared board. Everything below is computed from the tickets and the live state, nothing is typed in by hand.</div>
     <div id="ov-hero"></div>
+    <div id="ov-mock"></div>
     <div class="sec">The sprints</div>
     <div id="ov-sprints"></div>
     <div class="two" style="margin-top:18px">
@@ -780,6 +791,20 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     if(hc) hc.addEventListener('click',function(){ SEL=hc.getAttribute('data-s'); try{localStorage.setItem('artemis_launch_sprint',SEL);}catch(e){} showTab('tracker'); });
     var hb=document.querySelector('#ov-hero .hbk');
     if(hb) hb.addEventListener('click',function(){ showTab('backlog'); });
+    var MK=BYID['N1-SD-21']||all().filter(function(t){return t.id==='N1-SD-21';})[0];
+    if(MK && TODAY<='2026-09-20'){
+      var mkc=st('N1-SD-21').checks||{}, mitems=MK.checklist||[], mdone=mitems.filter(function(_,i){return mkc[String(i)];}).length;
+      var mpct=mitems.length?Math.round(mdone/mitems.length*100):0;
+      document.getElementById('ov-mock').innerHTML=
+        '<div class="mock" title="Open N1 in the tracker - Saad ticks packs off in ticket N1-SD-21">'+
+          '<div class="mkh"><span class="hk">Mockup handoff &middot; Saad</span><b>'+mdone+' / '+mitems.length+' packs</b>'+
+            (mdone>=mitems.length?'<span class="pchip ahead">complete</span>':'<span class="mkd">due 10 Sep &middot; '+days(TODAY,'2026-09-10')+' days left</span>')+'</div>'+
+          '<div class="bar big"><i style="width:'+mpct+'%"></i></div>'+
+          '<div class="mkp">'+mitems.map(function(p,i){ var on=!!mkc[String(i)]; return '<span class="mkpill'+(on?' on':'')+'">'+(on?'\u2713 ':'')+esc(p.replace(/ ?\(.*\)$/,''))+'</span>'; }).join('')+'</div>'+
+          '<div class="mkn">The whole front-end build queues behind these ten packs. Tick them in N1-SD-21 as each lands with its Loom.</div>'+
+        '</div>';
+      document.querySelector('#ov-mock .mock').addEventListener('click',function(){ SEL='N1'; try{localStorage.setItem('artemis_launch_sprint','N1');}catch(e){} showTab('tracker'); });
+    } else { document.getElementById('ov-mock').innerHTML=''; }
     var groups=[]; SPRINTS.forEach(function(sp0){ var g=groups[groups.length-1]; if(!g||g.sec!==sp0.section){ g={sec:sp0.section,items:[]}; groups.push(g);} g.items.push(sp0); });
     document.getElementById('ov-sprints').innerHTML=groups.map(function(g){
       var gts=T.filter(function(t){ return g.items.some(function(sp1){return sp1.id===sp(t);}); });

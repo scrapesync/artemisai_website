@@ -1,4 +1,4 @@
-// sprint_launch_data.js - regenerated 3 Sep 2026: Phase 0 (founder-corrected), Art-E + Discovery plans, build-book fixes, web push, app backlog, WhatsApp-history mining.
+// sprint_launch_data.js - regenerated 3 Sep 2026.
 window.LAUNCH_DATA = {
  "generated_at": "2026-09-03",
  "layers": [
@@ -1102,7 +1102,10 @@ window.LAUNCH_DATA = {
     "P0-FH-05",
     "P0-FH-03",
     "P0-FH-01",
-    "P0-FH-21"
+    "P0-FH-21",
+    "N1-SD-21",
+    "N1-FH-19",
+    "N2-FH-20"
    ],
    "kind": "surface"
   },
@@ -1170,7 +1173,8 @@ window.LAUNCH_DATA = {
     "P0-FH-07",
     "P0-FH-08",
     "P0-FH-09",
-    "P0-LW-03"
+    "P0-LW-03",
+    "N1-SD-21"
    ],
    "kind": "surface"
   },
@@ -1199,7 +1203,9 @@ window.LAUNCH_DATA = {
     "P0-MT-07",
     "P0-FH-04",
     "P0-FH-26",
-    "P0-MT-10"
+    "P0-MT-10",
+    "N1-SD-21",
+    "N5-SD-14"
    ],
    "kind": "surface"
   },
@@ -1233,7 +1239,8 @@ window.LAUNCH_DATA = {
     "N5-AS-13",
     "N5-SD-13",
     "P0-FH-19",
-    "P0-MT-07"
+    "P0-MT-07",
+    "N1-SD-21"
    ],
    "kind": "surface"
   },
@@ -1291,7 +1298,14 @@ window.LAUNCH_DATA = {
     "N4-SD-15",
     "N5-MT-19",
     "P0-FH-20",
-    "P0-AS-23"
+    "P0-AS-23",
+    "N1-SD-21",
+    "N3-MT-15",
+    "N3-SD-10",
+    "N4-FH-09",
+    "N4-MT-14",
+    "N4-MT-15",
+    "N6-SD-09"
    ],
    "kind": "surface"
   },
@@ -1337,7 +1351,13 @@ window.LAUNCH_DATA = {
     "N6-LW-02",
     "N3-FH-13",
     "N4-SD-16",
-    "N5-SD-13"
+    "N5-SD-13",
+    "N1-SD-21",
+    "N2-AS-14",
+    "N2-FH-19",
+    "N3-AS-15",
+    "N4-SD-13",
+    "N5-MT-10"
    ],
    "kind": "surface"
   },
@@ -1364,7 +1384,8 @@ window.LAUNCH_DATA = {
     "N4-AS-13",
     "N6-MT-04",
     "N4-MT-17",
-    "P0-FH-14"
+    "P0-FH-14",
+    "N1-SD-21"
    ],
    "kind": "surface"
   },
@@ -1386,7 +1407,9 @@ window.LAUNCH_DATA = {
     "N3-FH-04",
     "N4-MT-08",
     "N5-AS-11",
-    "N6-FH-05"
+    "N6-FH-05",
+    "N1-SD-21",
+    "N6-FH-07"
    ],
    "kind": "surface"
   },
@@ -1416,7 +1439,8 @@ window.LAUNCH_DATA = {
     "N5-AS-10",
     "N5-AS-13",
     "P0-FH-04",
-    "P0-AS-18"
+    "P0-AS-18",
+    "N1-SD-21"
    ],
    "kind": "surface"
   },
@@ -1445,7 +1469,9 @@ window.LAUNCH_DATA = {
     "N4-AS-10",
     "N4-SD-09",
     "N5-SD-08",
-    "N5-LW-08"
+    "N5-LW-08",
+    "N6-MT-10",
+    "N5-SD-15"
    ],
    "kind": "surface"
   },
@@ -1500,7 +1526,11 @@ window.LAUNCH_DATA = {
     "N5-LW-04",
     "N5-FZ-02",
     "N6-MT-06",
-    "N6-FZ-01"
+    "N6-FZ-01",
+    "N1-SD-21",
+    "N2-MT-15",
+    "N2-AS-15",
+    "N4-MT-01"
    ],
    "kind": "surface"
   },
@@ -1742,7 +1772,22 @@ window.LAUNCH_DATA = {
     "P0-MT-03",
     "P0-MT-05",
     "P0-AS-13",
-    "P0-FH-27"
+    "P0-FH-27",
+    "N1-AS-14",
+    "N1-AS-15",
+    "N1-MT-17",
+    "N1-MT-18",
+    "N2-AS-16",
+    "N2-AS-17",
+    "N2-AS-18",
+    "N2-MT-16",
+    "N2-MT-17",
+    "N3-SD-11",
+    "N5-AS-14",
+    "N6-AS-12",
+    "N1-MT-20",
+    "N4-MT-18",
+    "N5-MT-20"
    ],
    "kind": "foundation"
   },
@@ -1929,7 +1974,13 @@ window.LAUNCH_DATA = {
     "P0-SD-02",
     "P0-SD-03",
     "P0-AX-04",
-    "P0-FZ-04"
+    "P0-FZ-04",
+    "N1-SD-17",
+    "N1-AX-11",
+    "N2-FZ-11",
+    "N3-FZ-10",
+    "N5-SD-12",
+    "N6-AS-11"
    ]
   },
   {
@@ -2094,7 +2145,7 @@ window.LAUNCH_DATA = {
    "acceptance": "A signed stack-decision document exists in the repo and Muteeb's scaffold matches it.",
    "checklist": [
     "Confirm Next.js + TS PWA, Tailwind + tokens, Netlify with Muteeb",
-    "Name the auth vendor and its tenant-claim mechanism",
+    "Name the auth vendor and its tenant-claim mechanism, plus the operational database engine for users, sessions and alert state",
     "Name the E2E runner and the KPI-events sink",
     "Commit to docs/ with both signatures and the no-change clause",
     "Lovable-is-a-design-tool line signed by Saad + Muteeb"
@@ -3166,8 +3217,8 @@ window.LAUNCH_DATA = {
    "acceptance": "All Meta calls go through the pinned central client, logs carry tenant_id and no PII, and Sentry plus uptime alerts fire on staging.",
    "checklist": [
     "Pin the Graph API version in one config and note the sunset check date",
-    "Implement the central client with backoff, retry caps and rate accounting",
-    "Add structured logging with tenant tag and a PII scrub test",
+    "Implement the central client with error-class-aware backoff (auth errors surface for re-auth, rate-limit codes honour the budget, transient errors retry with jitter), retry caps and rate accounting",
+    "Add structured logging with tenant tag and a request_id propagated BFF to FastAPI to worker, plus a PII scrub test",
     "Connect Sentry DSN and an uptime monitor to staging"
    ]
   },
@@ -3318,7 +3369,7 @@ window.LAUNCH_DATA = {
    "acceptance": "A runbook in the repo lets someone other than Muteeb deploy and roll back staging by following it.",
    "checklist": [
     "Document deploy steps for staging and production",
-    "Document rollback steps and how to verify a rollback worked",
+    "Document rollback steps for both platforms - Netlify restore of the previous deploy and Fargate revert to the previous task-definition revision - and how to verify a rollback worked",
     "List secrets locations and rotation owner",
     "Add a change log section updated with each rails change"
    ]
@@ -6518,7 +6569,7 @@ window.LAUNCH_DATA = {
     "Agree the detector event schema with Faheem by 18 Sep and build the skeleton against a stub detector",
     "Define the alert record and queue topology",
     "Implement retries with caps and the DLQ",
-    "Send in-app and SES email from the engine output",
+    "Send in-app and SES email from the engine output, with SES bounce and complaint notifications wired to an automatic suppression list checked before every send",
     "Add unread-count endpoints per tenant and page, plus the quiet-hours and severity routing hook",
     "Swap in N2-FH-06 when it lands 23 Sep and re-run the end-to-end test"
    ]
@@ -13081,7 +13132,7 @@ window.LAUNCH_DATA = {
    "acceptance": "One complete export was produced for a real page with timings per store and a gap ticket list.",
    "checklist": [
     "Pick the pilot page and get their agreement",
-    "Muteeb runs the store queries; Filza redacts and assembles",
+    "Muteeb runs the store queries including S3 post-image and media objects; Filza redacts and assembles",
     "Time each step; compare to the one-month clock",
     "Open gap tickets with owners; file the run record"
    ]
@@ -13890,7 +13941,7 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Muteeb",
    "title": "Load test pilot x10 ramp, burst and day-1 shape with Fargate policy named",
-   "what": "Load test at pilot x10 with ramp and burst, then run the day-1 profile using the rates from the capacity model N5-MT-10: 100 pages connecting inside one hour, each triggering first-value ingest plus a queued historical backfill. Enforce the N5-MT-12 degradation tiers, hold queue depth inside the N5-MT-11 ceilings, prove the DLQ holds under surge, and record time-to-first-value per page and live scoring p95 during the onboarding storm. Name the Fargate autoscale policy applied, by policy name, in the writeup.",
+   "what": "Load test at pilot x10 with ramp and burst, then run the day-1 profile using the rates from the capacity model N4-MT-07: 100 pages connecting inside one hour, each triggering first-value ingest plus a queued historical backfill. Enforce the N5-MT-12 degradation tiers, hold queue depth inside the N5-MT-11 ceilings, prove the DLQ holds under surge, and record time-to-first-value per page and live scoring p95 during the onboarding storm. Name the Fargate autoscale policy applied, by policy name, in the writeup.",
    "why": "Launch traffic shape proven in advance is what readiness review #1 reads.",
    "area": "Ops",
    "due": "2026-10-30",
@@ -16458,7 +16509,7 @@ window.LAUNCH_DATA = {
     "Enumerate every credential with holder, store, scope and expiry",
     "Cut Meta permissions, IAM roles and warehouse users to least privilege",
     "Rotate pre-departure and shared secrets",
-    "Record next rotation dates and the break-glass procedure",
+    "Record next rotation dates and the break-glass procedure; rotate anything with no rotation path or older than 90 days before code freeze",
     "File the register in Jill's evidence folder"
    ]
   },
@@ -20308,6 +20359,178 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "status": "done",
    "layer": "intelligence"
+  },
+  {
+   "id": "N1-SD-21",
+   "sprint": "N1",
+   "assignee": "Saad",
+   "title": "Mockup handoff scoreboard: tick each pack as it ships",
+   "what": "The single place to mark mockup progress - one checkbox per pack, ticked when that pack is delivered with its Loom and states. Feeds the Overview widget everyone watches. Complete handoff is 10 Sep; the N1 gate reads from here.",
+   "why": "The whole front-end build queues behind these packs; the team needs one glanceable answer to are the mockups done.",
+   "area": "Design",
+   "due": "2026-09-10",
+   "priority": "P0",
+   "priority_reason": "the front-end build cannot start without the packs",
+   "depends_on": [
+    "N1-SD-04",
+    "N1-SD-07",
+    "N1-SD-09"
+   ],
+   "feeds": [
+    "N1-AS-12",
+    "N2-SD-15"
+   ],
+   "gate": "none",
+   "source": "founder ask 3 Sep",
+   "acceptance": "All ten boxes ticked by 10 Sep, each within a day of the pack actually landing.",
+   "checklist": [
+    "Discovery pack (due 5 Sep)",
+    "Today pack (~8 Sep)",
+    "Drafts / Studio pack (~8 Sep)",
+    "Alerts pack (by 10 Sep)",
+    "Best Times pack (by 10 Sep)",
+    "Analytics thin pack (by 10 Sep)",
+    "Art-E rail pack (by 10 Sep)",
+    "Settings pack (by 10 Sep)",
+    "Wins-lite pack (by 10 Sep)",
+    "Pages + workspace switcher pack (by 10 Sep)"
+   ]
+  },
+  {
+   "id": "N5-SD-14",
+   "sprint": "N5",
+   "assignee": "Saad",
+   "title": "E2E flow 8 in the nightly suite: Best Times heatmap honesty",
+   "what": "Write the Playwright spec for the missing Best Times flow: thin test page shows suppressed cells, the 'not enough posts yet' state and the methodology note; a full page shows the ringed #1 window in its IANA timezone; the N3-MT-04 floor flag asserted. Runs in Asad's nightly suite beside flows 6-7.",
+   "why": "Best Times is the only intelligence surface with no E2E; the gate's count-floor clause has no proving run - N2-SD-09 wrote acceptance but nothing executes it.",
+   "area": "Best Times",
+   "due": "2026-11-05",
+   "priority": "P1",
+   "priority_reason": "coverage + red-team audit 3 Sep",
+   "depends_on": [
+    "N3-AS-09",
+    "N3-MT-04"
+   ],
+   "feeds": [
+    "N5-AS-06"
+   ],
+   "gate": "none",
+   "source": "coverage + red-team audit 3 Sep",
+   "acceptance": "Flow 8 runs green in the nightly suite: suppressed cells on the thin page, ringed window in the page timezone, floor flag asserted.",
+   "checklist": []
+  },
+  {
+   "id": "N6-FH-07",
+   "sprint": "N6",
+   "assignee": "Faheem",
+   "title": "Wins-lite screen-vs-ledger check before the feature freeze",
+   "what": "On the dogfood tenant, compare every number on the Wins screen (value band, Art-E scoreboard) row-for-row against the outcome ledger (N3-FH-04) and N4-MT-08 endpoints; file the diff by 12 Nov. Front-loads N6-FH-05 so the gate has evidence pre-freeze; any mismatch becomes a pre-freeze fix.",
+   "why": "The wins gate's only proof (N6-FH-05, 19 Nov) lands after the 13 Nov feature freeze; nothing proves 'every number traces to the ledger' beforehand.",
+   "area": "Wins",
+   "due": "2026-11-12",
+   "priority": "P1",
+   "priority_reason": "coverage + red-team audit 3 Sep",
+   "depends_on": [
+    "N3-FH-04",
+    "N4-MT-08"
+   ],
+   "feeds": [
+    "N6-FH-05"
+   ],
+   "gate": "none",
+   "source": "coverage + red-team audit 3 Sep",
+   "acceptance": "Diff filed by 12 Nov with zero unexplained mismatches between the Wins screen and ledger queries for the dogfood tenant.",
+   "checklist": []
+  },
+  {
+   "id": "N5-SD-15",
+   "sprint": "N5",
+   "assignee": "Saad",
+   "title": "Measure time-to-first-insight for a fresh page in UAT wave 1",
+   "what": "During UAT wave 1 (N5-SD-03/05), connect at least one fresh pilot page and capture funnel timestamps from N4-AS-14's events (connect -> ingest done -> the N2-SD-06 activation event), then file minutes-to-first-insight as the onboarding gate evidence, with Lewis covering the pilot side.",
+   "why": "The onboarding gate reads 'measured in UAT', but N4-AS-14 and N5-MT-06 only measure staging tenants; no ticket produces the UAT measurement.",
+   "area": "Onboarding",
+   "due": "2026-11-07",
+   "priority": "P1",
+   "priority_reason": "coverage + red-team audit 3 Sep",
+   "depends_on": [
+    "N4-AS-14",
+    "N5-SD-03"
+   ],
+   "feeds": [],
+   "gate": "none",
+   "source": "coverage + red-team audit 3 Sep",
+   "acceptance": "Minutes from connect to the activation event recorded for a fresh pilot page and filed as gate evidence.",
+   "checklist": []
+  },
+  {
+   "id": "N1-MT-20",
+   "sprint": "N1",
+   "assignee": "Muteeb",
+   "title": "Name the operational store and wire schema migrations into CI",
+   "what": "Record the operational DB (users, sessions, tokens, alert state) as a named engine in the stack decision; stand it up per env; wire a migration tool into CI and deploys: forward-only versioned migrations, tested down-path, seed data per env. No destructive migration after code freeze.",
+   "why": "No ticket defines the app DB or owns schema change; unmanaged drift breaks rollback, restore drills and the freeze.",
+   "area": "Platform",
+   "due": "2026-09-11",
+   "priority": "P0",
+   "priority_reason": "coverage + red-team audit 3 Sep",
+   "depends_on": [
+    "N1-AS-03",
+    "N1-MT-04"
+   ],
+   "feeds": [
+    "N2-MT-10",
+    "N4-MT-18"
+   ],
+   "gate": "none",
+   "source": "coverage + red-team audit 3 Sep",
+   "acceptance": "The stack decision names the engine, and a PR adding a migration runs it in CI and on staging deploy with a tested down-path receipt filed.",
+   "checklist": []
+  },
+  {
+   "id": "N4-MT-18",
+   "sprint": "N4",
+   "assignee": "Muteeb",
+   "title": "Production environment as code, parity-diffed against staging",
+   "what": "Stand up production from the same infrastructure definitions as staging (Netlify context, Fargate services, ALB with client-cert auth, SQS/DLQ, stores, secrets), same region. Produce a config parity diff of every env var, quota and setting, documenting intentional differences; re-run at code freeze.",
+   "why": "Production only appears in N5+ smoke tickets; nothing creates it or stops staging/prod config drift before UAT and launch.",
+   "area": "Platform",
+   "due": "2026-10-21",
+   "priority": "P0",
+   "priority_reason": "coverage + red-team audit 3 Sep",
+   "depends_on": [
+    "N1-MT-04",
+    "N1-MT-18",
+    "N1-MT-10",
+    "N1-MT-20"
+   ],
+   "feeds": [
+    "N5-MT-02"
+   ],
+   "gate": "none",
+   "source": "coverage + red-team audit 3 Sep",
+   "acceptance": "Production serves the deep health check, and a filed parity diff shows only documented intentional differences, re-run clean at code freeze.",
+   "checklist": []
+  },
+  {
+   "id": "N5-MT-20",
+   "sprint": "N5",
+   "assignee": "Muteeb",
+   "title": "Domain, TLS and certificate-renewal audit with expiry alarms",
+   "what": "Audit apex+www redirects to one canonical host, DNS records under change control (incl. SES auth records), auto-renew on the Netlify cert and the ACM cert on the ALB, and expiry of internal client certs on the BFF-to-FastAPI path; add 30-day expiry alarms routed to paging; file the receipt.",
+   "why": "No ticket owns DNS or cert renewal; an internal client cert or domain cert expiring launch week downs the stack with no code change.",
+   "area": "Platform",
+   "due": "2026-11-05",
+   "priority": "P1",
+   "priority_reason": "coverage + red-team audit 3 Sep",
+   "depends_on": [
+    "N1-MT-18"
+   ],
+   "feeds": [],
+   "gate": "none",
+   "source": "coverage + red-team audit 3 Sep",
+   "acceptance": "A filed audit shows canonical redirects and auto-renew verified on every certificate including internal client certs, and a test expiry alarm paged on-call.",
+   "checklist": []
   }
  ]
 };
