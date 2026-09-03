@@ -1,4 +1,4 @@
-// sprint_launch_data.js - regenerated 3 Sep 2026: Phase 0 (founder-corrected: no product app code exists), Art-E + Discovery plans, build-book fixes, web push, app backlog.
+// sprint_launch_data.js - regenerated 3 Sep 2026: Phase 0 (founder-corrected), Art-E + Discovery plans, build-book fixes, web push, app backlog, WhatsApp-history mining.
 window.LAUNCH_DATA = {
  "generated_at": "2026-09-03",
  "layers": [
@@ -1022,6 +1022,44 @@ window.LAUNCH_DATA = {
    "source": "arte plan 3 Sep",
    "acceptance": "First post-launch cycle complete by 11 Dec: one review held, any change shipped via the registry with regression green, and the first monthly report filed.",
    "checklist": []
+  },
+  {
+   "id": "BL-LL-22",
+   "sprint": "BL",
+   "layer": "llm",
+   "assignee": "Asad",
+   "title": "Lower-cost LLM provider evaluation",
+   "what": "Evaluate lower-cost LLM providers (including Moonshot/Kimi, requested by the CEO 20 Jul) against current models for labelling and Art-E workloads; cost and quality comparison written up. Any candidate must pass the no-training-on-customer-content vendor gate before touching real data.",
+   "why": "An open CEO request from 20 Jul with no tracker item; labelling and Art-E are the two biggest recurring AI costs.",
+   "area": "Post-launch",
+   "due": "",
+   "priority": "P2",
+   "priority_reason": "cost work, not launch-critical",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "WhatsApp General Lobby 20 Jul (mined 3 Sep)",
+   "acceptance": "A comparison doc with a recommendation, or a written decision to stay put.",
+   "checklist": []
+  },
+  {
+   "id": "BL-LA-14",
+   "sprint": "BL",
+   "layer": "launch",
+   "assignee": "Lewis",
+   "title": "Instagram data-partner scouting",
+   "what": "Scout candidate Instagram partners per the CEO 26 Jul memo, which names this an active priority alongside development; build on the existing Facebook pilot relationships. Alex owns the relationship calls; Lewis the shortlist.",
+   "why": "Named an active priority in the 26 Jul memo but absent from every tracker tab until now.",
+   "area": "Post-launch",
+   "due": "",
+   "priority": "P2",
+   "priority_reason": "expansion groundwork, not launch-critical",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "WhatsApp General Lobby 26 Jul (mined 3 Sep)",
+   "acceptance": "A shortlist with contact status, or a written decision to defer.",
+   "checklist": []
   }
  ],
  "features": [
@@ -1999,7 +2037,8 @@ window.LAUNCH_DATA = {
     "P0-FH-25",
     "P0-FH-26",
     "P0-MT-10",
-    "P0-FH-27"
+    "P0-FH-27",
+    "P0-FH-28"
    ]
   }
  ],
@@ -2537,7 +2576,7 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Faheem",
    "title": "Annotate 25-29 Aug Facebook restriction as an anomaly window",
-   "what": "Add an anomaly-window flag (date range, affected pages) to the warehouse so flop training sets, hour-of-week baselines and crisis backtests exclude or down-weight 25-29 Aug. Document it in the flop definition and crisis doc.",
+   "what": "Add an anomaly-window flag (date range, affected pages) to the warehouse so flop training sets, hour-of-week baselines and crisis backtests exclude or down-weight 25-29 Aug. Document it in the flop definition and crisis doc. Also check a ~28 Jul window: all pilot admin pages were hit with restrictions and payout holds that week - verify whether page metrics dip in late July before treating 25-29 Aug as the only anomaly.",
    "why": "Without the flag the restriction reads as a real engagement collapse and skews every baseline.",
    "area": "Data",
    "due": "2026-09-05",
@@ -2556,7 +2595,8 @@ window.LAUNCH_DATA = {
     "Create anomaly_windows table with the 25-29 Aug range",
     "Exclude the window in the flop set + eval harness",
     "Exclude it from hour-of-week baseline queries",
-    "Note it in the flop definition and crisis doc"
+    "Note it in the flop definition and crisis doc",
+    "Check late-July metrics for a second dip"
    ]
   },
   {
@@ -4460,7 +4500,7 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Jill",
    "title": "Verify Rafeh's access revoked on every system (access review)",
-   "what": "Run the N1 access review against Rafeh's departure on 3 Sep: pull the user/admin list from every system the team uses (AWS IAM and console, the code repo, Netlify, Figma, Sentry, the warehouse, Meta Business Manager, shared inboxes, and the paging/status tools as they are bought) and confirm his accounts are disabled and any shared credentials or keys he held are rotated. Record it as a dated table (system, account, revoked by, date) and cross-check with Filza's exit hygiene (IP, NDA, access) so nothing is missed or done twice.",
+   "what": "Run the N1 access review against Rafeh's departure on 3 Sep: pull the user/admin list from every system the team uses (AWS IAM and console, the code repo, Netlify, Figma, Sentry, the warehouse, Meta Business Manager, shared inboxes, and the paging/status tools as they are bought) and confirm his accounts are disabled and any shared credentials or keys he held are rotated. Record it as a dated table (system, account, revoked by, date) and cross-check with Filza's exit hygiene (IP, NDA, access) so nothing is missed or done twice. EXTENDED 3 Sep: several shared credentials and tokens were posted in team group chats that departed staff belonged to - rotate every credential that ever appeared in chat (cloud console, server, page tokens, shared admin and demo logins), not only per-person accounts.",
    "why": "Offboarding is security: an ex-staff login left live is the cheapest breach we could have, and per the Rafeh policy this is the one Rafeh item that stays with Jill - verify it actually happened.",
    "area": "Ops",
    "due": "2026-09-04",
@@ -4482,7 +4522,9 @@ window.LAUNCH_DATA = {
     "Check each system's user list for Rafeh's account; disable/remove where still present",
     "Rotate any shared credential, API key or token he had access to (ask Muteeb to confirm the Netlify env key rotation Asad flagged)",
     "Write the dated table and file it; send to Filza for the leaver-hygiene record",
-    "Diary a repeat access review for N5 (evidence folder) and post-launch"
+    "Diary a repeat access review for N5 (evidence folder) and post-launch",
+    "Rotate every credential ever posted in group chat",
+    "Confirm departed staff removed from all group chats"
    ]
   },
   {
@@ -6364,7 +6406,7 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Muteeb",
    "title": "Scoring endpoint production-grade: caching, p95 under 1s warm",
-   "what": "Harden the N1 score endpoint: response cache keyed on tenant, page and draft hash, warm-path p95 under 1s measured on staging, and contract tests in CI. Serve the artifact that passed the gate (Borda gate plus regressor; LambdaRank lost the A/B).",
+   "what": "Harden the N1 score endpoint: response cache keyed on tenant, page and draft hash, warm-path p95 under 1s measured on staging, and contract tests in CI. Serve the artifact that passed the gate (Borda gate plus regressor; LambdaRank lost the A/B). (Supersedes the 3 Aug draft-score lambda handoff; its requirements carry over: performance band + flop probability + top-3 reasons, with timing-based reasons suppressed.)",
    "why": "The gauge must move as the pilot types; a slow endpoint turns the wow moment into a wait.",
    "area": "Drafts",
    "due": "2026-09-18",
@@ -19547,7 +19589,7 @@ window.LAUNCH_DATA = {
    "sprint": "P0",
    "assignee": "Faheem",
    "title": "Meta metric migration landed (marvel PR #7)",
-   "what": "Migrated post AND page insights to the surviving reach/views metrics after Meta killed the impressions family on 15 Jun; the feed was dark ~6 weeks until this merged 30 Jul. Author: Faheem (id kept for continuity).",
+   "what": "Migrated post AND page insights to the surviving reach/views metrics after Meta killed the impressions family on 15 Jun; the feed was dark ~6 weeks until this merged 30 Jul. Author: Faheem (id kept for continuity). Team decision 24 Jul: move to views-based KPIs, one-off historic insights re-dump, weekly re-poll of posts under 120 days (PR #9).",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Pipelines",
    "due": "2026-07-30",
@@ -20246,6 +20288,26 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "status": "done",
    "layer": "foundation"
+  },
+  {
+   "id": "P0-FH-28",
+   "sprint": "P0",
+   "assignee": "Faheem",
+   "title": "Apr-May 2026 image coverage recovered",
+   "what": "Re-scraped ~4,450 expired-CDN-link post images via date-override into the permanent S3 media store, restoring the draft-score model test window; CLIP and fusion runs queued May-first to unblock the retrain.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Data",
+   "due": "2026-08-01",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "WhatsApp Development group 1 Aug (mined 3 Sep)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "intelligence"
   }
  ]
 };
