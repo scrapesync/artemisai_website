@@ -1,4 +1,4 @@
-// sprint_launch_data.js - regenerated 3 Sep 2026: Phase 0 (S1-S9 record, founder-corrected), Art-E + Discovery plans, build-book fixes, web push, app backlog.
+// sprint_launch_data.js - regenerated 3 Sep 2026: Phase 0 (founder-corrected: no product app code exists), Art-E + Discovery plans, build-book fixes, web push, app backlog.
 window.LAUNCH_DATA = {
  "generated_at": "2026-09-03",
  "layers": [
@@ -1064,9 +1064,7 @@ window.LAUNCH_DATA = {
     "P0-FH-05",
     "P0-FH-03",
     "P0-FH-01",
-    "P0-FH-21",
-    "P0-AS-32",
-    "P0-AS-33"
+    "P0-FH-21"
    ],
    "kind": "surface"
   },
@@ -1163,8 +1161,7 @@ window.LAUNCH_DATA = {
     "P0-MT-07",
     "P0-FH-04",
     "P0-FH-26",
-    "P0-MT-10",
-    "P0-AS-34"
+    "P0-MT-10"
    ],
    "kind": "surface"
   },
@@ -1381,8 +1378,7 @@ window.LAUNCH_DATA = {
     "N5-AS-10",
     "N5-AS-13",
     "P0-FH-04",
-    "P0-AS-18",
-    "P0-AS-30"
+    "P0-AS-18"
    ],
    "kind": "surface"
   },
@@ -1708,8 +1704,7 @@ window.LAUNCH_DATA = {
     "P0-MT-03",
     "P0-MT-05",
     "P0-AS-13",
-    "P0-FH-27",
-    "P0-AS-35"
+    "P0-FH-27"
    ],
    "kind": "foundation"
   },
@@ -1901,16 +1896,16 @@ window.LAUNCH_DATA = {
   },
   {
    "id": "webfoundation",
-   "name": "Web app groundwork (Phase 0, done)",
+   "name": "Site, admin + design groundwork (Phase 0, done)",
    "layer": "foundation",
    "kind": "foundation",
-   "what": "Everything web-side that already exists and the launch build stands on: three generations of mockups (v3 at WCAG AA, mobile-first, real pilot data), the React foundation and six live screens, the public site and landing tour, the admin platform, dashboards, and the tracker lineage up to this board.",
-   "why": "The N1-N6 web build is not starting from zero - the design language, component thinking and every internal surface were proven here.",
+   "what": "What web-side work actually exists: the live marketing site and landing tour, the admin platform (dashboards, trackers, QA boards, data explorer), and three generations of static mockups up to v3 at WCAG AA. NO product app code exists - the product web app starts greenfield after Saad hands the mockup pack over on 10 Sep.",
+   "why": "The launch build starts from mockups plus a proven design language and internal tooling - not from product code.",
    "gate": "Shipped before 3 Sep 2026. This card is the record, not a promise.",
    "sprints": "Phase 0 (Feb-Sep)",
    "faheem": "",
    "muteeb": "",
-   "asad": "All of it: site, admin, dashboards, mockups, trackers.",
+   "asad": "Site, admin, dashboards, trackers, mockups. Product app: not started, by design.",
    "areas": [
     "Site",
     "Admin",
@@ -1929,8 +1924,6 @@ window.LAUNCH_DATA = {
     "P0-AS-07",
     "P0-AS-08",
     "P0-AS-09",
-    "P0-AS-10",
-    "P0-AS-11",
     "P0-AS-12",
     "P0-AS-13",
     "P0-AS-14",
@@ -1949,12 +1942,6 @@ window.LAUNCH_DATA = {
     "P0-AS-27",
     "P0-AS-28",
     "P0-AS-29",
-    "P0-AS-30",
-    "P0-AS-31",
-    "P0-AS-32",
-    "P0-AS-33",
-    "P0-AS-34",
-    "P0-AS-35",
     "P0-SD-04"
    ]
   },
@@ -5393,8 +5380,7 @@ window.LAUNCH_DATA = {
     "N1-AS-05",
     "Muteeb: production-grade score endpoint with drivers + confidence",
     "Faheem: driver attribution",
-    "Saad: Drafts pack + one-pager",
-    "P0-AS-32"
+    "Saad: Drafts pack + one-pager"
    ],
    "feeds": [
     "N2-AS-08",
@@ -6170,7 +6156,7 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Faheem",
    "title": "Best-times v1 aggregates",
-   "what": "Hour x day engagement aggregates per page, count floor >=10 with a persisted fallback level, strictly-before windows, explicit page timezone, TimeSeriesSplit backtest, and the lookback window written down for Asad's UI note. (S9 shipped this in the old app; this ticket rebuilds and re-validates it in the launch stack.)",
+   "what": "Hour x day engagement aggregates per page, count floor >=10 with a persisted fallback level, strictly-before windows, explicit page timezone, TimeSeriesSplit backtest, and the lookback window written down for Asad's UI note. (The S9 MODEL work is real and carries over; the surface has never been built in the launch stack.)",
    "why": "Powers the heatmap and the next-move hero's time claims; Muteeb's N3 endpoint reads the table.",
    "area": "Best Times",
    "due": "2026-09-25",
@@ -8522,7 +8508,7 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Asad",
    "title": "Best Times heatmap with sparse-data honesty and methodology note",
-   "what": "7x24 grid on Muteeb's best-times endpoint, #1-window ring, cells under the count floor suppressed with a 'not enough posts yet' state, page timezone by IANA id so the 25 Oct clock change needs no UI change, and a UI note stating the lookback window and the self-selection caveat. (S9 shipped this in the old app; this ticket rebuilds and re-validates it in the launch stack.)",
+   "what": "7x24 grid on Muteeb's best-times endpoint, #1-window ring, cells under the count floor suppressed with a 'not enough posts yet' state, page timezone by IANA id so the 25 Oct clock change needs no UI change, and a UI note stating the lookback window and the self-selection caveat.",
    "why": "The TIME-IT surface and the source of the hero's '6:40pm' claims; the honesty state matters more than the grid.",
    "area": "Best Times",
    "due": "2026-10-08",
@@ -8531,8 +8517,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "Muteeb: best-times endpoint",
     "Faheem: aggregates + count floor",
-    "Saad: Best Times pack + one-pager",
-    "P0-AS-34"
+    "Saad: Best Times pack + one-pager"
    ],
    "feeds": [
     "Saad (acceptance)",
@@ -19111,46 +19096,6 @@ window.LAUNCH_DATA = {
    "layer": "intelligence"
   },
   {
-   "id": "P0-AS-10",
-   "sprint": "P0",
-   "assignee": "Asad",
-   "title": "React app foundation and design system",
-   "what": "Replaced static mockups with a production React app, dark theme and shared component library",
-   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
-   "area": "Site",
-   "due": "2026-06-30",
-   "priority": "P1",
-   "priority_reason": "historical record",
-   "depends_on": [],
-   "feeds": [],
-   "gate": "none",
-   "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
-   "acceptance": "Shipped and in use.",
-   "checklist": [],
-   "status": "done",
-   "layer": "product"
-  },
-  {
-   "id": "P0-AS-11",
-   "sprint": "P0",
-   "assignee": "Asad",
-   "title": "Six live product screens",
-   "what": "Shipped analytics charts, feed content-type chips, posting-time heatmap, sparklines, stories rail, model-quality board",
-   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
-   "area": "Dashboards",
-   "due": "2026-06-30",
-   "priority": "P1",
-   "priority_reason": "historical record",
-   "depends_on": [],
-   "feeds": [],
-   "gate": "none",
-   "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
-   "acceptance": "Shipped and in use.",
-   "checklist": [],
-   "status": "done",
-   "layer": "product"
-  },
-  {
    "id": "P0-AX-01",
    "sprint": "P0",
    "assignee": "Alex",
@@ -19687,8 +19632,8 @@ window.LAUNCH_DATA = {
    "id": "P0-FH-20",
    "sprint": "P0",
    "assignee": "Faheem",
-   "title": "Model-serving FastAPI app shipped for draft scoring",
-   "what": "FastAPI serving app with Pydantic models: scoring endpoints and the response-envelope shape (model_version, confidence, explicit abstain) that N1 freezes into the OpenAPI contract. Backs the S8 draft-scoring and warnings surfaces; merge to main queued in N1.",
+   "title": "Model-serving FastAPI endpoints built on a branch",
+   "what": "FastAPI scoring endpoints with Pydantic models and the response-envelope shape (model_version, confidence, explicit abstain) that N1 freezes into the OpenAPI contract. On the feat/discovery_api branch in marvel - real code, unmerged; merge to main is N1 work. No product UI consumed it yet.",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Models",
    "due": "2026-08-31",
@@ -20179,88 +20124,6 @@ window.LAUNCH_DATA = {
    "layer": "intelligence"
   },
   {
-   "id": "P0-AS-30",
-   "sprint": "P0",
-   "assignee": "Asad",
-   "title": "S7 analytics video sub-tab and raw-signals table",
-   "what": "Analytics gains overview and video sub-tabs, the four per-video signals in the post view, and one sortable, exportable table with every post and every signal. Table numbers reconcile with the charts above them.",
-   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
-   "area": "Site",
-   "due": "2026-08-06",
-   "priority": "P1",
-   "priority_reason": "historical record",
-   "depends_on": [],
-   "feeds": [],
-   "gate": "none",
-   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
-   "acceptance": "Shipped and in use.",
-   "checklist": [],
-   "status": "done",
-   "layer": "product"
-  },
-  {
-   "id": "P0-AS-31",
-   "sprint": "P0",
-   "assignee": "Asad",
-   "title": "Predictions surface skeleton with the first post score",
-   "what": "The first model score shown on posts plus the predictions surface skeleton. Winner framing retired on the S7 evidence; the surface carries honest bands only, feeding the S8 warnings build.",
-   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
-   "area": "Site",
-   "due": "2026-08-06",
-   "priority": "P1",
-   "priority_reason": "historical record",
-   "depends_on": [],
-   "feeds": [],
-   "gate": "none",
-   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
-   "acceptance": "Shipped and in use.",
-   "checklist": [],
-   "status": "done",
-   "layer": "product"
-  },
-  {
-   "id": "P0-AS-32",
-   "sprint": "P0",
-   "assignee": "Asad",
-   "title": "Compose risk dial live: band, three reasons, one fix",
-   "what": "Write or paste a draft, attach the image, get at-risk / average / strong for this page with three reasons and one suggested fix; re-scores on edit in ~2s; thin drafts say 'not enough to score yet'; every render logged from day one.",
-   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
-   "area": "Site",
-   "due": "2026-08-08",
-   "priority": "P1",
-   "priority_reason": "historical record",
-   "depends_on": [],
-   "feeds": [
-    "N2-AS-06"
-   ],
-   "gate": "none",
-   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
-   "acceptance": "Shipped and in use.",
-   "checklist": [],
-   "status": "done",
-   "layer": "product"
-  },
-  {
-   "id": "P0-AS-33",
-   "sprint": "P0",
-   "assignee": "Asad",
-   "title": "Weak-post warnings surface with prediction receipts",
-   "what": "Outlook for upcoming posts, warnings shown only where the validated 75% precision floor holds, honest empty and low-confidence states, and the predicted-vs-actual scoreboard filling as outcomes arrive. Zero winner language anywhere.",
-   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
-   "area": "Site",
-   "due": "2026-08-08",
-   "priority": "P1",
-   "priority_reason": "historical record",
-   "depends_on": [],
-   "feeds": [],
-   "gate": "none",
-   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
-   "acceptance": "Shipped and in use.",
-   "checklist": [],
-   "status": "done",
-   "layer": "product"
-  },
-  {
    "id": "P0-FH-26",
    "sprint": "P0",
    "assignee": "Faheem",
@@ -20286,8 +20149,8 @@ window.LAUNCH_DATA = {
    "id": "P0-MT-10",
    "sprint": "P0",
    "assignee": "Muteeb",
-   "title": "Best Times pipeline and tenant-scoped serving API",
-   "what": "Leakage-safe per-slot feature assembly, the serving API cached per page/week with tenant isolation verified, Prophet run on the bulk E2 schedule inside budget, and drift signals through the one metrics API (VD-MLP-009A).",
+   "title": "Best Times feature assembly and scheduled model runs",
+   "what": "Leakage-safe per-slot feature assembly over the KANG/HEIMDALL data spine and Prophet runs on the bulk schedule (marvel PRs 9/12/17/19/20). The cached tenant-scoped serving API from the S9 plan is design-stage only and is NOT claimed here.",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Pipelines",
    "due": "2026-08-22",
@@ -20303,28 +20166,6 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "status": "done",
    "layer": "intelligence"
-  },
-  {
-   "id": "P0-AS-34",
-   "sprint": "P0",
-   "assignee": "Asad",
-   "title": "Best Times calendar heatmap live in the planner",
-   "what": "The 24h x 7d heatmap plus the plain-English slot recommendation with its confidence and sample count; cells under 5 posts stay silent; honest 'not enough history yet' state; matches the mockup on desktop and mobile (VD-211).",
-   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
-   "area": "Site",
-   "due": "2026-08-22",
-   "priority": "P1",
-   "priority_reason": "historical record",
-   "depends_on": [],
-   "feeds": [
-    "N3-AS-09"
-   ],
-   "gate": "none",
-   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
-   "acceptance": "Shipped and in use.",
-   "checklist": [],
-   "status": "done",
-   "layer": "product"
   },
   {
    "id": "P0-FH-27",
@@ -20345,26 +20186,6 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "status": "done",
    "layer": "intelligence"
-  },
-  {
-   "id": "P0-AS-35",
-   "sprint": "P0",
-   "assignee": "Asad",
-   "title": "Model-health dashboard: healthy / watch / slipping",
-   "what": "Watchdog state per model behind the team login, with the best-times quality and Prophet drift signals alongside the NLP models; slipping is the loudest thing on the page, readable in under two seconds (VD-DASH-009).",
-   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
-   "area": "Dashboards",
-   "due": "2026-08-22",
-   "priority": "P1",
-   "priority_reason": "historical record",
-   "depends_on": [],
-   "feeds": [],
-   "gate": "none",
-   "source": "playbook S7-S9 extraction 3 Sep (founder-confirmed done)",
-   "acceptance": "Shipped and in use.",
-   "checklist": [],
-   "status": "done",
-   "layer": "product"
   },
   {
    "id": "P0-SD-04",
