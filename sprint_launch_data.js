@@ -1,4 +1,4 @@
-// sprint_launch_data.js - regenerated 3 Sep 2026: Phase 0, Art-E + Discovery plans, build-book fixes, web push, app backlog.
+// sprint_launch_data.js - regenerated 3 Sep 2026: Phase 0 (S1-S10 record), Art-E + Discovery plans, build-book fixes, web push, app backlog.
 window.LAUNCH_DATA = {
  "generated_at": "2026-09-03",
  "layers": [
@@ -45,11 +45,11 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "section": "Phase 0 · Already built",
    "name": "Phase 0 · Done",
-   "start": "2026-02-01",
+   "start": "2025-06-01",
    "end": "2026-09-02",
    "gate_date": "2026-09-02",
    "gate": "Everything in this sprint shipped before 3 Sep 2026. It is the record, not the plan.",
-   "goal": "Eight months of groundwork: the models, pipelines, dashboards, site, pilots, legal and ops the launch plan builds on."
+   "goal": "Fifteen months of groundwork: the models, pipelines, dashboards, site, pilots, legal and ops the launch plan builds on."
   },
   {
    "id": "N1",
@@ -1058,7 +1058,13 @@ window.LAUNCH_DATA = {
     "N3-FH-05",
     "N4-SD-04",
     "N5-FH-01",
-    "N5-SD-09"
+    "N5-SD-09",
+    "P0-FH-18",
+    "P0-FH-17",
+    "P0-FH-05",
+    "P0-FH-03",
+    "P0-FH-01",
+    "P0-FH-21"
    ],
    "kind": "surface"
   },
@@ -1122,7 +1128,11 @@ window.LAUNCH_DATA = {
     "N6-FH-04",
     "N6-MT-04",
     "N5-MT-18",
-    "N5-AS-19"
+    "N5-AS-19",
+    "P0-FH-07",
+    "P0-FH-08",
+    "P0-FH-09",
+    "P0-LW-03"
    ],
    "kind": "surface"
   },
@@ -1147,7 +1157,9 @@ window.LAUNCH_DATA = {
     "N3-AS-09",
     "N3-FH-05",
     "N3-MT-04",
-    "N4-FH-08"
+    "N4-FH-08",
+    "P0-MT-07",
+    "P0-FH-04"
    ],
    "kind": "surface"
   },
@@ -1179,7 +1191,9 @@ window.LAUNCH_DATA = {
     "N4-AS-12",
     "N5-AS-10",
     "N5-AS-13",
-    "N5-SD-13"
+    "N5-SD-13",
+    "P0-FH-19",
+    "P0-MT-07"
    ],
    "kind": "surface"
   },
@@ -1235,7 +1249,9 @@ window.LAUNCH_DATA = {
     "N6-FH-06",
     "N6-MT-04",
     "N4-SD-15",
-    "N5-MT-19"
+    "N5-MT-19",
+    "P0-FH-20",
+    "P0-AS-23"
    ],
    "kind": "surface"
   },
@@ -1281,7 +1297,8 @@ window.LAUNCH_DATA = {
     "N6-LW-02",
     "N3-FH-13",
     "N4-SD-16",
-    "N5-SD-13"
+    "N5-SD-13",
+    "P0-MT-09"
    ],
    "kind": "surface"
   },
@@ -1307,7 +1324,8 @@ window.LAUNCH_DATA = {
     "N3-MT-07",
     "N4-AS-13",
     "N6-MT-04",
-    "N4-MT-17"
+    "N4-MT-17",
+    "P0-FH-14"
    ],
    "kind": "surface"
   },
@@ -1357,7 +1375,9 @@ window.LAUNCH_DATA = {
     "N3-MT-05",
     "N3-MT-07",
     "N5-AS-10",
-    "N5-AS-13"
+    "N5-AS-13",
+    "P0-FH-04",
+    "P0-AS-18"
    ],
    "kind": "surface"
   },
@@ -1508,7 +1528,9 @@ window.LAUNCH_DATA = {
     "LW-SD-02",
     "LW-SD-03",
     "LW-AX-03",
-    "LW-FZ-03"
+    "LW-FZ-03",
+    "P0-AS-01",
+    "P0-AS-14"
    ],
    "kind": "surface"
   },
@@ -1676,7 +1698,11 @@ window.LAUNCH_DATA = {
     "LW-MT-01",
     "LW-MT-02",
     "LW-MT-05",
-    "LW-JL-02"
+    "LW-JL-02",
+    "P0-MT-02",
+    "P0-MT-03",
+    "P0-MT-05",
+    "P0-AS-13"
    ],
    "kind": "foundation"
   },
@@ -1849,7 +1875,126 @@ window.LAUNCH_DATA = {
     "LW-LW-02",
     "LW-FZ-01",
     "LW-FZ-02",
-    "LW-FZ-04"
+    "LW-FZ-04",
+    "P0-FZ-01",
+    "P0-FZ-02",
+    "P0-JL-01",
+    "P0-LW-02",
+    "P0-AX-01",
+    "P0-SD-01",
+    "P0-LW-04",
+    "P0-FZ-03",
+    "P0-AX-03",
+    "P0-JL-02",
+    "P0-SD-02",
+    "P0-SD-03"
+   ]
+  },
+  {
+   "id": "webfoundation",
+   "name": "Web app groundwork (Phase 0, done)",
+   "layer": "foundation",
+   "kind": "foundation",
+   "what": "Everything web-side that already exists and the launch build stands on: three generations of mockups (v3 at WCAG AA, mobile-first, real pilot data), the React foundation and six live screens, the public site and landing tour, the admin platform, dashboards, and the tracker lineage up to this board.",
+   "why": "The N1-N6 web build is not starting from zero - the design language, component thinking and every internal surface were proven here.",
+   "gate": "Shipped before 3 Sep 2026. This card is the record, not a promise.",
+   "sprints": "Phase 0 (Feb-Sep)",
+   "faheem": "",
+   "muteeb": "",
+   "asad": "All of it: site, admin, dashboards, mockups, trackers.",
+   "areas": [
+    "Site",
+    "Admin",
+    "Dashboards",
+    "Design",
+    "Tracker",
+    "Ops"
+   ],
+   "tickets": [
+    "P0-AS-01",
+    "P0-AS-02",
+    "P0-AS-03",
+    "P0-AS-04",
+    "P0-AS-05",
+    "P0-AS-06",
+    "P0-AS-07",
+    "P0-AS-08",
+    "P0-AS-09",
+    "P0-AS-10",
+    "P0-AS-11",
+    "P0-AS-12",
+    "P0-AS-13",
+    "P0-AS-14",
+    "P0-AS-15",
+    "P0-AS-16",
+    "P0-AS-17",
+    "P0-AS-18",
+    "P0-AS-19",
+    "P0-AS-20",
+    "P0-AS-21",
+    "P0-AS-22",
+    "P0-AS-23",
+    "P0-AS-24",
+    "P0-AS-25",
+    "P0-AS-26",
+    "P0-AS-27",
+    "P0-AS-28",
+    "P0-AS-29"
+   ]
+  },
+  {
+   "id": "modelfoundation",
+   "name": "Models + data groundwork (Phase 0, done)",
+   "layer": "foundation",
+   "kind": "foundation",
+   "what": "The AI estate the product serves from: two years of warehouse history refreshed hourly, five post-NLP and five comment models, OCR and content-type fusion, GALACTUS routing, the drift test suite, the signals API, flop-detection v0 past its gate, and the S7 finding that flops are predictable.",
+   "why": "Every scored draft, alert and insight in the MVP reads from models and pipelines that were built and QA-ed before the launch push began.",
+   "gate": "Shipped before 3 Sep 2026. This card is the record, not a promise.",
+   "sprints": "Sprints S1-S7 (Feb-Aug)",
+   "faheem": "Models, datasets, QA suite, the 22-panel warehouse sweep.",
+   "muteeb": "Ingestion, embeddings, routing, hourly loads.",
+   "asad": "",
+   "areas": [
+    "Models",
+    "Data",
+    "Pipelines",
+    "QA"
+   ],
+   "tickets": [
+    "P0-FH-01",
+    "P0-FH-02",
+    "P0-FH-03",
+    "P0-MT-01",
+    "P0-FH-04",
+    "P0-FH-05",
+    "P0-FH-06",
+    "P0-FH-07",
+    "P0-FH-08",
+    "P0-FH-09",
+    "P0-FH-10",
+    "P0-FH-11",
+    "P0-FH-12",
+    "P0-FH-13",
+    "P0-FH-14",
+    "P0-MT-02",
+    "P0-MT-03",
+    "P0-MT-04",
+    "P0-MT-05",
+    "P0-FH-15",
+    "P0-FH-16",
+    "P0-FH-17",
+    "P0-FH-18",
+    "P0-MT-06",
+    "P0-FH-19",
+    "P0-MT-07",
+    "P0-FH-20",
+    "P0-MT-08",
+    "P0-MT-09",
+    "P0-FH-21",
+    "P0-FH-22",
+    "P0-FH-23",
+    "P0-FH-24",
+    "P0-FH-25"
    ]
   }
  ],
@@ -2171,7 +2316,8 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N1-SD-02",
     "N1-SD-06",
-    "N1-MT-04"
+    "N1-MT-04",
+    "P0-AS-12"
    ],
    "feeds": [
     "N2-AS-01",
@@ -2446,7 +2592,9 @@ window.LAUNCH_DATA = {
    "due": "2026-09-08",
    "priority": "P1",
    "priority_reason": "first in the agreed P2 chain; #22 and #18 wait on it but both sit inside N1",
-   "depends_on": [],
+   "depends_on": [
+    "P0-FH-10"
+   ],
    "feeds": [
     "N1-FH-10",
     "N1-FH-12"
@@ -2780,7 +2928,8 @@ window.LAUNCH_DATA = {
     "N1-FH-17",
     "N1-AS-14",
     "N1-AS-15",
-    "N1-MT-02"
+    "N1-MT-02",
+    "P0-FH-20"
    ],
    "feeds": [
     "N1-MT-17",
@@ -3561,7 +3710,8 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "Blocks Asad's component-library start on 10 Sep",
    "depends_on": [
-    "N1-SD-02"
+    "N1-SD-02",
+    "P0-AS-12"
    ],
    "feeds": [
     "Asad"
@@ -4561,7 +4711,8 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "Faheem's crisis backtest, the crisis-gate decision and N2 tuning all wait on it; Faheem's roadmap dates it end of N1",
    "depends_on": [
-    "N1-LW-01"
+    "N1-LW-01",
+    "P0-LW-03"
    ],
    "feeds": [
     "Faheem",
@@ -4619,7 +4770,8 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "Every later gate is measured on these pages; N2 onboarding cannot start without them",
    "depends_on": [
-    "N1-LW-01"
+    "N1-LW-01",
+    "P0-LW-02"
    ],
    "feeds": [
     "Saad",
@@ -5668,7 +5820,10 @@ window.LAUNCH_DATA = {
    "priority_reason": "blocks Muteeb's N2 week A",
    "depends_on": [
     "N1-FH-06",
-    "N2-FH-01"
+    "N2-FH-01",
+    "P0-FH-18",
+    "P0-FH-17",
+    "P0-FH-21"
    ],
    "feeds": [
     "Muteeb: scoring endpoint production-grade"
@@ -5778,7 +5933,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "Muteeb's alerts pipeline consumes it in N2",
    "depends_on": [
     "N2-AS-02",
-    "Lewis: complete incident window (N1)"
+    "Lewis: complete incident window (N1)",
+    "P0-FH-07"
    ],
    "feeds": [
     "Muteeb: alerts pipeline skeleton",
@@ -6114,7 +6270,9 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "blocks Muteeb's N3 day-1 graph work",
    "depends_on": [
-    "Filza: de-identification policy + k=5 floor signed"
+    "Filza: de-identification policy + k=5 floor signed",
+    "P0-MT-07",
+    "P0-MT-09"
    ],
    "feeds": [
     "Muteeb: Discovery graph N3"
@@ -6268,7 +6426,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "Asad builds Today against the mock layer from N1-MT-06 and switches per endpoint; the 25 Sep gate criterion is the live draft score (N2-MT-01/13), not Today. Slack to the sprint end.",
    "depends_on": [
     "N1-MT-02",
-    "N2-FH-02"
+    "N2-FH-02",
+    "P0-FH-14"
    ],
    "feeds": [
     "Asad: Today N2",
@@ -8745,7 +8904,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "N3 gate: health pill live",
    "depends_on": [
     "N2-FH-15",
-    "N2-FH-16"
+    "N2-FH-16",
+    "P0-FH-19"
    ],
    "feeds": [
     "Muteeb: health endpoints",
@@ -9044,7 +9204,9 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Best Times is not a 9 Oct gate criterion (crisis clock, precision-at-5, health pill, waitlist). Asad's heatmap builds on the mock layer; a few days' slip keeps the surface inside N3.",
    "depends_on": [
-    "Faheem: best-times v1 aggregates"
+    "Faheem: best-times v1 aggregates",
+    "P0-MT-07",
+    "P0-FH-04"
    ],
    "feeds": [
     "Asad: Best Times N3",
@@ -9073,7 +9235,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "The gate criterion 'health pill live' is carried by N3-MT-07 (kept P0). The reach/engagement/followers tiles and charts have the same mock-layer slack as N3-MT-04.",
    "depends_on": [
     "N1-MT-08",
-    "Faheem: per-post scores"
+    "Faheem: per-post scores",
+    "P0-MT-07"
    ],
    "feeds": [
     "Asad: Analytics N3",
@@ -18503,14 +18666,16 @@ window.LAUNCH_DATA = {
    "sprint": "P0",
    "assignee": "Faheem",
    "title": "Warehouse live: LOKI ingestion and the two-year backfill (S1)",
-   "what": "Redshift warehouse stood up with LOKI ingestion and the 2-year page-history backfill, per the Drive sprint records reconciled into the tracker on 3 Jun.",
+   "what": "Redshift warehouse stood up with LOKI ingestion and the 2-year page-history backfill, per the Drive sprint records reconciled into the tracker on 3 Jun. Backfill completed 28 Feb-1 Mar per the Sprint 2 wrap-up.",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Pipelines",
-   "due": "2026-06-03",
+   "due": "2026-03-01",
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
-   "feeds": [],
+   "feeds": [
+    "N3-MT-04"
+   ],
    "gate": "none",
    "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
    "acceptance": "Shipped and in use.",
@@ -18522,8 +18687,8 @@ window.LAUNCH_DATA = {
    "id": "P0-FH-05",
    "sprint": "P0",
    "assignee": "Faheem",
-   "title": "Five post-NLP models and the 97-post benchmark shipped (S2)",
-   "what": "Five NLP models for post understanding, benchmarked on the 97-post gold set, plus DeepSeek distillation work; the gold-set provenance was later banked in the PM handover pack.",
+   "title": "Five post-NLP models and the 97-post benchmark shipped (S3)",
+   "what": "Five NLP models for post understanding, benchmarked on the 97-post gold set, plus DeepSeek distillation work; the gold-set provenance was later banked in the PM handover pack. (S3 per Sprint_3_Conclusion.pdf; overlaps P0-FH-01/02 which carry the detail.)",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Models",
    "due": "2026-06-03",
@@ -18570,7 +18735,9 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
-   "feeds": [],
+   "feeds": [
+    "N2-FH-06"
+   ],
    "gate": "none",
    "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
    "acceptance": "Shipped and in use.",
@@ -18690,7 +18857,9 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
-   "feeds": [],
+   "feeds": [
+    "N1-FH-05"
+   ],
    "gate": "none",
    "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
    "acceptance": "Shipped and in use.",
@@ -18830,7 +18999,9 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
-   "feeds": [],
+   "feeds": [
+    "N2-MT-03"
+   ],
    "gate": "none",
    "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
    "acceptance": "Shipped and in use.",
@@ -18903,7 +19074,7 @@ window.LAUNCH_DATA = {
    "sprint": "P0",
    "assignee": "Muteeb",
    "title": "GALACTUS confidence calibration and routing",
-   "what": "Calibrated model confidence and routed each prediction to auto-accept, second opinion or human audit",
+   "what": "Calibrated model confidence and routed each prediction to auto-accept, second opinion or human audit (S6 ticket MLP-006C. Distinct from the GALACTUS loader family in the marvel repo, which is only S3-to-Redshift loads.)",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Pipelines",
    "due": "2026-06-30",
@@ -19050,7 +19221,10 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
-   "feeds": [],
+   "feeds": [
+    "N1-AS-12",
+    "N1-SD-06"
+   ],
    "gate": "none",
    "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
    "acceptance": "Shipped and in use.",
@@ -19143,10 +19317,10 @@ window.LAUNCH_DATA = {
    "sprint": "P0",
    "assignee": "Faheem",
    "title": "S6 shipped: OCR cascade and image fusion at 0.93 macro F1",
-   "what": "23/23 tickets: image download unlocked for the 2-year backfill, a confidence-routed OCR cascade (fast engine escalating to a VLM with a swapguard), and CLIP late fusion typing every post into 5 content types at 0.93 macro F1, weekly automated.",
+   "what": "23/23 tickets: image download unlocked for the 2-year backfill, a confidence-routed OCR cascade (fast engine escalating to a VLM with a swapguard), and CLIP late fusion typing every post into 5 content types at 0.93 macro F1, weekly automated. (Conclusion docs dated 30 Jun; the playbook says shipped 21 Jul - 30 Jun taken as canonical.)",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Models",
-   "due": "2026-07-21",
+   "due": "2026-06-30",
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
@@ -19350,7 +19524,9 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
-   "feeds": [],
+   "feeds": [
+    "N2-FH-02"
+   ],
    "gate": "none",
    "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
    "acceptance": "Shipped and in use.",
@@ -19383,14 +19559,16 @@ window.LAUNCH_DATA = {
    "sprint": "P0",
    "assignee": "Faheem",
    "title": "Flop-detection model v0 passed its gate",
-   "what": "AUC 0.76 with 75% precision at 55% coverage, cold-start 0.746; ships the Borda gate plus regressor (LambdaRank lost the A/B). The 598-line train.py and reason_map.json sit on feat/vd015b-target-fusion, with the rescue to main queued in N1.",
+   "what": "AUC 0.76 with 75% precision at 55% coverage, cold-start 0.746; ships the Borda gate plus regressor (LambdaRank lost the A/B). The 598-line train.py and reason_map.json sit on feat/vd015b-target-fusion, with the rescue to main queued in N1. VERIFY: the 5 Aug playbook only planned the gate re-score; no document records a pass and no S8 demo record exists.",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Models",
    "due": "2026-08-08",
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
-   "feeds": [],
+   "feeds": [
+    "N2-FH-02"
+   ],
    "gate": "none",
    "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
    "acceptance": "Shipped and in use.",
@@ -19401,12 +19579,12 @@ window.LAUNCH_DATA = {
   {
    "id": "P0-MT-06",
    "sprint": "P0",
-   "assignee": "Muteeb",
+   "assignee": "Faheem",
    "title": "Meta metric migration landed (marvel PR #7)",
-   "what": "The 14 Jun metric-deprecation incident repaired: LOKI insights migrated to supported metrics with era flags, the watermark trap fixed so dark-window partitions could backfill, and the feed restored before S8 model work consumed it.",
+   "what": "Migrated post AND page insights to the surviving reach/views metrics after Meta killed the impressions family on 15 Jun; the feed was dark ~6 weeks until this merged 30 Jul. Author: Faheem (id kept for continuity).",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Pipelines",
-   "due": "2026-08-08",
+   "due": "2026-07-30",
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
@@ -19450,7 +19628,9 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
-   "feeds": [],
+   "feeds": [
+    "N3-FH-06"
+   ],
    "gate": "none",
    "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
    "acceptance": "Shipped and in use.",
@@ -19461,16 +19641,20 @@ window.LAUNCH_DATA = {
   {
    "id": "P0-MT-07",
    "sprint": "P0",
-   "assignee": "Muteeb",
-   "title": "KANG live hourly: two years of page data refreshed",
-   "what": "KANG growth-curve rows loading hourly since 20 Aug; page_posts hourly after fix #12, ending up-to-7-day staleness; posting resumption on restricted pages 29 Aug gave the cleanest latency measurement. State-machine commit queued in N1.",
+   "assignee": "Faheem",
+   "title": "KANG growth-curve collection + hourly page_posts freshness",
+   "what": "KANG collects per-post growth curves into rdl.post_growth_curve (marvel PRs 19/20) and GALACTUS re-loads the newest page_posts day so hourly runs keep the table fresh (PR22). NOTE: the collector docstring at HEAD still says schedule wiring pending - verify it is actually on a schedule.",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Data",
-   "due": "2026-08-26",
+   "due": "2026-08-20",
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
-   "feeds": [],
+   "feeds": [
+    "N3-MT-04",
+    "N3-MT-05",
+    "N2-FH-18"
+   ],
    "gate": "none",
    "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
    "acceptance": "Shipped and in use.",
@@ -19483,14 +19667,16 @@ window.LAUNCH_DATA = {
    "sprint": "P0",
    "assignee": "Faheem",
    "title": "Model-serving FastAPI app drafted on a branch",
-   "what": "FastAPI serving app with Pydantic models on feat/discovery_api: scoring endpoints and the response-envelope shape (model_version, confidence, explicit abstain) that N1 freezes into the OpenAPI contract.",
+   "what": "FastAPI serving app with Pydantic models on feat/discovery_api: scoring endpoints and the response-envelope shape (model_version, confidence, explicit abstain) that N1 freezes into the OpenAPI contract. VERIFY OWNER: the 21 Aug status pack assigns the serving API to Muteeb; this row credits Faheem from the git branch.",
    "why": "Completed before the launch push began - part of the foundation the plan stands on.",
    "area": "Models",
    "due": "2026-08-31",
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
-   "feeds": [],
+   "feeds": [
+    "N1-FH-19"
+   ],
    "gate": "none",
    "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
    "acceptance": "Shipped and in use.",
@@ -19510,7 +19696,9 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
-   "feeds": [],
+   "feeds": [
+    "N1-LW-04"
+   ],
    "gate": "none",
    "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
    "acceptance": "Shipped and in use.",
@@ -19530,7 +19718,9 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "historical record",
    "depends_on": [],
-   "feeds": [],
+   "feeds": [
+    "N1-LW-02"
+   ],
    "gate": "none",
    "source": "phase 0 reconstruction 3 Sep (git, playbook, drive)",
    "acceptance": "Shipped and in use.",
@@ -19684,6 +19874,310 @@ window.LAUNCH_DATA = {
    "source": "discovery plan 3 Sep",
    "acceptance": "Protocol v1.1 contains the Discovery scenario and the N4-SD-07 dry-run notes show it exercised with the friendly pilot.",
    "checklist": []
+  },
+  {
+   "id": "P0-MT-08",
+   "sprint": "P0",
+   "assignee": "Muteeb",
+   "title": "Video frames and Whisper transcripts",
+   "what": "Frame sampling (1 per 2s) and per-video Whisper transcript JSONs to S3, feeding the S7 video models.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Pipelines",
+   "due": "2026-06-26",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "marvel repo audit 3 Sep",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "intelligence"
+  },
+  {
+   "id": "P0-MT-09",
+   "sprint": "P0",
+   "assignee": "Muteeb",
+   "title": "Page affinity feature builder",
+   "what": "Page-to-page affinity features computed from comment behaviour, feeding the Discovery matching work (VD-AI-013A).",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Data",
+   "due": "2026-07-03",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [
+    "N2-FH-18"
+   ],
+   "gate": "none",
+   "source": "marvel repo audit 3 Sep",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "intelligence"
+  },
+  {
+   "id": "P0-AS-28",
+   "sprint": "P0",
+   "assignee": "Asad",
+   "title": "THANOS ODL dimensional model",
+   "what": "Star-schema layer over the raw warehouse: dimension and fact tables for pages, posts, dates, comments and insights (marvel PR #1).",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Data",
+   "due": "2025-07-15",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "marvel repo audit 3 Sep",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "intelligence"
+  },
+  {
+   "id": "P0-FH-21",
+   "sprint": "P0",
+   "assignee": "Faheem",
+   "title": "HEIMDALL re-poll and page benchmarks",
+   "what": "120-day insights maturity re-poll, the post-insights history spine, and per-page benchmark stats refresh - the label spine draft scoring trains on.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Pipelines",
+   "due": "2026-08-15",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [
+    "N2-FH-02"
+   ],
+   "gate": "none",
+   "source": "marvel repo audit 3 Sep",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "intelligence"
+  },
+  {
+   "id": "P0-FH-22",
+   "sprint": "P0",
+   "assignee": "Faheem",
+   "title": "Weekly pipeline orchestration and email alerts live",
+   "what": "Step Functions + EventBridge run the Monday 1AM collection end to end with email alerting (WhatsApp channel dropped for cost/permissions).",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Pipelines",
+   "due": "2026-02-27",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "sprint-ledger audit 3 Sep (S1-S10 conclusions)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "intelligence"
+  },
+  {
+   "id": "P0-AS-29",
+   "sprint": "P0",
+   "assignee": "Asad",
+   "title": "Meta token verifier and data connector tools",
+   "what": "Two public site tools: validate and fetch Page access tokens, and view/download connected Page data.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Site",
+   "due": "2026-02-27",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "sprint-ledger audit 3 Sep (S1-S10 conclusions)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "product"
+  },
+  {
+   "id": "P0-LW-04",
+   "sprint": "P0",
+   "assignee": "Lewis",
+   "title": "Full Meta account access secured for engineering",
+   "what": "Resolved the access-control block on Graph API insights and walked Faheem through the Facebook data domain.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Ops",
+   "due": "2026-02-27",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "sprint-ledger audit 3 Sep (S1-S10 conclusions)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "foundation"
+  },
+  {
+   "id": "P0-FZ-03",
+   "sprint": "P0",
+   "assignee": "Filza",
+   "title": "Facebook terms review and data-processing agreement",
+   "what": "Reviewed Meta platform terms and put the data-processing agreement in place before crawling began.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Legal",
+   "due": "2026-02-11",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "sprint-ledger audit 3 Sep (S1-S10 conclusions)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "foundation"
+  },
+  {
+   "id": "P0-AX-03",
+   "sprint": "P0",
+   "assignee": "Alex",
+   "title": "Target user and problem definition locked",
+   "what": "The founding strategy call: who the product serves and what problem it solves, set before the build.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Ops",
+   "due": "2026-02-11",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "sprint-ledger audit 3 Sep (S1-S10 conclusions)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "foundation"
+  },
+  {
+   "id": "P0-JL-02",
+   "sprint": "P0",
+   "assignee": "Jill",
+   "title": "Cloud billing setup and cost guards",
+   "what": "Company card, cloud-bill watch and the warehouse/backfill cost guard in place.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Ops",
+   "due": "2026-02-27",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "sprint-ledger audit 3 Sep (S1-S10 conclusions)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "foundation"
+  },
+  {
+   "id": "P0-FH-23",
+   "sprint": "P0",
+   "assignee": "Faheem",
+   "title": "6K-post gold-label set and decision rules",
+   "what": "5,972 posts labelled across five tasks with 75 mined IF/THEN rules powering the distillation prompt.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Data",
+   "due": "2026-04-21",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "sprint-ledger audit 3 Sep (S1-S10 conclusions)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "intelligence"
+  },
+  {
+   "id": "P0-FH-24",
+   "sprint": "P0",
+   "assignee": "Faheem",
+   "title": "Full corpus labelled: 111,796 posts through deployed models",
+   "what": "Six fine-tuned models deployed and run across the entire two-year post history.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Pipelines",
+   "due": "2026-05-26",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "sprint-ledger audit 3 Sep (S1-S10 conclusions)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "intelligence"
+  },
+  {
+   "id": "P0-SD-02",
+   "sprint": "P0",
+   "assignee": "Saad",
+   "title": "S8 product definitions doc VD-PM-008 (originally Rafeh)",
+   "what": "Defined the S8 product surfaces and copy the playbook builds against.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Ops",
+   "due": "2026-07-11",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "sprint-ledger audit 3 Sep (S1-S10 conclusions)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "foundation"
+  },
+  {
+   "id": "P0-SD-03",
+   "sprint": "P0",
+   "assignee": "Saad",
+   "title": "Model Master Rules doc, provisional v1 (originally Rafeh)",
+   "what": "Numbered citable model-behaviour rules (MR-x.x) every sprint gate references; unreviewed rules marked.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "QA",
+   "due": "2026-07-24",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "sprint-ledger audit 3 Sep (S1-S10 conclusions)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "intelligence"
+  },
+  {
+   "id": "P0-FH-25",
+   "sprint": "P0",
+   "assignee": "Faheem",
+   "title": "Meta metric deprecation found and escalated",
+   "what": "Detected the reach-metric shutoff darkening the feed since mid-June and wrote the escalation that reset the model target.",
+   "why": "Completed before the launch push began - part of the foundation the plan stands on.",
+   "area": "Data",
+   "due": "2026-07-25",
+   "priority": "P1",
+   "priority_reason": "historical record",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "sprint-ledger audit 3 Sep (S1-S10 conclusions)",
+   "acceptance": "Shipped and in use.",
+   "checklist": [],
+   "status": "done",
+   "layer": "intelligence"
   }
  ]
 };

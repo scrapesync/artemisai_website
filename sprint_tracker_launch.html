@@ -1057,7 +1057,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
      by sprint (where the pressure sits between sprints). Free-text dependencies
      like "Lewis: incident set" are kept and shown, but only real ticket ids
      become arrows - an arrow that cannot be clicked through is a lie. */
-  var IDRE=/\b(N[1-6]|LW)-[A-Z]{2}-\d{2}\b/g;
+  var IDRE=/\b(N[1-6]|LW|P0|BL)-[A-Z]{2,3}-\d{2}\b/g;
   var BYID={}; function reindex(){ BYID={}; all().forEach(function(t){ BYID[t.id]=t; }); }
   function depIds(t){
     var out=[];
