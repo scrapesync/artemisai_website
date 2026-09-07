@@ -515,6 +515,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .fshb b.in{background:var(--sage);box-shadow:0 0 0 1px var(--gold)}
 .fshl{font-size:10.5px;color:var(--muted2);font-family:'IBM Plex Mono',monospace;white-space:nowrap}
 @media (max-width:760px){ .mkshotw{flex-direction:column} .mkshot{width:100%;max-width:100%} .fsh{grid-template-columns:1fr;gap:3px} .fshl{white-space:normal} }
+.mkhint{font-size:11px;color:var(--gold);opacity:.85}
 </style>
 </head><body>
 
@@ -1463,7 +1464,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
           return '<div class="lgb"><i style="width:'+gp+'%"></i></div>'+
             (MS?('<div class="mkshotw">'+(MS.img?'<img class="mkshot" loading="lazy" src="'+MS.img+'" alt="mockup">':'')+
               '<div class="mkside"><a class="mkopen" href="'+MS.page+'" target="_blank" rel="noopener">Open the full mockup &rarr;</a>'+
-              '<span class="mkcap">'+(MS.img?'What good looks like, from the v3 mockup.':'The old alerts mockup page is broken; open the link or wait for the new pack.')+' Saad\u2019s 10 Sep pack supersedes this.</span></div></div>'):'');
+              '<span class="mkcap">'+(MS.img?'What good looks like, from the v3 mockup.':'The old alerts mockup page is broken; open the link or wait for the new pack.')+' Saad\u2019s 10 Sep pack supersedes this.</span><span class="mkhint">Click any ticket below to read it in plain words, with its share of this feature.</span></div></div>'):'');
         })():'')+
         (open?g.ts.map(function(t){
           var o=!!LOPEN[g.id+t.id], S=st(t.id);
@@ -1481,7 +1482,9 @@ main{max-width:1500px;margin:0 auto;padding:22px}
         }).join(''):'')+
       '</div>';
     }).join('');
-    document.querySelectorAll('#lay-body .lgh').forEach(function(h){ h.addEventListener('click',function(){ var id=h.getAttribute('data-lg'); LGRP[id]=!LGRP[id]; renderLayman(); }); });
+    document.querySelectorAll('#lay-body .lgh').forEach(function(h){ h.addEventListener('click',function(){ var id=h.getAttribute('data-lg'); LGRP[id]=!LGRP[id];
+      if(LGRP[id]){ var g2=groups.filter(function(x){return x.id===id;})[0]; if(g2&&g2.ts.length&&!g2.ts.some(function(t){return LOPEN[id+t.id];})) LOPEN[id+g2.ts[0].id]=true; }
+      renderLayman(); }); });
     document.querySelectorAll('#lay-body .lrow').forEach(function(r){ r.addEventListener('click',function(){ var k=r.getAttribute('data-lt').split('|'); LOPEN[k[0]+k[1]]=!LOPEN[k[0]+k[1]]; renderLayman(); }); });
   }
 
