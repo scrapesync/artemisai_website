@@ -1,4 +1,4 @@
-// sprint_launch_data.js - regenerated 7 Sep 2026: calendar shifted +7 days, N1 starts 7 Sep, launch Tue 8 Dec.
+// sprint_launch_data.js - regenerated 7 Sep 2026: calendar +7, Saad delivers all mockups by 10 Sep, design chain + dependents pulled forward.
 window.LAUNCH_DATA = {
  "generated_at": "2026-09-03",
  "layers": [
@@ -59,7 +59,7 @@ window.LAUNCH_DATA = {
    "start": "2026-09-07",
    "end": "2026-09-20",
    "gate_date": "2026-09-18",
-   "gate": "Login -> connect a real page -> real data on a bare test page. Saad hands the complete mockup pack over on 17 Sep. Meta business verification submitted.",
+   "gate": "Login -> connect a real page -> real data on a bare test page. Saad hands the complete mockup pack over on 10 Sep. Meta business verification submitted.",
    "goal": "The rails sprint: scaffold, auth, staging and one real scoring endpoint exist; every design pack exists; the Meta clock has started."
   },
   {
@@ -2389,11 +2389,11 @@ window.LAUNCH_DATA = {
    "id": "N1-AS-08",
    "sprint": "N1",
    "assignee": "Asad",
-   "title": "Clear founder duties and hold the no-app-code line to Wed 17 Sep",
+   "title": "Clear founder duties and hold the no-app-code line to Fri 11 Sep",
    "what": "Confirm the four written decisions are signed and filed (stack N1-AS-03, multi-page N1-AS-04, crisis-gate wording N1-AS-02, Saad's no-publishing-scopes record); approve the 'page analytics tool' Meta narrative against the two-narratives doc; adopt Alex's 'Asad must NOT do' list with named owners and enforce it; write no app code before Wed 17 Sep and log any exception with a reason.",
    "why": "Every founder-hour spent in Sep is a build-hour saved in Oct; the no-code decision is what lets Muteeb's rails and Saad's packs finish first.",
    "area": "Launch",
-   "due": "2026-09-18",
+   "due": "2026-09-11",
    "priority": "P1",
    "priority_reason": "Protects the build weeks; nothing external blocks on it",
    "depends_on": [
@@ -2477,7 +2477,7 @@ window.LAUNCH_DATA = {
    "id": "N1-AS-11",
    "sprint": "N1",
    "assignee": "Asad",
-   "title": "Ship the landing page from the locked design, live Fri 19 Sep",
+   "title": "Ship the landing page from the locked design, live Tue 15 Sep",
    "what": "Build-ramp days 1-3 (Wed 10 - Fri 19 Sep, Asad's first code): rebuild the landing from the locked landing design using the token sheet; 1 December everywhere; link Filza's Privacy v1 draft and show a cookie banner (Checklist 4 docs timeline; the verifiably-blocking version is N4); keep the existing Netlify Forms 'pilot-waitlist' form (index.html) submitting until the bought waitlist replaces it in N3; preview deploy reviewed by Alex/Saad, production Fri 19 Sep.",
    "why": "A public date (the 19 Sep landing beat) and the toolchain warm-up before Today starts 21 Sep.",
    "area": "Landing",
@@ -2513,7 +2513,7 @@ window.LAUNCH_DATA = {
    "what": "In Muteeb's scaffolded repo, encode Saad's token sheet as Tailwind theme tokens (spacing, type, colour roles, radius, elevation, state rules) with Saad pairing on 18-27 Sep (N1-SD-20), then build ONLY the primitives the N2 shell and the two N2 screens need: app shell frame, icon rail, topbar with bell and health-pill slots, card, chip, gauge, toast. Publish /kitchen-sink on staging. Everything else - tiles, tables, sheets, tab bar, form controls, state shells - waits for Saad, who takes the library over on 28 Sep (N2-SD-15); do not build ahead of him.",
    "why": "Without tokens Asad derives a system from screenshots in his first build week; Today and Drafts must start on primitives, not blank files.",
    "area": "App core",
-   "due": "2026-09-20",
+   "due": "2026-09-14",
    "priority": "P1",
    "priority_reason": "Feeds the first screen on 14 Sep; slack is one weekend",
    "depends_on": [
@@ -3795,11 +3795,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-02",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Agree pack delivery order with Asad (first two ~15 Sep)",
-   "what": "Decide with Asad the build order of the nine packs so delivery is a ramp, not a cliff: first two packs (likely Today + Drafts) land ~15 Sep, the rest roll to 17 Sep. Write the order and dates in one message and pin it in the tracker.",
+   "title": "Agree pack delivery order with Asad (first two ~9 Sep)",
+   "what": "Decide with Asad the build order of the nine packs so delivery is a ramp, not a cliff: first two packs (likely Today + Drafts) land ~9 Sep, the rest roll to 17 Sep. Write the order and dates in one message and pin it in the tracker.",
    "why": "Costs nothing and buys schedule slack; without it Asad receives nine packs on 17 Sep and starts cold on all of them.",
    "area": "Design",
-   "due": "2026-09-10",
+   "due": "2026-09-07",
    "priority": "P0",
    "priority_reason": "Blocks the order Asad builds in from 14 Sep; only worth anything if decided on day 1 of N1",
    "depends_on": [
@@ -3826,7 +3826,7 @@ window.LAUNCH_DATA = {
    "what": "Write the decision that every Schedule CTA, scheduled row and calendar chip in V3 becomes 'Remind me at this time' because publishing/messaging scopes are excluded from Meta review; note the same for auto-replies/auto-pilot. Share with Filza and Alex so Meta-facing copy and the scopes decision match.",
    "why": "The mockups promise scheduling the MVP legally cannot do; if it is not cut on paper before the Today/Drafts packs, it is cut by surprise mid-build.",
    "area": "Design",
-   "due": "2026-09-11",
+   "due": "2026-09-07",
    "priority": "P1",
    "priority_reason": "An hour of writing whose date is carried by the first packs (N1-SD-07, 8 Sep, P0) which cannot ship a Schedule CTA; four days of slack before that. Internal prerequisite, not a blocker of another person.",
    "depends_on": [],
@@ -3849,11 +3849,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-04",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Ship the Discovery pack by Fri 12 Sep",
+   "title": "Ship the Discovery pack by Tue 8 Sep",
    "what": "Deliver the Explore layout (top-match spotlight + ranked rows with overlap %), slide-over profile, Matches/Saved tabs and the opt-in consent screen using Filza's text at equal prominence, view-only, reason strings only (no sub-score meters). Include the states Muteeb's N3 engine will emit: sub-k=5 fail-closed empty state, 'suggested - not validated' fallback badge, 'high-confidence' badge, and saved-then-revoked page state. This pack supersedes the V3 swipe deck.",
    "why": "It is the last new surface and there is no designer after 17 Sep; without it Asad's N4 Discovery UI and Muteeb's reason-string vocabulary have no truth to build to.",
    "area": "Discovery",
-   "due": "2026-09-12",
+   "due": "2026-09-08",
    "priority": "P0",
    "priority_reason": "Dated deadline 5 Sep; feeds Muteeb N3 and Asad N4",
    "depends_on": [
@@ -3869,7 +3869,7 @@ window.LAUNCH_DATA = {
    "source": "saad",
    "acceptance": "Pack delivered 12 Sep with web + mobile variants, all listed states, Filza's consent text verbatim, and the swipe deck recorded as deferred.",
    "checklist": [
-    "Chase Filza's consent text by 11 Sep; place it at equal prominence, revocable",
+    "Chase Filza's consent text by 8 Sep; place it at equal prominence, revocable",
     "Design spotlight, ranked rows, slide-over profile, Matches/Saved tabs (web + mobile)",
     "Design fail-closed empty state, 'suggested - not validated' and 'high-confidence' badges, revoked-page state",
     "Define reason-string slots that stay provenance-honest (text-only edges never say 'audience overlap')",
@@ -3880,11 +3880,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-05",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Run the daily 30-min async pack review with Asad, 10-24 Sep",
+   "title": "Run the daily 30-min async pack review with Asad, 7-10 Sep",
    "what": "Each day post the pack-in-progress and take Asad's buildability flags (component reuse, states missing, API fields the contract does not carry) while changes are still cheap. Fold every accepted flag back into the pack the same day and log the rest as decisions.",
    "why": "Design QA before code exists is the cheapest QA there is; skipping it lands unbuildable screens on the sole developer in his first build week.",
    "area": "Design",
-   "due": "2026-09-17",
+   "due": "2026-09-10",
    "priority": "P1",
    "priority_reason": "Real risk of unbuildable packs, but the daily loop has slack inside N1",
    "depends_on": [
@@ -3911,7 +3911,7 @@ window.LAUNCH_DATA = {
    "what": "Produce one token sheet: spacing scale, type scale, colour roles (danger, positive, muted, accent - roles not hexes), state rules (hover/disabled/loading/empty), radius, elevation. Ship it alongside the first two packs so Asad's component library starts from tokens rather than nine screenshots.",
    "why": "Without it Asad derives a design system from screens in his first build week and every later pack drifts.",
    "area": "Design",
-   "due": "2026-09-15",
+   "due": "2026-09-09",
    "priority": "P0",
    "priority_reason": "Blocks Asad's component-library start on 10 Sep",
    "depends_on": [
@@ -3935,11 +3935,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-07",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Deliver the first two packs (Today + Drafts) ~15 Sep",
+   "title": "Deliver the first two packs (Today + Drafts) ~9 Sep",
    "what": "Deliver the first two packs in the agreed order, expected Today (next-move hero with confidence chip, moves list, typed feed cards, briefing card, setup pill, workspace switcher slot, 'Remind me' CTAs) and Drafts/Studio (composer, virality gauge as BANDS plus an abstain 'no strong signal' state, driver chips vocabulary, minimum-text threshold, autosave). Web + mobile variants, all states, no stories strip or milestone banner (deferred).",
    "why": "Asad starts building Today and Drafts on 21 Sep; a slip here moves the whole build.",
    "area": "Design",
-   "due": "2026-09-15",
+   "due": "2026-09-09",
    "priority": "P0",
    "priority_reason": "Blocks Asad's first screens; gate says packs delivered",
    "depends_on": [
@@ -3970,7 +3970,7 @@ window.LAUNCH_DATA = {
    "what": "One page on how the product sounds when uncertain, when wrong, when there is no data, and when delivering bad news (a storm, a flop score), plus a shared vocabulary so one concept is not named three ways across surfaces. Ship it with the packs.",
    "why": "Prevents six surfaces sounding like six products and is the prerequisite for the N5 copy freeze; without it every empty-state and alert string is invented ad hoc.",
    "area": "Design",
-   "due": "2026-09-17",
+   "due": "2026-09-09",
    "priority": "P1",
    "priority_reason": "Real risk of inconsistent copy, but not schedule-critical to the packs",
    "depends_on": [],
@@ -3993,11 +3993,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-09",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Deliver the remaining seven packs by 17 Sep",
+   "title": "Deliver the remaining seven packs by 10 Sep",
    "what": "Deliver Alerts (triage strip, cards with cited posts + ONE action + drafted reply, rules list, 'not a crisis' button, all-clear state, notification settings incl. quiet hours), Best Times (7x24 heatmap, #1 ring, sparse-data state, lookback + self-selection note), Analytics thin (4 KPI tiles incl. HEALTH, 2 charts, All-posts raw table, 'why numbers differ from Facebook' note), Art-E rail (streaming, citation chips, grounding footer, recommendation card, refusal, AI label, thumbs; mic stays a stub), Settings (prefs, notifications, connected pages, data controls, cookie consent, delete/export), Wins-lite (value band, scoreboard, rating card), Pages + workspace switcher (cards with health rings, slide-over factor bars). Web + mobile, all states; deferred V3 items omitted by name.",
    "why": "Asad builds only what is in a pack; a V3 screen without a pack does not exist and there is no designer after 17 Sep.",
    "area": "Design",
-   "due": "2026-09-17",
+   "due": "2026-09-10",
    "priority": "P0",
    "priority_reason": "Dated 10 Sep; gate says packs delivered",
    "depends_on": [
@@ -4030,7 +4030,7 @@ window.LAUNCH_DATA = {
    "what": "One states matrix audited per pack: empty, error, loading-as-'learning, never loading', thin history, sub-k=5 fail-closed, 'building your baseline', best-times sparse, gauge abstain, rate-limited (Retry-After), stale-data banner, page revoked, feature-off (kill switch) - so N5-AS-02/N6-AS-03 render designed states. Design the crisis email (deep link, cited post, one action, drafted reply, dark-mode safe)",
    "why": "States are where trust is won; a missing spinner or a fake number on a thin page is what UAT would otherwise find first.",
    "area": "Design",
-   "due": "2026-09-17",
+   "due": "2026-09-10",
    "priority": "P1",
    "priority_reason": "Real risk, but folded into pack delivery with the same deadline",
    "depends_on": [
@@ -4058,7 +4058,7 @@ window.LAUNCH_DATA = {
    "what": "For each of the nine packs plus Discovery, record a short Loom walkthrough and write a design-QA checklist (what to compare when the screen ships). Export icons, illustrations and tokens into the repo so nothing lives only in Figma.",
    "why": "The Looms and checklists are how a sole developer self-verifies after the designer is gone; the exports remove the Figma bus factor.",
    "area": "Design",
-   "due": "2026-09-18",
+   "due": "2026-09-11",
    "priority": "P1",
    "priority_reason": "Needed before N2 build starts but has a day of slack after packs",
    "depends_on": [
@@ -4086,7 +4086,7 @@ window.LAUNCH_DATA = {
    "what": "Create a running log with one line per non-obvious decision and why: Schedule->Remind me, swipe deck deferred, bands + abstain, health bands, GraphRAG moved out, every V3 deviation. Seed it with N1 decisions and keep it current through N6.",
    "why": "Cheap if kept as you go, near-worthless if reconstructed later; it is also where the December betting table and copy audit will look.",
    "area": "Design",
-   "due": "2026-09-17",
+   "due": "2026-09-10",
    "priority": "P2",
    "priority_reason": "Compounds over time; safe to slip",
    "depends_on": [
@@ -4111,11 +4111,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-13",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Build the 17 Sep design reveal package with Alex",
+   "title": "Build the 11 Sep design reveal package with Alex",
    "what": "Assemble the public design reveal for 17 Sep from finished pack renders: honest about zero engineering, dated 1 December, no scheduling or messaging shown, no investor language. Alex owns the beat; Saad supplies the visuals and captions.",
    "why": "A public date already announced; the reveal shows finished design honestly or it undermines the 19 Sep landing beat.",
    "area": "Marketing",
-   "due": "2026-09-17",
+   "due": "2026-09-11",
    "priority": "P0",
    "priority_reason": "Dated public deadline 10 Sep (Saad tagged P2; CONTEXT rule makes dated items P0)",
    "depends_on": [
@@ -4204,7 +4204,7 @@ window.LAUNCH_DATA = {
    "what": "First PM day: write the one-page 'page analytics tool' reviewer narrative (what the app does with each permission, read-only analytics, Remind-me not Schedule) for Asad to approve and Filza to firewall-check, and set up the Meta app-dashboard roles so Asad (co-owner) and Lewis (tester management) have access before the tester list is built.",
    "why": "Asad's founder-duties clearance (N1-AS-09), Filza's firewall rulebook (N2-FZ-01) and Lewis's tester list (N1-LW-05) all depend on it; the 25 Sep submission clock starts here.",
    "area": "Meta",
-   "due": "2026-09-15",
+   "due": "2026-09-10",
    "priority": "P0",
    "priority_reason": "P0: blocks three people and sits on the Meta submission clock.",
    "depends_on": [
@@ -4235,7 +4235,7 @@ window.LAUNCH_DATA = {
    "what": "Deliver with the design packs the assets the Meta app dashboard requires: a 1024x1024 PNG app icon with no alpha channel, the app display name exactly as it will appear on the consent screen, the short App Details description in firewall language, the app category / business use case selection, and the support contact email. Hand them to whoever N1-AX-11 names, for entry into the dashboard in N2-AS-07.",
    "why": "Meta will not accept a submission without an icon, a category and contact details, and the icon appears on the consent screen the screencasts freeze on 1 Oct.",
    "area": "Meta",
-   "due": "2026-09-16",
+   "due": "2026-09-12",
    "priority": "P1",
    "priority_reason": "P1 - needed for N2-AS-07 on 23 Sep and for the frozen consent screen; ships with the packs, so real slack.",
    "depends_on": [
@@ -4295,7 +4295,7 @@ window.LAUNCH_DATA = {
    "what": "From the packs and the Netlify plan, price the front-end half of the bill: build minutes and deploy credits at the expected deploy rate, bandwidth and CDN requests at 5 pilots and at 100 pages, image and font weight per screen with the asset budget that follows, and any recurring design or asset tooling. Hand it to Asad as one line with its assumptions written next to it.",
    "why": "Asad's N1 consolidation and Jill's 2 Oct pricing model both need a front-end number, and design decisions taken this week (hero imagery, font count, chart libraries) set it for the life of the product.",
    "area": "Ops",
-   "due": "2026-09-18",
+   "due": "2026-09-14",
    "priority": "P1",
    "priority_reason": "P1 - real input to the 25 Sep pricing decision with ten days of slack.",
    "depends_on": [
@@ -4325,7 +4325,7 @@ window.LAUNCH_DATA = {
    "what": "With Asad on 18-27 Sep, once the packs are delivered: clone Muteeb's scaffold, run the app locally against the generated mock layer, ship one trivial PR through CI to a preview deploy, and walk the repo layout - route handlers versus lib/server versus components - and the branch/PR conventions. Then sit with Asad while the token sheet is encoded as Tailwind theme tokens (N1-AS-12), so the theme matches the sheet and the library he inherits in N2 is one he understands.",
    "why": "He owns the component library from 28 Sep and surfaces from N3; a ramp that starts on 21 Sep with environment problems eats the only slack in the front-end plan.",
    "area": "App core",
-   "due": "2026-09-20",
+   "due": "2026-09-16",
    "priority": "P0",
    "priority_reason": "P0 - his N2 coding starts 14 Sep and cannot start on an unconfigured machine.",
    "depends_on": [
@@ -4633,7 +4633,7 @@ window.LAUNCH_DATA = {
    "what": "Saad now writes the front-end as well as owning the Meta package, so confirm in writing who executes the package, who submits on 2 Oct, who watches the dashboard daily and who answers a reviewer inside 24h - naming a primary, a backup (Asad by default, per N1-SD-15/N1-AS-10) and weekend/holiday cover. If Saad stays the primary, state what front-end work yields when a reviewer message lands. Record the escalation path primary -> backup -> Alex and circulate to Saad, Asad, Filza and Muteeb.",
    "why": "Every Meta ticket from N1-SD-16 onward assumes an owner nobody has re-confirmed against Saad's new build load, and two tickets wait on a backup confirmation that no ticket owns.",
    "area": "Meta",
-   "due": "2026-09-15",
+   "due": "2026-09-11",
    "priority": "P0",
    "priority_reason": "P0 - blocks Saad's package authoring (N1-SD-16, 11 Sep) and unblocks N1-SD-15 and N1-AS-10, which both wait on this name.",
    "depends_on": [
@@ -5125,7 +5125,7 @@ window.LAUNCH_DATA = {
    "what": "Write the exact consent copy for the Discovery opt-in screen: what is shared (aggregated cohort overlap and banded fields, never follower identities), off by default, opt-in and decline at equal prominence (same size and weight, no pre-ticked box, no nudge copy), revocable from Settings with the 24h purge from matches, spotlight and Saved stated. Hand it to Saad as final strings so the 12 Sep pack ships the words Asad builds verbatim in N4.",
    "why": "Saad's Discovery pack is due Fri 12 Sep and there is no designer after 17 Sep; consent that fails the dark-patterns bar is not consent and voids the whole Discovery floor.",
    "area": "Discovery",
-   "due": "2026-09-11",
+   "due": "2026-09-08",
    "priority": "P0",
    "priority_reason": "Blocks Saad's dated 5 Sep Discovery pack",
    "depends_on": [],
@@ -5140,7 +5140,7 @@ window.LAUNCH_DATA = {
     "Draft the consent screen strings: what, why, who sees what, how to revoke",
     "Write the equal-prominence rules Saad must follow (size, weight, order, no pre-tick)",
     "State the 24h revocation purge and the Settings location",
-    "Send to Saad by 11 Sep and confirm receipt; log the decision in Saad's decision log"
+    "Send to Saad by 8 Sep and confirm receipt; log the decision in Saad's decision log"
    ]
   },
   {
@@ -20478,10 +20478,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Saad",
    "title": "Mockup handoff scoreboard: tick each pack as it ships",
-   "what": "The single place to mark mockup progress - one checkbox per pack, ticked when that pack is delivered with its Loom and states. Feeds the Overview widget everyone watches. Complete handoff is 17 Sep; the N1 gate reads from here.",
+   "what": "The single place to mark mockup progress - one checkbox per pack, ticked when that pack is delivered with its Loom and states. Feeds the Overview widget everyone watches. Complete handoff is 10 Sep; the N1 gate reads from here.",
    "why": "The whole front-end build queues behind these packs; the team needs one glanceable answer to are the mockups done.",
    "area": "Design",
-   "due": "2026-09-17",
+   "due": "2026-09-10",
    "priority": "P0",
    "priority_reason": "the front-end build cannot start without the packs",
    "depends_on": [
@@ -20497,18 +20497,18 @@ window.LAUNCH_DATA = {
    "source": "founder ask 3 Sep",
    "acceptance": "All ten boxes ticked by 17 Sep, each within a day of the pack actually landing.",
    "checklist": [
-    "Discovery pack (due 12 Sep)",
-    "Today pack (~15 Sep)",
-    "Drafts / Studio pack (~15 Sep)",
-    "Alerts pack (by 17 Sep)",
-    "Best Times pack (by 17 Sep)",
-    "Analytics thin pack (by 17 Sep)",
-    "Art-E rail pack (by 17 Sep)",
-    "Settings pack (by 17 Sep)",
-    "Wins-lite pack (by 17 Sep)",
-    "Pages + workspace switcher pack (by 17 Sep)",
-    "Connect + consent flow pack (by 17 Sep)",
-    "Shell + system prompts addendum (by 17 Sep)"
+    "Discovery pack (due 8 Sep)",
+    "Today pack (~9 Sep)",
+    "Drafts / Studio pack (~9 Sep)",
+    "Alerts pack (by 10 Sep)",
+    "Best Times pack (by 10 Sep)",
+    "Analytics thin pack (by 10 Sep)",
+    "Art-E rail pack (by 10 Sep)",
+    "Settings pack (by 10 Sep)",
+    "Wins-lite pack (by 10 Sep)",
+    "Pages + workspace switcher pack (by 10 Sep)",
+    "Connect + consent flow pack (by 10 Sep)",
+    "Shell + system prompts addendum (by 10 Sep)"
    ]
   },
   {

@@ -798,7 +798,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       document.getElementById('ov-mock').innerHTML=
         '<div class="mock" title="Open N1 in the tracker - Saad ticks packs off in ticket N1-SD-21">'+
           '<div class="mkh"><span class="hk">Mockup handoff &middot; Saad</span><b>'+mdone+' / '+mitems.length+' packs</b>'+
-            (mdone>=mitems.length?'<span class="pchip ahead">complete</span>':'<span class="mkd">due 17 Sep &middot; '+days(TODAY,'2026-09-17')+' days left</span>')+'</div>'+
+            (mdone>=mitems.length?'<span class="pchip ahead">complete</span>':'<span class="mkd">due 10 Sep &middot; '+days(TODAY,'2026-09-10')+' days left</span>')+'</div>'+
           '<div class="bar big"><i style="width:'+mpct+'%"></i></div>'+
           '<div class="mkp">'+mitems.map(function(p,i){ var on=!!mkc[String(i)]; return '<span class="mkpill'+(on?' on':'')+'">'+(on?'\u2713 ':'')+esc(p.replace(/ ?\(.*\)$/,''))+'</span>'; }).join('')+'</div>'+
           '<div class="mkn">The whole front-end build queues behind these ten packs. Tick them in N1-SD-21 as each lands with its Loom.</div>'+
