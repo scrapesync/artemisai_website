@@ -501,7 +501,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 
   <!-- ================= OVERVIEW ================= -->
   <section id="view-overview">
-    <div class="eyebrow">Launch Tracker · N1 &rarr; 1 December</div>
+    <div class="eyebrow">Launch Tracker · N1 &rarr; 8 December</div>
     <div class="h1">Overview</div>
     <div class="sub">The Phase 0 record, six sprints and a launch week - one shared board. Everything below is computed from the tickets and the live state, nothing is typed in by hand.</div>
     <div id="ov-hero"></div>
@@ -545,7 +545,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   <section id="view-features" class="hidden">
     <div class="eyebrow">What we are committing to</div>
     <div class="h1">MVP Features</div>
-    <div class="sub">Every feature we have promised for 1 December, with the tickets that build it and how far along it is. Open one and read the tickets: if they would not add up to a working feature, the feature is not planned yet, whatever the percentage says.</div>
+    <div class="sub">Every feature we have promised for 8 December, with the tickets that build it and how far along it is. Open one and read the tickets: if they would not add up to a working feature, the feature is not planned yet, whatever the percentage says.</div>
     <div class="ftiles" id="f-tiles"></div>
     <div class="sec">What the customer gets</div>
     <div id="f-surfaces"></div>
@@ -761,7 +761,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     var over=T.filter(isOver).length;
     var curT=T.filter(function(t){return sp(t)===cur.id;}), curDone=curT.filter(function(t){return st(t.id).status==='done';}).length;
     var pct=T.length?Math.round(done/T.length*100):0;
-    var toLaunch=days(TODAY,'2026-12-01');
+    var toLaunch=days(TODAY,'2026-12-08');
     var dueWeekN=T.filter(function(t){ return isOpen(t)&&t.due&&t.due>=TODAY&&days(TODAY,t.due)<=7; }).length;
     var blN=all().filter(function(t){return counted(t)&&sp(t)==='BL';}).length;
     var curPct=curT.length?curDone/curT.length:0, exp=expected(cur), ph0=sprintPhase(cur);
@@ -773,7 +773,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     document.getElementById('ov-hero').innerHTML=
       '<div class="hero">'+
         '<div class="hring" title="'+done+' of '+T.length+' tickets done"><svg viewBox="0 0 100 100"><circle class="bgc" cx="50" cy="50" r="44"/><circle class="fgc" cx="50" cy="50" r="44" style="stroke-dasharray:'+C+';stroke-dashoffset:'+(C*(1-pct/100)).toFixed(1)+'"/></svg><div class="hrv">'+pct+'%<small>built</small></div></div>'+
-        '<div class="hmain"><div class="hk">Days to launch</div><div class="hd">'+toLaunch+'</div><div class="hs">Tue 1 Dec &middot; 08:00 UK</div><div class="hs dim">'+done+' of '+T.length+' tickets done</div></div>'+
+        '<div class="hmain"><div class="hk">Days to launch</div><div class="hd">'+toLaunch+'</div><div class="hs">Tue 8 Dec &middot; 08:00 UK</div><div class="hs dim">'+done+' of '+T.length+' tickets done</div></div>'+
         '<div class="hcur" data-s="'+cur.id+'" title="Open '+cur.id+' in the tracker">'+
           '<div class="hk">Current sprint &middot; <span class="mono">'+cur.id+'</span>'+pace+'</div>'+
           '<div class="hcn">'+esc(cur.name)+'</div>'+
@@ -792,13 +792,13 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     var hb=document.querySelector('#ov-hero .hbk');
     if(hb) hb.addEventListener('click',function(){ showTab('backlog'); });
     var MK=BYID['N1-SD-21']||all().filter(function(t){return t.id==='N1-SD-21';})[0];
-    if(MK && TODAY<='2026-09-20'){
+    if(MK && TODAY<='2026-09-27'){
       var mkc=st('N1-SD-21').checks||{}, mitems=MK.checklist||[], mdone=mitems.filter(function(_,i){return mkc[String(i)];}).length;
       var mpct=mitems.length?Math.round(mdone/mitems.length*100):0;
       document.getElementById('ov-mock').innerHTML=
         '<div class="mock" title="Open N1 in the tracker - Saad ticks packs off in ticket N1-SD-21">'+
           '<div class="mkh"><span class="hk">Mockup handoff &middot; Saad</span><b>'+mdone+' / '+mitems.length+' packs</b>'+
-            (mdone>=mitems.length?'<span class="pchip ahead">complete</span>':'<span class="mkd">due 10 Sep &middot; '+days(TODAY,'2026-09-10')+' days left</span>')+'</div>'+
+            (mdone>=mitems.length?'<span class="pchip ahead">complete</span>':'<span class="mkd">due 17 Sep &middot; '+days(TODAY,'2026-09-17')+' days left</span>')+'</div>'+
           '<div class="bar big"><i style="width:'+mpct+'%"></i></div>'+
           '<div class="mkp">'+mitems.map(function(p,i){ var on=!!mkc[String(i)]; return '<span class="mkpill'+(on?' on':'')+'">'+(on?'\u2713 ':'')+esc(p.replace(/ ?\(.*\)$/,''))+'</span>'; }).join('')+'</div>'+
           '<div class="mkn">The whole front-end build queues behind these ten packs. Tick them in N1-SD-21 as each lands with its Loom.</div>'+
@@ -1423,7 +1423,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   function pst(k,v,c){ return '<div class="pstat"><div class="k">'+k+'</div><div class="v '+(c||'')+'">'+v+'</div></div>'; }
 
   /* ---- boot ---- */
-  (function(){ var n=days(TODAY,'2026-12-01'); var el=document.getElementById('hdr-count'); if(el) el.innerHTML='<b>'+n+'</b> days &middot; 1 Dec'; })();
+  (function(){ var n=days(TODAY,'2026-12-08'); var el=document.getElementById('hdr-count'); if(el) el.innerHTML='<b>'+n+'</b> days &middot; 8 Dec'; })();
   function renderAll(){ if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='features') renderFeatures(); else if(TAB==='map') renderMap(); else if(TAB==='backlog') renderBacklog(); else renderPerf(); }
   document.getElementById('btn-refresh').addEventListener('click',load);
   try{ var lt=localStorage.getItem('artemis_launch_tab'); if(lt) showTab(lt); }catch(e){}

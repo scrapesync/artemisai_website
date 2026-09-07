@@ -1,4 +1,4 @@
-// sprint_launch_data.js - regenerated 7 Sep 2026.
+// sprint_launch_data.js - regenerated 7 Sep 2026: calendar shifted +7 days, N1 starts 7 Sep, launch Tue 8 Dec.
 window.LAUNCH_DATA = {
  "generated_at": "2026-09-03",
  "layers": [
@@ -56,10 +56,10 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "section": "Phase 1 · Foundation",
    "name": "Foundations",
-   "start": "2026-09-03",
-   "end": "2026-09-13",
-   "gate_date": "2026-09-11",
-   "gate": "Login -> connect a real page -> real data on a bare test page. Saad hands the complete mockup pack over on 10 Sep. Meta business verification submitted.",
+   "start": "2026-09-07",
+   "end": "2026-09-20",
+   "gate_date": "2026-09-18",
+   "gate": "Login -> connect a real page -> real data on a bare test page. Saad hands the complete mockup pack over on 17 Sep. Meta business verification submitted.",
    "goal": "The rails sprint: scaffold, auth, staging and one real scoring endpoint exist; every design pack exists; the Meta clock has started."
   },
   {
@@ -67,9 +67,9 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "section": "Phase 2 · Intelligence layer",
    "name": "Daily loop + Meta submission",
-   "start": "2026-09-14",
-   "end": "2026-09-27",
-   "gate_date": "2026-09-25",
+   "start": "2026-09-21",
+   "end": "2026-10-04",
+   "gate_date": "2026-10-02",
    "gate": "Draft scored live on a pilot page; connect -> disconnect -> data gone. META SUBMITTED. Pricing locked.",
    "goal": "A pilot opens Today, types a draft and watches the gauge move on their own baselines."
   },
@@ -78,10 +78,10 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "section": "Phase 2 · Intelligence layer",
    "name": "Watchdog, clock, Discovery engine",
-   "start": "2026-09-28",
-   "end": "2026-10-11",
-   "gate_date": "2026-10-09",
-   "gate": "Live crisis drill timed comment-posted -> email-received under 15 min. Precision-at-5 recorded. Health pill live. Waitlist live 6 Oct.",
+   "start": "2026-10-05",
+   "end": "2026-10-18",
+   "gate_date": "2026-10-16",
+   "gate": "Live crisis drill timed comment-posted -> email-received under 15 min. Precision-at-5 recorded. Health pill live. Waitlist live 13 Oct.",
    "goal": "A seeded storm alerts in-app and by email within 15 minutes, cited and actionable. Discovery's graph passes its human gate."
   },
   {
@@ -89,9 +89,9 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "section": "Phase 3 · Product + LLM layer",
    "name": "Art-E receipts, Discovery on screen, Pages",
-   "start": "2026-10-12",
-   "end": "2026-10-25",
-   "gate_date": "2026-10-23",
+   "start": "2026-10-19",
+   "end": "2026-11-01",
+   "gate_date": "2026-10-30",
    "gate": "The 20-question Art-E run live; zero un-cited numbers; probes clean. Opt-in -> spotlight -> save. Pages view reads real health.",
    "goal": "Art-E answers with citations and refuses to invent; Discovery v1 and the Pages view are on screen."
   },
@@ -100,9 +100,9 @@ window.LAUNCH_DATA = {
    "layer": "launch",
    "section": "Phase 4 · Launch layer",
    "name": "Hardening",
-   "start": "2026-10-26",
-   "end": "2026-11-08",
-   "gate_date": "2026-11-06",
+   "start": "2026-11-02",
+   "end": "2026-11-15",
+   "gate_date": "2026-11-13",
    "gate": "Readiness review #1: zero P1, drills passed, pen-test criticals closed, Meta branch decided.",
    "goal": "Load tested at pilot x10 with burst; restore and rollback drilled; Wins-lite ships; UAT wave 1 done. Capacity 60-65%."
   },
@@ -111,10 +111,10 @@ window.LAUNCH_DATA = {
    "layer": "launch",
    "section": "Phase 4 · Launch layer",
    "name": "UAT, freeze, decision",
-   "start": "2026-11-09",
-   "end": "2026-11-22",
-   "gate_date": "2026-11-20",
-   "gate": "GO/NO-GO memo read item by item with evidence. 5 invoices sent. Zero P1. Features + models froze Fri 13 Nov; code freezes today.",
+   "start": "2026-11-16",
+   "end": "2026-11-29",
+   "gate_date": "2026-11-27",
+   "gate": "GO/NO-GO memo read item by item with evidence. 5 invoices sent. Zero P1. Features + models froze Fri 20 Nov; code freezes today.",
    "goal": "Full UAT on the frozen build converts 5 pilots to paying; go/no-go decided on written evidence."
   },
   {
@@ -122,11 +122,11 @@ window.LAUNCH_DATA = {
    "layer": "launch",
    "section": "Phase 4 · Launch layer",
    "name": "Launch week",
-   "start": "2026-11-23",
-   "end": "2026-12-01",
-   "gate_date": "2026-12-01",
-   "gate": "All 5 critical flows smoked on production BEFORE announcing. 5 pilots live. Doors open Tue 1 Dec 08:00 UK; Product Hunt 08:01.",
-   "goal": "Fixes only. Dry run #2 Wed 25 Nov. MVP done Sat 28 Nov. War room live."
+   "start": "2026-11-30",
+   "end": "2026-12-08",
+   "gate_date": "2026-12-08",
+   "gate": "All 5 critical flows smoked on production BEFORE announcing. 5 pilots live. Doors open Tue 8 Dec 08:00 UK; Product Hunt 08:01.",
+   "goal": "Fixes only. Dry run #2 Wed 2 Dec. MVP done Sat 5 Dec. War room live."
   }
  ],
  "backlog": [
@@ -138,7 +138,7 @@ window.LAUNCH_DATA = {
    "title": "Thin admin console",
    "what": "Tenant list + status + suspend flag + read-only impersonation + link to per-tenant health",
    "why": "Support speed and incident containment - the first 'my data looks wrong' ticket needs tenant lookup, and the plan auto-declares it an incident",
-   "area": "WAVE 1 · Survive batch 1 (1-21 Dec)",
+   "area": "WAVE 1 · Survive batch 1 (8-4 Jan)",
    "due": "",
    "priority": "P1",
    "priority_reason": "post-launch roadmap: WAVE 1",
@@ -157,7 +157,7 @@ window.LAUNCH_DATA = {
    "title": "Post detail slide-over",
    "what": "Per-post breakdown off the raw table (score, drivers, sentiment, timing vs window) - if it missed N5",
    "why": "Makes every per-post number defensible; the raw table invites exactly this click (mockup: post drill-down)",
-   "area": "WAVE 1 · Survive batch 1 (1-21 Dec)",
+   "area": "WAVE 1 · Survive batch 1 (8-4 Jan)",
    "due": "",
    "priority": "P1",
    "priority_reason": "post-launch roadmap: WAVE 1",
@@ -176,7 +176,7 @@ window.LAUNCH_DATA = {
    "title": "Lifecycle emails",
    "what": "Welcome / first-value / re-engagement sequences on existing SES + activation events",
    "why": "Batch-1 activation and retention at near-zero cost - the funnel tells us exactly who stalled where",
-   "area": "WAVE 1 · Survive batch 1 (1-21 Dec)",
+   "area": "WAVE 1 · Survive batch 1 (8-4 Jan)",
    "due": "",
    "priority": "P1",
    "priority_reason": "post-launch roadmap: WAVE 1",
@@ -195,7 +195,7 @@ window.LAUNCH_DATA = {
    "title": "PWA push for alerts",
    "what": "Web push as the second alert channel beside email [PROMOTED to N5-MT-18 + N5-AS-19]",
    "why": "Closes most of the 'alerts to phone' promise cheaply - email open latency can exceed the 15-minute detection we built",
-   "area": "WAVE 1 · Survive batch 1 (1-21 Dec)",
+   "area": "WAVE 1 · Survive batch 1 (8-4 Jan)",
    "due": "",
    "priority": "P1",
    "priority_reason": "post-launch roadmap: WAVE 1",
@@ -215,7 +215,7 @@ window.LAUNCH_DATA = {
    "title": "Help centre",
    "what": "Publish the N4 docs skeleton + top-20 macros as a public docs site",
    "why": "Deflects support load before it exists; trust signal for buyers",
-   "area": "WAVE 1 · Survive batch 1 (1-21 Dec)",
+   "area": "WAVE 1 · Survive batch 1 (8-4 Jan)",
    "due": "",
    "priority": "P1",
    "priority_reason": "post-launch roadmap: WAVE 1",
@@ -234,7 +234,7 @@ window.LAUNCH_DATA = {
    "title": "Notification centre + snooze",
    "what": "Unified in-app inbox over existing unread endpoints; snooze/mute per rule + page",
    "why": "Alerts are the re-engagement trigger (mockup: bells + popover); snooze prevents the alert fatigue that kills PROTECT",
-   "area": "WAVE 1 · Survive batch 1 (1-21 Dec)",
+   "area": "WAVE 1 · Survive batch 1 (8-4 Jan)",
    "due": "",
    "priority": "P1",
    "priority_reason": "post-launch roadmap: WAVE 1",
@@ -253,7 +253,7 @@ window.LAUNCH_DATA = {
    "title": "NPS + What's-new",
    "what": "Micro-survey + changelog modal",
    "why": "Churn early-warning + visible momentum for pilots (mockup: changelog/NPS in Settings)",
-   "area": "WAVE 1 · Survive batch 1 (1-21 Dec)",
+   "area": "WAVE 1 · Survive batch 1 (8-4 Jan)",
    "due": "",
    "priority": "P1",
    "priority_reason": "post-launch roadmap: WAVE 1",
@@ -272,7 +272,7 @@ window.LAUNCH_DATA = {
    "title": "Customer health score",
    "what": "Score pilots from KPI-funnel usage, formalising Lewis's manual checks",
    "why": "Churn prediction before renewal conversations - protects the 5 paying pilots",
-   "area": "WAVE 1 · Survive batch 1 (1-21 Dec)",
+   "area": "WAVE 1 · Survive batch 1 (8-4 Jan)",
    "due": "",
    "priority": "P1",
    "priority_reason": "post-launch roadmap: WAVE 1",
@@ -291,7 +291,7 @@ window.LAUNCH_DATA = {
    "title": "Pipeline console",
    "what": "Internal runs/reprocess/DLQ/backfill view over existing queues",
    "why": "Stops Muteeb hand-running SQL during incidents; ops cost down",
-   "area": "WAVE 1 · Survive batch 1 (1-21 Dec)",
+   "area": "WAVE 1 · Survive batch 1 (8-4 Jan)",
    "due": "",
    "priority": "P1",
    "priority_reason": "post-launch roadmap: WAVE 1",
@@ -310,7 +310,7 @@ window.LAUNCH_DATA = {
    "title": "Accessibility statement + coach marks",
    "what": "Publish WCAG conformance off the N4-N5 audit; tips on the 3 stickiest screens per funnel data",
    "why": "Trust + procurement box ticked; activation lifted where the funnel says users stall",
-   "area": "WAVE 1 · Survive batch 1 (1-21 Dec)",
+   "area": "WAVE 1 · Survive batch 1 (8-4 Jan)",
    "due": "",
    "priority": "P1",
    "priority_reason": "post-launch roadmap: WAVE 1",
@@ -871,7 +871,7 @@ window.LAUNCH_DATA = {
    "feeds": [],
    "gate": "none",
    "source": "build book 3 Sep",
-   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 7 Dec).",
+   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
    "checklist": []
   },
   {
@@ -892,7 +892,7 @@ window.LAUNCH_DATA = {
    "feeds": [],
    "gate": "none",
    "source": "build book 3 Sep",
-   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 7 Dec).",
+   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
    "checklist": []
   },
   {
@@ -913,7 +913,7 @@ window.LAUNCH_DATA = {
    "feeds": [],
    "gate": "none",
    "source": "build book 3 Sep",
-   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 7 Dec).",
+   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
    "checklist": []
   },
   {
@@ -934,7 +934,7 @@ window.LAUNCH_DATA = {
    "feeds": [],
    "gate": "none",
    "source": "build book 3 Sep",
-   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 7 Dec).",
+   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
    "checklist": []
   },
   {
@@ -955,7 +955,7 @@ window.LAUNCH_DATA = {
    "feeds": [],
    "gate": "none",
    "source": "build book 3 Sep",
-   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 7 Dec).",
+   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
    "checklist": []
   },
   {
@@ -976,7 +976,7 @@ window.LAUNCH_DATA = {
    "feeds": [],
    "gate": "none",
    "source": "build book 3 Sep",
-   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 7 Dec).",
+   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
    "checklist": []
   },
   {
@@ -997,7 +997,7 @@ window.LAUNCH_DATA = {
    "feeds": [],
    "gate": "none",
    "source": "build book 3 Sep",
-   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 7 Dec).",
+   "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
    "checklist": []
   },
   {
@@ -1007,7 +1007,7 @@ window.LAUNCH_DATA = {
    "assignee": "Faheem",
    "title": "Own the Art-E post-launch tuning loop",
    "what": "Run the standing post-launch loop: the weekly transcript review with Saad and Lewis resumes feeding new golden-set cases, prompt or model changes go only through the versioned registry with staged rollout and a full regression re-run, and a monthly pass-rate/cost/latency report goes to Alex.",
-   "why": "Every tuning ticket ends at the 13 Nov freeze and N5-LW-07 downgrades reviews to support macros; after launch nobody owns keeping the citation gate and golden set honest.",
+   "why": "Every tuning ticket ends at the 20 Nov freeze and N5-LW-07 downgrades reviews to support macros; after launch nobody owns keeping the citation gate and golden set honest.",
    "area": "Art-E",
    "due": "",
    "priority": "P1",
@@ -1020,7 +1020,7 @@ window.LAUNCH_DATA = {
    "feeds": [],
    "gate": "none",
    "source": "arte plan 3 Sep",
-   "acceptance": "First post-launch cycle complete by 11 Dec: one review held, any change shipped via the registry with regression green, and the first monthly report filed.",
+   "acceptance": "First post-launch cycle complete by 18 Dec: one review held, any change shipped via the registry with regression green, and the first monthly report filed.",
    "checklist": []
   },
   {
@@ -1166,7 +1166,7 @@ window.LAUNCH_DATA = {
    "why": "The PREDICT promise and the demo wow moment. Descriptive charts are free everywhere; this is not.",
    "gate": ">=75% precision at 10-20% coverage, beats page-history + zero-rate baselines, live path matches batch.",
    "sprints": "N1 -> N3 (then freeze)",
-   "faheem": "Training set + day-7 labels + arousal/novelty features (N1); flop v1 + DRIVER ATTRIBUTION + confidence flag (N2); type-time fast path + serving-skew test (N3); bands recalibrated (N4); frozen 13 Nov.",
+   "faheem": "Training set + day-7 labels + arousal/novelty features (N1); flop v1 + DRIVER ATTRIBUTION + confidence flag (N2); type-time fast path + serving-skew test (N3); bands recalibrated (N4); frozen 20 Nov.",
    "muteeb": "Score endpoint end-to-end (N1); production-grade with caching, p95 < 1s warm + contract tests (N2); load-tested with burst, criticality tier: critical (N4-N5).",
    "asad": "Composer + gauge + driver chips + minimum-text threshold + autosave (N2); polish + E2E flow 3 (N3-N5).",
    "areas": [
@@ -1418,7 +1418,7 @@ window.LAUNCH_DATA = {
    "sprints": "N1 (legal+design) -> N3 (engine) -> N4 (UI)",
    "faheem": "(with Muteeb) fingerprint capture continues; graph inputs de-identified per policy (N1-N3).",
    "muteeb": "Absorb the feat/discovery_api branch, then: significance-tested graph warehoused + weekly recompute; frozen 0-100 blend + reasons; k=5 fail-closed; endpoints hardened (auth, tenant, rate limits); differencing tests + 24h opt-out propagation (N3).",
-   "asad": "Explore UI per Saad's 5 Sep pack: spotlight, ranked rows, slide-over, tabs, opt-in consent screen; below-floor renders nothing (N4).",
+   "asad": "Explore UI per Saad's 12 Sep pack: spotlight, ranked rows, slide-over, tabs, opt-in consent screen; below-floor renders nothing (N4).",
    "areas": [
     "Discovery"
    ],
@@ -1642,7 +1642,7 @@ window.LAUNCH_DATA = {
    "id": "landing",
    "name": "Landing page + waitlist",
    "layer": "product",
-   "what": "The public site and the bought waitlist, live 12 Sep, opening 13 Oct, carrying the launch date and the founding-price notice.",
+   "what": "The public site and the bought waitlist, live 19 Sep, opening 20 Oct, carrying the launch date and the founding-price notice.",
    "why": "It is the only thing a stranger sees before 1 December, and the waitlist is the launch-day audience.",
    "gate": "Waitlist verified end to end; the launch date reads 1 December everywhere.",
    "sprints": "N1 -> N4",
@@ -1904,7 +1904,7 @@ window.LAUNCH_DATA = {
    "kind": "foundation",
    "what": "Everything that has to be true before the doors open: Meta App Review approved, the legal pack signed, five pilots converted to paying, the runbook rehearsed and the money modelled.",
    "why": "None of it is a screen, and all of it can stop the launch. Meta's clock is the only one we do not control.",
-   "gate": "GO/NO-GO on Fri 20 Nov answered item by item with written evidence; 5 invoices out; zero P1.",
+   "gate": "GO/NO-GO on Fri 27 Nov answered item by item with written evidence; 5 invoices out; zero P1.",
    "sprints": "N1 -> LW",
    "faheem": "",
    "muteeb": "",
@@ -2095,7 +2095,7 @@ window.LAUNCH_DATA = {
    "name": "Site, admin + design groundwork (Phase 0, done)",
    "layer": "foundation",
    "kind": "foundation",
-   "what": "What web-side work actually exists: the live marketing site and landing tour, the admin platform (dashboards, trackers, QA boards, data explorer), and three generations of static mockups up to v3 at WCAG AA. NO product app code exists - the product web app starts greenfield after Saad hands the mockup pack over on 10 Sep.",
+   "what": "What web-side work actually exists: the live marketing site and landing tour, the admin platform (dashboards, trackers, QA boards, data explorer), and three generations of static mockups up to v3 at WCAG AA. NO product app code exists - the product web app starts greenfield after Saad hands the mockup pack over on 17 Sep.",
    "why": "The launch build starts from mockups plus a proven design language and internal tooling - not from product code.",
    "gate": "Shipped before 3 Sep 2026. This card is the record, not a promise.",
    "sprints": "Phase 0 (Feb-Sep)",
@@ -2209,7 +2209,7 @@ window.LAUNCH_DATA = {
    "what": "With Faheem, replace 'crisis >= 75% precision on the real-incident backtest' with a two-part line shaped like the flop gate: precision at a stated alert volume PLUS a floor ('must catch N of Lewis's incidents inside the complete window' or a coverage %). Record that the numeric pass line is set in N2 once the 8-week hour-of-week measurement lands (N2-AS-02). Write the new line into the sprint tracker and Checklist 3.",
    "why": "As written a detector that alerts once a month passes while missing every storm; Faheem flagged the decision as needed this week and N2 backtests tune against whatever line exists.",
    "area": "Alerts",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P0",
    "priority_reason": "Faheem's roadmap asks for the decision this week; N2 tuning starts against it",
    "depends_on": [
@@ -2239,7 +2239,7 @@ window.LAUNCH_DATA = {
    "what": "Co-write and sign a one-page stack decision with Muteeb: Next.js + TypeScript PWA, Tailwind driven by Saad's design tokens, Netlify hosting for landing and app; name the bought auth vendor (Clerk or Cognito) and how its JWT carries the tenant claim; name the E2E runner and the KPI-events sink so no N2-N3 ticket reopens them. File it in the repo docs with a 'no changes after' clause. DECISION RECORDED 3 Sep: Lovable is Saad's mockup tool; Next.js is the product. Lovable code never merges - the mockup is the spec, the repo is the build.",
    "why": "Muteeb scaffolds repo, CI and preview deploys in week A against this document; a late change moves every deploy path.",
    "area": "App core",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P0",
    "priority_reason": "Blocks Muteeb's week-A scaffold",
    "depends_on": [],
@@ -2266,7 +2266,7 @@ window.LAUNCH_DATA = {
    "what": "Decide and record: an account (tenant) owns many pages; page_id is mandatory on every query and every table carrying page data; a workspace is the set of connected pages with an all-pages / one-page filter everywhere; one Facebook token per page. Agree with Muteeb how the JWT tenant claim keys RLS and where page ownership is checked.",
    "why": "Pilots run 3-5 pages; this is the one-way door the N1 sprint goal names, and the token backend, RLS and every screen build on it.",
    "area": "App core",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P0",
    "priority_reason": "One-way door; Muteeb's token model and RLS start from it this week",
    "depends_on": [
@@ -2296,7 +2296,7 @@ window.LAUNCH_DATA = {
    "what": "Co-sign the API contract as TWO OpenAPI documents with different lifecycles, not one: (1) browser-to-BFF, hand-authored with Zod and zod-openapi in the app repo, changing weekly - error envelope, tenant claim on every route and page_id on every query, pages list plus per-page connection-health and disconnect, Today feed (next-move with confidence, moves[], typed feed cards, setup-pill ingest progress), draft-score view-model carrying drivers[] in Saad's chip vocabulary plus confidence/coverage flag and band, unread counts, health (score, weekly delta, three factor sub-scores), nightly briefing aggregate, alerts (cited post/comment ids, one action, drafted reply, rules), best-times cells with a count-floor flag; (2) BFF-to-FastAPI, generated from Faheem's Pydantic models (N1-FH-19), changing when a model changes. Record which of the three owners owns each route (N1-AS-14), that only FastAPI holds warehouse credentials, and per route whether it is live or mock in N2 - the feature map gives Muteeb feed/aggregate endpoints that his own N2 list does not have, so the Today screen's data supply is settled here.",
    "why": "Every Faheem -> Muteeb -> Asad seam is mechanical only if the shapes are on paper now; Muteeb's mock layer and Asad's N2 screens both read this file.",
    "area": "App core",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P0",
    "priority_reason": "Muteeb's week-A mock generation and week-B endpoint need it",
    "depends_on": [
@@ -2333,10 +2333,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Asad",
    "title": "Fix the launch date on the live landing (3 places) to 1 December",
-   "what": "In index.html change the meta description (line 8, 'Launching November 2026'), the hero badge (line 579, 'Launching November 2026') and the FAQ answer (line 1106, 'launch publicly on 28 November 2026') to 1 December 2026; deploy via Netlify; confirm Alex has reset the landing beat to Fri 12 Sep in the marketing calendar. Content-only edit on the existing site, not app code.",
+   "what": "In index.html change the meta description (line 8, 'Launching November 2026'), the hero badge (line 579, 'Launching November 2026') and the FAQ answer (line 1106, 'launch publicly on 28 November 2026') to 1 December 2026; deploy via Netlify; confirm Alex has reset the landing beat to Fri 19 Sep in the marketing calendar. Content-only edit on the existing site, not app code.",
    "why": "Every listing and email keys off one date; the live site currently contradicts the declared launch.",
    "area": "Landing",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P1",
    "priority_reason": "Live public contradiction with slack: nothing dated blocks on it before the 12 Sep landing rebuild; a ten-minute content edit, not app code",
    "depends_on": [
@@ -2361,10 +2361,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Asad",
    "title": "Daily 30-min async pack review with Saad; flag the unbuildable early",
-   "what": "From Thu 3 Sep to Thu 10 Sep, a fixed 30-minute async slot each day on the packs Saad delivers in the agreed build order (first two ~8 Sep): check every state (empty/error/thin/fail-closed), the mobile variants, token compliance against the token sheet, bands + abstain in Drafts, and Remind-me in place of every Schedule CTA. Anything unbuildable or contradicting a signed decision is flagged the same day and its resolution logged in Saad's design decision log.",
-   "why": "Design QA before code exists is the cheapest QA; anything unbuildable found after 10 Sep costs build days with no designer left to fix it.",
+   "what": "From Thu 3 Sep to Thu 17 Sep, a fixed 30-minute async slot each day on the packs Saad delivers in the agreed build order (first two ~15 Sep): check every state (empty/error/thin/fail-closed), the mobile variants, token compliance against the token sheet, bands + abstain in Drafts, and Remind-me in place of every Schedule CTA. Anything unbuildable or contradicting a signed decision is flagged the same day and its resolution logged in Saad's design decision log.",
+   "why": "Design QA before code exists is the cheapest QA; anything unbuildable found after 17 Sep costs build days with no designer left to fix it.",
    "area": "Design",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P1",
    "priority_reason": "cheap now, expensive after the designer becomes PM on 10 Sep; nothing external blocks on it",
    "depends_on": [
@@ -2377,7 +2377,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N1",
    "source": "plan",
-   "acceptance": "Every pack delivered by 10 Sep has a dated review entry, and every flag has a logged resolution before Asad's first build day.",
+   "acceptance": "Every pack delivered by 17 Sep has a dated review entry, and every flag has a logged resolution before Asad's first build day.",
    "checklist": [
     "Daily 30-min slot from 3 Sep with a fixed checklist",
     "Check states, mobile variants and token compliance per pack",
@@ -2389,11 +2389,11 @@ window.LAUNCH_DATA = {
    "id": "N1-AS-08",
    "sprint": "N1",
    "assignee": "Asad",
-   "title": "Clear founder duties and hold the no-app-code line to Wed 10 Sep",
-   "what": "Confirm the four written decisions are signed and filed (stack N1-AS-03, multi-page N1-AS-04, crisis-gate wording N1-AS-02, Saad's no-publishing-scopes record); approve the 'page analytics tool' Meta narrative against the two-narratives doc; adopt Alex's 'Asad must NOT do' list with named owners and enforce it; write no app code before Wed 10 Sep and log any exception with a reason.",
+   "title": "Clear founder duties and hold the no-app-code line to Wed 17 Sep",
+   "what": "Confirm the four written decisions are signed and filed (stack N1-AS-03, multi-page N1-AS-04, crisis-gate wording N1-AS-02, Saad's no-publishing-scopes record); approve the 'page analytics tool' Meta narrative against the two-narratives doc; adopt Alex's 'Asad must NOT do' list with named owners and enforce it; write no app code before Wed 17 Sep and log any exception with a reason.",
    "why": "Every founder-hour spent in Sep is a build-hour saved in Oct; the no-code decision is what lets Muteeb's rails and Saad's packs finish first.",
    "area": "Launch",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "Protects the build weeks; nothing external blocks on it",
    "depends_on": [
@@ -2407,7 +2407,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N1",
    "source": "plan",
-   "acceptance": "Decisions signed, Meta narrative approved in writing, must-NOT-do list adopted, and no app commits by Asad dated before 10 Sep.",
+   "acceptance": "Decisions signed, Meta narrative approved in writing, must-NOT-do list adopted, and no app commits by Asad dated before 17 Sep.",
    "checklist": [
     "Confirm the four decisions are signed and filed",
     "Approve the Meta narrative wording",
@@ -2420,10 +2420,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Asad",
    "title": "Delegate + verify the three mcp.js secrets-hygiene items",
-   "what": "Asad's part is delegation and verification, not code before Wed 10 Sep (plan: 'secrets hygiene delegated'). (1) Verify in the Netlify env UI that the MCP access keys were rotated and record the date - the repo cannot prove it. (2) Hand Muteeb the two code changes in netlify/functions/mcp.js, or do them on/after Wed 10 Sep if his rails week cannot absorb them: remove the temporary captureRequest debug capture, the GET ?debug=<key> dump and the 'mcp-debug' blob store (lines ~309-389) and delete the stored blobs; drop the path-segment key form /api/mcp/<key> (line ~130) in favour of header auth so keys stop landing in access logs. (3) Probe both paths on production after the deploy.",
+   "what": "Asad's part is delegation and verification, not code before Wed 17 Sep (plan: 'secrets hygiene delegated'). (1) Verify in the Netlify env UI that the MCP access keys were rotated and record the date - the repo cannot prove it. (2) Hand Muteeb the two code changes in netlify/functions/mcp.js, or do them on/after Wed 17 Sep if his rails week cannot absorb them: remove the temporary captureRequest debug capture, the GET ?debug=<key> dump and the 'mcp-debug' blob store (lines ~309-389) and delete the stored blobs; drop the path-segment key form /api/mcp/<key> (line ~130) in favour of header auth so keys stop landing in access logs. (3) Probe both paths on production after the deploy.",
    "why": "Keys in access logs and a debug dump on a public endpoint are live exposure; left into Oct it competes with build hours.",
    "area": "Ops",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "Live exposure with slack; not on the gate path and must not break the no-code line",
    "depends_on": [
@@ -2435,10 +2435,10 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "Key rotation date recorded, mcp.js has no debug capture or dump route, and /api/mcp/<key> returns 404 while header auth works - verified by Asad on production by Fri 11 Sep.",
+   "acceptance": "Key rotation date recorded, mcp.js has no debug capture or dump route, and /api/mcp/<key> returns 404 while header auth works - verified by Asad on production by Fri 18 Sep.",
    "checklist": [
     "Check Netlify env for rotated keys; note the date",
-    "Name the delegate (Muteeb) or book the 10-11 Sep slot",
+    "Name the delegate (Muteeb) or book the 17-25 Sep slot",
     "Remove captureRequest + debug dump; delete the mcp-debug store",
     "Remove the path-segment key match; keep header auth",
     "Redeploy and probe both paths on production"
@@ -2449,10 +2449,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Asad",
    "title": "Take the Meta-package backup briefing from Saad",
-   "what": "Alex confirms Asad as the named backup (Saad's addition suggests Asad; drop this ticket if Alex names someone else). First briefing with Saad by 11 Sep: the 'page analytics tool' narrative vs the two-narratives doc, the Meta app dashboard walkthrough, the planned permission-to-feature map. Second pass at package co-sign on 24 Sep (inside the screencast ticket) covers reviewer credentials, the test page and the top-3 rejection responses. Notes stored with the package so Asad can answer a reviewer inside the 24h SLA when Saad is unavailable.",
+   "what": "Alex confirms Asad as the named backup (Saad's addition suggests Asad; drop this ticket if Alex names someone else). First briefing with Saad by 18 Sep: the 'page analytics tool' narrative vs the two-narratives doc, the Meta app dashboard walkthrough, the planned permission-to-feature map. Second pass at package co-sign on 1 Oct (inside the screencast ticket) covers reviewer credentials, the test page and the top-3 rejection responses. Notes stored with the package so Asad can answer a reviewer inside the 24h SLA when Saad is unavailable.",
    "why": "The Meta clock restarts on a missed reply; a single-person SLA on the one external gate is the risk Saad's addition closes.",
    "area": "Meta",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "One briefing against the one gate with an external clock",
    "depends_on": [
@@ -2470,18 +2470,18 @@ window.LAUNCH_DATA = {
     "Book the briefing with Saad",
     "Walk the narrative doc and the dashboard settings",
     "Record backup status and notes with the package",
-    "Diary the second pass for 24 Sep"
+    "Diary the second pass for 1 Oct"
    ]
   },
   {
    "id": "N1-AS-11",
    "sprint": "N1",
    "assignee": "Asad",
-   "title": "Ship the landing page from the locked design, live Fri 12 Sep",
-   "what": "Build-ramp days 1-3 (Wed 10 - Fri 12 Sep, Asad's first code): rebuild the landing from the locked landing design using the token sheet; 1 December everywhere; link Filza's Privacy v1 draft and show a cookie banner (Checklist 4 docs timeline; the verifiably-blocking version is N4); keep the existing Netlify Forms 'pilot-waitlist' form (index.html) submitting until the bought waitlist replaces it in N3; preview deploy reviewed by Alex/Saad, production Fri 12 Sep.",
-   "why": "A public date (the 12 Sep landing beat) and the toolchain warm-up before Today starts 14 Sep.",
+   "title": "Ship the landing page from the locked design, live Fri 19 Sep",
+   "what": "Build-ramp days 1-3 (Wed 10 - Fri 19 Sep, Asad's first code): rebuild the landing from the locked landing design using the token sheet; 1 December everywhere; link Filza's Privacy v1 draft and show a cookie banner (Checklist 4 docs timeline; the verifiably-blocking version is N4); keep the existing Netlify Forms 'pilot-waitlist' form (index.html) submitting until the bought waitlist replaces it in N3; preview deploy reviewed by Alex/Saad, production Fri 19 Sep.",
+   "why": "A public date (the 19 Sep landing beat) and the toolchain warm-up before Today starts 21 Sep.",
    "area": "Landing",
-   "due": "2026-09-12",
+   "due": "2026-09-19",
    "priority": "P0",
    "priority_reason": "Dated public beat reset by Alex to 12 Sep",
    "depends_on": [
@@ -2497,12 +2497,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "The new landing is on production on 12 Sep with the 1 Dec date, a Privacy v1 link, a cookie banner and the pilot-waitlist form still submitting.",
+   "acceptance": "The new landing is on production on 19 Sep with the 8 Dec date, a Privacy v1 link, a cookie banner and the pilot-waitlist form still submitting.",
    "checklist": [
     "Build from the locked design using the token sheet",
     "Wire the Privacy v1 link and cookie banner",
     "Keep the pilot-waitlist form submitting to Netlify Forms",
-    "Preview review by Alex/Saad, then deploy Fri 12 Sep"
+    "Preview review by Alex/Saad, then deploy Fri 19 Sep"
    ]
   },
   {
@@ -2510,10 +2510,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Asad",
    "title": "Start the component library from the packs and token sheet",
-   "what": "In Muteeb's scaffolded repo, encode Saad's token sheet as Tailwind theme tokens (spacing, type, colour roles, radius, elevation, state rules) with Saad pairing on 11-13 Sep (N1-SD-20), then build ONLY the primitives the N2 shell and the two N2 screens need: app shell frame, icon rail, topbar with bell and health-pill slots, card, chip, gauge, toast. Publish /kitchen-sink on staging. Everything else - tiles, tables, sheets, tab bar, form controls, state shells - waits for Saad, who takes the library over on 21 Sep (N2-SD-15); do not build ahead of him.",
+   "what": "In Muteeb's scaffolded repo, encode Saad's token sheet as Tailwind theme tokens (spacing, type, colour roles, radius, elevation, state rules) with Saad pairing on 18-27 Sep (N1-SD-20), then build ONLY the primitives the N2 shell and the two N2 screens need: app shell frame, icon rail, topbar with bell and health-pill slots, card, chip, gauge, toast. Publish /kitchen-sink on staging. Everything else - tiles, tables, sheets, tab bar, form controls, state shells - waits for Saad, who takes the library over on 28 Sep (N2-SD-15); do not build ahead of him.",
    "why": "Without tokens Asad derives a system from screenshots in his first build week; Today and Drafts must start on primitives, not blank files.",
    "area": "App core",
-   "due": "2026-09-13",
+   "due": "2026-09-20",
    "priority": "P1",
    "priority_reason": "Feeds the first screen on 14 Sep; slack is one weekend",
    "depends_on": [
@@ -2538,7 +2538,7 @@ window.LAUNCH_DATA = {
     "Build shell frame, icon rail, topbar slots",
     "Build card, chip, gauge, toast primitives only",
     "Publish /kitchen-sink on staging",
-    "Hand the library and its conventions to Saad on 14 Sep"
+    "Hand the library and its conventions to Saad on 21 Sep"
    ]
   },
   {
@@ -2546,10 +2546,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Asad",
    "title": "Publish plan v1.0 errata from the live facts",
-   "what": "One-page errata to the plan: flop gate already passed (AUC 0.76, 75% precision at 55% coverage, cold-start 0.746; ships Borda gate + regressor, LambdaRank lost the A/B); #11 closed and #12 fixed with the comment-collapse consequences (GraphRAG out, crisis re-scoped, 39k-comment corpus, 25-29 Aug anomaly window); tracker starts Thu 3 Sep; landing beat 12 Sep; Rafeh's tasks reassigned to Saad/Lewis per policy; the new crisis gate wording.",
+   "what": "One-page errata to the plan: flop gate already passed (AUC 0.76, 75% precision at 55% coverage, cold-start 0.746; ships Borda gate + regressor, LambdaRank lost the A/B); #11 closed and #12 fixed with the comment-collapse consequences (GraphRAG out, crisis re-scoped, 39k-comment corpus, 25-29 Aug anomaly window); tracker starts Thu 3 Sep; landing beat 19 Sep; Rafeh's tasks reassigned to Saad/Lewis per policy; the new crisis gate wording.",
    "why": "The plan is the team's source of truth and is now wrong in several places; every task list derived from it repeats the errors.",
    "area": "PM",
-   "due": "2026-09-13",
+   "due": "2026-09-20",
    "priority": "P2",
    "priority_reason": "Documentation; safe to slip a few days",
    "depends_on": [
@@ -2575,10 +2575,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Asad",
    "title": "Write the API ownership map and the thin-route-handler rule",
-   "what": "At the 4 Sep stack co-sign, write down who owns which endpoint family now the backend splits three ways: Asad owns every route the browser calls (Next.js Route Handlers - session, tenant claim, aggregation, view-models); Faheem owns the model function and its Pydantic contract inside FastAPI (accuracy, abstain, coverage, drivers, model_version); Muteeb owns the FastAPI service shell around it (routing, internal auth, caching, limits, deploy, observability, cost tagging) and the queue worker. Record the three rules that keep the split survivable: no business logic under app/api (logic lives in framework-free lib/server modules), only FastAPI holds warehouse credentials, and no WebSockets before 1 Dec - polling for counts and progress, SSE inside a hard budget for Art-E.",
+   "what": "At the 11 Sep stack co-sign, write down who owns which endpoint family now the backend splits three ways: Asad owns every route the browser calls (Next.js Route Handlers - session, tenant claim, aggregation, view-models); Faheem owns the model function and its Pydantic contract inside FastAPI (accuracy, abstain, coverage, drivers, model_version); Muteeb owns the FastAPI service shell around it (routing, internal auth, caching, limits, deploy, observability, cost tagging) and the queue worker. Record the three rules that keep the split survivable: no business logic under app/api (logic lives in framework-free lib/server modules), only FastAPI holds warehouse credentials, and no WebSockets before 8 Dec - polling for counts and progress, SSE inside a hard budget for Art-E.",
    "why": "Three people are about to write backend code against one product on a dated launch; without a written seam the same endpoint gets built twice or not at all, and the cheap migration path out of route handlers closes on the first business-logic import.",
    "area": "App core",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P0",
    "priority_reason": "P0 - blocks N1-AS-05, Muteeb's mock generation on 8 Sep and every backend ticket that follows.",
    "depends_on": [
@@ -2603,7 +2603,7 @@ window.LAUNCH_DATA = {
     "Record the no-business-logic-under-app/api rule and where logic lives",
     "Record that only FastAPI holds warehouse credentials",
     "Record the polling decision and the Art-E SSE budget",
-    "Get Muteeb's and Faheem's sign-off in the 4 Sep co-sign"
+    "Get Muteeb's and Faheem's sign-off in the 11 Sep co-sign"
    ],
    "source": "reconciler"
   },
@@ -2612,10 +2612,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Asad",
    "title": "API conventions v1: errors, versioning, pagination, idempotency",
-   "what": "Write the cross-cutting conventions every route inherits, before the mock layer is generated on 8 Sep: one error envelope (code, message, request_id, retry_after, field errors) with the HTTP status map and a stable code list; URL versioning at /api/v1 with an additive-only rule and a deprecation header; one cursor-pagination shape for every list; an Idempotency-Key header on every write with a stated replay window; rate-limit headers; and the cost-attribution fields every request carries (tenant, page, route, model version). Put them in the OpenAPI documents as shared components so mocks, generated clients and contract tests all inherit them rather than each route inventing its own.",
+   "what": "Write the cross-cutting conventions every route inherits, before the mock layer is generated on 15 Sep: one error envelope (code, message, request_id, retry_after, field errors) with the HTTP status map and a stable code list; URL versioning at /api/v1 with an additive-only rule and a deprecation header; one cursor-pagination shape for every list; an Idempotency-Key header on every write with a stated replay window; rate-limit headers; and the cost-attribution fields every request carries (tenant, page, route, model version). Put them in the OpenAPI documents as shared components so mocks, generated clients and contract tests all inherit them rather than each route inventing its own.",
    "why": "These are the decisions that are free in week one and a migration in week eight; the front end builds its error, empty and rate-limited states directly against this code list.",
    "area": "App core",
-   "due": "2026-09-05",
+   "due": "2026-09-12",
    "priority": "P0",
    "priority_reason": "P0 - Muteeb generates the mock layer and client on 8-9 Sep; conventions added later re-generate everything.",
    "depends_on": [
@@ -2651,9 +2651,9 @@ window.LAUNCH_DATA = {
    "assignee": "Asad",
    "title": "Consolidate one cost per page per month, excluding the LLM",
    "what": "Take Muteeb's infra line per environment, Faheem's cost per 1,000 predictions and pipeline monthly, Saad's front-end/hosting line and Jill's baseline memo, and produce ONE number: end-to-end cost per page per month excluding LLM spend, at 5 pilots and at 100 pages. Write the assumption set next to it - invocations per tenant, egress, Fargate task shape and count, warehouse bytes scanned per query, region, deploy rate - and split the total into what is fixed and what is marginal per page, because the shape of that split is what pricing actually turns on.",
-   "why": "Alex signs pricing on 25 Sep off Jill's model, and Jill's model has no engineering number under it; a price set on a guessed marginal cost is not recoverable after the founding-price notice on 17 Nov.",
+   "why": "Alex signs pricing on 2 Oct off Jill's model, and Jill's model has no engineering number under it; a price set on a guessed marginal cost is not recoverable after the founding-price notice on 24 Nov.",
    "area": "Ops",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "P1 - the 25 Sep pricing decision needs it by 21 Sep for Jill's model, so there is real slack, but no second chance after 17 Nov.",
    "depends_on": [
@@ -2675,7 +2675,7 @@ window.LAUNCH_DATA = {
     "Normalise them to one unit: cost per page per month",
     "Split fixed from marginal and state the per-page marginal cost",
     "Write the assumption set explicitly, including the region",
-    "Hand it to Jill for the 25 Sep model and file it for the N4 re-cost"
+    "Hand it to Jill for the 2 Oct model and file it for the N4 re-cost"
    ],
    "source": "reconciler"
   },
@@ -2687,7 +2687,7 @@ window.LAUNCH_DATA = {
    "what": "Done on arrival: the full QA sweep (22 panels, 8 pipelines, 13 issues, KANG hourly verified) was delivered 26 Aug. Remaining action: hand Muteeb the written frozen-vs-broken list with max timestamp per rdl/odl table so his odl backfill sequencing (N1 week B) is decided on paper, not in Slack.",
    "why": "Muteeb's own list names this as his N1 input from Faheem; without the per-table written form his odl backfill order is guessed.",
    "area": "Data",
-   "due": "2026-09-03",
+   "due": "2026-09-10",
    "priority": "P0",
    "priority_reason": "blocks Muteeb's N1 odl backfill sequencing",
    "depends_on": [],
@@ -2713,7 +2713,7 @@ window.LAUNCH_DATA = {
    "what": "The 25-29 Aug Facebook restriction window has closed. Record whether page_posts shows posting resuming 29 Aug on the restricted pages and use that resumption as the cleanest measurement of KANG discovery latency (hourly load). Close #24 in the register.",
    "why": "The resumption is the only clean latency test we get before pilots; unrecorded it is lost.",
    "area": "Data",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P2",
    "priority_reason": "verification window already passed; recording only, safe to slip",
    "depends_on": [],
@@ -2738,7 +2738,7 @@ window.LAUNCH_DATA = {
    "what": "Add an anomaly-window flag (date range, affected pages) to the warehouse so flop training sets, hour-of-week baselines and crisis backtests exclude or down-weight 25-29 Aug. Document it in the flop definition and crisis doc. Also check a ~28 Jul window: all pilot admin pages were hit with restrictions and payout holds that week - verify whether page metrics dip in late July before treating 25-29 Aug as the only anomaly.",
    "why": "Without the flag the restriction reads as a real engagement collapse and skews every baseline.",
    "area": "Data",
-   "due": "2026-09-05",
+   "due": "2026-09-12",
    "priority": "P1",
    "priority_reason": "real risk to baselines; cheap and early, slack inside N1",
    "depends_on": [],
@@ -2766,7 +2766,7 @@ window.LAUNCH_DATA = {
    "what": "The post-sentiment table carries two disagreeing label sets and one has unexplained origin for most rows. Trace lineage of each column (job, model, date range), quantify disagreement, choose a canonical column and write the provenance note; rename or flag the unexplained set.",
    "why": "Art-E, the mood cards and QA #22 all read this table; reporting from a column we cannot explain is worse than nothing.",
    "area": "Data",
-   "due": "2026-09-08",
+   "due": "2026-09-15",
    "priority": "P1",
    "priority_reason": "Seam 2 blocks Faheem's own QA #22 (N1-FH-10), not another person: Muteeb's N2 RAG plumbing does not read the label column, Art-E ingest is N3, and there is no external clock. Real risk (Art-E over an unexplained column) with slack.",
    "depends_on": [],
@@ -2793,7 +2793,7 @@ window.LAUNCH_DATA = {
    "what": "Sample 100 posts stratified by page and date, label them against the shared rubric, and store the set with provenance (labeller, date, rubric version). Compute agreement vs FUSION and NEBULA labels and publish the panel.",
    "why": "Every later label comparison (#22, #18) and the flop input decision rest on this set.",
    "area": "QA",
-   "due": "2026-09-08",
+   "due": "2026-09-15",
    "priority": "P1",
    "priority_reason": "first in the agreed P2 chain; #22 and #18 wait on it but both sit inside N1",
    "depends_on": [
@@ -2818,10 +2818,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Faheem",
    "title": "Rescue virality train.py + reason_map.json onto main-compatible paths",
-   "what": "Cherry-pick pipelines/virality/train.py (598 lines) and reason_map.json off feat/vd015b-target-fusion onto a main-based branch, fix paths/imports, run training end to end from main, and publish the artifact path plus a loading snippet. Not tied to parked PR #6. This is the code behind the N2 artifact hand-off (N2-FH-02); Muteeb's 11 Sep gate (login -> connect -> real data) does not need it.",
-   "why": "The model code exists unmerged and entangled with the parked restructure; without it on main the N2 artifact Muteeb needs on 14 Sep cannot be rebuilt or pinned.",
+   "what": "Cherry-pick pipelines/virality/train.py (598 lines) and reason_map.json off feat/vd015b-target-fusion onto a main-based branch, fix paths/imports, run training end to end from main, and publish the artifact path plus a loading snippet. Not tied to parked PR #6. This is the code behind the N2 artifact hand-off (N2-FH-02); Muteeb's 18 Sep gate (login -> connect -> real data) does not need it.",
+   "why": "The model code exists unmerged and entangled with the parked restructure; without it on main the N2 artifact Muteeb needs on 21 Sep cannot be rebuilt or pinned.",
    "area": "Drafts",
-   "due": "2026-09-09",
+   "due": "2026-09-16",
    "priority": "P0",
    "priority_reason": "blocks N2-FH-02, which blocks Muteeb's N2 week A endpoint",
    "depends_on": [],
@@ -2847,7 +2847,7 @@ window.LAUNCH_DATA = {
    "what": "#12 is fixed (page_posts now hourly). Confirm whether historical rows from the up-to-7-day-stale period were corrected; backfill if not. Re-test each of the 13 findings that read page_posts and note whether the flop set was trained on stale inputs.",
    "why": "Stale training inputs fake accuracy; symptom findings waste the QA queue.",
    "area": "Data",
-   "due": "2026-09-09",
+   "due": "2026-09-16",
    "priority": "P1",
    "priority_reason": "could invalidate flop evidence and several findings; slack inside N1",
    "depends_on": [],
@@ -2873,7 +2873,7 @@ window.LAUNCH_DATA = {
    "what": "Both plan tasks are done per the roadmap (flop set + eval harness in place, results above). File in the evidence folder: the 27,678-post training set's data hash, row count and day-7 label rule; the named flop definition with anomaly-window handling; the leak-audit note (no own-post metrics or impressions as inputs) with the feature list incl. arousal-mix and CLIP-novelty; and the harness outputs (page-history + zero-rate baselines, Brier, precision-coverage curve) with the harness commit id. The plan sequenced the rebuild after #19/#22; the roadmap reports it done, so the re-run trigger lives in N1-FH-10.",
    "why": "Checklist 3 requires leak audit and baselines as artifacts and the go/no-go reads artifacts, not recollection; an unfiled set cannot be rebuilt and the shortfall branch is only honest if the curve is filed.",
    "area": "Drafts",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P1",
    "priority_reason": "evidence for work that already exists; real risk of loss, slack inside N1",
    "depends_on": [
@@ -2903,7 +2903,7 @@ window.LAUNCH_DATA = {
    "what": "Finish the running measurement: comments per page per hour-of-week over the last 8 weeks, anomaly window excluded. Report the typical-hour count per page and archetype, band pages into 5+ / 1-5 / under 1, and mark which pilot pages (from Lewis's re-checked roster) fall in each band.",
    "why": "The crisis pass line cannot be set without this number; tuning cannot create signal that is not in the counts.",
    "area": "Alerts",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P0",
    "priority_reason": "Decision 1 must land before N2 tuning starts 14 Sep",
    "depends_on": [
@@ -2933,7 +2933,7 @@ window.LAUNCH_DATA = {
    "what": "Run both labellers on the 100 ground-truth posts, report agreement and a confusion by category, and decide which one feeds the shipped flop inputs. If the decision changes inputs, re-run the eval harness and re-record the flop gate numbers before N2-FH-01 files them.",
    "why": "The only finding that touches shipped model inputs; an unverified label pipe fakes accuracy.",
    "area": "QA",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "touches shipped inputs; re-run risk to the flop evidence, but N2-FH-01 has slack to 15 Sep",
    "depends_on": [
@@ -2962,7 +2962,7 @@ window.LAUNCH_DATA = {
    "what": "List every prediction table (flop scores, NLP labels, KANG growth rows, best-times aggregates when they exist) with expected cadence; add max-timestamp panels and an alert rule per table with routing and a written trip action. Test by pausing one job.",
    "why": "A silently stopped model is the failure we sell against.",
    "area": "Ops",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "real risk; guards every later model, slack inside N1",
    "depends_on": [],
@@ -2989,7 +2989,7 @@ window.LAUNCH_DATA = {
    "what": "Measure NEBULA label quality against the 100-post gold set, define the fallback gate (quality threshold and what serves below it), implement the gate flag and a panel. Record the rule #17's backfill must pass.",
    "why": "Ops-green is not correct; FUSION passed every check with wrong labels and NEBULA can too.",
    "area": "QA",
-   "due": "2026-09-13",
+   "due": "2026-09-20",
    "priority": "P2",
    "priority_reason": "P2 in the agreed order; safe inside the N1 tail",
    "depends_on": [
@@ -3016,7 +3016,7 @@ window.LAUNCH_DATA = {
    "what": "Load Lewis's complete incident window (every incident in a fixed range, page + timestamp, target 20+) into an incidents table, record the window bounds so unlisted alerts count as false alarms, join to comment/post data and add normal-but-spiky days per page. Note the confidence interval at the delivered n.",
    "why": "The detector is only as good as the truth it is tuned on; at n=5 the 75% number is decorative.",
    "area": "Alerts",
-   "due": "2026-09-13",
+   "due": "2026-09-20",
    "priority": "P0",
    "priority_reason": "blocks every N2 crisis task",
    "depends_on": [
@@ -3044,7 +3044,7 @@ window.LAUNCH_DATA = {
    "what": "Give Muteeb the seam-1 inputs early in the week (current LOGAN lag and backlog size, the sentiment/toxicity model and its latency, the toxic-recall fix plan from N2-FH-05), then review his one-page design (N1-MT-14) and co-sign it so the latency budget per stage inside the 15-minute clock is agreed by both.",
    "why": "Discovered at the 9 Oct drill, the 15-minute clock only measures half the chain.",
    "area": "Alerts",
-   "due": "2026-09-13",
+   "due": "2026-09-20",
    "priority": "P0",
    "priority_reason": "must be designed before Muteeb builds the fast-lane in N2 week B",
    "depends_on": [
@@ -3068,11 +3068,11 @@ window.LAUNCH_DATA = {
    "id": "N1-FH-17",
    "sprint": "N1",
    "assignee": "Faheem",
-   "title": "Send the flop v1 output field list for the 4 Sep API contract co-sign",
-   "what": "Before Asad and Muteeb co-sign the API contract on 4 Sep, send the flop v1 output schema as it exists today: score, band, drivers[] (chip slot), confidence/coverage flag, model version id, plus the input fields the feature builder needs (page_id, draft text, post metadata). One page, no new modelling; the pinned artifact and golden request/response pair follow in N2-FH-02.",
-   "why": "If the drivers/confidence fields are guessed on 4 Sep, Muteeb's endpoint (N2-MT-02) and Asad's gauge (N2-AS-05) get rebuilt in N2.",
+   "title": "Send the flop v1 output field list for the 11 Sep API contract co-sign",
+   "what": "Before Asad and Muteeb co-sign the API contract on 11 Sep, send the flop v1 output schema as it exists today: score, band, drivers[] (chip slot), confidence/coverage flag, model version id, plus the input fields the feature builder needs (page_id, draft text, post metadata). One page, no new modelling; the pinned artifact and golden request/response pair follow in N2-FH-02.",
+   "why": "If the drivers/confidence fields are guessed on 11 Sep, Muteeb's endpoint (N2-MT-02) and Asad's gauge (N2-AS-05) get rebuilt in N2.",
    "area": "Drafts",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P0",
    "priority_reason": "P0: blocks the 4 Sep contract co-sign (N1-AS-05, N1-MT-02).",
    "depends_on": [],
@@ -3096,10 +3096,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Faheem",
    "title": "Legal inventory for Filza: pipelines, purposes, vendors, emotion AI",
-   "what": "One sheet for Filza: the 8 pipelines (LOKI, GALACTUS, NEBULA, LOGAN, FUSION, VISION, KANG, HEIMDALL) with the purpose each serves and the models behind them; every labelling/LLM vendor in use, what customer content it receives and its training-tier status; and the emotion/arousal models shipped or planned. Refresh the emotion line by 7 Oct if the shipped set changes.",
+   "what": "One sheet for Filza: the 8 pipelines (LOKI, GALACTUS, NEBULA, LOGAN, FUSION, VISION, KANG, HEIMDALL) with the purpose each serves and the models behind them; every labelling/LLM vendor in use, what customer content it receives and its training-tier status; and the emotion/arousal models shipped or planned. Refresh the emotion line by 14 Oct if the shipped set changes.",
    "why": "Filza's Art 30 records (N1-FZ-08), AI-vendor gate (N2-FZ-03) and EU AI Act Art 5 memo (N3-FZ-07) all name this input and nobody owned it.",
    "area": "Legal",
-   "due": "2026-09-09",
+   "due": "2026-09-16",
    "priority": "P1",
    "priority_reason": "P1: three Filza tickets depend on it; same-day slack before N1-FZ-08.",
    "depends_on": [],
@@ -3114,7 +3114,7 @@ window.LAUNCH_DATA = {
     "Pipeline -> purpose -> model table",
     "Vendor list with data sent and training-tier status",
     "Emotion/arousal model list (shipped vs planned)",
-    "Send to Filza; refresh the emotion line by 7 Oct"
+    "Send to Filza; refresh the emotion line by 14 Oct"
    ],
    "source": "reconciler"
   },
@@ -3123,10 +3123,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Faheem",
    "title": "Publish the FastAPI document and freeze the serving envelope",
-   "what": "Generate the model-serving OpenAPI document from the Pydantic models on the feat/discovery_api branch and check it in as a build artifact, then freeze the response envelope every model endpoint returns: model_version, trained_at, coverage or eligibility flag, an explicit abstain with a reason, confidence, and the cost fields (compute ms, rows or bytes scanned, tokens where an LLM is involved). Confirm on the 4 Sep co-sign that the branch really is FastAPI, on which Python version, and how far behind main it has drifted. (The branch is envelope/serving groundwork only - no Discovery matching logic exists yet.)",
+   "what": "Generate the model-serving OpenAPI document from the Pydantic models on the feat/discovery_api branch and check it in as a build artifact, then freeze the response envelope every model endpoint returns: model_version, trained_at, coverage or eligibility flag, an explicit abstain with a reason, confidence, and the cost fields (compute ms, rows or bytes scanned, tokens where an LLM is involved). Confirm on the 11 Sep co-sign that the branch really is FastAPI, on which Python version, and how far behind main it has drifted. (The branch is envelope/serving groundwork only - no Discovery matching logic exists yet.)",
    "why": "The mock layer, the contract tests and both front-end developers generate from this document; and a model endpoint that cannot say 'I abstain' forces the UI to invent a confident number, which is the one thing the product promises never to do.",
    "area": "Drafts",
-   "due": "2026-09-09",
+   "due": "2026-09-16",
    "priority": "P0",
    "priority_reason": "P0 - blocks Muteeb's generation on 9 Sep and the mock layer the front end builds on.",
    "depends_on": [
@@ -3151,7 +3151,7 @@ window.LAUNCH_DATA = {
     "Generate the OpenAPI document from the Pydantic models",
     "Fix the envelope fields including abstain and cost",
     "Check the document in as a CI artifact",
-    "Hand it to Muteeb and Asad on 9 Sep"
+    "Hand it to Muteeb and Asad on 16 Sep"
    ],
    "source": "reconciler"
   },
@@ -3161,9 +3161,9 @@ window.LAUNCH_DATA = {
    "assignee": "Faheem",
    "title": "Cost per 1,000 predictions per model and monthly pipeline cost",
    "what": "For every model that will serve at launch - flop/virality, comment sentiment and toxicity, crisis burst, best-times aggregates, Art-E retrieval and embedding - publish cost per 1,000 predictions split into compute, warehouse scan and storage. Add the monthly cost of the pipelines that keep them fed (LOKI, GALACTUS, NEBULA, LOGAN, FUSION, KANG, HEIMDALL), and state the assumption set: rows scanned per prediction, batch versus live path, retrain frequency and embedding refresh.",
-   "why": "Asad's consolidation and Jill's 25 Sep pricing model both need a per-prediction number, and the pipelines are the part of the bill that is invisible until it is a line item.",
+   "why": "Asad's consolidation and Jill's 2 Oct pricing model both need a per-prediction number, and the pipelines are the part of the bill that is invisible until it is a line item.",
    "area": "Ops",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "P1 - needed for Jill's 21 Sep cost model, with slack.",
    "depends_on": [
@@ -3194,7 +3194,7 @@ window.LAUNCH_DATA = {
    "what": "Close PR #2 (Mantis, 13 months stale) and PR #3 (superseded: main already ships attachment extraction). Park PR #6 (restructure) with a written note that it reopens only after launch. Record the three decisions in the repo so nobody re-merges them mid-build.",
    "why": "All three conflict with main; merging the restructure mid-build would move every live deploy path under Asad's screens.",
    "area": "Ops",
-   "due": "2026-09-03",
+   "due": "2026-09-10",
    "priority": "P1",
    "priority_reason": "Closing PR #2/#3 and parking #6 gates nothing: open PRs do not block main or the scaffold. Day-1 due date keeps it early; a slip costs nobody a date.",
    "depends_on": [],
@@ -3220,7 +3220,7 @@ window.LAUNCH_DATA = {
    "what": "Write and co-sign with Asad the one-way-door stack decision (Next.js + TypeScript PWA, Tailwind + tokens, Netlify, and the chosen auth vendor Clerk or Cognito) and the API contract: OpenAPI stub, error envelope, tenant claim on every route, unread-count endpoints, drivers + confidence/coverage fields on the score response, and the multi-page model (account owns many pages; page_id on every query). Commit both as documents in the repo.",
    "why": "The contract is what makes every later model-to-app seam mechanical; without it the mock-API layer and Asad's screens have nothing to build against.",
    "area": "App core",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P0",
    "priority_reason": "blocks the mock-API generation and Asad's 10 Sep build start",
    "depends_on": [
@@ -3252,7 +3252,7 @@ window.LAUNCH_DATA = {
    "what": "Request SES production access for the alert-sending domain, publish SPF, DKIM and DMARC records, and verify them with a test send to Gmail and Outlook inboxes. Hand the sending identity to Jill for the autumn warm-up.",
    "why": "Sandbox exit and warm-up take weeks; crisis emails that land in spam are crises missed.",
    "area": "Alerts",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P1",
    "priority_reason": "SES production access is a 1-2 day AWS turnaround and Jill's warm-up starts in N2 (14 Sep), leaving ~10 days of slack; the first real alert email is N3. Real risk with slack, not a blocker.",
    "depends_on": [],
@@ -3276,9 +3276,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Repo scaffold, CI, preview deploys and permanent staging",
    "what": "Scaffold the Next.js + TypeScript app repo, add CI with lint, typecheck and tests, wire Netlify preview deploys per PR, and stand up a permanent staging environment with its own database and secrets.",
-   "why": "Asad starts coding Wed 10 Sep; without rails his screens start cold and every PR lacks a preview to review.",
+   "why": "Asad starts coding Wed 17 Sep; without rails his screens start cold and every PR lacks a preview to review.",
    "area": "App core",
-   "due": "2026-09-06",
+   "due": "2026-09-13",
    "priority": "P0",
    "priority_reason": "Asad's build start on 10 Sep depends on it",
    "depends_on": [
@@ -3309,7 +3309,7 @@ window.LAUNCH_DATA = {
    "what": "Pin the Meta Graph API version and record its sunset date; build one central Meta client with jittered backoff and retry caps; add structured tenant-tagged logging with no PII; connect Sentry and an uptime check on staging.",
    "why": "This is the quiet plumbing that cannot be late: an unpinned API or unbounded retries break silently at the worst moment, and the token backend reads real page data through this client for the gate demo.",
    "area": "Ops",
-   "due": "2026-09-08",
+   "due": "2026-09-15",
    "priority": "P1",
    "priority_reason": "Blocks only Muteeb's own N1-MT-09/14, not another person. Sentry, uptime, logging and the version pin have slack into N2; N1-MT-09 can carry a minimal Meta client for the gate demo.",
    "depends_on": [
@@ -3337,9 +3337,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Wire bought auth with tenant claim and generate the mock-API layer",
    "what": "Integrate the vendor recorded in the stack decision (Clerk or Cognito) so every session JWT carries the tenant claim, then generate the mock-API layer from the co-signed contract so BOTH front-end developers can build screens against realistic responses - including the error envelope and the abstain/coverage fields - before real endpoints exist. N1-MT-17 extends this to both documents, the typed client and the per-route live/mock switch; keep them one piece of work if that is easier.",
-   "why": "Auth is a vendor integration, not an invention; the mock layer lets Asad's screens start on rails on 10 Sep.",
+   "why": "Auth is a vendor integration, not an invention; the mock layer lets Asad's screens start on rails on 17 Sep.",
    "area": "Auth",
-   "due": "2026-09-08",
+   "due": "2026-09-15",
    "priority": "P0",
    "priority_reason": "blocks Asad's first build day",
    "depends_on": [
@@ -3372,7 +3372,7 @@ window.LAUNCH_DATA = {
    "what": "Build one end-to-end endpoint that scores a draft for one page: warehouse read, model call, contract-shaped response with the tenant claim enforced. Deploy it to staging behind the real auth.",
    "why": "It proves the whole chain warehouse to API to app before any screen exists; everything in N2 hardens this path.",
    "area": "Drafts",
-   "due": "2026-09-09",
+   "due": "2026-09-16",
    "priority": "P1",
    "priority_reason": "The 11 Sep gate as CONTEXT defines it is login -> connect -> real data; the score endpoint is not in it. Its first external consumer is Asad's Drafts screen from 14 Sep, which the mock layer serves until N2-MT-01 (18 Sep).",
    "depends_on": [
@@ -3403,7 +3403,7 @@ window.LAUNCH_DATA = {
    "what": "Enable Postgres RLS from the first table using a policy on tenant_id set from the JWT claim (GUC per request), and land the first cross-tenant leakage test in CI alongside the first endpoint: tenant A must not read tenant B's rows through the API.",
    "why": "A missed WHERE clause is the most probable launch-hurting bug; isolation must be structural from day one, not added in N4.",
    "area": "Ops",
-   "due": "2026-09-09",
+   "due": "2026-09-16",
    "priority": "P1",
    "priority_reason": "No other person waits on it before Filza's N6 attestation and it is not a gate criterion. Keep it inside N1 (the 'from the first table' rule) but it can slip a few days without moving anyone's date.",
    "depends_on": [
@@ -3432,7 +3432,7 @@ window.LAUNCH_DATA = {
    "what": "Build the token store with KMS envelope encryption, proactive refresh, and revocation wired to a data-delete cascade. Implement the multi-page model (one account, many pages, tokens per page) and prove login, connect and real data on a bare test page.",
    "why": "This is the G1 demo; without it there is no real data on screen and no revocation path for Meta's reviewers.",
    "area": "Auth",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P0",
    "priority_reason": "the 11 Sep gate demo is this chain",
    "depends_on": [
@@ -3463,7 +3463,7 @@ window.LAUNCH_DATA = {
    "what": "Write the deploy and rollback runbook while building: how to deploy to staging and production, how to roll back a release, where secrets live, and who to call. Keep it in the repo and update it with every rails change.",
    "why": "Asad must perform a deploy and rollback alone in N2; if the runbook does not exist by the gate that rehearsal slips.",
    "area": "Ops",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "real risk with slack; consumed in N2 by Asad's solo deploy",
    "depends_on": [
@@ -3487,11 +3487,11 @@ window.LAUNCH_DATA = {
    "id": "N1-MT-11",
    "sprint": "N1",
    "assignee": "Muteeb",
-   "title": "Gate demo Fri 11 Sep: login, connect, real data on a bare test page",
+   "title": "Gate demo Fri 18 Sep: login, connect, real data on a bare test page",
    "what": "Run the N1 gate demo: log in via the bought auth, connect a real Facebook page, and show real data from that page on the bare test page in staging. Show the tenant claim in the JWT and the leakage test passing in CI.",
    "why": "The rails are the product this sprint; the gate proves the whole chain before Asad builds screens on it.",
    "area": "App core",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P0",
    "priority_reason": "the dated Friday gate Muteeb owns",
    "depends_on": [
@@ -3506,7 +3506,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N1",
    "source": "muteeb",
-   "acceptance": "The demo is performed live on staging on 11 Sep and recorded as passed in the gate log.",
+   "acceptance": "The demo is performed live on staging on 18 Sep and recorded as passed in the gate log.",
    "checklist": [
     "Rehearse the flow on staging the day before",
     "Demo login, connect and real data live",
@@ -3522,7 +3522,7 @@ window.LAUNCH_DATA = {
    "what": "KANG is live (hourly growth-curve rows since 20 Aug; page_posts now loads hourly after fix #12). Commit its state-machine definition to the repo, verify receipts, retries and DLQ behaviour, fix the stale 'nothing invokes this' comment, and with Faheem confirm whether historical page_posts rows were corrected by the hourly load.",
    "why": "The scheduler exists outside the repo and undocumented; a bus-factor risk on the pipeline that feeds every model.",
    "area": "Data",
-   "due": "2026-09-12",
+   "due": "2026-09-19",
    "priority": "P1",
    "priority_reason": "real risk but not on the gate path",
    "depends_on": [
@@ -3550,7 +3550,7 @@ window.LAUNCH_DATA = {
    "what": "Faheem's N1 freshness verdict is delivered, so sequence and start the odl backfill now: reverse-chronological checkpointed chunks, progress logged, and a completion estimate posted. Annotate the 25-29 Aug Facebook restriction window as an anomaly in the backfilled data.",
    "why": "Models trained on a 13-month-stale odl feed stale inputs; the backfill is real work that only gets longer if deferred.",
    "area": "Data",
-   "due": "2026-09-13",
+   "due": "2026-09-20",
    "priority": "P1",
    "priority_reason": "real risk with slack; not on the gate path",
    "depends_on": [
@@ -3577,9 +3577,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Design the live comment-labelling path for the crisis fast-lane",
    "what": "With Faheem, design seam 1: the fast-lane will fetch comments every ~5 min, but comment-sentiment currently lags two weeks with a large backlog. Write the design: polling cadence and rate budget, where the sentiment/toxicity labelling call sits (inline at fetch or a priority queue), the latency budget so fetch plus label stays under 15 minutes, and how the ~39k unlabelled historical comments get drained.",
-   "why": "Faheem needs the fast-lane timing and labelling location by N2; without a live labelling path the 9 Oct drill measures only half the chain.",
+   "why": "Faheem needs the fast-lane timing and labelling location by N2; without a live labelling path the 16 Oct drill measures only half the chain.",
    "area": "Alerts",
-   "due": "2026-09-13",
+   "due": "2026-09-20",
    "priority": "P1",
    "priority_reason": "Faheem's stated need is 'by N2' and the design is co-written with him; the first ticket that consumes it is N2-MT-07 (23 Sep), ~10 days of slack. The P0 for Faheem's dated need sits on N2-MT-11.",
    "depends_on": [
@@ -3608,9 +3608,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Secrets hygiene delegated from Asad: Netlify keys, mcp.js, key auth",
    "what": "Take the secrets-hygiene items Asad's N1 plan line delegates off his runway: verify in the Netlify environment that the API keys were actually rotated (the repo cannot prove it), strip the mcp.js debug capture that is confirmed still present on the landing site, and replace path-segment key auth with header-based auth so keys stop leaking into access logs. Record each outcome in the deploy runbook.",
-   "why": "Asad writes no code before 10 Sep, and a debug capture plus keys in access logs on the live landing site are an open exposure that gets worse once pilots and Meta reviewers start visiting.",
+   "why": "Asad writes no code before 17 Sep, and a debug capture plus keys in access logs on the live landing site are an open exposure that gets worse once pilots and Meta reviewers start visiting.",
    "area": "Ops",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P1",
    "priority_reason": "real risk with slack; no gate depends on it, but it must not survive into N2 when Meta reviewers reach the site",
    "depends_on": [
@@ -3635,10 +3635,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Muteeb",
    "title": "N1 inputs to Jill + Filza: systems, tool tiers, data stores, billing",
-   "what": "Five hand-offs Jill's and Filza's N1 tickets name and nobody owned: (1) the list of infra systems and admin accounts for the access review (to Jill by 4 Sep); (2) preferred tools and tiers for Sentry, uptime/status page and paging for the tool-buy memo (by 6 Sep); (3) the list of stores holding tenant data plus the app event list (token store, warehouse, predictions, labels, vectors, memory) for the RoPA and the deletion-callback spec; (4) billing console access with cost-allocation tags per pipeline; (5) IAM permission for Budgets/Cost Explorer.",
-   "why": "Each is minutes for Muteeb but blocks a dated deliverable: access review 4 Sep, tool-buy memo 7 Sep, RoPA 9 Sep, deletion spec 10 Sep, budget alarms 11 Sep.",
+   "what": "Five hand-offs Jill's and Filza's N1 tickets name and nobody owned: (1) the list of infra systems and admin accounts for the access review (to Jill by 11 Sep); (2) preferred tools and tiers for Sentry, uptime/status page and paging for the tool-buy memo (by 13 Sep); (3) the list of stores holding tenant data plus the app event list (token store, warehouse, predictions, labels, vectors, memory) for the RoPA and the deletion-callback spec; (4) billing console access with cost-allocation tags per pipeline; (5) IAM permission for Budgets/Cost Explorer.",
+   "why": "Each is minutes for Muteeb but blocks a dated deliverable: access review 11 Sep, tool-buy memo 14 Sep, RoPA 16 Sep, deletion spec 17 Sep, budget alarms 18 Sep.",
    "area": "Ops",
-   "due": "2026-09-07",
+   "due": "2026-09-14",
    "priority": "P1",
    "priority_reason": "P1: small, but five consumers inside N1 week 1.",
    "depends_on": [],
@@ -3652,8 +3652,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "acceptance": "Jill and Filza each confirm, dated, that they received the inputs their N1 tickets list.",
    "checklist": [
-    "Systems + admin accounts list to Jill (4 Sep)",
-    "Tool tiers to Jill for the memo (6 Sep)",
+    "Systems + admin accounts list to Jill (11 Sep)",
+    "Tool tiers to Jill for the memo (13 Sep)",
     "Tenant-data store list + app event list to Filza",
     "Billing console access + cost tags for Jill",
     "Budgets/Cost Explorer IAM for Jill"
@@ -3668,7 +3668,7 @@ window.LAUNCH_DATA = {
    "what": "Make both documents produce artifacts in CI: the hand-authored browser-to-BFF document and the FastAPI document generated from Faheem's Pydantic models. Out of them come a typed TypeScript client the app imports, a mock server serving every BFF route with realistic fixtures including the error envelope, and a per-route live/mock switch. Write the switch guide for a developer who is new to this repo - Saad - naming the file to edit and how to tell which routes are live today.",
    "why": "The front end is now two people, one of them new, building surfaces against endpoints that land weeks later; regenerating by hand or reading source to find out what is live is where the front-end schedule quietly goes.",
    "area": "App core",
-   "due": "2026-09-09",
+   "due": "2026-09-16",
    "priority": "P0",
    "priority_reason": "P0 - blocks Saad's ramp from 13 Sep and Asad's N2 screens; the gate on 11 Sep runs on this path.",
    "depends_on": [
@@ -3704,7 +3704,7 @@ window.LAUNCH_DATA = {
    "what": "Fix the internal path before anything is built on it: FastAPI behind the ALB accepting only a short-lived audience-scoped JWT minted by the BFF, plus an IP allowlist, since Netlify functions cannot join the VPC. Set the Netlify function region to the AWS region carrying Fargate and Redshift so the p95-under-1s budget is not spent on transatlantic hops. Enforce that only FastAPI holds warehouse credentials - the BFF gets none - and verify by scanning the app environment.",
    "why": "A public data path with no internal auth is the finding a pen-test or a Meta data assessment will open with, and a region mismatch buys two 80-120ms hops on every scored draft forever.",
    "area": "Ops",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P0",
    "priority_reason": "P0 - the 11 Sep gate runs real data through this path, and the region is a config line now and a migration in October.",
    "depends_on": [
@@ -3737,7 +3737,7 @@ window.LAUNCH_DATA = {
    "what": "Price what you run, per environment (dev, staging, production): Fargate task shape and count, ALB, NAT gateway or VPC endpoints, SQS and DLQ, Redshift, S3, SES, the vector store and the Netlify plan and credits. Give each line at 5 pilots and at 100 pages and mark it fixed or scaling. Call out explicitly that Fargate does not scale to zero, so idle non-production tasks are a standing cost, and say what you would run instead for staging.",
    "why": "Asad's consolidation and Jill's pricing model both need the infra half, and the fixed-versus-marginal shape of this list is what determines whether per-page pricing works at all.",
    "area": "Ops",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "P1 - needed for Jill's 21 Sep cost model, with slack.",
    "depends_on": [
@@ -3769,7 +3769,7 @@ window.LAUNCH_DATA = {
    "what": "Take formal ownership of the handover pack Rafeh has already delivered: the acceptance register, launch-gate list, open-defect list, pilot notes, the MVP/Fast/Phase-2 retag summary, QA dashboard access, the 97-post gold-set provenance + comment sets, and the written note that Art-E GraphRAG moves out (comment collapse). Verify each artefact is complete and readable without him, file everything in one PM folder, and confirm no access or tracker still sits in his accounts. Anything missing goes to Alex as interim PM, not back to Rafeh.",
    "why": "Rafeh's tags, gates and gold-set provenance leave with him on 3 Sep; without a verified, filed pack every later acceptance and model gate has no paper trail.",
    "area": "PM",
-   "due": "2026-09-03",
+   "due": "2026-09-10",
    "priority": "P1",
    "priority_reason": "Per CONTEXT the handover pack is already delivered; this is verify-and-file. Jill's revocation check is her own ticket and does not wait on Saad's closure note. Nothing dated blocks on it.",
    "depends_on": [
@@ -3795,11 +3795,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-02",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Agree pack delivery order with Asad (first two ~8 Sep)",
-   "what": "Decide with Asad the build order of the nine packs so delivery is a ramp, not a cliff: first two packs (likely Today + Drafts) land ~8 Sep, the rest roll to 10 Sep. Write the order and dates in one message and pin it in the tracker.",
-   "why": "Costs nothing and buys schedule slack; without it Asad receives nine packs on 10 Sep and starts cold on all of them.",
+   "title": "Agree pack delivery order with Asad (first two ~15 Sep)",
+   "what": "Decide with Asad the build order of the nine packs so delivery is a ramp, not a cliff: first two packs (likely Today + Drafts) land ~15 Sep, the rest roll to 17 Sep. Write the order and dates in one message and pin it in the tracker.",
+   "why": "Costs nothing and buys schedule slack; without it Asad receives nine packs on 17 Sep and starts cold on all of them.",
    "area": "Design",
-   "due": "2026-09-03",
+   "due": "2026-09-10",
    "priority": "P0",
    "priority_reason": "Blocks the order Asad builds in from 14 Sep; only worth anything if decided on day 1 of N1",
    "depends_on": [
@@ -3813,7 +3813,7 @@ window.LAUNCH_DATA = {
    "acceptance": "A written, dated pack order agreed by Asad exists and N1-SD-07/N1-SD-09 dates match it.",
    "checklist": [
     "Propose Today + Drafts first, match Asad's N2 build order",
-    "Confirm Discovery stays 5 Sep and tokens ship with the first packs",
+    "Confirm Discovery stays 12 Sep and tokens ship with the first packs",
     "Post the order + dates in the tracker",
     "Adjust N1-SD-07 and N1-SD-09 scope if Asad picks different first packs"
    ]
@@ -3826,7 +3826,7 @@ window.LAUNCH_DATA = {
    "what": "Write the decision that every Schedule CTA, scheduled row and calendar chip in V3 becomes 'Remind me at this time' because publishing/messaging scopes are excluded from Meta review; note the same for auto-replies/auto-pilot. Share with Filza and Alex so Meta-facing copy and the scopes decision match.",
    "why": "The mockups promise scheduling the MVP legally cannot do; if it is not cut on paper before the Today/Drafts packs, it is cut by surprise mid-build.",
    "area": "Design",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P1",
    "priority_reason": "An hour of writing whose date is carried by the first packs (N1-SD-07, 8 Sep, P0) which cannot ship a Schedule CTA; four days of slack before that. Internal prerequisite, not a blocker of another person.",
    "depends_on": [],
@@ -3837,7 +3837,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N1",
    "source": "plan",
-   "acceptance": "The decision is written, co-noted by Filza, and no pack shipped after 4 Sep contains a Schedule CTA.",
+   "acceptance": "The decision is written, co-noted by Filza, and no pack shipped after 11 Sep contains a Schedule CTA.",
    "checklist": [
     "List every V3 element affected (CTAs, scheduled rows, calendar chips, auto-pilot log)",
     "Write the replacement pattern and copy for 'Remind me'",
@@ -3849,11 +3849,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-04",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Ship the Discovery pack by Fri 5 Sep",
+   "title": "Ship the Discovery pack by Fri 12 Sep",
    "what": "Deliver the Explore layout (top-match spotlight + ranked rows with overlap %), slide-over profile, Matches/Saved tabs and the opt-in consent screen using Filza's text at equal prominence, view-only, reason strings only (no sub-score meters). Include the states Muteeb's N3 engine will emit: sub-k=5 fail-closed empty state, 'suggested - not validated' fallback badge, 'high-confidence' badge, and saved-then-revoked page state. This pack supersedes the V3 swipe deck.",
-   "why": "It is the last new surface and there is no designer after 10 Sep; without it Asad's N4 Discovery UI and Muteeb's reason-string vocabulary have no truth to build to.",
+   "why": "It is the last new surface and there is no designer after 17 Sep; without it Asad's N4 Discovery UI and Muteeb's reason-string vocabulary have no truth to build to.",
    "area": "Discovery",
-   "due": "2026-09-05",
+   "due": "2026-09-12",
    "priority": "P0",
    "priority_reason": "Dated deadline 5 Sep; feeds Muteeb N3 and Asad N4",
    "depends_on": [
@@ -3867,9 +3867,9 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N1",
    "source": "saad",
-   "acceptance": "Pack delivered 5 Sep with web + mobile variants, all listed states, Filza's consent text verbatim, and the swipe deck recorded as deferred.",
+   "acceptance": "Pack delivered 12 Sep with web + mobile variants, all listed states, Filza's consent text verbatim, and the swipe deck recorded as deferred.",
    "checklist": [
-    "Chase Filza's consent text by 4 Sep; place it at equal prominence, revocable",
+    "Chase Filza's consent text by 11 Sep; place it at equal prominence, revocable",
     "Design spotlight, ranked rows, slide-over profile, Matches/Saved tabs (web + mobile)",
     "Design fail-closed empty state, 'suggested - not validated' and 'high-confidence' badges, revoked-page state",
     "Define reason-string slots that stay provenance-honest (text-only edges never say 'audience overlap')",
@@ -3880,11 +3880,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-05",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Run the daily 30-min async pack review with Asad, 3-10 Sep",
+   "title": "Run the daily 30-min async pack review with Asad, 10-24 Sep",
    "what": "Each day post the pack-in-progress and take Asad's buildability flags (component reuse, states missing, API fields the contract does not carry) while changes are still cheap. Fold every accepted flag back into the pack the same day and log the rest as decisions.",
    "why": "Design QA before code exists is the cheapest QA there is; skipping it lands unbuildable screens on the sole developer in his first build week.",
    "area": "Design",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P1",
    "priority_reason": "Real risk of unbuildable packs, but the daily loop has slack inside N1",
    "depends_on": [
@@ -3895,12 +3895,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N1",
    "source": "plan",
-   "acceptance": "A daily review note exists for every working day 3-10 Sep and every flagged item is either fixed in the pack or logged.",
+   "acceptance": "A daily review note exists for every working day 10-24 Sep and every flagged item is either fixed in the pack or logged.",
    "checklist": [
     "Agree the async format and time with Asad on 3 Sep",
     "Post daily: what changed, open questions, anything the API contract must carry (drivers, confidence, unread counts, page_id)",
     "Fix accepted flags same day; log deferred ones",
-    "Close the loop 10 Sep with a 'nothing unbuildable outstanding' note"
+    "Close the loop 17 Sep with a 'nothing unbuildable outstanding' note"
    ]
   },
   {
@@ -3911,7 +3911,7 @@ window.LAUNCH_DATA = {
    "what": "Produce one token sheet: spacing scale, type scale, colour roles (danger, positive, muted, accent - roles not hexes), state rules (hover/disabled/loading/empty), radius, elevation. Ship it alongside the first two packs so Asad's component library starts from tokens rather than nine screenshots.",
    "why": "Without it Asad derives a design system from screens in his first build week and every later pack drifts.",
    "area": "Design",
-   "due": "2026-09-08",
+   "due": "2026-09-15",
    "priority": "P0",
    "priority_reason": "Blocks Asad's component-library start on 10 Sep",
    "depends_on": [
@@ -3935,11 +3935,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-07",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Deliver the first two packs (Today + Drafts) ~8 Sep",
+   "title": "Deliver the first two packs (Today + Drafts) ~15 Sep",
    "what": "Deliver the first two packs in the agreed order, expected Today (next-move hero with confidence chip, moves list, typed feed cards, briefing card, setup pill, workspace switcher slot, 'Remind me' CTAs) and Drafts/Studio (composer, virality gauge as BANDS plus an abstain 'no strong signal' state, driver chips vocabulary, minimum-text threshold, autosave). Web + mobile variants, all states, no stories strip or milestone banner (deferred).",
-   "why": "Asad starts building Today and Drafts on 14 Sep; a slip here moves the whole build.",
+   "why": "Asad starts building Today and Drafts on 21 Sep; a slip here moves the whole build.",
    "area": "Design",
-   "due": "2026-09-08",
+   "due": "2026-09-15",
    "priority": "P0",
    "priority_reason": "Blocks Asad's first screens; gate says packs delivered",
    "depends_on": [
@@ -3970,7 +3970,7 @@ window.LAUNCH_DATA = {
    "what": "One page on how the product sounds when uncertain, when wrong, when there is no data, and when delivering bad news (a storm, a flop score), plus a shared vocabulary so one concept is not named three ways across surfaces. Ship it with the packs.",
    "why": "Prevents six surfaces sounding like six products and is the prerequisite for the N5 copy freeze; without it every empty-state and alert string is invented ad hoc.",
    "area": "Design",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P1",
    "priority_reason": "Real risk of inconsistent copy, but not schedule-critical to the packs",
    "depends_on": [],
@@ -3993,11 +3993,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-09",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Deliver the remaining seven packs by 10 Sep",
+   "title": "Deliver the remaining seven packs by 17 Sep",
    "what": "Deliver Alerts (triage strip, cards with cited posts + ONE action + drafted reply, rules list, 'not a crisis' button, all-clear state, notification settings incl. quiet hours), Best Times (7x24 heatmap, #1 ring, sparse-data state, lookback + self-selection note), Analytics thin (4 KPI tiles incl. HEALTH, 2 charts, All-posts raw table, 'why numbers differ from Facebook' note), Art-E rail (streaming, citation chips, grounding footer, recommendation card, refusal, AI label, thumbs; mic stays a stub), Settings (prefs, notifications, connected pages, data controls, cookie consent, delete/export), Wins-lite (value band, scoreboard, rating card), Pages + workspace switcher (cards with health rings, slide-over factor bars). Web + mobile, all states; deferred V3 items omitted by name.",
-   "why": "Asad builds only what is in a pack; a V3 screen without a pack does not exist and there is no designer after 10 Sep.",
+   "why": "Asad builds only what is in a pack; a V3 screen without a pack does not exist and there is no designer after 17 Sep.",
    "area": "Design",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P0",
    "priority_reason": "Dated 10 Sep; gate says packs delivered",
    "depends_on": [
@@ -4011,7 +4011,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N1",
    "source": "saad",
-   "acceptance": "All nine packs exist on 10 Sep with mobile variants and states; Asad confirms nothing he needs for N2-N5 is missing.",
+   "acceptance": "All nine packs exist on 17 Sep with mobile variants and states; Asad confirms nothing he needs for N2-N5 is missing.",
    "checklist": [
     "Alerts + Settings: quiet hours / severity / digest controls designed policy-agnostic pending N2-SD-03",
     "Analytics + Pages: health pill with bands, 'building your baseline' thin state",
@@ -4030,7 +4030,7 @@ window.LAUNCH_DATA = {
    "what": "One states matrix audited per pack: empty, error, loading-as-'learning, never loading', thin history, sub-k=5 fail-closed, 'building your baseline', best-times sparse, gauge abstain, rate-limited (Retry-After), stale-data banner, page revoked, feature-off (kill switch) - so N5-AS-02/N6-AS-03 render designed states. Design the crisis email (deep link, cited post, one action, drafted reply, dark-mode safe)",
    "why": "States are where trust is won; a missing spinner or a fake number on a thin page is what UAT would otherwise find first.",
    "area": "Design",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P1",
    "priority_reason": "Real risk, but folded into pack delivery with the same deadline",
    "depends_on": [
@@ -4058,7 +4058,7 @@ window.LAUNCH_DATA = {
    "what": "For each of the nine packs plus Discovery, record a short Loom walkthrough and write a design-QA checklist (what to compare when the screen ships). Export icons, illustrations and tokens into the repo so nothing lives only in Figma.",
    "why": "The Looms and checklists are how a sole developer self-verifies after the designer is gone; the exports remove the Figma bus factor.",
    "area": "Design",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "Needed before N2 build starts but has a day of slack after packs",
    "depends_on": [
@@ -4086,7 +4086,7 @@ window.LAUNCH_DATA = {
    "what": "Create a running log with one line per non-obvious decision and why: Schedule->Remind me, swipe deck deferred, bands + abstain, health bands, GraphRAG moved out, every V3 deviation. Seed it with N1 decisions and keep it current through N6.",
    "why": "Cheap if kept as you go, near-worthless if reconstructed later; it is also where the December betting table and copy audit will look.",
    "area": "Design",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P2",
    "priority_reason": "Compounds over time; safe to slip",
    "depends_on": [
@@ -4111,11 +4111,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-13",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Build the 10 Sep design reveal package with Alex",
-   "what": "Assemble the public design reveal for 10 Sep from finished pack renders: honest about zero engineering, dated 1 December, no scheduling or messaging shown, no investor language. Alex owns the beat; Saad supplies the visuals and captions.",
-   "why": "A public date already announced; the reveal shows finished design honestly or it undermines the 12 Sep landing beat.",
+   "title": "Build the 17 Sep design reveal package with Alex",
+   "what": "Assemble the public design reveal for 17 Sep from finished pack renders: honest about zero engineering, dated 1 December, no scheduling or messaging shown, no investor language. Alex owns the beat; Saad supplies the visuals and captions.",
+   "why": "A public date already announced; the reveal shows finished design honestly or it undermines the 19 Sep landing beat.",
    "area": "Marketing",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P0",
    "priority_reason": "Dated public deadline 10 Sep (Saad tagged P2; CONTEXT rule makes dated items P0)",
    "depends_on": [
@@ -4127,7 +4127,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "saad",
-   "acceptance": "Reveal package delivered to Alex by 10 Sep with renders that contain no cut features and the 1 Dec date.",
+   "acceptance": "Reveal package delivered to Alex by 17 Sep with renders that contain no cut features and the 8 Dec date.",
    "checklist": [
     "Pick 5-8 renders from the packs; no Schedule/inbox/auto-pilot visible",
     "Caption in the product voice; date reads 1 December",
@@ -4139,11 +4139,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-14",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Switch to PM 10 Sep: clear Alex's 'waits for Saad' list",
-   "what": "Take Alex's written 'waits for Saad' list from the 3-10 Sep bridge week, decide or schedule every item, and stand up the PM cadence: daily triage, the acceptance register as the gate source of truth, and the tracker starting Thu 3 Sep dates.",
+   "title": "Switch to PM 17 Sep: clear Alex's 'waits for Saad' list",
+   "what": "Take Alex's written 'waits for Saad' list from the 10-24 Sep bridge week, decide or schedule every item, and stand up the PM cadence: daily triage, the acceptance register as the gate source of truth, and the tracker starting Thu 3 Sep dates.",
    "why": "The bridge week must not decide things twice; anything left on the list stalls N2 planning.",
    "area": "PM",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "Real risk of decisions made twice, but a day of slack before N2",
    "depends_on": [
@@ -4158,9 +4158,9 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "reconciler",
-   "acceptance": "Every item on Alex's list has an owner and date, and daily triage has run at least once before 14 Sep.",
+   "acceptance": "Every item on Alex's list has an owner and date, and daily triage has run at least once before 21 Sep.",
    "checklist": [
-    "Receive the list from Alex on 10 Sep",
+    "Receive the list from Alex on 17 Sep",
     "Decide or date each item; log decisions",
     "Publish the triage time and the acceptance register location",
     "Confirm N2 tickets for Asad's first screens have one-pager dates"
@@ -4174,7 +4174,7 @@ window.LAUNCH_DATA = {
    "what": "Name one second person (CONTEXT suggests Asad, who already co-owns) and brief them on the narrative, permission-to-feature map, reviewer credentials and where the package lives, well enough to answer a reviewer inside the 24h SLA if Saad is unavailable.",
    "why": "One briefing insures the only gate with an external clock and a restart-on-rejection penalty.",
    "area": "Meta",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "closes a real gap with slack before the 25 Sep submission; must precede Asad's N1-AS-10 (11 Sep)",
    "depends_on": [
@@ -4200,11 +4200,11 @@ window.LAUNCH_DATA = {
    "id": "N1-SD-16",
    "sprint": "N1",
    "assignee": "Saad",
-   "title": "Draft the Meta reviewer narrative + open app-dashboard access (11 Sep)",
+   "title": "Draft the Meta reviewer narrative + open app-dashboard access (18 Sep)",
    "what": "First PM day: write the one-page 'page analytics tool' reviewer narrative (what the app does with each permission, read-only analytics, Remind-me not Schedule) for Asad to approve and Filza to firewall-check, and set up the Meta app-dashboard roles so Asad (co-owner) and Lewis (tester management) have access before the tester list is built.",
    "why": "Asad's founder-duties clearance (N1-AS-09), Filza's firewall rulebook (N2-FZ-01) and Lewis's tester list (N1-LW-05) all depend on it; the 25 Sep submission clock starts here.",
    "area": "Meta",
-   "due": "2026-09-08",
+   "due": "2026-09-15",
    "priority": "P0",
    "priority_reason": "P0: blocks three people and sits on the Meta submission clock.",
    "depends_on": [
@@ -4233,9 +4233,9 @@ window.LAUNCH_DATA = {
    "assignee": "Saad",
    "title": "Ship the Meta app icon and app-dashboard identity copy",
    "what": "Deliver with the design packs the assets the Meta app dashboard requires: a 1024x1024 PNG app icon with no alpha channel, the app display name exactly as it will appear on the consent screen, the short App Details description in firewall language, the app category / business use case selection, and the support contact email. Hand them to whoever N1-AX-11 names, for entry into the dashboard in N2-AS-07.",
-   "why": "Meta will not accept a submission without an icon, a category and contact details, and the icon appears on the consent screen the screencasts freeze on 24 Sep.",
+   "why": "Meta will not accept a submission without an icon, a category and contact details, and the icon appears on the consent screen the screencasts freeze on 1 Oct.",
    "area": "Meta",
-   "due": "2026-09-09",
+   "due": "2026-09-16",
    "priority": "P1",
    "priority_reason": "P1 - needed for N2-AS-07 on 23 Sep and for the frozen consent screen; ships with the packs, so real slack.",
    "depends_on": [
@@ -4262,10 +4262,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Saad",
    "title": "Split the PM load for the front-end switch; hand the list to Alex",
-   "what": "Before coding starts, write the keep/move list. Keep: the Meta package and its clock, design QA and the visual sweeps, acceptance one-pagers for the surfaces he now builds, the UAT protocol and both waves, the bug bashes, the golden-set commission and the cut-line reviews. Propose to move: BetaList/directory submissions and the Product Hunt package, the user-docs skeleton and support macros, the crisis-video script and the December betting table to Alex; the weekly pilot-feedback digest to Lewis. State plainly how many coding days survive a sprint that also submits Meta on 25 Sep, and what yields first when a reviewer message lands.",
+   "what": "Before coding starts, write the keep/move list. Keep: the Meta package and its clock, design QA and the visual sweeps, acceptance one-pagers for the surfaces he now builds, the UAT protocol and both waves, the bug bashes, the golden-set commission and the cut-line reviews. Propose to move: BetaList/directory submissions and the Product Hunt package, the user-docs skeleton and support macros, the crisis-video script and the December betting table to Alex; the weekly pilot-feedback digest to Lewis. State plainly how many coding days survive a sprint that also submits Meta on 2 Oct, and what yields first when a reviewer message lands.",
    "why": "Every N2-N6 plan assumes Saad's PM output and his front-end output at full strength; without a written split the Meta clock and the first surfaces collide silently in the sprint that can least afford it.",
    "area": "PM",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P0",
    "priority_reason": "P0 - blocks Alex's 8-11 Sep owner decision (N1-AX-11) and every N2 assumption; his coding starts 14 Sep.",
    "depends_on": [
@@ -4283,7 +4283,7 @@ window.LAUNCH_DATA = {
     "Name the proposed new owner per moved item",
     "State N2 coding capacity in days against the Meta calendar",
     "State what yields when a reviewer message lands inside the 24h SLA",
-    "Send to Alex before the 8 Sep owner decision and to Asad the same day"
+    "Send to Alex before the 15 Sep owner decision and to Asad the same day"
    ],
    "source": "reconciler"
   },
@@ -4293,9 +4293,9 @@ window.LAUNCH_DATA = {
    "assignee": "Saad",
    "title": "Cost the front end: build minutes, bandwidth, asset delivery",
    "what": "From the packs and the Netlify plan, price the front-end half of the bill: build minutes and deploy credits at the expected deploy rate, bandwidth and CDN requests at 5 pilots and at 100 pages, image and font weight per screen with the asset budget that follows, and any recurring design or asset tooling. Hand it to Asad as one line with its assumptions written next to it.",
-   "why": "Asad's N1 consolidation and Jill's 25 Sep pricing model both need a front-end number, and design decisions taken this week (hero imagery, font count, chart libraries) set it for the life of the product.",
+   "why": "Asad's N1 consolidation and Jill's 2 Oct pricing model both need a front-end number, and design decisions taken this week (hero imagery, font count, chart libraries) set it for the life of the product.",
    "area": "Ops",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "P1 - real input to the 25 Sep pricing decision with ten days of slack.",
    "depends_on": [
@@ -4322,10 +4322,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Saad",
    "title": "Set up the dev environment and pair on tokens-to-theme",
-   "what": "With Asad on 11-13 Sep, once the packs are delivered: clone Muteeb's scaffold, run the app locally against the generated mock layer, ship one trivial PR through CI to a preview deploy, and walk the repo layout - route handlers versus lib/server versus components - and the branch/PR conventions. Then sit with Asad while the token sheet is encoded as Tailwind theme tokens (N1-AS-12), so the theme matches the sheet and the library he inherits in N2 is one he understands.",
-   "why": "He owns the component library from 21 Sep and surfaces from N3; a ramp that starts on 14 Sep with environment problems eats the only slack in the front-end plan.",
+   "what": "With Asad on 18-27 Sep, once the packs are delivered: clone Muteeb's scaffold, run the app locally against the generated mock layer, ship one trivial PR through CI to a preview deploy, and walk the repo layout - route handlers versus lib/server versus components - and the branch/PR conventions. Then sit with Asad while the token sheet is encoded as Tailwind theme tokens (N1-AS-12), so the theme matches the sheet and the library he inherits in N2 is one he understands.",
+   "why": "He owns the component library from 28 Sep and surfaces from N3; a ramp that starts on 21 Sep with environment problems eats the only slack in the front-end plan.",
    "area": "App core",
-   "due": "2026-09-13",
+   "due": "2026-09-20",
    "priority": "P0",
    "priority_reason": "P0 - his N2 coding starts 14 Sep and cannot start on an unconfigured machine.",
    "depends_on": [
@@ -4355,11 +4355,11 @@ window.LAUNCH_DATA = {
    "id": "N1-AX-01",
    "sprint": "N1",
    "assignee": "Alex",
-   "title": "Declare the launch date in writing; reset the landing beat to 12 Sep",
-   "what": "Issue a one-paragraph written declaration to the whole team and the marketing calendar: public launch Tue 1 Dec 2026 08:00 UK, MVP done Sat 28 Nov, Product Hunt 08:01. In the marketing calendar move the landing-page beat from 1 Sep to Fri 12 Sep (Asad's build ramp ships the landing live that day) and re-key every downstream beat (design reveal 10 Sep, newsletter #1 15 Sep, pilot form 17 Sep, working-app reveal ~28 Sep, waitlist opens 13 Oct, video 5 Nov, pricing notice 17 Nov, MVP-done post 28 Nov) off 1 Dec.",
+   "title": "Declare the launch date in writing; reset the landing beat to 19 Sep",
+   "what": "Issue a one-paragraph written declaration to the whole team and the marketing calendar: public launch Tue 8 Dec 2026 08:00 UK, MVP done Sat 5 Dec, Product Hunt 08:01. In the marketing calendar move the landing-page beat from 8 Sep to Fri 19 Sep (Asad's build ramp ships the landing live that day) and re-key every downstream beat (design reveal 17 Sep, newsletter #1 22 Sep, pilot form 24 Sep, working-app reveal ~5 Oct, waitlist opens 20 Oct, video 12 Nov, pricing notice 24 Nov, MVP-done post 5 Dec) off 8 Dec.",
    "why": "Every listing, email, FAQ and invoice keys off one date; without a written declaration the site, the decks and the pilots keep quoting 28 November and the landing beat stays on a date Asad cannot hit.",
    "area": "Launch",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P0",
    "priority_reason": "Dated deadline that every other public artifact copies from.",
    "depends_on": [],
@@ -4371,12 +4371,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N1",
    "source": "plan",
-   "acceptance": "A dated declaration exists in the shared drive and the marketing calendar shows the landing beat on Fri 12 Sep with every later beat keyed to 1 Dec.",
+   "acceptance": "A dated declaration exists in the shared drive and the marketing calendar shows the landing beat on Fri 19 Sep with every later beat keyed to 8 Dec.",
    "checklist": [
-    "Write the declaration (1 Dec launch, 28 Nov MVP done, 08:00 flags / 08:01 PH)",
+    "Write the declaration (8 Dec launch, 5 Dec MVP done, 08:00 flags / 08:01 PH)",
     "Post to the team channel and pin it",
-    "Move the landing beat to Fri 12 Sep in the marketing calendar",
-    "Re-key every downstream beat off 1 Dec",
+    "Move the landing beat to Fri 19 Sep in the marketing calendar",
+    "Re-key every downstream beat off 8 Dec",
     "Confirm Saad and Jill have read it"
    ]
   },
@@ -4386,9 +4386,9 @@ window.LAUNCH_DATA = {
    "assignee": "Alex",
    "title": "Submit Meta business verification with exact legal-name match",
    "what": "Submit Business Verification in Meta Business Manager this week using the exact Companies House legal name (character-for-character match on registered name, address and uploaded documents). Record the submission timestamp and case id and put a recurring 48-hour chase reminder in the calendar until it clears.",
-   "why": "Verification can stall 14+ days and gates the 25 Sep App Review submission; a name mismatch restarts it and every day lost comes off the one safe rejection cycle before freeze.",
+   "why": "Verification can stall 14+ days and gates the 2 Oct App Review submission; a name mismatch restarts it and every day lost comes off the one safe rejection cycle before freeze.",
    "area": "Meta",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P0",
    "priority_reason": "External clock that gates the 25 Sep submission.",
    "depends_on": [
@@ -4407,7 +4407,7 @@ window.LAUNCH_DATA = {
     "Upload documents matching that name exactly",
     "Submit and log case id + timestamp",
     "Set the recurring 48h chase reminder",
-    "Report status at the 11 Sep gate"
+    "Report status at the 18 Sep gate"
    ]
   },
   {
@@ -4415,10 +4415,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Alex",
    "title": "Sign Jill's tool-buy memo (waitlist, status page, Sentry tier, paging)",
-   "what": "Sign Jill's one-page tool-buy memo covering the bought waitlist tool, status page, Sentry tier and paging tool, with prices, so each is purchased once. Muteeb installs Sentry + uptime on staging in N1 week A (1-6 Sep), so sign the Sentry-tier line by Fri 4 Sep even if the other three lines wait for Jill's prices until Mon 7 Sep; the waitlist tool must be live 6 Oct and the status page is Muteeb's N3 item, so none of them may wait on procurement.",
-   "why": "Buying invisible infrastructure buys back Asad-weeks; an unsigned memo puts Muteeb's Sentry-on-staging and the 6 Oct waitlist behind a purchase order.",
+   "what": "Sign Jill's one-page tool-buy memo covering the bought waitlist tool, status page, Sentry tier and paging tool, with prices, so each is purchased once. Muteeb installs Sentry + uptime on staging in N1 week A (8-20 Sep), so sign the Sentry-tier line by Fri 11 Sep even if the other three lines wait for Jill's prices until Mon 14 Sep; the waitlist tool must be live 13 Oct and the status page is Muteeb's N3 item, so none of them may wait on procurement.",
+   "why": "Buying invisible infrastructure buys back Asad-weeks; an unsigned memo puts Muteeb's Sentry-on-staging and the 13 Oct waitlist behind a purchase order.",
    "area": "Finance",
-   "due": "2026-09-07",
+   "due": "2026-09-14",
    "priority": "P0",
    "priority_reason": "Blocks Muteeb (Sentry on staging for the gate) and the 6 Oct waitlist.",
    "depends_on": [
@@ -4432,12 +4432,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N1",
    "source": "plan",
-   "acceptance": "The memo carries Alex's signature and date (Sentry line signed by 4 Sep), and Jill has placed all four orders.",
+   "acceptance": "The memo carries Alex's signature and date (Sentry line signed by 11 Sep), and Jill has placed all four orders.",
    "checklist": [
     "Read the memo against the Checklist 5 principle (buy what customers never see)",
-    "Sign the Sentry-tier line by Fri 4 Sep so Muteeb's week-A install is on the paid tier",
+    "Sign the Sentry-tier line by Fri 11 Sep so Muteeb's week-A install is on the paid tier",
     "Check the other prices against Jill's cost baseline",
-    "Sign and date the full memo by Mon 7 Sep",
+    "Sign and date the full memo by Mon 14 Sep",
     "Confirm the waitlist tool account exists before N3"
    ]
   },
@@ -4446,10 +4446,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Alex",
    "title": "Publish the decisions calendar with every dated call and its owner",
-   "what": "Publish one decisions calendar: crisis pass line + coverage-floor clause (owner Asad with Faheem, before N2 tuning starts 14 Sep), pricing signed 25 Sep, Meta submission 25 Sep with a placeholder for the last safe resubmission date, waitlist opens 13 Oct, readiness review 6 Nov, features+models freeze 13 Nov, pricing notice 17 Nov, code freeze + go/no-go 20 Nov, doors 1 Dec. Each row names the decider, the evidence needed and what waits on it. Sign off the Meta two-narratives doc with Filza as part of it so Saad's package work starts on approved language.",
+   "what": "Publish one decisions calendar: crisis pass line + coverage-floor clause (owner Asad with Faheem, before N2 tuning starts 21 Sep), pricing signed 2 Oct, Meta submission 2 Oct with a placeholder for the last safe resubmission date, waitlist opens 20 Oct, readiness review 13 Nov, features+models freeze 20 Nov, pricing notice 24 Nov, code freeze + go/no-go 27 Nov, doors 8 Dec. Each row names the decider, the evidence needed and what waits on it. Sign off the Meta two-narratives doc with Filza as part of it so Saad's package work starts on approved language.",
    "why": "The sole developer's hours are the scarcest resource; undated decisions get taken twice or late, and Asad's founder-duties task assumes the decisions are signed before he codes.",
    "area": "Launch",
-   "due": "2026-09-08",
+   "due": "2026-09-15",
    "priority": "P1",
    "priority_reason": "The dated decisions inside the calendar each carry their own P0 ticket (verification, pricing, crisis gate); the calendar document itself blocks nobody and has slack to 13 Sep.",
    "depends_on": [
@@ -4466,7 +4466,7 @@ window.LAUNCH_DATA = {
    "acceptance": "The calendar is published in the shared drive with every dated decision, its owner and its evidence, and the team channel has the link.",
    "checklist": [
     "List every dated decision with its owner",
-    "Add the crisis-gate decision row (before 14 Sep)",
+    "Add the crisis-gate decision row (before 21 Sep)",
     "Add the last-safe-resubmission placeholder (filled by N2-AX-06)",
     "Sign off the Meta two-narratives doc with Filza",
     "Publish and pin"
@@ -4477,10 +4477,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Alex",
    "title": "One-page KPIs + the 'Asad must NOT do' list with named owners",
-   "what": "Write the one-page KPI sheet (signup -> connected -> ingest done -> first insight -> draft scored, time-to-first-value, waitlist 500 by 20 Nov, 5 paying pilots) that Asad's N2 KPI events and N4 funnel will instrument. Write the 'Asad must NOT do' list: Meta package (Saad), pilot comms (Lewis), money (Jill), legal (Filza), infra/ops (Muteeb), design QA (Saad), PH replies (Alex), each line with a named owner, and hand it to Asad before he starts coding on 10 Sep.",
+   "what": "Write the one-page KPI sheet (signup -> connected -> ingest done -> first insight -> draft scored, time-to-first-value, waitlist 500 by 27 Nov, 5 paying pilots) that Asad's N2 KPI events and N4 funnel will instrument. Write the 'Asad must NOT do' list: Meta package (Saad), pilot comms (Lewis), money (Jill), legal (Filza), infra/ops (Muteeb), design QA (Saad), PH replies (Alex), each line with a named owner, and hand it to Asad before he starts coding on 17 Sep.",
    "why": "Without a named-owner list founder work leaks back into Asad's build weeks; without one KPI page the launch-day numbers are guesses.",
    "area": "Launch",
-   "due": "2026-09-09",
+   "due": "2026-09-16",
    "priority": "P0",
    "priority_reason": "Asad codes from 10 Sep and the list must exist before then.",
    "depends_on": [
@@ -4507,11 +4507,11 @@ window.LAUNCH_DATA = {
    "id": "N1-AX-06",
    "sprint": "N1",
    "assignee": "Alex",
-   "title": "Interim PM 3-10 Sep: daily triage only + written 'waits for Saad' list",
-   "what": "Run the bridge week as interim PM: a daily 15-minute triage of blockers, no new decisions beyond the published calendar, and a written 'waits for Saad' list of every PM item deferred to 10 Sep (acceptance register questions, backlog ranking, Meta package questions). Record the already-taken pack build-order decision (Today + Drafts first ~8 Sep, rest rolling) and confirm the crisis-gate decision is scheduled. Hand the list to Saad on 10 Sep.",
+   "title": "Interim PM 10-24 Sep: daily triage only + written 'waits for Saad' list",
+   "what": "Run the bridge week as interim PM: a daily 15-minute triage of blockers, no new decisions beyond the published calendar, and a written 'waits for Saad' list of every PM item deferred to 17 Sep (acceptance register questions, backlog ranking, Meta package questions). Record the already-taken pack build-order decision (Today + Drafts first ~15 Sep, rest rolling) and confirm the crisis-gate decision is scheduled. Hand the list to Saad on 17 Sep.",
    "why": "The bridge week must not decide things twice; Rafeh's handover is done, so the only PM risk left is decisions made in the gap that Saad then unwinds.",
    "area": "PM",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P1",
    "priority_reason": "A bridge role, not a deliverable anyone waits on; the 'waits for Saad' list has slack to the 10 Sep handover.",
    "depends_on": [
@@ -4523,13 +4523,13 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N1",
    "source": "plan",
-   "acceptance": "Saad receives the 'waits for Saad' list on 10 Sep and no decision outside the published calendar was taken in the bridge week.",
+   "acceptance": "Saad receives the 'waits for Saad' list on 17 Sep and no decision outside the published calendar was taken in the bridge week.",
    "checklist": [
-    "Daily 15-min triage 3-10 Sep",
+    "Daily 15-min triage 10-24 Sep",
     "Maintain the waits-for-Saad list",
-    "Log the pack build-order decision (Today + Drafts ~8 Sep)",
+    "Log the pack build-order decision (Today + Drafts ~15 Sep)",
     "Confirm the crisis-gate decision date with Asad and Faheem",
-    "Hand over to Saad on 10 Sep"
+    "Hand over to Saad on 17 Sep"
    ]
   },
   {
@@ -4537,10 +4537,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Alex",
    "title": "Landing date reads 1 December in all three places (with Asad)",
-   "what": "Get the live landing corrected: index.html line 8 meta description ('Launching November 2026'), line 579 hero badge ('In closed pilot now · Launching November 2026') and line 1106 FAQ ('launch publicly on 28 November 2026') must all read 1 December 2026; layman_explanation.html line 582 also still says 28 November. Alex supplies the exact replacement strings with N1-AX-01 by 4 Sep; Asad writes no code before Wed 10 Sep by decision, so he ships the string change as the first commit of the 10 Sep build ramp, before the design reveal goes out, and Alex verifies on the live URL.",
-   "why": "The 10 Sep design reveal and every listing point people at a site that contradicts the declared date; a public wrong date is the cheapest credibility loss to avoid.",
+   "what": "Get the live landing corrected: index.html line 8 meta description ('Launching November 2026'), line 579 hero badge ('In closed pilot now · Launching November 2026') and line 1106 FAQ ('launch publicly on 28 November 2026') must all read 1 December 2026; layman_explanation.html line 582 also still says 28 November. Alex supplies the exact replacement strings with N1-AX-01 by 11 Sep; Asad writes no code before Wed 17 Sep by decision, so he ships the string change as the first commit of the 17 Sep build ramp, before the design reveal goes out, and Alex verifies on the live URL.",
+   "why": "The 17 Sep design reveal and every listing point people at a site that contradicts the declared date; a public wrong date is the cheapest credibility loss to avoid.",
    "area": "Landing",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P0",
    "priority_reason": "Live public contradiction of the launch date, flagged as a live fact.",
    "depends_on": [
@@ -4556,8 +4556,8 @@ window.LAUNCH_DATA = {
    "acceptance": "The live site shows 1 December 2026 in the meta description, hero badge and FAQ, and no 'November 2026' launch string remains on public pages.",
    "checklist": [
     "Write the four replacement strings (3 in index.html, 1 in layman_explanation.html)",
-    "Send them to Asad with the file/line references by 4 Sep",
-    "Confirm Asad ships them first thing on 10 Sep, before the reveal post",
+    "Send them to Asad with the file/line references by 11 Sep",
+    "Confirm Asad ships them first thing on 17 Sep, before the reveal post",
     "Grep public pages for 'November' after deploy",
     "Verify live page and view-source"
    ]
@@ -4566,11 +4566,11 @@ window.LAUNCH_DATA = {
    "id": "N1-AX-08",
    "sprint": "N1",
    "assignee": "Alex",
-   "title": "Design reveal 10 Sep: public package with Saad",
-   "what": "Co-own the 10 Sep design reveal with Saad: approve the reveal post and visuals, frame it honestly as finished design with zero engineering, no claims about detector precision or Art-E, and confirm any mock data is not a real declining pilot page. Publish on the marketing calendar's date.",
+   "title": "Design reveal 17 Sep: public package with Saad",
+   "what": "Co-own the 17 Sep design reveal with Saad: approve the reveal post and visuals, frame it honestly as finished design with zero engineering, no claims about detector precision or Art-E, and confirm any mock data is not a real declining pilot page. Publish on the marketing calendar's date.",
    "why": "A public date that shows finished design honestly buys goodwill; an over-claim here is the first thing a Meta reviewer or journalist finds later.",
    "area": "Marketing",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P2",
    "priority_reason": "Valuable public beat, safe to slim down if packs run late.",
    "depends_on": [
@@ -4583,12 +4583,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "saad",
-   "acceptance": "The reveal is published on 10 Sep with 'design only' framing and no product-performance claims.",
+   "acceptance": "The reveal is published on 17 Sep with 'design only' framing and no product-performance claims.",
    "checklist": [
     "Review Saad's reveal package",
     "Strip any performance or timing claims",
     "Check the mock-data source with Lewis's roster",
-    "Publish on 10 Sep",
+    "Publish on 17 Sep",
     "Log in the marketing calendar"
    ]
   },
@@ -4597,10 +4597,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Alex",
    "title": "Crisis-gate decision: calendar it, cascade result to public claims",
-   "what": "The crisis gate (>=75% precision) is at risk because comments per post fell 21.3 -> 3.2 on the big pages. Asad (CTO) with Faheem owns the decision; Alex owns getting it made on time and carried into public claims. Put it on the decisions calendar (pass line + coverage floor or 'must catch N of Lewis's incidents' clause, before N2 tuning starts 14 Sep), confirm Lewis's complete incident window (20+ incidents, fixed date range) is due end of N1, and record the rule that the 15-minute / precision wording on the landing, the video brief and the PH copy follows whatever the gate says.",
-   "why": "If the gate changes after N2 tuning, 'caught in minutes' becomes copy rather than a measured promise, and the 5 Nov video and go/no-go criteria inherit a number nobody set.",
+   "what": "The crisis gate (>=75% precision) is at risk because comments per post fell 21.3 -> 3.2 on the big pages. Asad (CTO) with Faheem owns the decision; Alex owns getting it made on time and carried into public claims. Put it on the decisions calendar (pass line + coverage floor or 'must catch N of Lewis's incidents' clause, before N2 tuning starts 21 Sep), confirm Lewis's complete incident window (20+ incidents, fixed date range) is due end of N1, and record the rule that the 15-minute / precision wording on the landing, the video brief and the PH copy follows whatever the gate says.",
+   "why": "If the gate changes after N2 tuning, 'caught in minutes' becomes copy rather than a measured promise, and the 12 Nov video and go/no-go criteria inherit a number nobody set.",
    "area": "Alerts",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P0",
    "priority_reason": "Dated: must be decided before N2 tuning starts 14 Sep.",
    "depends_on": [
@@ -4616,13 +4616,13 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "faheem",
-   "acceptance": "The decisions calendar shows the crisis-gate decision with owner and date before 14 Sep, and a one-line 'public claims follow the gate' rule is recorded.",
+   "acceptance": "The decisions calendar shows the crisis-gate decision with owner and date before 21 Sep, and a one-line 'public claims follow the gate' rule is recorded.",
    "checklist": [
     "Add the decision row to the calendar",
     "Confirm Lewis's incident-window delivery date",
     "Ask Faheem for the measurement date",
     "Record the public-claims-follow-the-gate rule",
-    "Confirm with Asad on 11 Sep whether the decision landed or is provisional"
+    "Confirm with Asad on 18 Sep whether the decision landed or is provisional"
    ]
   },
   {
@@ -4630,10 +4630,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Alex",
    "title": "Re-confirm the Meta owner and the 24h SLA rota in writing",
-   "what": "Saad now writes the front-end as well as owning the Meta package, so confirm in writing who executes the package, who submits on 25 Sep, who watches the dashboard daily and who answers a reviewer inside 24h - naming a primary, a backup (Asad by default, per N1-SD-15/N1-AS-10) and weekend/holiday cover. If Saad stays the primary, state what front-end work yields when a reviewer message lands. Record the escalation path primary -> backup -> Alex and circulate to Saad, Asad, Filza and Muteeb.",
+   "what": "Saad now writes the front-end as well as owning the Meta package, so confirm in writing who executes the package, who submits on 2 Oct, who watches the dashboard daily and who answers a reviewer inside 24h - naming a primary, a backup (Asad by default, per N1-SD-15/N1-AS-10) and weekend/holiday cover. If Saad stays the primary, state what front-end work yields when a reviewer message lands. Record the escalation path primary -> backup -> Alex and circulate to Saad, Asad, Filza and Muteeb.",
    "why": "Every Meta ticket from N1-SD-16 onward assumes an owner nobody has re-confirmed against Saad's new build load, and two tickets wait on a backup confirmation that no ticket owns.",
    "area": "Meta",
-   "due": "2026-09-08",
+   "due": "2026-09-15",
    "priority": "P0",
    "priority_reason": "P0 - blocks Saad's package authoring (N1-SD-16, 11 Sep) and unblocks N1-SD-15 and N1-AS-10, which both wait on this name.",
    "depends_on": [
@@ -4665,7 +4665,7 @@ window.LAUNCH_DATA = {
    "what": "Run the N1 access review against Rafeh's departure on 3 Sep: pull the user/admin list from every system the team uses (AWS IAM and console, the code repo, Netlify, Figma, Sentry, the warehouse, Meta Business Manager, shared inboxes, and the paging/status tools as they are bought) and confirm his accounts are disabled and any shared credentials or keys he held are rotated. Record it as a dated table (system, account, revoked by, date) and cross-check with Filza's exit hygiene (IP, NDA, access) so nothing is missed or done twice. EXTENDED 3 Sep: several shared credentials and tokens were posted in team group chats that departed staff belonged to - rotate every credential that ever appeared in chat (cloud console, server, page tokens, shared admin and demo logins), not only per-person accounts.",
    "why": "Offboarding is security: an ex-staff login left live is the cheapest breach we could have, and per the Rafeh policy this is the one Rafeh item that stays with Jill - verify it actually happened.",
    "area": "Ops",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P0",
    "priority_reason": "Dated (he left 3 Sep) and a live credential is an open security hole until verified.",
    "depends_on": [
@@ -4695,9 +4695,9 @@ window.LAUNCH_DATA = {
    "assignee": "Jill",
    "title": "Tool-buy memo signed: waitlist, status page, Sentry tier, paging",
    "what": "One memo naming the tool, tier, monthly price and owner for each of the four invisible components: the waitlist tool Asad integrates in N3 (UTM per directory, migration of existing Netlify Forms signups), the bought status page Muteeb stands up in N3, the Sentry tier for staging now and production later, and the paging tool for the on-call rota. Alex signs once; purchase and seat provisioning to the named owners follow the same day and the prices go into the cost baseline. Muteeb starts Sentry and uptime on staging on free/trial tiers from 3 Sep; the memo confirms the paid tier and seat count, so his Week A does not wait on the signature.",
-   "why": "Buying invisible infrastructure buys back Asad-weeks; Muteeb's N1 Sentry + uptime on staging, the N3 status page and the 6 Oct waitlist all stall while the tools are unbought.",
+   "why": "Buying invisible infrastructure buys back Asad-weeks; Muteeb's N1 Sentry + uptime on staging, the N3 status page and the 13 Oct waitlist all stall while the tools are unbought.",
    "area": "Ops",
-   "due": "2026-09-07",
+   "due": "2026-09-14",
    "priority": "P0",
    "priority_reason": "Blocks Muteeb (Sentry on staging in N1) and the status page / waitlist / paging chain; Alex signs once per Checklist 5.",
    "depends_on": [
@@ -4728,9 +4728,9 @@ window.LAUNCH_DATA = {
    "assignee": "Jill",
    "title": "Cost baseline memo with pilot-x10 projection",
    "what": "Measure the current monthly run-rate line by line from the last full billing cycle (AWS: Redshift, S3, Fargate, KMS, SES; LLM/API spend; SaaS including the four new tools) and project it at pilot x10 (10 pilots at 3-5 pages each, so roughly x10 pages, ingest and comment volume, plus Art-E usage stated as an assumption). One memo, one table, assumptions listed, with the variable lines that scale with pages marked.",
-   "why": "You cannot cap what you have not measured; the AWS alarm thresholds come from this memo and Alex's 25 Sep pricing decision reads the cost model built on it.",
+   "why": "You cannot cap what you have not measured; the AWS alarm thresholds come from this memo and Alex's 2 Oct pricing decision reads the cost model built on it.",
    "area": "Finance",
-   "due": "2026-09-09",
+   "due": "2026-09-16",
    "priority": "P1",
    "priority_reason": "Real risk with slack: pricing is locked 25 Sep and the alarms need it this sprint.",
    "depends_on": [
@@ -4753,7 +4753,7 @@ window.LAUNCH_DATA = {
     "Tag which lines are fixed vs per-page variable, using Muteeb's per-environment split from N1-MT-17",
     "Take the ML variable lines from Faheem's per-prediction costs (N1-FH-19) and hosting from Saad's note (N1-SD-17)",
     "Build the x10 projection and an Art-E usage assumption line",
-    "Issue the memo to Alex and file it, noting that Asad's bottom-up consolidation lands 10 Sep as the cross-check"
+    "Issue the memo to Alex and file it, noting that Asad's bottom-up consolidation lands 17 Sep as the cross-check"
    ]
   },
   {
@@ -4764,7 +4764,7 @@ window.LAUNCH_DATA = {
    "what": "Create AWS Budgets on the production account(s): a monthly cost budget from the baseline memo with alerts at 80% actual and 80% forecast, plus per-service budgets for the lines that can run away (Redshift, Fargate, SES) where cost-allocation tags allow. Route alerts to Jill and Muteeb by email and to the paging tool channel once it exists; test by temporarily lowering a threshold and confirming the notification arrives.",
    "why": "Without an alarm a runaway pipeline or LLM loop is discovered on the invoice; this is the first cost breaker we own and the circuit-breaker spec in N3 wires into it.",
    "area": "Ops",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "Real risk with slack: spend is small now but the alarm must exist before pilots and Art-E add variable load.",
    "depends_on": [
@@ -4792,10 +4792,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Jill",
    "title": "On-call rota v0 with paging wired to staging alerts",
-   "what": "A v0 rota covering N1-N4: primary and secondary per week across Muteeb (platform), Faheem (models/pipelines) and Asad (app from 10 Sep), an escalation path to Alex, and the paging tool from the memo receiving Sentry and uptime alerts from staging plus Faheem's prediction-table freshness alerts. Write down what pages a human now (uptime down, error spike, freshness failure, budget alarm) and what waits for morning. The v1 rota with the real 2am test is N5.",
+   "what": "A v0 rota covering N1-N4: primary and secondary per week across Muteeb (platform), Faheem (models/pipelines) and Asad (app from 17 Sep), an escalation path to Alex, and the paging tool from the memo receiving Sentry and uptime alerts from staging plus Faheem's prediction-table freshness alerts. Write down what pages a human now (uptime down, error spike, freshness failure, budget alarm) and what waits for morning. The v1 rota with the real 2am test is N5.",
    "why": "Pipelines and staging are live now; without a named human on the other end of an alert an outage is found by a pilot instead of by us.",
    "area": "Ops",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "Real risk with slack: staging is not yet pilot-facing, but the rota must exist before pilots connect on 17 Sep.",
    "depends_on": [
@@ -4810,7 +4810,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "A published rota names primary/secondary per week to 25 Oct, the paging tool receives staging alerts, and one test page reached the primary.",
+   "acceptance": "A published rota names primary/secondary per week to 1 Nov, the paging tool receives staging alerts, and one test page reached the primary.",
    "checklist": [
     "Agree weekly primary/secondary with Muteeb, Faheem and Asad",
     "Configure the paging tool: schedule, escalation, Sentry/uptime/budget alert routes",
@@ -4827,7 +4827,7 @@ window.LAUNCH_DATA = {
    "what": "Confirm whether the company is registered with the ICO and at which fee tier; pay or renew if not, put the renewal date in the ops calendar, and give Filza the registration number for the privacy policy, Art 30 records and legal pack v1.",
    "why": "Checklist 4 housekeeping: processing pilot page data without the fee paid is an avoidable penalty and a question a pilot's advisor or Meta's reviewer may ask.",
    "area": "Legal",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "Cheap and legally required; Filza's N2 legal pack needs the registration number.",
    "depends_on": [
@@ -4852,10 +4852,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Jill",
    "title": "PI + cyber insurance quotes started",
-   "what": "Approach at least two brokers/insurers for professional indemnity and cyber cover sized for a SaaS processing Facebook page data for UK pilots: supply the business description, expected revenue and data volumes, and log each quote with cover limits, exclusions (AI-guidance advice, data breach), underwriter questions and lead time. Target bound cover by the N5 readiness review (6 Nov), ahead of the 20 Nov invoices.",
+   "what": "Approach at least two brokers/insurers for professional indemnity and cyber cover sized for a SaaS processing Facebook page data for UK pilots: supply the business description, expected revenue and data volumes, and log each quote with cover limits, exclusions (AI-guidance advice, data breach), underwriter questions and lead time. Target bound cover by the N5 readiness review (13 Nov), ahead of the 27 Nov invoices.",
    "why": "Insurance must exist before money changes hands; quotes take weeks and underwriters ask security questions we need time to answer.",
    "area": "Finance",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "Real risk with slack: binding is N5, but underwriting lead time means quotes must start now.",
    "depends_on": [
@@ -4868,13 +4868,13 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "At least two written PI + cyber quotes are logged with limits, exclusions, open underwriter questions and a bind-by date before 6 Nov.",
+   "acceptance": "At least two written PI + cyber quotes are logged with limits, exclusions, open underwriter questions and a bind-by date before 13 Nov.",
    "checklist": [
     "Draft the business description and data-processing summary with Filza",
     "Request quotes from two brokers/insurers",
     "Log quotes, exclusions and outstanding underwriter questions",
     "Route security questions to Muteeb, contract questions to Filza",
-    "Set the bind-by date (6 Nov) in the calendar"
+    "Set the bind-by date (13 Nov) in the calendar"
    ]
   },
   {
@@ -4883,9 +4883,9 @@ window.LAUNCH_DATA = {
    "assignee": "Lewis",
    "title": "Re-check the pilot roster against the comment collapse",
    "what": "For every recruited or candidate pilot page, pull comments-per-post for the last 12 weeks from Faheem's QA panels and tag the page: declining-monetised (the Ketflix / Drinking Memes / Council Estate Life pattern, -75% to -99%), flat, or up. Confirm with each admin not yet confirmed whether the page lost monetisation and when (the three big pages are already confirmed). Mark which pages are safe for benchmarks, demos, marketing screenshots and the crisis backtest, and hand the tagged roster to Faheem, Asad, Saad and Alex.",
-   "why": "#11 is closed and the ~90% drop is real; a benchmark, the 25 Sep gate demo or the 28 Sep working-app reveal built on a declining page would show a product that looks broken.",
+   "why": "#11 is closed and the ~90% drop is real; a benchmark, the 2 Oct gate demo or the 5 Oct working-app reveal built on a declining page would show a product that looks broken.",
    "area": "Pilots",
-   "due": "2026-09-07",
+   "due": "2026-09-14",
    "priority": "P0",
    "priority_reason": "Blocks Faheem's backtest page choice, the incident-sheet tiering in N1-LW-02 and every demo/screenshot page selection this month",
    "depends_on": [
@@ -4899,7 +4899,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "plan",
-   "acceptance": "A tagged roster (page, 12-week comments/post trend, monetisation status, safe-for benchmark/demo/screenshot/backtest) is shared and acknowledged by Faheem and Asad by Mon 7 Sep.",
+   "acceptance": "A tagged roster (page, 12-week comments/post trend, monetisation status, safe-for benchmark/demo/screenshot/backtest) is shared and acknowledged by Faheem and Asad by Mon 14 Sep.",
    "checklist": [
     "List every recruited/candidate page with page_id and admin contact",
     "Pull 12-week comments/post per page from the QA panels; note the 25-29 Aug admin-restriction window as an anomaly",
@@ -4914,9 +4914,9 @@ window.LAUNCH_DATA = {
    "assignee": "Lewis",
    "title": "Deliver the complete crisis incident window to Faheem (20+ incidents)",
    "what": "Choose a fixed date range across the pilot pages that you can vouch for as COMPLETE and list EVERY incident inside it: page, first-hostile-comment timestamp (with timezone), end timestamp, post id/URL, what happened, how the admin noticed, severity. Target 20 or more; a sample will not do, because any alert Faheem raises inside the window that is not on the list counts as a false alarm. Include incidents on pages that have since declined, tagged with the page's current volume tier from N1-LW-01. Deliver as one sheet to Faheem, copied to Asad.",
-   "why": "Without a complete window precision cannot be measured (at 5 incidents the interval around 75% runs ~30-95%), and Asad + Faheem must set the crisis pass line before N2 tuning starts on 14 Sep.",
+   "why": "Without a complete window precision cannot be measured (at 5 incidents the interval around 75% runs ~30-95%), and Asad + Faheem must set the crisis pass line before N2 tuning starts on 21 Sep.",
    "area": "Alerts",
-   "due": "2026-09-09",
+   "due": "2026-09-16",
    "priority": "P0",
    "priority_reason": "Faheem's crisis backtest, the crisis-gate decision and N2 tuning all wait on it; Faheem's roadmap dates it end of N1",
    "depends_on": [
@@ -4929,7 +4929,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "faheem",
-   "acceptance": "Faheem confirms receipt of a sheet with at least 20 incidents, each with page and timestamps, inside a declared complete window, by 9 Sep.",
+   "acceptance": "Faheem confirms receipt of a sheet with at least 20 incidents, each with page and timestamps, inside a declared complete window, by 16 Sep.",
    "checklist": [
     "Agree the window boundaries (date range, pages) with Faheem on 3 Sep",
     "Walk each pilot admin through their notifications and inbox for the window; capture every incident, not just the memorable ones",
@@ -4947,7 +4947,7 @@ window.LAUNCH_DATA = {
    "what": "For each page in the window, list the normal-but-spiky days (launches, viral posts, giveaways, TV moments) where comment volume jumped without a crisis, with timestamps. Then mark which incidents in N1-LW-02 the detector must catch (the storms an admin would be angry to miss) so Faheem and Asad can write the coverage-floor / must-catch-N clause into the crisis gate. Sit in the pass-line decision with Asad and Faheem once his hour-of-week measurement lands.",
    "why": "The detector is being re-scoped for ~3 comments per post rather than ~21; without spiky-normal days the thresholds cry wolf, and without a must-catch list a detector that alerts once a month could pass the gate.",
    "area": "Alerts",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P0",
    "priority_reason": "The crisis pass line (Decision 1) and the must-catch clause (Decision 2) must be set before N2 tuning starts 14 Sep; neither can be written without this",
    "depends_on": [
@@ -4959,7 +4959,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "plan",
-   "acceptance": "Faheem's structured incident set for N2 tuning includes Lewis's spiky-normal days and a must-catch subset agreed with Asad, and the pass-line decision is recorded with Lewis present, by 11 Sep.",
+   "acceptance": "Faheem's structured incident set for N2 tuning includes Lewis's spiky-normal days and a must-catch subset agreed with Asad, and the pass-line decision is recorded with Lewis present, by 18 Sep.",
    "checklist": [
     "Per page: list spiky-but-normal days with cause and timestamp",
     "Mark the must-catch incidents with a one-line reason each",
@@ -4975,7 +4975,7 @@ window.LAUNCH_DATA = {
    "what": "Recruit 10 pilot admins drawn from the non-declining part of the roster, each running 3-5 pages, with a mix of archetypes (meme, community, brand) so the crisis archetypes and Discovery both have variety. Confirm in writing: admin role on each page, willingness to be a dev-mode Tester, a weekly call, and openness to an honest pricing conversation at launch. Keep the recruited list, page IDs and contact tree in one roster sheet; pilots 1-5 are the cohort that onboards first in N2 and the five the plan counts for UAT and invoices.",
    "why": "Pilots are the product proof and the Meta-review insulation; Discovery's graph needs ~20 connected pages or the match list is near-empty.",
    "area": "Pilots",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P0",
    "priority_reason": "Every later gate is measured on these pages; N2 onboarding cannot start without them",
    "depends_on": [
@@ -4991,7 +4991,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "plan",
-   "acceptance": "10 named pilots with page IDs, admin confirmation and Tester consent are in the roster sheet by 11 Sep, with pilots 1-5 marked as cohort 1.",
+   "acceptance": "10 named pilots with page IDs, admin confirmation and Tester consent are in the roster sheet by 18 Sep, with pilots 1-5 marked as cohort 1.",
    "checklist": [
     "Shortlist 15 candidates from the safe roster and the inbound pipeline",
     "Pitch: what pilots get (founding access, weekly call) and what we ask (Tester role, feedback, pricing conversation)",
@@ -5006,9 +5006,9 @@ window.LAUNCH_DATA = {
    "assignee": "Lewis",
    "title": "Tester-role list for the Meta dev-mode app",
    "what": "For each pilot, collect the Facebook account that administers their pages plus the page IDs, and give Saad and Asad the list to add under App Roles > Testers in the Meta app dashboard. Brief each pilot to accept the Tester invite from developers.facebook.com within 48h and track acceptance in the roster.",
-   "why": "In dev mode only Testers can grant permissions; a pilot without an accepted Tester role cannot connect on 14 Sep and the 25 Sep gate has no pilot page.",
+   "why": "In dev mode only Testers can grant permissions; a pilot without an accepted Tester role cannot connect on 21 Sep and the 2 Oct gate has no pilot page.",
    "area": "Meta",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "First pilot connects are 22-24 Sep (N2-LW-03); Tester roles can be added the week of 14 Sep; Saad's package needs a populated test page, not pilot Testers.",
    "depends_on": [
@@ -5022,7 +5022,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "plan",
-   "acceptance": "All 10 pilots' admin accounts are listed and at least 5 have accepted Tester roles by 11 Sep.",
+   "acceptance": "All 10 pilots' admin accounts are listed and at least 5 have accepted Tester roles by 18 Sep.",
    "checklist": [
     "Collect admin Facebook account and page IDs per pilot",
     "Hand the list to Saad/Asad for App Roles > Testers",
@@ -5034,11 +5034,11 @@ window.LAUNCH_DATA = {
    "id": "N1-LW-06",
    "sprint": "N1",
    "assignee": "Lewis",
-   "title": "Build the pilot application form for the 17 Sep beat",
-   "what": "Draft the form: page URL(s), admin role, page size, comments/post estimate, archetype, why they want in, availability for a weekly call, and a consent checkbox linking Privacy v1. Agree with Asad where it lives (embed on the 12 Sep landing via Netlify Forms like the existing pilot-waitlist, or the bought waitlist tool from Jill's memo) and where submissions route. Get Filza's yes on the consent line and test one submission end-to-end.",
-   "why": "Newsletter #1 (15 Sep) and the 17 Sep marketing beat point people at this form; without it inbound pilots go nowhere.",
+   "title": "Build the pilot application form for the 24 Sep beat",
+   "what": "Draft the form: page URL(s), admin role, page size, comments/post estimate, archetype, why they want in, availability for a weekly call, and a consent checkbox linking Privacy v1. Agree with Asad where it lives (embed on the 19 Sep landing via Netlify Forms like the existing pilot-waitlist, or the bought waitlist tool from Jill's memo) and where submissions route. Get Filza's yes on the consent line and test one submission end-to-end.",
+   "why": "Newsletter #1 (22 Sep) and the 24 Sep marketing beat point people at this form; without it inbound pilots go nowhere.",
    "area": "Pilots",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "Dated beat on 17 Sep, but six days of slack after this due date",
    "depends_on": [
@@ -5052,7 +5052,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "Form fields, consent text and routing are approved and staged (not public) by 11 Sep, ready for Asad to switch live on 17 Sep.",
+   "acceptance": "Form fields, consent text and routing are approved and staged (not public) by 18 Sep, ready for Asad to switch live on 24 Sep.",
    "checklist": [
     "Write the fields and qualifying questions",
     "Consent checkbox text plus Privacy v1 link checked by Filza",
@@ -5066,10 +5066,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Lewis",
    "title": "Start the weekly pilot call rota",
-   "what": "Publish a weekly call slot per pilot (or two group slots), a 20-minute agenda (what they saw, what confused them, what they would pay for) and a single feedback sheet ranked by severity. Run the first round with every pilot confirmed by 9 Sep in the week of 7 Sep, and the rest in the week of 14 Sep, before there is a product, to capture baseline expectations: what should happen with a 2am storm, what best time means to them, which numbers they check in Meta Business Suite.",
+   "what": "Publish a weekly call slot per pilot (or two group slots), a 20-minute agenda (what they saw, what confused them, what they would pay for) and a single feedback sheet ranked by severity. Run the first round with every pilot confirmed by 16 Sep in the week of 14 Sep, and the rest in the week of 21 Sep, before there is a product, to capture baseline expectations: what should happen with a 2am storm, what best time means to them, which numbers they check in Meta Business Suite.",
    "why": "Saad's weekly pilot-feedback digest (N2 onward) and the notification timing policy need pilot voice from week one.",
    "area": "Pilots",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "Feeds Saad's digest and the N2 notification policy; slack exists before those are due",
    "depends_on": [
@@ -5081,12 +5081,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "The rota is on the shared calendar and first-round baseline expectations for every pilot confirmed by 9 Sep are logged in the feedback sheet by 11 Sep.",
+   "acceptance": "The rota is on the shared calendar and first-round baseline expectations for every pilot confirmed by 16 Sep are logged in the feedback sheet by 18 Sep.",
    "checklist": [
     "Book slots and add to the shared calendar",
     "Agenda and feedback sheet template",
-    "Run first-round calls with the 2am-storm and best-time questions for pilots confirmed by 9 Sep",
-    "Send week-1 notes to Saad and Alex; book the late joiners for the week of 14 Sep"
+    "Run first-round calls with the 2am-storm and best-time questions for pilots confirmed by 16 Sep",
+    "Send week-1 notes to Saad and Alex; book the late joiners for the week of 21 Sep"
    ]
   },
   {
@@ -5097,7 +5097,7 @@ window.LAUNCH_DATA = {
    "what": "Rafeh left 3 Sep. Confirm a signed IP assignment covering everything he produced (handover pack, dependency_tree tags, gold-set provenance notes) and a continuing confidentiality obligation are on file, and confirm with Jill that her access review shows every credential revoked (repo, Figma, warehouse, admin panel, Meta Business Manager). No on-call contract is drafted: on-call was reassigned to Saad (design-QA sweeps, UAT retest overflow) with Lewis covering the pilot side.",
    "why": "Without the IP assignment the handover material is not cleanly the company's; an open credential after a leaver is the cheapest breach there is.",
    "area": "Legal",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P1",
    "priority_reason": "Leaver risk is real but the paper is small; revocation itself is Jill's line",
    "depends_on": [
@@ -5121,11 +5121,11 @@ window.LAUNCH_DATA = {
    "id": "N1-FZ-02",
    "sprint": "N1",
    "assignee": "Filza",
-   "title": "Deliver Discovery opt-in consent text to Saad for the 5 Sep pack",
-   "what": "Write the exact consent copy for the Discovery opt-in screen: what is shared (aggregated cohort overlap and banded fields, never follower identities), off by default, opt-in and decline at equal prominence (same size and weight, no pre-ticked box, no nudge copy), revocable from Settings with the 24h purge from matches, spotlight and Saved stated. Hand it to Saad as final strings so the 5 Sep pack ships the words Asad builds verbatim in N4.",
-   "why": "Saad's Discovery pack is due Fri 5 Sep and there is no designer after 10 Sep; consent that fails the dark-patterns bar is not consent and voids the whole Discovery floor.",
+   "title": "Deliver Discovery opt-in consent text to Saad for the 12 Sep pack",
+   "what": "Write the exact consent copy for the Discovery opt-in screen: what is shared (aggregated cohort overlap and banded fields, never follower identities), off by default, opt-in and decline at equal prominence (same size and weight, no pre-ticked box, no nudge copy), revocable from Settings with the 24h purge from matches, spotlight and Saved stated. Hand it to Saad as final strings so the 12 Sep pack ships the words Asad builds verbatim in N4.",
+   "why": "Saad's Discovery pack is due Fri 12 Sep and there is no designer after 17 Sep; consent that fails the dark-patterns bar is not consent and voids the whole Discovery floor.",
    "area": "Discovery",
-   "due": "2026-09-04",
+   "due": "2026-09-11",
    "priority": "P0",
    "priority_reason": "Blocks Saad's dated 5 Sep Discovery pack",
    "depends_on": [],
@@ -5135,12 +5135,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N1",
    "source": "plan",
-   "acceptance": "Saad's 5 Sep Discovery pack contains Filza's consent strings unchanged with opt-in and decline at equal prominence.",
+   "acceptance": "Saad's 12 Sep Discovery pack contains Filza's consent strings unchanged with opt-in and decline at equal prominence.",
    "checklist": [
     "Draft the consent screen strings: what, why, who sees what, how to revoke",
     "Write the equal-prominence rules Saad must follow (size, weight, order, no pre-tick)",
     "State the 24h revocation purge and the Settings location",
-    "Send to Saad by 4 Sep and confirm receipt; log the decision in Saad's decision log"
+    "Send to Saad by 11 Sep and confirm receipt; log the decision in Saad's decision log"
    ]
   },
   {
@@ -5151,7 +5151,7 @@ window.LAUNCH_DATA = {
    "what": "Write and sign the policy that governs every Discovery input: which fields are dropped or banded before fingerprints and graph inputs are computed, that no follower or commenter identity leaves the warehouse, and a reverse-identification note assessing how an opted-in page (or two pilots comparing notes) could re-identify a person from overlaps. Alex countersigns. Faheem and Muteeb's fingerprint capture continues N1-N3 and must be de-identified to this policy from now.",
    "why": "The plan blocks graph code on this by design; without it Muteeb's N3 graph starts on inputs nobody has cleared.",
    "area": "Discovery",
-   "due": "2026-09-08",
+   "due": "2026-09-15",
    "priority": "P0",
    "priority_reason": "Blocks Faheem/Muteeb de-identified graph inputs (N1-N3) and Muteeb's N3 graph work",
    "depends_on": [],
@@ -5178,7 +5178,7 @@ window.LAUNCH_DATA = {
    "what": "Write the floor spec Muteeb builds to in N3: k=5 minimum cohort size on every aggregate; the list of dropped and banded fields on cards and profiles; fail-closed behaviour (below floor renders nothing) with a logged event; and the differencing rule (per-query seeded noise, no exact overlap counts that can be subtracted across queries or across weekly recomputes). Sign it with Asad as CTO and hand it to Muteeb as the acceptance spec for the Discovery API build (greenfield in N3).",
    "why": "The floor is the product risk; codified before the API so the endpoint is tested against it rather than retrofitted.",
    "area": "Discovery",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "Consumer is Muteeb's N3 Discovery endpoints (from 28 Sep), 2+ weeks after the 11 Sep due; N1-FZ-03 is the immediate blocker for fingerprint capture and stays P0.",
    "depends_on": [
@@ -5208,7 +5208,7 @@ window.LAUNCH_DATA = {
    "what": "Memo stating that no model or match infers special-category data about individuals, with a per-pipeline table (fingerprints and cohorts, comment sentiment and emotion, the page_demographics_insights probe #14, later audience intelligence) saying why each stays outside Art 9 or what guard applies. Name the #14 demographics probe as in scope for review before anything built on it ships.",
    "why": "Discovery cohorts and emotion labels are the two places an Art 9 inference could creep in; a written position now stops a rebuild later.",
    "area": "Legal",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "Real risk but nothing ships on it before N3",
    "depends_on": [
@@ -5237,7 +5237,7 @@ window.LAUNCH_DATA = {
    "what": "Put the scopes decision on paper with Saad: the Meta request is login, page identity and read-only page analytics only; no publishing, messaging or ads scopes. Record the product consequence (every Schedule CTA becomes Remind me; no auto-replies; Inbox and auto-pilot deferred) and the legal consequence (privacy policy and DPA describe read-only analytics processing). File it in Saad's decision log and the Meta package folder.",
    "why": "One of N1's two one-way doors; if the scopes list and the product promise diverge, the Meta narrative and the privacy policy are both wrong.",
    "area": "Meta",
-   "due": "2026-09-09",
+   "due": "2026-09-16",
    "priority": "P1",
    "priority_reason": "The decision is made; the paper must exist before packs ship 10 Sep",
    "depends_on": [
@@ -5265,9 +5265,9 @@ window.LAUNCH_DATA = {
    "assignee": "Filza",
    "title": "Draft ToS, Privacy and DPA naming Meta API data",
    "what": "First full drafts of the three documents, each quoting the lawful-bases map (N1-FZ-08) rather than inventing its own basis. Privacy names the Meta Graph API data held (page posts, comments, insights, tokens), the multi-page model, retention, the deletion route (disconnect = data gone plus the Meta data-deletion callback per N1-FZ-10) and sub-processors. ToS carries the AI-guidance disclaimer and the read-only, no-publishing posture. The DPA is a UK GDPR processor DPA with sub-processor and change-notice clauses. Drafts go to Alex so pack v1 can be signed in N2.",
-   "why": "Pilots sign against this in N2 and Meta's reviewers read the privacy policy at the 25 Sep submission.",
+   "why": "Pilots sign against this in N2 and Meta's reviewers read the privacy policy at the 2 Oct submission.",
    "area": "Legal",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P1",
    "priority_reason": "N2 sign-off has slack, but drafts must exist to be reviewed",
    "depends_on": [
@@ -5300,7 +5300,7 @@ window.LAUNCH_DATA = {
    "what": "Map every processing purpose (page analytics for the owner, flop scoring, crisis detection on comments, Discovery cohorts, Art-E, marketing emails, KPI events) to its lawful basis and controller/processor role, and open the Art 30 RoPA with one row per purpose: data category, source, retention, recipients. Leave rows for embeddings and Art-E memory to be classified in N3. This lands before the ToS/Privacy/DPA drafts so all three quote one map.",
    "why": "The map is what the DPA, Privacy v1 and the Meta answers all quote; without it each document invents its own basis.",
    "area": "Legal",
-   "due": "2026-09-09",
+   "due": "2026-09-16",
    "priority": "P1",
    "priority_reason": "Foundation the N1 drafts and pack v1 quote; not gate-serving this sprint",
    "depends_on": [
@@ -5319,7 +5319,7 @@ window.LAUNCH_DATA = {
    "checklist": [
     "List purposes with Faheem and Muteeb (pipelines, models, app events)",
     "Assign basis and role per purpose; flag any needing consent",
-    "State the PECR position for emailing the existing newsletter list (Jill's #1 goes 15 Sep)",
+    "State the PECR position for emailing the existing newsletter list (Jill's #1 goes 22 Sep)",
     "Open the RoPA with rows per purpose and placeholders for N3 additions",
     "Hand the map to the ToS/Privacy/DPA drafting (N1-FZ-07) as the single source of bases"
    ]
@@ -5328,11 +5328,11 @@ window.LAUNCH_DATA = {
    "id": "N1-FZ-09",
    "sprint": "N1",
    "assignee": "Filza",
-   "title": "Ready Privacy v1 + cookie notice for the 12 Sep landing",
-   "what": "Checklist 4 puts Privacy v1 and a cookie banner on the landing from 1 Sep; Asad's rebuilt landing goes live Fri 12 Sep. Supply a publishable Privacy v1 short form (pointing to the full N2 policy) and the cookie-notice text and behaviour (no non-essential scripts before consent, decline as easy as accept) so the new landing launches with both. Check what the current landing shows today, list the gaps for the 12 Sep rebuild (no patch to the old landing: Asad writes no code before 10 Sep), and record the 1 Sep -> 12 Sep slip in the decision log and RoPA with a ruling on the pilot-waitlist names collected via Netlify Forms between 1 and 12 Sep (covered by the existing form wording, or re-permissioned with the N2-FZ-08 ruling).",
+   "title": "Ready Privacy v1 + cookie notice for the 19 Sep landing",
+   "what": "Checklist 4 puts Privacy v1 and a cookie banner on the landing from 8 Sep; Asad's rebuilt landing goes live Fri 19 Sep. Supply a publishable Privacy v1 short form (pointing to the full N2 policy) and the cookie-notice text and behaviour (no non-essential scripts before consent, decline as easy as accept) so the new landing launches with both. Check what the current landing shows today, list the gaps for the 19 Sep rebuild (no patch to the old landing: Asad writes no code before 17 Sep), and record the 8 Sep -> 19 Sep slip in the decision log and RoPA with a ruling on the pilot-waitlist names collected via Netlify Forms between 1 and 19 Sep (covered by the existing form wording, or re-permissioned with the N2-FZ-08 ruling).",
    "why": "The landing already collects pilot-waitlist names via Netlify Forms; collecting without a notice is the first thing a reviewer or a pilot's advisor notices.",
    "area": "Landing",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P0",
    "priority_reason": "Dated: Asad's landing goes live Fri 12 Sep and builds from these strings",
    "depends_on": [
@@ -5346,13 +5346,13 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N1",
    "source": "plan",
-   "acceptance": "The 12 Sep landing links a Privacy v1 and shows the cookie notice, nothing non-essential loads before consent, and the decision log carries the dated 1->12 Sep slip with the ruling on names collected in the gap.",
+   "acceptance": "The 19 Sep landing links a Privacy v1 and shows the cookie notice, nothing non-essential loads before consent, and the decision log carries the dated 1->19 Sep slip with the ruling on names collected in the gap.",
    "checklist": [
     "Check the live landing for a privacy link and cookie notice today; list gaps for the rebuild",
     "Write the Privacy v1 short form and the cookie-notice strings",
     "Give Asad the load-before-consent rule for the landing scripts",
-    "Record the 1 Sep -> 12 Sep slip in the decision log and RoPA; rule on names collected 1-12 Sep (feeds N2-FZ-08)",
-    "Verify on the 12 Sep landing after it goes live"
+    "Record the 8 Sep -> 19 Sep slip in the decision log and RoPA; rule on names collected 8-26 Sep (feeds N2-FZ-08)",
+    "Verify on the 19 Sep landing after it goes live"
    ]
   },
   {
@@ -5363,7 +5363,7 @@ window.LAUNCH_DATA = {
    "what": "Specify what the Meta data-deletion callback must do so Muteeb can build it in N2: verify the signed_request, resolve the Facebook user/page to tenant and page ids, cascade deletion across tokens, warehouse rows, prediction tables, labels, vectors and Art-E memory, return a confirmation code plus status URL, and write a RoPA log entry. Define the same route for in-app disconnect so the N2 gate (connect, disconnect, data gone) and the callback share one deletion path. Mark open questions for Muteeb.",
    "why": "Muteeb builds the endpoint in N2 week B and it is required for App Review; an under-specified callback costs a 20-day cycle.",
    "area": "Meta",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P1",
    "priority_reason": "Muteeb builds the callback 21-27 Sep against the frozen spec in N2-FZ-02 (stays P0, 17 Sep); the N1 draft has a week of slack.",
    "depends_on": [
@@ -5389,10 +5389,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Filza",
    "title": "Confirm legal name + Companies House documents for Meta verification",
-   "what": "Check the Companies House register entry against what Alex will enter in Meta business verification on 4 Sep: exact registered name, registered address, company number, and which documents (certificate of incorporation, latest filing) match character-for-character. Send Alex the confirmed strings and the document set.",
-   "why": "A name mismatch is the commonest verification rejection and each cycle costs days against the 25 Sep submission anchor.",
+   "what": "Check the Companies House register entry against what Alex will enter in Meta business verification on 11 Sep: exact registered name, registered address, company number, and which documents (certificate of incorporation, latest filing) match character-for-character. Send Alex the confirmed strings and the document set.",
+   "why": "A name mismatch is the commonest verification rejection and each cycle costs days against the 2 Oct submission anchor.",
    "area": "Meta",
-   "due": "2026-09-03",
+   "due": "2026-09-10",
    "priority": "P0",
    "priority_reason": "P0: external clock - Alex submits 4 Sep and the 25 Sep Meta submission depends on it.",
    "depends_on": [],
@@ -5400,7 +5400,7 @@ window.LAUNCH_DATA = {
     "N1-AX-02"
    ],
    "gate": "N1",
-   "acceptance": "Alex submits verification on 4 Sep with the confirmed legal name and documents and no mismatch query comes back.",
+   "acceptance": "Alex submits verification on 11 Sep with the confirmed legal name and documents and no mismatch query comes back.",
    "checklist": [
     "Pull the Companies House entry",
     "Compare name/address/number with the Meta form fields",
@@ -5417,7 +5417,7 @@ window.LAUNCH_DATA = {
    "what": "First screen day: wire the bought auth (session, JWT tenant claim) into the Next.js app; app shell = icon rail, topbar with bell and health-pill slots, workspace-switcher stub listing the tenant's pages, theme, toasts, routed empty pages for Today / Drafts / Alerts / Best Times / Analytics / Settings; deployed to staging behind login.",
    "why": "The feature map puts auth integration on Asad in N1 but the no-code decision moves it to the first days of N2; nothing in N2 renders without it.",
    "area": "App core",
-   "due": "2026-09-16",
+   "due": "2026-09-23",
    "priority": "P0",
    "priority_reason": "Blocks every N2 screen",
    "depends_on": [
@@ -5446,9 +5446,9 @@ window.LAUNCH_DATA = {
    "assignee": "Asad",
    "title": "Set the numeric crisis pass line from the measurement, before tuning",
    "what": "With Faheem, read the 8-week comments-per-page-per-hour-of-week measurement and Lewis's complete incident window (20+ incidents), then decide and record the numeric line per the roadmap table (5+/hour: 75% stands; 1-5: scope to the larger pages and say so in the gate; <1: change the gate now). Attach the must-catch-N clause from N1-AS-02, annotate 25-29 Aug as an anomaly window, and confirm the gate clock covers the live labelling path (Faheem seam 1), not only fetch.",
-   "why": "Tuning against an unreachable line burns N2 and fails the 9 Oct drill in public; the decision must precede tuning, not follow it.",
+   "why": "Tuning against an unreachable line burns N2 and fails the 16 Oct drill in public; the decision must precede tuning, not follow it.",
    "area": "Alerts",
-   "due": "2026-09-14",
+   "due": "2026-09-21",
    "priority": "P0",
    "priority_reason": "Faheem's N2 backtests and Muteeb's fast-lane design wait on it",
    "depends_on": [
@@ -5483,7 +5483,7 @@ window.LAUNCH_DATA = {
    "what": "Connect flow on Muteeb's token backend: Facebook login (dev mode, Tester roles) -> multi-select page picker (3-5 pages) -> per-page connection-health state (connected / expiring / revoked / re-auth needed) -> disconnect per page triggering revocation and data delete. Consent-screen UI built in final form because the screencasts record it.",
    "why": "The N2 gate is connect -> disconnect -> data gone, and this exact UI appears in every Meta screencast.",
    "area": "Auth",
-   "due": "2026-09-18",
+   "due": "2026-09-25",
    "priority": "P0",
    "priority_reason": "Gate proof and screencast prerequisite",
    "depends_on": [
@@ -5511,10 +5511,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Asad",
    "title": "Today feed on the live API",
-   "what": "Today screen: next-move hero with confidence chip, moves checklist, typed feed cards (crisis / opportunity / signal / prediction / win), setup pill reading ingest progress; page_id scoping via the workspace-switcher stub; every 'Schedule' CTA renders as 'Remind me at this time'; empty and lag states per Saad's pack. Routes Muteeb has not made live by 22 Sep run on the contract's mock layer and are swapped as endpoints land; the gate proof is the draft score, not the feed.",
+   "what": "Today screen: next-move hero with confidence chip, moves checklist, typed feed cards (crisis / opportunity / signal / prediction / win), setup pill reading ingest progress; page_id scoping via the workspace-switcher stub; every 'Schedule' CTA renders as 'Remind me at this time'; empty and lag states per Saad's pack. Routes Muteeb has not made live by 29 Sep run on the contract's mock layer and are swapped as endpoints land; the gate proof is the draft score, not the feed.",
    "why": "The screen pilots open every morning; the habit loop the vision demands and half of the working-app reveal.",
    "area": "Today",
-   "due": "2026-09-22",
+   "due": "2026-09-29",
    "priority": "P0",
    "priority_reason": "Gate demo screen and screencast material",
    "depends_on": [
@@ -5547,7 +5547,7 @@ window.LAUNCH_DATA = {
    "what": "Email verify, password reset, logout everywhere, session expiry and refresh through the bought auth vendor; API-level negative tests for a forged JWT, an expired token, a missing tenant claim and a cross-tenant page_id, each returning 401/403 in the contract's error envelope; wired into CI.",
    "why": "The first thing a Meta reviewer or an attacker tries; a broken reset is a support ticket on day one.",
    "area": "Auth",
-   "due": "2026-09-22",
+   "due": "2026-09-29",
    "priority": "P1",
    "priority_reason": "Security baseline with slack before the gate",
    "depends_on": [
@@ -5574,9 +5574,9 @@ window.LAUNCH_DATA = {
    "assignee": "Asad",
    "title": "Drafts/Studio: composer, debounced gauge, driver chips, autosave",
    "what": "Composer with 300-500 ms debounced calls to Muteeb's score endpoint; virality gauge and driver chips rendered strictly from the drivers[] field in Saad's chip vocabulary (nothing invented UI-side); minimum-text threshold before scoring; autosave to the server with restore on reload; loading and error states.",
-   "why": "The wow moment and the 25 Sep gate proof ('draft scored live on a pilot page'); losing a half-written post once is once too many.",
+   "why": "The wow moment and the 2 Oct gate proof ('draft scored live on a pilot page'); losing a half-written post once is once too many.",
    "area": "Drafts",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P0",
    "priority_reason": "Gate proof",
    "depends_on": [
@@ -5610,7 +5610,7 @@ window.LAUNCH_DATA = {
    "what": "Muteeb registers the callbacks, policy URLs, redirect URIs and reviewer tenant in N2-MT-14; Asad does not repeat that work. Asad owns the dashboard fields nobody else covers - app display name, icon, App Details copy, category / business use case, contact email, App Domains and the Data Deletion INSTRUCTIONS URL as distinct from the callback URL - using Saad's N1-SD-17 assets, and then walks the whole dashboard as a reviewer would: open every URL over SSL from a clean browser, complete the OAuth redirect on the production domain, log in with the reviewer credentials to the populated test page, and confirm the requested scopes are exactly the frozen N2-AS-14 list. Anything broken goes back to Muteeb the same day.",
    "why": "A dead URL or mismatched redirect is a 20-day rejection cycle; the package cannot be submitted without it.",
    "area": "Meta",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P0",
    "priority_reason": "Checklist 1 N2 plumbing; submission is 25 Sep",
    "depends_on": [
@@ -5644,7 +5644,7 @@ window.LAUNCH_DATA = {
    "what": "Render the score as bands per Faheem's calibration and Saad's pack, and an explicit abstain state ('no strong signal on this one') whenever the endpoint's confidence/coverage flag says so; no numeric dial outside coverage; the no-strong-driver rule hides chips. With the flop gate passed at 55% coverage, roughly 45% of drafts still land in abstain.",
    "why": "UI precision must match measured model performance; a confident dial on uncovered drafts is the 'bogus score' failure the benchmark warned about.",
    "area": "Drafts",
-   "due": "2026-09-24",
+   "due": "2026-10-01",
    "priority": "P1",
    "priority_reason": "Benchmark fix on top of the composer; small slack before the gate",
    "depends_on": [
@@ -5670,10 +5670,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Asad",
    "title": "Record a screencast per permission; freeze consent UI; co-sign",
-   "what": "For each permission on the scope list locked in N1-FZ-06, record login -> permission prompt -> grant -> the feature working, on the host registered as the app's domain in the dashboard (production, or staging only if that exact host is registered and reachable by a reviewer), from a fresh reviewer account rather than a signed-in session. Include one clip showing disconnect and data deletion, since reviewers probe the deletion claim. Tag each clip to the permission-to-feature map, then freeze the consent-screen and connect UI - any change re-opens recording - and co-sign the package with the Meta owner by 24 Sep after Filza's firewall review.",
-   "why": "Mismatched screencast-vs-UI is a top rejection reason; SUBMIT is Fri 25 Sep and only one safe rejection cycle exists.",
+   "what": "For each permission on the scope list locked in N1-FZ-06, record login -> permission prompt -> grant -> the feature working, on the host registered as the app's domain in the dashboard (production, or staging only if that exact host is registered and reachable by a reviewer), from a fresh reviewer account rather than a signed-in session. Include one clip showing disconnect and data deletion, since reviewers probe the deletion claim. Tag each clip to the permission-to-feature map, then freeze the consent-screen and connect UI - any change re-opens recording - and co-sign the package with the Meta owner by 1 Oct after Filza's firewall review.",
+   "why": "Mismatched screencast-vs-UI is a top rejection reason; SUBMIT is Fri 2 Oct and only one safe rejection cycle exists.",
    "area": "Meta",
-   "due": "2026-09-24",
+   "due": "2026-10-01",
    "priority": "P0",
    "priority_reason": "External clock; submission 25 Sep",
    "depends_on": [
@@ -5708,7 +5708,7 @@ window.LAUNCH_DATA = {
    "what": "With Muteeb present but hands-off, run a production deploy of the app and a rollback to the previous build using only the deploy runbook; time both; file runbook gaps as fixes; record the receipt for Checklist 2 (code rollback tested N2).",
    "why": "If Muteeb is sick in launch week the product must still ship fixes; an unread runbook is not a runbook.",
    "area": "Ops",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "Bus-factor insurance; slack within the sprint",
    "depends_on": [
@@ -5737,7 +5737,7 @@ window.LAUNCH_DATA = {
    "what": "Instrument signup, page_connected and draft_scored as first-class events carrying tenant and page_id into the events sink named in the stack decision; verify on staging with a dashboard tile; document the taxonomy so the N4 funnel extends it.",
    "why": "Without events the launch KPIs are guesses and the activation event Saad names in N2 cannot be measured.",
    "area": "Ops",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "Measurement baseline with slack",
    "depends_on": [
@@ -5765,10 +5765,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Asad",
    "title": "Working-app reveal: curated demo tenant + rehearsed walkthrough",
-   "what": "Seed a demo tenant on staging with curated data (never pilot data; avoid pages Lewis flags as declining), script a 5-minute walkthrough login -> connect -> Today -> draft scored, rehearse twice with Alex/Saad; the reveal itself lands ~Mon 28 Sep.",
+   "what": "Seed a demo tenant on staging with curated data (never pilot data; avoid pages Lewis flags as declining), script a 5-minute walkthrough login -> connect -> Today -> draft scored, rehearse twice with Alex/Saad; the reveal itself lands ~Mon 5 Oct.",
    "why": "The first public proof the product is real; a rehearsed demo on curated data cannot leak pilot data or show declining pages.",
    "area": "Marketing",
-   "due": "2026-09-27",
+   "due": "2026-10-04",
    "priority": "P1",
    "priority_reason": "Public beat with a fixed week",
    "depends_on": [
@@ -5795,11 +5795,11 @@ window.LAUNCH_DATA = {
    "id": "N2-AS-13",
    "sprint": "N2",
    "assignee": "Asad",
-   "title": "Switch the pilot application form live on the landing, Thu 17 Sep",
-   "what": "Publish Lewis's pilot application form on the live landing on the 17 Sep beat: link or embed, the consent line from Filza (N1-FZ-09), UTM tags per the scheme, and a test submission that lands in Lewis's triage queue. Ship it hidden with the 12 Sep landing if that is easier and flip it on the day.",
-   "why": "Lewis's N2-LW-01 (form live 17 Sep, triage within 48h) names an Asad switch that had no ticket; the beat is on Alex's marketing calendar.",
+   "title": "Switch the pilot application form live on the landing, Thu 24 Sep",
+   "what": "Publish Lewis's pilot application form on the live landing on the 24 Sep beat: link or embed, the consent line from Filza (N1-FZ-09), UTM tags per the scheme, and a test submission that lands in Lewis's triage queue. Ship it hidden with the 19 Sep landing if that is easier and flip it on the day.",
+   "why": "Lewis's N2-LW-01 (form live 24 Sep, triage within 48h) names an Asad switch that had no ticket; the beat is on Alex's marketing calendar.",
    "area": "Landing",
-   "due": "2026-09-17",
+   "due": "2026-09-24",
    "priority": "P1",
    "priority_reason": "P1: dated beat, small change, a day of slack inside the N2 build.",
    "depends_on": [
@@ -5812,12 +5812,12 @@ window.LAUNCH_DATA = {
     "Jill"
    ],
    "gate": "none",
-   "acceptance": "A test submission on 17 Sep reaches Lewis's queue and the form is visible on production.",
+   "acceptance": "A test submission on 24 Sep reaches Lewis's queue and the form is visible on production.",
    "checklist": [
     "Embed or link the form with the consent line",
     "Add UTM tags per the scheme",
     "Test a submission end-to-end with Lewis",
-    "Go live on 17 Sep and confirm to Alex"
+    "Go live on 24 Sep and confirm to Alex"
    ],
    "source": "reconciler"
   },
@@ -5826,10 +5826,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Asad",
    "title": "Decide Discovery's signal floor and descope branch before graph code",
-   "what": "With Faheem's measurement (N2-FH-19) in hand, declare in writing, before Muteeb starts the graph on 28 Sep: the observation window Discovery will use and the honesty consequence of choosing a pre-collapse window (a fingerprint built on commenters a page may no longer have, while the reason string still says 'your people'); the minimum signal floor to proceed - a stated number of FDR-surviving edges and a stated share of connected pilot pages holding at least one structural edge; and the branch if the floor is not met. Name the branch options explicitly and pick the order: widen the window, re-weight the blend away from 80/20 with re-declared reason strings and a re-run of Filza's legal pass, or descope Discovery v1 to curated matches with the engine held back. Mirror the shape of N1-AS-02's crisis coverage floor. File it in the decision register with Faheem and Muteeb acknowledging.",
-   "why": "A sparse backbone discovered during the build silently becomes a list of fail-open 'suggested - not validated' rows going into Lewis's 9 Oct gate; the line has to be drawn before anyone has seen the matches.",
+   "what": "With Faheem's measurement (N2-FH-19) in hand, declare in writing, before Muteeb starts the graph on 5 Oct: the observation window Discovery will use and the honesty consequence of choosing a pre-collapse window (a fingerprint built on commenters a page may no longer have, while the reason string still says 'your people'); the minimum signal floor to proceed - a stated number of FDR-surviving edges and a stated share of connected pilot pages holding at least one structural edge; and the branch if the floor is not met. Name the branch options explicitly and pick the order: widen the window, re-weight the blend away from 80/20 with re-declared reason strings and a re-run of Filza's legal pass, or descope Discovery v1 to curated matches with the engine held back. Mirror the shape of N1-AS-02's crisis coverage floor. File it in the decision register with Faheem and Muteeb acknowledging.",
+   "why": "A sparse backbone discovered during the build silently becomes a list of fail-open 'suggested - not validated' rows going into Lewis's 16 Oct gate; the line has to be drawn before anyone has seen the matches.",
    "area": "Discovery",
-   "due": "2026-09-21",
+   "due": "2026-09-28",
    "priority": "P0",
    "priority_reason": "P0 - Muteeb's N3-MT-01 graph build starts 28 Sep and Lewis's 9 Oct gate depends on what it produces",
    "depends_on": [
@@ -5842,7 +5842,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "discovery-audit",
-   "acceptance": "A signed decision naming the observation window, the numeric signal floor and the ordered descope branch, filed in the register and acknowledged by Faheem and Muteeb on or before 25 Sep.",
+   "acceptance": "A signed decision naming the observation window, the numeric signal floor and the ordered descope branch, filed in the register and acknowledged by Faheem and Muteeb on or before 2 Oct.",
    "checklist": [
     "Read Faheem's window comparison with him and Muteeb",
     "Pick the observation window and write down its honesty consequence for reason strings",
@@ -5859,7 +5859,7 @@ window.LAUNCH_DATA = {
    "what": "Implement the tenant claim in exactly one place: a single middleware ahead of every route handler that resolves the session to a tenant, rejects a missing, expired or forged claim, puts the tenant on the request context, and passes it to FastAPI only inside the short-lived internal JWT - never from a client-supplied field. Every handler reads page_id through one helper that checks the page belongs to the tenant. Add the first cross-tenant test to CI: a valid session for tenant A requesting tenant B's page id gets a 404 from the envelope, not a 403 that confirms the page exists.",
    "why": "This is the replacement for the framework guards the stack decision gave up, and it is the single control standing between a multi-tenant product and the leak that ends it; every later leakage proof (N4-MT-01) tests this one piece of code.",
    "area": "Auth",
-   "due": "2026-09-17",
+   "due": "2026-09-24",
    "priority": "P0",
    "priority_reason": "P0 - every route Asad and Saad write after 17 Sep sits behind it, and the 25 Sep gate proves connect/disconnect per tenant.",
    "depends_on": [
@@ -5896,7 +5896,7 @@ window.LAUNCH_DATA = {
    "what": "Make every BFF route return the N1-AS-15 envelope, and map every upstream failure to a stable code the front end can switch on: FastAPI timeout, model abstain, warehouse slow or unavailable, Meta token expired or revoked, rate-limited, ingest incomplete, page revoked. Put request_id in every response and every log line so a pilot's screenshot resolves to a trace. Nothing leaks a stack trace, a vendor message or a SQL error to the browser. Publish the code list to Saad the day it lands.",
    "why": "Saad's shared state components switch on these codes; if he has to parse message strings, every upstream wording change becomes a front-end bug, and the honest empty and abstain states silently degrade into generic errors.",
    "area": "App core",
-   "due": "2026-09-22",
+   "due": "2026-09-29",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack inside N2, but N3-SD-11 and every N3 surface depend on the published code list.",
    "depends_on": [
@@ -5929,7 +5929,7 @@ window.LAUNCH_DATA = {
    "what": "Require an Idempotency-Key header on every POST, PATCH and DELETE the browser makes - disconnect a page, save a draft, act on an alert, submit feedback, opt in to Discovery, change settings - and store key-to-response per tenant for 24 hours so a replay returns the first response rather than acting twice. Make the queue consumers idempotent on the same principle with a dedupe key on every message, since SQS is at-least-once. Document the retry contract next to the code list.",
    "why": "A double-tap on 'disconnect' or a retried alert action on a flaky pilot connection produces duplicate side effects that show up as data-integrity bugs at UAT, and the crisis fast-lane will retry by design.",
    "area": "App core",
-   "due": "2026-09-24",
+   "due": "2026-10-01",
    "priority": "P1",
    "priority_reason": "P1 - safe to slip a week inside N3 if N2 overruns, but not past the first pilot writes.",
    "depends_on": [
@@ -5961,7 +5961,7 @@ window.LAUNCH_DATA = {
    "what": "Publish both OpenAPI documents at a stable URL behind login on staging (/api/docs), rendered and browsable, with the owner from the ownership map shown per route. Publish the generated TypeScript client as a versioned package the app imports rather than hand-written fetch calls, and keep a CHANGELOG with one dated line per contract change. Add the route list, its version and its owner to the same page so a fourth person - or Saad on his first week - can find an endpoint without asking Asad.",
    "why": "Contract-first only works if the contract is findable; the mobile app in the packs, the contract tests and Saad's screens are three consumers already, and an undocumented API becomes Asad-shaped knowledge exactly when he is the bottleneck.",
    "area": "App core",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack; can slip into N3 but not past the N3 surfaces Saad builds alone.",
    "depends_on": [
@@ -5977,12 +5977,12 @@ window.LAUNCH_DATA = {
     "Muteeb"
    ],
    "gate": "N2",
-   "acceptance": "/api/docs on staging renders both documents with owner and version per route, the app imports the versioned generated client, and the changelog has an entry per contract change since 8 Sep.",
+   "acceptance": "/api/docs on staging renders both documents with owner and version per route, the app imports the versioned generated client, and the changelog has an entry per contract change since 15 Sep.",
    "checklist": [
     "Render both documents at /api/docs behind login",
     "Show owner and version per route from the ownership map",
     "Publish the generated client as a versioned package",
-    "Start the changelog and backfill it to 8 Sep",
+    "Start the changelog and backfill it to 15 Sep",
     "Link it from the repo README and tell Saad and Muteeb"
    ],
    "source": "reconciler"
@@ -5995,7 +5995,7 @@ window.LAUNCH_DATA = {
    "what": "Done on arrival: AUC 0.76, 75% precision at 55% coverage (gate asked 10-20%), +0.19 over baseline, cold-start 0.746. LambdaRank was A/B'd and lost, so the shipped model is Borda gate + regressor. File the evidence with data hash and seed; fix the plan and tracker wording.",
    "why": "Muteeb's list and the plan still say LambdaRank; a wrong artifact name breaks the N5 pin and N6 rollback.",
    "area": "Drafts",
-   "due": "2026-09-15",
+   "due": "2026-09-22",
    "priority": "P1",
    "priority_reason": "evidence + wording; gate already passed, real risk of a wrong artifact name with slack",
    "depends_on": [
@@ -6024,7 +6024,7 @@ window.LAUNCH_DATA = {
    "what": "Deliver the pinned Borda gate + regressor artifact with a version id, the feature-builder callable and input schema, the output fields (band, confidence/coverage flag, drivers slot) and a golden request/response pair for contract tests. Parity-check 50 posts against batch.",
    "why": "Muteeb's week-A production endpoint (p95 < 1s) cannot start without the artifact and contract.",
    "area": "Drafts",
-   "due": "2026-09-15",
+   "due": "2026-09-22",
    "priority": "P0",
    "priority_reason": "blocks Muteeb's N2 week A",
    "depends_on": [
@@ -6055,7 +6055,7 @@ window.LAUNCH_DATA = {
    "what": "TreeSHAP top-k contributions per draft mapped through a feature-to-chip table from Saad's Drafts pack; a no-strong-driver threshold; the abstain rule outside the coverage band carried as a confidence/coverage flag in the score output. Spot-check 30 drafts with Saad.",
    "why": "Chips invented UI-side are the bogus-score failure; Muteeb's endpoint fields and Asad's gauge read these.",
    "area": "Drafts",
-   "due": "2026-09-18",
+   "due": "2026-09-25",
    "priority": "P0",
    "priority_reason": "Muteeb's contract-tested drivers field is week A",
    "depends_on": [
@@ -6084,7 +6084,7 @@ window.LAUNCH_DATA = {
    "what": "Cold-start held-out eval is done. Build the fallback chain (page model -> archetype -> global -> abstain), persist the active level per page in a table, expose it in the score output and test with a genuinely new page.",
    "why": "A new pilot's first week must not show confident garbage.",
    "area": "Drafts",
-   "due": "2026-09-22",
+   "due": "2026-09-29",
    "priority": "P1",
    "priority_reason": "real risk for new pilots; slack inside N2",
    "depends_on": [
@@ -6111,7 +6111,7 @@ window.LAUNCH_DATA = {
    "what": "Error analysis on missed toxic comments in the existing gold comment set (handed over with the 97-post provenance pack), then threshold/prompt change or retrain; re-measure recall and record it. Anomaly window excluded.",
    "why": "The detector checks burst content for toxicity; at 0.74 recall a quarter of storms look calm.",
    "area": "Alerts",
-   "due": "2026-09-18",
+   "due": "2026-09-25",
    "priority": "P1",
    "priority_reason": "The 0.74 recall fix gates the quality of Faheem's own detector; N2-FH-09 can expose the current model behind a version id and swap it, so Muteeb's fast-lane is not blocked. Real risk with slack inside N2.",
    "depends_on": [],
@@ -6134,10 +6134,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Faheem",
    "title": "Crisis detector v1 re-scoped for ~3 comments/post: burst vs baselines",
-   "what": "Hour-of-week baseline table per page (anomaly window excluded), Kleinberg two-state burst automaton on comment arrivals, archetype assignment, 2-window persistence, toxicity check on burst content, scoped to the pages the signed pass line (N2-AS-02) covers. Agree and publish the detector event schema to Muteeb by Fri 18 Sep so his alerts skeleton (N2-MT-04, due 20 Sep) builds against it before the detector itself lands 23 Sep.",
+   "what": "Hour-of-week baseline table per page (anomaly window excluded), Kleinberg two-state burst automaton on comment arrivals, archetype assignment, 2-window persistence, toxicity check on burst content, scoped to the pages the signed pass line (N2-AS-02) covers. Agree and publish the detector event schema to Muteeb by Fri 25 Sep so his alerts skeleton (N2-MT-04, due 27 Sep) builds against it before the detector itself lands 30 Sep.",
    "why": "Feeds Muteeb's alerts skeleton this sprint; the PROTECT promise has no model without it.",
    "area": "Alerts",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P0",
    "priority_reason": "Muteeb's alerts pipeline consumes it in N2",
    "depends_on": [
@@ -6153,7 +6153,7 @@ window.LAUNCH_DATA = {
    "source": "plan",
    "acceptance": "Detector emits events on replayed history in the agreed schema.",
    "checklist": [
-    "Event schema agreed with Muteeb by 18 Sep",
+    "Event schema agreed with Muteeb by 25 Sep",
     "Baseline table per page/hour-of-week",
     "Burst automaton + persistence rule",
     "Archetype thresholds",
@@ -6168,7 +6168,7 @@ window.LAUNCH_DATA = {
    "what": "Run the detector over the complete window; report precision, coverage (incidents caught of N), and false alarms outside the list; tune per-archetype thresholds once. Record the result against the re-set pass line and coverage clause, or the shortfall in writing.",
    "why": "Precision is measured before a single pilot sees an alert.",
    "area": "Alerts",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "Stated reason 'N2 gate evidence' is wrong: the 25 Sep gate is draft score / connect-disconnect / Meta submitted / pricing - no crisis item. Its consumers (N3-FH-02, the 9 Oct drill) have two weeks of slack.",
    "depends_on": [
@@ -6199,7 +6199,7 @@ window.LAUNCH_DATA = {
    "what": "Write that recall is measured on backtests and precision-gated at launch, include the coverage clause and what a missed storm means for the pilot. Asad reviews.",
    "why": "Honesty about the missed-storm side, not only false alarms.",
    "area": "Alerts",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "documentation with slack",
    "depends_on": [
@@ -6228,7 +6228,7 @@ window.LAUNCH_DATA = {
    "what": "Expose the sentiment/toxicity labelling model (after the toxic-recall fix, N2-FH-05) as a callable endpoint with the latency budget from the N1 design, batch and single-comment modes, model version id, and a freshness/lag metric; Muteeb wires it into the fast-lane in N2-MT-11 and returns the measured fetch-to-label timing.",
    "why": "Without it the 9 Oct drill clocks fetching, not detection.",
    "area": "Alerts",
-   "due": "2026-09-20",
+   "due": "2026-09-27",
    "priority": "P0",
    "priority_reason": "N3 drill depends on it",
    "depends_on": [
@@ -6254,10 +6254,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Faheem",
    "title": "QA #20: LOGAN lag + alerting + label the 39k comment backlog",
-   "what": "Measure LOGAN lag and add a lag alert; plan and run backlog labelling of the ~39k historical comments as a batch job (cost estimated first) with provenance. Run it as batch now, before the live path exists, so it never competes with N2-FH-09's live lane; the labelled corpus is in place for the 25 Sep backtest.",
+   "what": "Measure LOGAN lag and add a lag alert; plan and run backlog labelling of the ~39k historical comments as a batch job (cost estimated first) with provenance. Run it as batch now, before the live path exists, so it never competes with N2-FH-09's live lane; the labelled corpus is in place for the 2 Oct backtest.",
    "why": "This corpus predates the collapse and is the best comment data we have; crisis backtests and the blind gold set need labelled history.",
    "area": "Data",
-   "due": "2026-09-22",
+   "due": "2026-09-29",
    "priority": "P1",
    "priority_reason": "best corpus; feeds the backtest and gold set with three days of slack",
    "depends_on": [],
@@ -6283,7 +6283,7 @@ window.LAUNCH_DATA = {
    "what": "Locate the running LOGAN code, commit it with README and schedule definition, pass CI lint, deploy from the repo and note it in the runbook.",
    "why": "Undocumented code outside the repo is bus-factor risk on the crisis chain.",
    "area": "Data",
-   "due": "2026-09-24",
+   "due": "2026-10-01",
    "priority": "P1",
    "priority_reason": "bus factor on the crisis path; slack inside N2",
    "depends_on": [],
@@ -6308,7 +6308,7 @@ window.LAUNCH_DATA = {
    "what": "Define fixed benchmark drafts with known scores and drivers; Muteeb adds them to the endpoint contract tests; nightly compare serving vs batch and alert on drift.",
    "why": "Catches a serving change that silently shifts scores.",
    "area": "QA",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P1",
    "priority_reason": "guards the production endpoint; slack inside N2",
    "depends_on": [
@@ -6334,10 +6334,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Faheem",
    "title": "QA P3 backfills: #13 partitions, #17 NEBULA posts, #14 API probe",
-   "what": "Backfill the 6 Monday partitions (#13) first and verify, so the agreed P3 order (#13 -> #20 -> #21 -> #14 -> #17) holds and the 25 Sep pilot-page gate does not read gaps; backfill 1,300 NEBULA posts after the #18 gate (#17); probe the page_demographics_insights API (#14) and log the answer.",
+   "what": "Backfill the 6 Monday partitions (#13) first and verify, so the agreed P3 order (#13 -> #20 -> #21 -> #14 -> #17) holds and the 2 Oct pilot-page gate does not read gaps; backfill 1,300 NEBULA posts after the #18 gate (#17); probe the page_demographics_insights API (#14) and log the answer.",
    "why": "Gaps in partitions and labels show up as wrong numbers on pilot screens.",
    "area": "Data",
-   "due": "2026-09-21",
+   "due": "2026-09-28",
    "priority": "P2",
    "priority_reason": "P2 - safe to slip, but #13 sits first in the agreed P3 order (before #20 on 22 Sep) and missing partitions show as wrong numbers on the 25 Sep gate page",
    "depends_on": [
@@ -6363,7 +6363,7 @@ window.LAUNCH_DATA = {
    "what": "Hour x day engagement aggregates per page, count floor >=10 with a persisted fallback level, strictly-before windows, explicit page timezone, TimeSeriesSplit backtest, and the lookback window written down for Asad's UI note. (The S9 MODEL work is real and carries over; the surface has never been built in the launch stack.)",
    "why": "Powers the heatmap and the next-move hero's time claims; Muteeb's N3 endpoint reads the table.",
    "area": "Best Times",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P0",
    "priority_reason": "blocks Muteeb's N3 best-times endpoint on day 1 (28 Sep)",
    "depends_on": [
@@ -6394,7 +6394,7 @@ window.LAUNCH_DATA = {
    "what": "Spec posting consistency, content strength and timing adherence from existing warehouse metrics: normalisation, explicit weights, per page and per workspace roll-up, thin-page 'building your baseline' rule and a sensitivity note.",
    "why": "The topbar pill and Pages view read this; it had no owner before the audit.",
    "area": "Analytics",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P0",
    "priority_reason": "blocks Muteeb's N3 health endpoints and Saad's pack copy",
    "depends_on": [],
@@ -6421,7 +6421,7 @@ window.LAUNCH_DATA = {
    "what": "Add labelled bands (e.g. 0-49 at risk / 50-79 steady / 80+ strong) and the weekly-delta definition, validated against the pilot pages' score distribution, for Saad's pack copy.",
    "why": "What 72 means, Lighthouse-style, or the number is noise.",
    "area": "Analytics",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "Consumers are Asad's pill (N3-AS-05, due 8 Oct) and Saad's copy, two weeks out; the packs were delivered 10 Sep and the N2 one-pagers do not include Analytics. Blocks someone, but with slack.",
    "depends_on": [
@@ -6449,7 +6449,7 @@ window.LAUNCH_DATA = {
    "what": "Per surface (gauge, best times, health, crisis) state the minimum posts, comments and days before a real number shows and what shows below the floor, written from the rules already declared (best-times count floor >=10, cold-start fallback levels, health thin-page rule, crisis page scope from Decision 1) rather than waiting for the finished tables; walk the 3-months/40-comments example through and send it to Saad. Update if N2-FH-14/15 change a rule.",
    "why": "Saad's thin-page one-pager needs the floors; the worst reviews come from pages that should never have been shown a number.",
    "area": "Onboarding",
-   "due": "2026-09-20",
+   "due": "2026-09-27",
    "priority": "P1",
    "priority_reason": "Its only consumer is Saad's first-run thin-page one-pager, itself a P1 addition, and Asad builds onboarding in N4. A P0 that blocks a P1 is mis-tiered.",
    "depends_on": [
@@ -6474,10 +6474,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Faheem",
    "title": "De-identify Discovery graph inputs per Filza; keep fingerprint capture",
-   "what": "Confirm cohort-fingerprint capture is running, apply Filza's de-identification policy (dropped fields, k=5 pre-filter) to the graph input table and hand it to Muteeb before his N3 graph work starts 28 Sep.",
-   "why": "Muteeb's graph starts 28 Sep and legally cannot run on un-de-identified inputs.",
+   "what": "Confirm cohort-fingerprint capture is running, apply Filza's de-identification policy (dropped fields, k=5 pre-filter) to the graph input table and hand it to Muteeb before his N3 graph work starts 5 Oct.",
+   "why": "Muteeb's graph starts 5 Oct and legally cannot run on un-de-identified inputs.",
    "area": "Discovery",
-   "due": "2026-09-18",
+   "due": "2026-09-25",
    "priority": "P0",
    "priority_reason": "blocks Muteeb's N3 day-1 graph work",
    "depends_on": [
@@ -6505,7 +6505,7 @@ window.LAUNCH_DATA = {
    "what": "Write down the co-commenter cohort definition Muteeb's graph will use - which interactions count as a tie, the observation window, how repeat commenters and bots are deduplicated, and the minimum cohort size for a page to enter the graph at all. Then measure it on the warehouse for the pilot roster at three windows (last 90 days, last 180 days, and a window reaching back into the pre-collapse period that holds the ~39k historical comments): distinct commenters per page, pairwise shared-commenter counts, and the number of page pairs that would survive a Benjamini-Hochberg FDR gate under the degree-preserving hypergeometric null at n=20. Report the same numbers split by collapsed monetised pages and by the small pages that stayed flat. Hand the table and the definition to Muteeb and Asad.",
    "why": "The comment collapse cuts the exact quantity the graph is built from; without this measurement nobody knows whether the FDR backbone will be near-empty until the fallback fires in October.",
    "area": "Discovery",
-   "due": "2026-09-18",
+   "due": "2026-09-25",
    "priority": "P0",
    "priority_reason": "P0 - blocks Asad's signal-floor decision on 25 Sep and Muteeb's graph build starting 28 Sep",
    "depends_on": [
@@ -6518,7 +6518,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "discovery-audit",
-   "acceptance": "A written cohort definition plus a table of distinct commenters per page, pairwise overlaps and expected FDR-surviving edge counts at three observation windows, delivered to Asad and Muteeb on or before 18 Sep.",
+   "acceptance": "A written cohort definition plus a table of distinct commenters per page, pairwise overlaps and expected FDR-surviving edge counts at three observation windows, delivered to Asad and Muteeb on or before 25 Sep.",
    "checklist": [
     "Write the cohort tie definition, window, dedup and bot rules in one page",
     "Query distinct commenters per pilot page for the three candidate windows",
@@ -6536,7 +6536,7 @@ window.LAUNCH_DATA = {
    "what": "Bring every endpoint Muteeb mounts into line with the frozen envelope: draft score, comment labelling, best-times aggregates and health. Each returns model_version and trained_at, a coverage flag and an explicit abstain with a reason wherever the eligibility floors are not met, driver fields named exactly as the contract names them, and populated cost fields. Contract tests pass against the generated document with no per-route exceptions.",
    "why": "The gauge's abstain state, the thin-page first run and the health pill's 'building your baseline' are all driven by these fields; if any endpoint omits them the front end falls back to guessing, which is the failure mode the flop gate's 55% coverage makes routine.",
    "area": "Drafts",
-   "due": "2026-09-20",
+   "due": "2026-09-27",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack, but the 25 Sep gate shows a live score and N2-AS-08's abstain state reads these fields.",
    "depends_on": [
@@ -6572,7 +6572,7 @@ window.LAUNCH_DATA = {
    "what": "Harden the N1 score endpoint: response cache keyed on tenant, page and draft hash, warm-path p95 under 1s measured on staging, and contract tests in CI. Serve the artifact that passed the gate (Borda gate plus regressor; LambdaRank lost the A/B). (Supersedes the 3 Aug draft-score lambda handoff; its requirements carry over: performance band + flop probability + top-3 reasons, with timing-based reasons suppressed.)",
    "why": "The gauge must move as the pilot types; a slow endpoint turns the wow moment into a wait.",
    "area": "Drafts",
-   "due": "2026-09-18",
+   "due": "2026-09-25",
    "priority": "P0",
    "priority_reason": "Asad's Drafts screen and the 25 Sep gate read this endpoint",
    "depends_on": [
@@ -6601,7 +6601,7 @@ window.LAUNCH_DATA = {
    "what": "Extend the score response per the N1 contract: top-k drivers mapped to Saad's chip vocabulary, a confidence/coverage flag, and an explicit abstain state when Faheem's no-strong-driver rule fires. Contract-test each field.",
    "why": "The chips and the abstain state read these fields; anything invented UI-side is the bogus-score failure.",
    "area": "Drafts",
-   "due": "2026-09-21",
+   "due": "2026-09-28",
    "priority": "P0",
    "priority_reason": "Asad's gauge bands and abstain state (N2-AS-06 23 Sep, N2-AS-08 24 Sep) block on it; gate 25 Sep",
    "depends_on": [
@@ -6631,7 +6631,7 @@ window.LAUNCH_DATA = {
    "what": "Build the feed/aggregate endpoints the Today screen reads: next-move hero, moves checklist, typed feed cards (crisis, opportunity, signal, prediction, win) and setup pill state, all filterable by page_id per the multi-page model.",
    "why": "Asad's Today screen ships on the live API this sprint; without these endpoints the daily-loop demo runs on mocks.",
    "area": "Today",
-   "due": "2026-09-18",
+   "due": "2026-09-25",
    "priority": "P1",
    "priority_reason": "Asad builds Today against the mock layer from N1-MT-06 and switches per endpoint; the 25 Sep gate criterion is the live draft score (N2-MT-01/13), not Today. Slack to the sprint end.",
    "depends_on": [
@@ -6661,7 +6661,7 @@ window.LAUNCH_DATA = {
    "what": "Build detector to engine to in-app plus SES email on SQS with a real dead-letter queue and a redrive path - not Netlify background functions, which cap at two fixed retries, 256 KB and no DLQ. Run the consumer as a worker in the same image and pipeline as FastAPI (a third deployable, not a third stack); Netlify or EventBridge triggers, AWS executes. Every message carries a dedupe key and every consumer is safe to run twice (N2-AS-17). Add unread-count endpoints for the topbar bells and a routing hook for quiet hours, severity override and digest-vs-immediate per Saad's notification timing policy.",
    "why": "An alert that silently vanishes in a queue is worse than no alert; the N3 inbox and bells read this pipeline.",
    "area": "Alerts",
-   "due": "2026-09-24",
+   "due": "2026-10-01",
    "priority": "P1",
    "priority_reason": "real risk with slack; N3 consumes it",
    "depends_on": [
@@ -6678,12 +6678,12 @@ window.LAUNCH_DATA = {
    "source": "muteeb",
    "acceptance": "A poisoned message lands in the DLQ and can be redriven, a duplicate delivery causes no second email, and the unread counts are correct after a redrive.",
    "checklist": [
-    "Agree the detector event schema with Faheem by 18 Sep and build the skeleton against a stub detector",
+    "Agree the detector event schema with Faheem by 25 Sep and build the skeleton against a stub detector",
     "Define the alert record and queue topology",
     "Implement retries with caps and the DLQ",
     "Send in-app and SES email from the engine output, with SES bounce and complaint notifications wired to an automatic suppression list checked before every send",
     "Add unread-count endpoints per tenant and page, plus the quiet-hours and severity routing hook",
-    "Swap in N2-FH-06 when it lands 23 Sep and re-run the end-to-end test"
+    "Swap in N2-FH-06 when it lands 30 Sep and re-run the end-to-end test"
    ]
   },
   {
@@ -6694,7 +6694,7 @@ window.LAUNCH_DATA = {
    "what": "Stand up the tenant-namespaced vector index (start on pgvector per the feature map; Jill's Pinecone tier decision lands in N3 and can swap the backend behind the same namespace interface), an ingest job that embeds per-tenant content with cost logged, and index versioning so a re-embed can be rolled back. No Q&A yet; that is N3.",
    "why": "Art-E needs N3 and N4 to mature; starting later was the number one capacity risk the critics flagged.",
    "area": "Art-E",
-   "due": "2026-09-20",
+   "due": "2026-09-27",
    "priority": "P1",
    "priority_reason": "real risk with slack; N3 Q&A depends on it",
    "depends_on": [
@@ -6722,9 +6722,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Data Deletion callback endpoint per Filza's spec",
    "what": "Implement Meta's Data Deletion callback: verify the signed request, cascade to token revocation and data delete, return a status URL and confirmation code, and log the request. Deploy it on a stable public URL for the app dashboard.",
-   "why": "Required for App Review on 25 Sep; forgetting it costs a 20-day rejection cycle.",
+   "why": "Required for App Review on 2 Oct; forgetting it costs a 20-day rejection cycle.",
    "area": "Meta",
-   "due": "2026-09-22",
+   "due": "2026-09-29",
    "priority": "P0",
    "priority_reason": "dated Meta submission on 25 Sep",
    "depends_on": [
@@ -6753,7 +6753,7 @@ window.LAUNCH_DATA = {
    "what": "Poll comments on posts active in the last 24-48 hours every ~5 minutes through the central Meta client, tracking rate-budget use per tenant. Emit fetched comments to the labelling path designed in N1.",
    "why": "KANG is hourly; a storm must not hide for 60 minutes against a 15-minute promise.",
    "area": "Alerts",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P0",
    "priority_reason": "the 15-minute promise and the N3 drill depend on it",
    "depends_on": [
@@ -6783,7 +6783,7 @@ window.LAUNCH_DATA = {
    "what": "Consume the benchmark rows Faheem lands in N2-FH-12 and surface them in the serving dashboards. (De-duplicated 3 Sep: was double-ticketed with N2-FH-12.)",
    "why": "It sits in the agreed P2 order after #19, #22 and #18; unserved benchmark rows leave the app comparing against nothing.",
    "area": "QA",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P2",
    "priority_reason": "Faheem's own agreed QA order tags #23 as P2 and no consumer inside N2 is dated on it; safe to slip a week.",
    "depends_on": [
@@ -6811,7 +6811,7 @@ window.LAUNCH_DATA = {
    "what": "Turn on snapshots, PITR and object versioning for the database, token store and object storage, then run restore drill #1 into a scratch environment with a stopwatch and record the time against the 2h RTO.",
    "why": "An untested backup is a hope, not a backup; the drill receipt is what the go/no-go accepts.",
    "area": "Ops",
-   "due": "2026-09-24",
+   "due": "2026-10-01",
    "priority": "P1",
    "priority_reason": "real risk with slack; drill #2 in N5 builds on it",
    "depends_on": [
@@ -6840,7 +6840,7 @@ window.LAUNCH_DATA = {
    "what": "Implement the seam-1 design: fetched comments are labelled (sentiment, toxicity) on a live path so fetch plus label stays inside the 15-minute budget, with the backlog drain running separately. Measure end-to-end latency on staging and send Faheem the timing and where labelling sits.",
    "why": "Faheem needs the fast-lane timing by N2; polling fast is not labelling fast, and the N3 drill measures the whole chain.",
    "area": "Alerts",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P0",
    "priority_reason": "Faheem's stated N2 need and the N3 drill depend on it",
    "depends_on": [
@@ -6867,10 +6867,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Muteeb",
    "title": "Sit with Asad while he deploys and rolls back from the runbook alone",
-   "what": "Schedule a session where Asad performs one deploy and one rollback using only the runbook, on the production target if one exists by 25 Sep (per N2-AS-10) and otherwise on staging, with Muteeb watching but not touching. Time both, sign the receipt, and fix every gap the runbook shows.",
+   "what": "Schedule a session where Asad performs one deploy and one rollback using only the runbook, on the production target if one exists by 2 Oct (per N2-AS-10) and otherwise on staging, with Muteeb watching but not touching. Time both, sign the receipt, and fix every gap the runbook shows.",
    "why": "If Muteeb is sick in launch week, the product must still ship fixes.",
    "area": "Ops",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "real risk with slack",
    "depends_on": [
@@ -6885,7 +6885,7 @@ window.LAUNCH_DATA = {
    "source": "muteeb",
    "acceptance": "Asad completes a timed deploy and rollback unaided on the environment named in N2-AS-10, Muteeb signs the receipt, and the runbook is updated with the gaps found.",
    "checklist": [
-    "Agree the target environment with Asad (production if it exists by 25 Sep, else staging)",
+    "Agree the target environment with Asad (production if it exists by 2 Oct, else staging)",
     "Book the session with Asad",
     "Observe the deploy and rollback without intervening; time both",
     "Sign the receipt for Checklist 2 (code rollback tested N2)",
@@ -6896,11 +6896,11 @@ window.LAUNCH_DATA = {
    "id": "N2-MT-13",
    "sprint": "N2",
    "assignee": "Muteeb",
-   "title": "Gate Fri 25 Sep: live draft score on a pilot page, disconnect deletes data",
+   "title": "Gate Fri 2 Oct: live draft score on a pilot page, disconnect deletes data",
    "what": "Support the N2 gate demo: a draft scored live on a pilot page through the production-grade endpoint, then connect, disconnect and show the page's data is gone via the revocation cascade.",
    "why": "The gate proves the daily loop and the deletion promise on the day Meta is submitted.",
    "area": "Auth",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P0",
    "priority_reason": "dated Friday gate",
    "depends_on": [
@@ -6915,7 +6915,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "muteeb",
-   "acceptance": "Both demos are performed live on 25 Sep and recorded as passed.",
+   "acceptance": "Both demos are performed live on 2 Oct and recorded as passed.",
    "checklist": [
     "Rehearse on staging with a pilot page",
     "Demo the live score with drivers and abstain state",
@@ -6926,10 +6926,10 @@ window.LAUNCH_DATA = {
   {
    "id": "N2-MT-14",
    "title": "Meta dashboard plumbing: policy URLs, redirect URIs, reviewer test tenant",
-   "what": "With Asad, make the Meta app dashboard reviewer-ready for the 25 Sep submission: register the Data Deletion callback URL from N2-MT-06; make the privacy, ToS and deletion-instruction URLs resolve from the dashboard fields; make OAuth redirect URIs and SSL consistent between the dashboard and staging/production; and create a reviewer tenant with working credentials plus a populated test page (pilot-like content on which every requested read-only permission can be exercised and screencast). Hand the tenant, credentials and URL list to Saad for the package.",
+   "what": "With Asad, make the Meta app dashboard reviewer-ready for the 2 Oct submission: register the Data Deletion callback URL from N2-MT-06; make the privacy, ToS and deletion-instruction URLs resolve from the dashboard fields; make OAuth redirect URIs and SSL consistent between the dashboard and staging/production; and create a reviewer tenant with working credentials plus a populated test page (pilot-like content on which every requested read-only permission can be exercised and screencast). Hand the tenant, credentials and URL list to Saad for the package.",
    "why": "Checklist 1 puts this on Muteeb/Asad and a reviewer who cannot log in, hits a non-resolving policy URL or a redirect mismatch is a 20-day rejection cycle; N2-SD-04 only verifies what exists.",
    "area": "Meta",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P0",
    "depends_on": [
     "N2-MT-06",
@@ -6944,13 +6944,13 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "plan",
-   "acceptance": "On 23 Sep Saad's package check 'callback, privacy, ToS, deletion URLs and redirect URIs resolve; reviewer credentials tested' passes using the tenant, credentials and URLs Muteeb registered, and Asad has recorded at least one screencast on that tenant.",
+   "acceptance": "On 30 Sep Saad's package check 'callback, privacy, ToS, deletion URLs and redirect URIs resolve; reviewer credentials tested' passes using the tenant, credentials and URLs Muteeb registered, and Asad has recorded at least one screencast on that tenant.",
    "checklist": [
     "Register the deletion callback URL and the three policy URLs in the app dashboard and confirm each resolves over HTTPS",
     "Align OAuth redirect URIs and SSL between dashboard, staging and production",
     "Create the reviewer tenant and populated test page; store credentials in the Meta package folder",
     "Walk each requested permission on the reviewer tenant with Asad and fix anything a reviewer could not reproduce",
-    "Hand the URL list, tenant and credentials to Saad by 23 Sep"
+    "Hand the URL list, tenant and credentials to Saad by 30 Sep"
    ],
    "sprint": "N2",
    "assignee": "Muteeb",
@@ -6964,7 +6964,7 @@ window.LAUNCH_DATA = {
    "what": "Add the second callback the app dashboard requires: verify the signed_request, resolve the Facebook user and pages to tenant and page ids, revoke the stored tokens and mark those pages disconnected, then run the same cascade Filza's N2-FZ-02 spec defines for deletion (or record why deauthorize retains and deletion purges, so the privacy policy stays true). Register the URL in the dashboard with the deletion callback and log every call.",
    "why": "A user who removes the app from their Facebook settings never hits our disconnect flow; without this callback we keep live tokens and rows for a user who revoked us, which is both an App Review finding and a contradiction of the published privacy policy.",
    "area": "Meta",
-   "due": "2026-09-22",
+   "due": "2026-09-29",
    "priority": "P0",
    "priority_reason": "P0 - external clock: the dashboard field must be filled for the 25 Sep submission and it shares the N2-MT-06 build window.",
    "depends_on": [
@@ -6995,7 +6995,7 @@ window.LAUNCH_DATA = {
    "what": "Generate contract tests from both documents and run them on every PR: request and response schema validation per route, the error envelope shape, the required headers (version, idempotency, rate-limit), and a FastAPI-side test asserting the served schema equals the checked-in generated document. A route implemented but absent from the spec fails the build, and so does a spec change with no implementation. Report failures with the route and the field, not a diff dump.",
    "why": "Three backend owners and a generated client mean drift is silent until a screen breaks; a contract test is the only thing that makes the split safe at this team size.",
    "area": "QA",
-   "due": "2026-09-20",
+   "due": "2026-09-27",
    "priority": "P0",
    "priority_reason": "P0 - it protects every consumer of the generated client from 21 Sep, including the 25 Sep gate build.",
    "depends_on": [
@@ -7029,7 +7029,7 @@ window.LAUNCH_DATA = {
    "what": "Put per-tenant and per-route token buckets in front of the BFF and in front of FastAPI, with a tighter budget for the expensive routes (draft score, Art-E, Discovery) and a separate accounting of the Meta Graph call budget the fast-lane spends. Return the envelope's 429 with Retry-After and X-RateLimit-* headers so the front end can show a wait rather than an error, and log every limit hit with tenant and route so the N5 tuning has data.",
    "why": "Without limits one pilot's tab loop or one runaway retry can spend the Graph budget or the LLM quota for everybody, and the friendly-429 work in N5 has nothing to be friendly about.",
    "area": "Ops",
-   "due": "2026-09-24",
+   "due": "2026-10-01",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack in N2, but it must exist before pilots 4-5 join and before Art-E in N4.",
    "depends_on": [
@@ -7060,10 +7060,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Saad",
    "title": "Record the re-scoped crisis gate in the gate register",
-   "what": "Once Asad and Faheem set the crisis pass line from the hour-of-week measurement (5+ / 1-5 / <1 comments per hour branches), write it into the gate register no later than Fri 18 Sep, before Faheem's first threshold tune: the precision number, the page scope it applies to, a coverage floor or 'must catch N of Lewis's incidents' clause, and the clock definition comment-posted -> email-received including the live labelling step (seam 1).",
-   "why": "As written, a detector that alerts once a month could pass while missing every storm; and tuning against an unset gate cannot be judged at 9 Oct.",
+   "what": "Once Asad and Faheem set the crisis pass line from the hour-of-week measurement (5+ / 1-5 / <1 comments per hour branches), write it into the gate register no later than Fri 25 Sep, before Faheem's first threshold tune: the precision number, the page scope it applies to, a coverage floor or 'must catch N of Lewis's incidents' clause, and the clock definition comment-posted -> email-received including the live labelling step (seam 1).",
+   "why": "As written, a detector that alerts once a month could pass while missing every storm; and tuning against an unset gate cannot be judged at 16 Oct.",
    "area": "Alerts",
-   "due": "2026-09-18",
+   "due": "2026-09-25",
    "priority": "P1",
    "priority_reason": "The decision itself is Asad's with Faheem (CONTEXT); Saad's register entry is the record. Faheem's tuning does not wait on the PM entry, and the 9 Oct gate that reads it is three weeks away.",
    "depends_on": [
@@ -7094,9 +7094,9 @@ window.LAUNCH_DATA = {
    "assignee": "Saad",
    "title": "Acceptance one-pagers: Today and Drafts (pass/fail per state)",
    "what": "Write pass/fail acceptance for Today (hero, moves, card types, setup pill, per-page filter, empty/lag states) and Drafts (composer, gauge bands + abstain at the measured coverage, chip vocabulary from Faheem's attribution, minimum-text threshold, autosave). Each state gets a pass condition Asad can self-verify.",
-   "why": "Asad builds these from 14 Sep; acceptance written after the screen exists gets negotiated by the date.",
+   "why": "Asad builds these from 21 Sep; acceptance written after the screen exists gets negotiated by the date.",
    "area": "PM",
-   "due": "2026-09-16",
+   "due": "2026-09-23",
    "priority": "P1",
    "priority_reason": "Asad builds from the packs (delivered); the one-pager is the verification standard used at the end of the build (~23-25 Sep). Due 16 Sep gives a week of slack; nobody's date moves.",
    "depends_on": [
@@ -7125,7 +7125,7 @@ window.LAUNCH_DATA = {
    "what": "Run one decision meeting and write the policy: what happens when a storm fires at 2am (quiet hours, severity override, digest vs immediate, morning digest, what the user can configure, alerts logged during quiet hours), plus the timezone quiet hours are evaluated in (admin profile vs page-local) and how a DST change moves the boundary. Feed it to Muteeb's alerts pipeline, Faheem's crisis doc and Asad's N3 build.",
    "why": "The only unowned product decision in the plan; it decides whether 'caught in minutes' is a product claim or marketing copy.",
    "area": "Alerts",
-   "due": "2026-09-16",
+   "due": "2026-09-23",
    "priority": "P0",
    "priority_reason": "Blocks Muteeb's N2 engine rules and Asad's N3 Alerts/Settings build",
    "depends_on": [
@@ -7144,7 +7144,7 @@ window.LAUNCH_DATA = {
    "source": "saad",
    "acceptance": "A written policy exists, signed by Alex, and the Alerts/Settings acceptance lines reference it.",
    "checklist": [
-    "Book Alex + Lewis in one room by 15 Sep (Alex N2-AX-01 is dated 16 Sep)",
+    "Book Alex + Lewis in one room by 22 Sep (Alex N2-AX-01 is dated 23 Sep)",
     "Decide quiet hours default, severity override, digest vs immediate, user controls",
     "State that quiet-hour alerts are logged and surface in the morning digest",
     "Hand to Muteeb (engine), Faheem (crisis doc), Asad (Settings v1)",
@@ -7159,7 +7159,7 @@ window.LAUNCH_DATA = {
    "what": "Build the package: 'page analytics tool' narrative, permission-to-feature map (login, page identity, read-only analytics - each mapped to a built, demonstrable feature), reviewer credentials, a populated test page (with Muteeb/Asad), Asad's one-screencast-per-permission, and the dashboard plumbing check (deletion callback URL, privacy/ToS/deletion URLs resolve, redirect URIs + SSL).",
    "why": "The one gate we do not control; a missing callback or a mismatched screencast costs a 20-day cycle.",
    "area": "Meta",
-   "due": "2026-09-22",
+   "due": "2026-09-29",
    "priority": "P0",
    "priority_reason": "External clock: submission Fri 25 Sep with one safe rejection cycle",
    "depends_on": [
@@ -7174,7 +7174,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "saad",
-   "acceptance": "Package folder complete with every permission mapped, credentials tested, callback and policy URLs resolving, ready for sign-off on 23 Sep.",
+   "acceptance": "Package folder complete with every permission mapped, credentials tested, callback and policy URLs resolving, ready for sign-off on 30 Sep.",
    "checklist": [
     "Write the narrative in conservative language; no banned words (behavioural, influence, graph, viral)",
     "Map each permission to a feature and a screencast",
@@ -7191,7 +7191,7 @@ window.LAUNCH_DATA = {
    "what": "Before submitting, write responses to the top-3 rejection reasons (screencast/UI mismatch, unclear permission use, policy URL issues), the daily status-watch routine with a 24h response SLA, the weekly test-credential check, and re-brief the named backup on the final package.",
    "why": "Every idle day after a rejection is a day off the one safe cycle; the response pack must exist before the rejection arrives.",
    "area": "Meta",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P1",
    "priority_reason": "The three rejection responses are consumed on the first Meta decision (~15 Oct at the earliest) and the daily watch starts inside N2-SD-07 (kept P0). Three weeks of slack.",
    "depends_on": [
@@ -7220,7 +7220,7 @@ window.LAUNCH_DATA = {
    "what": "Spec the flow connect -> 'learning, never loading' -> first value in minutes with last-90-days-first ordering, setup pill states and the staged reveal. Name the single activation event (e.g. first insight viewed on own data) so Asad's KPI events and N4 funnel, Muteeb's priority queue and Faheem's ingest ordering all point at it.",
    "why": "First impressions decide pilot retention and one aha definition is what makes day-1 funnel numbers mean anything.",
    "area": "Onboarding",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P1",
    "priority_reason": "Real risk; consumed in N3 (Muteeb queue) and N4 (Asad flow) so slack exists",
    "depends_on": [
@@ -7246,11 +7246,11 @@ window.LAUNCH_DATA = {
    "id": "N2-SD-07",
    "sprint": "N2",
    "assignee": "Saad",
-   "title": "Get sign-offs and SUBMIT Meta App Review Fri 25 Sep",
-   "what": "Run Filza's narrative firewall review and Alex's line-by-line approval against the two-narratives doc, fix anything flagged, and submit on 25 Sep. Log the submission time and start the daily watch.",
-   "why": "One investor-deck phrase on a Meta surface can cost 20 days; the 25 Sep date is the last one that leaves a safe rejection cycle.",
+   "title": "Get sign-offs and SUBMIT Meta App Review Fri 2 Oct",
+   "what": "Run Filza's narrative firewall review and Alex's line-by-line approval against the two-narratives doc, fix anything flagged, and submit on 2 Oct. Log the submission time and start the daily watch.",
+   "why": "One investor-deck phrase on a Meta surface can cost 20 days; the 2 Oct date is the last one that leaves a safe rejection cycle.",
    "area": "Meta",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P0",
    "priority_reason": "Dated external deadline; gate says META SUBMITTED",
    "depends_on": [
@@ -7268,7 +7268,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "saad",
-   "acceptance": "Submission confirmed in the Meta dashboard on 25 Sep with the joint written sign-off filed.",
+   "acceptance": "Submission confirmed in the Meta dashboard on 2 Oct with the joint written sign-off filed.",
    "checklist": [
     "Filza firewall review complete with written sign-off",
     "Alex approval line-by-line filed",
@@ -7284,7 +7284,7 @@ window.LAUNCH_DATA = {
    "what": "Its own one-pager: what a page with 3 months of history and 40 comments sees on day one across Today, Drafts, Best Times, Health and Alerts, and where the eligibility floor sits (count floor >=10 for best times, 'building your baseline' for health, gauge abstain, no crisis baseline yet).",
    "why": "The worst reviews come from users who should never have been onboarded; the floors must be visible, not fake numbers.",
    "area": "Onboarding",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "Real risk; feeds N3-N4 builds with slack",
    "depends_on": [
@@ -7314,7 +7314,7 @@ window.LAUNCH_DATA = {
    "what": "Write pass/fail acceptance for Best Times (7x24 grid, #1 ring, count floor, page timezone, lookback window + self-selection note, sparse state) and Settings v1 (prefs, notifications per the timing policy, quiet hours, connected pages, data controls, delete/export reachable, consent).",
    "why": "Asad builds both in N3; acceptance must exist before the screens do.",
    "area": "PM",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "Best Times and Settings are Asad's N3 builds starting 28 Sep; the one-pager has a week of slack past its 25 Sep due date and is not a gate criterion.",
    "depends_on": [
@@ -7343,7 +7343,7 @@ window.LAUNCH_DATA = {
    "what": "With Lewis, commission 200 comments labelled blind under a shared rubric by labelers independent of the model authors. Sample from the pre-collapse historical comment corpus (~39k unlabelled), exclude the 25-29 Aug anomaly window, and record provenance from the start.",
    "why": "Agreement with DeepSeek is not accuracy; without this the N4 accuracy audit and the crisis toxicity fix have no human truth.",
    "area": "QA",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "Real risk; delivered N3, consumed N4, so slack exists",
    "depends_on": [
@@ -7372,9 +7372,9 @@ window.LAUNCH_DATA = {
    "assignee": "Saad",
    "title": "Design-QA pass on N2 surfaces + component-drift rule live",
    "what": "Sweep every surface shipped this sprint (landing, Today, Drafts, connect UI, auth screens) against the pack Looms and design-QA checklists; file drift as tickets sized for Asad. Publish the component-drift rule: inventions get folded back into the pack or logged as decisions.",
-   "why": "The packs stay the truth; unlogged inventions become the design debt the PM inherits after 10 Sep.",
+   "why": "The packs stay the truth; unlogged inventions become the design debt the PM inherits after 17 Sep.",
    "area": "Design",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "Real risk of drift; Saad absorbs sweeps after Rafeh left, slack inside the sprint",
    "depends_on": [
@@ -7402,7 +7402,7 @@ window.LAUNCH_DATA = {
    "what": "From Lewis's cohort-1 feedback, publish the first weekly digest: each item ranked (blocker / next sprint / betting table) and placed in the backlog. Repeat weekly through N6.",
    "why": "Feedback that is not ranked is noise, and the betting table needs an evidence column.",
    "area": "Pilots",
-   "due": "2026-09-27",
+   "due": "2026-10-04",
    "priority": "P2",
    "priority_reason": "Valuable, safe to slip a week",
    "depends_on": [
@@ -7427,11 +7427,11 @@ window.LAUNCH_DATA = {
    "id": "N2-SD-13",
    "sprint": "N2",
    "assignee": "Saad",
-   "title": "Agree the front-end review protocol with Asad, daily to 9 Oct",
-   "what": "Write and start the loop that keeps a new-to-the-codebase developer safe: a daily 30-minute PR review with Asad in the slot the pack review vacated on 10 Sep, running to the 9 Oct gate; a PR checklist (tokens only and no hard-coded colour or spacing, no business logic in components, no fetching in leaf components, every state from the states matrix present, keyboard and contrast basics, no new dependency without Asad); a size cap so no PR is unreviewable; and the escalation rule that anything touching auth, tenant scoping, deletion, consent or the Meta connect flow goes to Asad instead of being attempted.",
+   "title": "Agree the front-end review protocol with Asad, daily to 16 Oct",
+   "what": "Write and start the loop that keeps a new-to-the-codebase developer safe: a daily 30-minute PR review with Asad in the slot the pack review vacated on 17 Sep, running to the 16 Oct gate; a PR checklist (tokens only and no hard-coded colour or spacing, no business logic in components, no fetching in leaf components, every state from the states matrix present, keyboard and contrast basics, no new dependency without Asad); a size cap so no PR is unreviewable; and the escalation rule that anything touching auth, tenant scoping, deletion, consent or the Meta connect flow goes to Asad instead of being attempted.",
    "why": "Two developers now share one codebase for the first time nine weeks before a dated launch, and the one who is new owns the component library everything else renders through.",
    "area": "QA",
-   "due": "2026-09-15",
+   "due": "2026-09-22",
    "priority": "P0",
    "priority_reason": "P0 - it must exist before the first PR on 16 Sep; everything Saad ships passes through it.",
    "depends_on": [
@@ -7448,10 +7448,10 @@ window.LAUNCH_DATA = {
    "acceptance": "The checklist is written and every Saad PR merged in N2 shows a recorded Asad review against it before merge.",
    "checklist": [
     "Write the PR checklist and the size cap",
-    "Book the daily 30-minute slot through 9 Oct",
+    "Book the daily 30-minute slot through 16 Oct",
     "Write the escalation list: auth, tenant, deletion, consent, Meta",
     "Agree the definition of done for a surface",
-    "Review the protocol once at the 25 Sep gate and adjust"
+    "Review the protocol once at the 2 Oct gate and adjust"
    ],
    "source": "reconciler"
   },
@@ -7463,7 +7463,7 @@ window.LAUNCH_DATA = {
    "what": "Pick one empty or loading state from his own states matrix, implement it with existing library primitives against the mock layer, open a PR, take Asad's review and merge it to a preview deploy. No new components, no data fetching, no new dependency. The point is the loop, not the pixels: branch, CI, review, preview, merge.",
    "why": "Every later estimate for Saad's front-end work is a guess until one change has gone all the way through this repo's pipeline with his hands on it.",
    "area": "App core",
-   "due": "2026-09-16",
+   "due": "2026-09-23",
    "priority": "P0",
    "priority_reason": "P0 - it gates his component-library ownership on 21 Sep and every surface after it.",
    "depends_on": [
@@ -7494,7 +7494,7 @@ window.LAUNCH_DATA = {
    "what": "Take the library over from Asad's N1 bootstrap and extend it to what the N2-N3 screens need: cards, chips, gauge, KPI tiles, tables, sheets, bottom tab bar, toasts, form controls and the empty/loading/error/abstain state shells. Every component reads theme tokens only - no hard-coded colour, spacing, radius or type - and /kitchen-sink on staging shows every component in every state at both breakpoints. From here the component-drift rule is his to enforce in review: a screen may not fork a component.",
    "why": "Every surface either of them builds renders through these primitives; if the library forks per screen, the design QA sweeps and the WCAG audit turn into per-screen work in N4 and N5.",
    "area": "Design",
-   "due": "2026-09-21",
+   "due": "2026-09-28",
    "priority": "P0",
    "priority_reason": "P0 - blocks his own N3 surfaces and Asad's Today/Drafts polish; the drift rule is cheapest to set now.",
    "depends_on": [
@@ -7532,7 +7532,7 @@ window.LAUNCH_DATA = {
    "what": "Learn the generated TypeScript client and the per-route mock/live switch Muteeb documents, then add a fixture scenario for each state the matrix names: populated, thin page below the eligibility floor, ingest still running, low-signal abstain, upstream error, rate-limited, page revoked. Wire a scenario picker on staging so any surface can be opened in any state without waiting for real data.",
    "why": "Saad's surfaces land in N3-N4 while several endpoints are still mock; without fixtures per state, the empty and abstain states get invented at UAT, which is exactly where they cost the most.",
    "area": "App core",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P1",
    "priority_reason": "P1 - needed before the N3 surfaces, with a week of slack inside N2.",
    "depends_on": [
@@ -7563,10 +7563,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Alex",
    "title": "Start the Friday scope hammer (weekly cut-line check)",
-   "what": "Run a 30-minute Friday meeting from 18 Sep with Saad and Asad: what shipped, what is at risk, what moves down the cut order (Wins-lite, briefing card, Discovery breadth, Art-E memory depth, PWA polish; never crisis pipeline, tenant isolation, backups/rollback). Outcome is one written line per week; the first formal review is N3-AX-06 on 11 Oct.",
-   "why": "The hammer keeps N3+ honest; without a weekly cut decision scope grows until the 13 Nov freeze forces cuts by surprise.",
+   "what": "Run a 30-minute Friday meeting from 25 Sep with Saad and Asad: what shipped, what is at risk, what moves down the cut order (Wins-lite, briefing card, Discovery breadth, Art-E memory depth, PWA polish; never crisis pipeline, tenant isolation, backups/rollback). Outcome is one written line per week; the first formal review is N3-AX-06 on 18 Oct.",
+   "why": "The hammer keeps N3+ honest; without a weekly cut decision scope grows until the 20 Nov freeze forces cuts by surprise.",
    "area": "PM",
-   "due": "2026-09-18",
+   "due": "2026-09-25",
    "priority": "P1",
    "priority_reason": "Real risk with slack: the first swing costs nothing to miss, the fifth costs the freeze.",
    "depends_on": [
@@ -7579,11 +7579,11 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "The first scope-hammer note is written on Fri 18 Sep and the meeting recurs weekly in the calendar.",
+   "acceptance": "The first scope-hammer note is written on Fri 25 Sep and the meeting recurs weekly in the calendar.",
    "checklist": [
     "Create the recurring Friday invite",
     "Agenda template: shipped / at risk / cut-order move",
-    "Write the first note on 18 Sep",
+    "Write the first note on 25 Sep",
     "Store notes with the decisions calendar"
    ]
   },
@@ -7591,11 +7591,11 @@ window.LAUNCH_DATA = {
    "id": "N2-AX-03",
    "sprint": "N2",
    "assignee": "Alex",
-   "title": "Chase business verification to completion; escalate before 25 Sep",
-   "what": "Continue the 48h chase on Business Verification and escalate via Meta support / partner channels if it has not cleared by 18 Sep (14 days after submission), because the App Review package cannot go in on 25 Sep without it. Keep a log of every chase; if it is still pending on 23 Sep decide with Saad how the submission proceeds on the last possible day.",
-   "why": "It can stall 14+ days and gates the 25 Sep submission; an unverified business on 25 Sep pushes the whole rejection-loop math past freeze.",
+   "title": "Chase business verification to completion; escalate before 2 Oct",
+   "what": "Continue the 48h chase on Business Verification and escalate via Meta support / partner channels if it has not cleared by 25 Sep (14 days after submission), because the App Review package cannot go in on 2 Oct without it. Keep a log of every chase; if it is still pending on 30 Sep decide with Saad how the submission proceeds on the last possible day.",
+   "why": "It can stall 14+ days and gates the 2 Oct submission; an unverified business on 2 Oct pushes the whole rejection-loop math past freeze.",
    "area": "Meta",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P0",
    "priority_reason": "External clock gating the 25 Sep submission.",
    "depends_on": [
@@ -7607,12 +7607,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "plan",
-   "acceptance": "Business Verification shows verified before 25 Sep, or an escalation case is open with a dated log and Saad has the go-ahead decision.",
+   "acceptance": "Business Verification shows verified before 2 Oct, or an escalation case is open with a dated log and Saad has the go-ahead decision.",
    "checklist": [
     "Keep the 48h chase log",
-    "Escalate on 18 Sep if still pending",
+    "Escalate on 25 Sep if still pending",
     "Re-confirm legal-name match if Meta queries it",
-    "Status to Saad on 23 Sep",
+    "Status to Saad on 30 Sep",
     "Record outcome on the decisions calendar"
    ]
   },
@@ -7622,9 +7622,9 @@ window.LAUNCH_DATA = {
    "assignee": "Alex",
    "title": "Sign legal pack v1 (ToS, Privacy, DPA + sub-processors)",
    "what": "Read and sign Filza's legal pack v1: ToS, Privacy policy naming Meta API data and the deletion route, DPA with sub-processor list and change notice. Check the privacy policy uses page-analytics language only (Meta's reviewers read it) and that the deletion route matches Muteeb's Data Deletion callback. Sign before the Meta package is submitted and before pilots 1-5 sign as Testers.",
-   "why": "Filza leads, Alex signs; pilots sign against this pack and Meta reads the privacy policy, so an unsigned pack on 25 Sep stalls both.",
+   "why": "Filza leads, Alex signs; pilots sign against this pack and Meta reads the privacy policy, so an unsigned pack on 2 Oct stalls both.",
    "area": "Legal",
-   "due": "2026-09-24",
+   "due": "2026-10-01",
    "priority": "P0",
    "priority_reason": "Blocks the 25 Sep submission and pilot onboarding.",
    "depends_on": [
@@ -7655,7 +7655,7 @@ window.LAUNCH_DATA = {
    "what": "Go through Saad's submission package line by line against the two-narratives doc: 'page analytics tool' language only; banned words (behavioural intelligence, influence, network graph, viral optimisation) absent; each permission maps to a built, demonstrable feature; screencasts match the frozen consent UI; reviewer credentials and test page populated; Data Deletion, privacy and ToS URLs resolve. Give the joint written sign-off with Filza's narrative firewall review.",
    "why": "Investor language reaching Meta's reviewers is a rejection we chose, and one rejection costs the only safe cycle before freeze.",
    "area": "Meta",
-   "due": "2026-09-24",
+   "due": "2026-10-01",
    "priority": "P0",
    "priority_reason": "The 25 Sep submission is the sprint's hard date.",
    "depends_on": [
@@ -7670,7 +7670,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "plan",
-   "acceptance": "A dated written approval from Alex and Filza is attached to the package and Saad submits on 25 Sep.",
+   "acceptance": "A dated written approval from Alex and Filza is attached to the package and Saad submits on 2 Oct.",
    "checklist": [
     "Banned-word pass on every Meta-facing string",
     "Permission-to-feature map check",
@@ -7684,10 +7684,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Alex",
    "title": "Publish the rejection-loop math and the last safe resubmission date",
-   "what": "Publish the Meta clock as arithmetic under BOTH readings of 'up to 20 days per decision', and state which one we are planning against. Calendar days: submit 25 Sep -> decision ~15 Oct -> resubmit ~17 Oct -> second decision ~6 Nov, 14 days before go/no-go, last safe resubmission ~31 Oct. Business days: 25 Sep + 20 working days = ~23 Oct -> resubmit ~26 Oct -> second decision ~23 Nov, AFTER the 20 Nov go/no-go, with a last safe resubmission of ~22 Oct that arrives before the first decision would - i.e. no safe cycle at all. Check Meta's current published wording, name the assumption, and set the dev-mode fallback trigger (N2-AX-08) off the worse reading. Add all dates to the decisions calendar with the rule that every week the submission slips moves the second decision a week.",
+   "what": "Publish the Meta clock as arithmetic under BOTH readings of 'up to 20 days per decision', and state which one we are planning against. Calendar days: submit 2 Oct -> decision ~22 Oct -> resubmit ~24 Oct -> second decision ~13 Nov, 14 days before go/no-go, last safe resubmission ~7 Nov. Business days: 2 Oct + 20 working days = ~30 Oct -> resubmit ~2 Nov -> second decision ~30 Nov, AFTER the 27 Nov go/no-go, with a last safe resubmission of ~29 Oct that arrives before the first decision would - i.e. no safe cycle at all. Check Meta's current published wording, name the assumption, and set the dev-mode fallback trigger (N2-AX-08) off the worse reading. Add all dates to the decisions calendar with the rule that every week the submission slips moves the second decision a week.",
    "why": "Every idle day now costs buffer; a date nobody has computed becomes a surprise in N4.",
    "area": "Meta",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P0",
    "priority_reason": "P0 - the 25 Sep submit-or-slip call, the descope trigger and the dev-mode fallback trigger all read off this arithmetic, so it must be published before we submit, not after.",
    "depends_on": [
@@ -7708,18 +7708,18 @@ window.LAUNCH_DATA = {
     "Compute both cycles from the planned submission timestamp",
     "Publish both last-safe-resubmission dates and name the planning assumption",
     "Set the dev-mode fallback trigger off the worse reading",
-    "Circulate to Saad, Asad and Filza before 25 Sep"
+    "Circulate to Saad, Asad and Filza before 2 Oct"
    ]
   },
   {
    "id": "N2-AX-07",
    "sprint": "N2",
    "assignee": "Alex",
-   "title": "Sign pricing on Jill's cost model (locked 25 Sep)",
-   "what": "Sign the pricing on Jill's cost baseline and pilot-x10 projection: tier(s), founding price, what pilots pay from the first invoice, and a placeholder for the commercial motion for non-pilot batch-1 signups (free-during-founding or trial, to be finalised with the 17 Nov notice). Record the numbers once so waitlist copy, directory listings, invoice template and the 17 Nov notice all copy from one source.",
-   "why": "Gates the waitlist copy, listings, invoices and the 17 Nov notice; unlocked pricing means five documents drift.",
+   "title": "Sign pricing on Jill's cost model (locked 2 Oct)",
+   "what": "Sign the pricing on Jill's cost baseline and pilot-x10 projection: tier(s), founding price, what pilots pay from the first invoice, and a placeholder for the commercial motion for non-pilot batch-1 signups (free-during-founding or trial, to be finalised with the 24 Nov notice). Record the numbers once so waitlist copy, directory listings, invoice template and the 24 Nov notice all copy from one source.",
+   "why": "Gates the waitlist copy, listings, invoices and the 24 Nov notice; unlocked pricing means five documents drift.",
    "area": "Finance",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P0",
    "priority_reason": "Named N2 gate item ('Pricing locked').",
    "depends_on": [
@@ -7739,7 +7739,7 @@ window.LAUNCH_DATA = {
    "checklist": [
     "Review the cost model",
     "Set tiers and the founding price",
-    "Note the batch-1 non-pilot motion as an open item for 17 Nov",
+    "Note the batch-1 non-pilot motion as an open item for 24 Nov",
     "Sign and date",
     "Circulate the sheet"
    ]
@@ -7748,11 +7748,11 @@ window.LAUNCH_DATA = {
    "id": "N2-AX-08",
    "sprint": "N2",
    "assignee": "Alex",
-   "title": "Write the dev-mode fallback plan for 1 Dec",
-   "what": "Write what 1 Dec looks like if Meta approval is still pending: pilots stay on Tester roles in dev-mode, public signups join a waitlist-in-waves rather than connecting live, and marketing claims only what the dev-mode product does. List the exact claims allowed and banned, the pilot messaging, and the trigger that turns the fallback on (Live Mode not granted by 20 Nov, decided at go/no-go).",
+   "title": "Write the dev-mode fallback plan for 8 Dec",
+   "what": "Write what 8 Dec looks like if Meta approval is still pending: pilots stay on Tester roles in dev-mode, public signups join a waitlist-in-waves rather than connecting live, and marketing claims only what the dev-mode product does. List the exact claims allowed and banned, the pilot messaging, and the trigger that turns the fallback on (Live Mode not granted by 27 Nov, decided at go/no-go).",
    "why": "A pre-decided fallback is a plan and an improvised one is a scramble; the waitlist copy, PH package and pilot messaging all need to know which claims are safe.",
    "area": "Launch",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "A document whose first consumer is Asad's waitlist copy (live 6 Oct); 10+ days of slack, trigger is decided at go/no-go.",
    "depends_on": [
@@ -7768,7 +7768,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "A written fallback plan with allowed/banned claims and the 20 Nov trigger is filed with the decisions calendar and acknowledged by Saad, Lewis and Filza, and it states the dev-mode Tester role limit against wave sizes so no wave is promised a connect Meta cannot honour.",
+   "acceptance": "A written fallback plan with allowed/banned claims and the 27 Nov trigger is filed with the decisions calendar and acknowledged by Saad, Lewis and Filza, and it states the dev-mode Tester role limit against wave sizes so no wave is promised a connect Meta cannot honour.",
    "checklist": [
     "Describe the dev-mode launch shape",
     "List allowed vs banned claims with Filza",
@@ -7782,10 +7782,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Alex",
    "title": "Confirm the Product Hunt hunter",
-   "what": "Confirm a named Product Hunt hunter in writing for the 1 Dec 08:01 launch. The plan's outer date is 30 Sep, which falls in N3, so treat 25 Sep as the working target. Share the date, the dev-mode fallback claims and the asset timeline (PH package N5, assets frozen N6, preview verified 30 Nov).",
+   "what": "Confirm a named Product Hunt hunter in writing for the 8 Dec 08:01 launch. The plan's outer date is 7 Oct, which falls in N3, so treat 2 Oct as the working target. Share the date, the dev-mode fallback claims and the asset timeline (PH package N5, assets frozen N6, preview verified 7 Dec).",
    "why": "4-6 weeks of PH lead time; without a hunter confirmed by end of September the N5 package has nobody to hand to.",
    "area": "Marketing",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P0",
    "priority_reason": "Plan-dated (by 30 Sep) with an external 4-6 week lead time; Saad's N5 PH package has no hand-off without it.",
    "depends_on": [
@@ -7798,7 +7798,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "The hunter has confirmed by email with the 1 Dec date and the PH page owner recorded.",
+   "acceptance": "The hunter has confirmed by email with the 8 Dec date and the PH page owner recorded.",
    "checklist": [
     "Shortlist hunters",
     "Send the date and a one-paragraph brief",
@@ -7811,11 +7811,11 @@ window.LAUNCH_DATA = {
    "id": "N2-JL-01",
    "sprint": "N2",
    "assignee": "Jill",
-   "title": "Newsletter #1 sent Tue 15 Sep as first SES warm-up volume",
-   "what": "Draft newsletter #1, get Alex's copy sign-off (dates read 1 December, not November), confirm with Filza that the existing pilot-waitlist list has marketing consent under PECR and that the footer carries a working unsubscribe and company particulars, and send it on Tue 15 Sep from the domain Muteeb took out of the SES sandbox in N1. Record sends, bounces, complaints and opens as the first warm-up data point.",
-   "why": "A dated marketing beat (15 Sep) and the first real volume on a cold SES account; skipping it means the 17 Nov notice and the 1 Dec queue email hit throttles or spam.",
+   "title": "Newsletter #1 sent Tue 22 Sep as first SES warm-up volume",
+   "what": "Draft newsletter #1, get Alex's copy sign-off (dates read 1 December, not November), confirm with Filza that the existing pilot-waitlist list has marketing consent under PECR and that the footer carries a working unsubscribe and company particulars, and send it on Tue 22 Sep from the domain Muteeb took out of the SES sandbox in N1. Record sends, bounces, complaints and opens as the first warm-up data point.",
+   "why": "A dated marketing beat (22 Sep) and the first real volume on a cold SES account; skipping it means the 24 Nov notice and the 8 Dec queue email hit throttles or spam.",
    "area": "Marketing",
-   "due": "2026-09-15",
+   "due": "2026-09-22",
    "priority": "P0",
    "priority_reason": "Dated deadline (15 Sep) and it starts the SES warm-up clock.",
    "depends_on": [
@@ -7830,12 +7830,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "Newsletter #1 went out on 15 Sep from the warmed domain with unsubscribe and particulars, and the send/bounce/complaint stats are logged.",
+   "acceptance": "Newsletter #1 went out on 22 Sep from the warmed domain with unsubscribe and particulars, and the send/bounce/complaint stats are logged.",
    "checklist": [
     "Confirm list consent status with Filza; remove anyone without consent",
     "Draft copy; Alex signs off; date reads 1 December",
     "Set up the send from the warmed domain with Muteeb (SES or the warmed sender), test to internal addresses",
-    "Send 15 Sep; capture SES stats (sent, bounce, complaint, open)",
+    "Send 22 Sep; capture SES stats (sent, bounce, complaint, open)",
     "File stats as warm-up data point #1"
    ]
   },
@@ -7845,9 +7845,9 @@ window.LAUNCH_DATA = {
    "assignee": "Jill",
    "title": "Support inbox live with a written first-response standard",
    "what": "Stand up support@ on the company domain (shared inbox, SPF/DKIM-aligned replies so they do not land in spam), a triage label set (bug, data question, pilot, billing, legal/DSAR), and a written first-response standard: hours covered, first-response target, and escalation to Muteeb/Asad/Lewis for infra, app and pilot issues. Publish it internally; Saad's macros (N4-N5) and Asad's N5 site/in-app support expectation reuse it verbatim, and pilots 1-5 get the address as they onboard.",
-   "why": "A dead support@ at launch is a broken promise; the first pilots arrive from 17 Sep and the DSAR intake in N4 also lands here.",
+   "why": "A dead support@ at launch is a broken promise; the first pilots arrive from 24 Sep and the DSAR intake in N4 also lands here.",
    "area": "Ops",
-   "due": "2026-09-18",
+   "due": "2026-09-25",
    "priority": "P1",
    "priority_reason": "Real risk with slack: pilots onboard this sprint but Lewis is their concierge; the standard must exist before Asad publishes it in N5.",
    "depends_on": [
@@ -7876,11 +7876,11 @@ window.LAUNCH_DATA = {
    "id": "N2-JL-03",
    "sprint": "N2",
    "assignee": "Jill",
-   "title": "Cost model for the 25 Sep pricing decision handed to Alex",
-   "what": "Turn the N1 baseline and Asad's consolidated bottom-up cost per page (N1-AS-14, non-LLM) into a per-page / per-tenant unit-cost model: fixed monthly platform cost, variable cost per connected page (ingest, storage, scoring, hosting) taken from the measured component costs rather than re-derived, Art-E cost per active user under the 60% cache-hit target with a sensitivity row at 30%, and margin at candidate price points for 5 pilots and for 100 batch-1 pages. Mark every line as measured or estimated so the N4 re-cost can be compared against it line by line. Hand it to Alex by Mon 21 Sep with assumptions flagged so the 25 Sep signature is on numbers.",
-   "why": "Alex's N2 task is 'pricing signed 25 Sep on Jill's cost model'; no model means no locked price, and the waitlist copy, listings, invoices and the 17 Nov notice all key off that price.",
+   "title": "Cost model for the 2 Oct pricing decision handed to Alex",
+   "what": "Turn the N1 baseline and Asad's consolidated bottom-up cost per page (N1-AS-14, non-LLM) into a per-page / per-tenant unit-cost model: fixed monthly platform cost, variable cost per connected page (ingest, storage, scoring, hosting) taken from the measured component costs rather than re-derived, Art-E cost per active user under the 60% cache-hit target with a sensitivity row at 30%, and margin at candidate price points for 5 pilots and for 100 batch-1 pages. Mark every line as measured or estimated so the N4 re-cost can be compared against it line by line. Hand it to Alex by Mon 28 Sep with assumptions flagged so the 2 Oct signature is on numbers.",
+   "why": "Alex's N2 task is 'pricing signed 2 Oct on Jill's cost model'; no model means no locked price, and the waitlist copy, listings, invoices and the 24 Nov notice all key off that price.",
    "area": "Finance",
-   "due": "2026-09-21",
+   "due": "2026-09-28",
    "priority": "P0",
    "priority_reason": "Blocks Alex's dated pricing decision (N2 gate: pricing locked 25 Sep).",
    "depends_on": [
@@ -7899,14 +7899,14 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "plan",
-   "acceptance": "Alex has a cost model showing fixed cost, cost per page, Art-E cost per active user (with cache-hit sensitivity) and margin per candidate price, and signs pricing on it 25 Sep.",
+   "acceptance": "Alex has a cost model showing fixed cost, cost per page, Art-E cost per active user (with cache-hit sensitivity) and margin per candidate price, and signs pricing on it 2 Oct.",
    "checklist": [
     "Start from Asad's consolidated non-LLM cost per page and Jill's baseline",
     "Split lines into fixed vs per-page variable and mark each measured or estimated",
     "Add the Art-E line at 60% cache-hit and a 30% sensitivity row",
     "Compute margin at three candidate price points for 5 pilots and 100 pages",
     "Review assumptions with Asad, Muteeb and Faheem",
-    "Deliver to Alex by 21 Sep; record the price he signs on 25 Sep"
+    "Deliver to Alex by 28 Sep; record the price he signs on 2 Oct"
    ]
   },
   {
@@ -7914,10 +7914,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Jill",
    "title": "SES warm-up volume plan through the autumn (with Muteeb)",
-   "what": "With Muteeb, write the send schedule that ramps the SES domain from newsletter #1 to launch volume: newsletter cadence, transactional and alert email as pilots connect, the 17 Nov founding-pricing notice and the 1 Dec waitlist queue email (500 target), with per-week volume ceilings, bounce/complaint thresholds that pause the ramp, and who watches the SES reputation dashboard. Jill owns the schedule and list sizes; Muteeb owns the sending configuration and warm-up through November.",
-   "why": "Cold SES throttles launch email; a crisis alert or the 1 Dec queue email that lands in spam is a crisis missed and a launch audience lost.",
+   "what": "With Muteeb, write the send schedule that ramps the SES domain from newsletter #1 to launch volume: newsletter cadence, transactional and alert email as pilots connect, the 24 Nov founding-pricing notice and the 8 Dec waitlist queue email (500 target), with per-week volume ceilings, bounce/complaint thresholds that pause the ramp, and who watches the SES reputation dashboard. Jill owns the schedule and list sizes; Muteeb owns the sending configuration and warm-up through November.",
+   "why": "Cold SES throttles launch email; a crisis alert or the 8 Dec queue email that lands in spam is a crisis missed and a launch audience lost.",
    "area": "Ops",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "Real risk with slack: the ramp has weeks to run, but only if the schedule exists now.",
    "depends_on": [
@@ -7932,9 +7932,9 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "A dated send schedule to 1 Dec with weekly volume ceilings and pause thresholds is agreed with Muteeb and the SES reputation dashboard has a named watcher.",
+   "acceptance": "A dated send schedule to 8 Dec with weekly volume ceilings and pause thresholds is agreed with Muteeb and the SES reputation dashboard has a named watcher.",
    "checklist": [
-    "List every planned send to 1 Dec with expected volume",
+    "List every planned send to 8 Dec with expected volume",
     "Set weekly ceilings and bounce/complaint pause thresholds with Muteeb",
     "Name the reputation-dashboard watcher and the weekly check",
     "Add the schedule to the marketing calendar with Alex",
@@ -7946,10 +7946,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Jill",
    "title": "Commercial inputs to Filza's pilot terms schedule: price, cadence, VAT",
-   "what": "Give Filza the commercial content for the terms schedule that sits alongside pilot agreement v1: founding price and lock duration from Alex's 25 Sep decision, billing cadence, payment terms and method (manual invoicing, no Stripe at launch), VAT line, start date, and what 'paying pilot' means at go/no-go. Check the wording matches the landing page so one price appears everywhere.",
+   "what": "Give Filza the commercial content for the terms schedule that sits alongside pilot agreement v1: founding price and lock duration from Alex's 2 Oct decision, billing cadence, payment terms and method (manual invoicing, no Stripe at launch), VAT line, start date, and what 'paying pilot' means at go/no-go. Check the wording matches the landing page so one price appears everywhere.",
    "why": "Invoicing in N6 needs paper that exists in Sep; Filza countersigns all 5 pilot agreements before UAT in N5 and cannot do that against blank commercial terms.",
    "area": "Legal",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "Real risk with slack: countersigning is N5, but the terms need the 25 Sep price and Filza's review time.",
    "depends_on": [
@@ -7968,9 +7968,9 @@ window.LAUNCH_DATA = {
    "acceptance": "A commercial schedule with price, lock duration, cadence, payment terms, VAT and start date is attached to Filza's pilot agreement v1 and reviewed by Alex.",
    "checklist": [
     "Agree the schedule structure with Filza",
-    "Fill price and lock duration from the 25 Sep decision",
+    "Fill price and lock duration from the 2 Oct decision",
     "Define payment terms, method and the 'paying pilot' definition",
-    "Check wording against the landing page and the planned 17 Nov notice",
+    "Check wording against the landing page and the planned 24 Nov notice",
     "Attach to pilot agreement v1 and send to Lewis for conversations"
    ]
   },
@@ -7982,7 +7982,7 @@ window.LAUNCH_DATA = {
    "what": "Build the invoice template: numbering scheme, company registration number and registered address per the Companies Act, VAT number and treatment, payment terms and bank details block, line items matching the commercial schedule, pilot reference and period. Check it against Filza's requirements and produce one sample invoice.",
    "why": "Filza's N5 task puts Companies Act particulars on invoices and Checklist 4 says invoices must match terms; a template that appears in November gets built in a hurry and wrong.",
    "area": "Finance",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "Real risk with slack: first used in the N5 dry run, but its legal particulars need Filza now.",
    "depends_on": [
@@ -8010,11 +8010,11 @@ window.LAUNCH_DATA = {
    "id": "N2-LW-01",
    "sprint": "N2",
    "assignee": "Lewis",
-   "title": "Application form live 17 Sep and inbound triage within 48h",
-   "what": "Switch the form live with Asad on 17 Sep, verify one live submission and the auto-reply, then triage every application within 48h against the cohort-2 criteria (non-declining page, admin role, archetype gap). Log applicants in the roster sheet as candidates for pilots 6-10 or the waitlist and give Alex a weekly count.",
-   "why": "The 17 Sep marketing beat sends people to the form; a dead or untriaged form burns the first public ask.",
+   "title": "Application form live 24 Sep and inbound triage within 48h",
+   "what": "Switch the form live with Asad on 24 Sep, verify one live submission and the auto-reply, then triage every application within 48h against the cohort-2 criteria (non-declining page, admin role, archetype gap). Log applicants in the roster sheet as candidates for pilots 6-10 or the waitlist and give Alex a weekly count.",
+   "why": "The 24 Sep marketing beat sends people to the form; a dead or untriaged form burns the first public ask.",
    "area": "Pilots",
-   "due": "2026-09-17",
+   "due": "2026-09-24",
    "priority": "P0",
    "priority_reason": "Dated marketing beat",
    "depends_on": [
@@ -8028,9 +8028,9 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "Form public on 17 Sep, one live submission verified, and every application answered within 48h through 27 Sep.",
+   "acceptance": "Form public on 24 Sep, one live submission verified, and every application answered within 48h through 4 Oct.",
    "checklist": [
-    "Go-live check with Asad on 17 Sep",
+    "Go-live check with Asad on 24 Sep",
     "Live test submission and auto-reply",
     "Apply the triage rule within 48h of each application",
     "Add candidates to the roster",
@@ -8045,7 +8045,7 @@ window.LAUNCH_DATA = {
    "what": "Compile the pilot answers from the baseline calls (what should happen when a storm fires at 2am, who else should get it, how many alerts a week is too many, which quiet hours they would set) into a one-page evidence note and bring it to Saad's one-hour policy session with Alex. Saad owns and writes the policy (quiet-hours default, severity override, digest vs immediate, what the pilot can configure, what quiet-hours alerts still log for the morning digest); Lewis's job is that the pilot voice is in the room and attached to the signed decision.",
    "why": "Saad flags it as the only unowned product decision in the plan and asks for Alex and Lewis in the room; Muteeb's N2 alerts skeleton and Asad's N3 inbox and Settings quiet-hours build both need it written.",
    "area": "Alerts",
-   "due": "2026-09-16",
+   "due": "2026-09-23",
    "priority": "P1",
    "priority_reason": "Alex's N2-AX-01 owns the P0 decision; Lewis's evidence note has slack and the session can run on the baseline-call notes.",
    "depends_on": [
@@ -8060,7 +8060,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "saad",
-   "acceptance": "The policy is signed by Alex and Saad by 18 Sep with Lewis's one-page pilot evidence note attached.",
+   "acceptance": "The policy is signed by Alex and Saad by 25 Sep with Lewis's one-page pilot evidence note attached.",
    "checklist": [
     "Compile pilot answers from the baseline calls into a one-page note",
     "Attend the session with Alex and Saad",
@@ -8073,10 +8073,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Lewis",
    "title": "Onboard pilots 1-5 as Testers on dev-mode connect",
-   "what": "Once Asad's multi-page connect UI is on staging, screen-share with each of pilots 1-5 to log in, accept the Tester role, connect 3-5 pages and confirm connection-health shows green. Pilot 1 (a non-declining page) is connected by 22 Sep and nominated as the 25 Sep demo page. Have each pilot sign the pilot agreement v1 when Filza issues it, and log every friction point in the connect step for Saad's onboarding spec.",
+   "what": "Once Asad's multi-page connect UI is on staging, screen-share with each of pilots 1-5 to log in, accept the Tester role, connect 3-5 pages and confirm connection-health shows green. Pilot 1 (a non-declining page) is connected by 29 Sep and nominated as the 2 Oct demo page. Have each pilot sign the pilot agreement v1 when Filza issues it, and log every friction point in the connect step for Saad's onboarding spec.",
    "why": "Real pages on the real product while Meta reviews is the insulation strategy; the gate demo needs at least one pilot page with real data.",
    "area": "Pilots",
-   "due": "2026-09-24",
+   "due": "2026-10-01",
    "priority": "P0",
    "priority_reason": "The 25 Sep gate needs a draft scored live on a pilot page",
    "depends_on": [
@@ -8093,12 +8093,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "plan",
-   "acceptance": "Five pilots have connected pages showing real data on staging by 24 Sep, with pilot 1 live by 22 Sep and named as the gate-demo page.",
+   "acceptance": "Five pilots have connected pages showing real data on staging by 1 Oct, with pilot 1 live by 29 Sep and named as the gate-demo page.",
    "checklist": [
     "Confirm Tester roles accepted for pilots 1-5",
     "Schedule five onboarding calls",
-    "Pilot 1 connected by 22 Sep and nominated for the demo",
-    "Pilots 2-5 connected by 24 Sep",
+    "Pilot 1 connected by 29 Sep and nominated for the demo",
+    "Pilots 2-5 connected by 1 Oct",
     "Pilot agreement v1 signed or acknowledged per pilot",
     "Friction log to Saad"
    ]
@@ -8111,7 +8111,7 @@ window.LAUNCH_DATA = {
    "what": "Run the two weekly calls with the connected pilots, capture what they saw on Today and the gauge, rank issues by severity and hand them to Saad each Friday for his digest. Produce the fix-then-invite list: the defects that must be fixed before pilots 6-10 are invited in N3, agreed with Saad and Asad.",
    "why": "Feedback that is not ranked is noise; inviting cohort 2 onto known-broken flows burns five relationships.",
    "area": "Pilots",
-   "due": "2026-09-27",
+   "due": "2026-10-04",
    "priority": "P1",
    "priority_reason": "Feeds Saad's digest and gates the cohort-2 invite, but nothing external is dated",
    "depends_on": [
@@ -8123,7 +8123,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "Two weekly feedback sheets delivered to Saad and a written fix-then-invite list agreed with Saad and Asad by 27 Sep.",
+   "acceptance": "Two weekly feedback sheets delivered to Saad and a written fix-then-invite list agreed with Saad and Asad by 4 Oct.",
    "checklist": [
     "Calls in week 1 and week 2 of N2",
     "Severity ranking on the feedback sheet",
@@ -8139,7 +8139,7 @@ window.LAUNCH_DATA = {
    "what": "One page every Meta-facing author uses: the approved 'page analytics tool' framing, permission-to-feature language, and the banned list (behavioural intelligence, influence, network graph, viral optimisation, any investor-deck phrase from the two-narratives doc) with substitutions. Applies to app dashboard fields, screencast narration, reviewer notes, the privacy policy and the marketing site. Circulate to Saad, Asad, Alex and the named Meta backup before the package is written.",
    "why": "Saad writes the package in N2 week A; a rulebook after the fact means rewriting it, and one investor phrase on a Meta surface can cost 20 days.",
    "area": "Meta",
-   "due": "2026-09-16",
+   "due": "2026-09-23",
    "priority": "P0",
    "priority_reason": "Blocks Saad's package authoring; external clock 25 Sep",
    "depends_on": [
@@ -8167,10 +8167,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Filza",
    "title": "Finalise the deletion callback spec; match the privacy deletion route",
-   "what": "Close Muteeb's open questions on the N1 draft and freeze the spec by Wed 16 Sep so his week B build (21-27 Sep) starts on a fixed target, then make sure the deletion route in Privacy v1 (disconnect in Settings, the Meta callback, the privacy@ route) is exactly what the endpoint will do. Confirm with Muteeb the confirmation-code and status-URL format Meta expects and the data-deletion-instructions URL for the app dashboard. Witnessing the built endpoint is N4-FZ-05.",
-   "why": "Muteeb builds it 21-27 Sep and the 25 Sep submission needs the callback live and the privacy policy describing it truthfully.",
+   "what": "Close Muteeb's open questions on the N1 draft and freeze the spec by Wed 23 Sep so his week B build (28-11 Oct) starts on a fixed target, then make sure the deletion route in Privacy v1 (disconnect in Settings, the Meta callback, the privacy@ route) is exactly what the endpoint will do. Confirm with Muteeb the confirmation-code and status-URL format Meta expects and the data-deletion-instructions URL for the app dashboard. Witnessing the built endpoint is N4-FZ-05.",
+   "why": "Muteeb builds it 28-11 Oct and the 2 Oct submission needs the callback live and the privacy policy describing it truthfully.",
    "area": "Meta",
-   "due": "2026-09-17",
+   "due": "2026-09-24",
    "priority": "P0",
    "priority_reason": "Blocks Muteeb's N2 week B build and the 25 Sep submission",
    "depends_on": [
@@ -8185,7 +8185,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "muteeb",
-   "acceptance": "Frozen, versioned spec signed by Filza and Muteeb by 17 Sep, and the Privacy v1 deletion paragraph matches it word for word.",
+   "acceptance": "Frozen, versioned spec signed by Filza and Muteeb by 24 Sep, and the Privacy v1 deletion paragraph matches it word for word.",
    "checklist": [
     "Answer Muteeb's open questions in writing",
     "Freeze the spec and version it",
@@ -8201,7 +8201,7 @@ window.LAUNCH_DATA = {
    "what": "Apply the standing rule to every vendor already touching customer content and every one planned: the labelling tiers (haiku_label, DeepSeek used for comment agreement checks), the Art-E cascade (cache, cheap, frontier), embeddings and the vector index, and any evaluation tooling. For each, confirm contractual no-training and retention terms plus data location and record a sub-processor row; anything that fails is not used for customer content. Publish the one-line rule Faheem and Muteeb apply before adding a vendor.",
    "why": "The sub-processor list in pack v1 must be true, and comments are now the best corpus so labelling volume is rising; a training-tier vendor is a broken promise in the privacy policy.",
    "area": "Legal",
-   "due": "2026-09-22",
+   "due": "2026-09-29",
    "priority": "P1",
    "priority_reason": "Feeds the N2 sub-processor list; vendors are already in use so a fail forces a swap",
    "depends_on": [
@@ -8229,10 +8229,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Filza",
    "title": "Draft pilot agreement v1: AI-guidance disclaimer + liability cap",
-   "what": "The agreement each pilot signs before using the product as a Tester: AI-guidance disclaimer (scores, alerts and Art-E answers are decision support, no guarantee of reach), liability cap, Tester-role and dev-mode terms, feedback and confidentiality, and a pointer to the DPA. Give Lewis a signable version by 17 Sep, the day the application form goes live, so pilots 1-5 sign as they are onboarded.",
+   "what": "The agreement each pilot signs before using the product as a Tester: AI-guidance disclaimer (scores, alerts and Art-E answers are decision support, no guarantee of reach), liability cap, Tester-role and dev-mode terms, feedback and confidentiality, and a pointer to the DPA. Give Lewis a signable version by 24 Sep, the day the application form goes live, so pilots 1-5 sign as they are onboarded.",
    "why": "Lewis onboards pilots 1-5 this sprint; pilots on the real product without paper is exposure, and the same text must be countersigned by all five before N5 UAT.",
    "area": "Pilots",
-   "due": "2026-09-17",
+   "due": "2026-09-24",
    "priority": "P0",
    "priority_reason": "Pilots are onboarded as Testers from 17 Sep",
    "depends_on": [
@@ -8244,7 +8244,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "plan",
-   "acceptance": "Lewis holds a signable pilot agreement v1 on 17 Sep and the first pilot signature is on file.",
+   "acceptance": "Lewis holds a signable pilot agreement v1 on 24 Sep and the first pilot signature is on file.",
    "checklist": [
     "Draft the AI-guidance disclaimer consistent with the ToS draft",
     "Set the liability cap and Tester/dev-mode terms",
@@ -8260,7 +8260,7 @@ window.LAUNCH_DATA = {
    "what": "Take the N1 drafts through Alex's review to signed v1, naming Meta API data, the multi-page model, the deletion route and the sub-processors, then publish both at stable URLs linked from the landing footer so Saad can paste privacy, terms and data-deletion-instructions URLs into the Meta app dashboard. Version and date on each page.",
    "why": "Meta's reviewers read the privacy policy at submission; placeholder or broken URLs are a rejection reason.",
    "area": "Legal",
-   "due": "2026-09-22",
+   "due": "2026-09-29",
    "priority": "P0",
    "priority_reason": "External clock: URLs must resolve before the 25 Sep submission",
    "depends_on": [
@@ -8293,7 +8293,7 @@ window.LAUNCH_DATA = {
    "what": "Finish the processor DPA pilots sign: processing description (read-only page analytics, scoring, alerts, Discovery cohorts, Art-E), the sub-processor list from the vendor gate (AWS, auth vendor, SES, vector index, LLM tiers, waitlist tool, Sentry, status page), the change-notice clause, a security-measures summary (KMS, RLS, backups), breach notification timing and deletion/return terms. Hand to Lewis for pilot signature.",
    "why": "Pack v1 is the N2 deliverable; a missing DPA stalls pilot sign-up and later the invoices.",
    "area": "Legal",
-   "due": "2026-09-23",
+   "due": "2026-09-30",
    "priority": "P1",
    "priority_reason": "Nothing in the 25 Sep submission needs the DPA; Tester onboarding runs on pilot agreement v1 (N2-FZ-04); DPA signatures are due before UAT (N5-FZ-01).",
    "depends_on": [
@@ -8323,7 +8323,7 @@ window.LAUNCH_DATA = {
    "what": "Read every word Meta will see: app dashboard fields, permission-to-feature map, reviewer notes and credentials text, screencast narration, populated test-page copy, and the privacy and terms URLs. Check against the rulebook, mark each change, re-read the fixed version, and sign a joint written sign-off with Saad and Alex dated before submission.",
    "why": "The one gate we do not control; a single investor-deck phrase can cost a 20-day cycle and only one safe rejection cycle fits before freeze.",
    "area": "Meta",
-   "due": "2026-09-24",
+   "due": "2026-10-01",
    "priority": "P0",
    "priority_reason": "Dated: submission Fri 25 Sep",
    "depends_on": [
@@ -8338,7 +8338,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N2",
    "source": "plan",
-   "acceptance": "A dated joint sign-off (Filza, Saad, Alex) exists for the exact package submitted on 25 Sep.",
+   "acceptance": "A dated joint sign-off (Filza, Saad, Alex) exists for the exact package submitted on 2 Oct.",
    "checklist": [
     "Review every dashboard field and reviewer note against the rulebook",
     "Watch each screencast for narration and on-screen copy",
@@ -8351,10 +8351,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Filza",
    "title": "Write PECR consent wording for the waitlist and app signup",
-   "what": "Write the waitlist consent wording (what emails, how to unsubscribe, no pre-ticked box) for Asad's bought-waitlist integration (live 6 Oct), and specify marketing-email consent capture at app signup so the 17 Nov and 1 Dec emails are lawful. Rule on the existing Netlify Forms pilot-waitlist signups Asad will migrate: whether their consent covers the launch emails or a re-permission email is needed. Hand wording to Asad and Alex.",
-   "why": "Without consent captured now the 13 Oct list cannot lawfully be emailed on 17 Nov or 1 Dec.",
+   "what": "Write the waitlist consent wording (what emails, how to unsubscribe, no pre-ticked box) for Asad's bought-waitlist integration (live 13 Oct), and specify marketing-email consent capture at app signup so the 24 Nov and 8 Dec emails are lawful. Rule on the existing Netlify Forms pilot-waitlist signups Asad will migrate: whether their consent covers the launch emails or a re-permission email is needed. Hand wording to Asad and Alex.",
+   "why": "Without consent captured now the 20 Oct list cannot lawfully be emailed on 24 Nov or 8 Dec.",
    "area": "Waitlist",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "Waitlist integration is N3; wording must exist before Asad builds it",
    "depends_on": [
@@ -8381,9 +8381,9 @@ window.LAUNCH_DATA = {
    "assignee": "Filza",
    "title": "Run trademark clearance for ArtemisAI and Art-E",
    "what": "Run clearance searches (UKIPO, EUIPO, plus a common-law and web sweep) for ArtemisAI and Art-E in the software and SaaS analytics classes, note conflicts and risk, and recommend file-or-rename to Alex before the brand goes on BetaList, directories, G2 and Product Hunt in N3.",
-   "why": "The brand goes public on listings in N3 and the working-app reveal is ~28 Sep; a rename after that costs every listing.",
+   "why": "The brand goes public on listings in N3 and the working-app reveal is ~5 Oct; a rename after that costs every listing.",
    "area": "Marketing",
-   "due": "2026-09-25",
+   "due": "2026-10-02",
    "priority": "P1",
    "priority_reason": "Public listings start N3; a rename gets expensive after",
    "depends_on": [],
@@ -8406,10 +8406,10 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Filza",
    "title": "Write pilot commercial terms + invoice template with Jill",
-   "what": "Draft the commercial terms schedule for the pilot agreement before 25 Sep with the price as a slot (founding price, term, payment terms, VAT treatment, what happens if launch slips), then drop in the pricing Alex signs on 25 Sep. Review Jill's invoice template so it matches the terms and carries the Companies Act particulars. The N5 invoicing dry run and the N6 invoices are issued against this text.",
+   "what": "Draft the commercial terms schedule for the pilot agreement before 2 Oct with the price as a slot (founding price, term, payment terms, VAT treatment, what happens if launch slips), then drop in the pricing Alex signs on 2 Oct. Review Jill's invoice template so it matches the terms and carries the Companies Act particulars. The N5 invoicing dry run and the N6 invoices are issued against this text.",
    "why": "Invoicing in N6 needs paper that exists in Sep; invoices that do not match terms are the first dispute.",
    "area": "Finance",
-   "due": "2026-09-27",
+   "due": "2026-10-04",
    "priority": "P1",
    "priority_reason": "Downstream of the 25 Sep pricing; N6 invoices depend on it",
    "depends_on": [
@@ -8427,9 +8427,9 @@ window.LAUNCH_DATA = {
    "source": "plan",
    "acceptance": "A commercial terms schedule carrying the signed price plus explicit cancellation and refund clauses, and an approved invoice template, are filed with Jill and attached to the pilot agreement.",
    "checklist": [
-    "Draft the terms schedule with the price as a slot before 25 Sep",
+    "Draft the terms schedule with the price as a slot before 2 Oct",
     "Define the launch-slips and term clauses",
-    "Insert the signed pricing on 25 Sep",
+    "Insert the signed pricing on 2 Oct",
     "Review Jill's invoice template for particulars and VAT wording",
     "Attach the schedule to the pilot agreement for Lewis"
    ]
@@ -8438,11 +8438,11 @@ window.LAUNCH_DATA = {
    "id": "N2-FZ-11",
    "sprint": "N2",
    "assignee": "Filza",
-   "title": "Sweep every public surface, incl. LinkedIn, before 25 Sep",
-   "what": "Before submission, read every surface a reviewer can find by searching the company against the firewall rulebook: the LinkedIn company page and the founders' personal profiles and posts (including the 10 Sep design-reveal and the 12 Sep landing beat), the landing and waitlist pages, Crunchbase and any directory entry, any public repo or README, and the app's own consent-screen and dashboard copy. Mark every banned phrase, send edits to Alex, Saad and Asad, and re-read after the fixes.",
-   "why": "Meta's reviewers search the company; one investor-deck phrase on a public profile is a rejection we chose, and the existing marketing sweep is dated 23 Oct - a month after the submission it needed to protect.",
+   "title": "Sweep every public surface, incl. LinkedIn, before 2 Oct",
+   "what": "Before submission, read every surface a reviewer can find by searching the company against the firewall rulebook: the LinkedIn company page and the founders' personal profiles and posts (including the 17 Sep design-reveal and the 19 Sep landing beat), the landing and waitlist pages, Crunchbase and any directory entry, any public repo or README, and the app's own consent-screen and dashboard copy. Mark every banned phrase, send edits to Alex, Saad and Asad, and re-read after the fixes.",
+   "why": "Meta's reviewers search the company; one investor-deck phrase on a public profile is a rejection we chose, and the existing marketing sweep is dated 30 Oct - a month after the submission it needed to protect.",
    "area": "Meta",
-   "due": "2026-09-24",
+   "due": "2026-10-01",
    "priority": "P0",
    "priority_reason": "P0 - dated: it must complete before the 25 Sep submission, and edits to LinkedIn profiles need a day for their owners to make.",
    "depends_on": [
@@ -8460,7 +8460,7 @@ window.LAUNCH_DATA = {
    "checklist": [
     "List every public surface: LinkedIn company + personal, landing, waitlist, directories, repos",
     "Read each against the banned-terms list and record findings",
-    "Send edits to the surface owners with a deadline of 24 Sep",
+    "Send edits to the surface owners with a deadline of 1 Oct",
     "Re-read after the fixes and file the record with the package"
    ],
    "source": "reconciler"
@@ -8471,9 +8471,9 @@ window.LAUNCH_DATA = {
    "assignee": "Asad",
    "title": "Crisis Alerts inbox: triage strip, cited cards, action, drafted reply",
    "what": "Alerts screen on Muteeb's alerts endpoints: triage strip (needs-you / opportunity / briefing counts), cards with severity, cited posts and comments resolving to sources, ONE suggested action and the drafted calm reply (copy-to-clipboard, never auto-posted), mark-all-read.",
-   "why": "The PROTECT surface and the 9 Oct drill's in-app leg; the drafted reply is the differentiator.",
+   "why": "The PROTECT surface and the 16 Oct drill's in-app leg; the drafted reply is the differentiator.",
    "area": "Alerts",
-   "due": "2026-10-06",
+   "due": "2026-10-13",
    "priority": "P0",
    "priority_reason": "Gate: live crisis drill 9 Oct",
    "depends_on": [
@@ -8502,11 +8502,11 @@ window.LAUNCH_DATA = {
    "id": "N3-AS-02",
    "sprint": "N3",
    "assignee": "Asad",
-   "title": "Integrate the bought waitlist: themed, UTM per directory, live 6 Oct",
-   "what": "Replace the landing's Netlify Forms modal with Jill's bought waitlist tool, embedded and themed to the tokens; UTM per directory (BetaList, PH, G2, newsletter) captured into the tool; PECR-compliant consent wording, tested unsubscribe and no pre-consent pixels per Filza; queue position visible; live Tue 6 Oct, opens publicly Tue 13 Oct.",
-   "why": "One-shot directory traffic must hold and attribute; the 13 Oct opening and the 17 Nov and 1 Dec emails depend on a lawful list.",
+   "title": "Integrate the bought waitlist: themed, UTM per directory, live 13 Oct",
+   "what": "Replace the landing's Netlify Forms modal with Jill's bought waitlist tool, embedded and themed to the tokens; UTM per directory (BetaList, PH, G2, newsletter) captured into the tool; PECR-compliant consent wording, tested unsubscribe and no pre-consent pixels per Filza; queue position visible; live Tue 13 Oct, opens publicly Tue 20 Oct.",
+   "why": "One-shot directory traffic must hold and attribute; the 20 Oct opening and the 24 Nov and 8 Dec emails depend on a lawful list.",
    "area": "Waitlist",
-   "due": "2026-10-06",
+   "due": "2026-10-13",
    "priority": "P0",
    "priority_reason": "Dated: live 6 Oct, opens 13 Oct",
    "depends_on": [
@@ -8521,13 +8521,13 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "plan",
-   "acceptance": "Signup via the themed widget records source UTM, shows a queue position, and unsubscribe works, on production by 6 Oct.",
+   "acceptance": "Signup via the themed widget records source UTM, shows a queue position, and unsubscribe works, on production by 13 Oct.",
    "checklist": [
     "Embed and theme the widget",
     "UTM capture per directory",
     "Consent wording + unsubscribe test with Filza",
     "Verify no pixels fire before consent",
-    "Go live 6 Oct"
+    "Go live 13 Oct"
    ]
   },
   {
@@ -8538,7 +8538,7 @@ window.LAUNCH_DATA = {
    "what": "Export the 'pilot-waitlist' Netlify Forms submissions (name, email, page, timestamp), dedupe, import into the bought waitlist with original timestamps so queue position is preserved, tag source=early, confirm the consent basis with Filza before any email; verify counts match.",
    "why": "Early names who trusted us must keep their place; losing them is the first public trust break.",
    "area": "Waitlist",
-   "due": "2026-10-06",
+   "due": "2026-10-13",
    "priority": "P1",
    "priority_reason": "Must land with the tool going live; small task",
    "depends_on": [
@@ -8567,7 +8567,7 @@ window.LAUNCH_DATA = {
    "what": "SES email from Saad's crisis email template: cited post, one action, drafted reply, auth-aware deep link to the alert card; dark-mode QA'd in major clients; outbound crisis email sits behind a feature flag (the N6 kill switch). Topbar bells reading Muteeb's unread-count endpoints, decrementing on read / mark-all-read, per-page via the switcher.",
    "why": "Email is the re-engagement trigger and the drill clock ends at email-received; wrong bell counts erode trust instantly.",
    "area": "Alerts",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P0",
    "priority_reason": "Gate clock ends at email-received",
    "depends_on": [
@@ -8597,9 +8597,9 @@ window.LAUNCH_DATA = {
    "assignee": "Asad",
    "title": "Topbar health pill (score + weekly delta) on every screen",
    "what": "Pill in the topbar reading Muteeb's health endpoint per page/workspace: score with Faheem's band label (at risk / steady / strong), weekly delta, 'building your baseline' when thin; click-through to the Analytics health tile; band colours from token roles.",
-   "why": "'Health pill live' is an explicit item of the 9 Oct gate and the number pilots quote to their boss.",
+   "why": "'Health pill live' is an explicit item of the 16 Oct gate and the number pilots quote to their boss.",
    "area": "Analytics",
-   "due": "2026-10-08",
+   "due": "2026-10-15",
    "priority": "P0",
    "priority_reason": "Named in the N3 gate",
    "depends_on": [
@@ -8628,7 +8628,7 @@ window.LAUNCH_DATA = {
    "what": "Rules list (sensitivity per page/archetype, severity override, quiet hours, digest vs immediate) as toggles bound to Muteeb's rules endpoints, implementing Saad's N2 notification timing policy; quiet-hours alerts stay logged and appear in the morning digest count.",
    "why": "Tunable sensitivity keeps alerts from being muted; the 2am policy is the one unowned product decision and this is where it becomes real.",
    "area": "Alerts",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P1",
    "priority_reason": "Part of the Alerts surface; not on the drill's critical path",
    "depends_on": [
@@ -8658,7 +8658,7 @@ window.LAUNCH_DATA = {
    "what": "On each alert card a 'Not a crisis' button posting reason + incident id to the feedback store; when the detector marks an incident subsided, show an all-clear notice on the card and in Today's feed and include the all-clear line in the digest email.",
    "why": "False-alarm data from the people who know feeds Faheem's N4 tuning; closure stops pilots worrying.",
    "area": "Alerts",
-   "due": "2026-10-08",
+   "due": "2026-10-15",
    "priority": "P1",
    "priority_reason": "Benchmark add on the card build; small",
    "depends_on": [
@@ -8686,7 +8686,7 @@ window.LAUNCH_DATA = {
    "what": "Overview tab: reach, engagement, followers, HEALTH tiles; reach and engagement charts with plain-English notes; Photos / Video / Advanced tabs shown as named Fast-Follow, not built; reconcile one pilot's tiles exactly against warehouse queries and record query + numbers.",
    "why": "The descriptive minimum that makes the predictions credible; exact warehouse reconciliation is the gate.",
    "area": "Analytics",
-   "due": "2026-10-08",
+   "due": "2026-10-15",
    "priority": "P1",
    "priority_reason": "Sprint-goal surface with slack",
    "depends_on": [
@@ -8716,7 +8716,7 @@ window.LAUNCH_DATA = {
    "what": "7x24 grid on Muteeb's best-times endpoint, #1-window ring, cells under the count floor suppressed with a 'not enough posts yet' state, page timezone by IANA id so the 25 Oct clock change needs no UI change, and a UI note stating the lookback window and the self-selection caveat.",
    "why": "The TIME-IT surface and the source of the hero's '6:40pm' claims; the honesty state matters more than the grid.",
    "area": "Best Times",
-   "due": "2026-10-08",
+   "due": "2026-10-15",
    "priority": "P1",
    "priority_reason": "Sprint-goal surface; not on the drill path",
    "depends_on": [
@@ -8747,7 +8747,7 @@ window.LAUNCH_DATA = {
    "what": "With Lewis pick one pilot page, compare each tile AND the three health-factor inputs (using Faheem's factor-to-Meta mapping from N3-FH-06) against Meta Business Suite for the same window, document the known deltas (metric definitions, attribution windows, timezone), and ship the in-product 'why these may differ slightly from Facebook' note beside the tiles and the pill.",
    "why": "Pilots check our numbers against their Insights; an unexplained mismatch poisons every predictive claim.",
    "area": "Analytics",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "Benchmark trust fix; needs Lewis's access",
    "depends_on": [
@@ -8762,7 +8762,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "plan",
-   "acceptance": "A delta document covering the tiles and the three health factors exists for one pilot by 9 Oct and the note is visible beside the tiles and the pill.",
+   "acceptance": "A delta document covering the tiles and the three health factors exists for one pilot by 16 Oct and the note is visible beside the tiles and the pill.",
    "checklist": [
     "Pick the pilot page with Lewis",
     "Compare each tile vs Business Suite",
@@ -8779,7 +8779,7 @@ window.LAUNCH_DATA = {
    "what": "Settings screen: profile prefs, notification prefs (channels, quiet hours per policy), connected pages with health and disconnect, data controls section with export/delete entry points (wired in N4), links to Privacy/ToS; per Saad's Settings pack and one-pager.",
    "why": "Where consent, quiet hours and data rights physically live; Filza's N4 witnessed runs start here.",
    "area": "Settings",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "Needed before N4 legal proofs",
    "depends_on": [
@@ -8810,7 +8810,7 @@ window.LAUNCH_DATA = {
    "what": "From the component library: bottom tab bar with the Art-E orb entry point, sheet system (compose sheet, filters, slide-overs as sheets), responsive breakpoints on every shipped screen; checked on iOS Safari and Android Chrome.",
    "why": "PWA is the mobile story; nav cannot be an N6 surprise.",
    "area": "App core",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "Needed before N4 screens multiply",
    "depends_on": [
@@ -8838,7 +8838,7 @@ window.LAUNCH_DATA = {
    "what": "E2E flows against staging (runner per the stack decision; Playwright assumed): (1) signup -> verify -> connect a test page, (2) daily loop: login -> Today -> open a move/alert, (3) type a draft -> score + chips render or abstain; trace-on-retry, sharded, blocking PR merge.",
    "why": "Regressions caught by robots, not pilots; the freeze needs a net that already exists.",
    "area": "QA",
-   "due": "2026-10-11",
+   "due": "2026-10-18",
    "priority": "P1",
    "priority_reason": "Safety net; slack to the sprint end",
    "depends_on": [
@@ -8867,9 +8867,9 @@ window.LAUNCH_DATA = {
    "assignee": "Asad",
    "title": "Clear the cohort-1 fix-then-invite list before pilots 6-10 join",
    "what": "Take Lewis's fix-then-invite list from cohort 1 (N2-LW-04), fix the items marked blocking on staging, and tell Lewis and Saad which items are closed, deferred or won't-fix so pilots 6-10 are invited onto a build with the cohort-1 blockers out.",
-   "why": "Lewis's N3-LW-03 (6 Oct) depends on 'Asad: fix-then-invite list cleared' and no ticket owned the fixes; inviting onto known blockers burns pilot goodwill.",
+   "why": "Lewis's N3-LW-03 (13 Oct) depends on 'Asad: fix-then-invite list cleared' and no ticket owned the fixes; inviting onto known blockers burns pilot goodwill.",
    "area": "App core",
-   "due": "2026-10-05",
+   "due": "2026-10-12",
    "priority": "P1",
    "priority_reason": "P1: wave-2 invites are dated 6 Oct; scope bounded by what cohort 1 reports.",
    "depends_on": [
@@ -8885,7 +8885,7 @@ window.LAUNCH_DATA = {
     "Triage the list with Saad against blocker criteria",
     "Fix blockers on staging",
     "Post closed/deferred per item",
-    "Confirm to Lewis by 5 Oct"
+    "Confirm to Lewis by 12 Oct"
    ],
    "source": "reconciler"
   },
@@ -8894,10 +8894,10 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Asad",
    "title": "Pre-declare what Discovery ships if the precision-at-5 gate fails",
-   "what": "Before Lewis judges on 9 Oct, write the failure branch with Alex and Muteeb: nothing is served if the overall bar is missed; if a single provenance stratum fails - most likely text-only - that stratum is suppressed and Discovery ships structural-only with the blend re-frozen and the reason strings re-checked with Filza; if the structural stratum itself fails, Discovery v1 drops to a curated match list or leaves the tab behind its flag for launch. State who decides within 24 hours of Lewis's result, what Asad builds in N4 under each branch, and that any re-run of the gate uses the same pre-declared bar.",
-   "why": "A fail on 9 Oct lands three days before the N4 Discovery UI build starts; without a written branch that becomes an unowned scramble against a gate date.",
+   "what": "Before Lewis judges on 16 Oct, write the failure branch with Alex and Muteeb: nothing is served if the overall bar is missed; if a single provenance stratum fails - most likely text-only - that stratum is suppressed and Discovery ships structural-only with the blend re-frozen and the reason strings re-checked with Filza; if the structural stratum itself fails, Discovery v1 drops to a curated match list or leaves the tab behind its flag for launch. State who decides within 24 hours of Lewis's result, what Asad builds in N4 under each branch, and that any re-run of the gate uses the same pre-declared bar.",
+   "why": "A fail on 16 Oct lands three days before the N4 Discovery UI build starts; without a written branch that becomes an unowned scramble against a gate date.",
    "area": "Discovery",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P0",
    "priority_reason": "P0 - must exist before Lewis judges on 9 Oct and before the N4 UI build starts 12 Oct",
    "depends_on": [
@@ -8910,7 +8910,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "discovery-audit",
-   "acceptance": "A one-page branch decision filed in the register before 9 Oct naming the action per failure mode, the decider and the 24-hour decision window, acknowledged by Alex, Muteeb and Lewis.",
+   "acceptance": "A one-page branch decision filed in the register before 16 Oct naming the action per failure mode, the decider and the 24-hour decision window, acknowledged by Alex, Muteeb and Lewis.",
    "checklist": [
     "Write the three failure modes: overall, single stratum, structural",
     "Name what Asad builds in N4 under each branch",
@@ -8927,7 +8927,7 @@ window.LAUNCH_DATA = {
    "what": "Emit one structured cost record per request from the BFF, and have FastAPI emit the same schema: request_id, tenant, page, route and version, which upstreams were called (FastAPI, warehouse, vector store, LLM), duration, warehouse bytes scanned where the driver reports it, and LLM prompt/completion tokens with the model name. Sample nothing - the volumes are small and a sampled record cannot answer 'what did this tenant cost'. Hand the schema to Muteeb, whose dashboard reads it.",
    "why": "The pricing decision, the Art-E quotas and the N4 re-cost all need cost per endpoint per tenant, and it can only be reconstructed from records emitted at the time - a bill in November cannot be split by route retrospectively.",
    "area": "Ops",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack, but N4-AS-18's re-cost on 25 Oct needs at least two weeks of records.",
    "depends_on": [
@@ -8960,7 +8960,7 @@ window.LAUNCH_DATA = {
    "what": "Share one feature builder between batch and live; run a training-serving skew test on 500 drafts (diff ~0), a jitter test (same text, same score), a calibration parity plot, and profile latency inside Muteeb's p95 budget.",
    "why": "A gauge that flickers or disagrees with itself teaches pilots to ignore it.",
    "area": "Drafts",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P1",
    "priority_reason": "real risk; not on the N3 gate",
    "depends_on": [
@@ -8987,9 +8987,9 @@ window.LAUNCH_DATA = {
    "assignee": "Faheem",
    "title": "Alert engine: five-element template, citations, dedup, quiet hours",
    "what": "Plain-English problem + one action per the five-element template, citing exact post/comment ids, one-incident-one-alert via fingerprint grouping, and quiet-hours / severity-override / digest behaviour per Saad's notification timing policy (quiet-hours alerts still logged, morning digest). Output schema agreed with Muteeb.",
-   "why": "Fifty alerts for one storm is how alerts get muted; the 9 Oct drill reads this output.",
+   "why": "Fifty alerts for one storm is how alerts get muted; the 16 Oct drill reads this output.",
    "area": "Alerts",
-   "due": "2026-10-06",
+   "due": "2026-10-13",
    "priority": "P0",
    "priority_reason": "N3 gate and Muteeb's live pipeline depend on it",
    "depends_on": [
@@ -9015,11 +9015,11 @@ window.LAUNCH_DATA = {
    "id": "N3-FH-03",
    "sprint": "N3",
    "assignee": "Faheem",
-   "title": "Crisis drill #1 for the 9 Oct gate with Lewis + Muteeb",
+   "title": "Crisis drill #1 for the 16 Oct gate with Lewis + Muteeb",
    "what": "Seed a storm on a pilot page from Lewis's re-checked roster, clock comment-posted -> label -> alert -> email-received, record the time, citations and drafted reply.",
    "why": "The 15-minute promise is measured here before pilots depend on it.",
    "area": "Alerts",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P0",
    "priority_reason": "N3 gate",
    "depends_on": [
@@ -9050,7 +9050,7 @@ window.LAUNCH_DATA = {
    "what": "Ledger schema (context, recommendation type, action, followed?, outcome, timestamps), writers for next-move, best-time window and draft advice, a day-7 outcome resolver and daily job; handoff to Muteeb for the Wins endpoints.",
    "why": "Feeds the Wins scoreboard and the '+38% when you follow Art-E' claim; unowned before the audit.",
    "area": "Wins",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "Muteeb's Wins endpoints are N4 week B and Wins-lite is cut-order #1, so there is slack",
    "depends_on": [
@@ -9079,7 +9079,7 @@ window.LAUNCH_DATA = {
    "what": "Rank the day's strongest signals (best-times window x flop-gate margin x alert state) into one next-move card with a confidence chip value, logged to the ledger; hand the rule and table to Muteeb's feed endpoint.",
    "why": "The Today hero has no model behind it otherwise.",
    "area": "Today",
-   "due": "2026-10-05",
+   "due": "2026-10-12",
    "priority": "P1",
    "priority_reason": "feeds Muteeb's feed endpoint and Asad's hero; slack inside N3",
    "depends_on": [
@@ -9106,10 +9106,10 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Faheem",
    "title": "Health score v1 per page + workspace; handoff; reconcile one pilot",
-   "what": "Compute job and table with 3 factor sub-scores per page and workspace; reconcile each factor's input metrics with the warehouse for one pilot; hand Asad the factor-to-Meta-metric mapping and delta note by 6 Oct so N3-AS-10 can compare the same factors against Meta Business Suite before the 9 Oct gate; thin pages return the baseline state; factor bars sum sensibly.",
-   "why": "The pill must be live at the 9 Oct gate.",
+   "what": "Compute job and table with 3 factor sub-scores per page and workspace; reconcile each factor's input metrics with the warehouse for one pilot; hand Asad the factor-to-Meta-metric mapping and delta note by 13 Oct so N3-AS-10 can compare the same factors against Meta Business Suite before the 16 Oct gate; thin pages return the baseline state; factor bars sum sensibly.",
+   "why": "The pill must be live at the 16 Oct gate.",
    "area": "Analytics",
-   "due": "2026-10-06",
+   "due": "2026-10-13",
    "priority": "P0",
    "priority_reason": "N3 gate: health pill live",
    "depends_on": [
@@ -9124,11 +9124,11 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "plan",
-   "acceptance": "Score reconciles for one pilot vs the warehouse, the factor-to-Meta mapping + delta note is with Asad by 6 Oct, and a thin page shows 'building your baseline'.",
+   "acceptance": "Score reconciles for one pilot vs the warehouse, the factor-to-Meta mapping + delta note is with Asad by 13 Oct, and a thin page shows 'building your baseline'.",
    "checklist": [
     "Compute job + table",
     "Reconcile one pilot vs warehouse per factor",
-    "Factor-to-Meta-metric mapping + delta note to Asad (N3-AS-10) by 6 Oct",
+    "Factor-to-Meta-metric mapping + delta note to Asad (N3-AS-10) by 13 Oct",
     "Thin-page + factor-sum checks"
    ]
   },
@@ -9140,7 +9140,7 @@ window.LAUNCH_DATA = {
    "what": "Define the priority function and which models can score on 90 days of history so a new page reaches a first insight in minutes; list completion events the UI consumes; test on a new page with Muteeb's queue.",
    "why": "'Learning, never loading' is copy without it.",
    "area": "Onboarding",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "joint with Muteeb's N3 queue; Asad's onboarding flow is N4 so there is slack",
    "depends_on": [
@@ -9168,7 +9168,7 @@ window.LAUNCH_DATA = {
    "what": "Confidence distribution and label-mix KS tests vs baseline for flop, NLP and crisis on the QA dashboard, plus the weekly Brier trend for flop, with trip thresholds and written trip actions; verify with a synthetic shift.",
    "why": "Models decay silently; the watchdog is the smoke detector.",
    "area": "Ops",
-   "due": "2026-10-08",
+   "due": "2026-10-15",
    "priority": "P1",
    "priority_reason": "real risk; slack inside N3",
    "depends_on": [
@@ -9197,7 +9197,7 @@ window.LAUNCH_DATA = {
    "what": "Load Lewis and Saad's v1 (20 gate questions plus ~100) into the regression harness, check every row against the sheet format and provenance rules, and publish the coverage-gap list (per surface, per must-refuse category, qualitative-claim grounding, memory recall) that Lewis fills to reach 200 in N4-LW-03.",
    "why": "The 200-question citation gate cannot be built in N4 without questions arriving in N3.",
    "area": "Art-E",
-   "due": "2026-10-11",
+   "due": "2026-10-18",
    "priority": "P1",
    "priority_reason": "N4 gate depends on it; roadmap needs it by N3, slack inside N3",
    "depends_on": [
@@ -9212,7 +9212,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "faheem",
-   "acceptance": "v1 is loaded in the harness with provenance and Lewis has a written coverage-gap list by 11 Oct.",
+   "acceptance": "v1 is loaded in the harness with provenance and Lewis has a written coverage-gap list by 18 Oct.",
    "checklist": [
     "Load v1 and validate rows against the format",
     "Store provenance per question",
@@ -9228,7 +9228,7 @@ window.LAUNCH_DATA = {
    "what": "Write the promote-or-keep gate, retrain flop on a fresh temporal cut, compare against the pinned model and record the decision.",
    "why": "Retraining without a gate is gambling with the freeze.",
    "area": "QA",
-   "due": "2026-10-11",
+   "due": "2026-10-18",
    "priority": "P1",
    "priority_reason": "rehearses N5; slack inside N3",
    "depends_on": [
@@ -9255,7 +9255,7 @@ window.LAUNCH_DATA = {
    "what": "Handle retired pages (#16), retire post_reactions (#15), log VISION as parked, and build the ML Docker image (#8).",
    "why": "Housekeeping that otherwise surfaces as noise in the war-room board.",
    "area": "Data",
-   "due": "2026-10-11",
+   "due": "2026-10-18",
    "priority": "P2",
    "priority_reason": "P4 in the agreed order; safe to slip",
    "depends_on": [],
@@ -9278,9 +9278,9 @@ window.LAUNCH_DATA = {
    "assignee": "Faheem",
    "title": "Golden-set sheet format + coverage rules for Saad and Lewis",
    "what": "Publish the sheet format the nightly regression will consume (question, expected cited source or number, must-refuse category, adversarial flag, provenance, expected answer shape) and the coverage rules (per surface, per refusal category, qualitative-claim grounding, memory recall) so Lewis and Saad author v1 straight into it and Faheem loads it without rework.",
-   "why": "Lewis's N3-LW-07 depends on 'Faheem: sheet format for the nightly regression' and no Faheem ticket produced it before 9 Oct.",
+   "why": "Lewis's N3-LW-07 depends on 'Faheem: sheet format for the nightly regression' and no Faheem ticket produced it before 16 Oct.",
    "area": "Art-E",
-   "due": "2026-10-02",
+   "due": "2026-10-09",
    "priority": "P1",
    "priority_reason": "P1: a day of work that blocks authoring which starts early N3; slack before 9 Oct.",
    "depends_on": [
@@ -9307,9 +9307,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Discovery graph: FDR primary gate, fallback, k=5 fail-closed, weekly recompute",
    "what": "Build the significance-tested graph: Benjamini-Hochberg FDR as the primary edge gate at 20 pages, Holm/Bonferroni kept as a high-confidence badge, a pre-registered fail-open fallback (rank by p then weight, labelled 'suggested, not validated') when the backbone is too sparse, a discrete-p testability check after the k=5 filter, warehoused weekly recompute, and k=5 fail-closed with logging.",
-   "why": "Bonferroni-first at n=20 returns a near-empty match list; Lewis's human gate on 9 Oct needs real candidates.",
+   "why": "Bonferroni-first at n=20 returns a near-empty match list; Lewis's human gate on 16 Oct needs real candidates.",
    "area": "Discovery",
-   "due": "2026-10-04",
+   "due": "2026-10-11",
    "priority": "P0",
    "priority_reason": "Lewis's precision-at-5 gate on 9 Oct depends on it",
    "depends_on": [
@@ -9349,7 +9349,7 @@ window.LAUNCH_DATA = {
    "what": "Build the Discovery read endpoints from scratch (founder 3 Sep: no prior Discovery work exists to absorb; the unmerged feat/discovery_api branch is serving-envelope groundwork only, not matching logic).",
    "why": "Half-built already; its hard-coded single tenant and no auth do not meet the bar and duplicating it wastes the sprint.",
    "area": "Discovery",
-   "due": "2026-10-06",
+   "due": "2026-10-13",
    "priority": "P1",
    "priority_reason": "Lewis judges top-5 matches from the warehoused graph + blend (N3-MT-01/06/13), not through the API; Asad's Discovery UI starts 12 Oct on the mock layer. Real risk with slack to 11 Oct.",
    "depends_on": [
@@ -9376,9 +9376,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Live crisis pipeline: replay a historic incident end-to-end under 15 min",
    "what": "Replay one of Lewis's historic incidents through fast-lane, labelling, detector, engine, in-app and SES email with a stopwatch on comment-posted to email-received, using the crisis pass line decided by Asad and Faheem. Verify the DLQ catches forced failures.",
-   "why": "The 15-minute promise is measured here before pilots depend on it; the 9 Oct drill repeats it live.",
+   "why": "The 15-minute promise is measured here before pilots depend on it; the 16 Oct drill repeats it live.",
    "area": "Alerts",
-   "due": "2026-10-08",
+   "due": "2026-10-15",
    "priority": "P0",
    "priority_reason": "serves the 9 Oct gate",
    "depends_on": [
@@ -9412,7 +9412,7 @@ window.LAUNCH_DATA = {
    "what": "Serve Faheem's best-times aggregates: 7x24 buckets per page, count floor and fallback level passed through, strictly-before windows, page timezone explicit in the response, tenant-scoped and cached.",
    "why": "Asad's heatmap and the next-move hero's time claims ship this sprint on this endpoint.",
    "area": "Best Times",
-   "due": "2026-10-06",
+   "due": "2026-10-13",
    "priority": "P1",
    "priority_reason": "Best Times is not a 9 Oct gate criterion (crisis clock, precision-at-5, health pill, waitlist). Asad's heatmap builds on the mock layer; a few days' slip keeps the surface inside N3.",
    "depends_on": [
@@ -9443,7 +9443,7 @@ window.LAUNCH_DATA = {
    "what": "Build tenant-scoped, cached aggregation endpoints for the thin Analytics screen: reach, engagement and followers tiles plus reach and engagement time series, with the health tile fed from the health endpoint. Reconcile one pilot page against the warehouse.",
    "why": "Asad's thin Analytics ships this sprint; the descriptive numbers make the predictive ones credible.",
    "area": "Analytics",
-   "due": "2026-10-06",
+   "due": "2026-10-13",
    "priority": "P1",
    "priority_reason": "The gate criterion 'health pill live' is carried by N3-MT-07 (kept P0). The reach/engagement/followers tiles and charts have the same mock-layer slack as N3-MT-04.",
    "depends_on": [
@@ -9470,10 +9470,10 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Muteeb",
    "title": "Match blend hierarchical by provenance with honest reason strings",
-   "what": "Blend edges hierarchically: structural cohort-fingerprint edges dominate ~80/20 over text-similarity edges; text edges get their own permutation null; on disagreement the structural test wins and the discordant pair is logged and oversampled for Lewis's review; reason strings are provenance-honest ('similar discussion topics', never 'audience overlap', for text-only edges). Emit one 0-100 match score per pair from the blend and FREEZE the blend weights and score scale before Lewis's 9 Oct human gate; any change to weights or scale after the gate re-triggers the gate before anything is served.",
+   "what": "Blend edges hierarchically: structural cohort-fingerprint edges dominate ~80/20 over text-similarity edges; text edges get their own permutation null; on disagreement the structural test wins and the discordant pair is logged and oversampled for Lewis's review; reason strings are provenance-honest ('similar discussion topics', never 'audience overlap', for text-only edges). Emit one 0-100 match score per pair from the blend and FREEZE the blend weights and score scale before Lewis's 16 Oct human gate; any change to weights or scale after the gate re-triggers the gate before anything is served.",
    "why": "Lewis's precision-at-5 must be stratified by provenance before any score is served; a text proxy driving an audience claim is a false claim.",
    "area": "Discovery",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P0",
    "priority_reason": "Lewis's stratified gate on 9 Oct",
    "depends_on": [
@@ -9486,9 +9486,9 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "muteeb",
-   "acceptance": "Each match carries a 0-100 score from the frozen blend, provenance, blend weight and a legal-passed reason string; the frozen weights are recorded in the register before 9 Oct and the discordant log is delivered to Lewis.",
+   "acceptance": "Each match carries a 0-100 score from the frozen blend, provenance, blend weight and a legal-passed reason string; the frozen weights are recorded in the register before 16 Oct and the discordant log is delivered to Lewis.",
    "checklist": [
-    "Draft the reason-string templates per provenance (structural, text-only, discordant) and send them to Filza and Lewis by Fri 2 Oct",
+    "Draft the reason-string templates per provenance (structural, text-only, discordant) and send them to Filza and Lewis by Fri 9 Oct",
     "Implement the 80/20 blend with provenance tags",
     "Build the permutation null for text edges",
     "Log and oversample discordant pairs for Lewis",
@@ -9503,10 +9503,10 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Muteeb",
    "title": "Health and briefing endpoints: score, delta, factors, nightly aggregate",
-   "what": "Serve health per page and workspace with weekly delta and the three factor sub-scores, building the contract against Faheem's N2-FH-15/16 health spec from 28 Sep and switching to his N3-FH-06 handoff table when it lands on 6 Oct, with a 'building your baseline' state for thin pages. Add the nightly briefing aggregate job and endpoint: reach delta, overnight shares, moves count.",
-   "why": "The topbar pill goes live at the 9 Oct gate and the Pages view and Today briefing card read the same endpoints in N4.",
+   "what": "Serve health per page and workspace with weekly delta and the three factor sub-scores, building the contract against Faheem's N2-FH-15/16 health spec from 5 Oct and switching to his N3-FH-06 handoff table when it lands on 13 Oct, with a 'building your baseline' state for thin pages. Add the nightly briefing aggregate job and endpoint: reach delta, overnight shares, moves count.",
+   "why": "The topbar pill goes live at the 16 Oct gate and the Pages view and Today briefing card read the same endpoints in N4.",
    "area": "Analytics",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P0",
    "priority_reason": "health pill live is a gate criterion",
    "depends_on": [
@@ -9537,7 +9537,7 @@ window.LAUNCH_DATA = {
    "what": "When a page revokes Discovery opt-in, purge it from matches, spotlight and every Saved list within 24 hours, with an automated test that asserts absence across all three.",
    "why": "Consent promised revocable must be mechanically true; among 10 pilots who talk, a breach is visible.",
    "area": "Discovery",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "real risk; Filza witnesses it in N4",
    "depends_on": [
@@ -9565,7 +9565,7 @@ window.LAUNCH_DATA = {
    "what": "Wire Q&A over the tenant-namespaced index: retrieval, answer generation, per-tenant cost attribution on every call, and the cascade cache to cheap to frontier with routing decisions logged against a 60% cache-hit target. Name the model at each tier in writing with its vendor and version pin, and define the fallback when the frontier tier errors, rate-limits or times out mid-answer - degrade to the cheap tier or abstain with Saad's copy, never a silent failure. Key the semantic cache on tenant plus question so it can never serve one tenant's answer to another, and cover that key in the N4-MT-01 leakage proof. Tuning and the citation gate are N4.",
    "why": "The answer engine must work before N4 makes it trustworthy, and costs must be metered from day one.",
    "area": "Art-E",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "real risk with slack; N4 gate builds on it",
    "depends_on": [
@@ -9596,7 +9596,7 @@ window.LAUNCH_DATA = {
    "what": "With Faheem, build the ingest queue that backfills a newly connected page last-90-days-first in checkpointed, resumable chunks and emits completion events per named step for the setup pill and onboarding UI.",
    "why": "Onboarding's 'learning, never loading' promise and the setup pill depend on these events; a blank screen churns pilots.",
    "area": "Onboarding",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "Asad's N4 onboarding consumes it; has slack",
    "depends_on": [
@@ -9625,7 +9625,7 @@ window.LAUNCH_DATA = {
    "what": "Stand up the bought status page and build latency and error dashboards per endpoint. Implement three distinct checks rather than one: liveness (process is up, no dependencies, never fails on a slow dependency), readiness (this instance can serve - warm artifacts loaded, pool available - and de-registers the instance from traffic when false), and a deep check on a separate path that probes Redshift, Pinecone, the token store, SES and Meta with per-dependency timeouts and reports degraded rather than down. Wire readiness to load-balancer registration and to the autoscaling signal, and never let the deep check be the one the balancer polls. Close the follow-ups from restore drill #1.",
    "why": "Pilots and reviewers both check whether we are up; the dashboards are the seed of the N5 war-room board.",
    "area": "Ops",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "real risk with slack",
    "depends_on": [
@@ -9656,9 +9656,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Gate Fri 9 Oct: live crisis drill clock with Lewis and Faheem",
    "what": "Run the live drill on a real pilot page: Lewis seeds the storm, the pipeline detects, engines and delivers in-app plus email, and the clock from comment-posted to email-received is recorded. Show the health pill live.",
-   "why": "The gate proves the 15-minute promise on a real page and backs the 5 Nov demo video.",
+   "why": "The gate proves the 15-minute promise on a real page and backs the 12 Nov demo video.",
    "area": "Alerts",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P0",
    "priority_reason": "dated Friday gate",
    "depends_on": [
@@ -9688,9 +9688,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Reason-string templates + provenance strata draft for Filza and Lewis",
    "what": "Before the graph ships, write the provenance strata definition (structural / text-only / discordant, and how a pair is assigned) and the candidate reason-string templates per stratum ('8,200 of your people also follow...', 'similar discussion topics') with banded counts and the k=5 floor applied, so Filza can run the legal pass and Lewis can pre-declare the human-gate bar per stratum.",
-   "why": "Filza's N3-FZ-04 and Lewis's N3-LW-02 both depend on these before 2 Oct; the 9 Oct human gate is invalid if the bar is set after matches are seen.",
+   "why": "Filza's N3-FZ-04 and Lewis's N3-LW-02 both depend on these before 9 Oct; the 16 Oct human gate is invalid if the bar is set after matches are seen.",
    "area": "Discovery",
-   "due": "2026-09-30",
+   "due": "2026-10-07",
    "priority": "P0",
    "priority_reason": "P0: head of the 9 Oct gate chain (bar 2 Oct -> legal pass 2 Oct -> blend 7 Oct -> gate 9 Oct).",
    "depends_on": [
@@ -9703,7 +9703,7 @@ window.LAUNCH_DATA = {
     "N3-MT-06"
    ],
    "gate": "N3",
-   "acceptance": "Filza has the template list and Lewis has the strata definition by 30 Sep, and N3-MT-06 ships only templates on Filza's approved list.",
+   "acceptance": "Filza has the template list and Lewis has the strata definition by 7 Oct, and N3-MT-06 ships only templates on Filza's approved list.",
    "checklist": [
     "Define the three strata and the assignment rule",
     "Draft templates per stratum with banded counts",
@@ -9720,7 +9720,7 @@ window.LAUNCH_DATA = {
    "what": "Tenant-scoped endpoints Asad's N3/N4 screens read and write: the alert rule list with per-rule toggles and quiet hours per the notification timing policy; 'not a crisis' feedback and incident-resolved fields on an alert; and the Art-E thumbs + reason feedback store. Contract-tested, and queryable for Faheem's false-alarm log.",
    "why": "Asad's N3-AS-06, N3-AS-07 and N4-AS-03 each depend on a Muteeb endpoint that no Muteeb ticket named; Faheem's N4-FH-07 reads the feedback.",
    "area": "Alerts",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P1",
    "priority_reason": "P1: consumers dated 7-8 Oct and 22 Oct; small endpoints on the N2 alerts skeleton.",
    "depends_on": [
@@ -9751,7 +9751,7 @@ window.LAUNCH_DATA = {
    "what": "Add incremental re-ingest to the RAG index so new and edited posts, comments and refreshed aggregates become answerable inside a stated window, with deletes and disconnects removing vectors rather than orphaning them. Publish a freshness SLO per entity type (posts and comments hourly off the fixed page_posts path, aggregates daily) and expose a per-tenant 'data through' timestamp on the orchestration response so Asad's grounding footer can show it and the golden-set runner can assert it. Alarm when any namespace falls behind its SLO, and make a re-embed after a chunking change resumable and rollback-safe against the N2-MT-05 version tags.",
    "why": "An index that is silently a week old returns answers that are confidently cited and factually wrong, which is the one failure mode the whole Art-E design exists to prevent.",
    "area": "Art-E",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack; the 23 Oct gate runs on pilot data that must be current, but nothing dated depends on it inside N3",
    "depends_on": [
@@ -9784,7 +9784,7 @@ window.LAUNCH_DATA = {
    "what": "Land the cost records from the BFF and FastAPI in one table and publish a panel: cost per endpoint per tenant per month, split into function compute, Fargate CPU-seconds, warehouse bytes scanned, queue, egress and LLM tokens, using the unit prices from N1-MT-19. Add a top-10 most expensive endpoints view and an alert when one tenant's daily cost crosses a threshold, so a runaway Art-E user is visible on the day rather than in the monthly bill.",
    "why": "Pricing, the Art-E quotas and the N4 re-cost all read this panel, and a per-tenant cost alarm is the only thing that catches an expensive user before the invoice does.",
    "area": "Ops",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack, but the 25 Oct re-cost needs at least two weeks of populated data.",
    "depends_on": [
@@ -9818,7 +9818,7 @@ window.LAUNCH_DATA = {
    "what": "Answer every reviewer question the same day, keep the weekly test-credential check, and if rejected resubmit within 48h using the pre-written responses; log every exchange with timestamps for Alex's rejection-loop math.",
    "why": "The clock does not pause for us; every idle day eats the single safe cycle before freeze.",
    "area": "Meta",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P0",
    "priority_reason": "External clock",
    "depends_on": [
@@ -9848,7 +9848,7 @@ window.LAUNCH_DATA = {
    "what": "Write fix-then-invite waves (1-3, then 4-5), comprehension tasks per surface ('what does 72 mean', 'why did the gauge say that'), watch-don't-guide rules, blocker criteria (what is a P1), and the retest flow with Saad covering retest overflow and Lewis the pilot side.",
    "why": "Criteria written after defects exist get negotiated by the date; this protocol judges N5-N6.",
    "area": "PM",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P1",
    "priority_reason": "Its consumers (Filza's DPA countersign, Lewis's UAT scheduling, the N4 dry-run) all sit in N4-N5. 'Before defects exist' holds anywhere inside N3.",
    "depends_on": [
@@ -9881,7 +9881,7 @@ window.LAUNCH_DATA = {
    "what": "Pass/fail criteria for the rail: every number carries a resolving citation, grounding footer content including the 'data through' freshness stamp, refusal wording and categories from Filza's Art-E pack and Art 22 memo, AI label placement and disclaimer text, thumbs + reason capture, recommendation card deep-link. Add a latency pass line from Muteeb's budget (time to first token and p95) and the pass line for each state in the N3-SD-10 matrix, so a slow or stale answer fails the criteria as clearly as an un-cited one.",
    "why": "N4's hardest gate needs its definition now, and the legal text must be in the criteria not improvised in the UI.",
    "area": "Art-E",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P1",
    "priority_reason": "Real risk; needed before Asad's N4 rail build, slack inside N3",
    "depends_on": [
@@ -9909,11 +9909,11 @@ window.LAUNCH_DATA = {
    "id": "N3-SD-06",
    "sprint": "N3",
    "assignee": "Saad",
-   "title": "Discovery build QA against the 5 Sep pack",
-   "what": "As Muteeb's engine and endpoints land, QA the pack-to-API seam AND the Explore components Asad is building in the library: top-match spotlight, ranked rows with overlap %, profile slide-over, Matches/Saved tabs, and the sub-k=5 fail-closed empty state rendered exactly per the 5 Sep pack; plus 'suggested - not validated' and 'high-confidence' badges, provenance-honest reason strings and opt-out propagation state. Confirm the precision-at-5 bar is pre-declared in the register, stratified by provenance.",
+   "title": "Discovery build QA against the 12 Sep pack",
+   "what": "As Muteeb's engine and endpoints land, QA the pack-to-API seam AND the Explore components Asad is building in the library: top-match spotlight, ranked rows with overlap %, profile slide-over, Matches/Saved tabs, and the sub-k=5 fail-closed empty state rendered exactly per the 12 Sep pack; plus 'suggested - not validated' and 'high-confidence' badges, provenance-honest reason strings and opt-out propagation state. Confirm the precision-at-5 bar is pre-declared in the register, stratified by provenance.",
    "why": "The privacy floor must be visible in the UI, not just the API; catching seam gaps now is cheaper than in N4.",
    "area": "Discovery",
-   "due": "2026-10-11",
+   "due": "2026-10-18",
    "priority": "P1",
    "priority_reason": "Real risk; UI build is N4 so slack exists",
    "depends_on": [
@@ -9943,10 +9943,10 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Saad",
    "title": "Submit BetaList + directories; claim G2.com quietly",
-   "what": "Submit to BetaList and the agreed directory list with UTM tags matching the waitlist setup, using locked pricing and the 1 Dec date; claim the G2 profile without announcing it.",
+   "what": "Submit to BetaList and the agreed directory list with UTM tags matching the waitlist setup, using locked pricing and the 8 Dec date; claim the G2 profile without announcing it.",
    "why": "Pre-launch windows close at launch, permanently.",
    "area": "Marketing",
-   "due": "2026-10-11",
+   "due": "2026-10-18",
    "priority": "P1",
    "priority_reason": "Real risk; windows have slack until mid-Oct",
    "depends_on": [
@@ -9975,7 +9975,7 @@ window.LAUNCH_DATA = {
    "what": "Sweep Alerts inbox, Best Times heatmap, Analytics thin + health pill, Settings v1, mobile chrome and the waitlist against the pack checklists and one-pagers; file drift sized for Asad.",
    "why": "Rafeh's on-call sweeps no longer exist; unswept surfaces become UAT noise in N5.",
    "area": "Design",
-   "due": "2026-10-11",
+   "due": "2026-10-18",
    "priority": "P1",
    "priority_reason": "Real risk; slack before UAT",
    "depends_on": [
@@ -10003,7 +10003,7 @@ window.LAUNCH_DATA = {
    "what": "Hold the first formal scope review against the cut order (Wins-lite, briefing card, Discovery breadth, Art-E memory depth, PWA polish) using build status and the pilot digest; record what stays, what moves to the betting table.",
    "why": "The scope hammer's first swing; an unwritten outcome gets relitigated in N4.",
    "area": "PM",
-   "due": "2026-10-11",
+   "due": "2026-10-18",
    "priority": "P1",
    "priority_reason": "Real risk of relitigation in N4; slack before N4 planning",
    "depends_on": [
@@ -10034,7 +10034,7 @@ window.LAUNCH_DATA = {
    "what": "Write the state matrix and final copy for every non-happy Art-E answer, so the rail never has to improvise: policy refusal (Filza's categories, her wording), abstain because retrieval found nothing relevant, thin-data hedge where the sample is below the eligibility floor and the answer says so with the sample size, citation-gate block where a number could not be grounded, per-tenant quota reached, circuit breaker open or model vendor unavailable, and index behind its freshness SLO. For each: what the rail shows, whether a recommendation card still appears, what the user can do next, and whether it counts as correct in the golden set. Take the eligibility floors from N2-FH-17 and the failure modes from Muteeb's orchestration so the copy matches what the system can actually distinguish.",
    "why": "A rail that goes blank or errors on a quota or a breaker trip reads as a broken product on exactly the day an incident is already running, and an abstain that looks like a refusal makes an honest system look evasive.",
    "area": "Art-E",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack; needed before Asad's N4 rail build starts 20 Oct, with room inside N3",
    "depends_on": [
@@ -10068,7 +10068,7 @@ window.LAUNCH_DATA = {
    "what": "Turn the states matrix into shared components every surface renders: thin page below Faheem's eligibility floor, ingest in progress with the setup pill, low signal so no confident number is shown, upstream error with a retry, rate-limited wait with the Retry-After value, and page revoked. Drive them off the error codes Asad publishes in the envelope and the coverage/abstain flags the model responses carry - never off a parsed message string.",
    "why": "The honesty rules the product is sold on (never a confident dial on low signal, never a loading spinner where learning is meant) are only true if they are implemented once; per-surface copies drift by UAT.",
    "area": "App core",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack; the N3 surfaces can ship with local states and be refactored, but not after N4.",
    "depends_on": [
@@ -10105,7 +10105,7 @@ window.LAUNCH_DATA = {
    "what": "Walk Lewis through the signed pricing sheet (founding price, lock-duration intent, eligibility, what the first invoice says) so pilots hear the price from a person before the N5 conversion conversations and the N6 invoices. Agree the words Lewis uses and what he must not promise (no discounts beyond the sheet, no scheduling or publishing features).",
    "why": "Pilots hear the price from a person, not an invoice; an unbriefed Lewis improvises terms the invoices then contradict.",
    "area": "Pilots",
-   "due": "2026-10-02",
+   "due": "2026-10-09",
    "priority": "P1",
    "priority_reason": "Real risk with slack: conversion talks start in N5.",
    "depends_on": [
@@ -10122,7 +10122,7 @@ window.LAUNCH_DATA = {
     "30 minutes with Lewis",
     "Agree the wording",
     "List do-not-promise items",
-    "Log pilot objections for the 17 Nov terms"
+    "Log pilot objections for the 24 Nov terms"
    ]
   },
   {
@@ -10130,10 +10130,10 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Alex",
    "title": "Draft go/no-go criteria: threshold + named evidence per gate",
-   "what": "Draft the criteria one row per gate: flop recorded as CLEARED (75% precision at 55% coverage, AUC 0.76, cold-start 0.746, Borda gate + regressor, not LambdaRank); crisis with the re-scoped pass line + coverage floor from N1-AX-10 and the live drill < 15 min comment-posted -> email-received; Art-E zero un-cited numbers and 7 green nights; health reconciled vs warehouse and Meta; tenant-isolation CI proof; restore drill RTO/RPO; pen-test criticals; WCAG/Lighthouse; 5 DPAs countersigned; 5 invoices; waitlist count; Meta branch. Each row names the evidence artifact and the owner who reads it aloud on 20 Nov.",
-   "why": "Evidence-shaped criteria make the 20 Nov meeting short; criteria written after the evidence exists get negotiated by the date.",
+   "what": "Draft the criteria one row per gate: flop recorded as CLEARED (75% precision at 55% coverage, AUC 0.76, cold-start 0.746, Borda gate + regressor, not LambdaRank); crisis with the re-scoped pass line + coverage floor from N1-AX-10 and the live drill < 15 min comment-posted -> email-received; Art-E zero un-cited numbers and 7 green nights; health reconciled vs warehouse and Meta; tenant-isolation CI proof; restore drill RTO/RPO; pen-test criticals; WCAG/Lighthouse; 5 DPAs countersigned; 5 invoices; waitlist count; Meta branch. Each row names the evidence artifact and the owner who reads it aloud on 27 Nov.",
+   "why": "Evidence-shaped criteria make the 27 Nov meeting short; criteria written after the evidence exists get negotiated by the date.",
    "area": "Launch",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "Real risk with slack: consumed by the N4 scorecard and N5 memo skeleton.",
    "depends_on": [
@@ -10162,11 +10162,11 @@ window.LAUNCH_DATA = {
    "id": "N3-AX-03",
    "sprint": "N3",
    "assignee": "Alex",
-   "title": "Waitlist opening plan: live 6 Oct, opens 13 Oct, 500 by 20 Nov",
-   "what": "Own the waitlist as a marketing beat: confirm with Asad the bought tool is live and themed by 6 Oct with UTMs per directory and the migrated Netlify Forms names keeping queue position; write the 13 Oct opening comms using only dev-mode-safe claims and Filza's PECR wording; set the target of 500 by 20 Nov and the weekly growth report format that Saad's daily count feeds.",
-   "why": "The launch-day audience is built here; 500 by 20 Nov or the 1 Dec email list is thin.",
+   "title": "Waitlist opening plan: live 13 Oct, opens 20 Oct, 500 by 27 Nov",
+   "what": "Own the waitlist as a marketing beat: confirm with Asad the bought tool is live and themed by 13 Oct with UTMs per directory and the migrated Netlify Forms names keeping queue position; write the 20 Oct opening comms using only dev-mode-safe claims and Filza's PECR wording; set the target of 500 by 27 Nov and the weekly growth report format that Saad's daily count feeds.",
+   "why": "The launch-day audience is built here; 500 by 27 Nov or the 8 Dec email list is thin.",
    "area": "Waitlist",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P0",
    "priority_reason": "Dated: waitlist live 6 Oct is in the N3 gate and opens 13 Oct.",
    "depends_on": [
@@ -10182,13 +10182,13 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "plan",
-   "acceptance": "The waitlist is live on 6 Oct, the opening comms are scheduled for 13 Oct, and the weekly growth report template exists with the 500 target.",
+   "acceptance": "The waitlist is live on 13 Oct, the opening comms are scheduled for 20 Oct, and the weekly growth report template exists with the 500 target.",
    "checklist": [
-    "Verify live on 6 Oct with Asad",
+    "Verify live on 13 Oct with Asad",
     "Approve opening copy with Filza",
     "Set the UTM list per directory",
     "Define the weekly report format",
-    "Schedule the 13 Oct send"
+    "Schedule the 20 Oct send"
    ]
   },
   {
@@ -10196,10 +10196,10 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Alex",
    "title": "Investor update #1",
-   "what": "Send investor update #1: flop gate cleared with numbers, Meta submitted 25 Sep and the rejection-loop dates, pricing locked, pilots onboarded, and the comment collapse stated honestly (real, platform-side, consequences: GraphRAG deferred, crisis gate re-scoped). Keep the investor language off every Meta-facing and public surface.",
+   "what": "Send investor update #1: flop gate cleared with numbers, Meta submitted 2 Oct and the rejection-loop dates, pricing locked, pilots onboarded, and the comment collapse stated honestly (real, platform-side, consequences: GraphRAG deferred, crisis gate re-scoped). Keep the investor language off every Meta-facing and public surface.",
    "why": "Investors read the same numbers the go/no-go will; an update that hides the comment collapse costs trust when the crisis claim is later qualified.",
    "area": "Launch",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "Real risk with slack: no external date, but cadence is expected.",
    "depends_on": [
@@ -10228,7 +10228,7 @@ window.LAUNCH_DATA = {
    "what": "Decide whether to run the optional trial and, if yes, run it strictly by hand: rank invites by an engagement-weighted mutual-tie score (comments > reactions > passive follow), add a randomised control arm of matched cold prospects (same industry/title, 0 mutuals), log mutual count per invite for a dose-response read, cap ~20-25% per neighbourhood cluster, stay under 100 invites/week, and measure 30-day reply/engagement of accepts rather than accept rate.",
    "why": "Acceptance is not value; the trial is the cheap test of whether the network theory behind Discovery also grows our own pipeline, and if it works it becomes a Wave-2 engine.",
    "area": "Marketing",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P2",
    "priority_reason": "Optional per the plan; safe to skip if N3 runs hot.",
    "depends_on": [
@@ -10256,7 +10256,7 @@ window.LAUNCH_DATA = {
    "what": "Confirm with Muteeb which vector store is actually in use (the plan's HOW names tenant-namespaced pgvector; Checklist 5 and Muteeb's quota list name Pinecone - record the decision), pick the tier that covers pilot x10 with tenant namespaces, and set the embedding budget from the ingest volume (last-90-days-first backfill plus ongoing posts/comments at the embedding model's price). Clear the vendor with Filza under the standing rule that no customer content goes to any LLM tier that trains on data. Add both as cost-model lines.",
    "why": "Muteeb's RAG plumbing started in N2 and Art-E Q&A with per-tenant cost attribution lands this sprint; an unbudgeted vector store is the surprise line item and the N4 vendor quota raises need a tier to raise from.",
    "area": "Finance",
-   "due": "2026-09-30",
+   "due": "2026-10-07",
    "priority": "P1",
    "priority_reason": "Real risk with slack: Art-E is metered from day one, so the budget must exist before N4 tuning.",
    "depends_on": [
@@ -10288,7 +10288,7 @@ window.LAUNCH_DATA = {
    "what": "With Muteeb, write the log-retention policy: retention days per log class (app/API, tenant-tagged pipeline logs, Sentry events, uptime and status-page history) with a hot/cold split, and the resulting observability budget line (log storage, Sentry tier and seat cap, uptime, status page, paging). Align the tiers with Filza's retention schedule and the no-PII logging rule so the ops policy does not contradict the legal one.",
    "why": "Monitoring must not become the surprise line item; Sentry events and log storage grow with launch traffic exactly when nobody is watching the bill.",
    "area": "Ops",
-   "due": "2026-10-02",
+   "due": "2026-10-09",
    "priority": "P1",
    "priority_reason": "Real risk with slack: costs are modest now, but the caps must be set before the N5 war-room board multiplies sources.",
    "depends_on": [
@@ -10317,11 +10317,11 @@ window.LAUNCH_DATA = {
    "id": "N3-JL-03",
    "sprint": "N3",
    "assignee": "Jill",
-   "title": "Waitlist tool operationally ready for 6 Oct live / 13 Oct open",
-   "what": "Make the bought waitlist tool ready for Asad's 6 Oct integration: plan sized for the 500-by-20-Nov target and launch-day traffic, billing owner set, sender domain/DKIM on our domain, UTM-per-directory tracking confirmed, the migration of existing Netlify Forms signups planned with Asad so early names keep their queue position, and the daily-count export Saad sends Alex from 13 Oct. Check Filza's PECR list (consent wording, tested unsubscribe, no pre-consent pixels) is reflected in the tool's settings.",
-   "why": "The N3 gate has the waitlist live 6 Oct and it opens 13 Oct; scarcity mechanics need operational truth behind them and a tool on the wrong plan caps the list on opening day.",
+   "title": "Waitlist tool operationally ready for 13 Oct live / 20 Oct open",
+   "what": "Make the bought waitlist tool ready for Asad's 13 Oct integration: plan sized for the 500-by-20-Nov target and launch-day traffic, billing owner set, sender domain/DKIM on our domain, UTM-per-directory tracking confirmed, the migration of existing Netlify Forms signups planned with Asad so early names keep their queue position, and the daily-count export Saad sends Alex from 20 Oct. Check Filza's PECR list (consent wording, tested unsubscribe, no pre-consent pixels) is reflected in the tool's settings.",
+   "why": "The N3 gate has the waitlist live 13 Oct and it opens 20 Oct; scarcity mechanics need operational truth behind them and a tool on the wrong plan caps the list on opening day.",
    "area": "Waitlist",
-   "due": "2026-10-06",
+   "due": "2026-10-13",
    "priority": "P0",
    "priority_reason": "Dated: live 6 Oct (N3 gate), opens 13 Oct.",
    "depends_on": [
@@ -10354,7 +10354,7 @@ window.LAUNCH_DATA = {
    "what": "With Muteeb, write the one-page circuit-breaker spec Checklist 5 asks for: per-tenant Art-E quota (calls/day and spend/day), global daily LLM spend cap, embedding spend cap, what trips (soft warn at 80%, hard trip at 100%), what the user sees when tripped (Muteeb/Asad), who is paged, and how the trip wires to the AWS budget alarms. Jill sets the money numbers from the cost model; Muteeb implements and trip-tests in N4.",
    "why": "Art-E must be unable to bankrupt us; Muteeb's N4 'circuit breaker trip-tested' needs agreed thresholds, and a breaker with no paging just fails silently.",
    "area": "Ops",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P0",
    "priority_reason": "Blocks Muteeb: his N4 Week A orchestration (per-tenant quotas + trip-tested breaker) needs agreed money numbers he cannot set himself.",
    "depends_on": [
@@ -10385,10 +10385,10 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Jill",
    "title": "Founding-pricing mechanics sheet for Alex and Lewis",
-   "what": "Turn the 25 Sep price into the operational sheet behind the scarcity claims: number of founding seats/pages, eligibility deadline, lock duration, what a non-pilot batch-1 signup pays or gets during founding pricing, and how each claim reconciles with the invoice template and the landing page. Alex briefs Lewis from it this sprint and drafts the 17 Nov notice from it; Filza checks the scarcity claims.",
-   "why": "Alex briefs founding pricing to Lewis in N3 and the 17 Nov notice needs DEFINED terms reconciled with landing + invoices; numbers made up on the day mean the invoices and the notice disagree.",
+   "what": "Turn the 2 Oct price into the operational sheet behind the scarcity claims: number of founding seats/pages, eligibility deadline, lock duration, what a non-pilot batch-1 signup pays or gets during founding pricing, and how each claim reconciles with the invoice template and the landing page. Alex briefs Lewis from it this sprint and drafts the 24 Nov notice from it; Filza checks the scarcity claims.",
+   "why": "Alex briefs founding pricing to Lewis in N3 and the 24 Nov notice needs DEFINED terms reconciled with landing + invoices; numbers made up on the day mean the invoices and the notice disagree.",
    "area": "Marketing",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "Real risk with slack: the notice is 17 Nov, but Lewis starts conversion conversations now.",
    "depends_on": [
@@ -10421,7 +10421,7 @@ window.LAUNCH_DATA = {
    "what": "Connect ArtemisAI's own Facebook page as a tenant on staging with Lewis as admin/Tester and use the product every morning: Today, a draft in Studio, the alerts inbox once it is live. Keep a daily one-line log of friction or wrong-looking data and fold it into Saad's weekly digest; offer this tenant to Filza as the subject for the DSAR sample run if no pilot page is suitable.",
    "why": "Someone on the team must live in the product; we should hit the embarrassing bugs before pilots do.",
    "area": "Pilots",
-   "due": "2026-10-02",
+   "due": "2026-10-09",
    "priority": "P1",
    "priority_reason": "Benchmark-audit item with no gate on it, but daily use only pays if it starts early",
    "depends_on": [
@@ -10435,7 +10435,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "The company page is connected by 2 Oct and a daily-use log with at least 8 entries exists by 11 Oct.",
+   "acceptance": "The company page is connected by 9 Oct and a daily-use log with at least 8 entries exists by 18 Oct.",
    "checklist": [
     "Get admin on the company page",
     "Connect on staging",
@@ -10451,7 +10451,7 @@ window.LAUNCH_DATA = {
    "what": "Before seeing a single match, write the pass bar with Asad and Muteeb: precision@5 threshold per pilot page, stratified by edge provenance (structural / text-only / discordant), what counts as a good match (an audience overlap a page admin would actually collaborate on) and the minimum number of pages judged. Record alongside the bar what a miss means per stratum, pointing at Asad's pre-declared failure branch (N3-AS-15), so the consequence is fixed before the numbers exist. Build the judging sheet in qrels shape (page, rank, matched page, reason string shown, provenance, judgement, note) and ask Muteeb to oversample discordant pairs into it. (Cycle with N3-AS-15 broken 3 Sep: this delivers first; N3-AS-15 consumes it.)",
    "why": "With 20 pages there is no click data; a bar set after seeing matches is theatre, and Discovery cannot be served before it passes.",
    "area": "Discovery",
-   "due": "2026-10-02",
+   "due": "2026-10-09",
    "priority": "P0",
    "priority_reason": "The bar must exist before matches are delivered or the gate is invalid",
    "depends_on": [
@@ -10482,7 +10482,7 @@ window.LAUNCH_DATA = {
    "what": "When Asad has cleared the fix-then-invite list, invite pilots 6-10 from the roster and the application pipeline, get their Tester roles accepted, and run the same connect walkthrough as cohort 1. Report the total connected page count to Muteeb for the Discovery graph and log connect friction again against Saad's onboarding spec. Pilots 1-5 remain the five the plan counts for UAT, invoices and launch; cohort 2 widens the graph and the feedback pool.",
    "why": "The plan recruits 10 pilots but only names pilots 1-5; the human gate and the graph are thin below ~20 connected pages, and cohort 2 tests whether the fixes worked.",
    "area": "Pilots",
-   "due": "2026-10-06",
+   "due": "2026-10-13",
    "priority": "P1",
    "priority_reason": "Discovery's n depends on it, but the gate can be judged on cohort-1 pages if this slips",
    "depends_on": [
@@ -10497,7 +10497,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "reconciler",
-   "acceptance": "Pilots 6-10 have Tester roles and connected pages on staging by 6 Oct, with the connected page count reported to Muteeb.",
+   "acceptance": "Pilots 6-10 have Tester roles and connected pages on staging by 13 Oct, with the connected page count reported to Muteeb.",
    "checklist": [
     "Confirm the fix list is cleared",
     "Invites and Tester roles for pilots 6-10",
@@ -10511,10 +10511,10 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Lewis",
    "title": "Deliver the blind comment gold set (200 labelled)",
-   "what": "Collect the labelers' sheets on 2 Oct, compute inter-rater agreement on the overlap subset, adjudicate disagreements with Saad against the rubric (never against model output), and deliver the 200 final labels to Faheem with provenance (who labelled, rubric version, date).",
+   "what": "Collect the labelers' sheets on 9 Oct, compute inter-rater agreement on the overlap subset, adjudicate disagreements with Saad against the rubric (never against model output), and deliver the 200 final labels to Faheem with provenance (who labelled, rubric version, date).",
    "why": "Turns agreement-with-the-model into a real accuracy number before the freeze locks the crisis and sentiment models.",
    "area": "QA",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P1",
    "priority_reason": "Feeds Faheem's N4 mid-flight audit; a few days of slack",
    "depends_on": [
@@ -10526,9 +10526,9 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "Faheem receives 200 labelled comments with an agreement statistic and a provenance sheet by 7 Oct.",
+   "acceptance": "Faheem receives 200 labelled comments with an agreement statistic and a provenance sheet by 14 Oct.",
    "checklist": [
-    "Chase the labelers for the 2 Oct deadline",
+    "Chase the labelers for the 9 Oct deadline",
     "Agreement statistic on the overlap subset",
     "Adjudicate with Saad",
     "Provenance sheet",
@@ -10541,9 +10541,9 @@ window.LAUNCH_DATA = {
    "assignee": "Lewis",
    "title": "Live storm drill on a real pilot page with Faheem",
    "what": "Pick a non-declining pilot page whose admin agrees in writing to a seeded storm (a burst of pre-written hostile-but-harmless comments from team accounts, deleted afterwards) and schedule it with Faheem and Muteeb inside a weekday hour. Start the stopwatch on the first seeded comment, record the in-app alert time and the email-received time, and check the alert cites the right post and carries a drafted reply. Clean up the comments and thank the pilot.",
-   "why": "The 15-minute promise is measured here before pilots depend on it and before the 5 Nov demo video makes the claim publicly.",
+   "why": "The 15-minute promise is measured here before pilots depend on it and before the 12 Nov demo video makes the claim publicly.",
    "area": "Alerts",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P0",
    "priority_reason": "The 9 Oct gate is this clock: comment-posted to email-received under 15 minutes",
    "depends_on": [
@@ -10560,7 +10560,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "plan",
-   "acceptance": "A drill record (page, seed time, in-app time, email time, cited post, drafted reply present, under-15-min yes/no) is filed for the 9 Oct gate.",
+   "acceptance": "A drill record (page, seed time, in-app time, email time, cited post, drafted reply present, under-15-min yes/no) is filed for the 16 Oct gate.",
    "checklist": [
     "Pilot consent in writing",
     "Seed-comment script",
@@ -10578,7 +10578,7 @@ window.LAUNCH_DATA = {
    "what": "Judge the top-5 matches for every connected pilot page against the pre-declared bar, blind to the score, one judgement per match in the sheet; judge the oversampled discordant pairs and note which provenance the truth sided with. Compute precision@5 overall and per stratum (structural / text-only / discordant), record pass/fail against the bar, and hand it to Muteeb and Asad; if it fails, list the failure patterns for the recompute.",
    "why": "Expert judgement is the only validation at 20 pages; Discovery may not be served to anyone until this is recorded as a pass.",
    "area": "Discovery",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P0",
    "priority_reason": "The 9 Oct gate reads it and nothing is served before pass",
    "depends_on": [
@@ -10594,7 +10594,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "plan",
-   "acceptance": "The judging sheet is complete for every connected pilot page with precision@5 per stratum and a recorded pass/fail dated on or before 9 Oct.",
+   "acceptance": "The judging sheet is complete for every connected pilot page with precision@5 per stratum and a recorded pass/fail dated on or before 16 Oct.",
    "checklist": [
     "Receive matches plus the discordant oversample",
     "Judge blind to the score",
@@ -10609,10 +10609,10 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Lewis",
    "title": "Art-E golden question set v1 with Saad: 20 gate questions plus ~100",
-   "what": "With Saad, write the questions a page admin actually asks (why did Tuesday's post die, when should I post the giveaway, is my page healthier than last month), each with the expected cited source, plus a must-refuse and adversarial subset (competitor revenue, injection strings inside comments). Lock the 20 scripted questions for the 23 Oct gate first, then reach about 100, using Saad's Art-E acceptance criteria for refusal wording. Deliver to Faheem in the sheet format he can run nightly.",
+   "what": "With Saad, write the questions a page admin actually asks (why did Tuesday's post die, when should I post the giveaway, is my page healthier than last month), each with the expected cited source, plus a must-refuse and adversarial subset (competitor revenue, injection strings inside comments). Lock the 20 scripted questions for the 30 Oct gate first, then reach about 100, using Saad's Art-E acceptance criteria for refusal wording. Deliver to Faheem in the sheet format he can run nightly.",
    "why": "Faheem cannot build the 200-question citation gate without questions and his roadmap needs them in N3; the plan had Lewis's authoring in N4, and his document wins for the date.",
    "area": "Art-E",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P0",
    "priority_reason": "Faheem's roadmap names N3 as the deadline; the N4 gate runs these questions",
    "depends_on": [
@@ -10625,7 +10625,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N4",
    "source": "faheem",
-   "acceptance": "Faheem has the locked 20 gate questions plus at least 80 more with expected sources and refusal categories by 9 Oct.",
+   "acceptance": "Faheem has the locked 20 gate questions plus at least 80 more with expected sources and refusal categories by 16 Oct.",
    "checklist": [
     "Agree the sheet format with Faheem",
     "20 gate questions with expected cited sources",
@@ -10643,7 +10643,7 @@ window.LAUNCH_DATA = {
    "what": "Final strings per surface: the gauge and driver chips (bands plus the abstain state), crisis alerts and drafted replies, best-times and next-move claims, the health score, Art-E answers (AI label, grounding footer wording, refusal state) and Discovery reason strings. Each label says it is AI-generated decision support, what it is based on and where to learn more; disclaimers match the Art 22 position and the pilot agreement's AI-guidance clause.",
    "why": "Saad's N3 Art-E acceptance criteria and Asad's N4 builds ship these words; strings invented UI-side would not match the legal position.",
    "area": "Legal",
-   "due": "2026-10-02",
+   "due": "2026-10-09",
    "priority": "P1",
    "priority_reason": "Asad's consuming builds start 12 Oct, ten days after the 2 Oct due; Saad's criteria can carry placeholders; N3-FZ-03 (refusal categories) stays P0.",
    "depends_on": [
@@ -10672,7 +10672,7 @@ window.LAUNCH_DATA = {
    "what": "Specify what Art-E may remember per tenant (conversation context, stated goals, thumbs reasons), the 90-day rolling retention with automatic purge, the forget-this action (scope: one message, one topic, everything; latency; confirmation), that memory is tenant-namespaced and inside the deletion cascade and DSAR scope, and the log entry each purge writes. Muteeb builds retrieval plus memory in N4 week A.",
    "why": "Memory without retention rules is a GDPR incident waiting, and Muteeb needs the rules before he builds the store.",
    "area": "Art-E",
-   "due": "2026-10-06",
+   "due": "2026-10-13",
    "priority": "P0",
    "priority_reason": "Blocks Muteeb's N4 week A orchestration build",
    "depends_on": [
@@ -10702,7 +10702,7 @@ window.LAUNCH_DATA = {
    "what": "Define the categories Art-E must refuse (identifiable individuals or other tenants' pages, special-category inference, medical/legal/financial advice, replies that target a person, anything outside the page's own data) with refusal wording, the harmful-output redlines the golden set's must-refuse questions test, and the complaint path (thumbs-down reason to support@ to Filza review, with a response time). Goes to Saad for the acceptance criteria and to Faheem for the golden set.",
    "why": "Saad writes Art-E pass/fail criteria this sprint and Faheem's 200-question set needs must-refuse cases; without categories the refusal gate has nothing to test.",
    "area": "Art-E",
-   "due": "2026-10-06",
+   "due": "2026-10-13",
    "priority": "P0",
    "priority_reason": "Blocks Saad's N3 Art-E criteria (refusal wording) and Faheem's must-refuse golden-set cases",
    "depends_on": [
@@ -10731,7 +10731,7 @@ window.LAUNCH_DATA = {
    "what": "Review every reason-string template Muteeb and Saad propose ('8,200 of your people also follow...', 'similar discussion topics') as a data disclosure: banded not exact counts, no follower identities, provenance-honest (text-only edges never claim audience overlap), nothing below the k=5 floor, nothing that lets two pilots difference each other's audiences. Return the approved list with edits; anything not on it does not ship.",
    "why": "Muteeb builds provenance-honest reason strings in N3 week B and Asad shows them in N4; each template must clear the same bar as the cards.",
    "area": "Discovery",
-   "due": "2026-10-02",
+   "due": "2026-10-09",
    "priority": "P0",
    "priority_reason": "Blocks Muteeb's N3 blend/reason strings and Asad's N4 UI",
    "depends_on": [
@@ -10761,7 +10761,7 @@ window.LAUNCH_DATA = {
    "what": "Written position that the flop gauge, crisis alerts, health score, next-move and Art-E recommendations are decision support with a human page owner acting, produce no legal or similarly significant effect on data subjects, and how the UI (bands, abstain state, AI labels, not-a-crisis feedback) supports that. Include the meaningful-information-about-logic text that support and the privacy policy can quote.",
    "why": "This is the regulatory position that lets the scores exist; the AI labels and Privacy v2 both cite it.",
    "area": "Legal",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P1",
    "priority_reason": "Regulatory position with slack; cited by Privacy v2 on 9 Oct",
    "depends_on": [
@@ -10786,11 +10786,11 @@ window.LAUNCH_DATA = {
    "id": "N3-FZ-06",
    "sprint": "N3",
    "assignee": "Filza",
-   "title": "Run the PECR check on the live waitlist before it opens 13 Oct",
-   "what": "On the waitlist as built (live 6 Oct): consent wording matches N2, unsubscribe works end-to-end (a real signup and unsubscribe), no analytics or ad pixels fire before consent (read the network log), UTM per directory carries no personal data, and the migrated Netlify Forms names are handled per the N2 ruling. Written pass/fail to Asad and Alex before 13 Oct.",
-   "why": "The 13 Oct list must be lawful to email on 17 Nov and 1 Dec; a pixel before consent or a dead unsubscribe makes it unlawful.",
+   "title": "Run the PECR check on the live waitlist before it opens 20 Oct",
+   "what": "On the waitlist as built (live 13 Oct): consent wording matches N2, unsubscribe works end-to-end (a real signup and unsubscribe), no analytics or ad pixels fire before consent (read the network log), UTM per directory carries no personal data, and the migrated Netlify Forms names are handled per the N2 ruling. Written pass/fail to Asad and Alex before 20 Oct.",
+   "why": "The 20 Oct list must be lawful to email on 24 Nov and 8 Dec; a pixel before consent or a dead unsubscribe makes it unlawful.",
    "area": "Waitlist",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P0",
    "priority_reason": "Dated: waitlist opens Mon 13 Oct",
    "depends_on": [
@@ -10820,7 +10820,7 @@ window.LAUNCH_DATA = {
    "what": "Position memo on the arousal-mix feature and the comment emotion and sentiment models: they infer emotion from public comment text about a page's content, not from biometric data and not in workplace or education settings, so the Article 5(1)(f) prohibition does not apply; document the transparency obligations that do, and write the user-facing disclosure text Saad places where emotion signals appear (alerts, driver chips, Art-E).",
    "why": "A master-plan MVP item the legal pack had missed; lawyer-days, zero engineering, and the disclosure text has to ship with the surfaces.",
    "area": "Legal",
-   "due": "2026-10-07",
+   "due": "2026-10-14",
    "priority": "P1",
    "priority_reason": "Position memo with slack; disclosure text needed for N4 builds and Privacy v2 on 9 Oct",
    "depends_on": [
@@ -10850,7 +10850,7 @@ window.LAUNCH_DATA = {
    "what": "Update the RoPA and the privacy policy so vector embeddings (tenant-namespaced index) and Art-E memory are named as personal data with their retention and sit inside the DSAR export and the deletion cascade. Add the Art 22 and AI Act positions in plain language, the emotion-signal disclosure and the Discovery opt-in description. Publish v2 at the same URLs with a version note and tell Saad so the Meta dashboard still resolves.",
    "why": "Embeddings reconstruct text; they are personal data whether we like it or not, and the N4 DSAR run is tested against this document.",
    "area": "Legal",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "N4 DSAR run and deletion witness test against this version",
    "depends_on": [
@@ -10882,7 +10882,7 @@ window.LAUNCH_DATA = {
    "what": "Written position: the service is for page admins aged 18+ (ToS), no commenter ages are inferred, comment data from possible minors on pilot pages is processed only as public page content for the page owner, and the ICO Children's Code risk assessment outcome is recorded. Add the age statement to ToS final.",
    "why": "Housekeeping the legal checklist names; a regulator asks it first for anything touching public comments.",
    "area": "Legal",
-   "due": "2026-10-11",
+   "due": "2026-10-18",
    "priority": "P2",
    "priority_reason": "Safe to slip a few days; no build depends on it",
    "depends_on": [
@@ -10909,7 +10909,7 @@ window.LAUNCH_DATA = {
    "what": "Write the short pack that answers a Data Protection Assessment or Data Use Checkup request arriving between submission and the full N5 binder: the data-use statement per permission from the N2 package, the deletion and deauthorize routes with the built endpoints as evidence, the sub-processor list, the security posture as it stands (KMS, RLS, tenant isolation), and an explicit note of what is still in flight (pen-test, DSAR run) with its date. Name who replies and inside what clock.",
    "why": "Meta controls this clock and can start it any day after 25 Sep; a six-week gap with no pack means the reply is assembled under a deadline from five people's folders.",
    "area": "Meta",
-   "due": "2026-10-09",
+   "due": "2026-10-16",
    "priority": "P1",
    "priority_reason": "P1 - real risk on a Meta-controlled clock, but the artifacts exist and only assembly is needed.",
    "depends_on": [
@@ -10939,9 +10939,9 @@ window.LAUNCH_DATA = {
    "assignee": "Asad",
    "title": "Art-E rail: streaming answers, citation chips, grounding footer",
    "what": "Always-on right rail (orb on mobile) on Muteeb's orchestration: streamed tokens, citation chips resolving to the cited post / comment / metric, grounding footer with sample size + confidence, tenant-scoped history; behind a feature flag for the N6 kill switch.",
-   "why": "The interface to everything and the 23 Oct gate's 20-question run; receipts make it believable.",
+   "why": "The interface to everything and the 30 Oct gate's 20-question run; receipts make it believable.",
    "area": "Art-E",
-   "due": "2026-10-20",
+   "due": "2026-10-27",
    "priority": "P0",
    "priority_reason": "Gate: 20-question run live 23 Oct",
    "depends_on": [
@@ -10974,7 +10974,7 @@ window.LAUNCH_DATA = {
    "what": "Consent screen with equal-prominence opt-in / decline and revocation from Settings, exactly Filza's text; Discovery renders nothing (with Saad's low-opt-in empty-state copy) whenever the API returns fail-closed, and the event is logged client and server side.",
    "why": "Consent and the k=5 floor are product features here, not paperwork; the empty state must sell, not apologise.",
    "area": "Discovery",
-   "due": "2026-10-20",
+   "due": "2026-10-27",
    "priority": "P0",
    "priority_reason": "Gate and privacy floor",
    "depends_on": [
@@ -11004,7 +11004,7 @@ window.LAUNCH_DATA = {
    "what": "Recommendation card with ONE CTA deep-linking into the app (Drafts, Alerts, Best Times); AI label and Art 22 decision-support disclaimer on the rail per Filza; must-refuse questions render the refusal. Build every state in Saad's N3-SD-10 matrix, not just the policy refusal: abstain when retrieval found nothing, thin-data hedge showing the sample size, citation-gate block, per-tenant quota reached, and service degraded when the breaker is open or the model vendor is unavailable - each with Saad's final copy and the right next action, never a blank rail or a raw error.",
    "why": "The gate counts refusals as correct only if they exist; AI labels are a legal launch gate.",
    "area": "Art-E",
-   "due": "2026-10-21",
+   "due": "2026-10-28",
    "priority": "P0",
    "priority_reason": "Gate and legal requirement",
    "depends_on": [
@@ -11032,11 +11032,11 @@ window.LAUNCH_DATA = {
    "id": "N4-AS-04",
    "sprint": "N4",
    "assignee": "Asad",
-   "title": "Discovery v1 UI per Saad's 5 Sep pack (view-only)",
+   "title": "Discovery v1 UI per Saad's 12 Sep pack (view-only)",
    "what": "Explore: top-match spotlight, ranked rows with overlap % and provenance-honest reason strings straight from the API, slide-over profile, Matches / Saved tabs; pass through the 'suggested - not validated' label on fail-open rows and the 'high-confidence' badge; no sub-score meters, no messaging. Where the API reports that candidates were withheld below the k=5 floor, say so on the list in Filza-approved wording rather than silently returning a short list, and give each badge a one-line plain-English meaning in the slide-over so a thin-evidence match never reads like a strong one.",
    "why": "The network moat made visible; the gate demands opt-in -> spotlight -> save live.",
    "area": "Discovery",
-   "due": "2026-10-21",
+   "due": "2026-10-28",
    "priority": "P0",
    "priority_reason": "Gate item",
    "depends_on": [
@@ -11069,7 +11069,7 @@ window.LAUNCH_DATA = {
    "what": "Pages view: card per connected page with health ring, band label and weekly delta; workspace switcher finalised (all pages / one page) driving page_id on Today and Analytics queries; thin pages show 'building your baseline'.",
    "why": "Pilots run several pages; the gate says 'Pages view reads real health'.",
    "area": "Pages",
-   "due": "2026-10-22",
+   "due": "2026-10-29",
    "priority": "P0",
    "priority_reason": "Gate item",
    "depends_on": [
@@ -11100,7 +11100,7 @@ window.LAUNCH_DATA = {
    "what": "Settings data controls: 'export my data' request and 'delete my account / page data' flows calling Muteeb's deletion cascade (token revocation -> data delete incl. vectors and memory) with confirmation, status and an email receipt; ready for Filza's witnessed deletion and DSAR sample run.",
    "why": "Deletion witnessed and a real DSAR run are N4 legal proofs; the go/no-go reads the receipts.",
    "area": "Settings",
-   "due": "2026-10-22",
+   "due": "2026-10-29",
    "priority": "P0",
    "priority_reason": "Filza's witnessed run is dated in N4",
    "depends_on": [
@@ -11130,7 +11130,7 @@ window.LAUNCH_DATA = {
    "what": "Thumbs up/down on every Art-E answer with a reason picker; posts question, answer id, citations and reason to the feedback store Faheem reads for regression cases.",
    "why": "Every thumbs-down becomes a golden-set test case.",
    "area": "Art-E",
-   "due": "2026-10-22",
+   "due": "2026-10-29",
    "priority": "P1",
    "priority_reason": "Small add on the rail",
    "depends_on": [
@@ -11158,7 +11158,7 @@ window.LAUNCH_DATA = {
    "what": "When a saved page revokes opt-in, the Saved tab drops it within the 24h propagation window with a neutral 'no longer available' state (no name, no data) and spotlight/matches never re-show it; covered by an E2E case using Muteeb's propagation test fixture.",
    "why": "The consent breach made impossible on screen too; among 10 pilots who talk it would be visible.",
    "area": "Discovery",
-   "due": "2026-10-22",
+   "due": "2026-10-29",
    "priority": "P1",
    "priority_reason": "Benchmark fix riding on the engine's propagation test",
    "depends_on": [
@@ -11185,7 +11185,7 @@ window.LAUNCH_DATA = {
    "what": "Banner on landing and app per Filza's consent-gating spec: non-essential scripts (analytics, any pixel) load only after accept; declined state provably loads nothing (network-log evidence attached); preference stored and changeable in Settings; decline is one click.",
    "why": "Legal reality check; Filza verifies it on staging in N5 and PECR forbids pre-consent pixels.",
    "area": "Settings",
-   "due": "2026-10-22",
+   "due": "2026-10-29",
    "priority": "P1",
    "priority_reason": "Legal gate with N5 verification slack",
    "depends_on": [
@@ -11213,7 +11213,7 @@ window.LAUNCH_DATA = {
    "what": "Per Saad's onboarding spec: after connect, stream named analysis steps and partial results from Muteeb's priority-queue completion events (last 90 days first); the first insight surfaces as soon as it exists; staged tour; setup pill tracks the rest; thin-page first run per Saad's thin-page one-pager; a 'stuck? book 10 min' hatch link.",
    "why": "Blank screens churn pilots; the activation event must be reachable in minutes, measured in UAT.",
    "area": "Onboarding",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Sprint goal; measured in UAT not at the gate",
    "depends_on": [
@@ -11244,7 +11244,7 @@ window.LAUNCH_DATA = {
    "what": "Run a secrets scanner (gitleaks or equivalent) over the app and website repos including history, move anything found to the vault, confirm Facebook tokens are never logged client-side, add the scan to CI; file the receipt in Jill's evidence folder.",
    "why": "Checklist 2 names Asad/Muteeb for 'verified by scan (N4)'; the pen-test target must be clean first.",
    "area": "Ops",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Pen-test prerequisite with slack",
    "depends_on": [
@@ -11273,7 +11273,7 @@ window.LAUNCH_DATA = {
    "what": "Slide-over from a page card: posting consistency, content strength, timing adherence bars from the health sub-scores with plain-English notes; first against the wall if the week runs hot (cut order, not weekends).",
    "why": "Credit-score style decomposition is what makes 72 mean something, but it is presentation on already-served fields.",
    "area": "Pages",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P2",
    "priority_reason": "Named cut candidate",
    "depends_on": [
@@ -11299,7 +11299,7 @@ window.LAUNCH_DATA = {
    "what": "Card on Today from Muteeb's nightly briefing aggregate: reach delta, overnight shares, moves count, timestamped; hidden when the aggregate is stale; behind a feature flag for the N6 kill switch.",
    "why": "The 7am hook of the daily habit; cut-order #2 if N4 runs hot.",
    "area": "Today",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P2",
    "priority_reason": "Named cut candidate",
    "depends_on": [
@@ -11327,7 +11327,7 @@ window.LAUNCH_DATA = {
    "what": "Extend the N2 events into the funnel signup -> connected -> ingest done -> first insight (activation event) -> draft scored, each timestamped so time-to-first-value is computed per tenant; hand the dashboard query to Muteeb for the war-room activation panel.",
    "why": "Batch 1 is 100 strangers with no concierge; the war room must see where they stall.",
    "area": "Ops",
-   "due": "2026-10-25",
+   "due": "2026-11-01",
    "priority": "P1",
    "priority_reason": "Launch instrumentation with slack",
    "depends_on": [
@@ -11357,7 +11357,7 @@ window.LAUNCH_DATA = {
    "what": "E2E flows: (4) seeded alert -> inbox card -> action CTA -> mark read with the bell decrementing; (5) golden-set question -> streamed answer with a resolving citation chip, plus a refusal case; added to the CI suite from N3.",
    "why": "Checklist 2 names all five flows as Asad's, built N3-N5; the N5 nightly run needs them to exist.",
    "area": "QA",
-   "due": "2026-10-25",
+   "due": "2026-11-01",
    "priority": "P1",
    "priority_reason": "Safety net for the freeze",
    "depends_on": [
@@ -11385,7 +11385,7 @@ window.LAUNCH_DATA = {
    "what": "Per Filza's memory pack: a forget-this action on each Art-E message (scopes: this message / this topic / everything) calling Muteeb's purge endpoint, with confirmation and a done state within the specified latency; a one-line \"what Art-E remembers, 90-day purge\" note in Settings data controls linking to the everything-scope. Behind the same flag as the rail.",
    "why": "A backend purge nobody can trigger from the UI does not satisfy the control Filza specced or the DSAR/deletion story the go/no-go reads; the rail ships in N4 and this is the moment to add it.",
    "area": "Art-E",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "P1 - small addition to the rail with slack before the N5 legal proofs",
    "depends_on": [
@@ -11413,10 +11413,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Asad",
    "title": "Re-cost per page per month including the LLM, after Art-E",
-   "what": "Rerun the N1 consolidation on measured numbers now Art-E is live: LLM spend per tenant per month from the cost records (the cascade mix actually used, the cache-hit rate actually observed against the 60% assumption, the quota ceilings in force), plus infra, serving and hosting. State cost per page at 5 pilots and at 100 pages, the gross margin at the price Alex signed on 25 Sep, and the usage level at which a tenant stops being profitable - which is the number the Art-E quota should be set from.",
-   "why": "The founding-price notice goes out on 17 Nov and is a public commitment; if Art-E's real cost per tenant is above the September estimate, this is the last window in which the price or the quota can change.",
+   "what": "Rerun the N1 consolidation on measured numbers now Art-E is live: LLM spend per tenant per month from the cost records (the cascade mix actually used, the cache-hit rate actually observed against the 60% assumption, the quota ceilings in force), plus infra, serving and hosting. State cost per page at 5 pilots and at 100 pages, the gross margin at the price Alex signed on 2 Oct, and the usage level at which a tenant stops being profitable - which is the number the Art-E quota should be set from.",
+   "why": "The founding-price notice goes out on 24 Nov and is a public commitment; if Art-E's real cost per tenant is above the September estimate, this is the last window in which the price or the quota can change.",
    "area": "Ops",
-   "due": "2026-10-25",
+   "due": "2026-11-01",
    "priority": "P0",
    "priority_reason": "P0 - external clock: Alex drafts the founding-pricing notice on 6 Nov and sends it 17 Nov.",
    "depends_on": [
@@ -11440,7 +11440,7 @@ window.LAUNCH_DATA = {
     "Compare observed cache-hit rate against the 60% assumption",
     "Recompute cost per page at 5 pilots and at 100 pages",
     "State margin at the signed price and the unprofitable threshold",
-    "Hand it to Alex and Jill before the 6 Nov notice draft"
+    "Hand it to Alex and Jill before the 13 Nov notice draft"
    ],
    "source": "reconciler"
   },
@@ -11450,9 +11450,9 @@ window.LAUNCH_DATA = {
    "assignee": "Faheem",
    "title": "Hard citation gate: un-cited numbers blocked at generation",
    "what": "Programmatic check of every numeric claim against retrieved sources (entailment per number), block-and-regenerate on failure, refusal when no source; never an LLM judging itself.",
-   "why": "The trust moat; the 23 Oct gate is zero un-cited numbers.",
+   "why": "The trust moat; the 30 Oct gate is zero un-cited numbers.",
    "area": "Art-E",
-   "due": "2026-10-20",
+   "due": "2026-10-27",
    "priority": "P0",
    "priority_reason": "N4 gate",
    "depends_on": [
@@ -11481,7 +11481,7 @@ window.LAUNCH_DATA = {
    "what": "Grow the set to 200 incl. must-refuse, adversarial, a qualitative-claim grounding rubric and a memory-recall check; run nightly with pass/fail on the dashboard.",
    "why": "Seven green nights before freeze is impossible without the nightly job.",
    "area": "Art-E",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P0",
    "priority_reason": "N4 gate + N5 seven-green-nights",
    "depends_on": [
@@ -11510,7 +11510,7 @@ window.LAUNCH_DATA = {
    "what": "Delimit and mark retrieved comment text as untrusted (spotlighting) and add a named probe set where strangers' comments carry instructions.",
    "why": "Strangers write our RAG corpus; it is the sharpest injection vector.",
    "area": "Art-E",
-   "due": "2026-10-20",
+   "due": "2026-10-27",
    "priority": "P0",
    "priority_reason": "N4 gate: probes clean",
    "depends_on": [
@@ -11536,7 +11536,7 @@ window.LAUNCH_DATA = {
    "what": "Probe suite (injection, data disclosure, vector weaknesses, tenant A reading tenant B) wired as a regression gate in CI with Muteeb.",
    "why": "A RAG assistant over tenant data without injection defence is a leak with a chat UI.",
    "area": "Art-E",
-   "due": "2026-10-22",
+   "due": "2026-10-29",
    "priority": "P0",
    "priority_reason": "N4 gate; permanent gate",
    "depends_on": [
@@ -11565,7 +11565,7 @@ window.LAUNCH_DATA = {
    "what": "Serving p95, error rate, confidence, escalation share panels plus model-metric alert rules evaluated on live refresh, not only nightly.",
    "why": "A daytime model failure is invisible today.",
    "area": "Ops",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "real risk; feeds the war-room board with slack",
    "depends_on": [
@@ -11593,7 +11593,7 @@ window.LAUNCH_DATA = {
    "what": "Audit flop, NLP and crisis against the gold sets and Lewis's 200-comment blind set; recalibrate the gauge bands against outcomes with Saad.",
    "why": "Halfway checkpoint before the freeze locks everything.",
    "area": "QA",
-   "due": "2026-10-22",
+   "due": "2026-10-29",
    "priority": "P1",
    "priority_reason": "real risk with slack",
    "depends_on": [
@@ -11623,7 +11623,7 @@ window.LAUNCH_DATA = {
    "what": "Log every alert per pilot with Lewis's not-a-crisis verdicts and Asad's button feedback; tune per-archetype thresholds a second time against the gate.",
    "why": "Precision is maintained, not achieved once.",
    "area": "Alerts",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "real risk; feeds N5 drill with slack",
    "depends_on": [
@@ -11649,7 +11649,7 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Faheem",
    "title": "DST audit: UK clocks change Sun 25 Oct",
-   "what": "Snapshot hour-of-week baselines and best-times windows on 24 Oct, verify on 25 Oct that baselines, windows and scheduled model jobs (with Muteeb) survive the one-hour shift.",
+   "what": "Snapshot hour-of-week baselines and best-times windows on 31 Oct, verify on 1 Nov that baselines, windows and scheduled model jobs (with Muteeb) survive the one-hour shift.",
    "why": "A silent one-hour shift mis-times every recommendation.",
    "area": "Best Times",
    "due": "2026-10-22",
@@ -11664,7 +11664,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "Pre-change snapshot taken 24 Oct; on 25 Oct baselines, best-times windows and scheduled model jobs match the snapshot with no hour drift, recorded with Muteeb.",
+   "acceptance": "Pre-change snapshot taken 31 Oct; on 1 Nov baselines, best-times windows and scheduled model jobs match the snapshot with no hour drift, recorded with Muteeb.",
    "checklist": [
     "Pre-change snapshot",
     "Post-change verification",
@@ -11678,9 +11678,9 @@ window.LAUNCH_DATA = {
    "assignee": "Faheem",
    "title": "Retrieval-quality eval: recall@k and context precision baseline",
    "what": "Build the retrieval-stage half of the Art-E eval. For every golden-set question with a known expected source, mark the correct chunk(s) and compute recall@k and context precision over the live index, separately from whether the generated answer passed. Record a baseline before any tuning, then use it to choose k and to decide whether a reranking pass earns its latency and cost. Wire the retrieval numbers onto the same nightly QA panel as the generation pass rate so a regression is attributable to retrieval or generation on sight, and add the split to the failure triage the weekly transcript review feeds.",
-   "why": "Without a retrieval metric, a red nightly regression during the seven-green-nights window before the 13 Nov freeze is undiagnosable, and tuning becomes guesswork against a dated deadline.",
+   "why": "Without a retrieval metric, a red nightly regression during the seven-green-nights window before the 20 Nov freeze is undiagnosable, and tuning becomes guesswork against a dated deadline.",
    "area": "Art-E",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack; not a gate criterion itself, but the N5 seven-green-nights window cannot be debugged without it",
    "depends_on": [
@@ -11714,7 +11714,7 @@ window.LAUNCH_DATA = {
    "what": "Extend the N1 leakage test into a full CI proof: tenant A cannot reach tenant B via API, cache key, queue message, vector namespace or Art-E memory. Every path gets a named negative test and the suite blocks merges.",
    "why": "The single fatal bug class, made impossible to reintroduce; Filza signs the N6 attestation off these tests.",
    "area": "Ops",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P1",
    "priority_reason": "Filza signs the attestation in N6 (N6-MT-07) and the pen-test scope (N4-MT-13/06) does not depend on the CI suite. Real risk with weeks of slack.",
    "depends_on": [
@@ -11744,7 +11744,7 @@ window.LAUNCH_DATA = {
    "what": "File quota-raise requests with each vendor against the pilot x10 and day-1 projections, track approvals, and record the granted ceilings in the war-room runbook. Add the Meta Graph budget: compute fast-lane + ingest calls at day-1 scale (100 pages) against the app's rate-limit tier in dev mode AND Live Mode, and record the headroom beside the vendor ceilings.",
    "why": "Rate-limit ceilings discovered on launch morning are self-inflicted; approvals take days to weeks.",
    "area": "Ops",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P1",
    "priority_reason": "vendor lead times; slack exists if filed early",
    "depends_on": [
@@ -11772,7 +11772,7 @@ window.LAUNCH_DATA = {
    "what": "Measure the Art-E semantic cache hit rate on real pilot query logs from N3, compare with the 60% budget assumption, and report the LLM cost implication to Jill if it is lower.",
    "why": "If it is actually 30% the LLM budget doubles; the circuit-breaker thresholds depend on the real number.",
    "area": "Art-E",
-   "due": "2026-10-18",
+   "due": "2026-10-25",
    "priority": "P1",
    "priority_reason": "real risk with slack; feeds the budget",
    "depends_on": [
@@ -11798,9 +11798,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Art-E orchestration production: memory, quotas, circuit breaker trip-tested",
    "what": "Productionise orchestration: retrieval plus 90-day memory with forget-this per Filza's pack, per-tenant quotas, and a circuit breaker wired to cost alarms with thresholds and paging agreed with Jill in writing. Trip-test the breaker. Prove the 90-day purge without waiting 90 days: seed backdated memory records past the boundary (or run the job against a shifted clock) and show they are deleted, that records inside the window survive, and that each purge writes the log entry Filza's spec requires.",
-   "why": "Art-E must be trustworthy and unable to bankrupt us; Asad's rail and the 23 Oct 20-question run sit on this.",
+   "why": "Art-E must be trustworthy and unable to bankrupt us; Asad's rail and the 30 Oct 20-question run sit on this.",
    "area": "Art-E",
-   "due": "2026-10-19",
+   "due": "2026-10-26",
    "priority": "P0",
    "priority_reason": "serves the 23 Oct gate and Asad's rail",
    "depends_on": [
@@ -11834,7 +11834,7 @@ window.LAUNCH_DATA = {
    "what": "Run a scan proving Facebook tokens and pilot data are KMS-encrypted and no secret sits in code or env files, then sweep the API against the OWASP Top-10 and fix findings before the pen-test.",
    "why": "The N5 pen-test needs a hardened target, not a first draft.",
    "area": "Ops",
-   "due": "2026-10-21",
+   "due": "2026-10-28",
    "priority": "P1",
    "priority_reason": "real risk with slack before the N5 pen-test",
    "depends_on": [
@@ -11860,10 +11860,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Muteeb",
    "title": "Scope and book the external pen-test on OAuth, Art-E, Discovery",
-   "what": "Write the pen-test scope covering the OAuth connect flow, Art-E endpoints and Discovery endpoints, get Jill's budget signature, and book the vendor for the N5 window with criticals closable before 6 Nov.",
+   "what": "Write the pen-test scope covering the OAuth connect flow, Art-E endpoints and Discovery endpoints, get Jill's budget signature, and book the vendor for the N5 window with criticals closable before 13 Nov.",
    "why": "Outside eyes on the riskiest surface; a late booking pushes findings past readiness review #1.",
    "area": "Ops",
-   "due": "2026-10-22",
+   "due": "2026-10-29",
    "priority": "P0",
    "priority_reason": "external vendor clock against the 6 Nov review",
    "depends_on": [
@@ -11892,7 +11892,7 @@ window.LAUNCH_DATA = {
    "what": "Load test the scoring, alerts and Art-E APIs with a ramp and a burst profile. Produce the criticality tier table as a written artifact - every endpoint and background job assigned to T0 (never sheds: auth, connect, crisis detection and delivery), T1 (degrades to cached or last-known) or T2 (sheds first: backfills, Discovery recompute, exports, briefings) - with the user-visible copy for each degraded and shed state named alongside it. Enforce shedding under load and record which tier tripped at what load.",
    "why": "A viral post is a comment flood; the app must degrade, not die.",
    "area": "Ops",
-   "due": "2026-10-22",
+   "due": "2026-10-29",
    "priority": "P1",
    "priority_reason": "real risk with slack; N5 repeats at x10",
    "depends_on": [
@@ -11924,7 +11924,7 @@ window.LAUNCH_DATA = {
    "what": "Serve the value band (extra reach, drafts improved, risks caught) and the Art-E scoreboard (beat, matched, skipped) straight from Faheem's outcome ledger, tenant-scoped, so every number traces to a ledger row.",
    "why": "Wins-lite is Asad's cut-order #1 in N5; it only ships if the endpoints exist as assembly-ready data.",
    "area": "Wins",
-   "due": "2026-10-22",
+   "due": "2026-10-29",
    "priority": "P1",
    "priority_reason": "real risk with slack; N5 assembly depends on it",
    "depends_on": [
@@ -11951,7 +11951,7 @@ window.LAUNCH_DATA = {
    "what": "Run the DSAR sample with Filza across warehouse, labels, vector index and memory, and demonstrate deletion wired to token revocation while she witnesses. Turn every gap into a ticket.",
    "why": "A DSAR found broken by a regulator is a fine; found by us it is a ticket.",
    "area": "Legal",
-   "due": "2026-10-22",
+   "due": "2026-10-29",
    "priority": "P1",
    "priority_reason": "real risk; Filza's N4 proofs need platform time",
    "depends_on": [
@@ -11981,7 +11981,7 @@ window.LAUNCH_DATA = {
    "what": "Write the data rollback plan distinct from code rollback, and implement the deletion-on-restore policy so purged users do not resurrect from a restored backup.",
    "why": "A restore that brings back a deleted user is a GDPR incident; code rollback alone does not cover data.",
    "area": "Ops",
-   "due": "2026-10-25",
+   "due": "2026-11-01",
    "priority": "P1",
    "priority_reason": "real risk with slack before restore drill #2",
    "depends_on": [
@@ -12028,19 +12028,19 @@ window.LAUNCH_DATA = {
    "checklist": [
     "Inventory scheduled jobs and their timezones",
     "Fix any local-time schedules",
-    "Dry-run the 25 Oct transition",
-    "Monitor the real transition on 25-26 Oct"
+    "Dry-run the 1 Nov transition",
+    "Monitor the real transition on 1-9 Nov"
    ]
   },
   {
    "id": "N4-MT-12",
    "sprint": "N4",
    "assignee": "Muteeb",
-   "title": "Gate Fri 23 Oct: 20-question run, opt-in to save, Pages on real health",
+   "title": "Gate Fri 30 Oct: 20-question run, opt-in to save, Pages on real health",
    "what": "Support the N4 gate: the 20-question Art-E run live on production orchestration, injection probes clean, opt-in to spotlight to save through the Discovery endpoints, and the Pages view reading real health.",
    "why": "The gate proves Art-E and Discovery on real plumbing before hardening starts.",
    "area": "Art-E",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P0",
    "priority_reason": "dated Friday gate",
    "depends_on": [
@@ -12056,7 +12056,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N4",
    "source": "muteeb",
-   "acceptance": "All four gate criteria are demonstrated live on 23 Oct and recorded.",
+   "acceptance": "All four gate criteria are demonstrated live on 30 Oct and recorded.",
    "checklist": [
     "Rehearse the 20 questions on staging",
     "Run probes and capture results",
@@ -12068,11 +12068,11 @@ window.LAUNCH_DATA = {
    "id": "N4-MT-13",
    "sprint": "N4",
    "assignee": "Muteeb",
-   "title": "Pen-test scope outline + vendor shortlist for Jill's budget (14 Oct)",
-   "what": "Write the one-page scope Jill needs to price the external pen-test before 16 Oct: surfaces (OAuth/token flow, Art-E rail and orchestration, Discovery endpoints), environments, exclusions, the evidence we want back, and two or three vendor quotes or day-rate estimates. Final scope and booking stay in N4-MT-06.",
-   "why": "Jill's N4-JL-01 and Alex's N4-AX-03 (16 Oct) depend on a Muteeb scope that only existed as the 22 Oct booking ticket, which in turn waits for the budget.",
+   "title": "Pen-test scope outline + vendor shortlist for Jill's budget (21 Oct)",
+   "what": "Write the one-page scope Jill needs to price the external pen-test before 23 Oct: surfaces (OAuth/token flow, Art-E rail and orchestration, Discovery endpoints), environments, exclusions, the evidence we want back, and two or three vendor quotes or day-rate estimates. Final scope and booking stay in N4-MT-06.",
+   "why": "Jill's N4-JL-01 and Alex's N4-AX-03 (23 Oct) depend on a Muteeb scope that only existed as the 29 Oct booking ticket, which in turn waits for the budget.",
    "area": "Ops",
-   "due": "2026-10-14",
+   "due": "2026-10-21",
    "priority": "P1",
    "priority_reason": "P1: two dated consumers on 16 Oct; half a day of work.",
    "depends_on": [
@@ -12085,11 +12085,11 @@ window.LAUNCH_DATA = {
     "N4-MT-06"
    ],
    "gate": "none",
-   "acceptance": "Jill's budget memo cites the scope and a vendor estimate, and Alex signs it on 16 Oct.",
+   "acceptance": "Jill's budget memo cites the scope and a vendor estimate, and Alex signs it on 23 Oct.",
    "checklist": [
     "List surfaces, environments and exclusions",
     "Get vendor estimates",
-    "Send to Jill by 14 Oct",
+    "Send to Jill by 21 Oct",
     "Carry into N4-MT-06 for booking"
    ],
    "source": "reconciler"
@@ -12100,9 +12100,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Art-E latency budget: time to first token and p95, measured",
    "what": "Set and measure an Art-E latency budget: time to first streamed token, p95 and p99 end-to-end, broken down by stage (cache lookup, retrieval, generation, citation-gate check, regenerate). Cap the block-and-regenerate loop at a fixed number of attempts and define what the rail does when the cap is hit - abstain with the gate-blocked copy from Saad's state matrix, never an open-ended spinner. Report latency by cascade route so the cost/latency trade-off between cheap and frontier tiers is visible, and put the panel on the war-room board alongside Art-E cost.",
-   "why": "The 23 Oct gate demos twenty numeric questions live, and those are exactly the ones that trigger the regenerate loop; an unbudgeted rail can pass the correctness gate and still be unusable.",
+   "why": "The 30 Oct gate demos twenty numeric questions live, and those are exactly the ones that trigger the regenerate loop; an unbudgeted rail can pass the correctness gate and still be unusable.",
    "area": "Art-E",
-   "due": "2026-10-21",
+   "due": "2026-10-28",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack; the 23 Oct gate does not name latency as a criterion, but a slow demo damages the same claim",
    "depends_on": [
@@ -12134,9 +12134,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Art-E conversation logging and transcript export for the reviews",
    "what": "Log every Art-E exchange with what the review actually needs: question, final answer, the citations returned, the retrieved chunk ids, the cascade route and cost, the state (answered, refused, abstained, gate-blocked) and the thumbs verdict if one arrives. Give Saad and Lewis a tenant-scoped export they can read in a 30-minute session without database access. Keep the store inside Filza's memory rules rather than beside them: same tenant namespace, inside the DSAR export and the deletion cascade, retention no longer than the 90-day memory window unless Filza says otherwise in writing, and covered by the N4-MT-01 leakage proof.",
-   "why": "Two review tickets and the golden-set growth path all start 16 Oct on this dependency, and an unspecified transcript store would otherwise become a second undocumented copy of customer content outside the DSAR story.",
+   "why": "Two review tickets and the golden-set growth path all start 23 Oct on this dependency, and an unspecified transcript store would otherwise become a second undocumented copy of customer content outside the DSAR story.",
    "area": "Art-E",
-   "due": "2026-10-15",
+   "due": "2026-10-22",
    "priority": "P0",
    "priority_reason": "P0 - blocks N4-SD-03 and N4-LW-02, whose first review session is dated 16 Oct",
    "depends_on": [
@@ -12153,7 +12153,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N4",
    "source": "reconciler",
-   "acceptance": "Saad and Lewis run the 16 Oct review off the export unaided, and Filza confirms the transcript store sits inside the DSAR and deletion scope.",
+   "acceptance": "Saad and Lewis run the 23 Oct review off the export unaided, and Filza confirms the transcript store sits inside the DSAR and deletion scope.",
    "checklist": [
     "Log question, answer, citations, chunk ids, route, cost, state, thumbs",
     "Build the tenant-scoped export Saad and Lewis can read directly",
@@ -12168,9 +12168,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Publish measured cost per endpoint, pilot and at 100 pages",
    "what": "Turn the dashboard's measured pilot numbers plus the N4 load-test shapes into a published cost per endpoint at 5 pilots and projected at 100 pages, naming which lines step (a second Fargate task, a Redshift concurrency scale, a vector-store tier) and at what volume each step lands. Flag any endpoint whose cost per call is above what its product value justifies, so the cut discussion happens with numbers.",
-   "why": "Asad's 25 Oct re-cost and the 17 Nov founding-price notice both need a projection rather than a pilot snapshot, and the step points are what turn a smooth cost curve into a surprise.",
+   "why": "Asad's 1 Nov re-cost and the 24 Nov founding-price notice both need a projection rather than a pilot snapshot, and the step points are what turn a smooth cost curve into a surprise.",
    "area": "Ops",
-   "due": "2026-10-20",
+   "due": "2026-10-27",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack, but N4-AS-18 is due 25 Oct and reads this directly.",
    "depends_on": [
@@ -12198,11 +12198,11 @@ window.LAUNCH_DATA = {
    "id": "N4-SD-01",
    "sprint": "N4",
    "assignee": "Saad",
-   "title": "Verify the waitlist end-to-end on 13 Oct; daily count to Alex",
+   "title": "Verify the waitlist end-to-end on 20 Oct; daily count to Alex",
    "what": "On opening day walk signup -> confirmation -> unsubscribe on desktop and mobile, check PECR consent wording and no pre-consent pixels, confirm migrated Netlify Forms names hold queue position and UTMs attribute; then send Alex the count daily.",
-   "why": "Opening day of the funnel that feeds launch; a broken form on 13 Oct wastes the directory traffic.",
+   "why": "Opening day of the funnel that feeds launch; a broken form on 20 Oct wastes the directory traffic.",
    "area": "Waitlist",
-   "due": "2026-10-13",
+   "due": "2026-10-20",
    "priority": "P0",
    "priority_reason": "Dated opening 13 Oct",
    "depends_on": [
@@ -12215,7 +12215,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N4",
    "source": "saad",
-   "acceptance": "Verification note filed 13 Oct and daily counts reach Alex from day one.",
+   "acceptance": "Verification note filed 20 Oct and daily counts reach Alex from day one.",
    "checklist": [
     "Test signup, confirmation, unsubscribe on web + mobile",
     "Check consent wording, no pre-consent pixels",
@@ -12228,10 +12228,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Saad",
    "title": "Meta decision window: daily watch and 48h rejection response",
-   "what": "The first Meta decision is expected ~15 Oct. Keep the daily watch, answer inside 24h, and on rejection resubmit within 48h with the pre-written responses while giving Alex the evidence for the same-week resubmit-vs-descope decision.",
+   "what": "The first Meta decision is expected ~22 Oct. Keep the daily watch, answer inside 24h, and on rejection resubmit within 48h with the pre-written responses while giving Alex the evidence for the same-week resubmit-vs-descope decision.",
    "why": "Every idle day now costs buffer; the descope decision must be made on facts the same week.",
    "area": "Meta",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P0",
    "priority_reason": "External clock",
    "depends_on": [
@@ -12260,7 +12260,7 @@ window.LAUNCH_DATA = {
    "what": "Each week read real pilot Art-E transcripts with Lewis (starting with the dogfood tenant and pilots once the rail is on staging), flag unscripted questions and wrong answers, and route them into the 200-question golden set and Faheem's thumbs-down test cases. Continues to launch.",
    "why": "Scripted golden sets miss unscripted questions; this is the loop that keeps the citation gate honest.",
    "area": "Art-E",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P1",
    "priority_reason": "Real risk to gate honesty, but a weekly loop with slack to launch",
    "depends_on": [
@@ -12273,7 +12273,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "saad",
-   "acceptance": "First session held by 23 Oct with a weekly slot booked and at least one question added to the golden set.",
+   "acceptance": "First session held by 30 Oct with a weekly slot booked and at least one question added to the golden set.",
    "checklist": [
     "Get transcript access from Muteeb",
     "Hold the first review; log findings",
@@ -12289,7 +12289,7 @@ window.LAUNCH_DATA = {
    "what": "Sit with Faheem's mid-flight accuracy audit and reset the gauge bands and abstain threshold to measured outcomes; update the Drafts pack and acceptance one-pager and hand the change to Asad before freeze.",
    "why": "UI confidence must match measured performance or the gauge becomes the bogus score we sell against.",
    "area": "Drafts",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Needed before the 13 Nov freeze; slack exists",
    "depends_on": [
@@ -12317,7 +12317,7 @@ window.LAUNCH_DATA = {
    "what": "Audit every built surface (web + mobile) for contrast, focus order, keyboard reach, labels and motion; include the crisis/alert email template (semantic structure, alt text, dark-mode contrast) and the /security packet and invoice PDFs (tagged, readable order); list fixes sized for Asad's N5 slot.",
    "why": "Accessibility debt compounds; N5 has the fix slot only if the list exists by then.",
    "area": "QA",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Real risk; fixes scheduled N5 so slack exists",
    "depends_on": [
@@ -12344,7 +12344,7 @@ window.LAUNCH_DATA = {
    "what": "Accept Asad's Discovery UI: opt-in at equal prominence and revocable per Filza's text, below-floor renders nothing (demo the fail-closed proof), saved-then-revoked handled, low-opt-in empty state copy that sells rather than apologises.",
    "why": "A legally clean opt-in may leave Discovery quiet on day 1; the empty state must carry it.",
    "area": "Discovery",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Serves the 23 Oct gate; real risk with slack inside the sprint",
    "depends_on": [
@@ -12375,7 +12375,7 @@ window.LAUNCH_DATA = {
    "what": "Rehearse the UAT protocol end-to-end with one friendly pilot: comprehension tasks, watch-don't-guide, defect capture vs blocker criteria; fix the protocol, not the product.",
    "why": "The protocol gets debugged before it judges the product in N5.",
    "area": "PM",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Real risk of a broken protocol judging N5; slack before wave 1",
    "depends_on": [
@@ -12401,10 +12401,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Saad",
    "title": "Recalculate N5-N6 at 60-65% load with Alex",
-   "what": "Re-plan N5-N6 with Alex at 60-65% builder capacity: drills, UAT and retests are booked first, the cut order applied, dates re-checked against the 13 Nov and 20 Nov freezes.",
+   "what": "Re-plan N5-N6 with Alex at 60-65% builder capacity: drills, UAT and retests are booked first, the cut order applied, dates re-checked against the 20 Nov and 27 Nov freezes.",
    "why": "Drills and UAT eat builder time; unplanned, the freeze slips.",
    "area": "PM",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Real risk to the freeze; must precede N5 but has slack inside N4",
    "depends_on": [
@@ -12419,7 +12419,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N4",
    "source": "saad",
-   "acceptance": "Revised N5-N6 tracker published before 26 Oct.",
+   "acceptance": "Revised N5-N6 tracker published before 2 Nov.",
    "checklist": [
     "Load-count builder time per drill/UAT item",
     "Apply cut order",
@@ -12435,7 +12435,7 @@ window.LAUNCH_DATA = {
    "what": "Sweep Art-E rail, Discovery UI, Pages view + switcher, briefing card, first-run onboarding and cookie banner against packs and one-pagers; QA the onboarding flow against the spec and activation event.",
    "why": "Saad absorbs sweeps; onboarding flow QA is Saad's cross-sprint thread.",
    "area": "Design",
-   "due": "2026-10-25",
+   "due": "2026-11-01",
    "priority": "P1",
    "priority_reason": "Real risk; slack before pre-UAT sweep",
    "depends_on": [
@@ -12463,7 +12463,7 @@ window.LAUNCH_DATA = {
    "what": "Draft a getting-started page and a how-to per surface, plus initial support macros including 'is my data shared with other pages' answered from Filza's Discovery position.",
    "why": "Discovery makes that question inevitable; the answer must be ready before pilots ask.",
    "area": "PM",
-   "due": "2026-10-25",
+   "due": "2026-11-01",
    "priority": "P2",
    "priority_reason": "Safe to slip; completed in N5",
    "depends_on": [
@@ -12488,10 +12488,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Saad",
    "title": "Write the crisis-demo video script with Alex",
-   "what": "Script the 5 Nov video against real detector behaviour: claims limited to the re-scoped crisis gate and drill data, pages Lewis confirms are not in decline, calm-reply shown as drafted not sent.",
+   "what": "Script the 12 Nov video against real detector behaviour: claims limited to the re-scoped crisis gate and drill data, pages Lewis confirms are not in decline, calm-reply shown as drafted not sent.",
    "why": "Our best visual asset must survive fact-checking.",
    "area": "Marketing",
-   "due": "2026-10-21",
+   "due": "2026-10-28",
    "priority": "P1",
    "priority_reason": "Alex's script approval is dated (N4-AX-06, 23 Oct) and the 5 Nov video is a public date; P2 'safe to slip' is too low for the only input to a dated public asset, though N5-SD-04 carries the hard date.",
    "depends_on": [
@@ -12523,7 +12523,7 @@ window.LAUNCH_DATA = {
    "what": "List Fast-Follow items (Wave 1 from the plan, cut-line outcomes, GraphRAG moved out, deferred V3 items) with evidence from the pilot digest and UAT dry-run.",
    "why": "The cut material becomes next quarter's menu.",
    "area": "PM",
-   "due": "2026-10-25",
+   "due": "2026-11-01",
    "priority": "P2",
    "priority_reason": "Safe to slip; finalised in N6",
    "depends_on": [
@@ -12551,7 +12551,7 @@ window.LAUNCH_DATA = {
    "what": "Write the next-step copy for the slide-over and the Matches tab: what a page admin is actually meant to do with a match, stated honestly as off-platform outreach, since in-product messaging and introductions are deferred by design and collabs move to WhatsApp or email. Then sweep every place Discovery is described - Explore surfaces, onboarding, the landing and waitlist pages, launch-week and Product Hunt copy, and the support macros in N4-SD-10 - and remove any wording that implies introductions, mediated contact, shared campaigns or messaging. Clear the strings with Filza alongside her reason-string vocabulary and give Alex the one-line answer for the launch-week Q&A rehearsal.",
    "why": "A network-effect promise with no next step wastes the match, and any copy hinting at introductions promises a product the MVP has decided not to build.",
    "area": "Discovery",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "P1 - real risk to the launch claim with slack; it can follow the UI inside N4 and feeds the N4 acceptance",
    "depends_on": [
@@ -12578,10 +12578,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Saad",
    "title": "Responsive and touch pass across every built surface",
-   "what": "Take every surface built by 23 Oct to the mobile pack: breakpoints, the bottom tab bar and sheet system, touch target sizes, safe areas, the Art-E orb and rail on a phone, tables that become cards, and the Discovery and Pages views on a small screen. Check on real iOS Safari and Android Chrome, not only the emulator. Record what genuinely cannot be mobile before UAT, with a one-line reason each.",
+   "what": "Take every surface built by 30 Oct to the mobile pack: breakpoints, the bottom tab bar and sheet system, touch target sizes, safe areas, the Art-E orb and rail on a phone, tables that become cards, and the Discovery and Pages views on a small screen. Check on real iOS Safari and Android Chrome, not only the emulator. Record what genuinely cannot be mobile before UAT, with a one-line reason each.",
    "why": "Pilots will open this on a phone during UAT; a surface that only works at desktop width reads as broken and burns UAT time on layout defects rather than product feedback.",
    "area": "App core",
-   "due": "2026-10-25",
+   "due": "2026-11-01",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack; UAT wave 1 starts 3 Nov, so the fixes have a week.",
    "depends_on": [
@@ -12612,10 +12612,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Alex",
    "title": "Readiness scorecard live (RAG, weekly self-reports)",
-   "what": "Stand up the readiness scorecard from the go/no-go criteria: one row per gate, RAG status, evidence link, owner; each owner self-reports every Friday from 16 Oct through 20 Nov. Host it next to the decisions calendar and read it at the Friday scope hammer.",
-   "why": "Go/no-go becomes arithmetic instead of argument; without weekly self-reports the 6 Nov review discovers reds it should have known for a month.",
+   "what": "Stand up the readiness scorecard from the go/no-go criteria: one row per gate, RAG status, evidence link, owner; each owner self-reports every Friday from 23 Oct through 27 Nov. Host it next to the decisions calendar and read it at the Friday scope hammer.",
+   "why": "Go/no-go becomes arithmetic instead of argument; without weekly self-reports the 13 Nov review discovers reds it should have known for a month.",
    "area": "Launch",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P1",
    "priority_reason": "Real risk with slack: first read is 16 Oct, first hard use is 6 Nov.",
    "depends_on": [
@@ -12632,7 +12632,7 @@ window.LAUNCH_DATA = {
    "checklist": [
     "Build the sheet from the criteria table",
     "Assign an owner per row",
-    "First self-report round on 16 Oct",
+    "First self-report round on 23 Oct",
     "Add to the scope-hammer agenda",
     "Link from the decisions calendar"
    ]
@@ -12645,7 +12645,7 @@ window.LAUNCH_DATA = {
    "what": "Write the Top-5 risks with owner, mitigation and a numeric or dated trigger: Meta approval pending (trigger: no decision by the last safe resubmission date), crisis gate not met on real incidents, Asad capacity in his biggest sprint, Art-E golden set not green, waitlist off-track vs 500. Review weekly with the scorecard.",
    "why": "Risks with triggers get acted on before the review; risks without triggers get discussed at it.",
    "area": "Launch",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P1",
    "priority_reason": "Real risk with slack; feeds the 6 Nov review.",
    "depends_on": [
@@ -12675,7 +12675,7 @@ window.LAUNCH_DATA = {
    "what": "Sign the approvals Jill and Filza need this sprint: the external pen-test budget (Muteeb scopes and books it in N4, runs it in N5), Jill's unit-economics dashboard spec, and Filza's retention schedule. Jill leads the money items and Filza the legal one; Alex signs.",
    "why": "The N5 pen-test cannot be booked without a signed budget, and the retention schedule must be signed before UAT sees the product and the paper together.",
    "area": "Finance",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P0",
    "priority_reason": "Blocks Muteeb booking the external pen-test for N5.",
    "depends_on": [
@@ -12704,10 +12704,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Alex",
    "title": "Meta rejection branch: resubmit-vs-descope decided the same week",
-   "what": "When Meta's decision lands (~15 Oct by the loop math): if approved, trigger Asad's Live Mode flip plan for N5; if rejected, decide resubmit (Saad resubmits within 48h with the pre-written top-3 responses) versus descope (drop a permission and its feature) within the same week, and record it on the decisions calendar. If there is no decision by day 20, escalate through Meta support / partner channels.",
+   "what": "When Meta's decision lands (~22 Oct by the loop math): if approved, trigger Asad's Live Mode flip plan for N5; if rejected, decide resubmit (Saad resubmits within 48h with the pre-written top-3 responses) versus descope (drop a permission and its feature) within the same week, and record it on the decisions calendar. If there is no decision by day 20, escalate through Meta support / partner channels.",
    "why": "Every idle day now costs buffer; a rejection decision that waits a week eats the last safe cycle.",
    "area": "Meta",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P0",
    "priority_reason": "External clock; the decision window is the same week as the rejection.",
    "depends_on": [
@@ -12736,10 +12736,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Alex",
    "title": "Waitlist trajectory checkpoint; backup channels if off-track",
-   "what": "Read Saad's daily counts against the 500-by-20-Nov line (roughly 90 per week from 13 Oct). If under the line, activate backup channels: BetaList and directory listings (Saad N3), newsletter, pilot referrals via Lewis, the optional LinkedIn trial, and paid where Jill's budget allows. Publish the weekly growth report.",
-   "why": "500 by 20 Nov or the launch-day email list is thin; a checkpoint in week two leaves five weeks to correct.",
+   "what": "Read Saad's daily counts against the 500-by-20-Nov line (roughly 90 per week from 20 Oct). If under the line, activate backup channels: BetaList and directory listings (Saad N3), newsletter, pilot referrals via Lewis, the optional LinkedIn trial, and paid where Jill's budget allows. Publish the weekly growth report.",
+   "why": "500 by 27 Nov or the launch-day email list is thin; a checkpoint in week two leaves five weeks to correct.",
    "area": "Marketing",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Real risk with slack: five weeks remain to 20 Nov.",
    "depends_on": [
@@ -12767,10 +12767,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Jill",
    "title": "Pen-test budget signed so Muteeb can book it",
-   "what": "Get 2-3 quotes for an external pen-test scoped to the OAuth, Art-E and Discovery endpoints (Muteeb writes the scope), with a run window in N5 Week A (26 Oct - 1 Nov) and a report turnaround that lets criticals close before 6 Nov. Put the cost in the model, get Alex's signature, and raise the PO or payment so Muteeb can confirm the booking in N4 Week B.",
-   "why": "Checklist 2 says booked N4, run N5, criticals closed before 6 Nov; a pen-test booked late runs after the readiness review or not at all.",
+   "what": "Get 2-3 quotes for an external pen-test scoped to the OAuth, Art-E and Discovery endpoints (Muteeb writes the scope), with a run window in N5 Week A (2 Nov - 8 Nov) and a report turnaround that lets criticals close before 13 Nov. Put the cost in the model, get Alex's signature, and raise the PO or payment so Muteeb can confirm the booking in N4 Week B.",
+   "why": "Checklist 2 says booked N4, run N5, criticals closed before 13 Nov; a pen-test booked late runs after the readiness review or not at all.",
    "area": "Ops",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P0",
    "priority_reason": "Blocks Muteeb's booking and the N5 readiness gate (pen-test criticals closed).",
    "depends_on": [
@@ -12784,13 +12784,13 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "plan",
-   "acceptance": "A signed budget and a confirmed vendor booking exist for a pen-test running 26 Oct - 1 Nov with report delivery before 6 Nov.",
+   "acceptance": "A signed budget and a confirmed vendor booking exist for a pen-test running 2 Nov - 8 Nov with report delivery before 13 Nov.",
    "checklist": [
     "Get the scope from Muteeb",
     "Request quotes from 2-3 testers with the N5 Week A window",
     "Add the cost to the model; get Alex's signature",
     "Raise PO/payment; confirm the booking with Muteeb",
-    "Diary report delivery and the criticals-closed deadline (6 Nov)"
+    "Diary report delivery and the criticals-closed deadline (13 Nov)"
    ]
   },
   {
@@ -12801,7 +12801,7 @@ window.LAUNCH_DATA = {
    "what": "Support Filza's one real DSAR run end-to-end: set up the intake route (support@ label plus a DSAR log with the 30-day clock), pull the ops-side data a DSAR touches outside Muteeb's warehouse/labels/vectors/memory export (support inbox threads, newsletter and waitlist tool records, paging/Sentry events tagged to the tenant), time each step, and log every gap Filza finds as a ticket for its owner.",
    "why": "A DSAR discovered broken by a regulator is a fine, discovered by us is a ticket - and the ops-side records are the ones an engineer's export forgets.",
    "area": "Legal",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Real risk with slack: the re-test on frozen production is N6, but gaps found now become tickets before the freeze.",
    "depends_on": [
@@ -12830,10 +12830,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Jill",
    "title": "Email deliverability confirmed on the warmed domain",
-   "what": "Confirm with Muteeb that the domain is out of warm-up: SPF/DKIM/DMARC passing with DMARC aggregate reports read, SES bounce and complaint rates inside the warm-up plan thresholds, inbox placement checked by seeding test addresses at the major mailbox providers for both the crisis alert template and the newsletter, and the SES sending quota sufficient for the 1 Dec queue email. Write the one-page confirmation.",
-   "why": "Three quiet things that block loudly: crisis alerts, the 17 Nov notice and the 1 Dec email all die in spam if this is assumed rather than checked.",
+   "what": "Confirm with Muteeb that the domain is out of warm-up: SPF/DKIM/DMARC passing with DMARC aggregate reports read, SES bounce and complaint rates inside the warm-up plan thresholds, inbox placement checked by seeding test addresses at the major mailbox providers for both the crisis alert template and the newsletter, and the SES sending quota sufficient for the 8 Dec queue email. Write the one-page confirmation.",
+   "why": "Three quiet things that block loudly: crisis alerts, the 24 Nov notice and the 8 Dec email all die in spam if this is assumed rather than checked.",
    "area": "Ops",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Real risk with slack: the crisis drill already sent email in N3, but launch volume needs a written confirmation.",
    "depends_on": [
@@ -12848,12 +12848,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "LW",
    "source": "plan",
-   "acceptance": "A dated confirmation shows DMARC pass, bounce/complaint rates inside thresholds, an SES quota covering the 1 Dec send, and seeded inbox placement for every template live at launch: crisis alert, newsletter, waitlist confirm + 1 Dec queue email, deletion/export receipts, and the auth vendor's verify/reset emails from a branded, authenticated sender.",
+   "acceptance": "A dated confirmation shows DMARC pass, bounce/complaint rates inside thresholds, an SES quota covering the 8 Dec send, and seeded inbox placement for every template live at launch: crisis alert, newsletter, waitlist confirm + 8 Dec queue email, deletion/export receipts, and the auth vendor's verify/reset emails from a branded, authenticated sender.",
    "checklist": [
     "Read DMARC aggregate reports with Muteeb; confirm alignment",
     "Check SES bounce/complaint rates against the plan thresholds",
     "Seed test addresses at major providers; send alert + newsletter templates; record placement",
-    "Confirm SES quota vs the 1 Dec volume; request the raise via Muteeb if short",
+    "Confirm SES quota vs the 8 Dec volume; request the raise via Muteeb if short",
     "Write and file the confirmation"
    ]
   },
@@ -12865,7 +12865,7 @@ window.LAUNCH_DATA = {
    "what": "Specify the dashboard the war room reads during launch: per-tenant and per-page cost (compute, ingest, embeddings, Art-E by cascade tier from Muteeb's attribution), revenue per pilot from the invoices, margin per page, burn vs cap per day, and activation count from Asad's KPI funnel as the denominator. Name each metric's source table or event, refresh interval and owner. Muteeb builds it into the N5 war-room board; Jill and Alex sign the spec.",
    "why": "Launch-week burn needs a live denominator; the N6 real-time spend dashboard and the burn cap are built from this spec.",
    "area": "Finance",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Real risk with slack: Muteeb builds the board in N5 Week B, so the spec must land by the N4 gate.",
    "depends_on": [
@@ -12900,7 +12900,7 @@ window.LAUNCH_DATA = {
    "what": "Nominate one friendly, non-declining pilot for Saad's UAT dry-run on staging and book the session. Separately line up a pilot willing to opt in to Discovery and then revoke consent so Filza can witness the 24h purge from matches, spotlight and Saved, and confirm with Filza whether the DSAR sample run uses a pilot or the dogfood tenant.",
    "why": "Saad's protocol needs a real pilot to rehearse on and Filza's witness needs a real revocation; both stall without a named page.",
    "area": "Pilots",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P1",
    "priority_reason": "Both consumers have slack inside N4 but neither can start without a name",
    "depends_on": [
@@ -12914,7 +12914,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N4",
    "source": "saad",
-   "acceptance": "The dry-run pilot and session are booked and an opt-out witness pilot is named to Filza by 16 Oct.",
+   "acceptance": "The dry-run pilot and session are booked and an opt-out witness pilot is named to Filza by 23 Oct.",
    "checklist": [
     "Pick the dry-run pilot",
     "Book the session with Saad",
@@ -12926,11 +12926,11 @@ window.LAUNCH_DATA = {
    "id": "N4-LW-02",
    "sprint": "N4",
    "assignee": "Lewis",
-   "title": "Weekly 30-min real-transcript review with Saad starts 16 Oct",
-   "what": "Each week from 16 Oct, read real Art-E transcripts from pilots with Saad: flag wrong or un-cited answers, refusals that should have answered, and the unscripted questions pilots actually ask. Turn unscripted questions into golden-set candidates for Faheem and confusing answers into support-macro notes for Saad.",
+   "title": "Weekly 30-min real-transcript review with Saad starts 23 Oct",
+   "what": "Each week from 23 Oct, read real Art-E transcripts from pilots with Saad: flag wrong or un-cited answers, refusals that should have answered, and the unscripted questions pilots actually ask. Turn unscripted questions into golden-set candidates for Faheem and confusing answers into support-macro notes for Saad.",
    "why": "Scripted golden sets miss unscripted questions; the transcripts are where Art-E's real failures show before the freeze.",
    "area": "Art-E",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Benchmark item that compounds weekly; no single dated blocker",
    "depends_on": [
@@ -12943,7 +12943,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N4",
    "source": "saad",
-   "acceptance": "Two review sessions (16 and 23 Oct) are logged with at least 5 new golden-set candidates sent to Faheem.",
+   "acceptance": "Two review sessions (16 and 30 Oct) are logged with at least 5 new golden-set candidates sent to Faheem.",
    "checklist": [
     "Recurring slot with Saad",
     "Transcript export from Muteeb/Asad",
@@ -12956,10 +12956,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Lewis",
    "title": "Golden set to 200 questions with Faheem; G2 review-willing count",
-   "what": "Extend the N3 v1 set to 200 with Faheem, filling the gaps his coverage report shows (per surface, per must-refuse category, qualitative-claim grounding) while pinning the 20 gate questions unchanged; fold in any unscripted questions from the 16 Oct transcript review. On the weekly calls ask every pilot whether they would write a G2.com review after launch and record the count for Saad and Alex.",
+   "what": "Extend the N3 v1 set to 200 with Faheem, filling the gaps his coverage report shows (per surface, per must-refuse category, qualitative-claim grounding) while pinning the 20 gate questions unchanged; fold in any unscripted questions from the 23 Oct transcript review. On the weekly calls ask every pilot whether they would write a G2.com review after launch and record the count for Saad and Alex.",
    "why": "The nightly regression and the seven-green-nights freeze evidence need the full set; the post-launch G2 cluster needs a known count of willing reviewers.",
    "area": "Art-E",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P1",
    "priority_reason": "The 23 Oct gate runs the 20 questions locked in N3-LW-07; the 200 set is needed for seven green nights before 6 Nov, i.e. by ~30 Oct, nine days after the due date.",
    "depends_on": [
@@ -12973,7 +12973,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N4",
    "source": "plan",
-   "acceptance": "Faheem confirms 200 questions loaded into the nightly regression by 21 Oct and the review-willing count is on the roster sheet.",
+   "acceptance": "Faheem confirms 200 questions loaded into the nightly regression by 28 Oct and the review-willing count is on the roster sheet.",
    "checklist": [
     "Coverage gaps from Faheem",
     "Write the remaining questions",
@@ -12990,7 +12990,7 @@ window.LAUNCH_DATA = {
    "what": "Take Faheem's per-pilot false-alarm log and the pilots' not-a-crisis button presses since alerts went live, confirm with each pilot which alerts were real, noise, or missed, and label every row. Sit with Faheem on the round-2 thresholds per archetype and record what changed and why, including any storms the detector missed for the recall posture.",
    "why": "Precision is maintained, not achieved once; the pilots are the only ground truth for what happened since the backtest.",
    "area": "Alerts",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Tuning round 2 is dated to N4 but the detector already passed its drill",
    "depends_on": [
@@ -13004,7 +13004,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N4",
    "source": "plan",
-   "acceptance": "Every alert row since go-live is labelled real/false/missed by the pilot and the round-2 threshold change is recorded with Faheem by 23 Oct.",
+   "acceptance": "Every alert row since go-live is labelled real/false/missed by the pilot and the round-2 threshold change is recorded with Faheem by 30 Oct.",
    "checklist": [
     "Pull the log and the button data",
     "Confirm with each pilot",
@@ -13018,10 +13018,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Lewis",
    "title": "Pilot stories and testimonial permissions in writing with Filza",
-   "what": "Draft a one-paragraph story per pilot (who they are, what the product did for them so far, a number only if real) and collect written permission on Filza's template covering name, page name, quote, screenshots of their data, and use of their page in the 5 Nov crisis-demo video and on Product Hunt. Record which pilots decline which use.",
+   "what": "Draft a one-paragraph story per pilot (who they are, what the product did for them so far, a number only if real) and collect written permission on Filza's template covering name, page name, quote, screenshots of their data, and use of their page in the 12 Nov crisis-demo video and on Product Hunt. Record which pilots decline which use.",
    "why": "Launch-week social proof must be collected before launch week, and the demo video cannot show a pilot page without permission.",
    "area": "Pilots",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Needed for the 5 Nov video and N5 testimonials; slack exists in N4",
    "depends_on": [
@@ -13035,7 +13035,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "Signed permissions (or recorded declines) for all connected pilots and draft stories are in one folder by 23 Oct.",
+   "acceptance": "Signed permissions (or recorded declines) for all connected pilots and draft stories are in one folder by 30 Oct.",
    "checklist": [
     "Template from Filza",
     "Draft the stories",
@@ -13052,7 +13052,7 @@ window.LAUNCH_DATA = {
    "what": "Inventory every script and cookie on the landing and the app (auth vendor, Sentry, KPI events, waitlist tool, fonts, any pixel), classify essential vs non-essential, and write the gating spec: what loads before consent, what only after accept, what a decline must verifiably block, banner copy, and how the choice is stored and re-shown. Asad builds the banner in N4 to this spec.",
    "why": "The banner must actually gate the scripts; Asad builds it this sprint and 'declined = verifiably blocked' needs a definition to test against.",
    "area": "Settings",
-   "due": "2026-10-14",
+   "due": "2026-10-21",
    "priority": "P0",
    "priority_reason": "Blocks Asad's N4 cookie consent build",
    "depends_on": [
@@ -13081,7 +13081,7 @@ window.LAUNCH_DATA = {
    "what": "Step by step: how a request arrives (privacy@, Settings export), identity verification, the one-month clock, who queries what (warehouse rows by tenant and page, labels and prediction tables, vector namespace, Art-E memory, KPI events, support tickets), the export format the pilot receives, redactions for third-party commenters, and the log entry. Names Muteeb for the queries and Jill for the diary.",
    "why": "The N4 real sample run executes this document; without it the run has nothing to follow.",
    "area": "Legal",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P1",
    "priority_reason": "Needed before the N4 sample run; a week of slack",
    "depends_on": [
@@ -13110,7 +13110,7 @@ window.LAUNCH_DATA = {
    "what": "One table: each data category (tokens, raw Meta data, prediction tables, labels, embeddings, Art-E memory at 90 days, KPI events, support mail, backups, logs per Jill's log-retention policy) with retention period, trigger and the mechanism that enforces it. Alex countersigns; Muteeb confirms each mechanism exists or gets a ticket.",
    "why": "Paper must match product before UAT sees both; the DSAR run and the deletion-on-restore policy both cite it.",
    "area": "Legal",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P1",
    "priority_reason": "Cited by the N4 deletion-on-restore policy and the N5 restore drill",
    "depends_on": [
@@ -13140,7 +13140,7 @@ window.LAUNCH_DATA = {
    "what": "A short release Lewis collects from each pilot: what may be quoted (name, page name, screenshots, numbers), where (site, Product Hunt, press, G2), for how long, the revocation route, and that no other page's data appears in the story. Screenshots must come from the pilot's own pages or the demo tenant.",
    "why": "Lewis collects pilot stories in N4 and finalises testimonials in N5; launch-week social proof without written permission is a takedown waiting to happen.",
    "area": "Pilots",
-   "due": "2026-10-16",
+   "due": "2026-10-23",
    "priority": "P1",
    "priority_reason": "Lewis collects in N4; slack before N5 finalisation",
    "depends_on": [
@@ -13169,7 +13169,7 @@ window.LAUNCH_DATA = {
    "what": "Sit with Muteeb on staging: disconnect a connected page in Settings and trigger the Meta callback for another, then check the token is gone from the KMS store, warehouse and prediction rows are purged or tombstoned, the vector namespace and Art-E memory are cleared, the confirmation code and status URL are returned, and the RoPA log entry is written. Record timings and gaps as tickets. Also read Muteeb's N4 tenant-leakage CI test list as the first pass for the N6 attestation.",
    "why": "The privacy policy promises disconnect = data gone; a promise nobody has watched happen is a claim, not a proof.",
    "area": "Auth",
-   "due": "2026-10-21",
+   "due": "2026-10-28",
    "priority": "P1",
    "priority_reason": "Proof with slack; gaps must surface before the N5 pen-test",
    "depends_on": [
@@ -13200,7 +13200,7 @@ window.LAUNCH_DATA = {
    "what": "Policy for what happens to a deleted tenant when a backup is restored: a deletion ledger replayed after every restore (tokens, rows, vectors, memory), a maximum window before backups age out per the retention schedule, and who verifies the replay. Muteeb runs it in restore drill #2 (N5, production-shaped, incl. vectors and memory).",
    "why": "Purged users must not resurrect from a restore; restore drill #2 is in N5 and needs the rule to test.",
    "area": "Ops",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Needed for the N5 restore drill #2",
    "depends_on": [
@@ -13229,7 +13229,7 @@ window.LAUNCH_DATA = {
    "what": "Execute the workflow for one real pilot page with their agreement: Muteeb pulls the rows, labels and prediction tables, the vector namespace and Art-E memory (live from N4 week A); Filza redacts third-party commenters, assembles the export and times each step against the one-month clock. Every gap becomes a ticket with an owner; Jill supports.",
    "why": "A DSAR discovered broken by a regulator is a fine; discovered by us it is a ticket.",
    "area": "Legal",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Gate-adjacent proof; gaps need N5 to close",
    "depends_on": [
@@ -13261,7 +13261,7 @@ window.LAUNCH_DATA = {
    "what": "With an opted-in test page saved by another tenant: revoke consent in Settings, then confirm within 24h the page is gone from matches, the spotlight and the other tenant's Saved list, that the revocation is logged, and that Asad's UI shows the saved-then-revoked state gracefully. Confirm the consent screen shows the N1 text with equal prominence.",
    "why": "Revocation promised in the consent text must be mechanically true; among 10 pilots who talk, a breach is visible.",
    "area": "Discovery",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Serves the N4 opt-in to spotlight to save demo; propagation was built in N3",
    "depends_on": [
@@ -13289,10 +13289,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Filza",
    "title": "Run narrative sweep #2 on the marketing site",
-   "what": "Read the landing, waitlist pages, directory listings (BetaList, G2) and the reveal copy against the firewall rulebook: no behavioural-intelligence, influence, network-graph or viral-optimisation language, no scheduling or auto-reply promises, dates consistent with 1 Dec (the November 2026 fix), scarcity and pricing claims accurate. Edits to Asad and Alex.",
+   "what": "Read the landing, waitlist pages, directory listings (BetaList, G2) and the reveal copy against the firewall rulebook: no behavioural-intelligence, influence, network-graph or viral-optimisation language, no scheduling or auto-reply promises, dates consistent with 8 Dec (the November 2026 fix), scarcity and pricing claims accurate. Edits to Asad and Alex.",
    "why": "Reviewers and pilots read the public site as much as the app; investor language on a public surface is a rejection we chose.",
    "area": "Marketing",
-   "due": "2026-10-23",
+   "due": "2026-10-30",
    "priority": "P1",
    "priority_reason": "Meta review may still be iterating; public copy is a rejection vector",
    "depends_on": [
@@ -13323,7 +13323,7 @@ window.LAUNCH_DATA = {
    "what": "Before UAT wave 1: fix the bug-bash #1 list against Saad's blocker criteria; fold in Saad's pre-UAT visual sweep findings; apply Saad's copy-freeze string list (every user-visible string vs the voice guide) in one PR, after which strings change only as blocker fixes; confirm no deferred surface is reachable (Schedule CTAs are Remind-me, no auto-pilot log, no Inbox/messaging, no Photos/Video/Advanced tabs).",
    "why": "UAT should find product problems, not missing spinners, six voices or surfaces the MVP legally cannot ship.",
    "area": "QA",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P1",
    "priority_reason": "Precedes UAT wave 1; the copy part is Saad's P2 addition and drops if the voice guide slipped",
    "depends_on": [
@@ -13351,7 +13351,7 @@ window.LAUNCH_DATA = {
    "what": "Consume Muteeb's rate-limit layer (N5-MT-17) with a clean 429 UX that reads Retry-After and never silently retries a rejected request. Add a stale-data banner per surface driven by the freshness SLOs Muteeb publishes, and the T1/T2 degraded states named in N4-MT-07's tier table. Apply the client-side half of the retry and timeout budgets from N5-MT-13 - capped attempts, jittered backoff, no retry on a 429 or a 4xx - so the browser cannot amplify an incident. Keep the synthetic OAuth canary every 15 minutes running the connect flow on a test page and paging on failure.",
    "why": "The app must never DDoS itself or fail silently; the canary catches a Meta-side break before a pilot does.",
    "area": "Ops",
-   "due": "2026-11-04",
+   "due": "2026-11-11",
    "priority": "P1",
    "priority_reason": "Hardening with slack before the review",
    "depends_on": [
@@ -13385,7 +13385,7 @@ window.LAUNCH_DATA = {
    "what": "Daily: take Saad's defect triage against blocker criteria, fix blockers on staging, hand back for retest (Saad retests; Lewis covers the pilot side); invite pilots 4-5 only when wave-1 blockers are closed.",
    "why": "Fix-then-invite is the pattern; unfixed blockers in front of pilots 4-5 cost pilots.",
    "area": "QA",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P0",
    "priority_reason": "Gates inviting pilots 4-5 and the zero-P1 review",
    "depends_on": [
@@ -13414,7 +13414,7 @@ window.LAUNCH_DATA = {
    "what": "Work Saad's sized fix list: contrast via token roles, focus order and visible focus, ARIA on gauge / heatmap / rings, keyboard access to sheets and slide-overs, reduced-motion; axe pass on the five key pages.",
    "why": "Accessibility debt compounds; the sprint goal says WCAG met before freeze.",
    "area": "QA",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P1",
    "priority_reason": "Sprint goal; review evidence",
    "depends_on": [
@@ -13442,7 +13442,7 @@ window.LAUNCH_DATA = {
    "what": "Lighthouse >= 90 on landing, Today, Drafts, Alerts, Analytics; code-split the rails, lazy-load charts, image budget; a bundle-size budget that fails CI on regression; results attached as readiness-review evidence.",
    "why": "Speed is credibility for an analytics product; readiness review #1 reads the receipts.",
    "area": "QA",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P1",
    "priority_reason": "Review evidence with slack",
    "depends_on": [],
@@ -13467,7 +13467,7 @@ window.LAUNCH_DATA = {
    "what": "Nightly E2E run of every flow 1-14 (1-5 Asad's CI specs; 6-8 from N5-SD-13/14; 9-14 from N5-SD-16) against staging with failure paging; matrix: Chrome, Safari, Firefox desktop; iOS Safari and Android Chrome (PWA); results surfaced on the war-room board. Add iPad Safari to the matrix and publish the minimum supported browser/OS list into Saad's docs so support and pilots know what is promised.",
    "why": "The robot safety net at full strength before freeze.",
    "area": "QA",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P1",
    "priority_reason": "Review evidence",
    "depends_on": [],
@@ -13490,10 +13490,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Asad",
    "title": "Flip OAuth Live Mode behind the flag when Meta approval lands",
-   "what": "If approval lands: switch the Meta app to Live Mode behind the launch flag, verify connect on production with a non-Tester account, then Lewis walks each pilot through live connect the same week. If not approved by 6 Nov, record the dev-mode branch (Alex's fallback plan) at readiness review #1.",
-   "why": "The moment the product becomes publicly real; the Meta branch must be decided at the 6 Nov review either way.",
+   "what": "If approval lands: switch the Meta app to Live Mode behind the launch flag, verify connect on production with a non-Tester account, then Lewis walks each pilot through live connect the same week. If not approved by 13 Nov, record the dev-mode branch (Alex's fallback plan) at readiness review #1.",
+   "why": "The moment the product becomes publicly real; the Meta branch must be decided at the 13 Nov review either way.",
    "area": "Meta",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P0",
    "priority_reason": "External clock; branch decided at the review",
    "depends_on": [
@@ -13522,7 +13522,7 @@ window.LAUNCH_DATA = {
    "what": "Web manifest and maskable icons; Workbox app-shell-only precache with content-hash revisions and an update-ready prompt (never caches API data); iOS add-to-home-screen tested; a stale-shell scenario tested after a deploy.",
    "why": "The mobile story; a stale cached shell after launch fixes would be an own-goal.",
    "area": "App core",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "Sprint goal; cut order says PWA polish is last",
    "depends_on": [
@@ -13546,10 +13546,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Asad",
    "title": "/security trust page, 1-page security packet, security.txt",
-   "what": "/security page plus a downloadable one-page packet built from the evidence pack (KMS, isolation CI proofs, pen-test summary, RTO/RPO, backups, DPA) with copy from Filza + Muteeb after the narrative firewall; /.well-known/security.txt with a disclosure route and response SLA; live before the 17 Nov notice.",
+   "what": "/security page plus a downloadable one-page packet built from the evidence pack (KMS, isolation CI proofs, pen-test summary, RTO/RPO, backups, DPA) with copy from Filza + Muteeb after the narrative firewall; /.well-known/security.txt with a disclosure route and response SLA; live before the 24 Nov notice.",
    "why": "The first ask is 'OAuth your page to a stranger'; the proofs exist and were hidden.",
    "area": "Marketing",
-   "due": "2026-11-08",
+   "due": "2026-11-15",
    "priority": "P1",
    "priority_reason": "Must precede the 17 Nov notice; Lewis's conversions use it",
    "depends_on": [
@@ -13578,7 +13578,7 @@ window.LAUNCH_DATA = {
    "what": "Analytics All-posts tab: sortable table of per-post score, drivers summary, sentiment, reach, engagement, posted time vs best window from already-served fields; tenant-scoped CSV export; empty state. (Reassigned Asad -> Saad 3 Sep for load balance: Saad owns front-end build; Asad holds the N5 QA/hardening line.)",
    "why": "The raw table pilots actually export; cheap and pilot-valuable.",
    "area": "Analytics",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "Pilot value; no new endpoints",
    "depends_on": [
@@ -13606,7 +13606,7 @@ window.LAUNCH_DATA = {
    "what": "Wins screen from Muteeb's endpoints: value band (extra reach, drafts improved, risks caught), Art-E scoreboard (beat / matched / skipped), advice-rating card posting to the feedback store; every number traces to the ledger; ships only if N2-N4 ran clean. (Reassigned Asad -> Saad 3 Sep for load balance: Saad owns front-end build; Asad holds the N5 QA/hardening line.)",
    "why": "The ROI screen pilots look at when the invoice arrives; assembly, not invention, or it is December.",
    "area": "Wins",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P2",
    "priority_reason": "Cut-order #1 by decision",
    "depends_on": [
@@ -13636,7 +13636,7 @@ window.LAUNCH_DATA = {
    "what": "Channel, hours and first-response standard from Jill's support standard on the marketing site (footer/contact) and in Settings/help; wording matches Saad's macros.",
    "why": "It exists internally; buyers need to see it.",
    "area": "Marketing",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P2",
    "priority_reason": "Cheap visibility fix",
    "depends_on": [
@@ -13664,7 +13664,7 @@ window.LAUNCH_DATA = {
    "what": "Click a row -> slide-over with score + band, driver chips, sentiment, timing-vs-window, from fields already served; no new endpoints. (Reassigned Asad -> Saad 3 Sep for load balance: Saad owns front-end build; Asad holds the N5 QA/hardening line.)",
    "why": "Makes every per-post number defensible; if N5 runs hot it is Wave-1 item #2.",
    "area": "Analytics",
-   "due": "2026-11-08",
+   "due": "2026-11-15",
    "priority": "P2",
    "priority_reason": "Named cut candidate",
    "depends_on": [
@@ -13690,7 +13690,7 @@ window.LAUNCH_DATA = {
    "what": "Audit the running app against both documents: no undocumented route in production, no documented route without an implementation, every route tagged v1 with an owner and a rate-limit class. Write the deprecation policy - additive-only until launch; a breaking change needs a new version and two weeks' notice - and get the contract tests green in CI for both documents. Record the API state as one evidence line in readiness review #1.",
    "why": "Readiness review #1 asks whether the platform is finished, and an API with undocumented routes is an unfinished platform that nobody can prove is finished.",
    "area": "App core",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "P1 - real risk with slack, but it is the input to the 6 Nov readiness review and to the N6 contract freeze.",
    "depends_on": [
@@ -13722,7 +13722,7 @@ window.LAUNCH_DATA = {
    "what": "Serve page avatars, post thumbnails and OG images through a resizing path that emits width-appropriate AVIF/WebP with explicit dimensions and lazy loading below the fold, and handle expired Facebook image URLs with a placeholder rather than a broken box. Set immutable cache headers on hashed build assets and a deliberate TTL on everything else, and subset plus self-host the fonts with font-display swap and only the critical face preloaded. Record bandwidth per session so Saad's front-end cost line is measured rather than assumed.",
    "why": "Unsized third-party Facebook images are both the largest LCP contributor and the largest bandwidth line, and they are the one asset class the Lighthouse ticket cannot fix by code-splitting.",
    "area": "App core",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P1",
    "priority_reason": "Real risk with slack; N5-AS-05's scores and Saad's hosting cost both depend on it.",
    "depends_on": [
@@ -13755,7 +13755,7 @@ window.LAUNCH_DATA = {
    "what": "Audit both repositories: resolve or explicitly accept every high and critical advisory with a written reason and an owner, pin the lockfiles, and put automated updates on a schedule that stops at feature freeze. Produce an SBOM per build and inventory every third party that executes in the browser or in CI - analytics, embeds, fonts, GitHub Actions - with its owner and its justification, pinning actions to commit SHAs. Gate CI so a new critical advisory or an unpinned direct dependency fails the build.",
    "why": "Freeze week is the wrong time to discover a critical transitive advisory, and an unreviewed browser SDK silently defeats both the CSP and the cookie banner.",
    "area": "Ops",
-   "due": "2026-11-04",
+   "due": "2026-11-11",
    "priority": "P1",
    "priority_reason": "Must precede N6-AS-04's re-run and the frozen build; the CSP allowlist reads the third-party inventory.",
    "depends_on": [
@@ -13788,7 +13788,7 @@ window.LAUNCH_DATA = {
    "what": "Ship the full header set on staging in report-only mode - CSP with nonced scripts and an explicit allowlist per third party (Sentry, analytics, status page, fonts), plus HSTS, X-Content-Type-Options, Referrer-Policy, Permissions-Policy and COOP - and collect violations for a week of real UAT traffic. Fix our own inline scripts and styles rather than widening the policy, and produce the exact enforced policy that N6-AS-04 will flip on in freeze week.",
    "why": "A CSP first written and enforced two days before code freeze breaks charts, embeds or the cookie banner on launch day; the violations have to be collected while there is still time to fix them.",
    "area": "Ops",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P1",
    "priority_reason": "De-risks the N6-AS-04 enforcement flip, which currently happens 18 Nov with no rehearsal.",
    "depends_on": [
@@ -13820,7 +13820,7 @@ window.LAUNCH_DATA = {
    "what": "Define what may be logged - tenant id, page id, post id, request id, timings, error class - and what may never be: access tokens, email addresses, names, draft bodies, comment text, and Art-E questions and answers. Add redaction in the shared logger plus Sentry data scrubbing, then add a CI check that greps a captured log sample from an E2E run for token patterns, email addresses and known fixture strings and fails the build on a hit. Re-check Sentry breadcrumbs and the browser console specifically, which are where personal data actually escapes.",
    "why": "Filza's retention schedule and Jill's log-retention policy both assume the logs are non-personal; if they are not, every log store falls inside DSAR and breach notification.",
    "area": "Ops",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "Readiness evidence with slack, but it must precede the pen-test report and Filza's attestation.",
    "depends_on": [
@@ -13853,7 +13853,7 @@ window.LAUNCH_DATA = {
    "what": "Run the promote-or-keep gate for each model with fresh cuts and record the decision.",
    "why": "Last chance to improve; after this stability beats accuracy.",
    "area": "QA",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P0",
    "priority_reason": "must precede pinning and the shadow week",
    "depends_on": [
@@ -13881,7 +13881,7 @@ window.LAUNCH_DATA = {
    "what": "Pin weights, prompts, features, data hash and seeds per model under a named mechanism (MLflow or pinned manifest) so rollback is a pointer flip; hand the manifest to Muteeb. Runs in parallel with the shadow week, which logs the same candidates.",
    "why": "A frozen model that cannot be rebuilt is abandoned.",
    "area": "QA",
-   "due": "2026-11-03",
+   "due": "2026-11-10",
    "priority": "P1",
    "priority_reason": "Due 3 Nov; the dated consumers are the 13 Nov model freeze (N6-FH-01) and Muteeb's 17 Nov rollback rehearsal - ten days of slack. Real risk, must not slip past 12 Nov, but not zero-slack.",
    "depends_on": [
@@ -13906,10 +13906,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Faheem",
    "title": "Shadow week: live predictions vs outcomes logged as freeze evidence",
-   "what": "Start logging on 30 Oct, the day the promote-or-keep decisions land, so seven full days (30 Oct - 5 Nov) of live predictions vs outcomes for flop, crisis and health are in hand for the 6 Nov readiness review; report parity with production. Pinning (N5-FH-02) happens during the week on the same candidates.",
+   "what": "Start logging on 6 Nov, the day the promote-or-keep decisions land, so seven full days (6 Nov - 12 Nov) of live predictions vs outcomes for flop, crisis and health are in hand for the 13 Nov readiness review; report parity with production. Pinning (N5-FH-02) happens during the week on the same candidates.",
    "why": "The go/no-go reads this, not opinions; a week that starts after pinning cannot finish before the review.",
    "area": "QA",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P0",
    "priority_reason": "readiness review evidence on a dated gate",
    "depends_on": [
@@ -13921,9 +13921,9 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "plan",
-   "acceptance": "Seven-day shadow report (30 Oct - 5 Nov) filed by 6 Nov.",
+   "acceptance": "Seven-day shadow report (6 Nov - 12 Nov) filed by 13 Nov.",
    "checklist": [
-    "Start logging 30 Oct",
+    "Start logging 6 Nov",
     "Daily check",
     "Report"
    ]
@@ -13932,11 +13932,11 @@ window.LAUNCH_DATA = {
    "id": "N5-FH-04",
    "sprint": "N5",
    "assignee": "Faheem",
-   "title": "Crisis drill #2 for the 5 Nov video + 7-day live false-alarm rate",
+   "title": "Crisis drill #2 for the 12 Nov video + 7-day live false-alarm rate",
    "what": "Run drill #2 with Lewis and Muteeb, record the measured week of false alarms, and give Saad/Alex the real numbers the video may claim.",
    "why": "Marketing claims backed by a measured week.",
    "area": "Alerts",
-   "due": "2026-11-02",
+   "due": "2026-11-09",
    "priority": "P0",
    "priority_reason": "video ships 5 Nov",
    "depends_on": [
@@ -13948,7 +13948,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "plan",
-   "acceptance": "Drill receipt and 7-day rate delivered before 5 Nov.",
+   "acceptance": "Drill receipt and 7-day rate delivered before 12 Nov.",
    "checklist": [
     "Run drill",
     "Record 7-day rate",
@@ -13960,10 +13960,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Faheem",
    "title": "Golden-set regression green 7 consecutive nights; Saad countersigns",
-   "what": "Keep the 200-question regression green for seven consecutive nights ending by 6 Nov (so the run must be green from 30 Oct); Saad countersigns or the descope path activates.",
+   "what": "Keep the 200-question regression green for seven consecutive nights ending by 13 Nov (so the run must be green from 6 Nov); Saad countersigns or the descope path activates.",
    "why": "Seven green nights or Art-E ships as canned-context.",
    "area": "Art-E",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P0",
    "priority_reason": "readiness review + descope decision",
    "depends_on": [
@@ -13990,7 +13990,7 @@ window.LAUNCH_DATA = {
    "what": "Measure, for flop scoring, post and comment sentiment, toxicity, crisis detection and the embedding model, the current p50/p95/p99 and the cost per 1,000 predictions including compute, warehouse scan and storage. Optimise the ones that miss their budget: batch where the caller allows it, remove per-request feature fetches that hit the warehouse, precompute what is stable per page-day, and keep a warm path so cold start never sits on the type-time route. Prove output parity against the frozen candidate before and after - the optimisation may not move a single score band - and hand the cost table to Asad for the end-to-end per-page consolidation.",
    "why": "The 1s type-time budget and the per-page cost consolidation both rest on per-model numbers that were never measured after the models grew.",
    "area": "Ops",
-   "due": "2026-11-03",
+   "due": "2026-11-10",
    "priority": "P1",
    "priority_reason": "Feeds the N4 cost re-consolidation and must land before the 13 Nov model freeze.",
    "depends_on": [
@@ -14023,7 +14023,7 @@ window.LAUNCH_DATA = {
    "what": "Pull the ten most expensive queries by execution time and bytes scanned from the Redshift system tables across serving endpoints and the QA dashboards, then fix them at the table level with Muteeb: sort keys on the time and page columns the filters actually use, distribution keys that stop the large joins broadcasting, column compression, and a materialised aggregate wherever a dashboard rescans raw posts on every refresh. Record before and after runtime and bytes scanned per query, and set a scan-size alarm so a new query cannot quietly become the largest line on the bill.",
    "why": "Every analytics tile, health score and Discovery recompute reads the same tables, so unsorted keys make both p95 and the monthly bill scale with history rather than with traffic.",
    "area": "Data",
-   "due": "2026-11-04",
+   "due": "2026-11-11",
    "priority": "P1",
    "priority_reason": "Real risk with slack; the frozen-stack load test and Jill's cost model both read the result.",
    "depends_on": [
@@ -14056,7 +14056,7 @@ window.LAUNCH_DATA = {
    "what": "Load test at pilot x10 with ramp and burst, then run the day-1 profile using the rates from the capacity model N4-MT-07: 100 pages connecting inside one hour, each triggering first-value ingest plus a queued historical backfill. Enforce the N5-MT-12 degradation tiers, hold queue depth inside the N5-MT-11 ceilings, prove the DLQ holds under surge, and record time-to-first-value per page and live scoring p95 during the onboarding storm. Name the Fargate autoscale policy applied, by policy name, in the writeup.",
    "why": "Launch traffic shape proven in advance is what readiness review #1 reads.",
    "area": "Ops",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P1",
    "priority_reason": "Readiness-review evidence due 30 Oct with a week of slack before 6 Nov; N6-MT-03 re-runs it on the frozen stack. The dated item is the review itself (N5-MT-09, kept P0).",
    "depends_on": [
@@ -14090,7 +14090,7 @@ window.LAUNCH_DATA = {
    "what": "Run restore drill #2 from production-shaped backups including the vector index and Art-E memory, re-apply deletion tombstones, time it, and sign RTO 2h and RPO 24h with Filza and Jill.",
    "why": "The drill that makes the SLA a fact; the go/no-go accepts receipts, not assurances.",
    "area": "Ops",
-   "due": "2026-11-01",
+   "due": "2026-11-08",
    "priority": "P1",
    "priority_reason": "Same shape: drill receipt due 1 Nov, five days before the review that reads it. Real risk with slack; N5-MT-09 carries the 6 Nov date.",
    "depends_on": [
@@ -14115,11 +14115,11 @@ window.LAUNCH_DATA = {
    "id": "N5-MT-03",
    "sprint": "N5",
    "assignee": "Muteeb",
-   "title": "Supply timed pipeline evidence from crisis drill #2 for the 5 Nov video",
+   "title": "Supply timed pipeline evidence from crisis drill #2 for the 12 Nov video",
    "what": "Run the platform side of Faheem's crisis drill #2 and hand Saad and Alex the stage-by-stage timing log and the 7-day live false-alarm data so the video's claims match real detector behaviour.",
-   "why": "The crisis-demo video ships 5 Nov; its claims must survive fact-checking.",
+   "why": "The crisis-demo video ships 12 Nov; its claims must survive fact-checking.",
    "area": "Alerts",
-   "due": "2026-11-03",
+   "due": "2026-11-10",
    "priority": "P0",
    "priority_reason": "dated 5 Nov video; blocks Alex's approval of it and Saad's script fact-check",
    "depends_on": [
@@ -14144,11 +14144,11 @@ window.LAUNCH_DATA = {
    "id": "N5-MT-04",
    "sprint": "N5",
    "assignee": "Muteeb",
-   "title": "External pen-test executed; criticals closed before 6 Nov",
+   "title": "External pen-test executed; criticals closed before 13 Nov",
    "what": "Host the external pen-test on the hardened staging target, triage findings against the blocker criteria, and close every critical before readiness review #1. File the report in Jill's evidence folder.",
    "why": "Outside eyes on OAuth, Art-E and Discovery; open criticals fail the review.",
    "area": "Ops",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P0",
    "priority_reason": "readiness review criterion with an external vendor",
    "depends_on": [
@@ -14178,7 +14178,7 @@ window.LAUNCH_DATA = {
    "what": "Build the single war-room view: uptime, errors, freshness, Art-E cost, per-tenant health. First write the failure-mode table - the ten most likely failures ranked by likelihood times blast radius, each with its trigger, blast radius, detection signal, first action, owner and expected recovery time - and use that table as the index for the ten runbooks. Include the interim admin runbook (tenant lookup queries, per-tenant kill or suspend) until the Wave-1 console exists.",
    "why": "Launch week runs off this single pane; the first 'my data looks wrong' ticket needs tenant lookup.",
    "area": "Ops",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P1",
    "priority_reason": "real risk with slack before N6",
    "depends_on": [
@@ -14211,7 +14211,7 @@ window.LAUNCH_DATA = {
    "what": "Add a panel reading Asad's KPI funnel events (signup, connected, ingest done, first insight, draft scored) with time-to-first-value so launch day is read in drop-offs, not just uptime.",
    "why": "Batch 1 is 100 strangers with no concierge; the war room must see where they stall.",
    "area": "Ops",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P1",
    "priority_reason": "real risk with slack",
    "depends_on": [
@@ -14240,7 +14240,7 @@ window.LAUNCH_DATA = {
    "what": "Write a smoke suite that hits every production model endpoint with a known input and asserts a contract-shaped, in-range response; run it nightly and on deploy.",
    "why": "Models freeze next sprint; the smoke suite guards the freeze.",
    "area": "QA",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "real risk; N6 freeze smoke depends on it",
    "depends_on": [
@@ -14268,10 +14268,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Muteeb",
    "title": "Readiness review #1 evidence: drills, load, pen-test, zero P1",
-   "what": "Assemble Muteeb's evidence for the 6 Nov review: drill receipts, load writeup, pen-test closure, and the open platform P1 list at zero; every amber leaves with an owner and date.",
+   "what": "Assemble Muteeb's evidence for the 13 Nov review: drill receipts, load writeup, pen-test closure, and the open platform P1 list at zero; every amber leaves with an owner and date.",
    "why": "The review is the dress rehearsal for go/no-go and reads artifacts, not opinions.",
    "area": "Launch",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P0",
    "priority_reason": "dated readiness review",
    "depends_on": [
@@ -14286,7 +14286,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "muteeb",
-   "acceptance": "The evidence pack is presented on 6 Nov and every platform item is green or has an owner and date.",
+   "acceptance": "The evidence pack is presented on 13 Nov and every platform item is green or has an owner and date.",
    "checklist": [
     "Collect receipts and writeups",
     "Confirm zero open platform P1s",
@@ -14302,7 +14302,7 @@ window.LAUNCH_DATA = {
    "what": "Emit a diff report on every weekly recompute: edges added and removed, how many pages changed their top match, mean rank churn in the top 5, how many rows moved between the FDR-gated and fail-open fallback populations, and how many pairs crossed the k=5 suppression line. Persist the report per recompute and set a churn threshold that raises an alert to Asad and Muteeb rather than passing silently.",
    "why": "Matches that reshuffle every week destroy trust as fast as wrong matches, and Lewis's pre-freeze spot check needs a stability baseline to read its result against.",
    "area": "Discovery",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P2",
    "priority_reason": "P2 - safe to slip inside hardening; it improves confidence rather than unblocking a gate",
    "depends_on": [
@@ -14332,7 +14332,7 @@ window.LAUNCH_DATA = {
    "what": "Write and apply, service by service, the scaling signal, target value, min and max instances, cooldown and the cost at max: BFF route handlers (concurrency), FastAPI model serving on Fargate (CPU plus request concurrency), ingest and labelling consumers (queue depth per consumer), alert workers, and the nightly recompute jobs. Give every queue a maximum depth and a maximum consumer count, with backpressure at the producer - defer or 429 rather than unbounded growth - and alarms on both depth and oldest-message age. Record the whole thing as one table in the deploy runbook so N5-MT-01 verifies a named policy instead of discovering one.",
    "why": "N5-MT-01 is required to name the scaling mechanism, and without ceilings a burst either fails to scale at all or scales silently into an unbounded bill.",
    "area": "Ops",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P0",
    "priority_reason": "N5-MT-01 (30 Oct) must name it, and Jill's burn cap is priced off the max.",
    "depends_on": [
@@ -14364,7 +14364,7 @@ window.LAUNCH_DATA = {
    "what": "Write the tier table and implement it: T0 never sheds (login, connect, crisis alert detection and delivery), T1 degrades (scoring serves last-known or cached values, Art-E queues or politely declines, analytics serves stale with a banner), T2 sheds first (historical backfills, Discovery recompute, CSV exports, nightly briefings). Give each tier one switch plus an automatic trip on a named signal - p95 over its budget, queue depth over the N5-MT-11 ceiling, or the cost alarm - and make every shed path render the state Asad has designed rather than a 500. Force a trip of each tier on staging and record what a user actually saw. (Cycle with N5-AS-02 broken 3 Sep: tiers defined here first; Asad's UX consumes them.)",
    "why": "Under surge the system must lose the right things in the right order; without switches the shedding order is whatever fails first, and crisis email is the most likely casualty.",
    "area": "Ops",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P0",
    "priority_reason": "N5-MT-01 is written to 'enforce degradation tiers' and the mechanism does not exist yet.",
    "depends_on": [
@@ -14396,7 +14396,7 @@ window.LAUNCH_DATA = {
    "what": "Write the hop table - browser to BFF, BFF to FastAPI, serving to Redshift, to Pinecone, to Meta Graph, to SES, to the LLM - giving each a connect and a read timeout whose sum sits inside the caller's own timeout, so nothing waits longer than its caller will. Attach a retry budget per hop: maximum attempts, jittered exponential backoff, and a cap on the ratio of retries to requests per caller so a slow dependency cannot be amplified into a self-inflicted outage. Enforce these in shared client wrappers rather than at call sites, set retries to zero on non-idempotent calls until N5-MT-14 lands keys, and add a test proving a hop over budget fails fast instead of hanging the request.",
    "why": "Timeouts are library defaults today, so one slow Meta or LLM call can hold every worker and turn a partial dependency problem into a total outage.",
    "area": "Ops",
-   "due": "2026-11-02",
+   "due": "2026-11-09",
    "priority": "P0",
    "priority_reason": "N5-AS-02's retry caps and N5-MT-12's p95 trip signal both read this table.",
    "depends_on": [
@@ -14428,7 +14428,7 @@ window.LAUNCH_DATA = {
    "what": "Give every externally triggered write an idempotency key - connect and disconnect, alert send, Art-E answer plus its memory write, Discovery opt-in and opt-out, ingest completion events, feedback capture - stored with a TTL long enough to cover the retry window, so a retry or a redelivered queue message produces exactly one effect. Make the alert, ingest and labelling consumers at-least-once safe by keying on (tenant, page, post, run) and upserting rather than inserting. Verify by replaying a captured message batch twice and diffing the resulting state and the outbound email log.",
    "why": "Retries and DLQ redelivery now exist across alerts, ingest and KANG; without keys the first duplicate crisis email or double-applied write lands in front of a pilot.",
    "area": "Ops",
-   "due": "2026-11-03",
+   "due": "2026-11-10",
    "priority": "P0",
    "priority_reason": "N5-MT-13 cannot turn retries on for writes until this exists, and N5-MT-15's redrive depends on it.",
    "depends_on": [
@@ -14461,7 +14461,7 @@ window.LAUNCH_DATA = {
    "what": "Write and then rehearse the drain procedure for every dead-letter queue - alerts, ingest, labelling, KANG: how to inspect, how to tell poison from transient, how to redrive at a limited rate, and how to quarantine a poison message with its tenant and payload hash for later analysis. Set the alarms that page: any message older than one hour, or depth above the N5-MT-11 ceiling. Rehearse on staging by poisoning one alert message and one ingest message, drain both, and record the elapsed time and what was left behind.",
    "why": "DLQs exist in three pipelines and nobody has ever drained one; the first real poison message would be debugged live, during launch week, by whoever is on call.",
    "area": "Ops",
-   "due": "2026-11-04",
+   "due": "2026-11-11",
    "priority": "P1",
    "priority_reason": "Hardening with slack, but it is the input to the N6-MT-01 game-day and one of the top-10 runbooks.",
    "depends_on": [
@@ -14494,7 +14494,7 @@ window.LAUNCH_DATA = {
    "what": "For every cached read path - score, Today feed, analytics tiles and series, health, best times, Discovery matches and the Art-E semantic cache - record the key shape (always tenant-scoped, never global), the TTL, the invalidation trigger and a named hit-rate target. Measure the real hit rate on a week of pilot traffic and fix the misses: keys too specific to ever repeat, TTLs shorter than the data's refresh, and cold-start stampedes that need a single-flight lock. Add a per-endpoint hit-rate panel to the war-room board and state the cost saved per 1,000 requests. This extends N4-MT-03 from Art-E to everything else.",
    "why": "Both the p95 budgets and the per-page cost model assume caching, but the only cache hit rate anyone has ever measured is Art-E's.",
    "area": "Ops",
-   "due": "2026-11-04",
+   "due": "2026-11-11",
    "priority": "P1",
    "priority_reason": "Real risk with slack; the numbers feed Jill's unit economics and the N6 frozen-stack load test.",
    "depends_on": [
@@ -14528,7 +14528,7 @@ window.LAUNCH_DATA = {
    "what": "Put a named limit on each unauthenticated or cheap-to-abuse surface: waitlist and pilot-application forms, login and the OAuth callback, the Meta data-deletion callback, the Art-E ask endpoint, CSV export and the status endpoints. Implement per-IP and per-tenant token buckets with a burst allowance, add bot defence on the two public forms, and apply an edge WAF rule set inside the cost Jill confirmed. Return 429 with Retry-After so Asad's UX has something to read, and log limit hits per rule to the war-room board.",
    "why": "The public forms and the Art-E ask endpoint are the cheapest way for a stranger to burn the LLM budget or fill the waitlist with junk on launch day, and N5-AS-02's 429 UX currently has no layer behind it.",
    "area": "Ops",
-   "due": "2026-11-03",
+   "due": "2026-11-10",
    "priority": "P0",
    "priority_reason": "N5-AS-02 lists this as a dependency that does not exist, and the exposure starts the moment the waitlist opens.",
    "depends_on": [
@@ -14561,7 +14561,7 @@ window.LAUNCH_DATA = {
    "what": "Export every user-visible string from staging (empty states, alerts, gauge, health, refusals, settings) and review them in one pass against the voice guide and vocabulary table; file fixes sized for Asad before UAT wave 1. Drop the checkpoint if the voice guide never shipped.",
    "why": "UAT should test comprehension of consistent copy, not six voices.",
    "area": "PM",
-   "due": "2026-10-29",
+   "due": "2026-11-05",
    "priority": "P2",
    "priority_reason": "Safe to slip; drop if the voice guide slipped",
    "depends_on": [
@@ -14588,7 +14588,7 @@ window.LAUNCH_DATA = {
    "what": "Walk every state of every surface on staging, desktop and mobile, against the states matrix and packs; file missing spinners, empty states and drift before pilots see them. Saad alone, Rafeh has left.",
    "why": "UAT should find product problems, not missing spinners.",
    "area": "Design",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P1",
    "priority_reason": "Real risk that UAT finds cosmetics; slack before wave 1 on 3 Nov",
    "depends_on": [
@@ -14616,7 +14616,7 @@ window.LAUNCH_DATA = {
    "what": "Run the protocol with pilots 1-3: full journey, watch-don't-guide, comprehension tasks, defects logged against blocker criteria. Lewis handles the pilot side.",
    "why": "Fix-then-invite run for real; the first evidence the go/no-go reads.",
    "area": "PM",
-   "due": "2026-11-03",
+   "due": "2026-11-10",
    "priority": "P0",
    "priority_reason": "Gate-serving: feeds the 6 Nov readiness review",
    "depends_on": [
@@ -14645,11 +14645,11 @@ window.LAUNCH_DATA = {
    "id": "N5-SD-04",
    "sprint": "N5",
    "assignee": "Saad",
-   "title": "Ship the crisis-demo video 5 Nov",
-   "what": "Assemble the video from Faheem's drill #2 footage per the fact-checked script; Alex approves, Filza clears; publish 5 Nov.",
+   "title": "Ship the crisis-demo video 12 Nov",
+   "what": "Assemble the video from Faheem's drill #2 footage per the fact-checked script; Alex approves, Filza clears; publish 12 Nov.",
    "why": "Dated public asset; claims must match a measured week.",
    "area": "Marketing",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P0",
    "priority_reason": "Dated 5 Nov (owner inferred: Saad's own row carries 'ships 5 Nov')",
    "depends_on": [
@@ -14663,7 +14663,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "reconciler",
-   "acceptance": "Video published 5 Nov with approvals filed.",
+   "acceptance": "Video published 12 Nov with approvals filed.",
    "checklist": [
     "Cut from drill footage",
     "Fact-check claims",
@@ -14676,10 +14676,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Saad",
    "title": "UAT wave 1 fix-and-retest, invite pilots 4-5, review inputs",
-   "what": "Retest fixes (Saad covers overflow, Lewis pilot side), invite pilots 4-5 once blockers clear, and bring the defect list vs blocker criteria to the 6 Nov readiness review.",
+   "what": "Retest fixes (Saad covers overflow, Lewis pilot side), invite pilots 4-5 once blockers clear, and bring the defect list vs blocker criteria to the 13 Nov readiness review.",
    "why": "Readiness review #1 needs zero P1 with evidence.",
    "area": "PM",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P0",
    "priority_reason": "Gate-serving",
    "depends_on": [
@@ -14709,7 +14709,7 @@ window.LAUNCH_DATA = {
    "what": "Go-live checklist, rollback triggers, war-room roles (commander not hands-on-keyboard), kill-switch locations placeholder, Meta branch (Live vs dev-mode fallback).",
    "why": "Pre-decided decisions are the only kind that work at 8am on launch day.",
    "area": "Launch",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "Runbook v1 is not a named 6 Nov review criterion (zero P1, drills, pen-test, Meta branch); its consumers are N6-SD-02 (17 Nov) and dry run #1 (19 Nov), two weeks away.",
    "depends_on": [
@@ -14725,7 +14725,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "saad",
-   "acceptance": "Runbook v1 reviewed at the 6 Nov review.",
+   "acceptance": "Runbook v1 reviewed at the 13 Nov review.",
    "checklist": [
     "Draft checklist and triggers",
     "Define roles",
@@ -14741,7 +14741,7 @@ window.LAUNCH_DATA = {
    "what": "Check the nightly QA dashboard daily and countersign when seven consecutive nights are green; if not by review, trigger the pre-declared descope path with Alex.",
    "why": "Seven green nights or the descope path activates.",
    "area": "Art-E",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P0",
    "priority_reason": "Gate-serving: the descope decision is taken at the 6 Nov review",
    "depends_on": [
@@ -14769,7 +14769,7 @@ window.LAUNCH_DATA = {
    "what": "Put one genuine stranger through self-serve onboarding, record where they stall (esp. Facebook connect), and specify the escape hatch for Asad.",
    "why": "Facebook connect is notoriously sticky; batch 1 has no concierge.",
    "area": "Onboarding",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "Real risk for batch 1; slack before freeze",
    "depends_on": [
@@ -14797,7 +14797,7 @@ window.LAUNCH_DATA = {
    "what": "Finish the top-20 macros and write 'why did Art-E say that' and 'why did the gauge say that' explainers; hand to Jill.",
    "why": "Support answers written before support exists.",
    "area": "PM",
-   "due": "2026-11-08",
+   "due": "2026-11-15",
    "priority": "P1",
    "priority_reason": "Real risk at launch; slack until N6",
    "depends_on": [
@@ -14825,7 +14825,7 @@ window.LAUNCH_DATA = {
    "what": "Hunter brief, gallery from demo-dataset renders (never pilot data), tagline, maker comment; pricing and date consistent.",
    "why": "Launch-day assets from curated data, ready before freeze.",
    "area": "Marketing",
-   "due": "2026-11-08",
+   "due": "2026-11-15",
    "priority": "P1",
    "priority_reason": "Real risk; frozen in N6 so slack exists",
    "depends_on": [
@@ -14850,10 +14850,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Saad",
    "title": "Run bug bash #1 on staging (scripted, 60 min) and hand Asad the list",
-   "what": "Run the first scripted bug bash on staging with Lewis, Muteeb and Faheem (60 minutes, one script per surface), file findings against the blocker criteria, and hand Asad the ranked list the same day so fixes land before UAT wave 1 on 3 Nov.",
+   "what": "Run the first scripted bug bash on staging with Lewis, Muteeb and Faheem (60 minutes, one script per surface), file findings against the blocker criteria, and hand Asad the ranked list the same day so fixes land before UAT wave 1 on 10 Nov.",
    "why": "Asad's N5-AS-02 depends on 'Saad: bug bash #1 list' and no ticket ran the bash after Rafeh's QA support was dropped.",
    "area": "QA",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P1",
    "priority_reason": "P1: UAT wave 1 (3 Nov) is dated; the bash is a bounded session.",
    "depends_on": [
@@ -14863,7 +14863,7 @@ window.LAUNCH_DATA = {
     "N5-AS-02"
    ],
    "gate": "N5",
-   "acceptance": "A ranked bug-bash #1 list with blocker flags is with Asad on 30 Oct.",
+   "acceptance": "A ranked bug-bash #1 list with blocker flags is with Asad on 6 Nov.",
    "checklist": [
     "Write one script per surface",
     "Run the 60-min session",
@@ -14877,10 +14877,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Saad",
    "title": "Meta second-cycle watch and credential check through freeze",
-   "what": "Carry the daily dashboard watch, the 24h reviewer SLA and the weekly reviewer-credential and test-page check from 26 Oct through the 20 Nov go/no-go - the window in which the second decision lands under either reading of Meta's clock. Re-verify weekly that the reviewer login still works and the test page still shows populated data as the app changes through UAT and freeze, and give Alex the current status as a line in the readiness review and the go/no-go memo. Owner is whoever N1-AX-11 confirmed; the backup covers the UAT weeks.",
-   "why": "The watch tickets stop on 23 Oct while the decision that actually determines the Meta branch arrives after it, and reviewer credentials silently decay as the build changes.",
+   "what": "Carry the daily dashboard watch, the 24h reviewer SLA and the weekly reviewer-credential and test-page check from 2 Nov through the 27 Nov go/no-go - the window in which the second decision lands under either reading of Meta's clock. Re-verify weekly that the reviewer login still works and the test page still shows populated data as the app changes through UAT and freeze, and give Alex the current status as a line in the readiness review and the go/no-go memo. Owner is whoever N1-AX-11 confirmed; the backup covers the UAT weeks.",
+   "why": "The watch tickets stop on 30 Oct while the decision that actually determines the Meta branch arrives after it, and reviewer credentials silently decay as the build changes.",
    "area": "Meta",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P0",
    "priority_reason": "P0 - external clock: the second decision and the 6 Nov Meta-branch call both land inside this window.",
    "depends_on": [
@@ -14895,11 +14895,11 @@ window.LAUNCH_DATA = {
     "N6-FZ-02"
    ],
    "gate": "N5",
-   "acceptance": "A dated log shows a daily status check and a weekly working-credential check from 26 Oct, and the Meta status is a line in the 6 Nov review.",
+   "acceptance": "A dated log shows a daily status check and a weekly working-credential check from 2 Nov, and the Meta status is a line in the 13 Nov review.",
    "checklist": [
     "Daily dashboard check and log; escalate any message inside 24h",
     "Weekly reviewer login and populated-test-page check",
-    "Hand the status to Alex for readiness review #1 on 6 Nov",
+    "Hand the status to Alex for readiness review #1 on 13 Nov",
     "Hand the branch evidence to the go/no-go memo",
     "Confirm backup cover across the UAT weeks"
    ],
@@ -14913,7 +14913,7 @@ window.LAUNCH_DATA = {
    "what": "Countersign for the company all five pilot DPAs and pilot agreements (AI-guidance disclaimer, liability cap) that Filza prepared and Lewis had the pilots sign, and sign the final ToS, before UAT wave 1 (pilots 1-3) starts. Check the terms match the signed pricing sheet so Jill's N6 invoices can cite them.",
    "why": "UAT on unsigned paper is exposure, not testing; N6 invoices must go out against countersigned terms.",
    "area": "Legal",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P0",
    "priority_reason": "Blocks Saad's UAT wave 1 and Jill's invoices.",
    "depends_on": [
@@ -14942,11 +14942,11 @@ window.LAUNCH_DATA = {
    "id": "N5-AX-02",
    "sprint": "N5",
    "assignee": "Alex",
-   "title": "Approve the crisis-demo video before 5 Nov",
-   "what": "Review the cut of the crisis-demo video against the script's claim-to-evidence map, Faheem's drill #2 result and 7-day live false-alarm rate, and Filza's clearance; approve or send back with specific changes so it ships 5 Nov.",
+   "title": "Approve the crisis-demo video before 12 Nov",
+   "what": "Review the cut of the crisis-demo video against the script's claim-to-evidence map, Faheem's drill #2 result and 7-day live false-alarm rate, and Filza's clearance; approve or send back with specific changes so it ships 12 Nov.",
    "why": "Both public and fact-checked; a shipped claim the detector cannot meet costs more than a late video.",
    "area": "Marketing",
-   "due": "2026-11-04",
+   "due": "2026-11-11",
    "priority": "P0",
    "priority_reason": "Dated: the video ships 5 Nov.",
    "depends_on": [
@@ -14961,13 +14961,13 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "A written approval (or dated change list) is sent to Saad by 4 Nov and the video ships 5 Nov.",
+   "acceptance": "A written approval (or dated change list) is sent to Saad by 11 Nov and the video ships 12 Nov.",
    "checklist": [
     "Watch the cut against the claim map",
     "Check drill #2 numbers",
     "Confirm Filza's clearance",
     "Approve or list changes",
-    "Confirm the 5 Nov ship"
+    "Confirm the 12 Nov ship"
    ]
   },
   {
@@ -14978,7 +14978,7 @@ window.LAUNCH_DATA = {
    "what": "Write the NO-GO playbook: the fallback launch date, what pilots are told and by whom (Lewis), what the public and waitlist are told (Filza's pre-written 'launch slips' comms), what happens to the PH slot and hunter, the dev-mode branch from N2-AX-08, and who decides each step.",
    "why": "A review that can only say yes is not a review; a NO-GO with a playbook is a decision, without one it is a catastrophe.",
    "area": "Launch",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P1",
    "priority_reason": "Real risk with slack: needed at the 20 Nov go/no-go.",
    "depends_on": [
@@ -15006,10 +15006,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Alex",
    "title": "Draft the go/no-go memo with empty evidence slots",
-   "what": "Draft the 20 Nov memo from the criteria and scorecard: one section per criterion with owner, threshold and an empty evidence slot; a Meta-branch section (Live Mode granted / pending -> fallback); invoices, DPAs and waitlist rows; a recorded-decision block. Use it as the dress-rehearsal script at the 6 Nov readiness review.",
-   "why": "The memo read aloud on 20 Nov must exist with slots before evidence arrives, or the evidence gets shaped to the decision.",
+   "what": "Draft the 27 Nov memo from the criteria and scorecard: one section per criterion with owner, threshold and an empty evidence slot; a Meta-branch section (Live Mode granted / pending -> fallback); invoices, DPAs and waitlist rows; a recorded-decision block. Use it as the dress-rehearsal script at the 13 Nov readiness review.",
+   "why": "The memo read aloud on 27 Nov must exist with slots before evidence arrives, or the evidence gets shaped to the decision.",
    "area": "Launch",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P1",
    "priority_reason": "Real risk with slack: rehearsed 6 Nov, read 20 Nov.",
    "depends_on": [
@@ -15022,24 +15022,24 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "plan",
-   "acceptance": "The memo skeleton exists with every criterion, owner and an empty evidence slot, and was used at the 6 Nov review.",
+   "acceptance": "The memo skeleton exists with every criterion, owner and an empty evidence slot, and was used at the 13 Nov review.",
    "checklist": [
     "Build from the criteria table",
     "Add the Meta-branch section",
     "Add invoices, DPAs and waitlist rows",
     "Add the decision block",
-    "Circulate before 6 Nov"
+    "Circulate before 13 Nov"
    ]
   },
   {
    "id": "N5-AX-05",
    "sprint": "N5",
    "assignee": "Alex",
-   "title": "Chair readiness review #1 (6 Nov): every amber/red gets owner + date",
-   "what": "Chair readiness review #1 on Fri 6 Nov using the scorecard and memo skeleton: zero P1s, drills passed (load x10 + day-1 shape, restore #2, pen-test criticals closed), UAT wave 1 outcome, golden-set nights, and the Meta branch decided (Live Mode or dev-mode fallback). Every amber or red leaves the room with a named owner and a date before 13 Nov.",
-   "why": "The dress rehearsal for go/no-go; reds without owners on 6 Nov are reds on 20 Nov.",
+   "title": "Chair readiness review #1 (13 Nov): every amber/red gets owner + date",
+   "what": "Chair readiness review #1 on Fri 13 Nov using the scorecard and memo skeleton: zero P1s, drills passed (load x10 + day-1 shape, restore #2, pen-test criticals closed), UAT wave 1 outcome, golden-set nights, and the Meta branch decided (Live Mode or dev-mode fallback). Every amber or red leaves the room with a named owner and a date before 20 Nov.",
+   "why": "The dress rehearsal for go/no-go; reds without owners on 13 Nov are reds on 27 Nov.",
    "area": "Launch",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P0",
    "priority_reason": "The N5 gate itself.",
    "depends_on": [
@@ -15059,7 +15059,7 @@ window.LAUNCH_DATA = {
    "source": "plan",
    "acceptance": "Minutes record every criterion's RAG, the Meta branch decision, and an owner + date for each amber/red.",
    "checklist": [
-    "Circulate the scorecard on 5 Nov",
+    "Circulate the scorecard on 12 Nov",
     "Run the review criterion by criterion",
     "Decide the Meta branch",
     "Assign owner + date per amber/red",
@@ -15070,11 +15070,11 @@ window.LAUNCH_DATA = {
    "id": "N5-AX-06",
    "sprint": "N5",
    "assignee": "Alex",
-   "title": "Draft the founding-pricing notice (out 17 Nov)",
-   "what": "Draft the 17 Nov founding-pricing notice: founding price, lock duration, eligibility deadline, what happens after, and the commercial motion for non-pilot batch-1 signups; check it against the signed pricing sheet, the landing copy and the invoice template, and send to Filza for the scarcity-claims check. Check the price against Asad's N4 re-cost (N4-AS-18), which includes measured Art-E spend per tenant: if the margin at the signed price no longer holds, settle the price with Jill before drafting rather than after the notice is out. It cannot go out before the /security trust page is live.",
+   "title": "Draft the founding-pricing notice (out 24 Nov)",
+   "what": "Draft the 24 Nov founding-pricing notice: founding price, lock duration, eligibility deadline, what happens after, and the commercial motion for non-pilot batch-1 signups; check it against the signed pricing sheet, the landing copy and the invoice template, and send to Filza for the scarcity-claims check. Check the price against Asad's N4 re-cost (N4-AS-18), which includes measured Art-E spend per tenant: if the margin at the signed price no longer holds, settle the price with Jill before drafting rather than after the notice is out. It cannot go out before the /security trust page is live.",
    "why": "One price everywhere; a notice drafted in N6 collides with UAT, invoices and freeze week.",
    "area": "Marketing",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "Real risk with slack: the send is 17 Nov.",
    "depends_on": [
@@ -15106,10 +15106,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Jill",
    "title": "On-call rota v1: commander separated from hands-on-keyboard",
-   "what": "Rewrite the rota from 9 Nov through launch week (launch-week days provisional; N6-JL-03 freezes them once Saad's hour-by-hour rota and Muteeb's final monitoring exist): primary/secondary per day, an incident commander who is not hands-on-keyboard, escalation to Alex, Filza's 72h breach owner, severity definitions including 'pilot sees wrong data' = automatic incident, and the paging routes from the war-room board (uptime, errors, freshness, Art-E cost, budget and breaker alarms). Publish it into the launch runbook Saad owns.",
-   "why": "Paging that has never paged is decoration; the readiness review on 6 Nov reads this rota and the 2am test receipt, and Muteeb's N6 'on-call final' builds on it.",
+   "what": "Rewrite the rota from 16 Nov through launch week (launch-week days provisional; N6-JL-03 freezes them once Saad's hour-by-hour rota and Muteeb's final monitoring exist): primary/secondary per day, an incident commander who is not hands-on-keyboard, escalation to Alex, Filza's 72h breach owner, severity definitions including 'pilot sees wrong data' = automatic incident, and the paging routes from the war-room board (uptime, errors, freshness, Art-E cost, budget and breaker alarms). Publish it into the launch runbook Saad owns.",
+   "why": "Paging that has never paged is decoration; the readiness review on 13 Nov reads this rota and the 2am test receipt, and Muteeb's N6 'on-call final' builds on it.",
    "area": "Ops",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P1",
    "priority_reason": "Rota v0 already covers to 25 Oct; v1 has a week before the 2am test (N5-JL-03, the gate artefact) and the 6 Nov review.",
    "depends_on": [
@@ -15127,7 +15127,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "plan",
-   "acceptance": "A rota from 9 Nov through 4 Dec (launch week marked provisional) names primary, secondary and commander per day with severity rules and paging routes, and is in Saad's runbook.",
+   "acceptance": "A rota from 16 Nov through 11 Dec (launch week marked provisional) names primary, secondary and commander per day with severity rules and paging routes, and is in Saad's runbook.",
    "checklist": [
     "Agree daily primary/secondary/commander with Muteeb, Asad, Faheem, Alex",
     "Write severity definitions incl. 'pilot sees wrong data' auto-incident",
@@ -15141,10 +15141,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Jill",
    "title": "SOC2-later evidence folder started and filed as produced",
-   "what": "Create the evidence folder (one index, one dated file per artifact) and back-file what exists: N1 access review, Muteeb's restore drill #1 receipt (N2), pen-test scope and report, restore drill #2 with RTO/RPO signed, tenant-isolation CI proofs, DSAR sample run log, breaker trip-test, 2am page test, insurance certificates, ICO registration. Give Asad, Muteeb and Filza the index so the /security trust page and the 1-page security packet are built from it before the 17 Nov notice.",
-   "why": "The audit is later but the evidence is free now; Asad's N5 /security page is built 'from the evidence pack' and the 20 Nov go/no-go reads the same receipts.",
+   "what": "Create the evidence folder (one index, one dated file per artifact) and back-file what exists: N1 access review, Muteeb's restore drill #1 receipt (N2), pen-test scope and report, restore drill #2 with RTO/RPO signed, tenant-isolation CI proofs, DSAR sample run log, breaker trip-test, 2am page test, insurance certificates, ICO registration. Give Asad, Muteeb and Filza the index so the /security trust page and the 1-page security packet are built from it before the 24 Nov notice.",
+   "why": "The audit is later but the evidence is free now; Asad's N5 /security page is built 'from the evidence pack' and the 27 Nov go/no-go reads the same receipts.",
    "area": "Ops",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P1",
    "priority_reason": "Real risk with slack: the artifacts exist anyway, but the /security page must be live before 17 Nov.",
    "depends_on": [
@@ -15179,7 +15179,7 @@ window.LAUNCH_DATA = {
    "what": "Run a genuine out-of-hours page through the paging tool: a synthetic alert fired at about 02:00 on a rota night, the primary acknowledges within target, escalation to the secondary tested by letting one page time out, and the whole chain (alert, page, ack, escalation, all-clear) timestamped. File the receipt in the evidence folder; fix any routing gap and re-run if the first attempt fails.",
    "why": "A paging chain that has never been exercised at night fails at night; the readiness review accepts a drill receipt, not an assurance.",
    "area": "Ops",
-   "due": "2026-11-04",
+   "due": "2026-11-11",
    "priority": "P0",
    "priority_reason": "Readiness review 6 Nov requires 'drills passed'; Checklist 2 names the real 2am test.",
    "depends_on": [
@@ -15207,10 +15207,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Jill",
    "title": "Launch headroom + WAF cost confirmed",
-   "what": "From Muteeb's x10 + burst + day-1-shape load test (Fargate autoscale policy named in his write-up), cost the headroom actually needed for launch week (autoscale ceiling, warehouse and queue capacity, vendor quota raises already requested) and the WAF/rate-limiting layer in front of the app and API. Confirm the numbers in the cost model, get Alex's OK for the launch-week ceiling, and pre-approve the spend so nothing waits for a signature on 1 Dec.",
+   "what": "From Muteeb's x10 + burst + day-1-shape load test (Fargate autoscale policy named in his write-up), cost the headroom actually needed for launch week (autoscale ceiling, warehouse and queue capacity, vendor quota raises already requested) and the WAF/rate-limiting layer in front of the app and API. Confirm the numbers in the cost model, get Alex's OK for the launch-week ceiling, and pre-approve the spend so nothing waits for a signature on 8 Dec.",
    "why": "Capacity found missing on launch morning is self-inflicted; the N6 burn cap cannot be set without knowing what headroom costs.",
    "area": "Finance",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "Real risk with slack: depends on Week A load results, feeds the N6 cap.",
    "depends_on": [
@@ -15239,10 +15239,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Jill",
    "title": "Invoicing dry run: 5 draft invoices produced and checked",
-   "what": "Produce five draft invoices from the template, one per pilot on Lewis's confirmed roster, using the countersigned commercial terms and the founding price: legal particulars, VAT treatment, payment terms, pilot reference and start date. Walk each past Filza (matches terms) and Alex (matches the planned 17 Nov notice); fix the template; confirm the bank-details block and send-from address, and create the payment-tracking sheet.",
-   "why": "Money mechanics rehearsed before money moves; the N6 gate says 5 invoices sent by 20 Nov and a template error found then costs the go/no-go a line item.",
+   "what": "Produce five draft invoices from the template, one per pilot on Lewis's confirmed roster, using the countersigned commercial terms and the founding price: legal particulars, VAT treatment, payment terms, pilot reference and start date. Walk each past Filza (matches terms) and Alex (matches the planned 24 Nov notice); fix the template; confirm the bank-details block and send-from address, and create the payment-tracking sheet.",
+   "why": "Money mechanics rehearsed before money moves; the N6 gate says 5 invoices sent by 27 Nov and a template error found then costs the go/no-go a line item.",
    "area": "Finance",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "Real risk with slack: two weeks before the invoices go, but Filza's countersigning must land first.",
    "depends_on": [
@@ -15273,10 +15273,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Jill",
    "title": "PI + cyber insurance bound",
-   "what": "Choose the quote from N1, answer the underwriter's outstanding questions (Muteeb for security controls such as KMS, backups and the pen-test; Filza for contract terms), bind PI + cyber cover with a start date before the first invoice on 20 Nov, pay the premium, file the certificates and policy schedule in the evidence folder, and diary the renewal.",
+   "what": "Choose the quote from N1, answer the underwriter's outstanding questions (Muteeb for security controls such as KMS, backups and the pen-test; Filza for contract terms), bind PI + cyber cover with a start date before the first invoice on 27 Nov, pay the premium, file the certificates and policy schedule in the evidence folder, and diary the renewal.",
    "why": "Insurance must exist before money changes hands; Checklist 5 puts PI + cyber before the first paying customer.",
    "area": "Finance",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "The immovable date is 'in force before the 20 Nov invoices', two weeks after the 6 Nov due; quotes were started in N1.",
    "depends_on": [
@@ -15291,7 +15291,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "plan",
-   "acceptance": "PI + cyber policies are bound with a start date before 20 Nov, certificates filed and renewal diaried.",
+   "acceptance": "PI + cyber policies are bound with a start date before 27 Nov, certificates filed and renewal diaried.",
    "checklist": [
     "Select the quote with Alex",
     "Close underwriter questions with Muteeb and Filza",
@@ -15305,10 +15305,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Lewis",
    "title": "Pilot agreements and DPAs signed pilot-side before UAT wave 1",
-   "what": "Send every pilot the pilot agreement v1 (AI-guidance disclaimer, liability cap) and the DPA on Filza's N2 pack texts (plus any Privacy v2 updates) in the week of 19 Oct, chase to signature, pass them to Filza for countersign, and confirm to Saad which pilots are cleared before the first wave-1 session. File the signed set in the legal folder. Do not wait for the N5 ToS final; it is a separate document.",
+   "what": "Send every pilot the pilot agreement v1 (AI-guidance disclaimer, liability cap) and the DPA on Filza's N2 pack texts (plus any Privacy v2 updates) in the week of 26 Oct, chase to signature, pass them to Filza for countersign, and confirm to Saad which pilots are cleared before the first wave-1 session. File the signed set in the legal folder. Do not wait for the N5 ToS final; it is a separate document.",
    "why": "Filza's rule is all 5 countersigned BEFORE UAT; a pilot without paper cannot be in wave 1 or be invoiced.",
    "area": "Legal",
-   "due": "2026-10-28",
+   "due": "2026-11-04",
    "priority": "P0",
    "priority_reason": "UAT wave 1 cannot start on unsigned paper",
    "depends_on": [
@@ -15322,9 +15322,9 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "plan",
-   "acceptance": "Filza confirms 5 countersigned agreements plus DPAs and Saad has the cleared list before the first wave-1 session, by 28 Oct.",
+   "acceptance": "Filza confirms 5 countersigned agreements plus DPAs and Saad has the cleared list before the first wave-1 session, by 4 Nov.",
    "checklist": [
-    "Texts from Filza sent to every pilot in the week of 19 Oct",
+    "Texts from Filza sent to every pilot in the week of 26 Oct",
     "Chase each pilot to signature",
     "Filza countersigns",
     "Cleared list to Saad",
@@ -15337,9 +15337,9 @@ window.LAUNCH_DATA = {
    "assignee": "Lewis",
    "title": "UAT wave 1 pilot side: pilots 1-3, retests, invite 4-5",
    "what": "Schedule pilots 1-3 for Saad's full-journey sessions, sit in as the pilot's person (watch-don't-guide), and after each fix re-run the failed steps with the pilot: Saad triages, Lewis re-runs with the pilot (the pilot side of the retest overflow). When wave 1 is clean, invite pilots 4-5 for the next wave.",
-   "why": "Fix-then-invite run for real; without pilot-side retests the defect log never closes and the 6 Nov review reads open P1s.",
+   "why": "Fix-then-invite run for real; without pilot-side retests the defect log never closes and the 13 Nov review reads open P1s.",
    "area": "QA",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P0",
    "priority_reason": "Readiness review #1 needs wave 1 done with zero P1",
    "depends_on": [
@@ -15353,7 +15353,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "reconciler",
-   "acceptance": "Wave-1 sessions for pilots 1-3 are done, every reported defect is retested with the pilot, and pilots 4-5 are invited by 6 Nov.",
+   "acceptance": "Wave-1 sessions for pilots 1-3 are done, every reported defect is retested with the pilot, and pilots 4-5 are invited by 13 Nov.",
    "checklist": [
     "Schedule three sessions",
     "Attend, watch-don't-guide",
@@ -15366,11 +15366,11 @@ window.LAUNCH_DATA = {
    "id": "N5-LW-03",
    "sprint": "N5",
    "assignee": "Lewis",
-   "title": "Crisis drill #2 pilot page, consent and witness for the 5 Nov video",
+   "title": "Crisis drill #2 pilot page, consent and witness for the 12 Nov video",
    "what": "Repeat the N3 drill mechanics for Faheem's drill #2: a consenting pilot page with video permission from N4-LW-05, a seeded storm inside a weekday hour, the stopwatch on comment-posted to email-received, and clean-up after. Confirm with Saad that what the video script claims matches what the drill did.",
-   "why": "The 5 Nov crisis-demo video must survive fact-checking; the drill it is cut from needs a real page and a witnessed clock.",
+   "why": "The 12 Nov crisis-demo video must survive fact-checking; the drill it is cut from needs a real page and a witnessed clock.",
    "area": "Alerts",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P0",
    "priority_reason": "The video ships 5 Nov on a dated beat",
    "depends_on": [
@@ -15385,7 +15385,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "reconciler",
-   "acceptance": "The drill #2 record with times and the pilot's video permission is filed by 3 Nov.",
+   "acceptance": "The drill #2 record with times and the pilot's video permission is filed by 10 Nov.",
    "checklist": [
     "Page and consent",
     "Schedule with Faheem",
@@ -15399,10 +15399,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Lewis",
    "title": "Walk each pilot through live connect after the OAuth Live Mode flip",
-   "what": "The week Asad flips OAuth Live Mode, screen-share with each of the 5 pilots to reconnect their pages through the public OAuth flow, confirm data continuity (no gap, no duplicate pages) and log any consent-screen confusion for Saad. If approval has not landed by the 6 Nov review, record that pilots stay on Tester roles per Alex's dev-mode fallback.",
+   "what": "The week Asad flips OAuth Live Mode, screen-share with each of the 5 pilots to reconnect their pages through the public OAuth flow, confirm data continuity (no gap, no duplicate pages) and log any consent-screen confusion for Saad. If approval has not landed by the 13 Nov review, record that pilots stay on Tester roles per Alex's dev-mode fallback.",
    "why": "The moment the product becomes publicly real; a pilot who cannot reconnect on live mode is a pilot who cannot be invoiced.",
    "area": "Auth",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "Conditional on Meta approval; the written fallback covers a pending decision",
    "depends_on": [
@@ -15416,7 +15416,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "plan",
-   "acceptance": "All 5 pilots are reconnected on Live Mode with data continuity confirmed, or the fallback state is recorded, by 6 Nov.",
+   "acceptance": "All 5 pilots are reconnected on Live Mode with data continuity confirmed, or the fallback state is recorded, by 13 Nov.",
    "checklist": [
     "Approval watch with Saad",
     "Book five sessions in the same week",
@@ -15431,9 +15431,9 @@ window.LAUNCH_DATA = {
    "assignee": "Lewis",
    "title": "Conversion conversations toward 5 paying pilots",
    "what": "Using Alex's founding-pricing briefing, the pilot commercial terms from Jill and Filza, and Asad's one-page security packet, hold a pricing conversation with every pilot: what they would pay, what would stop them, which pages they would pay for. Record willingness-to-pay, objections and the price each pilot was told, and give Alex and Jill a weekly count toward 5.",
-   "why": "Willingness to pay is validated in conversation then confirmed by invoice; if fewer than 5 are warm by 6 Nov, Alex must know at the readiness review.",
+   "why": "Willingness to pay is validated in conversation then confirmed by invoice; if fewer than 5 are warm by 13 Nov, Alex must know at the readiness review.",
    "area": "Pilots",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "The dated commitment is N6-LW-04 (confirmed list to Jill 18 Nov, stays P0); N5 conversations are the run-up with two weeks of slack.",
    "depends_on": [
@@ -15447,7 +15447,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "plan",
-   "acceptance": "A per-pilot willingness-to-pay record exists for all pilots and the warm-to-pay count is reported at the 6 Nov review.",
+   "acceptance": "A per-pilot willingness-to-pay record exists for all pilots and the warm-to-pay count is reported at the 13 Nov review.",
    "checklist": [
     "Conversation script from the pricing briefing",
     "Security packet and terms in hand",
@@ -15464,7 +15464,7 @@ window.LAUNCH_DATA = {
    "what": "Turn the N4 stories into final quotes in the pilots' approved wording, matched to the signed permissions, and hand them to Saad for the PH package and Asad for the marketing-site refresh in N6. Flag any quote that claims something the product does not yet do.",
    "why": "Proof collected while goodwill is warm; the PH package and the N6 site refresh need final text.",
    "area": "Marketing",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "Consumers are in N6; slack exists",
    "depends_on": [
@@ -15477,7 +15477,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "Final approved testimonial text for each consenting pilot is in the marketing folder with its permission by 6 Nov.",
+   "acceptance": "Final approved testimonial text for each consenting pilot is in the marketing folder with its permission by 13 Nov.",
    "checklist": [
     "Draft the quotes",
     "Pilot approval",
@@ -15490,10 +15490,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Lewis",
    "title": "Transcript reviews continue; last golden-set additions before freeze",
-   "what": "Keep the weekly 30-minute transcript review with Saad (30 Oct, 6 Nov) and send Faheem the last unscripted-question additions before the 13 Nov model freeze; after that the review feeds only support macros.",
+   "what": "Keep the weekly 30-minute transcript review with Saad (6 Nov, 13 Nov) and send Faheem the last unscripted-question additions before the 20 Nov model freeze; after that the review feeds only support macros.",
    "why": "Art-E's regression must be green seven nights before freeze; the freshest failures come from real transcripts.",
    "area": "Art-E",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P2",
    "priority_reason": "Compounds but nothing dated depends on any single session",
    "depends_on": [
@@ -15505,10 +15505,10 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "saad",
-   "acceptance": "Two sessions are logged and final golden-set candidates are sent to Faheem by 6 Nov.",
+   "acceptance": "Two sessions are logged and final golden-set candidates are sent to Faheem by 13 Nov.",
    "checklist": [
-    "Session 30 Oct",
     "Session 6 Nov",
+    "Session 13 Nov",
     "Candidates to Faheem",
     "Macro notes to Saad"
    ]
@@ -15521,7 +15521,7 @@ window.LAUNCH_DATA = {
    "what": "Recruit one genuine cold user (a friend of the team who runs a Facebook page, not a pilot and not briefed) for Saad's self-serve onboarding test, get their consent, and sit in silently as observer while Saad runs it. Note where the Facebook-connect step sticks, and agree with Saad who answers the 'stuck? book 10 min' escape-hatch bookings for batch 1 so that seat is written into the launch support plan (N6-LW-05).",
    "why": "The handbook names Lewis for concierge plus the cold-user test in N5; without a real stranger the test is a pilot in disguise, and the escape hatch is a promise with no one behind it.",
    "area": "Onboarding",
-   "due": "2026-11-04",
+   "due": "2026-11-11",
    "priority": "P2",
    "priority_reason": "Saad owns the test and it is a benchmark minor; safe to slip inside N5 if hardening runs hot",
    "depends_on": [
@@ -15534,7 +15534,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "A named cold user has completed the self-serve test with Saad by 4 Nov, Lewis's observations are in Saad's log, and the escape-hatch seat owner is agreed.",
+   "acceptance": "A named cold user has completed the self-serve test with Saad by 11 Nov, Lewis's observations are in Saad's log, and the escape-hatch seat owner is agreed.",
    "checklist": [
     "Recruit and brief the cold user minimally (consent only)",
     "Attend silently; log where they stall",
@@ -15550,7 +15550,7 @@ window.LAUNCH_DATA = {
    "what": "Chase with Lewis: every one of the 5 pilots has the pilot agreement (with the commercial terms schedule) and the DPA signed by them and countersigned by Alex, filed with dates, before Saad runs UAT wave 1. A pilot who has not signed does not enter UAT.",
    "why": "UAT on unsigned paper is exposure, not testing; the N6 invoices are issued against these signatures.",
    "area": "Pilots",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P0",
    "priority_reason": "Gates UAT wave 1 and the 20 Nov invoices",
    "depends_on": [
@@ -15569,7 +15569,7 @@ window.LAUNCH_DATA = {
    "acceptance": "Five countersigned agreement-plus-DPA sets are filed with dates before UAT wave 1 starts.",
    "checklist": [
     "Build the signing tracker with Lewis for all 5 pilots",
-    "Chase outstanding signatures; escalate to Alex by 28 Oct",
+    "Chase outstanding signatures; escalate to Alex by 4 Nov",
     "Alex countersigns each set; file with dates",
     "Tell Saad which pilots are cleared for UAT"
    ]
@@ -15582,7 +15582,7 @@ window.LAUNCH_DATA = {
    "what": "On staging, accept and decline in fresh browsers and read the network log both times: nothing non-essential loads before a choice, decline blocks every non-essential script, the choice persists and can be changed in Settings, and the banner copy matches the spec. In the same session, run one app signup and confirm the marketing-email consent is an unticked box per N2-FZ-08, the choice is logged with a timestamp, and it is exported in the DSAR record. Pass/fail note to Asad before the pre-UAT visual sweep.",
    "why": "A banner that does not gate the scripts is the classic embarrassment; UAT pilots and the pen-test both see staging.",
    "area": "Settings",
-   "due": "2026-10-30",
+   "due": "2026-11-06",
    "priority": "P1",
    "priority_reason": "Pre-UAT check with a few days of slack for fixes",
    "depends_on": [
@@ -15609,11 +15609,11 @@ window.LAUNCH_DATA = {
    "id": "N5-FZ-03",
    "sprint": "N5",
    "assignee": "Filza",
-   "title": "Clear the crisis-demo video before it ships 5 Nov",
+   "title": "Clear the crisis-demo video before it ships 12 Nov",
    "what": "Review Saad and Alex's script and cut: every claim matches the detector as gated (the crisis pass line and coverage clause Asad and Faheem set, the measured false-alarm week from drill #2, the 15-minute clock as drilled), no scheduling or auto-reply implied, no identifiable third-party commenters or pages in decline used without permission, AI labels visible, firewall clean. Written clearance to Alex.",
-   "why": "Our best visual asset must survive fact-checking; it ships 5 Nov and is public forever.",
+   "why": "Our best visual asset must survive fact-checking; it ships 12 Nov and is public forever.",
    "area": "Marketing",
-   "due": "2026-11-03",
+   "due": "2026-11-10",
    "priority": "P0",
    "priority_reason": "Dated: video ships 5 Nov",
    "depends_on": [
@@ -15632,7 +15632,7 @@ window.LAUNCH_DATA = {
     "Compare each claim to the gated detector numbers and the drill clock",
     "Check third-party comments, page choice and permissions",
     "Confirm AI labels on screen and firewall language",
-    "Send clearance or required changes to Alex by 3 Nov"
+    "Send clearance or required changes to Alex by 10 Nov"
    ]
   },
   {
@@ -15643,7 +15643,7 @@ window.LAUNCH_DATA = {
    "what": "Take the RTO 2h / RPO 24h Muteeb signs after restore drill #2 and write it into the DPA security annex, the ToS availability wording and the /security page copy, with the deletion-on-restore policy referenced; make sure no document promises more than the drill proved.",
    "why": "A number in a contract the drill did not prove is a liability; one that was proved and never written down is wasted evidence.",
    "area": "Legal",
-   "due": "2026-11-04",
+   "due": "2026-11-11",
    "priority": "P2",
    "priority_reason": "Small; the drill signs the figures first",
    "depends_on": [
@@ -15673,7 +15673,7 @@ window.LAUNCH_DATA = {
    "what": "Three templates with fill-in slots: the customer breach or incident notice (what, when, what data, what to do), the ICO 72-hour decision tree (assessment, who decides notify or not, the form fields, the 72h owner), and the press holding line. Handed to Jill's contact tree and to Muteeb's N6 game-day, which runs the templates end-to-end.",
    "why": "When something breaks the words must already exist; the N6 game-day tests them.",
    "area": "Ops",
-   "due": "2026-10-29",
+   "due": "2026-11-05",
    "priority": "P1",
    "priority_reason": "Needed before the N6 game-day; slack inside N5",
    "depends_on": [
@@ -15700,10 +15700,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Filza",
    "title": "Sign ToS final",
-   "what": "Final terms incorporating the AI-guidance disclaimer, the Art 22 and AI Act positions, the 18+ statement, the availability and RTO wording, the founding-pricing and term language the 17 Nov notice must match, acceptable use for Art-E and Discovery, and the governing law and liability cap from the pilot agreement. Alex signs; version and date on the page.",
+   "what": "Final terms incorporating the AI-guidance disclaimer, the Art 22 and AI Act positions, the 18+ statement, the availability and RTO wording, the founding-pricing and term language the 24 Nov notice must match, acceptable use for Art-E and Discovery, and the governing law and liability cap from the pilot agreement. Alex signs; version and date on the page.",
    "why": "The frozen build in N6 links this version everywhere; changing terms after UAT means pilots signed something else.",
    "area": "Legal",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "Must precede the 13 Nov freeze and the 17 Nov notice",
    "depends_on": [
@@ -15734,7 +15734,7 @@ window.LAUNCH_DATA = {
    "what": "Check that registered name, company number, registered office and VAT number appear on the site footer, every outbound email template (alerts, waitlist, support) and Jill's 5 draft invoices from the dry run; check each draft invoice against the countersigned commercial terms (price, term, VAT) so the N6 invoices go out clean.",
    "why": "The boring trio that embarrasses companies that skip it; an invoice that does not match terms is the first dispute with a paying pilot.",
    "area": "Finance",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "Feeds the 20 Nov invoices; cheap to fix now",
    "depends_on": [
@@ -15762,10 +15762,10 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Filza",
    "title": "Write /security trust page + 1-page security packet copy with Muteeb",
-   "what": "With Muteeb, turn the evidence pack (KMS on tokens, RLS and the tenant-leakage CI proof, backups with RTO/RPO, pen-test scope and criticals-closed status, OWASP sweep, deletion and DSAR runs, sub-processors, security.txt disclosure route and response SLA) into plain-English page copy and a 1-page packet Lewis hands pilots. Firewall-pass it (no claims beyond the evidence, no Meta-narrative breaches) and give Asad final copy so the page is live before the 17 Nov notice.",
-   "why": "The first ask is 'OAuth your page to a stranger' and our proofs exist but are hidden; the page must be live before the 17 Nov pricing notice.",
+   "what": "With Muteeb, turn the evidence pack (KMS on tokens, RLS and the tenant-leakage CI proof, backups with RTO/RPO, pen-test scope and criticals-closed status, OWASP sweep, deletion and DSAR runs, sub-processors, security.txt disclosure route and response SLA) into plain-English page copy and a 1-page packet Lewis hands pilots. Firewall-pass it (no claims beyond the evidence, no Meta-narrative breaches) and give Asad final copy so the page is live before the 24 Nov notice.",
+   "why": "The first ask is 'OAuth your page to a stranger' and our proofs exist but are hidden; the page must be live before the 24 Nov pricing notice.",
    "area": "Marketing",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P0",
    "priority_reason": "Dated: live before 17 Nov; Asad builds from this copy",
    "depends_on": [
@@ -15797,7 +15797,7 @@ window.LAUNCH_DATA = {
    "what": "Assemble the Meta-facing evidence binder from artifacts the plan already produces: data-use statement per permission (from the N2 package), deletion route + callback proof (N2-MT-06, N4-FZ-05), sub-processor list (N2-FZ-06), KMS/isolation/pen-test summaries (N4-MT-05, N5-MT-04), DSAR run (N4-FZ-07), retention schedule (N4-FZ-03). Pre-answer the Data Protection Assessment questionnaire in firewall-approved language and diarise the annual Data Use Checkup + DPA windows in the app dashboard with Saad as the daily watcher.",
    "why": "Meta can request the assessment during or after review and revokes access on a missed deadline; without an owner the evidence stays scattered across five people and the reply clock is Meta's, not ours.",
    "area": "Meta",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P1",
    "priority_reason": "P1 - real risk with a Meta-controlled clock; artifacts exist, only assembly is needed",
    "depends_on": [
@@ -15829,11 +15829,11 @@ window.LAUNCH_DATA = {
    "id": "N6-AS-01",
    "sprint": "N6",
    "assignee": "Asad",
-   "title": "Feature freeze Fri 13 Nov: flag-freeze list + branch policy",
+   "title": "Feature freeze Fri 20 Nov: flag-freeze list + branch policy",
    "what": "Publish the flag-freeze list (every feature flag and its frozen state), the branch policy (main protected, release branch, blocker-only PRs carrying Saad's triage id) and the definition of blocker per Saad's criteria; announce in the tracker.",
-   "why": "The cut line becomes physics; the 20 Nov code freeze only means something if features stopped a week earlier.",
+   "why": "The cut line becomes physics; the 27 Nov code freeze only means something if features stopped a week earlier.",
    "area": "Launch",
-   "due": "2026-11-13",
+   "due": "2026-11-20",
    "priority": "P0",
    "priority_reason": "Dated freeze",
    "depends_on": [
@@ -15846,7 +15846,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "Flag list and branch policy are published and main rejects non-blocker PRs after 13 Nov.",
+   "acceptance": "Flag list and branch policy are published and main rejects non-blocker PRs after 20 Nov.",
    "checklist": [
     "Enumerate flags and frozen states",
     "Write branch policy",
@@ -15858,11 +15858,11 @@ window.LAUNCH_DATA = {
    "id": "N6-AS-02",
    "sprint": "N6",
    "assignee": "Asad",
-   "title": "Founding-pricing update on the site, live 17 Nov",
+   "title": "Founding-pricing update on the site, live 24 Nov",
    "what": "Update the landing pricing section and FAQ with Alex's defined founding terms (price, lock duration, eligibility deadline) reconciled with invoices; ship the same day the notice goes out.",
-   "why": "One price everywhere; the 17 Nov notice, landing and invoices must agree.",
+   "why": "One price everywhere; the 24 Nov notice, landing and invoices must agree.",
    "area": "Marketing",
-   "due": "2026-11-17",
+   "due": "2026-11-24",
    "priority": "P0",
    "priority_reason": "Dated public notice",
    "depends_on": [
@@ -15876,11 +15876,11 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "Landing pricing text matches the 17 Nov notice and the invoice terms word for word.",
+   "acceptance": "Landing pricing text matches the 24 Nov notice and the invoice terms word for word.",
    "checklist": [
     "Receive final terms",
     "Update pricing section + FAQ",
-    "Deploy on 17 Nov",
+    "Deploy on 24 Nov",
     "Cross-check with the notice"
    ]
   },
@@ -15890,9 +15890,9 @@ window.LAUNCH_DATA = {
    "assignee": "Asad",
    "title": "Per-feature kill switches flipped ON->OFF->ON on staging + runbook",
    "what": "Switches for the Art-E rail, crisis EMAIL sending, Discovery serving and the briefing card (Muteeb owns serving-side locations); flip each ON->OFF->ON on staging with a screenshot receipt; document flag name, location and who may flip it in the war-room runbook.",
-   "why": "A bad hour of outbound email on 1 Dec must be stoppable without a full rollback.",
+   "why": "A bad hour of outbound email on 8 Dec must be stoppable without a full rollback.",
    "area": "Launch",
-   "due": "2026-11-18",
+   "due": "2026-11-25",
    "priority": "P0",
    "priority_reason": "Launch-day safety lever; feeds dry run #1",
    "depends_on": [
@@ -15924,7 +15924,7 @@ window.LAUNCH_DATA = {
    "what": "Flip the CSP from N5-AS-17 out of report-only into enforcement on the frozen build, then walk every surface - charts, Sentry, the cookie banner, embeds, OG previews - confirming nothing broke, with a documented one-line rollback to report-only. Re-run the dependency audit from N5-AS-18 against the frozen lockfiles and confirm no new critical arrived. Confirm HSTS, cookie Secure/HttpOnly/SameSite, and the custom 404 and 500 pages, and capture a header-scanner receipt into the evidence pack.",
    "why": "The last quiet week to shrink the attack surface before the frozen build is public.",
    "area": "Ops",
-   "due": "2026-11-18",
+   "due": "2026-11-25",
    "priority": "P1",
    "priority_reason": "Evidence for the memo; slack before 20 Nov",
    "depends_on": [
@@ -15952,10 +15952,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Asad",
    "title": "Launch-flag config rehearsed; canary + rollback re-tested; dry run #1",
-   "what": "Single launch-flag config (what flips at 08:00) rehearsed on staging end to end; canary deploy and rollback re-run after feature freeze with timings; take the developer seat in Saad's runbook dry run #1 on Thu 19 Nov including the rollback rehearsal.",
+   "what": "Single launch-flag config (what flips at 08:00) rehearsed on staging end to end; canary deploy and rollback re-run after feature freeze with timings; take the developer seat in Saad's runbook dry run #1 on Thu 26 Nov including the rollback rehearsal.",
    "why": "Launch = flipping a flag, not deploying code; the rehearsal is what makes that true.",
    "area": "Launch",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P0",
    "priority_reason": "Dated dry run #1",
    "depends_on": [
@@ -15986,7 +15986,7 @@ window.LAUNCH_DATA = {
    "what": "Replace all site screenshots with captures from the frozen build (curated demo tenant); ToS / Privacy / DPA / Cookie versioned pages live and linked from the footer AND Settings (Filza's final sweep); Companies Act particulars in the footer; OG image on every public URL; sitemap.xml, robots.txt, structured data.",
    "why": "Pre-freeze screenshots go stale by definition; PH-day SEO basics; the legal go/no-go pillar needs the links.",
    "area": "Marketing",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P1",
    "priority_reason": "Public surface for PH day; slack to 20 Nov",
    "depends_on": [
@@ -16018,7 +16018,7 @@ window.LAUNCH_DATA = {
    "what": "Walk every surface's empty, loading, error, thin-history and fail-closed states on staging (desktop and mobile) against Saad's packs; fix deviations as blockers only; record the checklist.",
    "why": "The states are the product's manners; UAT judges comprehension on them.",
    "area": "QA",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P1",
    "priority_reason": "Quality gate with slack",
    "depends_on": [
@@ -16042,11 +16042,11 @@ window.LAUNCH_DATA = {
    "id": "N6-AS-08",
    "sprint": "N6",
    "assignee": "Asad",
-   "title": "Blocker fixes from full UAT and bug bash #2 (16 Nov)",
-   "what": "Daily blocker fixes from Saad's public triage log and the 16 Nov bug bash under the branch policy, each retested by Saad (Lewis on the pilot side); nothing non-blocker merges.",
-   "why": "Zero P1 at the 20 Nov gate and 5 pilots converting on the frozen build.",
+   "title": "Blocker fixes from full UAT and bug bash #2 (23 Nov)",
+   "what": "Daily blocker fixes from Saad's public triage log and the 23 Nov bug bash under the branch policy, each retested by Saad (Lewis on the pilot side); nothing non-blocker merges.",
+   "why": "Zero P1 at the 27 Nov gate and 5 pilots converting on the frozen build.",
    "area": "QA",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P0",
    "priority_reason": "Gate: zero P1",
    "depends_on": [
@@ -16059,7 +16059,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "Triage log shows zero open P1 on 20 Nov.",
+   "acceptance": "Triage log shows zero open P1 on 27 Nov.",
    "checklist": [
     "Daily intake from the triage log",
     "Fix under branch policy",
@@ -16075,7 +16075,7 @@ window.LAUNCH_DATA = {
    "what": "Remove the curated demo tenant, reviewer test-page data and any synthetic Tester data from the production DB, vector index, memory and events store; keep pilots' real data (they may still be on Tester roles under the dev-mode branch); verify with tenant-lookup queries from Muteeb's interim admin runbook.",
    "why": "Test data in prod is a privacy incident and would pollute the day-0 KPI baselines.",
    "area": "QA",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P1",
    "priority_reason": "Privacy + baseline hygiene",
    "depends_on": [
@@ -16099,11 +16099,11 @@ window.LAUNCH_DATA = {
    "id": "N6-AS-10",
    "sprint": "N6",
    "assignee": "Asad",
-   "title": "Code freeze Fri 20 Nov + Asad's evidence pack for the go/no-go",
+   "title": "Code freeze Fri 27 Nov + Asad's evidence pack for the go/no-go",
    "what": "Tag the frozen build; freeze main (blockers only via Muteeb's emergency-change protocol); assemble Asad's evidence: E2E nightly green, Lighthouse, WCAG, security pass, kill-switch receipts, rollback timings, consent-gating proof, deletion/export receipts, for the memo read item by item.",
    "why": "The go/no-go accepts evidence, not assurances; the app half of the memo is Asad's.",
    "area": "Ops",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P0",
    "priority_reason": "Dated freeze and gate",
    "depends_on": [
@@ -16132,9 +16132,9 @@ window.LAUNCH_DATA = {
    "assignee": "Asad",
    "title": "Build the dev-mode launch path before code freeze",
    "what": "Implement Alex's fallback (N2-AX-08) as product, behind the launch flag, before code freeze: with Live Mode off, a public visitor never reaches a Facebook connect that will fail - the CTA becomes waitlist-in-waves with the pre-agreed copy, pilots on Tester roles keep the full connect flow, and the onboarding and Today empty states say what a waitlisted account can do. Smoke it from a logged-out non-Tester browser and add both branches to the launch runbook.",
-   "why": "If approval has not landed by 1 Dec, the flag is thrown on launch morning in front of Product Hunt; a public visitor hitting an OAuth error that only Testers can pass is the worst possible first impression and cannot be fixed after code freeze.",
+   "why": "If approval has not landed by 8 Dec, the flag is thrown on launch morning in front of Product Hunt; a public visitor hitting an OAuth error that only Testers can pass is the worst possible first impression and cannot be fixed after code freeze.",
    "area": "Meta",
-   "due": "2026-11-18",
+   "due": "2026-11-25",
    "priority": "P0",
    "priority_reason": "P0 - code freeze Fri 20 Nov: after that the fallback cannot be built, and the branch is only decided at the 20 Nov go/no-go.",
    "depends_on": [
@@ -16163,11 +16163,11 @@ window.LAUNCH_DATA = {
    "id": "N6-AS-12",
    "sprint": "N6",
    "assignee": "Asad",
-   "title": "Contract freeze: no API change after 13 Nov without the protocol",
+   "title": "Contract freeze: no API change after 20 Nov without the protocol",
    "what": "After feature freeze, lock both documents: CI fails any PR that changes a spec file without the exception label and a named approver. Re-run the route inventory against production, confirm every live route has an owner, a version, a rate-limit class and cost records flowing, and publish the frozen spec bundle plus the changelog as go/no-go evidence.",
    "why": "A contract change during freeze breaks the generated client, the mocks and the contract tests at once, in the week when there is no time to notice; and the go/no-go needs to assert the API surface is known.",
    "area": "App core",
-   "due": "2026-11-18",
+   "due": "2026-11-25",
    "priority": "P0",
    "priority_reason": "P0 - code freeze Fri 20 Nov; after it the protocol cannot be added, and the go/no-go memo reads this evidence.",
    "depends_on": [
@@ -16194,11 +16194,11 @@ window.LAUNCH_DATA = {
    "id": "N6-FH-01",
    "sprint": "N6",
    "assignee": "Faheem",
-   "title": "MODEL FREEZE Fri 13 Nov: pinned, auto-jobs off, exception protocol",
+   "title": "MODEL FREEZE Fri 20 Nov: pinned, auto-jobs off, exception protocol",
    "what": "Freeze all models on the pinned manifest, disable retrain/auto jobs, publish the written exception protocol.",
    "why": "Stability is the feature now.",
    "area": "QA",
-   "due": "2026-11-13",
+   "due": "2026-11-20",
    "priority": "P0",
    "priority_reason": "dated freeze",
    "depends_on": [
@@ -16225,7 +16225,7 @@ window.LAUNCH_DATA = {
    "what": "Flip one model to its previous pinned version on staging with Muteeb, verify serving, flip back; file the receipt.",
    "why": "Freeze without a tested revert is theatre.",
    "area": "QA",
-   "due": "2026-11-13",
+   "due": "2026-11-20",
    "priority": "P0",
    "priority_reason": "go/no-go evidence",
    "depends_on": [
@@ -16250,10 +16250,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Faheem",
    "title": "Final accuracy audit vs every gate: signed statement or blocker",
-   "what": "Audit flop, crisis (vs the signed pass line + coverage clause), best times, health, Art-E against their gates with evidence; sign or name the blocker for the 20 Nov memo.",
+   "what": "Audit flop, crisis (vs the signed pass line + coverage clause), best times, health, Art-E against their gates with evidence; sign or name the blocker for the 27 Nov memo.",
    "why": "The model half of the go/no-go pack.",
    "area": "QA",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P0",
    "priority_reason": "go/no-go 20 Nov",
    "depends_on": [
@@ -16280,7 +16280,7 @@ window.LAUNCH_DATA = {
    "what": "Baseline model and crisis alert thresholds for launch week and delete alerts nobody acted on.",
    "why": "Day-1 alarms must mean something.",
    "area": "Ops",
-   "due": "2026-11-18",
+   "due": "2026-11-25",
    "priority": "P1",
    "priority_reason": "real risk with slack",
    "depends_on": [
@@ -16306,7 +16306,7 @@ window.LAUNCH_DATA = {
    "what": "Check scoreboard numbers against what UAT pilots experienced with Saad.",
    "why": "The Wins screen makes claims; UAT checks them.",
    "area": "Wins",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P1",
    "priority_reason": "real risk with slack",
    "depends_on": [
@@ -16331,10 +16331,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Faheem",
    "title": "Retrain triggers + quarterly model plan before Saad's betting table",
-   "what": "Write the post-launch retrain triggers (drift trip, false-alarm rate and Brier-trend thresholds already defined in N3-FH-08 / N4-FH-05) and the quarterly model plan, and hand them to Saad before he finalises the December betting table (N6-SD-08, 20 Nov). Documentation only: no model change after the 13 Nov freeze.",
+   "what": "Write the post-launch retrain triggers (drift trip, false-alarm rate and Brier-trend thresholds already defined in N3-FH-08 / N4-FH-05) and the quarterly model plan, and hand them to Saad before he finalises the December betting table (N6-SD-08, 27 Nov). Documentation only: no model change after the 20 Nov freeze.",
    "why": "Written in launch week it lands after the betting table is finalised and breaks the roadmap's 'daily readout only' LW lane.",
    "area": "QA",
-   "due": "2026-11-18",
+   "due": "2026-11-25",
    "priority": "P2",
    "priority_reason": "P2 - documentation with slack; its only dated consumer is N6-SD-08 on 20 Nov",
    "depends_on": [
@@ -16347,7 +16347,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "reconciler",
-   "acceptance": "Triggers + quarterly plan document published and acknowledged by Saad before 20 Nov.",
+   "acceptance": "Triggers + quarterly plan document published and acknowledged by Saad before 27 Nov.",
    "checklist": [
     "Retrain triggers from the live watchdog thresholds",
     "Quarterly model plan (what, when, evidence needed)",
@@ -16363,7 +16363,7 @@ window.LAUNCH_DATA = {
    "what": "Run a game-day on staging: kill a pipeline stage, declare the incident, page through Jill's rota, run Filza's comms templates end-to-end with a commander who is not hands-on-keyboard, and write the retro.",
    "why": "The only way to know the incident process works is to have an incident, before launch week.",
    "area": "Ops",
-   "due": "2026-11-12",
+   "due": "2026-11-19",
    "priority": "P1",
    "priority_reason": "real risk with slack before freeze",
    "depends_on": [
@@ -16389,11 +16389,11 @@ window.LAUNCH_DATA = {
    "id": "N6-MT-02",
    "sprint": "N6",
    "assignee": "Muteeb",
-   "title": "Align serving endpoints to the frozen model artifacts after 13 Nov",
-   "what": "Once Faheem pins every model version on Fri 13 Nov, point each serving endpoint at the pinned artifact manifest, disable any auto-refresh of weights, and record artifact hashes in the runbook.",
+   "title": "Align serving endpoints to the frozen model artifacts after 20 Nov",
+   "what": "Once Faheem pins every model version on Fri 20 Nov, point each serving endpoint at the pinned artifact manifest, disable any auto-refresh of weights, and record artifact hashes in the runbook.",
    "why": "A frozen model served from an unpinned path is not frozen.",
    "area": "QA",
-   "due": "2026-11-14",
+   "due": "2026-11-21",
    "priority": "P0",
    "priority_reason": "dated model freeze on 13 Nov",
    "depends_on": [
@@ -16421,7 +16421,7 @@ window.LAUNCH_DATA = {
    "what": "Re-run the load test on the frozen stack at launch projection plus burst, then rehearse a model rollback as a manifest pointer flip and back, timing both.",
    "why": "Freeze without a tested revert is theatre.",
    "area": "Ops",
-   "due": "2026-11-16",
+   "due": "2026-11-23",
    "priority": "P1",
    "priority_reason": "Go/no-go evidence due 16 Nov with four days of slack to 20 Nov, and the x10 load shape was already proven in N5. Model rollback rehearsal is the only new proof and is a pointer flip.",
    "depends_on": [
@@ -16449,9 +16449,9 @@ window.LAUNCH_DATA = {
    "assignee": "Muteeb",
    "title": "Serving-side kill switches: Art-E, crisis email, Discovery, briefing",
    "what": "Implement server-side flags for the Art-E rail, crisis email sending, Discovery serving and the briefing card; document each switch location in the war-room runbook and support Asad flipping each ON to OFF to ON on staging.",
-   "why": "A bad hour of outbound email on 1 Dec must be stoppable without a full rollback.",
+   "why": "A bad hour of outbound email on 8 Dec must be stoppable without a full rollback.",
    "area": "Launch",
-   "due": "2026-11-17",
+   "due": "2026-11-24",
    "priority": "P0",
    "priority_reason": "blocks Asad's N6 kill-switch rehearsal",
    "depends_on": [
@@ -16482,7 +16482,7 @@ window.LAUNCH_DATA = {
    "what": "Run the N5 smoke suite against the frozen models on production and publish the emergency-change protocol: who approves, what evidence, how to deploy and revert a blocker fix during freeze.",
    "why": "Exceptions need a path that is not panic.",
    "area": "QA",
-   "due": "2026-11-18",
+   "due": "2026-11-25",
    "priority": "P0",
    "priority_reason": "go/no-go evidence",
    "depends_on": [
@@ -16509,10 +16509,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Muteeb",
    "title": "Monitoring and on-call final, including the OAuth canary",
-   "what": "Finalise monitoring: launch-week alert thresholds, the synthetic OAuth canary every 15 min feeding the board, on-call routing verified with Jill, and support Saad's runbook dry run #1 on Thu 19 Nov including rollback.",
+   "what": "Finalise monitoring: launch-week alert thresholds, the synthetic OAuth canary every 15 min feeding the board, on-call routing verified with Jill, and support Saad's runbook dry run #1 on Thu 26 Nov including rollback.",
    "why": "Day-1 alarms must mean something and reach someone.",
    "area": "Ops",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P1",
    "priority_reason": "real risk with slack before code freeze",
    "depends_on": [
@@ -16542,7 +16542,7 @@ window.LAUNCH_DATA = {
    "what": "Support Filza's re-test of DSAR and deletion on the frozen production build and hand her the CI proof output for the cross-tenant attestation.",
    "why": "Legal's go/no-go pillar is evidence-based like the rest.",
    "area": "Legal",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P1",
    "priority_reason": "real risk; Filza's sign-off needs it before 20 Nov",
    "depends_on": [
@@ -16566,11 +16566,11 @@ window.LAUNCH_DATA = {
    "id": "N6-MT-08",
    "sprint": "N6",
    "assignee": "Muteeb",
-   "title": "Code freeze Fri 20 Nov and go/no-go platform evidence",
+   "title": "Code freeze Fri 27 Nov and go/no-go platform evidence",
    "what": "Enforce code freeze (blockers only via the emergency protocol) and put monitoring, on-call, backup, rollback and load evidence into the go/no-go memo slots.",
    "why": "The platform goes quiet on purpose; the memo is read item by item with evidence.",
    "area": "Launch",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P0",
    "priority_reason": "dated go/no-go",
    "depends_on": [
@@ -16600,7 +16600,7 @@ window.LAUNCH_DATA = {
    "what": "List every credential in one register - Meta app secret and system-user tokens, AWS IAM roles and access keys, database and Redshift users, Pinecone, Cognito, SES, the LLM vendor keys, Netlify, Sentry, the status page and CI tokens - with its holder, storage location, scope and expiry. Cut every over-broad scope to least privilege: Meta permissions to exactly the approved review set, IAM to per-service roles, warehouse users read-only where they only read. Rotate everything issued before Rafeh's departure or held by more than one person, and record the next rotation date and the break-glass procedure.",
    "why": "Rotation has only ever happened ad hoc, and an over-scoped key or a stale shared secret is the cheapest possible way to lose the launch.",
    "area": "Ops",
-   "due": "2026-11-16",
+   "due": "2026-11-23",
    "priority": "P1",
    "priority_reason": "Real risk with slack, but it is pen-test follow-through and go/no-go evidence before the 20 Nov freeze.",
    "depends_on": [
@@ -16634,7 +16634,7 @@ window.LAUNCH_DATA = {
    "what": "Make the day-1 shape survivable by construction: onboard new pages in batches with an operator-settable batch size and gap, hold the historical backfill behind a throttle that yields to live traffic, and give each new page a first-value SLO - the minimum useful data visible within a stated number of minutes - that the priority queue serves ahead of deep history. Expose batch size, gap and throttle as controls on the war-room board and wire the numbers to Saad's batch-expansion and abort thresholds.",
    "why": "100 pages connecting at once is the actual launch-day shape; without admission control the ingest queue starves live scoring and every new user waits behind a 13-month backfill.",
    "area": "Onboarding",
-   "due": "2026-11-17",
+   "due": "2026-11-24",
    "priority": "P0",
    "priority_reason": "Launch-week mechanism that N6-SD-02's numeric thresholds and LW-MT-01's war room both operate.",
    "depends_on": [
@@ -16664,11 +16664,11 @@ window.LAUNCH_DATA = {
    "id": "N6-SD-01",
    "sprint": "N6",
    "assignee": "Saad",
-   "title": "Run bug bash #2 (90 min, scripted) on 16 Nov",
-   "what": "Write a 90-minute bug bash script for the frozen build: one scripted path per surface (web + mobile), seeded defects to check coverage, and a capture template. Run it 16 Nov with the whole team, then triage every result against the blocker criteria, never the date.",
+   "title": "Run bug bash #2 (90 min, scripted) on 23 Nov",
+   "what": "Write a 90-minute bug bash script for the frozen build: one scripted path per surface (web + mobile), seeded defects to check coverage, and a capture template. Run it 23 Nov with the whole team, then triage every result against the blocker criteria, never the date.",
    "why": "Triage against criteria, never the date.",
    "area": "PM",
-   "due": "2026-11-16",
+   "due": "2026-11-23",
    "priority": "P0",
    "priority_reason": "Dated",
    "depends_on": [
@@ -16680,10 +16680,10 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "saad",
-   "acceptance": "Bash run 16 Nov with a triaged log and every item tagged against the blocker criteria.",
+   "acceptance": "Bash run 23 Nov with a triaged log and every item tagged against the blocker criteria.",
    "checklist": [
     "Write the script: one path per surface, web + mobile, capture template",
-    "Book the team for 90 min on 16 Nov",
+    "Book the team for 90 min on 23 Nov",
     "Run and collect results",
     "Triage vs blocker criteria and publish the log"
    ]
@@ -16696,7 +16696,7 @@ window.LAUNCH_DATA = {
    "what": "Define error-rate and activation-floor numbers for expanding or aborting batch 1, using Alex's KPI baselines and Muteeb's funnel panel.",
    "why": "Expansion decisions are pre-decided numbers, not launch-day vibes.",
    "area": "Launch",
-   "due": "2026-11-17",
+   "due": "2026-11-24",
    "priority": "P0",
    "priority_reason": "Blocks dry run #1 on 19 Nov",
    "depends_on": [
@@ -16727,7 +16727,7 @@ window.LAUNCH_DATA = {
    "what": "Capture docs screenshots from the frozen build and audit all public copy: 1 December everywhere, founding-pricing terms match landing and invoices, legal links, AI labels.",
    "why": "Everything public must match everything real.",
    "area": "PM",
-   "due": "2026-11-18",
+   "due": "2026-11-25",
    "priority": "P1",
    "priority_reason": "Real risk of public mismatch; slack before code freeze",
    "depends_on": [
@@ -16757,7 +16757,7 @@ window.LAUNCH_DATA = {
    "what": "Run all 5 pilots through all surfaces on the frozen build; each signs a comprehension sheet. Lewis on pilot side; Saad covers retest overflow.",
    "why": "Comprehension, not preference; and Faheem checks the ledger against this reality.",
    "area": "PM",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P0",
    "priority_reason": "Gate-serving",
    "depends_on": [
@@ -16785,11 +16785,11 @@ window.LAUNCH_DATA = {
    "id": "N6-SD-05",
    "sprint": "N6",
    "assignee": "Saad",
-   "title": "Runbook dry run #1 Thu 19 Nov incl. rollback rehearsal",
+   "title": "Runbook dry run #1 Thu 26 Nov incl. rollback rehearsal",
    "what": "Run the launch runbook end-to-end on staging with Asad and Muteeb: go-live checklist, the single launch-flag flip, each per-feature kill switch ON->OFF->ON, the rollback trigger and rollback itself, war-room roles in their seats. Log every failure with an owner and fold fixes into runbook v2.",
    "why": "Launch rehearsed twice before it happens once.",
    "area": "Launch",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P0",
    "priority_reason": "Dated",
    "depends_on": [
@@ -16818,9 +16818,9 @@ window.LAUNCH_DATA = {
    "assignee": "Saad",
    "title": "Daily defect triage log public; zero-P1 evidence for go/no-go",
    "what": "Triage daily vs blocker criteria with a public log; deliver the acceptance register and UAT evidence to Alex's memo.",
-   "why": "The 20 Nov memo needs zero P1 with evidence.",
+   "why": "The 27 Nov memo needs zero P1 with evidence.",
    "area": "PM",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P0",
    "priority_reason": "Gate-serving",
    "depends_on": [
@@ -16846,10 +16846,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Saad",
    "title": "Write the launch-week hour-by-hour rota",
-   "what": "PH replies (Alex), support (Saad), pilot hotline (Lewis), war-room seats, hour by hour from 30 Nov to 3 Dec, aligned with Jill's on-call rota.",
+   "what": "PH replies (Alex), support (Saad), pilot hotline (Lewis), war-room seats, hour by hour from 7 Dec to 10 Dec, aligned with Jill's on-call rota.",
    "why": "Launch day is a shift plan.",
    "area": "Launch",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P1",
    "priority_reason": "Real risk; slack in launch week to adjust",
    "depends_on": [
@@ -16877,10 +16877,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Saad",
    "title": "Freeze PH assets; finalise the December betting table",
-   "what": "Freeze PH gallery/tagline/maker comment from the frozen build; finalise the betting table with UAT evidence for the w/c 7 Dec retro + Roadmap V2.",
+   "what": "Freeze PH gallery/tagline/maker comment from the frozen build; finalise the betting table with UAT evidence for the w/c 14 Dec retro + Roadmap V2.",
    "why": "Public assets match the frozen product; the table is the post-launch menu.",
    "area": "PM",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P1",
    "priority_reason": "Real risk; slack before the 30 Nov preview check",
    "depends_on": [
@@ -16906,10 +16906,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Saad",
    "title": "Art-E launch sign-off sheet: every condition, named signer",
-   "what": "Assemble one page that says whether Art-E is fit to launch, with a named signer and a linked evidence artefact per line: nightly regression green seven nights (Faheem, countersigned Saad), citation gate zero un-cited numbers on the 200 set (Faheem), injection and comment-spotlighting probes clean and cross-tenant exfiltration proofs green (Faheem and Muteeb), per-tenant cost, quotas and a trip-tested breaker (Muteeb, thresholds agreed with Jill), latency inside budget (Muteeb), 90-day purge and forget-this proven end to end including the UI control (Muteeb and Filza), AI label, Art 22 disclaimer and refusal categories live on the rail (Filza), freshness stamp honest (Muteeb), kill switch flipped on staging (Asad, N6-AS-03 and N6-MT-04). Any red carries the descope path from N4-SD-13. Hand it to Alex for the 20 Nov GO/NO-GO.",
+   "what": "Assemble one page that says whether Art-E is fit to launch, with a named signer and a linked evidence artefact per line: nightly regression green seven nights (Faheem, countersigned Saad), citation gate zero un-cited numbers on the 200 set (Faheem), injection and comment-spotlighting probes clean and cross-tenant exfiltration proofs green (Faheem and Muteeb), per-tenant cost, quotas and a trip-tested breaker (Muteeb, thresholds agreed with Jill), latency inside budget (Muteeb), 90-day purge and forget-this proven end to end including the UI control (Muteeb and Filza), AI label, Art 22 disclaimer and refusal categories live on the rail (Filza), freshness stamp honest (Muteeb), kill switch flipped on staging (Asad, N6-AS-03 and N6-MT-04). Any red carries the descope path from N4-SD-13. Hand it to Alex for the 27 Nov GO/NO-GO.",
    "why": "Art-E is the trust claim the whole product rests on, and today one countersignature covers one of ten launch conditions; the rest would reach the GO/NO-GO as assumptions.",
    "area": "Art-E",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P0",
    "priority_reason": "P0 - dated: Alex chairs the GO/NO-GO on Fri 20 Nov and reads the evidence item by item",
    "depends_on": [
@@ -16929,24 +16929,24 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "reconciler",
-   "acceptance": "Every line on the sheet is signed by its named owner with a linked artefact, and Alex reads it at the 20 Nov GO/NO-GO with no unowned amber.",
+   "acceptance": "Every line on the sheet is signed by its named owner with a linked artefact, and Alex reads it at the 27 Nov GO/NO-GO with no unowned amber.",
    "checklist": [
     "Draft the sheet with one line and one named signer per condition",
     "Chase the evidence artefact for each line from its owner",
     "Mark any red against the pre-declared descope path",
     "Get each signature recorded with a date",
-    "Hand to Alex before the 20 Nov GO/NO-GO"
+    "Hand to Alex before the 27 Nov GO/NO-GO"
    ]
   },
   {
    "id": "N6-AX-01",
    "sprint": "N6",
    "assignee": "Alex",
-   "title": "Send the founding-pricing notice 17 Nov with defined terms",
-   "what": "Send the founding-pricing notice on Mon 17 Nov to the waitlist and pilots with defined terms (lock duration, eligibility deadline, what happens after, batch-1 non-pilot motion), only after confirming the landing page shows the same numbers (Asad's 17 Nov update), the invoice template matches, PECR consent covers the send, and the /security page is live.",
+   "title": "Send the founding-pricing notice 24 Nov with defined terms",
+   "what": "Send the founding-pricing notice on Mon 24 Nov to the waitlist and pilots with defined terms (lock duration, eligibility deadline, what happens after, batch-1 non-pilot motion), only after confirming the landing page shows the same numbers (Asad's 24 Nov update), the invoice template matches, PECR consent covers the send, and the /security page is live.",
    "why": "One price everywhere; a mismatch between the notice, the landing and the first invoice is the first support ticket on launch day.",
    "area": "Marketing",
-   "due": "2026-11-17",
+   "due": "2026-11-24",
    "priority": "P0",
    "priority_reason": "Dated public send.",
    "depends_on": [
@@ -16963,12 +16963,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "The notice is sent 17 Nov and the landing, invoices and notice show identical terms.",
+   "acceptance": "The notice is sent 24 Nov and the landing, invoices and notice show identical terms.",
    "checklist": [
     "Final reconcile against landing and invoice template",
     "Confirm /security is live",
     "Confirm the PECR-consented list",
-    "Send on 17 Nov",
+    "Send on 24 Nov",
     "File a copy"
    ]
   },
@@ -16977,10 +16977,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Alex",
    "title": "Pre-assign war-room roles for launch week",
-   "what": "Pre-assign the launch-week war-room roles into Saad's rota: commander (not hands-on-keyboard), the flip (Asad), the board (Muteeb), PH replies (Alex), support (Saad), pilot hotline (Lewis), burn watch (Jill), 72h breach owner (Filza), AI readout (Faheem); hour-by-hour for 1 Dec, plus stand-down criteria for when the heightened posture ends. Feed it into runbook dry run #1 on Thu 19 Nov.",
-   "why": "Launch day is a shift plan, not a vibe; roles assigned on 1 Dec are roles argued about on 1 Dec.",
+   "what": "Pre-assign the launch-week war-room roles into Saad's rota: commander (not hands-on-keyboard), the flip (Asad), the board (Muteeb), PH replies (Alex), support (Saad), pilot hotline (Lewis), burn watch (Jill), 72h breach owner (Filza), AI readout (Faheem); hour-by-hour for 8 Dec, plus stand-down criteria for when the heightened posture ends. Feed it into runbook dry run #1 on Thu 26 Nov.",
+   "why": "Launch day is a shift plan, not a vibe; roles assigned on 8 Dec are roles argued about on 8 Dec.",
    "area": "Launch",
-   "due": "2026-11-18",
+   "due": "2026-11-25",
    "priority": "P0",
    "priority_reason": "Blocks Saad's runbook dry run #1 on Thu 19 Nov.",
    "depends_on": [
@@ -16995,7 +16995,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "The rota names every seat hour-by-hour for 1 Dec with stand-down criteria, and was used in the 19 Nov dry run.",
+   "acceptance": "The rota names every seat hour-by-hour for 8 Dec with stand-down criteria, and was used in the 26 Nov dry run.",
    "checklist": [
     "Fill every seat",
     "Keep the commander off the keyboard",
@@ -17010,9 +17010,9 @@ window.LAUNCH_DATA = {
    "assignee": "Alex",
    "title": "Spokesperson hard-questions rehearsal",
    "what": "Run a 60-minute rehearsal of hostile launch-week questions: what data you take from Facebook, is my data shared with other pages (Discovery), what Art-E remembers, deletion and DSAR, the Meta approval status, emotion recognition (the Art 5 position), and the comment collapse. Answers use Filza's cleared language; write the answer sheet for PH replies.",
-   "why": "Hostile privacy questions rehearsed, not improvised; PH comments on 1 Dec are public and permanent.",
+   "why": "Hostile privacy questions rehearsed, not improvised; PH comments on 8 Dec are public and permanent.",
    "area": "Marketing",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P1",
    "priority_reason": "Real risk with slack: needed by 1 Dec.",
    "depends_on": [
@@ -17042,7 +17042,7 @@ window.LAUNCH_DATA = {
    "what": "Capture the day-0 baselines from the KPI events and funnel before launch: signup -> connected -> ingest done -> first insight -> draft scored, time-to-first-value, activation rate on Saad's named activation event, pilot health, waitlist count, Art-E cost per tenant, and the numeric batch-expansion/abort thresholds Saad wrote into the runbook. File them next to the memo so day-1 numbers have a comparison.",
    "why": "Day-1 numbers need a day-0 baseline; without it launch-day readouts are anecdotes.",
    "area": "Launch",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P1",
    "priority_reason": "Real risk with slack: a buffer week remains.",
    "depends_on": [
@@ -17058,7 +17058,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "A dated baseline sheet with every KPI value and the expansion/abort thresholds is filed with the go/no-go memo, and the sheet names the recurring post-launch KPI review: owner, weekday and duration through batch 1 (1-21 Dec).",
+   "acceptance": "A dated baseline sheet with every KPI value and the expansion/abort thresholds is filed with the go/no-go memo, and the sheet names the recurring post-launch KPI review: owner, weekday and duration through batch 1 (8-4 Jan).",
    "checklist": [
     "Pull funnel numbers from the war-room board",
     "Record the activation rate",
@@ -17075,7 +17075,7 @@ window.LAUNCH_DATA = {
    "what": "Sign Jill's launch-week burn cap and confirm the real-time spend dashboard and contact tree are live; agree who can raise the cap and by how much in launch week (LLM tiers, SES, compute), and that breakers trip before the cap is hit.",
    "why": "A launch that loses money invisibly is a failed launch with good vibes; the cap needs a signature before the week it protects.",
    "area": "Finance",
-   "due": "2026-11-18",
+   "due": "2026-11-25",
    "priority": "P1",
    "priority_reason": "Real risk with slack: Jill's dashboard is the backstop.",
    "depends_on": [
@@ -17102,10 +17102,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Alex",
    "title": "Lock the launch run-of-show",
-   "what": "Lock the run-of-show: Sat 28 Nov production smoke + MVP-done post, Mon 30 Nov PH preview verified + hunter sync, Tue 1 Dec 08:00 flags flip (Asad), smoke of all 5 flows before any announcement, 08:01 Product Hunt + waitlist queue email, batch 1 = first 100 pages, pilot messages (Lewis), investor note, and the hour-by-hour PH-reply shift. No changes after 20 Nov.",
+   "what": "Lock the run-of-show: Sat 5 Dec production smoke + MVP-done post, Mon 7 Dec PH preview verified + hunter sync, Tue 8 Dec 08:00 flags flip (Asad), smoke of all 5 flows before any announcement, 08:01 Product Hunt + waitlist queue email, batch 1 = first 100 pages, pilot messages (Lewis), investor note, and the hour-by-hour PH-reply shift. No changes after 27 Nov.",
    "why": "Calm is a choice made in advance; the run-of-show is what makes launch a flag flip watched by eight people who know their seat.",
    "area": "Launch",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P1",
    "priority_reason": "Internal lock date; consumers are Saad's runbook and dry run #2 on 25 Nov, 3-5 days of slack after code freeze.",
    "depends_on": [
@@ -17133,11 +17133,11 @@ window.LAUNCH_DATA = {
    "id": "N6-AX-07",
    "sprint": "N6",
    "assignee": "Alex",
-   "title": "Chair GO/NO-GO Fri 20 Nov; decision recorded incl. Meta branch",
-   "what": "Chair the go/no-go on Fri 20 Nov: the memo is read aloud, each named owner answers their criterion with the evidence artifact (isolation CI proof, drill receipts, pen-test closure, signed accuracy audit, golden-set nights, DPAs, 5 invoices sent, zero P1, waitlist count vs 500), the Meta branch is decided (Live Mode or dev-mode fallback with pre-agreed claims), and the decision, GO or NO-GO with the playbook activated, is recorded and signed.",
+   "title": "Chair GO/NO-GO Fri 27 Nov; decision recorded incl. Meta branch",
+   "what": "Chair the go/no-go on Fri 27 Nov: the memo is read aloud, each named owner answers their criterion with the evidence artifact (isolation CI proof, drill receipts, pen-test closure, signed accuracy audit, golden-set nights, DPAs, 5 invoices sent, zero P1, waitlist count vs 500), the Meta branch is decided (Live Mode or dev-mode fallback with pre-agreed claims), and the decision, GO or NO-GO with the playbook activated, is recorded and signed.",
    "why": "The plan's entire honesty cashes out in this meeting; an unrecorded decision is a discussion.",
    "area": "Launch",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P0",
    "priority_reason": "The N6 gate itself.",
    "depends_on": [
@@ -17161,7 +17161,7 @@ window.LAUNCH_DATA = {
    "source": "plan",
    "acceptance": "A signed memo records GO or NO-GO with evidence per criterion and the Meta branch, filed the same day.",
    "checklist": [
-    "Circulate the memo on 19 Nov",
+    "Circulate the memo on 26 Nov",
     "Read aloud criterion by criterion",
     "Owners present evidence",
     "Decide the Meta branch",
@@ -17174,9 +17174,9 @@ window.LAUNCH_DATA = {
    "assignee": "Jill",
    "title": "Contact tree tested in Muteeb's game-day",
    "what": "Write the contact tree (every team member, incident role, primary and backup channel, Alex escalation, Filza's 72h breach owner, pilot hotline via Lewis, status-page poster) and test it live during Muteeb's N6 Week A game-day: every person reached within target, one deliberate 'unreachable' to test the fallback, results timestamped. Fold the fixed tree into the launch runbook and the war-room board.",
-   "why": "The game-day is the only incident we get to schedule; a contact tree that has not been dialled once fails on 1 Dec.",
+   "why": "The game-day is the only incident we get to schedule; a contact tree that has not been dialled once fails on 8 Dec.",
    "area": "Launch",
-   "due": "2026-11-13",
+   "due": "2026-11-20",
    "priority": "P1",
    "priority_reason": "Real risk with slack: tied to the game-day date in Week A, receipt read at the 20 Nov gate.",
    "depends_on": [
@@ -17207,11 +17207,11 @@ window.LAUNCH_DATA = {
    "id": "N6-JL-02",
    "sprint": "N6",
    "assignee": "Jill",
-   "title": "VAT confirmed + invoice figures reconciled with the 17 Nov notice",
-   "what": "Confirm the VAT position on each invoice (registration, rate, whether each pilot is invoiced with VAT) with Alex and Filza, then reconcile the five invoice amounts, lock duration and eligibility deadline against Alex's founding-pricing notice draft and the landing page so the 17 Nov notice and the 20 Nov invoices state the same price and terms. Send Alex the reconciled figures by Fri 13 Nov.",
-   "why": "Alex's 17 Nov notice must be 'reconciled with landing + invoices first'; one price everywhere is the difference between a founding offer and a complaint.",
+   "title": "VAT confirmed + invoice figures reconciled with the 24 Nov notice",
+   "what": "Confirm the VAT position on each invoice (registration, rate, whether each pilot is invoiced with VAT) with Alex and Filza, then reconcile the five invoice amounts, lock duration and eligibility deadline against Alex's founding-pricing notice draft and the landing page so the 24 Nov notice and the 27 Nov invoices state the same price and terms. Send Alex the reconciled figures by Fri 20 Nov.",
+   "why": "Alex's 24 Nov notice must be 'reconciled with landing + invoices first'; one price everywhere is the difference between a founding offer and a complaint.",
    "area": "Finance",
-   "due": "2026-11-13",
+   "due": "2026-11-20",
    "priority": "P0",
    "priority_reason": "Feeds the dated 17 Nov notice and the 20 Nov gate criterion.",
    "depends_on": [
@@ -17227,7 +17227,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "VAT treatment is confirmed in writing and the invoice figures, lock duration and deadline match the notice draft and landing page, sent to Alex by 13 Nov.",
+   "acceptance": "VAT treatment is confirmed in writing and the invoice figures, lock duration and deadline match the notice draft and landing page, sent to Alex by 20 Nov.",
    "checklist": [
     "Confirm VAT registration and rate with Alex/Filza",
     "Apply VAT treatment to each draft invoice",
@@ -17241,10 +17241,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Jill",
    "title": "On-call rota final handed into the launch-week rota",
-   "what": "Freeze the rota for 23 Nov - 4 Dec, superseding the provisional launch-week days in N5-JL-01: primary/secondary per day including the weekend before launch and 1 Dec itself, commander per shift, Saad on support, Lewis on the pilot hotline, Alex on PH replies (per Saad's rota), and paging routes matching Muteeb's 'monitoring + on-call final'. Hand it to Muteeb and Saad by 18 Nov so it is in the runbook for dry run #1 on Thu 19 Nov.",
-   "why": "Muteeb's N6 'monitoring + on-call final' and Saad's hour-by-hour launch-week rota both need the human side from Jill; the 19 Nov dry run rehearses whatever is written.",
+   "what": "Freeze the rota for 30 Nov - 11 Dec, superseding the provisional launch-week days in N5-JL-01: primary/secondary per day including the weekend before launch and 8 Dec itself, commander per shift, Saad on support, Lewis on the pilot hotline, Alex on PH replies (per Saad's rota), and paging routes matching Muteeb's 'monitoring + on-call final'. Hand it to Muteeb and Saad by 25 Nov so it is in the runbook for dry run #1 on Thu 26 Nov.",
+   "why": "Muteeb's N6 'monitoring + on-call final' and Saad's hour-by-hour launch-week rota both need the human side from Jill; the 26 Nov dry run rehearses whatever is written.",
    "area": "Launch",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P1",
    "priority_reason": "Real risk with slack: v1 exists, but the frozen version must precede the 19 Nov dry run.",
    "depends_on": [
@@ -17260,12 +17260,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "muteeb",
-   "acceptance": "The frozen rota through 4 Dec is in the runbook before the 19 Nov dry run and Muteeb's paging config matches it.",
+   "acceptance": "The frozen rota through 11 Dec is in the runbook before the 26 Nov dry run and Muteeb's paging config matches it.",
    "checklist": [
-    "Fill every day 23 Nov - 4 Dec incl. weekend and 1 Dec",
+    "Fill every day 30 Nov - 11 Dec incl. weekend and 8 Dec",
     "Align commander/support/hotline/PH roles with Saad's rota",
     "Match paging routes with Muteeb's final monitoring",
-    "Hand to Saad and Muteeb by 18 Nov",
+    "Hand to Saad and Muteeb by 25 Nov",
     "Confirm it ran as written in dry run #1"
    ]
   },
@@ -17277,7 +17277,7 @@ window.LAUNCH_DATA = {
    "what": "With Muteeb, get the unit-economics spec live on the war-room board: AWS cost feed from Budgets/Cost Explorer, Art-E cost by cascade tier per tenant, embedding spend, SES volume, the daily burn line vs the cap, refreshed at least hourly for the money lines, with budget and breaker alarms routed to the on-call rota. Verify one day's numbers against the AWS bill.",
    "why": "Spend visibility at launch speed; a burn cap with no live number under it is a wish.",
    "area": "Finance",
-   "due": "2026-11-18",
+   "due": "2026-11-25",
    "priority": "P1",
    "priority_reason": "Real risk with slack: the board exists from N5; this is wiring and verification before the 20 Nov gate.",
    "depends_on": [
@@ -17308,10 +17308,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Jill",
    "title": "Launch-week burn cap signed by Alex",
-   "what": "Set the launch-week burn cap (23 Nov - 7 Dec): daily and weekly ceilings per line (AWS incl. headroom, LLM, embeddings, email, paid tools), the trip actions at 80% and 100% (who decides; which breakers and kill switches Muteeb and Asad flip - Art-E rail, Discovery serving), and how batch-1 expansion pauses if burn per activated page exceeds the model. Alex signs; the cap and its actions go into the runbook and the go/no-go memo.",
-   "why": "Runaway spend dies young; the 20 Nov go/no-go reads the cap as evidence that launch cannot bankrupt the company.",
+   "what": "Set the launch-week burn cap (30 Nov - 14 Dec): daily and weekly ceilings per line (AWS incl. headroom, LLM, embeddings, email, paid tools), the trip actions at 80% and 100% (who decides; which breakers and kill switches Muteeb and Asad flip - Art-E rail, Discovery serving), and how batch-1 expansion pauses if burn per activated page exceeds the model. Alex signs; the cap and its actions go into the runbook and the go/no-go memo.",
+   "why": "Runaway spend dies young; the 27 Nov go/no-go reads the cap as evidence that launch cannot bankrupt the company.",
    "area": "Finance",
-   "due": "2026-11-18",
+   "due": "2026-11-25",
    "priority": "P1",
    "priority_reason": "Same signature as Alex's N6-AX-05 (P1); the cap protects 23 Nov onward, slack to 22 Nov, and the breakers/budget alarms (already P0 elsewhere) are the real guard.",
    "depends_on": [
@@ -17342,11 +17342,11 @@ window.LAUNCH_DATA = {
    "id": "N6-JL-06",
    "sprint": "N6",
    "assignee": "Jill",
-   "title": "5 invoices sent by 20 Nov against countersigned terms",
+   "title": "5 invoices sent by 27 Nov against countersigned terms",
    "what": "Issue the five pilot invoices from the dry-run drafts once Filza confirms each pilot's agreement and DPA is countersigned and Lewis confirms conversion: correct amounts, VAT, particulars and due dates; send from the agreed address, log send time and recipient in the tracking sheet, and hand Alex the 'invoices sent' line with evidence for the go/no-go memo.",
    "why": "Paying pilots are the launch's real success metric, invoiced before not after; the N6 gate reads '5 invoices sent'.",
    "area": "Finance",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P0",
    "priority_reason": "Gate criterion with a dated deadline (20 Nov).",
    "depends_on": [
@@ -17364,7 +17364,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "Five invoices are sent by 20 Nov, each against a countersigned agreement, logged with timestamps and evidenced in the go/no-go memo.",
+   "acceptance": "Five invoices are sent by 27 Nov, each against a countersigned agreement, logged with timestamps and evidenced in the go/no-go memo.",
    "checklist": [
     "Confirm countersignature per pilot with Filza and conversion with Lewis",
     "Finalise each invoice from the reconciled figures",
@@ -17377,11 +17377,11 @@ window.LAUNCH_DATA = {
    "id": "N6-LW-01",
    "sprint": "N6",
    "assignee": "Lewis",
-   "title": "Daily pilot health checks start 9 Nov",
-   "what": "From 9 Nov check each of the 5 pilots daily: logged in, pages connected and fresh, any alert unanswered, any wrong-looking number, mood on the last call. One row per pilot per day in the health sheet; anything red goes to Saad's triage the same day.",
+   "title": "Daily pilot health checks start 16 Nov",
+   "what": "From 16 Nov check each of the 5 pilots daily: logged in, pages connected and fresh, any alert unanswered, any wrong-looking number, mood on the last call. One row per pilot per day in the health sheet; anything red goes to Saad's triage the same day.",
    "why": "The five people who matter most, minded personally; this is the manual check the Wave-1 customer health score later formalises.",
    "area": "Pilots",
-   "due": "2026-11-13",
+   "due": "2026-11-20",
    "priority": "P1",
    "priority_reason": "Daily routine with no single blocker; reds route to existing triage",
    "depends_on": [
@@ -17395,7 +17395,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "The health sheet has a row per pilot per working day from 9 Nov with reds routed to triage.",
+   "acceptance": "The health sheet has a row per pilot per working day from 16 Nov with reds routed to triage.",
    "checklist": [
     "Health sheet",
     "Daily routine",
@@ -17408,10 +17408,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Lewis",
    "title": "Light precision@5 spot check on the final pre-freeze recompute",
-   "what": "On the last weekly Discovery recompute before the 13 Nov freeze, re-judge top-5 for a fixed sample of about 5 pilot pages with the N3 sheet and bar, and record whether precision@5 held; flag any drift to Muteeb.",
+   "what": "On the last weekly Discovery recompute before the 20 Nov freeze, re-judge top-5 for a fixed sample of about 5 pilot pages with the N3 sheet and bar, and record whether precision@5 held; flag any drift to Muteeb.",
    "why": "The N3 pass was on an earlier graph; the freeze should lock a recompute that still passes, not one that drifted.",
    "area": "Discovery",
-   "due": "2026-11-12",
+   "due": "2026-11-19",
    "priority": "P2",
    "priority_reason": "Benchmark-audit minor; safe to slip if N6 runs hot",
    "depends_on": [
@@ -17424,7 +17424,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "A dated spot-check record on the pre-freeze recompute exists with a held/drifted verdict by 12 Nov.",
+   "acceptance": "A dated spot-check record on the pre-freeze recompute exists with a held/drifted verdict by 19 Nov.",
    "checklist": [
     "Recompute date from Muteeb",
     "Judge 5 pages",
@@ -17437,10 +17437,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Lewis",
    "title": "Pilot side of full UAT on the frozen build, all 5 pilots",
-   "what": "Schedule all 5 pilots for Saad's full UAT on the frozen build across every surface, be in the room for comprehension sign-off, and re-run failed steps with each pilot after blocker fixes (retest overflow, pilot side). Get each pilot's comprehension sign-off recorded before the 20 Nov go/no-go.",
+   "what": "Schedule all 5 pilots for Saad's full UAT on the frozen build across every surface, be in the room for comprehension sign-off, and re-run failed steps with each pilot after blocker fixes (retest overflow, pilot side). Get each pilot's comprehension sign-off recorded before the 27 Nov go/no-go.",
    "why": "The go/no-go reads comprehension signed per pilot; retests that wait for a pilot's diary are the last week's biggest schedule risk.",
    "area": "QA",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P0",
    "priority_reason": "The 20 Nov gate reads it",
    "depends_on": [
@@ -17454,9 +17454,9 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "reconciler",
-   "acceptance": "All 5 pilots have completed UAT with comprehension signed and all retests closed by 19 Nov.",
+   "acceptance": "All 5 pilots have completed UAT with comprehension signed and all retests closed by 26 Nov.",
    "checklist": [
-    "Schedule 5 pilots from 13 Nov",
+    "Schedule 5 pilots from 20 Nov",
     "Attend each session",
     "Pilot-side retests",
     "Sign-offs recorded",
@@ -17467,11 +17467,11 @@ window.LAUNCH_DATA = {
    "id": "N6-LW-04",
    "sprint": "N6",
    "assignee": "Lewis",
-   "title": "Close 5 paying commitments; confirmed list to Jill by 18 Nov",
-   "what": "Convert the warm pilots to a written yes: each pilot hears the founding price and terms from Lewis before Alex's 17 Nov public notice, agrees which pages and the billing contact, and confirms 'invoice me'. Hand Jill the confirmed list (name, company, billing contact, pages, agreed terms) by 18 Nov so 5 invoices leave by 20 Nov, and tell Alex immediately if the count is short.",
-   "why": "Five paying pilots are the launch's real success metric and the 20 Nov gate counts invoices sent; pilots hear the price from a person, not an invoice.",
+   "title": "Close 5 paying commitments; confirmed list to Jill by 25 Nov",
+   "what": "Convert the warm pilots to a written yes: each pilot hears the founding price and terms from Lewis before Alex's 24 Nov public notice, agrees which pages and the billing contact, and confirms 'invoice me'. Hand Jill the confirmed list (name, company, billing contact, pages, agreed terms) by 25 Nov so 5 invoices leave by 27 Nov, and tell Alex immediately if the count is short.",
+   "why": "Five paying pilots are the launch's real success metric and the 27 Nov gate counts invoices sent; pilots hear the price from a person, not an invoice.",
    "area": "Finance",
-   "due": "2026-11-18",
+   "due": "2026-11-25",
    "priority": "P0",
    "priority_reason": "Jill's 20 Nov invoices and the go/no-go count depend on it",
    "depends_on": [
@@ -17485,12 +17485,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "Jill has 5 confirmed billing records by 18 Nov and 5 invoices leave by 20 Nov.",
+   "acceptance": "Jill has 5 confirmed billing records by 25 Nov and 5 invoices leave by 27 Nov.",
    "checklist": [
-    "Price and terms told to each pilot before 17 Nov",
+    "Price and terms told to each pilot before 24 Nov",
     "Written yes per pilot",
     "Billing details captured",
-    "List to Jill on 18 Nov",
+    "List to Jill on 25 Nov",
     "Shortfall escalated to Alex"
    ]
   },
@@ -17499,10 +17499,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Lewis",
    "title": "Launch-day pilot support plan and the hotline seat in the launch rota",
-   "what": "Write the plan: per-pilot contact tree, hotline hours 30 Nov to 4 Dec, what Lewis handles versus what goes to Saad's support or the war room, the 'pilot sees wrong data = incident' trigger with the exact escalation message, the 'stuck? book 10 min' seat owner agreed in N5-LW-08, and what pilots are told before 1 Dec. Take the pilot-hotline seat in Saad's launch-week rota and rehearse it in runbook dry run #1 on 19 Nov.",
+   "what": "Write the plan: per-pilot contact tree, hotline hours 7 Dec to 11 Dec, what Lewis handles versus what goes to Saad's support or the war room, the 'pilot sees wrong data = incident' trigger with the exact escalation message, the 'stuck? book 10 min' seat owner agreed in N5-LW-08, and what pilots are told before 8 Dec. Take the pilot-hotline seat in Saad's launch-week rota and rehearse it in runbook dry run #1 on 26 Nov.",
    "why": "Launch day is a shift plan; the five relationships are guarded by a human with a written escalation path.",
    "area": "Launch",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P0",
    "priority_reason": "Part of the launch runbook read at the 20 Nov go/no-go",
    "depends_on": [
@@ -17516,13 +17516,13 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "The plan is in the launch runbook, the hotline seat is on the rota, and Lewis's role ran in dry run #1 on 19 Nov.",
+   "acceptance": "The plan is in the launch runbook, the hotline seat is on the rota, and Lewis's role ran in dry run #1 on 26 Nov.",
    "checklist": [
     "Contact tree",
     "Escalation rules and the incident trigger",
     "Pre-launch pilot message",
     "Rota seat agreed with Saad",
-    "Dry run #1 participation on 19 Nov"
+    "Dry run #1 participation on 26 Nov"
    ]
   },
   {
@@ -17533,7 +17533,7 @@ window.LAUNCH_DATA = {
    "what": "From the finalised testimonials, agree with each consenting pilot what they will do on launch day (a PH comment, a quote in the maker comment, a reply to press), the exact text and the time; give Saad the staged list for the PH package and Alex for the run-of-show.",
    "why": "Launch-day social proof has to be staged in advance or it does not happen at 08:01.",
    "area": "Marketing",
-   "due": "2026-11-20",
+   "due": "2026-11-27",
    "priority": "P1",
    "priority_reason": "PH assets freeze in N6 but the action itself is on 1 Dec",
    "depends_on": [
@@ -17546,23 +17546,23 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "A staged reference list (pilot, action, text, time) is in the PH package by 20 Nov.",
+   "acceptance": "A staged reference list (pilot, action, text, time) is in the PH package by 27 Nov.",
    "checklist": [
     "Ask each consenting pilot",
     "Text and timing agreed",
     "List to Saad and Alex",
-    "Reminders scheduled for 30 Nov"
+    "Reminders scheduled for 7 Dec"
    ]
   },
   {
    "id": "N6-FZ-01",
    "sprint": "N6",
    "assignee": "Filza",
-   "title": "Check the 17 Nov founding-pricing notice: terms, scarcity, consent",
+   "title": "Check the 24 Nov founding-pricing notice: terms, scarcity, consent",
    "what": "Read Alex's notice before it goes: defined lock duration and eligibility deadline that match ToS final, the landing and the invoices; scarcity claims that are true and evidenced (batch size, waitlist count); the send goes only to consented waitlist and marketing addresses with a working unsubscribe; Companies Act particulars in the footer. Written clearance to Alex and Jill.",
-   "why": "One price everywhere and a lawful send; an untrue scarcity claim or an unconsented send on 17 Nov is a complaint in launch week.",
+   "why": "One price everywhere and a lawful send; an untrue scarcity claim or an unconsented send on 24 Nov is a complaint in launch week.",
    "area": "Marketing",
-   "due": "2026-11-16",
+   "due": "2026-11-23",
    "priority": "P0",
    "priority_reason": "Dated: notice goes out 17 Nov",
    "depends_on": [
@@ -17581,7 +17581,7 @@ window.LAUNCH_DATA = {
     "Compare terms to ToS final, landing and invoices",
     "Verify each scarcity claim against evidence",
     "Confirm the recipient list is consent-only and unsubscribe works",
-    "Send clearance or changes to Alex by 16 Nov"
+    "Send clearance or changes to Alex by 23 Nov"
    ]
   },
   {
@@ -17592,7 +17592,7 @@ window.LAUNCH_DATA = {
    "what": "Open every URL in the Meta app dashboard (privacy policy, terms, data-deletion instructions and callback, app domain) and confirm each resolves over SSL to the current signed version with matching version dates, and that the callback returns a confirmation code on a test call. Record with screenshots for the go/no-go memo and note which Meta branch (approved or Tester fallback) the evidence applies to.",
    "why": "A stale or dead URL in the dashboard is a rejection or a compliance flag at the exact moment Live Mode matters.",
    "area": "Meta",
-   "due": "2026-11-17",
+   "due": "2026-11-24",
    "priority": "P1",
    "priority_reason": "Go/no-go evidence with a few days of slack",
    "depends_on": [
@@ -17620,10 +17620,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Filza",
    "title": "Sweep the frozen build: legal docs versioned + linked everywhere",
-   "what": "On the frozen build (features 13 Nov, code 20 Nov): each of ToS, Privacy, DPA and Cookie policy carries version and date, is the signed final, and is linked from the site footer, the app footer and Settings data controls; the in-app AI labels, consent screen and cookie banner show the final strings. Fill the legal evidence slots in the go/no-go memo with links to this sweep, the attestation, the DSAR and deletion re-test and the DPA signatures.",
+   "what": "On the frozen build (features 20 Nov, code 27 Nov): each of ToS, Privacy, DPA and Cookie policy carries version and date, is the signed final, and is linked from the site footer, the app footer and Settings data controls; the in-app AI labels, consent screen and cookie banner show the final strings. Fill the legal evidence slots in the go/no-go memo with links to this sweep, the attestation, the DSAR and deletion re-test and the DPA signatures.",
    "why": "The legal pillar of the go/no-go is evidence-based like the rest; a link that points at v1 is a broken promise on day one.",
    "area": "Legal",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P0",
    "priority_reason": "Go/no-go Fri 20 Nov reads this evidence",
    "depends_on": [
@@ -17652,10 +17652,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Filza",
    "title": "Re-test DSAR + deletion on the frozen production build",
-   "what": "Repeat the N4 DSAR run and the deletion witness on production after the 13 Nov freeze: one export assembled from production stores (warehouse, labels, vectors, memory), one disconnect and one Meta callback deletion verified gone including the vector namespace and memory, timings recorded, then confirm no test data remains after Asad purges demo and Tester data. Receipts into the go/no-go memo.",
+   "what": "Repeat the N4 DSAR run and the deletion witness on production after the 20 Nov freeze: one export assembled from production stores (warehouse, labels, vectors, memory), one disconnect and one Meta callback deletion verified gone including the vector namespace and memory, timings recorded, then confirm no test data remains after Asad purges demo and Tester data. Receipts into the go/no-go memo.",
    "why": "What passed on staging in October has to pass on the frozen production it will run on; the unglamorous check that prevents a glamorous failure.",
    "area": "Legal",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P0",
    "priority_reason": "Go/no-go evidence",
    "depends_on": [
@@ -17673,7 +17673,7 @@ window.LAUNCH_DATA = {
    "source": "plan",
    "acceptance": "Dated production receipts exist for one DSAR export and one deletion with every store verified.",
    "checklist": [
-    "Schedule the run with Muteeb after the 13 Nov freeze",
+    "Schedule the run with Muteeb after the 20 Nov freeze",
     "Run the DSAR export on production and time it",
     "Run disconnect and callback deletion; verify each store",
     "File receipts in the go/no-go memo"
@@ -17687,7 +17687,7 @@ window.LAUNCH_DATA = {
    "what": "Read the tenant-leakage CI suite and its latest green run on the frozen build (API, cache key, queue, vector namespace, Art-E memory), the RLS policy list from the first table, and the pen-test criticals-closed report; sign a one-page attestation stating what was tested, on which commit, and what it does not cover. Goes into the go/no-go memo and the /security evidence.",
    "why": "The go/no-go accepts evidence, not assurances; the attestation is Filza's signature on the single fatal bug class.",
    "area": "Ops",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P0",
    "priority_reason": "Go/no-go pillar",
    "depends_on": [
@@ -17714,10 +17714,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Filza",
    "title": "Pre-write the 'launch slips' comms for the NO-GO branch",
-   "what": "Templates for the NO-GO playbook: pilot notice (what changes for them, their paper unchanged), waitlist email (new date, no scarcity reset without terms), the public and Product Hunt line, and the founding-pricing consequence (eligibility deadline moves with the date). Consistent with ToS final and the 17 Nov notice; Alex holds them unsent.",
-   "why": "A NO-GO is a decision, not a catastrophe, only if the words already exist on 20 Nov.",
+   "what": "Templates for the NO-GO playbook: pilot notice (what changes for them, their paper unchanged), waitlist email (new date, no scarcity reset without terms), the public and Product Hunt line, and the founding-pricing consequence (eligibility deadline moves with the date). Consistent with ToS final and the 24 Nov notice; Alex holds them unsent.",
+   "why": "A NO-GO is a decision, not a catastrophe, only if the words already exist on 27 Nov.",
    "area": "Launch",
-   "due": "2026-11-19",
+   "due": "2026-11-26",
    "priority": "P1",
    "priority_reason": "Needed for the 20 Nov decision; small work",
    "depends_on": [
@@ -17731,7 +17731,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "Four templates are filed in the NO-GO playbook and consistent with ToS final and the 17 Nov notice.",
+   "acceptance": "Four templates are filed in the NO-GO playbook and consistent with ToS final and the 24 Nov notice.",
    "checklist": [
     "Draft the pilot notice",
     "Draft the waitlist and public lines",
@@ -17743,11 +17743,11 @@ window.LAUNCH_DATA = {
    "id": "LW-AS-01",
    "sprint": "LW",
    "assignee": "Asad",
-   "title": "Dry run #2 Wed 25 Nov; fix only checklist failures",
-   "what": "Run Saad's runbook dry run #2 on Wed 25 Nov in the developer seat (flag flip on staging, canary, rollback, kill switches, comms); fix only items that failed the checklist, done by Fri 27 Nov; no feature work.",
+   "title": "Dry run #2 Wed 2 Dec; fix only checklist failures",
+   "what": "Run Saad's runbook dry run #2 on Wed 2 Dec in the developer seat (flag flip on staging, canary, rollback, kill switches, comms); fix only items that failed the checklist, done by Fri 4 Dec; no feature work.",
    "why": "The second rehearsal catches what the first created; the buffer stays a buffer.",
    "area": "Launch",
-   "due": "2026-11-27",
+   "due": "2026-12-04",
    "priority": "P0",
    "priority_reason": "Dated rehearsal",
    "depends_on": [
@@ -17761,23 +17761,23 @@ window.LAUNCH_DATA = {
    ],
    "gate": "LW",
    "source": "plan",
-   "acceptance": "Dry run #2 minutes list failures and each has a merged fix by 27 Nov.",
+   "acceptance": "Dry run #2 minutes list failures and each has a merged fix by 4 Dec.",
    "checklist": [
-    "Developer seat on 25 Nov",
+    "Developer seat on 2 Dec",
     "Log checklist failures",
     "Fix failures only",
-    "Confirm by 27 Nov"
+    "Confirm by 4 Dec"
    ]
   },
   {
    "id": "LW-AS-02",
    "sprint": "LW",
    "assignee": "Asad",
-   "title": "Smoke all 5 flows on production Sat 28 Nov (MVP done)",
+   "title": "Smoke all 5 flows on production Sat 5 Dec (MVP done)",
    "what": "Run the five critical flows manually and the full E2E suite (flows 1-14) against production with the real pilot tenants and the dogfood tenant, plus a web-push test push and a PWA install spot-check; record the receipt; only then Saad posts the MVP-done graphics.",
    "why": "Never announce what you have not just watched work.",
    "area": "Launch",
-   "due": "2026-11-28",
+   "due": "2026-12-05",
    "priority": "P0",
    "priority_reason": "Dated MVP-done post",
    "depends_on": [
@@ -17802,11 +17802,11 @@ window.LAUNCH_DATA = {
    "id": "LW-AS-03",
    "sprint": "LW",
    "assignee": "Asad",
-   "title": "Smoke all 5 flows on production Tue 1 Dec before any announcement",
-   "what": "Early on 1 Dec (before 08:00 UK) re-run the five manual flows and the full E2E suite (flows 1-14) on production, confirm pilots' pages show correct data ('pilot sees wrong data' = automatic incident), and sign the smoke receipt in the war room before Alex's 08:01 posts.",
+   "title": "Smoke all 5 flows on production Tue 8 Dec before any announcement",
+   "what": "Early on 8 Dec (before 08:00 UK) re-run the five manual flows and the full E2E suite (flows 1-14) on production, confirm pilots' pages show correct data ('pilot sees wrong data' = automatic incident), and sign the smoke receipt in the war room before Alex's 08:01 posts.",
    "why": "The gate itself: all five flows smoked BEFORE announcing.",
    "area": "Launch",
-   "due": "2026-12-01",
+   "due": "2026-12-08",
    "priority": "P0",
    "priority_reason": "The 1 Dec gate",
    "depends_on": [
@@ -17832,11 +17832,11 @@ window.LAUNCH_DATA = {
    "id": "LW-AS-04",
    "sprint": "LW",
    "assignee": "Asad",
-   "title": "1 Dec 08:00: flip the flags, canary + rollback armed, hotfix-only",
+   "title": "8 Dec 08:00: flip the flags, canary + rollback armed, hotfix-only",
    "what": "At 08:00 UK flip the launch-flag config rehearsed in N6; canary path and rollback command staged; kill switches at hand; hotfix-only policy for the week; take the developer seat in the 09:00 war-room checkpoint daily.",
    "why": "Launch is a toggle because N6 made it one.",
    "area": "Launch",
-   "due": "2026-12-01",
+   "due": "2026-12-08",
    "priority": "P0",
    "priority_reason": "Doors open",
    "depends_on": [
@@ -17866,7 +17866,7 @@ window.LAUNCH_DATA = {
    "what": "Each morning report confidence, drift, crisis false alarms vs gates; touch nothing.",
    "why": "Watch, do not touch.",
    "area": "Ops",
-   "due": "2026-11-30",
+   "due": "2026-12-07",
    "priority": "P0",
    "priority_reason": "launch week",
    "depends_on": [
@@ -17877,7 +17877,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "LW",
    "source": "plan",
-   "acceptance": "Daily readouts filed 23-30 Nov and on launch morning 1 Dec.",
+   "acceptance": "Daily readouts filed 30-14 Dec and on launch morning 8 Dec.",
    "checklist": [
     "Daily readout",
     "Log anomalies",
@@ -17889,10 +17889,10 @@ window.LAUNCH_DATA = {
    "sprint": "LW",
    "assignee": "Muteeb",
    "title": "War room live: 09:00 checkpoint, one board, commander rota, breakers verified",
-   "what": "Run the war room from Mon 23 Nov: daily 09:00 checkpoint, one board, commander rota, and breakers plus guardrails verified under real traffic.",
+   "what": "Run the war room from Mon 30 Nov: daily 09:00 checkpoint, one board, commander rota, and breakers plus guardrails verified under real traffic.",
    "why": "The single pane earns its keep in launch week.",
    "area": "Ops",
-   "due": "2026-11-24",
+   "due": "2026-12-01",
    "priority": "P0",
    "priority_reason": "launch-week operating mode",
    "depends_on": [
@@ -17922,7 +17922,7 @@ window.LAUNCH_DATA = {
    "what": "Make the status page public and post any degradation within 15 minutes per the rota.",
    "why": "Silence during an incident costs more than the incident.",
    "area": "Ops",
-   "due": "2026-11-24",
+   "due": "2026-12-01",
    "priority": "P1",
    "priority_reason": "real risk with slack",
    "depends_on": [
@@ -17946,11 +17946,11 @@ window.LAUNCH_DATA = {
    "id": "LW-MT-03",
    "sprint": "LW",
    "assignee": "Muteeb",
-   "title": "Support dry run #2 on Wed 25 Nov",
+   "title": "Support dry run #2 on Wed 2 Dec",
    "what": "Run the platform side of dry run #2 with Saad and Asad; fix only checklist failures.",
    "why": "The second rehearsal catches what the first created.",
    "area": "Launch",
-   "due": "2026-11-25",
+   "due": "2026-12-02",
    "priority": "P0",
    "priority_reason": "dated rehearsal",
    "depends_on": [
@@ -17975,11 +17975,11 @@ window.LAUNCH_DATA = {
    "id": "LW-MT-04",
    "sprint": "LW",
    "assignee": "Muteeb",
-   "title": "Production smoke of all 5 flows on Sat 28 Nov",
+   "title": "Production smoke of all 5 flows on Sat 5 Dec",
    "what": "Support Asad smoking the five critical flows manually and the full E2E suite (flows 1-14) on production for the MVP-done milestone.",
    "why": "Never announce what you have not just watched work.",
    "area": "Launch",
-   "due": "2026-11-28",
+   "due": "2026-12-05",
    "priority": "P0",
    "priority_reason": "dated MVP-done milestone",
    "depends_on": [
@@ -18003,11 +18003,11 @@ window.LAUNCH_DATA = {
    "id": "LW-MT-05",
    "sprint": "LW",
    "assignee": "Muteeb",
-   "title": "Launch day 1 Dec: smoke before 08:01, flags flip, canary and rollback armed",
+   "title": "Launch day 8 Dec: smoke before 08:01, flags flip, canary and rollback armed",
    "what": "Smoke the five manual flows and the full E2E suite (flows 1-14) on production before 08:01, flip flags at 08:00 with canary and rollback armed, enforce hotfix-only, and treat 'pilot sees wrong data' as an automatic incident.",
    "why": "Launch is a toggle because N6 made it one; an unsmoked announcement is a gamble.",
    "area": "Launch",
-   "due": "2026-12-01",
+   "due": "2026-12-08",
    "priority": "P0",
    "priority_reason": "dated doors-open",
    "depends_on": [
@@ -18033,11 +18033,11 @@ window.LAUNCH_DATA = {
    "id": "LW-SD-01",
    "sprint": "LW",
    "assignee": "Saad",
-   "title": "Run the runbook checklist in dry run #2, Wed 25 Nov",
-   "what": "As runbook owner, run the checklist through Asad's dry run #2 with Muteeb: every step from runbook v2, fix only checklist failures, and hand the smoke checklist to Asad for the 28 Nov and 1 Dec production smokes. Asad owns the dry run; Saad owns the paper.",
+   "title": "Run the runbook checklist in dry run #2, Wed 2 Dec",
+   "what": "As runbook owner, run the checklist through Asad's dry run #2 with Muteeb: every step from runbook v2, fix only checklist failures, and hand the smoke checklist to Asad for the 5 Dec and 8 Dec production smokes. Asad owns the dry run; Saad owns the paper.",
    "why": "The second rehearsal catches what the first created.",
    "area": "Launch",
-   "due": "2026-11-25",
+   "due": "2026-12-02",
    "priority": "P0",
    "priority_reason": "Dated",
    "depends_on": [
@@ -18063,11 +18063,11 @@ window.LAUNCH_DATA = {
    "id": "LW-SD-02",
    "sprint": "LW",
    "assignee": "Saad",
-   "title": "Produce the MVP-done post graphics for 28 Nov",
-   "what": "Render graphics for the MVP-done post from the frozen build, containing no cut features and the 1 Dec date, and give them the same QA as the product before Alex publishes.",
+   "title": "Produce the MVP-done post graphics for 5 Dec",
+   "what": "Render graphics for the MVP-done post from the frozen build, containing no cut features and the 8 Dec date, and give them the same QA as the product before Alex publishes.",
    "why": "Announcement assets get the same QA as the product.",
    "area": "Marketing",
-   "due": "2026-11-28",
+   "due": "2026-12-05",
    "priority": "P0",
    "priority_reason": "Dated (Saad tagged P1)",
    "depends_on": [
@@ -18078,10 +18078,10 @@ window.LAUNCH_DATA = {
    ],
    "gate": "LW",
    "source": "saad",
-   "acceptance": "Graphics delivered to Alex by 28 Nov.",
+   "acceptance": "Graphics delivered to Alex by 5 Dec.",
    "checklist": [
     "Render from the frozen build; no Schedule/inbox/auto-pilot visible",
-    "QA against the packs and the 1 Dec date",
+    "QA against the packs and the 8 Dec date",
     "Filza narrative check",
     "Deliver to Alex with source files"
    ]
@@ -18091,10 +18091,10 @@ window.LAUNCH_DATA = {
    "sprint": "LW",
    "assignee": "Saad",
    "title": "Verify the Product Hunt preview the night before",
-   "what": "Check the PH listing preview on 30 Nov: assets, tagline, links, pricing, date; confirm with the hunter and Filza's final narrative check.",
+   "what": "Check the PH listing preview on 7 Dec: assets, tagline, links, pricing, date; confirm with the hunter and Filza's final narrative check.",
    "why": "The listing is public at 08:01 and cannot be fixed live.",
    "area": "Marketing",
-   "due": "2026-11-30",
+   "due": "2026-12-07",
    "priority": "P0",
    "priority_reason": "Dated",
    "depends_on": [
@@ -18107,7 +18107,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "LW",
    "source": "saad",
-   "acceptance": "Preview verified and logged 30 Nov.",
+   "acceptance": "Preview verified and logged 7 Dec.",
    "checklist": [
     "Check listing",
     "Fix issues",
@@ -18118,11 +18118,11 @@ window.LAUNCH_DATA = {
    "id": "LW-SD-04",
    "sprint": "LW",
    "assignee": "Saad",
-   "title": "Day-1 triage ready; retro + Roadmap V2 scheduled w/c 7 Dec",
-   "what": "Board and blocker criteria unchanged for 1 Dec triage; support seat staffed per rota; retro (predictions vs actuals) and Roadmap V2 booked w/c 7 Dec.",
+   "title": "Day-1 triage ready; retro + Roadmap V2 scheduled w/c 14 Dec",
+   "what": "Board and blocker criteria unchanged for 8 Dec triage; support seat staffed per rota; retro (predictions vs actuals) and Roadmap V2 booked w/c 14 Dec.",
    "why": "The criteria that shipped the product judge its first week.",
    "area": "PM",
-   "due": "2026-11-30",
+   "due": "2026-12-07",
    "priority": "P1",
    "priority_reason": "Real risk on day 1; slack until 30 Nov",
    "depends_on": [
@@ -18148,11 +18148,11 @@ window.LAUNCH_DATA = {
    "id": "LW-AX-01",
    "sprint": "LW",
    "assignee": "Alex",
-   "title": "Daily 15-min exec check Mon 23 - Mon 30 Nov",
-   "what": "Run a 15-minute daily exec check through the buffer week: scorecard reds, dry run #2 (Wed 25 Nov) outcome, production smoke Sat 28 Nov, pilot status from Lewis, burn from Jill, Meta status. Fixes only: any feature work that appears goes to the cut order, not the weekend.",
+   "title": "Daily 15-min exec check Mon 23 - Mon 7 Dec",
+   "what": "Run a 15-minute daily exec check through the buffer week: scorecard reds, dry run #2 (Wed 2 Dec) outcome, production smoke Sat 5 Dec, pilot status from Lewis, burn from Jill, Meta status. Fixes only: any feature work that appears goes to the cut order, not the weekend.",
    "why": "The buffer stays buffer only if someone checks daily that it has not filled with feature work.",
    "area": "Launch",
-   "due": "2026-11-30",
+   "due": "2026-12-07",
    "priority": "P1",
    "priority_reason": "Real risk with slack: the check is cheap and daily.",
    "depends_on": [
@@ -18165,11 +18165,11 @@ window.LAUNCH_DATA = {
    ],
    "gate": "LW",
    "source": "plan",
-   "acceptance": "Daily notes for 23-30 Nov exist, each with reds and owners, and no feature work entered the week.",
+   "acceptance": "Daily notes for 30-14 Dec exist, each with reds and owners, and no feature work entered the week.",
    "checklist": [
     "Book the daily 15-min slot",
     "Read the scorecard each day",
-    "Note dry run #2 and the 28 Nov smoke results",
+    "Note dry run #2 and the 5 Dec smoke results",
     "Confirm fixes-only",
     "Log each check"
    ]
@@ -18182,7 +18182,7 @@ window.LAUNCH_DATA = {
    "what": "Before launch data arrives, write the Series-A trigger as numbers: activation rate in batch 1, paying pilots retained, waitlist-to-connected conversion, Art-E cost per tenant, crisis false-alarm rate; and the date the decision is read (after Jill's day-3 cost snapshots, not on launch morning). Decide only on that evidence.",
    "why": "Launch week data must be read cold; a trigger written after the PH upvotes is adrenaline, not evidence.",
    "area": "Finance",
-   "due": "2026-11-30",
+   "due": "2026-12-07",
    "priority": "P2",
    "priority_reason": "Safe to slip; the decision itself is post-launch.",
    "depends_on": [
@@ -18195,7 +18195,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "A one-page trigger sheet with numeric thresholds and the read date is filed before 1 Dec.",
+   "acceptance": "A one-page trigger sheet with numeric thresholds and the read date is filed before 8 Dec.",
    "checklist": [
     "Pick the five metrics",
     "Set thresholds from the day-0 baselines",
@@ -18207,11 +18207,11 @@ window.LAUNCH_DATA = {
    "id": "LW-AX-03",
    "sprint": "LW",
    "assignee": "Alex",
-   "title": "PH sync with the hunter Sun 30 Nov",
-   "what": "Sync with the Product Hunt hunter on Sun 30 Nov: confirm the 08:01 UK launch time, the frozen assets and gallery from demo-dataset renders (never pilot data), tagline and maker comment, the PH preview Saad verified, and the hunter's own timing; confirm Filza's narrative check on PH copy is done.",
+   "title": "PH sync with the hunter Sun 7 Dec",
+   "what": "Sync with the Product Hunt hunter on Sun 7 Dec: confirm the 08:01 UK launch time, the frozen assets and gallery from demo-dataset renders (never pilot data), tagline and maker comment, the PH preview Saad verified, and the hunter's own timing; confirm Filza's narrative check on PH copy is done.",
    "why": "The PH slot is a one-shot; a hunter who posts at the wrong hour or with stale assets cannot be undone.",
    "area": "Marketing",
-   "due": "2026-11-30",
+   "due": "2026-12-07",
    "priority": "P0",
    "priority_reason": "Dated external coordination.",
    "depends_on": [
@@ -18238,11 +18238,11 @@ window.LAUNCH_DATA = {
    "id": "LW-AX-04",
    "sprint": "LW",
    "assignee": "Alex",
-   "title": "Execute the run-of-show on 1 Dec; PH replies seat",
-   "what": "Execute the locked run-of-show on Tue 1 Dec: confirm Asad's 08:00 flag flip and the smoke of all 5 flows on production before anything is announced; 08:01 Product Hunt goes live with the waitlist queue email; take the PH-replies seat with the hard-questions answer sheet; batch 1 is the first 100 pages; 'pilot sees wrong data' is an automatic incident. Announce nothing that has not just been watched to work.",
-   "why": "Never announce what you have not just watched work; the run-of-show exists so 1 Dec contains no decisions.",
+   "title": "Execute the run-of-show on 8 Dec; PH replies seat",
+   "what": "Execute the locked run-of-show on Tue 8 Dec: confirm Asad's 08:00 flag flip and the smoke of all 5 flows on production before anything is announced; 08:01 Product Hunt goes live with the waitlist queue email; take the PH-replies seat with the hard-questions answer sheet; batch 1 is the first 100 pages; 'pilot sees wrong data' is an automatic incident. Announce nothing that has not just been watched to work.",
+   "why": "Never announce what you have not just watched work; the run-of-show exists so 8 Dec contains no decisions.",
    "area": "Launch",
-   "due": "2026-12-01",
+   "due": "2026-12-08",
    "priority": "P0",
    "priority_reason": "The launch itself.",
    "depends_on": [
@@ -18273,11 +18273,11 @@ window.LAUNCH_DATA = {
    "id": "LW-AX-05",
    "sprint": "LW",
    "assignee": "Alex",
-   "title": "Send the 'We're live' investor note on 1 Dec",
-   "what": "Send the 'We're live' investor note on 1 Dec after the smoke and announcement: what launched, pilots live, day-0 baselines, the Meta branch actually taken, and the Series-A trigger sheet with its read date. No numbers that are not on the war-room board.",
+   "title": "Send the 'We're live' investor note on 8 Dec",
+   "what": "Send the 'We're live' investor note on 8 Dec after the smoke and announcement: what launched, pilots live, day-0 baselines, the Meta branch actually taken, and the Series-A trigger sheet with its read date. No numbers that are not on the war-room board.",
    "why": "Launch week data read cold begins with an honest day-0 note; investors get the same facts the go/no-go recorded.",
    "area": "Launch",
-   "due": "2026-12-01",
+   "due": "2026-12-08",
    "priority": "P1",
    "priority_reason": "Dated but a same-day send with no downstream dependency.",
    "depends_on": [
@@ -18291,7 +18291,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "LW",
    "source": "plan",
-   "acceptance": "The note is sent on 1 Dec after the announcement and matches the go/no-go memo and baseline sheet.",
+   "acceptance": "The note is sent on 8 Dec after the announcement and matches the go/no-go memo and baseline sheet.",
    "checklist": [
     "Draft from the memo and baselines",
     "Confirm smoke and announcement are done",
@@ -18305,10 +18305,10 @@ window.LAUNCH_DATA = {
    "sprint": "LW",
    "assignee": "Jill",
    "title": "Invoice tracking: payment status and chasing schedule",
-   "what": "Track the five invoices from 20 Nov: received/acknowledged, due date, paid; a polite chase at 7 days through Lewis as relationship owner, escalation to Alex at 14; bank reconciliation when payments land; a one-line status for the daily 09:00 war-room checkpoint. Log any pilot invoice query as a support ticket so the answer reuses the terms.",
+   "what": "Track the five invoices from 27 Nov: received/acknowledged, due date, paid; a polite chase at 7 days through Lewis as relationship owner, escalation to Alex at 14; bank reconciliation when payments land; a one-line status for the daily 09:00 war-room checkpoint. Log any pilot invoice query as a support ticket so the answer reuses the terms.",
    "why": "'5 invoices sent' is the gate, '5 invoices paid' is the business; tracking that starts after launch loses the first week.",
    "area": "Finance",
-   "due": "2026-11-27",
+   "due": "2026-12-04",
    "priority": "P1",
    "priority_reason": "Real risk with slack: payments arrive over weeks, but the first chase point is 27 Nov.",
    "depends_on": [
@@ -18336,10 +18336,10 @@ window.LAUNCH_DATA = {
    "sprint": "LW",
    "assignee": "Jill",
    "title": "Support inbox staffed to standard for launch week",
-   "what": "Staff support@ to the first-response standard for 23 Nov - 4 Dec: a named responder per shift (Saad owns support in the launch-week rota; Jill owns the standard, staffing and overflow), Saad's top-20 macros plus the 'why did Art-E say that' and 'is my data shared with other pages' explainers loaded as canned replies, escalation to the on-call engineer and Lewis's pilot hotline, and the 'stuck? book 10 min' escape hatch for batch 1. Rehearse in dry run #2 on Wed 25 Nov and measure first-response time on 1 Dec.",
+   "what": "Staff support@ to the first-response standard for 30 Nov - 11 Dec: a named responder per shift (Saad owns support in the launch-week rota; Jill owns the standard, staffing and overflow), Saad's top-20 macros plus the 'why did Art-E say that' and 'is my data shared with other pages' explainers loaded as canned replies, escalation to the on-call engineer and Lewis's pilot hotline, and the 'stuck? book 10 min' escape hatch for batch 1. Rehearse in dry run #2 on Wed 2 Dec and measure first-response time on 8 Dec.",
    "why": "First impressions include first replies; batch 1 is 100 strangers with no concierge.",
    "area": "Ops",
-   "due": "2026-11-30",
+   "due": "2026-12-07",
    "priority": "P0",
    "priority_reason": "Launch-day readiness with a dated deadline (doors open 1 Dec 08:00).",
    "depends_on": [
@@ -18361,8 +18361,8 @@ window.LAUNCH_DATA = {
     "Confirm shift responders with Saad against the rota",
     "Load macros and explainers as canned replies",
     "Wire escalation to on-call and the pilot hotline; set up the 'book 10 min' hatch",
-    "Rehearse in dry run #2 on 25 Nov",
-    "Measure first-response time on 1 Dec and report at the checkpoint"
+    "Rehearse in dry run #2 on 2 Dec",
+    "Measure first-response time on 8 Dec and report at the checkpoint"
    ]
   },
   {
@@ -18370,10 +18370,10 @@ window.LAUNCH_DATA = {
    "sprint": "LW",
    "assignee": "Jill",
    "title": "Live burn watch vs cap with day-1 / day-3 cost snapshots",
-   "what": "From 23 Nov, read the spend dashboard against the cap at the daily 09:00 war-room checkpoint and post the burn line; verify with Muteeb before 08:00 on 1 Dec that breakers and budget alarms are armed under real traffic; take the day-1 snapshot on 1 Dec (spend by line, per activated page, breaker/alarm events) and repeat on day 3, comparing each with the cost model and cap and triggering the pre-agreed actions if any line crosses 80%.",
+   "what": "From 30 Nov, read the spend dashboard against the cap at the daily 09:00 war-room checkpoint and post the burn line; verify with Muteeb before 08:00 on 8 Dec that breakers and budget alarms are armed under real traffic; take the day-1 snapshot on 8 Dec (spend by line, per activated page, breaker/alarm events) and repeat on day 3, comparing each with the cost model and cap and triggering the pre-agreed actions if any line crosses 80%.",
    "why": "Runaway spend dies young; the day-1/day-3 snapshots are the first real unit-economics numbers Alex's Series-A read and the December betting table use.",
    "area": "Finance",
-   "due": "2026-12-01",
+   "due": "2026-12-08",
    "priority": "P1",
    "priority_reason": "A daily routine backed by the P0 dashboard and breakers; the day-1/day-3 snapshots feed Alex's P2 Series-A read.",
    "depends_on": [
@@ -18388,10 +18388,10 @@ window.LAUNCH_DATA = {
    ],
    "gate": "LW",
    "source": "plan",
-   "acceptance": "The burn line was posted at every checkpoint from 23 Nov, breakers were confirmed armed before 08:00 on 1 Dec, and the day-1 snapshot exists with the day-3 snapshot diaried.",
+   "acceptance": "The burn line was posted at every checkpoint from 30 Nov, breakers were confirmed armed before 08:00 on 8 Dec, and the day-1 snapshot exists with the day-3 snapshot diaried.",
    "checklist": [
-    "Post burn vs cap at each 09:00 checkpoint from 23 Nov",
-    "Confirm breakers and budget alarms armed with Muteeb before 08:00 on 1 Dec",
+    "Post burn vs cap at each 09:00 checkpoint from 30 Nov",
+    "Confirm breakers and budget alarms armed with Muteeb before 08:00 on 8 Dec",
     "Take the day-1 snapshot by line and per activated page",
     "Compare with model and cap; trigger 80% actions if crossed",
     "Diary and take the day-3 snapshot; send both to Alex"
@@ -18402,10 +18402,10 @@ window.LAUNCH_DATA = {
    "sprint": "LW",
    "assignee": "Lewis",
    "title": "Hotline seat in dry run #2; all 5 pilots confirmed live on production",
-   "what": "Take the pilot-hotline seat in dry run #2 on Wed 25 Nov. Before the 28 Nov production smoke and again on 30 Nov, confirm with each pilot that they can log in on production, their pages are connected and fresh, and they know the launch-day channel; report '5 pilots live' (or which are not) to the war room before Asad announces.",
-   "why": "The 1 Dec gate says 5 pilots live and nothing is announced before it is watched working.",
+   "what": "Take the pilot-hotline seat in dry run #2 on Wed 2 Dec. Before the 5 Dec production smoke and again on 7 Dec, confirm with each pilot that they can log in on production, their pages are connected and fresh, and they know the launch-day channel; report '5 pilots live' (or which are not) to the war room before Asad announces.",
+   "why": "The 8 Dec gate says 5 pilots live and nothing is announced before it is watched working.",
    "area": "Launch",
-   "due": "2026-11-30",
+   "due": "2026-12-07",
    "priority": "P0",
    "priority_reason": "The 1 Dec gate condition",
    "depends_on": [
@@ -18421,11 +18421,11 @@ window.LAUNCH_DATA = {
    ],
    "gate": "LW",
    "source": "plan",
-   "acceptance": "A dated '5 pilots live on production' confirmation is in the war room before the 1 Dec 08:00 flip.",
+   "acceptance": "A dated '5 pilots live on production' confirmation is in the war room before the 8 Dec 08:00 flip.",
    "checklist": [
-    "Dry run #2 seat on 25 Nov",
-    "Per-pilot production check 27-28 Nov",
-    "Recheck on 30 Nov",
+    "Dry run #2 seat on 2 Dec",
+    "Per-pilot production check 4-12 Dec",
+    "Recheck on 7 Dec",
     "Confirmation posted to the war room"
    ]
   },
@@ -18437,7 +18437,7 @@ window.LAUNCH_DATA = {
    "what": "Keep the personal channel open with each pilot every day of launch week, answer within the hotline standard, and post one line per pilot to the war room's 09:00 checkpoint: green/amber/red with the reason (wrong data, unanswered alert, silence, pricing wobble). Any 'wrong data' report is raised as an incident immediately, not batched.",
    "why": "Five relationships guarded by a human; churn risk visible daily is how the war room protects the 5 invoices.",
    "area": "Pilots",
-   "due": "2026-11-30",
+   "due": "2026-12-07",
    "priority": "P1",
    "priority_reason": "LW-LW-01 carries the '5 pilots live' gate condition; the channel is a daily routine and the wrong-data incident trigger already sits in the runbook (N6-LW-05).",
    "depends_on": [
@@ -18453,7 +18453,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "LW",
    "source": "plan",
-   "acceptance": "A churn-risk line per pilot appears in every daily war-room checkpoint 23-30 Nov, with wrong-data reports raised as incidents.",
+   "acceptance": "A churn-risk line per pilot appears in every daily war-room checkpoint 30-14 Dec, with wrong-data reports raised as incidents.",
    "checklist": [
     "Channel and response standard",
     "Daily flags at the 09:00 checkpoint",
@@ -18469,7 +18469,7 @@ window.LAUNCH_DATA = {
    "what": "Add the legal seat to Saad's launch-week rota and Muteeb's war-room board: who assesses a suspected breach, who decides ICO notification inside 72 hours, cover for every hour of launch week, and the escalation from 'pilot sees wrong data' (an automatic incident) to that owner. Circulate the N5 templates to everyone on the rota.",
    "why": "The 72-hour clock runs from awareness, and awareness in launch week happens at 2am.",
    "area": "Launch",
-   "due": "2026-11-24",
+   "due": "2026-12-01",
    "priority": "P1",
    "priority_reason": "War room is live from 23 Nov; must be set before the 25 Nov dry run",
    "depends_on": [
@@ -18497,10 +18497,10 @@ window.LAUNCH_DATA = {
    "sprint": "LW",
    "assignee": "Filza",
    "title": "Run the launch-day sweep on production: links, labels, banner",
-   "what": "After the MVP-done smoke (Sat 28 Nov) and before any announcement: every footer and Settings legal link resolves to the final versions, AI labels are present on the gauge, alerts, health, Art-E and Discovery, the cookie banner gates scripts on production, the Discovery consent screen shows the signed text, unsubscribe works on the launch email, Companies Act particulars present. Written pass to the war room.",
+   "what": "After the MVP-done smoke (Sat 5 Dec) and before any announcement: every footer and Settings legal link resolves to the final versions, AI labels are present on the gauge, alerts, health, Art-E and Discovery, the cookie banner gates scripts on production, the Discovery consent screen shows the signed text, unsubscribe works on the launch email, Companies Act particulars present. Written pass to the war room.",
    "why": "The gate is smoked on production before announcing; the legal seat smokes its five things the same way.",
    "area": "Launch",
-   "due": "2026-11-30",
+   "due": "2026-12-07",
    "priority": "P0",
    "priority_reason": "Dated: before 08:00 on 1 Dec",
    "depends_on": [
@@ -18514,7 +18514,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "LW",
    "source": "plan",
-   "acceptance": "A dated production pass note covering links, labels, banner, consent screen and unsubscribe is posted to the war room before 08:00 on 1 Dec.",
+   "acceptance": "A dated production pass note covering links, labels, banner, consent screen and unsubscribe is posted to the war room before 08:00 on 8 Dec.",
    "checklist": [
     "Check legal links on production footer and Settings",
     "Check AI labels on every AI surface",
@@ -18530,7 +18530,7 @@ window.LAUNCH_DATA = {
    "what": "Read the frozen Product Hunt listing (tagline, gallery captions, maker comment), the waitlist queue email, the MVP-done post and any press lines against the firewall rulebook and the founding-pricing terms; confirm gallery images are demo-dataset renders, not pilot data, and testimonials carry permissions. Sign-off to Alex the night before.",
    "why": "The last Meta-adjacent thing that could go wrong, checked last; Product Hunt copy is public at 08:01 and cached forever.",
    "area": "Marketing",
-   "due": "2026-11-30",
+   "due": "2026-12-07",
    "priority": "P0",
    "priority_reason": "Dated: 08:01 on 1 Dec",
    "depends_on": [
@@ -18549,7 +18549,7 @@ window.LAUNCH_DATA = {
     "Read the listing, captions and maker comment against the rulebook",
     "Check pricing terms and scarcity wording",
     "Verify gallery sources and testimonial permissions",
-    "Sign off to Alex on 30 Nov"
+    "Sign off to Alex on 7 Dec"
    ]
   },
   {
@@ -18557,10 +18557,10 @@ window.LAUNCH_DATA = {
    "sprint": "LW",
    "assignee": "Filza",
    "title": "Open the 30-day legal-issue log for launch",
-   "what": "A single log owned by Filza, open from 1 Dec to 31 Dec: every DSAR, deletion request, consent complaint, takedown, Meta notice, pricing or terms question and AI-output complaint with date, owner, clock and outcome; reviewed at the daily war-room checkpoint and feeding the w/c 7 Dec retro and the December betting table.",
+   "what": "A single log owned by Filza, open from 8 Dec to 7 Jan: every DSAR, deletion request, consent complaint, takedown, Meta notice, pricing or terms question and AI-output complaint with date, owner, clock and outcome; reviewed at the daily war-room checkpoint and feeding the w/c 14 Dec retro and the December betting table.",
    "why": "Launch-week issues that are not logged become January surprises; the log is also the SOC2-later evidence.",
    "area": "Legal",
-   "due": "2026-11-30",
+   "due": "2026-12-07",
    "priority": "P2",
    "priority_reason": "Administrative; opened before doors, used after",
    "depends_on": [
@@ -18573,12 +18573,12 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "The log exists with columns and owners and is linked from the war-room board before 1 Dec.",
+   "acceptance": "The log exists with columns and owners and is linked from the war-room board before 8 Dec.",
    "checklist": [
     "Create the log with the issue types and clocks",
     "Link it from the war-room board",
     "Agree the daily checkpoint review with Saad",
-    "Schedule the 31 Dec close-out into the retro"
+    "Schedule the 7 Jan close-out into the retro"
    ]
   },
   {
@@ -18589,7 +18589,7 @@ window.LAUNCH_DATA = {
    "what": "Promote BL-PR-03 into the sprint: VAPID keypair in env (never the repo), subscribe/unsubscribe endpoints, and web push as a second delivery channel from the same alerts worker that sends SES email. Quiet hours respected identically.",
    "why": "Email open latency can exceed the 15-minute detection; push closes the alerts-to-phone promise before launch.",
    "area": "Alerts",
-   "due": "2026-11-03",
+   "due": "2026-11-10",
    "priority": "P1",
    "priority_reason": "the 15-minute promise is only as fast as its slowest channel",
    "depends_on": [
@@ -18616,7 +18616,7 @@ window.LAUNCH_DATA = {
    "what": "Opt-in prompt at the right moment (after first alert seen, never on first load), a toggle in Settings alongside the alert rules, and honest iOS copy: push needs add-to-home-screen on iPhone. Wire to Muteeb's subscribe endpoints.",
    "why": "Push without a respectful opt-in is a permission users deny once and never grant again.",
    "area": "Alerts",
-   "due": "2026-11-06",
+   "due": "2026-11-13",
    "priority": "P1",
    "priority_reason": "pairs with N5-MT-18; both land before the 6 Nov gate",
    "depends_on": [
@@ -18642,7 +18642,7 @@ window.LAUNCH_DATA = {
    "what": "Write the Playwright specs for two missing end-to-end flows: (6) Discovery opt-in through to matches shown with the why-this-match note, (7) Health score, Pages view and the four Analytics KPI tiles reconciling against known warehouse values for the test tenant. Asad's nightly suite runs them.",
    "why": "Discovery, Health, Best Times and Wins currently have no E2E flow - per-piece acceptance only.",
    "area": "QA",
-   "due": "2026-11-04",
+   "due": "2026-11-11",
    "priority": "P1",
    "priority_reason": "closes the two biggest E2E coverage holes before UAT wave 1 findings land",
    "depends_on": [
@@ -18669,7 +18669,7 @@ window.LAUNCH_DATA = {
    "what": "Re-run the checks from the N4-SD-05 audit against the fixes Asad shipped in N5-AS-04. Verify each previously failing item now passes; file anything still failing as a blocker.",
    "why": "An audit that is fixed but never re-checked is a guess, not a state.",
    "area": "QA",
-   "due": "2026-11-17",
+   "due": "2026-11-24",
    "priority": "P2",
    "priority_reason": "fits between bug bash #2 and full UAT",
    "depends_on": [
@@ -18695,7 +18695,7 @@ window.LAUNCH_DATA = {
    "what": "Prove the Today briefing aggregates (N3-MT-07) reconcile exactly with the warehouse for one pilot page - same discipline as the analytics reconcile. If N4-AS-13 (the briefing card) is cut, this closes with a note and the feature gate clause is descoped in writing.",
    "why": "The Today gate says 'briefing numbers reconcile' and nothing currently proves it.",
    "area": "QA",
-   "due": "2026-10-21",
+   "due": "2026-10-28",
    "priority": "P1",
    "priority_reason": "a feature gate clause with no proving ticket",
    "depends_on": [
@@ -19965,10 +19965,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Saad",
    "title": "Art-E UAT script: scripted questions per pilot for the UAT waves",
-   "what": "Add an Art-E section to the UAT protocol: five scripted questions per pilot from the golden set asked on their own page, one must-refuse and one thin-data question, and comprehension checks on citation chips, the AI label and the freshness stamp. Rehearse it in the 23 Oct dry-run (N4-SD-07).",
+   "what": "Add an Art-E section to the UAT protocol: five scripted questions per pilot from the golden set asked on their own page, one must-refuse and one thin-data question, and comprehension checks on citation chips, the AI label and the freshness stamp. Rehearse it in the 30 Oct dry-run (N4-SD-07).",
    "why": "UAT tests every surface by script, but no protocol line makes pilots exercise Art-E answers, refusals and citations; the go/no-go needs pilot evidence, not only the nightly regression.",
    "area": "Art-E",
-   "due": "2026-10-21",
+   "due": "2026-10-28",
    "priority": "P1",
    "priority_reason": "arte plan 3 Sep",
    "depends_on": [
@@ -19990,7 +19990,7 @@ window.LAUNCH_DATA = {
    "what": "On staging, block the model vendor at every cascade tier and the embedding endpoint at once; verify the rail renders the degraded state from Saad's matrix rather than a raw error, the breaker and alarms behave, queued asks recover cleanly, and the T1 degrade switch works as the manual override.",
    "why": "N3-MT-09 tests a frontier-tier failure only; a full vendor outage during launch week is the likeliest Art-E incident and its end-to-end behaviour has never been rehearsed.",
    "area": "Art-E",
-   "due": "2026-11-04",
+   "due": "2026-11-11",
    "priority": "P1",
    "priority_reason": "arte plan 3 Sep",
    "depends_on": [
@@ -20001,7 +20001,7 @@ window.LAUNCH_DATA = {
    "feeds": [],
    "gate": "none",
    "source": "arte plan 3 Sep",
-   "acceptance": "A recorded drill shows the full-outage state on the rail and clean recovery with no lost or double-billed asks, and the writeup is evidence at the 6 Nov readiness review.",
+   "acceptance": "A recorded drill shows the full-outage state on the rail and clean recovery with no lost or double-billed asks, and the writeup is evidence at the 13 Nov readiness review.",
    "checklist": []
   },
   {
@@ -20009,10 +20009,10 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Faheem",
    "title": "Permutation calibration of the structural match signal before the blend freeze",
-   "what": "Run a degree-preserving permutation check on the structural similarity component at pilot-roster scale: compare empirical permutation p-values against the analytic ones the N3-MT-01 gate uses, record tail agreement, and file the verdict before Muteeb freezes the 80/20 blend on 7 Oct.",
+   "what": "Run a degree-preserving permutation check on the structural similarity component at pilot-roster scale: compare empirical permutation p-values against the analytic ones the N3-MT-01 gate uses, record tail agreement, and file the verdict before Muteeb freezes the 80/20 blend on 14 Oct.",
    "why": "The agreed design validates each blend component against its own permutation null; text similarity has one (N3-MT-06) but the structural side rests on an unchecked analytic null at n=20.",
    "area": "Discovery",
-   "due": "2026-10-05",
+   "due": "2026-10-12",
    "priority": "P1",
    "priority_reason": "discovery plan 3 Sep",
    "depends_on": [
@@ -20022,7 +20022,7 @@ window.LAUNCH_DATA = {
    "feeds": [],
    "gate": "none",
    "source": "discovery plan 3 Sep",
-   "acceptance": "A dated register entry compares empirical vs analytic p-value quantiles at pilot scale with a calibrated / not-calibrated verdict before 7 Oct; a miss re-opens the N3-MT-06 blend weights before the 9 Oct gate.",
+   "acceptance": "A dated register entry compares empirical vs analytic p-value quantiles at pilot scale with a calibrated / not-calibrated verdict before 14 Oct; a miss re-opens the N3-MT-06 blend weights before the 16 Oct gate.",
    "checklist": []
   },
   {
@@ -20030,10 +20030,10 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Saad",
    "title": "Add a Discovery matching-quality scenario to the UAT protocol",
-   "what": "Extend the N3-SD-02 protocol before the 23 Oct dry-run: opt-in consent comprehension, reading a reason string and both badges in plain terms, a matching-quality judgement ('would you actually contact this page?'), and the below-floor empty state; fold it into the wave-1 script.",
+   "what": "Extend the N3-SD-02 protocol before the 30 Oct dry-run: opt-in consent comprehension, reading a reason string and both badges in plain terms, a matching-quality judgement ('would you actually contact this page?'), and the below-floor empty state; fold it into the wave-1 script.",
    "why": "The UAT protocol has comprehension tasks per surface but nothing where a pilot judges matching quality or walks the consent flow; UAT would otherwise skip Discovery entirely.",
    "area": "Discovery",
-   "due": "2026-10-21",
+   "due": "2026-10-28",
    "priority": "P1",
    "priority_reason": "discovery plan 3 Sep",
    "depends_on": [
@@ -20478,10 +20478,10 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Saad",
    "title": "Mockup handoff scoreboard: tick each pack as it ships",
-   "what": "The single place to mark mockup progress - one checkbox per pack, ticked when that pack is delivered with its Loom and states. Feeds the Overview widget everyone watches. Complete handoff is 10 Sep; the N1 gate reads from here.",
+   "what": "The single place to mark mockup progress - one checkbox per pack, ticked when that pack is delivered with its Loom and states. Feeds the Overview widget everyone watches. Complete handoff is 17 Sep; the N1 gate reads from here.",
    "why": "The whole front-end build queues behind these packs; the team needs one glanceable answer to are the mockups done.",
    "area": "Design",
-   "due": "2026-09-10",
+   "due": "2026-09-17",
    "priority": "P0",
    "priority_reason": "the front-end build cannot start without the packs",
    "depends_on": [
@@ -20495,20 +20495,20 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "founder ask 3 Sep",
-   "acceptance": "All ten boxes ticked by 10 Sep, each within a day of the pack actually landing.",
+   "acceptance": "All ten boxes ticked by 17 Sep, each within a day of the pack actually landing.",
    "checklist": [
-    "Discovery pack (due 5 Sep)",
-    "Today pack (~8 Sep)",
-    "Drafts / Studio pack (~8 Sep)",
-    "Alerts pack (by 10 Sep)",
-    "Best Times pack (by 10 Sep)",
-    "Analytics thin pack (by 10 Sep)",
-    "Art-E rail pack (by 10 Sep)",
-    "Settings pack (by 10 Sep)",
-    "Wins-lite pack (by 10 Sep)",
-    "Pages + workspace switcher pack (by 10 Sep)",
-    "Connect + consent flow pack (by 10 Sep)",
-    "Shell + system prompts addendum (by 10 Sep)"
+    "Discovery pack (due 12 Sep)",
+    "Today pack (~15 Sep)",
+    "Drafts / Studio pack (~15 Sep)",
+    "Alerts pack (by 17 Sep)",
+    "Best Times pack (by 17 Sep)",
+    "Analytics thin pack (by 17 Sep)",
+    "Art-E rail pack (by 17 Sep)",
+    "Settings pack (by 17 Sep)",
+    "Wins-lite pack (by 17 Sep)",
+    "Pages + workspace switcher pack (by 17 Sep)",
+    "Connect + consent flow pack (by 17 Sep)",
+    "Shell + system prompts addendum (by 17 Sep)"
    ]
   },
   {
@@ -20519,7 +20519,7 @@ window.LAUNCH_DATA = {
    "what": "Write the Playwright spec for the missing Best Times flow: thin test page shows suppressed cells, the 'not enough posts yet' state and the methodology note; a full page shows the ringed #1 window in its IANA timezone; the N3-MT-04 floor flag asserted. Runs in Asad's nightly suite beside flows 6-7.",
    "why": "Best Times is the only intelligence surface with no E2E; the gate's count-floor clause has no proving run - N2-SD-09 wrote acceptance but nothing executes it.",
    "area": "Best Times",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P1",
    "priority_reason": "coverage + red-team audit 3 Sep",
    "depends_on": [
@@ -20539,10 +20539,10 @@ window.LAUNCH_DATA = {
    "sprint": "N6",
    "assignee": "Faheem",
    "title": "Wins-lite screen-vs-ledger check before the feature freeze",
-   "what": "On the dogfood tenant, compare every number on the Wins screen (value band, Art-E scoreboard) row-for-row against the outcome ledger (N3-FH-04) and N4-MT-08 endpoints; file the diff by 12 Nov. Front-loads N6-FH-05 so the gate has evidence pre-freeze; any mismatch becomes a pre-freeze fix.",
-   "why": "The wins gate's only proof (N6-FH-05, 19 Nov) lands after the 13 Nov feature freeze; nothing proves 'every number traces to the ledger' beforehand.",
+   "what": "On the dogfood tenant, compare every number on the Wins screen (value band, Art-E scoreboard) row-for-row against the outcome ledger (N3-FH-04) and N4-MT-08 endpoints; file the diff by 19 Nov. Front-loads N6-FH-05 so the gate has evidence pre-freeze; any mismatch becomes a pre-freeze fix.",
+   "why": "The wins gate's only proof (N6-FH-05, 26 Nov) lands after the 20 Nov feature freeze; nothing proves 'every number traces to the ledger' beforehand.",
    "area": "Wins",
-   "due": "2026-11-12",
+   "due": "2026-11-19",
    "priority": "P1",
    "priority_reason": "coverage + red-team audit 3 Sep",
    "depends_on": [
@@ -20554,7 +20554,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "coverage + red-team audit 3 Sep",
-   "acceptance": "Diff filed by 12 Nov with zero unexplained mismatches between the Wins screen and ledger queries for the dogfood tenant.",
+   "acceptance": "Diff filed by 19 Nov with zero unexplained mismatches between the Wins screen and ledger queries for the dogfood tenant.",
    "checklist": []
   },
   {
@@ -20565,7 +20565,7 @@ window.LAUNCH_DATA = {
    "what": "During UAT wave 1 (N5-SD-03/05), connect at least one fresh pilot page and capture funnel timestamps from N4-AS-14's events (connect -> ingest done -> the N2-SD-06 activation event), then file minutes-to-first-insight as the onboarding gate evidence, with Lewis covering the pilot side.",
    "why": "The onboarding gate reads 'measured in UAT', but N4-AS-14 and N5-MT-06 only measure staging tenants; no ticket produces the UAT measurement.",
    "area": "Onboarding",
-   "due": "2026-11-07",
+   "due": "2026-11-14",
    "priority": "P1",
    "priority_reason": "coverage + red-team audit 3 Sep",
    "depends_on": [
@@ -20586,7 +20586,7 @@ window.LAUNCH_DATA = {
    "what": "Record the operational DB (users, sessions, tokens, alert state) as a named engine in the stack decision; stand it up per env; wire a migration tool into CI and deploys: forward-only versioned migrations, tested down-path, seed data per env. No destructive migration after code freeze.",
    "why": "No ticket defines the app DB or owns schema change; unmanaged drift breaks rollback, restore drills and the freeze.",
    "area": "Platform",
-   "due": "2026-09-11",
+   "due": "2026-09-18",
    "priority": "P0",
    "priority_reason": "coverage + red-team audit 3 Sep",
    "depends_on": [
@@ -20610,7 +20610,7 @@ window.LAUNCH_DATA = {
    "what": "Stand up production from the same infrastructure definitions as staging (Netlify context, Fargate services, ALB with client-cert auth, SQS/DLQ, stores, secrets), same region. Produce a config parity diff of every env var, quota and setting, documenting intentional differences; re-run at code freeze.",
    "why": "Production only appears in N5+ smoke tickets; nothing creates it or stops staging/prod config drift before UAT and launch.",
    "area": "Platform",
-   "due": "2026-10-21",
+   "due": "2026-10-28",
    "priority": "P0",
    "priority_reason": "coverage + red-team audit 3 Sep",
    "depends_on": [
@@ -20635,7 +20635,7 @@ window.LAUNCH_DATA = {
    "what": "Audit apex+www redirects to one canonical host, DNS records under change control (incl. SES auth records), auto-renew on the Netlify cert and the ACM cert on the ALB, and expiry of internal client certs on the BFF-to-FastAPI path; add 30-day expiry alarms routed to paging; file the receipt.",
    "why": "No ticket owns DNS or cert renewal; an internal client cert or domain cert expiring launch week downs the stack with no code change.",
    "area": "Platform",
-   "due": "2026-11-05",
+   "due": "2026-11-12",
    "priority": "P1",
    "priority_reason": "coverage + red-team audit 3 Sep",
    "depends_on": [
@@ -20655,7 +20655,7 @@ window.LAUNCH_DATA = {
    "what": "Draft a welcome email sent when a batch-1 account is admitted, and a day-2 nudge for accounts that never connected a page, both pointing at the connect flow and support address, using Filza's PECR wording and the warmed send domain. Agree the send procedure with Muteeb (manual daily list acceptable). (Later-due mechanics N6-MT-10 are referenced, not blocking - this ticket only drafts and rehearses.)",
    "why": "BL-LA-01 is unowned backlog; a batch-1 signup who stalls before connecting is never contacted and never activates, and admission-control expansion reads that activation floor.",
    "area": "Launch comms",
-   "due": "2026-11-13",
+   "due": "2026-11-20",
    "priority": "P1",
    "priority_reason": "launch blindspot sweep 3 Sep",
    "depends_on": [
@@ -20676,7 +20676,7 @@ window.LAUNCH_DATA = {
    "what": "Playwright specs in the nightly suite: 9 Today feed + briefing card or hidden state; 10 connect -> first insight -> tour once -> activation event; 11 export + delete on a throwaway tenant; 12 waitlist signup/confirm/unsubscribe; 13 quiet-hours alert suppressed but logged + digest; 14 Wins screen equals ledger. (Later-landing inputs N5-AS-11 are consumed as they arrive, not blocking the spec work.)",
    "why": "Six features pass only one-off or manual checks; the proven pattern (Saad specs, N5-AS-06 runs nightly, LW smokes re-run) makes every gate provable through freeze.",
    "area": "QA",
-   "due": "2026-11-04",
+   "due": "2026-11-11",
    "priority": "P1",
    "priority_reason": "E2E + QA-dashboard audit 7 Sep",
    "depends_on": [
@@ -20692,7 +20692,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "E2E + QA-dashboard audit 7 Sep",
-   "acceptance": "All six specs green in the nightly suite before 13 Nov; flow 14 green within 48h of N5-AS-11 landing; failures page exactly like flows 1-8.",
+   "acceptance": "All six specs green in the nightly suite before 20 Nov; flow 14 green within 48h of N5-AS-11 landing; failures page exactly like flows 1-8.",
    "checklist": []
   },
   {
@@ -20703,7 +20703,7 @@ window.LAUNCH_DATA = {
    "what": "One consolidated view on the rebuilt QA dashboard (shared Custom tab): flop, comment sentiment/toxicity, crisis burst, best-times and Art-E each get a healthy/watch/slipping row computed from rules already shipping (drift trips, nightly regression, freshness, serving panels), each row linking to its trip action.",
    "why": "The S9 watchdog shipped model-side only (P0-FH-27) and the visible-board claim was removed; no launch ticket rebuilds it, so model quality is alerted but never visible on one view.",
    "area": "model-qa",
-   "due": "2026-10-24",
+   "due": "2026-10-31",
    "priority": "P1",
    "priority_reason": "E2E + QA-dashboard audit 7 Sep",
    "depends_on": [
