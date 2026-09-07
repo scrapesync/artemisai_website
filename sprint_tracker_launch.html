@@ -516,6 +516,9 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .fshl{font-size:10.5px;color:var(--muted2);font-family:'IBM Plex Mono',monospace;white-space:nowrap}
 @media (max-width:760px){ .mkshotw{flex-direction:column} .mkshot{width:100%;max-width:100%} .fsh{grid-template-columns:1fr;gap:3px} .fshl{white-space:normal} }
 .mkhint{font-size:11px;color:var(--gold);opacity:.85}
+.outp{background:rgba(217,164,65,.06);border-left:2px solid var(--gold);border-radius:0 8px 8px 0;padding:8px 12px;margin:10px 0}
+.outp h4{color:var(--gold);margin-top:0}
+.outp p{margin:0}
 </style>
 </head><body>
 
@@ -1060,6 +1063,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       (t.layman_output?'<h4>What you\u2019ll see when it\u2019s done</h4><p>'+esc(t.layman_output)+'</p>':'')+
       '<p style="margin-top:8px">'+layShare(t)+'</p></div>'+
       '<h4>What</h4><p>'+esc(t.what)+'</p><h4>Why</h4><p>'+esc(t.why)+'</p><h4>Done when</h4><p>'+esc(t.acceptance)+'</p>'+
+      (t.layman_output?'<div class="outp"><h4>Expected output &middot; in plain english</h4><p>'+esc(t.layman_output)+'</p></div>':'')+
       '<h4>Priority</h4><p><span class="pr '+t.priority+'">'+t.priority+'</span> '+esc(t.priority_reason)+'</p>'+
       '<h4>Depends on</h4><p>'+((t.depends_on||[]).length?t.depends_on.map(function(d){return '<span class="tag">'+esc(d)+'</span>';}).join(''):'<span class="tag">nothing</span>')+'</p>'+
       '<h4>Feeds</h4><p>'+((t.feeds||[]).length?t.feeds.map(function(d){return '<span class="tag">'+esc(d)+'</span>';}).join(''):'<span class="tag">-</span>')+'</p>'+
