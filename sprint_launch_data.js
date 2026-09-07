@@ -1,4 +1,4 @@
-// sprint_launch_data.js - regenerated 7 Sep 2026: calendar +7, Saad delivers all mockups by 10 Sep, design chain + dependents pulled forward.
+// sprint_launch_data.js - regenerated 7 Sep 2026: plain-English layman line on every ticket and backlog row.
 window.LAUNCH_DATA = {
  "generated_at": "2026-09-03",
  "layers": [
@@ -147,7 +147,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Parked for after launch: a simple internal screen where we can look up any customer, see their status, and view the app as they see it - so support can answer 'my data looks wrong' in minutes."
   },
   {
    "id": "BL-PR-02",
@@ -166,7 +167,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For after launch: click any post in the table and a panel opens explaining its score - what helped, what hurt, how comments felt, timing - so every number we show can be backed up."
   },
   {
    "id": "BL-LA-01",
@@ -185,7 +187,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Post-launch: automatic emails that welcome new customers, nudge them to their first useful moment, and win back the ones going quiet - keeping people engaged at almost no cost."
   },
   {
    "id": "BL-PR-03",
@@ -205,7 +208,8 @@ window.LAUNCH_DATA = {
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
    "checklist": [],
-   "promoted": "Promoted into N5 on 3 Sep as N5-MT-18 (service, Muteeb) + N5-AS-19 (app, Asad)."
+   "promoted": "Promoted into N5 on 3 Sep as N5-MT-18 (service, Muteeb) + N5-AS-19 (app, Asad).",
+   "layman": "After launch: alerts sent straight to your phone's lock screen as well as email, because an email can sit unread far longer than the 15 minutes it took us to spot the problem."
   },
   {
    "id": "BL-LA-02",
@@ -224,7 +228,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Parked for later: a public help site with how-to guides and answers to the 20 most common questions, so customers help themselves and buyers see a polished, trustworthy product."
   },
   {
    "id": "BL-PR-04",
@@ -243,7 +248,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "After launch: one in-app inbox for all your alerts, with the option to snooze or mute noisy ones - so warnings stay useful instead of becoming background noise people ignore."
   },
   {
    "id": "BL-PR-05",
@@ -262,7 +268,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For later: a quick 'how likely are you to recommend us?' survey plus a 'what's new' pop-up listing recent improvements - early warning of unhappy customers and visible proof we're shipping."
   },
   {
    "id": "BL-IN-01",
@@ -281,7 +288,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Post-launch: a health score for each paying customer based on how much they actually use the product, turning Lewis's manual check-ins into an automatic early warning before a renewal is at risk."
   },
   {
    "id": "BL-IN-02",
@@ -300,7 +308,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "After launch: an internal dashboard showing our data-processing jobs, with buttons to rerun anything that failed - so fixing a hiccup no longer means Muteeb typing database commands by hand."
   },
   {
    "id": "BL-PR-06",
@@ -319,7 +328,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For later: publish our accessibility statement (proof the app works for people with disabilities) and add small on-screen tips where users get stuck - ticks a buyer checkbox and helps new users settle in."
   },
   {
    "id": "BL-LL-01",
@@ -338,7 +348,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "After launch: automatic weekly and monthly reports as polished PDFs, replacing the ones we currently write by hand - the feature agencies pay for, minus the labour."
   },
   {
    "id": "BL-PR-07",
@@ -357,7 +368,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Post-launch: finish the Wins screen - set a goal, track it, and see a plain-English tally of what Artemis earned you - the proof-of-value page that wins renewals."
   },
   {
    "id": "BL-IN-03",
@@ -376,7 +388,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "After launch: deeper analytics - separate views for photos and videos, comparisons against similar pages ('is 72 actually good?'), date-range comparisons, and post-mortems on why a post worked."
   },
   {
    "id": "BL-IN-04",
@@ -395,7 +408,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For later: a chart tracking how nasty comments are trending, plus a single strategy score next to the health score - simple numbers an executive gets at a glance, and a brand-safety selling point."
   },
   {
    "id": "BL-PR-08",
@@ -414,7 +428,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "After launch: swipeable story-style insight cards and celebration banners for milestones ('you hit 10k followers') - the fun, phone-friendly touches the original designs promised."
   },
   {
    "id": "BL-LA-03",
@@ -433,7 +448,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Post-launch: deliver alerts into Slack or Microsoft Teams channels, so warnings land where the whole team already works instead of one person's inbox."
   },
   {
    "id": "BL-IN-05",
@@ -452,7 +468,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For later: automatically spot your most loyal commenters and supporters, so page owners know who their biggest fans are and can nurture them."
   },
   {
    "id": "BL-PR-09",
@@ -471,7 +488,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "After launch: pin your favourite insights and share any chart with a secure link (with a record of who opened it) - so a finding can travel round a customer's company and sell us internally."
   },
   {
    "id": "BL-LA-04",
@@ -490,7 +508,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Post-launch: a try-before-you-buy demo filled with sample data, demo requests flowing into our sales tracker, and measurement of which marketing channels actually bring customers."
   },
   {
    "id": "BL-LA-05",
@@ -509,7 +528,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For later: published customer success stories and a public 'what we're building next' board - social proof for buyers and a way for customers to shape the roadmap."
   },
   {
    "id": "BL-LA-06",
@@ -528,7 +548,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Parked pending trial results: turn our LinkedIn outreach experiment into a weekly ranked list of the best people to invite, with tracked results - steady, compliant growth using the same matching ideas behind the product."
   },
   {
    "id": "BL-PR-10",
@@ -547,7 +568,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "After launch: automatic robot checks on every code change - catching visual glitches, accessibility problems, and security holes - so one developer can keep shipping fast without quality slipping."
   },
   {
    "id": "BL-PR-11",
@@ -566,7 +588,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Post-launch: let customers pipe our alerts into their own systems, watch any number they choose, get automatic flags on odd changes, and schedule digest summaries - power features that keep big users loyal."
   },
   {
    "id": "BL-IN-06",
@@ -585,7 +608,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For later: show exactly why we suggested a collaboration partner (a score per factor), plus fast in-app search and a keyboard shortcut menu - making suggestions believable and power users quicker."
   },
   {
    "id": "BL-LA-07",
@@ -604,7 +628,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "After launch: one bundle of grown-up paperwork and controls - activity logs, consent settings, admin permission levels, and the policies big buyers ask for - clearing the path to bigger contracts."
   },
   {
    "id": "BL-IN-07",
@@ -623,7 +648,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Post-launch: an internal screen for reviewing how well our AI labels comments, feeding mistakes back in so the models keep improving - restarting quality improvement after the pre-launch freeze."
   },
   {
    "id": "BL-IN-08",
@@ -642,7 +668,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For later: beef up the database as customer numbers grow, and add a 'report this page' button with community guidelines - the safety basics needed before any social features open up."
   },
   {
    "id": "BL-IN-09",
@@ -661,7 +688,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Big post-launch bet (2027): the full collaboration engine - mapping how pages relate to each other, tracking how collaborations actually performed, and a swipe-style deck of suggested partners. The long-term edge competitors can't copy."
   },
   {
    "id": "BL-IN-10",
@@ -680,7 +708,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For 2027: tell page owners who their audience actually is - groupings, demographics, and warnings when followers are losing interest. The most-requested insight, planned as a premium feature after a privacy review."
   },
   {
    "id": "BL-LL-02",
@@ -699,7 +728,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For 2027: a smarter Art-E assistant that speaks up on its own with useful findings, handles multi-step requests, and shows its working - plus running it on our own models to cut AI costs roughly ten-fold."
   },
   {
    "id": "BL-IN-11",
@@ -718,7 +748,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For 2027: top-tier analytics - live visitor counters, build-your-own executive dashboards, how you compare against rivals, and side-by-side views across several pages. Built for agencies and bigger clients."
   },
   {
    "id": "BL-LA-08",
@@ -737,7 +768,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For 2027: alerts on WhatsApp and SMS too, with the ability to assign a warning to a teammate - so the 15-minute warning reaches every pocket and someone always owns the response."
   },
   {
    "id": "BL-LA-09",
@@ -756,7 +788,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For 2027: customers pay by card and manage their own subscription online - trials, plans, tax and failed-payment chasing all automatic. Manual invoicing only stretches to about 20 customers."
   },
   {
    "id": "BL-LA-10",
@@ -775,7 +808,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For 2027: invite teammates, manage several pages in one workspace, and control who can do what - opening up the agency market, where one customer manages many pages."
   },
   {
    "id": "BL-LA-11",
@@ -794,7 +828,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For 2027: a public way for other software to plug into ArtemisAI, with documentation and a marketplace of ready-made connections - the stickiness that makes leaving hard."
   },
   {
    "id": "BL-LA-12",
@@ -813,7 +848,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For 2027: the heavyweight trust work big companies demand - an independent security certification, backup systems in several regions, and stress-testing at 1,000 customers - unlocking larger contracts."
   },
   {
    "id": "BL-LA-13",
@@ -832,7 +868,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "roadmap",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "For 2027: growth extras - rewards for referring friends, streaks that build a daily habit, other languages, and a blog that helps people find us on Google - once the core habit is proven."
   },
   {
    "id": "BL-IN-12",
@@ -853,7 +890,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "reconciler",
    "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "After launch: keep every version of the instructions we give our AI on record, compare old and new side by side, and trial changes quietly before switching everyone over - so a quiet tweak can never silently break results again."
   },
   {
    "id": "BL-APP-01",
@@ -872,7 +910,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "build book 3 Sep",
    "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-   "checklist": []
+   "checklist": [],
+   "layman": "Parked for January: open the official Apple and Google developer accounts and keep the signing keys safely in ops hands, the paperwork step before any phone app can ship."
   },
   {
    "id": "BL-APP-02",
@@ -893,7 +932,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "build book 3 Sep",
    "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-   "checklist": []
+   "checklist": [],
+   "layman": "Parked for January: wrap the finished web app in a thin shell so it installs from the App Store and Play Store - same product, no second codebase."
   },
   {
    "id": "BL-APP-03",
@@ -914,7 +954,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "build book 3 Sep",
    "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-   "checklist": []
+   "checklist": [],
+   "layman": "Parked for January: make crisis alerts arrive as real phone notifications through Apple and Google, using the same alarm system and quiet hours as email."
   },
   {
    "id": "BL-APP-04",
@@ -935,7 +976,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "build book 3 Sep",
    "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-   "checklist": []
+   "checklist": [],
+   "layman": "Parked for January: the app-store face - icon, splash screen, screenshots and listing text, all from demo data and approved wording."
   },
   {
    "id": "BL-APP-05",
@@ -956,7 +998,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "build book 3 Sep",
    "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-   "checklist": []
+   "checklist": [],
+   "layman": "Parked for January: fill in Apple and Google privacy forms straight from our signed data agreement, so the store filings and legal papers never disagree."
   },
   {
    "id": "BL-APP-06",
@@ -977,7 +1020,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "build book 3 Sep",
    "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-   "checklist": []
+   "checklist": [],
+   "layman": "Parked for January: put the store builds on real pilot phones and run one crisis alert end to end on a handset before the public release."
   },
   {
    "id": "BL-APP-07",
@@ -998,7 +1042,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "build book 3 Sep",
    "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-   "checklist": []
+   "checklist": [],
+   "layman": "Parked for January: submit to both app stores with a written release-and-rollback plan, including the case for why our app is more than a website in a wrapper."
   },
   {
    "id": "BL-LL-21",
@@ -1021,7 +1066,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "arte plan 3 Sep",
    "acceptance": "First post-launch cycle complete by 18 Dec: one review held, any change shipped via the registry with regression green, and the first monthly report filed.",
-   "checklist": []
+   "checklist": [],
+   "layman": "After launch: give someone clear ownership of keeping Art-E honest - weekly reviews of real conversations, careful testing before any change, and a monthly quality-and-cost report to Alex - so answer quality never quietly drifts."
   },
   {
    "id": "BL-LL-22",
@@ -1040,7 +1086,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "WhatsApp General Lobby 20 Jul (mined 3 Sep)",
    "acceptance": "A comparison doc with a recommendation, or a written decision to stay put.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Post-launch: shop around for cheaper AI suppliers for our two biggest AI bills, comparing cost and quality - with a hard rule that no supplier may train on customer data. An open CEO request finally on the board."
   },
   {
    "id": "BL-LA-14",
@@ -1059,7 +1106,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "WhatsApp General Lobby 26 Jul (mined 3 Sep)",
    "acceptance": "A shortlist with contact status, or a written decision to defer.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Post-launch: start scouting partner companies that could supply Instagram data, building on our Facebook pilot contacts - the CEO named this a priority and it now finally has an owner and a slot."
   },
   {
    "id": "BL-PR-12",
@@ -1078,7 +1126,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "old-mockup diff 7 Sep",
    "acceptance": "Scheduled with an owner at a betting table, or dropped with a written reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Parked until Facebook approves the extra permission: an inbox for pages to message each other, with Art-E suggesting replies. Recorded so dropping it from launch was a decision, not an accident."
   },
   {
    "id": "BL-PR-13",
@@ -1097,7 +1146,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "old-mockup diff 7 Sep",
    "acceptance": "Scheduled with an owner at a betting table, or dropped with a written reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Parked until Facebook grants publishing permission: upgrade today's 'remind me to post' feature into genuine scheduling that posts for you. Deliberately trimmed for launch; this brings it back on purpose."
   },
   {
    "id": "BL-IN-13",
@@ -1116,7 +1166,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "old-mockup diff 7 Sep",
    "acceptance": "Scheduled with an owner at a betting table, or dropped with a written reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "After launch: cards forecasting your likely reach and engagement over the next week and month, with an honest range of uncertainty - the look-ahead the original designs promised but launch doesn't show."
   },
   {
    "id": "BL-IN-14",
@@ -1135,7 +1186,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "old-mockup diff 7 Sep",
    "acceptance": "Scheduled with an owner at a betting table, or dropped with a written reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Post-launch: a chart showing the mix of feelings in your comments (joy, anger, and so on) over time. The analysis already runs behind the scenes; this finally puts it in front of customers, with the approved wording."
   },
   {
    "id": "BL-LL-23",
@@ -1154,7 +1206,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "old-mockup diff 7 Sep",
    "acceptance": "Scheduled with an owner at a betting table, or dropped with a written reason.",
-   "checklist": []
+   "checklist": [],
+   "layman": "After launch: switch on the microphone button in Art-E so you can ask questions out loud instead of typing. The button exists at launch but is deliberately inactive until this work."
   }
  ],
  "features": [
@@ -2229,7 +2282,8 @@ window.LAUNCH_DATA = {
     "Choose the clause form: must-catch-N of Lewis's incidents or a coverage %",
     "Write the wording; leave the numeric line as 'set in N2 from the measurement'",
     "Update the tracker and Checklist 3; tell Lewis what the complete window must contain"
-   ]
+   ],
+   "layman": "We're rewording the promise behind our comment-storm alarm so it commits to both accuracy and catching a minimum number of real incidents, so pilots know exactly what the alarm guarantees."
   },
   {
    "id": "N1-AS-03",
@@ -2256,7 +2310,8 @@ window.LAUNCH_DATA = {
     "Name the E2E runner and the KPI-events sink",
     "Commit to docs/ with both signatures and the no-change clause",
     "Lovable-is-a-design-tool line signed by Saad + Muteeb"
-   ]
+   ],
+   "layman": "Asad and Muteeb sit down and pick the core technology we build on, write it down and sign it, because it's a choice that's very costly to reverse later."
   },
   {
    "id": "N1-AS-04",
@@ -2286,7 +2341,8 @@ window.LAUNCH_DATA = {
     "State page_id-on-every-query and per-page token as rules",
     "Agree the RLS key (tenant claim) with Muteeb",
     "Record the decision in the plan errata and the contract"
-   ]
+   ],
+   "layman": "We put in writing how one customer account can own several Facebook pages, and how every piece of data stays tied to its page, so customers with multiple pages work safely from day one."
   },
   {
    "id": "N1-AS-05",
@@ -2326,7 +2382,8 @@ window.LAUNCH_DATA = {
     "Specify draft-score: score, band, drivers[], confidence/coverage flag",
     "Specify unread counts, health, briefing, alerts, rules, best-times shapes",
     "Sign, commit, record owner and live-vs-mock per route for N2"
-   ]
+   ],
+   "layman": "Asad and Muteeb agree and sign the exact way the app's screens talk to its data, so both can build their halves in parallel without surprises when they meet in the middle."
   },
   {
    "id": "N1-AS-06",
@@ -2354,7 +2411,8 @@ window.LAUNCH_DATA = {
     "grep the site for any remaining 'November' launch string",
     "Deploy and verify on production",
     "Tell Alex/Saad it is live for the marketing calendar"
-   ]
+   ],
+   "layman": "Fix the launch date shown on the public website in all three spots so it says 1 December, so visitors and pilots aren't given a date we can't hit."
   },
   {
    "id": "N1-AS-07",
@@ -2383,7 +2441,8 @@ window.LAUNCH_DATA = {
     "Check states, mobile variants and token compliance per pack",
     "Confirm bands + abstain in Drafts and Remind-me in Today",
     "Log flags and resolutions in the decision log"
-   ]
+   ],
+   "layman": "A daily half-hour where Asad reviews Saad's design files and flags anything that can't actually be built, so problems surface before building starts rather than mid-build."
   },
   {
    "id": "N1-AS-08",
@@ -2413,7 +2472,8 @@ window.LAUNCH_DATA = {
     "Approve the Meta narrative wording",
     "Adopt and circulate the must-NOT-do list with owners",
     "Log any pre-10-Sep exception"
-   ]
+   ],
+   "layman": "Asad clears his founder to-dos (sign-offs, the Meta story, a list of things not to do) and deliberately writes no app code before 17 Sep, so building starts on a clean, decided foundation."
   },
   {
    "id": "N1-AS-09",
@@ -2442,7 +2502,8 @@ window.LAUNCH_DATA = {
     "Remove captureRequest + debug dump; delete the mcp-debug store",
     "Remove the path-segment key match; keep header auth",
     "Redeploy and probe both paths on production"
-   ]
+   ],
+   "layman": "Asad double-checks three security clean-ups on the live site: keys changed, a leftover debugging trap removed, and secret keys no longer visible in web addresses, so nobody can sneak in."
   },
   {
    "id": "N1-AS-10",
@@ -2471,7 +2532,8 @@ window.LAUNCH_DATA = {
     "Walk the narrative doc and the dashboard settings",
     "Record backup status and notes with the package",
     "Diary the second pass for 1 Oct"
-   ]
+   ],
+   "layman": "Saad walks Asad through everything needed to deal with Facebook/Meta (logins, contacts, prepared replies), so the company isn't stuck if Saad is unavailable."
   },
   {
    "id": "N1-AS-11",
@@ -2503,7 +2565,8 @@ window.LAUNCH_DATA = {
     "Wire the Privacy v1 link and cookie banner",
     "Keep the pilot-waitlist form submitting to Netlify Forms",
     "Preview review by Alex/Saad, then deploy Fri 19 Sep"
-   ]
+   ],
+   "layman": "Put the newly designed public website live, with the correct launch date, a privacy policy, a cookie notice and the pilot sign-up form still working, so we look credible to visitors."
   },
   {
    "id": "N1-AS-12",
@@ -2539,7 +2602,8 @@ window.LAUNCH_DATA = {
     "Build card, chip, gauge, toast primitives only",
     "Publish /kitchen-sink on staging",
     "Hand the library and its conventions to Saad on 21 Sep"
-   ]
+   ],
+   "layman": "Build a shared kit of reusable building blocks (buttons, colours, text styles) taken straight from the designs, so every screen we build afterwards looks consistent and goes faster."
   },
   {
    "id": "N1-AS-13",
@@ -2568,7 +2632,8 @@ window.LAUNCH_DATA = {
     "Write the replacement lines",
     "Link errata from plan and tracker",
     "Notify the team"
-   ]
+   ],
+   "layman": "Publish a short 'corrections' page listing what has changed since the original plan was written, so anyone reading the plan sees the current truth, not stale promises."
   },
   {
    "id": "N1-AS-14",
@@ -2605,7 +2670,8 @@ window.LAUNCH_DATA = {
     "Record the polling decision and the Art-E SSE budget",
     "Get Muteeb's and Faheem's sign-off in the 11 Sep co-sign"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "A one-page map saying which person owns each part of the app's data connections, plus a rule keeping those connections simple, so nothing falls between two stools."
   },
   {
    "id": "N1-AS-15",
@@ -2643,7 +2709,8 @@ window.LAUNCH_DATA = {
     "Define rate-limit headers and the cost-attribution fields",
     "Commit as shared components and tell Muteeb, Faheem and Saad"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Agree house rules for how the app reports errors, handles long lists and stays safe to retry, written once and reused everywhere, so every part of the product behaves the same way."
   },
   {
    "id": "N1-AS-16",
@@ -2677,7 +2744,8 @@ window.LAUNCH_DATA = {
     "Write the assumption set explicitly, including the region",
     "Hand it to Jill for the 2 Oct model and file it for the N4 re-cost"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Work out one clear number: what it costs us to serve one Facebook page for a month (AI bill aside), at pilot size and at 100 pages, so we can price sensibly and talk to investors."
   },
   {
    "id": "N1-FH-01",
@@ -2703,7 +2771,8 @@ window.LAUNCH_DATA = {
     "Attach the 13-issue register in priority order",
     "Send to Muteeb and confirm receipt",
     "Mark done in the tracker"
-   ]
+   ],
+   "layman": "Faheem finished his health check of our data store and handed Muteeb a written verdict on every table plus a list of 13 known issues, so building starts with eyes open."
   },
   {
    "id": "N1-FH-02",
@@ -2728,7 +2797,8 @@ window.LAUNCH_DATA = {
     "Compute first-seen lag vs Facebook post time",
     "Log the number in the issue register",
     "Close #24"
-   ]
+   ],
+   "layman": "Record when Facebook posting came back after an outage and how quickly our collector notices new posts, so we know how fresh our data really is."
   },
   {
    "id": "N1-FH-03",
@@ -2756,7 +2826,8 @@ window.LAUNCH_DATA = {
     "Exclude it from hour-of-week baseline queries",
     "Note it in the flop definition and crisis doc",
     "Check late-July metrics for a second dip"
-   ]
+   ],
+   "layman": "Mark the late-August week when Facebook restricted us as an odd patch in the data, so none of our 'what's normal for this page' calculations are skewed by it."
   },
   {
    "id": "N1-FH-04",
@@ -2783,7 +2854,8 @@ window.LAUNCH_DATA = {
     "Measure disagreement rate by page and date",
     "Pick the canonical column and record why",
     "Flag or rename the unexplained set; update panels"
-   ]
+   ],
+   "layman": "We had two competing sets of comment mood labels; this settles which one is the official record and retires the other, so nobody builds on the wrong one."
   },
   {
    "id": "N1-FH-05",
@@ -2811,7 +2883,8 @@ window.LAUNCH_DATA = {
     "Label per rubric; record labeller + date",
     "Agreement vs FUSION/NEBULA labels",
     "Panel on the QA dashboard"
-   ]
+   ],
+   "layman": "Hand-check 100 real posts to create a trusted answer sheet, so we can measure honestly how good our automatic judgements are."
   },
   {
    "id": "N1-FH-06",
@@ -2837,7 +2910,8 @@ window.LAUNCH_DATA = {
     "Fix imports and paths; run training end to end",
     "Open a PR independent of PR #6",
     "Publish artifact path + loading snippet to Muteeb"
-   ]
+   ],
+   "layman": "Recover the training recipe for the post-performance predictor from an old side branch and make it run cleanly on the current code, so Muteeb can plug the model into the product."
   },
   {
    "id": "N1-FH-07",
@@ -2863,7 +2937,8 @@ window.LAUNCH_DATA = {
     "Backfill or confirm corrected",
     "Re-test findings that read page_posts; mark symptoms",
     "Note impact on the flop training set"
-   ]
+   ],
+   "layman": "Answer an open data-quality question in writing (were old post records corrected properly?) and update the issue list, so we know whether history can be trusted."
   },
   {
    "id": "N1-FH-08",
@@ -2893,7 +2968,8 @@ window.LAUNCH_DATA = {
     "Write the leak-audit note with the input feature list",
     "Export baseline comparison, Brier and precision-coverage with harness commit id",
     "File in the evidence folder and link from the QA dashboard"
-   ]
+   ],
+   "layman": "File the evidence behind our 'this post will flop' warning: the exact data used, the definition of a flop, and proof the test wasn't accidentally rigged, so the claim stands up to scrutiny."
   },
   {
    "id": "N1-FH-09",
@@ -2923,7 +2999,8 @@ window.LAUNCH_DATA = {
     "Compute typical-hour count per page and archetype",
     "Band pages and flag pilot pages",
     "Share with Asad + Lewis"
-   ]
+   ],
+   "layman": "Measure how many comments each page normally gets at each hour of the week over 8 weeks, so the comment-storm alarm knows what 'unusual' looks like per page."
   },
   {
    "id": "N1-FH-10",
@@ -2952,7 +3029,8 @@ window.LAUNCH_DATA = {
     "Agreement + confusion by category",
     "Decide the input labeller; log it",
     "Re-run harness if inputs changed"
-   ]
+   ],
+   "layman": "Compare two ways of judging post images against our hand-checked answer sheet and pick one, so the flop warning is built on the more trustworthy input."
   },
   {
    "id": "N1-FH-11",
@@ -2979,7 +3057,8 @@ window.LAUNCH_DATA = {
     "Route alerts; write trip actions",
     "Pause a job and confirm the alert fires",
     "Add the ingest tables — hourly page_posts and the KANG collection receipts — to the max-timestamp panel and alert inventory, not only model-output tables"
-   ]
+   ],
+   "layman": "Add automatic alarms that go off if the tables feeding our predictions stop updating, so we'd notice stale data before a customer sees a wrong warning."
   },
   {
    "id": "N1-FH-12",
@@ -3006,7 +3085,8 @@ window.LAUNCH_DATA = {
     "Define threshold + fallback behaviour",
     "Implement gate flag",
     "Panel + note for #17"
-   ]
+   ],
+   "layman": "Check the quality of one of our data feeds and add a safety net: if its quality drops below a set bar, we fall back to a safer answer instead of a bad one."
   },
   {
    "id": "N1-FH-15",
@@ -3034,7 +3114,8 @@ window.LAUNCH_DATA = {
     "Record complete-window bounds",
     "Join to comments/posts; add spiky-normal days",
     "Note n and the precision CI"
-   ]
+   ],
+   "layman": "Tidy Lewis's list of real past comment-storm incidents into a proper table joined to our data, so the next sprint can tune the alarm against real events, not guesses."
   },
   {
    "id": "N1-FH-16",
@@ -3062,7 +3143,8 @@ window.LAUNCH_DATA = {
     "Review inline-vs-queue placement against the budget",
     "Co-sign the design",
     "Carry the budget into N2-FH-09"
-   ]
+   ],
+   "layman": "Faheem reviews and signs Muteeb's plan for judging comments live as they arrive, including how many seconds each step may take, so the storm alarm truly fires within 15 minutes."
   },
   {
    "id": "N1-FH-17",
@@ -3089,7 +3171,8 @@ window.LAUNCH_DATA = {
     "Mark which fields exist today vs land with N2-FH-03 (drivers)",
     "Send to Asad + Muteeb before the co-sign; answer questions same day"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Faheem sends the exact fields the flop warning will return (score, band, reasons, confidence) in time for the signed agreement on how screens and data talk, so nothing is guessed."
   },
   {
    "id": "N1-FH-18",
@@ -3116,7 +3199,8 @@ window.LAUNCH_DATA = {
     "Emotion/arousal model list (shipped vs planned)",
     "Send to Filza; refresh the emotion line by 14 Oct"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Give Filza (legal) a full inventory of what data we process, why, and which outside suppliers touch it — including anything mood-related — so our privacy paperwork is accurate."
   },
   {
    "id": "N1-FH-19",
@@ -3153,7 +3237,8 @@ window.LAUNCH_DATA = {
     "Check the document in as a CI artifact",
     "Hand it to Muteeb and Asad on 16 Sep"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Publish the written description of the service that serves model answers and freeze the exact shape of those answers, so the rest of the app can rely on it not changing."
   },
   {
    "id": "N1-FH-20",
@@ -3184,7 +3269,8 @@ window.LAUNCH_DATA = {
     "Write the assumption set including retrain and embedding refresh",
     "Send to Asad and Jill"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Work out what each prediction costs us per thousand, per model, plus the monthly running cost of the data pipelines, with assumptions written down, so pricing rests on facts."
   },
   {
    "id": "N1-MT-01",
@@ -3210,7 +3296,8 @@ window.LAUNCH_DATA = {
     "Close PR #3 citing the attachment extraction already on main",
     "Label PR #6 parked-until-post-launch and note it in the repo README",
     "Confirm main builds clean after the closures"
-   ]
+   ],
+   "layman": "Tidy the code workspace on day one: close two stale proposed changes, shelve a third for after launch, so building starts from a clean slate with no clashes."
   },
   {
    "id": "N1-MT-02",
@@ -3242,7 +3329,8 @@ window.LAUNCH_DATA = {
     "Add the score response schema: score, bands, drivers[], confidence, coverage flag",
     "Add unread-count endpoints and the multi-page account/page model",
     "Commit both documents and link them from the repo README"
-   ]
+   ],
+   "layman": "Muteeb countersigns the technology choice and the agreement on how screens and data talk, with the security and multi-page details all present, so both builders share one blueprint."
   },
   {
    "id": "N1-MT-03",
@@ -3268,7 +3356,8 @@ window.LAUNCH_DATA = {
     "Publish SPF, DKIM (CNAME set) and DMARC records on the sending domain",
     "Send test mail to Gmail and Outlook and confirm authentication headers pass",
     "Hand the verified identity and daily send limits to Jill"
-   ]
+   ],
+   "layman": "Get our email sending fully approved and properly verified, so alert emails reliably reach customers' inboxes instead of landing in spam."
   },
   {
    "id": "N1-MT-04",
@@ -3299,7 +3388,8 @@ window.LAUNCH_DATA = {
     "Configure Netlify preview deploys and the permanent staging site",
     "Provision staging database and secrets separate from local dev",
     "Document the environment layout in the repo"
-   ]
+   ],
+   "layman": "Set up the workshop: every proposed change is automatically checked, previewable, and lands on a permanent rehearsal site, so quality is enforced by machinery, not memory."
   },
   {
    "id": "N1-MT-05",
@@ -3329,7 +3419,8 @@ window.LAUNCH_DATA = {
     "Implement the central client with error-class-aware backoff (auth errors surface for re-auth, rate-limit codes honour the budget, transient errors retry with jitter), retry caps and rate accounting",
     "Add structured logging with tenant tag and a request_id propagated BFF to FastAPI to worker, plus a PII scrub test",
     "Connect Sentry DSN and an uptime monitor to staging"
-   ]
+   ],
+   "layman": "One well-behaved doorway for all our calls to Facebook, plus logging that tags each customer without recording personal details, and alarms that ring when something breaks or the site goes down."
   },
   {
    "id": "N1-MT-06",
@@ -3362,7 +3453,8 @@ window.LAUNCH_DATA = {
     "Configure the vendor to inject the tenant claim into every JWT",
     "Generate the mock server from the OpenAPI stub in CI",
     "Write a short guide for Asad on switching mock to real per endpoint"
-   ]
+   ],
+   "layman": "Wire up the purchased login system so each sign-in is stamped with which customer it belongs to, and stand up a pretend data layer so screens can be built before the real one exists."
   },
   {
    "id": "N1-MT-07",
@@ -3393,7 +3485,8 @@ window.LAUNCH_DATA = {
     "Read the page's baseline from the warehouse, tenant-scoped",
     "Call the flop artifact and return score plus placeholder driver fields",
     "Deploy to staging and smoke it with a real page"
-   ]
+   ],
+   "layman": "The first working piece of the real service: send a draft post in, get a score back for your own page — and one customer's request for another customer's page is refused."
   },
   {
    "id": "N1-MT-08",
@@ -3422,7 +3515,8 @@ window.LAUNCH_DATA = {
     "Set the tenant GUC from the JWT on every request",
     "Write the cross-tenant leakage test and wire it into CI",
     "Document the rule: no table without a policy"
-   ]
+   ],
+   "layman": "Locks at the database level so each customer can only ever see their own rows, plus an automatic check that fails the build if a leak between customers ever becomes possible."
   },
   {
    "id": "N1-MT-09",
@@ -3453,7 +3547,8 @@ window.LAUNCH_DATA = {
     "Implement code exchange, proactive refresh and never-logged handling",
     "Wire revocation to the data-delete cascade with a test",
     "Build the bare test page proving login to connect to real data"
-   ]
+   ],
+   "layman": "Handle the keys Facebook gives us for each page properly: stored encrypted, refreshed on time, multiple pages supported, and if a customer disconnects a page we delete its data."
   },
   {
    "id": "N1-MT-10",
@@ -3481,7 +3576,8 @@ window.LAUNCH_DATA = {
     "Document rollback steps for both platforms - Netlify restore of the previous deploy and Fargate revert to the previous task-definition revision - and how to verify a rollback worked",
     "List secrets locations and rotation owner",
     "Add a change log section updated with each rails change"
-   ]
+   ],
+   "layman": "A written step-by-step guide for putting new versions live and undoing a bad one, so someone other than Muteeb could do it by following the page."
   },
   {
    "id": "N1-MT-11",
@@ -3512,7 +3608,8 @@ window.LAUNCH_DATA = {
     "Demo login, connect and real data live",
     "Show the CI leakage test and the RLS policy",
     "Record the outcome and any follow-ups"
-   ]
+   ],
+   "layman": "A live checkpoint demo on 18 Sep: log in, connect a test Facebook page, see its real data appear — proving the foundations actually work end to end."
   },
   {
    "id": "N1-MT-12",
@@ -3540,7 +3637,8 @@ window.LAUNCH_DATA = {
     "Verify receipts, retry policy and DLQ on a forced failure",
     "Fix the stale comment",
     "Confirm with Faheem whether historical page_posts rows were corrected and log the answer"
-   ]
+   ],
+   "layman": "Move our data collector's logic into the shared code home and prove it confirms every pickup, retries failures, and parks anything undeliverable in a holding queue that never loses a message."
   },
   {
    "id": "N1-MT-13",
@@ -3569,7 +3667,8 @@ window.LAUNCH_DATA = {
     "Implement checkpointed chunks with resume",
     "Start the job and post progress plus ETA",
     "Annotate the 25-29 Aug window as an anomaly"
-   ]
+   ],
+   "layman": "Kick off the catch-up job for a data feed that's 13 months behind, with save-points so it can resume if interrupted and a written estimate of when it finishes."
   },
   {
    "id": "N1-MT-14",
@@ -3600,7 +3699,8 @@ window.LAUNCH_DATA = {
     "Size the rate budget at ~3 comments per post post-collapse",
     "Plan the 39k historical-comment drain",
     "Send the signed design to Faheem"
-   ]
+   ],
+   "layman": "Design, on one signed page, how incoming comments get judged in near-real time for the storm alarm — how often, where, how fast, and what happens if we fall behind."
   },
   {
    "id": "N1-MT-15",
@@ -3628,7 +3728,8 @@ window.LAUNCH_DATA = {
     "Remove the mcp.js debug capture and verify it is absent on the deployed landing site",
     "Move key auth from path segments to a header and confirm access logs no longer contain keys",
     "Log the outcomes and rotation owner in the deploy runbook"
-   ]
+   ],
+   "layman": "Do the three security clean-ups Asad delegated: change the exposed keys, remove a leftover debugging trap from the live site, and stop secret keys appearing in web addresses."
   },
   {
    "id": "N1-MT-16",
@@ -3658,7 +3759,8 @@ window.LAUNCH_DATA = {
     "Billing console access + cost tags for Jill",
     "Budgets/Cost Explorer IAM for Jill"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Send Jill and Filza the raw facts their own tasks depend on — what systems and outside tools we use, where data lives, how billing works — and get dated confirmations."
   },
   {
    "id": "N1-MT-17",
@@ -3694,7 +3796,8 @@ window.LAUNCH_DATA = {
     "Implement the per-route live/mock switch",
     "Write the switch guide for someone new to the repo"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Machinery that automatically produces both the screens' data connector and the pretend data layer from the signed agreements, with a written guide for switching any screen from pretend to real data."
   },
   {
    "id": "N1-MT-18",
@@ -3727,7 +3830,8 @@ window.LAUNCH_DATA = {
     "Scan the app environment for warehouse credentials",
     "Record all three in the stack decision"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Lock the internal corridor between our web layer and the model service so only our own short-lived passes get through, keep everything in one region, and keep warehouse passwords out of the app."
   },
   {
    "id": "N1-MT-19",
@@ -3759,7 +3863,8 @@ window.LAUNCH_DATA = {
     "Name the idle cost of non-production and a cheaper option",
     "Send to Asad and Jill"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "A table of every hosting and infrastructure cost per environment, at pilot size and at 100 pages, marked fixed or growing, so we know exactly what running the product costs."
   },
   {
    "id": "N1-SD-01",
@@ -3789,7 +3894,8 @@ window.LAUNCH_DATA = {
     "File the written GraphRAG-moves-out note and the MVP/Fast/Phase-2 retag summary",
     "Confirm QA dashboard and defect-tracker access is Saad's, not Rafeh's; hand gaps to Alex",
     "Tell Jill the handover is closed so her revocation check can run"
-   ]
+   ],
+   "layman": "Saad files and verifies the project-management handover pack — sign-off lists, quality gates, defect list, dashboard access — so nothing from the previous phase gets lost in the switch."
   },
   {
    "id": "N1-SD-02",
@@ -3816,7 +3922,8 @@ window.LAUNCH_DATA = {
     "Confirm Discovery stays 12 Sep and tokens ship with the first packs",
     "Post the order + dates in the tracker",
     "Adjust N1-SD-07 and N1-SD-09 scope if Asad picks different first packs"
-   ]
+   ],
+   "layman": "Saad and Asad agree, in writing, the order the design files will be delivered in, so Asad always has the next design ready just before he needs to build it."
   },
   {
    "id": "N1-SD-03",
@@ -3843,7 +3950,8 @@ window.LAUNCH_DATA = {
     "Write the replacement pattern and copy for 'Remind me'",
     "Send to Filza for the Checklist-1 scopes note and to Alex for the Meta narrative",
     "Make it entry #1 of the design decision log"
-   ]
+   ],
+   "layman": "Formally record that the app says 'Remind me at this time' rather than 'Schedule' — we suggest the best moment to post, we don't post for you — so no design promises a feature we don't have."
   },
   {
    "id": "N1-SD-04",
@@ -3874,7 +3982,8 @@ window.LAUNCH_DATA = {
     "Design fail-closed empty state, 'suggested - not validated' and 'high-confidence' badges, revoked-page state",
     "Define reason-string slots that stay provenance-honest (text-only edges never say 'audience overlap')",
     "Log swipe deck, meters, Venns as deferred in the decision log"
-   ]
+   ],
+   "layman": "Deliver the finished design for the screen where users find pages worth teaming up with, in desktop and phone versions, with the legally approved consent wording word-for-word."
   },
   {
    "id": "N1-SD-05",
@@ -3901,7 +4010,8 @@ window.LAUNCH_DATA = {
     "Post daily: what changed, open questions, anything the API contract must carry (drivers, confidence, unread counts, page_id)",
     "Fix accepted flags same day; log deferred ones",
     "Close the loop 17 Sep with a 'nothing unbuildable outstanding' note"
-   ]
+   ],
+   "layman": "Saad's side of the daily half-hour design review with Asad, with a written note each day, so every flagged issue is either fixed in the design or logged, never forgotten."
   },
   {
    "id": "N1-SD-06",
@@ -3929,7 +4039,8 @@ window.LAUNCH_DATA = {
     "Name colour roles and map every pack colour to a role",
     "Write state rules once (hover/disabled/loading/empty) and reference them from packs",
     "Export in a form Asad can turn into Tailwind tokens"
-   ]
+   ],
+   "layman": "Deliver the sheet of agreed colours, sizes and text styles alongside the first designs, so Asad builds the reusable screen kit from one source of truth."
   },
   {
    "id": "N1-SD-07",
@@ -3960,7 +4071,8 @@ window.LAUNCH_DATA = {
     "Mobile: tab bar, compose sheet, sheets for cards",
     "Share the chip vocabulary with Faheem for driver attribution",
     "Record any V3 deviation in the decision log"
-   ]
+   ],
+   "layman": "Deliver the first two screen designs — the daily overview and the draft-checker — including phone versions, every screen state, and a shared vocabulary for the 'why' tags on predictions."
   },
   {
    "id": "N1-SD-08",
@@ -3987,7 +4099,8 @@ window.LAUNCH_DATA = {
     "Build the vocabulary table (gauge, chips, storm, health, moves, briefing)",
     "Apply it to the crisis email template and empty states",
     "Link it from every pack and the decision log"
-   ]
+   ],
+   "layman": "A one-page guide to how the product speaks — tone, wording, plain-English rules — so every message in the app sounds like the same friendly, clear voice."
   },
   {
    "id": "N1-SD-09",
@@ -4020,7 +4133,8 @@ window.LAUNCH_DATA = {
     "Fix the V3 mobile-search rows that navigate to a non-existent view",
     "Connect + consent pack: Facebook login -> multi-select page picker, per-page health (connected/expiring/revoked/re-auth needed), disconnect confirm, OAuth consent screen - frozen-ready for the N2-AS-09 screencasts",
     "Shell + system prompts addendum: topbar bell dropdown with unread counts, toasts, cookie banner (landing + app), push opt-in pre-prompt with iOS caveat, PWA install/update prompts"
-   ]
+   ],
+   "layman": "Deliver the remaining seven screen designs, so by mid-September Asad has every design he needs for the next four building sprints with nothing missing."
   },
   {
    "id": "N1-SD-10",
@@ -4048,7 +4162,8 @@ window.LAUNCH_DATA = {
     "Design 'learning, never loading' and last-90-days-first progress pattern for onboarding",
     "Design the crisis email: subject, cited post, action, drafted reply, deep link, dark mode",
     "Hand the email template to Muteeb for the N2 SES pipeline"
-   ]
+   ],
+   "layman": "Make sure every design shows all situations a screen can be in (loading, empty, error, and so on) and deliver the template for the email we send when a comment storm hits."
   },
   {
    "id": "N1-SD-11",
@@ -4076,7 +4191,8 @@ window.LAUNCH_DATA = {
     "Write the per-pack design-QA checklist Saad will use in N2-N5 sweeps",
     "Export assets and tokens to the repo with Asad's agreed folder layout",
     "Link everything from the tracker and the decision log"
-   ]
+   ],
+   "layman": "For each design: a quality checklist, a short walkthrough video, and the image files saved into the shared code home, so builders never have to guess the designer's intent."
   },
   {
    "id": "N1-SD-12",
@@ -4105,7 +4221,8 @@ window.LAUNCH_DATA = {
     "Enter all N1 decisions from the packs and the Discovery pack",
     "Add the rule: any V3 deviation gets a line before it ships",
     "Review weekly during the pilot digest"
-   ]
+   ],
+   "layman": "Start a running one-line-per-decision log of design choices, so months from now anyone can see what was decided and why without archaeology."
   },
   {
    "id": "N1-SD-13",
@@ -4133,7 +4250,8 @@ window.LAUNCH_DATA = {
     "Caption in the product voice; date reads 1 December",
     "Quick narrative check with Filza (no Meta-banned words)",
     "Hand to Alex with source files"
-   ]
+   ],
+   "layman": "Build the 11 Sep design-reveal package with Alex for showing off the product's look, with the correct launch date and no features we've cut, so marketing matches reality."
   },
   {
    "id": "N1-SD-14",
@@ -4164,7 +4282,8 @@ window.LAUNCH_DATA = {
     "Decide or date each item; log decisions",
     "Publish the triage time and the acceptance register location",
     "Confirm N2 tickets for Asad's first screens have one-pager dates"
-   ]
+   ],
+   "layman": "Saad becomes project manager on 17 Sep and clears everything Alex has been waiting on him for, giving each item an owner and a date, so nobody sits blocked."
   },
   {
    "id": "N1-SD-15",
@@ -4194,7 +4313,8 @@ window.LAUNCH_DATA = {
     "Agree the escalation path (Saad -> backup -> Alex)",
     "Re-brief on the final package in N2-SD-05"
    ],
-   "table_priority_cell": "P1"
+   "table_priority_cell": "P1",
+   "layman": "Name and brief a backup person (likely Asad) on the Facebook/Meta emergency package and what to do if trouble hits, so our Meta relationship never depends on one person."
   },
   {
    "id": "N1-SD-16",
@@ -4225,7 +4345,8 @@ window.LAUNCH_DATA = {
     "Add Asad + Lewis to the app dashboard roles",
     "File in the Meta package folder"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Saad writes the plain-English story we tell Facebook's reviewers about what our app does with their data, and opens dashboard access for Asad and Lewis, so that Facebook's approval process can start on time."
   },
   {
    "id": "N1-SD-17",
@@ -4255,7 +4376,8 @@ window.LAUNCH_DATA = {
     "Pick the category / business use case with Alex",
     "File everything in the Meta package folder and tell Asad"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Saad delivers the app's icon, name, short description and contact details that Facebook requires, so that our submission to Facebook isn't rejected for missing basics and the sign-in screen looks finished."
   },
   {
    "id": "N1-SD-18",
@@ -4285,7 +4407,8 @@ window.LAUNCH_DATA = {
     "State what yields when a reviewer message lands inside the 24h SLA",
     "Send to Alex before the 15 Sep owner decision and to Asad the same day"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Saad now codes as well as manages, so he writes down which duties he keeps and which move to Alex and Lewis, so that the Facebook submission and the build both get done without either quietly slipping."
   },
   {
    "id": "N1-SD-19",
@@ -4315,7 +4438,8 @@ window.LAUNCH_DATA = {
     "List recurring design tooling costs",
     "Send the line and its assumptions to Asad and Jill"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Saad works out what running the app's screens will cost each month - hosting, images, page traffic - and hands Asad one clear number, so that the price we charge customers covers what the product costs us."
   },
   {
    "id": "N1-SD-20",
@@ -4349,7 +4473,8 @@ window.LAUNCH_DATA = {
     "Pair on the token sheet to Tailwind theme translation",
     "List every token the sheet has and the theme does not"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Saad gets the coding tools running on his machine and sits with Asad while the design colours and styles are set up, so that when his building weeks start he isn't losing days to setup problems."
   },
   {
    "id": "N1-AX-01",
@@ -4378,7 +4503,8 @@ window.LAUNCH_DATA = {
     "Move the landing beat to Fri 19 Sep in the marketing calendar",
     "Re-key every downstream beat off 8 Dec",
     "Confirm Saad and Jill have read it"
-   ]
+   ],
+   "layman": "Alex puts the launch date in writing for everyone - public launch 8 December - and re-dates every marketing moment to match, so that the website, emails and pilots all quote the same date."
   },
   {
    "id": "N1-AX-02",
@@ -4408,7 +4534,8 @@ window.LAUNCH_DATA = {
     "Submit and log case id + timestamp",
     "Set the recurring 48h chase reminder",
     "Report status at the 18 Sep gate"
-   ]
+   ],
+   "layman": "Alex submits our company details to Facebook for business verification, matching our official registered name exactly, so that a paperwork mismatch doesn't stall Facebook's approval and eat our launch buffer."
   },
   {
    "id": "N1-AX-03",
@@ -4439,7 +4566,8 @@ window.LAUNCH_DATA = {
     "Check the other prices against Jill's cost baseline",
     "Sign and date the full memo by Mon 14 Sep",
     "Confirm the waitlist tool account exists before N3"
-   ]
+   ],
+   "layman": "Alex signs off the small purchases Jill listed - the waiting-list tool, a public status page, error monitoring and an alerting service - so that these are bought once, quickly, and nobody's work waits on a purchase."
   },
   {
    "id": "N1-AX-04",
@@ -4470,7 +4598,8 @@ window.LAUNCH_DATA = {
     "Add the last-safe-resubmission placeholder (filled by N2-AX-06)",
     "Sign off the Meta two-narratives doc with Filza",
     "Publish and pin"
-   ]
+   ],
+   "layman": "Alex publishes one calendar of every big decision - pricing, the Facebook submission, freezes, launch day - each with a named decider and date, so that decisions get made once, on time, and nobody waits in doubt."
   },
   {
    "id": "N1-AX-05",
@@ -4501,7 +4630,8 @@ window.LAUNCH_DATA = {
     "Sanity-check Saad's priority tags against it (Saad asked for Alex's view)",
     "Review with Asad",
     "Publish next to the decisions calendar"
-   ]
+   ],
+   "layman": "Alex writes the one-page list of numbers we will judge launch by, plus a list of jobs Asad must NOT do with a named owner for each, so that our only developer spends his weeks building rather than doing everyone's admin."
   },
   {
    "id": "N1-AX-06",
@@ -4530,7 +4660,8 @@ window.LAUNCH_DATA = {
     "Log the pack build-order decision (Today + Drafts ~15 Sep)",
     "Confirm the crisis-gate decision date with Asad and Faheem",
     "Hand over to Saad on 17 Sep"
-   ]
+   ],
+   "layman": "Alex acts as stand-in project manager for two weeks - a daily 15-minute unblocking check, no new decisions - and keeps a written list of things waiting for Saad, so that nothing gets decided twice in the gap."
   },
   {
    "id": "N1-AX-07",
@@ -4560,7 +4691,8 @@ window.LAUNCH_DATA = {
     "Confirm Asad ships them first thing on 17 Sep, before the reveal post",
     "Grep public pages for 'November' after deploy",
     "Verify live page and view-source"
-   ]
+   ],
+   "layman": "The live website still shows the old launch date in three places; Alex supplies the corrected wording and Asad ships it as his first change, so that we don't publicly contradict our own announced date."
   },
   {
    "id": "N1-AX-08",
@@ -4590,7 +4722,8 @@ window.LAUNCH_DATA = {
     "Check the mock-data source with Lewis's roster",
     "Publish on 17 Sep",
     "Log in the marketing calendar"
-   ]
+   ],
+   "layman": "Alex and Saad publish the 17 September design reveal, honestly framed as finished design with no working software behind it yet, so that we earn goodwill without making claims a reviewer or journalist could later disprove."
   },
   {
    "id": "N1-AX-10",
@@ -4623,7 +4756,8 @@ window.LAUNCH_DATA = {
     "Ask Faheem for the measurement date",
     "Record the public-claims-follow-the-gate rule",
     "Confirm with Asad on 18 Sep whether the decision landed or is provisional"
-   ]
+   ],
+   "layman": "Alex makes sure the decision on what counts as a good-enough storm-alert system is made on time and written down, so that our public promise about catching comment storms matches what we actually measured."
   },
   {
    "id": "N1-AX-11",
@@ -4655,7 +4789,8 @@ window.LAUNCH_DATA = {
     "Circulate and collect acknowledgements",
     "File in the Meta package folder and the decisions calendar"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Alex confirms in writing who owns the Facebook submission, who watches its dashboard daily and who answers a reviewer within 24 hours, with a named backup, so that a reviewer's question never sits unanswered."
   },
   {
    "id": "N1-JL-01",
@@ -4687,7 +4822,8 @@ window.LAUNCH_DATA = {
     "Diary a repeat access review for N5 (evidence folder) and post-launch",
     "Rotate every credential ever posted in group chat",
     "Confirm departed staff removed from all group chats"
-   ]
+   ],
+   "layman": "Jill checks every system we use to confirm the departed teammate's accounts are shut off and any passwords he saw are changed, so that nobody outside the company can get into our tools or our customers' data."
   },
   {
    "id": "N1-JL-02",
@@ -4720,7 +4856,8 @@ window.LAUNCH_DATA = {
     "Write the one-page memo with totals and get Alex's signature",
     "Purchase all four; hand credentials/seats to Muteeb (Sentry, status page, paging) and Asad (waitlist)",
     "Add the four lines to the cost baseline and the ops tool register"
-   ]
+   ],
+   "layman": "Jill writes the one-page shopping list - waiting-list tool, status page, error monitoring, alerting service - with prices and owners for Alex to sign, so that each is bought once and set up without delay."
   },
   {
    "id": "N1-JL-03",
@@ -4754,7 +4891,8 @@ window.LAUNCH_DATA = {
     "Take the ML variable lines from Faheem's per-prediction costs (N1-FH-19) and hosting from Saad's note (N1-SD-17)",
     "Build the x10 projection and an Art-E usage assumption line",
     "Issue the memo to Alex and file it, noting that Asad's bottom-up consolidation lands 17 Sep as the cross-check"
-   ]
+   ],
+   "layman": "Jill measures exactly what the company spends each month and projects it at ten times the pilot load, so that we know our costs before we set prices and can spot a bill running away."
   },
   {
    "id": "N1-JL-04",
@@ -4785,7 +4923,8 @@ window.LAUNCH_DATA = {
     "Create per-service budgets for Redshift, Fargate, SES",
     "Test-fire an alert by lowering a threshold; restore it",
     "Document the alarm routing in the on-call rota v0"
-   ]
+   ],
+   "layman": "Jill sets automatic warnings that fire when our cloud bill hits 80% of the expected monthly spend, so that a runaway system is caught the same day instead of on the invoice."
   },
   {
    "id": "N1-JL-05",
@@ -4817,7 +4956,8 @@ window.LAUNCH_DATA = {
     "Write the page-now vs wait-for-morning list",
     "Send one test page and record the acknowledgement",
     "Publish the rota and the paging contacts in the ops folder"
-   ]
+   ],
+   "layman": "Jill writes the first who-answers-the-phone rota: which person gets woken if the system goes down at night and who they escalate to, so that a fault is found by us and not by a pilot customer."
   },
   {
    "id": "N1-JL-06",
@@ -4845,7 +4985,8 @@ window.LAUNCH_DATA = {
     "Confirm fee tier with Filza; pay/renew",
     "Diary the renewal date in the ops calendar",
     "Send the registration number and receipt to Filza and file them"
-   ]
+   ],
+   "layman": "Jill confirms we've paid the UK data-protection regulator's registration fee and diaries the renewal, so that we're legally covered to handle customers' page data and can answer that question when asked."
   },
   {
    "id": "N1-JL-07",
@@ -4875,7 +5016,8 @@ window.LAUNCH_DATA = {
     "Log quotes, exclusions and outstanding underwriter questions",
     "Route security questions to Muteeb, contract questions to Filza",
     "Set the bind-by date (13 Nov) in the calendar"
-   ]
+   ],
+   "layman": "Jill gets insurance quotes started - cover for professional mistakes and for a data breach - so that proper insurance is in place before any customer money changes hands, since quotes take weeks."
   },
   {
    "id": "N1-LW-01",
@@ -4906,7 +5048,8 @@ window.LAUNCH_DATA = {
     "Ask each unconfirmed admin: monetisation lost? when?",
     "Tag each page safe/unsafe per use (benchmark, demo, screenshot, backtest)",
     "Send the roster to Faheem, Asad, Saad, Alex and swap declining pages out of the recruit target"
-   ]
+   ],
+   "layman": "Lewis checks every pilot page's recent activity and tags which have quietly collapsed in comment volume, so that our demos, benchmarks and screenshots use healthy pages and the product never looks broken by someone else's decline."
   },
   {
    "id": "N1-LW-02",
@@ -4937,7 +5080,8 @@ window.LAUNCH_DATA = {
     "Flag incidents inside the 25-29 Aug restriction window as anomaly-affected",
     "Tag each incident page with its current comments/post tier",
     "Send to Faheem and Asad; confirm receipt"
-   ]
+   ],
+   "layman": "Lewis lists every real comment storm on the pilot pages over a fixed period - 20 or more, with times and details - so that we can honestly measure how many storms our alert system catches versus how often it cries wolf."
   },
   {
    "id": "N1-LW-03",
@@ -4965,7 +5109,8 @@ window.LAUNCH_DATA = {
     "Mark the must-catch incidents with a one-line reason each",
     "Review Faheem's comments-per-page-per-hour-of-week measurement with him",
     "Attend the crisis pass-line decision with Asad and Faheem; record the number and the coverage clause"
-   ]
+   ],
+   "layman": "Lewis also lists the busy-but-fine days (giveaways, TV moments) and marks which storms we absolutely must catch, so that the alert system is tuned to spot real trouble without panicking at ordinary excitement."
   },
   {
    "id": "N1-LW-04",
@@ -4998,7 +5143,8 @@ window.LAUNCH_DATA = {
     "Confirm admin role and 3-5 pages per pilot; record page IDs",
     "Check the archetype mix is not all one type",
     "Mark cohort 1 (pilots 1-5) and publish the roster sheet to the team"
-   ]
+   ],
+   "layman": "Lewis recruits ten pilot page owners, each running three to five pages of different kinds, all confirmed in writing in one roster, so that we have real customers to prove the product on and honest feedback before launch."
   },
   {
    "id": "N1-LW-05",
@@ -5028,7 +5174,8 @@ window.LAUNCH_DATA = {
     "Hand the list to Saad/Asad for App Roles > Testers",
     "Send pilots a screenshot walkthrough for accepting the invite",
     "Track acceptance; chase at 48h"
-   ]
+   ],
+   "layman": "Lewis collects each pilot's Facebook account details so they can be added as approved testers of our not-yet-public app, so that pilots can actually connect their pages before Facebook fully approves us."
   },
   {
    "id": "N1-LW-06",
@@ -5059,7 +5206,8 @@ window.LAUNCH_DATA = {
     "Agree hosting/embed and routing with Asad",
     "Test a submission end-to-end on staging",
     "Write the auto-reply and the cohort-2 triage rule"
-   ]
+   ],
+   "layman": "Lewis builds the application form new pilots fill in - their pages, size and consent - agreed with legal and tested end to end, so that people our marketing attracts have somewhere to sign up that actually works."
   },
   {
    "id": "N1-LW-07",
@@ -5087,7 +5235,8 @@ window.LAUNCH_DATA = {
     "Agenda and feedback sheet template",
     "Run first-round calls with the 2am-storm and best-time questions for pilots confirmed by 16 Sep",
     "Send week-1 notes to Saad and Alex; book the late joiners for the week of 21 Sep"
-   ]
+   ],
+   "layman": "Lewis starts a weekly 20-minute call with each pilot before the product even exists, capturing what they expect and what they'd pay for, so that we build what page owners actually want."
   },
   {
    "id": "N1-FZ-01",
@@ -5115,7 +5264,8 @@ window.LAUNCH_DATA = {
     "Confirm the confidentiality/NDA obligation survives departure and file it",
     "Get Jill's written confirmation of revocation per system, dated 3 Sep",
     "Record in the legal file that no on-call agreement exists or is needed"
-   ]
+   ],
+   "layman": "Filza closes the departed teammate's paperwork - signed confirmation his work belongs to the company, confidentiality still binding, all access removed - so that a leaver can't become a legal or security problem."
   },
   {
    "id": "N1-FZ-02",
@@ -5141,7 +5291,8 @@ window.LAUNCH_DATA = {
     "Write the equal-prominence rules Saad must follow (size, weight, order, no pre-tick)",
     "State the 24h revocation purge and the Settings location",
     "Send to Saad by 8 Sep and confirm receipt; log the decision in Saad's decision log"
-   ]
+   ],
+   "layman": "Filza writes the exact wording of the opt-in screen for the page-matching feature - off by default, easy to decline, easy to undo - so that consent is genuine and the screens can be built with legally approved words."
   },
   {
    "id": "N1-FZ-03",
@@ -5168,7 +5319,8 @@ window.LAUNCH_DATA = {
     "Write the reverse-identification note with the two attack cases (opted-in page, colluding pilots)",
     "Alex countersigns; file in the legal pack",
     "Muteeb and Faheem acknowledge in writing"
-   ]
+   ],
+   "layman": "Filza signs the policy on stripping personal details out of the data behind the page-matching feature, and checks nobody could work out who a person is from it, so that no follower's identity ever leaves our systems."
   },
   {
    "id": "N1-FZ-04",
@@ -5198,7 +5350,8 @@ window.LAUNCH_DATA = {
     "Specify fail-closed rendering plus the log event fields",
     "Write the differencing rule incl. week-over-week recompute drift",
     "Asad co-signs; Muteeb receives it as the N3 acceptance spec"
-   ]
+   ],
+   "layman": "Filza writes the rule that the page-matching feature never shows a statistic drawn from fewer than five pages, and shows nothing at all below that, so that no individual page or person can be picked out of the numbers."
   },
   {
    "id": "N1-FZ-05",
@@ -5227,7 +5380,8 @@ window.LAUNCH_DATA = {
     "Assess each for special-category inference risk and write the guard",
     "Draft, Alex signs, file with the Discovery policy",
     "Send to Faheem and Muteeb with the #14 condition highlighted"
-   ]
+   ],
+   "layman": "Filza writes the memo confirming none of our models guess sensitive things about individuals - health, politics, beliefs - checking each part of the system, so that we stay clearly on the right side of data law."
   },
   {
    "id": "N1-FZ-06",
@@ -5257,7 +5411,8 @@ window.LAUNCH_DATA = {
     "Write the product and legal consequences in one page",
     "Saad and Filza sign; Alex informed",
     "File in the Meta package folder and the decision log"
-   ]
+   ],
+   "layman": "Filza and Saad put on paper that we ask Facebook only for read-only access - no posting, messaging or ads on anyone's behalf - so that our product promises, legal documents and Facebook application all tell the same story."
   },
   {
    "id": "N1-FZ-07",
@@ -5290,7 +5445,8 @@ window.LAUNCH_DATA = {
     "DPA draft: processor terms, sub-processor list placeholder, change notice, security annex",
     "Cross-check every purpose against the lawful-bases map",
     "Send to Alex with the open-points list"
-   ]
+   ],
+   "layman": "Filza drafts our terms of service, privacy policy and customer data agreement, naming exactly what Facebook data we hold and how someone gets it deleted, so that pilots can sign properly and Facebook's reviewers see us in order."
   },
   {
    "id": "N1-FZ-08",
@@ -5322,7 +5478,8 @@ window.LAUNCH_DATA = {
     "State the PECR position for emailing the existing newsletter list (Jill's #1 goes 22 Sep)",
     "Open the RoPA with rows per purpose and placeholders for N3 additions",
     "Hand the map to the ToS/Privacy/DPA drafting (N1-FZ-07) as the single source of bases"
-   ]
+   ],
+   "layman": "Filza writes the master map of every way we use data and the legal ground for each, in the official record format, so that all our legal documents quote one consistent story instead of each inventing its own."
   },
   {
    "id": "N1-FZ-09",
@@ -5353,7 +5510,8 @@ window.LAUNCH_DATA = {
     "Give Asad the load-before-consent rule for the landing scripts",
     "Record the 8 Sep -> 19 Sep slip in the decision log and RoPA; rule on names collected 8-26 Sep (feeds N2-FZ-08)",
     "Verify on the 19 Sep landing after it goes live"
-   ]
+   ],
+   "layman": "Filza prepares the short privacy notice and cookie banner for the new website - no tracking before consent, declining as easy as accepting - so that the site collecting pilot sign-ups is legally proper from day one."
   },
   {
    "id": "N1-FZ-10",
@@ -5382,7 +5540,8 @@ window.LAUNCH_DATA = {
     "Write the callback flow: verify, resolve, cascade, respond, log",
     "Define the in-app disconnect route as the same cascade",
     "Send to Muteeb and collect open questions for N2 finalisation"
-   ]
+   ],
+   "layman": "Filza specifies what must happen when a user asks Facebook to delete their data from us - wipe everything, everywhere, and confirm it - so that Muteeb can build it right first time; Facebook requires this before approving us."
   },
   {
    "id": "N1-FZ-11",
@@ -5407,7 +5566,8 @@ window.LAUNCH_DATA = {
     "Select and check the supporting documents",
     "Send the confirmed set to Alex on 3 Sep"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Filza checks our official company name and documents at Companies House and sends Alex the exact strings to enter, so that Facebook's business verification isn't rejected over a one-character mismatch."
   },
   {
    "id": "N2-AS-01",
@@ -5438,7 +5598,8 @@ window.LAUNCH_DATA = {
     "Build the shell from the library primitives",
     "Route the six empty screens",
     "Deploy to staging behind login"
-   ]
+   ],
+   "layman": "Asad builds the app's skeleton - login, the sidebar, top bar and empty pages for each screen - running on the shared groundwork, so that every real screen that follows has a working frame to sit in."
   },
   {
    "id": "N2-AS-02",
@@ -5473,7 +5634,8 @@ window.LAUNCH_DATA = {
     "Decide line, scope and clause; record in tracker + Checklist 3",
     "Confirm labelling latency is inside the 15-min clock",
     "Annotate the 25-29 Aug anomaly window"
-   ]
+   ],
+   "layman": "Asad and Faheem look at the real comment numbers and set, in writing, the bar the storm-alert system must clear before tuning starts, so that we don't spend weeks chasing a target the data can't support."
   },
   {
    "id": "N2-AS-03",
@@ -5504,7 +5666,8 @@ window.LAUNCH_DATA = {
     "Render per-page health states from the backend",
     "Build disconnect with confirmation and revocation call",
     "Finalise consent-screen UI copy with Saad/Filza"
-   ]
+   ],
+   "layman": "Asad builds the screen where a pilot connects their Facebook pages, sees whether each connection is healthy, and can disconnect - which also deletes their data - so that joining and leaving are both genuinely one click."
   },
   {
    "id": "N2-AS-04",
@@ -5537,7 +5700,8 @@ window.LAUNCH_DATA = {
     "Setup pill from ingest progress",
     "page_id scoping through the switcher stub",
     "Empty/lag states and Remind-me CTAs"
-   ]
+   ],
+   "layman": "Asad builds the Today screen - the morning view with the next suggested move, a checklist and a feed of what needs attention - so that pilots have one place to open each day and a reason to come back."
   },
   {
    "id": "N2-AS-05",
@@ -5566,7 +5730,8 @@ window.LAUNCH_DATA = {
     "Expiry and refresh behaviour",
     "Negative tests: forged, expired, no claim, cross-tenant",
     "Wire the tests into CI"
-   ]
+   ],
+   "layman": "Asad finishes the everyday account plumbing - email confirmation, password reset, logout - and adds automatic checks that fake or expired logins are refused, so that one customer can never see another's data."
   },
   {
    "id": "N2-AS-06",
@@ -5600,7 +5765,8 @@ window.LAUNCH_DATA = {
     "Chips from drivers[] only",
     "Autosave + restore",
     "Loading/error states per pack"
-   ]
+   ],
+   "layman": "Asad builds the writing screen: as a pilot types a post, a gauge updates with how well it's likely to do and short chips explaining why, with the draft auto-saved, so that nobody loses work and the advice feels alive."
   },
   {
    "id": "N2-AS-07",
@@ -5634,7 +5800,8 @@ window.LAUNCH_DATA = {
     "Open every dashboard URL over SSL from a clean browser",
     "Complete the OAuth redirect on the production domain and log in as the reviewer",
     "Confirm the scope list matches N2-AS-14 exactly; return breaks to Muteeb same day"
-   ]
+   ],
+   "layman": "Asad fills in our app's public-facing details on Facebook's dashboard and then walks through everything exactly as a reviewer would - every link, every login - so that nothing broken costs us a 20-day rejection cycle."
   },
   {
    "id": "N2-AS-08",
@@ -5663,7 +5830,8 @@ window.LAUNCH_DATA = {
     "Abstain state from the coverage flag",
     "Hide chips under the no-strong-driver rule",
     "Verify against the Drafts one-pager"
-   ]
+   ],
+   "layman": "Asad makes the post-score gauge honest: when the model isn't confident it says 'no strong signal' instead of showing a number, so that pilots never see a confident prediction we can't actually back up."
   },
   {
    "id": "N2-AS-09",
@@ -5698,7 +5866,8 @@ window.LAUNCH_DATA = {
     "Record the disconnect and deletion clip",
     "Freeze consent/connect UI in the tracker",
     "Co-sign with the Meta owner after Filza's review"
-   ]
+   ],
+   "layman": "Asad records a short screen video for each Facebook permission showing exactly what it's used for, including one of data deletion, then locks those screens from changing, so that our Facebook application matches the app exactly."
   },
   {
    "id": "N2-AS-10",
@@ -5727,7 +5896,8 @@ window.LAUNCH_DATA = {
     "Deploy from the runbook without help",
     "Roll back and time it",
     "File gaps and the receipt"
-   ]
+   ],
+   "layman": "Asad releases an update and reverses it using only the written instructions, with Muteeb watching but not helping, so that if Muteeb is ever ill in launch week someone else can still ship a fix."
   },
   {
    "id": "N2-AS-11",
@@ -5758,7 +5928,8 @@ window.LAUNCH_DATA = {
     "Fire signup, page_connected, draft_scored",
     "Verify in the sink",
     "Write the taxonomy"
-   ]
+   ],
+   "layman": "Asad wires in the counters for the three moments that matter - someone signs up, connects a page, gets a post scored - so that launch-day success is measured with real numbers rather than guesses."
   },
   {
    "id": "N2-AS-12",
@@ -5789,7 +5960,8 @@ window.LAUNCH_DATA = {
     "Write the walkthrough script",
     "Rehearse twice with Alex/Saad",
     "Confirm no pilot or declining-page data appears"
-   ]
+   ],
+   "layman": "Asad sets up a demo account with safe made-up data and rehearses a five-minute walkthrough twice, so that our first public showing of the working product can't fail on stage or leak a real pilot's information."
   },
   {
    "id": "N2-AS-13",
@@ -5819,7 +5991,8 @@ window.LAUNCH_DATA = {
     "Test a submission end-to-end with Lewis",
     "Go live on 24 Sep and confirm to Alex"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Asad puts Lewis's pilot application form live on the website on 24 September, with the legal consent line, and tests that a submission reaches Lewis, so that people our marketing attracts can actually apply."
   },
   {
    "id": "N2-AS-14",
@@ -5849,7 +6022,8 @@ window.LAUNCH_DATA = {
     "Set the numeric floor: surviving edges and share of pages with a structural edge",
     "Write the ordered branch if the floor is missed, including the curated-matches descope",
     "File in the decision register; Faheem and Muteeb acknowledge in writing"
-   ]
+   ],
+   "layman": "Before any code is written for the page-matching feature, Asad decides in writing how much real signal the data must show to proceed - and what we do instead if it doesn't - so that we don't build on evidence that isn't there."
   },
   {
    "id": "N2-AS-15",
@@ -5886,7 +6060,8 @@ window.LAUNCH_DATA = {
     "Add the cross-tenant CI test and a forged-claim test",
     "Document the one place a reviewer checks for tenant safety"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Asad builds one single checkpoint that every request to our data passes through, confirming who the customer is, plus an automatic test that one customer can never fetch another's pages, so that a data leak is designed out."
   },
   {
    "id": "N2-AS-16",
@@ -5919,7 +6094,8 @@ window.LAUNCH_DATA = {
     "Assert in CI that no raw upstream error escapes",
     "Publish the code list to Saad and Muteeb"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Asad makes every failure - a slow database, an expired Facebook connection, an unfinished import - come back as a clear, consistent message the screens understand, so that pilots see honest explanations instead of raw error text."
   },
   {
    "id": "N2-AS-17",
@@ -5951,7 +6127,8 @@ window.LAUNCH_DATA = {
     "Add a replay test per write route",
     "Document the retry contract for the front end"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Asad makes every button-press safe to repeat: if a shaky connection sends the same action twice, the system does it once, so that a double-tap on 'disconnect' or a retried alert never causes duplicate damage."
   },
   {
    "id": "N2-AS-18",
@@ -5985,7 +6162,8 @@ window.LAUNCH_DATA = {
     "Start the changelog and backfill it to 15 Sep",
     "Link it from the repo README and tell Saad and Muteeb"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Asad publishes a browsable reference of every way the screens talk to the data, with an owner and a change log per route, so that a new teammate can find things without asking Asad - who is our scarcest person."
   },
   {
    "id": "N2-FH-01",
@@ -6014,7 +6192,8 @@ window.LAUNCH_DATA = {
     "Record the LambdaRank A/B result",
     "Update plan + tracker wording",
     "Tell Muteeb and Saad"
-   ]
+   ],
+   "layman": "The flop-warning model already beat its quality bar; Faheem files the proof and corrects the plan, which still names the wrong model version, so that later checks and rollbacks point at the thing we actually shipped."
   },
   {
    "id": "N2-FH-02",
@@ -6045,7 +6224,8 @@ window.LAUNCH_DATA = {
     "Feature builder + input schema",
     "Output schema incl. confidence/coverage + drivers slot",
     "Golden pair + 50-post parity check"
-   ]
+   ],
+   "layman": "Faheem hands Muteeb the finished flop-warning model in a sealed, versioned package with an exact example of input and output, so that Muteeb can plug it into the live product and verify it behaves identically."
   },
   {
    "id": "N2-FH-03",
@@ -6074,7 +6254,8 @@ window.LAUNCH_DATA = {
     "Feature-to-chip mapping table from the pack",
     "No-strong-driver + abstain thresholds",
     "Spot-check 30 drafts with Saad"
-   ]
+   ],
+   "layman": "Faheem builds the 'why' behind each post score - short reason chips drawn only from an agreed list, with a rule to stay silent when no reason is strong - so that pilots get honest explanations, never invented ones."
   },
   {
    "id": "N2-FH-04",
@@ -6101,7 +6282,8 @@ window.LAUNCH_DATA = {
     "Persist level per page",
     "Expose level in output",
     "Test on a held-out new page"
-   ]
+   ],
+   "layman": "Faheem builds the ladder for brand-new pages: use the page's own model when there's enough history, otherwise fall back to similar pages or a general one, or say nothing, so that a new pilot's first week never shows confident nonsense."
   },
   {
    "id": "N2-FH-05",
@@ -6127,7 +6309,8 @@ window.LAUNCH_DATA = {
     "Apply threshold/prompt/retrain fix",
     "Re-measure recall + precision",
     "Log the change and version"
-   ]
+   ],
+   "layman": "The system currently misses about a quarter of nasty comments; Faheem digs into why and improves it before the storm detector relies on it, so that a storm of hostile comments can't slip past looking calm."
   },
   {
    "id": "N2-FH-06",
@@ -6158,7 +6341,8 @@ window.LAUNCH_DATA = {
     "Burst automaton + persistence rule",
     "Archetype thresholds",
     "Toxicity check; emit events on replayed history"
-   ]
+   ],
+   "layman": "Faheem rebuilds the comment-storm detector for today's quieter pages: it learns each page's normal rhythm hour by hour and flags unusual surges of hostile comments, so that the 15-minute warning promise has a real engine behind it."
   },
   {
    "id": "N2-FH-07",
@@ -6189,7 +6373,8 @@ window.LAUNCH_DATA = {
     "Precision + coverage + false alarms",
     "Tune thresholds per archetype",
     "Record pass/shortfall"
-   ]
+   ],
+   "layman": "Faheem replays the detector over Lewis's list of real past storms and counts what it caught and how often it cried wolf, tuning once, so that we know its true accuracy before a single pilot ever sees an alert."
   },
   {
    "id": "N2-FH-08",
@@ -6218,7 +6403,8 @@ window.LAUNCH_DATA = {
     "Include coverage clause + backtest recall",
     "Asad review",
     "Publish"
-   ]
+   ],
+   "layman": "Faheem writes down, honestly, what a missed storm means and how we measure the miss rate, reviewed by Asad, so that our public claims and the launch decision rest on stated facts rather than optimism."
   },
   {
    "id": "N2-FH-09",
@@ -6247,7 +6433,8 @@ window.LAUNCH_DATA = {
     "Batch + single modes with the latency budget",
     "Freshness/lag metric exposed",
     "Hand to Muteeb for N2-MT-11"
-   ]
+   ],
+   "layman": "Faheem packages the comment-reading model (mood and hostility) as a live service Muteeb's rapid alert path can call within its time budget, so that the 15-minute storm warning clocks real detection, not just fetching."
   },
   {
    "id": "N2-FH-10",
@@ -6273,7 +6460,8 @@ window.LAUNCH_DATA = {
     "Cost + batch plan",
     "Run backlog labelling",
     "Record provenance"
-   ]
+   ],
+   "layman": "Faheem checks how far behind our comment feed runs, adds a warning if it lags, and labels the 39,000 historical comments we hold, so that our best pre-collapse data is ready to test the storm detector against."
   },
   {
    "id": "N2-FH-11",
@@ -6298,7 +6486,8 @@ window.LAUNCH_DATA = {
     "README + schedule",
     "CI lint passes",
     "Runbook note"
-   ]
+   ],
+   "layman": "Some of the code that powers our crisis-warning chain lives only on one machine. We're moving it into the shared code vault with notes, so if the person who wrote it is away, the team can still run and fix it."
   },
   {
    "id": "N2-FH-12",
@@ -6327,7 +6516,8 @@ window.LAUNCH_DATA = {
     "Muteeb wires contract tests",
     "Nightly compare job",
     "Drift alert"
-   ]
+   ],
+   "layman": "We're planting a set of test posts with known correct scores, checked automatically every night, so if a software change quietly shifts the scores customers see, an alarm goes off before anyone notices wrong numbers."
   },
   {
    "id": "N2-FH-13",
@@ -6353,7 +6543,8 @@ window.LAUNCH_DATA = {
     "#13 backfill + verify",
     "#17 backfill through the gate",
     "#14 API probe + note"
-   ]
+   ],
+   "layman": "Filling gaps in our stored page history and labelling 1,300 older posts, so the numbers pilot customers see on screen are complete and correct rather than showing odd dips where data is missing."
   },
   {
    "id": "N2-FH-14",
@@ -6384,7 +6575,8 @@ window.LAUNCH_DATA = {
     "Strictly-before + timezone column",
     "Backtest + lookback note",
     "Panel on the QA dashboard: backtest lift vs baseline and per-page eligibility (count floor met / fallback level) so Best Times quality is visible before the N3 UI ships"
-   ]
+   ],
+   "layman": "Building the maths behind 'best time to post': for each page, which hours and days actually get engagement, with a sensible fallback when a page is too small to judge, so the posting-time calendar shows honest advice."
   },
   {
    "id": "N2-FH-15",
@@ -6411,7 +6603,8 @@ window.LAUNCH_DATA = {
     "Normalisation + weights",
     "Workspace roll-up + thin-page rule",
     "Sensitivity note"
-   ]
+   ],
+   "layman": "Writing down exactly how a page's overall health score is calculated - a blend of posting consistency, content strength and timing - so the health number customers see means the same thing everywhere."
   },
   {
    "id": "N2-FH-16",
@@ -6439,7 +6632,8 @@ window.LAUNCH_DATA = {
     "Define weekly delta",
     "Check distribution on pilot pages",
     "Send to Saad"
-   ]
+   ],
+   "layman": "Deciding what health scores mean in plain words - roughly 0-49 'at risk', 50-79 'steady', 80+ 'strong' - so a customer seeing 72 knows whether that's good, not just a bare number."
   },
   {
    "id": "N2-FH-17",
@@ -6467,7 +6661,8 @@ window.LAUNCH_DATA = {
     "Below-floor state per surface",
     "Worked thin-page example",
     "Send to Saad; revise if a spec changes"
-   ]
+   ],
+   "layman": "Setting the minimum amount of history a page needs before each feature shows a real number, and what shows instead below that line, so small pages never see made-up figures that would earn us bad reviews."
   },
   {
    "id": "N2-FH-18",
@@ -6495,7 +6690,8 @@ window.LAUNCH_DATA = {
     "Apply dropped-field rules",
     "k=5 pre-filter check",
     "Hand table to Muteeb"
-   ]
+   ],
+   "layman": "Stripping personal details out of the data our page-suggestion feature learns from, per our legal lead's rules, so that work can start on time and stays on the right side of privacy law."
   },
   {
    "id": "N2-FH-19",
@@ -6526,7 +6722,8 @@ window.LAUNCH_DATA = {
     "Count how many pairs survive BH-FDR at n=20 for each window",
     "Split the results by collapsed monetised pages vs flat small pages",
     "Send the table and definition to Asad and Muteeb"
-   ]
+   ],
+   "layman": "Measuring whether we currently collect enough comment activity for the collaboration-suggestions feature to give useful results, so we know now - not in October - whether it needs a fallback plan."
   },
   {
    "id": "N2-FH-20",
@@ -6562,7 +6759,8 @@ window.LAUNCH_DATA = {
     "Align driver field names with the contract",
     "Run the contract tests and clear every exception"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Making every prediction feature answer in the same standard format - including saying honestly 'not enough data' when a page is too small - so the app's screens always show truthful, consistent results."
   },
   {
    "id": "N2-MT-01",
@@ -6591,7 +6789,8 @@ window.LAUNCH_DATA = {
     "Add the cache with tenant-scoped keys and invalidation",
     "Measure warm p95 on staging and record it",
     "Add contract tests to CI"
-   ]
+   ],
+   "layman": "Making the post-score feature fast and dependable: answers come back in under a second, so the score dial moves as the customer types rather than making the big wow moment feel like a wait."
   },
   {
    "id": "N2-MT-02",
@@ -6621,7 +6820,8 @@ window.LAUNCH_DATA = {
     "Implement the abstain state and test it",
     "Update the mock layer so Asad sees the new fields"
    ],
-   "table_priority_cell": "P0"
+   "table_priority_cell": "P0",
+   "layman": "When we score a draft post, the answer now also explains why - the main reasons, how confident we are, and an honest 'can't say' when the signal is weak - so the app never invents an explanation."
   },
   {
    "id": "N2-MT-03",
@@ -6651,7 +6851,8 @@ window.LAUNCH_DATA = {
     "Implement the aggregate query per page with tenant scoping",
     "Return setup-pill progress from ingest state",
     "Contract-test and switch Asad's mock to real"
-   ]
+   ],
+   "layman": "Building the data feed behind the Today screen - the suggested next move, the to-do list and the alert cards - kept strictly separate per customer, so the daily demo runs on real data instead of pretend data."
   },
   {
    "id": "N2-MT-04",
@@ -6684,7 +6885,8 @@ window.LAUNCH_DATA = {
     "Send in-app and SES email from the engine output, with SES bounce and complaint notifications wired to an automatic suppression list checked before every send",
     "Add unread-count endpoints per tenant and page, plus the quiet-hours and severity routing hook",
     "Swap in N2-FH-06 when it lands 30 Sep and re-run the end-to-end test"
-   ]
+   ],
+   "layman": "Building the delivery system for alerts (in-app and email) with a retry queue that never loses a message, so a comment-storm warning can't silently vanish on its way to the customer."
   },
   {
    "id": "N2-MT-05",
@@ -6714,7 +6916,8 @@ window.LAUNCH_DATA = {
     "Add index version tags and a rollback path",
     "Write the namespace isolation test",
     "Send Jill the measured embedding cost for her N3 Pinecone tier decision"
-   ]
+   ],
+   "layman": "Laying the groundwork for the Art-E assistant: a private, per-customer library of their page's content that it will read from when answering questions. No answers yet - this is the plumbing, started early because it takes months to mature."
   },
   {
    "id": "N2-MT-06",
@@ -6743,7 +6946,8 @@ window.LAUNCH_DATA = {
     "Cascade to revocation and data delete via the N1 path",
     "Return confirmation code and a resolving status URL",
     "Log each request and test end-to-end on staging"
-   ]
+   ],
+   "layman": "Building the switch Facebook presses when a user asks us to delete their data: we wipe it, confirm it, and log it. Facebook requires this before they'll approve our app, so missing it would cost us a 20-day delay."
   },
   {
    "id": "N2-MT-07",
@@ -6773,7 +6977,8 @@ window.LAUNCH_DATA = {
     "Schedule the 5-minute poll with per-tenant rate accounting",
     "Emit new comments to the labelling queue",
     "Record measured fetch latency for Faheem"
-   ]
+   ],
+   "layman": "Checking comments on recently active posts every five minutes or so instead of hourly, so a comment storm is spotted quickly enough to keep our 15-minute warning promise."
   },
   {
    "id": "N2-MT-08",
@@ -6801,7 +7006,8 @@ window.LAUNCH_DATA = {
     "Implement the serving change tenant-scoped",
     "Verify on the QA panel",
     "Close #23 in the issue log"
-   ]
+   ],
+   "layman": "Showing the nightly score-check results on the team's monitoring screens, so anyone can see at a glance whether the scores customers get still match what the models actually produce."
   },
   {
    "id": "N2-MT-10",
@@ -6830,7 +7036,8 @@ window.LAUNCH_DATA = {
     "Restore into a scratch environment and time it",
     "Verify restored data integrity",
     "File the drill receipt"
-   ]
+   ],
+   "layman": "Switching on automatic backups of all customer data, then doing a timed practice run of restoring everything from scratch, so we know for certain we could recover within two hours if disaster struck."
   },
   {
    "id": "N2-MT-11",
@@ -6860,7 +7067,8 @@ window.LAUNCH_DATA = {
     "Start the historical-backlog drain at low priority",
     "Measure fetch-plus-label latency on staging",
     "Send the timing and labelling-location note to Faheem"
-   ]
+   ],
+   "layman": "Wiring comment analysis (mood and nastiness checks) into the fast alert path and timing the whole chain, so we can prove a storm gets spotted, judged and flagged within the 15-minute promise."
   },
   {
    "id": "N2-MT-12",
@@ -6890,7 +7098,8 @@ window.LAUNCH_DATA = {
     "Observe the deploy and rollback without intervening; time both",
     "Sign the receipt for Checklist 2 (code rollback tested N2)",
     "Log every point Asad had to ask about and update the runbook"
-   ]
+   ],
+   "layman": "A practice session where a second teammate releases an update and undoes it using only the written instructions, watched but unaided, so the product can still ship fixes in launch week if our lead engineer is ill."
   },
   {
    "id": "N2-MT-13",
@@ -6921,7 +7130,8 @@ window.LAUNCH_DATA = {
     "Demo the live score with drivers and abstain state",
     "Demo connect, disconnect and verify data gone by query",
     "Record the outcome"
-   ]
+   ],
+   "layman": "The big checkpoint demo on 2 October: score a real draft on a real pilot customer's page live, then disconnect that page and prove all its data is genuinely gone - showing both the daily value and the privacy promise work."
   },
   {
    "id": "N2-MT-14",
@@ -6954,7 +7164,8 @@ window.LAUNCH_DATA = {
    ],
    "sprint": "N2",
    "assignee": "Muteeb",
-   "priority_reason": "external Meta clock: submission Fri 25 Sep with one safe rejection cycle"
+   "priority_reason": "external Meta clock: submission Fri 25 Sep with one safe rejection cycle",
+   "layman": "Getting our Facebook developer account fully set up for review: working policy links, correct sign-in addresses, and a test account with a realistic page so Facebook's reviewer can actually try the product without hitting a wall."
   },
   {
    "id": "N2-MT-15",
@@ -6985,7 +7196,8 @@ window.LAUNCH_DATA = {
     "Run or explicitly scope the deletion cascade, and tell Filza which",
     "Register the URL in the dashboard and test end-to-end on staging"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Handling the case where someone removes our app from inside their Facebook settings: we're told, we cut our access and mark their pages disconnected, so we never keep data for someone who has revoked us."
   },
   {
    "id": "N2-MT-16",
@@ -7019,7 +7231,8 @@ window.LAUNCH_DATA = {
     "Prove both failure directions with a deliberate break",
     "Wire into the PR check and document how to fix a failure"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Automatic checks on every code change that make sure the screens and the data behind them still agree; if they drift apart the change is blocked, so three engineers can share one system without silently breaking each other."
   },
   {
    "id": "N2-MT-17",
@@ -7053,7 +7266,8 @@ window.LAUNCH_DATA = {
     "Return Retry-After and X-RateLimit-* in the envelope",
     "Log every limit hit for the N5 tuning"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Putting fair-usage limits on every part of the service, so one customer's runaway browser tab can't hog the capacity everyone shares - and when a limit is hit they see a polite 'please wait' rather than an error."
   },
   {
    "id": "N2-SD-01",
@@ -7086,7 +7300,8 @@ window.LAUNCH_DATA = {
     "Define the gate clock end-to-end incl. labelling, per Faheem's seam 1",
     "Note the recall posture line Faheem is adding to the crisis doc",
     "Circulate to Lewis (drill) and Alex (criteria)"
-   ]
+   ],
+   "layman": "Writing the pass mark for the crisis-warning feature into our official checklist - how accurate it must be and how fast, from comment posted to email received - so we can honestly judge in October whether it's good enough."
   },
   {
    "id": "N2-SD-02",
@@ -7115,7 +7330,8 @@ window.LAUNCH_DATA = {
     "Drafts: bands + abstain trigger tied to the confidence/coverage field, chip labels, threshold, autosave",
     "Cite the flop result (regressor + Borda gate, 75% at 55% coverage) so the abstain share is right",
     "Link the Loom and design-QA checklist for each"
-   ]
+   ],
+   "layman": "Writing a clear pass/fail checklist for the Today screen and the draft-scoring screen before they're built, so the developer can check his own work and quality isn't negotiated down against a deadline."
   },
   {
    "id": "N2-SD-03",
@@ -7149,7 +7365,8 @@ window.LAUNCH_DATA = {
     "State that quiet-hour alerts are logged and surface in the morning digest",
     "Hand to Muteeb (engine), Faheem (crisis doc), Asad (Settings v1)",
     "Add the decision to the decision log"
-   ]
+   ],
+   "layman": "Deciding what happens when a crisis alert fires at 2am: wake the customer, or hold it until morning? One meeting to settle quiet hours and overrides, so 'caught in minutes' is a real product promise rather than marketing copy."
   },
   {
    "id": "N2-SD-04",
@@ -7181,7 +7398,8 @@ window.LAUNCH_DATA = {
     "Verify reviewer credentials and test page content with Muteeb/Asad",
     "Check callback, privacy, ToS, deletion URLs and redirect URIs resolve",
     "Freeze the consent-screen UI note with Asad after recording"
-   ]
+   ],
+   "layman": "Putting together everything Facebook needs to approve our app: a plain description, proof of what each permission is for, a test account and demo videos. This is the one approval gate we don't control, so it must be watertight."
   },
   {
    "id": "N2-SD-05",
@@ -7210,7 +7428,8 @@ window.LAUNCH_DATA = {
     "Write the daily watch + 24h SLA routine and who covers weekends",
     "Schedule the weekly test-credential check",
     "Re-brief the backup on the final package and responses"
-   ]
+   ],
+   "layman": "Writing our replies to the three most likely Facebook rejection reasons before we even submit, plus a daily status-checking routine, so if a rejection lands we answer within a day instead of losing precious calendar time."
   },
   {
    "id": "N2-SD-06",
@@ -7240,7 +7459,8 @@ window.LAUNCH_DATA = {
     "Name the activation event and its measurable definition",
     "Specify setup pill states and completion events the UI consumes",
     "Hand to Asad (KPI events), Muteeb (queue events), Faheem (ingest priority)"
-   ]
+   ],
+   "layman": "Writing the plan for a new customer's first minutes - connect their page, see something useful fast - and picking the one moment that counts as 'they got it', so the whole team measures success the same way."
   },
   {
    "id": "N2-SD-07",
@@ -7274,7 +7494,8 @@ window.LAUNCH_DATA = {
     "Alex approval line-by-line filed",
     "Submit; screenshot the confirmation and timestamp",
     "Start the daily watch and confirm Alex publishes the last-safe-resubmission date"
-   ]
+   ],
+   "layman": "Getting the final approvals and actually pressing submit on our Facebook application on Friday 2 October - the last date that still leaves room for one rejection-and-resubmit round before launch."
   },
   {
    "id": "N2-SD-08",
@@ -7304,7 +7525,8 @@ window.LAUNCH_DATA = {
     "Set the eligibility floor with Faheem's floors and bands",
     "Give Lewis the floor for pilot recruiting",
     "Fold into the onboarding spec"
-   ]
+   ],
+   "layman": "Writing down exactly what a small page with little history should see on day one - honest 'still building your baseline' messages instead of shaky numbers - because the worst reviews come from customers shown figures they shouldn't be."
   },
   {
    "id": "N2-SD-09",
@@ -7333,7 +7555,8 @@ window.LAUNCH_DATA = {
     "Settings: pass lines per control incl. quiet hours and data rights",
     "Reference the notification policy and voice guide",
     "Link the Looms and design-QA checklists"
-   ]
+   ],
+   "layman": "Writing the pass/fail checklists for the best-posting-times screen and the Settings screen before they're built next sprint, so the developer knows exactly what 'done' looks like."
   },
   {
    "id": "N2-SD-10",
@@ -7364,7 +7587,8 @@ window.LAUNCH_DATA = {
     "Draw the 200 sample from historical comments; annotate/exclude the anomaly window",
     "Brief labelers with Lewis; agree the N3 delivery date",
     "Record provenance in the gold-set register"
-   ]
+   ],
+   "layman": "Paying independent people to judge 200 real comments by hand, without seeing what our software said, so we have a genuine human answer key to measure our comment-reading accuracy against."
   },
   {
    "id": "N2-SD-11",
@@ -7392,7 +7616,8 @@ window.LAUNCH_DATA = {
     "File drift as sized tickets; fold accepted inventions into the pack",
     "Publish the component-drift rule",
     "Update the decision log"
-   ]
+   ],
+   "layman": "A design quality sweep of every screen shipped this sprint against the agreed designs, plus a rule that any on-the-fly design change gets logged, so the product stays visually consistent instead of drifting screen by screen."
   },
   {
    "id": "N2-SD-12",
@@ -7421,7 +7646,8 @@ window.LAUNCH_DATA = {
     "Rank items against the cut order and blocker criteria",
     "Place into backlog or betting-table list",
     "Book the weekly slot through N6"
-   ]
+   ],
+   "layman": "Starting a weekly summary of pilot customer feedback, with each item ranked - must fix now, next sprint, or maybe later - so real customer voices steer what we build instead of getting lost in chat threads."
   },
   {
    "id": "N2-SD-13",
@@ -7453,7 +7679,8 @@ window.LAUNCH_DATA = {
     "Agree the definition of done for a surface",
     "Review the protocol once at the 2 Oct gate and adjust"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Setting up a daily half-hour code review between our two front-end developers, with a written checklist, because they're sharing one codebase for the first time nine weeks before launch and mistakes now compound."
   },
   {
    "id": "N2-SD-14",
@@ -7484,7 +7711,8 @@ window.LAUNCH_DATA = {
     "Take the review and merge",
     "Confirm it renders on the preview deploy"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Our new developer's first small change taken all the way through: written, reviewed, tested and live on a preview site. The point is proving he can use our whole pipeline, so later time estimates for his work stop being guesses."
   },
   {
    "id": "N2-SD-15",
@@ -7522,7 +7750,8 @@ window.LAUNCH_DATA = {
     "Grep the codebase for hard-coded colour/spacing and fix",
     "Write the component-drift rule into the review checklist"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Handing our new developer ownership of the shared kit of screen building blocks - buttons, cards, dials, tables - plus a single page showing every piece, so all screens stay consistent and later accessibility checks are done once, not per screen."
   },
   {
    "id": "N2-SD-16",
@@ -7556,7 +7785,8 @@ window.LAUNCH_DATA = {
     "Check each fixture against the pack's state art",
     "Tell Asad which routes he can now build against"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Building realistic pretend data for every situation a screen can be in - empty page, still loading, error, not enough data - so screens can be built and tested now without waiting for the real data connections to be finished."
   },
   {
    "id": "N2-AX-02",
@@ -7585,7 +7815,8 @@ window.LAUNCH_DATA = {
     "Agenda template: shipped / at risk / cut-order move",
     "Write the first note on 25 Sep",
     "Store notes with the decisions calendar"
-   ]
+   ],
+   "layman": "Starting a 30-minute Friday meeting where the founders decide what gets cut if we're running behind - nice-to-haves go first, safety and reliability never - so scope shrinks deliberately instead of by panic in November."
   },
   {
    "id": "N2-AX-03",
@@ -7614,7 +7845,8 @@ window.LAUNCH_DATA = {
     "Re-confirm legal-name match if Meta queries it",
     "Status to Saad on 30 Sep",
     "Record outcome on the decisions calendar"
-   ]
+   ],
+   "layman": "Chasing Facebook to finish verifying us as a legitimate business, escalating if it stalls, because without that stamp we can't even submit our app for review on 2 October and the whole launch timeline slips."
   },
   {
    "id": "N2-AX-04",
@@ -7645,7 +7877,8 @@ window.LAUNCH_DATA = {
     "Confirm the deletion route matches the callback",
     "Sign and date",
     "Confirm the URLs resolve in the Meta dashboard"
-   ]
+   ],
+   "layman": "The CEO reading and signing our first set of legal documents - terms of service, privacy policy and data-handling agreement - before Facebook reads them and before the first pilot customers sign up against them."
   },
   {
    "id": "N2-AX-05",
@@ -7677,7 +7910,8 @@ window.LAUNCH_DATA = {
     "Screencast vs consent-UI check",
     "URL resolution check (deletion, privacy, ToS)",
     "Sign jointly with Filza"
-   ]
+   ],
+   "layman": "The CEO checking every line of our Facebook submission to make sure it uses plain page-analytics language and none of the ambitious investor-pitch phrasing, because one wrong phrase in front of Facebook's reviewers could cost us 20 days."
   },
   {
    "id": "N2-AX-06",
@@ -7709,7 +7943,8 @@ window.LAUNCH_DATA = {
     "Publish both last-safe-resubmission dates and name the planning assumption",
     "Set the dev-mode fallback trigger off the worse reading",
     "Circulate to Saad, Asad and Filza before 2 Oct"
-   ]
+   ],
+   "layman": "Working out the Facebook approval maths on a calendar - if they take the full 20 days and reject us once, what's the last safe date to resubmit before launch? - and publishing it so no deadline surprises anyone in November."
   },
   {
    "id": "N2-AX-07",
@@ -7742,7 +7977,8 @@ window.LAUNCH_DATA = {
     "Note the batch-1 non-pilot motion as an open item for 24 Nov",
     "Sign and date",
     "Circulate the sheet"
-   ]
+   ],
+   "layman": "The CEO signing off our prices, based on Jill's cost workings, locked on 2 October - so the website, directory listings, invoices and customer notices all quote one price instead of five slightly different ones."
   },
   {
    "id": "N2-AX-08",
@@ -7775,7 +8011,8 @@ window.LAUNCH_DATA = {
     "Write the pilot messaging",
     "Name the trigger and who pulls it",
     "Circulate for acknowledgement"
-   ]
+   ],
+   "layman": "Writing the plan B for launch day if Facebook approval hasn't come through: pilots keep using the product in test mode, new signups join a queue, and marketing only claims what actually works - decided calmly now, not scrambled on the day."
   },
   {
    "id": "N2-AX-09",
@@ -7805,7 +8042,8 @@ window.LAUNCH_DATA = {
     "Get a written yes",
     "Log in the marketing calendar",
     "Brief Saad for the N5 package"
-   ]
+   ],
+   "layman": "Getting a named, well-followed person confirmed in writing to present us on Product Hunt on launch day, 8 December - they need 4-6 weeks' notice, so leaving it later means launching without one."
   },
   {
    "id": "N2-JL-01",
@@ -7837,7 +8075,8 @@ window.LAUNCH_DATA = {
     "Set up the send from the warmed domain with Muteeb (SES or the warmed sender), test to internal addresses",
     "Send 22 Sep; capture SES stats (sent, bounce, complaint, open)",
     "File stats as warm-up data point #1"
-   ]
+   ],
+   "layman": "Sending our first newsletter on 22 September - both a marketing beat and the first gentle traffic through our new email system, which has to be warmed up gradually or launch-day emails will land in spam folders."
   },
   {
    "id": "N2-JL-02",
@@ -7870,7 +8109,8 @@ window.LAUNCH_DATA = {
     "Write the first-response standard (hours, target, escalation)",
     "Send a test ticket; answer it inside the standard",
     "Share the standard with Saad, Asad, Lewis; add the address to pilot onboarding"
-   ]
+   ],
+   "layman": "Getting a proper support email address live with a written promise of how fast we reply and who handles what, so the first pilot customers arriving from 24 September never write into a dead inbox."
   },
   {
    "id": "N2-JL-03",
@@ -7907,7 +8147,8 @@ window.LAUNCH_DATA = {
     "Compute margin at three candidate price points for 5 pilots and 100 pages",
     "Review assumptions with Asad, Muteeb and Faheem",
     "Deliver to Alex by 28 Sep; record the price he signs on 2 Oct"
-   ]
+   ],
+   "layman": "Working out what each customer actually costs us to serve - hosting, data, AI usage - and what we'd earn at different price points, handed to the CEO so the 2 October pricing decision rests on real numbers."
   },
   {
    "id": "N2-JL-04",
@@ -7939,7 +8180,8 @@ window.LAUNCH_DATA = {
     "Name the reputation-dashboard watcher and the weekly check",
     "Add the schedule to the marketing calendar with Alex",
     "Review after each send and adjust the ramp"
-   ]
+   ],
+   "layman": "Planning the gradual ramp-up of our email sending through the autumn - how much, when, and what pauses the ramp if too many bounce - so the big launch-day emails to hundreds of people actually reach inboxes."
   },
   {
    "id": "N2-JL-05",
@@ -7972,7 +8214,8 @@ window.LAUNCH_DATA = {
     "Define payment terms, method and the 'paying pilot' definition",
     "Check wording against the landing page and the planned 24 Nov notice",
     "Attach to pilot agreement v1 and send to Lewis for conversations"
-   ]
+   ],
+   "layman": "Giving our legal lead the money details for the pilot contracts - price, how often we bill, payment terms, VAT - and checking they match the website, so every customer sees one consistent price everywhere."
   },
   {
    "id": "N2-JL-06",
@@ -8004,7 +8247,8 @@ window.LAUNCH_DATA = {
     "Map line items to the commercial schedule",
     "Produce a sample invoice; Filza approves",
     "File the template in the finance folder"
-   ]
+   ],
+   "layman": "Building our invoice template properly now - company details, VAT, payment terms, numbering - with legal review, so November invoicing isn't a rushed job that gets the legally required details wrong."
   },
   {
    "id": "N2-LW-01",
@@ -8035,7 +8279,8 @@ window.LAUNCH_DATA = {
     "Apply the triage rule within 48h of each application",
     "Add candidates to the roster",
     "Weekly applicant count to Alex"
-   ]
+   ],
+   "layman": "Putting the pilot application form live on 24 September and reviewing every application within 48 hours, so the people our first marketing push sends to the form get a prompt answer instead of silence."
   },
   {
    "id": "N2-LW-02",
@@ -8066,7 +8311,8 @@ window.LAUNCH_DATA = {
     "Attend the session with Alex and Saad",
     "Check the written rules against what pilots said and flag mismatches",
     "Confirm Saad circulates the signed policy to Muteeb, Asad and Faheem"
-   ]
+   ],
+   "layman": "Gathering what pilot customers actually said about alerts - would they want a 2am wake-up, how many alerts is too many - into a one-page note for the policy meeting, so the decision is based on real customer preferences."
   },
   {
    "id": "N2-LW-03",
@@ -8101,7 +8347,8 @@ window.LAUNCH_DATA = {
     "Pilots 2-5 connected by 1 Oct",
     "Pilot agreement v1 signed or acknowledged per pilot",
     "Friction log to Saad"
-   ]
+   ],
+   "layman": "Personally walking each of our first five pilot customers through connecting their real Facebook pages in test mode, noting every stumble, so the product runs on real pages while Facebook reviews us and the 2 October demo has real data."
   },
   {
    "id": "N2-LW-04",
@@ -8129,7 +8376,8 @@ window.LAUNCH_DATA = {
     "Severity ranking on the feedback sheet",
     "Friday hand-off to Saad",
     "Fix-then-invite list agreed with Saad and Asad"
-   ]
+   ],
+   "layman": "Running weekly calls with the first pilot customers, ranking what they report by severity, and agreeing the list of problems that must be fixed before we invite the next five - so we don't burn new relationships on known-broken flows."
   },
   {
    "id": "N2-FZ-01",
@@ -8160,7 +8408,8 @@ window.LAUNCH_DATA = {
     "Write the banned-terms list with substitutions",
     "List every Meta-facing surface the rule covers",
     "Circulate and get acknowledgements, incl. the Meta backup"
-   ]
+   ],
+   "layman": "Publishing a one-page rulebook of words we may and may not use anywhere Facebook will look - plain 'page analytics tool' language in, investor-pitch phrasing out - because one wrong phrase could cost a 20-day rejection."
   },
   {
    "id": "N2-FZ-02",
@@ -8191,7 +8440,8 @@ window.LAUNCH_DATA = {
     "Freeze the spec and version it",
     "Align the Privacy v1 deletion paragraph to the spec",
     "Agree the confirmation-code, status-URL and data-deletion-instructions URL formats with Muteeb and Saad"
-   ]
+   ],
+   "layman": "Finalising exactly how data deletion works when a user asks for it, and making sure our privacy policy describes precisely what the system actually does - so the promise on paper and the behaviour in code match word for word."
   },
   {
    "id": "N2-FZ-03",
@@ -8222,7 +8472,8 @@ window.LAUNCH_DATA = {
     "Check each vendor's training and retention terms and data location",
     "Record rows for the sub-processor list; flag any fail",
     "Publish the standing rule and the approval route for new vendors"
-   ]
+   ],
+   "layman": "Checking every AI supplier we use in writing: none may keep or learn from our customers' content. Any supplier that can't promise that doesn't get customer data - so our privacy policy stays true."
   },
   {
    "id": "N2-FZ-04",
@@ -8250,7 +8501,8 @@ window.LAUNCH_DATA = {
     "Set the liability cap and Tester/dev-mode terms",
     "Add feedback, confidentiality and DPA pointer",
     "Hand a signable version to Lewis with a signing log"
-   ]
+   ],
+   "layman": "Drafting the agreement each pilot customer signs: our scores and alerts are guidance not guarantees, our liability is capped, and they're testing an early product - so pilots use the real product with proper paper behind them."
   },
   {
    "id": "N2-FZ-05",
@@ -8283,7 +8535,8 @@ window.LAUNCH_DATA = {
     "Firewall-check both documents against the rulebook",
     "Asad publishes at stable URLs; footer links live",
     "Send the three URLs to Saad for the app dashboard"
-   ]
+   ],
+   "layman": "Getting the privacy policy and terms of service signed off and published at permanent web addresses, because Facebook's reviewers read them during approval and a broken or placeholder link is a rejection reason."
   },
   {
    "id": "N2-FZ-06",
@@ -8313,7 +8566,8 @@ window.LAUNCH_DATA = {
     "Insert the sub-processor rows from the vendor gate",
     "Write the change-notice, breach-timing and deletion terms",
     "Alex signs; Lewis receives the signable version"
-   ]
+   ],
+   "layman": "Finishing the data-handling agreement pilots sign - naming every supplier that touches their data, our security measures, and how we'd notify them of a breach - so pilot sign-ups and later invoicing aren't stalled by missing paperwork."
   },
   {
    "id": "N2-FZ-07",
@@ -8344,7 +8598,8 @@ window.LAUNCH_DATA = {
     "Watch each screencast for narration and on-screen copy",
     "Return marked changes to Saad; re-read the fixed package",
     "Sign the joint written sign-off with Saad and Alex"
-   ]
+   ],
+   "layman": "A final word-by-word read of everything Facebook will see - forms, videos, policy pages - against the language rulebook, with a joint written sign-off, because this is the one approval we don't control and one slip costs 20 days."
   },
   {
    "id": "N2-FZ-08",
@@ -8373,7 +8628,8 @@ window.LAUNCH_DATA = {
     "Specify marketing consent capture at app signup (unticked, logged with timestamp)",
     "Review the existing Netlify Forms wording and rule on re-permission",
     "Send to Asad and Alex before the N3 waitlist build"
-   ]
+   ],
+   "layman": "Writing legally correct opt-in wording for our mailing lists - what emails people will get and how to unsubscribe - so the big launch emails in November and December are lawful to send under UK marketing rules."
   },
   {
    "id": "N2-FZ-09",
@@ -8399,7 +8655,8 @@ window.LAUNCH_DATA = {
     "Web and common-law sweep for conflicting use",
     "Write the risk note and recommendation",
     "Alex decides; diary any filing with Jill"
-   ]
+   ],
+   "layman": "A search of UK and EU trademark records to check nobody else owns the names ArtemisAI or Art-E, so we know whether to register or rename before the brand goes on public startup listings."
   },
   {
    "id": "N2-FZ-10",
@@ -8432,7 +8689,8 @@ window.LAUNCH_DATA = {
     "Insert the signed pricing on 2 Oct",
     "Review Jill's invoice template for particulars and VAT wording",
     "Attach the schedule to the pilot agreement for Lewis"
-   ]
+   ],
+   "layman": "Writing the money side of the pilot agreement (price, payment terms, VAT) plus a matching invoice template, so when we bill pilot customers in November the paperwork already exists and nothing gets disputed."
   },
   {
    "id": "N2-FZ-11",
@@ -8463,7 +8721,8 @@ window.LAUNCH_DATA = {
     "Send edits to the surface owners with a deadline of 1 Oct",
     "Re-read after the fixes and file the record with the package"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "A careful read of everything the public can find about us — LinkedIn, the website, directories — to strip out phrases that could get us rejected by Facebook's app reviewers, who do search the company before approving."
   },
   {
    "id": "N3-AS-01",
@@ -8496,7 +8755,8 @@ window.LAUNCH_DATA = {
     "One action + drafted reply (copy only)",
     "Mark-all-read",
     "Verify against a replayed incident from Muteeb"
-   ]
+   ],
+   "layman": "Building the alerts screen: a sorted inbox of warnings, each showing the exact posts and comments that triggered it, one suggested action, and a ready-drafted calm reply the owner can copy — never posted automatically."
   },
   {
    "id": "N3-AS-02",
@@ -8528,7 +8788,8 @@ window.LAUNCH_DATA = {
     "Consent wording + unsubscribe test with Filza",
     "Verify no pixels fire before consent",
     "Go live 13 Oct"
-   ]
+   ],
+   "layman": "Swapping our homemade sign-up form for a proper purchased waitlist tool, so people joining from each startup directory are tracked, get a lawful consent flow, and can see their place in the queue."
   },
   {
    "id": "N3-AS-03",
@@ -8557,7 +8818,8 @@ window.LAUNCH_DATA = {
     "Import with original timestamps",
     "Tag source=early",
     "Reconcile counts; confirm consent basis"
-   ]
+   ],
+   "layman": "Moving everyone who already signed up on the old form into the new waitlist tool with their original join date, so early supporters keep their place in the queue and we don't break their trust."
   },
   {
    "id": "N3-AS-04",
@@ -8589,7 +8851,8 @@ window.LAUNCH_DATA = {
     "Email sending behind a flag",
     "Bells on unread-count endpoints",
     "Decrement on read / mark-all-read"
-   ]
+   ],
+   "layman": "Alert emails that link straight to the right alert in the app, plus notification bells that show accurate unread counts — so a crisis warning reaches the owner wherever they are and the numbers can be trusted."
   },
   {
    "id": "N3-AS-05",
@@ -8618,7 +8881,8 @@ window.LAUNCH_DATA = {
     "Band labels and colours",
     "Weekly delta and thin state",
     "Click-through to Analytics"
-   ]
+   ],
+   "layman": "A small badge at the top of every screen showing the page's health score and how it changed this week, so owners always have the one number they quote to their boss without hunting for it."
   },
   {
    "id": "N3-AS-06",
@@ -8648,7 +8912,8 @@ window.LAUNCH_DATA = {
     "Quiet hours + severity override per policy",
     "Digest vs immediate toggle",
     "Verify logged-not-sent behaviour"
-   ]
+   ],
+   "layman": "Settings that let owners tune their alerts — how sensitive, quiet hours at night, instant or daily summary — so warnings arrive the way each person wants and never get so annoying they switch them off."
   },
   {
    "id": "N3-AS-07",
@@ -8676,7 +8941,8 @@ window.LAUNCH_DATA = {
     "Post to the feedback store",
     "All-clear state on card and feed",
     "All-clear line in the digest"
-   ]
+   ],
+   "layman": "A 'Not a crisis' button on each alert so owners can tell us when we got it wrong, plus an all-clear notice when a storm dies down — the feedback makes future warnings more accurate and the all-clear stops the worrying."
   },
   {
    "id": "N3-AS-08",
@@ -8706,7 +8972,8 @@ window.LAUNCH_DATA = {
     "Two charts with notes",
     "Deferred tabs named",
     "Warehouse reconciliation recorded"
-   ]
+   ],
+   "layman": "A simple analytics page with four headline numbers (reach, engagement, followers, health) and two charts, checked to the penny against our own database so the figures pilots see are provably right."
   },
   {
    "id": "N3-AS-09",
@@ -8737,7 +9004,8 @@ window.LAUNCH_DATA = {
     "Count-floor suppression state",
     "IANA timezone rendering",
     "Lookback + self-selection note"
-   ]
+   ],
+   "layman": "A week-by-hour grid showing when a page's audience actually responds, with the best slot highlighted — and an honest 'not enough posts yet' message instead of a made-up answer when the data is thin."
   },
   {
    "id": "N3-AS-10",
@@ -8769,7 +9037,8 @@ window.LAUNCH_DATA = {
     "Compare the three health-factor inputs vs Business Suite using Faheem's mapping",
     "Write the delta document; file it for N6-FH-03",
     "Ship the note beside tiles and pill"
-   ]
+   ],
+   "layman": "Sitting with a pilot and comparing our numbers side by side with Facebook's own dashboard, then adding a plain note in the product explaining the small expected differences — so a mismatch never shakes their trust."
   },
   {
    "id": "N3-AS-11",
@@ -8800,7 +9069,8 @@ window.LAUNCH_DATA = {
     "Connected pages with disconnect",
     "Data-controls entry points",
     "Legal links"
-   ]
+   ],
+   "layman": "The first settings screen: notification preferences, connected pages, and the doors to export-my-data and delete-my-data — the place where consent and privacy rights physically live for the legal checks that follow."
   },
   {
    "id": "N3-AS-12",
@@ -8828,7 +9098,8 @@ window.LAUNCH_DATA = {
     "Sheet system for compose/filters/slide-overs",
     "Breakpoints on shipped screens",
     "Device check iOS + Android"
-   ]
+   ],
+   "layman": "Making the whole app work properly on phones — a bottom navigation bar, the Art-E assistant button, and slide-up panels — tested on iPhone and Android so mobile isn't a nasty surprise near launch."
   },
   {
    "id": "N3-AS-13",
@@ -8859,7 +9130,8 @@ window.LAUNCH_DATA = {
     "Flow 2 daily loop",
     "Flow 3 draft score / abstain",
     "Wire as a required CI check"
-   ]
+   ],
+   "layman": "Three automatic robot tests that click through the app like a real user — sign up and connect a page, the daily check-in, and scoring a draft post — run on every code change so breakages are caught before pilots see them."
   },
   {
    "id": "N3-AS-14",
@@ -8887,7 +9159,8 @@ window.LAUNCH_DATA = {
     "Post closed/deferred per item",
     "Confirm to Lewis by 12 Oct"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Fixing the problems the first five pilot users reported, and telling the team what's fixed or parked, so pilots six to ten join a version without the known annoyances that would burn their goodwill."
   },
   {
    "id": "N3-AS-15",
@@ -8917,7 +9190,8 @@ window.LAUNCH_DATA = {
     "Name the decider and the 24-hour window after Lewis's result",
     "Confirm a re-run reuses the same pre-declared bar with Lewis",
     "File in the register; Alex, Muteeb and Lewis acknowledge"
-   ]
+   ],
+   "layman": "Writing down in advance what we ship if the collaboration-suggestions quality test fails — a trimmed list, or holding the feature back — so a bad result triggers a plan, not a last-minute scramble."
   },
   {
    "id": "N3-AS-16",
@@ -8950,7 +9224,8 @@ window.LAUNCH_DATA = {
     "Verify a week of records covers every live route",
     "Hand the schema and a sample query to Muteeb"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Labelling every request the app makes with who asked and what it cost (computing time, database reads, AI usage), so we can later say exactly what each customer costs us — vital for setting the right price."
   },
   {
    "id": "N3-FH-01",
@@ -8979,7 +9254,8 @@ window.LAUNCH_DATA = {
     "500-draft skew test",
     "Jitter + parity checks",
     "Latency profile"
-   ]
+   ],
+   "layman": "Making sure the live post-scoring gives exactly the same answer as our tested version, never flickers between scores for the same text, and responds quickly — a gauge that disagrees with itself gets ignored."
   },
   {
    "id": "N3-FH-02",
@@ -9009,7 +9285,8 @@ window.LAUNCH_DATA = {
     "Citations to post/comment ids",
     "Fingerprint dedup",
     "Quiet hours + severity override + digest per policy"
-   ]
+   ],
+   "layman": "The brain of the alert system: it turns a comment storm into one clear alert — plain-English problem, one action, links to the actual comments — instead of fifty pings, and respects each owner's quiet hours."
   },
   {
    "id": "N3-FH-03",
@@ -9040,7 +9317,8 @@ window.LAUNCH_DATA = {
     "Seed storm",
     "Clock each stage",
     "File the receipt"
-   ]
+   ],
+   "layman": "A live fire drill: we deliberately stir up a comment storm on a pilot page and time the whole chain, proving the warning email lands within our 15-minute promise before real customers depend on it."
   },
   {
    "id": "N3-FH-04",
@@ -9069,7 +9347,8 @@ window.LAUNCH_DATA = {
     "Writers for each recommendation type",
     "Outcome resolver",
     "Handoff to Muteeb"
-   ]
+   ],
+   "layman": "A running record of every recommendation we make and what actually happened afterwards, so we can later prove statements like 'posts improved when you followed the advice' with real evidence."
   },
   {
    "id": "N3-FH-05",
@@ -9099,7 +9378,8 @@ window.LAUNCH_DATA = {
     "Confidence chip value",
     "Ledger write",
     "Handoff to Muteeb"
-   ]
+   ],
+   "layman": "The logic that picks the single best thing a page owner should do today — from posting-time data, flop warnings and alert status — so the home screen's headline suggestion has real reasoning behind it."
   },
   {
    "id": "N3-FH-06",
@@ -9130,7 +9410,8 @@ window.LAUNCH_DATA = {
     "Reconcile one pilot vs warehouse per factor",
     "Factor-to-Meta-metric mapping + delta note to Asad (N3-AS-10) by 13 Oct",
     "Thin-page + factor-sum checks"
-   ]
+   ],
+   "layman": "The first version of the health score calculation, made of three understandable sub-scores and double-checked against our database for a real pilot page, so the number on the badge is defensible before the mid-October checkpoint."
   },
   {
    "id": "N3-FH-07",
@@ -9158,7 +9439,8 @@ window.LAUNCH_DATA = {
     "Models eligible at 90 days",
     "Completion events list",
     "Test on a new page"
-   ]
+   ],
+   "layman": "Deciding what to fetch first when a new page connects — the last 90 days — so a new customer sees their first useful insight in minutes rather than staring at a loading screen while months of history download."
   },
   {
    "id": "N3-FH-08",
@@ -9187,7 +9469,8 @@ window.LAUNCH_DATA = {
     "Trip thresholds + written trip actions",
     "Synthetic-shift test",
     "Extend the watchdog panels to best-times aggregates (staleness + distribution shift vs the S9 baseline) so every launch model, not only flop/NLP/crisis, has a drift panel on the QA dashboard"
-   ]
+   ],
+   "layman": "Automatic smoke detectors for our prediction models: if their accuracy quietly starts drifting, a dashboard flags it and a written playbook says what to do — models decay silently otherwise."
   },
   {
    "id": "N3-FH-09",
@@ -9218,7 +9501,8 @@ window.LAUNCH_DATA = {
     "Store provenance per question",
     "Write the coverage-gap list per surface and category",
     "Send gaps to Lewis and Saad"
-   ]
+   ],
+   "layman": "Loading the first batch of test questions for the Art-E assistant into our nightly checking system and listing which topics still need questions, so the full 200-question accuracy test can be built next sprint."
   },
   {
    "id": "N3-FH-10",
@@ -9245,7 +9529,8 @@ window.LAUNCH_DATA = {
     "Retrain on a fresh cut",
     "Compare vs pinned",
     "Record decision"
-   ]
+   ],
+   "layman": "A practice run of updating a prediction model, with a written rule for deciding whether the new version is genuinely better before it replaces the old one — so retraining is a checked process, not a gamble."
   },
   {
    "id": "N3-FH-11",
@@ -9270,7 +9555,8 @@ window.LAUNCH_DATA = {
     "#15 retire post_reactions",
     "Log VISION parked",
     "#8 ML Docker image"
-   ]
+   ],
+   "layman": "Four small data-hygiene chores — tidying retired pages, dropping an unused metric, parking an image-analysis idea, packaging our tools — so they stop showing up as noise on the team's monitoring board."
   },
   {
    "id": "N3-FH-12",
@@ -9299,7 +9585,8 @@ window.LAUNCH_DATA = {
     "Share a sample row set",
     "Confirm with Lewis and Saad"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Publishing the exact spreadsheet format and coverage rules for the Art-E test questions, so Lewis and Saad can write them once, in the right shape, and they feed straight into the nightly checks without rework."
   },
   {
    "id": "N3-MT-01",
@@ -9339,7 +9626,8 @@ window.LAUNCH_DATA = {
    ],
    "depends_on_add": [
     "N1-FZ: de-identification policy + k=5 floor signed (blocking, per Checklist 4)"
-   ]
+   ],
+   "layman": "Building the engine that finds pages with genuinely similar audiences, with statistical checks so weak matches are filtered out, privacy floors enforced, and the list refreshed weekly."
   },
   {
    "id": "N3-MT-02",
@@ -9368,7 +9656,8 @@ window.LAUNCH_DATA = {
     "Add auth, tenant scoping and rate limits",
     "Swap CSV for the warehouse graph",
     "Write differencing and recompute-drift tests"
-   ]
+   ],
+   "layman": "Building the proper, secure connection that will feed collaboration suggestions to each customer's screen — with logins, per-customer separation and sensible limits, replacing an old half-built version that had none of that."
   },
   {
    "id": "N3-MT-03",
@@ -9402,7 +9691,8 @@ window.LAUNCH_DATA = {
     "Force a failure and confirm the DLQ holds it",
     "File the timing log",
     "Publish the per-stage timing (fetch -> label -> detect -> deliver) as a standing 15-min-clock panel on the QA dashboard, fed by every fast-lane cycle, not only the drill log"
-   ]
+   ],
+   "layman": "Replaying a real past comment storm through the whole system with a stopwatch — from first comment to warning email — to prove the 15-minute promise holds, and checking nothing gets lost when parts fail."
   },
   {
    "id": "N3-MT-04",
@@ -9433,7 +9723,8 @@ window.LAUNCH_DATA = {
     "Query the aggregates tenant-scoped and cache them",
     "Pass through the fallback level",
     "Contract-test against Faheem's table"
-   ]
+   ],
+   "layman": "The data feed behind the best-time-to-post grid: it serves each page's hour-by-hour results, honestly marks slots with too little data, and handles time zones correctly so the autumn clock change causes no wrong advice."
   },
   {
    "id": "N3-MT-05",
@@ -9463,7 +9754,8 @@ window.LAUNCH_DATA = {
     "Implement the aggregates with tenant scoping and cache",
     "Reconcile one pilot against the warehouse",
     "Contract-test"
-   ]
+   ],
+   "layman": "The data feeds behind the analytics page's headline numbers and charts, kept fast with caching and checked against our database for a real pilot page so what customers see is what the data actually says."
   },
   {
    "id": "N3-MT-06",
@@ -9496,7 +9788,8 @@ window.LAUNCH_DATA = {
    ],
    "checklist_add": [
     "Emit the 0-100 match score and record the frozen blend weights + scale in the gate register before 9 Oct"
-   ]
+   ],
+   "layman": "The recipe for combining the two ways we spot similar pages, with honest wording — 'similar discussion topics' when that's all we know, never overclaiming — and the recipe locked before the human quality review so the test is fair."
   },
   {
    "id": "N3-MT-07",
@@ -9527,7 +9820,8 @@ window.LAUNCH_DATA = {
     "Compute the weekly delta and thin-page state",
     "Schedule the nightly briefing aggregate",
     "Contract-test both endpoints"
-   ]
+   ],
+   "layman": "The data feed behind the health badge: each page's score, weekly change and the three factors behind it, plus an overnight summary job — the plumbing that must be live for the mid-October checkpoint."
   },
   {
    "id": "N3-MT-08",
@@ -9555,7 +9849,8 @@ window.LAUNCH_DATA = {
     "Purge from matches, spotlight and Saved",
     "Write the absence test and add to CI",
     "Log each propagation with timestamps"
-   ]
+   ],
+   "layman": "Making sure that when a page withdraws from collaboration suggestions, it vanishes from every match list and saved list within 24 hours — with an automatic check proving it — because a consent promise must be mechanically true."
   },
   {
    "id": "N3-MT-09",
@@ -9586,7 +9881,8 @@ window.LAUNCH_DATA = {
     "Implement the cascade with a tenant-scoped semantic cache key and log routing",
     "Define and test the frontier-failure fallback",
     "Report the first cache-hit rate"
-   ]
+   ],
+   "layman": "Wiring up the Art-E assistant end to end: it finds the right facts from your page's data, answers, tracks what each answer costs, and uses cheaper AI where possible — with one customer's data never leaking into another's answer."
   },
   {
    "id": "N3-MT-10",
@@ -9615,7 +9911,8 @@ window.LAUNCH_DATA = {
     "Implement checkpointed resumable chunks",
     "Emit named completion events to the API",
     "Test resume after a forced interruption"
-   ]
+   ],
+   "layman": "The system that fetches a newly connected page's history in smart order — most recent first, resumable if interrupted — and tells the screen what's done, so new customers see progress instead of a blank loading page."
   },
   {
    "id": "N3-MT-11",
@@ -9648,7 +9945,8 @@ window.LAUNCH_DATA = {
     "Wire readiness to load-balancer registration and the autoscale signal",
     "Build latency and error dashboards per endpoint",
     "Close restore drill #1 follow-ups"
-   ]
+   ],
+   "layman": "A public status page and internal dashboards showing whether the service is up and how fast it is, with layered health checks that report 'slower than usual' rather than falsely 'down' — pilots and Facebook's reviewers both check this."
   },
   {
    "id": "N3-MT-12",
@@ -9680,7 +9978,8 @@ window.LAUNCH_DATA = {
     "Run the drill and capture stage timestamps",
     "Show the health pill on real data",
     "Record the clock and follow-ups"
-   ]
+   ],
+   "layman": "The formal Friday checkpoint: a live crisis drill on a real pilot page, timed from first comment to warning email, with the health badge shown working — the recorded proof behind our 15-minute promise."
   },
   {
    "id": "N3-MT-13",
@@ -9710,7 +10009,8 @@ window.LAUNCH_DATA = {
     "Apply the k=5 floor rule to every template",
     "Send to Filza and Lewis; fold Filza's edits into N3-MT-06"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Writing the exact wording of match explanations ('8,200 of your people also follow…') and how each match type is classified, so legal can approve the language and the quality bar can be set before anyone sees a single match."
   },
   {
    "id": "N3-MT-14",
@@ -9741,7 +10041,8 @@ window.LAUNCH_DATA = {
     "Art-E thumbs + reason store endpoint",
     "Contract tests and a query for Faheem"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "The data plumbing behind alert settings and feedback: saving each owner's toggles and quiet hours, recording 'not a crisis' clicks and thumbs-up/down on assistant answers, so the screens work and the models learn from real reactions."
   },
   {
    "id": "N3-MT-15",
@@ -9774,7 +10075,8 @@ window.LAUNCH_DATA = {
     "Return a per-tenant 'data through' timestamp on the answer payload",
     "Make re-embed resumable and rollback-safe against the version tags",
     "Verify with a freshly published post on the dogfood tenant"
-   ]
+   ],
+   "layman": "Keeping the Art-E assistant's knowledge fresh: new posts and comments become answerable within a stated window, deleted data is properly removed, and each answer shows a 'data through' date — a stale answer confidently cited is worse than none."
   },
   {
    "id": "N3-MT-16",
@@ -9808,7 +10110,8 @@ window.LAUNCH_DATA = {
     "Add the top-10 view and the per-tenant daily threshold alert",
     "Check one tenant's numbers against the vendor bill"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "One dashboard showing what each feature costs us per customer per month, with an alarm if any single customer's daily cost spikes — so pricing uses real numbers and an expensive user is spotted the same day, not on the bill."
   },
   {
    "id": "N3-SD-01",
@@ -9838,7 +10141,8 @@ window.LAUNCH_DATA = {
     "Answer questions same day; route language to Filza only if new",
     "Resubmit within 48h on rejection; notify Alex the same day",
     "Weekly credential + test-page check"
-   ]
+   ],
+   "layman": "Actively managing Facebook's review of our app: answering every reviewer question the same day and resubmitting within 48 hours if rejected, with everything logged — because their clock doesn't pause for us."
   },
   {
    "id": "N3-SD-02",
@@ -9871,7 +10175,8 @@ window.LAUNCH_DATA = {
     "Define blocker criteria and severity ladder",
     "Define retest flow (Saad overflow, Lewis pilot side)",
     "Share with Filza for the pre-UAT DPA timing"
-   ]
+   ],
+   "layman": "Writing the rulebook for pilot testing before any bugs exist: who tests in what order, what tasks they attempt, what counts as a serious defect, and how retests work — so pass/fail can't be renegotiated under deadline pressure."
   },
   {
    "id": "N3-SD-04",
@@ -9903,7 +10208,8 @@ window.LAUNCH_DATA = {
     "Thumbs/reason capture and recommendation card pass lines",
     "Latency pass line from Muteeb's budget (TTFT and p95)",
     "Pass line per state in the N3-SD-10 matrix"
-   ]
+   ],
+   "layman": "Writing the pass/fail rules for the Art-E assistant: every number must link to its source, refusals use approved wording, AI labels show, and slow or stale answers fail like wrong ones — the definition next sprint's hardest test is judged by."
   },
   {
    "id": "N3-SD-06",
@@ -9936,7 +10242,8 @@ window.LAUNCH_DATA = {
     "Check reason-string vocabulary vs Filza's pass",
     "Verify pre-declared bar in the register before Lewis's human gate",
     "File gaps as tickets for Muteeb/Asad"
-   ]
+   ],
+   "layman": "Quality-checking the collaboration-suggestions feature against the agreed designs as it's built — the match cards, honest explanation wording, privacy floors and the withdrew-consent behaviour — so gaps are caught now, when they're cheap."
   },
   {
    "id": "N3-SD-07",
@@ -9965,7 +10272,8 @@ window.LAUNCH_DATA = {
     "Submit with per-directory UTM",
     "Claim G2; record review-willing pilots count from Lewis later",
     "Log dates in the marketing calendar"
-   ]
+   ],
+   "layman": "Submitting ArtemisAI to BetaList and startup directories with tracking tags so we know which listing brings sign-ups, and quietly claiming our review-site profile — these pre-launch windows close permanently at launch."
   },
   {
    "id": "N3-SD-08",
@@ -9993,7 +10301,8 @@ window.LAUNCH_DATA = {
     "Check alert email dark mode and deep links",
     "Verify the 'why numbers differ from Facebook' note ships",
     "File and size drift"
-   ]
+   ],
+   "layman": "A design quality sweep of every screen built this sprint — alerts, posting-time grid, analytics, settings, mobile, waitlist — against the agreed designs, filing anything off-spec so it's fixed before pilot testing amplifies it."
   },
   {
    "id": "N3-SD-09",
@@ -10024,7 +10333,8 @@ window.LAUNCH_DATA = {
     "Hold the review",
     "Write and circulate the outcome",
     "Update betting-table list"
-   ]
+   ],
+   "layman": "The first formal what-stays-what-gets-cut meeting with the founder, with the decision written down and shared — so scope shrinks deliberately as launch nears instead of being argued about again next sprint."
   },
   {
    "id": "N3-SD-10",
@@ -10058,7 +10368,8 @@ window.LAUNCH_DATA = {
     "Decide per state whether a recommendation card still shows",
     "Set the golden-set verdict for each state (correct / fail)",
     "Fold the states into the N3-SD-04 acceptance criteria and send to Asad"
-   ]
+   ],
+   "layman": "Writing the exact words the Art-E assistant shows in every awkward situation — can't answer, too little data, daily limit reached, service degraded — so it's honest and helpful in each case rather than improvising."
   },
   {
    "id": "N3-SD-11",
@@ -10095,7 +10406,8 @@ window.LAUNCH_DATA = {
     "Prove each state through the scenario picker",
     "Add a review-checklist line: no local state copies"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Building the 'honest states' (still learning, too little data, temporary error, try again shortly) once as shared building blocks every screen reuses — so our promise never to show a confident number on thin data stays true everywhere."
   },
   {
    "id": "N3-AX-01",
@@ -10123,7 +10435,8 @@ window.LAUNCH_DATA = {
     "Agree the wording",
     "List do-not-promise items",
     "Log pilot objections for the 24 Nov terms"
-   ]
+   ],
+   "layman": "Alex walks Lewis through the signed pricing — the founding price, how long it's locked, what he may and may not promise — so pilots hear the price from a person and the later invoices match exactly what they were told."
   },
   {
    "id": "N3-AX-02",
@@ -10156,7 +10469,8 @@ window.LAUNCH_DATA = {
     "Name the evidence artifact per row",
     "Name the owner per row",
     "Circulate to Asad, Faheem, Muteeb, Saad, Filza, Jill"
-   ]
+   ],
+   "layman": "Drafting the launch go/no-go checklist: one row per promise (crisis alerts under 15 minutes, every assistant number sourced, backups proven, contracts signed…), each with named evidence and an owner — so the 27 Nov decision meeting is short."
   },
   {
    "id": "N3-AX-03",
@@ -10189,7 +10503,8 @@ window.LAUNCH_DATA = {
     "Set the UTM list per directory",
     "Define the weekly report format",
     "Schedule the 20 Oct send"
-   ]
+   ],
+   "layman": "The plan for opening the waitlist: live 13 Oct, public 20 Oct, aiming for 500 names by 27 Nov — with lawful sign-up wording and weekly growth reports, because this list is the audience for launch day."
   },
   {
    "id": "N3-AX-04",
@@ -10218,7 +10533,8 @@ window.LAUNCH_DATA = {
     "Write the comment-collapse paragraph honestly",
     "Narrative-firewall check on the wording",
     "Send and file"
-   ]
+   ],
+   "layman": "Alex sends the first investor update: the flop-warning proof, the Meta submission date, locked pricing and pilots on board, so investors hear progress from us before they ask."
   },
   {
    "id": "N3-AX-05",
@@ -10246,7 +10562,8 @@ window.LAUNCH_DATA = {
     "Define the control arm",
     "Send under 100/week, manually",
     "Set the 30-day read date"
-   ]
+   ],
+   "layman": "Alex decides whether to run a small, strictly-by-hand LinkedIn outreach trial, inviting the people most likely to care first, so we learn what works without breaking any platform rules."
   },
   {
    "id": "N3-JL-01",
@@ -10278,7 +10595,8 @@ window.LAUNCH_DATA = {
     "Estimate embedding volume with Muteeb/Faheem and price it",
     "Send vendor data-training terms to Filza for the standing-rule check",
     "Add tier and embedding lines to the cost model"
-   ]
+   ],
+   "layman": "Confirming which database powers the assistant's memory, picking a plan sized for ten times our pilots, budgeting the running cost, and checking the vendor never trains on customer data — so there's no surprise bill or privacy slip."
   },
   {
    "id": "N3-JL-02",
@@ -10311,7 +10629,8 @@ window.LAUNCH_DATA = {
     "Cap Sentry seats and events; price the observability line",
     "Check against Filza's retention schedule and no-PII rule",
     "Add the line to the cost model and file the policy"
-   ]
+   ],
+   "layman": "Deciding how long we keep each kind of system log and capping the monitoring bills, aligned with our privacy rules — because logging costs grow with launch traffic exactly when nobody is watching the bill."
   },
   {
    "id": "N3-JL-03",
@@ -10344,7 +10663,8 @@ window.LAUNCH_DATA = {
     "Verify UTM-per-directory tracking with Asad",
     "Agree the Netlify Forms migration steps and test with a sample",
     "Walk Filza's PECR checklist against the tool settings; configure the daily-count export"
-   ]
+   ],
+   "layman": "Getting the purchased waitlist tool operationally ready — right plan for launch traffic, emails sending from our own domain, sign-up tracking and lawful consent settings checked — so opening day isn't capped by an admin oversight."
   },
   {
    "id": "N3-JL-04",
@@ -10378,7 +10698,8 @@ window.LAUNCH_DATA = {
     "Name who is paged and how the trip links to AWS budget alarms",
     "Sign the spec with Muteeb; file it",
     "Diary the N4 trip-test and record the receipt in the evidence folder"
-   ]
+   ],
+   "layman": "A one-page written agreement on spending limits for the AI assistant: per-customer daily caps, a company-wide ceiling, warnings at 80%, an automatic cut-off at 100% and who gets phoned — so a runaway user can never bankrupt us."
   },
   {
    "id": "N3-JL-05",
@@ -10411,7 +10732,8 @@ window.LAUNCH_DATA = {
     "Define the batch-1 non-pilot motion (free-during-founding vs trial) with Alex",
     "Reconcile every claim with the invoice template and landing page copy",
     "Send to Alex, Lewis and Filza; file"
-   ]
+   ],
+   "layman": "Turning the agreed price into a precise fact sheet — how many founding seats, the deadline, how long the price is locked — so the sales conversations, the website and the invoices all say exactly the same thing."
   },
   {
    "id": "N3-LW-01",
@@ -10441,7 +10763,8 @@ window.LAUNCH_DATA = {
     "Connect on staging",
     "Five minutes of use every morning plus a log line",
     "Weekly friction summary to Saad"
-   ]
+   ],
+   "layman": "Connecting our own company Facebook page to the product and using it every morning like a real customer, logging every annoyance — so we hit the embarrassing bugs before any pilot does."
   },
   {
    "id": "N3-LW-02",
@@ -10472,7 +10795,8 @@ window.LAUNCH_DATA = {
     "Sheet template with provenance and page-type (meme / community / brand) columns so precision@5 reads per stratum and per page type",
     "Discordant-pair oversampling agreed with Muteeb",
     "File the bar with a date stamp"
-   ]
+   ],
+   "layman": "Writing down the quality bar for collaboration suggestions before seeing a single one — how many of the top five must be genuinely good, judged by type — so the test is fair and the result can't be fudged after the fact."
   },
   {
    "id": "N3-LW-03",
@@ -10504,7 +10828,8 @@ window.LAUNCH_DATA = {
     "Connect calls",
     "Report the page count to Muteeb",
     "Friction log to Saad"
-   ]
+   ],
+   "layman": "Inviting pilot customers six to ten once the first group's problems are fixed, and walking them through connecting their pages — widening the pool of connected pages the matching feature and our feedback both need."
   },
   {
    "id": "N3-LW-04",
@@ -10533,7 +10858,8 @@ window.LAUNCH_DATA = {
     "Adjudicate with Saad",
     "Provenance sheet",
     "Hand to Faheem"
-   ]
+   ],
+   "layman": "Lewis will hand over 200 real comments, each judged by a human without seeing the computer's answer, so we have a trusted answer sheet to measure how well our comment-reading actually performs."
   },
   {
    "id": "N3-LW-05",
@@ -10568,7 +10894,8 @@ window.LAUNCH_DATA = {
     "Run the drill with the stopwatch",
     "Verify citation and drafted reply",
     "Clean up and file the record"
-   ]
+   ],
+   "layman": "A live fire-drill with Faheem on a real pilot page: we simulate a sudden flood of angry comments and check the alert really reaches the owner within 15 minutes, so we know the warning works before a customer needs it."
   },
   {
    "id": "N3-LW-06",
@@ -10602,7 +10929,8 @@ window.LAUNCH_DATA = {
     "Record pass/fail against the bar",
     "Failure patterns to Muteeb if it fails",
     "File the record for the gate"
-   ]
+   ],
+   "layman": "A human check on our collaboration suggestions: reviewers score whether the top five picks for different kinds of pages are genuinely good, and we record the results, so we only ship suggestions people would actually act on."
   },
   {
    "id": "N3-LW-07",
@@ -10633,7 +10961,8 @@ window.LAUNCH_DATA = {
     "Reach about 100 questions",
     "Saad reviews against the acceptance criteria",
     "Deliver to Faheem"
-   ]
+   ],
+   "layman": "Lewis and Saad write the questions a real page admin would actually ask our assistant (why did Tuesday's post die?), so we can test Art-E against real life, not textbook prompts."
   },
   {
    "id": "N3-FZ-01",
@@ -10662,7 +10991,8 @@ window.LAUNCH_DATA = {
     "Write the label and disclaimer string per surface",
     "Check consistency with the pilot agreement disclaimer and the Art 22 draft",
     "Send to Saad and Asad; log in the decision log"
-   ]
+   ],
+   "layman": "Filza will write the exact 'this was made by AI' labels and small-print wording for every screen where AI speaks, and hand them to Saad, so customers are never misled about what is machine-generated."
   },
   {
    "id": "N3-FZ-02",
@@ -10692,7 +11022,8 @@ window.LAUNCH_DATA = {
     "Set the 90-day purge and the forget-this scopes and latency",
     "Place memory inside the deletion cascade and DSAR export",
     "Define the purge log entry; hand to Muteeb"
-   ]
+   ],
+   "layman": "Filza will set the rules for what the Art-E assistant is allowed to remember: nothing kept longer than 90 days, plus a 'forget this' button, so customers stay in control of their own information."
   },
   {
    "id": "N3-FZ-03",
@@ -10721,7 +11052,8 @@ window.LAUNCH_DATA = {
     "Write the harmful-output redlines as testable statements",
     "Define the complaint path and response time",
     "Send to Saad and Faheem; confirm inclusion in criteria and golden set"
-   ]
+   ],
+   "layman": "Filza will define the questions Art-E must politely decline to answer, the hard lines it never crosses, and where a customer complains if it gets something wrong, so the assistant stays safe and trustworthy."
   },
   {
    "id": "N3-FZ-04",
@@ -10751,7 +11083,8 @@ window.LAUNCH_DATA = {
     "Check each against the floor spec and the de-identification policy",
     "Mark banded, provenance-honest wording per template",
     "Return the approved list; Lewis oversamples discordant pairs in review"
-   ]
+   ],
+   "layman": "A legal read-through of the short explanations we show next to each collaboration suggestion, so the wording never over-promises or says anything about other pages we shouldn't."
   },
   {
    "id": "N3-FZ-05",
@@ -10780,7 +11113,8 @@ window.LAUNCH_DATA = {
     "State the Art 22 analysis and the UI safeguards",
     "Write the plain-language logic paragraph",
     "Alex signs; send to Saad for support macros"
-   ]
+   ],
+   "layman": "A short legal memo confirming our scores and alerts are advice for a human to act on, not automatic decisions made about anyone, which keeps us on the right side of data-protection law."
   },
   {
    "id": "N3-FZ-06",
@@ -10810,7 +11144,8 @@ window.LAUNCH_DATA = {
     "Check the network log for pre-consent pixels on the waitlist pages",
     "Verify consent wording and the migrated-names handling",
     "Send pass/fail with fixes to Asad and Alex"
-   ]
+   ],
+   "layman": "Before the sign-up waitlist opens on 20 October, Filza checks the marketing-consent rules are followed, so we can email the people who sign up without breaking UK marketing law."
   },
   {
    "id": "N3-FZ-07",
@@ -10840,7 +11175,8 @@ window.LAUNCH_DATA = {
     "Write the Article 5 analysis and the transparency obligations",
     "Draft the user-facing disclosure text per surface",
     "Alex signs; send text to Saad and Asad"
-   ]
+   ],
+   "layman": "A memo confirming our product does none of the things the new EU AI law bans, plus honest wording about the fact we read the mood of comments, so we can show regulators and customers we've done the homework."
   },
   {
    "id": "N3-FZ-08",
@@ -10872,7 +11208,8 @@ window.LAUNCH_DATA = {
     "Update the privacy policy sections: AI positions, emotion disclosure, Discovery opt-in",
     "Asad publishes v2 at the same URL; version note added",
     "Confirm with Saad the Meta dashboard URL still resolves"
-   ]
+   ],
+   "layman": "An updated privacy notice that also spells out how the assistant's memory and our behind-the-scenes text summaries are stored, found and deleted when a customer asks, so 'delete my data' genuinely means everything."
   },
   {
    "id": "N3-FZ-09",
@@ -10899,7 +11236,8 @@ window.LAUNCH_DATA = {
     "Write the position on commenter data from possible minors",
     "Draft the 18+ statement for ToS final",
     "File and reference from the RoPA"
-   ]
+   ],
+   "layman": "A written position on children's data: our product is for business page owners, and this documents why children's-privacy rules don't apply and what we'd do if a child's data ever appeared."
   },
   {
    "id": "N3-FZ-10",
@@ -10931,7 +11269,8 @@ window.LAUNCH_DATA = {
     "Attach deletion, deauthorize, sub-processor and security evidence",
     "Name the responder and the reply clock; tell the Meta owner"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "A ready-made answer pack in case the data regulator asks questions in October: who holds what data, why, and for how long, so we can respond fast and confidently instead of scrambling."
   },
   {
    "id": "N4-AS-01",
@@ -10964,7 +11303,8 @@ window.LAUNCH_DATA = {
     "Citation chips resolving to the cited post, comment or metric",
     "Grounding footer with sample size and confidence",
     "Tenant-scoped history behind the N6 kill-switch flag"
-   ]
+   ],
+   "layman": "Build the Art-E chat panel: answers appear word by word as they're written, each fact carries a little tag showing where it came from, and a footer says what data the answer is based on, so customers can trust what they read."
   },
   {
    "id": "N4-AS-02",
@@ -10994,7 +11334,8 @@ window.LAUNCH_DATA = {
     "Revocation in Settings",
     "Fail-closed empty state",
     "Client + server logging"
-   ]
+   ],
+   "layman": "A clear yes/no screen (using Filza's approved wording) asking permission before the assistant remembers anything; if a page doesn't have enough data for a reliable answer, we show nothing rather than a guess."
   },
   {
    "id": "N4-AS-03",
@@ -11026,7 +11367,8 @@ window.LAUNCH_DATA = {
     "Quota-reached and service-degraded states",
     "AI label + disclaimer text",
     "Check against Saad's criteria and state matrix"
-   ]
+   ],
+   "layman": "Design the card Art-E uses to give a suggestion, plus an honest 'I can't answer that' state and a visible 'AI-generated' label, so customers always know when advice comes from the machine and when it declines."
   },
   {
    "id": "N4-AS-04",
@@ -11059,7 +11401,8 @@ window.LAUNCH_DATA = {
     "Fail-open label passthrough",
     "Partial-suppression notice in Filza-approved wording",
     "Plain-English meaning for the 'suggested - not validated' and 'high-confidence' badges"
-   ]
+   ],
+   "layman": "Build the first version of the screen that shows pages worth teaming up with, following Saad's design pack — look but not click for now, so pilots can react to it before we add actions."
   },
   {
    "id": "N4-AS-05",
@@ -11090,7 +11433,8 @@ window.LAUNCH_DATA = {
     "Switcher final behaviour",
     "Per-page filtering on Today/Analytics",
     "Thin-page state"
-   ]
+   ],
+   "layman": "A screen listing all of a customer's pages with a simple health ring on each, plus an easy switcher between them, so someone running several pages sees at a glance which one needs attention."
   },
   {
    "id": "N4-AS-06",
@@ -11120,7 +11464,8 @@ window.LAUNCH_DATA = {
     "Delete flow with confirmation",
     "Status + email receipt",
     "Support Filza's witnessed run"
-   ]
+   ],
+   "layman": "Put 'delete my data' and 'download my data' in Settings and make them actually work, tied to disconnecting a page, so customers can leave cleanly and we keep our privacy promises."
   },
   {
    "id": "N4-AS-07",
@@ -11148,7 +11493,8 @@ window.LAUNCH_DATA = {
     "Thumbs UI + reason picker",
     "Post payload with citations",
     "Verify in the store"
-   ]
+   ],
+   "layman": "Thumbs-up/thumbs-down buttons on our advice, with a quick 'why' prompt, saved to one place, so we learn which suggestions customers find useful and improve them."
   },
   {
    "id": "N4-AS-08",
@@ -11175,7 +11521,8 @@ window.LAUNCH_DATA = {
     "Neutral revoked state in Saved",
     "Exclude revoked from spotlight/matches",
     "E2E case on the fixture"
-   ]
+   ],
+   "layman": "Make sure that when a customer disconnects a page they'd saved things about, the screens handle it gracefully instead of showing errors or stale information."
   },
   {
    "id": "N4-AS-09",
@@ -11203,7 +11550,8 @@ window.LAUNCH_DATA = {
     "Script gating on consent",
     "Settings preference",
     "Network-log evidence"
-   ]
+   ],
+   "layman": "A cookie banner where 'decline' provably stops the optional tracking scripts from loading at all, so we comply with the rules rather than just looking like we do."
   },
   {
    "id": "N4-AS-10",
@@ -11234,7 +11582,8 @@ window.LAUNCH_DATA = {
     "Staged tour",
     "Thin-page variant",
     "Escape-hatch link"
-   ]
+   ],
+   "layman": "A friendly first-visit tour explaining that the product is learning about your page (not broken or slow) and that the first insights use your last 90 days of history, so new customers know what to expect on day one."
   },
   {
    "id": "N4-AS-11",
@@ -11263,7 +11612,8 @@ window.LAUNCH_DATA = {
     "Vault any findings",
     "Check client logging for tokens",
     "Add scan to CI; file receipt"
-   ]
+   ],
+   "layman": "A sweep with Muteeb to prove no passwords or keys are accidentally sitting in the app's code or setup files, so nothing sensitive can leak if the code is ever seen by outsiders."
   },
   {
    "id": "N4-AS-12",
@@ -11289,7 +11639,8 @@ window.LAUNCH_DATA = {
     "Slide-over from card",
     "Three factor bars",
     "Plain-English notes"
-   ]
+   ],
+   "layman": "A side panel on the Pages screen showing three simple bars explaining what's driving a page's health — nice to have, and first in line to be dropped if time runs short."
   },
   {
    "id": "N4-AS-13",
@@ -11317,7 +11668,8 @@ window.LAUNCH_DATA = {
     "Card on the aggregate endpoint",
     "Stale handling",
     "Feature flag"
-   ]
+   ],
+   "layman": "A morning summary card on the Today screen — a quick 'here's how your page did overnight'. Also marked as droppable if the sprint gets tight."
   },
   {
    "id": "N4-AS-14",
@@ -11347,7 +11699,8 @@ window.LAUNCH_DATA = {
     "Compute TTFV per tenant",
     "Funnel query documented",
     "Hand to Muteeb"
-   ]
+   ],
+   "layman": "Finish the measurements that track a customer's journey from signing up to getting their first useful insight, including how long that takes, so we know where people get stuck and can prove the product delivers quickly."
   },
   {
    "id": "N4-AS-15",
@@ -11375,7 +11728,8 @@ window.LAUNCH_DATA = {
     "Flow 4 alert->action",
     "Flow 5 Art-E Q&A + refusal",
     "Add to the CI check"
-   ]
+   ],
+   "layman": "Two more automatic robot tests that run on every code change: one walks through receiving an alert and acting on it, the other asks Art-E a question — so a breakage in either journey is caught before customers see it."
   },
   {
    "id": "N4-AS-17",
@@ -11406,7 +11760,8 @@ window.LAUNCH_DATA = {
     "Call purge endpoint; confirmation + done state",
     "Settings data-controls note + everything-scope link",
     "Add to Saad's Art-E acceptance criteria"
-   ]
+   ],
+   "layman": "Add a 'forget this' button inside the Art-E chat and a note in Settings explaining what the assistant remembers, so customers can erase something from its memory with one click."
   },
   {
    "id": "N4-AS-18",
@@ -11442,7 +11797,8 @@ window.LAUNCH_DATA = {
     "State margin at the signed price and the unprofitable threshold",
     "Hand it to Alex and Jill before the 13 Nov notice draft"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Re-do the sums on what serving one page costs us per month now that the AI assistant is included, so pricing and investor numbers rest on real costs, not guesses."
   },
   {
    "id": "N4-FH-01",
@@ -11471,7 +11827,8 @@ window.LAUNCH_DATA = {
     "Block-and-regenerate",
     "Refusal path",
     "Run on the golden set"
-   ]
+   ],
+   "layman": "A hard rule in the assistant: any number it can't trace back to real data is blocked before it reaches the customer, so Art-E can never confidently make a figure up."
   },
   {
    "id": "N4-FH-02",
@@ -11500,7 +11857,8 @@ window.LAUNCH_DATA = {
     "Rubric incl. qualitative grounding + refusals",
     "Nightly job + panel",
     "Memory recall check"
-   ]
+   ],
+   "layman": "Grow our trusted question-and-answer answer sheet to 200 items with Lewis, and re-test the assistant against it every night with results on a dashboard, so any drop in quality is spotted the next morning."
   },
   {
    "id": "N4-FH-03",
@@ -11526,7 +11884,8 @@ window.LAUNCH_DATA = {
     "Spotlighting on retrieved text",
     "Named comment-injection probes",
     "Run + record"
-   ]
+   ],
+   "layman": "Test a specific trick: someone writing a comment designed to fool or steer our AI when it reads it. We make this a named attack we deliberately try, so we know the assistant can't be manipulated through comment text."
   },
   {
    "id": "N4-FH-04",
@@ -11555,7 +11914,8 @@ window.LAUNCH_DATA = {
     "Cross-tenant exfil probes",
     "CI wiring with Muteeb",
     "Record results"
-   ]
+   ],
+   "layman": "Make two attack drills permanent pass/fail checks: sneaky instructions hidden in text, and one customer's data leaking into another's answers. Every release must pass both, so safety can't quietly slip."
   },
   {
    "id": "N4-FH-05",
@@ -11583,7 +11943,8 @@ window.LAUNCH_DATA = {
     "Alert rules",
     "Live-refresh evaluation",
     "Failure injection test"
-   ]
+   ],
+   "layman": "Live monitoring of the AI's behaviour on a dashboard, with alarms that fire automatically when quality dips, so we hear about problems from our own systems before a pilot does."
   },
   {
    "id": "N4-FH-06",
@@ -11613,7 +11974,8 @@ window.LAUNCH_DATA = {
     "Band recalibration with Saad",
     "File report",
     "Publish the audit's per-model accuracy vs gold and blind sets to the QA dashboard (superseding the old-stack NLP accuracy tracker numbers) so mid-flight accuracy is visible, not only filed"
-   ]
+   ],
+   "layman": "A mid-sprint accuracy check of our predictions against the trusted answer sheets, and adjusting the warning-level boundaries where they're off, so the gauges customers see stay honest."
   },
   {
    "id": "N4-FH-07",
@@ -11642,7 +12004,8 @@ window.LAUNCH_DATA = {
     "Tune round 2",
     "Record vs gate",
     "Panel on the QA dashboard: weekly alert precision trend (alerts vs not-a-crisis verdicts) per pilot, refreshed from this log so drift between tuning rounds is visible"
-   ]
+   ],
+   "layman": "Keep a log of every comment-storm alert per pilot page that turned out to be nothing, then tune the trigger levels with Lewis, so owners get warned about real trouble without being cried wolf at."
   },
   {
    "id": "N4-FH-08",
@@ -11670,7 +12033,8 @@ window.LAUNCH_DATA = {
     "Post-change verification",
     "Job schedule check with Muteeb",
     "Record"
-   ]
+   ],
+   "layman": "Check every timed feature copes with UK clocks going back on 25 October, so alerts and best-time-to-post advice don't quietly land an hour wrong."
   },
   {
    "id": "N4-FH-09",
@@ -11704,7 +12068,8 @@ window.LAUNCH_DATA = {
     "Record the pre-tuning baseline and choose k from it",
     "Decide on reranking against its measured latency and cost",
     "Add both metrics to the nightly QA panel next to the pass rate"
-   ]
+   ],
+   "layman": "Measure how good the assistant is at finding the right pieces of a customer's own data before answering — a baseline score, so we can prove future changes make its answers better, not worse."
   },
   {
    "id": "N4-MT-01",
@@ -11734,7 +12099,8 @@ window.LAUNCH_DATA = {
     "Add vector-namespace and memory isolation tests",
     "Make the suite a required check",
     "Document the proof for Filza"
-   ]
+   ],
+   "layman": "An automatic proof, run on every code change, that one customer's data can never bleed into another's — checked across every storage layer we use — so privacy between customers is guaranteed, not assumed."
   },
   {
    "id": "N4-MT-02",
@@ -11762,7 +12128,8 @@ window.LAUNCH_DATA = {
     "File the four requests",
     "Track approvals",
     "Record ceilings in the runbook"
-   ]
+   ],
+   "layman": "Ask our suppliers (email, search, sign-in, AI provider) to raise our usage allowances now, so we don't hit a ceiling and stall just as pilot traffic grows."
   },
   {
    "id": "N4-MT-03",
@@ -11790,7 +12157,8 @@ window.LAUNCH_DATA = {
     "Compute hit rate by tenant",
     "Estimate cost at the measured rate",
     "Send the note to Jill and Asad"
-   ]
+   ],
+   "layman": "We assumed 60% of assistant questions are repeats we can answer from a saved copy (which keeps AI costs down); this checks that assumption against real pilot questions, so our cost model isn't wishful thinking."
   },
   {
    "id": "N4-MT-04",
@@ -11824,7 +12192,8 @@ window.LAUNCH_DATA = {
     "Add per-tenant quotas",
     "Wire the breaker to cost alarms and agreed thresholds",
     "Trip-test the breaker and file the receipt"
-   ]
+   ],
+   "layman": "Make the machinery behind Art-E production-ready: memory rules enforced, spending limits per customer, and an automatic cut-off that stops runaway failures — each deliberately tripped in testing to prove it works."
   },
   {
    "id": "N4-MT-05",
@@ -11853,7 +12222,8 @@ window.LAUNCH_DATA = {
     "Verify KMS on token and pilot-data stores",
     "Sweep the API against OWASP Top-10",
     "Fix or ticket each finding"
-   ]
+   ],
+   "layman": "Prove by scan that customers' sign-in tokens and pilot data are properly encrypted, plus a sweep for the ten most common security holes, so we can show pilots their data is locked down."
   },
   {
    "id": "N4-MT-06",
@@ -11882,7 +12252,8 @@ window.LAUNCH_DATA = {
     "Get Jill's budget sign-off",
     "Book the vendor date",
     "Prepare a hardened staging target"
-   ]
+   ],
+   "layman": "Decide exactly what an outside security firm should attack (sign-in, the assistant, the collaboration screens) and get the test booked, so an independent expert confirms we're secure before wider launch."
   },
   {
    "id": "N4-MT-07",
@@ -11914,7 +12285,8 @@ window.LAUNCH_DATA = {
     "Name the user-visible state for each degraded and shed path with Asad",
     "Run the tests on staging and enforce shedding",
     "Write up results including which tier tripped at what load"
-   ]
+   ],
+   "layman": "Deliberately hammer our AI connections with heavy and sudden traffic, having decided which features matter most when things get tight, so under real load the important stuff keeps working."
   },
   {
    "id": "N4-MT-08",
@@ -11941,7 +12313,8 @@ window.LAUNCH_DATA = {
     "Query the ledger tenant-scoped",
     "Contract-test traceability to ledger rows",
     "Switch Asad's mock to real"
-   ]
+   ],
+   "layman": "Build the data feeds behind a 'wins' view: how much value alerts delivered and how often customers followed our advice, so sales and investors have proof the product pays for itself."
   },
   {
    "id": "N4-MT-09",
@@ -11971,7 +12344,8 @@ window.LAUNCH_DATA = {
     "Demonstrate revocation-triggered deletion live",
     "Log gaps as tickets",
     "File Filza's sign-off"
-   ]
+   ],
+   "layman": "Help Filza run a real 'give me all my data' request end to end, and witness a full deletion after a customer disconnects, so our privacy promises are demonstrated, not just written down."
   },
   {
    "id": "N4-MT-10",
@@ -12001,7 +12375,8 @@ window.LAUNCH_DATA = {
     "Keep a deletion tombstone log",
     "Re-apply tombstones after restore in a test",
     "Add both to the runbook"
-   ]
+   ],
+   "layman": "A written plan for restoring from backups without resurrecting data a customer had asked us to delete, so even a disaster recovery can't break a deletion promise."
   },
   {
    "id": "N4-MT-11",
@@ -12030,7 +12405,8 @@ window.LAUNCH_DATA = {
     "Fix any local-time schedules",
     "Dry-run the 1 Nov transition",
     "Monitor the real transition on 1-9 Nov"
-   ]
+   ],
+   "layman": "Go through every scheduled background job before the 25 October clock change and confirm none will run at the wrong hour, so nothing customer-facing slips when the clocks go back."
   },
   {
    "id": "N4-MT-12",
@@ -12062,7 +12438,8 @@ window.LAUNCH_DATA = {
     "Run probes and capture results",
     "Demo opt-in to spotlight to save",
     "Record the gate outcome"
-   ]
+   ],
+   "layman": "The Friday 30 October go/no-go check: ask Art-E 20 real questions, prove the memory opt-in works, and show the Pages screen running on genuine health data, so we only call the sprint done on evidence."
   },
   {
    "id": "N4-MT-13",
@@ -12092,7 +12469,8 @@ window.LAUNCH_DATA = {
     "Send to Jill by 21 Oct",
     "Carry into N4-MT-06 for booking"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Write up what the outside security test should cover and a shortlist of firms with rough prices, ready for Jill's budget decision on 21 October."
   },
   {
    "id": "N4-MT-14",
@@ -12126,7 +12504,8 @@ window.LAUNCH_DATA = {
     "Cap regenerate attempts and wire the gate-blocked state",
     "Report latency split by cascade route",
     "Add the panel to the war-room board next to Art-E cost"
-   ]
+   ],
+   "layman": "Set and measure speed targets for the assistant: how quickly the first words appear and how slow the worst answers are allowed to be, so chatting with Art-E feels snappy rather than like waiting for a page to load."
   },
   {
    "id": "N4-MT-15",
@@ -12160,7 +12539,8 @@ window.LAUNCH_DATA = {
     "Place the store inside the DSAR export and the deletion cascade",
     "Set retention to the 90-day memory window and confirm with Filza",
     "Cover the store in the N4-MT-01 cross-tenant leakage proof"
-   ]
+   ],
+   "layman": "Record Art-E conversations (with proper safeguards) and make transcripts exportable, so the weekly quality reviews can look at what the assistant actually said to real users."
   },
   {
    "id": "N4-MT-16",
@@ -12192,7 +12572,8 @@ window.LAUNCH_DATA = {
     "Flag endpoints whose unit cost looks unjustifiable",
     "Send to Asad for the re-cost and to Jill"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Publish what each feature actually costs us to run, both at pilot size and projected at 100 pages, so pricing and fundraising conversations use measured numbers."
   },
   {
    "id": "N4-SD-01",
@@ -12221,7 +12602,8 @@ window.LAUNCH_DATA = {
     "Check consent wording, no pre-consent pixels",
     "Confirm migrated names and UTM attribution",
     "Set up the daily count message"
-   ]
+   ],
+   "layman": "On 20 October, personally test the public sign-up waitlist from form to confirmation email, then send Alex the sign-up count every day, so we know demand is real and nothing in the funnel is broken."
   },
   {
    "id": "N4-SD-02",
@@ -12250,7 +12632,8 @@ window.LAUNCH_DATA = {
     "On decision: brief Alex and Asad same day",
     "On rejection: resubmit within 48h",
     "Update the runbook Meta branch note"
-   ]
+   ],
+   "layman": "While Meta reviews our app, someone checks their decision daily and we have a response ready to go within 48 hours if they say no, so a rejection costs us days, not weeks."
   },
   {
    "id": "N4-SD-03",
@@ -12279,7 +12662,8 @@ window.LAUNCH_DATA = {
     "Hold the first review; log findings",
     "Route new questions to Faheem",
     "Book weekly to N6"
-   ]
+   ],
+   "layman": "Start a weekly half-hour with Lewis reading real Art-E conversations, so a human regularly judges whether the assistant is being helpful, accurate and polite."
   },
   {
    "id": "N4-SD-04",
@@ -12307,7 +12691,8 @@ window.LAUNCH_DATA = {
     "Reset bands and abstain rule",
     "Update pack + one-pager",
     "Log the decision and ticket Asad"
-   ]
+   ],
+   "layman": "Sit down with Faheem and adjust where the lines sit on the will-this-post-flop gauge, using real mid-pilot results, so a 'red' warning genuinely means trouble."
   },
   {
    "id": "N4-SD-05",
@@ -12334,7 +12719,8 @@ window.LAUNCH_DATA = {
     "Prioritise by user impact",
     "Size each fix with Asad",
     "File tickets"
-   ]
+   ],
+   "layman": "An accessibility audit of everything we've built, fixing text sizes and similar issues with Asad, so people with impaired vision or motor control can use the product comfortably — and we meet the recognised standard."
   },
   {
    "id": "N4-SD-06",
@@ -12365,7 +12751,8 @@ window.LAUNCH_DATA = {
     "Demo below-floor and revoked states",
     "Approve empty-state copy in the product voice",
     "Sign off in the register"
-   ]
+   ],
+   "layman": "Sign-off checks for the collaboration screens: the opt-in is impossible to miss, the feature provably shows nothing when it isn't sure, and the empty states read well — so it launches respectful and honest."
   },
   {
    "id": "N4-SD-07",
@@ -12394,7 +12781,8 @@ window.LAUNCH_DATA = {
     "Run the full journey",
     "Record protocol gaps",
     "Publish protocol v1.1"
-   ]
+   ],
+   "layman": "A full practice run of the product with one friendly pilot customer on our rehearsal environment, so we find the rough edges with a forgiving audience before opening up wider."
   },
   {
    "id": "N4-SD-08",
@@ -12425,7 +12813,8 @@ window.LAUNCH_DATA = {
     "Apply cut order",
     "Confirm freeze dates hold",
     "Publish"
-   ]
+   ],
+   "layman": "Re-plan the next two sprints with Alex assuming the team only has 60-65% of its time free, so the schedule reflects reality and we stop promising dates we'd miss."
   },
   {
    "id": "N4-SD-09",
@@ -12453,7 +12842,8 @@ window.LAUNCH_DATA = {
     "Verify activation event fires at the spec'd moment",
     "File drift",
     "Log decisions"
-   ]
+   ],
+   "layman": "A design quality sweep of every screen built this sprint, including walking the new-customer welcome flow, so spacing, wording and polish are consistent before pilots see it."
   },
   {
    "id": "N4-SD-10",
@@ -12481,7 +12871,8 @@ window.LAUNCH_DATA = {
     "Write the data-sharing macro",
     "Share with Jill for the inbox",
     "Mark screenshot slots for N6"
-   ]
+   ],
+   "layman": "Draft the skeleton of help pages for each screen and the first canned replies for common support questions, so when pilots ask for help we answer in minutes, not from scratch."
   },
   {
    "id": "N4-SD-11",
@@ -12513,7 +12904,8 @@ window.LAUNCH_DATA = {
     "Draft with Alex",
     "Send to Filza early"
    ],
-   "table_priority_cell": "P1"
+   "table_priority_cell": "P1",
+   "layman": "Write the script with Alex for a short video showing the comment-storm alert catching trouble in time, so sales and investors can see the product's best moment in two minutes."
   },
   {
    "id": "N4-SD-12",
@@ -12541,7 +12933,8 @@ window.LAUNCH_DATA = {
     "Attach evidence",
     "Sequence provisionally",
     "Share with Alex"
-   ]
+   ],
+   "layman": "Prepare December's prioritisation meeting so every proposed bet comes with an evidence column — what pilots actually did and said — so we choose the next quarter's work on facts, not hunches."
   },
   {
    "id": "N4-SD-13",
@@ -12571,7 +12964,8 @@ window.LAUNCH_DATA = {
     "Clear the strings with Filza",
     "Fold the answer into the N4-SD-10 support macros",
     "Give Alex the one-line answer for the hostile-question rehearsal"
-   ]
+   ],
+   "layman": "Write the on-screen wording that explains what a suggested partner page match is actually inviting you to do, and keep that screen read-only so nobody can message anyone from it yet."
   },
   {
    "id": "N4-SD-14",
@@ -12605,7 +12999,8 @@ window.LAUNCH_DATA = {
     "Fix what is in the component library; hand shell issues to Asad",
     "Write the desktop-only list with reasons for the UAT script"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Go through every screen we have built and make sure it looks right and works with a finger on phones and tablets, not just with a mouse on a laptop, so pilots can use it wherever they are."
   },
   {
    "id": "N4-AX-01",
@@ -12635,7 +13030,8 @@ window.LAUNCH_DATA = {
     "First self-report round on 23 Oct",
     "Add to the scope-hammer agenda",
     "Link from the decisions calendar"
-   ]
+   ],
+   "layman": "Put up a simple traffic-light scorecard (green, amber, red) that each team updates weekly, so anyone can see at a glance whether we are on track for launch."
   },
   {
    "id": "N4-AX-02",
@@ -12665,7 +13061,8 @@ window.LAUNCH_DATA = {
     "Confirm owners",
     "Publish with the scorecard",
     "Review weekly"
-   ]
+   ],
+   "layman": "Keep a short list of the five biggest things that could derail launch, each with a named owner, a plan to reduce it, and a clear signal for when to act, so risks get managed instead of remembered too late."
   },
   {
    "id": "N4-AX-03",
@@ -12697,7 +13094,8 @@ window.LAUNCH_DATA = {
     "Approve the unit-economics dashboard spec",
     "Sign the retention schedule",
     "Confirm the booking with Muteeb"
-   ]
+   ],
+   "layman": "Get the sign-offs done: money approved for an outside security test, agreement on how we will measure profit per customer, and rules for how long we keep data, so the teams waiting on these can move."
   },
   {
    "id": "N4-AX-04",
@@ -12729,7 +13127,8 @@ window.LAUNCH_DATA = {
     "Decide resubmit vs descope",
     "Escalate if silent past day 20",
     "Record on the decisions calendar"
-   ]
+   ],
+   "layman": "Agree in advance what we do if Facebook turns down our app approval: within the same week we decide whether to reapply or launch without the blocked features, so a rejection costs days, not months."
   },
   {
    "id": "N4-AX-05",
@@ -12760,7 +13159,8 @@ window.LAUNCH_DATA = {
     "Decide backup channels",
     "Assign owners",
     "Publish the weekly report"
-   ]
+   ],
+   "layman": "Check whether sign-ups for the waiting list are growing fast enough, and if not, have backup ways to reach people ready to switch on, so we do not arrive at launch without an audience."
   },
   {
    "id": "N4-JL-01",
@@ -12791,7 +13191,8 @@ window.LAUNCH_DATA = {
     "Add the cost to the model; get Alex's signature",
     "Raise PO/payment; confirm the booking with Muteeb",
     "Diary report delivery and the criticals-closed deadline (13 Nov)"
-   ]
+   ],
+   "layman": "Get the budget for the outside security test formally approved, so Muteeb can book the testers in time for their findings to be fixed before launch."
   },
   {
    "id": "N4-JL-02",
@@ -12823,7 +13224,8 @@ window.LAUNCH_DATA = {
     "Pull the sample subject's records from each and hand to Filza",
     "Time each step; record gaps as tickets",
     "File the run log in the evidence folder"
-   ]
+   ],
+   "layman": "Help run a practice round of a customer asking for a copy of all their data, handling the operations side, so we know we can meet that legal request smoothly when a real one arrives."
   },
   {
    "id": "N4-JL-03",
@@ -12855,7 +13257,8 @@ window.LAUNCH_DATA = {
     "Seed test addresses at major providers; send alert + newsletter templates; record placement",
     "Confirm SES quota vs the 8 Dec volume; request the raise via Muteeb if short",
     "Write and file the confirmation"
-   ]
+   ],
+   "layman": "Confirm that emails we send from our properly prepared sending address actually land in inboxes rather than spam folders, so pilots and customers reliably receive our alerts and messages."
   },
   {
    "id": "N4-JL-04",
@@ -12890,7 +13293,8 @@ window.LAUNCH_DATA = {
     "Fold in the cache-hit validation result",
     "Alex signs; Muteeb accepts into the N5 board scope",
     "File the spec"
-   ]
+   ],
+   "layman": "Approve the plan for a dashboard showing what each customer costs us versus what they pay, so we can see whether the business makes money as it grows."
   },
   {
    "id": "N4-LW-01",
@@ -12920,7 +13324,8 @@ window.LAUNCH_DATA = {
     "Book the session with Saad",
     "Brief the opt-out witness pilot",
     "Agree the DSAR subject with Filza"
-   ]
+   ],
+   "layman": "Line up a friendly pilot customer to help with two rehearsals: Saad's practice test run and Filza's supervised check that leaving the partner-suggestions feature really removes someone properly."
   },
   {
    "id": "N4-LW-02",
@@ -12949,7 +13354,8 @@ window.LAUNCH_DATA = {
     "Transcript export from Muteeb/Asad",
     "Review and log each session",
     "Candidates to Faheem, macro notes to Saad"
-   ]
+   ],
+   "layman": "Start a weekly half-hour session with Saad reading real conversations pilots had with the Art-E assistant, so we spot bad or odd answers early and keep improving it from real use, from 23 Oct."
   },
   {
    "id": "N4-LW-03",
@@ -12980,7 +13386,8 @@ window.LAUNCH_DATA = {
     "Pin the 20 gate questions",
     "G2 ask on the weekly calls",
     "Count recorded on the roster"
-   ]
+   ],
+   "layman": "Grow our master list of test questions with known correct answers to 200 with Faheem, and count how many pilots would write us a public review, so we can measure Art-E properly and gather launch proof."
   },
   {
    "id": "N4-LW-04",
@@ -13011,7 +13418,8 @@ window.LAUNCH_DATA = {
     "Label every row",
     "Tuning session with Faheem",
     "Record misses for the recall posture"
-   ]
+   ],
+   "layman": "Do a second tuning round on the comment-storm alarm: go through each pilot's log of alerts that turned out to be nothing and adjust, so warnings stay useful rather than becoming noise people ignore."
   },
   {
    "id": "N4-LW-05",
@@ -13042,7 +13450,8 @@ window.LAUNCH_DATA = {
     "Collect signatures",
     "Note per-use permissions (video, PH, screenshots)",
     "File with Filza"
-   ]
+   ],
+   "layman": "Lewis drafts a short true story per pilot and collects written permission to use it, so launch marketing has real voices without any legal surprises."
   },
   {
    "id": "N4-FZ-01",
@@ -13071,7 +13480,8 @@ window.LAUNCH_DATA = {
     "Classify each as essential or non-essential with the reason",
     "Write the gating rules, banner copy and storage of choice",
     "Hand to Asad; agree the verification method for N5"
-   ]
+   ],
+   "layman": "Turn our review of the small tracking files the website uses into clear rules for what needs the visitor's permission first, so Asad can build the consent pop-up correctly and we stay on the right side of privacy law."
   },
   {
    "id": "N4-FZ-02",
@@ -13100,7 +13510,8 @@ window.LAUNCH_DATA = {
     "Write intake, verification and the clock",
     "Define the export format and third-party redaction rule",
     "Define the log entry; give Jill the diary step"
-   ]
+   ],
+   "layman": "Write the step-by-step manual process for when a customer legally asks to see or delete all the data we hold on them, so anyone on the team can handle such a request correctly and on time."
   },
   {
    "id": "N4-FZ-03",
@@ -13130,7 +13541,8 @@ window.LAUNCH_DATA = {
     "Set periods and triggers per category",
     "Muteeb confirms each enforcement mechanism or opens a ticket",
     "Alex countersigns; file and reference from the RoPA"
-   ]
+   ],
+   "layman": "Formally sign off the rules for how long we keep each kind of data before deleting it, so we are not holding information longer than we should and can show regulators we have a policy."
   },
   {
    "id": "N4-FZ-04",
@@ -13159,7 +13571,8 @@ window.LAUNCH_DATA = {
     "Add the no-other-page-data and screenshot-source rule",
     "Hand to Lewis with a signing log",
     "Confirm the first signed release is filed"
-   ]
+   ],
+   "layman": "Draft the standard permission form pilots sign before we use their quotes and success stories in marketing, so Lewis can collect launch stories without any legal wrangling later."
   },
   {
    "id": "N4-FZ-05",
@@ -13190,7 +13603,8 @@ window.LAUNCH_DATA = {
     "Verify each store in the cascade list is clear",
     "Check the response format and the log entry",
     "Raise gap tickets; skim the tenant-leakage CI test list"
-   ]
+   ],
+   "layman": "Personally watch a full account deletion and confirm it also cuts off our access to the person's Facebook data everywhere, so when someone leaves, they are genuinely gone."
   },
   {
    "id": "N4-FZ-06",
@@ -13219,7 +13633,8 @@ window.LAUNCH_DATA = {
     "Set the backup age-out window against the retention schedule",
     "Name the verifier and the evidence produced",
     "Muteeb adds the step to restore drill #2"
-   ]
+   ],
+   "layman": "Write the policy for what happens if we restore data from a backup that still contains someone who had asked to be deleted, so a technical recovery never quietly brings back data we promised to erase."
   },
   {
    "id": "N4-FZ-07",
@@ -13251,7 +13666,8 @@ window.LAUNCH_DATA = {
     "Muteeb runs the store queries including S3 post-image and media objects; Filza redacts and assembles",
     "Time each step; compare to the one-month clock",
     "Open gap tickets with owners; file the run record"
-   ]
+   ],
+   "layman": "Run one real delete-my-data request from start to finish across every place we store things, and confirm it all actually disappears, so we know the process works before a real customer tests us."
   },
   {
    "id": "N4-FZ-08",
@@ -13282,7 +13698,8 @@ window.LAUNCH_DATA = {
     "Revoke and record the time; re-check all three surfaces within 24h",
     "Check the revocation log and the UI state",
     "Compare the consent screen to the N1 strings"
-   ]
+   ],
+   "layman": "Watch one person opt out of the partner-suggestions feature from start to finish and confirm they truly vanish from it everywhere, so the opt-out promise we make is one we can prove."
   },
   {
    "id": "N4-FZ-09",
@@ -13313,7 +13730,8 @@ window.LAUNCH_DATA = {
     "Check date, scarcity and pricing claims",
     "Send edits to Asad and Alex",
     "Confirm the fixes are live"
-   ]
+   ],
+   "layman": "Do a second read-through of every page on the marketing website to catch any claim or wording we cannot back up or should not say publicly, so the site stays accurate and safe before launch."
   },
   {
    "id": "N5-AS-01",
@@ -13341,7 +13759,8 @@ window.LAUNCH_DATA = {
     "Fold in visual sweep findings",
     "Apply Saad's string list in one PR; mark strings frozen",
     "Audit for deferred surfaces"
-   ]
+   ],
+   "layman": "A clean-up round before pilots start testing: the whole team hunts bugs together, we tidy anything that looks off, and lock the wording on every screen, so testers judge the product, not our typos."
   },
   {
    "id": "N5-AS-02",
@@ -13375,7 +13794,8 @@ window.LAUNCH_DATA = {
     "Render the T1/T2 degraded states from the tier table",
     "Client retry caps and jitter per N5-MT-13",
     "Canary job + paging test"
-   ]
+   ],
+   "layman": "Make the app fail gracefully: polite messages when someone clicks too fast, a banner when data on screen is out of date, limits on automatic retries, and an early-warning check on Facebook sign-in, so hiccups never look like crashes."
   },
   {
    "id": "N5-AS-03",
@@ -13404,7 +13824,8 @@ window.LAUNCH_DATA = {
     "Fix blockers on staging",
     "Retest hand-off to Saad",
     "Confirm invite of 4-5"
-   ]
+   ],
+   "layman": "Fix whatever stopped the first three pilot testers in their tracks, have them retest, then invite testers four and five, so testing keeps moving instead of stalling on known problems."
   },
   {
    "id": "N5-AS-04",
@@ -13432,7 +13853,8 @@ window.LAUNCH_DATA = {
     "ARIA on custom widgets",
     "Keyboard access to sheets",
     "axe pass"
-   ]
+   ],
+   "layman": "Fix the accessibility problems Saad's audit found, so people using screen readers, keyboard-only navigation or with low vision can use the app properly and we meet the recognised standard."
   },
   {
    "id": "N5-AS-05",
@@ -13457,7 +13879,8 @@ window.LAUNCH_DATA = {
     "Code-split and lazy-load",
     "Bundle budget in CI",
     "File reports"
-   ]
+   ],
+   "layman": "Make our five most important pages score at least 90 on Google's speed and quality check, and add an automatic tripwire that stops us shipping code that would make pages heavy and slow again."
   },
   {
    "id": "N5-AS-06",
@@ -13483,7 +13906,8 @@ window.LAUNCH_DATA = {
     "Browser matrix",
     "Device matrix",
     "Board tile"
-   ]
+   ],
+   "layman": "Set up automatic robot tests that click through all fourteen customer journeys every night, on different browsers and devices, so if something breaks we find out overnight rather than from a customer."
   },
   {
    "id": "N5-AS-07",
@@ -13512,7 +13936,8 @@ window.LAUNCH_DATA = {
     "Flip Live Mode behind the flag",
     "Verify non-Tester connect",
     "Hand to Lewis for pilot walkthroughs or record the fallback"
-   ]
+   ],
+   "layman": "The moment Facebook approves our app, flip the hidden switch that lets real customers connect their pages with the approved sign-in, so we can go live the same day approval lands."
   },
   {
    "id": "N5-AS-08",
@@ -13539,7 +13964,8 @@ window.LAUNCH_DATA = {
     "Service worker app-shell only",
     "Update-ready prompt",
     "iOS install + stale-shell test"
-   ]
+   ],
+   "layman": "Make the app installable on a phone home screen like a proper app, with its own icon and quick loading, including the extra steps Apple requires on iPhones, so pilots can reach it in one tap."
   },
   {
    "id": "N5-AS-09",
@@ -13568,7 +13994,8 @@ window.LAUNCH_DATA = {
     "Produce the packet",
     "Publish security.txt",
     "Verify live"
-   ]
+   ],
+   "layman": "Publish a page on our site explaining how we protect customer data, plus a one-page version to hand to cautious buyers, so security questions have a ready answer instead of slowing down sales."
   },
   {
    "id": "N5-AS-10",
@@ -13596,7 +14023,8 @@ window.LAUNCH_DATA = {
     "Table with sort",
     "CSV export tenant-scoped",
     "Empty state"
-   ]
+   ],
+   "layman": "Add a simple table listing every post a page has published, sortable by any column and downloadable as a spreadsheet, so customers can dig into their own numbers however they like."
   },
   {
    "id": "N5-AS-11",
@@ -13626,7 +14054,8 @@ window.LAUNCH_DATA = {
     "Scoreboard",
     "Rating card to feedback store",
     "Ledger trace check"
-   ]
+   ],
+   "layman": "Build a slimmed-down results screen: a simple band showing the value we have delivered, a scoreboard of how the Art-E assistant is doing, and a rating card. It is first in line to be dropped if time runs short."
   },
   {
    "id": "N5-AS-12",
@@ -13654,7 +14083,8 @@ window.LAUNCH_DATA = {
     "Add to site footer/contact",
     "Add to Settings/help",
     "Match macro wording"
-   ]
+   ],
+   "layman": "State plainly on the website and inside the app how quickly we answer support requests, so customers know what to expect and we are held to a promise we chose ourselves."
   },
   {
    "id": "N5-AS-13",
@@ -13680,7 +14110,8 @@ window.LAUNCH_DATA = {
     "Slide-over from row",
     "Render score, chips, sentiment, timing",
     "Empty state"
-   ]
+   ],
+   "layman": "Add a slide-in panel that shows one post's details when clicked in the posts table, kept deliberately simple; we only build it during the first testing wave if testers keep asking for it."
   },
   {
    "id": "N5-AS-14",
@@ -13712,7 +14143,8 @@ window.LAUNCH_DATA = {
     "Write the deprecation policy",
     "Put the result into the readiness review evidence"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Before we lock the product for launch, walk through every live screen and check it matches what we promised to build, so nothing half-finished or off-spec sneaks into the version pilots and customers see."
   },
   {
    "id": "N5-AS-15",
@@ -13745,7 +14177,8 @@ window.LAUNCH_DATA = {
     "Set immutable headers on hashed assets and TTLs elsewhere",
     "Subset and self-host fonts; preload only the critical face",
     "Record bandwidth per session and send it to Saad and Jill"
-   ]
+   ],
+   "layman": "Make pictures and design files load fast: right-sized images for each screen, sensible rules for what browsers keep locally, and lettering that appears instantly, so the app feels quick even on a weak connection."
   },
   {
    "id": "N5-AS-16",
@@ -13778,7 +14211,8 @@ window.LAUNCH_DATA = {
     "Generate an SBOM per build and file it",
     "Inventory browser and build third parties with justifications",
     "Add the CI gate on new criticals and unpinned direct dependencies"
-   ]
+   ],
+   "layman": "Check every piece of borrowed software we build on for known security holes, and add an automatic gate that blocks new code if it brings in a serious one, so we do not inherit someone else's flaw."
   },
   {
    "id": "N5-AS-17",
@@ -13810,7 +14244,8 @@ window.LAUNCH_DATA = {
     "Collect a week of UAT violations",
     "Remove app-origin inline scripts and styles instead of widening",
     "Hand the final enforced policy text to N6-AS-04"
-   ]
+   ],
+   "layman": "Turn on a browser safety rule in watch-only mode on our test site — it reports anything on a page loading from somewhere unexpected — and investigate every report, so we can switch it to blocking mode safely later."
   },
   {
    "id": "N5-AS-18",
@@ -13843,7 +14278,8 @@ window.LAUNCH_DATA = {
     "Capture a log sample from an E2E run",
     "Add the grep check to CI and fail on a hit",
     "Re-check Sentry breadcrumbs and the browser console"
-   ]
+   ],
+   "layman": "Scrub our technical logs so they never contain passwords, personal details, or the text of anyone's posts and comments, so even our own troubleshooting records cannot leak customer information."
   },
   {
    "id": "N5-FH-01",
@@ -13871,7 +14307,8 @@ window.LAUNCH_DATA = {
     "Retrain each",
     "Apply gate",
     "Record"
-   ]
+   ],
+   "layman": "One final training round for our three prediction systems — post-flop warning, language understanding, and comment-storm detection — then a decision per system: keep the current version or promote the newer one, and freeze it for launch."
   },
   {
    "id": "N5-FH-02",
@@ -13899,7 +14336,8 @@ window.LAUNCH_DATA = {
     "Pin all five elements per model",
     "Manifest to Muteeb",
     "Test a pointer flip"
-   ]
+   ],
+   "layman": "Give every version of our prediction systems a proper name and a saved copy, so we always know exactly which version is running and can put an old one back instantly if a new one misbehaves."
   },
   {
    "id": "N5-FH-03",
@@ -13926,7 +14364,8 @@ window.LAUNCH_DATA = {
     "Start logging 6 Nov",
     "Daily check",
     "Report"
-   ]
+   ],
+   "layman": "Run our predictions quietly alongside real page activity for a week and record how often they were right, so we have written proof the systems work before we lock them for launch."
   },
   {
    "id": "N5-FH-04",
@@ -13953,7 +14392,8 @@ window.LAUNCH_DATA = {
     "Run drill",
     "Record 7-day rate",
     "Hand numbers to Saad"
-   ]
+   ],
+   "layman": "Run a second full rehearsal of the comment-storm alarm for the 12 Nov demo video, and measure how often it cried wolf over seven real days, so we can show the alert is fast and rarely wrong."
   },
   {
    "id": "N5-FH-05",
@@ -13980,7 +14420,8 @@ window.LAUNCH_DATA = {
     "Monitor nightly",
     "Fix regressions",
     "Saad countersigns"
-   ]
+   ],
+   "layman": "Have the Art-E assistant pass our full question-and-answer test seven nights in a row with no slips, then get Saad's signature on the result, so we launch with proof it answers reliably, not a good day's luck."
   },
   {
    "id": "N5-FH-06",
@@ -14013,7 +14454,8 @@ window.LAUNCH_DATA = {
     "Keep a warm path off the type-time route",
     "Re-measure and prove score-band parity against the frozen candidate",
     "Hand the cost table to Asad and Jill"
-   ]
+   ],
+   "layman": "Measure how long each prediction system takes to answer on a bad day and what a thousand predictions cost us, so we know the product stays snappy and the sums still work as customers grow."
   },
   {
    "id": "N5-FH-07",
@@ -14046,7 +14488,8 @@ window.LAUNCH_DATA = {
     "Add materialised aggregates for the rescanning dashboards",
     "Re-run and record before/after runtime and bytes scanned",
     "Set the per-query scan-size alarm"
-   ]
+   ],
+   "layman": "Tune how our data warehouse organises its tables and fix the ten slowest, most expensive queries, so reports come back faster and our monthly data bill stays sensible."
   },
   {
    "id": "N5-MT-01",
@@ -14080,7 +14523,8 @@ window.LAUNCH_DATA = {
     "Verify tiers, queue depth ceilings and DLQ under surge",
     "Record time-to-first-value per page and live scoring p95",
     "Write up naming the Fargate policy and the ceilings hit"
-   ]
+   ],
+   "layman": "Stress-test the system with ten times our pilot traffic, sudden spikes, and a realistic launch-day pattern, and write down exactly how the servers add capacity, so launch day cannot surprise us."
   },
   {
    "id": "N5-MT-02",
@@ -14109,7 +14553,8 @@ window.LAUNCH_DATA = {
     "Restore and time it",
     "Verify vectors, memory and tombstones",
     "Sign RTO/RPO"
-   ]
+   ],
+   "layman": "Practise recovering everything from backup a second time using realistic launch-sized data, including the assistant's stored knowledge, so if disaster strikes we already know the recovery works and how long it takes."
   },
   {
    "id": "N5-MT-03",
@@ -14138,7 +14583,8 @@ window.LAUNCH_DATA = {
     "Capture stage timestamps",
     "Export the 7-day alert log",
     "Deliver to Saad and Alex"
-   ]
+   ],
+   "layman": "Capture timed, stamped evidence from the second comment-storm rehearsal showing how quickly an alert travels from Facebook to the customer's phone, so the 12 Nov video shows real speed, not a claim."
   },
   {
    "id": "N5-MT-04",
@@ -14168,7 +14614,8 @@ window.LAUNCH_DATA = {
     "Triage findings vs blocker criteria",
     "Fix criticals and retest",
     "File the report"
-   ]
+   ],
+   "layman": "Have outside security specialists attack our system on purpose and fix every serious weakness they find before 13 Nov, so we launch knowing a professional tried to break in and failed."
   },
   {
    "id": "N5-MT-05",
@@ -14201,7 +14648,8 @@ window.LAUNCH_DATA = {
     "Write one runbook per row and link it from the table",
     "Write tenant lookup and suspend queries",
     "Confirm every row has a detection signal that actually exists on the board"
-   ]
+   ],
+   "layman": "Build one launch-day screen showing the health of everything at once, plus written step-by-step guides for the ten most likely problems and for routine admin, so whoever is on duty can act fast without guessing."
   },
   {
    "id": "N5-MT-06",
@@ -14230,7 +14678,8 @@ window.LAUNCH_DATA = {
     "Build the funnel query",
     "Add the panel",
     "Verify against a test signup"
-   ]
+   ],
+   "layman": "Add a panel to the launch-day screen showing where new sign-ups get stuck between joining and getting value, so we can spot and fix the exact step that loses people."
   },
   {
    "id": "N5-MT-07",
@@ -14261,7 +14710,8 @@ window.LAUNCH_DATA = {
     "Write known-input assertions",
     "Schedule nightly and on-deploy runs",
     "Alert on failure"
-   ]
+   ],
+   "layman": "Set up a quick automatic daily check that asks each live prediction system a known question and confirms it answers sensibly, so a silently broken system is caught within hours, not weeks."
   },
   {
    "id": "N5-MT-09",
@@ -14292,7 +14742,8 @@ window.LAUNCH_DATA = {
     "Confirm zero open platform P1s",
     "Present at the review",
     "Log ambers with owners"
-   ]
+   ],
+   "layman": "Gather the proof for the first go/no-go launch review: rehearsals done, stress tests passed, security test clean, and no showstopper bugs open, so the launch decision rests on evidence rather than optimism."
   },
   {
    "id": "N5-MT-10",
@@ -14322,7 +14773,8 @@ window.LAUNCH_DATA = {
     "Set the churn alert threshold with Asad",
     "Hand the two most recent reports to Lewis before the pre-freeze spot check",
     "Publish the recompute-diff series (edge churn, top-5 rank stability, FDR-gated/fallback/k=5-suppressed counts) plus the latest precision@5 gate result as a panel on the QA dashboard"
-   ]
+   ],
+   "layman": "Each week, compare the freshly recalculated partner-page suggestions with last week's and check the top five stay sensibly stable, so recommendations do not reshuffle randomly and confuse customers."
   },
   {
    "id": "N5-MT-11",
@@ -14354,7 +14806,8 @@ window.LAUNCH_DATA = {
     "Set queue depth ceilings and producer-side backpressure",
     "Alarm on queue depth and oldest-message age",
     "Prove one scale-up and one ceiling stop with a synthetic burst on staging"
-   ]
+   ],
+   "layman": "Write down, for each part of the system, exactly when it adds more capacity under load and how much waiting work is allowed to pile up before we intervene, so scaling is a plan rather than a hope."
   },
   {
    "id": "N5-MT-12",
@@ -14386,7 +14839,8 @@ window.LAUNCH_DATA = {
     "Wire each shed path to Asad's degraded/stale state, never a 500",
     "Force-trip each tier on staging and screenshot the user-visible result",
     "Link the tier table from the war-room board"
-   ]
+   ],
+   "layman": "Prepare graceful fallback modes for when the system is overwhelmed — each level switches off the least important things first with a single switch — so under extreme pressure the core alerts keep working instead of everything failing."
   },
   {
    "id": "N5-MT-13",
@@ -14418,7 +14872,8 @@ window.LAUNCH_DATA = {
     "Move enforcement into shared client wrappers in both backends",
     "Set retries to zero on writes until idempotency keys land",
     "Test a forced slow dependency and record the fail-fast behaviour"
-   ]
+   ],
+   "layman": "Set a strict time limit and retry allowance for every internal hand-off between parts of the system, so one slow component cannot silently jam everything behind it."
   },
   {
    "id": "N5-MT-14",
@@ -14451,7 +14906,8 @@ window.LAUNCH_DATA = {
     "Make alert, ingest and labelling consumers upsert on (tenant, page, post, run)",
     "Replay a captured batch twice and diff state plus the email log",
     "Re-enable write retries in N5-MT-13's client wrappers"
-   ]
+   ],
+   "layman": "Make every action that saves or changes data safe to repeat: if a hiccup makes the same request arrive twice, it counts once, so retries never create duplicate alerts, records or charges."
   },
   {
    "id": "N5-MT-15",
@@ -14484,7 +14940,8 @@ window.LAUNCH_DATA = {
     "Poison one alert and one ingest message on staging",
     "Drain both, time it and record the residue",
     "File as one of the top-10 runbooks and link from the board"
-   ]
+   ],
+   "layman": "Rehearse clearing our safety-net queue — the holding pen for messages that failed to process — including one deliberately broken message, so a bad message never jams the queue or gets lost for real."
   },
   {
    "id": "N5-MT-16",
@@ -14518,7 +14975,8 @@ window.LAUNCH_DATA = {
     "Fix low hit rates: key shape, TTL, single-flight on cold start",
     "Add the hit-rate panel to the war-room board",
     "Publish the cost saved per 1,000 requests to Jill"
-   ]
+   ],
+   "layman": "Decide, for every data-serving part of the app, what gets remembered temporarily, for how long, and when it must be refreshed, with a target for how often we serve from memory, so pages load fast without showing stale numbers."
   },
   {
    "id": "N5-MT-17",
@@ -14551,7 +15009,8 @@ window.LAUNCH_DATA = {
     "Add bot defence to the waitlist and application forms",
     "Apply the edge WAF rule set within Jill's confirmed cost",
     "Log and panel limit hits per rule"
-   ]
+   ],
+   "layman": "Put speed limits and abuse protections on every door into our system from the internet, so a badly behaved script or an attacker cannot overload us or rack up our costs."
   },
   {
    "id": "N5-SD-01",
@@ -14578,7 +15037,8 @@ window.LAUNCH_DATA = {
     "Review each against the voice guide modes and vocabulary",
     "File fixes as sized tickets for Asad",
     "Log deliberate deviations in the decision log"
-   ]
+   ],
+   "layman": "Before pilot testing, we read every word the app shows users in one sitting and fix anything off-tone or inconsistent, so pilots judge the product, not six different writing styles."
   },
   {
    "id": "N5-SD-02",
@@ -14606,7 +15066,8 @@ window.LAUNCH_DATA = {
     "Mobile pass",
     "File tickets",
     "Confirm fixes landed"
-   ]
+   ],
+   "layman": "Saad clicks through every screen in every possible state, on desktop and mobile, and files anything missing or broken — so pilots find real product issues, not missing loading spinners."
   },
   {
    "id": "N5-SD-03",
@@ -14639,7 +15100,8 @@ window.LAUNCH_DATA = {
     "Run sessions",
     "Log defects vs criteria",
     "Share with Asad daily"
-   ]
+   ],
+   "layman": "We sit the first three pilot customers down and watch them use the whole product without helping, logging everything that confuses or breaks — the first real evidence for the launch decision."
   },
   {
    "id": "N5-SD-04",
@@ -14669,7 +15131,8 @@ window.LAUNCH_DATA = {
     "Fact-check claims",
     "Get Alex + Filza sign-off",
     "Publish"
-   ]
+   ],
+   "layman": "We publish the demo video showing the comment-storm alert catching a real seeded incident, fact-checked and legally cleared, on 12 Nov — a public asset where every claim matches something we actually measured."
   },
   {
    "id": "N5-SD-05",
@@ -14699,7 +15162,8 @@ window.LAUNCH_DATA = {
     "Invite 4-5",
     "Prepare review inputs",
     "Update register"
-   ]
+   ],
+   "layman": "After the first pilot tests, we fix what broke, re-test each fix, invite pilots 4 and 5, and bring the full defect list to the 13 Nov readiness review — which needs zero serious bugs open."
   },
   {
    "id": "N5-SD-06",
@@ -14731,7 +15195,8 @@ window.LAUNCH_DATA = {
     "Define roles",
     "Add Meta branch",
     "Circulate"
-   ]
+   ],
+   "layman": "A written launch-day playbook: the go-live checklist, who does what in the war room, when we roll back, and what we do if Facebook approval has not landed — so launch morning runs on decisions made in advance."
   },
   {
    "id": "N5-SD-07",
@@ -14759,7 +15224,8 @@ window.LAUNCH_DATA = {
     "Log streak",
     "Countersign or escalate",
     "Record in register"
-   ]
+   ],
+   "layman": "Saad checks the Art-E quality dashboard daily and only signs it off after seven straight nights of passing scores; if the streak fails, we trigger the pre-agreed plan to trim the feature rather than launch it wobbly."
   },
   {
    "id": "N5-SD-08",
@@ -14787,7 +15253,8 @@ window.LAUNCH_DATA = {
     "Observe unguided",
     "Spec the hatch",
     "Ticket Asad"
-   ]
+   ],
+   "layman": "We watch a complete stranger try to sign up unaided, note where they get stuck (usually connecting Facebook), and add a 'stuck? book 10 minutes with us' button — so first customers never quietly give up."
   },
   {
    "id": "N5-SD-09",
@@ -14815,7 +15282,8 @@ window.LAUNCH_DATA = {
     "Write explainers",
     "Review with Faheem",
     "Hand to Jill"
-   ]
+   ],
+   "layman": "We pre-write the answers to the 20 most likely customer questions, including plain explanations of why Art-E or the flop gauge said what it said, and hand them to Jill — support answers ready before support exists."
   },
   {
    "id": "N5-SD-10",
@@ -14843,7 +15311,8 @@ window.LAUNCH_DATA = {
     "Write tagline + maker comment",
     "Check narrative wording",
     "Share"
-   ]
+   ],
+   "layman": "We prepare the whole Product Hunt launch kit — images, tagline, founder comment — using our polished demo data (never real pilot data), so launch-day marketing is ready well before the code is locked down."
   },
   {
    "id": "N5-SD-11",
@@ -14870,7 +15339,8 @@ window.LAUNCH_DATA = {
     "Triage against blocker criteria",
     "Hand the ranked list to Asad"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "A one-hour organised bug hunt on the test site with four of us following scripts, ending with a ranked fix list handed to Asad the same day — so the worst bugs are gone before pilots start testing."
   },
   {
    "id": "N5-SD-12",
@@ -14903,7 +15373,8 @@ window.LAUNCH_DATA = {
     "Hand the branch evidence to the go/no-go memo",
     "Confirm backup cover across the UAT weeks"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Daily watch on Facebook's approval dashboard plus a weekly check that their reviewer can still log in and see real-looking data, right through to the final launch decision — so Meta's verdict never catches us off guard."
   },
   {
    "id": "N5-AX-01",
@@ -14936,7 +15407,8 @@ window.LAUNCH_DATA = {
     "Countersign all five",
     "Sign the final ToS",
     "File and notify Saad and Jill"
-   ]
+   ],
+   "layman": "Alex signs the company's side of all five pilot contracts and data-protection agreements, plus the final terms of service, before pilot testing starts — no testing or invoicing on unsigned paper."
   },
   {
    "id": "N5-AX-02",
@@ -14968,7 +15440,8 @@ window.LAUNCH_DATA = {
     "Confirm Filza's clearance",
     "Approve or list changes",
     "Confirm the 12 Nov ship"
-   ]
+   ],
+   "layman": "Alex personally reviews the demo video against the measured drill numbers and legal clearance before it goes public — a public claim the product cannot meet would cost more than a late video."
   },
   {
    "id": "N5-AX-03",
@@ -14999,7 +15472,8 @@ window.LAUNCH_DATA = {
     "Public message with Filza",
     "PH slot and hunter handling",
     "Decision owner per step"
-   ]
+   ],
+   "layman": "Alex writes the plan for a delayed launch: the fallback date, what we tell pilots and the waitlist, and what happens to the Product Hunt slot — so saying 'not yet' is a managed decision, not a scramble."
   },
   {
    "id": "N5-AX-04",
@@ -15029,7 +15503,8 @@ window.LAUNCH_DATA = {
     "Add invoices, DPAs and waitlist rows",
     "Add the decision block",
     "Circulate before 13 Nov"
-   ]
+   ],
+   "layman": "Alex drafts the launch-decision document in advance with an empty evidence box per requirement, and rehearses it at the 13 Nov review — so on decision day we fill in facts rather than shape them to a wanted answer."
   },
   {
    "id": "N5-AX-05",
@@ -15064,7 +15539,8 @@ window.LAUNCH_DATA = {
     "Decide the Meta branch",
     "Assign owner + date per amber/red",
     "Publish minutes"
-   ]
+   ],
+   "layman": "Alex chairs the 13 Nov readiness review: bugs, drills, pilot results and the Facebook-approval question all get a red/amber/green, and every problem leaves the room with a named owner and a deadline."
   },
   {
    "id": "N5-AX-06",
@@ -15099,7 +15575,8 @@ window.LAUNCH_DATA = {
     "Check against the signed pricing sheet, landing copy and invoice template",
     "Send to Filza for the scarcity-claims check",
     "Confirm /security is live before scheduling the send"
-   ]
+   ],
+   "layman": "Alex drafts the founding-customer pricing announcement — the discounted price, how long it is locked, and the sign-up deadline — checked against our costs and every other place the price appears, so one price shows everywhere."
   },
   {
    "id": "N5-JL-01",
@@ -15134,7 +15611,8 @@ window.LAUNCH_DATA = {
     "Map every war-room board alarm to a paging route",
     "Add Filza's 72h breach owner and escalation to Alex",
     "Publish into the launch runbook; file"
-   ]
+   ],
+   "layman": "Jill writes the out-of-hours duty schedule through launch: who is on call each day, who runs an incident (never the person typing fixes), and how each alarm reaches a phone — published into the launch playbook."
   },
   {
    "id": "N5-JL-02",
@@ -15169,7 +15647,8 @@ window.LAUNCH_DATA = {
     "Collect pen-test, drill #2, breaker and 2am receipts as they land",
     "Share the index with Asad, Muteeb, Filza for the trust page",
     "Add a standing 'file on completion' step to every drill ticket"
-   ]
+   ],
+   "layman": "Jill starts an organised evidence folder of every security proof we produce — drills, tests, certificates — so the public security page and future audits are built from filed receipts, not memory."
   },
   {
    "id": "N5-JL-03",
@@ -15200,7 +15679,8 @@ window.LAUNCH_DATA = {
     "Record ack time; let one page time out to test escalation",
     "Post the all-clear; write the receipt",
     "Fix gaps and re-run if needed; file"
-   ]
+   ],
+   "layman": "We fire a fake alarm at 2am on a real duty night to prove the on-call phone actually rings, someone answers in time, and the backup gets alerted if they don't — filed as a timestamped receipt."
   },
   {
    "id": "N5-JL-04",
@@ -15232,7 +15712,8 @@ window.LAUNCH_DATA = {
     "Check vendor quota raises are granted and priced",
     "Alex approves the launch-week ceiling",
     "Update the cost model; file"
-   ]
+   ],
+   "layman": "Jill costs the extra server capacity and traffic protection we need for launch-week crowds and gets the spend pre-approved by Alex — so nothing waits for a signature on launch morning."
   },
   {
    "id": "N5-JL-05",
@@ -15266,7 +15747,8 @@ window.LAUNCH_DATA = {
     "Filza checks each against the countersigned terms; Alex checks against the notice draft",
     "Fix the template; confirm bank block and send-from address",
     "Create the payment-tracking sheet"
-   ]
+   ],
+   "layman": "A practice run of billing: Jill drafts all five pilot invoices, has legal and Alex check them against the signed terms, and fixes the template now — so the first real invoices go out without an embarrassing error."
   },
   {
    "id": "N5-JL-06",
@@ -15298,7 +15780,8 @@ window.LAUNCH_DATA = {
     "Bind cover; pay premium",
     "File certificates and schedule in the evidence folder",
     "Diary renewal and notify Lewis that cover is in place"
-   ]
+   ],
+   "layman": "Jill buys the company's professional-liability and cyber insurance so cover is in force before the first customer money arrives — a must-have before anyone pays us."
   },
   {
    "id": "N5-LW-01",
@@ -15329,7 +15812,8 @@ window.LAUNCH_DATA = {
     "Filza countersigns",
     "Cleared list to Saad",
     "File the signed set"
-   ]
+   ],
+   "layman": "Lewis gets all five pilots to sign their agreements and data-protection paperwork before testing starts — a pilot without signed paper cannot join testing or be invoiced."
   },
   {
    "id": "N5-LW-02",
@@ -15360,7 +15844,8 @@ window.LAUNCH_DATA = {
     "Retest each fix with the pilot",
     "Log to Saad's triage",
     "Invite pilots 4-5"
-   ]
+   ],
+   "layman": "Lewis sits with pilots 1-3 during their test sessions as their advocate, then re-runs each failed step with them after we fix it, and invites pilots 4-5 once the first wave is clean — so the bug list actually closes."
   },
   {
    "id": "N5-LW-03",
@@ -15392,7 +15877,8 @@ window.LAUNCH_DATA = {
     "Run with times recorded",
     "Clean up",
     "Claims check with Saad"
-   ]
+   ],
+   "layman": "Lewis arranges the second live comment-storm rehearsal on a consenting pilot's real page, with times recorded stopwatch-style — the raw, witnessed footage the 12 Nov demo video is cut from."
   },
   {
    "id": "N5-LW-04",
@@ -15423,7 +15909,8 @@ window.LAUNCH_DATA = {
     "Reconnect and check continuity",
     "Confusion log to Saad",
     "Fallback record if approval is pending"
-   ]
+   ],
+   "layman": "Once Facebook approves us for public use, Lewis screen-shares with each pilot to reconnect their page through the new public sign-in and confirms no data was lost — the moment the product becomes real for paying customers."
   },
   {
    "id": "N5-LW-05",
@@ -15454,7 +15941,8 @@ window.LAUNCH_DATA = {
     "Conversations with every pilot",
     "Objections log",
     "Weekly count to Alex and Jill"
-   ]
+   ],
+   "layman": "Lewis holds the money conversation with each pilot using the agreed founding price and terms, aiming for five paying customers signed before launch."
   },
   {
    "id": "N5-LW-06",
@@ -15483,7 +15971,8 @@ window.LAUNCH_DATA = {
     "Pilot approval",
     "Match to permissions",
     "Hand to Saad and Asad"
-   ]
+   ],
+   "layman": "Turn the pilot stories into final approved quotes matched to signed permissions, ready for the launch announcement, so nothing published misquotes a customer."
   },
   {
    "id": "N5-LW-07",
@@ -15511,7 +16000,8 @@ window.LAUNCH_DATA = {
     "Session 13 Nov",
     "Candidates to Faheem",
     "Macro notes to Saad"
-   ]
+   ],
+   "layman": "Lewis keeps reviewing real conversations with the assistant weekly and sends the last new test questions before the models are locked for launch."
   },
   {
    "id": "N5-LW-08",
@@ -15540,7 +16030,8 @@ window.LAUNCH_DATA = {
     "Attend silently; log where they stall",
     "Hand observations to Saad",
     "Agree the escape-hatch seat with Saad for the launch support plan"
-   ]
+   ],
+   "layman": "Find one genuinely fresh outsider who runs a Facebook page to try signing up unaided, so we see where a stranger gets stuck before real strangers arrive."
   },
   {
    "id": "N5-FZ-01",
@@ -15572,7 +16063,8 @@ window.LAUNCH_DATA = {
     "Chase outstanding signatures; escalate to Alex by 4 Nov",
     "Alex countersigns each set; file with dates",
     "Tell Saad which pilots are cleared for UAT"
-   ]
+   ],
+   "layman": "Filza chases until all five pilots' agreements and data-protection contracts are signed by both sides and filed before testing starts — an unsigned pilot does not enter testing."
   },
   {
    "id": "N5-FZ-02",
@@ -15603,7 +16095,8 @@ window.LAUNCH_DATA = {
     "Check persistence and the Settings change route",
     "Sign up once; confirm the unticked marketing-consent box and the timestamped log entry (N2-FZ-08 spec)",
     "Send pass/fail to Asad; retest after fixes"
-   ]
+   ],
+   "layman": "Filza tests the cookie banner properly: declining really must block every non-essential tracker, and the sign-up marketing tick-box must start unticked and be recorded — so pilots and security testers see us doing privacy right."
   },
   {
    "id": "N5-FZ-03",
@@ -15633,7 +16126,8 @@ window.LAUNCH_DATA = {
     "Check third-party comments, page choice and permissions",
     "Confirm AI labels on screen and firewall language",
     "Send clearance or required changes to Alex by 10 Nov"
-   ]
+   ],
+   "layman": "Filza legally clears the demo video before it ships: every claim matches measured numbers, no one else's page or comments appear without permission, and AI-generated bits are labelled — because it is public forever."
   },
   {
    "id": "N5-FZ-04",
@@ -15663,7 +16157,8 @@ window.LAUNCH_DATA = {
     "Update the DPA security annex",
     "Update ToS availability wording and the /security draft",
     "Cross-check no document overstates"
-   ]
+   ],
+   "layman": "Filza writes the proven recovery promises (back up and running within 2 hours, losing at most a day of data) into the contracts and security page — promising customers exactly what the drill proved, no more."
   },
   {
    "id": "N5-FZ-05",
@@ -15693,7 +16188,8 @@ window.LAUNCH_DATA = {
     "Build the ICO 72h decision tree and owner",
     "Write the press holding line",
     "Hand to Jill and Muteeb for the game-day"
-   ]
+   ],
+   "layman": "Filza pre-writes three emergency scripts: the customer notice if something goes wrong, the 72-hour regulator-notification decision guide, and a press holding line — so in a crisis the words already exist."
   },
   {
    "id": "N5-FZ-06",
@@ -15724,7 +16220,8 @@ window.LAUNCH_DATA = {
     "Align the liability cap with the pilot agreement",
     "Alex signs; Asad publishes at the same URL",
     "Notify Saad for the Meta dashboard and Jill for invoices"
-   ]
+   ],
+   "layman": "Filza finalises the terms of service — AI disclaimers, age limit, uptime promises, founding-price wording — and Alex signs it, so every pilot and launch customer signs the same locked version."
   },
   {
    "id": "N5-FZ-07",
@@ -15755,7 +16252,8 @@ window.LAUNCH_DATA = {
     "Review the 5 draft invoices against the terms schedules",
     "Send fixes to Asad and Jill",
     "Re-check after fixes"
-   ]
+   ],
+   "layman": "Filza checks the legally required company details (name, number, VAT) appear on the website, every outgoing email and all five draft invoices, and that each invoice matches its signed terms — cheap to fix now, embarrassing later."
   },
   {
    "id": "N5-FZ-08",
@@ -15787,7 +16285,8 @@ window.LAUNCH_DATA = {
     "Write the page copy and the packet, one claim per evidence item",
     "Firewall-pass and add the security.txt disclosure route and SLA",
     "Hand to Asad and Lewis"
-   ]
+   ],
+   "layman": "Filza and Muteeb turn our security proofs into a plain-English public security page and a one-pager Lewis can hand pilots — because 'connect your Facebook page to a stranger' is our first big ask and the proof should be visible."
   },
   {
    "id": "N5-FZ-09",
@@ -15823,7 +16322,8 @@ window.LAUNCH_DATA = {
     "File deletion, sub-processor, security and DSAR proofs into the binder",
     "Diarise DUC + DPA windows in the Meta app dashboard; name Saad as watcher",
     "Hand the index to Jill for the SOC2-later evidence folder"
-   ]
+   ],
+   "layman": "Filza assembles one binder answering every data-protection question Facebook might ask, with proof attached, and puts the annual check-up dates in the diary — so a Meta questionnaire never becomes a scramble on their deadline."
   },
   {
    "id": "N6-AS-01",
@@ -15852,7 +16352,8 @@ window.LAUNCH_DATA = {
     "Write branch policy",
     "Protect main",
     "Announce"
-   ]
+   ],
+   "layman": "From Fri 20 Nov, no new features: Asad publishes the list of what is locked on or off and sets the code repository to reject anything that is not a critical bug fix — so the launch build stops moving a week before it must be final."
   },
   {
    "id": "N6-AS-02",
@@ -15882,7 +16383,8 @@ window.LAUNCH_DATA = {
     "Update pricing section + FAQ",
     "Deploy on 24 Nov",
     "Cross-check with the notice"
-   ]
+   ],
+   "layman": "On 24 Nov the website's pricing section is updated to match the founding-price announcement and the invoices word for word — one price everywhere, live the day the notice goes out."
   },
   {
    "id": "N6-AS-03",
@@ -15914,7 +16416,8 @@ window.LAUNCH_DATA = {
     "Wire four switches",
     "Flip each with receipts",
     "Runbook entries"
-   ]
+   ],
+   "layman": "Asad tests the four emergency off-buttons (Art-E, crisis emails, partner suggestions, daily briefing) by flipping each off and on with screenshots — so one misbehaving feature on launch day can be stopped in seconds, not rolled back."
   },
   {
    "id": "N6-AS-04",
@@ -15945,7 +16448,8 @@ window.LAUNCH_DATA = {
     "Re-run the dependency audit against frozen lockfiles",
     "Confirm HSTS, cookie flags and custom 404/500",
     "Capture the scanner receipt into the evidence pack"
-   ]
+   ],
+   "layman": "Asad switches on the strictest browser security rules for the final build, walks every screen to confirm nothing broke, re-checks our software ingredients for new flaws, and files a top-grade security scan as evidence."
   },
   {
    "id": "N6-AS-05",
@@ -15976,7 +16480,8 @@ window.LAUNCH_DATA = {
     "Rehearse the flip on staging",
     "Re-run canary + rollback post-freeze",
     "Developer seat in dry run #1"
-   ]
+   ],
+   "layman": "We rehearse launch itself: going live is just flipping one switch, and the practised deploy-and-undo path is re-timed after the freeze; Asad plays the developer role in the full dress rehearsal on 26 Nov."
   },
   {
    "id": "N6-AS-06",
@@ -16008,7 +16513,8 @@ window.LAUNCH_DATA = {
     "Companies Act particulars",
     "OG images",
     "Sitemap/robots/structured data"
-   ]
+   ],
+   "layman": "Asad refreshes the marketing site for launch: screenshots from the final build, all legal pages linked, correct company details, and the search-engine and link-preview basics — so the public front door is accurate on Product Hunt day."
   },
   {
    "id": "N6-AS-07",
@@ -16036,7 +16542,8 @@ window.LAUNCH_DATA = {
     "Desktop pass",
     "Mobile pass",
     "Fix blockers only"
-   ]
+   ],
+   "layman": "One last walk through every screen's empty, loading and error views on desktop and mobile, fixing only true blockers — the small moments that decide whether the product feels finished."
   },
   {
    "id": "N6-AS-08",
@@ -16065,7 +16572,8 @@ window.LAUNCH_DATA = {
     "Fix under branch policy",
     "Retest hand-off",
     "Confirm zero P1"
-   ]
+   ],
+   "layman": "Asad fixes only launch-blocking bugs from pilot testing and the 23 Nov bug hunt, each fix re-tested, until the log shows zero serious bugs on 27 Nov — the bar the launch decision requires."
   },
   {
    "id": "N6-AS-09",
@@ -16093,7 +16601,8 @@ window.LAUNCH_DATA = {
     "List test tenants and reviewer data",
     "Purge across DB, vectors, memory, events",
     "Verify with lookup queries"
-   ]
+   ],
+   "layman": "We delete all demo and test data from the live system, keeping only real pilot data — test data in production is both a privacy risk and would muddy our first real usage numbers."
   },
   {
    "id": "N6-AS-10",
@@ -16124,7 +16633,8 @@ window.LAUNCH_DATA = {
     "Collect receipts",
     "Map to memo criteria",
     "File in the evidence folder"
-   ]
+   ],
+   "layman": "On Fri 27 Nov the code is locked: Asad tags the final build and assembles a folder of proof — passing tests, security checks, off-button receipts — for the launch decision, which accepts evidence, not assurances."
   },
   {
    "id": "N6-AS-11",
@@ -16157,7 +16667,8 @@ window.LAUNCH_DATA = {
     "Smoke both branches from a logged-out non-Tester browser",
     "Add the branch switch to the launch runbook with Saad"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "Asad builds the backup launch path: if Facebook approval has not landed, public visitors see a tidy join-the-waitlist flow instead of a broken Facebook connection — so we can still launch gracefully in front of Product Hunt."
   },
   {
    "id": "N6-AS-12",
@@ -16188,7 +16699,8 @@ window.LAUNCH_DATA = {
     "Publish the frozen spec bundle and changelog",
     "Add the evidence line to the go/no-go pack"
    ],
-   "source": "reconciler"
+   "source": "reconciler",
+   "layman": "After the freeze, the rules for how screens and data talk to each other are locked: any change needs a named approver, and we publish proof the live system matches the frozen blueprint exactly — so nothing quietly shifts in launch week."
   },
   {
    "id": "N6-FH-01",
@@ -16215,7 +16727,8 @@ window.LAUNCH_DATA = {
     "Confirm manifest",
     "Disable auto jobs",
     "Publish protocol"
-   ]
+   ],
+   "layman": "On Fri 20 Nov every prediction model is frozen at its exact tested version and all automatic retraining is switched off — from here, stability is the feature."
   },
   {
    "id": "N6-FH-02",
@@ -16243,7 +16756,8 @@ window.LAUNCH_DATA = {
     "Verify",
     "Flip forward",
     "File"
-   ]
+   ],
+   "layman": "Faheem and Muteeb rehearse swapping a model back to its previous version and forward again, with a filed receipt — a freeze without a proven undo is just theatre."
   },
   {
    "id": "N6-FH-03",
@@ -16270,7 +16784,8 @@ window.LAUNCH_DATA = {
     "Per-gate evidence",
     "Sign or name blocker",
     "Deliver to Alex"
-   ]
+   ],
+   "layman": "Faheem audits every prediction — flop warnings, storm alerts, best times, health, Art-E — against its agreed accuracy bar and either signs a statement or names the blocker for the launch decision."
   },
   {
    "id": "N6-FH-04",
@@ -16296,7 +16811,8 @@ window.LAUNCH_DATA = {
     "Review acted/never-acted",
     "Purge",
     "Baseline thresholds"
-   ]
+   ],
+   "layman": "Faheem sets sensible launch-week alarm levels and deletes the alerts nobody ever acted on — so when something beeps on day one, it means something."
   },
   {
    "id": "N6-FH-05",
@@ -16324,7 +16840,8 @@ window.LAUNCH_DATA = {
     "Sample pilots",
     "Compare",
     "File"
-   ]
+   ],
+   "layman": "Faheem cross-checks the results our Wins screen claims against what pilot customers actually experienced — the screen makes promises, and testing is where we verify them."
   },
   {
    "id": "N6-FH-06",
@@ -16353,7 +16870,8 @@ window.LAUNCH_DATA = {
     "Quarterly model plan (what, when, evidence needed)",
     "Send to Saad for N6-SD-08",
     "Publish alongside the freeze notice"
-   ]
+   ],
+   "layman": "Faheem writes down when and why we would retrain models after launch and the quarterly improvement plan, handing it to Saad before he sets the December priorities — paperwork only, no model changes after the freeze."
   },
   {
    "id": "N6-MT-01",
@@ -16383,7 +16901,8 @@ window.LAUNCH_DATA = {
     "Run the drill with real paging",
     "Execute all three comms templates",
     "Write the retro"
-   ]
+   ],
+   "layman": "A fire drill: we deliberately break part of the data pipeline on the test system, page the on-call person for real, run the pre-written crisis messages end to end, and write up what to improve — before launch week does it for us."
   },
   {
    "id": "N6-MT-02",
@@ -16411,7 +16930,8 @@ window.LAUNCH_DATA = {
     "Repoint each endpoint",
     "Disable auto-refresh jobs",
     "Record hashes"
-   ]
+   ],
+   "layman": "Once the models are frozen, Muteeb points every live service at those exact frozen versions and turns off anything that could auto-update them — a frozen model served from an unfrozen path is not frozen."
   },
   {
    "id": "N6-MT-03",
@@ -16441,7 +16961,8 @@ window.LAUNCH_DATA = {
     "Flip the model pointer back one version and verify",
     "Restore and verify",
     "File receipts"
-   ]
+   ],
+   "layman": "Muteeb re-runs the heavy-traffic test on the final locked build and times a practice model swap-back — proving the exact thing we launch can take the crowd and be reverted."
   },
   {
    "id": "N6-MT-04",
@@ -16472,7 +16993,8 @@ window.LAUNCH_DATA = {
     "Verify each stops its feature",
     "Document locations",
     "Rehearse with Asad"
-   ]
+   ],
+   "layman": "Muteeb builds the server side of the four emergency off-buttons (Art-E, crisis emails, partner suggestions, daily briefing) and documents where each lives — so a bad hour of outgoing email can be stopped without undoing the whole release."
   },
   {
    "id": "N6-MT-05",
@@ -16502,7 +17024,8 @@ window.LAUNCH_DATA = {
     "Write the protocol",
     "Get Asad and Faheem sign-off",
     "Publish"
-   ]
+   ],
+   "layman": "Muteeb runs the quick health checks against the frozen models on the live system and publishes the emergency-fix rules: who approves, what proof is needed, and how to ship and undo a critical fix during the freeze."
   },
   {
    "id": "N6-MT-06",
@@ -16532,7 +17055,8 @@ window.LAUNCH_DATA = {
     "Wire the canary to the board",
     "Test paging with Jill",
     "Support dry run #1"
-   ]
+   ],
+   "layman": "Muteeb finishes launch monitoring: alarm levels set, a robot tries the Facebook sign-in every 15 minutes to catch breakage early, paging verified with Jill, and support for the 26 Nov dress rehearsal."
   },
   {
    "id": "N6-MT-07",
@@ -16560,7 +17084,8 @@ window.LAUNCH_DATA = {
     "Demonstrate deletion",
     "Export the CI proof run",
     "Collect sign-off"
-   ]
+   ],
+   "layman": "Muteeb helps Filza re-prove on the final live build that customers can get a copy of their data and have it deleted, and hands over automatic test proof that no customer can ever see another's data — evidence for legal's launch sign-off."
   },
   {
    "id": "N6-MT-08",
@@ -16590,7 +17115,8 @@ window.LAUNCH_DATA = {
     "Fill memo slots",
     "Attend the go/no-go",
     "Log the decision"
-   ]
+   ],
+   "layman": "From Fri 27 Nov we stop changing the product (emergency fixes only) and file proof that monitoring, backups, on-call and the undo plan all work, so the go/no-go meeting decides on evidence, not promises."
   },
   {
    "id": "N6-MT-09",
@@ -16624,7 +17150,8 @@ window.LAUNCH_DATA = {
     "Rotate pre-departure and shared secrets",
     "Record next rotation dates and the break-glass procedure; rotate anything with no rotation path or older than 90 days before code freeze",
     "File the register in Jill's evidence folder"
-   ]
+   ],
+   "layman": "One list of every password and access key we hold: who has it, what it can touch, when it gets changed. Anything too powerful or shared gets trimmed or replaced, so a leaked key can never sink the launch."
   },
   {
    "id": "N6-MT-10",
@@ -16658,7 +17185,8 @@ window.LAUNCH_DATA = {
     "Prioritise the first-value slice per page ahead of deep history",
     "Rehearse 100 simulated pages and record first-value times and live p95",
     "Hand the working numbers to Saad for N6-SD-02"
-   ]
+   ],
+   "layman": "When 100 pages join on day one, we let them in gradually and load their history slowly in the background, so new users see something useful in minutes instead of everyone waiting in one giant queue."
   },
   {
    "id": "N6-SD-01",
@@ -16686,7 +17214,8 @@ window.LAUNCH_DATA = {
     "Book the team for 90 min on 23 Nov",
     "Run and collect results",
     "Triage vs blocker criteria and publish the log"
-   ]
+   ],
+   "layman": "A second all-hands bug hunt on 23 Nov: 90 minutes, everyone follows a script through the finished product and logs what breaks, so problems are judged against clear rules rather than launch-date pressure."
   },
   {
    "id": "N6-SD-02",
@@ -16717,7 +17246,8 @@ window.LAUNCH_DATA = {
     "Set numbers",
     "Add to runbook",
     "Circulate"
-   ]
+   ],
+   "layman": "Write down the exact numbers (error rates, how many users actually get going) that tell us to let more people in or hit pause on launch day, so those calls are made in advance, not under launch-day adrenaline."
   },
   {
    "id": "N6-SD-03",
@@ -16747,7 +17277,8 @@ window.LAUNCH_DATA = {
     "Audit dates and pricing",
     "Check labels and links",
     "File fixes"
-   ]
+   ],
+   "layman": "Retake all help-page screenshots from the final product and check every public word: dates, prices, legal links, AI labels all match reality, so customers never see something the product doesn't actually do."
   },
   {
    "id": "N6-SD-04",
@@ -16779,7 +17310,8 @@ window.LAUNCH_DATA = {
     "Run",
     "Collect signatures",
     "Share with Faheem"
-   ]
+   ],
+   "layman": "All 5 pilot customers try every part of the final product while we watch, and each signs to say they understood what they saw, so we know real users get it before we launch to strangers."
   },
   {
    "id": "N6-SD-05",
@@ -16810,7 +17342,8 @@ window.LAUNCH_DATA = {
     "Run go-live checklist, flag flip, kill switches, rollback in sequence",
     "Log every failure with an owner",
     "Update the runbook to v2 and circulate"
-   ]
+   ],
+   "layman": "First full launch rehearsal on 26 Nov: switch it on, switch each feature off and on, practise the emergency undo, everyone in their seat. Every stumble gets a fix, so launch day has already happened once."
   },
   {
    "id": "N6-SD-06",
@@ -16839,7 +17372,8 @@ window.LAUNCH_DATA = {
     "Publish log",
     "Fill memo slots",
     "Attend go/no-go"
-   ]
+   ],
+   "layman": "A public daily log of every bug found and how serious it is, proving there are zero showstoppers left, so the launch decision meeting sees the evidence rather than taking our word for it."
   },
   {
    "id": "N6-SD-07",
@@ -16870,7 +17404,8 @@ window.LAUNCH_DATA = {
     "Align with Jill",
     "Confirm",
     "Publish"
-   ]
+   ],
+   "layman": "An hour-by-hour shift plan for launch week: who answers Product Hunt, who does support, who minds the pilots, who watches the systems, so launch day runs like a rota, not a scramble."
   },
   {
    "id": "N6-SD-08",
@@ -16899,7 +17434,8 @@ window.LAUNCH_DATA = {
     "Freeze",
     "Update table",
     "Share"
-   ]
+   ],
+   "layman": "Lock the Product Hunt images and words to match the finished product, and finish the ranked list of what we might build next, so the public launch page is honest and the post-launch roadmap discussion is ready."
   },
   {
    "id": "N6-SD-09",
@@ -16936,7 +17472,8 @@ window.LAUNCH_DATA = {
     "Mark any red against the pre-declared descope path",
     "Get each signature recorded with a date",
     "Hand to Alex before the 27 Nov GO/NO-GO"
-   ]
+   ],
+   "layman": "One page listing every condition the Art-E assistant must meet before launch (accurate answers, safe with tricky questions, costs under control) with a named person signing each line, so nothing launches on assumption."
   },
   {
    "id": "N6-AX-01",
@@ -16970,7 +17507,8 @@ window.LAUNCH_DATA = {
     "Confirm the PECR-consented list",
     "Send on 24 Nov",
     "File a copy"
-   ]
+   ],
+   "layman": "Send the early-customer pricing email on 24 Nov with crystal-clear terms: how long the price is locked, who qualifies, the deadline; checked first so the email, website and invoices all say the same price."
   },
   {
    "id": "N6-AX-02",
@@ -17002,7 +17540,8 @@ window.LAUNCH_DATA = {
     "Add stand-down criteria",
     "Confirm with each person",
     "Hand to Saad for the dry run"
-   ]
+   ],
+   "layman": "Decide now who does what if things go wrong in launch week: who leads, who flips the switch, who talks to customers, so nobody is arguing over roles on the day itself."
   },
   {
    "id": "N6-AX-03",
@@ -17032,7 +17571,8 @@ window.LAUNCH_DATA = {
     "Rehearse with Saad as questioner",
     "Write the answer sheet",
     "File it for PH replies"
-   ]
+   ],
+   "layman": "A practice session answering the hardest questions people might throw at us publicly (what data do you take, who sees it, can I delete it), so our public answers on launch day are prepared, not improvised."
   },
   {
    "id": "N6-AX-04",
@@ -17065,7 +17605,8 @@ window.LAUNCH_DATA = {
     "Record the waitlist count",
     "Copy the expansion/abort thresholds",
     "File with the memo"
-   ]
+   ],
+   "layman": "Record where every key number stands the day before launch (signups, how fast people get value, costs), so when launch-day numbers come in we can actually tell what changed."
   },
   {
    "id": "N6-AX-05",
@@ -17095,7 +17636,8 @@ window.LAUNCH_DATA = {
     "Sign",
     "Confirm the dashboard is live",
     "Confirm breakers trip below the cap"
-   ]
+   ],
+   "layman": "Alex signs the spending limit for launch week and confirms live cost tracking is running, so a busy launch cannot quietly burn through money without anyone noticing."
   },
   {
    "id": "N6-AX-06",
@@ -17127,7 +17669,8 @@ window.LAUNCH_DATA = {
     "Confirm PH + waitlist email at 08:01",
     "Confirm the batch-1 size",
     "Lock and circulate"
-   ]
+   ],
+   "layman": "Lock the minute-by-minute launch schedule: final check Saturday, preview Monday, switch on Tuesday 8 Dec at 08:00, announce at 08:01. No changes after 27 Nov, so launch day contains no surprises."
   },
   {
    "id": "N6-AX-07",
@@ -17166,7 +17709,8 @@ window.LAUNCH_DATA = {
     "Owners present evidence",
     "Decide the Meta branch",
     "Record, sign and publish the decision"
-   ]
+   ],
+   "layman": "Chair the formal launch decision meeting on Fri 27 Nov: every owner presents proof their area is ready, the Facebook approval question is settled, and the go or no-go decision is written down and signed."
   },
   {
    "id": "N6-JL-01",
@@ -17201,7 +17745,8 @@ window.LAUNCH_DATA = {
     "Run it: time each contact, include one unreachable",
     "Fix gaps; update the runbook and war-room board",
     "File the receipt"
-   ]
+   ],
+   "layman": "Write down exactly who to call when something breaks, in what order, and test it for real during a practice emergency, so on launch day nobody is hunting for a phone number at 2am."
   },
   {
    "id": "N6-JL-02",
@@ -17234,7 +17779,8 @@ window.LAUNCH_DATA = {
     "Compare amounts and terms with the notice draft and landing copy",
     "Resolve any mismatch with Alex",
     "Send the reconciled figures to Alex and Asad; file"
-   ]
+   ],
+   "layman": "Double-check the tax on every pilot invoice and make sure the invoice amounts match the pricing email and the website exactly, so our first customers see one price everywhere, not a muddle."
   },
   {
    "id": "N6-JL-03",
@@ -17267,7 +17813,8 @@ window.LAUNCH_DATA = {
     "Match paging routes with Muteeb's final monitoring",
     "Hand to Saad and Muteeb by 25 Nov",
     "Confirm it ran as written in dry run #1"
-   ]
+   ],
+   "layman": "Finalise who is on duty each day and night from 30 Nov to 11 Dec, including the weekend before launch, and hand it over in time to be rehearsed, so cover for launch week is settled well in advance."
   },
   {
    "id": "N6-JL-04",
@@ -17301,7 +17848,8 @@ window.LAUNCH_DATA = {
     "Route budget and breaker alarms to the rota",
     "Reconcile one day against the AWS bill",
     "Record the check in the evidence folder"
-   ]
+   ],
+   "layman": "Put live spending numbers on the launch-week control board, refreshed hourly, with alarms when costs climb, so we can see money going out in real time instead of finding out from next month's bill."
   },
   {
    "id": "N6-JL-05",
@@ -17336,7 +17884,8 @@ window.LAUNCH_DATA = {
     "Align with Saad's batch-expansion/abort thresholds",
     "Alex signs",
     "Insert into runbook and go/no-go memo; file"
-   ]
+   ],
+   "layman": "Set the maximum we are allowed to spend in launch week, line by line, with agreed actions when we hit 80% and 100%, signed by Alex, so a runaway cost gets stopped automatically rather than discovered later."
   },
   {
    "id": "N6-JL-06",
@@ -17371,7 +17920,8 @@ window.LAUNCH_DATA = {
     "Send from the agreed address; log time and recipient",
     "Give Alex the evidence line for the memo",
     "File copies in finance and evidence folders"
-   ]
+   ],
+   "layman": "Send all five pilot customers their first invoice by 27 Nov, once their contracts are signed, so we go into launch with real paying customers on paper, which is what the launch decision meeting counts."
   },
   {
    "id": "N6-LW-01",
@@ -17401,7 +17951,8 @@ window.LAUNCH_DATA = {
     "Daily routine",
     "Reds to Saad the same day",
     "Weekly summary to Alex"
-   ]
+   ],
+   "layman": "From 16 Nov, check on each of our 5 pilot customers every single day: are they logged in, is their data fresh, are they happy? Anything worrying goes straight to the bug list, so our most important users never drift."
   },
   {
    "id": "N6-LW-02",
@@ -17430,7 +17981,8 @@ window.LAUNCH_DATA = {
     "Judge 5 pages",
     "Compare to the N3 result",
     "Record the verdict"
-   ]
+   ],
+   "layman": "Before we lock the product, hand-check the collaboration suggestions for a few pilot pages to confirm the top picks are still genuinely good, so we freeze a version that works, not one that has quietly got worse."
   },
   {
    "id": "N6-LW-03",
@@ -17461,7 +18013,8 @@ window.LAUNCH_DATA = {
     "Pilot-side retests",
     "Sign-offs recorded",
     "Open items to triage"
-   ]
+   ],
+   "layman": "Book all 5 pilots into the final walkthrough of the finished product, sit with them, and get each to sign that they understood it, with quick re-tests after any fixes, so the launch decision has real user proof."
   },
   {
    "id": "N6-LW-04",
@@ -17492,7 +18045,8 @@ window.LAUNCH_DATA = {
     "Billing details captured",
     "List to Jill on 25 Nov",
     "Shortfall escalated to Alex"
-   ]
+   ],
+   "layman": "Get a written yes from all five pilot customers: they hear the founding price from a person, agree terms, and say invoice me. The confirmed list goes to Jill by 25 Nov so invoices go out before launch."
   },
   {
    "id": "N6-LW-05",
@@ -17523,7 +18077,8 @@ window.LAUNCH_DATA = {
     "Pre-launch pilot message",
     "Rota seat agreed with Saad",
     "Dry run #1 participation on 26 Nov"
-   ]
+   ],
+   "layman": "Write the plan for looking after pilots on launch day: a dedicated hotline, clear rules for when a pilot problem becomes an emergency, so the five relationships that matter most are guarded by a person with a plan."
   },
   {
    "id": "N6-LW-06",
@@ -17552,7 +18107,8 @@ window.LAUNCH_DATA = {
     "Text and timing agreed",
     "List to Saad and Alex",
     "Reminders scheduled for 7 Dec"
-   ]
+   ],
+   "layman": "Agree with each willing pilot exactly what they will say publicly on launch day, when, and in what words, so real customer voices show up at 08:01 instead of being wished for."
   },
   {
    "id": "N6-FZ-01",
@@ -17582,7 +18138,8 @@ window.LAUNCH_DATA = {
     "Verify each scarcity claim against evidence",
     "Confirm the recipient list is consent-only and unsubscribe works",
     "Send clearance or changes to Alex by 23 Nov"
-   ]
+   ],
+   "layman": "Legal read of the 24 Nov pricing email before it goes: terms match everywhere, any limited-time claims are true, and it only goes to people who agreed to hear from us, so the offer cannot become a complaint."
   },
   {
    "id": "N6-FZ-02",
@@ -17613,7 +18170,8 @@ window.LAUNCH_DATA = {
     "Open each and compare version dates",
     "Run a callback test with Muteeb",
     "File the record for the memo"
-   ]
+   ],
+   "layman": "Click every link we have registered with Facebook (privacy policy, terms, delete-my-data) and prove each one works and shows the current version, so nothing stale trips up our Facebook approval at the worst moment."
   },
   {
    "id": "N6-FZ-03",
@@ -17645,7 +18203,8 @@ window.LAUNCH_DATA = {
     "Check footer, app footer and Settings links on the frozen build",
     "Check AI labels, consent screen and banner strings in-app",
     "Fill the go/no-go memo legal slots with links"
-   ]
+   ],
+   "layman": "Sweep the finished product to confirm every legal document is the final signed version and linked from every footer and settings screen, so no customer ever lands on an out-of-date terms page."
   },
   {
    "id": "N6-FZ-04",
@@ -17677,7 +18236,8 @@ window.LAUNCH_DATA = {
     "Run the DSAR export on production and time it",
     "Run disconnect and callback deletion; verify each store",
     "File receipts in the go/no-go memo"
-   ]
+   ],
+   "layman": "On the real live system, run a full test of a customer asking for their data and asking for deletion, and prove everything is genuinely gone afterwards, so our privacy promises are demonstrated, not assumed."
   },
   {
    "id": "N6-FZ-05",
@@ -17707,7 +18267,8 @@ window.LAUNCH_DATA = {
     "Read the RLS policy list and the pen-test closure report",
     "Write the attestation with scope and exclusions",
     "Sign and file in the memo"
-   ]
+   ],
+   "layman": "Filza reads the automated proof that one customer's data can never leak into another customer's account, and signs a one-page statement saying so, which goes into the launch decision file and our public security page."
   },
   {
    "id": "N6-FZ-06",
@@ -17737,7 +18298,8 @@ window.LAUNCH_DATA = {
     "Draft the waitlist and public lines",
     "Write the pricing-terms consequence",
     "File in the NO-GO playbook with Alex"
-   ]
+   ],
+   "layman": "Filza pre-writes the if-we-slip messages for pilots, waitlist and investors, so a delay would be announced calmly in hours, not scrambled overnight."
   },
   {
    "id": "LW-AS-01",
@@ -17767,7 +18329,8 @@ window.LAUNCH_DATA = {
     "Log checklist failures",
     "Fix failures only",
     "Confirm by 4 Dec"
-   ]
+   ],
+   "layman": "Second full launch rehearsal on Wed 2 Dec, with Asad at the controls: switch on, undo, kill switches. Only things that failed the checklist get fixed afterwards, so the buffer week stays a buffer, not a building site."
   },
   {
    "id": "LW-AS-02",
@@ -17796,7 +18359,8 @@ window.LAUNCH_DATA = {
     "Manual pass on production",
     "E2E pass on production",
     "Receipt in the war room"
-   ]
+   ],
+   "layman": "On Sat 5 Dec, run all five core customer journeys plus the full automatic robot test on the real live system, and only after everything passes do we announce the product is finished."
   },
   {
    "id": "LW-AS-03",
@@ -17826,7 +18390,8 @@ window.LAUNCH_DATA = {
     "Check each pilot's data",
     "Sign receipt in the war room",
     "Install the PWA on one real phone and run flow 2 before 08:01"
-   ]
+   ],
+   "layman": "Early on launch morning, before anyone says a word publicly, re-run all five customer journeys on the live system and confirm pilots see correct data, so we never announce something we have not just watched work."
   },
   {
    "id": "LW-AS-04",
@@ -17856,7 +18421,8 @@ window.LAUNCH_DATA = {
     "Confirm canary + rollback staged",
     "Kill switches at hand",
     "09:00 checkpoint seat"
-   ]
+   ],
+   "layman": "At 08:00 on 8 Dec, Asad flips the pre-rehearsed switch that makes the product live, with a small trial group first and an instant undo ready, and only emergency fixes allowed all week."
   },
   {
    "id": "LW-FH-01",
@@ -17882,7 +18448,8 @@ window.LAUNCH_DATA = {
     "Daily readout",
     "Log anomalies",
     "No changes"
-   ]
+   ],
+   "layman": "Every launch-week morning Faheem reports how the AI is behaving (accuracy, false alarms) against agreed limits, and changes nothing, because launch week is for watching the AI, not tinkering with it."
   },
   {
    "id": "LW-MT-01",
@@ -17912,7 +18479,8 @@ window.LAUNCH_DATA = {
     "Publish the commander rota",
     "Verify breakers under real traffic",
     "Log daily"
-   ]
+   ],
+   "layman": "From 30 Nov the launch control room is live: one shared board of the whole system, a 09:00 daily check-in, a rota for who leads, and the automatic safety cut-offs proven to work under real traffic."
   },
   {
    "id": "LW-MT-02",
@@ -17940,7 +18508,8 @@ window.LAUNCH_DATA = {
     "Assign posting duty",
     "Test a post",
     "Link from the app"
-   ]
+   ],
+   "layman": "Put our system-health page where customers can see it, and post any problem within 15 minutes, because staying silent during an outage costs more trust than the outage itself."
   },
   {
    "id": "LW-MT-03",
@@ -17969,7 +18538,8 @@ window.LAUNCH_DATA = {
     "Log failures",
     "Fix only failures",
     "Re-verify"
-   ]
+   ],
+   "layman": "Muteeb runs the systems side of the 2 Dec rehearsal alongside Saad and Asad, fixing only what the checklist catches, because the second run-through finds the problems the first one created."
   },
   {
    "id": "LW-MT-04",
@@ -17997,7 +18567,8 @@ window.LAUNCH_DATA = {
     "Watch each flow",
     "Log results",
     "Escalate failures"
-   ]
+   ],
+   "layman": "Muteeb backs Asad up on the Sat 5 Dec live check of all five customer journeys, so the finished-product announcement only goes out once everything has been watched working for real."
   },
   {
    "id": "LW-MT-05",
@@ -18027,7 +18598,8 @@ window.LAUNCH_DATA = {
     "Flip flags with Asad",
     "Arm canary and rollback",
     "Watch the board"
-   ]
+   ],
+   "layman": "On launch morning Muteeb makes sure everything is checked working before 08:01, the switch-on happens with a small trial group and instant undo ready, and a pilot seeing wrong data is treated as an emergency."
   },
   {
    "id": "LW-SD-01",
@@ -18057,7 +18629,8 @@ window.LAUNCH_DATA = {
     "Log failures",
     "Fix list (checklist failures only)",
     "Hand smoke checklist to Asad"
-   ]
+   ],
+   "layman": "Saad runs his step-by-step launch checklist through the 2 Dec rehearsal and then hands the final version to Asad for the real launch checks, so the paper and the practice match perfectly."
   },
   {
    "id": "LW-SD-02",
@@ -18084,7 +18657,8 @@ window.LAUNCH_DATA = {
     "QA against the packs and the 8 Dec date",
     "Filza narrative check",
     "Deliver to Alex with source files"
-   ]
+   ],
+   "layman": "Create the images for the product-is-finished announcement from the actual final product, showing nothing that was cut, and check them as carefully as the product itself, so the announcement is honest."
   },
   {
    "id": "LW-SD-03",
@@ -18112,7 +18686,8 @@ window.LAUNCH_DATA = {
     "Check listing",
     "Fix issues",
     "Confirm with hunter"
-   ]
+   ],
+   "layman": "The night before launch, check the Product Hunt page preview line by line: images, tagline, links, prices, date, because once it goes public at 08:01 it cannot be fixed."
   },
   {
    "id": "LW-SD-04",
@@ -18142,7 +18717,8 @@ window.LAUNCH_DATA = {
     "Confirm criteria",
     "Book retro",
     "Book Roadmap V2"
-   ]
+   ],
+   "layman": "Have the bug-sorting process ready for launch day with the same rules that got us here, and book the lessons-learned session and next-roadmap meeting for the week of 14 Dec."
   },
   {
    "id": "LW-AX-01",
@@ -18172,7 +18748,8 @@ window.LAUNCH_DATA = {
     "Note dry run #2 and the 5 Dec smoke results",
     "Confirm fixes-only",
     "Log each check"
-   ]
+   ],
+   "layman": "A 15-minute daily check-in with Alex through the final fortnight: rehearsal results, pilot status, spending, Facebook approval. Any new feature ideas get parked, so the quiet week before launch stays quiet."
   },
   {
    "id": "LW-AX-02",
@@ -18201,7 +18778,8 @@ window.LAUNCH_DATA = {
     "Set thresholds from the day-0 baselines",
     "Set the read date",
     "File and share with Jill"
-   ]
+   ],
+   "layman": "Before launch data arrives, write down the exact numbers that would justify raising our next big funding round, and the date we will read them, so that decision is made on cold evidence, not launch-day excitement."
   },
   {
    "id": "LW-AX-03",
@@ -18232,7 +18810,8 @@ window.LAUNCH_DATA = {
     "Confirm the maker comment",
     "Confirm Filza's check is done",
     "Log the confirmation"
-   ]
+   ],
+   "layman": "On Sunday 7 Dec, confirm everything with the person posting us on Product Hunt: the exact time, the final images and words, so our one shot at that audience goes out right."
   },
   {
    "id": "LW-AX-04",
@@ -18267,7 +18846,8 @@ window.LAUNCH_DATA = {
     "Waitlist email sent",
     "Staff PH replies per the rota",
     "Log incidents"
-   ]
+   ],
+   "layman": "On launch day Alex runs the locked schedule: switch-on confirmed working, announcement at 08:01, first 100 pages let in, and Alex personally answers Product Hunt questions using the prepared answer sheet."
   },
   {
    "id": "LW-AX-05",
@@ -18298,7 +18878,8 @@ window.LAUNCH_DATA = {
     "State the Meta branch taken",
     "Attach the trigger sheet",
     "Send"
-   ]
+   ],
+   "layman": "Alex sends the we-are-live note to investors on launch day with real day-one numbers, so the people backing us hear it from us first."
   },
   {
    "id": "LW-JL-01",
@@ -18329,7 +18910,8 @@ window.LAUNCH_DATA = {
     "Chase at 7 days; escalate at 14",
     "Reconcile payments against the bank",
     "Report the status line at the 09:00 checkpoint"
-   ]
+   ],
+   "layman": "Track each of the five pilot invoices from sent to paid, with a polite chase after a week and escalation after two, because sending invoices is the launch target but getting them paid is the business."
   },
   {
    "id": "LW-JL-02",
@@ -18363,7 +18945,8 @@ window.LAUNCH_DATA = {
     "Wire escalation to on-call and the pilot hotline; set up the 'book 10 min' hatch",
     "Rehearse in dry run #2 on 2 Dec",
     "Measure first-response time on 8 Dec and report at the checkpoint"
-   ]
+   ],
+   "layman": "Staff the support inbox properly for launch fortnight: a named person on every shift, ready-made answers to the top questions loaded, and a way for stuck users to book 10 minutes with a human."
   },
   {
    "id": "LW-JL-03",
@@ -18395,7 +18978,8 @@ window.LAUNCH_DATA = {
     "Take the day-1 snapshot by line and per activated page",
     "Compare with model and cap; trigger 80% actions if crossed",
     "Diary and take the day-3 snapshot; send both to Alex"
-   ]
+   ],
+   "layman": "Jill reads the live spending against our cap every morning of launch week and posts the number to the team, so a cost surprise is caught in a day, not on the monthly bill."
   },
   {
    "id": "LW-LW-01",
@@ -18427,7 +19011,8 @@ window.LAUNCH_DATA = {
     "Per-pilot production check 4-12 Dec",
     "Recheck on 7 Dec",
     "Confirmation posted to the war room"
-   ]
+   ],
+   "layman": "Lewis staffs the pilot hotline in the final rehearsal and personally confirms all five pilots can log in on the real product before doors open."
   },
   {
    "id": "LW-LW-02",
@@ -18459,7 +19044,8 @@ window.LAUNCH_DATA = {
     "Daily flags at the 09:00 checkpoint",
     "Incident raised on any wrong-data report",
     "Friday summary to Alex and Jill"
-   ]
+   ],
+   "layman": "Lewis keeps a personal line open with every pilot all launch week and flags anyone drifting unhappy to the team daily, so no pilot quietly gives up on us."
   },
   {
    "id": "LW-FZ-01",
@@ -18490,7 +19076,8 @@ window.LAUNCH_DATA = {
     "Add the escalation from automatic incidents",
     "Link the incident templates on the war-room board",
     "Brief the rota at the 09:00 checkpoint"
-   ]
+   ],
+   "layman": "Name who is legally responsible if we suspect a data leak during launch week, covered every hour, because the law gives us 72 hours to report one and the clock starts even if it happens at 2am."
   },
   {
    "id": "LW-FZ-02",
@@ -18520,7 +19107,8 @@ window.LAUNCH_DATA = {
     "Check AI labels on every AI surface",
     "Test the cookie banner and the consent screen on production",
     "Test unsubscribe on the launch email; post the pass note"
-   ]
+   ],
+   "layman": "Before any announcement, Filza checks the live site herself: every legal link works, AI features are clearly labelled, the cookie banner behaves, unsubscribe works, and gives the war room a written pass."
   },
   {
    "id": "LW-FZ-03",
@@ -18550,7 +19138,8 @@ window.LAUNCH_DATA = {
     "Check pricing terms and scarcity wording",
     "Verify gallery sources and testimonial permissions",
     "Sign off to Alex on 7 Dec"
-   ]
+   ],
+   "layman": "The night before launch, Filza reads every public word (Product Hunt page, emails, press lines) against our rules on what we may claim, and confirms images use demo data, never real customer data."
   },
   {
    "id": "LW-FZ-04",
@@ -18579,7 +19168,8 @@ window.LAUNCH_DATA = {
     "Link it from the war-room board",
     "Agree the daily checkpoint review with Saad",
     "Schedule the 7 Jan close-out into the retro"
-   ]
+   ],
+   "layman": "Filza keeps one log of every legal question for 30 days after launch - data requests, complaints, notices - so nothing legal slips through the cracks in the busiest month."
   },
   {
    "id": "N5-MT-18",
@@ -18606,7 +19196,8 @@ window.LAUNCH_DATA = {
     "Subscribe + unsubscribe endpoints",
     "Worker sends push beside SES",
     "Quiet-hours parity test"
-   ]
+   ],
+   "layman": "We add phone-style pop-up notifications alongside email for urgent alerts, so a warning reaches the customer in seconds even if they are not watching their inbox — keeping our 15-minute promise."
   },
   {
    "id": "N5-AS-19",
@@ -18632,7 +19223,8 @@ window.LAUNCH_DATA = {
     "Settings toggle",
     "iOS add-to-home-screen caveat copy",
     "End-to-end test push"
-   ]
+   ],
+   "layman": "Add proper phone and browser notifications: a polite ask for permission, an on-off switch in settings, and honest handling of Apple's limits on iPhone, so urgent alerts reach people even when the app is closed."
   },
   {
    "id": "N5-SD-13",
@@ -18659,7 +19251,8 @@ window.LAUNCH_DATA = {
     "Flow 6 spec: opt-in to matches",
     "Flow 7 spec: Health/Pages reconcile",
     "Handed into the nightly suite"
-   ]
+   ],
+   "layman": "We write two new automatic robot tests that run every night: one walks the whole partner-suggestions journey, the other checks the health score and dashboard numbers match our records — so a break there is caught overnight, not by a pilot."
   },
   {
    "id": "N6-SD-10",
@@ -18685,7 +19278,8 @@ window.LAUNCH_DATA = {
     "Re-run audit checklist",
     "Pass/fail per item",
     "Blockers filed"
-   ]
+   ],
+   "layman": "Re-run the accessibility checks on the issues we fixed (so people with disabilities can use the product properly), because a fix nobody re-tested is just a hope."
   },
   {
    "id": "N4-MT-17",
@@ -18711,7 +19305,8 @@ window.LAUNCH_DATA = {
     "Pick pilot page",
     "Reconcile each briefing number",
     "File discrepancies or the descope note"
-   ]
+   ],
+   "layman": "Cross-check every number in the morning briefing against our main data store, so the summary a customer reads over coffee always matches the truth underneath."
   },
   {
    "id": "P0-FZ-01",
@@ -18731,7 +19326,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We put a proper privacy page on the public website back in February, linked from every page, so anyone checking us out could see how we handle their data from day one."
   },
   {
    "id": "P0-AS-01",
@@ -18751,7 +19347,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We built and launched the public ArtemisAI website in February: the story, the team, a working contact form and a private admin view, giving the company a front door before the product existed."
   },
   {
    "id": "P0-FH-01",
@@ -18771,7 +19368,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We built the first version of the reading brain: five programs that look at a Facebook post or comment and work out its mood, emotion, topic, purpose and nastiness, the raw material for every warning and insight we sell."
   },
   {
    "id": "P0-FH-02",
@@ -18791,7 +19389,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We tested our own reading brain against two of the world's best AI models on 97 real posts and wrote down exactly where each one goes wrong, so we know when to trust ours and when to pay for theirs."
   },
   {
    "id": "P0-FH-03",
@@ -18811,7 +19410,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We hand-checked and labelled 2,545 real posts across five kinds of judgement, creating the teaching material that makes our AI smarter and cheaper to run than renting a big model for everything."
   },
   {
    "id": "P0-MT-01",
@@ -18831,7 +19431,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We hand-labelled 97 posts with the correct answers to use as the exam paper for testing any AI model we consider, so quality arguments are settled by a score, not opinions."
   },
   {
    "id": "P0-AS-02",
@@ -18851,7 +19452,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We designed and built two rounds of working product mockups, from early dashboard sketches to a polished multi-screen demo with 30+ charts and the Art-E assistant, letting pilots and investors see the product before it was built."
   },
   {
    "id": "P0-AS-03",
@@ -18871,7 +19473,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We built the team's shared sprint tracker: everyone sees the same live plan, filtered by person, with plain-English checklists and its own automatic test, so the whole launch effort runs from one honest board."
   },
   {
    "id": "P0-FH-04",
@@ -18893,7 +19496,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We stood up the company's data store and filled it with two full years of Facebook page history by early March, the foundation every warning, insight and suggestion is calculated from."
   },
   {
    "id": "P0-FH-05",
@@ -18913,7 +19517,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We built five AI readers that understand what a Facebook post is about, and checked them against 97 hand-marked posts so we know they judge posts the way a person would."
   },
   {
    "id": "P0-FH-06",
@@ -18933,7 +19538,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We taught a smaller, cheaper AI to copy our best one, and built a referee that compares the models' answers and only trusts the confident ones, so we get accuracy without the big-model bill."
   },
   {
    "id": "P0-FH-07",
@@ -18955,7 +19561,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We upgraded how we read comments: one smarter model now spots things like anger or toxicity in comments, replacing several older ones, so comment-storm warnings rest on better judgement."
   },
   {
    "id": "P0-AS-04",
@@ -18975,7 +19582,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We built a password-protected internal control room linking every team page, with a consistent look throughout, so the team runs the whole project from one place."
   },
   {
    "id": "P0-AS-05",
@@ -18995,7 +19603,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We published a master plan of all 218 planned features, each marked launch-now or later with the reasoning and effort, so anyone can see what we are building and why."
   },
   {
    "id": "P0-AS-06",
@@ -19015,7 +19624,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We updated the countdown and launch-planning pages to the 28 November launch date, so the whole team works to the same, honest timeline."
   },
   {
    "id": "P0-FH-08",
@@ -19035,7 +19645,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We trained five specialist models that each judge one thing about a comment (using the post it replies to for context), so comment alerts read situations more accurately."
   },
   {
    "id": "P0-FH-09",
@@ -19055,7 +19666,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We assembled a clean training set of over 31,000 hand-marked comments, recovering batches that had failed, so our comment models learn from plenty of good examples."
   },
   {
    "id": "P0-FH-10",
@@ -19077,7 +19689,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We wrote one shared marking guide so the AI, the models and human checkers all judge comments by the same standards, so results are consistent no matter who marks them."
   },
   {
    "id": "P0-AS-07",
@@ -19097,7 +19710,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We applied an approved reshuffle of the plan, pulling the page-discovery work earlier without cutting anything, and kept the 28 November launch date, all visible on a page that tracks plan changes."
   },
   {
    "id": "P0-AS-08",
@@ -19117,7 +19731,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We rebuilt the project trackers into three clear stages (must-have, soon-after, later), each with its own timeline, so nobody confuses launch work with nice-to-haves."
   },
   {
    "id": "P0-AS-09",
@@ -19137,7 +19752,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We put up a live scoreboard showing how accurate each of our AI models is over time, with results saved permanently, so we can prove quality is improving rather than guessing."
   },
   {
    "id": "P0-FH-11",
@@ -19157,7 +19773,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We built a reader that pulls the text out of images in posts, using a fast engine first and a smarter one only when needed, with a guard against made-up words, so text in pictures counts too."
   },
   {
    "id": "P0-FH-12",
@@ -19177,7 +19794,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We trained a model that combines a post's picture and words to say what kind of content it is (one of five types), right 93% of the time, so advice can be tailored to content type."
   },
   {
    "id": "P0-FH-13",
@@ -19197,7 +19815,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We built automatic checks that stop a worsened model from going live and flag when a model's judgement starts slipping, so customers never quietly get worse advice."
   },
   {
    "id": "P0-FH-14",
@@ -19219,7 +19838,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We built the connection that hands each post's AI readings to the rest of the product, so the screens people see can show what the models found."
   },
   {
    "id": "P0-MT-02",
@@ -19239,7 +19859,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We built the collector that saves every post's images into our storage with a daily inventory, so the picture-reading models always have the images they need."
   },
   {
    "id": "P0-MT-03",
@@ -19259,7 +19880,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We built the step that turns each image into a numeric fingerprint our models can compare, so pictures can be analysed as easily as text."
   },
   {
    "id": "P0-MT-04",
@@ -19279,7 +19901,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We built the loop that picks examples for marking, collects the answers, and surfaces the cases the models find hardest, so training effort goes where it helps most."
   },
   {
    "id": "P0-MT-05",
@@ -19299,7 +19922,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We tuned the system that decides how much to trust each AI answer: confident ones pass, borderline ones get a second opinion, shaky ones go to a human, so customers only see answers we would stand behind."
   },
   {
    "id": "P0-AX-01",
@@ -19319,7 +19943,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We set clear pass/fail rules for each sprint and built a board to run the final check, so nothing gets called done unless it genuinely meets the bar."
   },
   {
    "id": "P0-FZ-02",
@@ -19339,7 +19964,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We worked out the legal position on using other people's images (copyright and privacy law) and wrote the rules we follow, so the product stays on the right side of the law."
   },
   {
    "id": "P0-JL-01",
@@ -19359,7 +19985,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We put spending limits, storage clean-up rules and billing alarms on the image system, reviewed weekly, so a bug or spike cannot quietly run up a huge cloud bill."
   },
   {
    "id": "P0-LW-01",
@@ -19379,7 +20006,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We studied which pilot pages lead with pictures and which lead with text, using their real engagement numbers, so we demo the right features to the right pages first."
   },
   {
    "id": "P0-AS-12",
@@ -19402,7 +20030,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We finished full clickable previews of the web and mobile apps showing all 218 planned features, and fixed every one of 308 readability issues, so investors and pilots can see exactly what they will get."
   },
   {
    "id": "P0-AS-13",
@@ -19422,7 +20051,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We set up an overnight robot that refreshes our quality numbers and data views every night without anyone lifting a finger, so dashboards are always showing yesterday's truth."
   },
   {
    "id": "P0-AS-14",
@@ -19442,7 +20072,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We rebuilt the public website around a scrolling tour of the product on a phone screen, with a demo video and a waitlist sign-up, so visitors instantly get what ArtemisAI does and can join the pilot."
   },
   {
    "id": "P0-AS-15",
@@ -19462,7 +20093,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We finished the app previews for phones first, using real pilot page data, including redesigned alerts with suggested replies, so demos feel like the real product in a customer's hand."
   },
   {
    "id": "P0-AS-16",
@@ -19482,7 +20114,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We wrote a plain-English purpose line for all 234 tickets, linked to the screen each one powers, so anyone on the team can see what every piece of work is for."
   },
   {
    "id": "P0-FH-15",
@@ -19502,7 +20135,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We shipped the image work: two years of post pictures downloaded, text read out of them reliably, and every post sorted into five content types with 93% accuracy, refreshed weekly."
   },
   {
    "id": "P0-AS-17",
@@ -19522,7 +20156,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We published team onboarding pages - a coding guide, a learning hub and a resources library - so new joiners can get productive without hunting people down for documents."
   },
   {
    "id": "P0-AS-18",
@@ -19542,7 +20177,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We put up a browse-and-download window onto our data, refreshed every night, with sorting and filters, so anyone on the team can check the numbers without asking an engineer."
   },
   {
    "id": "P0-AS-19",
@@ -19562,7 +20198,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We rebuilt the data-quality dashboard to run against the live database, with a point-and-click chart maker and shareable saved charts, so the team can answer their own data questions."
   },
   {
    "id": "P0-AS-20",
@@ -19582,7 +20219,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We added a guest login for investors that shows the polished product side only, plus a private page for leadership performance reviews behind a proper password."
   },
   {
    "id": "P0-AS-21",
@@ -19602,7 +20240,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We turned the founder's vision, a plain-language explainer of how the product works, and our assessment of the Facebook-changes risk into published pages, so strategy is written down, not word of mouth."
   },
   {
    "id": "P0-AX-02",
@@ -19622,7 +20261,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "The founder delivered the written vision and long-term product strategy papers to the team, which later became interactive pages everyone can read, so the whole company steers by the same north star."
   },
   {
    "id": "P0-AS-22",
@@ -19642,7 +20282,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We published a playbook covering 19 sprints to launch, each with a plain plan, proof of what shipped and app screenshots, backed by 53 checked research papers, so the road to launch is fully mapped."
   },
   {
    "id": "P0-AS-23",
@@ -19662,7 +20303,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We built a secure bridge letting teammates ask questions of our data warehouse straight from their AI assistants, so getting a number no longer needs an engineer or a dashboard."
   },
   {
    "id": "P0-FH-16",
@@ -19682,7 +20324,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We taught the system to understand videos - what kind of scene it is, any on-screen text, what is said aloud, and how gripping the first three seconds are - so video posts get real advice, not a blind spot."
   },
   {
    "id": "P0-FH-17",
@@ -19704,7 +20347,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "Our research showed you cannot reliably predict smash hits, but you CAN predict flops - so we pivoted the product to warning owners before a post flops, which is the promise customers actually feel."
   },
   {
    "id": "P0-AS-24",
@@ -19724,7 +20368,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We built a marketing command centre: a 20-week LinkedIn plan to launch with a what-to-post-today view, best UK posting times, sample copy and an image maker, so launch marketing runs itself day by day."
   },
   {
    "id": "P0-FH-18",
@@ -19746,7 +20391,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "Our first flop-warning model passed its quality bar: when it flags a post as likely to flop it is right about three times in four, catching over half of flops, so the headline promise is now proven to work."
   },
   {
    "id": "P0-MT-06",
@@ -19766,7 +20412,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "Facebook switched off the statistics we relied on in June, blinding our feed for six weeks; we moved everything onto the replacement numbers and re-fetched history, so the data flows again and stays future-proof."
   },
   {
    "id": "P0-AS-25",
@@ -19786,7 +20433,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We built a small tool that turns pasted team updates into a tidy picture card for the group chat, so the daily stand-up summary takes seconds instead of fiddly formatting."
   },
   {
    "id": "P0-FH-19",
@@ -19808,7 +20456,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We ran a full health check on the data warehouse - 22 dashboard panels and all 8 data feeds verified, 13 issues logged and the serious ones fixed - so we know the numbers under the product are sound."
   },
   {
    "id": "P0-MT-07",
@@ -19832,7 +20481,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We now record how each post's numbers grow hour by hour after publishing, and keep the post list fresh every hour, which is the raw material for spotting a flop early. One scheduling detail still needs a double-check."
   },
   {
    "id": "P0-FH-20",
@@ -19854,7 +20504,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We wrote the serving layer that will hand model answers (with version, confidence and an honest 'not sure') to the app. It exists on a side branch and is not wired into the product yet - connecting it is next."
   },
   {
    "id": "P0-LW-02",
@@ -19876,7 +20527,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We recruited the pilot pages - real Facebook pages of different kinds, with their page details and owner contacts on file - so we test and demo on genuine customers, not made-up data."
   },
   {
    "id": "P0-LW-03",
@@ -19898,7 +20550,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We collected a log of real comment-storm incidents from pilot pages, so we can test our crisis alerts against events that actually happened rather than theory."
   },
   {
    "id": "P0-AS-26",
@@ -19918,7 +20571,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We built the internal alerts page with a reliable status checker behind it, plus a shared archive for admin pages, so the team can see system health and old pages never break."
   },
   {
    "id": "P0-SD-01",
@@ -19938,7 +20592,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We delivered the project-management handover pack - what has been accepted, launch checks, open defects, pilot notes and how our benchmark data was made - so a new PM can pick up the project without archaeology."
   },
   {
    "id": "P0-AS-27",
@@ -19958,7 +20613,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We launched the new shared launch tracker everyone sees the same way: sprints grouped by area, a backlog, a map of what depends on what, and a phone-friendly layout, with every ticket audited against its sources."
   },
   {
    "id": "N4-SD-15",
@@ -19980,7 +20636,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "arte plan 3 Sep",
    "acceptance": "The dry-run pilot completes the Art-E script unaided, and UAT wave-1 sessions log a verdict per scripted question, including the refusal and thin-data cases, into the defect triage.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Prepare a set list of questions each pilot will ask the Art-E assistant during testing, so every tester probes the same things and we can fairly compare how well it answers."
   },
   {
    "id": "N5-MT-19",
@@ -20002,7 +20659,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "arte plan 3 Sep",
    "acceptance": "A recorded drill shows the full-outage state on the rail and clean recovery with no lost or double-billed asks, and the writeup is evidence at the 13 Nov readiness review.",
-   "checklist": []
+   "checklist": [],
+   "layman": "A rehearsal where we deliberately cut off the AI supplier behind Art-E to check the assistant shows a polite 'temporarily unavailable' message, recovers cleanly and never double-charges — so a supplier outage in launch week is a non-event."
   },
   {
    "id": "N3-FH-13",
@@ -20023,7 +20681,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "discovery plan 3 Sep",
    "acceptance": "A dated register entry compares empirical vs analytic p-value quantiles at pilot scale with a calibrated / not-calibrated verdict before 14 Oct; a miss re-opens the N3-MT-06 blend weights before the 16 Oct gate.",
-   "checklist": []
+   "checklist": [],
+   "layman": "An extra statistical double-check on how we judge whether two pages genuinely share an audience, run before the matching recipe is locked in — so the collaboration suggestions rest on maths that has actually been tested."
   },
   {
    "id": "N4-SD-16",
@@ -20045,7 +20704,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "discovery plan 3 Sep",
    "acceptance": "Protocol v1.1 contains the Discovery scenario and the N4-SD-07 dry-run notes show it exercised with the friendly pilot.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Add a step to the pilot testing plan where testers judge whether the partner pages we suggest actually make sense for them, so we learn if the suggestions feel right before launch."
   },
   {
    "id": "P0-MT-08",
@@ -20065,7 +20725,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We built the step that pulls still frames from every video and writes down what is said in it, feeding the video-understanding work, so videos are as readable to our models as text posts."
   },
   {
    "id": "P0-AS-28",
@@ -20085,7 +20746,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We organised the raw warehouse data into tidy, well-labelled tables for pages, posts, dates, comments and statistics, so every report and model draws on the same clean foundation."
   },
   {
    "id": "P0-FH-21",
@@ -20107,7 +20769,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We re-fetched each post's statistics once they had fully settled (Facebook keeps updating them for months) and refreshed each page's typical numbers, giving models an honest yardstick to judge posts against."
   },
   {
    "id": "P0-FH-22",
@@ -20127,7 +20790,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We automated the weekly data collection to run itself every Monday at 1am end to end, emailing the team if anything breaks, so fresh data arrives without anyone babysitting it."
   },
   {
    "id": "P0-AS-29",
@@ -20147,7 +20811,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We built two public tools on our site: one checks that a customer's Facebook page connection works, and one lets them see and download the data we pull from their page - so connecting is painless and transparent."
   },
   {
    "id": "P0-LW-04",
@@ -20167,7 +20832,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We sorted out full access to our Facebook developer account for the engineering team and got Faheem up to speed on Facebook's data, so nobody is blocked waiting for permissions."
   },
   {
    "id": "P0-FZ-03",
@@ -20187,7 +20853,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We reviewed Facebook's platform rules and signed the required data-handling agreement before any data collection began, so the business is built on permitted, contracted access from day one."
   },
   {
    "id": "P0-AX-03",
@@ -20207,7 +20874,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We locked down, in writing and before building, exactly who the product serves and what problem it solves, so every later decision could be tested against that definition."
   },
   {
    "id": "P0-JL-02",
@@ -20227,7 +20895,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We set up the company card for our cloud services and added spending alarms, so a runaway computing bill can never sneak up on us."
   },
   {
    "id": "P0-FH-23",
@@ -20247,7 +20916,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We hand-marked nearly 6,000 posts across five questions and distilled 75 clear if-this-then-that rules from them, giving our models a trustworthy answer key to learn from."
   },
   {
    "id": "P0-FH-24",
@@ -20267,7 +20937,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We ran our finished models over the entire two-year history - almost 112,000 posts - so every post in the system now carries the AI's readings, ready for the product to use."
   },
   {
    "id": "P0-SD-02",
@@ -20287,7 +20958,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We wrote the document defining exactly what the flop-warning screens should show and say, so designers and engineers built to one agreed picture instead of guessing."
   },
   {
    "id": "P0-SD-03",
@@ -20307,7 +20979,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We wrote a first numbered rulebook for how our models must behave, which every quality check now cites by rule number, so standards are written down and checkable rather than tribal knowledge."
   },
   {
    "id": "P0-FH-25",
@@ -20327,7 +21000,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We spotted that Facebook had quietly switched off a key statistic in mid-June, leaving our feed dark, and raised the alarm with a plan - which is why the product now runs on numbers Facebook still supports."
   },
   {
    "id": "P0-FH-26",
@@ -20349,7 +21023,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We built the best-time-to-post model: it learns each page's weekly rhythm, guards against one lucky post faking a hot slot, and says how confident it is - the feature designed to bring owners back daily."
   },
   {
    "id": "P0-MT-10",
@@ -20371,7 +21046,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We built the machinery that prepares each page's posting-time data honestly (no peeking at the future) and runs the best-time model on a schedule, so 'when should I post?' answers refresh themselves."
   },
   {
    "id": "P0-FH-27",
@@ -20391,7 +21067,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We put a watchdog on every live model that compares its behaviour to the day it was trained and raises a flag only when quality genuinely slips, so customers never quietly receive stale advice."
   },
   {
    "id": "P0-SD-04",
@@ -20411,7 +21088,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "product"
+   "layer": "product",
+   "layman": "We audited the website and app designs, chose one visual direction, and produced polished new landing-page designs for desktop and mobile with everything a developer needs to build them."
   },
   {
    "id": "P0-AX-04",
@@ -20431,7 +21109,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We defined how we will measure pilot success - who comes back daily and monthly, who acts on alerts - and a 'why open this tomorrow?' test for every feature, confirming best-time-to-post as the daily habit hook."
   },
   {
    "id": "P0-FZ-04",
@@ -20451,7 +21130,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "foundation"
+   "layer": "foundation",
+   "layman": "We wrote down our legal position that posting-time tips are guidance, not a promise of results, and confirmed the feature handles no new personal data - so the company is covered if a customer's post still flops."
   },
   {
    "id": "P0-FH-28",
@@ -20471,7 +21151,8 @@ window.LAUNCH_DATA = {
    "acceptance": "Shipped and in use.",
    "checklist": [],
    "status": "done",
-   "layer": "intelligence"
+   "layer": "intelligence",
+   "layman": "We recovered about 4,450 post images whose download links had expired, filling a two-month hole in the picture archive our flop-warning model learns from."
   },
   {
    "id": "N1-SD-21",
@@ -20509,7 +21190,8 @@ window.LAUNCH_DATA = {
     "Pages + workspace switcher pack (by 10 Sep)",
     "Connect + consent flow pack (by 10 Sep)",
     "Shell + system prompts addendum (by 10 Sep)"
-   ]
+   ],
+   "layman": "One simple checklist showing which design packs have been handed over, ticked as each ships, so that anyone can see at a glance whether the designs the whole build waits on are actually done."
   },
   {
    "id": "N5-SD-14",
@@ -20532,7 +21214,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "coverage + red-team audit 3 Sep",
    "acceptance": "Flow 8 runs green in the nightly suite: suppressed cells on the thin page, ringed window in the page timezone, floor flag asserted.",
-   "checklist": []
+   "checklist": [],
+   "layman": "A nightly automatic robot test for the best-time-to-post grid: it checks we hide suggestions when a page has too few posts, show an honest 'not enough posts yet' note, and highlight the top slot in the page's own timezone."
   },
   {
    "id": "N6-FH-07",
@@ -20555,7 +21238,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "coverage + red-team audit 3 Sep",
    "acceptance": "Diff filed by 19 Nov with zero unexplained mismatches between the Wins screen and ledger queries for the dogfood tenant.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Before the freeze, Faheem compares every number on the Wins screen line-by-line with our underlying results record on our own test account — any mismatch gets fixed while fixes are still allowed."
   },
   {
    "id": "N5-SD-15",
@@ -20576,7 +21260,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "coverage + red-team audit 3 Sep",
    "acceptance": "Minutes from connect to the activation event recorded for a fresh pilot page and filed as gate evidence.",
-   "checklist": []
+   "checklist": [],
+   "layman": "During pilot testing we time how many minutes pass from a fresh page connecting to its first useful insight appearing — the real-world measurement our onboarding quality gate demands."
   },
   {
    "id": "N1-MT-20",
@@ -20600,7 +21285,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "coverage + red-team audit 3 Sep",
    "acceptance": "The stack decision names the engine, and a PR adding a migration runs it in CI and on staging deploy with a tested down-path receipt filed.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Choose and name the app's main working database, and make database changes run automatically with a tested undo, so schema changes are routine rather than risky."
   },
   {
    "id": "N4-MT-18",
@@ -20625,7 +21311,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "coverage + red-team audit 3 Sep",
    "acceptance": "Production serves the deep health check, and a filed parity diff shows only documented intentional differences, re-run clean at code freeze.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Set up the live production environment from written, repeatable recipes and automatically compare it to our rehearsal environment, so launch day holds no surprises from the two being subtly different."
   },
   {
    "id": "N5-MT-20",
@@ -20645,7 +21332,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "coverage + red-team audit 3 Sep",
    "acceptance": "A filed audit shows canonical redirects and auto-renew verified on every certificate including internal client certs, and a test expiry alarm paged on-call.",
-   "checklist": []
+   "checklist": [],
+   "layman": "A check that our web address, security certificates and email-sending records all renew themselves automatically, with a warning 30 days before anything expires — so the site cannot silently go dark during launch week."
   },
   {
    "id": "N6-JL-07",
@@ -20666,7 +21354,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "launch blindspot sweep 3 Sep",
    "acceptance": "Both emails are approved by Filza, test-sent from the warmed domain, and the send procedure (trigger, list source, owner) is written into the launch runbook before the freeze.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Write the welcome email for new users and a friendly day-2 nudge for anyone who signed up but never connected their Facebook page, so early users who stall get a helping hand instead of silence."
   },
   {
    "id": "N5-SD-16",
@@ -20693,7 +21382,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "E2E + QA-dashboard audit 7 Sep",
    "acceptance": "All six specs green in the nightly suite before 20 Nov; flow 14 green within 48h of N5-AS-11 landing; failures page exactly like flows 1-8.",
-   "checklist": []
+   "checklist": [],
+   "layman": "We write six more nightly automatic robot tests covering the daily feed, first-time setup, data export and delete, waitlist emails, quiet-hours alerts and the Wins screen — so every feature is re-proven every night until launch."
   },
   {
    "id": "N4-FH-10",
@@ -20716,7 +21406,8 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "E2E + QA-dashboard audit 7 Sep",
    "acceptance": "All five launch models show a live tri-state row on the QA dashboard; a synthetic drift trip and a paused freshness job each flip the correct row to slipping within one refresh.",
-   "checklist": []
+   "checklist": [],
+   "layman": "Bring across the dashboard that grades each of our prediction systems as healthy, needs watching, or slipping, so we notice a model getting worse before customers do."
   }
  ]
 };

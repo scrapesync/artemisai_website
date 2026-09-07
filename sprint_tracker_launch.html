@@ -475,6 +475,23 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .mkpill{font-size:10.5px;padding:3.5px 10px;border-radius:20px;border:1px solid var(--border);color:var(--muted2);background:var(--bg2)}
 .mkpill.on{color:var(--sage);border-color:rgba(127,158,106,.45);background:rgba(127,158,106,.10)}
 .mkn{font-size:10.5px;color:var(--muted3);margin-top:8px}
+
+.lg{background:var(--card);border:1px solid var(--border);border-radius:15px;margin-bottom:12px;overflow:hidden}
+.lgh{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer}
+.lgh:hover{background:var(--card2)}
+.lgh h3{font-size:15.5px}
+.lgp{font-size:10.5px;color:var(--gold);border:1px solid rgba(217,164,65,.35);border-radius:20px;padding:2.5px 10px;background:rgba(217,164,65,.07)}
+.lgn{margin-left:auto;font-size:11px;color:var(--muted2);font-family:'IBM Plex Mono',monospace}
+.lrow{display:flex;align-items:center;gap:10px;padding:9px 18px;border-top:1px solid var(--border2);cursor:pointer;font-size:12.5px}
+.lrow:hover{background:var(--card2)}
+.lrow .lid{font-size:10.5px;color:var(--accent)}
+.lrow .lti{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lrow .dot{width:8px;height:8px;border-radius:50%;background:var(--muted3);flex:none}
+.lrow .dot.done{background:var(--sage)}.lrow .dot.inprog{background:var(--gold)}.lrow .dot.blocked{background:var(--red)}
+.laytxt{padding:4px 18px 14px 46px;border-top:1px dashed var(--border2);background:var(--bg2);font-size:13px;color:var(--text);line-height:1.6}
+.laybox{background:var(--bg2);border:1px dashed var(--border);border-radius:10px;padding:10px 14px;margin-bottom:10px}
+.laybox h4{color:var(--gold)}
+@media (max-width:760px){ .lgh{flex-wrap:wrap} .lgn{margin-left:0;flex-basis:100%} .lrow .who{display:none} }
 </style>
 </head><body>
 
@@ -491,6 +508,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   <button class="tab-btn active" data-tab="overview">Overview</button>
   <button class="tab-btn" data-tab="tracker">Sprint Tracker</button>
   <button class="tab-btn" data-tab="features">MVP Features</button>
+  <button class="tab-btn" data-tab="layman">Plain English</button>
   <button class="tab-btn" data-tab="map">Dependencies</button>
   <button class="tab-btn" data-tab="backlog">Backlog</button>
   <button class="tab-btn" data-tab="performance">Performance</button>
@@ -565,6 +583,14 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     </div>
     <div class="mapwrap" id="map-wrap"><div class="mapinner" id="map-inner"></div></div>
     <div class="detpanel" id="map-det"></div>
+  </section>
+
+  <!-- ================= PLAIN ENGLISH ================= -->
+  <section id="view-layman" class="hidden">
+    <div class="eyebrow">Every ticket, in plain words</div>
+    <div class="h1">Plain English</div>
+    <div class="sub">What each ticket actually is, said across a lunch table - and which mockup feature it fuels, with the rough share of that feature this one ticket carries. Open a feature, then open a ticket. The same text lives on every ticket in the Sprint Tracker behind the "In plain words" button.</div>
+    <div id="lay-body"></div>
   </section>
 
   <!-- ================= BACKLOG ================= -->
@@ -749,7 +775,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   var TAB='overview';
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.addEventListener('click',function(){ showTab(b.getAttribute('data-tab')); }); });
   function showTab(t){ TAB=t; document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active',b.getAttribute('data-tab')===t); });
-    ['overview','tracker','features','map','backlog','performance'].forEach(function(v){ document.getElementById('view-'+v).classList.toggle('hidden',v!==t); });
+    ['overview','tracker','features','layman','map','backlog','performance'].forEach(function(v){ document.getElementById('view-'+v).classList.toggle('hidden',v!==t); });
     try{ localStorage.setItem('artemis_launch_tab',t); }catch(e){} renderAll(); }
 
   /* ================= OVERVIEW ================= */
@@ -1001,8 +1027,9 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     if(EDITING===t.id) return '<div class="det" data-det="'+t.id+'" style="grid-template-columns:1fr">'+ticketForm(t)+'</div>';
     var edited=S.edits&&Object.keys(S.edits).length;
     return '<div class="det" data-det="'+t.id+'"><div>'+
-      '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><button class="editbtn" data-eopen="'+t.id+'">Edit ticket</button>'+
+      '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><button class="editbtn" data-eopen="'+t.id+'">Edit ticket</button><button class="editbtn" data-lay="'+t.id+'">In plain words</button>'+
       (edited?'<span class="edited">edited by '+esc(S.edited_by||'someone')+'</span>':'')+'</div>'+
+      '<div class="laybox" id="lay-'+t.id+'" hidden><h4>In plain words</h4><p>'+esc(t.layman||'Plain-words note is being written for this ticket.')+'</p><p style="margin-top:6px">'+layShare(t)+'</p></div>'+
       '<h4>What</h4><p>'+esc(t.what)+'</p><h4>Why</h4><p>'+esc(t.why)+'</p><h4>Done when</h4><p>'+esc(t.acceptance)+'</p>'+
       '<h4>Priority</h4><p><span class="pr '+t.priority+'">'+t.priority+'</span> '+esc(t.priority_reason)+'</p>'+
       '<h4>Depends on</h4><p>'+((t.depends_on||[]).length?t.depends_on.map(function(d){return '<span class="tag">'+esc(d)+'</span>';}).join(''):'<span class="tag">nothing</span>')+'</p>'+
@@ -1366,6 +1393,52 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   document.getElementById('mv-ticket').addEventListener('click',function(){ MAPVIEW='ticket'; MAPSEL=null; renderMap(); });
   document.getElementById('mv-sprint').addEventListener('click',function(){ MAPVIEW='sprint'; MAPSEL=null; renderMap(); });
 
+  /* ================= PLAIN ENGLISH ================= */
+  var LGRP={}, LOPEN={};
+  function layShare(t){
+    var out=FEATURES.filter(function(f){return (f.tickets||[]).indexOf(t.id)>=0;}).map(function(f){
+      var n=(f.tickets||[]).length, pct=n?Math.round(1000/n)/10:0;
+      return '<span class="tag">&asymp;'+pct+'% of '+esc(f.name)+'</span>';
+    });
+    return out.length?out.join(''):'<span class="tag">platform / ops &middot; keeps the product alive</span>';
+  }
+  function renderLayman(){
+    var T=all().filter(function(t){return counted(t)&&sp(t)!=='BL';});
+    var byId={}; T.forEach(function(t){byId[t.id]=t;});
+    var PACK={drafts:'Drafts / Studio pack',crisis:'Alerts pack',besttimes:'Best Times pack',health:'Pages + workspace switcher pack',arte:'Art-E rail pack',discovery:'Discovery pack',today:'Today pack',wins:'Wins-lite pack',analytics:'Analytics thin pack',onboarding:'Onboarding tour (written spec)',auth:'Connect + consent + Settings packs',landing:'Landing page (Figma)'};
+    var mapped={};
+    var groups=FEATURES.map(function(f){
+      var ts=(f.tickets||[]).map(function(id){return byId[id];}).filter(Boolean);
+      ts.forEach(function(t){mapped[t.id]=1;});
+      return {id:f.id,name:f.name,pack:PACK[f.id]||(f.kind==='foundation'?'not a mockup surface':''),ts:ts};
+    }).filter(function(g){return g.ts.length;});
+    var rest=T.filter(function(t){return !mapped[t.id];});
+    if(rest.length) groups.push({id:'_ops',name:'Platform, QA and operations',pack:'not a mockup surface - keeps everything above alive',ts:rest});
+    document.getElementById('lay-body').innerHTML=groups.map(function(g){
+      var open=!!LGRP[g.id];
+      var d=g.ts.filter(function(t){return st(t.id).status==='done';}).length;
+      var share=g.id==='_ops'?null:Math.round(1000/g.ts.length)/10;
+      return '<div class="lg"><div class="lgh" data-lg="'+g.id+'">'+
+        '<span class="chev">'+(open?'&#9650;':'&#9660;')+'</span>'+
+        '<h3>'+esc(g.name)+'</h3>'+
+        '<span class="lgp">'+esc(g.pack)+'</span>'+
+        '<span class="lgn">'+g.ts.length+' tickets'+(share?' &middot; each &asymp;'+share+'%':'')+' &middot; '+d+' done</span></div>'+
+        (open?g.ts.map(function(t){
+          var o=!!LOPEN[g.id+t.id], S=st(t.id);
+          return '<div class="lrow" data-lt="'+g.id+'|'+t.id+'">'+
+            '<span class="dot '+S.status+'"></span>'+
+            '<span class="mono lid">'+t.id+'</span>'+
+            '<span class="lti">'+esc(t.title)+'</span>'+
+            '<span class="who" style="color:'+(PC[t.assignee]||'#9c8f80')+'">'+esc(t.assignee||'')+'</span>'+
+            '<span class="chev">'+(o?'&#9650;':'&#9660;')+'</span></div>'+
+            (o?'<div class="laytxt"><p>'+esc(t.layman||'Plain-words note is being written for this ticket.')+'</p><p style="margin-top:6px">'+layShare(t)+'</p></div>':'');
+        }).join(''):'')+
+      '</div>';
+    }).join('');
+    document.querySelectorAll('#lay-body .lgh').forEach(function(h){ h.addEventListener('click',function(){ var id=h.getAttribute('data-lg'); LGRP[id]=!LGRP[id]; renderLayman(); }); });
+    document.querySelectorAll('#lay-body .lrow').forEach(function(r){ r.addEventListener('click',function(){ var k=r.getAttribute('data-lt').split('|'); LOPEN[k[0]+k[1]]=!LOPEN[k[0]+k[1]]; renderLayman(); }); });
+  }
+
   /* ================= BACKLOG ================= */
   function renderBacklog(){
     var T=all().filter(function(t){return sp(t)==='BL';});
@@ -1422,9 +1495,11 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   }
   function pst(k,v,c){ return '<div class="pstat"><div class="k">'+k+'</div><div class="v '+(c||'')+'">'+v+'</div></div>'; }
 
+  document.addEventListener('click',function(e){ var b=e.target.closest('[data-lay]'); if(!b) return; e.stopPropagation(); var d=document.getElementById('lay-'+b.getAttribute('data-lay')); if(d) d.hidden=!d.hidden; },true);
+
   /* ---- boot ---- */
   (function(){ var n=days(TODAY,'2026-12-08'); var el=document.getElementById('hdr-count'); if(el) el.innerHTML='<b>'+n+'</b> days &middot; 8 Dec'; })();
-  function renderAll(){ if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='features') renderFeatures(); else if(TAB==='map') renderMap(); else if(TAB==='backlog') renderBacklog(); else renderPerf(); }
+  function renderAll(){ if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='features') renderFeatures(); else if(TAB==='layman') renderLayman(); else if(TAB==='map') renderMap(); else if(TAB==='backlog') renderBacklog(); else renderPerf(); }
   document.getElementById('btn-refresh').addEventListener('click',load);
   try{ var lt=localStorage.getItem('artemis_launch_tab'); if(lt) showTab(lt); }catch(e){}
   load();
