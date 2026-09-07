@@ -1,4 +1,4 @@
-// sprint_launch_data.js - regenerated 7 Sep 2026: three-part plain-English notes (plain words, analogy, exactly what is needed) on every ticket.
+// sprint_launch_data.js - regenerated 7 Sep 2026: four-part plain-English notes on every ticket.
 window.LAUNCH_DATA = {
  "generated_at": "2026-09-03",
  "layers": [
@@ -150,7 +150,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Parked for after launch: a simple internal screen where we can look up any customer, see their status, and view the app as they see it - so support can answer 'my data looks wrong' in minutes.",
    "layman_analogy": "Like giving the shop manager a master key and customer ledger so a complaint can be looked into at the counter instead of sent to head office.",
-   "layman_needed": "When picked up: an internal screen where support can look up any customer, see their status, pause an account, and view the app exactly as that customer sees it. For now it needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: an internal screen where support can look up any customer, see their status, pause an account, and view the app exactly as that customer sees it. For now it needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: an internal support screen where a teammate types any customer's name, sees their account status and health, can pause the account during an incident, and can view the app exactly as that customer sees it — read-only. The first 'my data looks wrong' ticket then takes minutes, not database queries. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-PR-02",
@@ -172,7 +173,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For after launch: click any post in the table and a panel opens explaining its score - what helped, what hurt, how comments felt, timing - so every number we show can be backed up.",
    "layman_analogy": "Like a teacher handing back an essay with margin notes explaining the mark, not just a grade circled in red.",
-   "layman_needed": "When picked up: a panel that opens from any post in the table and explains its score in plain words — what helped, what hurt, how comments felt, and timing. For now it needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: a panel that opens from any post in the table and explains its score in plain words — what helped, what hurt, how comments felt, and timing. For now it needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: a panel that slides open from any row in the posts table and explains that post's score in plain words — what helped it, what hurt it, how the comments felt, and whether the timing hit the recommended window. A customer questioning any number can click the post and read the answer themselves. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-LA-01",
@@ -194,7 +196,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Post-launch: automatic emails that welcome new customers, nudge them to their first useful moment, and win back the ones going quiet - keeping people engaged at almost no cost.",
    "layman_analogy": "Like a good hotel's routine of a welcome note at check-in, a mid-stay 'everything alright?' and a come-back offer after checkout — all sent without staff lifting a finger.",
-   "layman_needed": "When picked up: automatic email sequences that welcome new customers, nudge them to their first useful moment, and win back quiet ones, running on our existing email setup. Until then it needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up: automatic email sequences that welcome new customers, nudge them to their first useful moment, and win back quiet ones, running on our existing email setup. Until then it needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up: three automatic email sequences running on our existing sending setup — a welcome for new customers, a nudge guiding them to their first useful moment, and a win-back note for accounts gone quiet — each triggered by real usage events. A stalled customer is contacted without anyone lifting a finger. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-PR-03",
@@ -217,7 +220,8 @@ window.LAUNCH_DATA = {
    "promoted": "Promoted into N5 on 3 Sep as N5-MT-18 (service, Muteeb) + N5-AS-19 (app, Asad).",
    "layman": "After launch: alerts sent straight to your phone's lock screen as well as email, because an email can sit unread far longer than the 15 minutes it took us to spot the problem.",
    "layman_analogy": "Like moving the fire alarm from a letter in the post to a bell on the wall — the warning arrives while it still matters.",
-   "layman_needed": "When picked up: alerts delivered straight to the phone's lock screen alongside email. Core parts were promoted into launch tickets; the remainder needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: alerts delivered straight to the phone's lock screen alongside email. Core parts were promoted into launch tickets; the remainder needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: alerts arriving straight on the phone's lock screen as web notifications, sitting beside the existing email channel, so a comment-storm warning reaches the owner within minutes rather than waiting for an email to be opened. The core pieces were promoted into launch tickets; the remainder here needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-LA-02",
@@ -239,7 +243,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Parked for later: a public help site with how-to guides and answers to the 20 most common questions, so customers help themselves and buyers see a polished, trustworthy product.",
    "layman_analogy": "Like putting a well-stocked leaflet rack and FAQ board in the shop window, so most questions answer themselves before anyone rings the bell.",
-   "layman_needed": "When picked up: a public help site built from the existing docs skeleton and the 20 most common support answers. Until then it needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: a public help site built from the existing docs skeleton and the 20 most common support answers. Until then it needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: a public help website anyone can browse without logging in, built from the existing documentation skeleton and the twenty most common support answers. A confused customer finds their answer at 11pm without emailing us, and prospective buyers see a professional, well-documented product. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-PR-04",
@@ -261,7 +266,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "After launch: one in-app inbox for all your alerts, with the option to snooze or mute noisy ones - so warnings stay useful instead of becoming background noise people ignore.",
    "layman_analogy": "Like fitting a letterbox with a sorting tray and a do-not-disturb switch, so important post stands out and junk stops burying it.",
-   "layman_needed": "When picked up: one in-app inbox showing all alerts, with snooze and mute controls per alert type and page. Until then it needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: one in-app inbox showing all alerts, with snooze and mute controls per alert type and page. Until then it needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: one inbox inside the app listing every alert in one place, with snooze and mute switches per alert type and per page. A customer drowning in warnings can quiet the noisy ones without losing the important ones, and returning to the inbox becomes the habit that brings people back. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-PR-05",
@@ -283,7 +289,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For later: a quick 'how likely are you to recommend us?' survey plus a 'what's new' pop-up listing recent improvements - early warning of unhappy customers and visible proof we're shipping.",
    "layman_analogy": "Like a restaurant leaving a comment card on the table and chalking new dishes on the board — you learn who's unhappy and show you're still cooking.",
-   "layman_needed": "When picked up: a quick would-you-recommend-us survey plus a what's-new pop-up listing recent improvements. Until then it needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: a quick would-you-recommend-us survey plus a what's-new pop-up listing recent improvements. Until then it needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: a tiny in-app survey asking customers how likely they are to recommend us, plus a what's-new pop-up in Settings listing recent improvements. The team gets an early warning when a customer's mood dips before renewal, and pilots see visible momentum every time we ship. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-IN-01",
@@ -305,7 +312,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Post-launch: a health score for each paying customer based on how much they actually use the product, turning Lewis's manual check-ins into an automatic early warning before a renewal is at risk.",
    "layman_analogy": "Like a GP calling patients in for a check-up based on their vitals, instead of waiting for them to feel ill and leave the practice.",
-   "layman_needed": "When picked up: an automatic health score per paying customer based on real product usage, replacing Lewis's manual check-ins with an early warning before renewals wobble. Needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up: an automatic health score per paying customer based on real product usage, replacing Lewis's manual check-ins with an early warning before renewals wobble. Needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up: an automatic health score for each paying customer, computed from how they actually use the product, replacing Lewis's manual check-ins. A glance at the internal list shows which of the five paying pilots is thriving and which is drifting towards cancelling — months before the renewal conversation. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-IN-02",
@@ -327,7 +335,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "After launch: an internal dashboard showing our data-processing jobs, with buttons to rerun anything that failed - so fixing a hiccup no longer means Muteeb typing database commands by hand.",
    "layman_analogy": "Like a factory control room with restart buttons on the wall, instead of an engineer climbing into the machinery each time a belt jams.",
-   "layman_needed": "When picked up: an internal dashboard showing our data-processing jobs with buttons to rerun failures, so fixes stop requiring Muteeb to type database commands by hand. Needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up: an internal dashboard showing our data-processing jobs with buttons to rerun failures, so fixes stop requiring Muteeb to type database commands by hand. Needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up: an internal dashboard showing every data-processing job — what ran, what failed, what's stuck — with buttons to rerun failures and replay missed work. During an incident, any teammate can fix a stuck pipeline with a click instead of waiting for Muteeb to type database commands by hand. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-PR-06",
@@ -349,7 +358,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For later: publish our accessibility statement (proof the app works for people with disabilities) and add small on-screen tips where users get stuck - ticks a buyer checkbox and helps new users settle in.",
    "layman_analogy": "Like posting the wheelchair-access certificate by the front door and adding little signposts where visitors tend to get lost.",
-   "layman_needed": "When picked up: a published accessibility statement based on the completed audit, plus small on-screen tips on the three screens where funnel data shows users stall. Needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up: a published accessibility statement based on the completed audit, plus small on-screen tips on the three screens where funnel data shows users stall. Needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up: a published accessibility statement on the website, backed by the completed audit, plus small on-screen tips added to the three screens where our funnel data shows new users most often stall. Procurement teams can tick their accessibility box, and stuck users get a gentle pointer at the exact moment they need one. Until then, this row needs a sprint slot and owner, or a reason to drop."
   },
   {
    "id": "BL-LL-01",
@@ -371,7 +381,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "After launch: automatic weekly and monthly reports as polished PDFs, replacing the ones we currently write by hand - the feature agencies pay for, minus the labour.",
    "layman_analogy": "Like swapping hand-written school reports for a printing press — the same polished report for every pupil, every term, with no teacher up at midnight.",
-   "layman_needed": "When picked up: automatic weekly and monthly reports as polished PDFs with a reports page and a what-changed recap, replacing the hand-written versions. Needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: automatic weekly and monthly reports as polished PDFs with a reports page and a what-changed recap, replacing the hand-written versions. Needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: a reports page inside the app plus scheduled weekly and monthly PDF and spreadsheet reports — including a brand-risk template and a plain-English 'what changed this week' recap — landing in customers' inboxes automatically. The hand-written concierge reports stop, and the agency tier gains its headline feature. Until then, this row needs a sprint slot and owner, or a reason to drop."
   },
   {
    "id": "BL-PR-07",
@@ -393,7 +404,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Post-launch: finish the Wins screen - set a goal, track it, and see a plain-English tally of what Artemis earned you - the proof-of-value page that wins renewals.",
    "layman_analogy": "Like finishing a trophy cabinet with a target chart beside it — not just what you won, but what you aimed for and what it was worth.",
-   "layman_needed": "When picked up: a finished Wins screen where a customer sets a goal, tracks it, and sees a plain-English tally of what Artemis earned them, built on the results record. Needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up: a finished Wins screen where a customer sets a goal, tracks it, and sees a plain-English tally of what Artemis earned them, built on the results record. Needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up: a completed Wins screen where a customer sets a goal, watches progress towards it, and reads a plain-English grid tallying what Artemis earned them — every figure drawn from the results ledger. It becomes the page a pilot opens before deciding whether to renew. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-IN-03",
@@ -415,7 +427,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "After launch: deeper analytics - separate views for photos and videos, comparisons against similar pages ('is 72 actually good?'), date-range comparisons, and post-mortems on why a post worked.",
    "layman_analogy": "Like upgrading a bathroom scale to a full health check — not just your weight, but how it compares to people like you and why it changed.",
-   "layman_needed": "When picked up: deeper analytics — separate photo and video views, comparisons against similar pages, date-range comparisons, and plain-English post-mortems on why a post worked. Needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up: deeper analytics — separate photo and video views, comparisons against similar pages, date-range comparisons, and plain-English post-mortems on why a post worked. Needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up: deeper analytics screens — separate photo and video tabs, a comparison against similar pages so '72' finally has context, date-range comparisons, and plain-English post-mortems explaining why a post worked. The models already run; this puts their answers where customers can see them. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-IN-04",
@@ -437,7 +450,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For later: a chart tracking how nasty comments are trending, plus a single strategy score next to the health score - simple numbers an executive gets at a glance, and a brand-safety selling point.",
    "layman_analogy": "Like adding a weather trend line and a single overall forecast number to the noticeboard, so the head teacher gets the picture in one glance.",
-   "layman_needed": "When picked up: a chart tracking how nasty comments are trending over time, plus one combined strategy score shown beside the health score. Needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: a chart tracking how nasty comments are trending over time, plus one combined strategy score shown beside the health score. Needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: a chart tracking whether nasty comments are rising or falling over time, plus one combined strategy score displayed beside the existing health score. A page owner — or their boss — gets a single exec-friendly number and a brand-safety trend they can screenshot into a meeting. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-PR-08",
@@ -459,7 +473,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "After launch: swipeable story-style insight cards and celebration banners for milestones ('you hit 10k followers') - the fun, phone-friendly touches the original designs promised.",
    "layman_analogy": "Like the bakery putting up a banner when it sells its 10,000th loaf — small celebrations that make regulars feel part of the story.",
-   "layman_needed": "When picked up: swipeable story-style insight cards and celebration banners for milestones like hitting 10k followers, built over existing insights. Needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: swipeable story-style insight cards and celebration banners for milestones like hitting 10k followers, built over existing insights. Needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: swipeable story-style cards presenting each day's insights like a social feed, plus a celebration banner when a page hits a milestone such as 10,000 followers — both built over insights that already exist. Checking Artemis on a phone starts to feel like a treat rather than a chore. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-LA-03",
@@ -481,7 +496,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Post-launch: deliver alerts into Slack or Microsoft Teams channels, so warnings land where the whole team already works instead of one person's inbox.",
    "layman_analogy": "Like piping the fire-bell into the staff room where everyone already sits, instead of ringing it only in one manager's office.",
-   "layman_needed": "When picked up: alerts delivered into a customer's Slack or Microsoft Teams channel so the whole team sees warnings where they already work. Needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: alerts delivered into a customer's Slack or Microsoft Teams channel so the whole team sees warnings where they already work. Needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: alerts posted straight into a customer's Slack or Microsoft Teams channel, so a comment-storm warning appears where the whole team already works instead of one person's inbox. It is also the first brick of the wider integrations offering. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-IN-05",
@@ -503,7 +519,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For later: automatically spot your most loyal commenters and supporters, so page owners know who their biggest fans are and can nurture them.",
    "layman_analogy": "Like a publican learning which regulars bring their mates every Friday, so those regulars get looked after first.",
-   "layman_needed": "When picked up: a view that automatically surfaces a page's most loyal commenters and supporters from existing comment data, so owners know who their biggest fans are. Needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up: a view that automatically surfaces a page's most loyal commenters and supporters from existing comment data, so owners know who their biggest fans are. Needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up: a view that automatically lists a page's most loyal commenters and supporters, drawn from comment data we already hold. A page owner can finally answer 'who are my biggest fans?' and thank or feature them — and the same groundwork feeds the future collaboration features. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-PR-09",
@@ -525,7 +542,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "After launch: pin your favourite insights and share any chart with a secure link (with a record of who opened it) - so a finding can travel round a customer's company and sell us internally.",
    "layman_analogy": "Like pinning your best photos to the fridge and posting copies with a signed-for delivery slip, so you know exactly who opened the envelope.",
-   "layman_needed": "When picked up: the ability to pin favourite insights and share any chart with a secure link that records who opened it. Needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: the ability to pin favourite insights and share any chart with a secure link that records who opened it. Needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: a pin button on any insight to save it to a personal list, plus secure share links for any chart that record who opened them. A social media manager can send their boss one link instead of a screenshot, and we can see which shared charts actually get read. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-LA-04",
@@ -547,7 +565,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Post-launch: a try-before-you-buy demo filled with sample data, demo requests flowing into our sales tracker, and measurement of which marketing channels actually bring customers.",
    "layman_analogy": "Like a car showroom with a test-drive model on the forecourt, a visitor book for enquiries, and a note of which advert brought each customer in.",
-   "layman_needed": "When picked up: a public demo filled with sample data, demo requests flowing into the sales tracker, and consent-respecting measurement of which marketing channels bring customers. Needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up: a public demo filled with sample data, demo requests flowing into the sales tracker, and consent-respecting measurement of which marketing channels bring customers. Needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up: a public try-it-now demo filled with realistic sample data that anyone can click around without signing up, demo requests flowing straight into the sales tracker, and consent-respecting measurement showing which marketing channel each customer came from. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-LA-05",
@@ -569,7 +588,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For later: published customer success stories and a public 'what we're building next' board - social proof for buyers and a way for customers to shape the roadmap.",
    "layman_analogy": "Like framing thank-you letters on the shop wall and pinning next season's menu by the till, so newcomers see proof and regulars see what's coming.",
-   "layman_needed": "When picked up: published customer success stories built from collected testimonials, and a public what-we're-building-next board seeded from the planning table. Needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up: published customer success stories built from collected testimonials, and a public what-we're-building-next board seeded from the planning table. Needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up: published customer success stories on the website, built from testimonials already collected from pilots, plus a public what-we're-building-next board seeded from the planning table where anyone can vote and comment. Prospective buyers see real proof and an open roadmap. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-LA-06",
@@ -591,7 +611,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Parked pending trial results: turn our LinkedIn outreach experiment into a weekly ranked list of the best people to invite, with tracked results - steady, compliant growth using the same matching ideas behind the product.",
    "layman_analogy": "Like turning a few lucky market-stall conversations into a weekly round of the most promising doors to knock, with a tally of who answered.",
-   "layman_needed": "When picked up, and only if the trial worked: a weekly ranked list of the best people to invite on LinkedIn, with accepted-and-converted rates tracked — still manual, still within the rules. Needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up, and only if the trial worked: a weekly ranked list of the best people to invite on LinkedIn, with accepted-and-converted rates tracked — still manual, still within the rules. Needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up, and only if the earlier trial worked: a weekly ranked list of the most promising people to invite on LinkedIn, built from engagement and ideal-customer signals, with accepted-and-converted rates tracked in a simple sheet — still sent by hand, still within LinkedIn's rules. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-PR-10",
@@ -613,7 +634,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "After launch: automatic robot checks on every code change - catching visual glitches, accessibility problems, and security holes - so one developer can keep shipping fast without quality slipping.",
    "layman_analogy": "Like fitting the workshop with automatic safety checks on every tool, so one craftsman can work fast without a foreman inspecting each cut.",
-   "layman_needed": "When picked up: automatic checks on every code change catching visual glitches, accessibility problems and security holes, extending the one-off audit into a permanent habit. Needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up: automatic checks on every code change catching visual glitches, accessibility problems and security holes, extending the one-off audit into a permanent habit. Needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up: automatic checks running on every code change that catch visual glitches, accessibility problems and known security holes before anything ships — turning the one-off audit into a permanent habit that lets a sole developer keep moving fast without quality quietly rotting. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-PR-11",
@@ -635,7 +657,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Post-launch: let customers pipe our alerts into their own systems, watch any number they choose, get automatic flags on odd changes, and schedule digest summaries - power features that keep big users loyal.",
    "layman_analogy": "Like letting big customers plumb your warning siren into their own control room and choose exactly which dials it watches.",
-   "layman_needed": "When picked up: customers can pipe alerts into their own systems, watch any number they choose, get automatic flags on odd changes, and schedule digest summaries. Needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: customers can pipe alerts into their own systems, watch any number they choose, get automatic flags on odd changes, and schedule digest summaries. Needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: power tools for advanced customers — the ability to pipe alerts into their own systems, subscribe to any metric they choose, receive automatic flags when a number moves oddly, and schedule digest summaries on their own timetable. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-IN-06",
@@ -657,7 +680,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For later: show exactly why we suggested a collaboration partner (a score per factor), plus fast in-app search and a keyboard shortcut menu - making suggestions believable and power users quicker.",
    "layman_analogy": "Like a matchmaker who explains why the introduction makes sense, in a house where every room is one shortcut away.",
-   "layman_needed": "When picked up: a per-factor breakdown showing why each collaboration partner was suggested, plus fast in-app search and a keyboard shortcut menu, fixing the mockup's dead mobile-search rows. Needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up: a per-factor breakdown showing why each collaboration partner was suggested, plus fast in-app search and a keyboard shortcut menu, fixing the mockup's dead mobile-search rows. Needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up: a breakdown beside every collaboration suggestion showing the individual factors behind the match, plus fast in-app search and a keyboard shortcut menu — fixing the mockup's dead mobile-search rows along the way. A sceptical customer can see exactly why a partner was suggested. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-LA-07",
@@ -679,7 +703,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "After launch: one bundle of grown-up paperwork and controls - activity logs, consent settings, admin permission levels, and the policies big buyers ask for - clearing the path to bigger contracts.",
    "layman_analogy": "Like assembling the folder of certificates, insurance papers and house rules a landlord needs before big tenants will sign a lease.",
-   "layman_needed": "When picked up: one bundle of activity logs, consent settings, admin permission levels, and the standard policies big buyers ask for, done as a single Filza sprint. Needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: one bundle of activity logs, consent settings, admin permission levels, and the standard policies big buyers ask for, done as a single Filza sprint. Needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: one bundle delivered in a single Filza sprint — an activity log of who did what, consent management settings, admin permission levels, and the standard policies (acceptable use, takedowns, refunds, service levels, AI use) that large buyers ask for before signing. It also clears the path to self-serve billing and security certification. Needs a sprint slot and owner, or a reason to drop."
   },
   {
    "id": "BL-IN-07",
@@ -701,7 +726,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Post-launch: an internal screen for reviewing how well our AI labels comments, feeding mistakes back in so the models keep improving - restarting quality improvement after the pre-launch freeze.",
    "layman_analogy": "Like a teacher re-marking a sample of homework each week and feeding the mistakes back into next term's lessons.",
-   "layman_needed": "When picked up: an internal screen for reviewing how well our AI labels comments, with mistakes and low-confidence cases routed into a pile for retraining. Needs a sprint slot and owner, or a written reason to drop it."
+   "layman_needed": "When picked up: an internal screen for reviewing how well our AI labels comments, with mistakes and low-confidence cases routed into a pile for retraining. Needs a sprint slot and owner, or a written reason to drop it.",
+   "layman_output": "When picked up: an internal review screen showing how our AI labelled real comments against the trusted answer sets, with wrong or unsure cases routed into a retraining pile automatically. After the freeze lifts, model quality starts improving again on a steady loop instead of standing still. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-IN-08",
@@ -723,7 +749,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For later: beef up the database as customer numbers grow, and add a 'report this page' button with community guidelines - the safety basics needed before any social features open up.",
    "layman_analogy": "Like widening the shop's stockroom as trade grows and putting a report-a-problem box by the door before opening the community noticeboard.",
-   "layman_needed": "When picked up: database reinforcements added as customer numbers demand, plus a report-this-page button and community guidelines in place before any social features open. Needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up: database reinforcements added as customer numbers demand, plus a report-this-page button and community guidelines in place before any social features open. Needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up: database reinforcements added as customer numbers demand — keeping the app fast and bills sane for batches two and beyond — plus a report-this-page button and published community guidelines, the basic safety floor required before any feature lets customers see each other. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-IN-09",
@@ -745,7 +772,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Big post-launch bet (2027): the full collaboration engine - mapping how pages relate to each other, tracking how collaborations actually performed, and a swipe-style deck of suggested partners. The long-term edge competitors can't copy.",
    "layman_analogy": "Like moving from introducing two friends at a party to running the whole town's social calendar — who should meet, how it went, who to pair next.",
-   "layman_needed": "When picked up (planned for 2027): the full collaboration engine — mapping how pages relate, tracking how collaborations performed, and a swipe-style deck of suggested partners. Needs scheduling with an owner, or a reason to drop."
+   "layman_needed": "When picked up (planned for 2027): the full collaboration engine — mapping how pages relate, tracking how collaborations performed, and a swipe-style deck of suggested partners. Needs scheduling with an owner, or a reason to drop.",
+   "layman_output": "When picked up, planned for 2027: the full collaboration engine — a map of how pages relate to one another, a record of how past collaborations actually performed, and a swipe-style deck of suggested partners a page owner can accept or skip. This is the long-term differentiator the Series-A story rests on. Needs scheduling with an owner, or a written reason to drop it."
   },
   {
    "id": "BL-IN-10",
@@ -767,7 +795,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For 2027: tell page owners who their audience actually is - groupings, demographics, and warnings when followers are losing interest. The most-requested insight, planned as a premium feature after a privacy review.",
    "layman_analogy": "Like a theatre finally learning who actually sits in its seats — regulars, first-timers, and which rows are quietly emptying.",
-   "layman_needed": "When picked up (planned for 2027, after a privacy review): audience groupings, demographics and interest-fading warnings for page owners, positioned as a premium feature. Needs scheduling with an owner, or a reason to drop."
+   "layman_needed": "When picked up (planned for 2027, after a privacy review): audience groupings, demographics and interest-fading warnings for page owners, positioned as a premium feature. Needs scheduling with an owner, or a reason to drop.",
+   "layman_output": "When picked up, planned for 2027 and only after the scheduled privacy review: a picture of who a page's audience actually is — groupings, demographics, a one-card audience snapshot, and warnings when interest starts fading — positioned as the premium tier's headline feature. Needs scheduling with an owner, or a written reason to drop it."
   },
   {
    "id": "BL-LL-02",
@@ -789,7 +818,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For 2027: a smarter Art-E assistant that speaks up on its own with useful findings, handles multi-step requests, and shows its working - plus running it on our own models to cut AI costs roughly ten-fold.",
    "layman_analogy": "Like promoting a helpful shop assistant to a partner who speaks up with ideas, handles whole errands, shows their working — and costs a tenth as much to employ.",
-   "layman_needed": "When picked up (planned for 2027): an Art-E that proactively raises useful findings, handles multi-step requests, shows its reasoning, and runs on our own models to cut AI costs roughly ten-fold. Needs scheduling with an owner, or a reason to drop."
+   "layman_needed": "When picked up (planned for 2027): an Art-E that proactively raises useful findings, handles multi-step requests, shows its reasoning, and runs on our own models to cut AI costs roughly ten-fold. Needs scheduling with an owner, or a reason to drop.",
+   "layman_output": "When picked up, planned for 2027: a deeper Art-E that raises useful findings unprompted, carries out multi-step requests, keeps a visible activity feed, shows where every answer came from, and runs on our own tuned models — cutting AI running costs roughly ten-fold at scale. Needs scheduling with an owner, or a written reason to drop it."
   },
   {
    "id": "BL-IN-11",
@@ -811,7 +841,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For 2027: top-tier analytics - live visitor counters, build-your-own executive dashboards, how you compare against rivals, and side-by-side views across several pages. Built for agencies and bigger clients.",
    "layman_analogy": "Like upgrading from the shop's till roll to a manager's office with live footfall counters, custom wall charts and a window onto the rivals across the street.",
-   "layman_needed": "When picked up (planned for 2027): top-tier analytics — live visitor counters, build-your-own executive dashboards, comparisons against rivals, and side-by-side views across several pages. Needs scheduling with an owner, or a reason to drop."
+   "layman_needed": "When picked up (planned for 2027): top-tier analytics — live visitor counters, build-your-own executive dashboards, comparisons against rivals, and side-by-side views across several pages. Needs scheduling with an owner, or a reason to drop.",
+   "layman_output": "When picked up, planned for 2027: top-tier analytics — a live right-now visitor counter, build-your-own executive dashboards, a view of your share of the conversation versus rivals, and side-by-side comparison across several pages — aimed at premium and agency customers. Needs scheduling with an owner, or a written reason to drop it."
   },
   {
    "id": "BL-LA-08",
@@ -833,7 +864,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For 2027: alerts on WhatsApp and SMS too, with the ability to assign a warning to a teammate - so the 15-minute warning reaches every pocket and someone always owns the response.",
    "layman_analogy": "Like a village fire brigade that rings the church bell, texts every warden's phone, and chalks a name on the board so someone always owns the bucket run.",
-   "layman_needed": "When picked up (planned for 2027): alerts on WhatsApp and SMS as well, with the ability to assign a warning to a named teammate so every alarm has an owner. Needs scheduling with an owner, or a reason to drop."
+   "layman_needed": "When picked up (planned for 2027): alerts on WhatsApp and SMS as well, with the ability to assign a warning to a named teammate so every alarm has an owner. Needs scheduling with an owner, or a reason to drop.",
+   "layman_output": "When picked up, planned for 2027: alerts reaching every pocket — two-way WhatsApp messages, SMS, and a full triage flow where a warning can be assigned to a named teammate so every alarm ends with an owner, not a shrug. Needs scheduling with an owner, or a written reason to drop it."
   },
   {
    "id": "BL-LA-09",
@@ -855,7 +887,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For 2027: customers pay by card and manage their own subscription online - trials, plans, tax and failed-payment chasing all automatic. Manual invoicing only stretches to about 20 customers.",
    "layman_analogy": "Like replacing the corner shop's hand-written invoice book with a card machine and standing orders — the book only stretches to about 20 regulars.",
-   "layman_needed": "When picked up (planned for 2027): customers paying by card and managing their own subscription online — trials, plans, tax and failed-payment chasing all automatic. Needs scheduling with an owner, or a reason to drop."
+   "layman_needed": "When picked up (planned for 2027): customers paying by card and managing their own subscription online — trials, plans, tax and failed-payment chasing all automatic. Needs scheduling with an owner, or a reason to drop.",
+   "layman_output": "When picked up, planned for 2027: customers paying by card and managing their own subscription online — free trials, plan tiers built on the usage-metering groundwork, VAT handled, and failed payments chased automatically. Revenue stops depending on founder hours and hand-typed invoices, which only stretch to about twenty customers. Needs scheduling with an owner, or a reason to drop."
   },
   {
    "id": "BL-LA-10",
@@ -877,7 +910,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For 2027: invite teammates, manage several pages in one workspace, and control who can do what - opening up the agency market, where one customer manages many pages.",
    "layman_analogy": "Like turning a single-desk studio into a shared office with door keys cut per person — some open every room, some just the front door.",
-   "layman_needed": "When picked up (planned for 2027): teammate invites, seats, workspaces managing several pages together, and controls over who can do what — opening the agency market. Needs scheduling with an owner, or a reason to drop."
+   "layman_needed": "When picked up (planned for 2027): teammate invites, seats, workspaces managing several pages together, and controls over who can do what — opening the agency market. Needs scheduling with an owner, or a reason to drop.",
+   "layman_output": "When picked up, planned for 2027: teammate invites and paid seats, workspaces that manage several pages together, controls over who can see and do what, and internal team notes — opening the agency market, where one firm runs many clients' pages. The multi-page data groundwork from N1 already did the hard part. Needs scheduling with an owner, or a written reason to drop it."
   },
   {
    "id": "BL-LA-11",
@@ -899,7 +933,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For 2027: a public way for other software to plug into ArtemisAI, with documentation and a marketplace of ready-made connections - the stickiness that makes leaving hard.",
    "layman_analogy": "Like publishing the sockets and wiring diagram for your building so other tradespeople can plug their equipment straight in.",
-   "layman_needed": "When picked up (planned for 2027): a documented public way for other software to connect to ArtemisAI, plus a marketplace of ready-made connections. Needs scheduling with an owner, or a written reason to drop it."
+   "layman_needed": "When picked up (planned for 2027): a documented public way for other software to connect to ArtemisAI, plus a marketplace of ready-made connections. Needs scheduling with an owner, or a written reason to drop it.",
+   "layman_output": "When picked up, planned for 2027: a documented, public way for other software to connect to ArtemisAI — a first-version API with a docs portal — plus a marketplace of ready-made connections, with the Slack alert delivery as brick one. Needs scheduling with an owner, or a written reason to drop it."
   },
   {
    "id": "BL-LA-12",
@@ -921,7 +956,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For 2027: the heavyweight trust work big companies demand - an independent security certification, backup systems in several regions, and stress-testing at 1,000 customers - unlocking larger contracts.",
    "layman_analogy": "Like a bank earning its independent safety inspection, keeping vaults in two cities, and stress-testing the doors against a thousand customers at once.",
-   "layman_needed": "When picked up (planned for 2027): an independent security certification, backup systems across regions, and stress-testing at 1,000 customers — the trust work that unlocks larger contracts. Needs scheduling with an owner, or a reason to drop."
+   "layman_needed": "When picked up (planned for 2027): an independent security certification, backup systems across regions, and stress-testing at 1,000 customers — the trust work that unlocks larger contracts. Needs scheduling with an owner, or a reason to drop.",
+   "layman_output": "When picked up, planned for 2027: an independent security certification (the evidence folder has been collecting since N5), backup systems spread across regions, a sustained stress test at 1,000 customers, and a programme of deliberately breaking things to prove recovery — the trust package that unlocks larger contracts. Needs scheduling with an owner, or a written reason to drop it."
   },
   {
    "id": "BL-LA-13",
@@ -943,7 +979,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "For 2027: growth extras - rewards for referring friends, streaks that build a daily habit, other languages, and a blog that helps people find us on Google - once the core habit is proven.",
    "layman_analogy": "Like a café adding a loyalty stamp card, a bring-a-friend discount, menus in three languages and a spot in the tourist guidebook — once the coffee itself is proven.",
-   "layman_needed": "When picked up (planned for 2027): referral rewards, daily-habit streaks, other languages, and a search-friendly blog — growth extras added once the core habit is proven. Needs scheduling with an owner, or a reason to drop."
+   "layman_needed": "When picked up (planned for 2027): referral rewards, daily-habit streaks, other languages, and a search-friendly blog — growth extras added once the core habit is proven. Needs scheduling with an owner, or a reason to drop.",
+   "layman_output": "When picked up, planned for 2027: growth extras layered on once the core habit is proven — referral rewards for customers who bring friends, daily-streak encouragement revisited deliberately, the product in more languages, and a blog with comparison pages that search engines can find. Needs scheduling with an owner, or a written reason to drop it."
   },
   {
    "id": "BL-IN-12",
@@ -967,7 +1004,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "After launch: keep every version of the instructions we give our AI on record, compare old and new side by side, and trial changes quietly before switching everyone over - so a quiet tweak can never silently break results again.",
    "layman_analogy": "Like a pharmacy keeping every past version of a prescription on file and trialling any change on a small batch before the whole town gets the new formula.",
-   "layman_needed": "When picked up: a record of every version of our AI instructions, side-by-side comparison on change, and quiet trials before switching everyone over — so a tweak can never silently break results. Needs a sprint slot and owner, or a reason to drop."
+   "layman_needed": "When picked up: a record of every version of our AI instructions, side-by-side comparison on change, and quiet trials before switching everyone over — so a tweak can never silently break results. Needs a sprint slot and owner, or a reason to drop.",
+   "layman_output": "When picked up: a versioned record of every set of instructions we give our AI, with its fingerprint stamped into each prediction, a side-by-side comparison whenever wording changes, and a quiet trial run before any change reaches customers — so a tweak can never silently skew results again, as happened once before. Until then, this row needs a sprint slot and owner, or a written reason to drop it."
   },
   {
    "id": "BL-APP-01",
@@ -989,7 +1027,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Parked for January: open the official Apple and Google developer accounts and keep the signing keys safely in ops hands, the paperwork step before any phone app can ship.",
    "layman_analogy": "Like registering the business with the trading authorities and locking the shop's master keys in the safe before you can open a market stall.",
-   "layman_needed": "When picked up in January: official Apple and Google developer accounts under the company, with signing keys created and kept safely by ops, never in the code. Otherwise re-decided at Roadmap V2 (w/c 14 Dec)."
+   "layman_needed": "When picked up in January: official Apple and Google developer accounts under the company, with signing keys created and kept safely by ops, never in the code. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+   "layman_output": "When picked up in January: official Apple and Google developer accounts registered under the company itself, with the signing certificates and keys — the credentials that prove an app genuinely comes from us — created and held safely by ops, never stored in the code. The paperwork foundation every store submission after it depends on. Otherwise re-decided at Roadmap V2 (w/c 14 Dec)."
   },
   {
    "id": "BL-APP-02",
@@ -1013,7 +1052,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Parked for January: wrap the finished web app in a thin shell so it installs from the App Store and Play Store - same product, no second codebase.",
    "layman_analogy": "Like putting the same shop inside a shopping-centre unit — identical stock and staff, just a doorway where mall visitors already walk.",
-   "layman_needed": "When picked up in January: the finished web app wrapped in a thin shell that installs from the App Store and Play Store, with offline start-up, links straight into alert cards, and an update path — one codebase. Otherwise re-decided at Roadmap V2."
+   "layman_needed": "When picked up in January: the finished web app wrapped in a thin shell that installs from the App Store and Play Store, with offline start-up, links straight into alert cards, and an update path — one codebase. Otherwise re-decided at Roadmap V2.",
+   "layman_output": "When picked up in January: the exact web app we shipped, wrapped in a thin shell that installs from the App Store and Play Store like any normal app — starting offline, opening links straight into alert cards, and updating cleanly. One codebase, two store icons; a pilot can find ArtemisAI on their home screen. Otherwise re-decided at Roadmap V2 (w/c 14 Dec)."
   },
   {
    "id": "BL-APP-03",
@@ -1037,7 +1077,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Parked for January: make crisis alerts arrive as real phone notifications through Apple and Google, using the same alarm system and quiet hours as email.",
    "layman_analogy": "Like wiring the existing burglar alarm to also ring the owner's mobile — same alarm, same quiet hours, one more bell.",
-   "layman_needed": "When picked up in January: crisis alerts arriving as real Apple and Google phone notifications from the same system that sends email, honouring the same quiet hours, duplicate rules and kill switch. Otherwise re-decided at Roadmap V2."
+   "layman_needed": "When picked up in January: crisis alerts arriving as real Apple and Google phone notifications from the same system that sends email, honouring the same quiet hours, duplicate rules and kill switch. Otherwise re-decided at Roadmap V2.",
+   "layman_output": "When picked up in January: crisis alerts arriving as genuine Apple and Google phone notifications, sent by the very same system that already sends email and web push — honouring the same quiet hours, the same duplicate rules and the same emergency off switch. A page owner feels the buzz in their pocket within minutes. Otherwise re-decided at Roadmap V2 (w/c 14 Dec)."
   },
   {
    "id": "BL-APP-04",
@@ -1061,7 +1102,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Parked for January: the app-store face - icon, splash screen, screenshots and listing text, all from demo data and approved wording.",
    "layman_analogy": "Like dressing the shop window before opening day — sign, awning and display photos — using the showroom dummy rather than real customers' belongings.",
-   "layman_needed": "When picked up in January: an app icon, splash screen, store screenshots taken from demo data only, and listing text that passes our approved wording rules. Otherwise re-decided at Roadmap V2 (w/c 14 Dec)."
+   "layman_needed": "When picked up in January: an app icon, splash screen, store screenshots taken from demo data only, and listing text that passes our approved wording rules. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+   "layman_output": "When picked up in January: the app's public face — an icon and splash screen built from the approved design sheet, store screenshots taken only from the demo account (never real pilot data), and listing text that passes our approved wording rules. Anyone browsing either store sees a polished, honest listing. Otherwise re-decided at Roadmap V2 (w/c 14 Dec)."
   },
   {
    "id": "BL-APP-05",
@@ -1085,7 +1127,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Parked for January: fill in Apple and Google privacy forms straight from our signed data agreement, so the store filings and legal papers never disagree.",
    "layman_analogy": "Like copying the customs declaration straight from the shipping contract, so the form at the border never contradicts the paperwork in the crate.",
-   "layman_needed": "When picked up in January: Apple and Google privacy forms filled in directly from our signed data agreement and supplier list, so store filings and legal papers always agree. Otherwise re-decided at Roadmap V2 (w/c 14 Dec)."
+   "layman_needed": "When picked up in January: Apple and Google privacy forms filled in directly from our signed data agreement and supplier list, so store filings and legal papers always agree. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+   "layman_output": "When picked up in January: Apple's privacy labels and Google's data-safety form filled in directly from our signed data-processing agreement and supplier list, so what the stores say about our data handling can never contradict what the legal papers say. A reviewer can lay the three side by side and find no gaps. Otherwise re-decided at Roadmap V2 (w/c 14 Dec)."
   },
   {
    "id": "BL-APP-06",
@@ -1109,7 +1152,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Parked for January: put the store builds on real pilot phones and run one crisis alert end to end on a handset before the public release.",
    "layman_analogy": "Like a fire drill in the actual building with the actual residents — not a diagram — before certifying the escape routes.",
-   "layman_needed": "When picked up in January: both store builds installed on real pilot phones, with one crisis alert run end to end on a handset before public release. Otherwise re-decided at Roadmap V2 (w/c 14 Dec)."
+   "layman_needed": "When picked up in January: both store builds installed on real pilot phones, with one crisis alert run end to end on a handset before public release. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+   "layman_output": "When picked up in January: both store builds installed on real pilot phones through Apple's and Google's testing channels, followed by one full crisis-alert drill run end to end — from detection to the notification buzzing on an actual handset — before anything goes public. Otherwise re-decided at Roadmap V2 (w/c 14 Dec)."
   },
   {
    "id": "BL-APP-07",
@@ -1133,7 +1177,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Parked for January: submit to both app stores with a written release-and-rollback plan, including the case for why our app is more than a website in a wrapper.",
    "layman_analogy": "Like submitting planning permission with a written case for why the building is more than a facade, plus a demolition plan filed in case anything goes wrong.",
-   "layman_needed": "When picked up in January: submissions to both app stores, a documented case for why the app is more than a wrapped website, and a written release-and-rollback plan. Otherwise re-decided at Roadmap V2 (w/c 14 Dec)."
+   "layman_needed": "When picked up in January: submissions to both app stores, a documented case for why the app is more than a wrapped website, and a written release-and-rollback plan. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+   "layman_output": "When picked up in January: production submissions filed with both app stores, a written case ready for Apple's more-than-a-wrapped-website rule (citing the native notifications, deep links and offline start), and a release-and-rollback runbook saying how versions ship and how a bad one gets pulled back. Otherwise re-decided at Roadmap V2 (w/c 14 Dec)."
   },
   {
    "id": "BL-LL-21",
@@ -1159,7 +1204,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "After launch: give someone clear ownership of keeping Art-E honest - weekly reviews of real conversations, careful testing before any change, and a monthly quality-and-cost report to Alex - so answer quality never quietly drifts.",
    "layman_analogy": "Like appointing a head chef who tastes real plates weekly, trials recipe changes on one table first, and hands the owner a monthly quality-and-cost report.",
-   "layman_needed": "When picked up: a first full cycle by 18 Dec — one weekly review of real Art-E conversations held, any change shipped through the versioned record with tests green, and the first monthly quality-and-cost report sent to Alex."
+   "layman_needed": "When picked up: a first full cycle by 18 Dec — one weekly review of real Art-E conversations held, any change shipped through the versioned record with tests green, and the first monthly quality-and-cost report sent to Alex.",
+   "layman_output": "When picked up: the standing quality loop for Art-E running again after launch — a first full cycle complete by 18 Dec, meaning one weekly review of real conversations held with Saad and Lewis, any prompt or model change shipped only through the versioned record with all tests green, and the first monthly quality-and-cost report sitting in Alex's inbox. Art-E's honesty checks get a named keeper."
   },
   {
    "id": "BL-LL-22",
@@ -1181,7 +1227,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Post-launch: shop around for cheaper AI suppliers for our two biggest AI bills, comparing cost and quality - with a hard rule that no supplier may train on customer data. An open CEO request finally on the board.",
    "layman_analogy": "Like getting quotes from three wholesalers for your two biggest ingredients — taste-testing each, and refusing any supplier who'd copy your recipes.",
-   "layman_needed": "When picked up: a written comparison of cheaper AI suppliers for our two biggest AI bills, covering cost and quality, ending in a recommendation or a decision to stay put — no candidate touches real data without the no-training-on-customer-data promise."
+   "layman_needed": "When picked up: a written comparison of cheaper AI suppliers for our two biggest AI bills, covering cost and quality, ending in a recommendation or a decision to stay put — no candidate touches real data without the no-training-on-customer-data promise.",
+   "layman_output": "When picked up: a written comparison of cheaper AI suppliers — including the one the CEO asked about in July — against our current models on the two biggest recurring AI bills, covering cost and quality side by side, ending in a clear recommendation or a documented decision to stay put. No candidate touches real customer data without a written no-training-on-customer-data promise first."
   },
   {
    "id": "BL-LA-14",
@@ -1203,7 +1250,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Post-launch: start scouting partner companies that could supply Instagram data, building on our Facebook pilot contacts - the CEO named this a priority and it now finally has an owner and a slot.",
    "layman_analogy": "Like a greengrocer who's proven the fruit stall now visiting wholesalers about stocking vegetables too, starting with suppliers he already knows.",
-   "layman_needed": "When picked up: a shortlist of candidate Instagram data partners with contact status, built on existing Facebook pilot relationships — Alex on the calls, Lewis on the list — or a written decision to defer."
+   "layman_needed": "When picked up: a shortlist of candidate Instagram data partners with contact status, built on existing Facebook pilot relationships — Alex on the calls, Lewis on the list — or a written decision to defer.",
+   "layman_output": "When picked up: a shortlist of candidate Instagram data partners with the contact status of each — built on the relationships from the existing Facebook pilots, with Alex making the calls and Lewis keeping the list — or, failing that, a written decision to defer. Either way, the July memo's named priority finally has a visible home in the tracker instead of living only in someone's head."
   },
   {
    "id": "BL-PR-12",
@@ -1225,7 +1273,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Parked until Facebook approves the extra permission: an inbox for pages to message each other, with Art-E suggesting replies. Recorded so dropping it from launch was a decision, not an accident.",
    "layman_analogy": "Like a hotel keeping the plans for a guests' post room drawn and dated, waiting only on the council's permit — shelved on purpose, not forgotten.",
-   "layman_needed": "When picked up, and only after Facebook approves the messaging permission: an inbox where pages message each other with Art-E suggesting replies. Until then it needs scheduling with an owner at a betting table, or a written reason to drop."
+   "layman_needed": "When picked up, and only after Facebook approves the messaging permission: an inbox where pages message each other with Art-E suggesting replies. Until then it needs scheduling with an owner at a betting table, or a written reason to drop.",
+   "layman_output": "When picked up, and only after Facebook approves the messaging permission: an inbox inside the app where pages message each other directly, with Art-E suggesting replies and files shared in the thread — restoring the old mockup's inbox that was hidden from the reveal. Until then, this row needs scheduling with an owner at a betting table, or a written reason to drop it."
   },
   {
    "id": "BL-PR-13",
@@ -1247,7 +1296,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Parked until Facebook grants publishing permission: upgrade today's 'remind me to post' feature into genuine scheduling that posts for you. Deliberately trimmed for launch; this brings it back on purpose.",
    "layman_analogy": "Like upgrading an alarm clock that reminds you to leave into a chauffeur who actually drives — once the licence comes through.",
-   "layman_needed": "When picked up, and only after Facebook grants publishing permission: today's remind-me-to-post feature upgraded into genuine scheduling that posts for you. Until then it needs scheduling with an owner, or a written reason to drop."
+   "layman_needed": "When picked up, and only after Facebook grants publishing permission: today's remind-me-to-post feature upgraded into genuine scheduling that posts for you. Until then it needs scheduling with an owner, or a written reason to drop.",
+   "layman_output": "When picked up, and only after Facebook grants publishing permission: today's remind-me-to-post rows upgraded into genuine scheduling, where a customer queues a post and Artemis publishes it at the chosen best time without them touching their phone. The launch downgrade was deliberate; this brings it back on purpose. Needs scheduling with an owner, or a written reason to drop it."
   },
   {
    "id": "BL-IN-13",
@@ -1269,7 +1319,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "After launch: cards forecasting your likely reach and engagement over the next week and month, with an honest range of uncertainty - the look-ahead the original designs promised but launch doesn't show.",
    "layman_analogy": "Like a weather forecast for your page — next week and next month, with an honest 'chance of rain' range rather than false certainty.",
-   "layman_needed": "When picked up: cards on Analytics and Today forecasting likely reach and engagement over 7 and 30 days, each with an honest range of uncertainty, built from the existing scoring models. Needs scheduling with an owner, or a reason to drop."
+   "layman_needed": "When picked up: cards on Analytics and Today forecasting likely reach and engagement over 7 and 30 days, each with an honest range of uncertainty, built from the existing scoring models. Needs scheduling with an owner, or a reason to drop.",
+   "layman_output": "When picked up: forecast cards on the Analytics and Today screens showing a page's likely reach and engagement over the next 7 and 30 days, each with an honest range rather than a single false-precision number, powered by the scoring models already running. The old mockups promised forecasts; this makes one real. Needs scheduling with an owner, or a written reason to drop it."
   },
   {
    "id": "BL-IN-14",
@@ -1291,7 +1342,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Post-launch: a chart showing the mix of feelings in your comments (joy, anger, and so on) over time. The analysis already runs behind the scenes; this finally puts it in front of customers, with the approved wording.",
    "layman_analogy": "Like finally putting the kitchen's tasting notes on the menu — the chef has judged every dish all along; diners just never saw the verdicts.",
-   "layman_needed": "When picked up: a customer-facing chart showing the mix of feelings in comments over time, powered by the analysis already running behind the scenes and carrying the approved disclosure wording. Needs scheduling with an owner, or a reason to drop."
+   "layman_needed": "When picked up: a customer-facing chart showing the mix of feelings in comments over time, powered by the analysis already running behind the scenes and carrying the approved disclosure wording. Needs scheduling with an owner, or a reason to drop.",
+   "layman_output": "When picked up: a customer-facing chart showing the mix of feelings in a page's comments and how it shifts over time, powered by analysis already running quietly behind the scenes and carrying the approved disclosure wording about its limits. Page owners finally see a capability we already pay for. Needs scheduling with an owner, or a written reason to drop it."
   },
   {
    "id": "BL-LL-23",
@@ -1313,7 +1365,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "After launch: switch on the microphone button in Art-E so you can ask questions out loud instead of typing. The button exists at launch but is deliberately inactive until this work.",
    "layman_analogy": "Like connecting the intercom button that was fitted at build time but deliberately left unwired until the electrician's return visit.",
-   "layman_needed": "When picked up: the microphone button in Art-E switched on, turning speech into text in the chat rail so customers can ask questions out loud. Until then it needs scheduling with an owner at a betting table, or a written reason to drop."
+   "layman_needed": "When picked up: the microphone button in Art-E switched on, turning speech into text in the chat rail so customers can ask questions out loud. Until then it needs scheduling with an owner at a betting table, or a written reason to drop.",
+   "layman_output": "When picked up: the microphone button in the Art-E chat rail switched on for real — a customer taps it, speaks their question aloud, and watches it appear as text and get answered, instead of tapping a button that does nothing. The mic ships as a placeholder at launch; this row exists so leaving it dead stays a decision, not an accident. Needs scheduling with an owner, or a reason to drop."
   }
  ],
  "features": [
@@ -2391,7 +2444,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We're rewording the promise behind our comment-storm alarm so it commits to both accuracy and catching a minimum number of real incidents, so pilots know exactly what the alarm guarantees.",
    "layman_analogy": "Like rewriting a guard dog's job description so it promises not just 'rarely barks at nothing' but also 'always barks at actual burglars'.",
-   "layman_needed": "A reworded alarm promise in the sprint tracker and Checklist 3, stating both an accuracy term and a minimum number of real incidents it must catch, countersigned by Faheem, with a note that the exact number is set next sprint."
+   "layman_needed": "A reworded alarm promise in the sprint tracker and Checklist 3, stating both an accuracy term and a minimum number of real incidents it must catch, countersigned by Faheem, with a note that the exact number is set next sprint.",
+   "layman_output": "A rewritten promise line in the sprint tracker and in Checklist 3, replacing the old one-part accuracy claim with two commitments: how often the storm alarm is right, and a minimum number of real past incidents it must catch. Faheem's countersignature sits beside it, with a note that the exact number lands next sprint - so anyone can read exactly what the alarm guarantees and see both names against it."
   },
   {
    "id": "N1-AS-03",
@@ -2421,7 +2475,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad and Muteeb sit down and pick the core technology we build on, write it down and sign it, because it's a choice that's very costly to reverse later.",
    "layman_analogy": "Like two builders choosing the foundations and signing the architect's drawing before a single brick is laid, because you can't swap foundations later.",
-   "layman_needed": "A signed one-page document in the code repository naming the chosen technologies, login vendor and hosting, with a no-changes clause, and Muteeb's starter code matching it exactly."
+   "layman_needed": "A signed one-page document in the code repository naming the chosen technologies, login vendor and hosting, with a no-changes clause, and Muteeb's starter code matching it exactly.",
+   "layman_output": "A signed one-page document in the code repository's docs folder naming every core technology choice - the app framework, styling, hosting, the bought login vendor and how it tags each customer - with a clause forbidding later changes. Anyone on the team can open it and check Muteeb's starter code against it line by line, and it records that Saad's mockup tool is the spec, never the shipped code."
   },
   {
    "id": "N1-AS-04",
@@ -2454,7 +2509,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We put in writing how one customer account can own several Facebook pages, and how every piece of data stays tied to its page, so customers with multiple pages work safely from day one.",
    "layman_analogy": "Like a landlord's ledger where every key, bill and repair is filed under the exact flat it belongs to, so tenants' paperwork never gets mixed up.",
-   "layman_needed": "A written, signed rulebook saying one account owns several pages, every piece of data is stamped with its page, and each page has its own Facebook key — signed by Asad and Muteeb and referenced by the data agreement."
+   "layman_needed": "A written, signed rulebook saying one account owns several pages, every piece of data is stamped with its page, and each page has its own Facebook key — signed by Asad and Muteeb and referenced by the data agreement.",
+   "layman_output": "A short written rulebook in the repository, signed by Asad and Muteeb, stating that one customer account can own several Facebook pages, that every stored row and every request is stamped with its page, and that each page has its own Facebook key. A teammate can open it and see exactly how multi-page customers are kept safe, and the data agreement points to it as its foundation."
   },
   {
    "id": "N1-AS-05",
@@ -2497,7 +2553,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad and Muteeb agree and sign the exact way the app's screens talk to its data, so both can build their halves in parallel without surprises when they meet in the middle.",
    "layman_analogy": "Like two crews digging a tunnel from opposite ends agreeing the exact meeting point on paper first, so the halves line up when they meet.",
-   "layman_needed": "A signed agreement file in the repository describing every way screens request data and the exact shape of every answer, carried in two documents with both signatures, from which the pretend data layer is generated without hand edits."
+   "layman_needed": "A signed agreement file in the repository describing every way screens request data and the exact shape of every answer, carried in two documents with both signatures, from which the pretend data layer is generated without hand edits.",
+   "layman_output": "Two signed agreement files in the repository describing every way the app's screens ask for data and the exact shape of every answer - scores, feeds, alerts, best-times cells, health numbers - one for browser-to-app traffic and one for the model service. Both carry Asad's and Muteeb's signatures, and the pretend data layer is generated straight from them, so anyone can confirm no shape was hand-guessed."
   },
   {
    "id": "N1-AS-06",
@@ -2528,7 +2585,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Fix the launch date shown on the public website in all three spots so it says 1 December, so visitors and pilots aren't given a date we can't hit.",
    "layman_analogy": "Like correcting the wedding date on the invitations, the website and the venue sign before any more guests read the wrong day.",
-   "layman_needed": "The live public website showing 1 December 2026 in all three spots — the page summary, the banner and the FAQ — with no trace of the old November date, confirmed on the deployed site."
+   "layman_needed": "The live public website showing 1 December 2026 in all three spots — the page summary, the banner and the FAQ — with no trace of the old November date, confirmed on the deployed site.",
+   "layman_output": "The live public website at its normal address showing 1 December 2026 in all three places the old date appeared: the page summary search engines read, the banner at the top, and the FAQ answer. A teammate can open the site on their phone, search the page for 'November', find nothing, and confirm the marketing calendar's landing beat has moved to 19 September to match."
   },
   {
    "id": "N1-AS-07",
@@ -2560,7 +2618,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A daily half-hour where Asad reviews Saad's design files and flags anything that can't actually be built, so problems surface before building starts rather than mid-build.",
    "layman_analogy": "Like a chef tasting each course as the menu is written, so an impossible dish is caught on paper rather than on the night.",
-   "layman_needed": "A dated review note for every design file Saad delivers by 17 Sep, with every 'can't be built' flag logged and resolved before Asad's first day of building."
+   "layman_needed": "A dated review note for every design file Saad delivers by 17 Sep, with every 'can't be built' flag logged and resolved before Asad's first day of building.",
+   "layman_output": "A dated review note for every design file Saad delivers between 3 and 17 September, filed where the team can read them, each listing what was checked - every screen state, phone versions, colour-and-size compliance - and any 'this can't be built' flag. Each flag has a logged resolution in Saad's decision log before Asad's first build day, so nobody hits an unbuildable screen mid-build."
   },
   {
    "id": "N1-AS-08",
@@ -2593,7 +2652,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad clears his founder to-dos (sign-offs, the Meta story, a list of things not to do) and deliberately writes no app code before 17 Sep, so building starts on a clean, decided foundation.",
    "layman_analogy": "Like a captain refusing to leave harbour until the charts are signed, the crew list is set and the cargo checked — no sailing on guesswork.",
-   "layman_needed": "Four signed decisions on file, the Facebook reviewer story approved in writing, a do-not-do list adopted with named owners, and no app code from Asad dated before 17 Sep."
+   "layman_needed": "Four signed decisions on file, the Facebook reviewer story approved in writing, a do-not-do list adopted with named owners, and no app code from Asad dated before 17 Sep.",
+   "layman_output": "Four signed decision documents on file, a written approval of the story we tell Facebook's reviewers, and an adopted do-not-do list for Asad with a named owner beside every duty. A teammate can open the repository history and confirm Asad committed no app code before 17 September - proof the founder cleared the decisions first and the build starts on settled ground."
   },
   {
    "id": "N1-AS-09",
@@ -2625,7 +2685,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad double-checks three security clean-ups on the live site: keys changed, a leftover debugging trap removed, and secret keys no longer visible in web addresses, so nobody can sneak in.",
    "layman_analogy": "Like a homeowner checking the locksmith really changed the locks, the spare key under the mat is gone, and the door code is no longer written on the gate.",
-   "layman_needed": "A recorded date proving the site keys were changed, the leftover debugging trap removed from the live site, and secret keys no longer appearing in web addresses — all checked by Asad on the live site by 18 Sep."
+   "layman_needed": "A recorded date proving the site keys were changed, the leftover debugging trap removed from the live site, and secret keys no longer appearing in web addresses — all checked by Asad on the live site by 18 Sep.",
+   "layman_output": "A dated note recording that the site's access keys were changed, a live site with the leftover debugging trap removed, and secret keys no longer visible in any web address - all verified by Asad on the real production site by 18 September. A teammate can try the old key-in-the-address route themselves and watch it fail while the proper header-based route still works."
   },
   {
    "id": "N1-AS-10",
@@ -2657,7 +2718,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Saad walks Asad through everything needed to deal with Facebook/Meta (logins, contacts, prepared replies), so the company isn't stuck if Saad is unavailable.",
    "layman_analogy": "Like the co-pilot doing a full cockpit walkthrough with the captain, so the plane can still land safely if the captain is off sick.",
-   "layman_needed": "Asad named as backup in the Facebook submission pack, with briefing notes filed so he can find the logins, the permissions map and the prepared replies without Saad's help."
+   "layman_needed": "Asad named as backup in the Facebook submission pack, with briefing notes filed so he can find the logins, the permissions map and the prepared replies without Saad's help.",
+   "layman_output": "Asad named in writing as the backup contact for our Facebook submission, with briefing notes filed alongside the package: where the logins live, what each requested permission is for, and the prepared replies to likely reviewer questions. If Saad is unreachable when Facebook writes, anyone can watch Asad open the folder and answer the reviewer within the 24-hour window unaided."
   },
   {
    "id": "N1-AS-11",
@@ -2692,7 +2754,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Put the newly designed public website live, with the correct launch date, a privacy policy, a cookie notice and the pilot sign-up form still working, so we look credible to visitors.",
    "layman_analogy": "Like reopening a shop after a refit: new frontage, correct opening date in the window, the legal notices posted and the enquiry form still taking names.",
-   "layman_needed": "The redesigned public website live on 19 Sep with the 1 December date, a link to the privacy policy, a cookie notice, and the pilot sign-up form still accepting submissions."
+   "layman_needed": "The redesigned public website live on 19 Sep with the 1 December date, a link to the privacy policy, a cookie notice, and the pilot sign-up form still accepting submissions.",
+   "layman_output": "The rebuilt public website live at the real address from 19 September: the new locked design, 1 December everywhere, a link to the privacy policy, a cookie notice, and the pilot sign-up form still accepting entries. A teammate can visit on a phone, submit a test sign-up and see it arrive, and confirm the preview was reviewed by Alex and Saad before it went live."
   },
   {
    "id": "N1-AS-12",
@@ -2731,7 +2794,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Build a shared kit of reusable building blocks (buttons, colours, text styles) taken straight from the designs, so every screen we build afterwards looks consistent and goes faster.",
    "layman_analogy": "Like casting one set of moulds for bricks, doors and windows before building the estate, so every house comes out matching and goes up faster.",
-   "layman_needed": "The agreed colours, sizes and text styles encoded in the code, the first handful of reusable screen parts built from them, and a demo page on the rehearsal site showing each one working."
+   "layman_needed": "The agreed colours, sizes and text styles encoded in the code, the first handful of reusable screen parts built from them, and a demo page on the rehearsal site showing each one working.",
+   "layman_output": "The agreed colours, sizes, text styles and spacing encoded once in the app's code, plus the first handful of reusable screen parts - the app frame, cards, chips, the score gauge, pop-up messages - built from them. A demo page on the rehearsal site shows each part working, so a teammate can open one address and see every building block the next two screens will be assembled from."
   },
   {
    "id": "N1-AS-13",
@@ -2763,7 +2827,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Publish a short 'corrections' page listing what has changed since the original plan was written, so anyone reading the plan sees the current truth, not stale promises.",
    "layman_analogy": "Like pasting a corrections slip into the front of a guidebook so readers trust today's facts, not last year's printing.",
-   "layman_needed": "A one-page corrections list linked from the plan and the tracker, showing each outdated line beside its current replacement."
+   "layman_needed": "A one-page corrections list linked from the plan and the tracker, showing each outdated line beside its current replacement.",
+   "layman_output": "A one-page corrections sheet linked from both the plan and the tracker, listing each outdated line of the original plan beside its current replacement: the flop test already passed, the assistant re-scoped, the new tracker start date, reassigned tasks and the reworded alarm promise. Anyone reading the plan lands on the current truth in one click instead of acting on stale promises."
   },
   {
    "id": "N1-AS-14",
@@ -2803,7 +2868,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "A one-page map saying which person owns each part of the app's data connections, plus a rule keeping those connections simple, so nothing falls between two stools.",
    "layman_analogy": "Like a rota pinned in the staff room naming exactly who covers each till, so no queue is ever 'somebody else's job'.",
-   "layman_needed": "A one-page map signed by Asad, Muteeb and Faheem naming an owner for every group of data connections, plus three written house rules about where logic and passwords may live."
+   "layman_needed": "A one-page map signed by Asad, Muteeb and Faheem naming an owner for every group of data connections, plus three written house rules about where logic and passwords may live.",
+   "layman_output": "A one-page map in the repository, signed by Asad, Muteeb and Faheem, naming exactly which person owns each family of the app's data connections, plus three written house rules: where business logic may live, that only the model service holds warehouse passwords, and no always-open connections before launch. When a question of 'whose job is this endpoint' comes up, anyone can point at the line that answers it."
   },
   {
    "id": "N1-AS-15",
@@ -2844,7 +2910,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Agree house rules for how the app reports errors, handles long lists and stays safe to retry, written once and reused everywhere, so every part of the product behaves the same way.",
    "layman_analogy": "Like a franchise handbook: every branch greets, apologises and handles queues the same way, written once instead of invented per shop.",
-   "layman_needed": "A shared set of house rules — one error format, one way to page through long lists, safe-to-retry markers — checked in so the pretend data layer follows them automatically without per-screen work."
+   "layman_needed": "A shared set of house rules — one error format, one way to page through long lists, safe-to-retry markers — checked in so the pretend data layer follows them automatically without per-screen work.",
+   "layman_output": "A checked-in set of house rules every data connection inherits automatically: one error format with a stable code list, one way to page through long lists, safe-to-retry markers on every write, and version and cost tags on every request. A teammate can hit any pretend endpoint and see the same envelope and headers come back without any per-screen work having been done."
   },
   {
    "id": "N1-AS-16",
@@ -2881,7 +2948,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Work out one clear number: what it costs us to serve one Facebook page for a month (AI bill aside), at pilot size and at 100 pages, so we can price sensibly and talk to investors.",
    "layman_analogy": "Like a café owner working out the true cost of serving one regular customer per month — rent, staff, milk — before setting the menu prices.",
-   "layman_needed": "A single page stating the monthly cost of serving one Facebook page (AI bill excluded) at 5 pilots and at 100 pages, split into fixed and per-page costs, with every assumption written beside it."
+   "layman_needed": "A single page stating the monthly cost of serving one Facebook page (AI bill excluded) at 5 pilots and at 100 pages, split into fixed and per-page costs, with every assumption written beside it.",
+   "layman_output": "A single page stating what it costs to serve one Facebook page for a month, AI bill excluded, at two sizes: 5 pilot pages and 100 pages. It splits the total into fixed costs and per-page costs and lists every assumption beside the numbers, so Jill and Alex can set the 2 October price on an engineering fact rather than a guess, and an investor question gets a sourced answer."
   },
   {
    "id": "N1-FH-01",
@@ -2910,7 +2978,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem finished his health check of our data store and handed Muteeb a written verdict on every table plus a list of 13 known issues, so building starts with eyes open.",
    "layman_analogy": "Like a surveyor finishing the house inspection and physically handing the buyer the report and snag list before contracts are exchanged.",
-   "layman_needed": "Muteeb holding the written table-by-table verdict with last-updated times and the link to the 13-issue register, and the ticket marked done."
+   "layman_needed": "Muteeb holding the written table-by-table verdict with last-updated times and the link to the 13-issue register, and the ticket marked done.",
+   "layman_output": "Muteeb holding the written table-by-table health verdict for the data store: which tables are current, which are frozen or broken, and the last-updated time on each, plus the link to the 13-issue register. His catch-up-job ordering is then decided from paper rather than Slack memory, and the ticket is marked done - a teammate can ask Muteeb to produce the document and he can."
   },
   {
    "id": "N1-FH-02",
@@ -2938,7 +3007,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Record when Facebook posting came back after an outage and how quickly our collector notices new posts, so we know how fresh our data really is.",
    "layman_analogy": "Like noting exactly when the postal strike ended and timing how long the first letter took to arrive, to learn how fast the post really is.",
-   "layman_needed": "Issue #24 closed in the register with the date posting resumed on each affected page and a measured number for how quickly our collector spots new posts."
+   "layman_needed": "Issue #24 closed in the register with the date posting resumed on each affected page and a measured number for how quickly our collector spots new posts.",
+   "layman_output": "Issue #24 closed in the register with two facts written in: the date Facebook posting resumed on each restricted page after the late-August outage, and a measured number for how quickly our collector noticed the new posts. Anyone can open the register and answer 'how fresh is our data really?' with an actual figure instead of a hope."
   },
   {
    "id": "N1-FH-03",
@@ -2969,7 +3039,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Mark the late-August week when Facebook restricted us as an odd patch in the data, so none of our 'what's normal for this page' calculations are skewed by it.",
    "layman_analogy": "Like a weather station flagging the week a fire blocked the sensors, so that freak week never counts towards 'normal temperatures'.",
-   "layman_needed": "A flag in the data store marking the late-August restricted week (and any late-July dip checked), which every 'what's normal' calculation automatically excludes."
+   "layman_needed": "A flag in the data store marking the late-August restricted week (and any late-July dip checked), which every 'what's normal' calculation automatically excludes.",
+   "layman_output": "A flag inside the data store marking the late-August week when Facebook restricted our pages as an odd patch, with a note on whether late July needs the same treatment. Every 'what is normal for this page' calculation - flop training, hourly baselines, storm-alarm backtests - automatically skips or discounts that week, and a teammate can run a baseline query and see the join to the flag in place."
   },
   {
    "id": "N1-FH-04",
@@ -2999,7 +3070,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We had two competing sets of comment mood labels; this settles which one is the official record and retires the other, so nobody builds on the wrong one.",
    "layman_analogy": "Like a registry office finding two conflicting birth certificates and ruling which one is official, stamping the other as void.",
-   "layman_needed": "A written note naming the one official set of comment-mood labels, stating how often the two sets disagreed, with the unofficial set flagged or retired."
+   "layman_needed": "A written note naming the one official set of comment-mood labels, stating how often the two sets disagreed, with the unofficial set flagged or retired.",
+   "layman_output": "A written provenance note naming which of the two competing sets of comment-mood labels is the official record, how each was produced, and how often the two disagreed. The unofficial set is renamed or flagged so nobody builds on it by accident, and anyone querying the table can tell at a glance which column the assistant and the mood cards are allowed to read."
   },
   {
    "id": "N1-FH-05",
@@ -3030,7 +3102,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Hand-check 100 real posts to create a trusted answer sheet, so we can measure honestly how good our automatic judgements are.",
    "layman_analogy": "Like a teacher marking 100 exam scripts by hand to build the answer key the marking machine is then graded against.",
-   "layman_needed": "100 hand-labelled posts stored with who labelled them, when and by what rules, plus a published panel showing how closely the automatic labels agree with them."
+   "layman_needed": "100 hand-labelled posts stored with who labelled them, when and by what rules, plus a published panel showing how closely the automatic labels agree with them.",
+   "layman_output": "A trusted answer sheet of 100 real posts, hand-labelled against the shared rulebook and stored in the data store with who labelled them, when and by what rules. Beside it, a published panel showing how closely each automatic labelling method agrees with the hand checks - so a teammate can open the panel and see, in one view, how honest our machine judgements actually are."
   },
   {
    "id": "N1-FH-06",
@@ -3059,7 +3132,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Recover the training recipe for the post-performance predictor from an old side branch and make it run cleanly on the current code, so Muteeb can plug the model into the product.",
    "layman_analogy": "Like retrieving grandma's recipe from a box in the attic and rewriting it for today's oven so anyone in the kitchen can cook it.",
-   "layman_needed": "The predictor's training recipe running end to end from the main code line, with the finished model's location and a loading snippet handed to Muteeb."
+   "layman_needed": "The predictor's training recipe running end to end from the main code line, with the finished model's location and a loading snippet handed to Muteeb.",
+   "layman_output": "The post-performance predictor's training recipe rescued off its old side branch and running end to end from the main code line, with the finished model saved at a published location and a short loading snippet handed to Muteeb. A teammate can watch the training run complete from a clean checkout, meaning the model can now be rebuilt or pinned whenever the product needs it."
   },
   {
    "id": "N1-FH-07",
@@ -3088,7 +3162,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Answer an open data-quality question in writing (were old post records corrected properly?) and update the issue list, so we know whether history can be trusted.",
    "layman_analogy": "Like an accountant confirming in writing whether last year's mis-filed invoices were ever corrected before trusting the old books.",
-   "layman_needed": "A written answer on whether the stale historical post records were fixed, a backfill if not, and the 13-issue register updated to say which findings were symptoms of it."
+   "layman_needed": "A written answer on whether the stale historical post records were fixed, a backfill if not, and the 13-issue register updated to say which findings were symptoms of it.",
+   "layman_output": "A written answer in the issue register on whether the old, up-to-a-week-stale post records were corrected after fix #12 - with a backfill run if they were not - plus each of the 13 findings that read that table re-tested and marked as real or a symptom. Anyone can read the register and know whether the flop model was trained on stale inputs, in writing rather than folklore."
   },
   {
    "id": "N1-FH-08",
@@ -3121,7 +3196,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "File the evidence behind our 'this post will flop' warning: the exact data used, the definition of a flop, and proof the test wasn't accidentally rigged, so the claim stands up to scrutiny.",
    "layman_analogy": "Like a lab filing its full experiment notes — samples, method, proof nobody peeked at the answers — so the result survives an audit.",
-   "layman_needed": "An evidence folder holding the exact training data fingerprint, the written flop definition, the note proving no answer-revealing inputs were used, and the test results with version numbers, linked from the QA dashboard."
+   "layman_needed": "An evidence folder holding the exact training data fingerprint, the written flop definition, the note proving no answer-revealing inputs were used, and the test results with version numbers, linked from the QA dashboard.",
+   "layman_output": "An evidence folder, linked from the QA dashboard, holding everything behind the flop warning's claims: the exact fingerprint of the 27,678-post training set, the written definition of a flop, the note proving no answer-revealing inputs were used, and the test results with version numbers. A sceptic at the go/no-go can open the folder and check every number against an artefact, not a recollection."
   },
   {
    "id": "N1-FH-09",
@@ -3154,7 +3230,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Measure how many comments each page normally gets at each hour of the week over 8 weeks, so the comment-storm alarm knows what 'unusual' looks like per page.",
    "layman_analogy": "Like a shopkeeper logging footfall for every hour of every weekday for two months, so a sudden crowd on a quiet Tuesday stands out instantly.",
-   "layman_needed": "A one-page result showing each page's typical comment count per hour of the week over 8 weeks, pages grouped into busy, medium and quiet bands, shared with Asad and Lewis."
+   "layman_needed": "A one-page result showing each page's typical comment count per hour of the week over 8 weeks, pages grouped into busy, medium and quiet bands, shared with Asad and Lewis.",
+   "layman_output": "A one-page result showing, for each page, its typical comment count at every hour of the week measured over eight weeks with the odd late-August week excluded, and the pages sorted into busy, medium and quiet bands - Lewis's pilot pages marked in each. Shared with Asad and Lewis, it is the factual floor the storm alarm's pass line gets set on next sprint."
   },
   {
    "id": "N1-FH-10",
@@ -3186,7 +3263,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Compare two ways of judging post images against our hand-checked answer sheet and pick one, so the flop warning is built on the more trustworthy input.",
    "layman_analogy": "Like trying two wine critics on bottles you've already tasted yourself, then keeping the critic whose scores match your palate.",
-   "layman_needed": "A recorded decision on which of the two image-judging methods feeds the flop warning, with the warning's headline numbers either confirmed or re-measured on the corrected inputs."
+   "layman_needed": "A recorded decision on which of the two image-judging methods feeds the flop warning, with the warning's headline numbers either confirmed or re-measured on the corrected inputs.",
+   "layman_output": "A recorded decision naming which of the two image-judging methods feeds the flop warning, backed by an agreement report and a category-by-category comparison against the 100-post answer sheet. If the choice changed the inputs, the warning's headline numbers are re-measured and re-recorded first - so a teammate can see the shipped numbers were earned on the inputs actually in use."
   },
   {
    "id": "N1-FH-11",
@@ -3216,7 +3294,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Add automatic alarms that go off if the tables feeding our predictions stop updating, so we'd notice stale data before a customer sees a wrong warning.",
    "layman_analogy": "Like fitting a low-fuel light to every delivery van and stalling one on purpose to prove the light actually comes on.",
-   "layman_needed": "An automatic alarm on every table feeding predictions that fires when updates stop, each proven by deliberately pausing a job, with a written action for whoever gets the alert."
+   "layman_needed": "An automatic alarm on every table feeding predictions that fires when updates stop, each proven by deliberately pausing a job, with a written action for whoever gets the alert.",
+   "layman_output": "An automatic alarm on every table that feeds our predictions - flop scores, comment labels, growth rows - that fires when updates stop, with a named recipient and a written action for each. Every alarm was proven by deliberately pausing a job and watching it ring, so a silently stalled model would now be caught by us before any customer sees a stale warning."
   },
   {
    "id": "N1-FH-12",
@@ -3246,7 +3325,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Check the quality of one of our data feeds and add a safety net: if its quality drops below a set bar, we fall back to a safer answer instead of a bad one.",
    "layman_analogy": "Like a restaurant tasting each delivery of fish and having a frozen backup ready the moment a batch fails the sniff test.",
-   "layman_needed": "A measured quality score for the data feed against the 100-post answer sheet, a written threshold, and a working switch that serves the safer fallback whenever quality drops below it — with a panel showing it."
+   "layman_needed": "A measured quality score for the data feed against the 100-post answer sheet, a written threshold, and a working switch that serves the safer fallback whenever quality drops below it — with a panel showing it.",
+   "layman_output": "A measured quality score for the NEBULA data feed against the 100-post answer sheet, a written quality bar, and a working switch that serves a safer fallback answer whenever quality drops below that bar - all visible on a monitoring panel. A teammate can open the panel and see the feed's current quality against the threshold, and the rule the pending backfill must pass is written down."
   },
   {
    "id": "N1-FH-15",
@@ -3277,7 +3357,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Tidy Lewis's list of real past comment-storm incidents into a proper table joined to our data, so the next sprint can tune the alarm against real events, not guesses.",
    "layman_analogy": "Like typing up a firefighter's handwritten log of every real blaze into the station database, so the new alarm can be tested against genuine fires.",
-   "layman_needed": "A table of Lewis's real comment-storm incidents with dates and pages, joined to our comment data, with the covered time window and the sample size's reliability noted."
+   "layman_needed": "A table of Lewis's real comment-storm incidents with dates and pages, joined to our comment data, with the covered time window and the sample size's reliability noted.",
+   "layman_output": "A proper table of Lewis's real past comment-storm incidents - every incident in a fixed date range with its page and timestamp - joined to our comment and post data, with normal-but-busy days added per page for contrast. The covered window and the honest reliability of the sample size are noted on it, so next sprint tunes the alarm against real events with known limits."
   },
   {
    "id": "N1-FH-16",
@@ -3308,7 +3389,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem reviews and signs Muteeb's plan for judging comments live as they arrive, including how many seconds each step may take, so the storm alarm truly fires within 15 minutes.",
    "layman_analogy": "Like a head chef signing off the kitchen's timings dish by dish, so the whole order still leaves the pass inside the promised fifteen minutes.",
-   "layman_needed": "Muteeb's one-page live-labelling design carrying Faheem's signature and an agreed time budget for every step, so fetching plus judging comments fits inside the 15-minute alarm promise."
+   "layman_needed": "Muteeb's one-page live-labelling design carrying Faheem's signature and an agreed time budget for every step, so fetching plus judging comments fits inside the 15-minute alarm promise.",
+   "layman_output": "Muteeb's one-page design for judging comments as they arrive now carrying Faheem's signature and an agreed time budget for every step in the chain, informed by the real current lag and backlog figures Faheem supplied. Anyone can read the page and add the steps up to confirm that fetching plus judging genuinely fits inside the 15-minute storm-alarm promise."
   },
   {
    "id": "N1-FH-17",
@@ -3338,7 +3420,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Faheem sends the exact fields the flop warning will return (score, band, reasons, confidence) in time for the signed agreement on how screens and data talk, so nothing is guessed.",
    "layman_analogy": "Like a supplier faxing the exact parts list ahead of the contract signing, so the order form is filled in from facts rather than guesses.",
-   "layman_needed": "A one-page list of the exact fields the flop warning returns — score, band, reasons, confidence — sent before 11 Sep and appearing word-for-word in the signed data agreement with Faheem's sign-off."
+   "layman_needed": "A one-page list of the exact fields the flop warning returns — score, band, reasons, confidence — sent before 11 Sep and appearing word-for-word in the signed data agreement with Faheem's sign-off.",
+   "layman_output": "A one-page list, sent before 11 September, of the exact fields the flop warning returns - score, band, plain-English reasons in Saad's chip vocabulary, a confidence flag and the model version - plus the inputs it needs. Those fields appear word-for-word in the signed data agreement with Faheem's sign-off, so a teammate can compare the two pages and find no guessed field anywhere."
   },
   {
    "id": "N1-FH-18",
@@ -3368,7 +3451,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Give Filza (legal) a full inventory of what data we process, why, and which outside suppliers touch it — including anything mood-related — so our privacy paperwork is accurate.",
    "layman_analogy": "Like handing your accountant the full shoebox — every supplier, subscription and receipt — so the tax return is filed on facts, not memory.",
-   "layman_needed": "One sheet for Filza listing every data pipeline and its purpose, every outside supplier that touches customer content, and any mood-related judging in use — confirmed by Filza as the basis of her privacy paperwork."
+   "layman_needed": "One sheet for Filza listing every data pipeline and its purpose, every outside supplier that touches customer content, and any mood-related judging in use — confirmed by Filza as the basis of her privacy paperwork.",
+   "layman_output": "One sheet in Filza's hands listing every data pipeline and what it is for, every outside supplier that touches customer content and whether it may train on that content, and any mood-related judging shipped or planned. Filza confirms in writing that her privacy records, supplier checks and EU AI Act memo were drafted from it - so the legal paperwork rests on a real inventory, not memory."
   },
   {
    "id": "N1-FH-19",
@@ -3408,7 +3492,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Publish the written description of the service that serves model answers and freeze the exact shape of those answers, so the rest of the app can rely on it not changing.",
    "layman_analogy": "Like a bank publishing the fixed layout of its statements and promising the columns will never move, so every cashier can rely on it.",
-   "layman_needed": "A published, checked-in description of the model-answering service, with every answer guaranteed to carry its version, confidence, an honest 'can't say' option and cost details — and the service's technical basis recorded."
+   "layman_needed": "A published, checked-in description of the model-answering service, with every answer guaranteed to carry its version, confidence, an honest 'can't say' option and cost details — and the service's technical basis recorded.",
+   "layman_output": "A checked-in, machine-readable description of the model-answering service, generated from its own code, with the shape of every answer frozen: version, training date, confidence, an honest 'cannot say' option with a reason, and cost details. The mock layer and both screen-builders generate from it, and the branch's framework and language version are recorded in the stack decision for anyone to check."
   },
   {
    "id": "N1-FH-20",
@@ -3442,7 +3527,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Work out what each prediction costs us per thousand, per model, plus the monthly running cost of the data pipelines, with assumptions written down, so pricing rests on facts.",
    "layman_analogy": "Like a bakery costing each loaf down to flour, oven time and delivery, plus the monthly rent of keeping the ovens hot.",
-   "layman_needed": "A table giving the cost per thousand answers for each model, split into its parts, plus the monthly running cost of the data pipelines, with the assumptions written next to every line."
+   "layman_needed": "A table giving the cost per thousand answers for each model, split into its parts, plus the monthly running cost of the data pipelines, with the assumptions written next to every line.",
+   "layman_output": "A table giving, for every model serving at launch, the cost per thousand answers split into computing, data-scanning and storage, plus the monthly running cost of each pipeline that keeps the models fed, with every assumption written beside its line. Asad folds it into the single cost number and Jill prices from it - a teammate can trace any figure back to a stated assumption."
   },
   {
    "id": "N1-MT-01",
@@ -3471,7 +3557,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Tidy the code workspace on day one: close two stale proposed changes, shelve a third for after launch, so building starts from a clean slate with no clashes.",
    "layman_analogy": "Like clearing the workbench on day one: two rusty half-finished jobs binned, one boxed and labelled 'after the move', all noted in the logbook.",
-   "layman_needed": "Two stale proposed changes closed, a third shelved with a written 'reopen after launch' note, and all three decisions recorded in the repository so nothing gets re-merged mid-build."
+   "layman_needed": "Two stale proposed changes closed, a third shelved with a written 'reopen after launch' note, and all three decisions recorded in the repository so nothing gets re-merged mid-build.",
+   "layman_output": "A tidied code workspace on day one: two stale proposed changes closed, the big restructuring proposal shelved with a written 'reopen only after launch' note, and all three decisions recorded in the repository. Anyone opening the project sees no conflicting open proposals against the main code line, so nothing can be accidentally re-merged mid-build."
   },
   {
    "id": "N1-MT-02",
@@ -3506,7 +3593,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Muteeb countersigns the technology choice and the agreement on how screens and data talk, with the security and multi-page details all present, so both builders share one blueprint.",
    "layman_analogy": "Like both partners signing the same architect's plans, so neither builds a wall the other's drawings don't show.",
-   "layman_needed": "The technology decision and the screens-to-data agreement committed to the repository with both signatures, covering the login vendor, customer stamping on every request, error format and the multi-page rules."
+   "layman_needed": "The technology decision and the screens-to-data agreement committed to the repository with both signatures, covering the login vendor, customer stamping on every request, error format and the multi-page rules.",
+   "layman_output": "The technology decision and the screens-to-data agreement committed to the repository carrying both Asad's and Muteeb's signatures, covering the login vendor, the customer stamp on every request, the shared error format and the multi-page rules. Both builders can point at one blueprint, and a teammate can open the two files and see every named detail actually present."
   },
   {
    "id": "N1-MT-03",
@@ -3535,7 +3623,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Get our email sending fully approved and properly verified, so alert emails reliably reach customers' inboxes instead of landing in spam.",
    "layman_analogy": "Like getting your business post franked and certified so the bank's letters land on doormats instead of being binned as junk mail.",
-   "layman_needed": "Email sending approved for real customers, the domain's proof-of-sender records published, and a test alert landing cleanly in real Gmail and Outlook inboxes — then handed to Jill for warm-up."
+   "layman_needed": "Email sending approved for real customers, the domain's proof-of-sender records published, and a test alert landing cleanly in real Gmail and Outlook inboxes — then handed to Jill for warm-up.",
+   "layman_output": "Our alert-sending email address fully approved for real recipients, with the domain's proof-of-sender records published and verified. A test alert sent to real Gmail and Outlook inboxes lands in the inbox, not spam - anyone can repeat the test themselves - and the sending identity is handed to Jill so the autumn reputation warm-up starts on time."
   },
   {
    "id": "N1-MT-04",
@@ -3569,7 +3658,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Set up the workshop: every proposed change is automatically checked, previewable, and lands on a permanent rehearsal site, so quality is enforced by machinery, not memory.",
    "layman_analogy": "Like fitting the workshop with an inspection line and a showroom: every piece is machine-checked and displayed before it reaches a customer.",
-   "layman_needed": "A working code home where every proposed change is automatically checked and previewable at its own address, and accepted changes land on a permanent rehearsal site with its own database and secrets."
+   "layman_needed": "A working code home where every proposed change is automatically checked and previewable at its own address, and accepted changes land on a permanent rehearsal site with its own database and secrets.",
+   "layman_output": "A working code home for the app: every proposed change is automatically checked for errors and gets its own preview web address a reviewer can click, and accepted changes land on a permanent rehearsal site with its own database and secrets. When Asad starts coding on 17 September, a teammate can open any proposal, follow its preview link and see the change running."
   },
   {
    "id": "N1-MT-05",
@@ -3602,7 +3692,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "One well-behaved doorway for all our calls to Facebook, plus logging that tags each customer without recording personal details, and alarms that ring when something breaks or the site goes down.",
    "layman_analogy": "Like routing all deliveries through one signed-in loading dock with a logbook that names the client but never their private details, plus a bell that rings on any breakage.",
-   "layman_needed": "Every Facebook call going through one central, version-pinned connector that backs off politely, logs tagged by customer with no personal details, and error and downtime alarms proven to fire on the rehearsal site."
+   "layman_needed": "Every Facebook call going through one central, version-pinned connector that backs off politely, logs tagged by customer with no personal details, and error and downtime alarms proven to fire on the rehearsal site.",
+   "layman_output": "One central, version-pinned doorway through which every call to Facebook passes, retrying politely when Facebook is busy, plus logs tagged by customer with no personal details in them, and error and downtime alarms proven to fire on the rehearsal site. A teammate can break something on purpose on the rehearsal site and watch the alert arrive."
   },
   {
    "id": "N1-MT-06",
@@ -3638,7 +3729,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Wire up the purchased login system so each sign-in is stamped with which customer it belongs to, and stand up a pretend data layer so screens can be built before the real one exists.",
    "layman_analogy": "Like installing the hotel's key-card system where every card knows whose room it opens, plus a mock front desk so staff can rehearse before opening night.",
-   "layman_needed": "A rehearsal-site login that stamps each session with its customer, and a pretend data layer answering every agreed request with realistic responses so both screen-builders can start before the real data exists."
+   "layman_needed": "A rehearsal-site login that stamps each session with its customer, and a pretend data layer answering every agreed request with realistic responses so both screen-builders can start before the real data exists.",
+   "layman_output": "A working login on the rehearsal site using the bought sign-in vendor, where every session is stamped with which customer it belongs to, plus a pretend data layer answering every agreed request with realistic responses - including errors and honest 'cannot say' cases. Both screen-builders can start building against it immediately, weeks before the real data connections exist."
   },
   {
    "id": "N1-MT-07",
@@ -3672,7 +3764,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The first working piece of the real service: send a draft post in, get a score back for your own page — and one customer's request for another customer's page is refused.",
    "layman_analogy": "Like the first working till in a new shop: it rings up one real sale correctly — and refuses a card that belongs to a different shop's account.",
-   "layman_needed": "One working endpoint on the rehearsal site where sending a draft post returns a real score for your own page, and a request made for another customer's page is refused."
+   "layman_needed": "One working endpoint on the rehearsal site where sending a draft post returns a real score for your own page, and a request made for another customer's page is refused.",
+   "layman_output": "The first working piece of the real service, live on the rehearsal site behind the real login: send in a draft post for one of your pages and a genuine score comes back in the agreed shape, drawn from the real data store and model. A teammate can try requesting a score for another customer's page and watch it be refused - proving the whole chain works end to end."
   },
   {
    "id": "N1-MT-08",
@@ -3704,7 +3797,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Locks at the database level so each customer can only ever see their own rows, plus an automatic check that fails the build if a leak between customers ever becomes possible.",
    "layman_analogy": "Like fitting locks on every filing-cabinet drawer plus a nightly patrol that raises the alarm if any tenant's key ever opens a neighbour's drawer.",
-   "layman_needed": "Database-level locks on every table so each customer sees only their own rows, plus an automatic check that fails the build if one customer's login can ever read another's data."
+   "layman_needed": "Database-level locks on every table so each customer sees only their own rows, plus an automatic check that fails the build if one customer's login can ever read another's data.",
+   "layman_output": "Locks built into the database itself so each customer's login can only ever reach that customer's own rows, plus an automatic check in the build machinery that tries to read one customer's data with another's credentials and fails the build if it succeeds. A teammate can watch that check run on any proposed change - customer separation is enforced by structure, not by care."
   },
   {
    "id": "N1-MT-09",
@@ -3738,7 +3832,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Handle the keys Facebook gives us for each page properly: stored encrypted, refreshed on time, multiple pages supported, and if a customer disconnects a page we delete its data.",
    "layman_analogy": "Like a hotel keeping guests' car keys in a safe, renewing valet permits before they expire, and clearing a guest's records the day they check out.",
-   "layman_needed": "A working keys system: Facebook page keys stored only encrypted, renewed before expiry, several pages per account supported, and disconnecting a page proven to delete its data — shown live on a bare test page."
+   "layman_needed": "A working keys system: Facebook page keys stored only encrypted, renewed before expiry, several pages per account supported, and disconnecting a page proven to delete its data — shown live on a bare test page.",
+   "layman_output": "A working key-handling system for the credentials Facebook grants us: each page's key stored only in encrypted form, renewed before it expires, several pages supported per account, and disconnecting a page proven to delete that page's data. Shown live on a bare test page, so a reviewer or teammate can watch login, connect, real data, and clean disconnect happen for real."
   },
   {
    "id": "N1-MT-10",
@@ -3769,7 +3864,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A written step-by-step guide for putting new versions live and undoing a bad one, so someone other than Muteeb could do it by following the page.",
    "layman_analogy": "Like laminating the fire-drill card by the door: any member of staff can evacuate the building or reopen it by following the steps.",
-   "layman_needed": "A step-by-step guide in the repository that lets someone other than Muteeb put a new version live and undo a bad one on the rehearsal site, kept current as the machinery changes."
+   "layman_needed": "A step-by-step guide in the repository that lets someone other than Muteeb put a new version live and undo a bad one on the rehearsal site, kept current as the machinery changes.",
+   "layman_output": "A step-by-step written guide in the repository for putting a new version of the app live and undoing a bad one - where the secrets live, what to click, who to call - kept current as the machinery changes. Its test is simple: someone other than Muteeb can sit down with only the page open, perform a rehearsal-site release and roll it back, unaided."
   },
   {
    "id": "N1-MT-11",
@@ -3803,7 +3899,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A live checkpoint demo on 18 Sep: log in, connect a test Facebook page, see its real data appear — proving the foundations actually work end to end.",
    "layman_analogy": "Like the dress rehearsal where the lead walks on, the lights come up and the set moves — proving the theatre works before tickets go on sale.",
-   "layman_needed": "A live demonstration on 18 Sep: log in, connect a real Facebook page, see its real data appear, show the customer stamp and the passing leak-check — recorded as passed in the gate log."
+   "layman_needed": "A live demonstration on 18 Sep: log in, connect a real Facebook page, see its real data appear, show the customer stamp and the passing leak-check — recorded as passed in the gate log.",
+   "layman_output": "A live checkpoint demonstration on 18 September, recorded as passed in the gate log: log in through the bought sign-in, connect a real Facebook page, and watch its real data appear on the bare test page on the rehearsal site, with the customer stamp shown in the session and the customer-separation check passing. It is the on-the-record proof the foundations work before any screen is built on them."
   },
   {
    "id": "N1-MT-12",
@@ -3834,7 +3931,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Move our data collector's logic into the shared code home and prove it confirms every pickup, retries failures, and parks anything undeliverable in a holding queue that never loses a message.",
    "layman_analogy": "Like a courier depot proving every parcel is signed for, failed drops are retried, and undeliverables sit safely in a cage rather than vanishing.",
-   "layman_needed": "The collector's step-by-step logic committed to the shared repository, a passing check that pickups are confirmed, failures retried and dead letters held safely, and a written answer on the old records."
+   "layman_needed": "The collector's step-by-step logic committed to the shared repository, a passing check that pickups are confirmed, failures retried and dead letters held safely, and a written answer on the old records.",
+   "layman_output": "The data collector's step-by-step scheduling logic committed to the shared repository instead of living only in the cloud console, with a passing check proving every pickup is confirmed, failures are retried, and anything undeliverable is parked safely rather than lost. A written answer on whether the old post records were corrected sits alongside, ending the bus-factor risk on our main feed."
   },
   {
    "id": "N1-MT-13",
@@ -3866,7 +3964,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Kick off the catch-up job for a data feed that's 13 months behind, with save-points so it can resume if interrupted and a written estimate of when it finishes.",
    "layman_analogy": "Like starting to digitise 13 months of paper ledgers newest-first, with a bookmark after every box so a power cut never loses progress.",
-   "layman_needed": "The catch-up job running with save-points so it can resume if interrupted, a written estimate of its finish date, and the odd late-August week flagged in the recovered data."
+   "layman_needed": "The catch-up job running with save-points so it can resume if interrupted, a written estimate of its finish date, and the odd late-August week flagged in the recovered data.",
+   "layman_output": "The catch-up job for the 13-months-behind data feed actually running, working backwards in chunks with save-points so an interruption never restarts it from scratch, its progress logged and a written estimate of the finish date posted for the team. The odd late-August week is flagged in the recovered data, and a teammate can read the log and see how far back the feed now reaches."
   },
   {
    "id": "N1-MT-14",
@@ -3900,7 +3999,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Design, on one signed page, how incoming comments get judged in near-real time for the storm alarm — how often, where, how fast, and what happens if we fall behind.",
    "layman_analogy": "Like an A&E triage plan on one signed page: how often the doors are checked, who assesses arrivals, how many minutes each step gets, and what happens when the corridor backs up.",
-   "layman_needed": "A one-page design signed by both Faheem and Muteeb stating how often comments are fetched, where they get judged, the time budget keeping it under 15 minutes, and how the 39k-comment backlog gets cleared."
+   "layman_needed": "A one-page design signed by both Faheem and Muteeb stating how often comments are fetched, where they get judged, the time budget keeping it under 15 minutes, and how the 39k-comment backlog gets cleared.",
+   "layman_output": "A one-page design, signed by both Muteeb and Faheem, stating exactly how incoming comments get judged in near-real time for the storm alarm: how often we fetch, where the judging call sits, the seconds allowed per step so the whole chain stays under 15 minutes, and how the 39,000-comment backlog gets cleared. Anyone can read it and add up the numbers themselves."
   },
   {
    "id": "N1-MT-15",
@@ -3931,7 +4031,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Do the three security clean-ups Asad delegated: change the exposed keys, remove a leftover debugging trap from the live site, and stop secret keys appearing in web addresses.",
    "layman_analogy": "Like the deputy doing the boss's security rounds: new locks confirmed fitted, the prop holding the back door removed, and door codes taken off the noticeboard.",
-   "layman_needed": "Proof in the hosting console that the keys were rotated with dates, the debugging trap stripped from the live site, keys no longer readable from web addresses, and each outcome recorded in the runbook."
+   "layman_needed": "Proof in the hosting console that the keys were rotated with dates, the debugging trap stripped from the live site, keys no longer readable from web addresses, and each outcome recorded in the runbook.",
+   "layman_output": "Three security clean-ups completed on the live landing site and recorded in the runbook: the hosting console showing the access keys were changed and when, the leftover debugging trap stripped from the deployed site, and secret keys no longer readable from web addresses. A teammate can try the old key-in-the-address trick on production and watch it fail."
   },
   {
    "id": "N1-MT-16",
@@ -3964,7 +4065,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Send Jill and Filza the raw facts their own tasks depend on — what systems and outside tools we use, where data lives, how billing works — and get dated confirmations.",
    "layman_analogy": "Like handing the auditors the full set of keys, supplier contracts and utility bills they asked for — and getting a signed receipt for each.",
-   "layman_needed": "Dated confirmations from Jill and Filza that they received all five hand-offs: the systems and accounts list, tool preferences, where customer data lives, billing access with cost tags, and spending-report permissions."
+   "layman_needed": "Dated confirmations from Jill and Filza that they received all five hand-offs: the systems and accounts list, tool preferences, where customer data lives, billing access with cost tags, and spending-report permissions.",
+   "layman_output": "Five dated confirmations from Jill and Filza that they hold the raw facts their own deadline-bound tasks need: the list of systems and admin accounts, the preferred monitoring and paging tools, every store holding customer data, billing access with per-pipeline cost tags, and spending-report permissions. Nothing on their side then waits on an unowned hand-off."
   },
   {
    "id": "N1-MT-17",
@@ -4003,7 +4105,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Machinery that automatically produces both the screens' data connector and the pretend data layer from the signed agreements, with a written guide for switching any screen from pretend to real data.",
    "layman_analogy": "Like a machine that stamps both the plug and the practice socket from the same signed blueprint, with a card telling a new electrician how to switch from practice to mains.",
-   "layman_needed": "Automatic machinery producing the screens' typed data connector and the pretend data layer from both signed agreements, plus a written guide that lets Saad flip any screen from pretend to real data on his own."
+   "layman_needed": "Automatic machinery producing the screens' typed data connector and the pretend data layer from both signed agreements, plus a written guide that lets Saad flip any screen from pretend to real data on his own.",
+   "layman_output": "Build machinery that automatically produces, from the two signed data agreements, both the typed connector the app's screens import and the pretend data layer with realistic example answers, plus a written guide naming the exact file to edit to switch any screen from pretend to real data. Saad, new to the repository, can flip a screen live by following the guide alone."
   },
   {
    "id": "N1-MT-18",
@@ -4039,7 +4142,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Lock the internal corridor between our web layer and the model service so only our own short-lived passes get through, keep everything in one region, and keep warehouse passwords out of the app.",
    "layman_analogy": "Like a bank's staff corridor between branches: short-lived passes only, both buildings on the same street, and the vault combination kept in exactly one of them.",
-   "layman_needed": "The internal doorway rejecting any call without a valid short-lived pass, both services running in the same region so answers stay fast, and a scan proving the web layer holds no warehouse passwords."
+   "layman_needed": "The internal doorway rejecting any call without a valid short-lived pass, both services running in the same region so answers stay fast, and a scan proving the web layer holds no warehouse passwords.",
+   "layman_output": "The internal corridor between the web layer and the model service locked: any call without a valid short-lived pass minted by our own web layer is rejected, both services run in the same region so answers stay fast, and a scan proves the web layer holds no warehouse passwords. A teammate can fire an unauthenticated call at the internal doorway and watch it bounce."
   },
   {
    "id": "N1-MT-19",
@@ -4074,7 +4178,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "A table of every hosting and infrastructure cost per environment, at pilot size and at 100 pages, marked fixed or growing, so we know exactly what running the product costs.",
    "layman_analogy": "Like itemising a restaurant's overheads — rent, fridges, card machine — at today's covers and at ten times as many, marking which bills grow and which don't.",
-   "layman_needed": "A table listing every hosting and infrastructure cost per environment at 5 pilots and at 100 pages, each marked fixed or growing, with the cost of idle rehearsal machinery named and a cheaper alternative stated."
+   "layman_needed": "A table listing every hosting and infrastructure cost per environment at 5 pilots and at 100 pages, each marked fixed or growing, with the cost of idle rehearsal machinery named and a cheaper alternative stated.",
+   "layman_output": "A table listing every hosting and infrastructure cost line per environment - development, rehearsal and production - priced at 5 pilot pages and at 100 pages, each line marked fixed or growing. It names the standing cost of idle rehearsal machinery explicitly and states a cheaper alternative, so Asad's cost roll-up and Jill's pricing both rest on the real bill."
   },
   {
    "id": "N1-SD-01",
@@ -4107,7 +4212,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Saad files and verifies the project-management handover pack — sign-off lists, quality gates, defect list, dashboard access — so nothing from the previous phase gets lost in the switch.",
    "layman_analogy": "Like the incoming shopkeeper counting the stock, testing every key and signing the inventory before the old manager leaves town.",
-   "layman_needed": "All handover items — sign-off register, quality gates, defect list, dashboard access, answer-sheet provenance — verified complete, filed in Saad's PM folder, with a dated 'received and verified' log."
+   "layman_needed": "All handover items — sign-off register, quality gates, defect list, dashboard access, answer-sheet provenance — verified complete, filed in Saad's PM folder, with a dated 'received and verified' log.",
+   "layman_output": "One PM folder holding the entire handover pack from the departing project manager - the sign-off register, launch-gate list, defect list, pilot notes, dashboard access and the answer-sheet provenance - each item verified as complete and readable without him, with a dated 'received and verified' log. A teammate can open the folder and find any gate's paper trail in minutes."
   },
   {
    "id": "N1-SD-02",
@@ -4137,7 +4243,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Saad and Asad agree, in writing, the order the design files will be delivered in, so Asad always has the next design ready just before he needs to build it.",
    "layman_analogy": "Like a caterer and a host agreeing the course order in writing, so each dish arrives just before the table is ready for it.",
-   "layman_needed": "A written, dated delivery order for the nine design files agreed with Asad and pinned in the tracker, with the first two landing around 9 Sep and later tickets matching those dates."
+   "layman_needed": "A written, dated delivery order for the nine design files agreed with Asad and pinned in the tracker, with the first two landing around 9 Sep and later tickets matching those dates.",
+   "layman_output": "A single written, dated message pinned in the tracker recording the order in which the nine design files will be delivered, agreed with Asad, with the first two landing around 9 September and the rest rolling in before he needs them. Anyone can check the later delivery tickets against it and see the dates match, so Asad always has the next design just before he builds it."
   },
   {
    "id": "N1-SD-03",
@@ -4167,7 +4274,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Formally record that the app says 'Remind me at this time' rather than 'Schedule' — we suggest the best moment to post, we don't post for you — so no design promises a feature we don't have.",
    "layman_analogy": "Like a travel agent changing 'we'll drive you there' to 'we'll tell you when to leave' on every brochure, because we advise, we don't chauffeur.",
-   "layman_needed": "A written design decision, co-noted by Filza, that every 'Schedule' button becomes 'Remind me at this time', with no design file after 11 Sep containing the old wording."
+   "layman_needed": "A written design decision, co-noted by Filza, that every 'Schedule' button becomes 'Remind me at this time', with no design file after 11 Sep containing the old wording.",
+   "layman_output": "A written design decision, co-noted by Filza and shared with Alex, that every 'Schedule' button in the mockups becomes 'Remind me at this time' - because the app suggests the best moment but never posts for you - with the same rule recorded for auto-replies. A teammate can open any design file shipped after 11 September and find no trace of the old wording."
   },
   {
    "id": "N1-SD-04",
@@ -4201,7 +4309,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Deliver the finished design for the screen where users find pages worth teaming up with, in desktop and phone versions, with the legally approved consent wording word-for-word.",
    "layman_analogy": "Like an estate agent's window display: matches shown with reasons and a signed consent form on the counter, browsing only — no keys handed over.",
-   "layman_needed": "The finished partner-finding screen design in desktop and phone versions, with the legal consent wording word-for-word, every fallback and empty state drawn, and the old swipe-deck idea recorded as deferred."
+   "layman_needed": "The finished partner-finding screen design in desktop and phone versions, with the legal consent wording word-for-word, every fallback and empty state drawn, and the old swipe-deck idea recorded as deferred.",
+   "layman_output": "The finished design for the partner-finding screen, in desktop and phone versions: a top-match spotlight, ranked suggestion rows with overlap percentages, a slide-over profile, and the legally approved consent wording word-for-word at equal prominence. Every fallback and empty state is drawn, and the old swipe-deck idea is recorded as deferred - so the later build has one visual truth."
   },
   {
    "id": "N1-SD-05",
@@ -4231,7 +4340,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Saad's side of the daily half-hour design review with Asad, with a written note each day, so every flagged issue is either fixed in the design or logged, never forgotten.",
    "layman_analogy": "Like a tailor fitting the suit daily while it's still pinned, so alterations happen with chalk marks rather than scissors after stitching.",
-   "layman_needed": "A daily review note for every working day in the window, with each of Asad's buildability flags either fixed in the design the same day or logged as a decision."
+   "layman_needed": "A daily review note for every working day in the window, with each of Asad's buildability flags either fixed in the design the same day or logged as a decision.",
+   "layman_output": "A short written review note for every working day of the review window, showing each of Asad's buildability flags on the in-progress designs and its fate: fixed in the design the same day, or logged as a decision. A teammate can leaf through the notes and confirm nothing flagged was ever silently dropped - the cheapest quality check the project gets, done before any code exists."
   },
   {
    "id": "N1-SD-06",
@@ -4262,7 +4372,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Deliver the sheet of agreed colours, sizes and text styles alongside the first designs, so Asad builds the reusable screen kit from one source of truth.",
    "layman_analogy": "Like handing the decorators one paint chart and measuring stick for the whole house, instead of letting each room pick its own shades.",
-   "layman_needed": "One sheet of agreed colours, sizes, text styles and state rules delivered with the first two design files, with Asad confirming the reusable screen kit is built from it."
+   "layman_needed": "One sheet of agreed colours, sizes, text styles and state rules delivered with the first two design files, with Asad confirming the reusable screen kit is built from it.",
+   "layman_output": "One sheet of the product's agreed colours, sizes, text styles, spacing and state rules - roles rather than raw colour codes - delivered alongside the first two design files. Asad confirms in writing that the reusable screen kit is built from this sheet, so every later screen inherits one source of truth instead of a system reverse-engineered from screenshots."
   },
   {
    "id": "N1-SD-07",
@@ -4296,7 +4407,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Deliver the first two screen designs — the daily overview and the draft-checker — including phone versions, every screen state, and a shared vocabulary for the 'why' tags on predictions.",
    "layman_analogy": "Like delivering the show's first two finished sets — stage and costume changes included — while the rest of the scenery is still in the workshop.",
-   "layman_needed": "Two finished screen designs — the daily overview and the draft-checker — in desktop and phone versions with every state drawn, including the score bands, an honest 'no strong signal' state, and a reason-tag vocabulary Faheem can map to."
+   "layman_needed": "Two finished screen designs — the daily overview and the draft-checker — in desktop and phone versions with every state drawn, including the score bands, an honest 'no strong signal' state, and a reason-tag vocabulary Faheem can map to.",
+   "layman_output": "Two finished screen designs delivered on the agreed date: the daily overview (next-move card with a confidence chip, feed cards, briefing card) and the draft-checker (composer, a score shown as bands, an honest 'no strong signal' state, and reason tags in a fixed vocabulary Faheem can map to). Desktop and phone versions with every state drawn, so Asad's first build week starts warm."
   },
   {
    "id": "N1-SD-08",
@@ -4326,7 +4438,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A one-page guide to how the product speaks — tone, wording, plain-English rules — so every message in the app sounds like the same friendly, clear voice.",
    "layman_analogy": "Like a radio station's presenter handbook: one page on how to sound when unsure, when wrong, and when the news is bad — so every voice on air is the same voice.",
-   "layman_needed": "A one-page guide to the product's tone — when uncertain, when wrong, when data is missing, when delivering bad news — with a shared word list, shipped alongside the design files."
+   "layman_needed": "A one-page guide to the product's tone — when uncertain, when wrong, when data is missing, when delivering bad news — with a shared word list, shipped alongside the design files.",
+   "layman_output": "A one-page guide to how the product speaks - when it is uncertain, when it was wrong, when there is no data yet, and when delivering bad news like a flop score or a comment storm - plus a shared word list so one concept never gets three names. Shipped with the design files, it is what every later screen message and alert is checked against."
   },
   {
    "id": "N1-SD-09",
@@ -4362,7 +4475,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Deliver the remaining seven screen designs, so by mid-September Asad has every design he needs for the next four building sprints with nothing missing.",
    "layman_analogy": "Like the costume department delivering the remaining seven racks before opening week, so the director never waits on a missing outfit.",
-   "layman_needed": "All nine screen designs finished by 17 Sep in desktop and phone versions with every state drawn, and Asad's confirmation that nothing he needs for the next four sprints is missing."
+   "layman_needed": "All nine screen designs finished by 17 Sep in desktop and phone versions with every state drawn, and Asad's confirmation that nothing he needs for the next four sprints is missing.",
+   "layman_output": "The remaining seven screen designs delivered by the deadline - alerts, best posting times, the thin analytics view, the assistant panel, settings, the wins summary and the pages switcher - each in desktop and phone versions with every state drawn and cut features omitted by name. Asad confirms in writing that nothing he needs for the next four building sprints is missing."
   },
   {
    "id": "N1-SD-10",
@@ -4393,7 +4507,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Make sure every design shows all situations a screen can be in (loading, empty, error, and so on) and deliver the template for the email we send when a comment storm hits.",
    "layman_analogy": "Like photographing a house in every weather — empty, mid-renovation, storm-damaged — so the builder knows what each room looks like on a bad day too.",
-   "layman_needed": "Every design file audited against one checklist of situations — empty, error, learning, thin data, rate-limited, page disconnected — plus the finished comment-storm email template delivered to Asad and Muteeb."
+   "layman_needed": "Every design file audited against one checklist of situations — empty, error, learning, thin data, rate-limited, page disconnected — plus the finished comment-storm email template delivered to Asad and Muteeb.",
+   "layman_output": "Every design file audited against one shared checklist of situations a screen can be in - empty, error, still learning, thin history, rate-limited, page disconnected, feature switched off - so no state ships undesigned. Alongside it, the finished comment-storm email template, with a deep link, the cited post and one drafted reply, delivered to Asad and Muteeb ready to wire up."
   },
   {
    "id": "N1-SD-11",
@@ -4424,7 +4539,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "For each design: a quality checklist, a short walkthrough video, and the image files saved into the shared code home, so builders never have to guess the designer's intent.",
    "layman_analogy": "Like an architect leaving a snag checklist, a walkthrough video and the full drawings on site, so the builders never phone to ask what was meant.",
-   "layman_needed": "Ten short walkthrough videos and ten quality checklists linked from the tracker, with all icons, illustrations and style values saved into the shared code home rather than living only in design software."
+   "layman_needed": "Ten short walkthrough videos and ten quality checklists linked from the tracker, with all icons, illustrations and style values saved into the shared code home rather than living only in design software.",
+   "layman_output": "Ten short walkthrough videos and ten written quality checklists - one per design - linked from the tracker, plus every icon, illustration and style value exported into the shared code repository rather than living only in design software. After the designer moves on, a builder can watch the video, follow the checklist and verify their screen matches the intent without guessing."
   },
   {
    "id": "N1-SD-12",
@@ -4456,7 +4572,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Start a running one-line-per-decision log of design choices, so months from now anyone can see what was decided and why without archaeology.",
    "layman_analogy": "Like a ship's log with one line per course change and why, so a future crew never has to guess what the captain was thinking.",
-   "layman_needed": "A running log with one line per non-obvious design decision and its reason, seeded with every decision from this sprint and linked from the tracker."
+   "layman_needed": "A running log with one line per non-obvious design decision and its reason, seeded with every decision from this sprint and linked from the tracker.",
+   "layman_output": "A running log with one line per non-obvious design decision and the reason for it - Schedule becoming Remind-me, the swipe deck deferred, score bands with an honest abstain - seeded with every decision from this sprint and linked from the tracker. Months later, anyone can answer 'why does the app do it this way?' by reading one line instead of doing archaeology."
   },
   {
    "id": "N1-SD-13",
@@ -4487,7 +4604,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Build the 11 Sep design-reveal package with Alex for showing off the product's look, with the correct launch date and no features we've cut, so marketing matches reality.",
    "layman_analogy": "Like assembling the show-home brochure with the sales team: real photos, the true completion date, and no rooms that were cut from the plans.",
-   "layman_needed": "A public design-reveal package with Alex by 17 Sep — finished screen images and captions, the 1 December date, honest about no engineering yet, and showing no features we have cut."
+   "layman_needed": "A public design-reveal package with Alex by 17 Sep — finished screen images and captions, the 1 December date, honest about no engineering yet, and showing no features we have cut.",
+   "layman_output": "A public design-reveal package sitting with Alex by the deadline: finished screen images and captions built from the real design files, dated 1 December, honest that engineering has not started, and showing no feature that has been cut. Alex can run the marketing beat straight from it, and a teammate can compare the images against the cut list and find nothing overpromised."
   },
   {
    "id": "N1-SD-14",
@@ -4521,7 +4639,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Saad becomes project manager on 17 Sep and clears everything Alex has been waiting on him for, giving each item an owner and a date, so nobody sits blocked.",
    "layman_analogy": "Like a new store manager's first shift: working through the outgoing manager's pending pile, giving every item a name and a date, and starting the morning huddle.",
-   "layman_needed": "Every item on Alex's waiting-on-Saad list given an owner and a date, and the new PM routine — daily triage, the sign-off register as the source of truth — running at least once before 21 Sep."
+   "layman_needed": "Every item on Alex's waiting-on-Saad list given an owner and a date, and the new PM routine — daily triage, the sign-off register as the source of truth — running at least once before 21 Sep.",
+   "layman_output": "Alex's entire 'waiting for Saad' list from the bridge weeks cleared, with every item either decided or given a named owner and a date, and the new project-management routine running: daily triage held at least once before 21 September and the sign-off register installed as the single source of truth for the gates. Nobody on the team is left blocked on an undecided item."
   },
   {
    "id": "N1-SD-15",
@@ -4554,7 +4673,8 @@ window.LAUNCH_DATA = {
    "table_priority_cell": "P1",
    "layman": "Name and brief a backup person (likely Asad) on the Facebook/Meta emergency package and what to do if trouble hits, so our Meta relationship never depends on one person.",
    "layman_analogy": "Like briefing a second keyholder on the alarm code and the emergency folder, so the shop can still open when the owner is on holiday.",
-   "layman_needed": "A named backup (likely Asad) recorded in the tracker who has walked through the Facebook package folder and knows the story, credentials and response steps well enough to answer a reviewer within 24 hours."
+   "layman_needed": "A named backup (likely Asad) recorded in the tracker who has walked through the Facebook package folder and knows the story, credentials and response steps well enough to answer a reviewer within 24 hours.",
+   "layman_output": "A named backup person for the Facebook submission - likely Asad - recorded in the tracker, who has physically walked through the package folder and can find the story we tell reviewers, the credentials and the prepared response steps unaided. If Facebook writes while Saad is away, the team can watch the backup answer within the 24-hour window rather than losing the review slot."
   },
   {
    "id": "N1-SD-16",
@@ -4588,7 +4708,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Saad writes the plain-English story we tell Facebook's reviewers about what our app does with their data, and opens dashboard access for Asad and Lewis, so that Facebook's approval process can start on time.",
    "layman_analogy": "Like writing the planning application in plain words for the council and adding two colleagues to the portal, so the approval process can start without you.",
-   "layman_needed": "A one-page plain-English story for Facebook's reviewers filed in the package folder with Asad's approval note, and Asad and Lewis able to log into the Facebook app dashboard."
+   "layman_needed": "A one-page plain-English story for Facebook's reviewers filed in the package folder with Asad's approval note, and Asad and Lewis able to log into the Facebook app dashboard.",
+   "layman_output": "A one-page plain-English story for Facebook's reviewers - what the app does with each permission, read-only analytics, reminders rather than posting - filed in the package folder with Asad's written approval, ready for Filza's wording check. Alongside it, Asad and Lewis can both log into the Facebook app dashboard with their own roles, so the submission clock can start on time."
   },
   {
    "id": "N1-SD-17",
@@ -4621,7 +4742,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Saad delivers the app's icon, name, short description and contact details that Facebook requires, so that our submission to Facebook isn't rejected for missing basics and the sign-in screen looks finished.",
    "layman_analogy": "Like preparing the shop sign, nameplate and business card exactly to the mall's spec, so the lease application isn't bounced for missing basics.",
-   "layman_needed": "The app icon, exact display name, short description, category and support email sitting in the Facebook package folder, in the precise formats the dashboard accepts, ready for whoever enters them."
+   "layman_needed": "The app icon, exact display name, short description, category and support email sitting in the Facebook package folder, in the precise formats the dashboard accepts, ready for whoever enters them.",
+   "layman_output": "The identity assets Facebook's app dashboard demands, sitting in the package folder in exactly the formats it accepts: the 1024-pixel app icon, the display name as it will appear on the sign-in screen, the short description in approved language, the chosen category and the support email. Whoever does the dashboard entry can copy them across without a single follow-up question."
   },
   {
    "id": "N1-SD-18",
@@ -4654,7 +4776,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Saad now codes as well as manages, so he writes down which duties he keeps and which move to Alex and Lewis, so that the Facebook submission and the build both get done without either quietly slipping.",
    "layman_analogy": "Like a head teacher who starts teaching a class: writing down which duties they keep and which pass to the deputies, so neither the school nor the lessons slip.",
-   "layman_needed": "A one-page keep/move list with Alex and Asad, each moved duty given a named new owner, and an honest number stating how many coding days survive a sprint that also submits to Facebook."
+   "layman_needed": "A one-page keep/move list with Alex and Asad, each moved duty given a named new owner, and an honest number stating how many coding days survive a sprint that also submits to Facebook.",
+   "layman_output": "A one-page keep/move list, shared with Alex and Asad before coding starts, recording which duties Saad keeps now he both manages and builds, and naming a new owner for every duty that moves to Alex or Lewis. It states plainly, as a number of days, how much building time survives a sprint that also submits to Facebook - so nothing collides silently when a reviewer message lands."
   },
   {
    "id": "N1-SD-19",
@@ -4687,7 +4810,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Saad works out what running the app's screens will cost each month - hosting, images, page traffic - and hands Asad one clear number, so that the price we charge customers covers what the product costs us.",
    "layman_analogy": "Like pricing up a cafe's rent, crockery and electricity before printing the menu, so every dish is priced above what it costs to serve.",
-   "layman_needed": "A one-line monthly cost figure for the app's screens at 5 pilots and at 100 pages, with its assumptions written beside it, handed to Asad, plus a per-screen budget for images and fonts the build can be checked against."
+   "layman_needed": "A one-line monthly cost figure for the app's screens at 5 pilots and at 100 pages, with its assumptions written beside it, handed to Asad, plus a per-screen budget for images and fonts the build can be checked against.",
+   "layman_output": "A one-page costing in Asad's hands stating what the app's screens will cost per month at 5 pilots and again at 100 pages, with every assumption written next to the figure. Alongside it sits a per-screen weight budget for images and fonts. Anyone building a screen can check their work against the budget, and Asad can quote a front-end cost line in planning without guessing."
   },
   {
    "id": "N1-SD-20",
@@ -4724,7 +4848,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Saad gets the coding tools running on his machine and sits with Asad while the design colours and styles are set up, so that when his building weeks start he isn't losing days to setup problems.",
    "layman_analogy": "Like a new chef spending a day learning the kitchen and plating one practice dish before service starts, so opening night isn't spent hunting for the knives.",
-   "layman_needed": "Saad's machine running the app locally against test data, one small change shipped through the full release pipeline, and the design colour-and-style settings encoded so they match the design sheet line for line."
+   "layman_needed": "Saad's machine running the app locally against test data, one small change shipped through the full release pipeline, and the design colour-and-style settings encoded so they match the design sheet line for line.",
+   "layman_output": "Saad's own machine will run the app locally against safe test data, and one small change of his will have travelled the whole release pipeline to a preview address. The design colours and styles will be encoded in the app so they match the design sheet line for line. Anyone can open the preview link, see his change live, and compare any colour on screen to the sheet."
   },
   {
    "id": "N1-AX-01",
@@ -4756,7 +4881,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex puts the launch date in writing for everyone - public launch 8 December - and re-dates every marketing moment to match, so that the website, emails and pilots all quote the same date.",
    "layman_analogy": "Like a couple fixing the wedding date in writing and re-dating every invitation, fitting and cake order to match, so no guest turns up on the wrong day.",
-   "layman_needed": "A dated written declaration of the 8 December launch in the shared drive, and a marketing calendar showing the landing-page moment moved to 19 September with every later moment re-keyed to 8 December."
+   "layman_needed": "A dated written declaration of the 8 December launch in the shared drive, and a marketing calendar showing the landing-page moment moved to 19 September with every later moment re-keyed to 8 December.",
+   "layman_output": "A dated one-paragraph declaration in the shared drive naming the public launch as Tuesday 8 December 2026 at 08:00 UK, with MVP done 5 December. The marketing calendar will show the landing-page moment moved to Friday 19 September, and every later moment re-keyed to 8 December. Anyone on the team can open the drive and the calendar and see one consistent set of dates."
   },
   {
    "id": "N1-AX-02",
@@ -4789,7 +4915,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex submits our company details to Facebook for business verification, matching our official registered name exactly, so that a paperwork mismatch doesn't stall Facebook's approval and eat our launch buffer.",
    "layman_analogy": "Like filling in a passport application with your name copied letter-for-letter from your birth certificate, because one wrong character sends you to the back of the queue.",
-   "layman_needed": "A verification submission showing as in review in Meta's system, using the exact registered company name, with the case number logged and a recurring 48-hour chase reminder in the calendar until it clears."
+   "layman_needed": "A verification submission showing as in review in Meta's system, using the exact registered company name, with the case number logged and a recurring 48-hour chase reminder in the calendar until it clears.",
+   "layman_output": "Meta's Business Manager will show the company's verification as submitted and in review, filed under the exact registered legal name, with the case number written in the ops log. A recurring 48-hour reminder will sit in the calendar to chase it until it clears. Anyone can open Business Manager and see the in-review status, or the log and see the case id and submission time."
   },
   {
    "id": "N1-AX-03",
@@ -4823,7 +4950,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex signs off the small purchases Jill listed - the waiting-list tool, a public status page, error monitoring and an alerting service - so that these are bought once, quickly, and nobody's work waits on a purchase.",
    "layman_analogy": "Like the owner signing off the plumber's parts list in one go so the bathroom refit isn't paused every time a new washer needs approving.",
-   "layman_needed": "Jill's one-page purchase memo carrying Alex's signature and date, with the error-monitoring line signed by 11 September, and Jill's confirmation that all four tools have been ordered."
+   "layman_needed": "Jill's one-page purchase memo carrying Alex's signature and date, with the error-monitoring line signed by 11 September, and Jill's confirmation that all four tools have been ordered.",
+   "layman_output": "Jill's one-page purchase memo will carry Alex's signature and date, with the error-monitoring line signed by 11 September so Muteeb's staging install isn't blocked. Jill will have confirmed all four tools ordered: waitlist, status page, error monitoring, and paging. Anyone can open the memo, see the signature and prices, and ask Jill for the four order confirmations."
   },
   {
    "id": "N1-AX-04",
@@ -4857,7 +4985,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex publishes one calendar of every big decision - pricing, the Facebook submission, freezes, launch day - each with a named decider and date, so that decisions get made once, on time, and nobody waits in doubt.",
    "layman_analogy": "Like a school exam timetable pinned on the wall: every paper has a date, a room and an invigilator, so nobody sits the same exam twice or misses it entirely.",
-   "layman_needed": "A published calendar in the shared drive listing every dated decision from now to launch, each with a named decider, the evidence required and what waits on it, with the link posted in the team channel."
+   "layman_needed": "A published calendar in the shared drive listing every dated decision from now to launch, each with a named decider, the evidence required and what waits on it, with the link posted in the team channel.",
+   "layman_output": "A published calendar in the shared drive listing every dated decision between now and launch - the storm-alert quality call, pricing, the Facebook submission, waitlist opening, readiness review, the freeze - each with a named decider and the evidence it needs. The link will be posted in the team channel, so anyone can look up who decides what, on which day, and what waits on it."
   },
   {
    "id": "N1-AX-05",
@@ -4891,7 +5020,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex writes the one-page list of numbers we will judge launch by, plus a list of jobs Asad must NOT do with a named owner for each, so that our only developer spends his weeks building rather than doing everyone's admin.",
    "layman_analogy": "Like giving the star surgeon a scorecard for the operation and a signed list of who handles the paperwork, so the one person who can operate never gets stuck at the reception desk.",
-   "layman_needed": "A one-page sheet of the numbers launch will be judged by, plus a list of jobs Asad must not do with a named owner on every line, and Asad's written confirmation that he holds both before coding starts on 17 September."
+   "layman_needed": "A one-page sheet of the numbers launch will be judged by, plus a list of jobs Asad must not do with a named owner on every line, and Asad's written confirmation that he holds both before coding starts on 17 September.",
+   "layman_output": "Two documents in Asad's hands before he starts coding on 17 September: a one-page sheet of the numbers launch will be judged by (sign-ups, connections, first insight, waitlist, paying pilots) and a list of jobs Asad must not do, each line carrying another named owner. Asad's written confirmation will be on file, so anyone can check who owns what and what counts as success."
   },
   {
    "id": "N1-AX-06",
@@ -4923,7 +5053,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex acts as stand-in project manager for two weeks - a daily 15-minute unblocking check, no new decisions - and keeps a written list of things waiting for Saad, so that nothing gets decided twice in the gap.",
    "layman_analogy": "Like a supply teacher keeping the class ticking over from the lesson plan and noting questions for the real teacher, rather than rewriting the curriculum.",
-   "layman_needed": "A daily 15-minute unblocking check run for the two-week gap, no decisions taken beyond the published calendar, and a written 'waits for Saad' list handed to Saad on 17 September."
+   "layman_needed": "A daily 15-minute unblocking check run for the two-week gap, no decisions taken beyond the published calendar, and a written 'waits for Saad' list handed to Saad on 17 September.",
+   "layman_output": "A daily 15-minute unblocking check will run through the two-week gap before Saad starts, with no decisions taken beyond the published calendar. On 17 September Saad will receive a written 'waits for Saad' list of every deferred product question. Saad can walk in, read one list, and know exactly what has been parked for him rather than reconstructing two weeks of chat."
   },
   {
    "id": "N1-AX-07",
@@ -4956,7 +5087,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The live website still shows the old launch date in three places; Alex supplies the corrected wording and Asad ships it as his first change, so that we don't publicly contradict our own announced date.",
    "layman_analogy": "Like spotting the shop window still advertises last month's sale dates and handing the signwriter the exact new wording to paint over all three panes.",
-   "layman_needed": "The live website showing 1 December 2026 in the page description, the front-page badge and the FAQ, with no leftover 'November 2026' launch wording anywhere public, verified by Alex on the live address."
+   "layman_needed": "The live website showing 1 December 2026 in the page description, the front-page badge and the FAQ, with no leftover 'November 2026' launch wording anywhere public, verified by Alex on the live address.",
+   "layman_output": "The live website will read 1 December 2026 in all three places it currently says November: the page description search engines show, the front-page badge, and the FAQ answer - plus the explainer page. Alex will have checked the live address himself. Anyone can open the site on their phone and confirm no 'November 2026' launch wording remains anywhere public."
   },
   {
    "id": "N1-AX-08",
@@ -4989,7 +5121,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex and Saad publish the 17 September design reveal, honestly framed as finished design with no working software behind it yet, so that we earn goodwill without making claims a reviewer or journalist could later disprove.",
    "layman_analogy": "Like unveiling an architect's finished drawings while saying plainly the house isn't built yet - impressive, honest, and nothing a surveyor could later call a lie.",
-   "layman_needed": "The design reveal published on 17 September, clearly framed as finished design with no working software behind it, containing no claims about accuracy or features that haven't been measured."
+   "layman_needed": "The design reveal published on 17 September, clearly framed as finished design with no working software behind it, containing no claims about accuracy or features that haven't been measured.",
+   "layman_output": "A public design reveal post, live on 17 September, showing the finished screens and framed honestly as design only - no working software, no claims about accuracy or the assistant, and no mock data resembling a real struggling page. Anyone can read the published post and confirm it promises nothing that hasn't been built or measured, and Alex and Saad both approved it."
   },
   {
    "id": "N1-AX-10",
@@ -5025,7 +5158,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex makes sure the decision on what counts as a good-enough storm-alert system is made on time and written down, so that our public promise about catching comment storms matches what we actually measured.",
    "layman_analogy": "Like the head of the fire brigade making sure the pass mark for the new alarm is agreed before drills begin, and that the leaflet promises only what the alarm was tested to do.",
-   "layman_needed": "The storm-alert quality decision on the calendar with its owner and a date before 21 September, plus a recorded one-line rule that all public wording about catching storms follows whatever that decision says."
+   "layman_needed": "The storm-alert quality decision on the calendar with its owner and a date before 21 September, plus a recorded one-line rule that all public wording about catching storms follows whatever that decision says.",
+   "layman_output": "The decisions calendar will carry the storm-alert quality decision with its owner (Asad with Faheem) and a date before 21 September, plus a recorded one-line rule that all public wording about catching comment storms follows whatever that decision says. Anyone can open the calendar and see the entry, and check any marketing draft against the recorded rule."
   },
   {
    "id": "N1-AX-11",
@@ -5060,7 +5194,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Alex confirms in writing who owns the Facebook submission, who watches its dashboard daily and who answers a reviewer within 24 hours, with a named backup, so that a reviewer's question never sits unanswered.",
    "layman_analogy": "Like a hospital rota naming who carries the on-call pager this weekend and who covers if they're ill, so an urgent call never rings an empty desk.",
-   "layman_needed": "A dated one-pager naming who owns the Facebook submission, who checks its dashboard daily, who answers a reviewer within 24 hours, the backup and weekend cover - acknowledged by Saad, Asad, Filza and Muteeb."
+   "layman_needed": "A dated one-pager naming who owns the Facebook submission, who checks its dashboard daily, who answers a reviewer within 24 hours, the backup and weekend cover - acknowledged by Saad, Asad, Filza and Muteeb.",
+   "layman_output": "A dated one-pager naming who owns the Facebook app submission, who checks its dashboard daily, who answers a Facebook reviewer within 24 hours, plus the named backup and weekend cover. Saad, Asad, Filza and Muteeb will each have acknowledged it in writing. If a reviewer message arrives on a Saturday, anyone can open the page and see exactly who must respond."
   },
   {
    "id": "N1-JL-01",
@@ -5095,7 +5230,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Jill checks every system we use to confirm the departed teammate's accounts are shut off and any passwords he saw are changed, so that nobody outside the company can get into our tools or our customers' data.",
    "layman_analogy": "Like changing the locks and collecting every spare key after a lodger moves out - including the one hidden under the mat that visitors knew about.",
-   "layman_needed": "A dated table listing every system with the departed teammate's account disabled and every shared password or key he ever saw - including any posted in group chats - changed, countersigned by Filza."
+   "layman_needed": "A dated table listing every system with the departed teammate's account disabled and every shared password or key he ever saw - including any posted in group chats - changed, countersigned by Filza.",
+   "layman_output": "A dated table in the ops folder listing every system the team uses - cloud, code, design, monitoring, the warehouse, Facebook Business Manager, shared inboxes - with the departed teammate's account shown disabled on each and every shared password or key he ever saw changed. Filza will have countersigned it, so anyone can pick a row and verify that system themselves."
   },
   {
    "id": "N1-JL-02",
@@ -5131,7 +5267,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Jill writes the one-page shopping list - waiting-list tool, status page, error monitoring, alerting service - with prices and owners for Alex to sign, so that each is bought once and set up without delay.",
    "layman_analogy": "Like writing one shopping list for the whole DIY job - drill, ladder, paint, dust sheets - with prices, so one trip to the shop covers everything and nobody downs tools waiting.",
-   "layman_needed": "A signed one-page memo naming all four tools with tier, monthly price and owner, and each tool bought with a paid account handed to the person who runs it."
+   "layman_needed": "A signed one-page memo naming all four tools with tier, monthly price and owner, and each tool bought with a paid account handed to the person who runs it.",
+   "layman_output": "A signed one-page memo naming all four bought tools - the waitlist service, the status page, error monitoring, and paging - each with its tier, monthly price and a named owner. Each tool will have a paid account handed to the person who runs it. Anyone can read the memo, then ask each owner to show the working account, and no tool gets bought twice or forgotten."
   },
   {
    "id": "N1-JL-03",
@@ -5168,7 +5305,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Jill measures exactly what the company spends each month and projects it at ten times the pilot load, so that we know our costs before we set prices and can spot a bill running away.",
    "layman_analogy": "Like going through a month of household receipts line by line, then working out what the bills would be with ten lodgers instead of one, before setting the rent.",
-   "layman_needed": "A signed-off memo showing the current monthly spend line by line and a projection at ten times the pilot load, with every assumption named and the lines that grow with usage marked."
+   "layman_needed": "A signed-off memo showing the current monthly spend line by line and a projection at ten times the pilot load, with every assumption named and the lines that grow with usage marked.",
+   "layman_output": "A signed-off memo showing the company's current monthly spend line by line - cloud services, AI usage, software subscriptions including the four new tools - and a projection of the bill at ten times the pilot load. Every assumption will be named and the lines that grow with usage marked, so anyone can see today's burn and what launch scale would cost before it happens."
   },
   {
    "id": "N1-JL-04",
@@ -5202,7 +5340,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Jill sets automatic warnings that fire when our cloud bill hits 80% of the expected monthly spend, so that a runaway system is caught the same day instead of on the invoice.",
    "layman_analogy": "Like setting your boiler's smart meter to text you the moment the month's gas spend hits 80% of normal, instead of finding out from a shock bill.",
-   "layman_needed": "Automatic cloud-spend warnings set at 80% of expected actual and forecast spend, matching the baseline memo, with a test alert proven to reach Jill and Muteeb."
+   "layman_needed": "Automatic cloud-spend warnings set at 80% of expected actual and forecast spend, matching the baseline memo, with a test alert proven to reach Jill and Muteeb.",
+   "layman_output": "Automatic spending alarms will be live on the cloud account, set at 80% of the expected monthly bill for both actual and forecast spend, with extra alarms on the services most likely to run away. A test alert will have provably landed in Jill's and Muteeb's inboxes and the team channel, so a surprise bill triggers a warning mid-month instead of a shock at month end."
   },
   {
    "id": "N1-JL-05",
@@ -5237,7 +5376,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Jill writes the first who-answers-the-phone rota: which person gets woken if the system goes down at night and who they escalate to, so that a fault is found by us and not by a pilot customer.",
    "layman_analogy": "Like a small hotel's night-porter rota: someone named for every week, a manager to escalate to, and the front-desk bell actually wired to their room.",
-   "layman_needed": "A published rota naming a first and second responder per week to 1 November, the alerting tool receiving warnings from the test system, and one test alert proven to reach the person on duty."
+   "layman_needed": "A published rota naming a first and second responder per week to 1 November, the alerting tool receiving warnings from the test system, and one test alert proven to reach the person on duty.",
+   "layman_output": "A published rota naming a first and second responder for every week up to 1 November, with an escalation path to Alex. The paging tool will be receiving error and uptime warnings from the test system, and one test alert will have provably reached the person on duty. Anyone can look up who answers if something breaks tonight, and trust the phone actually rings."
   },
   {
    "id": "N1-JL-06",
@@ -5268,7 +5408,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Jill confirms we've paid the UK data-protection regulator's registration fee and diaries the renewal, so that we're legally covered to handle customers' page data and can answer that question when asked.",
    "layman_analogy": "Like taxing the car and setting a reminder for renewal day, so you're never caught driving uninsured paperwork-wise when someone official asks.",
-   "layman_needed": "Confirmation the company is registered with the UK data regulator at the right fee tier, the fee paid, the renewal date in the ops calendar, and the registration number passed to Filza for the legal documents."
+   "layman_needed": "Confirmation the company is registered with the UK data regulator at the right fee tier, the fee paid, the renewal date in the ops calendar, and the registration number passed to Filza for the legal documents.",
+   "layman_output": "Confirmation on file that the company is registered with the UK data regulator at the correct fee tier, with the fee paid, the renewal date in the ops calendar, and the registration number handed to Filza for the privacy policy and legal pack. Anyone can look the company up on the ICO's public register and find it, and Filza can quote the number in every legal document."
   },
   {
    "id": "N1-JL-07",
@@ -5301,7 +5442,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Jill gets insurance quotes started - cover for professional mistakes and for a data breach - so that proper insurance is in place before any customer money changes hands, since quotes take weeks.",
    "layman_analogy": "Like getting building-insurance quotes in before exchanging contracts on a house - the cover must exist before money moves, and quotes take weeks.",
-   "layman_needed": "At least two written insurance quotes - covering professional mistakes and data breaches - logged with cover limits, exclusions, outstanding insurer questions and a date to have cover in place before 13 November."
+   "layman_needed": "At least two written insurance quotes - covering professional mistakes and data breaches - logged with cover limits, exclusions, outstanding insurer questions and a date to have cover in place before 13 November.",
+   "layman_output": "At least two written insurance quotes - covering professional mistakes and data breaches - logged in the ops folder, each with its cover limits, exclusions and the insurer's outstanding questions, plus a date to have cover bound before 13 November. Anyone can open the log, compare the two quotes side by side, and see exactly what stands between the company and being insured."
   },
   {
    "id": "N1-LW-01",
@@ -5335,7 +5477,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis checks every pilot page's recent activity and tags which have quietly collapsed in comment volume, so that our demos, benchmarks and screenshots use healthy pages and the product never looks broken by someone else's decline.",
    "layman_analogy": "Like a wedding photographer checking which venues have scaffolding up before the shoot list is set, so the album isn't full of buildings mid-repair.",
-   "layman_needed": "A shared roster tagging every pilot page's 12-week comment trend and monetisation status, marking which pages are safe for benchmarks, demos, screenshots and testing, acknowledged by Faheem and Asad by 14 September."
+   "layman_needed": "A shared roster tagging every pilot page's 12-week comment trend and monetisation status, marking which pages are safe for benchmarks, demos, screenshots and testing, acknowledged by Faheem and Asad by 14 September.",
+   "layman_output": "A shared roster tagging every recruited and candidate pilot page with its 12-week comment trend - declining, flat or up - and its monetisation status, marking which pages are safe to use for benchmarks, demos, screenshots and testing. Faheem and Asad will have acknowledged it by 14 September, so nobody accidentally builds a demo on a page whose audience has collapsed."
   },
   {
    "id": "N1-LW-02",
@@ -5369,7 +5512,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis lists every real comment storm on the pilot pages over a fixed period - 20 or more, with times and details - so that we can honestly measure how many storms our alert system catches versus how often it cries wolf.",
    "layman_analogy": "Like handing the alarm engineer the complete logbook of every real break-in over six months - miss one and a genuine catch gets marked as a false alarm.",
-   "layman_needed": "One sheet listing every comment storm - at least 20 - inside a declared complete date range, each with page, start and end times and what happened, delivered to Faheem with Asad copied, confirmed received by 16 September."
+   "layman_needed": "One sheet listing every comment storm - at least 20 - inside a declared complete date range, each with page, start and end times and what happened, delivered to Faheem with Asad copied, confirmed received by 16 September.",
+   "layman_output": "One sheet in Faheem's hands listing every comment storm - at least twenty - inside a date range Lewis vouches for as complete, each with the page, start and end times, the post involved and what happened. Faheem will have confirmed receipt by 16 September with Asad copied. This becomes the answer sheet the storm detector is marked against, so gaps in it would mean false grades."
   },
   {
    "id": "N1-LW-03",
@@ -5400,7 +5544,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis also lists the busy-but-fine days (giveaways, TV moments) and marks which storms we absolutely must catch, so that the alert system is tuned to spot real trouble without panicking at ordinary excitement.",
    "layman_analogy": "Like telling the burglar-alarm fitter which loud nights were just parties, and which break-ins the alarm absolutely must never sleep through.",
-   "layman_needed": "The busy-but-harmless days for each page listed with timestamps, a must-catch subset of storms agreed with Asad, both folded into Faheem's tuning set, and the pass-line decision recorded with Lewis present by 18 September."
+   "layman_needed": "The busy-but-harmless days for each page listed with timestamps, a must-catch subset of storms agreed with Asad, both folded into Faheem's tuning set, and the pass-line decision recorded with Lewis present by 18 September.",
+   "layman_output": "An addendum alongside the incident sheet listing each page's busy-but-harmless days - launches, giveaways, TV moments - with timestamps, plus a must-catch subset of storms agreed with Asad. Both will be folded into Faheem's tuning set and the pass-line decision recorded with Lewis in the room by 18 September, so the detector is tested on telling real trouble from mere noise."
   },
   {
    "id": "N1-LW-04",
@@ -5436,7 +5581,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis recruits ten pilot page owners, each running three to five pages of different kinds, all confirmed in writing in one roster, so that we have real customers to prove the product on and honest feedback before launch.",
    "layman_analogy": "Like a chef recruiting ten regulars for a tasting menu before the restaurant opens - varied palates, confirmed bookings, honest opinions promised in writing.",
-   "layman_needed": "Ten named pilot page owners in one roster sheet by 18 September, each with page IDs, written confirmation of their admin role and tester consent, and the first five marked as the group that starts first."
+   "layman_needed": "Ten named pilot page owners in one roster sheet by 18 September, each with page IDs, written confirmation of their admin role and tester consent, and the first five marked as the group that starts first.",
+   "layman_output": "One roster sheet holding ten named pilot page owners by 18 September, each running three to five pages across a mix of page types, with page IDs, written confirmation of their admin role and their consent to test an unreleased app. The first five will be marked as the group that starts first, so anyone can open the sheet and see exactly who the pilots are and who goes first."
   },
   {
    "id": "N1-LW-05",
@@ -5469,7 +5615,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis collects each pilot's Facebook account details so they can be added as approved testers of our not-yet-public app, so that pilots can actually connect their pages before Facebook fully approves us.",
    "layman_analogy": "Like collecting guests' names for the door list of a private preview night - if you're not on the list, the bouncer won't let you in, however keen you are.",
-   "layman_needed": "All ten pilots' Facebook admin accounts listed for adding as approved testers of the unreleased app, with at least five invitations accepted by 18 September and acceptance tracked in the roster."
+   "layman_needed": "All ten pilots' Facebook admin accounts listed for adding as approved testers of the unreleased app, with at least five invitations accepted by 18 September and acceptance tracked in the roster.",
+   "layman_output": "A list of all ten pilots' Facebook admin accounts and page IDs handed to Saad and Asad for adding as approved testers of the unreleased app, with each invitation tracked in the roster and at least five accepted by 18 September. Anyone can open the roster and see who has accepted, and an accepted pilot can actually log into the test app the moment it exists."
   },
   {
    "id": "N1-LW-06",
@@ -5503,7 +5650,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis builds the application form new pilots fill in - their pages, size and consent - agreed with legal and tested end to end, so that people our marketing attracts have somewhere to sign up that actually works.",
    "layman_analogy": "Like printing the membership application forms and posting one through the letterbox yourself before the open day, to prove it actually arrives.",
-   "layman_needed": "An application form with agreed fields, Filza-approved consent wording and a decided home and routing, tested with one end-to-end submission, staged and ready for Asad to switch live on 24 September."
+   "layman_needed": "An application form with agreed fields, Filza-approved consent wording and a decided home and routing, tested with one end-to-end submission, staged and ready for Asad to switch live on 24 September.",
+   "layman_output": "A pilot application form - page links, admin role, page size, why they want in, availability, and a Filza-approved consent tick-box - built, tested with one end-to-end submission, and staged ready but not public. Its home and where submissions go will be agreed with Asad, so on 24 September switching it live is one small step rather than a scramble."
   },
   {
    "id": "N1-LW-07",
@@ -5534,7 +5682,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis starts a weekly 20-minute call with each pilot before the product even exists, capturing what they expect and what they'd pay for, so that we build what page owners actually want.",
    "layman_analogy": "Like a tailor measuring every client and noting their tastes before cutting any cloth, so the first fitting already resembles what they wanted.",
-   "layman_needed": "A weekly 20-minute call slot per pilot on the shared calendar, and the first round of calls run before the product exists, with each pilot's expectations and what they'd pay for logged in one feedback sheet by 18 September."
+   "layman_needed": "A weekly 20-minute call slot per pilot on the shared calendar, and the first round of calls run before the product exists, with each pilot's expectations and what they'd pay for logged in one feedback sheet by 18 September.",
+   "layman_output": "A weekly 20-minute call slot per pilot on the shared calendar with a set agenda, and the first round of calls already run before the product exists. Each pilot's expectations, confusions and what they would pay for will be logged in one feedback sheet ranked by severity by 18 September, so anyone can read what pilots actually want before a line of the app is judged against it."
   },
   {
    "id": "N1-FZ-01",
@@ -5565,7 +5714,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza closes the departed teammate's paperwork - signed confirmation his work belongs to the company, confidentiality still binding, all access removed - so that a leaver can't become a legal or security problem.",
    "layman_analogy": "Like completing a house sale properly when a flatmate moves out: deeds signed over, keys returned, and a written promise not to share what they saw.",
-   "layman_needed": "A signed agreement on file confirming the departed teammate's work belongs to the company and his confidentiality still binds, plus Jill's access review showing every credential of his revoked with a date."
+   "layman_needed": "A signed agreement on file confirming the departed teammate's work belongs to the company and his confidentiality still binds, plus Jill's access review showing every credential of his revoked with a date.",
+   "layman_output": "A signed agreement on file confirming everything the departed teammate produced belongs to the company and his confidentiality obligation continues, plus Jill's access review showing every credential of his revoked with a date. Anyone can open the legal folder and see both documents, closing the exit cleanly so no ownership question can surface later - say, in due diligence."
   },
   {
    "id": "N1-FZ-02",
@@ -5594,7 +5744,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza writes the exact wording of the opt-in screen for the page-matching feature - off by default, easy to decline, easy to undo - so that consent is genuine and the screens can be built with legally approved words.",
    "layman_analogy": "Like an organ-donation form where yes and no boxes are the same size, nothing is pre-ticked, and you can change your mind later - a real choice, plainly worded.",
-   "layman_needed": "Final, legally approved wording for the page-matching opt-in screen - off by default, decline as prominent as accept, revocable with a 24-hour purge - delivered into Saad's 12 September design pack unchanged."
+   "layman_needed": "Final, legally approved wording for the page-matching opt-in screen - off by default, decline as prominent as accept, revocable with a 24-hour purge - delivered into Saad's 12 September design pack unchanged.",
+   "layman_output": "The exact, legally approved wording for the page-matching opt-in screen, delivered into Saad's 12 September design pack unchanged: off by default, decline shown as prominently as accept, no pre-ticked box, revocable from Settings with a 24-hour purge. Anyone can compare the pack against Filza's text word for word and confirm the screens can't ship with unlawful consent copy."
   },
   {
    "id": "N1-FZ-03",
@@ -5624,7 +5775,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza signs the policy on stripping personal details out of the data behind the page-matching feature, and checks nobody could work out who a person is from it, so that no follower's identity ever leaves our systems.",
    "layman_analogy": "Like a hospital publishing ward statistics only after names, birthdays and bed numbers are removed - and checking no patient could be worked out from the totals.",
-   "layman_needed": "A signed policy naming which personal details are stripped or grouped before matching data is computed, plus a note assessing whether anyone could be re-identified, countersigned by Alex and acknowledged in writing by Muteeb and Faheem."
+   "layman_needed": "A signed policy naming which personal details are stripped or grouped before matching data is computed, plus a note assessing whether anyone could be re-identified, countersigned by Alex and acknowledged in writing by Muteeb and Faheem.",
+   "layman_output": "A signed policy in the legal folder naming exactly which personal details are stripped or grouped before any page-matching data is computed, plus a note assessing whether an opted-in page could be re-identified. Alex will have countersigned and Muteeb and Faheem acknowledged in writing, so anyone building matching inputs has one document that says what may never leave the warehouse."
   },
   {
    "id": "N1-FZ-04",
@@ -5657,7 +5809,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza writes the rule that the page-matching feature never shows a statistic drawn from fewer than five pages, and shows nothing at all below that, so that no individual page or person can be picked out of the numbers.",
    "layman_analogy": "Like the census rule that no statistic is published for a street with fewer than five households - below that, the table simply shows nothing.",
-   "layman_needed": "A signed rule that page-matching never shows a statistic drawn from fewer than five pages and shows nothing below that, with the exact fields hidden or grouped, handed to Muteeb as the standard his build is tested against."
+   "layman_needed": "A signed rule that page-matching never shows a statistic drawn from fewer than five pages and shows nothing below that, with the exact fields hidden or grouped, handed to Muteeb as the standard his build is tested against.",
+   "layman_output": "A signed written rule handed to Muteeb: page-matching never shows a statistic drawn from fewer than five pages, shows nothing at all below that floor, and logs the event - with the exact hidden and grouped fields listed and a rule preventing two queries being compared to expose one page. Muteeb's build will be tested against this document, so anyone can check the app against the rule."
   },
   {
    "id": "N1-FZ-05",
@@ -5689,7 +5842,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza writes the memo confirming none of our models guess sensitive things about individuals - health, politics, beliefs - checking each part of the system, so that we stay clearly on the right side of data law.",
    "layman_analogy": "Like a school confirming in writing that no teacher's mark scheme ever grades pupils on their religion or health - checked subject by subject.",
-   "layman_needed": "A signed memo with a table covering each data pipeline, stating why none guesses sensitive personal matters about individuals or what safeguard applies, with Faheem acknowledging the condition on the demographics probe."
+   "layman_needed": "A signed memo with a table covering each data pipeline, stating why none guesses sensitive personal matters about individuals or what safeguard applies, with Faheem acknowledging the condition on the demographics probe.",
+   "layman_output": "A signed memo in the legal folder with a table covering every data pipeline - matching, comment sentiment, the demographics probe, later audience work - stating why none of them guesses sensitive personal matters about individuals, or what safeguard applies where the risk exists. Faheem will have acknowledged the condition on the demographics probe, so the boundary is on paper before code."
   },
   {
    "id": "N1-FZ-06",
@@ -5722,7 +5876,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza and Saad put on paper that we ask Facebook only for read-only access - no posting, messaging or ads on anyone's behalf - so that our product promises, legal documents and Facebook application all tell the same story.",
    "layman_analogy": "Like a locksmith and the shop owner signing that the spare key opens the front door only - never the till or the safe - and filing that promise with the landlord.",
-   "layman_needed": "A signed one-page decision that the app asks Facebook only for read-only access - no posting, messaging or adverts - with the product and legal consequences recorded, filed in Saad's decision log and the Facebook application folder."
+   "layman_needed": "A signed one-page decision that the app asks Facebook only for read-only access - no posting, messaging or adverts - with the product and legal consequences recorded, filed in Saad's decision log and the Facebook application folder.",
+   "layman_output": "A signed one-page decision, filed in both the Facebook application folder and Saad's decision log, stating the app asks Facebook only for read-only access - no posting, messaging or adverts - with the product consequences (every Schedule button becomes Remind me, no auto-replies) and legal consequences written down. Anyone drafting screens or the Meta submission can check against one page."
   },
   {
    "id": "N1-FZ-07",
@@ -5758,7 +5913,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza drafts our terms of service, privacy policy and customer data agreement, naming exactly what Facebook data we hold and how someone gets it deleted, so that pilots can sign properly and Facebook's reviewers see us in order.",
    "layman_analogy": "Like a landlord drafting the tenancy agreement, house rules and inventory before move-in day, each naming exactly what's held and how a tenant gets it back.",
-   "layman_needed": "First full drafts of the terms of service, privacy policy and customer data agreement with Alex, each naming the exact Facebook data held, the deletion route, and quoting the one master legal-basis map, with open points listed."
+   "layman_needed": "First full drafts of the terms of service, privacy policy and customer data agreement with Alex, each naming the exact Facebook data held, the deletion route, and quoting the one master legal-basis map, with open points listed.",
+   "layman_output": "First full drafts of three documents on Alex's desk: the terms of service, the privacy policy and the customer data agreement. Each will name the exact Facebook data the company holds, the deletion route when a page disconnects, and quote the one master legal-basis map rather than inventing its own, with open questions listed. Alex can read all three and see what still needs deciding."
   },
   {
    "id": "N1-FZ-08",
@@ -5793,7 +5949,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza writes the master map of every way we use data and the legal ground for each, in the official record format, so that all our legal documents quote one consistent story instead of each inventing its own.",
    "layman_analogy": "Like drawing the master family tree once so every relative's story quotes the same ancestors instead of each inventing their own grandparents.",
-   "layman_needed": "A table mapping every use of data to its legal ground, plus the official processing record opened with one row per purpose - in place before the three legal documents are drafted, so all quote the same map."
+   "layman_needed": "A table mapping every use of data to its legal ground, plus the official processing record opened with one row per purpose - in place before the three legal documents are drafted, so all quote the same map.",
+   "layman_output": "A table in the legal folder mapping every use of data - analytics, flop scoring, storm detection, page matching, the assistant, marketing emails - to its legal ground and the company's role, plus the official processing record opened with one row per purpose. It will exist before the three legal documents are drafted, so all of them quote one map and can't contradict each other."
   },
   {
    "id": "N1-FZ-09",
@@ -5827,7 +5984,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza prepares the short privacy notice and cookie banner for the new website - no tracking before consent, declining as easy as accepting - so that the site collecting pilot sign-ups is legally proper from day one.",
    "layman_analogy": "Like putting the hygiene certificate and allergen notice up before the cafe's opening day - visible at the door, with no sneaky extras slipped onto the plate.",
-   "layman_needed": "A short privacy notice and cookie banner ready for the 19 September website - nothing non-essential loading before consent, declining as easy as accepting - plus a logged ruling on the sign-up names collected during the gap."
+   "layman_needed": "A short privacy notice and cookie banner ready for the 19 September website - nothing non-essential loading before consent, declining as easy as accepting - plus a logged ruling on the sign-up names collected during the gap.",
+   "layman_output": "A short published privacy notice and a cookie banner ready for the 19 September website: nothing non-essential loads before consent, and declining is as easy as accepting. A logged ruling will also cover the sign-up names collected during the gap since 1 September. Anyone can open the live landing, click decline, and verify no tracking fires - and see the privacy link in the footer."
   },
   {
    "id": "N1-FZ-10",
@@ -5859,7 +6017,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza specifies what must happen when a user asks Facebook to delete their data from us - wipe everything, everywhere, and confirm it - so that Muteeb can build it right first time; Facebook requires this before approving us.",
    "layman_analogy": "Like writing the exact fire-drill instructions - which doors, which registers, who confirms everyone's out - so the builder can fit the alarms right first time.",
-   "layman_needed": "A written specification for the Facebook data-deletion request handler: verify the request, wipe everything everywhere, confirm with a code, and share one deletion route with in-app disconnect - with Muteeb's open questions listed."
+   "layman_needed": "A written specification for the Facebook data-deletion request handler: verify the request, wipe everything everywhere, confirm with a code, and share one deletion route with in-app disconnect - with Muteeb's open questions listed.",
+   "layman_output": "A written specification in Muteeb's hands for the Facebook data-deletion request handler: verify the request really came from Facebook, find every trace of that user's pages - tokens, stored posts, predictions, assistant memory - wipe it all, and return a confirmation code and status page. Muteeb's open questions will be listed, so he can build it in N2 without guessing at the law."
   },
   {
    "id": "N1-FZ-11",
@@ -5887,7 +6046,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Filza checks our official company name and documents at Companies House and sends Alex the exact strings to enter, so that Facebook's business verification isn't rejected over a one-character mismatch.",
    "layman_analogy": "Like checking your name on the deed poll before booking flights, because airlines bounce tickets over a single mismatched letter.",
-   "layman_needed": "The exact registered company name, address, number and matching documents pulled from Companies House and sent to Alex, so his 11 September Facebook verification goes in character-for-character correct."
+   "layman_needed": "The exact registered company name, address, number and matching documents pulled from Companies House and sent to Alex, so his 11 September Facebook verification goes in character-for-character correct.",
+   "layman_output": "The company's exact registered name, address, number and matching Companies House documents pulled from the register and sent to Alex before his 11 September Facebook verification. Alex can then type the details in character-for-character correct, so the submission isn't bounced weeks later over a one-letter mismatch. Anyone can compare the sent strings against the public register."
   },
   {
    "id": "N2-AS-01",
@@ -5921,7 +6081,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad builds the app's skeleton - login, the sidebar, top bar and empty pages for each screen - running on the shared groundwork, so that every real screen that follows has a working frame to sit in.",
    "layman_analogy": "Like putting up a house's frame, front door and labelled empty rooms before any furniture arrives - every later room fits into a standing structure.",
-   "layman_needed": "A working login on the test system that lands on the app's skeleton: side rail, top bar and empty routed pages for every screen, showing only that customer's own pages."
+   "layman_needed": "A working login on the test system that lands on the app's skeleton: side rail, top bar and empty routed pages for every screen, showing only that customer's own pages.",
+   "layman_output": "A working login on the test system that lands on the app's first real skeleton: a side icon rail, a top bar with bell and health slots, a page switcher listing only that customer's own pages, and empty routed screens for Today, Drafts, Alerts, Best Times, Analytics and Settings. Anyone with a test account can log in on staging, click through every screen, and see only their own pages."
   },
   {
    "id": "N2-AS-02",
@@ -5959,7 +6120,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad and Faheem look at the real comment numbers and set, in writing, the bar the storm-alert system must clear before tuning starts, so that we don't spend weeks chasing a target the data can't support.",
    "layman_analogy": "Like agreeing the pass mark for a driving test from real road statistics before lessons start, rather than moving the goalposts after the student fails.",
-   "layman_needed": "A written numeric quality bar for the storm-alert system, set from the real comment measurements and Lewis's incident list, with its scope and must-catch clause recorded in the tracker before any tuning begins."
+   "layman_needed": "A written numeric quality bar for the storm-alert system, set from the real comment measurements and Lewis's incident list, with its scope and must-catch clause recorded in the tracker before any tuning begins.",
+   "layman_output": "A written numeric quality bar for the storm-alert system, recorded in the tracker before any tuning begins: the exact pass percentage, which pages it covers given how far comment volumes have fallen, and the must-catch clause from Lewis's list. Anyone can open the tracker and read the bar the detector will be judged against - set from real measurements, not picked after the results."
   },
   {
    "id": "N2-AS-03",
@@ -5993,7 +6155,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad builds the screen where a pilot connects their Facebook pages, sees whether each connection is healthy, and can disconnect - which also deletes their data - so that joining and leaving are both genuinely one click.",
    "layman_analogy": "Like a gym where joining is one signature, the membership card shows if it's still valid, and cancelling genuinely shreds your file rather than filing it away.",
-   "layman_needed": "A working screen where a tester connects Facebook pages, sees each connection's health, and disconnects one - with Muteeb confirming the disconnected page's data is actually gone."
+   "layman_needed": "A working screen where a tester connects Facebook pages, sees each connection's health, and disconnects one - with Muteeb confirming the disconnected page's data is actually gone.",
+   "layman_output": "A working screen on the test system where an approved tester logs in with Facebook, picks the pages to connect, and sees each connection's health - connected, expiring, revoked, needs re-linking. Disconnecting a page will trigger real data deletion, confirmed by Muteeb. Anyone can watch a tester connect two pages, unplug one, and hear Muteeb confirm its data is genuinely gone."
   },
   {
    "id": "N2-AS-04",
@@ -6029,7 +6192,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad builds the Today screen - the morning view with the next suggested move, a checklist and a feed of what needs attention - so that pilots have one place to open each day and a reason to come back.",
    "layman_analogy": "Like a good morning newspaper for each page owner: today's top story, a to-do list, and the items that need attention - fresh on the doorstep daily.",
-   "layman_needed": "A working Today screen showing a real suggested next move, a checklist and typed attention cards for a pilot page on the test system, matching the design pack state by state."
+   "layman_needed": "A working Today screen showing a real suggested next move, a checklist and typed attention cards for a pilot page on the test system, matching the design pack state by state.",
+   "layman_output": "The Today screen running on live data for a pilot page on the test system: a suggested next move with a confidence chip at the top, a checklist of moves beneath it, and typed attention cards - storm, opportunity, signal, prediction, win - with honest empty and catching-up states. Anyone can log in, pick a pilot page, and compare the screen state by state against Saad's design pack."
   },
   {
    "id": "N2-AS-05",
@@ -6061,7 +6225,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad finishes the everyday account plumbing - email confirmation, password reset, logout - and adds automatic checks that fake or expired logins are refused, so that one customer can never see another's data.",
    "layman_analogy": "Like testing a hotel's keycards by trying a forged card, an expired one and the card for the room next door - and proving the lock refuses all three.",
-   "layman_needed": "Email confirmation, password reset and logout all working, plus automatic tests proving fake, expired and wrong-customer logins are refused - running on every code change."
+   "layman_needed": "Email confirmation, password reset and logout all working, plus automatic tests proving fake, expired and wrong-customer logins are refused - running on every code change.",
+   "layman_output": "The full account lifecycle working on the test system: email confirmation, password reset, logout everywhere, and sessions that expire and refresh properly. Automatic tests will prove a fake login, an expired one, and one customer requesting another's data are all refused - and those tests run on every code change, so a regression is caught before it reaches anyone."
   },
   {
    "id": "N2-AS-06",
@@ -6098,7 +6263,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad builds the writing screen: as a pilot types a post, a gauge updates with how well it's likely to do and short chips explaining why, with the draft auto-saved, so that nobody loses work and the advice feels alive.",
    "layman_analogy": "Like a sat nav recalculating as you type the destination: a live reading of how the journey looks, brief reasons why, and your route saved if the app closes.",
-   "layman_needed": "A writing screen where typing a draft moves the score gauge and reason chips within about a second, with the draft auto-saved so closing and reopening restores it exactly."
+   "layman_needed": "A writing screen where typing a draft moves the score gauge and reason chips within about a second, with the draft auto-saved so closing and reopening restores it exactly.",
+   "layman_output": "A writing screen on the test system where a pilot types a draft post and, within about a second, sees the score gauge move and short reason chips appear underneath, drawn only from the agreed vocabulary. The draft auto-saves as they type, so closing the browser and reopening restores it exactly. Anyone can type a test draft, watch the gauge react, reload, and find their words intact."
   },
   {
    "id": "N2-AS-07",
@@ -6135,7 +6301,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad fills in our app's public-facing details on Facebook's dashboard and then walks through everything exactly as a reviewer would - every link, every login - so that nothing broken costs us a 20-day rejection cycle.",
    "layman_analogy": "Like walking your own restaurant as a food inspector would - trying every door, reading every notice, ordering off the menu - the week before the real inspection.",
-   "layman_needed": "Every public-facing field on the Facebook app dashboard filled in, and a full walkthrough from a clean browser proving every link opens, the login completes on the real domain, and the reviewer account reaches a populated test page."
+   "layman_needed": "Every public-facing field on the Facebook app dashboard filled in, and a full walkthrough from a clean browser proving every link opens, the login completes on the real domain, and the reviewer account reaches a populated test page.",
+   "layman_output": "Every public-facing field on the Facebook app dashboard filled in - name, icon, description, category, contact email, domains, and the data-deletion address - plus a recorded walkthrough from a clean browser proving every link opens, the login completes on the real domain, and the reviewer account reaches a populated test page. Anyone can rerun the walkthrough and hit no dead ends."
   },
   {
    "id": "N2-AS-08",
@@ -6167,7 +6334,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad makes the post-score gauge honest: when the model isn't confident it says 'no strong signal' instead of showing a number, so that pilots never see a confident prediction we can't actually back up.",
    "layman_analogy": "Like a weather forecaster saying 'too early to call' instead of inventing a confident percentage when the models disagree.",
-   "layman_needed": "A score gauge that shows honest bands when the model is confident and an explicit 'no strong signal' state - no dial, no chips - whenever it isn't, proven on both kinds of draft."
+   "layman_needed": "A score gauge that shows honest bands when the model is confident and an explicit 'no strong signal' state - no dial, no chips - whenever it isn't, proven on both kinds of draft.",
+   "layman_output": "A score gauge that is honest about uncertainty: confident drafts show a band, and when the model has no strong signal the screen says so plainly - no dial, no reason chips, no false precision. Both behaviours will be proven on the test system with a covered draft and a low-confidence one, so anyone can type each kind and watch the screen refuse to bluff."
   },
   {
    "id": "N2-AS-09",
@@ -6205,7 +6373,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad records a short screen video for each Facebook permission showing exactly what it's used for, including one of data deletion, then locks those screens from changing, so that our Facebook application matches the app exactly.",
    "layman_analogy": "Like filming the estate agent's video tour of the exact house being sold, then agreeing not to move a single wall before the buyer's visit.",
-   "layman_needed": "One screen recording per requested Facebook permission - made from a fresh reviewer account on the registered address - plus a clip proving disconnect deletes data, attached to the application with the consent screens locked against change."
+   "layman_needed": "One screen recording per requested Facebook permission - made from a fresh reviewer account on the registered address - plus a clip proving disconnect deletes data, attached to the application with the consent screens locked against change.",
+   "layman_output": "One screen recording per requested Facebook permission - each made from a fresh reviewer account on the app's registered address, showing login, the permission prompt, granting it, and the feature working - plus a clip proving disconnecting deletes data. All attached to the Facebook application with the consent screens frozen, so the reviewer sees exactly what a user would."
   },
   {
    "id": "N2-AS-10",
@@ -6237,7 +6406,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad releases an update and reverses it using only the written instructions, with Muteeb watching but not helping, so that if Muteeb is ever ill in launch week someone else can still ship a fix.",
    "layman_analogy": "Like the co-pilot landing the plane from the manual while the captain sits on his hands - proving the manual, not the man, can fly it.",
-   "layman_needed": "A timed record of Asad performing a release and a reversal using only the written runbook, with Muteeb watching but not helping, signed by Muteeb and every gap found in the runbook fixed."
+   "layman_needed": "A timed record of Asad performing a release and a reversal using only the written runbook, with Muteeb watching but not helping, signed by Muteeb and every gap found in the runbook fixed.",
+   "layman_output": "A timed, signed record of Asad performing a real production release and then reversing it using only the written runbook, with Muteeb present but hands-off. Every gap the exercise found in the runbook will be fixed. Anyone can read the receipt with both timings and Muteeb's signature, and trust that a second person can genuinely ship and un-ship the app without help."
   },
   {
    "id": "N2-AS-11",
@@ -6271,7 +6441,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad wires in the counters for the three moments that matter - someone signs up, connects a page, gets a post scored - so that launch-day success is measured with real numbers rather than guesses.",
    "layman_analogy": "Like fitting tills that ring up every sale as it happens, so opening week is judged on receipts rather than the shopkeeper's hunch.",
-   "layman_needed": "Three counters - someone signs up, connects a page, gets a post scored - firing from the test system into the measurement store with customer and page attached, plus a short document defining them."
+   "layman_needed": "Three counters - someone signs up, connects a page, gets a post scored - firing from the test system into the measurement store with customer and page attached, plus a short document defining them.",
+   "layman_output": "Three counters flowing from the test system into the measurement store: someone signs up, someone connects a page, someone gets a post scored - each carrying which customer and which page. A dashboard tile will show them arriving, and a short document will define each event. Anyone can perform one of the three actions on staging and watch their own event land in the store."
   },
   {
    "id": "N2-AS-12",
@@ -6305,7 +6476,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad sets up a demo account with safe made-up data and rehearses a five-minute walkthrough twice, so that our first public showing of the working product can't fail on stage or leak a real pilot's information.",
    "layman_analogy": "Like a dress rehearsal on a stage set built from props, run twice without a stumble, so opening night can't be sunk by a surprise or leak a real name.",
-   "layman_needed": "A demo account on the test system filled with safe made-up data, and a five-minute scripted walkthrough - login, connect, Today, post scored - rehearsed twice with Alex and Saad without a failure."
+   "layman_needed": "A demo account on the test system filled with safe made-up data, and a five-minute scripted walkthrough - login, connect, Today, post scored - rehearsed twice with Alex and Saad without a failure.",
+   "layman_output": "A demo account on the test system filled with safe made-up data - never real pilot pages - and a five-minute scripted walkthrough covering login, connecting a page, the Today screen and a scored draft, rehearsed twice with Alex and Saad without a failure. Anyone can log into the demo account and run the script themselves, so the working-app reveal in early October carries no surprises."
   },
   {
    "id": "N2-AS-13",
@@ -6338,7 +6510,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Asad puts Lewis's pilot application form live on the website on 24 September, with the legal consent line, and tests that a submission reaches Lewis, so that people our marketing attracts can actually apply.",
    "layman_analogy": "Like unlocking the shop's front door on opening morning and posting the first order slip through yourself to check it reaches the counter.",
-   "layman_needed": "Lewis's pilot application form visible on the live website on 24 September, carrying the legal consent line and tracking tags, with a test submission proven to land in Lewis's queue."
+   "layman_needed": "Lewis's pilot application form visible on the live website on 24 September, carrying the legal consent line and tracking tags, with a test submission proven to land in Lewis's queue.",
+   "layman_output": "Lewis's pilot application form live on the public website on 24 September, carrying Filza's consent line and the agreed tracking tags, with a test submission proven to land in Lewis's triage queue. Anyone can open the live landing page, see the form, submit a test entry, and watch it arrive where Lewis will actually read it - the first working intake route from the public site."
   },
   {
    "id": "N2-AS-14",
@@ -6371,7 +6544,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Before any code is written for the page-matching feature, Asad decides in writing how much real signal the data must show to proceed - and what we do instead if it doesn't - so that we don't build on evidence that isn't there.",
    "layman_analogy": "Like a surveyor setting in writing how firm the ground must test before foundations are poured - and which smaller house gets built if it fails the test.",
-   "layman_needed": "A signed decision, filed by 2 October and acknowledged by Faheem and Muteeb, naming the data window the matching feature uses, the minimum evidence needed to proceed, and the ordered fallback plan if the evidence isn't there."
+   "layman_needed": "A signed decision, filed by 2 October and acknowledged by Faheem and Muteeb, naming the data window the matching feature uses, the minimum evidence needed to proceed, and the ordered fallback plan if the evidence isn't there.",
+   "layman_output": "A signed decision, filed by 2 October and acknowledged by Faheem and Muteeb before any matching code starts: which window of data the page-matching feature uses, the minimum evidence needed to proceed given the comment collapse, and the ordered fallback plan if the evidence isn't there. Anyone can read one register entry and know whether the feature goes ahead, shrinks, or waits."
   },
   {
    "id": "N2-AS-15",
@@ -6411,7 +6585,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Asad builds one single checkpoint that every request to our data passes through, confirming who the customer is, plus an automatic test that one customer can never fetch another's pages, so that a data leak is designed out.",
    "layman_analogy": "Like one manned checkpoint every visitor must pass, checking their badge against their floor - and a guard who says 'no such room' rather than 'that room isn't yours'.",
-   "layman_needed": "A single checkpoint in the code that every data request passes through to confirm which customer is asking, plus an automatic test proving one customer requesting another's page gets a plain not-found."
+   "layman_needed": "A single checkpoint in the code that every data request passes through to confirm which customer is asking, plus an automatic test proving one customer requesting another's page gets a plain not-found.",
+   "layman_output": "One single checkpoint in the code that every data request passes through, confirming which customer is asking before any other code runs - with forged, missing and expired credentials refused. An automatic test will prove one customer requesting another's page gets a plain not-found, running on every code change, so cross-customer leaks are prevented in one place, not fifty."
   },
   {
    "id": "N2-AS-16",
@@ -6447,7 +6622,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Asad makes every failure - a slow database, an expired Facebook connection, an unfinished import - come back as a clear, consistent message the screens understand, so that pilots see honest explanations instead of raw error text.",
    "layman_analogy": "Like a call centre translating every backroom mishap into one calm, numbered apology script - never putting the warehouse's shouting straight through to the customer.",
-   "layman_needed": "Every failure - slow systems, expired connections, unfinished imports - returned as a consistent coded message with a trace number, no raw errors ever reaching the browser, and the code list published to Saad."
+   "layman_needed": "Every failure - slow systems, expired connections, unfinished imports - returned as a consistent coded message with a trace number, no raw errors ever reaching the browser, and the code list published to Saad.",
+   "layman_output": "Every failure the app can hit - a slow model, an expired Facebook connection, an unfinished import, a rate limit - returned to the browser as a consistent coded message with a trace number, never a raw error. The list of codes will be published to Saad so every screen can show the right words. Anyone can break something on staging and see a tidy coded response with an id to search the logs by."
   },
   {
    "id": "N2-AS-17",
@@ -6482,7 +6658,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Asad makes every button-press safe to repeat: if a shaky connection sends the same action twice, the system does it once, so that a double-tap on 'disconnect' or a retried alert never causes duplicate damage.",
    "layman_analogy": "Like a cash machine that, asked twice for the same withdrawal by a glitchy line, pays out once and shows the same receipt again.",
-   "layman_needed": "Every action button safe to repeat: a resent request returns the first result instead of acting twice, proven by a test for each write action, with background queues deduplicated the same way."
+   "layman_needed": "Every action button safe to repeat: a resent request returns the first result instead of acting twice, proven by a test for each write action, with background queues deduplicated the same way.",
+   "layman_output": "Every action button in the app made safe to press twice: a resent request - from a wobbly connection or an impatient double-click - returns the first result instead of acting again, so a page can't be disconnected twice or a draft saved as two copies. A test per write action will prove it, and anyone can replay a request on staging and watch nothing happen the second time."
   },
   {
    "id": "N2-AS-18",
@@ -6519,7 +6696,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Asad publishes a browsable reference of every way the screens talk to the data, with an owner and a change log per route, so that a new teammate can find things without asking Asad - who is our scarcest person.",
    "layman_analogy": "Like a building's maintenance cupboard with a labelled plan of every pipe, who owns it, and a logbook of changes - so the new caretaker never has to phone the old one.",
-   "layman_needed": "A browsable reference on the test system listing every route with its owner and version, a change log with one dated line per change, and the app importing a versioned generated client instead of hand-written calls."
+   "layman_needed": "A browsable reference on the test system listing every route with its owner and version, a change log with one dated line per change, and the app importing a versioned generated client instead of hand-written calls.",
+   "layman_output": "A browsable reference on the test system, behind login, listing every API route with its owner and version, alongside a change log with one dated line per change since 15 September. The app itself will import a versioned generated client instead of hand-written calls. Anyone can open the docs page, look up any route, and see who owns it and when it last changed."
   },
   {
    "id": "N2-FH-01",
@@ -6551,7 +6729,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The flop-warning model already beat its quality bar; Faheem files the proof and corrects the plan, which still names the wrong model version, so that later checks and rollbacks point at the thing we actually shipped.",
    "layman_analogy": "Like framing the exam certificate but correcting the register, which still names the wrong pupil as having sat it.",
-   "layman_needed": "The flop-model's passing evidence filed with its data fingerprint and settings, and every plan and tracker reference corrected to name the model actually shipped."
+   "layman_needed": "The flop-model's passing evidence filed with its data fingerprint and settings, and every plan and tracker reference corrected to name the model actually shipped.",
+   "layman_output": "The flop-warning model's passing evidence filed in the register - the scores, the data fingerprint and the settings that produced them - with every plan and tracker reference corrected to name the model actually shipped rather than the one that lost the comparison. Anyone can open the register, see the numbers behind the passed gate, and find no document contradicting another."
   },
   {
    "id": "N2-FH-02",
@@ -6585,7 +6764,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem hands Muteeb the finished flop-warning model in a sealed, versioned package with an exact example of input and output, so that Muteeb can plug it into the live product and verify it behaves identically.",
    "layman_analogy": "Like a baker handing over a sealed, batch-numbered recipe with one finished loaf as the reference, so the next kitchen can prove theirs comes out identical.",
-   "layman_needed": "The finished flop-warning model delivered to Muteeb as a versioned package with its input format, output fields and one exact example request and answer - with Muteeb's live version scoring that example identically to the original."
+   "layman_needed": "The finished flop-warning model delivered to Muteeb as a versioned package with its input format, output fields and one exact example request and answer - with Muteeb's live version scoring that example identically to the original.",
+   "layman_output": "The finished flop-warning model handed to Muteeb as a versioned package: the exact input format, the output fields, and one golden example request with its exact correct answer. Muteeb's live service will score that example identically to the original, and a 50-post spot check will match too - so anyone can send the golden request and verify the live answer to the digit."
   },
   {
    "id": "N2-FH-03",
@@ -6617,7 +6797,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem builds the 'why' behind each post score - short reason chips drawn only from an agreed list, with a rule to stay silent when no reason is strong - so that pilots get honest explanations, never invented ones.",
    "layman_analogy": "Like a wine critic allowed only words from an agreed tasting card, and required to say nothing at all when no flavour stands out.",
-   "layman_needed": "The scoring service returning short reason chips drawn only from Saad's agreed vocabulary, staying silent when no reason is strong and abstaining outside its confidence range, spot-checked with Saad on 30 drafts."
+   "layman_needed": "The scoring service returning short reason chips drawn only from Saad's agreed vocabulary, staying silent when no reason is strong and abstaining outside its confidence range, spot-checked with Saad on 30 drafts.",
+   "layman_output": "The scoring service returning short reason chips with every draft score, drawn only from the vocabulary agreed with Saad - staying silent when no reason is strong and abstaining entirely outside its confidence range. A 30-draft spot check with Saad will be on record, so anyone can score a draft and confirm every chip shown is a phrase from the pack, never something invented."
   },
   {
    "id": "N2-FH-04",
@@ -6647,7 +6828,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem builds the ladder for brand-new pages: use the page's own model when there's enough history, otherwise fall back to similar pages or a general one, or say nothing, so that a new pilot's first week never shows confident nonsense.",
    "layman_analogy": "Like a GP with no notes on a new patient: consult the family history, then general medicine, and if still unsure say so - never bluff a diagnosis.",
-   "layman_needed": "A fallback ladder for new pages - own model, then similar pages, then a general one, then silence - with the level in use stored per page, shown in the output, and proven on a genuinely new page."
+   "layman_needed": "A fallback ladder for new pages - own model, then similar pages, then a general one, then silence - with the level in use stored per page, shown in the output, and proven on a genuinely new page.",
+   "layman_output": "A fallback ladder for brand-new pages with no history: the page's own model where it exists, then a similar-pages model, then a general one, then honest silence - with the level in use stored per page and shown in the score output. It will be proven on a genuinely new page, so anyone can connect a fresh page, get a score, and see exactly which rung produced it."
   },
   {
    "id": "N2-FH-05",
@@ -6676,7 +6858,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The system currently misses about a quarter of nasty comments; Faheem digs into why and improves it before the storm detector relies on it, so that a storm of hostile comments can't slip past looking calm.",
    "layman_analogy": "Like recalibrating a smoke detector that sleeps through a quarter of real fires before wiring it into the building's main alarm.",
-   "layman_needed": "An investigation of the hostile comments the model misses, a fix applied, and a new miss rate measured above the current 0.74 on the reference set with the change logged."
+   "layman_needed": "An investigation of the hostile comments the model misses, a fix applied, and a new miss rate measured above the current 0.74 on the reference set with the change logged.",
+   "layman_output": "A written investigation of the hostile comments the current model misses, a fix applied, and the miss rate re-measured on the reference set with the change logged - the new figure recorded above the current 0.74. Anyone can open the log and see what was missed, what changed, and the before-and-after numbers, giving the storm detector a sounder foundation before it is built on top."
   },
   {
    "id": "N2-FH-06",
@@ -6710,7 +6893,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem rebuilds the comment-storm detector for today's quieter pages: it learns each page's normal rhythm hour by hour and flags unusual surges of hostile comments, so that the 15-minute warning promise has a real engine behind it.",
    "layman_analogy": "Like a nurse who learns each patient's normal pulse hour by hour, so a spike on a quiet ward is flagged even when the numbers are small.",
-   "layman_needed": "A rebuilt storm detector that learns each page's normal hourly rhythm and flags unusual hostile surges, emitting events in a schema agreed and published to Muteeb by 25 September, proven on replayed history."
+   "layman_needed": "A rebuilt storm detector that learns each page's normal hourly rhythm and flags unusual hostile surges, emitting events in a schema agreed and published to Muteeb by 25 September, proven on replayed history.",
+   "layman_output": "A rebuilt storm detector suited to today's quieter pages: it learns each page's normal hourly rhythm, flags unusual surges of hostile comments, and requires persistence and a toxicity check before firing. It will emit events in a schema agreed and published to Muteeb by 25 September, proven by replaying page history - so anyone can watch it fire on a replayed storm."
   },
   {
    "id": "N2-FH-07",
@@ -6744,7 +6928,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem replays the detector over Lewis's list of real past storms and counts what it caught and how often it cried wolf, tuning once, so that we know its true accuracy before a single pilot ever sees an alert.",
    "layman_analogy": "Like testing a new burglar alarm against last year's actual break-in log: how many would it have caught, and how many nights would it have woken the street for nothing.",
-   "layman_needed": "A written report of the detector replayed over Lewis's complete storm list - what it caught, what it missed, false alarms - with one round of tuning, measured against the signed quality bar or the shortfall recorded."
+   "layman_needed": "A written report of the detector replayed over Lewis's complete storm list - what it caught, what it missed, false alarms - with one round of tuning, measured against the signed quality bar or the shortfall recorded.",
+   "layman_output": "A written report of the detector replayed over Lewis's complete storm list: which storms it caught, which it missed, and how many false alarms it raised outside the list, after one round of tuning. The result will be recorded against the signed quality bar - or the shortfall written down honestly - so anyone can read one document and know whether the alert feature is good enough."
   },
   {
    "id": "N2-FH-08",
@@ -6776,7 +6961,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem writes down, honestly, what a missed storm means and how we measure the miss rate, reviewed by Asad, so that our public claims and the launch decision rest on stated facts rather than optimism.",
    "layman_analogy": "Like a lifeguard notice stating plainly how the beach is patrolled and what an unspotted swimmer means - not just boasting about rescues made.",
-   "layman_needed": "A signed section in the crisis document stating honestly how missed storms are measured, what a miss means for a pilot, and the coverage caveat, reviewed by Asad."
+   "layman_needed": "A signed section in the crisis document stating honestly how missed storms are measured, what a miss means for a pilot, and the coverage caveat, reviewed by Asad.",
+   "layman_output": "A signed section in the crisis document stating plainly how missed storms are measured, that the launch bar guards against false alarms rather than guaranteeing every catch, which pages the coverage extends to, and what a miss means for a pilot. Asad will have reviewed it, so anyone writing public or pilot-facing wording about storm alerts has an honest source to quote."
   },
   {
    "id": "N2-FH-09",
@@ -6808,7 +6994,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem packages the comment-reading model (mood and hostility) as a live service Muteeb's rapid alert path can call within its time budget, so that the 15-minute storm warning clocks real detection, not just fetching.",
    "layman_analogy": "Like promoting the sniffer dog from kennel trials to airport duty, timed to check bags within its slice of the security queue.",
-   "layman_needed": "The comment-reading model running as a live service that labels a comment within its share of the 15-minute alert budget on the test system, with Muteeb's timing note referencing it."
+   "layman_needed": "The comment-reading model running as a live service that labels a comment within its share of the 15-minute alert budget on the test system, with Muteeb's timing note referencing it.",
+   "layman_output": "The comment-reading model running as a live service on the test system: send it a comment, singly or in batches, and it returns sentiment and toxicity labels within its share of the 15-minute alert budget, reporting its version and how fresh it is. Muteeb's timing note will reference it, so anyone can time a call and confirm the storm-alert clock still adds up."
   },
   {
    "id": "N2-FH-10",
@@ -6837,7 +7024,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem checks how far behind our comment feed runs, adds a warning if it lags, and labels the 39,000 historical comments we hold, so that our best pre-collapse data is ready to test the storm detector against.",
    "layman_analogy": "Like checking how far behind the post van runs, fitting a late-delivery bell, and sorting the warehouse of 39,000 unopened letters into labelled files.",
-   "layman_needed": "A measurement of how far the comment feed lags with an alert if it falls behind, and all 39,000 historical comments labelled as a costed batch job with their origins recorded, ready for the 2 October test."
+   "layman_needed": "A measurement of how far the comment feed lags with an alert if it falls behind, and all 39,000 historical comments labelled as a costed batch job with their origins recorded, ready for the 2 October test.",
+   "layman_output": "A measurement of how far behind the comment feed runs, with an automatic alert if it falls too far, plus all 39,000 historical comments labelled as a costed batch job with their origins recorded. The labelled archive will be ready for the 2 October pilot-page check, so anyone can query the warehouse and find every old comment carrying a label and a note of where it came from."
   },
   {
    "id": "N2-FH-11",
@@ -6865,7 +7053,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Some of the code that powers our crisis-warning chain lives only on one machine. We're moving it into the shared code vault with notes, so if the person who wrote it is away, the team can still run and fix it.",
    "layman_analogy": "Like copying the family recipe out of grandad's head into the shared cookbook, so Sunday lunch survives his holiday.",
-   "layman_needed": "The comment-feed code moved from one person's machine into the shared repository with notes and a schedule, passing checks, and deployed from there with the runbook updated."
+   "layman_needed": "The comment-feed code moved from one person's machine into the shared repository with notes and a schedule, passing checks, and deployed from there with the runbook updated.",
+   "layman_output": "The comment-feed code moved off one person's machine into the shared repository, with a README, its schedule written down, the automated checks passing, and the running copy deployed from the repository with the runbook updated. If its author is unavailable, anyone on the team can find the code, read how it works, and redeploy it - which is impossible today."
   },
   {
    "id": "N2-FH-12",
@@ -6897,7 +7086,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We're planting a set of test posts with known correct scores, checked automatically every night, so if a software change quietly shifts the scores customers see, an alarm goes off before anyone notices wrong numbers.",
    "layman_analogy": "Like keeping a reference weight beside the shop scales and checking it every night, so a drifting scale is caught before a customer is short-changed.",
-   "layman_needed": "A fixed set of test posts with known correct scores checked automatically every night against the live system, raising an alarm if a software change quietly shifts the numbers."
+   "layman_needed": "A fixed set of test posts with known correct scores checked automatically every night against the live system, raising an alarm if a software change quietly shifts the numbers.",
+   "layman_output": "A fixed set of benchmark posts with known correct scores, checked automatically every night against the live scoring service and compared with the original results, raising an alarm if a software change quietly shifts the numbers. Anyone can look at the nightly comparison run, and if a deploy ever bends the scores, the team hears about it the next morning instead of from a pilot."
   },
   {
    "id": "N2-FH-13",
@@ -6926,7 +7116,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filling gaps in our stored page history and labelling 1,300 older posts, so the numbers pilot customers see on screen are complete and correct rather than showing odd dips where data is missing.",
    "layman_analogy": "Like filling the missing weeks in a ship's logbook and labelling the old cargo manifests, so the record shows no unexplained gaps when the inspector reads it.",
-   "layman_needed": "The six missing weeks of stored page history backfilled and verified first, 1,300 older posts labelled after their gate, and the demographics API question answered and logged - all three closed in the register."
+   "layman_needed": "The six missing weeks of stored page history backfilled and verified first, 1,300 older posts labelled after their gate, and the demographics API question answered and logged - all three closed in the register.",
+   "layman_output": "Three long-standing data gaps closed in the quality register: the six missing Mondays of stored page history backfilled and verified first so the 2 October check reads no gaps, 1,300 older posts labelled after their gate clears, and the demographics API question answered and logged. Anyone can open the register and see all three rows closed with dates and evidence."
   },
   {
    "id": "N2-FH-14",
@@ -6960,7 +7151,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Building the maths behind 'best time to post': for each page, which hours and days actually get engagement, with a sensible fallback when a page is too small to judge, so the posting-time calendar shows honest advice.",
    "layman_analogy": "Like a market trader tallying which hours the stall actually sells, day by day, and admitting the pattern is unclear when a stall is too new to judge.",
-   "layman_needed": "A per-page table of engagement by hour and day with a minimum-data floor, a recorded fallback level, explicit timezones and a written lookback window, tested on past data and handed to Muteeb."
+   "layman_needed": "A per-page table of engagement by hour and day with a minimum-data floor, a recorded fallback level, explicit timezones and a written lookback window, tested on past data and handed to Muteeb.",
+   "layman_output": "A per-page table of engagement by hour and day of the week - the raw material for best-time-to-post advice - with a minimum-data floor, a recorded fallback level, explicit page timezones, and the lookback window written down for Asad's screen note. Tested on past data and handed to Muteeb, so anyone can query a pilot page's table and see its strong and weak posting hours."
   },
   {
    "id": "N2-FH-15",
@@ -6990,7 +7182,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing down exactly how a page's overall health score is calculated - a blend of posting consistency, content strength and timing - so the health number customers see means the same thing everywhere.",
    "layman_analogy": "Like writing the exact marking scheme for a school report - how effort, attainment and attendance blend into one grade - so every teacher awards the same mark.",
-   "layman_needed": "A written specification of how the page health score blends posting consistency, content strength and timing - weights, normalisation, roll-ups and a new-page rule - reviewed by Muteeb and Saad."
+   "layman_needed": "A written specification of how the page health score blends posting consistency, content strength and timing - weights, normalisation, roll-ups and a new-page rule - reviewed by Muteeb and Saad.",
+   "layman_output": "A written specification of the page health score: how posting consistency, content strength and timing blend into one number, with explicit weights, how each factor is normalised, how pages roll up to a workspace view, and a 'building your baseline' rule for thin new pages. Muteeb and Saad will have reviewed it, so both can build to one agreed definition of healthy."
   },
   {
    "id": "N2-FH-16",
@@ -7021,7 +7214,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Deciding what health scores mean in plain words - roughly 0-49 'at risk', 50-79 'steady', 80+ 'strong' - so a customer seeing 72 knows whether that's good, not just a bare number.",
    "layman_analogy": "Like printing 'underweight / healthy / overweight' bands on a bathroom scale so the number 72 finally tells you something.",
-   "layman_needed": "A written spec section giving each score range a plain label and defining the weekly change, checked against real pilot pages, and adopted by Saad for his customer-facing copy."
+   "layman_needed": "A written spec section giving each score range a plain label and defining the weekly change, checked against real pilot pages, and adopted by Saad for his customer-facing copy.",
+   "layman_output": "A new section in the scoring spec where every score range carries a plain-English label — for example 0-49 'at risk', 50-79 'steady', 80+ 'strong' — plus a written definition of what the weekly change number means, checked against the real pilot pages' scores. It lives in the shared spec document, and Saad lifts the labels straight into his customer-facing copy, so a pilot seeing '72' finally knows what it means."
   },
   {
    "id": "N2-FH-17",
@@ -7052,7 +7246,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Setting the minimum amount of history a page needs before each feature shows a real number, and what shows instead below that line, so small pages never see made-up figures that would earn us bad reviews.",
    "layman_analogy": "Like a fairground height chart: below this line you don't ride yet - and the sign says so kindly, instead of pretending you rode.",
-   "layman_needed": "A note sent to Saad stating, for each screen, the minimum posts, comments and days before a real number shows and what appears below that line, with the small-page example walked through."
+   "layman_needed": "A note sent to Saad stating, for each screen, the minimum posts, comments and days before a real number shows and what appears below that line, with the small-page example walked through.",
+   "layman_output": "A short note in Saad's hands listing, screen by screen — score gauge, best times, page health, crisis — the minimum number of posts, comments and days a page needs before a real number appears, and exactly what shows below that line. It walks through the worked example of a small page with three months of history and 40 comments, so Saad's one-pager for thin pages quotes real floors rather than guesses."
   },
   {
    "id": "N2-FH-18",
@@ -7083,7 +7278,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Stripping personal details out of the data our page-suggestion feature learns from, per our legal lead's rules, so that work can start on time and stays on the right side of privacy law.",
    "layman_analogy": "Like blacking out names and addresses on survey forms before handing the stack to a researcher, so the analysis starts on time without exposing anyone.",
-   "layman_needed": "A cleaned data table with personal details removed to the legal lead's rules, handed to Muteeb before 5 Oct with every item on the policy checklist ticked."
+   "layman_needed": "A cleaned data table with personal details removed to the legal lead's rules, handed to Muteeb before 5 Oct with every item on the policy checklist ticked.",
+   "layman_output": "A cleaned data table, stripped of personal details to the legal lead's written rules (named fields removed, tiny groups filtered out), sitting ready for Muteeb before his 5 October start. The policy checklist is ticked item by item and filed alongside it, so anyone can confirm the grouping work will begin on data that is legally safe to use, with a paper trail showing why."
   },
   {
    "id": "N2-FH-19",
@@ -7117,7 +7313,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Measuring whether we currently collect enough comment activity for the collaboration-suggestions feature to give useful results, so we know now - not in October - whether it needs a fallback plan.",
    "layman_analogy": "Like counting how many fish are actually in the lake before promising the village a fishing festival in October.",
-   "layman_needed": "A written definition of how pages are grouped by shared commenters, plus a measured table over three time windows showing whether enough overlap exists, delivered to Asad and Muteeb by 25 Sep."
+   "layman_needed": "A written definition of how pages are grouped by shared commenters, plus a measured table over three time windows showing whether enough overlap exists, delivered to Asad and Muteeb by 25 Sep.",
+   "layman_output": "A written definition of how pages are grouped by shared commenters — what counts as a link, over what period, how bots and repeats are handled — plus a measured warehouse table showing, at three time windows, commenters per pilot page, the overlap between pages, and how many pairings would survive the statistical filter. Delivered to Asad and Muteeb by 25 September so nobody is surprised in October."
   },
   {
    "id": "N2-FH-20",
@@ -7156,7 +7353,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Making every prediction feature answer in the same standard format - including saying honestly 'not enough data' when a page is too small - so the app's screens always show truthful, consistent results.",
    "layman_analogy": "Like making every shop till print receipts in the same layout - including an honest 'out of stock' slip - so head office can read them all the same way.",
-   "layman_needed": "Every prediction endpoint answering in the agreed standard shape - version, coverage, an honest 'not enough data' with a reason, named driver fields and cost figures - with automated checks passing for all of them."
+   "layman_needed": "Every prediction endpoint answering in the agreed standard shape - version, coverage, an honest 'not enough data' with a reason, named driver fields and cost figures - with automated checks passing for all of them.",
+   "layman_output": "Every prediction service Muteeb runs — draft scoring, comment labelling, best times, page health — will answer in one agreed shape: which model version answered, whether the page has enough data, an honest 'not enough data' message with a reason when it does not, reason fields named exactly as the contract says, and a cost figure. Automated checks prove all of it, so no screen ever has to invent a number."
   },
   {
    "id": "N2-MT-01",
@@ -7188,7 +7386,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Making the post-score feature fast and dependable: answers come back in under a second, so the score dial moves as the customer types rather than making the big wow moment feel like a wait.",
    "layman_analogy": "Like tuning a shop's card machine so payment goes through in a second every time, instead of leaving the customer standing at the counter.",
-   "layman_needed": "A hardened scoring service where repeat requests are cached, staging tests show warm answers in under a second at the 95th percentile, and the checks run automatically in the build pipeline."
+   "layman_needed": "A hardened scoring service where repeat requests are cached, staging tests show warm answers in under a second at the 95th percentile, and the checks run automatically in the build pipeline.",
+   "layman_output": "A hardened live scoring service behind the draft gauge: repeat requests for the same draft come back from a cache, and a staging test run proves warm answers arrive in under a second 95% of the time. The checks run automatically on every code change, so a pilot typing a draft sees the dial move as they type rather than watching a spinner — verifiable by anyone opening the staging test results."
   },
   {
    "id": "N2-MT-02",
@@ -7221,7 +7420,8 @@ window.LAUNCH_DATA = {
    "table_priority_cell": "P0",
    "layman": "When we score a draft post, the answer now also explains why - the main reasons, how confident we are, and an honest 'can't say' when the signal is weak - so the app never invents an explanation.",
    "layman_analogy": "Like a teacher returning an essay with the mark, the reasons in the margin, and an honest 'not enough here to grade' when the page is nearly blank.",
-   "layman_needed": "Every score response carrying its top reasons in Saad's agreed wording, a confidence and coverage flag, and a tested 'can't say' state for weak drafts."
+   "layman_needed": "Every score response carrying its top reasons in Saad's agreed wording, a confidence and coverage flag, and a tested 'can't say' state for weak drafts.",
+   "layman_output": "Every score answer will carry its top reasons in Saad's agreed chip wording, a flag saying how confident and complete it is, and a tested 'can't say yet' state for drafts too thin to judge. Automated tests check each field, so the chips under the gauge always show real reasons from the model, never wording invented by the screen — anyone can type a weak draft and watch the honest abstain appear."
   },
   {
    "id": "N2-MT-03",
@@ -7254,7 +7454,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Building the data feed behind the Today screen - the suggested next move, the to-do list and the alert cards - kept strictly separate per customer, so the daily demo runs on real data instead of pretend data.",
    "layman_analogy": "Like installing the kitchen pass-through so the front-of-house menu board shows today's real dishes, not laminated samples.",
-   "layman_needed": "Working data feeds behind the Today screen - next move, checklist, alert cards and setup state - filterable by page and strictly separated per customer, returning real pilot data that matches the contract."
+   "layman_needed": "Working data feeds behind the Today screen - next move, checklist, alert cards and setup state - filterable by page and strictly separated per customer, returning real pilot data that matches the contract.",
+   "layman_output": "The working data feeds behind the Today screen: the suggested next move, the daily checklist, the alert and insight cards, and the setup-progress pill, each filterable to a single Facebook page and strictly walled per customer. A teammate can open the Today screen for a connected pilot page and see real numbers from that page flowing through — the daily-loop demo runs on live data instead of pretend samples."
   },
   {
    "id": "N2-MT-04",
@@ -7290,7 +7491,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Building the delivery system for alerts (in-app and email) with a retry queue that never loses a message, so a comment-storm warning can't silently vanish on its way to the customer.",
    "layman_analogy": "Like a courier depot with a shelf for failed deliveries and a re-send round, so no parcel is ever quietly binned.",
-   "layman_needed": "A delivery pipeline where a bad message lands in a holding queue and can be re-sent, a duplicate never causes a second email, and unread counts stay correct throughout."
+   "layman_needed": "A delivery pipeline where a bad message lands in a holding queue and can be re-sent, a duplicate never causes a second email, and unread counts stay correct throughout.",
+   "layman_output": "A reliable alert pipeline: when a storm is detected, the in-app card and email both travel through a queue where a broken message lands in a holding pen and can be re-sent, and a duplicate never causes a second email. Unread counts for the topbar bells stay correct, and a routing hook respects quiet hours. A teammate can poison a test message, watch it caught and re-sent, and see counts stay right."
   },
   {
    "id": "N2-MT-05",
@@ -7323,7 +7525,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Laying the groundwork for the Art-E assistant: a private, per-customer library of their page's content that it will read from when answering questions. No answers yet - this is the plumbing, started early because it takes months to mature.",
    "layman_analogy": "Like building each customer their own locked filing cabinet and stocking it now, months before the librarian who will read from it starts work.",
-   "layman_needed": "A per-customer content library with ingestion costs logged and versioned so re-loads can be rolled back, proven by a test showing one customer's search can never return another's material."
+   "layman_needed": "A per-customer content library with ingestion costs logged and versioned so re-loads can be rolled back, proven by a test showing one customer's search can never return another's material.",
+   "layman_output": "A per-customer content library for the Art-E assistant: each customer's material is loaded into its own sealed compartment, every load logs what it cost, and each load is versioned so a bad one can be rolled back. A test on record proves a search in one customer's compartment can never surface another customer's material — the foundation Art-E's question-answering builds on next sprint."
   },
   {
    "id": "N2-MT-06",
@@ -7355,7 +7558,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Building the switch Facebook presses when a user asks us to delete their data: we wipe it, confirm it, and log it. Facebook requires this before they'll approve our app, so missing it would cost us a 20-day delay.",
    "layman_analogy": "Like fitting the shredder button the landlord insists on before granting the lease - press it and the tenant's files are gone, with a receipt.",
-   "layman_needed": "A live public endpoint that verifies Facebook's signed deletion request, wipes the user's data, returns a confirmation code and status link, and logs it - proven with Meta's own test tooling."
+   "layman_needed": "A live public endpoint that verifies Facebook's signed deletion request, wipes the user's data, returns a confirmation code and status link, and logs it - proven with Meta's own test tooling.",
+   "layman_output": "A live public web address that Facebook can call when a user asks for their data to be deleted: it checks the request is genuinely signed by Facebook, wipes the user's data and revokes their tokens, hands back a confirmation code and a status link that resolves, and logs the whole event. Proven with Meta's own test tooling, and registered in the app dashboard — a requirement for the 2 October review submission."
   },
   {
    "id": "N2-MT-07",
@@ -7388,7 +7592,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Checking comments on recently active posts every five minutes or so instead of hourly, so a comment storm is spotted quickly enough to keep our 15-minute warning promise.",
    "layman_analogy": "Like a nurse checking the ward every five minutes instead of once an hour, without ever exceeding the visiting-time allowance.",
-   "layman_needed": "A polling loop that fetches comments on recently active posts roughly every five minutes within the allowed call budget, with a test comment appearing in the pipeline inside five minutes and usage logged."
+   "layman_needed": "A polling loop that fetches comments on recently active posts roughly every five minutes within the allowed call budget, with a test comment appearing in the pipeline inside five minutes and usage logged.",
+   "layman_output": "A running background loop that checks recently active posts for new comments roughly every five minutes, staying inside Facebook's call allowance per customer, and feeds each comment into the assessment pipeline. A teammate can post a comment on the test page and watch it appear in the pipeline within five minutes, with the call-budget usage logged — the plumbing that makes the 15-minute storm promise possible."
   },
   {
    "id": "N2-MT-08",
@@ -7419,7 +7624,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Showing the nightly score-check results on the team's monitoring screens, so anyone can see at a glance whether the scores customers get still match what the models actually produce.",
    "layman_analogy": "Like pinning the nightly stocktake sheet on the staff-room wall so anyone can see the shelves still match the ledger.",
-   "layman_needed": "A dashboard panel showing the nightly benchmark results Faheem produces, live enough that Faheem closes his finding against it."
+   "layman_needed": "A dashboard panel showing the nightly benchmark results Faheem produces, live enough that Faheem closes his finding against it.",
+   "layman_output": "A live panel in the serving dashboards showing the nightly benchmark rows Faheem produces — the comparison numbers the app measures pages against. A teammate can open the dashboard and see fresh benchmark results displayed, live enough that Faheem closes his open finding against it, and the app is no longer comparing customer pages against an empty shelf."
   },
   {
    "id": "N2-MT-10",
@@ -7451,7 +7657,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Switching on automatic backups of all customer data, then doing a timed practice run of restoring everything from scratch, so we know for certain we could recover within two hours if disaster struck.",
    "layman_analogy": "Like a fire drill for the filing room: photocopy everything nightly, then actually rebuild the office from the copies against a stopwatch.",
-   "layman_needed": "Backups switched on for the database, token store and file storage, plus a signed note from a timed practice restore showing recovery completed inside two hours."
+   "layman_needed": "Backups switched on for the database, token store and file storage, plus a signed note from a timed practice restore showing recovery completed inside two hours.",
+   "layman_output": "Backups switched on for the database, the token store and the file storage — snapshots, point-in-time recovery and version history — plus a signed note from a timed practice restore into a scratch environment, showing recovery finished inside the two-hour target. Anyone preparing the go/no-go can read the drill note and see the stopwatch time, so the backup is a tested fact rather than a hope."
   },
   {
    "id": "N2-MT-11",
@@ -7484,7 +7691,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Wiring comment analysis (mood and nastiness checks) into the fast alert path and timing the whole chain, so we can prove a storm gets spotted, judged and flagged within the 15-minute promise.",
    "layman_analogy": "Like timing the whole 999 chain - call, assessment, dispatch - to prove the ambulance really arrives inside the promised window.",
-   "layman_needed": "A live path where a fresh comment is fetched and assessed for mood and nastiness within the 15-minute budget on staging, with the measured timings written up and sent to Faheem."
+   "layman_needed": "A live path where a fresh comment is fetched and assessed for mood and nastiness within the 15-minute budget on staging, with the measured timings written up and sent to Faheem.",
+   "layman_output": "A live fast lane on staging where a freshly posted comment is fetched and assessed for mood and nastiness within the 15-minute budget, with the slower backlog processed separately. The measured end-to-end timings are written up and sent to Faheem, showing exactly where the labelling step sits in the chain — so the crisis drill in the next sprint measures a chain everyone has already seen work."
   },
   {
    "id": "N2-MT-12",
@@ -7517,7 +7725,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A practice session where a second teammate releases an update and undoes it using only the written instructions, watched but unaided, so the product can still ship fixes in launch week if our lead engineer is ill.",
    "layman_analogy": "Like the co-pilot landing the plane from the manual while the captain sits on his hands, so illness never grounds the airline.",
-   "layman_needed": "A signed receipt showing Asad completed one timed deploy and one rollback using only the runbook, unaided, with every gap the exercise exposed fixed in the runbook."
+   "layman_needed": "A signed receipt showing Asad completed one timed deploy and one rollback using only the runbook, unaided, with every gap the exercise exposed fixed in the runbook.",
+   "layman_output": "A signed receipt showing Asad performed one timed deploy and one rollback entirely from the written runbook, with Muteeb watching but not touching, on whichever environment exists by 2 October. Every gap the exercise exposed is fixed back into the runbook. The receipt lives in the tracker, so anyone can confirm the product can still ship a fix even if Muteeb is unreachable in launch week."
   },
   {
    "id": "N2-MT-13",
@@ -7551,7 +7760,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The big checkpoint demo on 2 October: score a real draft on a real pilot customer's page live, then disconnect that page and prove all its data is genuinely gone - showing both the daily value and the privacy promise work.",
    "layman_analogy": "Like a driving test taken on real roads: perform the manoeuvre live, then prove you can undo it cleanly, with the examiner watching.",
-   "layman_needed": "Both gate demos performed live on 2 Oct and recorded as passed: a real draft scored on a pilot page, then that page disconnected with proof its data is genuinely gone."
+   "layman_needed": "Both gate demos performed live on 2 Oct and recorded as passed: a real draft scored on a pilot page, then that page disconnected with proof its data is genuinely gone.",
+   "layman_output": "Both halves of the 2 October gate demo performed live and recorded as passed: a real draft scored on a connected pilot's page through the production-grade service, then that page disconnected with proof its data is genuinely gone via the deletion cascade. The recording and the pass record sit with the gate notes, so the daily loop and the deletion promise are demonstrated facts on submission day, not claims."
   },
   {
    "id": "N2-MT-14",
@@ -7587,7 +7797,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "external Meta clock: submission Fri 25 Sep with one safe rejection cycle",
    "layman": "Getting our Facebook developer account fully set up for review: working policy links, correct sign-in addresses, and a test account with a realistic page so Facebook's reviewer can actually try the product without hitting a wall.",
    "layman_analogy": "Like staging a show flat before the inspector visits: keys that work, signs that point somewhere, and a furnished room to walk through.",
-   "layman_needed": "A reviewer-ready Facebook dashboard - callback and policy links that resolve, matching sign-in addresses, and a test account with a populated page - handed to Saad and passing his 30 Sep package check."
+   "layman_needed": "A reviewer-ready Facebook dashboard - callback and policy links that resolve, matching sign-in addresses, and a test account with a populated page - handed to Saad and passing his 30 Sep package check.",
+   "layman_output": "A reviewer-ready Facebook app dashboard: the deletion callback registered, the privacy, terms and deletion-instruction links all resolving, sign-in addresses matching between the dashboard and the running app, and a working reviewer account with a populated test page on which every requested permission can be exercised on camera. The account, passwords and link list are in Saad's hands and pass his 30 September package check."
   },
   {
    "id": "N2-MT-15",
@@ -7621,7 +7832,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Handling the case where someone removes our app from inside their Facebook settings: we're told, we cut our access and mark their pages disconnected, so we never keep data for someone who has revoked us.",
    "layman_analogy": "Like the gym noticing you cancelled your direct debit at the bank and closing your membership themselves, rather than keeping your locker forever.",
-   "layman_needed": "A second callback that, on a signed test request, revokes the stored tokens, marks the pages disconnected and logs the event, with its address registered in the Facebook dashboard."
+   "layman_needed": "A second callback that, on a signed test request, revokes the stored tokens, marks the pages disconnected and logs the event, with its address registered in the Facebook dashboard.",
+   "layman_output": "A second Facebook callback: when a user removes the app from their own Facebook settings, the request is verified, their stored tokens are revoked, their pages are marked disconnected and the event is logged — matching what the privacy policy promises. Its address is registered in the app dashboard, and a signed test request proves the whole chain, so we never hold live access for someone who revoked us."
   },
   {
    "id": "N2-MT-16",
@@ -7658,7 +7870,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Automatic checks on every code change that make sure the screens and the data behind them still agree; if they drift apart the change is blocked, so three engineers can share one system without silently breaking each other.",
    "layman_analogy": "Like a lock and key cut from the same template on every order - if either side is filed differently, the factory line stops before it ships.",
-   "layman_needed": "Automated checks on every code change that fail the build when screens and data drift apart - proven by deliberately breaking each direction and watching the build go red."
+   "layman_needed": "Automated checks on every code change that fail the build when screens and data drift apart - proven by deliberately breaking each direction and watching the build go red.",
+   "layman_output": "Automated checks on every code change that fail the build the moment screens and data services drift apart — a route added without a spec entry goes red, and a spec change with no matching code goes red too, with the failure naming the route and field. Anyone can watch both deliberate breaks turn the build red, proving three backend owners cannot silently diverge."
   },
   {
    "id": "N2-MT-17",
@@ -7695,7 +7908,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Putting fair-usage limits on every part of the service, so one customer's runaway browser tab can't hog the capacity everyone shares - and when a limit is hit they see a polite 'please wait' rather than an error.",
    "layman_analogy": "Like a buffet with portion limits and a polite 'back in five minutes' sign, so one hungry guest can't empty the trays for everyone.",
-   "layman_needed": "Per-customer usage limits on every route, returning a polite wait-and-retry response with the standard headers when hit, and every limit event logged with customer and route."
+   "layman_needed": "Per-customer usage limits on every route, returning a polite wait-and-retry response with the standard headers when hit, and every limit event logged with customer and route.",
+   "layman_output": "Per-customer usage limits on every route, tighter on expensive ones like draft scoring and Art-E. A customer at their limit gets a polite 'please wait' response with standard retry headers instead of a crash, and every limit event is logged with customer and route. A teammate can hammer a test route, see the friendly wait, and find the event in the log — no one pilot can drain the budget for everybody."
   },
   {
    "id": "N2-SD-01",
@@ -7731,7 +7945,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing the pass mark for the crisis-warning feature into our official checklist - how accurate it must be and how fast, from comment posted to email received - so we can honestly judge in October whether it's good enough.",
    "layman_analogy": "Like writing the pass mark on the exam paper before anyone sits it, so October's marking can't be argued about.",
-   "layman_needed": "An entry in the gate register, dated before the first tuning run, stating the crisis feature's required accuracy, which pages it covers, how many real incidents it must catch, and the exact stopwatch definition."
+   "layman_needed": "An entry in the gate register, dated before the first tuning run, stating the crisis feature's required accuracy, which pages it covers, how many real incidents it must catch, and the exact stopwatch definition.",
+   "layman_output": "A dated entry in the gate register, filed before Faheem's first tuning run, stating what the crisis feature must achieve to pass on 16 October: the required accuracy figure, which pages it covers, how many of Lewis's real incidents it must catch, and the stopwatch definition from comment posted to email received. Anyone judging the gate can check the detector against a line set in advance."
   },
   {
    "id": "N2-SD-02",
@@ -7763,7 +7978,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing a clear pass/fail checklist for the Today screen and the draft-scoring screen before they're built, so the developer can check his own work and quality isn't negotiated down against a deadline.",
    "layman_analogy": "Like agreeing the snagging list with the builder before the first brick, so 'finished' can't be renegotiated when the deadline looms.",
-   "layman_needed": "Two published one-pagers - Today and Drafts - each listing every screen state with a pass or fail condition Asad can check himself, referenced from his build tickets."
+   "layman_needed": "Two published one-pagers - Today and Drafts - each listing every screen state with a pass or fail condition Asad can check himself, referenced from his build tickets.",
+   "layman_output": "Two published one-pagers — one for the Today screen, one for Drafts — listing every screen state (hero, checklist, cards, gauge bands, abstain, empty, lagging) with a plain pass-or-fail condition Asad can check on his own. They are linked from Asad's build tickets before he starts on 21 September, so 'done' is defined up front and cannot be renegotiated when the deadline arrives."
   },
   {
    "id": "N2-SD-03",
@@ -7800,7 +8016,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Deciding what happens when a crisis alert fires at 2am: wake the customer, or hold it until morning? One meeting to settle quiet hours and overrides, so 'caught in minutes' is a real product promise rather than marketing copy.",
    "layman_analogy": "Like a family agreeing before the holiday which phone calls justify waking Dad at 2am and which wait for breakfast.",
-   "layman_needed": "A written notification policy signed by Alex - quiet hours, severity overrides, digest versus immediate, time zones - referenced by the Alerts and Settings acceptance checklists."
+   "layman_needed": "A written notification policy signed by Alex - quiet hours, severity overrides, digest versus immediate, time zones - referenced by the Alerts and Settings acceptance checklists.",
+   "layman_output": "A written notification policy signed by Alex answering the 2am question: what happens when a storm fires during quiet hours, when severity overrides silence, what arrives immediately versus in the morning digest, which timezone applies and what the user can configure. It is referenced by the Alerts and Settings acceptance checklists, feeding Muteeb's pipeline and Asad's next-sprint build."
   },
   {
    "id": "N2-SD-04",
@@ -7835,7 +8052,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Putting together everything Facebook needs to approve our app: a plain description, proof of what each permission is for, a test account and demo videos. This is the one approval gate we don't control, so it must be watertight.",
    "layman_analogy": "Like assembling a visa application: every form, photo and supporting letter in one folder, because the embassy rejects for a single missing page.",
-   "layman_needed": "A complete review folder - plain product description, each permission mapped to a demonstrable feature, tested reviewer login, populated test page, screencasts and resolving policy links - ready for sign-off on 30 Sep."
+   "layman_needed": "A complete review folder - plain product description, each permission mapped to a demonstrable feature, tested reviewer login, populated test page, screencasts and resolving policy links - ready for sign-off on 30 Sep.",
+   "layman_output": "A complete Facebook review folder ready for sign-off on 30 September: a plain 'page analytics tool' description, every requested permission mapped to a built feature a reviewer can see, tested reviewer login details, a populated test page, one screencast per permission, and confirmation the deletion callback and policy links all resolve. Anyone can open the folder and walk the reviewer's path end to end before Meta does."
   },
   {
    "id": "N2-SD-05",
@@ -7867,7 +8085,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing our replies to the three most likely Facebook rejection reasons before we even submit, plus a daily status-checking routine, so if a rejection lands we answer within a day instead of losing precious calendar time.",
    "layman_analogy": "Like a barrister drafting closing arguments for the three most likely objections before the trial even starts.",
-   "layman_needed": "Three pre-written replies to the likeliest Facebook rejection reasons, a written daily status-check routine with a 24-hour response promise, and a backup person re-briefed - all filed before submission."
+   "layman_needed": "Three pre-written replies to the likeliest Facebook rejection reasons, a written daily status-check routine with a 24-hour response promise, and a backup person re-briefed - all filed before submission.",
+   "layman_output": "A rejection-response kit filed in the Meta folder before submission: three pre-written replies to the likeliest Facebook rejection reasons, a written daily routine for watching the review status with a 24-hour response promise, a weekly check that the reviewer login still works, and a named backup person re-briefed on the final package. If a rejection lands, the reply goes out the same day instead of being drafted in a panic."
   },
   {
    "id": "N2-SD-06",
@@ -7900,7 +8119,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing the plan for a new customer's first minutes - connect their page, see something useful fast - and picking the one moment that counts as 'they got it', so the whole team measures success the same way.",
    "layman_analogy": "Like scripting a guest's first five minutes at a hotel - greeted, keys in hand, shown something lovely - and agreeing what moment counts as 'they'll come back'.",
-   "layman_needed": "A published first-run spec naming the single moment that counts as a customer 'getting it', with Asad, Muteeb and Faheem confirming their coming work points at that same moment."
+   "layman_needed": "A published first-run spec naming the single moment that counts as a customer 'getting it', with Asad, Muteeb and Faheem confirming their coming work points at that same moment.",
+   "layman_output": "A published first-run specification describing a new customer's opening minutes — connect a page, see 'learning' rather than 'loading', reach first real value fast with the most recent 90 days processed first — and naming the single moment that counts as a customer 'getting it'. Asad, Muteeb and Faheem each confirm in writing that their coming work points at that same moment, so the day-one funnel measures one agreed thing."
   },
   {
    "id": "N2-SD-07",
@@ -7937,7 +8157,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Getting the final approvals and actually pressing submit on our Facebook application on Friday 2 October - the last date that still leaves room for one rejection-and-resubmit round before launch.",
    "layman_analogy": "Like posting the exam entry before the final deadline - the last date that still leaves time for one resit before results day.",
-   "layman_needed": "The Facebook review submission confirmed in the dashboard on 2 Oct, with the joint written sign-off from legal and the CEO filed and the daily status watch started."
+   "layman_needed": "The Facebook review submission confirmed in the dashboard on 2 Oct, with the joint written sign-off from legal and the CEO filed and the daily status watch started.",
+   "layman_output": "The Facebook App Review submission confirmed in the Meta dashboard on 2 October, after the legal wording review and Alex's line-by-line approval, with the joint written sign-off filed and the submission time logged. The daily status watch starts the same day. Anyone can open the dashboard and see the submission sitting in review, with the paper trail showing every word was checked before it went in."
   },
   {
    "id": "N2-SD-08",
@@ -7970,7 +8191,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing down exactly what a small page with little history should see on day one - honest 'still building your baseline' messages instead of shaky numbers - because the worst reviews come from customers shown figures they shouldn't be.",
    "layman_analogy": "Like a seedling label that says 'growing - flowers in spring' instead of gluing on a plastic bloom.",
-   "layman_needed": "A published one-pager showing exactly what a small, young page sees on each screen on day one - honest 'still building' messages, not fabricated numbers - with a floor Lewis can use when recruiting pilots."
+   "layman_needed": "A published one-pager showing exactly what a small, young page sees on each screen on day one - honest 'still building' messages, not fabricated numbers - with a floor Lewis can use when recruiting pilots.",
+   "layman_output": "A published one-pager showing exactly what a small, young page — three months of history, 40 comments — sees on day one across Today, Drafts, Best Times, Health and Alerts: honest 'still building' messages where data is thin, never fabricated numbers, with the eligibility line marked per screen. Lewis uses its floor when recruiting pilots, so no page owner is onboarded onto screens that would have to lie to them."
   },
   {
    "id": "N2-SD-09",
@@ -8002,7 +8224,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing the pass/fail checklists for the best-posting-times screen and the Settings screen before they're built next sprint, so the developer knows exactly what 'done' looks like.",
    "layman_analogy": "Like handing the decorator the paint chart and finish spec before he starts the next two rooms.",
-   "layman_needed": "Two published one-pagers - Best Times and Settings - with pass or fail lines for every state, linked from Asad's next-sprint tickets before he builds the screens."
+   "layman_needed": "Two published one-pagers - Best Times and Settings - with pass or fail lines for every state, linked from Asad's next-sprint tickets before he builds the screens.",
+   "layman_output": "Two more published acceptance one-pagers — Best Times (the week grid, top-slot ring, minimum-data floor, page timezone, sparse state) and Settings (preferences, notifications, quiet hours, connected pages, delete and export, consent) — each state carrying a pass-or-fail line. Both are linked from Asad's next-sprint tickets before he builds, so the target exists before the work does."
   },
   {
    "id": "N2-SD-10",
@@ -8036,7 +8259,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Paying independent people to judge 200 real comments by hand, without seeing what our software said, so we have a genuine human answer key to measure our comment-reading accuracy against.",
    "layman_analogy": "Like hiring independent tasters to judge the dishes blind, so the chef isn't marking his own cooking.",
-   "layman_needed": "An agreed judging rubric, a 200-comment sample drawn from the historical archive avoiding the anomaly week, briefed independent labellers, and a delivery date inside next sprint."
+   "layman_needed": "An agreed judging rubric, a 200-comment sample drawn from the historical archive avoiding the anomaly week, briefed independent labellers, and a delivery date inside next sprint.",
+   "layman_output": "A human truth set under way: an agreed judging rubric, a 200-comment sample drawn from the pre-collapse archive (avoiding the late-August anomaly week) with its origin recorded, and independent labellers briefed who had no hand in the models, with delivery dated inside next sprint. It gives the accuracy audit a human answer key instead of one AI marking another's homework."
   },
   {
    "id": "N2-SD-11",
@@ -8067,7 +8291,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A design quality sweep of every screen shipped this sprint against the agreed designs, plus a rule that any on-the-fly design change gets logged, so the product stays visually consistent instead of drifting screen by screen.",
    "layman_analogy": "Like a site foreman walking every finished room against the architect's drawings and logging each on-the-fly change in the day book.",
-   "layman_needed": "Sweep notes filed for every screen shipped this sprint, drift issues raised as sized tickets for Asad, and the published rule that any design invention is folded back or logged as a decision."
+   "layman_needed": "Sweep notes filed for every screen shipped this sprint, drift issues raised as sized tickets for Asad, and the published rule that any design invention is folded back or logged as a decision.",
+   "layman_output": "Filed sweep notes for every surface shipped this sprint — landing page, Today, Drafts, connect flow, sign-in screens — checked against the design pack videos and QA checklists, with every drift raised as a sized ticket for Asad. Alongside them, a published rule in the tracker: any design invention gets folded back into the pack or logged as a decision, so the packs stay the single source of truth."
   },
   {
    "id": "N2-SD-12",
@@ -8099,7 +8324,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Starting a weekly summary of pilot customer feedback, with each item ranked - must fix now, next sprint, or maybe later - so real customer voices steer what we build instead of getting lost in chat threads.",
    "layman_analogy": "Like the suggestion box actually being emptied every Friday and sorted into 'fix now', 'next week' and 'maybe' piles on the manager's desk.",
-   "layman_needed": "The first weekly digest of pilot feedback published with every item ranked as blocker, next sprint or long list, placed into the backlog, and a recurring weekly slot booked."
+   "layman_needed": "The first weekly digest of pilot feedback published with every item ranked as blocker, next sprint or long list, placed into the backlog, and a recurring weekly slot booked.",
+   "layman_output": "The first weekly pilot-feedback digest, published from Lewis's cohort-1 notes, with every item ranked — blocker, next sprint, or long list — and placed into the backlog, plus a recurring weekly slot booked in the calendar through to launch. Anyone can open the digest and see what pilots actually said, how seriously each item was taken, and where it now sits in the plan."
   },
   {
    "id": "N2-SD-13",
@@ -8134,7 +8360,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Setting up a daily half-hour code review between our two front-end developers, with a written checklist, because they're sharing one codebase for the first time nine weeks before launch and mistakes now compound.",
    "layman_analogy": "Like a driving instructor riding along daily with the new delivery driver - same van, agreed checklist, tricky junctions handed back to the senior.",
-   "layman_needed": "A written review checklist and a daily half-hour slot with Asad running to 16 Oct, with every one of Saad's merged changes this sprint showing a recorded review against it."
+   "layman_needed": "A written review checklist and a daily half-hour slot with Asad running to 16 Oct, with every one of Saad's merged changes this sprint showing a recorded review against it.",
+   "layman_output": "A written PR review checklist (design tokens only, no business logic in components, every state present, keyboard and contrast basics, no unapproved dependency) plus a daily 30-minute review slot with Asad to 16 October, and a rule sending anything touching sign-in, customer separation, deletion or Facebook connect to Asad. Every change Saad merges this sprint shows a recorded review."
   },
   {
    "id": "N2-SD-14",
@@ -8168,7 +8395,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Our new developer's first small change taken all the way through: written, reviewed, tested and live on a preview site. The point is proving he can use our whole pipeline, so later time estimates for his work stop being guesses.",
    "layman_analogy": "Like a new chef's first plate sent through the whole service - ordered, cooked, checked by the head chef and served - to prove he can work this kitchen.",
-   "layman_needed": "One small screen state built by Saad, taken through branch, automated checks, Asad's recorded review and merge, and visible live on a preview site."
+   "layman_needed": "One small screen state built by Saad, taken through branch, automated checks, Asad's recorded review and merge, and visible live on a preview site.",
+   "layman_output": "One small screen state — an empty or loading view from Saad's own states matrix — built by Saad with existing library pieces and taken through the whole pipeline: branch, automated checks, Asad's recorded review, merge, and a live preview site anyone can open. It proves Saad's hands have been through the loop once, so later estimates for his front-end work rest on experience, not guesswork."
   },
   {
    "id": "N2-SD-15",
@@ -8209,7 +8437,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Handing our new developer ownership of the shared kit of screen building blocks - buttons, cards, dials, tables - plus a single page showing every piece, so all screens stay consistent and later accessibility checks are done once, not per screen.",
    "layman_analogy": "Like taking over the theatre's prop cupboard and laying every item out on one table, so no show ever builds its own slightly different chair.",
-   "layman_needed": "The shared component kit extended to cover the coming screens, using theme values only, with a staging page showing every piece in every state at both screen sizes."
+   "layman_needed": "The shared component kit extended to cover the coming screens, using theme values only, with a staging page showing every piece in every state at both screen sizes.",
+   "layman_output": "The shared component kit extended to everything the coming screens need — cards, chips, the gauge, tiles, tables, sheets, tab bar, toasts, form controls and the empty/loading/error/can't-say shells — every piece drawing colours and spacing from theme values only. A /kitchen-sink page on staging shows every component in every state at both phone and desktop sizes, so anyone can eyeball the whole kit in one visit."
   },
   {
    "id": "N2-SD-16",
@@ -8246,7 +8475,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Building realistic pretend data for every situation a screen can be in - empty page, still loading, error, not enough data - so screens can be built and tested now without waiting for the real data connections to be finished.",
    "layman_analogy": "Like a dress rehearsal wardrobe with a costume for every scene - storm, blackout, empty house - so the cast can practise any moment without waiting for opening night.",
-   "layman_needed": "A fixture for every screen state named in the matrix and a picker on staging that opens any surface in any state - thin page, loading, error, rate-limited - without a live connection."
+   "layman_needed": "A fixture for every screen state named in the matrix and a picker on staging that opens any surface in any state - thin page, loading, error, rate-limited - without a live connection.",
+   "layman_output": "A pretend-data fixture for every screen state the matrix names — healthy page, thin page below the floor, still loading, can't-say, upstream error, rate-limited, page revoked — plus a picker on staging that opens any surface in any of those states on demand. A teammate can flip a screen into 'thin page' or 'error' without a live connection, so awkward states get designed now, not discovered at user testing."
   },
   {
    "id": "N2-AX-02",
@@ -8278,7 +8508,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Starting a 30-minute Friday meeting where the founders decide what gets cut if we're running behind - nice-to-haves go first, safety and reliability never - so scope shrinks deliberately instead of by panic in November.",
    "layman_analogy": "Like a weekly packing check before a long trek: decide now what leaves the rucksack if it's too heavy - never the first-aid kit.",
-   "layman_needed": "The first written scope-hammer note dated Fri 25 Sep - what shipped, what's at risk, what moves down the cut order - and the 30-minute meeting recurring weekly in the calendar."
+   "layman_needed": "The first written scope-hammer note dated Fri 25 Sep - what shipped, what's at risk, what moves down the cut order - and the 30-minute meeting recurring weekly in the calendar.",
+   "layman_output": "A standing 30-minute Friday meeting with Saad and Asad, recurring in the calendar from 25 September, and the first written scope note dated that day: what shipped, what is at risk, and what moves down the agreed cut order (nice-to-haves first, never the crisis pipeline, customer separation or backups). One written line a week keeps the November freeze from arriving as a surprise."
   },
   {
    "id": "N2-AX-03",
@@ -8310,7 +8541,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Chasing Facebook to finish verifying us as a legitimate business, escalating if it stalls, because without that stamp we can't even submit our app for review on 2 October and the whole launch timeline slips.",
    "layman_analogy": "Like chasing the council for the permit that gates the whole build - ringing every two days and going over heads before the digger's booked date.",
-   "layman_needed": "Facebook business verification showing verified before 2 Oct, or an open escalation case with a dated chase log and a recorded decision with Saad on how the submission proceeds."
+   "layman_needed": "Facebook business verification showing verified before 2 Oct, or an open escalation case with a dated chase log and a recorded decision with Saad on how the submission proceeds.",
+   "layman_output": "Either Facebook Business Verification showing 'verified' in the dashboard before 2 October, or an open escalation case with Meta carrying a dated log of every chase since submission, plus a recorded decision with Saad on how the 2 October submission proceeds if it is still stuck on the last possible day. Anyone can check the dashboard status or read the chase log and know exactly where the blocker stands."
   },
   {
    "id": "N2-AX-04",
@@ -8344,7 +8576,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The CEO reading and signing our first set of legal documents - terms of service, privacy policy and data-handling agreement - before Facebook reads them and before the first pilot customers sign up against them.",
    "layman_analogy": "Like the shop owner reading and signing the lease himself before the first customer walks in and the landlord inspects the premises.",
-   "layman_needed": "All three legal documents - terms, privacy policy and data agreement - carrying Alex's signature, in the exact versions linked from the Facebook app dashboard."
+   "layman_needed": "All three legal documents - terms, privacy policy and data agreement - carrying Alex's signature, in the exact versions linked from the Facebook app dashboard.",
+   "layman_output": "All three legal documents — the terms of service, the privacy policy naming the Facebook data and the deletion route, and the data-processing agreement with its supplier list — carrying Alex's signature, in the exact versions linked from the Facebook app dashboard. Signed before the Meta package goes in and before the first five pilots sign, so both the reviewer and the pilots read paper the company has actually committed to."
   },
   {
    "id": "N2-AX-05",
@@ -8379,7 +8612,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The CEO checking every line of our Facebook submission to make sure it uses plain page-analytics language and none of the ambitious investor-pitch phrasing, because one wrong phrase in front of Facebook's reviewers could cost us 20 days.",
    "layman_analogy": "Like proofreading the planning application to strip out the estate agent's sales patter before the council reads it.",
-   "layman_needed": "A dated written approval from Alex and Filza, attached to the package, confirming every line uses plain product language, each permission maps to a real feature, and all links and credentials work."
+   "layman_needed": "A dated written approval from Alex and Filza, attached to the package, confirming every line uses plain product language, each permission maps to a real feature, and all links and credentials work.",
+   "layman_output": "A dated written approval from Alex and Filza attached to Saad's submission package, confirming line by line that every word uses plain product language, each permission maps to a real demonstrable feature, the screencasts match the frozen screens, and every link and login works. With it filed, Saad submits on 2 October knowing the package was read twice before Meta reads it once."
   },
   {
    "id": "N2-AX-06",
@@ -8414,7 +8648,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Working out the Facebook approval maths on a calendar - if they take the full 20 days and reject us once, what's the last safe date to resubmit before launch? - and publishing it so no deadline surprises anyone in November.",
    "layman_analogy": "Like counting backwards from the wedding date through dress fittings and alterations to find the last safe day to order.",
-   "layman_needed": "The decisions calendar showing the approval timeline under both readings of Facebook's '20 days', naming which we plan against, with the plan-B trigger date derived from the worse one."
+   "layman_needed": "The decisions calendar showing the approval timeline under both readings of Facebook's '20 days', naming which we plan against, with the plan-B trigger date derived from the worse one.",
+   "layman_output": "The decisions calendar showing Facebook's approval timeline under both readings of 'up to 20 days per decision' — calendar days and business days — naming which reading the plan follows, with the fallback trigger date set from the worse one. Every date sits in the shared calendar with the rule that each week of slip moves the second decision a week, so nobody meets the maths for the first time in November."
   },
   {
    "id": "N2-AX-07",
@@ -8450,7 +8685,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The CEO signing off our prices, based on Jill's cost workings, locked on 2 October - so the website, directory listings, invoices and customer notices all quote one price instead of five slightly different ones.",
    "layman_analogy": "Like the owner setting the menu prices once from the accountant's costings, so the menu, window card and bills all say the same number.",
-   "layman_needed": "A signed one-page pricing sheet - tiers, founding price, what pilots pay - with Jill, Saad, Lewis and Asad confirming their documents all copy from it."
+   "layman_needed": "A signed one-page pricing sheet - tiers, founding price, what pilots pay - with Jill, Saad, Lewis and Asad confirming their documents all copy from it.",
+   "layman_output": "A signed one-page pricing sheet: the tiers, the founding price, and what pilots pay from their first invoice, with a placeholder for how non-pilot signups are handled. It lives as the single source, and Jill, Saad, Lewis and Asad each confirm their documents — waitlist copy, listings, invoice template, the 24 November notice — copy from it, so one price appears everywhere instead of five drifting versions."
   },
   {
    "id": "N2-AX-08",
@@ -8486,7 +8722,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing the plan B for launch day if Facebook approval hasn't come through: pilots keep using the product in test mode, new signups join a queue, and marketing only claims what actually works - decided calmly now, not scrambled on the day.",
    "layman_analogy": "Like writing the rain plan for an outdoor wedding in the calm of summer - marquee, seating, revised invitations - not while the clouds burst.",
-   "layman_needed": "A filed written plan for launch day without Facebook approval - allowed and banned claims, pilot messaging, waitlist waves within tester limits, and the 27 Nov trigger - acknowledged by Saad, Lewis and Filza."
+   "layman_needed": "A filed written plan for launch day without Facebook approval - allowed and banned claims, pilot messaging, waitlist waves within tester limits, and the 27 Nov trigger - acknowledged by Saad, Lewis and Filza.",
+   "layman_output": "A filed written plan for launch day without Facebook approval: pilots stay on Tester roles, public signups join a waitlist in waves sized within the Tester limit, and marketing claims only what the restricted product truly does — with allowed and banned claims listed and the trigger named (no approval by 27 November). Saad, Lewis and Filza have acknowledged it, so plan B is a document, not a scramble."
   },
   {
    "id": "N2-AX-09",
@@ -8519,7 +8756,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Getting a named, well-followed person confirmed in writing to present us on Product Hunt on launch day, 8 December - they need 4-6 weeks' notice, so leaving it later means launching without one.",
    "layman_analogy": "Like booking the well-known toastmaster for the big day months ahead, because the good ones need six weeks' notice.",
-   "layman_needed": "An email confirmation from a named Product Hunt hunter committing to the 8 Dec date, with the page owner recorded and the fallback claims and asset timeline shared."
+   "layman_needed": "An email confirmation from a named Product Hunt hunter committing to the 8 Dec date, with the page owner recorded and the fallback claims and asset timeline shared.",
+   "layman_output": "A written email confirmation from a named Product Hunt hunter committing to the 8 December 08:01 launch, with the page owner recorded and the hunter briefed on the fallback claims and the asset timeline. The confirmation sits in the launch folder, so when the launch package is assembled in November there is a real person waiting to receive it rather than an empty slot."
   },
   {
    "id": "N2-JL-01",
@@ -8554,7 +8792,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Sending our first newsletter on 22 September - both a marketing beat and the first gentle traffic through our new email system, which has to be warmed up gradually or launch-day emails will land in spam folders.",
    "layman_analogy": "Like a new postman walking a small first round so the sorting office trusts him before launch-day's heavy sack.",
-   "layman_needed": "Newsletter #1 sent on 22 Sep from the warmed-up domain with a working unsubscribe and company particulars, after copy and consent checks, with sends, bounces, complaints and opens logged."
+   "layman_needed": "Newsletter #1 sent on 22 Sep from the warmed-up domain with a working unsubscribe and company particulars, after copy and consent checks, with sends, bounces, complaints and opens logged.",
+   "layman_output": "Newsletter #1 actually sent on Tuesday 22 September from the company's warmed-up email domain, after Alex's copy sign-off and Filza's consent check, carrying a working unsubscribe link and the required company details in the footer. The send, bounce, complaint and open numbers are logged as the first data point in warming the email account — so the big launch emails in November and December do not hit spam filters cold."
   },
   {
    "id": "N2-JL-02",
@@ -8590,7 +8829,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Getting a proper support email address live with a written promise of how fast we reply and who handles what, so the first pilot customers arriving from 24 September never write into a dead inbox.",
    "layman_analogy": "Like putting a staffed reception desk in before the first guests arrive, with a promise on the wall of how fast the bell gets answered.",
-   "layman_needed": "A live support address that receives and routes mail, a written first-response standard shared with Saad, Asad and Lewis, and one test ticket answered within it."
+   "layman_needed": "A live support address that receives and routes mail, a written first-response standard shared with Saad, Asad and Lewis, and one test ticket answered within it.",
+   "layman_output": "A live support@ address on the company domain that receives and routes mail without landing in spam, with a triage label set (bug, data question, pilot, billing, legal) and a written first-response standard — hours covered, response target, who handles what. It is shared with Saad, Asad and Lewis, one test ticket has been answered inside the standard, and the first pilots get the address as they onboard."
   },
   {
    "id": "N2-JL-03",
@@ -8630,7 +8870,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Working out what each customer actually costs us to serve - hosting, data, AI usage - and what we'd earn at different price points, handed to the CEO so the 2 October pricing decision rests on real numbers.",
    "layman_analogy": "Like costing every plate - ingredients, gas, staff - before the owner prices the menu, so the margins are arithmetic rather than hope.",
-   "layman_needed": "A cost model handed to Alex by 28 Sep showing fixed costs, cost per connected page, assistant cost per active user with sensitivity, and margin at candidate prices, every line marked measured or estimated."
+   "layman_needed": "A cost model handed to Alex by 28 Sep showing fixed costs, cost per connected page, assistant cost per active user with sensitivity, and margin at candidate prices, every line marked measured or estimated.",
+   "layman_output": "A cost model in Alex's hands by 28 September: fixed monthly platform cost, cost per connected page, assistant cost per active user with a sensitivity row if caching underperforms, and margin at candidate prices for 5 pilots and 100 pages — every line marked 'measured' or 'estimated'. It is the numbers Alex signs pricing on come 2 October, and the baseline the later re-cost is compared against."
   },
   {
    "id": "N2-JL-04",
@@ -8665,7 +8906,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Planning the gradual ramp-up of our email sending through the autumn - how much, when, and what pauses the ramp if too many bounce - so the big launch-day emails to hundreds of people actually reach inboxes.",
    "layman_analogy": "Like a training plan that builds from gentle jogs to marathon distance, with a rule to ease off the moment anything strains.",
-   "layman_needed": "A dated email ramp-up schedule to 8 Dec agreed with Muteeb - weekly volume ceilings, bounce and complaint thresholds that pause the ramp, and a named watcher on the reputation dashboard."
+   "layman_needed": "A dated email ramp-up schedule to 8 Dec agreed with Muteeb - weekly volume ceilings, bounce and complaint thresholds that pause the ramp, and a named watcher on the reputation dashboard.",
+   "layman_output": "A dated email ramp-up schedule agreed with Muteeb, running from newsletter #1 to the 8 December launch email: weekly sending ceilings, bounce and complaint thresholds that pause the ramp automatically, and a named person watching the sender-reputation dashboard. It sits with the marketing plan, so a crisis alert or the launch-day queue email lands in inboxes rather than spam because the volume was built up deliberately."
   },
   {
    "id": "N2-JL-05",
@@ -8701,7 +8943,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Giving our legal lead the money details for the pilot contracts - price, how often we bill, payment terms, VAT - and checking they match the website, so every customer sees one consistent price everywhere.",
    "layman_analogy": "Like handing the solicitor the agreed rent, deposit and payment dates so the tenancy agreement isn't drafted around blanks.",
-   "layman_needed": "A commercial schedule - price, lock duration, billing cadence, payment terms, VAT and start date - attached to Filza's pilot agreement, reviewed by Alex and matching the website wording."
+   "layman_needed": "A commercial schedule - price, lock duration, billing cadence, payment terms, VAT and start date - attached to Filza's pilot agreement, reviewed by Alex and matching the website wording.",
+   "layman_output": "The commercial content handed to Filza for the pilot agreement's terms schedule: the founding price and how long it is locked, billing rhythm, payment terms and method, VAT line, start date, and what 'paying pilot' means at the go/no-go — all matching the wording on the landing page. With it, Filza can countersign the five pilot agreements before user testing, and one price appears identically on paper and website."
   },
   {
    "id": "N2-JL-06",
@@ -8736,7 +8979,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Building our invoice template properly now - company details, VAT, payment terms, numbering - with legal review, so November invoicing isn't a rushed job that gets the legally required details wrong.",
    "layman_analogy": "Like printing the receipt pads with the company details and VAT box properly laid out before the shop's first busy Saturday.",
-   "layman_needed": "An invoice template with numbering, statutory company particulars, VAT treatment, payment terms and line items, approved by Filza, plus one completed sample invoice."
+   "layman_needed": "An invoice template with numbering, statutory company particulars, VAT treatment, payment terms and line items, approved by Filza, plus one completed sample invoice.",
+   "layman_output": "A finished invoice template checked against Filza's legal requirements: a numbering scheme, the company registration number and registered address the law requires, VAT number and treatment, payment terms with bank details, and line items matching the commercial schedule — plus one completed sample invoice on file. When real invoices go out in November they are filled in, not designed in a hurry."
   },
   {
    "id": "N2-LW-01",
@@ -8770,7 +9014,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Putting the pilot application form live on 24 September and reviewing every application within 48 hours, so the people our first marketing push sends to the form get a prompt answer instead of silence.",
    "layman_analogy": "Like opening the audition sign-up sheet on the advertised day and calling everyone back within two days, so nobody who queued is left hanging.",
-   "layman_needed": "The application form public on 24 Sep with one live submission verified, and every application triaged and answered within 48 hours through 4 Oct, logged in the roster with a weekly count to Alex."
+   "layman_needed": "The application form public on 24 Sep with one live submission verified, and every application triaged and answered within 48 hours through 4 Oct, logged in the roster with a weekly count to Alex.",
+   "layman_output": "The pilot application form live to the public on 24 September, with one real submission and its auto-reply verified on day one. Every application thereafter is checked within 48 hours against the cohort-2 criteria (a page that is not declining, admin access, a gap in the archetype mix) and logged in the roster sheet as a candidate for pilots 6-10 or the waitlist, with a weekly count going to Alex."
   },
   {
    "id": "N2-LW-02",
@@ -8804,7 +9049,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Gathering what pilot customers actually said about alerts - would they want a 2am wake-up, how many alerts is too many - into a one-page note for the policy meeting, so the decision is based on real customer preferences.",
    "layman_analogy": "Like bringing the patients' own words into the hospital meeting that sets visiting hours, so the rule fits the people it governs.",
-   "layman_needed": "A one-page evidence note of what pilots actually said about alert timing, brought into Saad's policy session, and attached to the policy Alex and Saad sign by 25 Sep."
+   "layman_needed": "A one-page evidence note of what pilots actually said about alert timing, brought into Saad's policy session, and attached to the policy Alex and Saad sign by 25 Sep.",
+   "layman_output": "A one-page evidence note compiling what the pilots themselves said in their baseline calls — what should happen when a storm fires at 2am, who else should be told, how many alerts a week is too many, what quiet hours they would set. It is brought into Saad's policy session and attached to the notification policy Alex and Saad sign by 25 September, so the decision carries real customer voices rather than team guesses."
   },
   {
    "id": "N2-LW-03",
@@ -8842,7 +9088,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Personally walking each of our first five pilot customers through connecting their real Facebook pages in test mode, noting every stumble, so the product runs on real pages while Facebook reviews us and the 2 October demo has real data.",
    "layman_analogy": "Like a fitting specialist personally helping the first five customers try the suit, noting every tight seam for the tailor.",
-   "layman_needed": "Five pilots with real pages connected and showing data on staging by 1 Oct - pilot 1 live by 29 Sep as the demo page - with agreements signed and every connection stumble logged for Saad."
+   "layman_needed": "Five pilots with real pages connected and showing data on staging by 1 Oct - pilot 1 live by 29 Sep as the demo page - with agreements signed and every connection stumble logged for Saad.",
+   "layman_output": "Five pilots with their real Facebook pages connected and showing live data on staging by 1 October — each walked through login, Tester acceptance and connecting 3-5 pages over screen-share, with connection health green. Pilot 1 is live by 29 September and named as the 2 October demo page, each pilot's agreement is signed, and every stumble in the connect step is logged for Saad's onboarding spec."
   },
   {
    "id": "N2-LW-04",
@@ -8873,7 +9120,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Running weekly calls with the first pilot customers, ranking what they report by severity, and agreeing the list of problems that must be fixed before we invite the next five - so we don't burn new relationships on known-broken flows.",
    "layman_analogy": "Like fixing the leaks the first guests reported before inviting the next five families to stay.",
-   "layman_needed": "Two weekly ranked feedback sheets delivered to Saad, and a written list of defects that must be fixed before pilots 6-10 are invited, agreed with Saad and Asad by 4 Oct."
+   "layman_needed": "Two weekly ranked feedback sheets delivered to Saad, and a written list of defects that must be fixed before pilots 6-10 are invited, agreed with Saad and Asad by 4 Oct.",
+   "layman_output": "Two weekly feedback sheets from calls with the connected pilots — what they saw on Today and the gauge, each issue ranked by severity — handed to Saad each Friday, plus a written 'fix these before inviting more' list agreed with Saad and Asad by 4 October. Anyone can read the sheets and see exactly what real users hit and what blocks the next wave of pilots."
   },
   {
    "id": "N2-FZ-01",
@@ -8907,7 +9155,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Publishing a one-page rulebook of words we may and may not use anywhere Facebook will look - plain 'page analytics tool' language in, investor-pitch phrasing out - because one wrong phrase could cost a 20-day rejection.",
    "layman_analogy": "Like the phrase book issued to everyone meeting the customs officer: what to say, what never to say, and the safe substitute for each.",
-   "layman_needed": "A one-page rulebook of approved and banned wording for every Facebook-facing surface, with substitutions, circulated to Saad, Asad and Alex - receipt confirmed and cited by the package draft."
+   "layman_needed": "A one-page rulebook of approved and banned wording for every Facebook-facing surface, with substitutions, circulated to Saad, Asad and Alex - receipt confirmed and cited by the package draft.",
+   "layman_output": "A one-page wording rulebook for every surface Facebook might read: the approved 'page analytics tool' framing, the permission-to-feature phrasing, and the banned investor-deck words with plain substitutions for each. Circulated to Saad, Asad and Alex with receipt confirmed before the review package is drafted, and cited by the package itself — so one rogue phrase never costs a 20-day rejection cycle."
   },
   {
    "id": "N2-FZ-02",
@@ -8941,7 +9190,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Finalising exactly how data deletion works when a user asks for it, and making sure our privacy policy describes precisely what the system actually does - so the promise on paper and the behaviour in code match word for word.",
    "layman_analogy": "Like making sure the fire-exit map on the wall matches the actual corridors before the safety inspector walks them.",
-   "layman_needed": "A frozen, versioned deletion spec signed by Filza and Muteeb by 24 Sep, with the privacy policy's deletion paragraph matching what the endpoint will actually do, word for word."
+   "layman_needed": "A frozen, versioned deletion spec signed by Filza and Muteeb by 24 Sep, with the privacy policy's deletion paragraph matching what the endpoint will actually do, word for word.",
+   "layman_output": "A frozen, versioned data-deletion specification signed by Filza and Muteeb by 24 September: exactly what happens when a user disconnects, when Facebook's callback fires, or when someone emails the privacy address — with the confirmation-code and status-link format Meta expects. The privacy policy's deletion paragraph matches it word for word, so Muteeb builds against a fixed target and the policy tells the truth."
   },
   {
    "id": "N2-FZ-03",
@@ -8975,7 +9225,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Checking every AI supplier we use in writing: none may keep or learn from our customers' content. Any supplier that can't promise that doesn't get customer data - so our privacy policy stays true.",
    "layman_analogy": "Like a caterer demanding written allergy guarantees from every supplier - any kitchen that won't sign doesn't touch the food.",
-   "layman_needed": "A signed-off row for every AI supplier - no-training terms, retention, data location - with failures barred from customer content, and the one-line rule acknowledged by Faheem and Muteeb."
+   "layman_needed": "A signed-off row for every AI supplier - no-training terms, retention, data location - with failures barred from customer content, and the one-line rule acknowledged by Faheem and Muteeb.",
+   "layman_output": "A signed-off register row for every AI supplier that touches customer content — the labelling services, the assistant's model tiers, the embedding and search tools — confirming a contractual promise not to train on our data, the retention terms and where the data sits. Suppliers that fail are barred from customer content, and a one-line rule Faheem and Muteeb have acknowledged governs any new vendor."
   },
   {
    "id": "N2-FZ-04",
@@ -9006,7 +9257,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Drafting the agreement each pilot customer signs: our scores and alerts are guidance not guarantees, our liability is capped, and they're testing an early product - so pilots use the real product with proper paper behind them.",
    "layman_analogy": "Like the waiver a climbing wall has you sign before you touch the holds: guidance offered, outcomes not guaranteed, liability capped.",
-   "layman_needed": "A signable pilot agreement in Lewis's hands on 24 Sep - guidance disclaimer, liability cap, tester terms, confidentiality and data-agreement pointer - with the first pilot signature on file."
+   "layman_needed": "A signable pilot agreement in Lewis's hands on 24 Sep - guidance disclaimer, liability cap, tester terms, confidentiality and data-agreement pointer - with the first pilot signature on file.",
+   "layman_output": "A signable pilot agreement in Lewis's hands on 24 September — the day the application form opens — covering the AI-guidance disclaimer (scores and alerts are decision support, not guarantees), a liability cap, Tester-role terms, feedback and confidentiality, and a pointer to the data agreement. The first pilot's signature is on file, so no pilot uses the real product without paper behind them."
   },
   {
    "id": "N2-FZ-05",
@@ -9042,7 +9294,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Getting the privacy policy and terms of service signed off and published at permanent web addresses, because Facebook's reviewers read them during approval and a broken or placeholder link is a rejection reason.",
    "layman_analogy": "Like framing the food-hygiene certificate by the door at a fixed spot, because the inspector checks it hangs where the paperwork says.",
-   "layman_needed": "Signed privacy policy and terms published at permanent addresses with version dates, linked from the site footer, and those exact addresses placed in Saad's Facebook package."
+   "layman_needed": "Signed privacy policy and terms published at permanent addresses with version dates, linked from the site footer, and those exact addresses placed in Saad's Facebook package.",
+   "layman_output": "The signed privacy policy and terms of service published at permanent web addresses, each page carrying a version number and date, linked from the site footer — and those exact addresses pasted into Saad's Facebook package for the app dashboard fields. A Meta reviewer clicking any policy link finds a real, current, signed document naming the Facebook data, the multi-page model, the deletion route and the suppliers."
   },
   {
    "id": "N2-FZ-06",
@@ -9075,7 +9328,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Finishing the data-handling agreement pilots sign - naming every supplier that touches their data, our security measures, and how we'd notify them of a breach - so pilot sign-ups and later invoicing aren't stalled by missing paperwork.",
    "layman_analogy": "Like a removals contract that names every subcontractor who'll touch your boxes and promises to tell you if the crew changes.",
-   "layman_needed": "A data-handling agreement signed by Alex with the complete supplier list, change-notice clause, security summary and breach-notification terms, with a signable copy in Lewis's hands."
+   "layman_needed": "A data-handling agreement signed by Alex with the complete supplier list, change-notice clause, security summary and breach-notification terms, with a signable copy in Lewis's hands.",
+   "layman_output": "The finished data-processing agreement pilots sign: what processing happens (read-only page analytics, scoring, alerts, the assistant), the complete supplier list from the vendor checks, a change-notice clause, a summary of security measures, breach-notification timing and deletion terms — signed by Alex, with a signable copy in Lewis's hands so pilot sign-up is never stalled waiting for paper."
   },
   {
    "id": "N2-FZ-07",
@@ -9109,7 +9363,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A final word-by-word read of everything Facebook will see - forms, videos, policy pages - against the language rulebook, with a joint written sign-off, because this is the one approval we don't control and one slip costs 20 days.",
    "layman_analogy": "Like the editor's final word-by-word proof of the whole print run before the presses roll - one slip and the entire edition is pulped.",
-   "layman_needed": "A dated joint sign-off from Filza, Saad and Alex on the exact package submitted on 2 Oct, after every Facebook-visible word is read against the rulebook and re-read post-fixes."
+   "layman_needed": "A dated joint sign-off from Filza, Saad and Alex on the exact package submitted on 2 Oct, after every Facebook-visible word is read against the rulebook and re-read post-fixes.",
+   "layman_output": "A dated joint sign-off from Filza, Saad and Alex covering the exact package submitted on 2 October, produced by reading every word Meta will see — dashboard fields, permission map, reviewer notes, screencast narration, test-page copy, policy pages — against the wording rulebook, marking every change, and re-reading the fixed version. The one gate the company does not control goes in checked three ways."
   },
   {
    "id": "N2-FZ-08",
@@ -9141,7 +9396,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing legally correct opt-in wording for our mailing lists - what emails people will get and how to unsubscribe - so the big launch emails in November and December are lawful to send under UK marketing rules.",
    "layman_analogy": "Like printing 'tick here to receive our letters' properly on the raffle stub, so posting to the list later is lawful rather than lucky.",
-   "layman_needed": "Consent wording handed to Asad for the waitlist and app signup - including timestamped terms-acceptance logging - plus a written ruling on whether the old form's signups can lawfully be emailed."
+   "layman_needed": "Consent wording handed to Asad for the waitlist and app signup - including timestamped terms-acceptance logging - plus a written ruling on whether the old form's signups can lawfully be emailed.",
+   "layman_output": "The lawful-consent wording in Asad's hands for both the waitlist and app signup — what emails people will get, how to unsubscribe, no pre-ticked boxes, and timestamped terms-acceptance logged per account — plus a written ruling on whether the old form's early signups can lawfully receive the launch emails or need a re-permission email first. It is what makes the 24 November and 8 December sends legal."
   },
   {
    "id": "N2-FZ-09",
@@ -9170,7 +9426,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A search of UK and EU trademark records to check nobody else owns the names ArtemisAI or Art-E, so we know whether to register or rename before the brand goes on public startup listings.",
    "layman_analogy": "Like checking the land registry before painting the shop sign, in case someone already owns the name over the door.",
-   "layman_needed": "A clearance note with Alex covering UK and EU trademark searches for both names, listed conflicts and risk, and a clear file-or-rename recommendation before the listings go public."
+   "layman_needed": "A clearance note with Alex covering UK and EU trademark searches for both names, listed conflicts and risk, and a clear file-or-rename recommendation before the listings go public.",
+   "layman_output": "A trademark clearance note with Alex before the brand goes onto public listings: UK and EU register searches for both 'ArtemisAI' and 'Art-E' in the software and analytics classes plus a web sweep, each conflict listed with its risk, and a clear recommendation to file the marks or rename. It means a naming problem is found while a rename costs a document edit, not after the brand is on every directory."
   },
   {
    "id": "N2-FZ-10",
@@ -9206,7 +9463,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing the money side of the pilot agreement (price, payment terms, VAT) plus a matching invoice template, so when we bill pilot customers in November the paperwork already exists and nothing gets disputed.",
    "layman_analogy": "Like drafting the tenancy's rent schedule with the price left as a blank to ink in the day the landlord decides, so nothing else waits.",
-   "layman_needed": "A commercial terms schedule carrying the signed price plus cancellation and refund clauses, and an approved matching invoice template, filed with Jill and attached to the pilot agreement."
+   "layman_needed": "A commercial terms schedule carrying the signed price plus cancellation and refund clauses, and an approved matching invoice template, filed with Jill and attached to the pilot agreement.",
+   "layman_output": "A commercial terms schedule attached to the pilot agreement and filed with Jill: the signed founding price dropped in after Alex's 2 October decision, the term, payment terms, VAT treatment, explicit cancellation and refund clauses, and what happens if launch slips — plus Jill's invoice template reviewed to match it. The November invoicing dry run and the real invoices are issued against this exact text."
   },
   {
    "id": "N2-FZ-11",
@@ -9240,7 +9498,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "A careful read of everything the public can find about us — LinkedIn, the website, directories — to strip out phrases that could get us rejected by Facebook's app reviewers, who do search the company before approving.",
    "layman_analogy": "Like googling yourself before the job interview and scrubbing the boastful old posts, because the panel certainly will look.",
-   "layman_needed": "A dated sweep record listing every public surface checked - LinkedIn, site, directories, repos - the edits requested, and confirmation each was made before the 2 Oct submission."
+   "layman_needed": "A dated sweep record listing every public surface checked - LinkedIn, site, directories, repos - the edits requested, and confirmation each was made before the 2 Oct submission.",
+   "layman_output": "A dated sweep record covering every public surface a Meta reviewer could find by searching the company — the LinkedIn page, founders' profiles and posts, the landing and waitlist pages, directory entries, public code repositories and the app's consent screens — with every banned phrase marked, the edits requested from Alex, Saad and Asad, and confirmation each fix was made before the 2 October submission."
   },
   {
    "id": "N3-AS-01",
@@ -9276,7 +9535,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Building the alerts screen: a sorted inbox of warnings, each showing the exact posts and comments that triggered it, one suggested action, and a ready-drafted calm reply the owner can copy — never posted automatically.",
    "layman_analogy": "Like a hospital triage board: cases sorted by urgency, each with the chart attached, one recommended treatment, and a note pre-drafted for the family.",
-   "layman_needed": "A working alerts screen where a replayed incident shows a sorted card citing the actual posts and comments, one suggested action and a copyable drafted reply - never auto-posted - with mark-all-read clearing the strip."
+   "layman_needed": "A working alerts screen where a replayed incident shows a sorted card citing the actual posts and comments, one suggested action and a copyable drafted reply - never auto-posted - with mark-all-read clearing the strip.",
+   "layman_output": "A working Alerts screen in the app: a triage strip counting what needs the owner now versus opportunities and briefings, cards sorted by severity citing the actual posts and comments behind them, one suggested action per card, and a pre-drafted calm reply the owner can copy — never posted automatically. A teammate can replay a past incident, watch the cited card appear, then clear the strip with mark-all-read."
   },
   {
    "id": "N3-AS-02",
@@ -9311,7 +9571,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Swapping our homemade sign-up form for a proper purchased waitlist tool, so people joining from each startup directory are tracked, get a lawful consent flow, and can see their place in the queue.",
    "layman_analogy": "Like replacing the clipboard at the door with a proper ticketing system that stamps where each guest came from and shows their place in the queue.",
-   "layman_needed": "The purchased waitlist tool live on production by 13 Oct, themed to match, capturing the source of each signup, showing queue position, with lawful consent wording and a tested unsubscribe."
+   "layman_needed": "The purchased waitlist tool live on production by 13 Oct, themed to match, capturing the source of each signup, showing queue position, with lawful consent wording and a tested unsubscribe.",
+   "layman_output": "The purchased waitlist tool live on the public site by 13 October, themed to match the brand, replacing the old signup modal. Each signup records where the person came from (BetaList, Product Hunt, newsletter), sees their queue position, and gets lawful consent wording with a tested unsubscribe. When the one-shot directory traffic arrives on 20 October, every visitor is captured, attributed and lawfully emailable."
   },
   {
    "id": "N3-AS-03",
@@ -9343,7 +9604,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Moving everyone who already signed up on the old form into the new waitlist tool with their original join date, so early supporters keep their place in the queue and we don't break their trust.",
    "layman_analogy": "Like moving season-ticket holders to the new stadium with their original seat numbers honoured, so the earliest fans keep their spots.",
-   "layman_needed": "Every old-form signup imported into the new waitlist with its original timestamp and an early-supporter tag, consent basis confirmed with Filza, and the counts reconciling exactly."
+   "layman_needed": "Every old-form signup imported into the new waitlist with its original timestamp and an early-supporter tag, consent basis confirmed with Filza, and the counts reconciling exactly.",
+   "layman_output": "Every early signup from the old website form moved into the new waitlist tool with their original signup date preserved, so nobody loses their place in the queue, each tagged as an early supporter. The counts between old and new lists reconcile exactly, and Filza has confirmed whether their original consent covers the launch emails — keeping faith with the first people who trusted the product."
   },
   {
    "id": "N3-AS-04",
@@ -9378,7 +9640,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alert emails that link straight to the right alert in the app, plus notification bells that show accurate unread counts — so a crisis warning reaches the owner wherever they are and the numbers can be trusted.",
    "layman_analogy": "Like a doorbell chime that also texts you - and the text opens the camera on the right door, with the missed-call counter always truthful.",
-   "layman_needed": "A drill alert email that lands, deep-links to the correct alert card, renders in dark mode, sits behind a kill-switch flag, and notification bells whose unread counts match the endpoint and clear on read."
+   "layman_needed": "A drill alert email that lands, deep-links to the correct alert card, renders in dark mode, sits behind a kill-switch flag, and notification bells whose unread counts match the endpoint and clear on read.",
+   "layman_output": "The crisis alert arriving by email: built from Saad's template with the cited post, one recommended action, the drafted reply and a link landing the signed-in owner on the exact alert card, checked in dark mode across major email apps, behind an off-switch flag for launch day. Plus topbar bells whose unread counts match the server and clear on read — verifiable by running a drill and watching both."
   },
   {
    "id": "N3-AS-05",
@@ -9410,7 +9673,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A small badge at the top of every screen showing the page's health score and how it changed this week, so owners always have the one number they quote to their boss without hunting for it.",
    "layman_analogy": "Like the fuel gauge on a car dashboard — one glanceable dial that travels with you to every screen instead of being buried under the bonnet.",
-   "layman_needed": "A working badge at the top of every screen showing a real health score, its band label and this week's change for a pilot page, plus a 'building your baseline' message on a brand-new page, clicking through to the full analytics tile."
+   "layman_needed": "A working badge at the top of every screen showing a real health score, its band label and this week's change for a pilot page, plus a 'building your baseline' message on a brand-new page, clicking through to the full analytics tile.",
+   "layman_output": "A small badge will sit at the top of every screen in the app showing the page's health score, a plain word for its band (at risk, steady or strong) and how much it moved this week. On a brand-new page it will instead read 'building your baseline'. Anyone can click it to land on the full analytics health tile, so a pilot always has the one number they quote to their boss a glance away."
   },
   {
    "id": "N3-AS-06",
@@ -9443,7 +9707,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Settings that let owners tune their alerts — how sensitive, quiet hours at night, instant or daily summary — so warnings arrive the way each person wants and never get so annoying they switch them off.",
    "layman_analogy": "Like setting a doorbell to silent overnight while it still records who called, ready to review over breakfast.",
-   "layman_needed": "A working settings list where flipping a toggle actually saves the choice, and a test showing an alert raised during quiet hours is logged and counted in the morning summary but never emailed at night."
+   "layman_needed": "A working settings list where flipping a toggle actually saves the choice, and a test showing an alert raised during quiet hours is logged and counted in the morning summary but never emailed at night.",
+   "layman_output": "A settings list inside the app where a page owner can flip switches for alert sensitivity, severity, quiet hours and digest-versus-immediate, with each flip actually saved. A teammate can verify it by raising a test alert at 2am: no email goes out overnight, but the alert appears in the log and is counted in the next morning's summary — the night-time policy made real and checkable."
   },
   {
    "id": "N3-AS-07",
@@ -9474,7 +9739,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A 'Not a crisis' button on each alert so owners can tell us when we got it wrong, plus an all-clear notice when a storm dies down — the feedback makes future warnings more accurate and the all-clear stops the worrying.",
    "layman_analogy": "Like a fire brigade taking 'false alarm' reports and ringing back to say the smoke has cleared — fewer needless call-outs, calmer households.",
-   "layman_needed": "A working button on each alert that stores the owner's 'not a crisis' reason against that incident, and an all-clear notice that appears on the card and in the daily feed once the storm has died down."
+   "layman_needed": "A working button on each alert that stores the owner's 'not a crisis' reason against that incident, and an all-clear notice that appears on the card and in the daily feed once the storm has died down.",
+   "layman_output": "Every alert card will carry a 'Not a crisis' button; pressing it asks for a short reason and stores it against that incident for the tuning team to read later. When a comment storm dies down, an all-clear notice appears on the same card, in the Today feed and as a line in the daily email — so an owner can both correct a false alarm and see, in writing, that the trouble is over."
   },
   {
    "id": "N3-AS-08",
@@ -9507,7 +9773,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A simple analytics page with four headline numbers (reach, engagement, followers, health) and two charts, checked to the penny against our own database so the figures pilots see are provably right.",
    "layman_analogy": "Like a shopkeeper's till roll totted up and matched line by line against the bank statement before the figures go in the shop window.",
-   "layman_needed": "A working analytics page with four headline tiles and two charts for a pilot page, plus a recorded database query proving the numbers on screen match our own records exactly for the same date range."
+   "layman_needed": "A working analytics page with four headline tiles and two charts for a pilot page, plus a recorded database query proving the numbers on screen match our own records exactly for the same date range.",
+   "layman_output": "A working analytics page for each pilot with four headline tiles — reach, engagement, followers and health — plus reach and engagement charts with plain-English notes, and the Photos, Video and Advanced tabs honestly labelled as coming later. Alongside it sits a recorded database query proving the on-screen numbers match our own records exactly, so anyone can re-run it and check the figures themselves."
   },
   {
    "id": "N3-AS-09",
@@ -9541,7 +9808,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A week-by-hour grid showing when a page's audience actually responds, with the best slot highlighted — and an honest 'not enough posts yet' message instead of a made-up answer when the data is thin.",
    "layman_analogy": "Like a market trader's chart of which hours the stall is busiest — with an honest 'too soon to say' for hours the stall has barely been open.",
-   "layman_needed": "A working week-by-hour grid that highlights the single best posting slot in the page's own timezone, greys out slots with too few posts with a 'not enough posts yet' message, and carries a short note on how it is worked out."
+   "layman_needed": "A working week-by-hour grid that highlights the single best posting slot in the page's own timezone, greys out slots with too few posts with a 'not enough posts yet' message, and carries a short note on how it is worked out.",
+   "layman_output": "A week-by-hour grid on screen showing when a page's audience responds best, with a ring around the single best posting slot in the page's own timezone. Slots with too few posts are greyed out with a 'not enough posts yet' message rather than guessed at, and a short note explains how the figures are worked out — so an owner can pick a posting time and see exactly how trustworthy the advice is."
   },
   {
    "id": "N3-AS-10",
@@ -9576,7 +9844,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Sitting with a pilot and comparing our numbers side by side with Facebook's own dashboard, then adding a plain note in the product explaining the small expected differences — so a mismatch never shakes their trust.",
    "layman_analogy": "Like weighing your luggage at home and at the airport, then writing on the tag why the two scales differ by a few grams.",
-   "layman_needed": "A written comparison document, done with one pilot by 16 Oct, listing our numbers against Facebook's own dashboard and explaining each small difference, plus a visible in-product note beside the tiles and badge saying why figures may differ slightly."
+   "layman_needed": "A written comparison document, done with one pilot by 16 Oct, listing our numbers against Facebook's own dashboard and explaining each small difference, plus a visible in-product note beside the tiles and badge saying why figures may differ slightly.",
+   "layman_output": "A written comparison document, finished with one pilot by 16 Oct, laying our tiles and the three health-score ingredients side by side with Facebook's own dashboard for the same dates and explaining every small gap. In the app, a visible note beside the tiles and the health badge says why our figures may differ slightly from Facebook's — so a pilot who double-checks us never finds an unexplained mismatch."
   },
   {
    "id": "N3-AS-11",
@@ -9610,7 +9879,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The first settings screen: notification preferences, connected pages, and the doors to export-my-data and delete-my-data — the place where consent and privacy rights physically live for the legal checks that follow.",
    "layman_analogy": "Like fitting a house with its fuse box, letterbox preferences and front-door keys all in one hallway cupboard where an inspector expects to find them.",
-   "layman_needed": "A working settings screen — notification preferences, connected pages with a disconnect option, and entry points to export and delete my data — that passes Saad's one-pager checklist state by state on both desktop and mobile."
+   "layman_needed": "A working settings screen — notification preferences, connected pages with a disconnect option, and entry points to export and delete my data — that passes Saad's one-pager checklist state by state on both desktop and mobile.",
+   "layman_output": "A finished settings area in the app holding profile preferences, notification choices with quiet hours, a list of connected pages each with its health and a disconnect button, and entry points for exporting or deleting your data, plus links to the privacy policy and terms. A teammate can walk through Saad's one-page checklist state by state, on a laptop and a phone, and tick every item off."
   },
   {
    "id": "N3-AS-12",
@@ -9641,7 +9911,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Making the whole app work properly on phones — a bottom navigation bar, the Art-E assistant button, and slide-up panels — tested on iPhone and Android so mobile isn't a nasty surprise near launch.",
    "layman_analogy": "Like refitting a shop so every aisle, till and changing room works when the doorway is only phone-width.",
-   "layman_needed": "Every shipped screen usable on a phone — bottom tab bar, assistant button and slide-up panels in place — checked on iPhone Safari and Android Chrome with no sideways scrolling anywhere."
+   "layman_needed": "Every shipped screen usable on a phone — bottom tab bar, assistant button and slide-up panels in place — checked on iPhone Safari and Android Chrome with no sideways scrolling anywhere.",
+   "layman_output": "Every screen already built will work properly on a phone: a bottom tab bar for moving around, the Art-E assistant button always reachable, and panels that slide up from the bottom for composing and filtering. A teammate can open the app on an iPhone in Safari and an Android phone in Chrome, visit each screen and confirm nothing scrolls sideways and nothing is out of reach of a thumb."
   },
   {
    "id": "N3-AS-13",
@@ -9675,7 +9946,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Three automatic robot tests that click through the app like a real user — sign up and connect a page, the daily check-in, and scoring a draft post — run on every code change so breakages are caught before pilots see them.",
    "layman_analogy": "Like a wind-up toy inspector who walks the whole shop floor after every rearrangement, pulling the same three levers to prove nothing new falls over.",
-   "layman_needed": "Three automated tests — sign up and connect a page, the daily check-in, and scoring a draft post — that run green on every code change and block a change from merging if any of them fails."
+   "layman_needed": "Three automated tests — sign up and connect a page, the daily check-in, and scoring a draft post — that run green on every code change and block a change from merging if any of them fails.",
+   "layman_output": "Three robot-run tests living in the build system: one signs up, verifies and connects a test page; one logs in, opens Today and an alert; one types a draft and checks the verdict appears or honestly declines. They run automatically on every code change against the staging site and physically block a change from being merged if any fails — so a broken flow is caught by a machine, never by a pilot."
   },
   {
    "id": "N3-AS-14",
@@ -9706,7 +9978,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Fixing the problems the first five pilot users reported, and telling the team what's fixed or parked, so pilots six to ten join a version without the known annoyances that would burn their goodwill.",
    "layman_analogy": "Like fixing the leaks the first houseguests complained about before the next lot arrive with their suitcases.",
-   "layman_needed": "Every blocking problem from the first five pilots either fixed on staging or given a written deferred/won't-fix decision, with Lewis and Saad told the outcome and Lewis confirming pilots six to ten can be invited."
+   "layman_needed": "Every blocking problem from the first five pilots either fixed on staging or given a written deferred/won't-fix decision, with Lewis and Saad told the outcome and Lewis confirming pilots six to ten can be invited.",
+   "layman_output": "Every blocking problem reported by the first five pilots will be either fixed on the staging site or given a written 'deferred' or 'won't fix' decision, with the outcome sent to Lewis and Saad. The tangible result is Lewis's written confirmation that pilots six to ten can now be invited onto a build with the known blockers gone — no new pilot walks into a bug the first five already hit."
   },
   {
    "id": "N3-AS-15",
@@ -9739,7 +10012,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing down in advance what we ship if the collaboration-suggestions quality test fails — a trimmed list, or holding the feature back — so a bad result triggers a plan, not a last-minute scramble.",
    "layman_analogy": "Like a wedding planner writing the rain plan before checking the forecast — the marquee decision is made calmly, not mid-downpour.",
-   "layman_needed": "A one-page plan filed before 16 Oct saying exactly what ships under each way the suggestions quality test could fail, who decides within 24 hours, and what gets built next in each case — acknowledged by Alex, Muteeb and Lewis."
+   "layman_needed": "A one-page plan filed before 16 Oct saying exactly what ships under each way the suggestions quality test could fail, who decides within 24 hours, and what gets built next in each case — acknowledged by Alex, Muteeb and Lewis.",
+   "layman_output": "A one-page decision plan, filed in the register before 16 Oct, spelling out exactly what the collaboration-suggestions feature ships under each way its quality test could fail — full stop, a trimmed version, a hand-picked list, or held back — plus who decides within 24 hours and what gets built next in each case. Alex, Muteeb and Lewis will each have acknowledged it, so a fail triggers a plan, not a scramble."
   },
   {
    "id": "N3-AS-16",
@@ -9775,7 +10049,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Labelling every request the app makes with who asked and what it cost (computing time, database reads, AI usage), so we can later say exactly what each customer costs us — vital for setting the right price.",
    "layman_analogy": "Like an itemised restaurant bill that shows every table's dishes and their cost, instead of one mystery total at month end.",
-   "layman_needed": "A cost record written for every single request the app handles — who asked, what it touched, how long it took, what AI it used — such that one query can list what each customer cost us, per feature, over the last seven days."
+   "layman_needed": "A cost record written for every single request the app handles — who asked, what it touched, how long it took, what AI it used — such that one query can list what each customer cost us, per feature, over the last seven days.",
+   "layman_output": "Every single request the app handles will leave behind a structured cost record: who asked, which page and feature, which back-end services and AI models it touched, how long it took and how many AI tokens it burned. With one query anyone can list what each customer cost us, per feature, over the last seven days — the raw material for pricing, quotas and the cost dashboard, impossible to reconstruct later."
   },
   {
    "id": "N3-FH-01",
@@ -9807,7 +10082,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Making sure the live post-scoring gives exactly the same answer as our tested version, never flickers between scores for the same text, and responds quickly — a gauge that disagrees with itself gets ignored.",
    "layman_analogy": "Like checking a butcher's shop scale against the certified one out back — same joint, same weight, every time, no wobble.",
-   "layman_needed": "Filed test reports showing the live scoring gives essentially identical answers to the tested version across 500 drafts, never flickers between scores for the same text, and responds within the agreed speed budget."
+   "layman_needed": "Filed test reports showing the live scoring gives essentially identical answers to the tested version across 500 drafts, never flickers between scores for the same text, and responds within the agreed speed budget.",
+   "layman_output": "A set of filed test reports proving the live draft-scoring behaves itself: the same 500 drafts score essentially identically live as in testing, the same text always gets the same score with no flicker, the confidence figures line up, and answers come back inside the agreed speed budget. Anyone can open the reports and see the near-zero differences — evidence the gauge pilots see can be trusted."
   },
   {
    "id": "N3-FH-02",
@@ -9840,7 +10116,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The brain of the alert system: it turns a comment storm into one clear alert — plain-English problem, one action, links to the actual comments — instead of fifty pings, and respects each owner's quiet hours.",
    "layman_analogy": "Like a switchboard operator who turns fifty frantic calls about the same fire into one clear message: what is burning, where, and which door to use.",
-   "layman_needed": "A working engine that turns a replayed comment storm into exactly one alert — plain-English problem, one suggested action, a drafted reply, links to the actual comments — and holds it correctly through quiet hours."
+   "layman_needed": "A working engine that turns a replayed comment storm into exactly one alert — plain-English problem, one suggested action, a drafted reply, links to the actual comments — and holds it correctly through quiet hours.",
+   "layman_output": "A working alert engine that turns a replayed comment storm into exactly one alert instead of fifty: a plain-English description of the problem, one suggested action, a drafted reply, and links to the actual posts and comments involved. It also obeys the night-time rules — a storm during quiet hours is logged and lands in the morning digest rather than waking anyone. Its output format is agreed with Muteeb."
   },
   {
    "id": "N3-FH-03",
@@ -9874,7 +10151,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A live fire drill: we deliberately stir up a comment storm on a pilot page and time the whole chain, proving the warning email lands within our 15-minute promise before real customers depend on it.",
    "layman_analogy": "Like setting off controlled smoke in the kitchen and standing there with a stopwatch until the alarm actually rings.",
-   "layman_needed": "A filed drill record showing a deliberately seeded comment storm on a pilot page produced the warning email in under 15 minutes end to end, with the alert citing the right comments and carrying a drafted reply."
+   "layman_needed": "A filed drill record showing a deliberately seeded comment storm on a pilot page produced the warning email in under 15 minutes end to end, with the alert citing the right comments and carrying a drafted reply.",
+   "layman_output": "A filed drill record from the first crisis rehearsal: a comment storm deliberately seeded on a pilot page, with timestamps showing the warning email arrived less than 15 minutes after the first comment, the alert pointing at the right comments and carrying a drafted reply. Anyone can open the record and check the clock themselves — the 15-minute promise measured before pilots rely on it."
   },
   {
    "id": "N3-FH-04",
@@ -9906,7 +10184,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A running record of every recommendation we make and what actually happened afterwards, so we can later prove statements like 'posts improved when you followed the advice' with real evidence.",
    "layman_analogy": "Like a doctor's notes that record both the prescription and whether the patient got better — without them you can never prove the medicine works.",
-   "layman_needed": "A running record that gains rows every day for all three kinds of advice we give — next move, best time, draft feedback — each noting what we suggested, whether it was followed and what happened a week later."
+   "layman_needed": "A running record that gains rows every day for all three kinds of advice we give — next move, best time, draft feedback — each noting what we suggested, whether it was followed and what happened a week later.",
+   "layman_output": "A running ledger that gains rows every day, one for each piece of advice the product gives — the daily next move, the best-time window, and draft feedback — recording what we suggested, whether the owner followed it, and what actually happened a week later. Muteeb's Wins screens read straight from it, so claims like 'posts do better when you follow the advice' will rest on recorded outcomes, not anecdotes."
   },
   {
    "id": "N3-FH-05",
@@ -9939,7 +10218,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The logic that picks the single best thing a page owner should do today — from posting-time data, flop warnings and alert status — so the home screen's headline suggestion has real reasoning behind it.",
    "layman_analogy": "Like a head chef reading the day's deliveries, bookings and weather, then chalking one dish of the day on the board — not a whole menu.",
-   "layman_needed": "Working logic that combines posting-time data, flop warnings and alert status into one ranked 'do this today' suggestion with a confidence label for a pilot page, recorded in the outcomes ledger and handed to Muteeb's feed."
+   "layman_needed": "Working logic that combines posting-time data, flop warnings and alert status into one ranked 'do this today' suggestion with a confidence label for a pilot page, recorded in the outcomes ledger and handed to Muteeb's feed.",
+   "layman_output": "Working logic that each day weighs a page's best posting window, any flop-warning margin and any live alert, and boils them into one ranked 'do this today' suggestion with a confidence label. For a pilot page a teammate can see the single card, check it is logged in the outcomes ledger, and confirm Muteeb's feed receives it — the Today screen's headline advice will finally have a real engine behind it."
   },
   {
    "id": "N3-FH-06",
@@ -9973,7 +10253,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The first version of the health score calculation, made of three understandable sub-scores and double-checked against our database for a real pilot page, so the number on the badge is defensible before the mid-October checkpoint.",
    "layman_analogy": "Like a school report built from three marked subjects, with the marking cross-checked against the exam papers before it goes home to parents.",
-   "layman_needed": "A calculation producing the health score from three understandable sub-scores, verified against our database for one real pilot page, the factor-to-Facebook mapping with Asad by 13 Oct, and new pages correctly showing 'building your baseline'."
+   "layman_needed": "A calculation producing the health score from three understandable sub-scores, verified against our database for one real pilot page, the factor-to-Facebook mapping with Asad by 13 Oct, and new pages correctly showing 'building your baseline'.",
+   "layman_output": "A nightly calculation producing every page's health score from three understandable ingredients, stored per page and per workspace, with a brand-new page correctly returning 'building your baseline'. One real pilot's figures will be checked against our database line by line, and the mapping from each ingredient to Facebook's own metrics will be with Asad by 13 Oct so he can compare against Meta before the gate."
   },
   {
    "id": "N3-FH-07",
@@ -10004,7 +10285,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Deciding what to fetch first when a new page connects — the last 90 days — so a new customer sees their first useful insight in minutes rather than staring at a loading screen while months of history download.",
    "layman_analogy": "Like unpacking after a house move by opening the kettle-and-mugs box first, not working through the loft crates in the order they came off the van.",
-   "layman_needed": "An agreed fetch-the-last-90-days-first rule on the ingest queue, tested with Muteeb, so a newly connected page shows its first useful insight within minutes while the older history still downloads behind it."
+   "layman_needed": "An agreed fetch-the-last-90-days-first rule on the ingest queue, tested with Muteeb, so a newly connected page shows its first useful insight within minutes while the older history still downloads behind it.",
+   "layman_output": "An agreed rule on the download queue that fetches a newly connected page's most recent 90 days first, tested with Muteeb on a fresh page. The visible result: a new customer sees their first useful insight within minutes of connecting, while the older history quietly downloads behind it — the 'learning, never loading' promise made true, with the completion signals the screens need listed for the UI."
   },
   {
    "id": "N3-FH-08",
@@ -10036,7 +10318,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Automatic smoke detectors for our prediction models: if their accuracy quietly starts drifting, a dashboard flags it and a written playbook says what to do — models decay silently otherwise.",
    "layman_analogy": "Like fitting tyre-pressure warning lights and then letting a little air out on purpose to prove the light comes on.",
-   "layman_needed": "Live accuracy monitors on the prediction models with written instructions for what to do when one trips, proven by feeding in a fake data shift and watching the warning actually fire."
+   "layman_needed": "Live accuracy monitors on the prediction models with written instructions for what to do when one trips, proven by feeding in a fake data shift and watching the warning actually fire.",
+   "layman_output": "Live accuracy monitors on the QA dashboard watching the flop, language and crisis models for quiet decay, each with a written instruction sheet for what to do when one trips. The proof is on file: a deliberately faked data shift was fed in and the warning fired. A teammate can open the dashboard, see the monitors green, and read exactly who does what the day one turns red."
   },
   {
    "id": "N3-FH-09",
@@ -10070,7 +10353,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Loading the first batch of test questions for the Art-E assistant into our nightly checking system and listing which topics still need questions, so the full 200-question accuracy test can be built next sprint.",
    "layman_analogy": "Like loading the first hundred flashcards into the revision deck and listing which exam topics still have no cards.",
-   "layman_needed": "The first batch of Art-E test questions loaded into the nightly checking system, each row verified against the sheet format, plus a written list with Lewis by 18 Oct of the question topics still missing on the road to 200."
+   "layman_needed": "The first batch of Art-E test questions loaded into the nightly checking system, each row verified against the sheet format, plus a written list with Lewis by 18 Oct of the question topics still missing on the road to 200.",
+   "layman_output": "The first batch of Art-E test questions — the 20 gate questions plus roughly 100 more from Lewis and Saad — loaded into the nightly checking system, every row verified against the sheet format and its source rules. Alongside it, a written list handed to Lewis by 18 Oct of the question topics still missing on the road to 200, so he knows exactly what to write next and nothing arrives unusable."
   },
   {
    "id": "N3-FH-10",
@@ -10100,7 +10384,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A practice run of updating a prediction model, with a written rule for deciding whether the new version is genuinely better before it replaces the old one — so retraining is a checked process, not a gamble.",
    "layman_analogy": "Like a dress rehearsal for recasting a lead role, with a written rule for whether the understudy actually goes on.",
-   "layman_needed": "A written promote-or-keep rule for model updates, one practice retrain of the flop model compared against the current one, and a recorded decision showing the rule was actually applied."
+   "layman_needed": "A written promote-or-keep rule for model updates, one practice retrain of the flop model compared against the current one, and a recorded decision showing the rule was actually applied.",
+   "layman_output": "A written promote-or-keep rule for updating models, plus the record of it being used once for real: the flop model retrained on fresher data, compared side by side with the current one, and a documented decision on which to keep. A teammate can read the rule and the decision record and see that model updates now pass through a gate rather than a gamble."
   },
   {
    "id": "N3-FH-11",
@@ -10128,7 +10413,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Four small data-hygiene chores — tidying retired pages, dropping an unused metric, parking an image-analysis idea, packaging our tools — so they stop showing up as noise on the team's monitoring board.",
    "layman_analogy": "Like an end-of-week tidy of the workshop — old offcuts binned, one project shelved with a label, the toolbox packed — so the bench is clear on Monday.",
-   "layman_needed": "All four housekeeping chores — retired pages handled, the unused metric dropped, the image-analysis idea logged as parked, the tools packaged into a Docker image — marked closed in the register."
+   "layman_needed": "All four housekeeping chores — retired pages handled, the unused metric dropped, the image-analysis idea logged as parked, the tools packaged into a Docker image — marked closed in the register.",
+   "layman_output": "Four housekeeping chores marked closed in the register: pages that no longer exist handled cleanly, an unused reactions metric retired, the image-analysis idea formally logged as parked rather than forgotten, and the machine-learning tools packaged into a Docker image anyone can run. The war-room board stops carrying their noise, and a teammate can check all four entries read 'closed'."
   },
   {
    "id": "N3-FH-12",
@@ -10160,7 +10446,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Publishing the exact spreadsheet format and coverage rules for the Art-E test questions, so Lewis and Saad can write them once, in the right shape, and they feed straight into the nightly checks without rework.",
    "layman_analogy": "Like handing the exam-setters the official answer-sheet template and syllabus rules before they write a single question.",
-   "layman_needed": "A published spreadsheet format and coverage rules for the Art-E test questions, proven by Lewis and Saad writing their first batch straight into it and Faheem loading it into the nightly checks without any reformatting."
+   "layman_needed": "A published spreadsheet format and coverage rules for the Art-E test questions, proven by Lewis and Saad writing their first batch straight into it and Faheem loading it into the nightly checks without any reformatting.",
+   "layman_output": "A published spreadsheet format and coverage rules for the Art-E test questions — columns for the question, the expected cited source, must-refuse category, trick-question flag and provenance — proven by Lewis and Saad writing their first batch straight into it and Faheem loading that batch into the nightly checks with zero reformatting. The 200-question gate now has a container everyone writes into."
   },
   {
    "id": "N3-MT-01",
@@ -10203,7 +10490,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Building the engine that finds pages with genuinely similar audiences, with statistical checks so weak matches are filtered out, privacy floors enforced, and the list refreshed weekly.",
    "layman_analogy": "Like a matchmaker who only introduces couples with real mutual friends, checks the evidence stands up, and refreshes the books every week.",
-   "layman_needed": "A weekly-refreshed database of statistically checked page-to-page matches, with weak matches filtered or honestly labelled, privacy floors enforced with a log, and a first-run report of how many matches survived the checks."
+   "layman_needed": "A weekly-refreshed database of statistically checked page-to-page matches, with weak matches filtered or honestly labelled, privacy floors enforced with a log, and a first-run report of how many matches survived the checks.",
+   "layman_output": "A database table, refreshed weekly, holding statistically checked page-to-page collaboration matches: weak matches filtered out or honestly labelled 'suggested, not validated', high-confidence ones badged, and the privacy floor of five enforced with a log of what it hid. The first run comes with a report of how many matches survived the checks, so Lewis's 16 Oct review judges real candidates."
   },
   {
    "id": "N3-MT-02",
@@ -10235,7 +10523,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Building the proper, secure connection that will feed collaboration suggestions to each customer's screen — with logins, per-customer separation and sensible limits, replacing an old half-built version that had none of that.",
    "layman_analogy": "Like building a proper bank counter with ID checks and separate customer accounts, rather than patching up an old stall that had no till.",
-   "layman_needed": "Working, secure data feeds serving each customer only their own collaboration matches from the database, with login checks and per-customer separation proven by automated tests that pass on every code change."
+   "layman_needed": "Working, secure data feeds serving each customer only their own collaboration matches from the database, with login checks and per-customer separation proven by automated tests that pass on every code change.",
+   "layman_output": "Working, secure data feeds — built from scratch — that serve each customer only their own collaboration matches from the database, with proper login checks and per-customer separation. Automated tests proving one customer can never see another's matches will run on every code change, so the feature the Explore screens plug into is safe before a single pilot touches it."
   },
   {
    "id": "N3-MT-03",
@@ -10272,7 +10561,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Replaying a real past comment storm through the whole system with a stopwatch — from first comment to warning email — to prove the 15-minute promise holds, and checking nothing gets lost when parts fail.",
    "layman_analogy": "Like re-running last year's fire evacuation from the CCTV footage with a stopwatch, and checking nobody gets left behind if a door jams.",
-   "layman_needed": "A filed timing log showing a real historic comment storm, replayed through the whole system, produced the in-app alert and email in under 15 minutes, with forced failures proven to be caught rather than lost."
+   "layman_needed": "A filed timing log showing a real historic comment storm, replayed through the whole system, produced the in-app alert and email in under 15 minutes, with forced failures proven to be caught rather than lost.",
+   "layman_output": "A filed timing log showing one of Lewis's real historic comment storms replayed through the entire live system — detection, labelling, alert writing, in-app notice and email — with a stopwatch proving under 15 minutes from comment posted to email received. Deliberately forced failures were shown to land in the safety queue rather than vanish, so the pipeline's promise and its safety net are both on record."
   },
   {
    "id": "N3-MT-04",
@@ -10306,7 +10596,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The data feed behind the best-time-to-post grid: it serves each page's hour-by-hour results, honestly marks slots with too little data, and handles time zones correctly so the autumn clock change causes no wrong advice.",
    "layman_analogy": "Like the wholesaler who supplies the greengrocer's display — right stock, honest 'out of season' labels, clocks set correctly for the early market.",
-   "layman_needed": "A working data feed returning all 168 hour-by-day slots for a pilot page, matching Faheem's table, with too-thin slots flagged honestly and the page's timezone stated so the autumn clock change causes no wrong advice."
+   "layman_needed": "A working data feed returning all 168 hour-by-day slots for a pilot page, matching Faheem's table, with too-thin slots flagged honestly and the page's timezone stated so the autumn clock change causes no wrong advice.",
+   "layman_output": "A working data feed returning all 168 hour-by-day posting slots for a pilot page, matching Faheem's table exactly, with too-thin slots honestly flagged and the page's timezone stated in every response so the October clock change cannot skew the advice. Asad's heatmap and the 'post at 6:40pm' claims will draw from this feed, and each customer sees only their own pages' figures."
   },
   {
    "id": "N3-MT-05",
@@ -10339,7 +10630,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The data feeds behind the analytics page's headline numbers and charts, kept fast with caching and checked against our database for a real pilot page so what customers see is what the data actually says.",
    "layman_analogy": "Like the kitchen pass that plates every dish the front of house serves — fast, and tasting exactly like the recipe book says it should.",
-   "layman_needed": "Fast, per-customer data feeds behind the analytics tiles and charts, with one pilot page's numbers proven to match our database exactly."
+   "layman_needed": "Fast, per-customer data feeds behind the analytics tiles and charts, with one pilot page's numbers proven to match our database exactly.",
+   "layman_output": "Fast, per-customer data feeds sitting behind the analytics screen: the reach, engagement and followers tiles, the two charts, and the health tile drawn from the health feed, all cached so the page loads quickly. One pilot page's numbers will have been checked line by line against our database, so a teammate can open the screen, run the recorded query and watch the figures agree exactly."
   },
   {
    "id": "N3-MT-06",
@@ -10375,7 +10667,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The recipe for combining the two ways we spot similar pages, with honest wording — 'similar discussion topics' when that's all we know, never overclaiming — and the recipe locked before the human quality review so the test is fair.",
    "layman_analogy": "Like sealing a recipe in an envelope before the tasting panel sits, with honest labels on which dishes are just similar-smelling, not proven alike.",
-   "layman_needed": "Each match carrying a 0-100 score from a blend whose weights are frozen and recorded before the 16 Oct human review, honest wording that never overclaims for text-only matches, and the disagreement log delivered to Lewis."
+   "layman_needed": "Each match carrying a 0-100 score from a blend whose weights are frozen and recorded before the 16 Oct human review, honest wording that never overclaims for text-only matches, and the disagreement log delivered to Lewis.",
+   "layman_output": "Every collaboration match will carry a single 0-100 score from a recipe that mixes audience-based and topic-based evidence, with the recipe's weights frozen and written in the register before Lewis's 16 Oct review. Text-only matches will say 'similar discussion topics', never claim shared audiences, and the log of cases where the two kinds of evidence disagreed will be in Lewis's hands for judging."
   },
   {
    "id": "N3-MT-07",
@@ -10409,7 +10702,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The data feed behind the health badge: each page's score, weekly change and the three factors behind it, plus an overnight summary job — the plumbing that must be live for the mid-October checkpoint.",
    "layman_analogy": "Like the meter and wiring behind the dashboard dial — the score, this week's change and its three ingredients piped in fresh, plus an overnight reading.",
-   "layman_needed": "Working data feeds returning each page's health score, weekly change and three sub-scores, verified against our database for a pilot page, plus a nightly job writing the morning briefing summary row."
+   "layman_needed": "Working data feeds returning each page's health score, weekly change and three sub-scores, verified against our database for a pilot page, plus a nightly job writing the morning briefing summary row.",
+   "layman_output": "Working data feeds returning each page's health score, its change on the week and the three ingredient sub-scores, checked against our database for a pilot page, plus a nightly job that writes each page's morning briefing summary — overnight reach change, shares and moves count. The topbar badge, the Pages view and the Today briefing card will all read from these same feeds."
   },
   {
    "id": "N3-MT-08",
@@ -10440,7 +10734,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Making sure that when a page withdraws from collaboration suggestions, it vanishes from every match list and saved list within 24 hours — with an automatic check proving it — because a consent promise must be mechanically true.",
    "layman_analogy": "Like a phone directory that genuinely removes an ex-directory number from every copy within a day — and a clerk who checks each edition.",
-   "layman_needed": "A process that removes a page from all match lists, spotlight and saved lists within 24 hours of it withdrawing consent, plus an automated test proving a revoked test page vanishes from all three."
+   "layman_needed": "A process that removes a page from all match lists, spotlight and saved lists within 24 hours of it withdrawing consent, plus an automated test proving a revoked test page vanishes from all three.",
+   "layman_output": "An automatic process that, within 24 hours of a page withdrawing its consent to appear in collaboration suggestions, scrubs it from the match lists, the spotlight and every customer's saved list. The proof lives in an automated test: revoke a test page, and the test asserts it has vanished from all three places. A promise made in the consent screen becomes something a machine enforces and verifies."
   },
   {
    "id": "N3-MT-09",
@@ -10474,7 +10769,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Wiring up the Art-E assistant end to end: it finds the right facts from your page's data, answers, tracks what each answer costs, and uses cheaper AI where possible — with one customer's data never leaking into another's answer.",
    "layman_analogy": "Like a librarian who checks the right shelf before answering, keeps a fare meter running, and never reads out another member's borrowing record.",
-   "layman_needed": "The assistant answering a pilot's question from their own data, every call costed to that customer, cheaper AI used where possible with routing logged, each model named in writing, and a proven graceful fallback when the top tier fails."
+   "layman_needed": "The assistant answering a pilot's question from their own data, every call costed to that customer, cheaper AI used where possible with routing logged, each model named in writing, and a proven graceful fallback when the top tier fails.",
+   "layman_output": "The Art-E assistant answering a pilot's typed question from that pilot's own data end to end, with every call costed to that customer, cheaper AI models used where good enough and each routing choice logged, every model named and version-pinned in writing, and a proven graceful fallback — a forced failure of the top model degrades to the cheap tier or a polite abstain, never a blank error."
   },
   {
    "id": "N3-MT-10",
@@ -10506,7 +10802,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The system that fetches a newly connected page's history in smart order — most recent first, resumable if interrupted — and tells the screen what's done, so new customers see progress instead of a blank loading page.",
    "layman_analogy": "Like a removal crew that unloads the beds and kettle first, chalks off each room as it is done, and can pick up exactly where it stopped after a tea break.",
-   "layman_needed": "A working queue that fetches a newly connected page's history most-recent-first in resumable chunks, sending the screen step-by-step 'done' signals in order so the new customer watches progress instead of a blank page."
+   "layman_needed": "A working queue that fetches a newly connected page's history most-recent-first in resumable chunks, sending the screen step-by-step 'done' signals in order so the new customer watches progress instead of a blank page.",
+   "layman_output": "A working download queue that, the moment a new page connects, fetches its history newest-first in small resumable chunks and fires a 'done' signal at each named step. The visible result: a brand-new customer watches their setup screen tick through progress steps and reach a first insight quickly, instead of staring at a blank page — and an interrupted fetch picks up where it left off."
   },
   {
    "id": "N3-MT-11",
@@ -10542,7 +10839,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A public status page and internal dashboards showing whether the service is up and how fast it is, with layered health checks that report 'slower than usual' rather than falsely 'down' — pilots and Facebook's reviewers both check this.",
    "layman_analogy": "Like a hospital that checks pulse, fitness for duty and full bloodwork separately — a slow lab result never gets a healthy patient declared dead.",
-   "layman_needed": "A public status page plus dashboards, with three separate health checks — alive, ready to serve, and deep dependency probe — where a failing dependency shows 'degraded' rather than 'down' and only readiness controls whether an instance takes traffic."
+   "layman_needed": "A public status page plus dashboards, with three separate health checks — alive, ready to serve, and deep dependency probe — where a failing dependency shows 'degraded' rather than 'down' and only readiness controls whether an instance takes traffic.",
+   "layman_output": "A public status page anyone can visit to see whether ArtemisAI is up, backed by dashboards of speed and errors per feature, and three separate health checks: alive, ready to take traffic, and a deep probe of every dependency. A failing dependency shows 'degraded' rather than 'down', only the readiness check decides whether a server receives traffic, and the loose ends from the first restore drill are closed."
   },
   {
    "id": "N3-MT-12",
@@ -10577,7 +10875,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The formal Friday checkpoint: a live crisis drill on a real pilot page, timed from first comment to warning email, with the health badge shown working — the recorded proof behind our 15-minute promise.",
    "layman_analogy": "Like the official timed run at a driving test — examiner watching, stopwatch clicked, result written on the certificate.",
-   "layman_needed": "The live crisis drill run on 9 Oct on a real pilot page — Lewis seeding the storm, the alert and email delivered — with the comment-to-email time recorded in the gate log and the health badge shown working."
+   "layman_needed": "The live crisis drill run on 9 Oct on a real pilot page — Lewis seeding the storm, the alert and email delivered — with the comment-to-email time recorded in the gate log and the health badge shown working.",
+   "layman_output": "The 9 Oct gate run for real: Lewis seeds a comment storm on a genuine pilot page, the live system detects it and delivers the in-app alert and the email, and the time from first comment to email received is written into the gate log, with the health badge shown working on screen. Anyone can open the gate log afterwards and read the clock — the evidence the 12 Nov demo video will stand on."
   },
   {
    "id": "N3-MT-13",
@@ -10610,7 +10909,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Writing the exact wording of match explanations ('8,200 of your people also follow…') and how each match type is classified, so legal can approve the language and the quality bar can be set before anyone sees a single match.",
    "layman_analogy": "Like drafting the label wording for a food product and sending it to the regulator before a single packet is printed.",
-   "layman_needed": "A written classification of match types and the candidate explanation wordings per type, with Filza holding the template list and Lewis the classification by 7 Oct, so only legally approved wording ever ships."
+   "layman_needed": "A written classification of match types and the candidate explanation wordings per type, with Filza holding the template list and Lewis the classification by 7 Oct, so only legally approved wording ever ships.",
+   "layman_output": "A written classification of the three kinds of collaboration match — audience-based, topic-only, and the two disagreeing — plus the candidate explanation sentences for each kind, with follower counts banded and the privacy floor applied. Filza holds the wording list and Lewis holds the classification by 7 Oct, so the legal check and the quality bar are both set before a single match is ever shown."
   },
   {
    "id": "N3-MT-14",
@@ -10644,7 +10944,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "The data plumbing behind alert settings and feedback: saving each owner's toggles and quiet hours, recording 'not a crisis' clicks and thumbs-up/down on assistant answers, so the screens work and the models learn from real reactions.",
    "layman_analogy": "Like the filing cabinet behind the reception desk — every preference card, complaint slip and comment card stored where staff can actually find them.",
-   "layman_needed": "Working data feeds that save each owner's alert toggles and quiet hours, record 'not a crisis' clicks and thumbs feedback on assistant answers, contract-tested, with Faheem able to query the feedback for his false-alarm log."
+   "layman_needed": "Working data feeds that save each owner's alert toggles and quiet hours, record 'not a crisis' clicks and thumbs feedback on assistant answers, contract-tested, with Faheem able to query the feedback for his false-alarm log.",
+   "layman_output": "Working data feeds behind the alert settings and feedback screens: each owner's toggles and quiet hours save properly, a 'not a crisis' click is stored with its reason against the incident, and thumbs-up or thumbs-down on assistant answers land in a store Faheem can query for his false-alarm log. Contract tests pin the formats, so Asad's screens and Faheem's analysis both plug in without surprises."
   },
   {
    "id": "N3-MT-15",
@@ -10680,7 +10981,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Keeping the Art-E assistant's knowledge fresh: new posts and comments become answerable within a stated window, deleted data is properly removed, and each answer shows a 'data through' date — a stale answer confidently cited is worse than none.",
    "layman_analogy": "Like a newsagent who restocks today's papers every hour, pulls recalled editions off the shelf, and dates the rack so you know how current it is.",
-   "layman_needed": "A refresh process so a post published on a pilot page becomes answerable by the assistant within its stated window, deleted data properly removed, each answer carrying a correct 'data through' date, and an alarm when freshness slips."
+   "layman_needed": "A refresh process so a post published on a pilot page becomes answerable by the assistant within its stated window, deleted data properly removed, each answer carrying a correct 'data through' date, and an alarm when freshness slips.",
+   "layman_output": "A refresh process for the assistant's memory of each page: a new post becomes answerable within a stated window (hourly for posts and comments, daily for aggregates), deleted or disconnected data is properly removed rather than lingering, every answer carries a truthful 'data through' date on screen, and an alarm fires if any customer's data falls behind schedule — so the assistant can never confidently cite stale facts."
   },
   {
    "id": "N3-MT-16",
@@ -10717,7 +11019,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "One dashboard showing what each feature costs us per customer per month, with an alarm if any single customer's daily cost spikes — so pricing uses real numbers and an expensive user is spotted the same day, not on the bill.",
    "layman_analogy": "Like a landlord's ledger showing each tenant's gas, water and electricity separately — with a knock on the door the day one meter starts spinning.",
-   "layman_needed": "One dashboard showing what each feature costs per customer per month, broken down by computing, database, queue and AI usage, with a top-10 most-expensive view and an alert that fires the day any customer's cost spikes."
+   "layman_needed": "One dashboard showing what each feature costs per customer per month, broken down by computing, database, queue and AI usage, with a top-10 most-expensive view and an alert that fires the day any customer's cost spikes.",
+   "layman_output": "One dashboard showing what each feature costs per customer per month, split into computing, database reads, queues, network and AI usage, with a top-10 most-expensive-features view. An alert fires the same day any single customer's cost crosses the threshold, so a runaway assistant user is spotted immediately rather than discovered in the monthly bill — and pricing decisions read from this panel."
   },
   {
    "id": "N3-SD-01",
@@ -10750,7 +11053,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Actively managing Facebook's review of our app: answering every reviewer question the same day and resubmitting within 48 hours if rejected, with everything logged — because their clock doesn't pause for us.",
    "layman_analogy": "Like a planning application shepherded by someone who answers the council's letters by return of post and refiles corrected drawings within two days.",
-   "layman_needed": "Every message from Facebook's reviewers answered within 24 hours, any rejection resubmitted within 48 hours using the pre-written responses, and a timestamped log of every exchange for Alex's timeline calculations."
+   "layman_needed": "Every message from Facebook's reviewers answered within 24 hours, any rejection resubmitted within 48 hours using the pre-written responses, and a timestamped log of every exchange for Alex's timeline calculations.",
+   "layman_output": "A running, timestamped log of the entire exchange with Facebook's app reviewers: every question from them answered the same day, the weekly check that the test login still works recorded, and any rejection turned around within 48 hours using the pre-written responses. Alex can open the log and compute exactly how many review cycles remain before the code freeze — no idle days lost to silence."
   },
   {
    "id": "N3-SD-02",
@@ -10786,7 +11090,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing the rulebook for pilot testing before any bugs exist: who tests in what order, what tasks they attempt, what counts as a serious defect, and how retests work — so pass/fail can't be renegotiated under deadline pressure.",
    "layman_analogy": "Like agreeing the driving-test marking sheet before anyone gets in the car — majors, minors and retakes defined in advance, not argued at the kerb.",
-   "layman_needed": "A published pilot-testing rulebook — invitation waves, comprehension tasks per screen, watch-don't-guide rules, what counts as a serious defect, and who runs retests — reviewed by Alex before any defects exist."
+   "layman_needed": "A published pilot-testing rulebook — invitation waves, comprehension tasks per screen, watch-don't-guide rules, what counts as a serious defect, and who runs retests — reviewed by Alex before any defects exist.",
+   "layman_output": "A published pilot-testing rulebook, written before any defects exist and reviewed by Alex: which pilots get invited in which wave, the comprehension tasks per screen ('what does 72 mean?'), the watch-don't-guide rules for sessions, exactly what counts as a serious blocking defect, and who runs retests. When testing starts, results are judged against rules set in advance, not negotiated on the day."
   },
   {
    "id": "N3-SD-04",
@@ -10821,7 +11126,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing the pass/fail rules for the Art-E assistant: every number must link to its source, refusals use approved wording, AI labels show, and slow or stale answers fail like wrong ones — the definition next sprint's hardest test is judged by.",
    "layman_analogy": "Like writing the examiner's mark scheme for an oral exam: every claim must show its source, some questions must be refused, and dithering loses marks too.",
-   "layman_needed": "A published pass/fail rulebook for the assistant — every number linked to its source, approved refusal wording, visible AI labels, a freshness stamp, and speed limits — quoting Filza's legal text verbatim and Faheem's gate definition."
+   "layman_needed": "A published pass/fail rulebook for the assistant — every number linked to its source, approved refusal wording, visible AI labels, a freshness stamp, and speed limits — quoting Filza's legal text verbatim and Faheem's gate definition.",
+   "layman_output": "A published pass/fail rulebook for the Art-E assistant: every number in an answer must link to its source, refusals use Filza's approved wording quoted verbatim, the AI label and disclaimer sit in defined places, each answer shows how fresh its data is, and answers must arrive within the agreed speed limits. Anyone building or testing the assistant can hold a screen against this document and say pass or fail."
   },
   {
    "id": "N3-SD-06",
@@ -10857,7 +11163,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Quality-checking the collaboration-suggestions feature against the agreed designs as it's built — the match cards, honest explanation wording, privacy floors and the withdrew-consent behaviour — so gaps are caught now, when they're cheap.",
    "layman_analogy": "Like a snagging inspection during the build, walking the plans room by room so gaps are caught while the plaster is still wet.",
-   "layman_needed": "A signed-off checklist confirming every state in the collaboration-suggestions designs — match cards, honest wording, privacy floors, the withdrew-consent behaviour — matches what the data feeds actually deliver, with no missing state."
+   "layman_needed": "A signed-off checklist confirming every state in the collaboration-suggestions designs — match cards, honest wording, privacy floors, the withdrew-consent behaviour — matches what the data feeds actually deliver, with no missing state.",
+   "layman_output": "A signed-off inspection checklist confirming the collaboration-suggestions screens match both the 12 Sep designs and what the data feeds actually deliver: the top-match spotlight, ranked rows, profile panel, honest 'suggested, not validated' badges, truthful explanation wording, the privacy-floor empty state and the withdrew-consent behaviour — with no screen state missing between design and data."
   },
   {
    "id": "N3-SD-07",
@@ -10889,7 +11196,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Submitting ArtemisAI to BetaList and startup directories with tracking tags so we know which listing brings sign-ups, and quietly claiming our review-site profile — these pre-launch windows close permanently at launch.",
    "layman_analogy": "Like getting your stall booked into the Christmas markets and quietly registering the shop name before opening day — windows that shut for good once you launch.",
-   "layman_needed": "Logged submissions to BetaList and the agreed directories, each with tracking tags matched to the waitlist so sign-ups can be traced to their source, and the G2 review profile claimed without any announcement."
+   "layman_needed": "Logged submissions to BetaList and the agreed directories, each with tracking tags matched to the waitlist so sign-ups can be traced to their source, and the G2 review profile claimed without any announcement.",
+   "layman_output": "Logged submissions to BetaList and the agreed start-up directories, each carrying tracking tags matched to the waitlist so every future sign-up can be traced to the directory that sent it, all using the locked pricing and the 8 Dec launch date. The G2 review profile will be claimed and held quietly, ready for launch — windows that close permanently at launch, secured in advance."
   },
   {
    "id": "N3-SD-08",
@@ -10920,7 +11228,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A design quality sweep of every screen built this sprint — alerts, posting-time grid, analytics, settings, mobile, waitlist — against the agreed designs, filing anything off-spec so it's fixed before pilot testing amplifies it.",
    "layman_analogy": "Like a dress fitting the week before the wedding — every seam checked against the pattern, alterations pinned and sent to the tailor.",
-   "layman_needed": "Written inspection notes for every screen built this sprint — alerts, posting-time grid, analytics, settings, mobile, waitlist — with each deviation from the designs filed as a sized ticket for Asad."
+   "layman_needed": "Written inspection notes for every screen built this sprint — alerts, posting-time grid, analytics, settings, mobile, waitlist — with each deviation from the designs filed as a sized ticket for Asad.",
+   "layman_output": "Written inspection notes for every screen built this sprint — the alerts inbox, posting-time grid, analytics page, health badge, settings, mobile layout and waitlist — each checked against the design packs. Every deviation is filed as a sized ticket in Asad's queue, so a teammate can open the notes, pick any screen and see exactly what drifted from the design and how big the fix is."
   },
   {
    "id": "N3-SD-09",
@@ -10954,7 +11263,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The first formal what-stays-what-gets-cut meeting with the founder, with the decision written down and shared — so scope shrinks deliberately as launch nears instead of being argued about again next sprint.",
    "layman_analogy": "Like editing the wedding guest list with the couple in the room and posting the final version, so nobody relitigates cousins at the door.",
-   "layman_needed": "A written record, shared with the team, of the first formal keep-or-cut meeting with Alex — what stays in scope, what moves to the discussion table — reflected in the next sprint's tickets."
+   "layman_needed": "A written record, shared with the team, of the first formal keep-or-cut meeting with Alex — what stays in scope, what moves to the discussion table — reflected in the next sprint's tickets.",
+   "layman_output": "A written record, shared with the whole team, of the first formal keep-or-cut meeting with Alex: which features stay in scope for launch and which move to the discussion table, judged against build status and pilot feedback. The next sprint's tickets will visibly reflect the outcome, so nobody can relitigate the decision later — it is on paper with a date on it."
   },
   {
    "id": "N3-SD-10",
@@ -10991,7 +11301,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing the exact words the Art-E assistant shows in every awkward situation — can't answer, too little data, daily limit reached, service degraded — so it's honest and helpful in each case rather than improvising.",
    "layman_analogy": "Like scripting the cabin crew's announcements for every kind of delay in advance, so nobody improvises over the tannoy mid-turbulence.",
-   "layman_needed": "A finished table giving the exact words the assistant shows in every awkward state — refusal, nothing found, thin data, limit reached, service degraded — each with defined behaviour and a test verdict, so Asad builds without writing new text."
+   "layman_needed": "A finished table giving the exact words the assistant shows in every awkward state — refusal, nothing found, thin data, limit reached, service degraded — each with defined behaviour and a test verdict, so Asad builds without writing new text.",
+   "layman_output": "A finished table giving the exact words the assistant shows in every awkward moment — a refusal, nothing relevant found, too little data, a number it cannot back up, the daily limit reached, the service degraded, or stale data — each with the defined screen behaviour, what the user can do next, and whether it counts as correct in testing. Asad builds every state from it without inventing a single new sentence."
   },
   {
    "id": "N3-SD-11",
@@ -11031,7 +11342,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Building the 'honest states' (still learning, too little data, temporary error, try again shortly) once as shared building blocks every screen reuses — so our promise never to show a confident number on thin data stays true everywhere.",
    "layman_analogy": "Like casting one set of standard road signs for the whole town instead of letting every street hand-paint its own warnings.",
-   "layman_needed": "Shared, reusable screen components for the honest states — still learning, too little data, temporary error, rate-limited, page disconnected — used by every built screen and driven off proper error codes, never off parsed message text."
+   "layman_needed": "Shared, reusable screen components for the honest states — still learning, too little data, temporary error, rate-limited, page disconnected — used by every built screen and driven off proper error codes, never off parsed message text.",
+   "layman_output": "A set of shared, reusable screen components for the honest states — still learning, too little data, temporary error, please wait, page disconnected — built once and used by every screen in the app, driven off proper error codes rather than parsed message text. A teammate can trigger each state on any screen and see identical, correct behaviour everywhere — the honesty promise implemented once, not copied and drifting."
   },
   {
    "id": "N3-AX-01",
@@ -11062,7 +11374,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex walks Lewis through the signed pricing — the founding price, how long it's locked, what he may and may not promise — so pilots hear the price from a person and the later invoices match exactly what they were told.",
    "layman_analogy": "Like the shop owner rehearsing the price card with the person on the till, so what customers hear at the counter matches the invoice to the penny.",
-   "layman_needed": "A briefing done: Lewis confirmed he understands the founding price, the lock period, what he may promise and what he must not, and holds the one-page pricing sheet to use in pilot conversations."
+   "layman_needed": "A briefing done: Lewis confirmed he understands the founding price, the lock period, what he may promise and what he must not, and holds the one-page pricing sheet to use in pilot conversations.",
+   "layman_output": "A completed briefing: Lewis walked through the signed pricing sheet and confirming in writing that he understands the founding price, how long it is locked, who qualifies, what he may promise pilots and what he must never promise — no extra discounts, no scheduling or publishing features. He holds the one-page sheet to use in conversations, so pilots hear a price the invoices will later match exactly."
   },
   {
    "id": "N3-AX-02",
@@ -11098,7 +11411,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Drafting the launch go/no-go checklist: one row per promise (crisis alerts under 15 minutes, every assistant number sourced, backups proven, contracts signed…), each with named evidence and an owner — so the 27 Nov decision meeting is short.",
    "layman_analogy": "Like a pilot's pre-flight checklist drafted long before departure — each item with a pass mark and the crew member who reads it out.",
-   "layman_needed": "A drafted launch checklist table with one row per promise, each carrying its pass threshold, the named piece of evidence, and the owner who presents it at the 27 Nov decision meeting — with the flop-warning row already marked cleared."
+   "layman_needed": "A drafted launch checklist table with one row per promise, each carrying its pass threshold, the named piece of evidence, and the owner who presents it at the 27 Nov decision meeting — with the flop-warning row already marked cleared.",
+   "layman_output": "A drafted launch checklist table with one row per promise the product makes — flop warnings, the 15-minute crisis clock, cited assistant answers, health accuracy, security, backups, accessibility, signed agreements, invoices, waitlist size, Facebook approval. Each row names its pass threshold, the exact evidence, and who reads it aloud at the 27 Nov go/no-go — with the flop row already marked cleared."
   },
   {
    "id": "N3-AX-03",
@@ -11134,7 +11448,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The plan for opening the waitlist: live 13 Oct, public 20 Oct, aiming for 500 names by 27 Nov — with lawful sign-up wording and weekly growth reports, because this list is the audience for launch day.",
    "layman_analogy": "Like planning a restaurant's reservations book before opening night — line open on a set date, bookings taken a week later, a target of full covers.",
-   "layman_needed": "A plan executed: the waitlist live on 13 Oct, opening announcements written with lawful sign-up wording and scheduled for 20 Oct, and a weekly growth-report template in place tracking towards 500 names by 27 Nov."
+   "layman_needed": "A plan executed: the waitlist live on 13 Oct, opening announcements written with lawful sign-up wording and scheduled for 20 Oct, and a weekly growth-report template in place tracking towards 500 names by 27 Nov.",
+   "layman_output": "An executed waitlist plan: the sign-up page live on 13 Oct with source tracking per directory and early sign-ups keeping their queue positions, the opening announcements written in lawful dev-mode-safe wording and scheduled for 20 Oct, and a weekly growth-report template tracking towards 500 names by 27 Nov. Anyone can open the plan, check the dates, and watch the weekly count against the target."
   },
   {
    "id": "N3-AX-04",
@@ -11166,7 +11481,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex sends the first investor update: the flop-warning proof, the Meta submission date, locked pricing and pilots on board, so investors hear progress from us before they ask.",
    "layman_analogy": "Like a captain's letter home to the ship's backers — honest about the storm weathered, clear about the course, sent before anyone writes asking.",
-   "layman_needed": "Investor update one sent and filed — flop-warning proof, Facebook submission dates, locked pricing, pilots on board, the comment-data setback stated honestly — with none of its wording reused on public or Facebook-facing pages."
+   "layman_needed": "Investor update one sent and filed — flop-warning proof, Facebook submission dates, locked pricing, pilots on board, the comment-data setback stated honestly — with none of its wording reused on public or Facebook-facing pages.",
+   "layman_output": "The first investor update, sent and filed: the flop-warning proof with its numbers, the Facebook submission dates and review timeline, the locked pricing, the pilots on board, and the comment-data setback stated honestly with its consequences. None of its wording appears on public pages or anything Facebook's reviewers see, so investors and reviewers each read exactly what they should — and nothing else."
   },
   {
    "id": "N3-AX-05",
@@ -11197,7 +11513,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex decides whether to run a small, strictly-by-hand LinkedIn outreach trial, inviting the people most likely to care first, so we learn what works without breaking any platform rules.",
    "layman_analogy": "Like deciding whether to hand-deliver a few dozen party invitations to the friends most likely to come, with a note kept of who replied.",
-   "layman_needed": "Either a written 'not running it' note, or a logged spreadsheet of the hand-run LinkedIn trial — who was invited, the comparison group, invite caps respected — with the 30-day follow-up measurement date set."
+   "layman_needed": "Either a written 'not running it' note, or a logged spreadsheet of the hand-run LinkedIn trial — who was invited, the comparison group, invite caps respected — with the 30-day follow-up measurement date set.",
+   "layman_output": "One of two things on file: a short written note saying the optional LinkedIn outreach trial is not being run, or a logged spreadsheet of the hand-run trial — who was invited and why they ranked highly, a matched comparison group of cold prospects, invite caps respected, and the 30-day follow-up date set to measure real replies rather than mere accepts. Either way, the decision is recorded, not drifting."
   },
   {
    "id": "N3-JL-01",
@@ -11232,7 +11549,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Confirming which database powers the assistant's memory, picking a plan sized for ten times our pilots, budgeting the running cost, and checking the vendor never trains on customer data — so there's no surprise bill or privacy slip.",
    "layman_analogy": "Like choosing the warehouse before the stock arrives — the right size unit, rent in the budget, and a landlord contractually barred from rummaging through your boxes.",
-   "layman_needed": "A recorded decision on which memory database the assistant uses, a plan tier sized for ten times our pilots, the running cost added to the cost model, and Filza's confirmation the vendor never trains on customer data."
+   "layman_needed": "A recorded decision on which memory database the assistant uses, a plan tier sized for ten times our pilots, the running cost added to the cost model, and Filza's confirmation the vendor never trains on customer data.",
+   "layman_output": "A recorded decision on which memory database the Art-E assistant uses, with a paid tier sized for ten times our current pilots, the embedding cost worked out from real ingest volumes and added as a line in the cost model, and Filza's written confirmation that the vendor never trains its AI on customer data. The surprise line item is priced and cleared before the bill arrives."
   },
   {
    "id": "N3-JL-02",
@@ -11268,7 +11586,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Deciding how long we keep each kind of system log and capping the monitoring bills, aligned with our privacy rules — because logging costs grow with launch traffic exactly when nobody is watching the bill.",
    "layman_analogy": "Like deciding which paperwork goes in the office drawer, which to the basement archive, and which gets shredded — with a cap on the storage bill.",
-   "layman_needed": "A table stating how long each class of system log is kept, split between quick-access and cheap storage, plus a signed monitoring budget line with seat caps — all consistent with Filza's legal retention schedule."
+   "layman_needed": "A table stating how long each class of system log is kept, split between quick-access and cheap storage, plus a signed monitoring budget line with seat caps — all consistent with Filza's legal retention schedule.",
+   "layman_output": "A written table stating how long each class of system log is kept — app logs, pipeline logs, error events, uptime history — split between quick-access and cheap storage, plus a signed monitoring budget line with error-tool seat caps. It all matches Filza's legal retention schedule and the no-personal-data-in-logs rule, so the ops policy and the legal policy can be read side by side and agree."
   },
   {
    "id": "N3-JL-03",
@@ -11304,7 +11623,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Getting the purchased waitlist tool operationally ready — right plan for launch traffic, emails sending from our own domain, sign-up tracking and lawful consent settings checked — so opening day isn't capped by an admin oversight.",
    "layman_analogy": "Like prepping the box office before tickets go on sale — enough capacity for the queue, tickets printed on your own letterhead, early buyers keeping their place in line.",
-   "layman_needed": "The waitlist tool ready before 13 Oct: capacity for 500+ sign-ups and launch-day traffic, emails sending from our own domain, source tracking verified, early sign-ups keeping their queue place agreed with Asad, and lawful-consent settings configured."
+   "layman_needed": "The waitlist tool ready before 13 Oct: capacity for 500+ sign-ups and launch-day traffic, emails sending from our own domain, source tracking verified, early sign-ups keeping their queue place agreed with Asad, and lawful-consent settings configured.",
+   "layman_output": "The bought waitlist tool operationally ready before 13 Oct: a plan that holds 500-plus sign-ups and launch-day traffic, a named billing owner, emails sending from our own domain, source tracking verified per directory, a migration plan agreed with Asad so early Netlify sign-ups keep their queue place, and the lawful-consent settings — wording, tested unsubscribe, no pre-consent pixels — configured."
   },
   {
    "id": "N3-JL-04",
@@ -11341,7 +11661,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A one-page written agreement on spending limits for the AI assistant: per-customer daily caps, a company-wide ceiling, warnings at 80%, an automatic cut-off at 100% and who gets phoned — so a runaway user can never bankrupt us.",
    "layman_analogy": "Like agreeing the fuse ratings for a building in writing — what trips, at what load, and whose phone rings when the lights go out.",
-   "layman_needed": "A one-page written agreement, signed by Jill and Muteeb before next sprint, setting per-customer and company-wide AI spending caps, the 80% warning and 100% cut-off, what users see when tripped, and who gets paged."
+   "layman_needed": "A one-page written agreement, signed by Jill and Muteeb before next sprint, setting per-customer and company-wide AI spending caps, the 80% warning and 100% cut-off, what users see when tripped, and who gets paged.",
+   "layman_output": "A one-page written agreement, signed by Jill and Muteeb before the next sprint starts, setting the AI spending caps: per-customer daily limits, a company-wide daily cap, a warning at 80% and a hard cut-off at 100%, what the user sees when tripped, who gets paged, and how it wires into the billing alarms. The assistant becomes mechanically unable to run up a ruinous bill, with the numbers set by the budget owner."
   },
   {
    "id": "N3-JL-05",
@@ -11377,7 +11698,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Turning the agreed price into a precise fact sheet — how many founding seats, the deadline, how long the price is locked — so the sales conversations, the website and the invoices all say exactly the same thing.",
    "layman_analogy": "Like the small print card behind a January-sale sign — how many at that price, until when, and exactly what the receipt will say.",
-   "layman_needed": "A one-page fact sheet stating founding seats, the eligibility deadline, how long the price is locked and what later sign-ups pay — reconciled to the invoice template and website — and already used by Alex to brief Lewis."
+   "layman_needed": "A one-page fact sheet stating founding seats, the eligibility deadline, how long the price is locked and what later sign-ups pay — reconciled to the invoice template and website — and already used by Alex to brief Lewis.",
+   "layman_output": "A one-page founding-pricing fact sheet: how many founding seats exist, the eligibility deadline, how long the price is locked, and what later sign-ups pay — every claim reconciled against the invoice template and the website so nothing ever contradicts. Alex will already have used it to brief Lewis, and the 24 Nov pricing notice drafts straight from it, so the scarcity claims have operational truth behind them."
   },
   {
    "id": "N3-LW-01",
@@ -11410,7 +11732,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Connecting our own company Facebook page to the product and using it every morning like a real customer, logging every annoyance — so we hit the embarrassing bugs before any pilot does.",
    "layman_analogy": "Like the restaurant's head waiter eating in his own dining room every day and jotting each wobbly table in a notebook before paying guests sit down.",
-   "layman_needed": "Our own company Facebook page connected to the product by 9 Oct, used every morning like a real customer, with a daily friction log holding at least eight entries by 18 Oct and fed into the weekly digest."
+   "layman_needed": "Our own company Facebook page connected to the product by 9 Oct, used every morning like a real customer, with a daily friction log holding at least eight entries by 18 Oct and fed into the weekly digest.",
+   "layman_output": "ArtemisAI's own Facebook page connected to the product on staging by 9 Oct, with Lewis using it every morning like a real customer — checking Today, drafting in Studio, opening alerts. A daily one-line friction log, holding at least eight entries by 18 Oct, feeds Saad's weekly digest, so the team hits the embarrassing bugs and odd-looking numbers before any paying pilot does."
   },
   {
    "id": "N3-LW-02",
@@ -11444,7 +11767,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Writing down the quality bar for collaboration suggestions before seeing a single one — how many of the top five must be genuinely good, judged by type — so the test is fair and the result can't be fudged after the fact.",
    "layman_analogy": "Like sealing the judges' scorecards and pass mark in an envelope before the contestants walk on stage.",
-   "layman_needed": "A written quality bar for collaboration suggestions — how many of the top five must be genuinely good, by match type, over how many pages — filed with the ready-to-use judging sheet before anyone sees a single match."
+   "layman_needed": "A written quality bar for collaboration suggestions — how many of the top five must be genuinely good, by match type, over how many pages — filed with the ready-to-use judging sheet before anyone sees a single match.",
+   "layman_output": "A written quality bar for collaboration suggestions, filed in the register before anyone sees a single match: how many of each page's top five must be genuinely good, judged per match type, over how many pages, and what a miss means in each case. Alongside it sits the ready-to-use judging sheet, one row per match — so the 16 Oct review is a real test against a pre-set bar, not marking after seeing the answers."
   },
   {
    "id": "N3-LW-03",
@@ -11479,7 +11803,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Inviting pilot customers six to ten once the first group's problems are fixed, and walking them through connecting their pages — widening the pool of connected pages the matching feature and our feedback both need.",
    "layman_analogy": "Like welcoming the second wave of houseguests after the first lot's complaints are fixed, and showing each of them where the keys and light switches are.",
-   "layman_needed": "Pilots six to ten invited, holding tester roles with their pages connected on staging by 13 Oct, the total connected page count reported to Muteeb, and any connection friction logged again."
+   "layman_needed": "Pilots six to ten invited, holding tester roles with their pages connected on staging by 13 Oct, the total connected page count reported to Muteeb, and any connection friction logged again.",
+   "layman_output": "Pilots six to ten invited, holding accepted tester roles with their Facebook pages connected on staging by 13 Oct, after walking the same connection guide as the first five. The total connected page count is reported to Muteeb — widening the pool the matching engine and the quality review depend on — and any connection friction is logged again to prove the earlier fixes actually worked."
   },
   {
    "id": "N3-LW-04",
@@ -11511,7 +11836,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis will hand over 200 real comments, each judged by a human without seeing the computer's answer, so we have a trusted answer sheet to measure how well our comment-reading actually performs.",
    "layman_analogy": "Like two teachers marking the same exam scripts independently, comparing marks, and settling differences against the mark scheme — never against a pupil's crib sheet.",
-   "layman_needed": "200 real comments, each labelled by humans who never saw the computer's answer, delivered to Faheem by 14 Oct with an agreement statistic between labellers and a record of who labelled what, when, under which rubric."
+   "layman_needed": "200 real comments, each labelled by humans who never saw the computer's answer, delivered to Faheem by 14 Oct with an agreement statistic between labellers and a record of who labelled what, when, under which rubric.",
+   "layman_output": "200 real Facebook comments, each labelled by human labellers who never saw the computer's verdicts, delivered to Faheem by 14 Oct together with a statistic showing how often the labellers agreed with each other and a record of who labelled what, when, under which rubric. This turns 'the model agrees with itself' into a genuine accuracy measurement before the crisis and sentiment models are frozen."
   },
   {
    "id": "N3-LW-05",
@@ -11549,7 +11875,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A live fire-drill with Faheem on a real pilot page: we simulate a sudden flood of angry comments and check the alert really reaches the owner within 15 minutes, so we know the warning works before a customer needs it.",
    "layman_analogy": "Like staging a small controlled kitchen fire, with the owner's written blessing, to prove the alarm rings and the brigade arrives inside the promised time.",
-   "layman_needed": "A filed drill record from a real pilot page — seeded storm with the admin's written consent, timestamps for the alert and email, the right post cited, a drafted reply present, an under-15-minutes verdict — with the comments cleaned up afterwards."
+   "layman_needed": "A filed drill record from a real pilot page — seeded storm with the admin's written consent, timestamps for the alert and email, the right post cited, a drafted reply present, an under-15-minutes verdict — with the comments cleaned up afterwards.",
+   "layman_output": "A filed drill record from a real pilot page: the admin's written consent to a seeded storm, a burst of pre-written hostile-but-harmless comments from team accounts, timestamps for the in-app alert and the email, confirmation the alert cited the right post and carried a drafted reply, an under-15-minutes verdict, and the comments cleaned up afterwards. The live proof behind the 15-minute promise, on paper."
   },
   {
    "id": "N3-LW-06",
@@ -11586,7 +11913,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A human check on our collaboration suggestions: reviewers score whether the top five picks for different kinds of pages are genuinely good, and we record the results, so we only ship suggestions people would actually act on.",
    "layman_analogy": "Like a blind wine tasting — judges scoring each glass on merit with the labels hidden, results written down before anyone peeks at the bottle.",
-   "layman_needed": "A completed judging sheet scoring the top-five suggestions for every connected pilot page, blind to the computer's scores, with quality percentages worked out per match type and a recorded pass or fail by 16 Oct."
+   "layman_needed": "A completed judging sheet scoring the top-five suggestions for every connected pilot page, blind to the computer's scores, with quality percentages worked out per match type and a recorded pass or fail by 16 Oct.",
+   "layman_output": "A completed judging sheet scoring the top five collaboration suggestions for every connected pilot page — judged blind to the computer's scores, one verdict per match — with quality percentages worked out per match type and an explicit recorded pass or fail against the pre-set bar, dated on or before 16 Oct. If it fails, the sheet also lists the failure patterns, so the recompute knows exactly what to fix."
   },
   {
    "id": "N3-LW-07",
@@ -11620,7 +11948,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis and Saad write the questions a real page admin would actually ask our assistant (why did Tuesday's post die?), so we can test Art-E against real life, not textbook prompts.",
    "layman_analogy": "Like writing the driving-test routes from the roads locals actually use — including the tricky junctions where the examiner expects a refusal to turn.",
-   "layman_needed": "The 20 locked gate questions plus at least 80 more with Faheem by 16 Oct — real page-admin questions with their expected sources, plus trick questions the assistant must politely refuse — in the sheet format his nightly checks can run."
+   "layman_needed": "The 20 locked gate questions plus at least 80 more with Faheem by 16 Oct — real page-admin questions with their expected sources, plus trick questions the assistant must politely refuse — in the sheet format his nightly checks can run.",
+   "layman_output": "The assistant's test question set v1 with Faheem by 16 Oct: the 20 locked gate questions plus at least 80 more — real questions a page admin asks, each with the source a correct answer must cite — and trick questions the assistant must politely refuse, all in the exact sheet format Faheem's nightly checks consume. The 200-question quality gate finally has real questions to run."
   },
   {
    "id": "N3-FZ-01",
@@ -11652,7 +11981,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza will write the exact 'this was made by AI' labels and small-print wording for every screen where AI speaks, and hand them to Saad, so customers are never misled about what is machine-generated.",
    "layman_analogy": "Like writing the ingredients label and allergy warning for every dish on the menu before it leaves the kitchen.",
-   "layman_needed": "A per-screen table of final 'made by AI' labels and small-print wording, delivered to Saad, covering every place the AI speaks — gauge, alerts, timing advice, health score, assistant, suggestions — and quoted in the assistant's acceptance rules."
+   "layman_needed": "A per-screen table of final 'made by AI' labels and small-print wording, delivered to Saad, covering every place the AI speaks — gauge, alerts, timing advice, health score, assistant, suggestions — and quoted in the assistant's acceptance rules.",
+   "layman_output": "A per-screen table of final 'made by AI' labels and small-print wording, delivered to Saad, covering every place the AI speaks — the draft gauge, crisis alerts and drafted replies, timing advice, the health score, assistant answers and collaboration suggestions. Each label says what the advice is based on and where to learn more, matches the legal position, and is quoted verbatim in the assistant's acceptance rules."
   },
   {
    "id": "N3-FZ-02",
@@ -11685,7 +12015,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza will set the rules for what the Art-E assistant is allowed to remember: nothing kept longer than 90 days, plus a 'forget this' button, so customers stay in control of their own information.",
    "layman_analogy": "Like house rules for a diary-keeping butler: pages older than 90 days burned automatically, and any entry torn out the moment the owner asks.",
-   "layman_needed": "A written specification of what the assistant may remember per customer, the 90-day automatic purge, a 'forget this' action with defined scope and speed, confirmed as buildable by Muteeb and referenced in the data-processing records."
+   "layman_needed": "A written specification of what the assistant may remember per customer, the 90-day automatic purge, a 'forget this' action with defined scope and speed, confirmed as buildable by Muteeb and referenced in the data-processing records.",
+   "layman_output": "A written specification of the assistant's memory, handed to Muteeb: exactly what it may remember about each customer, the 90-day automatic purge, a 'forget this' button with defined scope (one message, one topic, or everything) and response time, and the log entry every purge writes. Muteeb confirms it is buildable before he builds it, and the data-processing records reference it — memory with rules, not risk."
   },
   {
    "id": "N3-FZ-03",
@@ -11717,7 +12048,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza will define the questions Art-E must politely decline to answer, the hard lines it never crosses, and where a customer complains if it gets something wrong, so the assistant stays safe and trustworthy.",
    "layman_analogy": "Like the staff handbook for a pharmacist's counter — which requests to politely decline, which lines are never crossed, and where the complaints book lives.",
-   "layman_needed": "A defined list of question types the assistant must refuse, with approved refusal wording, the hard-line rules the test questions probe, and a complaint route with a response time — quoted verbatim in Saad's criteria and covered in Faheem's test set."
+   "layman_needed": "A defined list of question types the assistant must refuse, with approved refusal wording, the hard-line rules the test questions probe, and a complaint route with a response time — quoted verbatim in Saad's criteria and covered in Faheem's test set.",
+   "layman_output": "A defined list of the question types the assistant must refuse — questions about identifiable people, other customers' pages, medical, legal or financial advice, and anything outside the page's own data — each with approved refusal wording, plus the hard-line rules the trick test questions probe and a complaint route with a promised response time. Saad's criteria quote it verbatim and Faheem's tests cover every category."
   },
   {
    "id": "N3-FZ-04",
@@ -11750,7 +12082,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A legal read-through of the short explanations we show next to each collaboration suggestion, so the wording never over-promises or says anything about other pages we shouldn't.",
    "layman_analogy": "Like a solicitor proofreading estate-agent particulars so nothing overpromises or gives away details about the neighbours.",
-   "layman_needed": "An approved list of match-explanation wordings, with edits, returned to Muteeb and Saad — counts banded not exact, no identities, nothing below the privacy floor — with the rule that no unapproved wording is ever shown."
+   "layman_needed": "An approved list of match-explanation wordings, with edits, returned to Muteeb and Saad — counts banded not exact, no identities, nothing below the privacy floor — with the rule that no unapproved wording is ever shown.",
+   "layman_output": "An approved list of match-explanation wordings, returned with edits to Muteeb and Saad: follower counts shown in bands never exact figures, no individual identities, topic-only matches never claiming shared audiences, nothing below the privacy floor of five, and nothing letting two customers work out each other's audiences. The standing rule attached: any wording not on the list is never shown to anyone."
   },
   {
    "id": "N3-FZ-05",
@@ -11782,7 +12115,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A short legal memo confirming our scores and alerts are advice for a human to act on, not automatic decisions made about anyone, which keeps us on the right side of data-protection law.",
    "layman_analogy": "Like a doctor's note confirming the sat-nav only suggests routes — the driver still steers — so nobody can claim the machine made the decision.",
-   "layman_needed": "A signed memo, filed, stating our scores and alerts are advice a human acts on, with a plain-language paragraph copied into Privacy v2 and the support canned replies."
+   "layman_needed": "A signed memo, filed, stating our scores and alerts are advice a human acts on, with a plain-language paragraph copied into Privacy v2 and the support canned replies.",
+   "layman_output": "A short signed memo will sit in the legal folder stating that every score and alert in the product is advice a human page owner acts on, never an automated decision with legal effect. It will include a plain-English paragraph explaining how the scoring works, ready to be pasted into the privacy policy and support replies. Anyone challenged on the point can open the memo and quote it directly."
   },
   {
    "id": "N3-FZ-06",
@@ -11815,7 +12149,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Before the sign-up waitlist opens on 20 October, Filza checks the marketing-consent rules are followed, so we can email the people who sign up without breaking UK marketing law.",
    "layman_analogy": "Like a health inspector walking a restaurant the week before opening night — tasting, checking the fridge logs — and signing the certificate before the doors open.",
-   "layman_needed": "A written pass/fail note to Asad and Alex before 20 Oct, with proof a real signup and unsubscribe worked and evidence no tracking scripts loaded before consent."
+   "layman_needed": "A written pass/fail note to Asad and Alex before 20 Oct, with proof a real signup and unsubscribe worked and evidence no tracking scripts loaded before consent.",
+   "layman_output": "A written pass-or-fail note will land with Asad and Alex before 20 Oct, covering the live waitlist page. Attached will be proof that a real signup and a real unsubscribe both worked, plus a network-log screenshot showing no tracking scripts loaded before consent. Anyone can reread the note and re-run the same signup themselves to confirm the list is lawful to email."
   },
   {
    "id": "N3-FZ-07",
@@ -11848,7 +12183,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A memo confirming our product does none of the things the new EU AI law bans, plus honest wording about the fact we read the mood of comments, so we can show regulators and customers we've done the homework.",
    "layman_analogy": "Like an importer's letter confirming the goods contain none of the newly banned substances, plus an honest ingredients label for what they do contain.",
-   "layman_needed": "A signed memo stating the product does nothing the new EU AI law bans, plus approved wording about reading comment mood, placed in Saad's text file for every screen where mood appears."
+   "layman_needed": "A signed memo stating the product does nothing the new EU AI law bans, plus approved wording about reading comment mood, placed in Saad's text file for every screen where mood appears.",
+   "layman_output": "A signed memo will state, with reasoning, that reading the mood of public comments breaks none of the new EU AI rules, and list the transparency duties that do apply. Alongside it, approved sentences explaining that the app reads comment mood will sit in Saad's copy file, ready for every screen where mood appears. A teammate can open the file and see the exact wording each screen must carry."
   },
   {
    "id": "N3-FZ-08",
@@ -11883,7 +12219,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "An updated privacy notice that also spells out how the assistant's memory and our behind-the-scenes text summaries are stored, found and deleted when a customer asks, so 'delete my data' genuinely means everything.",
    "layman_analogy": "Like updating the building's fire register so the new storerooms in the basement are on the map — so an evacuation really clears every room.",
-   "layman_needed": "Privacy v2 live at the same web address with a version note, and the data register updated so the assistant's memory and our text summaries are named, with retention, and included in export and deletion."
+   "layman_needed": "Privacy v2 live at the same web address with a version note, and the data register updated so the assistant's memory and our text summaries are named, with retention, and included in export and deletion.",
+   "layman_output": "Version 2 of the privacy policy will be live at the same web address with a visible version note, now naming the assistant's memory and our stored text summaries as personal data with their keep-for periods. The internal data register will match, and both will be inside the export and deletion routes. Anyone can open the public page, see the new sections, and check the register lines up."
   },
   {
    "id": "N3-FZ-09",
@@ -11913,7 +12250,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A written position on children's data: our product is for business page owners, and this documents why children's-privacy rules don't apply and what we'd do if a child's data ever appeared.",
    "layman_analogy": "Like a pub landlord writing down the door policy: adults only, here's why, and here's what staff do if someone underage slips in.",
-   "layman_needed": "A signed note explaining why children's-privacy rules don't apply to a business tool for adult page owners, with the 18+ statement queued for the final Terms of Service."
+   "layman_needed": "A signed note explaining why children's-privacy rules don't apply to a business tool for adult page owners, with the 18+ statement queued for the final Terms of Service.",
+   "layman_output": "A signed note will sit in the legal folder explaining why children's-privacy rules do not apply: the tool is for page admins aged 18 and over, and commenters' ages are never guessed at. The 18+ statement will be queued for the final Terms of Service. If a regulator ever asks the standard first question about children, anyone can pull this note and answer it the same day."
   },
   {
    "id": "N3-FZ-10",
@@ -11948,7 +12286,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "A ready-made answer pack in case the data regulator asks questions in October: who holds what data, why, and for how long, so we can respond fast and confidently instead of scrambling.",
    "layman_analogy": "Like keeping a packed folder by the door in case the tax office calls — who to ring, what to say, every receipt already inside.",
-   "layman_needed": "One folder answering every likely regulator question — what data we hold, why, deletion routes, suppliers, security — noting what's still in flight, and naming who replies and by when."
+   "layman_needed": "One folder answering every likely regulator question — what data we hold, why, deletion routes, suppliers, security — noting what's still in flight, and naming who replies and by when.",
+   "layman_output": "One folder will exist holding ready-made answers to every likely question from a Meta data check: what data we hold and why, how deletion works, our supplier list, and our security setup, with an honest note on what is still in progress and when it finishes. It will name who replies and their deadline. If Meta's clock starts, anyone can open the folder and send the reply the same day."
   },
   {
    "id": "N4-AS-01",
@@ -11984,7 +12323,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Build the Art-E chat panel: answers appear word by word as they're written, each fact carries a little tag showing where it came from, and a footer says what data the answer is based on, so customers can trust what they read.",
    "layman_analogy": "Like a newsreader who speaks as the story comes in and holds up the source for every claim, rather than reading a script of unknown origin.",
-   "layman_needed": "A working chat panel where answers appear word by word within 45 seconds, each fact carries a tag opening the post or figure it came from, and a footer states what data the answer rests on."
+   "layman_needed": "A working chat panel where answers appear word by word within 45 seconds, each fact carries a tag opening the post or figure it came from, and a footer states what data the answer rests on.",
+   "layman_output": "A chat panel will sit on the right of every screen (a small round button on phones) where a pilot types a question and watches the answer appear word by word within 45 seconds. Each fact will carry a small tag that opens the exact post or figure it came from, and a footer will state how much data the answer rests on. A teammate can ask a question on staging and click a tag to check the source."
   },
   {
    "id": "N4-AS-02",
@@ -12017,7 +12357,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A clear yes/no screen (using Filza's approved wording) asking permission before the assistant remembers anything; if a page doesn't have enough data for a reliable answer, we show nothing rather than a guess.",
    "layman_analogy": "Like a consent form where 'no thanks' is printed as large as 'yes please' — and if the kitchen can't vouch for a dish, it simply isn't served.",
-   "layman_needed": "A working screen using Filza's exact wording where decline is as prominent as accept, revocation sits in Settings, and a not-enough-data response shows the approved empty state with the event logged."
+   "layman_needed": "A working screen using Filza's exact wording where decline is as prominent as accept, revocation sits in Settings, and a not-enough-data response shows the approved empty state with the event logged.",
+   "layman_output": "A permission screen will exist using Filza's exact wording, where declining is just as easy and prominent as accepting, and the choice can be withdrawn later from Settings. When too few pages have opted in, the matching screen will show the approved friendly message instead of results, with the event logged. Anyone can decline on staging and confirm nothing renders and the log entry appears."
   },
   {
    "id": "N4-AS-03",
@@ -12052,7 +12393,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Design the card Art-E uses to give a suggestion, plus an honest 'I can't answer that' state and a visible 'AI-generated' label, so customers always know when advice comes from the machine and when it declines.",
    "layman_analogy": "Like a signed price tag on every suggestion — 'machine-made' clearly printed — and a shop assistant honest enough to say 'I don't know' instead of guessing.",
-   "layman_needed": "A finished suggestion card with one button leading to the right screen, an AI label on every answer, and every no-answer situation in Saad's list showing its own proper wording, never a blank or an error."
+   "layman_needed": "A finished suggestion card with one button leading to the right screen, an AI label on every answer, and every no-answer situation in Saad's list showing its own proper wording, never a blank or an error.",
+   "layman_output": "A finished suggestion card will appear in the chat panel with exactly one button that jumps to the right screen — Drafts, Alerts or Best Times — and an AI label on every answer. Each no-answer situation from Saad's list (nothing found, thin data, blocked, quota reached, service down) will show its own proper wording. A teammate can trigger any of them on staging and never see a blank panel or raw error."
   },
   {
    "id": "N4-AS-04",
@@ -12088,7 +12430,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Build the first version of the screen that shows pages worth teaming up with, following Saad's design pack — look but not click for now, so pilots can react to it before we add actions.",
    "layman_analogy": "Like a dating-agency shortlist behind glass — you can read each profile and why it was picked, but the phone lines aren't connected yet.",
-   "layman_needed": "A working look-only screen on staging where a pilot sees ranked partner pages with honest reasons from the data, a note when weaker candidates were held back, and a plain-English meaning on every badge."
+   "layman_needed": "A working look-only screen on staging where a pilot sees ranked partner pages with honest reasons from the data, a note when weaker candidates were held back, and a plain-English meaning on every badge.",
+   "layman_output": "A look-only Explore screen will run on staging showing a top-match spotlight and ranked partner pages, each with an honest plain-English reason drawn from real data and a badge explained in one line. When weaker candidates are held back for having too little evidence, the list will say so in approved wording. A teammate can open it, read the reasons, and confirm no message button exists anywhere."
   },
   {
    "id": "N4-AS-05",
@@ -12122,7 +12465,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A screen listing all of a customer's pages with a simple health ring on each, plus an easy switcher between them, so someone running several pages sees at a glance which one needs attention.",
    "layman_analogy": "Like a ward board showing every patient with a coloured wristband, so the nurse sees in one glance which bed needs a visit first.",
-   "layman_needed": "A working screen where every connected page shows a genuine health ring and band label, and switching pages filters what Today and Analytics display."
+   "layman_needed": "A working screen where every connected page shows a genuine health ring and band label, and switching pages filters what Today and Analytics display.",
+   "layman_output": "A Pages screen will exist showing one card per connected Facebook page, each with a genuine health ring, a band label and a weekly change figure. A switcher at the top will flip between all pages and one page, and Today and Analytics will refilter accordingly. A teammate can switch pages on staging and watch every number change to match, with new pages showing a 'building your baseline' note."
   },
   {
    "id": "N4-AS-06",
@@ -12155,7 +12499,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Put 'delete my data' and 'download my data' in Settings and make them actually work, tied to disconnecting a page, so customers can leave cleanly and we keep our privacy promises.",
    "layman_analogy": "Like fitting a marked fire exit that actually opens — leaving takes your belongings with you and the building keeps no copy.",
-   "layman_needed": "Working Settings buttons where an export request produces a real file and a deletion, witnessed by Filza, is confirmed wiped across every store, with confirmation and an email receipt."
+   "layman_needed": "Working Settings buttons where an export request produces a real file and a deletion, witnessed by Filza, is confirmed wiped across every store, with confirmation and an email receipt.",
+   "layman_output": "Two working buttons will sit in Settings: one requests an export and produces a real file of everything held, the other deletes the account and page data — chat memory and stored summaries included — with a confirmation step, a status display and an email receipt. Filza can press delete on a test account, watch it wipe across every store, and hold the receipt as evidence."
   },
   {
    "id": "N4-AS-07",
@@ -12186,7 +12531,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Thumbs-up/thumbs-down buttons on our advice, with a quick 'why' prompt, saved to one place, so we learn which suggestions customers find useful and improve them.",
    "layman_analogy": "Like comment cards on every restaurant table, collected into one box the chef actually reads each morning.",
-   "layman_needed": "Working thumbs-up/down buttons on every assistant answer with a quick 'why' picker, so a thumbs-down lands in the feedback store with the answer and its sources attached for Faheem to review."
+   "layman_needed": "Working thumbs-up/down buttons on every assistant answer with a quick 'why' picker, so a thumbs-down lands in the feedback store with the answer and its sources attached for Faheem to review.",
+   "layman_output": "Thumbs-up and thumbs-down buttons will sit under every assistant answer, and a thumbs-down will open a quick 'why' picker. Each verdict will land in the feedback store with the question, the answer and its sources attached, ready for Faheem to turn into test cases. A teammate can press thumbs-down on staging and find the full record waiting in the store seconds later."
   },
   {
    "id": "N4-AS-08",
@@ -12216,7 +12562,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Make sure that when a customer disconnects a page they'd saved things about, the screens handle it gracefully instead of showing errors or stale information.",
    "layman_analogy": "Like a guest cancelling their wedding RSVP — their place card quietly disappears from every table plan rather than sitting there with stale details.",
-   "layman_needed": "An automatic test proving that when a saved page withdraws permission it vanishes from the Saved tab within a day, shows a neutral 'no longer available' note, and never reappears."
+   "layman_needed": "An automatic test proving that when a saved page withdraws permission it vanishes from the Saved tab within a day, shows a neutral 'no longer available' note, and never reappears.",
+   "layman_output": "An automatic test will run on every code change proving that when a saved partner page withdraws its permission, it disappears from the Saved tab within a day, leaving only a neutral 'no longer available' note with no name or data, and never reappears in matches. A teammate can open the test results and see the case passing green, with the revoked-page fixture named in it."
   },
   {
    "id": "N4-AS-09",
@@ -12247,7 +12594,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A cookie banner where 'decline' provably stops the optional tracking scripts from loading at all, so we comply with the rules rather than just looking like we do.",
    "layman_analogy": "Like a door bouncer who genuinely turns people away — not one who waves everyone through while the sign says 'members only'.",
-   "layman_needed": "A working banner where choosing decline provably loads no optional tracking script — shown in the network log — with the choice changeable later in Settings."
+   "layman_needed": "A working banner where choosing decline provably loads no optional tracking script — shown in the network log — with the choice changeable later in Settings.",
+   "layman_output": "A cookie banner will sit on the website and the app where declining takes one click and provably loads no optional tracking script — with the network-log evidence saved to show it. The choice will be stored and changeable later in Settings. A teammate can decline on staging, open the browser's network log themselves, and confirm nothing extra loaded."
   },
   {
    "id": "N4-AS-10",
@@ -12281,7 +12629,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A friendly first-visit tour explaining that the product is learning about your page (not broken or slow) and that the first insights use your last 90 days of history, so new customers know what to expect on day one.",
    "layman_analogy": "Like a good host walking a new guest through the house, narrating what's cooking, and serving the first course before the full meal is ready.",
-   "layman_needed": "A working first visit where a newly connected page shows named analysis steps, the first insight appears before all history is processed, the tour runs once, and a 'book 10 minutes' help link exists."
+   "layman_needed": "A working first visit where a newly connected page shows named analysis steps, the first insight appears before all history is processed, the tour runs once, and a 'book 10 minutes' help link exists.",
+   "layman_output": "A first visit will no longer be a blank screen: after connecting a page, the pilot watches named analysis steps stream by, sees their first insight the moment it exists (last 90 days analysed first), gets a one-time tour, and finds a 'stuck? book 10 minutes' link. A setup pill will track what is still processing. A teammate can connect a fresh page on staging and time how quickly the first insight lands."
   },
   {
    "id": "N4-AS-11",
@@ -12313,7 +12662,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A sweep with Muteeb to prove no passwords or keys are accidentally sitting in the app's code or setup files, so nothing sensitive can leak if the code is ever seen by outsiders.",
    "layman_analogy": "Like turning out every coat pocket before sending the coats to the charity shop, so no house key leaves the building by accident.",
-   "layman_needed": "A clean automated sweep of both code repositories, including their history, proving no passwords or keys sit in the code, running on every change, with the receipt filed in Jill's evidence folder."
+   "layman_needed": "A clean automated sweep of both code repositories, including their history, proving no passwords or keys sit in the code, running on every change, with the receipt filed in Jill's evidence folder.",
+   "layman_output": "An automated secrets scan will have swept both code repositories, including their full history, proving no passwords, keys or Facebook tokens sit anywhere in the code, with anything found moved to the vault. The scan will run on every future change, and the clean-sweep receipt will be filed in Jill's evidence folder where anyone can open it before the security test."
   },
   {
    "id": "N4-AS-12",
@@ -12342,7 +12692,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A side panel on the Pages screen showing three simple bars explaining what's driving a page's health — nice to have, and first in line to be dropped if time runs short.",
    "layman_analogy": "Like the optional garnish on the plate — three tidy bars explaining the score, and the first thing left off if the kitchen gets slammed.",
-   "layman_needed": "A working side panel that opens from a page card showing three plain bars — posting consistency, content strength, timing — matching the real underlying scores. Openly first to be cut if time runs short."
+   "layman_needed": "A working side panel that opens from a page card showing three plain bars — posting consistency, content strength, timing — matching the real underlying scores. Openly first to be cut if time runs short.",
+   "layman_output": "A side panel will slide open from any page card showing three plain bars — posting consistency, content strength and timing — each matching the real underlying score with a plain-English note beneath. It turns the single health number into something a pilot can act on. Openly first in the cut order if the sprint runs hot; a teammate can open any card on staging and compare the bars to the score."
   },
   {
    "id": "N4-AS-13",
@@ -12373,7 +12724,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A morning summary card on the Today screen — a quick 'here's how your page did overnight'. Also marked as droppable if the sprint gets tight.",
    "layman_analogy": "Like a folded morning paper on the doorstep — a quick overnight summary, and no paper at all beats yesterday's news.",
-   "layman_needed": "A working card on Today showing last night's summary with a timestamp, hiding itself when the data is stale, and switchable off by feature flag. Openly droppable if the sprint runs tight."
+   "layman_needed": "A working card on Today showing last night's summary with a timestamp, hiding itself when the data is stale, and switchable off by feature flag. Openly droppable if the sprint runs tight.",
+   "layman_output": "A morning-briefing card will sit at the top of the Today screen showing last night's summary — reach change, overnight shares, moves made — with a timestamp, hiding itself automatically whenever the data is stale, and switchable off by feature flag. A teammate can open Today after the nightly run and check the card's figures against the summary data. Openly the second thing cut if time runs short."
   },
   {
    "id": "N4-AS-14",
@@ -12406,7 +12758,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Finish the measurements that track a customer's journey from signing up to getting their first useful insight, including how long that takes, so we know where people get stuck and can prove the product delivers quickly.",
    "layman_analogy": "Like timing runners at every checkpoint of a race, so you know exactly where people slow down and how long the whole course takes.",
-   "layman_needed": "A working query returning, per stage, how many customers reached signup, connection, first insight and first scored draft, plus the median time to first value, handed to Muteeb for the war-room panel."
+   "layman_needed": "A working query returning, per stage, how many customers reached signup, connection, first insight and first scored draft, plus the median time to first value, handed to Muteeb for the war-room panel.",
+   "layman_output": "A working query will return, for every customer, how far they got down the funnel — signed up, page connected, data analysed, first insight seen, first draft scored — with timestamps giving the median time to first value. Muteeb will hold it for the war-room panel, so during launch week anyone can see exactly which step the 100 strangers are stalling at."
   },
   {
    "id": "N4-AS-15",
@@ -12437,7 +12790,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Two more automatic robot tests that run on every code change: one walks through receiving an alert and acting on it, the other asks Art-E a question — so a breakage in either journey is caught before customers see it.",
    "layman_analogy": "Like two extra crash-test dummies added to the nightly line — one rides the alert journey, one asks the assistant a question — before any car ships.",
-   "layman_needed": "Two automatic tests running green on every code change: one walks an alert from arrival to marked-read, the other asks a question and checks the streamed answer, its source tag, and a proper refusal."
+   "layman_needed": "Two automatic tests running green on every code change: one walks an alert from arrival to marked-read, the other asks a question and checks the streamed answer, its source tag, and a proper refusal.",
+   "layman_output": "Two more automatic tests will run green on every code change: one walks a seeded alert from arrival through the inbox card and action button to marked-read with the bell count dropping, the other asks a known question and checks the streamed answer, its clickable source tag, and a proper refusal case. A teammate can open the test dashboard and watch both pass without touching the app."
   },
   {
    "id": "N4-AS-17",
@@ -12471,7 +12825,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Add a 'forget this' button inside the Art-E chat and a note in Settings explaining what the assistant remembers, so customers can erase something from its memory with one click.",
    "layman_analogy": "Like an eraser handed to the customer for the notebook we keep about them — rub out one line, one topic, or the whole page.",
-   "layman_needed": "A working 'forget this' button on each assistant message (this message / topic / everything) that provably wipes the memory, plus a Settings note explaining what's remembered and the 90-day purge."
+   "layman_needed": "A working 'forget this' button on each assistant message (this message / topic / everything) that provably wipes the memory, plus a Settings note explaining what's remembered and the 90-day purge.",
+   "layman_output": "A 'forget this' button will sit on every assistant message, offering three scopes — this message, this topic, or everything — and each choice will provably wipe the memory with a confirmation shown promptly. A one-line note in Settings will explain what the assistant remembers and the 90-day automatic purge. A teammate can forget a message on staging, re-ask, and confirm the assistant no longer knows it."
   },
   {
    "id": "N4-AS-18",
@@ -12510,7 +12865,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Re-do the sums on what serving one page costs us per month now that the AI assistant is included, so pricing and investor numbers rest on real costs, not guesses.",
    "layman_analogy": "Like re-costing the menu after adding a pricey new ingredient, so the dish price still leaves a margin instead of quietly losing money per plate.",
-   "layman_needed": "A one-pager stating the measured monthly cost per page — AI spend included — at 5 pilots and at 100 pages, the margin at the signed price, and the usage level at which a customer becomes loss-making."
+   "layman_needed": "A one-pager stating the measured monthly cost per page — AI spend included — at 5 pilots and at 100 pages, the margin at the signed price, and the usage level at which a customer becomes loss-making.",
+   "layman_output": "A one-pager will state the measured monthly running cost per page — AI spend included, from real usage records rather than estimates — at 5 pilots and at 100 pages, the profit margin at the price Alex signed, and the usage level at which a customer becomes loss-making. Alex and Jill can read it before the 24 Nov price notice and adjust the price or the assistant's usage cap while there is still time."
   },
   {
    "id": "N4-FH-01",
@@ -12542,7 +12898,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A hard rule in the assistant: any number it can't trace back to real data is blocked before it reaches the customer, so Art-E can never confidently make a figure up.",
    "layman_analogy": "Like a newspaper sub-editor who strikes out any figure without a source before the paper goes to print — no citation, no column inch.",
-   "layman_needed": "A working automatic check where every number the assistant states is verified against real retrieved data before it's shown, and a 20-question test run produces zero unbacked numbers."
+   "layman_needed": "A working automatic check where every number the assistant states is verified against real retrieved data before it's shown, and a 20-question test run produces zero unbacked numbers.",
+   "layman_output": "An automatic gate will sit between the assistant and the screen: every number it wants to state is checked against the real retrieved data first, and an unbacked number is blocked and regenerated or refused — never judged by the AI marking its own work. A 20-question test run will be on file showing zero unbacked numbers, and anyone can rerun it to confirm."
   },
   {
    "id": "N4-FH-02",
@@ -12574,7 +12931,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Grow our trusted question-and-answer answer sheet to 200 items with Lewis, and re-test the assistant against it every night with results on a dashboard, so any drop in quality is spotted the next morning.",
    "layman_analogy": "Like growing the exam paper to 200 questions and sitting the pupil every single night, with the marks pinned on the staffroom wall by morning.",
-   "layman_needed": "A trusted set of 200 questions and answers, built with Lewis, that runs against the assistant every night with the pass rate visible on the quality dashboard."
+   "layman_needed": "A trusted set of 200 questions and answers, built with Lewis, that runs against the assistant every night with the pass rate visible on the quality dashboard.",
+   "layman_output": "A trusted answer sheet of 200 questions — including ones the assistant must refuse and deliberately tricky ones — will exist, built with Lewis, and run against the assistant automatically every night. The pass rate will appear each morning on the quality dashboard, so anyone can glance at it and see whether last night's code change made the assistant better or worse."
   },
   {
    "id": "N4-FH-03",
@@ -12603,7 +12961,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Test a specific trick: someone writing a comment designed to fool or steer our AI when it reads it. We make this a named attack we deliberately try, so we know the assistant can't be manipulated through comment text.",
    "layman_analogy": "Like training the receptionist to spot a forged note slipped into the suggestion box telling staff to hand over the keys.",
-   "layman_needed": "Retrieved comment text marked as untrusted, plus a named set of trick comments containing hidden instructions, with proof none of them can steer the assistant's answers."
+   "layman_needed": "Retrieved comment text marked as untrusted, plus a named set of trick comments containing hidden instructions, with proof none of them can steer the assistant's answers.",
+   "layman_output": "Comment text pulled into the assistant will be marked internally as untrusted, and a named set of trick comments — strangers' comments carrying hidden instructions — will exist as a permanent test. The results will prove none of them can steer the assistant's answers. A teammate can open the test set, read the trick comments, and see each one failing to take control."
   },
   {
    "id": "N4-FH-04",
@@ -12635,7 +12994,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Make two attack drills permanent pass/fail checks: sneaky instructions hidden in text, and one customer's data leaking into another's answers. Every release must pass both, so safety can't quietly slip.",
    "layman_analogy": "Like making the fire drill and the locked-doors check a permanent part of the leaving routine — no release goes out until both pass.",
-   "layman_needed": "An attack test suite — hidden instructions and one customer reaching another's data — wired into the automatic checks so every code change must pass both before it ships."
+   "layman_needed": "An attack test suite — hidden instructions and one customer reaching another's data — wired into the automatic checks so every code change must pass both before it ships.",
+   "layman_output": "A permanent attack test suite will run on every code change, trying hidden-instruction tricks and attempts by one customer to read another's data, and blocking any change that lets either through. A teammate can open the automated check results and see both attack families listed and passing before anything ships."
   },
   {
    "id": "N4-FH-05",
@@ -12666,7 +13026,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Live monitoring of the AI's behaviour on a dashboard, with alarms that fire automatically when quality dips, so we hear about problems from our own systems before a pilot does.",
    "layman_analogy": "Like a heart monitor on the patient rather than a weekly check-up — the alarm sounds within minutes, not at the next appointment.",
-   "layman_needed": "Live dashboard panels tracking the assistant's speed, errors and confidence, with alarm rules that trip within minutes of a daytime failure — proven by deliberately injecting one."
+   "layman_needed": "Live dashboard panels tracking the assistant's speed, errors and confidence, with alarm rules that trip within minutes of a daytime failure — proven by deliberately injecting one.",
+   "layman_output": "Live panels on the quality dashboard will track the assistant's answer speed, error rate and confidence throughout the day, with alarm rules that trip within minutes of a failure rather than waiting for the nightly run. A deliberately injected failure will be on record proving the alarm actually fired and someone was told. A teammate can open the dashboard and watch the panels move in real time."
   },
   {
    "id": "N4-FH-06",
@@ -12699,7 +13060,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A mid-sprint accuracy check of our predictions against the trusted answer sheets, and adjusting the warning-level boundaries where they're off, so the gauges customers see stay honest.",
    "layman_analogy": "Like recalibrating the bathroom scales mid-diet against a known weight, and moving the 'healthy' markings to where they truly belong.",
-   "layman_needed": "A filed audit comparing our predictions against the trusted answer sheets and Lewis's blind set, with the gauge band boundaries adjusted to real outcomes and updated in the pack with Saad."
+   "layman_needed": "A filed audit comparing our predictions against the trusted answer sheets and Lewis's blind set, with the gauge band boundaries adjusted to real outcomes and updated in the pack with Saad.",
+   "layman_output": "A filed audit will compare the flop, language and comment-storm predictions against the trusted answer sheets and Lewis's 200-comment blind set, halfway through the pilot. The gauge band boundaries will be adjusted to real measured outcomes and updated in the pack with Saad. Anyone can read the audit and see exactly how accurate each prediction was before the freeze locks everything."
   },
   {
    "id": "N4-FH-07",
@@ -12731,7 +13093,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Keep a log of every comment-storm alert per pilot page that turned out to be nothing, then tune the trigger levels with Lewis, so owners get warned about real trouble without being cried wolf at.",
    "layman_analogy": "Like a village logging every false fire-bell ring, then adjusting how hard the rope must be pulled so the bell still rings for real fires.",
-   "layman_needed": "A live log of every comment-storm alert per pilot marked genuine or false with Lewis's verdicts, and a second round of tuned trigger levels recorded against the accuracy gate."
+   "layman_needed": "A live log of every comment-storm alert per pilot marked genuine or false with Lewis's verdicts, and a second round of tuned trigger levels recorded against the accuracy gate.",
+   "layman_output": "A live log will list every comment-storm alert sent to each pilot, marked genuine or false alarm using Lewis's verdicts and the in-app button feedback. A second round of tuned trigger levels, set per page type, will be recorded against the accuracy target. A teammate can open the log, count the false alarms per pilot, and see the before-and-after trigger settings."
   },
   {
    "id": "N4-FH-08",
@@ -12762,7 +13125,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Check every timed feature copes with UK clocks going back on 25 October, so alerts and best-time-to-post advice don't quietly land an hour wrong.",
    "layman_analogy": "Like checking every clock in the railway station the weekend the hour changes, so no train quietly leaves sixty minutes wrong.",
-   "layman_needed": "A snapshot of baselines and best-time windows taken 31 Oct, and a check on 1 Nov, recorded with Muteeb, showing alerts, timing advice and scheduled jobs survived the clock change with no hour drift."
+   "layman_needed": "A snapshot of baselines and best-time windows taken 31 Oct, and a check on 1 Nov, recorded with Muteeb, showing alerts, timing advice and scheduled jobs survived the clock change with no hour drift.",
+   "layman_output": "A snapshot of every baseline and best-time window will be taken on 31 Oct, and a check recorded with Muteeb on 1 Nov proving that alerts, timing advice and scheduled jobs all survived the UK clock change with no one-hour drift. Anyone can open the two records side by side and confirm the numbers match — so no pilot gets advice that is silently an hour wrong."
   },
   {
    "id": "N4-FH-09",
@@ -12799,7 +13163,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Measure how good the assistant is at finding the right pieces of a customer's own data before answering — a baseline score, so we can prove future changes make its answers better, not worse.",
    "layman_analogy": "Like scoring the librarian separately from the essayist — first, did they fetch the right books off the shelf at all?",
-   "layman_needed": "A nightly panel showing how often the assistant retrieves the right source material, alongside answer quality, with a baseline recorded before any tuning and settings chosen from it."
+   "layman_needed": "A nightly panel showing how often the assistant retrieves the right source material, alongside answer quality, with a baseline recorded before any tuning and settings chosen from it.",
+   "layman_output": "A nightly panel will show how often the assistant fetched the right source material for each test question, displayed beside the answer-quality pass rate, with a baseline recorded before any tuning. When a night goes red, anyone can look at the panel and tell at a glance whether the fetching or the answering broke — and the settings chosen will be traceable to the measured baseline."
   },
   {
    "id": "N4-MT-01",
@@ -12832,7 +13197,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "An automatic proof, run on every code change, that one customer's data can never bleed into another's — checked across every storage layer we use — so privacy between customers is guaranteed, not assumed.",
    "layman_analogy": "Like testing every door, hatch and vent between two hotel rooms on every refurbishment, proving no guest can ever reach the neighbour's suite.",
-   "layman_needed": "Five named automatic tests — one per storage path — proving one customer can never reach another's data, running on every code change and blocking any change that fails."
+   "layman_needed": "Five named automatic tests — one per storage path — proving one customer can never reach another's data, running on every code change and blocking any change that fails.",
+   "layman_output": "Five named automatic tests will run on every code change — one for each place data lives: the API, the cache, the queue, the search index and the assistant's memory — each proving one customer can never reach another's data, and blocking any change that fails. Filza will sign the isolation attestation off these tests, and anyone can open the results and see all five green."
   },
   {
    "id": "N4-MT-02",
@@ -12863,7 +13229,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Ask our suppliers (email, search, sign-in, AI provider) to raise our usage allowances now, so we don't hit a ceiling and stall just as pilot traffic grows.",
    "layman_analogy": "Like ringing the wholesalers before the Christmas rush to raise your standing order, rather than finding the shelves bare in December.",
-   "layman_needed": "Quota-raise requests filed with all four suppliers with growth projections attached, the granted ceilings recorded in the runbook, and the Facebook call budget checked with headroom noted."
+   "layman_needed": "Quota-raise requests filed with all four suppliers with growth projections attached, the granted ceilings recorded in the runbook, and the Facebook call budget checked with headroom noted.",
+   "layman_output": "Formal requests for higher usage limits will be filed with all four suppliers — email, search index, sign-in and the AI provider — with growth projections attached, and the granted ceilings recorded in the war-room runbook. The Facebook call budget at 100 pages will be checked with headroom noted. On launch morning anyone can open the runbook and see exactly how much capacity is guaranteed."
   },
   {
    "id": "N4-MT-03",
@@ -12894,7 +13261,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We assumed 60% of assistant questions are repeats we can answer from a saved copy (which keeps AI costs down); this checks that assumption against real pilot questions, so our cost model isn't wishful thinking.",
    "layman_analogy": "Like assuming most café orders are the usual — then actually counting a week of orders to see if the batch-brew maths holds.",
-   "layman_needed": "A written note stating the measured repeat-question rate from real pilot logs versus the assumed 60%, and the resulting cost per customer, reported to Jill if it's worse."
+   "layman_needed": "A written note stating the measured repeat-question rate from real pilot logs versus the assumed 60%, and the resulting cost per customer, reported to Jill if it's worse.",
+   "layman_output": "A written note will state the measured rate at which pilots ask repeat questions — taken from real query logs — against the 60% assumed in the budget, and what the difference means for AI cost per customer. If the real number is worse, the note will already be with Jill, so the spending limits and cut-off thresholds get set from fact rather than hope."
   },
   {
    "id": "N4-MT-04",
@@ -12931,7 +13299,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Make the machinery behind Art-E production-ready: memory rules enforced, spending limits per customer, and an automatic cut-off that stops runaway failures — each deliberately tripped in testing to prove it works.",
    "layman_analogy": "Like testing the house before moving in — tripping the fuse board, running the taps, forcing the stop-valve — so nothing is trusted on faith.",
-   "layman_needed": "Production machinery where backdated memories past 90 days provably purge while recent ones survive, spending limits enforce, and a forced overspend trips the cut-off and pages someone."
+   "layman_needed": "Production machinery where backdated memories past 90 days provably purge while recent ones survive, spending limits enforce, and a forced overspend trips the cut-off and pages someone.",
+   "layman_output": "The assistant's engine room will be production-ready: memories older than 90 days provably purge (proven by seeding backdated records and watching them delete while recent ones survive), per-customer spending limits enforce, and a forced overspend trips the automatic cut-off and pages someone. Jill's agreed thresholds will be in writing, and anyone can read the trip-test record."
   },
   {
    "id": "N4-MT-05",
@@ -12963,7 +13332,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Prove by scan that customers' sign-in tokens and pilot data are properly encrypted, plus a sweep for the ten most common security holes, so we can show pilots their data is locked down.",
    "layman_analogy": "Like having the locksmith test every lock on the shop and check the ten ways burglars usually get in, before the insurance assessor visits.",
-   "layman_needed": "Scan output proving tokens and pilot data are properly encrypted with no plaintext secrets anywhere, and the ten most common security holes swept with findings fixed or ticketed."
+   "layman_needed": "Scan output proving tokens and pilot data are properly encrypted with no plaintext secrets anywhere, and the ten most common security holes swept with findings fixed or ticketed.",
+   "layman_output": "Scan output will be on file proving Facebook tokens and pilot data are encrypted with managed keys and no plaintext secret sits in code or configuration, plus a sweep of the API against the ten most common security holes with every finding fixed or ticketed. The external testers in November will face a hardened target, and anyone can open the scan receipts beforehand."
   },
   {
    "id": "N4-MT-06",
@@ -12995,7 +13365,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Decide exactly what an outside security firm should attack (sign-in, the assistant, the collaboration screens) and get the test booked, so an independent expert confirms we're secure before wider launch.",
    "layman_analogy": "Like writing the brief for the burglar you're hiring to break into your own shop — which doors to try, and a booked date on the calendar.",
-   "layman_needed": "A signed scope covering sign-in, the assistant and the partner-matching endpoints, plus a confirmed vendor booked for early November so serious findings close before 13 Nov."
+   "layman_needed": "A signed scope covering sign-in, the assistant and the partner-matching endpoints, plus a confirmed vendor booked for early November so serious findings close before 13 Nov.",
+   "layman_output": "A signed scope document will exist covering the three riskiest surfaces — the Facebook sign-in flow, the assistant, and the partner-matching endpoints — with Jill's budget signature and a named outside security firm booked for early November. The booking confirmation will show the report arrives in time to fix serious findings before the 13 Nov readiness review."
   },
   {
    "id": "N4-MT-07",
@@ -13030,7 +13401,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Deliberately hammer our AI connections with heavy and sudden traffic, having decided which features matter most when things get tight, so under real load the important stuff keeps working.",
    "layman_analogy": "Like stress-testing a bridge with slowly increasing and then sudden loads, having decided in advance which lanes close first if it groans.",
-   "layman_needed": "A written report showing performance under steady and burst load, a table assigning every feature a keep-alive priority with its degraded wording, and proof low-priority work sheds while typing stays fast."
+   "layman_needed": "A written report showing performance under steady and burst load, a table assigning every feature a keep-alive priority with its degraded wording, and proof low-priority work sheds while typing stays fast.",
+   "layman_output": "A written load-test report will show how the scoring, alert and assistant services behave under steady and sudden-spike traffic, alongside a table assigning every feature a keep-alive priority — crisis alerts never drop, background work sheds first — with the on-screen wording for each degraded state. Anyone can read which tier gave way at what load, proof the app degrades rather than dies."
   },
   {
    "id": "N4-MT-08",
@@ -13060,7 +13432,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Build the data feeds behind a 'wins' view: how much value alerts delivered and how often customers followed our advice, so sales and investors have proof the product pays for itself.",
    "layman_analogy": "Like wiring the shop's trophy cabinet straight to the till receipts — every 'win' on display traces to a real transaction.",
-   "layman_needed": "Working data feeds returning the value delivered (extra reach, drafts improved, risks caught) and the advice-followed scoreboard, each figure matching Faheem's outcome ledger row for row."
+   "layman_needed": "Working data feeds returning the value delivered (extra reach, drafts improved, risks caught) and the advice-followed scoreboard, each figure matching Faheem's outcome ledger row for row.",
+   "layman_output": "Working data feeds will return each customer's value story — extra reach earned, drafts improved, risks caught — and the advice-followed scoreboard (beat, matched, skipped), every figure traceable to a row in Faheem's outcome ledger. Asad can assemble the Wins screen straight from them, and a teammate can pick any number and find its matching ledger row."
   },
   {
    "id": "N4-MT-09",
@@ -13093,7 +13466,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Help Filza run a real 'give me all my data' request end to end, and witness a full deletion after a customer disconnects, so our privacy promises are demonstrated, not just written down.",
    "layman_analogy": "Like a fire marshal watching the actual evacuation with a stopwatch, not just reading the laminated plan on the wall.",
-   "layman_needed": "A completed real data-request run and a deletion after disconnection, both witnessed and signed by Filza across every store, with every gap found turned into an owned ticket."
+   "layman_needed": "A completed real data-request run and a deletion after disconnection, both witnessed and signed by Filza across every store, with every gap found turned into an owned ticket.",
+   "layman_output": "One real everything-you-hold-on-me request will have been run end to end with Filza watching — across the warehouse, labels, search index and assistant memory — and one deletion triggered by disconnecting a page, witnessed and signed. Every gap found will exist as an owned ticket. Anyone can read Filza's signed record and the ticket list rather than trusting that deletion 'probably works'."
   },
   {
    "id": "N4-MT-10",
@@ -13126,7 +13500,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A written plan for restoring from backups without resurrecting data a customer had asked us to delete, so even a disaster recovery can't break a deletion promise.",
    "layman_analogy": "Like restoring the house from old photographs after a flood — while making sure the wall you'd legally demolished doesn't get rebuilt.",
-   "layman_needed": "A written data-restore plan in the runbook, plus a tested restore proving that customers who were deleted stay deleted afterwards, re-applied from the deletion log."
+   "layman_needed": "A written data-restore plan in the runbook, plus a tested restore proving that customers who were deleted stay deleted afterwards, re-applied from the deletion log.",
+   "layman_output": "A written data-restore plan will sit in the runbook, separate from the code rollback plan, and a tested restore will be on record proving that customers who asked to be deleted stay deleted afterwards — their erasure re-applied from the deletion log. Anyone can read the test record and confirm a backup restore can never quietly resurrect someone we promised to forget."
   },
   {
    "id": "N4-MT-11",
@@ -13158,7 +13533,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Go through every scheduled background job before the 25 October clock change and confirm none will run at the wrong hour, so nothing customer-facing slips when the clocks go back.",
    "layman_analogy": "Like walking round the factory the night the clocks change, checking every timer so no machine runs twice or sleeps through its shift.",
-   "layman_needed": "A list of every scheduled background job with its timezone handling stated, and a dry run across the 25 Oct clock change showing none skip or double."
+   "layman_needed": "A list of every scheduled background job with its timezone handling stated, and a dry run across the 25 Oct clock change showing none skip or double.",
+   "layman_output": "A list of every scheduled background job — the fast poll, the nightly briefing, the weekly matching refresh, the backfills — will state each one's timezone handling, and a dry run across the 25 Oct clock change will be on record showing none skips or doubles. A teammate can open the list and the dry-run log and confirm the clocks going back cannot silently mis-time anything."
   },
   {
    "id": "N4-MT-12",
@@ -13193,7 +13569,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The Friday 30 October go/no-go check: ask Art-E 20 real questions, prove the memory opt-in works, and show the Pages screen running on genuine health data, so we only call the sprint done on evidence.",
    "layman_analogy": "Like the dress rehearsal with the director in the stalls — every scene performed live, on the real stage, before opening night is confirmed.",
-   "layman_needed": "All four go/no-go checks demonstrated live on 30 Oct — the 20-question run on production, clean injection probes, the opt-in-to-save journey, and Pages on real health data — and recorded."
+   "layman_needed": "All four go/no-go checks demonstrated live on 30 Oct — the 20-question run on production, clean injection probes, the opt-in-to-save journey, and Pages on real health data — and recorded.",
+   "layman_output": "On Friday 30 Oct all four go/no-go checks will have been demonstrated live and recorded: the 20-question assistant run on production machinery, the hidden-instruction attack probes coming back clean, the full opt-in-to-spotlight-to-save journey, and the Pages view reading real health data. Anyone can watch the recording and see the sprint's headline claims proven rather than promised."
   },
   {
    "id": "N4-MT-13",
@@ -13226,7 +13603,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Write up what the outside security test should cover and a shortlist of firms with rough prices, ready for Jill's budget decision on 21 October.",
    "layman_analogy": "Like getting three builders' quotes and a one-page job spec ready before the household budget meeting, so the decision takes minutes.",
-   "layman_needed": "A one-page test scope with two or three vendor price estimates, cited in Jill's budget memo and signed by Alex on 23 Oct."
+   "layman_needed": "A one-page test scope with two or three vendor price estimates, cited in Jill's budget memo and signed by Alex on 23 Oct.",
+   "layman_output": "A one-page security-test scope will exist naming the surfaces to attack, the environments, the exclusions and the evidence wanted back, with two or three vendor price estimates attached. It will be cited in Jill's budget memo and sit in front of Alex for the 23 Oct signature — so the money decision happens on a priced document, not a guess."
   },
   {
    "id": "N4-MT-14",
@@ -13263,7 +13641,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Set and measure speed targets for the assistant: how quickly the first words appear and how slow the worst answers are allowed to be, so chatting with Art-E feels snappy rather than like waiting for a page to load.",
    "layman_analogy": "Like timing a restaurant from order to first bread roll and to worst-case main course, with a rule for when the kitchen must admit defeat instead of keeping you waiting.",
-   "layman_needed": "Measured first-word and worst-case answer times per model route, recorded against a written target, with the retry loop capped and a defined honest message when the cap is hit — never an endless spinner."
+   "layman_needed": "Measured first-word and worst-case answer times per model route, recorded against a written target, with the retry loop capped and a defined honest message when the cap is hit — never an endless spinner.",
+   "layman_output": "A written speed target for the assistant will exist alongside real measurements: time to the first word appearing and worst-case full-answer time, broken down by stage and by model route. The retry loop will be capped, with an honest 'could not verify this answer' message when the cap is hit — never an endless spinner. The panel will sit on the war-room board where anyone can read the live figures."
   },
   {
    "id": "N4-MT-15",
@@ -13300,7 +13679,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Record Art-E conversations (with proper safeguards) and make transcripts exportable, so the weekly quality reviews can look at what the assistant actually said to real users.",
    "layman_analogy": "Like a black-box recorder for the assistant's conversations — kept in the same locked cabinet as everything else, and shredded on the same schedule.",
-   "layman_needed": "A conversation log Saad and Lewis can read for the 23 Oct review without database access, confirmed by Filza to sit inside the export, deletion and 90-day retention rules."
+   "layman_needed": "A conversation log Saad and Lewis can read for the 23 Oct review without database access, confirmed by Filza to sit inside the export, deletion and 90-day retention rules.",
+   "layman_output": "Every assistant conversation will be logged with its question, final answer, sources, cost and outcome, and Saad and Lewis will have a readable per-customer export they can review in a 30-minute session without database access. Filza will have confirmed the log sits inside the export, deletion and 90-day retention rules — so the 23 Oct review reads real transcripts, not a second rogue copy of customer data."
   },
   {
    "id": "N4-MT-16",
@@ -13335,7 +13715,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Publish what each feature actually costs us to run, both at pilot size and projected at 100 pages, so pricing and fundraising conversations use measured numbers.",
    "layman_analogy": "Like an itemised bill for every dish on the menu — at today's covers and at a full house — flagging any plate that costs more than it sells for.",
-   "layman_needed": "A published table giving the measured running cost of each feature at 5 pilots and projected at 100 pages, naming which costs jump in steps and at what volume, with poor-value features flagged."
+   "layman_needed": "A published table giving the measured running cost of each feature at 5 pilots and projected at 100 pages, naming which costs jump in steps and at what volume, with poor-value features flagged.",
+   "layman_output": "A published table will give the measured running cost of each feature at 5 pilots and projected at 100 pages, naming which costs jump in steps — an extra server, a bigger database tier — and at what volume each jump lands, with any feature costing more than its value flagged. Asad's re-cost and the 24 Nov price notice can both cite it, and anyone can trace a line to its measured source."
   },
   {
    "id": "N4-SD-01",
@@ -13367,7 +13748,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "On 20 October, personally test the public sign-up waitlist from form to confirmation email, then send Alex the sign-up count every day, so we know demand is real and nothing in the funnel is broken.",
    "layman_analogy": "Like the shopkeeper personally walking through the new front door on opening morning, then phoning the owner the till count every evening.",
-   "layman_needed": "A filed note dated 20 Oct confirming signup, confirmation email and unsubscribe all work on desktop and mobile with no pre-consent tracking, and a daily signup count reaching Alex from day one."
+   "layman_needed": "A filed note dated 20 Oct confirming signup, confirmation email and unsubscribe all work on desktop and mobile with no pre-consent tracking, and a daily signup count reaching Alex from day one.",
+   "layman_output": "A filed note dated 20 Oct will confirm the waitlist worked on its opening day: signup, confirmation email and unsubscribe all walked through on desktop and mobile, no tracking before consent, and the migrated early names holding their queue positions. From that day on, Alex will receive the signup count daily, so a broken form or a slow week is visible within 24 hours."
   },
   {
    "id": "N4-SD-02",
@@ -13399,7 +13781,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "While Meta reviews our app, someone checks their decision daily and we have a response ready to go within 48 hours if they say no, so a rejection costs us days, not weeks.",
    "layman_analogy": "Like waiting on a planning-permission verdict with the appeal letter already drafted — checked daily, posted within two days if refused.",
-   "layman_needed": "A dated log of Meta's decision from a daily watch, and — if rejected — a resubmission filed within 48 hours plus the evidence Alex needs for the same-week resubmit-or-descope call."
+   "layman_needed": "A dated log of Meta's decision from a daily watch, and — if rejected — a resubmission filed within 48 hours plus the evidence Alex needs for the same-week resubmit-or-descope call.",
+   "layman_output": "A dated log will record Meta's app-review decision from a daily watch, with every question answered inside 24 hours. If Meta rejects, a resubmission using the pre-written responses will be filed within 48 hours, and Alex will hold the evidence needed to choose resubmit-or-drop-a-feature the same week. Anyone can open the log and see exactly what happened on which day."
   },
   {
    "id": "N4-SD-03",
@@ -13431,7 +13814,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Start a weekly half-hour with Lewis reading real Art-E conversations, so a human regularly judges whether the assistant is being helpful, accurate and polite.",
    "layman_analogy": "Like a head teacher sitting in on real lessons for half an hour each week, rather than only reading the term's exam results.",
-   "layman_needed": "A weekly half-hour booked with Lewis reading real assistant conversations, first session held by 30 Oct, with at least one real question fed into the 200-question answer sheet."
+   "layman_needed": "A weekly half-hour booked with Lewis reading real assistant conversations, first session held by 30 Oct, with at least one real question fed into the 200-question answer sheet.",
+   "layman_output": "A weekly half-hour will be booked with Lewis reading real assistant conversations from the pilots, with the first session held by 30 Oct. Questions the test sheet never anticipated, and any wrong answers, will be routed into the 200-question answer sheet and Faheem's test cases. Anyone can check the calendar entry and find at least one real pilot question already added to the sheet."
   },
   {
    "id": "N4-SD-04",
@@ -13462,7 +13846,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Sit down with Faheem and adjust where the lines sit on the will-this-post-flop gauge, using real mid-pilot results, so a 'red' warning genuinely means trouble.",
    "layman_analogy": "Like moving the needle markings on a car's fuel gauge after real journeys showed where 'empty' actually is.",
-   "layman_needed": "Updated flop-gauge band boundaries, reset with Faheem against measured mid-pilot results, published in the one-pager and decision log, with the change ticket handed to Asad before freeze."
+   "layman_needed": "Updated flop-gauge band boundaries, reset with Faheem against measured mid-pilot results, published in the one-pager and decision log, with the change ticket handed to Asad before freeze.",
+   "layman_output": "The flop gauge's band boundaries — where 'risky' becomes 'fine' — will be reset with Faheem against measured mid-pilot results rather than the original guesses, published in the updated one-pager and decision log, and handed to Asad as a change ticket before the freeze. A teammate can compare old and new boundaries and see the reasoning for each shift."
   },
   {
    "id": "N4-SD-05",
@@ -13492,7 +13877,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "An accessibility audit of everything we've built, fixing text sizes and similar issues with Asad, so people with impaired vision or motor control can use the product comfortably — and we meet the recognised standard.",
    "layman_analogy": "Like walking the whole shop with a wheelchair user and a magnifying glass, noting every step, dim label and stiff handle to fix.",
-   "layman_needed": "An accessibility audit report covering every built screen, email template and PDF against the recognised standard, with each fix sized and accepted into Asad's next-sprint plan."
+   "layman_needed": "An accessibility audit report covering every built screen, email template and PDF against the recognised standard, with each fix sized and accepted into Asad's next-sprint plan.",
+   "layman_output": "An accessibility audit report will cover every built screen, the crisis-alert email and the PDF documents against the recognised WCAG standard — contrast, keyboard use, labels, reading order — with each fix sized and accepted into Asad's next-sprint plan. A teammate can open the report, pick any finding, and reproduce it on the screen it names."
   },
   {
    "id": "N4-SD-06",
@@ -13526,7 +13912,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Sign-off checks for the collaboration screens: the opt-in is impossible to miss, the feature provably shows nothing when it isn't sure, and the empty states read well — so it launches respectful and honest.",
    "layman_analogy": "Like a wedding planner's final walkthrough — the consent card unmissable, the empty tables dressed nicely, and the doors that should be locked provably locked.",
-   "layman_needed": "A signed acceptance of the partner-matching screens: the opt-in equally prominent and revocable, a recorded demo that thin data shows nothing, and empty-state wording approved."
+   "layman_needed": "A signed acceptance of the partner-matching screens: the opt-in equally prominent and revocable, a recorded demo that thin data shows nothing, and empty-state wording approved.",
+   "layman_output": "A signed acceptance note will confirm the partner-matching screens are right: the opt-in equally prominent and revocable per Filza's wording, a recorded demo proving thin data shows nothing rather than weak results, revoked pages vanishing cleanly, and empty-state wording that sells rather than apologises. Anyone can watch the demo recording and read the approved copy."
   },
   {
    "id": "N4-SD-07",
@@ -13558,7 +13945,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A full practice run of the product with one friendly pilot customer on our rehearsal environment, so we find the rough edges with a forgiving audience before opening up wider.",
    "layman_analogy": "Like a full dress rehearsal with one kind friend in the audience — you're testing the running order, not blaming the actors.",
-   "layman_needed": "Filed notes from one friendly pilot walking the full test protocol on staging, with the protocol itself — tasks, observation rules, defect capture — revised from what was learned."
+   "layman_needed": "Filed notes from one friendly pilot walking the full test protocol on staging, with the protocol itself — tasks, observation rules, defect capture — revised from what was learned.",
+   "layman_output": "Filed notes will exist from one friendly pilot walking the full user-acceptance test protocol on staging — the comprehension tasks, the watch-don't-guide rule, the defect capture sheet — with the protocol itself revised from what the rehearsal exposed. When the real test judges the product in November, anyone can see the script was debugged on a friendly first."
   },
   {
    "id": "N4-SD-08",
@@ -13592,7 +13980,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Re-plan the next two sprints with Alex assuming the team only has 60-65% of its time free, so the schedule reflects reality and we stop promising dates we'd miss.",
    "layman_analogy": "Like re-planning the house renovation once you admit the builders are only free three days a week, instead of pretending it's five.",
-   "layman_needed": "A revised plan for the next two sprints, agreed with Alex at 60-65% available time with drills and retests booked first, published before 2 Nov and checked against the freeze dates."
+   "layman_needed": "A revised plan for the next two sprints, agreed with Alex at 60-65% available time with drills and retests booked first, published before 2 Nov and checked against the freeze dates.",
+   "layman_output": "A revised plan for the final two sprints will exist, agreed with Alex, built on the honest assumption that builders have only 60-65% of their time once drills, testing and retests are booked first. It will be published before 2 Nov with the cut order applied and dates checked against the 20 Nov and 27 Nov freezes. Anyone can read it and see what was moved or dropped to protect the freeze."
   },
   {
    "id": "N4-SD-09",
@@ -13623,7 +14012,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A design quality sweep of every screen built this sprint, including walking the new-customer welcome flow, so spacing, wording and polish are consistent before pilots see it.",
    "layman_analogy": "Like the shopfitter's final lap with a spirit level and a notepad — every shelf, label and doorway checked against the drawings before customers arrive.",
-   "layman_needed": "Written sweep notes covering every screen built this sprint — chat rail, matching, Pages, briefing, onboarding, cookie banner — with each deviation from the designs sized for fixing."
+   "layman_needed": "Written sweep notes covering every screen built this sprint — chat rail, matching, Pages, briefing, onboarding, cookie banner — with each deviation from the designs sized for fixing.",
+   "layman_output": "Written sweep notes will cover every screen built this sprint — the chat rail, partner matching, Pages, the briefing card, first-run onboarding and the cookie banner — comparing each against its design pack, with every deviation listed and sized for fixing. A teammate can take any note, open the screen beside the design, and see the same difference."
   },
   {
    "id": "N4-SD-10",
@@ -13654,7 +14044,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Draft the skeleton of help pages for each screen and the first canned replies for common support questions, so when pilots ask for help we answer in minutes, not from scratch.",
    "layman_analogy": "Like stocking the help desk before opening day — a thin manual per counter and a drawer of ready-written replies to the obvious questions.",
-   "layman_needed": "A drafted help-page skeleton for each screen plus first canned support replies — including the 'is my data shared with other pages' answer — filed in the support folder."
+   "layman_needed": "A drafted help-page skeleton for each screen plus first canned support replies — including the 'is my data shared with other pages' answer — filed in the support folder.",
+   "layman_output": "A drafted help-page skeleton will exist for every screen — a getting-started page plus a how-to each — alongside the first canned support replies, including the ready answer to 'is my data shared with other pages', written from Filza's approved position. All filed in the support folder, so when the first pilot asks, whoever answers copies rather than composes."
   },
   {
    "id": "N4-SD-11",
@@ -13689,7 +14080,8 @@ window.LAUNCH_DATA = {
    "table_priority_cell": "P1",
    "layman": "Write the script with Alex for a short video showing the comment-storm alert catching trouble in time, so sales and investors can see the product's best moment in two minutes.",
    "layman_analogy": "Like storyboarding the shop's best two minutes for the advert — with a checklist proving every boast on screen actually happened.",
-   "layman_needed": "A video script agreed with Alex showing the comment-storm alert catching real trouble, with a table matching every claim to evidence and the reply shown as drafted, not sent."
+   "layman_needed": "A video script agreed with Alex showing the comment-storm alert catching real trouble, with a table matching every claim to evidence and the reply shown as drafted, not sent.",
+   "layman_output": "A finished video script for the 12 Nov crisis demo will exist, agreed with Alex, showing the comment-storm alert catching real trouble — with a table matching every on-screen claim to the evidence behind it, pages Lewis confirms are healthy, and the calm reply shown as drafted, never sent. Anyone can fact-check the script line by line before a camera rolls."
   },
   {
    "id": "N4-SD-12",
@@ -13720,7 +14112,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Prepare December's prioritisation meeting so every proposed bet comes with an evidence column — what pilots actually did and said — so we choose the next quarter's work on facts, not hunches.",
    "layman_analogy": "Like preparing the family budget meeting with receipts stapled to every proposal, so December's choices are argued from facts, not feelings.",
-   "layman_needed": "A drafted table of candidate next-quarter bets, each with an evidence entry from what pilots actually did and said, ready for the December prioritisation meeting."
+   "layman_needed": "A drafted table of candidate next-quarter bets, each with an evidence entry from what pilots actually did and said, ready for the December prioritisation meeting.",
+   "layman_output": "A drafted table of candidate bets for next quarter will exist — the features cut or deferred this quarter, each with an evidence entry recording what pilots actually did and said about it, drawn from the pilot digest and the test rehearsal. At the December prioritisation meeting, anyone can argue from the evidence column instead of memory."
   },
   {
    "id": "N4-SD-13",
@@ -13753,7 +14146,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Write the on-screen wording that explains what a suggested partner page match is actually inviting you to do, and keep that screen read-only so nobody can message anyone from it yet.",
    "layman_analogy": "Like a noticeboard ad that honestly says 'here's a number to call yourself' — not a matchmaking service that promises to make the call for you.",
-   "layman_needed": "Approved on-screen wording explaining a match invites off-platform contact, cleared by Filza, plus a written sweep confirming no page, ad or reply anywhere implies introductions or in-app messaging."
+   "layman_needed": "Approved on-screen wording explaining a match invites off-platform contact, cleared by Filza, plus a written sweep confirming no page, ad or reply anywhere implies introductions or in-app messaging.",
+   "layman_output": "Approved on-screen wording will explain honestly what a partner match invites — reaching out yourself by email or WhatsApp, since in-app messaging is deliberately not built — cleared by Filza. A written sweep will confirm no page, advert or reply anywhere implies introductions or in-app contact, and Alex will hold the one-line answer for launch-week questions."
   },
   {
    "id": "N4-SD-14",
@@ -13790,7 +14184,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Go through every screen we have built and make sure it looks right and works with a finger on phones and tablets, not just with a mouse on a laptop, so pilots can use it wherever they are.",
    "layman_analogy": "Like test-driving the new car on real potholed roads with gloves on, not just admiring it on the showroom turntable.",
-   "layman_needed": "Every built screen opened on a real iPhone and a real Android phone, defects filed, and any screen deliberately left desktop-only listed with a one-line reason each."
+   "layman_needed": "Every built screen opened on a real iPhone and a real Android phone, defects filed, and any screen deliberately left desktop-only listed with a one-line reason each.",
+   "layman_output": "Every screen built by 30 Oct will have been opened on a real iPhone and a real Android phone — not just the emulator — with layout and touch defects filed, and any screen deliberately left desktop-only listed with a one-line reason each. A teammate can pick up either phone, open any screen, and find it matches the mobile designs or appears on the exceptions list."
   },
   {
    "id": "N4-AX-01",
@@ -13823,7 +14218,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Put up a simple traffic-light scorecard (green, amber, red) that each team updates weekly, so anyone can see at a glance whether we are on track for launch.",
    "layman_analogy": "Like the departures board at an airport — every gate showing green, amber or red, updated by the crew themselves each Friday.",
-   "layman_needed": "A live scorecard with every launch gate rated green/amber/red, an owner and evidence link per row, and the first round of Friday self-reports completed."
+   "layman_needed": "A live scorecard with every launch gate rated green/amber/red, an owner and evidence link per row, and the first round of Friday self-reports completed.",
+   "layman_output": "A live scorecard will exist beside the decisions calendar with one row per launch gate, each rated green, amber or red, with a named owner and a link to the evidence. Every owner will self-report each Friday from 23 Oct, and the card will be read aloud at the Friday scope meeting. Anyone can open it any day and see exactly what stands between the team and launch."
   },
   {
    "id": "N4-AX-02",
@@ -13856,7 +14252,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Keep a short list of the five biggest things that could derail launch, each with a named owner, a plan to reduce it, and a clear signal for when to act, so risks get managed instead of remembered too late.",
    "layman_analogy": "Like a ship's captain keeping the five worst weather threats on one card — each with a lookout, a plan, and the exact reading that means act now.",
-   "layman_needed": "A filed list of the five biggest launch risks, each with a named owner, a written plan to reduce it, and a numeric or dated trigger, reviewed weekly beside the scorecard."
+   "layman_needed": "A filed list of the five biggest launch risks, each with a named owner, a written plan to reduce it, and a numeric or dated trigger, reviewed weekly beside the scorecard.",
+   "layman_output": "A filed one-page register will name the five biggest launch risks — Meta approval, crisis accuracy, Asad's workload, the assistant's test scores, the waitlist pace — each with an owner, a written reduction plan, and a numeric or dated trigger that forces action. It will be reviewed weekly beside the scorecard, so anyone can see which triggers are close to firing."
   },
   {
    "id": "N4-AX-03",
@@ -13891,7 +14288,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Get the sign-offs done: money approved for an outside security test, agreement on how we will measure profit per customer, and rules for how long we keep data, so the teams waiting on these can move.",
    "layman_analogy": "Like the headmaster signing the three permission slips the trip can't leave without, so the coaches waiting outside can finally move.",
-   "layman_needed": "Alex's signature on all three documents — the security-test budget, the profit-measurement spec, and the data-retention schedule — with Muteeb confirming the test is booked."
+   "layman_needed": "Alex's signature on all three documents — the security-test budget, the profit-measurement spec, and the data-retention schedule — with Muteeb confirming the test is booked.",
+   "layman_output": "Three documents will carry Alex's signature: the budget for the external security test, Jill's specification for the profit-measurement dashboard, and Filza's data-retention schedule. Muteeb will have confirmed the test is actually booked off the signed budget. Anyone can open the folder and see all three signatures dated within the sprint."
   },
   {
    "id": "N4-AX-04",
@@ -13926,7 +14324,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Agree in advance what we do if Facebook turns down our app approval: within the same week we decide whether to reapply or launch without the blocked features, so a rejection costs days, not months.",
    "layman_analogy": "Like agreeing before the exam results arrive whether a fail means resitting or switching course — so the bad-news week is spent acting, not deliberating.",
-   "layman_needed": "A dated decision — approved, resubmit, descope, or escalated — recorded on the decisions calendar within the same week Meta's verdict arrives."
+   "layman_needed": "A dated decision — approved, resubmit, descope, or escalated — recorded on the decisions calendar within the same week Meta's verdict arrives.",
+   "layman_output": "A dated decision will sit on the decisions calendar within the same week Meta's verdict arrives: approved (triggering the go-live flip plan), resubmit within 48 hours, drop the affected feature, or escalate through Meta's support channels if no decision comes by day 20. Anyone can open the calendar and see the call was made on facts inside the week, not left to drift."
   },
   {
    "id": "N4-AX-05",
@@ -13960,7 +14359,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Check whether sign-ups for the waiting list are growing fast enough, and if not, have backup ways to reach people ready to switch on, so we do not arrive at launch without an audience.",
    "layman_analogy": "Like checking ticket sales against the seating plan weeks before the show, with street flyers and radio spots ready if the stalls look empty.",
-   "layman_needed": "A weekly growth report comparing signups against the 500-by-20-Nov line, and — if behind — naming which backup channels were switched on and who owns each."
+   "layman_needed": "A weekly growth report comparing signups against the 500-by-20-Nov line, and — if behind — naming which backup channels were switched on and who owns each.",
+   "layman_output": "A weekly growth report will compare waitlist signups against the 500-by-20-Nov line — roughly 90 a week — and, if behind, name which backup channels were switched on (directories, newsletter, pilot referrals, paid) and who owns each. Anyone can read the latest report and know whether launch day will have a real audience, five weeks before it matters."
   },
   {
    "id": "N4-JL-01",
@@ -13994,7 +14394,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Get the budget for the outside security test formally approved, so Muteeb can book the testers in time for their findings to be fixed before launch.",
    "layman_analogy": "Like getting the survey fee approved and the surveyor booked early enough that anything he finds can be fixed before completion day.",
-   "layman_needed": "A signed budget with Alex's approval and a confirmed vendor booking for a security test running 2-8 Nov, with the report arriving in time to fix serious findings before 13 Nov."
+   "layman_needed": "A signed budget with Alex's approval and a confirmed vendor booking for a security test running 2-8 Nov, with the report arriving in time to fix serious findings before 13 Nov.",
+   "layman_output": "A signed budget with Alex's approval will exist, backed by two or three vendor quotes, and payment raised so a named outside security firm is confirmed for a 2-8 Nov test of the sign-in, assistant and partner-matching services. The booking confirmation will show the report arrives early enough to fix serious findings before the 13 Nov review. Anyone can see the signature, quote and booking in one folder."
   },
   {
    "id": "N4-JL-02",
@@ -14029,7 +14430,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Help run a practice round of a customer asking for a copy of all their data, handling the operations side, so we know we can meet that legal request smoothly when a real one arrives.",
    "layman_analogy": "Like a fire drill for a records request — running the whole retrieval once with a stopwatch, including the filing cabinets in the back office.",
-   "layman_needed": "One real everything-you-hold-on-me request completed end to end, including support inbox and mailing-tool records, each step timed and every gap logged as an owned ticket."
+   "layman_needed": "One real everything-you-hold-on-me request completed end to end, including support inbox and mailing-tool records, each step timed and every gap logged as an owned ticket.",
+   "layman_output": "One real everything-you-hold-on-me request will have been completed end to end on the operations side: a working intake route with a 30-day clock, and the records an engineer's export forgets — support inbox threads, mailing-tool entries, alert events — pulled and included. Each step will be timed and every gap logged as an owned ticket anyone can open and track."
   },
   {
    "id": "N4-JL-03",
@@ -14064,7 +14466,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Confirm that emails we send from our properly prepared sending address actually land in inboxes rather than spam folders, so pilots and customers reliably receive our alerts and messages.",
    "layman_analogy": "Like posting test letters to friends in every town before the big mail-out, checking each one lands on the doormat and not in the bin.",
-   "layman_needed": "A dated one-page confirmation showing the sending domain passes all authentication checks, bounce rates are within limits, quota covers the 8 Dec send, and every live email template lands in test inboxes."
+   "layman_needed": "A dated one-page confirmation showing the sending domain passes all authentication checks, bounce rates are within limits, quota covers the 8 Dec send, and every live email template lands in test inboxes.",
+   "layman_output": "A dated one-page confirmation will state the sending domain is out of warm-up: all three email-authentication checks passing, bounce and complaint rates inside limits, sending quota covering the 8 Dec queue email, and both the crisis-alert and newsletter templates landing in test inboxes at the major providers. Anyone can reread it before the 24 Nov and 8 Dec sends instead of assuming email just works."
   },
   {
    "id": "N4-JL-04",
@@ -14102,7 +14505,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Approve the plan for a dashboard showing what each customer costs us versus what they pay, so we can see whether the business makes money as it grows.",
    "layman_analogy": "Like a restaurant owner agreeing exactly which figures go on the till report — cost of each plate, takings, profit — before the busy opening week.",
-   "layman_needed": "A signed one-pager listing every money metric for the launch dashboard — what it costs to serve each customer, what they pay, the daily spend — each with its data source, refresh time and owner; signed by Jill and Alex, accepted by Muteeb."
+   "layman_needed": "A signed one-pager listing every money metric for the launch dashboard — what it costs to serve each customer, what they pay, the daily spend — each with its data source, refresh time and owner; signed by Jill and Alex, accepted by Muteeb.",
+   "layman_output": "A signed one-page spec will sit in the launch folder listing every money metric for the war-room board — what each customer costs us to serve, what they pay, margin per page, daily spend against the cap — each row naming its data source, refresh time and owner. Signed by Jill and Alex and accepted by Muteeb, so anyone can check the board being built matches an agreed plan rather than guesswork."
   },
   {
    "id": "N4-LW-01",
@@ -14135,7 +14539,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Line up a friendly pilot customer to help with two rehearsals: Saad's practice test run and Filza's supervised check that leaving the partner-suggestions feature really removes someone properly.",
    "layman_analogy": "Like recruiting a friendly neighbour to be the practice patient for a first-aid course — someone real to rehearse on before it matters.",
-   "layman_needed": "One friendly pilot booked for Saad's practice test session, and a second pilot named to Filza who will opt in to partner suggestions and then leave, so the removal can be watched — both arranged by 23 Oct."
+   "layman_needed": "One friendly pilot booked for Saad's practice test session, and a second pilot named to Filza who will opt in to partner suggestions and then leave, so the removal can be watched — both arranged by 23 Oct.",
+   "layman_output": "Two named pilots will be on the calendar: one friendly page owner booked into Saad's practice test session on the staging site, and a second, named to Filza, who will join the partner-suggestions feature and then leave it while Filza watches the removal happen. A teammate can open the diary and the roster sheet and see both bookings confirmed by 23 October, unblocking both rehearsals."
   },
   {
    "id": "N4-LW-02",
@@ -14167,7 +14572,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Start a weekly half-hour session with Saad reading real conversations pilots had with the Art-E assistant, so we spot bad or odd answers early and keep improving it from real use, from 23 Oct.",
    "layman_analogy": "Like a head teacher sitting in on real lessons each week instead of only reading the lesson plans — you catch what actually goes wrong in the room.",
-   "layman_needed": "Two logged half-hour sessions with Saad (16 and 30 Oct) reading real pilot conversations with Art-E, with at least 5 new test questions drawn from them and sent to Faheem."
+   "layman_needed": "Two logged half-hour sessions with Saad (16 and 30 Oct) reading real pilot conversations with Art-E, with at least 5 new test questions drawn from them and sent to Faheem.",
+   "layman_output": "A logged half-hour meeting each week from 23 October where Lewis and Saad read real pilot conversations with the Art-E assistant, flagging wrong or oddly refused answers. Two session notes (16 and 30 October) will sit in the shared folder, and at least five genuine pilot questions from them will be sent to Faheem as new test questions — so Art-E improves from real use, not just scripted checks."
   },
   {
    "id": "N4-LW-03",
@@ -14201,7 +14607,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Grow our master list of test questions with known correct answers to 200 with Faheem, and count how many pilots would write us a public review, so we can measure Art-E properly and gather launch proof.",
    "layman_analogy": "Like growing a driving-test question bank to cover every road situation, while also counting which past students would give the school a public review.",
-   "layman_needed": "A bank of 200 test questions with known right answers loaded into the nightly check by 28 Oct, confirmed by Faheem, plus a count on the roster sheet of pilots willing to write a public G2 review."
+   "layman_needed": "A bank of 200 test questions with known right answers loaded into the nightly check by 28 Oct, confirmed by Faheem, plus a count on the roster sheet of pilots willing to write a public G2 review.",
+   "layman_output": "A bank of 200 test questions with known correct answers, confirmed by Faheem and loaded into the overnight Art-E check by 28 October, with the original 20 gate questions kept unchanged. Alongside it, the pilot roster sheet will carry a count of pilots willing to write a public G2 review. A teammate can open the nightly test run and see all 200 questions being asked, and read the roster for the review count."
   },
   {
    "id": "N4-LW-04",
@@ -14235,7 +14642,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Do a second tuning round on the comment-storm alarm: go through each pilot's log of alerts that turned out to be nothing and adjust, so warnings stay useful rather than becoming noise people ignore.",
    "layman_analogy": "Like walking a street with each household after a month of a new burglar alarm, marking every ring as real, false or missed, then adjusting the sensitivity together.",
-   "layman_needed": "Every comment-storm alert since go-live marked real, false or missed by the pilot it went to, and a written record with Faheem by 30 Oct of what alarm settings changed and why."
+   "layman_needed": "Every comment-storm alert since go-live marked real, false or missed by the pilot it went to, and a written record with Faheem by 30 Oct of what alarm settings changed and why.",
+   "layman_output": "A completed adjudication log where every comment-storm alert sent since go-live is marked real, false or missed by the pilot who received it, plus a written note agreed with Faheem by 30 October recording exactly which alarm settings changed in this second tuning round and why. A teammate can open the log and see no unlabelled rows — proof the alarm is being kept useful rather than left to drift into noise."
   },
   {
    "id": "N4-LW-05",
@@ -14269,7 +14677,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis drafts a short true story per pilot and collects written permission to use it, so launch marketing has real voices without any legal surprises.",
    "layman_analogy": "Like collecting signed photo-consent forms from wedding guests before the album goes to print — permission first, publication second.",
-   "layman_needed": "One folder by 30 Oct holding a short true story per pilot and each pilot's signed permission on Filza's form (or a recorded no) covering their name, quotes, screenshots and use in the launch video."
+   "layman_needed": "One folder by 30 Oct holding a short true story per pilot and each pilot's signed permission on Filza's form (or a recorded no) covering their name, quotes, screenshots and use in the launch video.",
+   "layman_output": "One shared folder, complete by 30 October, holding a short true story for each pilot — who they are and what the product did for them — next to that pilot's signed permission on Filza's form (or a recorded no) covering their name, quotes, screenshots and use in the 12 November demo video. Marketing can then pull any story straight into launch material knowing the paperwork behind it is already done."
   },
   {
    "id": "N4-FZ-01",
@@ -14301,7 +14710,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Turn our review of the small tracking files the website uses into clear rules for what needs the visitor's permission first, so Asad can build the consent pop-up correctly and we stay on the right side of privacy law.",
    "layman_analogy": "Like turning a kitchen inspection into a written recipe for the front door: which visitors must sign in first and which may walk straight through.",
-   "layman_needed": "A table for Asad listing every script and cookie on the site, marking which may load before the visitor consents and which must wait, plus the pop-up wording — and the consent banner built to it this sprint."
+   "layman_needed": "A table for Asad listing every script and cookie on the site, marking which may load before the visitor consents and which must wait, plus the pop-up wording — and the consent banner built to it this sprint.",
+   "layman_output": "A table in Asad's hands listing every script and cookie on the website and app, marking which may load before a visitor consents and which must wait, plus the exact wording for the consent pop-up. The pop-up itself will be built to that table this sprint — so a teammate can visit the site, click decline, and verify the blocked items genuinely never load."
   },
   {
    "id": "N4-FZ-02",
@@ -14333,7 +14743,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Write the step-by-step manual process for when a customer legally asks to see or delete all the data we hold on them, so anyone on the team can handle such a request correctly and on time.",
    "layman_analogy": "Like writing the step-by-step fire-drill card kept by the door — so on the day, anyone can follow it without inventing the route.",
-   "layman_needed": "A filed, step-by-step written procedure for handling a legal see-my-data or delete-my-data request — who checks identity, who pulls what from each store, the deadline clock, the export format — with Muteeb holding the query list."
+   "layman_needed": "A filed, step-by-step written procedure for handling a legal see-my-data or delete-my-data request — who checks identity, who pulls what from each store, the deadline clock, the export format — with Muteeb holding the query list.",
+   "layman_output": "A filed, step-by-step written procedure for handling a legal see-my-data or delete-my-data request: how it arrives, who checks identity, who pulls what from each storage place, the one-month deadline clock, and the export format the customer receives. Muteeb will hold the ready-made query list. Anyone on the team could pick up the document and handle a request correctly without asking around."
   },
   {
    "id": "N4-FZ-03",
@@ -14366,7 +14777,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Formally sign off the rules for how long we keep each kind of data before deleting it, so we are not holding information longer than we should and can show regulators we have a policy.",
    "layman_analogy": "Like signing the larder rules: how long each ingredient keeps, what triggers the clear-out, and checking the bin rota actually runs.",
-   "layman_needed": "A signed table stating how long each kind of data is kept and what deletes it, countersigned by Alex, with Muteeb confirming the deleting mechanism exists for every row or a ticket opened where it does not."
+   "layman_needed": "A signed table stating how long each kind of data is kept and what deletes it, countersigned by Alex, with Muteeb confirming the deleting mechanism exists for every row or a ticket opened where it does not.",
+   "layman_output": "A signed table, countersigned by Alex, stating how long each kind of data is kept — sign-in keys, raw Facebook data, predictions, assistant memory, backups, logs — and what mechanism deletes it when time is up. Muteeb will have confirmed a working deleter exists for every row, or opened a ticket where one does not. A teammate can read the table and check any row against reality."
   },
   {
    "id": "N4-FZ-04",
@@ -14398,7 +14810,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Draft the standard permission form pilots sign before we use their quotes and success stories in marketing, so Lewis can collect launch stories without any legal wrangling later.",
    "layman_analogy": "Like drafting the standard model-release form a photographer carries, so every subject signs the same clear terms before a picture is used.",
-   "layman_needed": "A short permission form in Lewis's hands covering what a pilot's story may quote, where it may appear and how they can withdraw it — with the first signed copy on file."
+   "layman_needed": "A short permission form in Lewis's hands covering what a pilot's story may quote, where it may appear and how they can withdraw it — with the first signed copy on file.",
+   "layman_output": "A short standard permission form in Lewis's hands covering exactly what a pilot's story may quote, where it may appear (site, Product Hunt, press, reviews), for how long, and how they can withdraw it — with the first signed copy already on file. Lewis can then collect launch stories from every pilot without a lawyer in the loop each time."
   },
   {
    "id": "N4-FZ-05",
@@ -14432,7 +14845,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Personally watch a full account deletion and confirm it also cuts off our access to the person's Facebook data everywhere, so when someone leaves, they are genuinely gone.",
    "layman_analogy": "Like standing beside the locksmith while a departing tenant's keys are cut off, checking every door in the building no longer opens for them.",
-   "layman_needed": "A dated witness record from a watched account deletion on staging, listing each storage place checked — keys, records, saved knowledge — the result at each, and a ticket for any gap found."
+   "layman_needed": "A dated witness record from a watched account deletion on staging, listing each storage place checked — keys, records, saved knowledge — the result at each, and a ticket for any gap found.",
+   "layman_output": "A dated witness record from a supervised account deletion on the staging site: Filza and Muteeb disconnect a page, then check each storage place in turn — sign-in keys, database records, saved assistant knowledge — and write down what they found at each. Any gap becomes a ticket. A teammate can read the record and see the disconnect-means-gone promise was watched happening, not assumed."
   },
   {
    "id": "N4-FZ-06",
@@ -14464,7 +14878,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Write the policy for what happens if we restore data from a backup that still contains someone who had asked to be deleted, so a technical recovery never quietly brings back data we promised to erase.",
    "layman_analogy": "Like a rule that when you restore an old address book from a drawer, you first cross out everyone who has since asked to be forgotten.",
-   "layman_needed": "A signed policy, in Muteeb's hands, stating that after any backup restore the list of deletions is replayed so erased people stay erased — and the plan for restore drill #2 including that replay step."
+   "layman_needed": "A signed policy, in Muteeb's hands, stating that after any backup restore the list of deletions is replayed so erased people stay erased — and the plan for restore drill #2 including that replay step.",
+   "layman_output": "A signed policy document, in Muteeb's hands, stating that after any restore from backup the list of past deletions is replayed so erased people stay erased, and how old a backup may be before it must be discarded. The plan for restore rehearsal #2 will include that replay step. A teammate can read the policy and the drill plan and confirm the rule will actually be tested."
   },
   {
    "id": "N4-FZ-07",
@@ -14499,7 +14914,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Run one real delete-my-data request from start to finish across every place we store things, and confirm it all actually disappears, so we know the process works before a real customer tests us.",
    "layman_analogy": "Like sending yourself a parcel before promising next-day delivery to customers — one real run, timed, to find where it gets stuck.",
-   "layman_needed": "One complete data export produced for a real pilot page — every storage place emptied into it, third parties blacked out — with timings per step against the one-month deadline and a ticket for every gap found."
+   "layman_needed": "One complete data export produced for a real pilot page — every storage place emptied into it, third parties blacked out — with timings per step against the one-month deadline and a ticket for every gap found.",
+   "layman_output": "One complete data export produced for a real pilot page, with their agreement: every storage place emptied into it, other people's comments blacked out, and a timing sheet showing how long each step took against the one-month legal deadline. Every gap found along the way becomes a ticket. The team will know the see-my-data process works because it has been run for real, once, end to end."
   },
   {
    "id": "N4-FZ-08",
@@ -14533,7 +14949,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Watch one person opt out of the partner-suggestions feature from start to finish and confirm they truly vanish from it everywhere, so the opt-out promise we make is one we can prove.",
    "layman_analogy": "Like watching someone cancel a club membership and checking the next day their name is off the noticeboard, the register and every member's address book.",
-   "layman_needed": "A dated witness record showing a test page that left partner suggestions vanished from matches, the spotlight and another customer's saved list within 24 hours, with the sign-up screen matching the approved wording."
+   "layman_needed": "A dated witness record showing a test page that left partner suggestions vanished from matches, the spotlight and another customer's saved list within 24 hours, with the sign-up screen matching the approved wording.",
+   "layman_output": "A dated witness record showing a test page that left the partner-suggestions feature genuinely vanished within 24 hours — from the match list, the spotlight and another customer's saved list — with the revocation logged and the sign-up screen matching the approved wording. A teammate can read the record and see the opt-out promise proven, not just written down."
   },
   {
    "id": "N4-FZ-09",
@@ -14567,7 +14984,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Do a second read-through of every page on the marketing website to catch any claim or wording we cannot back up or should not say publicly, so the site stays accurate and safe before launch.",
    "layman_analogy": "Like a second proofread of the shop window before opening day — checking every sign says only what the shop can actually deliver.",
-   "layman_needed": "A marked-up read-through of every public web page — landing, waitlist, listings — with edits handed to Asad and Alex and the corrections confirmed live, so no claim outruns what the product does."
+   "layman_needed": "A marked-up read-through of every public web page — landing, waitlist, listings — with edits handed to Asad and Alex and the corrections confirmed live, so no claim outruns what the product does.",
+   "layman_output": "A marked-up read-through of every public web page — landing page, waitlist, directory listings — with each risky or unsupportable claim flagged and the edits handed to Asad and Alex, then the corrections confirmed live on the site. A teammate can open any public page and check the wording now matches what the product genuinely does, with dates consistent with the 8 December launch."
   },
   {
    "id": "N5-AS-01",
@@ -14598,7 +15016,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A clean-up round before pilots start testing: the whole team hunts bugs together, we tidy anything that looks off, and lock the wording on every screen, so testers judge the product, not our typos.",
    "layman_analogy": "Like the deep clean and final menu print before food critics arrive — smudges wiped, wording fixed, kitchen doors to unfinished rooms locked.",
-   "layman_needed": "The bug-hunt list closed or ruled minor, one merged change locking every on-screen word, and staging checked so no half-built screen is reachable — all before the first pilot testing session."
+   "layman_needed": "The bug-hunt list closed or ruled minor, one merged change locking every on-screen word, and staging checked so no half-built screen is reachable — all before the first pilot testing session.",
+   "layman_output": "A visibly tidier staging app before pilot testing: the team bug-hunt list closed or ruled minor, one merged change locking the wording on every screen, and a check confirming no half-built screen is reachable. A teammate can click anywhere on staging and find no obvious rough edges — so pilot testers spend their time judging the product, not reporting typos and dead ends."
   },
   {
    "id": "N5-AS-02",
@@ -14635,7 +15054,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Make the app fail gracefully: polite messages when someone clicks too fast, a banner when data on screen is out of date, limits on automatic retries, and an early-warning check on Facebook sign-in, so hiccups never look like crashes.",
    "layman_analogy": "Like fitting a lift with a polite 'please wait' sign, an out-of-order notice and a rule against jabbing the button — so a fault never feels like a plunge.",
-   "layman_needed": "A working app where a too-many-requests error shows a friendly message and does not retry, out-of-date tables show a banner, each reduced-service mode shows its designed screen, and the sign-in watchdog has paged once in a test."
+   "layman_needed": "A working app where a too-many-requests error shows a friendly message and does not retry, out-of-date tables show a banner, each reduced-service mode shows its designed screen, and the sign-in watchdog has paged once in a test.",
+   "layman_output": "An app that fails politely: clicking too fast brings a friendly wait-a-moment message instead of a crash, out-of-date tables show a clear banner, each reduced-service mode shows its designed screen, and a watchdog on Facebook sign-in that has already paged the team once in a test. A teammate can force each failure on staging and see calm, designed screens rather than errors."
   },
   {
    "id": "N5-AS-03",
@@ -14667,7 +15087,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Fix whatever stopped the first three pilot testers in their tracks, have them retest, then invite testers four and five, so testing keeps moving instead of stalling on known problems.",
    "layman_analogy": "Like fixing whatever stalled the first test drivers before handing keys to the next two — no new drivers until the known faults are out.",
-   "layman_needed": "An empty list of showstopper faults from the first three pilot testers, each fix retested, and invitations sent to pilots four and five."
+   "layman_needed": "An empty list of showstopper faults from the first three pilot testers, each fix retested, and invitations sent to pilots four and five.",
+   "layman_output": "An empty showstopper list from the first three pilot testers: every fault they hit fixed on staging, retested by Saad, and invitations then sent to pilots four and five. A teammate can open the defect tracker and see wave-1 blockers at zero and the next two invitations out — testing rolling forward instead of stalling on known problems."
   },
   {
    "id": "N5-AS-04",
@@ -14698,7 +15119,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Fix the accessibility problems Saad's audit found, so people using screen readers, keyboard-only navigation or with low vision can use the app properly and we meet the recognised standard.",
    "layman_analogy": "Like fitting ramps, handrails and clear signage after the access survey — so the building works for everyone, not just the able-bodied.",
-   "layman_needed": "Saad's accessibility fix list fully closed and an automated check reporting zero standard violations on the five key pages — colours readable, keyboard navigation working, screen readers understanding the charts."
+   "layman_needed": "Saad's accessibility fix list fully closed and an automated check reporting zero standard violations on the five key pages — colours readable, keyboard navigation working, screen readers understanding the charts.",
+   "layman_output": "An app that works for everyone: readable colour contrast, a visible keyboard focus that moves in a sensible order, charts a screen reader can describe, and panels reachable without a mouse. Saad's audit list will be fully closed and an automated check will report zero standard violations on the five key pages — something a teammate can re-run themselves in a minute."
   },
   {
    "id": "N5-AS-05",
@@ -14726,7 +15148,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Make our five most important pages score at least 90 on Google's speed and quality check, and add an automatic tripwire that stops us shipping code that would make pages heavy and slow again.",
    "layman_analogy": "Like getting the car through its MOT at 90-plus and fitting a dashboard light that flashes if anyone loads it up again.",
-   "layman_needed": "Five filed speed-test reports scoring 90 or better on the key pages, and an automatic check in the build system that fails any change making the app noticeably heavier."
+   "layman_needed": "Five filed speed-test reports scoring 90 or better on the key pages, and an automatic check in the build system that fails any change making the app noticeably heavier.",
+   "layman_output": "Five filed speed-test reports, each scoring 90 or better on Google's Lighthouse check, for the landing page, Today, Drafts, Alerts and Analytics — plus an automatic tripwire in the build system that fails any code change making the app noticeably heavier. A teammate can re-run Lighthouse on any of the five pages and watch it score 90+, and see the tripwire green in the build history."
   },
   {
    "id": "N5-AS-06",
@@ -14755,7 +15178,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Set up automatic robot tests that click through all fourteen customer journeys every night, on different browsers and devices, so if something breaks we find out overnight rather than from a customer.",
    "layman_analogy": "Like a night watchman who walks all fourteen corridors of the building every night, on every kind of shoe, and rings if a single door sticks.",
-   "layman_needed": "An automatic overnight test clicking through all fourteen customer journeys on major browsers, phones and tablet, showing five straight green nights on the launch-room board, with the supported-browser list published in Saad's docs."
+   "layman_needed": "An automatic overnight test clicking through all fourteen customer journeys on major browsers, phones and tablet, showing five straight green nights on the launch-room board, with the supported-browser list published in Saad's docs.",
+   "layman_output": "An automatic robot that clicks through all fourteen customer journeys every night — on Chrome, Safari and Firefox, plus iPhone, Android and iPad — and pages the team when anything breaks. Its results appear on the launch-room board, with five straight green nights required, and the supported-browser list published in the docs. Breakages surface overnight instead of coming from a customer."
   },
   {
    "id": "N5-AS-07",
@@ -14787,7 +15211,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The moment Facebook approves our app, flip the hidden switch that lets real customers connect their pages with the approved sign-in, so we can go live the same day approval lands.",
    "layman_analogy": "Like keeping your hand on the grand-opening ribbon scissors: the moment the council permit arrives, you cut — or write down the plan B if it doesn't.",
-   "layman_needed": "Either Facebook sign-in verified live on production with a real non-tester account the day approval lands, or the fallback plan formally recorded in the 13 Nov review minutes."
+   "layman_needed": "Either Facebook sign-in verified live on production with a real non-tester account the day approval lands, or the fallback plan formally recorded in the 13 Nov review minutes.",
+   "layman_output": "The day Facebook approves the app, the hidden switch flips and real customers can connect their pages with the approved sign-in — verified on production with a genuine non-tester account, then Lewis walks each pilot through connecting that same week. If approval has not landed by 13 November, the fallback plan is formally recorded in the review minutes instead. Either way, the decision is on paper."
   },
   {
    "id": "N5-AS-08",
@@ -14817,7 +15242,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Make the app installable on a phone home screen like a proper app, with its own icon and quick loading, including the extra steps Apple requires on iPhones, so pilots can reach it in one tap.",
    "layman_analogy": "Like giving the shop its own front-door key on every customer's keyring — one tap from the home screen, and the sign updates itself after a refit.",
-   "layman_needed": "An app that installs to the home screen on both iPhone and Android with its own icon, and a test showing that after we ship an update users are offered the new version rather than served the old cached one."
+   "layman_needed": "An app that installs to the home screen on both iPhone and Android with its own icon, and a test showing that after we ship an update users are offered the new version rather than served the old cached one.",
+   "layman_output": "An app a pilot can install to their phone's home screen with its own icon, on both iPhone and Android, opening in one tap like a native app. A filed test will show that after the team ships an update, users are offered the new version rather than being served a stale cached copy. A teammate can install it on their own phone and verify both behaviours."
   },
   {
    "id": "N5-AS-09",
@@ -14849,7 +15275,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Publish a page on our site explaining how we protect customer data, plus a one-page version to hand to cautious buyers, so security questions have a ready answer instead of slowing down sales.",
    "layman_analogy": "Like framing the safety certificates in the shop window instead of keeping them in a drawer — cautious customers can read them before they walk in.",
-   "layman_needed": "A live /security page and a standard disclosure file on production, plus a downloadable one-page security summary built from real evidence — all up before the 24 Nov notice."
+   "layman_needed": "A live /security page and a standard disclosure file on production, plus a downloadable one-page security summary built from real evidence — all up before the 24 Nov notice.",
+   "layman_output": "A live /security page on the website explaining how customer data is protected, a downloadable one-page summary built from real evidence for cautious buyers, and a standard disclosure file telling security researchers how to report problems — all on production before the 24 November notice. A teammate can visit the page, download the PDF, and hand it to any prospect who asks."
   },
   {
    "id": "N5-AS-10",
@@ -14880,7 +15307,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Add a simple table listing every post a page has published, sortable by any column and downloadable as a spreadsheet, so customers can dig into their own numbers however they like.",
    "layman_analogy": "Like giving shopkeepers their full sales ledger to leaf through and photocopy — every entry, sortable any way they like.",
-   "layman_needed": "A working screen where a pilot sees every post their page has published, sorts it by any column, and downloads a spreadsheet containing only their own pages' numbers."
+   "layman_needed": "A working screen where a pilot sees every post their page has published, sorts it by any column, and downloads a spreadsheet containing only their own pages' numbers.",
+   "layman_output": "A new screen in the Analytics area where a pilot sees every post their page has published in one table — score, sentiment, reach, timing — sortable by any column, with a button that downloads it as a spreadsheet containing only their own pages' numbers. A teammate can log in as a test pilot, sort by any column, and open the downloaded file to check it holds nothing from anyone else."
   },
   {
    "id": "N5-AS-11",
@@ -14913,7 +15341,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Build a slimmed-down results screen: a simple band showing the value we have delivered, a scoreboard of how the Art-E assistant is doing, and a rating card. It is first in line to be dropped if time runs short.",
    "layman_analogy": "Like a slimmed-down end-of-term report — headline results, the tutor's hit rate, a feedback slip — printed only if the term went smoothly.",
-   "layman_needed": "A results screen where every figure — extra reach delivered, drafts improved, risks caught, Art-E's record — exactly matches the underlying ledger query for that customer; first to be dropped if time runs out."
+   "layman_needed": "A results screen where every figure — extra reach delivered, drafts improved, risks caught, Art-E's record — exactly matches the underlying ledger query for that customer; first to be dropped if time runs out.",
+   "layman_output": "A slimmed-down results screen inside the app showing each pilot what they have got for their money: a band of extra reach delivered, drafts improved and risks caught, a scoreboard of how the Art-E assistant is doing, and a card for rating its advice. Every figure will exactly match the underlying ledger query. It is first in line to be dropped if the sprint runs out of time."
   },
   {
    "id": "N5-AS-12",
@@ -14944,7 +15373,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "State plainly on the website and inside the app how quickly we answer support requests, so customers know what to expect and we are held to a promise we chose ourselves.",
    "layman_analogy": "Like putting the 'we answer within one working day' promise on both the shop door and the till receipt — the same words, everywhere the customer looks.",
-   "layman_needed": "The identical support promise — channel, hours, first-response time — visible on the marketing site and inside the app's settings, matching Saad's prepared answers word for word."
+   "layman_needed": "The identical support promise — channel, hours, first-response time — visible on the marketing site and inside the app's settings, matching Saad's prepared answers word for word.",
+   "layman_output": "The same plain support promise — which channel to use, what hours, and how fast the first reply comes — visible in two places: the marketing site's footer and the app's Settings help area, word-for-word matching Saad's prepared answers. A teammate can open both and read identical text, so customers know exactly what to expect and the team is held to a promise it chose."
   },
   {
    "id": "N5-AS-13",
@@ -14973,7 +15403,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Add a slide-in panel that shows one post's details when clicked in the posts table, kept deliberately simple; we only build it during the first testing wave if testers keep asking for it.",
    "layman_analogy": "Like a card index drawer that slides open when you tap an entry — one card, the key facts, no trip to another room.",
-   "layman_needed": "A working panel that slides in when a pilot clicks a row in the posts table, showing that post's score, drivers, sentiment and timing from data already loaded — no new server call; built only if wave-1 testers keep asking."
+   "layman_needed": "A working panel that slides in when a pilot clicks a row in the posts table, showing that post's score, drivers, sentiment and timing from data already loaded — no new server call; built only if wave-1 testers keep asking.",
+   "layman_output": "A panel that slides in when a pilot clicks any row in the posts table, showing that one post's score, its main drivers, sentiment and how its timing compared to the best window — all from data already on the screen, with no extra server call. It gets built only if the first wave of testers keeps asking for it; if built, a teammate can click a row and watch the panel appear instantly."
   },
   {
    "id": "N5-AS-14",
@@ -15008,7 +15439,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Before we lock the product for launch, walk through every live screen and check it matches what we promised to build, so nothing half-finished or off-spec sneaks into the version pilots and customers see.",
    "layman_analogy": "Like walking a finished house against the architect's drawings before handover — no unplanned rooms, no rooms on the plan left unbuilt.",
-   "layman_needed": "A route inventory showing every live screen and endpoint matches the spec — nothing undocumented, nothing unbuilt — with automated contract checks green and a written rule that nothing breaks without notice before launch."
+   "layman_needed": "A route inventory showing every live screen and endpoint matches the spec — nothing undocumented, nothing unbuilt — with automated contract checks green and a written rule that nothing breaks without notice before launch.",
+   "layman_output": "A route inventory document proving the running app matches its own spec: every live screen and endpoint documented, nothing undocumented and nothing promised but unbuilt, each route tagged with a version and owner, and automated contract checks green. A written rule will say nothing breaks without two weeks' notice before launch. The 13 November review can read it as proof the platform is finished."
   },
   {
    "id": "N5-AS-15",
@@ -15044,7 +15476,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Make pictures and design files load fast: right-sized images for each screen, sensible rules for what browsers keep locally, and lettering that appears instantly, so the app feels quick even on a weak connection.",
    "layman_analogy": "Like a picture framer cutting each print to fit its frame and couriering the common sizes ahead — nothing oversized, nothing arriving late and askew.",
-   "layman_needed": "Images served at the right size and modern format for each screen with sensible browser-caching rules, broken Facebook pictures replaced by a tidy placeholder, instant-appearing fonts, and bandwidth per session recorded for Saad's cost line."
+   "layman_needed": "Images served at the right size and modern format for each screen with sensible browser-caching rules, broken Facebook pictures replaced by a tidy placeholder, instant-appearing fonts, and bandwidth per session recorded for Saad's cost line.",
+   "layman_output": "An app whose pictures load fast: page avatars and thumbnails served at the right size and modern format for each screen, sensible browser-caching rules, a tidy placeholder where a Facebook image has expired instead of a broken box, and lettering that appears instantly. Bandwidth per session will be recorded for the cost line. A teammate on a weak connection can feel the difference."
   },
   {
    "id": "N5-AS-16",
@@ -15080,7 +15513,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Check every piece of borrowed software we build on for known security holes, and add an automatic gate that blocks new code if it brings in a serious one, so we do not inherit someone else's flaw.",
    "layman_analogy": "Like checking the provenance of every borrowed ladder and power tool on the building site, and turning away any new one without a safety tag.",
-   "layman_needed": "Both codebases with zero unresolved serious known flaws in borrowed software, a parts list produced per build, a signed-off inventory of every third party running in the browser, and a build gate that blocks any new serious flaw."
+   "layman_needed": "Both codebases with zero unresolved serious known flaws in borrowed software, a parts list produced per build, a signed-off inventory of every third party running in the browser, and a build gate that blocks any new serious flaw.",
+   "layman_output": "Both codebases audited for known security holes in borrowed software, with every serious flaw fixed or formally accepted in writing, a parts list produced with every build, a signed-off inventory of every third party running in the browser, and an automatic gate that blocks any code change bringing in a new serious flaw. A teammate can open the build history and see the gate green."
   },
   {
    "id": "N5-AS-17",
@@ -15115,7 +15549,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Turn on a browser safety rule in watch-only mode on our test site — it reports anything on a page loading from somewhere unexpected — and investigate every report, so we can switch it to blocking mode safely later.",
    "layman_analogy": "Like fitting a burglar alarm in listen-only mode for a week and investigating every beep before arming it for real.",
-   "layman_needed": "Watch-only browser security rules live on staging, a week of pilot-testing reports investigated down to zero from our own pages, and the final enforced rule text written ready to switch on in freeze week."
+   "layman_needed": "Watch-only browser security rules live on staging, a week of pilot-testing reports investigated down to zero from our own pages, and the final enforced rule text written ready to switch on in freeze week.",
+   "layman_output": "A browser safety rule running in watch-only mode on the staging site, reporting anything on a page that loads from an unexpected place, with a full week of pilot-testing reports investigated down to zero from the app's own pages. The final blocking version of the rule will be written and ready to switch on in freeze week — so turning it on cannot break charts or the cookie banner on launch day."
   },
   {
    "id": "N5-AS-18",
@@ -15151,7 +15586,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Scrub our technical logs so they never contain passwords, personal details, or the text of anyone's posts and comments, so even our own troubleshooting records cannot leak customer information.",
    "layman_analogy": "Like shredding names and card numbers out of the shop's CCTV notes — the record of what happened stays, who it happened to does not.",
-   "layman_needed": "An automatic check over a captured sample of the system's logs finding zero passwords, tokens, email addresses or customer text — in the application logs and in the error-reporting tool alike."
+   "layman_needed": "An automatic check over a captured sample of the system's logs finding zero passwords, tokens, email addresses or customer text — in the application logs and in the error-reporting tool alike.",
+   "layman_output": "Technical logs scrubbed clean: a written rule for what may be logged and what never may — no sign-in tokens, email addresses, names, draft posts, comments or Art-E conversations — enforced by redaction in the shared logging code and the error-reporting tool. An automatic check over a captured sample of real logs will find zero forbidden items, and a teammate can re-run that check any time."
   },
   {
    "id": "N5-FH-01",
@@ -15182,7 +15618,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "One final training round for our three prediction systems — post-flop warning, language understanding, and comment-storm detection — then a decision per system: keep the current version or promote the newer one, and freeze it for launch.",
    "layman_analogy": "Like a final taste test before printing the menu: for each of three dishes, keep the trusted recipe or promote the new one — then no more tinkering.",
-   "layman_needed": "Three recorded keep-or-promote decisions — one each for the flop warning, the language reader and the storm detector — made on fresh data, after which the chosen versions are locked for launch."
+   "layman_needed": "Three recorded keep-or-promote decisions — one each for the flop warning, the language reader and the storm detector — made on fresh data, after which the chosen versions are locked for launch.",
+   "layman_output": "Three recorded decisions, one per prediction system — the flop warning, the language reader and the comment-storm detector — each saying whether the current version or a freshly trained one goes to launch, made on fresh data. After this the chosen versions are locked. A teammate can read the three decision notes and see exactly which version of each system will be running on launch day."
   },
   {
    "id": "N5-FH-02",
@@ -15213,7 +15650,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Give every version of our prediction systems a proper name and a saved copy, so we always know exactly which version is running and can put an old one back instantly if a new one misbehaves.",
    "layman_analogy": "Like labelling and shelving every batch in the brewery so you know exactly which barrel is on tap and can swap back to last month's in seconds.",
-   "layman_needed": "A manifest naming a saved, rebuildable copy of every prediction system's exact version — settings, training data and all — handed to Muteeb, with a switch-back to an older version proven working on staging."
+   "layman_needed": "A manifest naming a saved, rebuildable copy of every prediction system's exact version — settings, training data and all — handed to Muteeb, with a switch-back to an older version proven working on staging.",
+   "layman_output": "A manifest handed to Muteeb naming a saved, rebuildable copy of every prediction system's exact version — its settings, training data and random seeds — so any version can be identified and an older one put back with a single switch. A staging test will have proven that switch-back works. If a new version ever misbehaves in front of customers, the fix takes minutes, not days."
   },
   {
    "id": "N5-FH-03",
@@ -15243,7 +15681,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Run our predictions quietly alongside real page activity for a week and record how often they were right, so we have written proof the systems work before we lock them for launch.",
    "layman_analogy": "Like trialling a new weather forecaster silently for a week against the actual weather before putting them on air.",
-   "layman_needed": "A filed seven-day report (6-12 Nov) comparing live predictions with what actually happened for the flop, storm and health systems, ready for the 13 Nov launch review."
+   "layman_needed": "A filed seven-day report (6-12 Nov) comparing live predictions with what actually happened for the flop, storm and health systems, ready for the 13 Nov launch review.",
+   "layman_output": "A filed seven-day report covering 6–12 November where the flop, storm and health prediction systems ran quietly alongside real page activity, comparing every prediction with what actually happened. It lands on the table at the 13 November launch review — so the go or no-go decision reads a measured week of evidence, not anyone's opinion of how well the systems work."
   },
   {
    "id": "N5-FH-04",
@@ -15273,7 +15712,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Run a second full rehearsal of the comment-storm alarm for the 12 Nov demo video, and measure how often it cried wolf over seven real days, so we can show the alert is fast and rarely wrong.",
    "layman_analogy": "Like a second full fire drill filmed for the brochure, alongside a week's honest count of how often the alarm rang for burnt toast.",
-   "layman_needed": "A receipt from storm-alarm rehearsal #2 with Lewis and Muteeb, plus the measured seven-day false-alarm rate, delivered to Saad and Alex before 12 Nov so the video claims only real numbers."
+   "layman_needed": "A receipt from storm-alarm rehearsal #2 with Lewis and Muteeb, plus the measured seven-day false-alarm rate, delivered to Saad and Alex before 12 Nov so the video claims only real numbers.",
+   "layman_output": "A receipt from the second full rehearsal of the comment-storm alarm, run with Lewis and Muteeb, plus a measured seven-day count of how often the alarm cried wolf on real pages — both delivered to Saad and Alex before 12 November. The demo video can then claim only speeds and accuracy figures that were genuinely measured, and a teammate can check every claim against the receipt."
   },
   {
    "id": "N5-FH-05",
@@ -15303,7 +15743,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Have the Art-E assistant pass our full question-and-answer test seven nights in a row with no slips, then get Saad's signature on the result, so we launch with proof it answers reliably, not a good day's luck.",
    "layman_analogy": "Like requiring a student to pass the full mock exam seven nights running before the examiner signs the certificate — one good night proves nothing.",
-   "layman_needed": "Seven consecutive green overnight runs of the 200-question Art-E test ending by 13 Nov, countersigned by Saad — or the agreed slimming-down plan triggered instead."
+   "layman_needed": "Seven consecutive green overnight runs of the 200-question Art-E test ending by 13 Nov, countersigned by Saad — or the agreed slimming-down plan triggered instead.",
+   "layman_output": "Seven consecutive green overnight runs of the full 200-question Art-E test, ending by 13 November, with Saad's countersignature on the streak — or, if any night slips, the pre-agreed slimming-down plan triggered instead. A teammate can open the nightly dashboard and count the seven green marks themselves: proof the assistant answers reliably, not proof of one good day."
   },
   {
    "id": "N5-FH-06",
@@ -15339,7 +15780,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Measure how long each prediction system takes to answer on a bad day and what a thousand predictions cost us, so we know the product stays snappy and the sums still work as customers grow.",
    "layman_analogy": "Like timing each till at closing rush and costing every thousand receipts — then speeding up the slow ones without changing a single price rung.",
-   "layman_needed": "A before-and-after table of response times on good and bad days and cost per thousand answers for each prediction system, with proof the speed-ups changed no scores, handed to Asad for the per-page cost sums."
+   "layman_needed": "A before-and-after table of response times on good and bad days and cost per thousand answers for each prediction system, with proof the speed-ups changed no scores, handed to Asad for the per-page cost sums.",
+   "layman_output": "A before-and-after table for every prediction system — flop scoring, sentiment, toxicity, storm detection, embeddings — showing how long each takes to answer on ordinary and bad days and what a thousand answers cost, with the slow ones tuned and proof the tuning changed no scores. The table goes to Asad for the per-page cost sums, so pricing rests on measured numbers."
   },
   {
    "id": "N5-FH-07",
@@ -15375,7 +15817,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Tune how our data warehouse organises its tables and fix the ten slowest, most expensive queries, so reports come back faster and our monthly data bill stays sensible.",
    "layman_analogy": "Like re-shelving the archive by the dates people actually ask for and fixing the ten slowest requests — so the clerk stops walking the whole basement.",
-   "layman_needed": "A before-and-after table for the ten most expensive warehouse queries showing faster runtimes and less data scanned after re-organising the tables with Muteeb, plus a live alarm if any new query starts reading too much."
+   "layman_needed": "A before-and-after table for the ten most expensive warehouse queries showing faster runtimes and less data scanned after re-organising the tables with Muteeb, plus a live alarm if any new query starts reading too much.",
+   "layman_output": "A before-and-after table for the ten slowest, most expensive data-warehouse queries, showing each now runs faster and reads less data after the tables were reorganised with Muteeb, plus a live alarm that fires if any new query starts reading too much. A teammate can compare the two columns and see reports coming back quicker — and the monthly data bill staying sensible as history grows."
   },
   {
    "id": "N5-MT-01",
@@ -15412,7 +15855,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Stress-test the system with ten times our pilot traffic, sudden spikes, and a realistic launch-day pattern, and write down exactly how the servers add capacity, so launch day cannot surprise us.",
    "layman_analogy": "Like a bridge engineer parking ten times the expected trucks on the new bridge, in rush-hour order, with the reinforcement plan named in the report.",
-   "layman_needed": "A written stress-test report showing the system held ten times pilot traffic and a realistic launch morning — 100 pages connecting in an hour — with queues inside their limits, the named auto-scaling policy applied and speed held."
+   "layman_needed": "A written stress-test report showing the system held ten times pilot traffic and a realistic launch morning — 100 pages connecting in an hour — with queues inside their limits, the named auto-scaling policy applied and speed held.",
+   "layman_output": "A written stress-test report proving the system held ten times pilot traffic, sudden bursts, and a realistic launch morning of 100 pages connecting within one hour — with queues inside their limits, the named auto-scaling policy doing the scaling, and response speeds held throughout. The 13 November review can read it and know launch-day traffic has already happened once, on purpose."
   },
   {
    "id": "N5-MT-02",
@@ -15444,7 +15888,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Practise recovering everything from backup a second time using realistic launch-sized data, including the assistant's stored knowledge, so if disaster strikes we already know the recovery works and how long it takes.",
    "layman_analogy": "Like a second full evacuation-and-rebuild drill of the warehouse at real stock levels, stopwatch running, with the demolished sections left demolished.",
-   "layman_needed": "A signed drill receipt showing everything restored from launch-sized backups in under 2 hours — including the assistant's stored knowledge — with previously deleted data correctly kept deleted, countersigned by Filza and Jill."
+   "layman_needed": "A signed drill receipt showing everything restored from launch-sized backups in under 2 hours — including the assistant's stored knowledge — with previously deleted data correctly kept deleted, countersigned by Filza and Jill.",
+   "layman_output": "A signed drill receipt from the second full recovery rehearsal: everything restored from launch-sized backups in under two hours, including the assistant's stored knowledge, with previously deleted customers correctly staying deleted afterwards. Countersigned by Filza and Jill — so the recovery promise in the contracts is a timed fact a teammate can read, not an assurance."
   },
   {
    "id": "N5-MT-03",
@@ -15476,7 +15921,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Capture timed, stamped evidence from the second comment-storm rehearsal showing how quickly an alert travels from Facebook to the customer's phone, so the 12 Nov video shows real speed, not a claim.",
    "layman_analogy": "Like the stamped stopwatch printout from a relay race — each baton hand-off timed — so the poster's speed claim is a record, not a boast.",
-   "layman_needed": "A stage-by-stage timing log from storm-drill #2 — Facebook to customer's inbox — plus the seven-day false-alarm figures, delivered to Saad and Alex before the 12 Nov video is approved."
+   "layman_needed": "A stage-by-stage timing log from storm-drill #2 — Facebook to customer's inbox — plus the seven-day false-alarm figures, delivered to Saad and Alex before the 12 Nov video is approved.",
+   "layman_output": "A stage-by-stage timing log from the second comment-storm rehearsal, stamping how long an alert took at each step from Facebook to the customer's inbox, plus the seven-day false-alarm figures — delivered to Saad and Alex before the 12 November video is approved. Anyone fact-checking the video can lay each on-screen claim against a line in the log."
   },
   {
    "id": "N5-MT-04",
@@ -15509,7 +15955,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Have outside security specialists attack our system on purpose and fix every serious weakness they find before 13 Nov, so we launch knowing a professional tried to break in and failed.",
    "layman_analogy": "Like hiring professional locksmiths to try every window and door of the new shop, then fixing each way in they found before opening day.",
-   "layman_needed": "An outside security firm's attack report filed in Jill's evidence folder, with every serious weakness they found fixed and evidenced before the 13 Nov review."
+   "layman_needed": "An outside security firm's attack report filed in Jill's evidence folder, with every serious weakness they found fixed and evidenced before the 13 Nov review.",
+   "layman_output": "An outside security firm's attack report filed in Jill's evidence folder: professionals tried on purpose to break into the sign-in, the Art-E assistant and the partner-suggestions feature, and every serious weakness they found is fixed with proof before the 13 November review. A teammate can open the folder, read the findings, and see each critical one marked closed with evidence."
   },
   {
    "id": "N5-MT-05",
@@ -15545,7 +15992,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Build one launch-day screen showing the health of everything at once, plus written step-by-step guides for the ten most likely problems and for routine admin, so whoever is on duty can act fast without guessing.",
    "layman_analogy": "Like an airport control tower with one wall of screens and a ring binder of the ten likeliest emergencies, each with its first move and who makes it.",
-   "layman_needed": "One launch-day screen showing system health end to end, plus a ranked ten-row table of likely failures — each with trigger, blast radius, first action and owner — linked to a written runbook, including a full site-outage row and routine admin steps."
+   "layman_needed": "One launch-day screen showing system health end to end, plus a ranked ten-row table of likely failures — each with trigger, blast radius, first action and owner — linked to a written runbook, including a full site-outage row and routine admin steps.",
+   "layman_output": "One launch-day screen showing the health of everything at once — uptime, errors, data freshness, Art-E cost, per-customer status — beside a ranked table of the ten most likely failures, each with its trigger, blast radius, first action and owner, linked to a step-by-step written guide, including one for the whole site going down. Whoever is on duty can act from it without guessing."
   },
   {
    "id": "N5-MT-06",
@@ -15577,7 +16025,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Add a panel to the launch-day screen showing where new sign-ups get stuck between joining and getting value, so we can spot and fix the exact step that loses people.",
    "layman_analogy": "Like counting shoppers at every stage from pavement to till — you learn exactly which doorway loses them.",
-   "layman_needed": "A panel on the launch-day board showing how many new users pass each step — signed up, connected, data loaded, first insight, first draft scored — and how long each takes, working with staging users."
+   "layman_needed": "A panel on the launch-day board showing how many new users pass each step — signed up, connected, data loaded, first insight, first draft scored — and how long each takes, working with staging users.",
+   "layman_output": "A new panel on the launch-day board showing where new sign-ups get stuck: how many people pass each step — signed up, page connected, data loaded, first insight seen, first draft scored — and how long each step takes, already working with staging users. On launch day the team can watch 100 strangers arrive and see the exact step losing people, then fix that step."
   },
   {
    "id": "N5-MT-07",
@@ -15611,7 +16060,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Set up a quick automatic daily check that asks each live prediction system a known question and confirms it answers sensibly, so a silently broken system is caught within hours, not weeks.",
    "layman_analogy": "Like ringing each department every morning with the same test question — a wrong answer tells you a line is down before a customer does.",
-   "layman_needed": "An automatic test that asks every live prediction system a known question nightly and on each deploy, checking the answer is well-formed and sensible, running green against production."
+   "layman_needed": "An automatic test that asks every live prediction system a known question nightly and on each deploy, checking the answer is well-formed and sensible, running green against production.",
+   "layman_output": "An automatic daily check that asks every live prediction system a known question — each night and after every code deployment — and confirms the answer comes back well-formed and within sensible bounds, running green against production. A silently broken prediction system gets caught within hours instead of weeks, and a teammate can open the test history and see the green runs."
   },
   {
    "id": "N5-MT-09",
@@ -15645,7 +16095,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Gather the proof for the first go/no-go launch review: rehearsals done, stress tests passed, security test clean, and no showstopper bugs open, so the launch decision rests on evidence rather than optimism.",
    "layman_analogy": "Like assembling the folder of certificates, drill records and inspection reports the board reads before approving the grand opening.",
-   "layman_needed": "An evidence pack presented at the 13 Nov review — recovery-drill receipts, stress-test write-up, security-test closure and a zero-showstopper bug list — with every amber item leaving with a named owner and date."
+   "layman_needed": "An evidence pack presented at the 13 Nov review — recovery-drill receipts, stress-test write-up, security-test closure and a zero-showstopper bug list — with every amber item leaving with a named owner and date.",
+   "layman_output": "A complete evidence pack presented at the 13 November review: recovery-drill receipts, the stress-test write-up, the security firm's closed report, and a showstopper bug list standing at zero. Every item not fully green leaves the meeting with a named owner and a date. The launch decision gets made by reading documents anyone in the room can pick up, not by trusting assurances."
   },
   {
    "id": "N5-MT-10",
@@ -15678,7 +16129,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Each week, compare the freshly recalculated partner-page suggestions with last week's and check the top five stay sensibly stable, so recommendations do not reshuffle randomly and confuse customers.",
    "layman_analogy": "Like comparing this week's league table with last week's — a little movement is life, the whole top five reshuffling means the scoring is broken.",
-   "layman_needed": "Two consecutive weekly comparison reports on the partner-suggestion refresh, saved each run, showing how much the rankings moved — with an automatic alert to Asad and Muteeb if the shuffle exceeds a set threshold."
+   "layman_needed": "Two consecutive weekly comparison reports on the partner-suggestion refresh, saved each run, showing how much the rankings moved — with an automatic alert to Asad and Muteeb if the shuffle exceeds a set threshold.",
+   "layman_output": "A saved comparison report produced after every weekly refresh of the partner-page suggestions, showing how much the rankings moved — pairings added and removed, how many pages changed their top match — with two consecutive weekly reports on file and an automatic alert to Asad and Muteeb if the shuffle exceeds the agreed threshold. Suggestions that reshuffle randomly get caught before customers see them."
   },
   {
    "id": "N5-MT-11",
@@ -15713,7 +16165,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Write down, for each part of the system, exactly when it adds more capacity under load and how much waiting work is allowed to pile up before we intervene, so scaling is a plan rather than a hope.",
    "layman_analogy": "Like writing the staffing rota rules for every counter — when to open another till, the most tills allowed, and how long a queue may grow before the manager is called.",
-   "layman_needed": "One table per service stating exactly when it adds capacity, its floor, ceiling and cost at maximum, plus a hard limit on every queue — proven by a synthetic burst on staging that scales one service by its named rule and stops at the ceiling."
+   "layman_needed": "One table per service stating exactly when it adds capacity, its floor, ceiling and cost at maximum, plus a hard limit on every queue — proven by a synthetic burst on staging that scales one service by its named rule and stops at the ceiling.",
+   "layman_output": "One written table per service stating exactly when it adds more capacity under load, its minimum, its ceiling and the cost when running flat out, plus a hard limit on how much waiting work each queue may hold — proven by a deliberate burst on staging that scaled one service by its named rule and stopped at its ceiling. Scaling becomes a plan a teammate can read, with a bill that cannot silently run away."
   },
   {
    "id": "N5-MT-12",
@@ -15748,7 +16201,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Prepare graceful fallback modes for when the system is overwhelmed — each level switches off the least important things first with a single switch — so under extreme pressure the core alerts keep working instead of everything failing.",
    "layman_analogy": "Like a hospital's escalation plan: in a surge, postpone check-ups first, then routine clinics — but the emergency department never, ever closes.",
-   "layman_needed": "Three overload levels each behind one switch, tripping automatically on named signals, where every switched-off feature shows a designed screen rather than an error — each level tested by force on staging with what users saw recorded."
+   "layman_needed": "Three overload levels each behind one switch, tripping automatically on named signals, where every switched-off feature shows a designed screen rather than an error — each level tested by force on staging with what users saw recorded.",
+   "layman_output": "Three prepared overload modes, each behind a single switch that trips automatically on named signals: level one never sheds sign-in or crisis alerts, level two serves cached figures with a banner, level three pauses background work first. Each level will have been forced on staging with a record of exactly what users saw — always a designed screen, never an error. Under extreme pressure, the right things fail first."
   },
   {
    "id": "N5-MT-13",
@@ -15783,7 +16237,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Set a strict time limit and retry allowance for every internal hand-off between parts of the system, so one slow component cannot silently jam everything behind it.",
    "layman_analogy": "Like giving every waiter a strict kitchen-wait limit and a two-asks rule — one slow chef can no longer freeze the whole dining room.",
-   "layman_needed": "One table of time limits and retry allowances for every internal hand-off, enforced in the shared connection code, with a test proving a deliberately slowed component fails fast instead of jamming everything behind it."
+   "layman_needed": "One table of time limits and retry allowances for every internal hand-off, enforced in the shared connection code, with a test proving a deliberately slowed component fails fast instead of jamming everything behind it.",
+   "layman_output": "One table giving every internal hand-off in the system — browser to server, server to models, to the warehouse, to Facebook, to email, to the language model — a strict time limit and a retry allowance, enforced in the shared connection code. A test will prove a deliberately slowed component fails fast instead of jamming everything behind it. One sluggish dependency can no longer freeze the whole app."
   },
   {
    "id": "N5-MT-14",
@@ -15819,7 +16274,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Make every action that saves or changes data safe to repeat: if a hiccup makes the same request arrive twice, it counts once, so retries never create duplicate alerts, records or charges.",
    "layman_analogy": "Like a wedding list that ignores a duplicate order — however many times the shop resends the form, the couple still gets one toaster.",
-   "layman_needed": "Every data-changing action stamped with a once-only key, proven by replaying a captured batch of alert and data-load messages twice and showing identical results with not one duplicate email sent."
+   "layman_needed": "Every data-changing action stamped with a once-only key, proven by replaying a captured batch of alert and data-load messages twice and showing identical results with not one duplicate email sent.",
+   "layman_output": "Every action that saves or changes data — connecting a page, sending an alert, an Art-E answer, joining or leaving partner suggestions — stamped with a once-only key so a repeated request counts once. The proof: a captured batch of alert and data-load messages replayed twice on staging with identical results and not one duplicate email sent. Retries and hiccups can never double-charge or double-alert a pilot."
   },
   {
    "id": "N5-MT-15",
@@ -15855,7 +16311,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Rehearse clearing our safety-net queue — the holding pen for messages that failed to process — including one deliberately broken message, so a bad message never jams the queue or gets lost for real.",
    "layman_analogy": "Like practising clearing the returns bin, including one deliberately jammed parcel — so the sorting office never seizes up on a real bad package.",
-   "layman_needed": "A rehearsed, filed procedure for emptying each failed-message holding queue, proven on staging by planting one broken alert and one broken data-load message, quarantining both and emptying the queues, with times recorded and alarms set."
+   "layman_needed": "A rehearsed, filed procedure for emptying each failed-message holding queue, proven on staging by planting one broken alert and one broken data-load message, quarantining both and emptying the queues, with times recorded and alarms set.",
+   "layman_output": "A rehearsed, filed procedure for emptying each failed-message holding queue: how to inspect it, tell a genuinely broken message from a passing glitch, refeed the rest at a safe pace, and quarantine the broken one. Proven on staging by planting one broken alert and one broken data-load message, clearing both queues, and recording the times — so the first real bad message is routine, not a launch-week emergency."
   },
   {
    "id": "N5-MT-16",
@@ -15892,7 +16349,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Decide, for every data-serving part of the app, what gets remembered temporarily, for how long, and when it must be refreshed, with a target for how often we serve from memory, so pages load fast without showing stale numbers.",
    "layman_analogy": "Like deciding what the barista keeps warm on the hotplate, for how long, and when to brew fresh — with a target for how often orders come straight off it.",
-   "layman_needed": "A written memory-and-refresh rule for every data-serving endpoint — what is remembered, for how long, what forces a refresh — with real hit rates measured against targets over a week and a live panel on the launch-day board."
+   "layman_needed": "A written memory-and-refresh rule for every data-serving endpoint — what is remembered, for how long, what forces a refresh — with real hit rates measured against targets over a week and a live panel on the launch-day board.",
+   "layman_output": "A written memory-and-refresh rule for every data-serving part of the app — what gets remembered temporarily, for how long, what forces a refresh, always scoped to one customer — with real hit rates measured over a week against a named target for each, shown on a live panel on the launch-day board. Pages load fast, numbers never go quietly stale, and a teammate can read the panel to check both."
   },
   {
    "id": "N5-MT-17",
@@ -15928,7 +16386,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Put speed limits and abuse protections on every door into our system from the internet, so a badly behaved script or an attacker cannot overload us or rack up our costs.",
    "layman_analogy": "Like fitting turnstiles and a doorman on every public entrance — regulars flow through, but nobody can flood the lobby or run up the bar tab.",
-   "layman_needed": "A documented speed limit on every public-facing endpoint — forms, sign-in, the ask-Art-E route, exports — where a forced breach returns a polite try-again-later response and every limit hit shows on the launch-day board."
+   "layman_needed": "A documented speed limit on every public-facing endpoint — forms, sign-in, the ask-Art-E route, exports — where a forced breach returns a polite try-again-later response and every limit hit shows on the launch-day board.",
+   "layman_output": "A documented speed limit on every door into the system from the open internet — the waitlist form, sign-in, the ask-Art-E route, spreadsheet export — where a deliberate breach in testing returned a polite try-again-later message, and every limit hit shows up on the launch-day board. A stranger's script can no longer flood the waitlist or quietly burn through the assistant's running costs."
   },
   {
    "id": "N5-SD-01",
@@ -15958,7 +16417,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Before pilot testing, we read every word the app shows users in one sitting and fix anything off-tone or inconsistent, so pilots judge the product, not six different writing styles.",
    "layman_analogy": "Like one editor reading the whole brochure aloud in a single sitting before printing — so it sounds like one shop, not six shop assistants.",
-   "layman_needed": "Every word the app shows users exported from staging, reviewed in one pass against the voice guide, and a list of wording fixes sized for Asad filed before the first pilot testing session."
+   "layman_needed": "Every word the app shows users exported from staging, reviewed in one pass against the voice guide, and a list of wording fixes sized for Asad filed before the first pilot testing session.",
+   "layman_output": "A complete export of every word the app shows users — empty screens, alerts, the gauge, settings — reviewed in one sitting against the voice guide, with a list of wording fixes sized for Asad and filed before the first pilot session. After the fixes land, a teammate can click through the app and hear one consistent voice, so pilots judge the product rather than six writing styles."
   },
   {
    "id": "N5-SD-02",
@@ -15989,7 +16449,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Saad clicks through every screen in every possible state, on desktop and mobile, and files anything missing or broken — so pilots find real product issues, not missing loading spinners.",
    "layman_analogy": "Like the house-proud final walkthrough before viewings — opening every cupboard, flicking every switch, on foot and from the street.",
-   "layman_needed": "A completed click-through of every screen in every state on staging, desktop and mobile, with tickets filed for every missing spinner, empty state or visual drift before pilots see it."
+   "layman_needed": "A completed click-through of every screen in every state on staging, desktop and mobile, with tickets filed for every missing spinner, empty state or visual drift before pilots see it.",
+   "layman_output": "A completed click-through by Saad of every screen in every possible state — loading, empty, error, full — on both desktop and mobile staging, with a ticket filed for every missing spinner, blank state or visual drift found. When pilots arrive they meet a finished-feeling product, and a teammate can open the ticket list to see exactly what the sweep caught and what has been fixed."
   },
   {
    "id": "N5-SD-03",
@@ -16025,7 +16486,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We sit the first three pilot customers down and watch them use the whole product without helping, logging everything that confuses or breaks — the first real evidence for the launch decision.",
    "layman_analogy": "Like a driving examiner in the passenger seat: hands off the wheel, notebook out, recording every wrong turn the learner makes unprompted.",
-   "layman_needed": "Three completed observation sessions where pilots 1-3 use the whole product unaided, producing defect logs graded against the blocker rules and notes on what confused them."
+   "layman_needed": "Three completed observation sessions where pilots 1-3 use the whole product unaided, producing defect logs graded against the blocker rules and notes on what confused them.",
+   "layman_output": "Three completed observation sessions where pilots one to three used the whole product unaided while Saad watched without helping and Lewis handled the pilot side. Each session produces a defect log graded against the blocker rules plus notes on what genuinely confused people. These logs become the first real evidence the launch decision will read — a teammate can open them and see what real users hit."
   },
   {
    "id": "N5-SD-04",
@@ -16058,7 +16520,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We publish the demo video showing the comment-storm alert catching a real seeded incident, fact-checked and legally cleared, on 12 Nov — a public asset where every claim matches something we actually measured.",
    "layman_analogy": "Like airing the rescue-team's training footage on the news — real drill, real stopwatch, every claim checked by the lawyers first.",
-   "layman_needed": "The comment-storm demo video, cut from real rehearsal footage with every claim matching measured numbers, approved by Alex, cleared by Filza, and published on 12 Nov."
+   "layman_needed": "The comment-storm demo video, cut from real rehearsal footage with every claim matching measured numbers, approved by Alex, cleared by Filza, and published on 12 Nov.",
+   "layman_output": "A public demo video, live from 12 November, showing the comment-storm alert catching a seeded incident — cut from real rehearsal footage, with every on-screen claim matching a measured number, approved by Alex and legally cleared by Filza. A teammate, or any prospect, can watch it online and see the alert working at its true speed; the approvals sit filed beside it."
   },
   {
    "id": "N5-SD-05",
@@ -16091,7 +16554,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "After the first pilot tests, we fix what broke, re-test each fix, invite pilots 4 and 5, and bring the full defect list to the 13 Nov readiness review — which needs zero serious bugs open.",
    "layman_analogy": "Like fixing the snag list from the first open-day, re-checking each repair, then booking the next viewings and bringing the file to the board.",
-   "layman_needed": "Logged retests of every wave-1 fix, invitations out to pilots 4 and 5 once showstoppers clear, and the full defect status presented at the 13 Nov readiness review."
+   "layman_needed": "Logged retests of every wave-1 fix, invitations out to pilots 4 and 5 once showstoppers clear, and the full defect status presented at the 13 Nov readiness review.",
+   "layman_output": "A logged retest of every fix from the first pilot-testing wave, invitations out to pilots four and five once the showstoppers cleared, and the full defect list — graded against the blocker rules — presented at the 13 November readiness review. A teammate can open the tracker and see each wave-1 fault marked fixed-and-retested, and the review minutes showing zero serious bugs open."
   },
   {
    "id": "N5-SD-06",
@@ -16126,7 +16590,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A written launch-day playbook: the go-live checklist, who does what in the war room, when we roll back, and what we do if Facebook approval has not landed — so launch morning runs on decisions made in advance.",
    "layman_analogy": "Like the wedding-day running order pinned to the vestry door — who stands where, when to start, and the rain plan decided the week before.",
-   "layman_needed": "A written launch-day playbook — go-live checklist, roll-back triggers, war-room roles, and the plan for Facebook approval landing or not — reviewed at the 13 Nov meeting."
+   "layman_needed": "A written launch-day playbook — go-live checklist, roll-back triggers, war-room roles, and the plan for Facebook approval landing or not — reviewed at the 13 Nov meeting.",
+   "layman_output": "A written launch-day playbook, version one, reviewed at the 13 November meeting: the go-live checklist, who plays which war-room role (the commander directs, never types), the exact conditions that trigger a roll-back, where the kill-switches live, and the plan for Facebook approval landing or not. Launch morning then runs on decisions made calmly in advance — and anyone can read them beforehand."
   },
   {
    "id": "N5-SD-07",
@@ -16157,7 +16622,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Saad checks the Art-E quality dashboard daily and only signs it off after seven straight nights of passing scores; if the streak fails, we trigger the pre-agreed plan to trim the feature rather than launch it wobbly.",
    "layman_analogy": "Like a food-safety inspector who only awards the certificate after seven consecutive clean spot-checks — one clean day earns nothing.",
-   "layman_needed": "Saad's countersignature filed after seven straight green nights on the Art-E test dashboard — or, if the streak fails by review time, the pre-agreed feature-trimming decision filed with Alex instead."
+   "layman_needed": "Saad's countersignature filed after seven straight green nights on the Art-E test dashboard — or, if the streak fails by review time, the pre-agreed feature-trimming decision filed with Alex instead.",
+   "layman_output": "Saad's countersignature filed against seven consecutive green nights on the Art-E quality dashboard — checked daily by him personally — or, if the streak fails by review time, the pre-agreed feature-trimming decision filed with Alex instead. Either way a dated document exists that a teammate can read to know exactly why Art-E launched at full strength or trimmed."
   },
   {
    "id": "N5-SD-08",
@@ -16188,7 +16654,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We watch a complete stranger try to sign up unaided, note where they get stuck (usually connecting Facebook), and add a 'stuck? book 10 minutes with us' button — so first customers never quietly give up.",
    "layman_analogy": "Like watching a stranger try your front door unaided, noting where they fumble, then fitting a doorbell marked 'stuck? ring for help'.",
-   "layman_needed": "Written notes from watching one genuine stranger sign up with no help, showing exactly where they stalled, plus a spec handed to Asad for a 'stuck? book 10 minutes' button."
+   "layman_needed": "Written notes from watching one genuine stranger sign up with no help, showing exactly where they stalled, plus a spec handed to Asad for a 'stuck? book 10 minutes' button.",
+   "layman_output": "Written notes from watching one genuine stranger try to sign up completely unaided, recording exactly where they stalled — especially at the Facebook-connect step — plus a spec handed to Asad for a 'stuck? book 10 minutes with us' button. The first hundred self-serve customers get a visible escape hatch instead of quietly giving up, and a teammate can read precisely where people stall."
   },
   {
    "id": "N5-SD-09",
@@ -16219,7 +16686,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We pre-write the answers to the 20 most likely customer questions, including plain explanations of why Art-E or the flop gauge said what it said, and hand them to Jill — support answers ready before support exists.",
    "layman_analogy": "Like stocking the pharmacy shelves before the doors open — the twenty most-asked-for remedies pre-packed and labelled in plain English.",
-   "layman_needed": "Twenty ready-written answers to the likeliest customer questions, plus plain-language explainers for why Art-E and the flop gauge said what they said, filed in the support folder for Jill."
+   "layman_needed": "Twenty ready-written answers to the likeliest customer questions, plus plain-language explainers for why Art-E and the flop gauge said what they said, filed in the support folder for Jill.",
+   "layman_output": "Twenty ready-written answers to the likeliest customer questions, plus plain-language explainers for 'why did Art-E say that' and 'why did the flop gauge say that', all filed in the support folder and handed to Jill. From day one, whoever answers a support message can paste a considered, accurate reply in seconds — and a teammate can open the folder and read all twenty."
   },
   {
    "id": "N5-SD-10",
@@ -16250,7 +16718,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We prepare the whole Product Hunt launch kit — images, tagline, founder comment — using our polished demo data (never real pilot data), so launch-day marketing is ready well before the code is locked down.",
    "layman_analogy": "Like preparing the entire market-stall display the night before — banners, samples and patter — using the show kitchen's dishes, never a customer's dinner.",
-   "layman_needed": "A drafted Product Hunt kit shared with Alex — hunter brief, gallery images from demo data only, tagline and founder comment — with pricing and dates consistent everywhere."
+   "layman_needed": "A drafted Product Hunt kit shared with Alex — hunter brief, gallery images from demo data only, tagline and founder comment — with pricing and dates consistent everywhere.",
+   "layman_output": "A drafted Product Hunt launch kit shared with Alex: the hunter brief, gallery images rendered only from the polished demo data (never a real pilot's page), the tagline and the founder's comment, with pricing and dates consistent everywhere. On launch day the marketing goes out by opening a finished folder — and a teammate can review every asset in it well before the code is locked."
   },
   {
    "id": "N5-SD-11",
@@ -16280,7 +16749,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "A one-hour organised bug hunt on the test site with four of us following scripts, ending with a ranked fix list handed to Asad the same day — so the worst bugs are gone before pilots start testing.",
    "layman_analogy": "Like four inspectors sweeping the theatre with torches for one timed hour before the preview audience, handing the stage manager a ranked snag list at the interval.",
-   "layman_needed": "A 60-minute scripted bug hunt run on staging with Lewis, Muteeb and Faheem, findings graded against the blocker rules, and the ranked fix list in Asad's hands the same day, before pilot testing starts 10 Nov."
+   "layman_needed": "A 60-minute scripted bug hunt run on staging with Lewis, Muteeb and Faheem, findings graded against the blocker rules, and the ranked fix list in Asad's hands the same day, before pilot testing starts 10 Nov.",
+   "layman_output": "A completed one-hour scripted bug hunt on staging with Saad, Lewis, Muteeb and Faheem each working through a script for one area, every finding graded against the blocker rules, and the ranked fix list in Asad's hands the same day — 6 November. The worst bugs get found and queued for fixing before the first pilot testing session on 10 November, and a teammate can read the ranked list."
   },
   {
    "id": "N5-SD-12",
@@ -16316,7 +16786,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Daily watch on Facebook's approval dashboard plus a weekly check that their reviewer can still log in and see real-looking data, right through to the final launch decision — so Meta's verdict never catches us off guard.",
    "layman_analogy": "Like checking the visa-office portal every morning and testing the inspector's gate pass weekly — so the verdict, whenever it lands, finds the door open.",
-   "layman_needed": "A dated log of daily checks on Facebook's approval dashboard and weekly proof the reviewer's login and populated test page still work, from 2 Nov through the 27 Nov decision, with the current status reported as a line in the 13 Nov review."
+   "layman_needed": "A dated log of daily checks on Facebook's approval dashboard and weekly proof the reviewer's login and populated test page still work, from 2 Nov through the 27 Nov decision, with the current status reported as a line in the 13 Nov review.",
+   "layman_output": "A dated log showing a daily check of Facebook's approval dashboard and a weekly proof that Facebook's reviewer can still log in and see a realistic, populated test page, running from 2 November right through the 27 November launch decision. The current Facebook status appears as a line in the 13 November review — so Meta's verdict, whenever it lands, catches nobody off guard."
   },
   {
    "id": "N5-AX-01",
@@ -16352,7 +16823,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex signs the company's side of all five pilot contracts and data-protection agreements, plus the final terms of service, before pilot testing starts — no testing or invoicing on unsigned paper.",
    "layman_analogy": "Like the landlord signing all five tenancy agreements before handing over any keys — nobody moves in on a handshake.",
-   "layman_needed": "Five pilot contracts and data-protection agreements countersigned by Alex, plus the signed final terms of service matching the pricing sheet, all filed — and Saad given the go-ahead for pilot testing wave 1."
+   "layman_needed": "Five pilot contracts and data-protection agreements countersigned by Alex, plus the signed final terms of service matching the pricing sheet, all filed — and Saad given the go-ahead for pilot testing wave 1.",
+   "layman_output": "Five pilot contracts and data-protection agreements countersigned by Alex on the company's side, plus the signed final terms of service checked against the pricing sheet, all filed before pilot testing begins — and Saad given the written go-ahead for wave 1. A teammate can open the contracts folder and see every signature in place, so no testing or invoicing ever happens on unsigned paper."
   },
   {
    "id": "N5-AX-02",
@@ -16387,7 +16859,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex personally reviews the demo video against the measured drill numbers and legal clearance before it goes public — a public claim the product cannot meet would cost more than a late video.",
    "layman_analogy": "Like the editor personally checking every claim in the advert against the lab results before it airs — a promise on telly is forever.",
-   "layman_needed": "A written approval, or a dated list of specific changes, sent from Alex to Saad by 11 Nov after checking the demo video against the drill numbers and legal clearance, so it publishes on 12 Nov."
+   "layman_needed": "A written approval, or a dated list of specific changes, sent from Alex to Saad by 11 Nov after checking the demo video against the drill numbers and legal clearance, so it publishes on 12 Nov.",
+   "layman_output": "A written approval — or a dated list of specific changes — sent from Alex to Saad by 11 November after personally checking the demo video against the measured drill numbers, the seven-day false-alarm rate and Filza's legal clearance. The video then publishes on 12 November knowing every public claim in it can be met, and a teammate can read Alex's note beside the drill receipts."
   },
   {
    "id": "N5-AX-03",
@@ -16421,7 +16894,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex writes the plan for a delayed launch: the fallback date, what we tell pilots and the waitlist, and what happens to the Product Hunt slot — so saying 'not yet' is a managed decision, not a scramble.",
    "layman_analogy": "Like a wedding planner writing the rain plan before the big day — the marquee booking, who phones the guests, and who makes the call to move indoors.",
-   "layman_needed": "A written playbook naming the fallback launch date, the exact messages for pilots and the waitlist, and what happens to the Product Hunt slot, filed alongside the go/no-go memo."
+   "layman_needed": "A written playbook naming the fallback launch date, the exact messages for pilots and the waitlist, and what happens to the Product Hunt slot, filed alongside the go/no-go memo.",
+   "layman_output": "A short written playbook, filed next to the launch-decision memo, that names the fallback launch date, the exact words Lewis sends to pilots, Filza's pre-written 'launch slips' note for the public and waitlist, and what happens to the Product Hunt slot. Anyone can open it and see who decides each step — so a delayed launch becomes reading a plan aloud, not improvising one."
   },
   {
    "id": "N5-AX-04",
@@ -16454,7 +16928,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex drafts the launch-decision document in advance with an empty evidence box per requirement, and rehearses it at the 13 Nov review — so on decision day we fill in facts rather than shape them to a wanted answer.",
    "layman_analogy": "Like printing an exam answer sheet with blank boxes before the exam — the questions are fixed in advance, so nobody rewrites them to suit the marks they got.",
-   "layman_needed": "A memo skeleton with one section per launch requirement — owner, pass mark and an empty evidence box — plus the Facebook-approval branch, used as the script at the 13 Nov review."
+   "layman_needed": "A memo skeleton with one section per launch requirement — owner, pass mark and an empty evidence box — plus the Facebook-approval branch, used as the script at the 13 Nov review.",
+   "layman_output": "A drafted launch-decision document with one section per launch requirement, each showing the owner, the pass mark and an empty evidence box waiting to be filled, plus a branch for whether Facebook approval has landed. It sits in the launch folder and is read aloud as the script at the 13 Nov review — so on 27 Nov the team fills boxes with facts rather than writing a story around a wanted answer."
   },
   {
    "id": "N5-AX-05",
@@ -16492,7 +16967,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex chairs the 13 Nov readiness review: bugs, drills, pilot results and the Facebook-approval question all get a red/amber/green, and every problem leaves the room with a named owner and a deadline.",
    "layman_analogy": "Like a head teacher's pre-inspection walkround — every classroom gets a red, amber or green, and every problem leaves with a name and a fix-by date on it.",
-   "layman_needed": "Minutes from the 13 Nov review recording a red/amber/green for every launch requirement, the decision on the Facebook-approval question, and a named owner and date for each amber or red."
+   "layman_needed": "Minutes from the 13 Nov review recording a red/amber/green for every launch requirement, the decision on the Facebook-approval question, and a named owner and date for each amber or red.",
+   "layman_output": "Filed minutes from the 13 Nov readiness review giving every launch requirement a red, amber or green, recording the decision on the Facebook-approval question, and listing a named owner and deadline for every amber or red. A teammate can open the minutes and see exactly what stands between the company and launch, and who is fixing each gap by when."
   },
   {
    "id": "N5-AX-06",
@@ -16530,7 +17006,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex drafts the founding-customer pricing announcement — the discounted price, how long it is locked, and the sign-up deadline — checked against our costs and every other place the price appears, so one price shows everywhere.",
    "layman_analogy": "Like drafting the closing-down-sale poster and checking it against the till, the window display and the receipts — one price, everywhere, before it goes in the window.",
-   "layman_needed": "A draft founding-price announcement with defined terms — price, lock period, sign-up deadline — that matches the pricing sheet, the website and the invoice template, sitting with Filza for her claims check."
+   "layman_needed": "A draft founding-price announcement with defined terms — price, lock period, sign-up deadline — that matches the pricing sheet, the website and the invoice template, sitting with Filza for her claims check.",
+   "layman_output": "A drafted founding-customer pricing announcement sitting with Filza for her claims check, stating the discounted price, how long it is locked, who qualifies and the sign-up deadline, plus what non-pilot early customers are offered. Every number in it has been checked against the signed pricing sheet, the website and the invoice template — so one price appears everywhere the customer looks."
   },
   {
    "id": "N5-JL-01",
@@ -16568,7 +17045,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Jill writes the out-of-hours duty schedule through launch: who is on call each day, who runs an incident (never the person typing fixes), and how each alarm reaches a phone — published into the launch playbook.",
    "layman_analogy": "Like a hospital ward rota where the consultant directing an emergency is never also the one holding the scalpel — someone must keep the overview while others work.",
-   "layman_needed": "A published duty rota from 16 Nov to 11 Dec naming a primary, a backup and an incident leader for every day, with rules for how serious alarms reach whose phone, filed in Saad's runbook."
+   "layman_needed": "A published duty rota from 16 Nov to 11 Dec naming a primary, a backup and an incident leader for every day, with rules for how serious alarms reach whose phone, filed in Saad's runbook.",
+   "layman_output": "A published duty schedule covering every day from 16 Nov through launch week, naming a first responder, a backup and an incident leader who is never the person typing fixes, plus rules for which alarms ring whose phone. It lives in Saad's runbook where anyone can look up tonight's names — so a 3am problem already has an owner before it happens."
   },
   {
    "id": "N5-JL-02",
@@ -16606,7 +17084,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Jill starts an organised evidence folder of every security proof we produce — drills, tests, certificates — so the public security page and future audits are built from filed receipts, not memory.",
    "layman_analogy": "Like keeping every MOT certificate, receipt and service stamp in one folder in the glovebox — so when a buyer asks for proof, you hand over a file, not a story.",
-   "layman_needed": "An indexed folder holding a dated copy of every security proof produced so far — drills, tests, certificates — already used by Asad, Muteeb and Filza to build the public security page."
+   "layman_needed": "An indexed folder holding a dated copy of every security proof produced so far — drills, tests, certificates — already used by Asad, Muteeb and Filza to build the public security page.",
+   "layman_output": "An organised evidence folder with a single index and one dated file per security proof — drills, tests, certificates, restore receipts — including everything produced so far, back-filed. It lives in the shared drive, and Asad, Muteeb and Filza can pull any receipt to build the public security page or answer an audit, instead of reconstructing proof from memory."
   },
   {
    "id": "N5-JL-03",
@@ -16640,7 +17119,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We fire a fake alarm at 2am on a real duty night to prove the on-call phone actually rings, someone answers in time, and the backup gets alerted if they don't — filed as a timestamped receipt.",
    "layman_analogy": "Like phoning the night porter at 2am to check he actually picks up — and letting one call ring out to prove the deputy's phone rings next.",
-   "layman_needed": "A timestamped record of a test alarm fired around 2am on a real duty night, answered within target, with the hand-off to the backup proven, filed in the evidence folder."
+   "layman_needed": "A timestamped record of a test alarm fired around 2am on a real duty night, answered within target, with the hand-off to the backup proven, filed in the evidence folder.",
+   "layman_output": "A timestamped receipt in the evidence folder showing a fake alarm fired at about 2am on a real duty night, the on-call phone ringing, the responder acknowledging within target, and the backup being paged when one alert was deliberately left to time out. Anyone can read the timeline and see the whole chain worked — proof the paging system rings real phones at the worst hour."
   },
   {
    "id": "N5-JL-04",
@@ -16675,7 +17155,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Jill costs the extra server capacity and traffic protection we need for launch-week crowds and gets the spend pre-approved by Alex — so nothing waits for a signature on launch morning.",
    "layman_analogy": "Like a café booking extra staff and a bouncer before a festival weekend — and getting the owner to approve the wage bill before the queue forms.",
-   "layman_needed": "A cost model with a launch-week extra-capacity line and a traffic-protection line, both derived from the heavy-traffic test results, with Alex's approval recorded."
+   "layman_needed": "A cost model with a launch-week extra-capacity line and a traffic-protection line, both derived from the heavy-traffic test results, with Alex's approval recorded.",
+   "layman_output": "A cost model in the finance sheet with two new lines derived from the heavy-traffic test: the extra server capacity needed for launch-week crowds and the traffic-protection layer in front of the app. Alex's approval is recorded against both — so on launch morning the spend is already authorised and nobody is chasing a signature while traffic climbs."
   },
   {
    "id": "N5-JL-05",
@@ -16712,7 +17193,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A practice run of billing: Jill drafts all five pilot invoices, has legal and Alex check them against the signed terms, and fixes the template now — so the first real invoices go out without an embarrassing error.",
    "layman_analogy": "Like addressing five envelopes and having two colleagues proofread them before any post the real cheque request — spelling mistakes cost nothing now, everything later.",
-   "layman_needed": "Five draft invoices, one per pilot, each checked by Filza against the signed terms and by Alex against the pricing plan, with the template corrected and a payment-tracking sheet ready."
+   "layman_needed": "Five draft invoices, one per pilot, each checked by Filza against the signed terms and by Alex against the pricing plan, with the template corrected and a payment-tracking sheet ready.",
+   "layman_output": "Five draft invoices, one per pilot, produced from the real template with the founding price, correct legal details and payment terms. Each has been checked by Filza against the signed terms and by Alex against the pricing plan, the template's errors fixed, and a payment-tracking sheet stands ready — so the first real invoices go out clean, not as a live experiment."
   },
   {
    "id": "N5-JL-06",
@@ -16747,7 +17229,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Jill buys the company's professional-liability and cyber insurance so cover is in force before the first customer money arrives — a must-have before anyone pays us.",
    "layman_analogy": "Like taking out home insurance the week before the tenants move in — cover must start before the first rent cheque, not after the first leak.",
-   "layman_needed": "Professional-liability and cyber insurance policies bound and paid, starting before the first invoice on 27 Nov, with certificates filed and the renewal date in the diary."
+   "layman_needed": "Professional-liability and cyber insurance policies bound and paid, starting before the first invoice on 27 Nov, with certificates filed and the renewal date in the diary.",
+   "layman_output": "Professional-liability and cyber insurance policies bound and paid, with cover starting before the first invoice goes out on 27 Nov. The certificates and policy schedules are filed in the company records and the renewal date is in the diary — so the moment customer money arrives, the company is insured, and anyone can open the folder and see the certificates."
   },
   {
    "id": "N5-LW-01",
@@ -16781,7 +17264,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis gets all five pilots to sign their agreements and data-protection paperwork before testing starts — a pilot without signed paper cannot join testing or be invoiced.",
    "layman_analogy": "Like collecting signed permission slips before the school trip — no signature, no seat on the coach, however keen the child.",
-   "layman_needed": "All five pilots' agreements and data-protection contracts signed on their side and passed to Filza, with Saad holding the cleared list before the first testing session, by 4 Nov."
+   "layman_needed": "All five pilots' agreements and data-protection contracts signed on their side and passed to Filza, with Saad holding the cleared list before the first testing session, by 4 Nov.",
+   "layman_output": "All five pilots' agreements and data-protection contracts signed on the pilot side by 4 Nov, passed to Filza for countersigning, and a cleared-pilots list in Saad's hands before the first testing session. Anyone scheduling a session can check the list and see who is legally allowed in — because a pilot without signed paper cannot test or be invoiced."
   },
   {
    "id": "N5-LW-02",
@@ -16815,7 +17299,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis sits with pilots 1-3 during their test sessions as their advocate, then re-runs each failed step with them after we fix it, and invites pilots 4-5 once the first wave is clean — so the bug list actually closes.",
    "layman_analogy": "Like a driving instructor sitting silently in the passenger seat, then re-driving each failed manoeuvre after the fix — and only booking the next learners once the first pass clean.",
-   "layman_needed": "Testing sessions completed with pilots 1-3, every reported problem re-tested with the pilot after fixing, and pilots 4-5 invited for the next wave by 13 Nov."
+   "layman_needed": "Testing sessions completed with pilots 1-3, every reported problem re-tested with the pilot after fixing, and pilots 4-5 invited for the next wave by 13 Nov.",
+   "layman_output": "Completed test sessions with pilots 1-3, where Lewis sat in as each pilot's advocate, plus a record showing every reported problem was re-run with the pilot after the fix rather than assumed closed. Pilots 4 and 5 hold invitations for the next wave by 13 Nov — so the bug list demonstrably shrinks to zero instead of quietly reopening."
   },
   {
    "id": "N5-LW-03",
@@ -16850,7 +17335,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis arranges the second live comment-storm rehearsal on a consenting pilot's real page, with times recorded stopwatch-style — the raw, witnessed footage the 12 Nov demo video is cut from.",
    "layman_analogy": "Like arranging a witnessed fire drill in a friend's shop, stopwatch running, with their signed OK to film it — real smoke, real clock, real permission.",
-   "layman_needed": "A record of the second live comment-storm rehearsal on a consenting pilot's page — timings from comment posted to email received — plus the pilot's filming permission, filed by 10 Nov."
+   "layman_needed": "A record of the second live comment-storm rehearsal on a consenting pilot's page — timings from comment posted to email received — plus the pilot's filming permission, filed by 10 Nov.",
+   "layman_output": "A filed record of the second live comment-storm rehearsal, run on a consenting pilot's real page inside a weekday hour: stopwatch timings from the moment a comment posted to the moment the warning email arrived, clean-up confirmed, and the pilot's signed filming permission attached. It is the raw, witnessed footage the 12 Nov demo video is cut from, filed by 10 Nov."
   },
   {
    "id": "N5-LW-04",
@@ -16884,7 +17370,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Once Facebook approves us for public use, Lewis screen-shares with each pilot to reconnect their page through the new public sign-in and confirms no data was lost — the moment the product becomes real for paying customers.",
    "layman_analogy": "Like walking each tenant through the new front-door lock after it's changed — hand on shoulder, key turned together, checking nothing in the flat went missing.",
-   "layman_needed": "All five pilots reconnected through the new public Facebook sign-in on a screen-share, with no data gaps or duplicates confirmed — or, if approval hasn't landed, the fallback state recorded by 13 Nov."
+   "layman_needed": "All five pilots reconnected through the new public Facebook sign-in on a screen-share, with no data gaps or duplicates confirmed — or, if approval hasn't landed, the fallback state recorded by 13 Nov.",
+   "layman_output": "All five pilots reconnected to their Facebook pages through the new public sign-in, each on a screen-share with Lewis, with confirmation that no data went missing and no pages duplicated, and any confusing moments logged for Saad. If Facebook approval has not landed by 13 Nov, a written note records the fallback state instead — either way the review knows exactly where pilots stand."
   },
   {
    "id": "N5-LW-05",
@@ -16918,7 +17405,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis holds the money conversation with each pilot using the agreed founding price and terms, aiming for five paying customers signed before launch.",
    "layman_analogy": "Like a market trader asking regulars straight out what they'd pay before setting the stall's first real prices — awkward question, priceless answer.",
-   "layman_needed": "A written record per pilot of what they would pay, their objections and their reaction to the founding price, with the count of pilots warm to paying reported at the 13 Nov review."
+   "layman_needed": "A written record per pilot of what they would pay, their objections and their reaction to the founding price, with the count of pilots warm to paying reported at the 13 Nov review.",
+   "layman_output": "A written record per pilot of the money conversation: what they say they would pay, what would stop them, and how they reacted to the founding price. The records sit in the pilot folder and the count of pilots warm to paying is reported at the 13 Nov review — so the launch decision rests on real answers from real customers, not hope."
   },
   {
    "id": "N5-LW-06",
@@ -16950,7 +17438,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Turn the pilot stories into final approved quotes matched to signed permissions, ready for the launch announcement, so nothing published misquotes a customer.",
    "layman_analogy": "Like getting each guest to approve their exact quote before it goes on the restaurant's wall — in their words, with their signature next to it.",
-   "layman_needed": "Final approved quote text for each consenting pilot, matched to its signed permission, in the marketing folder by 13 Nov — with any quote overclaiming the product flagged."
+   "layman_needed": "Final approved quote text for each consenting pilot, matched to its signed permission, in the marketing folder by 13 Nov — with any quote overclaiming the product flagged.",
+   "layman_output": "Final approved quote text for every consenting pilot, in the pilot's own signed-off wording and matched to its filed permission, sitting in the marketing folder by 13 Nov. Saad can drop them into the Product Hunt package and Asad into the website knowing each quote is cleared, and any quote claiming something the product cannot yet do is flagged rather than published."
   },
   {
    "id": "N5-LW-07",
@@ -16981,7 +17470,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis keeps reviewing real conversations with the assistant weekly and sends the last new test questions before the models are locked for launch.",
    "layman_analogy": "Like a teacher marking a stack of homework each week and posting the last tricky questions to the exam board before the paper is locked for printing.",
-   "layman_needed": "Two weekly assistant-conversation reviews logged (6 and 13 Nov) and the final new test questions sent to Faheem by 13 Nov, before the 20 Nov model lock."
+   "layman_needed": "Two weekly assistant-conversation reviews logged (6 and 13 Nov) and the final new test questions sent to Faheem by 13 Nov, before the 20 Nov model lock.",
+   "layman_output": "Two logged weekly reviews of real pilot conversations with the assistant (6 and 13 Nov), and the final batch of new test questions sent to Faheem by 13 Nov, before the 20 Nov model lock. Anyone can open the review log and see what real users asked and how the assistant coped — and the locked test set now includes the awkward questions real usage surfaced."
   },
   {
    "id": "N5-LW-08",
@@ -17013,7 +17503,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Find one genuinely fresh outsider who runs a Facebook page to try signing up unaided, so we see where a stranger gets stuck before real strangers arrive.",
    "layman_analogy": "Like asking a friend who's never seen your shop to walk in off the street and find the till — while you watch from the corner and bite your tongue.",
-   "layman_needed": "A named genuine outsider who runs a Facebook page has tried signing up unaided with Saad by 11 Nov, Lewis's notes are in Saad's log, and it's agreed who answers the stuck-user help button."
+   "layman_needed": "A named genuine outsider who runs a Facebook page has tried signing up unaided with Saad by 11 Nov, Lewis's notes are in Saad's log, and it's agreed who answers the stuck-user help button.",
+   "layman_output": "A named genuine outsider — someone who runs a Facebook page but has never seen the product — has attempted the sign-up unaided while Saad ran the test and Lewis watched silently. Lewis's notes on where they got stuck, especially at the Facebook-connect step, are in Saad's log, and it is agreed who answers the help button when a stuck stranger presses it after launch."
   },
   {
    "id": "N5-FZ-01",
@@ -17048,7 +17539,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza chases until all five pilots' agreements and data-protection contracts are signed by both sides and filed before testing starts — an unsigned pilot does not enter testing.",
    "layman_analogy": "Like the registrar refusing to start the ceremony until both copies of the licence are signed — no paperwork, no wedding, no exceptions.",
-   "layman_needed": "Five complete agreement-plus-data-protection sets, signed by each pilot and countersigned by Alex, filed with dates before the first pilot testing session begins."
+   "layman_needed": "Five complete agreement-plus-data-protection sets, signed by each pilot and countersigned by Alex, filed with dates before the first pilot testing session begins.",
+   "layman_output": "Five complete signed sets — pilot agreement plus data-protection contract — each signed by the pilot and countersigned by Alex, filed with dates before the first testing session. Anyone can open the folder and confirm all five are in place, and the rule holds: an unsigned pilot simply does not enter testing."
   },
   {
    "id": "N5-FZ-02",
@@ -17082,7 +17574,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza tests the cookie banner properly: declining really must block every non-essential tracker, and the sign-up marketing tick-box must start unticked and be recorded — so pilots and security testers see us doing privacy right.",
    "layman_analogy": "Like checking that the 'do not disturb' sign on a hotel door actually stops the knocking — pressing decline and watching the corridor to be sure.",
-   "layman_needed": "A dated pass note with network-log evidence showing decline blocks every non-essential tracker and accept behaves properly, plus one recorded sign-up consent with timestamp — any failure ticketed."
+   "layman_needed": "A dated pass note with network-log evidence showing decline blocks every non-essential tracker and accept behaves properly, plus one recorded sign-up consent with timestamp — any failure ticketed.",
+   "layman_output": "A dated pass note in the evidence folder, with network-log screenshots, proving that declining the cookie banner really blocks every non-essential tracker, that the choice sticks and can be changed later, and that the sign-up marketing tick-box starts unticked with one consent recorded and timestamped. Any failure found has its own ticket — so our privacy behaviour is proven, not assumed."
   },
   {
    "id": "N5-FZ-03",
@@ -17115,7 +17608,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza legally clears the demo video before it ships: every claim matches measured numbers, no one else's page or comments appear without permission, and AI-generated bits are labelled — because it is public forever.",
    "layman_analogy": "Like a solicitor vetting the advert before it airs — every claim checked against the receipts, no strangers' faces in shot, and the reconstructions clearly labelled.",
-   "layman_needed": "A written legal clearance from Filza, on file, for the exact cut of the demo video that Alex approves — claims matched to measured numbers, no unpermitted third parties, AI content labelled."
+   "layman_needed": "A written legal clearance from Filza, on file, for the exact cut of the demo video that Alex approves — claims matched to measured numbers, no unpermitted third parties, AI content labelled.",
+   "layman_output": "A written legal clearance from Filza, on file, for the exact cut of the demo video Alex approves before it ships on 12 Nov. It confirms every claim matches a measured number from the drills, no one else's page or comments appear without permission, and AI-generated content is labelled — so a video that lives publicly forever cannot come back to bite us."
   },
   {
    "id": "N5-FZ-04",
@@ -17148,7 +17642,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza writes the proven recovery promises (back up and running within 2 hours, losing at most a day of data) into the contracts and security page — promising customers exactly what the drill proved, no more.",
    "layman_analogy": "Like writing a boiler warranty from the engineer's actual test results — promising exactly the repair time proven on the bench, and not an hour more.",
-   "layman_needed": "The proven recovery figures (running again within 2 hours, at most a day of data lost) written identically into the data-protection annex, the terms of service and the public security page."
+   "layman_needed": "The proven recovery figures (running again within 2 hours, at most a day of data lost) written identically into the data-protection annex, the terms of service and the public security page.",
+   "layman_output": "The proven recovery promises — back up and running within 2 hours, at most a day of data lost — written in identical wording into the data-protection annex, the terms of service and the public security page, with the deletion-on-restore policy referenced. A customer reading any of the three sees the same numbers, and none promises more than the restore drill actually proved."
   },
   {
    "id": "N5-FZ-05",
@@ -17181,7 +17676,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza pre-writes three emergency scripts: the customer notice if something goes wrong, the 72-hour regulator-notification decision guide, and a press holding line — so in a crisis the words already exist.",
    "layman_analogy": "Like keeping three sealed letters in the safe — one to customers, one to the regulator, one to the press — written calmly now so nobody drafts them mid-fire.",
-   "layman_needed": "Three fill-in-the-blanks templates — customer incident notice, the 72-hour regulator decision guide, and a press holding line — filed, linked from the contact tree and named in the fire-drill plan."
+   "layman_needed": "Three fill-in-the-blanks templates — customer incident notice, the 72-hour regulator decision guide, and a press holding line — filed, linked from the contact tree and named in the fire-drill plan.",
+   "layman_output": "Three fill-in-the-blanks emergency templates filed and ready: the customer notice for when something goes wrong, the 72-hour regulator-notification decision guide naming who decides and owns the clock, and a press holding line. They are linked from Jill's contact tree and named in the fire-drill plan — so in a real crisis the words already exist and only the facts get filled in."
   },
   {
    "id": "N5-FZ-06",
@@ -17215,7 +17711,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza finalises the terms of service — AI disclaimers, age limit, uptime promises, founding-price wording — and Alex signs it, so every pilot and launch customer signs the same locked version.",
    "layman_analogy": "Like the landlord finalising the tenancy agreement and signing it before any keys are cut — one locked version every tenant signs, word for word the same.",
-   "layman_needed": "A final terms-of-service document signed by Alex, published at a stable web address with a version date, matching the founding-price wording and covering online sign-ups without extra paperwork."
+   "layman_needed": "A final terms-of-service document signed by Alex, published at a stable web address with a version date, matching the founding-price wording and covering online sign-ups without extra paperwork.",
+   "layman_output": "A final terms-of-service document signed by Alex and published at a stable web address with a version date, covering the AI disclaimers, the 18+ rule, the uptime promises and the founding-price wording. Online sign-ups accept it without extra paperwork because the data-protection terms are built in — so every pilot and launch customer signs the same locked version."
   },
   {
    "id": "N5-FZ-07",
@@ -17249,7 +17746,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza checks the legally required company details (name, number, VAT) appear on the website, every outgoing email and all five draft invoices, and that each invoice matches its signed terms — cheap to fix now, embarrassing later.",
    "layman_analogy": "Like checking the shop's registered name and VAT number appear on the sign, the receipts and the letterhead — dull, legally required, mortifying to get wrong.",
-   "layman_needed": "The company's legal particulars confirmed on the website footer, every outgoing email template and all five draft invoices, with each invoice checked against its pilot's signed terms."
+   "layman_needed": "The company's legal particulars confirmed on the website footer, every outgoing email template and all five draft invoices, with each invoice checked against its pilot's signed terms.",
+   "layman_output": "A completed check confirming the company's legally required details — registered name, company number, office address, VAT number — appear on the website footer, every outgoing email template and all five draft invoices, with each invoice verified against its pilot's signed terms. Anyone can spot-check any surface and find the particulars present and consistent."
   },
   {
    "id": "N5-FZ-08",
@@ -17284,7 +17782,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza and Muteeb turn our security proofs into a plain-English public security page and a one-pager Lewis can hand pilots — because 'connect your Facebook page to a stranger' is our first big ask and the proof should be visible.",
    "layman_analogy": "Like turning a restaurant's hygiene inspection file into the certificate in the window and a card for the maître d' to hand nervous diners.",
-   "layman_needed": "Plain-English copy for the public security page and a one-page handout for pilots, every claim traceable to a filed proof, delivered to Asad having passed the claims check."
+   "layman_needed": "Plain-English copy for the public security page and a one-page handout for pilots, every claim traceable to a filed proof, delivered to Asad having passed the claims check.",
+   "layman_output": "Plain-English copy for the public security page and a one-page handout Lewis can physically give a pilot, both written with Muteeb and delivered to Asad having passed the claims check. Every sentence traces to a filed proof in Jill's evidence folder — so when we ask a stranger to connect their Facebook page, the evidence for trusting us is visible, not implied."
   },
   {
    "id": "N5-FZ-09",
@@ -17323,7 +17822,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza assembles one binder answering every data-protection question Facebook might ask, with proof attached, and puts the annual check-up dates in the diary — so a Meta questionnaire never becomes a scramble on their deadline.",
    "layman_analogy": "Like keeping a ring-binder ready for the tax inspector — every question they could ask already answered, with the receipt stapled behind it.",
-   "layman_needed": "One indexed binder answering every question in Facebook's data-protection assessment with a linked proof document, and the annual check-up dates in the diary with Saad watching them."
+   "layman_needed": "One indexed binder answering every question in Facebook's data-protection assessment with a linked proof document, and the annual check-up dates in the diary with Saad watching them.",
+   "layman_output": "One indexed binder answering every question in Facebook's data-protection assessment, each answer linked to a filed proof document — deletion routes, sub-processors, security summaries and the rest. It sits in the compliance folder with the annual check-up dates in the diary and Saad watching them — so a Meta questionnaire becomes copying from the binder, not a deadline scramble."
   },
   {
    "id": "N6-AS-01",
@@ -17355,7 +17855,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "From Fri 20 Nov, no new features: Asad publishes the list of what is locked on or off and sets the code repository to reject anything that is not a critical bug fix — so the launch build stops moving a week before it must be final.",
    "layman_analogy": "Like locking the kitchen pass a week before the food critic visits — the menu is fixed, and only a burnt dish gets remade, nothing new gets invented.",
-   "layman_needed": "A published list of every feature switch and its locked state, plus a code-repository rule that rejects anything after 20 Nov that isn't a tagged critical bug fix."
+   "layman_needed": "A published list of every feature switch and its locked state, plus a code-repository rule that rejects anything after 20 Nov that isn't a tagged critical bug fix.",
+   "layman_output": "A published list showing every feature switch and the state it is locked in from Fri 20 Nov, plus a code-repository rule that automatically rejects any change that is not a tagged critical bug fix. Both are announced in the tracker, so anyone can check what is frozen and see the repository itself enforcing the freeze — the launch build stops moving a week before it must be final."
   },
   {
    "id": "N6-AS-02",
@@ -17388,7 +17889,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "On 24 Nov the website's pricing section is updated to match the founding-price announcement and the invoices word for word — one price everywhere, live the day the notice goes out.",
    "layman_analogy": "Like changing the menu board the same morning the new prices are announced — so the till, the flyer and the board never disagree in front of a customer.",
-   "layman_needed": "The website's pricing section and FAQ updated to match the 24 Nov founding-price announcement and the invoices word for word, live the same day the notice goes out."
+   "layman_needed": "The website's pricing section and FAQ updated to match the 24 Nov founding-price announcement and the invoices word for word, live the same day the notice goes out.",
+   "layman_output": "The website's pricing section and FAQ updated to state the founding terms — price, lock duration, eligibility deadline — word for word as the 24 Nov announcement and the invoices, live the same day the email goes out. A teammate can open the site, the email and an invoice side by side and see one identical price everywhere a customer might look."
   },
   {
    "id": "N6-AS-03",
@@ -17423,7 +17925,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad tests the four emergency off-buttons (Art-E, crisis emails, partner suggestions, daily briefing) by flipping each off and on with screenshots — so one misbehaving feature on launch day can be stopped in seconds, not rolled back.",
    "layman_analogy": "Like testing each isolation valve under the sink — off, check the tap stops, back on — so one leaky appliance never means shutting off the whole house.",
-   "layman_needed": "Screenshot receipts of each of the four emergency off-switches flipped off and back on in the test environment, with each switch's location and authorised flipper written in the war-room runbook."
+   "layman_needed": "Screenshot receipts of each of the four emergency off-switches flipped off and back on in the test environment, with each switch's location and authorised flipper written in the war-room runbook.",
+   "layman_output": "Screenshot receipts proving each of the four emergency off-switches — Art-E, crisis emails, partner suggestions, the daily briefing — was flipped off and back on in the test environment and behaved. The war-room runbook lists where each switch lives and who may flip it — so a misbehaving feature on launch day can be stopped in seconds by the named person, without undoing the release."
   },
   {
    "id": "N6-AS-04",
@@ -17457,7 +17960,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad switches on the strictest browser security rules for the final build, walks every screen to confirm nothing broke, re-checks our software ingredients for new flaws, and files a top-grade security scan as evidence.",
    "layman_analogy": "Like double-locking every door of the finished house and then walking each room to check no window jammed shut in the process.",
-   "layman_needed": "The strictest browser security rules enforced on the final build with every screen verified working, a one-line undo documented, a re-run ingredients check showing no new critical flaws, and a top-grade scan receipt."
+   "layman_needed": "The strictest browser security rules enforced on the final build with every screen verified working, a one-line undo documented, a re-run ingredients check showing no new critical flaws, and a top-grade scan receipt.",
+   "layman_output": "The strictest browser security rules switched fully on for the final build, with every screen — charts, error reporting, the cookie banner, link previews — walked and confirmed working, and a one-line undo written down. A re-run check of our software ingredients shows no new critical flaws, and a top-grade scan receipt is filed as evidence for the launch decision."
   },
   {
    "id": "N6-AS-05",
@@ -17491,7 +17995,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We rehearse launch itself: going live is just flipping one switch, and the practised deploy-and-undo path is re-timed after the freeze; Asad plays the developer role in the full dress rehearsal on 26 Nov.",
    "layman_analogy": "Like rehearsing the curtain-raise itself — one lever lifts it, and the stagehands re-time the lower-and-raise after the set is finally bolted down.",
-   "layman_needed": "Minutes from the 26 Nov dress rehearsal recording a successful one-switch go-live, a trial deployment and a timed undo, with Asad in the developer seat throughout."
+   "layman_needed": "Minutes from the 26 Nov dress rehearsal recording a successful one-switch go-live, a trial deployment and a timed undo, with Asad in the developer seat throughout.",
+   "layman_output": "Filed minutes from the 26 Nov dress rehearsal showing that going live is literally one switch: the launch flag flipped on the test system end to end, a trial deployment run, and the undo path re-timed after the freeze, with Asad in the developer seat throughout. Anyone can read the timings and see the launch morning routine has already been performed successfully once."
   },
   {
    "id": "N6-AS-06",
@@ -17526,7 +18031,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad refreshes the marketing site for launch: screenshots from the final build, all legal pages linked, correct company details, and the search-engine and link-preview basics — so the public front door is accurate on Product Hunt day.",
    "layman_analogy": "Like dressing the shop window with photos of the actual stock the night before opening — no old display cards, and the opening-hours sign finally correct.",
-   "layman_needed": "A marketing site showing screenshots from the final build only, legal pages linked from footer and Settings, correct company details, link-preview images and search-engine basics on every public page, and the help guides published."
+   "layman_needed": "A marketing site showing screenshots from the final build only, legal pages linked from footer and Settings, correct company details, link-preview images and search-engine basics on every public page, and the help guides published.",
+   "layman_output": "A refreshed public marketing site where every screenshot comes from the final build, the legal pages are versioned and linked from both the footer and Settings, the company's legal details sit in the footer, and every public page has a link-preview image and appears in the site map, with the help guides published. A visitor from Product Hunt sees a front door that matches the real product exactly."
   },
   {
    "id": "N6-AS-07",
@@ -17557,7 +18063,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "One last walk through every screen's empty, loading and error views on desktop and mobile, fixing only true blockers — the small moments that decide whether the product feels finished.",
    "layman_analogy": "Like a hotelier's final corridor walk before opening — checking the rooms nobody planned to show: the empty wardrobe, the flickering bulb, the sign for a broken lift.",
-   "layman_needed": "A completed checklist per screen covering empty, loading and error views on desktop and mobile, with no unfixed deviations serious enough to block launch."
+   "layman_needed": "A completed checklist per screen covering empty, loading and error views on desktop and mobile, with no unfixed deviations serious enough to block launch.",
+   "layman_output": "A completed checklist, one per screen, confirming the empty, loading, error and thin-history views were walked on both desktop and mobile against Saad's specifications, with any true blocker fixed and nothing serious left open. Anyone can pick a screen from the checklist, break it deliberately, and see it fail gracefully — the small moments that make the product feel finished."
   },
   {
    "id": "N6-AS-08",
@@ -17589,7 +18096,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Asad fixes only launch-blocking bugs from pilot testing and the 23 Nov bug hunt, each fix re-tested, until the log shows zero serious bugs on 27 Nov — the bar the launch decision requires.",
    "layman_analogy": "Like a mechanic in race week fixing only faults that would stop the car — every repair track-tested, and the fault sheet reading clear by scrutineering day.",
-   "layman_needed": "Every launch-blocking bug from pilot testing and the 23 Nov bug hunt fixed and re-tested, so the public triage log shows zero serious open bugs on 27 Nov."
+   "layman_needed": "Every launch-blocking bug from pilot testing and the 23 Nov bug hunt fixed and re-tested, so the public triage log shows zero serious open bugs on 27 Nov.",
+   "layman_output": "A public bug log showing every launch-blocking problem from pilot testing and the 23 Nov bug hunt fixed under the freeze rules and re-tested — by Saad, with Lewis re-running pilot-reported ones — until it reads zero serious open bugs on 27 Nov. That zero is the bar the launch decision requires, and anyone can open the log and verify it themselves."
   },
   {
    "id": "N6-AS-09",
@@ -17620,7 +18128,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We delete all demo and test data from the live system, keeping only real pilot data — test data in production is both a privacy risk and would muddy our first real usage numbers.",
    "layman_analogy": "Like clearing the showroom of display dummies and sample stock before real customers' orders arrive — so the stocktake counts only what's genuinely theirs.",
-   "layman_needed": "All demo and test data removed from the live system across every data store, real pilot data untouched, verified by look-up queries showing only genuine pilot accounts remain."
+   "layman_needed": "All demo and test data removed from the live system across every data store, real pilot data untouched, verified by look-up queries showing only genuine pilot accounts remain.",
+   "layman_output": "A live system containing only genuine pilot data: the demo account, reviewer test pages and all synthetic records deleted from every data store, verified by look-up queries whose results are filed showing only real pilot accounts remain. Real pilots are untouched — so day-one usage numbers reflect real customers and no test data lingers as a privacy risk."
   },
   {
    "id": "N6-AS-10",
@@ -17654,7 +18163,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "On Fri 27 Nov the code is locked: Asad tags the final build and assembles a folder of proof — passing tests, security checks, off-button receipts — for the launch decision, which accepts evidence, not assurances.",
    "layman_analogy": "Like sealing the exam paper in its envelope and clipping the marking evidence to the front — nothing changes now, and every claim has its proof attached.",
-   "layman_needed": "A tagged final build with the code locked, and an evidence folder — passing tests, security checks, off-switch receipts, undo timings — linked item by item to the launch-decision memo."
+   "layman_needed": "A tagged final build with the code locked, and an evidence folder — passing tests, security checks, off-switch receipts, undo timings — linked item by item to the launch-decision memo.",
+   "layman_output": "A tagged, locked final build in the code repository — only emergency fixes under Muteeb's protocol can touch it — plus Asad's evidence folder for the launch decision: passing test runs, security checks, off-switch receipts, undo timings and deletion proofs, each linked to its line in the memo. At the 27 Nov meeting every app claim can be clicked through to its receipt."
   },
   {
    "id": "N6-AS-11",
@@ -17690,7 +18200,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "Asad builds the backup launch path: if Facebook approval has not landed, public visitors see a tidy join-the-waitlist flow instead of a broken Facebook connection — so we can still launch gracefully in front of Product Hunt.",
    "layman_analogy": "Like building a polite 'join the guest list' desk at the door in case the licence hasn't arrived — nobody walks into a locked room and rattles the handle.",
-   "layman_needed": "A working fallback where, with Facebook approval off, public visitors see a tidy waitlist sign-up end to end and never hit a broken Facebook connection, pilots keep full access, and both routes are in the runbook."
+   "layman_needed": "A working fallback where, with Facebook approval off, public visitors see a tidy waitlist sign-up end to end and never hit a broken Facebook connection, pilots keep full access, and both routes are in the runbook.",
+   "layman_output": "A working fallback route built into the product before code freeze: with Facebook approval switched off, a public visitor sees a tidy join-the-waitlist flow end to end and never reaches a Facebook connection that would fail, while pilots keep full access. Both routes are written into the runbook — so the company can launch gracefully in front of Product Hunt either way."
   },
   {
    "id": "N6-AS-12",
@@ -17724,7 +18235,8 @@ window.LAUNCH_DATA = {
    "source": "reconciler",
    "layman": "After the freeze, the rules for how screens and data talk to each other are locked: any change needs a named approver, and we publish proof the live system matches the frozen blueprint exactly — so nothing quietly shifts in launch week.",
    "layman_analogy": "Like laminating the building's wiring diagram and requiring a signed permit for any change — then checking the walls actually match the drawing before handover.",
-   "layman_needed": "An automatic check that blocks any unapproved change to the system's agreed connection rules, plus published proof that the live system matches the frozen blueprint exactly, included in the go/no-go pack."
+   "layman_needed": "An automatic check that blocks any unapproved change to the system's agreed connection rules, plus published proof that the live system matches the frozen blueprint exactly, included in the go/no-go pack.",
+   "layman_output": "An automatic check in the code pipeline that blocks any change to the system's agreed connection rules unless it carries an exception label and a named approver, plus published proof that the live system matches the frozen blueprint route for route, with every route owned, versioned and rate-limited. The proof bundle sits in the go/no-go pack — nothing can quietly shift in launch week."
   },
   {
    "id": "N6-FH-01",
@@ -17754,7 +18266,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "On Fri 20 Nov every prediction model is frozen at its exact tested version and all automatic retraining is switched off — from here, stability is the feature.",
    "layman_analogy": "Like a baker locking the recipe book the week before the competition — no tweaking the sourdough, and the note on the door says who may open it and why.",
-   "layman_needed": "A freeze notice listing the exact locked version of every prediction model, all automatic retraining switched off, and a written rule for the only ways an exception can happen."
+   "layman_needed": "A freeze notice listing the exact locked version of every prediction model, all automatic retraining switched off, and a written rule for the only ways an exception can happen.",
+   "layman_output": "A published freeze notice listing the exact locked version of every prediction model as of Fri 20 Nov, with all automatic retraining jobs switched off and a written rule for the only ways an exception can be granted. Anyone can compare what is running against the notice and see it matches — from here to launch, stability itself is the feature."
   },
   {
    "id": "N6-FH-02",
@@ -17785,7 +18298,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem and Muteeb rehearse swapping a model back to its previous version and forward again, with a filed receipt — a freeze without a proven undo is just theatre.",
    "layman_analogy": "Like practising putting the spare wheel on in the driveway — a spare you've never fitted is just a heavy ornament in the boot.",
-   "layman_needed": "A filed receipt showing one model swapped back to its previous version on the test system, verified working, and swapped forward again, rehearsed with Muteeb."
+   "layman_needed": "A filed receipt showing one model swapped back to its previous version on the test system, verified working, and swapped forward again, rehearsed with Muteeb.",
+   "layman_output": "A filed receipt showing one prediction model swapped back to its previous version on the test system with Muteeb, verified still serving correct answers, then swapped forward again. It proves the freeze has a working undo — if a frozen model misbehaves in launch week, the team has already rehearsed putting the old one back in minutes."
   },
   {
    "id": "N6-FH-03",
@@ -17815,7 +18329,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem audits every prediction — flop warnings, storm alerts, best times, health, Art-E — against its agreed accuracy bar and either signs a statement or names the blocker for the launch decision.",
    "layman_analogy": "Like an MOT tester running the finished car past every legal limit and either stamping the certificate or writing the exact fault on the sheet.",
-   "layman_needed": "A signed statement in the launch memo that every prediction — flop warnings, storm alerts, best times, health, Art-E — meets its agreed accuracy bar, or a named blocker where one doesn't."
+   "layman_needed": "A signed statement in the launch memo that every prediction — flop warnings, storm alerts, best times, health, Art-E — meets its agreed accuracy bar, or a named blocker where one doesn't.",
+   "layman_output": "A signed statement in the launch-decision memo confirming every prediction — flop warnings, storm alerts, best posting times, page health, the Art-E assistant — meets its agreed accuracy bar, with the evidence attached, or a named blocker where one falls short. The 27 Nov meeting reads either a signature or a specific problem with an owner — never a shrug."
   },
   {
    "id": "N6-FH-04",
@@ -17844,7 +18359,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem sets sensible launch-week alarm levels and deletes the alerts nobody ever acted on — so when something beeps on day one, it means something.",
    "layman_analogy": "Like recalibrating the smoke alarms before a house party and unscrewing the one that shrieks at toast — a beep must mean something on the night.",
-   "layman_needed": "A published list of launch-week alarm levels for every model, with alerts nobody ever acted on deleted from the system."
+   "layman_needed": "A published list of launch-week alarm levels for every model, with alerts nobody ever acted on deleted from the system.",
+   "layman_output": "A published list of the launch-week alarm level for every model and the storm detector, tuned for launch traffic, with every alert nobody ever acted on deleted from the system. When something beeps on day one, the person on call knows it means something — because the noise that trains people to ignore alarms has been purged in advance."
   },
   {
    "id": "N6-FH-05",
@@ -17875,7 +18391,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem cross-checks the results our Wins screen claims against what pilot customers actually experienced — the screen makes promises, and testing is where we verify them.",
    "layman_analogy": "Like checking the trophy cabinet against the match reports — does every result on display match what actually happened on the pitch?",
-   "layman_needed": "A filed cross-check confirming the results claimed on the customers' Wins screen match what pilot testers actually experienced, done with Saad."
+   "layman_needed": "A filed cross-check confirming the results claimed on the customers' Wins screen match what pilot testers actually experienced, done with Saad.",
+   "layman_output": "A filed cross-check, done with Saad, comparing the results claimed on the customers' Wins screen against what pilot testers actually experienced during testing, with any mismatch corrected or ticketed. Anyone can open the check and see the screen's promises verified line by line — so the product's scoreboard tells customers the truth from day one."
   },
   {
    "id": "N6-FH-06",
@@ -17907,7 +18424,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Faheem writes down when and why we would retrain models after launch and the quarterly improvement plan, handing it to Saad before he sets the December priorities — paperwork only, no model changes after the freeze.",
    "layman_analogy": "Like leaving the gardener written instructions for when to prune and what to plant each season — advice on paper, no digging before the open day.",
-   "layman_needed": "A published document of the after-launch retraining triggers and the quarterly model improvement plan, acknowledged by Saad before he sets December priorities on 27 Nov."
+   "layman_needed": "A published document of the after-launch retraining triggers and the quarterly model improvement plan, acknowledged by Saad before he sets December priorities on 27 Nov.",
+   "layman_output": "A published document stating exactly when and why models would be retrained after launch — the drift and false-alarm trip-wires already defined — plus the quarterly model improvement plan, handed to and acknowledged by Saad before he sets December priorities on 27 Nov. It is paperwork only, changing nothing before launch, but it means post-launch model decisions follow written rules."
   },
   {
    "id": "N6-MT-01",
@@ -17940,7 +18458,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A fire drill: we deliberately break part of the data pipeline on the test system, page the on-call person for real, run the pre-written crisis messages end to end, and write up what to improve — before launch week does it for us.",
    "layman_analogy": "Like an airline crash simulation — cut an engine in the simulator, page the duty crew for real, read the emergency script aloud, and debrief what fumbled.",
-   "layman_needed": "A written debrief from a full staged-incident drill — pipeline stage deliberately broken, on-call paged, crisis messages run end to end — recording detection, declaration and recovery times, with fixes ticketed."
+   "layman_needed": "A written debrief from a full staged-incident drill — pipeline stage deliberately broken, on-call paged, crisis messages run end to end — recording detection, declaration and recovery times, with fixes ticketed.",
+   "layman_output": "A written debrief from a full fire drill on the test system: a pipeline stage deliberately broken, the incident declared, the on-call person genuinely paged through Jill's rota, and Filza's crisis messages run end to end with a leader who never touched a keyboard. The debrief records detection, declaration and recovery times, with every improvement ticketed — before launch week runs the drill for real."
   },
   {
    "id": "N6-MT-02",
@@ -17971,7 +18490,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Once the models are frozen, Muteeb points every live service at those exact frozen versions and turns off anything that could auto-update them — a frozen model served from an unfrozen path is not frozen.",
    "layman_analogy": "Like locking the pantry after the recipes are fixed — every chef now cooks from those exact jars, and the self-restocking cupboard is switched off.",
-   "layman_needed": "Every live service pointed at the exact frozen model versions with auto-updates disabled, and the version fingerprints recorded in the runbook."
+   "layman_needed": "Every live service pointed at the exact frozen model versions with auto-updates disabled, and the version fingerprints recorded in the runbook.",
+   "layman_output": "Every live prediction service pointed at the exact frozen model versions Faheem pinned on 20 Nov, with anything that could auto-update them disabled, and the version fingerprints recorded in the runbook. Anyone can compare what production is serving against the runbook list and confirm they match — because a frozen model served from an unfrozen path is not frozen."
   },
   {
    "id": "N6-MT-03",
@@ -18004,7 +18524,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Muteeb re-runs the heavy-traffic test on the final locked build and times a practice model swap-back — proving the exact thing we launch can take the crowd and be reverted.",
    "layman_analogy": "Like load-testing the finished bridge with the actual convoy weight, then timing how fast the diversion signs go up if it groans.",
-   "layman_needed": "Heavy-traffic test results for the final locked build at launch-crowd levels, plus a timed rehearsal of swapping a model back to its previous version and forward again, both filed."
+   "layman_needed": "Heavy-traffic test results for the final locked build at launch-crowd levels, plus a timed rehearsal of swapping a model back to its previous version and forward again, both filed.",
+   "layman_output": "Filed results from re-running the heavy-traffic test against the final locked build at launch-crowd levels plus a surge, alongside a timed receipt of a rehearsed model swap-back and swap-forward. Together they prove the exact thing being launched can take the crowd and be reverted quickly — evidence anyone can read rather than an engineer's assurance."
   },
   {
    "id": "N6-MT-04",
@@ -18038,7 +18559,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Muteeb builds the server side of the four emergency off-buttons (Art-E, crisis emails, partner suggestions, daily briefing) and documents where each lives — so a bad hour of outgoing email can be stopped without undoing the whole release.",
    "layman_analogy": "Like wiring the fuse box behind the four big red buttons — each labelled, each proven to actually cut the power, each location marked on the cellar wall.",
-   "layman_needed": "Server-side off-switches built for all four features, each proven to flip off and on in the test environment with the effect visible, and each location documented in the war-room runbook."
+   "layman_needed": "Server-side off-switches built for all four features, each proven to flip off and on in the test environment with the effect visible, and each location documented in the war-room runbook.",
+   "layman_output": "Four server-side emergency off-switches built and proven — for the Art-E assistant, crisis emails, partner suggestions and the daily briefing — each flipped off and on in the test environment with the effect visibly confirmed, and each switch's location documented in the war-room runbook. A bad hour of outgoing email can now be stopped at the source without rolling back the whole release."
   },
   {
    "id": "N6-MT-05",
@@ -18071,7 +18593,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Muteeb runs the quick health checks against the frozen models on the live system and publishes the emergency-fix rules: who approves, what proof is needed, and how to ship and undo a critical fix during the freeze.",
    "layman_analogy": "Like the matron's morning ward round plus the rulebook pinned by the door — who may prescribe in an emergency, what notes they must leave, how it's reversed.",
-   "layman_needed": "A green quick-health-check run against the frozen models on the live system, plus a published emergency-fix protocol: who approves, what proof, and how a critical fix ships and is undone."
+   "layman_needed": "A green quick-health-check run against the frozen models on the live system, plus a published emergency-fix protocol: who approves, what proof, and how a critical fix ships and is undone.",
+   "layman_output": "A green quick-health-check run against the frozen models on the live system, filed, plus a published emergency-fix protocol in the runbook stating who approves a critical fix during the freeze, what proof is required, and exactly how it ships and is undone. Anyone facing a launch-week emergency can follow the written steps instead of inventing a process under pressure."
   },
   {
    "id": "N6-MT-06",
@@ -18104,7 +18627,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Muteeb finishes launch monitoring: alarm levels set, a robot tries the Facebook sign-in every 15 minutes to catch breakage early, paging verified with Jill, and support for the 26 Nov dress rehearsal.",
    "layman_analogy": "Like a night watchman who also rattles the front door every 15 minutes on his rounds — not waiting for a customer to find it locked.",
-   "layman_needed": "Final launch monitoring: alarm levels set, an automatic check that tries the Facebook sign-in every 15 minutes feeding the board, paging to on-call verified with Jill, and the 26 Nov rehearsal supported."
+   "layman_needed": "Final launch monitoring: alarm levels set, an automatic check that tries the Facebook sign-in every 15 minutes feeding the board, paging to on-call verified with Jill, and the 26 Nov rehearsal supported.",
+   "layman_output": "Launch monitoring in its final form: alarm levels set for launch week, an automatic robot attempting the Facebook sign-in every 15 minutes with its result on the war-room board, and a test page confirmed to reach the on-call phone via Jill's rota. It was exercised in the 26 Nov rehearsal — so if the front door breaks on launch day, the board shows it within a quarter of an hour."
   },
   {
    "id": "N6-MT-07",
@@ -18135,7 +18659,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Muteeb helps Filza re-prove on the final live build that customers can get a copy of their data and have it deleted, and hands over automatic test proof that no customer can ever see another's data — evidence for legal's launch sign-off.",
    "layman_analogy": "Like helping the surveyor re-test the finished building — the fire exits open, the master keys fit only their own doors — and handing over the inspection printout.",
-   "layman_needed": "Filza's re-test of data copies and deletion passed on the final live build with Muteeb's support, and the automatic proof that no customer can see another's data handed over and signed off."
+   "layman_needed": "Filza's re-test of data copies and deletion passed on the final live build with Muteeb's support, and the automatic proof that no customer can see another's data handed over and signed off.",
+   "layman_output": "A passed re-test on the final live build, supported by Muteeb, proving a customer can request a copy of their data and have it deleted, plus the automatic test output proving no customer can ever see another customer's data, handed to Filza and signed off. Both receipts feed legal's launch sign-off — the privacy promises are demonstrated on the exact build being launched."
   },
   {
    "id": "N6-MT-08",
@@ -18168,7 +18693,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "From Fri 27 Nov we stop changing the product (emergency fixes only) and file proof that monitoring, backups, on-call and the undo plan all work, so the go/no-go meeting decides on evidence, not promises.",
    "layman_analogy": "Like sealing the ship's engine room before the maiden voyage and stacking the inspection certificates on the captain's desk — repairs only, papers ready.",
-   "layman_needed": "Code freeze enforced from 27 Nov with emergency fixes only, and every platform slot in the launch-decision memo filled with evidence: monitoring, backups, on-call, undo plan and traffic tests."
+   "layman_needed": "Code freeze enforced from 27 Nov with emergency fixes only, and every platform slot in the launch-decision memo filled with evidence: monitoring, backups, on-call, undo plan and traffic tests.",
+   "layman_output": "Code freeze in force from Fri 27 Nov — only emergency fixes under the published protocol — and every platform slot in the launch-decision memo filled with a real receipt: monitoring live, backups proven, on-call tested, the undo plan timed, the traffic tests passed. The go/no-go meeting reads evidence in each box, not promises."
   },
   {
    "id": "N6-MT-09",
@@ -18205,7 +18731,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "One list of every password and access key we hold: who has it, what it can touch, when it gets changed. Anything too powerful or shared gets trimmed or replaced, so a leaked key can never sink the launch.",
    "layman_analogy": "Like a hotel auditing every master key — who holds it, which doors it opens, when the locks were last changed — and recutting any key an ex-porter once had.",
-   "layman_needed": "One register listing every password and access key with holder, storage, scope and next change date, with anything over-powerful, shared, or pre-dating a leaver's exit already replaced."
+   "layman_needed": "One register listing every password and access key with holder, storage, scope and next change date, with anything over-powerful, shared, or pre-dating a leaver's exit already replaced.",
+   "layman_output": "A single register listing every password and access key the company holds — Facebook, cloud, database, email and vendor keys — with its holder, where it is stored, what it can touch and its next change date. Anything over-powerful, shared between people, or pre-dating a leaver's exit has already been replaced — so one leaked key can no longer sink the launch."
   },
   {
    "id": "N6-MT-10",
@@ -18242,7 +18769,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "When 100 pages join on day one, we let them in gradually and load their history slowly in the background, so new users see something useful in minutes instead of everyone waiting in one giant queue.",
    "layman_analogy": "Like a restaurant seating a coach party a few tables at a time and starting everyone with bread — nobody queues at the door, everyone eats within minutes.",
-   "layman_needed": "A rehearsal proving 100 simulated new pages can join in staged batches with history loading gently in the background, live service unaffected, and every new page seeing something useful within its promised time."
+   "layman_needed": "A rehearsal proving 100 simulated new pages can join in staged batches with history loading gently in the background, live service unaffected, and every new page seeing something useful within its promised time.",
+   "layman_output": "A rehearsal receipt proving 100 simulated new pages can join on day one in staged batches, with an operator dial for batch size, their history loading gently in the background without slowing live service, and every new page seeing something useful within its promised time. When real crowds arrive, new users get value in minutes instead of everyone queuing behind one giant backlog."
   },
   {
    "id": "N6-SD-01",
@@ -18273,7 +18801,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A second all-hands bug hunt on 23 Nov: 90 minutes, everyone follows a script through the finished product and logs what breaks, so problems are judged against clear rules rather than launch-date pressure.",
    "layman_analogy": "Like a scripted village-hall snag hunt before handover — everyone walks the same route with a clipboard, and a few planted faults check the walkers are really looking.",
-   "layman_needed": "A 90-minute scripted bug hunt run with the whole team on 23 Nov, producing a triaged log where every finding is judged against the written blocker rules, not the launch date."
+   "layman_needed": "A 90-minute scripted bug hunt run with the whole team on 23 Nov, producing a triaged log where every finding is judged against the written blocker rules, not the launch date.",
+   "layman_output": "A completed 90-minute all-hands bug hunt on 23 Nov: a written script walking every screen on web and mobile, planted defects to prove the hunt actually catches things, and a triaged log where every finding is judged against the written blocker rules. Anyone can read the log and see problems classified by the rules, never by launch-date pressure."
   },
   {
    "id": "N6-SD-02",
@@ -18307,7 +18836,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Write down the exact numbers (error rates, how many users actually get going) that tell us to let more people in or hit pause on launch day, so those calls are made in advance, not under launch-day adrenaline.",
    "layman_analogy": "Like a lifeguard writing the flag rules before summer — the exact wave height that means red flag was decided in an office, not in the surf.",
-   "layman_needed": "Exact written numbers in runbook v2 — error rates and sign-up-success floors — that decide on launch day whether to admit more users or pause."
+   "layman_needed": "Exact written numbers in runbook v2 — error rates and sign-up-success floors — that decide on launch day whether to admit more users or pause.",
+   "layman_output": "Exact numbers written into runbook v2: the error rates and sign-up-success floors that decide, on launch day, whether to let more people in or hit pause. Anyone in the war room can read the page, compare it with the live board and know what the call is — because those decisions were made calmly in advance, not under launch-day adrenaline."
   },
   {
    "id": "N6-SD-03",
@@ -18340,7 +18870,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Retake all help-page screenshots from the final product and check every public word: dates, prices, legal links, AI labels all match reality, so customers never see something the product doesn't actually do.",
    "layman_analogy": "Like reshooting the brochure with the finished showhome and proofreading every board — prices, dates and small print must match the house people actually buy.",
-   "layman_needed": "Help pages re-shot from the final build and a filed audit confirming every public word — launch date, founding-price terms, legal links, AI labels — matches reality."
+   "layman_needed": "Help pages re-shot from the final build and a filed audit confirming every public word — launch date, founding-price terms, legal links, AI labels — matches reality.",
+   "layman_output": "Help pages re-shot so every screenshot shows the final build, plus a filed audit confirming every public word is true: the 1 December date consistent everywhere, the founding-price terms matching the website and invoices, legal links resolving, and AI-generated content labelled. A customer following any guide sees exactly what the product actually shows."
   },
   {
    "id": "N6-SD-04",
@@ -18375,7 +18906,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "All 5 pilot customers try every part of the final product while we watch, and each signs to say they understood what they saw, so we know real users get it before we launch to strangers.",
    "layman_analogy": "Like the final fitting where each of five customers tries on the whole outfit and signs the slip saying it fits and they understand the care label.",
-   "layman_needed": "All five pilots taken through every part of the final product while observed, with five signed sheets confirming each understood what they saw, filed."
+   "layman_needed": "All five pilots taken through every part of the final product while observed, with five signed sheets confirming each understood what they saw, filed.",
+   "layman_output": "All five pilot customers taken through every part of the final product while observed, Lewis alongside as their advocate, with five signed comprehension sheets filed confirming each pilot understood what they saw. The launch decision can point to written proof that real users get the product — before it is shown to strangers."
   },
   {
    "id": "N6-SD-05",
@@ -18409,7 +18941,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "First full launch rehearsal on 26 Nov: switch it on, switch each feature off and on, practise the emergency undo, everyone in their seat. Every stumble gets a fix, so launch day has already happened once.",
    "layman_analogy": "Like a full technical rehearsal two weeks before opening night — curtain up, every light cued off and on, the fire curtain dropped for practice, everyone in position.",
-   "layman_needed": "A log from the 26 Nov full launch rehearsal — go-live flip, each off-switch cycled, the emergency undo practised — with every stumble assigned an owner and runbook v2 issued."
+   "layman_needed": "A log from the 26 Nov full launch rehearsal — go-live flip, each off-switch cycled, the emergency undo practised — with every stumble assigned an owner and runbook v2 issued.",
+   "layman_output": "A log from the first full launch rehearsal on 26 Nov: the go-live switch flipped on the test system, each of the four emergency off-switches cycled, the undo rehearsed, and everyone sitting in their war-room seat. Every stumble is assigned an owner and the fixes are folded into runbook v2 — so launch day has effectively already happened once."
   },
   {
    "id": "N6-SD-06",
@@ -18441,7 +18974,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A public daily log of every bug found and how serious it is, proving there are zero showstoppers left, so the launch decision meeting sees the evidence rather than taking our word for it.",
    "layman_analogy": "Like a builder's snag list pinned to the site gate, updated daily — the buyer sees the list shrink to zero rather than being told 'trust us, it's fine'.",
-   "layman_needed": "A public daily log of every bug and its severity, showing zero showstoppers, delivered with the testing evidence into Alex's launch-decision memo."
+   "layman_needed": "A public daily log of every bug and its severity, showing zero showstoppers, delivered with the testing evidence into Alex's launch-decision memo.",
+   "layman_output": "A public daily log listing every bug found, its severity under the written rules, and its status, maintained through to launch and showing zero showstoppers by 27 Nov. The log plus the testing evidence goes into Alex's launch-decision memo — so the meeting can verify the zero itself rather than take anyone's word for it."
   },
   {
    "id": "N6-SD-07",
@@ -18475,7 +19009,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "An hour-by-hour shift plan for launch week: who answers Product Hunt, who does support, who minds the pilots, who watches the systems, so launch day runs like a rota, not a scramble.",
    "layman_analogy": "Like the stage manager's show-day call sheet — who's on book, who's front of house, who's minding the VIPs, hour by hour from doors to curtain.",
-   "layman_needed": "A published hour-by-hour shift plan for 7-10 Dec — Product Hunt replies, support, pilot hotline, systems watch — aligned with Jill's on-call rota and acknowledged by everyone named."
+   "layman_needed": "A published hour-by-hour shift plan for 7-10 Dec — Product Hunt replies, support, pilot hotline, systems watch — aligned with Jill's on-call rota and acknowledged by everyone named.",
+   "layman_output": "A published hour-by-hour shift plan for 7-10 Dec naming who answers Product Hunt, who handles support, who minds the pilot hotline and who watches the systems, aligned with Jill's on-call rota and acknowledged by every person named. Anyone can look up any launch-week hour and see exactly who is doing what — a rota, not a scramble."
   },
   {
    "id": "N6-SD-08",
@@ -18507,7 +19042,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lock the Product Hunt images and words to match the finished product, and finish the ranked list of what we might build next, so the public launch page is honest and the post-launch roadmap discussion is ready.",
    "layman_analogy": "Like sending the final poster to print and pinning up the ranked wishlist for next season — the advert locked to reality, the what-next debate prepped.",
-   "layman_needed": "Product Hunt images, tagline and maker comment frozen to match the finished product, and the ranked list of possible next features finalised with testing evidence for the mid-December review."
+   "layman_needed": "Product Hunt images, tagline and maker comment frozen to match the finished product, and the ranked list of possible next features finalised with testing evidence for the mid-December review.",
+   "layman_output": "The Product Hunt launch page assets — gallery images, tagline and maker comment — frozen to match the finished product exactly, plus the ranked list of possible next features finalised with testing evidence attached. The public launch page cannot drift from reality, and the mid-December roadmap discussion starts from an evidence-backed list, not opinions."
   },
   {
    "id": "N6-SD-09",
@@ -18547,7 +19083,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "One page listing every condition the Art-E assistant must meet before launch (accurate answers, safe with tricky questions, costs under control) with a named person signing each line, so nothing launches on assumption.",
    "layman_analogy": "Like an aircraft's pre-flight sheet — every check on one page, each line signed by the person responsible, and nothing takes off with an unsigned box.",
-   "layman_needed": "A one-page sign-off sheet where every Art-E launch condition — accuracy, safety probes, cost controls — is signed by its named owner with linked proof, read by Alex at the 27 Nov decision with no unowned amber."
+   "layman_needed": "A one-page sign-off sheet where every Art-E launch condition — accuracy, safety probes, cost controls — is signed by its named owner with linked proof, read by Alex at the 27 Nov decision with no unowned amber.",
+   "layman_output": "A one-page sign-off sheet for the Art-E assistant where every launch condition — accuracy over seven nights, clean safety probes, cost controls — carries a named signer and a link to its proof. Alex reads it at the 27 Nov decision with no unowned ambers — so the assistant launches on signatures against evidence, never on assumption."
   },
   {
    "id": "N6-AX-01",
@@ -18584,7 +19121,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Send the early-customer pricing email on 24 Nov with crystal-clear terms: how long the price is locked, who qualifies, the deadline; checked first so the email, website and invoices all say the same price.",
    "layman_analogy": "Like posting the members-only price letter on the promised morning — after checking the noticeboard and the invoices quote the same figure to the penny.",
-   "layman_needed": "The founding-price email sent to waitlist and pilots on 24 Nov with defined terms, only after confirming the website, invoices and email all show identical numbers."
+   "layman_needed": "The founding-price email sent to waitlist and pilots on 24 Nov with defined terms, only after confirming the website, invoices and email all show identical numbers.",
+   "layman_output": "The founding-price email landed in every waitlist and pilot inbox on Mon 24 Nov, stating the price, how long it is locked, who qualifies and the deadline — sent only after confirming the website, the invoice template and the email itself show identical numbers. A customer comparing the email against the site and their invoice finds one consistent story."
   },
   {
    "id": "N6-AX-02",
@@ -18619,7 +19157,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Decide now who does what if things go wrong in launch week: who leads, who flips the switch, who talks to customers, so nobody is arguing over roles on the day itself.",
    "layman_analogy": "Like assigning lifeboat stations before the ship leaves port — everyone knows their post and drill before the sea gets rough, not during.",
-   "layman_needed": "Launch-week emergency roles named in the rota — commander, switch-flipper, customer voice and the rest — hour by hour for 8 Dec with stand-down rules, and used in the 26 Nov rehearsal."
+   "layman_needed": "Launch-week emergency roles named in the rota — commander, switch-flipper, customer voice and the rest — hour by hour for 8 Dec with stand-down rules, and used in the 26 Nov rehearsal.",
+   "layman_output": "Launch-week emergency roles written into Saad's rota, hour by hour for 8 Dec: who leads an incident (never the person typing), who flips the switch, who watches the board, who talks to customers, pilots and press, plus the rules for standing down. The seating was used in the 26 Nov rehearsal — so if launch day goes wrong, nobody argues over roles."
   },
   {
    "id": "N6-AX-03",
@@ -18652,7 +19191,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A practice session answering the hardest questions people might throw at us publicly (what data do you take, who sees it, can I delete it), so our public answers on launch day are prepared, not improvised.",
    "layman_analogy": "Like a mock press conference the night before — a colleague fires the nastiest questions across the table until the answers come out steady, not startled.",
-   "layman_needed": "An answer sheet of at least ten hard public questions — data taken, deletion, what the assistant remembers — with legally cleared answers, filed after the 60-minute rehearsal has been run."
+   "layman_needed": "An answer sheet of at least ten hard public questions — data taken, deletion, what the assistant remembers — with legally cleared answers, filed after the 60-minute rehearsal has been run.",
+   "layman_output": "A filed answer sheet of at least ten of the hardest questions the public could throw at us — what data we take from Facebook, who sees it, what the assistant remembers, how deletion works, where Facebook approval stands — each with a legally cleared answer, produced from a 60-minute hostile-questions rehearsal. On launch day the spokesperson reads prepared answers, not improvised ones."
   },
   {
    "id": "N6-AX-04",
@@ -18688,7 +19228,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Record where every key number stands the day before launch (signups, how fast people get value, costs), so when launch-day numbers come in we can actually tell what changed.",
    "layman_analogy": "Like weighing yourself the night before the diet starts — without the starting number, next week's scales prove nothing either way.",
-   "layman_needed": "A dated sheet recording every key number the day before launch — sign-ups, time-to-value, costs — plus the expand/pause thresholds, filed with the memo and naming the owner and weekday of the post-launch review."
+   "layman_needed": "A dated sheet recording every key number the day before launch — sign-ups, time-to-value, costs — plus the expand/pause thresholds, filed with the memo and naming the owner and weekday of the post-launch review.",
+   "layman_output": "A dated baseline sheet recording every key number the day before launch — sign-ups, connection and first-value rates, time-to-value, pilot health, waitlist count, assistant cost — plus the expand-or-pause thresholds, filed with the launch memo. It also names the owner, weekday and length of the recurring post-launch review — so day-one numbers can be compared against a real 'before'."
   },
   {
    "id": "N6-AX-05",
@@ -18721,7 +19262,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex signs the spending limit for launch week and confirms live cost tracking is running, so a busy launch cannot quietly burn through money without anyone noticing.",
    "layman_analogy": "Like setting a hard limit on the wedding bar tab and posting someone by the till — a great party must not quietly drink the honeymoon fund.",
-   "layman_needed": "The launch-week spending cap signed by Alex, live cost tracking confirmed running, and the rule for who may raise the cap and by how much written into the war-room runbook."
+   "layman_needed": "The launch-week spending cap signed by Alex, live cost tracking confirmed running, and the rule for who may raise the cap and by how much written into the war-room runbook.",
+   "layman_output": "The launch-week spending cap signed by Alex, with the live cost dashboard confirmed running and automatic circuit-breakers set to trip before the cap is reached. The rule for who may raise the cap, and by how much, is written into the war-room runbook — so a busy launch cannot quietly burn through money, and raising the limit is a named decision, not a panic."
   },
   {
    "id": "N6-AX-06",
@@ -18756,7 +19298,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lock the minute-by-minute launch schedule: final check Saturday, preview Monday, switch on Tuesday 8 Dec at 08:00, announce at 08:01. No changes after 27 Nov, so launch day contains no surprises.",
    "layman_analogy": "Like the conductor fixing the concert programme after the final rehearsal — doors at 7, baton at 8, encore decided in advance, and no one swaps the setlist backstage.",
-   "layman_needed": "A locked minute-by-minute launch schedule — Saturday final check, Monday preview, Tuesday 8 Dec 08:00 switch-on, 08:01 announcement — with times and owners, filed and referenced by Saad's runbook."
+   "layman_needed": "A locked minute-by-minute launch schedule — Saturday final check, Monday preview, Tuesday 8 Dec 08:00 switch-on, 08:01 announcement — with times and owners, filed and referenced by Saad's runbook.",
+   "layman_output": "A locked minute-by-minute launch schedule filed and referenced by Saad's runbook: final production check Saturday 5 Dec, Product Hunt preview verified Monday, switches flip Tuesday 8 Dec at 08:00, all five customer journeys smoke-checked, announcement at 08:01, first 100 pages admitted as batch one. Every step has a time and an owner, and nothing changes after 27 Nov — launch day holds no surprises."
   },
   {
    "id": "N6-AX-07",
@@ -18798,7 +19341,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Chair the formal launch decision meeting on Fri 27 Nov: every owner presents proof their area is ready, the Facebook approval question is settled, and the go or no-go decision is written down and signed.",
    "layman_analogy": "Like the head examiner chairing a viva where every department shows its evidence before the school signs off the results.",
-   "layman_needed": "A signed memo, filed the same day as the 27 Nov meeting, recording GO or NO-GO, the evidence each owner presented for their criterion, and which Facebook-approval route was chosen."
+   "layman_needed": "A signed memo, filed the same day as the 27 Nov meeting, recording GO or NO-GO, the evidence each owner presented for their criterion, and which Facebook-approval route was chosen.",
+   "layman_output": "A signed one-page memo, filed the same day as the 27 Nov meeting, sits in the launch folder recording GO or NO-GO. Beside each launch criterion it names the owner, the answer they gave and a link to their evidence, plus which Facebook-approval route was chosen. Anyone on the team can open it and see exactly what was decided, by whom, and on what proof - no more 'I thought we agreed'."
   },
   {
    "id": "N6-JL-01",
@@ -18836,7 +19380,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Write down exactly who to call when something breaks, in what order, and test it for real during a practice emergency, so on launch day nobody is hunting for a phone number at 2am.",
    "layman_analogy": "Like pinning the emergency numbers by the phone and then ringing round during a fire drill to prove everyone actually picks up.",
-   "layman_needed": "A timestamped record from the practice emergency showing every person was reached (or the backup route worked when one was deliberately unreachable), plus the corrected call list written into the launch runbook."
+   "layman_needed": "A timestamped record from the practice emergency showing every person was reached (or the backup route worked when one was deliberately unreachable), plus the corrected call list written into the launch runbook.",
+   "layman_output": "A written emergency call list - every team member, their incident role, first and backup contact route - lives in the launch runbook and on the war-room board. Beside it is a timestamped record from the practice emergency showing each person was actually reached, including one deliberate no-answer that proved the backup route works. Anyone can open the runbook and see who to call at 2am, tested for real."
   },
   {
    "id": "N6-JL-02",
@@ -18872,7 +19417,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Double-check the tax on every pilot invoice and make sure the invoice amounts match the pricing email and the website exactly, so our first customers see one price everywhere, not a muddle.",
    "layman_analogy": "Like checking every price tag in the shop window matches the till before opening day, VAT included.",
-   "layman_needed": "Written confirmation of the VAT treatment on each invoice, and the five invoice amounts, price-lock length and deadline matching the pricing email draft and the website, sent to Alex by 20 Nov."
+   "layman_needed": "Written confirmation of the VAT treatment on each invoice, and the five invoice amounts, price-lock length and deadline matching the pricing email draft and the website, sent to Alex by 20 Nov.",
+   "layman_output": "A short written confirmation, sent to Alex by 20 Nov, states the VAT treatment on each of the five pilot invoices and lists the five amounts, the price-lock length and the eligibility deadline. Those figures match the 24 Nov pricing email draft and the website word for word, so a teammate can lay the three side by side and see one price everywhere before anything is sent."
   },
   {
    "id": "N6-JL-03",
@@ -18908,7 +19454,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Finalise who is on duty each day and night from 30 Nov to 11 Dec, including the weekend before launch, and hand it over in time to be rehearsed, so cover for launch week is settled well in advance.",
    "layman_analogy": "Like posting the final staff rota on the kitchen wall a week before the wedding so every shift, including the overnight, has a name on it.",
-   "layman_needed": "A frozen duty rota covering 30 Nov to 11 Dec, day and night, in the runbook before the 26 Nov rehearsal, with the paging system set up to match it exactly."
+   "layman_needed": "A frozen duty rota covering 30 Nov to 11 Dec, day and night, in the runbook before the 26 Nov rehearsal, with the paging system set up to match it exactly.",
+   "layman_output": "A frozen duty rota covering 30 Nov to 11 Dec sits in the launch runbook before the 26 Nov rehearsal: who is on first and second call each day and night, who commands each shift, plus Saad on support, Lewis on the pilot hotline and Alex on Product Hunt replies. The paging system is set up to match it exactly, so anyone can look up any hour of launch fortnight and see precisely who gets woken."
   },
   {
    "id": "N6-JL-04",
@@ -18945,7 +19492,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Put live spending numbers on the launch-week control board, refreshed hourly, with alarms when costs climb, so we can see money going out in real time instead of finding out from next month's bill.",
    "layman_analogy": "Like fitting a live fuel gauge and low-fuel warning light to the car instead of waiting for the garage bill.",
-   "layman_needed": "A working control-board panel showing spending by line and daily burn against the cap, refreshed at least hourly, with alarms wired to whoever is on duty, and one day's figures checked against the actual AWS bill."
+   "layman_needed": "A working control-board panel showing spending by line and daily burn against the cap, refreshed at least hourly, with alarms wired to whoever is on duty, and one day's figures checked against the actual AWS bill.",
+   "layman_output": "A live spending panel sits on the war-room board: cloud costs, AI assistant costs per customer, email volume and the daily burn figure against the agreed cap, refreshed at least hourly, with alarms that page whoever is on duty when a line runs hot. One full day's figures have been checked against the actual AWS bill, so a teammate can glance at the board and trust the number they see."
   },
   {
    "id": "N6-JL-05",
@@ -18983,7 +19531,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Set the maximum we are allowed to spend in launch week, line by line, with agreed actions when we hit 80% and 100%, signed by Alex, so a runaway cost gets stopped automatically rather than discovered later.",
    "layman_analogy": "Like agreeing a hard spending limit on the joint account with alarms at 80% and the card frozen at 100%, all signed by the account holder.",
-   "layman_needed": "A cap signed by Alex with daily and weekly ceilings per spending line and named actions at 80% and 100%, filed in the runbook and the launch decision memo."
+   "layman_needed": "A cap signed by Alex with daily and weekly ceilings per spending line and named actions at 80% and 100%, filed in the runbook and the launch decision memo.",
+   "layman_output": "A one-page spending cap for launch fortnight, signed by Alex, sits in the runbook and the launch decision memo. It lists daily and weekly ceilings for each spending line and names exactly who does what at 80% and 100% - including which emergency switches get flipped and when new sign-ups pause. Anyone on duty can read it in a minute and know the pre-agreed action instead of debating at midnight."
   },
   {
    "id": "N6-JL-06",
@@ -19021,7 +19570,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Send all five pilot customers their first invoice by 27 Nov, once their contracts are signed, so we go into launch with real paying customers on paper, which is what the launch decision meeting counts.",
    "layman_analogy": "Like handing the first five diners their bill only after each has signed the booking form, and logging every receipt.",
-   "layman_needed": "Five invoices sent by 27 Nov, each only after that pilot's agreement was countersigned, with send time and recipient logged and the 'invoices sent' line plus evidence handed to Alex for the launch decision memo."
+   "layman_needed": "Five invoices sent by 27 Nov, each only after that pilot's agreement was countersigned, with send time and recipient logged and the 'invoices sent' line plus evidence handed to Alex for the launch decision memo.",
+   "layman_output": "Five real pilot invoices are sent by 27 Nov, each only after that pilot's agreement and data paperwork were countersigned, with correct amounts, VAT and due dates. The tracking sheet logs the send time and recipient of each, and Alex holds the 'invoices sent' line with evidence for the launch decision memo. A teammate can open the sheet and see five timestamped sends against five signed agreements."
   },
   {
    "id": "N6-LW-01",
@@ -19054,7 +19604,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "From 16 Nov, check on each of our 5 pilot customers every single day: are they logged in, is their data fresh, are they happy? Anything worrying goes straight to the bug list, so our most important users never drift.",
    "layman_analogy": "Like a nurse doing daily ward rounds on the five most important patients, charting each one and calling the doctor at the first bad sign.",
-   "layman_needed": "A health sheet with one row per pilot per working day from 16 Nov (logged in, data fresh, alerts answered, mood), with anything red sent to Saad's triage the same day."
+   "layman_needed": "A health sheet with one row per pilot per working day from 16 Nov (logged in, data fresh, alerts answered, mood), with anything red sent to Saad's triage the same day.",
+   "layman_output": "A shared health sheet holds one row per pilot per working day from 16 Nov: logged in, pages connected and fresh, any alert unanswered, any wrong-looking number, and mood on the last call. Anything marked red goes to Saad's triage the same day. A teammate can open the sheet any morning and see at a glance how each of the five most important customers is doing - and that nothing red sat unnoticed."
   },
   {
    "id": "N6-LW-02",
@@ -19086,7 +19637,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Before we lock the product, hand-check the collaboration suggestions for a few pilot pages to confirm the top picks are still genuinely good, so we freeze a version that works, not one that has quietly got worse.",
    "layman_analogy": "Like tasting a few plates from the last batch before the recipe is locked, to be sure it still tastes as good as when it won the award.",
-   "layman_needed": "A dated spot-check record by 19 Nov: the top-5 partner suggestions for about 5 pilot pages re-judged against the agreed bar, with a held-or-drifted verdict and any drift flagged to Muteeb."
+   "layman_needed": "A dated spot-check record by 19 Nov: the top-5 partner suggestions for about 5 pilot pages re-judged against the agreed bar, with a held-or-drifted verdict and any drift flagged to Muteeb.",
+   "layman_output": "A dated record, filed by 19 Nov, shows the top-5 partner-page suggestions for about five pilot pages were re-judged by hand against the agreed quality bar on the final refresh before the 20 Nov freeze, with a clear held-or-drifted verdict. Any drift is flagged to Muteeb in writing, so the team freezes a version known to still meet the bar rather than hoping it does."
   },
   {
    "id": "N6-LW-03",
@@ -19120,7 +19672,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Book all 5 pilots into the final walkthrough of the finished product, sit with them, and get each to sign that they understood it, with quick re-tests after any fixes, so the launch decision has real user proof.",
    "layman_analogy": "Like walking each of the five buyers through the finished house room by room and getting their signature that they understood everything.",
-   "layman_needed": "All 5 pilots through the final walkthrough of the frozen product by 26 Nov, each with a recorded sign-off that they understood it, and every failed step re-tested and closed before the 27 Nov decision meeting."
+   "layman_needed": "All 5 pilots through the final walkthrough of the frozen product by 26 Nov, each with a recorded sign-off that they understood it, and every failed step re-tested and closed before the 27 Nov decision meeting.",
+   "layman_output": "All five pilots have walked through the frozen product across every screen by 26 Nov, each with a recorded sign-off saying they understood what they saw, and every step that failed has been re-tested and closed with that pilot. The sign-offs and retest records sit ready for the 27 Nov decision meeting, so anyone can check that real customers, not just the team, have used and understood the final build."
   },
   {
    "id": "N6-LW-04",
@@ -19154,7 +19707,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Get a written yes from all five pilot customers: they hear the founding price from a person, agree terms, and say invoice me. The confirmed list goes to Jill by 25 Nov so invoices go out before launch.",
    "layman_analogy": "Like getting five handshake deals turned into written orders before the shop's opening-sale advert goes out.",
-   "layman_needed": "Five written 'invoice me' confirmations, each pilot having heard the founding price from Lewis, with the confirmed billing list (name, company, contact, pages, terms) handed to Jill by 25 Nov."
+   "layman_needed": "Five written 'invoice me' confirmations, each pilot having heard the founding price from Lewis, with the confirmed billing list (name, company, contact, pages, terms) handed to Jill by 25 Nov.",
+   "layman_output": "Jill holds a confirmed billing list by 25 Nov: five pilots, each having heard the founding price and terms from Lewis in person, with name, company, billing contact, agreed pages and terms, and a written 'invoice me'. That list is what lets five invoices leave by 27 Nov, and if the count comes up short Alex hears immediately - so the launch's real success metric rests on written yeses, not warm feelings."
   },
   {
    "id": "N6-LW-05",
@@ -19188,7 +19742,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Write the plan for looking after pilots on launch day: a dedicated hotline, clear rules for when a pilot problem becomes an emergency, so the five relationships that matter most are guarded by a person with a plan.",
    "layman_analogy": "Like assigning the VIP guests their own dedicated host with a direct line for the whole opening night.",
-   "layman_needed": "A written pilot support plan in the launch runbook: hotline hours 7-11 Dec, escalation rules including 'wrong data = emergency', the hotline seat named on the launch rota, and Lewis's role rehearsed in the 26 Nov dry run."
+   "layman_needed": "A written pilot support plan in the launch runbook: hotline hours 7-11 Dec, escalation rules including 'wrong data = emergency', the hotline seat named on the launch rota, and Lewis's role rehearsed in the 26 Nov dry run.",
+   "layman_output": "A written pilot support plan sits in the launch runbook: hotline hours 7-11 Dec, what Lewis handles versus what escalates to support or the war room, the rule that a pilot seeing wrong data is an automatic emergency with the exact escalation wording, and the 'stuck? book 10 minutes' seat owner. Lewis's hotline seat is named on the launch rota and was rehearsed in the 26 Nov dry run."
   },
   {
    "id": "N6-LW-06",
@@ -19220,7 +19775,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Agree with each willing pilot exactly what they will say publicly on launch day, when, and in what words, so real customer voices show up at 08:01 instead of being wished for.",
    "layman_analogy": "Like confirming with each wedding speaker exactly what they will say and when, so the toasts happen on cue rather than being hoped for.",
-   "layman_needed": "A staged list in the Product Hunt package by 27 Nov: for each willing pilot, what they will post publicly on launch day, the exact agreed wording, and the time, shared with Saad and Alex."
+   "layman_needed": "A staged list in the Product Hunt package by 27 Nov: for each willing pilot, what they will post publicly on launch day, the exact agreed wording, and the time, shared with Saad and Alex.",
+   "layman_output": "A staged reference list sits in the Product Hunt package by 27 Nov: for each pilot who agreed, exactly what they will do on launch day - a comment, a quote, a press reply - the agreed wording and the time it goes up, shared with Saad and Alex. On 8 Dec nobody has to chase social proof; a teammate can read the list and know what public support lands at which minute."
   },
   {
    "id": "N6-FZ-01",
@@ -19253,7 +19809,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Legal read of the 24 Nov pricing email before it goes: terms match everywhere, any limited-time claims are true, and it only goes to people who agreed to hear from us, so the offer cannot become a complaint.",
    "layman_analogy": "Like a solicitor reading the sale poster before it goes in the window: prices match the till, 'limited offer' is true, and it only goes through doors that asked for post.",
-   "layman_needed": "A written legal clearance on file, before sending, covering the exact 24 Nov notice text and the recipient list: terms matching everywhere, truthful scarcity claims, consented recipients, working unsubscribe and company particulars."
+   "layman_needed": "A written legal clearance on file, before sending, covering the exact 24 Nov notice text and the recipient list: terms matching everywhere, truthful scarcity claims, consented recipients, working unsubscribe and company particulars.",
+   "layman_output": "A written legal clearance is on file before the 24 Nov pricing email goes out, covering the exact text and recipient list: lock terms matching the final terms of service, the website and the invoices; scarcity claims that are true and evidenced; recipients who all consented; a working unsubscribe and the required company details in the footer. Alex and Jill each hold the clearance before pressing send."
   },
   {
    "id": "N6-FZ-02",
@@ -19287,7 +19844,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Click every link we have registered with Facebook (privacy policy, terms, delete-my-data) and prove each one works and shows the current version, so nothing stale trips up our Facebook approval at the worst moment.",
    "layman_analogy": "Like walking the fire inspector's route yourself the day before the visit, opening every door they will open to check none is stuck.",
-   "layman_needed": "A dated screenshot record showing every link registered in the Facebook app dashboard opens securely to the current signed version, plus a successful test of the delete-my-data callback, noted against the approval route it covers."
+   "layman_needed": "A dated screenshot record showing every link registered in the Facebook app dashboard opens securely to the current signed version, plus a successful test of the delete-my-data callback, noted against the approval route it covers.",
+   "layman_output": "A dated screenshot record shows every link registered in the Facebook app dashboard - privacy policy, terms, data-deletion instructions and the app domain - opening securely to the current signed versions, plus a successful test of the delete-my-data callback returning its confirmation code. It is filed for the decision memo, marked with which Facebook approval route it covers."
   },
   {
    "id": "N6-FZ-03",
@@ -19322,7 +19880,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Sweep the finished product to confirm every legal document is the final signed version and linked from every footer and settings screen, so no customer ever lands on an out-of-date terms page.",
    "layman_analogy": "Like checking every fire-exit sign in the finished building points to a real door before the safety certificate is filed.",
-   "layman_needed": "A sweep record on the frozen build showing each legal document (terms, privacy, DPA, cookies) is the signed final version linked from every footer and Settings, with the decision memo's legal evidence slots filled in."
+   "layman_needed": "A sweep record on the frozen build showing each legal document (terms, privacy, DPA, cookies) is the signed final version linked from every footer and Settings, with the decision memo's legal evidence slots filled in.",
+   "layman_output": "A sweep record on the frozen build shows each legal document - terms, privacy, data agreement, cookie policy - carrying its version and date, being the signed final, and linked from the site footer, app footer and Settings, with the AI labels, consent screen and cookie banner showing the final wording. The decision memo's legal evidence slots are filled with links, so anyone can click and verify each claim."
   },
   {
    "id": "N6-FZ-04",
@@ -19357,7 +19916,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "On the real live system, run a full test of a customer asking for their data and asking for deletion, and prove everything is genuinely gone afterwards, so our privacy promises are demonstrated, not assumed.",
    "layman_analogy": "Like doing a full moving-out inspection on the real house: hand the tenant their box of belongings, then prove every cupboard is genuinely empty.",
-   "layman_needed": "Dated receipts from the live system: one complete customer data export assembled from every store, one deletion verified gone everywhere including AI memory, timings recorded, and confirmation no test data remains, filed in the decision memo."
+   "layman_needed": "Dated receipts from the live system: one complete customer data export assembled from every store, one deletion verified gone everywhere including AI memory, timings recorded, and confirmation no test data remains, filed in the decision memo.",
+   "layman_output": "Dated receipts from the live system, filed in the decision memo, show a complete customer data export assembled from every store, and one deletion verified gone from everywhere - including the AI's memory - with timings recorded. A confirmation that no demo or test data remains after the purge sits alongside. A teammate can read the receipts and see the privacy promises were kept on production, not staging."
   },
   {
    "id": "N6-FZ-05",
@@ -19390,7 +19950,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza reads the automated proof that one customer's data can never leak into another customer's account, and signs a one-page statement saying so, which goes into the launch decision file and our public security page.",
    "layman_analogy": "Like the structural engineer reading the test results and signing the certificate that the walls between flats are sound.",
-   "layman_needed": "A signed one-page statement from Filza naming the automated separation tests, the exact software version they ran on, and what they do not cover, filed in the launch decision memo and the public security page evidence."
+   "layman_needed": "A signed one-page statement from Filza naming the automated separation tests, the exact software version they ran on, and what they do not cover, filed in the launch decision memo and the public security page evidence.",
+   "layman_output": "A one-page attestation signed by Filza sits in the launch decision memo and the public security-page evidence. It names the automated tests proving no customer's data can leak into another's view, the exact software version they ran on, the database rules checked, the penetration-test closure - and, honestly, what the tests do not cover. Anyone can read it and know exactly what was verified and what was not."
   },
   {
    "id": "N6-FZ-06",
@@ -19423,7 +19984,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza pre-writes the if-we-slip messages for pilots, waitlist and investors, so a delay would be announced calmly in hours, not scrambled overnight.",
    "layman_analogy": "Like writing the 'flight delayed' announcements before departure day so a slip is read out calmly, not scribbled at the gate.",
-   "layman_needed": "Four ready-to-send templates filed in the NO-GO playbook (pilot notice, waitlist email, public line, pricing consequence), consistent with the final terms and the 24 Nov notice, held unsent by Alex."
+   "layman_needed": "Four ready-to-send templates filed in the NO-GO playbook (pilot notice, waitlist email, public line, pricing consequence), consistent with the final terms and the 24 Nov notice, held unsent by Alex.",
+   "layman_output": "Four ready-to-send messages sit in the NO-GO playbook, held unsent by Alex: a pilot notice explaining what changes for them, a waitlist email with the new date, the public and Product Hunt line, and the pricing consequence with the moved deadline. All are consistent with the final terms and the 24 Nov notice, so if the 27 Nov meeting says stop, the words already exist and nobody drafts under panic."
   },
   {
    "id": "LW-AS-01",
@@ -19456,7 +20018,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Second full launch rehearsal on Wed 2 Dec, with Asad at the controls: switch on, undo, kill switches. Only things that failed the checklist get fixed afterwards, so the buffer week stays a buffer, not a building site.",
    "layman_analogy": "Like the second full dress rehearsal: run the whole show, then only mend the costumes that actually tore.",
-   "layman_needed": "Minutes from the 2 Dec rehearsal listing every checklist failure, with a merged fix for each by 4 Dec and no new feature work slipped in."
+   "layman_needed": "Minutes from the 2 Dec rehearsal listing every checklist failure, with a merged fix for each by 4 Dec and no new feature work slipped in.",
+   "layman_output": "Minutes from the 2 Dec full rehearsal sit in the runbook listing every checklist step that failed, and each failure has a merged fix by Fri 4 Dec - with nothing else touched, so the buffer week stays a buffer. A teammate can read the minutes, click through to each fix, and confirm the second rehearsal caught what the first created without any new feature work sneaking in."
   },
   {
    "id": "LW-AS-02",
@@ -19488,7 +20051,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "On Sat 5 Dec, run all five core customer journeys plus the full automatic robot test on the real live system, and only after everything passes do we announce the product is finished.",
    "layman_analogy": "Like test-driving the car on the real road, every gear, before hanging the 'finished' sign on it.",
-   "layman_needed": "A signed test receipt from 5 Dec showing all five core customer journeys plus the full automatic test suite passing on the live system, produced before the finished-product announcement goes out."
+   "layman_needed": "A signed test receipt from 5 Dec showing all five core customer journeys plus the full automatic test suite passing on the live system, produced before the finished-product announcement goes out.",
+   "layman_output": "A signed test receipt from Sat 5 Dec sits in the war-room log: the five core customer journeys walked by hand on the live system with real pilot accounts, the full automatic test suite green, plus a working push notification and app-install spot-check. Only after that receipt exists does Saad post the 'MVP done' graphics - so the announcement follows the proof, never the other way round."
   },
   {
    "id": "LW-AS-03",
@@ -19521,7 +20085,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Early on launch morning, before anyone says a word publicly, re-run all five customer journeys on the live system and confirm pilots see correct data, so we never announce something we have not just watched work.",
    "layman_analogy": "Like the pilot's final walk-around of the plane on the morning of the flight, before any passengers board.",
-   "layman_needed": "A smoke receipt signed in the war room before 08:00 on 8 Dec: all five customer journeys green on the live system and every pilot's pages showing correct data, ahead of the 08:01 announcement."
+   "layman_needed": "A smoke receipt signed in the war room before 08:00 on 8 Dec: all five customer journeys green on the live system and every pilot's pages showing correct data, ahead of the 08:01 announcement.",
+   "layman_output": "A smoke receipt signed in the war room before 08:00 on 8 Dec shows all five customer journeys green on the live system that morning, the full automatic test suite passing, and every pilot's pages showing correct numbers. Alex's 08:01 announcement only goes out on the back of it, so anyone can check that launch morning was verified working an hour before the world was told."
   },
   {
    "id": "LW-AS-04",
@@ -19554,7 +20119,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "At 08:00 on 8 Dec, Asad flips the pre-rehearsed switch that makes the product live, with a small trial group first and an instant undo ready, and only emergency fixes allowed all week.",
    "layman_analogy": "Like the stage manager raising the curtain at the rehearsed second, hand on the rope to drop it instantly if anything goes wrong.",
-   "layman_needed": "The launch switches flipped at 08:00 on 8 Dec exactly as rehearsed, a small trial group first, the undo command staged, emergency-fixes-only for the week, and the flip plus first daily check-in recorded in the war-room log."
+   "layman_needed": "The launch switches flipped at 08:00 on 8 Dec exactly as rehearsed, a small trial group first, the undo command staged, emergency-fixes-only for the week, and the flip plus first daily check-in recorded in the war-room log.",
+   "layman_output": "At 08:00 on 8 Dec the launch switches are flipped exactly as rehearsed: a small trial group goes first, the undo command sits staged, the emergency cut-offs are within reach, and emergency-fixes-only applies for the week. The war-room log records the flip and Asad's first 09:00 check-in, so launch itself is a calm toggle anyone can see happened on time, not a scramble."
   },
   {
    "id": "LW-FH-01",
@@ -19583,7 +20149,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Every launch-week morning Faheem reports how the AI is behaving (accuracy, false alarms) against agreed limits, and changes nothing, because launch week is for watching the AI, not tinkering with it.",
    "layman_analogy": "Like the anaesthetist reading the monitors aloud every morning of recovery week and touching no dials.",
-   "layman_needed": "A short readout filed every morning from 30 Nov to 14 Dec, including launch morning, on how the AI is behaving (accuracy, drift, false alarms) against the agreed limits, with zero changes made to the models."
+   "layman_needed": "A short readout filed every morning from 30 Nov to 14 Dec, including launch morning, on how the AI is behaving (accuracy, drift, false alarms) against the agreed limits, with zero changes made to the models.",
+   "layman_output": "A short written readout is filed every morning from 30 Nov to 14 Dec, launch morning included, saying how the AI is behaving - accuracy, drift and false-alarm rates against the agreed limits - with a standing record that zero changes were made to the models. A teammate can open any day's note and see the AI was watched, measured and left alone throughout launch."
   },
   {
    "id": "LW-MT-01",
@@ -19616,7 +20183,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "From 30 Nov the launch control room is live: one shared board of the whole system, a 09:00 daily check-in, a rota for who leads, and the automatic safety cut-offs proven to work under real traffic.",
    "layman_analogy": "Like opening mission control a week before the rocket: one big screen, a morning briefing, a named flight director per shift, and the abort switches tested.",
-   "layman_needed": "The war room running from 30 Nov: a 09:00 checkpoint held daily, one shared board, a commander rota, and a log proving the automatic safety cut-offs were verified under real traffic."
+   "layman_needed": "The war room running from 30 Nov: a 09:00 checkpoint held daily, one shared board, a commander rota, and a log proving the automatic safety cut-offs were verified under real traffic.",
+   "layman_output": "The war room is running from Mon 30 Nov: one shared board everybody reads, a 09:00 checkpoint held every day, a named commander per shift, and a log proving the automatic safety cut-offs were verified under real traffic. Anyone can walk in at 09:00, see the single source of truth, and know who is in charge right now and that the emergency brakes have actually been tested."
   },
   {
    "id": "LW-MT-02",
@@ -19647,7 +20215,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Put our system-health page where customers can see it, and post any problem within 15 minutes, because staying silent during an outage costs more trust than the outage itself.",
    "layman_analogy": "Like the departures board at the station: when a train is delayed it says so within minutes, rather than leaving the platform guessing.",
-   "layman_needed": "The system-health page live and public, with a test posting proving a problem notice can go up within 15 minutes under the rota."
+   "layman_needed": "The system-health page live and public, with a test posting proving a problem notice can go up within 15 minutes under the rota.",
+   "layman_output": "A public system-health page is live where any customer can check whether ArtemisAI is up, and a test posting proves a problem notice can appear within 15 minutes under the duty rota. When something degrades during launch week, pilots read an honest notice on the page instead of wondering - and the team can point support queries at one public, current answer."
   },
   {
    "id": "LW-MT-03",
@@ -19679,7 +20248,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Muteeb runs the systems side of the 2 Dec rehearsal alongside Saad and Asad, fixing only what the checklist catches, because the second run-through finds the problems the first one created.",
    "layman_analogy": "Like the sound engineer running the second dress rehearsal from the mixing desk, fixing only the faults the checklist catches.",
-   "layman_needed": "The systems side of the 2 Dec rehearsal completed alongside Saad and Asad, with every checklist failure logged and fixed, and nothing else touched."
+   "layman_needed": "The systems side of the 2 Dec rehearsal completed alongside Saad and Asad, with every checklist failure logged and fixed, and nothing else touched.",
+   "layman_output": "The systems side of the 2 Dec rehearsal is complete: Muteeb ran the platform steps alongside Saad and Asad, every checklist failure is logged with its fix, and nothing outside the checklist was touched. A teammate can read the rehearsal log and see that the machinery behind the launch was exercised twice, and that the second pass cleaned up only what the checklist caught."
   },
   {
    "id": "LW-MT-04",
@@ -19710,7 +20280,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Muteeb backs Asad up on the Sat 5 Dec live check of all five customer journeys, so the finished-product announcement only goes out once everything has been watched working for real.",
    "layman_analogy": "Like the co-driver reading the checklist aloud during the final road test before the car is declared finished.",
-   "layman_needed": "All five customer journeys and the full automatic test suite passing on the live system on 5 Dec with Muteeb supporting Asad, and the results logged."
+   "layman_needed": "All five customer journeys and the full automatic test suite passing on the live system on 5 Dec with Muteeb supporting Asad, and the results logged.",
+   "layman_output": "On Sat 5 Dec all five core customer journeys and the full automatic test suite pass on the live system, with Muteeb supporting Asad through the run and the results logged. The logged pass is what clears the 'MVP done' milestone announcement, so anyone can trace the celebratory post back to a dated record of the product actually working in production that day."
   },
   {
    "id": "LW-MT-05",
@@ -19743,7 +20314,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "On launch morning Muteeb makes sure everything is checked working before 08:01, the switch-on happens with a small trial group and instant undo ready, and a pilot seeing wrong data is treated as an emergency.",
    "layman_analogy": "Like the ground crew clearing the runway before the first flight: checks done, tower ready, and any warning light treated as a stop signal.",
-   "layman_needed": "On 8 Dec: all checks passing on the live system before 08:01, the switch-on at 08:00 with trial group and undo ready, emergency-fixes-only enforced, and 'a pilot sees wrong data' treated as an automatic emergency."
+   "layman_needed": "On 8 Dec: all checks passing on the live system before 08:01, the switch-on at 08:00 with trial group and undo ready, emergency-fixes-only enforced, and 'a pilot sees wrong data' treated as an automatic emergency.",
+   "layman_output": "On 8 Dec the platform side of launch runs to plan: every check green on the live system before 08:01, the switch-on at 08:00 with a trial group first and the undo ready, emergency-fixes-only enforced for the week, and 'a pilot sees wrong data' treated as an automatic emergency. The war-room log records each step, so anyone can verify launch was a rehearsed sequence, not improvisation."
   },
   {
    "id": "LW-SD-01",
@@ -19776,7 +20348,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Saad runs his step-by-step launch checklist through the 2 Dec rehearsal and then hands the final version to Asad for the real launch checks, so the paper and the practice match perfectly.",
    "layman_analogy": "Like the choreographer following the second dress rehearsal script line by line, then handing the marked-up copy to the lead for opening night.",
-   "layman_needed": "A rehearsal log from 2 Dec showing every runbook step run with only checklist fixes made, and the final pre-flight checklist handed to Asad for the 5 Dec and 8 Dec live checks."
+   "layman_needed": "A rehearsal log from 2 Dec showing every runbook step run with only checklist fixes made, and the final pre-flight checklist handed to Asad for the 5 Dec and 8 Dec live checks.",
+   "layman_output": "A rehearsal log from 2 Dec shows every step of runbook v2 run in order, with only checklist failures fixed and nothing else changed. The final pre-flight checklist is handed to Asad for the 5 Dec and 8 Dec live checks, so the person flipping the switches on launch morning works from paper that has been walked through twice, and a teammate can read exactly what will happen and in what order."
   },
   {
    "id": "LW-SD-02",
@@ -19806,7 +20379,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Create the images for the product-is-finished announcement from the actual final product, showing nothing that was cut, and check them as carefully as the product itself, so the announcement is honest.",
    "layman_analogy": "Like photographing the actual finished cake for the bakery window, not the sketch, and proofing the photos as carefully as the bake.",
-   "layman_needed": "Announcement images delivered to Alex by 5 Dec, rendered from the real frozen product, showing no cut features, carrying the 8 Dec date, and quality-checked before publication."
+   "layman_needed": "Announcement images delivered to Alex by 5 Dec, rendered from the real frozen product, showing no cut features, carrying the 8 Dec date, and quality-checked before publication.",
+   "layman_output": "A set of announcement images for the 'MVP done' post sits with Alex by 5 Dec, rendered from the real frozen product - no cut features shown, the 8 Dec date carried, and quality-checked like the product itself before publication. A teammate can put the graphics next to the live app and see they match, so nothing published promises a screen that does not exist."
   },
   {
    "id": "LW-SD-03",
@@ -19837,7 +20411,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The night before launch, check the Product Hunt page preview line by line: images, tagline, links, prices, date, because once it goes public at 08:01 it cannot be fixed.",
    "layman_analogy": "Like proofreading the wedding invitations one last time the night before they are posted, because misprints cannot be recalled.",
-   "layman_needed": "A logged check on 7 Dec of the Product Hunt page preview, images, tagline, links, prices and date, confirmed with the person posting it and Filza's final wording check."
+   "layman_needed": "A logged check on 7 Dec of the Product Hunt page preview, images, tagline, links, prices and date, confirmed with the person posting it and Filza's final wording check.",
+   "layman_output": "A logged check from the night of 7 Dec confirms the Product Hunt page preview is right: images, tagline, links, prices and the launch date all verified, confirmed with the person posting it, and Filza's final wording check done. When the listing goes public at 08:01 it cannot be fixed live - so this record is the proof someone looked at every element the evening before."
   },
   {
    "id": "LW-SD-04",
@@ -19870,7 +20445,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Have the bug-sorting process ready for launch day with the same rules that got us here, and book the lessons-learned session and next-roadmap meeting for the week of 14 Dec.",
    "layman_analogy": "Like laying out the first-aid station before the marathon and booking the debrief for the week after.",
-   "layman_needed": "The bug-sorting board live for launch day with the existing rules unchanged and the support seat staffed, plus calendar invites sent for the lessons-learned session and the next-roadmap meeting in the week of 14 Dec."
+   "layman_needed": "The bug-sorting board live for launch day with the existing rules unchanged and the support seat staffed, plus calendar invites sent for the lessons-learned session and the next-roadmap meeting in the week of 14 Dec.",
+   "layman_output": "The bug-sorting board is live for launch day with the same blocker rules that shipped the product, the support seat is staffed per the rota, and calendar invites are sent for the lessons-learned session and the Roadmap V2 meeting in the week of 14 Dec. A teammate can see day-one problems will be judged by familiar criteria, and that the look-back and the next plan already have dates."
   },
   {
    "id": "LW-AX-01",
@@ -19903,7 +20479,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "A 15-minute daily check-in with Alex through the final fortnight: rehearsal results, pilot status, spending, Facebook approval. Any new feature ideas get parked, so the quiet week before launch stays quiet.",
    "layman_analogy": "Like the site foreman's daily ten-minute walk of the building in the final fortnight: snags only, no new extensions started.",
-   "layman_needed": "A daily note for every check-in from 30 Nov to 14 Dec, each listing the red items and their owners, with proof that no new feature work entered the quiet week."
+   "layman_needed": "A daily note for every check-in from 30 Nov to 14 Dec, each listing the red items and their owners, with proof that no new feature work entered the quiet week.",
+   "layman_output": "A short daily note exists for every 15-minute exec check from 23 Nov through launch: the red items on the scorecard, who owns each, the rehearsal and smoke outcomes, pilot status, spend and the Facebook position. The notes also show that no new feature work entered the quiet week - anything that appeared went to the cut list. Anyone can flip through them and see the buffer stayed a buffer."
   },
   {
    "id": "LW-AX-02",
@@ -19935,7 +20512,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Before launch data arrives, write down the exact numbers that would justify raising our next big funding round, and the date we will read them, so that decision is made on cold evidence, not launch-day excitement.",
    "layman_analogy": "Like writing your house-offer ceiling on paper before the auction, so the bidding excitement cannot rewrite it.",
-   "layman_needed": "A one-page sheet filed before 8 Dec stating the exact numbers (sign-ups, paying pilots retained, conversion, cost per customer, false-alarm rate) that would justify the next funding round, and the fixed date the decision is read."
+   "layman_needed": "A one-page sheet filed before 8 Dec stating the exact numbers (sign-ups, paying pilots retained, conversion, cost per customer, false-alarm rate) that would justify the next funding round, and the fixed date the decision is read.",
+   "layman_output": "A one-page sheet, filed before 8 Dec, states in plain numbers what would justify raising the next funding round: sign-up rate in the first batch, paying pilots retained, waitlist conversion, cost per customer and the false-alarm rate - plus the fixed date the decision is read, after the day-3 cost figures. Anyone can check the fundraising call is made against numbers written down before the excitement."
   },
   {
    "id": "LW-AX-03",
@@ -19969,7 +20547,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "On Sunday 7 Dec, confirm everything with the person posting us on Product Hunt: the exact time, the final images and words, so our one shot at that audience goes out right.",
    "layman_analogy": "Like the final phone call with the auctioneer the evening before: lot confirmed, photos final, hammer time agreed.",
-   "layman_needed": "Written confirmation from the Product Hunt poster on 7 Dec of the 08:01 launch time and the final images and wording, all screenshots from demo data, with Filza's wording check confirmed done."
+   "layman_needed": "Written confirmation from the Product Hunt poster on 7 Dec of the 08:01 launch time and the final images and wording, all screenshots from demo data, with Filza's wording check confirmed done.",
+   "layman_output": "A written confirmation from the Product Hunt poster, dated Sun 7 Dec, pins down the 08:01 UK launch time, the final images and wording, and that every screenshot comes from demo data rather than any pilot's real pages, with Filza's wording check confirmed done. The one-shot listing is settled the night before, so nobody is negotiating assets with the hunter on launch morning."
   },
   {
    "id": "LW-AX-04",
@@ -20007,7 +20586,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "On launch day Alex runs the locked schedule: switch-on confirmed working, announcement at 08:01, first 100 pages let in, and Alex personally answers Product Hunt questions using the prepared answer sheet.",
    "layman_analogy": "Like the ringmaster running opening night from the locked programme: doors open on the minute, and the ringmaster personally fields the audience's questions.",
-   "layman_needed": "On 8 Dec: the 08:00 switch-on and live checks confirmed before the 08:01 Product Hunt post, the waitlist queue email sent, the first 100 pages let in, and Alex answering Product Hunt questions all day from the prepared answer sheet."
+   "layman_needed": "On 8 Dec: the 08:00 switch-on and live checks confirmed before the 08:01 Product Hunt post, the waitlist queue email sent, the first 100 pages let in, and Alex answering Product Hunt questions all day from the prepared answer sheet.",
+   "layman_output": "On 8 Dec the run-of-show is executed as written: Alex confirms the 08:00 switch-on and live checks before the 08:01 Product Hunt post, the waitlist queue email goes out, the first 100 pages are let in, and Alex spends the day answering Product Hunt questions from the prepared answer sheet. Nothing is announced that has not just been watched working, and the day contains no new decisions."
   },
   {
    "id": "LW-AX-05",
@@ -20041,7 +20621,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Alex sends the we-are-live note to investors on launch day with real day-one numbers, so the people backing us hear it from us first.",
    "layman_analogy": "Like phoning the people who lent you the deposit on completion day, with the keys in hand and the actual figures, before they read it elsewhere.",
-   "layman_needed": "An investor note sent by Alex on 8 Dec after the announcement, stating what launched, pilots live, day-one baseline numbers and the Facebook route taken, every figure matching the war-room board and decision memo."
+   "layman_needed": "An investor note sent by Alex on 8 Dec after the announcement, stating what launched, pilots live, day-one baseline numbers and the Facebook route taken, every figure matching the war-room board and decision memo.",
+   "layman_output": "An investor note from Alex lands on 8 Dec, after the checks and the announcement: what launched, which pilots are live, the day-one baseline numbers, the Facebook route actually taken, and the funding-trigger sheet with its read date. Every figure matches the war-room board and the decision memo, so investors receive the same facts the team recorded - nothing polished, nothing invented."
   },
   {
    "id": "LW-JL-01",
@@ -20075,7 +20656,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Track each of the five pilot invoices from sent to paid, with a polite chase after a week and escalation after two, because sending invoices is the launch target but getting them paid is the business.",
    "layman_analogy": "Like the shopkeeper's ledger of who has paid, with a friendly reminder after a week and the owner stepping in after two.",
-   "layman_needed": "A tracking sheet showing each of the five invoices from sent to paid, 7-day chases via Lewis and 14-day escalation to Alex where needed, payments reconciled to the bank, and a one-line status read at every morning check-in."
+   "layman_needed": "A tracking sheet showing each of the five invoices from sent to paid, 7-day chases via Lewis and 14-day escalation to Alex where needed, payments reconciled to the bank, and a one-line status read at every morning check-in.",
+   "layman_output": "A tracking sheet follows each of the five invoices from sent to paid: received, due date, payment status, a polite 7-day chase through Lewis and a 14-day escalation to Alex where needed, with payments reconciled against the bank when they land. A one-line status is read at every 09:00 war-room check-in, so anyone can see at a glance whether the launch's real money has actually arrived."
   },
   {
    "id": "LW-JL-02",
@@ -20112,7 +20694,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Staff the support inbox properly for launch fortnight: a named person on every shift, ready-made answers to the top questions loaded, and a way for stuck users to book 10 minutes with a human.",
    "layman_analogy": "Like fully staffing the shop's help desk for opening fortnight: a name on every shift, answer cards for the common questions, and a bell to summon the manager.",
-   "layman_needed": "Every launch-fortnight shift with a named responder, the ready-made answers loaded including the top explainers, escalation routes set, the inbox exercised in the 2 Dec rehearsal, and day-one response times measured against the standard."
+   "layman_needed": "Every launch-fortnight shift with a named responder, the ready-made answers loaded including the top explainers, escalation routes set, the inbox exercised in the 2 Dec rehearsal, and day-one response times measured against the standard.",
+   "layman_output": "The support inbox is staffed for launch fortnight: a named responder on every shift, the top ready-made replies loaded - including the 'why did Art-E say that' and data-sharing explainers - escalation routes to the on-call engineer and the pilot hotline, and the 'stuck? book 10 minutes' offer for batch one. It was exercised in the 2 Dec rehearsal and day-one reply times are measured against the standard."
   },
   {
    "id": "LW-JL-03",
@@ -20147,7 +20730,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Jill reads the live spending against our cap every morning of launch week and posts the number to the team, so a cost surprise is caught in a day, not on the monthly bill.",
    "layman_analogy": "Like reading the electricity meter every morning of the party week and shouting before the credit runs out, not after the lights die.",
-   "layman_needed": "The daily burn figure posted at every 09:00 check-in from 30 Nov, the automatic cost cut-offs confirmed armed before 08:00 on 8 Dec, a day-1 spending snapshot filed and the day-3 one diaried, each compared with the cap."
+   "layman_needed": "The daily burn figure posted at every 09:00 check-in from 30 Nov, the automatic cost cut-offs confirmed armed before 08:00 on 8 Dec, a day-1 spending snapshot filed and the day-3 one diaried, each compared with the cap.",
+   "layman_output": "The daily burn figure is posted at every 09:00 check-in from 30 Nov against the signed cap, and before 08:00 on 8 Dec Jill confirms with Muteeb that the automatic cost cut-offs are armed under real traffic. A day-1 spending snapshot - spend by line and per activated page - is filed on 8 Dec with the day-3 one diaried, each compared with the cost model so any line crossing 80% triggers the pre-agreed action."
   },
   {
    "id": "LW-LW-01",
@@ -20182,7 +20766,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis staffs the pilot hotline in the final rehearsal and personally confirms all five pilots can log in on the real product before doors open.",
    "layman_analogy": "Like the maitre d' phoning each VIP the day before opening to confirm their table, then telling the kitchen 'all five are coming' before doors open.",
-   "layman_needed": "A dated confirmation in the war room, before the 08:00 switch-on, that all five pilots can log in on the live system with their pages connected and fresh, plus Lewis staffing the hotline seat in the 2 Dec rehearsal."
+   "layman_needed": "A dated confirmation in the war room, before the 08:00 switch-on, that all five pilots can log in on the live system with their pages connected and fresh, plus Lewis staffing the hotline seat in the 2 Dec rehearsal.",
+   "layman_output": "A dated confirmation sits in the war room before the 08:00 switch-on: all five pilots can log in on the live system, their pages are connected and showing fresh data, and each knows the launch-day contact channel - checked before the 5 Dec smoke and again on 7 Dec. Lewis also staffed the hotline seat in the 2 Dec rehearsal, so nothing is announced until the five people who matter are confirmed working."
   },
   {
    "id": "LW-LW-02",
@@ -20217,7 +20802,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Lewis keeps a personal line open with every pilot all launch week and flags anyone drifting unhappy to the team daily, so no pilot quietly gives up on us.",
    "layman_analogy": "Like a shepherd counting the flock every evening and flagging any sheep drifting towards the fence before it is gone.",
-   "layman_needed": "One green/amber/red line per pilot, with reasons, in every daily 09:00 war-room check-in from 30 Nov to 14 Dec, with any 'wrong data' report raised as an emergency immediately rather than saved up."
+   "layman_needed": "One green/amber/red line per pilot, with reasons, in every daily 09:00 war-room check-in from 30 Nov to 14 Dec, with any 'wrong data' report raised as an emergency immediately rather than saved up.",
+   "layman_output": "Every 09:00 war-room check-in from 30 Nov to 14 Dec carries one green/amber/red line per pilot with the reason - wrong data, an unanswered alert, silence, a pricing wobble - fed from Lewis's daily personal contact with each. Any 'wrong data' report is raised as an emergency the moment it lands, not saved up, so the whole team can see churn risk on the five paying customers every single morning."
   },
   {
    "id": "LW-FZ-01",
@@ -20251,7 +20837,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Name who is legally responsible if we suspect a data leak during launch week, covered every hour, because the law gives us 72 hours to report one and the clock starts even if it happens at 2am.",
    "layman_analogy": "Like naming the designated first-aider for every hour of the festival, because the 72-hour clock starts the moment someone is hurt, even at 2am.",
-   "layman_needed": "The launch-week rota naming who assesses a suspected data leak and decides on reporting to the regulator within 72 hours, cover for every hour, the escalation route from 'wrong data' incidents, and the templates linked from the war-room board."
+   "layman_needed": "The launch-week rota naming who assesses a suspected data leak and decides on reporting to the regulator within 72 hours, cover for every hour, the escalation route from 'wrong data' incidents, and the templates linked from the war-room board.",
+   "layman_output": "The launch-week rota and the war-room board both name the legal seat: who assesses a suspected data leak, who decides on reporting to the regulator within 72 hours, and cover for every hour of launch week - with the escalation route from a 'pilot sees wrong data' emergency to that person, and the prepared templates linked and circulated. At 2am anyone on duty knows exactly who owns the breach clock."
   },
   {
    "id": "LW-FZ-02",
@@ -20284,7 +20871,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Before any announcement, Filza checks the live site herself: every legal link works, AI features are clearly labelled, the cookie banner behaves, unsubscribe works, and gives the war room a written pass.",
    "layman_analogy": "Like the health inspector doing a final walk of the restaurant before the doors open: every certificate on the wall, every label correct.",
-   "layman_needed": "A dated written pass posted to the war room before 08:00 on 8 Dec, from Filza's own check of the live site: legal links, AI labels, cookie banner, consent screen wording and unsubscribe all correct."
+   "layman_needed": "A dated written pass posted to the war room before 08:00 on 8 Dec, from Filza's own check of the live site: legal links, AI labels, cookie banner, consent screen wording and unsubscribe all correct.",
+   "layman_output": "A dated written pass from Filza's own walk of the live site is posted to the war room before 08:00 on 8 Dec: every footer and Settings legal link opening the final versions, AI labels present on the gauge, alerts, health, Art-E and partner suggestions, the cookie banner behaving, the consent screen showing the signed wording, and unsubscribe working on the launch email. The legal seat smokes production like everyone else."
   },
   {
    "id": "LW-FZ-03",
@@ -20317,7 +20905,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "The night before launch, Filza reads every public word (Product Hunt page, emails, press lines) against our rules on what we may claim, and confirms images use demo data, never real customer data.",
    "layman_analogy": "Like the editor reading every word of the press pack against the style guide the night before, and checking the photos are stock, not the client's family album.",
-   "layman_needed": "A dated sign-off from Filza to Alex, the night before launch, covering the exact Product Hunt listing, waitlist email and press lines: claims within the rules, images from demo data only, and testimonials with permission."
+   "layman_needed": "A dated sign-off from Filza to Alex, the night before launch, covering the exact Product Hunt listing, waitlist email and press lines: claims within the rules, images from demo data only, and testimonials with permission.",
+   "layman_output": "A dated sign-off from Filza to Alex exists the night before launch, covering the exact Product Hunt listing, the waitlist queue email, the 'MVP done' post and any press lines: every claim within the agreed rules and pricing terms, every gallery image a demo-data render rather than any pilot's real page, and every testimonial carrying permission. What goes public at 08:01 has been read, word by word, in advance."
   },
   {
    "id": "LW-FZ-04",
@@ -20349,7 +20938,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Filza keeps one log of every legal question for 30 days after launch - data requests, complaints, notices - so nothing legal slips through the cracks in the busiest month.",
    "layman_analogy": "Like the front desk's single incident book for the first month: every complaint and request written in one place with a name and a deadline.",
-   "layman_needed": "One log, open before 8 Dec and linked from the war-room board, with columns for every legal matter (data requests, deletions, complaints, notices) plus date, owner, deadline and outcome, reviewed at the daily check-in for 30 days."
+   "layman_needed": "One log, open before 8 Dec and linked from the war-room board, with columns for every legal matter (data requests, deletions, complaints, notices) plus date, owner, deadline and outcome, reviewed at the daily check-in for 30 days.",
+   "layman_output": "A single legal-issue log, owned by Filza, is open before 8 Dec and linked from the war-room board, running to 7 Jan. Every data request, deletion, consent complaint, takedown, Facebook notice, pricing question or AI-output complaint gets a row with date, owner, deadline and outcome, reviewed at the daily check-in. Launch-month legal matters are visible in one place instead of surfacing as January surprises."
   },
   {
    "id": "N5-MT-18",
@@ -20379,7 +20969,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We add phone-style pop-up notifications alongside email for urgent alerts, so a warning reaches the customer in seconds even if they are not watching their inbox — keeping our 15-minute promise.",
    "layman_analogy": "Like adding a doorbell alongside the letterbox: urgent news now rings the house instantly instead of waiting to be read with the post.",
-   "layman_needed": "A working push-notification service where a test alert reaches a subscribed browser within seconds, sent by the same worker that sends the emails, with night-time quiet hours suppressed exactly as email is."
+   "layman_needed": "A working push-notification service where a test alert reaches a subscribed browser within seconds, sent by the same worker that sends the emails, with night-time quiet hours suppressed exactly as email is.",
+   "layman_output": "A working push-notification service runs alongside the email sender: the same worker that emails an alert can also push it straight to a subscribed browser within seconds, with subscribe and unsubscribe endpoints live and the signing keys held safely outside the code. Night-time quiet hours suppress pushes exactly as they do email, so a teammate can trigger a test alert and watch it pop up on a phone almost instantly."
   },
   {
    "id": "N5-AS-19",
@@ -20408,7 +20999,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Add proper phone and browser notifications: a polite ask for permission, an on-off switch in settings, and honest handling of Apple's limits on iPhone, so urgent alerts reach people even when the app is closed.",
    "layman_analogy": "Like a shop assistant politely asking 'shall we text you when your order's ready?' at the right moment, with an easy opt-out at the counter.",
-   "layman_needed": "A working screen where a pilot can switch push notifications on in Settings, receives a test notification, sees the permission ask only after their first alert, and iPhone users get the honest add-to-home-screen note."
+   "layman_needed": "A working screen where a pilot can switch push notifications on in Settings, receives a test notification, sees the permission ask only after their first alert, and iPhone users get the honest add-to-home-screen note.",
+   "layman_output": "A pilot can now switch push notifications on from a toggle in Settings next to their alert rules, and receive a test notification to prove it works. The permission ask appears only after they have seen their first alert - never on first load - and iPhone users get the honest note that push needs the app added to their home screen first. A teammate can enable it on their own phone and feel an alert arrive."
   },
   {
    "id": "N5-SD-13",
@@ -20438,7 +21030,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "We write two new automatic robot tests that run every night: one walks the whole partner-suggestions journey, the other checks the health score and dashboard numbers match our records — so a break there is caught overnight, not by a pilot.",
    "layman_analogy": "Like adding two more night watchmen rounds so the partner-suggestions corridor and the scoreboard room get checked every night too.",
-   "layman_needed": "Two automatic tests running green in the nightly suite: one walking the partner-suggestions journey end to end, the other confirming the health score and dashboard numbers match the underlying records for the test account."
+   "layman_needed": "Two automatic tests running green in the nightly suite: one walking the partner-suggestions journey end to end, the other confirming the health score and dashboard numbers match the underlying records for the test account.",
+   "layman_output": "Two new automatic tests run green in the nightly suite: one walks the partner-suggestions journey end to end - opting in through to seeing matches with the why-this-match note - and the other confirms the health score, Pages view and four dashboard tiles show exactly the numbers held in the data store for the test account. Two previously untested customer journeys now break the build if they break."
   },
   {
    "id": "N6-SD-10",
@@ -20467,7 +21060,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Re-run the accessibility checks on the issues we fixed (so people with disabilities can use the product properly), because a fix nobody re-tested is just a hope.",
    "layman_analogy": "Like the electrician coming back after the rewiring to test every socket that failed the first inspection.",
-   "layman_needed": "Every previously failing accessibility item re-tested against the shipped fixes, each with a pass or fail note, and any remaining failures filed as blockers before the full customer walkthrough."
+   "layman_needed": "Every previously failing accessibility item re-tested against the shipped fixes, each with a pass or fail note, and any remaining failures filed as blockers before the full customer walkthrough.",
+   "layman_output": "Every accessibility item that failed the earlier audit has been re-tested against the shipped fixes, each with a written pass or fail note, and anything still failing is filed as a blocker before the full customer walkthrough. A teammate can open the re-check record and see, item by item, that the fixes were actually verified rather than assumed - screen readers, keyboards and contrast included."
   },
   {
    "id": "N4-MT-17",
@@ -20496,7 +21090,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "Cross-check every number in the morning briefing against our main data store, so the summary a customer reads over coffee always matches the truth underneath.",
    "layman_analogy": "Like checking the morning paper's football scores against the referee's official record before it goes to print.",
-   "layman_needed": "A written check proving the morning briefing's numbers exactly match the main data store for one pilot page, or, if the briefing card is cut, a written note recording the descope."
+   "layman_needed": "A written check proving the morning briefing's numbers exactly match the main data store for one pilot page, or, if the briefing card is cut, a written note recording the descope.",
+   "layman_output": "A written check proves the morning briefing's numbers exactly match the main data store for one pilot page - the same discipline as the analytics reconcile - or, if the briefing card is cut from launch, a written note records the descope and the gate clause is amended. Either way, a teammate can point to a document showing the briefing promise was proven or formally withdrawn, never left ambiguous."
   },
   {
    "id": "P0-FZ-01",
@@ -20519,7 +21114,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We put a proper privacy page on the public website back in February, linked from every page, so anyone checking us out could see how we handle their data from day one.",
    "layman_analogy": "Like hanging the shop's returns-and-refunds policy by the door on the day it opened, so customers could read the rules before buying.",
-   "layman_needed": "A live privacy page was published on the public website in February, linked from every page's footer, with the wording kept in line with the agreed public-copy rules since July."
+   "layman_needed": "A live privacy page was published on the public website in February, linked from every page's footer, with the wording kept in line with the agreed public-copy rules since July.",
+   "layman_output": "A privacy page is live on the public website, shipped in February and linked from every page's footer, so any visitor or pilot can read in plain terms what data ArtemisAI collects and how it is used. Its wording has followed the agreed public-copy rules since the July landing rebuild, and anyone can open the site right now and click through to check it."
   },
   {
    "id": "P0-AS-01",
@@ -20542,7 +21138,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We built and launched the public ArtemisAI website in February: the story, the team, a working contact form and a private admin view, giving the company a front door before the product existed.",
    "layman_analogy": "Like building the shopfront and hanging the sign before the workshop out back was finished, so customers had a door to knock on.",
-   "layman_needed": "A live public website was launched in February: the company story, team page, privacy link, a working contact form, visitor tracking and a private admin login."
+   "layman_needed": "A live public website was launched in February: the company story, team page, privacy link, a working contact form, visitor tracking and a private admin login.",
+   "layman_output": "The public ArtemisAI website is live on the internet: the company story, a team page, the privacy link, a working contact form that reaches the team, visitor tracking and a private admin login. First published in February and refined into March, it is the front door where a curious page owner can read about the product and get in touch - anyone can visit it today and try the form."
   },
   {
    "id": "P0-FH-01",
@@ -20565,7 +21162,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We built the first version of the reading brain: five programs that look at a Facebook post or comment and work out its mood, emotion, topic, purpose and nastiness, the raw material for every warning and insight we sell.",
    "layman_analogy": "Like training five tasters who each judge one thing about a dish: how it smells, how spicy, what cuisine, why it was cooked, and whether it is off.",
-   "layman_needed": "A working first version of five programs was built, each reading a post or comment and judging its mood, emotion, topic, purpose or nastiness, the raw material for every warning the product gives."
+   "layman_needed": "A working first version of five programs was built, each reading a post or comment and judging its mood, emotion, topic, purpose or nastiness, the raw material for every warning the product gives.",
+   "layman_output": "Five working programs exist, each reading a Facebook post or comment and judging one thing about it: its mood, its emotion, its topic, its purpose, or whether it is nasty. Together they are the raw material behind every flop warning and comment-storm alert the product gives. A teammate can feed any post through them and see five plain judgements come back."
   },
   {
    "id": "P0-FH-02",
@@ -20588,7 +21186,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We tested our own reading brain against two of the world's best AI models on 97 real posts and wrote down exactly where each one goes wrong, so we know when to trust ours and when to pay for theirs.",
    "layman_analogy": "Like entering your home-brew against two famous labels in a blind tasting of 97 bottles and noting exactly where each falls short.",
-   "layman_needed": "A written benchmark was produced comparing our own reading models against two top commercial AI models on 97 real posts, with each model's failure patterns documented so we know when to trust which."
+   "layman_needed": "A written benchmark was produced comparing our own reading models against two top commercial AI models on 97 real posts, with each model's failure patterns documented so we know when to trust which.",
+   "layman_output": "A written benchmark document exists comparing our own reading models against two top commercial AI models on 97 real posts, with each model's failure patterns documented - where ours slips, where theirs do. It tells the team when to trust which model, and anyone can open it to see exactly how the in-house models stack up against the expensive alternatives, judged on the same exam."
   },
   {
    "id": "P0-FH-03",
@@ -20611,7 +21210,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We hand-checked and labelled 2,545 real posts across five kinds of judgement, creating the teaching material that makes our AI smarter and cheaper to run than renting a big model for everything.",
    "layman_analogy": "Like a teacher marking 2,545 past exam papers by hand to create the answer sheets a new student learns from.",
-   "layman_needed": "A hand-checked training set of 2,545 real posts was produced, labelled across five kinds of judgement with confidence weighting, ready to teach our own models."
+   "layman_needed": "A hand-checked training set of 2,545 real posts was produced, labelled across five kinds of judgement with confidence weighting, ready to teach our own models.",
+   "layman_output": "A hand-checked training set of 2,545 real posts sits in the model team's store, each post labelled across five kinds of judgement with a confidence weight on every label. It is the teaching material our own models learn from, and a teammate can open it and spot-check any row: a real post, the human answers, and how sure the labellers were."
   },
   {
    "id": "P0-MT-01",
@@ -20634,7 +21234,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We hand-labelled 97 posts with the correct answers to use as the exam paper for testing any AI model we consider, so quality arguments are settled by a score, not opinions.",
    "layman_analogy": "Like writing the official answer key for the exam, so every candidate is marked against the same correct answers.",
-   "layman_needed": "A hand-labelled set of 97 posts with agreed correct answers was produced, used ever since as the standard exam for judging any AI model we consider."
+   "layman_needed": "A hand-labelled set of 97 posts with agreed correct answers was produced, used ever since as the standard exam for judging any AI model we consider.",
+   "layman_output": "A hand-labelled set of 97 posts with agreed correct answers is held by the model team and used ever since as the standard exam: any AI model the team considers is scored against it before being trusted. A teammate can open the set, read any post and its agreed answer, and see the fixed yardstick every model comparison in the company is measured with."
   },
   {
    "id": "P0-AS-02",
@@ -20657,7 +21258,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We designed and built two rounds of working product mockups, from early dashboard sketches to a polished multi-screen demo with 30+ charts and the Art-E assistant, letting pilots and investors see the product before it was built.",
    "layman_analogy": "Like building a full show-home before the estate exists, so buyers could walk the rooms and picture living there.",
-   "layman_needed": "Two rounds of working product mockups were built and shown, from early dashboard sketches to a polished multi-screen demo with 30+ charts and the Art-E assistant, used with pilots and investors."
+   "layman_needed": "Two rounds of working product mockups were built and shown, from early dashboard sketches to a polished multi-screen demo with 30+ charts and the Art-E assistant, used with pilots and investors.",
+   "layman_output": "Two rounds of clickable product mockups exist and have been shown to pilots and investors: from February's early dashboard sketches through to a polished multi-screen demo with 30-plus charts, the Art-E assistant, a mobile-first layout and a light/dark toggle. Anyone can open the demo in a browser and click through what the product will feel like before the real one is built."
   },
   {
    "id": "P0-AS-03",
@@ -20680,7 +21282,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We built the team's shared sprint tracker: everyone sees the same live plan, filtered by person, with plain-English checklists and its own automatic test, so the whole launch effort runs from one honest board.",
    "layman_analogy": "Like putting one big whiteboard in the workshop that every tradesman reads and updates, instead of six private notebooks.",
-   "layman_needed": "A shared live sprint tracker was built and adopted: one board everyone sees, per-person filters, plain-English checklists and its own automatic test, running the whole launch effort."
+   "layman_needed": "A shared live sprint tracker was built and adopted: one board everyone sees, per-person filters, plain-English checklists and its own automatic test, running the whole launch effort.",
+   "layman_output": "A shared live sprint tracker runs the whole launch effort: one board every team member sees in the same state, filter chips per person, a performance tab, plain-English checklists on each ticket and its own automatic test that guards against breakage. A teammate can open it right now, filter to their own name, and see exactly what they owe and what everyone else is doing."
   },
   {
    "id": "P0-FH-04",
@@ -20705,7 +21308,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We stood up the company's data store and filled it with two full years of Facebook page history by early March, the foundation every warning, insight and suggestion is calculated from.",
    "layman_analogy": "Like digging the reservoir and piping in two years of rainfall records before the waterworks opened.",
-   "layman_needed": "A recovered record shows the company data store was stood up by early March with automated feeds and two full years of Facebook page history loaded, the foundation every warning and insight is calculated from."
+   "layman_needed": "A recovered record shows the company data store was stood up by early March with automated feeds and two full years of Facebook page history loaded, the foundation every warning and insight is calculated from.",
+   "layman_output": "The company data store is live: a recovered record shows it was stood up by early March with automated daily feeds and two full years of Facebook page history loaded. It is the foundation every warning, best-time suggestion and dashboard figure is calculated from, and an analyst can query any connected page's history back two years and get real numbers out today."
   },
   {
    "id": "P0-FH-05",
@@ -20728,7 +21332,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We built five AI readers that understand what a Facebook post is about, and checked them against 97 hand-marked posts so we know they judge posts the way a person would.",
    "layman_analogy": "Like hiring five readers for the sorting office and testing each against 97 letters a postmaster had already sorted correctly.",
-   "layman_needed": "Five working AI models for understanding posts were shipped and scored against the 97-post answer key, with the answer key's provenance later banked in the handover pack."
+   "layman_needed": "Five working AI models for understanding posts were shipped and scored against the 97-post answer key, with the answer key's provenance later banked in the handover pack.",
+   "layman_output": "Five working AI models for understanding posts are shipped and scored against the 97-post answer key, with the answer key's provenance later written up and banked in the handover pack. The models run as the post-reading layer of the product, and a teammate can trace any model's score back to the exam it sat and where that exam came from."
   },
   {
    "id": "P0-FH-06",
@@ -20751,7 +21356,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We taught a smaller, cheaper AI to copy our best one, and built a referee that compares the models' answers and only trusts the confident ones, so we get accuracy without the big-model bill.",
    "layman_analogy": "Like teaching an apprentice to copy the master chef, with a referee tasting both plates and only serving the dishes they agree on.",
-   "layman_needed": "A cheaper distilled model was trained to match the best one, plus a routing referee that compares model answers and only trusts confident ones, and the first model dashboard, cutting cost without losing accuracy."
+   "layman_needed": "A cheaper distilled model was trained to match the best one, plus a routing referee that compares model answers and only trusts confident ones, and the first model dashboard, cutting cost without losing accuracy.",
+   "layman_output": "A cheaper distilled model exists that was trained to match the best model's answers at a fraction of the cost, alongside a routing referee that compares answers across engines and only passes on the confident ones, and the first model dashboard showing how they behave. The team can serve accurate judgements more cheaply, and anyone can open the dashboard and watch the models' agreement and confidence."
   },
   {
    "id": "P0-FH-07",
@@ -20776,7 +21382,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We upgraded how we read comments: one smarter model now spots things like anger or toxicity in comments, replacing several older ones, so comment-storm warnings rest on better judgement.",
    "layman_analogy": "Like replacing several part-time door staff with one sharper-eyed head of security who spots trouble brewing in the crowd.",
-   "layman_needed": "A single smarter comment-reading model was shipped, replacing several older ones, powering comment-storm warnings; one known weak spot (catching some toxic comments) was measured and queued for a fix."
+   "layman_needed": "A single smarter comment-reading model was shipped, replacing several older ones, powering comment-storm warnings; one known weak spot (catching some toxic comments) was measured and queued for a fix.",
+   "layman_output": "A single smarter comment-reading model is live, replacing several older separate ones, and powers the comment-storm warnings pilots receive. Its gold comment set is labelled, and one known weak spot - it catches roughly three toxic comments in four - is honestly measured, written down and queued for a fix, so a teammate can see both what the model does well and where it is known to miss."
   },
   {
    "id": "P0-AS-04",
@@ -20799,7 +21406,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We built a password-protected internal control room linking every team page, with a consistent look throughout, so the team runs the whole project from one place.",
    "layman_analogy": "Like building a locked staff-only back office with every department's door off one corridor, all decorated to match.",
-   "layman_needed": "A password-protected internal control room was built linking every team page, with one consistent navigation and look applied across all admin pages and drag-to-reorder cards."
+   "layman_needed": "A password-protected internal control room was built linking every team page, with one consistent navigation and look applied across all admin pages and drag-to-reorder cards.",
+   "layman_output": "A password-protected internal control room is live, linking every team page from one place, with a consistent navigation bar and footer applied across all admin pages and cards the team can drag into their preferred order. Any team member can log in, reach every internal tool from one screen, and arrange the panel to suit how they work."
   },
   {
    "id": "P0-AS-05",
@@ -20822,7 +21430,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We published a master plan of all 218 planned features, each marked launch-now or later with the reasoning and effort, so anyone can see what we are building and why.",
    "layman_analogy": "Like publishing the full architect's plan for the whole estate: every room, which phase builds it, and why.",
-   "layman_needed": "A published master plan of 218 planned features across 20 categories, each marked launch-now or later with its reasoning and build effort, cross-linked to the tracker."
+   "layman_needed": "A published master plan of 218 planned features across 20 categories, each marked launch-now or later with its reasoning and build effort, cross-linked to the tracker.",
+   "layman_output": "A published Master Plan page lists all 218 planned features across 20 categories, each marked launch-now, fast-follow or later, with its reasoning, estimated build-days and a click-through to the matching tracker ticket. Anyone - teammate or investor - can open it and see the whole product ambition, why each piece is sequenced where it is, and how planning connects to the day-to-day work."
   },
   {
    "id": "P0-AS-06",
@@ -20845,7 +21454,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We updated the countdown and launch-planning pages to the 28 November launch date, so the whole team works to the same, honest timeline.",
    "layman_analogy": "Like resetting every clock and calendar in the office to the real wedding date, so nobody plans to the old one.",
-   "layman_needed": "The countdown page and launch-planning pages were updated to the 28 November launch date, with the phases and scope brought in line with the master plan."
+   "layman_needed": "The countdown page and launch-planning pages were updated to the 28 November launch date, with the phases and scope brought in line with the master plan.",
+   "layman_output": "The live countdown page and the Launch Command planning pages are aligned to the 28 November 2026 target: phases extended through the autumn hardening work and the November go-live, with the scope synced to the Master Plan. Anyone on the team can open either page and see the same date, the same phases and the same scope - one story about when and what launches."
   },
   {
    "id": "P0-FH-08",
@@ -20868,7 +21478,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We trained five specialist models that each judge one thing about a comment (using the post it replies to for context), so comment alerts read situations more accurately.",
    "layman_analogy": "Like five specialist referees each watching one rule of the match, with the run of play in view, not just the single tackle.",
-   "layman_needed": "Five trained-and-locked specialist models were produced, each judging one aspect of a comment while using the post it replies to for context, sharpening comment alerts."
+   "layman_needed": "Five trained-and-locked specialist models were produced, each judging one aspect of a comment while using the post it replies to for context, sharpening comment alerts.",
+   "layman_output": "Five trained-and-locked specialist models exist, each judging one aspect of a comment - and each reads the post the comment replies to, so context sharpens the call. They are the machinery behind more precise comment alerts, and a teammate can run any comment with its parent post through them and see five focused judgements come back."
   },
   {
    "id": "P0-FH-09",
@@ -20891,7 +21502,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We assembled a clean training set of over 31,000 hand-marked comments, recovering batches that had failed, so our comment models learn from plenty of good examples.",
    "layman_analogy": "Like salvaging spilled crates and repacking the warehouse into one clean, counted stock of 31,000 labelled parts.",
-   "layman_needed": "A recovered and deduplicated training set of 31,023 hand-marked comments was assembled, including batches that had previously failed, giving the comment models plenty of good examples."
+   "layman_needed": "A recovered and deduplicated training set of 31,023 hand-marked comments was assembled, including batches that had previously failed, giving the comment models plenty of good examples.",
+   "layman_output": "A cleaned training set of 31,023 hand-marked comments sits in the model team's store, assembled by recovering previously failed labelling batches and removing duplicates. It gives the comment models a deep supply of good examples to learn from, and a teammate can open it and spot-check any row: a real comment and the human judgement on it."
   },
   {
    "id": "P0-FH-10",
@@ -20916,7 +21528,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We wrote one shared marking guide so the AI, the models and human checkers all judge comments by the same standards, so results are consistent no matter who marks them.",
    "layman_analogy": "Like giving every exam marker the same marking scheme, so a script gets the same grade whoever picks it up.",
-   "layman_needed": "One shared marking guide was written after comparing AI, model and human judgements three ways, so all labellers judge comments by the same standards."
+   "layman_needed": "One shared marking guide was written after comparing AI, model and human judgements three ways, so all labellers judge comments by the same standards.",
+   "layman_output": "One shared marking guide exists for everyone who labels comments, written after comparing AI, model and human judgements three ways and settling the disagreements. Any new labeller - human or machine - now judges comments by the same written standards, and a teammate can open the guide and see exactly how a borderline comment should be scored and why."
   },
   {
    "id": "P0-AS-07",
@@ -20939,7 +21552,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We applied an approved reshuffle of the plan, pulling the page-discovery work earlier without cutting anything, and kept the 28 November launch date, all visible on a page that tracks plan changes.",
    "layman_analogy": "Like a wedding planner moving the venue visit earlier in the schedule without dropping a single item, and showing the family the big day is still on the same date.",
-   "layman_needed": "A live page recording the approved plan reshuffle: seven pieces of discovery work pulled forward, two sprints merged, nothing cut, and a calculator showing the 28 November launch date still holds."
+   "layman_needed": "A live page recording the approved plan reshuffle: seven pieces of discovery work pulled forward, two sprints merged, nothing cut, and a calculator showing the 28 November launch date still holds.",
+   "layman_output": "A live Plan Drift page on the admin site sets the threat assessment beside the plan and records the approved reshuffle: seven pieces of discovery work pulled forward, two sprints merged, nothing cut. A built-in calculator recomputes the launch date from the current sprint list, so anyone can open it and confirm for themselves that 28 November still holds."
   },
   {
    "id": "P0-AS-08",
@@ -20962,7 +21576,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We rebuilt the project trackers into three clear stages (must-have, soon-after, later), each with its own timeline, so nobody confuses launch work with nice-to-haves.",
    "layman_analogy": "Like sorting a house-move into three labelled piles - essentials for day one, unpack soon, and attic-for-later - so nobody wastes moving day on the fairy lights.",
-   "layman_needed": "Rebuilt trackers showing three clear stages (must-have, soon-after, later), each with its own timeline, aligned launch dates, no duplicated ticket numbers, and updated checklists."
+   "layman_needed": "Rebuilt trackers showing three clear stages (must-have, soon-after, later), each with its own timeline, aligned launch dates, no duplicated ticket numbers, and updated checklists.",
+   "layman_output": "The tracker on the team site now shows three separate stage sequences - must-have, soon-after and later - each with its own timeline ending at the aligned 28 November launch. Ticket numbers are deduplicated and the sprint checklists match the agreed execution plan, so a teammate can open any stage and see exactly what belongs where without cross-checking documents."
   },
   {
    "id": "P0-AS-09",
@@ -20985,7 +21600,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We put up a live scoreboard showing how accurate each of our AI models is over time, with results saved permanently, so we can prove quality is improving rather than guessing.",
    "layman_analogy": "Like a school posting each pupil's test scores on a hall noticeboard term after term, so improvement is a matter of record rather than a teacher's hunch.",
-   "layman_needed": "A live scoreboard page showing each AI model's accuracy over time, with charts and saved history that survives permanently, so quality claims can be checked rather than taken on trust."
+   "layman_needed": "A live scoreboard page showing each AI model's accuracy over time, with charts and saved history that survives permanently, so quality claims can be checked rather than taken on trust.",
+   "layman_output": "A live scoreboard page on the team site charts each AI model's accuracy over time, with separate views for posts and comments, flow diagrams and an OCR Images tab. Every reading is saved permanently to a cloud database with automatic versioning, so anyone can open the page, scroll back through history and verify a quality claim rather than taking it on trust."
   },
   {
    "id": "P0-FH-11",
@@ -21008,7 +21624,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We built a reader that pulls the text out of images in posts, using a fast engine first and a smarter one only when needed, with a guard against made-up words, so text in pictures counts too.",
    "layman_analogy": "Like a shop assistant who reads most labels at a glance but calls the manager over for smudged ones, and never guesses a price that isn't printed.",
-   "layman_needed": "A working reader that pulls text out of post images - a fast engine first, a smarter one for hard cases - with a guard that blocks invented words, so text in pictures feeds the analysis."
+   "layman_needed": "A working reader that pulls text out of post images - a fast engine first, a smarter one for hard cases - with a guard that blocks invented words, so text in pictures feeds the analysis.",
+   "layman_output": "A running reader in the pipeline that lifts the words out of post images: a fast engine handles easy pictures and a smarter one takes over on hard cases, with a guard that throws out invented words. Its output sits in the warehouse alongside each post, so the text printed on a photo or meme now feeds the analysis just like a caption does."
   },
   {
    "id": "P0-FH-12",
@@ -21031,7 +21648,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We trained a model that combines a post's picture and words to say what kind of content it is (one of five types), right 93% of the time, so advice can be tailored to content type.",
    "layman_analogy": "Like a librarian who looks at both a book's cover and its blurb before shelving it in one of five sections, and gets it right 93 times in a hundred.",
-   "layman_needed": "A trained model that reads a post's picture and words together and labels it as one of five content types, correct about 93% of the time, so advice can be tailored to each type."
+   "layman_needed": "A trained model that reads a post's picture and words together and labels it as one of five content types, correct about 93% of the time, so advice can be tailored to each type.",
+   "layman_output": "A trained model, live in the pipeline, that reads each post's picture and words together and files it under one of five content types, correct about 93 times in 100 on the held-back test set. Every post in the warehouse now carries its type label, so advice screens can tailor what they say to the kind of post an owner actually makes."
   },
   {
    "id": "P0-FH-13",
@@ -21054,7 +21672,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We built automatic checks that stop a worsened model from going live and flag when a model's judgement starts slipping, so customers never quietly get worse advice.",
    "layman_analogy": "Like an MOT test a car must pass before going back on the road, plus a dashboard light that comes on if the engine starts running rough later.",
-   "layman_needed": "Automatic checks that block a worsened model from going live, plus ongoing measurements that flag when a live model's judgement starts slipping, so customers never quietly get worse advice."
+   "layman_needed": "Automatic checks that block a worsened model from going live, plus ongoing measurements that flag when a live model's judgement starts slipping, so customers never quietly get worse advice.",
+   "layman_output": "An automatic test suite that runs before any model goes live and blocks the release if the new version scores worse than the old, plus per-answer quality measurements recorded in production. It runs in the deployment process itself, so an engineer can point to the passing checks and a teammate can confirm no customer ever quietly received worse advice."
   },
   {
    "id": "P0-FH-14",
@@ -21079,7 +21698,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We built the connection that hands each post's AI readings to the rest of the product, so the screens people see can show what the models found.",
    "layman_analogy": "Like installing the serving hatch between the kitchen and the dining room, so every dish the cooks finish can actually reach the tables.",
-   "layman_needed": "A working connection that hands each post's model readings to the rest of the product on request, so the screens people see can display what the models found."
+   "layman_needed": "A working connection that hands each post's model readings to the rest of the product on request, so the screens people see can display what the models found.",
+   "layman_output": "A running connection point that any part of the product can call to fetch what the models found about a given post - its type, its text readings and the rest. It lives on the platform's servers and answers in a fixed format, so the screens people see can display model findings without anyone copying numbers around by hand."
   },
   {
    "id": "P0-MT-02",
@@ -21102,7 +21722,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We built the collector that saves every post's images into our storage with a daily inventory, so the picture-reading models always have the images they need.",
    "layman_analogy": "Like a postal clerk who photocopies every parcel's photo on arrival and files it, keeping a daily ledger of exactly what came in.",
-   "layman_needed": "A collector that saves every post's images into our own storage with a daily inventory list, so the picture-reading models always have the originals to hand."
+   "layman_needed": "A collector that saves every post's images into our own storage with a daily inventory list, so the picture-reading models always have the originals to hand.",
+   "layman_output": "A collector, running on schedule, that downloads every post's images into the company's own cloud storage and writes a daily inventory listing what arrived. The pictures and the manifest sit in the S3 store, so an engineer can look up any post and find its original images on file - the raw material the picture-reading models depend on."
   },
   {
    "id": "P0-MT-03",
@@ -21125,7 +21746,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We built the step that turns each image into a numeric fingerprint our models can compare, so pictures can be analysed as easily as text.",
    "layman_analogy": "Like taking a fingerprint of every guest at the door, so later you can instantly tell which two people are the same or similar without studying their faces.",
-   "layman_needed": "A working pipeline that turns each stored image into a numeric fingerprint the models can compare, run across the archive, so pictures are as analysable as text."
+   "layman_needed": "A working pipeline that turns each stored image into a numeric fingerprint the models can compare, run across the archive, so pictures are as analysable as text.",
+   "layman_output": "A running pipeline that converts each stored image into a numeric fingerprint the models can compare, applied across the whole archive. The fingerprints live in the warehouse beside the images, so pictures can now be searched, grouped and fed into models as readily as text - a teammate can pick any post and see its image already processed."
   },
   {
    "id": "P0-MT-04",
@@ -21148,7 +21770,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We built the loop that picks examples for marking, collects the answers, and surfaces the cases the models find hardest, so training effort goes where it helps most.",
    "layman_analogy": "Like a tutor who marks a sample of homework, spots which question types the class keeps fluffing, and sets next week's practice on exactly those.",
-   "layman_needed": "A working loop that picks examples for human marking, collects the answers, and surfaces the cases the models find hardest, so training effort goes where it improves the models most."
+   "layman_needed": "A working loop that picks examples for human marking, collects the answers, and surfaces the cases the models find hardest, so training effort goes where it improves the models most.",
+   "layman_output": "A working loop that picks a spread of posts for human marking, gathers the answers, and then surfaces the examples the models are least sure about for the next round. The marked sets live in the training store, so the team can show exactly where each label came from and prove that labelling effort goes where it sharpens the models most."
   },
   {
    "id": "P0-MT-05",
@@ -21171,7 +21794,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We tuned the system that decides how much to trust each AI answer: confident ones pass, borderline ones get a second opinion, shaky ones go to a human, so customers only see answers we would stand behind.",
    "layman_analogy": "Like airport security lanes: green-light passengers walk through, borderline bags get a second scan, and anything odd goes to a human officer.",
-   "layman_needed": "A tuned system that scores how trustworthy each AI answer is and routes it - confident answers pass, borderline ones get a second opinion, shaky ones go to a human - so only defensible answers reach customers."
+   "layman_needed": "A tuned system that scores how trustworthy each AI answer is and routes it - confident answers pass, borderline ones get a second opinion, shaky ones go to a human - so only defensible answers reach customers.",
+   "layman_output": "A tuned routing system, live in the pipeline, that scores how trustworthy each AI answer is: confident answers pass straight through, borderline ones get a second model's opinion, and shaky ones are queued for a human to check. The thresholds are calibrated against real outcomes, so a teammate can trace any answer and see which route it took and why."
   },
   {
    "id": "P0-AX-01",
@@ -21194,7 +21818,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We set clear pass/fail rules for each sprint and built a board to run the final check, so nothing gets called done unless it genuinely meets the bar.",
    "layman_analogy": "Like a building inspector agreeing the sign-off checklist before work starts, then walking the site with a clipboard before anyone calls it finished.",
-   "layman_needed": "Written pass/fail rules for each sprint plus a working go/no-go review board, used to run the final sign-off, so nothing is called done unless it genuinely meets the agreed bar."
+   "layman_needed": "Written pass/fail rules for each sprint plus a working go/no-go review board, used to run the final sign-off, so nothing is called done unless it genuinely meets the agreed bar.",
+   "layman_output": "A written set of pass/fail rules for every sprint and a working go/no-go review board on the team site, used to run the final sign-off. The criteria sit beside each sprint's tickets, so a teammate can open the board, read the bar a piece of work had to clear, and confirm nothing was called done without genuinely meeting it."
   },
   {
    "id": "P0-FZ-02",
@@ -21217,7 +21842,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We worked out the legal position on using other people's images (copyright and privacy law) and wrote the rules we follow, so the product stays on the right side of the law.",
    "layman_analogy": "Like checking the licensing rules before hanging other artists' paintings in your café, and pinning the house rules to the kitchen wall.",
-   "layman_needed": "A written legal position on using other people's images under copyright and privacy law, plus the rules the team follows, so the product stays on the right side of the law."
+   "layman_needed": "A written legal position on using other people's images under copyright and privacy law, plus the rules the team follows, so the product stays on the right side of the law.",
+   "layman_output": "A written legal position, held with the company's records, settling how the product may use other people's images under copyright and privacy law, plus drafted policy wording and the rules the team follows day to day. Anyone can read it and check a proposed use of an image against the rules before acting, instead of guessing what the law allows."
   },
   {
    "id": "P0-JL-01",
@@ -21240,7 +21866,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We put spending limits, storage clean-up rules and billing alarms on the image system, reviewed weekly, so a bug or spike cannot quietly run up a huge cloud bill.",
    "layman_analogy": "Like putting a prepayment meter, a declutter rota and a smoke alarm on the household bills, checked every week before anything can spiral.",
-   "layman_needed": "Spending limits, storage clean-up rules and billing alarms on the image system, reviewed weekly, so a bug or usage spike cannot quietly run up a huge cloud bill."
+   "layman_needed": "Spending limits, storage clean-up rules and billing alarms on the image system, reviewed weekly, so a bug or usage spike cannot quietly run up a huge cloud bill.",
+   "layman_output": "Spending limits, storage clean-up rules and billing alarms now sit on the image system in the cloud account, with a weekly review in the calendar. If usage spikes or a bug starts hoarding files, an alarm email fires before the bill grows, so a teammate can open the cloud console and see the guardrails standing rather than trusting that costs are fine."
   },
   {
    "id": "P0-LW-01",
@@ -21263,7 +21890,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We studied which pilot pages lead with pictures and which lead with text, using their real engagement numbers, so we demo the right features to the right pages first.",
    "layman_analogy": "Like a market trader noting which stalls draw crowds with displays and which with signs, before deciding what to pitch to whom.",
-   "layman_needed": "A finished analysis of which pilot pages lead with pictures and which with text, based on their real engagement numbers, feeding the order in which features get demoed to whom."
+   "layman_needed": "A finished analysis of which pilot pages lead with pictures and which with text, based on their real engagement numbers, feeding the order in which features get demoed to whom.",
+   "layman_output": "A finished analysis document mapping which pilot pages lead with pictures and which with text, backed by their real engagement numbers. It sits with the pilot records and feeds the order in which features are demoed to each page owner, so a teammate can look up any pilot page and know which side of the product to show them first."
   },
   {
    "id": "P0-AS-12",
@@ -21289,7 +21917,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We finished full clickable previews of the web and mobile apps showing all 218 planned features, and fixed every one of 308 readability issues, so investors and pilots can see exactly what they will get.",
    "layman_analogy": "Like a show home you can walk through before the estate is built - every room furnished, and every wobbly step and dim light fixed before viewings.",
-   "layman_needed": "Finished clickable previews of the web and mobile apps showing all 218 planned features, with all 308 readability problems fixed to zero, ready to show investors and pilot customers."
+   "layman_needed": "Finished clickable previews of the web and mobile apps showing all 218 planned features, with all 308 readability problems fixed to zero, ready to show investors and pilot customers.",
+   "layman_output": "Finished clickable previews of the web and mobile apps, live on the team site, where all 218 planned features can be opened and walked through - Insight Stories, the Studio, readable charts, light and dark looks. An accessibility audit took 308 readability failures down to zero, so anyone can hand the preview to an investor or pilot and let them explore unaided."
   },
   {
    "id": "P0-AS-13",
@@ -21312,7 +21941,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We set up an overnight robot that refreshes our quality numbers and data views every night without anyone lifting a finger, so dashboards are always showing yesterday's truth.",
    "layman_analogy": "Like a milkman who restocks the doorstep before dawn every single day, so breakfast never depends on anyone remembering to go to the shop.",
-   "layman_needed": "An overnight automatic job that refreshes the quality numbers and data views every night without human help, with fresh snapshots landing daily, so dashboards always show yesterday's truth."
+   "layman_needed": "An overnight automatic job that refreshes the quality numbers and data views every night without human help, with fresh snapshots landing daily, so dashboards always show yesterday's truth.",
+   "layman_output": "An overnight automatic job on GitHub that refreshes the quality numbers and data-explorer views every night with no human involved, committing a fresh snapshot daily since 9 July. Fetch-live and publish buttons work without anyone handling secret keys, so a teammate can open any dashboard in the morning and trust it shows yesterday's truth."
   },
   {
    "id": "P0-AS-14",
@@ -21335,7 +21965,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We rebuilt the public website around a scrolling tour of the product on a phone screen, with a demo video and a waitlist sign-up, so visitors instantly get what ArtemisAI does and can join the pilot.",
    "layman_analogy": "Like rebuilding a shop window as a guided walk past the actual product working, with a sign-up sheet by the door for anyone who wants in early.",
-   "layman_needed": "A rebuilt public website with a scrolling phone-screen tour of the product, a demo video and a working pilot waitlist sign-up, with visitor measurement running across the site."
+   "layman_needed": "A rebuilt public website with a scrolling phone-screen tour of the product, a demo video and a working pilot waitlist sign-up, with visitor measurement running across the site.",
+   "layman_output": "The rebuilt public website, live at the company address: a scroll-driven six-screen phone tour of the product, flip-board live counters, a demo video and a working pilot waitlist sign-up form, all reworked for mobile. Visitor measurement runs across all 22 pages, so anyone can visit the site, watch the tour, join the waitlist and see it counted."
   },
   {
    "id": "P0-AS-15",
@@ -21358,7 +21989,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We finished the app previews for phones first, using real pilot page data, including redesigned alerts with suggested replies, so demos feel like the real product in a customer's hand.",
    "layman_analogy": "Like tailoring the suit to the person who will actually wear it - fitted for the phone in a customer's hand, using their own measurements, not a mannequin's.",
-   "layman_needed": "App previews finished for phones first, populated with real pilot page data, including redesigned alerts with suggested replies, so demos feel like the real product in a customer's hand."
+   "layman_needed": "App previews finished for phones first, populated with real pilot page data, including redesigned alerts with suggested replies, so demos feel like the real product in a customer's hand.",
+   "layman_output": "Both app previews now open properly on a phone - bottom tab bar, edge-to-edge screens - and are filled with real pilot page names and numbers. Alerts are redesigned with severity ordering and drafted replies, and a swipeable partner-scouting screen is in place, so a demo in a customer's hand feels like the finished product rather than a desktop sketch."
   },
   {
    "id": "P0-AS-16",
@@ -21381,7 +22013,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We wrote a plain-English purpose line for all 234 tickets, linked to the screen each one powers, so anyone on the team can see what every piece of work is for.",
    "layman_analogy": "Like adding a plain-English label to every box in the warehouse saying what's inside and which shelf it stocks, so nobody has to open boxes to find out.",
-   "layman_needed": "A plain-English purpose line for all 234 tickets, each linked to the app screen it powers, plus an overview page, so anyone on the team can see what every piece of work is for."
+   "layman_needed": "A plain-English purpose line for all 234 tickets, each linked to the app screen it powers, plus an overview page, so anyone on the team can see what every piece of work is for.",
+   "layman_output": "Every one of the 234 tickets now carries a plain-English purpose line and a note saying which app screen it powers, with deep links and screenshots joining sprint work to the previews, plus a standalone MVP overview page. It all lives on the team site, so any teammate can pick a ticket at random and see in one read what it is for and where it shows up."
   },
   {
    "id": "P0-FH-15",
@@ -21404,7 +22037,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We shipped the image work: two years of post pictures downloaded, text read out of them reliably, and every post sorted into five content types with 93% accuracy, refreshed weekly.",
    "layman_analogy": "Like finally cataloguing two years of family photos: every picture fetched from old albums, captions read out, and each sorted into the right box - refreshed weekly from now on.",
-   "layman_needed": "A completed sprint: two years of post pictures downloaded, text read out of them reliably, and every post sorted into five content types at 93% accuracy, refreshed automatically each week."
+   "layman_needed": "A completed sprint: two years of post pictures downloaded, text read out of them reliably, and every post sorted into five content types at 93% accuracy, refreshed automatically each week.",
+   "layman_output": "A completed sprint, all 23 tickets done: two years of post pictures downloaded into storage, their text read out reliably by the two-engine reader, and every post sorted into five content types at 93% accuracy. The whole run repeats automatically each week, so a teammate can check the warehouse any Monday and find the newest posts already typed."
   },
   {
    "id": "P0-AS-17",
@@ -21427,7 +22061,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We published team onboarding pages - a coding guide, a learning hub and a resources library - so new joiners can get productive without hunting people down for documents.",
    "layman_analogy": "Like leaving a welcome folder on a new colleague's desk - house rules, a map of the building and where the manuals live - so their first week isn't spent knocking on doors.",
-   "layman_needed": "Published team onboarding pages - a coding guide, a learning hub with the current roster, and a resources library holding the key documents - so new joiners can get productive alone."
+   "layman_needed": "Published team onboarding pages - a coding guide, a learning hub with the current roster, and a resources library holding the key documents - so new joiners can get productive alone.",
+   "layman_output": "Published onboarding pages on the team site: a coding guide, a learning hub listing the current roster, and a resources library holding the key build-instruction and research PDFs behind 14 working links. A new joiner can sit down alone, read their way through, and reach the same documents the rest of the team uses without asking anyone."
   },
   {
    "id": "P0-AS-18",
@@ -21450,7 +22085,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We put up a browse-and-download window onto our data, refreshed every night, with sorting and filters, so anyone on the team can check the numbers without asking an engineer.",
    "layman_analogy": "Like a self-service deli counter restocked overnight: browse, pick, weigh and take away, without ringing the bell for a butcher.",
-   "layman_needed": "A live browse-and-download window onto the data, refreshed every night, with sorting, filters and download-what-you-see, so anyone on the team can check numbers without asking an engineer."
+   "layman_needed": "A live browse-and-download window onto the data, refreshed every night, with sorting, filters and download-what-you-see, so anyone on the team can check numbers without asking an engineer.",
+   "layman_output": "A live Data Explorer page where anyone on the team can browse the warehouse tables, sort by any column, filter rows and download exactly what they see. It refreshes from a fresh nightly snapshot, so a non-technical teammate can look up a number themselves each morning instead of asking an engineer to run a query."
   },
   {
    "id": "P0-AS-19",
@@ -21473,7 +22109,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We rebuilt the data-quality dashboard to run against the live database, with a point-and-click chart maker and shareable saved charts, so the team can answer their own data questions.",
    "layman_analogy": "Like swapping a printed weather report for a window plus your own thermometer kit - look at live conditions and build your own readings to share.",
-   "layman_needed": "A rebuilt data-quality dashboard running against the live database, with a point-and-click chart maker and a shared tab of saved charts, so the team answer their own data questions."
+   "layman_needed": "A rebuilt data-quality dashboard running against the live database, with a point-and-click chart maker and a shared tab of saved charts, so the team answer their own data questions.",
+   "layman_output": "The rebuilt data-quality dashboard, live on the team site and connected to the real database: preset questions, a box for custom queries, live refresh, and a point-and-click chart maker whose published charts appear on a shared Custom tab for everyone. A teammate can now build, save and share a chart answering their own question in minutes."
   },
   {
    "id": "P0-AS-20",
@@ -21496,7 +22133,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We added a guest login for investors that shows the polished product side only, plus a private page for leadership performance reviews behind a proper password.",
    "layman_analogy": "Like giving visitors a front-of-house tour pass while the staff appraisal files stay in a locked office drawer.",
-   "layman_needed": "A guest login for investors that shows only the polished product side, plus a private leadership-performance page behind a proper password with an overview mode."
+   "layman_needed": "A guest login for investors that shows only the polished product side, plus a private leadership-performance page behind a proper password with an overview mode.",
+   "layman_output": "A guest login on the site that drops an investor straight into the polished product views with none of the internal plumbing visible, plus a private Team Performance page recording leadership assessments behind a real password, with an overview mode. An investor demo now needs only the guest credentials, and the sensitive assessments stay sealed off."
   },
   {
    "id": "P0-AS-21",
@@ -21519,7 +22157,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We turned the founder's vision, a plain-language explainer of how the product works, and our assessment of the Facebook-changes risk into published pages, so strategy is written down, not word of mouth.",
    "layman_analogy": "Like framing the family recipes and hanging them in the kitchen instead of keeping them in grandma's head.",
-   "layman_needed": "Published pages carrying the founder's vision, a plain-language explainer of how the product works with competitor comparison, and the written assessment of Facebook-change risk with fallback options."
+   "layman_needed": "Published pages carrying the founder's vision, a plain-language explainer of how the product works with competitor comparison, and the written assessment of Facebook-change risk with fallback options.",
+   "layman_output": "Published pages on the team site carrying the founder's vision and long-term product thinking as interactive reads, a plain-language How It Works with a researched competitor comparison, and the written assessment of Facebook-change risk with fallback options. Anyone - teammate or investor - can read the strategy directly instead of hearing it second-hand."
   },
   {
    "id": "P0-AX-02",
@@ -21542,7 +22181,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "The founder delivered the written vision and long-term product strategy papers to the team, which later became interactive pages everyone can read, so the whole company steers by the same north star.",
    "layman_analogy": "Like the captain writing the ship's destination and route into the log and handing every officer a copy, so the whole crew steers by the same stars.",
-   "layman_needed": "The written vision and long-term product strategy papers, authored by the founder and handed to the team, later turned into interactive pages everyone can read."
+   "layman_needed": "The written vision and long-term product strategy papers, authored by the founder and handed to the team, later turned into interactive pages everyone can read.",
+   "layman_output": "The founder's written vision papers and the long-term product architecture note, authored in July and handed to the team, later drawn into interactive pages on the admin site. Any teammate can open them and read, in the founder's own words, where the product is heading and why - the reference every later design argument gets tested against."
   },
   {
    "id": "P0-AS-22",
@@ -21565,7 +22205,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We published a playbook covering 19 sprints to launch, each with a plain plan, proof of what shipped and app screenshots, backed by 53 checked research papers, so the road to launch is fully mapped.",
    "layman_analogy": "Like publishing the full expedition route card - every leg planned, past legs photographed as proof, and each claim checked against the guidebooks.",
-   "layman_needed": "A published playbook covering 19 sprints to launch - each with a plain plan, proof of what shipped and app screenshots - backed by 53 verified research papers, with the replan holding the launch date."
+   "layman_needed": "A published playbook covering 19 sprints to launch - each with a plain plan, proof of what shipped and app screenshots - backed by 53 verified research papers, with the replan holding the launch date.",
+   "layman_output": "A published Sprint Playbook on the team site with one tab per sprint from S6 to S23: a plain-English plan, input-output tables, proof of what shipped and screenshots of the app screen it powers, backed by 53 verified research papers. After the August replan it also shows everything pulled three days earlier with the launch date held - all checkable in one place."
   },
   {
    "id": "P0-AS-23",
@@ -21588,7 +22229,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We built a secure bridge letting teammates ask questions of our data warehouse straight from their AI assistants, so getting a number no longer needs an engineer or a dashboard.",
    "layman_analogy": "Like fitting a serving hatch between the archive room and everyone's desk phone - staff ask a question and the records answer directly, no runner needed.",
-   "layman_needed": "A secure live bridge letting teammates query the data warehouse straight from their AI assistants, protected by keys, so getting a number no longer needs an engineer or a dashboard."
+   "layman_needed": "A secure live bridge letting teammates query the data warehouse straight from their AI assistants, protected by keys, so getting a number no longer needs an engineer or a dashboard.",
+   "layman_output": "A live, key-protected connection at the company's web address that lets teammates ask questions of the data warehouse straight from their own AI assistants. Once a teammate adds it to their assistant with their key, they can get a real number out of the warehouse in conversation - no engineer, no dashboard, and no keys exposed."
   },
   {
    "id": "P0-FH-16",
@@ -21611,7 +22253,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We taught the system to understand videos - what kind of scene it is, any on-screen text, what is said aloud, and how gripping the first three seconds are - so video posts get real advice, not a blind spot.",
    "layman_analogy": "Like teaching a film critic to note the setting, read the subtitles, listen to the dialogue and judge whether the opening seconds hook you - all before the popcorn's warm.",
-   "layman_needed": "Working video understanding across the test set: scene type, on-screen text, spoken-word transcripts and a first-three-seconds grip score, with silent and very short clips handled deliberately."
+   "layman_needed": "Working video understanding across the test set: scene type, on-screen text, spoken-word transcripts and a first-three-seconds grip score, with silent and very short clips handled deliberately.",
+   "layman_output": "Working video understanding running across the 46-video test set: each video gets a scene type, any on-screen text read out, a transcript of the spoken words, and a transparent score for how gripping its opening three seconds are. Silent, music-only and very short clips are labelled as such rather than failing quietly, and the results sit in the warehouse to inspect."
   },
   {
    "id": "P0-FH-17",
@@ -21636,7 +22279,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "Our research showed you cannot reliably predict smash hits, but you CAN predict flops - so we pivoted the product to warning owners before a post flops, which is the promise customers actually feel.",
    "layman_analogy": "Like discovering you can't predict which lottery ticket wins, but you can absolutely spot the ones that are torn - so you sell torn-ticket checks instead of fortune-telling.",
-   "layman_needed": "A documented research finding: smash hits can't be reliably predicted but flops can, with the honest test scores, which pivoted the product to warning owners before a post flops."
+   "layman_needed": "A documented research finding: smash hits can't be reliably predicted but flops can, with the honest test scores, which pivoted the product to warning owners before a post flops.",
+   "layman_output": "A written research finding, with honest test scores attached, showing that smash-hit posts cannot be reliably predicted but flops can. The document lives with the sprint records and is the reason the product now leads with flop warnings: a teammate can read it and see exactly why the pivot happened and what evidence forced it."
   },
   {
    "id": "P0-AS-24",
@@ -21659,7 +22303,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We built a marketing command centre: a 20-week LinkedIn plan to launch with a what-to-post-today view, best UK posting times, sample copy and an image maker, so launch marketing runs itself day by day.",
    "layman_analogy": "Like a caterer's countdown board for a big event - what to prep today, the best serving times, sample menus and ready-made place cards, ticking down twenty weeks.",
-   "layman_needed": "A working marketing command centre: a 20-week social plan to launch with a what-to-post-today view, researched UK posting times, sample copy and a per-post image maker."
+   "layman_needed": "A working marketing command centre: a 20-week social plan to launch with a what-to-post-today view, researched UK posting times, sample copy and a per-post image maker.",
+   "layman_output": "A working marketing command centre on the team site: a 20-week social plan running to the December launch with a what-to-post-today view, a visual-strategy tab, researched UK posting times, ready sample copy for the next three days, and a per-post image maker whose COMING SOON badge flips at launch. Whoever posts that day opens one page and has everything."
   },
   {
    "id": "P0-FH-18",
@@ -21684,7 +22329,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "Our first flop-warning model passed its quality bar: when it flags a post as likely to flop it is right about three times in four, catching over half of flops, so the headline promise is now proven to work.",
    "layman_analogy": "Like a smoke alarm passing its certification test: when it sounds, there really is smoke three times out of four, and it catches over half of all fires.",
-   "layman_needed": "A first flop-warning model that passed its quality bar - right about three times in four when it flags a post, catching over half of flops - frozen as version one with the result recorded."
+   "layman_needed": "A first flop-warning model that passed its quality bar - right about three times in four when it flags a post, catching over half of flops - frozen as version one with the result recorded.",
+   "layman_output": "A first flop-warning model that passed its agreed quality bar and is frozen as version one, with the result recorded: when it flags a post it is right about three times in four, and it catches over half of flops, including on pages it has never seen. The record sits in the sprint proof, so anyone can check the numbers; moving its code to the main codebase is queued."
   },
   {
    "id": "P0-MT-06",
@@ -21707,7 +22353,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "Facebook switched off the statistics we relied on in June, blinding our feed for six weeks; we moved everything onto the replacement numbers and re-fetched history, so the data flows again and stays future-proof.",
    "layman_analogy": "Like the council changing your bin-collection scheme mid-year: six weeks of missed pickups, then rebooking everything onto the new rota and back-collecting what piled up.",
-   "layman_needed": "A completed migration of all statistics onto the numbers Facebook still supports, with history re-fetched and a weekly re-check of recent posts, ending six weeks of darkened data feed."
+   "layman_needed": "A completed migration of all statistics onto the numbers Facebook still supports, with history re-fetched and a weekly re-check of recent posts, ending six weeks of darkened data feed.",
+   "layman_output": "A completed migration of every statistic onto the numbers Facebook still supports, merged into the main pipeline after six weeks of darkened data. History has been re-fetched once, and posts under 120 days old are re-checked weekly, so a teammate can open any dashboard and see fresh, unbroken figures flowing again."
   },
   {
    "id": "P0-AS-25",
@@ -21730,7 +22377,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We built a small tool that turns pasted team updates into a tidy picture card for the group chat, so the daily stand-up summary takes seconds instead of fiddly formatting.",
    "layman_analogy": "Like a rubber stamp that turns scribbled notes into a neat printed notice for the staffroom board in one press.",
-   "layman_needed": "A small working tool where pasted team updates become a tidy picture card, downloadable for the group chat, so the daily stand-up summary takes seconds."
+   "layman_needed": "A small working tool where pasted team updates become a tidy picture card, downloadable for the group chat, so the daily stand-up summary takes seconds.",
+   "layman_output": "A small working tool on the team site where anyone pastes the day's team updates and gets back a tidy, styled picture card to download as a PNG for the group chat. The daily stand-up summary that used to be retyped by hand now takes seconds, and every card comes out looking the same."
   },
   {
    "id": "P0-FH-19",
@@ -21755,7 +22403,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We ran a full health check on the data warehouse - 22 dashboard panels and all 8 data feeds verified, 13 issues logged and the serious ones fixed - so we know the numbers under the product are sound.",
    "layman_analogy": "Like a full annual survey of a house - every room and every pipe inspected, faults listed in a snag book, and the serious ones repaired before winter.",
-   "layman_needed": "A completed warehouse health check: 22 dashboard panels and all 8 data feeds verified, a 13-issue register with the serious ones fixed, delivered as a written sweep."
+   "layman_needed": "A completed warehouse health check: 22 dashboard panels and all 8 data feeds verified, a 13-issue register with the serious ones fixed, delivered as a written sweep.",
+   "layman_output": "A delivered warehouse health check, written up on 26 August: all 22 dashboard panels QA'd, all eight data feeds verified end to end, and a 13-issue register with the serious faults fixed and closed. The sweep document sits with the team records, so anyone can read exactly what was checked, what was wrong and what was done about it."
   },
   {
    "id": "P0-MT-07",
@@ -21782,7 +22431,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We now record how each post's numbers grow hour by hour after publishing, and keep the post list fresh every hour, which is the raw material for spotting a flop early. One scheduling detail still needs a double-check.",
    "layman_analogy": "Like a nurse charting a patient's temperature every hour after an operation instead of once at discharge - the curve tells you early if something's wrong. One monitor's timer still needs checking.",
-   "layman_needed": "Hour-by-hour growth records for each post flowing into the warehouse, with the post list refreshed hourly - the raw material for early flop-spotting - plus one confirmation the collector really is on its schedule."
+   "layman_needed": "Hour-by-hour growth records for each post flowing into the warehouse, with the post list refreshed hourly - the raw material for early flop-spotting - plus one confirmation the collector really is on its schedule.",
+   "layman_output": "Hour-by-hour growth records for each post now flow into a dedicated warehouse table, and the post list itself refreshes hourly - the raw material for spotting a flop early. A teammate can open the table and watch a post's numbers build hour by hour; one loose end is flagged: confirming the collector genuinely runs on its schedule."
   },
   {
    "id": "P0-FH-20",
@@ -21807,7 +22457,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We wrote the serving layer that will hand model answers (with version, confidence and an honest 'not sure') to the app. It exists on a side branch and is not wired into the product yet - connecting it is next.",
    "layman_analogy": "Like a fitted kitchen built and tested in the workshop but not yet installed in the house - real cabinetry, still waiting for delivery day.",
-   "layman_needed": "A written serving layer that hands model answers - with version, confidence and an honest 'not sure' - built and working on a side branch; wiring it into the product is the next job."
+   "layman_needed": "A written serving layer that hands model answers - with version, confidence and an honest 'not sure' - built and working on a side branch; wiring it into the product is the next job.",
+   "layman_output": "A built and working serving layer, on a side branch of the code, that hands out model answers in a fixed envelope: the answer, the model version, a confidence score and an honest 'not sure' when it should abstain. No product screen uses it yet - merging it into the main codebase and wiring it in is the next piece of work, already queued."
   },
   {
    "id": "P0-LW-02",
@@ -21832,7 +22483,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We recruited the pilot pages - real Facebook pages of different kinds, with their page details and owner contacts on file - so we test and demo on genuine customers, not made-up data.",
    "layman_analogy": "Like signing up real taste-testers of different diets before opening the restaurant, with their names and phone numbers in the book, rather than imagining diners.",
-   "layman_needed": "A recruited pilot group of real Facebook pages of different kinds, with page details and owner contacts on file, powering the demos and previews since July."
+   "layman_needed": "A recruited pilot group of real Facebook pages of different kinds, with page details and owner contacts on file, powering the demos and previews since July.",
+   "layman_output": "A recruited pilot group: five real Facebook pages plus candidates, chosen across different page types, with a roster holding page IDs and owner contact details. The roster sits with the pilot records and has powered every demo and preview since July, so a teammate can look up exactly which pages are in and who to ring at each one."
   },
   {
    "id": "P0-LW-03",
@@ -21857,7 +22509,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We collected a log of real comment-storm incidents from pilot pages, so we can test our crisis alerts against events that actually happened rather than theory.",
    "layman_analogy": "Like collecting the fire brigade's records of real past blazes so you can test your new alarm against fires that actually happened, not just theory.",
-   "layman_needed": "A collected log of real comment-storm incidents from pilot pages, banked in the handover notes, so crisis alerts can be tested against events that genuinely occurred."
+   "layman_needed": "A collected log of real comment-storm incidents from pilot pages, banked in the handover notes, so crisis alerts can be tested against events that genuinely occurred.",
+   "layman_output": "A collected log of real comment-storm incidents that happened on pilot pages, with the pilot notes banked in the handover pack. It gives the crisis-alert tests genuine events to be measured against - the quality bar is being rewritten as 'must catch N of these real incidents in time' - so a teammate can open the log and see the actual cases."
   },
   {
    "id": "P0-AS-26",
@@ -21880,7 +22533,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We built the internal alerts page with a reliable status checker behind it, plus a shared archive for admin pages, so the team can see system health and old pages never break.",
    "layman_analogy": "Like fitting the staff noticeboard with a working status light for every machine, and moving old notices into a filing cabinet where they can't fall off the wall.",
-   "layman_needed": "An internal alerts page backed by a reliable status checker, plus a shared archive for admin pages with live and archive tabs, so system health is visible and old pages never break."
+   "layman_needed": "An internal alerts page backed by a reliable status checker, plus a shared archive for admin pages with live and archive tabs, so system health is visible and old pages never break.",
+   "layman_output": "An internal alerts page on the team site, backed by a status-checking function that reads reliably even moments after a write, plus a shared admin archive with Live and Archive tabs. Page addresses are canonical so renames cannot break saved data, meaning a teammate can check system health at a glance and old admin pages never go missing."
   },
   {
    "id": "P0-SD-01",
@@ -21903,7 +22557,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We delivered the project-management handover pack - what has been accepted, launch checks, open defects, pilot notes and how our benchmark data was made - so a new PM can pick up the project without archaeology.",
    "layman_analogy": "Like a departing housekeeper leaving the new one the keys, the inventory, the list of squeaky doors and the tradesmen's numbers - no rummaging required.",
-   "layman_needed": "A delivered handover pack: acceptance register, launch checks, open defects, pilot notes and the record of how the benchmark data was made, ready for a new project manager to pick up."
+   "layman_needed": "A delivered handover pack: acceptance register, launch checks, open defects, pilot notes and the record of how the benchmark data was made, ready for a new project manager to pick up.",
+   "layman_output": "A delivered handover pack held with the project records: the acceptance register, launch-gate list, open-defect list, pilot notes, the stage-retag summary, and the full account of how the 97-post benchmark set and its comments were made, plus the written note moving one Art-E piece out. A new project manager can pick it up cold; Saad verifies it next."
   },
   {
    "id": "P0-AS-27",
@@ -21926,7 +22581,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We launched the new shared launch tracker everyone sees the same way: sprints grouped by area, a backlog, a map of what depends on what, and a phone-friendly layout, with every ticket audited against its sources.",
    "layman_analogy": "Like replacing everyone's private paper diaries with one wall planner in the office - the same board for all, with strings showing which jobs wait on which.",
-   "layman_needed": "A live shared launch tracker everyone sees identically: sprints grouped by area, a backlog, a map of what depends on what, a phone-friendly layout, and every ticket audited against its sources."
+   "layman_needed": "A live shared launch tracker everyone sees identically: sprints grouped by area, a backlog, a map of what depends on what, a phone-friendly layout, and every ticket audited against its sources.",
+   "layman_output": "The new launch tracker, live on the team site with shared state so everyone sees the same board: sprints grouped by area, a backlog tab, per-ticket layer tags, a map of what depends on what, an MVP features tab and a phone-friendly layout. Every ticket was reconciled against its sources, so a teammate can trust the board is the single honest picture."
   },
   {
    "id": "N4-SD-15",
@@ -21951,7 +22607,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Prepare a set list of questions each pilot will ask the Art-E assistant during testing, so every tester probes the same things and we can fairly compare how well it answers.",
    "layman_analogy": "Like giving every driving examiner the same test route and manoeuvres, so candidates are compared fairly rather than by whichever streets the examiner fancied.",
-   "layman_needed": "A set list of Art-E questions per pilot tester - including one it must refuse and one with thin data - rehearsed in the dry-run, with each answer's verdict logged into defect triage during wave one."
+   "layman_needed": "A set list of Art-E questions per pilot tester - including one it must refuse and one with thin data - rehearsed in the dry-run, with each answer's verdict logged into defect triage during wave one.",
+   "layman_output": "When picked up, the pilot test protocol will gain a written Art-E section: five set questions per pilot from the answer key, asked on their own page, including one Art-E must refuse and one where data is thin, plus checks that pilots understand the citation chips, AI label and freshness stamp. Wave-one sessions will log a verdict per question into defect triage."
   },
   {
    "id": "N5-MT-19",
@@ -21976,7 +22633,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "A rehearsal where we deliberately cut off the AI supplier behind Art-E to check the assistant shows a polite 'temporarily unavailable' message, recovers cleanly and never double-charges — so a supplier outage in launch week is a non-event.",
    "layman_analogy": "Like a restaurant rehearsing the gas being cut off mid-service: diners get a polite apology, nobody is billed twice, and the kitchen restarts cleanly when supply returns.",
-   "layman_needed": "A recorded rehearsal cutting off Art-E's AI supplier entirely on staging, showing a polite unavailable message, clean recovery, no lost or double-charged asks, written up for the 13 Nov readiness review."
+   "layman_needed": "A recorded rehearsal cutting off Art-E's AI supplier entirely on staging, showing a polite unavailable message, clean recovery, no lost or double-charged asks, written up for the 13 Nov readiness review.",
+   "layman_output": "When done, a recorded rehearsal on the staging system will show what happens if Art-E's AI supplier goes down entirely: the assistant shows a polite unavailable message rather than a raw error, alarms fire, queued questions recover cleanly, and nobody is charged twice. The write-up will sit as evidence at the 13 November readiness review for anyone to read."
   },
   {
    "id": "N3-FH-13",
@@ -22000,7 +22658,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "An extra statistical double-check on how we judge whether two pages genuinely share an audience, run before the matching recipe is locked in — so the collaboration suggestions rest on maths that has actually been tested.",
    "layman_analogy": "Like shuffling the raffle tickets a thousand times to prove a match wasn't just the luck of the draw, before the raffle rules are printed.",
-   "layman_needed": "A dated register entry, filed before 14 Oct, comparing the shuffled-data double-check against the standard maths behind audience matching, with a clear calibrated-or-not verdict; a miss re-opens the blend weights."
+   "layman_needed": "A dated register entry, filed before 14 Oct, comparing the shuffled-data double-check against the standard maths behind audience matching, with a clear calibrated-or-not verdict; a miss re-opens the blend weights.",
+   "layman_output": "When finished, a dated entry in the decisions register will record a shuffled-data double-check of the structural half of audience matching at pilot scale, comparing it against the standard maths and giving a clear calibrated-or-not verdict before 14 October. If it misses, the agreed 80/20 blend weights are reopened before they are frozen on the 16th."
   },
   {
    "id": "N4-SD-16",
@@ -22025,7 +22684,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Add a step to the pilot testing plan where testers judge whether the partner pages we suggest actually make sense for them, so we learn if the suggestions feel right before launch.",
    "layman_analogy": "Like adding a question to the tasting menu feedback card: not just 'was it cooked?', but 'would you actually order this again?'",
-   "layman_needed": "An updated pilot test protocol (v1.1) with a partner-suggestion scenario - consent, reading the reasons, judging 'would you actually contact this page?', and the too-little-data state - exercised in the dry-run."
+   "layman_needed": "An updated pilot test protocol (v1.1) with a partner-suggestion scenario - consent, reading the reasons, judging 'would you actually contact this page?', and the too-little-data state - exercised in the dry-run.",
+   "layman_output": "When done, the pilot test protocol becomes v1.1 with a partner-suggestion scenario: a pilot walks the opt-in consent step, reads a suggestion's reasons and badges in their own words, answers 'would you actually contact this page?', and sees the too-little-data state. The 30 October dry-run notes will show a friendly pilot completing it end to end."
   },
   {
    "id": "P0-MT-08",
@@ -22048,7 +22708,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We built the step that pulls still frames from every video and writes down what is said in it, feeding the video-understanding work, so videos are as readable to our models as text posts.",
    "layman_analogy": "Like a court stenographer paired with a photographer - one writes down every word spoken, the other snaps the scene every couple of seconds, so nothing on film goes unrecorded.",
-   "layman_needed": "A working step that pulls still frames from every video and writes a transcript of what is said, stored alongside, feeding the video-understanding models."
+   "layman_needed": "A working step that pulls still frames from every video and writes a transcript of what is said, stored alongside, feeding the video-understanding models.",
+   "layman_output": "A running step that takes every collected video, pulls a still frame every two seconds and writes a transcript of the spoken words, storing both in the company's cloud alongside the video. The video-understanding models draw directly on these files, so a teammate can pick any video in the archive and find its frames and transcript sitting there."
   },
   {
    "id": "P0-AS-28",
@@ -22071,7 +22732,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We organised the raw warehouse data into tidy, well-labelled tables for pages, posts, dates, comments and statistics, so every report and model draws on the same clean foundation.",
    "layman_analogy": "Like reorganising a jumbled stockroom into labelled aisles - one for pages, one for posts, one for dates - so every stocktake counts from the same shelves.",
-   "layman_needed": "Tidy, well-labelled warehouse tables for pages, posts, dates, comments and statistics, built over the raw data, so every report and model draws on the same clean foundation."
+   "layman_needed": "Tidy, well-labelled warehouse tables for pages, posts, dates, comments and statistics, built over the raw data, so every report and model draws on the same clean foundation.",
+   "layman_output": "A layer of tidy, well-labelled warehouse tables - pages, posts, dates, comments and statistics - built over the raw collected data and merged into the main pipeline. Every report, dashboard and model now draws on the same clean foundation, so two people asking the same question of the data get the same answer."
   },
   {
    "id": "P0-FH-21",
@@ -22096,7 +22758,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We re-fetched each post's statistics once they had fully settled (Facebook keeps updating them for months) and refreshed each page's typical numbers, giving models an honest yardstick to judge posts against.",
    "layman_analogy": "Like weighing the harvest after it has fully ripened rather than mid-season, and keeping each farm's typical yield on record so a good crop is judged against its own norm.",
-   "layman_needed": "Re-fetched post statistics taken after they had fully settled, a history of those readings, and refreshed typical-performance numbers per page, giving models an honest yardstick."
+   "layman_needed": "Re-fetched post statistics taken after they had fully settled, a history of those readings, and refreshed typical-performance numbers per page, giving models an honest yardstick.",
+   "layman_output": "A running re-poll that fetches each post's statistics again after 120 days, once the numbers have fully settled, plus a stored history of those readings and refreshed typical-performance figures per page. Together they give the models an honest yardstick, so a teammate can check any page and see what 'normal' genuinely looks like for it."
   },
   {
    "id": "P0-FH-22",
@@ -22119,7 +22782,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We automated the weekly data collection to run itself every Monday at 1am end to end, emailing the team if anything breaks, so fresh data arrives without anyone babysitting it.",
    "layman_analogy": "Like a central-heating timer that fires the boiler every Monday at 1am and texts you if the pilot light goes out.",
-   "layman_needed": "The weekly data collection running itself end to end every Monday at 1am, with automatic emails to the team if anything breaks, so fresh data arrives without babysitting."
+   "layman_needed": "The weekly data collection running itself end to end every Monday at 1am, with automatic emails to the team if anything breaks, so fresh data arrives without babysitting.",
+   "layman_output": "The weekly data collection now runs itself: every Monday at 1am the cloud scheduler kicks off the full run end to end, and if any step fails the team gets an automatic email naming it. Fresh data arrives without anyone babysitting the pipeline, and a teammate can confirm it simply by checking Monday's inbox and the warehouse dates."
   },
   {
    "id": "P0-AS-29",
@@ -22142,7 +22806,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We built two public tools on our site: one checks that a customer's Facebook page connection works, and one lets them see and download the data we pull from their page - so connecting is painless and transparent.",
    "layman_analogy": "Like a garage offering a free plug-in diagnostic before you buy, plus a printout of exactly what the machine read from your car.",
-   "layman_needed": "Two public tools on the website: one that checks a customer's Facebook page connection works, and one that lets them view and download the data we pull from their page."
+   "layman_needed": "Two public tools on the website: one that checks a customer's Facebook page connection works, and one that lets them view and download the data we pull from their page.",
+   "layman_output": "Two working tools on the public website: one where a customer pastes their Facebook page connection details and instantly sees whether the link works and what it grants, and one where they can view and download the data pulled from their own page. A page owner can now check their own connection and see their own data without emailing anyone."
   },
   {
    "id": "P0-LW-04",
@@ -22165,7 +22830,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We sorted out full access to our Facebook developer account for the engineering team and got Faheem up to speed on Facebook's data, so nobody is blocked waiting for permissions.",
    "layman_analogy": "Like finally getting every engineer their own set of keys to the workshop and walking the new mechanic round the tools, so nobody stands outside waiting to be let in.",
-   "layman_needed": "Full access to the Facebook developer account secured for engineering, with the data domain walked through with the new engineer, so nobody is blocked waiting for permissions."
+   "layman_needed": "Full access to the Facebook developer account secured for engineering, with the data domain walked through with the new engineer, so nobody is blocked waiting for permissions.",
+   "layman_output": "Full access to the company's Facebook developer account is secured for engineering, with the permissions block on page statistics resolved, and the new engineer walked through the Facebook data domain. Nobody on the build is left waiting for someone else's login, and a teammate can confirm it simply by watching the data flow in."
   },
   {
    "id": "P0-FZ-03",
@@ -22188,7 +22854,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We reviewed Facebook's platform rules and signed the required data-handling agreement before any data collection began, so the business is built on permitted, contracted access from day one.",
    "layman_analogy": "Like reading the market's trading rules and signing the stallholder agreement before setting up your stall, not after the first sale.",
-   "layman_needed": "A completed review of Facebook's platform rules and a signed data-handling agreement, both in place before any data collection began."
+   "layman_needed": "A completed review of Facebook's platform rules and a signed data-handling agreement, both in place before any data collection began.",
+   "layman_output": "A completed review of Facebook's platform rules and a signed data-handling agreement, both filed with the company records before any data collection began. Anyone asking whether the crawling is allowed can be shown the review and the signed agreement rather than an assurance."
   },
   {
    "id": "P0-AX-03",
@@ -22211,7 +22878,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We locked down, in writing and before building, exactly who the product serves and what problem it solves, so every later decision could be tested against that definition.",
    "layman_analogy": "Like an architect agreeing in writing who the house is for and how they'll live in it before a single brick is laid.",
-   "layman_needed": "A written, locked definition of exactly who the product serves and what problem it solves, set before building started, against which every later decision could be tested."
+   "layman_needed": "A written, locked definition of exactly who the product serves and what problem it solves, set before building started, against which every later decision could be tested.",
+   "layman_output": "A written, locked definition - agreed on the founding strategy call and kept with the company records - of exactly who the product serves and what problem it solves, set down before building started. Every later feature argument can be tested against it, and a teammate can read it in a minute to see whether a proposal fits the product."
   },
   {
    "id": "P0-JL-02",
@@ -22234,7 +22902,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We set up the company card for our cloud services and added spending alarms, so a runaway computing bill can never sneak up on us.",
    "layman_analogy": "Like setting up the household direct debit with a spending cap and a text alert the moment the bill looks odd.",
-   "layman_needed": "The company card set up for cloud services, with spending alarms and a cost guard on the warehouse and backfill work, so a runaway computing bill can never sneak up."
+   "layman_needed": "The company card set up for cloud services, with spending alarms and a cost guard on the warehouse and backfill work, so a runaway computing bill can never sneak up.",
+   "layman_output": "The company card is set up for cloud services, with a watch on the cloud bill and a cost guard on the warehouse and backfill work. Spending alarms fire before a runaway computing bill can build, so a teammate can open the billing console and see the caps and alerts standing rather than hoping costs are under control."
   },
   {
    "id": "P0-FH-23",
@@ -22257,7 +22926,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We hand-marked nearly 6,000 posts across five questions and distilled 75 clear if-this-then-that rules from them, giving our models a trustworthy answer key to learn from.",
    "layman_analogy": "Like a panel of examiners hand-marking six thousand scripts and then writing the marking scheme, so future markers score exactly the same way.",
-   "layman_needed": "Nearly 6,000 posts hand-marked across five questions, with 75 clear if-this-then-that rules distilled from them, giving the models a trustworthy answer key to learn from."
+   "layman_needed": "Nearly 6,000 posts hand-marked across five questions, with 75 clear if-this-then-that rules distilled from them, giving the models a trustworthy answer key to learn from.",
+   "layman_output": "A finished answer key: 5,972 posts hand-marked across five questions, stored with the training data, plus 75 plain if-this-then-that rules mined from the markings that now power the teaching prompt. Anyone can open the set, pick a post, and see the human judgement the models were trained to match."
   },
   {
    "id": "P0-FH-24",
@@ -22280,7 +22950,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We ran our finished models over the entire two-year history - almost 112,000 posts - so every post in the system now carries the AI's readings, ready for the product to use.",
    "layman_analogy": "Like sending the whole two-year filing backlog through the new sorting machine, so every folder in the cabinet now carries its label.",
-   "layman_needed": "The finished models run over the entire two-year history - almost 112,000 posts - so every post in the system carries the AI's readings, ready for the product to use."
+   "layman_needed": "The finished models run over the entire two-year history - almost 112,000 posts - so every post in the system carries the AI's readings, ready for the product to use.",
+   "layman_output": "Six fine-tuned models are deployed and have been run across the entire two-year history - 111,796 posts - so every post in the warehouse now carries the AI's readings. The product screens draw on these labels directly, and a teammate can pick any old post in the Explorer and find its readings already attached."
   },
   {
    "id": "P0-SD-02",
@@ -22303,7 +22974,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We wrote the document defining exactly what the flop-warning screens should show and say, so designers and engineers built to one agreed picture instead of guessing.",
    "layman_analogy": "Like the architect's drawings for the shopfront - agreed on paper before builders and signwriters set to work, so nobody improvises the layout.",
-   "layman_needed": "A written document defining exactly what the flop-warning screens should show and say, so designers and engineers built to one agreed picture instead of guessing."
+   "layman_needed": "A written document defining exactly what the flop-warning screens should show and say, so designers and engineers built to one agreed picture instead of guessing.",
+   "layman_output": "A written product-definition document specifying exactly what the flop-warning screens should show and say - the surfaces, the wording, the states. It sits with the project documents and is what the playbook builds against, so designers and engineers work to one agreed picture and a teammate can check any screen against the page that defined it."
   },
   {
    "id": "P0-SD-03",
@@ -22326,7 +22998,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We wrote a first numbered rulebook for how our models must behave, which every quality check now cites by rule number, so standards are written down and checkable rather than tribal knowledge.",
    "layman_analogy": "Like publishing the first edition of the highway code with numbered rules, so every driving test can cite the exact rule instead of arguing custom.",
-   "layman_needed": "A first numbered rulebook for how the models must behave, cited by rule number in every quality check, with unreviewed rules clearly marked as provisional."
+   "layman_needed": "A first numbered rulebook for how the models must behave, cited by rule number in every quality check, with unreviewed rules clearly marked as provisional.",
+   "layman_output": "A first numbered rulebook for how the models must behave, each rule carrying its own reference number, with unreviewed rules clearly marked provisional. It lives with the project documents and every sprint quality gate cites it by rule number, so a teammate can trace any model-behaviour check straight back to the written rule it enforces."
   },
   {
    "id": "P0-FH-25",
@@ -22349,7 +23022,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We spotted that Facebook had quietly switched off a key statistic in mid-June, leaving our feed dark, and raised the alarm with a plan - which is why the product now runs on numbers Facebook still supports.",
    "layman_analogy": "Like the shopkeeper noticing the wholesaler quietly stopped stocking a key ingredient weeks ago, and raising the alarm with a new supplier already suggested.",
-   "layman_needed": "The written escalation that spotted Facebook switching off a key statistic in mid-June, explained the darkened data feed, and proposed the plan that moved the product onto supported numbers."
+   "layman_needed": "The written escalation that spotted Facebook switching off a key statistic in mid-June, explained the darkened data feed, and proposed the plan that moved the product onto supported numbers.",
+   "layman_output": "The written escalation, kept with the team records, that spotted Facebook switching off a key statistic in mid-June, explained why the data feed had gone dark, and proposed the move onto the numbers Facebook still supports. It reset the model target and triggered the migration, and anyone can read it to see how the problem was caught and answered."
   },
   {
    "id": "P0-FH-26",
@@ -22374,7 +23048,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We built the best-time-to-post model: it learns each page's weekly rhythm, guards against one lucky post faking a hot slot, and says how confident it is - the feature designed to bring owners back daily.",
    "layman_analogy": "Like a market trader learning each street's weekly rhythm of footfall - and refusing to call a corner 'busy' just because one lucky Saturday went wild.",
-   "layman_needed": "A working best-time-to-post model that learns each page's weekly rhythm, guards against one lucky post faking a hot slot, states its confidence, and flags when a page's rhythm changes."
+   "layman_needed": "A working best-time-to-post model that learns each page's weekly rhythm, guards against one lucky post faking a hot slot, states its confidence, and flags when a page's rhythm changes.",
+   "layman_output": "A working best-time-to-post model that learns each page's weekly rhythm hour by hour, normalises each slot so one lucky post cannot fake a hot time, and recommends slots with a stated confidence and sample count. It also flags when a page's rhythm changes, so the tip an owner sees comes with honest caveats a teammate can inspect in the model output."
   },
   {
    "id": "P0-MT-10",
@@ -22399,7 +23074,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We built the machinery that prepares each page's posting-time data honestly (no peeking at the future) and runs the best-time model on a schedule, so 'when should I post?' answers refresh themselves.",
    "layman_analogy": "Like a baker prepping tomorrow's dough on a strict timetable using only yesterday's ledger - never tomorrow's orders - so the morning bake runs itself honestly.",
-   "layman_needed": "Working machinery that prepares each page's posting-time data with no peeking at the future, and runs the best-time model on a schedule, so answers refresh themselves. The cached serving layer is explicitly not claimed."
+   "layman_needed": "Working machinery that prepares each page's posting-time data with no peeking at the future, and runs the best-time model on a schedule, so answers refresh themselves. The cached serving layer is explicitly not claimed.",
+   "layman_output": "Running machinery that assembles each page's posting-time data with no peeking at future numbers and runs the best-time model on the regular bulk schedule, so its answers refresh themselves without anyone pressing a button. A teammate can check the warehouse and find fresh slot scores; the cached serving layer for the app is explicitly not claimed here."
   },
   {
    "id": "P0-FH-27",
@@ -22422,7 +23098,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We put a watchdog on every live model that compares its behaviour to the day it was trained and raises a flag only when quality genuinely slips, so customers never quietly receive stale advice.",
    "layman_analogy": "Like fitting every machine on the factory floor with a gauge compared against its day-one reading, sounding only when it genuinely drifts and output worsens together.",
-   "layman_needed": "A watchdog on every live model comparing behaviour to its training-day baseline, alerting only when drift and a real quality drop occur together, with the response to a trip written down."
+   "layman_needed": "A watchdog on every live model comparing behaviour to its training-day baseline, alerting only when drift and a real quality drop occur together, with the response to a trip written down.",
+   "layman_output": "A watchdog now runs on every live model - the five text readers, the fusion model and best-times - comparing behaviour against its frozen training-day baseline. It alerts only when drift and a genuine quality drop happen together, was proven on a seeded fault, and the response to a trip is written down, so a teammate can read exactly what happens next."
   },
   {
    "id": "P0-SD-04",
@@ -22445,7 +23122,8 @@ window.LAUNCH_DATA = {
    "layer": "product",
    "layman": "We audited the website and app designs, chose one visual direction, and produced polished new landing-page designs for desktop and mobile with everything a developer needs to build them.",
    "layman_analogy": "Like a decorator surveying the whole house, agreeing one colour scheme, then handing the builder finished room plans with paint codes and fittings listed.",
-   "layman_needed": "A completed design audit, one chosen visual direction, and polished new landing-page designs for desktop and mobile with the tokens, assets and interaction notes a developer needs to build them."
+   "layman_needed": "A completed design audit, one chosen visual direction, and polished new landing-page designs for desktop and mobile with the tokens, assets and interaction notes a developer needs to build them.",
+   "layman_output": "A completed design audit of the landing page and app previews, one visual direction chosen from the reviewed options, and polished high-fidelity Figma designs for the new landing page on desktop and mobile. The handoff pack - colours, spacing tokens, assets and interaction notes - sits ready for the developer, so the build needs no design guesswork."
   },
   {
    "id": "P0-AX-04",
@@ -22468,7 +23146,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We defined how we will measure pilot success - who comes back daily and monthly, who acts on alerts - and a 'why open this tomorrow?' test for every feature, confirming best-time-to-post as the daily habit hook.",
    "layman_analogy": "Like a gym deciding upfront how it will judge success - who returns daily, who acts on their plan - and testing every class against 'why would a member come back tomorrow?'",
-   "layman_needed": "A written measures document defining pilot success - daily and monthly return rates, alert engagement, posts acted on - plus a 'why open this tomorrow?' test, confirming best-times as the daily habit hook."
+   "layman_needed": "A written measures document defining pilot success - daily and monthly return rates, alert engagement, posts acted on - plus a 'why open this tomorrow?' test, confirming best-times as the daily habit hook.",
+   "layman_output": "A written measures document defining pilot success - daily and monthly return rates, alert engagement and posts acted on per week, each with its exact counting rules and exclusions - plus a 'why would they open this tomorrow?' checklist applied before anything ships. It confirms best-times as the daily habit hook, and anyone can read the definitions."
   },
   {
    "id": "P0-FZ-04",
@@ -22491,7 +23170,8 @@ window.LAUNCH_DATA = {
    "layer": "foundation",
    "layman": "We wrote down our legal position that posting-time tips are guidance, not a promise of results, and confirmed the feature handles no new personal data - so the company is covered if a customer's post still flops.",
    "layman_analogy": "Like a weather forecaster printing 'guidance, not a guarantee' on the forecast, and confirming no new personal details were gathered to make it.",
-   "layman_needed": "A filed legal position stating posting-time tips are guidance not a promise of results, and confirming the feature handles no new personal data beyond the existing agreement."
+   "layman_needed": "A filed legal position stating posting-time tips are guidance not a promise of results, and confirming the feature handles no new personal data beyond the existing agreement.",
+   "layman_output": "A filed legal position, held with the company records, stating that posting-time recommendations are guidance rather than a promise of results, matching the disclaimer pattern already used elsewhere. It also confirms the feature handles no new personal data beyond the existing agreement, so a teammate can answer a legal question by pointing at the file."
   },
   {
    "id": "P0-FH-28",
@@ -22514,7 +23194,8 @@ window.LAUNCH_DATA = {
    "layer": "intelligence",
    "layman": "We recovered about 4,450 post images whose download links had expired, filling a two-month hole in the picture archive our flop-warning model learns from.",
    "layman_analogy": "Like reprinting two months of missing photos from the negatives after the originals faded, so the family album has no gap.",
-   "layman_needed": "A recovered archive of about 4,450 post images whose links had expired, re-fetched into permanent storage, filling a two-month hole in the pictures the flop-warning model learns from."
+   "layman_needed": "A recovered archive of about 4,450 post images whose links had expired, re-fetched into permanent storage, filling a two-month hole in the pictures the flop-warning model learns from.",
+   "layman_output": "A recovered archive: about 4,450 post images whose Facebook links had expired were re-fetched into the permanent storage, filling the April-May hole in the pictures the flop-warning model learns from. The fingerprinting and typing runs were queued May-first to unblock the retrain, so a teammate can check storage and find the missing months present."
   },
   {
    "id": "N1-SD-21",
@@ -22555,7 +23236,8 @@ window.LAUNCH_DATA = {
    ],
    "layman": "One simple checklist showing which design packs have been handed over, ticked as each ships, so that anyone can see at a glance whether the designs the whole build waits on are actually done.",
    "layman_analogy": "Like the wall chart by the school office with one tick box per coach trip permission pack, so the head can see at a glance which classes are actually cleared to travel.",
-   "layman_needed": "A simple live checklist with one box per design pack, ticked within a day of each pack landing, all ten ticked by 17 Sep, feeding the overview widget everyone watches."
+   "layman_needed": "A simple live checklist with one box per design pack, ticked within a day of each pack landing, all ten ticked by 17 Sep, feeding the overview widget everyone watches.",
+   "layman_output": "When done, a simple live checklist will sit on the team site with one box per mockup design pack, ticked within a day of each pack landing with its walkthrough video and screen states. It feeds the overview widget everyone watches, so anyone can glance at one place and answer 'are the mockups done?' - all ten boxes ticked by 17 September."
   },
   {
    "id": "N5-SD-14",
@@ -22581,7 +23263,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "A nightly automatic robot test for the best-time-to-post grid: it checks we hide suggestions when a page has too few posts, show an honest 'not enough posts yet' note, and highlight the top slot in the page's own timezone.",
    "layman_analogy": "Like a night watchman who tests the shop's opening-hours sign every evening - checking it says 'closed' when stock is thin and points to the right busiest hour on the local clock.",
-   "layman_needed": "An automatic nightly test of the best-times grid: on a thin page it must hide suggestions and show 'not enough posts yet'; on a full page it must ring the top slot in that page's own timezone - running green in the suite."
+   "layman_needed": "An automatic nightly test of the best-times grid: on a thin page it must hide suggestions and show 'not enough posts yet'; on a full page it must ring the top slot in that page's own timezone - running green in the suite.",
+   "layman_output": "When finished, an automatic test will run every night against the best-times grid: on a page with too few posts it must confirm suggestions are hidden and 'not enough posts yet' shown with the methodology note; on a full page it must confirm the top slot is ringed in that page's own timezone. It runs green in the nightly suite, visible to anyone checking."
   },
   {
    "id": "N6-FH-07",
@@ -22607,7 +23290,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Before the freeze, Faheem compares every number on the Wins screen line-by-line with our underlying results record on our own test account — any mismatch gets fixed while fixes are still allowed.",
    "layman_analogy": "Like a shopkeeper counting the till against the day's receipts before the auditor locks the books — any penny out gets chased down while corrections are still allowed.",
-   "layman_needed": "A filed comparison, done by 19 Nov, showing every number on the Wins screen matched line-by-line against our results record on the test account, with zero unexplained mismatches — anything off fixed before the freeze."
+   "layman_needed": "A filed comparison, done by 19 Nov, showing every number on the Wins screen matched line-by-line against our results record on the test account, with zero unexplained mismatches — anything off fixed before the freeze.",
+   "layman_output": "A filed comparison document, dated on or before 19 Nov, listing every figure on the Wins screen for our own test account beside the matching entry in the results ledger, row by row, with a tick or an explanation against each. Anyone can open it and see zero unexplained mismatches — and know that any number a customer sees on Wins traces back to a real recorded result before the feature freeze locks the code."
   },
   {
    "id": "N5-SD-15",
@@ -22631,7 +23315,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "During pilot testing we time how many minutes pass from a fresh page connecting to its first useful insight appearing — the real-world measurement our onboarding quality gate demands.",
    "layman_analogy": "Like timing a new oven with a stopwatch from switch-on to the first properly baked loaf, so you can honestly tell buyers how long dinner takes.",
-   "layman_needed": "A recorded stopwatch reading — the minutes from a fresh pilot page connecting to its first useful insight appearing — filed as evidence for the onboarding quality gate, with Lewis handling the pilot side."
+   "layman_needed": "A recorded stopwatch reading — the minutes from a fresh pilot page connecting to its first useful insight appearing — filed as evidence for the onboarding quality gate, with Lewis handling the pilot side.",
+   "layman_output": "A recorded timing, filed in the launch evidence folder, showing exactly how many minutes passed between a genuine pilot page being connected during the first testing wave and its first useful insight appearing on screen. Lewis handles the pilot side. Anyone reviewing the onboarding quality gate can open the record and see the real stopwatch number, measured on a live customer page rather than a staging account."
   },
   {
    "id": "N1-MT-20",
@@ -22658,7 +23343,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Choose and name the app's main working database, and make database changes run automatically with a tested undo, so schema changes are routine rather than risky.",
    "layman_analogy": "Like choosing the filing cabinet for the shop's paperwork and fitting it with a drawer system where every reorganisation is rehearsed and reversible.",
-   "layman_needed": "A written decision naming the main database, plus a working setup where any database change runs automatically in testing and staging, with a proven undo step filed as a receipt."
+   "layman_needed": "A written decision naming the main database, plus a working setup where any database change runs automatically in testing and staging, with a proven undo step filed as a receipt.",
+   "layman_output": "A written decision naming the main application database, plus a working pipeline where any change to its structure runs automatically in testing and staging, with a rehearsed undo step filed as a receipt. A teammate can open the decision doc, watch a database change flow through a pull request untouched by hand, and see proof the change can be reversed — no more silent, unmanaged edits to the database."
   },
   {
    "id": "N4-MT-18",
@@ -22686,7 +23372,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Set up the live production environment from written, repeatable recipes and automatically compare it to our rehearsal environment, so launch day holds no surprises from the two being subtly different.",
    "layman_analogy": "Like building the wedding venue from the same blueprints as the rehearsal hall, then walking both with a checklist so nothing differs on the day except what you meant to differ.",
-   "layman_needed": "A live production environment built from the same written recipes as staging, passing its health check, plus a filed comparison listing every difference between the two — each one deliberate — re-checked at code freeze."
+   "layman_needed": "A live production environment built from the same written recipes as staging, passing its health check, plus a filed comparison listing every difference between the two — each one deliberate — re-checked at code freeze.",
+   "layman_output": "A live production environment, built from the same written recipes as staging and passing its full health check, plus a filed comparison listing every setting that differs between the two with a reason beside each. Anyone can visit the production address, see it healthy, and open the diff to confirm no accidental gaps exist between what we tested and what customers will use — re-checked again at code freeze."
   },
   {
    "id": "N5-MT-20",
@@ -22709,7 +23396,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "A check that our web address, security certificates and email-sending records all renew themselves automatically, with a warning 30 days before anything expires — so the site cannot silently go dark during launch week.",
    "layman_analogy": "Like checking every smoke-alarm battery, door lock and insurance renewal date in the house before going on holiday, with a reminder set 30 days before anything runs out.",
-   "layman_needed": "A filed audit confirming the web address redirects correctly and every security certificate renews itself, plus a 30-day expiry warning proven to actually ring the on-call person's pager."
+   "layman_needed": "A filed audit confirming the web address redirects correctly and every security certificate renews itself, plus a 30-day expiry warning proven to actually ring the on-call person's pager.",
+   "layman_output": "A filed audit confirming the website address redirects correctly to one canonical home and that every security certificate — public and internal — renews itself automatically, plus a 30-day expiry warning wired to the on-call pager and proven with a real test page. Anyone can read the receipt and confirm an expiring certificate can no longer silently take the site down during launch week."
   },
   {
    "id": "N6-JL-07",
@@ -22733,7 +23421,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Write the welcome email for new users and a friendly day-2 nudge for anyone who signed up but never connected their Facebook page, so early users who stall get a helping hand instead of silence.",
    "layman_analogy": "Like writing the welcome card for new guests and a gentle follow-up note for anyone who RSVP'd but never turned up, and rehearsing the postal run before the party.",
-   "layman_needed": "Two emails — a welcome and a day-2 nudge for people who never connected a page — approved by Filza, test-sent from our warmed email address, with the sending procedure written into the launch runbook before the freeze."
+   "layman_needed": "Two emails — a welcome and a day-2 nudge for people who never connected a page — approved by Filza, test-sent from our warmed email address, with the sending procedure written into the launch runbook before the freeze.",
+   "layman_output": "Two finished emails — a welcome sent when a batch-1 account is admitted, and a day-2 nudge for anyone who never connected a page — both approved by Filza, test-sent from our warmed sending address, and pointing at the connect flow and support inbox. The send procedure (who sends, from what list, when) is written into the launch runbook, so a stalled new signup is contacted instead of quietly forgotten."
   },
   {
    "id": "N5-SD-16",
@@ -22763,7 +23452,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "We write six more nightly automatic robot tests covering the daily feed, first-time setup, data export and delete, waitlist emails, quiet-hours alerts and the Wins screen — so every feature is re-proven every night until launch.",
    "layman_analogy": "Like adding six more rooms to the night watchman's round, so every corner of the building gets checked each night, not just the front hall.",
-   "layman_needed": "Six new automatic nightly tests — covering the daily feed, first-time setup, export and delete, waitlist emails, quiet-hours alerts and the Wins screen — all passing before 20 Nov and raising the same alarm as the existing tests when they fail."
+   "layman_needed": "Six new automatic nightly tests — covering the daily feed, first-time setup, export and delete, waitlist emails, quiet-hours alerts and the Wins screen — all passing before 20 Nov and raising the same alarm as the existing tests when they fail.",
+   "layman_output": "Six new automatic tests running every night alongside the existing suite, covering the daily feed, first-time setup, export and delete, waitlist emails, quiet-hours alerts and the Wins screen. Anyone can open the nightly results and see all six green before 20 Nov — and when one breaks, the same alarm rings as for the original tests, so every launch feature now has a machine-checked proof it still works."
   },
   {
    "id": "N4-FH-10",
@@ -22789,7 +23479,8 @@ window.LAUNCH_DATA = {
    "checklist": [],
    "layman": "Bring across the dashboard that grades each of our prediction systems as healthy, needs watching, or slipping, so we notice a model getting worse before customers do.",
    "layman_analogy": "Like a hospital ward board showing each patient as stable, needs watching, or deteriorating — one glance tells the doctor where to go first.",
-   "layman_needed": "A live dashboard row for each of the five prediction systems grading it healthy, watching or slipping, proven by deliberately tripping two faults and seeing the right rows turn red within one refresh."
+   "layman_needed": "A live dashboard row for each of the five prediction systems grading it healthy, watching or slipping, proven by deliberately tripping two faults and seeing the right rows turn red within one refresh.",
+   "layman_output": "A single view on the internal QA dashboard with one live row for each of the five prediction systems — flop warnings, comment feeling, crisis bursts, best times and Art-E — graded healthy, watching or slipping, each row linking to the fix-it action. Proven by deliberately breaking two things and watching the right rows turn red within one refresh, so model trouble is visible at a glance, not just alerted."
   }
  ]
 };
