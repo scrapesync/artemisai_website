@@ -1200,7 +1200,8 @@ window.LAUNCH_DATA = {
     "P0-FH-21",
     "N1-SD-21",
     "N1-FH-19",
-    "N2-FH-20"
+    "N2-FH-20",
+    "N4-FH-10"
    ],
    "kind": "surface"
   },
@@ -1269,7 +1270,9 @@ window.LAUNCH_DATA = {
     "P0-FH-08",
     "P0-FH-09",
     "P0-LW-03",
-    "N1-SD-21"
+    "N1-SD-21",
+    "N5-SD-16",
+    "N4-FH-10"
    ],
    "kind": "surface"
   },
@@ -1300,7 +1303,8 @@ window.LAUNCH_DATA = {
     "P0-FH-26",
     "P0-MT-10",
     "N1-SD-21",
-    "N5-SD-14"
+    "N5-SD-14",
+    "N4-FH-10"
    ],
    "kind": "surface"
   },
@@ -1480,7 +1484,8 @@ window.LAUNCH_DATA = {
     "N6-MT-04",
     "N4-MT-17",
     "P0-FH-14",
-    "N1-SD-21"
+    "N1-SD-21",
+    "N5-SD-16"
    ],
    "kind": "surface"
   },
@@ -1504,7 +1509,8 @@ window.LAUNCH_DATA = {
     "N5-AS-11",
     "N6-FH-05",
     "N1-SD-21",
-    "N6-FH-07"
+    "N6-FH-07",
+    "N5-SD-16"
    ],
    "kind": "surface"
   },
@@ -1535,7 +1541,8 @@ window.LAUNCH_DATA = {
     "N5-AS-13",
     "P0-FH-04",
     "P0-AS-18",
-    "N1-SD-21"
+    "N1-SD-21",
+    "N5-SD-16"
    ],
    "kind": "surface"
   },
@@ -1566,7 +1573,8 @@ window.LAUNCH_DATA = {
     "N5-SD-08",
     "N5-LW-08",
     "N6-MT-10",
-    "N5-SD-15"
+    "N5-SD-15",
+    "N5-SD-16"
    ],
    "kind": "surface"
   },
@@ -1625,7 +1633,8 @@ window.LAUNCH_DATA = {
     "N1-SD-21",
     "N2-MT-15",
     "N2-AS-15",
-    "N4-MT-01"
+    "N4-MT-01",
+    "N5-SD-16"
    ],
    "kind": "surface"
   },
@@ -1694,7 +1703,8 @@ window.LAUNCH_DATA = {
     "LW-AX-03",
     "LW-FZ-03",
     "P0-AS-01",
-    "P0-AS-14"
+    "P0-AS-14",
+    "N5-SD-16"
    ],
    "kind": "surface"
   },
@@ -1882,7 +1892,8 @@ window.LAUNCH_DATA = {
     "N6-AS-12",
     "N1-MT-20",
     "N4-MT-18",
-    "N5-MT-20"
+    "N5-MT-20",
+    "N4-FH-10"
    ],
    "kind": "foundation"
   },
@@ -2966,7 +2977,8 @@ window.LAUNCH_DATA = {
     "Inventory prediction tables + cadence",
     "Panels + alert rules on the QA dashboard",
     "Route alerts; write trip actions",
-    "Pause a job and confirm the alert fires"
+    "Pause a job and confirm the alert fires",
+    "Add the ingest tables — hourly page_posts and the KANG collection receipts — to the max-timestamp panel and alert inventory, not only model-output tables"
    ]
   },
   {
@@ -6370,7 +6382,8 @@ window.LAUNCH_DATA = {
     "Hour x day table per page",
     "Count floor + persisted fallback",
     "Strictly-before + timezone column",
-    "Backtest + lookback note"
+    "Backtest + lookback note",
+    "Panel on the QA dashboard: backtest lift vs baseline and per-page eligibility (count floor met / fallback level) so Best Times quality is visible before the N3 UI ships"
    ]
   },
   {
@@ -9172,7 +9185,8 @@ window.LAUNCH_DATA = {
     "KS tests on confidence + label mix",
     "Weekly Brier trend panel",
     "Trip thresholds + written trip actions",
-    "Synthetic-shift test"
+    "Synthetic-shift test",
+    "Extend the watchdog panels to best-times aggregates (staleness + distribution shift vs the S9 baseline) so every launch model, not only flop/NLP/crisis, has a drift panel on the QA dashboard"
    ]
   },
   {
@@ -9386,7 +9400,8 @@ window.LAUNCH_DATA = {
     "Pick an incident from Lewis's set and stage its comments",
     "Run the replay with timestamps at each stage",
     "Force a failure and confirm the DLQ holds it",
-    "File the timing log"
+    "File the timing log",
+    "Publish the per-stage timing (fetch -> label -> detect -> deliver) as a standing 15-min-clock panel on the QA dashboard, fed by every fast-lane cycle, not only the drill log"
    ]
   },
   {
@@ -11596,7 +11611,8 @@ window.LAUNCH_DATA = {
     "Audit per model",
     "Blind-set accuracy",
     "Band recalibration with Saad",
-    "File report"
+    "File report",
+    "Publish the audit's per-model accuracy vs gold and blind sets to the QA dashboard (superseding the old-stack NLP accuracy tracker numbers) so mid-flight accuracy is visible, not only filed"
    ]
   },
   {
@@ -11624,7 +11640,8 @@ window.LAUNCH_DATA = {
     "Per-pilot log",
     "Lewis verdicts",
     "Tune round 2",
-    "Record vs gate"
+    "Record vs gate",
+    "Panel on the QA dashboard: weekly alert precision trend (alerts vs not-a-crisis verdicts) per pilot, refreshed from this log so drift between tuning rounds is visible"
    ]
   },
   {
@@ -13446,25 +13463,21 @@ window.LAUNCH_DATA = {
    "id": "N5-AS-06",
    "sprint": "N5",
    "assignee": "Asad",
-   "title": "E2E all 5 flows nightly vs staging + cross-browser/device matrix",
-   "what": "Nightly E2E run of flows 1-5 against staging with failure paging; matrix: Chrome, Safari, Firefox desktop; iOS Safari and Android Chrome (PWA); results surfaced on the war-room board. Add iPad Safari to the matrix and publish the minimum supported browser/OS list into Saad's docs so support and pilots know what is promised.",
+   "title": "E2E nightly suite vs staging: all flows 1-14 + cross-browser/device matrix",
+   "what": "Nightly E2E run of every flow 1-14 (1-5 Asad's CI specs; 6-8 from N5-SD-13/14; 9-14 from N5-SD-16) against staging with failure paging; matrix: Chrome, Safari, Firefox desktop; iOS Safari and Android Chrome (PWA); results surfaced on the war-room board. Add iPad Safari to the matrix and publish the minimum supported browser/OS list into Saad's docs so support and pilots know what is promised.",
    "why": "The robot safety net at full strength before freeze.",
    "area": "QA",
    "due": "2026-11-05",
    "priority": "P1",
    "priority_reason": "Review evidence",
-   "depends_on": [
-    "N4-AS-15",
-    "Muteeb: nightly CI slot + board",
-    "N5-SD-13"
-   ],
+   "depends_on": [],
    "feeds": [
     "Muteeb (board)",
     "Alex (readiness)"
    ],
    "gate": "N5",
    "source": "plan",
-   "acceptance": "Five consecutive green nightly runs across the matrix are visible on the board.",
+   "acceptance": "Five consecutive green nightly runs of flows 1-14 across the matrix visible on the board; flow 14 counts from the night N5-AS-11 lands.",
    "checklist": [
     "Nightly schedule + paging",
     "Browser matrix",
@@ -14307,7 +14320,8 @@ window.LAUNCH_DATA = {
     "Compute added/removed edges and top-5 rank churn per page",
     "Count movement between FDR-gated, fallback and k=5-suppressed populations",
     "Set the churn alert threshold with Asad",
-    "Hand the two most recent reports to Lewis before the pre-freeze spot check"
+    "Hand the two most recent reports to Lewis before the pre-freeze spot check",
+    "Publish the recompute-diff series (edge churn, top-5 rank stability, FDR-gated/fallback/k=5-suppressed counts) plus the latest precision@5 gate result as a panel on the QA dashboard"
    ]
   },
   {
@@ -17760,7 +17774,7 @@ window.LAUNCH_DATA = {
    "sprint": "LW",
    "assignee": "Asad",
    "title": "Smoke all 5 flows on production Sat 28 Nov (MVP done)",
-   "what": "Run the five critical flows manually and via E2E against production with the real pilot tenants and the dogfood tenant; record the receipt; only then Saad posts the MVP-done graphics.",
+   "what": "Run the five critical flows manually and the full E2E suite (flows 1-14) against production with the real pilot tenants and the dogfood tenant, plus a web-push test push and a PWA install spot-check; record the receipt; only then Saad posts the MVP-done graphics.",
    "why": "Never announce what you have not just watched work.",
    "area": "Launch",
    "due": "2026-11-28",
@@ -17789,7 +17803,7 @@ window.LAUNCH_DATA = {
    "sprint": "LW",
    "assignee": "Asad",
    "title": "Smoke all 5 flows on production Tue 1 Dec before any announcement",
-   "what": "Early on 1 Dec (before 08:00 UK) re-run the five flows on production, confirm pilots' pages show correct data ('pilot sees wrong data' = automatic incident), and sign the smoke receipt in the war room before Alex's 08:01 posts.",
+   "what": "Early on 1 Dec (before 08:00 UK) re-run the five manual flows and the full E2E suite (flows 1-14) on production, confirm pilots' pages show correct data ('pilot sees wrong data' = automatic incident), and sign the smoke receipt in the war room before Alex's 08:01 posts.",
    "why": "The gate itself: all five flows smoked BEFORE announcing.",
    "area": "Launch",
    "due": "2026-12-01",
@@ -17962,7 +17976,7 @@ window.LAUNCH_DATA = {
    "sprint": "LW",
    "assignee": "Muteeb",
    "title": "Production smoke of all 5 flows on Sat 28 Nov",
-   "what": "Support Asad smoking all five critical flows on production for the MVP-done milestone.",
+   "what": "Support Asad smoking the five critical flows manually and the full E2E suite (flows 1-14) on production for the MVP-done milestone.",
    "why": "Never announce what you have not just watched work.",
    "area": "Launch",
    "due": "2026-11-28",
@@ -17990,7 +18004,7 @@ window.LAUNCH_DATA = {
    "sprint": "LW",
    "assignee": "Muteeb",
    "title": "Launch day 1 Dec: smoke before 08:01, flags flip, canary and rollback armed",
-   "what": "Smoke all five flows on production before 08:01, flip flags at 08:00 with canary and rollback armed, enforce hotfix-only, and treat 'pilot sees wrong data' as an automatic incident.",
+   "what": "Smoke the five manual flows and the full E2E suite (flows 1-14) on production before 08:01, flip flags at 08:00 with canary and rollback armed, enforce hotfix-only, and treat 'pilot sees wrong data' as an automatic incident.",
    "why": "Launch is a toggle because N6 made it one; an unsmoked announcement is a gamble.",
    "area": "Launch",
    "due": "2026-12-01",
@@ -18625,7 +18639,7 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Saad",
    "title": "E2E specs for flows 6-7: Discovery and Health/Pages",
-   "what": "Write the Playwright specs for two missing end-to-end flows: (6) Discovery opt-in through to matches shown with the why-this-match note, (7) Health score and Pages view reconciling against known warehouse values for the test tenant. Asad's nightly suite runs them.",
+   "what": "Write the Playwright specs for two missing end-to-end flows: (6) Discovery opt-in through to matches shown with the why-this-match note, (7) Health score, Pages view and the four Analytics KPI tiles reconciling against known warehouse values for the test tenant. Asad's nightly suite runs them.",
    "why": "Discovery, Health, Best Times and Wins currently have no E2E flow - per-piece acceptance only.",
    "area": "QA",
    "due": "2026-11-04",
@@ -20652,6 +20666,56 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "launch blindspot sweep 3 Sep",
    "acceptance": "Both emails are approved by Filza, test-sent from the warmed domain, and the send procedure (trigger, list source, owner) is written into the launch runbook before the freeze.",
+   "checklist": []
+  },
+  {
+   "id": "N5-SD-16",
+   "sprint": "N5",
+   "assignee": "Saad",
+   "title": "E2E specs for flows 9-14: the six uncovered feature surfaces",
+   "what": "Playwright specs in the nightly suite: 9 Today feed + briefing card or hidden state; 10 connect -> first insight -> tour once -> activation event; 11 export + delete on a throwaway tenant; 12 waitlist signup/confirm/unsubscribe; 13 quiet-hours alert suppressed but logged + digest; 14 Wins screen equals ledger. (Later-landing inputs N5-AS-11 are consumed as they arrive, not blocking the spec work.)",
+   "why": "Six features pass only one-off or manual checks; the proven pattern (Saad specs, N5-AS-06 runs nightly, LW smokes re-run) makes every gate provable through freeze.",
+   "area": "QA",
+   "due": "2026-11-04",
+   "priority": "P1",
+   "priority_reason": "E2E + QA-dashboard audit 7 Sep",
+   "depends_on": [
+    "N4-AS-10",
+    "N4-AS-06",
+    "N4-AS-13",
+    "N3-FH-02",
+    "N3-MT-14",
+    "N3-AS-02"
+   ],
+   "feeds": [
+    "N5-AS-06"
+   ],
+   "gate": "none",
+   "source": "E2E + QA-dashboard audit 7 Sep",
+   "acceptance": "All six specs green in the nightly suite before 13 Nov; flow 14 green within 48h of N5-AS-11 landing; failures page exactly like flows 1-8.",
+   "checklist": []
+  },
+  {
+   "id": "N4-FH-10",
+   "sprint": "N4",
+   "assignee": "Faheem",
+   "title": "Port the S9 model-health board: healthy/watch/slipping per launch model",
+   "what": "One consolidated view on the rebuilt QA dashboard (shared Custom tab): flop, comment sentiment/toxicity, crisis burst, best-times and Art-E each get a healthy/watch/slipping row computed from rules already shipping (drift trips, nightly regression, freshness, serving panels), each row linking to its trip action.",
+   "why": "The S9 watchdog shipped model-side only (P0-FH-27) and the visible-board claim was removed; no launch ticket rebuilds it, so model quality is alerted but never visible on one view.",
+   "area": "model-qa",
+   "due": "2026-10-24",
+   "priority": "P1",
+   "priority_reason": "E2E + QA-dashboard audit 7 Sep",
+   "depends_on": [
+    "N3-FH-08",
+    "N4-FH-05",
+    "N1-FH-11",
+    "N4-FH-02"
+   ],
+   "feeds": [],
+   "gate": "none",
+   "source": "E2E + QA-dashboard audit 7 Sep",
+   "acceptance": "All five launch models show a live tri-state row on the QA dashboard; a synthetic drift trip and a paused freshness job each flip the correct row to slipping within one refresh.",
    "checklist": []
   }
  ]
