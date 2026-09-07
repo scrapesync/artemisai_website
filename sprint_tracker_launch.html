@@ -492,6 +492,12 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .laybox{background:var(--bg2);border:1px dashed var(--border);border-radius:10px;padding:10px 14px;margin-bottom:10px}
 .laybox h4{color:var(--gold)}
 @media (max-width:760px){ .lgh{flex-wrap:wrap} .lgn{margin-left:0;flex-basis:100%} .lrow .who{display:none} }
+
+.laytxt .lk{font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold);font-weight:700;margin:9px 0 3px}
+.laytxt .lk:first-child{margin-top:2px}
+.laytxt p{margin:0}
+.laybox h4{margin-top:9px}
+.laybox h4:first-child{margin-top:0}
 </style>
 </head><body>
 
@@ -1029,7 +1035,10 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     return '<div class="det" data-det="'+t.id+'"><div>'+
       '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><button class="editbtn" data-eopen="'+t.id+'">Edit ticket</button><button class="editbtn" data-lay="'+t.id+'">In plain words</button>'+
       (edited?'<span class="edited">edited by '+esc(S.edited_by||'someone')+'</span>':'')+'</div>'+
-      '<div class="laybox" id="lay-'+t.id+'" hidden><h4>In plain words</h4><p>'+esc(t.layman||'Plain-words note is being written for this ticket.')+'</p><p style="margin-top:6px">'+layShare(t)+'</p></div>'+
+      '<div class="laybox" id="lay-'+t.id+'" hidden><h4>In plain words</h4><p>'+esc(t.layman||'Plain-words note is being written for this ticket.')+'</p>'+
+      (t.layman_analogy?'<h4>Think of it like</h4><p>'+esc(t.layman_analogy)+'</p>':'')+
+      (t.layman_needed?'<h4>Exactly what is needed</h4><p>'+esc(t.layman_needed)+'</p>':'')+
+      '<p style="margin-top:8px">'+layShare(t)+'</p></div>'+
       '<h4>What</h4><p>'+esc(t.what)+'</p><h4>Why</h4><p>'+esc(t.why)+'</p><h4>Done when</h4><p>'+esc(t.acceptance)+'</p>'+
       '<h4>Priority</h4><p><span class="pr '+t.priority+'">'+t.priority+'</span> '+esc(t.priority_reason)+'</p>'+
       '<h4>Depends on</h4><p>'+((t.depends_on||[]).length?t.depends_on.map(function(d){return '<span class="tag">'+esc(d)+'</span>';}).join(''):'<span class="tag">nothing</span>')+'</p>'+
@@ -1431,7 +1440,10 @@ main{max-width:1500px;margin:0 auto;padding:22px}
             '<span class="lti">'+esc(t.title)+'</span>'+
             '<span class="who" style="color:'+(PC[t.assignee]||'#9c8f80')+'">'+esc(t.assignee||'')+'</span>'+
             '<span class="chev">'+(o?'&#9650;':'&#9660;')+'</span></div>'+
-            (o?'<div class="laytxt"><p>'+esc(t.layman||'Plain-words note is being written for this ticket.')+'</p><p style="margin-top:6px">'+layShare(t)+'</p></div>':'');
+            (o?'<div class="laytxt"><div class="lk">In plain words</div><p>'+esc(t.layman||'Plain-words note is being written for this ticket.')+'</p>'+
+              (t.layman_analogy?'<div class="lk">Think of it like</div><p>'+esc(t.layman_analogy)+'</p>':'')+
+              (t.layman_needed?'<div class="lk">Exactly what is needed</div><p>'+esc(t.layman_needed)+'</p>':'')+
+              '<p style="margin-top:8px">'+layShare(t)+'</p></div>':'');
         }).join(''):'')+
       '</div>';
     }).join('');
