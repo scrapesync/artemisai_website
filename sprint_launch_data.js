@@ -1980,7 +1980,8 @@ window.LAUNCH_DATA = {
     "N2-FZ-11",
     "N3-FZ-10",
     "N5-SD-12",
-    "N6-AS-11"
+    "N6-AS-11",
+    "N6-JL-07"
    ]
   },
   {
@@ -2378,6 +2379,7 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "Dated public beat reset by Alex to 12 Sep",
    "depends_on": [
+    "P0-SD-04",
     "N1-SD-06",
     "N1-AS-06",
     "N1-FZ-09"
@@ -3908,7 +3910,9 @@ window.LAUNCH_DATA = {
     "Analytics + Pages: health pill with bands, 'building your baseline' thin state",
     "Art-E: refusal and AI-label slots reserved for Filza's N3 text",
     "Omit deferred items by name: auto-pilot log, Photos/Video tabs, goal tracker, billing/team modals, Cmd-K",
-    "Fix the V3 mobile-search rows that navigate to a non-existent view"
+    "Fix the V3 mobile-search rows that navigate to a non-existent view",
+    "Connect + consent pack: Facebook login -> multi-select page picker, per-page health (connected/expiring/revoked/re-auth needed), disconnect confirm, OAuth consent screen - frozen-ready for the N2-AS-09 screencasts",
+    "Shell + system prompts addendum: topbar bell dropdown with unread counts, toasts, cookie banner (landing + app), push opt-in pre-prompt with iOS caveat, PWA install/update prompts"
    ]
   },
   {
@@ -3916,7 +3920,7 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Saad",
    "title": "States matrix across all packs + crisis email template",
-   "what": "Audit every pack against one states matrix: empty, error, loading-as-'learning, never loading', thin history, sub-k=5 fail-closed, health 'building your baseline', best-times sparse, gauge abstain. Design the crisis alert email (deep link, cited post, one action, drafted reply, dark-mode safe) using the voice guide.",
+   "what": "One states matrix audited per pack: empty, error, loading-as-'learning, never loading', thin history, sub-k=5 fail-closed, 'building your baseline', best-times sparse, gauge abstain, rate-limited (Retry-After), stale-data banner, page revoked, feature-off (kill switch) - so N5-AS-02/N6-AS-03 render designed states. Design the crisis email (deep link, cited post, one action, drafted reply, dark-mode safe)",
    "why": "States are where trust is won; a missing spinner or a fake number on a thin page is what UAT would otherwise find first.",
    "area": "Design",
    "due": "2026-09-10",
@@ -7010,7 +7014,7 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Saad",
    "title": "Decide the notification timing policy with Alex + Lewis",
-   "what": "Run one decision meeting and write the policy: what happens when a storm fires at 2am (quiet hours, severity override, digest vs immediate, morning digest, what the user can configure, alerts still logged during quiet hours). Feed it to Muteeb's alerts pipeline, Faheem's crisis doc and Asad's N3 Alerts/Settings build.",
+   "what": "Run one decision meeting and write the policy: what happens when a storm fires at 2am (quiet hours, severity override, digest vs immediate, morning digest, what the user can configure, alerts logged during quiet hours), plus the timezone quiet hours are evaluated in (admin profile vs page-local) and how a DST change moves the boundary. Feed it to Muteeb's alerts pipeline, Faheem's crisis doc and Asad's N3 build.",
    "why": "The only unowned product decision in the plan; it decides whether 'caught in minutes' is a product claim or marketing copy.",
    "area": "Alerts",
    "due": "2026-09-16",
@@ -7656,7 +7660,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "A written fallback plan with allowed/banned claims and the 20 Nov trigger is filed with the decisions calendar and acknowledged by Saad, Lewis and Filza.",
+   "acceptance": "A written fallback plan with allowed/banned claims and the 20 Nov trigger is filed with the decisions calendar and acknowledged by Saad, Lewis and Filza, and it states the dev-mode Tester role limit against wave sizes so no wave is promised a connect Meta cannot honour.",
    "checklist": [
     "Describe the dev-mode launch shape",
     "List allowed vs banned claims with Filza",
@@ -8255,7 +8259,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N3",
    "source": "plan",
-   "acceptance": "Asad has the consent strings and the signup consent spec, and the ruling on migrated Netlify Forms names is written.",
+   "acceptance": "Asad has the consent strings and the signup consent spec - including timestamped ToS-acceptance capture at app signup, logged per account - and the ruling on migrated Netlify Forms names is written.",
    "checklist": [
     "Write the waitlist consent and unsubscribe strings",
     "Specify marketing consent capture at app signup (unticked, logged with timestamp)",
@@ -8313,7 +8317,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "plan",
-   "acceptance": "A commercial terms schedule carrying the signed price and an approved invoice template are filed with Jill and attached to the pilot agreement.",
+   "acceptance": "A commercial terms schedule carrying the signed price plus explicit cancellation and refund clauses, and an approved invoice template, are filed with Jill and attached to the pilot agreement.",
    "checklist": [
     "Draft the terms schedule with the price as a slot before 25 Sep",
     "Define the launch-slips and term clauses",
@@ -11625,7 +11629,7 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Muteeb",
    "title": "Request vendor quota raises: SES, Pinecone, Cognito, frontier LLM",
-   "what": "File quota-raise requests with each vendor against the pilot x10 and day-1 projections, track approvals, and record the granted ceilings in the war-room runbook.",
+   "what": "File quota-raise requests with each vendor against the pilot x10 and day-1 projections, track approvals, and record the granted ceilings in the war-room runbook. Add the Meta Graph budget: compute fast-lane + ingest calls at day-1 scale (100 pages) against the app's rate-limit tier in dev mode AND Live Mode, and record the headroom beside the vendor ceilings.",
    "why": "Rate-limit ceilings discovered on launch morning are self-inflicted; approvals take days to weeks.",
    "area": "Ops",
    "due": "2026-10-16",
@@ -12198,7 +12202,7 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Saad",
    "title": "WCAG 2.1 AA audit across built surfaces; size fixes for Asad",
-   "what": "Audit every built surface (web + mobile) for contrast, focus order, keyboard reach, labels and motion; list fixes sized for Asad's N5 slot.",
+   "what": "Audit every built surface (web + mobile) for contrast, focus order, keyboard reach, labels and motion; include the crisis/alert email template (semantic structure, alt text, dark-mode contrast) and the /security packet and invoice PDFs (tagged, readable order); list fixes sized for Asad's N5 slot.",
    "why": "Accessibility debt compounds; N5 has the fix slot only if the list exists by then.",
    "area": "QA",
    "due": "2026-10-23",
@@ -12732,7 +12736,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "LW",
    "source": "plan",
-   "acceptance": "A dated confirmation shows DMARC pass, bounce/complaint rates inside thresholds, seeded inbox placement for alert and newsletter templates, and an SES quota that covers the 1 Dec send.",
+   "acceptance": "A dated confirmation shows DMARC pass, bounce/complaint rates inside thresholds, an SES quota covering the 1 Dec send, and seeded inbox placement for every template live at launch: crisis alert, newsletter, waitlist confirm + 1 Dec queue email, deletion/export receipts, and the auth vendor's verify/reset emails from a branded, authenticated sender.",
    "checklist": [
     "Read DMARC aggregate reports with Muteeb; confirm alignment",
     "Check SES bounce/complaint rates against the plan thresholds",
@@ -13348,7 +13352,7 @@ window.LAUNCH_DATA = {
    "sprint": "N5",
    "assignee": "Asad",
    "title": "E2E all 5 flows nightly vs staging + cross-browser/device matrix",
-   "what": "Nightly E2E run of flows 1-5 against staging with failure paging; matrix: Chrome, Safari, Firefox desktop; iOS Safari and Android Chrome (PWA); results surfaced on the war-room board.",
+   "what": "Nightly E2E run of flows 1-5 against staging with failure paging; matrix: Chrome, Safari, Firefox desktop; iOS Safari and Android Chrome (PWA); results surfaced on the war-room board. Add iPad Safari to the matrix and publish the minimum supported browser/OS list into Saad's docs so support and pilots know what is promised.",
    "why": "The robot safety net at full strength before freeze.",
    "area": "QA",
    "due": "2026-11-05",
@@ -14082,7 +14086,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "none",
    "source": "muteeb",
-   "acceptance": "A ranked ten-row failure-mode table exists with trigger, blast radius, detection signal, first action, owner and expected recovery, each row linked to its runbook from the one board.",
+   "acceptance": "A ranked ten-row failure-mode table exists with trigger, blast radius, detection signal, first action, owner and expected recovery, each row linked to its runbook from the one board; the table includes a full Netlify/BFF outage row with its launch-morning first action (status page + comms, noting crisis emails still deliver from AWS).",
    "checklist": [
     "Assemble the five panels on one board",
     "Write the ranked ten-row failure-mode table with all six columns",
@@ -15605,7 +15609,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N5",
    "source": "plan",
-   "acceptance": "ToS final is signed by Alex and published at the stable URL with a version date.",
+   "acceptance": "ToS final is signed by Alex and published at the stable URL with a version date, and incorporates the DPA by reference for online signups so non-pilot batch-1 customers have processor terms without countersigning.",
    "checklist": [
     "Merge the AI, age, availability and pricing clauses",
     "Align the liability cap with the pilot agreement",
@@ -15888,7 +15892,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "All screenshots are post-freeze, legal pages resolve from footer and Settings, and every public URL has an OG image and appears in the sitemap.",
+   "acceptance": "All screenshots are post-freeze, legal pages resolve from footer and Settings, every public URL has an OG image and appears in the sitemap, and Saad's getting-started + per-surface how-to docs are published on the site and linked from Settings/help.",
    "checklist": [
     "Capture frozen-build screenshots",
     "Legal pages + footer/Settings links",
@@ -16945,7 +16949,7 @@ window.LAUNCH_DATA = {
    ],
    "gate": "N6",
    "source": "plan",
-   "acceptance": "A dated baseline sheet with every KPI value and the expansion/abort thresholds is filed with the go/no-go memo.",
+   "acceptance": "A dated baseline sheet with every KPI value and the expansion/abort thresholds is filed with the go/no-go memo, and the sheet names the recurring post-launch KPI review: owner, weekday and duration through batch 1 (1-21 Dec).",
    "checklist": [
     "Pull funnel numbers from the war-room board",
     "Record the activation rate",
@@ -20393,7 +20397,9 @@ window.LAUNCH_DATA = {
     "Art-E rail pack (by 10 Sep)",
     "Settings pack (by 10 Sep)",
     "Wins-lite pack (by 10 Sep)",
-    "Pages + workspace switcher pack (by 10 Sep)"
+    "Pages + workspace switcher pack (by 10 Sep)",
+    "Connect + consent flow pack (by 10 Sep)",
+    "Shell + system prompts addendum (by 10 Sep)"
    ]
   },
   {
@@ -20530,6 +20536,27 @@ window.LAUNCH_DATA = {
    "gate": "none",
    "source": "coverage + red-team audit 3 Sep",
    "acceptance": "A filed audit shows canonical redirects and auto-renew verified on every certificate including internal client certs, and a test expiry alarm paged on-call.",
+   "checklist": []
+  },
+  {
+   "id": "N6-JL-07",
+   "sprint": "N6",
+   "assignee": "Jill",
+   "title": "Welcome + connect-nudge emails ready for batch 1",
+   "what": "Draft a welcome email sent when a batch-1 account is admitted, and a day-2 nudge for accounts that never connected a page, both pointing at the connect flow and support address, using Filza's PECR wording and the warmed send domain. Agree the send procedure with Muteeb (manual daily list acceptable). (Later-due mechanics N6-MT-10 are referenced, not blocking - this ticket only drafts and rehearses.)",
+   "why": "BL-LA-01 is unowned backlog; a batch-1 signup who stalls before connecting is never contacted and never activates, and admission-control expansion reads that activation floor.",
+   "area": "Launch comms",
+   "due": "2026-11-13",
+   "priority": "P1",
+   "priority_reason": "launch blindspot sweep 3 Sep",
+   "depends_on": [
+    "N2-FZ-08",
+    "N4-JL-03"
+   ],
+   "feeds": [],
+   "gate": "none",
+   "source": "launch blindspot sweep 3 Sep",
+   "acceptance": "Both emails are approved by Filza, test-sent from the warmed domain, and the send procedure (trigger, list source, owner) is written into the launch runbook before the freeze.",
    "checklist": []
   }
  ]
