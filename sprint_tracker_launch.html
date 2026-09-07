@@ -519,6 +519,18 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .outp{background:rgba(217,164,65,.06);border-left:2px solid var(--gold);border-radius:0 8px 8px 0;padding:8px 12px;margin:10px 0}
 .outp h4{color:var(--gold);margin-top:0}
 .outp p{margin:0}
+
+.softb{position:absolute;top:-8px;right:8px;font-size:9px;font-family:'IBM Plex Mono',monospace;color:var(--gold);background:var(--bg);border:1px solid rgba(217,164,65,.45);border-radius:10px;padding:1px 7px;z-index:2}
+.softpanel{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-top:14px;overflow:hidden}
+.sph{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer}
+.sph:hover{background:var(--card2)}
+.sph h3{font-size:14px}
+.spn{margin-left:auto;font-size:10.5px;color:var(--muted3);max-width:420px;text-align:right}
+.spb{border-top:1px solid var(--border2);max-height:420px;overflow-y:auto}
+.sprow{display:flex;align-items:center;gap:10px;padding:7px 16px;border-bottom:1px solid var(--border2);font-size:12px}
+.sprow .spt{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:300px}
+.sprow .spx{color:var(--gold);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:760px){ .spn{display:none} .sprow{flex-wrap:wrap} .sprow .spt{max-width:100%} }
 </style>
 </head><body>
 
@@ -609,6 +621,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       <span class="maphint" id="map-hint"></span>
     </div>
     <div class="mapwrap" id="map-wrap"><div class="mapinner" id="map-inner"></div></div>
+    <div id="map-soft"></div>
     <div class="detpanel" id="map-det"></div>
   </section>
 
@@ -819,6 +832,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     var dueWeekN=T.filter(function(t){ return isOpen(t)&&t.due&&t.due>=TODAY&&days(TODAY,t.due)<=7; }).length;
     var blN=all().filter(function(t){return counted(t)&&sp(t)==='BL';}).length;
     var curPct=curT.length?curDone/curT.length:0, exp=expected(cur), ph0=sprintPhase(cur);
+    var gateChip = (ph0==='live'&&cur.gate_date&&cur.gate_date>=TODAY)?'<span class="pchip na">gate in '+days(TODAY,cur.gate_date)+'d</span>':'';
     var pace = ph0!=='live' ? '<span class="pchip na">'+(ph0==='upcoming'?'starts '+fmtS(cur.start):'closed')+'</span>'
       : curPct>=exp+0.1 ? '<span class="pchip ahead">ahead of pace</span>'
       : curPct>=exp-0.15 ? '<span class="pchip on">on pace</span>'
@@ -829,7 +843,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
         '<div class="hring" title="'+done+' of '+T.length+' tickets done"><svg viewBox="0 0 100 100"><circle class="bgc" cx="50" cy="50" r="44"/><circle class="fgc" cx="50" cy="50" r="44" style="stroke-dasharray:'+C+';stroke-dashoffset:'+(C*(1-pct/100)).toFixed(1)+'"/></svg><div class="hrv">'+pct+'%<small>built</small></div></div>'+
         '<div class="hmain"><div class="hk">Days to launch</div><div class="hd">'+toLaunch+'</div><div class="hs">Tue 8 Dec &middot; 08:00 UK</div><div class="hs dim">'+done+' of '+T.length+' tickets done</div></div>'+
         '<div class="hcur" data-s="'+cur.id+'" title="Open '+cur.id+' in the tracker">'+
-          '<div class="hk">Current sprint &middot; <span class="mono">'+cur.id+'</span>'+pace+'</div>'+
+          '<div class="hk">Current sprint &middot; <span class="mono">'+cur.id+'</span>'+pace+gateChip+'</div>'+
           '<div class="hcn">'+esc(cur.name)+'</div>'+
           '<div class="hcs">'+(ph0==='upcoming'?('starts '+fmt(cur.start)):(days(TODAY,cur.end)+' days left &middot; gate '+fmtS(cur.gate_date)))+' &middot; expected ~'+Math.round(exp*100)+'% by today</div>'+
           '<div class="bar big"><i style="width:'+Math.round(curPct*100)+'%"></i><b style="left:'+Math.round(exp*100)+'%" title="where we should be today"></b></div>'+
@@ -1287,9 +1301,10 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   function drawTicketMap(){
     var nodes=mapNodes(), inner=document.getElementById('map-inner');
     var PEOPLE_N=PEOPLE.map(function(p){return p.n;});
-    document.getElementById('map-hint').textContent = MAPWHO
+    var softTotal=0; all().forEach(function(t){ if(counted(t)&&sp(t)!=='BL') softTotal+=softDeps(t).length; });
+    document.getElementById('map-hint').textContent = (MAPWHO
       ? nodes.length+' boxes: '+MAPWHO+"'s tickets and everything they touch"
-      : nodes.length+' boxes: only the tickets that hand off between people. Pick a name to see one person in full.';
+      : nodes.length+' boxes: only the tickets that hand off between people. Pick a name to see one person in full.')+' '+softTotal+' smaller promises are still words, not edges - see the panel below the map.';
     if(!nodes.length){ inner.style.height='120px'; inner.innerHTML='<div class="empty" style="padding:40px;text-align:center">Nothing to draw here.</div>'; return; }
     /* Generous columns, and each column grouped under the person who owns the
        work, so a wall of boxes reads as lanes instead of a heap. */
@@ -1326,11 +1341,33 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     var boxes=nodes.map(function(t){
       var p=pos[t.id]; if(!p) return '';
       return '<div class="node" data-id="'+t.id+'" style="left:'+p.x+'px;top:'+p.y+'px;width:'+NW+'px;height:'+NH+'px;--nc:'+(PC[t.assignee]||'#9c8f80')+'">'+
+        (softDeps(t).length?'<span class="softb" title="'+esc(softDeps(t).join('\n'))+'">'+softDeps(t).length+' in words</span>':'')+
         '<div class="nid">'+t.id+' &middot; '+esc(t.assignee||'unassigned')+'</div><div class="ntt">'+esc(t.title)+'</div></div>';
     }).join('');
     inner.innerHTML='<svg class="mapsvg" width="'+W+'" height="'+H+'">'+paths.join('')+'</svg>'+heads+boxes;
     inner.querySelectorAll('.node').forEach(function(n){ n.addEventListener('click',function(){ MAPSEL=n.getAttribute('data-id'); highlight(); showDetail(MAPSEL); }); });
-    if(MAPSEL&&pos[MAPSEL]){ highlight(); showDetail(MAPSEL); } else { document.getElementById('map-det').innerHTML='<div class="dt">Pick a box</div><p style="color:var(--muted2);margin-top:4px">Gold arrows are what it waits on. Green arrows are what waits on it.</p>'; }
+    if(MAPSEL&&pos[MAPSEL]){ highlight(); showDetail(MAPSEL); } else { document.getElementById('map-det').innerHTML='<div class="dt">Pick a box</div><p style="color:var(--muted2);margin-top:4px">Gold arrows are what it waits on. Green arrows are what waits on it. A small gold tag on a box counts dependencies still written in words rather than ticket ids.</p>'; }
+    renderSoftPanel();
+  }
+  var SOFTOPEN=false;
+  function renderSoftPanel(){
+    var el=document.getElementById('map-soft'); if(!el) return;
+    var T=all().filter(function(t){return counted(t)&&sp(t)!=='BL';});
+    if(MAPWHO) T=T.filter(function(t){return t.assignee===MAPWHO||softDeps(t).some(function(x){return x.toLowerCase().indexOf(MAPWHO.toLowerCase()+':')===0;});});
+    var rows=[]; T.forEach(function(t){ softDeps(t).forEach(function(x){ rows.push({t:t,x:x}); }); });
+    rows.sort(function(a,b){ return a.t.due.localeCompare(b.t.due); });
+    if(!rows.length){ el.innerHTML=''; return; }
+    el.innerHTML='<div class="softpanel"><div class="sph" id="sph-toggle"><span class="chev">'+(SOFTOPEN?'&#9650;':'&#9660;')+'</span>'+
+      '<h3>'+rows.length+' small dependencies still in words'+(MAPWHO?' around '+esc(MAPWHO):'')+'</h3>'+
+      '<span class="spn">promises between people that are not ticket-to-ticket edges yet - the map cannot draw them, so they live here</span></div>'+
+      (SOFTOPEN?'<div class="spb">'+rows.slice(0,120).map(function(r){
+        return '<div class="sprow"><span class="mono" style="color:var(--accent)">'+r.t.id+'</span>'+
+          '<span class="who" style="color:'+(PC[r.t.assignee]||'#9c8f80')+'">'+esc(r.t.assignee)+'</span>'+
+          '<span class="spt">'+esc(r.t.title)+'</span><span class="spx">&larr; '+esc(r.x)+'</span></div>';
+      }).join('')+(rows.length>120?'<div class="empty">'+(rows.length-120)+' more - pick a person to narrow.</div>':'')+'</div>':'')+
+      '</div>';
+    var h=document.getElementById('sph-toggle');
+    if(h) h.addEventListener('click',function(){ SOFTOPEN=!SOFTOPEN; renderSoftPanel(); });
   }
   function highlight(){
     var inner=document.getElementById('map-inner');

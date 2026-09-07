@@ -1,4 +1,4 @@
-// sprint_launch_data.js - regenerated 7 Sep 2026: four-part plain-English notes on every ticket.
+// sprint_launch_data.js - regenerated 7 Sep 2026: 138 free-text dependencies resolved to ticket ids; the rest surfaced as soft deps in the map.
 window.LAUNCH_DATA = {
  "generated_at": "2026-09-03",
  "layers": [
@@ -2461,7 +2461,8 @@ window.LAUNCH_DATA = {
    "depends_on": [],
    "feeds": [
     "Muteeb",
-    "N1-AS-12"
+    "N1-AS-12",
+    "N1-MT-02"
    ],
    "gate": "N1",
    "source": "plan",
@@ -2526,7 +2527,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N1-AS-03",
     "N1-AS-04",
-    "Faheem: flop output fields (drivers, confidence, band)"
+    "N1-FH-17"
    ],
    "feeds": [
     "Muteeb",
@@ -2568,7 +2569,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Live public contradiction with slack: nothing dated blocks on it before the 12 Sep landing rebuild; a ten-minute content edit, not app code",
    "depends_on": [
-    "Alex: date declared in writing"
+    "N1-AX-01"
    ],
    "feeds": [
     "Alex",
@@ -2601,7 +2602,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "cheap now, expensive after the designer becomes PM on 10 Sep; nothing external blocks on it",
    "depends_on": [
     "Saad: packs in the agreed build order (first two ~8 Sep)",
-    "Saad: design token sheet"
+    "N1-SD-06"
    ],
    "feeds": [
     "Saad",
@@ -3212,12 +3213,13 @@ window.LAUNCH_DATA = {
    "priority_reason": "Decision 1 must land before N2 tuning starts 14 Sep",
    "depends_on": [
     "N1-FH-03",
-    "Lewis: pilot roster re-check"
+    "N1-LW-01"
    ],
    "feeds": [
     "N2-AS-02",
     "Asad",
-    "Lewis"
+    "Lewis",
+    "N2-SD-01"
    ],
    "gate": "none",
    "source": "faheem",
@@ -3280,7 +3282,8 @@ window.LAUNCH_DATA = {
    "depends_on": [],
    "feeds": [
     "Muteeb: war-room board",
-    "N3-FH-08"
+    "N3-FH-08",
+    "N1-JL-05"
    ],
    "gate": "none",
    "source": "plan",
@@ -3572,7 +3575,7 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "blocks the mock-API generation and Asad's 10 Sep build start",
    "depends_on": [
-    "Asad: stack decision + contract review"
+    "N1-AS-03"
    ],
    "feeds": [
     "N1-MT-04",
@@ -3610,7 +3613,8 @@ window.LAUNCH_DATA = {
    "depends_on": [],
    "feeds": [
     "Jill: SES warm-up N2",
-    "N2-MT-04"
+    "N2-MT-04",
+    "N2-JL-04"
    ],
    "gate": "none",
    "source": "muteeb",
@@ -3679,7 +3683,8 @@ window.LAUNCH_DATA = {
     "N1-MT-09",
     "N1-MT-14",
     "N2-MT-06",
-    "N5-MT-05"
+    "N5-MT-05",
+    "N1-JL-05"
    ],
    "gate": "N1",
    "source": "muteeb",
@@ -3716,7 +3721,8 @@ window.LAUNCH_DATA = {
     "N1-MT-08",
     "N1-MT-17",
     "N1-SD-20",
-    "N2-SD-16"
+    "N2-SD-16",
+    "N2-AS-01"
    ],
    "gate": "N1",
    "source": "muteeb",
@@ -3784,7 +3790,9 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "N4-MT-01",
-    "Filza: cross-tenant attestation N6"
+    "Filza: cross-tenant attestation N6",
+    "N2-AS-05",
+    "N5-JL-06"
    ],
    "gate": "N1",
    "source": "muteeb",
@@ -3819,7 +3827,9 @@ window.LAUNCH_DATA = {
    "feeds": [
     "N1-MT-11",
     "N2-AS-08",
-    "Asad: connect UI N2"
+    "Asad: connect UI N2",
+    "N2-AS-03",
+    "N2-LW-03"
    ],
    "gate": "N1",
    "source": "muteeb",
@@ -4359,7 +4369,8 @@ window.LAUNCH_DATA = {
     "P0-AS-12"
    ],
    "feeds": [
-    "Asad"
+    "Asad",
+    "N1-AS-07"
    ],
    "gate": "N1",
    "source": "saad",
@@ -4425,7 +4436,8 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Asad",
     "Faheem",
-    "Jill"
+    "Jill",
+    "N5-AS-01"
    ],
    "gate": "N1",
    "source": "saad",
@@ -4494,7 +4506,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Asad",
-    "Muteeb"
+    "Muteeb",
+    "N3-AS-04"
    ],
    "gate": "N1",
    "source": "plan",
@@ -4591,7 +4604,8 @@ window.LAUNCH_DATA = {
     "Alex: reveal copy"
    ],
    "feeds": [
-    "Alex"
+    "Alex",
+    "N1-AX-08"
    ],
    "gate": "none",
    "source": "saad",
@@ -4619,7 +4633,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Real risk of decisions made twice, but a day of slack before N2",
    "depends_on": [
-    "Alex: 'waits for Saad' list",
+    "N1-AX-06",
     "N1-SD-01"
    ],
    "feeds": [
@@ -4796,7 +4810,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "N1-AS-16",
-    "N5-AS-05"
+    "N5-AS-05",
+    "N5-AS-15"
    ],
    "gate": "N1",
    "acceptance": "Asad has a front-end cost line for 5 pilots and 100 pages with its assumptions, and an asset budget per screen exists that the build can be checked against.",
@@ -4867,7 +4882,8 @@ window.LAUNCH_DATA = {
     "N1-AX-07",
     "Asad: landing rebuild 10-12 Sep",
     "Saad: listings + PH package",
-    "Jill: newsletter #1 15 Sep"
+    "Jill: newsletter #1 15 Sep",
+    "N1-AS-06"
    ],
    "gate": "N1",
    "source": "plan",
@@ -4896,7 +4912,7 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "External clock that gates the 25 Sep submission.",
    "depends_on": [
-    "Filza: confirm registered legal name + documents match Companies House"
+    "N1-FZ-11"
    ],
    "feeds": [
     "N2-AX-03",
@@ -4930,7 +4946,7 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "Blocks Muteeb (Sentry on staging for the gate) and the 6 Oct waitlist.",
    "depends_on": [
-    "Jill: tool-buy memo with prices"
+    "N1-JL-02"
    ],
    "feeds": [
     "Muteeb: Sentry + uptime on staging (N1)",
@@ -5039,7 +5055,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Saad: PM from 10 Sep",
-    "Asad: build ramp 10 Sep"
+    "Asad: build ramp 10 Sep",
+    "N1-SD-14"
    ],
    "gate": "N1",
    "source": "plan",
@@ -5102,7 +5119,7 @@ window.LAUNCH_DATA = {
    "priority": "P2",
    "priority_reason": "Valuable public beat, safe to slim down if packs run late.",
    "depends_on": [
-    "Saad: 10 Sep design reveal package",
+    "N1-SD-13",
     "N1-AX-07"
    ],
    "feeds": [
@@ -5209,7 +5226,7 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "Dated (he left 3 Sep) and a live credential is an open security hole until verified.",
    "depends_on": [
-    "Filza: Rafeh exit hygiene (IP, NDA, access) - N1",
+    "N1-FZ-01",
     "Muteeb: list of infra systems and admin accounts"
    ],
    "feeds": [
@@ -5245,7 +5262,7 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "Blocks Muteeb (Sentry on staging in N1) and the status page / waitlist / paging chain; Alex signs once per Checklist 5.",
    "depends_on": [
-    "Muteeb: preferred tools and required tiers for Sentry, uptime/status page, paging",
+    "N1-MT-16",
     "Asad: waitlist tool requirements (UTM per directory, queue-position migration)",
     "Alex: signature"
    ],
@@ -5253,7 +5270,9 @@ window.LAUNCH_DATA = {
     "Muteeb (Sentry + uptime on staging N1; status page N3)",
     "Asad (waitlist integration N3, live 6 Oct)",
     "N1-JL-05 (paging tool for the rota)",
-    "N1-JL-03 (tool prices in the baseline)"
+    "N1-JL-03 (tool prices in the baseline)",
+    "N1-AX-03",
+    "N3-MT-11"
    ],
    "gate": "none",
    "source": "plan",
@@ -5282,7 +5301,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Real risk with slack: pricing is locked 25 Sep and the alarms need it this sprint.",
    "depends_on": [
-    "Muteeb: billing console access and cost-allocation tags per pipeline",
+    "N1-MT-16",
     "N1-JL-02",
     "N1-FH-19",
     "N1-MT-17",
@@ -5291,7 +5310,8 @@ window.LAUNCH_DATA = {
    "feeds": [
     "N1-JL-04",
     "N2-JL-03",
-    "Alex (pricing signed 25 Sep)"
+    "Alex (pricing signed 25 Sep)",
+    "N4-MT-02"
    ],
    "gate": "N2",
    "source": "plan",
@@ -5321,7 +5341,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Real risk with slack: spend is small now but the alarm must exist before pilots and Art-E add variable load.",
    "depends_on": [
     "N1-JL-03",
-    "Muteeb: IAM permission for Budgets/Cost Explorer"
+    "N1-MT-16"
    ],
    "feeds": [
     "N3-JL-04 (circuit-breaker spec wired to cost alarms)",
@@ -5356,8 +5376,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "Real risk with slack: staging is not yet pilot-facing, but the rota must exist before pilots connect on 17 Sep.",
    "depends_on": [
     "N1-JL-02",
-    "Muteeb: Sentry + uptime on staging (N1)",
-    "Faheem: freshness alerts for prediction tables (N1)"
+    "N1-MT-05",
+    "N1-FH-11"
    ],
    "feeds": [
     "Muteeb (alert routing)",
@@ -5463,7 +5483,10 @@ window.LAUNCH_DATA = {
     "Faheem",
     "Asad",
     "Saad",
-    "Alex"
+    "Alex",
+    "N1-FH-09",
+    "N2-AS-12",
+    "N5-JL-05"
    ],
    "gate": "N2",
    "source": "plan",
@@ -5597,7 +5620,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "First pilot connects are 22-24 Sep (N2-LW-03); Tester roles can be added the week of 14 Sep; Saad's package needs a populated test page, not pilot Testers.",
    "depends_on": [
     "N1-LW-04",
-    "Saad: Meta app dashboard access (Asad co-owner)"
+    "N1-SD-16"
    ],
    "feeds": [
     "Saad",
@@ -5701,7 +5724,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Jill",
-    "Alex"
+    "Alex",
+    "N1-JL-01"
    ],
    "gate": "none",
    "source": "plan",
@@ -5731,7 +5755,8 @@ window.LAUNCH_DATA = {
    "depends_on": [],
    "feeds": [
     "Saad",
-    "Asad"
+    "Asad",
+    "N4-AS-02"
    ],
    "gate": "N1",
    "source": "plan",
@@ -5999,7 +6024,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Muteeb builds the callback 21-27 Sep against the frozen spec in N2-FZ-02 (stays P0, 17 Sep); the N1 draft has a week of slack.",
    "depends_on": [
-    "Muteeb: list of stores holding tenant data (token store, warehouse, predictions, labels, vectors, memory)"
+    "N1-MT-16"
    ],
    "feeds": [
     "Muteeb",
@@ -6062,7 +6087,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Blocks every N2 screen",
    "depends_on": [
     "N1-AS-12",
-    "Muteeb: auth + tenant claim + mock API (N1 rails)"
+    "N1-MT-06"
    ],
    "feeds": [
     "N2-AS-03",
@@ -6137,12 +6162,13 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N2-AS-01",
     "N1-AS-04",
-    "Muteeb: token backend + multi-page token model + revocation->delete"
+    "N1-MT-09"
    ],
    "feeds": [
     "N2-AS-09",
     "Lewis (pilot onboarding)",
-    "Filza (deletion witness)"
+    "Filza (deletion witness)",
+    "N2-LW-03"
    ],
    "gate": "N2",
    "source": "plan",
@@ -6208,7 +6234,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Security baseline with slack before the gate",
    "depends_on": [
     "N2-AS-01",
-    "Muteeb: RLS + cross-tenant CI test"
+    "N1-MT-08"
    ],
    "feeds": [
     "Muteeb (leakage CI)",
@@ -6282,7 +6308,7 @@ window.LAUNCH_DATA = {
     "N2-MT-15",
     "N2-AS-14",
     "N1-SD-17",
-    "Filza: Privacy/ToS v1 URLs (N2-FZ-05)",
+    "N2-FZ-05",
     "N2-AS-03"
    ],
    "feeds": [
@@ -6317,7 +6343,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Benchmark fix on top of the composer; small slack before the gate",
    "depends_on": [
     "N2-AS-06",
-    "Faheem: confidence/coverage flag + bands"
+    "N2-FH-03"
    ],
    "feeds": [
     "Saad (acceptance)",
@@ -6359,7 +6385,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Saad (submits 25 Sep)",
-    "Alex (approves line by line)"
+    "Alex (approves line by line)",
+    "N2-AX-05"
    ],
    "gate": "N2",
    "source": "plan",
@@ -6423,7 +6450,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N2-AS-04",
     "N2-AS-06",
-    "Saad: activation event named"
+    "N2-SD-06"
    ],
    "feeds": [
     "N4-AS-14",
@@ -6458,7 +6485,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N2-AS-04",
     "N2-AS-06",
-    "Lewis: pilot roster re-check",
+    "N1-LW-01",
     "Alex: reveal slot"
    ],
    "feeds": [
@@ -6784,7 +6811,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Muteeb: drivers + confidence fields",
-    "Asad: gauge + chips"
+    "Asad: gauge + chips",
+    "N2-AS-08"
    ],
    "gate": "N2",
    "source": "plan",
@@ -7069,7 +7097,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "guards the production endpoint; slack inside N2",
    "depends_on": [
     "N2-FH-02",
-    "Muteeb: contract tests"
+    "N2-MT-16"
    ],
    "feeds": [
     "Muteeb",
@@ -7137,7 +7165,8 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Muteeb: best-times endpoint N3",
     "Asad: heatmap",
-    "N3-FH-05"
+    "N3-FH-05",
+    "N3-AS-09"
    ],
    "gate": "N2",
    "source": "plan",
@@ -7201,7 +7230,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Saad",
-    "Asad"
+    "Asad",
+    "N3-AS-05"
    ],
    "gate": "N2",
    "source": "plan",
@@ -7373,7 +7403,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Asad: Drafts N2",
-    "N2-MT-13"
+    "N2-MT-13",
+    "N3-FH-01"
    ],
    "gate": "N2",
    "source": "muteeb",
@@ -7511,7 +7542,8 @@ window.LAUNCH_DATA = {
    "feeds": [
     "N3-MT-09",
     "N4-MT-04",
-    "Jill: embedding budget input N3"
+    "Jill: embedding budget input N3",
+    "N3-FZ-02"
    ],
    "gate": "none",
    "source": "muteeb",
@@ -7545,7 +7577,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Saad: Meta package",
-    "N2-AS-08"
+    "N2-AS-08",
+    "N2-AX-04"
    ],
    "gate": "N2",
    "source": "muteeb",
@@ -7856,7 +7889,8 @@ window.LAUNCH_DATA = {
     "N5-AS-14",
     "N6-AS-12",
     "Saad",
-    "Asad"
+    "Asad",
+    "N2-FH-12"
    ],
    "gate": "N2",
    "acceptance": "CI fails a deliberate drift in each direction: a route added without a spec entry, and a spec field changed without an implementation.",
@@ -7925,7 +7959,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "Asad: crisis gate decisions 1 + 2 with Faheem",
     "Lewis: complete incident window (20+) by end N1",
-    "Faheem: hour-of-week measurement"
+    "N1-FH-09"
    ],
    "feeds": [
     "Faheem",
@@ -8002,7 +8036,9 @@ window.LAUNCH_DATA = {
     "Faheem",
     "Asad",
     "Filza",
-    "Alex"
+    "Alex",
+    "N3-AS-06",
+    "N3-FH-02"
    ],
    "gate": "none",
    "source": "saad",
@@ -8106,7 +8142,9 @@ window.LAUNCH_DATA = {
     "Asad",
     "Muteeb",
     "Faheem",
-    "Alex"
+    "Alex",
+    "N2-AS-11",
+    "N4-AS-14"
    ],
    "gate": "none",
    "source": "saad",
@@ -8144,7 +8182,8 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Alex",
     "Asad",
-    "Lewis"
+    "Lewis",
+    "N6-AX-07"
    ],
    "gate": "N2",
    "source": "saad",
@@ -8178,7 +8217,8 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Asad",
     "Faheem",
-    "Lewis"
+    "Lewis",
+    "N3-AS-01"
    ],
    "gate": "none",
    "source": "saad",
@@ -8306,7 +8346,7 @@ window.LAUNCH_DATA = {
    "priority": "P2",
    "priority_reason": "Valuable, safe to slip a week",
    "depends_on": [
-    "Lewis: cohort-1 feedback"
+    "N2-LW-04"
    ],
    "feeds": [
     "Asad",
@@ -8557,7 +8597,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Blocks the 25 Sep submission and pilot onboarding.",
    "depends_on": [
     "Filza: legal pack v1 drafts",
-    "Muteeb: Data Deletion callback endpoint"
+    "N2-MT-06"
    ],
    "feeds": [
     "Saad: Meta package (privacy/ToS URLs)",
@@ -8593,7 +8633,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "Saad: package draft",
     "Filza: narrative firewall review",
-    "Asad: one screencast per permission",
+    "N2-AS-09",
     "Muteeb: deletion callback live",
     "N2-AX-04"
    ],
@@ -8885,7 +8925,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Real risk with slack: the ramp has weeks to run, but only if the schedule exists now.",
    "depends_on": [
-    "Muteeb: SES out of sandbox + SPF/DKIM/DMARC (N1)",
+    "N1-MT-03",
     "N2-JL-01",
     "Alex: marketing calendar (17 Nov notice, 1 Dec email)"
    ],
@@ -8965,7 +9005,10 @@ window.LAUNCH_DATA = {
    "feeds": [
     "N5-JL-05 (invoicing dry run)",
     "N6-JL-06 (5 invoices)",
-    "Filza N5 (particulars on invoices)"
+    "Filza N5 (particulars on invoices)",
+    "N5-AX-06",
+    "N6-AX-01",
+    "N6-LW-04"
    ],
    "gate": "N6",
    "source": "plan",
@@ -9065,9 +9108,9 @@ window.LAUNCH_DATA = {
    "priority_reason": "The 25 Sep gate needs a draft scored live on a pilot page",
    "depends_on": [
     "N1-LW-05",
-    "Muteeb: token backend + multi-page model (N1)",
-    "Asad: dev-mode Facebook connect UI (N2)",
-    "Filza: pilot agreement v1"
+    "N1-MT-09",
+    "N2-AS-03",
+    "N2-FZ-04"
    ],
    "feeds": [
     "Asad",
@@ -9107,7 +9150,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Saad",
-    "Asad"
+    "Asad",
+    "N2-SD-12"
    ],
    "gate": "none",
    "source": "plan",
@@ -9212,7 +9256,8 @@ window.LAUNCH_DATA = {
     "N2-FZ-06",
     "Faheem",
     "Muteeb",
-    "Jill"
+    "Jill",
+    "N3-JL-01"
    ],
    "gate": "N2",
    "source": "plan",
@@ -9244,7 +9289,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Lewis",
-    "N5-FZ-01"
+    "N5-FZ-01",
+    "N2-LW-03"
    ],
    "gate": "N2",
    "source": "plan",
@@ -9281,7 +9327,8 @@ window.LAUNCH_DATA = {
     "Saad",
     "Asad",
     "Muteeb",
-    "Lewis"
+    "Lewis",
+    "N2-AS-07"
    ],
    "gate": "N2",
    "source": "plan",
@@ -9515,7 +9562,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N3-FH-02",
     "Muteeb: alerts endpoints (cards with cited ids, counts, rules) + a replayed incident on staging",
-    "Saad: Alerts pack + acceptance one-pager"
+    "N2-SD-08"
    ],
    "feeds": [
     "Lewis (drill)",
@@ -9621,12 +9668,13 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N3-AS-01",
     "Muteeb: SES sending + unread-count endpoints",
-    "Saad: crisis email template (N1)"
+    "N1-SD-10"
    ],
    "feeds": [
     "Lewis (drill)",
     "Muteeb (drill timing)",
-    "N6-AS-03"
+    "N6-AS-03",
+    "N3-LW-05"
    ],
    "gate": "N3",
    "source": "plan",
@@ -9656,7 +9704,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Named in the N3 gate",
    "depends_on": [
     "Muteeb: health endpoints",
-    "Faheem: health v1 + bands"
+    "N2-FH-16"
    ],
    "feeds": [
     "N3-AS-08",
@@ -9689,8 +9737,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "Part of the Alerts surface; not on the drill's critical path",
    "depends_on": [
     "N3-AS-01",
-    "Saad: notification timing policy (N2, with Alex + Lewis)",
-    "Muteeb: rules endpoints"
+    "N2-SD-03",
+    "N3-MT-14"
    ],
    "feeds": [
     "N3-AS-11",
@@ -9723,10 +9771,12 @@ window.LAUNCH_DATA = {
    "priority_reason": "Benchmark add on the card build; small",
    "depends_on": [
     "N3-AS-01",
-    "Muteeb: feedback + incident-resolved fields"
+    "N3-MT-14"
    ],
    "feeds": [
-    "Faheem (N4 false-alarm log)"
+    "Faheem (N4 false-alarm log)",
+    "N4-FH-07",
+    "N4-LW-04"
    ],
    "gate": "none",
    "source": "plan",
@@ -9754,7 +9804,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Sprint-goal surface with slack",
    "depends_on": [
-    "Muteeb: aggregation endpoints",
+    "N3-MT-05",
     "N3-AS-05",
     "Saad: Analytics pack"
    ],
@@ -9789,7 +9839,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Sprint-goal surface; not on the drill path",
    "depends_on": [
     "Muteeb: best-times endpoint",
-    "Faheem: aggregates + count floor",
+    "N2-FH-14",
     "Saad: Best Times pack + one-pager"
    ],
    "feeds": [
@@ -10065,7 +10115,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "real risk; not on the N3 gate",
    "depends_on": [
     "N2-FH-12",
-    "Muteeb: scoring endpoint"
+    "N2-MT-01"
    ],
    "feeds": [
     "Asad: E2E flow 3",
@@ -10099,11 +10149,12 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N2-FH-06",
     "N2-FH-07",
-    "Saad: notification timing policy"
+    "N2-SD-03"
    ],
    "feeds": [
     "Muteeb: live crisis pipeline",
-    "Asad: Alerts inbox cards"
+    "Asad: Alerts inbox cards",
+    "N3-LW-05"
    ],
    "gate": "N3",
    "source": "plan",
@@ -10171,7 +10222,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Muteeb: Wins endpoints N4",
-    "N6-FH-05"
+    "N6-FH-05",
+    "N4-MT-08"
    ],
    "gate": "none",
    "source": "plan",
@@ -10268,7 +10320,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "joint with Muteeb's N3 queue; Asad's onboarding flow is N4 so there is slack",
    "depends_on": [
-    "Muteeb: resumable priority queue"
+    "N3-MT-10"
    ],
    "feeds": [
     "Muteeb",
@@ -10469,7 +10521,8 @@ window.LAUNCH_DATA = {
    "feeds": [
     "N3-MT-02",
     "N3-MT-06",
-    "Lewis: human gate"
+    "Lewis: human gate",
+    "N4-AS-02"
    ],
    "gate": "N3",
    "source": "muteeb",
@@ -10510,7 +10563,9 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Lewis: human gate",
-    "Asad: Discovery UI N4"
+    "Asad: Discovery UI N4",
+    "N3-SD-06",
+    "N4-AS-04"
    ],
    "gate": "N3",
    "source": "muteeb",
@@ -10617,7 +10672,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Asad: Analytics N3",
-    "N3-MT-07"
+    "N3-MT-07",
+    "N3-AS-08"
    ],
    "gate": "N3",
    "source": "plan",
@@ -10689,7 +10745,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Asad: health pill N3",
-    "Asad: Pages view and briefing card N4"
+    "Asad: Pages view and briefing card N4",
+    "N4-AS-13"
    ],
    "gate": "N3",
    "source": "muteeb",
@@ -10721,7 +10778,9 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Filza: opt-out witness N4",
-    "Asad: saved-then-revoked UI N4"
+    "Asad: saved-then-revoked UI N4",
+    "N4-AS-08",
+    "N4-FZ-08"
    ],
    "gate": "none",
    "source": "muteeb",
@@ -10789,7 +10848,9 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Asad: onboarding N4",
-    "Today setup pill state (ingest-state source behind N2-MT-03)"
+    "Today setup pill state (ingest-state source behind N2-MT-03)",
+    "N3-FH-07",
+    "N4-AS-10"
    ],
    "gate": "none",
    "source": "plan",
@@ -10817,7 +10878,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "real risk with slack",
    "depends_on": [
-    "Jill: status page buy",
+    "N1-JL-02",
     "N2-MT-10"
    ],
    "feeds": [
@@ -10856,7 +10917,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N3-MT-03",
     "N3-MT-07",
-    "Lewis: storm drill",
+    "N3-LW-05",
     "Faheem"
    ],
    "feeds": [
@@ -11111,7 +11172,8 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Asad",
     "Faheem",
-    "Filza"
+    "Filza",
+    "N4-AS-01"
    ],
    "gate": "N3",
    "source": "saad",
@@ -11142,8 +11204,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "Real risk; UI build is N4 so slack exists",
    "depends_on": [
     "N1-SD-04",
-    "Muteeb: Discovery endpoints",
-    "Filza: reason-string legal pass"
+    "N3-MT-02",
+    "N3-FZ-04"
    ],
    "feeds": [
     "Asad",
@@ -11183,7 +11245,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Alex",
-    "Lewis"
+    "Lewis",
+    "N4-AX-05"
    ],
    "gate": "none",
    "source": "saad",
@@ -11427,9 +11490,9 @@ window.LAUNCH_DATA = {
    "priority_reason": "Dated: waitlist live 6 Oct is in the N3 gate and opens 13 Oct.",
    "depends_on": [
     "Asad: bought waitlist integrated + migrated (live 6 Oct)",
-    "Filza: PECR check",
+    "N3-FZ-06",
     "N2-AX-08",
-    "Jill: waitlist + founding-pricing mechanics"
+    "N3-JL-05"
    ],
    "feeds": [
     "Saad: waitlist verified e2e 13 Oct + daily count",
@@ -11529,7 +11592,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Real risk with slack: Art-E is metered from day one, so the budget must exist before N4 tuning.",
    "depends_on": [
     "Muteeb: RAG index design (N2)",
-    "Filza: AI vendor gate (Checklist 5 standing rule)",
+    "N2-FZ-03",
     "N2-JL-03"
    ],
    "feeds": [
@@ -11647,7 +11710,8 @@ window.LAUNCH_DATA = {
     "Muteeb N4 (orchestration with quotas + breaker trip-tested)",
     "N4-JL-04 (unit-economics spec)",
     "N6-JL-05 (burn cap trip actions)",
-    "Muteeb LW (breakers verified under real traffic)"
+    "Muteeb LW (breakers verified under real traffic)",
+    "N4-MT-04"
    ],
    "gate": "N4",
    "source": "plan",
@@ -11684,7 +11748,8 @@ window.LAUNCH_DATA = {
     "Alex (Lewis briefing N3; 17 Nov notice N5-N6)",
     "Lewis (conversion conversations)",
     "Filza (scarcity claims check, PECR)",
-    "N6-JL-02 (invoice reconciliation)"
+    "N6-JL-02 (invoice reconciliation)",
+    "N3-AX-03"
    ],
    "gate": "none",
    "source": "plan",
@@ -11783,7 +11848,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Discovery's n depends on it, but the gate can be judged on cohort-1 pages if this slips",
    "depends_on": [
     "N2-LW-04",
-    "Asad: fix-then-invite list cleared",
+    "N3-AS-14",
     "N1-LW-05"
    ],
    "feeds": [
@@ -11822,7 +11887,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Faheem",
-    "Saad"
+    "Saad",
+    "N4-FH-06"
    ],
    "gate": "none",
    "source": "plan",
@@ -11852,15 +11918,16 @@ window.LAUNCH_DATA = {
    "priority_reason": "The 9 Oct gate is this clock: comment-posted to email-received under 15 minutes",
    "depends_on": [
     "N1-LW-02",
-    "Faheem: alert engine (N3)",
+    "N3-FH-02",
     "Muteeb: live crisis pipeline + fast-lane and the live labelling path (seam 1)",
-    "Asad: alert emails + inbox (N3)"
+    "N3-AS-04"
    ],
    "feeds": [
     "Faheem",
     "Muteeb",
     "Asad",
-    "Saad"
+    "Saad",
+    "N3-MT-12"
    ],
    "gate": "N3",
    "source": "plan",
@@ -11997,7 +12064,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Blocks Muteeb's N4 week A orchestration build",
    "depends_on": [
     "N1-FZ-08",
-    "Muteeb: RAG index and memory store layout (N2 plumbing)"
+    "N2-MT-05"
    ],
    "feeds": [
     "Muteeb",
@@ -12069,7 +12136,9 @@ window.LAUNCH_DATA = {
     "Muteeb",
     "Asad",
     "Saad",
-    "Lewis"
+    "Lewis",
+    "N3-SD-06",
+    "N4-SD-13"
    ],
    "gate": "N3",
    "source": "plan",
@@ -12136,7 +12205,9 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Asad",
     "Alex",
-    "Jill"
+    "Jill",
+    "N3-AX-03",
+    "N4-SD-01"
    ],
    "gate": "N3",
    "source": "plan",
@@ -12302,8 +12373,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "Gate: 20-question run live 23 Oct",
    "depends_on": [
     "Muteeb: Q&A end-to-end + orchestration",
-    "Faheem: citation gate",
-    "Saad: Art-E pack + acceptance criteria"
+    "N4-FH-01",
+    "N3-SD-04"
    ],
    "feeds": [
     "N4-AS-03",
@@ -12338,13 +12409,14 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "Gate and privacy floor",
    "depends_on": [
-    "Filza: consent text",
+    "N1-FZ-02",
     "Saad: empty-state copy",
-    "Muteeb: fail-closed responses"
+    "N3-MT-01"
    ],
    "feeds": [
     "N4-AS-04",
-    "Filza (opt-out witness)"
+    "Filza (opt-out witness)",
+    "N4-FZ-08"
    ],
    "gate": "N4",
    "source": "plan",
@@ -12408,7 +12480,7 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "Gate item",
    "depends_on": [
-    "Muteeb: Discovery endpoints (auth, tenant, k=5)",
+    "N3-MT-02",
     "Lewis: precision-at-5 gate passed",
     "Saad: Discovery pack"
    ],
@@ -12482,7 +12554,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N3-AS-11",
     "Muteeb: revocation->deletion cascade",
-    "Filza: DSAR workflow"
+    "N4-FZ-02"
    ],
    "feeds": [
     "Filza",
@@ -12547,7 +12619,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Benchmark fix riding on the engine's propagation test",
    "depends_on": [
     "N4-AS-04",
-    "Muteeb: opt-out propagation + test"
+    "N3-MT-08"
    ],
    "feeds": [
     "Filza (witness)"
@@ -12577,11 +12649,12 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Legal gate with N5 verification slack",
    "depends_on": [
-    "Filza: cookie audit -> consent-gating spec",
+    "N4-FZ-01",
     "N3-AS-11"
    ],
    "feeds": [
-    "Filza"
+    "Filza",
+    "N5-FZ-02"
    ],
    "gate": "none",
    "source": "plan",
@@ -12610,12 +12683,13 @@ window.LAUNCH_DATA = {
    "priority_reason": "Sprint goal; measured in UAT not at the gate",
    "depends_on": [
     "Saad: onboarding spec + activation event + thin-page one-pager",
-    "Muteeb: priority queue + completion events",
+    "N3-MT-10",
     "N2-AS-03"
    ],
    "feeds": [
     "N4-AS-14",
-    "Saad (cold-user test N5)"
+    "Saad (cold-user test N5)",
+    "N5-LW-08"
    ],
    "gate": "none",
    "source": "plan",
@@ -12707,7 +12781,7 @@ window.LAUNCH_DATA = {
    "priority": "P2",
    "priority_reason": "Named cut candidate",
    "depends_on": [
-    "Muteeb: nightly briefing aggregate",
+    "N3-MT-07",
     "N2-AS-04"
    ],
    "feeds": [
@@ -12741,7 +12815,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N2-AS-11",
     "N4-AS-10",
-    "Saad: activation event"
+    "N2-SD-06"
    ],
    "feeds": [
     "Muteeb (N5 funnel panel)",
@@ -12885,7 +12959,9 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Muteeb: orchestration",
-    "Asad: rail"
+    "Asad: rail",
+    "N4-AS-01",
+    "N4-MT-12"
    ],
    "gate": "N4",
    "source": "plan",
@@ -12918,7 +12994,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "N5-FH-05",
-    "Saad: transcript review"
+    "Saad: transcript review",
+    "N5-SD-07"
    ],
    "gate": "N4",
    "source": "plan",
@@ -13041,12 +13118,13 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "real risk with slack",
    "depends_on": [
-    "Lewis: blind gold set",
+    "N3-LW-04",
     "N3-FH-04"
    ],
    "feeds": [
     "Saad",
-    "N5-FH-01"
+    "N5-FH-01",
+    "N4-SD-04"
    ],
    "gate": "none",
    "source": "plan",
@@ -13076,10 +13154,11 @@ window.LAUNCH_DATA = {
    "priority_reason": "real risk; feeds N5 drill with slack",
    "depends_on": [
     "N3-FH-03",
-    "Asad: not-a-crisis button"
+    "N3-AS-07"
    ],
    "feeds": [
-    "N5-FH-04"
+    "N5-FH-04",
+    "N4-LW-04"
    ],
    "gate": "none",
    "source": "plan",
@@ -13212,11 +13291,12 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "vendor lead times; slack exists if filed early",
    "depends_on": [
-    "Jill: cost projection"
+    "N1-JL-03"
    ],
    "feeds": [
     "N5-MT-01",
-    "N5-MT-05"
+    "N5-MT-05",
+    "N5-JL-04"
    ],
    "gate": "none",
    "source": "muteeb",
@@ -13279,7 +13359,7 @@ window.LAUNCH_DATA = {
     "N3-MT-09",
     "N4-MT-03",
     "Filza: Art-E legal pack",
-    "Jill: circuit-breaker spec"
+    "N3-JL-04"
    ],
    "feeds": [
     "Asad: Art-E rail N4",
@@ -13416,10 +13496,11 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "real risk with slack; N5 assembly depends on it",
    "depends_on": [
-    "Faheem: outcome ledger N3"
+    "N3-FH-04"
    ],
    "feeds": [
-    "Asad: Wins-lite N5"
+    "Asad: Wins-lite N5",
+    "N5-AS-11"
    ],
    "gate": "none",
    "source": "muteeb",
@@ -13449,7 +13530,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N1-MT-09",
     "N4-MT-04",
-    "Filza: DSAR workflow"
+    "N4-FZ-02"
    ],
    "feeds": [
     "Filza",
@@ -13482,7 +13563,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "real risk with slack before restore drill #2",
    "depends_on": [
     "N2-MT-10",
-    "Filza: deletion-on-restore policy"
+    "N4-FZ-06"
    ],
    "feeds": [
     "N5-MT-02",
@@ -13551,7 +13632,7 @@ window.LAUNCH_DATA = {
     "N4-MT-04",
     "N3-MT-02",
     "N3-MT-07",
-    "Faheem: citation gate and probes"
+    "N4-FH-01"
    ],
    "feeds": [
     "Alex",
@@ -13731,11 +13812,12 @@ window.LAUNCH_DATA = {
    "priority_reason": "Dated opening 13 Oct",
    "depends_on": [
     "Asad: waitlist live 6 Oct",
-    "Filza: PECR check"
+    "N3-FZ-06"
    ],
    "feeds": [
     "Alex",
-    "Jill"
+    "Jill",
+    "N4-AX-05"
    ],
    "gate": "N4",
    "source": "saad",
@@ -13829,7 +13911,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Needed before the 13 Nov freeze; slack exists",
    "depends_on": [
-    "Faheem: mid-flight audit"
+    "N4-FH-06"
    ],
    "feeds": [
     "Asad",
@@ -13864,7 +13946,8 @@ window.LAUNCH_DATA = {
     "Asad: N4 surfaces on staging"
    ],
    "feeds": [
-    "Asad"
+    "Asad",
+    "N5-AS-04"
    ],
    "gate": "N4",
    "source": "saad",
@@ -13928,7 +14011,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Real risk of a broken protocol judging N5; slack before wave 1",
    "depends_on": [
     "N3-SD-02",
-    "Lewis: friendly pilot"
+    "N4-LW-01"
    ],
    "feeds": [
     "Lewis",
@@ -14066,7 +14149,8 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Alex",
     "Faheem",
-    "Filza"
+    "Filza",
+    "N5-FZ-03"
    ],
    "gate": "none",
    "source": "saad",
@@ -14129,7 +14213,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N4-AS-04",
     "N4-SD-06",
-    "Filza: reason-string vocabulary (N3-FZ-04)"
+    "N3-FZ-04"
    ],
    "feeds": [
     "Asad: Discovery UI strings; Alex: launch-week Q&A answer sheet; N4-SD-10 support macros"
@@ -14340,8 +14424,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "Real risk with slack: five weeks remain to 20 Nov.",
    "depends_on": [
     "N3-AX-03",
-    "Saad: daily waitlist count",
-    "Saad: BetaList + directories (N3)"
+    "N4-SD-01",
+    "N3-SD-07"
    ],
    "feeds": [
     "N6-AX-07",
@@ -14409,14 +14493,15 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Real risk with slack: the re-test on frozen production is N6, but gaps found now become tickets before the freeze.",
    "depends_on": [
-    "Filza: manual DSAR workflow (N4)",
+    "N4-FZ-02",
     "Muteeb: warehouse, labels, vectors, memory export (N4)",
     "N2-JL-02"
    ],
    "feeds": [
     "Filza (DSAR re-test on frozen production N6)",
     "N5-JL-02 (evidence folder)",
-    "Saad (support macro 'is my data shared with other pages')"
+    "Saad (support macro 'is my data shared with other pages')",
+    "N4-FZ-07"
    ],
    "gate": "N6",
    "source": "plan",
@@ -14526,7 +14611,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Saad",
-    "Filza"
+    "Filza",
+    "N4-SD-07"
    ],
    "gate": "N4",
    "source": "saad",
@@ -14623,8 +14709,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "Tuning round 2 is dated to N4 but the detector already passed its drill",
    "depends_on": [
     "N3-LW-05",
-    "Faheem: false-alarm log per pilot",
-    "Asad: not-a-crisis button (N3)"
+    "N4-FH-07",
+    "N3-AS-07"
    ],
    "feeds": [
     "Faheem",
@@ -14657,7 +14743,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Needed for the 5 Nov video and N5 testimonials; slack exists in N4",
    "depends_on": [
-    "Filza: testimonial permission template",
+    "N4-FZ-04",
     "N2-LW-03"
    ],
    "feeds": [
@@ -14697,7 +14783,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Asad",
-    "N5-FZ-02"
+    "N5-FZ-02",
+    "N4-AS-09"
    ],
    "gate": "N4",
    "source": "plan",
@@ -14730,7 +14817,10 @@ window.LAUNCH_DATA = {
    "feeds": [
     "N4-FZ-07",
     "Muteeb",
-    "Jill"
+    "Jill",
+    "N4-AS-06",
+    "N4-MT-09",
+    "N4-JL-02"
    ],
    "gate": "N4",
    "source": "plan",
@@ -14797,7 +14887,8 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Lewis",
     "Alex",
-    "Saad"
+    "Saad",
+    "N4-LW-05"
    ],
    "gate": "none",
    "source": "plan",
@@ -14865,7 +14956,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Muteeb",
-    "N5-FZ-04"
+    "N5-FZ-04",
+    "N4-MT-10"
    ],
    "gate": "N5",
    "source": "plan",
@@ -14895,7 +14987,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N4-FZ-02",
     "Muteeb: Art-E memory live (N4 week A)",
-    "Jill: DSAR sample run supported"
+    "N4-JL-02"
    ],
    "feeds": [
     "Muteeb",
@@ -14930,8 +15022,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "Serves the N4 opt-in to spotlight to save demo; propagation was built in N3",
    "depends_on": [
     "N1-FZ-02",
-    "Muteeb: opt-out propagation with test (N3)",
-    "Asad: Discovery UI + consent screen (N4)"
+    "N3-MT-08",
+    "N4-AS-02"
    ],
    "feeds": [
     "Saad",
@@ -15000,7 +15092,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Precedes UAT wave 1; the copy part is Saad's P2 addition and drops if the voice guide slipped",
    "depends_on": [
     "Saad: bug bash #1 list + pre-UAT visual sweep + copy-freeze string list",
-    "Saad: product voice guide"
+    "N1-SD-08"
    ],
    "feeds": [
     "Saad (UAT wave 1)"
@@ -15040,7 +15132,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Muteeb (war-room board)",
-    "Jill (paging)"
+    "Jill (paging)",
+    "N6-MT-06"
    ],
    "gate": "none",
    "source": "plan",
@@ -15102,7 +15195,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Sprint goal; review evidence",
    "depends_on": [
-    "Saad: WCAG audit (N4)"
+    "N4-SD-05"
    ],
    "feeds": [
     "Saad",
@@ -15198,7 +15291,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Lewis",
-    "Alex (readiness review)"
+    "Alex (readiness review)",
+    "N5-LW-04"
    ],
    "gate": "N5",
    "source": "plan",
@@ -15258,7 +15352,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Must precede the 17 Nov notice; Lewis's conversions use it",
    "depends_on": [
     "Muteeb + Filza: firewall-passed copy",
-    "Muteeb: pen-test criticals closed"
+    "N5-MT-04"
    ],
    "feeds": [
     "Lewis (pilot conversations)",
@@ -15323,7 +15417,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Cut-order #1 by decision",
    "depends_on": [
     "N3-FH-04",
-    "Muteeb: Wins endpoints (value band stats + scoreboard) N4",
+    "N4-MT-08",
     "N4-AS-07"
    ],
    "feeds": [
@@ -15361,7 +15455,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Saad",
-    "Jill"
+    "Jill",
+    "LW-JL-02"
    ],
    "gate": "none",
    "source": "plan",
@@ -15455,7 +15550,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Real risk with slack; N5-AS-05's scores and Saad's hosting cost both depend on it.",
    "depends_on": [
     "N5-AS-05",
-    "Saad: front-end/hosting cost line",
+    "N1-SD-19",
     "N4-AS-05"
    ],
    "feeds": [
@@ -15700,7 +15795,8 @@ window.LAUNCH_DATA = {
     "N5-LW-03"
    ],
    "feeds": [
-    "Saad/Alex: crisis-demo video"
+    "Saad/Alex: crisis-demo video",
+    "N5-FZ-03"
    ],
    "gate": "N5",
    "source": "plan",
@@ -15942,7 +16038,9 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Alex: readiness review",
     "Jill: evidence folder",
-    "N5-FZ-08"
+    "N5-FZ-08",
+    "N5-AS-09",
+    "N6-FZ-05"
    ],
    "gate": "N5",
    "source": "muteeb",
@@ -15978,7 +16076,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "LW-MT-01",
-    "Saad: launch runbook"
+    "Saad: launch runbook",
+    "N6-AS-09"
    ],
    "gate": "none",
    "source": "muteeb",
@@ -16012,7 +16111,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Alex",
-    "Saad: batch thresholds"
+    "Saad: batch thresholds",
+    "N6-AX-04"
    ],
    "gate": "none",
    "source": "muteeb",
@@ -16466,7 +16566,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N3-SD-02",
     "N5-SD-02",
-    "Filza: 5 DPAs countersigned before UAT",
+    "N5-FZ-01",
     "Lewis: pilots scheduled"
    ],
    "feeds": [
@@ -16577,7 +16677,9 @@ window.LAUNCH_DATA = {
     "Asad",
     "Muteeb",
     "Alex",
-    "Jill"
+    "Jill",
+    "N6-AX-02",
+    "N6-JL-01"
    ],
    "gate": "N5",
    "source": "saad",
@@ -16605,7 +16707,7 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "Gate-serving: the descope decision is taken at the 6 Nov review",
    "depends_on": [
-    "Faheem: nightly regression"
+    "N4-FH-02"
    ],
    "feeds": [
     "Faheem",
@@ -16984,14 +17086,15 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N2-AX-07",
     "N4-AS-18",
-    "Jill: invoice template",
+    "N2-JL-06",
     "Filza: scarcity claims check",
     "Asad: /security page (N5)"
    ],
    "feeds": [
     "N6-AX-01",
     "Jill: invoices (N6)",
-    "Asad: landing pricing update 17 Nov"
+    "Asad: landing pricing update 17 Nov",
+    "N6-JL-02"
    ],
    "gate": "none",
    "source": "plan",
@@ -17135,7 +17238,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Real risk with slack: depends on Week A load results, feeds the N6 cap.",
    "depends_on": [
     "Muteeb: load test x10 + burst + day-1 shape (N5 Week A)",
-    "Muteeb: vendor quota raises (N4)",
+    "N4-MT-02",
     "Alex: sign-off"
    ],
    "feeds": [
@@ -17172,14 +17275,15 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N2-JL-06",
     "N2-JL-05",
-    "Filza: 5 pilot DPAs + agreements countersigned before UAT (N5)",
-    "Lewis: pilot roster confirmed after the comment-collapse re-check",
+    "N5-FZ-01",
+    "N1-LW-01",
     "Alex: founding-pricing terms"
    ],
    "feeds": [
     "N6-JL-02 (VAT + reconciliation)",
     "N6-JL-06 (5 invoices sent)",
-    "Filza N5 (particulars on invoices)"
+    "Filza N5 (particulars on invoices)",
+    "N5-FZ-07"
    ],
    "gate": "N6",
    "source": "plan",
@@ -17209,7 +17313,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "The immovable date is 'in force before the 20 Nov invoices', two weeks after the 6 Nov due; quotes were started in N1.",
    "depends_on": [
     "N1-JL-07",
-    "Muteeb: security-controls answers (pen-test, KMS, backups)",
+    "N1-MT-08",
     "Alex: signature and premium payment"
    ],
    "feeds": [
@@ -17350,7 +17454,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Conditional on Meta approval; the written fallback covers a pending decision",
    "depends_on": [
-    "Asad: Live Mode flip on approval",
+    "N5-AS-07",
     "Saad: Meta approval status"
    ],
    "feeds": [
@@ -17486,7 +17590,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Saad owns the test and it is a benchmark minor; safe to slip inside N5 if hardening runs hot",
    "depends_on": [
     "Saad: cold-user test plan (N5)",
-    "Asad: first-run onboarding (N4)"
+    "N4-AS-10"
    ],
    "feeds": [
     "Saad",
@@ -17526,7 +17630,10 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Saad",
     "Jill",
-    "Lewis"
+    "Lewis",
+    "N5-SD-03",
+    "N5-JL-05",
+    "N6-JL-06"
    ],
    "gate": "N5",
    "source": "plan",
@@ -17555,7 +17662,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Pre-UAT check with a few days of slack for fixes",
    "depends_on": [
     "N4-FZ-01",
-    "Asad: cookie consent banner built (N4)"
+    "N4-AS-09"
    ],
    "feeds": [
     "Asad",
@@ -17589,8 +17696,8 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "Dated: video ships 5 Nov",
    "depends_on": [
-    "Saad: video script (N4)",
-    "Faheem: drill #2 + 7-day false-alarm rate",
+    "N4-SD-11",
+    "N5-FH-04",
     "Asad: crisis pass line decision"
    ],
    "feeds": [
@@ -17663,7 +17770,9 @@ window.LAUNCH_DATA = {
     "Muteeb",
     "Jill",
     "Alex",
-    "LW-FZ-01"
+    "LW-FZ-01",
+    "N6-MT-01",
+    "N6-JL-01"
    ],
    "gate": "N6",
    "source": "plan",
@@ -17727,7 +17836,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Feeds the 20 Nov invoices; cheap to fix now",
    "depends_on": [
     "N2-FZ-10",
-    "Jill: invoicing dry run (5 draft invoices)",
+    "N5-JL-05",
     "Asad: email templates"
    ],
    "feeds": [
@@ -17876,7 +17985,8 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Alex",
     "Jill",
-    "Lewis"
+    "Lewis",
+    "N6-AX-01"
    ],
    "gate": "none",
    "source": "plan",
@@ -17904,7 +18014,7 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "Launch-day safety lever; feeds dry run #1",
    "depends_on": [
-    "Muteeb: serving-side switches",
+    "N6-MT-04",
     "N4-AS-01",
     "N3-AS-04",
     "N4-AS-04",
@@ -18011,8 +18121,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "Public surface for PH day; slack to 20 Nov",
    "depends_on": [
     "N6-AS-01",
-    "Filza: versioned legal docs",
-    "Saad: docs screenshots"
+    "N6-FZ-03",
+    "N6-SD-03"
    ],
    "feeds": [
     "Saad (PH assets)",
@@ -18111,7 +18221,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Privacy + baseline hygiene",
    "depends_on": [
-    "Muteeb: admin runbook queries",
+    "N5-MT-05",
     "Alex: Meta branch decision"
    ],
    "feeds": [
@@ -18146,7 +18256,7 @@ window.LAUNCH_DATA = {
     "N6-AS-04",
     "N6-AS-05",
     "N6-AS-08",
-    "Muteeb: emergency-change protocol"
+    "N6-MT-05"
    ],
    "feeds": [
     "Alex (chairs go/no-go)",
@@ -18440,7 +18550,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "real risk with slack before freeze",
    "depends_on": [
     "Jill: on-call rota v1 with 2am test",
-    "Filza: incident comms x3",
+    "N5-FZ-05",
     "N5-MT-05"
    ],
    "feeds": [
@@ -18546,7 +18656,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Asad: kill-switch rehearsal",
-    "Saad: launch runbook"
+    "Saad: launch runbook",
+    "N6-AS-03"
    ],
    "gate": "N6",
    "source": "muteeb",
@@ -18580,7 +18691,8 @@ window.LAUNCH_DATA = {
    "feeds": [
     "N6-MT-08",
     "Asad",
-    "Faheem"
+    "Faheem",
+    "N6-AS-10"
    ],
    "gate": "N6",
    "source": "muteeb",
@@ -18609,7 +18721,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "real risk with slack before code freeze",
    "depends_on": [
     "N5-MT-05",
-    "Asad: OAuth canary N5",
+    "N5-AS-02",
     "Jill: on-call rota"
    ],
    "feeds": [
@@ -18823,7 +18935,9 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Alex",
     "Muteeb",
-    "Asad"
+    "Asad",
+    "N6-AX-04",
+    "N6-JL-05"
    ],
    "gate": "N6",
    "source": "saad",
@@ -18857,7 +18971,8 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Asad",
     "Alex",
-    "Filza"
+    "Filza",
+    "N6-AS-06"
    ],
    "gate": "N6",
    "source": "saad",
@@ -18990,13 +19105,14 @@ window.LAUNCH_DATA = {
    "priority_reason": "Real risk; slack in launch week to adjust",
    "depends_on": [
     "Jill: on-call rota v1",
-    "Alex: war-room roles"
+    "N6-AX-02"
    ],
    "feeds": [
     "Alex",
     "Lewis",
     "Jill",
-    "Muteeb"
+    "Muteeb",
+    "LW-FZ-01"
    ],
    "gate": "N6",
    "source": "saad",
@@ -19099,10 +19215,10 @@ window.LAUNCH_DATA = {
    "priority_reason": "Dated public send.",
    "depends_on": [
     "N5-AX-06",
-    "Asad: landing founding-pricing update 17 Nov",
+    "N6-AS-02",
     "Asad: /security page live",
     "Filza: PECR + scarcity check",
-    "Jill: invoice template"
+    "N2-JL-06"
    ],
    "feeds": [
     "Jill: 5 invoices by 20 Nov",
@@ -19136,14 +19252,15 @@ window.LAUNCH_DATA = {
    "priority": "P0",
    "priority_reason": "Blocks Saad's runbook dry run #1 on Thu 19 Nov.",
    "depends_on": [
-    "Saad: launch runbook v1 (N5)",
+    "N5-SD-06",
     "Jill: on-call rota + contact tree"
    ],
    "feeds": [
     "Saad: runbook dry run #1 (19 Nov)",
     "Saad: launch-week rota",
     "Muteeb: commander rota (LW)",
-    "LW-AX-04"
+    "LW-AX-04",
+    "N6-SD-07"
    ],
    "gate": "N6",
    "source": "plan",
@@ -19208,8 +19325,8 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N1-AX-05",
     "Asad: KPI funnel (N4)",
-    "Muteeb: activation-funnel panel (N5)",
-    "Saad: batch thresholds in the runbook"
+    "N5-MT-06",
+    "N6-SD-02"
    ],
    "feeds": [
     "LW-AX-01",
@@ -19243,7 +19360,7 @@ window.LAUNCH_DATA = {
    "priority": "P1",
    "priority_reason": "Real risk with slack: Jill's dashboard is the backstop.",
    "depends_on": [
-    "Jill: burn cap + spend dashboard",
+    "N6-JL-04",
     "Muteeb: breakers wired to cost alarms"
    ],
    "feeds": [
@@ -19320,8 +19437,8 @@ window.LAUNCH_DATA = {
     "Jill: 5 invoices out",
     "Faheem: signed accuracy audit",
     "Muteeb: monitoring / on-call / rollback evidence",
-    "Filza: final legal sweep",
-    "Saad: UAT comprehension sign-offs"
+    "N6-FZ-03",
+    "N2-SD-07"
    ],
    "feeds": [
     "LW-AX-04",
@@ -19358,8 +19475,8 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N5-JL-01",
     "Muteeb: game-day (N6 Week A)",
-    "Filza: incident comms x3 (N5)",
-    "Saad: launch runbook v1 (N5)"
+    "N5-FZ-05",
+    "N5-SD-06"
    ],
    "feeds": [
     "Muteeb (war-room runbook)",
@@ -19397,7 +19514,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N5-JL-05",
     "N3-JL-05",
-    "Alex: founding-pricing notice draft (N5)",
+    "N5-AX-06",
     "Lewis: final pilot roster"
    ],
    "feeds": [
@@ -19478,7 +19595,8 @@ window.LAUNCH_DATA = {
     "N6-JL-05 (burn cap)",
     "LW-JL-03 (burn watch)",
     "Muteeb (war room live LW)",
-    "Alex (KPI baselines)"
+    "Alex (KPI baselines)",
+    "N6-AX-05"
    ],
    "gate": "N6",
    "source": "plan",
@@ -19510,7 +19628,7 @@ window.LAUNCH_DATA = {
     "N5-JL-04",
     "N6-JL-04",
     "N3-JL-04",
-    "Saad: batch-expansion/abort thresholds in the runbook (N6)",
+    "N6-SD-02",
     "Alex: signature"
    ],
    "feeds": [
@@ -19549,7 +19667,7 @@ window.LAUNCH_DATA = {
     "N6-JL-02",
     "N5-JL-05",
     "N5-JL-06",
-    "Filza: countersigned agreements + DPAs for all 5",
+    "N5-FZ-01",
     "Lewis: conversion confirmed per pilot",
     "Alex: 17 Nov notice sent"
    ],
@@ -19689,7 +19807,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N5-LW-05",
     "Alex: founding-pricing terms (lock duration, eligibility)",
-    "Jill: invoice template + VAT"
+    "N2-JL-06"
    ],
    "feeds": [
     "Jill",
@@ -19867,7 +19985,9 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Alex",
     "Asad",
-    "Saad"
+    "Saad",
+    "N6-AS-06",
+    "N6-AX-07"
    ],
    "gate": "N6",
    "source": "plan",
@@ -19932,7 +20052,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Go/no-go pillar",
    "depends_on": [
     "Muteeb: tenant-leakage proof in CI (N4) green on the frozen build",
-    "Muteeb: pen-test criticals closed (N5)"
+    "N5-MT-04"
    ],
    "feeds": [
     "Alex",
@@ -20034,12 +20154,14 @@ window.LAUNCH_DATA = {
    "priority_reason": "Dated MVP-done post",
    "depends_on": [
     "LW-AS-01",
-    "Muteeb: war room live"
+    "LW-MT-01"
    ],
    "feeds": [
     "Saad (MVP-done post)",
     "Alex",
-    "LW-AS-03"
+    "LW-AS-03",
+    "LW-LW-01",
+    "LW-FZ-02"
    ],
    "gate": "LW",
    "source": "plan",
@@ -20170,7 +20292,11 @@ window.LAUNCH_DATA = {
    "feeds": [
     "Alex",
     "Saad",
-    "Lewis"
+    "Lewis",
+    "LW-AS-02",
+    "LW-AX-04",
+    "LW-JL-03",
+    "LW-LW-02"
    ],
    "gate": "LW",
    "source": "muteeb",
@@ -20395,7 +20521,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Dated",
    "depends_on": [
     "N6-SD-08",
-    "Alex: hunter sync",
+    "LW-AX-03",
     "Filza: final narrative check"
    ],
    "feeds": [
@@ -20530,10 +20656,11 @@ window.LAUNCH_DATA = {
     "N2-AX-09",
     "Saad: PH preview verified",
     "Saad: PH assets frozen",
-    "Filza: PH + press copy check"
+    "LW-FZ-03"
    ],
    "feeds": [
-    "LW-AX-04"
+    "LW-AX-04",
+    "LW-SD-03"
    ],
    "gate": "LW",
    "source": "plan",
@@ -20566,7 +20693,7 @@ window.LAUNCH_DATA = {
     "LW-AX-03",
     "N6-AX-03",
     "Asad: smoke 5 flows + flags flip",
-    "Muteeb: war room live"
+    "LW-MT-01"
    ],
    "feeds": [
     "LW-AX-05",
@@ -20673,7 +20800,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N2-JL-02",
     "Saad: support macros complete (N5) + launch-week rota (N6)",
-    "Asad: support expectation published (N5)",
+    "N5-AS-12",
     "N6-JL-03"
    ],
    "feeds": [
@@ -20711,7 +20838,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N6-JL-05",
     "N6-JL-04",
-    "Muteeb: war room live + breakers verified (LW)"
+    "LW-MT-01"
    ],
    "feeds": [
     "Alex (daily exec check, 'we're live' note, Series-A evidence)",
@@ -20747,7 +20874,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N6-LW-05",
     "N5-LW-04",
-    "Asad: production smoke of the 5 flows on 28 Nov"
+    "LW-AS-02"
    ],
    "feeds": [
     "Asad",
@@ -20783,7 +20910,7 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N6-LW-01",
     "N6-LW-05",
-    "Muteeb: war room daily 09:00 checkpoint"
+    "LW-MT-01"
    ],
    "feeds": [
     "Muteeb",
@@ -20818,7 +20945,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "War room is live from 23 Nov; must be set before the 25 Nov dry run",
    "depends_on": [
     "N5-FZ-05",
-    "Saad: launch-week rota (N6)",
+    "N6-SD-07",
     "Jill: on-call rota v1"
    ],
    "feeds": [
@@ -20853,7 +20980,7 @@ window.LAUNCH_DATA = {
    "priority_reason": "Dated: before 08:00 on 1 Dec",
    "depends_on": [
     "N6-FZ-03",
-    "Asad: production smoke Sat 28 Nov"
+    "LW-AS-02"
    ],
    "feeds": [
     "Asad",
@@ -20892,7 +21019,8 @@ window.LAUNCH_DATA = {
    ],
    "feeds": [
     "Alex",
-    "Saad"
+    "Saad",
+    "LW-AX-03"
    ],
    "gate": "LW",
    "source": "plan",
