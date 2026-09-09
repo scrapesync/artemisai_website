@@ -286,6 +286,20 @@ def acc_fusion_conf(cur):
     rows=q(cur,f"""SELECT processed_at::date d, ROUND(100*AVG(confidence),1) c
       FROM rdl.fusion_predictions WHERE processed_at>='{START}' AND confidence IS NOT NULL GROUP BY 1""")
     return trend(align_daily(rows,'d','c',82,True))
+def acc_video_nlp(cur):
+    """Video NLP tab: scene classifier vs Claude Haiku labels on the same videos,
+    plus confidence / hook / uncertain aggregates. N is tiny while the video
+    pipeline is a pilot - the page shows it and says so."""
+    r=q(cur,"""SELECT COUNT(*) n,
+      ROUND(100.0*AVG(CASE WHEN scene_label=haiku_label THEN 1 ELSE 0 END::float),1) agree,
+      ROUND(100.0*AVG(scene_confidence),1) conf,
+      ROUND(100.0*AVG(haiku_confidence),1) haiku_conf,
+      ROUND(100.0*AVG(CASE WHEN scene_uncertain THEN 1 ELSE 0 END::float),1) uncertain,
+      ROUND(100.0*AVG(hook_score),1) hook
+      FROM rdl.video_intelligence WHERE scene_label IS NOT NULL AND haiku_label IS NOT NULL""")[0]
+    return {'n':int(r['n'] or 0),'agree':float(r['agree'] or 0),'conf':float(r['conf'] or 0),
+            'haiku_conf':float(r['haiku_conf'] or 0),'uncertain':float(r['uncertain'] or 0),'hook':float(r['hook'] or 0)}
+
 def acc_video_conf(cur):
     rows=q(cur,f"""SELECT processed_at::date d, ROUND(100*AVG(scene_confidence),1) c
       FROM rdl.video_intelligence WHERE processed_at>='{START}' AND scene_confidence IS NOT NULL GROUP BY 1""")
@@ -546,7 +560,7 @@ def main():
         'conf_buckets':safe(acc_conf_buckets,cur),'per_dim':safe(acc_per_dim,cur),
         'escalation':safe(acc_escalation,cur),'proctime':safe(acc_proctime,cur),
         'comment_agreement':safe(acc_comment_agreement,cur),'fusion_conf':safe(acc_fusion_conf,cur),
-        'video_conf':safe(acc_video_conf,cur),'dim_conf':safe(acc_dim_conf,cur),'uncertain':safe(acc_uncertain,cur)}
+        'video_conf':safe(acc_video_conf,cur),'video':safe(acc_video_nlp,cur),'dim_conf':safe(acc_dim_conf,cur),'uncertain':safe(acc_uncertain,cur)}
     tabs['health']={'freshness':safe(hl_freshness_table,cur),'daily_loads':safe(hl_daily_loads,cur),
         'load_status':safe(hl_load_status,cur),'missing_days':safe(hl_missing_days,cur),
         'lag':safe(hl_lag,cur),'rowcount_delta':safe(hl_rowcount_delta,cur),

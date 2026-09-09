@@ -247,11 +247,22 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
       </p>
     </div>
     <div style="text-align:right;display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+      <button id="refreshBtn" class="btn primary" onclick="triggerRefresh()" title="Re-run the warehouse pipeline now and reload every tab and table" style="font-size:14px;padding:11px 24px;font-weight:700;border-radius:10px">&#8635; Refresh from warehouse</button>
       <div id="syncStatus" style="min-width:180px;text-align:right">
         <span style="color:#7b8ba8;font-family:'JetBrains Mono',monospace;font-size:11px">⟳ Connecting…</span>
       </div>
       <div style="font-size:9px;color:var(--t2);font-family:'JetBrains Mono',monospace">Last updated</div>
       <div id="lastUpdated" style="font-size:13px;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--accent)">26 Apr 2026</div>
+    </div>
+  </div>
+
+  <div id="refreshWrap" style="display:none;margin:-4px 0 16px;background:var(--card);border:1px solid rgba(0,212,170,.3);border-radius:12px;padding:12px 16px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px">
+      <span id="refreshMsg" style="font-size:12px;color:var(--t2)"></span>
+      <span id="refreshPct" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#00d4aa"></span>
+    </div>
+    <div style="height:10px;background:rgba(255,255,255,.07);border-radius:6px;overflow:hidden">
+      <div id="refreshFill" style="width:0%;height:100%;border-radius:6px;background:linear-gradient(90deg,#00d4aa,#34d399);box-shadow:0 0 12px rgba(0,212,170,.5);transition:width .6s ease"></div>
     </div>
   </div>
 
@@ -262,6 +273,8 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
       <button class="lvl-btn active" data-level="post" onclick="setLevel('post')">Post NLP</button>
       <button class="lvl-btn" data-level="comment" onclick="setLevel('comment')">Comment NLP</button>
       <button class="lvl-btn" data-level="ocr" onclick="setLevel('ocr')">OCR Images</button>
+      <button class="lvl-btn" data-level="video" onclick="setLevel('video')">Video NLP</button>
+      <button class="lvl-btn" data-level="flop" onclick="setLevel('flop')">Flop Model</button>
       <button class="lvl-btn" data-level="both" onclick="setLevel('both')">All</button>
     </div>
     <span id="levelHint" style="font-size:11px;color:var(--t2)"></span>
@@ -514,6 +527,8 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
           <option value="post">Post NLP</option>
           <option value="comment">Comment NLP</option>
           <option value="ocr">OCR Images</option>
+          <option value="video">Video NLP</option>
+          <option value="flop">Flop Model</option>
         </select>
       </div>
       <div class="fg">
@@ -600,9 +615,21 @@ const METRIC_SETS = {
     labels: ['Word Acc','Char Acc','Escal. Rate','VLM Win','Fusion F1'],
     col:    {Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#f87171',Toxicity:'#34d399'},
     target: {Sentiment:90,Emotion:95,Topic:75,Intent:80,Toxicity:90}
+  },
+  video: {
+    keys:   ['Sentiment','Emotion','Topic','Intent','Toxicity'],
+    labels: ['Scene Acc','Scene Conf','Haiku Conf','Hook Score','Uncertain'],
+    col:    {Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#f87171',Toxicity:'#34d399'},
+    target: {Sentiment:85,Emotion:85,Topic:85,Intent:50,Toxicity:15}
+  },
+  flop: {
+    keys:   ['Sentiment','Emotion','Topic','Intent','Toxicity'],
+    labels: ['AUC ×100','Precision','Coverage','Cold-start','Day-7 Acc'],
+    col:    {Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#f87171',Toxicity:'#34d399'},
+    target: {Sentiment:75,Emotion:75,Topic:55,Intent:70,Toxicity:80}
   }
 };
-function metricSet(lv){ lv=lv||_level; return (lv==='ocr')?METRIC_SETS.ocr:METRIC_SETS.nlp; }
+function metricSet(lv){ lv=lv||_level; return METRIC_SETS[lv]||METRIC_SETS.nlp; }
 const TASKS = ['Sentiment','Emotion','Topic','Intent','Toxicity']; // physical slots (constant)
 function taskLabel(key){ const m=metricSet(); const i=m.keys.indexOf(key); return i>=0?m.labels[i]:key; }
 const TCOL  = {Sentiment:'#00d4aa',Emotion:'#a78bfa',Topic:'#60a5fa',Intent:'#f87171',Toxicity:'#34d399'};
@@ -641,7 +668,9 @@ function setLevel(lv){
     post:'Showing post-level NLP models (NEBULA pipeline).',
     comment:'Showing comment-level NLP models (single-task DeBERTa with post context).',
     ocr:'Showing image OCR + fusion models (the Sprint 6 image pipeline). Metrics: word/char accuracy, escalation rate, VLM win rate, fusion Macro-F1.',
-    both:'Showing post, comment and OCR-image models together.'
+    video:'Showing video NLP (scene classifier + hook detector on video frames). Metrics: scene accuracy vs Claude Haiku, model confidence, hook score, uncertain rate.',
+    flop:'Showing the flop-prediction model (early warning on underperforming posts). Numbers are the passed gate backtest; live scores land in the warehouse in N2.',
+    both:'Showing post, comment, OCR-image, video and flop models together.'
   };
   const h=document.getElementById('levelHint'); if(h)h.textContent=hints[lv]||'';
   relabelMetrics();
@@ -653,7 +682,7 @@ function relabelMetrics(){
   const m=metricSet();
   m.keys.forEach((k,i)=>{
     const lbl=m.labels[i];
-    const th=document.getElementById('th_'+k); if(th) th.textContent=lbl+(_level==='ocr'?'':' %');
+    const th=document.getElementById('th_'+k); if(th) th.textContent=lbl+(['ocr','video','flop'].includes(_level)?'':' %');
     const kl=document.getElementById('kl_'+k); if(kl) kl.textContent=lbl;
     const fl=document.getElementById('fl_'+k); if(fl) fl.textContent=lbl;
   });
@@ -661,11 +690,15 @@ function relabelMetrics(){
   const mh=document.getElementById('metricBlockHead');
   if(mh) mh.textContent=(_level==='ocr')
     ? 'OCR / fusion metrics (0–100 · word & char accuracy, escalation rate, VLM win rate, fusion Macro-F1 ×100)'
+    : (_level==='video') ? 'Video metrics (0–100 · scene acc & conf vs Haiku, hook score ×100, uncertain %)'
+    : (_level==='flop') ? 'Flop-model metrics (0–100 · AUC ×100, precision %, coverage %, cold-start AUC ×100)'
     : 'Accuracy % (0–100 · leave blank if not evaluated yet)';
   // table card subtitle
   const sub=document.getElementById('tableCardSub');
   if(sub) sub.textContent=(_level==='ocr')
     ? 'OCR engines + fusion classifier · word/char accuracy, escalation, VLM win, fusion F1 · Sprint 6 pipeline'
+    : (_level==='video') ? 'Video NLP · scene classifier vs Claude Haiku + hook detector · pilot batch, scales with the pipeline'
+    : (_level==='flop') ? 'Flop detector · gate-backtest metrics (AUC, precision @ coverage, cold-start) · live scores land in N2'
     : (_level==='comment') ? 'Comment-level models · Accuracy % · ▲▼ = change vs previous version'
     : (_level==='both') ? 'Post, comment & OCR models · Accuracy % · ▲▼ = change vs previous'
     : 'Post-level models · Accuracy % · ▲▼ = change vs previous version';
@@ -706,7 +739,7 @@ function ensureCommentSeeds(){
 
 // ── Ensure Sprint-6 OCR-image entries exist (merge into DB-backed data, persist if new) ──
 function ocrSeedEntries(){
-  return getDefaultEntries().filter(e=>e.level==='ocr');
+  return getDefaultEntries().filter(e=>['ocr','video','flop'].includes(e.level));
 }
 function ensureOcrSeeds(){
   const seeds=ocrSeedEntries();
@@ -846,6 +879,10 @@ function getDefaultEntries(){
     {id:'ocr_paddle',sort_order:402,level:'ocr',version:'PaddleOCR-VL-1.5 (VLM fallback)',date:'2026-06-14',desc:'0.9B vision-language fallback on the escalated hard cases (stylised fonts, memes)',Sentiment:91,Emotion:95,Topic:72,Intent:68,Toxicity:null,benchmark:'vs gold set (150 images)',notes:'~72% escalation rate on the hardest batches; ≤250 images/SageMaker job. Swapguard reverts hallucination/repetition loops.'},
     {id:'ocr_hybrid',sort_order:403,level:'ocr',version:'OCR Hybrid (production)',date:'2026-06-18',desc:'EasyOCR + PaddleOCR-VL cascade as deployed — the live OCR pipeline',Sentiment:93,Emotion:96,Topic:72,Intent:68,Toxicity:null,benchmark:'vs gold set (150 images)',notes:'Weekly SageMaker batch. Word/char accuracy after swapguard. Escalation = % sent to VLM; VLM win = % where VLM beat EasyOCR.'},
     {id:'fusion_v1',sort_order:404,level:'ocr',version:'Fusion Classifier v1',date:'2026-06-18',desc:'CLIP image + OCR text + caption → 1 of 5 content types',Sentiment:null,Emotion:null,Topic:null,Intent:null,Toxicity:93,benchmark:'vs gold set (150 images)',notes:'Macro F1 0.93 across 5 classes (val acc 81.7%, honest on rare classes). 1536→256→64→5 MLP, 2,593 training samples. Weekly Lambda.'},
+    {id:'video_scene_v0',sort_order:501,level:'video',version:'Scene Classifier v0 (pilot)',date:'2026-07-04',desc:'Frame-ensemble scene classifier over 6 content classes + hook detector — 5-video pilot batch',Sentiment:100,Emotion:89.1,Topic:85,Intent:35,Toxicity:0,benchmark:'vs Claude Haiku labels (5 videos)',notes:'Pilot run 4 Jul 2026. 100% scene agreement with Haiku on the 5-video batch (meme, lifestyle) — far too small to trust; the real read arrives as the video pipeline scales. Hook score is a 0–100 signal, not an accuracy. Uncertain rate 0%.'},
+    {id:'video_target',sort_order:599,level:'video',version:'Video NLP Target',date:null,desc:'Gate: scene accuracy vs Haiku on a scaled batch (≥150 videos)',Sentiment:85,Emotion:85,Topic:85,Intent:50,Toxicity:15,benchmark:'video gate',notes:'Targets: scene acc ≥85 on ≥150 videos, scene confidence ≥85, uncertain ≤15 (lower is better). Hook target = hook-signal coverage, not accuracy.',isTarget:true},
+    {id:'flop_v0',sort_order:601,level:'flop',version:'Flop Detector v0 (Borda gate + regressor)',date:'2026-09-02',desc:'Early warning on underperforming posts — gate backtest passed',Sentiment:76,Emotion:75,Topic:55,Intent:74.6,Toxicity:null,benchmark:'gate backtest (S7)',notes:'Gate passed: AUC 0.76, 75% precision at 55% coverage, cold-start AUC 0.746. Ships Borda gate + regressor; LambdaRank lost the A/B. Day-7 accuracy lands with the N2 recalibration; live flop scores are not in the warehouse yet, so this tab stays backtest-based until they land.'},
+    {id:'flop_target',sort_order:699,level:'flop',version:'Flop Gate Target',date:null,desc:'Gate line: precision at a stated alert volume plus a coverage floor',Sentiment:75,Emotion:75,Topic:55,Intent:70,Toxicity:80,benchmark:'flop gate',notes:'AUC ≥0.75, precision ≥75% at ≥55% coverage, cold-start AUC ≥0.70; day-7 accuracy target 80 once the N2 recalibration lands.',isTarget:true},
     {id:'ocr_target',sort_order:499,level:'ocr',version:'OCR + Fusion Target',date:null,desc:'Sprint 6 gate: strong word/char accuracy, fusion Macro-F1 ≥ 0.90',Sentiment:90,Emotion:95,Topic:75,Intent:80,Toxicity:90,benchmark:'Sprint 6 gate',notes:'Targets: word ≥90, char ≥95, escalation ≤75 (lower is better), VLM win ≥80, fusion F1 ≥90. Fine-tuned local OCR later cuts escalation.',isTarget:true},
   ];
 }
@@ -865,7 +902,7 @@ function renderTable(){
     const avgHtml=a!=null?`<span class="avg-sc" style="color:${a>=80?'#34d399':a>=65?'#fbbf24':'#f87171'}">${a.toFixed(1)}%</span>${trend}`:'<span class="sc m">—</span>';
     const editable=!e.isTarget&&!e.isReference;
     return`<tr class="${e.isTarget?'target-row':e.pending?'pending-row':''}">
-      <td><span class="vbadge" style="${badgeStyle(e.version)}">${e.version}</span>${_level==='both'?` <span style="font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;margin-left:4px;${entryLevel(e)==='comment'?'background:rgba(167,139,250,.14);color:#a78bfa':entryLevel(e)==='ocr'?'background:rgba(0,212,170,.14);color:#00d4aa':'background:rgba(96,165,250,.14);color:#60a5fa'}">${entryLevel(e)==='comment'?'COMMENT':entryLevel(e)==='ocr'?'OCR':'POST'}</span>`:''}</td>
+      <td><span class="vbadge" style="${badgeStyle(e.version)}">${e.version}</span>${_level==='both'?` <span style="font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;margin-left:4px;${entryLevel(e)==='comment'?'background:rgba(167,139,250,.14);color:#a78bfa':entryLevel(e)==='ocr'?'background:rgba(0,212,170,.14);color:#00d4aa':entryLevel(e)==='video'?'background:rgba(251,191,36,.14);color:#fbbf24':entryLevel(e)==='flop'?'background:rgba(248,113,113,.14);color:#f87171':'background:rgba(96,165,250,.14);color:#60a5fa'}">${entryLevel(e)==='comment'?'COMMENT':entryLevel(e)==='ocr'?'OCR':entryLevel(e)==='video'?'VIDEO':entryLevel(e)==='flop'?'FLOP':'POST'}</span>`:''}</td>
       <td style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--t2)">${e.date||'<span style="color:var(--t3)">Pending</span>'}</td>
       <td>${pct(e.Sentiment)}</td>
       <td>${pct(e.Emotion)}</td>
@@ -1137,6 +1174,14 @@ function liveRows(){
       benchmark:'sentiment agreement · latest week',
       notes:'Auto-updated nightly from rdl.comment_label_predictions (sentiment only - the other comment axes have no second model to agree with yet).'});
   }
+  if((_level==='video'||_level==='both')&&L.video&&L.video.n){
+    rows.push({id:'live_video',level:'video',isReference:true,auto:true,
+      version:'Live · vs Haiku (auto)',date:stamp,
+      desc:'Nightly scene-classifier agreement from the warehouse',
+      Sentiment:L.video.agree,Emotion:L.video.conf,Topic:L.video.haiku_conf,Intent:L.video.hook,Toxicity:L.video.uncertain,
+      benchmark:'agreement · '+L.video.n+' videos',
+      notes:'Auto-updated nightly from rdl.video_intelligence: scene label vs Claude Haiku label on the same videos. N='+L.video.n+' — treat as a pilot signal until the video pipeline scales.'});
+  }
   return rows;
 }
 function renderLivePanel(){
@@ -1155,16 +1200,7 @@ function renderLivePanel(){
     <div class="card-head"><div>
       <div class="card-title" style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:#00d4aa;display:inline-block;animation:spin 0s;box-shadow:0 0 8px #00d4aa"></span>Live from the warehouse</div>
       <div class="card-sub">Auto-updated nightly at 01:00 UTC by the QA metrics pipeline · last refresh ${(L.gen||'').replace('T',' ').slice(0,16)} UTC · no hand entry</div>
-    </div><button id="refreshBtn" class="btn" onclick="triggerRefresh()" title="Re-run the warehouse pipeline now instead of waiting for the nightly cron">&#8635; Refresh now</button></div>
-    <div id="refreshWrap" style="display:none;padding:2px 8px 12px">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
-        <span id="refreshMsg" style="font-size:11px;color:var(--t2)"></span>
-        <span id="refreshPct" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#00d4aa"></span>
-      </div>
-      <div style="height:8px;background:rgba(255,255,255,.07);border-radius:5px;overflow:hidden">
-        <div id="refreshFill" style="width:0%;height:100%;border-radius:5px;background:linear-gradient(90deg,#00d4aa,#34d399);box-shadow:0 0 10px rgba(0,212,170,.5);transition:width .6s ease"></div>
-      </div>
-    </div>
+    </div></div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;padding:0 4px 4px">
       ${tile('Post agreement',lastVal(L.agreement),'our models vs DeepSeek · weekly')}
       ${tile('Comment agreement',lastVal(L.commentAgreement),'sentiment · weekly')}
@@ -1188,7 +1224,7 @@ async function loadLive(){
     const A=(j.tabs&&j.tabs.accuracy)||{};
     const dim={}; (A.per_dim||[]).forEach(([n,v])=>dim[n]=v);
     __LIVE={gen:j.generated_at,agreement:A.agreement,commentAgreement:A.comment_agreement,
-      nlpConf:A.nlp_conf,dsConf:A.ds_conf,fusionConf:A.fusion_conf,videoConf:A.video_conf,
+      nlpConf:A.nlp_conf,dsConf:A.ds_conf,fusionConf:A.fusion_conf,videoConf:A.video_conf,video:A.video||null,
       dim:{sentiment:dim.sentiment??null,emotion:dim.emotion??null,toxicity:dim.toxicity??null}};
     renderLivePanel(); renderAll();
   }catch(e){ /* snapshot missing or offline: page works exactly as before */ }
@@ -1203,7 +1239,7 @@ let __REFRESH=null;
 function updateRefreshUI(){
   const wrap=document.getElementById('refreshWrap'),btn=document.getElementById('refreshBtn');
   if(!wrap||!btn)return;
-  if(!__REFRESH){wrap.style.display='none';btn.disabled=false;btn.style.opacity='';btn.innerHTML='&#8635; Refresh now';return;}
+  if(!__REFRESH){wrap.style.display='none';btn.disabled=false;btn.style.opacity='';btn.innerHTML='&#8635; Refresh from warehouse';return;}
   wrap.style.display='block';btn.disabled=true;btn.style.opacity='.5';btn.innerHTML='&#8635; Refreshing…';
   document.getElementById('refreshMsg').textContent=__REFRESH.msg;
   document.getElementById('refreshMsg').style.color=__REFRESH.err?'#f87171':'var(--t2)';
@@ -1262,11 +1298,12 @@ async function trackRefresh(){
         if(r.ok){
           const j=await r.json();
           if(j.generated_at&&j.generated_at!==__REFRESH.baseline){
-            __REFRESH.pct=100;__REFRESH.msg='Fresh data is live.';
+            __REFRESH.pct=100;__REFRESH.msg='Fresh data is live - reloading every tab…';
             updateRefreshUI();
             await loadLive();
-            __REFRESH={pct:100,msg:'Fresh data is live.'};
-            updateRefreshUI();endRefresh(4000);return;
+            loadEntries();
+            __REFRESH={pct:100,msg:'Fresh data is live - all tabs and tables reloaded.'};
+            updateRefreshUI();endRefresh(5000);return;
           }
         }
       }catch(e){}
