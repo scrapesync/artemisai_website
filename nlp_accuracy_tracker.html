@@ -1111,7 +1111,6 @@ async function saveEntry(){
   } else {
     const maxOrder=Math.max(...ENTRIES.filter(e=>!e.isTarget).map(e=>e.sort_order||0),0);
     entry={level:'post',id:'nlp_'+Date.now(),sort_order:maxOrder+1,created_at:Date.now(),...formData};
-    if(formData.date) document.getElementById('lastUpdated').textContent=formData.date;
   }
   closeModal();
   await dbSaveEntry(entry);
@@ -1139,7 +1138,21 @@ function expChart(cid,name){ const ch=_c[cid];if(!ch)return; const rows=[['Versi
 function dl(rows,fn){ const csv=rows.map(r=>r.map(c=>{const s=String(c).replace(/"/g,'""');return s.includes(',')||s.includes('"')?`"${s}"`:s;}).join(',')).join('\n'); const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=fn;a.click(); }
 
 // ─── BOOT ───
-function renderAll(){ renderTable();renderKPIs();renderLog();buildCharts(); }
+function renderAll(){ renderTable();renderKPIs();renderLog();buildCharts();updateLastStamp(); }
+// Header "Last updated": the newest of the latest manual entry and the nightly
+// warehouse snapshot. Warehouse wins show the exact time; manual entries only
+// carry a date.
+function updateLastStamp(){
+  const el=document.getElementById('lastUpdated'); if(!el)return;
+  let best=null,src='';
+  ENTRIES.forEach(e=>{const t=e.date?Date.parse(e.date):NaN; if(!isNaN(t)&&(!best||t>best)){best=t;src='manual entry';}});
+  if(__LIVE&&__LIVE.gen){const t=Date.parse(__LIVE.gen); if(!isNaN(t)&&(!best||t>best)){best=t;src='warehouse';}}
+  if(!best)return;
+  const d=new Date(best),M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  el.textContent=d.getUTCDate()+' '+M[d.getUTCMonth()]+' '+d.getUTCFullYear()
+    +(src==='warehouse'?' · '+String(d.getUTCHours()).padStart(2,'0')+':'+String(d.getUTCMinutes()).padStart(2,'0')+' UTC':'');
+  const lbl=el.previousElementSibling; if(lbl) lbl.textContent='Last updated · '+src;
+}
 
 // Load from DynamoDB ONCE on page load — renderAll called inside loadEntries
 try{ const _sl=localStorage.getItem('artemis_nlp_level'); if(_sl){ _level=_sl; document.querySelectorAll('.lvl-btn').forEach(b=>b.classList.toggle('active', b.dataset.level===_sl)); } }catch(_){}
