@@ -1155,7 +1155,16 @@ function renderLivePanel(){
     <div class="card-head"><div>
       <div class="card-title" style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:#00d4aa;display:inline-block;animation:spin 0s;box-shadow:0 0 8px #00d4aa"></span>Live from the warehouse</div>
       <div class="card-sub">Auto-updated nightly at 01:00 UTC by the QA metrics pipeline · last refresh ${(L.gen||'').replace('T',' ').slice(0,16)} UTC · no hand entry</div>
-    </div></div>
+    </div><button id="refreshBtn" class="btn" onclick="triggerRefresh()" title="Re-run the warehouse pipeline now instead of waiting for the nightly cron">&#8635; Refresh now</button></div>
+    <div id="refreshWrap" style="display:none;padding:2px 8px 12px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+        <span id="refreshMsg" style="font-size:11px;color:var(--t2)"></span>
+        <span id="refreshPct" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#00d4aa"></span>
+      </div>
+      <div style="height:8px;background:rgba(255,255,255,.07);border-radius:5px;overflow:hidden">
+        <div id="refreshFill" style="width:0%;height:100%;border-radius:5px;background:linear-gradient(90deg,#00d4aa,#34d399);box-shadow:0 0 10px rgba(0,212,170,.5);transition:width .6s ease"></div>
+      </div>
+    </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;padding:0 4px 4px">
       ${tile('Post agreement',lastVal(L.agreement),'our models vs DeepSeek · weekly')}
       ${tile('Comment agreement',lastVal(L.commentAgreement),'sentiment · weekly')}
@@ -1169,6 +1178,7 @@ function renderLivePanel(){
       ${bar('sentiment',L.dim.sentiment,'#00d4aa')}${bar('emotion',L.dim.emotion,'#a78bfa')}${bar('toxicity',L.dim.toxicity,'#34d399')}
       <div style="font-size:9.5px;color:var(--t3);margin-top:8px">Agreement = our model and DeepSeek giving the same label to the same post (toxicity vocabularies mapped: non_toxic↔none). It is an accuracy proxy, not gold-set accuracy - the human gold set (N1-FH-05) converts these into true accuracy rows.</div>
     </div></div>`;
+  updateRefreshUI();
 }
 async function loadLive(){
   try{
@@ -1182,6 +1192,91 @@ async function loadLive(){
       dim:{sentiment:dim.sentiment??null,emotion:dim.emotion??null,toxicity:dim.toxicity??null}};
     renderLivePanel(); renderAll();
   }catch(e){ /* snapshot missing or offline: page works exactly as before */ }
+}
+// ── On-demand refresh: button → Netlify fn → workflow_dispatch → track run ──
+// The bar tracks four real stages: dispatch accepted, run queued/working on
+// GitHub Actions (polled from the public API - no token needed to read a
+// public repo), snapshot committed, then the site poll until generated_at
+// changes (the commit has to ride through a Netlify deploy before the page
+// can see it, which is why the last stretch is the slow one).
+let __REFRESH=null;
+function updateRefreshUI(){
+  const wrap=document.getElementById('refreshWrap'),btn=document.getElementById('refreshBtn');
+  if(!wrap||!btn)return;
+  if(!__REFRESH){wrap.style.display='none';btn.disabled=false;btn.style.opacity='';btn.innerHTML='&#8635; Refresh now';return;}
+  wrap.style.display='block';btn.disabled=true;btn.style.opacity='.5';btn.innerHTML='&#8635; Refreshing…';
+  document.getElementById('refreshMsg').textContent=__REFRESH.msg;
+  document.getElementById('refreshMsg').style.color=__REFRESH.err?'#f87171':'var(--t2)';
+  document.getElementById('refreshPct').textContent=__REFRESH.err?'':Math.round(__REFRESH.pct)+'%';
+  const fill=document.getElementById('refreshFill');
+  fill.style.width=(__REFRESH.err?100:__REFRESH.pct)+'%';
+  fill.style.background=__REFRESH.err?'#7f1d1d':'linear-gradient(90deg,#00d4aa,#34d399)';
+}
+function endRefresh(ms){setTimeout(()=>{__REFRESH=null;updateRefreshUI();},ms||5000);}
+async function triggerRefresh(){
+  if(__REFRESH)return;
+  __REFRESH={pct:5,msg:'Asking GitHub to start the pipeline…',baseline:__LIVE?__LIVE.gen:null,t0:Date.now()};
+  updateRefreshUI();
+  try{
+    const r=await fetch('/api/refresh-qa-metrics',{method:'POST'});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(j.message||('HTTP '+r.status));
+    __REFRESH.already=!!j.already_running;
+    __REFRESH.pct=12;
+    __REFRESH.msg=j.already_running?'A refresh is already running - tracking it…':'Pipeline dispatched - waiting for the run to start…';
+    updateRefreshUI();
+    trackRefresh();
+  }catch(e){
+    __REFRESH.err=true;__REFRESH.msg='Could not start: '+e.message;
+    updateRefreshUI();endRefresh(7000);
+  }
+}
+async function trackRefresh(){
+  const runsURL='https://api.github.com/repos/scrapesync/artemisai_website/actions/workflows/qa-dashboard-metrics.yml/runs?per_page=1';
+  const MAX=12*60*1000;
+  let committed=false;
+  while(__REFRESH&&Date.now()-__REFRESH.t0<MAX){
+    await new Promise(r=>setTimeout(r,6000));
+    if(!__REFRESH)return;
+    if(!committed){
+      try{
+        const run=(((await(await fetch(runsURL)).json()).workflow_runs)||[])[0];
+        if(run){
+          const fresh=__REFRESH.already||new Date(run.created_at).getTime()>__REFRESH.t0-90000;
+          if(!fresh){__REFRESH.msg='Waiting for the pipeline to start…';}
+          else if(run.status==='queued'){__REFRESH.pct=Math.max(__REFRESH.pct,18);__REFRESH.msg='Queued on GitHub Actions…';}
+          else if(run.status==='in_progress'){__REFRESH.pct=Math.min(65,Math.max(__REFRESH.pct+6,30));__REFRESH.msg='Running - querying the warehouse…';}
+          else if(run.status==='completed'){
+            if(run.conclusion!=='success'){
+              __REFRESH.err=true;__REFRESH.msg='Pipeline failed on GitHub ('+(run.conclusion||'error')+') - see the repo Actions tab.';
+              updateRefreshUI();endRefresh(9000);return;
+            }
+            committed=true;__REFRESH.pct=75;__REFRESH.msg='Snapshot committed - publishing the site…';
+          }
+        }
+      }catch(e){}
+    }else{
+      __REFRESH.pct=Math.min(96,__REFRESH.pct+3);
+      try{
+        const r=await fetch('qa_metrics.json?ts='+Date.now(),{cache:'no-store'});
+        if(r.ok){
+          const j=await r.json();
+          if(j.generated_at&&j.generated_at!==__REFRESH.baseline){
+            __REFRESH.pct=100;__REFRESH.msg='Fresh data is live.';
+            updateRefreshUI();
+            await loadLive();
+            __REFRESH={pct:100,msg:'Fresh data is live.'};
+            updateRefreshUI();endRefresh(4000);return;
+          }
+        }
+      }catch(e){}
+    }
+    updateRefreshUI();
+  }
+  if(__REFRESH){
+    __REFRESH.msg='Taking longer than expected - the new data will appear once the deploy finishes.';
+    updateRefreshUI();endRefresh(9000);
+  }
 }
 loadEntries();
 loadLive();
