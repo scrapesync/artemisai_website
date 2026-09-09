@@ -335,6 +335,8 @@ html[data-theme="light"] .af-links a:hover{color:#00A085}
   </div>
 
   <!-- TABLE + GATE PANEL -->
+  <div id="livePanel" style="display:none"></div>
+
   <div class="layout">
     <!-- TABLE -->
     <div class="card">
@@ -678,7 +680,7 @@ function viewEntries(){
 function avg(e){ const v=TASKS.map(t=>e[t]).filter(x=>x!=null&&!isNaN(Number(x))); return v.length?v.reduce((a,b)=>Number(a)+Number(b),0)/v.length:null; }
 function sc(v){ if(v==null)return'm'; if(v>=80)return'g'; if(v>=65)return'a'; return'r'; }
 function pct(v){ if(v==null)return'<span style="color:var(--t3)">—</span>'; const cl=sc(v); const cols={g:'#34d399',a:'#fbbf24',r:'#f87171',m:'#4a5568'}; return`<span style="font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px;color:${cols[cl]}">${Number(v)%1===0?Number(v).toFixed(0):Number(v).toFixed(1)}%</span>`; }
-function badgeStyle(ver){ const v=ver.toLowerCase(); if(v.includes('claude'))return'border:1px solid rgba(0,212,170,.3);background:rgba(0,212,170,.08);color:#00d4aa'; if(v.includes('deepseek'))return'border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.08);color:#a78bfa'; if(v.includes('target'))return'border:1px solid rgba(52,211,153,.3);background:rgba(52,211,153,.08);color:#34d399'; if(v.includes('v4')||v.includes('latest'))return'border:1px solid rgba(251,191,36,.35);background:rgba(251,191,36,.08);color:#fbbf24'; if(v.includes('v0')||v.includes('baseline'))return'border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:#7b8ba8'; return'border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#60a5fa'; }
+function badgeStyle(ver){ const v=ver.toLowerCase(); if(v.startsWith('live'))return'border:1px solid rgba(0,212,170,.55);background:rgba(0,212,170,.12);color:#00d4aa;box-shadow:0 0 8px rgba(0,212,170,.25)'; if(v.includes('claude'))return'border:1px solid rgba(0,212,170,.3);background:rgba(0,212,170,.08);color:#00d4aa'; if(v.includes('deepseek'))return'border:1px solid rgba(167,139,250,.3);background:rgba(167,139,250,.08);color:#a78bfa'; if(v.includes('target'))return'border:1px solid rgba(52,211,153,.3);background:rgba(52,211,153,.08);color:#34d399'; if(v.includes('v4')||v.includes('latest'))return'border:1px solid rgba(251,191,36,.35);background:rgba(251,191,36,.08);color:#fbbf24'; if(v.includes('v0')||v.includes('baseline'))return'border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:#7b8ba8'; return'border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.08);color:#60a5fa'; }
 
 // ── Ensure Sprint-5 comment-level entries exist (merge into DB-backed data, persist if new) ──
 function commentSeedEntries(){
@@ -852,7 +854,7 @@ function getDefaultEntries(){
 // ─── TABLE ───
 function renderTable(){
   const body=document.getElementById('tableBody');
-  const VIEW=viewEntries();
+  const VIEW=viewEntries().concat(liveRows());
   const base=VIEW.find(e=>e.id==='nlp_v0'||e.id===1||e.sort_order===1)||VIEW.find(e=>!e.isTarget&&!e.isReference&&avg(e)!=null); const baseAvg=base?avg(base):0;
   body.innerHTML=VIEW.map((e,idx)=>{
     const a=avg(e);
@@ -1106,7 +1108,83 @@ function renderAll(){ renderTable();renderKPIs();renderLog();buildCharts(); }
 try{ const _sl=localStorage.getItem('artemis_nlp_level'); if(_sl){ _level=_sl; document.querySelectorAll('.lvl-btn').forEach(b=>b.classList.toggle('active', b.dataset.level===_sl)); } }catch(_){}
 try{ relabelMetrics(); }catch(_){}
 { const hints={post:'Showing post-level NLP models (NEBULA pipeline).',comment:'Showing comment-level NLP models (single-task DeBERTa with post context).',both:'Showing post and comment NLP together.'}; const h=document.getElementById('levelHint'); if(h)h.textContent=hints[_level]||''; }
+// ── LIVE: auto-updated nightly from the warehouse via qa_metrics.json ──
+// The nightly GitHub Action (qa-dashboard-metrics.yml) queries Redshift at
+// 01:00 UTC and commits qa_metrics.json; this page reads the accuracy tab of
+// that same snapshot, so it refreshes itself with zero extra infrastructure.
+// "Accuracy" here is inter-model agreement (our models vs DeepSeek on the
+// same posts) - the honest proxy until the human gold set (N1-FH-05) lands.
+let __LIVE=null;
+function lastVal(series){ if(!series)return null; const a=(series.week&&series.week.length?series.week:series.day)||[]; for(let i=a.length-1;i>=0;i--){ if(a[i]!=null&&!isNaN(a[i])&&a[i]>0) return a[i]; } return a.length?a[a.length-1]:null; }
+function liveRows(){
+  if(!__LIVE) return [];
+  const L=__LIVE, rows=[];
+  const stamp=(L.gen||'').slice(0,10);
+  if(_level==='post'||_level==='both'){
+    rows.push({id:'live_post',level:'post',isReference:true,auto:true,
+      version:'Live · vs DeepSeek (auto)',date:stamp,
+      desc:'Nightly inter-model agreement from the warehouse',
+      Sentiment:L.dim.sentiment,Emotion:L.dim.emotion,Topic:null,Intent:null,Toxicity:L.dim.toxicity,
+      benchmark:'agreement · 120-day window',
+      notes:'Auto-updated nightly from rdl.post_label_predictions. Agreement with DeepSeek on identical posts, not gold-set accuracy; toxicity uses vocabulary mapping (non_toxic=none). Gold-set accuracy arrives with N1-FH-05.'});
+  }
+  if(_level==='comment'||_level==='both'){
+    const ca=lastVal(L.commentAgreement);
+    if(ca!=null) rows.push({id:'live_comment',level:'comment',isReference:true,auto:true,
+      version:'Live · vs DeepSeek (auto)',date:stamp,
+      desc:'Nightly comment sentiment agreement',
+      Sentiment:ca,Emotion:null,Topic:null,Intent:null,Toxicity:null,
+      benchmark:'sentiment agreement · latest week',
+      notes:'Auto-updated nightly from rdl.comment_label_predictions (sentiment only - the other comment axes have no second model to agree with yet).'});
+  }
+  return rows;
+}
+function renderLivePanel(){
+  const el=document.getElementById('livePanel'); if(!el||!__LIVE)return;
+  const L=__LIVE;
+  const tile=(k,v,sub,col)=>`<div style="flex:1;min-width:118px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px">
+    <div style="font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--t3)">${k}</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:${col||'#00d4aa'}">${v!=null?v.toFixed(1)+'%':'—'}</div>
+    <div style="font-size:9.5px;color:var(--t3)">${sub}</div></div>`;
+  const bar=(name,v,col)=>`<div style="display:flex;align-items:center;gap:8px;margin-top:6px">
+    <span style="width:72px;font-size:10px;color:var(--t2);text-transform:capitalize">${name}</span>
+    <div style="flex:1;height:7px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden"><div style="width:${Math.min(100,v)}%;height:100%;background:${col};border-radius:4px"></div></div>
+    <span style="width:44px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:${col}">${v.toFixed(1)}%</span></div>`;
+  el.style.display='block';
+  el.innerHTML=`<div class="card" style="border:1px solid rgba(0,212,170,.3);margin-bottom:18px">
+    <div class="card-head"><div>
+      <div class="card-title" style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:#00d4aa;display:inline-block;animation:spin 0s;box-shadow:0 0 8px #00d4aa"></span>Live from the warehouse</div>
+      <div class="card-sub">Auto-updated nightly at 01:00 UTC by the QA metrics pipeline · last refresh ${(L.gen||'').replace('T',' ').slice(0,16)} UTC · no hand entry</div>
+    </div></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;padding:0 4px 4px">
+      ${tile('Post agreement',lastVal(L.agreement),'our models vs DeepSeek · weekly')}
+      ${tile('Comment agreement',lastVal(L.commentAgreement),'sentiment · weekly')}
+      ${tile('NLP confidence',lastVal(L.nlpConf),'mean · weekly','#60a5fa')}
+      ${tile('DeepSeek confidence',lastVal(L.dsConf),'mean · weekly','#a78bfa')}
+      ${tile('Fusion confidence',lastVal(L.fusionConf),'image classifier','#34d399')}
+      ${tile('Video confidence',lastVal(L.videoConf),'scene + hook models','#fbbf24')}
+    </div>
+    <div style="padding:6px 8px 4px">
+      <div style="font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-bottom:2px">Per-dimension agreement (post level)</div>
+      ${bar('sentiment',L.dim.sentiment,'#00d4aa')}${bar('emotion',L.dim.emotion,'#a78bfa')}${bar('toxicity',L.dim.toxicity,'#34d399')}
+      <div style="font-size:9.5px;color:var(--t3);margin-top:8px">Agreement = our model and DeepSeek giving the same label to the same post (toxicity vocabularies mapped: non_toxic↔none). It is an accuracy proxy, not gold-set accuracy - the human gold set (N1-FH-05) converts these into true accuracy rows.</div>
+    </div></div>`;
+}
+async function loadLive(){
+  try{
+    const r=await fetch('qa_metrics.json?ts='+Date.now(),{cache:'no-store'});
+    if(!r.ok) throw new Error(r.status);
+    const j=await r.json();
+    const A=(j.tabs&&j.tabs.accuracy)||{};
+    const dim={}; (A.per_dim||[]).forEach(([n,v])=>dim[n]=v);
+    __LIVE={gen:j.generated_at,agreement:A.agreement,commentAgreement:A.comment_agreement,
+      nlpConf:A.nlp_conf,dsConf:A.ds_conf,fusionConf:A.fusion_conf,videoConf:A.video_conf,
+      dim:{sentiment:dim.sentiment??null,emotion:dim.emotion??null,toxicity:dim.toxicity??null}};
+    renderLivePanel(); renderAll();
+  }catch(e){ /* snapshot missing or offline: page works exactly as before */ }
+}
 loadEntries();
+loadLive();
 
 // Auth — check both session keys
 (function(){try{const s=JSON.parse(localStorage.getItem('artemis_session')||localStorage.getItem('artemis_app_session')||'null');if(!s)window.location.href='admin_login.html';}catch(e){}})();

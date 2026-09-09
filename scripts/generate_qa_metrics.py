@@ -140,7 +140,15 @@ def acc_per_dim(cur):
     dims=[('sentiment','nlp_sentiment','ds_sentiment'),('emotion','nlp_emotion','ds_emotion'),('toxicity','nlp_toxicity','ds_toxicity')]
     out=[]
     for name,a,b in dims:
-        r=q(cur,f"SELECT ROUND(100.0*AVG(CASE WHEN {a}={b} THEN 1 ELSE 0 END::float),1) v FROM rdl.post_label_predictions WHERE {a} IS NOT NULL AND {b} IS NOT NULL")[0]
+        if name=='toxicity':
+            # Vocabulary mismatch: NLP says non_toxic/toxic, DeepSeek says
+            # none/borderline/coded_political - raw equality is 0% forever.
+            # Map both to ok/flagged before comparing (measured 97.8% on prod).
+            expr=(f"CASE WHEN (CASE WHEN {a}='non_toxic' THEN 'ok' ELSE 'flag' END)"
+                  f"=(CASE WHEN {b}='none' THEN 'ok' ELSE 'flag' END) THEN 1 ELSE 0 END::float")
+        else:
+            expr=f"CASE WHEN {a}={b} THEN 1 ELSE 0 END::float"
+        r=q(cur,f"SELECT ROUND(100.0*AVG({expr}),1) v FROM rdl.post_label_predictions WHERE {a} IS NOT NULL AND {b} IS NOT NULL")[0]
         out.append([name,float(r['v'] or 0)])
     return out
 def acc_escalation(cur):
