@@ -1,6 +1,6 @@
-// sprint_launch_data.js - regenerated 7 Sep 2026: 138 free-text dependencies resolved to ticket ids; the rest surfaced as soft deps in the map.
+// sprint_launch_data.js - regenerated 11 Sep 2026: Alex's sprint-tracker review added (recosting every sprint, Meta permissions master document + a review every sprint, never-empty Discovery decision, photos in drafts, Art-E best times + allowances, Share-to, tracking plan, voice, third-party reviews).
 window.LAUNCH_DATA = {
- "generated_at": "2026-09-03",
+ "generated_at": "2026-09-11",
  "layers": [
   {
    "id": "foundation",
@@ -1367,6 +1367,123 @@ window.LAUNCH_DATA = {
    "layman_analogy": "Like connecting the intercom button that was fitted at build time but deliberately left unwired until the electrician's return visit.",
    "layman_needed": "When picked up: the microphone button in Art-E switched on, turning speech into text in the chat rail so customers can ask questions out loud. Until then it needs scheduling with an owner at a betting table, or a written reason to drop.",
    "layman_output": "When picked up: the microphone button in the Art-E chat rail switched on for real — a customer taps it, speaks their question aloud, and watches it appear as text and get answered, instead of tapping a button that does nothing. The mic ships as a placeholder at launch; this row exists so leaving it dead stays a decision, not an accident. Needs scheduling with an owner, or a reason to drop."
+  },
+  {
+   "id": "BL-IN-15",
+   "sprint": "BL",
+   "layer": "intelligence",
+   "assignee": "",
+   "title": "Photo-aware draft scoring: attach a picture and the score uses it",
+   "what": "Let a user attach a photo to a draft; score it with the image content type from the fusion classifier and the text on the image from the OCR pipeline, and show a picture driver chip. Built on the offline result from N2-FH-21. Moves into a sprint if N3-AX-06 decides photos ship at launch.",
+   "why": "Over 95% of the posts we track are photos, so a text-only score misses most of what people actually publish.",
+   "area": "WAVE 2 · Prove value and sell it (late Dec · Jan)",
+   "due": "",
+   "priority": "P1",
+   "priority_reason": "Alex review 11 Sep: photos in drafts",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "Alex review 11 Sep",
+   "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
+   "checklist": [],
+   "layman": "Parked for after launch (unless the team pulls it forward): add a photo to your draft and the score takes the picture into account.",
+   "layman_analogy": "Like a proofreader who looks at the whole poster, not just the caption.",
+   "layman_needed": "When picked up: photo upload in the composer, image-aware scoring and a picture driver chip.",
+   "layman_output": "When picked up: people attach a photo to a draft and the flop score considers the kind of picture and any text on it, with a chip explaining how the picture affects the score."
+  },
+  {
+   "id": "BL-IN-16",
+   "sprint": "BL",
+   "layer": "intelligence",
+   "assignee": "",
+   "title": "Video-aware draft scoring once video analysis scales past its pilot",
+   "what": "Score a draft video on its opening hook and scene type using the video models, once the video pipeline covers enough posts to train and test on (it is a 5-video pilot today).",
+   "why": "Alex (review 11 Sep) wants videos covered; the models exist but there is not yet enough video data to trust a score.",
+   "area": "LATER · Phase 2: the product moat (Q1-Q2 2027)",
+   "due": "",
+   "priority": "P2",
+   "priority_reason": "Alex review 11 Sep: videos in drafts",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "Alex review 11 Sep",
+   "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
+   "checklist": [],
+   "layman": "Parked for later: score a draft video on how strong its opening is, once we have analysed enough videos to be reliable.",
+   "layman_analogy": "Like a film trailer test screening - only useful once enough people have watched.",
+   "layman_needed": "When picked up: video upload in drafts and a hook and scene score trained on enough real videos.",
+   "layman_output": "When picked up: people attach a video to a draft and see how strong its opening hook is and what kind of scene it is, based on enough analysed videos to trust."
+  },
+  {
+   "id": "BL-PR-14",
+   "sprint": "BL",
+   "layer": "product",
+   "assignee": "",
+   "title": "Rewards for sharing: points for posting ArtemisAI insights",
+   "what": "Give users points or badges (\"brownie points\") when they share Art-E insights or analytics cards, counted from tracked share links, and decide what points unlock.",
+   "why": "Alex (review 11 Sep): rewarding shares turns happy users into a steady source of new ones.",
+   "area": "WAVE 2 · Prove value and sell it (late Dec · Jan)",
+   "due": "",
+   "priority": "P2",
+   "priority_reason": "Alex review 11 Sep: rewards for sharing",
+   "depends_on": [
+    "N4-AS-19"
+   ],
+   "feeds": [],
+   "gate": "none",
+   "source": "Alex review 11 Sep",
+   "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
+   "checklist": [],
+   "layman": "Parked for after launch: users earn points or badges when they share ArtemisAI insights.",
+   "layman_analogy": "Like a coffee-shop loyalty card that fills up every time you bring a friend.",
+   "layman_needed": "When picked up: a points or badge system tied to tracked shares, and a decision on what points unlock.",
+   "layman_output": "When picked up: every tracked share earns the user points or a badge, with a clear reward for reaching milestones."
+  },
+  {
+   "id": "BL-IN-17",
+   "sprint": "BL",
+   "layer": "intelligence",
+   "assignee": "",
+   "title": "Independent third-party review of our AI and ML models",
+   "what": "After MVP: an outside reviewer checks our models and how we test them - the flop detector, crisis detection, Art-E grounding and refusals, and the accuracy figures we publish. Output: a written report we can show investors and customers, and a fix list.",
+   "why": "Alex (review 11 Sep): outside validation of the AI carries more weight than our own claims, and is best done once the MVP is live.",
+   "area": "WAVE 2 · Prove value and sell it (late Dec · Jan)",
+   "due": "",
+   "priority": "P1",
+   "priority_reason": "Alex review 11 Sep: third-party AI/ML review after MVP",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "Alex review 11 Sep",
+   "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
+   "checklist": [],
+   "layman": "Parked for after launch: an independent expert checks our AI and how we measure it, and writes a report we can show people.",
+   "layman_analogy": "Like getting accounts audited: the numbers mean more when someone independent signs them.",
+   "layman_needed": "When picked up: a named independent reviewer, an agreed scope, and a report with a fix list.",
+   "layman_output": "When picked up: an independent report on ArtemisAI's models and accuracy claims that investors and customers can read, plus a list of anything we need to fix."
+  },
+  {
+   "id": "BL-IN-18",
+   "sprint": "BL",
+   "layer": "intelligence",
+   "assignee": "",
+   "title": "Independent third-party review of data handling and data quality",
+   "what": "After MVP: an outside reviewer checks how we collect, store, de-identify and delete data, and the quality of the data the models learn from. Output: a report and a fix list that also supports Meta's Data Protection Assessment.",
+   "why": "Alex (review 11 Sep): an independent data review protects customers, strengthens the Meta relationship, and is best done once the MVP is live.",
+   "area": "WAVE 2 · Prove value and sell it (late Dec · Jan)",
+   "due": "",
+   "priority": "P1",
+   "priority_reason": "Alex review 11 Sep: third-party data review after MVP",
+   "depends_on": [],
+   "feeds": [],
+   "gate": "none",
+   "source": "Alex review 11 Sep",
+   "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
+   "checklist": [],
+   "layman": "Parked for after launch: an independent expert checks how we look after data and how good our training data is.",
+   "layman_analogy": "Like a food-hygiene inspection: it proves the kitchen is clean to everyone who eats there.",
+   "layman_needed": "When picked up: a named independent reviewer, an agreed scope, and a report with a fix list.",
+   "layman_output": "When picked up: an independent report on how ArtemisAI handles and protects data and how good its training data is, with a fix list that also helps with Meta's data checks."
   }
  ],
  "features": [
@@ -1413,7 +1530,9 @@ window.LAUNCH_DATA = {
     "N1-SD-21",
     "N1-FH-19",
     "N2-FH-20",
-    "N4-FH-10"
+    "N4-FH-10",
+    "N2-FH-21",
+    "N3-AX-06"
    ],
    "kind": "surface"
   },
@@ -1516,7 +1635,8 @@ window.LAUNCH_DATA = {
     "P0-MT-10",
     "N1-SD-21",
     "N5-SD-14",
-    "N4-FH-10"
+    "N4-FH-10",
+    "N4-MT-19"
    ],
    "kind": "surface"
   },
@@ -1616,7 +1736,12 @@ window.LAUNCH_DATA = {
     "N4-FH-09",
     "N4-MT-14",
     "N4-MT-15",
-    "N6-SD-09"
+    "N6-SD-09",
+    "N4-MT-19",
+    "N5-AX-07",
+    "N3-FZ-12",
+    "N3-SD-13",
+    "N4-AS-19"
    ],
    "kind": "surface"
   },
@@ -1668,7 +1793,9 @@ window.LAUNCH_DATA = {
     "N2-FH-19",
     "N3-AS-15",
     "N4-SD-13",
-    "N5-MT-10"
+    "N5-MT-10",
+    "N2-AX-10",
+    "N3-SD-12"
    ],
    "kind": "surface"
   },
@@ -1916,7 +2043,8 @@ window.LAUNCH_DATA = {
     "LW-FZ-03",
     "P0-AS-01",
     "P0-AS-14",
-    "N5-SD-16"
+    "N5-SD-16",
+    "N3-AS-17"
    ],
    "kind": "surface"
   },
@@ -2299,7 +2427,24 @@ window.LAUNCH_DATA = {
     "N3-FZ-10",
     "N5-SD-12",
     "N6-AS-11",
-    "N6-JL-07"
+    "N6-JL-07",
+    "N1-JL-08",
+    "N2-JL-07",
+    "N3-JL-06",
+    "N4-JL-05",
+    "N5-JL-07",
+    "N6-JL-08",
+    "LW-JL-04",
+    "N1-AX-12",
+    "N1-FZ-12",
+    "N2-SD-17",
+    "N2-SD-18",
+    "N2-FZ-12",
+    "N3-FZ-11",
+    "N4-FZ-10",
+    "N5-FZ-10",
+    "N6-FZ-07",
+    "LW-FZ-05"
    ]
   },
   {
@@ -8704,7 +8849,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "Named N2 gate item ('Pricing locked').",
    "depends_on": [
     "N1-JL-03",
-    "N2-JL-03"
+    "N2-JL-03",
+    "N2-JL-07"
    ],
    "feeds": [
     "N3-AX-01",
@@ -12402,7 +12548,7 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Asad",
    "title": "Opt-in consent screen per Filza's text; below-floor renders nothing",
-   "what": "Consent screen with equal-prominence opt-in / decline and revocation from Settings, exactly Filza's text; Discovery renders nothing (with Saad's low-opt-in empty-state copy) whenever the API returns fail-closed, and the event is logged client and server side.",
+   "what": "Consent screen with equal-prominence opt-in / decline and revocation from Settings, exactly Filza's text; Discovery renders nothing (with Saad's low-opt-in empty-state copy) whenever the API returns fail-closed, and the event is logged client and server side. Empty-state and cold-start behaviour follows the team decision in N2-AX-10 (review 11 Sep).",
    "why": "Consent and the k=5 floor are product features here, not paperwork; the empty state must sell, not apologise.",
    "area": "Discovery",
    "due": "2026-10-27",
@@ -12411,7 +12557,9 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N1-FZ-02",
     "Saad: empty-state copy",
-    "N3-MT-01"
+    "N3-MT-01",
+    "N2-AX-10",
+    "N3-SD-12"
    ],
    "feeds": [
     "N4-AS-04",
@@ -12473,7 +12621,7 @@ window.LAUNCH_DATA = {
    "sprint": "N4",
    "assignee": "Asad",
    "title": "Discovery v1 UI per Saad's 12 Sep pack (view-only)",
-   "what": "Explore: top-match spotlight, ranked rows with overlap % and provenance-honest reason strings straight from the API, slide-over profile, Matches / Saved tabs; pass through the 'suggested - not validated' label on fail-open rows and the 'high-confidence' badge; no sub-score meters, no messaging. Where the API reports that candidates were withheld below the k=5 floor, say so on the list in Filza-approved wording rather than silently returning a short list, and give each badge a one-line plain-English meaning in the slide-over so a thin-evidence match never reads like a strong one.",
+   "what": "Explore: top-match spotlight, ranked rows with overlap % and provenance-honest reason strings straight from the API, slide-over profile, Matches / Saved tabs; pass through the 'suggested - not validated' label on fail-open rows and the 'high-confidence' badge; no sub-score meters, no messaging. Where the API reports that candidates were withheld below the k=5 floor, say so on the list in Filza-approved wording rather than silently returning a short list, and give each badge a one-line plain-English meaning in the slide-over so a thin-evidence match never reads like a strong one. Empty-state and cold-start behaviour follows the team decision in N2-AX-10 (review 11 Sep).",
    "why": "The network moat made visible; the gate demands opt-in -> spotlight -> save live.",
    "area": "Discovery",
    "due": "2026-10-28",
@@ -12482,7 +12630,9 @@ window.LAUNCH_DATA = {
    "depends_on": [
     "N3-MT-02",
     "Lewis: precision-at-5 gate passed",
-    "Saad: Discovery pack"
+    "Saad: Discovery pack",
+    "N2-AX-10",
+    "N3-SD-12"
    ],
    "feeds": [
     "N4-AS-08",
@@ -23609,6 +23759,879 @@ window.LAUNCH_DATA = {
    "layman_analogy": "Like a hospital ward board showing each patient as stable, needs watching, or deteriorating — one glance tells the doctor where to go first.",
    "layman_needed": "A live dashboard row for each of the five prediction systems grading it healthy, watching or slipping, proven by deliberately tripping two faults and seeing the right rows turn red within one refresh.",
    "layman_output": "A single view on the internal QA dashboard with one live row for each of the five prediction systems — flop warnings, comment feeling, crisis bursts, best times and Art-E — graded healthy, watching or slipping, each row linking to the fix-it action. Proven by deliberately breaking two things and watching the right rows turn red within one refresh, so model trouble is visible at a glance, not just alerted."
+  },
+  {
+   "id": "N1-JL-08",
+   "sprint": "N1",
+   "assignee": "Jill",
+   "title": "Recosting #1: cost per request, per customer and per model, then the price plans",
+   "what": "Standing end-of-sprint item. Update the unit-cost sheet with this sprint's measured numbers: cost per request for each paid route (draft score, Art-E answer by model tier, Discovery, alerts), cost per customer per month at pilot scale and at 100 pages, and cost per model (inference, training and storage). Mark every line measured or estimated. Then refresh the package options built on those costs, tiered plans and a pay-as-you-go option, with the margin on each, so the pricing-plan decision always sits on current numbers. First pass: fold this sprint's four cost tickets (N1-AS-16, N1-FH-20, N1-MT-19, N1-SD-19) into one baseline for Jill's N2 cost model.",
+   "why": "Alex (review 11 Sep): costing is how we build the packages, so it must be current at every sprint end, at very high priority. Prices signed on stale costs lose money quietly.",
+   "area": "Finance",
+   "due": "2026-09-18",
+   "priority": "P0",
+   "priority_reason": "Alex: very high priority at every sprint end",
+   "depends_on": [
+    "N1-AS-16",
+    "N1-FH-20",
+    "N1-MT-19",
+    "N1-SD-19"
+   ],
+   "feeds": [
+    "N2-JL-03",
+    "N2-JL-07"
+   ],
+   "gate": "N1",
+   "source": "Alex review 11 Sep",
+   "acceptance": "The recosting sheet carries this sprint's measured costs per request, per customer and per model (each marked measured or estimated) and the plan options, tiers and pay-as-you-go, with margins; Alex records change or no change in writing at the gate.",
+   "checklist": [
+    "Pull measured costs from Muteeb's cost records and Faheem's per-model costs",
+    "Update cost per request, per customer and per model; mark measured vs estimated",
+    "Refresh the plan options: tiers and pay-as-you-go, with the margin on each",
+    "Alex reviews at the gate: change or no change, in writing"
+   ],
+   "layman": "At the end of the sprint Jill re-adds what ArtemisAI costs to run - per question, per customer and per model - and checks our price plans still make money, including a pay-as-you-go option.",
+   "layman_analogy": "Like a restaurant re-pricing the menu whenever ingredient costs change, so no dish is quietly sold at a loss.",
+   "layman_needed": "An updated costing sheet with cost per request, per customer and per model, and the plan options (tiers and pay-as-you-go) with their margins, reviewed by Alex.",
+   "layman_output": "A one-page recosting sheet for this sprint: what each request, each customer and each model costs us, which numbers are measured and which are still estimates, and the price plans (including pay-as-you-go) with the margin on each. Alex has read it at the gate and written down whether the prices change."
+  },
+  {
+   "id": "N2-JL-07",
+   "sprint": "N2",
+   "assignee": "Jill",
+   "title": "Recosting #2: cost per request, per customer and per model, then the price plans",
+   "what": "Standing end-of-sprint item. Update the unit-cost sheet with this sprint's measured numbers: cost per request for each paid route (draft score, Art-E answer by model tier, Discovery, alerts), cost per customer per month at pilot scale and at 100 pages, and cost per model (inference, training and storage). Mark every line measured or estimated. Then refresh the package options built on those costs, tiered plans and a pay-as-you-go option, with the margin on each, so the pricing-plan decision always sits on current numbers. Lands before the 2 Oct pricing lock: put a pay-as-you-go option beside the tiers so Alex signs N2-AX-07 with both on the table.",
+   "why": "Alex (review 11 Sep): costing is how we build the packages, so it must be current at every sprint end, at very high priority. Prices signed on stale costs lose money quietly.",
+   "area": "Finance",
+   "due": "2026-09-30",
+   "priority": "P0",
+   "priority_reason": "Alex: very high priority at every sprint end",
+   "depends_on": [
+    "N1-JL-08",
+    "N2-JL-03"
+   ],
+   "feeds": [
+    "N2-AX-07",
+    "N3-JL-06"
+   ],
+   "gate": "N2",
+   "source": "Alex review 11 Sep",
+   "acceptance": "The recosting sheet carries this sprint's measured costs per request, per customer and per model (each marked measured or estimated) and the plan options, tiers and pay-as-you-go, with margins; Alex records change or no change in writing at the gate.",
+   "checklist": [
+    "Pull measured costs from Muteeb's cost records and Faheem's per-model costs",
+    "Update cost per request, per customer and per model; mark measured vs estimated",
+    "Refresh the plan options: tiers and pay-as-you-go, with the margin on each",
+    "Alex reviews at the gate: change or no change, in writing"
+   ],
+   "layman": "At the end of the sprint Jill re-adds what ArtemisAI costs to run - per question, per customer and per model - and checks our price plans still make money, including a pay-as-you-go option.",
+   "layman_analogy": "Like a restaurant re-pricing the menu whenever ingredient costs change, so no dish is quietly sold at a loss.",
+   "layman_needed": "An updated costing sheet with cost per request, per customer and per model, and the plan options (tiers and pay-as-you-go) with their margins, reviewed by Alex.",
+   "layman_output": "A one-page recosting sheet for this sprint: what each request, each customer and each model costs us, which numbers are measured and which are still estimates, and the price plans (including pay-as-you-go) with the margin on each. Alex has read it at the gate and written down whether the prices change."
+  },
+  {
+   "id": "N3-JL-06",
+   "sprint": "N3",
+   "assignee": "Jill",
+   "title": "Recosting #3: cost per request, per customer and per model, then the price plans",
+   "what": "Standing end-of-sprint item. Update the unit-cost sheet with this sprint's measured numbers: cost per request for each paid route (draft score, Art-E answer by model tier, Discovery, alerts), cost per customer per month at pilot scale and at 100 pages, and cost per model (inference, training and storage). Mark every line measured or estimated. Then refresh the package options built on those costs, tiered plans and a pay-as-you-go option, with the margin on each, so the pricing-plan decision always sits on current numbers. First sprint with real Art-E calls: take cost per endpoint per tenant from Muteeb's dashboard (N3-MT-16).",
+   "why": "Alex (review 11 Sep): costing is how we build the packages, so it must be current at every sprint end, at very high priority. Prices signed on stale costs lose money quietly.",
+   "area": "Finance",
+   "due": "2026-10-16",
+   "priority": "P0",
+   "priority_reason": "Alex: very high priority at every sprint end",
+   "depends_on": [
+    "N2-JL-07",
+    "N3-MT-16"
+   ],
+   "feeds": [
+    "N4-JL-05"
+   ],
+   "gate": "N3",
+   "source": "Alex review 11 Sep",
+   "acceptance": "The recosting sheet carries this sprint's measured costs per request, per customer and per model (each marked measured or estimated) and the plan options, tiers and pay-as-you-go, with margins; Alex records change or no change in writing at the gate.",
+   "checklist": [
+    "Pull measured costs from Muteeb's cost records and Faheem's per-model costs",
+    "Update cost per request, per customer and per model; mark measured vs estimated",
+    "Refresh the plan options: tiers and pay-as-you-go, with the margin on each",
+    "Alex reviews at the gate: change or no change, in writing"
+   ],
+   "layman": "At the end of the sprint Jill re-adds what ArtemisAI costs to run - per question, per customer and per model - and checks our price plans still make money, including a pay-as-you-go option.",
+   "layman_analogy": "Like a restaurant re-pricing the menu whenever ingredient costs change, so no dish is quietly sold at a loss.",
+   "layman_needed": "An updated costing sheet with cost per request, per customer and per model, and the plan options (tiers and pay-as-you-go) with their margins, reviewed by Alex.",
+   "layman_output": "A one-page recosting sheet for this sprint: what each request, each customer and each model costs us, which numbers are measured and which are still estimates, and the price plans (including pay-as-you-go) with the margin on each. Alex has read it at the gate and written down whether the prices change."
+  },
+  {
+   "id": "N4-JL-05",
+   "sprint": "N4",
+   "assignee": "Jill",
+   "title": "Recosting #4: cost per request, per customer and per model, then the price plans",
+   "what": "Standing end-of-sprint item. Update the unit-cost sheet with this sprint's measured numbers: cost per request for each paid route (draft score, Art-E answer by model tier, Discovery, alerts), cost per customer per month at pilot scale and at 100 pages, and cost per model (inference, training and storage). Mark every line measured or estimated. Then refresh the package options built on those costs, tiered plans and a pay-as-you-go option, with the margin on each, so the pricing-plan decision always sits on current numbers. Uses Asad's measured re-cost including the LLM (N4-AS-18); flags any plan that loses money at observed usage and feeds the Art-E allowances (N5-AX-07).",
+   "why": "Alex (review 11 Sep): costing is how we build the packages, so it must be current at every sprint end, at very high priority. Prices signed on stale costs lose money quietly.",
+   "area": "Finance",
+   "due": "2026-11-01",
+   "priority": "P0",
+   "priority_reason": "Alex: very high priority at every sprint end",
+   "depends_on": [
+    "N3-JL-06",
+    "N4-AS-18",
+    "N4-MT-16"
+   ],
+   "feeds": [
+    "N5-AX-07",
+    "N5-JL-07"
+   ],
+   "gate": "N4",
+   "source": "Alex review 11 Sep",
+   "acceptance": "The recosting sheet carries this sprint's measured costs per request, per customer and per model (each marked measured or estimated) and the plan options, tiers and pay-as-you-go, with margins; Alex records change or no change in writing at the gate.",
+   "checklist": [
+    "Pull measured costs from Muteeb's cost records and Faheem's per-model costs",
+    "Update cost per request, per customer and per model; mark measured vs estimated",
+    "Refresh the plan options: tiers and pay-as-you-go, with the margin on each",
+    "Alex reviews at the gate: change or no change, in writing"
+   ],
+   "layman": "At the end of the sprint Jill re-adds what ArtemisAI costs to run - per question, per customer and per model - and checks our price plans still make money, including a pay-as-you-go option.",
+   "layman_analogy": "Like a restaurant re-pricing the menu whenever ingredient costs change, so no dish is quietly sold at a loss.",
+   "layman_needed": "An updated costing sheet with cost per request, per customer and per model, and the plan options (tiers and pay-as-you-go) with their margins, reviewed by Alex.",
+   "layman_output": "A one-page recosting sheet for this sprint: what each request, each customer and each model costs us, which numbers are measured and which are still estimates, and the price plans (including pay-as-you-go) with the margin on each. Alex has read it at the gate and written down whether the prices change."
+  },
+  {
+   "id": "N5-JL-07",
+   "sprint": "N5",
+   "assignee": "Jill",
+   "title": "Recosting #5: cost per request, per customer and per model, then the price plans",
+   "what": "Standing end-of-sprint item. Update the unit-cost sheet with this sprint's measured numbers: cost per request for each paid route (draft score, Art-E answer by model tier, Discovery, alerts), cost per customer per month at pilot scale and at 100 pages, and cost per model (inference, training and storage). Mark every line measured or estimated. Then refresh the package options built on those costs, tiered plans and a pay-as-you-go option, with the margin on each, so the pricing-plan decision always sits on current numbers. Adds the load-test and burst numbers from hardening; confirms the plan limits hold at pilot x10.",
+   "why": "Alex (review 11 Sep): costing is how we build the packages, so it must be current at every sprint end, at very high priority. Prices signed on stale costs lose money quietly.",
+   "area": "Finance",
+   "due": "2026-11-13",
+   "priority": "P0",
+   "priority_reason": "Alex: very high priority at every sprint end",
+   "depends_on": [
+    "N4-JL-05",
+    "N5-AX-07"
+   ],
+   "feeds": [
+    "N6-JL-08"
+   ],
+   "gate": "N5",
+   "source": "Alex review 11 Sep",
+   "acceptance": "The recosting sheet carries this sprint's measured costs per request, per customer and per model (each marked measured or estimated) and the plan options, tiers and pay-as-you-go, with margins; Alex records change or no change in writing at the gate.",
+   "checklist": [
+    "Pull measured costs from Muteeb's cost records and Faheem's per-model costs",
+    "Update cost per request, per customer and per model; mark measured vs estimated",
+    "Refresh the plan options: tiers and pay-as-you-go, with the margin on each",
+    "Alex reviews at the gate: change or no change, in writing"
+   ],
+   "layman": "At the end of the sprint Jill re-adds what ArtemisAI costs to run - per question, per customer and per model - and checks our price plans still make money, including a pay-as-you-go option.",
+   "layman_analogy": "Like a restaurant re-pricing the menu whenever ingredient costs change, so no dish is quietly sold at a loss.",
+   "layman_needed": "An updated costing sheet with cost per request, per customer and per model, and the plan options (tiers and pay-as-you-go) with their margins, reviewed by Alex.",
+   "layman_output": "A one-page recosting sheet for this sprint: what each request, each customer and each model costs us, which numbers are measured and which are still estimates, and the price plans (including pay-as-you-go) with the margin on each. Alex has read it at the gate and written down whether the prices change."
+  },
+  {
+   "id": "N6-JL-08",
+   "sprint": "N6",
+   "assignee": "Jill",
+   "title": "Recosting #6: cost per request, per customer and per model, then the price plans",
+   "what": "Standing end-of-sprint item. Update the unit-cost sheet with this sprint's measured numbers: cost per request for each paid route (draft score, Art-E answer by model tier, Discovery, alerts), cost per customer per month at pilot scale and at 100 pages, and cost per model (inference, training and storage). Mark every line measured or estimated. Then refresh the package options built on those costs, tiered plans and a pay-as-you-go option, with the margin on each, so the pricing-plan decision always sits on current numbers. Last recost before go/no-go: the numbers the launch price and the five pilot invoices stand on.",
+   "why": "Alex (review 11 Sep): costing is how we build the packages, so it must be current at every sprint end, at very high priority. Prices signed on stale costs lose money quietly.",
+   "area": "Finance",
+   "due": "2026-11-27",
+   "priority": "P0",
+   "priority_reason": "Alex: very high priority at every sprint end",
+   "depends_on": [
+    "N5-JL-07"
+   ],
+   "feeds": [
+    "LW-JL-04"
+   ],
+   "gate": "N6",
+   "source": "Alex review 11 Sep",
+   "acceptance": "The recosting sheet carries this sprint's measured costs per request, per customer and per model (each marked measured or estimated) and the plan options, tiers and pay-as-you-go, with margins; Alex records change or no change in writing at the gate.",
+   "checklist": [
+    "Pull measured costs from Muteeb's cost records and Faheem's per-model costs",
+    "Update cost per request, per customer and per model; mark measured vs estimated",
+    "Refresh the plan options: tiers and pay-as-you-go, with the margin on each",
+    "Alex reviews at the gate: change or no change, in writing"
+   ],
+   "layman": "At the end of the sprint Jill re-adds what ArtemisAI costs to run - per question, per customer and per model - and checks our price plans still make money, including a pay-as-you-go option.",
+   "layman_analogy": "Like a restaurant re-pricing the menu whenever ingredient costs change, so no dish is quietly sold at a loss.",
+   "layman_needed": "An updated costing sheet with cost per request, per customer and per model, and the plan options (tiers and pay-as-you-go) with their margins, reviewed by Alex.",
+   "layman_output": "A one-page recosting sheet for this sprint: what each request, each customer and each model costs us, which numbers are measured and which are still estimates, and the price plans (including pay-as-you-go) with the margin on each. Alex has read it at the gate and written down whether the prices change."
+  },
+  {
+   "id": "LW-JL-04",
+   "sprint": "LW",
+   "assignee": "Jill",
+   "title": "Recosting #7: cost per request, per customer and per model, then the price plans",
+   "what": "Standing end-of-sprint item. Update the unit-cost sheet with this sprint's measured numbers: cost per request for each paid route (draft score, Art-E answer by model tier, Discovery, alerts), cost per customer per month at pilot scale and at 100 pages, and cost per model (inference, training and storage). Mark every line measured or estimated. Then refresh the package options built on those costs, tiered plans and a pay-as-you-go option, with the margin on each, so the pricing-plan decision always sits on current numbers. Launch-week recost on production traffic: confirms or corrects the plans before the first public signups are billed.",
+   "why": "Alex (review 11 Sep): costing is how we build the packages, so it must be current at every sprint end, at very high priority. Prices signed on stale costs lose money quietly.",
+   "area": "Finance",
+   "due": "2026-12-04",
+   "priority": "P0",
+   "priority_reason": "Alex: very high priority at every sprint end",
+   "depends_on": [
+    "N6-JL-08"
+   ],
+   "feeds": [],
+   "gate": "LW",
+   "source": "Alex review 11 Sep",
+   "acceptance": "The recosting sheet carries this sprint's measured costs per request, per customer and per model (each marked measured or estimated) and the plan options, tiers and pay-as-you-go, with margins; Alex records change or no change in writing at the gate.",
+   "checklist": [
+    "Pull measured costs from Muteeb's cost records and Faheem's per-model costs",
+    "Update cost per request, per customer and per model; mark measured vs estimated",
+    "Refresh the plan options: tiers and pay-as-you-go, with the margin on each",
+    "Alex reviews at the gate: change or no change, in writing"
+   ],
+   "layman": "At the end of the sprint Jill re-adds what ArtemisAI costs to run - per question, per customer and per model - and checks our price plans still make money, including a pay-as-you-go option.",
+   "layman_analogy": "Like a restaurant re-pricing the menu whenever ingredient costs change, so no dish is quietly sold at a loss.",
+   "layman_needed": "An updated costing sheet with cost per request, per customer and per model, and the plan options (tiers and pay-as-you-go) with their margins, reviewed by Alex.",
+   "layman_output": "A one-page recosting sheet for this sprint: what each request, each customer and each model costs us, which numbers are measured and which are still estimates, and the price plans (including pay-as-you-go) with the margin on each. Alex has read it at the gate and written down whether the prices change."
+  },
+  {
+   "id": "N1-AX-12",
+   "sprint": "N1",
+   "assignee": "Alex",
+   "title": "Put the biggest Meta approval risks on the next team call",
+   "what": "Lead a 30-minute item on the next team call with Filza, Asad and Saad: walk the risks to getting Meta approval (Live Mode) in time for 8 Dec, rank them, and give each an owner. Start from the list in the review answers: business verification not completing, the review clock leaving no safe second cycle (N2-AX-06), screencasts or mockups showing features our permissions do not cover (collab, messaging), banned framing in Meta-facing text (N2-FZ-01), a Data Protection Assessment request (N3-FZ-10), and pilot pages being restricted by Facebook (the 25-29 Aug window). Record the ranking in the permissions master document.",
+   "why": "Alex (review 11 Sep) asked for the biggest OAuth risk to be discussed on the next call; an unranked risk list does not change what anyone does this week.",
+   "area": "Meta",
+   "due": "2026-09-15",
+   "priority": "P0",
+   "priority_reason": "Before the permissions master document and the Meta package are written",
+   "depends_on": [],
+   "feeds": [
+    "N1-FZ-12",
+    "N2-AX-06",
+    "N2-AX-08"
+   ],
+   "gate": "N1",
+   "source": "Alex review 11 Sep",
+   "acceptance": "After the call, the ranked Meta risk list with an owner per risk is recorded in the permissions master document.",
+   "checklist": [
+    "Add the item to the next team call agenda",
+    "Walk and rank the risks with Filza, Asad and Saad",
+    "Name an owner per risk",
+    "Record the ranking in the master document"
+   ],
+   "layman": "Alex runs a short session on the next team call about what could stop Facebook approving our app in time, ranks the dangers and gives each one an owner.",
+   "layman_analogy": "Like a pre-flight briefing where the crew agrees what could go wrong and who handles each case.",
+   "layman_needed": "A ranked list of Meta approval risks, each with an owner, written into the permissions master document.",
+   "layman_output": "After the next team call, a short ranked list of the biggest risks to Facebook approving ArtemisAI before 8 December - from business verification to review timing to screens that promise too much - each with a named owner, filed in the permissions master document."
+  },
+  {
+   "id": "N1-FZ-12",
+   "sprint": "N1",
+   "assignee": "Filza",
+   "title": "Start the Meta permissions master document: what we may and may not build",
+   "what": "One living document the team works from: every feature and every mockup screen mapped to the Meta permission it relies on, marked allowed, not allowed, or needs a check, with the reason. Start from the signed scopes decision (N1-FZ-06: login, page identity and read-only page analytics; no publishing, messaging or ads scopes). Cover explicitly: the collab and Discovery features (what we may show one page about another), in-app messaging between our own users (and why it cannot run on Meta messaging), the Share-to button (user-initiated share flows only), reminders instead of scheduling, alerts, Art-E answers, data deletion and deauthorisation. Filza owns it; Asad, Alex and Saad review it; it is updated at every sprint's Meta review.",
+   "why": "Alex (review 11 Sep): the rules for what Meta allows must live in one maintained place, so the build, the mockups and the App Review package never promise something our permissions do not cover.",
+   "area": "Meta",
+   "due": "2026-09-16",
+   "priority": "P0",
+   "priority_reason": "Feeds the Meta package and Saad's mockup audit before the 2 Oct submission",
+   "depends_on": [
+    "N1-FZ-06",
+    "N1-AX-12"
+   ],
+   "feeds": [
+    "N2-FZ-01",
+    "N2-SD-17",
+    "N2-SD-04",
+    "N2-FZ-12"
+   ],
+   "gate": "N1",
+   "source": "Alex review 11 Sep",
+   "acceptance": "The master document is in the Meta package folder with every current feature and mockup screen mapped to a permission and marked allowed, not allowed or needs a check; Asad, Alex and Saad have confirmed they reviewed it.",
+   "checklist": [
+    "Map every feature and mockup screen to the permission it uses",
+    "Mark each allowed, not allowed or needs a check, with the reason",
+    "Cover collab, Discovery, in-app messaging and Share-to explicitly",
+    "Review with Asad, Alex and Saad; file in the Meta package folder"
+   ],
+   "layman": "Filza writes one rulebook of what Facebook's permissions let us build and what they do not - feature by feature - so nobody designs or builds something Meta will reject.",
+   "layman_analogy": "Like the planning permission kept on a building site, so every builder checks it before adding a wall.",
+   "layman_needed": "One maintained document mapping every feature and screen to the Meta permission it needs, marked allowed, not allowed or needs a check, reviewed by Asad, Alex and Saad.",
+   "layman_output": "A living rulebook in the Meta folder listing every ArtemisAI feature and mockup screen, the Facebook permission each relies on, and a clear allowed, not allowed or check verdict with the reason - including collab, Discovery, in-app messaging and the Share-to button. Asad, Alex and Saad have reviewed it, and it is updated every sprint."
+  },
+  {
+   "id": "N2-SD-17",
+   "sprint": "N2",
+   "assignee": "Saad",
+   "title": "Check every mockup pack against the Meta permissions master document",
+   "what": "Walk all twelve mockup packs against the master document (N1-FZ-12) before the App Review package is assembled. Flag any screen that implies a permission we are not requesting: publishing or scheduling, messaging (including a collab chat that looks like Messenger), ads, or showing one page's analytics to another page. Fix or annotate each flag, and make sure the screens used in the screencasts match exactly what the requested permissions do.",
+   "why": "Alex (review 11 Sep): the mockups must respect what Meta allows; a screencast showing a capability we did not ask permission for is a common rejection reason.",
+   "area": "Design",
+   "due": "2026-09-24",
+   "priority": "P0",
+   "priority_reason": "Before the Meta package is assembled on 29 Sep",
+   "depends_on": [
+    "N1-FZ-12"
+   ],
+   "feeds": [
+    "N2-SD-04",
+    "N2-FZ-12"
+   ],
+   "gate": "N2",
+   "source": "Alex review 11 Sep",
+   "acceptance": "Every pack is checked; each flagged screen is fixed or annotated in the master document; the screencast screens match the requested permissions.",
+   "checklist": [
+    "Walk all 12 packs against the master document",
+    "Flag publishing, messaging, ads and cross-page data screens",
+    "Fix or annotate every flag",
+    "Confirm the screencast screens match the requested permissions"
+   ],
+   "layman": "Saad checks every screen he designed against the Facebook rulebook and fixes anything that promises more than our permissions allow.",
+   "layman_analogy": "Like checking a house plan against the planning rules before the inspector visits.",
+   "layman_needed": "All mockup packs checked against the master document, with every problem screen fixed or noted.",
+   "layman_output": "All twelve mockup packs checked against the Facebook permissions rulebook: no screen suggests posting, messaging, ads or showing one page's data to another unless the rulebook allows it, and the screens used in Meta's review videos match exactly what we ask permission for."
+  },
+  {
+   "id": "N2-FZ-12",
+   "sprint": "N2",
+   "assignee": "Filza",
+   "title": "Meta permissions review #1: this sprint's features and screens vs the master document",
+   "what": "Standing sprint item with Asad, Alex and Saad: go through everything designed or built this sprint and check it against the Meta permissions master document (N1-FZ-12); add any new feature to the document; log each gap with an owner and a fix date. Runs before the 2 Oct submission, alongside the firewall review (N2-FZ-07).",
+   "why": "Alex (review 11 Sep): Meta compliance needs a ticket in every sprint, not only around the submission.",
+   "area": "Meta",
+   "due": "2026-09-29",
+   "priority": "P0",
+   "priority_reason": "Alex: a Meta review in every sprint",
+   "depends_on": [
+    "N1-FZ-12",
+    "N2-SD-17"
+   ],
+   "feeds": [
+    "N2-FZ-07",
+    "N3-FZ-11"
+   ],
+   "gate": "N2",
+   "source": "Alex review 11 Sep",
+   "acceptance": "This sprint's new features and screens are checked against the master document, the document is updated, and every gap has an owner and a fix date.",
+   "checklist": [
+    "List what was designed or built this sprint",
+    "Check each item against the master document with Asad, Alex and Saad",
+    "Update the master document",
+    "Log gaps with an owner and a fix date"
+   ],
+   "layman": "Filza, Asad, Alex and Saad check what was built this sprint against the Facebook rulebook, and update the rulebook.",
+   "layman_analogy": "Like a regular safety inspection on a building site, not just one at the end.",
+   "layman_needed": "This sprint's work checked against the Meta permissions master document, the document updated, and every gap owned.",
+   "layman_output": "A short record that everything designed or built this sprint was checked against the Facebook permissions rulebook by Filza with Asad, Alex and Saad, the rulebook updated for new features, and every problem given an owner and a fix date."
+  },
+  {
+   "id": "N3-FZ-11",
+   "sprint": "N3",
+   "assignee": "Filza",
+   "title": "Meta permissions review #2: this sprint's features and screens vs the master document",
+   "what": "Standing sprint item with Asad, Alex and Saad: go through everything designed or built this sprint and check it against the Meta permissions master document (N1-FZ-12); add any new feature to the document; log each gap with an owner and a fix date. Covers any Meta reviewer questions (N3-SD-01) and the Share-to design.",
+   "why": "Alex (review 11 Sep): Meta compliance needs a ticket in every sprint, not only around the submission.",
+   "area": "Meta",
+   "due": "2026-10-14",
+   "priority": "P1",
+   "priority_reason": "Alex: a Meta review in every sprint",
+   "depends_on": [
+    "N2-FZ-12"
+   ],
+   "feeds": [
+    "N4-FZ-10"
+   ],
+   "gate": "N3",
+   "source": "Alex review 11 Sep",
+   "acceptance": "This sprint's new features and screens are checked against the master document, the document is updated, and every gap has an owner and a fix date.",
+   "checklist": [
+    "List what was designed or built this sprint",
+    "Check each item against the master document with Asad, Alex and Saad",
+    "Update the master document",
+    "Log gaps with an owner and a fix date"
+   ],
+   "layman": "Filza, Asad, Alex and Saad check what was built this sprint against the Facebook rulebook, and update the rulebook.",
+   "layman_analogy": "Like a regular safety inspection on a building site, not just one at the end.",
+   "layman_needed": "This sprint's work checked against the Meta permissions master document, the document updated, and every gap owned.",
+   "layman_output": "A short record that everything designed or built this sprint was checked against the Facebook permissions rulebook by Filza with Asad, Alex and Saad, the rulebook updated for new features, and every problem given an owner and a fix date."
+  },
+  {
+   "id": "N4-FZ-10",
+   "sprint": "N4",
+   "assignee": "Filza",
+   "title": "Meta permissions review #3: this sprint's features and screens vs the master document",
+   "what": "Standing sprint item with Asad, Alex and Saad: go through everything designed or built this sprint and check it against the Meta permissions master document (N1-FZ-12); add any new feature to the document; log each gap with an owner and a fix date. Covers Discovery on screen, Art-E answers and the Share-to build.",
+   "why": "Alex (review 11 Sep): Meta compliance needs a ticket in every sprint, not only around the submission.",
+   "area": "Meta",
+   "due": "2026-10-28",
+   "priority": "P1",
+   "priority_reason": "Alex: a Meta review in every sprint",
+   "depends_on": [
+    "N3-FZ-11"
+   ],
+   "feeds": [
+    "N5-FZ-10"
+   ],
+   "gate": "N4",
+   "source": "Alex review 11 Sep",
+   "acceptance": "This sprint's new features and screens are checked against the master document, the document is updated, and every gap has an owner and a fix date.",
+   "checklist": [
+    "List what was designed or built this sprint",
+    "Check each item against the master document with Asad, Alex and Saad",
+    "Update the master document",
+    "Log gaps with an owner and a fix date"
+   ],
+   "layman": "Filza, Asad, Alex and Saad check what was built this sprint against the Facebook rulebook, and update the rulebook.",
+   "layman_analogy": "Like a regular safety inspection on a building site, not just one at the end.",
+   "layman_needed": "This sprint's work checked against the Meta permissions master document, the document updated, and every gap owned.",
+   "layman_output": "A short record that everything designed or built this sprint was checked against the Facebook permissions rulebook by Filza with Asad, Alex and Saad, the rulebook updated for new features, and every problem given an owner and a fix date."
+  },
+  {
+   "id": "N5-FZ-10",
+   "sprint": "N5",
+   "assignee": "Filza",
+   "title": "Meta permissions review #4: this sprint's features and screens vs the master document",
+   "what": "Standing sprint item with Asad, Alex and Saad: go through everything designed or built this sprint and check it against the Meta permissions master document (N1-FZ-12); add any new feature to the document; log each gap with an owner and a fix date. Covers the Live Mode flip (N5-AS-07) and the Data Use Checkup binder (N5-FZ-09).",
+   "why": "Alex (review 11 Sep): Meta compliance needs a ticket in every sprint, not only around the submission.",
+   "area": "Meta",
+   "due": "2026-11-11",
+   "priority": "P1",
+   "priority_reason": "Alex: a Meta review in every sprint",
+   "depends_on": [
+    "N4-FZ-10"
+   ],
+   "feeds": [
+    "N6-FZ-07"
+   ],
+   "gate": "N5",
+   "source": "Alex review 11 Sep",
+   "acceptance": "This sprint's new features and screens are checked against the master document, the document is updated, and every gap has an owner and a fix date.",
+   "checklist": [
+    "List what was designed or built this sprint",
+    "Check each item against the master document with Asad, Alex and Saad",
+    "Update the master document",
+    "Log gaps with an owner and a fix date"
+   ],
+   "layman": "Filza, Asad, Alex and Saad check what was built this sprint against the Facebook rulebook, and update the rulebook.",
+   "layman_analogy": "Like a regular safety inspection on a building site, not just one at the end.",
+   "layman_needed": "This sprint's work checked against the Meta permissions master document, the document updated, and every gap owned.",
+   "layman_output": "A short record that everything designed or built this sprint was checked against the Facebook permissions rulebook by Filza with Asad, Alex and Saad, the rulebook updated for new features, and every problem given an owner and a fix date."
+  },
+  {
+   "id": "N6-FZ-07",
+   "sprint": "N6",
+   "assignee": "Filza",
+   "title": "Meta permissions review #5: this sprint's features and screens vs the master document",
+   "what": "Standing sprint item with Asad, Alex and Saad: go through everything designed or built this sprint and check it against the Meta permissions master document (N1-FZ-12); add any new feature to the document; log each gap with an owner and a fix date. Last check before the 20 Nov feature freeze.",
+   "why": "Alex (review 11 Sep): Meta compliance needs a ticket in every sprint, not only around the submission.",
+   "area": "Meta",
+   "due": "2026-11-18",
+   "priority": "P1",
+   "priority_reason": "Alex: a Meta review in every sprint",
+   "depends_on": [
+    "N5-FZ-10"
+   ],
+   "feeds": [
+    "LW-FZ-05"
+   ],
+   "gate": "N6",
+   "source": "Alex review 11 Sep",
+   "acceptance": "This sprint's new features and screens are checked against the master document, the document is updated, and every gap has an owner and a fix date.",
+   "checklist": [
+    "List what was designed or built this sprint",
+    "Check each item against the master document with Asad, Alex and Saad",
+    "Update the master document",
+    "Log gaps with an owner and a fix date"
+   ],
+   "layman": "Filza, Asad, Alex and Saad check what was built this sprint against the Facebook rulebook, and update the rulebook.",
+   "layman_analogy": "Like a regular safety inspection on a building site, not just one at the end.",
+   "layman_needed": "This sprint's work checked against the Meta permissions master document, the document updated, and every gap owned.",
+   "layman_output": "A short record that everything designed or built this sprint was checked against the Facebook permissions rulebook by Filza with Asad, Alex and Saad, the rulebook updated for new features, and every problem given an owner and a fix date."
+  },
+  {
+   "id": "LW-FZ-05",
+   "sprint": "LW",
+   "assignee": "Filza",
+   "title": "Meta permissions review #6: this sprint's features and screens vs the master document",
+   "what": "Standing sprint item with Asad, Alex and Saad: go through everything designed or built this sprint and check it against the Meta permissions master document (N1-FZ-12); add any new feature to the document; log each gap with an owner and a fix date. Final check of the production app against the approved permissions before doors open.",
+   "why": "Alex (review 11 Sep): Meta compliance needs a ticket in every sprint, not only around the submission.",
+   "area": "Meta",
+   "due": "2026-12-03",
+   "priority": "P1",
+   "priority_reason": "Alex: a Meta review in every sprint",
+   "depends_on": [
+    "N6-FZ-07"
+   ],
+   "feeds": [],
+   "gate": "LW",
+   "source": "Alex review 11 Sep",
+   "acceptance": "This sprint's new features and screens are checked against the master document, the document is updated, and every gap has an owner and a fix date.",
+   "checklist": [
+    "List what was designed or built this sprint",
+    "Check each item against the master document with Asad, Alex and Saad",
+    "Update the master document",
+    "Log gaps with an owner and a fix date"
+   ],
+   "layman": "Filza, Asad, Alex and Saad check what was built this sprint against the Facebook rulebook, and update the rulebook.",
+   "layman_analogy": "Like a regular safety inspection on a building site, not just one at the end.",
+   "layman_needed": "This sprint's work checked against the Meta permissions master document, the document updated, and every gap owned.",
+   "layman_output": "A short record that everything designed or built this sprint was checked against the Facebook permissions rulebook by Filza with Asad, Alex and Saad, the rulebook updated for new features, and every problem given an owner and a fix date."
+  },
+  {
+   "id": "N2-AX-10",
+   "sprint": "N2",
+   "assignee": "Alex",
+   "title": "Decide with the team: the Discovery feed is never empty",
+   "what": "Alex's position (review 11 Sep): an empty feed is dangerous for a new product. Better to show every opted-in page at the start and let users pick their own matches, so the model learns from their choices, then tighten to a benchmark of fewer, better matches once there are many users. The current design is the opposite (N4-AS-02: below the signal floor, Discovery renders nothing). Decide with Asad, Filza, Saad, Faheem and Muteeb which way launch goes. Options: (a) browse all opted-in pages with filters, with suggestions marked only where the signal clears the floor; (b) onboarding picks, where the user names pages they would work with, seeding both the feed and the model; (c) a curated starter list; (d) the current fail-closed empty state. What stays fixed: only opted-in pages ever appear, the k=5 privacy floor on anything derived from shared audiences, Filza's legal pass on reason strings, and the Meta firewall wording.",
+   "why": "An empty Discovery tab on day one reads as a broken product. This decision changes N2-AS-14, N3-AS-15 and the N4 build, so it has to land before the matching work starts on 5 Oct.",
+   "area": "Discovery",
+   "due": "2026-09-25",
+   "priority": "P0",
+   "priority_reason": "Changes the N2 descope decision and the N4 Discovery build",
+   "depends_on": [
+    "N2-FH-19"
+   ],
+   "feeds": [
+    "N2-AS-14",
+    "N3-AS-15",
+    "N3-SD-12",
+    "N4-AS-02",
+    "N4-AS-04"
+   ],
+   "gate": "N2",
+   "source": "Alex review 11 Sep",
+   "acceptance": "A written decision on Discovery's empty state and cold start, naming the chosen option, what the privacy floor still governs, and how user choices feed the model, acknowledged by Asad, Filza, Saad, Faheem and Muteeb.",
+   "checklist": [
+    "Put Alex's never-empty position beside the current fail-closed design",
+    "Weigh browse-all, onboarding picks, a curated list and the empty state",
+    "Confirm the consent and privacy-floor rules that stay",
+    "File the decision; update N2-AS-14 and N4-AS-02 to match"
+   ],
+   "layman": "The team decides what the Discovery tab shows on day one, when we cannot yet find strong matches: Alex wants it always to show pages people can browse and pick from, rather than an empty screen.",
+   "layman_analogy": "Like a new dating app showing everyone nearby at first instead of \"no matches yet\", then getting pickier as it learns what people choose.",
+   "layman_needed": "A written team decision on what Discovery shows when matches are weak, with the privacy rules that still apply.",
+   "layman_output": "A signed team decision on Discovery's first days: whether it shows all opted-in pages to browse, asks users to pick pages during onboarding, shows a starter list, or stays empty - with how people's picks teach the model, and which privacy rules (opt-in only, the k=5 floor) still hold."
+  },
+  {
+   "id": "N3-SD-12",
+   "sprint": "N3",
+   "assignee": "Saad",
+   "title": "Design the never-empty Discovery feed from the team decision",
+   "what": "Design what the team chose in N2-AX-10: the browse view of opted-in pages, the onboarding step where a user picks pages they would work with (if chosen), how a strong suggestion is marked apart from a browse result, and copy that never promises a match we have not found. Keep the Meta firewall wording and Filza's reason-string rules; update the Discovery pack and hand the changes to Asad.",
+   "why": "The 12 Sep Discovery pack was drawn for a fail-closed feed; Asad cannot build a never-empty feed from it.",
+   "area": "Discovery",
+   "due": "2026-10-09",
+   "priority": "P1",
+   "priority_reason": "Asad builds the Discovery UI in N4 from this",
+   "depends_on": [
+    "N2-AX-10"
+   ],
+   "feeds": [
+    "N4-AS-04",
+    "N4-AS-02"
+   ],
+   "gate": "N3",
+   "source": "Alex review 11 Sep",
+   "acceptance": "An updated Discovery pack covering the browse view, the onboarding picks step if chosen, suggestion-versus-browse marking and empty-safe copy, handed to Asad.",
+   "checklist": [
+    "Read the N2-AX-10 decision",
+    "Design the browse view and onboarding picks",
+    "Mark strong suggestions apart from browse results",
+    "Hand the pack changes and copy to Asad"
+   ],
+   "layman": "Saad redraws the Discovery screens so the tab always has pages to look at, following what the team decided.",
+   "layman_analogy": "Like redesigning a shop window so it is never bare, even before the new stock arrives.",
+   "layman_needed": "Updated Discovery designs for a feed that is never empty, handed to Asad.",
+   "layman_output": "Updated Discovery screens: a browse view of pages that opted in, an optional onboarding step where users pick pages they would like to work with, strong suggestions clearly marked apart from general browsing, and wording that never claims a match we have not found - ready for Asad to build."
+  },
+  {
+   "id": "N2-FH-21",
+   "sprint": "N2",
+   "assignee": "Faheem",
+   "title": "Offline test: does a post's image type make flop scoring better?",
+   "what": "Draft scoring reads text only today (the flop v1 inputs are page, draft text and post metadata, per N1-FH-17). Test offline on the 27,678-post flop set whether adding the image content type from the existing fusion classifier, and the text on the image from the OCR pipeline, lifts precision at the gate's coverage. Report the lift on the same harness, and the cost of running the fusion model while a user writes a draft. Do not change the shipped flop v1 artifact.",
+   "why": "Alex (review 11 Sep) asked whether drafts include pictures and videos. They do not; this measures whether adding pictures is worth building, given that over 95% of the posts we track are photos.",
+   "area": "Models",
+   "due": "2026-10-01",
+   "priority": "P1",
+   "priority_reason": "Input to the photos-in-drafts decision on 9 Oct",
+   "depends_on": [
+    "N1-FH-08"
+   ],
+   "feeds": [
+    "N3-AX-06"
+   ],
+   "gate": "N2",
+   "source": "Alex review 11 Sep",
+   "acceptance": "A one-page result: precision at the gate coverage with and without image features on the same harness, plus the draft-time serving cost of the fusion model.",
+   "checklist": [
+    "Join image content type and OCR text to the flop set",
+    "Re-run the flop harness with and without them",
+    "Measure the draft-time serving cost of the fusion model",
+    "Hand the one-page result to Alex"
+   ],
+   "layman": "Faheem tests whether knowing what kind of picture a post has (a meme, a product shot, a screenshot) helps us spot flops better, before anyone builds it into drafts.",
+   "layman_analogy": "Like checking whether adding a photo to a job ad actually brings more replies before redesigning every ad.",
+   "layman_needed": "A short result showing whether picture information improves flop prediction, and what it would cost to run live.",
+   "layman_output": "A one-page test result: how much better (or not) flop prediction gets when the model also knows each post's image type and any text on the image, measured the same way as the passed gate, plus the cost of doing it live while someone writes a draft."
+  },
+  {
+   "id": "N3-AX-06",
+   "sprint": "N3",
+   "assignee": "Alex",
+   "title": "Decide: photos and videos in the draft composer at launch or after",
+   "what": "Using Faheem's offline result (N2-FH-21), decide with Faheem, Asad, Saad and Muteeb whether the draft composer accepts a photo at launch and scores it, or drafts stay text-only for launch with photos as the first post-launch item. Video drafts stay post-launch either way: the video pipeline is still a 5-video pilot. If photos ship, create the build tickets (upload in the composer, image scoring at draft time, a picture driver chip) before the 20 Nov model freeze; if not, confirm BL-IN-15 as the first post-launch item.",
+   "why": "Alex (review 11 Sep) wants drafts to cover pictures and videos; this turns the question into a scoped decision instead of scope creep.",
+   "area": "Drafts",
+   "due": "2026-10-09",
+   "priority": "P1",
+   "priority_reason": "Must land before the N4 build and the 20 Nov model freeze",
+   "depends_on": [
+    "N2-FH-21"
+   ],
+   "feeds": [
+    "BL-IN-15",
+    "BL-IN-16",
+    "N3-SD-09"
+   ],
+   "gate": "N3",
+   "source": "Alex review 11 Sep",
+   "acceptance": "A written decision: photos in drafts at launch (with named build tickets) or post-launch (BL-IN-15 confirmed), and video post-launch, acknowledged by Faheem, Asad, Saad and Muteeb.",
+   "checklist": [
+    "Read Faheem's lift and cost result",
+    "Decide photos at launch or post-launch",
+    "Confirm video stays post-launch until the pipeline scales",
+    "Create the build tickets or confirm the backlog items"
+   ],
+   "layman": "Alex and the team decide whether people can add a photo to a draft and have it scored at launch, or just after launch; videos come later either way.",
+   "layman_analogy": "Like deciding whether a new menu launches with desserts or adds them the month after.",
+   "layman_needed": "A written decision on photos (launch or after) and videos (after) in drafts.",
+   "layman_output": "A clear team decision on pictures and videos in draft scoring: whether photos are scored at launch (with the work named and scheduled) or right after launch, and confirmation that video scoring waits until our video analysis grows beyond its small pilot."
+  },
+  {
+   "id": "N4-MT-19",
+   "sprint": "N4",
+   "assignee": "Muteeb",
+   "title": "Art-E answers from the Best Times heatmap, with a link back to it",
+   "what": "Make Best Times a first-class Art-E source: expose the hour-by-day aggregates from the best-times endpoint (N3-MT-04) to Art-E, as a retrieval source or a tool call, so questions like \"when should I post this week?\" are answered from the heatmap with a citation chip that opens the heatmap on the cited slot. Respect the heatmap's sparse-data honesty (N3-AS-09): where the heatmap hedges, Art-E hedges. Add best-time questions to the golden set with Lewis and Faheem.",
+   "why": "Alex (review 11 Sep) asked whether users can reach the heatmap through Art-E. Art-E's recommendation card uses best-times signals (N3-FH-05), but no ticket lets Art-E answer from or link to the heatmap itself.",
+   "area": "Art-E",
+   "due": "2026-10-23",
+   "priority": "P1",
+   "priority_reason": "Before the Art-E gate run on 30 Oct",
+   "depends_on": [
+    "N3-MT-04",
+    "N3-MT-09",
+    "N3-AS-09"
+   ],
+   "feeds": [
+    "N4-AS-01",
+    "N4-FH-02"
+   ],
+   "gate": "N4",
+   "source": "Alex review 11 Sep",
+   "acceptance": "A best-time question on a pilot tenant returns an answer grounded in the heatmap with a citation chip that opens it; sparse slots are hedged; best-time questions are in the golden set.",
+   "checklist": [
+    "Expose the best-times aggregates to Art-E as retrieval or a tool",
+    "Citation chip opens the heatmap at the cited slot",
+    "Match the heatmap's sparse-data hedging",
+    "Add best-time questions to the golden set"
+   ],
+   "layman": "Muteeb connects Art-E to the Best Times heatmap, so you can simply ask \"when should I post?\" and get an answer with a link to the exact spot on the heatmap.",
+   "layman_analogy": "Like a shop assistant who answers \"when is it quiet?\" by pointing at the footfall chart instead of guessing.",
+   "layman_needed": "Art-E answering best-time questions from the heatmap, with a link that opens it.",
+   "layman_output": "Ask Art-E \"when should I post this week?\" and it answers from your own Best Times heatmap, shows where the answer came from, and one click opens the heatmap at that slot; where the data is thin it says so, just as the heatmap does."
+  },
+  {
+   "id": "N3-FZ-12",
+   "sprint": "N3",
+   "assignee": "Filza",
+   "title": "Check Share-to against Facebook and Instagram sharing rules",
+   "what": "Before Saad designs it, write down what a Share-to button may do: sharing is user-initiated through the platforms' own share flows, with no pre-filled post text and no publishing permission (which we are not requesting, per N1-FZ-06); a share card may show only the user's own page data, never another page's data, commenter data or anything from Discovery; shared Art-E text is labelled as AI-generated; and the rules for ArtemisAI branding and links on a card. Add the result to the permissions master document.",
+   "why": "Alex (review 11 Sep) wants users to share Art-E insights and analytics cards to Facebook and Instagram; that must not need a permission we are not requesting, or expose anyone else's data.",
+   "area": "Legal",
+   "due": "2026-10-09",
+   "priority": "P1",
+   "priority_reason": "Rules must exist before Saad designs Share-to",
+   "depends_on": [
+    "N1-FZ-12"
+   ],
+   "feeds": [
+    "N3-SD-13",
+    "N4-AS-19"
+   ],
+   "gate": "N3",
+   "source": "Alex review 11 Sep",
+   "acceptance": "A one-page Share-to rules note filed in the permissions master document, covering share flows, allowed card content, AI labelling and branding.",
+   "checklist": [
+    "Confirm sharing works through platform share flows with no new permission",
+    "List what a share card may and may not show",
+    "Set the AI-label rule for shared Art-E text",
+    "File the note in the master document"
+   ],
+   "layman": "Filza checks what Facebook and Instagram allow before we add a share button, so sharing never needs extra permissions or shows someone else's data.",
+   "layman_analogy": "Like checking a venue's rules before handing out flyers at the door.",
+   "layman_needed": "A written note on what Share-to may do, filed in the permissions master document.",
+   "layman_output": "A one-page rules note: users share only through Facebook's and Instagram's own share screens, a shared card shows only the user's own page numbers, shared Art-E text is labelled as AI, and our branding and link appear by agreed rules - all added to the Facebook permissions rulebook."
+  },
+  {
+   "id": "N3-SD-13",
+   "sprint": "N3",
+   "assignee": "Saad",
+   "title": "Design Share-to: a share button on Art-E answers and a shareable analytics card",
+   "what": "Design two things from Alex's idea: a Share-to button on Art-E answers and feed items (Facebook, Instagram, LinkedIn or copy link), and a special analytics card, an image summarising the user's own wins that looks good posted on Facebook. Follow Filza's rules (N3-FZ-12); every shared link carries the tags from the tracking plan (N3-AS-17). Leave the rewards for sharing (\"brownie points\") for after launch (BL-PR-14).",
+   "why": "Share-to turns a good insight into free marketing and gives us a measurable referral loop.",
+   "area": "Design",
+   "due": "2026-10-14",
+   "priority": "P1",
+   "priority_reason": "Asad builds Share-to in N4 from this",
+   "depends_on": [
+    "N3-FZ-12"
+   ],
+   "feeds": [
+    "N4-AS-19"
+   ],
+   "gate": "N3",
+   "source": "Alex review 11 Sep",
+   "acceptance": "The Share-to button states and the analytics card are designed with copy, follow Filza's rules, and are handed to Asad.",
+   "checklist": [
+    "Design the Share-to button and its states",
+    "Design the analytics card layout",
+    "Apply Filza's rules and the AI label",
+    "Hand the pack to Asad"
+   ],
+   "layman": "Saad designs a share button for Art-E answers and a good-looking card of your own results that you can post on Facebook or Instagram.",
+   "layman_analogy": "Like a fitness app's \"share your run\" card: it looks good on your feed and quietly advertises the app.",
+   "layman_needed": "Share-to button designs and a shareable analytics card, ready for Asad.",
+   "layman_output": "Designs for a share button on Art-E answers and feed items, plus an attractive image card of the user's own results to post on Facebook or Instagram, following the platforms' rules and ready for Asad to build."
+  },
+  {
+   "id": "N4-AS-19",
+   "sprint": "N4",
+   "assignee": "Asad",
+   "title": "Build Share-to: share links and a downloadable analytics card",
+   "what": "Build Saad's Share-to (N3-SD-13): the share button opens each platform's own share flow with a tracked link (tags per the tracking plan), and the analytics card renders as an image the user can download or share. No new Meta permission. Launch scope is settled at the cut-line review; if it misses the cut, it becomes the first post-launch item.",
+   "why": "Alex (review 11 Sep): sharing insights spreads ArtemisAI through creators' own feeds.",
+   "area": "Art-E",
+   "due": "2026-10-30",
+   "priority": "P2",
+   "priority_reason": "Cut-line candidate: ships at launch only if it clears Alex's cut-line review",
+   "depends_on": [
+    "N3-SD-13",
+    "N4-AS-01",
+    "N3-AS-17"
+   ],
+   "feeds": [
+    "BL-PR-14"
+   ],
+   "gate": "N4",
+   "source": "Alex review 11 Sep",
+   "acceptance": "On staging, sharing an Art-E answer opens the platform share flow with a tagged link, and the analytics card downloads as an image; no new permission is requested.",
+   "checklist": [
+    "Share button opens the platform share flows",
+    "Links tagged per the tracking plan",
+    "Analytics card renders and downloads as an image",
+    "Confirm no new Meta permission is requested"
+   ],
+   "layman": "Asad builds the share button and the downloadable results card, if it makes the cut for launch.",
+   "layman_analogy": "Like adding a \"send to a friend\" button to a magazine article.",
+   "layman_needed": "A working share button with tracked links and a downloadable analytics card on staging.",
+   "layman_output": "On the test system, a share button on Art-E answers opens Facebook's, Instagram's or LinkedIn's own share screen with a tracked link, and users can download an image card of their own results - without asking Facebook for any new permission."
+  },
+  {
+   "id": "N3-AS-17",
+   "sprint": "N3",
+   "assignee": "Asad",
+   "title": "Tracking plan v1: UTM rules for every link and the full event list",
+   "what": "One page every public link and every app event follows: UTM naming for source, medium, campaign and content across the landing page, directories, Product Hunt, LinkedIn, emails and Share-to links; the full event list from first visit through activation, retention and sharing, extending the N2 KPI events (N2-AS-11); where each event is stored and who reads it; and the consent rule that non-essential tracking fires only after consent (Filza's PECR wording, N2-FZ-08).",
+   "why": "Alex (review 11 Sep): all types of tracking need adding. Today only the waitlist has UTM tags (N3-AS-02) and the app has three KPI events (N2-AS-11); without one plan, marketing numbers cannot be joined to signups or shares.",
+   "area": "Analytics",
+   "due": "2026-10-09",
+   "priority": "P1",
+   "priority_reason": "Before the waitlist goes live with UTM tags on 13 Oct",
+   "depends_on": [
+    "N2-AS-11",
+    "N2-FZ-08"
+   ],
+   "feeds": [
+    "N3-AS-02",
+    "N4-AS-14",
+    "N4-AS-19",
+    "BL-LA-04"
+   ],
+   "gate": "N3",
+   "source": "Alex review 11 Sep",
+   "acceptance": "The tracking plan is published, the waitlist UTM tags and KPI events follow it, and Filza has confirmed the consent rule.",
+   "checklist": [
+    "UTM naming rules for every channel",
+    "Full event list from first visit to sharing",
+    "Storage and an owner per event",
+    "Filza confirms the consent rule"
+   ],
+   "layman": "Asad writes the rules for tracking where every visitor comes from and what they do, so we know which posts, directories and shares actually bring customers.",
+   "layman_analogy": "Like printing a different code on every flyer so the shop knows which street brought each customer.",
+   "layman_needed": "One tracking plan: link-tagging rules for every channel and the list of app events, with consent respected.",
+   "layman_output": "A single tracking plan: how every link we publish is tagged so we know where visitors came from, the list of everything we record in the app from first visit to sharing, where it is stored, and the rule that nothing optional is tracked before the visitor agrees."
+  },
+  {
+   "id": "N5-AX-07",
+   "sprint": "N5",
+   "assignee": "Alex",
+   "title": "Set Art-E allowances per plan and the pay-as-you-go top-up",
+   "what": "Turn Asad's measured re-cost (N4-AS-18) and recosting #4 (N4-JL-05) into the numbers customers see: Art-E questions per day and per month on each plan, what happens at the limit (Saad's quota copy, N3-SD-10), and the price of a pay-as-you-go top-up if we offer one. Muteeb configures them in the quotas N4-MT-04 enforces and tunes them in N5-MT-17.",
+   "why": "Alex (review 11 Sep) asked whether Art-E limits are in the sprints. Quotas, rate limits and a cost circuit breaker are (N2-MT-17, N4-MT-04, N3-JL-04), but no ticket sets the allowance each plan actually gets.",
+   "area": "Art-E",
+   "due": "2026-11-04",
+   "priority": "P0",
+   "priority_reason": "Quotas need real numbers before hardening and the copy freeze",
+   "depends_on": [
+    "N4-AS-18",
+    "N4-JL-05"
+   ],
+   "feeds": [
+    "N5-MT-17",
+    "N5-SD-01",
+    "N5-JL-07"
+   ],
+   "gate": "N5",
+   "source": "Alex review 11 Sep",
+   "acceptance": "A signed allowance table: Art-E questions per day and per month per plan, the at-limit behaviour, and the top-up price if offered, handed to Muteeb and Saad.",
+   "checklist": [
+    "Read the measured LLM cost per tenant",
+    "Set the allowances per plan",
+    "Decide the pay-as-you-go top-up",
+    "Hand the numbers to Muteeb and the copy to Saad"
+   ],
+   "layman": "Alex decides how many Art-E questions each price plan includes and what a top-up costs, based on what each answer really costs us.",
+   "layman_analogy": "Like a phone plan: a set number of minutes a month, and a clear price if you go over.",
+   "layman_needed": "A table of Art-E allowances per plan, the at-limit behaviour and any top-up price.",
+   "layman_output": "A signed table showing how many Art-E questions each ArtemisAI plan includes per day and per month, what users see when they hit the limit, and the price of extra questions if we offer pay-as-you-go - set from what answers actually cost us."
+  },
+  {
+   "id": "N2-SD-18",
+   "sprint": "N2",
+   "assignee": "Saad",
+   "title": "Agree the app's theme and wording with Alex: we are on the creator's side",
+   "what": "Take the voice guide (N1-SD-08) to Alex and agree the theme the whole product speaks in: we help creators and small businesses, so the words sound like a coach in their corner, not a dashboard judging them. Agree the words we use and avoid (for example \"your next move\" and \"this might underperform\" rather than \"fail\"), how Art-E sounds, and how bad news is delivered. Apply it to the mockup packs and hand the word list to Asad before app copy is written; keep it consistent with Filza's Meta firewall wording (N2-FZ-01).",
+   "why": "Alex (review 11 Sep): the mockups and the app should sound like a product that helps creators. The voice guide exists but has not been agreed with him or applied to the packs.",
+   "area": "Design",
+   "due": "2026-09-24",
+   "priority": "P1",
+   "priority_reason": "Before app copy is written in N2",
+   "depends_on": [
+    "N1-SD-08"
+   ],
+   "feeds": [
+    "N3-SD-10",
+    "N5-SD-01",
+    "N5-AS-01"
+   ],
+   "gate": "N2",
+   "source": "Alex review 11 Sep",
+   "acceptance": "Voice guide v2 signed by Alex, with the theme line, the use-and-avoid word list and example rewrites applied to the mockup packs, handed to Asad.",
+   "checklist": [
+    "Review the voice guide with Alex",
+    "Agree the theme line and the use-and-avoid words",
+    "Apply it to the mockup packs",
+    "Hand the word list to Asad"
+   ],
+   "layman": "Saad and Alex agree how ArtemisAI talks - like a friendly coach on the creator's side - and apply that wording to every screen.",
+   "layman_analogy": "Like a restaurant training every waiter to greet guests the same warm way.",
+   "layman_needed": "An agreed voice guide and word list, applied to the mockups.",
+   "layman_output": "A signed one-page voice guide: the theme (\"we are in the creator's corner\"), the words we use and avoid, how Art-E sounds and how we deliver bad news gently - already applied to the mockup screens and handed to Asad for the app."
   }
  ]
 };
