@@ -203,6 +203,21 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .frow .fw{font-size:10.5px;color:var(--muted2);text-align:right}
 .frow .fs{font-family:'IBM Plex Mono',monospace;font-size:9.5px;text-align:right}
 .frow.done{opacity:.55}
+.tkmeta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:7px;font-size:11.5px;color:var(--muted3)}
+.tkmeta b{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted2);margin-right:4px}
+.ovsum{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:0 0 12px;font-size:12.5px;color:var(--muted3)}
+.ovsum div{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px}
+.ovsum b{font-family:'Fraunces',Georgia,serif;font-size:22px;color:var(--accent);margin-right:6px}
+.ovhead,.ovrow{display:grid;grid-template-columns:1.6fr 80px 110px 44px 56px 150px 90px 1fr;gap:10px;align-items:center;padding:7px 10px;font-size:12px}
+.ovhead{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted3)}
+.ovrow{border:1px solid var(--border2);border-left:3px solid var(--fc,var(--stone));border-radius:8px;margin-bottom:5px;cursor:pointer;background:var(--card)}
+.ovrow:hover{border-color:var(--fc)}
+.ovrow.thin .ovn em{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--red);letter-spacing:1px;text-transform:uppercase;margin-left:6px}
+.ovrow .ovn{font-weight:600;color:var(--text)}.ovrow .ovk,.ovrow .ovsp,.ovrow .ovs{color:var(--muted3);font-size:11.5px}
+.ovrow .ovbar{display:block;height:7px;border-radius:4px;background:rgba(255,255,255,.06);overflow:hidden}.ovrow .ovbar i{display:block;height:100%;background:var(--fc)}
+.ovrow .ovp,.ovrow .ovt{font-family:'IBM Plex Mono',monospace;font-size:11px;text-align:right}
+.ovrow .ovw{font-size:11.5px;text-align:right}
+@media(max-width:900px){.ovhead{display:none}.ovrow{grid-template-columns:1fr 60px 44px;}.ovrow .ovk,.ovrow .ovs,.ovrow .ovsp,.ovrow .ovw,.ovrow .ovbar{display:none}}
 .fempty{color:var(--gold);font-size:12.5px;padding:8px 0}
 /* ---- inline editors ---- */
 .editbtn{padding:4px 11px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:inherit;font-size:11.5px;cursor:pointer}
@@ -551,6 +566,11 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   <button class="tab-btn" data-tab="map">Dependencies</button>
   <button class="tab-btn" data-tab="backlog">Backlog</button>
   <button class="tab-btn" data-tab="performance">Performance</button>
+  <button class="tab-btn" data-tab="track-build">Build</button>
+  <button class="tab-btn" data-tab="track-meta">App Review</button>
+  <button class="tab-btn" data-tab="track-costing">Costing</button>
+  <button class="tab-btn" data-tab="track-models">Models</button>
+  <button class="tab-btn" data-tab="track-launch">Launch</button>
 </div></div></header>
 
 <main>
@@ -604,10 +624,50 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     <div class="h1">MVP Features</div>
     <div class="sub">Every feature we have promised for 8 December, with the tickets that build it and how far along it is. Open one and read the tickets: if they would not add up to a working feature, the feature is not planned yet, whatever the percentage says.</div>
     <div class="ftiles" id="f-tiles"></div>
+    <div class="sec">How much is covered</div>
+    <div id="f-overview"></div>
     <div class="sec">What the customer gets</div>
     <div id="f-surfaces"></div>
     <div class="sec">What it takes to open the doors</div>
     <div id="f-foundation"></div>
+  </section>
+
+  <!-- ================= TRACKS (Build, App Review, Costing, Models) ================= -->
+  <section id="view-track-build" class="hidden">
+    <div class="eyebrow">How the product gets built</div>
+    <div class="h1">Build tracker</div>
+    <div class="sub">Every phase of the build in one place: landing page, design packs, the phone mock-up, web development, the mobile app (iOS and Android), the API and contracts, data pipelines, and quality (stress, reliability, security, QA). Each lane shows its stack, who is responsible, how far along it is and the tickets that build it.</div>
+    <div class="ftiles" id="tk-tiles-build"></div>
+    <div id="tk-body-build"></div>
+  </section>
+  <section id="view-track-meta" class="hidden">
+    <div class="eyebrow">The one review that decides launch</div>
+    <div class="h1">Meta App Review</div>
+    <div class="sub">Everything on the road to Live Mode, for Filza, Saad, Alex and Asad: business verification, the permissions we ask for, the package, the submission and review loop, the fallback if it is late, data-protection checks, and the wording firewall. Submission is Fri 2 Oct.</div>
+    <div class="ftiles" id="tk-tiles-meta"></div>
+    <div id="tk-body-meta"></div>
+  </section>
+  <section id="view-track-costing" class="hidden">
+    <div class="eyebrow">What the system costs us</div>
+    <div class="h1">Costing</div>
+    <div class="sub">What we know now about the cost of running ArtemisAI and the tickets that firm it up: baselines, the telemetry and dashboard Muteeb owns, the recosting at every sprint end, pricing and packaging, billing and invoicing, budgets and vendor tiers.</div>
+    <div class="ftiles" id="tk-tiles-costing"></div>
+    <div id="tk-body-costing"></div>
+  </section>
+  <section id="view-track-models" class="hidden">
+    <div class="eyebrow">Every model and the LLM</div>
+    <div class="h1">Model tracker</div>
+    <div class="sub">All the AI in the product and who is responsible for it: post and comment language models, OCR and image fusion, video, flop and draft scoring, crisis detection, best times, Discovery matching, Art-E (the LLM we are building on), and the model operations that keep them honest.</div>
+    <div class="ftiles" id="tk-tiles-models"></div>
+    <div id="tk-body-models"></div>
+  </section>
+
+  <section id="view-track-launch" class="hidden">
+    <div class="eyebrow">Getting to 8 December, and through it</div>
+    <div class="h1">Launch tracker</div>
+    <div class="sub">Everything outside the build that decides the launch: marketing and comms, the waitlist and landing beats, pilots, legal and compliance, operations and on-call, governance and investors, and launch week itself.</div>
+    <div class="ftiles" id="tk-tiles-launch"></div>
+    <div id="tk-body-launch"></div>
   </section>
 
   <!-- ================= DEPENDENCY MAP ================= -->
@@ -816,7 +876,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   var TAB='overview';
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.addEventListener('click',function(){ showTab(b.getAttribute('data-tab')); }); });
   function showTab(t){ TAB=t; document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active',b.getAttribute('data-tab')===t); });
-    ['overview','tracker','features','layman','map','backlog','performance'].forEach(function(v){ document.getElementById('view-'+v).classList.toggle('hidden',v!==t); });
+    ['overview','tracker','features','layman','map','backlog','performance','track-build','track-meta','track-costing','track-models','track-launch'].forEach(function(v){ document.getElementById('view-'+v).classList.toggle('hidden',v!==t); });
     try{ localStorage.setItem('artemis_launch_tab',t); }catch(e){} renderAll(); }
 
   /* ================= OVERVIEW ================= */
@@ -1239,6 +1299,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       tile('Feature with least cover', (function(){ var m=surf.slice().sort(function(a,b){return a.tickets.length-b.tickets.length;})[0]; return m?m.tickets.length:0; })(), (function(){ var m=surf.slice().sort(function(a,b){return a.tickets.length-b.tickets.length;})[0]; return m?esc(m.name):''; })()),
       tile('Features with a problem', atRisk, atRisk?'something late or blocked':'nothing late or blocked', atRisk?'red':'')
     ].join('');
+    renderFeatureOverview();
     document.getElementById('f-surfaces').innerHTML=surf.map(featureCard).join('');
     document.getElementById('f-foundation').innerHTML=fnd.map(featureCard).join('');
     document.querySelectorAll('.fhead').forEach(function(h){ h.addEventListener('click',function(){ var id=h.getAttribute('data-f'); FOPEN[id]=!FOPEN[id]; renderFeatures(); }); });
@@ -1248,6 +1309,97 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       try{ localStorage.setItem('artemis_launch_sprint',SEL); }catch(_){}
       showTab('tracker'); setTimeout(function(){ var el=document.querySelector('.row[data-id="'+id+'"]'); if(el) el.scrollIntoView({block:'center'}); },60);
     }); });
+  }
+
+  /* ================= FEATURES OVERVIEW =================
+     How much of the plan each promised feature actually has behind it. */
+  function renderFeatureOverview(){
+    var T=all().filter(function(t){ return counted(t)&&sp(t)!=='BL'; });
+    var covered={}; FEATURES.forEach(function(f){ f.tickets.forEach(function(id){ covered[id]=1; }); });
+    var inF=T.filter(function(t){return covered[t.id];}).length, orphan=T.filter(function(t){return !covered[t.id];});
+    var areas={}; orphan.forEach(function(t){ areas[t.area]=(areas[t.area]||0)+1; });
+    var top=Object.keys(areas).sort(function(a,b){return areas[b]-areas[a];}).slice(0,6);
+    var rows=FEATURES.slice().sort(function(a,b){ return (a.kind===b.kind?0:(a.kind==='surface'?-1:1)) || fstats(a).pct-fstats(b).pct; }).map(function(f){
+      var s=fstats(f), col=LAYER_COL[f.layer]||'#9c8f80';
+      var sprints={}; s.ts.forEach(function(t){ sprints[sp(t)]=1; }); var span=Object.keys(sprints).sort(function(a,b){return ORDER.indexOf(a)-ORDER.indexOf(b);});
+      var ppl=Object.keys(s.ppl).sort(function(a,b){return s.ppl[b]-s.ppl[a];}).slice(0,3).map(function(p){return '<span style="color:'+(PC[p]||'#5c7a99')+'">'+esc(p)+'</span>';}).join(', ');
+      var thin=s.ts.length<3;
+      return '<div class="ovrow'+(thin?' thin':'')+'" data-f="'+f.id+'" style="--fc:'+col+'">'+
+        '<span class="ovn">'+esc(f.name)+(thin?' <em>thin</em>':'')+'</span>'+
+        '<span class="ovk">'+(f.kind==='surface'?'customer':'foundation')+'</span>'+
+        '<span class="ovbar"><i style="width:'+s.pct+'%"></i></span><span class="ovp">'+s.pct+'%</span>'+
+        '<span class="ovt">'+s.ts.length+'</span>'+
+        '<span class="ovs">'+s.by.done+' / '+s.by.inprog+' / '+(s.by.blocked||0)+(s.late?' · <b style="color:var(--red)">'+s.late+' late</b>':'')+'</span>'+
+        '<span class="ovsp">'+(span.length?span[0]+(span.length>1?' → '+span[span.length-1]:''):'-')+'</span>'+
+        '<span class="ovw">'+ppl+'</span></div>';
+    }).join('');
+    document.getElementById('f-overview').innerHTML=
+      '<div class="ovsum"><div><b>'+Math.round(inF/Math.max(1,T.length)*100)+'%</b> of the '+T.length+' sprint tickets build a named feature</div>'+
+      '<div>'+orphan.length+' tickets sit outside every feature'+(top.length?' · mostly '+top.map(function(a){return esc(a)+' ('+areas[a]+')';}).join(', '):'')+'</div>'+
+      '<div>'+FEATURES.filter(function(f){return fstats(f).ts.length<3;}).length+' features have fewer than 3 tickets</div></div>'+
+      '<div class="ovhead"><span>Feature</span><span>Kind</span><span>Done</span><span></span><span>Tickets</span><span>done / running / blocked</span><span>Sprints</span><span>Who</span></div>'+rows;
+    document.querySelectorAll('.ovrow').forEach(function(r){ r.addEventListener('click',function(){ var id=r.getAttribute('data-f'); FOPEN[id]=true; renderFeatures(); setTimeout(function(){ var el=document.querySelector('.fhead[data-f="'+id+'"]'); if(el) el.scrollIntoView({block:'center'}); },40); }); });
+  }
+
+  /* ================= TRACKS =================
+     Build, Meta App Review, Costing and Models: the same tickets read along a
+     different axis. A track is a list of lanes; each lane names its owners and
+     stack and lists the tickets that build it (from the generated data). */
+  var TRACKS=D.tracks||[], TOPEN={};
+  function laneStats(l){ return fstats({tickets:l.tickets||[]}); }
+  function renderTrack(id){
+    var tr=TRACKS.filter(function(x){return x.id===id;})[0]; if(!tr) return;
+    var lanes=tr.lanes||[], allIds={}; lanes.forEach(function(l){ (l.tickets||[]).forEach(function(i){ allIds[i]=1; }); });
+    var T=all().filter(function(t){ return allIds[t.id]&&counted(t); });
+    var done=T.filter(function(t){return st(t.id).status==='done';}).length, late=T.filter(isOver).length, blocked=T.filter(function(t){return st(t.id).status==='blocked';}).length;
+    var next=T.filter(isOpen).filter(function(t){return t.due;}).sort(function(a,b){return a.due.localeCompare(b.due);})[0];
+    var ppl={}; T.forEach(function(t){ ppl[t.assignee]=(ppl[t.assignee]||0)+1; });
+    var lead=Object.keys(ppl).sort(function(a,b){return ppl[b]-ppl[a];})[0]||'-';
+    document.getElementById('tk-tiles-'+id).innerHTML=[
+      tile('Lanes', lanes.length, 'phases in this track'),
+      tile('Progress', (T.length?Math.round(done/T.length*100):0)+'%', done+' of '+T.length+' tickets done'),
+      tile('Late or blocked', late+blocked, late+' overdue · '+blocked+' blocked', (late+blocked)?'red':''),
+      tile('Next due', next?fmtS(next.due):'-', next?(next.id+' · '+esc(next.assignee)):'nothing open'),
+      tile('Most tickets', lead, (ppl[lead]||0)+' of '+T.length)
+    ].join('');
+    document.getElementById('tk-body-'+id).innerHTML=lanes.map(function(l){ return laneCard(tr,l); }).join('');
+    document.querySelectorAll('#tk-body-'+id+' .fhead').forEach(function(h){ h.addEventListener('click',function(){ var k=h.getAttribute('data-l'); TOPEN[k]=!TOPEN[k]; renderTrack(id); }); });
+    document.querySelectorAll('#tk-body-'+id+' .frow[data-goto]').forEach(function(r){ r.addEventListener('click',function(e){
+      e.stopPropagation(); var tid=r.getAttribute('data-goto'), t=BYIDT(tid);
+      SEL=sp(t); OPEN={}; OPEN[tid]=true; F={who:'',status:'',pr:'',q:'',layer:''};
+      try{ localStorage.setItem('artemis_launch_sprint',SEL); }catch(_){}
+      showTab('tracker'); setTimeout(function(){ var el=document.querySelector('.row[data-id="'+tid+'"]'); if(el) el.scrollIntoView({block:'center'}); },60);
+    }); });
+  }
+  function laneCard(tr,l){
+    var s=laneStats(l), col=l.color||tr.color||'#7d94b8', key=tr.id+':'+l.id, open=TOPEN[key];
+    var seg=function(n,c){ return n?'<i style="width:'+(n/s.ts.length*100)+'%;background:'+c+'"></i>':''; };
+    var owners=(l.owners||[]).map(function(p){ return '<span style="color:'+(PC[p]||'#5c7a99')+'">'+esc(p)+'</span>'; }).join(' · ');
+    var next=s.ts.filter(isOpen).filter(function(t){return t.due;}).sort(function(a,b){return a.due.localeCompare(b.due);})[0];
+    var status=l.status||(s.ts.length===0?'no tickets yet':(s.pct===100?'done':(next?'next: '+next.id+' '+fmtS(next.due):'nothing open')));
+    return '<div class="fcard" style="--fc:'+col+'">'+
+      '<div class="fhead" data-l="'+key+'">'+
+        '<div><div class="fname">'+esc(l.name)+'</div><div class="fwhat">'+esc(l.what||'')+'</div>'+
+          '<div class="tkmeta">'+(owners?'<span><b>Owners</b> '+owners+'</span>':'')+(l.stack?'<span><b>Stack</b> '+esc(l.stack)+'</span>':'')+(l.platform?'<span><b>Platform</b> '+esc(l.platform)+'</span>':'')+'<span><b>Status</b> '+esc(status)+'</span></div></div>'+
+        '<div><div class="fbarwrap">'+seg(s.by.done,'var(--sage)')+seg(s.by.inprog,'var(--gold)')+seg(s.by.blocked,'var(--red)')+'</div>'+
+          '<div class="sub" style="margin-top:5px">'+s.by.done+' done &middot; '+s.by.inprog+' running'+(s.by.blocked?' &middot; '+s.by.blocked+' blocked':'')+(s.late?' &middot; <span style="color:var(--red)">'+s.late+' late</span>':'')+'</div></div>'+
+        '<div class="fring">'+ring(s.pct,col)+'<div><div class="pc">'+s.pct+'%</div><div class="sub">'+s.ts.length+' tickets</div></div></div>'+
+        '<div style="text-align:right;color:var(--muted3);font-size:15px">'+(open?'&#9650;':'&#9660;')+'</div>'+
+      '</div>'+
+      (open?laneBody(l,s):'')+'</div>';
+  }
+  function laneBody(l,s){
+    var rows=s.ts.slice().sort(function(a,b){ return ORDER.indexOf(sp(a))-ORDER.indexOf(sp(b))||(a.due||'').localeCompare(b.due||''); })
+      .map(function(t){ var S=st(t.id).status||'todo';
+        return '<div class="frow'+(S==='done'?' done':'')+'" data-goto="'+t.id+'"><span class="fid">'+t.id+'</span>'+
+          '<span class="ft" title="'+esc(t.title)+'">'+esc(t.title)+'</span>'+
+          '<span class="fw">'+esc(t.assignee)+' · '+fmtS(t.due)+'</span>'+
+          '<span class="fs" style="color:'+(S==='done'?'var(--sage)':S==='blocked'?'var(--red)':S==='inprog'?'var(--gold)':'var(--muted3)')+'">'+esc(STATUS_LABEL[S])+'</span></div>'; }).join('');
+    var sprints={}; s.ts.forEach(function(t){ sprints[sp(t)]=(sprints[sp(t)]||0)+1; });
+    return '<div class="fbody">'+(l.note?'<div class="fmeta"><div><h5>What we know now</h5><p>'+esc(l.note)+'</p></div>'+
+      '<div><h5>Where the work sits</h5><p>'+Object.keys(sprints).sort(function(a,b){return ORDER.indexOf(a)-ORDER.indexOf(b);}).map(function(k){return k+' ('+sprints[k]+')';}).join(' &middot; ')+'</p></div></div>':'')+
+      (s.ts.length<3?'<div class="fempty">Only '+s.ts.length+' ticket'+(s.ts.length===1?'':'s')+' in this lane. If it matters, it is under-planned.</div>':'')+
+      '<div class="flist">'+rows+'</div></div>';
   }
 
   /* ================= DEPENDENCY MAP =================
@@ -1589,7 +1741,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 
   /* ---- boot ---- */
   (function(){ var n=days(TODAY,'2026-12-08'); var el=document.getElementById('hdr-count'); if(el) el.innerHTML='<b>'+n+'</b> days &middot; 8 Dec'; })();
-  function renderAll(){ if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='features') renderFeatures(); else if(TAB==='layman') renderLayman(); else if(TAB==='map') renderMap(); else if(TAB==='backlog') renderBacklog(); else renderPerf(); }
+  function renderAll(){ if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='features') renderFeatures(); else if(TAB==='layman') renderLayman(); else if(TAB==='map') renderMap(); else if(TAB==='backlog') renderBacklog(); else if(TAB.indexOf('track-')===0) renderTrack(TAB.slice(6)); else renderPerf(); }
   document.getElementById('btn-refresh').addEventListener('click',load);
   try{ var lt=localStorage.getItem('artemis_launch_tab'); if(lt) showTab(lt); }catch(e){}
   load();
