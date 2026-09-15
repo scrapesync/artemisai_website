@@ -17,14 +17,15 @@ For each whitelisted table it bakes:
 ENV: REDSHIFT_HOST/PORT/DB/USER/PASSWORD  (DB var accepts REDSHIFT_DB or REDSHIFT_DATABASE)
 Deps: pip install redshift_connector  (psycopg2 fallback)
 """
-import os, json, datetime as dt, decimal
+import os, re, json, datetime as dt, decimal
 
 OUT_PATH = os.path.join(os.path.dirname(__file__), '..', 'explorer_data.json')
 PREVIEW_ROWS = 200          # rows baked per table for the preview grid
 SUMMARY_TOPN = 12           # top values per categorical column
 MAX_SUMMARY_COLS = 8        # cap summarised columns per table to keep JSON sane
 
-# Same 25 tables the Netlify function whitelists.
+# Same tables the Netlify function whitelists. public.artemis_fb_connections is
+# deliberately excluded: it holds Facebook access tokens and account emails.
 TABLES = [
   ("odl","comment_sentiments","Comment Sentiments"),
   ("odl","comment_sentiments_v2","Comment Sentiments v2"),
@@ -42,7 +43,6 @@ TABLES = [
   ("odl","gpt_model_prediction","GPT Model Predictions"),
   ("odl","gpt_post_recommendation","GPT Post Recommendations"),
   ("odl","sentiments_overall","Overall Sentiments"),
-  ("public","artemis_fb_connections","FB Connections"),
   ("public","ml_comment_sentiment_results","ML Comment Sentiments"),
   ("rdl","page_daily_insights","Page Daily Insights (RDL)"),
   ("rdl","page_demographics_insights","Page Demographics (RDL)"),
@@ -158,6 +158,34 @@ def bake_table(cur,schema,table,label):
     entry['summaries']=summarize(cur,schema,table,cols,entry.get('rows') or 0)
     return entry
 
+# This file is committed to a public repo and served by the public site, so
+# credentials and direct identifiers must never reach it, whatever the tables hold.
+SENSITIVE_COL = re.compile(r'token|secret|passw|api_?key|email|user_name', re.I)
+TOKEN_RE = re.compile(r'EAA[A-Za-z0-9]{20,}')
+EMAIL_RE = re.compile(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}')
+
+def _scrub_value(v):
+    if isinstance(v, str):
+        return EMAIL_RE.sub('[redacted]', TOKEN_RE.sub('[redacted]', v))
+    if isinstance(v, list):
+        return [_scrub_value(x) for x in v]
+    if isinstance(v, dict):
+        return {k: _scrub_value(x) for k, x in v.items()}
+    return v
+
+def scrub_payload(payload):
+    for t in payload.get('tables', []):
+        cols = t.get('preview_cols') or []
+        keep = [i for i, c in enumerate(cols) if not SENSITIVE_COL.search(str(c))]
+        if len(keep) != len(cols):
+            t['preview_cols'] = [cols[i] for i in keep]
+            t['preview'] = [[row[i] for i in keep if i < len(row)] for row in (t.get('preview') or [])]
+        t['summaries'] = [s for s in (t.get('summaries') or []) if not SENSITIVE_COL.search(str(s.get('col', '')))]
+    payload = _scrub_value(payload)
+    if TOKEN_RE.search(json.dumps(payload, default=str)):
+        raise SystemExit('Refusing to write explorer_data.json: an access-token pattern survived scrubbing')
+    return payload
+
 def main():
     global CONN
     print("Data Explorer snapshot - connecting...")
@@ -172,6 +200,7 @@ def main():
             tables.append({'schema':schema,'table':table,'label':label,'columns':[],'rows':None,'preview_cols':[],'preview':[],'summaries':[]})
     payload={'generated_at':dt.datetime.utcnow().isoformat()+'Z',
              'preview_rows':PREVIEW_ROWS,'tables':tables}
+    payload=scrub_payload(payload)
     with open(OUT_PATH,'w') as f: json.dump(payload,f,separators=(',',':'),default=str)
     ok=sum(1 for t in tables if t.get('preview'))
     print(f"Wrote {OUT_PATH}: {len(tables)} tables ({ok} with preview data) at {payload['generated_at']}")

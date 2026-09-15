@@ -42,7 +42,6 @@ const ALLOWED_TABLES = [
   { schema: "odl", table: "gpt_model_prediction", desc: "GPT-generated virality and engagement predictions per post" },
   { schema: "odl", table: "gpt_post_recommendation", desc: "GPT-generated content strategy recommendations per post" },
   { schema: "odl", table: "sentiments_overall", desc: "Aggregated sentiment scores across all posts and comments" },
-  { schema: "public", table: "artemis_fb_connections", desc: "Connected Facebook pages from the website connect flow" },
   { schema: "public", table: "ml_comment_sentiment_results", desc: "ML pipeline sentiment classification results for comments" },
   { schema: "rdl", table: "page_daily_insights", desc: "Refined daily page metrics after transformation and cleaning" },
   { schema: "rdl", table: "page_demographics_insights", desc: "Refined page demographics data after transformation" },
@@ -53,7 +52,10 @@ const ALLOWED_TABLES = [
   { schema: "rdl", table: "post_reactions", desc: "Refined post reactions data with reaction type breakdowns" },
 ];
 
-const DENIED = /portal_users|pg_user|pg_shadow|svl_user|stl_query|stl_connection/i;
+const DENIED = /portal_users|artemis_fb_connections|pg_user|pg_shadow|svl_user|stl_query|stl_connection/i;
+const SENSITIVE_COL = /token|secret|passw|api_?key|email|user_name/i;
+const TOKEN_RE = /EAA[A-Za-z0-9]{20,}/g;
+const EMAIL_RE = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
 const MAX_ROWS = 1000;
 const DEFAULT_ROWS = 200;
 const CELL_CAP = 400;
@@ -157,12 +159,13 @@ async function withDb(fn) {
 }
 
 function shapeRows(res, cap) {
-  const cols = res.fields.map((f) => f.name);
+  const cols = res.fields.map((f) => f.name).filter((c) => !SENSITIVE_COL.test(c));
   const rows = res.rows.slice(0, cap).map((r) => {
     const rec = {};
     for (const c of cols) {
       let v = r[c];
       if (v !== null && typeof v !== "number" && typeof v !== "boolean") v = String(v);
+      if (typeof v === "string") v = v.replace(TOKEN_RE, "[redacted]").replace(EMAIL_RE, "[redacted]");
       if (typeof v === "string" && v.length > CELL_CAP) v = v.slice(0, CELL_CAP) + "…";
       rec[c] = v;
     }

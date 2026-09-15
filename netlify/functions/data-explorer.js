@@ -17,6 +17,22 @@ function createClient() {
   });
 }
 
+const SENSITIVE_COL = /token|secret|passw|api_?key|email|user_name/i;
+const TOKEN_RE = /EAA[A-Za-z0-9]{20,}/g;
+const EMAIL_RE = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
+// public.artemis_fb_connections is deliberately not listed: it holds Facebook
+// access tokens. Rows are scrubbed as a second line of defence.
+function scrubRows(rows) {
+  return rows.map((r) => {
+    const o = {};
+    for (const [k, v] of Object.entries(r)) {
+      if (SENSITIVE_COL.test(k)) continue;
+      o[k] = typeof v === "string" ? v.replace(TOKEN_RE, "[redacted]").replace(EMAIL_RE, "[redacted]") : v;
+    }
+    return o;
+  });
+}
+
 const ALLOWED_TABLES = [
   { schema: "odl", table: "comment_sentiments", label: "Comment Sentiments", description: "Sentiment analysis results for post comments" },
   { schema: "odl", table: "comment_sentiments_v2", label: "Comment Sentiments v2", description: "Updated sentiment analysis with improved model accuracy" },
@@ -34,7 +50,6 @@ const ALLOWED_TABLES = [
   { schema: "odl", table: "gpt_model_prediction", label: "GPT Model Predictions", description: "GPT-generated virality and engagement predictions per post" },
   { schema: "odl", table: "gpt_post_recommendation", label: "GPT Post Recommendations", description: "GPT-generated content strategy recommendations per post" },
   { schema: "odl", table: "sentiments_overall", label: "Overall Sentiments", description: "Aggregated sentiment scores across all posts and comments" },
-  { schema: "public", table: "artemis_fb_connections", label: "FB Connections", description: "Connected Facebook pages from the website connect flow" },
   { schema: "public", table: "ml_comment_sentiment_results", label: "ML Comment Sentiments", description: "ML pipeline sentiment classification results for comments" },
   { schema: "rdl", table: "page_daily_insights", label: "Page Daily Insights (RDL)", description: "Refined daily page metrics after transformation and cleaning" },
   { schema: "rdl", table: "page_demographics_insights", label: "Page Demographics (RDL)", description: "Refined page demographics data after transformation" },
@@ -137,7 +152,7 @@ exports.handler = async (event) => {
 
       return { statusCode: 200, headers, body: JSON.stringify({
         success: true, schema: allowed.schema, table: allowed.table, label: allowed.label, description: allowed.description,
-        columns: columns.map(c => ({ name: c.column_name, type: c.data_type })), rows: dataRes.rows, total, page, page_size: limit, total_pages: Math.ceil(total / limit),
+        columns: columns.map(c => ({ name: c.column_name, type: c.data_type })), rows: scrubRows(dataRes.rows), total, page, page_size: limit, total_pages: Math.ceil(total / limit),
       })};
     }
 
@@ -188,7 +203,7 @@ exports.handler = async (event) => {
 
       return { statusCode: 200, headers, body: JSON.stringify({
         success: true, schema: allowed.schema, table: allowed.table, label: allowed.label,
-        columns: colNames, rows: dataRes.rows, exported_at: new Date().toISOString(),
+        columns: colNames.filter((c) => !SENSITIVE_COL.test(c)), rows: scrubRows(dataRes.rows), exported_at: new Date().toISOString(),
         filters: { limit: rowLimit, date_from: date_from || null, date_to: date_to || null, date_column: dateCol ? dateCol.column_name : null },
       })};
     }

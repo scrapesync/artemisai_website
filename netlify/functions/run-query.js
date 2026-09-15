@@ -20,6 +20,7 @@ const TIMEOUT_MS = 20000;
 // Tables/views that must never be readable here, whatever the SQL says.
 const BLOCKED = [
   "portal_users",   // plaintext credentials
+  "artemis_fb_connections", // Facebook access tokens and account emails
   "pg_shadow",
   "pg_authid",
   "pg_user_info",
@@ -64,6 +65,24 @@ function validate(sqlRaw) {
     }
   }
   return null; // ok
+}
+
+const SENSITIVE_COL = /token|secret|passw|api_?key|email|user_name/i;
+const TOKEN_RE = /EAA[A-Za-z0-9]{20,}/g;
+const EMAIL_RE = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
+// Results can reach anyone who can call this endpoint, so credentials and
+// direct identifiers are stripped whatever the SQL asked for.
+function scrubResult(columns, rows) {
+  const keep = columns.filter((c) => !SENSITIVE_COL.test(c));
+  const clean = rows.map((r) => {
+    const o = {};
+    for (const c of keep) {
+      const v = r[c];
+      o[c] = typeof v === "string" ? v.replace(TOKEN_RE, "[redacted]").replace(EMAIL_RE, "[redacted]") : v;
+    }
+    return o;
+  });
+  return { columns: keep, rows: clean };
 }
 
 exports.handler = async (event) => {
@@ -118,16 +137,16 @@ exports.handler = async (event) => {
   try {
     await client.connect();
     const res = await client.query(wrapped);
-    const columns = res.fields.map((f) => f.name);
+    const { columns, rows } = scrubResult(res.fields.map((f) => f.name), res.rows);
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
         success: true,
         columns,
-        rows: res.rows,
-        row_count: res.rows.length,
-        truncated: res.rows.length >= ROW_CAP,
+        rows,
+        row_count: rows.length,
+        truncated: rows.length >= ROW_CAP,
         ms: Date.now() - started,
       }),
     };
