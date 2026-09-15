@@ -203,6 +203,16 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .frow .fw{font-size:10.5px;color:var(--muted2);text-align:right}
 .frow .fs{font-family:'IBM Plex Mono',monospace;font-size:9.5px;text-align:right}
 .frow.done{opacity:.55}
+.qsum{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;font-size:13.5px;line-height:1.55;color:var(--text);margin-bottom:12px}
+.qgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:14px}
+.qsec{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:12px;padding:13px 16px}
+.qsn{font-family:'Fraunces',Georgia,serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.qsp{font-size:12.5px;color:var(--muted3);margin-bottom:8px;line-height:1.5}
+.qsec ul{margin:0 0 8px 16px;padding:0;font-size:12.5px;line-height:1.55;color:var(--text)}
+.qso{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:11.5px;color:var(--muted3)}
+.qso b{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted2);margin-right:4px}
+.qgates{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px;margin-bottom:14px}
+.qgate{background:var(--card);border:1px solid var(--border2);border-left:3px solid var(--gold);border-radius:9px;padding:9px 13px;font-size:12.5px;line-height:1.5;color:var(--text)}
 .tkmeta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:7px;font-size:11.5px;color:var(--muted3)}
 .tkmeta b{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted2);margin-right:4px}
 .ovsum{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:0 0 12px;font-size:12.5px;color:var(--muted3)}
@@ -571,6 +581,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   <button class="tab-btn" data-tab="track-costing">Costing</button>
   <button class="tab-btn" data-tab="track-models">Models</button>
   <button class="tab-btn" data-tab="track-launch">Launch</button>
+  <button class="tab-btn" data-tab="track-qa">QA Control Center</button>
 </div></div></header>
 
 <main>
@@ -578,7 +589,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 
   <!-- ================= OVERVIEW ================= -->
   <section id="view-overview">
-    <div class="eyebrow">Launch Tracker · N1 &rarr; 8 December</div>
+    <div class="eyebrow">Launch Tracker · N1 &rarr; <span class="l-long">8 December</span></div>
     <div class="h1">Overview</div>
     <div class="sub">The Phase 0 record, six sprints and a launch week - one shared board. Everything below is computed from the tickets and the live state, nothing is typed in by hand.</div>
     <div id="ov-hero"></div>
@@ -622,7 +633,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   <section id="view-features" class="hidden">
     <div class="eyebrow">What we are committing to</div>
     <div class="h1">MVP Features</div>
-    <div class="sub">Every feature we have promised for 8 December, with the tickets that build it and how far along it is. Open one and read the tickets: if they would not add up to a working feature, the feature is not planned yet, whatever the percentage says.</div>
+    <div class="sub">Every feature we have promised for <span class="l-long">8 December</span>, with the tickets that build it and how far along it is. Open one and read the tickets: if they would not add up to a working feature, the feature is not planned yet, whatever the percentage says.</div>
     <div class="ftiles" id="f-tiles"></div>
     <div class="sec">How much is covered</div>
     <div id="f-overview"></div>
@@ -663,11 +674,20 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   </section>
 
   <section id="view-track-launch" class="hidden">
-    <div class="eyebrow">Getting to 8 December, and through it</div>
+    <div class="eyebrow">Getting to <span class="l-long">8 December</span>, and through it</div>
     <div class="h1">Launch tracker</div>
     <div class="sub">Everything outside the build that decides the launch: marketing and comms, the waitlist and landing beats, pilots, legal and compliance, operations and on-call, governance and investors, and launch week itself.</div>
     <div class="ftiles" id="tk-tiles-launch"></div>
     <div id="tk-body-launch"></div>
+  </section>
+
+  <section id="view-track-qa" class="hidden">
+    <div class="eyebrow">One place to see and control quality</div>
+    <div class="h1">QA Control Center</div>
+    <div class="sub">What the QA Control Center is, the checks behind every section, the release gates that read it, and the tickets that build it: data quality, model quality, Art-E quality, product and app QA, release gates, and the defect and incident process.</div>
+    <div class="ftiles" id="tk-tiles-qa"></div>
+    <div id="tk-spec-qa"></div>
+    <div id="tk-body-qa"></div>
   </section>
 
   <!-- ================= DEPENDENCY MAP ================= -->
@@ -744,6 +764,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   document.querySelector('#viewer .av').textContent=VIEWER.charAt(0).toUpperCase();
 
   var D=window.LAUNCH_DATA||{sprints:[],tickets:[]};
+  var LAUNCH=D.launch||{public:'2026-12-08',public_label:'Tue 8 Dec',short:'8 Dec',long:'8 December'};
   var SPRINTS_BASE=JSON.parse(JSON.stringify(D.sprints));
   var SPRINT_EDITS={}, SPRINTS=D.sprints, ORDER=SPRINTS.map(function(s){return s.id;});
   function applySprintEdits(){
@@ -876,7 +897,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   var TAB='overview';
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.addEventListener('click',function(){ showTab(b.getAttribute('data-tab')); }); });
   function showTab(t){ TAB=t; document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active',b.getAttribute('data-tab')===t); });
-    ['overview','tracker','features','layman','map','backlog','performance','track-build','track-meta','track-costing','track-models','track-launch'].forEach(function(v){ document.getElementById('view-'+v).classList.toggle('hidden',v!==t); });
+    ['overview','tracker','features','layman','map','backlog','performance','track-build','track-meta','track-costing','track-models','track-launch','track-qa'].forEach(function(v){ document.getElementById('view-'+v).classList.toggle('hidden',v!==t); });
     try{ localStorage.setItem('artemis_launch_tab',t); }catch(e){} renderAll(); }
 
   /* ================= OVERVIEW ================= */
@@ -888,7 +909,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     var over=T.filter(isOver).length;
     var curT=T.filter(function(t){return sp(t)===cur.id;}), curDone=curT.filter(function(t){return st(t.id).status==='done';}).length;
     var pct=T.length?Math.round(done/T.length*100):0;
-    var toLaunch=days(TODAY,'2026-12-08');
+    var toLaunch=days(TODAY,LAUNCH.public);
     var dueWeekN=T.filter(function(t){ return isOpen(t)&&t.due&&t.due>=TODAY&&days(TODAY,t.due)<=7; }).length;
     var blN=all().filter(function(t){return counted(t)&&sp(t)==='BL';}).length;
     var curPct=curT.length?curDone/curT.length:0, exp=expected(cur), ph0=sprintPhase(cur);
@@ -901,7 +922,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     document.getElementById('ov-hero').innerHTML=
       '<div class="hero">'+
         '<div class="hring" title="'+done+' of '+T.length+' tickets done"><svg viewBox="0 0 100 100"><circle class="bgc" cx="50" cy="50" r="44"/><circle class="fgc" cx="50" cy="50" r="44" style="stroke-dasharray:'+C+';stroke-dashoffset:'+(C*(1-pct/100)).toFixed(1)+'"/></svg><div class="hrv">'+pct+'%<small>built</small></div></div>'+
-        '<div class="hmain"><div class="hk">Days to launch</div><div class="hd">'+toLaunch+'</div><div class="hs">Tue 8 Dec &middot; 08:00 UK</div><div class="hs dim">'+done+' of '+T.length+' tickets done</div></div>'+
+        '<div class="hmain"><div class="hk">Days to launch</div><div class="hd">'+toLaunch+'</div><div class="hs">'+esc(LAUNCH.public_label)+' &middot; 08:00 UK'+(LAUNCH.beta?'</div><div class="hs dim">'+esc(LAUNCH.beta_label||'Private beta')+' &middot; '+esc(LAUNCH.beta_date_label||LAUNCH.beta)+(LAUNCH.beta>=TODAY?' ('+days(TODAY,LAUNCH.beta)+' days)':''):'')+'</div><div class="hs dim">'+done+' of '+T.length+' tickets done</div></div>'+
         '<div class="hcur" data-s="'+cur.id+'" title="Open '+cur.id+' in the tracker">'+
           '<div class="hk">Current sprint &middot; <span class="mono">'+cur.id+'</span>'+pace+gateChip+'</div>'+
           '<div class="hcn">'+esc(cur.name)+'</div>'+
@@ -1362,7 +1383,9 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       tile('Next due', next?fmtS(next.due):'-', next?(next.id+' · '+esc(next.assignee)):'nothing open'),
       tile('Most tickets', lead, (ppl[lead]||0)+' of '+T.length)
     ].join('');
-    document.getElementById('tk-body-'+id).innerHTML=lanes.map(function(l){ return laneCard(tr,l); }).join('');
+    var specEl=document.getElementById('tk-spec-'+id);
+    if(specEl) specEl.innerHTML=tr.spec?trackSpec(tr.spec):'';
+    document.getElementById('tk-body-'+id).innerHTML=(tr.spec?'<div class="sec">The tickets that build it</div>':'')+lanes.map(function(l){ return laneCard(tr,l); }).join('');
     document.querySelectorAll('#tk-body-'+id+' .fhead').forEach(function(h){ h.addEventListener('click',function(){ var k=h.getAttribute('data-l'); TOPEN[k]=!TOPEN[k]; renderTrack(id); }); });
     document.querySelectorAll('#tk-body-'+id+' .frow[data-goto]').forEach(function(r){ r.addEventListener('click',function(e){
       e.stopPropagation(); var tid=r.getAttribute('data-goto'), t=BYIDT(tid);
@@ -1370,6 +1393,17 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       try{ localStorage.setItem('artemis_launch_sprint',SEL); }catch(_){}
       showTab('tracker'); setTimeout(function(){ var el=document.querySelector('.row[data-id="'+tid+'"]'); if(el) el.scrollIntoView({block:'center'}); },60);
     }); });
+  }
+  function trackSpec(sp){
+    var secs=(sp.sections||[]).map(function(x){
+      return '<div class="qsec"><div class="qsn">'+esc(x.name)+'</div><div class="qsp">'+esc(x.purpose||'')+'</div>'+
+        '<ul>'+(x.checks||[]).map(function(c){ return '<li>'+esc(c)+'</li>'; }).join('')+'</ul>'+
+        '<div class="qso">'+(x.owner?'<span><b>Owner</b> '+esc(x.owner)+'</span>':'')+(x.source?'<span><b>Source</b> '+esc(x.source)+'</span>':'')+'</div></div>';
+    }).join('');
+    return '<div class="sec">What the control center is</div><div class="qsum">'+esc(sp.summary||'')+'</div>'+
+      '<div class="qgrid">'+secs+'</div>'+
+      ((sp.gates||[]).length?'<div class="sec">Release gates that read it</div><div class="qgates">'+sp.gates.map(function(g){ return '<div class="qgate">'+esc(g)+'</div>'; }).join('')+'</div>':'')+
+      (sp.alerting?'<div class="qsum" style="margin-top:10px"><b style="color:var(--gold)">Alerting</b> &middot; '+esc(sp.alerting)+'</div>':'');
   }
   function laneCard(tr,l){
     var s=laneStats(l), col=l.color||tr.color||'#7d94b8', key=tr.id+':'+l.id, open=TOPEN[key];
@@ -1740,7 +1774,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   document.addEventListener('click',function(e){ var b=e.target.closest('[data-lay]'); if(!b) return; e.stopPropagation(); var d=document.getElementById('lay-'+b.getAttribute('data-lay')); if(d) d.hidden=!d.hidden; },true);
 
   /* ---- boot ---- */
-  (function(){ var n=days(TODAY,'2026-12-08'); var el=document.getElementById('hdr-count'); if(el) el.innerHTML='<b>'+n+'</b> days &middot; 8 Dec'; })();
+  (function(){ var n=days(TODAY,LAUNCH.public); var el=document.getElementById('hdr-count'); if(el) el.innerHTML='<b>'+n+'</b> days &middot; '+esc(LAUNCH.short); document.querySelectorAll('.l-long').forEach(function(e){ e.textContent=LAUNCH.long; }); })();
   function renderAll(){ if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='features') renderFeatures(); else if(TAB==='layman') renderLayman(); else if(TAB==='map') renderMap(); else if(TAB==='backlog') renderBacklog(); else if(TAB.indexOf('track-')===0) renderTrack(TAB.slice(6)); else renderPerf(); }
   document.getElementById('btn-refresh').addEventListener('click',load);
   try{ var lt=localStorage.getItem('artemis_launch_tab'); if(lt) showTab(lt); }catch(e){}
