@@ -1,6 +1,6 @@
-// sprint_launch_data.js - regenerated 11 Sep 2026: Alex's sprint-tracker review added (recosting every sprint, Meta permissions master document + a review every sprint, never-empty Discovery decision, photos in drafts, Art-E best times + allowances, Share-to, tracking plan, voice, third-party reviews).
+// sprint_launch_data.js - regenerated 15 Sep 2026: Alex's 14 Sep product & design direction applied (phone mock-up on four layers, screen-cut pass with the eight-question design test, alert hooks, briefing script, Discovery match beyond overlap, landing collab example, direction log with Jill).
 window.LAUNCH_DATA = {
- "generated_at": "2026-09-11",
+ "generated_at": "2026-09-15",
  "layers": [
   {
    "id": "foundation",
@@ -1484,6 +1484,31 @@ window.LAUNCH_DATA = {
    "layman_analogy": "Like a food-hygiene inspection: it proves the kitchen is clean to everyone who eats there.",
    "layman_needed": "When picked up: a named independent reviewer, an agreed scope, and a report with a fix list.",
    "layman_output": "When picked up: an independent report on how ArtemisAI handles and protects data and how good its training data is, with a fix list that also helps with Meta's data checks."
+  },
+  {
+   "id": "BL-IN-19",
+   "sprint": "BL",
+   "layer": "intelligence",
+   "assignee": "",
+   "title": "Discovery v2: match on receptiveness to new audiences, not overlap",
+   "what": "The signals N3-FH-14 marks as v2: audience behaviour and actions, content-strategy fit, engagement patterns and predicted response of a new audience to the current content, learned from the choices users make in the feed (N2-AX-10).",
+   "why": "Alex (14 Sep): the valuable question is whether a connection introduces each side to people likely to respond; that needs more data than launch has.",
+   "area": "LATER · Phase 2: the product moat (Q1-Q2 2027)",
+   "due": "",
+   "priority": "P1",
+   "priority_reason": "Alex direction 14 Sep: Discovery v2 receptiveness matching",
+   "depends_on": [
+    "N3-FH-14"
+   ],
+   "feeds": [],
+   "gate": "none",
+   "source": "Alex direction 14 Sep",
+   "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
+   "checklist": [],
+   "layman": "Parked for after launch: Discovery learns which introductions actually bring new, interested people, from what users pick.",
+   "layman_analogy": "Like a matchmaker who gets better with every introduction that worked.",
+   "layman_needed": "When picked up: the v2 signals from N3-FH-14 trained on real user choices.",
+   "layman_output": "When picked up: Discovery suggestions ranked by how likely a new audience is to respond, learned from the matches users actually chose."
   }
  ],
  "features": [
@@ -1603,7 +1628,8 @@ window.LAUNCH_DATA = {
     "P0-LW-03",
     "N1-SD-21",
     "N5-SD-16",
-    "N4-FH-10"
+    "N4-FH-10",
+    "N2-SD-20"
    ],
    "kind": "surface"
   },
@@ -1795,7 +1821,9 @@ window.LAUNCH_DATA = {
     "N4-SD-13",
     "N5-MT-10",
     "N2-AX-10",
-    "N3-SD-12"
+    "N3-SD-12",
+    "N3-FH-14",
+    "BL-IN-19"
    ],
    "kind": "surface"
   },
@@ -1824,7 +1852,8 @@ window.LAUNCH_DATA = {
     "N4-MT-17",
     "P0-FH-14",
     "N1-SD-21",
-    "N5-SD-16"
+    "N5-SD-16",
+    "N3-SD-15"
    ],
    "kind": "surface"
   },
@@ -2044,7 +2073,8 @@ window.LAUNCH_DATA = {
     "P0-AS-01",
     "P0-AS-14",
     "N5-SD-16",
-    "N3-AS-17"
+    "N3-AS-17",
+    "N2-AS-19"
    ],
    "kind": "surface"
   },
@@ -2444,7 +2474,11 @@ window.LAUNCH_DATA = {
     "N4-FZ-10",
     "N5-FZ-10",
     "N6-FZ-07",
-    "LW-FZ-05"
+    "LW-FZ-05",
+    "N2-SD-19",
+    "N2-JL-08",
+    "N3-SD-14",
+    "N4-AS-20"
    ]
   },
   {
@@ -2872,7 +2906,7 @@ window.LAUNCH_DATA = {
    "sprint": "N1",
    "assignee": "Asad",
    "title": "Ship the landing page from the locked design, live Tue 15 Sep",
-   "what": "Build-ramp days 1-3 (Wed 10 - Fri 19 Sep, Asad's first code): rebuild the landing from the locked landing design using the token sheet; 1 December everywhere; link Filza's Privacy v1 draft and show a cookie banner (Checklist 4 docs timeline; the verifiably-blocking version is N4); keep the existing Netlify Forms 'pilot-waitlist' form (index.html) submitting until the bought waitlist replaces it in N3; preview deploy reviewed by Alex/Saad, production Fri 19 Sep.",
+   "what": "Build-ramp days 1-3 (Wed 10 - Fri 19 Sep, Asad's first code): rebuild the landing from the locked landing design using the token sheet; 1 December everywhere; link Filza's Privacy v1 draft and show a cookie banner (Checklist 4 docs timeline; the verifiably-blocking version is N4); keep the existing Netlify Forms 'pilot-waitlist' form (index.html) submitting until the bought waitlist replaces it in N3; preview deploy reviewed by Alex/Saad, production Fri 19 Sep. Per Alex (14 Sep): ship now; the collaboration-example rewrite and the \"swap\" ban follow in N2-AS-19, and must not delay this.",
    "why": "A public date (the 19 Sep landing beat) and the toolchain warm-up before Today starts 21 Sep.",
    "area": "Landing",
    "due": "2026-09-19",
@@ -8165,7 +8199,7 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Saad",
    "title": "Decide the notification timing policy with Alex + Lewis",
-   "what": "Run one decision meeting and write the policy: what happens when a storm fires at 2am (quiet hours, severity override, digest vs immediate, morning digest, what the user can configure, alerts logged during quiet hours), plus the timezone quiet hours are evaluated in (admin profile vs page-local) and how a DST change moves the boundary. Feed it to Muteeb's alerts pipeline, Faheem's crisis doc and Asad's N3 build.",
+   "what": "Run one decision meeting and write the policy: what happens when a storm fires at 2am (quiet hours, severity override, digest vs immediate, morning digest, what the user can configure, alerts logged during quiet hours), plus the timezone quiet hours are evaluated in (admin profile vs page-local) and how a DST change moves the boundary. Feed it to Muteeb's alerts pipeline, Faheem's crisis doc and Asad's N3 build. Per Alex (14 Sep): alerts should feel like a WhatsApp notification with a hook; the hook copy follows in N2-SD-20.",
    "why": "The only unowned product decision in the plan; it decides whether 'caught in minutes' is a product claim or marketing copy.",
    "area": "Alerts",
    "due": "2026-09-23",
@@ -8668,7 +8702,7 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Alex",
    "title": "Start the Friday scope hammer (weekly cut-line check)",
-   "what": "Run a 30-minute Friday meeting from 25 Sep with Saad and Asad: what shipped, what is at risk, what moves down the cut order (Wins-lite, briefing card, Discovery breadth, Art-E memory depth, PWA polish; never crisis pipeline, tenant isolation, backups/rollback). Outcome is one written line per week; the first formal review is N3-AX-06 on 18 Oct.",
+   "what": "Run a 30-minute Friday meeting from 25 Sep with Saad and Asad: what shipped, what is at risk, what moves down the cut order (Wins-lite, briefing card, Discovery breadth, Art-E memory depth, PWA polish; never crisis pipeline, tenant isolation, backups/rollback). Outcome is one written line per week; the first formal review is N3-AX-06 on 18 Oct. Per Alex (14 Sep): the hammer's rubric is his eight-question design test (Art-E or feed instead; own screen needed; button necessary; child could navigate; language simple; app works without it; changes a habit; needs a new skill). Open items come from Jill's direction log (N2-JL-08).",
    "why": "The hammer keeps N3+ honest; without a weekly cut decision scope grows until the 20 Nov freeze forces cuts by surprise.",
    "area": "PM",
    "due": "2026-09-25",
@@ -11445,7 +11479,7 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Saad",
    "title": "Cut-line review #1 with Alex, outcome in writing",
-   "what": "Hold the first formal scope review against the cut order (Wins-lite, briefing card, Discovery breadth, Art-E memory depth, PWA polish) using build status and the pilot digest; record what stays, what moves to the betting table.",
+   "what": "Hold the first formal scope review against the cut order (Wins-lite, briefing card, Discovery breadth, Art-E memory depth, PWA polish) using build status and the pilot digest; record what stays, what moves to the betting table. Per Alex (14 Sep): this review decides the launch screen map from Saad's kill, fold and keep lists (N3-SD-14); the outcome names what Asad removes or folds in N4-AS-20. Disagreements go to Jill.",
    "why": "The scope hammer's first swing; an unwritten outcome gets relitigated in N4.",
    "area": "PM",
    "due": "2026-10-18",
@@ -11453,7 +11487,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "Real risk of relitigation in N4; slack before N4 planning",
    "depends_on": [
     "Alex: attend",
-    "N2-SD-12"
+    "N2-SD-12",
+    "N3-SD-14"
    ],
    "feeds": [
     "Alex",
@@ -12923,16 +12958,17 @@ window.LAUNCH_DATA = {
    "id": "N4-AS-13",
    "sprint": "N4",
    "assignee": "Asad",
-   "title": "Morning-briefing card on Today (cut candidate)",
-   "what": "Card on Today from Muteeb's nightly briefing aggregate: reach delta, overnight shares, moves count, timestamped; hidden when the aggregate is stale; behind a feature flag for the N6 kill switch.",
+   "title": "Morning-briefing card on Today: five lines, each opening Art-E",
+   "what": "Card on Today from Muteeb's nightly briefing aggregate: reach delta, overnight shares, moves count, timestamped; hidden when the aggregate is stale; behind a feature flag for the N6 kill switch. Per Alex (14 Sep): the briefing is the morning hook, not a cut candidate; build it from Saad's five-line script (N3-SD-15), each line tapping through to Art-E.",
    "why": "The 7am hook of the daily habit; cut-order #2 if N4 runs hot.",
    "area": "Today",
    "due": "2026-10-30",
-   "priority": "P2",
-   "priority_reason": "Named cut candidate",
+   "priority": "P1",
+   "priority_reason": "Alex (14 Sep): the morning briefing is the daily hook",
    "depends_on": [
     "N3-MT-07",
-    "N2-AS-04"
+    "N2-AS-04",
+    "N3-SD-15"
    ],
    "feeds": [
     "Saad",
@@ -22927,7 +22963,8 @@ window.LAUNCH_DATA = {
    "priority_reason": "discovery plan 3 Sep",
    "depends_on": [
     "N3-MT-01",
-    "N2-FH-19"
+    "N2-FH-19",
+    "N3-FH-14"
    ],
    "feeds": [],
    "gate": "none",
@@ -24310,14 +24347,15 @@ window.LAUNCH_DATA = {
    "sprint": "N3",
    "assignee": "Saad",
    "title": "Design the never-empty Discovery feed from the team decision",
-   "what": "Design what the team chose in N2-AX-10: the browse view of opted-in pages, the onboarding step where a user picks pages they would work with (if chosen), how a strong suggestion is marked apart from a browse result, and copy that never promises a match we have not found. Keep the Meta firewall wording and Filza's reason-string rules; update the Discovery pack and hand the changes to Asad.",
+   "what": "Design what the team chose in N2-AX-10: the browse view of opted-in pages, the onboarding step where a user picks pages they would work with (if chosen), how a strong suggestion is marked apart from a browse result, and copy that never promises a match we have not found. Keep the Meta firewall wording and Filza's reason-string rules; update the Discovery pack and hand the changes to Asad. Per Alex (14 Sep): Discovery feels like a dating app (swipe through relevant pages) while the score underneath favours new, receptive audiences over overlap (N3-FH-14).",
    "why": "The 12 Sep Discovery pack was drawn for a fail-closed feed; Asad cannot build a never-empty feed from it.",
    "area": "Discovery",
    "due": "2026-10-09",
    "priority": "P1",
    "priority_reason": "Asad builds the Discovery UI in N4 from this",
    "depends_on": [
-    "N2-AX-10"
+    "N2-AX-10",
+    "N3-FH-14"
    ],
    "feeds": [
     "N4-AS-04",
@@ -24605,7 +24643,7 @@ window.LAUNCH_DATA = {
    "sprint": "N2",
    "assignee": "Saad",
    "title": "Agree the app's theme and wording with Alex: we are on the creator's side",
-   "what": "Take the voice guide (N1-SD-08) to Alex and agree the theme the whole product speaks in: we help creators and small businesses, so the words sound like a coach in their corner, not a dashboard judging them. Agree the words we use and avoid (for example \"your next move\" and \"this might underperform\" rather than \"fail\"), how Art-E sounds, and how bad news is delivered. Apply it to the mockup packs and hand the word list to Asad before app copy is written; keep it consistent with Filza's Meta firewall wording (N2-FZ-01).",
+   "what": "Take the voice guide (N1-SD-08) to Alex and agree the theme the whole product speaks in: we help creators and small businesses, so the words sound like a coach in their corner, not a dashboard judging them. Agree the words we use and avoid (for example \"your next move\" and \"this might underperform\" rather than \"fail\"), how Art-E sounds, and how bad news is delivered. Apply it to the mockup packs and hand the word list to Asad before app copy is written; keep it consistent with Filza's Meta firewall wording (N2-FZ-01). Per Alex (14 Sep): the theme is \"power underneath, simplicity on top\". The avoid-list includes \"swap\"; every label must pass his language test (would an influencer or small business owner understand it instantly; if not, rewrite).",
    "why": "Alex (review 11 Sep): the mockups and the app should sound like a product that helps creators. The voice guide exists but has not been agreed with him or applied to the packs.",
    "area": "Design",
    "due": "2026-09-24",
@@ -24632,6 +24670,264 @@ window.LAUNCH_DATA = {
    "layman_analogy": "Like a restaurant training every waiter to greet guests the same warm way.",
    "layman_needed": "An agreed voice guide and word list, applied to the mockups.",
    "layman_output": "A signed one-page voice guide: the theme (\"we are in the creator's corner\"), the words we use and avoid, how Art-E sounds and how we deliver bad news gently - already applied to the mockup screens and handed to Asad for the app."
+  },
+  {
+   "id": "N2-AS-19",
+   "sprint": "N2",
+   "assignee": "Asad",
+   "title": "Landing: the two agreed changes, and a collaboration example broader than food",
+   "what": "Ship the two minor changes already agreed with Alex, and rewrite the collaboration example so it is broader than food: it should show ArtemisAI finding data-driven opportunities for businesses, influencers and page owners to work together, run campaigns and grow. The copy answers five questions: who should you work with, why does it make sense, what audience could you reach, what campaign could you build together, and what do both sides gain. The word \"swap\" does not appear anywhere on the site; we are not presenting share swapping. Filza checks the final wording against the Meta rulebook.",
+   "why": "Alex (14 Sep): move the landing forward now; the proposition is data-driven collaboration, not share swapping.",
+   "area": "Landing",
+   "due": "2026-09-22",
+   "priority": "P0",
+   "priority_reason": "Alex: get the landing page moving; do not let wording slow it",
+   "depends_on": [
+    "N1-AS-11"
+   ],
+   "feeds": [
+    "N2-FZ-11",
+    "N3-AS-02"
+   ],
+   "gate": "N2",
+   "source": "Alex direction 14 Sep",
+   "acceptance": "The live landing carries the two changes and a collaboration example that is not food-specific, answers the five questions, and contains no \"swap\"; Filza has checked the wording.",
+   "checklist": [
+    "Apply the two agreed changes",
+    "Rewrite the collaboration example around the five questions",
+    "Search the site for \"swap\" and remove it",
+    "Filza checks the wording; deploy"
+   ],
+   "layman": "Asad updates the website so the collaboration example works for any business or creator, not just food, and never calls it a \"swap\".",
+   "layman_analogy": "Like changing a shop window from one product to a display that shows what the whole shop does.",
+   "layman_needed": "The landing page updated with the two changes and the broader collaboration example, checked by Filza.",
+   "layman_output": "The live website with the two agreed tweaks and a collaboration example any business, influencer or page owner recognises: who to work with, why, what audience, what campaign, what each side gains, with no mention of swapping."
+  },
+  {
+   "id": "N2-SD-19",
+   "sprint": "N2",
+   "assignee": "Saad",
+   "title": "Phone app mock-up v1: the four layers, one thumb, as few screens as possible",
+   "what": "Design the phone app Alex described: Home (a scrollable feed where the intelligence comes to the user: what is happening, what matters, opportunities, recommendations, posts taking off, things needing attention), Art-E (ask, answer, follow up, like ChatGPT or Claude), Discovery (swipe through relevant pages, dating-app simple) and Alerts (a notification with a hook, then Art-E explains). Operable with one thumb, screens flowing into each other, no dashboards or menus. Start from the twelve web packs and the token sheet, but treat every separate analytics screen as a candidate to fold into Art-E or the feed. Use the voice guide agreed in N2-SD-18 and keep the Meta rulebook wording.",
+   "why": "Alex (14 Sep): the phone mock-up is the top priority after the landing page, and the biggest danger now is building too much.",
+   "area": "Design",
+   "due": "2026-10-02",
+   "priority": "P0",
+   "priority_reason": "Alex: top priority once the landing page is moving",
+   "depends_on": [
+    "N1-SD-09",
+    "N2-SD-18"
+   ],
+   "feeds": [
+    "N3-SD-14",
+    "N3-SD-15",
+    "N2-SD-20"
+   ],
+   "gate": "N2",
+   "source": "Alex direction 14 Sep",
+   "acceptance": "A phone mock-up covering the four layers with flows between them, reviewed with Alex, with every web-pack screen either present, folded into Art-E or the feed, or listed for the screen-cut pass.",
+   "checklist": [
+    "Home feed, Art-E, Discovery swipe and Alerts screens with flows",
+    "One-thumb reach and no dashboard-style screens",
+    "Map every web-pack screen to: kept, folded into Art-E/feed, or to be cut",
+    "Review with Alex"
+   ],
+   "layman": "Saad designs the phone app as four simple parts, a feed, Art-E, swipe-to-discover and alerts, so it feels like apps people already use.",
+   "layman_analogy": "Like designing a car dashboard with four dials instead of forty.",
+   "layman_needed": "A phone mock-up of the four layers, reviewed with Alex, with every old screen accounted for.",
+   "layman_output": "A phone app design with just four parts: a scrolling home feed, a chat with Art-E, a swipe-through Discovery and alerts, plus a list showing where every screen from the earlier web designs went."
+  },
+  {
+   "id": "N2-SD-20",
+   "sprint": "N2",
+   "assignee": "Saad",
+   "title": "Alert hooks: a curiosity line per alert type, then Art-E explains",
+   "what": "Write the notification copy for every alert type so each one has a hook that creates curiosity and pulls the user back in, in the style Alex gave (\"Your post is taking off. Want to know why?\", \"Something has changed in your audience this morning.\", \"You may be missing a collaboration opportunity.\"). Tapping the alert opens Art-E with the explanation, never a chain of screens. Fit the timing policy from N2-SD-03; Filza checks the lines against the Meta rulebook and the AI-label rules.",
+   "why": "Alex (14 Sep): alerts should feel as natural as a WhatsApp notification and get attention, with Art-E doing the explaining.",
+   "area": "Alerts",
+   "due": "2026-09-30",
+   "priority": "P1",
+   "priority_reason": "Notification copy must exist before the alerts pipeline ships in N3",
+   "depends_on": [
+    "N2-SD-03"
+   ],
+   "feeds": [
+    "N3-AS-04",
+    "N3-AS-06"
+   ],
+   "gate": "N2",
+   "source": "Alex direction 14 Sep",
+   "acceptance": "A copy sheet with a hook line per alert type, the Art-E explanation it opens, checked by Filza and handed to Asad and Muteeb.",
+   "checklist": [
+    "List every alert type",
+    "Write the hook line and the Art-E follow-up for each",
+    "Filza checks wording and AI labels",
+    "Hand to Asad and Muteeb"
+   ],
+   "layman": "Saad writes the short, curiosity-sparking lines each alert will show, with Art-E explaining once you tap.",
+   "layman_analogy": "Like a good headline: enough to make you open the story, with the story waiting inside.",
+   "layman_needed": "A checked copy sheet of alert hooks and their Art-E explanations.",
+   "layman_output": "A sheet of notification lines, one per alert type, each written to make the user want to tap, and the explanation Art-E gives when they do, checked by Filza."
+  },
+  {
+   "id": "N2-JL-08",
+   "sprint": "N2",
+   "assignee": "Jill",
+   "title": "Own the design-direction log: disputes and cut decisions recorded and closed",
+   "what": "Keep one log of every question or disagreement about the 14 Sep direction (which screen stays, which feature goes, which wording), the decision and who made it. Jill arbitrates or takes it to Alex, and closes each item in writing within the week. The log feeds the Friday scope hammer (N2-AX-02) and the cut-line reviews.",
+   "why": "Alex (14 Sep): refer questions or disagreements about direction to Jill; without a log, the same argument is had three times.",
+   "area": "PM",
+   "due": "2026-10-02",
+   "priority": "P1",
+   "priority_reason": "Alex: questions and disagreements about direction go to Jill",
+   "depends_on": [],
+   "feeds": [
+    "N2-AX-02",
+    "N3-SD-09"
+   ],
+   "gate": "N2",
+   "source": "Alex direction 14 Sep",
+   "acceptance": "A direction log exists with every raised item, its decision, decider and date, and no item older than a week left open.",
+   "checklist": [
+    "Open the log and share it with the team",
+    "Record each raised item with a decision and decider",
+    "Close items within the week",
+    "Bring open items to the Friday scope hammer"
+   ],
+   "layman": "Jill keeps the list of every \"should this stay or go?\" question and makes sure each gets a clear answer within the week.",
+   "layman_analogy": "Like a referee's notebook: every call written down so play never stops to re-argue it.",
+   "layman_needed": "A running log of direction questions with decisions, kept current by Jill.",
+   "layman_output": "A shared list of every design-direction question the team raised, who decided it, what they decided and when, with nothing left hanging for more than a week."
+  },
+  {
+   "id": "N3-SD-14",
+   "sprint": "N3",
+   "assignee": "Saad",
+   "title": "Screen-cut pass: every screen, button and feature through Alex's eight questions",
+   "what": "Take the phone mock-up (N2-SD-19) and the web packs and run every screen, button, feature and label through Alex's design test: can it be delivered through Art-E or the home feed; does it need its own screen; is the button necessary or could it be automatic; could a child navigate it; is the language too complicated for an influencer or small business owner; does the app still work without it; does it change an existing habit; does it need a new skill. Produce a kill list (remove), a fold list (into Art-E or the feed) and a keep list with the reason for each, and bring it to the cut-line review (N3-SD-09).",
+   "why": "Alex (14 Sep): our advantage is fewer screens with better intelligence, not more screens than everyone else.",
+   "area": "Design",
+   "due": "2026-10-09",
+   "priority": "P0",
+   "priority_reason": "Alex: after the mock-up, challenge every screen, button and word",
+   "depends_on": [
+    "N2-SD-19"
+   ],
+   "feeds": [
+    "N3-SD-09",
+    "N4-AS-20"
+   ],
+   "gate": "N3",
+   "source": "Alex direction 14 Sep",
+   "acceptance": "A kill, fold and keep list covering every screen, button and feature with the reason per item, ready for the 18 Oct cut-line review.",
+   "checklist": [
+    "Run every screen and button through the eight questions",
+    "Write the kill, fold and keep lists with reasons",
+    "Rewrite any language that fails question five",
+    "Bring the lists to the cut-line review"
+   ],
+   "layman": "Saad goes through every screen and button asking Alex's eight questions, and lists what to remove, what to fold into Art-E or the feed, and what stays.",
+   "layman_analogy": "Like editing a film: every scene has to earn its place or it is cut.",
+   "layman_needed": "A kill, fold and keep list for every screen, button and feature, with reasons.",
+   "layman_output": "Three lists covering the whole app: what gets removed, what gets delivered through Art-E or the home feed instead, and what stays, each with a one-line reason, ready for the cut-line review with Alex."
+  },
+  {
+   "id": "N3-SD-15",
+   "sprint": "N3",
+   "assignee": "Saad",
+   "title": "Morning briefing script: five lines that say what matters and what to do",
+   "what": "Write the briefing format Alex described: \"Good morning. Here's what you need to know today.\" followed by at most five lines such as \"your post is accelerating\", \"your audience is responding strongly to this type of content\", \"there is an opportunity you should look at\", \"this item needs action\", \"something has changed that you should understand\". Each line maps to a real signal from the briefing endpoint (N3-MT-07) and taps through to Art-E. No walls of numbers; every line answers \"what do I need to know and what do I need to do\". Filza checks the wording.",
+   "why": "Alex (14 Sep): the briefing tells the user what matters, not analytics; it is the morning reason to open the app.",
+   "area": "Today",
+   "due": "2026-10-14",
+   "priority": "P1",
+   "priority_reason": "Alex: the briefing is the morning hook and must be simple",
+   "depends_on": [
+    "N3-MT-07"
+   ],
+   "feeds": [
+    "N4-AS-13",
+    "N4-MT-17"
+   ],
+   "gate": "N3",
+   "source": "Alex direction 14 Sep",
+   "acceptance": "A briefing script with the greeting and up to five line templates, each tied to a named signal and an Art-E follow-up, checked by Filza and handed to Asad.",
+   "checklist": [
+    "Write the greeting and the line templates",
+    "Tie each line to a signal from the briefing endpoint",
+    "Define the Art-E follow-up per line",
+    "Filza checks; hand to Asad"
+   ],
+   "layman": "Saad writes the short morning message Art-E sends: what matters today and what to do, in five lines at most.",
+   "layman_analogy": "Like a good assistant's morning note: three things that matter, not the whole inbox.",
+   "layman_needed": "A five-line briefing script tied to real signals, checked by Filza.",
+   "layman_output": "The morning briefing as the user will read it: a greeting and up to five plain lines about what is happening and what to do, each backed by a real number and openable in Art-E."
+  },
+  {
+   "id": "N3-FH-14",
+   "sprint": "N3",
+   "assignee": "Faheem",
+   "title": "Discovery match score beyond overlap: what v1 can honour, what waits for v2",
+   "what": "Alex's test for a match is not \"do these audiences overlap\" but \"could this connection introduce each side to people likely to respond to what they are already doing\". Specify a match score that weighs audience behaviour, current content and its performance, engagement patterns, affinity, relevance, potential new reach and how receptive that audience is to the current content strategy, and penalise near-identical audiences. State which of these signals the v1 data can honour today (with N2-FH-19's density measurement), how they enter the blend before N3-FH-13 freezes it, and which wait for v2 (BL-IN-19). Keep the k=5 floor and Filza's reason-string rules.",
+   "why": "Alex (14 Sep): if two pages already share an audience, collaborating just shows the same people more of the same; the value is reaching new people who will respond.",
+   "area": "Discovery",
+   "due": "2026-10-09",
+   "priority": "P1",
+   "priority_reason": "Alex: matching must aim at new, receptive audiences, not overlap; must land before the blend freeze",
+   "depends_on": [
+    "N2-FH-19"
+   ],
+   "feeds": [
+    "N3-FH-13",
+    "N3-SD-12",
+    "BL-IN-19"
+   ],
+   "gate": "N3",
+   "source": "Alex direction 14 Sep",
+   "acceptance": "A one-page spec naming the v1 match signals, the overlap penalty, how they enter the blend before the freeze, and the v2 list, acknowledged by Asad and Muteeb.",
+   "checklist": [
+    "Define the score and the overlap penalty",
+    "Mark each signal v1 or v2 against the available data",
+    "Hand the v1 signals to the N3-FH-13 blend",
+    "File the v2 list in BL-IN-19"
+   ],
+   "layman": "Faheem defines how Discovery scores a match so it favours pages that can bring you new people likely to respond, rather than pages with the same followers you already have.",
+   "layman_analogy": "Like a good networker introducing you to people you do not know yet who would actually be interested, instead of your own friends again.",
+   "layman_needed": "A written match-score spec: which signals go in now, which later, and how identical audiences are penalised.",
+   "layman_output": "A one-page definition of what makes a good Discovery match, favouring new and receptive audiences over overlapping ones, saying which parts ship in version one and which come later."
+  },
+  {
+   "id": "N4-AS-20",
+   "sprint": "N4",
+   "assignee": "Asad",
+   "title": "Apply the screen map: remove or fold screens per the cut-line decision",
+   "what": "Implement the outcome of the cut-line review (N3-SD-09): remove the screens on the kill list, fold the listed screens into Art-E answers or feed cards, retire their routes and navigation, and make sure every removed screen's intelligence still reaches the user through Art-E or the feed. Update the E2E flows and the copy freeze list to match.",
+   "why": "Alex (14 Sep): anything that can go through Art-E or the home feed should, and we should not ship screens that failed the design test.",
+   "area": "App core",
+   "due": "2026-11-01",
+   "priority": "P1",
+   "priority_reason": "Applies the cut-line decision before hardening starts",
+   "depends_on": [
+    "N3-SD-09",
+    "N3-SD-14"
+   ],
+   "feeds": [
+    "N5-AS-01",
+    "N5-AS-06"
+   ],
+   "gate": "N4",
+   "source": "Alex direction 14 Sep",
+   "acceptance": "Staging shows only the screens on the keep list; folded intelligence is reachable through Art-E or the feed; E2E flows updated.",
+   "checklist": [
+    "Remove kill-list screens and routes",
+    "Fold listed screens into Art-E or feed cards",
+    "Confirm every removed screen's intelligence still reaches the user",
+    "Update E2E flows and the copy list"
+   ],
+   "layman": "Asad removes the screens the team cut and moves their information into Art-E or the home feed.",
+   "layman_analogy": "Like knocking through walls after the architect decided which rooms the house really needs.",
+   "layman_needed": "The app on staging matching the agreed screen map, with nothing useful lost.",
+   "layman_output": "The test app with only the screens that survived the cut, and everything that used to live on removed screens now delivered by Art-E or the home feed."
   }
  ]
 };
