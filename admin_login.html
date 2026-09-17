@@ -250,7 +250,12 @@ const SK = 'artemis_session';
 const API = 'https://g6zr0b5lwe.execute-api.eu-west-2.amazonaws.com/default/lambda_save';
 
 // Already logged in: route by role. Clients land on their own home, not the panel.
-function homeFor(sess){ return (sess && sess.role === 'client') ? 'client_home.html' : 'admin_panel.html'; }
+function homeFor(sess){
+  if(sess && sess.role === 'client') return 'client_home.html';
+  var next=new URLSearchParams(window.location.search).get('next')||'';
+  // Only this local tracker route is accepted; never redirect to arbitrary input.
+  return /^sprint_tracker_launch\.html(?:\?ticket=[A-Za-z0-9-]+)?$/.test(next)?next:'admin_panel.html';
+}
 try{
   var _s = JSON.parse(localStorage.getItem(SK) || 'null');
   if(_s) window.location.href = homeFor(_s);

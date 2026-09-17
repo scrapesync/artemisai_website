@@ -556,6 +556,14 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .sprow .spt{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:300px}
 .sprow .spx{color:var(--gold);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media (max-width:760px){ .spn{display:none} .sprow{flex-wrap:wrap} .sprow .spt{max-width:100%} }
+/* Fixed deadline and honest baseline workload, kept readable on phones. */
+.launch-constraint{margin-top:14px;border-color:var(--amber,#f59e0b)}
+.launch-constraint p{line-height:1.5}
+.launch-constraint details{margin-top:12px}
+.launch-constraint summary{cursor:pointer;font-weight:600}
+.capacity-scroll{overflow-x:auto;margin-top:10px}
+.capacity-scroll table{width:100%;border-collapse:collapse;font-size:12px}
+.capacity-scroll th,.capacity-scroll td{text-align:left;padding:8px;border-bottom:1px solid var(--border);white-space:nowrap}
 </style>
 </head><body>
 
@@ -586,12 +594,13 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 
 <main>
   <div id="banner" class="banner hidden"></div>
+  <div id="evidence-status" class="note" style="margin-bottom:12px"></div>
 
   <!-- ================= OVERVIEW ================= -->
   <section id="view-overview">
-    <div class="eyebrow">Launch Tracker · N1 &rarr; <span class="l-long">8 December</span></div>
+    <div class="eyebrow">Launch Tracker · N1 &rarr; <span class="l-long">15 December</span></div>
     <div class="h1">Overview</div>
-    <div class="sub">The Phase 0 record, six sprints and a launch week - one shared board. Everything below is computed from the tickets and the live state, nothing is typed in by hand.</div>
+    <div class="sub">The Phase 0 record, six sprints and a launch week - one shared board. Ticket progress uses the board state; scope notes and workload estimates are planning baselines, not verified live completion.</div>
     <div id="ov-hero"></div>
     <div id="ov-mock"></div>
     <div class="sec">The sprints</div>
@@ -633,7 +642,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   <section id="view-features" class="hidden">
     <div class="eyebrow">What we are committing to</div>
     <div class="h1">MVP Features</div>
-    <div class="sub">Every feature we have promised for <span class="l-long">8 December</span>, with the tickets that build it and how far along it is. Open one and read the tickets: if they would not add up to a working feature, the feature is not planned yet, whatever the percentage says.</div>
+    <div class="sub">Current planned launch surfaces for <span class="l-long">15 December</span>, with the tickets that build it and how far along it is. Open one and read the tickets: if they would not add up to a working feature, the feature is not planned yet, whatever the percentage says.</div>
     <div class="ftiles" id="f-tiles"></div>
     <div class="sec">How much is covered</div>
     <div id="f-overview"></div>
@@ -647,7 +656,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   <section id="view-track-build" class="hidden">
     <div class="eyebrow">How the product gets built</div>
     <div class="h1">Build tracker</div>
-    <div class="sub">Every phase of the build in one place: landing page, design packs, the phone mock-up, web development, the mobile app (iOS and Android), the API and contracts, data pipelines, and quality (stress, reliability, security, QA). Each lane shows its stack, who is responsible, how far along it is and the tickets that build it.</div>
+    <div class="sub">Every phase of the build in one place: landing page, design packs, the phone mock-up, web development, deferred mobile-store work, the API and contracts, data pipelines, and quality (stress, reliability, security, QA). Each lane shows its stack, who is responsible, how far along it is and the tickets that build it.</div>
     <div class="ftiles" id="tk-tiles-build"></div>
     <div id="tk-body-build"></div>
   </section>
@@ -661,22 +670,22 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   <section id="view-track-costing" class="hidden">
     <div class="eyebrow">What the system costs us</div>
     <div class="h1">Costing</div>
-    <div class="sub">What we know now about the cost of running ArtemisAI and the tickets that firm it up: baselines, the telemetry and dashboard Muteeb owns, the recosting at every sprint end, pricing and packaging, billing and invoicing, budgets and vendor tiers.</div>
+    <div class="sub">What we know now about the cost of running ArtemisAI and the tickets that firm it up: baselines, the telemetry and dashboard Muteeb owns, scheduled recosting reviews, pricing and packaging, billing and invoicing, budgets and vendor tiers.</div>
     <div class="ftiles" id="tk-tiles-costing"></div>
     <div id="tk-body-costing"></div>
   </section>
   <section id="view-track-models" class="hidden">
     <div class="eyebrow">Every model and the LLM</div>
     <div class="h1">Model tracker</div>
-    <div class="sub">All the AI in the product and who is responsible for it: post and comment language models, OCR and image fusion, video, flop and draft scoring, crisis detection, best times, Discovery matching, Art-E (the LLM we are building on), and the model operations that keep them honest.</div>
+    <div class="sub">Existing model delivery is shown separately from remaining integration and quality work. Percentages measure ticket completion, not model accuracy. Models covered: post and comment language models, OCR and image fusion, video, flop and draft scoring, crisis detection, best-times recommendations, deferred Discovery research, Art-E (the LLM we are building on), and the model operations that keep them honest.</div>
     <div class="ftiles" id="tk-tiles-models"></div>
     <div id="tk-body-models"></div>
   </section>
 
   <section id="view-track-launch" class="hidden">
-    <div class="eyebrow">Getting to <span class="l-long">8 December</span>, and through it</div>
+    <div class="eyebrow">Getting to <span class="l-long">15 December</span>, and through it</div>
     <div class="h1">Launch tracker</div>
-    <div class="sub">Everything outside the build that decides the launch: marketing and comms, the waitlist and landing beats, pilots, legal and compliance, operations and on-call, governance and investors, and launch week itself.</div>
+    <div class="sub">Everything outside the build that decides the launch: marketing and comms, the waitlist and landing beats, pilots, legal and compliance, operations and on-call, governance, and launch week itself.</div>
     <div class="ftiles" id="tk-tiles-launch"></div>
     <div id="tk-body-launch"></div>
   </section>
@@ -717,7 +726,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   <section id="view-backlog" class="hidden">
     <div class="eyebrow">Unscheduled work, by layer</div>
     <div class="h1">Backlog</div>
-    <div class="sub">Everything we intend to build that is not in a sprint yet, grouped by the plan's layers. Seeded from the post-launch roadmap. Move a ticket into a sprint when it is real, remove it when it is not, add what is missing. All shared.</div>
+    <div class="sub">Deferred options and historical decisions outside the current sprint plan, grouped by the plan's layers. Seeded from the post-launch roadmap. Move a ticket into a sprint when it is real, remove it when it is not, add what is missing. All shared.</div>
     <div id="bl-body"></div>
   </section>
 
@@ -758,17 +767,18 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   /* ---- session (client-side courtesy gate, same as the other admin pages) ---- */
   var sess=null;
   try{ sess=JSON.parse(localStorage.getItem('artemis_session')||localStorage.getItem('artemis_sprint_session')||localStorage.getItem('artemis_app_session')||'null'); }catch(e){}
-  if(!sess){ location.href='admin_login.html'; return; }
+  if(!sess){ location.href='admin_login.html?next='+encodeURIComponent('sprint_tracker_launch.html'+location.search); return; }
   var VIEWER=(sess.name||sess.username||'someone'); try{ localStorage.setItem('artemis_viewer_name',VIEWER); }catch(e){}
   document.getElementById('viewer-name').textContent=VIEWER;
   document.querySelector('#viewer .av').textContent=VIEWER.charAt(0).toUpperCase();
 
   var D=window.LAUNCH_DATA||{sprints:[],tickets:[]};
-  var LAUNCH=D.launch||{public:'2026-12-08',public_label:'Tue 8 Dec',short:'8 Dec',long:'8 December'};
+  var LAUNCH=D.launch||{public:'2026-12-15',public_label:'Tue 15 Dec 2026',short:'15 Dec',long:'15 December 2026',hard_deadline:'2026-12-20',hard_deadline_label:'Sun 20 Dec 2026'};
   var SPRINTS_BASE=JSON.parse(JSON.stringify(D.sprints));
   var SPRINT_EDITS={}, SPRINTS=D.sprints, ORDER=SPRINTS.map(function(s){return s.id;});
+  function supersededSprintEdit(id,e){ var old=D.reconciliation&&D.reconciliation.superseded_sprint_overrides[id]; return !!(old&&e&&e.at===old.at&&e.start===old.start&&e.end===old.end&&e.gate_date===old.gate_date); }
   function applySprintEdits(){
-    SPRINTS=SPRINTS_BASE.map(function(s){ var e=SPRINT_EDITS[s.id]; return e?Object.assign({},s,e):s; });
+    SPRINTS=SPRINTS_BASE.map(function(s){ var e=SPRINT_EDITS[s.id]; return e&&!supersededSprintEdit(s.id,e)?Object.assign({},s,e):s; });
     ORDER=SPRINTS.map(function(s){return s.id;});
   }
   var LAYERS=D.layers||[], BACKLOG=D.backlog||[];
@@ -795,7 +805,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     {n:'Asad',   c:'#6366f1', role:'Founder · web/app build'},
     {n:'Faheem', c:'#00d4aa', role:'AI / ML'},
     {n:'Muteeb', c:'#06b6d4', role:'Platform / infra / serving'},
-    {n:'Saad',   c:'#f59e0b', role:'Design to 10 Sep, then PM'},
+    {n:'Saad',   c:'#f59e0b', role:'Design, components and acceptance'},
     {n:'Alex',   c:'#ec4899', role:'CEO'},
     {n:'Jill',   c:'#10b981', role:'Ops + money'},
     {n:'Lewis',  c:'#38bdf8', role:'Pilots'},
@@ -837,11 +847,25 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   function sp(t){ return (STATE[t.id]&&STATE[t.id].sprint)||t.sprint; }
   function ly(t){ var s=sprintOf(sp(t)); return (STATE[t.id]&&STATE[t.id].layer)||t.layer||(s&&s.layer)||'product'; }
   function inSprints(t){ return counted(t) && sp(t)!=='BL'; }
-  var DEF_STATUS={}; (D.tickets||[]).forEach(function(t){ if(t.status) DEF_STATUS[t.id]=t.status; });
-  function st(id){ return STATE[id]||{status:DEF_STATUS[id]||'todo',checks:{},note:'',history:[]}; }
-  function isOpen(t){ var s=st(t.id).status; return s!=='done'&&s!=='dropped'; }
+  var BASE_RECORDS={}; D.tickets.concat(BACKLOG).forEach(function(t){ BASE_RECORDS[t.id]=t; });
+  function resolveState(t,e){
+    t=t||{}; e=e||{};
+    var base={status:t.status||'todo',done_at:t.done_at||null,updated_at:t.status_updated_at||null,checks:{},note:'',history:[]};
+    var out=Object.assign({},base,e);
+    if(t.status_updated_at && (!e.updated_at || e.updated_at<t.status_updated_at)){out.status=base.status;out.done_at=base.done_at;}
+    if(t.checklist_revised_at && (!e.updated_at || e.updated_at<=t.checklist_revised_at)){out.checks={};out.checks_need_review=true;}
+    return out;
+  }
+  function st(id){ return resolveState(BASE_RECORDS[id],STATE[id]); }
+  function isOpen(t){ var s=st(t.id).status; return !t.superseded_by && s!=='done'&&s!=='dropped'; }
+  function planningInputs(t){
+    var notes=[];
+    if(t.schedule_confidence) notes.push(t.schedule_confidence);
+    (t.design_milestone_dependencies||[]).forEach(function(id){var m=(D.design_handoff.milestones||[]).filter(function(x){return x.id===id;})[0];if(m) notes.push(m.title+' · '+fmtS(m.date)+' · '+m.status+' (acceptance not verified)');});
+    return notes.length?'<div class="note"><b>Design / planning inputs</b><p>'+notes.map(esc).join('<br>')+'</p></div>':'';
+  }
   function isOver(t){ return isOpen(t) && t.due && t.due<TODAY; }
-  function counted(t){ return st(t.id).status!=='dropped'; }
+  function counted(t){ return !t.superseded_by && st(t.id).status!=='dropped'; }
   function ckDone(t){ var c=st(t.id).checks||{}; return (t.checklist||[]).filter(function(_,i){return c[String(i)];}).length; }
 
   function mirror(){ try{ localStorage.setItem(LSK,JSON.stringify({state:STATE,custom:CUSTOM,sprints:SPRINT_EDITS})); }catch(e){} }
@@ -853,9 +877,9 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       .catch(function(e){
         OFFLINE=true;
         try{ var m=JSON.parse(localStorage.getItem(LSK)||'null'); if(m){ STATE=m.state||{}; CUSTOM=m.custom||[]; SPRINT_EDITS=m.sprints||{}; applySprintEdits(); } }catch(_){}
-        banner('Could not reach the shared board ('+esc(e.message)+'). Showing this device’s last copy; changes you make now save here only until it is back.');
+        banner('Could not reach the shared board ('+esc(e.message)+'). Showing the verified status snapshot plus saved local changes. Changes made here remain local while offline.');
       })
-      .then(function(){ btn.disabled=false; renderAll(); });
+      .then(function(){ btn.disabled=false; renderAll(); if(!ticketLinkHandled){ ticketLinkHandled=true; openTicketLink(); } });
   }
   function save(id,patch){
     var prev=JSON.parse(JSON.stringify(st(id)));
@@ -921,8 +945,8 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     var C=276.46;
     document.getElementById('ov-hero').innerHTML=
       '<div class="hero">'+
-        '<div class="hring" title="'+done+' of '+T.length+' tickets done"><svg viewBox="0 0 100 100"><circle class="bgc" cx="50" cy="50" r="44"/><circle class="fgc" cx="50" cy="50" r="44" style="stroke-dasharray:'+C+';stroke-dashoffset:'+(C*(1-pct/100)).toFixed(1)+'"/></svg><div class="hrv">'+pct+'%<small>built</small></div></div>'+
-        '<div class="hmain"><div class="hk">Days to launch</div><div class="hd">'+toLaunch+'</div><div class="hs">'+esc(LAUNCH.public_label)+' &middot; 08:00 UK'+(LAUNCH.beta?'</div><div class="hs dim">'+esc(LAUNCH.beta_label||'Private beta')+' &middot; '+esc(LAUNCH.beta_date_label||LAUNCH.beta)+(LAUNCH.beta>=TODAY?' ('+days(TODAY,LAUNCH.beta)+' days)':''):'')+'</div><div class="hs dim">'+done+' of '+T.length+' tickets done</div></div>'+
+        '<div class="hring" title="'+done+' of '+T.length+' tickets done"><svg viewBox="0 0 100 100"><circle class="bgc" cx="50" cy="50" r="44"/><circle class="fgc" cx="50" cy="50" r="44" style="stroke-dasharray:'+C+';stroke-dashoffset:'+(C*(1-pct/100)).toFixed(1)+'"/></svg><div class="hrv">'+pct+'%<small>tickets done</small></div></div>'+
+        '<div class="hmain"><div class="hk">Days to launch target</div><div class="hd">'+toLaunch+'</div><div class="hs">'+esc(LAUNCH.public_label)+' &middot; 08:00 UK'+(LAUNCH.beta?'</div><div class="hs dim">'+esc(LAUNCH.beta_label||'Private beta')+' &middot; '+esc(LAUNCH.beta_date_label||LAUNCH.beta)+(LAUNCH.beta>=TODAY?' ('+days(TODAY,LAUNCH.beta)+' days)':''):'')+'</div><div class="hs dim">'+done+' of '+T.length+' tickets done</div></div>'+
         '<div class="hcur" data-s="'+cur.id+'" title="Open '+cur.id+' in the tracker">'+
           '<div class="hk">Current sprint &middot; <span class="mono">'+cur.id+'</span>'+pace+gateChip+'</div>'+
           '<div class="hcn">'+esc(cur.name)+'</div>'+
@@ -936,18 +960,36 @@ main{max-width:1500px;margin:0 auto;padding:22px}
           '<div class="hbk" data-tab-jump="backlog">'+blN+' in the backlog &rarr;</div>'+
         '</div>'+
       '</div>';
+    if(LAUNCH.hard_deadline){
+      var lateEdits=T.filter(function(t){return isOpen(t)&&t.due>LAUNCH.hard_deadline;}).length;
+      var cap=D.capacity_review;
+      if(cap){cap=Object.assign({},cap,{owners:cap.owners.map(function(p){var effort=all().filter(function(t){return inSprints(t)&&sp(t)!=='P0'&&isOpen(t);}).reduce(function(n,t){return n+(t.effort_allocations?(t.effort_allocations[p.owner]||0):(t.assignee===p.owner?(t.estimated_days||0):0));},0);return Object.assign({},p,{effort_days:Math.round(effort*100)/100,gap_days:Math.round(Math.max(0,effort-p.capacity_days)*100)/100});})});}
+      var rows=cap?cap.owners.map(function(p){return '<tr><th scope="row">'+esc(p.owner)+'</th><td>'+p.effort_days+'</td><td>'+p.capacity_days+'</td><td>'+p.gap_days+'</td></tr>';}).join(''):'';
+      document.getElementById('ov-hero').insertAdjacentHTML('beforeend',
+        '<section class="panel launch-constraint" aria-label="December launch constraints">'+
+        '<h3>15 December target · 20 December absolute latest</h3><p>'+esc(LAUNCH.staffing||'Existing team only')+'.</p>'+
+        '<p class="note">'+esc(LAUNCH.planning_note||'')+'</p>'+
+        (lateEdits?'<p class="note">'+lateEdits+' open shared ticket edits are beyond the hard limit. Jill and the owners must reconcile these; saved team edits have not been erased.</p>':'')+
+        (D.ticket_audit?'<p class="note">Two audit passes · 14 tickets deferred · 3 overlapping tickets consolidated. <a href="docs/ticket-audit-round-2.md" target="_blank" rel="noopener">Read ticket audit</a></p>':'')+
+        (cap?'<details><summary>Owner workload review · 16 September ticket audit</summary><p class="note">Inherited remaining estimates, before owner confirmation. Recorded completion is reconciled with the shared-board snapshot; later saved statuses also affect this table. Effort includes open audited work and allocated reviewer effort; deferred and consolidated duplicate records are excluded. Capacity excludes weekends and assumes no extra staff or overtime.</p><div class="capacity-scroll"><table><thead><tr><th>Owner</th><th>Work days</th><th>Available to 15 Dec</th><th>Unresolved gap</th></tr></thead><tbody>'+rows+'</tbody></table></div></details>':'')+
+        '</section>');
+    }
+    if(D.design_handoff){
+      var dh=D.design_handoff;
+      document.getElementById('ov-hero').insertAdjacentHTML('beforeend','<section class="panel launch-constraint" aria-label="Saad design handoff"><h3>Saad’s design handoffs</h3><p class="note">Landing-page mockups are separate from app screens and implementation.</p><div class="capacity-scroll"><table><thead><tr><th>Sprint</th><th>Deliverable</th><th>Date / status</th></tr></thead><tbody>'+dh.milestones.map(function(m){return '<tr><td>'+esc(m.sprint)+'</td><td>'+esc(m.title)+'</td><td>'+esc(m.date?((m.start?fmtS(m.start)+' – ':'')+fmtS(m.date)):m.status)+'</td></tr>';}).join('')+'</tbody></table></div><p class="note">'+esc(dh.planning_note)+'</p><a href="docs/saad-design-handoff.md" target="_blank" rel="noopener">Handoff and dependency plan</a></section>');
+    }
     var hc=document.querySelector('#ov-hero .hcur');
     if(hc) hc.addEventListener('click',function(){ SEL=hc.getAttribute('data-s'); try{localStorage.setItem('artemis_launch_sprint',SEL);}catch(e){} showTab('tracker'); });
     var hb=document.querySelector('#ov-hero .hbk');
     if(hb) hb.addEventListener('click',function(){ showTab('backlog'); });
     var MK=BYID['N1-SD-21']||all().filter(function(t){return t.id==='N1-SD-21';})[0];
-    if(MK && TODAY<='2026-09-27'){
+    if(MK && counted(MK) && sp(MK)!=='BL' && TODAY<=MK.due){
       var mkc=st('N1-SD-21').checks||{}, mitems=MK.checklist||[], mdone=mitems.filter(function(_,i){return mkc[String(i)];}).length;
       var mpct=mitems.length?Math.round(mdone/mitems.length*100):0;
       document.getElementById('ov-mock').innerHTML=
         '<div class="mock" title="Open N1 in the tracker - Saad ticks packs off in ticket N1-SD-21">'+
           '<div class="mkh"><span class="hk">Mockup handoff &middot; Saad</span><b>'+mdone+' / '+mitems.length+' packs</b>'+
-            (mdone>=mitems.length?'<span class="pchip ahead">complete</span>':'<span class="mkd">due 10 Sep &middot; '+days(TODAY,'2026-09-10')+' days left</span>')+'</div>'+
+            (mdone>=mitems.length?'<span class="pchip ahead">complete</span>':'<span class="mkd">due '+fmtS(MK.due)+' &middot; '+days(TODAY,MK.due)+' days left</span>')+'</div>'+
           '<div class="bar big"><i style="width:'+mpct+'%"></i></div>'+
           '<div class="mkp">'+mitems.map(function(p,i){ var on=!!mkc[String(i)]; return '<span class="mkpill'+(on?' on':'')+'">'+(on?'\u2713 ':'')+esc(p.replace(/ ?\(.*\)$/,''))+'</span>'; }).join('')+'</div>'+
           '<div class="mkn">The whole front-end build queues behind these ten packs. Tick them in N1-SD-21 as each lands with its Loom.</div>'+
@@ -1150,21 +1192,21 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     if(EDITING===t.id) return '<div class="det" data-det="'+t.id+'" style="grid-template-columns:1fr">'+ticketForm(t)+'</div>';
     var edited=S.edits&&Object.keys(S.edits).length;
     return '<div class="det" data-det="'+t.id+'"><div>'+
-      '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><button class="editbtn" data-eopen="'+t.id+'">Edit ticket</button><button class="editbtn" data-lay="'+t.id+'">In plain words</button>'+
+      '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><a class="editbtn" href="'+ticketURL(t.id)+'">Ticket link</a><button class="editbtn" data-eopen="'+t.id+'">Edit ticket</button><button class="editbtn" data-lay="'+t.id+'">In plain words</button>'+
       (edited?'<span class="edited">edited by '+esc(S.edited_by||'someone')+'</span>':'')+'</div>'+
       '<div class="laybox" id="lay-'+t.id+'" hidden><h4>In plain words</h4><p>'+esc(t.layman||'Plain-words note is being written for this ticket.')+'</p>'+
       (t.layman_analogy?'<h4>Think of it like</h4><p>'+esc(t.layman_analogy)+'</p>':'')+
       (t.layman_needed?'<h4>Exactly what is needed</h4><p>'+esc(t.layman_needed)+'</p>':'')+
       (t.layman_output?'<h4>What you\u2019ll see when it\u2019s done</h4><p>'+esc(t.layman_output)+'</p>':'')+
       '<p style="margin-top:8px">'+layShare(t)+'</p></div>'+
-      '<h4>What</h4><p>'+esc(t.what)+'</p><h4>Why</h4><p>'+esc(t.why)+'</p><h4>Done when</h4><p>'+esc(t.acceptance)+'</p>'+
+      planningInputs(t)+'<h4>What</h4><p>'+esc(t.what)+'</p><h4>Why</h4><p>'+esc(t.why)+'</p><h4>Done when</h4><p>'+esc(t.acceptance)+'</p>'+
       (t.layman_output?'<div class="outp"><h4>Expected output &middot; in plain english</h4><p>'+esc(t.layman_output)+'</p></div>':'')+
       '<h4>Priority</h4><p><span class="pr '+t.priority+'">'+t.priority+'</span> '+esc(t.priority_reason)+'</p>'+
       '<h4>Depends on</h4><p>'+((t.depends_on||[]).length?t.depends_on.map(function(d){return '<span class="tag">'+esc(d)+'</span>';}).join(''):'<span class="tag">nothing</span>')+'</p>'+
       '<h4>Feeds</h4><p>'+((t.feeds||[]).length?t.feeds.map(function(d){return '<span class="tag">'+esc(d)+'</span>';}).join(''):'<span class="tag">-</span>')+'</p>'+
       '<p style="margin-top:8px"><span class="tag">gate '+esc(t.gate||'none')+'</span><span class="tag">source '+esc(t.source)+'</span><span class="tag">'+esc(t.area)+'</span></p>'+
       '</div><div>'+
-      '<h4>Checklist</h4>'+(t.checklist||[]).map(function(c,i){ var on=!!(S.checks||{})[String(i)]; return '<label class="ck'+(on?' on':'')+'"><input type="checkbox" data-ck="'+t.id+'" data-i="'+i+'"'+(on?' checked':'')+'> <span>'+esc(c)+'</span></label>'; }).join('')+
+      '<h4>Checklist</h4>'+(S.checks_need_review?'<p class="note">Checklist changed since the saved ticks; reconfirm these items. The saved record has not been deleted.</p>':'')+(t.checklist||[]).map(function(c,i){ var on=!!(S.checks||{})[String(i)]; return '<label class="ck'+(on?' on':'')+'"><input type="checkbox" data-ck="'+t.id+'" data-i="'+i+'"'+(on?' checked':'')+'> <span>'+esc(c)+'</span></label>'; }).join('')+
       '<h4>Note</h4><textarea data-note="'+t.id+'" placeholder="Blocker detail, decision, link…">'+esc(S.note||'')+'</textarea>'+
       '<div class="brow"><button class="hbtn primary" data-savenote="'+t.id+'">Save note</button>'+(String(t.id).startsWith('C-')?'<button class="hbtn" data-del="'+t.id+'" style="color:var(--red)">Delete ticket</button>':'')+'</div>'+
       '<div class="hist">'+((S.history||[]).slice(0,6).map(function(h){return esc(h.by)+' · '+esc(STATUS_LABEL[h.from]||h.from)+' &rarr; '+esc(STATUS_LABEL[h.to]||h.to)+' · '+new Date(h.at).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});}).join('<br>')||'no changes yet')+'</div>'+
@@ -1250,7 +1292,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   document.getElementById('btn-csv').addEventListener('click',function(){
     var T=all().filter(function(t){return sp(t)===SEL;}).sort(function(a,b){return a.assignee.localeCompare(b.assignee)||prSort(a,b);});
     var cols=['id','sprint','assignee','priority','title','area','due','status','checklist_done','checklist_total','gate','depends_on','acceptance','note'];
-    var rows=[cols.join(',')].concat(T.map(function(t){ var S=st(t.id); var v={id:t.id,sprint:t.sprint,assignee:t.assignee,priority:t.priority,title:t.title,area:t.area,due:t.due,status:S.status,checklist_done:ckDone(t),checklist_total:(t.checklist||[]).length,gate:t.gate,depends_on:(t.depends_on||[]).join('; '),acceptance:t.acceptance,note:S.note||''};
+    var rows=[cols.join(',')].concat(T.map(function(t){ var S=st(t.id); var v={id:t.id,sprint:sp(t),assignee:t.assignee,priority:t.priority,title:t.title,area:t.area,due:t.due,status:S.status,checklist_done:ckDone(t),checklist_total:(t.checklist||[]).length,gate:t.gate,depends_on:(t.depends_on||[]).join('; '),acceptance:t.acceptance,note:S.note||''};
       return cols.map(function(c){ return '"'+String(v[c]==null?'':v[c]).replace(/"/g,'""')+'"'; }).join(','); }));
     var a=document.createElement('a'); a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(rows.join('\n')); a.download='artemis_'+SEL+'_'+TODAY+'.csv'; a.click();
   });
@@ -1262,7 +1304,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
      to a working feature. */
   var FEATURES=D.features||[], FOPEN={};
   function fstats(f){
-    var ts=all().filter(function(t){ return f.tickets.indexOf(t.id)>=0 && counted(t); });
+    var ts=all().filter(function(t){ return f.tickets.indexOf(t.id)>=0 && inSprints(t); });
     var by={done:0,inprog:0,blocked:0,todo:0};
     ts.forEach(function(t){ var s=st(t.id).status||'todo'; by[s==='dropped'?'todo':s]++; });
     var pct=ts.length?Math.round(by.done/ts.length*100):0;
@@ -1289,21 +1331,19 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       (open?featureBody(f,s,col):'')+'</div>';
   }
   function featureBody(f,s,col){
-    var rows=s.ts.slice().sort(function(a,b){ return ORDER.indexOf(a.sprint)-ORDER.indexOf(b.sprint)||a.due.localeCompare(b.due); })
+    var rows=s.ts.slice().sort(function(a,b){ return ORDER.indexOf(sp(a))-ORDER.indexOf(sp(b))||(a.due||'').localeCompare(b.due||''); })
       .map(function(t){ var S=st(t.id).status||'todo';
         return '<div class="frow'+(S==='done'?' done':'')+'" data-goto="'+t.id+'"><span class="fid">'+t.id+'</span>'+
           '<span class="ft" title="'+esc(t.title)+'">'+esc(t.title)+'</span>'+
           '<span class="fw">'+esc(t.assignee)+'</span>'+
           '<span class="fs" style="color:'+(S==='done'?'var(--sage)':S==='blocked'?'var(--red)':S==='inprog'?'var(--gold)':'var(--muted3)')+'">'+esc(STATUS_LABEL[S])+'</span></div>'; }).join('');
-    var sprints={}; s.ts.forEach(function(t){ sprints[t.sprint]=(sprints[t.sprint]||0)+1; });
+    var sprints={}; s.ts.forEach(function(t){ sprints[sp(t)]=(sprints[sp(t)]||0)+1; });
     return '<div class="fbody"><div class="fmeta">'+
       '<div><h5>Why it is in the MVP</h5><p>'+esc(f.why||'')+'</p></div>'+
       '<div><h5>How we know it works</h5><p>'+esc(f.gate||'')+'</p></div>'+
       '<div><h5>Where the work sits</h5><p>'+Object.keys(sprints).sort(function(a,b){return ORDER.indexOf(a)-ORDER.indexOf(b);}).map(function(k){return k+' ('+sprints[k]+')';}).join(' &middot; ')+
         (s.last?'<br><span style="color:var(--muted2)">last ticket due '+fmtS(s.last)+'</span>':'')+'</p></div>'+
-      (f.faheem?'<div><h5>Model / data</h5><p>'+esc(f.faheem)+'</p></div>':'')+
-      (f.muteeb?'<div><h5>Serving</h5><p>'+esc(f.muteeb)+'</p></div>':'')+
-      (f.asad?'<div><h5>In the app</h5><p>'+esc(f.asad)+'</p></div>':'')+
+      '<div><h5>Current ticket owners</h5><p>'+Object.keys(s.ppl).map(function(n){return esc(n)+' ('+s.ppl[n]+')';}).join(', ')+'</p></div>'+
       '</div>'+
       (s.ts.length<3?'<div class="fempty">Only '+s.ts.length+' ticket'+(s.ts.length===1?'':'s')+' build this. Worth asking whether that is really enough.</div>':'')+
       '<h5 style="font-family:\'IBM Plex Mono\',monospace;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted3);margin-bottom:7px">The tickets that build it</h5>'+
@@ -1312,16 +1352,16 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   function renderFeatures(){
     var T=all().filter(function(t){ return counted(t)&&sp(t)!=='BL'; });
     var done=T.filter(function(t){return st(t.id).status==='done';}).length;
-    var surf=FEATURES.filter(function(f){return f.kind==='surface';}), fnd=FEATURES.filter(function(f){return f.kind!=='surface';});
+    var surf=FEATURES.filter(function(f){return f.kind==='surface'&&f.scope!=='deferred';}), fnd=FEATURES.filter(function(f){return f.kind!=='surface'&&f.scope!=='deferred';});
     var atRisk=surf.filter(function(f){ var s=fstats(f); return s.late>0||s.by.blocked>0; }).length;
     document.getElementById('f-tiles').innerHTML=[
-      tile('Features promised', surf.length, 'surfaces a customer touches'),
-      tile('Overall build', (T.length?Math.round(done/T.length*100):0)+'%', done+' of '+T.length+' tickets done'),
-      tile('Feature with least cover', (function(){ var m=surf.slice().sort(function(a,b){return a.tickets.length-b.tickets.length;})[0]; return m?m.tickets.length:0; })(), (function(){ var m=surf.slice().sort(function(a,b){return a.tickets.length-b.tickets.length;})[0]; return m?esc(m.name):''; })()),
+      tile('Launch surfaces planned', surf.length, 'surfaces a customer touches'),
+      tile('Ticket completion', (T.length?Math.round(done/T.length*100):0)+'%', done+' of '+T.length+' tickets done'),
+      tile('Feature with least cover', (function(){ var m=surf.slice().sort(function(a,b){return fstats(a).ts.length-fstats(b).ts.length;})[0]; return m?fstats(m).ts.length:0; })(), (function(){ var m=surf.slice().sort(function(a,b){return fstats(a).ts.length-fstats(b).ts.length;})[0]; return m?esc(m.name):''; })()),
       tile('Features with a problem', atRisk, atRisk?'something late or blocked':'nothing late or blocked', atRisk?'red':'')
     ].join('');
     renderFeatureOverview();
-    document.getElementById('f-surfaces').innerHTML=surf.map(featureCard).join('');
+    document.getElementById('f-surfaces').innerHTML=surf.map(featureCard).join('')+'<details class="panel"><summary>Deferred features — excluded from launch progress</summary>'+FEATURES.filter(function(f){return f.scope==='deferred';}).map(function(f){return '<p><b>'+esc(f.name)+'</b>: '+esc(f.what)+'</p>';}).join('')+'</details>';
     document.getElementById('f-foundation').innerHTML=fnd.map(featureCard).join('');
     document.querySelectorAll('.fhead').forEach(function(h){ h.addEventListener('click',function(){ var id=h.getAttribute('data-f'); FOPEN[id]=!FOPEN[id]; renderFeatures(); }); });
     document.querySelectorAll('.frow[data-goto]').forEach(function(r){ r.addEventListener('click',function(e){
@@ -1336,11 +1376,11 @@ main{max-width:1500px;margin:0 auto;padding:22px}
      How much of the plan each promised feature actually has behind it. */
   function renderFeatureOverview(){
     var T=all().filter(function(t){ return counted(t)&&sp(t)!=='BL'; });
-    var covered={}; FEATURES.forEach(function(f){ f.tickets.forEach(function(id){ covered[id]=1; }); });
+    var covered={}; FEATURES.filter(function(f){return f.scope!=='deferred';}).forEach(function(f){ f.tickets.forEach(function(id){ covered[id]=1; }); });
     var inF=T.filter(function(t){return covered[t.id];}).length, orphan=T.filter(function(t){return !covered[t.id];});
     var areas={}; orphan.forEach(function(t){ areas[t.area]=(areas[t.area]||0)+1; });
     var top=Object.keys(areas).sort(function(a,b){return areas[b]-areas[a];}).slice(0,6);
-    var rows=FEATURES.slice().sort(function(a,b){ return (a.kind===b.kind?0:(a.kind==='surface'?-1:1)) || fstats(a).pct-fstats(b).pct; }).map(function(f){
+    var rows=FEATURES.filter(function(f){return f.scope!=='deferred';}).sort(function(a,b){ return (a.kind===b.kind?0:(a.kind==='surface'?-1:1)) || fstats(a).pct-fstats(b).pct; }).map(function(f){
       var s=fstats(f), col=LAYER_COL[f.layer]||'#9c8f80';
       var sprints={}; s.ts.forEach(function(t){ sprints[sp(t)]=1; }); var span=Object.keys(sprints).sort(function(a,b){return ORDER.indexOf(a)-ORDER.indexOf(b);});
       var ppl=Object.keys(s.ppl).sort(function(a,b){return s.ppl[b]-s.ppl[a];}).slice(0,3).map(function(p){return '<span style="color:'+(PC[p]||'#5c7a99')+'">'+esc(p)+'</span>';}).join(', ');
@@ -1357,7 +1397,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     document.getElementById('f-overview').innerHTML=
       '<div class="ovsum"><div><b>'+Math.round(inF/Math.max(1,T.length)*100)+'%</b> of the '+T.length+' sprint tickets build a named feature</div>'+
       '<div>'+orphan.length+' tickets sit outside every feature'+(top.length?' · mostly '+top.map(function(a){return esc(a)+' ('+areas[a]+')';}).join(', '):'')+'</div>'+
-      '<div>'+FEATURES.filter(function(f){return fstats(f).ts.length<3;}).length+' features have fewer than 3 tickets</div></div>'+
+      '<div>'+FEATURES.filter(function(f){return f.scope!=='deferred'&&fstats(f).ts.length<3;}).length+' features have fewer than 3 tickets</div></div>'+
       '<div class="ovhead"><span>Feature</span><span>Kind</span><span>Done</span><span></span><span>Tickets</span><span>done / running / blocked</span><span>Sprints</span><span>Who</span></div>'+rows;
     document.querySelectorAll('.ovrow').forEach(function(r){ r.addEventListener('click',function(){ var id=r.getAttribute('data-f'); FOPEN[id]=true; renderFeatures(); setTimeout(function(){ var el=document.querySelector('.fhead[data-f="'+id+'"]'); if(el) el.scrollIntoView({block:'center'}); },40); }); });
   }
@@ -1367,18 +1407,18 @@ main{max-width:1500px;margin:0 auto;padding:22px}
      different axis. A track is a list of lanes; each lane names its owners and
      stack and lists the tickets that build it (from the generated data). */
   var TRACKS=D.tracks||[], TOPEN={};
-  function laneStats(l){ return fstats({tickets:l.tickets||[]}); }
+  function laneStats(l){ return fstats({tickets:l.scope==='deferred'?[]:(l.tickets||[])}); }
   function renderTrack(id){
     var tr=TRACKS.filter(function(x){return x.id===id;})[0]; if(!tr) return;
-    var lanes=tr.lanes||[], allIds={}; lanes.forEach(function(l){ (l.tickets||[]).forEach(function(i){ allIds[i]=1; }); });
-    var T=all().filter(function(t){ return allIds[t.id]&&counted(t); });
+    var lanes=tr.lanes||[], allIds={}; lanes.filter(function(l){return l.scope!=='deferred';}).forEach(function(l){ (l.tickets||[]).forEach(function(i){ allIds[i]=1; }); });
+    var T=all().filter(function(t){ return allIds[t.id]&&inSprints(t); });
     var done=T.filter(function(t){return st(t.id).status==='done';}).length, late=T.filter(isOver).length, blocked=T.filter(function(t){return st(t.id).status==='blocked';}).length;
     var next=T.filter(isOpen).filter(function(t){return t.due;}).sort(function(a,b){return a.due.localeCompare(b.due);})[0];
     var ppl={}; T.forEach(function(t){ ppl[t.assignee]=(ppl[t.assignee]||0)+1; });
     var lead=Object.keys(ppl).sort(function(a,b){return ppl[b]-ppl[a];})[0]||'-';
     document.getElementById('tk-tiles-'+id).innerHTML=[
       tile('Lanes', lanes.length, 'phases in this track'),
-      tile('Progress', (T.length?Math.round(done/T.length*100):0)+'%', done+' of '+T.length+' tickets done'),
+      tile(id==='models'?'Tracked work incl. follow-ups':'Progress', (T.length?Math.round(done/T.length*100):0)+'%', done+' of '+T.length+' tickets done'),
       tile('Late or blocked', late+blocked, late+' overdue · '+blocked+' blocked', (late+blocked)?'red':''),
       tile('Next due', next?fmtS(next.due):'-', next?(next.id+' · '+esc(next.assignee)):'nothing open'),
       tile('Most tickets', lead, (ppl[lead]||0)+' of '+T.length)
@@ -1402,19 +1442,20 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     }).join('');
     return '<div class="sec">What the control center is</div><div class="qsum">'+esc(sp.summary||'')+'</div>'+
       '<div class="qgrid">'+secs+'</div>'+
-      ((sp.gates||[]).length?'<div class="sec">Release gates that read it</div><div class="qgates">'+sp.gates.map(function(g){ return '<div class="qgate">'+esc(g)+'</div>'; }).join('')+'</div>':'')+
+      '<div class="sec">Current gates and release milestones</div><div class="qgates">'+SPRINTS.filter(function(g){return g.id!=="P0";}).map(function(g){return '<div class="qgate"><b>'+esc(g.id)+' · '+fmt(g.gate_date)+'</b>: '+esc(g.gate)+'</div>';}).join('')+['N5-FH-03','N5-FH-02','N6-FH-01','N6-AS-10','N6-AX-07','LW-AS-04'].map(function(id){var t=BYIDT(id);return t?'<div class="qgate">'+esc(id)+' · '+fmt(t.due)+' · '+esc(t.title)+'</div>':'';}).join('')+'</div>'+
       (sp.alerting?'<div class="qsum" style="margin-top:10px"><b style="color:var(--gold)">Alerting</b> &middot; '+esc(sp.alerting)+'</div>':'');
   }
   function laneCard(tr,l){
     var s=laneStats(l), col=l.color||tr.color||'#7d94b8', key=tr.id+':'+l.id, open=TOPEN[key];
     var seg=function(n,c){ return n?'<i style="width:'+(n/s.ts.length*100)+'%;background:'+c+'"></i>':''; };
-    var owners=(l.owners||[]).map(function(p){ return '<span style="color:'+(PC[p]||'#5c7a99')+'">'+esc(p)+'</span>'; }).join(' · ');
+    var owners=Object.keys(s.ppl).map(function(p){ return '<span style="color:'+(PC[p]||'#5c7a99')+'">'+esc(p)+'</span>'; }).join(' · ');
     var next=s.ts.filter(isOpen).filter(function(t){return t.due;}).sort(function(a,b){return a.due.localeCompare(b.due);})[0];
-    var status=l.status||(s.ts.length===0?'no tickets yet':(s.pct===100?'done':(next?'next: '+next.id+' '+fmtS(next.due):'nothing open')));
+    var laneDates=s.ts.filter(function(t){return sp(t)!=='P0' && t.due;}).map(function(t){return t.due;}).sort();
+    var status=(s.ts.length===0?'No scheduled work; see Backlog':(s.pct===100?'done':(next?'next: '+next.id+' '+fmtS(next.due):'nothing open')));
     return '<div class="fcard" style="--fc:'+col+'">'+
       '<div class="fhead" data-l="'+key+'">'+
         '<div><div class="fname">'+esc(l.name)+'</div><div class="fwhat">'+esc(l.what||'')+'</div>'+
-          '<div class="tkmeta">'+(owners?'<span><b>Owners</b> '+owners+'</span>':'')+(l.stack?'<span><b>Stack</b> '+esc(l.stack)+'</span>':'')+(l.platform?'<span><b>Platform</b> '+esc(l.platform)+'</span>':'')+'<span><b>Status</b> '+esc(status)+'</span></div></div>'+
+          '<div class="tkmeta">'+(owners?'<span><b>Owners</b> '+owners+'</span>':'')+(l.stack?'<span><b>Stack</b> '+esc(l.stack)+'</span>':'')+(l.platform?'<span><b>Platform</b> '+esc(l.platform)+'</span>':'')+(l.delivery_state?'<span><b>Delivery</b> '+esc(l.delivery_state)+'</span>':'')+'<span><b>Status</b> '+esc(status)+'</span><span><b>Ticket due range</b> '+(laneDates.length?fmtS(laneDates[0])+' – '+fmtS(laneDates[laneDates.length-1]):'No active dates')+'</span></div></div>'+
         '<div><div class="fbarwrap">'+seg(s.by.done,'var(--sage)')+seg(s.by.inprog,'var(--gold)')+seg(s.by.blocked,'var(--red)')+'</div>'+
           '<div class="sub" style="margin-top:5px">'+s.by.done+' done &middot; '+s.by.inprog+' running'+(s.by.blocked?' &middot; '+s.by.blocked+' blocked':'')+(s.late?' &middot; <span style="color:var(--red)">'+s.late+' late</span>':'')+'</div></div>'+
         '<div class="fring">'+ring(s.pct,col)+'<div><div class="pc">'+s.pct+'%</div><div class="sub">'+s.ts.length+' tickets</div></div></div>'+
@@ -1432,8 +1473,8 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     var sprints={}; s.ts.forEach(function(t){ sprints[sp(t)]=(sprints[sp(t)]||0)+1; });
     return '<div class="fbody">'+(l.note?'<div class="fmeta"><div><h5>What we know now</h5><p>'+esc(l.note)+'</p></div>'+
       '<div><h5>Where the work sits</h5><p>'+Object.keys(sprints).sort(function(a,b){return ORDER.indexOf(a)-ORDER.indexOf(b);}).map(function(k){return k+' ('+sprints[k]+')';}).join(' &middot; ')+'</p></div></div>':'')+
-      (s.ts.length<3?'<div class="fempty">Only '+s.ts.length+' ticket'+(s.ts.length===1?'':'s')+' in this lane. If it matters, it is under-planned.</div>':'')+
-      '<div class="flist">'+rows+'</div></div>';
+      (s.ts.length<3?'<div class="fempty">'+s.ts.length+' scheduled ticket'+(s.ts.length===1?'':'s')+' in this lane. Unscheduled backlog is excluded.</div>':'')+
+      (l.evidence_links?'<p>'+l.evidence_links.map(function(e){return '<a href="'+esc(e.url)+'" target="_blank" rel="noopener">'+esc(e.label)+'</a>';}).join(' · ')+'</p>':'')+'<div class="flist">'+rows+'</div></div>';
   }
 
   /* ================= DEPENDENCY MAP =================
@@ -1580,7 +1621,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
       '<div class="dt">'+esc(t.title)+'</div>'+
       '<div style="font-size:12px;color:var(--muted2);margin-top:2px"><span class="mono" style="color:'+(PC[t.assignee]||'#9c8f80')+'">'+t.id+'</span> &middot; '+esc(t.assignee)+' &middot; '+esc(t.area)+' &middot; '+(s?s.id+' '+esc(s.name):'')+' &middot; due '+fmtS(t.due)+' &middot; <span class="pr '+t.priority+'">'+t.priority+'</span></div>'+
       '<div class="cols">'+
-        '<div><h4>What we do in '+sp(t)+'</h4><p>'+esc(t.what)+'</p><h4>Why it matters</h4><p>'+esc(t.why)+'</p></div>'+
+        '<div>'+planningInputs(t)+'<h4>What we do in '+sp(t)+'</h4><p>'+esc(t.what)+'</p><h4>Why it matters</h4><p>'+esc(t.why)+'</p></div>'+
         '<div><h4>Waits on ('+(ups.length+soft.length)+')</h4>'+
           (ups.map(link).join('')||'')+
           (soft.map(function(x){ return '<span class="deplink soft">'+esc(x)+'</span>'; }).join(''))+
@@ -1666,9 +1707,9 @@ main{max-width:1500px;margin:0 auto;padding:22px}
   function renderLayman(){
     var T=all().filter(function(t){return counted(t)&&sp(t)!=='BL';});
     var byId={}; T.forEach(function(t){byId[t.id]=t;});
-    var PACK={drafts:'Drafts / Studio pack',crisis:'Alerts pack',besttimes:'Best Times pack',health:'Pages + workspace switcher pack',arte:'Art-E rail pack',discovery:'Discovery pack',today:'Today pack',wins:'Wins-lite pack',analytics:'Analytics thin pack',onboarding:'Onboarding tour (written spec)',auth:'Connect + consent + Settings packs',landing:'Landing page (Figma)'};
+    var PACK={drafts:'Drafts / Studio pack',crisis:'Alerts pack',besttimes:'Timing recommendations; standalone heatmap deferred',health:'Connected pages + workspace filtering',arte:'Art-E rail pack',discovery:'Discovery pack',today:'Today pack',wins:'Wins-lite pack',analytics:'Analytics thin pack',onboarding:'Onboarding tour (written spec)',auth:'Connect + consent + Settings packs',landing:'Landing page (Figma)'};
     var mapped={};
-    var groups=FEATURES.map(function(f){
+    var groups=FEATURES.filter(function(f){return f.scope!=='deferred';}).map(function(f){
       var ts=(f.tickets||[]).map(function(id){return byId[id];}).filter(Boolean);
       ts.forEach(function(t){mapped[t.id]=1;});
       return {id:f.id,name:f.name,pack:PACK[f.id]||(f.kind==='foundation'?'not a mockup surface':''),ts:ts};
@@ -1691,7 +1732,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
           return '<div class="lgb"><i style="width:'+gp+'%"></i></div>'+
             (MS?('<div class="mkshotw">'+(MS.img?'<img class="mkshot" loading="lazy" src="'+MS.img+'" alt="mockup">':'')+
               '<div class="mkside"><a class="mkopen" href="'+MS.page+'" target="_blank" rel="noopener">Open the full mockup &rarr;</a>'+
-              '<span class="mkcap">'+(MS.img?'What good looks like, from the v3 mockup.':'The old alerts mockup page is broken; open the link or wait for the new pack.')+' Saad\u2019s 10 Sep pack supersedes this.</span><span class="mkhint">Click any ticket below to read it in plain words, with its share of this feature.</span></div></div>'):'');
+              '<span class="mkcap">'+(MS.img?'What good looks like, from the v3 mockup.':'The old alerts mockup page is broken; open the link or wait for the new pack.')+' Historical reference only; accepted current product designs take precedence. Landing mockups hand over 19 Sep; app Home redesign is 22–23 Sep.</span><span class="mkhint">Click any ticket below to read it in plain words, with its share of this feature.</span></div></div>'):'');
         })():'')+
         (open?g.ts.map(function(t){
           var o=!!LOPEN[g.id+t.id], S=st(t.id);
@@ -1701,7 +1742,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
             '<span class="lti">'+esc(t.title)+'</span>'+
             '<span class="who" style="color:'+(PC[t.assignee]||'#9c8f80')+'">'+esc(t.assignee||'')+'</span>'+
             '<span class="chev">'+(o?'&#9650;':'&#9660;')+'</span></div>'+
-            (o?'<div class="laytxt"><div class="lk">In plain words</div><p>'+esc(t.layman||'Plain-words note is being written for this ticket.')+'</p>'+
+            (o?'<div class="laytxt">'+planningInputs(t)+'<div class="lk">In plain words</div><p>'+esc(t.layman||'Plain-words note is being written for this ticket.')+'</p>'+
               (t.layman_analogy?'<div class="lk">Think of it like</div><p>'+esc(t.layman_analogy)+'</p>':'')+
               (t.layman_needed?'<div class="lk">Exactly what is needed</div><p>'+esc(t.layman_needed)+'</p>':'')+
               (t.layman_output?'<div class="lk">What you\u2019ll see when it\u2019s done</div><p>'+esc(t.layman_output)+'</p>':'')+
@@ -1717,16 +1758,18 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 
   /* ================= BACKLOG ================= */
   function renderBacklog(){
-    var T=all().filter(function(t){return sp(t)==='BL';});
+    var archived=all().filter(function(t){return t.superseded_by;});
+    var T=all().filter(function(t){return !t.superseded_by && sp(t)==='BL';});
     var el=document.getElementById('bl-body');
     var live0=T.filter(counted), waves={};
     live0.forEach(function(t){ var w=(t.area||'').split('\u00b7')[0].trim()||'Other'; waves[w]=(waves[w]||0)+1; });
-    var promoted=live0.filter(function(t){return t.promoted;}).length;
+    var promoted=0; // historical promoted flags do not mean a backlog row is currently scheduled
     var summary='<div class="card" style="margin-bottom:14px;padding:12px 16px;display:flex;gap:18px;flex-wrap:wrap;align-items:center">'+
       '<b style="font-size:14px">'+live0.length+' parked tickets</b>'+
       Object.keys(waves).sort().map(function(w){ return '<span style="font-size:12px;color:var(--muted)">'+esc(w)+' \u00b7 <b style="color:var(--ink)">'+waves[w]+'</b></span>'; }).join('')+
       (promoted?'<span style="font-size:12px;color:var(--green,#3F7A5C)">'+promoted+' promoted into sprints</span>':'')+
-      '<span style="font-size:11.5px;color:var(--muted);flex-basis:100%">Every item here is a decision on record: it has an owner and an acceptance line, and gets re-decided at Roadmap V2 (w/c 7 Dec). The January mobile app workstream lives in its own group below.</span></div>';
+      '<span style="font-size:11.5px;color:var(--muted);flex-basis:100%">These items are unscheduled and add no December workload. Deferred feature work resumes only with a scope decision. Consolidated records below are history, not new work.</span></div>';
+    summary += '<details class="removed"><summary>'+archived.length+' consolidated records (history only)</summary>'+archived.map(function(t){return '<p><span class="mono">'+esc(t.id)+'</span> '+esc(t.title)+' — covered by '+esc(t.superseded_by)+'</p>';}).join('')+'</details>';
     el.innerHTML=summary+LAYERS.map(function(L){
       var ts=T.filter(function(t){return ly(t)===L.id;});
       var live=ts.filter(counted).sort(function(a,b){return a.priority.localeCompare(b.priority)||a.title.localeCompare(b.title);});
@@ -1766,16 +1809,32 @@ main{max-width:1500px;margin:0 auto;padding:22px}
         '<div class="pstats">'+pst('Tickets',ts.length)+pst('Done',done.length,'green')+pst('In progress',ip,'amber')+pst('Blocked',bl,bl?'red':'')+pst('Overdue',ov,ov?'red':'')+'</div>'+
         '<div class="pace"><span>'+cur.id+': '+cD+' of '+cT.length+' done · expected ~'+Math.round(exp*100)+'% by today'+(timed.length?' · on time '+ontime+'/'+timed.length:'')+' · '+p0+' P0</span><b class="'+cls+'">'+pace+'</b></div>'+
         '<div class="sprow">'+SPRINTS.map(function(s){ var a=ts.filter(function(t){return sp(t)===s.id;}), d=a.filter(function(t){return st(t.id).status==='done';}).length; return '<div class="spc'+(s.id===cur.id?' cur':'')+'"><div class="id">'+s.id+'</div><div class="v">'+(a.length?d+'/'+a.length:'-')+'</div></div>'; }).join('')+'</div>'+
-        '<div class="note">On time counts tickets marked done on or before their due date. Overdue is open past due. Pace compares this sprint’s completion with how much of the sprint has elapsed.</div></div>';
+        '<div class="note">On time compares recorded completion with the current planned due date, not the original commitment. Overdue is open past due. Pace compares this sprint’s completion with how much of the sprint has elapsed.</div></div>';
     }).join('');
   }
   function pst(k,v,c){ return '<div class="pstat"><div class="k">'+k+'</div><div class="v '+(c||'')+'">'+v+'</div></div>'; }
 
   document.addEventListener('click',function(e){ var b=e.target.closest('[data-lay]'); if(!b) return; e.stopPropagation(); var d=document.getElementById('lay-'+b.getAttribute('data-lay')); if(d) d.hidden=!d.hidden; },true);
 
+  // Resolve links after shared state loads so saved sprint moves are respected.
+  var ticketLinkHandled=false;
+  function linkedTicketId(search){ var id=new URLSearchParams(search).get('ticket'); return id&&/^[A-Za-z0-9-]+$/.test(id)?id:null; }
+  function ticketURL(id){ return 'sprint_tracker_launch.html?ticket='+encodeURIComponent(id); }
+  function openTicketLink(){
+    var id=linkedTicketId(location.search); if(!id) return;
+    var t=all().filter(function(x){return x.id===id;})[0];
+    if(!t){ toast('Ticket not found: '+id,true); return; }
+    F={who:'',status:'',pr:'',q:'',layer:''}; VIEW='list'; OPEN={}; OPEN[id]=true;
+    ['f-status','f-pr','f-q'].forEach(function(k){document.getElementById(k).value='';});
+    if(sp(t)==='BL'){ MAPWHO=''; MAPSEL=id; showTab('map'); }
+    else { SEL=sp(t); showTab('tracker'); }
+    requestAnimationFrame(function(){ var el=sp(t)==='BL'?document.getElementById('map-det'):document.querySelector('[data-det="'+id+'"]'); if(el){el.scrollIntoView({block:'center'});el.setAttribute('tabindex','-1');el.focus({preventScroll:true});} });
+  }
+  window.addEventListener('popstate',openTicketLink);
+
   /* ---- boot ---- */
   (function(){ var n=days(TODAY,LAUNCH.public); var el=document.getElementById('hdr-count'); if(el) el.innerHTML='<b>'+n+'</b> days &middot; '+esc(LAUNCH.short); document.querySelectorAll('.l-long').forEach(function(e){ e.textContent=LAUNCH.long; }); })();
-  function renderAll(){ if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='features') renderFeatures(); else if(TAB==='layman') renderLayman(); else if(TAB==='map') renderMap(); else if(TAB==='backlog') renderBacklog(); else if(TAB.indexOf('track-')===0) renderTrack(TAB.slice(6)); else renderPerf(); }
+  function renderAll(){ if(D.reconciliation){ document.getElementById('evidence-status').textContent='Status baseline: shared board checked '+D.reconciliation.as_of+' · 14 completed launch tickets reconciled. Later saved updates apply. December target 15 Dec, absolute latest 20 Dec; other planning dates remain provisional. The old 7 September N1 calendar override is superseded.'; } if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='features') renderFeatures(); else if(TAB==='layman') renderLayman(); else if(TAB==='map') renderMap(); else if(TAB==='backlog') renderBacklog(); else if(TAB.indexOf('track-')===0) renderTrack(TAB.slice(6)); else renderPerf(); }
   document.getElementById('btn-refresh').addEventListener('click',load);
   try{ var lt=localStorage.getItem('artemis_launch_tab'); if(lt) showTab(lt); }catch(e){}
   load();
