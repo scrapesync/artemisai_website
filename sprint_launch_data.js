@@ -14863,7 +14863,7 @@ window.LAUNCH_DATA = {
       "sprint": "N1",
       "assignee": "Filza",
       "title": "Prepare landing privacy notice and tracking decisions",
-      "what": "Review the existing landing and all public pages using analytics. Supply publishable privacy and cookie/measurement wording; identify each tool, data purpose, notice, consent or opt-out treatment and required behaviour for Asad. Filza verifies current applicable guidance and records the reason for each decision. Check existing waitlist collection and document any remediation. The 19 September milestone is a design handoff, not a production launch. Obtain network evidence that accept, decline and withdrawal work before implementation is signed off.",
+      "what": "Review the existing landing and all public pages using analytics. Supply publishable privacy and cookie/measurement wording; identify each tool, data purpose, notice, consent or opt-out treatment and required behaviour for Saad. Filza verifies current applicable guidance and records the reason for each decision. Check existing waitlist collection and document any remediation. The 19 September milestone is a design handoff, not a production launch. Obtain network evidence that accept, decline and withdrawal work before implementation is signed off.",
       "why": "The landing already collects pilot-waitlist names via Netlify Forms; collecting without a notice is the first thing a reviewer or a pilot's advisor notices.",
       "area": "Landing",
       "due": "2026-09-25",
@@ -14871,7 +14871,7 @@ window.LAUNCH_DATA = {
       "priority_reason": "Required N1 legal handoff. Complete by the sprint gate; supply prerequisites before dependent work starts.",
       "depends_on": [
         "N1-FZ-08",
-        "Asad: landing live Fri 12 Sep"
+        "Saad: actual landing forms and tracking behaviour; design handoff is not deployment"
       ],
       "feeds": [
         "N1-AS-11",
@@ -14880,7 +14880,7 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N1",
       "source": "plan",
-      "acceptance": "Publishable wording and a tool-by-tool decision record are with Asad; existing collection gaps and remediation are recorded, with implementation checks and evidence owners identified.",
+      "acceptance": "Publishable wording and a tool-by-tool decision record are with Saad; existing collection gaps and remediation are recorded, with implementation checks and evidence owners identified.",
       "checklist": [
         "Inventory public-page forms and tracking tools with Asad and Muteeb",
         "Record the notice, consent or opt-out decision and reason for each tool",
@@ -14888,10 +14888,10 @@ window.LAUNCH_DATA = {
         "Record existing collection gaps and required remediation",
         "Review accept, decline and withdrawal evidence before implementation sign-off"
       ],
-      "layman": "Review the existing landing and all public pages using analytics. Supply publishable privacy and cookie/measurement wording; identify each tool, data purpose, notice, consent or opt-out treatment and required behaviour for Asad. Filza verifies current applicable guidance and records the reason for each decision. Check existing waitlist collection and document any remediation. The 19 September milestone is a design handoff, not a production launch. Obtain network evidence that accept, decline and withdrawal work before implementation is signed off.",
+      "layman": "Review the existing landing and all public pages using analytics. Supply publishable privacy and cookie/measurement wording; identify each tool, data purpose, notice, consent or opt-out treatment and required behaviour for Saad. Filza verifies current applicable guidance and records the reason for each decision. Check existing waitlist collection and document any remediation. The 19 September milestone is a design handoff, not a production launch. Obtain network evidence that accept, decline and withdrawal work before implementation is signed off.",
       "layman_analogy": "Like putting the hygiene certificate and allergen notice up before the cafe's opening day - visible at the door, with no sneaky extras slipped onto the plate.",
-      "layman_needed": "Publishable wording and a tool-by-tool decision record are with Asad; existing collection gaps and remediation are recorded, with implementation checks and evidence owners identified.",
-      "layman_output": "A notice pack for Asad, a tracking decision table, a record of existing gaps and a checklist for proving the implemented controls work. Design handoff is separate from going live.",
+      "layman_needed": "Publishable wording and a tool-by-tool decision record are with Saad; existing collection gaps and remediation are recorded, with implementation checks and evidence owners identified.",
+      "layman_output": "A notice pack for Saad, a tracking decision table, a record of existing gaps and a checklist for proving the implemented controls work. Design handoff is separate from going live.",
       "timebox_days": 0.5,
       "launch_stage": "beta",
       "estimated_days": 0.5,
@@ -14908,7 +14908,7 @@ window.LAUNCH_DATA = {
       "id": "N1-FZ-10",
       "sprint": "N1",
       "assignee": "Filza",
-      "title": "Draft the Meta Data Deletion callback spec for Muteeb",
+      "title": "Draft the data-deletion specification with Asad and Muteeb",
       "what": "Write the Meta deletion-request specification with Muteeb: verify the request, identify the correct customer and page, list all affected stores, define the deletion steps, confirmation code, status URL and audit log. Define how in-app disconnect uses the same agreed route. Include credentials, warehouse records, predictions, labels, search vectors and assistant memory, with any legally required exceptions reviewed explicitly. Record technical questions for N2 finalisation; this N1 task hands over a specification, not a tested endpoint.",
       "why": "Muteeb builds the endpoint in N2 week B and it is required for App Review; an under-specified callback costs a 20-day cycle.",
       "area": "Meta",
@@ -14943,7 +14943,8 @@ window.LAUNCH_DATA = {
       },
       "deadline_note": "Complete the N1 deliverable by Friday 25 September. Preparatory work must clearly record any unbuilt feature or missing input.",
       "checklist_revised_at": "2026-09-17T09:47:24.081Z",
-      "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident."
+      "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident.",
+      "workload_note": "Filza owns the legal deletion requirements. Asad owns the planned removal backend; Muteeb supplies infrastructure and store details; Saad implements customer controls. N1 delivers a specification, not a claim that the integration works."
     },
     {
       "id": "N1-FZ-11",

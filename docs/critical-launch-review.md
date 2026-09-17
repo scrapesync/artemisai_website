@@ -1,5 +1,7 @@
 # ArtemisAI launch: critical review across 12 roles
 
+**Role/workload update:** the subsequent [confirmed-role allocation](workload-rebalance.md) supersedes ownership and capacity figures below. Saad leads frontend; Asad, Muteeb and Faheem share backend; Lewis is a limited data partner. The findings below are the earlier audit record.
+
 17 September 2026. Public launch remains **15 December 2026**. N1 ends **Friday 25 September**. The existing eight-person team is the resource limit.
 
 **Verdict: broad coverage, but delivery feasibility is RED.** The plan contains the main product, engineering, AI, design, commercial, operational and legal work. That does not prove the work can fit. The inherited 16 September capacity baseline is **606.25 effort days against 312 available days**, before confirmed remaining estimates and leave. This is already optimistic as time passes. Moving dates or halving a ticket's wording cannot create capacity.
