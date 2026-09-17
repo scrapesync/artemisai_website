@@ -9857,6 +9857,66 @@ window.LAUNCH_DATA = {
       },
       "layer": "launch",
       "parked_from": "LW"
+    },
+    {
+      "id": "N6-JL-12",
+      "sprint": "BL",
+      "assignee": "Jill",
+      "title": "Decide and set up Play pre-registration / App Store 'Coming Soon'",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Decide whether to run Play pre-registration and an App Store pre-order/Coming-Soon page to capture installs before 15 Dec, and set it up if yes. A growth lever, not launch-blocking.",
+      "why": "Pre-registration can seed day-one installs and ranking, but it is optional and can be decided after the launch essentials.",
+      "area": "Marketing",
+      "due": "",
+      "priority": "P2",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "none",
+      "source": "plan",
+      "acceptance": "A decision is recorded; if yes, the store pre-registration/Coming-Soon pages are live.",
+      "checklist": [],
+      "layman": "Pre-registration can seed day-one installs and ranking, but it is optional and can be decided after the launch essentials.",
+      "layman_analogy": "",
+      "layman_needed": "A decision is recorded; if yes, the store pre-registration/Coming-Soon pages are live.",
+      "layman_output": "A decision is recorded; if yes, the store pre-registration/Coming-Soon pages are live.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "backlog",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "layer": "launch",
+      "parked_from": "N6"
+    },
+    {
+      "id": "N6-AX-12",
+      "sprint": "BL",
+      "assignee": "Alex",
+      "title": "Decide Apple Search Ads brand-term defence for launch",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Decide whether to run a small Apple Search Ads campaign on the brand term so competitors cannot bid on 'ArtemisAI' at launch. Budget-gated, optional, post-launch-decidable.",
+      "why": "Competitors bidding on your brand term can siphon installs, but this is an optional paid lever, not a launch blocker.",
+      "area": "Marketing",
+      "due": "",
+      "priority": "P2",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "none",
+      "source": "plan",
+      "acceptance": "A go/no-go decision on brand-term Search Ads is recorded with a budget if yes.",
+      "checklist": [],
+      "layman": "Competitors bidding on your brand term can siphon installs, but this is an optional paid lever, not a launch blocker.",
+      "layman_analogy": "",
+      "layman_needed": "A go/no-go decision on brand-term Search Ads is recorded with a budget if yes.",
+      "layman_output": "A go/no-go decision on brand-term Search Ads is recorded with a budget if yes.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "backlog",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "layer": "launch",
+      "parked_from": "LW"
     }
   ],
   "features": [
@@ -9901,7 +9961,8 @@ window.LAUNCH_DATA = {
         "N2-AX-18",
         "N3-FH-31",
         "N4-FH-25",
-        "N3-MT-28"
+        "N3-MT-28",
+        "N3-AS-28"
       ],
       "kind": "surface",
       "scope": "active"
@@ -9970,7 +10031,10 @@ window.LAUNCH_DATA = {
         "N4-AS-29",
         "N3-SD-20",
         "N4-MT-36",
-        "N5-MT-28"
+        "N5-MT-28",
+        "N6-MT-11",
+        "N4-FH-31",
+        "N3-FH-35"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10015,7 +10079,9 @@ window.LAUNCH_DATA = {
         "N4-AS-05",
         "N1-AS-03",
         "N2-AS-03",
-        "N3-AS-10"
+        "N3-AS-10",
+        "N4-MT-46",
+        "N5-SD-21"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10096,7 +10162,11 @@ window.LAUNCH_DATA = {
         "N4-FH-28",
         "N4-FH-29",
         "N4-FH-30",
-        "N5-SD-20"
+        "N5-SD-20",
+        "N4-MT-47",
+        "N4-MT-48",
+        "N5-MT-30",
+        "N4-SD-21"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10121,7 +10191,9 @@ window.LAUNCH_DATA = {
         "N4-MT-37",
         "N4-MT-41",
         "N5-FH-12",
-        "N3-FH-34"
+        "N3-FH-34",
+        "N4-FH-32",
+        "N5-FH-13"
       ],
       "what": "Pilot types a draft; the virality gauge + driver chips move as they type, warning before a flop is published.",
       "why": "The PREDICT promise and the demo wow moment. Descriptive charts are free everywhere; this is not.",
@@ -10188,7 +10260,8 @@ window.LAUNCH_DATA = {
         "N4-MT-17",
         "P0-FH-14",
         "N5-SD-16",
-        "N3-SD-15"
+        "N3-SD-15",
+        "N5-AS-28"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10231,7 +10304,8 @@ window.LAUNCH_DATA = {
         "P0-AS-18",
         "N5-SD-16",
         "N5-SD-19",
-        "N4-AS-26"
+        "N4-AS-26",
+        "N6-AS-15"
       ],
       "kind": "surface",
       "scope": "deferred"
@@ -10270,7 +10344,10 @@ window.LAUNCH_DATA = {
         "N6-SD-11",
         "N6-SD-12",
         "N1-SD-18",
-        "N4-SD-14"
+        "N4-SD-14",
+        "N4-MT-49",
+        "N6-SD-15",
+        "N4-FZ-18"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10326,7 +10403,8 @@ window.LAUNCH_DATA = {
         "N2-MT-23",
         "N4-MT-32",
         "N3-AS-25",
-        "N2-MT-22"
+        "N2-MT-22",
+        "N3-SD-21"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10400,7 +10478,8 @@ window.LAUNCH_DATA = {
         "N3-JL-17",
         "N1-AX-21",
         "N4-SD-17",
-        "N3-AX-05"
+        "N3-AX-05",
+        "N6-SD-14"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10624,7 +10703,8 @@ window.LAUNCH_DATA = {
         "N5-MT-27",
         "N3-AS-27",
         "N4-MT-44",
-        "N5-AS-27"
+        "N5-AS-27",
+        "N4-MT-45"
       ],
       "kind": "foundation",
       "scope": "active"
@@ -10867,7 +10947,19 @@ window.LAUNCH_DATA = {
         "N2-FZ-20",
         "N3-FZ-23",
         "N4-FZ-16",
-        "BL-FZ-01"
+        "BL-FZ-01",
+        "N5-SD-22",
+        "N2-AX-19",
+        "N6-AX-10",
+        "N6-AX-11",
+        "N4-JL-12",
+        "N6-JL-11",
+        "N4-FZ-17",
+        "N3-FZ-24",
+        "N5-FZ-15",
+        "N5-FZ-16",
+        "N6-JL-12",
+        "N6-AX-12"
       ],
       "scope": "active"
     },
@@ -38254,7 +38346,7 @@ window.LAUNCH_DATA = {
       "layer": "app",
       "assignee": "Muteeb",
       "title": "Native push: APNs + FCM from the same alerts worker",
-      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). The worker that already sends SES email and web push gains APNs and FCM delivery. Same quiet hours, same dedup, same kill switch. Added in the 16 Sep review: In the shell, ask for notification permission only after the first alert, with a pre-prompt and a route to system settings after denial, and register device tokens per user and tenant, removing them on sign-out, page disconnect and account deletion. Use separate Android channels for crisis and digest, the iOS time-sensitive level for crisis alerts only, and lock-screen text that shows the hook but never comment content.",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). The worker that already sends SES email and web push gains APNs and FCM delivery. Same quiet hours, same dedup, same kill switch. Added in the 16 Sep review: In the shell, ask for notification permission only after the first alert, with a pre-prompt and a route to system settings after denial, and register device tokens per user and tenant, removing them on sign-out, page disconnect and account deletion. Use separate Android channels for crisis and digest, the iOS time-sensitive level for crisis alerts only, and lock-screen text that shows the hook but never comment content. 18 Sep audit: also add a persistent, dismissible 'crisis alerts are off' nudge while notification permission is denied, so a pilot never silently misses a storm.",
       "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
       "area": "Mobile app",
       "due": "2026-11-13",
@@ -38320,7 +38412,7 @@ window.LAUNCH_DATA = {
       "layer": "app",
       "assignee": "Filza",
       "title": "Privacy labels + data-safety forms from the DPA",
-      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). Apple privacy nutrition labels and Google data-safety form, derived from the signed DPA and sub-processor list so the store filings and the legal papers never disagree.",
+      "what": "18 Sep audit: HARD pre-submission gate (not January); labels reconciled with the DPA and BL-LL-24 before BL-APP-07 submits. Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). Apple privacy nutrition labels and Google data-safety form, derived from the signed DPA and sub-processor list so the store filings and the legal papers never disagree.",
       "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
       "area": "Mobile app",
       "due": "2026-11-13",
@@ -42201,6 +42293,954 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
       }
+    },
+    {
+      "id": "N4-MT-45",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Meta Graph call-budget governor with cross-consumer priority arbitration",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): One governor in front of the Meta client (N1-MT-05) that allocates the app's Graph rate/quota across all consumers — crisis fast-lane polling (N2-MT-07), nightly batch scoring, connect/health reads, on-demand Art-E — with priorities, per-consumer ceilings, fair-share when near the cap, and shedding of low-priority calls before a 429. Reactive backoff (N1-MT-05) and the dependency alarms (N4-MT-21) stay; this adds proactive arbitration.",
+      "why": "At launch four subsystems share one Meta rate budget; without arbitration a batch run or an Art-E burst can starve crisis polling and miss the 15-minute promise.",
+      "area": "Platform",
+      "due": "2026-11-01",
+      "priority": "P0",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N1-MT-05",
+        "N2-MT-07"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Under a synthetic burst on staging, crisis polling keeps its share while low-priority calls shed; no consumer can exhaust the budget and 429 another.",
+      "checklist": [],
+      "layman": "At launch four subsystems share one Meta rate budget; without arbitration a batch run or an Art-E burst can starve crisis polling and miss the 15-minute promise.",
+      "layman_analogy": "",
+      "layman_needed": "Under a synthetic burst on staging, crisis polling keeps its share while low-priority calls shed; no consumer can exhaust the budget and 429 another.",
+      "layman_output": "Under a synthetic burst on staging, crisis polling keeps its share while low-priority calls shed; no consumer can exhaust the budget and 429 another.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 1.5,
+      "timebox_days": 1.5
+    },
+    {
+      "id": "N4-MT-46",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Connected-pages read model + endpoint with per-page connection health",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Build the served read model behind the pages/health feature: list the tenant's connected pages with per-page connection health (token valid/expiring/revoked from N1-MT-09), last-sync freshness, and the all-pages/one-page workspace filter. N1-AS-05 defines it in the contract only; N2-AS-03 is the connect UI; N4-MT-24 detects access loss — nothing serves the list+health the Today/Settings/health-pill surfaces read.",
+      "why": "The workspace switcher, the connected-pages view and the health pill are all launch surfaces with no endpoint to read from.",
+      "area": "API",
+      "due": "2026-11-01",
+      "priority": "P0",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N1-MT-09"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "GET returns the tenant's pages with health and freshness, tenant- and page-scoped with a leakage test; a revoked page shows disconnected within one refresh; the all-pages/one-page filter is honoured.",
+      "checklist": [],
+      "layman": "The workspace switcher, the connected-pages view and the health pill are all launch surfaces with no endpoint to read from.",
+      "layman_analogy": "",
+      "layman_needed": "GET returns the tenant's pages with health and freshness, tenant- and page-scoped with a leakage test; a revoked page shows disconnected within one refresh; the all-pages/one-page filter is honoured.",
+      "layman_output": "GET returns the tenant's pages with health and freshness, tenant- and page-scoped with a leakage test; a revoked page shows disconnected within one refresh; the all-pages/one-page filter is honoured.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 1.5,
+      "timebox_days": 1.5
+    },
+    {
+      "id": "N4-MT-47",
+      "sprint": "N6",
+      "assignee": "Muteeb",
+      "title": "One shared metric-computation service for product surfaces AND Art-E tools",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Promote the vetted metric functions (N4-FH-15) into one tenant-scoped service that BOTH the product surfaces (Today, briefing, drafts drivers) and the Art-E tools layer (N4-MT-38) call, so a number shown on a screen and the same number quoted by Art-E come from identical code. Single source, cached, versioned; replaces per-surface arithmetic.",
+      "why": "If Today computes a metric one way and Art-E another, they will disagree in front of the customer — fatal for a product whose whole promise is trustworthy numbers.",
+      "area": "ML backend",
+      "due": "2026-11-20",
+      "priority": "P0",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N4-FH-15"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "Both a product surface and an Art-E answer for the same metric/page/date return byte-identical values in a test; no surface computes metrics locally.",
+      "checklist": [],
+      "layman": "If Today computes a metric one way and Art-E another, they will disagree in front of the customer — fatal for a product whose whole promise is trustworthy numbers.",
+      "layman_analogy": "",
+      "layman_needed": "Both a product surface and an Art-E answer for the same metric/page/date return byte-identical values in a test; no surface computes metrics locally.",
+      "layman_output": "Both a product surface and an Art-E answer for the same metric/page/date return byte-identical values in a test; no surface computes metrics locally.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 2,
+      "timebox_days": 2
+    },
+    {
+      "id": "N4-MT-48",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Expose model outputs (flop score+drivers, crisis verdict+reason, best-times) as an Art-E grounding source",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Index/serve the models' own outputs — flop score and driver chips, crisis verdict and reason, best-times cells — as a first-class grounding source for Art-E, so 'why did my post flop?' and 'is this a crisis?' are answered from the model's actual output with citations, not re-derived. N4-MT-40 embeds posts/comments/insights only; model outputs are absent from what Art-E can retrieve.",
+      "why": "Art-E cannot explain the product's own predictions unless the predictions are something it can retrieve and cite.",
+      "area": "ML backend",
+      "due": "2026-11-01",
+      "priority": "P0",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N4-MT-40",
+        "N3-FH-33"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Art-E answers 'why did this post score low' by citing the flop driver chips and 'is this a storm' from the crisis verdict, both grounded and version-stamped.",
+      "checklist": [],
+      "layman": "Art-E cannot explain the product's own predictions unless the predictions are something it can retrieve and cite.",
+      "layman_analogy": "",
+      "layman_needed": "Art-E answers 'why did this post score low' by citing the flop driver chips and 'is this a storm' from the crisis verdict, both grounded and version-stamped.",
+      "layman_output": "Art-E answers 'why did this post score low' by citing the flop driver chips and 'is this a storm' from the crisis verdict, both grounded and version-stamped.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 1.5,
+      "timebox_days": 1.5
+    },
+    {
+      "id": "N4-MT-49",
+      "sprint": "N5",
+      "assignee": "Muteeb",
+      "title": "Onboarding ingest health check + stall alert (per-page backfill SLA)",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): A check+alert on the new-tenant backfill: when a page connects, its 90-days-first ingest (N3-MT-10) must reach a usable state within an SLA; alert if a page's ingest stalls or misses the SLA so onboarding never silently shows an empty app. N4-MT-44's seven checks do not include ingest; N3-MT-10 emits completion events but nothing pages on a stall.",
+      "why": "The 'learning, not loading' onboarding promise breaks silently if a new page's backfill stalls and no one is told.",
+      "area": "ML backend",
+      "due": "2026-11-04",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N3-MT-10"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "A deliberately stalled backfill on staging raises the alert within the SLA; the check is registered and on the QA Control Center.",
+      "checklist": [],
+      "layman": "The 'learning, not loading' onboarding promise breaks silently if a new page's backfill stalls and no one is told.",
+      "layman_analogy": "",
+      "layman_needed": "A deliberately stalled backfill on staging raises the alert within the SLA; the check is registered and on the QA Control Center.",
+      "layman_output": "A deliberately stalled backfill on staging raises the alert within the SLA; the check is registered and on the QA Control Center.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N5-MT-30",
+      "sprint": "N5",
+      "assignee": "Muteeb",
+      "title": "Best Times as an Art-E metric tool, or a timing-answer guardrail at launch",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Best-times serving (N3-MT-04) and Art-E-from-best-times (N4-MT-19) are both parked post-launch, so at launch Art-E can be asked 'when should I post?' with no grounded source. Either expose a read-only best-times tool to the Art-E tools layer, or add an explicit guardrail so timing questions are answered with an honest 'not available yet' instead of a hallucinated time.",
+      "why": "A posting-intelligence product that invents a posting time when asked is worse than one that declines.",
+      "area": "ML backend",
+      "due": "2026-11-15",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N4-MT-38"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Asked a timing question, Art-E either cites the best-times tool or clearly declines; it never invents a time. Decision (expose vs guardrail) recorded.",
+      "checklist": [],
+      "layman": "A posting-intelligence product that invents a posting time when asked is worse than one that declines.",
+      "layman_analogy": "",
+      "layman_needed": "Asked a timing question, Art-E either cites the best-times tool or clearly declines; it never invents a time. Decision (expose vs guardrail) recorded.",
+      "layman_output": "Asked a timing question, Art-E either cites the best-times tool or clearly declines; it never invents a time. Decision (expose vs guardrail) recorded.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.75,
+      "timebox_days": 0.75
+    },
+    {
+      "id": "N6-MT-11",
+      "sprint": "N6",
+      "assignee": "Muteeb",
+      "title": "Runtime health check + alert for the reply-draft and next-move generation service",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Add a live health check and alert for the generation service behind drafted crisis replies and next-move suggestions (N5-MT-28): error rate, guard-block rate, latency, empty-output rate; routed through the alert matrix. N4-MT-44 watches Art-E Q&A answer/refusal but not the generation service.",
+      "why": "A drafted-reply service that silently fails during a real storm leaves the customer with no suggested action at the worst moment.",
+      "area": "Platform",
+      "due": "2026-11-29",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N5-MT-28"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "A forced failure of the generation path raises the alert; the check is on the QA Control Center and in N5-MT-28's runbook.",
+      "checklist": [],
+      "layman": "A drafted-reply service that silently fails during a real storm leaves the customer with no suggested action at the worst moment.",
+      "layman_analogy": "",
+      "layman_needed": "A forced failure of the generation path raises the alert; the check is on the QA Control Center and in N5-MT-28's runbook.",
+      "layman_output": "A forced failure of the generation path raises the alert; the check is on the QA Control Center and in N5-MT-28's runbook.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N4-FH-31",
+      "sprint": "N4",
+      "assignee": "Faheem",
+      "title": "Language-ID gate on every NLP and Art-E input; non-supported languages abstain",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): A language-identification step in front of the post/comment NLP models and Art-E: inputs in unsupported languages route to an explicit abstain/label rather than being scored or answered as if English. Declare the supported-language set; log the abstain rate. Only 2027 multi-language (BL-LA-13) and a legal language-check exist today; the cut N4-FH-19 was English-dialect only.",
+      "why": "Feeding non-English comments to English-only models yields silent nonsense — wrong crisis verdicts and ungrounded Art-E answers on content we cannot read.",
+      "area": "Models",
+      "due": "2026-11-01",
+      "priority": "P0",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Non-supported-language inputs abstain with a clear state on every model path and in Art-E; supported set declared; abstain rate on the scorecard.",
+      "checklist": [],
+      "layman": "Feeding non-English comments to English-only models yields silent nonsense — wrong crisis verdicts and ungrounded Art-E answers on content we cannot read.",
+      "layman_analogy": "",
+      "layman_needed": "Non-supported-language inputs abstain with a clear state on every model path and in Art-E; supported set declared; abstain rate on the scorecard.",
+      "layman_output": "Non-supported-language inputs abstain with a clear state on every model path and in Art-E; supported set declared; abstain rate on the scorecard.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N3-FH-35",
+      "sprint": "N3",
+      "assignee": "Faheem",
+      "title": "Dialect and banter precision control on the toxicity-to-crisis path",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): A precision control so playful banter, in-group insults and dialect are not escalated as a crisis: a banter/false-positive slice with a target FP rate, threshold or classifier adjustment on the toxicity→crisis handoff (N2-FH-09), measured on the incident window plus a banter set. N2-FH-05 fixed recall only; the disaggregated slice (N4-FH-19) was cut.",
+      "why": "A comment-storm alarm that cries wolf on ordinary banter trains pilots to ignore it — the fastest way to kill the flagship feature's trust.",
+      "area": "Alerts",
+      "due": "2026-10-18",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N2-FH-09"
+      ],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "On a labelled banter+dialect set the crisis path holds a stated false-positive ceiling without losing must-catch recall; result on the scorecard.",
+      "checklist": [],
+      "layman": "A comment-storm alarm that cries wolf on ordinary banter trains pilots to ignore it — the fastest way to kill the flagship feature's trust.",
+      "layman_analogy": "",
+      "layman_needed": "On a labelled banter+dialect set the crisis path holds a stated false-positive ceiling without losing must-catch recall; result on the scorecard.",
+      "layman_output": "On a labelled banter+dialect set the crisis path holds a stated false-positive ceiling without losing must-catch recall; result on the scorecard.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N4-FH-32",
+      "sprint": "N4",
+      "assignee": "Faheem",
+      "title": "Add OCR and content-type fusion to model freshness, alert rules and the scorecard",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): The already-shipped OCR cascade and content-type fusion classifier feed flop scoring and Art-E but are absent from freshness (N1-FH-11), the alert rules (N3-FH-28) and the scorecard (N3-FH-27), which cover six models only. Add them so every running model is monitored, alerted and scored.",
+      "why": "A model that is live but unmonitored is exactly how the flop label broke in July without anyone being paged.",
+      "area": "Models",
+      "due": "2026-11-01",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "OCR and fusion appear on the scorecard with freshness, drift and an alert rule each; a staged staleness fires the alert.",
+      "checklist": [],
+      "layman": "A model that is live but unmonitored is exactly how the flop label broke in July without anyone being paged.",
+      "layman_analogy": "",
+      "layman_needed": "OCR and fusion appear on the scorecard with freshness, drift and an alert rule each; a staged staleness fires the alert.",
+      "layman_output": "OCR and fusion appear on the scorecard with freshness, drift and an alert rule each; a staged staleness fires the alert.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N5-FH-13",
+      "sprint": "N6",
+      "assignee": "Faheem",
+      "title": "AI-quality incident: declaration criteria and feature-pull authority runbook",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Written criteria for when an AI-quality problem becomes a declared incident (accuracy/false-alarm/hallucination thresholds, customer-visible harm), who is authorised to pull a model or a feature (kill switch N6-MT-04 / flags N6-AS-03 are the mechanism; this is the decision), the comms tie-in (Alex's playbook), and the review afterwards. Distinct from the pipeline-outage game-day (N6-MT-01).",
+      "why": "When a model starts saying something harmful, the team must already know who can turn it off and on what trigger — not debate it live.",
+      "area": "QA",
+      "due": "2026-11-23",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N6-MT-04"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "The runbook names thresholds, the pull authority per model/feature, and the escalation; rehearsed once against a simulated bad-output event.",
+      "checklist": [],
+      "layman": "When a model starts saying something harmful, the team must already know who can turn it off and on what trigger — not debate it live.",
+      "layman_analogy": "",
+      "layman_needed": "The runbook names thresholds, the pull authority per model/feature, and the escalation; rehearsed once against a simulated bad-output event.",
+      "layman_output": "The runbook names thresholds, the pull authority per model/feature, and the escalation; rehearsed once against a simulated bad-output event.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N3-AS-28",
+      "sprint": "N4",
+      "assignee": "Asad",
+      "title": "Drafts persistence service + BFF CRUD behind the composer (autosave upsert, restore, soft-delete)",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Build the tenant- and page-scoped draft document store and BFF routes the N2-AS-06 composer writes to: create/update (autosave upsert), get (restore-on-reload), soft-delete, and the drain target for the N4-SD-20 offline queue. Reuse RLS (N1-MT-08), the Idempotency-Key contract (N2-AS-17), and register the drafts table in deletion/deauthorise and DSAR (N2-MT-06/N3-MT-24). Decide first with Saad whether the native app persists drafts on-device instead (which would descope this to post-launch cross-device sync).",
+      "why": "The Drafts composer is specified to autosave to the server with restore-on-reload, but only the stateless draft-SCORE endpoint exists — at launch autosave writes to a 404 and a pilot loses their post on reload or backgrounding.",
+      "area": "App core",
+      "due": "2026-10-21",
+      "priority": "P0",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N1-MT-08",
+        "N2-AS-17"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "A draft autosaved on staging survives reload and reappears exactly; routes are tenant/page-scoped with a leakage test; a replayed autosave creates no duplicate; page disconnect and account deletion remove the drafts.",
+      "checklist": [],
+      "layman": "The Drafts composer is specified to autosave to the server with restore-on-reload, but only the stateless draft-SCORE endpoint exists — at launch autosave writes to a 404 and a pilot loses their post on reload or backgrounding.",
+      "layman_analogy": "",
+      "layman_needed": "A draft autosaved on staging survives reload and reappears exactly; routes are tenant/page-scoped with a leakage test; a replayed autosave creates no duplicate; page disconnect and account deletion remove the drafts.",
+      "layman_output": "A draft autosaved on staging survives reload and reappears exactly; routes are tenant/page-scoped with a leakage test; a replayed autosave creates no duplicate; page disconnect and account deletion remove the drafts.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 1.5,
+      "timebox_days": 1.5
+    },
+    {
+      "id": "N5-AS-28",
+      "sprint": "N5",
+      "assignee": "Asad",
+      "title": "'Remind me at this time': implement the reminder delivery for the Today and Drafts CTAs",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): The 'Remind me' CTA on the Today next-move hero and the Drafts pack is the deliberate launch replacement for scheduling, and currently does nothing. Decide the mechanism (prefer on-device local notification via the Capacitor plugin — no backend, fires when the app is closed, timezone-correct; fall back to a server reminder store + dispatch only if cross-device is required) and wire schedule/cancel from both CTAs, suppressed in quiet hours (N3-AS-11), with a permission pre-prompt and a Settings toggle. Excludes the deferred true-scheduling upgrade (BL-PR-13).",
+      "why": "The headline 'post at the best time' promise is a dead button on the primary screen at launch.",
+      "area": "App core",
+      "due": "2026-11-15",
+      "priority": "P0",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N1-AS-20"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "A reminder set from Today or Drafts on a device build fires once at the chosen local time, is suppressed in quiet hours, cancels/reschedules idempotently, and the mechanism decision is recorded.",
+      "checklist": [],
+      "layman": "The headline 'post at the best time' promise is a dead button on the primary screen at launch.",
+      "layman_analogy": "",
+      "layman_needed": "A reminder set from Today or Drafts on a device build fires once at the chosen local time, is suppressed in quiet hours, cancels/reschedules idempotently, and the mechanism decision is recorded.",
+      "layman_output": "A reminder set from Today or Drafts on a device build fires once at the chosen local time, is suppressed in quiet hours, cancels/reschedules idempotently, and the mechanism decision is recorded.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N6-AS-15",
+      "sprint": "N6",
+      "assignee": "Asad",
+      "title": "Store-console acquisition metrics into the launch scoreboard",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Pull App Store Connect and Play Console acquisition data — product-page views, install conversion rate, source — into the launch scoreboard (N5-JL-08) alongside the UTM install attribution (N4-AS-26). The scoreboard today sources GA/waitlist/PH only; the store is now the real top of the funnel.",
+      "why": "On a store-distributed launch, the scoreboard is blind to the biggest funnel step — store impression to install — without the console numbers.",
+      "area": "Analytics",
+      "due": "2026-11-29",
+      "priority": "P2",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N5-JL-08",
+        "N4-AS-26"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "The scoreboard shows store page-views and install-conversion beside the waitlist/PH numbers, refreshed daily.",
+      "checklist": [],
+      "layman": "On a store-distributed launch, the scoreboard is blind to the biggest funnel step — store impression to install — without the console numbers.",
+      "layman_analogy": "",
+      "layman_needed": "The scoreboard shows store page-views and install-conversion beside the waitlist/PH numbers, refreshed daily.",
+      "layman_output": "The scoreboard shows store page-views and install-conversion beside the waitlist/PH numbers, refreshed daily.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N3-SD-21",
+      "sprint": "N3",
+      "assignee": "Saad",
+      "title": "Acceptance one-pagers: Facebook Connect and Connected Pages / Health (pass/fail per state)",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): The same acceptance format as Today/Drafts (N2-SD-02), Best Times/Settings (N2-SD-09), Alerts/Onboarding (N3-SD-20) and Art-E (N3-SD-04), for the two surfaces that have none: the Facebook Connect flow and the Connected Pages/Health view — every state (connecting, permission declined, partial pages, token expired, reconnect) with pass/fail and the Meta permission strings checked.",
+      "why": "Connect is the entry point to the whole product and has no acceptance sheet; UAT cannot judge it.",
+      "area": "PM",
+      "due": "2026-10-18",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N2-SD-02"
+      ],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Two signed one-pagers referenced by the UAT protocol; every Connect and Pages/Health state has a pass/fail line.",
+      "checklist": [],
+      "layman": "Connect is the entry point to the whole product and has no acceptance sheet; UAT cannot judge it.",
+      "layman_analogy": "",
+      "layman_needed": "Two signed one-pagers referenced by the UAT protocol; every Connect and Pages/Health state has a pass/fail line.",
+      "layman_output": "Two signed one-pagers referenced by the UAT protocol; every Connect and Pages/Health state has a pass/fail line.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N4-SD-21",
+      "sprint": "N4",
+      "assignee": "Saad",
+      "title": "Cross-surface handoff + E2E acceptance for the alert/card -> Art-E -> drafted-reply journey",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Make the core 'intelligence comes to you' journey a first-class, tested flow: an alert or card opens the Art-E rail pre-grounded on that post/comment (the context-handoff contract N3-AS-19, currently deferred), Art-E explains, and the drafted-reply hands back to the composer. Specify the handoff payload and add the E2E acceptance; N4-AS-15 tests Q&A and alert-action separately, not the chained journey.",
+      "why": "The product's headline loop spans three surfaces with no contract or end-to-end test binding them; each half can pass while the handoff drops context.",
+      "area": "Art-E",
+      "due": "2026-11-01",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N3-SD-04"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "On staging, tapping an alert opens Art-E grounded on that item and a drafted reply lands in the composer; the E2E flow is green in CI.",
+      "checklist": [],
+      "layman": "The product's headline loop spans three surfaces with no contract or end-to-end test binding them; each half can pass while the handoff drops context.",
+      "layman_analogy": "",
+      "layman_needed": "On staging, tapping an alert opens Art-E grounded on that item and a drafted reply lands in the composer; the E2E flow is green in CI.",
+      "layman_output": "On staging, tapping an alert opens Art-E grounded on that item and a drafted reply lands in the composer; the E2E flow is green in CI.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N6-SD-14",
+      "sprint": "N6",
+      "assignee": "Saad",
+      "title": "Landing 'launched' state: App Store / Play download CTAs and badges, gated on the launch flag",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Build and accept the landing page's post-launch state: the waitlist CTA flips to 'Download on the App Store / Get it on Google Play' with official badges and smart-app-banner, gated on the 15 Dec launch flag and carrying the N4-AS-26 UTM. N6-AS-06 is frozen-build screenshots/SEO; N4-AS-26 assumes the links already exist.",
+      "why": "On launch day the landing page must send visitors to the stores, not a waitlist — with correct, policy-compliant store badges.",
+      "area": "Landing",
+      "due": "2026-11-29",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N4-AS-26"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "Behind the launch flag the landing shows working, badge-compliant store links with UTM; before the flag it still shows the waitlist; verified on device.",
+      "checklist": [],
+      "layman": "On launch day the landing page must send visitors to the stores, not a waitlist — with correct, policy-compliant store badges.",
+      "layman_analogy": "",
+      "layman_needed": "Behind the launch flag the landing shows working, badge-compliant store links with UTM; before the flag it still shows the waitlist; verified on device.",
+      "layman_output": "Behind the launch flag the landing shows working, badge-compliant store links with UTM; before the flag it still shows the waitlist; verified on device.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N6-SD-15",
+      "sprint": "N6",
+      "assignee": "Saad",
+      "title": "Build + accept the first-run AI-consent gate and the report-an-answer control in the app",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Implement BL-LL-24's first-run consent screen (third-party AI processing) as an actual app gate with acceptance, and the in-product 'report this answer' control on Art-E outputs (reusing the thumbs+reason store N4-AS-07). BL-LL-24 is Filza's legal spec; N4-AS-07 is thumbs only — neither builds the consent gate or the report control as accepted surfaces.",
+      "why": "A store AI app must gate third-party AI processing on first run and let users report a bad answer; both are specified but unbuilt.",
+      "area": "Onboarding",
+      "due": "2026-11-29",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N4-AS-07"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "First run shows the consent gate and blocks until accepted; every Art-E answer has a working report control writing to the feedback store; both signed off.",
+      "checklist": [],
+      "layman": "A store AI app must gate third-party AI processing on first run and let users report a bad answer; both are specified but unbuilt.",
+      "layman_analogy": "",
+      "layman_needed": "First run shows the consent gate and blocks until accepted; every Art-E answer has a working report control writing to the feedback store; both signed off.",
+      "layman_output": "First run shows the consent gate and blocks until accepted; every Art-E answer has a working report control writing to the feedback store; both signed off.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N5-SD-21",
+      "sprint": "N5",
+      "assignee": "Saad",
+      "title": "Launch E2E flow: connected-page status + all-pages/one-page filtering",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Add the missing E2E flow for the workspace: connect state per page, the all-pages vs one-page filter across Today/Drafts/Alerts, and the health pill. N5-SD-16 flows 9-14 exclude it and N5-SD-13 (health/pages) is deferred to backlog with the Analytics/health-score work.",
+      "why": "Switching between pages and the all-pages view is a core multi-page interaction with no end-to-end test.",
+      "area": "QA",
+      "due": "2026-11-15",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N4-MT-46"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "The flow is scripted and green in the nightly device matrix: connect health shows correctly and the page filter changes every surface.",
+      "checklist": [],
+      "layman": "Switching between pages and the all-pages view is a core multi-page interaction with no end-to-end test.",
+      "layman_analogy": "",
+      "layman_needed": "The flow is scripted and green in the nightly device matrix: connect health shows correctly and the page filter changes every surface.",
+      "layman_output": "The flow is scripted and green in the nightly device matrix: connect health shows correctly and the page filter changes every surface.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N5-SD-22",
+      "sprint": "N5",
+      "assignee": "Saad",
+      "title": "App Store Optimisation: keyword field, subtitle, promo text and Play descriptions pre-submission",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): The ASO layer BL-APP-04 (icon/splash/screenshots/listing copy) does not cover: the Apple keyword field and subtitle, promotional text, and the Play short/long description written for search, plus category and localisation choices. Do keyword research for the creator/small-business niche and fill these before submission (BL-APP-07).",
+      "why": "Store search is a primary discovery channel for a new app; unoptimised metadata wastes the launch's organic install potential.",
+      "area": "Platform",
+      "due": "2026-11-15",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Keyword field, subtitle, promo text and Play descriptions are drafted from keyword research and loaded before submission; a reviewer signs the copy against the rulebook.",
+      "checklist": [],
+      "layman": "Store search is a primary discovery channel for a new app; unoptimised metadata wastes the launch's organic install potential.",
+      "layman_analogy": "",
+      "layman_needed": "Keyword field, subtitle, promo text and Play descriptions are drafted from keyword research and loaded before submission; a reviewer signs the copy against the rulebook.",
+      "layman_output": "Keyword field, subtitle, promo text and Play descriptions are drafted from keyword research and loaded before submission; a reviewer signs the copy against the rulebook.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N2-AX-19",
+      "sprint": "N2",
+      "assignee": "Alex",
+      "title": "Validate founding price against pilot willingness-to-pay before the 2 Oct lock",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Before pricing is locked on the cost model (N2-AX-07), test the founding price against the five pilots' actual willingness to pay: structured conversations or a simple price-sensitivity check, recorded, feeding the lock. N2-JL-03 is the cost model; N3-AX-01/N3-JL-05 are downstream of the lock; N2-LW-06 answers 'why not Meta's free AI' but does not price-test.",
+      "why": "Locking a price on cost alone, never tested against a customer, risks launching at a number that either leaves money on the table or blocks conversion.",
+      "area": "Finance",
+      "due": "2026-10-04",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N2-JL-03"
+      ],
+      "feeds": [],
+      "gate": "N2",
+      "source": "plan",
+      "acceptance": "A short WTP finding from the pilots is on file before 2 Oct and explicitly feeds N2-AX-07's price decision.",
+      "checklist": [],
+      "layman": "Locking a price on cost alone, never tested against a customer, risks launching at a number that either leaves money on the table or blocks conversion.",
+      "layman_analogy": "",
+      "layman_needed": "A short WTP finding from the pilots is on file before 2 Oct and explicitly feeds N2-AX-07's price decision.",
+      "layman_output": "A short WTP finding from the pilots is on file before 2 Oct and explicitly feeds N2-AX-07's price decision.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N6-AX-10",
+      "sprint": "N6",
+      "assignee": "Alex",
+      "title": "AI/product-failure reputational playbook for launch week",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): A comms playbook for the AI-specific ways this product can embarrass the company publicly — a wrong crisis alarm, a hallucinated or offensive Art-E answer, a bad drafted reply posted by a pilot: holding lines, escalation, who speaks, and the tie to the feature-pull authority (the AI-quality incident runbook). N5-FZ-05 is breach/ICO comms; N6-AX-03 is a privacy/Meta Q&A rehearsal — neither covers an AI-output failure.",
+      "why": "The most likely launch-week embarrassment is the AI saying something wrong in public, and there is no script for it.",
+      "area": "Launch",
+      "due": "2026-11-29",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "The playbook covers the top AI-failure scenarios with holding lines and an escalation path, cross-linked to the incident runbook.",
+      "checklist": [],
+      "layman": "The most likely launch-week embarrassment is the AI saying something wrong in public, and there is no script for it.",
+      "layman_analogy": "",
+      "layman_needed": "The playbook covers the top AI-failure scenarios with holding lines and an escalation path, cross-linked to the incident runbook.",
+      "layman_output": "The playbook covers the top AI-failure scenarios with holding lines and an escalation path, cross-linked to the incident runbook.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N6-AX-11",
+      "sprint": "N6",
+      "assignee": "Alex",
+      "title": "Name a launch-week deputy for CEO external comms and a backup go/no-go chair",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Name and brief a deputy who can run external comms and PH replies if Alex is unavailable during launch week, and a backup chair for the go/no-go decision (N6-AX-07). The BCP (N5-JL-12) names technical key-person cover only; the rotas assign Alex with no backup.",
+      "why": "A single point of failure on the two most time-critical launch-week roles is an avoidable risk.",
+      "area": "Launch",
+      "due": "2026-11-29",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "A named, briefed deputy for CEO comms and a named backup go/no-go chair are recorded in the launch rota.",
+      "checklist": [],
+      "layman": "A single point of failure on the two most time-critical launch-week roles is an avoidable risk.",
+      "layman_analogy": "",
+      "layman_needed": "A named, briefed deputy for CEO comms and a named backup go/no-go chair are recorded in the launch rota.",
+      "layman_output": "A named, briefed deputy for CEO comms and a named backup go/no-go chair are recorded in the launch rota.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.25,
+      "timebox_days": 0.25
+    },
+    {
+      "id": "N4-JL-12",
+      "sprint": "N4",
+      "assignee": "Jill",
+      "title": "Festive-window operational cover: legal/DSAR, manual-purchase queue, burn decision, and vendor payment continuity",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): One continuity plan for the 15 Dec–early-Jan window naming a deputy and runbook for each single-owner operational role: a breach/DSAR deputy plus external-counsel on-call with Filza (N4-JL-06's deputies exclude legal); cover for the manual purchase and Art-E top-up queue (N5-JL-09 defines the queue, names no deputy); a finance/ops decision-maker for the burn read and cap-trip judgment (N6-JL-05); and verification that critical-vendor payment methods will not lapse over the holidays (beyond N3-JL-12's register).",
+      "why": "Launch lands straight into the festive shutdown; every one of these roles is currently a single person with no cover, and a lapsed card or an unanswered DSAR over Christmas is a real, foreseeable failure.",
+      "area": "Ops",
+      "due": "2026-11-01",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N4-JL-06"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Each role has a named deputy and a one-page runbook; vendor payment continuity through January is verified; the plan is in the register and tested in one tabletop.",
+      "checklist": [],
+      "layman": "Launch lands straight into the festive shutdown; every one of these roles is currently a single person with no cover, and a lapsed card or an unanswered DSAR over Christmas is a real, foreseeable failure.",
+      "layman_analogy": "",
+      "layman_needed": "Each role has a named deputy and a one-page runbook; vendor payment continuity through January is verified; the plan is in the register and tested in one tabletop.",
+      "layman_output": "Each role has a named deputy and a one-page runbook; vendor payment continuity through January is verified; the plan is in the register and tested in one tabletop.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N6-JL-11",
+      "sprint": "N6",
+      "assignee": "Jill",
+      "title": "Store rating and review watch + response playbook for launch",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): A daily watch on App Store and Play ratings/reviews from launch, with a response playbook (who replies, tone against the narrative rulebook, when a 1-star triggers a support or engineering ticket) and a rating-drop alert. N6-SD-11 prompts happy users to rate; nothing watches or responds to what lands.",
+      "why": "First-week store ratings decide organic installs, and unanswered 1-star reviews both hurt ranking and lose recoverable customers.",
+      "area": "Ops",
+      "due": "2026-11-29",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "A named owner reviews store ratings daily from launch, responds per the playbook, and a rating-drop below a threshold raises an alert.",
+      "checklist": [],
+      "layman": "First-week store ratings decide organic installs, and unanswered 1-star reviews both hurt ranking and lose recoverable customers.",
+      "layman_analogy": "",
+      "layman_needed": "A named owner reviews store ratings daily from launch, responds per the playbook, and a rating-drop below a threshold raises an alert.",
+      "layman_output": "A named owner reviews store ratings daily from launch, responds per the playbook, and a rating-drop below a threshold raises an alert.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N4-FZ-17",
+      "sprint": "N4",
+      "assignee": "Filza",
+      "title": "Confirm PI/cyber/tech-E&O insurance covers AI errors and media liability",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Confirm the insurance being procured (N1-JL-07 / N5-JL-06) actually covers AI-decision errors, technology E&O and media liability (a wrong crisis call, a harmful drafted reply, an offensive Art-E answer), not just a generic cyber policy; get it in writing and note any exclusion that needs a product mitigation.",
+      "why": "An AI product whose insurance excludes AI-error and media claims is uninsured against its most likely liability.",
+      "area": "Legal",
+      "due": "2026-11-01",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N1-JL-07"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Written confirmation from the broker that AI-error, tech-E&O and media liability are covered, with any exclusion logged and mitigated.",
+      "checklist": [],
+      "layman": "An AI product whose insurance excludes AI-error and media claims is uninsured against its most likely liability.",
+      "layman_analogy": "",
+      "layman_needed": "Written confirmation from the broker that AI-error, tech-E&O and media liability are covered, with any exclusion logged and mitigated.",
+      "layman_output": "Written confirmation from the broker that AI-error, tech-E&O and media liability are covered, with any exclusion logged and mitigated.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N4-FZ-18",
+      "sprint": "N4",
+      "assignee": "Filza",
+      "title": "Clickwrap ToS/Privacy acceptance at signup with a versioned proof-of-acceptance record",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Specify the active-accept mechanism at signup for ToS and Privacy (distinct from PECR/marketing consent, N2-FZ-08) and the evidence captured per user — document version/URL, timestamp, user id — retained as proof and re-prompted on a material version change. N4-FZ-14 is the in-app links spec; N2-FZ-05 publishes the documents; neither captures acceptance.",
+      "why": "Without a versioned proof that each user accepted the current terms, the terms are hard to enforce and a disputed account has no record.",
+      "area": "Legal",
+      "due": "2026-11-01",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N2-FZ-05"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Signup requires active acceptance of ToS+Privacy; a per-user proof record (version, timestamp, id) is stored and a version change re-prompts.",
+      "checklist": [],
+      "layman": "Without a versioned proof that each user accepted the current terms, the terms are hard to enforce and a disputed account has no record.",
+      "layman_analogy": "",
+      "layman_needed": "Signup requires active acceptance of ToS+Privacy; a per-user proof record (version, timestamp, id) is stored and a version change re-prompts.",
+      "layman_output": "Signup requires active acceptance of ToS+Privacy; a per-user proof record (version, timestamp, id) is stored and a version change re-prompts.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N3-FZ-24",
+      "sprint": "N3",
+      "assignee": "Filza",
+      "title": "Document the DPO-necessity position (UK GDPR Art 37) and name the privacy contact point",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): A short signed note recording whether the large-scale monitoring / special-category thresholds require a Data Protection Officer; if not, the reasoning and the named privacy contact point published in the Privacy Policy; if yes, the appointee. Not covered by the children's-code, EU-representative or RoPA tickets.",
+      "why": "Regulators and enterprise buyers ask for the DPO position; an undocumented answer is an accountability gap.",
+      "area": "Legal",
+      "due": "2026-10-18",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "A signed DPO-necessity note is on file and the privacy contact point appears in the Privacy Policy.",
+      "checklist": [],
+      "layman": "Regulators and enterprise buyers ask for the DPO position; an undocumented answer is an accountability gap.",
+      "layman_analogy": "",
+      "layman_needed": "A signed DPO-necessity note is on file and the privacy contact point appears in the Privacy Policy.",
+      "layman_output": "A signed DPO-necessity note is on file and the privacy contact point appears in the Privacy Policy.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.25,
+      "timebox_days": 0.25
+    },
+    {
+      "id": "N5-FZ-15",
+      "sprint": "N6",
+      "assignee": "Filza",
+      "title": "Apple 3.1.1 / Play payments rejection counter-case and a decided commercial fallback",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Prepare the position and fallback for the stores' payments rules: whether the manual purchase / Art-E top-up (N5-JL-09) triggers Apple's 3.1.1 in-app-purchase requirement, the counter-case (external-account / reader / 3.1.3(f) as applicable), and a decided fallback if a store insists on IAP. N6-AS-13's rejection playbook covers 4.2/4.8/5.1.1 only.",
+      "why": "If a store rules our paid flow needs in-app purchase and we have no answer, the app is blocked at review with no plan B days before launch.",
+      "area": "Legal",
+      "due": "2026-11-27",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [
+        "N6-AS-13"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "A written 3.1.1/payments position with a decided fallback commercial flow, attached to the submission and the rejection playbook.",
+      "checklist": [],
+      "layman": "If a store rules our paid flow needs in-app purchase and we have no answer, the app is blocked at review with no plan B days before launch.",
+      "layman_analogy": "",
+      "layman_needed": "A written 3.1.1/payments position with a decided fallback commercial flow, attached to the submission and the rejection playbook.",
+      "layman_output": "A written 3.1.1/payments position with a decided fallback commercial flow, attached to the submission and the rejection playbook.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N5-FZ-16",
+      "sprint": "N5",
+      "assignee": "Filza",
+      "title": "Record the export-compliance encryption determination for both store submissions",
+      "what": "Executive-lens completeness audit (Asad, 18 Sep; CTO/CEO/COO/CMO/CLO/AI-engineer/PM): Record, with Asad, whether the app's encryption (standard HTTPS/TLS plus any plugin crypto) qualifies for the App Store/Play export-compliance exemption, fix the correct submission answer, and determine whether any BIS/French filing is needed. The Capacitor build sets the Info.plist key; no ticket makes the determination.",
+      "why": "A wrong export-compliance answer at submission is a rejection or a later compliance problem, and it is asked on every upload.",
+      "area": "Legal",
+      "due": "2026-11-15",
+      "priority": "P1",
+      "priority_reason": "Genuinely-missing launch item found in the 18 Sep multi-lens audit; verified not covered",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "The export-compliance determination is recorded, the submission answer is set correctly for both stores, and any filing need is decided.",
+      "checklist": [],
+      "layman": "A wrong export-compliance answer at submission is a rejection or a later compliance problem, and it is asked on every upload.",
+      "layman_analogy": "",
+      "layman_needed": "The export-compliance determination is recorded, the submission answer is set correctly for both stores, and any filing need is decided.",
+      "layman_output": "The export-compliance determination is recorded, the submission answer is set correctly for both stores, and any filing need is decided.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (exec-lens audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 18 Sep exec-lens audit; adversarially verified as a real, uncovered gap."
+      },
+      "estimated_days": 0.25,
+      "timebox_days": 0.25
     }
   ],
   "tracks": [
@@ -42241,7 +43281,8 @@ window.LAUNCH_DATA = {
             "N1-MT-22",
             "N1-AS-18",
             "N2-AS-21",
-            "N4-SD-17"
+            "N4-SD-17",
+            "N6-SD-14"
           ]
         },
         {
@@ -42281,7 +43322,8 @@ window.LAUNCH_DATA = {
             "N5-SD-17",
             "N3-SD-20",
             "N1-SD-18",
-            "N2-SD-15"
+            "N2-SD-15",
+            "N3-SD-21"
           ]
         },
         {
@@ -42385,7 +43427,10 @@ window.LAUNCH_DATA = {
             "N1-SD-20",
             "N2-SD-15",
             "N2-SD-16",
-            "N1-AS-20"
+            "N1-AS-20",
+            "N4-MT-46",
+            "N3-AS-28",
+            "N5-AS-28"
           ]
         },
         {
@@ -42426,7 +43471,11 @@ window.LAUNCH_DATA = {
             "N2-MT-22",
             "N4-AS-26",
             "BL-APP-02",
-            "N4-FZ-16"
+            "N4-FZ-16",
+            "N5-AS-28",
+            "N5-SD-22",
+            "N5-FZ-15",
+            "N5-FZ-16"
           ],
           "scope": "deferred"
         },
@@ -42474,7 +43523,10 @@ window.LAUNCH_DATA = {
             "N3-MT-23",
             "N5-MT-23",
             "N3-AS-25",
-            "N4-MT-43"
+            "N4-MT-43",
+            "N4-MT-45",
+            "N4-MT-46",
+            "N3-AS-28"
           ]
         },
         {
@@ -42550,7 +43602,8 @@ window.LAUNCH_DATA = {
             "N4-MT-33",
             "N3-MT-29",
             "N4-MT-35",
-            "N4-MT-40"
+            "N4-MT-40",
+            "N4-MT-49"
           ]
         },
         {
@@ -42719,7 +43772,8 @@ window.LAUNCH_DATA = {
             "N6-AS-14",
             "N3-MT-30",
             "N4-MT-42",
-            "N3-AS-27"
+            "N3-AS-27",
+            "N4-MT-45"
           ]
         },
         {
@@ -42755,7 +43809,12 @@ window.LAUNCH_DATA = {
             "N4-MT-35",
             "N4-MT-36",
             "N5-MT-27",
-            "N4-MT-37"
+            "N4-MT-37",
+            "N4-MT-45",
+            "N4-MT-47",
+            "N4-MT-48",
+            "N4-MT-49",
+            "N6-MT-11"
           ]
         }
       ]
@@ -43026,7 +44085,8 @@ window.LAUNCH_DATA = {
             "N6-AX-01",
             "N5-AX-07",
             "N2-JL-12",
-            "N5-JL-09"
+            "N5-JL-09",
+            "N2-AX-19"
           ]
         },
         {
@@ -43224,7 +44284,13 @@ window.LAUNCH_DATA = {
             "N1-AX-21",
             "N4-SD-17",
             "N3-AX-05",
-            "N4-AS-26"
+            "N4-AS-26",
+            "N6-AS-15",
+            "N5-SD-22",
+            "N6-AX-10",
+            "N6-JL-11",
+            "N6-JL-12",
+            "N6-AX-12"
           ]
         },
         {
@@ -43263,7 +44329,8 @@ window.LAUNCH_DATA = {
             "N3-LW-08",
             "N4-FH-18",
             "N5-LW-10",
-            "N3-AX-11"
+            "N3-AX-11",
+            "N6-SD-14"
           ]
         },
         {
@@ -43402,7 +44469,14 @@ window.LAUNCH_DATA = {
             "N2-FZ-20",
             "N3-FZ-23",
             "N4-FZ-16",
-            "BL-FZ-01"
+            "BL-FZ-01",
+            "N6-SD-15",
+            "N4-JL-12",
+            "N4-FZ-17",
+            "N4-FZ-18",
+            "N3-FZ-24",
+            "N5-FZ-15",
+            "N5-FZ-16"
           ]
         },
         {
@@ -43449,7 +44523,10 @@ window.LAUNCH_DATA = {
             "N4-MT-37",
             "N5-SD-20",
             "N3-AS-27",
-            "N5-AS-27"
+            "N5-AS-27",
+            "N6-AX-11",
+            "N4-JL-12",
+            "N6-JL-11"
           ]
         },
         {
@@ -43490,7 +44567,9 @@ window.LAUNCH_DATA = {
             "N5-SD-19",
             "N6-SD-13",
             "N3-AX-12",
-            "N6-AX-09"
+            "N6-AX-09",
+            "N6-AX-10",
+            "N6-AX-11"
           ]
         },
         {
@@ -43831,7 +44910,8 @@ window.LAUNCH_DATA = {
             "N5-LW-03",
             "N5-FH-11",
             "N4-MT-36",
-            "N5-MT-28"
+            "N5-MT-28",
+            "N3-FH-35"
           ]
         },
         {
@@ -43853,7 +44933,8 @@ window.LAUNCH_DATA = {
             "P0-FH-26",
             "P0-MT-10",
             "N3-FH-26",
-            "N3-FH-31"
+            "N3-FH-31",
+            "N5-MT-30"
           ]
         },
         {
@@ -43911,7 +44992,9 @@ window.LAUNCH_DATA = {
             "N5-AX-07",
             "N5-JL-09",
             "N6-SD-09",
-            "N5-SD-20"
+            "N5-SD-20",
+            "N4-SD-21",
+            "N6-SD-15"
           ]
         },
         {
@@ -43927,7 +45010,10 @@ window.LAUNCH_DATA = {
             "N4-MT-34",
             "N3-FH-33",
             "N4-MT-38",
-            "N4-MT-40"
+            "N4-MT-40",
+            "N4-MT-47",
+            "N4-MT-48",
+            "N5-MT-30"
           ]
         },
         {
@@ -43977,7 +45063,8 @@ window.LAUNCH_DATA = {
             "N4-FH-28",
             "N4-FH-29",
             "N5-FH-12",
-            "N4-FH-30"
+            "N4-FH-30",
+            "N4-FH-31"
           ]
         },
         {
@@ -44043,7 +45130,9 @@ window.LAUNCH_DATA = {
             "N3-MT-29",
             "N5-MT-26",
             "N5-MT-27",
-            "N4-MT-44"
+            "N4-MT-44",
+            "N4-FH-31",
+            "N4-FH-32"
           ]
         },
         {
@@ -44068,7 +45157,16 @@ window.LAUNCH_DATA = {
             "N4-MT-37",
             "N4-MT-41",
             "N5-FH-12",
-            "N3-FH-34"
+            "N3-FH-34",
+            "N4-FH-32",
+            "N5-FH-13"
+          ]
+        },
+        {
+          "id": "model-quality",
+          "name": "Model quality",
+          "tickets": [
+            "N3-FH-35"
           ]
         }
       ]
@@ -44170,7 +45268,9 @@ window.LAUNCH_DATA = {
             "N4-MT-37",
             "N3-AS-27",
             "N4-MT-44",
-            "N5-AS-27"
+            "N5-AS-27",
+            "N4-MT-49",
+            "N6-MT-11"
           ]
         },
         {
@@ -44279,7 +45379,8 @@ window.LAUNCH_DATA = {
             "N3-MT-27",
             "N3-MT-28",
             "N5-MT-26",
-            "N3-FH-34"
+            "N3-FH-34",
+            "N4-FH-31"
           ]
         },
         {
@@ -44385,7 +45486,10 @@ window.LAUNCH_DATA = {
             "N5-SD-18",
             "N3-SD-20",
             "N4-SD-14",
-            "N5-FZ-12"
+            "N5-FZ-12",
+            "N3-SD-21",
+            "N4-SD-21",
+            "N5-SD-21"
           ]
         },
         {
@@ -44483,7 +45587,8 @@ window.LAUNCH_DATA = {
             "BL-IN-18",
             "N2-JL-15",
             "N5-FH-09",
-            "BL-IN-24"
+            "BL-IN-24",
+            "N5-FH-13"
           ]
         }
       ]
@@ -44513,56 +45618,56 @@ window.LAUNCH_DATA = {
     "owners": [
       {
         "owner": "Asad",
-        "tickets": 75,
+        "tickets": 78,
         "focus_rate": 0.6,
-        "effort_days": 103.06,
+        "effort_days": 106.06,
         "capacity_days": 38.4,
-        "gap_days": 64.66,
+        "gap_days": 67.66,
         "capacity_at_hard_limit": 38.4
       },
       {
         "owner": "Muteeb",
-        "tickets": 111,
+        "tickets": 118,
         "focus_rate": 0.7,
-        "effort_days": 164.03,
+        "effort_days": 172.78,
         "capacity_days": 44.8,
-        "gap_days": 119.23,
+        "gap_days": 127.98,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Faheem",
-        "tickets": 93,
+        "tickets": 97,
         "focus_rate": 0.7,
-        "effort_days": 143.13,
+        "effort_days": 146.13,
         "capacity_days": 44.8,
-        "gap_days": 98.33,
+        "gap_days": 101.33,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Saad",
-        "tickets": 134,
+        "tickets": 140,
         "focus_rate": 0.7,
-        "effort_days": 141,
+        "effort_days": 145,
         "capacity_days": 44.8,
-        "gap_days": 96.2,
+        "gap_days": 100.2,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Alex",
-        "tickets": 76,
+        "tickets": 79,
         "focus_rate": 0.4,
-        "effort_days": 51.73,
+        "effort_days": 52.98,
         "capacity_days": 25.6,
-        "gap_days": 26.13,
+        "gap_days": 27.38,
         "capacity_at_hard_limit": 25.6
       },
       {
         "owner": "Jill",
-        "tickets": 80,
+        "tickets": 82,
         "focus_rate": 0.6,
-        "effort_days": 53.31,
+        "effort_days": 54.81,
         "capacity_days": 38.4,
-        "gap_days": 14.91,
+        "gap_days": 16.41,
         "capacity_at_hard_limit": 38.4
       },
       {
@@ -44576,15 +45681,15 @@ window.LAUNCH_DATA = {
       },
       {
         "owner": "Filza",
-        "tickets": 77,
+        "tickets": 82,
         "focus_rate": 0.5,
-        "effort_days": 65.5,
+        "effort_days": 67.5,
         "capacity_days": 32,
-        "gap_days": 33.5,
+        "gap_days": 35.5,
         "capacity_at_hard_limit": 32
       }
     ],
-    "total_effort_days": 722.25,
+    "total_effort_days": 745.75,
     "total_capacity_days": 268.8
   },
   "ticket_audit": {
@@ -47915,6 +49020,51 @@ window.LAUNCH_DATA = {
       ],
       "ml_backend_lane": "ML backend: serving, registry, batch scoring, feature parity, vector ops",
       "note": "Muteeb owns the ML backend and the Art-E backend; Faheem owns models, prompts, evals and reviews every contract. Art-E is now five sub-lanes so its size is visible. No done ticket changed."
+    },
+    "exec_lens_audit_18sep": {
+      "added": [
+        "N4-MT-45",
+        "N4-MT-46",
+        "N4-MT-47",
+        "N4-MT-48",
+        "N4-MT-49",
+        "N5-MT-30",
+        "N6-MT-11",
+        "N4-FH-31",
+        "N3-FH-35",
+        "N4-FH-32",
+        "N5-FH-13",
+        "N3-AS-28",
+        "N5-AS-28",
+        "N6-AS-15",
+        "N3-SD-21",
+        "N4-SD-21",
+        "N6-SD-14",
+        "N6-SD-15",
+        "N5-SD-21",
+        "N5-SD-22",
+        "N2-AX-19",
+        "N6-AX-10",
+        "N6-AX-11",
+        "N4-JL-12",
+        "N6-JL-11",
+        "N4-FZ-17",
+        "N4-FZ-18",
+        "N3-FZ-24",
+        "N5-FZ-15",
+        "N5-FZ-16",
+        "N6-JL-12",
+        "N6-AX-12"
+      ],
+      "edited": [
+        "BL-APP-05",
+        "BL-APP-03"
+      ],
+      "backlog": [
+        "N6-JL-12",
+        "N6-AX-12"
+      ],
+      "note": "18 Sep 8-lens (CTO/CEO/COO/CMO/CLO/AI-engineer/PM) audit via workflow; 38 findings adversarially verified against the live tracker. Muteeb gains Meta rate governor, connected-pages endpoint, shared metric service, model-output grounding, ingest health, best-times tool/guardrail, reply-draft health. No done ticket changed."
     }
   }
 };
