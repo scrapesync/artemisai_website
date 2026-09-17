@@ -564,6 +564,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .capacity-scroll{overflow-x:auto;margin-top:10px}
 .capacity-scroll table{width:100%;border-collapse:collapse;font-size:12px}
 .capacity-scroll th,.capacity-scroll td{text-align:left;padding:8px;border-bottom:1px solid var(--border);white-space:nowrap}
+a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px} a.ticket-ref:hover{color:var(--accent)}
 </style>
 </head><body>
 
@@ -1809,6 +1810,7 @@ main{max-width:1500px;margin:0 auto;padding:22px}
         '<div class="pstats">'+pst('Tickets',ts.length)+pst('Done',done.length,'green')+pst('In progress',ip,'amber')+pst('Blocked',bl,bl?'red':'')+pst('Overdue',ov,ov?'red':'')+'</div>'+
         '<div class="pace"><span>'+cur.id+': '+cD+' of '+cT.length+' done · expected ~'+Math.round(exp*100)+'% by today'+(timed.length?' · on time '+ontime+'/'+timed.length:'')+' · '+p0+' P0</span><b class="'+cls+'">'+pace+'</b></div>'+
         '<div class="sprow">'+SPRINTS.map(function(s){ var a=ts.filter(function(t){return sp(t)===s.id;}), d=a.filter(function(t){return st(t.id).status==='done';}).length; return '<div class="spc'+(s.id===cur.id?' cur':'')+'"><div class="id">'+s.id+'</div><div class="v">'+(a.length?d+'/'+a.length:'-')+'</div></div>'; }).join('')+'</div>'+
+        '<details class="panel"><summary>Tickets for '+esc(p.n)+'</summary>'+ts.map(function(t){return '<p>'+esc(t.id)+' &middot; '+esc(t.title)+'</p>';}).join('')+'</details>'+
         '<div class="note">On time compares recorded completion with the current planned due date, not the original commitment. Overdue is open past due. Pace compares this sprint’s completion with how much of the sprint has elapsed.</div></div>';
     }).join('');
   }
@@ -1826,11 +1828,34 @@ main{max-width:1500px;margin:0 auto;padding:22px}
     if(!t){ toast('Ticket not found: '+id,true); return; }
     F={who:'',status:'',pr:'',q:'',layer:''}; VIEW='list'; OPEN={}; OPEN[id]=true;
     ['f-status','f-pr','f-q'].forEach(function(k){document.getElementById(k).value='';});
-    if(sp(t)==='BL'){ MAPWHO=''; MAPSEL=id; showTab('map'); }
+    if(sp(t)==='BL'){ MAPVIEW='ticket'; MAPWHO=''; MAPSEL=id; showTab('map'); showDetail(id); }
     else { SEL=sp(t); showTab('tracker'); }
     requestAnimationFrame(function(){ var el=sp(t)==='BL'?document.getElementById('map-det'):document.querySelector('[data-det="'+id+'"]'); if(el){el.scrollIntoView({block:'center'});el.setAttribute('tabindex','-1');el.focus({preventScroll:true});} });
   }
   window.addEventListener('popstate',openTicketLink);
+  // Link known ticket IDs in rendered text across every tab, including lazy views.
+  function ticketTextParts(text,known){
+    var parts=[],last=0,re=/\b(?:[A-Z][A-Z0-9]*-)+[A-Z0-9]+\b/g,m;
+    while((m=re.exec(text))){ if(!known[m[0]]) continue; if(m.index>last) parts.push({text:text.slice(last,m.index)}); parts.push({text:m[0],id:m[0]}); last=re.lastIndex; }
+    if(last<text.length) parts.push({text:text.slice(last)}); return parts;
+  }
+  function linkTicketReferences(root){
+    var known={}; all().forEach(function(t){known[t.id]=true;});
+    var walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),nodes=[],node;
+    while((node=walker.nextNode())){ if(node.parentElement&&!node.parentElement.closest('a,button,input,textarea,select,script,style,svg,[contenteditable]')) nodes.push(node); }
+    nodes.forEach(function(n){ var parts=ticketTextParts(n.nodeValue,known); if(!parts.some(function(p){return p.id;})) return;
+      var frag=document.createDocumentFragment(); parts.forEach(function(p){if(!p.id){frag.appendChild(document.createTextNode(p.text));return;} var a=document.createElement('a'); a.className='ticket-ref';a.href=ticketURL(p.id);a.dataset.ticketLink=p.id;a.textContent=p.text;a.title='Open ticket '+p.id;frag.appendChild(a);}); n.replaceWith(frag);
+    });
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[data-ticket-link]'); if(!a) return;
+    e.stopPropagation(); if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button!==0) return;
+    e.preventDefault(); history.pushState({},'',a.getAttribute('href')); openTicketLink();
+  },true);
+  var ticketLinkRoot=document.querySelector('main');
+  var ticketLinkObserver=new MutationObserver(function(){ ticketLinkObserver.disconnect(); linkTicketReferences(ticketLinkRoot); ticketLinkObserver.observe(ticketLinkRoot,{childList:true,subtree:true}); });
+  ticketLinkObserver.observe(ticketLinkRoot,{childList:true,subtree:true});
+
 
   /* ---- boot ---- */
   (function(){ var n=days(TODAY,LAUNCH.public); var el=document.getElementById('hdr-count'); if(el) el.innerHTML='<b>'+n+'</b> days &middot; '+esc(LAUNCH.short); document.querySelectorAll('.l-long').forEach(function(e){ e.textContent=LAUNCH.long; }); })();

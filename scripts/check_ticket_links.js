@@ -1,10 +1,10 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const html=fs.readFileSync('sprint_tracker_launch.html','utf8');
 let opened=[],scrolled=0;
-const ctx={URLSearchParams,location:{search:'?ticket=N1-AX-01'},all:()=>[{id:'N1-AX-01',sprint:'N2'},{id:'BL-X',sprint:'BL'}],sp:t=>t.sprint,showTab:t=>opened.push(t),toast:()=>opened.push('missing'),requestAnimationFrame:f=>f(),document:{getElementById:()=>({value:'old',scrollIntoView:()=>scrolled++,setAttribute(){},focus(){}}),querySelector:()=>({scrollIntoView:()=>scrolled++,setAttribute(){},focus(){}})}};
+const ctx={URLSearchParams,location:{search:'?ticket=N1-AX-01'},all:()=>[{id:'N1-AX-01',sprint:'N2'},{id:'BL-X',sprint:'BL'}],sp:t=>t.sprint,showTab:t=>opened.push(t),showDetail:id=>{ctx.detailId=id;},toast:()=>opened.push('missing'),requestAnimationFrame:f=>f(),document:{getElementById:()=>({value:'old',scrollIntoView:()=>scrolled++,setAttribute(){},focus(){}}),querySelector:()=>({scrollIntoView:()=>scrolled++,setAttribute(){},focus(){}})}};
 const start=html.indexOf('  function linkedTicketId('),end=html.indexOf("  window.addEventListener('popstate'",start);vm.runInNewContext(html.slice(start,end),ctx);
 ctx.openTicketLink();assert.equal(ctx.SEL,'N2');assert.equal(ctx.VIEW,'list');assert(ctx.OPEN['N1-AX-01']);assert.equal(opened.pop(),'tracker');assert(scrolled);
-ctx.location.search='?ticket=BL-X';ctx.openTicketLink();assert.equal(opened.pop(),'map');assert.equal(ctx.MAPSEL,'BL-X');
+ctx.location.search='?ticket=BL-X';ctx.openTicketLink();assert.equal(opened.pop(),'map');assert.equal(ctx.MAPSEL,'BL-X');assert.equal(ctx.detailId,'BL-X');assert.equal(ctx.MAPVIEW,'ticket');
 ctx.location.search='?ticket=UNKNOWN';ctx.openTicketLink();assert.equal(opened.pop(),'missing');
 assert.equal(ctx.linkedTicketId('?ticket=%22%3E%3Cscript%3E'),null);
 const login=fs.readFileSync('admin_login.html','utf8'),ls=login.indexOf('function homeFor('),le=login.indexOf('\ntry{',ls);
@@ -12,3 +12,10 @@ ctx.window={location:{search:'?next='+encodeURIComponent('sprint_tracker_launch.
 assert.equal(ctx.homeFor({role:'admin'}),'sprint_tracker_launch.html?ticket=N1-AX-01');assert.equal(ctx.homeFor({role:'client'}),'client_home.html');
 for(const bad of ['https://evil.test','//evil.test','sprint_tracker_launch.html?ticket=X&next=https://evil.test']){ctx.window.location.search='?next='+encodeURIComponent(bad);assert.equal(ctx.homeFor({role:'admin'}),'admin_panel.html');}
 console.log('PASS: scheduled/moved/backlog/missing ticket routes; cleared filters; safe login return and client routing.');
+const partStart=html.indexOf('  function ticketTextParts('),partEnd=html.indexOf('  function linkTicketReferences(',partStart);
+vm.runInNewContext(html.slice(partStart,partEnd),ctx);
+const parts=ctx.ticketTextParts('See N1-AX-01, N1-AX-01 and N1-AX-010; unknown X-Y-12.',{'N1-AX-01':true});
+assert.equal(parts.filter(p=>p.id).length,2);
+assert.equal(parts.map(p=>p.text).join(''),'See N1-AX-01, N1-AX-01 and N1-AX-010; unknown X-Y-12.');
+assert(html.includes("closest('a,button,input,textarea,select,script,style,svg,[contenteditable]')"));
+console.log('PASS: all-tab reference parsing links exact known IDs only and leaves editing controls/anchors untouched.');
