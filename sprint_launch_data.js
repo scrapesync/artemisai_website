@@ -9824,6 +9824,39 @@ window.LAUNCH_DATA = {
       },
       "layer": "launch",
       "parked_from": "LW"
+    },
+    {
+      "id": "BL-FZ-01",
+      "sprint": "BL",
+      "assignee": "Filza",
+      "title": "B2B subscription agreement for agencies and teams (Phase 2 customers)",
+      "what": "Post-launch: a business subscription agreement (order form, SLA reference, DPA incorporation, seats, liability caps) for agencies and teams once team roles ship; consumer/sole-trader buyers stay on the ToS + consumer-law pack (N4-FZ-12).",
+      "why": "Agencies are a Phase 2 segment; the agreement should exist before the first one signs.",
+      "area": "After launch · Legal",
+      "due": "",
+      "priority": "P1",
+      "priority_reason": "Filza covers every contract and agreement (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "none",
+      "source": "plan",
+      "acceptance": "Agreement template ready for the first agency conversation.",
+      "checklist": [
+        "Draft",
+        "Review"
+      ],
+      "layman": "A business contract for agencies who buy for a team, ready after launch.",
+      "layman_analogy": "",
+      "layman_needed": "Agreement template ready for the first agency conversation.",
+      "layman_output": "Agreement template ready for the first agency conversation.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (contracts coverage); owner estimate to confirm",
+      "audit": {
+        "decision": "backlog",
+        "reason": "Contracts coverage added 17 Sep at Asad's request."
+      },
+      "layer": "launch",
+      "parked_from": "LW"
     }
   ],
   "features": [
@@ -10798,7 +10831,12 @@ window.LAUNCH_DATA = {
         "N5-FZ-14",
         "N2-FZ-18",
         "N2-FZ-19",
-        "N5-FZ-12"
+        "N5-FZ-12",
+        "N3-FZ-22",
+        "N2-FZ-20",
+        "N3-FZ-23",
+        "N4-FZ-16",
+        "BL-FZ-01"
       ],
       "scope": "active"
     },
@@ -37229,7 +37267,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Jill",
       "title": "Employment status and written engagement terms for all eight",
-      "what": "Jill builds a status table with one row per person (employee, sole-trader contractor or own company; UK or overseas). For any UK employee, confirm the right-to-work check, payroll and auto-enrolment now. Everyone else signs one contractor template Filza approves, covering services, fees, confidentiality, data protection and termination, alongside the N2-FZ-13 IP assignment. Full HMRC status testing, off-payroll analysis and overseas tax exposure go to backlog with the accountant. Builds on N2-FZ-13, N2-JL-11, N3-JL-14.",
+      "what": "Jill builds a status table with one row per person (employee, sole-trader contractor or own company; UK or overseas). For any UK employee, confirm the right-to-work check, payroll and auto-enrolment now. Everyone else signs one contractor template Filza approves, covering services, fees, confidentiality, data protection and termination, alongside the N2-FZ-13 IP assignment. Full HMRC status testing, off-payroll analysis and overseas tax exposure go to backlog with the accountant. Builds on N2-FZ-13, N2-JL-11, N3-JL-14. (17 Sep) Filza drafts the agreements themselves in N3-FZ-23; this ticket owns the status assessment and signature collection.",
       "why": "Misclassified workers create back-tax, holiday pay and pension liabilities that surface in investor due diligence; no ticket covers engagement status or contracts. (16 Sep research: legal.)",
       "area": "Legal",
       "due": "2026-10-30",
@@ -40869,6 +40907,156 @@ window.LAUNCH_DATA = {
       },
       "estimated_days": 0.5,
       "timebox_days": 0.5
+    },
+    {
+      "id": "N3-FZ-22",
+      "sprint": "N3",
+      "assignee": "Filza",
+      "title": "Contract register and renewal calendar: every agreement, counterparty, term, owner, renewal and exit terms",
+      "what": "One register of every contract and agreement the company is party to — pilots, Lewis, contractors and advisors, vendors and sub-processors, insurance, domains, Meta Platform Terms, app-store agreements, shareholders' agreement — with counterparty, signed date, term, renewal/notice date, owner, where the signed copy lives and the exit/deletion obligation. Feeds the document register (N4-JL-10) and the sanctions screening (N5-JL-10).",
+      "why": "Nobody can say today which agreements exist, which are unsigned and which renew silently.",
+      "area": "Legal",
+      "due": "2026-10-16",
+      "priority": "P0",
+      "priority_reason": "Filza covers every contract and agreement (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [
+        "N4-JL-10"
+      ],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Register live with every known agreement; unsigned ones listed with an owner and a date; renewal alarms set.",
+      "checklist": [
+        "List every agreement type and instance",
+        "Record term, renewal, owner, exit obligation",
+        "Flag unsigned and expiring",
+        "Set alarms"
+      ],
+      "layman": "One list of every contract we have, who it is with, when it ends and who looks after it.",
+      "layman_analogy": "",
+      "layman_needed": "Register live with every known agreement; unsigned ones listed with an owner and a date; renewal alarms set.",
+      "layman_output": "Register live with every known agreement; unsigned ones listed with an owner and a date; renewal alarms set.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (contracts coverage); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Contracts coverage added 17 Sep at Asad's request."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N2-FZ-20",
+      "sprint": "N2",
+      "assignee": "Filza",
+      "title": "Mutual NDA template for pilots, partners, investors and vendors, plus the signing log",
+      "what": "A short mutual NDA (UK law, 2-year term, carve-outs, no non-compete) used before any pilot data walkthrough, partner conversation, investor data-room access or vendor evaluation; a signing log in the contract register.",
+      "why": "Conversations with prospects, investors and vendors are already happening without one.",
+      "area": "Legal",
+      "due": "2026-10-02",
+      "priority": "P1",
+      "priority_reason": "Filza covers every contract and agreement (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [
+        "N3-FZ-22"
+      ],
+      "gate": "N2",
+      "source": "plan",
+      "acceptance": "Template approved by Alex; first three NDAs signed and logged.",
+      "checklist": [
+        "Draft",
+        "Approve",
+        "Log signatures"
+      ],
+      "layman": "A standard confidentiality agreement we send before sharing anything sensitive.",
+      "layman_analogy": "",
+      "layman_needed": "Template approved by Alex; first three NDAs signed and logged.",
+      "layman_output": "Template approved by Alex; first three NDAs signed and logged.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (contracts coverage); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Contracts coverage added 17 Sep at Asad's request."
+      },
+      "estimated_days": 0.25,
+      "timebox_days": 0.25
+    },
+    {
+      "id": "N3-FZ-23",
+      "sprint": "N3",
+      "assignee": "Filza",
+      "title": "Contractor and advisor agreements: templates and a signed set for all eight plus every advisor (IP, confidentiality, data protection, status, notice)",
+      "what": "Filza drafts the contractor services agreement and the advisor agreement (IP assignment and confidentiality per N2-FZ-13 folded in, data-protection clauses aligned to the DPA, IR35/status wording from Jill's assessment in N4-JL-08, notice and termination, equipment and access return). Jill collects signatures; Filza files them in the register.",
+      "why": "Engagement terms and IP assignment exist as separate tasks; a single signed agreement per person is what an investor or the security assessor will ask for.",
+      "area": "Legal",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "Filza covers every contract and agreement (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [
+        "N3-FZ-22",
+        "N4-JL-08"
+      ],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Every contributor and advisor has one signed agreement on file; register updated.",
+      "checklist": [
+        "Contractor template",
+        "Advisor template",
+        "Align with N4-JL-08 and N2-FZ-13",
+        "Signed set filed"
+      ],
+      "layman": "Proper signed agreements with everyone who works with us, covering ownership of work and confidentiality.",
+      "layman_analogy": "",
+      "layman_needed": "Every contributor and advisor has one signed agreement on file; register updated.",
+      "layman_output": "Every contributor and advisor has one signed agreement on file; register updated.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (contracts coverage); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Contracts coverage added 17 Sep at Asad's request."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N4-FZ-16",
+      "sprint": "N4",
+      "assignee": "Filza",
+      "title": "Platform and vendor agreements review: Apple Developer Program licence, Google Play distribution agreement, Meta Platform Terms, LLM, cloud, email, vector-store and monitoring vendors — obligations and data-use register",
+      "what": "Read and record the obligations we accept by shipping: Apple DPLA and Play DDA (content, payments, data, account deletion, AI disclosure), Meta Platform Terms and Tech Provider terms (P0-FZ-03, N4-FZ-13), LLM providers (no-training tiers per N2-FZ-03, data residency), AWS/SES, vector store, Sentry, analytics; for each: data-use position, sub-processor status (N2-FZ-06), termination and export rights. One register row per vendor.",
+      "why": "Store and platform agreements are accepted by clicking; the obligations still bind us.",
+      "area": "Legal",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Filza covers every contract and agreement (Asad, 17 Sep)",
+      "depends_on": [
+        "BL-APP-01"
+      ],
+      "feeds": [
+        "N3-FZ-22"
+      ],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Register rows for every platform and vendor with obligations, data-use position and owner; gaps raised with Asad.",
+      "checklist": [
+        "Apple + Google agreements",
+        "Meta terms",
+        "LLM/cloud/email/vector/monitoring vendors",
+        "Raise gaps"
+      ],
+      "layman": "We read the small print of every platform and supplier we depend on and write down what we have promised them.",
+      "layman_analogy": "",
+      "layman_needed": "Register rows for every platform and vendor with obligations, data-use position and owner; gaps raised with Asad.",
+      "layman_output": "Register rows for every platform and vendor with obligations, data-use position and owner; gaps raised with Asad.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (contracts coverage); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Contracts coverage added 17 Sep at Asad's request."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
     }
   ],
   "tracks": [
@@ -41093,7 +41281,8 @@ window.LAUNCH_DATA = {
             "N3-AS-25",
             "N2-MT-22",
             "N4-AS-26",
-            "BL-APP-02"
+            "BL-APP-02",
+            "N4-FZ-16"
           ],
           "scope": "deferred"
         },
@@ -41765,7 +41954,8 @@ window.LAUNCH_DATA = {
             "N3-LW-10",
             "N5-AX-11",
             "LW-AX-06",
-            "N3-JL-20"
+            "N3-JL-20",
+            "N3-FZ-22"
           ]
         }
       ]
@@ -42031,7 +42221,12 @@ window.LAUNCH_DATA = {
             "N5-FZ-14",
             "N2-FZ-18",
             "N2-FZ-19",
-            "N5-FZ-12"
+            "N5-FZ-12",
+            "N3-FZ-22",
+            "N2-FZ-20",
+            "N3-FZ-23",
+            "N4-FZ-16",
+            "BL-FZ-01"
           ]
         },
         {
@@ -42212,7 +42407,9 @@ window.LAUNCH_DATA = {
             "N4-AS-30",
             "N5-AS-26",
             "N4-AS-31",
-            "N6-AS-14"
+            "N6-AS-14",
+            "N3-FZ-22",
+            "N3-FZ-23"
           ]
         }
       ]
@@ -43135,15 +43332,15 @@ window.LAUNCH_DATA = {
       },
       {
         "owner": "Filza",
-        "tickets": 73,
+        "tickets": 77,
         "focus_rate": 0.5,
-        "effort_days": 62.75,
+        "effort_days": 65.5,
         "capacity_days": 32,
-        "gap_days": 30.75,
+        "gap_days": 33.5,
         "capacity_at_hard_limit": 32
       }
     ],
-    "total_effort_days": 683,
+    "total_effort_days": 685.75,
     "total_capacity_days": 268.8
   },
   "ticket_audit": {
@@ -46414,6 +46611,16 @@ window.LAUNCH_DATA = {
       "feature_added": "aiquality",
       "rule": "No ticket marked done by Muteeb, Faheem or Saad was changed; statuses untouched; edits are additions, lane wiring and open-ticket text only.",
       "saad_design_scope": "Phone-app packs and the landing page only; no web/desktop product screens (N1-SD-05/07/09/10, N2-SD-15 annotated)."
+    },
+    "contracts_17sep": {
+      "added": [
+        "N3-FZ-22",
+        "N2-FZ-20",
+        "N3-FZ-23",
+        "N4-FZ-16",
+        "BL-FZ-01"
+      ],
+      "note": "Filza covers every contract and agreement; register is the index."
     }
   }
 };
