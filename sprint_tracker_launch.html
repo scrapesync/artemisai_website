@@ -657,21 +657,21 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   <section id="view-track-build" class="hidden">
     <div class="eyebrow">How the product gets built</div>
     <div class="h1">Build tracker</div>
-    <div class="sub">Every phase of the build in one place: landing page, design packs, the phone mock-up, web development, deferred mobile-store work, the API and contracts, data pipelines, and quality (stress, reliability, security, QA). Each lane shows its stack, who is responsible, how far along it is and the tickets that build it.</div>
+    <div class="sub">Every phase of the build in one place: landing page, design packs, the phone mock-up, web development, the API and contracts, data pipelines, and quality (stress, reliability, security, QA). Each lane shows its stack, who is responsible, how far along it is and the tickets that build it.</div>
     <div class="ftiles" id="tk-tiles-build"></div>
     <div id="tk-body-build"></div>
   </section>
   <section id="view-track-meta" class="hidden">
-    <div class="eyebrow">The one review that decides launch</div>
+    <div class="eyebrow">Planned integration and external review</div>
     <div class="h1">Meta App Review</div>
-    <div class="sub">Everything on the road to Live Mode, for Filza, Saad, Alex and Asad: business verification, the permissions we ask for, the package, the submission and review loop, the fallback if it is late, data-protection checks, and the wording firewall. Submission is Fri 2 Oct.</div>
+    <div class="sub">Meta login is not completed. Build and test the actual connection first, then complete the review requirements shown by the configured app. Dates are internal planning targets; no approval or review duration is assumed.</div>
     <div class="ftiles" id="tk-tiles-meta"></div>
     <div id="tk-body-meta"></div>
   </section>
   <section id="view-track-costing" class="hidden">
     <div class="eyebrow">What the system costs us</div>
     <div class="h1">Costing</div>
-    <div class="sub">What we know now about the cost of running ArtemisAI and the tickets that firm it up: baselines, the telemetry and dashboard Muteeb owns, scheduled recosting reviews, pricing and packaging, billing and invoicing, budgets and vendor tiers.</div>
+    <div class="sub">What we know now about the cost of running ArtemisAI and the tickets that firm it up: baselines, the telemetry and dashboard Muteeb owns, one maintained cost sheet, pricing and packaging, billing and invoicing, budgets and vendor tiers.</div>
     <div class="ftiles" id="tk-tiles-costing"></div>
     <div id="tk-body-costing"></div>
   </section>
@@ -694,7 +694,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   <section id="view-track-qa" class="hidden">
     <div class="eyebrow">One place to see and control quality</div>
     <div class="h1">QA Control Center</div>
-    <div class="sub">What the QA Control Center is, the checks behind every section, the release gates that read it, and the tickets that build it: data quality, model quality, Art-E quality, product and app QA, release gates, and the defect and incident process.</div>
+    <div class="sub">Practical checks for the shipped product, using the existing QA and NLP dashboards. No duplicate dashboard build or assumed incident-response work.</div>
     <div class="ftiles" id="tk-tiles-qa"></div>
     <div id="tk-spec-qa"></div>
     <div id="tk-body-qa"></div>
@@ -755,7 +755,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
 </div></div>
 <div class="toast" id="toast"></div>
 
-<script src="sprint_launch_data.js?v=20260917-friday"></script>
+<script src="sprint_launch_data.js?v=20260917-essential"></script>
 <script src="mock_shots_data.js"></script>
 <script>
 /* ============================================================
@@ -842,7 +842,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
      edits laid over the top. Every view reads through here, so a corrected date
      or title is corrected everywhere at once. */
   function applyEdits(t){ var e=STATE[t.id]&&STATE[t.id].edits; return e?Object.assign({},t,e):t; }
-  function all(){ return D.tickets.concat(BACKLOG,CUSTOM).map(applyEdits); }
+  function all(){ return D.tickets.concat(BACKLOG,CUSTOM).filter(function(t){return !(D.scope_revision && D.scope_revision.removed_ids.indexOf(t.id)>=0);}).map(applyEdits); }
   /* A move on the board is an override on the ticket's state; the generated
      file keeps saying what the plan said. */
   function sp(t){ return (STATE[t.id]&&STATE[t.id].sprint)||t.sprint; }
@@ -971,8 +971,8 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
         '<h3>15 December launch · final deadline</h3><p>'+esc(LAUNCH.staffing||'Existing team only')+'.</p>'+
         '<p class="note">'+esc(LAUNCH.planning_note||'')+'</p>'+
         (lateEdits?'<p class="note">'+lateEdits+' open shared ticket edits are beyond the hard limit. Jill and the owners must reconcile these; saved team edits have not been erased.</p>':'')+
-        (D.ticket_audit?'<p class="note">Two audit passes · 14 tickets deferred · 3 overlapping tickets consolidated. <a href="docs/ticket-audit-round-2.md" target="_blank" rel="noopener">Read ticket audit</a></p>':'')+
-        (cap?'<details><summary>Owner workload review · 16 September ticket audit</summary><p class="note">Inherited remaining estimates, before owner confirmation. Recorded completion is reconciled with the shared-board snapshot; later saved statuses also affect this table. Effort includes open audited work and allocated reviewer effort; deferred and consolidated duplicate records are excluded. Capacity excludes weekends and assumes no extra staff or overtime.</p><div class="capacity-scroll"><table><thead><tr><th>Owner</th><th>Work days</th><th>Available to 15 Dec</th><th>Unresolved gap</th></tr></thead><tbody>'+rows+'</tbody></table></div></details>':'')+
+        (D.ticket_audit?'<p class="note">Essential-scope review: 177 open tasks; repeated, premature and unsupported assignments removed. <a href="docs/business-scope-review.md" target="_blank" rel="noopener">Read scope review</a></p>':'')+
+        (cap?'<details><summary>Owner workload review · essential scope</summary><p class="note">Inherited remaining estimates, before owner confirmation. Recorded completion is reconciled with the shared-board snapshot; later saved statuses also affect this table. Effort includes open audited work and allocated reviewer effort; deferred and consolidated duplicate records are excluded. Capacity excludes weekends and assumes no extra staff or overtime.</p><div class="capacity-scroll"><table><thead><tr><th>Owner</th><th>Work days</th><th>Available to 15 Dec</th><th>Unresolved gap</th></tr></thead><tbody>'+rows+'</tbody></table></div></details>':'')+
         '</section>');
     }
     if(D.design_handoff){
@@ -1825,7 +1825,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   function openTicketLink(){
     var id=linkedTicketId(location.search); if(!id) return;
     var t=all().filter(function(x){return x.id===id;})[0];
-    if(!t){ toast('Ticket not found: '+id,true); return; }
+    if(!t){ toast(D.scope_revision && D.scope_revision.removed_ids.indexOf(id)>=0?'Removed from the essential launch plan: '+id:'Ticket not found: '+id,true); return; }
     F={who:'',status:'',pr:'',q:'',layer:''}; VIEW='list'; OPEN={}; OPEN[id]=true;
     ['f-status','f-pr','f-q'].forEach(function(k){document.getElementById(k).value='';});
     if(sp(t)==='BL'){ MAPVIEW='ticket'; MAPWHO=''; MAPSEL=id; showTab('map'); showDetail(id); }

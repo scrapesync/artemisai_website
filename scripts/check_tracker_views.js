@@ -9,7 +9,7 @@ for(const name of ['counted','inSprints','isOpen','isOver','laneStats']) {
 }
 const start=html.indexOf('  function fstats('),end=html.indexOf('  function ring(',start);vm.runInNewContext(html.slice(start,end),ctx);
 const allIds=records.map(t=>t.id);
-assert.equal(ctx.fstats({tickets:allIds}).ts.length,627);
+assert.equal(ctx.fstats({tickets:allIds}).ts.length,d.tickets.length);
 assert.equal(ctx.fstats({tickets:d.backlog.map(t=>t.id)}).ts.length,0);
 assert.equal(ctx.laneStats({tickets:allIds,scope:'deferred'}).ts.length,0);
 state['N1-AS-11']={status:'todo',sprint:'BL'};
@@ -56,3 +56,12 @@ assert(!resolution.supersededSprintEdit('N1',{...override,at:'2026-09-17T12:00:0
 assert(!resolution.supersededSprintEdit('N2',override));
 assert.equal(d.tickets.filter(t=>t.status==='done').length,96);
 console.log('PASS: verified status wins over stale cache; newer updates apply; revised checklists require fresh checks; only the exact superseded calendar override is ignored.');
+
+// Stale saved moves/custom records must not resurrect removed assignments.
+const allContext={D:d,BACKLOG:d.backlog,CUSTOM:[{id:'N1-FZ-13',sprint:'N1'},{id:'N1-JL-06',sprint:'N1'}],applyEdits:t=>t};
+vm.runInNewContext(html.split('\n').find(l=>l.trim().startsWith('function all(')),allContext);
+assert(!allContext.all().some(t=>d.scope_revision.removed_ids.includes(t.id)));
+for(const tr of d.tracks) for(const lane of tr.lanes) for(const id of lane.tickets) assert(!d.scope_revision.removed_ids.includes(id));
+assert(!html.includes('Submission is Fri 2 Oct'));
+assert(!JSON.stringify(d.tracks.find(t=>t.id==='qa').spec).includes('72h'));
+console.log('PASS: removed work stays out of every feature/lane and cannot return through saved custom records.');

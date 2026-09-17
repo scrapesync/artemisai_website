@@ -1,3 +1,7 @@
+# Current scope correction
+
+The 17 September [essential-scope review](business-scope-review.md) supersedes the earlier workload totals, ticket lists and fixed Meta submission assumption below. Current plan: 177 open tasks, 96 completed history records; launch 15 December, N1 end 25 September. Meta review follows a working integration.
+
 # December launch plan — 16 September 2026
 
 The user has fixed public launch at **15 December 2026**, with **15 December 2026 also the final deadline**. Use the existing eight-person team. The February/March plan and assumed new contractors or outside-counsel capacity are superseded.

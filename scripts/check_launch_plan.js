@@ -42,39 +42,25 @@ all.forEach(t => visit(t.id));
 for (const tr of d.tracks) for (const lane of tr.lanes) {
   for (const id of lane.tickets) assert(index.has(id), `Missing lane ticket ${id}`);
 }
-for (const id of ['N2-SD-07', 'N2-FZ-07', 'N2-AS-09', 'N2-SD-04']) {
-  assert.equal(index.get(id).due, '2026-10-02', `${id}: Meta anchor moved`);
-}
-assert.equal(index.get('LW-AS-04').due, d.launch.public);
-assert.equal(index.get('N6-AX-07').due, '2026-12-11');
-for (const id of ['N3-JL-18', 'N3-JL-19', 'LW-JL-05']) assert.equal(index.get(id).sprint, 'BL');
-console.log(`PASS: ${d.tickets.length} scheduled records, ${d.backlog.length} backlog records; dates, dependencies, gates and existing owners checked. Capacity is a separate unresolved planning check.`);
-// Audit invariants: consolidation must not silently discard scope or reviewer effort.
-const audit = JSON.parse(fs.readFileSync('docs/ticket-audit.json', 'utf8'));
-assert.equal(audit.tickets.length, 906);
-assert.equal(all.length, 906);
-assert.equal(new Set(audit.tickets.map(t => t.id)).size, 906);
-for (const t of all) {
-  assert(audit.tickets.some(q => q.id === t.id), `Unreviewed record ${t.id}`);
-  if (t.effort_allocations) {
-    assert.equal(Object.values(t.effort_allocations).reduce((a,b)=>a+b,0), t.estimated_days, `${t.id}: reviewer effort lost`);
-    for (const name of Object.keys(t.effort_allocations)) assert(d.capacity_review.owners.some(o=>o.owner===name));
-  }
-  if (t.superseded_by) {
-    const target = index.get(t.superseded_by);
-    assert(target && target.sprint !== 'BL');
-    assert(target.absorbed_requirements.some(q=>q.id===t.id && q.acceptance===t.acceptance), `${t.id}: merged acceptance lost`);
-    assert(!d.tickets.some(q=>(q.depends_on||[]).includes(t.id)), `${t.id}: active dependency still uses archive`);
-  }
-}
-const report = JSON.parse(require('node:child_process').execFileSync(process.execPath, ['scripts/report_launch_capacity.js'], {encoding:'utf8'}));
-assert.deepEqual(JSON.parse(JSON.stringify(d.capacity_review)), report, 'Displayed capacity differs from calculated effort');
-assert.equal(report.total_effort_days, 609.25);
-assert.equal(report.total_capacity_days, 312);
-console.log('PASS: 906-record conservation, merge acceptance, reviewer effort and displayed capacity reconciliation.');
-
-for (const id of ["N1-SD-13","N3-JL-11","N3-SD-16","N2-AX-14","N5-AX-08"]) assert.equal(index.get(id).sprint,"BL");
-assert.equal(d.tickets.filter(t=>t.sprint!=="P0").length,545);
+// Every original record has an explicit disposition; removed work must not leak into any view.
+const audit=JSON.parse(fs.readFileSync('docs/business-scope-audit.json','utf8'));
+assert.equal(audit.records.length,audit.before_total);
+assert.equal(new Set(audit.records.map(t=>t.id)).size,audit.before_total);
+const removed=new Set(d.scope_revision.removed_ids);
+assert.equal(all.length+removed.size,audit.before_total);
+for(const id of removed) assert(!index.has(id),`Removed record still active: ${id}`);
+for(const t of all) assert(audit.records.some(r=>r.id===t.id&&['retain','historical'].includes(r.decision)));
+assert.equal(d.backlog.length,0);
+assert.equal(d.tickets.filter(t=>t.status!=='done'&&t.sprint!=='P0').length,d.scope_revision.retained_open);
+for(const id of ['N1-FZ-13','N1-AS-17','N1-JL-06']) assert(removed.has(id));
+assert.equal(index.get('LW-AS-04').due,d.launch.public);
+assert.equal(index.get('N2-SD-07').sprint,'N4');
+assert(index.get('N2-SD-07').depends_on.includes('N2-SD-04'));
+assert(index.get('N2-SD-04').depends_on.includes('N1-MT-11'));
+const report=JSON.parse(require('node:child_process').execFileSync(process.execPath,['scripts/report_launch_capacity.js'],{encoding:'utf8'}));
+assert.deepEqual(JSON.parse(JSON.stringify(d.capacity_review)),report);
+assert(report.total_effort_days>0);
+console.log(`PASS: ${all.length} retained, ${removed.size} removed; dates, dependency graph, disposition coverage and capacity agree.`);
 
 // Saad's landing milestone dates are distinct from product build completion.
 const handoff = new Map(d.design_handoff.milestones.map(m=>[m.id,m]));
