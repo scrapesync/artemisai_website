@@ -378,9 +378,9 @@ window.LAUNCH_DATA = {
       "sprint": "BL",
       "layer": "product",
       "assignee": "",
-      "title": "Accessibility statement + coach marks",
-      "what": "Publish WCAG conformance off the N4-N5 audit; tips on the 3 stickiest screens per funnel data",
-      "why": "Trust + procurement box ticked; activation lifted where the funnel says users stall",
+      "title": "Onboarding coach marks",
+      "what": "On-screen coach-mark tips on the 3 stickiest screens per funnel data. Accessibility statement scope moved to N5-FZ-12 (Filza, wording) and its Saad/Asad publish step, tied to the WCAG audit fix ticket N5-AS-04 — this row is now UI-only.",
+      "why": "Activation lifted where the funnel says users stall",
       "area": "WAVE 1 · Survive batch 1 (8-4 Jan)",
       "due": "",
       "priority": "P1",
@@ -391,10 +391,10 @@ window.LAUNCH_DATA = {
       "source": "roadmap",
       "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
       "checklist": [],
-      "layman": "For later: publish our accessibility statement (proof the app works for people with disabilities) and add small on-screen tips where users get stuck - ticks a buyer checkbox and helps new users settle in.",
-      "layman_analogy": "Like posting the wheelchair-access certificate by the front door and adding little signposts where visitors tend to get lost.",
-      "layman_needed": "When picked up: a published accessibility statement based on the completed audit, plus small on-screen tips on the three screens where funnel data shows users stall. Needs a sprint slot and owner, or a reason to drop.",
-      "layman_output": "When picked up: a published accessibility statement on the website, backed by the completed audit, plus small on-screen tips added to the three screens where our funnel data shows new users most often stall. Procurement teams can tick their accessibility box, and stuck users get a gentle pointer at the exact moment they need one. Until then, this row needs a sprint slot and owner, or a reason to drop.",
+      "layman": "For later: add small on-screen tips where new users get stuck, on the three screens funnel data shows they stall on. (The accessibility statement that used to be bundled into this row now ships on schedule as N5-FZ-12, ahead of launch.)",
+      "layman_analogy": "Like adding little signposts where visitors tend to get lost in the building — the separate wheelchair-access certificate by the front door is now handled on its own schedule.",
+      "layman_needed": "When picked up: small on-screen tips on the three screens where funnel data shows users stall. Needs a sprint slot and owner, or a reason to drop.",
+      "layman_output": "When picked up: small on-screen tips added to the three screens where our funnel data shows new users most often stall, helping stuck users with a gentle pointer at the exact moment they need one. Until then, this row needs a sprint slot and owner, or a reason to drop.",
       "audit": {
         "decision": "backlog",
         "reason": "Unscheduled scope; requires a separate priority decision, contributes no December capacity load."
@@ -17636,8 +17636,8 @@ window.LAUNCH_DATA = {
       "id": "N2-AX-04",
       "sprint": "N4",
       "assignee": "Alex",
-      "title": "Sign legal pack v1 (ToS, Privacy, DPA + sub-processors)",
-      "what": "Read and sign Filza's legal pack v1: ToS, Privacy policy naming Meta API data and the deletion route, DPA with sub-processor list and change notice. Check the privacy policy uses page-analytics language only (Meta's reviewers read it) and that the deletion route matches Muteeb's Data Deletion callback. Sign before the Meta package is submitted and before pilots 1-5 sign as Testers.",
+      "title": "Sign legal pack v1 (ToS, Privacy, DPA, Cookie Policy + sub-processors)",
+      "what": "Read and sign Filza's legal pack v1: ToS, Privacy policy naming Meta API data and the deletion route, DPA with sub-processor list and change notice, and Cookie Policy v1 (N2-FZ-18). Check the privacy policy uses page-analytics language only (Meta's reviewers read it) and that the deletion route matches Muteeb's Data Deletion callback. Sign before the Meta package is submitted and before pilots 1-5 sign as Testers.",
       "why": "Filza leads, Alex signs; pilots sign against this pack and Meta reads the privacy policy, so an unsigned pack on 2 Oct stalls both.",
       "area": "Legal",
       "due": "2026-10-26",
@@ -17645,22 +17645,24 @@ window.LAUNCH_DATA = {
       "priority_reason": "Blocks the 25 Sep submission and pilot onboarding.",
       "depends_on": [
         "Filza: legal pack v1 drafts",
-        "N2-MT-06"
+        "N2-MT-06",
+        "N2-FZ-18"
       ],
       "feeds": [
         "N2-AX-05"
       ],
       "gate": "N4",
       "source": "plan",
-      "acceptance": "All three documents carry Alex's signature and are the versions linked from the Meta app dashboard.",
+      "acceptance": "All four documents carry Alex's signature and are the versions linked from the Meta app dashboard.",
       "checklist": [
         "Read the pack",
         "Check narrative language on the privacy policy",
         "Confirm the deletion route matches the callback",
+        "Confirm Cookie Policy v1 (N2-FZ-18) is included and signed",
         "Sign and date",
         "Confirm the URLs resolve in the Meta dashboard"
       ],
-      "layman": "The CEO reading and signing our first set of legal documents - terms of service, privacy policy and data-handling agreement - before Facebook reads them and before the first pilot customers sign up against them.",
+      "layman": "The CEO reading and signing our first set of legal documents - terms of service, privacy policy, cookie policy and data-handling agreement - before Facebook reads them and before the first pilot customers sign up against them.",
       "layman_analogy": "Like the shop owner reading and signing the lease himself before the first customer walks in and the landlord inspects the premises.",
       "layman_needed": "All three legal documents - terms, privacy policy and data agreement - carrying Alex's signature, in the exact versions linked from the Facebook app dashboard.",
       "layman_output": "All three legal documents — the terms of service, the privacy policy naming the Facebook data and the deletion route, and the data-processing agreement with its supplier list — carrying Alex's signature, in the exact versions linked from the Facebook app dashboard. Signed before the Meta package goes in and before the first five pilots sign, so both the reviewer and the pilots read paper the company has actually committed to.",
@@ -18445,6 +18447,86 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
+      },
+      "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident."
+    },
+    {
+      "id": "N2-FZ-18",
+      "sprint": "N2",
+      "assignee": "Filza",
+      "title": "Draft + publish Cookie Policy v1 at a stable URL",
+      "what": "Write a standalone, PECR-compliant Cookie Policy v1 as a fourth core legal document alongside Privacy v1 and ToS v1: categories of cookies/trackers actually in use (strictly necessary, analytics, any measurement pixels), the purpose and duration of each, the specific tool-by-tool consent and opt-out/withdrawal mechanics that N1-FZ-09 already decided for the landing page, and how a visitor withdraws consent after the fact. Take it through Alex's review to a signed v1, then publish at a stable URL and link it from the site footer next to Privacy and ToS, versioned and dated like N2-FZ-05's pair. Send the URL to Saad and to N6-FZ-03's sweep list.",
+      "why": "N6-FZ-03's frozen-build sweep already treats a signed, versioned Cookie Policy as one of the four core legal documents, but nothing before it actually drafts and publishes one as its own artifact — only the tracking-wording inputs exist today, under N1-FZ-09.",
+      "area": "Legal",
+      "due": "2026-10-02",
+      "priority": "P1",
+      "priority_reason": "N6-FZ-03's frozen-build legal sweep and N2-AX-04's sign-off both need a real Cookie Policy URL to point at, not a placeholder.",
+      "depends_on": [
+        "N1-FZ-09"
+      ],
+      "feeds": [
+        "N2-AX-04",
+        "N6-FZ-03"
+      ],
+      "gate": "N2",
+      "source": "plan",
+      "acceptance": "Cookie Policy v1 is signed, live at a stable URL with a version and date, linked from the site footer beside Privacy and ToS, and the URL is with Saad and recorded for N6-FZ-03's sweep.",
+      "checklist": [
+        "List every cookie/tracker in use with its category, purpose and duration, drawing on N1-FZ-09's tool-by-tool decisions",
+        "Draft consent and withdrawal wording matching the landing page's actual accept/decline/withdraw behaviour",
+        "Incorporate Alex's review; firewall-check against the rulebook alongside Privacy and ToS",
+        "Asad publishes at a stable URL; footer link live next to Privacy and ToS",
+        "Send the URL to Saad and note it for N6-FZ-03's frozen-build sweep"
+      ],
+      "layman": "Writing and publishing our own Cookie Policy - a plain page listing every tracker we use, what it's for, how long it lasts, and how to say no - as its own signed document alongside the Privacy Policy and Terms, because right now that page doesn't actually exist yet.",
+      "layman_analogy": "Like printing a standalone allergen card for the menu instead of just scribbling notes in the kitchen - the customer needs the actual card on the table, not the chef's private notes.",
+      "layman_needed": "A signed Cookie Policy v1 published at a permanent web address, listing every cookie/tracker, its purpose and duration, and how to consent or withdraw, linked from the footer next to Privacy and Terms.",
+      "layman_output": "A signed Cookie Policy v1 live at a permanent web address, carrying a version and date, linked from the site footer next to Privacy and Terms — naming every cookie and tracker in use, what each is for, how long it lasts, and exactly how a visitor accepts, declines or later withdraws consent. Saad has the URL for the Meta package, and the frozen-build legal sweep in N6 has a real document to check instead of a placeholder.",
+      "timebox_days": 1,
+      "launch_stage": "beta",
+      "estimated_days": 1,
+      "estimate_source": "New scope identified 17 Sep 2026: standalone Cookie Policy lifecycle was missing between N1-FZ-09's tracking-wording inputs and N6-FZ-03's frozen-build sweep, which already assumed one existed.",
+      "audit": {
+        "decision": "retain",
+        "reason": "Confirmed gap: N6-FZ-03 sweeps a Cookie Policy as a core legal document but no ticket drafted or published one; this closes that gap without touching any existing ticket's scope."
+      },
+      "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident."
+    },
+    {
+      "id": "N2-FZ-19",
+      "sprint": "N2",
+      "assignee": "Filza",
+      "title": "Publish a copyright/IP-complaints and takedown-response policy for the public site",
+      "what": "Draft a short, proportionate copyright/IP-infringement complaints and takedown-response policy for the public marketing site: a named contact/route for a third party to submit a complaint that site content infringes their rights, what information the complaint must include to be actioned, the review and response process and its target timescale, and the possible outcomes (removal, correction, attribution fix, or a reasoned refusal). Kept lightweight and proportionate to an app with no user-generated or uploaded content — not a full DMCA safe-harbor program. Publish at a stable URL and link it from the site footer alongside Privacy, ToS and the Cookie Policy.",
+      "why": "P0-FZ-02 only settled the company's own position on using third-party images (the input side); nothing today covers the outward-facing process if a third party claims the site itself infringes their rights.",
+      "area": "Legal",
+      "due": "2026-10-04",
+      "priority": "P2",
+      "priority_reason": "Proportionate gap-fill for a public site with no confirmed incident or claim; not on the Meta submission critical path.",
+      "depends_on": [
+        "P0-FZ-02"
+      ],
+      "feeds": [],
+      "gate": "N2",
+      "source": "plan",
+      "acceptance": "A copyright/IP-complaints and takedown-response policy is published at a stable URL, linked from the footer, and names a real contact/route for complaints.",
+      "checklist": [
+        "Draft the named contact/route and required complaint information",
+        "Draft the review process, target response time and possible outcomes",
+        "Check consistency with P0-FZ-02's existing image-rights position",
+        "Asad publishes at a stable URL; footer link live alongside the other legal pages"
+      ],
+      "layman": "Writing a short public page explaining what someone should do if they think our website is using their copyrighted content or intellectual property without permission - who to contact, what to send us, and what happens next.",
+      "layman_analogy": "Like putting up a small 'if you think we've used your work unfairly, contact us here' notice by the shop door, rather than leaving visitors to guess who to complain to.",
+      "layman_needed": "A published complaints page naming a real contact and route, what a complainant needs to send, and what happens after they send it.",
+      "layman_output": "A short, published copyright/IP-complaints page linked from the site footer, naming a real contact and route for anyone who believes site content infringes their rights, listing exactly what to include in a complaint and the review process and outcomes that follow. It gives the company a documented, proportionate response process instead of an ad hoc one, without pretending to be a full DMCA program the company's actual content model does not need.",
+      "timebox_days": 0.5,
+      "launch_stage": "beta",
+      "estimated_days": 0.5,
+      "estimate_source": "New scope identified 17 Sep 2026: no ticket previously covered the outward-facing IP-complaints process for the public site.",
+      "audit": {
+        "decision": "retain",
+        "reason": "Confirmed gap: P0-FZ-02 covers only the company's own third-party-image use, not an inbound complaints/takedown route; this closes that gap narrowly and proportionately."
       },
       "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident."
     },
@@ -28768,6 +28850,7 @@ window.LAUNCH_DATA = {
         "N5-FZ-06",
         "N3-FZ-08",
         "N6-FZ-02",
+        "N2-FZ-18",
         "Asad: legal pages live on the marketing site (N6)"
       ],
       "feeds": [
@@ -34506,6 +34589,44 @@ window.LAUNCH_DATA = {
       "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident."
     },
     {
+      "id": "N5-FZ-12",
+      "sprint": "N6",
+      "assignee": "Filza",
+      "title": "Accessibility statement wording + publish (Equality Act 2010 context)",
+      "what": "Draft a published accessibility statement for the app and site: conformance target and current status against WCAG 2.1 AA, drawn from Saad's closed N5-AS-04 fix list and axe results, known limitations still open, the Equality Act 2010 'reasonable adjustments' framing for a UK service, a contact route for access problems, and the date it was last reviewed. Hand the approved wording to Saad and Asad, who publish it at a stable URL linked from the site footer alongside the other legal pages, and add its route to Settings. Split out of BL-PR-06, which now covers only its unrelated coach-marks UI feature.",
+      "why": "BL-PR-06 previously bundled this legally-relevant statement into an unscheduled backlog row with no owner and no date; an accessibility statement is boilerplate procurement/trust content that should ship before public launch, not sit parked indefinitely.",
+      "area": "Legal",
+      "due": "2026-11-24",
+      "priority": "P2",
+      "priority_reason": "Trust/procurement gap-fill; depends on Saad's WCAG fix list closing first, not on the Meta submission critical path.",
+      "depends_on": [
+        "N5-AS-04"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "An accessibility statement is published at a stable URL linked from the site footer and Settings, naming the conformance target, current status, known limitations and a contact route, reviewed and dated.",
+      "checklist": [
+        "Draft conformance target, current status and known limitations from Saad's closed N5-AS-04 list and axe results",
+        "Add Equality Act 2010 reasonable-adjustments framing and a named contact route for access problems",
+        "Alex/Filza approve wording; hand to Saad and Asad",
+        "Saad/Asad publish at a stable URL; footer and Settings links live; review date recorded"
+      ],
+      "layman": "Writing the page that says how accessible our app actually is - what we meet, what we're still fixing, and who to contact if something doesn't work for you - based on the real accessibility fixes Saad's team just finished, then getting it published.",
+      "layman_analogy": "Like posting the wheelchair-access certificate by the front door once the ramp has actually been built, not before, and putting a real doorbell next to it for anyone who still can't get in.",
+      "layman_needed": "A published accessibility statement naming what standard we meet, what's still open, and a contact route, based on Saad's completed fix list.",
+      "layman_output": "A published accessibility statement, linked from the site footer and the Settings screen, stating the WCAG conformance level actually reached (drawn from Saad's closed fix list and axe results), any known limitations still open, our Equality Act 2010 position, a contact for anyone hitting an access problem, and the date it was last reviewed.",
+      "timebox_days": 0.5,
+      "launch_stage": "public",
+      "estimated_days": 0.5,
+      "estimate_source": "New scope identified 17 Sep 2026: split out of BL-PR-06, which bundled this legal statement into an unscheduled, unowned backlog row.",
+      "audit": {
+        "decision": "retain",
+        "reason": "Confirmed gap: accessibility statement was unscheduled with no owner in BL-PR-06; split out with a real owner, dependency on the completed WCAG audit, and a due date before the hard deadline."
+      },
+      "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident."
+    },
+    {
       "id": "N5-JL-08",
       "sprint": "N5",
       "assignee": "Alex",
@@ -40168,15 +40289,15 @@ window.LAUNCH_DATA = {
       },
       {
         "owner": "Filza",
-        "tickets": 62,
+        "tickets": 65,
         "focus_rate": 0.5,
-        "effort_days": 55.75,
+        "effort_days": 57.75,
         "capacity_days": 32,
-        "gap_days": 23.75,
+        "gap_days": 25.75,
         "capacity_at_hard_limit": 32
       }
     ],
-    "total_effort_days": 606.25,
+    "total_effort_days": 608.25,
     "total_capacity_days": 268.8
   },
   "ticket_audit": {

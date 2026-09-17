@@ -1,8 +1,8 @@
 {
   "source_commit": "fa817cd",
   "reverses_scope_cut_commit": "44f347e",
-  "before_total": 906,
-  "retained_total": 904,
+  "before_total": 909,
+  "retained_total": 907,
   "restored_active": 352,
   "restored_backlog": 279,
   "removed_ids": [
@@ -378,6 +378,8 @@
     "N2-FZ-15",
     "N2-FZ-16",
     "N2-FZ-17",
+    "N2-FZ-18",
+    "N2-FZ-19",
     "N2-JL-01",
     "N2-JL-02",
     "N2-JL-03",
@@ -768,6 +770,7 @@
     "N5-FZ-09",
     "N5-FZ-10",
     "N5-FZ-11",
+    "N5-FZ-12",
     "N5-JL-01",
     "N5-JL-02",
     "N5-JL-03",

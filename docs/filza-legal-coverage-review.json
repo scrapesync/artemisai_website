@@ -1,0 +1,103 @@
+{
+  "as_of": "2026-09-17",
+  "source": "Filza legal-coverage review requested 17 September 2026, following docs/scope-restoration.json and ai-context/artemisai-planning/launch-constraints.md",
+  "n1_filza_tickets_audited": [
+    { "id": "N1-FZ-06", "title": "Co-sign Meta scopes decision", "verdict": "confirmed launch-critical, unchanged" },
+    { "id": "N1-FZ-07", "title": "Draft ToS/Privacy/DPA", "verdict": "confirmed launch-critical, unchanged" },
+    { "id": "N1-FZ-09", "title": "Landing privacy notice + tracking wording", "verdict": "confirmed launch-critical, unchanged" },
+    { "id": "N1-FZ-10", "title": "Data-deletion spec", "verdict": "confirmed launch-critical, unchanged" },
+    { "id": "N1-FZ-11", "title": "Companies House verification for Meta", "verdict": "confirmed launch-critical, unchanged" },
+    { "id": "N1-FZ-12", "title": "Meta permissions master doc", "verdict": "confirmed launch-critical, unchanged" }
+  ],
+  "existing_coverage_verified": {
+    "company_legal": ["N2-AX-11", "N2-JL-09", "N3-JL-08", "N2-JL-10", "N3-AX-09", "N3-FZ-14"],
+    "employee_contractor_legal": ["N2-FZ-13", "N4-JL-08", "N1-FZ-01"],
+    "privacy_tos_dpa_lifecycle": ["N1-FZ-07", "N2-FZ-05", "N2-AX-04", "N2-FZ-06", "N2-FZ-04", "N5-FZ-06", "N6-FZ-03"],
+    "other_confirmed_not_duplicated": [
+      "N2-FZ-09", "N3-FZ-09", "N3-FZ-18", "N1-FZ-05", "N3-FZ-05", "N3-FZ-13", "N2-FZ-15",
+      "N2-FZ-17", "N3-FZ-15", "N5-JL-10", "N1-JL-07", "N5-JL-06", "N2-FZ-16", "N2-FZ-01",
+      "N2-FZ-07", "N5-FZ-10", "N5-FZ-09", "P0-FZ-02", "N3-FZ-16"
+    ],
+    "parked_no_new_resource_tickets_untouched": ["N3-JL-18", "N3-JL-19", "LW-JL-05"]
+  },
+  "confirmed_gaps_closed": [
+    {
+      "id": "N2-FZ-18",
+      "title": "Draft + publish Cookie Policy v1 at a stable URL",
+      "rationale": "N6-FZ-03's frozen-build sweep already treats a signed, versioned Cookie Policy as a core legal document, but no ticket drafted or published one as its own artifact; only N1-FZ-09's tracking-wording inputs existed.",
+      "sprint": "N2",
+      "assignee": "Filza",
+      "due": "2026-10-02",
+      "estimated_days": 1,
+      "depends_on": ["N1-FZ-09"],
+      "linked_updates": [
+        "N6-FZ-03 depends_on now includes N2-FZ-18",
+        "N2-AX-04 title/what/checklist/acceptance updated to include Cookie Policy sign-off"
+      ]
+    },
+    {
+      "id": "N2-FZ-19",
+      "title": "Publish a copyright/IP-complaints and takedown-response policy for the public site",
+      "rationale": "P0-FZ-02 only settled the company's own position on using third-party images (input side); nothing covered the outward-facing process if a third party claims site content infringes their rights.",
+      "sprint": "N2",
+      "assignee": "Filza",
+      "due": "2026-10-04",
+      "estimated_days": 0.5,
+      "depends_on": ["P0-FZ-02"]
+    },
+    {
+      "id": "N5-FZ-12",
+      "title": "Accessibility statement wording + publish (Equality Act 2010 context)",
+      "rationale": "BL-PR-06 bundled a legally-relevant accessibility statement into an unscheduled, unowned backlog row with no date; split out with a real owner and a due date ahead of the hard deadline.",
+      "sprint": "N6",
+      "assignee": "Filza",
+      "due": "2026-11-24",
+      "estimated_days": 0.5,
+      "depends_on": ["N5-AS-04"]
+    }
+  ],
+  "bl_pr_06_disposition": {
+    "before_title": "Accessibility statement + coach marks",
+    "after_title": "Onboarding coach marks",
+    "change": "Accessibility-statement scope removed and split into new ticket N5-FZ-12 (Filza wording, Saad/Asad publish, depends on N5-AS-04). BL-PR-06 retains only the unrelated coach-marks UI feature, still unscheduled in backlog with no owner.",
+    "id_unchanged": true
+  },
+  "counts": {
+    "before_total_ids": 904,
+    "after_total_ids": 907,
+    "before_open_non_p0_tickets": 529,
+    "after_open_non_p0_tickets": 532,
+    "before_total_effort_days": 606.25,
+    "after_total_effort_days": 608.25,
+    "backlog_count_unchanged": 279,
+    "deletions": 0,
+    "n1_as_17_n1_fz_13_status": "remain permanently excluded, untouched"
+  },
+  "validation": {
+    "scripts_passing": [
+      "scripts/check_launch_plan.js",
+      "scripts/check_workload_review.js",
+      "scripts/check_critical_review.js",
+      "scripts/check_tracker_views.js",
+      "scripts/check_ticket_links.js"
+    ],
+    "files_updated_for_validation": [
+      "docs/scope-restoration.json (expected_ids +3, before_total 906->909, retained_total 904->907)",
+      "scripts/check_launch_plan.js (open non-P0 ticket count 529->532)",
+      "scripts/check_workload_review.js (capacity_review.total_effort_days 606.25->608.25)",
+      "scripts/check_critical_review.js (tickets+backlog 904->907; capacity_review.total_effort_days 606.25->608.25)",
+      "sprint_launch_data.js d.capacity_review.owners.Filza and total_effort_days regenerated via scripts/report_launch_capacity.js"
+    ]
+  },
+  "pdf": {
+    "regenerated": ["output/pdf/ArtemisAI_N1_Filza.pdf"],
+    "not_regenerated_intentionally": ["output/pdf/ArtemisAI_N1_Alex_and_Jill.pdf was regenerated as a side effect of running tmp/pdfs/current_guides.py (it builds both PDFs together), but its N1-AX/N1-JL ticket set and content are unaffected: the script's own assertion against d.tickets confirms the same N1 Alex/Jill ticket IDs, and no N1 ticket was touched by this review"],
+    "page_count": 6,
+    "visual_qa": "All 6 pages rendered via pdftoppm and inspected: no clipping/overlap, correct titles/content per ticket, working 'Open this ticket in the live tracker' links."
+  },
+  "judgment_calls": [
+    "N2-AX-04 (Alex's legal-pack sign-off) explicitly enumerates ToS/Privacy/DPA by name, so it was extended to also require signing Cookie Policy v1 (N2-FZ-18) for consistency, since Alex is the sole signer of the core legal pack.",
+    "New ticket ids follow the existing assignee-initials convention (N2-FZ-18/19, N5-FZ-12 for Filza) rather than the N5-AS numbering suggested only as an example in the brief, matching neighboring tickets like N5-FZ-10/11 whose sprint field does not match their id-number prefix (e.g. N5-FZ-11 sits in sprint LW).",
+    "N2-FZ-19 (copyright/takedown policy) was not added to N6-FZ-03's frozen-build sweep, since that ticket's 'what' field explicitly names only ToS/Privacy/DPA/Cookie as the four core documents it sweeps; the takedown policy is a fifth, separate public-site policy, not one of those four."
+  ]
+}
