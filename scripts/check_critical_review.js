@@ -1,0 +1,5 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');const c={window:{}};vm.runInNewContext(fs.readFileSync('sprint_launch_data.js','utf8'),c);const d=c.window.LAUNCH_DATA;const t=id=>d.tickets.find(t=>t.id===id);
+for(const [child,parent] of [['N2-AS-04','N2-MT-03'],['N2-AS-06','N2-MT-02'],['N4-AS-01','N4-MT-04']]){assert(t(child).depends_on.includes(parent));assert(t(child).due>t(parent).due);}
+assert(t('N2-LW-03').depends_on.includes('N2-LW-05'));for(const id of ['N2-FZ-06','N3-FZ-13'])assert(t('N2-LW-05').depends_on.includes(id));
+assert(t('N5-FH-05').depends_on.includes('N4-FH-13'));assert(t('N5-FH-05').what.includes('21–27 November'));assert(!t('N4-FH-13').acceptance.includes('60 answers'));assert.equal(t('N3-AX-08').launch_requirement,'conditional');assert(!t('N6-FH-01').layman_output.includes('7 Dec'));
+assert.equal(d.tickets.length+d.backlog.length,904);assert.equal(d.capacity_review.total_effort_days,606.25);console.log('PASS: live API acceptance, pilot clearance, stable evaluation window, conditional work and full scope preserved.');

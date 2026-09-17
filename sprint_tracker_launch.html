@@ -755,7 +755,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
 </div></div>
 <div class="toast" id="toast"></div>
 
-<script src="sprint_launch_data.js?v=20260917-restored"></script>
+<script src="sprint_launch_data.js?v=20260917-critical-review"></script>
 <script src="mock_shots_data.js"></script>
 <script>
 /* ============================================================
@@ -860,7 +860,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   function st(id){ return resolveState(BASE_RECORDS[id],STATE[id]); }
   function isOpen(t){ var s=st(t.id).status; return !t.superseded_by && s!=='done'&&s!=='dropped'; }
   function planningInputs(t){
-    var notes=[]; if(t.applicability_note) notes.push(t.applicability_note); if(t.deadline_note) notes.push(t.deadline_note);
+    var notes=[]; if(t.critical_review_note) notes.push(t.critical_review_note); if(t.launch_requirement==='conditional') notes.push('Conditional: confirm the stated business trigger before starting. Reserved effort remains in capacity totals until a decision is recorded.'); if(t.applicability_note) notes.push(t.applicability_note); if(t.deadline_note) notes.push(t.deadline_note);
     if(t.schedule_confidence) notes.push(t.schedule_confidence);
     (t.design_milestone_dependencies||[]).forEach(function(id){var m=(D.design_handoff.milestones||[]).filter(function(x){return x.id===id;})[0];if(m) notes.push(m.title+' · '+fmtS(m.date)+' · '+m.status+' (acceptance not verified)');});
     return notes.length?'<div class="note"><b>Design / planning inputs</b><p>'+notes.map(esc).join('<br>')+'</p></div>':'';
@@ -972,6 +972,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
         '<p class="note">'+esc(LAUNCH.planning_note||'')+'</p>'+
         (lateEdits?'<p class="note">'+lateEdits+' open shared ticket edits are beyond the hard limit. Jill and the owners must reconcile these; saved team edits have not been erased.</p>':'')+
         (D.ticket_audit?'<p class="note">Full plan restored: build, AI/ML, APIs, design, vision, marketing and legal work. Two disputed incident-specific assignments remain excluded. <a href="docs/scope-restoration.md" target="_blank" rel="noopener">Read restoration summary</a></p>':'')+
+        (D.critical_review?'<p class="note"><b>Critical review: feasibility remains RED.</b> All workstreams retained; dependencies and conditional work corrected. <a href="docs/critical-launch-review.md" target="_blank" rel="noopener">Read the review across 12 roles</a></p>':'')+
         (cap?'<details><summary>Owner workload review · restored plan</summary><p class="note">Inherited remaining estimates, before owner confirmation. Recorded completion is reconciled with the shared-board snapshot; later saved statuses also affect this table. Effort includes open audited work and allocated reviewer effort; deferred and consolidated duplicate records are excluded. Capacity excludes weekends and assumes no extra staff or overtime.</p><div class="capacity-scroll"><table><thead><tr><th>Owner</th><th>Work days</th><th>Available to 15 Dec</th><th>Unresolved gap</th></tr></thead><tbody>'+rows+'</tbody></table></div></details>':'')+
         '</section>');
     }
