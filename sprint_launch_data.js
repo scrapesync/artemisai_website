@@ -15060,7 +15060,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Asad",
       "title": "Today feed on the live API",
-      "what": "Today screen: next-move hero with confidence chip, moves checklist, typed feed cards (crisis / opportunity / signal / prediction / win), setup pill reading ingest progress; page_id scoping via the workspace-switcher stub; every 'Schedule' CTA renders as 'Remind me at this time'; empty and lag states per Saad's pack. Routes Muteeb has not made live by 29 Sep run on the contract's mock layer and are swapped as endpoints land; the gate proof is the draft score, not the feed.",
+      "what": "Today screen: next-move hero with confidence chip, moves checklist, typed feed cards (crisis / opportunity / signal / prediction / win), setup pill reading ingest progress; page_id scoping via the workspace-switcher stub; every 'Schedule' CTA renders as 'Remind me at this time'; empty and lag states per Saad's pack. Use contract fixtures while the API is being built; final acceptance requires the real endpoint and pilot data.",
       "why": "The screen pilots open every morning; the habit loop the vision demands and half of the working-app reveal.",
       "area": "Today",
       "due": "2026-10-23",
@@ -15069,7 +15069,6 @@ window.LAUNCH_DATA = {
       "depends_on": [
         "N2-AS-01",
         "N1-AS-05",
-        "Muteeb: feed/aggregate endpoints (feature map N2; absent from his own N2 list - live-vs-mock per route agreed in N1-AS-05)",
         "N1-SD-07",
         "N2-SD-02",
         "N2-MT-03"
@@ -15080,7 +15079,7 @@ window.LAUNCH_DATA = {
         "N4-AS-13",
         "N2-AS-12"
       ],
-      "gate": "N3",
+      "gate": "N4",
       "source": "plan",
       "acceptance": "A pilot page shows a real next move, moves list and typed cards on staging and passes Saad's Today one-pager state by state.",
       "checklist": [
@@ -15166,7 +15165,6 @@ window.LAUNCH_DATA = {
       "depends_on": [
         "N2-AS-01",
         "N1-AS-05",
-        "Muteeb: production-grade score endpoint with drivers + confidence",
         "Faheem: driver attribution",
         "N2-FH-03",
         "N1-SD-07",
@@ -15179,7 +15177,7 @@ window.LAUNCH_DATA = {
         "N2-AS-12",
         "N2-AS-08"
       ],
-      "gate": "N3",
+      "gate": "N4",
       "source": "plan",
       "acceptance": "Typing a draft on a pilot page moves the gauge and chips within ~1 s on staging and a reload restores the draft. Also required (N2-AS-08): A low-coverage draft shows the abstain state with no dial or chips; a covered draft shows a band.",
       "checklist": [
@@ -20863,7 +20861,6 @@ window.LAUNCH_DATA = {
       "priority": "P0",
       "priority_reason": "Gate: 20-question run live Mon 12 Oct 2026",
       "depends_on": [
-        "Muteeb: Q&A end-to-end + orchestration",
         "N4-FH-01",
         "N3-SD-04",
         "N3-MT-09",
@@ -20878,7 +20875,7 @@ window.LAUNCH_DATA = {
         "N4-AS-22",
         "N4-AS-19"
       ],
-      "gate": "N5",
+      "gate": "N6",
       "source": "plan",
       "acceptance": "Answers stream over SSE from a route handler inside a hard 45-second budget with a reconnecting client, no WebSocket is used anywhere, and an answer that exceeds the budget degrades to a visible, honest wait rather than a dead stream.",
       "checklist": [
@@ -20923,7 +20920,7 @@ window.LAUNCH_DATA = {
       "feeds": [
         "N4-SD-14"
       ],
-      "gate": "N5",
+      "gate": "N6",
       "source": "plan",
       "acceptance": "A must-refuse question shows the refusal state, every state in Saad's matrix renders with its own copy, every answer carries the AI label, and the card CTA lands on the right screen.",
       "checklist": [
@@ -21057,7 +21054,7 @@ window.LAUNCH_DATA = {
         "N5-AS-11",
         "N5-FH-08"
       ],
-      "gate": "N5",
+      "gate": "N6",
       "source": "plan",
       "acceptance": "A thumbs-down with reason appears in the feedback store with the answer id and citations.",
       "checklist": [
@@ -21329,7 +21326,7 @@ window.LAUNCH_DATA = {
       "feeds": [
         "N5-AS-21"
       ],
-      "gate": "N5",
+      "gate": "N6",
       "source": "plan",
       "acceptance": "Flows 4 and 5 run green in CI alongside 1-3.",
       "checklist": [

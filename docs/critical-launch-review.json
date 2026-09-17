@@ -534,7 +534,7 @@
         },
         "what": {
           "before": "Today screen: next-move hero with confidence chip, moves checklist, typed feed cards (crisis / opportunity / signal / prediction / win), setup pill reading ingest progress; page_id scoping via the workspace-switcher stub; every 'Schedule' CTA renders as 'Remind me at this time'; empty and lag states per Saad's pack. Routes Muteeb has not made live by 29 Sep run on the contract's mock layer and are swapped as endpoints land; the gate proof is the draft score, not the feed. Balancing 16 Sep: time-box to about 3 days (full scope about 5); ship the smallest version that meets the acceptance and park the rest in the backlog.",
-          "after": "Today screen: next-move hero with confidence chip, moves checklist, typed feed cards (crisis / opportunity / signal / prediction / win), setup pill reading ingest progress; page_id scoping via the workspace-switcher stub; every 'Schedule' CTA renders as 'Remind me at this time'; empty and lag states per Saad's pack. Routes Muteeb has not made live by 29 Sep run on the contract's mock layer and are swapped as endpoints land; the gate proof is the draft score, not the feed."
+          "after": "Today screen: next-move hero with confidence chip, moves checklist, typed feed cards (crisis / opportunity / signal / prediction / win), setup pill reading ingest progress; page_id scoping via the workspace-switcher stub; every 'Schedule' CTA renders as 'Remind me at this time'; empty and lag states per Saad's pack. Use contract fixtures while the API is being built; final acceptance requires the real endpoint and pilot data."
         },
         "due": {
           "before": "2026-10-14",
@@ -551,11 +551,14 @@
           "after": [
             "N2-AS-01",
             "N1-AS-05",
-            "Muteeb: feed/aggregate endpoints (feature map N2; absent from his own N2 list - live-vs-mock per route agreed in N1-AS-05)",
             "N1-SD-07",
             "N2-SD-02",
             "N2-MT-03"
           ]
+        },
+        "gate": {
+          "before": "N3",
+          "after": "N4"
         },
         "critical_review_note": {
           "before": null,
@@ -604,13 +607,16 @@
           "after": [
             "N2-AS-01",
             "N1-AS-05",
-            "Muteeb: production-grade score endpoint with drivers + confidence",
             "Faheem: driver attribution",
             "N2-FH-03",
             "N1-SD-07",
             "N2-SD-02",
             "N2-MT-02"
           ]
+        },
+        "gate": {
+          "before": "N3",
+          "after": "N4"
         },
         "critical_review_note": {
           "before": null,
@@ -1681,12 +1687,15 @@
             "N3-SD-04"
           ],
           "after": [
-            "Muteeb: Q&A end-to-end + orchestration",
             "N4-FH-01",
             "N3-SD-04",
             "N3-MT-09",
             "N4-MT-04"
           ]
+        },
+        "gate": {
+          "before": "N5",
+          "after": "N6"
         },
         "critical_review_note": {
           "before": null,
@@ -1712,6 +1721,10 @@
         "due": {
           "before": "2026-11-12",
           "after": "2026-11-19"
+        },
+        "gate": {
+          "before": "N5",
+          "after": "N6"
         }
       }
     },
@@ -1738,6 +1751,10 @@
         "due": {
           "before": "2026-11-12",
           "after": "2026-11-19"
+        },
+        "gate": {
+          "before": "N5",
+          "after": "N6"
         }
       }
     },
@@ -1800,6 +1817,10 @@
         "due": {
           "before": "2026-11-12",
           "after": "2026-11-19"
+        },
+        "gate": {
+          "before": "N5",
+          "after": "N6"
         }
       }
     },
