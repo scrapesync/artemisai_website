@@ -42,17 +42,16 @@ all.forEach(t => visit(t.id));
 for (const tr of d.tracks) for (const lane of tr.lanes) {
   for (const id of lane.tickets) assert(index.has(id), `Missing lane ticket ${id}`);
 }
-// Every original record has an explicit disposition; removed work must not leak into any view.
-const audit=JSON.parse(fs.readFileSync('docs/business-scope-audit.json','utf8'));
-assert.equal(audit.records.length,audit.before_total);
-assert.equal(new Set(audit.records.map(t=>t.id)).size,audit.before_total);
+// Protect the full agreed plan from another blanket deletion.
+const receipt=JSON.parse(fs.readFileSync('docs/scope-restoration.json','utf8'));
+assert.deepEqual([...index.keys()].sort(),receipt.expected_ids);
 const removed=new Set(d.scope_revision.removed_ids);
-assert.equal(all.length+removed.size,audit.before_total);
-for(const id of removed) assert(!index.has(id),`Removed record still active: ${id}`);
-for(const t of all) assert(audit.records.some(r=>r.id===t.id&&['retain','historical'].includes(r.decision)));
-assert.equal(d.backlog.length,0);
-assert.equal(d.tickets.filter(t=>t.status!=='done'&&t.sprint!=='P0').length,d.scope_revision.retained_open);
-for(const id of ['N1-FZ-13','N1-AS-17','N1-JL-06']) assert(removed.has(id));
+assert.equal(all.length+removed.size,receipt.before_total);
+assert.deepEqual([...removed].sort(),['N1-AS-17','N1-FZ-13']);
+for(const id of removed) assert(!index.has(id));
+assert.equal(d.backlog.length,279);
+assert.equal(d.tickets.filter(t=>t.status!=='done'&&t.sprint!=='P0').length,529);
+for(const id of ['N2-AS-01','N2-AS-06','N1-MT-09','N2-FH-06','N2-FH-14','N2-MT-16','N2-SD-19','N3-SD-14','N2-AX-13','N2-AX-16','N6-AX-08','N3-FZ-13','N4-FZ-12','N1-JL-06']) assert(index.has(id),`Agreed work lost: ${id}`);
 assert.equal(index.get('LW-AS-04').due,d.launch.public);
 assert.equal(index.get('N2-SD-07').sprint,'N4');
 assert(index.get('N2-SD-07').depends_on.includes('N2-SD-04'));

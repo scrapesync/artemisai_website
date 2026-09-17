@@ -58,7 +58,7 @@ assert.equal(d.tickets.filter(t=>t.status==='done').length,96);
 console.log('PASS: verified status wins over stale cache; newer updates apply; revised checklists require fresh checks; only the exact superseded calendar override is ignored.');
 
 // Stale saved moves/custom records must not resurrect removed assignments.
-const allContext={D:d,BACKLOG:d.backlog,CUSTOM:[{id:'N1-FZ-13',sprint:'N1'},{id:'N1-JL-06',sprint:'N1'}],applyEdits:t=>t};
+const allContext={D:d,BACKLOG:d.backlog,CUSTOM:[{id:'N1-FZ-13',sprint:'N1'},{id:'N1-AS-17',sprint:'N1'}],applyEdits:t=>t};
 vm.runInNewContext(html.split('\n').find(l=>l.trim().startsWith('function all(')),allContext);
 assert(!allContext.all().some(t=>d.scope_revision.removed_ids.includes(t.id)));
 for(const tr of d.tracks) for(const lane of tr.lanes) for(const id of lane.tickets) assert(!d.scope_revision.removed_ids.includes(id));

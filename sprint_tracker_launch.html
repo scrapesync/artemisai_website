@@ -694,7 +694,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   <section id="view-track-qa" class="hidden">
     <div class="eyebrow">One place to see and control quality</div>
     <div class="h1">QA Control Center</div>
-    <div class="sub">Practical checks for the shipped product, using the existing QA and NLP dashboards. No duplicate dashboard build or assumed incident-response work.</div>
+    <div class="sub">Restored build, data/model, product and release checks, using the existing QA and NLP dashboards. Planned checks are not completed checks.</div>
     <div class="ftiles" id="tk-tiles-qa"></div>
     <div id="tk-spec-qa"></div>
     <div id="tk-body-qa"></div>
@@ -755,7 +755,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
 </div></div>
 <div class="toast" id="toast"></div>
 
-<script src="sprint_launch_data.js?v=20260917-essential"></script>
+<script src="sprint_launch_data.js?v=20260917-restored"></script>
 <script src="mock_shots_data.js"></script>
 <script>
 /* ============================================================
@@ -860,7 +860,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   function st(id){ return resolveState(BASE_RECORDS[id],STATE[id]); }
   function isOpen(t){ var s=st(t.id).status; return !t.superseded_by && s!=='done'&&s!=='dropped'; }
   function planningInputs(t){
-    var notes=[]; if(t.deadline_note) notes.push(t.deadline_note);
+    var notes=[]; if(t.applicability_note) notes.push(t.applicability_note); if(t.deadline_note) notes.push(t.deadline_note);
     if(t.schedule_confidence) notes.push(t.schedule_confidence);
     (t.design_milestone_dependencies||[]).forEach(function(id){var m=(D.design_handoff.milestones||[]).filter(function(x){return x.id===id;})[0];if(m) notes.push(m.title+' · '+fmtS(m.date)+' · '+m.status+' (acceptance not verified)');});
     return notes.length?'<div class="note"><b>Design / planning inputs</b><p>'+notes.map(esc).join('<br>')+'</p></div>':'';
@@ -971,8 +971,8 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
         '<h3>15 December launch · final deadline</h3><p>'+esc(LAUNCH.staffing||'Existing team only')+'.</p>'+
         '<p class="note">'+esc(LAUNCH.planning_note||'')+'</p>'+
         (lateEdits?'<p class="note">'+lateEdits+' open shared ticket edits are beyond the hard limit. Jill and the owners must reconcile these; saved team edits have not been erased.</p>':'')+
-        (D.ticket_audit?'<p class="note">Essential-scope review: 177 open tasks; repeated, premature and unsupported assignments removed. <a href="docs/business-scope-review.md" target="_blank" rel="noopener">Read scope review</a></p>':'')+
-        (cap?'<details><summary>Owner workload review · essential scope</summary><p class="note">Inherited remaining estimates, before owner confirmation. Recorded completion is reconciled with the shared-board snapshot; later saved statuses also affect this table. Effort includes open audited work and allocated reviewer effort; deferred and consolidated duplicate records are excluded. Capacity excludes weekends and assumes no extra staff or overtime.</p><div class="capacity-scroll"><table><thead><tr><th>Owner</th><th>Work days</th><th>Available to 15 Dec</th><th>Unresolved gap</th></tr></thead><tbody>'+rows+'</tbody></table></div></details>':'')+
+        (D.ticket_audit?'<p class="note">Full plan restored: build, AI/ML, APIs, design, vision, marketing and legal work. Two disputed incident-specific assignments remain excluded. <a href="docs/scope-restoration.md" target="_blank" rel="noopener">Read restoration summary</a></p>':'')+
+        (cap?'<details><summary>Owner workload review · restored plan</summary><p class="note">Inherited remaining estimates, before owner confirmation. Recorded completion is reconciled with the shared-board snapshot; later saved statuses also affect this table. Effort includes open audited work and allocated reviewer effort; deferred and consolidated duplicate records are excluded. Capacity excludes weekends and assumes no extra staff or overtime.</p><div class="capacity-scroll"><table><thead><tr><th>Owner</th><th>Work days</th><th>Available to 15 Dec</th><th>Unresolved gap</th></tr></thead><tbody>'+rows+'</tbody></table></div></details>':'')+
         '</section>');
     }
     if(D.design_handoff){
@@ -1825,7 +1825,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   function openTicketLink(){
     var id=linkedTicketId(location.search); if(!id) return;
     var t=all().filter(function(x){return x.id===id;})[0];
-    if(!t){ toast(D.scope_revision && D.scope_revision.removed_ids.indexOf(id)>=0?'Removed from the essential launch plan: '+id:'Ticket not found: '+id,true); return; }
+    if(!t){ toast(D.scope_revision && D.scope_revision.removed_ids.indexOf(id)>=0?'Excluded disputed assignment: '+id:'Ticket not found: '+id,true); return; }
     F={who:'',status:'',pr:'',q:'',layer:''}; VIEW='list'; OPEN={}; OPEN[id]=true;
     ['f-status','f-pr','f-q'].forEach(function(k){document.getElementById(k).value='';});
     if(sp(t)==='BL'){ MAPVIEW='ticket'; MAPWHO=''; MAPSEL=id; showTab('map'); showDetail(id); }

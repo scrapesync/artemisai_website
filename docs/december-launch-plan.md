@@ -1,3 +1,5 @@
+> Superseded scope reduction: see [restoration of the full plan](scope-restoration.md). The broad essential-only cut was reversed; full workstreams are restored.
+
 # Current scope correction
 
 The 17 September [essential-scope review](business-scope-review.md) supersedes the earlier workload totals, ticket lists and fixed Meta submission assumption below. Current plan: 177 open tasks, 96 completed history records; launch 15 December, N1 end 25 September. Meta review follows a working integration.

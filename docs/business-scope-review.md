@@ -1,3 +1,5 @@
+> Superseded scope reduction: see [restoration of the full plan](scope-restoration.md). The broad essential-only cut was reversed; full workstreams are restored.
+
 # Essential launch scope - 17 September 2026
 
 User instruction: remove unsupported, premature and nonessential assignments from the PDF and every tracker tab. Public launch remains **15 December**; N1 ends **Friday 25 September**.
