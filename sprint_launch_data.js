@@ -4405,42 +4405,6 @@ window.LAUNCH_DATA = {
       }
     },
     {
-      "id": "N3-AX-05",
-      "sprint": "BL",
-      "assignee": "Alex",
-      "title": "Optional LinkedIn invite-targeting trial (research-upgraded, manual)",
-      "what": "Decide whether to run the optional trial and, if yes, run it strictly by hand: rank invites by an engagement-weighted mutual-tie score (comments > reactions > passive follow), add a randomised control arm of matched cold prospects (same industry/title, 0 mutuals), log mutual count per invite for a dose-response read, cap ~20-25% per neighbourhood cluster, stay under 100 invites/week, and measure 30-day reply/engagement of accepts rather than accept rate. Proposed cut in the 16 Sep balancing: Optional speculative LinkedIn experiment unrelated to the product or launch readiness. Re-decide at Roadmap V2.",
-      "why": "Acceptance is not value; the trial is the cheap test of whether the network theory behind Discovery also grows our own pipeline, and if it works it becomes a Wave-2 engine.",
-      "area": "Proposed cut · Marketing",
-      "due": "",
-      "priority": "P2",
-      "priority_reason": "Optional per the plan; safe to skip if N3 runs hot. · parked 16 Sep (cut)",
-      "depends_on": [
-        "N3-AX-03"
-      ],
-      "feeds": [],
-      "gate": "none",
-      "source": "plan",
-      "acceptance": "Either a written 'not running' note, or a logged sheet of invites with treatment/control arms and the 30-day measurement date set.",
-      "checklist": [
-        "Decide go/no-go on the trial",
-        "Build the scoring sheet",
-        "Define the control arm",
-        "Send under 100/week, manually",
-        "Set the 30-day read date"
-      ],
-      "layman": "Alex decides whether to run a small, strictly-by-hand LinkedIn outreach trial, inviting the people most likely to care first, so we learn what works without breaking any platform rules.",
-      "layman_analogy": "Like deciding whether to hand-deliver a few dozen party invitations to the friends most likely to come, with a note kept of who replied.",
-      "layman_needed": "Either a written 'not running it' note, or a logged spreadsheet of the hand-run LinkedIn trial — who was invited, the comparison group, invite caps respected — with the 30-day follow-up measurement date set.",
-      "layman_output": "One of two things on file: a short written note saying the optional LinkedIn outreach trial is not being run, or a logged spreadsheet of the hand-run trial — who was invited and why they ranked highly, a matched comparison group of cold prospects, invite caps respected, and the 30-day follow-up date set to measure real replies rather than mere accepts. Either way, the decision is recorded, not drifting.",
-      "layer": "launch",
-      "parked_from": "N3",
-      "audit": {
-        "decision": "backlog",
-        "reason": "Unscheduled scope; requires a separate priority decision, contributes no December capacity load."
-      }
-    },
-    {
       "id": "N3-LW-02",
       "sprint": "BL",
       "assignee": "Lewis",
@@ -11303,6 +11267,9 @@ window.LAUNCH_DATA = {
       "id": "N1-AS-03",
       "sprint": "N1",
       "assignee": "Asad",
+      "status": "done",
+      "status_source": "Consistency resolution 2026-09-17: counterpart co-sign N1-MT-02 (Muteeb, 'co-sign stack decision and API contract WITH Asad') is recorded done on the shared board; a co-sign is mutual and the 3 Sep stack decision is recorded in this ticket. Confirm before treating as owner-attested.",
+      "status_updated_at": "2026-09-17",
       "title": "Sign the stack and multi-page tenancy decision",
       "what": "Co-write and sign a one-page stack decision with Muteeb: Next.js + TypeScript PWA, Tailwind driven by Saad's design tokens, Netlify hosting for landing and app; name the bought auth vendor (Clerk or Cognito) and how its JWT carries the tenant claim; name the E2E runner and the KPI-events sink so no N2-N3 ticket reopens them. File it in the repo docs with a 'no changes after' clause. DECISION RECORDED 3 Sep: Lovable is Saad's mockup tool; Next.js is the product. Lovable code never merges - the mockup is the spec, the repo is the build. Consolidated N1-AS-04: Decide and record: an account (tenant) owns many pages; page_id is mandatory on every query and every table carrying page data; a workspace is the set of connected pages with an all-pages / one-page filter everywhere; one Facebook token per page. Agree with Muteeb how the JWT tenant claim keys RLS and where page ownership is checked.",
       "why": "Muteeb scaffolds repo, CI and preview deploys in week A against this document; a late change moves every deploy path.",
@@ -11371,6 +11338,9 @@ window.LAUNCH_DATA = {
       "id": "N1-AS-05",
       "sprint": "N1",
       "assignee": "Asad",
+      "status": "done",
+      "status_source": "Consistency resolution 2026-09-17: counterpart co-sign N1-MT-02 and N1-FH-19 (FastAPI doc frozen) are recorded done on the shared board; a co-sign is mutual. Confirm before treating as owner-attested.",
+      "status_updated_at": "2026-09-17",
       "title": "Co-sign the API contract v1 with Muteeb (OpenAPI stub)",
       "what": "Co-sign the API contract as TWO OpenAPI documents with different lifecycles, not one: (1) browser-to-BFF, hand-authored with Zod and zod-openapi in the app repo, changing weekly - error envelope, tenant claim on every route and page_id on every query, pages list plus per-page connection-health and disconnect, Today feed (next-move with confidence, moves[], typed feed cards, setup-pill ingest progress), draft-score view-model carrying drivers[] in Saad's chip vocabulary plus confidence/coverage flag and band, unread counts, health (score, weekly delta, three factor sub-scores), nightly briefing aggregate, alerts (cited post/comment ids, one action, drafted reply, rules), best-times cells with a count-floor flag; (2) BFF-to-FastAPI, generated from Faheem's Pydantic models (N1-FH-19), changing when a model changes. Record which of the three owners owns each route (N1-AS-14), that only FastAPI holds warehouse credentials, and per route whether it is live or mock in N2 - the feature map gives Muteeb feed/aggregate endpoints that his own N2 list does not have, so the Today screen's data supply is settled here.",
       "why": "Every Faheem -> Muteeb -> Asad seam is mechanical only if the shapes are on paper now; Muteeb's mock layer and Asad's N2 screens both read this file.",
@@ -11920,9 +11890,7 @@ window.LAUNCH_DATA = {
       "due": "2026-09-23",
       "priority": "P1",
       "priority_reason": "evidence for work that already exists; real risk of loss, slack inside N1",
-      "depends_on": [
-        "N1-FH-07"
-      ],
+      "depends_on": [],
       "feeds": [
         "N2-FH-01",
         "N3-JL-10",
@@ -11966,8 +11934,7 @@ window.LAUNCH_DATA = {
       "priority": "P0",
       "priority_reason": "Decision 1 must land before N2 tuning starts 14 Sep",
       "depends_on": [
-        "N1-FH-03",
-        "N1-LW-01"
+        "N1-FH-03"
       ],
       "feeds": [
         "N2-AS-02",
@@ -38204,6 +38171,119 @@ window.LAUNCH_DATA = {
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
       "deadline_note": "Complete the N1 deliverable by Friday 25 September. Preparatory work must clearly record any unbuilt feature or missing input."
+    },
+    {
+      "id": "N1-AX-21",
+      "sprint": "N1",
+      "assignee": "Alex",
+      "title": "Kick off pre-launch build-in-public on LinkedIn now",
+      "what": "Start the founder-led LinkedIn cadence immediately rather than waiting for the 9 Oct content calendar (N2-AX-16). Amplify the 24 Sep design reveal (N1-AX-08): post the reveal, a short 'why we are building Art-E' founder note, and begin a weekly build-in-public rhythm (one Alex post plus one builder post per week) that N2-AX-16 later formalises. Every post carries the waitlist UTM link. Hold to Filza's Meta narrative firewall wording (never 'go viral'; use 'taking off') and make no product claim beyond the messaging house once N2-AX-13 lands.",
+      "why": "The waitlist opens around 20 Oct and hype compounds; starting the cadence in mid-September warms the audience and de-risks a cold waitlist launch. The 24 Sep reveal is a natural first beat that currently has no amplification ticket.",
+      "area": "Marketing",
+      "due": "2026-09-25",
+      "priority": "P1",
+      "priority_reason": "Time-sensitive: the 24 Sep reveal is the first beat and hype compounds before the 20 Oct waitlist opening",
+      "depends_on": [],
+      "feeds": [
+        "N2-AX-16"
+      ],
+      "gate": "N1",
+      "source": "plan",
+      "acceptance": "The 24 Sep reveal is posted on LinkedIn with the waitlist UTM link, a founder intro post is live, and a weekly cadence with named posters is running until N2-AX-16 takes over.",
+      "checklist": [
+        "Post the 24 Sep design reveal on LinkedIn with the waitlist UTM link",
+        "Publish a short founder 'why Art-E' note",
+        "Agree the weekly cadence and named posters (Alex + one builder)",
+        "Confirm all wording matches Filza's Meta narrative firewall"
+      ],
+      "layman": "We start posting about the product on LinkedIn now — beginning with the 24 Sep reveal — so people are warmed up and interested before the waitlist opens, instead of starting from cold.",
+      "layman_analogy": "Like putting up 'opening soon' signs and sharing behind-the-scenes photos weeks before a shop opens, so there's a queue on day one.",
+      "layman_needed": "The 24 Sep reveal posted on LinkedIn with the waitlist link, a short founder note on why we're building Art-E, and a simple weekly posting rhythm with named people, all in the approved wording.",
+      "layman_output": "A live start to our public presence: the design reveal and a founder note on LinkedIn carrying the waitlist link, plus an agreed weekly rhythm of one founder post and one builder post — all inside the approved, platform-safe wording — so momentum is already building when the waitlist opens and the October content calendar simply takes the baton.",
+      "timebox_days": 1.5,
+      "launch_stage": "beta",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep; owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Launch-relevant marketing beat filling the mid-September pre-hype gap before the 9 Oct content calendar; owner estimate requires confirmation."
+      }
+    },
+    {
+      "id": "N4-SD-17",
+      "sprint": "N4",
+      "assignee": "Saad",
+      "title": "Technical + content SEO baseline for the marketing site",
+      "what": "Go beyond N4-AS-21's indexable-pages/metadata foundation: ship sitemap.xml and robots.txt, canonical tags, JSON-LD structured data (Organization + Product/SoftwareApplication), OpenGraph/Twitter card tags on every public page, a Core Web Vitals pass (LCP/CLS/INP within Google thresholds), and a semantic heading pass. Add a light content baseline: 3-5 target keywords for the creator/small-business segment, on-page copy aligned to them from the N2-AX-13 messaging house, and one help/explainer article. Coordinate with N6-AS-06 (frozen-build marketing site) so nothing regresses at launch freeze.",
+      "why": "The waitlist and launch drive organic search traffic; without structured data, canonical/OG tags and a Core Web Vitals pass the site indexes poorly and shares badly, wasting paid and organic reach. N4-AS-21 covers foundations only.",
+      "area": "Marketing",
+      "due": "2026-10-30",
+      "priority": "P2",
+      "priority_reason": "Should be in place before the waitlist opens ~20 Oct so shared and searched links render and rank",
+      "depends_on": [],
+      "feeds": [
+        "N6-AS-06"
+      ],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "sitemap.xml/robots.txt live, canonical + OG/Twitter tags on every public page, Organization + Product JSON-LD validated, a Core Web Vitals pass recorded green, and a 3-5 keyword content map with one published explainer article.",
+      "checklist": [
+        "Ship sitemap.xml, robots.txt and canonical tags",
+        "Add OG/Twitter cards and validate Organization + Product JSON-LD",
+        "Run and record a Core Web Vitals pass (LCP/CLS/INP)",
+        "Write the 3-5 keyword map and publish one explainer article"
+      ],
+      "layman": "We make the marketing site easy for Google to understand and nice to share, and write a little targeted content, so people can find us in search and links look good when shared.",
+      "layman_analogy": "Like putting clear signage, a good shop-window and a listing in the directory so people can both find the shop and see what's inside before walking in.",
+      "layman_needed": "A search-ready site: a site map and crawl rules, correct tags so Google and social previews work, a proven-fast page check, and a short list of target search terms with one helpful article.",
+      "layman_output": "A marketing site that search engines can read and social platforms preview correctly: sitemap and robots rules, canonical and OpenGraph/structured-data tags on every page, a recorded fast-page (Core Web Vitals) result, and a small keyword-aligned content baseline including one explainer article — so organic and shared traffic actually finds and trusts us, complementing the foundations in N4-AS-21 and holding through the launch freeze.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep; owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Distinct launch-relevant SEO depth (technical + content) beyond the N4-AS-21 foundation; owner estimate requires confirmation."
+      }
+    },
+    {
+      "id": "N3-AX-05",
+      "sprint": "N4",
+      "assignee": "Alex",
+      "title": "Optional LinkedIn invite-targeting trial (research-upgraded, manual)",
+      "what": "Decide whether to run the optional trial and, if yes, run it strictly by hand: rank invites by an engagement-weighted mutual-tie score (comments > reactions > passive follow), add a randomised control arm of matched cold prospects (same industry/title, 0 mutuals), log mutual count per invite for a dose-response read, cap ~20-25% per neighbourhood cluster, stay under 100 invites/week, and measure 30-day reply/engagement of accepts rather than accept rate. Proposed cut in the 16 Sep balancing: Optional speculative LinkedIn experiment unrelated to the product or launch readiness. Re-decide at Roadmap V2.",
+      "why": "Acceptance is not value; the trial is the cheap test of whether the network theory behind Discovery also grows our own pipeline, and if it works it becomes a Wave-2 engine.",
+      "area": "Marketing",
+      "due": "2026-10-30",
+      "priority": "P2",
+      "priority_reason": "Optional per the plan but retained as an active LinkedIn growth test at the user's direction (17 Sep); run only if N3 capacity allows",
+      "depends_on": [
+        "N3-AX-03"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Either a written 'not running' note, or a logged sheet of invites with treatment/control arms and the 30-day measurement date set.",
+      "checklist": [
+        "Decide go/no-go on the trial",
+        "Build the scoring sheet",
+        "Define the control arm",
+        "Send under 100/week, manually",
+        "Set the 30-day read date"
+      ],
+      "layman": "Alex decides whether to run a small, strictly-by-hand LinkedIn outreach trial, inviting the people most likely to care first, so we learn what works without breaking any platform rules.",
+      "layman_analogy": "Like deciding whether to hand-deliver a few dozen party invitations to the friends most likely to come, with a note kept of who replied.",
+      "layman_needed": "Either a written 'not running it' note, or a logged spreadsheet of the hand-run LinkedIn trial — who was invited, the comparison group, invite caps respected — with the 30-day follow-up measurement date set.",
+      "layman_output": "One of two things on file: a short written note saying the optional LinkedIn outreach trial is not being run, or a logged spreadsheet of the hand-run trial — who was invited and why they ranked highly, a matched comparison group of cold prospects, invite caps respected, and the 30-day follow-up date set to measure real replies rather than mere accepts. Either way, the decision is recorded, not drifting.",
+      "layer": "launch",
+      "audit": {
+        "decision": "retain",
+        "reason": "Reactivated from backlog at user direction as an active LinkedIn growth experiment; manual and compliant; owner estimate requires confirmation."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimate_source": "Reactivated 17 Sep; owner estimate to confirm"
     }
   ],
   "tracks": [
@@ -40226,11 +40306,11 @@ window.LAUNCH_DATA = {
     "owners": [
       {
         "owner": "Asad",
-        "tickets": 53,
+        "tickets": 51,
         "focus_rate": 0.6,
-        "effort_days": 80.51,
+        "effort_days": 78.51,
         "capacity_days": 38.4,
-        "gap_days": 42.11,
+        "gap_days": 40.11,
         "capacity_at_hard_limit": 38.4
       },
       {
@@ -40253,20 +40333,20 @@ window.LAUNCH_DATA = {
       },
       {
         "owner": "Saad",
-        "tickets": 121,
+        "tickets": 122,
         "focus_rate": 0.7,
-        "effort_days": 130.05,
+        "effort_days": 131.55,
         "capacity_days": 44.8,
-        "gap_days": 85.25,
+        "gap_days": 86.75,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Alex",
-        "tickets": 69,
+        "tickets": 71,
         "focus_rate": 0.4,
-        "effort_days": 47.48,
+        "effort_days": 49.98,
         "capacity_days": 25.6,
-        "gap_days": 21.88,
+        "gap_days": 24.38,
         "capacity_at_hard_limit": 25.6
       },
       {
@@ -40297,7 +40377,7 @@ window.LAUNCH_DATA = {
         "capacity_at_hard_limit": 32
       }
     ],
-    "total_effort_days": 608.25,
+    "total_effort_days": 610.25,
     "total_capacity_days": 268.8
   },
   "ticket_audit": {

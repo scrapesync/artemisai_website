@@ -54,7 +54,7 @@ const override=d.reconciliation.superseded_sprint_overrides.N1;
 assert(resolution.supersededSprintEdit('N1',override));
 assert(!resolution.supersededSprintEdit('N1',{...override,at:'2026-09-17T12:00:00Z'}));
 assert(!resolution.supersededSprintEdit('N2',override));
-assert.equal(d.tickets.filter(t=>t.status==='done').length,96);
+assert.equal(d.tickets.filter(t=>t.status==='done').length,98);
 console.log('PASS: verified status wins over stale cache; newer updates apply; revised checklists require fresh checks; only the exact superseded calendar override is ignored.');
 
 // Stale saved moves/custom records must not resurrect removed assignments.
