@@ -1163,219 +1163,6 @@ window.LAUNCH_DATA = {
       }
     },
     {
-      "id": "BL-APP-01",
-      "sprint": "BL",
-      "layer": "app",
-      "assignee": "Jill",
-      "title": "Apple + Google developer accounts, signing, keystore custody",
-      "what": "Apple Developer ($99/yr) and Google Play ($25) accounts under the company entity; signing certs and keystores created and custodied by ops, never in the repo.",
-      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
-      "area": "JANUARY · Mobile app (2 days)",
-      "due": "",
-      "priority": "P1",
-      "priority_reason": "scoped and parked by decision, not by omission",
-      "depends_on": [],
-      "feeds": [
-        "BL-APP-02",
-        "BL-APP-03",
-        "BL-APP-04",
-        "BL-APP-05",
-        "BL-APP-06",
-        "BL-APP-07"
-      ],
-      "gate": "none",
-      "source": "build book 3 Sep",
-      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-      "checklist": [],
-      "layman": "Parked for January: open the official Apple and Google developer accounts and keep the signing keys safely in ops hands, the paperwork step before any phone app can ship.",
-      "layman_analogy": "Like registering the business with the trading authorities and locking the shop's master keys in the safe before you can open a market stall.",
-      "layman_needed": "When picked up in January: official Apple and Google developer accounts under the company, with signing keys created and kept safely by ops, never in the code. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
-      "layman_output": "When picked up in January: official Apple and Google developer accounts registered under the company itself, with the signing certificates and keys — the credentials that prove an app genuinely comes from us — created and held safely by ops, never stored in the code. The paperwork foundation every store submission after it depends on. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
-      "audit": {
-        "decision": "backlog",
-        "reason": "Unscheduled scope; requires a separate priority decision, contributes no December capacity load."
-      }
-    },
-    {
-      "id": "BL-APP-02",
-      "sprint": "BL",
-      "layer": "app",
-      "assignee": "Asad",
-      "title": "Capacitor shell around the shipped Next.js build",
-      "what": "Wrap the exact web bundle N5-AS-08 ships. Offline app shell, deep links into alert cards, versioned update path. One codebase, two store shells. Added in the 16 Sep review: Build against the store floors in force at submission: Capacitor 8 targeting Android 16 (API 36) with enforced edge-to-edge handled through the SystemBars plugin and CSS safe-area insets, and Xcode 26 with the iOS 26 SDK. Ship a PrivacyInfo.xcprivacy declaring required-reason APIs for every plugin and SDK with tracking set to false, and set the export-compliance encryption key in Info.plist.",
-      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
-      "area": "JANUARY · Mobile app (4 days)",
-      "due": "",
-      "priority": "P1",
-      "priority_reason": "scoped and parked by decision, not by omission",
-      "depends_on": [
-        "BL-APP-01"
-      ],
-      "feeds": [
-        "BL-LL-24"
-      ],
-      "gate": "none",
-      "source": "build book 3 Sep",
-      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-      "checklist": [],
-      "layman": "Parked for January: wrap the finished web app in a thin shell so it installs from the App Store and Play Store - same product, no second codebase.",
-      "layman_analogy": "Like putting the same shop inside a shopping-centre unit — identical stock and staff, just a doorway where mall visitors already walk.",
-      "layman_needed": "When picked up in January: the finished web app wrapped in a thin shell that installs from the App Store and Play Store, with offline start-up, links straight into alert cards, and an update path — one codebase. Otherwise re-decided at Roadmap V2.",
-      "layman_output": "When picked up in January: the exact web app we shipped, wrapped in a thin shell that installs from the App Store and Play Store like any normal app — starting offline, opening links straight into alert cards, and updating cleanly. One codebase, two store icons; a pilot can find ArtemisAI on their home screen. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
-      "audit": {
-        "decision": "backlog",
-        "reason": "Unscheduled scope; requires a separate priority decision, contributes no December capacity load."
-      }
-    },
-    {
-      "id": "BL-APP-03",
-      "sprint": "BL",
-      "layer": "app",
-      "assignee": "Muteeb",
-      "title": "Native push: APNs + FCM from the same alerts worker",
-      "what": "The worker that already sends SES email and web push gains APNs and FCM delivery. Same quiet hours, same dedup, same kill switch. Added in the 16 Sep review: In the shell, ask for notification permission only after the first alert, with a pre-prompt and a route to system settings after denial, and register device tokens per user and tenant, removing them on sign-out, page disconnect and account deletion. Use separate Android channels for crisis and digest, the iOS time-sensitive level for crisis alerts only, and lock-screen text that shows the hook but never comment content.",
-      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
-      "area": "JANUARY · Mobile app (3 days)",
-      "due": "",
-      "priority": "P1",
-      "priority_reason": "scoped and parked by decision, not by omission",
-      "depends_on": [
-        "BL-APP-01"
-      ],
-      "feeds": [],
-      "gate": "none",
-      "source": "build book 3 Sep",
-      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-      "checklist": [],
-      "layman": "Parked for January: make crisis alerts arrive as real phone notifications through Apple and Google, using the same alarm system and quiet hours as email.",
-      "layman_analogy": "Like wiring the existing burglar alarm to also ring the owner's mobile — same alarm, same quiet hours, one more bell.",
-      "layman_needed": "When picked up in January: crisis alerts arriving as real Apple and Google phone notifications from the same system that sends email, honouring the same quiet hours, duplicate rules and kill switch. Otherwise re-decided at Roadmap V2.",
-      "layman_output": "When picked up in January: crisis alerts arriving as genuine Apple and Google phone notifications, sent by the very same system that already sends email and web push — honouring the same quiet hours, the same duplicate rules and the same emergency off switch. A page owner feels the buzz in their pocket within minutes. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
-      "audit": {
-        "decision": "backlog",
-        "reason": "Unscheduled scope; requires a separate priority decision, contributes no December capacity load."
-      }
-    },
-    {
-      "id": "BL-APP-04",
-      "sprint": "BL",
-      "layer": "app",
-      "assignee": "Saad",
-      "title": "Store identity: icon, splash, screenshots, listing copy",
-      "what": "App icon and splash from the token sheet; store screenshots from the demo tenant (never pilot data); listing copy that passes the narrative rulebook.",
-      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
-      "area": "JANUARY · Mobile app (2 days)",
-      "due": "",
-      "priority": "P1",
-      "priority_reason": "scoped and parked by decision, not by omission",
-      "depends_on": [
-        "BL-APP-01"
-      ],
-      "feeds": [],
-      "gate": "none",
-      "source": "build book 3 Sep",
-      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-      "checklist": [],
-      "layman": "Parked for January: the app-store face - icon, splash screen, screenshots and listing text, all from demo data and approved wording.",
-      "layman_analogy": "Like dressing the shop window before opening day — sign, awning and display photos — using the showroom dummy rather than real customers' belongings.",
-      "layman_needed": "When picked up in January: an app icon, splash screen, store screenshots taken from demo data only, and listing text that passes our approved wording rules. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
-      "layman_output": "When picked up in January: the app's public face — an icon and splash screen built from the approved design sheet, store screenshots taken only from the demo account (never real pilot data), and listing text that passes our approved wording rules. Anyone browsing either store sees a polished, honest listing. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
-      "audit": {
-        "decision": "backlog",
-        "reason": "Unscheduled scope; requires a separate priority decision, contributes no December capacity load."
-      }
-    },
-    {
-      "id": "BL-APP-05",
-      "sprint": "BL",
-      "layer": "app",
-      "assignee": "Filza",
-      "title": "Privacy labels + data-safety forms from the DPA",
-      "what": "Apple privacy nutrition labels and Google data-safety form, derived from the signed DPA and sub-processor list so the store filings and the legal papers never disagree.",
-      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
-      "area": "JANUARY · Mobile app (1 day)",
-      "due": "",
-      "priority": "P1",
-      "priority_reason": "scoped and parked by decision, not by omission",
-      "depends_on": [
-        "BL-APP-01"
-      ],
-      "feeds": [
-        "BL-LL-24"
-      ],
-      "gate": "none",
-      "source": "build book 3 Sep",
-      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-      "checklist": [],
-      "layman": "Parked for January: fill in Apple and Google privacy forms straight from our signed data agreement, so the store filings and legal papers never disagree.",
-      "layman_analogy": "Like copying the customs declaration straight from the shipping contract, so the form at the border never contradicts the paperwork in the crate.",
-      "layman_needed": "When picked up in January: Apple and Google privacy forms filled in directly from our signed data agreement and supplier list, so store filings and legal papers always agree. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
-      "layman_output": "When picked up in January: Apple's privacy labels and Google's data-safety form filled in directly from our signed data-processing agreement and supplier list, so what the stores say about our data handling can never contradict what the legal papers say. A reviewer can lay the three side by side and find no gaps. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
-      "audit": {
-        "decision": "backlog",
-        "reason": "Unscheduled scope; requires a separate priority decision, contributes no December capacity load."
-      },
-      "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident."
-    },
-    {
-      "id": "BL-APP-06",
-      "sprint": "BL",
-      "layer": "app",
-      "assignee": "Lewis",
-      "title": "Pilot devices: install, reconnect, crisis push drill",
-      "what": "Both store builds on real pilot phones via TestFlight/Play internal; one crisis push drill end to end on a phone before public release.",
-      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
-      "area": "JANUARY · Mobile app (1 day)",
-      "due": "",
-      "priority": "P1",
-      "priority_reason": "scoped and parked by decision, not by omission",
-      "depends_on": [
-        "BL-APP-01"
-      ],
-      "feeds": [],
-      "gate": "none",
-      "source": "build book 3 Sep",
-      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-      "checklist": [],
-      "layman": "Parked for January: put the store builds on real pilot phones and run one crisis alert end to end on a handset before the public release.",
-      "layman_analogy": "Like a fire drill in the actual building with the actual residents — not a diagram — before certifying the escape routes.",
-      "layman_needed": "When picked up in January: both store builds installed on real pilot phones, with one crisis alert run end to end on a handset before public release. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
-      "layman_output": "When picked up in January: both store builds installed on real pilot phones through Apple's and Google's testing channels, followed by one full crisis-alert drill run end to end — from detection to the notification buzzing on an actual handset — before anything goes public. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
-      "audit": {
-        "decision": "backlog",
-        "reason": "Unscheduled scope; requires a separate priority decision, contributes no December capacity load."
-      }
-    },
-    {
-      "id": "BL-APP-07",
-      "sprint": "BL",
-      "layer": "app",
-      "assignee": "Asad",
-      "title": "Submit both stores + release/rollback runbook",
-      "what": "TestFlight + Play internal, then production submission to both stores. Guideline 4.2 counter-case documented (native push, deep links, offline shell). Versioning and forced-update runbook written. Added in the 16 Sep review: Add the Sentry Capacitor SDK with release and dist tied to store build numbers, plus dSYM, Android mapping and source-map uploads in the release pipeline, and confirm a forced native crash from TestFlight and Play internal builds appears symbolicated. Write crash-free session thresholds (target 99.5%) into the runbook that halt the Play staged rollout and pause the Apple phased release, with the first release gated on TestFlight and internal-track crash data.",
-      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
-      "area": "JANUARY · Mobile app (2 days)",
-      "due": "",
-      "priority": "P1",
-      "priority_reason": "scoped and parked by decision, not by omission",
-      "depends_on": [
-        "BL-APP-01"
-      ],
-      "feeds": [],
-      "gate": "none",
-      "source": "build book 3 Sep",
-      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
-      "checklist": [],
-      "layman": "Parked for January: submit to both app stores with a written release-and-rollback plan, including the case for why our app is more than a website in a wrapper.",
-      "layman_analogy": "Like submitting planning permission with a written case for why the building is more than a facade, plus a demolition plan filed in case anything goes wrong.",
-      "layman_needed": "When picked up in January: submissions to both app stores, a documented case for why the app is more than a wrapped website, and a written release-and-rollback plan. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
-      "layman_output": "When picked up in January: production submissions filed with both app stores, a written case ready for Apple's more-than-a-wrapped-website rule (citing the native notifications, deep links and offline start), and a release-and-rollback runbook saying how versions ship and how a bad one gets pulled back. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
-      "audit": {
-        "decision": "backlog",
-        "reason": "Unscheduled scope; requires a separate priority decision, contributes no December capacity load."
-      }
-    },
-    {
       "id": "BL-LL-21",
       "sprint": "BL",
       "layer": "llm",
@@ -7043,7 +6830,7 @@ window.LAUNCH_DATA = {
       "title": "Web push service: VAPID keys, subscriptions, push beside SES",
       "what": "Promote BL-PR-03 into the sprint: VAPID keypair in env (never the repo), subscribe/unsubscribe endpoints, and web push as a second delivery channel from the same alerts worker that sends SES email. Quiet hours respected identically. Moved after launch in the 16 Sep balancing: Email and in-app crisis alerts suffice; push is an extra channel, not a legal or pilot requirement.",
       "why": "Email open latency can exceed the 15-minute detection; push closes the alerts-to-phone promise before launch.",
-      "area": "After launch · Alerts",
+      "area": "After launch · Web app",
       "due": "",
       "priority": "P1",
       "priority_reason": "the 15-minute promise is only as fast as its slowest channel · parked 16 Sep (later)",
@@ -10229,6 +10016,60 @@ window.LAUNCH_DATA = {
       "audit_round_2": {
         "reason": "Investor deck, monthly investor packs and a new data room are financing work; the release evidence folder and existing records remain active."
       }
+    },
+    {
+      "id": "N4-AS-23",
+      "sprint": "BL",
+      "assignee": "Saad",
+      "title": "In-app browser handling and an early supported browser and device matrix",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). Parked: web/browser-only. Before signup and Facebook connect, detect Facebook, Instagram and LinkedIn in-app browsers by user agent and show an open-in-Safari-or-Chrome step with a copy-link fallback. Set browserslist to match the N5-AS-06 matrix and add those three in-app browsers on iOS and Android to N5-AS-06's runs. Leave matrix publishing in N5. Builds on N5-AS-06, N5-AS-19, N5-AS-20, N4-SD-14, N3-AS-12. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
+      "why": "Launch links shared on LinkedIn, Facebook and Product Hunt open inside in-app browsers where connect, install and push can fail silently, losing launch-day signups. (16 Sep research: web-app-eng.)",
+      "area": "After launch · Web app",
+      "due": "",
+      "priority": "P1",
+      "priority_reason": "16 Sep research (launch-critical): Launch links shared on LinkedIn, Instagram and Facebook open inside in-app webviews, where Facebook Login and PWA install can fail silently. That would lose lau",
+      "depends_on": [
+        "N2-AS-03",
+        "N2-AS-05"
+      ],
+      "feeds": [],
+      "gate": "none",
+      "source": "Asad research 16 Sep (web-app-eng)",
+      "acceptance": "The matrix is in support docs; signup and connect from Facebook, Instagram and LinkedIn in-app browsers on iOS and Android either succeed or hand off to the system browser.",
+      "checklist": [
+        "Before signup and Facebook connect, detect Facebook, Instagram and LinkedIn in-app browsers by user agent and ",
+        "Set browserslist to match the N5-AS-06 matrix and add those three in-app browsers on iOS and Android to N5-AS-",
+        "Leave matrix publishing in N5",
+        "Done when: The matrix is in support docs; signup and connect from Facebook, Instagram and LinkedIn in-app browsers on iOS"
+      ],
+      "layman": "Asad makes sure people who tap an ArtemisAI link inside Facebook, Instagram or LinkedIn are guided to open it in Safari or Chrome before signing up, so launch-day signups are not quietly lost.",
+      "layman_analogy": "Like a shop sign explaining the side door sticks and pointing visitors round to the main entrance before they give up and leave.",
+      "layman_needed": "A supported browsers and devices list in the help pages, and signup and Facebook connection inside those apps either working or handing over to the normal browser.",
+      "layman_output": "A step inside the Facebook, Instagram and LinkedIn apps on iPhone and Android that offers to open Safari or Chrome or copy the link, plus a supported browsers list.",
+      "evidence": [
+        "https://developers.facebook.com/docs/facebook-login/android/deprecating-webviews/",
+        "https://developers.googleblog.com/upcoming-security-changes-to-googles-oauth-20-authorization-endpoint-in-embedded-webviews/",
+        "https://webkit.org/blog/13878/web-push-for-web-apps-on-ios-and-ipados/"
+      ],
+      "moved_from": "N4",
+      "timebox_days": 1,
+      "launch_stage": "public",
+      "estimated_days": 1,
+      "estimate_source": "16 Sep inherited effort estimate; not a new team commitment",
+      "audit": {
+        "decision": "backlog",
+        "reason": "Web app deferred until after launch (Alex + Asad, 17 Sep)."
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance.",
+      "parked_from": "N6"
     }
   ],
   "features": [
@@ -11503,7 +11344,7 @@ window.LAUNCH_DATA = {
       "sprint": "N2",
       "assignee": "Saad",
       "title": "Implement product primitives after environment setup",
-      "what": "Implement the product tokens and the primitives needed by the app shell, Today and Drafts in the scaffolded repo. Saad implements and Asad reviews integration using the recorded effort allocations. Reuse landing tokens only where appropriate; the landing design system is not the product component library. Publish the primitives on /kitchen-sink. Broader components remain in N2-SD-15.",
+      "what": "Implement the product tokens and the primitives needed by the app shell, Today and Drafts in the scaffolded repo. Saad implements and Asad reviews integration using the recorded effort allocations. Reuse landing tokens only where appropriate; the landing design system is not the product component library. Publish the primitives on /kitchen-sink. Broader components remain in N2-SD-15. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Without tokens Asad derives a system from screenshots in his first build week; Today and Drafts must start on primitives, not blank files.",
       "area": "App core",
       "due": "2026-09-29",
@@ -13294,7 +13135,7 @@ window.LAUNCH_DATA = {
       "sprint": "N2",
       "assignee": "Saad",
       "title": "Review available app designs during 21–25 September",
-      "what": "Review available product designs with Asad during 21–25 September. Record buildability, state and API-field gaps against the relevant screen, resolving or assigning each gap. Home redesign is supplied for 22–23 September; other product dates remain provisional. The landing handoff is tracked separately.",
+      "what": "Review available product designs with Asad during 21–25 September. Record buildability, state and API-field gaps against the relevant screen, resolving or assigning each gap. Home redesign is supplied for 22–23 September; other product dates remain provisional. The landing handoff is tracked separately. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Design QA before code exists is the cheapest QA there is; skipping it lands unbuildable screens on the sole developer in his first build week.",
       "area": "Design",
       "due": "2026-09-25",
@@ -13329,7 +13170,7 @@ window.LAUNCH_DATA = {
       "sprint": "N1",
       "assignee": "Saad",
       "title": "Product token mapping — provisional, separate from landing tokens",
-      "what": "Produce one token sheet: spacing scale, type scale, colour roles (danger, positive, muted, accent - roles not hexes), state rules (hover/disabled/loading/empty), radius, elevation. Ship it alongside the first two packs so Asad's component library starts from tokens rather than nine screenshots. Scope clarification: this is the PRODUCT token mapping. Saad’s 18 September landing token delivery is a reusable input, not evidence this product task is finished.",
+      "what": "Produce one token sheet: spacing scale, type scale, colour roles (danger, positive, muted, accent - roles not hexes), state rules (hover/disabled/loading/empty), radius, elevation. Ship it alongside the first two packs so Asad's component library starts from tokens rather than nine screenshots. Scope clarification: this is the PRODUCT token mapping. Saad’s 18 September landing token delivery is a reusable input, not evidence this product task is finished. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Without it Asad derives a design system from screens in his first build week and every later pack drifts.",
       "area": "Design",
       "due": "2026-09-25",
@@ -13788,7 +13629,7 @@ window.LAUNCH_DATA = {
       "sprint": "N2",
       "assignee": "Saad",
       "title": "Set up the development environment without waiting for all screen packs",
-      "what": "Run Muteeb’s scaffold against the existing generated mocks, verify a preview PR, and learn route/component conventions. Use the available product tokens or clearly marked temporary fixtures for setup. Do not wait for the complete screen catalogue or the finished component library; theme implementation remains in N1-AS-12.",
+      "what": "Run Muteeb’s scaffold against the existing generated mocks, verify a preview PR, and learn route/component conventions. Use the available product tokens or clearly marked temporary fixtures for setup. Do not wait for the complete screen catalogue or the finished component library; theme implementation remains in N1-AS-12. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "He owns the component library from 28 Sep and surfaces from N3; a ramp that starts on 21 Sep with environment problems eats the only slack in the front-end plan.",
       "area": "App core",
       "due": "2026-09-25",
@@ -14957,7 +14798,7 @@ window.LAUNCH_DATA = {
       "sprint": "N3",
       "assignee": "Saad",
       "title": "Stand up the app shell on Muteeb's rails with auth integrated",
-      "what": "First screen day: wire the bought auth (session, JWT tenant claim) into the Next.js app; app shell = icon rail, topbar with bell and health-pill slots, workspace-switcher stub listing the tenant's pages, theme, toasts, routed empty pages for Today / Drafts / Alerts / Best Times / Analytics / Settings; deployed to staging behind login.",
+      "what": "First screen day: wire the bought auth (session, JWT tenant claim) into the Next.js app; app shell = icon rail, topbar with bell and health-pill slots, workspace-switcher stub listing the tenant's pages, theme, toasts, routed empty pages for Today / Drafts / Alerts / Best Times / Analytics / Settings; deployed to staging behind login. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "The feature map puts auth integration on Asad in N1 but the no-code decision moves it to the first days of N2; nothing in N2 renders without it.",
       "area": "App core",
       "due": "2026-10-09",
@@ -15059,7 +14900,7 @@ window.LAUNCH_DATA = {
       "sprint": "N3",
       "assignee": "Saad",
       "title": "Dev-mode Facebook connect UI: pick pages, health state, disconnect",
-      "what": "Connect flow on Muteeb's token backend: Facebook login (dev mode, Tester roles) -> multi-select page picker (3-5 pages) -> per-page connection-health state (connected / expiring / revoked / re-auth needed) -> disconnect per page triggering revocation and data delete. Consent-screen UI built in final form because the screencasts record it.",
+      "what": "Connect flow on Muteeb's token backend: Facebook login (dev mode, Tester roles) -> multi-select page picker (3-5 pages) -> per-page connection-health state (connected / expiring / revoked / re-auth needed) -> disconnect per page triggering revocation and data delete. Consent-screen UI built in final form because the screencasts record it. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "The N2 gate is connect -> disconnect -> data gone, and this exact UI appears in every Meta screencast.",
       "area": "Auth",
       "due": "2026-10-12",
@@ -15115,7 +14956,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "Today feed on the live API",
-      "what": "Today screen: next-move hero with confidence chip, moves checklist, typed feed cards (crisis / opportunity / signal / prediction / win), setup pill reading ingest progress; page_id scoping via the workspace-switcher stub; every 'Schedule' CTA renders as 'Remind me at this time'; empty and lag states per Saad's pack. Use contract fixtures while the API is being built; final acceptance requires the real endpoint and pilot data.",
+      "what": "Today screen: next-move hero with confidence chip, moves checklist, typed feed cards (crisis / opportunity / signal / prediction / win), setup pill reading ingest progress; page_id scoping via the workspace-switcher stub; every 'Schedule' CTA renders as 'Remind me at this time'; empty and lag states per Saad's pack. Use contract fixtures while the API is being built; final acceptance requires the real endpoint and pilot data. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "The screen pilots open every morning; the habit loop the vision demands and half of the working-app reveal.",
       "area": "Today",
       "due": "2026-10-23",
@@ -15220,7 +15061,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "Drafts/Studio: composer, debounced gauge, driver chips, autosave",
-      "what": "Composer with 300-500 ms debounced calls to Muteeb's score endpoint; virality gauge and driver chips rendered strictly from the drivers[] field in Saad's chip vocabulary (nothing invented UI-side); minimum-text threshold before scoring; autosave to the server with restore on reload; loading and error states. Consolidated N2-AS-08: Render the score as bands per Faheem's calibration and Saad's pack, and an explicit abstain state ('no strong signal on this one') whenever the endpoint's confidence/coverage flag says so; no numeric dial outside coverage; the no-strong-driver rule hides chips. With the flop gate passed at 55% coverage, roughly 45% of drafts still land in abstain.",
+      "what": "Composer with 300-500 ms debounced calls to Muteeb's score endpoint; virality gauge and driver chips rendered strictly from the drivers[] field in Saad's chip vocabulary (nothing invented UI-side); minimum-text threshold before scoring; autosave to the server with restore on reload; loading and error states. Consolidated N2-AS-08: Render the score as bands per Faheem's calibration and Saad's pack, and an explicit abstain state ('no strong signal on this one') whenever the endpoint's confidence/coverage flag says so; no numeric dial outside coverage; the no-strong-driver rule hides chips. With the flop gate passed at 55% coverage, roughly 45% of drafts still land in abstain. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "The wow moment and the 2 Oct gate proof ('draft scored live on a pilot page'); losing a half-written post once is once too many.",
       "area": "Drafts",
       "due": "2026-10-22",
@@ -17224,7 +17065,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "Write the onboarding spec and name THE activation event",
-      "what": "Spec the flow connect -> 'learning, never loading' -> first value in minutes with last-90-days-first ordering, setup pill states and the staged reveal. Name the single activation event (e.g. first insight viewed on own data) so Asad's KPI events and N4 funnel, Muteeb's priority queue and Faheem's ingest ordering all point at it.",
+      "what": "Spec the flow connect -> 'learning, never loading' -> first value in minutes with last-90-days-first ordering, setup pill states and the staged reveal. Name the single activation event (e.g. first insight viewed on own data) so Asad's KPI events and N4 funnel, Muteeb's priority queue and Faheem's ingest ordering all point at it. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "First impressions decide pilot retention and one aha definition is what makes day-1 funnel numbers mean anything.",
       "area": "Onboarding",
       "due": "2026-10-23",
@@ -17443,7 +17284,7 @@ window.LAUNCH_DATA = {
       "sprint": "N3",
       "assignee": "Saad",
       "title": "Extend product components from the shared bootstrap",
-      "what": "Extend the N1-AS-12 product bootstrap to shipped screens: cards, chips, gauge, sheets, navigation, form controls and shared empty/loading/error/abstain states. Use product tokens and staging mocks. Saad implements with the existing review protocol; it is not a handover of a completed library from Asad. Deferred Analytics, Wins and Discovery components are not required.",
+      "what": "Extend the N1-AS-12 product bootstrap to shipped screens: cards, chips, gauge, sheets, navigation, form controls and shared empty/loading/error/abstain states. Use product tokens and staging mocks. Saad implements with the existing review protocol; it is not a handover of a completed library from Asad. Deferred Analytics, Wins and Discovery components are not required. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Every surface either of them builds renders through these primitives; if the library forks per screen, the design QA sweeps and the WCAG audit turn into per-screen work in N4 and N5.",
       "area": "Design",
       "due": "2026-10-14",
@@ -18721,7 +18562,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "Crisis Alerts inbox: triage strip, cited cards, action, drafted reply",
-      "what": "Alerts screen on Muteeb's alerts endpoints: triage strip (needs-you / opportunity / briefing counts), cards with severity, cited posts and comments resolving to sources, ONE suggested action and the drafted calm reply (copy-to-clipboard, never auto-posted), mark-all-read.",
+      "what": "Alerts screen on Muteeb's alerts endpoints: triage strip (needs-you / opportunity / briefing counts), cards with severity, cited posts and comments resolving to sources, ONE suggested action and the drafted calm reply (copy-to-clipboard, never auto-posted), mark-all-read. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "The PROTECT surface and the Sat 17 Oct 2026 drill's in-app leg; the drafted reply is the differentiator.",
       "area": "Alerts",
       "due": "2026-10-26",
@@ -18874,7 +18715,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "Alert emails deep-linking into the app; bells with real unread counts",
-      "what": "SES email from Saad's crisis email template: cited post, one action, drafted reply, auth-aware deep link to the alert card; dark-mode QA'd in major clients; outbound crisis email sits behind a feature flag (the N6 kill switch). Topbar bells reading Muteeb's unread-count endpoints, decrementing on read / mark-all-read, per-page via the switcher.",
+      "what": "SES email from Saad's crisis email template: cited post, one action, drafted reply, auth-aware deep link to the alert card; dark-mode QA'd in major clients; outbound crisis email sits behind a feature flag (the N6 kill switch). Topbar bells reading Muteeb's unread-count endpoints, decrementing on read / mark-all-read, per-page via the switcher. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page. In the store app these are universal links / app links that open the alert card directly.",
       "why": "Email is the re-engagement trigger and the drill clock ends at email-received; wrong bell counts erode trust instantly.",
       "area": "Alerts",
       "due": "2026-10-26",
@@ -19016,7 +18857,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "Settings v1: prefs, notifications, connected pages, data controls",
-      "what": "Settings screen: profile prefs, notification prefs (channels, quiet hours per policy), connected pages with health and disconnect, data controls section with export/delete entry points (wired in N4), links to Privacy/ToS; per Saad's Settings pack and one-pager. No longer waits on N3-AS-06 (parked in the 16 Sep balancing).",
+      "what": "Settings screen: profile prefs, notification prefs (channels, quiet hours per policy), connected pages with health and disconnect, data controls section with export/delete entry points (wired in N4), links to Privacy/ToS; per Saad's Settings pack and one-pager. No longer waits on N3-AS-06 (parked in the 16 Sep balancing). — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Where consent, quiet hours and data rights physically live; Filza's N4 witnessed runs start here.",
       "area": "Settings",
       "due": "2026-10-30",
@@ -19067,7 +18908,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "Mobile chrome: bottom tab bar + orb + sheet system",
-      "what": "From the component library: bottom tab bar with the Art-E orb entry point, sheet system (compose sheet, filters, slide-overs as sheets), responsive breakpoints on every shipped screen; checked on iOS Safari and Android Chrome. Ownership proposal: Saad implements within his existing component-library role; Asad reviews integration. Both effort allocations are included in the workload report.",
+      "what": "From the component library: bottom tab bar with the Art-E orb entry point, sheet system (compose sheet, filters, slide-overs as sheets), responsive breakpoints on every shipped screen; checked on iOS Safari and Android Chrome. Ownership proposal: Saad implements within his existing component-library role; Asad reviews integration. Both effort allocations are included in the workload report. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "PWA is the mobile story; nav cannot be an N6 surprise.",
       "area": "App core",
       "due": "2026-10-30",
@@ -20196,7 +20037,7 @@ window.LAUNCH_DATA = {
       "sprint": "N5",
       "assignee": "Saad",
       "title": "Design-QA sweep of N3 surfaces",
-      "what": "Sweep Alerts inbox, Best Times heatmap, Analytics thin + health pill, Settings v1, mobile chrome and the waitlist against the pack checklists and one-pagers; file drift sized for Asad.",
+      "what": "Sweep Alerts inbox, Best Times heatmap, Analytics thin + health pill, Settings v1, mobile chrome and the waitlist against the pack checklists and one-pagers; file drift sized for Asad. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Rafeh's on-call sweeps no longer exist; unswept surfaces become UAT noise in N5.",
       "area": "Design",
       "due": "2026-11-06",
@@ -20325,7 +20166,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "Implement the shared state components once, for every surface",
-      "what": "Turn the states matrix into shared components every surface renders: thin page below Faheem's eligibility floor, ingest in progress with the setup pill, low signal so no confident number is shown, upstream error with a retry, rate-limited wait with the Retry-After value, and page revoked. Drive them off the error codes Asad publishes in the envelope and the coverage/abstain flags the model responses carry - never off a parsed message string.",
+      "what": "Turn the states matrix into shared components every surface renders: thin page below Faheem's eligibility floor, ingest in progress with the setup pill, low signal so no confident number is shown, upstream error with a retry, rate-limited wait with the Retry-After value, and page revoked. Drive them off the error codes Asad publishes in the envelope and the coverage/abstain flags the model responses carry - never off a parsed message string. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "The honesty rules the product is sold on (never a confident dial on low signal, never a loading spinner where learning is meant) are only true if they are implemented once; per-surface copies drift by UAT.",
       "area": "App core",
       "due": "2026-10-28",
@@ -21465,7 +21306,7 @@ window.LAUNCH_DATA = {
       "sprint": "N5",
       "assignee": "Saad",
       "title": "Deletion + export reachable in Settings, wired to revocation",
-      "what": "Settings data controls: 'export my data' request and 'delete my account / page data' flows calling Muteeb's deletion cascade (token revocation -> data delete incl. vectors and memory) with confirmation, status and an email receipt; ready for Filza's witnessed deletion and DSAR sample run.",
+      "what": "Settings data controls: 'export my data' request and 'delete my account / page data' flows calling Muteeb's deletion cascade (token revocation -> data delete incl. vectors and memory) with confirmation, status and an email receipt; ready for Filza's witnessed deletion and DSAR sample run. Also satisfies Apple 5.1.1(v) and Google Play's in-app account-deletion requirement: deletion must be reachable inside the app, not only on the website.",
       "why": "Deletion witnessed and a real DSAR run are N4 legal proofs; the go/no-go reads the receipts.",
       "area": "Settings",
       "due": "2026-11-13",
@@ -21619,7 +21460,7 @@ window.LAUNCH_DATA = {
       "sprint": "N5",
       "assignee": "Saad",
       "title": "First-run onboarding: tour, 'learning, never loading', 90 days first",
-      "what": "Per Saad's onboarding spec: after connect, stream named analysis steps and partial results from Muteeb's priority-queue completion events (last 90 days first); the first insight surfaces as soon as it exists; staged tour; setup pill tracks the rest; thin-page first run per Saad's thin-page one-pager; a 'stuck? book 10 min' hatch link.",
+      "what": "Per Saad's onboarding spec: after connect, stream named analysis steps and partial results from Muteeb's priority-queue completion events (last 90 days first); the first insight surfaces as soon as it exists; staged tour; setup pill tracks the rest; thin-page first run per Saad's thin-page one-pager; a 'stuck? book 10 min' hatch link. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Blank screens churn pilots; the activation event must be reachable in minutes, measured in UAT.",
       "area": "Onboarding",
       "due": "2026-11-12",
@@ -23073,8 +22914,8 @@ window.LAUNCH_DATA = {
       "id": "N4-SD-14",
       "sprint": "N6",
       "assignee": "Saad",
-      "title": "Responsive and touch pass across every built surface",
-      "what": "Take every surface built by Wed 18 Nov 2026 to the mobile pack: breakpoints, the bottom tab bar and sheet system, touch target sizes, safe areas, the Art-E orb and rail on a phone, tables that become cards, and the Pages view on a small screen. Check on real iOS Safari and Android Chrome, not only the emulator. Record what genuinely cannot be mobile before UAT, with a one-line reason each. No longer waits on N4-AS-04 (parked in the 16 Sep balancing).",
+      "title": "Device pass across every built screen (iOS + Android, real devices)",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). Take every screen built by Wed 18 Nov to real iPhones and Android phones: safe areas, touch targets, the bottom tab bar and sheet system, the Art-E orb, keyboard and notch handling, dark/light, and store-shell navigation. No desktop or tablet breakpoints at launch.",
       "why": "Pilots will open this on a phone during UAT; a surface that only works at desktop width reads as broken and burns UAT time on layout defects rather than product feedback.",
       "area": "App core",
       "due": "2026-11-19",
@@ -23903,8 +23744,8 @@ window.LAUNCH_DATA = {
       "id": "N5-AS-06",
       "sprint": "N6",
       "assignee": "Saad",
-      "title": "E2E nightly suite vs staging: all flows 1-14 + cross-browser/device matrix",
-      "what": "Nightly E2E run of every flow 1-14 (1-5 Asad's CI specs; 6-8 from N5-SD-13/14; 9-14 from N5-SD-16) against staging with failure paging; matrix: Chrome, Safari, Firefox desktop; iOS Safari and Android Chrome (PWA); results surfaced on the war-room board. Add iPad Safari to the matrix and publish the minimum supported browser/OS list into Saad's docs so support and pilots know what is promised. Audit scope: cover shipped surfaces only. Deferred Discovery, standalone heatmap, Wins and web-push routes must stay hidden/disabled. Substitute a negative route/claim check where the historical flow names one; do not implement the deferred feature to satisfy the test.",
+      "title": "E2E nightly suite vs staging: all flows 1-14 on a real-device matrix",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). Nightly E2E run of every flow 1-14 against staging with failure paging, on the store builds: iOS (two current iPhone sizes) and Android (two tiers) via TestFlight/Play internal + device cloud; results on the war-room board. Desktop browsers and iPad are out of scope until the web app returns after launch.",
       "why": "The robot safety net at full strength before freeze.",
       "area": "QA",
       "due": "2026-11-20",
@@ -25343,7 +25184,7 @@ window.LAUNCH_DATA = {
       "sprint": "N6",
       "assignee": "Saad",
       "title": "Cold-user test + 'stuck? book 10 min' escape hatch",
-      "what": "Put one genuine stranger through self-serve onboarding, record where they stall (esp. Facebook connect), and specify the escape hatch for Asad.",
+      "what": "Put one genuine stranger through self-serve onboarding, record where they stall (esp. Facebook connect), and specify the escape hatch for Asad. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Facebook connect is notoriously sticky; batch 1 has no concierge.",
       "area": "Onboarding",
       "due": "2026-11-20",
@@ -32047,7 +31888,7 @@ window.LAUNCH_DATA = {
       "sprint": "N6",
       "assignee": "Saad",
       "title": "Measure time-to-first-insight for a fresh page in UAT wave 1",
-      "what": "During UAT wave 1 (N5-SD-03/05), connect at least one fresh pilot page and capture funnel timestamps from N4-AS-14's events (connect -> ingest done -> the N2-SD-06 activation event), then file minutes-to-first-insight as the onboarding gate evidence, with Saad covering the pilot side.",
+      "what": "During UAT wave 1 (N5-SD-03/05), connect at least one fresh pilot page and capture funnel timestamps from N4-AS-14's events (connect -> ingest done -> the N2-SD-06 activation event), then file minutes-to-first-insight as the onboarding gate evidence, with Saad covering the pilot side. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "The onboarding gate reads 'measured in UAT', but N4-AS-14 and N5-MT-06 only measure staging tenants; no ticket produces the UAT measurement.",
       "area": "Onboarding",
       "due": "2026-11-20",
@@ -32522,7 +32363,7 @@ window.LAUNCH_DATA = {
       "sprint": "N2",
       "assignee": "Saad",
       "title": "Check shipped product mockups against the Meta permissions master",
-      "what": "Check every shipped product mockup, especially connect and consent evidence, against N1-FZ-12. Flag publishing, messaging, ads and cross-page data access outside approved scope. Landing-page mockup delivery does not certify the product screens. Record any missing review input as pending; do not recreate deferred screens to reach a historical twelve-pack count.",
+      "what": "Check every shipped product mockup, especially connect and consent evidence, against N1-FZ-12. Flag publishing, messaging, ads and cross-page data access outside approved scope. Landing-page mockup delivery does not certify the product screens. Record any missing review input as pending; do not recreate deferred screens to reach a historical twelve-pack count. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Alex (review 11 Sep): the mockups must respect what Meta allows; a screencast showing a capability we did not ask permission for is a common rejection reason.",
       "area": "Design",
       "due": "2026-09-25",
@@ -32839,7 +32680,7 @@ window.LAUNCH_DATA = {
       "sprint": "N2",
       "assignee": "Saad",
       "title": "Agree the app's theme and wording with Alex: we are on the creator's side",
-      "what": "Take the voice guide (N1-SD-08) to Alex and agree the theme the whole product speaks in: we help creators and small businesses, so the words sound like a coach in their corner, not a dashboard judging them. Agree the words we use and avoid (for example \"your next move\" and \"this might underperform\" rather than \"fail\"), how Art-E sounds, and how bad news is delivered. Apply it to the mockup packs and hand the word list to Asad before app copy is written; keep it consistent with Filza's Meta firewall wording (N2-FZ-01). Per Alex (14 Sep): the theme is \"power underneath, simplicity on top\". The avoid-list includes \"swap\"; every label must pass his language test (would an influencer or small business owner understand it instantly; if not, rewrite). No longer waits on N1-SD-08 (parked in the 16 Sep balancing).",
+      "what": "Take the voice guide (N1-SD-08) to Alex and agree the theme the whole product speaks in: we help creators and small businesses, so the words sound like a coach in their corner, not a dashboard judging them. Agree the words we use and avoid (for example \"your next move\" and \"this might underperform\" rather than \"fail\"), how Art-E sounds, and how bad news is delivered. Apply it to the mockup packs and hand the word list to Asad before app copy is written; keep it consistent with Filza's Meta firewall wording (N2-FZ-01). Per Alex (14 Sep): the theme is \"power underneath, simplicity on top\". The avoid-list includes \"swap\"; every label must pass his language test (would an influencer or small business owner understand it instantly; if not, rewrite). No longer waits on N1-SD-08 (parked in the 16 Sep balancing). — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Alex (review 11 Sep): the mockups and the app should sound like a product that helps creators. The voice guide exists but has not been agreed with him or applied to the packs.",
       "area": "Design",
       "due": "2026-09-24",
@@ -32927,7 +32768,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "Phone app mock-up v1: the four layers, one thumb, as few screens as possible",
-      "what": "Design the phone app Alex described: Home (a scrollable feed where the intelligence comes to the user: what is happening, what matters, opportunities, recommendations, posts taking off, things needing attention), Art-E (ask, answer, follow up, like ChatGPT or Claude), Discovery (swipe through relevant pages, dating-app simple) and Alerts (a notification with a hook, then Art-E explains). Operable with one thumb, screens flowing into each other, no dashboards or menus. Start from the twelve web packs and the token sheet, but treat every separate analytics screen as a candidate to fold into Art-E or the feed. Use the voice guide agreed in N2-SD-18 and keep the Meta rulebook wording. Audit scope: cover shipped surfaces only. Deferred Discovery, standalone heatmap, Wins and web-push routes must stay hidden/disabled. Substitute a negative route/claim check where the historical flow names one; do not implement the deferred feature to satisfy the test. The Home redesign milestone is 22–23 September. This broader phone prototype is separate, still provisional, and must not hold up implementation of already accepted individual screens.",
+      "what": "Design the phone app Alex described: Home (a scrollable feed where the intelligence comes to the user: what is happening, what matters, opportunities, recommendations, posts taking off, things needing attention), Art-E (ask, answer, follow up, like ChatGPT or Claude), Discovery (swipe through relevant pages, dating-app simple) and Alerts (a notification with a hook, then Art-E explains). Operable with one thumb, screens flowing into each other, no dashboards or menus. Start from the twelve web packs and the token sheet, but treat every separate analytics screen as a candidate to fold into Art-E or the feed. Use the voice guide agreed in N2-SD-18 and keep the Meta rulebook wording. Audit scope: cover shipped surfaces only. Deferred Discovery, standalone heatmap, Wins and web-push routes must stay hidden/disabled. Substitute a negative route/claim check where the historical flow names one; do not implement the deferred feature to satisfy the test. The Home redesign milestone is 22–23 September. This broader phone prototype is separate, still provisional, and must not hold up implementation of already accepted individual screens. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Alex (14 Sep): the phone mock-up is the top priority after the landing page, and the biggest danger now is building too much.",
       "area": "Design",
       "due": "2026-10-23",
@@ -32979,7 +32820,7 @@ window.LAUNCH_DATA = {
       "sprint": "N3",
       "assignee": "Saad",
       "title": "Alert hooks: a curiosity line per alert type, then Art-E explains",
-      "what": "Write the notification copy for every alert type so each one has a hook that creates curiosity and pulls the user back in, in the style Alex gave (\"Your post is taking off. Want to know why?\", \"Something has changed in your audience this morning.\", \"You may be missing a collaboration opportunity.\"). Tapping the alert opens Art-E with the explanation, never a chain of screens. Fit the timing policy from N2-SD-03; Filza checks the lines against the Meta rulebook and the AI-label rules. Audit scope: cover shipped surfaces only. Deferred Discovery, standalone heatmap, Wins and web-push routes must stay hidden/disabled. Substitute a negative route/claim check where the historical flow names one; do not implement the deferred feature to satisfy the test.",
+      "what": "Write the notification copy for every alert type so each one has a hook that creates curiosity and pulls the user back in, in the style Alex gave (\"Your post is taking off. Want to know why?\", \"Something has changed in your audience this morning.\", \"You may be missing a collaboration opportunity.\"). Tapping the alert opens Art-E with the explanation, never a chain of screens. Fit the timing policy from N2-SD-03; Filza checks the lines against the Meta rulebook and the AI-label rules. Audit scope: cover shipped surfaces only. Deferred Discovery, standalone heatmap, Wins and web-push routes must stay hidden/disabled. Substitute a negative route/claim check where the historical flow names one; do not implement the deferred feature to satisfy the test. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Alex (14 Sep): alerts should feel as natural as a WhatsApp notification and get attention, with Art-E doing the explaining.",
       "area": "Alerts",
       "due": "2026-10-16",
@@ -33066,7 +32907,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "Screen-cut pass: every screen, button and feature through Alex's eight questions",
-      "what": "Take the phone mock-up (N2-SD-19) and the web packs and run every screen, button, feature and label through Alex's design test: can it be delivered through Art-E or the home feed; does it need its own screen; is the button necessary or could it be automatic; could a child navigate it; is the language too complicated for an influencer or small business owner; does the app still work without it; does it change an existing habit; does it need a new skill. Produce a kill list (remove), a fold list (into Art-E or the feed) and a keep list with the reason for each, and bring it to the cut-line review (N3-SD-09). Added in the 16 Sep review: Mark a protected keep list that the eight questions cannot remove, because the app stores or our legal commitments require them: in-app account deletion, privacy policy and terms links, notification permission and quiet-hours controls, sign out, Discovery opt-out, AI labels and a report-this-answer entry point. Give each a one-thumb placement in the phone mock-up, for example a profile sheet, and confirm in the N3-SD-09 record that none was killed.",
+      "what": "Take the phone mock-up (N2-SD-19) and the web packs and run every screen, button, feature and label through Alex's design test: can it be delivered through Art-E or the home feed; does it need its own screen; is the button necessary or could it be automatic; could a child navigate it; is the language too complicated for an influencer or small business owner; does the app still work without it; does it change an existing habit; does it need a new skill. Produce a kill list (remove), a fold list (into Art-E or the feed) and a keep list with the reason for each, and bring it to the cut-line review (N3-SD-09). Added in the 16 Sep review: Mark a protected keep list that the eight questions cannot remove, because the app stores or our legal commitments require them: in-app account deletion, privacy policy and terms links, notification permission and quiet-hours controls, sign out, Discovery opt-out, AI labels and a report-this-answer entry point. Give each a one-thumb placement in the phone mock-up, for example a profile sheet, and confirm in the N3-SD-09 record that none was killed. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Alex (14 Sep): our advantage is fewer screens with better intelligence, not more screens than everyone else.",
       "area": "Design",
       "due": "2026-10-27",
@@ -33149,7 +32990,7 @@ window.LAUNCH_DATA = {
       "sprint": "N5",
       "assignee": "Saad",
       "title": "Apply the screen map: remove or fold screens per the cut-line decision",
-      "what": "Implement the outcome of the cut-line review (N3-SD-09): remove the screens on the kill list, fold the listed screens into Art-E answers or feed cards, retire their routes and navigation, and make sure every removed screen's intelligence still reaches the user through Art-E or the feed. Update the E2E flows and the copy freeze list to match.",
+      "what": "Implement the outcome of the cut-line review (N3-SD-09): remove the screens on the kill list, fold the listed screens into Art-E answers or feed cards, retire their routes and navigation, and make sure every removed screen's intelligence still reaches the user through Art-E or the feed. Update the E2E flows and the copy freeze list to match. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Alex (14 Sep): anything that can go through Art-E or the home feed should, and we should not ship screens that failed the design test.",
       "area": "App core",
       "due": "2026-11-12",
@@ -33741,7 +33582,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "Re-sequence N3 and N4 screen builds behind the Wed 7 Oct 2026 screen-cut outcome",
-      "what": "N3-AS-08 (Analytics), N3-AS-09 (Best Times), N3-AS-11 (Settings) and N4-AS-05 (Pages) are scheduled as standalone screens while N3-SD-14 decides on Wed 7 Oct 2026 which fold into feed cards or Art-E answers; N4-AS-20 then removes them by Thu 15 Oct 2026. Re-order Asad's tickets so card and answer variants ship first and standalone screens start only for survivors; update the dependency map and Alex's cut order. Builds on N3-SD-09, N4-AS-20.",
+      "what": "N3-AS-08 (Analytics), N3-AS-09 (Best Times), N3-AS-11 (Settings) and N4-AS-05 (Pages) are scheduled as standalone screens while N3-SD-14 decides on Wed 7 Oct 2026 which fold into feed cards or Art-E answers; N4-AS-20 then removes them by Thu 15 Oct 2026. Re-order Asad's tickets so card and answer variants ship first and standalone screens start only for survivors; update the dependency map and Alex's cut order. Builds on N3-SD-09, N4-AS-20. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Building screens the cut then removes burns Asad's scarcest weeks at 60-65% capacity (N4-SD-08). (CTO-lens review, 15 Sep.)",
       "area": "App core",
       "due": "2026-10-23",
@@ -36213,7 +36054,7 @@ window.LAUNCH_DATA = {
       "sprint": "N5",
       "assignee": "Saad",
       "title": "Usability-test the four-layer phone mock-up with five non-pilot users",
-      "what": "Five 30-minute remote moderated sessions on the N2-SD-19 prototype, shown on the participant's own phone. Recruit through Saad's prospect list and team contacts: no pilots, each person runs a Facebook Page, at least one creator and one small business. Five tasks: find what matters today on Home, ask Art-E why a post did well, act on an alert hook, save or pass in Discovery, recover from an Art-E refusal. Record pass or fail and the top confusions in one sheet before the Sun 8 Nov 2026 beta build freeze. Builds on N3-SD-14, N3-SD-09, N5-SD-08, N3-SD-02, N4-SD-07, N5-SD-03. Audit scope: cover shipped surfaces only. Deferred Discovery, standalone heatmap, Wins and web-push routes must stay hidden/disabled. Substitute a negative route/claim check where the historical flow names one; do not implement the deferred feature to satisfy the test.",
+      "what": "Five 30-minute remote moderated sessions on the N2-SD-19 prototype, shown on the participant's own phone. Recruit through Saad's prospect list and team contacts: no pilots, each person runs a Facebook Page, at least one creator and one small business. Five tasks: find what matters today on Home, ask Art-E why a post did well, act on an alert hook, save or pass in Discovery, recover from an Art-E refusal. Record pass or fail and the top confusions in one sheet before the Sun 8 Nov 2026 beta build freeze. Builds on N3-SD-14, N3-SD-09, N5-SD-08, N3-SD-02, N4-SD-07, N5-SD-03. Audit scope: cover shipped surfaces only. Deferred Discovery, standalone heatmap, Wins and web-push routes must stay hidden/disabled. Substitute a negative route/claim check where the historical flow names one; do not implement the deferred feature to satisfy the test. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "The four-layer direction replaces nine web packs, yet UAT starts Mon 19 Oct 2026 on built code, when navigation changes are expensive and feature freeze is ten days away. (16 Sep research: product-ux.)",
       "area": "Design",
       "due": "2026-11-05",
@@ -36565,7 +36406,7 @@ window.LAUNCH_DATA = {
       "sprint": "N3",
       "assignee": "Saad",
       "title": "Timezone and locale rendering: account timezone, en-GB formats, hydration-safe times",
-      "what": "Build one shared formatter (Intl, en-GB, compact counts such as 12.3K, relative times) that every screen uses. Save the browser's IANA timezone on the account at signup. Render alert, feed and briefing times client-side in that zone so UTC server rendering never breaks hydration. Best Times stay in the labelled page timezone. Pass the timezone to Art-E. One unit test spanning Tue 13 Oct 2026 covers the clock change. The editable Settings timezone and the two-timezone E2E run move to backlog. Builds on N3-AS-09, N2-SD-03, N4-FH-08, N4-MT-11, N3-AS-10, N3-MT-04. No longer waits on N3-AS-09 (parked in the 16 Sep balancing).",
+      "what": "Build one shared formatter (Intl, en-GB, compact counts such as 12.3K, relative times) that every screen uses. Save the browser's IANA timezone on the account at signup. Render alert, feed and briefing times client-side in that zone so UTC server rendering never breaks hydration. Best Times stay in the labelled page timezone. Pass the timezone to Art-E. One unit test spanning Tue 13 Oct 2026 covers the clock change. The editable Settings timezone and the two-timezone E2E run move to backlog. Builds on N3-AS-09, N2-SD-03, N4-FH-08, N4-MT-11, N3-AS-10, N3-MT-04. No longer waits on N3-AS-09 (parked in the 16 Sep balancing). — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Servers render in UTC, pilots read UK time and part of the team tests from abroad; only jobs and Best Times are clock-change audited, not what the screen shows. (16 Sep research: web-app-eng.)",
       "area": "App core",
       "due": "2026-10-12",
@@ -36795,7 +36636,7 @@ window.LAUNCH_DATA = {
       "sprint": "N5",
       "assignee": "Saad",
       "title": "Specify Home feed ranking, caps, expiry and card feedback",
-      "what": "After the Wed 7 Oct 2026 screen cut, write one page: surviving card types, ranking rule (severity, time-sensitivity, confidence, recency), a per-session cap, expiry per type, dedup against alerts and the briefing, and a dismiss action on every card with an optional reason. Quiet-day reuses the N2-SD-02 empty state and multi-page ordering follows the existing page filter. Muteeb applies ordering and expiry in the feed endpoint. Name the Home input metric. Builds on N2-MT-03, N2-AS-04, N2-SD-02, N3-SD-15, N4-AS-20.",
+      "what": "After the Wed 7 Oct 2026 screen cut, write one page: surviving card types, ranking rule (severity, time-sensitivity, confidence, recency), a per-session cap, expiry per type, dedup against alerts and the briefing, and a dismiss action on every card with an optional reason. Quiet-day reuses the N2-SD-02 empty state and multi-page ordering follows the existing page filter. Muteeb applies ordering and expiry in the feed endpoint. Name the Home input metric. Builds on N2-MT-03, N2-AS-04, N2-SD-02, N3-SD-15, N4-AS-20. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "The feed endpoint serves typed cards with no ordering rule; without one, the feed meant to carry the product can show stale or duplicate cards above urgent ones. (16 Sep research: product-ux.)",
       "area": "Today",
       "due": "2026-11-04",
@@ -37479,59 +37320,6 @@ window.LAUNCH_DATA = {
       "audit_round_2": {
         "reason": "Align the acceptance count to the ten scripted conversations specified in the work; all named poisoning, page-switch and forget-this cases remain. No effort saving claimed."
       }
-    },
-    {
-      "id": "N4-AS-23",
-      "sprint": "N6",
-      "assignee": "Saad",
-      "title": "In-app browser handling and an early supported browser and device matrix",
-      "what": "Before signup and Facebook connect, detect Facebook, Instagram and LinkedIn in-app browsers by user agent and show an open-in-Safari-or-Chrome step with a copy-link fallback. Set browserslist to match the N5-AS-06 matrix and add those three in-app browsers on iOS and Android to N5-AS-06's runs. Leave matrix publishing in N5. Builds on N5-AS-06, N5-AS-19, N5-AS-20, N4-SD-14, N3-AS-12.",
-      "why": "Launch links shared on LinkedIn, Facebook and Product Hunt open inside in-app browsers where connect, install and push can fail silently, losing launch-day signups. (16 Sep research: web-app-eng.)",
-      "area": "Onboarding",
-      "due": "2026-11-18",
-      "priority": "P1",
-      "priority_reason": "16 Sep research (launch-critical): Launch links shared on LinkedIn, Instagram and Facebook open inside in-app webviews, where Facebook Login and PWA install can fail silently. That would lose lau",
-      "depends_on": [
-        "N2-AS-03",
-        "N2-AS-05"
-      ],
-      "feeds": [],
-      "gate": "N6",
-      "source": "Asad research 16 Sep (web-app-eng)",
-      "acceptance": "The matrix is in support docs; signup and connect from Facebook, Instagram and LinkedIn in-app browsers on iOS and Android either succeed or hand off to the system browser.",
-      "checklist": [
-        "Before signup and Facebook connect, detect Facebook, Instagram and LinkedIn in-app browsers by user agent and ",
-        "Set browserslist to match the N5-AS-06 matrix and add those three in-app browsers on iOS and Android to N5-AS-",
-        "Leave matrix publishing in N5",
-        "Done when: The matrix is in support docs; signup and connect from Facebook, Instagram and LinkedIn in-app browsers on iOS"
-      ],
-      "layman": "Asad makes sure people who tap an ArtemisAI link inside Facebook, Instagram or LinkedIn are guided to open it in Safari or Chrome before signing up, so launch-day signups are not quietly lost.",
-      "layman_analogy": "Like a shop sign explaining the side door sticks and pointing visitors round to the main entrance before they give up and leave.",
-      "layman_needed": "A supported browsers and devices list in the help pages, and signup and Facebook connection inside those apps either working or handing over to the normal browser.",
-      "layman_output": "A step inside the Facebook, Instagram and LinkedIn apps on iPhone and Android that offers to open Safari or Chrome or copy the link, plus a supported browsers list.",
-      "evidence": [
-        "https://developers.facebook.com/docs/facebook-login/android/deprecating-webviews/",
-        "https://developers.googleblog.com/upcoming-security-changes-to-googles-oauth-20-authorization-endpoint-in-embedded-webviews/",
-        "https://webkit.org/blog/13878/web-push-for-web-apps-on-ios-and-ipados/"
-      ],
-      "moved_from": "N4",
-      "timebox_days": 1,
-      "launch_stage": "public",
-      "estimated_days": 1,
-      "estimate_source": "16 Sep inherited effort estimate; not a new team commitment",
-      "audit": {
-        "decision": "retain",
-        "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      },
-      "delivery_lead": "Saad",
-      "effort_allocations": {
-        "Saad": 0.8,
-        "Asad": 0.2
-      },
-      "reviewers": [
-        "Asad"
-      ],
-      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-FZ-12",
@@ -38284,6 +38072,397 @@ window.LAUNCH_DATA = {
       "timebox_days": 1,
       "launch_stage": "launch",
       "estimate_source": "Reactivated 17 Sep; owner estimate to confirm"
+    },
+    {
+      "id": "N1-AS-20",
+      "sprint": "N1",
+      "assignee": "Asad",
+      "title": "Re-decide the app stack for a native store app (reopens N1-AS-03)",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). With Muteeb and Saad, pick the mobile stack this week: (a) Capacitor shell around the existing Next.js build (one codebase, two store shells — what BL-APP-02 assumed), (b) Expo / React Native, or (c) Flutter. Decide on: reuse of Saad's component library and mock-ups, Facebook Login for Business on device, native push, deep links, offline shell, OTA update path, team skills, and Apple guideline 4.2 (minimum functionality) risk for a wrapped web build. Record the decision in the repo with a 'no changes after' clause; N1-AS-03 stays as the backend/API decision.",
+      "why": "Every screen, the push worker, store submission and the Meta app settings depend on this choice; a late change moves every mobile ticket.",
+      "area": "App core",
+      "due": "2026-09-25",
+      "priority": "P0",
+      "priority_reason": "Blocks every mobile screen and the store pipeline",
+      "depends_on": [],
+      "feeds": [
+        "N1-AS-03"
+      ],
+      "gate": "N1",
+      "source": "plan",
+      "acceptance": "A signed one-page mobile stack decision in the repo naming the framework, the login approach on device, the push and deep-link approach and the update path; N1-AS-03 amended to reference it.",
+      "checklist": [
+        "Compare Capacitor wrap vs Expo/RN vs Flutter against the criteria",
+        "Check Facebook Login for Business + Sign in with Apple support on the chosen stack",
+        "Confirm Saad's components carry over",
+        "Sign and file; amend N1-AS-03"
+      ],
+      "layman": "We choose how the phone app is built before anyone builds a screen, so nothing has to be redone.",
+      "layman_analogy": "",
+      "layman_needed": "A signed one-page mobile stack decision in the repo naming the framework, the login approach on device, the push and deep-link approach and the update path; N1-AS-03 amended to reference it.",
+      "layman_output": "A signed one-page mobile stack decision in the repo naming the framework, the login approach on device, the push and deep-link approach and the update path; N1-AS-03 amended to reference it.",
+      "timebox_days": 1,
+      "launch_stage": "beta",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (mobile re-plan); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Store-app launch requirement added in the 17 Sep mobile re-plan."
+      }
+    },
+    {
+      "id": "N3-AS-25",
+      "sprint": "N3",
+      "assignee": "Asad",
+      "title": "Sign in with Apple beside Facebook Login (App Store guideline 4.8)",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). Apple requires an equivalent privacy-focused sign-in option when an app offers third-party or social login. Add Sign in with Apple to the bought auth (same tenant claim), keep Facebook Login for Business as the page-connect step, and document the account-linking rules with Filza (email relay, deletion). Android: Google sign-in optional, not required.",
+      "why": "Without it the iOS submission is rejected at review.",
+      "area": "Auth",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "Required for a store-app launch on 15 Dec",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Sign in with Apple works end to end on a device build; the linked account carries the tenant claim; rejection risk under 4.8 closed in the submission notes.",
+      "checklist": [
+        "Enable the capability and service ID",
+        "Wire to the bought auth with the tenant claim",
+        "Account-linking + deletion rules agreed with Filza",
+        "Device test on iOS"
+      ],
+      "layman": "Apple only lets apps in if there is an Apple-branded login next to any Facebook-style login.",
+      "layman_analogy": "",
+      "layman_needed": "Sign in with Apple works end to end on a device build; the linked account carries the tenant claim; rejection risk under 4.8 closed in the submission notes.",
+      "layman_output": "Sign in with Apple works end to end on a device build; the linked account carries the tenant claim; rejection risk under 4.8 closed in the submission notes.",
+      "timebox_days": 2,
+      "launch_stage": "beta",
+      "estimated_days": 2,
+      "estimate_source": "New ticket 17 Sep (mobile re-plan); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Store-app launch requirement added in the 17 Sep mobile re-plan."
+      }
+    },
+    {
+      "id": "N2-MT-22",
+      "sprint": "N2",
+      "assignee": "Muteeb",
+      "title": "Register the iOS bundle ID and Android package + key hashes in the Meta app for review",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). Add the iOS bundle identifier, Android package name and release/debug key hashes to the Meta app settings; make sure the Facebook Login for Business flow and permissions screencasts (N2-AS-09) are recorded from the device build, not the browser; confirm the review package references the store apps.",
+      "why": "Meta App Review checks the platforms the app declares; a browser-only submission does not cover the store apps.",
+      "area": "Meta",
+      "due": "2026-10-02",
+      "priority": "P1",
+      "priority_reason": "Required for a store-app launch on 15 Dec",
+      "depends_on": [],
+      "feeds": [
+        "N2-AS-09"
+      ],
+      "gate": "N2",
+      "source": "plan",
+      "acceptance": "Meta app settings list both store platforms with correct identifiers; login tested from a device build; review package updated.",
+      "checklist": [
+        "Add iOS + Android platforms in the Meta app",
+        "Register key hashes for debug and release",
+        "Re-record permission screencasts on device"
+      ],
+      "layman": "Facebook needs to know the phone app exists before it will approve it.",
+      "layman_analogy": "",
+      "layman_needed": "Meta app settings list both store platforms with correct identifiers; login tested from a device build; review package updated.",
+      "layman_output": "Meta app settings list both store platforms with correct identifiers; login tested from a device build; review package updated.",
+      "timebox_days": 0.5,
+      "launch_stage": "beta",
+      "estimated_days": 0.5,
+      "estimate_source": "New ticket 17 Sep (mobile re-plan); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Store-app launch requirement added in the 17 Sep mobile re-plan."
+      }
+    },
+    {
+      "id": "N4-AS-26",
+      "sprint": "N5",
+      "assignee": "Asad",
+      "title": "Mobile analytics events and install attribution (deferred deep links from the landing page)",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). Extend the N3-AS-17 tracking plan to the store apps: the same event list on device, app-install attribution from landing-page and campaign links (store links with UTM → deferred deep link into onboarding), and crash-free sessions as a launch KPI. No pilot data in analytics.",
+      "why": "The waitlist and launch funnel end in a store install, not a page view; without attribution the marketing scoreboard is blind.",
+      "area": "Analytics",
+      "due": "2026-11-13",
+      "priority": "P2",
+      "priority_reason": "Required for a store-app launch on 15 Dec",
+      "depends_on": [
+        "N3-AS-17"
+      ],
+      "feeds": [
+        "N5-JL-08"
+      ],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Every N3-AS-17 event fires from the device build; an install from a UTM'd landing link shows the campaign in the scoreboard; crash-free rate visible.",
+      "checklist": [
+        "Map events to the mobile SDK",
+        "Store links carry UTM; deferred deep link into onboarding",
+        "Crash-free sessions on the war-room board"
+      ],
+      "layman": "We can still see which post or ad brought each person to the app.",
+      "layman_analogy": "",
+      "layman_needed": "Every N3-AS-17 event fires from the device build; an install from a UTM'd landing link shows the campaign in the scoreboard; crash-free rate visible.",
+      "layman_output": "Every N3-AS-17 event fires from the device build; an install from a UTM'd landing link shows the campaign in the scoreboard; crash-free rate visible.",
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (mobile re-plan); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Store-app launch requirement added in the 17 Sep mobile re-plan."
+      }
+    },
+    {
+      "id": "BL-APP-01",
+      "sprint": "N2",
+      "layer": "app",
+      "assignee": "Jill",
+      "title": "Apple + Google developer accounts, signing, keystore custody",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). Apple Developer ($99/yr) and Google Play ($25) accounts under the company entity; signing certs and keystores created and custodied by ops, never in the repo.",
+      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
+      "area": "Mobile app",
+      "due": "2026-10-02",
+      "priority": "P1",
+      "priority_reason": "Store-app launch requirement (was January backlog)",
+      "depends_on": [],
+      "feeds": [
+        "BL-APP-02",
+        "BL-APP-03",
+        "BL-APP-04",
+        "BL-APP-05",
+        "BL-APP-06",
+        "BL-APP-07"
+      ],
+      "gate": "N2",
+      "source": "build book 3 Sep",
+      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
+      "checklist": [],
+      "layman": "Parked for January: open the official Apple and Google developer accounts and keep the signing keys safely in ops hands, the paperwork step before any phone app can ship.",
+      "layman_analogy": "Like registering the business with the trading authorities and locking the shop's master keys in the safe before you can open a market stall.",
+      "layman_needed": "When picked up in January: official Apple and Google developer accounts under the company, with signing keys created and kept safely by ops, never in the code. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+      "layman_output": "When picked up in January: official Apple and Google developer accounts registered under the company itself, with the signing certificates and keys — the credentials that prove an app genuinely comes from us — created and held safely by ops, never stored in the code. The paperwork foundation every store submission after it depends on. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from the January backlog: the store app is now the launch product (17 Sep)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5,
+      "launch_stage": "launch",
+      "estimate_source": "Promoted 17 Sep (mobile re-plan); owner estimate to confirm"
+    },
+    {
+      "id": "BL-APP-02",
+      "sprint": "N4",
+      "layer": "app",
+      "assignee": "Asad",
+      "title": "Capacitor shell around the shipped Next.js build",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). Wrap the exact web bundle N5-AS-08 ships. Offline app shell, deep links into alert cards, versioned update path. One codebase, two store shells. Added in the 16 Sep review: Build against the store floors in force at submission: Capacitor 8 targeting Android 16 (API 36) with enforced edge-to-edge handled through the SystemBars plugin and CSS safe-area insets, and Xcode 26 with the iOS 26 SDK. Ship a PrivacyInfo.xcprivacy declaring required-reason APIs for every plugin and SDK with tracking set to false, and set the export-compliance encryption key in Info.plist.",
+      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
+      "area": "Mobile app",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Store-app launch requirement (was January backlog)",
+      "depends_on": [
+        "N1-AS-20"
+      ],
+      "feeds": [
+        "BL-LL-24"
+      ],
+      "gate": "N4",
+      "source": "build book 3 Sep",
+      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
+      "checklist": [],
+      "layman": "Parked for January: wrap the finished web app in a thin shell so it installs from the App Store and Play Store - same product, no second codebase.",
+      "layman_analogy": "Like putting the same shop inside a shopping-centre unit — identical stock and staff, just a doorway where mall visitors already walk.",
+      "layman_needed": "When picked up in January: the finished web app wrapped in a thin shell that installs from the App Store and Play Store, with offline start-up, links straight into alert cards, and an update path — one codebase. Otherwise re-decided at Roadmap V2.",
+      "layman_output": "When picked up in January: the exact web app we shipped, wrapped in a thin shell that installs from the App Store and Play Store like any normal app — starting offline, opening links straight into alert cards, and updating cleanly. One codebase, two store icons; a pilot can find ArtemisAI on their home screen. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from the January backlog: the store app is now the launch product (17 Sep)."
+      },
+      "estimated_days": 5,
+      "timebox_days": 5,
+      "launch_stage": "launch",
+      "estimate_source": "Promoted 17 Sep (mobile re-plan); owner estimate to confirm"
+    },
+    {
+      "id": "BL-APP-03",
+      "sprint": "N5",
+      "layer": "app",
+      "assignee": "Muteeb",
+      "title": "Native push: APNs + FCM from the same alerts worker",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). The worker that already sends SES email and web push gains APNs and FCM delivery. Same quiet hours, same dedup, same kill switch. Added in the 16 Sep review: In the shell, ask for notification permission only after the first alert, with a pre-prompt and a route to system settings after denial, and register device tokens per user and tenant, removing them on sign-out, page disconnect and account deletion. Use separate Android channels for crisis and digest, the iOS time-sensitive level for crisis alerts only, and lock-screen text that shows the hook but never comment content.",
+      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
+      "area": "Mobile app",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Store-app launch requirement (was January backlog)",
+      "depends_on": [
+        "BL-APP-01"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "build book 3 Sep",
+      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
+      "checklist": [],
+      "layman": "Parked for January: make crisis alerts arrive as real phone notifications through Apple and Google, using the same alarm system and quiet hours as email.",
+      "layman_analogy": "Like wiring the existing burglar alarm to also ring the owner's mobile — same alarm, same quiet hours, one more bell.",
+      "layman_needed": "When picked up in January: crisis alerts arriving as real Apple and Google phone notifications from the same system that sends email, honouring the same quiet hours, duplicate rules and kill switch. Otherwise re-decided at Roadmap V2.",
+      "layman_output": "When picked up in January: crisis alerts arriving as genuine Apple and Google phone notifications, sent by the very same system that already sends email and web push — honouring the same quiet hours, the same duplicate rules and the same emergency off switch. A page owner feels the buzz in their pocket within minutes. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from the January backlog: the store app is now the launch product (17 Sep)."
+      },
+      "estimated_days": 3,
+      "timebox_days": 3,
+      "launch_stage": "launch",
+      "estimate_source": "Promoted 17 Sep (mobile re-plan); owner estimate to confirm"
+    },
+    {
+      "id": "BL-APP-04",
+      "sprint": "N5",
+      "layer": "app",
+      "assignee": "Saad",
+      "title": "Store identity: icon, splash, screenshots, listing copy",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). App icon and splash from the token sheet; store screenshots from the demo tenant (never pilot data); listing copy that passes the narrative rulebook.",
+      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
+      "area": "Mobile app",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Store-app launch requirement (was January backlog)",
+      "depends_on": [
+        "BL-APP-01"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "build book 3 Sep",
+      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
+      "checklist": [],
+      "layman": "Parked for January: the app-store face - icon, splash screen, screenshots and listing text, all from demo data and approved wording.",
+      "layman_analogy": "Like dressing the shop window before opening day — sign, awning and display photos — using the showroom dummy rather than real customers' belongings.",
+      "layman_needed": "When picked up in January: an app icon, splash screen, store screenshots taken from demo data only, and listing text that passes our approved wording rules. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+      "layman_output": "When picked up in January: the app's public face — an icon and splash screen built from the approved design sheet, store screenshots taken only from the demo account (never real pilot data), and listing text that passes our approved wording rules. Anyone browsing either store sees a polished, honest listing. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from the January backlog: the store app is now the launch product (17 Sep)."
+      },
+      "estimated_days": 2,
+      "timebox_days": 2,
+      "launch_stage": "launch",
+      "estimate_source": "Promoted 17 Sep (mobile re-plan); owner estimate to confirm"
+    },
+    {
+      "id": "BL-APP-05",
+      "sprint": "N5",
+      "layer": "app",
+      "assignee": "Filza",
+      "title": "Privacy labels + data-safety forms from the DPA",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). Apple privacy nutrition labels and Google data-safety form, derived from the signed DPA and sub-processor list so the store filings and the legal papers never disagree.",
+      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
+      "area": "Mobile app",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Store-app launch requirement (was January backlog)",
+      "depends_on": [
+        "BL-APP-01"
+      ],
+      "feeds": [
+        "BL-LL-24"
+      ],
+      "gate": "N5",
+      "source": "build book 3 Sep",
+      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
+      "checklist": [],
+      "layman": "Parked for January: fill in Apple and Google privacy forms straight from our signed data agreement, so the store filings and legal papers never disagree.",
+      "layman_analogy": "Like copying the customs declaration straight from the shipping contract, so the form at the border never contradicts the paperwork in the crate.",
+      "layman_needed": "When picked up in January: Apple and Google privacy forms filled in directly from our signed data agreement and supplier list, so store filings and legal papers always agree. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+      "layman_output": "When picked up in January: Apple's privacy labels and Google's data-safety form filled in directly from our signed data-processing agreement and supplier list, so what the stores say about our data handling can never contradict what the legal papers say. A reviewer can lay the three side by side and find no gaps. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from the January backlog: the store app is now the launch product (17 Sep)."
+      },
+      "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident.",
+      "estimated_days": 1,
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimate_source": "Promoted 17 Sep (mobile re-plan); owner estimate to confirm"
+    },
+    {
+      "id": "BL-APP-06",
+      "sprint": "N6",
+      "layer": "app",
+      "assignee": "Asad",
+      "title": "Pilot devices: install, reconnect, crisis push drill",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). Both store builds on real pilot phones via TestFlight/Play internal; one crisis push drill end to end on a phone before public release.",
+      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
+      "area": "Mobile app",
+      "due": "2026-11-27",
+      "priority": "P1",
+      "priority_reason": "Store-app launch requirement (was January backlog)",
+      "depends_on": [
+        "BL-APP-02",
+        "BL-APP-03"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "build book 3 Sep",
+      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
+      "checklist": [],
+      "layman": "Parked for January: put the store builds on real pilot phones and run one crisis alert end to end on a handset before the public release.",
+      "layman_analogy": "Like a fire drill in the actual building with the actual residents — not a diagram — before certifying the escape routes.",
+      "layman_needed": "When picked up in January: both store builds installed on real pilot phones, with one crisis alert run end to end on a handset before public release. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+      "layman_output": "When picked up in January: both store builds installed on real pilot phones through Apple's and Google's testing channels, followed by one full crisis-alert drill run end to end — from detection to the notification buzzing on an actual handset — before anything goes public. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from the January backlog: the store app is now the launch product (17 Sep)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimate_source": "Promoted 17 Sep (mobile re-plan); owner estimate to confirm"
+    },
+    {
+      "id": "BL-APP-07",
+      "sprint": "N6",
+      "layer": "app",
+      "assignee": "Asad",
+      "title": "Submit both stores + release/rollback runbook",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). TestFlight + Play internal, then production submission to both stores. Guideline 4.2 counter-case documented (native push, deep links, offline shell). Versioning and forced-update runbook written. Added in the 16 Sep review: Add the Sentry Capacitor SDK with release and dist tied to store build numbers, plus dSYM, Android mapping and source-map uploads in the release pipeline, and confirm a forced native crash from TestFlight and Play internal builds appears symbolicated. Write crash-free session thresholds (target 99.5%) into the runbook that halt the Play staged rollout and pause the Apple phased release, with the first release gated on TestFlight and internal-track crash data. Submit to both stores no later than Fri 27 Nov so review time sits inside the 15 Dec deadline; TestFlight/Play internal from N5.",
+      "why": "The January mobile app: a wrap of the shipped web build, not a second product. Starts launch + 2 weeks, whichever date launch lands on.",
+      "area": "Mobile app",
+      "due": "2026-11-27",
+      "priority": "P1",
+      "priority_reason": "Store-app launch requirement (was January backlog)",
+      "depends_on": [
+        "BL-APP-02",
+        "BL-APP-04",
+        "BL-APP-05",
+        "N3-AS-25"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "build book 3 Sep",
+      "acceptance": "Scheduled after launch with the named owner, or re-decided at Roadmap V2 (w/c 14 Dec).",
+      "checklist": [],
+      "layman": "Parked for January: submit to both app stores with a written release-and-rollback plan, including the case for why our app is more than a website in a wrapper.",
+      "layman_analogy": "Like submitting planning permission with a written case for why the building is more than a facade, plus a demolition plan filed in case anything goes wrong.",
+      "layman_needed": "When picked up in January: submissions to both app stores, a documented case for why the app is more than a wrapped website, and a written release-and-rollback plan. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+      "layman_output": "When picked up in January: production submissions filed with both app stores, a written case ready for Apple's more-than-a-wrapped-website rule (citing the native notifications, deep links and offline start), and a release-and-rollback runbook saying how versions ship and how a bad one gets pulled back. Otherwise re-decided at Roadmap V2 (w/c 14 Dec).",
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from the January backlog: the store app is now the launch product (17 Sep)."
+      },
+      "estimated_days": 3,
+      "timebox_days": 3,
+      "launch_stage": "launch",
+      "estimate_source": "Promoted 17 Sep (mobile re-plan); owner estimate to confirm"
     }
   ],
   "tracks": [
@@ -40296,7 +40475,8 @@ window.LAUNCH_DATA = {
     "summary": "Public launch and final deadline: 15 December 2026. Invited beta target: 1 December. Existing team only.",
     "staffing": "Existing team only; no new hires or outside-counsel capacity assumed",
     "plan_status": "Critical review: coverage broad; feasibility RED pending owner capacity resolution",
-    "planning_note": "All previously planned delivery and business work is visible again. Tasks are plans, not claims of completed integrations or approvals. No broad scope deletion is authorised. Launch remains 15 December; workload estimates are not a delivery guarantee."
+    "planning_note": "All previously planned delivery and business work is visible again. Tasks are plans, not claims of completed integrations or approvals. No broad scope deletion is authorised. Launch remains 15 December; workload estimates are not a delivery guarantee.",
+    "goal": " Launch product: landing page + native store app; web app after launch (17 Sep)."
   },
   "capacity_review": {
     "as_of": "2026-09-17",
@@ -40306,20 +40486,20 @@ window.LAUNCH_DATA = {
     "owners": [
       {
         "owner": "Asad",
-        "tickets": 51,
+        "tickets": 57,
         "focus_rate": 0.6,
-        "effort_days": 78.51,
+        "effort_days": 91.31,
         "capacity_days": 38.4,
-        "gap_days": 40.11,
+        "gap_days": 52.91,
         "capacity_at_hard_limit": 38.4
       },
       {
         "owner": "Muteeb",
-        "tickets": 76,
+        "tickets": 78,
         "focus_rate": 0.7,
-        "effort_days": 127.03,
+        "effort_days": 130.53,
         "capacity_days": 44.8,
-        "gap_days": 82.23,
+        "gap_days": 85.73,
         "capacity_at_hard_limit": 44.8
       },
       {
@@ -40335,9 +40515,9 @@ window.LAUNCH_DATA = {
         "owner": "Saad",
         "tickets": 122,
         "focus_rate": 0.7,
-        "effort_days": 131.55,
+        "effort_days": 132.75,
         "capacity_days": 44.8,
-        "gap_days": 86.75,
+        "gap_days": 87.95,
         "capacity_at_hard_limit": 44.8
       },
       {
@@ -40351,11 +40531,11 @@ window.LAUNCH_DATA = {
       },
       {
         "owner": "Jill",
-        "tickets": 75,
+        "tickets": 76,
         "focus_rate": 0.6,
-        "effort_days": 50.31,
+        "effort_days": 50.81,
         "capacity_days": 38.4,
-        "gap_days": 11.91,
+        "gap_days": 12.41,
         "capacity_at_hard_limit": 38.4
       },
       {
@@ -40369,15 +40549,15 @@ window.LAUNCH_DATA = {
       },
       {
         "owner": "Filza",
-        "tickets": 65,
+        "tickets": 66,
         "focus_rate": 0.5,
-        "effort_days": 57.75,
+        "effort_days": 58.75,
         "capacity_days": 32,
-        "gap_days": 25.75,
+        "gap_days": 26.75,
         "capacity_at_hard_limit": 32
       }
     ],
-    "total_effort_days": 610.25,
+    "total_effort_days": 629.25,
     "total_capacity_days": 268.8
   },
   "ticket_audit": {
@@ -43500,5 +43680,61 @@ window.LAUNCH_DATA = {
     "report": "docs/workload-rebalance.md",
     "capacity_status": "RED: redistribution reduces some specialist overhead, but does not remove the overall effort shortfall.",
     "queue_order": "Dependency order first; earliest due date, priority and number of downstream tickets second. A clear ticket graph is not proof that external inputs are ready."
+  },
+  "platform_revision": {
+    "date": "2026-09-17",
+    "decision": "Launch product = landing page + native store app (iOS/Android). Web app deferred until after launch (Alex + Asad call, 17 Sep).",
+    "added": [
+      "N1-AS-20",
+      "N3-AS-25",
+      "N2-MT-22",
+      "N4-AS-26"
+    ],
+    "promoted_from_january_backlog": [
+      "BL-APP-01",
+      "BL-APP-02",
+      "BL-APP-03",
+      "BL-APP-04",
+      "BL-APP-05",
+      "BL-APP-06",
+      "BL-APP-07"
+    ],
+    "converted_to_mobile_stack": [
+      "N1-AS-12",
+      "N1-SD-05",
+      "N1-SD-06",
+      "N1-SD-20",
+      "N2-AS-01",
+      "N2-AS-03",
+      "N2-AS-04",
+      "N2-AS-06",
+      "N2-SD-06",
+      "N2-SD-15",
+      "N3-AS-01",
+      "N3-AS-04",
+      "N3-AS-11",
+      "N3-AS-12",
+      "N3-SD-08",
+      "N3-SD-11",
+      "N4-AS-10",
+      "N4-SD-14",
+      "N5-SD-08",
+      "N5-SD-15",
+      "N2-SD-17",
+      "N2-SD-18",
+      "N2-SD-19",
+      "N2-SD-20",
+      "N3-SD-14",
+      "N4-AS-20",
+      "N2-SD-21",
+      "N3-SD-17",
+      "N3-AS-23",
+      "N3-SD-19",
+      "N4-AS-23"
+    ],
+    "parked_web_only": [
+      "N4-AS-23"
+    ],
+    "note": "BL-APP-02 assumed a Capacitor shell around the Next.js build; the stack is re-decided in N1-AS-20. Backend, APIs, ML, alerts pipeline, legal and marketing tickets are unchanged."
   }
 };
