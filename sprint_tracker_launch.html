@@ -755,7 +755,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
 </div></div>
 <div class="toast" id="toast"></div>
 
-<script src="sprint_launch_data.js"></script>
+<script src="sprint_launch_data.js?v=20260917-friday"></script>
 <script src="mock_shots_data.js"></script>
 <script>
 /* ============================================================
@@ -774,7 +774,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   document.querySelector('#viewer .av').textContent=VIEWER.charAt(0).toUpperCase();
 
   var D=window.LAUNCH_DATA||{sprints:[],tickets:[]};
-  var LAUNCH=D.launch||{public:'2026-12-15',public_label:'Tue 15 Dec 2026',short:'15 Dec',long:'15 December 2026',hard_deadline:'2026-12-20',hard_deadline_label:'Sun 20 Dec 2026'};
+  var LAUNCH=D.launch||{public:'2026-12-15',public_label:'Tue 15 Dec 2026',short:'15 Dec',long:'15 December 2026',hard_deadline:'2026-12-15',hard_deadline_label:'Tue 15 Dec 2026'};
   var SPRINTS_BASE=JSON.parse(JSON.stringify(D.sprints));
   var SPRINT_EDITS={}, SPRINTS=D.sprints, ORDER=SPRINTS.map(function(s){return s.id;});
   function supersededSprintEdit(id,e){ var old=D.reconciliation&&D.reconciliation.superseded_sprint_overrides[id]; return !!(old&&e&&e.at===old.at&&e.start===old.start&&e.end===old.end&&e.gate_date===old.gate_date); }
@@ -860,7 +860,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   function st(id){ return resolveState(BASE_RECORDS[id],STATE[id]); }
   function isOpen(t){ var s=st(t.id).status; return !t.superseded_by && s!=='done'&&s!=='dropped'; }
   function planningInputs(t){
-    var notes=[];
+    var notes=[]; if(t.deadline_note) notes.push(t.deadline_note);
     if(t.schedule_confidence) notes.push(t.schedule_confidence);
     (t.design_milestone_dependencies||[]).forEach(function(id){var m=(D.design_handoff.milestones||[]).filter(function(x){return x.id===id;})[0];if(m) notes.push(m.title+' · '+fmtS(m.date)+' · '+m.status+' (acceptance not verified)');});
     return notes.length?'<div class="note"><b>Design / planning inputs</b><p>'+notes.map(esc).join('<br>')+'</p></div>':'';
@@ -968,7 +968,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
       var rows=cap?cap.owners.map(function(p){return '<tr><th scope="row">'+esc(p.owner)+'</th><td>'+p.effort_days+'</td><td>'+p.capacity_days+'</td><td>'+p.gap_days+'</td></tr>';}).join(''):'';
       document.getElementById('ov-hero').insertAdjacentHTML('beforeend',
         '<section class="panel launch-constraint" aria-label="December launch constraints">'+
-        '<h3>15 December target · 20 December absolute latest</h3><p>'+esc(LAUNCH.staffing||'Existing team only')+'.</p>'+
+        '<h3>15 December launch · final deadline</h3><p>'+esc(LAUNCH.staffing||'Existing team only')+'.</p>'+
         '<p class="note">'+esc(LAUNCH.planning_note||'')+'</p>'+
         (lateEdits?'<p class="note">'+lateEdits+' open shared ticket edits are beyond the hard limit. Jill and the owners must reconcile these; saved team edits have not been erased.</p>':'')+
         (D.ticket_audit?'<p class="note">Two audit passes · 14 tickets deferred · 3 overlapping tickets consolidated. <a href="docs/ticket-audit-round-2.md" target="_blank" rel="noopener">Read ticket audit</a></p>':'')+
@@ -1859,7 +1859,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
 
   /* ---- boot ---- */
   (function(){ var n=days(TODAY,LAUNCH.public); var el=document.getElementById('hdr-count'); if(el) el.innerHTML='<b>'+n+'</b> days &middot; '+esc(LAUNCH.short); document.querySelectorAll('.l-long').forEach(function(e){ e.textContent=LAUNCH.long; }); })();
-  function renderAll(){ if(D.reconciliation){ document.getElementById('evidence-status').textContent='Status baseline: shared board checked '+D.reconciliation.as_of+' · 14 completed launch tickets reconciled. Later saved updates apply. December target 15 Dec, absolute latest 20 Dec; other planning dates remain provisional. The old 7 September N1 calendar override is superseded.'; } if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='features') renderFeatures(); else if(TAB==='layman') renderLayman(); else if(TAB==='map') renderMap(); else if(TAB==='backlog') renderBacklog(); else if(TAB.indexOf('track-')===0) renderTrack(TAB.slice(6)); else renderPerf(); }
+  function renderAll(){ if(D.reconciliation){ document.getElementById('evidence-status').textContent='Status baseline: shared board checked '+D.reconciliation.as_of+' · 14 completed launch tickets reconciled. Later saved updates apply. Public launch and final deadline 15 Dec; other planning dates remain provisional. The old 7 September N1 calendar override is superseded.'; } if(TAB==='overview') renderOverview(); else if(TAB==='tracker') renderTracker(); else if(TAB==='features') renderFeatures(); else if(TAB==='layman') renderLayman(); else if(TAB==='map') renderMap(); else if(TAB==='backlog') renderBacklog(); else if(TAB.indexOf('track-')===0) renderTrack(TAB.slice(6)); else renderPerf(); }
   document.getElementById('btn-refresh').addEventListener('click',load);
   try{ var lt=localStorage.getItem('artemis_launch_tab'); if(lt) showTab(lt); }catch(e){}
   load();

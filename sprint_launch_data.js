@@ -120,12 +120,12 @@ window.LAUNCH_DATA = {
       "id": "LW",
       "layer": "launch",
       "section": "Phase 4 · Launch layer",
-      "name": "December launch and contingency",
+      "name": "December release and launch",
       "start": "2026-11-30",
-      "end": "2026-12-20",
+      "end": "2026-12-15",
       "gate_date": "2026-12-11",
-      "gate": "Fri 11 Dec: public release readiness decision on the evidence. Target Tue 15 Dec; Sun 20 Dec is the absolute latest date, not a new routine target.",
-      "goal": "Invited beta Tue 1 Dec; public launch Tue 15 Dec. Keep 16-20 Dec for contingency and support. No new feature work in that buffer; unmet release gates remain blockers."
+      "gate": "11 December: readiness decision on evidence. Public launch and final deadline: 15 December.",
+      "goal": "Invited beta 1 December; public launch 15 December. No later launch window. Required release checks must pass."
     }
   ],
   "backlog": [
@@ -11269,7 +11269,7 @@ window.LAUNCH_DATA = {
       "what": "With Faheem, replace 'crisis >= 75% precision on the real-incident backtest' with a two-part line shaped like the flop gate: precision at a stated alert volume PLUS a floor ('must catch N of Lewis's incidents inside the complete window' or a coverage %). Record that the numeric pass line is set in N2 once the 8-week hour-of-week measurement lands (N2-AS-02). Write the new line into the sprint tracker and Checklist 3. Balancing 16 Sep: time-box to about 0.25 days (full scope about 0.5); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "As written a detector that alerts once a month passes while missing every storm; Faheem flagged the decision as needed this week and N2 backtests tune against whatever line exists.",
       "area": "Alerts",
-      "due": "2026-09-11",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Faheem's roadmap asks for the decision this week; N2 tuning starts against it",
       "depends_on": [
@@ -11298,7 +11298,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-AS-03",
@@ -11308,7 +11309,7 @@ window.LAUNCH_DATA = {
       "what": "Co-write and sign a one-page stack decision with Muteeb: Next.js + TypeScript PWA, Tailwind driven by Saad's design tokens, Netlify hosting for landing and app; name the bought auth vendor (Clerk or Cognito) and how its JWT carries the tenant claim; name the E2E runner and the KPI-events sink so no N2-N3 ticket reopens them. File it in the repo docs with a 'no changes after' clause. DECISION RECORDED 3 Sep: Lovable is Saad's mockup tool; Next.js is the product. Lovable code never merges - the mockup is the spec, the repo is the build. Balancing 16 Sep: time-box to about 0.5 days (full scope about 1); ship the smallest version that meets the acceptance and park the rest in the backlog. Consolidated N1-AS-04: Decide and record: an account (tenant) owns many pages; page_id is mandatory on every query and every table carrying page data; a workspace is the set of connected pages with an all-pages / one-page filter everywhere; one Facebook token per page. Agree with Muteeb how the JWT tenant claim keys RLS and where page ownership is checked. Balancing 16 Sep: time-box to about 0.5 days (full scope about 1); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Muteeb scaffolds repo, CI and preview deploys in week A against this document; a late change moves every deploy path.",
       "area": "App core",
-      "due": "2026-09-11",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Blocks Muteeb's week-A scaffold",
       "depends_on": [],
@@ -11354,7 +11355,8 @@ window.LAUNCH_DATA = {
         "decision": "consolidated",
         "reason": "Single deliverable with N1-AS-04; combined estimate retained, no assumed efficiency saving."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-AS-05",
@@ -11364,7 +11366,7 @@ window.LAUNCH_DATA = {
       "what": "Co-sign the API contract as TWO OpenAPI documents with different lifecycles, not one: (1) browser-to-BFF, hand-authored with Zod and zod-openapi in the app repo, changing weekly - error envelope, tenant claim on every route and page_id on every query, pages list plus per-page connection-health and disconnect, Today feed (next-move with confidence, moves[], typed feed cards, setup-pill ingest progress), draft-score view-model carrying drivers[] in Saad's chip vocabulary plus confidence/coverage flag and band, unread counts, health (score, weekly delta, three factor sub-scores), nightly briefing aggregate, alerts (cited post/comment ids, one action, drafted reply, rules), best-times cells with a count-floor flag; (2) BFF-to-FastAPI, generated from Faheem's Pydantic models (N1-FH-19), changing when a model changes. Record which of the three owners owns each route (N1-AS-14), that only FastAPI holds warehouse credentials, and per route whether it is live or mock in N2 - the feature map gives Muteeb feed/aggregate endpoints that his own N2 list does not have, so the Today screen's data supply is settled here. Balancing 16 Sep: time-box to about 1 day (full scope about 2.5); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Every Faheem -> Muteeb -> Asad seam is mechanical only if the shapes are on paper now; Muteeb's mock layer and Asad's N2 screens both read this file.",
       "area": "App core",
-      "due": "2026-09-11",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Muteeb's week-A mock generation and week-B endpoint need it",
       "depends_on": [
@@ -11402,7 +11404,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-AS-06",
@@ -11551,7 +11554,7 @@ window.LAUNCH_DATA = {
       "what": "At the 11 Sep stack co-sign, write down who owns which endpoint family now the backend splits three ways: Asad owns every route the browser calls (Next.js Route Handlers - session, tenant claim, aggregation, view-models); Faheem owns the model function and its Pydantic contract inside FastAPI (accuracy, abstain, coverage, drivers, model_version); Muteeb owns the FastAPI service shell around it (routing, internal auth, caching, limits, deploy, observability, cost tagging) and the queue worker. Record the three rules that keep the split survivable: no business logic under app/api (logic lives in framework-free lib/server modules), only FastAPI holds warehouse credentials, and no WebSockets before the public launch on Tue 15 Dec 2026 - polling for counts and progress, SSE inside a hard budget for Art-E. Balancing 16 Sep: time-box to about 0.5 days (full scope about 0.75); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Three people are about to write backend code against one product on a dated launch; without a written seam the same endpoint gets built twice or not at all, and the cheap migration path out of route handlers closes on the first business-logic import.",
       "area": "App core",
-      "due": "2026-09-11",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "P0 - blocks N1-AS-05, Muteeb's mock generation on 8 Sep and every backend ticket that follows.",
       "depends_on": [
@@ -11588,7 +11591,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-FH-01",
@@ -12003,7 +12007,7 @@ window.LAUNCH_DATA = {
       "what": "List every prediction table (flop scores, NLP labels, KANG growth rows, best-times aggregates when they exist) with expected cadence; add max-timestamp panels and an alert rule per table with routing and a written trip action. Test by pausing one job. Balancing 16 Sep: time-box to about 1 day (full scope about 2); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "A silently stopped model is the failure we sell against.",
       "area": "Ops",
-      "due": "2026-09-18",
+      "due": "2026-09-25",
       "priority": "P1",
       "priority_reason": "real risk; guards every later model, slack inside N1",
       "depends_on": [],
@@ -12032,7 +12036,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-FH-12",
@@ -12117,7 +12122,8 @@ window.LAUNCH_DATA = {
       "status": "blocked",
       "done_at": null,
       "status_updated_at": "2026-09-07T16:21:21.520Z",
-      "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z"
+      "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z",
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-FH-16",
@@ -12207,7 +12213,7 @@ window.LAUNCH_DATA = {
       "what": "One sheet for Filza: the 8 pipelines (LOKI, GALACTUS, NEBULA, LOGAN, FUSION, VISION, KANG, HEIMDALL) with the purpose each serves and the models behind them; every labelling/LLM vendor in use, what customer content it receives and its training-tier status; and the emotion/arousal models shipped or planned. Refresh the emotion line by Thu 8 Oct 2026 if the shipped set changes. Balancing 16 Sep: time-box to about 0.5 days (full scope about 1); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Filza's Art 30 records (N1-FZ-08), AI-vendor gate (N2-FZ-03) and EU AI Act Art 5 memo (N3-FZ-07) all name this input and nobody owned it.",
       "area": "Legal",
-      "due": "2026-09-16",
+      "due": "2026-09-25",
       "priority": "P1",
       "priority_reason": "P1: three Filza tickets depend on it; same-day slack before N1-FZ-08.",
       "depends_on": [],
@@ -12241,7 +12247,8 @@ window.LAUNCH_DATA = {
       "done_at": null,
       "status_updated_at": "2026-09-07T16:21:31.868Z",
       "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z",
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-FH-19",
@@ -12343,7 +12350,7 @@ window.LAUNCH_DATA = {
       "what": "Close PR #2 (Mantis, 13 months stale) and PR #3 (superseded: main already ships attachment extraction). Park PR #6 (restructure) with a written note that it reopens only after launch. Record the three decisions in the repo so nobody re-merges them mid-build.",
       "why": "All three conflict with main; merging the restructure mid-build would move every live deploy path under Asad's screens.",
       "area": "Ops",
-      "due": "2026-09-10",
+      "due": "2026-09-25",
       "priority": "P1",
       "priority_reason": "Closing PR #2/#3 and parking #6 gates nothing: open PRs do not block main or the scaffold. Day-1 due date keeps it early; a slip costs nobody a date.",
       "depends_on": [],
@@ -12373,7 +12380,8 @@ window.LAUNCH_DATA = {
       "status": "inprog",
       "done_at": null,
       "status_updated_at": "2026-09-14T16:23:43.658Z",
-      "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z"
+      "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z",
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-MT-02",
@@ -12428,7 +12436,7 @@ window.LAUNCH_DATA = {
       "what": "Request SES production access for the alert-sending domain, publish SPF, DKIM and DMARC records, and verify them with a test send to Gmail and Outlook inboxes. Hand the sending identity to Jill for the autumn warm-up. Balancing 16 Sep: time-box to about 0.5 days (full scope about 1); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Sandbox exit and warm-up take weeks; crisis emails that land in spam are crises missed.",
       "area": "Alerts",
-      "due": "2026-09-11",
+      "due": "2026-09-25",
       "priority": "P1",
       "priority_reason": "SES production access is a 1-2 day AWS turnaround and Jill's warm-up starts in N2 (14 Sep), leaving ~10 days of slack; the first real alert email is N3. Real risk with slack, not a blocker.",
       "depends_on": [],
@@ -12460,7 +12468,8 @@ window.LAUNCH_DATA = {
       "status": "inprog",
       "done_at": null,
       "status_updated_at": "2026-09-11T23:31:31.112Z",
-      "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z"
+      "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z",
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-MT-04",
@@ -12470,7 +12479,7 @@ window.LAUNCH_DATA = {
       "what": "Scaffold the Next.js + TypeScript app repo, add CI with lint, typecheck and tests, wire Netlify preview deploys per PR, and stand up a permanent staging environment with its own database and secrets. Balancing 16 Sep: time-box to about 2 days (full scope about 3); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Asad starts coding Wed 17 Sep; without rails his screens start cold and every PR lacks a preview to review.",
       "area": "App core",
-      "due": "2026-09-11",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Asad's build start on 10 Sep depends on it",
       "depends_on": [
@@ -12506,7 +12515,8 @@ window.LAUNCH_DATA = {
       "status": "inprog",
       "done_at": null,
       "status_updated_at": "2026-09-14T16:23:56.715Z",
-      "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z"
+      "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z",
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-MT-05",
@@ -12516,7 +12526,7 @@ window.LAUNCH_DATA = {
       "what": "Pin the Meta Graph API version and record its sunset date; build one central Meta client with jittered backoff and retry caps; add structured tenant-tagged logging with no PII; connect Sentry and an uptime check on staging. Balancing 16 Sep: time-box to about 2 days (full scope about 3); ship the smallest version that meets the acceptance and park the rest in the backlog. Note: N1-JL-02 now finishes on 2026-09-30 after the 16 Sep balancing, so this fixed-date item goes ahead with what exists by then.",
       "why": "This is the quiet plumbing that cannot be late: an unpinned API or unbounded retries break silently at the worst moment, and the token backend reads real page data through this client for the gate demo.",
       "area": "Ops",
-      "due": "2026-09-15",
+      "due": "2026-09-25",
       "priority": "P1",
       "priority_reason": "Blocks only Muteeb's own N1-MT-09/14, not another person. Sentry, uptime, logging and the version pin have slack into N2; N1-MT-09 can carry a minimal Meta client for the gate demo.",
       "depends_on": [],
@@ -12547,7 +12557,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-MT-06",
@@ -13105,7 +13116,7 @@ window.LAUNCH_DATA = {
       "what": "Take formal ownership of the handover pack Rafeh has already delivered: the acceptance register, launch-gate list, open-defect list, pilot notes, the MVP/Fast/Phase-2 retag summary, QA dashboard access, the 97-post gold-set provenance + comment sets, and the written note that Art-E GraphRAG moves out (comment collapse). Verify each artefact is complete and readable without him, file everything in one PM folder, and confirm no access or tracker still sits in his accounts. Anything missing goes to Alex as interim PM, not back to Rafeh. Balancing 16 Sep: time-box to about 0.25 days (full scope about 0.5); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Rafeh's tags, gates and gold-set provenance leave with him on 3 Sep; without a verified, filed pack every later acceptance and model gate has no paper trail.",
       "area": "PM",
-      "due": "2026-09-10",
+      "due": "2026-09-25",
       "priority": "P1",
       "priority_reason": "Per CONTEXT the handover pack is already delivered; this is verify-and-file. Jill's revocation check is her own ticket and does not wait on Saad's closure note. Nothing dated blocks on it.",
       "depends_on": [
@@ -13137,7 +13148,8 @@ window.LAUNCH_DATA = {
       "status": "inprog",
       "done_at": null,
       "status_updated_at": "2026-09-14T18:45:22.677Z",
-      "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z"
+      "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z",
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-SD-02",
@@ -13147,7 +13159,7 @@ window.LAUNCH_DATA = {
       "what": "Record Saad’s supplied landing dates and the app Home redesign on 22–23 September. Asad reviews the landing handoff on the next working day, 21 September, and lists missing assets or states immediately. Maintain a separate product-design queue: Drafts, Alerts, Art-E, Settings and connected-page states. Get dates from Saad rather than inferring that the landing handoff includes them. Existing app planning dates are provisional.",
       "why": "Costs nothing and buys schedule slack; without it Asad receives nine packs on 17 Sep and starts cold on all of them.",
       "area": "Design",
-      "due": "2026-09-21",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Blocks the order Asad builds in from 14 Sep; only worth anything if decided on day 1 of N1",
       "depends_on": [],
@@ -13177,7 +13189,8 @@ window.LAUNCH_DATA = {
       "done_at": null,
       "status_updated_at": "2026-09-14T18:46:20.384Z",
       "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z",
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-SD-05",
@@ -13222,7 +13235,7 @@ window.LAUNCH_DATA = {
       "what": "Produce one token sheet: spacing scale, type scale, colour roles (danger, positive, muted, accent - roles not hexes), state rules (hover/disabled/loading/empty), radius, elevation. Ship it alongside the first two packs so Asad's component library starts from tokens rather than nine screenshots. Balancing 16 Sep: time-box to about 1 day (full scope about 1.5); ship the smallest version that meets the acceptance and park the rest in the backlog. Scope clarification: this is the PRODUCT token mapping. Saad’s 18 September landing token delivery is a reusable input, not evidence this product task is finished.",
       "why": "Without it Asad derives a design system from screens in his first build week and every later pack drifts.",
       "area": "Design",
-      "due": "2026-09-22",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Blocks Asad's component-library start on 10 Sep",
       "depends_on": [
@@ -13258,7 +13271,8 @@ window.LAUNCH_DATA = {
         "source": "Saad dates relayed by Asad on 16 September; landing scope clarified by Asad",
         "previous_due": "2026-09-22",
         "previous_sprint": "N1"
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-SD-07",
@@ -13311,7 +13325,8 @@ window.LAUNCH_DATA = {
       "status": "inprog",
       "done_at": null,
       "status_updated_at": "2026-09-14T18:46:53.311Z",
-      "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z"
+      "status_source": "Shared board snapshot 2026-09-16T12:15:43.591Z",
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-SD-09",
@@ -13409,7 +13424,7 @@ window.LAUNCH_DATA = {
       "what": "Complete the PM handover on 24 September after the supplied Home redesign milestone. Jill continues daily queue coordination under N1-JL-20. Saad retains design acceptance and the signed gate register, with decisions/evidence links and approvers recorded for the 25 September gate. Do not create a competing daily management process.",
       "why": "The bridge week must not decide things twice; anything left on the list stalls N2 planning.",
       "area": "PM",
-      "due": "2026-09-24",
+      "due": "2026-09-25",
       "priority": "P1",
       "priority_reason": "Real risk of decisions made twice, but a day of slack before N2",
       "depends_on": [
@@ -13484,7 +13499,7 @@ window.LAUNCH_DATA = {
       "what": "First PM day: write the one-page 'page analytics tool' reviewer narrative (what the app does with each permission, read-only analytics, Remind-me not Schedule) for Asad to approve and Filza to firewall-check, and set up the Meta app-dashboard roles so Asad (co-owner) and Lewis (tester management) have access before the tester list is built. Balancing 16 Sep: time-box to about 0.5 days (full scope about 1); ship the smallest version that meets the acceptance and park the rest in the backlog. Note: N1-FZ-06 now finishes on 2026-09-16 after the 16 Sep balancing, so this fixed-date item goes ahead with what exists by then.",
       "why": "Asad's founder-duties clearance (N1-AS-09), Filza's firewall rulebook (N2-FZ-01) and Lewis's tester list (N1-LW-05) all depend on it; the 25 Sep submission clock starts here.",
       "area": "Meta",
-      "due": "2026-09-10",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "P0: blocks three people and sits on the Meta submission clock.",
       "depends_on": [],
@@ -13515,7 +13530,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-SD-17",
@@ -13525,7 +13541,7 @@ window.LAUNCH_DATA = {
       "what": "Deliver with the design packs the assets the Meta app dashboard requires: a 1024x1024 PNG app icon with no alpha channel, the app display name exactly as it will appear on the consent screen, the short App Details description in firewall language, the app category / business use case selection, and the support contact email. Hand them to whoever N1-AX-11 names, for entry into the dashboard in N2-AS-07. Balancing 16 Sep: time-box to about 0.5 days (full scope about 1); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Meta will not accept a submission without an icon, a category and contact details, and the icon appears on the consent screen the screencasts freeze on 1 Oct.",
       "area": "Meta",
-      "due": "2026-09-12",
+      "due": "2026-09-25",
       "priority": "P1",
       "priority_reason": "P1 - needed for N2-AS-07 on 23 Sep and for the frozen consent screen; ships with the packs, so real slack.",
       "depends_on": [
@@ -13557,7 +13573,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-SD-18",
@@ -13690,10 +13707,10 @@ window.LAUNCH_DATA = {
       "sprint": "N1",
       "assignee": "Alex",
       "title": "Confirm the fixed December launch target and hard limit",
-      "what": "Confirm the user-set dates in the team calendar: invited beta target Tue 1 Dec 2026, public launch Tue 15 Dec 2026 at 08:00 UK, absolute latest Sun 20 Dec. Meta submission stays Fri 2 Oct. Use the existing team only. Alex and Jill resolve scope and workload conflicts; no January or March launch date is authorised. Announcements describe only a release whose readiness checks have passed.",
+      "what": "Confirm the user-set dates in the team calendar: invited beta target Tue 1 Dec 2026, public launch Tue 15 Dec 2026 at 08:00 UK, absolute latest Tue 15 Dec. Meta submission stays Fri 2 Oct. Use the existing team only. Alex and Jill resolve scope and workload conflicts; no January or March launch date is authorised. Announcements describe only a release whose readiness checks have passed.",
       "why": "Every listing, email, FAQ and invoice keys off one date; without a written declaration the site, the decks and the pilots keep quoting Mon 26 Oct 2026 and the landing beat stays on a date Asad cannot hit.",
       "area": "Launch",
-      "due": "2026-09-11",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Dated deadline that every other public artifact copies from.",
       "depends_on": [],
@@ -13703,14 +13720,14 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N1",
       "source": "plan",
-      "acceptance": "The calendar and team brief state 15 Dec target, 20 Dec hard limit, current-team staffing and the 2 Oct Meta anchor consistently.",
+      "acceptance": "The calendar and team brief state 15 Dec target, 15 Dec hard limit, current-team staffing and the 2 Oct Meta anchor consistently.",
       "checklist": [
-        "The calendar and team brief state 15 Dec target, 20 Dec hard limit, current-team staffing and the 2 Oct Meta anchor consistently."
+        "The calendar and team brief state 15 Dec target, 15 Dec hard limit, current-team staffing and the 2 Oct Meta anchor consistently."
       ],
-      "layman": "Confirm the user-set dates in the team calendar: invited beta target Tue 1 Dec 2026, public launch Tue 15 Dec 2026 at 08:00 UK, absolute latest Sun 20 Dec. Meta submission stays Fri 2 Oct. Use the existing team only. Alex and Jill resolve scope and workload conflicts; no January or March launch date is authorised. Announcements describe only a release whose readiness checks have passed.",
+      "layman": "Confirm the user-set dates in the team calendar: invited beta target Tue 1 Dec 2026, public launch Tue 15 Dec 2026 at 08:00 UK, absolute latest Tue 15 Dec. Meta submission stays Fri 2 Oct. Use the existing team only. Alex and Jill resolve scope and workload conflicts; no January or March launch date is authorised. Announcements describe only a release whose readiness checks have passed.",
       "layman_analogy": "Like a couple fixing the wedding date in writing and re-dating every invitation, fitting and cake order to match, so no guest turns up on the wrong day.",
-      "layman_needed": "The calendar and team brief state 15 Dec target, 20 Dec hard limit, current-team staffing and the 2 Oct Meta anchor consistently.",
-      "layman_output": "The calendar and team brief state 15 Dec target, 20 Dec hard limit, current-team staffing and the 2 Oct Meta anchor consistently.",
+      "layman_needed": "The calendar and team brief state 15 Dec target, 15 Dec hard limit, current-team staffing and the 2 Oct Meta anchor consistently.",
+      "layman_output": "The calendar and team brief state 15 Dec target, 15 Dec hard limit, current-team staffing and the 2 Oct Meta anchor consistently.",
       "timebox_days": 0.25,
       "launch_stage": "beta",
       "estimated_days": 0.25,
@@ -13719,7 +13736,8 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-AX-02",
@@ -13729,7 +13747,7 @@ window.LAUNCH_DATA = {
       "what": "Submit Business Verification in Meta Business Manager this week using the exact Companies House legal name (character-for-character match on registered name, address and uploaded documents). Record the submission timestamp and case id and put a recurring 48-hour chase reminder in the calendar until it clears. Balancing 16 Sep: time-box to about 0.25 days (full scope about 0.5); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Verification can stall 14+ days and gates the 2 Oct App Review submission; a name mismatch restarts it and every day lost comes off the one safe rejection cycle before freeze.",
       "area": "Meta",
-      "due": "2026-09-11",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "External clock that gates the 25 Sep submission.",
       "depends_on": [
@@ -13759,7 +13777,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-AX-05",
@@ -13769,7 +13788,7 @@ window.LAUNCH_DATA = {
       "what": "Write the one-page KPI sheet (signup -> connected -> ingest done -> first insight -> draft scored, time-to-first-value, waitlist 500 by the Fri 11 Dec 2026 public go/no-go, 5 paying pilots) that Asad's N2 KPI events and N4 funnel will instrument. Write the 'Asad must NOT do' list: Meta package (Saad), pilot comms (Lewis), money (Jill), legal (Filza), infra/ops (Muteeb), design QA (Saad), PH replies (Alex), each line with a named owner, and hand it to Asad before he starts coding on 17 Sep. Balancing 16 Sep: time-box to about 0.25 days (full scope about 1); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Without a named-owner list founder work leaks back into Asad's build weeks; without one KPI page the launch-day numbers are guesses.",
       "area": "Launch",
-      "due": "2026-09-24",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Asad codes from 10 Sep and the list must exist before then.",
       "depends_on": [
@@ -13810,7 +13829,7 @@ window.LAUNCH_DATA = {
       "what": "Saad now writes the front-end as well as owning the Meta package, so confirm in writing who executes the package, who submits on 2 Oct, who watches the dashboard daily and who answers a reviewer inside 24h - naming a primary, a backup (Asad by default, per N1-SD-15/N1-AS-10) and weekend/holiday cover. If Saad stays the primary, state what front-end work yields when a reviewer message lands. Record the escalation path primary -> backup -> Alex and circulate to Saad, Asad, Filza and Muteeb. Balancing 16 Sep: time-box to about 0.25 days (full scope about 0.5); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Every Meta ticket from N1-SD-16 onward assumes an owner nobody has re-confirmed against Saad's new build load, and two tickets wait on a backup confirmation that no ticket owns.",
       "area": "Meta",
-      "due": "2026-09-11",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "P0 - blocks Saad's package authoring (N1-SD-16, 11 Sep) and unblocks N1-SD-15 and N1-AS-10, which both wait on this name.",
       "depends_on": [
@@ -13844,7 +13863,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-JL-01",
@@ -14072,7 +14092,7 @@ window.LAUNCH_DATA = {
       "what": "Confirm whether the company is registered with the ICO and at which fee tier; pay or renew if not, put the renewal date in the ops calendar, and give Filza the registration number for the privacy policy, Art 30 records and legal pack v1.",
       "why": "Checklist 4 housekeeping: processing pilot page data without the fee paid is an avoidable penalty and a question a pilot's advisor or Meta's reviewer may ask.",
       "area": "Legal",
-      "due": "2026-09-18",
+      "due": "2026-09-25",
       "priority": "P1",
       "priority_reason": "Cheap and legally required; Filza's N2 legal pack needs the registration number.",
       "depends_on": [
@@ -14098,7 +14118,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-JL-07",
@@ -14108,7 +14129,7 @@ window.LAUNCH_DATA = {
       "what": "Approach at least two brokers/insurers for professional indemnity and cyber cover sized for a SaaS processing Facebook page data for UK pilots: supply the business description, expected revenue and data volumes, and log each quote with cover limits, exclusions (AI-guidance advice, data breach), underwriter questions and lead time. Target bound cover by readiness review #1 (Wed 18 Nov 2026), ahead of the Wed 2 Dec 2026 pilot invoices. Balancing 16 Sep: time-box to about 0.5 days (full scope about 1); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Insurance must exist before money changes hands; quotes take weeks and underwriters ask security questions we need time to answer.",
       "area": "Finance",
-      "due": "2026-09-18",
+      "due": "2026-09-25",
       "priority": "P1",
       "priority_reason": "Real risk with slack: binding is N5, but underwriting lead time means quotes must start now.",
       "depends_on": [
@@ -14138,7 +14159,8 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-LW-01",
@@ -14148,7 +14170,7 @@ window.LAUNCH_DATA = {
       "what": "For every recruited or candidate pilot page, pull comments-per-post for the last 12 weeks from Faheem's QA panels and tag the page: declining-monetised (the Ketflix / Drinking Memes / Council Estate Life pattern, -75% to -99%), flat, or up. Confirm with each admin not yet confirmed whether the page lost monetisation and when (the three big pages are already confirmed). Mark which pages are safe for benchmarks, demos, marketing screenshots and the crisis backtest, and hand the tagged roster to Faheem, Asad, Saad and Alex. Balancing 16 Sep: time-box to about 1 day (full scope about 2); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "#11 is closed and the ~90% drop is real; a benchmark, the 2 Oct gate demo or the 5 Oct working-app reveal built on a declining page would show a product that looks broken.",
       "area": "Pilots",
-      "due": "2026-09-14",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Blocks Faheem's backtest page choice, the incident-sheet tiering in N1-LW-02 and every demo/screenshot page selection this month",
       "depends_on": [
@@ -14180,7 +14202,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-LW-02",
@@ -14308,7 +14331,7 @@ window.LAUNCH_DATA = {
       "what": "For each pilot, collect the Facebook account that administers their pages plus the page IDs, and give Saad and Asad the list to add under App Roles > Testers in the Meta app dashboard. Brief each pilot to accept the Tester invite from developers.facebook.com within 48h and track acceptance in the roster. Balancing 16 Sep: time-box to about 0.5 days (full scope about 1); ship the smallest version that meets the acceptance and park the rest in the backlog. Note: N1-LW-04 now finishes on 2026-10-07 after the 16 Sep balancing, so this fixed-date item goes ahead with what exists by then.",
       "why": "In dev mode only Testers can grant permissions; a pilot without an accepted Tester role cannot connect on 21 Sep and the 2 Oct gate has no pilot page.",
       "area": "Meta",
-      "due": "2026-09-18",
+      "due": "2026-09-25",
       "priority": "P1",
       "priority_reason": "First pilot connects are 22-24 Sep (N2-LW-03); Tester roles can be added the week of 14 Sep; Saad's package needs a populated test page, not pilot Testers.",
       "depends_on": [
@@ -14335,7 +14358,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-LW-07",
@@ -14421,9 +14445,9 @@ window.LAUNCH_DATA = {
       "what": "Put the scopes decision on paper with Saad: the Meta request is login, page identity and read-only page analytics only; no publishing, messaging or ads scopes. Record the product consequence (every Schedule CTA becomes Remind me; no auto-replies; Inbox and auto-pilot deferred) and the legal consequence (privacy policy and DPA describe read-only analytics processing). File it in Saad's decision log and the Meta package folder. Balancing 16 Sep: time-box to about 0.25 days (full scope about 0.5); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "One of N1's two one-way doors; if the scopes list and the product promise diverge, the Meta narrative and the privacy policy are both wrong.",
       "area": "Meta",
-      "due": "2026-09-16",
+      "due": "2026-09-25",
       "priority": "P1",
-      "priority_reason": "The decision is made; the paper must exist before packs ship 10 Sep",
+      "priority_reason": "Required N1 legal handoff. Complete by the sprint gate; supply prerequisites before dependent work starts.",
       "depends_on": [
         "Saad: Schedule-to-Remind-me design decision"
       ],
@@ -14451,7 +14475,9 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work.",
+      "checklist_revised_at": "2026-09-17T09:47:24.081Z"
     },
     {
       "id": "N1-FZ-07",
@@ -14461,9 +14487,9 @@ window.LAUNCH_DATA = {
       "what": "First full drafts of the three documents, each quoting the lawful-bases map (N1-FZ-08) rather than inventing its own basis. Privacy names the Meta Graph API data held (page posts, comments, insights, tokens), the multi-page model, retention, the deletion route (disconnect = data gone plus the Meta data-deletion callback per N1-FZ-10) and sub-processors. ToS carries the AI-guidance disclaimer and the read-only, no-publishing posture. The DPA is a UK GDPR processor DPA with sub-processor and change-notice clauses. Drafts go to Alex so pack v1 can be signed in N2. Balancing 16 Sep: time-box to about 3 days (full scope about 5); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Pilots sign against this in N2 and Meta's reviewers read the privacy policy at the 2 Oct submission.",
       "area": "Legal",
-      "due": "2026-09-24",
+      "due": "2026-09-25",
       "priority": "P1",
-      "priority_reason": "N2 sign-off has slack, but drafts must exist to be reviewed",
+      "priority_reason": "Required N1 legal handoff. Complete by the sprint gate; supply prerequisites before dependent work starts.",
       "depends_on": [
         "N1-FZ-06",
         "N1-FZ-08",
@@ -14495,7 +14521,9 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work.",
+      "checklist_revised_at": "2026-09-17T09:47:24.081Z"
     },
     {
       "id": "N1-FZ-08",
@@ -14546,13 +14574,13 @@ window.LAUNCH_DATA = {
       "id": "N1-FZ-09",
       "sprint": "N1",
       "assignee": "Filza",
-      "title": "Ready Privacy v1 + cookie notice for the 19 Sep landing",
-      "what": "Checklist 4 puts Privacy v1 and a cookie banner on the landing from 8 Sep; Asad's rebuilt landing goes live Fri 19 Sep. Supply a publishable Privacy v1 short form (pointing to the full N2 policy) and the cookie-notice text and behaviour (no non-essential scripts before consent, decline as easy as accept) so the new landing launches with both. Check what the current landing shows today, list the gaps for the 19 Sep rebuild (no patch to the old landing: Asad writes no code before 17 Sep), and record the 8 Sep -> 19 Sep slip in the decision log and RoPA with a ruling on the pilot-waitlist names collected via Netlify Forms between 1 and 19 Sep (covered by the existing form wording, or re-permissioned with the N2-FZ-08 ruling). Added in the 16 Sep review: Rule per tool under PECR as amended from 5 Feb 2026 and the ICO's storage and access guidance of 29 Apr 2026, covering every public page where GA and Clarity run, not only the landing: whether GA4 set up without Google signals or ads links qualifies for the statistical-purposes exception (clear notice plus a simple opt-out) or needs consent, with GA4 Consent Mode v2 defaulting to denied. Clarity session replay needs consent and must receive Consent API V2 signals, and a production network log must show both tools honouring accept and decline. Balancing 16 Sep: time-box to about 0.5 days (full scope about 1); ship the smallest version that meets the acceptance and park the rest in the backlog.",
+      "title": "Prepare landing privacy notice and tracking decisions",
+      "what": "Review the existing landing and all public pages using analytics. Supply publishable privacy and cookie/measurement wording; identify each tool, data purpose, notice, consent or opt-out treatment and required behaviour for Asad. Filza verifies current applicable guidance and records the reason for each decision. Check existing waitlist collection and document any remediation. The 19 September milestone is a design handoff, not a production launch. Obtain network evidence that accept, decline and withdrawal work before implementation is signed off.",
       "why": "The landing already collects pilot-waitlist names via Netlify Forms; collecting without a notice is the first thing a reviewer or a pilot's advisor notices.",
       "area": "Landing",
-      "due": "2026-09-24",
+      "due": "2026-09-25",
       "priority": "P0",
-      "priority_reason": "Dated: Asad's landing goes live Fri 12 Sep and builds from these strings",
+      "priority_reason": "Required N1 legal handoff. Complete by the sprint gate; supply prerequisites before dependent work starts.",
       "depends_on": [
         "N1-FZ-08",
         "Asad: landing live Fri 12 Sep"
@@ -14562,18 +14590,18 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N1",
       "source": "plan",
-      "acceptance": "The 19 Sep landing links a Privacy v1 and shows the cookie notice, nothing non-essential loads before consent, and the decision log carries the dated 1->19 Sep slip with the ruling on names collected in the gap.",
+      "acceptance": "Publishable wording and a tool-by-tool decision record are with Asad; existing collection gaps and remediation are recorded, with implementation checks and evidence owners identified.",
       "checklist": [
-        "Check the live landing for a privacy link and cookie notice today; list gaps for the rebuild",
-        "Write the Privacy v1 short form and the cookie-notice strings",
-        "Give Asad the load-before-consent rule for the landing scripts",
-        "Record the 8 Sep -> 19 Sep slip in the decision log and RoPA; rule on names collected 8-26 Sep (feeds N2-FZ-08)",
-        "Verify on the 19 Sep landing after it goes live"
+        "Inventory public-page forms and tracking tools with Asad and Muteeb",
+        "Record the notice, consent or opt-out decision and reason for each tool",
+        "Supply privacy and cookie/measurement wording for implementation",
+        "Record existing collection gaps and required remediation",
+        "Review accept, decline and withdrawal evidence before implementation sign-off"
       ],
-      "layman": "Filza prepares the short privacy notice and cookie banner for the new website - no tracking before consent, declining as easy as accepting - so that the site collecting pilot sign-ups is legally proper from day one.",
+      "layman": "Review the existing landing and all public pages using analytics. Supply publishable privacy and cookie/measurement wording; identify each tool, data purpose, notice, consent or opt-out treatment and required behaviour for Asad. Filza verifies current applicable guidance and records the reason for each decision. Check existing waitlist collection and document any remediation. The 19 September milestone is a design handoff, not a production launch. Obtain network evidence that accept, decline and withdrawal work before implementation is signed off.",
       "layman_analogy": "Like putting the hygiene certificate and allergen notice up before the cafe's opening day - visible at the door, with no sneaky extras slipped onto the plate.",
-      "layman_needed": "A short privacy notice and cookie banner ready for the 19 September website - nothing non-essential loading before consent, declining as easy as accepting - plus a logged ruling on the sign-up names collected during the gap.",
-      "layman_output": "A short published privacy notice and a cookie banner ready for the 19 September website: nothing non-essential loads before consent, and declining is as easy as accepting. A logged ruling will also cover the sign-up names collected during the gap since 1 September. Anyone can open the live landing, click decline, and verify no tracking fires - and see the privacy link in the footer.",
+      "layman_needed": "Publishable wording and a tool-by-tool decision record are with Asad; existing collection gaps and remediation are recorded, with implementation checks and evidence owners identified.",
+      "layman_output": "A notice pack for Asad, a tracking decision table, a record of existing gaps and a checklist for proving the implemented controls work. Design handoff is separate from going live.",
       "timebox_days": 0.5,
       "launch_stage": "beta",
       "estimated_days": 0.5,
@@ -14581,19 +14609,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work.",
+      "checklist_revised_at": "2026-09-17T09:47:24.081Z"
     },
     {
       "id": "N1-FZ-10",
       "sprint": "N1",
       "assignee": "Filza",
       "title": "Draft the Meta Data Deletion callback spec for Muteeb",
-      "what": "Specify what the Meta data-deletion callback must do so Muteeb can build it in N2: verify the signed_request, resolve the Facebook user/page to tenant and page ids, cascade deletion across tokens, warehouse rows, prediction tables, labels, vectors and Art-E memory, return a confirmation code plus status URL, and write a RoPA log entry. Define the same route for in-app disconnect so the N2 gate (connect, disconnect, data gone) and the callback share one deletion path. Mark open questions for Muteeb. Balancing 16 Sep: time-box to about 1 day (full scope about 1.5); ship the smallest version that meets the acceptance and park the rest in the backlog. Note: N1-MT-16 now finishes on 2026-09-30 after the 16 Sep balancing, so this fixed-date item goes ahead with what exists by then.",
+      "what": "Write the Meta deletion-request specification with Muteeb: verify the request, identify the correct customer and page, list all affected stores, define the deletion steps, confirmation code, status URL and audit log. Define how in-app disconnect uses the same agreed route. Include credentials, warehouse records, predictions, labels, search vectors and assistant memory, with any legally required exceptions reviewed explicitly. Record technical questions for N2 finalisation; this N1 task hands over a specification, not a tested endpoint.",
       "why": "Muteeb builds the endpoint in N2 week B and it is required for App Review; an under-specified callback costs a 20-day cycle.",
       "area": "Meta",
-      "due": "2026-09-17",
+      "due": "2026-09-25",
       "priority": "P1",
-      "priority_reason": "Muteeb builds the callback 21-27 Sep against the frozen spec in N2-FZ-02 (stays P0, 17 Sep); the N1 draft has a week of slack.",
+      "priority_reason": "Required N1 legal handoff. Complete by the sprint gate; supply prerequisites before dependent work starts.",
       "depends_on": [],
       "feeds": [
         "N1-FZ-07",
@@ -14608,10 +14638,10 @@ window.LAUNCH_DATA = {
         "Define the in-app disconnect route as the same cascade",
         "Send to Muteeb and collect open questions for N2 finalisation"
       ],
-      "layman": "Filza specifies what must happen when a user asks Facebook to delete their data from us - wipe everything, everywhere, and confirm it - so that Muteeb can build it right first time; Facebook requires this before approving us.",
+      "layman": "Write the Meta deletion-request specification with Muteeb: verify the request, identify the correct customer and page, list all affected stores, define the deletion steps, confirmation code, status URL and audit log. Define how in-app disconnect uses the same agreed route. Include credentials, warehouse records, predictions, labels, search vectors and assistant memory, with any legally required exceptions reviewed explicitly. Record technical questions for N2 finalisation; this N1 task hands over a specification, not a tested endpoint.",
       "layman_analogy": "Like writing the exact fire-drill instructions - which doors, which registers, who confirms everyone's out - so the builder can fit the alarms right first time.",
-      "layman_needed": "A written specification for the Facebook data-deletion request handler: verify the request, wipe everything everywhere, confirm with a code, and share one deletion route with in-app disconnect - with Muteeb's open questions listed.",
-      "layman_output": "A written specification in Muteeb's hands for the Facebook data-deletion request handler: verify the request really came from Facebook, find every trace of that user's pages - tokens, stored posts, predictions, assistant memory - wipe it all, and return a confirmation code and status page. Muteeb's open questions will be listed, so he can build it in N2 without guessing at the law.",
+      "layman_needed": "Muteeb has a written spec with request verification, the deletion cascade list, response format and log entry, and has listed his open questions.",
+      "layman_output": "Write the Meta deletion-request specification with Muteeb: verify the request, identify the correct customer and page, list all affected stores, define the deletion steps, confirmation code, status URL and audit log. Define how in-app disconnect uses the same agreed route. Include credentials, warehouse records, predictions, labels, search vectors and assistant memory, with any legally required exceptions reviewed explicitly. Record technical questions for N2 finalisation; this N1 task hands over a specification, not a tested endpoint.",
       "timebox_days": 1,
       "launch_stage": "beta",
       "estimated_days": 1,
@@ -14619,43 +14649,47 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work.",
+      "checklist_revised_at": "2026-09-17T09:47:24.081Z"
     },
     {
       "id": "N1-FZ-11",
       "sprint": "N1",
       "assignee": "Filza",
       "title": "Confirm legal name + Companies House documents for Meta verification",
-      "what": "Check the Companies House register entry against what Alex will enter in Meta business verification on 11 Sep: exact registered name, registered address, company number, and which documents (certificate of incorporation, latest filing) match character-for-character. Send Alex the confirmed strings and the document set.",
+      "what": "Check the current Companies House entry: exact registered name, address and company number. Match supporting documents to those details and send the verified package to Alex before he submits Meta business verification.",
       "why": "A name mismatch is the commonest verification rejection and each cycle costs days against the 2 Oct submission anchor.",
       "area": "Meta",
-      "due": "2026-09-10",
+      "due": "2026-09-25",
       "priority": "P0",
-      "priority_reason": "P0: external clock - Alex submits 4 Sep and the 25 Sep Meta submission depends on it.",
+      "priority_reason": "Required N1 legal handoff. Complete by the sprint gate; supply prerequisites before dependent work starts.",
       "depends_on": [],
       "feeds": [
         "N1-AX-02"
       ],
       "gate": "N1",
-      "acceptance": "Alex submits verification on 11 Sep with the confirmed legal name and documents and no mismatch query comes back.",
+      "acceptance": "Alex has the verified company details and matching supporting documents, with any mismatch flagged before submission.",
       "checklist": [
-        "Pull the Companies House entry",
-        "Compare name/address/number with the Meta form fields",
-        "Select and check the supporting documents",
-        "Send the confirmed set to Alex on 3 Sep"
+        "Check the current Companies House entry",
+        "Compare exact name, address and number with the Meta form",
+        "Check matching supporting documents",
+        "Send the verified pack to Alex before submission"
       ],
       "source": "reconciler",
-      "layman": "Filza checks our official company name and documents at Companies House and sends Alex the exact strings to enter, so that Facebook's business verification isn't rejected over a one-character mismatch.",
+      "layman": "Check the current Companies House entry: exact registered name, address and company number. Match supporting documents to those details and send the verified package to Alex before he submits Meta business verification.",
       "layman_analogy": "Like checking your name on the deed poll before booking flights, because airlines bounce tickets over a single mismatched letter.",
-      "layman_needed": "The exact registered company name, address, number and matching documents pulled from Companies House and sent to Alex, so his 11 September Facebook verification goes in character-for-character correct.",
-      "layman_output": "The company's exact registered name, address, number and matching Companies House documents pulled from the register and sent to Alex before his 11 September Facebook verification. Alex can then type the details in character-for-character correct, so the submission isn't bounced weeks later over a one-letter mismatch. Anyone can compare the sent strings against the public register.",
+      "layman_needed": "Alex has the verified company details and matching supporting documents, with any mismatch flagged before submission.",
+      "layman_output": "A verified company-details sheet and matching documents in Alex’s hands before Meta submission; open mismatches are clearly listed.",
       "launch_stage": "beta",
       "estimated_days": 0.25,
       "estimate_source": "16 Sep inherited effort estimate; not a new team commitment",
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work.",
+      "checklist_revised_at": "2026-09-17T09:47:24.081Z"
     },
     {
       "id": "N2-AS-01",
@@ -17116,7 +17150,7 @@ window.LAUNCH_DATA = {
       "sprint": "N2",
       "assignee": "Alex",
       "title": "Verify the Meta review clock against the December release gates",
-      "what": "Check the current Meta review wording and maintain both calendar-day and working-day scenarios from the fixed 2 Oct submission. Preserve review durations rather than compressing them with the sprint calendar. The previous planning arithmetic estimated a second decision around 13 Nov under calendar days and around 30 Nov under working days; these are assumptions to verify, not promised Meta dates. Compare against 27 Nov beta readiness, 11 Dec public readiness and 15 Dec target / 20 Dec hard limit. Record the permitted fallback separately and escalate an approval risk immediately; never treat a tester-only app or waitlist as an approved public connection experience.",
+      "what": "Check the current Meta review wording and maintain both calendar-day and working-day scenarios from the fixed 2 Oct submission. Preserve review durations rather than compressing them with the sprint calendar. The previous planning arithmetic estimated a second decision around 13 Nov under calendar days and around 30 Nov under working days; these are assumptions to verify, not promised Meta dates. Compare against 27 Nov beta readiness, 11 Dec public readiness and 15 Dec target / 15 Dec hard limit. Record the permitted fallback separately and escalate an approval risk immediately; never treat a tester-only app or waitlist as an approved public connection experience.",
       "why": "Every idle day now costs buffer; a date nobody has computed becomes a surprise in N4.",
       "area": "Meta",
       "due": "2026-10-02",
@@ -17137,7 +17171,7 @@ window.LAUNCH_DATA = {
       "checklist": [
         "The calendar names the verified review assumption, decision ranges, escalation owner and honest permitted fallback; no external approval duration is shortened to fit a date."
       ],
-      "layman": "Check the current Meta review wording and maintain both calendar-day and working-day scenarios from the fixed 2 Oct submission. Preserve review durations rather than compressing them with the sprint calendar. The previous planning arithmetic estimated a second decision around 13 Nov under calendar days and around 30 Nov under working days; these are assumptions to verify, not promised Meta dates. Compare against 27 Nov beta readiness, 11 Dec public readiness and 15 Dec target / 20 Dec hard limit. Record the permitted fallback separately and escalate an approval risk immediately; never treat a tester-only app or waitlist as an approved public connection experience.",
+      "layman": "Check the current Meta review wording and maintain both calendar-day and working-day scenarios from the fixed 2 Oct submission. Preserve review durations rather than compressing them with the sprint calendar. The previous planning arithmetic estimated a second decision around 13 Nov under calendar days and around 30 Nov under working days; these are assumptions to verify, not promised Meta dates. Compare against 27 Nov beta readiness, 11 Dec public readiness and 15 Dec target / 15 Dec hard limit. Record the permitted fallback separately and escalate an approval risk immediately; never treat a tester-only app or waitlist as an approved public connection experience.",
       "layman_analogy": "Like counting backwards from the wedding date through dress fittings and alterations to find the last safe day to order.",
       "layman_needed": "The calendar names the verified review assumption, decision ranges, escalation owner and honest permitted fallback; no external approval duration is shortened to fit a date.",
       "layman_output": "The calendar names the verified review assumption, decision ranges, escalation owner and honest permitted fallback; no external approval duration is shortened to fit a date.",
@@ -17581,7 +17615,7 @@ window.LAUNCH_DATA = {
       "what": "One page every Meta-facing author uses: the approved 'page analytics tool' framing, permission-to-feature language, and the banned list (behavioural intelligence, influence, network graph, viral optimisation, any investor-deck phrase from the two-narratives doc) with substitutions. Applies to app dashboard fields, screencast narration, reviewer notes, the privacy policy and the marketing site. Circulate to Saad, Asad, Alex and the named Meta backup before the package is written. Added in the 16 Sep review: Add a brand rule: no wording that implies a Meta partnership, approval or endorsement (such as 'Meta approved' or 'official partner'), no product names using Meta marks, Facebook and Instagram logos only as unmodified assets from Meta's Brand Resource Center, and neutral connect wording such as 'Connect your Facebook Page' on the connect button and in onboarding. Balancing 16 Sep: time-box to about 0.5 days (full scope about 1); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Saad writes the package in N2 week A; a rulebook after the fact means rewriting it, and one investor phrase on a Meta surface can cost 20 days.",
       "area": "Meta",
-      "due": "2026-09-23",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Blocks Saad's package authoring; external clock 25 Sep",
       "depends_on": [
@@ -17621,7 +17655,7 @@ window.LAUNCH_DATA = {
       "what": "Close Muteeb's open questions on the N1 draft and freeze the spec by Wed 23 Sep so his week B build (28-Wed 7 Oct 2026) starts on a fixed target, then make sure the deletion route in Privacy v1 (disconnect in Settings, the Meta callback, the privacy@ route) is exactly what the endpoint will do. Confirm with Muteeb the confirmation-code and status-URL format Meta expects and the data-deletion-instructions URL for the app dashboard. Witnessing the built endpoint is N4-FZ-05.",
       "why": "Muteeb builds it 28-Wed 7 Oct 2026 and the 2 Oct submission needs the callback live and the privacy policy describing it truthfully.",
       "area": "Meta",
-      "due": "2026-09-24",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Blocks Muteeb's N2 week B build and the 25 Sep submission",
       "depends_on": [
@@ -24193,8 +24227,8 @@ window.LAUNCH_DATA = {
       "id": "N5-AX-03",
       "sprint": "N5",
       "assignee": "Alex",
-      "title": "Own the contingency plan inside the 15-20 December launch window",
-      "what": "Write the response to a failed release check: named owner, precise remedial action, next check and honest pilot/public communications. Target public launch 15 Dec; the only authorised contingency window is 16-20 Dec. Do not insert a January or March fallback or assume a date extension. Keep all required security, legal and release gates. If an unmet gate threatens 20 Dec, raise a deadline conflict to Asad and Alex immediately; do not silently pass it or announce an unready product. Record any proposed feature restriction explicitly, with the affected claims and dependency checks.",
+      "title": "Own the contingency plan inside the 15-15 December launch window",
+      "what": "Write the response to a failed release check: named owner, precise remedial action, next check and honest pilot/public communications. Target public launch 15 Dec; there is no authorised launch window after 15 Dec. Do not insert a January or March fallback or assume a date extension. Keep all required security, legal and release gates. If an unmet gate threatens 15 Dec, raise a deadline conflict to Asad and Alex immediately; do not silently pass it or announce an unready product. Record any proposed feature restriction explicitly, with the affected claims and dependency checks.",
       "why": "A review that can only say yes is not a review; a NO-GO with a playbook is a decision, without one it is a catastrophe.",
       "area": "Launch",
       "due": "2026-11-12",
@@ -24209,14 +24243,14 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N5",
       "source": "plan",
-      "acceptance": "The signed playbook contains no launch date beyond 20 Dec, preserves mandatory gates and names the owner and escalation path for every release blocker.",
+      "acceptance": "The signed playbook contains no launch date beyond 15 Dec, preserves mandatory gates and names the owner and escalation path for every release blocker.",
       "checklist": [
-        "The signed playbook contains no launch date beyond 20 Dec, preserves mandatory gates and names the owner and escalation path for every release blocker."
+        "The signed playbook contains no launch date beyond 15 Dec, preserves mandatory gates and names the owner and escalation path for every release blocker."
       ],
-      "layman": "Write the response to a failed release check: named owner, precise remedial action, next check and honest pilot/public communications. Target public launch 15 Dec; the only authorised contingency window is 16-20 Dec. Do not insert a January or March fallback or assume a date extension. Keep all required security, legal and release gates. If an unmet gate threatens 20 Dec, raise a deadline conflict to Asad and Alex immediately; do not silently pass it or announce an unready product. Record any proposed feature restriction explicitly, with the affected claims and dependency checks.",
+      "layman": "Write the response to a failed release check: named owner, precise remedial action, next check and honest pilot/public communications. Target public launch 15 Dec; there is no authorised launch window after 15 Dec. Do not insert a January or March fallback or assume a date extension. Keep all required security, legal and release gates. If an unmet gate threatens 15 Dec, raise a deadline conflict to Asad and Alex immediately; do not silently pass it or announce an unready product. Record any proposed feature restriction explicitly, with the affected claims and dependency checks.",
       "layman_analogy": "Like a wedding planner writing the rain plan before the big day — the marquee booking, who phones the guests, and who makes the call to move indoors.",
-      "layman_needed": "The signed playbook contains no launch date beyond 20 Dec, preserves mandatory gates and names the owner and escalation path for every release blocker.",
-      "layman_output": "The signed playbook contains no launch date beyond 20 Dec, preserves mandatory gates and names the owner and escalation path for every release blocker.",
+      "layman_needed": "The signed playbook contains no launch date beyond 15 Dec, preserves mandatory gates and names the owner and escalation path for every release blocker.",
+      "layman_output": "The signed playbook contains no launch date beyond 15 Dec, preserves mandatory gates and names the owner and escalation path for every release blocker.",
       "timebox_days": 0.5,
       "launch_stage": "public",
       "estimated_days": 0.5,
@@ -30663,7 +30697,7 @@ window.LAUNCH_DATA = {
       "what": "Lead a 30-minute item on the next team call with Filza, Asad and Saad: walk the risks to getting Meta approval (Live Mode) in time for the private beta on Tue 1 Dec 2026, rank them, and give each an owner. Start from the list in the review answers: business verification not completing, the review clock leaving no safe second cycle (N2-AX-06), screencasts or mockups showing features our permissions do not cover (collab, messaging), banned framing in Meta-facing text (N2-FZ-01), a Data Protection Assessment request (N3-FZ-10), and pilot pages being restricted by Facebook (the 25-29 Aug window). Record the ranking in the permissions master document. Balancing 16 Sep: time-box to about 0.25 days (full scope about 0.5); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Alex (review 11 Sep) asked for the biggest OAuth risk to be discussed on the next call; an unranked risk list does not change what anyone does this week.",
       "area": "Meta",
-      "due": "2026-09-15",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Before the permissions master document and the Meta package are written",
       "depends_on": [],
@@ -30692,7 +30726,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-FZ-12",
@@ -30702,9 +30737,9 @@ window.LAUNCH_DATA = {
       "what": "One living document the team works from: every feature and every mockup screen mapped to the Meta permission it relies on, marked allowed, not allowed, or needs a check, with the reason. Start from the signed scopes decision (N1-FZ-06: login, page identity and read-only page analytics; no publishing, messaging or ads scopes). Cover explicitly: the collab and Discovery features (what we may show one page about another), in-app messaging between our own users (and why it cannot run on Meta messaging), the Share-to button (user-initiated share flows only), reminders instead of scheduling, alerts, Art-E answers, data deletion and deauthorisation. Filza owns it; Asad, Alex and Saad review it; it is updated at every sprint's Meta review. Balancing 16 Sep: time-box to about 1 day (full scope about 2.5); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Alex (review 11 Sep): the rules for what Meta allows must live in one maintained place, so the build, the mockups and the App Review package never promise something our permissions do not cover.",
       "area": "Meta",
-      "due": "2026-09-16",
+      "due": "2026-09-25",
       "priority": "P0",
-      "priority_reason": "Feeds the Meta package and Saad's mockup audit before the 2 Oct submission",
+      "priority_reason": "Required N1 legal handoff. Complete by the sprint gate; supply prerequisites before dependent work starts.",
       "depends_on": [
         "N1-FZ-06",
         "N1-AX-12"
@@ -30735,7 +30770,9 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work.",
+      "checklist_revised_at": "2026-09-17T09:47:24.081Z"
     },
     {
       "id": "N2-SD-17",
@@ -30745,7 +30782,7 @@ window.LAUNCH_DATA = {
       "what": "Check every shipped product mockup, especially connect and consent evidence, against N1-FZ-12. Flag publishing, messaging, ads and cross-page data access outside approved scope. Landing-page mockup delivery does not certify the product screens. Record any missing review input as pending; do not recreate deferred screens to reach a historical twelve-pack count.",
       "why": "Alex (review 11 Sep): the mockups must respect what Meta allows; a screencast showing a capability we did not ask permission for is a common rejection reason.",
       "area": "Design",
-      "due": "2026-09-24",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Before the Meta package is assembled on 29 Sep",
       "depends_on": [
@@ -31671,10 +31708,10 @@ window.LAUNCH_DATA = {
       "sprint": "N2",
       "assignee": "Alex",
       "title": "Keep all public launch wording on 15 December 2026",
-      "what": "Check landing, newsletter, investor, pilot, tracker and Product Hunt copy against the user-set public target of 15 Dec 2026 and internal hard limit of 20 Dec. The invited beta target is 1 Dec. Remove the superseded February/March launch wording and any claim that the original 8 Dec date is still the public target. Keep claims tied to approved release scope.",
+      "what": "Check landing, newsletter, investor, pilot, tracker and Product Hunt copy against the user-set public target of 15 Dec 2026 and internal hard limit of 15 Dec. The invited beta target is 1 Dec. Remove the superseded February/March launch wording and any claim that the original 8 Dec date is still the public target. Keep claims tied to approved release scope.",
       "why": "Six tickets and the landing gate carry Tue 27 Oct 2026; the declaration, directories and Product Hunt carry Tue 15 Dec 2026. (CEO-lens review, 15 Sep.)",
       "area": "Launch",
-      "due": "2026-09-21",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "CEO-lens review 15 Sep: launch-critical gap",
       "depends_on": [
@@ -31683,14 +31720,14 @@ window.LAUNCH_DATA = {
       "feeds": [],
       "gate": "N2",
       "source": "Asad review 15 Sep (CEO lens)",
-      "acceptance": "Every current launch surface uses 15 Dec 2026; internal plans also record 20 Dec as the hard limit.",
+      "acceptance": "Every current launch surface uses 15 Dec 2026; internal plans also record 15 Dec as the hard limit.",
       "checklist": [
-        "Every current launch surface uses 15 Dec 2026; internal plans also record 20 Dec as the hard limit."
+        "Every current launch surface uses 15 Dec 2026; internal plans also record 15 Dec as the hard limit."
       ],
-      "layman": "Check landing, newsletter, investor, pilot, tracker and Product Hunt copy against the user-set public target of 15 Dec 2026 and internal hard limit of 20 Dec. The invited beta target is 1 Dec. Remove the superseded February/March launch wording and any claim that the original 8 Dec date is still the public target. Keep claims tied to approved release scope.",
+      "layman": "Check landing, newsletter, investor, pilot, tracker and Product Hunt copy against the user-set public target of 15 Dec 2026 and internal hard limit of 15 Dec. The invited beta target is 1 Dec. Remove the superseded February/March launch wording and any claim that the original 8 Dec date is still the public target. Keep claims tied to approved release scope.",
       "layman_analogy": "Like a wedding where half the invitations say Saturday and half say Sunday: someone has to reprint the wrong ones before the guests book their trains.",
-      "layman_needed": "Every current launch surface uses 15 Dec 2026; internal plans also record 20 Dec as the hard limit.",
-      "layman_output": "Every current launch surface uses 15 Dec 2026; internal plans also record 20 Dec as the hard limit.",
+      "layman_needed": "Every current launch surface uses 15 Dec 2026; internal plans also record 15 Dec as the hard limit.",
+      "layman_output": "Every current launch surface uses 15 Dec 2026; internal plans also record 15 Dec as the hard limit.",
       "timebox_days": 0.25,
       "launch_stage": "beta",
       "estimated_days": 0.25,
@@ -32600,7 +32637,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Jill",
       "title": "Agree December launch cover and the Christmas/New Year support rota",
-      "what": "Publish the people plan for 1 Dec 2026 to 4 Jan 2027: agreed coverage from 1 Dec to 20 Dec without assuming cancelled leave or overtime, agreed core overlap hours in UK time for the overseas members, and a festive cover rota 12 Dec to 4 Jan naming on-call primary and secondary, support responder, pilot hotline and the 72h breach owner for every day, including Christmas and New Year, with public-holiday differences by country reconciled. Builds on N5-JL-01, N6-JL-03. Balancing 16 Sep: time-box to about 0.5 days (full scope about 1); ship the smallest version that meets the acceptance and park the rest in the backlog.",
+      "what": "Publish the people plan for 1 Dec 2026 to 4 Jan 2027: agreed coverage from 1 Dec to 15 Dec without assuming cancelled leave or overtime, agreed core overlap hours in UK time for the overseas members, and a festive cover rota 12 Dec to 4 Jan naming on-call primary and secondary, support responder, pilot hotline and the 72h breach owner for every day, including Christmas and New Year, with public-holiday differences by country reconciled. Builds on N5-JL-01, N6-JL-03. Balancing 16 Sep: time-box to about 0.5 days (full scope about 1); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "The beta build freeze lands on Sun 8 Nov 2026, in the middle of the festive period; no rota, leave rule or time-zone agreement exists past Sat 31 Oct 2026. (COO-lens review, 15 Sep.)",
       "area": "Ops",
       "due": "2026-10-30",
@@ -32988,7 +33025,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Urgent exception: act by the earlier recorded deadline; do not wait for the N1 sprint end."
     },
     {
       "id": "N1-MT-22",
@@ -33029,7 +33067,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Urgent exception: act by the earlier recorded deadline; do not wait for the N1 sprint end."
     },
     {
       "id": "N1-FZ-13",
@@ -33041,17 +33080,17 @@ window.LAUNCH_DATA = {
       "area": "Legal",
       "due": "2026-09-18",
       "priority": "P0",
-      "priority_reason": "16 Sep research (launch-critical): The 72-hour clock started on 16 Sep. The log entry and a documented decision are required whether or not we report, and forensics must not delay the decision.",
+      "priority_reason": "Urgent incident decision; earlier deadline applies.",
       "depends_on": [],
       "feeds": [],
       "gate": "N1",
       "source": "Asad research 16 Sep (security-reliability, data-governance, website, qa-control-center)",
       "acceptance": "An incident log entry signed by Filza and Alex within 72 hours of 16 Sep records the ICO, Meta and Article 34 decisions with reasons, any notices sent, and the confirmation that every exposed credential is dead.",
       "checklist": [
-        "By 18 Sep, using the facts in the private security brief (16 Sep, held by Asad;",
-        "shared with Muteeb, Filza and Alex), write the incident log entry: data types, time window, who could be affec",
-        "Record whether the ICO must be told, with reasons, reporting in phases if facts are incomplete",
-        "Done when: An incident log entry signed by Filza and Alex within 72 hours of 16 Sep records the ICO and Meta decisions wi"
+        "Confirm awareness time and incident facts from the private brief with Asad and Muteeb",
+        "Record the risk assessment and ICO, Meta and affected-person notification decisions with reasons",
+        "Obtain confirmation of credential revocation and containment; identify missing evidence",
+        "Filza and Alex sign the incident entry; file any notifications and schedule follow-up evidence"
       ],
       "layman": "Filza writes up the 16 Sep security finding in the company's incident log and decides, with reasons, whether the UK data regulator and Meta need to be told. UK data law requires this record, and prompt, honest handling protects customer trust.",
       "layman_analogy": "Like a school filling in an accident book and deciding whether parents and inspectors need a phone call, with the reasons written down.",
@@ -33070,7 +33109,9 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Urgent exception: act by the earlier recorded deadline; do not wait for the N1 sprint end.",
+      "checklist_revised_at": "2026-09-17T09:47:24.081Z"
     },
     {
       "id": "N1-AS-18",
@@ -33121,7 +33162,7 @@ window.LAUNCH_DATA = {
       "what": "Every website function checks a signed HttpOnly session on the server, set at login. Store portal passwords as bcrypt hashes. Lock CORS to the site origin. Give warehouse-reading functions a SELECT-only Redshift user that can only read non-personal views. Retire write functions that are no longer needed, and log user and query on each call. Detailed findings are in the private security brief (16 Sep, held by Asad; shared with Muteeb, Filza and Alex). Per-user rate limits move into N5-MT-17, and the admin site joins the N4-MT-06 pen-test scope. Builds on N5-MT-17, N4-MT-06, P0-AS-04, P0-AS-19. Balancing 16 Sep: time-box to about 3 days (full scope about 5); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Sign-in that only runs in the browser does not protect server functions; warehouse data needs a real server-side check. (16 Sep research: data-governance.)",
       "area": "Platform",
-      "due": "2026-09-22",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "16 Sep research (launch-critical): Blocks the Meta data-handling assessment and protects pilot comment data, so it stays P0 in N1.",
       "depends_on": [
@@ -33253,7 +33294,7 @@ window.LAUNCH_DATA = {
       "what": "Build the inventory from the central Meta client's request log on staging (distinct endpoint and field pairs per pipeline, fast-lane and connect) instead of reading code by hand. Run one minimal-scope token test on a Tester Page and one on a Page reached only through a business portfolio, and decide on business_management from the results. Only prune logged fields that no screen or model uses. Output is a one-page table in the Meta folder. Builds on N1-FZ-06, N2-SD-04, N1-FZ-12, N2-AX-15. Balancing 16 Sep: time-box to about 2 days (full scope about 3); ship the smallest version that meets the acceptance and park the rest in the backlog.",
       "why": "Meta rejects permissions not visibly used, and a missing scope or task silently empties comments or insights for some pilots. Every requested permission also triggers Access Verification. (16 Sep research: meta-review.)",
       "area": "Meta",
-      "due": "2026-09-24",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "16 Sep research (launch-critical): The scope list freezes for the 2 Oct submission. N2-SD-04 and N1-FZ-12 map features to permissions, but nothing checks each real Graph call, the Page task it ne",
       "depends_on": [
@@ -36067,7 +36108,7 @@ window.LAUNCH_DATA = {
       "sprint": "N3",
       "assignee": "Alex",
       "title": "Align the team and launch communications on the December constraint",
-      "what": "Agree one clear paragraph: public launch target 15 Dec 2026, absolute latest 20 Dec, with an invited beta targeted for 1 Dec. Explain the change from 8 Dec without repeating the rejected March plan. Align the landing, waitlist, investor update, pilots and press materials. Filza reviews claims and Alex signs the wording; sending remains a separate execution task.",
+      "what": "Agree one clear paragraph: public launch target 15 Dec 2026, absolute latest 15 Dec, with an invited beta targeted for 1 Dec. Explain the change from 8 Dec without repeating the rejected March plan. Align the landing, waitlist, investor update, pilots and press materials. Filza reviews claims and Alex signs the wording; sending remains a separate execution task.",
       "why": "The old date is on the live site and in investor material, and a quiet slip costs more trust than the delay itself. (16 Sep balancing.)",
       "area": "Launch",
       "due": "2026-10-09",
@@ -36081,7 +36122,7 @@ window.LAUNCH_DATA = {
       "checklist": [
         "One approved paragraph and a list of surfaces to update use the December dates and only the features the release will deliver."
       ],
-      "layman": "Agree one clear paragraph: public launch target 15 Dec 2026, absolute latest 20 Dec, with an invited beta targeted for 1 Dec. Explain the change from 8 Dec without repeating the rejected March plan. Align the landing, waitlist, investor update, pilots and press materials. Filza reviews claims and Alex signs the wording; sending remains a separate execution task.",
+      "layman": "Agree one clear paragraph: public launch target 15 Dec 2026, absolute latest 15 Dec, with an invited beta targeted for 1 Dec. Explain the change from 8 Dec without repeating the rejected March plan. Align the landing, waitlist, investor update, pilots and press materials. Filza reviews claims and Alex signs the wording; sending remains a separate execution task.",
       "layman_analogy": "Like a theatre moving opening night and telling ticket holders straight away, in the same words everywhere.",
       "layman_needed": "One approved paragraph and a list of surfaces to update use the December dates and only the features the release will deliver.",
       "layman_output": "One approved paragraph and a list of surfaces to update use the December dates and only the features the release will deliver.",
@@ -36099,10 +36140,10 @@ window.LAUNCH_DATA = {
       "sprint": "N1",
       "assignee": "Jill",
       "title": "Run the existing-team December ticket board",
-      "what": "Run a 15-minute daily blocker review and a weekly owner-by-owner workload review through launch. Each person pulls one primary build item at a time; finish and review it before starting another. Jill owns evidence collection, scheduling and follow-ups; Lewis owns pilot coordination and feedback; Alex resolves scope and priority disputes within one working day. Engineers retain technical decisions and Filza retains legal sign-off. Do not assume contractors, external counsel or overtime. Record every overload against the 15 Dec target and 20 Dec hard limit.",
+      "what": "Run a 15-minute daily blocker review and a weekly owner-by-owner workload review through launch. Each person pulls one primary build item at a time; finish and review it before starting another. Jill owns evidence collection, scheduling and follow-ups; Lewis owns pilot coordination and feedback; Alex resolves scope and priority disputes within one working day. Engineers retain technical decisions and Filza retains legal sign-off. Do not assume contractors, external counsel or overtime. Record every overload against the 15 Dec target and 15 Dec hard limit.",
       "why": "User fixed the December deadline and current-team resource constraint on 16 Sep.",
       "area": "Launch management",
-      "due": "2026-09-18",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Direct user constraint",
       "depends_on": [],
@@ -36113,7 +36154,7 @@ window.LAUNCH_DATA = {
       "checklist": [
         "One ranked queue per existing owner, one primary work item per person, named blockers and a dated weekly capacity review. No hidden extra staffing."
       ],
-      "layman": "Run a 15-minute daily blocker review and a weekly owner-by-owner workload review through launch. Each person pulls one primary build item at a time; finish and review it before starting another. Jill owns evidence collection, scheduling and follow-ups; Lewis owns pilot coordination and feedback; Alex resolves scope and priority disputes within one working day. Engineers retain technical decisions and Filza retains legal sign-off. Do not assume contractors, external counsel or overtime. Record every overload against the 15 Dec target and 20 Dec hard limit.",
+      "layman": "Run a 15-minute daily blocker review and a weekly owner-by-owner workload review through launch. Each person pulls one primary build item at a time; finish and review it before starting another. Jill owns evidence collection, scheduling and follow-ups; Lewis owns pilot coordination and feedback; Alex resolves scope and priority disputes within one working day. Engineers retain technical decisions and Filza retains legal sign-off. Do not assume contractors, external counsel or overtime. Record every overload against the 15 Dec target and 15 Dec hard limit.",
       "layman_needed": "One ranked queue per existing owner, one primary work item per person, named blockers and a dated weekly capacity review. No hidden extra staffing.",
       "layman_output": "One ranked queue per existing owner, one primary work item per person, named blockers and a dated weekly capacity review. No hidden extra staffing.",
       "launch_stage": "beta",
@@ -36122,17 +36163,18 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     },
     {
       "id": "N1-AX-20",
       "sprint": "N1",
       "assignee": "Alex",
       "title": "Resolve December scope and workload conflicts within the current team",
-      "what": "With Jill and the eight current owners, review the workload report and the launch-critical dependency chains. For every overloaded queue, record a smaller acceptable implementation, a skills-appropriate handoff with reviewer time, or an explicit later-release decision. Preserve security, legal and release gates and existing acceptance criteria until an explicit change is recorded. The public launch target is 15 Dec 2026 and its hard limit is 20 Dec; do not substitute a January or March date. Reassess weekly and resolve blockers within one working day.",
+      "what": "With Jill and the eight current owners, review the workload report and the launch-critical dependency chains. For every overloaded queue, record a smaller acceptable implementation, a skills-appropriate handoff with reviewer time, or an explicit later-release decision. Preserve security, legal and release gates and existing acceptance criteria until an explicit change is recorded. The public launch target is 15 Dec 2026 and its hard limit is 15 Dec; do not substitute a January or March date. Reassess weekly and resolve blockers within one working day.",
       "why": "User fixed the December deadline and current-team resource constraint on 16 Sep.",
       "area": "Launch management",
-      "due": "2026-09-21",
+      "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "Direct user constraint",
       "depends_on": [],
@@ -36143,7 +36185,7 @@ window.LAUNCH_DATA = {
       "checklist": [
         "An owner-reviewed queue and written resolution for each capacity conflict; unresolved items remain red. A calendar target alone is not treated as proof of feasibility."
       ],
-      "layman": "With Jill and the eight current owners, review the workload report and the launch-critical dependency chains. For every overloaded queue, record a smaller acceptable implementation, a skills-appropriate handoff with reviewer time, or an explicit later-release decision. Preserve security, legal and release gates and existing acceptance criteria until an explicit change is recorded. The public launch target is 15 Dec 2026 and its hard limit is 20 Dec; do not substitute a January or March date. Reassess weekly and resolve blockers within one working day.",
+      "layman": "With Jill and the eight current owners, review the workload report and the launch-critical dependency chains. For every overloaded queue, record a smaller acceptable implementation, a skills-appropriate handoff with reviewer time, or an explicit later-release decision. Preserve security, legal and release gates and existing acceptance criteria until an explicit change is recorded. The public launch target is 15 Dec 2026 and its hard limit is 15 Dec; do not substitute a January or March date. Reassess weekly and resolve blockers within one working day.",
       "layman_needed": "An owner-reviewed queue and written resolution for each capacity conflict; unresolved items remain red. A calendar target alone is not treated as proof of feasibility.",
       "layman_output": "An owner-reviewed queue and written resolution for each capacity conflict; unresolved items remain red. A calendar target alone is not treated as proof of feasibility.",
       "launch_stage": "beta",
@@ -36152,7 +36194,8 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "deadline_note": "Complete by the N1 gate on Friday 25 September. Earlier handoffs may still be needed by dependent work."
     }
   ],
   "tracks": [
@@ -37280,7 +37323,7 @@ window.LAUNCH_DATA = {
           ],
           "stack": "",
           "platform": "",
-          "note": "Public readiness11 December; target15 December; absolute latest20 December. Unmet gates remain open.",
+          "note": "Public readiness11 December; target15 December; absolute latest15 December. Unmet gates remain open.",
           "color": "#ec4899",
           "tickets": [
             "N1-SD-16",
@@ -37319,7 +37362,7 @@ window.LAUNCH_DATA = {
           ],
           "stack": "",
           "platform": "",
-          "note": "Public target15 December08:00 UK; hard latest20 December. No October launch.",
+          "note": "Public target15 December08:00 UK; hard latest15 December. No October launch.",
           "color": "#d0714f",
           "tickets": [
             "N1-FH-19",
@@ -38221,12 +38264,12 @@ window.LAUNCH_DATA = {
     "public_label": "Tue 15 Dec 2026",
     "short": "15 Dec",
     "long": "15 December 2026",
-    "hard_deadline": "2026-12-20",
-    "hard_deadline_label": "Sun 20 Dec 2026",
+    "hard_deadline": "2026-12-15",
+    "hard_deadline_label": "Tue 15 Dec 2026",
     "beta": "2026-12-01",
     "beta_label": "Invited beta target",
     "beta_date_label": "Tue 1 Dec 2026",
-    "summary": "Invited beta target 1 Dec; public launch target 15 Dec 2026; absolute latest 20 Dec 2026. Existing team only.",
+    "summary": "Public launch and final deadline: 15 December 2026. Invited beta target: 1 December. Existing team only.",
     "staffing": "Existing team only; no new hires or outside-counsel capacity assumed",
     "plan_status": "Capacity conflicts require owner review",
     "planning_note": "Ticket audit removed stranded work for already-deferred features and consolidated overlapping deliverables. The remaining inherited estimates still exceed existing-team capacity; do not treat the fixed calendar as a feasible commitment. Resolve priority and estimates without moving the December deadline."
@@ -38234,7 +38277,7 @@ window.LAUNCH_DATA = {
   "capacity_review": {
     "as_of": "2026-09-16",
     "target": "2026-12-15",
-    "hard_limit": "2026-12-20",
+    "hard_limit": "2026-12-15",
     "basis": "Audited scope with inherited estimates and focus rates, including allocated reviewer effort; excludes deferred/merged work and recorded done/Phase 0. Shared-board status snapshot 2026-09-16T12:15:43.591Z applied; remaining effort, leave and availability still require owner confirmation. No new hires, overtime or assumed external counsel. Weekends add no capacity.",
     "owners": [
       {
@@ -38244,7 +38287,7 @@ window.LAUNCH_DATA = {
         "effort_days": 115.25,
         "capacity_days": 39,
         "gap_days": 76.25,
-        "capacity_at_hard_limit": 40.8
+        "capacity_at_hard_limit": 39
       },
       {
         "owner": "Muteeb",
@@ -38253,7 +38296,7 @@ window.LAUNCH_DATA = {
         "effort_days": 157.25,
         "capacity_days": 45.5,
         "gap_days": 111.75,
-        "capacity_at_hard_limit": 47.6
+        "capacity_at_hard_limit": 45.5
       },
       {
         "owner": "Faheem",
@@ -38262,7 +38305,7 @@ window.LAUNCH_DATA = {
         "effort_days": 97.75,
         "capacity_days": 45.5,
         "gap_days": 52.25,
-        "capacity_at_hard_limit": 47.6
+        "capacity_at_hard_limit": 45.5
       },
       {
         "owner": "Saad",
@@ -38271,7 +38314,7 @@ window.LAUNCH_DATA = {
         "effort_days": 76.5,
         "capacity_days": 45.5,
         "gap_days": 31,
-        "capacity_at_hard_limit": 47.6
+        "capacity_at_hard_limit": 45.5
       },
       {
         "owner": "Alex",
@@ -38280,7 +38323,7 @@ window.LAUNCH_DATA = {
         "effort_days": 24.5,
         "capacity_days": 26,
         "gap_days": 0,
-        "capacity_at_hard_limit": 27.2
+        "capacity_at_hard_limit": 26
       },
       {
         "owner": "Jill",
@@ -38289,7 +38332,7 @@ window.LAUNCH_DATA = {
         "effort_days": 42,
         "capacity_days": 39,
         "gap_days": 3,
-        "capacity_at_hard_limit": 40.8
+        "capacity_at_hard_limit": 39
       },
       {
         "owner": "Lewis",
@@ -38298,7 +38341,7 @@ window.LAUNCH_DATA = {
         "effort_days": 38,
         "capacity_days": 39,
         "gap_days": 0,
-        "capacity_at_hard_limit": 40.8
+        "capacity_at_hard_limit": 39
       },
       {
         "owner": "Filza",
@@ -38307,7 +38350,7 @@ window.LAUNCH_DATA = {
         "effort_days": 58,
         "capacity_days": 32.5,
         "gap_days": 25.5,
-        "capacity_at_hard_limit": 34
+        "capacity_at_hard_limit": 32.5
       }
     ],
     "total_effort_days": 609.25,
@@ -38412,5 +38455,221 @@ window.LAUNCH_DATA = {
       }
     },
     "note": "Shared-board statuses imported as team-recorded facts; acceptance evidence is not independently certified. The specific 7 September N1 calendar override is superseded by the current December plan. Later saved edits still apply."
+  },
+  "schedule_revision": {
+    "as_of": "2026-09-17",
+    "n1_end": "2026-09-25",
+    "launch_final": "2026-12-15",
+    "changes": [
+      {
+        "id": "N1-AS-02",
+        "before": "2026-09-11",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-AS-03",
+        "before": "2026-09-11",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-AS-05",
+        "before": "2026-09-11",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-AS-14",
+        "before": "2026-09-11",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-FH-11",
+        "before": "2026-09-18",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-FH-18",
+        "before": "2026-09-16",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-MT-01",
+        "before": "2026-09-10",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-MT-03",
+        "before": "2026-09-11",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-MT-04",
+        "before": "2026-09-11",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-MT-05",
+        "before": "2026-09-15",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-SD-01",
+        "before": "2026-09-10",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-SD-02",
+        "before": "2026-09-21",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-SD-06",
+        "before": "2026-09-22",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-SD-16",
+        "before": "2026-09-10",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-SD-17",
+        "before": "2026-09-12",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-AX-01",
+        "before": "2026-09-11",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-AX-02",
+        "before": "2026-09-11",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-AX-11",
+        "before": "2026-09-11",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-JL-06",
+        "before": "2026-09-18",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-JL-07",
+        "before": "2026-09-18",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-LW-01",
+        "before": "2026-09-14",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-LW-05",
+        "before": "2026-09-18",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-FZ-06",
+        "before": "2026-09-16",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-FZ-07",
+        "before": "2026-09-24",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-FZ-09",
+        "before": "2026-09-24",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-FZ-10",
+        "before": "2026-09-17",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-FZ-11",
+        "before": "2026-09-10",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-AX-12",
+        "before": "2026-09-15",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-FZ-12",
+        "before": "2026-09-16",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-JL-20",
+        "before": "2026-09-18",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-AX-20",
+        "before": "2026-09-21",
+        "after": "2026-09-25"
+      },
+      {
+        "id": "N1-SD-14",
+        "before": "2026-09-24",
+        "after": "2026-09-25",
+        "reason": "Prerequisite now due at N1 gate"
+      },
+      {
+        "id": "N1-AX-05",
+        "before": "2026-09-24",
+        "after": "2026-09-25",
+        "reason": "Prerequisite now due at N1 gate"
+      },
+      {
+        "id": "N2-FZ-01",
+        "before": "2026-09-23",
+        "after": "2026-09-25",
+        "reason": "Prerequisite now due at N1 gate"
+      },
+      {
+        "id": "N2-FZ-02",
+        "before": "2026-09-24",
+        "after": "2026-09-25",
+        "reason": "Prerequisite now due at N1 gate"
+      },
+      {
+        "id": "N2-SD-17",
+        "before": "2026-09-24",
+        "after": "2026-09-25",
+        "reason": "Prerequisite now due at N1 gate"
+      },
+      {
+        "id": "N2-AX-12",
+        "before": "2026-09-21",
+        "after": "2026-09-25",
+        "reason": "Prerequisite now due at N1 gate"
+      },
+      {
+        "id": "N1-AS-19",
+        "before": "2026-09-22",
+        "after": "2026-09-25",
+        "reason": "Prerequisite now due at N1 gate"
+      },
+      {
+        "id": "N2-FH-23",
+        "before": "2026-09-24",
+        "after": "2026-09-25",
+        "reason": "Prerequisite now due at N1 gate"
+      }
+    ],
+    "urgent_exceptions": [
+      "N1-AS-17",
+      "N1-FZ-13",
+      "N1-MT-22"
+    ],
+    "note": "Completed records retain historical dates. Supplied design milestone dates remain separate from ticket deadlines."
   }
 };

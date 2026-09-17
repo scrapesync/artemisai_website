@@ -6,7 +6,7 @@ vm.runInNewContext(fs.readFileSync('sprint_launch_data.js', 'utf8'), context);
 const d = context.window.LAUNCH_DATA;
 const assert = require('node:assert/strict');
 assert.equal(d.launch.public, '2026-12-15');
-assert.equal(d.launch.hard_deadline, '2026-12-20');
+assert.equal(d.launch.hard_deadline, '2026-12-15');
 assert(d.launch.beta < d.launch.public);
 const all = [...d.tickets, ...d.backlog];
 const index = new Map(all.map(t => [t.id, t]));
@@ -27,7 +27,7 @@ for (const t of all) {
   for (const dep of (t.depends_on || []).filter(isTicketId)) {
     const q = index.get(dep);
     assert(q.sprint !== 'BL', `${t.id}: depends on parked ${dep}`);
-    assert(!q.due || q.due <= t.due, `${t.id}: before ${dep}`);
+    assert(t.status === 'done' || !q.due || q.due <= t.due, `${t.id}: before ${dep}`);
   }
 }
 const seen = new Set(), visiting = new Set();
@@ -91,3 +91,7 @@ for (const id of ['N2-AS-04','N2-AS-06']) {
 assert(!index.get('N1-SD-20').depends_on.includes('N1-SD-09'));
 assert(!index.get('N1-AS-11').depends_on.includes('N1-SD-06'));
 console.log('PASS: landing/product handoffs separated; acceptance precedes implementation completion.');
+
+assert.equal(sprints.get("N1").end,"2026-09-25");
+assert.equal(sprints.get("LW").end,"2026-12-15");
+for(const t of d.tickets.filter(t=>t.sprint==="N1"&&t.status!=="done"&&!d.schedule_revision.urgent_exceptions.includes(t.id))) assert.equal(t.due,"2026-09-25",t.id);

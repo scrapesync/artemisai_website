@@ -1,6 +1,6 @@
 # December launch plan — 16 September 2026
 
-The user has fixed public launch at **15 December 2026**, with **20 December 2026 as the absolute latest date**. Use the existing eight-person team. The February/March plan and assumed new contractors or outside-counsel capacity are superseded.
+The user has fixed public launch at **15 December 2026**, with **15 December 2026 also the final deadline**. Use the existing eight-person team. The February/March plan and assumed new contractors or outside-counsel capacity are superseded.
 
 This is a revised ticket calendar and management plan, not a capacity sign-off. No product delivery, external approval, spending, hiring, or launch announcement has been executed by this change.
 
@@ -13,7 +13,7 @@ This is a revised ticket calendar and management plan, not a capacity sign-off. 
 | Invited beta target | 1 December |
 | Public readiness review | 11 December |
 | Public launch target | 15 December |
-| Absolute latest launch | 20 December |
+| Final deadline | 15 December |
 
 The beta target is a planning choice, not a completed gate. Required evidence windows, regulatory obligations, holiday dates and external review durations do not become shorter when sprint dates move. The Meta review-clock ticket explicitly requires verification against the new gates.
 
@@ -24,7 +24,7 @@ The beta target is a planning choice, not a completed gate. Required evidence wi
 - Asad owns the app and integration; Muteeb owns platform and infrastructure; Faheem owns models and data; Saad owns design and design QA.
 - Jill owns coordination and evidence collection; Lewis owns pilot coordination and feedback; Filza retains legal sign-off; Alex owns commercial and scope decisions. Administrative support is not counted as replacement engineering or legal capacity.
 - Required security, legal and release checks remain. An unmet gate is a blocker to resolve, never permission to mark a check passed.
-- The 16–20 December window is contingency and support, not space for new features. No fallback date after 20 December is authorised.
+- There is no later launch contingency window. No launch after 15 December is authorised.
 
 ## Workload still to resolve
 
@@ -54,3 +54,7 @@ After the [second ticket audit](ticket-audit-round-2.md) and [live-board reconci
 ## Saad’s supplied design dates
 
 See the [handoff plan](saad-design-handoff.md): landing mockups and tokens hand over 19 September in N1; app Home redesign is 22–23 September in N2. Other app dates remain provisional. Landing mockup completion is not implementation completion.
+
+## 17 September calendar correction
+
+N1 ends Friday25 September. All33 open ordinary N1 tickets use that deadline;31 due dates changed and two were already25 September. Three urgent security/incident tickets retain earlier deadlines (N1-AS-17, N1-MT-22, N1-FZ-13). Completed ticket dates remain historical. Eight dependent dates moved to the N1 gate to preserve ordering. Launch phase now ends15 December; public and final deadline agree. See friday-launch-correction.json for the date-change receipt.
