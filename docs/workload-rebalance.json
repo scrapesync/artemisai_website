@@ -2,86 +2,390 @@
   "review": {
     "as_of": "2026-09-17",
     "roles": {
-      "Asad": "Technical lead, full stack, frontend integration and engineering review",
-      "Muteeb": "Backend, APIs, infrastructure, tenant isolation and production operations",
-      "Faheem": "AI/ML, evaluations, model serving contracts and data quality",
-      "Saad": "Product design, acceptance, frontend components and usability",
-      "Alex": "Vision, commercial decisions, marketing, scope and release coordination",
-      "Jill": "Finance, operational records, procurement and team coordination",
-      "Lewis": "Pilot customers, research, customer walkthroughs and support",
-      "Filza": "Legal interpretation, terms, data protection and legal sign-off"
+      "Asad": "CTO: website/mobile backend, technical and product advice, ownership and customer outreach",
+      "Muteeb": "Backend with Asad; APIs, ML/AI and data",
+      "Faheem": "AI/ML, data and backend",
+      "Saad": "Design, frontend delivery and product management",
+      "Alex": "CEO: vision, pricing, marketing, product ownership and customer outreach",
+      "Lewis": "Limited data partner; no routine delivery, pilot operations or support commitment",
+      "Jill": "COO: operations, finance and coordination",
+      "Filza": "All legal work and general advisory matters"
     },
-    "role_basis": "Inferred from existing assignments and shared context; owner availability and additional technical skills are not confirmed.",
+    "role_basis": "User explicitly confirmed these roles on 17 September 2026. Individual focus rates and remaining effort still require confirmation. Lewis has no assumed recurring delivery capacity.",
     "policy": "One primary delivery item per person. Pull only after required input evidence exists; use mock contracts for preparation, never as live acceptance. Reserve specialist review and do not create parallel boards.",
     "changes": [
       {
-        "id": "N5-MT-09",
+        "id": "N1-AS-06",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.2,
+            "Asad": 0.05
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-AS-11",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.4,
+            "Asad": 0.1
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.75,
+            "Asad": 0.25
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-LW-02",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 1.5,
+            "Lewis": 0.5
+          }
+        },
+        "handoff": "Lewis is asked only for an agreed source-data handoff. Faheem owns structuring, completeness and evaluation use. Unconfirmed partner availability remains an external dependency; no daily delivery commitment is assumed. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-LW-03",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 1
+          }
+        },
+        "handoff": "Faheem produces the backtest addendum from available source data and records gaps; Lewis may supply existing examples by agreement only. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-LW-04",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 1.5,
+            "Asad": 0.5
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-LW-05",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-LW-07",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.375,
+            "Alex": 0.125
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-01",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 3
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 2.4000000000000004,
+            "Asad": 0.6000000000000001
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-03",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-04",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 3
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 2.4000000000000004,
+            "Asad": 0.6000000000000001
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-06",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2.5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 2,
+            "Asad": 0.5
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-09",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.6,
+            "Alex": 0.4
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-11",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-13",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.2,
+            "Asad": 0.05
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-MT-01",
         "before": {
           "assignee": "Muteeb",
           "effort_allocations": {
-            "Muteeb": 0.5
+            "Muteeb": 2
           }
         },
         "after": {
-          "assignee": "Alex",
+          "assignee": "Faheem",
           "effort_allocations": {
-            "Alex": 0.25,
-            "Muteeb": 0.25
+            "Faheem": 1.5,
+            "Muteeb": 0.5
           }
         },
-        "handoff": "Alex assembles the review pack and chases missing links; Muteeb validates the platform results and unresolved defects."
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       },
       {
-        "id": "N6-MT-08",
+        "id": "N2-MT-02",
         "before": {
           "assignee": "Muteeb",
           "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 0.75,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-MT-03",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 3
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2.4000000000000004,
+            "Muteeb": 0.6000000000000001
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-MT-05",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 3
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 2.25,
+            "Muteeb": 0.75
+          }
+        },
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-MT-06",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1.6,
+            "Muteeb": 0.4
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-MT-11",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 1.5,
             "Muteeb": 0.5
           }
         },
-        "after": {
-          "assignee": "Alex",
-          "effort_allocations": {
-            "Alex": 0.25,
-            "Muteeb": 0.25
-          }
-        },
-        "handoff": "Alex fills the go/no-go evidence slots; Muteeb enforces the technical freeze and attests to the evidence."
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       },
       {
-        "id": "N6-SD-06",
+        "id": "N2-MT-15",
         "before": {
-          "assignee": "Saad",
+          "assignee": "Muteeb",
           "effort_allocations": {
-            "Saad": 1
+            "Muteeb": 1
           }
         },
         "after": {
-          "assignee": "Alex",
+          "assignee": "Asad",
           "effort_allocations": {
-            "Alex": 0.5,
-            "Saad": 0.5
+            "Asad": 0.8,
+            "Muteeb": 0.2
           }
         },
-        "handoff": "Alex maintains the decision/defect log and escalates blockers; Saad validates product acceptance and UAT evidence."
-      },
-      {
-        "id": "N5-SD-06",
-        "before": {
-          "assignee": "Saad",
-          "effort_allocations": {
-            "Saad": 1
-          }
-        },
-        "after": {
-          "assignee": "Alex",
-          "effort_allocations": {
-            "Alex": 0.5,
-            "Saad": 0.25,
-            "Muteeb": 0.25
-          }
-        },
-        "handoff": "Alex assembles launch roles and the run-of-show; Saad signs product gates and Muteeb validates rollback instructions."
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       },
       {
         "id": "N2-SD-04",
@@ -100,10 +404,112 @@
             "Filza": 0.25
           }
         },
-        "handoff": "Alex assembles the submission evidence; Saad retains the Meta submission, Asad confirms the working journey and Filza approves claims."
+        "handoff": "Alex assembles the submission evidence; Saad retains the Meta submission, Asad confirms the working journey and Filza approves claims. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
       },
       {
-        "id": "N2-AS-09",
+        "id": "N2-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-LW-03",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 1.5,
+            "Asad": 0.5
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-LW-04",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 1.5,
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-01",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-02",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-04",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 3
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 2.4000000000000004,
+            "Asad": 0.6000000000000001
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-07",
         "before": {
           "assignee": "Asad",
           "effort_allocations": {
@@ -111,30 +517,66 @@
           }
         },
         "after": {
-          "assignee": "Lewis",
-          "effort_allocations": {
-            "Lewis": 0.5,
-            "Asad": 0.5
-          }
-        },
-        "handoff": "Lewis records the scripted customer journey on approved test accounts; Asad verifies permission coverage and freezes the implemented UI. Lewis does not change auth or permission configuration."
-      },
-      {
-        "id": "N6-SD-03",
-        "before": {
           "assignee": "Saad",
           "effort_allocations": {
-            "Saad": 0.5
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-11",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
           }
         },
         "after": {
-          "assignee": "Lewis",
+          "assignee": "Saad",
           "effort_allocations": {
-            "Lewis": 0.25,
-            "Saad": 0.25
+            "Saad": 1.6,
+            "Asad": 0.4
           }
         },
-        "handoff": "Lewis captures screenshots and checks links and dates; Saad approves visual and product accuracy. Legal wording is reused from approved documents."
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-13",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1,
+            "Asad": 0.6,
+            "Muteeb": 0.4
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-14",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1,
+            "Asad": 0.6,
+            "Muteeb": 0.4
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       },
       {
         "id": "N3-FH-09",
@@ -145,13 +587,1177 @@
           }
         },
         "after": {
-          "assignee": "Lewis",
+          "assignee": "Faheem",
           "effort_allocations": {
-            "Lewis": 0.5,
-            "Faheem": 0.5
+            "Faheem": 0.75,
+            "Alex": 0.25
           }
         },
-        "handoff": "Lewis assembles question coverage and missing customer scenarios; Faheem decides evaluation validity and technical coverage gaps."
+        "handoff": "Faheem owns data/evaluation analysis; Alex supplies customer interpretation or independent human judgement. The data partner is not an assigned analyst or reviewer. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-MT-07",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1.5
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1.2000000000000002,
+            "Muteeb": 0.30000000000000004
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-MT-09",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 5
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 3.75,
+            "Muteeb": 1.25
+          }
+        },
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-MT-14",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-MT-15",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 3
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 2.25,
+            "Muteeb": 0.75
+          }
+        },
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-MT-16",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1.6,
+            "Muteeb": 0.4
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-04",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Faheem owns data/evaluation analysis; Alex supplies customer interpretation or independent human judgement. The data partner is not an assigned analyst or reviewer. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-05",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.75,
+            "Asad": 0.25
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-07",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.2,
+            "Alex": 0.8
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-01",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 4,
+            "Asad": 1
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-03",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-05",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-06",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-07",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.4,
+            "Asad": 0.1
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-09",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-10",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-13",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-14",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-15",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.5,
+            "Asad": 0.3,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-17",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-MT-04",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 5
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 4,
+            "Muteeb": 1
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-MT-14",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-SD-10",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.75,
+            "Saad": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.1875,
+            "Alex": 0.0625
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-LW-03",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.2,
+            "Alex": 0.8
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-LW-04",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Faheem owns data/evaluation analysis; Alex supplies customer interpretation or independent human judgement. The data partner is not an assigned analyst or reviewer. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-LW-05",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.75,
+            "Asad": 0.25
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-AS-01",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 3
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.5,
+            "Asad": 0.8999999999999999,
+            "Muteeb": 0.6000000000000001
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-AS-03",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 2.5,
+            "Asad": 1.5,
+            "Muteeb": 1
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-AS-04",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-AS-06",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 3
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.5,
+            "Asad": 0.8999999999999999,
+            "Muteeb": 0.6000000000000001
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-AS-09",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-AS-12",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.2,
+            "Asad": 0.05
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-MT-05",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1.5,
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Muteeb implements the monitoring view and writes technical recovery steps. Alex assembles the failure table, roles and communication links from those instructions; technical acceptance stays with Muteeb. All preparation and specialist effort is reserved; owner availability remains unconfirmed."
+      },
+      {
+        "id": "N5-MT-07",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 0.75,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-MT-09",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Alex assembles the review pack and chases missing links; Muteeb validates the platform results and unresolved defects. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N5-MT-13",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-MT-17",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1.6,
+            "Muteeb": 0.4
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-SD-06",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.5,
+            "Saad": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Alex assembles launch roles and the run-of-show; Saad signs product gates and Muteeb validates rollback instructions. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N5-SD-09",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.75,
+            "Saad": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-02",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.6,
+            "Alex": 0.4
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-03",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.375,
+            "Alex": 0.125
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-04",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-05",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.75,
+            "Asad": 0.25
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-06",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-07",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.3,
+            "Alex": 0.2
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-AS-02",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.2,
+            "Asad": 0.05
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-AS-06",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-AS-07",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-AS-08",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 3
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.5,
+            "Asad": 0.8999999999999999,
+            "Muteeb": 0.6000000000000001
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-AS-10",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.5,
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Asad enforces the code freeze and signs engineering evidence; Alex collects the existing evidence links into the release memo. All preparation and specialist effort is reserved; owner availability remains unconfirmed."
+      },
+      {
+        "id": "N6-MT-02",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 0.375,
+            "Muteeb": 0.125
+          }
+        },
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-MT-08",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Alex fills the go/no-go evidence slots; Muteeb enforces the technical freeze and attests to the evidence. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N6-SD-03",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.3,
+            "Alex": 0.2
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-SD-06",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.5,
+            "Saad": 0.5
+          }
+        },
+        "handoff": "Alex maintains the decision/defect log and escalates blockers; Saad validates product acceptance and UAT evidence. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N6-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-LW-03",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.6,
+            "Alex": 0.4
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-LW-04",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 1.5,
+            "Asad": 0.5
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-LW-05",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.375,
+            "Alex": 0.125
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-LW-06",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "LW-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.375,
+            "Alex": 0.125
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-MT-17",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-19",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.4,
+            "Asad": 0.1
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-JL-08",
+        "before": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.75,
+            "Jill": 0.25
+          }
+        },
+        "handoff": "Alex resolves product-direction decisions and maintains their outcomes; Jill checks follow-up and unresolved age in the existing team board. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N4-AS-20",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-MT-18",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1.6,
+            "Muteeb": 0.4
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-LW-05",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       },
       {
         "id": "N3-FZ-14",
@@ -169,7 +1775,176 @@
             "Asad": 0.25
           }
         },
-        "handoff": "Jill collects company asset and account ownership records; Asad supplies repository licence evidence; Filza interprets licences and approves legal ownership conclusions."
+        "handoff": "Jill collects company asset and account ownership records; Asad supplies repository licence evidence; Filza interprets licences and approves legal ownership conclusions. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N3-JL-12",
+        "before": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.25,
+            "Jill": 0.25
+          }
+        },
+        "handoff": "Alex owns spending approval limits and decisions; Jill maintains vendor commitments and checks the financial records. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N5-JL-08",
+        "before": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Alex owns the marketing scoreboard, targets and channel decisions, using existing analytics exports; no new engineering dashboard is commissioned. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N5-LW-09",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.375,
+            "Alex": 0.125
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-LW-07",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-LW-06",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-08",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.1875,
+            "Asad": 0.0625
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-MT-19",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-21",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-09",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-23",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       },
       {
         "id": "N3-FZ-19",
@@ -187,77 +1962,10 @@
             "Muteeb": 0.25
           }
         },
-        "handoff": "Jill collects current vendor evidence in the existing register; Muteeb assesses technical gaps and Filza signs the data/vendor implications."
+        "handoff": "Jill collects current vendor evidence in the existing register; Muteeb assesses technical gaps and Filza signs the data/vendor implications. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
       },
       {
-        "id": "N2-JL-08",
-        "before": {
-          "assignee": "Jill",
-          "effort_allocations": {
-            "Jill": 1
-          }
-        },
-        "after": {
-          "assignee": "Alex",
-          "effort_allocations": {
-            "Alex": 0.75,
-            "Jill": 0.25
-          }
-        },
-        "handoff": "Alex resolves product-direction decisions and maintains their outcomes; Jill checks follow-up and unresolved age in the existing team board."
-      },
-      {
-        "id": "N5-JL-08",
-        "before": {
-          "assignee": "Jill",
-          "effort_allocations": {
-            "Jill": 0.5
-          }
-        },
-        "after": {
-          "assignee": "Alex",
-          "effort_allocations": {
-            "Alex": 0.5
-          }
-        },
-        "handoff": "Alex owns the marketing scoreboard, targets and channel decisions, using existing analytics exports; no new engineering dashboard is commissioned."
-      },
-      {
-        "id": "N3-JL-12",
-        "before": {
-          "assignee": "Jill",
-          "effort_allocations": {
-            "Jill": 0.5
-          }
-        },
-        "after": {
-          "assignee": "Alex",
-          "effort_allocations": {
-            "Alex": 0.25,
-            "Jill": 0.25
-          }
-        },
-        "handoff": "Alex owns spending approval limits and decisions; Jill maintains vendor commitments and checks the financial records."
-      },
-      {
-        "id": "N5-MT-05",
-        "before": {
-          "assignee": "Muteeb",
-          "effort_allocations": {
-            "Muteeb": 2
-          }
-        },
-        "after": {
-          "assignee": "Muteeb",
-          "effort_allocations": {
-            "Muteeb": 1.5,
-            "Alex": 0.5
-          }
-        },
-        "handoff": "Muteeb implements the monitoring view and writes technical recovery steps. Alex assembles the failure table, roles and communication links from those instructions; technical acceptance stays with Muteeb."
-      },
-      {
-        "id": "N6-AS-10",
+        "id": "N3-AS-24",
         "before": {
           "assignee": "Asad",
           "effort_allocations": {
@@ -265,13 +1973,115 @@
           }
         },
         "after": {
-          "assignee": "Asad",
+          "assignee": "Saad",
           "effort_allocations": {
-            "Asad": 0.5,
-            "Alex": 0.5
+            "Saad": 0.8,
+            "Asad": 0.2
           }
         },
-        "handoff": "Asad enforces the code freeze and signs engineering evidence; Alex collects the existing evidence links into the release memo."
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-MT-23",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-22",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-23",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-MT-30",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-10",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.6,
+            "Alex": 0.4
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-10",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       }
     ],
     "report": "docs/workload-rebalance.md",
@@ -286,66 +2096,66 @@
     "owners": [
       {
         "owner": "Asad",
-        "tickets": 81,
+        "tickets": 53,
         "focus_rate": 0.6,
-        "effort_days": 112.75,
+        "effort_days": 80.51,
         "capacity_days": 38.4,
-        "gap_days": 74.35,
+        "gap_days": 42.11,
         "capacity_at_hard_limit": 38.4
       },
       {
         "owner": "Muteeb",
-        "tickets": 99,
+        "tickets": 76,
         "focus_rate": 0.7,
-        "effort_days": 156.75,
+        "effort_days": 127.03,
         "capacity_days": 44.8,
-        "gap_days": 111.95,
+        "gap_days": 82.23,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Faheem",
-        "tickets": 60,
+        "tickets": 73,
         "focus_rate": 0.7,
-        "effort_days": 97.25,
+        "effort_days": 114.63,
         "capacity_days": 44.8,
-        "gap_days": 52.45,
+        "gap_days": 69.83,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Saad",
-        "tickets": 70,
+        "tickets": 121,
         "focus_rate": 0.7,
-        "effort_days": 73.5,
+        "effort_days": 130.05,
         "capacity_days": 44.8,
-        "gap_days": 28.7,
+        "gap_days": 85.25,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Alex",
-        "tickets": 53,
+        "tickets": 69,
         "focus_rate": 0.4,
-        "effort_days": 29.5,
+        "effort_days": 47.48,
         "capacity_days": 25.6,
-        "gap_days": 3.9,
+        "gap_days": 21.88,
         "capacity_at_hard_limit": 25.6
       },
       {
         "owner": "Jill",
-        "tickets": 61,
+        "tickets": 75,
         "focus_rate": 0.6,
-        "effort_days": 41.5,
+        "effort_days": 50.31,
         "capacity_days": 38.4,
-        "gap_days": 3.1,
+        "gap_days": 11.91,
         "capacity_at_hard_limit": 38.4
       },
       {
         "owner": "Lewis",
-        "tickets": 43,
-        "focus_rate": 0.6,
-        "effort_days": 39.25,
-        "capacity_days": 38.4,
-        "gap_days": 0.85,
-        "capacity_at_hard_limit": 38.4
+        "tickets": 0,
+        "focus_rate": 0,
+        "effort_days": 0.5,
+        "capacity_days": 0,
+        "gap_days": 0.5,
+        "capacity_at_hard_limit": 0
       },
       {
         "owner": "Filza",
@@ -358,6 +2168,6 @@
       }
     ],
     "total_effort_days": 606.25,
-    "total_capacity_days": 307.2
+    "total_capacity_days": 268.8
   }
 }

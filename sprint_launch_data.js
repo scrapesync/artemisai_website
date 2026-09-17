@@ -11258,7 +11258,7 @@ window.LAUNCH_DATA = {
       "sprint": "N1",
       "assignee": "Asad",
       "title": "Rewrite the crisis gate: add a coverage floor / must-catch-N clause",
-      "what": "With Faheem, replace 'crisis >= 75% precision on the real-incident backtest' with a two-part line shaped like the flop gate: precision at a stated alert volume PLUS a floor ('must catch N of Lewis's incidents inside the complete window' or a coverage %). Record that the numeric pass line is set in N2 once the 8-week hour-of-week measurement lands (N2-AS-02). Write the new line into the sprint tracker and Checklist 3.",
+      "what": "With Faheem, replace 'crisis >= 75% precision on the real-incident backtest' with a two-part line shaped like the flop gate: precision at a stated alert volume PLUS a floor ('must catch N of Alex's incidents inside the complete window' or a coverage %). Record that the numeric pass line is set in N2 once the 8-week hour-of-week measurement lands (N2-AS-02). Write the new line into the sprint tracker and Checklist 3.",
       "why": "As written a detector that alerts once a month passes while missing every storm; Faheem flagged the decision as needed this week and N2 backtests tune against whatever line exists.",
       "area": "Alerts",
       "due": "2026-09-25",
@@ -11281,9 +11281,9 @@ window.LAUNCH_DATA = {
       "acceptance": "The tracker and Checklist 3 carry a crisis gate line with both a precision term and a must-catch-N / coverage clause, countersigned by Faheem.",
       "checklist": [
         "Read roadmap section 4 and the three-row outcome table with Faheem",
-        "Choose the clause form: must-catch-N of Lewis's incidents or a coverage %",
+        "Choose the clause form: must-catch-N of Alex's incidents or a coverage %",
         "Write the wording; leave the numeric line as 'set in N2 from the measurement'",
-        "Update the tracker and Checklist 3; tell Lewis what the complete window must contain"
+        "Update the tracker and Checklist 3; tell Alex what the complete window must contain"
       ],
       "layman": "We're rewording the promise behind our comment-storm alarm so it commits to both accuracy and catching a minimum number of real incidents, so pilots know exactly what the alarm guarantees.",
       "layman_analogy": "Like rewriting a guard dog's job description so it promises not just 'rarely barks at nothing' but also 'always barks at actual burglars'.",
@@ -11422,7 +11422,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N1-AS-06",
       "sprint": "N2",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Fix the launch date on the live landing (3 places) to Tue 15 Dec 2026",
       "what": "Update the live landing meta description, hero badge and public-launch FAQ answer to 15 December 2026. Remove all superseded November, 8 December and March public-launch claims. This is a content-only change on the existing site. Follow the normal preview and deployment process; verify the rendered copy after publication.",
       "why": "Every listing and email keys off one date; the live site currently contradicts the declared launch.",
@@ -11457,12 +11457,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.2,
+        "Asad": 0.05
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N1-AS-11",
       "sprint": "N2",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Implement landing-page desktop and mobile mockups after 19 September handoff",
       "what": "Use Saad’s landing desktop mockup (reported done), mobile mockup due 17 September, landing tokens/system due 18 September and combined handoff due 19 September. Asad checks design links, mobile breakpoints, assets, interactions and content at handoff. Implement from the next working day, 21 September. Reuse existing landing components where possible. Landing implementation does not wait for app Home or other product packs. Keep the 15 December public date and required legal/consent review. The ticket completion date is a planning target, not a commitment from Saad.",
       "why": "A public date (the 19 Sep landing beat) and the toolchain warm-up before Today starts 21 Sep.",
@@ -11508,7 +11517,16 @@ window.LAUNCH_DATA = {
         "previous_due": "2026-10-07",
         "previous_sprint": "N3"
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.4,
+        "Asad": 0.1
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N1-AS-12",
@@ -12113,15 +12131,15 @@ window.LAUNCH_DATA = {
       "id": "N1-FH-15",
       "sprint": "N1",
       "assignee": "Faheem",
-      "title": "Structure Lewis's crisis incident set for N2 tuning",
-      "what": "Load Lewis's complete incident window (every incident in a fixed range, page + timestamp, target 20+) into an incidents table, record the window bounds so unlisted alerts count as false alarms, join to comment/post data and add normal-but-spiky days per page. Note the confidence interval at the delivered n.",
+      "title": "Structure Faheem's crisis incident set for N2 tuning",
+      "what": "Load Faheem's complete incident window (every incident in a fixed range, page + timestamp, target 20+) into an incidents table, record the window bounds so unlisted alerts count as false alarms, join to comment/post data and add normal-but-spiky days per page. Note the confidence interval at the delivered n.",
       "why": "The detector is only as good as the truth it is tuned on; at n=5 the 75% number is decorative.",
       "area": "Alerts",
       "due": "2026-09-25",
       "priority": "P0",
       "priority_reason": "blocks every N2 crisis task",
       "depends_on": [
-        "Lewis: complete incident window by end N1"
+        "Faheem: complete incident window by end N1"
       ],
       "feeds": [
         "N2-AS-02",
@@ -12136,10 +12154,10 @@ window.LAUNCH_DATA = {
         "Join to comments/posts; add spiky-normal days",
         "Note n and the precision CI"
       ],
-      "layman": "Tidy Lewis's list of real past comment-storm incidents into a proper table joined to our data, so the next sprint can tune the alarm against real events, not guesses.",
+      "layman": "Tidy Faheem's list of real past comment-storm incidents into a proper table joined to our data, so the next sprint can tune the alarm against real events, not guesses.",
       "layman_analogy": "Like typing up a firefighter's handwritten log of every real blaze into the station database, so the new alarm can be tested against genuine fires.",
-      "layman_needed": "A table of Lewis's real comment-storm incidents with dates and pages, joined to our comment data, with the covered time window and the sample size's reliability noted.",
-      "layman_output": "A proper table of Lewis's real past comment-storm incidents - every incident in a fixed date range with its page and timestamp - joined to our comment and post data, with normal-but-busy days added per page for contrast. The covered window and the honest reliability of the sample size are noted on it, so next sprint tunes the alarm against real events with known limits.",
+      "layman_needed": "A table of Faheem's real comment-storm incidents with dates and pages, joined to our comment data, with the covered time window and the sample size's reliability noted.",
+      "layman_output": "A proper table of Faheem's real past comment-storm incidents - every incident in a fixed date range with its page and timestamp - joined to our comment and post data, with normal-but-busy days added per page for contrast. The covered window and the honest reliability of the sample size are noted on it, so next sprint tunes the alarm against real events with known limits.",
       "timebox_days": 1,
       "launch_stage": "beta",
       "estimated_days": 1,
@@ -13639,8 +13657,8 @@ window.LAUNCH_DATA = {
       "sprint": "N1",
       "assignee": "Saad",
       "title": "Draft Meta reviewer narrative and arrange app-dashboard access",
-      "what": "First PM day: write the one-page 'page analytics tool' reviewer narrative (what the app does with each permission, read-only analytics, Remind-me not Schedule) for Asad to approve and Filza to firewall-check, and set up the Meta app-dashboard roles so Asad (co-owner) and Lewis (tester management) have access before the tester list is built. Note: N1-FZ-06 now finishes on 2026-09-16 after the 16 Sep balancing, so this fixed-date item goes ahead with what exists by then.",
-      "why": "Asad's founder-duties clearance (N1-AS-09), Filza's firewall rulebook (N2-FZ-01) and Lewis's tester list (N1-LW-05) all depend on it; the 25 Sep submission clock starts here.",
+      "what": "First PM day: write the one-page 'page analytics tool' reviewer narrative (what the app does with each permission, read-only analytics, Remind-me not Schedule) for Asad to approve and Filza to firewall-check, and set up the Meta app-dashboard roles so Asad (co-owner) and Saad (tester management) have access before the tester list is built. Note: N1-FZ-06 now finishes on 2026-09-16 after the 16 Sep balancing, so this fixed-date item goes ahead with what exists by then.",
+      "why": "Asad's founder-duties clearance (N1-AS-09), Filza's firewall rulebook (N2-FZ-01) and Saad's tester list (N1-LW-05) all depend on it; the 25 Sep submission clock starts here.",
       "area": "Meta",
       "due": "2026-09-25",
       "priority": "P0",
@@ -13652,18 +13670,18 @@ window.LAUNCH_DATA = {
         "N1-LW-05"
       ],
       "gate": "N1",
-      "acceptance": "Narrative v0 is in the package folder with Asad's approval note, and Asad and Lewis can log into the app dashboard.",
+      "acceptance": "Narrative v0 is in the package folder with Asad's approval note, and Asad and Saad can log into the app dashboard.",
       "checklist": [
         "Write the narrative from the Remind-me decision and the permission list",
         "Send to Asad for approval and to Filza for the rulebook",
-        "Add Asad + Lewis to the app dashboard roles",
+        "Add Asad + Saad to the app dashboard roles",
         "File in the Meta package folder"
       ],
       "source": "reconciler",
-      "layman": "Saad writes the plain-English story we tell Facebook's reviewers about what our app does with their data, and opens dashboard access for Asad and Lewis, so that Facebook's approval process can start on time.",
+      "layman": "Saad writes the plain-English story we tell Facebook's reviewers about what our app does with their data, and opens dashboard access for Asad and Saad, so that Facebook's approval process can start on time.",
       "layman_analogy": "Like writing the planning application in plain words for the council and adding two colleagues to the portal, so the approval process can start without you.",
-      "layman_needed": "A one-page plain-English story for Facebook's reviewers filed in the package folder with Asad's approval note, and Asad and Lewis able to log into the Facebook app dashboard.",
-      "layman_output": "A one-page plain-English story for Facebook's reviewers - what the app does with each permission, read-only analytics, reminders rather than posting - filed in the package folder with Asad's written approval, ready for Filza's wording check. Alongside it, Asad and Lewis can both log into the Facebook app dashboard with their own roles, so the submission clock can start on time.",
+      "layman_needed": "A one-page plain-English story for Facebook's reviewers filed in the package folder with Asad's approval note, and Asad and Saad able to log into the Facebook app dashboard.",
+      "layman_output": "A one-page plain-English story for Facebook's reviewers - what the app does with each permission, read-only analytics, reminders rather than posting - filed in the package folder with Asad's written approval, ready for Filza's wording check. Alongside it, Asad and Saad can both log into the Facebook app dashboard with their own roles, so the submission clock can start on time.",
       "timebox_days": 0.5,
       "launch_stage": "beta",
       "estimated_days": 0.5,
@@ -13722,7 +13740,7 @@ window.LAUNCH_DATA = {
       "sprint": "N2",
       "assignee": "Saad",
       "title": "Confirm PM and component responsibilities for N2",
-      "what": "Record the actual responsibility split: Saad owns design, component implementation and design QA; Asad reviews integration; Jill coordinates the queue; Lewis drafts support materials with Saad review. Protect Meta submission on 2 October and list remaining app design dates as pending. Do not assume Saad stopped designing on 10 or 23 September.",
+      "what": "Record the actual responsibility split: Saad owns design, component implementation and design QA; Asad reviews integration; Jill coordinates the queue; Saad drafts support materials with Saad review. Protect Meta submission on 2 October and list remaining app design dates as pending. Do not assume Saad stopped designing on 10 or 23 September.",
       "why": "Every N2-N6 plan assumes Saad's PM output and his front-end output at full strength; without a written split the Meta clock and the first surfaces collide silently in the sprint that can least afford it.",
       "area": "PM",
       "due": "2026-09-25",
@@ -13740,7 +13758,7 @@ window.LAUNCH_DATA = {
         "The responsibility split and remaining app-date gaps are recorded without duplicate queue ownership."
       ],
       "source": "reconciler",
-      "layman": "Record the actual responsibility split: Saad owns design, component implementation and design QA; Asad reviews integration; Jill coordinates the queue; Lewis drafts support materials with Saad review. Protect Meta submission on 2 October and list remaining app design dates as pending. Do not assume Saad stopped designing on 10 or 23 September.",
+      "layman": "Record the actual responsibility split: Saad owns design, component implementation and design QA; Asad reviews integration; Jill coordinates the queue; Saad drafts support materials with Saad review. Protect Meta submission on 2 October and list remaining app design dates as pending. Do not assume Saad stopped designing on 10 or 23 September.",
       "layman_needed": "The responsibility split and remaining app-date gaps are recorded without duplicate queue ownership.",
       "layman_output": "The responsibility split and remaining app-date gaps are recorded without duplicate queue ownership.",
       "moved_from": "N1",
@@ -13931,7 +13949,7 @@ window.LAUNCH_DATA = {
       "sprint": "N2",
       "assignee": "Alex",
       "title": "One-page KPIs + the 'Asad must NOT do' list with named owners",
-      "what": "Write the one-page KPI sheet (signup -> connected -> ingest done -> first insight -> draft scored, time-to-first-value, waitlist 500 by the Fri 11 Dec 2026 public go/no-go, 5 paying pilots) that Asad's N2 KPI events and N4 funnel will instrument. Write the 'Asad must NOT do' list: Meta package (Saad), pilot comms (Lewis), money (Jill), legal (Filza), infra/ops (Muteeb), design QA (Saad), PH replies (Alex), each line with a named owner, and hand it to Asad before he starts coding on 17 Sep.",
+      "what": "Write the one-page KPI sheet (signup -> connected -> ingest done -> first insight -> draft scored, time-to-first-value, waitlist 500 by the Fri 11 Dec 2026 public go/no-go, 5 paying pilots) that Asad's N2 KPI events and N4 funnel will instrument. Write the 'Asad must NOT do' list: Meta package (Saad), pilot comms (Alex), money (Jill), legal (Filza), infra/ops (Muteeb), design QA (Saad), PH replies (Alex), each line with a named owner, and hand it to Asad before he starts coding on 17 Sep.",
       "why": "Without a named-owner list founder work leaks back into Asad's build weeks; without one KPI page the launch-day numbers are guesses.",
       "area": "Launch",
       "due": "2026-09-25",
@@ -14343,7 +14361,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N1-LW-01",
       "sprint": "N1",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Confirm the first pilot customers",
       "what": "Confirm who will actually test the first release, which pages they can use and who can provide feedback. Do not assume five customers or a signed paid commitment.",
       "why": "Plan around real pilot customers and the pages they can actually test.",
@@ -14384,12 +14402,21 @@ window.LAUNCH_DATA = {
       "deadline_note": "Complete the N1 deliverable by Friday 25 September. Preparatory work must clearly record any unbuilt feature or missing input.",
       "checklist_revised_at": "2026-09-17T12:00:00Z",
       "critical_review_note": "Use one shared pilot roster across these checkpoints. Record only new confirmations or changed availability; do not recruit or count the same person again. Pilot numbers are targets until confirmed.",
-      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies."
+      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies.",
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 0.75,
+        "Asad": 0.25
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N1-LW-02",
       "sprint": "N2",
-      "assignee": "Lewis",
+      "assignee": "Faheem",
       "title": "Deliver the complete crisis incident window to Faheem (20+ incidents)",
       "what": "Choose a fixed date range across the pilot pages that you can vouch for as COMPLETE and list EVERY incident inside it: page, first-hostile-comment timestamp (with timezone), end timestamp, post id/URL, what happened, how the admin noticed, severity. Target 20 or more; a sample will not do, because any alert Faheem raises inside the window that is not on the list counts as a false alarm. Include incidents on pages that have since declined, tagged with the page's current volume tier from N1-LW-01. Deliver as one sheet to Faheem, copied to Asad.",
       "why": "Without a complete window precision cannot be measured (at 5 incidents the interval around 75% runs ~30-95%), and Asad + Faheem must set the crisis pass line before N2 tuning starts on 21 Sep.",
@@ -14432,12 +14459,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Faheem",
+      "effort_allocations": {
+        "Faheem": 1.5,
+        "Lewis": 0.5
+      },
+      "reviewers": [
+        "Lewis"
+      ],
+      "workload_note": "Lewis is asked only for an agreed source-data handoff. Faheem owns structuring, completeness and evaluation use. Unconfirmed partner availability remains an external dependency; no daily delivery commitment is assumed. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N1-LW-03",
       "sprint": "N2",
-      "assignee": "Lewis",
+      "assignee": "Faheem",
       "title": "Backtest addendum: normal-but-spiky days and the must-catch list",
       "what": "For each page in the window, list the normal-but-spiky days (launches, viral posts, giveaways, TV moments) where comment volume jumped without a crisis, with timestamps. Then mark which incidents in N1-LW-02 the detector must catch (the storms an admin would be angry to miss) so Faheem and Asad can write the coverage-floor / must-catch-N clause into the crisis gate. Sit in the pass-line decision with Asad and Faheem once his hour-of-week measurement lands.",
       "why": "The detector is being re-scoped for ~3 comments per post rather than ~21; without spiky-normal days the thresholds cry wolf, and without a must-catch list a detector that alerts once a month could pass the gate.",
@@ -14470,12 +14506,18 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Faheem",
+      "effort_allocations": {
+        "Faheem": 1
+      },
+      "reviewers": [],
+      "workload_note": "Faheem produces the backtest addendum from available source data and records gaps; Lewis may supply existing examples by agreement only. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N1-LW-04",
       "sprint": "N3",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Confirm five core pilots in one roster",
       "what": "Recruit and confirm five core pilot admins, with page IDs, administrator status, Tester consent, weekly-call agreement and an honest pricing conversation. Cover the retained brand/community/meme evaluation needs across their pages; flag any missing segment instead of automatically recruiting a second cohort. Existing extra contacts may remain reserves, with no new second-cohort recruitment or onboarding requirement.",
       "why": "Pilots are the product proof and the Meta-review insulation; Discovery's graph needs ~20 connected pages or the match list is near-empty.",
@@ -14515,12 +14557,21 @@ window.LAUNCH_DATA = {
       },
       "checklist_revised_at": "2026-09-16T12:15:43.591Z",
       "critical_review_note": "Use one shared pilot roster across these checkpoints. Record only new confirmations or changed availability; do not recruit or count the same person again. Pilot numbers are targets until confirmed.",
-      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies."
+      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies.",
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 1.5,
+        "Asad": 0.5
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N1-LW-05",
       "sprint": "N1",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Identify testers for the future Meta connection",
       "what": "List the people and pages available for connection testing. Add test roles only after Muteeb has configured the actual Meta app.",
       "why": "Engineering needs a real tester list once the Meta app is configured.",
@@ -14556,12 +14607,21 @@ window.LAUNCH_DATA = {
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
       "deadline_note": "Complete the N1 deliverable by Friday 25 September. Preparatory work must clearly record any unbuilt feature or missing input.",
-      "checklist_revised_at": "2026-09-17T12:00:00Z"
+      "checklist_revised_at": "2026-09-17T12:00:00Z",
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 0.375,
+        "Asad": 0.125
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N1-LW-07",
       "sprint": "N3",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "Start the weekly pilot call rota",
       "what": "Publish a weekly call slot per pilot (or two group slots), a 20-minute agenda (what they saw, what confused them, what they would pay for) and a single feedback sheet ranked by severity. Run the first round with every pilot confirmed by 16 Sep in the week of 14 Sep, and the rest in the week of 21 Sep, before there is a product, to capture baseline expectations: what should happen with a 2am storm, what best time means to them, which numbers they check in Meta Business Suite.",
       "why": "Saad's weekly pilot-feedback digest (N2 onward) and the notification timing policy need pilot voice from week one.",
@@ -14585,7 +14645,7 @@ window.LAUNCH_DATA = {
         "Run first-round calls with the 2am-storm and best-time questions for pilots confirmed by 16 Sep",
         "Send week-1 notes to Saad and Alex; book the late joiners for the week of 21 Sep"
       ],
-      "layman": "Lewis starts a weekly 20-minute call with each pilot before the product even exists, capturing what they expect and what they'd pay for, so that we build what page owners actually want.",
+      "layman": "Jill starts a weekly 20-minute call with each pilot before the product even exists, capturing what they expect and what they'd pay for, so that we build what page owners actually want.",
       "layman_analogy": "Like a tailor measuring every client and noting their tastes before cutting any cloth, so the first fitting already resembles what they wanted.",
       "layman_needed": "A weekly 20-minute call slot per pilot on the shared calendar, and the first round of calls run before the product exists, with each pilot's expectations and what they'd pay for logged in one feedback sheet by 18 September.",
       "layman_output": "A weekly 20-minute call slot per pilot on the shared calendar with a set agenda, and the first round of calls already run before the product exists. Each pilot's expectations, confusions and what they would pay for will be logged in one feedback sheet ranked by severity by 18 September, so anyone can read what pilots actually want before a line of the app is judged against it.",
@@ -14597,7 +14657,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Jill",
+      "effort_allocations": {
+        "Jill": 0.375,
+        "Alex": 0.125
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N1-FZ-03",
@@ -14918,7 +14987,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-AS-01",
       "sprint": "N3",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Stand up the app shell on Muteeb's rails with auth integrated",
       "what": "First screen day: wire the bought auth (session, JWT tenant claim) into the Next.js app; app shell = icon rail, topbar with bell and health-pill slots, workspace-switcher stub listing the tenant's pages, theme, toasts, routed empty pages for Today / Drafts / Alerts / Best Times / Analytics / Settings; deployed to staging behind login.",
       "why": "The feature map puts auth integration on Asad in N1 but the no-code decision moves it to the first days of N2; nothing in N2 renders without it.",
@@ -14960,14 +15029,23 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 2.4000000000000004,
+        "Asad": 0.6000000000000001
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-AS-02",
       "sprint": "N3",
       "assignee": "Asad",
       "title": "Set the numeric crisis pass line from the measurement, before tuning",
-      "what": "With Faheem, read the 8-week comments-per-page-per-hour-of-week measurement and Lewis's complete incident window (20+ incidents), then decide and record the numeric line per the roadmap table (5+/hour: 75% stands; 1-5: scope to the larger pages and say so in the gate; <1: change the gate now). Attach the must-catch-N clause from N1-AS-02, annotate 25-29 Aug as an anomaly window, and confirm the gate clock covers the live labelling path (Faheem seam 1), not only fetch.",
+      "what": "With Faheem, read the 8-week comments-per-page-per-hour-of-week measurement and Alex's complete incident window (20+ incidents), then decide and record the numeric line per the roadmap table (5+/hour: 75% stands; 1-5: scope to the larger pages and say so in the gate; <1: change the gate now). Attach the must-catch-N clause from N1-AS-02, annotate 25-29 Aug as an anomaly window, and confirm the gate clock covers the live labelling path (Faheem seam 1), not only fetch.",
       "why": "Tuning against an unreachable line burns N2 and fails the Sat 17 Oct 2026 drill in public; the decision must precede tuning, not follow it.",
       "area": "Alerts",
       "due": "2026-10-13",
@@ -14997,8 +15075,8 @@ window.LAUNCH_DATA = {
       ],
       "layman": "Asad and Faheem look at the real comment numbers and set, in writing, the bar the storm-alert system must clear before tuning starts, so that we don't spend weeks chasing a target the data can't support.",
       "layman_analogy": "Like agreeing the pass mark for a driving test from real road statistics before lessons start, rather than moving the goalposts after the student fails.",
-      "layman_needed": "A written numeric quality bar for the storm-alert system, set from the real comment measurements and Lewis's incident list, with its scope and must-catch clause recorded in the tracker before any tuning begins.",
-      "layman_output": "A written numeric quality bar for the storm-alert system, recorded in the tracker before any tuning begins: the exact pass percentage, which pages it covers given how far comment volumes have fallen, and the must-catch clause from Lewis's list. Anyone can open the tracker and read the bar the detector will be judged against - set from real measurements, not picked after the results.",
+      "layman_needed": "A written numeric quality bar for the storm-alert system, set from the real comment measurements and Alex's incident list, with its scope and must-catch clause recorded in the tracker before any tuning begins.",
+      "layman_output": "A written numeric quality bar for the storm-alert system, recorded in the tracker before any tuning begins: the exact pass percentage, which pages it covers given how far comment volumes have fallen, and the must-catch clause from Alex's list. Anyone can open the tracker and read the bar the detector will be judged against - set from real measurements, not picked after the results.",
       "moved_from": "N2",
       "launch_stage": "beta",
       "estimated_days": 0.5,
@@ -15011,7 +15089,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-AS-03",
       "sprint": "N3",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Dev-mode Facebook connect UI: pick pages, health state, disconnect",
       "what": "Connect flow on Muteeb's token backend: Facebook login (dev mode, Tester roles) -> multi-select page picker (3-5 pages) -> per-page connection-health state (connected / expiring / revoked / re-auth needed) -> disconnect per page triggering revocation and data delete. Consent-screen UI built in final form because the screencasts record it.",
       "why": "The N2 gate is connect -> disconnect -> data gone, and this exact UI appears in every Meta screencast.",
@@ -15053,12 +15131,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.6,
+        "Asad": 0.4
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-AS-04",
       "sprint": "N4",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Today feed on the live API",
       "what": "Today screen: next-move hero with confidence chip, moves checklist, typed feed cards (crisis / opportunity / signal / prediction / win), setup pill reading ingest progress; page_id scoping via the workspace-switcher stub; every 'Schedule' CTA renders as 'Remind me at this time'; empty and lag states per Saad's pack. Use contract fixtures while the API is being built; final acceptance requires the real endpoint and pilot data.",
       "why": "The screen pilots open every morning; the habit loop the vision demands and half of the working-app reveal.",
@@ -15108,7 +15195,16 @@ window.LAUNCH_DATA = {
         "previous_sprint": "N3"
       },
       "critical_review_note": "Mock-based development may start earlier, but this ticket cannot be accepted as live until its named API dependencies pass and the integrated flow is demonstrated.",
-      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies."
+      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies.",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 2.4000000000000004,
+        "Asad": 0.6000000000000001
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-AS-05",
@@ -15154,7 +15250,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-AS-06",
       "sprint": "N4",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Drafts/Studio: composer, debounced gauge, driver chips, autosave",
       "what": "Composer with 300-500 ms debounced calls to Muteeb's score endpoint; virality gauge and driver chips rendered strictly from the drivers[] field in Saad's chip vocabulary (nothing invented UI-side); minimum-text threshold before scoring; autosave to the server with restore on reload; loading and error states. Consolidated N2-AS-08: Render the score as bands per Faheem's calibration and Saad's pack, and an explicit abstain state ('no strong signal on this one') whenever the endpoint's confidence/coverage flag says so; no numeric dial outside coverage; the no-strong-driver rule hides chips. With the flop gate passed at 55% coverage, roughly 45% of drafts still land in abstain.",
       "why": "The wow moment and the 2 Oct gate proof ('draft scored live on a pilot page'); losing a half-written post once is once too many.",
@@ -15223,7 +15319,16 @@ window.LAUNCH_DATA = {
       },
       "checklist_revised_at": "2026-09-16T12:15:43.591Z",
       "critical_review_note": "Mock-based development may start earlier, but this ticket cannot be accepted as live until its named API dependencies pass and the integrated flow is demonstrated.",
-      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies."
+      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies.",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 2,
+        "Asad": 0.5
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-AS-07",
@@ -15272,7 +15377,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-AS-09",
       "sprint": "N4",
-      "assignee": "Lewis",
+      "assignee": "Saad",
       "title": "Record a screencast per permission; freeze consent UI; co-sign",
       "what": "For each permission on the scope list locked in N1-FZ-06, record login -> permission prompt -> grant -> the feature working, on the host registered as the app's domain in the dashboard (production, or staging only if that exact host is registered and reachable by a reviewer), from a fresh reviewer account rather than a signed-in session. Include one clip showing disconnect and data deletion, since reviewers probe the deletion claim. Tag each clip to the permission-to-feature map, then freeze the consent-screen and connect UI - any change re-opens recording - and co-sign the package with the Meta owner after the working connection and Filza's claims review.",
       "why": "Mismatched screencast-vs-UI is a top rejection reason; SUBMIT is Fri 2 Oct and only one safe rejection cycle exists.",
@@ -15313,14 +15418,14 @@ window.LAUNCH_DATA = {
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
       "effort_allocations": {
-        "Lewis": 0.5,
-        "Asad": 0.5
+        "Saad": 0.6,
+        "Alex": 0.4
       },
-      "delivery_lead": "Lewis",
+      "delivery_lead": "Saad",
       "reviewers": [
-        "Asad"
+        "Alex"
       ],
-      "workload_note": "Lewis records the scripted customer journey on approved test accounts; Asad verifies permission coverage and freezes the implemented UI. Lewis does not change auth or permission configuration. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      "workload_note": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-AS-10",
@@ -15366,7 +15471,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-AS-11",
       "sprint": "N4",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "KPI events v1 firing in staging",
       "what": "Instrument signup, page_connected and draft_scored as first-class events carrying tenant and page_id into the events sink named in the stack decision; verify on staging with a dashboard tile; document the taxonomy so the N4 funnel extends it.",
       "why": "Without events the launch KPIs are guesses and the activation event Saad names in N2 cannot be measured.",
@@ -15408,15 +15513,24 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-AS-13",
       "sprint": "N5",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Publish the pilot application form on the landing",
-      "what": "Publish Lewis's pilot application form on the live landing on the 24 Sep beat: link or embed, the consent line from Filza (N1-FZ-09), UTM tags per the scheme, and a test submission that lands in Lewis's triage queue. Ship it hidden with the 19 Sep landing if that is easier and flip it on the day.",
-      "why": "Lewis's N2-LW-01 (form live 24 Sep, triage within 48h) names an Asad switch that had no ticket; the beat is on Alex's marketing calendar.",
+      "what": "Publish Saad's pilot application form on the live landing on the 24 Sep beat: link or embed, the consent line from Filza (N1-FZ-09), UTM tags per the scheme, and a test submission that lands in Saad's triage queue. Ship it hidden with the 19 Sep landing if that is easier and flip it on the day.",
+      "why": "Saad's N2-LW-01 (form live 24 Sep, triage within 48h) names an Asad switch that had no ticket; the beat is on Alex's marketing calendar.",
       "area": "Landing",
       "due": "2026-11-04",
       "priority": "P1",
@@ -15427,18 +15541,18 @@ window.LAUNCH_DATA = {
       ],
       "feeds": [],
       "gate": "N5",
-      "acceptance": "A test submission on 24 Sep reaches Lewis's queue and the form is visible on production.",
+      "acceptance": "A test submission on 24 Sep reaches Saad's queue and the form is visible on production.",
       "checklist": [
         "Embed or link the form with the consent line",
         "Add UTM tags per the scheme",
-        "Test a submission end-to-end with Lewis",
+        "Test a submission end-to-end with Saad",
         "Go live on 24 Sep and confirm to Alex"
       ],
       "source": "reconciler",
-      "layman": "Asad puts Lewis's pilot application form live on the website on 24 September, with the legal consent line, and tests that a submission reaches Lewis, so that people our marketing attracts can actually apply.",
+      "layman": "Asad puts Saad's pilot application form live on the website on 24 September, with the legal consent line, and tests that a submission reaches Saad, so that people our marketing attracts can actually apply.",
       "layman_analogy": "Like unlocking the shop's front door on opening morning and posting the first order slip through yourself to check it reaches the counter.",
-      "layman_needed": "Lewis's pilot application form visible on the live website on 24 September, carrying the legal consent line and tracking tags, with a test submission proven to land in Lewis's queue.",
-      "layman_output": "Lewis's pilot application form live on the public website on 24 September, carrying Filza's consent line and the agreed tracking tags, with a test submission proven to land in Lewis's triage queue. Anyone can open the live landing page, see the form, submit a test entry, and watch it arrive where Lewis will actually read it - the first working intake route from the public site.",
+      "layman_needed": "Saad's pilot application form visible on the live website on 24 September, carrying the legal consent line and tracking tags, with a test submission proven to land in Saad's queue.",
+      "layman_output": "Saad's pilot application form live on the public website on 24 September, carrying Filza's consent line and the agreed tracking tags, with a test submission proven to land in Saad's triage queue. Anyone can open the live landing page, see the form, submit a test entry, and watch it arrive where Saad will actually read it - the first working intake route from the public site.",
       "moved_from": "N2",
       "timebox_days": 0.25,
       "launch_stage": "beta",
@@ -15447,7 +15561,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.2,
+        "Asad": 0.05
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-AS-15",
@@ -15847,7 +15970,7 @@ window.LAUNCH_DATA = {
       "priority_reason": "Muteeb's alerts pipeline consumes it in N2",
       "depends_on": [
         "N2-AS-02",
-        "Lewis: complete incident window (N1)",
+        "Faheem: complete incident window (N1)",
         "P0-FH-07"
       ],
       "feeds": [
@@ -15883,7 +16006,7 @@ window.LAUNCH_DATA = {
       "id": "N2-FH-07",
       "sprint": "N4",
       "assignee": "Faheem",
-      "title": "Backtest on Lewis's incidents; first threshold tune vs decided gate",
+      "title": "Backtest on Faheem's incidents; first threshold tune vs decided gate",
       "what": "Run the detector over the complete window; report precision, coverage (incidents caught of N), and false alarms outside the list; tune per-archetype thresholds once. Record the result against the re-set pass line and coverage clause, or the shortfall in writing.",
       "why": "Precision is measured before a single pilot sees an alert.",
       "area": "Alerts",
@@ -15909,10 +16032,10 @@ window.LAUNCH_DATA = {
         "Tune thresholds per archetype",
         "Record pass/shortfall"
       ],
-      "layman": "Faheem replays the detector over Lewis's list of real past storms and counts what it caught and how often it cried wolf, tuning once, so that we know its true accuracy before a single pilot ever sees an alert.",
+      "layman": "Faheem replays the detector over Faheem's list of real past storms and counts what it caught and how often it cried wolf, tuning once, so that we know its true accuracy before a single pilot ever sees an alert.",
       "layman_analogy": "Like testing a new burglar alarm against last year's actual break-in log: how many would it have caught, and how many nights would it have woken the street for nothing.",
-      "layman_needed": "A written report of the detector replayed over Lewis's complete storm list - what it caught, what it missed, false alarms - with one round of tuning, measured against the signed quality bar or the shortfall recorded.",
-      "layman_output": "A written report of the detector replayed over Lewis's complete storm list: which storms it caught, which it missed, and how many false alarms it raised outside the list, after one round of tuning. The result will be recorded against the signed quality bar - or the shortfall written down honestly - so anyone can read one document and know whether the alert feature is good enough.",
+      "layman_needed": "A written report of the detector replayed over Faheem's complete storm list - what it caught, what it missed, false alarms - with one round of tuning, measured against the signed quality bar or the shortfall recorded.",
+      "layman_output": "A written report of the detector replayed over Faheem's complete storm list: which storms it caught, which it missed, and how many false alarms it raised outside the list, after one round of tuning. The result will be recorded against the signed quality bar - or the shortfall written down honestly - so anyone can read one document and know whether the alert feature is good enough.",
       "moved_from": "N2",
       "timebox_days": 2,
       "launch_stage": "beta",
@@ -16289,7 +16412,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-MT-01",
       "sprint": "N3",
-      "assignee": "Muteeb",
+      "assignee": "Faheem",
       "title": "Scoring endpoint production-grade: caching, p95 under 1s warm",
       "what": "Harden the N1 score endpoint: response cache keyed on tenant, page and draft hash, warm-path p95 under 1s measured on staging, and contract tests in CI. Serve the artifact that passed the gate (Borda gate plus regressor; LambdaRank lost the A/B). (Supersedes the 3 Aug draft-score lambda handoff; its requirements carry over: performance band + flop probability + top-3 reasons, with timing-based reasons suppressed.)",
       "why": "The gauge must move as the pilot types; a slow endpoint turns the wow moment into a wait.",
@@ -16332,12 +16455,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Faheem",
+      "effort_allocations": {
+        "Faheem": 1.5,
+        "Muteeb": 0.5
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-MT-02",
       "sprint": "N4",
-      "assignee": "Muteeb",
+      "assignee": "Faheem",
       "title": "Score endpoint carries drivers, confidence and coverage fields",
       "what": "Extend the score response per the N1 contract: top-k drivers mapped to Saad's chip vocabulary, a confidence/coverage flag, and an explicit abstain state when Faheem's no-strong-driver rule fires. Contract-test each field.",
       "why": "The chips and the abstain state read these fields; anything invented UI-side is the bogus-score failure.",
@@ -16375,12 +16507,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Faheem",
+      "effort_allocations": {
+        "Faheem": 0.75,
+        "Muteeb": 0.25
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-MT-03",
       "sprint": "N4",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Today feed and aggregate endpoints, tenant-scoped with page filter",
       "what": "Build the feed/aggregate endpoints the Today screen reads: next-move hero, moves checklist, typed feed cards (crisis, opportunity, signal, prediction, win) and setup pill state, all filterable by page_id per the multi-page model.",
       "why": "Asad's Today screen ships on the live API this sprint; without these endpoints the daily-loop demo runs on mocks.",
@@ -16420,7 +16561,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 2.4000000000000004,
+        "Muteeb": 0.6000000000000001
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-MT-04",
@@ -16475,7 +16625,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-MT-05",
       "sprint": "N4",
-      "assignee": "Muteeb",
+      "assignee": "Faheem",
       "title": "RAG plumbing starts: tenant-namespaced index, ingest job, versioning",
       "what": "Stand up the tenant-namespaced vector index (start on pgvector per the feature map; Jill's Pinecone tier decision lands in N3 and can swap the backend behind the same namespace interface), an ingest job that embeds per-tenant content with cost logged, and index versioning so a re-embed can be rolled back. No Q&A yet; that is N3.",
       "why": "Art-E needs N3 and N4 to mature; starting later was the number one capacity risk the critics flagged.",
@@ -16519,12 +16669,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Faheem",
+      "effort_allocations": {
+        "Faheem": 2.25,
+        "Muteeb": 0.75
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-MT-06",
       "sprint": "N4",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Build the data-removal flow alongside Meta connection",
       "what": "With Filza, agree what a genuine removal request must remove. Implement request validation, the correct customer/page lookup, deletion of applicable stored copies and a confirmation/status response. This is future build work.",
       "why": "Customers need a working removal route before the integration opens to them.",
@@ -16566,7 +16725,16 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-17T12:00:00Z"
+      "checklist_revised_at": "2026-09-17T12:00:00Z",
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 1.6,
+        "Muteeb": 0.4
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-MT-07",
@@ -16657,7 +16825,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-MT-11",
       "sprint": "N4",
-      "assignee": "Muteeb",
+      "assignee": "Faheem",
       "title": "Build the live labelling path in the fast-lane and send Faheem the timing",
       "what": "Implement the seam-1 design: fetched comments are labelled (sentiment, toxicity) on a live path so fetch plus label stays inside the 15-minute budget, with the backlog drain running separately. Measure end-to-end latency on staging and send Faheem the timing and where labelling sits.",
       "why": "Faheem needs the fast-lane timing by N2; polling fast is not labelling fast, and the N3 drill measures the whole chain.",
@@ -16695,7 +16863,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Faheem",
+      "effort_allocations": {
+        "Faheem": 1.5,
+        "Muteeb": 0.5
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-MT-13",
@@ -16783,7 +16960,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-MT-15",
       "sprint": "N4",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Implement the Meta Deauthorize callback beside the deletion one",
       "what": "Add the second callback the app dashboard requires: verify the signed_request, resolve the Facebook user and pages to tenant and page ids, revoke the stored tokens and mark those pages disconnected, then run the same cascade Filza's N2-FZ-02 spec defines for deletion (or record why deauthorize retains and deletion purges, so the privacy policy stays true). Register the URL in the dashboard with the deletion callback and log every call.",
       "why": "A user who removes the app from their Facebook settings never hits our disconnect flow; without this callback we keep live tokens and rows for a user who revoked us, which is both an App Review finding and a contradiction of the published privacy policy.",
@@ -16820,7 +16997,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 0.8,
+        "Muteeb": 0.2
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-MT-16",
@@ -16872,7 +17058,7 @@ window.LAUNCH_DATA = {
       "sprint": "N2",
       "assignee": "Saad",
       "title": "Record the re-scoped crisis gate in the gate register",
-      "what": "Once Asad and Faheem set the crisis pass line from the hour-of-week measurement (5+ / 1-5 / <1 comments per hour branches), write it into the gate register no later than Fri 25 Sep, before Faheem's first threshold tune: the precision number, the page scope it applies to, a coverage floor or 'must catch N of Lewis's incidents' clause, and the clock definition comment-posted -> email-received including the live labelling step (seam 1).",
+      "what": "Once Asad and Faheem set the crisis pass line from the hour-of-week measurement (5+ / 1-5 / <1 comments per hour branches), write it into the gate register no later than Fri 25 Sep, before Faheem's first threshold tune: the precision number, the page scope it applies to, a coverage floor or 'must catch N of Saad's incidents' clause, and the clock definition comment-posted -> email-received including the live labelling step (seam 1).",
       "why": "As written, a detector that alerts once a month could pass while missing every storm; and tuning against an unset gate cannot be judged at Sat 17 Oct 2026.",
       "area": "Alerts",
       "due": "2026-09-25",
@@ -16880,7 +17066,7 @@ window.LAUNCH_DATA = {
       "priority_reason": "The decision itself is Asad's with Faheem (CONTEXT); Saad's register entry is the record. Faheem's tuning does not wait on the PM entry, and the Wed 7 Oct 2026 gate that reads it is three weeks away.",
       "depends_on": [
         "Asad: crisis gate decisions 1 + 2 with Faheem",
-        "Lewis: complete incident window (20+) by end N1",
+        "Saad: complete incident window (20+) by end N1",
         "N1-FH-09"
       ],
       "feeds": [
@@ -16894,12 +17080,12 @@ window.LAUNCH_DATA = {
         "Enter pass line + scope + coverage/incident-count clause in the register",
         "Define the gate clock end-to-end incl. labelling, per Faheem's seam 1",
         "Note the recall posture line Faheem is adding to the crisis doc",
-        "Circulate to Lewis (drill) and Alex (criteria)"
+        "Circulate to Saad (drill) and Alex (criteria)"
       ],
       "layman": "Writing the pass mark for the crisis-warning feature into our official checklist - how accurate it must be and how fast, from comment posted to email received - so we can honestly judge in October whether it's good enough.",
       "layman_analogy": "Like writing the pass mark on the exam paper before anyone sits it, so October's marking can't be argued about.",
       "layman_needed": "An entry in the gate register, dated before the first tuning run, stating the crisis feature's required accuracy, which pages it covers, how many real incidents it must catch, and the exact stopwatch definition.",
-      "layman_output": "A dated entry in the gate register, filed before Faheem's first tuning run, stating what the crisis feature must achieve to pass on 2 October: the required accuracy figure, which pages it covers, how many of Lewis's real incidents it must catch, and the stopwatch definition from comment posted to email received. Anyone judging the gate can check the detector against a line set in advance.",
+      "layman_output": "A dated entry in the gate register, filed before Faheem's first tuning run, stating what the crisis feature must achieve to pass on 2 October: the required accuracy figure, which pages it covers, how many of Saad's real incidents it must catch, and the stopwatch definition from comment posted to email received. Anyone judging the gate can check the detector against a line set in advance.",
       "timebox_days": 0.25,
       "launch_stage": "beta",
       "estimated_days": 0.25,
@@ -16962,7 +17148,7 @@ window.LAUNCH_DATA = {
       "id": "N2-SD-03",
       "sprint": "N3",
       "assignee": "Saad",
-      "title": "Decide the notification timing policy with Alex + Lewis",
+      "title": "Decide the notification timing policy with Alex + Saad",
       "what": "Run one decision meeting and write the policy: what happens when a storm fires at 2am (quiet hours, severity override, digest vs immediate, morning digest, what the user can configure, alerts logged during quiet hours), plus the timezone quiet hours are evaluated in (admin profile vs page-local) and how a DST change moves the boundary. Feed it to Muteeb's alerts pipeline, Faheem's crisis doc and Asad's N3 build. Per Alex (14 Sep): alerts should feel like a WhatsApp notification with a hook; the hook copy follows in N2-SD-20. Added in the 16 Sep review: Add a notification budget to the policy across every hook type (crisis, taking off, audience change, collaboration opportunity, briefing): daily and weekly caps per page and per account for multi-page admins, a priority order and same-type bundling when over budget, only crisis severity breaking through quiet hours, and automatic step-down to the morning digest after three ignored hooks of one type. N3-FH-02 enforces the budget, and a seeded burst of six hooks on staging delivers only the budgeted ones. No longer waits on N2-LW-02 (parked in the 16 Sep balancing).",
       "why": "The only unowned product decision in the plan; it decides whether 'caught in minutes' is a product claim or marketing copy.",
       "area": "Alerts",
@@ -16986,7 +17172,7 @@ window.LAUNCH_DATA = {
       "source": "saad",
       "acceptance": "A written policy exists, signed by Alex, and the Alerts/Settings acceptance lines reference it.",
       "checklist": [
-        "Book Alex + Lewis in one room by 22 Sep (Alex N2-AX-01 is dated 23 Sep)",
+        "Book Alex + Saad in one room by 22 Sep (Alex N2-AX-01 is dated 23 Sep)",
         "Decide quiet hours default, severity override, digest vs immediate, user controls",
         "State that quiet-hour alerts are logged and surface in the morning digest",
         "Hand to Muteeb (engine), Faheem (crisis doc), Asad (Settings v1)",
@@ -17199,15 +17385,15 @@ window.LAUNCH_DATA = {
       "id": "N2-SD-10",
       "sprint": "N4",
       "assignee": "Saad",
-      "title": "Commission the blind human comment gold set with Lewis",
-      "what": "With Lewis, commission 200 comments labelled blind under a shared rubric by labelers independent of the model authors. Sample from the pre-collapse historical comment corpus (~39k unlabelled), exclude the 25-29 Aug anomaly window, and record provenance from the start.",
+      "title": "Commission the blind human comment gold set with Saad",
+      "what": "With Saad, commission 200 comments labelled blind under a shared rubric by labelers independent of the model authors. Sample from the pre-collapse historical comment corpus (~39k unlabelled), exclude the 25-29 Aug anomaly window, and record provenance from the start.",
       "why": "Agreement with DeepSeek is not accuracy; without this the N4 accuracy audit and the crisis toxicity fix have no human truth.",
       "area": "QA",
       "due": "2026-10-23",
       "priority": "P1",
       "priority_reason": "Real risk; delivered N3, consumed N4, so slack exists",
       "depends_on": [
-        "Lewis: labelers",
+        "Saad: labelers",
         "Faheem: rubric input",
         "N1-SD-01",
         "N2-FH-10"
@@ -17223,7 +17409,7 @@ window.LAUNCH_DATA = {
       "checklist": [
         "Write the rubric with Faheem's label classes; keep labelers blind to model output",
         "Draw the 200 sample from historical comments; annotate/exclude the anomaly window",
-        "Brief labelers with Lewis; agree the N3 delivery date",
+        "Brief labelers with Saad; agree the N3 delivery date",
         "Record provenance in the gold-set register"
       ],
       "layman": "Paying independent people to judge 200 real comments by hand, without seeing what our software said, so we have a genuine human answer key to measure our comment-reading accuracy against.",
@@ -17557,7 +17743,7 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N2",
       "source": "plan",
-      "acceptance": "A signed one-page pricing sheet exists and Jill, Saad, Lewis and Asad confirm they copy from it.",
+      "acceptance": "A signed one-page pricing sheet exists and Jill, Saad, Alex and Asad confirm they copy from it.",
       "checklist": [
         "Review the cost model",
         "Set tiers and the founding price",
@@ -17567,8 +17753,8 @@ window.LAUNCH_DATA = {
       ],
       "layman": "The CEO signing off our prices, based on Jill's cost workings, locked on 2 October - so the website, directory listings, invoices and customer notices all quote one price instead of five slightly different ones.",
       "layman_analogy": "Like the owner setting the menu prices once from the accountant's costings, so the menu, window card and bills all say the same number.",
-      "layman_needed": "A signed one-page pricing sheet - tiers, founding price, what pilots pay - with Jill, Saad, Lewis and Asad confirming their documents all copy from it.",
-      "layman_output": "A signed one-page pricing sheet: the tiers, the founding price, and what pilots pay from their first invoice, with a placeholder for how non-pilot signups are handled. It lives as the single source, and Jill, Saad, Lewis and Asad each confirm their documents — waitlist copy, listings, invoice template, the founding-pricing notice in the week of Tue 24 Nov 2026 — copy from it, so one price appears everywhere instead of five drifting versions.",
+      "layman_needed": "A signed one-page pricing sheet - tiers, founding price, what pilots pay - with Jill, Saad, Alex and Asad confirming their documents all copy from it.",
+      "layman_output": "A signed one-page pricing sheet: the tiers, the founding price, and what pilots pay from their first invoice, with a placeholder for how non-pilot signups are handled. It lives as the single source, and Jill, Saad, Alex and Asad each confirm their documents — waitlist copy, listings, invoice template, the founding-pricing notice in the week of Tue 24 Nov 2026 — copy from it, so one price appears everywhere instead of five drifting versions.",
       "launch_stage": "beta",
       "estimated_days": 0.5,
       "estimate_source": "16 Sep inherited effort estimate; not a new team commitment",
@@ -17603,7 +17789,7 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N4",
       "source": "plan",
-      "acceptance": "A written fallback plan with allowed/banned claims and the Fri 27 Nov 2026 and Fri 11 Dec 2026 triggers is filed with the decisions calendar and acknowledged by Saad, Lewis and Filza, and it states the dev-mode Tester role limit against the beta invite list and the launch wave sizes so no one is promised a connect Meta cannot honour.",
+      "acceptance": "A written fallback plan with allowed/banned claims and the Fri 27 Nov 2026 and Fri 11 Dec 2026 triggers is filed with the decisions calendar and acknowledged by Saad, Alex and Filza, and it states the dev-mode Tester role limit against the beta invite list and the launch wave sizes so no one is promised a connect Meta cannot honour.",
       "checklist": [
         "Describe the dev-mode launch shape",
         "List allowed vs banned claims with Filza",
@@ -17613,8 +17799,8 @@ window.LAUNCH_DATA = {
       ],
       "layman": "Writing the plan B for launch day if Facebook approval hasn't come through: pilots keep using the product in test mode, new signups join a queue, and marketing only claims what actually works - decided calmly now, not scrambled on the day.",
       "layman_analogy": "Like writing the rain plan for an outdoor wedding in the calm of summer - marquee, seating, revised invitations - not while the clouds burst.",
-      "layman_needed": "A filed written plan for the private beta on Tue 1 Dec 2026 and the public launch on Tue 15 Dec 2026 without Facebook approval - allowed and banned claims, pilot messaging, invited beta accounts and public waitlist waves kept within tester limits, and the Fri 27 Nov 2026 and Fri 11 Dec 2026 triggers - acknowledged by Saad, Lewis and Filza.",
-      "layman_output": "A filed written plan for both openings without Facebook approval: at the private beta on Tue 1 Dec 2026 the pilots and invited accounts stay on Tester roles, at the public launch on Tue 15 Dec 2026 open sign-ups join a waitlist in waves sized within the Tester limit, and marketing claims only what the restricted product truly does, with allowed and banned claims listed and both triggers named (no approval by Fri 27 Nov 2026 for the beta, by Fri 11 Dec 2026 for the launch). Saad, Lewis and Filza have acknowledged it, so plan B is a document, not a scramble.",
+      "layman_needed": "A filed written plan for the private beta on Tue 1 Dec 2026 and the public launch on Tue 15 Dec 2026 without Facebook approval - allowed and banned claims, pilot messaging, invited beta accounts and public waitlist waves kept within tester limits, and the Fri 27 Nov 2026 and Fri 11 Dec 2026 triggers - acknowledged by Saad, Alex and Filza.",
+      "layman_output": "A filed written plan for both openings without Facebook approval: at the private beta on Tue 1 Dec 2026 the pilots and invited accounts stay on Tester roles, at the public launch on Tue 15 Dec 2026 open sign-ups join a waitlist in waves sized within the Tester limit, and marketing claims only what the restricted product truly does, with allowed and banned claims listed and both triggers named (no approval by Fri 27 Nov 2026 for the beta, by Fri 11 Dec 2026 for the launch). Saad, Alex and Filza have acknowledged it, so plan B is a document, not a scramble.",
       "moved_from": "N2",
       "timebox_days": 0.5,
       "launch_stage": "beta",
@@ -17675,7 +17861,7 @@ window.LAUNCH_DATA = {
       "sprint": "N3",
       "assignee": "Jill",
       "title": "Support inbox live with a written first-response standard",
-      "what": "Stand up support@ on the company domain (shared inbox, SPF/DKIM-aligned replies so they do not land in spam), a triage label set (bug, data question, pilot, billing, legal/DSAR), and a written first-response standard: hours covered, first-response target, and escalation to Muteeb/Asad/Lewis for infra, app and pilot issues. Publish it internally; Saad's macros (N4-N5) and Asad's N5 site/in-app support expectation reuse it verbatim, and pilots 1-5 get the address as they onboard.",
+      "what": "Stand up support@ on the company domain (shared inbox, SPF/DKIM-aligned replies so they do not land in spam), a triage label set (bug, data question, pilot, billing, legal/DSAR), and a written first-response standard: hours covered, first-response target, and escalation to Muteeb/Asad/Jill for infra, app and pilot issues. Publish it internally; Saad's macros (N4-N5) and Asad's N5 site/in-app support expectation reuse it verbatim, and pilots 1-5 get the address as they onboard.",
       "why": "A dead support@ at launch is a broken promise; the first pilots arrive from 24 Sep and the DSAR intake in N4 also lands here.",
       "area": "Ops",
       "due": "2026-10-07",
@@ -17683,7 +17869,7 @@ window.LAUNCH_DATA = {
       "priority_reason": "Real risk with slack: pilots onboard this sprint but Lewis is their concierge; the standard must exist before Asad publishes it in N5.",
       "depends_on": [
         "Muteeb: mailbox/DNS on the sending domain",
-        "Lewis: pilot onboarding dates (form live 17 Sep)"
+        "Jill: pilot onboarding dates (form live 17 Sep)"
       ],
       "feeds": [
         "LW-JL-02",
@@ -17694,18 +17880,18 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N3",
       "source": "plan",
-      "acceptance": "support@ receives and routes mail, the first-response standard is written and shared with Saad, Asad and Lewis, and a test ticket was answered inside the standard.",
+      "acceptance": "support@ receives and routes mail, the first-response standard is written and shared with Saad, Asad and Jill, and a test ticket was answered inside the standard.",
       "checklist": [
         "Create the shared inbox and confirm SPF/DKIM alignment with Muteeb",
         "Define labels and the escalation matrix (who owns bug, data, pilot, billing, DSAR)",
         "Write the first-response standard (hours, target, escalation)",
         "Send a test ticket; answer it inside the standard",
-        "Share the standard with Saad, Asad, Lewis; add the address to pilot onboarding"
+        "Share the standard with Saad, Asad, Jill; add the address to pilot onboarding"
       ],
       "layman": "Getting a proper support email address live with a written promise of how fast we reply and who handles what, so the first pilot customers arriving from 24 September never write into a dead inbox.",
       "layman_analogy": "Like putting a staffed reception desk in before the first guests arrive, with a promise on the wall of how fast the bell gets answered.",
-      "layman_needed": "A live support address that receives and routes mail, a written first-response standard shared with Saad, Asad and Lewis, and one test ticket answered within it.",
-      "layman_output": "A live support@ address on the company domain that receives and routes mail without landing in spam, with a triage label set (bug, data question, pilot, billing, legal) and a written first-response standard — hours covered, response target, who handles what. It is shared with Saad, Asad and Lewis, one test ticket has been answered inside the standard, and the first pilots get the address as they onboard.",
+      "layman_needed": "A live support address that receives and routes mail, a written first-response standard shared with Saad, Asad and Jill, and one test ticket answered within it.",
+      "layman_output": "A live support@ address on the company domain that receives and routes mail without landing in spam, with a triage label set (bug, data question, pilot, billing, legal) and a written first-response standard — hours covered, response target, who handles what. It is shared with Saad, Asad and Jill, one test ticket has been answered inside the standard, and the first pilots get the address as they onboard.",
       "moved_from": "N2",
       "timebox_days": 0.5,
       "launch_stage": "beta",
@@ -17867,7 +18053,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-LW-01",
       "sprint": "N5",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "Application form live Wed 4 Nov 2026 and inbound triage within 48h",
       "what": "Switch the form live with Asad on Wed 4 Nov 2026, verify one live submission and the auto-reply, then triage every application within 48h against the cohort-2 criteria (non-declining page, admin role, archetype gap). Log applicants in the roster sheet as candidates for pilots 6-10 or the waitlist and give Alex a weekly count.",
       "why": "The 24 Sep marketing beat sends people to the form; a dead or untriaged form burns the first public ask.",
@@ -17905,12 +18091,21 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Jill",
+      "effort_allocations": {
+        "Jill": 0.75,
+        "Alex": 0.25
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-LW-03",
       "sprint": "N4",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Help confirmed pilots connect after the flow is ready",
       "what": "After the connection is tested and applicable pilot terms are agreed, help the confirmed pilots connect their authorised pages. Record errors and confirm real data appears. Do not assume a fixed number of committed pilots.",
       "why": "Real pages on the real product while Meta reviews is the insulation strategy; the gate demo needs at least one pilot page with real data.",
@@ -17953,12 +18148,21 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 1.5,
+        "Asad": 0.5
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-LW-04",
       "sprint": "N4",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "Cohort-1 feedback loop and the fix-then-invite list",
       "what": "Run the two weekly calls with the pilots already connected, capture what they saw on Today and the gauge, rank issues by severity and hand them to Saad each Friday for his digest. Produce the fix-then-invite list: the defects that must be fixed before pilots 6-10 are invited in N5, agreed with Saad and Asad.",
       "why": "Feedback that is not ranked is noise; inviting cohort 2 onto known-broken flows burns five relationships.",
@@ -17997,7 +18201,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Jill",
+      "effort_allocations": {
+        "Jill": 1.5,
+        "Alex": 0.5
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-FZ-01",
@@ -18144,8 +18357,8 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Filza",
       "title": "Prepare applicable pilot terms before real-data onboarding",
-      "what": "Prepare a signable pilot agreement based on the actual product and pilot relationship. Explain AI guidance limitations, responsibilities and applicable data terms. Give Lewis the approved version before onboarding; neither a form launch nor a date proves a customer has signed.",
-      "why": "Lewis onboards pilots 1-5 this sprint; pilots on the real product without paper is exposure, and the same text must be countersigned by all five before N5 UAT.",
+      "what": "Prepare a signable pilot agreement based on the actual product and pilot relationship. Explain AI guidance limitations, responsibilities and applicable data terms. Give Alex the approved version before onboarding; neither a form launch nor a date proves a customer has signed.",
+      "why": "Alex onboards pilots 1-5 this sprint; pilots on the real product without paper is exposure, and the same text must be countersigned by all five before N5 UAT.",
       "area": "Pilots",
       "due": "2026-10-21",
       "priority": "P0",
@@ -18163,14 +18376,14 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N4",
       "source": "plan",
-      "acceptance": "Filza has approved the applicable pilot agreement; Lewis has a signable version linked to the clearance register.",
+      "acceptance": "Filza has approved the applicable pilot agreement; Alex has a signable version linked to the clearance register.",
       "checklist": [
-        "Filza has approved the applicable pilot agreement; Lewis has a signable version linked to the clearance register."
+        "Filza has approved the applicable pilot agreement; Alex has a signable version linked to the clearance register."
       ],
-      "layman": "Prepare a signable pilot agreement based on the actual product and pilot relationship. Explain AI guidance limitations, responsibilities and applicable data terms. Give Lewis the approved version before onboarding; neither a form launch nor a date proves a customer has signed.",
+      "layman": "Prepare a signable pilot agreement based on the actual product and pilot relationship. Explain AI guidance limitations, responsibilities and applicable data terms. Give Alex the approved version before onboarding; neither a form launch nor a date proves a customer has signed.",
       "layman_analogy": "Like the waiver a climbing wall has you sign before you touch the holds: guidance offered, outcomes not guaranteed, liability capped.",
       "layman_needed": "Use the existing implementation, records and named dependencies. Record missing facts instead of assuming them.",
-      "layman_output": "Filza has approved the applicable pilot agreement; Lewis has a signable version linked to the clearance register.",
+      "layman_output": "Filza has approved the applicable pilot agreement; Alex has a signable version linked to the clearance register.",
       "moved_from": "N2",
       "timebox_days": 1,
       "launch_stage": "beta",
@@ -18182,7 +18395,7 @@ window.LAUNCH_DATA = {
       },
       "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident.",
       "checklist_revised_at": "2026-09-17T12:00:00Z",
-      "critical_review_note": "17 September critical review: Prepare a signable pilot agreement based on the actual product and pilot relationship. Explain AI guidance limitations, responsibilities and applicable data terms. Give Lewis the approved version before onboarding; neither a form launch nor a date proves a customer has signed.",
+      "critical_review_note": "17 September critical review: Prepare a signable pilot agreement based on the actual product and pilot relationship. Explain AI guidance limitations, responsibilities and applicable data terms. Give Alex the approved version before onboarding; neither a form launch nor a date proves a customer has signed.",
       "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies."
     },
     {
@@ -18239,7 +18452,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Filza",
       "title": "Sign DPA v1 with sub-processor list and change-notice clause",
-      "what": "Finish the processor DPA pilots sign: processing description (read-only page analytics, scoring, alerts, Discovery cohorts, Art-E), the sub-processor list from the vendor gate (AWS, auth vendor, SES, vector index, LLM tiers, waitlist tool, Sentry, status page), the change-notice clause, a security-measures summary (KMS, RLS, backups), breach notification timing and deletion/return terms. Hand to Lewis for pilot signature.",
+      "what": "Finish the processor DPA pilots sign: processing description (read-only page analytics, scoring, alerts, Discovery cohorts, Art-E), the sub-processor list from the vendor gate (AWS, auth vendor, SES, vector index, LLM tiers, waitlist tool, Sentry, status page), the change-notice clause, a security-measures summary (KMS, RLS, backups), breach notification timing and deletion/return terms. Hand to Alex for pilot signature.",
       "why": "Pack v1 is the N2 deliverable; a missing DPA stalls pilot sign-up and later the invoices.",
       "area": "Legal",
       "due": "2026-10-22",
@@ -18257,17 +18470,17 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N4",
       "source": "plan",
-      "acceptance": "DPA v1 signed by Alex with a complete sub-processor list and change-notice clause, and Lewis has the signable version.",
+      "acceptance": "DPA v1 signed by Alex with a complete sub-processor list and change-notice clause, and Alex has the signable version.",
       "checklist": [
         "Finalise the processing description per the lawful-bases map",
         "Insert the sub-processor rows from the vendor gate",
         "Write the change-notice, breach-timing and deletion terms",
-        "Alex signs; Lewis receives the signable version"
+        "Alex signs; Alex receives the signable version"
       ],
       "layman": "Finishing the data-handling agreement pilots sign - naming every supplier that touches their data, our security measures, and how we'd notify them of a breach - so pilot sign-ups and later invoicing aren't stalled by missing paperwork.",
       "layman_analogy": "Like a removals contract that names every subcontractor who'll touch your boxes and promises to tell you if the crew changes.",
-      "layman_needed": "A data-handling agreement signed by Alex with the complete supplier list, change-notice clause, security summary and breach-notification terms, with a signable copy in Lewis's hands.",
-      "layman_output": "The finished data-processing agreement pilots sign: what processing happens (read-only page analytics, scoring, alerts, the assistant), the complete supplier list from the vendor checks, a change-notice clause, a summary of security measures, breach-notification timing and deletion terms — signed by Alex, with a signable copy in Lewis's hands so pilot sign-up is never stalled waiting for paper.",
+      "layman_needed": "A data-handling agreement signed by Alex with the complete supplier list, change-notice clause, security summary and breach-notification terms, with a signable copy in Alex's hands.",
+      "layman_output": "The finished data-processing agreement pilots sign: what processing happens (read-only page analytics, scoring, alerts, the assistant), the complete supplier list from the vendor checks, a change-notice clause, a summary of security measures, breach-notification timing and deletion terms — signed by Alex, with a signable copy in Alex's hands so pilot sign-up is never stalled waiting for paper.",
       "moved_from": "N2",
       "timebox_days": 1,
       "launch_stage": "beta",
@@ -18399,7 +18612,7 @@ window.LAUNCH_DATA = {
         "Define the launch-slips and term clauses",
         "Insert the signed pricing on 2 Oct",
         "Review Jill's invoice template for particulars and VAT wording",
-        "Attach the schedule to the pilot agreement for Lewis"
+        "Attach the schedule to the pilot agreement for Alex"
       ],
       "layman": "Writing the money side of the pilot agreement (price, payment terms, VAT) plus a matching invoice template, so when we bill pilot customers in November the paperwork already exists and nothing gets disputed.",
       "layman_analogy": "Like drafting the tenancy's rent schedule with the price left as a blank to ink in the day the landlord decides, so nothing else waits.",
@@ -18456,7 +18669,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-AS-01",
       "sprint": "N4",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Crisis Alerts inbox: triage strip, cited cards, action, drafted reply",
       "what": "Alerts screen on Muteeb's alerts endpoints: triage strip (needs-you / opportunity / briefing counts), cards with severity, cited posts and comments resolving to sources, ONE suggested action and the drafted calm reply (copy-to-clipboard, never auto-posted), mark-all-read.",
       "why": "The PROTECT surface and the Sat 17 Oct 2026 drill's in-app leg; the drafted reply is the differentiator.",
@@ -18497,12 +18710,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.6,
+        "Asad": 0.4
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-AS-02",
       "sprint": "N4",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Integrate the waitlist with themed UI and UTM attribution",
       "what": "Replace the landing's Netlify Forms modal with Jill's bought waitlist tool, embedded and themed to the tokens; UTM per directory (BetaList, PH, G2, newsletter) captured into the tool; PECR-compliant consent wording, tested unsubscribe and no pre-consent pixels per Filza; queue position visible; live the scheduled ticket date, opens publicly Sun 11 Oct 2026.",
       "why": "One-shot directory traffic must hold and attribute; the Sun 11 Oct 2026 opening and the Tue 24 Nov 2026 founding-pricing and Tue 15 Dec 2026 public launch emails depend on a lawful list.",
@@ -18547,7 +18769,16 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.6,
+        "Asad": 0.4
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-AS-03",
@@ -18591,7 +18822,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-AS-04",
       "sprint": "N4",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Alert emails deep-linking into the app; bells with real unread counts",
       "what": "SES email from Saad's crisis email template: cited post, one action, drafted reply, auth-aware deep link to the alert card; dark-mode QA'd in major clients; outbound crisis email sits behind a feature flag (the N6 kill switch). Topbar bells reading Muteeb's unread-count endpoints, decrementing on read / mark-all-read, per-page via the switcher.",
       "why": "Email is the re-engagement trigger and the drill clock ends at email-received; wrong bell counts erode trust instantly.",
@@ -18630,12 +18861,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 2.4000000000000004,
+        "Asad": 0.6000000000000001
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-AS-07",
       "sprint": "N5",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "'Not a crisis' feedback button and all-clear notice",
       "what": "On each alert card a 'Not a crisis' button posting reason + incident id to the feedback store; when the detector marks an incident subsided, show an all-clear notice on the card and in Today's feed and include the all-clear line in the digest email.",
       "why": "False-alarm data from the people who know feeds Faheem's N4 tuning; closure stops pilots worrying.",
@@ -18673,21 +18913,30 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-AS-10",
       "sprint": "N5",
       "assignee": "Asad",
       "title": "Reconcile displayed pilot metrics against Meta",
-      "what": "With Lewis, compare every numeric metric actually displayed in Today and briefing against Meta Business Suite for one pilot and the same time window. Document definition, attribution and timezone differences beside the relevant metrics. Deferred Analytics tiles and composite health factors are excluded.",
+      "what": "With Alex, compare every numeric metric actually displayed in Today and briefing against Meta Business Suite for one pilot and the same time window. Document definition, attribution and timezone differences beside the relevant metrics. Deferred Analytics tiles and composite health factors are excluded.",
       "why": "Pilots check our numbers against their Insights; an unexplained mismatch poisons every predictive claim.",
       "area": "Analytics",
       "due": "2026-11-05",
       "priority": "P1",
       "priority_reason": "Benchmark trust fix; needs Lewis's access",
       "depends_on": [
-        "Lewis: pilot page + Insights access"
+        "Alex: pilot page + Insights access"
       ],
       "feeds": [
         "N4-FH-17"
@@ -18698,7 +18947,7 @@ window.LAUNCH_DATA = {
       "checklist": [
         "Displayed launch metrics reconcile for one pilot; known differences are documented in-product. No deferred health or Analytics implementation is required."
       ],
-      "layman": "With Lewis, compare every numeric metric actually displayed in Today and briefing against Meta Business Suite for one pilot and the same time window. Document definition, attribution and timezone differences beside the relevant metrics. Deferred Analytics tiles and composite health factors are excluded.",
+      "layman": "With Alex, compare every numeric metric actually displayed in Today and briefing against Meta Business Suite for one pilot and the same time window. Document definition, attribution and timezone differences beside the relevant metrics. Deferred Analytics tiles and composite health factors are excluded.",
       "layman_needed": "Displayed launch metrics reconcile for one pilot; known differences are documented in-product. No deferred health or Analytics implementation is required.",
       "layman_output": "Displayed launch metrics reconcile for one pilot; known differences are documented in-product. No deferred health or Analytics implementation is required.",
       "moved_from": "N3",
@@ -18715,7 +18964,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-AS-11",
       "sprint": "N4",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Settings v1: prefs, notifications, connected pages, data controls",
       "what": "Settings screen: profile prefs, notification prefs (channels, quiet hours per policy), connected pages with health and disconnect, data controls section with export/delete entry points (wired in N4), links to Privacy/ToS; per Saad's Settings pack and one-pager. No longer waits on N3-AS-06 (parked in the 16 Sep balancing).",
       "why": "Where consent, quiet hours and data rights physically live; Filza's N4 witnessed runs start here.",
@@ -18752,7 +19001,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.6,
+        "Asad": 0.4
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-AS-12",
@@ -18803,7 +19061,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-AS-13",
       "sprint": "N5",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "E2E flows 1-3 in CI (signup->connect, daily loop, draft score)",
       "what": "E2E flows against staging (runner per the stack decision; Playwright assumed): (1) signup -> verify -> connect a test page, (2) daily loop: login -> Today -> open a move/alert, (3) type a draft -> score + chips render or abstain; trace-on-retry, sharded, blocking PR merge.",
       "why": "Regressions caught by robots, not pilots; the freeze needs a net that already exists.",
@@ -18842,15 +19100,26 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1,
+        "Asad": 0.6,
+        "Muteeb": 0.4
+      },
+      "reviewers": [
+        "Asad",
+        "Muteeb"
+      ],
+      "workload_note": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-AS-14",
       "sprint": "N4",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Fix cohort-1 blockers before invited beta",
-      "what": "Take the five core pilots’ feedback list from N2-LW-04, fix blocking defects on staging and retest them with Lewis and Saad before the invited beta. Record nonblocking deferrals explicitly.",
-      "why": "Lewis's N3-LW-03 (Thu 8 Oct 2026) depends on 'Asad: fix-then-invite list cleared' and no ticket owned the fixes; inviting onto known blockers burns pilot goodwill.",
+      "what": "Take the five core pilots’ feedback list from N2-LW-04, fix blocking defects on staging and retest them with Saad and Saad before the invited beta. Record nonblocking deferrals explicitly.",
+      "why": "Saad's N3-LW-03 (Thu 8 Oct 2026) depends on 'Asad: fix-then-invite list cleared' and no ticket owned the fixes; inviting onto known blockers burns pilot goodwill.",
       "area": "App core",
       "due": "2026-10-28",
       "priority": "P1",
@@ -18867,7 +19136,7 @@ window.LAUNCH_DATA = {
         "Core-pilot blocking defects are fixed and retested before invited beta; remaining nonblocking items have recorded decisions."
       ],
       "source": "reconciler",
-      "layman": "Take the five core pilots’ feedback list from N2-LW-04, fix blocking defects on staging and retest them with Lewis and Saad before the invited beta. Record nonblocking deferrals explicitly.",
+      "layman": "Take the five core pilots’ feedback list from N2-LW-04, fix blocking defects on staging and retest them with Saad and Saad before the invited beta. Record nonblocking deferrals explicitly.",
       "layman_needed": "Core-pilot blocking defects are fixed and retested before invited beta; remaining nonblocking items have recorded decisions.",
       "layman_output": "Core-pilot blocking defects are fixed and retested before invited beta; remaining nonblocking items have recorded decisions.",
       "moved_from": "N3",
@@ -18882,7 +19151,18 @@ window.LAUNCH_DATA = {
       "audit_round_2": {
         "reason": "Keep the defect fixes; remove the obsolete invitation dependency on pilots 6–10."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1,
+        "Asad": 0.6,
+        "Muteeb": 0.4
+      },
+      "reviewers": [
+        "Asad",
+        "Muteeb"
+      ],
+      "workload_note": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-AS-16",
@@ -19104,9 +19384,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-FH-09",
       "sprint": "N4",
-      "assignee": "Lewis",
-      "title": "Review golden set v1 from Saad + Lewis; list coverage gaps for the 200",
-      "what": "Load Lewis and Saad's v1 (20 gate questions plus ~100) into the regression harness, check every row against the sheet format and provenance rules, and publish the coverage-gap list (per surface, per must-refuse category, qualitative-claim grounding, memory recall) that Lewis fills to reach 200 in N4-LW-03.",
+      "assignee": "Faheem",
+      "title": "Review golden set v1 from Saad + Alex; list coverage gaps for the 200",
+      "what": "Load Faheem and Saad's v1 (20 gate questions plus ~100) into the regression harness, check every row against the sheet format and provenance rules, and publish the coverage-gap list (per surface, per must-refuse category, qualitative-claim grounding, memory recall) that Faheem fills to reach 200 in N4-LW-03.",
       "why": "The 200-question citation gate cannot be built in N4 without questions arriving in N3.",
       "area": "Art-E",
       "due": "2026-10-29",
@@ -19125,17 +19405,17 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N4",
       "source": "faheem",
-      "acceptance": "v1 is loaded in the harness with provenance and Lewis has a written coverage-gap list by Fri 30 Oct 2026.",
+      "acceptance": "v1 is loaded in the harness with provenance and Faheem has a written coverage-gap list by Fri 30 Oct 2026.",
       "checklist": [
         "Load v1 and validate rows against the format",
         "Store provenance per question",
         "Write the coverage-gap list per surface and category",
-        "Send gaps to Lewis and Saad"
+        "Send gaps to Faheem and Saad"
       ],
       "layman": "Loading the first batch of test questions for the Art-E assistant into our nightly checking system and listing which topics still need questions, so the full 200-question accuracy test can be built next sprint.",
       "layman_analogy": "Like loading the first hundred flashcards into the revision deck and listing which exam topics still have no cards.",
-      "layman_needed": "The first batch of Art-E test questions loaded into the nightly checking system, each row verified against the sheet format, plus a written list with Lewis by Fri 30 Oct 2026 of the question topics still missing on the road to 200.",
-      "layman_output": "The first batch of Art-E test questions, the 20 gate questions plus roughly 100 more from Lewis and Saad, loaded into the nightly checking system, every row verified against the sheet format and its source rules. Alongside it, a written list handed to Lewis by Fri 30 Oct 2026 of the question topics still missing on the road to 200, so he knows exactly what to write next and nothing arrives unusable.",
+      "layman_needed": "The first batch of Art-E test questions loaded into the nightly checking system, each row verified against the sheet format, plus a written list with Faheem by Fri 30 Oct 2026 of the question topics still missing on the road to 200.",
+      "layman_output": "The first batch of Art-E test questions, the 20 gate questions plus roughly 100 more from Faheem and Saad, loaded into the nightly checking system, every row verified against the sheet format and its source rules. Alongside it, a written list handed to Faheem by Fri 30 Oct 2026 of the question topics still missing on the road to 200, so he knows exactly what to write next and nothing arrives unusable.",
       "moved_from": "N3",
       "timebox_days": 1,
       "launch_stage": "beta",
@@ -19146,22 +19426,22 @@ window.LAUNCH_DATA = {
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
       "effort_allocations": {
-        "Lewis": 0.5,
-        "Faheem": 0.5
+        "Faheem": 0.75,
+        "Alex": 0.25
       },
-      "delivery_lead": "Lewis",
+      "delivery_lead": "Faheem",
       "reviewers": [
-        "Faheem"
+        "Alex"
       ],
-      "workload_note": "Lewis assembles question coverage and missing customer scenarios; Faheem decides evaluation validity and technical coverage gaps. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      "workload_note": "Faheem owns data/evaluation analysis; Alex supplies customer interpretation or independent human judgement. The data partner is not an assigned analyst or reviewer. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-FH-12",
       "sprint": "N4",
       "assignee": "Faheem",
-      "title": "Golden-set sheet format + coverage rules for Saad and Lewis",
-      "what": "Publish the sheet format the nightly regression will consume (question, expected cited source or number, must-refuse category, adversarial flag, provenance, expected answer shape) and the coverage rules (per surface, per refusal category, qualitative-claim grounding, memory recall) so Lewis and Saad author v1 straight into it and Faheem loads it without rework.",
-      "why": "Lewis's N3-LW-07 depends on 'Faheem: sheet format for the nightly regression' and no Faheem ticket produced it before Fri 30 Oct 2026.",
+      "title": "Golden-set sheet format + coverage rules for Saad and Faheem",
+      "what": "Publish the sheet format the nightly regression will consume (question, expected cited source or number, must-refuse category, adversarial flag, provenance, expected answer shape) and the coverage rules (per surface, per refusal category, qualitative-claim grounding, memory recall) so Faheem and Saad author v1 straight into it and Faheem loads it without rework.",
+      "why": "Faheem's N3-LW-07 depends on 'Faheem: sheet format for the nightly regression' and no Faheem ticket produced it before Fri 30 Oct 2026.",
       "area": "Art-E",
       "due": "2026-10-27",
       "priority": "P1",
@@ -19176,18 +19456,18 @@ window.LAUNCH_DATA = {
         "N4-MT-30"
       ],
       "gate": "N4",
-      "acceptance": "Lewis and Saad author v1 in the published format and Faheem loads it into the regression harness without reformatting.",
+      "acceptance": "Faheem and Saad author v1 in the published format and Faheem loads it into the regression harness without reformatting.",
       "checklist": [
         "Define columns and provenance fields",
         "Write the coverage rules per surface and category",
         "Share a sample row set",
-        "Confirm with Lewis and Saad"
+        "Confirm with Faheem and Saad"
       ],
       "source": "reconciler",
-      "layman": "Publishing the exact spreadsheet format and coverage rules for the Art-E test questions, so Lewis and Saad can write them once, in the right shape, and they feed straight into the nightly checks without rework.",
+      "layman": "Publishing the exact spreadsheet format and coverage rules for the Art-E test questions, so Faheem and Saad can write them once, in the right shape, and they feed straight into the nightly checks without rework.",
       "layman_analogy": "Like handing the exam-setters the official answer-sheet template and syllabus rules before they write a single question.",
-      "layman_needed": "A published spreadsheet format and coverage rules for the Art-E test questions, proven by Lewis and Saad writing their first batch straight into it and Faheem loading it into the nightly checks without any reformatting.",
-      "layman_output": "A published spreadsheet format and coverage rules for the Art-E test questions — columns for the question, the expected cited source, must-refuse category, trick-question flag and provenance — proven by Lewis and Saad writing their first batch straight into it and Faheem loading that batch into the nightly checks with zero reformatting. The 200-question gate now has a container everyone writes into.",
+      "layman_needed": "A published spreadsheet format and coverage rules for the Art-E test questions, proven by Faheem and Saad writing their first batch straight into it and Faheem loading it into the nightly checks without any reformatting.",
+      "layman_output": "A published spreadsheet format and coverage rules for the Art-E test questions — columns for the question, the expected cited source, must-refuse category, trick-question flag and provenance — proven by Faheem and Saad writing their first batch straight into it and Faheem loading that batch into the nightly checks with zero reformatting. The 200-question gate now has a container everyone writes into.",
       "moved_from": "N3",
       "timebox_days": 0.5,
       "launch_stage": "beta",
@@ -19203,7 +19483,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Muteeb",
       "title": "Live crisis pipeline: replay a historic incident end-to-end under 15 min",
-      "what": "Replay one of Lewis's historic incidents through fast-lane, labelling, detector, engine, in-app and SES email with a stopwatch on comment-posted to email-received, using the crisis pass line decided by Asad and Faheem. Verify the DLQ catches forced failures.",
+      "what": "Replay one of Alex's historic incidents through fast-lane, labelling, detector, engine, in-app and SES email with a stopwatch on comment-posted to email-received, using the crisis pass line decided by Asad and Faheem. Verify the DLQ catches forced failures.",
       "why": "The 15-minute promise is measured here before pilots depend on it; the Sat 31 Oct 2026 drill repeats it live.",
       "area": "Alerts",
       "due": "2026-10-23",
@@ -19214,7 +19494,7 @@ window.LAUNCH_DATA = {
         "N2-MT-04",
         "N3-FH-02",
         "Asad+Faheem: crisis pass line decision",
-        "Lewis: complete incident window"
+        "Alex: complete incident window"
       ],
       "feeds": [
         "N3-MT-12",
@@ -19225,7 +19505,7 @@ window.LAUNCH_DATA = {
       "source": "muteeb",
       "acceptance": "A replayed incident produces an in-app alert and email in under 15 minutes with the timing log filed.",
       "checklist": [
-        "Pick an incident from Lewis's set and stage its comments",
+        "Pick an incident from Alex's set and stage its comments",
         "Run the replay with timestamps at each stage",
         "Force a failure and confirm the DLQ holds it",
         "File the timing log",
@@ -19234,7 +19514,7 @@ window.LAUNCH_DATA = {
       "layman": "Replaying a real past comment storm through the whole system with a stopwatch — from first comment to warning email — to prove the 15-minute promise holds, and checking nothing gets lost when parts fail.",
       "layman_analogy": "Like re-running last year's fire evacuation from the CCTV footage with a stopwatch, and checking nobody gets left behind if a door jams.",
       "layman_needed": "A filed timing log showing a real historic comment storm, replayed through the whole system, produced the in-app alert and email in under 15 minutes, with forced failures proven to be caught rather than lost.",
-      "layman_output": "A filed timing log showing one of Lewis's real historic comment storms replayed through the entire live system — detection, labelling, alert writing, in-app notice and email — with a stopwatch proving under 15 minutes from comment posted to email received. Deliberately forced failures were shown to land in the safety queue rather than vanish, so the pipeline's promise and its safety net are both on record.",
+      "layman_output": "A filed timing log showing one of Alex's real historic comment storms replayed through the entire live system — detection, labelling, alert writing, in-app notice and email — with a stopwatch proving under 15 minutes from comment posted to email received. Deliberately forced failures were shown to land in the safety queue rather than vanish, so the pipeline's promise and its safety net are both on record.",
       "moved_from": "N3",
       "timebox_days": 3,
       "launch_stage": "beta",
@@ -19248,7 +19528,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-MT-07",
       "sprint": "N4",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Nightly briefing endpoint from shipped metrics",
       "what": "Build the nightly briefing aggregate and endpoint from shipped page metrics, with tenant/page isolation, freshness and warehouse reconciliation. Composite health score, delta and factors wait with N3-FH-06.",
       "why": "The topbar pill goes live at the Sat 31 Oct 2026 gate and the Pages view and Today briefing card read the same endpoints in N5.",
@@ -19299,12 +19579,21 @@ window.LAUNCH_DATA = {
         "decision": "narrowed",
         "reason": "Align the ticket with the existing launch scope; preserve the shipped feature checks."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 1.2000000000000002,
+        "Muteeb": 0.30000000000000004
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-MT-09",
       "sprint": "N4",
-      "assignee": "Muteeb",
+      "assignee": "Faheem",
       "title": "Art-E Q&A end-to-end on the RAG index with cost cascade",
       "what": "Wire Q&A over the tenant-namespaced index: retrieval, answer generation, per-tenant cost attribution on every call, and the cascade cache to cheap to frontier with routing decisions logged against a 60% cache-hit target. Name the model at each tier in writing with its vendor and version pin, and define the fallback when the frontier tier errors, rate-limits or times out mid-answer - degrade to the cheap tier or abstain with Saad's copy, never a silent failure. Key the semantic cache on tenant plus question so it can never serve one tenant's answer to another, and cover that key in the N4-MT-01 leakage proof. Tuning and the citation gate are N4.",
       "why": "The answer engine must work before N4 makes it trustworthy, and costs must be metered from day one.",
@@ -19354,7 +19643,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Faheem",
+      "effort_allocations": {
+        "Faheem": 3.75,
+        "Muteeb": 1.25
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-MT-10",
@@ -19457,8 +19755,8 @@ window.LAUNCH_DATA = {
       "id": "N3-MT-12",
       "sprint": "N4",
       "assignee": "Muteeb",
-      "title": "Demonstrate live crisis timing with Lewis and Faheem",
-      "what": "Run the live drill on a real pilot page: Lewis seeds the storm, the pipeline detects, engines and delivers in-app plus email, and the clock from comment-posted to email-received is recorded. Show the health pill live.",
+      "title": "Demonstrate live crisis timing with Alex and Faheem",
+      "what": "Run the live drill on a real pilot page: Alex seeds the storm, the pipeline detects, engines and delivers in-app plus email, and the clock from comment-posted to email-received is recorded. Show the health pill live.",
       "why": "The gate proves the 15-minute promise on a real page and backs the Tue 20 Oct 2026 demo video.",
       "area": "Alerts",
       "due": "2026-10-29",
@@ -19475,15 +19773,15 @@ window.LAUNCH_DATA = {
       "source": "muteeb",
       "acceptance": "The drill is timed live on the scheduled ticket date and the clock is recorded in the gate log.",
       "checklist": [
-        "Agree the seeded storm with Lewis and Faheem",
+        "Agree the seeded storm with Alex and Faheem",
         "Run the drill and capture stage timestamps",
         "Show the health pill on real data",
         "Record the clock and follow-ups"
       ],
       "layman": "The formal Friday checkpoint: a live crisis drill on a real pilot page, timed from first comment to warning email, with the health badge shown working — the recorded proof behind our 15-minute promise.",
       "layman_analogy": "Like the official timed run at a driving test — examiner watching, stopwatch clicked, result written on the certificate.",
-      "layman_needed": "The live crisis drill run on the scheduled ticket date on a real pilot page — Lewis seeding the storm, the alert and email delivered — with the comment-to-email time recorded in the gate log and the health badge shown working.",
-      "layman_output": "The the scheduled ticket date gate run for real: Lewis seeds a comment storm on a genuine pilot page, the live system detects it and delivers the in-app alert and the email, and the time from first comment to email received is written into the gate log, with the health badge shown working on screen. Anyone can open the gate log afterwards and read the clock — the evidence the crisis-demo video will stand on.",
+      "layman_needed": "The live crisis drill run on the scheduled ticket date on a real pilot page — Alex seeding the storm, the alert and email delivered — with the comment-to-email time recorded in the gate log and the health badge shown working.",
+      "layman_output": "The the scheduled ticket date gate run for real: Alex seeds a comment storm on a genuine pilot page, the live system detects it and delivers the in-app alert and the email, and the time from first comment to email received is written into the gate log, with the health badge shown working on screen. Anyone can open the gate log afterwards and read the clock — the evidence the crisis-demo video will stand on.",
       "moved_from": "N3",
       "timebox_days": 0.5,
       "launch_stage": "beta",
@@ -19497,7 +19795,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-MT-14",
       "sprint": "N4",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Rules + feedback endpoints: toggles, quiet hours, not-a-crisis, thumbs",
       "what": "Tenant-scoped endpoints Asad's N3/N4 screens read and write: the alert rule list with per-rule toggles and quiet hours per the notification timing policy; 'not a crisis' feedback and incident-resolved fields on an alert; and the Art-E thumbs + reason feedback store. Contract-tested, and queryable for Faheem's false-alarm log.",
       "why": "Asad's N3-AS-06, N3-AS-07 and N4-AS-03 each depend on a Muteeb endpoint that no Muteeb ticket named; Faheem's N4-FH-07 reads the feedback.",
@@ -19539,12 +19837,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 0.8,
+        "Muteeb": 0.2
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-MT-15",
       "sprint": "N5",
-      "assignee": "Muteeb",
+      "assignee": "Faheem",
       "title": "Index refresh job and freshness stamp for Art-E answers",
       "what": "Add incremental re-ingest to the RAG index so new and edited posts, comments and refreshed aggregates become answerable inside a stated window, with deletes and disconnects removing vectors rather than orphaning them. Publish a freshness SLO per entity type (posts and comments hourly off the fixed page_posts path, aggregates daily) and expose a per-tenant 'data through' timestamp on the orchestration response so Asad's grounding footer can show it and the golden-set runner can assert it. Alarm when any namespace falls behind its SLO, and make a re-embed after a chunking change resumable and rollback-safe against the N2-MT-05 version tags.",
       "why": "An index that is silently a week old returns answers that are confidently cited and factually wrong, which is the one failure mode the whole Art-E design exists to prevent.",
@@ -19588,12 +19895,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Faheem",
+      "effort_allocations": {
+        "Faheem": 2.25,
+        "Muteeb": 0.75
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-MT-16",
       "sprint": "N5",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "The costing dashboard: cost per request, per customer, per model and per month, one place",
       "what": "Land the cost records from the BFF and FastAPI in one table and publish a panel: cost per endpoint per tenant per month, split into function compute, Fargate CPU-seconds, warehouse bytes scanned, queue, egress and LLM tokens, using the unit prices from N1-MT-19. Add a top-10 most expensive endpoints view and an alert when one tenant's daily cost crosses a threshold, so a runaway Art-E user is visible on the day rather than in the monthly bill. Expanded (15 Sep): this is THE costing dashboard for the company, built with Jill. It shows cost per request by route and model tier, cost per customer per month at pilot scale and projected at 100 pages, cost per model (inference, training, storage), the fixed lines (infra, email, monitoring, tooling, vendor tiers) and a manual line for people costs from Jill, with measured versus estimated marked. Every Recosting ticket reads from it.",
       "why": "Pricing, the Art-E quotas and the N4 re-cost all read this panel, and a per-tenant cost alarm is the only thing that catches an expensive user before the invoice does.",
@@ -19639,7 +19955,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 1.6,
+        "Muteeb": 0.4
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-SD-01",
@@ -19685,7 +20010,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "Write the UAT protocol before defects exist",
-      "what": "Write fix-then-invite waves (1-3, then 4-5), comprehension tasks per surface ('what does 72 mean', 'why did the gauge say that'), watch-don't-guide rules, blocker criteria (what is a P1), and the retest flow with Saad covering retest overflow and Lewis the pilot side.",
+      "what": "Write fix-then-invite waves (1-3, then 4-5), comprehension tasks per surface ('what does 72 mean', 'why did the gauge say that'), watch-don't-guide rules, blocker criteria (what is a P1), and the retest flow with Saad covering retest overflow and Saad the pilot side.",
       "why": "Criteria written after defects exist get negotiated by the date; this protocol judges N5-N6.",
       "area": "PM",
       "due": "2026-10-27",
@@ -19709,7 +20034,7 @@ window.LAUNCH_DATA = {
         "Define waves and invite rule",
         "Write comprehension tasks per surface",
         "Define blocker criteria and severity ladder",
-        "Define retest flow (Saad overflow, Lewis pilot side)",
+        "Define retest flow (Saad overflow, Saad pilot side)",
         "Share with Filza for the pre-UAT DPA timing"
       ],
       "layman": "Writing the rulebook for pilot testing before any bugs exist: who tests in what order, what tasks they attempt, what counts as a serious defect, and how retests work — so pass/fail can't be renegotiated under deadline pressure.",
@@ -19796,7 +20121,7 @@ window.LAUNCH_DATA = {
       "checklist": [
         "Copy passes the narrative firewall wording",
         "Submit with per-directory UTM",
-        "Claim G2; record review-willing pilots count from Lewis later",
+        "Claim G2; record review-willing pilots count from Saad later",
         "Log dates in the marketing calendar"
       ],
       "layman": "Submitting ArtemisAI to BetaList and startup directories with tracking tags so we know which listing brings sign-ups, and quietly claiming our review-site profile — these pre-launch windows close permanently at launch.",
@@ -19991,9 +20316,9 @@ window.LAUNCH_DATA = {
       "id": "N3-AX-01",
       "sprint": "N3",
       "assignee": "Alex",
-      "title": "Brief founding pricing to Lewis for conversion conversations",
-      "what": "Walk Lewis through the signed pricing sheet (founding price, lock-duration intent, eligibility, what the first invoice says) so pilots hear the price from a person before the N5 conversion conversations and the N6 invoices. Agree the words Lewis uses and what he must not promise (no discounts beyond the sheet, no scheduling or publishing features).",
-      "why": "Pilots hear the price from a person, not an invoice; an unbriefed Lewis improvises terms the invoices then contradict.",
+      "title": "Brief founding pricing to Alex for conversion conversations",
+      "what": "Walk Alex through the signed pricing sheet (founding price, lock-duration intent, eligibility, what the first invoice says) so pilots hear the price from a person before the N5 conversion conversations and the N6 invoices. Agree the words Alex uses and what he must not promise (no discounts beyond the sheet, no scheduling or publishing features).",
+      "why": "Pilots hear the price from a person, not an invoice; an unbriefed Alex improvises terms the invoices then contradict.",
       "area": "Pilots",
       "due": "2026-10-09",
       "priority": "P1",
@@ -20004,17 +20329,17 @@ window.LAUNCH_DATA = {
       "feeds": [],
       "gate": "N3",
       "source": "plan",
-      "acceptance": "Lewis confirms the brief and holds the one-page pricing sheet.",
+      "acceptance": "Alex confirms the brief and holds the one-page pricing sheet.",
       "checklist": [
-        "30 minutes with Lewis",
+        "30 minutes with Alex",
         "Agree the wording",
         "List do-not-promise items",
         "Log pilot objections for the Tue 24 Nov 2026 terms"
       ],
-      "layman": "Alex walks Lewis through the signed pricing — the founding price, how long it's locked, what he may and may not promise — so pilots hear the price from a person and the later invoices match exactly what they were told.",
+      "layman": "Alex walks Alex through the signed pricing — the founding price, how long it's locked, what he may and may not promise — so pilots hear the price from a person and the later invoices match exactly what they were told.",
       "layman_analogy": "Like the shop owner rehearsing the price card with the person on the till, so what customers hear at the counter matches the invoice to the penny.",
-      "layman_needed": "A briefing done: Lewis confirmed he understands the founding price, the lock period, what he may promise and what he must not, and holds the one-page pricing sheet to use in pilot conversations.",
-      "layman_output": "A completed briefing: Lewis walked through the signed pricing sheet and confirming in writing that he understands the founding price, how long it is locked, who qualifies, what he may promise pilots and what he must never promise — no extra discounts, no scheduling or publishing features. He holds the one-page sheet to use in conversations, so pilots hear a price the invoices will later match exactly.",
+      "layman_needed": "A briefing done: Alex confirmed he understands the founding price, the lock period, what he may promise and what he must not, and holds the one-page pricing sheet to use in pilot conversations.",
+      "layman_output": "A completed briefing: Alex walked through the signed pricing sheet and confirming in writing that he understands the founding price, how long it is locked, who qualifies, what he may promise pilots and what he must never promise — no extra discounts, no scheduling or publishing features. He holds the one-page sheet to use in conversations, so pilots hear a price the invoices will later match exactly.",
       "timebox_days": 0.25,
       "launch_stage": "beta",
       "estimated_days": 0.25,
@@ -20144,7 +20469,7 @@ window.LAUNCH_DATA = {
       "source": "plan",
       "acceptance": "Update #1 is sent and filed, and none of its phrasing appears in the Meta package or landing copy.",
       "checklist": [
-        "Collect numbers from Faheem, Saad, Lewis",
+        "Collect numbers from Faheem, Saad, Alex",
         "Write the comment-collapse paragraph honestly",
         "Narrative-firewall check on the wording",
         "Send and file"
@@ -20345,9 +20670,9 @@ window.LAUNCH_DATA = {
       "id": "N3-JL-05",
       "sprint": "N3",
       "assignee": "Jill",
-      "title": "Founding-pricing mechanics sheet for Alex and Lewis",
-      "what": "Turn the 2 Oct price into the operational sheet behind the scarcity claims: number of founding seats/pages, eligibility deadline, lock duration, what a non-pilot batch-1 signup pays or gets during founding pricing, and how each claim reconciles with the invoice template and the landing page. Alex briefs Lewis from it this sprint and drafts the Tue 24 Nov 2026 notice from it; Filza checks the scarcity claims.",
-      "why": "Alex briefs founding pricing to Lewis in N3 and the Tue 24 Nov 2026 notice needs DEFINED terms reconciled with landing + invoices; numbers made up on the day mean the invoices and the notice disagree.",
+      "title": "Founding-pricing mechanics sheet for Alex and Jill",
+      "what": "Turn the 2 Oct price into the operational sheet behind the scarcity claims: number of founding seats/pages, eligibility deadline, lock duration, what a non-pilot batch-1 signup pays or gets during founding pricing, and how each claim reconciles with the invoice template and the landing page. Alex briefs Jill from it this sprint and drafts the Tue 24 Nov 2026 notice from it; Filza checks the scarcity claims.",
+      "why": "Alex briefs founding pricing to Jill in N3 and the Tue 24 Nov 2026 notice needs DEFINED terms reconciled with landing + invoices; numbers made up on the day mean the invoices and the notice disagree.",
       "area": "Marketing",
       "due": "2026-10-07",
       "priority": "P1",
@@ -20366,18 +20691,18 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N3",
       "source": "plan",
-      "acceptance": "A one-page sheet states seats, deadline, lock duration and the batch-1 commercial motion, reconciled to the invoice template and landing page, and Alex has used it to brief Lewis.",
+      "acceptance": "A one-page sheet states seats, deadline, lock duration and the batch-1 commercial motion, reconciled to the invoice template and landing page, and Alex has used it to brief Jill.",
       "checklist": [
         "Set seat/page count and eligibility deadline with Alex from the cost model",
         "State lock duration and what happens after",
         "Define the batch-1 non-pilot motion (free-during-founding vs trial) with Alex",
         "Reconcile every claim with the invoice template and landing page copy",
-        "Send to Alex, Lewis and Filza; file"
+        "Send to Alex, Jill and Filza; file"
       ],
       "layman": "Turning the agreed price into a precise fact sheet — how many founding seats, the deadline, how long the price is locked — so the sales conversations, the website and the invoices all say exactly the same thing.",
       "layman_analogy": "Like the small print card behind a January-sale sign — how many at that price, until when, and exactly what the receipt will say.",
-      "layman_needed": "A one-page fact sheet stating founding seats, the eligibility deadline, how long the price is locked and what later sign-ups pay — reconciled to the invoice template and website — and already used by Alex to brief Lewis.",
-      "layman_output": "A one-page founding-pricing fact sheet: how many founding seats exist, the eligibility deadline, how long the price is locked, and what later sign-ups pay — every claim reconciled against the invoice template and the website so nothing ever contradicts. Alex will already have used it to brief Lewis, and the Tue 24 Nov 2026 pricing notice drafts straight from it, so the scarcity claims have operational truth behind them.",
+      "layman_needed": "A one-page fact sheet stating founding seats, the eligibility deadline, how long the price is locked and what later sign-ups pay — reconciled to the invoice template and website — and already used by Alex to brief Jill.",
+      "layman_output": "A one-page founding-pricing fact sheet: how many founding seats exist, the eligibility deadline, how long the price is locked, and what later sign-ups pay — every claim reconciled against the invoice template and the website so nothing ever contradicts. Alex will already have used it to brief Jill, and the Tue 24 Nov 2026 pricing notice drafts straight from it, so the scarcity claims have operational truth behind them.",
       "timebox_days": 0.5,
       "launch_stage": "beta",
       "estimated_days": 0.5,
@@ -20390,9 +20715,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-LW-01",
       "sprint": "N3",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Internal dogfood tenant: connect the company page and use it daily",
-      "what": "Connect ArtemisAI's own Facebook page as a tenant on staging with Lewis as admin/Tester and use the product every morning: Today, a draft in Studio, the alerts inbox once it is live. Keep a daily one-line log of friction or wrong-looking data and fold it into Saad's weekly digest; offer this tenant to Filza as the subject for the DSAR sample run if no pilot page is suitable.",
+      "what": "Connect ArtemisAI's own Facebook page as a tenant on staging with Alex as admin/Tester and use the product every morning: Today, a draft in Studio, the alerts inbox once it is live. Keep a daily one-line log of friction or wrong-looking data and fold it into Saad's weekly digest; offer this tenant to Filza as the subject for the DSAR sample run if no pilot page is suitable.",
       "why": "Someone on the team must live in the product; we should hit the embarrassing bugs before pilots do.",
       "area": "Pilots",
       "due": "2026-10-09",
@@ -20419,7 +20744,7 @@ window.LAUNCH_DATA = {
       "layman": "Connecting our own company Facebook page to the product and using it every morning like a real customer, logging every annoyance — so we hit the embarrassing bugs before any pilot does.",
       "layman_analogy": "Like the restaurant's head waiter eating in his own dining room every day and jotting each wobbly table in a notebook before paying guests sit down.",
       "layman_needed": "Our own company Facebook page connected to the product by Mon 5 Oct 2026, used every morning like a real customer, with a daily friction log holding at least eight entries by Fri 9 Oct 2026 and fed into the weekly digest.",
-      "layman_output": "ArtemisAI's own Facebook page connected to the product on staging by Mon 5 Oct 2026, with Lewis using it every morning like a real customer, checking Today, drafting in Studio, opening alerts. A daily one-line friction log, holding at least eight entries by Fri 9 Oct 2026, feeds Saad's weekly digest, so the team hits the embarrassing bugs and odd-looking numbers before any paying pilot does.",
+      "layman_output": "ArtemisAI's own Facebook page connected to the product on staging by Mon 5 Oct 2026, with Alex using it every morning like a real customer, checking Today, drafting in Studio, opening alerts. A daily one-line friction log, holding at least eight entries by Fri 9 Oct 2026, feeds Saad's weekly digest, so the team hits the embarrassing bugs and odd-looking numbers before any paying pilot does.",
       "timebox_days": 0.5,
       "launch_stage": "beta",
       "estimated_days": 0.5,
@@ -20427,12 +20752,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 0.375,
+        "Asad": 0.125
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-LW-04",
       "sprint": "N4",
-      "assignee": "Lewis",
+      "assignee": "Faheem",
       "title": "Deliver the blind comment gold set (200 labelled)",
       "what": "Collect the labelers' sheets as soon as they land after the Sun 25 Oct 2026 briefing, compute inter-rater agreement on the overlap subset, adjudicate disagreements with Saad against the rubric (never against model output), and deliver the 200 final labels to Faheem with provenance (who labelled, rubric version, date).",
       "why": "Turns agreement-with-the-model into a real accuracy number before the freeze locks the crisis and sentiment models.",
@@ -20458,7 +20792,7 @@ window.LAUNCH_DATA = {
         "Provenance sheet",
         "Hand to Faheem"
       ],
-      "layman": "Lewis will hand over 200 real comments, each judged by a human without seeing the computer's answer, so we have a trusted answer sheet to measure how well our comment-reading actually performs.",
+      "layman": "Faheem will hand over 200 real comments, each judged by a human without seeing the computer's answer, so we have a trusted answer sheet to measure how well our comment-reading actually performs.",
       "layman_analogy": "Like two teachers marking the same exam scripts independently, comparing marks, and settling differences against the mark scheme — never against a pupil's crib sheet.",
       "layman_needed": "200 real comments, each labelled by humans who never saw the computer's answer, delivered to Faheem by Tue 27 Oct 2026 with an agreement statistic between labellers and a record of who labelled what, when, under which rubric.",
       "layman_output": "200 real Facebook comments, each labelled by human labellers who never saw the computer's verdicts, delivered to Faheem by Tue 27 Oct 2026 together with a statistic showing how often the labellers agreed with each other and a record of who labelled what, when, under which rubric. This turns 'the model agrees with itself' into a genuine accuracy measurement before the crisis and sentiment models are frozen.",
@@ -20471,12 +20805,21 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Faheem",
+      "effort_allocations": {
+        "Faheem": 0.75,
+        "Alex": 0.25
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Faheem owns data/evaluation analysis; Alex supplies customer interpretation or independent human judgement. The data partner is not an assigned analyst or reviewer. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-LW-05",
       "sprint": "N4",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Live storm drill on a real pilot page with Faheem",
       "what": "Pick a non-declining pilot page whose admin agrees in writing to a seeded storm (a burst of pre-written hostile-but-harmless comments from team accounts, deleted afterwards) and schedule it with Faheem and Muteeb inside a weekday hour. Start the stopwatch on the first seeded comment, record the in-app alert time and the email-received time, and check the alert cites the right post and carries a drafted reply. Clean up the comments and thank the pilot.",
       "why": "The 15-minute promise is measured here before pilots depend on it and before the Tue 20 Oct 2026 demo video makes the claim publicly.",
@@ -20518,15 +20861,24 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 0.75,
+        "Asad": 0.25
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-LW-07",
       "sprint": "N4",
-      "assignee": "Lewis",
-      "title": "Art-E golden question set v1 with Saad: 20 gate questions plus ~100",
+      "assignee": "Saad",
+      "title": "Art-E golden question set v1 for product acceptance: 20 gate questions plus ~100",
       "what": "With Saad, write the questions a page admin actually asks (why did Tuesday's post die, when should I post the giveaway, is my page healthier than last month), each with the expected cited source, plus a must-refuse and adversarial subset (competitor revenue, injection strings inside comments). Lock the 20 scripted questions for the Sat 31 Oct 2026 gate first, then reach about 100, using Saad's Art-E acceptance criteria for refusal wording. Deliver to Faheem in the sheet format he can run nightly.",
-      "why": "Faheem cannot build the 200-question citation gate without questions and his roadmap needs them in N3; the plan had Lewis's authoring in N4, and his document wins for the date.",
+      "why": "Faheem cannot build the 200-question citation gate without questions and his roadmap needs them in N3; the plan had Saad's authoring in N4, and his document wins for the date.",
       "area": "Art-E",
       "due": "2026-10-29",
       "priority": "P0",
@@ -20553,7 +20905,7 @@ window.LAUNCH_DATA = {
         "Saad reviews against the acceptance criteria",
         "Deliver to Faheem"
       ],
-      "layman": "Lewis and Saad write the questions a real page admin would actually ask our assistant (why did Tuesday's post die?), so we can test Art-E against real life, not textbook prompts.",
+      "layman": "Saad and Saad write the questions a real page admin would actually ask our assistant (why did Tuesday's post die?), so we can test Art-E against real life, not textbook prompts.",
       "layman_analogy": "Like writing the driving-test routes from the roads locals actually use — including the tricky junctions where the examiner expects a refusal to turn.",
       "layman_needed": "The 20 locked gate questions plus at least 80 more with Faheem by Fri 30 Oct 2026 — real page-admin questions with their expected sources, plus trick questions the assistant must politely refuse — in the sheet format his nightly checks can run.",
       "layman_output": "The assistant's test question set v1 with Faheem by Fri 30 Oct 2026: the 20 locked gate questions plus at least 80 more — real questions a page admin asks, each with the source a correct answer must cite — and trick questions the assistant must politely refuse, all in the exact sheet format Faheem's nightly checks consume. The 200-question quality gate finally has real questions to run.",
@@ -20565,7 +20917,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.2,
+        "Alex": 0.8
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-FZ-01",
@@ -20883,7 +21244,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N4-AS-01",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Art-E rail: streaming answers, citation chips, grounding footer",
       "what": "Always-on right rail (orb on mobile) on Muteeb's orchestration: streamed tokens, citation chips resolving to the cited post / comment / metric, grounding footer with sample size + confidence, tenant-scoped history; behind a feature flag for the N6 kill switch.",
       "why": "The interface to everything and the Sat 14 Nov 2026 gate's 20-question run; receipts make it believable.",
@@ -20930,12 +21291,21 @@ window.LAUNCH_DATA = {
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
       "critical_review_note": "Mock-based development may start earlier, but this ticket cannot be accepted as live until its named API dependencies pass and the integrated flow is demonstrated.",
-      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies."
+      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies.",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 4,
+        "Asad": 1
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-AS-03",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Art-E recommendation card, honest refusal state, AI label",
       "what": "Recommendation card with ONE CTA deep-linking into the app (Drafts, Alerts, Best Times); AI label and Art 22 decision-support disclaimer on the rail per Filza; must-refuse questions render the refusal. Build every state in Saad's N3-SD-10 matrix, not just the policy refusal: abstain when retrieval found nothing, thin-data hedge showing the sample size, citation-gate block, per-tenant quota reached, and service degraded when the breaker is open or the model vendor is unavailable - each with Saad's final copy and the right next action, never a blank rail or a raw error.",
       "why": "The gate counts refusals as correct only if they exist; AI labels are a legal launch gate.",
@@ -20974,12 +21344,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.6,
+        "Asad": 0.4
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-AS-05",
       "sprint": "N5",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Connected pages and workspace filtering",
       "what": "Show connected pages and their connection status. All-pages / one-page selection drives page_id on shipped Today and briefing queries. Composite health rings and the deferred Analytics view are excluded.",
       "why": "Pilots run several pages; the gate says 'Pages view reads real health'.",
@@ -21020,12 +21399,21 @@ window.LAUNCH_DATA = {
         "decision": "narrowed",
         "reason": "Align the ticket with the existing launch scope; preserve the shipped feature checks."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-AS-06",
       "sprint": "N5",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Deletion + export reachable in Settings, wired to revocation",
       "what": "Settings data controls: 'export my data' request and 'delete my account / page data' flows calling Muteeb's deletion cascade (token revocation -> data delete incl. vectors and memory) with confirmation, status and an email receipt; ready for Filza's witnessed deletion and DSAR sample run.",
       "why": "Deletion witnessed and a real DSAR run are N4 legal proofs; the go/no-go reads the receipts.",
@@ -21062,12 +21450,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.6,
+        "Asad": 0.4
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-AS-07",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Thumbs + reason capture wired to the feedback store",
       "what": "Thumbs up/down on every Art-E answer with a reason picker; posts question, answer id, citations and reason to the feedback store Faheem reads for regression cases.",
       "why": "Every thumbs-down becomes a golden-set test case.",
@@ -21105,12 +21502,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.4,
+        "Asad": 0.1
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-AS-09",
       "sprint": "N4",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Cookie consent banner that verifiably blocks scripts when declined",
       "what": "Banner on landing and app per Filza's consent-gating spec: non-essential scripts (analytics, any pixel) load only after accept; declined state provably loads nothing (network-log evidence attached); preference stored and changeable in Settings; decline is one click.",
       "why": "Legal reality check; Filza verifies it on staging in N5 and PECR forbids pre-consent pixels.",
@@ -21147,12 +21553,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-AS-10",
       "sprint": "N5",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "First-run onboarding: tour, 'learning, never loading', 90 days first",
       "what": "Per Saad's onboarding spec: after connect, stream named analysis steps and partial results from Muteeb's priority-queue completion events (last 90 days first); the first insight surfaces as soon as it exists; staged tour; setup pill tracks the rest; thin-page first run per Saad's thin-page one-pager; a 'stuck? book 10 min' hatch link.",
       "why": "Blank screens churn pilots; the activation event must be reachable in minutes, measured in UAT.",
@@ -21193,7 +21608,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.6,
+        "Asad": 0.4
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-AS-11",
@@ -21241,7 +21665,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N4-AS-13",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Morning-briefing card on Today: five lines, each opening Art-E",
       "what": "Card on Today from Muteeb's nightly briefing aggregate: reach delta, overnight shares, moves count, timestamped; hidden when the aggregate is stale; behind a feature flag for the N6 kill switch. Per Alex (14 Sep): the briefing is the morning hook, not a cut candidate; build it from Saad's five-line script (N3-SD-15), each line tapping through to Art-E.",
       "why": "The 7am hook of the daily habit; cut-order #2 if N4 runs hot.",
@@ -21278,12 +21702,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-AS-14",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "One activation and shipped-usage funnel",
       "what": "Extend the N2 events into the funnel signup -> connected -> ingest done -> first insight (activation event) -> draft scored, each timestamped so time-to-first-value is computed per tenant; hand the dashboard query to Muteeb for the war-room activation panel. Consolidated N4-AS-24: Instrument declined permission, page selection and return during connect; feed card opened/acted/dismissed, Art-E entry and question, and shipped alert hooks. Filza signs the consent classification. Use one saved query on the existing funnel dashboard. Exclude deferred Discovery and web push.",
       "why": "Batch 1 is 100 strangers with no concierge; the war room must see where they stall.",
@@ -21336,12 +21769,21 @@ window.LAUNCH_DATA = {
         "decision": "consolidated",
         "reason": "Single deliverable with N4-AS-24; combined estimate retained, no assumed efficiency saving."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.6,
+        "Asad": 0.4
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-AS-15",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "E2E flows 4-5 in CI (alert -> action, Art-E Q&A)",
       "what": "E2E flows: (4) seeded alert -> inbox card -> action CTA -> mark read with the bell decrementing; (5) golden-set question -> streamed answer with a resolving citation chip, plus a refusal case; added to the CI suite from N3.",
       "why": "Checklist 2 names all five flows as Asad's, built N3-N5; the N5 nightly run needs them to exist.",
@@ -21377,12 +21819,23 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.5,
+        "Asad": 0.3,
+        "Muteeb": 0.2
+      },
+      "reviewers": [
+        "Asad",
+        "Muteeb"
+      ],
+      "workload_note": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-AS-17",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Forget-this control in the Art-E rail + memory note in Settings",
       "what": "Per Filza's memory pack: a forget-this action on each Art-E message (scopes: this message / this topic / everything) calling Muteeb's purge endpoint, with confirmation and a done state within the specified latency; a one-line \"what Art-E remembers, 90-day purge\" note in Settings data controls linking to the everything-scope. Behind the same flag as the rail.",
       "why": "A backend purge nobody can trigger from the UI does not satisfy the control Filza specced or the DSAR/deletion story the go/no-go reads; the rail ships in N4 and this is the moment to add it.",
@@ -21419,7 +21872,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-FH-01",
@@ -21471,7 +21933,7 @@ window.LAUNCH_DATA = {
       "id": "N4-FH-02",
       "sprint": "N5",
       "assignee": "Faheem",
-      "title": "Golden set to 200 with Lewis + nightly regression on QA dashboard",
+      "title": "Golden set to 200 with Faheem + nightly regression on QA dashboard",
       "what": "Grow the set to 200 incl. must-refuse, adversarial, a qualitative-claim grounding rubric and a memory-recall check; run nightly with pass/fail on the dashboard.",
       "why": "Seven green nights before freeze is impossible without the nightly job.",
       "area": "Art-E",
@@ -21492,15 +21954,15 @@ window.LAUNCH_DATA = {
       "source": "plan",
       "acceptance": "200 questions run nightly with a visible pass rate.",
       "checklist": [
-        "Author to 200 with Lewis",
+        "Author to 200 with Faheem",
         "Rubric incl. qualitative grounding + refusals",
         "Nightly job + panel",
         "Memory recall check"
       ],
-      "layman": "Grow our trusted question-and-answer answer sheet to 200 items with Lewis, and re-test the assistant against it every night with results on a dashboard, so any drop in quality is spotted the next morning.",
+      "layman": "Grow our trusted question-and-answer answer sheet to 200 items with Faheem, and re-test the assistant against it every night with results on a dashboard, so any drop in quality is spotted the next morning.",
       "layman_analogy": "Like growing the exam paper to 200 questions and sitting the pupil every single night, with the marks pinned on the staffroom wall by morning.",
-      "layman_needed": "A trusted set of 200 questions and answers, built with Lewis, that runs against the assistant every night with the pass rate visible on the quality dashboard.",
-      "layman_output": "A trusted answer sheet of 200 questions — including ones the assistant must refuse and deliberately tricky ones — will exist, built with Lewis, and run against the assistant automatically every night. The pass rate will appear each morning on the quality dashboard, so anyone can glance at it and see whether last night's code change made the assistant better or worse.",
+      "layman_needed": "A trusted set of 200 questions and answers, built with Faheem, that runs against the assistant every night with the pass rate visible on the quality dashboard.",
+      "layman_output": "A trusted answer sheet of 200 questions — including ones the assistant must refuse and deliberately tricky ones — will exist, built with Faheem, and run against the assistant automatically every night. The pass rate will appear each morning on the quality dashboard, so anyone can glance at it and see whether last night's code change made the assistant better or worse.",
       "moved_from": "N4",
       "timebox_days": 2,
       "launch_stage": "beta",
@@ -21643,7 +22105,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Faheem",
       "title": "Mid-flight accuracy audit vs gold + blind sets; recalibrate bands",
-      "what": "Audit flop, NLP and crisis against the gold sets and Lewis's 200-comment blind set; recalibrate the gauge bands against outcomes with Saad. Added in the 16 Sep review: Extend the recalibration to every confidence value users see: from the outcome ledger and adjudicated alerts, file a reliability table (stated band versus observed hit rate, with n and intervals) for the next-move confidence chip, best-times confidence and crisis severity. Recalibrate each where n allows, otherwise change its chip copy to a stronger or weaker signal wording instead of a confidence claim, before the Mon 7 Dec 2026 public feature and model freeze. No longer waits on N3-FH-04 (parked in the 16 Sep balancing).",
+      "what": "Audit flop, NLP and crisis against the gold sets and Faheem's 200-comment blind set; recalibrate the gauge bands against outcomes with Saad. Added in the 16 Sep review: Extend the recalibration to every confidence value users see: from the outcome ledger and adjudicated alerts, file a reliability table (stated band versus observed hit rate, with n and intervals) for the next-move confidence chip, best-times confidence and crisis severity. Recalibrate each where n allows, otherwise change its chip copy to a stronger or weaker signal wording instead of a confidence claim, before the Mon 7 Dec 2026 public feature and model freeze. No longer waits on N3-FH-04 (parked in the 16 Sep balancing).",
       "why": "Halfway checkpoint before the freeze locks everything.",
       "area": "QA",
       "due": "2026-10-30",
@@ -21669,8 +22131,8 @@ window.LAUNCH_DATA = {
       ],
       "layman": "A mid-sprint accuracy check of our predictions against the trusted answer sheets, and adjusting the warning-level boundaries where they're off, so the gauges customers see stay honest.",
       "layman_analogy": "Like recalibrating the bathroom scales mid-diet against a known weight, and moving the 'healthy' markings to where they truly belong.",
-      "layman_needed": "A filed audit comparing our predictions against the trusted answer sheets and Lewis's blind set, with the gauge band boundaries adjusted to real outcomes and updated in the pack with Saad.",
-      "layman_output": "A filed audit will compare the flop, language and comment-storm predictions against the trusted answer sheets and Lewis's 200-comment blind set, halfway through the pilot. The gauge band boundaries will be adjusted to real measured outcomes and updated in the pack with Saad. Anyone can read the audit and see exactly how accurate each prediction was before the freeze locks everything.",
+      "layman_needed": "A filed audit comparing our predictions against the trusted answer sheets and Faheem's blind set, with the gauge band boundaries adjusted to real outcomes and updated in the pack with Saad.",
+      "layman_output": "A filed audit will compare the flop, language and comment-storm predictions against the trusted answer sheets and Faheem's 200-comment blind set, halfway through the pilot. The gauge band boundaries will be adjusted to real measured outcomes and updated in the pack with Saad. Anyone can read the audit and see exactly how accurate each prediction was before the freeze locks everything.",
       "timebox_days": 2,
       "launch_stage": "public",
       "estimated_days": 2,
@@ -21684,8 +22146,8 @@ window.LAUNCH_DATA = {
       "id": "N4-FH-07",
       "sprint": "N6",
       "assignee": "Faheem",
-      "title": "Crisis false-alarm log per pilot; threshold tuning round 2 with Lewis",
-      "what": "Log every alert per pilot with Lewis's not-a-crisis verdicts and Asad's button feedback; tune per-archetype thresholds a second time against the gate.",
+      "title": "Crisis false-alarm log per pilot; threshold tuning round 2 with Faheem",
+      "what": "Log every alert per pilot with Faheem's not-a-crisis verdicts and Asad's button feedback; tune per-archetype thresholds a second time against the gate.",
       "why": "Precision is maintained, not achieved once.",
       "area": "Alerts",
       "due": "2026-11-24",
@@ -21704,15 +22166,15 @@ window.LAUNCH_DATA = {
       "acceptance": "False-alarm log live and round-2 thresholds recorded.",
       "checklist": [
         "Per-pilot log",
-        "Lewis verdicts",
+        "Faheem verdicts",
         "Tune round 2",
         "Record vs gate",
         "Panel on the QA dashboard: weekly alert precision trend (alerts vs not-a-crisis verdicts) per pilot, refreshed from this log so drift between tuning rounds is visible"
       ],
-      "layman": "Keep a log of every comment-storm alert per pilot page that turned out to be nothing, then tune the trigger levels with Lewis, so owners get warned about real trouble without being cried wolf at.",
+      "layman": "Keep a log of every comment-storm alert per pilot page that turned out to be nothing, then tune the trigger levels with Faheem, so owners get warned about real trouble without being cried wolf at.",
       "layman_analogy": "Like a village logging every false fire-bell ring, then adjusting how hard the rope must be pulled so the bell still rings for real fires.",
-      "layman_needed": "A live log of every comment-storm alert per pilot marked genuine or false with Lewis's verdicts, and a second round of tuned trigger levels recorded against the accuracy gate.",
-      "layman_output": "A live log will list every comment-storm alert sent to each pilot, marked genuine or false alarm using Lewis's verdicts and the in-app button feedback. A second round of tuned trigger levels, set per page type, will be recorded against the accuracy target. A teammate can open the log, count the false alarms per pilot, and see the before-and-after trigger settings.",
+      "layman_needed": "A live log of every comment-storm alert per pilot marked genuine or false with Faheem's verdicts, and a second round of tuned trigger levels recorded against the accuracy gate.",
+      "layman_output": "A live log will list every comment-storm alert sent to each pilot, marked genuine or false alarm using Faheem's verdicts and the in-app button feedback. A second round of tuned trigger levels, set per page type, will be recorded against the accuracy target. A teammate can open the log, count the false alarms per pilot, and see the before-and-after trigger settings.",
       "moved_from": "N4",
       "timebox_days": 2,
       "launch_stage": "public",
@@ -21851,7 +22313,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N4-MT-04",
       "sprint": "N6",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Art-E orchestration production: memory, quotas, circuit breaker trip-tested",
       "what": "Productionise orchestration: retrieval plus 90-day memory with forget-this per Filza's pack, per-tenant quotas, and a circuit breaker wired to cost alarms with thresholds and paging agreed with Jill in writing. Trip-test the breaker. Prove the 90-day purge without waiting 90 days: seed backdated memory records past the boundary (or run the job against a shifted clock) and show they are deleted, that records inside the window survive, and that each purge writes the log entry Filza's spec requires.",
       "why": "Art-E must be trustworthy and unable to bankrupt us; Asad's rail and the Art-E 20-question run sit on this.",
@@ -21902,7 +22364,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 4,
+        "Muteeb": 1
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-MT-05",
@@ -22152,7 +22623,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N4-MT-14",
       "sprint": "N6",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Art-E latency budget: time to first token and p95, measured",
       "what": "Set and measure an Art-E latency budget: time to first streamed token, p95 and p99 end-to-end, broken down by stage (cache lookup, retrieval, generation, citation-gate check, regenerate). Cap the block-and-regenerate loop at a fixed number of attempts and define what the rail does when the cap is hit - abstain with the gate-blocked copy from Saad's state matrix, never an open-ended spinner. Report latency by cascade route so the cost/latency trade-off between cheap and frontier tiers is visible, and put the panel on the war-room board alongside Art-E cost.",
       "why": "The Fri 27 Nov 2026 gate demos twenty numeric questions live, and those are exactly the ones that trigger the regenerate loop; an unbudgeted rail can pass the correctness gate and still be unusable.",
@@ -22191,14 +22662,23 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 0.8,
+        "Muteeb": 0.2
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-MT-15",
       "sprint": "N5",
       "assignee": "Muteeb",
       "title": "Art-E conversation logging and transcript export for the reviews",
-      "what": "Log every Art-E exchange with what the review actually needs: question, final answer, the citations returned, the retrieved chunk ids, the cascade route and cost, the state (answered, refused, abstained, gate-blocked) and the thumbs verdict if one arrives. Give Saad and Lewis a tenant-scoped export they can read in a 30-minute session without database access. Keep the store inside Filza's memory rules rather than beside them: same tenant namespace, inside the DSAR export and the deletion cascade, retention no longer than the 90-day memory window unless Filza says otherwise in writing, and covered by the N4-MT-01 leakage proof. Added in the 16 Sep review: Emit each exchange as an OpenTelemetry GenAI trace (retrieval with chunk ids, cascade route and model ids, citation-gate verdict, regenerate count, tokens, cost, latency, tenant id) into a self-hosted Arize Phoenix instance on Postgres, unless a one-page comparison with self-hosted Langfuse finds a blocker, so a failed live answer can be inspected span by span. Mask commenter names before export and have Filza record the trace store in the RoPA and DSAR scope.",
+      "what": "Log every Art-E exchange with what the review actually needs: question, final answer, the citations returned, the retrieved chunk ids, the cascade route and cost, the state (answered, refused, abstained, gate-blocked) and the thumbs verdict if one arrives. Give Saad and Alex a tenant-scoped export they can read in a 30-minute session without database access. Keep the store inside Filza's memory rules rather than beside them: same tenant namespace, inside the DSAR export and the deletion cascade, retention no longer than the 90-day memory window unless Filza says otherwise in writing, and covered by the N4-MT-01 leakage proof. Added in the 16 Sep review: Emit each exchange as an OpenTelemetry GenAI trace (retrieval with chunk ids, cascade route and model ids, citation-gate verdict, regenerate count, tokens, cost, latency, tenant id) into a self-hosted Arize Phoenix instance on Postgres, unless a one-page comparison with self-hosted Langfuse finds a blocker, so a failed live answer can be inspected span by span. Mask commenter names before export and have Filza record the trace store in the RoPA and DSAR scope.",
       "why": "Two review tickets and the golden-set growth path all start Mon 12 Oct 2026 on this dependency, and an unspecified transcript store would otherwise become a second undocumented copy of customer content outside the DSAR story.",
       "area": "Art-E",
       "due": "2026-11-05",
@@ -22218,18 +22698,18 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N5",
       "source": "reconciler",
-      "acceptance": "Saad and Lewis run the Mon 12 Oct 2026 review off the export unaided, and Filza confirms the transcript store sits inside the DSAR and deletion scope.",
+      "acceptance": "Saad and Alex run the Mon 12 Oct 2026 review off the export unaided, and Filza confirms the transcript store sits inside the DSAR and deletion scope.",
       "checklist": [
         "Log question, answer, citations, chunk ids, route, cost, state, thumbs",
-        "Build the tenant-scoped export Saad and Lewis can read directly",
+        "Build the tenant-scoped export Saad and Alex can read directly",
         "Place the store inside the DSAR export and the deletion cascade",
         "Set retention to the 90-day memory window and confirm with Filza",
         "Cover the store in the N4-MT-01 cross-tenant leakage proof"
       ],
       "layman": "Record Art-E conversations (with proper safeguards) and make transcripts exportable, so the weekly quality reviews can look at what the assistant actually said to real users.",
       "layman_analogy": "Like a black-box recorder for the assistant's conversations — kept in the same locked cabinet as everything else, and shredded on the same schedule.",
-      "layman_needed": "A conversation log Saad and Lewis can read for the Mon 12 Oct 2026 review without database access, confirmed by Filza to sit inside the export, deletion and 90-day retention rules.",
-      "layman_output": "Every assistant conversation will be logged with its question, final answer, sources, cost and outcome, and Saad and Lewis will have a readable per-customer export they can review in a 30-minute session without database access. Filza will have confirmed the log sits inside the export, deletion and 90-day retention rules — so the Mon 12 Oct 2026 review reads real transcripts, not a second rogue copy of customer data.",
+      "layman_needed": "A conversation log Saad and Alex can read for the Mon 12 Oct 2026 review without database access, confirmed by Filza to sit inside the export, deletion and 90-day retention rules.",
+      "layman_output": "Every assistant conversation will be logged with its question, final answer, sources, cost and outcome, and Saad and Alex will have a readable per-customer export they can review in a 30-minute session without database access. Filza will have confirmed the log sits inside the export, deletion and 90-day retention rules — so the Mon 12 Oct 2026 review reads real transcripts, not a second rogue copy of customer data.",
       "moved_from": "N4",
       "timebox_days": 2,
       "launch_stage": "beta",
@@ -22326,8 +22806,8 @@ window.LAUNCH_DATA = {
       "id": "N4-SD-03",
       "sprint": "N5",
       "assignee": "Saad",
-      "title": "Start the weekly 30-min real-transcript review with Lewis",
-      "what": "Each week read real pilot Art-E transcripts with Lewis (starting with the dogfood tenant and pilots once the rail is on staging), flag unscripted questions and wrong answers, and route them into the 200-question golden set and Faheem's thumbs-down test cases. Continues to launch.",
+      "title": "Start the weekly 30-min real-transcript review with Saad",
+      "what": "Each week read real pilot Art-E transcripts with Saad (starting with the dogfood tenant and pilots once the rail is on staging), flag unscripted questions and wrong answers, and route them into the 200-question golden set and Faheem's thumbs-down test cases. Continues to launch.",
       "why": "Scripted golden sets miss unscripted questions; this is the loop that keeps the citation gate honest.",
       "area": "Art-E",
       "due": "2026-11-06",
@@ -22351,10 +22831,10 @@ window.LAUNCH_DATA = {
         "Route new questions to Faheem",
         "Book weekly to N6"
       ],
-      "layman": "Start a weekly half-hour with Lewis reading real Art-E conversations, so a human regularly judges whether the assistant is being helpful, accurate and polite.",
+      "layman": "Start a weekly half-hour with Saad reading real Art-E conversations, so a human regularly judges whether the assistant is being helpful, accurate and polite.",
       "layman_analogy": "Like a head teacher sitting in on real lessons for half an hour each week, rather than only reading the term's exam results.",
-      "layman_needed": "A weekly half-hour booked with Lewis reading real assistant conversations, first session held by Tue 10 Nov 2026, with at least one real question fed into the 200-question answer sheet.",
-      "layman_output": "A weekly half-hour will be booked with Lewis reading real assistant conversations from the pilots, with the first session held by Tue 10 Nov 2026. Questions the test sheet never anticipated, and any wrong answers, will be routed into the 200-question answer sheet and Faheem's test cases. Anyone can check the calendar entry and find at least one real pilot question already added to the sheet.",
+      "layman_needed": "A weekly half-hour booked with Saad reading real assistant conversations, first session held by Tue 10 Nov 2026, with at least one real question fed into the 200-question answer sheet.",
+      "layman_output": "A weekly half-hour will be booked with Saad reading real assistant conversations from the pilots, with the first session held by Tue 10 Nov 2026. Questions the test sheet never anticipated, and any wrong answers, will be routed into the 200-question answer sheet and Faheem's test cases. Anyone can check the calendar entry and find at least one real pilot question already added to the sheet.",
       "moved_from": "N4",
       "launch_stage": "beta",
       "estimated_days": 0.5,
@@ -22424,7 +22904,7 @@ window.LAUNCH_DATA = {
       "source": "saad",
       "acceptance": "Dry-run notes filed and the protocol revised.",
       "checklist": [
-        "Schedule with Lewis",
+        "Schedule with Saad",
         "Run the full journey",
         "Record protocol gaps",
         "Publish protocol v1.1"
@@ -22446,9 +22926,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N4-SD-10",
       "sprint": "N5",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "User-docs skeleton per surface + first support macros",
-      "what": "Draft a getting-started page and a how-to per surface, plus initial support macros including 'is my data shared with other pages' answered from Filza's Discovery position. Ownership proposal: Lewis drafts support material using the shipped product; Saad verifies UI instructions. Only shipped surfaces are documented.",
+      "what": "Draft a getting-started page and a how-to per surface, plus initial support macros including 'is my data shared with other pages' answered from Filza's Discovery position. Ownership proposal: Jill drafts support material using the shipped product; Saad verifies UI instructions. Only shipped surfaces are documented.",
       "why": "Discovery makes that question inevitable; the answer must be ready before pilots ask.",
       "area": "PM",
       "due": "2026-11-12",
@@ -22480,20 +22960,25 @@ window.LAUNCH_DATA = {
       "estimated_days": 1,
       "estimate_source": "16 Sep inherited effort estimate; not a new team commitment",
       "effort_allocations": {
-        "Lewis": 0.75,
-        "Saad": 0.25
+        "Jill": 0.75,
+        "Alex": 0.25
       },
       "audit": {
         "decision": "reassigned",
         "reason": "Use pilot/support expertise for drafting, retain Saad review; total effort unchanged."
-      }
+      },
+      "delivery_lead": "Jill",
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-SD-11",
       "sprint": "N5",
       "assignee": "Saad",
       "title": "Write the crisis-demo video script with Alex",
-      "what": "Script the Wed 18 Nov 2026 video against real detector behaviour: claims limited to the re-scoped crisis gate and drill data, pages Lewis confirms are not in decline, calm-reply shown as drafted not sent.",
+      "what": "Script the Wed 18 Nov 2026 video against real detector behaviour: claims limited to the re-scoped crisis gate and drill data, pages Saad confirms are not in decline, calm-reply shown as drafted not sent.",
       "why": "Our best visual asset must survive fact-checking.",
       "area": "Marketing",
       "due": "2026-11-06",
@@ -22501,7 +22986,7 @@ window.LAUNCH_DATA = {
       "priority_reason": "Alex's script approval is dated (N4-AX-06, Mon 12 Oct 2026) and the Sat 17 Oct 2026 video is a public date; P2 'safe to slip' is too low for the only input to a dated public asset, though N5-SD-04 carries the hard date.",
       "depends_on": [
         "N2-SD-01",
-        "Lewis: drill data",
+        "Saad: drill data",
         "Alex: attend"
       ],
       "feeds": [
@@ -22515,7 +23000,7 @@ window.LAUNCH_DATA = {
       "acceptance": "Script agreed by Alex with a claims-vs-evidence table.",
       "checklist": [
         "List claims and evidence",
-        "Confirm pages with Lewis",
+        "Confirm pages with Saad",
         "Draft with Alex",
         "Send to Filza early"
       ],
@@ -22523,7 +23008,7 @@ window.LAUNCH_DATA = {
       "layman": "Write the script with Alex for a short video showing the comment-storm alert catching trouble in time, so sales and investors can see the product's best moment in two minutes.",
       "layman_analogy": "Like storyboarding the shop's best two minutes for the advert — with a checklist proving every boast on screen actually happened.",
       "layman_needed": "A video script agreed with Alex showing the comment-storm alert catching real trouble, with a table matching every claim to evidence and the reply shown as drafted, not sent.",
-      "layman_output": "A finished video script for the Wed 18 Nov 2026 crisis demo will exist, agreed with Alex, showing the comment-storm alert catching real trouble — with a table matching every on-screen claim to the evidence behind it, pages Lewis confirms are healthy, and the calm reply shown as drafted, never sent. Anyone can fact-check the script line by line before a camera rolls.",
+      "layman_output": "A finished video script for the Wed 18 Nov 2026 crisis demo will exist, agreed with Alex, showing the comment-storm alert catching real trouble — with a table matching every on-screen claim to the evidence behind it, pages Saad confirms are healthy, and the calm reply shown as drafted, never sent. Anyone can fact-check the script line by line before a camera rolls.",
       "moved_from": "N4",
       "timebox_days": 0.5,
       "launch_stage": "public",
@@ -22669,7 +23154,7 @@ window.LAUNCH_DATA = {
       "sprint": "N5",
       "assignee": "Alex",
       "title": "Waitlist trajectory checkpoint; backup channels if off-track",
-      "what": "Read Saad's daily counts against the 500-by-20-Nov line (roughly 90 per week from Sun 11 Oct 2026). If under the line, activate backup channels: BetaList and directory listings (Saad N3), newsletter, pilot referrals via Lewis, the optional LinkedIn trial, and paid where Jill's budget allows. Publish the weekly growth report.",
+      "what": "Read Saad's daily counts against the 500-by-20-Nov line (roughly 90 per week from Sun 11 Oct 2026). If under the line, activate backup channels: BetaList and directory listings (Saad N3), newsletter, pilot referrals via Alex, the optional LinkedIn trial, and paid where Jill's budget allows. Publish the weekly growth report.",
       "why": "500 by Fri 11 Dec 2026 or the public launch day email list is thin; a checkpoint in week two leaves about eight weeks to correct.",
       "area": "Marketing",
       "due": "2026-11-06",
@@ -22752,7 +23237,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N4-LW-01",
       "sprint": "N4",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "Supply the friendly pilot for Saad's UAT dry-run and Filza's opt-out witness",
       "what": "Nominate one friendly, non-declining pilot for Saad's UAT dry-run on staging and book the session. Separately line up a pilot willing to opt in to Discovery and then revoke consent so Filza can witness the 24h purge from matches, spotlight and Saved, and confirm with Filza whether the DSAR sample run uses a pilot or the dogfood tenant.",
       "why": "Saad's protocol needs a real pilot to rehearse on and Filza's witness needs a real revocation; both stall without a named page.",
@@ -22788,12 +23273,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Jill",
+      "effort_allocations": {
+        "Jill": 0.1875,
+        "Alex": 0.0625
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-LW-03",
       "sprint": "N4",
-      "assignee": "Lewis",
+      "assignee": "Saad",
       "title": "Golden set to 200 questions with Faheem; G2 review-willing count",
       "what": "Extend the N3 v1 set to 200 with Faheem, filling the gaps his coverage report shows (per surface, per must-refuse category, qualitative-claim grounding) while pinning the 20 gate questions unchanged; leave room for the unscripted questions Saad's transcript review starts adding from Tue 10 Nov 2026. On the weekly calls ask every pilot whether they would write a G2.com review after launch and record the count for Saad and Alex.",
       "why": "The nightly regression and the seven-green-nights freeze evidence need the full set; the post-launch G2 cluster needs a known count of willing reviewers.",
@@ -22829,12 +23323,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.2,
+        "Alex": 0.8
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-LW-04",
       "sprint": "N6",
-      "assignee": "Lewis",
+      "assignee": "Faheem",
       "title": "Crisis tuning round 2: adjudicate the per-pilot false-alarm log",
       "what": "Take Faheem's per-pilot false-alarm log and the pilots' not-a-crisis button presses since alerts went live, confirm with each pilot which alerts were real, noise, or missed, and label every row. Sit with Faheem on the round-2 thresholds per archetype and record what changed and why, including any storms the detector missed for the recall posture.",
       "why": "Precision is maintained, not achieved once; the pilots are the only ground truth for what happened since the backtest.",
@@ -22870,12 +23373,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Faheem",
+      "effort_allocations": {
+        "Faheem": 0.75,
+        "Alex": 0.25
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Faheem owns data/evaluation analysis; Alex supplies customer interpretation or independent human judgement. The data partner is not an assigned analyst or reviewer. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-LW-05",
       "sprint": "N4",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Pilot stories and testimonial permissions in writing with Filza",
       "what": "Draft a one-paragraph story per pilot (who they are, what the product did for them so far, a number only if real) and collect written permission on Filza's template covering name, page name, quote, screenshots of their data, and use of their page in the crisis-demo video and on Product Hunt. Record which pilots decline which use. No longer waits on N4-FZ-04 (parked in the 16 Sep balancing).",
       "why": "Launch-week social proof must be collected before launch week, and the demo video cannot show a pilot page without permission.",
@@ -22900,7 +23412,7 @@ window.LAUNCH_DATA = {
         "Note per-use permissions (video, PH, screenshots)",
         "File with Filza"
       ],
-      "layman": "Lewis drafts a short true story per pilot and collects written permission to use it, so launch marketing has real voices without any legal surprises.",
+      "layman": "Alex drafts a short true story per pilot and collects written permission to use it, so launch marketing has real voices without any legal surprises.",
       "layman_analogy": "Like collecting signed photo-consent forms from wedding guests before the album goes to print — permission first, publication second.",
       "layman_needed": "One folder by Fri 30 Oct 2026 holding a short true story per pilot and each pilot's signed permission on Filza's form (or a recorded no) covering their name, quotes, screenshots and use in the public launch video.",
       "layman_output": "One shared folder, complete by Fri 30 Oct 2026, holding a short true story for each pilot — who they are and what the product did for them — next to that pilot's signed permission on Filza's form (or a recorded no) covering their name, quotes, screenshots and use in the crisis-demo video. Marketing can then pull any story straight into launch material knowing the paperwork behind it is already done.",
@@ -22911,7 +23423,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 0.75,
+        "Asad": 0.25
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-FZ-01",
@@ -23137,7 +23658,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-AS-01",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Pre-UAT fix pass: bug bash #1, visual sweep, copy freeze",
       "what": "Before UAT wave 1: fix the bug-bash #1 list against Saad's blocker criteria; fold in Saad's pre-UAT visual sweep findings; apply Saad's copy-freeze string list (every user-visible string vs the voice guide) in one PR, after which strings change only as blocker fixes; confirm no deferred surface is reachable (Schedule CTAs are Remind-me, no auto-pilot log, no Inbox/messaging, no Photos/Video/Advanced tabs).",
       "why": "UAT should find product problems, not missing spinners, six voices or surfaces the MVP legally cannot ship.",
@@ -23171,7 +23692,18 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.5,
+        "Asad": 0.8999999999999999,
+        "Muteeb": 0.6000000000000001
+      },
+      "reviewers": [
+        "Asad",
+        "Muteeb"
+      ],
+      "workload_note": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-AS-02",
@@ -23222,9 +23754,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-AS-03",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "UAT wave-1 blocker fixes and retest for pilots 1-3, then invite 4-5",
-      "what": "Daily: take Saad's defect triage against blocker criteria, fix blockers on staging, hand back for retest (Saad retests; Lewis covers the pilot side); invite pilots 4-5 only when wave-1 blockers are closed.",
+      "what": "Daily: take Saad's defect triage against blocker criteria, fix blockers on staging, hand back for retest (Saad retests; Saad covers the pilot side); invite pilots 4-5 only when wave-1 blockers are closed.",
       "why": "Fix-then-invite is the pattern; unfixed blockers in front of pilots 4-5 cost pilots.",
       "area": "QA",
       "due": "2026-11-19",
@@ -23232,7 +23764,7 @@ window.LAUNCH_DATA = {
       "priority_reason": "Gates inviting pilots 4-5 and the zero-P1 review",
       "depends_on": [
         "Saad: UAT wave 1 + triage",
-        "Lewis: pilots 1-3"
+        "Saad: pilots 1-3"
       ],
       "feeds": [],
       "gate": "N6",
@@ -23255,12 +23787,23 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 2.5,
+        "Asad": 1.5,
+        "Muteeb": 1
+      },
+      "reviewers": [
+        "Asad",
+        "Muteeb"
+      ],
+      "workload_note": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-AS-04",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "WCAG 2.1 AA fixes from Saad's N4 audit",
       "what": "Work Saad's sized fix list: contrast via token roles, focus order and visible focus, ARIA on gauge / heatmap / rings, keyboard access to sheets and slide-overs, reduced-motion; axe pass on the five key pages.",
       "why": "Accessibility debt compounds; the sprint goal says WCAG met before freeze.",
@@ -23295,12 +23838,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.6,
+        "Asad": 0.4
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-AS-06",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "E2E nightly suite vs staging: all flows 1-14 + cross-browser/device matrix",
       "what": "Nightly E2E run of every flow 1-14 (1-5 Asad's CI specs; 6-8 from N5-SD-13/14; 9-14 from N5-SD-16) against staging with failure paging; matrix: Chrome, Safari, Firefox desktop; iOS Safari and Android Chrome (PWA); results surfaced on the war-room board. Add iPad Safari to the matrix and publish the minimum supported browser/OS list into Saad's docs so support and pilots know what is promised. Audit scope: cover shipped surfaces only. Deferred Discovery, standalone heatmap, Wins and web-push routes must stay hidden/disabled. Substitute a negative route/claim check where the historical flow names one; do not implement the deferred feature to satisfy the test.",
       "why": "The robot safety net at full strength before freeze.",
@@ -23331,14 +23883,25 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "clarified",
         "reason": "Remove ghost-feature implementation obligations while retaining shipped-flow and disabled-route tests."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.5,
+        "Asad": 0.8999999999999999,
+        "Muteeb": 0.6000000000000001
+      },
+      "reviewers": [
+        "Asad",
+        "Muteeb"
+      ],
+      "workload_note": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-AS-07",
       "sprint": "N5",
       "assignee": "Asad",
       "title": "Flip OAuth Live Mode behind the flag when Meta approval lands",
-      "what": "If approval lands: switch the Meta app to Live Mode behind the launch flag, verify connect on production with a non-Tester account, then Lewis walks each pilot through live connect the same week. If not approved by Wed 18 Nov 2026, record the dev-mode branch (Alex's fallback plan) at readiness review #1.",
+      "what": "If approval lands: switch the Meta app to Live Mode behind the launch flag, verify connect on production with a non-Tester account, then Alex walks each pilot through live connect the same week. If not approved by Wed 18 Nov 2026, record the dev-mode branch (Alex's fallback plan) at readiness review #1.",
       "why": "The moment the product becomes publicly real; the Meta branch must be decided at the Wed 18 Nov 2026 review either way.",
       "area": "Meta",
       "due": "2026-11-13",
@@ -23359,12 +23922,12 @@ window.LAUNCH_DATA = {
         "Watch approval status daily with Saad",
         "Flip Live Mode behind the flag",
         "Verify non-Tester connect",
-        "Hand to Lewis for pilot walkthroughs or record the fallback"
+        "Hand to Alex for pilot walkthroughs or record the fallback"
       ],
       "layman": "The moment Facebook approves our app, flip the hidden switch that lets real customers connect their pages with the approved sign-in, so we can go live the same day approval lands.",
       "layman_analogy": "Like keeping your hand on the grand-opening ribbon scissors: the moment the council permit arrives, you cut — or write down the plan B if it doesn't.",
       "layman_needed": "Either Facebook sign-in verified live on production with a real non-tester account the day approval lands, or the fallback plan formally recorded in the Wed 18 Nov 2026 review minutes.",
-      "layman_output": "The day Facebook approves the app, the hidden switch flips and real customers can connect their pages with the approved sign-in, verified on production with a genuine non-tester account, then Lewis walks each pilot through connecting that same week. If approval has not landed by Wed 18 Nov 2026, the fallback plan is formally recorded in the review minutes instead. Either way, the decision is on paper.",
+      "layman_output": "The day Facebook approves the app, the hidden switch flips and real customers can connect their pages with the approved sign-in, verified on production with a genuine non-tester account, then Alex walks each pilot through connecting that same week. If approval has not landed by Wed 18 Nov 2026, the fallback plan is formally recorded in the review minutes instead. Either way, the decision is on paper.",
       "launch_stage": "beta",
       "estimated_days": 0.5,
       "estimate_source": "16 Sep inherited effort estimate; not a new team commitment",
@@ -23376,7 +23939,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-AS-09",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "/security trust page, 1-page security packet, security.txt",
       "what": "/security page plus a downloadable one-page packet built from the evidence pack (KMS, isolation CI proofs, pen-test summary, RTO/RPO, backups, DPA) with copy from Filza + Muteeb after the narrative firewall; /.well-known/security.txt with a disclosure route and response SLA; live before the founding-pricing notice in the week of Tue 24 Nov 2026.",
       "why": "The first ask is 'OAuth your page to a stranger'; the proofs exist and were hidden.",
@@ -23410,12 +23973,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-AS-12",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Publish the support expectation on the site and in-app",
       "what": "Channel, hours and first-response standard from Jill's support standard on the marketing site (footer/contact) and in Settings/help; wording matches Saad's macros. No longer waits on N5-FZ-08 (parked in the 16 Sep balancing).",
       "why": "It exists internally; buyers need to see it.",
@@ -23449,7 +24021,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.2,
+        "Asad": 0.05
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-AS-14",
@@ -23749,7 +24330,7 @@ window.LAUNCH_DATA = {
       "sprint": "N6",
       "assignee": "Faheem",
       "title": "Crisis drill #2 for the Sat 28 Nov 2026 video + 7-day live false-alarm rate",
-      "what": "Run drill #2 with Lewis and Muteeb, record the measured week of false alarms, and give Saad/Alex the real numbers the video may claim. Rescheduled to Thu 26 Nov 2026 in the 16 Sep balancing, after the alert tuning it depends on, so the drill numbers exist before the video is cleared.",
+      "what": "Run drill #2 with Faheem and Muteeb, record the measured week of false alarms, and give Saad/Alex the real numbers the video may claim. Rescheduled to Thu 26 Nov 2026 in the 16 Sep balancing, after the alert tuning it depends on, so the drill numbers exist before the video is cleared.",
       "why": "Marketing claims backed by a measured week.",
       "area": "Alerts",
       "due": "2026-11-26",
@@ -23773,8 +24354,8 @@ window.LAUNCH_DATA = {
       ],
       "layman": "Run a second full rehearsal of the comment-storm alarm for the Sat 28 Nov 2026 demo video, and measure how often it cried wolf over seven real days, so we can show the alert is fast and rarely wrong.",
       "layman_analogy": "Like a second full fire drill filmed for the brochure, alongside a week's honest count of how often the alarm rang for burnt toast.",
-      "layman_needed": "A receipt from storm-alarm rehearsal #2 with Lewis and Muteeb, plus the measured seven-day false-alarm rate, delivered to Saad and Alex before Sat 28 Nov 2026 so the video claims only real numbers.",
-      "layman_output": "A receipt from the second full rehearsal of the comment-storm alarm, run with Lewis and Muteeb, plus a measured seven-day count of how often the alarm cried wolf on real pages — both delivered to Saad and Alex before Sat 28 Nov 2026. The demo video can then claim only speeds and accuracy figures that were genuinely measured, and a teammate can check every claim against the receipt.",
+      "layman_needed": "A receipt from storm-alarm rehearsal #2 with Faheem and Muteeb, plus the measured seven-day false-alarm rate, delivered to Saad and Alex before Sat 28 Nov 2026 so the video claims only real numbers.",
+      "layman_output": "A receipt from the second full rehearsal of the comment-storm alarm, run with Faheem and Muteeb, plus a measured seven-day count of how often the alarm cried wolf on real pages — both delivered to Saad and Alex before Sat 28 Nov 2026. The demo video can then claim only speeds and accuracy figures that were genuinely measured, and a teammate can check every claim against the receipt.",
       "moved_from": "N5",
       "timebox_days": 1,
       "launch_stage": "public",
@@ -24108,7 +24689,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-MT-07",
       "sprint": "N5",
-      "assignee": "Muteeb",
+      "assignee": "Faheem",
       "title": "E2E model smoke suite on every production endpoint",
       "what": "Write a smoke suite that hits every production model endpoint with a known input and asserts a contract-shaped, in-range response; run it nightly and on deploy. No longer waits on N3-MT-04, N4-MT-08 (parked in the 16 Sep balancing).",
       "why": "Models freeze next sprint; the smoke suite guards the freeze.",
@@ -24144,7 +24725,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Faheem",
+      "effort_allocations": {
+        "Faheem": 0.75,
+        "Muteeb": 0.25
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-MT-09",
@@ -24291,7 +24881,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-MT-13",
       "sprint": "N6",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Timeout and retry budgets per hop, enforced in every client",
       "what": "Write the hop table - browser to BFF, BFF to FastAPI, serving to Redshift, to Pinecone, to Meta Graph, to SES, to the LLM - giving each a connect and a read timeout whose sum sits inside the caller's own timeout, so nothing waits longer than its caller will. Attach a retry budget per hop: maximum attempts, jittered exponential backoff, and a cap on the ratio of retries to requests per caller so a slow dependency cannot be amplified into a self-inflicted outage. Enforce these in shared client wrappers rather than at call sites, set retries to zero on non-idempotent calls until N5-MT-14 lands keys, and add a test proving a hop over budget fails fast instead of hanging the request.",
       "why": "Timeouts are library defaults today, so one slow Meta or LLM call can hold every worker and turn a partial dependency problem into a total outage.",
@@ -24331,7 +24921,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 0.8,
+        "Muteeb": 0.2
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-MT-15",
@@ -24379,7 +24978,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-MT-17",
       "sprint": "N6",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Rate limits and abuse controls on every public endpoint",
       "what": "Put a named limit on each unauthenticated or cheap-to-abuse surface: waitlist and pilot-application forms, login and the OAuth callback, the Meta data-deletion callback, the Art-E ask endpoint, CSV export and the status endpoints. Implement per-IP and per-tenant token buckets with a burst allowance, add bot defence on the two public forms, and apply an edge WAF rule set inside the cost Jill confirmed. Return 429 with Retry-After so Asad's UX has something to read, and log limit hits per rule to the war-room board.",
       "why": "The public forms and the Art-E ask endpoint are the cheapest way for a stranger to burn the LLM budget or fill the waitlist with junk on launch day, and N5-AS-02's 429 UX currently has no layer behind it.",
@@ -24418,7 +25017,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 1.6,
+        "Muteeb": 0.4
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-SD-01",
@@ -24502,7 +25110,7 @@ window.LAUNCH_DATA = {
       "sprint": "N6",
       "assignee": "Saad",
       "title": "Run UAT wave 1 with pilots 1-3",
-      "what": "Run the protocol with pilots 1-3: full journey, watch-don't-guide, comprehension tasks, defects logged against blocker criteria. Lewis handles the pilot side.",
+      "what": "Run the protocol with pilots 1-3: full journey, watch-don't-guide, comprehension tasks, defects logged against blocker criteria. Saad handles the pilot side.",
       "why": "Fix-then-invite run for real; the first evidence the go/no-go reads.",
       "area": "PM",
       "due": "2026-11-18",
@@ -24512,7 +25120,7 @@ window.LAUNCH_DATA = {
         "N3-SD-02",
         "N5-SD-02",
         "N5-LW-01",
-        "Lewis: pilots scheduled"
+        "Saad: pilots scheduled"
       ],
       "feeds": [
         "N5-SD-05",
@@ -24530,7 +25138,7 @@ window.LAUNCH_DATA = {
       "layman": "We sit the first three pilot customers down and watch them use the whole product without helping, logging everything that confuses or breaks — the first real evidence for the launch decision.",
       "layman_analogy": "Like a driving examiner in the passenger seat: hands off the wheel, notebook out, recording every wrong turn the learner makes unprompted.",
       "layman_needed": "Three completed observation sessions where pilots 1-3 use the whole product unaided, producing defect logs graded against the blocker rules and notes on what confused them.",
-      "layman_output": "Three completed observation sessions where pilots one to three used the whole product unaided while Saad watched without helping and Lewis handled the pilot side. Each session produces a defect log graded against the blocker rules plus notes on what genuinely confused people. These logs become the first real evidence the launch decision will read — a teammate can open them and see what real users hit.",
+      "layman_output": "Three completed observation sessions where pilots one to three used the whole product unaided while Saad watched without helping and Saad handled the pilot side. Each session produces a defect log graded against the blocker rules plus notes on what genuinely confused people. These logs become the first real evidence the launch decision will read — a teammate can open them and see what real users hit.",
       "moved_from": "N5",
       "timebox_days": 1,
       "launch_stage": "beta",
@@ -24589,7 +25197,7 @@ window.LAUNCH_DATA = {
       "sprint": "N6",
       "assignee": "Saad",
       "title": "UAT wave 1 fix-and-retest, invite pilots 4-5, review inputs",
-      "what": "Retest fixes (Saad covers overflow, Lewis pilot side), invite pilots 4-5 by Fri 13 Nov 2026 once blockers clear as N5-LW-02 requires, and bring the defect list vs blocker criteria to the Wed 18 Nov 2026 readiness review.",
+      "what": "Retest fixes (Saad covers overflow, Saad pilot side), invite pilots 4-5 by Fri 13 Nov 2026 once blockers clear as N5-LW-02 requires, and bring the defect list vs blocker criteria to the Wed 18 Nov 2026 readiness review.",
       "why": "Readiness review #1 needs zero P1 with evidence.",
       "area": "PM",
       "due": "2026-11-19",
@@ -24723,9 +25331,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-SD-09",
       "sprint": "N6",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "Complete top-20 support macros + Art-E and gauge explainers",
-      "what": "Finish the top-20 macros and write 'why did Art-E say that' and 'why did the gauge say that' explainers; hand to Jill. Ownership proposal: Lewis drafts support material using the shipped product; Saad verifies UI instructions. Only shipped surfaces are documented.",
+      "what": "Finish the top-20 macros and write 'why did Art-E say that' and 'why did the gauge say that' explainers; hand to Jill. Ownership proposal: Jill drafts support material using the shipped product; Saad verifies UI instructions. Only shipped surfaces are documented.",
       "why": "Support answers written before support exists.",
       "area": "PM",
       "due": "2026-11-20",
@@ -24754,13 +25362,18 @@ window.LAUNCH_DATA = {
       "estimated_days": 1,
       "estimate_source": "16 Sep inherited effort estimate; not a new team commitment",
       "effort_allocations": {
-        "Lewis": 0.75,
-        "Saad": 0.25
+        "Jill": 0.75,
+        "Alex": 0.25
       },
       "audit": {
         "decision": "reassigned",
         "reason": "Use pilot/support expertise for drafting, retain Saad review; total effort unchanged."
-      }
+      },
+      "delivery_lead": "Jill",
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-SD-10",
@@ -24811,7 +25424,7 @@ window.LAUNCH_DATA = {
       "sprint": "N6",
       "assignee": "Saad",
       "title": "Run bug bash #1 on staging (scripted, 60 min) and hand Asad the list",
-      "what": "Run the first scripted bug bash on staging with Lewis, Muteeb and Faheem (60 minutes, one script per surface), file findings against the blocker criteria, and hand Asad the ranked list the same day so fixes land before full UAT on the frozen build on Thu 26 Nov 2026.",
+      "what": "Run the first scripted bug bash on staging with Saad, Muteeb and Faheem (60 minutes, one script per surface), file findings against the blocker criteria, and hand Asad the ranked list the same day so fixes land before full UAT on the frozen build on Thu 26 Nov 2026.",
       "why": "Asad's N5-AS-02 depends on 'Saad: bug bash #1 list' and no ticket ran the bash after Rafeh's QA support was dropped.",
       "area": "QA",
       "due": "2026-11-20",
@@ -24832,8 +25445,8 @@ window.LAUNCH_DATA = {
       "source": "reconciler",
       "layman": "A one-hour organised bug hunt on the test site with four of us following scripts, ending with a ranked fix list handed to Asad the same day — so the worst bugs are gone before pilots start testing.",
       "layman_analogy": "Like four inspectors sweeping the theatre with torches for one timed hour before the preview audience, handing the stage manager a ranked snag list at the interval.",
-      "layman_needed": "A 60-minute scripted bug hunt run on staging with Lewis, Muteeb and Faheem, findings graded against the blocker rules, and the ranked fix list in Asad's hands the same day, before full testing on the frozen build starts Thu 26 Nov 2026.",
-      "layman_output": "A completed one-hour scripted bug hunt on staging with Saad, Lewis, Muteeb and Faheem each working through a script for one area, every finding graded against the blocker rules, and the ranked fix list in Asad's hands the same day — Fri 20 Nov 2026. The worst bugs get found and queued for fixing before full testing on the frozen build on Thu 26 Nov 2026, and a teammate can read the ranked list.",
+      "layman_needed": "A 60-minute scripted bug hunt run on staging with Saad, Muteeb and Faheem, findings graded against the blocker rules, and the ranked fix list in Asad's hands the same day, before full testing on the frozen build starts Thu 26 Nov 2026.",
+      "layman_output": "A completed one-hour scripted bug hunt on staging with Saad, Saad, Muteeb and Faheem each working through a script for one area, every finding graded against the blocker rules, and the ranked fix list in Asad's hands the same day — Fri 20 Nov 2026. The worst bugs get found and queued for fixing before full testing on the frozen build on Thu 26 Nov 2026, and a teammate can read the ranked list.",
       "moved_from": "N5",
       "launch_stage": "beta",
       "estimated_days": 1,
@@ -25268,7 +25881,7 @@ window.LAUNCH_DATA = {
       "sprint": "N5",
       "assignee": "Jill",
       "title": "Invoicing dry run: 5 draft invoices produced and checked",
-      "what": "Produce five draft invoices from the template, one per pilot on Lewis's confirmed roster, using the countersigned commercial terms and the founding price: legal particulars, VAT treatment, payment terms, pilot reference and start date. Walk each past Filza (matches terms) and Alex (matches the notice planned for the week of Tue 24 Nov 2026); fix the template; confirm the bank-details block and send-from address, and create the payment-tracking sheet.",
+      "what": "Produce five draft invoices from the template, one per pilot on Jill's confirmed roster, using the countersigned commercial terms and the founding price: legal particulars, VAT treatment, payment terms, pilot reference and start date. Walk each past Filza (matches terms) and Alex (matches the notice planned for the week of Tue 24 Nov 2026); fix the template; confirm the bank-details block and send-from address, and create the payment-tracking sheet.",
       "why": "Money mechanics rehearsed before money moves; the plan says 5 invoices sent by Wed 2 Dec 2026 in beta week and a template error found then costs the go/no-go a line item.",
       "area": "Finance",
       "due": "2026-11-13",
@@ -25291,7 +25904,7 @@ window.LAUNCH_DATA = {
       "source": "plan",
       "acceptance": "Five draft invoices exist, each checked by Filza against terms and by Alex against the notice, with the template corrected and a tracking sheet ready.",
       "checklist": [
-        "Get the confirmed pilot list and start dates from Lewis",
+        "Get the confirmed pilot list and start dates from Jill",
         "Draft five invoices from the template",
         "Filza checks each against the countersigned terms; Alex checks against the notice draft",
         "Fix the template; confirm bank block and send-from address",
@@ -25337,7 +25950,7 @@ window.LAUNCH_DATA = {
         "Close underwriter questions with Muteeb and Filza",
         "Bind cover; pay premium",
         "File certificates and schedule in the evidence folder",
-        "Diary renewal and notify Lewis that cover is in place"
+        "Diary renewal and notify Jill that cover is in place"
       ],
       "layman": "Jill buys the company's professional-liability and cyber insurance so cover is in force before the first customer money arrives — a must-have before anyone pays us.",
       "layman_analogy": "Like taking out home insurance the week before the tenants move in — cover must start before the first rent cheque, not after the first leak.",
@@ -25355,7 +25968,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-LW-01",
       "sprint": "N5",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "Recheck pilot clearance for UAT; collect only missing or changed terms",
       "what": "Reuse N2-LW-05 clearance records before UAT. Chase only new pilots, expired clearance or material changes requiring fresh agreement. Existing signed terms are not recreated. Confirm the actual cleared cohort with Saad.",
       "why": "Filza's rule is all 5 countersigned BEFORE UAT; a pilot without paper cannot be in wave 1 or be invoiced.",
@@ -25393,14 +26006,23 @@ window.LAUNCH_DATA = {
       },
       "checklist_revised_at": "2026-09-17T12:00:00Z",
       "critical_review_note": "17 September critical review: Reuse N2-LW-05 clearance records before UAT. Chase only new pilots, expired clearance or material changes requiring fresh agreement. Existing signed terms are not recreated. Confirm the actual cleared cohort with Saad.",
-      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies."
+      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies.",
+      "delivery_lead": "Jill",
+      "effort_allocations": {
+        "Jill": 0.75,
+        "Alex": 0.25
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-LW-02",
       "sprint": "N5",
-      "assignee": "Lewis",
+      "assignee": "Saad",
       "title": "UAT wave 1 pilot side: pilots 1-3, retests, invite 4-5",
-      "what": "Schedule pilots 1-3 for Saad's full-journey sessions, sit in as the pilot's person (watch-don't-guide), and after each fix re-run the failed steps with the pilot: Saad triages, Lewis re-runs with the pilot (the pilot side of the retest overflow). When wave 1 is clean, invite pilots 4-5 for the next wave.",
+      "what": "Schedule pilots 1-3 for Saad's full-journey sessions, sit in as the pilot's person (watch-don't-guide), and after each fix re-run the failed steps with the pilot: Saad triages, Saad re-runs with the pilot (the pilot side of the retest overflow). When wave 1 is clean, invite pilots 4-5 for the next wave.",
       "why": "Fix-then-invite run for real; without pilot-side retests the defect log never closes and the Wed 18 Nov 2026 review reads open P1s.",
       "area": "QA",
       "due": "2026-11-13",
@@ -25423,10 +26045,10 @@ window.LAUNCH_DATA = {
         "Log to Saad's triage",
         "Invite pilots 4-5"
       ],
-      "layman": "Lewis sits with pilots 1-3 during their test sessions as their advocate, then re-runs each failed step with them after we fix it, and invites pilots 4-5 once the first wave is clean — so the bug list actually closes.",
+      "layman": "Saad sits with pilots 1-3 during their test sessions as their advocate, then re-runs each failed step with them after we fix it, and invites pilots 4-5 once the first wave is clean — so the bug list actually closes.",
       "layman_analogy": "Like a driving instructor sitting silently in the passenger seat, then re-driving each failed manoeuvre after the fix — and only booking the next learners once the first pass clean.",
       "layman_needed": "Testing sessions completed with pilots 1-3, every reported problem re-tested with the pilot after fixing, and pilots 4-5 invited for the next wave by Fri 13 Nov 2026.",
-      "layman_output": "Completed test sessions with pilots 1-3, where Lewis sat in as each pilot's advocate, plus a record showing every reported problem was re-run with the pilot after the fix rather than assumed closed. Pilots 4 and 5 hold invitations for the next wave by Fri 13 Nov 2026, so the bug list demonstrably shrinks to zero instead of quietly reopening.",
+      "layman_output": "Completed test sessions with pilots 1-3, where Saad sat in as each pilot's advocate, plus a record showing every reported problem was re-run with the pilot after the fix rather than assumed closed. Pilots 4 and 5 hold invitations for the next wave by Fri 13 Nov 2026, so the bug list demonstrably shrinks to zero instead of quietly reopening.",
       "timebox_days": 1,
       "launch_stage": "beta",
       "estimated_days": 1,
@@ -25434,12 +26056,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.6,
+        "Alex": 0.4
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-LW-03",
       "sprint": "N5",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "Crisis drill #2 pilot page, consent and witness for the Wed 18 Nov 2026 video",
       "what": "Repeat the N3 drill mechanics for Faheem's drill #2: a consenting pilot page with video permission from N4-LW-05, a seeded storm inside a weekday hour, the stopwatch on comment-posted to email-received, and clean-up after. Confirm with Saad that what the video script claims matches what the drill did.",
       "why": "The Tue 20 Oct 2026 crisis-demo video must survive fact-checking; the drill it is cut from needs a real page and a witnessed clock.",
@@ -25464,7 +26095,7 @@ window.LAUNCH_DATA = {
         "Clean up",
         "Claims check with Saad"
       ],
-      "layman": "Lewis arranges the second live comment-storm rehearsal on a consenting pilot's real page, with times recorded stopwatch-style — the raw, witnessed footage the Wed 18 Nov 2026 demo video is cut from.",
+      "layman": "Jill arranges the second live comment-storm rehearsal on a consenting pilot's real page, with times recorded stopwatch-style — the raw, witnessed footage the Wed 18 Nov 2026 demo video is cut from.",
       "layman_analogy": "Like arranging a witnessed fire drill in a friend's shop, stopwatch running, with their signed OK to film it — real smoke, real clock, real permission.",
       "layman_needed": "A record of the second live comment-storm rehearsal on a consenting pilot's page — timings from comment posted to email received — plus the pilot's filming permission, filed by Fri 6 Nov 2026.",
       "layman_output": "A filed record of the second live comment-storm rehearsal, run on a consenting pilot's real page inside a weekday hour: stopwatch timings from the moment a comment posted to the moment the warning email arrived, clean-up confirmed, and the pilot's signed filming permission attached. It is the raw, witnessed footage the Wed 18 Nov 2026 demo video is cut from, filed by Fri 6 Nov 2026.",
@@ -25475,12 +26106,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Jill",
+      "effort_allocations": {
+        "Jill": 0.375,
+        "Alex": 0.125
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-LW-04",
       "sprint": "N5",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Walk each pilot through live connect after the OAuth Live Mode flip",
       "what": "The week Asad flips OAuth Live Mode, screen-share with each of the 5 pilots to reconnect their pages through the public OAuth flow, confirm data continuity (no gap, no duplicate pages) and log any consent-screen confusion for Saad. If approval has not landed by Fri 13 Nov 2026, record that pilots stay on Tester roles per Alex's dev-mode fallback, for the Wed 18 Nov 2026 review.",
       "why": "The moment the product becomes publicly real; a pilot who cannot reconnect on live mode is a pilot who cannot be invoiced.",
@@ -25506,10 +26146,10 @@ window.LAUNCH_DATA = {
         "Confusion log to Saad",
         "Fallback record if approval is pending"
       ],
-      "layman": "Once Facebook approves us for public use, Lewis screen-shares with each pilot to reconnect their page through the new public sign-in and confirms no data was lost — the moment the product becomes real for paying customers.",
+      "layman": "Once Facebook approves us for public use, Alex screen-shares with each pilot to reconnect their page through the new public sign-in and confirms no data was lost — the moment the product becomes real for paying customers.",
       "layman_analogy": "Like walking each tenant through the new front-door lock after it's changed — hand on shoulder, key turned together, checking nothing in the flat went missing.",
       "layman_needed": "All five pilots reconnected through the new public Facebook sign-in on a screen-share, with no data gaps or duplicates confirmed by Fri 13 Nov 2026, or, if approval hasn't landed, the fallback state recorded for the Wed 18 Nov 2026 review.",
-      "layman_output": "All five pilots reconnected to their Facebook pages through the new public sign-in, each on a screen-share with Lewis, with confirmation that no data went missing and no pages duplicated, and any confusing moments logged for Saad. If Facebook approval has not landed by Fri 13 Nov 2026, a written note records the fallback state instead, so either way the Wed 18 Nov 2026 review knows exactly where pilots stand.",
+      "layman_output": "All five pilots reconnected to their Facebook pages through the new public sign-in, each on a screen-share with Alex, with confirmation that no data went missing and no pages duplicated, and any confusing moments logged for Saad. If Facebook approval has not landed by Fri 13 Nov 2026, a written note records the fallback state instead, so either way the Wed 18 Nov 2026 review knows exactly where pilots stand.",
       "timebox_days": 0.5,
       "launch_stage": "beta",
       "estimated_days": 0.5,
@@ -25517,12 +26157,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 0.375,
+        "Asad": 0.125
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-LW-05",
       "sprint": "N5",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Conversion conversations toward 5 paying pilots",
       "what": "Using Alex's founding-pricing briefing, the pilot commercial terms from Jill and Filza, and Asad's one-page security packet, hold a pricing conversation with every pilot: what they would pay, what would stop them, which pages they would pay for. Record willingness-to-pay, objections and the price each pilot was told, and give Alex and Jill a weekly count toward 5.",
       "why": "Willingness to pay is validated in conversation then confirmed by invoice; if fewer than 5 are warm by Wed 18 Nov 2026, Alex must know at the readiness review.",
@@ -25531,7 +26180,7 @@ window.LAUNCH_DATA = {
       "priority": "P1",
       "priority_reason": "The dated commitment is N6-LW-04 (confirmed list to Jill Thu 22 Oct 2026, stays P0); N5 conversations are the run-up with two weeks of slack.",
       "depends_on": [
-        "Alex: founding pricing briefed to Lewis (N3)",
+        "Alex: founding pricing briefed to Alex (N3)",
         "Jill/Filza: pilot commercial terms + invoice template (N2)",
         "Asad: /security packet (N5)"
       ],
@@ -25548,7 +26197,7 @@ window.LAUNCH_DATA = {
         "Objections log",
         "Weekly count to Alex and Jill"
       ],
-      "layman": "Lewis holds the money conversation with each pilot using the agreed founding price and terms, aiming for five paying customers signed before launch.",
+      "layman": "Alex holds the money conversation with each pilot using the agreed founding price and terms, aiming for five paying customers signed before launch.",
       "layman_analogy": "Like a market trader asking regulars straight out what they'd pay before setting the stall's first real prices — awkward question, priceless answer.",
       "layman_needed": "A written record per pilot of what they would pay, their objections and their reaction to the founding price, with the count of pilots warm to paying reported at the Wed 18 Nov 2026 review.",
       "layman_output": "A written record per pilot of the money conversation: what they say they would pay, what would stop them, and how they reacted to the founding price. The records sit in the pilot folder and the count of pilots warm to paying is reported at the Wed 18 Nov 2026 review, so the private beta decision rests on real answers from real customers, not hope.",
@@ -25559,12 +26208,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 0.75,
+        "Asad": 0.25
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-LW-06",
       "sprint": "N5",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Testimonials finalised with permissions",
       "what": "Turn the N4 stories into final quotes in the pilots' approved wording, matched to the signed permissions, and hand them to Saad for the PH package and Asad for the marketing-site refresh in N6. Flag any quote that claims something the product does not yet do.",
       "why": "Proof collected while goodwill is warm; the PH package and the N6 site refresh need final text.",
@@ -25599,12 +26257,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 0.375,
+        "Asad": 0.125
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-LW-07",
       "sprint": "N5",
-      "assignee": "Lewis",
+      "assignee": "Saad",
       "title": "Transcript reviews continue; last golden-set additions before freeze",
       "what": "Keep the weekly 30-minute transcript review with Saad (Tue 10 Nov 2026, Fri 13 Nov 2026) and send Faheem the unscripted-question additions from those sessions; the golden set stays open until the Mon 7 Dec 2026 model freeze, after which the review feeds only support macros.",
       "why": "Art-E's regression must be green seven nights before freeze; the freshest failures come from real transcripts.",
@@ -25625,7 +26292,7 @@ window.LAUNCH_DATA = {
         "Candidates to Faheem",
         "Macro notes to Saad"
       ],
-      "layman": "Lewis keeps reviewing real conversations with the assistant weekly and sends the last new test questions before the models are locked for launch.",
+      "layman": "Saad keeps reviewing real conversations with the assistant weekly and sends the last new test questions before the models are locked for launch.",
       "layman_analogy": "Like a teacher marking a stack of homework each week and posting the last tricky questions to the exam board before the paper is locked for printing.",
       "layman_needed": "Two weekly assistant-conversation reviews logged (5 and Fri 13 Nov 2026) and the new test questions from them sent to Faheem by Fri 13 Nov 2026, ahead of the Mon 7 Dec 2026 model lock.",
       "layman_output": "Two logged weekly reviews of real pilot conversations with the assistant (5 and Fri 13 Nov 2026), and the batch of new test questions sent to Faheem by Fri 13 Nov 2026, well ahead of the Mon 7 Dec 2026 model lock. Anyone can open the review log and see what real users asked and how the assistant coped, and the test set now includes the awkward questions real usage surfaced.",
@@ -25636,7 +26303,16 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.3,
+        "Alex": 0.2
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-FZ-02",
@@ -25983,7 +26659,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N6-AS-02",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Founding-pricing update on the site, live in the week of Tue 24 Nov 2026",
       "what": "Update the landing pricing section and FAQ with Alex's defined founding terms (price, lock duration, eligibility deadline) reconciled with invoices; ship the same day the notice goes out.",
       "why": "One price everywhere; the founding-pricing notice in the week of Tue 24 Nov 2026, landing and invoices must agree.",
@@ -26019,7 +26695,16 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.2,
+        "Asad": 0.05
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N6-AS-03",
@@ -26152,7 +26837,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N6-AS-06",
       "sprint": "LW",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Marketing site: frozen-build screenshots, legal pages, OG, SEO",
       "what": "Replace all site screenshots with captures from the frozen build (curated demo tenant); ToS / Privacy / DPA / Cookie versioned pages live and linked from the footer AND Settings (Filza's final sweep); Companies Act particulars in the footer; OG image on every public URL; sitemap.xml, robots.txt, structured data.",
       "why": "Pre-freeze screenshots go stale by definition; PH-day SEO basics; the legal go/no-go pillar needs the links.",
@@ -26188,12 +26873,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N6-AS-07",
       "sprint": "LW",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Final sweep of every empty/loading/error state, desktop + mobile",
       "what": "Walk every surface's empty, loading, error, thin-history and fail-closed states on staging (desktop and mobile) against Saad's packs; fix deviations as blockers only; record the checklist.",
       "why": "The states are the product's manners; UAT judges comprehension on them.",
@@ -26227,14 +26921,23 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N6-AS-08",
       "sprint": "LW",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Blocker fixes from full UAT and bug bash #2 (Mon 23 Nov 2026)",
-      "what": "Daily blocker fixes from Saad's public triage log and the Mon 23 Nov 2026 bug bash under the branch policy, each retested by Saad (Lewis on the pilot side); nothing non-blocker merges.",
+      "what": "Daily blocker fixes from Saad's public triage log and the Mon 23 Nov 2026 bug bash under the branch policy, each retested by Saad (Saad on the pilot side); nothing non-blocker merges.",
       "why": "Zero P1 at the Fri 11 Dec 2026 gate and 5 pilots converting on the beta build, invoiced by Wed 2 Dec 2026.",
       "area": "QA",
       "due": "2026-12-02",
@@ -26259,7 +26962,7 @@ window.LAUNCH_DATA = {
       "layman": "Asad fixes only launch-blocking bugs from pilot testing and the bug hunt before the Fri 11 Dec 2026 code freeze, each fix re-tested, until the log shows zero serious bugs on Fri 11 Dec 2026 — the bar the public launch decision requires.",
       "layman_analogy": "Like a mechanic in race week fixing only faults that would stop the car — every repair track-tested, and the fault sheet reading clear by scrutineering day.",
       "layman_needed": "Every launch-blocking bug from pilot testing and the bug hunt before the Fri 11 Dec 2026 code freeze fixed and re-tested, so the public triage log shows zero serious open bugs on Fri 11 Dec 2026.",
-      "layman_output": "A public bug log showing every launch-blocking problem from pilot testing and the bug hunt before the Fri 11 Dec 2026 code freeze fixed under the freeze rules and re-tested — by Saad, with Lewis re-running pilot-reported ones — until it reads zero serious open bugs on Fri 11 Dec 2026. That zero is the bar the public launch decision requires, and anyone can open the log and verify it themselves.",
+      "layman_output": "A public bug log showing every launch-blocking problem from pilot testing and the bug hunt before the Fri 11 Dec 2026 code freeze fixed under the freeze rules and re-tested — by Saad, with Saad re-running pilot-reported ones — until it reads zero serious open bugs on Fri 11 Dec 2026. That zero is the bar the public launch decision requires, and anyone can open the log and verify it themselves.",
       "moved_from": "N6",
       "timebox_days": 3,
       "launch_stage": "public",
@@ -26268,7 +26971,18 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.5,
+        "Asad": 0.8999999999999999,
+        "Muteeb": 0.6000000000000001
+      },
+      "reviewers": [
+        "Asad",
+        "Muteeb"
+      ],
+      "workload_note": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N6-AS-09",
@@ -26518,7 +27232,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N6-MT-02",
       "sprint": "N6",
-      "assignee": "Muteeb",
+      "assignee": "Faheem",
       "title": "Align serving endpoints to the frozen model artifacts on 26 November",
       "what": "Once Faheem pins every model version on Thu 26 Nov 2026, point each serving endpoint at the pinned artifact manifest, disable any auto-refresh of weights, and record artifact hashes in the runbook.",
       "why": "A frozen model served from an unpinned path is not frozen.",
@@ -26553,7 +27267,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Faheem",
+      "effort_allocations": {
+        "Faheem": 0.375,
+        "Muteeb": 0.125
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N6-MT-03",
@@ -26939,7 +27662,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N6-SD-03",
       "sprint": "N6",
-      "assignee": "Lewis",
+      "assignee": "Saad",
       "title": "Docs screenshots from the frozen build + final copy audit",
       "what": "Capture docs screenshots from the frozen beta build and audit all public copy: the Tue 1 Dec 2026 private beta and Tue 15 Dec 2026 public launch dates everywhere, founding-pricing terms match landing and invoices, legal links, AI labels.",
       "why": "Everything public must match everything real.",
@@ -26976,21 +27699,21 @@ window.LAUNCH_DATA = {
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
       "effort_allocations": {
-        "Lewis": 0.25,
-        "Saad": 0.25
+        "Saad": 0.3,
+        "Alex": 0.2
       },
-      "delivery_lead": "Lewis",
+      "delivery_lead": "Saad",
       "reviewers": [
-        "Saad"
+        "Alex"
       ],
-      "workload_note": "Lewis captures screenshots and checks links and dates; Saad approves visual and product accuracy. Legal wording is reused from approved documents. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      "workload_note": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N6-SD-04",
       "sprint": "N6",
       "assignee": "Saad",
       "title": "Full UAT on the frozen build: 5 pilots, comprehension signed",
-      "what": "Run all 5 pilots through all surfaces on the frozen build; each signs a comprehension sheet. Lewis on pilot side; Saad covers retest overflow.",
+      "what": "Run all 5 pilots through all surfaces on the frozen build; each signs a comprehension sheet. Saad on pilot side; Saad covers retest overflow.",
       "why": "Comprehension, not preference; and Faheem checks the ledger against this reality.",
       "area": "PM",
       "due": "2026-11-26",
@@ -26998,7 +27721,7 @@ window.LAUNCH_DATA = {
       "priority_reason": "Gate-serving",
       "depends_on": [
         "N6-SD-01",
-        "Lewis: pilots",
+        "Saad: pilots",
         "N5-SD-05"
       ],
       "feeds": [
@@ -27017,7 +27740,7 @@ window.LAUNCH_DATA = {
       "layman": "All 5 pilot customers try every part of the final product while we watch, and each signs to say they understood what they saw, so we know real users get it before we launch to strangers.",
       "layman_analogy": "Like the final fitting where each of five customers tries on the whole outfit and signs the slip saying it fits and they understand the care label.",
       "layman_needed": "All five pilots taken through every part of the final product while observed, with five signed sheets confirming each understood what they saw, filed.",
-      "layman_output": "All five pilot customers taken through every part of the final product while observed, Lewis alongside as their advocate, with five signed comprehension sheets filed confirming each pilot understood what they saw. The launch decision can point to written proof that real users get the product — before it is shown to strangers.",
+      "layman_output": "All five pilot customers taken through every part of the final product while observed, Saad alongside as their advocate, with five signed comprehension sheets filed confirming each pilot understood what they saw. The launch decision can point to written proof that real users get the product — before it is shown to strangers.",
       "timebox_days": 2,
       "launch_stage": "public",
       "estimated_days": 2,
@@ -27343,7 +28066,7 @@ window.LAUNCH_DATA = {
       "sprint": "N6",
       "assignee": "Alex",
       "title": "Lock the launch run-of-show",
-      "what": "Lock the run-of-show: Mon 14 Dec 2026 production smoke + release-candidate-done post, Tue 15 Dec 2026 PH preview verified + hunter sync, Tue 15 Dec 2026 08:00 flags flip (Asad), smoke of all 5 flows before any announcement, 08:01 Product Hunt + waitlist queue email, batch 1 = first 100 pages, pilot messages (Lewis), investor note, and the hour-by-hour PH-reply shift. No changes after Fri 11 Dec 2026. No longer waits on N6-AX-02 (parked in the 16 Sep balancing).",
+      "what": "Lock the run-of-show: Mon 14 Dec 2026 production smoke + release-candidate-done post, Tue 15 Dec 2026 PH preview verified + hunter sync, Tue 15 Dec 2026 08:00 flags flip (Asad), smoke of all 5 flows before any announcement, 08:01 Product Hunt + waitlist queue email, batch 1 = first 100 pages, pilot messages (Alex), investor note, and the hour-by-hour PH-reply shift. No changes after Fri 11 Dec 2026. No longer waits on N6-AX-02 (parked in the 16 Sep balancing).",
       "why": "Calm is a choice made in advance; the run-of-show is what makes launch a flag flip watched by eight people who know their seat.",
       "area": "Launch",
       "due": "2026-11-27",
@@ -27435,7 +28158,7 @@ window.LAUNCH_DATA = {
       "sprint": "LW",
       "assignee": "Jill",
       "title": "Contact tree tested in Muteeb's game-day",
-      "what": "Write the contact tree (every team member, incident role, primary and backup channel, Alex escalation, Filza's 72h breach owner, pilot hotline via Lewis, status-page poster) and test it live during Muteeb's N6 Week A game-day: every person reached within target, one deliberate 'unreachable' to test the fallback, results timestamped. Fold the fixed tree into the launch runbook and the war-room board.",
+      "what": "Write the contact tree (every team member, incident role, primary and backup channel, Alex escalation, Filza's 72h breach owner, pilot hotline via Jill, status-page poster) and test it live during Muteeb's N6 Week A game-day: every person reached within target, one deliberate 'unreachable' to test the fallback, results timestamped. Fold the fixed tree into the launch runbook and the war-room board.",
       "why": "The game-day is the only incident we get to schedule; a contact tree that has not been dialled once fails on Tue 15 Dec 2026.",
       "area": "Launch",
       "due": "2026-12-02",
@@ -27489,7 +28212,7 @@ window.LAUNCH_DATA = {
         "N5-JL-05",
         "N3-JL-05",
         "N5-AX-06",
-        "Lewis: final pilot roster"
+        "Jill: final pilot roster"
       ],
       "feeds": [
         "N6-JL-06"
@@ -27522,7 +28245,7 @@ window.LAUNCH_DATA = {
       "sprint": "LW",
       "assignee": "Jill",
       "title": "On-call rota final handed into the launch-week rota",
-      "what": "Freeze the rota for Sun 13 Dec 2026 - Fri 18 Dec 2026, superseding the provisional public launch week days in N5-JL-01: primary/secondary per day including the weekend before the public launch and Tue 15 Dec 2026 itself, commander per shift, Saad on support, Lewis on the pilot hotline, Alex on PH replies (per Saad's rota), and paging routes matching Muteeb's 'monitoring + on-call final'. Hand it to Muteeb and Saad by Wed 2 Dec 2026 so it is in the runbook for dry run #1 on Thu 10 Dec 2026.",
+      "what": "Freeze the rota for Sun 13 Dec 2026 - Fri 18 Dec 2026, superseding the provisional public launch week days in N5-JL-01: primary/secondary per day including the weekend before the public launch and Tue 15 Dec 2026 itself, commander per shift, Saad on support, Jill on the pilot hotline, Alex on PH replies (per Saad's rota), and paging routes matching Muteeb's 'monitoring + on-call final'. Hand it to Muteeb and Saad by Wed 2 Dec 2026 so it is in the runbook for dry run #1 on Thu 10 Dec 2026.",
       "why": "Muteeb's N6 'monitoring + on-call final' and Saad's hour-by-hour launch-week rota both need the human side from Jill; the Sun 25 Oct 2026 dry run rehearses whatever is written.",
       "area": "Launch",
       "due": "2026-12-02",
@@ -27550,7 +28273,7 @@ window.LAUNCH_DATA = {
       "layman": "Finalise who is on duty each day and night from Sun 13 Dec 2026 to Fri 18 Dec 2026, including the weekend before the public launch, and hand it over in time to be rehearsed, so cover for public launch week is settled well in advance.",
       "layman_analogy": "Like posting the final staff rota on the kitchen wall a week before the wedding so every shift, including the overnight, has a name on it.",
       "layman_needed": "A frozen duty rota covering Sun 13 Dec 2026 to Fri 18 Dec 2026, day and night, in the runbook before the Thu 10 Dec 2026 rehearsal, with the paging system set up to match it exactly.",
-      "layman_output": "A frozen duty rota covering Sun 13 Dec 2026 to Fri 18 Dec 2026 sits in the launch runbook before the Thu 10 Dec 2026 rehearsal: who is on first and second call each day and night, who commands each shift, plus Saad on support, Lewis on the pilot hotline and Alex on Product Hunt replies. The paging system is set up to match it exactly, so anyone can look up any hour of the public launch fortnight and see precisely who gets woken.",
+      "layman_output": "A frozen duty rota covering Sun 13 Dec 2026 to Fri 18 Dec 2026 sits in the launch runbook before the Thu 10 Dec 2026 rehearsal: who is on first and second call each day and night, who commands each shift, plus Saad on support, Jill on the pilot hotline and Alex on Product Hunt replies. The paging system is set up to match it exactly, so anyone can look up any hour of the public launch fortnight and see precisely who gets woken.",
       "moved_from": "N6",
       "launch_stage": "public",
       "estimated_days": 0.5,
@@ -27656,7 +28379,7 @@ window.LAUNCH_DATA = {
       "sprint": "LW",
       "assignee": "Jill",
       "title": "5 invoices sent by Wed 2 Dec 2026 against countersigned terms",
-      "what": "Issue the five pilot invoices from the dry-run drafts once Filza confirms each pilot's agreement and DPA is countersigned and Lewis confirms conversion: correct amounts, VAT, particulars and due dates; send from the agreed address, log send time and recipient in the tracking sheet, and hand Alex the 'invoices sent' line with evidence for the go/no-go memo.",
+      "what": "Issue the five pilot invoices from the dry-run drafts once Filza confirms each pilot's agreement and DPA is countersigned and Jill confirms conversion: correct amounts, VAT, particulars and due dates; send from the agreed address, log send time and recipient in the tracking sheet, and hand Alex the 'invoices sent' line with evidence for the go/no-go memo.",
       "why": "Paying pilots are the launch's real success metric, invoiced before not after; the N6 gate reads '5 invoices sent'.",
       "area": "Finance",
       "due": "2026-12-02",
@@ -27667,7 +28390,7 @@ window.LAUNCH_DATA = {
         "N5-JL-05",
         "N5-JL-06",
         "N5-LW-01",
-        "Lewis: conversion confirmed per pilot",
+        "Jill: conversion confirmed per pilot",
         "Alex: 17 Nov notice sent"
       ],
       "feeds": [
@@ -27677,7 +28400,7 @@ window.LAUNCH_DATA = {
       "source": "plan",
       "acceptance": "Five invoices are sent by Wed 2 Dec 2026, each against a countersigned agreement, logged with timestamps and evidenced in the go/no-go memo.",
       "checklist": [
-        "Confirm countersignature per pilot with Filza and conversion with Lewis",
+        "Confirm countersignature per pilot with Filza and conversion with Jill",
         "Finalise each invoice from the reconciled figures",
         "Send from the agreed address; log time and recipient",
         "Give Alex the evidence line for the memo",
@@ -27699,7 +28422,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N6-LW-01",
       "sprint": "N6",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "Daily pilot health checks start Fri 20 Nov 2026",
       "what": "From Fri 20 Nov 2026 check each of the 5 pilots daily: logged in, pages connected and fresh, any alert unanswered, any wrong-looking number, mood on the last call. One row per pilot per day in the health sheet; anything red goes to Saad's triage the same day.",
       "why": "The five people who matter most, minded personally; this is the manual check the Wave-1 customer health score later formalises.",
@@ -27734,12 +28457,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Jill",
+      "effort_allocations": {
+        "Jill": 0.75,
+        "Alex": 0.25
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N6-LW-03",
       "sprint": "N6",
-      "assignee": "Lewis",
+      "assignee": "Saad",
       "title": "Pilot side of full UAT on the frozen build, all 5 pilots",
       "what": "Schedule all 5 pilots for Saad's full UAT on the frozen build across every surface, be in the room for comprehension sign-off, and re-run failed steps with each pilot after blocker fixes (retest overflow, pilot side). Get each pilot's comprehension sign-off recorded before the Fri 27 Nov 2026 beta go/no-go.",
       "why": "The go/no-go reads comprehension signed per pilot; retests that wait for a pilot's diary are the last week's biggest schedule risk.",
@@ -27775,14 +28507,23 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.6,
+        "Alex": 0.4
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N6-LW-04",
       "sprint": "N6",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Close 5 paying commitments; confirmed list to Jill by Wed 25 Nov 2026",
-      "what": "Convert the warm pilots to a written yes: each pilot hears the founding price and terms from Lewis before Alex's w/c Tue 24 Nov 2026 public notice, agrees which pages and the billing contact, and confirms 'invoice me'. Hand Jill the confirmed list (name, company, billing contact, pages, agreed terms) by Wed 25 Nov 2026 so 5 invoices leave by Wed 2 Dec 2026, and tell Alex immediately if the count is short.",
+      "what": "Convert the warm pilots to a written yes: each pilot hears the founding price and terms from Alex before Alex's w/c Tue 24 Nov 2026 public notice, agrees which pages and the billing contact, and confirms 'invoice me'. Hand Jill the confirmed list (name, company, billing contact, pages, agreed terms) by Wed 25 Nov 2026 so 5 invoices leave by Wed 2 Dec 2026, and tell Alex immediately if the count is short.",
       "why": "Five paying pilots are the public launch's real success metric and the Fri 11 Dec 2026 gate counts invoices sent; pilots hear the price from a person, not an invoice.",
       "area": "Finance",
       "due": "2026-11-25",
@@ -27806,8 +28547,8 @@ window.LAUNCH_DATA = {
       ],
       "layman": "Get a written yes from all five pilot customers: they hear the founding price from a person, agree terms, and say invoice me. The confirmed list goes to Jill by Wed 25 Nov 2026 so invoices go out before launch.",
       "layman_analogy": "Like getting five handshake deals turned into written orders before the shop's opening-sale advert goes out.",
-      "layman_needed": "Five written 'invoice me' confirmations, each pilot having heard the founding price from Lewis, with the confirmed billing list (name, company, contact, pages, terms) handed to Jill by Wed 25 Nov 2026.",
-      "layman_output": "Jill holds a confirmed billing list by Wed 25 Nov 2026: five pilots, each having heard the founding price and terms from Lewis in person, with name, company, billing contact, agreed pages and terms, and a written 'invoice me'. That list is what lets five invoices leave by Wed 2 Dec 2026, and if the count comes up short Alex hears immediately - so the public launch's real success metric rests on written yeses, not warm feelings.",
+      "layman_needed": "Five written 'invoice me' confirmations, each pilot having heard the founding price from Alex, with the confirmed billing list (name, company, contact, pages, terms) handed to Jill by Wed 25 Nov 2026.",
+      "layman_output": "Jill holds a confirmed billing list by Wed 25 Nov 2026: five pilots, each having heard the founding price and terms from Alex in person, with name, company, billing contact, agreed pages and terms, and a written 'invoice me'. That list is what lets five invoices leave by Wed 2 Dec 2026, and if the count comes up short Alex hears immediately - so the public launch's real success metric rests on written yeses, not warm feelings.",
       "timebox_days": 2,
       "launch_stage": "beta",
       "estimated_days": 2,
@@ -27816,14 +28557,23 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 1.5,
+        "Asad": 0.5
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N6-LW-05",
       "sprint": "N6",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "Launch-day pilot support plan and the hotline seat in the launch rota",
-      "what": "Write the plan: per-pilot contact tree, hotline hours Tue 15 Dec 2026 to Fri 18 Dec 2026, what Lewis handles versus what goes to Saad's support or the war room, the 'pilot sees wrong data = incident' trigger with the exact escalation message, the 'stuck? book 10 min' seat owner agreed in N5-LW-08, and what pilots are told before Tue 15 Dec 2026. Take the pilot-hotline seat in Saad's public launch week rota and rehearse it in runbook dry run #1 on Thu 10 Dec 2026.",
+      "what": "Write the plan: per-pilot contact tree, hotline hours Tue 15 Dec 2026 to Fri 18 Dec 2026, what Jill handles versus what goes to Saad's support or the war room, the 'pilot sees wrong data = incident' trigger with the exact escalation message, the 'stuck? book 10 min' seat owner agreed in N5-LW-08, and what pilots are told before Tue 15 Dec 2026. Take the pilot-hotline seat in Saad's public launch week rota and rehearse it in runbook dry run #1 on Thu 10 Dec 2026.",
       "why": "Launch day is a shift plan; the five relationships are guarded by a human with a written escalation path.",
       "area": "Launch",
       "due": "2026-11-27",
@@ -27839,7 +28589,7 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N6",
       "source": "plan",
-      "acceptance": "The plan is in the launch runbook, the hotline seat is on the rota, and Lewis's role ran in dry run #1 on Thu 10 Dec 2026.",
+      "acceptance": "The plan is in the launch runbook, the hotline seat is on the rota, and Jill's role ran in dry run #1 on Thu 10 Dec 2026.",
       "checklist": [
         "Contact tree",
         "Escalation rules and the incident trigger",
@@ -27849,8 +28599,8 @@ window.LAUNCH_DATA = {
       ],
       "layman": "Write the plan for looking after pilots on launch day: a dedicated hotline, clear rules for when a pilot problem becomes an emergency, so the five relationships that matter most are guarded by a person with a plan.",
       "layman_analogy": "Like assigning the VIP guests their own dedicated host with a direct line for the whole opening night.",
-      "layman_needed": "A written pilot support plan in the launch runbook: hotline hours 22-Fri 18 Dec 2026, escalation rules including 'wrong data = emergency', the hotline seat named on the public launch rota, and Lewis's role rehearsed in the Thu 10 Dec 2026 dry run.",
-      "layman_output": "A written pilot support plan sits in the launch runbook: hotline hours 22-Fri 18 Dec 2026, what Lewis handles versus what escalates to support or the war room, the rule that a pilot seeing wrong data is an automatic emergency with the exact escalation wording, and the 'stuck? book 10 minutes' seat owner. Lewis's hotline seat is named on the public launch rota and was rehearsed in the Thu 10 Dec 2026 dry run.",
+      "layman_needed": "A written pilot support plan in the launch runbook: hotline hours 22-Fri 18 Dec 2026, escalation rules including 'wrong data = emergency', the hotline seat named on the public launch rota, and Jill's role rehearsed in the Thu 10 Dec 2026 dry run.",
+      "layman_output": "A written pilot support plan sits in the launch runbook: hotline hours 22-Fri 18 Dec 2026, what Jill handles versus what escalates to support or the war room, the rule that a pilot seeing wrong data is an automatic emergency with the exact escalation wording, and the 'stuck? book 10 minutes' seat owner. Jill's hotline seat is named on the public launch rota and was rehearsed in the Thu 10 Dec 2026 dry run.",
       "timebox_days": 0.5,
       "launch_stage": "public",
       "estimated_days": 0.5,
@@ -27859,12 +28609,21 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Jill",
+      "effort_allocations": {
+        "Jill": 0.375,
+        "Alex": 0.125
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N6-LW-06",
       "sprint": "N6",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Stage pilot references for Product Hunt",
       "what": "From the finalised testimonials, agree with each consenting pilot what they will do on launch day (a PH comment, a quote in the maker comment, a reply to press), the exact text and the time; give Saad the staged list for the PH package and Alex for the run-of-show.",
       "why": "Launch-day social proof has to be staged in advance or it does not happen at 08:01.",
@@ -27898,7 +28657,16 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 0.375,
+        "Asad": 0.125
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N6-FZ-01",
@@ -28163,7 +28931,7 @@ window.LAUNCH_DATA = {
       "priority": "P0",
       "priority_reason": "The Fri 11 Dec 2026 gate",
       "depends_on": [
-        "Lewis: 5 pilots live"
+        "Alex: 5 pilots live"
       ],
       "feeds": [
         "LW-AS-04"
@@ -28427,7 +29195,7 @@ window.LAUNCH_DATA = {
       "sprint": "LW",
       "assignee": "Alex",
       "title": "Daily 15-min exec check Mon 8 - Tue 15 Dec 2026",
-      "what": "Run a 15-minute daily exec check through the buffer week: scorecard reds, dry run #2 (Sun 13 Dec 2026) outcome, production smoke Mon 14 Dec 2026, pilot status from Lewis, burn from Jill, Meta status. Fixes only: any feature work that appears goes to the cut order, not the weekend.",
+      "what": "Run a 15-minute daily exec check through the buffer week: scorecard reds, dry run #2 (Sun 13 Dec 2026) outcome, production smoke Mon 14 Dec 2026, pilot status from Alex, burn from Jill, Meta status. Fixes only: any feature work that appears goes to the cut order, not the weekend.",
       "why": "The buffer stays buffer only if someone checks daily that it has not filled with feature work.",
       "area": "Launch",
       "due": "2026-12-15",
@@ -28557,7 +29325,7 @@ window.LAUNCH_DATA = {
       "sprint": "LW",
       "assignee": "Jill",
       "title": "Invoice tracking: payment status and chasing schedule",
-      "what": "Track the five invoices from Fri 4 Dec 2026: received/acknowledged, due date, paid; a polite chase at 7 days through Lewis as relationship owner, escalation to Alex at 14; bank reconciliation when payments land; a one-line status for the daily 09:00 war-room checkpoint. Log any pilot invoice query as a support ticket so the answer reuses the terms.",
+      "what": "Track the five invoices from Fri 4 Dec 2026: received/acknowledged, due date, paid; a polite chase at 7 days through Jill as relationship owner, escalation to Alex at 14; bank reconciliation when payments land; a one-line status for the daily 09:00 war-room checkpoint. Log any pilot invoice query as a support ticket so the answer reuses the terms.",
       "why": "'5 invoices sent' is the gate, '5 invoices paid' is the business; tracking that starts after launch loses the first week.",
       "area": "Finance",
       "due": "2026-12-04",
@@ -28565,23 +29333,23 @@ window.LAUNCH_DATA = {
       "priority_reason": "Real risk with slack: payments arrive over weeks, but the first chase point is Fri 4 Dec 2026.",
       "depends_on": [
         "N6-JL-06",
-        "Lewis: pilot channel"
+        "Jill: pilot channel"
       ],
       "feeds": [],
       "gate": "LW",
       "source": "plan",
-      "acceptance": "The tracking sheet shows status per invoice, the 7-day chase went via Lewis where needed, and the war-room checkpoint carries the line daily.",
+      "acceptance": "The tracking sheet shows status per invoice, the 7-day chase went via Jill where needed, and the war-room checkpoint carries the line daily.",
       "checklist": [
         "Populate the sheet with send dates and due dates",
-        "Confirm receipt with each pilot via Lewis",
+        "Confirm receipt with each pilot via Jill",
         "Chase at 7 days; escalate at 14",
         "Reconcile payments against the bank",
         "Report the status line at the 09:00 checkpoint"
       ],
       "layman": "Track each of the five pilot invoices from sent to paid, with a polite chase after a week and escalation after two, because sending invoices is the launch target but getting them paid is the business.",
       "layman_analogy": "Like the shopkeeper's ledger of who has paid, with a friendly reminder after a week and the owner stepping in after two.",
-      "layman_needed": "A tracking sheet showing each of the five invoices from sent to paid, 7-day chases via Lewis and 14-day escalation to Alex where needed, payments reconciled to the bank, and a one-line status read at every morning check-in.",
-      "layman_output": "A tracking sheet follows each of the five invoices from sent to paid: received, due date, payment status, a polite 7-day chase through Lewis and a 14-day escalation to Alex where needed, with payments reconciled against the bank when they land. A one-line status is read at every 09:00 war-room check-in, so anyone can see at a glance whether the launch's real money has actually arrived.",
+      "layman_needed": "A tracking sheet showing each of the five invoices from sent to paid, 7-day chases via Jill and 14-day escalation to Alex where needed, payments reconciled to the bank, and a one-line status read at every morning check-in.",
+      "layman_output": "A tracking sheet follows each of the five invoices from sent to paid: received, due date, payment status, a polite 7-day chase through Jill and a 14-day escalation to Alex where needed, with payments reconciled against the bank when they land. A one-line status is read at every 09:00 war-room check-in, so anyone can see at a glance whether the launch's real money has actually arrived.",
       "timebox_days": 0.25,
       "launch_stage": "beta",
       "estimated_days": 0.25,
@@ -28596,7 +29364,7 @@ window.LAUNCH_DATA = {
       "sprint": "LW",
       "assignee": "Jill",
       "title": "Support inbox staffed to standard for launch week",
-      "what": "Staff support@ to the first-response standard for Sun 13 Dec 2026 - Fri 18 Dec 2026: a named responder per shift (Saad owns support in the public launch week rota; Jill owns the standard, staffing and overflow), Saad's top-20 macros plus the 'why did Art-E say that' and 'is my data shared with other pages' explainers loaded as canned replies, escalation to the on-call engineer and Lewis's pilot hotline, and the 'stuck? book 10 min' escape hatch for batch 1. Rehearse in dry run #2 on Sun 13 Dec 2026 and measure first-response time on Tue 15 Dec 2026.",
+      "what": "Staff support@ to the first-response standard for Sun 13 Dec 2026 - Fri 18 Dec 2026: a named responder per shift (Saad owns support in the public launch week rota; Jill owns the standard, staffing and overflow), Saad's top-20 macros plus the 'why did Art-E say that' and 'is my data shared with other pages' explainers loaded as canned replies, escalation to the on-call engineer and Jill's pilot hotline, and the 'stuck? book 10 min' escape hatch for batch 1. Rehearse in dry run #2 on Sun 13 Dec 2026 and measure first-response time on Tue 15 Dec 2026.",
       "why": "First impressions include first replies; batch 1 is 100 strangers with no concierge.",
       "area": "Ops",
       "due": "2026-12-15",
@@ -28677,7 +29445,7 @@ window.LAUNCH_DATA = {
     {
       "id": "LW-LW-01",
       "sprint": "LW",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "Hotline seat in dry run #2; all 5 pilots confirmed live on production",
       "what": "Take the pilot-hotline seat in dry run #2 on Sun 13 Dec 2026. Before the Mon 14 Dec 2026 production smoke and again on Tue 15 Dec 2026, confirm with each pilot that they can log in on production, their pages are connected and fresh, and they know the public launch day channel; report '5 pilots live' (or which are not) to the war room before Asad announces. No longer waits on LW-AS-02 (parked in the 16 Sep balancing).",
       "why": "The Tue 15 Dec 2026 gate says 5 pilots live and nothing is announced before it is watched working.",
@@ -28699,10 +29467,10 @@ window.LAUNCH_DATA = {
         "Recheck on Tue 15 Dec 2026",
         "Confirmation posted to the war room"
       ],
-      "layman": "Lewis staffs the pilot hotline in the final rehearsal and personally confirms all five pilots can log in on the real product before doors open.",
+      "layman": "Jill staffs the pilot hotline in the final rehearsal and personally confirms all five pilots can log in on the real product before doors open.",
       "layman_analogy": "Like the maitre d' phoning each VIP the day before opening to confirm their table, then telling the kitchen 'all five are coming' before doors open.",
-      "layman_needed": "A dated confirmation in the war room, before the 08:00 switch-on, that all five pilots can log in on the live system with their pages connected and fresh, plus Lewis staffing the hotline seat in the Sun 13 Dec 2026 rehearsal.",
-      "layman_output": "A dated confirmation sits in the war room before the 08:00 switch-on: all five pilots can log in on the live system, their pages are connected and showing fresh data, and each knows the public launch day contact channel - checked before the Mon 14 Dec 2026 smoke and again on Tue 15 Dec 2026. Lewis also staffed the hotline seat in the Sun 13 Dec 2026 rehearsal, so nothing is announced until the five people who matter are confirmed working.",
+      "layman_needed": "A dated confirmation in the war room, before the 08:00 switch-on, that all five pilots can log in on the live system with their pages connected and fresh, plus Jill staffing the hotline seat in the Sun 13 Dec 2026 rehearsal.",
+      "layman_output": "A dated confirmation sits in the war room before the 08:00 switch-on: all five pilots can log in on the live system, their pages are connected and showing fresh data, and each knows the public launch day contact channel - checked before the Mon 14 Dec 2026 smoke and again on Tue 15 Dec 2026. Jill also staffed the hotline seat in the Sun 13 Dec 2026 rehearsal, so nothing is announced until the five people who matter are confirmed working.",
       "timebox_days": 0.5,
       "launch_stage": "public",
       "estimated_days": 0.5,
@@ -28711,7 +29479,16 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Jill",
+      "effort_allocations": {
+        "Jill": 0.375,
+        "Alex": 0.125
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "LW-FZ-02",
@@ -28831,7 +29608,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N4-MT-17",
       "sprint": "N6",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Briefing numbers reconcile against the warehouse",
       "what": "Prove the Today briefing aggregates (N3-MT-07) reconcile exactly with the warehouse for one pilot page - same discipline as the analytics reconcile. If N4-AS-13 (the briefing card) is cut, this closes with a note and the feature gate clause is descoped in writing.",
       "why": "The Today gate says 'briefing numbers reconcile' and nothing currently proves it.",
@@ -28863,7 +29640,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 0.8,
+        "Muteeb": 0.2
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "P0-FZ-01",
@@ -31210,7 +31996,7 @@ window.LAUNCH_DATA = {
       "sprint": "N6",
       "assignee": "Saad",
       "title": "Measure time-to-first-insight for a fresh page in UAT wave 1",
-      "what": "During UAT wave 1 (N5-SD-03/05), connect at least one fresh pilot page and capture funnel timestamps from N4-AS-14's events (connect -> ingest done -> the N2-SD-06 activation event), then file minutes-to-first-insight as the onboarding gate evidence, with Lewis covering the pilot side.",
+      "what": "During UAT wave 1 (N5-SD-03/05), connect at least one fresh pilot page and capture funnel timestamps from N4-AS-14's events (connect -> ingest done -> the N2-SD-06 activation event), then file minutes-to-first-insight as the onboarding gate evidence, with Saad covering the pilot side.",
       "why": "The onboarding gate reads 'measured in UAT', but N4-AS-14 and N5-MT-06 only measure staging tenants; no ticket produces the UAT measurement.",
       "area": "Onboarding",
       "due": "2026-11-20",
@@ -31227,8 +32013,8 @@ window.LAUNCH_DATA = {
       "checklist": [],
       "layman": "During pilot testing we time how many minutes pass from a fresh page connecting to its first useful insight appearing — the real-world measurement our onboarding quality gate demands.",
       "layman_analogy": "Like timing a new oven with a stopwatch from switch-on to the first properly baked loaf, so you can honestly tell buyers how long dinner takes.",
-      "layman_needed": "A recorded stopwatch reading — the minutes from a fresh pilot page connecting to its first useful insight appearing — filed as evidence for the onboarding quality gate, with Lewis handling the pilot side.",
-      "layman_output": "A recorded timing, filed in the launch evidence folder, showing exactly how many minutes passed between a genuine pilot page being connected during the first testing wave and its first useful insight appearing on screen. Lewis handles the pilot side. Anyone reviewing the onboarding quality gate can open the record and see the real stopwatch number, measured on a live customer page rather than a staging account.",
+      "layman_needed": "A recorded stopwatch reading — the minutes from a fresh pilot page connecting to its first useful insight appearing — filed as evidence for the onboarding quality gate, with Saad handling the pilot side.",
+      "layman_output": "A recorded timing, filed in the launch evidence folder, showing exactly how many minutes passed between a genuine pilot page being connected during the first testing wave and its first useful insight appearing on screen. Saad handles the pilot side. Anyone reviewing the onboarding quality gate can open the record and see the real stopwatch number, measured on a live customer page rather than a staging account.",
       "moved_from": "N5",
       "timebox_days": 0.25,
       "launch_stage": "public",
@@ -32041,7 +32827,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-AS-19",
       "sprint": "N3",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Landing: the two agreed changes, and a collaboration example broader than food",
       "what": "Ship the two minor changes already agreed with Alex, and rewrite the collaboration example so it is broader than food: it should show ArtemisAI finding data-driven opportunities for businesses, influencers and page owners to work together, run campaigns and grow. The copy answers five questions: who should you work with, why does it make sense, what audience could you reach, what campaign could you build together, and what do both sides gain. The word \"swap\" does not appear anywhere on the site; we are not presenting share swapping. Filza checks the final wording against the Meta rulebook.",
       "why": "Alex (14 Sep): move the landing forward now; the proposition is data-driven collaboration, not share swapping.",
@@ -32074,7 +32860,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.4,
+        "Asad": 0.1
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-SD-19",
@@ -32301,7 +33096,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N4-AS-20",
       "sprint": "N5",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Apply the screen map: remove or fold screens per the cut-line decision",
       "what": "Implement the outcome of the cut-line review (N3-SD-09): remove the screens on the kill list, fold the listed screens into Art-E answers or feed cards, retire their routes and navigation, and make sure every removed screen's intelligence still reaches the user through Art-E or the feed. Update the E2E flows and the copy freeze list to match.",
       "why": "Alex (14 Sep): anything that can go through Art-E or the home feed should, and we should not ship screens that failed the design test.",
@@ -32335,12 +33130,21 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-MT-18",
       "sprint": "N4",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Cost telemetry: every paid call logs tenant, route, model, tokens and cost",
       "what": "Instrument every cost-bearing call so it writes one cost record: tenant, page, route (draft score, Art-E answer by model tier, Discovery, alert send, ingest), model and version, tokens or units, unit price and cost, plus a nightly roll-up of infra, storage, egress, email and monitoring per environment. This is the feed for the cost dashboard (N3-MT-16) and for Jill's recosting each sprint.",
       "why": "Asad (15 Sep): we must cover the cost of everything; a dashboard with no telemetry underneath is a guess.",
@@ -32377,7 +33181,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 1.6,
+        "Muteeb": 0.4
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-AX-11",
@@ -32786,9 +33599,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-LW-05",
       "sprint": "N4",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "Complete applicable pilot paperwork before each real-data connection",
-      "what": "Use one pilot clearance register. Filza determines the applicable agreement and data terms for each actual pilot; Lewis collects signatures and Alex countersigns where required before any real page is connected. No invented five-customer commitment or old 1 October connection date. Later reviews only handle new pilots or changed terms.",
+      "what": "Use one pilot clearance register. Filza determines the applicable agreement and data terms for each actual pilot; Jill collects signatures and Alex countersigns where required before any real page is connected. No invented five-customer commitment or old 1 October connection date. Later reviews only handle new pilots or changed terms.",
       "why": "Five weeks of processing pilots' page and commenter data on Tester roles with no signed terms or liability cap. (COO-lens review, 15 Sep.)",
       "area": "Pilots",
       "due": "2026-10-23",
@@ -32807,7 +33620,7 @@ window.LAUNCH_DATA = {
       "checklist": [
         "Each connected pilot has the applicable signed and countersigned terms, named page authorisation and legal clearance recorded before connection."
       ],
-      "layman": "Use one pilot clearance register. Filza determines the applicable agreement and data terms for each actual pilot; Lewis collects signatures and Alex countersigns where required before any real page is connected. No invented five-customer commitment or old 1 October connection date. Later reviews only handle new pilots or changed terms.",
+      "layman": "Use one pilot clearance register. Filza determines the applicable agreement and data terms for each actual pilot; Jill collects signatures and Alex countersigns where required before any real page is connected. No invented five-customer commitment or old 1 October connection date. Later reviews only handle new pilots or changed terms.",
       "layman_analogy": "Like having a tenant sign the lease before handing over the keys, not five weeks after they have moved in.",
       "layman_needed": "Use the existing implementation, records and named dependencies. Record missing facts instead of assuming them.",
       "layman_output": "Each connected pilot has the applicable signed and countersigned terms, named page authorisation and legal clearance recorded before connection.",
@@ -32821,8 +33634,17 @@ window.LAUNCH_DATA = {
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
       "checklist_revised_at": "2026-09-17T12:00:00Z",
-      "critical_review_note": "17 September critical review: Use one pilot clearance register. Filza determines the applicable agreement and data terms for each actual pilot; Lewis collects signatures and Alex countersigns where required before any real page is connected. No invented five-customer commitment or old 1 October connection date. Later reviews only handle new pilots or changed terms.",
-      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies."
+      "critical_review_note": "17 September critical review: Use one pilot clearance register. Filza determines the applicable agreement and data terms for each actual pilot; Jill collects signatures and Alex countersigns where required before any real page is connected. No invented five-customer commitment or old 1 October connection date. Later reviews only handle new pilots or changed terms.",
+      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies.",
+      "delivery_lead": "Jill",
+      "effort_allocations": {
+        "Jill": 0.75,
+        "Alex": 0.25
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-AX-15",
@@ -33773,7 +34595,7 @@ window.LAUNCH_DATA = {
       "sprint": "LW",
       "assignee": "Muteeb",
       "title": "Support read-only query pack with an access log, usable without Muteeb",
-      "what": "Give support a way to answer without Muteeb: a read-only database role and a saved query pack (tenant by email, connected pages and token health, last ingest and freshness, alert history and delivery status, Art-E quota and spend, deletion status) that Saad and Lewis run themselves. Every lookup writes who, when, tenant and reason to an access log. Rehearsed in dry run #1. Builds on N5-MT-05, BL-PR-01.",
+      "what": "Give support a way to answer without Muteeb: a read-only database role and a saved query pack (tenant by email, connected pages and token health, last ingest and freshness, alert history and delivery status, Art-E quota and spend, deletion status) that Saad and Alex run themselves. Every lookup writes who, when, tenant and reason to an access log. Rehearsed in dry run #1. Builds on N5-MT-05, BL-PR-01.",
       "why": "The admin console is post-launch; until then every support question routes through the one backend engineer, unlogged. (COO-lens review, 15 Sep.)",
       "area": "Platform",
       "due": "2026-12-02",
@@ -33793,7 +34615,7 @@ window.LAUNCH_DATA = {
         "Rehearsed in dry run #1",
         "Done when: Saad resolves five scripted support cases on staging without Muteeb; each appears in the access log with a rea"
       ],
-      "layman": "Muteeb gives Saad and Lewis a set of ready-made, read-only lookups (find an account by email, check page connection, last data update, alert history, Art-E usage) so support questions get answered without waiting on him, with every lookup logged.",
+      "layman": "Muteeb gives Saad and Alex a set of ready-made, read-only lookups (find an account by email, check page connection, last data update, alert history, Art-E usage) so support questions get answered without waiting on him, with every lookup logged.",
       "layman_analogy": "Like giving the front desk a card index they can search themselves, with a sign-in sheet for who looked at what.",
       "layman_needed": "Saad resolving five scripted support cases on the test system without Muteeb, each showing in the access log with a reason.",
       "layman_output": "A saved set of lookups support can run, and a log showing who looked up which customer, when and why.",
@@ -33848,9 +34670,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-LW-09",
       "sprint": "N5",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "Written path for pilots who do not convert, and for later cancellation",
-      "what": "Decide and write what happens at the private beta on Tue 1 Dec 2026 to any roster pilot who does not commit to pay: free access end date, Tester role removal, whether their pages are disconnected and when their data is deleted under the retention schedule, who tells them and the wording. Same for a paying pilot who later cancels. Lewis applies it in the conversion conversations. Builds on N5-LW-05, N2-AX-07, N6-LW-04.",
+      "what": "Decide and write what happens at the private beta on Tue 1 Dec 2026 to any roster pilot who does not commit to pay: free access end date, Tester role removal, whether their pages are disconnected and when their data is deleted under the retention schedule, who tells them and the wording. Same for a paying pilot who later cancels. Jill applies it in the conversion conversations. Builds on N5-LW-05, N2-AX-07, N6-LW-04.",
       "why": "Ten pilots are onboarded, five are expected to pay; nothing says what the other five get or lose. (COO-lens review, 15 Sep.)",
       "area": "Pilots",
       "due": "2026-11-13",
@@ -33867,13 +34689,13 @@ window.LAUNCH_DATA = {
       "checklist": [
         "Decide and write what happens at the private beta on Tue 1 Dec 2026 to any roster pilot who does not commit to pay: free access end date, T",
         "Same for a paying pilot who later cancels",
-        "Lewis applies it in the conversion conversations",
+        "Jill applies it in the conversion conversations",
         "Done when: Every roster pilot carries a written status (paying, extended free to a date, or offboarded with deletion date"
       ],
-      "layman": "Lewis writes down what happens at the private beta on Tue 1 Dec 2026 to pilots who do not pay: when free access ends, when their pages are disconnected, when their data is deleted and who tells them, and the same for a paying pilot who later cancels.",
+      "layman": "Jill writes down what happens at the private beta on Tue 1 Dec 2026 to pilots who do not pay: when free access ends, when their pages are disconnected, when their data is deleted and who tells them, and the same for a paying pilot who later cancels.",
       "layman_analogy": "Like agreeing with a lodger, up front, when the free stay ends and how they get their things back.",
       "layman_needed": "Every pilot on the roster carrying a written status (paying, extended free to a date, or offboarded with a deletion date) by Wed 18 Nov 2026.",
-      "layman_output": "A roster with a clear status and date against each pilot's name, plus the exact wording Lewis uses in the conversation.",
+      "layman_output": "A roster with a clear status and date against each pilot's name, plus the exact wording Jill uses in the conversation.",
       "timebox_days": 0.5,
       "launch_stage": "beta",
       "estimated_days": 0.5,
@@ -33882,12 +34704,21 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Jill",
+      "effort_allocations": {
+        "Jill": 0.375,
+        "Alex": 0.125
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N6-LW-07",
       "sprint": "N6",
-      "assignee": "Lewis",
+      "assignee": "Jill",
       "title": "Batch-1 activation check-ins by hand: day-3 'first insight?' and day-7 review",
       "what": "Lifecycle emails sit in Wave 1 (BL-LA-01), so cover batch 1 by hand: two macros (day-3 for accounts connected but without the activation event; day-7 'what did Art-E get right?' with the 10-minute booking link from N5-SD-08) sent from support@ each launch-week morning off the N5-MT-06 funnel panel and logged per account; never-connected accounts stay with N6-JL-07's nudge. Builds on N6-JL-07, BL-LA-01, N5-SD-09. No longer waits on N5-MT-06 (parked in the 16 Sep balancing).",
       "why": "Activation rate decides batch expansion (N6-SD-02); nobody follows up an account that stalls after day 2. (CMO-lens review, 15 Sep.)",
@@ -33912,7 +34743,7 @@ window.LAUNCH_DATA = {
         "never-connected accounts stay with N6-JL-07's nudge",
         "Done when: Both macros approved by Filza; per-account send log from the public launch on Tue 15 Dec 2026; stalled-account count reported at the 09:00 ch"
       ],
-      "layman": "Lewis sends two hand-written check-in emails during launch week: a day-3 nudge to accounts that connected but have not had their first insight, and a day-7 'what did Art-E get right?' with a 10-minute call link, so nobody drifts off after day two.",
+      "layman": "Jill sends two hand-written check-in emails during launch week: a day-3 nudge to accounts that connected but have not had their first insight, and a day-7 'what did Art-E get right?' with a 10-minute call link, so nobody drifts off after day two.",
       "layman_analogy": "Like a good gym calling new members in their first week to ask how it is going.",
       "layman_needed": "Both email templates approved by Filza, a per-account send log from the public launch on Tue 15 Dec 2026, and the stalled-account count reported at the 09:00 checkpoint.",
       "layman_output": "Two approved templates, and a log showing which accounts were emailed on which day and how many replied.",
@@ -33924,7 +34755,16 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Jill",
+      "effort_allocations": {
+        "Jill": 0.75,
+        "Alex": 0.25
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N6-AX-08",
@@ -34234,7 +35074,7 @@ window.LAUNCH_DATA = {
       "assignee": "Jill",
       "title": "Stand up research ops: participant consent, incentives, repository",
       "what": "Filza writes a one-page participant information sheet and recording notice (lawful basis, recording retention, withdrawal route), and Jill adds a fixed voucher line to the budget, both by 25 Sep. Participants and findings go into one shared sheet with a tab per source, tagged by layer and segment, with source links. No separate repository tool and no back-filling of older notes. Builds on N5-LW-08, N2-FZ-04, N2-SD-12, N1-LW-07, N4-LW-02.",
-      "why": "Interviews, mock-up tests and cold-user sessions will record people who are not pilots and have signed nothing; findings are scattered across Lewis's sheets and Saad's digests. (16 Sep research: product-ux.)",
+      "why": "Interviews, mock-up tests and cold-user sessions will record people who are not pilots and have signed nothing; findings are scattered across Jill's sheets and Saad's digests. (16 Sep research: product-ux.)",
       "area": "PM",
       "due": "2026-10-23",
       "priority": "P1",
@@ -34329,7 +35169,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-LW-06",
       "sprint": "N2",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Competitive map and the 'why not Meta's free AI?' answer",
       "what": "Four-hour timebox. One-page table covering Meta Business Suite and Meta AI, Metricool, Hootsuite, Later and Buffer: price, whether each offers grounded AI Q&A, scoring before posting and crisis alerts, each with a dated source link. Write the three-line difference and a 100-word answer. Add three comparative-claim rules (verifiable, like-for-like, dated) to the N2-AX-13 claims register rather than a separate document. Builds on N2-AX-13, N6-AX-03.",
       "why": "Meta now offers free AI performance reviews in its own tools; without a sharp, verifiable difference the first Product Hunt question goes unanswered and comparisons risk breaching CAP rules. (16 Sep research: marketing.)",
@@ -34348,7 +35188,7 @@ window.LAUNCH_DATA = {
         "Add three comparative-claim rules (verifiable, like-for-like, dated) to the N2-AX-13 claims register rather th",
         "Done when: Map and answer filed by 29 Sep; N2-AX-13 cites the difference; every named-competitor comparison has a dated, "
       ],
-      "layman": "Lewis builds a one-page comparison of ArtemisAI against Meta's own free tools and rivals such as Metricool, Hootsuite, Later and Buffer, then writes a short answer on why customers should choose us. Without a clear, checkable difference, launch questions go unanswered and comparisons could break UK advertising rules.",
+      "layman": "Alex builds a one-page comparison of ArtemisAI against Meta's own free tools and rivals such as Metricool, Hootsuite, Later and Buffer, then writes a short answer on why customers should choose us. Without a clear, checkable difference, launch questions go unanswered and comparisons could break UK advertising rules.",
       "layman_analogy": "Like a shop assistant who can say in one breath why their product beats the free one next door, with the proof to hand.",
       "layman_needed": "A dated comparison table with source links, a three-line difference and a 100-word answer, filed by 29 Sep and cited in the claims register.",
       "layman_output": "A one-page table showing each competitor's price and whether they offer AI answers, scoring before posting and crisis alerts, each with a dated link, plus the short answer and three comparison rules.",
@@ -34365,7 +35205,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 0.375,
+        "Asad": 0.125
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N2-MT-19",
@@ -34728,9 +35577,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-LW-08",
       "sprint": "N5",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Waitlist qualifying questions and a written batch admission order",
-      "what": "Lewis specifies three waitlist fields for Asad to add within N3-AS-02 before Thu 8 Oct 2026: manages a Facebook Page with Insights access (yes, no, not sure), page size band, and segment. Filza checks them against the privacy notice. Lewis writes a half-page admission order (qualifying pages, then referral position, then signup time, with a segment mix cap) for N6-AX-06 to use. Drop country and 'how did you hear' because UTM capture covers source. The 'not yet' email template can follow in N6. Builds on N3-AS-02, N3-JL-11, N1-LW-06, N6-MT-10, N3-AS-17, N5-JL-08, N4-AX-05.",
+      "what": "Alex specifies three waitlist fields for Asad to add within N3-AS-02 before Thu 8 Oct 2026: manages a Facebook Page with Insights access (yes, no, not sure), page size band, and segment. Filza checks them against the privacy notice. Alex writes a half-page admission order (qualifying pages, then referral position, then signup time, with a segment mix cap) for N6-AX-06 to use. Drop country and 'how did you hear' because UTM capture covers source. The 'not yet' email template can follow in N6. Builds on N3-AS-02, N3-JL-11, N1-LW-06, N6-MT-10, N3-AS-17, N5-JL-08, N4-AX-05.",
       "why": "First-come admission can fill batch 1's 100 slots with people who cannot connect a Page, wasting capacity and dragging down launch activation. (16 Sep research: launch-gtm, marketing.)",
       "area": "Waitlist",
       "due": "2026-11-04",
@@ -34749,12 +35598,12 @@ window.LAUNCH_DATA = {
       "source": "Asad research 16 Sep (launch-gtm, marketing)",
       "acceptance": "Fields live in the waitlist on Thu 8 Oct 2026 with Filza's check logged; a written admission order sits in the runbook and N6-AX-06 uses it for batch 1.",
       "checklist": [
-        "Lewis specifies three waitlist fields for Asad to add within N3-AS-02 before Thu 8 Oct 2026: manages a Facebook Page w",
+        "Alex specifies three waitlist fields for Asad to add within N3-AS-02 before Thu 8 Oct 2026: manages a Facebook Page w",
         "Filza checks them against the privacy notice",
-        "Lewis writes a half-page admission order (qualifying pages, then referral position, then signup time, with a s",
+        "Alex writes a half-page admission order (qualifying pages, then referral position, then signup time, with a s",
         "Done when: Fields live in the waitlist on Thu 8 Oct 2026 with Filza's check logged; a written admission order sits in the runbook"
       ],
-      "layman": "Lewis chooses three short questions for the waitlist and writes down the order people are let in, so the first batch of 100 goes to people who can actually connect a Facebook Page. That keeps launch places from being wasted.",
+      "layman": "Alex chooses three short questions for the waitlist and writes down the order people are let in, so the first batch of 100 goes to people who can actually connect a Facebook Page. That keeps launch places from being wasted.",
       "layman_analogy": "Like a driving school checking you have a provisional licence before booking lessons, then taking people in a fair, written order.",
       "layman_needed": "The three questions live on the waitlist by Thu 8 Oct 2026, checked by Filza, and a written admission order in the runbook.",
       "layman_output": "A waitlist sign-up form asking whether you manage a Facebook Page with Insights access, your page size and your type of customer, plus a half-page note setting out who gets into batch 1 first.",
@@ -34772,7 +35621,16 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 0.1875,
+        "Asad": 0.0625
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-AS-20",
@@ -34819,7 +35677,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-MT-19",
       "sprint": "N4",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Harden Meta login and Graph calls with app secret proof and dashboard security settings",
       "what": "Turn on Require App Secret and send appsecret_proof on every server-side Graph call through the central client; enable Strict Mode for redirect URIs and Enforce HTTPS; switch off Client OAuth login and Embedded Browser OAuth login if unused; generate and verify the state parameter on connect; and check every new token with debug_token (app_id matches, is_valid, scopes) before storing it. Record each setting with a screenshot for the Data Protection Assessment security section. Builds on N2-MT-14, N6-MT-09, N1-MT-09.",
       "why": "Tokens are portable: without app secret proof a leaked Page token works from anywhere. These settings are Meta's own login security checklist and cheap to set now. (16 Sep research: meta-review.)",
@@ -34857,7 +35715,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 0.8,
+        "Muteeb": 0.2
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-MT-20",
@@ -34941,7 +35808,7 @@ window.LAUNCH_DATA = {
       "sprint": "N5",
       "assignee": "Filza",
       "title": "Reviews and endorsements policy for Product Hunt, G2, testimonials and team posts",
-      "what": "One page signed by Filza and acknowledged by Lewis, Alex and Saad. Pilots write reviews in their own words and disclose the pilot relationship and any founding-price benefit (fix N6-LW-06). Staff and shareholders disclose their connection. No asking for upvotes, no incentives for votes or reviews, no paid hunters. Testimonials only with written consent kept on file, not cherry-picked. Anyone given free access says so. A short public review policy goes on the site. The VAT-inclusive pricing check moves to the existing pricing copy review. Builds on N6-LW-06, N4-FZ-04, N6-AX-08, N3-JL-11, N4-LW-03, LW-FZ-03, N4-LW-05, N5-LW-06, N6-FZ-01, N4-FZ-09.",
+      "what": "One page signed by Filza and acknowledged by Alex, Alex and Saad. Pilots write reviews in their own words and disclose the pilot relationship and any founding-price benefit (fix N6-LW-06). Staff and shareholders disclose their connection. No asking for upvotes, no incentives for votes or reviews, no paid hunters. Testimonials only with written consent kept on file, not cherry-picked. Anyone given free access says so. A short public review policy goes on the site. The VAT-inclusive pricing check moves to the existing pricing copy review. Builds on N6-LW-06, N4-FZ-04, N6-AX-08, N3-JL-11, N4-LW-03, LW-FZ-03, N4-LW-05, N5-LW-06, N6-FZ-01, N4-FZ-09.",
       "why": "The DMCC Act bans fake and concealed incentivised reviews, including by employees and shareholders; Product Hunt removes launches that solicit or incentivise upvotes. (16 Sep research: marketing, legal, launch-gtm, website.)",
       "area": "Marketing",
       "due": "2026-11-04",
@@ -34956,14 +35823,14 @@ window.LAUNCH_DATA = {
       "source": "Asad research 16 Sep (marketing, legal, launch-gtm, website)",
       "acceptance": "Signed policy filed and acknowledged; N6-LW-06 staging and the N6-AX-08 amplification brief follow it; LW-FZ-03 checks Product Hunt and G2 copy against it.",
       "checklist": [
-        "One page signed by Filza and acknowledged by Lewis, Alex and Saad",
+        "One page signed by Filza and acknowledged by Alex, Alex and Saad",
         "Pilots write reviews in their own words and disclose the pilot relationship and any founding-price benefit (fi",
         "Staff and shareholders disclose their connection",
         "Done when: Signed policy filed and acknowledged; N6-LW-06 staging and the N6-AX-08 amplification brief follow it; LW-FZ-0"
       ],
       "layman": "Filza writes a one-page rulebook for reviews, testimonials and team posts, so pilots, staff and shareholders say how they are connected to us and nobody is rewarded for votes or reviews. UK law bans fake or secretly rewarded reviews, and Product Hunt removes launches that ask for or reward upvotes.",
       "layman_analogy": "Like a friend recommending a restaurant who mentions upfront that their cousin owns it.",
-      "layman_needed": "A policy signed by Filza and acknowledged by Lewis, Alex and Saad, with the launch plans and Product Hunt and G2 copy checked against it.",
+      "layman_needed": "A policy signed by Filza and acknowledged by Alex, Alex and Saad, with the launch plans and Product Hunt and G2 copy checked against it.",
       "layman_output": "A signed one-page reviews and endorsements policy on file, a short public review policy on the website, and written consent kept for every testimonial used.",
       "evidence": [
         "https://assets.publishing.service.gov.uk/media/67eeb64fe9c76fa33048c790/CMA208_-_Fake_reviews_guidance.pdf",
@@ -35118,7 +35985,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-AS-21",
       "sprint": "N4",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Frontend observability: browser errors with source maps and release tags, field Core Web Vitals per layer",
       "what": "Add the Sentry Next.js SDK on client, server and edge. Set release to the commit SHA, upload source maps in CI and remove them from the deploy, report from error.tsx and global-error.tsx with request_id, and turn session replay off. Use Sentry's built-in LCP, INP and CLS capture tagged by layer, with no custom sink or panel. Change N5-AS-05's page list to the four layers. Builds on N1-MT-05, N5-AS-05, N5-AS-18, N2-AS-11, N4-FZ-01.",
       "why": "Lighthouse is lab-only and the Sentry setup names no browser SDK or source maps; pilot crashes and slow screens on real phones go unseen, and hotfixes need readable traces. (16 Sep research: web-app-eng.)",
@@ -35158,7 +36025,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-FZ-17",
@@ -35248,7 +36124,7 @@ window.LAUNCH_DATA = {
       "sprint": "N5",
       "assignee": "Saad",
       "title": "Usability-test the four-layer phone mock-up with five non-pilot users",
-      "what": "Five 30-minute remote moderated sessions on the N2-SD-19 prototype, shown on the participant's own phone. Recruit through Lewis's prospect list and team contacts: no pilots, each person runs a Facebook Page, at least one creator and one small business. Five tasks: find what matters today on Home, ask Art-E why a post did well, act on an alert hook, save or pass in Discovery, recover from an Art-E refusal. Record pass or fail and the top confusions in one sheet before the Sun 8 Nov 2026 beta build freeze. Builds on N3-SD-14, N3-SD-09, N5-SD-08, N3-SD-02, N4-SD-07, N5-SD-03. Audit scope: cover shipped surfaces only. Deferred Discovery, standalone heatmap, Wins and web-push routes must stay hidden/disabled. Substitute a negative route/claim check where the historical flow names one; do not implement the deferred feature to satisfy the test.",
+      "what": "Five 30-minute remote moderated sessions on the N2-SD-19 prototype, shown on the participant's own phone. Recruit through Saad's prospect list and team contacts: no pilots, each person runs a Facebook Page, at least one creator and one small business. Five tasks: find what matters today on Home, ask Art-E why a post did well, act on an alert hook, save or pass in Discovery, recover from an Art-E refusal. Record pass or fail and the top confusions in one sheet before the Sun 8 Nov 2026 beta build freeze. Builds on N3-SD-14, N3-SD-09, N5-SD-08, N3-SD-02, N4-SD-07, N5-SD-03. Audit scope: cover shipped surfaces only. Deferred Discovery, standalone heatmap, Wins and web-push routes must stay hidden/disabled. Substitute a negative route/claim check where the historical flow names one; do not implement the deferred feature to satisfy the test.",
       "why": "The four-layer direction replaces nine web packs, yet UAT starts Mon 19 Oct 2026 on built code, when navigation changes are expensive and feature freeze is ten days away. (16 Sep research: product-ux.)",
       "area": "Design",
       "due": "2026-11-05",
@@ -35263,7 +36139,7 @@ window.LAUNCH_DATA = {
       "acceptance": "Five consented sessions recorded; per-task success and a severity-ranked findings list filed before the Sun 8 Nov 2026 beta build freeze, each finding marked fix in mock-up, accept or defer. Flow coverage is evaluated against this shipped-surface scope; deferred routes are checked as unavailable.",
       "checklist": [
         "Five 30-minute remote moderated sessions on the N2-SD-19 prototype, shown on the participant's own phone",
-        "Recruit through Lewis's prospect list and team contacts: no pilots, each person runs a Facebook Page, at least",
+        "Recruit through Saad's prospect list and team contacts: no pilots, each person runs a Facebook Page, at least",
         "Five tasks: find what matters today on Home, ask Art-E why a post did well, act on an alert hook, save or pass",
         "Done when: Five consented sessions recorded; per-task success and a severity-ranked findings list filed before the Sun 8 Nov 2026"
       ],
@@ -35331,7 +36207,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-LW-09",
       "sprint": "N3",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Second independent rater and agreement statistic for single-judge gates",
       "what": "Second judge (Saad or Jill, not Faheem or Muteeb) blind-judges a 30% overlap of the Discovery top-5 sheet (N3-LW-06) and of the N1-LW-02 crisis incident list, minimum 30 items each. Record Cohen's kappa with an interval in the sheets. If kappa is below 0.6, mark the gate result provisional and adjudicate disagreements against the judging guide; no full rejudge. N4-LW-04 keeps pilot confirmation as its second view. Builds on N3-LW-06, N4-LW-04, N3-LW-04. No longer waits on N3-LW-02 (parked in the 16 Sep balancing).",
       "why": "A gate judged by one person measures that person's view; without agreement figures, precision@5 and crisis precision are hard to defend at go/no-go or publicly. (16 Sep research: ml-lifecycle.)",
@@ -35352,7 +36228,7 @@ window.LAUNCH_DATA = {
         "If kappa is below 0.6, mark the gate result provisional and adjudicate disagreements against the judging guide",
         "Done when: Kappa with interval recorded for Discovery judgements and crisis incident labels before the Sat 17 Oct 2026 gate; disag"
       ],
-      "layman": "Lewis arranges for Saad or Jill to blind-judge a share of the Discovery results and crisis incidents, so the team can show gate results reflect agreement between two people rather than one person's view.",
+      "layman": "Alex arranges for Saad or Jill to blind-judge a share of the Discovery results and crisis incidents, so the team can show gate results reflect agreement between two people rather than one person's view.",
       "layman_analogy": "Like a second referee reviewing a sample of decisions to show the first referee's calls would stand.",
       "layman_needed": "An agreement score with a range recorded for Discovery judgements and crisis incident labels before the Sat 17 Oct 2026 gate, with disagreements settled in the sheets.",
       "layman_output": "The judging sheets showing the agreement score and its range, each disagreement resolved against the judging guide, and any gate marked provisional if agreement falls below 0.6.",
@@ -35369,7 +36245,16 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 0.375,
+        "Asad": 0.125
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-MT-23",
@@ -35589,7 +36474,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-AS-23",
       "sprint": "N3",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Timezone and locale rendering: account timezone, en-GB formats, hydration-safe times",
       "what": "Build one shared formatter (Intl, en-GB, compact counts such as 12.3K, relative times) that every screen uses. Save the browser's IANA timezone on the account at signup. Render alert, feed and briefing times client-side in that zone so UTC server rendering never breaks hydration. Best Times stay in the labelled page timezone. Pass the timezone to Art-E. One unit test spanning Tue 13 Oct 2026 covers the clock change. The editable Settings timezone and the two-timezone E2E run move to backlog. Builds on N3-AS-09, N2-SD-03, N4-FH-08, N4-MT-11, N3-AS-10, N3-MT-04. No longer waits on N3-AS-09 (parked in the 16 Sep balancing).",
       "why": "Servers render in UTC, pilots read UK time and part of the team tests from abroad; only jobs and Best Times are clock-change audited, not what the screen shows. (16 Sep research: web-app-eng.)",
@@ -35625,7 +36510,16 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-JL-17",
@@ -35855,7 +36749,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-AS-24",
       "sprint": "N5",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Add a Checks tab to the existing QA dashboard",
       "what": "Add one read-only Checks tab to qa_dashboard_tabs.html using the existing registry. Reuse the current dashboard and authentication. Display owners, evidence status and stopped checks first.",
       "why": "The team needs one place showing what is red, who owns it and which gate it blocks, before pilots connect in N2. (16 Sep research: qa-control-center.)",
@@ -35891,7 +36785,16 @@ window.LAUNCH_DATA = {
         "decision": "narrowed",
         "reason": "Align the ticket with the existing launch scope; preserve the shipped feature checks."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-FZ-20",
@@ -35991,7 +36894,7 @@ window.LAUNCH_DATA = {
       "sprint": "N6",
       "assignee": "Faheem",
       "title": "Pseudonymise commenters before vendor calls; govern human transcript review",
-      "what": "Before any vendor call, swap commenter names and profile ids, @mentions, and pattern-matched emails and phone numbers in retrieved context for stable per-tenant pseudonyms, with the mapping kept server-side. No free-text name detection. The N4-MT-15 review export uses the pseudonyms, is limited to Saad and Lewis, and writes an access log. Filza adds staff quality review of conversations to Privacy v2, the pilot agreement and the DPIA, live by Fri 20 Nov 2026. Drop flagging personal data typed into questions. Builds on N4-FH-11, N5-AS-18, N2-FZ-03, N4-MT-15, N5-MT-22, N3-FZ-13.",
+      "what": "Before any vendor call, swap commenter names and profile ids, @mentions, and pattern-matched emails and phone numbers in retrieved context for stable per-tenant pseudonyms, with the mapping kept server-side. No free-text name detection. The N4-MT-15 review export uses the pseudonyms, is limited to Saad and Faheem, and writes an access log. Filza adds staff quality review of conversations to Privacy v2, the pilot agreement and the DPIA, live by Fri 20 Nov 2026. Drop flagging personal data typed into questions. Builds on N4-FH-11, N5-AS-18, N2-FZ-03, N4-MT-15, N5-MT-22, N3-FZ-13.",
       "why": "Commenters never agreed to reach an LLM vendor, and staff reading real transcripts from Mon 12 Oct 2026 needs disclosure, least privilege and a record (ICO data minimisation). (16 Sep research: llm-arte.)",
       "area": "Art-E",
       "due": "2026-11-20",
@@ -36009,12 +36912,12 @@ window.LAUNCH_DATA = {
       "checklist": [
         "Before any vendor call, swap commenter names and profile ids, @mentions, and pattern-matched emails and phone ",
         "No free-text name detection",
-        "The N4-MT-15 review export uses the pseudonyms, is limited to Saad and Lewis, and writes an access log",
+        "The N4-MT-15 review export uses the pseudonyms, is limited to Saad and Faheem, and writes an access log",
         "Done when: A seeded commenter name and phone number never appear in vendor request logs or the review export, and the rev"
       ],
       "layman": "Faheem hides commenters' names, ids, emails and phone numbers behind consistent stand-in names before anything reaches the outside AI provider, since commenters never agreed to that. Filza adds staff review of conversations to the privacy policy and pilot agreement by Fri 20 Nov 2026.",
       "layman_analogy": "Like a doctor's case notes shared for training with patients listed as Patient A and Patient B instead of their real names.",
-      "layman_needed": "Stand-in names applied before every AI provider call, a review export limited to Saad and Lewis with an access log, and the review disclosure live by Fri 20 Nov 2026.",
+      "layman_needed": "Stand-in names applied before every AI provider call, a review export limited to Saad and Faheem with an access log, and the review disclosure live by Fri 20 Nov 2026.",
       "layman_output": "Provider request logs and the staff review export in which a test commenter's name and phone number never appear, plus privacy wording about staff review published by Fri 20 Nov 2026.",
       "evidence": [
         "https://ico.org.uk/for-organisations/advice-and-services/audits/data-protection-audit-framework/toolkits/artificial-intelligence/data-minimisation/",
@@ -36036,7 +36939,7 @@ window.LAUNCH_DATA = {
       "sprint": "N5",
       "assignee": "Faheem",
       "title": "Define 'green' for Art-E: thresholds per stratum and a calibrated judge",
-      "what": "Before the first 200 run, Faheem publishes a threshold table that Saad countersigns: must-refuse caught 100%, an answer-rate floor on answerable questions, a qualitative-claim grounding pass rate, and minimums only for strata holding at least 20 questions (overall, thin-data pages, card and alert handoff). Per-segment and per-cascade-tier results are reported, not gated. Calibrate the judge, a pinned model from a different family, on 40 answers blind-graded by Saad and Lewis; below 85% agreement the qualitative line is graded by hand. Builds on N4-FH-02, N5-FH-05, N6-SD-09, N3-SD-04, N3-FH-12.",
+      "what": "Before the first 200 run, Faheem publishes a threshold table that Saad countersigns: must-refuse caught 100%, an answer-rate floor on answerable questions, a qualitative-claim grounding pass rate, and minimums only for strata holding at least 20 questions (overall, thin-data pages, card and alert handoff). Per-segment and per-cascade-tier results are reported, not gated. Calibrate the judge, a pinned model from a different family, on 40 answers blind-graded by Saad and Faheem; below 85% agreement the qualitative line is graded by hand. Builds on N4-FH-02, N5-FH-05, N6-SD-09, N3-SD-04, N3-FH-12.",
       "why": "N5-FH-05 and N6-SD-09 rely on 'green', which is undefined; zero un-cited numbers can be met by refusing everything, and an uncalibrated judge makes pass rates meaningless. (16 Sep research: llm-arte.)",
       "area": "Art-E",
       "due": "2026-11-06",
@@ -36057,7 +36960,7 @@ window.LAUNCH_DATA = {
       "layman": "Faheem writes down exactly what a pass means for Art-E, the product's AI assistant, including catching every question it must refuse and a minimum rate of real answers, so it cannot pass simply by refusing everything.",
       "layman_analogy": "Like agreeing the pass mark and marking scheme before the exam is sat, not after seeing the scores.",
       "layman_needed": "A threshold table countersigned by Saad before the first 200 run, with the automatic judge agreeing with human graders at least 85% of the time.",
-      "layman_output": "A signed table of pass marks for overall results, thin-data pages and card and alert handoffs, plus a recorded agreement figure between the automatic judge and Saad and Lewis's grades.",
+      "layman_output": "A signed table of pass marks for overall results, thin-data pages and card and alert handoffs, plus a recorded agreement figure between the automatic judge and Saad and Faheem's grades.",
       "evidence": [
         "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
         "https://docs.anthropic.com/en/docs/test-and-evaluate/develop-tests",
@@ -36167,7 +37070,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N4-MT-23",
       "sprint": "N6",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Per-ask token and context budgets plus an off-scope gate before the frontier tier",
       "what": "Set a question length cap, with friendly copy from Saad. Set max output tokens per cascade tier. Hard-cap history turns, memory items and retrieved chunks, truncating the oldest first, with no summarisation yet. Put the off-scope decline (essays, code, homework) in the cheap routing step, using Filza's out-of-scope refusal category, so it never reaches the frontier tier. Read p50 and p95 tokens per answer from the N2-MT-18 cost records for recosting #4. Builds on N4-MT-04, N3-JL-04, N5-MT-17, N4-MT-14, N5-AX-07, N2-MT-18.",
       "why": "Quotas count asks, not tokens; one huge paste or long conversation costs many normal asks, and a free frontier chatbot invites farming (OWASP LLM10). (16 Sep research: llm-arte.)",
@@ -36205,7 +37108,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 0.8,
+        "Muteeb": 0.2
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-MT-24",
@@ -36296,7 +37208,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N4-AS-22",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "Render every model string as untrusted: no HTML, images or model-written links",
       "what": "Render Art-E answers, cards and drafted replies through a markdown allowlist (plain text, bold, lists, citation chips): no raw HTML, images or links the model wrote. Build citation chips and deep links server-side from ids, and escape model text in alert email templates and any share card. Add the img-src and connect-src limits to the N5-AS-17 policy rather than as a separate change. Add five probes (script, markdown image, external link, HTML in email, data in a URL) to the N4-FH-04 suite. Builds on N4-FH-11, N5-AS-17, N6-AS-04, N4-MT-05, N3-FZ-12.",
       "why": "A comment carrying instructions can make the model emit script, or a link or image URL containing page data; rendering it leaks data (OWASP LLM05). (16 Sep research: llm-arte.)",
@@ -36335,7 +37247,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 1.6,
+        "Asad": 0.4
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-MT-25",
@@ -36473,7 +37394,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N4-AS-23",
       "sprint": "N6",
-      "assignee": "Asad",
+      "assignee": "Saad",
       "title": "In-app browser handling and an early supported browser and device matrix",
       "what": "Before signup and Facebook connect, detect Facebook, Instagram and LinkedIn in-app browsers by user agent and show an open-in-Safari-or-Chrome step with a copy-link fallback. Set browserslist to match the N5-AS-06 matrix and add those three in-app browsers on iOS and Android to N5-AS-06's runs. Leave matrix publishing in N5. Builds on N5-AS-06, N5-AS-19, N5-AS-20, N4-SD-14, N3-AS-12.",
       "why": "Launch links shared on LinkedIn, Facebook and Product Hunt open inside in-app browsers where connect, install and push can fail silently, losing launch-day signups. (16 Sep research: web-app-eng.)",
@@ -36512,7 +37433,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.8,
+        "Asad": 0.2
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-FZ-12",
@@ -36691,7 +37621,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N4-MT-30",
       "sprint": "N6",
-      "assignee": "Muteeb",
+      "assignee": "Asad",
       "title": "Ground Art-E answers about the product: methods, settings, privacy and plans",
       "what": "Ship a curated approved-answer set, not a new retrieval namespace. About 40 version-stamped entries, written by Saad and Filza, cover how each score and abstain works, settings, privacy, deletion and plans. The off-scope gate matches them and returns the text verbatim with a Settings deep link and citation. An unmatched product question gets a fixed reply pointing to Help, never a model guess. Add 30 product questions to the golden set.",
       "why": "An invented answer about data sharing, deletion or pricing is a misrepresentation with legal weight, and refusing to explain the app's own scores breaks the 'Art-E explains' promise every alert hook opens into. (16 Sep research: critic.)",
@@ -36731,14 +37661,23 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "delivery_lead": "Asad",
+      "effort_allocations": {
+        "Asad": 0.8,
+        "Muteeb": 0.2
+      },
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N4-FH-23",
       "sprint": "N6",
       "assignee": "Faheem",
       "title": "Quality gate for drafted crisis replies and the one suggested action",
-      "what": "Filza writes redlines by Mon 12 Oct 2026. Legal threats, safety allegations and claims naming an individual return 'do not reply, escalate' with no draft, enforced by a rule, not the model. Build a 40-incident set from Lewis's real cases plus synthetic storms. Lewis and one pilot score drafts on the six-point rubric, with a pass rate signed off by Filza. If drafts miss the pass rate by feature freeze, launch crisis alerts with the suggested action only and no draft. File results for readiness review #1.",
+      "what": "Filza writes redlines by Mon 12 Oct 2026. Legal threats, safety allegations and claims naming an individual return 'do not reply, escalate' with no draft, enforced by a rule, not the model. Build a 40-incident set from Faheem's real cases plus synthetic storms. Faheem and one pilot score drafts on the six-point rubric, with a pass rate signed off by Filza. If drafts miss the pass rate by feature freeze, launch crisis alerts with the suggested action only and no draft. File results for readiness review #1.",
       "why": "A pilot who pastes a draft that admits fault or inflames a storm is harmed by the feature meant to protect them; the guard catches toxic or name-bearing text, not a bad reply. (16 Sep research: critic.)",
       "area": "Alerts",
       "due": "2026-11-26",
@@ -36757,10 +37696,10 @@ window.LAUNCH_DATA = {
       "checklist": [
         "Filza writes redlines by Mon 12 Oct 2026",
         "Legal threats, safety allegations and claims naming an individual return 'do not reply, escalate' with no draf",
-        "Build a 40-incident set from Lewis's real cases plus synthetic storms",
+        "Build a 40-incident set from Faheem's real cases plus synthetic storms",
         "Done when: An evaluation set of at least 60 incidents scored by two raters on the rubric; drafts meet the signed pass rat"
       ],
-      "layman": "Faheem tests the reply drafts the app suggests during a crisis against real and made-up storms, scored by Lewis and a pilot. Legal threats, safety allegations and claims naming a person get a firm \"do not reply, escalate\" message instead, so a bad draft never harms the customer it should protect.",
+      "layman": "Faheem tests the reply drafts the app suggests during a crisis against real and made-up storms, scored by Faheem and a pilot. Legal threats, safety allegations and claims naming a person get a firm \"do not reply, escalate\" message instead, so a bad draft never harms the customer it should protect.",
       "layman_analogy": "Like a press officer who drafts statements but hands anything involving lawyers straight to the solicitor.",
       "layman_needed": "At least 60 incidents scored by two raters, drafts meeting Filza's signed pass rate on unseen cases, and legal and safety cases returning escalate with no draft.",
       "layman_output": "A scored results pack filed for the first readiness review showing draft pass rates on unseen incidents, and crisis alerts that include checked drafts or, if drafts fall short, only the suggested action.",
@@ -36871,9 +37810,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-LW-10",
       "sprint": "LW",
-      "assignee": "Lewis",
+      "assignee": "Saad",
       "title": "Self-serve invited beta with 10 non-pilot waitlist accounts",
-      "what": "Fold into N5-SD-08: Lewis admits 10 non-pilot waitlist accounts by the private beta on Tue 1 Dec 2026 (as Testers if Live Mode is pending), only once ToS, privacy notice and the delete path are live. No walkthroughs, only the 'book 10 min' hatch. In beta week file a readout from the N4-AS-14 funnel: connect completion (Tester-invite friction noted separately), minutes to first insight, activation, day-7 return and support contacts, plus the top three stalls for Asad to fix before freeze. Numbers feed N6-SD-02. Builds on N5-SD-08, N5-LW-08, N6-SD-02, N6-AX-04, N3-LW-03.",
+      "what": "Fold into N5-SD-08: Saad admits 10 non-pilot waitlist accounts by the private beta on Tue 1 Dec 2026 (as Testers if Live Mode is pending), only once ToS, privacy notice and the delete path are live. No walkthroughs, only the 'book 10 min' hatch. In beta week file a readout from the N4-AS-14 funnel: connect completion (Tester-invite friction noted separately), minutes to first insight, activation, day-7 return and support contacts, plus the top three stalls for Asad to fix before freeze. Numbers feed N6-SD-02. Builds on N5-SD-08, N5-LW-08, N6-SD-02, N6-AX-04, N3-LW-03.",
       "why": "Batch 1 on launch day is the first unassisted cohort; hand-held pilots and a single cold-user test cannot set honest activation floors. (16 Sep research: launch-gtm.)",
       "area": "Onboarding",
       "due": "2026-12-01",
@@ -36888,12 +37827,12 @@ window.LAUNCH_DATA = {
       "source": "Asad research 16 Sep (launch-gtm)",
       "acceptance": "10 non-pilot accounts admitted by the private beta on Tue 1 Dec 2026; a funnel and stall readout filed in beta week and cited in N6-SD-02's thresholds.",
       "checklist": [
-        "Fold into N5-SD-08: Lewis admits 10 non-pilot waitlist accounts by the private beta on Tue 1 Dec 2026 (as Testers if L",
+        "Fold into N5-SD-08: Saad admits 10 non-pilot waitlist accounts by the private beta on Tue 1 Dec 2026 (as Testers if L",
         "No walkthroughs, only the 'book 10 min' hatch",
         "In beta week file a readout from the N4-AS-14 funnel: connect completion (Tester-invite friction noted separat",
         "Done when: 25 non-pilot accounts admitted by the private beta on Tue 1 Dec 2026; a funnel and stall readout filed in beta week an"
       ],
-      "layman": "Lewis lets 25 people from the waitlist who are not pilot customers use ArtemisAI on their own, without hand-holding, and reports where they get stuck, so launch-day targets reflect how real unassisted users behave.",
+      "layman": "Saad lets 25 people from the waitlist who are not pilot customers use ArtemisAI on their own, without hand-holding, and reports where they get stuck, so launch-day targets reflect how real unassisted users behave.",
       "layman_analogy": "Like a restaurant's soft opening for a few real diners before the critics arrive.",
       "layman_needed": "25 non-pilot waitlist accounts admitted, and a readout of sign-up progress and sticking points filed in beta week and used in launch targets.",
       "layman_output": "A short report showing how many accounts connected, how quickly they saw a first insight, who came back after a week, support contacts, and the top three places people got stuck.",
@@ -36911,7 +37850,16 @@ window.LAUNCH_DATA = {
         "decision": "clarified",
         "reason": "Acceptance now matches the existing ten-person beta ticket, instead of requiring 25."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "delivery_lead": "Saad",
+      "effort_allocations": {
+        "Saad": 0.6,
+        "Alex": 0.4
+      },
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N5-JL-11",
@@ -37001,7 +37949,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-LW-10",
       "sprint": "N3",
-      "assignee": "Lewis",
+      "assignee": "Alex",
       "title": "Confirm the five pilots for the December beta and launch",
       "what": "Confirm each pilot can take part in the invited beta targeted for 1 Dec and the public release targeted for 15 Dec. Explain the change from the previous 27 Nov pilot commitment honestly; agree the walkthrough, founding price and any credit or free-period adjustment with Alex. Record written replies and changes to the conversion forecast. Do not describe a February beta or a months-long bridge.",
       "why": "Five pilots were due to convert to paying on Mon 26 Oct 2026; moving that date without agreement risks losing them and the launch reference stories. (16 Sep balancing.)",
@@ -37030,7 +37978,16 @@ window.LAUNCH_DATA = {
       },
       "checklist_revised_at": "2026-09-16T12:15:43.591Z",
       "critical_review_note": "Use one shared pilot roster across these checkpoints. Record only new confirmations or changed availability; do not recruit or count the same person again. Pilot numbers are targets until confirmed.",
-      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies."
+      "schedule_confidence": "Planning deadline, not confirmed delivery capacity. Accept only against current evidence and named dependencies.",
+      "delivery_lead": "Alex",
+      "effort_allocations": {
+        "Alex": 0.375,
+        "Asad": 0.125
+      },
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
     },
     {
       "id": "N3-AX-11",
@@ -37069,7 +38026,7 @@ window.LAUNCH_DATA = {
       "sprint": "N1",
       "assignee": "Jill",
       "title": "Run the existing-team December ticket board",
-      "what": "Run a 15-minute daily blocker review and a weekly owner-by-owner workload review through launch. Each person pulls one primary build item at a time; finish and review it before starting another. Jill owns evidence collection, scheduling and follow-ups; Lewis owns pilot coordination and feedback; Alex resolves scope and priority disputes within one working day. Engineers retain technical decisions and Filza retains legal sign-off. Do not assume contractors, external counsel or overtime. Record every overload against the 15 Dec target and 15 Dec hard limit.",
+      "what": "Run a 15-minute daily blocker review and a weekly owner-by-owner workload review through launch. Each person pulls one primary build item at a time; finish and review it before starting another. Jill owns evidence collection, scheduling and follow-ups; Jill owns pilot coordination and feedback; Alex resolves scope and priority disputes within one working day. Engineers retain technical decisions and Filza retains legal sign-off. Do not assume contractors, external counsel or overtime. Record every overload against the 15 Dec target and 15 Dec hard limit.",
       "why": "User fixed the December deadline and current-team resource constraint on 16 Sep.",
       "area": "Launch management",
       "due": "2026-09-25",
@@ -37083,7 +38040,7 @@ window.LAUNCH_DATA = {
       "checklist": [
         "One ranked queue per existing owner, one primary work item per person, named blockers and a dated weekly capacity review. No hidden extra staffing."
       ],
-      "layman": "Run a 15-minute daily blocker review and a weekly owner-by-owner workload review through launch. Each person pulls one primary build item at a time; finish and review it before starting another. Jill owns evidence collection, scheduling and follow-ups; Lewis owns pilot coordination and feedback; Alex resolves scope and priority disputes within one working day. Engineers retain technical decisions and Filza retains legal sign-off. Do not assume contractors, external counsel or overtime. Record every overload against the 15 Dec target and 15 Dec hard limit.",
+      "layman": "Run a 15-minute daily blocker review and a weekly owner-by-owner workload review through launch. Each person pulls one primary build item at a time; finish and review it before starting another. Jill owns evidence collection, scheduling and follow-ups; Jill owns pilot coordination and feedback; Alex resolves scope and priority disputes within one working day. Engineers retain technical decisions and Filza retains legal sign-off. Do not assume contractors, external counsel or overtime. Record every overload against the 15 Dec target and 15 Dec hard limit.",
       "layman_needed": "One ranked queue per existing owner, one primary work item per person, named blockers and a dated weekly capacity review. No hidden extra staffing.",
       "layman_output": "One ranked queue per existing owner, one primary work item per person, named blockers and a dated weekly capacity review. No hidden extra staffing.",
       "launch_stage": "beta",
@@ -37172,6 +38129,9 @@ window.LAUNCH_DATA = {
           "name": "Design packs (web)",
           "what": "Product token mapping, shipped screen designs, shared states and design QA.",
           "owners": [
+            "Alex",
+            "Asad",
+            "Filza",
             "Saad"
           ],
           "stack": "Figma packs + Loom per pack, exported assets in the repo",
@@ -37234,7 +38194,9 @@ window.LAUNCH_DATA = {
           "name": "Web app development",
           "what": "App shell, Home, Drafts, Alerts, Art-E, connected pages, Settings and onboarding.",
           "owners": [
+            "Alex",
             "Asad",
+            "Muteeb",
             "Saad"
           ],
           "stack": "Next.js on Netlify, design tokens, BFF to FastAPI, Playwright E2E in CI",
@@ -37300,11 +38262,7 @@ window.LAUNCH_DATA = {
           "name": "Mobile app (iOS and Android)",
           "what": "Native wrappers, push and store submission remain unscheduled backlog work.",
           "owners": [
-            "",
             "Asad",
-            "Filza",
-            "Jill",
-            "Lewis",
             "Muteeb",
             "Saad"
           ],
@@ -37377,7 +38335,6 @@ window.LAUNCH_DATA = {
           "name": "Data and pipelines",
           "what": "Collectors, backfills, the warehouse and the labelling pipelines that feed every model.",
           "owners": [
-            "",
             "Asad",
             "Faheem",
             "Muteeb"
@@ -37450,12 +38407,10 @@ window.LAUNCH_DATA = {
           "name": "Quality, reliability and security",
           "what": "Stress and load tests, the E2E suite, QA dashboard and control, backups and restore, pen-test, secrets, SLOs and kill switches.",
           "owners": [
-            "",
             "Alex",
             "Asad",
             "Faheem",
             "Jill",
-            "Lewis",
             "Muteeb",
             "Saad"
           ],
@@ -37547,6 +38502,8 @@ window.LAUNCH_DATA = {
           "name": "Platform, environments and CI",
           "what": "Staging and production as code, CI, migrations, tenancy isolation, auth and the operational store.",
           "owners": [
+            "Asad",
+            "Faheem",
             "Muteeb"
           ],
           "stack": "AWS (region-pinned), Netlify functions, bought auth with tenant claim, row-level security, schema migrations in CI",
@@ -37652,6 +38609,7 @@ window.LAUNCH_DATA = {
           "name": "The App Review package",
           "what": "Narrative, screencasts per permission, dashboard identity, the wording firewall and the line-by-line approval.",
           "owners": [
+            "Alex",
             "Asad",
             "Filza",
             "Muteeb",
@@ -37679,6 +38637,7 @@ window.LAUNCH_DATA = {
           "name": "Data deletion and deauthorise callbacks",
           "what": "The two endpoints Meta requires, specified by Filza and built by Muteeb.",
           "owners": [
+            "Asad",
             "Filza",
             "Muteeb"
           ],
@@ -37722,7 +38681,6 @@ window.LAUNCH_DATA = {
             "Alex",
             "Asad",
             "Filza",
-            "Lewis",
             "Muteeb"
           ],
           "stack": "",
@@ -37762,7 +38720,6 @@ window.LAUNCH_DATA = {
           "name": "Other Meta-area work",
           "what": "Meta-area tickets not in a lane above.",
           "owners": [
-            "",
             "Faheem",
             "Muteeb"
           ],
@@ -37810,6 +38767,8 @@ window.LAUNCH_DATA = {
           "name": "Cost telemetry and the costing dashboard",
           "what": "One costing dashboard for cost per request, customer and model, reused on the war-room board.",
           "owners": [
+            "Asad",
+            "Faheem",
             "Muteeb"
           ],
           "stack": "",
@@ -37895,6 +38854,8 @@ window.LAUNCH_DATA = {
           "name": "Budgets, tools and vendor tiers",
           "what": "Tool-buy memo, quota raises, vector-store and observability budgets, pen-test budget, launch headroom.",
           "owners": [
+            "Alex",
+            "Asad",
             "Jill",
             "Muteeb"
           ],
@@ -37928,9 +38889,9 @@ window.LAUNCH_DATA = {
           "what": "Corporate structure, agreements, tax reviews, cash runway, governance and insurance.",
           "owners": [
             "Alex",
+            "Asad",
             "Filza",
             "Jill",
-            "Lewis",
             "Saad"
           ],
           "stack": "",
@@ -37974,13 +38935,11 @@ window.LAUNCH_DATA = {
           "name": "Launch marketing and comms",
           "what": "Launch positioning, communications, demo, Product Hunt, directories, SEO and marketing measurement.",
           "owners": [
-            "",
             "Alex",
             "Asad",
             "Faheem",
             "Filza",
             "Jill",
-            "Lewis",
             "Muteeb",
             "Saad"
           ],
@@ -38062,7 +39021,6 @@ window.LAUNCH_DATA = {
             "Faheem",
             "Filza",
             "Jill",
-            "Lewis",
             "Saad"
           ],
           "stack": "",
@@ -38098,9 +39056,12 @@ window.LAUNCH_DATA = {
           "what": "Five core pilots: terms, onboarding, feedback, conversion and activation check-ins.",
           "owners": [
             "Alex",
+            "Asad",
+            "Faheem",
             "Filza",
             "Jill",
-            "Lewis"
+            "Lewis",
+            "Saad"
           ],
           "stack": "",
           "platform": "",
@@ -38149,8 +39110,8 @@ window.LAUNCH_DATA = {
           "name": "Legal and compliance",
           "what": "ToS, privacy, DPA, DPIA, lawful bases, retention, DSARs, AI and automated-decision memos, refunds, testimonial releases.",
           "owners": [
-            "",
             "Alex",
+            "Asad",
             "Faheem",
             "Filza",
             "Jill",
@@ -38216,6 +39177,7 @@ window.LAUNCH_DATA = {
           "name": "Operations, support and on-call",
           "what": "Support inbox, macros, on-call, runbooks, current-team deputies and December support coverage.",
           "owners": [
+            "Alex",
             "Asad",
             "Faheem",
             "Jill",
@@ -38292,13 +39254,11 @@ window.LAUNCH_DATA = {
           "name": "Launch week and readiness",
           "what": "Final freezes, dry runs, production smokes, release and contingency coverage.",
           "owners": [
-            "",
             "Alex",
             "Asad",
             "Faheem",
             "Filza",
             "Jill",
-            "Lewis",
             "Muteeb",
             "Saad"
           ],
@@ -38492,7 +39452,6 @@ window.LAUNCH_DATA = {
           "name": "OCR and image fusion",
           "what": "Reading text on images and typing every post into five content types.",
           "owners": [
-            "",
             "Faheem",
             "Muteeb"
           ],
@@ -38514,7 +39473,6 @@ window.LAUNCH_DATA = {
           "name": "Video",
           "what": "Scene classifier and hook detector foundation is recorded complete. QA snapshot 16 September reports only five videos, latest data 4 July, and failed freshness; production coverage is not established.",
           "owners": [
-            "",
             "Faheem",
             "Muteeb"
           ],
@@ -38536,7 +39494,8 @@ window.LAUNCH_DATA = {
             "Alex",
             "Asad",
             "Faheem",
-            "Muteeb"
+            "Muteeb",
+            "Saad"
           ],
           "stack": "Borda gate + regressor on a 27,678-post day-7-labelled set; FastAPI score endpoint with cache, p95 under 1s",
           "platform": "",
@@ -38569,8 +39528,10 @@ window.LAUNCH_DATA = {
           "name": "Crisis detection",
           "what": "Burst-versus-baseline detector on comments, the gate measurement, incident set and drills.",
           "owners": [
+            "Alex",
             "Asad",
             "Faheem",
+            "Jill",
             "Lewis",
             "Muteeb"
           ],
@@ -38619,10 +39580,8 @@ window.LAUNCH_DATA = {
           "name": "Discovery matching",
           "what": "Discovery matching is deferred; no December implementation commitment.",
           "owners": [
-            "",
             "Asad",
             "Faheem",
-            "Filza",
             "Muteeb"
           ],
           "stack": "Deferred matching research; not a shipped December model",
@@ -38649,13 +39608,11 @@ window.LAUNCH_DATA = {
           "name": "Art-E (the LLM layer)",
           "what": "Retrieval, the model cascade, citations, refusals, memory, quotas, the golden set and every red-team gate.",
           "owners": [
-            "",
             "Alex",
             "Asad",
             "Faheem",
             "Filza",
             "Jill",
-            "Lewis",
             "Muteeb",
             "Saad"
           ],
@@ -38821,7 +39778,8 @@ window.LAUNCH_DATA = {
             "Alex",
             "Asad",
             "Jill",
-            "Muteeb"
+            "Muteeb",
+            "Saad"
           ],
           "stack": "Existing qa_dashboard_tabs.html Checks tab; registry and existing result pipeline",
           "platform": "",
@@ -38886,7 +39844,8 @@ window.LAUNCH_DATA = {
           "name": "Model quality, gold sets, drift and freeze",
           "what": "Human gold and blind sets, the per-model scorecard with intervals, drift and calibration watchdogs, live precision against gates, review queues, model cards, pinning, the freeze drift guard and the final accuracy audit.",
           "owners": [
-            "",
+            "Alex",
+            "Asad",
             "Faheem",
             "Lewis",
             "Muteeb",
@@ -38943,10 +39902,9 @@ window.LAUNCH_DATA = {
           "name": "Art-E evals, tracing and red-team",
           "what": "The golden set and nightly regression, citation gate, injection and cross-tenant probes, retrieval metrics, production tracing, online monitors with a human-validated judge, transcript reviews and the Art-E launch sign-off.",
           "owners": [
-            "",
+            "Alex",
             "Asad",
             "Faheem",
-            "Lewis",
             "Muteeb",
             "Saad"
           ],
@@ -38987,9 +39945,9 @@ window.LAUNCH_DATA = {
           "name": "Product app QA, accessibility and UAT",
           "what": "Shipped web E2E, accessibility, performance, bug bashes, UAT and production smokes. Native release checks remain backlog.",
           "owners": [
-            "",
+            "Alex",
             "Asad",
-            "Lewis",
+            "Muteeb",
             "Saad"
           ],
           "stack": "Web E2E reports, Lighthouse, axe, Sentry, web-vitals and UAT records",
@@ -39077,7 +40035,6 @@ window.LAUNCH_DATA = {
           "name": "Gates, defects, incidents and audit trail",
           "what": "Gate demos and reviews, go/no-go criteria and scorecard, the signed decision log, the gate report generator, the defect and incident log with one severity scale, postmortems, breach decisions, drills and the evidence folder.",
           "owners": [
-            "",
             "Alex",
             "Asad",
             "Faheem",
@@ -39147,66 +40104,66 @@ window.LAUNCH_DATA = {
     "owners": [
       {
         "owner": "Asad",
-        "tickets": 81,
+        "tickets": 53,
         "focus_rate": 0.6,
-        "effort_days": 112.75,
+        "effort_days": 80.51,
         "capacity_days": 38.4,
-        "gap_days": 74.35,
+        "gap_days": 42.11,
         "capacity_at_hard_limit": 38.4
       },
       {
         "owner": "Muteeb",
-        "tickets": 99,
+        "tickets": 76,
         "focus_rate": 0.7,
-        "effort_days": 156.75,
+        "effort_days": 127.03,
         "capacity_days": 44.8,
-        "gap_days": 111.95,
+        "gap_days": 82.23,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Faheem",
-        "tickets": 60,
+        "tickets": 73,
         "focus_rate": 0.7,
-        "effort_days": 97.25,
+        "effort_days": 114.63,
         "capacity_days": 44.8,
-        "gap_days": 52.45,
+        "gap_days": 69.83,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Saad",
-        "tickets": 70,
+        "tickets": 121,
         "focus_rate": 0.7,
-        "effort_days": 73.5,
+        "effort_days": 130.05,
         "capacity_days": 44.8,
-        "gap_days": 28.7,
+        "gap_days": 85.25,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Alex",
-        "tickets": 53,
+        "tickets": 69,
         "focus_rate": 0.4,
-        "effort_days": 29.5,
+        "effort_days": 47.48,
         "capacity_days": 25.6,
-        "gap_days": 3.9,
+        "gap_days": 21.88,
         "capacity_at_hard_limit": 25.6
       },
       {
         "owner": "Jill",
-        "tickets": 61,
+        "tickets": 75,
         "focus_rate": 0.6,
-        "effort_days": 41.5,
+        "effort_days": 50.31,
         "capacity_days": 38.4,
-        "gap_days": 3.1,
+        "gap_days": 11.91,
         "capacity_at_hard_limit": 38.4
       },
       {
         "owner": "Lewis",
-        "tickets": 43,
-        "focus_rate": 0.6,
-        "effort_days": 39.25,
-        "capacity_days": 38.4,
-        "gap_days": 0.85,
-        "capacity_at_hard_limit": 38.4
+        "tickets": 0,
+        "focus_rate": 0,
+        "effort_days": 0.5,
+        "capacity_days": 0,
+        "gap_days": 0.5,
+        "capacity_at_hard_limit": 0
       },
       {
         "owner": "Filza",
@@ -39219,7 +40176,7 @@ window.LAUNCH_DATA = {
       }
     ],
     "total_effort_days": 606.25,
-    "total_capacity_days": 307.2
+    "total_capacity_days": 268.8
   },
   "ticket_audit": {
     "as_of": "2026-09-17",
@@ -40256,86 +41213,390 @@ window.LAUNCH_DATA = {
   "workload_review": {
     "as_of": "2026-09-17",
     "roles": {
-      "Asad": "Technical lead, full stack, frontend integration and engineering review",
-      "Muteeb": "Backend, APIs, infrastructure, tenant isolation and production operations",
-      "Faheem": "AI/ML, evaluations, model serving contracts and data quality",
-      "Saad": "Product design, acceptance, frontend components and usability",
-      "Alex": "Vision, commercial decisions, marketing, scope and release coordination",
-      "Jill": "Finance, operational records, procurement and team coordination",
-      "Lewis": "Pilot customers, research, customer walkthroughs and support",
-      "Filza": "Legal interpretation, terms, data protection and legal sign-off"
+      "Asad": "CTO: website/mobile backend, technical and product advice, ownership and customer outreach",
+      "Muteeb": "Backend with Asad; APIs, ML/AI and data",
+      "Faheem": "AI/ML, data and backend",
+      "Saad": "Design, frontend delivery and product management",
+      "Alex": "CEO: vision, pricing, marketing, product ownership and customer outreach",
+      "Lewis": "Limited data partner; no routine delivery, pilot operations or support commitment",
+      "Jill": "COO: operations, finance and coordination",
+      "Filza": "All legal work and general advisory matters"
     },
-    "role_basis": "Inferred from existing assignments and shared context; owner availability and additional technical skills are not confirmed.",
+    "role_basis": "User explicitly confirmed these roles on 17 September 2026. Individual focus rates and remaining effort still require confirmation. Lewis has no assumed recurring delivery capacity.",
     "policy": "One primary delivery item per person. Pull only after required input evidence exists; use mock contracts for preparation, never as live acceptance. Reserve specialist review and do not create parallel boards.",
     "changes": [
       {
-        "id": "N5-MT-09",
+        "id": "N1-AS-06",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.2,
+            "Asad": 0.05
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-AS-11",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.4,
+            "Asad": 0.1
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.75,
+            "Asad": 0.25
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-LW-02",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 1.5,
+            "Lewis": 0.5
+          }
+        },
+        "handoff": "Lewis is asked only for an agreed source-data handoff. Faheem owns structuring, completeness and evaluation use. Unconfirmed partner availability remains an external dependency; no daily delivery commitment is assumed. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-LW-03",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 1
+          }
+        },
+        "handoff": "Faheem produces the backtest addendum from available source data and records gaps; Lewis may supply existing examples by agreement only. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-LW-04",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 1.5,
+            "Asad": 0.5
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-LW-05",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N1-LW-07",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.375,
+            "Alex": 0.125
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-01",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 3
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 2.4000000000000004,
+            "Asad": 0.6000000000000001
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-03",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-04",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 3
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 2.4000000000000004,
+            "Asad": 0.6000000000000001
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-06",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2.5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 2,
+            "Asad": 0.5
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-09",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.6,
+            "Alex": 0.4
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-11",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-13",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.2,
+            "Asad": 0.05
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-MT-01",
         "before": {
           "assignee": "Muteeb",
           "effort_allocations": {
-            "Muteeb": 0.5
+            "Muteeb": 2
           }
         },
         "after": {
-          "assignee": "Alex",
+          "assignee": "Faheem",
           "effort_allocations": {
-            "Alex": 0.25,
-            "Muteeb": 0.25
+            "Faheem": 1.5,
+            "Muteeb": 0.5
           }
         },
-        "handoff": "Alex assembles the review pack and chases missing links; Muteeb validates the platform results and unresolved defects."
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       },
       {
-        "id": "N6-MT-08",
+        "id": "N2-MT-02",
         "before": {
           "assignee": "Muteeb",
           "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 0.75,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-MT-03",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 3
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2.4000000000000004,
+            "Muteeb": 0.6000000000000001
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-MT-05",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 3
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 2.25,
+            "Muteeb": 0.75
+          }
+        },
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-MT-06",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1.6,
+            "Muteeb": 0.4
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-MT-11",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 1.5,
             "Muteeb": 0.5
           }
         },
-        "after": {
-          "assignee": "Alex",
-          "effort_allocations": {
-            "Alex": 0.25,
-            "Muteeb": 0.25
-          }
-        },
-        "handoff": "Alex fills the go/no-go evidence slots; Muteeb enforces the technical freeze and attests to the evidence."
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       },
       {
-        "id": "N6-SD-06",
+        "id": "N2-MT-15",
         "before": {
-          "assignee": "Saad",
+          "assignee": "Muteeb",
           "effort_allocations": {
-            "Saad": 1
+            "Muteeb": 1
           }
         },
         "after": {
-          "assignee": "Alex",
+          "assignee": "Asad",
           "effort_allocations": {
-            "Alex": 0.5,
-            "Saad": 0.5
+            "Asad": 0.8,
+            "Muteeb": 0.2
           }
         },
-        "handoff": "Alex maintains the decision/defect log and escalates blockers; Saad validates product acceptance and UAT evidence."
-      },
-      {
-        "id": "N5-SD-06",
-        "before": {
-          "assignee": "Saad",
-          "effort_allocations": {
-            "Saad": 1
-          }
-        },
-        "after": {
-          "assignee": "Alex",
-          "effort_allocations": {
-            "Alex": 0.5,
-            "Saad": 0.25,
-            "Muteeb": 0.25
-          }
-        },
-        "handoff": "Alex assembles launch roles and the run-of-show; Saad signs product gates and Muteeb validates rollback instructions."
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       },
       {
         "id": "N2-SD-04",
@@ -40354,10 +41615,112 @@ window.LAUNCH_DATA = {
             "Filza": 0.25
           }
         },
-        "handoff": "Alex assembles the submission evidence; Saad retains the Meta submission, Asad confirms the working journey and Filza approves claims."
+        "handoff": "Alex assembles the submission evidence; Saad retains the Meta submission, Asad confirms the working journey and Filza approves claims. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
       },
       {
-        "id": "N2-AS-09",
+        "id": "N2-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-LW-03",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 1.5,
+            "Asad": 0.5
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-LW-04",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 1.5,
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-01",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-02",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-04",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 3
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 2.4000000000000004,
+            "Asad": 0.6000000000000001
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-07",
         "before": {
           "assignee": "Asad",
           "effort_allocations": {
@@ -40365,30 +41728,66 @@ window.LAUNCH_DATA = {
           }
         },
         "after": {
-          "assignee": "Lewis",
-          "effort_allocations": {
-            "Lewis": 0.5,
-            "Asad": 0.5
-          }
-        },
-        "handoff": "Lewis records the scripted customer journey on approved test accounts; Asad verifies permission coverage and freezes the implemented UI. Lewis does not change auth or permission configuration."
-      },
-      {
-        "id": "N6-SD-03",
-        "before": {
           "assignee": "Saad",
           "effort_allocations": {
-            "Saad": 0.5
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-11",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
           }
         },
         "after": {
-          "assignee": "Lewis",
+          "assignee": "Saad",
           "effort_allocations": {
-            "Lewis": 0.25,
-            "Saad": 0.25
+            "Saad": 1.6,
+            "Asad": 0.4
           }
         },
-        "handoff": "Lewis captures screenshots and checks links and dates; Saad approves visual and product accuracy. Legal wording is reused from approved documents."
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-13",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1,
+            "Asad": 0.6,
+            "Muteeb": 0.4
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-14",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1,
+            "Asad": 0.6,
+            "Muteeb": 0.4
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       },
       {
         "id": "N3-FH-09",
@@ -40399,13 +41798,1177 @@ window.LAUNCH_DATA = {
           }
         },
         "after": {
-          "assignee": "Lewis",
+          "assignee": "Faheem",
           "effort_allocations": {
-            "Lewis": 0.5,
-            "Faheem": 0.5
+            "Faheem": 0.75,
+            "Alex": 0.25
           }
         },
-        "handoff": "Lewis assembles question coverage and missing customer scenarios; Faheem decides evaluation validity and technical coverage gaps."
+        "handoff": "Faheem owns data/evaluation analysis; Alex supplies customer interpretation or independent human judgement. The data partner is not an assigned analyst or reviewer. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-MT-07",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1.5
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1.2000000000000002,
+            "Muteeb": 0.30000000000000004
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-MT-09",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 5
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 3.75,
+            "Muteeb": 1.25
+          }
+        },
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-MT-14",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-MT-15",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 3
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 2.25,
+            "Muteeb": 0.75
+          }
+        },
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-MT-16",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1.6,
+            "Muteeb": 0.4
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-04",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Faheem owns data/evaluation analysis; Alex supplies customer interpretation or independent human judgement. The data partner is not an assigned analyst or reviewer. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-05",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.75,
+            "Asad": 0.25
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-07",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.2,
+            "Alex": 0.8
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-01",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 4,
+            "Asad": 1
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-03",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-05",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-06",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-07",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.4,
+            "Asad": 0.1
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-09",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-10",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-13",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-14",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-15",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.5,
+            "Asad": 0.3,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-17",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-MT-04",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 5
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 4,
+            "Muteeb": 1
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-MT-14",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-SD-10",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.75,
+            "Saad": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.1875,
+            "Alex": 0.0625
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-LW-03",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.2,
+            "Alex": 0.8
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-LW-04",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Faheem owns data/evaluation analysis; Alex supplies customer interpretation or independent human judgement. The data partner is not an assigned analyst or reviewer. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-LW-05",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.75,
+            "Asad": 0.25
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-AS-01",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 3
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.5,
+            "Asad": 0.8999999999999999,
+            "Muteeb": 0.6000000000000001
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-AS-03",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 2.5,
+            "Asad": 1.5,
+            "Muteeb": 1
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-AS-04",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-AS-06",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 3
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.5,
+            "Asad": 0.8999999999999999,
+            "Muteeb": 0.6000000000000001
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-AS-09",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-AS-12",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.2,
+            "Asad": 0.05
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-MT-05",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1.5,
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Muteeb implements the monitoring view and writes technical recovery steps. Alex assembles the failure table, roles and communication links from those instructions; technical acceptance stays with Muteeb. All preparation and specialist effort is reserved; owner availability remains unconfirmed."
+      },
+      {
+        "id": "N5-MT-07",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 0.75,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-MT-09",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Alex assembles the review pack and chases missing links; Muteeb validates the platform results and unresolved defects. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N5-MT-13",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-MT-17",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1.6,
+            "Muteeb": 0.4
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-SD-06",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.5,
+            "Saad": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Alex assembles launch roles and the run-of-show; Saad signs product gates and Muteeb validates rollback instructions. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N5-SD-09",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.75,
+            "Saad": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-02",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.6,
+            "Alex": 0.4
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-03",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.375,
+            "Alex": 0.125
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-04",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-05",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.75,
+            "Asad": 0.25
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-06",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-07",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.3,
+            "Alex": 0.2
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-AS-02",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.2,
+            "Asad": 0.05
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-AS-06",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-AS-07",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-AS-08",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 3
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.5,
+            "Asad": 0.8999999999999999,
+            "Muteeb": 0.6000000000000001
+          }
+        },
+        "handoff": "Saad leads UI/product testing and frontend fixes. Asad fixes website/mobile backend defects and reviews integration; Muteeb fixes API/platform defects. Route each actual defect to its technical owner and keep one retest record. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-AS-10",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.5,
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Asad enforces the code freeze and signs engineering evidence; Alex collects the existing evidence links into the release memo. All preparation and specialist effort is reserved; owner availability remains unconfirmed."
+      },
+      {
+        "id": "N6-MT-02",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 0.375,
+            "Muteeb": 0.125
+          }
+        },
+        "handoff": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-MT-08",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Alex fills the go/no-go evidence slots; Muteeb enforces the technical freeze and attests to the evidence. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N6-SD-03",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.3,
+            "Alex": 0.2
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-SD-06",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.5,
+            "Saad": 0.5
+          }
+        },
+        "handoff": "Alex maintains the decision/defect log and escalates blockers; Saad validates product acceptance and UAT evidence. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N6-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-LW-03",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.6,
+            "Alex": 0.4
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-LW-04",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 2
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 1.5,
+            "Asad": 0.5
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-LW-05",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.375,
+            "Alex": 0.125
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-LW-06",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "LW-LW-01",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.375,
+            "Alex": 0.125
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-MT-17",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-AS-19",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.4,
+            "Asad": 0.1
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-JL-08",
+        "before": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.75,
+            "Jill": 0.25
+          }
+        },
+        "handoff": "Alex resolves product-direction decisions and maintains their outcomes; Jill checks follow-up and unresolved age in the existing team board. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N4-AS-20",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-MT-18",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1.6,
+            "Muteeb": 0.4
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-LW-05",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       },
       {
         "id": "N3-FZ-14",
@@ -40423,7 +42986,176 @@ window.LAUNCH_DATA = {
             "Asad": 0.25
           }
         },
-        "handoff": "Jill collects company asset and account ownership records; Asad supplies repository licence evidence; Filza interprets licences and approves legal ownership conclusions."
+        "handoff": "Jill collects company asset and account ownership records; Asad supplies repository licence evidence; Filza interprets licences and approves legal ownership conclusions. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N3-JL-12",
+        "before": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.25,
+            "Jill": 0.25
+          }
+        },
+        "handoff": "Alex owns spending approval limits and decisions; Jill maintains vendor commitments and checks the financial records. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N5-JL-08",
+        "before": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Alex owns the marketing scoreboard, targets and channel decisions, using existing analytics exports; no new engineering dashboard is commissioned. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
+      },
+      {
+        "id": "N5-LW-09",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.375,
+            "Alex": 0.125
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N6-LW-07",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.75,
+            "Alex": 0.25
+          }
+        },
+        "handoff": "Jill coordinates the records, sessions and support follow-up; Alex owns customer contact and decisions. Technical and legal approvals remain with their existing specialists. The data partner is not assigned operational cover. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N2-LW-06",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-08",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.25
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.1875,
+            "Asad": 0.0625
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-MT-19",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-21",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-09",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-AS-23",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       },
       {
         "id": "N3-FZ-19",
@@ -40441,77 +43173,10 @@ window.LAUNCH_DATA = {
             "Muteeb": 0.25
           }
         },
-        "handoff": "Jill collects current vendor evidence in the existing register; Muteeb assesses technical gaps and Filza signs the data/vendor implications."
+        "handoff": "Jill collects current vendor evidence in the existing register; Muteeb assesses technical gaps and Filza signs the data/vendor implications. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
       },
       {
-        "id": "N2-JL-08",
-        "before": {
-          "assignee": "Jill",
-          "effort_allocations": {
-            "Jill": 1
-          }
-        },
-        "after": {
-          "assignee": "Alex",
-          "effort_allocations": {
-            "Alex": 0.75,
-            "Jill": 0.25
-          }
-        },
-        "handoff": "Alex resolves product-direction decisions and maintains their outcomes; Jill checks follow-up and unresolved age in the existing team board."
-      },
-      {
-        "id": "N5-JL-08",
-        "before": {
-          "assignee": "Jill",
-          "effort_allocations": {
-            "Jill": 0.5
-          }
-        },
-        "after": {
-          "assignee": "Alex",
-          "effort_allocations": {
-            "Alex": 0.5
-          }
-        },
-        "handoff": "Alex owns the marketing scoreboard, targets and channel decisions, using existing analytics exports; no new engineering dashboard is commissioned."
-      },
-      {
-        "id": "N3-JL-12",
-        "before": {
-          "assignee": "Jill",
-          "effort_allocations": {
-            "Jill": 0.5
-          }
-        },
-        "after": {
-          "assignee": "Alex",
-          "effort_allocations": {
-            "Alex": 0.25,
-            "Jill": 0.25
-          }
-        },
-        "handoff": "Alex owns spending approval limits and decisions; Jill maintains vendor commitments and checks the financial records."
-      },
-      {
-        "id": "N5-MT-05",
-        "before": {
-          "assignee": "Muteeb",
-          "effort_allocations": {
-            "Muteeb": 2
-          }
-        },
-        "after": {
-          "assignee": "Muteeb",
-          "effort_allocations": {
-            "Muteeb": 1.5,
-            "Alex": 0.5
-          }
-        },
-        "handoff": "Muteeb implements the monitoring view and writes technical recovery steps. Alex assembles the failure table, roles and communication links from those instructions; technical acceptance stays with Muteeb."
-      },
-      {
-        "id": "N6-AS-10",
+        "id": "N3-AS-24",
         "before": {
           "assignee": "Asad",
           "effort_allocations": {
@@ -40519,13 +43184,115 @@ window.LAUNCH_DATA = {
           }
         },
         "after": {
-          "assignee": "Asad",
+          "assignee": "Saad",
           "effort_allocations": {
-            "Asad": 0.5,
-            "Alex": 0.5
+            "Saad": 0.8,
+            "Asad": 0.2
           }
         },
-        "handoff": "Asad enforces the code freeze and signs engineering evidence; Alex collects the existing evidence links into the release memo."
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-MT-23",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-22",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 2
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1.6,
+            "Asad": 0.4
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-AS-23",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.8,
+            "Asad": 0.2
+          }
+        },
+        "handoff": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N4-MT-30",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.8,
+            "Muteeb": 0.2
+          }
+        },
+        "handoff": "Asad owns backend implementation and the product/API contract. Muteeb reviews shared infrastructure, auth, deployment and operational fit. Reuse the agreed stack and shared clients. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N5-LW-10",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 1
+          }
+        },
+        "after": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.6,
+            "Alex": 0.4
+          }
+        },
+        "handoff": "Saad owns product acceptance, test protocol or demonstration capture; Alex arranges customer participation and contributes real product questions. The data partner is not the pilot manager. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      },
+      {
+        "id": "N3-LW-10",
+        "before": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.375,
+            "Asad": 0.125
+          }
+        },
+        "handoff": "Alex leads customer outreach, recruitment and commercial follow-up; Asad contributes technical/product discussions. Confirm real customer participation rather than assuming Alex will run it. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
       }
     ],
     "report": "docs/workload-rebalance.md",

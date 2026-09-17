@@ -5,7 +5,7 @@ const context = { window: {} };
 vm.runInNewContext(fs.readFileSync('sprint_launch_data.js', 'utf8'), context);
 const d = context.window.LAUNCH_DATA;
 const start = '2026-09-17';
-const rates = {Asad: .6, Muteeb: .7, Faheem: .7, Saad: .7, Alex: .4, Jill: .6, Lewis: .6, Filza: .5};
+const rates = {Asad: .6, Muteeb: .7, Faheem: .7, Saad: .7, Alex: .4, Jill: .6, Lewis: 0, Filza: .5};
 function weekdays(end) {
   let n = 0;
   for (let date = new Date(start+'T00:00:00Z'); date.toISOString().slice(0,10) <= end; date.setUTCDate(date.getUTCDate()+1)) {
@@ -22,4 +22,4 @@ const owners = Object.entries(rates).map(([owner, rate]) => {
 });
 console.log(JSON.stringify({as_of:start, target:d.launch.public, hard_limit:d.launch.hard_deadline,
   basis:'Audited scope with inherited estimates and focus rates, including allocated reviewer effort; excludes deferred/merged work and recorded done/Phase 0. Shared-board status snapshot 2026-09-16T12:15:43.591Z applied; remaining effort, leave and availability still require owner confirmation. No new hires, overtime or assumed external counsel. Weekends add no capacity.',
-  owners, total_effort_days:round(owners.reduce((n,p)=>n+p.effort_days,0)), total_capacity_days:round(owners.reduce((n,p)=>n+p.capacity_days,0))},null,2));
+  owners, total_effort_days:round(d.tickets.filter(t=>t.sprint!=='P0'&&t.status!=='done').reduce((n,t)=>n+t.estimated_days,0)), total_capacity_days:round(owners.reduce((n,p)=>n+p.capacity_days,0))},null,2));

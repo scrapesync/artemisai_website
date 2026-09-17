@@ -755,7 +755,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
 </div></div>
 <div class="toast" id="toast"></div>
 
-<script src="sprint_launch_data.js?v=20260917-workload"></script>
+<script src="sprint_launch_data.js?v=20260917-confirmed-roles"></script>
 <script src="mock_shots_data.js"></script>
 <script>
 /* ============================================================
@@ -803,14 +803,14 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   var LAYER_COL={foundation:'#9c8f80',intelligence:'#7d94b8',product:'#d0714f',llm:'#a2739b',launch:'#d9a441'};
   var LAYER_NAME={foundation:'Foundation',intelligence:'Intelligence',product:'Product',llm:'LLM (Art-E)',launch:'Launch'};
   var PEOPLE=[
-    {n:'Asad',   c:'#6366f1', role:'Founder · web/app build'},
-    {n:'Faheem', c:'#00d4aa', role:'AI / ML'},
-    {n:'Muteeb', c:'#06b6d4', role:'Platform / infra / serving'},
-    {n:'Saad',   c:'#f59e0b', role:'Design, components and acceptance'},
-    {n:'Alex',   c:'#ec4899', role:'CEO'},
-    {n:'Jill',   c:'#10b981', role:'Ops + money'},
-    {n:'Lewis',  c:'#38bdf8', role:'Pilots'},
-    {n:'Filza',  c:'#a78bfa', role:'Legal'}
+    {n:'Asad',   c:'#6366f1', role:'CTO · backend, product and outreach'},
+    {n:'Faheem', c:'#00d4aa', role:'AI/ML, data and backend'},
+    {n:'Muteeb', c:'#06b6d4', role:'Backend, APIs, AI/ML and data'},
+    {n:'Saad',   c:'#f59e0b', role:'Design, frontend and product manager'},
+    {n:'Alex',   c:'#ec4899', role:'CEO · vision, marketing and outreach'},
+    {n:'Jill',   c:'#10b981', role:'COO · operations, finance and coordination'},
+    {n:'Lewis',  c:'#38bdf8', role:'Limited data partner'},
+    {n:'Filza',  c:'#a78bfa', role:'Legal and general advisor'}
   ];
   var PC={}; PEOPLE.forEach(function(p){PC[p.n]=p.c;});
   var STATUS_LABEL={todo:'To do',inprog:'In progress',blocked:'Blocked',done:'Done',dropped:'Dropped'};
