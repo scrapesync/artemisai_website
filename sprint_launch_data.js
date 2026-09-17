@@ -33,8 +33,8 @@ window.LAUNCH_DATA = {
     },
     {
       "id": "app",
-      "phase": "Post-launch",
-      "name": "Mobile app (January)",
+      "phase": "Phase 4",
+      "name": "Store app shells (launch)",
       "color": "#3F6491"
     }
   ],
@@ -1132,37 +1132,6 @@ window.LAUNCH_DATA = {
       }
     },
     {
-      "id": "BL-IN-12",
-      "sprint": "BL",
-      "layer": "intelligence",
-      "assignee": "",
-      "title": "Prompt registry + staged rollout",
-      "what": "Versioned registry for labelling and Art-E prompts (hash recorded in every prediction/label row), diff on change, staged rollout with a shadow comparison before promotion - extends the N5 pinned manifest. Added in the 16 Sep review: Extend the same path to retrained flop, comment and crisis models once the freeze lifts: seven days in shadow logging disagreement with the champion, then 10% of tenants through a registry alias with automatic rollback if false-alarm rate, abstain share or ledger hit rate breach written thresholds, then promotion. File the runbook with thresholds per model and rehearse it once on staging with a deliberately worse challenger.",
-      "why": "Prevents the next silent prompt divergence (the MTL label mess) once prompts start changing again after the freeze; pairs with the label console + retrain queue.",
-      "area": "WAVE 3 · Harden and open up (Jan onward)",
-      "due": "",
-      "priority": "P2",
-      "priority_reason": "post-launch roadmap: WAVE 3",
-      "depends_on": [
-        "BL-IN-07"
-      ],
-      "feeds": [
-        "BL-LL-21"
-      ],
-      "gate": "none",
-      "source": "reconciler",
-      "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
-      "checklist": [],
-      "layman": "After launch: keep every version of the instructions we give our AI on record, compare old and new side by side, and trial changes quietly before switching everyone over - so a quiet tweak can never silently break results again.",
-      "layman_analogy": "Like a pharmacy keeping every past version of a prescription on file and trialling any change on a small batch before the whole town gets the new formula.",
-      "layman_needed": "When picked up: a record of every version of our AI instructions, side-by-side comparison on change, and quiet trials before switching everyone over — so a tweak can never silently break results. Needs a sprint slot and owner, or a reason to drop.",
-      "layman_output": "When picked up: a versioned record of every set of instructions we give our AI, with its fingerprint stamped into each prediction, a side-by-side comparison whenever wording changes, and a quiet trial run before any change reaches customers — so a tweak can never silently skew results again, as happened once before. Until then, this row needs a sprint slot and owner, or a written reason to drop it.",
-      "audit": {
-        "decision": "backlog",
-        "reason": "Unscheduled scope; requires a separate priority decision, contributes no December capacity load."
-      }
-    },
-    {
       "id": "BL-LL-21",
       "sprint": "BL",
       "layer": "llm",
@@ -1549,50 +1518,6 @@ window.LAUNCH_DATA = {
       }
     },
     {
-      "id": "BL-LL-24",
-      "sprint": "BL",
-      "assignee": "",
-      "title": "App-store AI rules for the January app: third-party AI consent and in-app reporting",
-      "what": "Fold into BL-APP-05. Add a one-time consent screen before first Art-E use that names the AI vendors. Reuse the web app's answer feedback control and add a Report reason on Art-E answers and drafted replies, stored with the answer id. Add hide-and-report on Discovery cards, a stated 48-hour response time for reports, and the vendors listed in the App Store privacy labels and the Play data safety form. Builds on BL-APP-05, N4-AS-07, N3-FZ-03, N2-FZ-03, N3-FZ-08, N2-FZ-06, N3-FZ-01, N3-MT-14, LW-FZ-04.",
-      "why": "Apple and Google reject AI apps without third-party AI consent or in-app reporting; retrofitting after a rejection would slip the January release. (16 Sep research: llm-arte, mobile.)",
-      "area": "App core",
-      "due": "",
-      "priority": "P1",
-      "priority_reason": "16 Sep research: The Capacitor app ships in January, after the 8 Dec web launch, so app-store AI rules do not block launch. What the web launch needs (AI vendors named in the pr",
-      "depends_on": [
-        "BL-APP-02",
-        "BL-APP-05",
-        "N2-FZ-03",
-        "N3-FZ-01",
-        "N4-AS-07",
-        "N4-AS-04",
-        "N3-MT-17"
-      ],
-      "feeds": [],
-      "gate": "none",
-      "source": "Asad research 16 Sep (llm-arte, mobile)",
-      "acceptance": "The Capacitor build shows the AI consent screen before first Art-E use, reports reach the feedback store with the answer id, and store forms name the AI vendors.",
-      "checklist": [
-        "Add a one-time consent screen before first Art-E use that names the AI vendors",
-        "Reuse the web app's answer feedback control and add a Report reason on Art-E answers and drafted replies, stor",
-        "Add hide-and-report on Discovery cards, a stated 48-hour response time for reports, and the vendors listed in ",
-        "Done when: The Capacitor build shows the AI consent screen before first Art-E use, reports reach the feedback store with "
-      ],
-      "layman": "Asad adds to the January mobile app a one-time consent screen naming the AI companies behind Art-E, plus ways to report a poor answer or hide a Discovery card. Apple and Google reject AI apps without these, which would delay the release.",
-      "layman_analogy": "Like a restaurant telling you which suppliers it uses and leaving a comment card on every table.",
-      "layman_needed": "The mobile app build showing the AI consent screen before first Art-E use, reports saved against the answer, and store forms naming the AI vendors.",
-      "layman_output": "In the test mobile app, a consent screen that lists the AI vendors before Art-E is first used, a Report option on answers and drafted replies, hide-and-report on Discovery cards, and a stated 48-hour response time.",
-      "evidence": [
-        "https://developer.apple.com/app-store/review/guidelines/",
-        "https://support.google.com/googleplay/android-developer/answer/13985936"
-      ],
-      "layer": "llm",
-      "audit": {
-        "decision": "backlog",
-        "reason": "Unscheduled scope; requires a separate priority decision, contributes no December capacity load."
-      }
-    },
-    {
       "id": "BL-IN-20",
       "sprint": "BL",
       "assignee": "",
@@ -1970,45 +1895,6 @@ window.LAUNCH_DATA = {
         "https://www.asa.org.uk/advice-online/substantiation.html"
       ],
       "layer": "launch",
-      "audit": {
-        "decision": "backlog",
-        "reason": "Unscheduled scope; requires a separate priority decision, contributes no December capacity load."
-      }
-    },
-    {
-      "id": "BL-IN-22",
-      "sprint": "BL",
-      "assignee": "",
-      "title": "Test strategy with diff-coverage floors and a flaky-test rule across repos",
-      "what": "Post-launch, begin with a one-page test strategy and non-blocking diff-coverage reporting on the serving and pipeline repos; add merge gates only once baseline numbers are known. Before launch, add one line to the N6-AS-12 freeze protocol instead: every post-freeze blocker fix carries a regression test that fails without the fix. Builds on N1-MT-04, N2-MT-16, N3-AS-13, N5-AS-06, P0-FH-13, N3-FH-16, N4-MT-01.",
-      "why": "E2E-heavy suites are slow and flaky; without lower-layer floors, freeze-week blocker fixes merge untested and regressions surface only overnight. (16 Sep research: dev-process-platform.)",
-      "area": "QA",
-      "due": "",
-      "priority": "P2",
-      "priority_reason": "16 Sep research: Diff-coverage gates across three repos plus flaky-test quarantine is process overhead the team cannot carry before launch. Asad, the main builder, is already ov",
-      "depends_on": [
-        "N1-MT-04"
-      ],
-      "feeds": [],
-      "gate": "none",
-      "source": "Asad research 16 Sep (dev-process-platform)",
-      "acceptance": "Strategy published; CI on the app, serving and pipeline repos reports diff coverage and fails below the floor; quarantine list shows owner and expiry.",
-      "checklist": [
-        "Post-launch, begin with a one-page test strategy and non-blocking diff-coverage reporting on the serving and p",
-        "add merge gates only once baseline numbers are known",
-        "Before launch, add one line to the N6-AS-12 freeze protocol instead: every post-freeze blocker fix carries a r",
-        "Done when: Strategy published; CI on the app, serving and pipeline repos reports diff coverage and fails below the floor;"
-      ],
-      "layman": "After launch, Asad writes a simple testing plan and starts reporting how much new code is covered by tests, adding stricter rules once normal levels are known. Before launch, every urgent fix made after the code freeze must come with its own test.",
-      "layman_analogy": "Like a mechanic who, after fixing a fault, checks that exact fault again before handing back the car keys.",
-      "layman_needed": "A published testing plan, code checks that report coverage and block changes below the agreed floor, and a list of unreliable tests with owners.",
-      "layman_output": "A published test strategy, automatic coverage reports on changes to the app, serving and pipeline code, and a list of unreliable tests set aside, each with an owner and expiry date.",
-      "evidence": [
-        "https://testing.googleblog.com/2020/08/code-coverage-best-practices.html",
-        "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/ops_dev_integ_code_quality.html",
-        "https://dora.dev/guides/dora-metrics/"
-      ],
-      "layer": "intelligence",
       "audit": {
         "decision": "backlog",
         "reason": "Unscheduled scope; requires a separate priority decision, contributes no December capacity load."
@@ -9233,240 +9119,6 @@ window.LAUNCH_DATA = {
       }
     },
     {
-      "id": "N1-FZ-04",
-      "sprint": "BL",
-      "assignee": "Filza",
-      "title": "Codify the k=5 floor before the Discovery API",
-      "what": "Deferred: Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature. Original scope: Write the floor spec Muteeb builds to in N3: k=5 minimum cohort size on every aggregate; the list of dropped and banded fields on cards and profiles; fail-closed behaviour (below floor renders nothing) with a logged event; and the differencing rule (per-query seeded noise, no exact overlap counts that can be subtracted across queries or across weekly recomputes). Sign it with Asad as CTO and hand it to Muteeb as the acceptance spec for the Discovery API build (greenfield in N3). Balancing 16 Sep: time-box to about 1 day (full scope about 2); ship the smallest version that meets the acceptance and park the rest in the backlog.",
-      "why": "The floor is the product risk; codified before the API so the endpoint is tested against it rather than retrofitted.",
-      "area": "Discovery",
-      "due": null,
-      "priority": "P1",
-      "priority_reason": "Consumer is Muteeb's N3 Discovery endpoints (from 28 Sep), 2+ weeks after the 11 Sep due; N1-FZ-03 is the immediate blocker for fingerprint capture and stays P0.",
-      "depends_on": [
-        "N1-FZ-03"
-      ],
-      "feeds": [
-        "N3-MT-13",
-        "N3-MT-17",
-        "N2-AS-14"
-      ],
-      "gate": "BL",
-      "source": "plan",
-      "acceptance": "Muteeb confirms the floor spec is the test oracle for the N3 differencing tests and Saad's fail-closed empty state matches it.",
-      "checklist": [
-        "Define k=5 and where it applies (matches, spotlight, profile fields, reason strings)",
-        "List dropped and banded fields per surface",
-        "Specify fail-closed rendering plus the log event fields",
-        "Write the differencing rule incl. week-over-week recompute drift",
-        "Asad co-signs; Muteeb receives it as the N3 acceptance spec"
-      ],
-      "layman": "Filza writes the rule that the page-matching feature never shows a statistic drawn from fewer than five pages, and shows nothing at all below that, so that no individual page or person can be picked out of the numbers.",
-      "layman_analogy": "Like the census rule that no statistic is published for a street with fewer than five households - below that, the table simply shows nothing.",
-      "layman_needed": "A signed rule that page-matching never shows a statistic drawn from fewer than five pages and shows nothing below that, with the exact fields hidden or grouped, handed to Muteeb as the standard his build is tested against.",
-      "layman_output": "A signed written rule handed to Muteeb: page-matching never shows a statistic drawn from fewer than five pages, shows nothing at all below that floor, and logs the event - with the exact hidden and grouped fields listed and a rule preventing two queries being compared to expose one page. Muteeb's build will be tested against this document, so anyone can check the app against the rule.",
-      "moved_from": "N1",
-      "timebox_days": 1,
-      "launch_stage": "after-public",
-      "estimated_days": 1,
-      "estimate_source": "16 Sep inherited effort estimate; not a new team commitment",
-      "audit_original_schedule": {
-        "sprint": "N3",
-        "due": "2026-10-09"
-      },
-      "audit": {
-        "decision": "deferred",
-        "reason": "Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature."
-      },
-      "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident."
-    },
-    {
-      "id": "N2-FH-18",
-      "sprint": "BL",
-      "assignee": "Faheem",
-      "title": "De-identify Discovery graph inputs per Filza; keep fingerprint capture",
-      "what": "Deferred: Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature. Original scope: Confirm cohort-fingerprint capture is running, apply Filza's de-identification policy (dropped fields, k=5 pre-filter) to the graph input table and hand it to Muteeb before his N3 graph work starts 5 Oct. Balancing 16 Sep: time-box to about 1 day (full scope about 2); ship the smallest version that meets the acceptance and park the rest in the backlog.",
-      "why": "Muteeb's graph starts 5 Oct and legally cannot run on un-de-identified inputs.",
-      "area": "Discovery",
-      "due": null,
-      "priority": "P0",
-      "priority_reason": "blocks Muteeb's N3 day-1 graph work",
-      "depends_on": [
-        "Filza: de-identification policy + k=5 floor signed",
-        "P0-MT-07"
-      ],
-      "feeds": [
-        "N2-FH-19"
-      ],
-      "gate": "BL",
-      "source": "plan",
-      "acceptance": "De-identified graph input table handed to Muteeb with the policy checklist ticked.",
-      "checklist": [
-        "Verify fingerprint capture running",
-        "Apply dropped-field rules",
-        "k=5 pre-filter check",
-        "Hand table to Muteeb"
-      ],
-      "layman": "Stripping personal details out of the data our page-suggestion feature learns from, per our legal lead's rules, so that work can start on time and stays on the right side of privacy law.",
-      "layman_analogy": "Like blacking out names and addresses on survey forms before handing the stack to a researcher, so the analysis starts on time without exposing anyone.",
-      "layman_needed": "A cleaned data table with personal details removed to the legal lead's rules, handed to Muteeb before 5 Oct with every item on the policy checklist ticked.",
-      "layman_output": "A cleaned data table, stripped of personal details to the legal lead's written rules (named fields removed, tiny groups filtered out), sitting ready for Muteeb before his 5 October start. The policy checklist is ticked item by item and filed alongside it, so anyone can confirm the grouping work will begin on data that is legally safe to use, with a paper trail showing why.",
-      "timebox_days": 1,
-      "launch_stage": "after-public",
-      "estimated_days": 1,
-      "estimate_source": "16 Sep inherited effort estimate; not a new team commitment",
-      "audit_original_schedule": {
-        "sprint": "N2",
-        "due": "2026-09-25"
-      },
-      "audit": {
-        "decision": "deferred",
-        "reason": "Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature."
-      }
-    },
-    {
-      "id": "N2-FH-19",
-      "sprint": "BL",
-      "assignee": "Faheem",
-      "title": "Measure Discovery's signal: cohort density at today's comment volumes",
-      "what": "Deferred: Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature. Original scope: Write down the co-commenter cohort definition Muteeb's graph will use - which interactions count as a tie, the observation window, how repeat commenters and bots are deduplicated, and the minimum cohort size for a page to enter the graph at all. Then measure it on the warehouse for the pilot roster at three windows (last 90 days, last 180 days, and a window reaching back into the pre-collapse period that holds the ~39k historical comments): distinct commenters per page, pairwise shared-commenter counts, and the number of page pairs that would survive a Benjamini-Hochberg FDR gate under the degree-preserving hypergeometric null at n=20. Report the same numbers split by collapsed monetised pages and by the small pages that stayed flat. Hand the table and the definition to Muteeb and Asad. Balancing 16 Sep: time-box to about 2 days (full scope about 3); ship the smallest version that meets the acceptance and park the rest in the backlog.",
-      "why": "The comment collapse cuts the exact quantity the graph is built from; without this measurement nobody knows whether the FDR backbone will be near-empty until the fallback fires in October.",
-      "area": "Discovery",
-      "due": null,
-      "priority": "P0",
-      "priority_reason": "P0 - blocks Asad's signal-floor decision on 25 Sep and Muteeb's graph build starting 28 Sep",
-      "depends_on": [
-        "N2-FH-18",
-        "Filza: de-identification policy signed (N1-FZ-03)",
-        "Lewis: confirmed pilot roster and connected page count"
-      ],
-      "feeds": [
-        "N3-MT-01",
-        "N4-FH-09",
-        "N3-FH-13",
-        "N2-AX-10",
-        "N3-FH-14",
-        "N2-AS-14"
-      ],
-      "gate": "BL",
-      "source": "discovery-audit",
-      "acceptance": "A written cohort definition plus a table of distinct commenters per page, pairwise overlaps and expected FDR-surviving edge counts at three observation windows, delivered to Asad and Muteeb on or before 25 Sep.",
-      "checklist": [
-        "Write the cohort tie definition, window, dedup and bot rules in one page",
-        "Query distinct commenters per pilot page for the three candidate windows",
-        "Compute pairwise shared-commenter counts and the hypergeometric p per pair",
-        "Count how many pairs survive BH-FDR at n=20 for each window",
-        "Split the results by collapsed monetised pages vs flat small pages",
-        "Send the table and definition to Asad and Muteeb"
-      ],
-      "layman": "Measuring whether we currently collect enough comment activity for the collaboration-suggestions feature to give useful results, so we know now - not in October - whether it needs a fallback plan.",
-      "layman_analogy": "Like counting how many fish are actually in the lake before promising the village a fishing festival in October.",
-      "layman_needed": "A written definition of how pages are grouped by shared commenters, plus a measured table over three time windows showing whether enough overlap exists, delivered to Asad and Muteeb by 25 Sep.",
-      "layman_output": "A written definition of how pages are grouped by shared commenters — what counts as a link, over what period, how bots and repeats are handled — plus a measured warehouse table showing, at three time windows, commenters per pilot page, the overlap between pages, and how many pairings would survive the statistical filter. Delivered to Asad and Muteeb by 25 September so nobody is surprised in October.",
-      "moved_from": "N2",
-      "timebox_days": 2,
-      "launch_stage": "after-public",
-      "estimated_days": 2,
-      "estimate_source": "16 Sep inherited effort estimate; not a new team commitment",
-      "audit_original_schedule": {
-        "sprint": "N4",
-        "due": "2026-10-23"
-      },
-      "audit": {
-        "decision": "deferred",
-        "reason": "Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature."
-      }
-    },
-    {
-      "id": "N2-AS-14",
-      "sprint": "BL",
-      "assignee": "Asad",
-      "title": "Decide Discovery's signal floor and descope branch before graph code",
-      "what": "Deferred: Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature. Original scope: With Faheem's measurement (N2-FH-19) in hand, declare in writing, before Muteeb starts the graph: the observation window Discovery will use and the honesty consequence of choosing a pre-collapse window (a fingerprint built on commenters a page may no longer have, while the reason string still says 'your people'); the minimum signal floor to proceed - a stated number of FDR-surviving edges and a stated share of connected pilot pages holding at least one structural edge; and the branch if the floor is not met. Name the branch options explicitly and pick the order: widen the window, re-weight the blend away from 80/20 with re-declared reason strings and a re-run of Filza's legal pass, or descope Discovery v1 to curated matches with the engine held back. Mirror the shape of N1-AS-02's crisis coverage floor. File it in the decision register with Faheem and Muteeb acknowledging. Kept in the launch plan in the 16 Sep balancing because N2-AS-07 depends on it.",
-      "why": "A sparse backbone discovered during the build silently becomes a list of fail-open 'suggested - not validated' rows going into Lewis's Sat 17 Oct 2026 gate; the line has to be drawn before anyone has seen the matches.",
-      "area": "Discovery",
-      "due": null,
-      "priority": "P0",
-      "priority_reason": "P0 - Muteeb's N3-MT-01 graph build starts 28 Sep and Lewis's Wed 7 Oct 2026 gate depends on what it produces",
-      "depends_on": [
-        "N2-FH-19",
-        "N1-FZ-04",
-        "Muteeb: graph implementation plan"
-      ],
-      "feeds": [
-        "N3-MT-01",
-        "N3-AS-15"
-      ],
-      "gate": "BL",
-      "source": "discovery-audit",
-      "acceptance": "A signed decision naming the observation window, the numeric signal floor and the ordered descope branch, filed in the register and acknowledged by Faheem and Muteeb on or before Fri 23 Oct 2026.",
-      "checklist": [
-        "Read Faheem's window comparison with him and Muteeb",
-        "Pick the observation window and write down its honesty consequence for reason strings",
-        "Set the numeric floor: surviving edges and share of pages with a structural edge",
-        "Write the ordered branch if the floor is missed, including the curated-matches descope",
-        "File in the decision register; Faheem and Muteeb acknowledge in writing"
-      ],
-      "layman": "Before any code is written for the page-matching feature, Asad decides in writing how much real signal the data must show to proceed - and what we do instead if it doesn't - so that we don't build on evidence that isn't there.",
-      "layman_analogy": "Like a surveyor setting in writing how firm the ground must test before foundations are poured - and which smaller house gets built if it fails the test.",
-      "layman_needed": "A signed decision, filed by Fri 23 Oct 2026 and acknowledged by Faheem and Muteeb, naming the data window the matching feature uses, the minimum evidence needed to proceed, and the ordered fallback plan if the evidence isn't there.",
-      "layman_output": "A signed decision, filed by Fri 23 Oct 2026 and acknowledged by Faheem and Muteeb before any matching code starts: which window of data the page-matching feature uses, the minimum evidence needed to proceed given the comment collapse, and the ordered fallback plan if the evidence isn't there. Anyone can read one register entry and know whether the feature goes ahead, shrinks, or waits.",
-      "moved_from": "N2",
-      "launch_stage": "after-public",
-      "estimated_days": 1,
-      "estimate_source": "16 Sep inherited effort estimate; not a new team commitment",
-      "audit_original_schedule": {
-        "sprint": "N4",
-        "due": "2026-10-23"
-      },
-      "audit": {
-        "decision": "deferred",
-        "reason": "Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature."
-      }
-    },
-    {
-      "id": "N3-AS-15",
-      "sprint": "BL",
-      "assignee": "Asad",
-      "title": "Pre-declare what Discovery ships if the precision-at-5 gate fails",
-      "what": "Deferred: Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature. Original scope: Before Lewis judges, write the failure branch with Alex and Muteeb: nothing is served if the overall bar is missed; if a single provenance stratum fails - most likely text-only - that stratum is suppressed and Discovery ships structural-only with the blend re-frozen and the reason strings re-checked with Filza; if the structural stratum itself fails, Discovery v1 drops to a curated match list or stays behind its flag until the post-launch Discovery release. State who decides within 24 hours of Lewis's result, what Asad builds next under each branch, and that any re-run of the gate uses the same pre-declared bar. No longer waits on N3-LW-02, N3-MT-13 (parked in the 16 Sep balancing).",
-      "why": "A fail arrives with the Discovery UI build still ahead of it; without a written branch that becomes an unowned scramble against a gate date.",
-      "area": "Discovery",
-      "due": null,
-      "priority": "P0",
-      "priority_reason": "P0 - must exist before Lewis judges on Wed 7 Oct 2026 and before the N4 UI build starts Thu 8 Oct 2026",
-      "depends_on": [
-        "N2-AS-14"
-      ],
-      "feeds": [],
-      "gate": "BL",
-      "source": "discovery-audit",
-      "acceptance": "A one-page branch decision filed in the register by Wed 4 Nov 2026, ahead of Lewis's judging, naming the action per failure mode, the decider and the 24-hour decision window, acknowledged by Alex, Muteeb and Lewis.",
-      "checklist": [
-        "Write the three failure modes: overall, single stratum, structural",
-        "Name what Asad builds in N4 under each branch",
-        "Name the decider and the 24-hour window after Lewis's result",
-        "Confirm a re-run reuses the same pre-declared bar with Lewis",
-        "File in the register; Alex, Muteeb and Lewis acknowledge"
-      ],
-      "layman": "Writing down in advance what we ship if the collaboration-suggestions quality test fails — a trimmed list, or holding the feature back — so a bad result triggers a plan, not a last-minute scramble.",
-      "layman_analogy": "Like a wedding planner writing the rain plan before checking the forecast — the marquee decision is made calmly, not mid-downpour.",
-      "layman_needed": "A one-page plan filed by Wed 4 Nov 2026, ahead of Lewis's judging, saying exactly what ships under each way the suggestions quality test could fail, who decides within 24 hours, and what gets built next in each case, acknowledged by Alex, Muteeb and Lewis.",
-      "layman_output": "A one-page decision plan, filed in the register by Wed 4 Nov 2026 and ahead of Lewis's judging, spelling out exactly what the collaboration-suggestions feature ships under each way its quality test could fail: full stop, a trimmed version, a hand-picked list, or held back to the Discovery release that follows the public launch, plus who decides within 24 hours and what gets built next in each case. Alex, Muteeb and Lewis will each have acknowledged it, so a fail triggers a plan, not a scramble.",
-      "moved_from": "N3",
-      "launch_stage": "after-public",
-      "estimated_days": 0.5,
-      "estimate_source": "16 Sep inherited effort estimate; not a new team commitment",
-      "audit_original_schedule": {
-        "sprint": "N5",
-        "due": "2026-11-04"
-      },
-      "audit": {
-        "decision": "deferred",
-        "reason": "Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature."
-      }
-    },
-    {
       "id": "N2-FH-15",
       "sprint": "BL",
       "assignee": "Faheem",
@@ -10070,6 +9722,108 @@ window.LAUNCH_DATA = {
       ],
       "workload_note": "Saad builds and accepts the frontend/design behaviour. Asad supplies backend integration decisions and CTO review; existing API tickets must provide working endpoints before live acceptance. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance.",
       "parked_from": "N6"
+    },
+    {
+      "id": "BL-DS-01",
+      "sprint": "BL",
+      "assignee": "Faheem",
+      "title": "Discovery matching service v1 (build): candidate generation, scoring, daily refresh, kill switch",
+      "what": "Post-launch Discovery build (17 Sep program). Build the chosen v1 scorer as a tenant-scoped service with a daily refresh, precision@5 monitoring on the scorecard, and a kill switch.",
+      "why": "Discovery ships after the 15 Dec launch by Alex's 16 Sep decision; the build follows the N3–N5 design work.",
+      "area": "After launch · Discovery",
+      "due": "",
+      "priority": "P1",
+      "priority_reason": "Post-launch; no December capacity load",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "none",
+      "source": "plan",
+      "acceptance": "Shipped behind a flag to pilot tenants first.",
+      "checklist": [
+        "Build",
+        "Measure",
+        "Roll out"
+      ],
+      "layman": "The collaboration-finder gets built and switched on after launch, once the design and tests are done.",
+      "layman_analogy": "",
+      "layman_needed": "Shipped behind a flag to pilot tenants first.",
+      "layman_output": "Shipped behind a flag to pilot tenants first.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "backlog",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "layer": "launch",
+      "parked_from": "LW"
+    },
+    {
+      "id": "BL-DS-02",
+      "sprint": "BL",
+      "assignee": "Saad",
+      "title": "Discovery layer in the app (build): match cards, outreach, mutual accept",
+      "what": "Post-launch Discovery build (17 Sep program). Build the swipe layer from the N5 spec in the mobile stack; Art-E-drafted intro; decline reasons feed the model.",
+      "why": "Discovery ships after the 15 Dec launch by Alex's 16 Sep decision; the build follows the N3–N5 design work.",
+      "area": "After launch · Discovery",
+      "due": "",
+      "priority": "P1",
+      "priority_reason": "Post-launch; no December capacity load",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "none",
+      "source": "plan",
+      "acceptance": "Shipped behind a flag to pilot tenants first.",
+      "checklist": [
+        "Build",
+        "Measure",
+        "Roll out"
+      ],
+      "layman": "The collaboration-finder gets built and switched on after launch, once the design and tests are done.",
+      "layman_analogy": "",
+      "layman_needed": "Shipped behind a flag to pilot tenants first.",
+      "layman_output": "Shipped behind a flag to pilot tenants first.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "backlog",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "layer": "launch",
+      "parked_from": "LW"
+    },
+    {
+      "id": "BL-DS-03",
+      "sprint": "BL",
+      "assignee": "Faheem",
+      "title": "Collaboration outcome tracking: did the collab happen, did reach lift for both pages",
+      "what": "Post-launch Discovery build (17 Sep program). Track accepted introductions, published collabs and 30-day reach/engagement lift for both pages; this is the feedback signal for Discovery v2 (BL-IN-19).",
+      "why": "Discovery ships after the 15 Dec launch by Alex's 16 Sep decision; the build follows the N3–N5 design work.",
+      "area": "After launch · Discovery",
+      "due": "",
+      "priority": "P1",
+      "priority_reason": "Post-launch; no December capacity load",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "none",
+      "source": "plan",
+      "acceptance": "Shipped behind a flag to pilot tenants first.",
+      "checklist": [
+        "Build",
+        "Measure",
+        "Roll out"
+      ],
+      "layman": "The collaboration-finder gets built and switched on after launch, once the design and tests are done.",
+      "layman_analogy": "",
+      "layman_needed": "Shipped behind a flag to pilot tenants first.",
+      "layman_output": "Shipped behind a flag to pilot tenants first.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "backlog",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "layer": "launch",
+      "parked_from": "LW"
     }
   ],
   "features": [
@@ -10109,7 +9863,11 @@ window.LAUNCH_DATA = {
         "P0-FH-21",
         "N1-FH-19",
         "N2-FH-20",
-        "N3-AX-06"
+        "N3-AX-06",
+        "N2-FH-27",
+        "N2-AX-18",
+        "N3-FH-31",
+        "N4-FH-25"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10173,7 +9931,10 @@ window.LAUNCH_DATA = {
         "N5-SD-16",
         "N2-SD-20",
         "N4-MT-26",
-        "N4-FH-23"
+        "N4-FH-23",
+        "N5-FH-11",
+        "N4-AS-29",
+        "N3-SD-20"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10282,14 +10043,42 @@ window.LAUNCH_DATA = {
         "N4-MT-23",
         "N4-AS-22",
         "N4-FH-21",
-        "N4-MT-30"
+        "N4-MT-30",
+        "BL-IN-12",
+        "N4-AS-27",
+        "N4-FH-27",
+        "N4-AS-28"
       ],
       "kind": "surface",
       "scope": "active"
     },
     {
+      "id": "aiquality",
+      "name": "AI/ML quality program (weekly manual review, scorecard, retraining)",
+      "layer": "intelligence",
+      "tickets": [
+        "N2-FH-25",
+        "N3-FH-27",
+        "N3-FH-28",
+        "N3-FH-29",
+        "N2-FH-26",
+        "N3-FH-30",
+        "N4-FH-24",
+        "N5-FH-10",
+        "N6-FH-08",
+        "LW-FH-02"
+      ],
+      "what": "Pilot types a draft; the virality gauge + driver chips move as they type, warning before a flop is published.",
+      "why": "The PREDICT promise and the demo wow moment. Descriptive charts are free everywhere; this is not.",
+      "gate": ">=75% precision at 10-20% coverage, beats page-history + zero-rate baselines, live path matches batch.",
+      "sprints": "Computed from current scheduled tickets",
+      "areas": [],
+      "kind": "surface",
+      "scope": "active"
+    },
+    {
       "id": "discovery",
-      "name": "Discovery v1 — deferred",
+      "name": "Discovery — network collaboration (design now, build after launch)",
       "layer": "intelligence",
       "what": "Not committed for the December launch. Historical and future work remains in Backlog; related shared safeguards do not reactivate this feature.",
       "why": "Deferred in the existing launch scope.",
@@ -10310,7 +10099,15 @@ window.LAUNCH_DATA = {
         "N2-AS-14",
         "N2-FH-19",
         "N3-AS-15",
-        "BL-IN-19"
+        "BL-IN-19",
+        "N3-FH-32",
+        "N4-FH-26",
+        "N4-SD-18",
+        "N5-SD-17",
+        "N5-FZ-13",
+        "BL-DS-01",
+        "BL-DS-02",
+        "BL-DS-03"
       ],
       "kind": "surface",
       "scope": "deferred"
@@ -10377,7 +10174,9 @@ window.LAUNCH_DATA = {
         "N3-MT-07",
         "P0-FH-04",
         "P0-AS-18",
-        "N5-SD-16"
+        "N5-SD-16",
+        "N5-SD-19",
+        "N4-AS-26"
       ],
       "kind": "surface",
       "scope": "deferred"
@@ -10410,7 +10209,13 @@ window.LAUNCH_DATA = {
         "N3-SD-19",
         "N4-AS-23",
         "N4-AS-14",
-        "N5-LW-10"
+        "N5-LW-10",
+        "N4-SD-20",
+        "N5-SD-18",
+        "N6-SD-11",
+        "N6-SD-12",
+        "N1-SD-18",
+        "N4-SD-14"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10462,7 +10267,11 @@ window.LAUNCH_DATA = {
         "N2-MT-15",
         "N2-AS-15",
         "N4-MT-01",
-        "N5-SD-16"
+        "N5-SD-16",
+        "N2-MT-23",
+        "N4-MT-32",
+        "N3-AS-25",
+        "N2-MT-22"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10533,7 +10342,10 @@ window.LAUNCH_DATA = {
         "N2-MT-21",
         "N3-LW-08",
         "N3-FZ-16",
-        "N3-JL-17"
+        "N3-JL-17",
+        "N1-AX-21",
+        "N4-SD-17",
+        "N3-AX-05"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10722,7 +10534,33 @@ window.LAUNCH_DATA = {
         "N3-AS-24",
         "N4-MT-25",
         "N4-MT-28",
-        "N5-MT-23"
+        "N5-MT-23",
+        "N3-MT-26",
+        "N5-MT-24",
+        "N5-AS-22",
+        "N4-MT-31",
+        "N5-MT-25",
+        "BL-IN-22",
+        "N4-SD-19",
+        "N5-AS-23",
+        "N5-AS-24",
+        "N2-AS-22",
+        "N3-AS-26",
+        "N4-AS-30",
+        "N5-AS-26",
+        "N4-AS-31",
+        "N6-AS-14",
+        "N1-AS-20",
+        "N1-SD-20",
+        "N2-SD-15",
+        "N2-SD-16",
+        "BL-APP-01",
+        "BL-APP-02",
+        "BL-APP-03",
+        "BL-APP-04",
+        "BL-APP-05",
+        "BL-APP-06",
+        "BL-APP-07"
       ],
       "kind": "foundation",
       "scope": "active"
@@ -10940,7 +10778,27 @@ window.LAUNCH_DATA = {
         "N5-JL-10",
         "N5-JL-11",
         "N3-LW-10",
-        "N3-AX-11"
+        "N3-AX-11",
+        "N5-AS-25",
+        "N6-AS-13",
+        "BL-LL-24",
+        "N2-SD-22",
+        "N6-SD-13",
+        "N3-AX-12",
+        "N5-AX-11",
+        "LW-AX-06",
+        "N6-AX-09",
+        "N3-FZ-21",
+        "N3-JL-20",
+        "N4-JL-10",
+        "N4-JL-11",
+        "N5-JL-12",
+        "N4-FZ-14",
+        "N4-FZ-15",
+        "N5-FZ-14",
+        "N2-FZ-18",
+        "N2-FZ-19",
+        "N5-FZ-12"
       ],
       "scope": "active"
     },
@@ -13135,7 +12993,7 @@ window.LAUNCH_DATA = {
       "sprint": "N2",
       "assignee": "Saad",
       "title": "Review available app designs during 21–25 September",
-      "what": "Review available product designs with Asad during 21–25 September. Record buildability, state and API-field gaps against the relevant screen, resolving or assigning each gap. Home redesign is supplied for 22–23 September; other product dates remain provisional. The landing handoff is tracked separately. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
+      "what": "Phone-app packs only (Alex + Asad, 17 Sep): no web or desktop product screens are designed or reviewed; landing-page desktop/mobile views (N1-AS-11) are the only desktop design work. Review available product designs with Asad during 21–25 September. Record buildability, state and API-field gaps against the relevant screen, resolving or assigning each gap. Home redesign is supplied for 22–23 September; other product dates remain provisional. The landing handoff is tracked separately. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Design QA before code exists is the cheapest QA there is; skipping it lands unbuildable screens on the sole developer in his first build week.",
       "area": "Design",
       "due": "2026-09-25",
@@ -13222,7 +13080,7 @@ window.LAUNCH_DATA = {
       "sprint": "N1",
       "assignee": "Saad",
       "title": "Accept Home and Drafts packs — Home design 22–23 Sep; Drafts date pending",
-      "what": "Deliver the first two packs in the agreed order, expected Today (next-move hero with confidence chip, moves list, typed feed cards, briefing card, setup pill, workspace switcher slot, 'Remind me' CTAs) and Drafts/Studio (composer, virality gauge as BANDS plus an abstain 'no strong signal' state, driver chips vocabulary, minimum-text threshold, autosave). Web + mobile variants, all states, no stories strip or milestone banner (deferred). Saad has supplied 22–23 September for the app Home redesign only. Drafts and remaining state completion still need his dates; this combined ticket remains open until both packs are accepted.",
+      "what": "Phone-app packs only (17 Sep). Deliver the first two packs in the agreed order, expected Today (next-move hero with confidence chip, moves list, typed feed cards, briefing card, setup pill, workspace switcher slot, 'Remind me' CTAs) and Drafts/Studio (composer, virality gauge as BANDS plus an abstain 'no strong signal' state, driver chips vocabulary, minimum-text threshold, autosave). Web + mobile variants, all states, no stories strip or milestone banner (deferred). Saad has supplied 22–23 September for the app Home redesign only. Drafts and remaining state completion still need his dates; this combined ticket remains open until both packs are accepted.",
       "why": "Asad starts building Today and Drafts on 21 Sep; a slip here moves the whole build.",
       "area": "Design",
       "due": "2026-09-25",
@@ -13282,7 +13140,7 @@ window.LAUNCH_DATA = {
       "sprint": "N3",
       "assignee": "Saad",
       "title": "Complete remaining launch packs and shared states",
-      "what": "Complete Alerts, Art-E, Settings, and connected-page/workspace selection in desktop and mobile variants. Include quiet-hours and severity controls, grounded citations/refusal/AI labels, consent/delete/export, connection/re-auth states and shared bell/toast/cookie/PWA states. Keep connect consent and page picker ready for Meta evidence. Exclude deferred Analytics, standalone Best Times heatmap, Wins, composite health rings and web-push opt-in.",
+      "what": "Phone-app packs only (17 Sep): remaining launch packs are phone screens for the store app; no web variants. Complete Alerts, Art-E, Settings, and connected-page/workspace selection in desktop and mobile variants. Include quiet-hours and severity controls, grounded citations/refusal/AI labels, consent/delete/export, connection/re-auth states and shared bell/toast/cookie/PWA states. Keep connect consent and page picker ready for Meta evidence. Exclude deferred Analytics, standalone Best Times heatmap, Wins, composite health rings and web-push opt-in.",
       "why": "Asad builds only what is in a pack; a V3 screen without a pack does not exist and there is no designer after 17 Sep.",
       "area": "Design",
       "due": "2026-10-08",
@@ -13332,7 +13190,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "States matrix across all packs + crisis email template",
-      "what": "One states matrix audited per pack: empty, error, loading-as-'learning, never loading', thin history, sub-k=5 fail-closed, 'building your baseline', best-times sparse, gauge abstain, rate-limited (Retry-After), stale-data banner, page revoked, feature-off (kill switch) - so N5-AS-02/N6-AS-03 render designed states. Design the crisis email (deep link, cited post, one action, drafted reply, dark-mode safe)",
+      "what": "Phone-app states only (17 Sep). One states matrix audited per pack: empty, error, loading-as-'learning, never loading', thin history, sub-k=5 fail-closed, 'building your baseline', best-times sparse, gauge abstain, rate-limited (Retry-After), stale-data banner, page revoked, feature-off (kill switch) - so N5-AS-02/N6-AS-03 render designed states. Design the crisis email (deep link, cited post, one action, drafted reply, dark-mode safe)",
       "why": "States are where trust is won; a missing spinner or a fake number on a thin page is what UAT would otherwise find first.",
       "area": "Design",
       "due": "2026-10-21",
@@ -15188,7 +15046,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Saad",
       "title": "Record a screencast per permission; freeze consent UI; co-sign",
-      "what": "For each permission on the scope list locked in N1-FZ-06, record login -> permission prompt -> grant -> the feature working, on the host registered as the app's domain in the dashboard (production, or staging only if that exact host is registered and reachable by a reviewer), from a fresh reviewer account rather than a signed-in session. Include one clip showing disconnect and data deletion, since reviewers probe the deletion claim. Tag each clip to the permission-to-feature map, then freeze the consent-screen and connect UI - any change re-opens recording - and co-sign the package with the Meta owner after the working connection and Filza's claims review.",
+      "what": "For each permission on the scope list locked in N1-FZ-06, record login -> permission prompt -> grant -> the feature working, on the host registered as the app's domain in the dashboard (production, or staging only if that exact host is registered and reachable by a reviewer), from a fresh reviewer account rather than a signed-in session. Include one clip showing disconnect and data deletion, since reviewers probe the deletion claim. Tag each clip to the permission-to-feature map, then freeze the consent-screen and connect UI - any change re-opens recording - and co-sign the package with the Meta owner after the working connection and Filza's claims review. Store app (17 Sep): record the permission screencasts from the iOS and Android device builds, not the browser (see N2-MT-22).",
       "why": "Mismatched screencast-vs-UI is a top rejection reason; SUBMIT is Fri 2 Oct and only one safe rejection cycle exists.",
       "area": "Meta",
       "due": "2026-10-29",
@@ -17284,7 +17142,7 @@ window.LAUNCH_DATA = {
       "sprint": "N3",
       "assignee": "Saad",
       "title": "Extend product components from the shared bootstrap",
-      "what": "Extend the N1-AS-12 product bootstrap to shipped screens: cards, chips, gauge, sheets, navigation, form controls and shared empty/loading/error/abstain states. Use product tokens and staging mocks. Saad implements with the existing review protocol; it is not a handover of a completed library from Asad. Deferred Analytics, Wins and Discovery components are not required. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
+      "what": "Components target the cross-platform phone app chosen in N1-AS-20 (17 Sep). Extend the N1-AS-12 product bootstrap to shipped screens: cards, chips, gauge, sheets, navigation, form controls and shared empty/loading/error/abstain states. Use product tokens and staging mocks. Saad implements with the existing review protocol; it is not a handover of a completed library from Asad. Deferred Analytics, Wins and Discovery components are not required. — Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). This is built in the mobile stack chosen in N1-AS-20, not as a web page.",
       "why": "Every surface either of them builds renders through these primitives; if the library forks per screen, the design QA sweeps and the WCAG audit turn into per-screen work in N4 and N5.",
       "area": "Design",
       "due": "2026-10-14",
@@ -33740,7 +33598,7 @@ window.LAUNCH_DATA = {
       "sprint": "N4",
       "assignee": "Asad",
       "title": "Art-E streaming transport decided and proven against Netlify function limits",
-      "what": "Decide where the Art-E stream terminates before N4-AS-01 starts. Netlify Functions cap execution time, buffer responses and cannot join the VPC (N1-MT-18). Options: a Netlify streaming or edge function proxying SSE from FastAPI, or browser-direct to the ALB with a short-lived audience-scoped JWT. Prove one on staging with the citation-gate regenerate loop inside N4-MT-14's budget; append the choice to the stack decision. Builds on N4-MT-14, N5-MT-13. Added in the 16 Sep review: In the same decision note, fix how the stream coexists with the citation gate (N4-FH-01) and output guard (N4-FH-11): either verify server-side and stream only verified sentences, or hold each sentence until its numbers and guard checks pass, with a 'checking the numbers' state while held, so no text is ever shown and later retracted. N4-AS-01 then proves on staging that a seeded ungroundable number and a seeded toxic string never reach the client, and records time to first verified sentence.",
+      "what": "Scope change 17 Sep (store app): decide and prove Art-E streaming over the mobile transport chosen in N1-AS-20 (WebSocket/SSE through the BFF from the store shell), not against Netlify function limits. Decide where the Art-E stream terminates before N4-AS-01 starts. Netlify Functions cap execution time, buffer responses and cannot join the VPC (N1-MT-18). Options: a Netlify streaming or edge function proxying SSE from FastAPI, or browser-direct to the ALB with a short-lived audience-scoped JWT. Prove one on staging with the citation-gate regenerate loop inside N4-MT-14's budget; append the choice to the stack decision. Builds on N4-MT-14, N5-MT-13. Added in the 16 Sep review: In the same decision note, fix how the stream coexists with the citation gate (N4-FH-01) and output guard (N4-FH-11): either verify server-side and stream only verified sentences, or hold each sentence until its numbers and guard checks pass, with a 'checking the numbers' state while held, so no text is ever shown and later retracted. N4-AS-01 then proves on staging that a seeded ungroundable number and a seeded toxic string never reach the client, and records time to first verified sentence.",
       "why": "A buffered or timed-out stream breaks the flagship rail late in N4 with no time to re-plumb. (CTO-lens review, 15 Sep.)",
       "area": "Art-E",
       "due": "2026-10-23",
@@ -35916,8 +35774,8 @@ window.LAUNCH_DATA = {
       "id": "N3-AS-21",
       "sprint": "N4",
       "assignee": "Saad",
-      "title": "Frontend observability: browser errors with source maps and release tags, field Core Web Vitals per layer",
-      "what": "Add the Sentry Next.js SDK on client, server and edge. Set release to the commit SHA, upload source maps in CI and remove them from the deploy, report from error.tsx and global-error.tsx with request_id, and turn session replay off. Use Sentry's built-in LCP, INP and CLS capture tagged by layer, with no custom sink or panel. Change N5-AS-05's page list to the four layers. Builds on N1-MT-05, N5-AS-05, N5-AS-18, N2-AS-11, N4-FZ-01.",
+      "title": "Mobile observability: SDK errors with source maps, release health, breadcrumbs (was browser errors)",
+      "what": "Scope change 17 Sep (store app): Add the Sentry Next.js SDK on client, server and edge. Set release to the commit SHA, upload source maps in CI and remove them from the deploy, report from error.tsx and global-error.tsx with request_id, and turn session replay off. Use Sentry's built-in LCP, INP and CLS capture tagged by layer, with no custom sink or panel. Change N5-AS-05's page list to the four layers. Builds on N1-MT-05, N5-AS-05, N5-AS-18, N2-AS-11, N4-FZ-01. Replace the browser error path with the mobile SDK (Sentry mobile): symbolicated stack traces, release tags per store build, breadcrumbs for the five flows, and release-health (crash-free) reporting.",
       "why": "Lighthouse is lab-only and the Sentry setup names no browser SDK or source maps; pilot crashes and slow screens on real phones go unseen, and hotfixes need readable traces. (16 Sep research: web-app-eng.)",
       "area": "Ops",
       "due": "2026-10-29",
@@ -38462,6 +38320,2555 @@ window.LAUNCH_DATA = {
       "timebox_days": 3,
       "launch_stage": "launch",
       "estimate_source": "Promoted 17 Sep (mobile re-plan); owner estimate to confirm"
+    },
+    {
+      "id": "N2-FH-25",
+      "sprint": "N2",
+      "assignee": "Faheem",
+      "title": "Manual test script per production model: what to sample, how to score, where to log",
+      "what": "One page per model — flop/draft score, crisis detector, post NLP (5 axes), comment NLP, Best Times, Art-E — stating: the weekly sample (10–20 fresh predictions, stratified by page tier and regime), the scoring rubric a non-ML person can apply, the pass/warn/fail bands, and the log sheet. Reuses the shared labelling rubric (P0-FH-10) and the Art-E judge (N4-FH-13). This is the playbook the weekly review runs from.",
+      "why": "A weekly human check only works if everyone scores the same way; without scripts the review becomes opinion.",
+      "area": "Models",
+      "due": "2026-10-02",
+      "priority": "P0",
+      "priority_reason": "Prerequisite for the weekly model review from N2",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N2",
+      "source": "plan",
+      "acceptance": "Six one-page scripts in the repo; Saad can run the Art-E and draft-score scripts unaided; log sheet template live on the QA dashboard.",
+      "checklist": [
+        "Write the six scripts on one template",
+        "Dry-run two of them with Saad",
+        "Publish the log sheet"
+      ],
+      "layman": "We write down exactly how a human checks each AI model every week, so the checks are consistent and anyone on the team can do them.",
+      "layman_analogy": "",
+      "layman_needed": "Six one-page scripts in the repo; Saad can run the Art-E and draft-score scripts unaided; log sheet template live on the QA dashboard.",
+      "layman_output": "Six one-page scripts in the repo; Saad can run the Art-E and draft-score scripts unaided; log sheet template live on the QA dashboard.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N3-FH-27",
+      "sprint": "N4",
+      "assignee": "Faheem",
+      "title": "Model scorecard on the QA dashboard: one row per model, refreshed nightly",
+      "what": "Add a Models panel to the existing QA dashboard (P0-AS-19, N3-AS-24): one row per production model with gate metric vs pass line, drift watchdog state, data freshness, cost per 1,000 predictions, last human-review score and date, open optimisation items, and alert state. Red/amber/green per cell, one link per cell to the evidence. Reads from the check registry (N2-MT-20).",
+      "why": "The team needs one screen that says, every morning, which model is healthy — today that lives in six places.",
+      "area": "Models",
+      "due": "2026-10-23",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N2-MT-20"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Scorecard live with all six models, nightly refresh, every cell linked to evidence; Alex can read it without Faheem.",
+      "checklist": [
+        "Define the row schema and pass lines per model",
+        "Wire freshness, drift, gate metric and cost feeds",
+        "Add the last-human-review column from the weekly log",
+        "Link each cell to evidence"
+      ],
+      "layman": "A single traffic-light board showing whether each AI model is healthy, updated every night.",
+      "layman_analogy": "",
+      "layman_needed": "Scorecard live with all six models, nightly refresh, every cell linked to evidence; Alex can read it without Faheem.",
+      "layman_output": "Scorecard live with all six models, nightly refresh, every cell linked to evidence; Alex can read it without Faheem.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N3-FH-28",
+      "sprint": "N3",
+      "assignee": "Faheem",
+      "title": "Model alert rules v0 live for every production model, routed through the alert matrix",
+      "what": "For flop, crisis, post NLP, comment NLP and Best Times: freshness stale (>24h), drift watchdog trip (P0-FH-27/N3-FH-08), gate-metric decay on the nightly regression, prediction-distribution shift (flop rate outside 25–45% in any stratum), and cost spike (>2× 7-day median). Route by severity through N3-JL-16 with a noise budget. Art-E rules come with N4-FH-05; this ticket makes sure the four already-built models are covered before then.",
+      "why": "Everything we have already built must page someone when it degrades; today only freshness and drift do.",
+      "area": "Models",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N3-JL-16"
+      ],
+      "feeds": [
+        "N4-FH-05"
+      ],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Every rule fires in a staged test and reaches the right channel; noise budget respected for one week.",
+      "checklist": [
+        "Write the rule set per model",
+        "Wire to the routing matrix",
+        "Fire each rule synthetically",
+        "Review a week of noise"
+      ],
+      "layman": "Each AI model gets its own alarms — if it goes stale, drifts, gets worse or gets expensive, the right person is told automatically.",
+      "layman_analogy": "",
+      "layman_needed": "Every rule fires in a staged test and reaches the right channel; noise budget respected for one week.",
+      "layman_output": "Every rule fires in a staged test and reaches the right channel; noise budget respected for one week.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N3-FH-29",
+      "sprint": "N3",
+      "assignee": "Faheem",
+      "title": "Retraining policy and calendar by risk tier; optimisation backlog opened",
+      "what": "Write the policy: which model retrains on what trigger (crisis: drift trip or false-alarm rate; flop: monthly or regime change; NLP: quarterly or label-error audit; Best Times: monthly), who approves, how a challenger is shadow-tested before promotion (champion/challenger), and the freeze rule before launch (N6-FH-01). Open the optimisation backlog on the board: every weekly-review finding becomes an item with an owner and an expected lift.",
+      "why": "Retraining by feel is how we ended up with a label that broke silently in July.",
+      "area": "Models",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Policy signed by Faheem and Asad; calendar on the board; backlog has its first items from the N2 reviews.",
+      "checklist": [
+        "Write triggers, approvers and shadow rule per model",
+        "Put the calendar on the tracker",
+        "Seed the backlog from the first two reviews"
+      ],
+      "layman": "A written rule for when each model gets retrained and how we prove the new one is better before we switch.",
+      "layman_analogy": "",
+      "layman_needed": "Policy signed by Faheem and Asad; calendar on the board; backlog has its first items from the N2 reviews.",
+      "layman_output": "Policy signed by Faheem and Asad; calendar on the board; backlog has its first items from the N2 reviews.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N2-FH-26",
+      "sprint": "N2",
+      "assignee": "Faheem",
+      "title": "Weekly model quality review — sprint N2 (two sessions)",
+      "what": "Two 45-minute sessions this sprint. Each: 10–20 fresh predictions per production model scored by hand from the manual test scripts (flop/draft, crisis, post NLP, comment NLP, Best Times; Art-E transcripts jointly with Saad per N4-SD-03). Log the scores, name the worst failure per model, and file every finding as an optimisation item or a bug. Read the scorecard first; if a model is red, the session starts there. Session output is a five-line note on the QA board.",
+      "why": "Automated metrics miss the failures customers notice; a short human look every week catches them while they are cheap.",
+      "area": "Models",
+      "due": "2026-10-02",
+      "priority": "P1",
+      "priority_reason": "The AI/ML core is tracked weekly by hand, by decision of Asad (17 Sep)",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N2",
+      "source": "plan",
+      "acceptance": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "checklist": [
+        "Session 1: sample, score, log, file findings",
+        "Session 2: same, plus check last week's items moved",
+        "Post the five-line note"
+      ],
+      "layman": "Every week a human looks at a handful of real predictions from each AI model and scores them, so problems are caught early and written down.",
+      "layman_analogy": "",
+      "layman_needed": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "layman_output": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N3-FH-30",
+      "sprint": "N3",
+      "assignee": "Faheem",
+      "title": "Weekly model quality review — sprint N3 (two sessions)",
+      "what": "Two 45-minute sessions this sprint. Each: 10–20 fresh predictions per production model scored by hand from the manual test scripts (flop/draft, crisis, post NLP, comment NLP, Best Times; Art-E transcripts jointly with Saad per N4-SD-03). Log the scores, name the worst failure per model, and file every finding as an optimisation item or a bug. Read the scorecard first; if a model is red, the session starts there. Session output is a five-line note on the QA board.",
+      "why": "Automated metrics miss the failures customers notice; a short human look every week catches them while they are cheap.",
+      "area": "Models",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "The AI/ML core is tracked weekly by hand, by decision of Asad (17 Sep)",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "checklist": [
+        "Session 1: sample, score, log, file findings",
+        "Session 2: same, plus check last week's items moved",
+        "Post the five-line note"
+      ],
+      "layman": "Every week a human looks at a handful of real predictions from each AI model and scores them, so problems are caught early and written down.",
+      "layman_analogy": "",
+      "layman_needed": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "layman_output": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N4-FH-24",
+      "sprint": "N4",
+      "assignee": "Faheem",
+      "title": "Weekly model quality review — sprint N4 (two sessions)",
+      "what": "Two 45-minute sessions this sprint. Each: 10–20 fresh predictions per production model scored by hand from the manual test scripts (flop/draft, crisis, post NLP, comment NLP, Best Times; Art-E transcripts jointly with Saad per N4-SD-03). Log the scores, name the worst failure per model, and file every finding as an optimisation item or a bug. Read the scorecard first; if a model is red, the session starts there. Session output is a five-line note on the QA board.",
+      "why": "Automated metrics miss the failures customers notice; a short human look every week catches them while they are cheap.",
+      "area": "Models",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "The AI/ML core is tracked weekly by hand, by decision of Asad (17 Sep)",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "checklist": [
+        "Session 1: sample, score, log, file findings",
+        "Session 2: same, plus check last week's items moved",
+        "Post the five-line note"
+      ],
+      "layman": "Every week a human looks at a handful of real predictions from each AI model and scores them, so problems are caught early and written down.",
+      "layman_analogy": "",
+      "layman_needed": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "layman_output": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N5-FH-10",
+      "sprint": "N5",
+      "assignee": "Faheem",
+      "title": "Weekly model quality review — sprint N5 (two sessions)",
+      "what": "Two 45-minute sessions this sprint. Each: 10–20 fresh predictions per production model scored by hand from the manual test scripts (flop/draft, crisis, post NLP, comment NLP, Best Times; Art-E transcripts jointly with Saad per N4-SD-03). Log the scores, name the worst failure per model, and file every finding as an optimisation item or a bug. Read the scorecard first; if a model is red, the session starts there. Session output is a five-line note on the QA board.",
+      "why": "Automated metrics miss the failures customers notice; a short human look every week catches them while they are cheap.",
+      "area": "Models",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "The AI/ML core is tracked weekly by hand, by decision of Asad (17 Sep)",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "checklist": [
+        "Session 1: sample, score, log, file findings",
+        "Session 2: same, plus check last week's items moved",
+        "Post the five-line note"
+      ],
+      "layman": "Every week a human looks at a handful of real predictions from each AI model and scores them, so problems are caught early and written down.",
+      "layman_analogy": "",
+      "layman_needed": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "layman_output": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N6-FH-08",
+      "sprint": "N6",
+      "assignee": "Faheem",
+      "title": "Weekly model quality review — sprint N6 (two sessions)",
+      "what": "Two 45-minute sessions this sprint. Each: 10–20 fresh predictions per production model scored by hand from the manual test scripts (flop/draft, crisis, post NLP, comment NLP, Best Times; Art-E transcripts jointly with Saad per N4-SD-03). Log the scores, name the worst failure per model, and file every finding as an optimisation item or a bug. Read the scorecard first; if a model is red, the session starts there. Session output is a five-line note on the QA board.",
+      "why": "Automated metrics miss the failures customers notice; a short human look every week catches them while they are cheap.",
+      "area": "Models",
+      "due": "2026-11-27",
+      "priority": "P1",
+      "priority_reason": "The AI/ML core is tracked weekly by hand, by decision of Asad (17 Sep)",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "checklist": [
+        "Session 1: sample, score, log, file findings",
+        "Session 2: same, plus check last week's items moved",
+        "Post the five-line note"
+      ],
+      "layman": "Every week a human looks at a handful of real predictions from each AI model and scores them, so problems are caught early and written down.",
+      "layman_analogy": "",
+      "layman_needed": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "layman_output": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "LW-FH-02",
+      "sprint": "LW",
+      "assignee": "Faheem",
+      "title": "Weekly model quality review — sprint LW (two sessions)",
+      "what": "Two 45-minute sessions this sprint. Each: 10–20 fresh predictions per production model scored by hand from the manual test scripts (flop/draft, crisis, post NLP, comment NLP, Best Times; Art-E transcripts jointly with Saad per N4-SD-03). Log the scores, name the worst failure per model, and file every finding as an optimisation item or a bug. Read the scorecard first; if a model is red, the session starts there. Session output is a five-line note on the QA board. Launch-week rule: review only, zero model changes (LW-FH-01).",
+      "why": "Automated metrics miss the failures customers notice; a short human look every week catches them while they are cheap.",
+      "area": "Models",
+      "due": "2026-12-11",
+      "priority": "P1",
+      "priority_reason": "The AI/ML core is tracked weekly by hand, by decision of Asad (17 Sep)",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "LW",
+      "source": "plan",
+      "acceptance": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "checklist": [
+        "Session 1: sample, score, log, file findings",
+        "Session 2: same, plus check last week's items moved",
+        "Post the five-line note"
+      ],
+      "layman": "Every week a human looks at a handful of real predictions from each AI model and scores them, so problems are caught early and written down.",
+      "layman_analogy": "",
+      "layman_needed": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "layman_output": "Two logged sessions with scores per model, a named worst failure per model, and findings filed on the optimisation backlog.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N2-FH-27",
+      "sprint": "N2",
+      "assignee": "Faheem",
+      "title": "Flop label R0–R2: prior-sibling relabel + hurdle, reported per era (the one-day test)",
+      "what": "R0: rerun current train.py deterministically and report within-page pairwise accuracy (≥2× gap) separately for pre- and post-27-July posts. R1: relabel as bottom tercile among the page's prior 30 matured siblings on the Borda composite (shares+reactions+comments), as-of-date, never against later posts. R2: R1 plus the two-stage hurdle (gate on 'gets anything' vs the page's current zero-rate; pairwise Stage B on survivors). Pass line 55% pairwise on the post-collapse era; 50–55% is inconclusive. Also correct the 10 Sep API contract numbers (64.7% → measured) with Muteeb. See docs: Flop_Benchmark_Proposal.pdf and the 17 Sep one-pagers.",
+      "why": "The current label grades every new post against a healthy year that no longer exists; 88.6% of recent posts read as flops and the gauge is a coin flip.",
+      "area": "Models",
+      "due": "2026-10-02",
+      "priority": "P0",
+      "priority_reason": "Draft gauge is currently a coin flip; blocks the Drafts product promise",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N2",
+      "source": "plan",
+      "acceptance": "Three runs logged with per-era pairwise accuracy, gate AUC vs page-zero-rate baseline, and a written decision: ship relative gauge / ship page-health only.",
+      "checklist": [
+        "R0 baseline per era",
+        "R1 prior-sibling relabel on the composite",
+        "R2 + hurdle and pairwise Stage B",
+        "Write the decision and update the API contract"
+      ],
+      "layman": "We fix the measuring stick: compare each post with recent posts from its own page instead of last year's, and check whether the model can rank again.",
+      "layman_analogy": "",
+      "layman_needed": "Three runs logged with per-era pairwise accuracy, gate AUC vs page-zero-rate baseline, and a written decision: ship relative gauge / ship page-health only.",
+      "layman_output": "Three runs logged with per-era pairwise accuracy, gate AUC vs page-zero-rate baseline, and a written decision: ship relative gauge / ship page-health only.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N2-AX-18",
+      "sprint": "N2",
+      "assignee": "Alex",
+      "title": "Establish the cause of the 27 July engagement collapse across the 15 pages",
+      "what": "With Lewis: open each page's Meta Professional Dashboard and record originality / recommendation / monetisation status; pull reach and impressions per page per week around 27 July from the warehouse (reactions down with reach flat = audience disinterest; both down = distribution cut); ask what changed that week in sourcing, cross-posting or scheduling. Meta's 2026 originality enforcement reduces distribution on everything an account posts — the leading hypothesis. Record the answer on the tracker as the regime cause.",
+      "why": "No model fixes a 90% audience drop; whether the audience returns decides what the Drafts gauge can honestly promise.",
+      "area": "Data",
+      "due": "2026-09-25",
+      "priority": "P0",
+      "priority_reason": "Decides whether the audience recovers; needed before the R0–R2 decision is final",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N2",
+      "source": "plan",
+      "acceptance": "A one-paragraph cause statement with evidence per page, filed on the tracker and the Model tracker tab.",
+      "checklist": [
+        "Dashboard status for all 15 pages",
+        "Reach vs reactions series around 27 Jul",
+        "Ask Lewis what changed",
+        "File the cause"
+      ],
+      "layman": "Find out why almost every page suddenly lost its audience in late July — most likely Facebook penalising reposted content — because that decides what our product can promise.",
+      "layman_analogy": "",
+      "layman_needed": "A one-paragraph cause statement with evidence per page, filed on the tracker and the Model tracker tab.",
+      "layman_output": "A one-paragraph cause statement with evidence per page, filed on the tracker and the Model tracker tab.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.25,
+      "timebox_days": 0.25
+    },
+    {
+      "id": "N3-FH-31",
+      "sprint": "N3",
+      "assignee": "Faheem",
+      "title": "Regime detector per page + holiday/seasonality calendar (shared by benchmark, Best Times and briefing)",
+      "what": "Online change-point test (CUSUM or Bayesian) on each page's weekly median composite → regime id, start date, level vs prior, recomputed daily and written to page_benchmark_stats; plus a calendar table for the audience country (Christmas week, New Year, bank holidays, Ramadan, school holidays, Black Friday) used as Prophet-style regressors by Best Times (P0-FH-26) and as a context class by the benchmark and the morning briefing. Emit the regime sentence the UI shows: 'this page is at X% of its pre-27-Jul level since <date>'.",
+      "why": "A relative score lies without a regime marker; Christmas posts must never be compared with normal Tuesdays.",
+      "area": "Models",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Every page has a regime id/date; 27 Jul detected on ≥12 of 15 pages; calendar table live and referenced by Best Times.",
+      "checklist": [
+        "Implement the change-point test",
+        "Build the calendar table",
+        "Write regime fields to page_benchmark_stats",
+        "Expose the regime sentence in the serving envelope"
+      ],
+      "layman": "Each page gets a 'chapter' marker (when its audience level changed) and we keep a holiday calendar, so posts are only compared with posts from the same chapter and the same kind of day.",
+      "layman_analogy": "",
+      "layman_needed": "Every page has a regime id/date; 27 Jul detected on ≥12 of 15 pages; calendar table live and referenced by Best Times.",
+      "layman_output": "Every page has a regime id/date; 27 Jul detected on ≥12 of 15 pages; calendar table live and referenced by Best Times.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1.5,
+      "timebox_days": 1.5
+    },
+    {
+      "id": "N4-FH-25",
+      "sprint": "N4",
+      "assignee": "Faheem",
+      "title": "Twin benchmark: per-context flop/strong lines (Engine A) and twin matching in the label (Engine B)",
+      "what": "Engine A: per-page robust quantile model of the log-composite on regime + calendar class + weekday×hour slot + format → P33/P66 per situation, refreshed daily into page_benchmark_stats with partial pooling for thin pages. Engine B: label each training post against its ~30 prior matured twins chosen by a coarsening ladder (page+regime+day-kind+slot+format → … → page+regime, n≥10), Borda rank, hurdle first. Benchmark self-check: flop rate 30–36% in every stratum, run weekly. Design per the 17 Sep master plan.",
+      "why": "This is what makes 'what counts as a flop' move with the conditions, per page, per date — the smart version of the sibling fix.",
+      "area": "Models",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Serving reads P33/P66 per situation from page_benchmark_stats; label SQL uses twins; stratum flop rates within 30–36%; pairwise ≥58% post-collapse.",
+      "checklist": [
+        "Engine A quantile model + daily write",
+        "Twin ladder in the label SQL",
+        "Stratum self-check job",
+        "Re-run R2 on the twin label"
+      ],
+      "layman": "The measuring stick becomes a moving one: for each page, each day and each kind of day we work out fresh what 'normal' is, and every post is judged against its closest twins.",
+      "layman_analogy": "",
+      "layman_needed": "Serving reads P33/P66 per situation from page_benchmark_stats; label SQL uses twins; stratum flop rates within 30–36%; pairwise ≥58% post-collapse.",
+      "layman_output": "Serving reads P33/P66 per situation from page_benchmark_stats; label SQL uses twins; stratum flop rates within 30–36%; pairwise ≥58% post-collapse.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 2,
+      "timebox_days": 2
+    },
+    {
+      "id": "N5-FH-11",
+      "sprint": "N5",
+      "assignee": "Faheem",
+      "title": "Same-age early warning from the 14-day growth curve (6 h / 24 h vs the twins)",
+      "what": "Using thor_rdl_post_growth_curve, compare a live post's cumulative composite at 6 h and 24 h with its twins' curve at the same age; emit an 'under-tracking' signal into the alerts pipeline (N2-MT-04) with quiet hours and the crisis kill switch respected. Evaluate: does the 24 h signal beat the draft score at predicting the matured outcome?",
+      "why": "A same-day warning that a post is sinking is worth more to a creator than a pre-publish guess.",
+      "area": "Alerts",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N2-MT-04"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Signal live for pilot pages; 24 h AUC reported against the draft score; alert copy approved by Saad.",
+      "checklist": [
+        "Same-age comparison job",
+        "Alert integration",
+        "Evaluation vs draft score"
+      ],
+      "layman": "The day a post goes out we can already tell if it is falling behind similar posts, and warn the creator.",
+      "layman_analogy": "",
+      "layman_needed": "Signal live for pilot pages; 24 h AUC reported against the draft score; alert copy approved by Saad.",
+      "layman_output": "Signal live for pilot pages; 24 h AUC reported against the draft score; alert copy approved by Saad.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N2-FH-19",
+      "sprint": "N3",
+      "assignee": "Faheem",
+      "title": "Measure Discovery's signal: cohort density at today's comment volumes",
+      "what": "Discovery program (17 Sep): design now, build after launch. Deferred: Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature. Original scope: Write down the co-commenter cohort definition Muteeb's graph will use - which interactions count as a tie, the observation window, how repeat commenters and bots are deduplicated, and the minimum cohort size for a page to enter the graph at all. Then measure it on the warehouse for the pilot roster at three windows (last 90 days, last 180 days, and a window reaching back into the pre-collapse period that holds the ~39k historical comments): distinct commenters per page, pairwise shared-commenter counts, and the number of page pairs that would survive a Benjamini-Hochberg FDR gate under the degree-preserving hypergeometric null at n=20. Report the same numbers split by collapsed monetised pages and by the small pages that stayed flat. Hand the table and the definition to Muteeb and Asad. Balancing 16 Sep: time-box to about 2 days (full scope about 3); ship the smallest version that meets the acceptance and park the rest in the backlog.",
+      "why": "The comment collapse cuts the exact quantity the graph is built from; without this measurement nobody knows whether the FDR backbone will be near-empty until the fallback fires in October.",
+      "area": "Discovery",
+      "due": "2026-10-16",
+      "priority": "P0",
+      "priority_reason": "Promoted from backlog in the 17 Sep completeness audit",
+      "depends_on": [],
+      "feeds": [
+        "N3-MT-01",
+        "N4-FH-09",
+        "N3-FH-13",
+        "N2-AX-10",
+        "N3-FH-14",
+        "N2-AS-14"
+      ],
+      "gate": "N3",
+      "source": "discovery-audit",
+      "acceptance": "A written cohort definition plus a table of distinct commenters per page, pairwise overlaps and expected FDR-surviving edge counts at three observation windows, delivered to Asad and Muteeb on or before 25 Sep.",
+      "checklist": [
+        "Write the cohort tie definition, window, dedup and bot rules in one page",
+        "Query distinct commenters per pilot page for the three candidate windows",
+        "Compute pairwise shared-commenter counts and the hypergeometric p per pair",
+        "Count how many pairs survive BH-FDR at n=20 for each window",
+        "Split the results by collapsed monetised pages vs flat small pages",
+        "Send the table and definition to Asad and Muteeb"
+      ],
+      "layman": "Measuring whether we currently collect enough comment activity for the collaboration-suggestions feature to give useful results, so we know now - not in October - whether it needs a fallback plan.",
+      "layman_analogy": "Like counting how many fish are actually in the lake before promising the village a fishing festival in October.",
+      "layman_needed": "A written definition of how pages are grouped by shared commenters, plus a measured table over three time windows showing whether enough overlap exists, delivered to Asad and Muteeb by 25 Sep.",
+      "layman_output": "A written definition of how pages are grouped by shared commenters — what counts as a link, over what period, how bots and repeats are handled — plus a measured warehouse table showing, at three time windows, commenters per pilot page, the overlap between pages, and how many pairings would survive the statistical filter. Delivered to Asad and Muteeb by 25 September so nobody is surprised in October.",
+      "moved_from": "N2",
+      "timebox_days": 1,
+      "launch_stage": "after-public",
+      "estimated_days": 1,
+      "estimate_source": "Promoted 17 Sep (completeness audit); owner estimate to confirm",
+      "audit_original_schedule": {
+        "sprint": "N4",
+        "due": "2026-10-23"
+      },
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from backlog in the 17 Sep completeness audit."
+      }
+    },
+    {
+      "id": "N2-AS-14",
+      "sprint": "N3",
+      "assignee": "Asad",
+      "title": "Decide Discovery's signal floor and descope branch before graph code",
+      "what": "Discovery program (17 Sep): design now, build after launch. Deferred: Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature. Original scope: With Faheem's measurement (N2-FH-19) in hand, declare in writing, before Muteeb starts the graph: the observation window Discovery will use and the honesty consequence of choosing a pre-collapse window (a fingerprint built on commenters a page may no longer have, while the reason string still says 'your people'); the minimum signal floor to proceed - a stated number of FDR-surviving edges and a stated share of connected pilot pages holding at least one structural edge; and the branch if the floor is not met. Name the branch options explicitly and pick the order: widen the window, re-weight the blend away from 80/20 with re-declared reason strings and a re-run of Filza's legal pass, or descope Discovery v1 to curated matches with the engine held back. Mirror the shape of N1-AS-02's crisis coverage floor. File it in the decision register with Faheem and Muteeb acknowledging. Kept in the launch plan in the 16 Sep balancing because N2-AS-07 depends on it.",
+      "why": "A sparse backbone discovered during the build silently becomes a list of fail-open 'suggested - not validated' rows going into Lewis's Sat 17 Oct 2026 gate; the line has to be drawn before anyone has seen the matches.",
+      "area": "Discovery",
+      "due": "2026-10-16",
+      "priority": "P0",
+      "priority_reason": "Promoted from backlog in the 17 Sep completeness audit",
+      "depends_on": [
+        "N2-FH-19"
+      ],
+      "feeds": [
+        "N3-MT-01",
+        "N3-AS-15"
+      ],
+      "gate": "N3",
+      "source": "discovery-audit",
+      "acceptance": "A signed decision naming the observation window, the numeric signal floor and the ordered descope branch, filed in the register and acknowledged by Faheem and Muteeb on or before Fri 23 Oct 2026.",
+      "checklist": [
+        "Read Faheem's window comparison with him and Muteeb",
+        "Pick the observation window and write down its honesty consequence for reason strings",
+        "Set the numeric floor: surviving edges and share of pages with a structural edge",
+        "Write the ordered branch if the floor is missed, including the curated-matches descope",
+        "File in the decision register; Faheem and Muteeb acknowledge in writing"
+      ],
+      "layman": "Before any code is written for the page-matching feature, Asad decides in writing how much real signal the data must show to proceed - and what we do instead if it doesn't - so that we don't build on evidence that isn't there.",
+      "layman_analogy": "Like a surveyor setting in writing how firm the ground must test before foundations are poured - and which smaller house gets built if it fails the test.",
+      "layman_needed": "A signed decision, filed by Fri 23 Oct 2026 and acknowledged by Faheem and Muteeb, naming the data window the matching feature uses, the minimum evidence needed to proceed, and the ordered fallback plan if the evidence isn't there.",
+      "layman_output": "A signed decision, filed by Fri 23 Oct 2026 and acknowledged by Faheem and Muteeb before any matching code starts: which window of data the page-matching feature uses, the minimum evidence needed to proceed given the comment collapse, and the ordered fallback plan if the evidence isn't there. Anyone can read one register entry and know whether the feature goes ahead, shrinks, or waits.",
+      "moved_from": "N2",
+      "launch_stage": "after-public",
+      "estimated_days": 0.5,
+      "estimate_source": "Promoted 17 Sep (completeness audit); owner estimate to confirm",
+      "audit_original_schedule": {
+        "sprint": "N4",
+        "due": "2026-10-23"
+      },
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from backlog in the 17 Sep completeness audit."
+      },
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N1-FZ-04",
+      "sprint": "N3",
+      "assignee": "Filza",
+      "title": "Codify the k=5 floor before the Discovery API",
+      "what": "Discovery program (17 Sep): design now, build after launch. Deferred: Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature. Original scope: Write the floor spec Muteeb builds to in N3: k=5 minimum cohort size on every aggregate; the list of dropped and banded fields on cards and profiles; fail-closed behaviour (below floor renders nothing) with a logged event; and the differencing rule (per-query seeded noise, no exact overlap counts that can be subtracted across queries or across weekly recomputes). Sign it with Asad as CTO and hand it to Muteeb as the acceptance spec for the Discovery API build (greenfield in N3). Balancing 16 Sep: time-box to about 1 day (full scope about 2); ship the smallest version that meets the acceptance and park the rest in the backlog.",
+      "why": "The floor is the product risk; codified before the API so the endpoint is tested against it rather than retrofitted.",
+      "area": "Discovery",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "Promoted from backlog in the 17 Sep completeness audit",
+      "depends_on": [
+        "N1-FZ-03"
+      ],
+      "feeds": [
+        "N3-MT-13",
+        "N3-MT-17",
+        "N2-AS-14"
+      ],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Muteeb confirms the floor spec is the test oracle for the N3 differencing tests and Saad's fail-closed empty state matches it.",
+      "checklist": [
+        "Define k=5 and where it applies (matches, spotlight, profile fields, reason strings)",
+        "List dropped and banded fields per surface",
+        "Specify fail-closed rendering plus the log event fields",
+        "Write the differencing rule incl. week-over-week recompute drift",
+        "Asad co-signs; Muteeb receives it as the N3 acceptance spec"
+      ],
+      "layman": "Filza writes the rule that the page-matching feature never shows a statistic drawn from fewer than five pages, and shows nothing at all below that, so that no individual page or person can be picked out of the numbers.",
+      "layman_analogy": "Like the census rule that no statistic is published for a street with fewer than five households - below that, the table simply shows nothing.",
+      "layman_needed": "A signed rule that page-matching never shows a statistic drawn from fewer than five pages and shows nothing below that, with the exact fields hidden or grouped, handed to Muteeb as the standard his build is tested against.",
+      "layman_output": "A signed written rule handed to Muteeb: page-matching never shows a statistic drawn from fewer than five pages, shows nothing at all below that floor, and logs the event - with the exact hidden and grouped fields listed and a rule preventing two queries being compared to expose one page. Muteeb's build will be tested against this document, so anyone can check the app against the rule.",
+      "moved_from": "N1",
+      "timebox_days": 0.5,
+      "launch_stage": "after-public",
+      "estimated_days": 0.5,
+      "estimate_source": "Promoted 17 Sep (completeness audit); owner estimate to confirm",
+      "audit_original_schedule": {
+        "sprint": "N3",
+        "due": "2026-10-09"
+      },
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from backlog in the 17 Sep completeness audit."
+      },
+      "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident."
+    },
+    {
+      "id": "N2-FH-18",
+      "sprint": "N4",
+      "assignee": "Faheem",
+      "title": "De-identify Discovery graph inputs per Filza; keep fingerprint capture",
+      "what": "Discovery program (17 Sep): design now, build after launch. Deferred: Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature. Original scope: Confirm cohort-fingerprint capture is running, apply Filza's de-identification policy (dropped fields, k=5 pre-filter) to the graph input table and hand it to Muteeb before his N3 graph work starts 5 Oct. Balancing 16 Sep: time-box to about 1 day (full scope about 2); ship the smallest version that meets the acceptance and park the rest in the backlog.",
+      "why": "Muteeb's graph starts 5 Oct and legally cannot run on un-de-identified inputs.",
+      "area": "Discovery",
+      "due": "2026-10-30",
+      "priority": "P0",
+      "priority_reason": "Promoted from backlog in the 17 Sep completeness audit",
+      "depends_on": [
+        "P0-MT-07"
+      ],
+      "feeds": [
+        "N2-FH-19"
+      ],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "De-identified graph input table handed to Muteeb with the policy checklist ticked.",
+      "checklist": [
+        "Verify fingerprint capture running",
+        "Apply dropped-field rules",
+        "k=5 pre-filter check",
+        "Hand table to Muteeb"
+      ],
+      "layman": "Stripping personal details out of the data our page-suggestion feature learns from, per our legal lead's rules, so that work can start on time and stays on the right side of privacy law.",
+      "layman_analogy": "Like blacking out names and addresses on survey forms before handing the stack to a researcher, so the analysis starts on time without exposing anyone.",
+      "layman_needed": "A cleaned data table with personal details removed to the legal lead's rules, handed to Muteeb before 5 Oct with every item on the policy checklist ticked.",
+      "layman_output": "A cleaned data table, stripped of personal details to the legal lead's written rules (named fields removed, tiny groups filtered out), sitting ready for Muteeb before his 5 October start. The policy checklist is ticked item by item and filed alongside it, so anyone can confirm the grouping work will begin on data that is legally safe to use, with a paper trail showing why.",
+      "timebox_days": 1,
+      "launch_stage": "after-public",
+      "estimated_days": 1,
+      "estimate_source": "Promoted 17 Sep (completeness audit); owner estimate to confirm",
+      "audit_original_schedule": {
+        "sprint": "N2",
+        "due": "2026-09-25"
+      },
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from backlog in the 17 Sep completeness audit."
+      }
+    },
+    {
+      "id": "N3-AS-15",
+      "sprint": "N4",
+      "assignee": "Asad",
+      "title": "Pre-declare what Discovery ships if the precision-at-5 gate fails",
+      "what": "Discovery program (17 Sep): design now, build after launch. Deferred: Discovery implementation is already deferred; resume its privacy, signal and gate work together with that feature. Original scope: Before Lewis judges, write the failure branch with Alex and Muteeb: nothing is served if the overall bar is missed; if a single provenance stratum fails - most likely text-only - that stratum is suppressed and Discovery ships structural-only with the blend re-frozen and the reason strings re-checked with Filza; if the structural stratum itself fails, Discovery v1 drops to a curated match list or stays behind its flag until the post-launch Discovery release. State who decides within 24 hours of Lewis's result, what Asad builds next under each branch, and that any re-run of the gate uses the same pre-declared bar. No longer waits on N3-LW-02, N3-MT-13 (parked in the 16 Sep balancing).",
+      "why": "A fail arrives with the Discovery UI build still ahead of it; without a written branch that becomes an unowned scramble against a gate date.",
+      "area": "Discovery",
+      "due": "2026-10-30",
+      "priority": "P0",
+      "priority_reason": "Promoted from backlog in the 17 Sep completeness audit",
+      "depends_on": [
+        "N2-AS-14"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "discovery-audit",
+      "acceptance": "A one-page branch decision filed in the register by Wed 4 Nov 2026, ahead of Lewis's judging, naming the action per failure mode, the decider and the 24-hour decision window, acknowledged by Alex, Muteeb and Lewis.",
+      "checklist": [
+        "Write the three failure modes: overall, single stratum, structural",
+        "Name what Asad builds in N4 under each branch",
+        "Name the decider and the 24-hour window after Lewis's result",
+        "Confirm a re-run reuses the same pre-declared bar with Lewis",
+        "File in the register; Alex, Muteeb and Lewis acknowledge"
+      ],
+      "layman": "Writing down in advance what we ship if the collaboration-suggestions quality test fails — a trimmed list, or holding the feature back — so a bad result triggers a plan, not a last-minute scramble.",
+      "layman_analogy": "Like a wedding planner writing the rain plan before checking the forecast — the marquee decision is made calmly, not mid-downpour.",
+      "layman_needed": "A one-page plan filed by Wed 4 Nov 2026, ahead of Lewis's judging, saying exactly what ships under each way the suggestions quality test could fail, who decides within 24 hours, and what gets built next in each case, acknowledged by Alex, Muteeb and Lewis.",
+      "layman_output": "A one-page decision plan, filed in the register by Wed 4 Nov 2026 and ahead of Lewis's judging, spelling out exactly what the collaboration-suggestions feature ships under each way its quality test could fail: full stop, a trimmed version, a hand-picked list, or held back to the Discovery release that follows the public launch, plus who decides within 24 hours and what gets built next in each case. Alex, Muteeb and Lewis will each have acknowledged it, so a fail triggers a plan, not a scramble.",
+      "moved_from": "N3",
+      "launch_stage": "after-public",
+      "estimated_days": 0.25,
+      "estimate_source": "Promoted 17 Sep (completeness audit); owner estimate to confirm",
+      "audit_original_schedule": {
+        "sprint": "N5",
+        "due": "2026-11-04"
+      },
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from backlog in the 17 Sep completeness audit."
+      },
+      "timebox_days": 0.25
+    },
+    {
+      "id": "N3-FH-32",
+      "sprint": "N3",
+      "assignee": "Faheem",
+      "title": "Discovery graph spec v1: nodes, edges, features and the candidate-generation rule",
+      "what": "Define the creator graph from data we already hold: nodes = pages; edges = shared commenters (co-engagement), audience overlap proxies, topic/format similarity from post NLP and CLIP, posting-time overlap. Specify feature vectors per pair, the de-identification boundary (N2-FH-18), the cold-start rule for new pages, and the candidate-generation step (top-k by cheap similarity before scoring). Grounded in the link-prediction literature (Daud et al. 2020 review) and the influencer–brand congruence work (Weinlich 2024).",
+      "why": "Discovery is the network-theory feature the company is named for; without a written graph spec every later decision is guesswork.",
+      "area": "Discovery",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N2-FH-19"
+      ],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Spec in the repo with schema, feature list, cold-start and privacy rules; Filza sign-off on the de-identification boundary.",
+      "checklist": [
+        "Enumerate edge types from existing tables",
+        "Define pair features and cold-start",
+        "Agree the privacy boundary with Filza",
+        "Write the candidate-generation rule"
+      ],
+      "layman": "We write down exactly how we will decide which creators are a good match for each other, using data we already have, without exposing anyone's identity.",
+      "layman_analogy": "",
+      "layman_needed": "Spec in the repo with schema, feature list, cold-start and privacy rules; Filza sign-off on the de-identification boundary.",
+      "layman_output": "Spec in the repo with schema, feature list, cold-start and privacy rules; Filza sign-off on the de-identification boundary.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N4-FH-26",
+      "sprint": "N4",
+      "assignee": "Faheem",
+      "title": "Discovery matching bake-off: link prediction vs collaborative filtering vs embedding similarity, offline",
+      "what": "On the pilot and dogfood pages, compare three scorers for 'would these two creators benefit from collaborating': classic link-prediction scores (common neighbours / Adamic–Adar on the co-engagement graph), item-based collaborative filtering on audience overlap, and CLIP+NLP embedding similarity with a receptiveness term (BL-IN-19). Evaluate offline with Saad's rated pairs; report precision@5 per page tier; pick one for v1.",
+      "why": "Choosing the algorithm with evidence now means the January build is a build, not a research project.",
+      "area": "Discovery",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N3-FH-32"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Bake-off report with precision@5 per method and tier, a chosen v1 method, and the gate line for N3-AS-15.",
+      "checklist": [
+        "Build the three scorers offline",
+        "Collect 100 rated pairs with Saad",
+        "Report and choose"
+      ],
+      "layman": "We test three ways of finding good collaboration partners on our real pages and pick the one that works best before building it.",
+      "layman_analogy": "",
+      "layman_needed": "Bake-off report with precision@5 per method and tier, a chosen v1 method, and the gate line for N3-AS-15.",
+      "layman_output": "Bake-off report with precision@5 per method and tier, a chosen v1 method, and the gate line for N3-AS-15.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1.5,
+      "timebox_days": 1.5
+    },
+    {
+      "id": "N4-SD-18",
+      "sprint": "N4",
+      "assignee": "Saad",
+      "title": "Discovery evaluation protocol: rated match pairs, precision@5 gate and the pilot feedback loop",
+      "what": "Write the protocol Faheem's bake-off scores against: 100 candidate pairs rated 'would collaborate / not' by two raters (agreement statistic per N3-LW-09), the precision@5 gate, and how pilots will rate suggestions in-product after launch (thumbs + reason, reusing N4-AS-07).",
+      "why": "A matching model is only as good as the judgement it is measured against.",
+      "area": "Discovery",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N3-FH-32"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Protocol document; 100 rated pairs delivered to Faheem; agreement ≥0.6.",
+      "checklist": [
+        "Write the rating guide",
+        "Rate 100 pairs with a second rater",
+        "Hand over with the agreement statistic"
+      ],
+      "layman": "We decide how to judge whether a suggested collaboration is a good one, and rate real examples to test the model against.",
+      "layman_analogy": "",
+      "layman_needed": "Protocol document; 100 rated pairs delivered to Faheem; agreement ≥0.6.",
+      "layman_output": "Protocol document; 100 rated pairs delivered to Faheem; agreement ≥0.6.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N5-SD-17",
+      "sprint": "N5",
+      "assignee": "Saad",
+      "title": "Discovery product spec + phone mock-up: swipe-through matches, why-this-match, one-tap outreach",
+      "what": "Spec and phone mock-up for the post-launch Discovery layer Alex described (swipe through relevant creators): the match card (who, why — three plain reasons, shared audience size band), the receptiveness signal, one-tap outreach with an Art-E-drafted intro, decline reasons, and the safety rules (no contact details until both accept). Mock-up only; build is post-launch.",
+      "why": "Alex's four-layer vision has Discovery as a core layer; the design must be ready when the build slot opens in January.",
+      "area": "Discovery",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N4-FH-26"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Spec + phone mock-up reviewed with Alex; Filza sign-off on the consent flow.",
+      "checklist": [
+        "Match card and reasons",
+        "Outreach flow with mutual-accept rule",
+        "Review with Alex and Filza"
+      ],
+      "layman": "We design the screen where creators swipe through suggested collaboration partners and reach out, ready to build after launch.",
+      "layman_analogy": "",
+      "layman_needed": "Spec + phone mock-up reviewed with Alex; Filza sign-off on the consent flow.",
+      "layman_output": "Spec + phone mock-up reviewed with Alex; Filza sign-off on the consent flow.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N5-FZ-13",
+      "sprint": "N5",
+      "assignee": "Filza",
+      "title": "Discovery legal: consent and data-sharing terms for introductions between tenants",
+      "what": "What one creator may see about another (aggregates only until mutual accept), the lawful basis, the consent screen wording, opt-out, and the DPIA addendum; align with the commenter transparency notice (N3-FZ-20) and pilot data-reuse rights (N2-FZ-14).",
+      "why": "Introducing two customers to each other is a new processing purpose; it needs its own basis before any build.",
+      "area": "Legal",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N3-FH-32"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Terms and consent wording delivered to Saad; DPIA addendum filed.",
+      "checklist": [
+        "Purpose and basis memo",
+        "Consent screen wording",
+        "DPIA addendum"
+      ],
+      "layman": "We make sure it is lawful and clear before one creator is shown to another as a possible partner.",
+      "layman_analogy": "",
+      "layman_needed": "Terms and consent wording delivered to Saad; DPIA addendum filed.",
+      "layman_output": "Terms and consent wording delivered to Saad; DPIA addendum filed.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "BL-IN-12",
+      "sprint": "N4",
+      "layer": "intelligence",
+      "assignee": "Faheem",
+      "title": "Prompt registry + staged rollout",
+      "what": "Promoted 17 Sep: prompt changes get the same rigour as code. Versioned registry for labelling and Art-E prompts (hash recorded in every prediction/label row), diff on change, staged rollout with a shadow comparison before promotion - extends the N5 pinned manifest. Added in the 16 Sep review: Extend the same path to retrained flop, comment and crisis models once the freeze lifts: seven days in shadow logging disagreement with the champion, then 10% of tenants through a registry alias with automatic rollback if false-alarm rate, abstain share or ledger hit rate breach written thresholds, then promotion. File the runbook with thresholds per model and rehearse it once on staging with a deliberately worse challenger.",
+      "why": "Prevents the next silent prompt divergence (the MTL label mess) once prompts start changing again after the freeze; pairs with the label console + retrain queue.",
+      "area": "WAVE 3 · Harden and open up (Jan onward)",
+      "due": "2026-10-30",
+      "priority": "P2",
+      "priority_reason": "Promoted from backlog in the 17 Sep completeness audit",
+      "depends_on": [],
+      "feeds": [
+        "BL-LL-21"
+      ],
+      "gate": "N4",
+      "source": "reconciler",
+      "acceptance": "Scheduled into a sprint with an owner, or dropped with a reason.",
+      "checklist": [],
+      "layman": "After launch: keep every version of the instructions we give our AI on record, compare old and new side by side, and trial changes quietly before switching everyone over - so a quiet tweak can never silently break results again.",
+      "layman_analogy": "Like a pharmacy keeping every past version of a prescription on file and trialling any change on a small batch before the whole town gets the new formula.",
+      "layman_needed": "When picked up: a record of every version of our AI instructions, side-by-side comparison on change, and quiet trials before switching everyone over — so a tweak can never silently break results. Needs a sprint slot and owner, or a reason to drop.",
+      "layman_output": "When picked up: a versioned record of every set of instructions we give our AI, with its fingerprint stamped into each prediction, a side-by-side comparison whenever wording changes, and a quiet trial run before any change reaches customers — so a tweak can never silently skew results again, as happened once before. Until then, this row needs a sprint slot and owner, or a written reason to drop it.",
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from backlog in the 17 Sep completeness audit."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimate_source": "Promoted 17 Sep (completeness audit); owner estimate to confirm"
+    },
+    {
+      "id": "N4-AS-27",
+      "sprint": "N4",
+      "assignee": "Asad",
+      "title": "LLM provider failover and routing policy: primary, fallback, cost tier, and the switch test",
+      "what": "Name the primary frontier model and a fallback from a second provider behind one interface; routing rules by ask type (briefing, Q&A, drafted reply) and by budget state (N4-MT-23); automatic failover on error rate or latency; a monthly switch test. Keep BL-LL-22 (lower-cost provider evaluation) as the follow-on.",
+      "why": "A single-provider outage or price change must not take Art-E down or blow the burn cap.",
+      "area": "Art-E",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N3-MT-09"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Failover demonstrated on staging by killing the primary; routing table in the repo; cost per ask per route on the costing dashboard.",
+      "checklist": [
+        "One interface, two providers",
+        "Routing table by ask type and budget state",
+        "Failover drill",
+        "Cost per route on the dashboard"
+      ],
+      "layman": "Art-E can switch to a second AI provider automatically if the first fails or gets too expensive.",
+      "layman_analogy": "",
+      "layman_needed": "Failover demonstrated on staging by killing the primary; routing table in the repo; cost per ask per route on the costing dashboard.",
+      "layman_output": "Failover demonstrated on staging by killing the primary; routing table in the repo; cost per ask per route on the costing dashboard.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N4-FH-27",
+      "sprint": "N4",
+      "assignee": "Faheem",
+      "title": "Retrieval diagnostics on the golden set: recall@k, MRR, faithfulness; chunking and index tuning",
+      "what": "Instrument the RAG path with RAGAs-style metrics on the 200-question golden set: context recall@k and MRR for retrieval, faithfulness and answer relevance for generation; tune chunk size, overlap and the reranker; record the before/after on the nightly regression (N4-FH-02).",
+      "why": "Most bad Art-E answers are retrieval failures; measuring only the final answer hides where to fix them.",
+      "area": "Art-E",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N3-FH-12"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Retrieval metrics on the nightly regression; one tuning round with measured lift; results on the scorecard.",
+      "checklist": [
+        "Add retrieval metrics to the eval harness",
+        "Tune chunking/reranker",
+        "Record lift on the nightly run"
+      ],
+      "layman": "We measure whether Art-E finds the right facts before it answers, and tune that step separately.",
+      "layman_analogy": "",
+      "layman_needed": "Retrieval metrics on the nightly regression; one tuning round with measured lift; results on the scorecard.",
+      "layman_output": "Retrieval metrics on the nightly regression; one tuning round with measured lift; results on the scorecard.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N4-AS-28",
+      "sprint": "N4",
+      "assignee": "Asad",
+      "title": "Art-E API contract for the mobile client: streaming over the store app, retries, offline last-briefing cache",
+      "what": "Extend the BFF contract for the cross-platform app: streaming answers over the mobile transport chosen in N1-AS-20 (replaces the Netlify-function assumption in N3-AS-18), idempotent retries, background refresh of the morning briefing, and a cached last briefing readable offline; error states mapped to Saad's Art-E state matrix (N3-SD-10).",
+      "why": "The web streaming design assumed serverless functions; a store app needs a transport and an offline story.",
+      "area": "Art-E",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N1-AS-20"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Contract merged; streaming proven on an iOS and Android device build; offline briefing renders.",
+      "checklist": [
+        "Transport decision applied",
+        "Retry and cache rules",
+        "Device test"
+      ],
+      "layman": "Art-E's answers stream smoothly inside the phone app, and the morning briefing is readable even offline.",
+      "layman_analogy": "",
+      "layman_needed": "Contract merged; streaming proven on an iOS and Android device build; offline briefing renders.",
+      "layman_output": "Contract merged; streaming proven on an iOS and Android device build; offline briefing renders.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N3-MT-26",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "SLOs and error-budget policy for the five user journeys",
+      "what": "Define SLOs (availability, p95 latency, freshness) for: connect a page, Today feed load, draft score, crisis alert delivery (<15 min), Art-E first token; set error budgets, the burn-rate alerts, and the policy (when the budget is spent, feature work stops and reliability work starts). Feeds the circuit-breaker spec (N3-JL-04) and the status page (N3-MT-11).",
+      "why": "We have many monitors but no agreed definition of 'reliable enough'; SLOs turn alerts into decisions.",
+      "area": "Ops",
+      "due": "2026-10-28",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N3-MT-11"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "SLO document signed by Asad; burn-rate alerts wired; policy referenced by the war-room board.",
+      "checklist": [
+        "Pick the five journeys and targets",
+        "Wire burn-rate alerts",
+        "Write the policy",
+        "Review with Asad"
+      ],
+      "layman": "We agree what 'working well' means in numbers for the five things customers do most, and what we do when we miss them.",
+      "layman_analogy": "",
+      "layman_needed": "SLO document signed by Asad; burn-rate alerts wired; policy referenced by the war-room board.",
+      "layman_output": "SLO document signed by Asad; burn-rate alerts wired; policy referenced by the war-room board.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N5-MT-24",
+      "sprint": "N5",
+      "assignee": "Muteeb",
+      "title": "Every feature has a check: feature → check → alert coverage matrix, gaps closed before freeze",
+      "what": "One matrix over every shipped and to-be-shipped surface (Today, Drafts, Alerts, Art-E, Settings, Connect, push, briefing, each model endpoint): which QA check covers it (N2-MT-20 registry), which alert fires, who receives it, last time it fired in a drill. Close every gap or record an accepted risk. Re-run at freeze.",
+      "why": "The user asked for alerts on what we have built and what we will build; this is the proof that nothing is unwatched.",
+      "area": "QA",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N2-MT-20"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Matrix on the QA Control Center with zero unwatched surfaces or a signed accepted-risk line per gap.",
+      "checklist": [
+        "List every surface",
+        "Map to checks and alerts",
+        "Close gaps",
+        "Publish and schedule the freeze re-run"
+      ],
+      "layman": "A single table proving that every part of the product has a test watching it and an alarm if it breaks.",
+      "layman_analogy": "",
+      "layman_needed": "Matrix on the QA Control Center with zero unwatched surfaces or a signed accepted-risk line per gap.",
+      "layman_output": "Matrix on the QA Control Center with zero unwatched surfaces or a signed accepted-risk line per gap.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N5-AS-22",
+      "sprint": "N6",
+      "assignee": "Asad",
+      "title": "Scale plan 100 → 1,000 → 10,000 pages: Meta rate budget, ingest queue, warehouse, vector index, cost per page",
+      "what": "Model the breakpoints: Graph API rate headroom per page count (N4-MT-21), ingest queue throughput (N3-MT-10), Redshift workload and storage, vector index size and cost, LLM spend per page tier, and the unit economics per page at each step; name the first thing that breaks and the change that fixes it. Input to pricing and to the January roadmap.",
+      "why": "Launch-shape load tests cover December; the CTO needs to know what breaks at 10× and 100×.",
+      "area": "Platform",
+      "due": "2026-11-25",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N5-MT-01"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "A scale memo with breakpoints, cost per page at 100/1k/10k, and a ranked list of pre-emptive changes.",
+      "checklist": [
+        "Rate and queue model",
+        "Warehouse and vector sizing",
+        "Cost curve",
+        "Ranked fixes"
+      ],
+      "layman": "We work out what breaks first as we grow from 100 pages to 10,000, and what it costs per page at each step.",
+      "layman_analogy": "",
+      "layman_needed": "A scale memo with breakpoints, cost per page at 100/1k/10k, and a ranked list of pre-emptive changes.",
+      "layman_output": "A scale memo with breakpoints, cost per page at 100/1k/10k, and a ranked list of pre-emptive changes.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N4-MT-31",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Tracing end-to-end: one trace id from app → BFF → FastAPI → LLM/vector, with sampling and retention",
+      "what": "Propagate a trace id across every hop; capture retrieval scores, model ids, token counts and latency per span; sample by criticality; retention per N3-JL-02. This is the observability layer the Art-E evals and the cost dashboard read from.",
+      "why": "Without traces, a slow or wrong answer cannot be attributed to the hop that caused it.",
+      "area": "Platform",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N1-MT-05"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "A single trace for a real Art-E ask visible end to end on the dashboard; sampling and retention configured.",
+      "checklist": [
+        "Trace id propagation",
+        "Span attributes",
+        "Sampling and retention",
+        "Dashboard view"
+      ],
+      "layman": "Every request carries a thread we can follow through all our systems to find where it slowed down or went wrong.",
+      "layman_analogy": "",
+      "layman_needed": "A single trace for a real Art-E ask visible end to end on the dashboard; sampling and retention configured.",
+      "layman_output": "A single trace for a real Art-E ask visible end to end on the dashboard; sampling and retention configured.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N5-MT-25",
+      "sprint": "N5",
+      "assignee": "Muteeb",
+      "title": "Disaster-recovery plan document and one region-failure test",
+      "what": "Write the internal DR plan per system (RTO/RPO, backup source, restore order, owner), including the vector store, memory, token store and warehouse; run one region-failure or full-restore test against it and record the measured RTO; feed the customer-facing paper (N5-FZ-04).",
+      "why": "Restore drills prove backups work; the plan proves we can run them under stress in the right order.",
+      "area": "Ops",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N2-MT-10"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "DR plan in the repo; one test run with measured RTO ≤ 2 h; gaps assigned.",
+      "checklist": [
+        "Write the plan",
+        "Run the test",
+        "Record RTO and gaps"
+      ],
+      "layman": "A written plan for rebuilding everything if a whole data centre fails, tested once for real.",
+      "layman_analogy": "",
+      "layman_needed": "DR plan in the repo; one test run with measured RTO ≤ 2 h; gaps assigned.",
+      "layman_output": "DR plan in the repo; one test run with measured RTO ≤ 2 h; gaps assigned.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "BL-IN-22",
+      "sprint": "N3",
+      "assignee": "Muteeb",
+      "title": "Test strategy with diff-coverage floors and a flaky-test rule across repos",
+      "what": "Promoted 17 Sep: backend/API unit and integration tests with diff-coverage floors in CI, a flaky-test rule, and the mobile UI suite named as a first-class layer. Post-launch, begin with a one-page test strategy and non-blocking diff-coverage reporting on the serving and pipeline repos; add merge gates only once baseline numbers are known. Before launch, add one line to the N6-AS-12 freeze protocol instead: every post-freeze blocker fix carries a regression test that fails without the fix. Builds on N1-MT-04, N2-MT-16, N3-AS-13, N5-AS-06, P0-FH-13, N3-FH-16, N4-MT-01.",
+      "why": "E2E-heavy suites are slow and flaky; without lower-layer floors, freeze-week blocker fixes merge untested and regressions surface only overnight. (16 Sep research: dev-process-platform.)",
+      "area": "QA",
+      "due": "2026-10-16",
+      "priority": "P2",
+      "priority_reason": "Promoted from backlog in the 17 Sep completeness audit",
+      "depends_on": [
+        "N1-MT-04"
+      ],
+      "feeds": [],
+      "gate": "N3",
+      "source": "Asad research 16 Sep (dev-process-platform)",
+      "acceptance": "Strategy published; CI on the app, serving and pipeline repos reports diff coverage and fails below the floor; quarantine list shows owner and expiry.",
+      "checklist": [
+        "Post-launch, begin with a one-page test strategy and non-blocking diff-coverage reporting on the serving and p",
+        "add merge gates only once baseline numbers are known",
+        "Before launch, add one line to the N6-AS-12 freeze protocol instead: every post-freeze blocker fix carries a r",
+        "Done when: Strategy published; CI on the app, serving and pipeline repos reports diff coverage and fails below the floor;"
+      ],
+      "layman": "After launch, Asad writes a simple testing plan and starts reporting how much new code is covered by tests, adding stricter rules once normal levels are known. Before launch, every urgent fix made after the code freeze must come with its own test.",
+      "layman_analogy": "Like a mechanic who, after fixing a fault, checks that exact fault again before handing back the car keys.",
+      "layman_needed": "A published testing plan, code checks that report coverage and block changes below the agreed floor, and a list of unreliable tests with owners.",
+      "layman_output": "A published test strategy, automatic coverage reports on changes to the app, serving and pipeline code, and a list of unreliable tests set aside, each with an owner and expiry date.",
+      "evidence": [
+        "https://testing.googleblog.com/2020/08/code-coverage-best-practices.html",
+        "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/ops_dev_integ_code_quality.html",
+        "https://dora.dev/guides/dora-metrics/"
+      ],
+      "layer": "intelligence",
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from backlog in the 17 Sep completeness audit."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimate_source": "Promoted 17 Sep (completeness audit); owner estimate to confirm"
+    },
+    {
+      "id": "N4-SD-19",
+      "sprint": "N4",
+      "assignee": "Saad",
+      "title": "Mobile UI test automation (Maestro/Detox) running on emulators in CI for flows 1–5",
+      "what": "Stand up the mobile UI test layer on the chosen stack: emulator/simulator runs in CI for the first five flows, screenshot diffs for the shared state components, and the real-device nightly (N5-AS-06) fed from the same specs. Part of the test strategy (BL-IN-22).",
+      "why": "E2E on real devices is nightly and slow; CI needs a fast mobile suite on every merge.",
+      "area": "QA",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N1-AS-20"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Flows 1–5 green on iOS simulator and Android emulator in CI under 15 minutes; screenshot diffs on.",
+      "checklist": [
+        "Pick the runner for the stack",
+        "Write flows 1–5",
+        "Wire to CI with artefacts"
+      ],
+      "layman": "Every code change is automatically tested on a virtual iPhone and Android phone before it can merge.",
+      "layman_analogy": "",
+      "layman_needed": "Flows 1–5 green on iOS simulator and Android emulator in CI under 15 minutes; screenshot diffs on.",
+      "layman_output": "Flows 1–5 green on iOS simulator and Android emulator in CI under 15 minutes; screenshot diffs on.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1.5,
+      "timebox_days": 1.5
+    },
+    {
+      "id": "N5-AS-23",
+      "sprint": "N5",
+      "assignee": "Asad",
+      "title": "Mobile performance and stability budget: cold start ≤2 s, screen p95, crash-free ≥98%, release health",
+      "what": "Set and measure: cold start, time-to-Today, Art-E first token on device, memory/battery on a low-end Android; crash-free sessions ≥98% and ANR rate on Sentry mobile release health; alerts on regression per release. Re-scope N3-AS-21 from browser errors to mobile SDK errors with source maps.",
+      "why": "Store ratings die in the first week if the app crashes or feels slow; a budget makes it a gate, not a hope.",
+      "area": "QA",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N1-AS-20"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Budgets in the repo; release-health dashboard live; the freeze build meets every budget on the device matrix.",
+      "checklist": [
+        "Define budgets",
+        "Instrument release health",
+        "Measure on the matrix",
+        "Gate the freeze build"
+      ],
+      "layman": "We set speed and crash limits for the phone app and measure every release against them.",
+      "layman_analogy": "",
+      "layman_needed": "Budgets in the repo; release-health dashboard live; the freeze build meets every budget on the device matrix.",
+      "layman_output": "Budgets in the repo; release-health dashboard live; the freeze build meets every budget on the device matrix.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N4-SD-20",
+      "sprint": "N4",
+      "assignee": "Saad",
+      "title": "Offline and poor-network behaviour spec for every screen",
+      "what": "For each screen: what renders offline (cached Today/briefing/alerts), what queues (draft autosave, thumbs), what blocks with an honest message (connect, Art-E), retry and stale-data banners on the SLOs (N5-AS-02). Apple reviewers toggle airplane mode; creators post from trains.",
+      "why": "A store app that goes blank offline fails review and users alike.",
+      "area": "App core",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N1-AS-20"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Spec agreed with Asad; state components cover offline; airplane-mode pass added to the device pass (N4-SD-14).",
+      "checklist": [
+        "Per-screen offline table",
+        "Queue and retry rules",
+        "Add to the device pass"
+      ],
+      "layman": "We decide exactly what the app shows and does when the phone has no signal.",
+      "layman_analogy": "",
+      "layman_needed": "Spec agreed with Asad; state components cover offline; airplane-mode pass added to the device pass (N4-SD-14).",
+      "layman_output": "Spec agreed with Asad; state components cover offline; airplane-mode pass added to the device pass (N4-SD-14).",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N5-AS-24",
+      "sprint": "N5",
+      "assignee": "Asad",
+      "title": "Update strategy: OTA for the web layer, forced-update floor, store release cadence and rollback",
+      "what": "Decide and implement: over-the-air updates for the JS/web layer (if Capacitor/Expo), the minimum-supported-version floor with a forced-update screen, a fortnightly store release cadence with staged rollout percentages, and rollback per layer. Aligns with BL-APP-07's runbook and Apple/Google OTA rules.",
+      "why": "Without a floor and a cadence, old broken builds live forever and hotfixes wait on store review.",
+      "area": "Platform",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "BL-APP-02"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "OTA proven on a device; forced-update screen tested; cadence and rollback in the runbook.",
+      "checklist": [
+        "OTA channel",
+        "Version floor + screen",
+        "Staged rollout and rollback"
+      ],
+      "layman": "We can push small fixes to phones without waiting for the app stores, and retire old versions safely.",
+      "layman_analogy": "",
+      "layman_needed": "OTA proven on a device; forced-update screen tested; cadence and rollback in the runbook.",
+      "layman_output": "OTA proven on a device; forced-update screen tested; cadence and rollback in the runbook.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N5-SD-18",
+      "sprint": "N5",
+      "assignee": "Saad",
+      "title": "Mobile accessibility pass: VoiceOver, TalkBack, dynamic type, contrast on device",
+      "what": "Extend the WCAG audit (N4-SD-05) to the store app: screen-reader labels on every control, focus order, dynamic type up to the largest accessibility size, contrast in dark and light, reduced motion; fixes listed for Asad with N5-AS-04.",
+      "why": "The accessibility statement (N5-FZ-12) must describe an app that actually passes.",
+      "area": "QA",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N4-SD-05"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Audit sheet with zero critical issues after fixes; statement updated.",
+      "checklist": [
+        "VoiceOver/TalkBack pass",
+        "Dynamic type and contrast",
+        "Fix list to Asad"
+      ],
+      "layman": "We check the phone app works for people using screen readers and large text.",
+      "layman_analogy": "",
+      "layman_needed": "Audit sheet with zero critical issues after fixes; statement updated.",
+      "layman_output": "Audit sheet with zero critical issues after fixes; statement updated.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N5-AS-25",
+      "sprint": "N5",
+      "assignee": "Asad",
+      "title": "Store compliance engineering: iOS privacy manifest + required-reason APIs, SDK signatures, Play target API level",
+      "what": "PrivacyInfo.xcprivacy with declared data types and required-reason API entries for every SDK (Sentry, analytics, Facebook SDK), signed binary dependencies, Xcode 26 / iOS 26 SDK build, Android target API at the 2026 floor; reconciled with Filza's labels (BL-APP-05) so the manifest, labels and DPA never disagree.",
+      "why": "Apple rejects submissions without a correct privacy manifest; Play blocks below the target API floor.",
+      "area": "Platform",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "BL-APP-02"
+      ],
+      "feeds": [
+        "BL-APP-07"
+      ],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Manifest validated in App Store Connect; Play pre-launch report clean; reconciled with BL-APP-05.",
+      "checklist": [
+        "Manifest + required reasons",
+        "SDK signatures",
+        "Target API level",
+        "Reconcile with labels"
+      ],
+      "layman": "We fill in Apple's and Google's technical privacy paperwork correctly so the app is not rejected.",
+      "layman_analogy": "",
+      "layman_needed": "Manifest validated in App Store Connect; Play pre-launch report clean; reconciled with BL-APP-05.",
+      "layman_output": "Manifest validated in App Store Connect; Play pre-launch report clean; reconciled with BL-APP-05.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N2-MT-23",
+      "sprint": "N2",
+      "assignee": "Muteeb",
+      "title": "Facebook Login for Business on iOS: ATT / Limited Login decision and a device proof of pages_* scopes",
+      "what": "Apple's tracking prompt routes the iOS SDK to Limited Login (no Graph access token) when tracking is declined; Facebook Login for Business needs the full business flow. Decide SDK-classic-with-ATT vs the web OAuth flow (ASWebAuthenticationSession / Custom Tabs) and prove on a device build that the pages_* scopes and a usable token come back with tracking declined. Record it in the Meta package (N2-MT-14, N2-AS-09).",
+      "why": "If this fails on iOS the store app cannot connect a page — the whole product.",
+      "area": "Auth",
+      "due": "2026-10-02",
+      "priority": "P0",
+      "priority_reason": "Blocks page connection on iOS; must be settled before the Meta review package",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N2",
+      "source": "plan",
+      "acceptance": "Device proof video with tracking declined and pages connected; decision filed in the Meta package.",
+      "checklist": [
+        "Read the Limited Login rules",
+        "Prototype both flows",
+        "Prove pages_* on device",
+        "File the decision"
+      ],
+      "layman": "We make sure people can still connect their Facebook page from the iPhone app even if they refuse Apple's tracking prompt.",
+      "layman_analogy": "",
+      "layman_needed": "Device proof video with tracking declined and pages connected; decision filed in the Meta package.",
+      "layman_output": "Device proof video with tracking declined and pages connected; decision filed in the Meta package.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N4-MT-32",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Mobile app security baseline (OWASP MASVS): secure storage, pinning decision, App Attest / Play Integrity, clipboard and screenshot hygiene",
+      "what": "Tokens and session in Keychain/Keystore only; certificate-pinning decision with rotation plan; App Attest and Play Integrity on the BFF for abuse control alongside N5-MT-17; jailbreak/root policy; no secrets in the bundle; sensitive screens excluded from screenshots/recents; add MASVS to the threat model (N3-MT-20) and the security assessment (N5-MT-04).",
+      "why": "The web threat model does not cover a binary on someone else's phone.",
+      "area": "Platform",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N1-AS-20"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "MASVS L1 checklist passed on both platforms; attestation enforced on write endpoints; findings in the assessment scope.",
+      "checklist": [
+        "Secure storage",
+        "Pinning decision",
+        "Attestation on the BFF",
+        "Bundle and screenshot hygiene"
+      ],
+      "layman": "We protect the phone app the way banks do: safe storage of logins, proof the app is genuine, no secrets inside it.",
+      "layman_analogy": "",
+      "layman_needed": "MASVS L1 checklist passed on both platforms; attestation enforced on write endpoints; findings in the assessment scope.",
+      "layman_output": "MASVS L1 checklist passed on both platforms; attestation enforced on write endpoints; findings in the assessment scope.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N4-AS-29",
+      "sprint": "N4",
+      "assignee": "Asad",
+      "title": "Universal links and Android App Links: AASA + assetlinks.json, tested from email and push",
+      "what": "Serve the Apple App Site Association and Android assetlinks files from artemisai.co.uk, register the paths (alert cards, briefing, settings), and test that alert emails (N3-AS-04) and push notifications open the right screen on both platforms with the app installed or not (store fallback).",
+      "why": "Deep links that fall to the website break the alert → action loop the product is built on.",
+      "area": "App core",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "BL-APP-02"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Links open the correct screen on iOS and Android from email and push; store fallback works.",
+      "checklist": [
+        "Host AASA and assetlinks",
+        "Register routes",
+        "Test from email and push"
+      ],
+      "layman": "Tapping an alert email or notification opens the right screen in the app.",
+      "layman_analogy": "",
+      "layman_needed": "Links open the correct screen on iOS and Android from email and push; store fallback works.",
+      "layman_output": "Links open the correct screen on iOS and Android from email and push; store fallback works.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N6-AS-13",
+      "sprint": "N6",
+      "assignee": "Asad",
+      "title": "Store rejection playbook: 4.2, 4.8, 5.1.1 counter-cases, reviewer notes and the 48 h resubmit rule",
+      "what": "Pre-write the counter-cases (native push, offline shell, deep links for 4.2; Sign in with Apple for 4.8; in-app deletion and third-party-AI disclosure for 5.1.1), reviewer notes with a demo tenant login, and the 48-hour resubmit rule mirroring the Meta rejection branch (N4-AX-04). Both stores.",
+      "why": "A first rejection two weeks before 15 Dec must be a same-day fix, not a scramble.",
+      "area": "Launch",
+      "due": "2026-11-27",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "BL-APP-07"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "Playbook in the repo; reviewer notes attached to the first submission; owner on call for the review window.",
+      "checklist": [
+        "Counter-cases",
+        "Reviewer notes + demo tenant",
+        "Resubmit rule"
+      ],
+      "layman": "If Apple or Google reject the app, we already have the answers ready and resubmit within two days.",
+      "layman_analogy": "",
+      "layman_needed": "Playbook in the repo; reviewer notes attached to the first submission; owner on call for the review window.",
+      "layman_output": "Playbook in the repo; reviewer notes attached to the first submission; owner on call for the review window.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N6-SD-11",
+      "sprint": "N6",
+      "assignee": "Saad",
+      "title": "In-app review prompt after the first value moment, with the store-guideline rules",
+      "what": "Trigger the native review prompt once, after a defined value moment (first insight seen or first alert acted on), never on error, rate-limited per store rules; a 'not now' path; measured in the funnel (N4-AS-14).",
+      "why": "Store rating in the first month decides organic installs.",
+      "area": "Onboarding",
+      "due": "2026-11-27",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N4-AS-14"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "Prompt fires once after the value moment on both platforms; no prompt on error paths.",
+      "checklist": [
+        "Define the value moment",
+        "Implement with rate limits",
+        "Add to the funnel"
+      ],
+      "layman": "We ask happy users for a store rating at the right moment, once.",
+      "layman_analogy": "",
+      "layman_needed": "Prompt fires once after the value moment on both platforms; no prompt on error paths.",
+      "layman_output": "Prompt fires once after the value moment on both platforms; no prompt on error paths.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.25,
+      "timebox_days": 0.25
+    },
+    {
+      "id": "BL-LL-24",
+      "sprint": "N6",
+      "assignee": "Filza",
+      "title": "App-store AI rules for the January app: third-party AI consent and in-app reporting",
+      "what": "Promoted 17 Sep (store app at launch): third-party AI disclosure and consent in-app per Apple 5.1.1 and Play policy. Fold into BL-APP-05. Add a one-time consent screen before first Art-E use that names the AI vendors. Reuse the web app's answer feedback control and add a Report reason on Art-E answers and drafted replies, stored with the answer id. Add hide-and-report on Discovery cards, a stated 48-hour response time for reports, and the vendors listed in the App Store privacy labels and the Play data safety form. Builds on BL-APP-05, N4-AS-07, N3-FZ-03, N2-FZ-03, N3-FZ-08, N2-FZ-06, N3-FZ-01, N3-MT-14, LW-FZ-04.",
+      "why": "Apple and Google reject AI apps without third-party AI consent or in-app reporting; retrofitting after a rejection would slip the January release. (16 Sep research: llm-arte, mobile.)",
+      "area": "App core",
+      "due": "2026-11-19",
+      "priority": "P1",
+      "priority_reason": "Promoted from backlog in the 17 Sep completeness audit",
+      "depends_on": [
+        "BL-APP-02",
+        "BL-APP-05",
+        "N2-FZ-03",
+        "N3-FZ-01",
+        "N4-AS-07"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "Asad research 16 Sep (llm-arte, mobile)",
+      "acceptance": "The Capacitor build shows the AI consent screen before first Art-E use, reports reach the feedback store with the answer id, and store forms name the AI vendors.",
+      "checklist": [
+        "Add a one-time consent screen before first Art-E use that names the AI vendors",
+        "Reuse the web app's answer feedback control and add a Report reason on Art-E answers and drafted replies, stor",
+        "Add hide-and-report on Discovery cards, a stated 48-hour response time for reports, and the vendors listed in ",
+        "Done when: The Capacitor build shows the AI consent screen before first Art-E use, reports reach the feedback store with "
+      ],
+      "layman": "Asad adds to the January mobile app a one-time consent screen naming the AI companies behind Art-E, plus ways to report a poor answer or hide a Discovery card. Apple and Google reject AI apps without these, which would delay the release.",
+      "layman_analogy": "Like a restaurant telling you which suppliers it uses and leaving a comment card on every table.",
+      "layman_needed": "The mobile app build showing the AI consent screen before first Art-E use, reports saved against the answer, and store forms naming the AI vendors.",
+      "layman_output": "In the test mobile app, a consent screen that lists the AI vendors before Art-E is first used, a Report option on answers and drafted replies, hide-and-report on Discovery cards, and a stated 48-hour response time.",
+      "evidence": [
+        "https://developer.apple.com/app-store/review/guidelines/",
+        "https://support.google.com/googleplay/android-developer/answer/13985936"
+      ],
+      "layer": "llm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Promoted from backlog in the 17 Sep completeness audit."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5,
+      "launch_stage": "launch",
+      "estimate_source": "Promoted 17 Sep (completeness audit); owner estimate to confirm"
+    },
+    {
+      "id": "N2-SD-22",
+      "sprint": "N2",
+      "assignee": "Saad",
+      "title": "Sprint cadence and definition of done: planning, mid-sprint demo, retro, and the DoD checklist",
+      "what": "Write the two-week rhythm on one page: Monday planning from the board, Wednesday mid-sprint demo on device, Friday scope hammer (N2-AX-02) and retro; the definition of done (tests green, device pass, acceptance one-pager signed, strings final, analytics events firing, legal strings in). Every ticket closes against the DoD.",
+      "why": "Eight people, three of them contractors, need one rhythm and one meaning of 'done'.",
+      "area": "PM",
+      "due": "2026-10-02",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N2",
+      "source": "plan",
+      "acceptance": "Cadence and DoD published; first retro held; DoD referenced in the tracker's ticket detail.",
+      "checklist": [
+        "Write cadence and DoD",
+        "Run the first cycle",
+        "Link from the tracker"
+      ],
+      "layman": "We agree the weekly rhythm of meetings and exactly what 'finished' means for every ticket.",
+      "layman_analogy": "",
+      "layman_needed": "Cadence and DoD published; first retro held; DoD referenced in the tracker's ticket detail.",
+      "layman_output": "Cadence and DoD published; first retro held; DoD referenced in the tracker's ticket detail.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N3-SD-20",
+      "sprint": "N3",
+      "assignee": "Saad",
+      "title": "Acceptance one-pagers: Alerts inbox and first-run onboarding (pass/fail per state)",
+      "what": "Same format as Today/Drafts (N2-SD-02) and Best Times/Settings (N2-SD-09): every state of the crisis inbox and the first-run onboarding on the phone, with pass/fail per state and the Meta permission strings checked.",
+      "why": "Two launch surfaces have no acceptance sheet; UAT cannot judge them.",
+      "area": "PM",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N2-SD-02"
+      ],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Two signed one-pagers; referenced by the UAT protocol (N3-SD-02).",
+      "checklist": [
+        "Alerts inbox states",
+        "Onboarding states",
+        "Sign with Asad"
+      ],
+      "layman": "We write down what 'working' looks like for the alerts screen and the first-time setup, state by state.",
+      "layman_analogy": "",
+      "layman_needed": "Two signed one-pagers; referenced by the UAT protocol (N3-SD-02).",
+      "layman_output": "Two signed one-pagers; referenced by the UAT protocol (N3-SD-02).",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N5-SD-19",
+      "sprint": "N6",
+      "assignee": "Saad",
+      "title": "Weekly product metrics review from UAT onward: activation, D1/D7 retention, feature usage, Art-E asks",
+      "what": "A 30-minute weekly review of the funnel (N4-AS-14), retention cohorts, per-feature usage, Art-E asks per user and the store release health; decisions logged on the design-direction log (N2-JL-08). Starts in UAT with pilot data, continues after launch.",
+      "why": "Metrics that nobody reviews weekly do not change decisions.",
+      "area": "PM",
+      "due": "2026-11-18",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N4-AS-14"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "Weekly note posted from UAT wave 1; at least one decision per fortnight traced to it.",
+      "checklist": [
+        "Define the review sheet",
+        "Run weekly from UAT",
+        "Log decisions"
+      ],
+      "layman": "Every week we look at how people actually use the app and decide what to change.",
+      "layman_analogy": "",
+      "layman_needed": "Weekly note posted from UAT wave 1; at least one decision per fortnight traced to it.",
+      "layman_output": "Weekly note posted from UAT wave 1; at least one decision per fortnight traced to it.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N6-SD-12",
+      "sprint": "N6",
+      "assignee": "Saad",
+      "title": "Release notes and in-app 'what's new' for every store build",
+      "what": "A changelog per store build in plain language, the in-app what's-new sheet on first open after update, and the store listing 'what's new' text cleared against the narrative rulebook (N2-FZ-01).",
+      "why": "Store updates without notes read as neglect; reviewers and users both look.",
+      "area": "PM",
+      "due": "2026-11-27",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "BL-APP-07"
+      ],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "Notes for the submission build and the first update; sheet implemented.",
+      "checklist": [
+        "Changelog format",
+        "In-app sheet",
+        "Rulebook check"
+      ],
+      "layman": "Every app update tells users what changed, in plain words.",
+      "layman_analogy": "",
+      "layman_needed": "Notes for the submission build and the first update; sheet implemented.",
+      "layman_output": "Notes for the submission build and the first update; sheet implemented.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N6-SD-13",
+      "sprint": "N6",
+      "assignee": "Saad",
+      "title": "Post-launch roadmap draft (Jan–Mar 2027): Discovery, web app return, Instagram, pricing tiers",
+      "what": "One page with Alex: the January Discovery build, when the web app returns, the Instagram second platform (BL-LA-15), team/agency roles, and the pricing-tier evolution; sequenced against the scale memo and the capacity we actually have.",
+      "why": "Investors, pilots and the team will ask 'what's next' on 15 December; the answer should exist on 27 November.",
+      "area": "PM",
+      "due": "2026-11-27",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "Roadmap page reviewed with Alex and Asad; linked from the tracker.",
+      "checklist": [
+        "Draft with Alex",
+        "Check against scale memo and capacity",
+        "Publish"
+      ],
+      "layman": "We write down what we build in the three months after launch, so everyone hears the same answer.",
+      "layman_analogy": "",
+      "layman_needed": "Roadmap page reviewed with Alex and Asad; linked from the tracker.",
+      "layman_output": "Roadmap page reviewed with Alex and Asad; linked from the tracker.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N3-AX-12",
+      "sprint": "N3",
+      "assignee": "Alex",
+      "title": "Company risk register: top ten risks, owner, mitigation, monthly review",
+      "what": "Meta approval, audience collapse, capacity, key-person, runway, store rejection, security incident, pilot churn, LLM vendor, legal exposure — each with likelihood, impact, owner, mitigation and trigger; reviewed monthly at the board (N3-AX-09) and feeding the readiness scorecard (N4-AX-01).",
+      "why": "Risks are discussed in every call and written nowhere.",
+      "area": "Launch management",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Register on the tracker; first monthly review minuted.",
+      "checklist": [
+        "List and score",
+        "Assign owners",
+        "Review monthly"
+      ],
+      "layman": "One list of the ten things most likely to hurt the company, who is watching each, and what we do about it.",
+      "layman_analogy": "",
+      "layman_needed": "Register on the tracker; first monthly review minuted.",
+      "layman_output": "Register on the tracker; first monthly review minuted.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N5-AX-11",
+      "sprint": "N5",
+      "assignee": "Alex",
+      "title": "Investor update #2 (mid-November): UAT evidence, store submission date, KPIs, asks",
+      "what": "Follow #1 (N3-AX-04): UAT status, model scorecard summary, store submission date, waitlist numbers, burn vs plan, the three asks. Same template, sent to the same list.",
+      "why": "A quiet founder before launch reads as a struggling one.",
+      "area": "Launch management",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N3-AX-04"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Update sent; replies logged.",
+      "checklist": [
+        "Draft",
+        "Review with Jill",
+        "Send"
+      ],
+      "layman": "A short progress letter to investors a month before launch.",
+      "layman_analogy": "",
+      "layman_needed": "Update sent; replies logged.",
+      "layman_output": "Update sent; replies logged.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.25,
+      "timebox_days": 0.25
+    },
+    {
+      "id": "LW-AX-06",
+      "sprint": "LW",
+      "assignee": "Alex",
+      "title": "Investor update #3 (launch week): what shipped, day-1 numbers, January plan, funding conversation opener",
+      "what": "Sent within 48 h of 15 Dec: what shipped, day-1/day-3 KPIs (N6-AX-04 baselines), store ratings, the Q1 roadmap, and the opener for the post-launch funding round (fundraising plan stays in backlog until Asad says go).",
+      "why": "The launch is the best moment to open the funding conversation without asking.",
+      "area": "Launch management",
+      "due": "2026-12-15",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "LW",
+      "source": "plan",
+      "acceptance": "Update sent by 17 Dec; at least three follow-up meetings requested.",
+      "checklist": [
+        "Draft on 15 Dec",
+        "Send by 17 Dec"
+      ],
+      "layman": "Right after launch we tell investors how it went and what comes next.",
+      "layman_analogy": "",
+      "layman_needed": "Update sent by 17 Dec; at least three follow-up meetings requested.",
+      "layman_output": "Update sent by 17 Dec; at least three follow-up meetings requested.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.25,
+      "timebox_days": 0.25
+    },
+    {
+      "id": "N6-AX-09",
+      "sprint": "N6",
+      "assignee": "Alex",
+      "title": "Q1 2027 OKRs and the post-launch hiring / contractor plan with budget",
+      "what": "Three objectives with measurable key results for Jan–Mar (activation, paying customers, Discovery beta), and the hiring/contractor plan the scale memo and roadmap need, costed against runway (N2-JL-11).",
+      "why": "The team needs a target after 15 December that is not 'survive'.",
+      "area": "Launch management",
+      "due": "2026-11-27",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "OKRs and plan signed with Jill; budget line in the forecast.",
+      "checklist": [
+        "Draft OKRs",
+        "Hiring plan and cost",
+        "Sign"
+      ],
+      "layman": "Goals for the first quarter after launch, and who we need to hire to hit them.",
+      "layman_analogy": "",
+      "layman_needed": "OKRs and plan signed with Jill; budget line in the forecast.",
+      "layman_output": "OKRs and plan signed with Jill; budget line in the forecast.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N3-FZ-21",
+      "sprint": "N3",
+      "assignee": "Filza",
+      "title": "Data-partner agreement with Lewis: data rights, training and Discovery use, exclusivity, exit",
+      "what": "Formalise the relationship behind the 15 pages: what data we may hold and for how long, training and Discovery use (N2-FZ-14), attribution, exclusivity, payment or equity if any, exit and deletion on termination; Alex signs.",
+      "why": "The company's model evidence sits on one partner's pages with no written agreement.",
+      "area": "Legal",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Signed agreement; deletion-on-exit path matches the retention schedule.",
+      "checklist": [
+        "Draft with Alex",
+        "Negotiate",
+        "Sign and file"
+      ],
+      "layman": "A proper contract with Lewis covering the pages our models learn from.",
+      "layman_analogy": "",
+      "layman_needed": "Signed agreement; deletion-on-exit path matches the retention schedule.",
+      "layman_output": "Signed agreement; deletion-on-exit path matches the retention schedule.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N3-JL-20",
+      "sprint": "N3",
+      "assignee": "Jill",
+      "title": "Financial controls: two-signatory payments, expense approval, monthly close and the payroll/contractor calendar",
+      "what": "Bank mandate with two signatories above a threshold, expense policy and approval flow (N3-JL-12), monthly close checklist with the accountant (N2-JL-13), and the payroll / contractor payment calendar.",
+      "why": "Controls are cheap before money moves and expensive after.",
+      "area": "Finance",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Mandate updated; policy signed; first monthly close done on time.",
+      "checklist": [
+        "Bank mandate",
+        "Expense policy",
+        "Close checklist",
+        "Payment calendar"
+      ],
+      "layman": "Basic money controls: two people approve payments, expenses have rules, the books close every month.",
+      "layman_analogy": "",
+      "layman_needed": "Mandate updated; policy signed; first monthly close done on time.",
+      "layman_output": "Mandate updated; policy signed; first monthly close done on time.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N4-JL-10",
+      "sprint": "N4",
+      "assignee": "Jill",
+      "title": "Company document register and data-room skeleton: contracts, policies, versions, owners",
+      "what": "One index of every signed contract, policy, legal document version and vendor DPA with owner and review date; the folder structure is the future data room (N5-AX-08).",
+      "why": "Investors and auditors ask for the same twenty documents; find them once.",
+      "area": "Finance",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Register complete; every document linked; review dates set.",
+      "checklist": [
+        "Build the index",
+        "Collect and link",
+        "Set review dates"
+      ],
+      "layman": "A single organised folder of all our important documents, ready for investors.",
+      "layman_analogy": "",
+      "layman_needed": "Register complete; every document linked; review dates set.",
+      "layman_output": "Register complete; every document linked; review dates set.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N4-JL-11",
+      "sprint": "N4",
+      "assignee": "Jill",
+      "title": "Staff data-protection and security awareness onboarding, with Filza",
+      "what": "A 45-minute session and a one-page acknowledgement for all eight: what personal data we hold, DSAR and breach reporting, phishing and MFA, acceptable use of AI tools with customer data (N2-FZ-03), device rules; repeat for every new joiner.",
+      "why": "ICO accountability and the security assessment both ask for it.",
+      "area": "Legal",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "All eight acknowledgements filed; joiner checklist updated.",
+      "checklist": [
+        "Write the session",
+        "Run it",
+        "File acknowledgements"
+      ],
+      "layman": "Everyone on the team learns the basic rules for handling customer data safely and signs to say so.",
+      "layman_analogy": "",
+      "layman_needed": "All eight acknowledgements filed; joiner checklist updated.",
+      "layman_output": "All eight acknowledgements filed; joiner checklist updated.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N5-JL-12",
+      "sprint": "N5",
+      "assignee": "Jill",
+      "title": "Business continuity plan: key-person cover, device loss, vendor failure, office-less operations",
+      "what": "For each critical function the deputy (N4-JL-06), the access they need, the vendor failover (email, paging, LLM, hosting), lost-laptop and compromised-account steps, and the launch-week variant; tested with one tabletop.",
+      "why": "The deputies exist; the plan that connects them does not.",
+      "area": "Ops",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N4-JL-06"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "BCP in the register; one tabletop run with actions closed.",
+      "checklist": [
+        "Write per function",
+        "Tabletop",
+        "Close actions"
+      ],
+      "layman": "A plan for keeping the company running if a person, a laptop or a supplier drops out.",
+      "layman_analogy": "",
+      "layman_needed": "BCP in the register; one tabletop run with actions closed.",
+      "layman_output": "BCP in the register; one tabletop run with actions closed.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N2-AS-22",
+      "sprint": "N2",
+      "assignee": "Asad",
+      "title": "Architecture decision records and the system diagram (C4 level 1–2), kept current",
+      "what": "Start the ADR log with the decisions already made (stack, tenancy, API split, mobile stack once N1-AS-20 lands, LLM routing) and a C4 context/container diagram of app, BFF, FastAPI, warehouse, vector store, queues and Meta; one ADR per future decision; diagram reviewed at each sprint end.",
+      "why": "New contractors and the security assessor both start from the diagram; today it lives in people's heads.",
+      "area": "Platform",
+      "due": "2026-10-02",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N2",
+      "source": "plan",
+      "acceptance": "ADR folder with ≥6 records; diagram in the repo; both linked from the contributor guide (N3-MT-23).",
+      "checklist": [
+        "Backfill ADRs",
+        "Draw C4 1–2",
+        "Link and schedule review"
+      ],
+      "layman": "We write down the big technical decisions and draw the system so anyone new can understand it.",
+      "layman_analogy": "",
+      "layman_needed": "ADR folder with ≥6 records; diagram in the repo; both linked from the contributor guide (N3-MT-23).",
+      "layman_output": "ADR folder with ≥6 records; diagram in the repo; both linked from the contributor guide (N3-MT-23).",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N3-AS-26",
+      "sprint": "N3",
+      "assignee": "Asad",
+      "title": "Engineering handbook: branching, code review, CI gates, release process, on-call expectations",
+      "what": "Extend the contributor guide (N3-MT-23) into the handbook: branch and PR rules, review SLAs, required CI gates (tests, contract tests, secrets, dependency scan, mobile suite), release and hotfix process per layer, environments, on-call expectations, and how a ticket moves on the board (DoD).",
+      "why": "Three contractors and two backend owners need the same rules or the freeze will not hold.",
+      "area": "Platform",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N3-MT-23"
+      ],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Handbook in the repo; CI gates enforced as branch protection; team acknowledged.",
+      "checklist": [
+        "Write",
+        "Enforce gates",
+        "Walk the team through it"
+      ],
+      "layman": "The rules of how we write, review, test and ship code, in one place.",
+      "layman_analogy": "",
+      "layman_needed": "Handbook in the repo; CI gates enforced as branch protection; team acknowledged.",
+      "layman_output": "Handbook in the repo; CI gates enforced as branch protection; team acknowledged.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N4-AS-30",
+      "sprint": "N4",
+      "assignee": "Asad",
+      "title": "Technical-debt register with a monthly review and a fixed share of each sprint",
+      "what": "Log every known shortcut (mock layers, temporary auth, single-region, manual steps) with cost-to-fix and risk; review monthly; reserve 10% of each sprint for the top items after launch.",
+      "why": "Debt taken to hit 15 December must be written down or it becomes the January outage.",
+      "area": "Platform",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Register live with owners; first monthly review held.",
+      "checklist": [
+        "Seed the register",
+        "Score",
+        "Schedule review"
+      ],
+      "layman": "A list of the shortcuts we took, so we pay them back deliberately.",
+      "layman_analogy": "",
+      "layman_needed": "Register live with owners; first monthly review held.",
+      "layman_output": "Register live with owners; first monthly review held.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N5-AS-26",
+      "sprint": "N5",
+      "assignee": "Asad",
+      "title": "Engineering metrics (DORA) on the war-room board and a weekly engineering review",
+      "what": "Deploy frequency, lead time, change-failure rate and MTTR from CI and the incident log (N2-JL-15), plus open P1/P2 and flaky-test count; a 20-minute weekly review with Muteeb, Faheem and Saad.",
+      "why": "You cannot steer a freeze without knowing how often changes fail.",
+      "area": "Platform",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N2-JL-15"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Panel live; weekly review minuted from N5.",
+      "checklist": [
+        "Wire the four metrics",
+        "Add defect and flake counts",
+        "Run weekly"
+      ],
+      "layman": "Four numbers that show how fast and how safely we ship, reviewed every week.",
+      "layman_analogy": "",
+      "layman_needed": "Panel live; weekly review minuted from N5.",
+      "layman_output": "Panel live; weekly review minuted from N5.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N4-AS-31",
+      "sprint": "N4",
+      "assignee": "Asad",
+      "title": "Access-control policy: least-privilege matrix for prod, warehouse and vendor consoles; quarterly access review",
+      "what": "Who may read/write what in production, the warehouse (N3-MT-21 roles), vector store, Meta app, stores and vendor consoles (N3-JL-13); joiner/leaver procedure; quarterly review (the first one is N1-JL-01's Rafeh check, made routine).",
+      "why": "The security assessment and the DPA both require it in writing.",
+      "area": "Platform",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "N3-JL-13"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Matrix signed; joiner/leaver checklist; first quarterly review scheduled.",
+      "checklist": [
+        "Draw the matrix",
+        "Joiner/leaver",
+        "Schedule the review"
+      ],
+      "layman": "A written rule of who can access which systems, checked every quarter.",
+      "layman_analogy": "",
+      "layman_needed": "Matrix signed; joiner/leaver checklist; first quarterly review scheduled.",
+      "layman_output": "Matrix signed; joiner/leaver checklist; first quarterly review scheduled.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N6-AS-14",
+      "sprint": "N6",
+      "assignee": "Asad",
+      "title": "Engineering onboarding checklist and the January hiring brief",
+      "what": "Day-one checklist for a new engineer or contractor (access per the matrix, handbook, ADRs, device setup, first ticket); the January hiring brief for the roles the scale memo and OKRs need, with interview loop.",
+      "why": "Post-launch hires start in January; a checklist written now saves the first fortnight.",
+      "area": "Platform",
+      "due": "2026-11-27",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "Checklist in the handbook; brief agreed with Alex.",
+      "checklist": [
+        "Checklist",
+        "Hiring brief",
+        "Interview loop"
+      ],
+      "layman": "Everything a new engineer needs on day one, and the job descriptions for January.",
+      "layman_analogy": "",
+      "layman_needed": "Checklist in the handbook; brief agreed with Alex.",
+      "layman_output": "Checklist in the handbook; brief agreed with Alex.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N4-FZ-14",
+      "sprint": "N4",
+      "assignee": "Filza",
+      "title": "App EULA and store terms: Apple standard EULA or custom, Play terms, age rating, in-app legal links",
+      "what": "Decide standard vs custom EULA per store, set the age rating and minimum age consistent with the children's-data position (N3-FZ-09), and specify where ToS, Privacy, Cookie and the EULA are linked in-app and in both listings.",
+      "why": "Both stores require it and reject listings that link to nothing.",
+      "area": "Legal",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "EULA decision filed; ratings set; links spec to Saad.",
+      "checklist": [
+        "EULA decision",
+        "Age rating",
+        "Links spec"
+      ],
+      "layman": "The licence and age rules the app stores require, and where the legal links live in the app.",
+      "layman_analogy": "",
+      "layman_needed": "EULA decision filed; ratings set; links spec to Saad.",
+      "layman_output": "EULA decision filed; ratings set; links spec to Saad.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N4-FZ-15",
+      "sprint": "N4",
+      "assignee": "Filza",
+      "title": "Acceptable Use Policy including AI-generated content, abuse and account suspension",
+      "what": "Permitted and prohibited use (harassment, spam, scraping, unlawful content, misuse of AI-drafted replies), reporting and suspension process, and the link to the takedown policy (N2-FZ-19); published with ToS.",
+      "why": "Suspending an abusive account without an AUP invites a claim.",
+      "area": "Legal",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "AUP published at a stable URL; referenced in ToS and the app.",
+      "checklist": [
+        "Draft",
+        "Review with Alex",
+        "Publish"
+      ],
+      "layman": "The rules of what users may and may not do with the app, so we can act on abuse.",
+      "layman_analogy": "",
+      "layman_needed": "AUP published at a stable URL; referenced in ToS and the app.",
+      "layman_output": "AUP published at a stable URL; referenced in ToS and the app.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N5-FZ-14",
+      "sprint": "N5",
+      "assignee": "Filza",
+      "title": "Push-notification consent: service vs marketing messages under PECR, wording and settings",
+      "what": "Classify every push (crisis alert, briefing, product news) as service or marketing; consent wording and default state for marketing pushes; settings copy for Saad (N3-AS-11); align with the waitlist consent (N2-FZ-08).",
+      "why": "Native push is a new channel; marketing pushes without consent breach PECR.",
+      "area": "Legal",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "Big-company completeness audit, 17 Sep",
+      "depends_on": [
+        "BL-APP-03"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Classification table and wording delivered; settings default agreed.",
+      "checklist": [
+        "Classify pushes",
+        "Consent wording",
+        "Settings copy"
+      ],
+      "layman": "We sort notifications into 'part of the service' and 'marketing' and only send marketing ones with permission.",
+      "layman_analogy": "",
+      "layman_needed": "Classification table and wording delivered; settings default agreed.",
+      "layman_output": "Classification table and wording delivered; settings default agreed.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 17 Sep (completeness audit); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added in the 17 Sep completeness audit (reliability, QA, AI/ML program, Discovery, mobile, leadership, legal)."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
     }
   ],
   "tracks": [
@@ -38501,12 +40908,13 @@ window.LAUNCH_DATA = {
             "N5-JL-09",
             "N1-MT-22",
             "N1-AS-18",
-            "N2-AS-21"
+            "N2-AS-21",
+            "N4-SD-17"
           ]
         },
         {
           "id": "design",
-          "name": "Design packs (web)",
+          "name": "Design packs (landing + phone app)",
           "what": "Product token mapping, shipped screen designs, shared states and design QA.",
           "owners": [
             "Alex",
@@ -38537,7 +40945,11 @@ window.LAUNCH_DATA = {
             "N5-SD-10",
             "N6-SD-10",
             "P0-SD-01",
-            "N2-SD-17"
+            "N2-SD-17",
+            "N5-SD-17",
+            "N3-SD-20",
+            "N1-SD-18",
+            "N2-SD-15"
           ]
         },
         {
@@ -38571,7 +40983,7 @@ window.LAUNCH_DATA = {
         },
         {
           "id": "web",
-          "name": "Web app development",
+          "name": "Product app development (cross-platform, one codebase)",
           "what": "App shell, Home, Drafts, Alerts, Art-E, connected pages, Settings and onboarding.",
           "owners": [
             "Alex",
@@ -38634,12 +41046,19 @@ window.LAUNCH_DATA = {
             "N4-AS-22",
             "N4-AS-23",
             "N4-AS-14",
-            "BL-APP-02"
+            "BL-APP-02",
+            "N4-AS-28",
+            "N4-SD-20",
+            "N4-AS-29",
+            "N1-SD-20",
+            "N2-SD-15",
+            "N2-SD-16",
+            "N1-AS-20"
           ]
         },
         {
           "id": "mobile",
-          "name": "Mobile app (iOS and Android)",
+          "name": "Store apps: shells, push, listing, submission",
           "what": "Native wrappers, push and store submission remain unscheduled backlog work.",
           "owners": [
             "Asad",
@@ -38661,7 +41080,20 @@ window.LAUNCH_DATA = {
             "BL-APP-05",
             "BL-APP-06",
             "BL-APP-07",
-            "BL-LL-24"
+            "BL-LL-24",
+            "N5-AS-24",
+            "N5-AS-25",
+            "N2-MT-23",
+            "N4-AS-29",
+            "N6-AS-13",
+            "N6-SD-12",
+            "N4-FZ-14",
+            "N5-FZ-14",
+            "N1-AS-20",
+            "N3-AS-25",
+            "N2-MT-22",
+            "N4-AS-26",
+            "BL-APP-02"
           ],
           "scope": "deferred"
         },
@@ -38707,7 +41139,8 @@ window.LAUNCH_DATA = {
             "P0-FH-20",
             "N2-MT-20",
             "N3-MT-23",
-            "N5-MT-23"
+            "N5-MT-23",
+            "N3-AS-25"
           ]
         },
         {
@@ -38874,7 +41307,11 @@ window.LAUNCH_DATA = {
             "N3-LW-09",
             "N4-FH-18",
             "BL-IN-22",
-            "BL-IN-23"
+            "BL-IN-23",
+            "N4-AS-27",
+            "N3-MT-26",
+            "N5-MT-24",
+            "N5-MT-25"
           ]
         },
         {
@@ -38931,7 +41368,29 @@ window.LAUNCH_DATA = {
             "N4-MT-24",
             "N4-MT-25",
             "N4-MT-26",
-            "N4-MT-28"
+            "N4-MT-28",
+            "N5-AS-22",
+            "N4-MT-31",
+            "N2-AS-22",
+            "N3-AS-26",
+            "N4-AS-30",
+            "N5-AS-26",
+            "N4-AS-31",
+            "N6-AS-14"
+          ]
+        },
+        {
+          "id": "mobile-engineering-qa-automation-performance-security-updates",
+          "name": "Mobile engineering: QA automation, performance, security, updates",
+          "tickets": [
+            "N4-SD-19",
+            "N5-AS-23",
+            "N4-SD-20",
+            "N5-AS-24",
+            "N5-SD-18",
+            "N4-MT-32",
+            "N6-SD-11",
+            "N4-SD-14"
           ]
         }
       ]
@@ -39009,7 +41468,9 @@ window.LAUNCH_DATA = {
             "N2-SD-04",
             "N2-FZ-01",
             "N2-FZ-07",
-            "N2-FZ-11"
+            "N2-FZ-11",
+            "N2-MT-23",
+            "N2-MT-22"
           ]
         },
         {
@@ -39260,7 +41721,8 @@ window.LAUNCH_DATA = {
             "N4-MT-21",
             "N3-JL-16",
             "N4-MT-23",
-            "N5-JL-10"
+            "N5-JL-10",
+            "N5-AS-22"
           ]
         },
         {
@@ -39300,7 +41762,10 @@ window.LAUNCH_DATA = {
             "N5-AX-08",
             "N5-JL-08",
             "N6-LW-07",
-            "N3-LW-10"
+            "N3-LW-10",
+            "N5-AX-11",
+            "LW-AX-06",
+            "N3-JL-20"
           ]
         }
       ]
@@ -39388,7 +41853,12 @@ window.LAUNCH_DATA = {
             "BL-LA-20",
             "BL-LA-21",
             "N1-JL-20",
-            "N1-AX-20"
+            "N1-AX-20",
+            "N6-SD-12",
+            "N1-AX-21",
+            "N4-SD-17",
+            "N3-AX-05",
+            "N4-AS-26"
           ]
         },
         {
@@ -39549,7 +42019,19 @@ window.LAUNCH_DATA = {
             "N4-JL-08",
             "N4-FZ-13",
             "BL-APP-05",
-            "BL-PR-15"
+            "BL-PR-15",
+            "N5-FZ-13",
+            "N5-AS-25",
+            "BL-LL-24",
+            "N3-FZ-21",
+            "N4-JL-10",
+            "N4-JL-11",
+            "N4-FZ-14",
+            "N4-FZ-15",
+            "N5-FZ-14",
+            "N2-FZ-18",
+            "N2-FZ-19",
+            "N5-FZ-12"
           ]
         },
         {
@@ -39591,7 +42073,8 @@ window.LAUNCH_DATA = {
             "N4-JL-06",
             "N4-JL-07",
             "N5-MT-22",
-            "N2-JL-15"
+            "N2-JL-15",
+            "N5-JL-12"
           ]
         },
         {
@@ -39626,7 +42109,13 @@ window.LAUNCH_DATA = {
             "P0-AX-01",
             "N1-AX-12",
             "N2-JL-08",
-            "N3-AX-09"
+            "N3-AX-09",
+            "N2-AX-18",
+            "N2-SD-22",
+            "N5-SD-19",
+            "N6-SD-13",
+            "N3-AX-12",
+            "N6-AX-09"
           ]
         },
         {
@@ -39698,7 +42187,32 @@ window.LAUNCH_DATA = {
             "N2-AX-12",
             "N2-FH-23",
             "N5-FH-09",
-            "BL-IN-24"
+            "BL-IN-24",
+            "N6-AS-13"
+          ]
+        },
+        {
+          "id": "leadership-cadence-ceo-coo-cto",
+          "name": "Leadership cadence: CEO, COO, CTO",
+          "tickets": [
+            "N2-SD-22",
+            "N5-SD-19",
+            "N6-SD-13",
+            "N3-AX-12",
+            "N5-AX-11",
+            "LW-AX-06",
+            "N6-AX-09",
+            "N3-FZ-21",
+            "N3-JL-20",
+            "N4-JL-10",
+            "N4-JL-11",
+            "N5-JL-12",
+            "N2-AS-22",
+            "N3-AS-26",
+            "N4-AS-30",
+            "N5-AS-26",
+            "N4-AS-31",
+            "N6-AS-14"
           ]
         }
       ]
@@ -39900,7 +42414,12 @@ window.LAUNCH_DATA = {
             "P0-FH-17",
             "P0-FH-18",
             "P0-FH-21",
-            "N3-AX-06"
+            "N3-AX-06",
+            "N2-FH-27",
+            "N2-AX-18",
+            "N3-FH-31",
+            "N4-FH-25",
+            "N5-FH-11"
           ]
         },
         {
@@ -39931,7 +42450,8 @@ window.LAUNCH_DATA = {
             "N3-MT-12",
             "N5-FH-04",
             "N5-MT-03",
-            "N5-LW-03"
+            "N5-LW-03",
+            "N5-FH-11"
           ]
         },
         {
@@ -39952,12 +42472,13 @@ window.LAUNCH_DATA = {
             "N2-SD-09",
             "P0-FH-26",
             "P0-MT-10",
-            "N3-FH-26"
+            "N3-FH-26",
+            "N3-FH-31"
           ]
         },
         {
           "id": "discovery",
-          "name": "Discovery matching",
+          "name": "Discovery — network collaboration program",
           "what": "Discovery matching is deferred; no December implementation commitment.",
           "owners": [
             "Asad",
@@ -39979,7 +42500,15 @@ window.LAUNCH_DATA = {
             "N4-MT-06",
             "N6-MT-04",
             "P0-AS-07",
-            "BL-IN-19"
+            "BL-IN-19",
+            "N3-FH-32",
+            "N4-FH-26",
+            "N4-SD-18",
+            "N5-SD-17",
+            "N5-FZ-13",
+            "BL-DS-01",
+            "BL-DS-02",
+            "BL-DS-03"
           ],
           "scope": "deferred"
         },
@@ -40055,7 +42584,11 @@ window.LAUNCH_DATA = {
             "BL-LL-23",
             "BL-LA-19",
             "BL-LA-21",
-            "BL-IN-23"
+            "BL-IN-23",
+            "BL-IN-12",
+            "N4-AS-27",
+            "N4-FH-27",
+            "N4-AS-28"
           ]
         },
         {
@@ -40095,6 +42628,25 @@ window.LAUNCH_DATA = {
             "P0-FH-27",
             "N4-MT-22",
             "BL-APP-07"
+          ]
+        },
+        {
+          "id": "ai-ml-quality-program-weekly-manual-review-scorecard-retraining",
+          "name": "AI/ML quality program: weekly manual review, scorecard, retraining",
+          "tickets": [
+            "N2-FH-25",
+            "N3-FH-27",
+            "N3-FH-28",
+            "N3-FH-29",
+            "N2-FH-26",
+            "N3-FH-30",
+            "N4-FH-24",
+            "N5-FH-10",
+            "N6-FH-08",
+            "LW-FH-02",
+            "N2-FH-27",
+            "N3-FH-31",
+            "N4-FH-25"
           ]
         }
       ]
@@ -40183,7 +42735,14 @@ window.LAUNCH_DATA = {
             "LW-MT-02",
             "N2-MT-20",
             "N3-JL-16",
-            "N3-AS-24"
+            "N3-AS-24",
+            "N3-FH-27",
+            "N3-FH-28",
+            "N3-MT-26",
+            "N5-MT-24",
+            "N4-MT-31",
+            "N5-AS-23",
+            "N5-AS-26"
           ]
         },
         {
@@ -40274,7 +42833,21 @@ window.LAUNCH_DATA = {
             "N4-FH-18",
             "N4-FH-23",
             "BL-IN-20",
-            "BL-IN-23"
+            "BL-IN-23",
+            "N2-FH-25",
+            "N3-FH-27",
+            "N3-FH-28",
+            "N3-FH-29",
+            "N2-FH-26",
+            "N3-FH-30",
+            "N4-FH-24",
+            "N5-FH-10",
+            "N6-FH-08",
+            "LW-FH-02",
+            "N2-FH-27",
+            "N4-FH-25",
+            "N4-FH-26",
+            "N4-SD-18"
           ]
         },
         {
@@ -40317,7 +42890,10 @@ window.LAUNCH_DATA = {
             "BL-LL-21",
             "BL-LL-22",
             "N4-FH-13",
-            "N4-FH-21"
+            "N4-FH-21",
+            "N4-AS-27",
+            "N4-FH-27",
+            "N4-MT-31"
           ]
         },
         {
@@ -40365,7 +42941,13 @@ window.LAUNCH_DATA = {
             "N6-AS-05",
             "N3-AS-21",
             "N4-AS-23",
-            "BL-IN-22"
+            "BL-IN-22",
+            "N4-SD-19",
+            "N5-AS-23",
+            "N5-SD-18",
+            "N3-SD-20",
+            "N4-SD-14",
+            "N5-FZ-12"
           ]
         },
         {
@@ -40407,7 +42989,12 @@ window.LAUNCH_DATA = {
             "N3-MT-25",
             "N4-MT-25",
             "N4-MT-26",
-            "N5-MT-23"
+            "N5-MT-23",
+            "N3-MT-26",
+            "N5-MT-25",
+            "N2-MT-23",
+            "N4-MT-32",
+            "N4-AS-31"
           ]
         },
         {
@@ -40485,56 +43072,56 @@ window.LAUNCH_DATA = {
     "owners": [
       {
         "owner": "Asad",
-        "tickets": 57,
+        "tickets": 73,
         "focus_rate": 0.6,
-        "effort_days": 91.31,
+        "effort_days": 101.56,
         "capacity_days": 38.4,
-        "gap_days": 52.91,
+        "gap_days": 63.16,
         "capacity_at_hard_limit": 38.4
       },
       {
         "owner": "Muteeb",
-        "tickets": 78,
+        "tickets": 85,
         "focus_rate": 0.7,
-        "effort_days": 130.53,
+        "effort_days": 137.03,
         "capacity_days": 44.8,
-        "gap_days": 85.73,
+        "gap_days": 92.23,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Faheem",
-        "tickets": 73,
+        "tickets": 93,
         "focus_rate": 0.7,
-        "effort_days": 114.63,
+        "effort_days": 136.13,
         "capacity_days": 44.8,
-        "gap_days": 69.83,
+        "gap_days": 91.33,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Saad",
-        "tickets": 122,
+        "tickets": 133,
         "focus_rate": 0.7,
-        "effort_days": 132.75,
+        "effort_days": 140,
         "capacity_days": 44.8,
-        "gap_days": 87.95,
+        "gap_days": 95.2,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Alex",
-        "tickets": 71,
+        "tickets": 76,
         "focus_rate": 0.4,
-        "effort_days": 49.98,
+        "effort_days": 51.73,
         "capacity_days": 25.6,
-        "gap_days": 24.38,
+        "gap_days": 26.13,
         "capacity_at_hard_limit": 25.6
       },
       {
         "owner": "Jill",
-        "tickets": 76,
+        "tickets": 80,
         "focus_rate": 0.6,
-        "effort_days": 50.81,
+        "effort_days": 53.31,
         "capacity_days": 38.4,
-        "gap_days": 12.41,
+        "gap_days": 14.91,
         "capacity_at_hard_limit": 38.4
       },
       {
@@ -40548,15 +43135,15 @@ window.LAUNCH_DATA = {
       },
       {
         "owner": "Filza",
-        "tickets": 66,
+        "tickets": 73,
         "focus_rate": 0.5,
-        "effort_days": 58.75,
+        "effort_days": 62.75,
         "capacity_days": 32,
-        "gap_days": 26.75,
+        "gap_days": 30.75,
         "capacity_at_hard_limit": 32
       }
     ],
-    "total_effort_days": 629.25,
+    "total_effort_days": 683,
     "total_capacity_days": 268.8
   },
   "ticket_audit": {
@@ -43734,6 +46321,99 @@ window.LAUNCH_DATA = {
     "parked_web_only": [
       "N4-AS-23"
     ],
-    "note": "BL-APP-02 assumed a Capacitor shell around the Next.js build; the stack is re-decided in N1-AS-20. Backend, APIs, ML, alerts pipeline, legal and marketing tickets are unchanged."
+    "note": "BL-APP-02 assumed a Capacitor shell around the Next.js build; the stack is re-decided in N1-AS-20. Backend, APIs, ML, alerts pipeline, legal and marketing tickets are unchanged.",
+    "completeness_audit_17sep": {
+      "added": [
+        "N2-FH-25",
+        "N3-FH-27",
+        "N3-FH-28",
+        "N3-FH-29",
+        "N2-FH-26",
+        "N3-FH-30",
+        "N4-FH-24",
+        "N5-FH-10",
+        "N6-FH-08",
+        "LW-FH-02",
+        "N2-FH-27",
+        "N2-AX-18",
+        "N3-FH-31",
+        "N4-FH-25",
+        "N5-FH-11",
+        "N3-FH-32",
+        "N4-FH-26",
+        "N4-SD-18",
+        "N5-SD-17",
+        "N5-FZ-13",
+        "BL-DS-01",
+        "BL-DS-02",
+        "BL-DS-03",
+        "N4-AS-27",
+        "N4-FH-27",
+        "N4-AS-28",
+        "N3-MT-26",
+        "N5-MT-24",
+        "N5-AS-22",
+        "N4-MT-31",
+        "N5-MT-25",
+        "N4-SD-19",
+        "N5-AS-23",
+        "N4-SD-20",
+        "N5-AS-24",
+        "N5-SD-18",
+        "N5-AS-25",
+        "N2-MT-23",
+        "N4-MT-32",
+        "N4-AS-29",
+        "N6-AS-13",
+        "N6-SD-11",
+        "N2-SD-22",
+        "N3-SD-20",
+        "N5-SD-19",
+        "N6-SD-12",
+        "N6-SD-13",
+        "N3-AX-12",
+        "N5-AX-11",
+        "LW-AX-06",
+        "N6-AX-09",
+        "N3-FZ-21",
+        "N3-JL-20",
+        "N4-JL-10",
+        "N4-JL-11",
+        "N5-JL-12",
+        "N2-AS-22",
+        "N3-AS-26",
+        "N4-AS-30",
+        "N5-AS-26",
+        "N4-AS-31",
+        "N6-AS-14",
+        "N4-FZ-14",
+        "N4-FZ-15",
+        "N5-FZ-14"
+      ],
+      "promoted": [
+        "N2-FH-19",
+        "N2-AS-14",
+        "N1-FZ-04",
+        "N2-FH-18",
+        "N3-AS-15",
+        "BL-IN-12",
+        "BL-IN-22",
+        "BL-LL-24"
+      ],
+      "lanes_renamed": {
+        "Design packs (web)": "Design packs (landing + phone app)",
+        "Web app development": "Product app development (cross-platform, one codebase)",
+        "Mobile app (iOS and Android)": "Store apps: shells, push, listing, submission",
+        "Discovery matching": "Discovery — network collaboration program"
+      },
+      "lanes_added": [
+        "Mobile engineering: QA automation, performance, security, updates",
+        "AI/ML quality program: weekly manual review, scorecard, retraining",
+        "Leadership cadence: CEO, COO, CTO"
+      ],
+      "feature_added": "aiquality",
+      "rule": "No ticket marked done by Muteeb, Faheem or Saad was changed; statuses untouched; edits are additions, lane wiring and open-ticket text only.",
+      "saad_design_scope": "Phone-app packs and the landing page only; no web/desktop product screens (N1-SD-05/07/09/10, N2-SD-15 annotated)."
+    }
   }
 };
