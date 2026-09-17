@@ -15272,9 +15272,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-AS-09",
       "sprint": "N4",
-      "assignee": "Asad",
+      "assignee": "Lewis",
       "title": "Record a screencast per permission; freeze consent UI; co-sign",
-      "what": "For each permission on the scope list locked in N1-FZ-06, record login -> permission prompt -> grant -> the feature working, on the host registered as the app's domain in the dashboard (production, or staging only if that exact host is registered and reachable by a reviewer), from a fresh reviewer account rather than a signed-in session. Include one clip showing disconnect and data deletion, since reviewers probe the deletion claim. Tag each clip to the permission-to-feature map, then freeze the consent-screen and connect UI - any change re-opens recording - and co-sign the package with the Meta owner by 1 Oct after Filza's firewall review. Note: N2-AS-03 now finishes on 2026-10-12 after the 16 Sep balancing, so this fixed-date item goes ahead with what exists by then. Note: N2-AS-04 now finishes on 2026-10-14 after the 16 Sep balancing, so this fixed-date item goes ahead with what exists by then. Note: N2-AS-05 now finishes on 2026-10-21 after the 16 Sep balancing, so this fixed-date item goes ahead with what exists by then. Note: N2-AS-08 now finishes on 2026-10-15 after the 16 Sep balancing, so this fixed-date item goes ahead with what exists by then.",
+      "what": "For each permission on the scope list locked in N1-FZ-06, record login -> permission prompt -> grant -> the feature working, on the host registered as the app's domain in the dashboard (production, or staging only if that exact host is registered and reachable by a reviewer), from a fresh reviewer account rather than a signed-in session. Include one clip showing disconnect and data deletion, since reviewers probe the deletion claim. Tag each clip to the permission-to-feature map, then freeze the consent-screen and connect UI - any change re-opens recording - and co-sign the package with the Meta owner after the working connection and Filza's claims review.",
       "why": "Mismatched screencast-vs-UI is a top rejection reason; SUBMIT is Fri 2 Oct and only one safe rejection cycle exists.",
       "area": "Meta",
       "due": "2026-10-29",
@@ -15311,7 +15311,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "effort_allocations": {
+        "Lewis": 0.5,
+        "Asad": 0.5
+      },
+      "delivery_lead": "Lewis",
+      "reviewers": [
+        "Asad"
+      ],
+      "workload_note": "Lewis records the scripted customer journey on approved test accounts; Asad verifies permission coverage and freezes the implemented UI. Lewis does not change auth or permission configuration. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
     },
     {
       "id": "N2-AS-10",
@@ -17000,7 +17009,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-SD-04",
       "sprint": "N4",
-      "assignee": "Saad",
+      "assignee": "Alex",
       "title": "Prepare Meta review from a working connection demo",
       "what": "After the Meta connection, permissions and data-removal flow work, show what the app actually does. Assemble the evidence the current Meta dashboard asks for with Asad, Muteeb and Filza.",
       "why": "External reviewers need a working, truthful demonstration before customer access can be approved.",
@@ -17041,7 +17050,20 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-17T12:00:00Z"
+      "checklist_revised_at": "2026-09-17T12:00:00Z",
+      "effort_allocations": {
+        "Alex": 1,
+        "Saad": 0.5,
+        "Asad": 0.25,
+        "Filza": 0.25
+      },
+      "delivery_lead": "Alex",
+      "reviewers": [
+        "Saad",
+        "Asad",
+        "Filza"
+      ],
+      "workload_note": "Alex assembles the submission evidence; Saad retains the Meta submission, Asad confirms the working journey and Filza approves claims. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
     },
     {
       "id": "N2-SD-06",
@@ -19082,7 +19104,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-FH-09",
       "sprint": "N4",
-      "assignee": "Faheem",
+      "assignee": "Lewis",
       "title": "Review golden set v1 from Saad + Lewis; list coverage gaps for the 200",
       "what": "Load Lewis and Saad's v1 (20 gate questions plus ~100) into the regression harness, check every row against the sheet format and provenance rules, and publish the coverage-gap list (per surface, per must-refuse category, qualitative-claim grounding, memory recall) that Lewis fills to reach 200 in N4-LW-03.",
       "why": "The 200-question citation gate cannot be built in N4 without questions arriving in N3.",
@@ -19122,7 +19144,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "effort_allocations": {
+        "Lewis": 0.5,
+        "Faheem": 0.5
+      },
+      "delivery_lead": "Lewis",
+      "reviewers": [
+        "Faheem"
+      ],
+      "workload_note": "Lewis assembles question coverage and missing customer scenarios; Faheem decides evaluation validity and technical coverage gaps. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
     },
     {
       "id": "N3-FH-12",
@@ -24063,7 +24094,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "effort_allocations": {
+        "Muteeb": 1.5,
+        "Alex": 0.5
+      },
+      "delivery_lead": "Muteeb",
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Muteeb implements the monitoring view and writes technical recovery steps. Alex assembles the failure table, roles and communication links from those instructions; technical acceptance stays with Muteeb. All preparation and specialist effort is reserved; owner availability remains unconfirmed."
     },
     {
       "id": "N5-MT-07",
@@ -24109,7 +24149,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-MT-09",
       "sprint": "N6",
-      "assignee": "Muteeb",
+      "assignee": "Alex",
       "title": "Readiness review #1 evidence: drills, load, pen-test, zero P1",
       "what": "Assemble Muteeb's evidence for the Wed 18 Nov 2026 review: drill receipts, load writeup, pen-test closure, and the open platform P1 list at zero; every amber leaves with an owner and date.",
       "why": "The review is the dress rehearsal for go/no-go and reads artifacts, not opinions.",
@@ -24147,7 +24187,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "effort_allocations": {
+        "Alex": 0.25,
+        "Muteeb": 0.25
+      },
+      "delivery_lead": "Alex",
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Alex assembles the review pack and chases missing links; Muteeb validates the platform results and unresolved defects. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
     },
     {
       "id": "N5-MT-11",
@@ -24579,7 +24628,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-SD-06",
       "sprint": "LW",
-      "assignee": "Saad",
+      "assignee": "Alex",
       "title": "Write launch runbook v1",
       "what": "Go-live checklist, rollback triggers, war-room roles (commander not hands-on-keyboard), kill-switch locations placeholder, Meta branch (Live vs dev-mode fallback).",
       "why": "Pre-decided decisions are the only kind that work at 8am on launch day.",
@@ -24618,7 +24667,18 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "effort_allocations": {
+        "Alex": 0.5,
+        "Saad": 0.25,
+        "Muteeb": 0.25
+      },
+      "delivery_lead": "Alex",
+      "reviewers": [
+        "Saad",
+        "Muteeb"
+      ],
+      "workload_note": "Alex assembles launch roles and the run-of-show; Saad signs product gates and Muteeb validates rollback instructions. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
     },
     {
       "id": "N5-SD-08",
@@ -26288,7 +26348,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "effort_allocations": {
+        "Asad": 0.5,
+        "Alex": 0.5
+      },
+      "delivery_lead": "Asad",
+      "reviewers": [
+        "Alex"
+      ],
+      "workload_note": "Asad enforces the code freeze and signs engineering evidence; Alex collects the existing evidence links into the release memo. All preparation and specialist effort is reserved; owner availability remains unconfirmed."
     },
     {
       "id": "N6-FH-01",
@@ -26695,7 +26764,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N6-MT-08",
       "sprint": "LW",
-      "assignee": "Muteeb",
+      "assignee": "Alex",
       "title": "Prepare platform evidence for the 7 December code freeze",
       "what": "Enforce code freeze (blockers only via the emergency protocol) and put monitoring, on-call, backup, rollback and load evidence into the go/no-go memo slots.",
       "why": "The platform goes quiet on purpose; the memo is read item by item with evidence.",
@@ -26732,7 +26801,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "effort_allocations": {
+        "Alex": 0.25,
+        "Muteeb": 0.25
+      },
+      "delivery_lead": "Alex",
+      "reviewers": [
+        "Muteeb"
+      ],
+      "workload_note": "Alex fills the go/no-go evidence slots; Muteeb enforces the technical freeze and attests to the evidence. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
     },
     {
       "id": "N6-MT-09",
@@ -26861,7 +26939,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N6-SD-03",
       "sprint": "N6",
-      "assignee": "Saad",
+      "assignee": "Lewis",
       "title": "Docs screenshots from the frozen build + final copy audit",
       "what": "Capture docs screenshots from the frozen beta build and audit all public copy: the Tue 1 Dec 2026 private beta and Tue 15 Dec 2026 public launch dates everywhere, founding-pricing terms match landing and invoices, legal links, AI labels.",
       "why": "Everything public must match everything real.",
@@ -26896,7 +26974,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "effort_allocations": {
+        "Lewis": 0.25,
+        "Saad": 0.25
+      },
+      "delivery_lead": "Lewis",
+      "reviewers": [
+        "Saad"
+      ],
+      "workload_note": "Lewis captures screenshots and checks links and dates; Saad approves visual and product accuracy. Legal wording is reused from approved documents. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
     },
     {
       "id": "N6-SD-04",
@@ -26985,7 +27072,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N6-SD-06",
       "sprint": "N6",
-      "assignee": "Saad",
+      "assignee": "Alex",
       "title": "Daily defect triage log public; zero-P1 evidence for go/no-go",
       "what": "Triage daily vs blocker criteria with a public log; deliver the acceptance register and UAT evidence to Alex's memo.",
       "why": "The Fri 27 Nov 2026 memo needs zero P1 with evidence.",
@@ -27020,7 +27107,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "effort_allocations": {
+        "Alex": 0.5,
+        "Saad": 0.5
+      },
+      "delivery_lead": "Alex",
+      "reviewers": [
+        "Saad"
+      ],
+      "workload_note": "Alex maintains the decision/defect log and escalates blockers; Saad validates product acceptance and UAT evidence. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
     },
     {
       "id": "N6-SD-08",
@@ -32076,7 +32172,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-JL-08",
       "sprint": "N3",
-      "assignee": "Jill",
+      "assignee": "Alex",
       "title": "Own the design-direction log: disputes and cut decisions recorded and closed",
       "what": "Keep one log of every question or disagreement about the 14 Sep direction (which screen stays, which feature goes, which wording), the decision and who made it. Jill arbitrates or takes it to Alex, and closes each item in writing within the week. The log feeds the Friday scope hammer (N2-AX-02) and the cut-line reviews. Kept in the launch plan in the 16 Sep balancing because N2-SD-21 depends on it.",
       "why": "Alex (14 Sep): refer questions or disagreements about direction to Jill; without a log, the same argument is had three times.",
@@ -32108,7 +32204,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "effort_allocations": {
+        "Alex": 0.75,
+        "Jill": 0.25
+      },
+      "delivery_lead": "Alex",
+      "reviewers": [
+        "Jill"
+      ],
+      "workload_note": "Alex resolves product-direction decisions and maintains their outcomes; Jill checks follow-up and unresolved age in the existing team board. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
     },
     {
       "id": "N3-SD-14",
@@ -33163,7 +33268,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-FZ-14",
       "sprint": "N5",
-      "assignee": "Filza",
+      "assignee": "Jill",
       "title": "Company asset register and open-source licence inventory",
       "what": "Register showing that the domains, the Meta app and Business Manager, AWS, GitHub, Netlify, Apple and Google developer accounts and the trademark filings are owned by the Ltd, not individuals, with a named admin each; plus an open-source licence inventory of both repositories with copyleft flagged. IP assignments themselves are N2-FZ-13. Builds on N1-FZ-01, N2-FZ-09, N5-AS-16, N1-JL-01. No longer waits on N2-FZ-09 (parked in the 16 Sep balancing).",
       "why": "Investor due diligence starts with who owns the models and code; one missing assignment stalls a term sheet. (CEO-lens review, 15 Sep.)",
@@ -33199,12 +33304,23 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident."
+      "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident.",
+      "effort_allocations": {
+        "Jill": 0.5,
+        "Filza": 0.25,
+        "Asad": 0.25
+      },
+      "delivery_lead": "Jill",
+      "reviewers": [
+        "Filza",
+        "Asad"
+      ],
+      "workload_note": "Jill collects company asset and account ownership records; Asad supplies repository licence evidence; Filza interprets licences and approves legal ownership conclusions. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
     },
     {
       "id": "N3-JL-12",
       "sprint": "N4",
-      "assignee": "Jill",
+      "assignee": "Alex",
       "title": "Spend-approval policy and vendor commitment register",
       "what": "One page: who may commit spend at which threshold, dual authorisation on bank payments above a limit, company-card holders and monthly card reconciliation, expense rules. Alongside it a register of every paid vendor (AWS, LLM tiers, auth vendor, Pinecone, Netlify, SES, Sentry, status page, paging, waitlist, insurers, accountant): plan, monthly cost, billing owner, renewal and notice dates, committed spend, DPA status. Builds on N1-JL-02, N4-MT-02, N6-MT-09. Kept in the launch plan in the 16 Sep balancing because N3-FZ-19 depends on it.",
       "why": "Tool-buy memos cover four tools; nobody holds renewal dates, commitments or a rule for new spend. (CFO-lens review, 15 Sep.)",
@@ -33237,7 +33353,16 @@ window.LAUNCH_DATA = {
       "audit": {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
-      }
+      },
+      "effort_allocations": {
+        "Alex": 0.25,
+        "Jill": 0.25
+      },
+      "delivery_lead": "Alex",
+      "reviewers": [
+        "Jill"
+      ],
+      "workload_note": "Alex owns spending approval limits and decisions; Jill maintains vendor commitments and checks the financial records. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
     },
     {
       "id": "N3-FZ-15",
@@ -33560,7 +33685,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-JL-08",
       "sprint": "N5",
-      "assignee": "Jill",
+      "assignee": "Alex",
       "title": "Launch marketing scoreboard: top of funnel beside the activation panel",
       "what": "One board (sheet or war-room panel) read at the 09:00 checkpoint and hourly on the public launch day, Tue 15 Dec 2026: site visits and waitlist signups by UTM source, landing conversion rate, PH rank, upvotes and comments, waitlist to admitted to connected, with day-1 targets set beforehand (signups, PH placing, connected pages). Sources: GA behind consent, the waitlist tool export, the PH page and the N5-MT-06 funnel panel. Builds on N4-SD-01, N4-AX-05, N5-MT-06, BL-LA-04. No longer waits on N5-MT-06 (parked in the 16 Sep balancing).",
       "why": "The war room reads uptime and activation only; nobody will know which channel worked or whether PH is on track. (CMO-lens review, 15 Sep.)",
@@ -33594,7 +33719,13 @@ window.LAUNCH_DATA = {
         "decision": "retain",
         "reason": "Retain distinct launch deliverable or evidence gate; dependency integrity checked, estimate and completion require owner confirmation."
       },
-      "checklist_revised_at": "2026-09-16T12:15:43.591Z"
+      "checklist_revised_at": "2026-09-16T12:15:43.591Z",
+      "effort_allocations": {
+        "Alex": 0.5
+      },
+      "delivery_lead": "Alex",
+      "reviewers": [],
+      "workload_note": "Alex owns the marketing scoreboard, targets and channel decisions, using existing analytics exports; no new engineering dashboard is commissioned. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
     },
     {
       "id": "N5-JL-09",
@@ -35631,7 +35762,7 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-FZ-19",
       "sprint": "N3",
-      "assignee": "Filza",
+      "assignee": "Jill",
       "title": "Complete vendor security evidence in the existing register",
       "what": "Add rated security evidence and review dates for every subprocessor in the existing vendor register. Retain gaps and required actions. Enterprise questionnaire answer banks and SOC 2 gap projects remain deferred.",
       "why": "The DPA lists sub-processors but nobody has checked their security; agencies will send questionnaires at launch and SOC 2 sits unplanned in Phase 2. (16 Sep research: security-reliability.)",
@@ -35663,7 +35794,18 @@ window.LAUNCH_DATA = {
         "reason": "Align the ticket with the existing launch scope; preserve the shipped feature checks."
       },
       "checklist_revised_at": "2026-09-16T12:15:43.591Z",
-      "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident."
+      "applicability_note": "Planned legal work: confirm actual product/data facts and applicability. This ticket does not claim an existing integration, registration, approval or past incident.",
+      "effort_allocations": {
+        "Jill": 0.5,
+        "Filza": 0.25,
+        "Muteeb": 0.25
+      },
+      "delivery_lead": "Jill",
+      "reviewers": [
+        "Filza",
+        "Muteeb"
+      ],
+      "workload_note": "Jill collects current vendor evidence in the existing register; Muteeb assesses technical gaps and Filza signs the data/vendor implications. The ticket is complete only after the named specialist review. Work and review effort are both reserved; this is a proposed allocation, not confirmed availability."
     },
     {
       "id": "N3-SD-19",
@@ -38998,86 +39140,86 @@ window.LAUNCH_DATA = {
     "planning_note": "All previously planned delivery and business work is visible again. Tasks are plans, not claims of completed integrations or approvals. No broad scope deletion is authorised. Launch remains 15 December; workload estimates are not a delivery guarantee."
   },
   "capacity_review": {
-    "as_of": "2026-09-16",
+    "as_of": "2026-09-17",
     "target": "2026-12-15",
     "hard_limit": "2026-12-15",
     "basis": "Audited scope with inherited estimates and focus rates, including allocated reviewer effort; excludes deferred/merged work and recorded done/Phase 0. Shared-board status snapshot 2026-09-16T12:15:43.591Z applied; remaining effort, leave and availability still require owner confirmation. No new hires, overtime or assumed external counsel. Weekends add no capacity.",
     "owners": [
       {
         "owner": "Asad",
-        "tickets": 82,
+        "tickets": 81,
         "focus_rate": 0.6,
-        "effort_days": 113.25,
-        "capacity_days": 39,
-        "gap_days": 74.25,
-        "capacity_at_hard_limit": 39
+        "effort_days": 112.75,
+        "capacity_days": 38.4,
+        "gap_days": 74.35,
+        "capacity_at_hard_limit": 38.4
       },
       {
         "owner": "Muteeb",
-        "tickets": 101,
+        "tickets": 99,
         "focus_rate": 0.7,
-        "effort_days": 157.25,
-        "capacity_days": 45.5,
-        "gap_days": 111.75,
-        "capacity_at_hard_limit": 45.5
+        "effort_days": 156.75,
+        "capacity_days": 44.8,
+        "gap_days": 111.95,
+        "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Faheem",
-        "tickets": 61,
+        "tickets": 60,
         "focus_rate": 0.7,
-        "effort_days": 97.75,
-        "capacity_days": 45.5,
-        "gap_days": 52.25,
-        "capacity_at_hard_limit": 45.5
+        "effort_days": 97.25,
+        "capacity_days": 44.8,
+        "gap_days": 52.45,
+        "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Saad",
-        "tickets": 74,
+        "tickets": 70,
         "focus_rate": 0.7,
-        "effort_days": 76.5,
-        "capacity_days": 45.5,
-        "gap_days": 31,
-        "capacity_at_hard_limit": 45.5
+        "effort_days": 73.5,
+        "capacity_days": 44.8,
+        "gap_days": 28.7,
+        "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Alex",
-        "tickets": 45,
+        "tickets": 53,
         "focus_rate": 0.4,
-        "effort_days": 24.5,
-        "capacity_days": 26,
-        "gap_days": 0,
-        "capacity_at_hard_limit": 26
+        "effort_days": 29.5,
+        "capacity_days": 25.6,
+        "gap_days": 3.9,
+        "capacity_at_hard_limit": 25.6
       },
       {
         "owner": "Jill",
-        "tickets": 62,
+        "tickets": 61,
         "focus_rate": 0.6,
-        "effort_days": 42,
-        "capacity_days": 39,
-        "gap_days": 3,
-        "capacity_at_hard_limit": 39
+        "effort_days": 41.5,
+        "capacity_days": 38.4,
+        "gap_days": 3.1,
+        "capacity_at_hard_limit": 38.4
       },
       {
         "owner": "Lewis",
-        "tickets": 40,
+        "tickets": 43,
         "focus_rate": 0.6,
-        "effort_days": 38,
-        "capacity_days": 39,
-        "gap_days": 0,
-        "capacity_at_hard_limit": 39
+        "effort_days": 39.25,
+        "capacity_days": 38.4,
+        "gap_days": 0.85,
+        "capacity_at_hard_limit": 38.4
       },
       {
         "owner": "Filza",
-        "tickets": 64,
+        "tickets": 62,
         "focus_rate": 0.5,
-        "effort_days": 57,
-        "capacity_days": 32.5,
-        "gap_days": 24.5,
-        "capacity_at_hard_limit": 32.5
+        "effort_days": 55.75,
+        "capacity_days": 32,
+        "gap_days": 23.75,
+        "capacity_at_hard_limit": 32
       }
     ],
     "total_effort_days": 606.25,
-    "total_capacity_days": 312
+    "total_capacity_days": 307.2
   },
   "ticket_audit": {
     "as_of": "2026-09-17",
@@ -40110,5 +40252,284 @@ window.LAUNCH_DATA = {
       "Inherited effort estimates and third-party approvals are unconfirmed.",
       "Conditional work remains visible and reserved in workload totals until an explicit decision is recorded."
     ]
+  },
+  "workload_review": {
+    "as_of": "2026-09-17",
+    "roles": {
+      "Asad": "Technical lead, full stack, frontend integration and engineering review",
+      "Muteeb": "Backend, APIs, infrastructure, tenant isolation and production operations",
+      "Faheem": "AI/ML, evaluations, model serving contracts and data quality",
+      "Saad": "Product design, acceptance, frontend components and usability",
+      "Alex": "Vision, commercial decisions, marketing, scope and release coordination",
+      "Jill": "Finance, operational records, procurement and team coordination",
+      "Lewis": "Pilot customers, research, customer walkthroughs and support",
+      "Filza": "Legal interpretation, terms, data protection and legal sign-off"
+    },
+    "role_basis": "Inferred from existing assignments and shared context; owner availability and additional technical skills are not confirmed.",
+    "policy": "One primary delivery item per person. Pull only after required input evidence exists; use mock contracts for preparation, never as live acceptance. Reserve specialist review and do not create parallel boards.",
+    "changes": [
+      {
+        "id": "N5-MT-09",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Alex assembles the review pack and chases missing links; Muteeb validates the platform results and unresolved defects."
+      },
+      {
+        "id": "N6-MT-08",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Alex fills the go/no-go evidence slots; Muteeb enforces the technical freeze and attests to the evidence."
+      },
+      {
+        "id": "N6-SD-06",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.5,
+            "Saad": 0.5
+          }
+        },
+        "handoff": "Alex maintains the decision/defect log and escalates blockers; Saad validates product acceptance and UAT evidence."
+      },
+      {
+        "id": "N5-SD-06",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.5,
+            "Saad": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Alex assembles launch roles and the run-of-show; Saad signs product gates and Muteeb validates rollback instructions."
+      },
+      {
+        "id": "N2-SD-04",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 2
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 1,
+            "Saad": 0.5,
+            "Asad": 0.25,
+            "Filza": 0.25
+          }
+        },
+        "handoff": "Alex assembles the submission evidence; Saad retains the Meta submission, Asad confirms the working journey and Filza approves claims."
+      },
+      {
+        "id": "N2-AS-09",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5,
+            "Asad": 0.5
+          }
+        },
+        "handoff": "Lewis records the scripted customer journey on approved test accounts; Asad verifies permission coverage and freezes the implemented UI. Lewis does not change auth or permission configuration."
+      },
+      {
+        "id": "N6-SD-03",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.25,
+            "Saad": 0.25
+          }
+        },
+        "handoff": "Lewis captures screenshots and checks links and dates; Saad approves visual and product accuracy. Legal wording is reused from approved documents."
+      },
+      {
+        "id": "N3-FH-09",
+        "before": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 1
+          }
+        },
+        "after": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5,
+            "Faheem": 0.5
+          }
+        },
+        "handoff": "Lewis assembles question coverage and missing customer scenarios; Faheem decides evaluation validity and technical coverage gaps."
+      },
+      {
+        "id": "N3-FZ-14",
+        "before": {
+          "assignee": "Filza",
+          "effort_allocations": {
+            "Filza": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.5,
+            "Filza": 0.25,
+            "Asad": 0.25
+          }
+        },
+        "handoff": "Jill collects company asset and account ownership records; Asad supplies repository licence evidence; Filza interprets licences and approves legal ownership conclusions."
+      },
+      {
+        "id": "N3-FZ-19",
+        "before": {
+          "assignee": "Filza",
+          "effort_allocations": {
+            "Filza": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.5,
+            "Filza": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Jill collects current vendor evidence in the existing register; Muteeb assesses technical gaps and Filza signs the data/vendor implications."
+      },
+      {
+        "id": "N2-JL-08",
+        "before": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.75,
+            "Jill": 0.25
+          }
+        },
+        "handoff": "Alex resolves product-direction decisions and maintains their outcomes; Jill checks follow-up and unresolved age in the existing team board."
+      },
+      {
+        "id": "N5-JL-08",
+        "before": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Alex owns the marketing scoreboard, targets and channel decisions, using existing analytics exports; no new engineering dashboard is commissioned."
+      },
+      {
+        "id": "N3-JL-12",
+        "before": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.25,
+            "Jill": 0.25
+          }
+        },
+        "handoff": "Alex owns spending approval limits and decisions; Jill maintains vendor commitments and checks the financial records."
+      },
+      {
+        "id": "N5-MT-05",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1.5,
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Muteeb implements the monitoring view and writes technical recovery steps. Alex assembles the failure table, roles and communication links from those instructions; technical acceptance stays with Muteeb."
+      },
+      {
+        "id": "N6-AS-10",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.5,
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Asad enforces the code freeze and signs engineering evidence; Alex collects the existing evidence links into the release memo."
+      }
+    ],
+    "report": "docs/workload-rebalance.md",
+    "capacity_status": "RED: redistribution reduces some specialist overhead, but does not remove the overall effort shortfall.",
+    "queue_order": "Dependency order first; earliest due date, priority and number of downstream tickets second. A clear ticket graph is not proof that external inputs are ready."
   }
 };

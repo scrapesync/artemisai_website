@@ -1,0 +1,363 @@
+{
+  "review": {
+    "as_of": "2026-09-17",
+    "roles": {
+      "Asad": "Technical lead, full stack, frontend integration and engineering review",
+      "Muteeb": "Backend, APIs, infrastructure, tenant isolation and production operations",
+      "Faheem": "AI/ML, evaluations, model serving contracts and data quality",
+      "Saad": "Product design, acceptance, frontend components and usability",
+      "Alex": "Vision, commercial decisions, marketing, scope and release coordination",
+      "Jill": "Finance, operational records, procurement and team coordination",
+      "Lewis": "Pilot customers, research, customer walkthroughs and support",
+      "Filza": "Legal interpretation, terms, data protection and legal sign-off"
+    },
+    "role_basis": "Inferred from existing assignments and shared context; owner availability and additional technical skills are not confirmed.",
+    "policy": "One primary delivery item per person. Pull only after required input evidence exists; use mock contracts for preparation, never as live acceptance. Reserve specialist review and do not create parallel boards.",
+    "changes": [
+      {
+        "id": "N5-MT-09",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Alex assembles the review pack and chases missing links; Muteeb validates the platform results and unresolved defects."
+      },
+      {
+        "id": "N6-MT-08",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Alex fills the go/no-go evidence slots; Muteeb enforces the technical freeze and attests to the evidence."
+      },
+      {
+        "id": "N6-SD-06",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.5,
+            "Saad": 0.5
+          }
+        },
+        "handoff": "Alex maintains the decision/defect log and escalates blockers; Saad validates product acceptance and UAT evidence."
+      },
+      {
+        "id": "N5-SD-06",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.5,
+            "Saad": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Alex assembles launch roles and the run-of-show; Saad signs product gates and Muteeb validates rollback instructions."
+      },
+      {
+        "id": "N2-SD-04",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 2
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 1,
+            "Saad": 0.5,
+            "Asad": 0.25,
+            "Filza": 0.25
+          }
+        },
+        "handoff": "Alex assembles the submission evidence; Saad retains the Meta submission, Asad confirms the working journey and Filza approves claims."
+      },
+      {
+        "id": "N2-AS-09",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5,
+            "Asad": 0.5
+          }
+        },
+        "handoff": "Lewis records the scripted customer journey on approved test accounts; Asad verifies permission coverage and freezes the implemented UI. Lewis does not change auth or permission configuration."
+      },
+      {
+        "id": "N6-SD-03",
+        "before": {
+          "assignee": "Saad",
+          "effort_allocations": {
+            "Saad": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.25,
+            "Saad": 0.25
+          }
+        },
+        "handoff": "Lewis captures screenshots and checks links and dates; Saad approves visual and product accuracy. Legal wording is reused from approved documents."
+      },
+      {
+        "id": "N3-FH-09",
+        "before": {
+          "assignee": "Faheem",
+          "effort_allocations": {
+            "Faheem": 1
+          }
+        },
+        "after": {
+          "assignee": "Lewis",
+          "effort_allocations": {
+            "Lewis": 0.5,
+            "Faheem": 0.5
+          }
+        },
+        "handoff": "Lewis assembles question coverage and missing customer scenarios; Faheem decides evaluation validity and technical coverage gaps."
+      },
+      {
+        "id": "N3-FZ-14",
+        "before": {
+          "assignee": "Filza",
+          "effort_allocations": {
+            "Filza": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.5,
+            "Filza": 0.25,
+            "Asad": 0.25
+          }
+        },
+        "handoff": "Jill collects company asset and account ownership records; Asad supplies repository licence evidence; Filza interprets licences and approves legal ownership conclusions."
+      },
+      {
+        "id": "N3-FZ-19",
+        "before": {
+          "assignee": "Filza",
+          "effort_allocations": {
+            "Filza": 1
+          }
+        },
+        "after": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.5,
+            "Filza": 0.25,
+            "Muteeb": 0.25
+          }
+        },
+        "handoff": "Jill collects current vendor evidence in the existing register; Muteeb assesses technical gaps and Filza signs the data/vendor implications."
+      },
+      {
+        "id": "N2-JL-08",
+        "before": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 1
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.75,
+            "Jill": 0.25
+          }
+        },
+        "handoff": "Alex resolves product-direction decisions and maintains their outcomes; Jill checks follow-up and unresolved age in the existing team board."
+      },
+      {
+        "id": "N5-JL-08",
+        "before": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Alex owns the marketing scoreboard, targets and channel decisions, using existing analytics exports; no new engineering dashboard is commissioned."
+      },
+      {
+        "id": "N3-JL-12",
+        "before": {
+          "assignee": "Jill",
+          "effort_allocations": {
+            "Jill": 0.5
+          }
+        },
+        "after": {
+          "assignee": "Alex",
+          "effort_allocations": {
+            "Alex": 0.25,
+            "Jill": 0.25
+          }
+        },
+        "handoff": "Alex owns spending approval limits and decisions; Jill maintains vendor commitments and checks the financial records."
+      },
+      {
+        "id": "N5-MT-05",
+        "before": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 2
+          }
+        },
+        "after": {
+          "assignee": "Muteeb",
+          "effort_allocations": {
+            "Muteeb": 1.5,
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Muteeb implements the monitoring view and writes technical recovery steps. Alex assembles the failure table, roles and communication links from those instructions; technical acceptance stays with Muteeb."
+      },
+      {
+        "id": "N6-AS-10",
+        "before": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 1
+          }
+        },
+        "after": {
+          "assignee": "Asad",
+          "effort_allocations": {
+            "Asad": 0.5,
+            "Alex": 0.5
+          }
+        },
+        "handoff": "Asad enforces the code freeze and signs engineering evidence; Alex collects the existing evidence links into the release memo."
+      }
+    ],
+    "report": "docs/workload-rebalance.md",
+    "capacity_status": "RED: redistribution reduces some specialist overhead, but does not remove the overall effort shortfall.",
+    "queue_order": "Dependency order first; earliest due date, priority and number of downstream tickets second. A clear ticket graph is not proof that external inputs are ready."
+  },
+  "capacity": {
+    "as_of": "2026-09-17",
+    "target": "2026-12-15",
+    "hard_limit": "2026-12-15",
+    "basis": "Audited scope with inherited estimates and focus rates, including allocated reviewer effort; excludes deferred/merged work and recorded done/Phase 0. Shared-board status snapshot 2026-09-16T12:15:43.591Z applied; remaining effort, leave and availability still require owner confirmation. No new hires, overtime or assumed external counsel. Weekends add no capacity.",
+    "owners": [
+      {
+        "owner": "Asad",
+        "tickets": 81,
+        "focus_rate": 0.6,
+        "effort_days": 112.75,
+        "capacity_days": 38.4,
+        "gap_days": 74.35,
+        "capacity_at_hard_limit": 38.4
+      },
+      {
+        "owner": "Muteeb",
+        "tickets": 99,
+        "focus_rate": 0.7,
+        "effort_days": 156.75,
+        "capacity_days": 44.8,
+        "gap_days": 111.95,
+        "capacity_at_hard_limit": 44.8
+      },
+      {
+        "owner": "Faheem",
+        "tickets": 60,
+        "focus_rate": 0.7,
+        "effort_days": 97.25,
+        "capacity_days": 44.8,
+        "gap_days": 52.45,
+        "capacity_at_hard_limit": 44.8
+      },
+      {
+        "owner": "Saad",
+        "tickets": 70,
+        "focus_rate": 0.7,
+        "effort_days": 73.5,
+        "capacity_days": 44.8,
+        "gap_days": 28.7,
+        "capacity_at_hard_limit": 44.8
+      },
+      {
+        "owner": "Alex",
+        "tickets": 53,
+        "focus_rate": 0.4,
+        "effort_days": 29.5,
+        "capacity_days": 25.6,
+        "gap_days": 3.9,
+        "capacity_at_hard_limit": 25.6
+      },
+      {
+        "owner": "Jill",
+        "tickets": 61,
+        "focus_rate": 0.6,
+        "effort_days": 41.5,
+        "capacity_days": 38.4,
+        "gap_days": 3.1,
+        "capacity_at_hard_limit": 38.4
+      },
+      {
+        "owner": "Lewis",
+        "tickets": 43,
+        "focus_rate": 0.6,
+        "effort_days": 39.25,
+        "capacity_days": 38.4,
+        "gap_days": 0.85,
+        "capacity_at_hard_limit": 38.4
+      },
+      {
+        "owner": "Filza",
+        "tickets": 62,
+        "focus_rate": 0.5,
+        "effort_days": 55.75,
+        "capacity_days": 32,
+        "gap_days": 23.75,
+        "capacity_at_hard_limit": 32
+      }
+    ],
+    "total_effort_days": 606.25,
+    "total_capacity_days": 307.2
+  }
+}

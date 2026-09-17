@@ -4,7 +4,7 @@ const vm = require('node:vm');
 const context = { window: {} };
 vm.runInNewContext(fs.readFileSync('sprint_launch_data.js', 'utf8'), context);
 const d = context.window.LAUNCH_DATA;
-const start = '2026-09-16';
+const start = '2026-09-17';
 const rates = {Asad: .6, Muteeb: .7, Faheem: .7, Saad: .7, Alex: .4, Jill: .6, Lewis: .6, Filza: .5};
 function weekdays(end) {
   let n = 0;

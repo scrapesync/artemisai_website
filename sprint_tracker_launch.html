@@ -755,7 +755,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
 </div></div>
 <div class="toast" id="toast"></div>
 
-<script src="sprint_launch_data.js?v=20260917-critical-review"></script>
+<script src="sprint_launch_data.js?v=20260917-workload"></script>
 <script src="mock_shots_data.js"></script>
 <script>
 /* ============================================================
@@ -860,7 +860,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   function st(id){ return resolveState(BASE_RECORDS[id],STATE[id]); }
   function isOpen(t){ var s=st(t.id).status; return !t.superseded_by && s!=='done'&&s!=='dropped'; }
   function planningInputs(t){
-    var notes=[]; if(t.critical_review_note) notes.push(t.critical_review_note); if(t.launch_requirement==='conditional') notes.push('Conditional: confirm the stated business trigger before starting. Reserved effort remains in capacity totals until a decision is recorded.'); if(t.applicability_note) notes.push(t.applicability_note); if(t.deadline_note) notes.push(t.deadline_note);
+    var notes=[]; if(t.workload_note) notes.push(t.workload_note); if(t.effort_allocations) notes.push('Reserved work/review days: '+Object.keys(t.effort_allocations).map(function(p){return p+' '+t.effort_allocations[p];}).join(', ')); if(t.critical_review_note) notes.push(t.critical_review_note); if(t.launch_requirement==='conditional') notes.push('Conditional: confirm the stated business trigger before starting. Reserved effort remains in capacity totals until a decision is recorded.'); if(t.applicability_note) notes.push(t.applicability_note); if(t.deadline_note) notes.push(t.deadline_note);
     if(t.schedule_confidence) notes.push(t.schedule_confidence);
     (t.design_milestone_dependencies||[]).forEach(function(id){var m=(D.design_handoff.milestones||[]).filter(function(x){return x.id===id;})[0];if(m) notes.push(m.title+' · '+fmtS(m.date)+' · '+m.status+' (acceptance not verified)');});
     return notes.length?'<div class="note"><b>Design / planning inputs</b><p>'+notes.map(esc).join('<br>')+'</p></div>':'';
@@ -972,6 +972,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
         '<p class="note">'+esc(LAUNCH.planning_note||'')+'</p>'+
         (lateEdits?'<p class="note">'+lateEdits+' open shared ticket edits are beyond the hard limit. Jill and the owners must reconcile these; saved team edits have not been erased.</p>':'')+
         (D.ticket_audit?'<p class="note">Full plan restored: build, AI/ML, APIs, design, vision, marketing and legal work. Two disputed incident-specific assignments remain excluded. <a href="docs/scope-restoration.md" target="_blank" rel="noopener">Read restoration summary</a></p>':'')+
+        (D.workload_review?'<p class="note"><b>Skills-based workload allocation</b>: named preparation and specialist review shares; dependency-aware queues in Performance. <a href="docs/workload-rebalance.md" target="_blank" rel="noopener">Read assignments and handoff rules</a></p>':'')+
         (D.critical_review?'<p class="note"><b>Critical review: feasibility remains RED.</b> All workstreams retained; dependencies and conditional work corrected. <a href="docs/critical-launch-review.md" target="_blank" rel="noopener">Read the review across 12 roles</a></p>':'')+
         (cap?'<details><summary>Owner workload review · restored plan</summary><p class="note">Inherited remaining estimates, before owner confirmation. Recorded completion is reconciled with the shared-board snapshot; later saved statuses also affect this table. Effort includes open audited work and allocated reviewer effort; deferred and consolidated duplicate records are excluded. Capacity excludes weekends and assumes no extra staff or overtime.</p><div class="capacity-scroll"><table><thead><tr><th>Owner</th><th>Work days</th><th>Available to 15 Dec</th><th>Unresolved gap</th></tr></thead><tbody>'+rows+'</tbody></table></div></details>':'')+
         '</section>');
@@ -1792,6 +1793,25 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   }
 
   /* ================= PERFORMANCE ================= */
+
+  function ownerWorkQueue(owner){
+    var records=all().filter(function(t){return inSprints(t)&&sp(t)!=='P0'&&isOpen(t);});
+    var ids={};records.forEach(function(t){ids[t.id]=t;});
+    var dependents={}; records.forEach(function(t){(t.depends_on||[]).forEach(function(id){if(ids[id])(dependents[id]||(dependents[id]=[])).push(t.id);});});
+    function downstream(id,seen){seen=seen||{};(dependents[id]||[]).forEach(function(x){if(!seen[x]){seen[x]=true;downstream(x,seen);}});return Object.keys(seen).length;}
+    var scored=records.map(function(t){return {t:t,wait:(t.depends_on||[]).filter(function(id){return ids[id];}),external:(t.depends_on||[]).filter(function(id){return !/^(P0|N\d|LW|BL)-[A-Z]+-\d+$/.test(id);}),unlocks:downstream(t.id)};});
+    scored.sort(function(a,b){return (a.t.due||'9999').localeCompare(b.t.due||'9999')||((a.t.priority==='P0'?0:1)-(b.t.priority==='P0'?0:1))||b.unlocks-a.unlocks||a.t.id.localeCompare(b.t.id);});
+    var mine=scored.filter(function(x){return x.t.assignee===owner;});
+    var clear=mine.filter(function(x){return st(x.t.id).status!=='blocked'&&!x.wait.length&&x.t.launch_requirement!=='conditional'&&(!x.t.not_before||x.t.not_before<=TODAY)&&(!SPRINTS.filter(function(s){return s.id===sp(x.t);})[0]||SPRINTS.filter(function(s){return s.id===sp(x.t);})[0].start<=TODAY);});
+    var active=mine.filter(function(x){return st(x.t.id).status==='inprog';});
+    if(active.length) clear=active;
+    var reviews=scored.filter(function(x){return x.t.assignee!==owner&&x.t.effort_allocations&&x.t.effort_allocations[owner]>0;});
+    var effort=records.reduce(function(n,t){return n+(t.effort_allocations?(t.effort_allocations[owner]||0):(t.assignee===owner?(t.estimated_days||0):0));},0);
+    var cap=D.capacity_review.owners.filter(function(p){return p.owner===owner;})[0];
+    function row(x){return '<p>'+esc(x.t.id)+' · '+esc(x.t.title)+(x.wait.length?'<br><b>Waiting for:</b> '+x.wait.map(esc).join(', '):'<br>No unfinished ticket prerequisites; verify actual inputs before starting.')+(x.external.length?'<br><b>Confirm external input:</b> '+x.external.map(esc).join('; '):'')+(x.t.launch_requirement==='conditional'?'<br><b>Conditional:</b> confirm business trigger first.':'')+'<br>Feeds '+x.unlocks+' downstream tickets.</p>';}
+    return '<section class="note"><b>Workload and next actions</b><p>'+Math.round(effort*100)/100+' reserved work/review days · '+(cap?cap.capacity_days:'?')+' available in the '+esc(D.capacity_review.as_of)+' baseline. One primary item at a time.</p><h4>'+(active.length?'Finish or resolve current work before pulling another':'Check these inputs, then pull one')+'</h4>'+(clear.slice(0,3).map(row).join('')||'<p>No dependency-clear current-sprint item. Resolve the waiting inputs below; do not start later work just to appear busy.</p>')+'<details><summary>Full delivery queue ('+mine.length+')</summary>'+mine.map(row).join('')+'</details><details><summary>Review/support reservations ('+reviews.length+')</summary>'+reviews.map(function(x){return '<p>'+esc(x.t.id)+' · Lead '+esc(x.t.assignee)+' · '+x.t.effort_allocations[owner]+' days. Review the prepared output before acceptance.</p>';}).join('')+'</details></section>';
+  }
+
   function renderPerf(){
     var T=all().filter(inSprints), cur=currentSprint(), exp=expected(cur);
     document.getElementById('perf').innerHTML=PEOPLE.map(function(p){
@@ -1811,6 +1831,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
         '<div class="pstats">'+pst('Tickets',ts.length)+pst('Done',done.length,'green')+pst('In progress',ip,'amber')+pst('Blocked',bl,bl?'red':'')+pst('Overdue',ov,ov?'red':'')+'</div>'+
         '<div class="pace"><span>'+cur.id+': '+cD+' of '+cT.length+' done · expected ~'+Math.round(exp*100)+'% by today'+(timed.length?' · on time '+ontime+'/'+timed.length:'')+' · '+p0+' P0</span><b class="'+cls+'">'+pace+'</b></div>'+
         '<div class="sprow">'+SPRINTS.map(function(s){ var a=ts.filter(function(t){return sp(t)===s.id;}), d=a.filter(function(t){return st(t.id).status==='done';}).length; return '<div class="spc'+(s.id===cur.id?' cur':'')+'"><div class="id">'+s.id+'</div><div class="v">'+(a.length?d+'/'+a.length:'-')+'</div></div>'; }).join('')+'</div>'+
+        (D.workload_review?ownerWorkQueue(p.n):'')+
         '<details class="panel"><summary>Tickets for '+esc(p.n)+'</summary>'+ts.map(function(t){return '<p>'+esc(t.id)+' &middot; '+esc(t.title)+'</p>';}).join('')+'</details>'+
         '<div class="note">On time compares recorded completion with the current planned due date, not the original commitment. Overdue is open past due. Pace compares this sprint’s completion with how much of the sprint has elapsed.</div></div>';
     }).join('');
