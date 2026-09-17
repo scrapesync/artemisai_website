@@ -38077,8 +38077,8 @@ window.LAUNCH_DATA = {
       "id": "N1-AS-20",
       "sprint": "N1",
       "assignee": "Asad",
-      "title": "Re-decide the app stack for a native store app (reopens N1-AS-03)",
-      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). With Muteeb and Saad, pick the mobile stack this week: (a) Capacitor shell around the existing Next.js build (one codebase, two store shells — what BL-APP-02 assumed), (b) Expo / React Native, or (c) Flutter. Decide on: reuse of Saad's component library and mock-ups, Facebook Login for Business on device, native push, deep links, offline shell, OTA update path, team skills, and Apple guideline 4.2 (minimum functionality) risk for a wrapped web build. Record the decision in the repo with a 'no changes after' clause; N1-AS-03 stays as the backend/API decision.",
+      "title": "Pick the cross-platform app stack (one codebase, iOS + Android; reopens N1-AS-03)",
+      "what": "Scope change 17 Sep (Alex + Asad): no web app at launch — landing page + a native store app (iOS/Android). With Muteeb and Saad, pick the cross-platform stack this week (Asad, 17 Sep: one codebase for iOS + Android — separate native Swift/Kotlin apps are ruled out): (a) Capacitor shell around the existing Next.js build (one codebase, two store shells — what BL-APP-02 assumed), (b) Expo / React Native, or (c) Flutter. Decide on: reuse of Saad's component library and mock-ups, Facebook Login for Business on device, native push, deep links, offline shell, OTA update path, team skills, and Apple guideline 4.2 (minimum functionality) risk for a wrapped web build. Record the decision in the repo with a 'no changes after' clause; N1-AS-03 stays as the backend/API decision.",
       "why": "Every screen, the push worker, store submission and the Meta app settings depend on this choice; a late change moves every mobile ticket.",
       "area": "App core",
       "due": "2026-09-25",
@@ -38090,11 +38090,10 @@ window.LAUNCH_DATA = {
       ],
       "gate": "N1",
       "source": "plan",
-      "acceptance": "A signed one-page mobile stack decision in the repo naming the framework, the login approach on device, the push and deep-link approach and the update path; N1-AS-03 amended to reference it.",
+      "acceptance": "A signed one-page decision naming ONE cross-platform framework (Capacitor wrap of the Next.js build, Expo/React Native, or Flutter), the login approach on device, push, deep links and the OTA update path; N1-AS-03 amended to reference it.",
       "checklist": [
-        "Compare Capacitor wrap vs Expo/RN vs Flutter against the criteria",
-        "Check Facebook Login for Business + Sign in with Apple support on the chosen stack",
-        "Confirm Saad's components carry over",
+        "Compare Capacitor wrap vs Expo/RN vs Flutter on: reuse of Saad's components and mock-ups, Facebook Login for Business + Sign in with Apple on device, push, deep links, OTA updates, Apple 4.2 risk, team skills",
+        "Confirm Saad's component library carries over to the chosen stack",
         "Sign and file; amend N1-AS-03"
       ],
       "layman": "We choose how the phone app is built before anyone builds a screen, so nothing has to be redone.",
@@ -43683,7 +43682,7 @@ window.LAUNCH_DATA = {
   },
   "platform_revision": {
     "date": "2026-09-17",
-    "decision": "Launch product = landing page + native store app (iOS/Android). Web app deferred until after launch (Alex + Asad call, 17 Sep).",
+    "decision": "Launch product = landing page + native store app (iOS/Android). Web app deferred until after launch (Alex + Asad call, 17 Sep). Constraint (Asad, 17 Sep): cross-platform, one codebase for iOS and Android.",
     "added": [
       "N1-AS-20",
       "N3-AS-25",
