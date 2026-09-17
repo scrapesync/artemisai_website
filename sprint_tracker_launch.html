@@ -565,6 +565,22 @@ main{max-width:1500px;margin:0 auto;padding:22px}
 .capacity-scroll table{width:100%;border-collapse:collapse;font-size:12px}
 .capacity-scroll th,.capacity-scroll td{text-align:left;padding:8px;border-bottom:1px solid var(--border);white-space:nowrap}
 a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px} a.ticket-ref:hover{color:var(--accent)}
+
+/* ================= PHONE v3 (17 Sep): tab rail, jump menu, wide tables ================= */
+.tab-jump{display:none}
+@media (max-width:760px){
+  .tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding:8px 12px 10px;gap:8px;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab-btn{flex:0 0 auto;min-width:auto;white-space:nowrap;scroll-snap-align:start;padding:10px 14px;font-size:13.5px}
+  .tab-jump{display:block;margin:0 14px 8px;width:calc(100% - 28px);padding:11px 12px;border-radius:10px;border:1px solid var(--border2);background:var(--bg2);color:var(--text);font-size:14px}
+  .hwrap .hcount{order:5;flex-basis:100%;text-align:center}
+  .hwrap .hbtn{flex:1 1 auto;text-align:center}
+  .capacity-scroll table{font-size:11px}
+  main table{display:block;overflow-x:auto;max-width:100%}
+  .capacity-scroll table,main .capacity-scroll table{display:table;min-width:640px}
+  pre,code{white-space:pre-wrap;word-break:break-word}
+  img,svg{max-width:100%}
+}
 </style>
 </head><body>
 
@@ -573,6 +589,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   <div class="sp"></div>
   <span class="hcount" id="hdr-count"></span>
   <button class="hbtn" id="btn-csv" title="Export the current sprint as CSV">&#8681; CSV</button>
+  <button class="hbtn" id="btn-csv-all" title="Export every sprint, the backlog and completed history as one CSV">&#8681; All sprints CSV</button>
   <button class="hbtn primary" id="btn-refresh">&#8635; Refresh</button>
   <span class="chip" id="viewer"><span class="av">?</span><span id="viewer-name">…</span></span>
   <a class="hbtn" href="admin_panel.html">&larr; Admin</a>
@@ -591,6 +608,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   <button class="tab-btn" data-tab="track-models">Models</button>
   <button class="tab-btn" data-tab="track-launch">Launch</button>
   <button class="tab-btn" data-tab="track-qa">QA Control Center</button>
+<select class="tab-jump" id="tab-jump" aria-label="Go to tab"><option value="overview">Overview</option><option value="tracker">Sprint Tracker</option><option value="features">MVP Features</option><option value="layman">Plain English</option><option value="map">Dependencies</option><option value="backlog">Backlog</option><option value="performance">Performance</option><option value="track-build">Build</option><option value="track-meta">App Review</option><option value="track-costing">Costing</option><option value="track-models">Models</option><option value="track-launch">Launch</option><option value="track-qa">QA Control Center</option></select>
 </div></div></header>
 
 <main>
@@ -921,6 +939,7 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
   /* ---- tabs ---- */
   var TAB='overview';
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.addEventListener('click',function(){ showTab(b.getAttribute('data-tab')); }); });
+  (function(){ var tj=document.getElementById('tab-jump'); if(!tj) return; tj.addEventListener('change',function(){ showTab(tj.value); }); document.querySelectorAll('.tab-btn').forEach(function(b){ b.addEventListener('click',function(){ tj.value=b.getAttribute('data-tab'); }); }); })();
   function showTab(t){ TAB=t; document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active',b.getAttribute('data-tab')===t); });
     ['overview','tracker','features','layman','map','backlog','performance','track-build','track-meta','track-costing','track-models','track-launch','track-qa'].forEach(function(v){ document.getElementById('view-'+v).classList.toggle('hidden',v!==t); });
     try{ localStorage.setItem('artemis_launch_tab',t); }catch(e){} renderAll(); }
@@ -1298,6 +1317,15 @@ a.ticket-ref{color:inherit;text-decoration:underline;text-decoration-style:dotte
     var rows=[cols.join(',')].concat(T.map(function(t){ var S=st(t.id); var v={id:t.id,sprint:sp(t),assignee:t.assignee,priority:t.priority,title:t.title,area:t.area,due:t.due,status:S.status,checklist_done:ckDone(t),checklist_total:(t.checklist||[]).length,gate:t.gate,depends_on:(t.depends_on||[]).join('; '),acceptance:t.acceptance,note:S.note||''};
       return cols.map(function(c){ return '"'+String(v[c]==null?'':v[c]).replace(/"/g,'""')+'"'; }).join(','); }));
     var a=document.createElement('a'); a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(rows.join('\n')); a.download='artemis_'+SEL+'_'+TODAY+'.csv'; a.click();
+  });
+  /* ---- CSV: every sprint + backlog + history in one file ---- */
+  document.getElementById('btn-csv-all').addEventListener('click',function(){
+    var ORDER={P0:0,N1:1,N2:2,N3:3,N4:4,N5:5,N6:6,LW:7,BL:8};
+    var T=all().slice().sort(function(a,b){ var sa=ORDER[sp(a)]==null?9:ORDER[sp(a)], sb=ORDER[sp(b)]==null?9:ORDER[sp(b)]; return sa-sb||String(a.assignee||'').localeCompare(String(b.assignee||''))||prSort(a,b); });
+    var cols=['id','sprint','assignee','priority','title','area','due','estimated_days','status','checklist_done','checklist_total','gate','depends_on','feeds','acceptance','layman','note'];
+    var rows=[cols.join(',')].concat(T.map(function(t){ var S=st(t.id); var v={id:t.id,sprint:sp(t),assignee:t.assignee,priority:t.priority,title:t.title,area:t.area,due:t.due,estimated_days:t.estimated_days,status:S.status,checklist_done:ckDone(t),checklist_total:(t.checklist||[]).length,gate:t.gate,depends_on:(t.depends_on||[]).join('; '),feeds:(t.feeds||[]).join('; '),acceptance:t.acceptance,layman:t.layman,note:S.note||''};
+      return cols.map(function(c){ return '"'+String(v[c]==null?'':v[c]).replace(/"/g,'""')+'"'; }).join(','); }));
+    var a=document.createElement('a'); a.href='data:text/csv;charset=utf-8,'+encodeURIComponent('\ufeff'+rows.join('\n')); a.download='artemis_all_sprints_'+TODAY+'.csv'; a.click();
   });
 
   /* ================= MVP FEATURES =================

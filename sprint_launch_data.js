@@ -9900,7 +9900,8 @@ window.LAUNCH_DATA = {
         "N2-FH-27",
         "N2-AX-18",
         "N3-FH-31",
-        "N4-FH-25"
+        "N4-FH-25",
+        "N3-MT-28"
       ],
       "kind": "surface",
       "scope": "active"
@@ -9967,7 +9968,9 @@ window.LAUNCH_DATA = {
         "N4-FH-23",
         "N5-FH-11",
         "N4-AS-29",
-        "N3-SD-20"
+        "N3-SD-20",
+        "N4-MT-36",
+        "N5-MT-28"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10080,7 +10083,20 @@ window.LAUNCH_DATA = {
         "BL-IN-12",
         "N4-AS-27",
         "N4-FH-27",
-        "N4-AS-28"
+        "N4-AS-28",
+        "N4-MT-34",
+        "N3-MT-30",
+        "N3-FH-33",
+        "N4-MT-38",
+        "N4-MT-39",
+        "N4-MT-40",
+        "N4-MT-42",
+        "N4-MT-43",
+        "N5-MT-29",
+        "N4-FH-28",
+        "N4-FH-29",
+        "N4-FH-30",
+        "N5-SD-20"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10099,7 +10115,13 @@ window.LAUNCH_DATA = {
         "N4-FH-24",
         "N5-FH-10",
         "N6-FH-08",
-        "LW-FH-02"
+        "LW-FH-02",
+        "N5-MT-26",
+        "N4-MT-35",
+        "N4-MT-37",
+        "N4-MT-41",
+        "N5-FH-12",
+        "N3-FH-34"
       ],
       "what": "Pilot types a draft; the virality gauge + driver chips move as they type, warning before a flop is published.",
       "why": "The PREDICT promise and the demo wow moment. Descriptive charts are free everywhere; this is not.",
@@ -10593,7 +10615,16 @@ window.LAUNCH_DATA = {
         "BL-APP-04",
         "BL-APP-05",
         "BL-APP-06",
-        "BL-APP-07"
+        "BL-APP-07",
+        "N3-MT-15",
+        "N2-MT-11",
+        "N3-MT-27",
+        "N4-MT-33",
+        "N3-MT-29",
+        "N5-MT-27",
+        "N3-AS-27",
+        "N4-MT-44",
+        "N5-AS-27"
       ],
       "kind": "foundation",
       "scope": "active"
@@ -16117,9 +16148,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-MT-01",
       "sprint": "N3",
-      "assignee": "Faheem",
+      "assignee": "Muteeb",
       "title": "Scoring endpoint production-grade: caching, p95 under 1s warm",
-      "what": "Harden the N1 score endpoint: response cache keyed on tenant, page and draft hash, warm-path p95 under 1s measured on staging, and contract tests in CI. Serve the artifact that passed the gate (Borda gate plus regressor; LambdaRank lost the A/B). (Supersedes the 3 Aug draft-score lambda handoff; its requirements carry over: performance band + flop probability + top-3 reasons, with timing-based reasons suppressed.)",
+      "what": "Harden the N1 score endpoint: response cache keyed on tenant, page and draft hash, warm-path p95 under 1s measured on staging, and contract tests in CI. Serve the artifact that passed the gate (Borda gate plus regressor; LambdaRank lost the A/B). (Supersedes the 3 Aug draft-score lambda handoff; its requirements carry over: performance band + flop probability + top-3 reasons, with timing-based reasons suppressed.) (17 Sep) Muteeb owns the backend build; Faheem owns the model and reviews the contract.",
       "why": "The gauge must move as the pilot types; a slow endpoint turns the wow moment into a wait.",
       "area": "Drafts",
       "due": "2026-10-14",
@@ -16169,7 +16200,12 @@ window.LAUNCH_DATA = {
       "reviewers": [
         "Muteeb"
       ],
-      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance.",
+      "reassigned_17sep": {
+        "from": "Faheem",
+        "to": "Muteeb",
+        "reason": "ML backend ownership (Asad, 17 Sep)"
+      }
     },
     {
       "id": "N2-MT-02",
@@ -16330,9 +16366,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-MT-05",
       "sprint": "N4",
-      "assignee": "Faheem",
+      "assignee": "Muteeb",
       "title": "RAG plumbing starts: tenant-namespaced index, ingest job, versioning",
-      "what": "Stand up the tenant-namespaced vector index (start on pgvector per the feature map; Jill's Pinecone tier decision lands in N3 and can swap the backend behind the same namespace interface), an ingest job that embeds per-tenant content with cost logged, and index versioning so a re-embed can be rolled back. No Q&A yet; that is N3.",
+      "what": "Stand up the tenant-namespaced vector index (start on pgvector per the feature map; Jill's Pinecone tier decision lands in N3 and can swap the backend behind the same namespace interface), an ingest job that embeds per-tenant content with cost logged, and index versioning so a re-embed can be rolled back. No Q&A yet; that is N3. (17 Sep) Muteeb owns the backend build; Faheem owns the model and reviews the contract.",
       "why": "Art-E needs N3 and N4 to mature; starting later was the number one capacity risk the critics flagged.",
       "area": "Art-E",
       "due": "2026-10-22",
@@ -16383,7 +16419,12 @@ window.LAUNCH_DATA = {
       "reviewers": [
         "Muteeb"
       ],
-      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance.",
+      "reassigned_17sep": {
+        "from": "Faheem",
+        "to": "Muteeb",
+        "reason": "ML backend ownership (Asad, 17 Sep)"
+      }
     },
     {
       "id": "N2-MT-06",
@@ -16530,9 +16571,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N2-MT-11",
       "sprint": "N4",
-      "assignee": "Faheem",
+      "assignee": "Muteeb",
       "title": "Build the live labelling path in the fast-lane and send Faheem the timing",
-      "what": "Implement the seam-1 design: fetched comments are labelled (sentiment, toxicity) on a live path so fetch plus label stays inside the 15-minute budget, with the backlog drain running separately. Measure end-to-end latency on staging and send Faheem the timing and where labelling sits.",
+      "what": "Implement the seam-1 design: fetched comments are labelled (sentiment, toxicity) on a live path so fetch plus label stays inside the 15-minute budget, with the backlog drain running separately. Measure end-to-end latency on staging and send Faheem the timing and where labelling sits. (17 Sep) Muteeb owns the backend build; Faheem owns the model and reviews the contract.",
       "why": "Faheem needs the fast-lane timing by N2; polling fast is not labelling fast, and the N3 drill measures the whole chain.",
       "area": "Alerts",
       "due": "2026-10-21",
@@ -16577,7 +16618,12 @@ window.LAUNCH_DATA = {
       "reviewers": [
         "Muteeb"
       ],
-      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance.",
+      "reassigned_17sep": {
+        "from": "Faheem",
+        "to": "Muteeb",
+        "reason": "ML backend ownership (Asad, 17 Sep)"
+      }
     },
     {
       "id": "N2-MT-13",
@@ -19638,9 +19684,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N3-MT-15",
       "sprint": "N5",
-      "assignee": "Faheem",
+      "assignee": "Muteeb",
       "title": "Index refresh job and freshness stamp for Art-E answers",
-      "what": "Add incremental re-ingest to the RAG index so new and edited posts, comments and refreshed aggregates become answerable inside a stated window, with deletes and disconnects removing vectors rather than orphaning them. Publish a freshness SLO per entity type (posts and comments hourly off the fixed page_posts path, aggregates daily) and expose a per-tenant 'data through' timestamp on the orchestration response so Asad's grounding footer can show it and the golden-set runner can assert it. Alarm when any namespace falls behind its SLO, and make a re-embed after a chunking change resumable and rollback-safe against the N2-MT-05 version tags.",
+      "what": "Add incremental re-ingest to the RAG index so new and edited posts, comments and refreshed aggregates become answerable inside a stated window, with deletes and disconnects removing vectors rather than orphaning them. Publish a freshness SLO per entity type (posts and comments hourly off the fixed page_posts path, aggregates daily) and expose a per-tenant 'data through' timestamp on the orchestration response so Asad's grounding footer can show it and the golden-set runner can assert it. Alarm when any namespace falls behind its SLO, and make a re-embed after a chunking change resumable and rollback-safe against the N2-MT-05 version tags. (17 Sep) Muteeb owns the backend build; Faheem owns the model and reviews the contract.",
       "why": "An index that is silently a week old returns answers that are confidently cited and factually wrong, which is the one failure mode the whole Art-E design exists to prevent.",
       "area": "Art-E",
       "due": "2026-11-05",
@@ -19691,7 +19737,12 @@ window.LAUNCH_DATA = {
       "reviewers": [
         "Muteeb"
       ],
-      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance.",
+      "reassigned_17sep": {
+        "from": "Faheem",
+        "to": "Muteeb",
+        "reason": "ML backend ownership (Asad, 17 Sep)"
+      }
     },
     {
       "id": "N3-MT-16",
@@ -24476,9 +24527,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N5-MT-07",
       "sprint": "N5",
-      "assignee": "Faheem",
+      "assignee": "Muteeb",
       "title": "E2E model smoke suite on every production endpoint",
-      "what": "Write a smoke suite that hits every production model endpoint with a known input and asserts a contract-shaped, in-range response; run it nightly and on deploy. No longer waits on N3-MT-04, N4-MT-08 (parked in the 16 Sep balancing).",
+      "what": "Write a smoke suite that hits every production model endpoint with a known input and asserts a contract-shaped, in-range response; run it nightly and on deploy. No longer waits on N3-MT-04, N4-MT-08 (parked in the 16 Sep balancing). (17 Sep) Muteeb owns the backend build; Faheem owns the model and reviews the contract.",
       "why": "Models freeze next sprint; the smoke suite guards the freeze.",
       "area": "QA",
       "due": "2026-11-13",
@@ -24521,7 +24572,12 @@ window.LAUNCH_DATA = {
       "reviewers": [
         "Muteeb"
       ],
-      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance.",
+      "reassigned_17sep": {
+        "from": "Faheem",
+        "to": "Muteeb",
+        "reason": "ML backend ownership (Asad, 17 Sep)"
+      }
     },
     {
       "id": "N5-MT-09",
@@ -27019,9 +27075,9 @@ window.LAUNCH_DATA = {
     {
       "id": "N6-MT-02",
       "sprint": "N6",
-      "assignee": "Faheem",
+      "assignee": "Muteeb",
       "title": "Align serving endpoints to the frozen model artifacts on 26 November",
-      "what": "Once Faheem pins every model version on Thu 26 Nov 2026, point each serving endpoint at the pinned artifact manifest, disable any auto-refresh of weights, and record artifact hashes in the runbook.",
+      "what": "Once Faheem pins every model version on Thu 26 Nov 2026, point each serving endpoint at the pinned artifact manifest, disable any auto-refresh of weights, and record artifact hashes in the runbook. (17 Sep) Muteeb owns the backend build; Faheem owns the model and reviews the contract.",
       "why": "A frozen model served from an unpinned path is not frozen.",
       "area": "QA",
       "due": "2026-11-20",
@@ -27063,7 +27119,12 @@ window.LAUNCH_DATA = {
       "reviewers": [
         "Muteeb"
       ],
-      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance."
+      "workload_note": "Faheem implements the model/data-facing backend path and validates outputs. Muteeb reviews serving, tenant isolation, scaling and deployment. Do not duplicate the same pipeline in two repositories. This allocation follows the user-confirmed roles. All delivery, input and review effort remains reserved; finish required reviews before acceptance.",
+      "reassigned_17sep": {
+        "from": "Faheem",
+        "to": "Muteeb",
+        "reason": "ML backend ownership (Asad, 17 Sep)"
+      }
     },
     {
       "id": "N6-MT-03",
@@ -41057,6 +41118,1089 @@ window.LAUNCH_DATA = {
       },
       "estimated_days": 1,
       "timebox_days": 1
+    },
+    {
+      "id": "N3-MT-27",
+      "sprint": "N3",
+      "assignee": "Muteeb",
+      "title": "Model registry + serving CI/CD: the registry is the only path to serving; smoke, canary, rollback",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. Every model artifact (flop regressor, gate classifier, NLP models, crisis detector, Best Times, embeddings) is registered with version, training-data snapshot, code commit and eval results; the serving image is built from the registry entry, smoke-tested, canaried and rolled back by one command. No artifact reaches serving any other way. Feeds N5-FH-02 (version-pin) and N6-MT-05 (production smoke of frozen models).",
+      "why": "A model that answers differently from what was evaluated is the failure the registry prevents.",
+      "area": "Platform",
+      "due": "2026-10-16",
+      "priority": "P0",
+      "priority_reason": "Prerequisite for the model freeze and rollback rehearsals",
+      "depends_on": [],
+      "feeds": [
+        "N5-FH-02",
+        "N6-MT-05"
+      ],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Registry live; one full promote-canary-rollback cycle demonstrated on staging; the frozen-model path documented.",
+      "checklist": [
+        "Registry schema and storage",
+        "Build-from-registry pipeline",
+        "Canary + rollback command",
+        "Demo cycle"
+      ],
+      "layman": "Every AI model version is catalogued, and only catalogued versions can go live — with a one-command rollback.",
+      "layman_analogy": "",
+      "layman_needed": "Registry live; one full promote-canary-rollback cycle demonstrated on staging; the frozen-model path documented.",
+      "layman_output": "Registry live; one full promote-canary-rollback cycle demonstrated on staging; the frozen-model path documented.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N3-MT-28",
+      "sprint": "N3",
+      "assignee": "Muteeb",
+      "title": "Train–serve feature parity: page features computed identically in train.py and serving, nightly diff with alerts",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. One shared feature module for page_prior_avg_logshares, page_roll30, page_trend, page_prior_zero_rate, page_prior_arousal and the twin-benchmark lines (N4-FH-25); a nightly job recomputes a sample of pages both ways and alerts on any difference above tolerance (the zero-rate rounding bug Faheem found is exactly this class of failure).",
+      "why": "Training–serving skew is the most common silent cause of ML failures in production.",
+      "area": "Models",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [
+        "N2-FH-12"
+      ],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Shared module used by both paths; nightly parity diff green for a week; alert wired.",
+      "checklist": [
+        "Extract the shared feature module",
+        "Nightly parity job",
+        "Alert on tolerance breach"
+      ],
+      "layman": "The numbers the model learned from and the numbers it sees live are computed by the same code and checked every night.",
+      "layman_analogy": "",
+      "layman_needed": "Shared module used by both paths; nightly parity diff green for a week; alert wired.",
+      "layman_output": "Shared module used by both paths; nightly parity diff green for a week; alert wired.",
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-MT-33",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Batch scoring orchestration: nightly scoring of every post per model with retries, idempotency, cost caps and completion events",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. One orchestrated nightly run per model over new and re-polled posts, idempotent per (post, model version), retry with DLQ, per-run cost cap, completion events that the QA checks and the scorecard consume; backfill mode for re-scoring after a model change.",
+      "why": "Labels that arrive late, twice or not at all corrupt every downstream number.",
+      "area": "Platform",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N3-MT-27"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Nightly runs complete with events; a re-score backfill executed once; duplicates impossible by key.",
+      "checklist": [
+        "Orchestrator + idempotency key",
+        "Retry/DLQ + cost cap",
+        "Completion events",
+        "Backfill mode"
+      ],
+      "layman": "Every night, every new post is scored by every model exactly once, and the dashboard knows when it finished.",
+      "layman_analogy": "",
+      "layman_needed": "Nightly runs complete with events; a re-score backfill executed once; duplicates impossible by key.",
+      "layman_output": "Nightly runs complete with events; a re-score backfill executed once; duplicates impossible by key.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N3-MT-29",
+      "sprint": "N3",
+      "assignee": "Muteeb",
+      "title": "Training-dataset versioning and lineage: immutable snapshots per model version, gold sets included, pointer in the registry",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. Snapshot the exact training and evaluation tables per model version (post and comment label sets, gold sets, benchmark rows) as immutable objects with a manifest (row counts, date ranges, schema hash); the registry entry points to the snapshot; deletion rule per N3-FH-23 applied.",
+      "why": "Reproducing a model or answering a DSAR needs the data as it was, not as it is.",
+      "area": "Data",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [
+        "N5-FH-09"
+      ],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Snapshots exist for every current model version; manifest validated; registry links resolve.",
+      "checklist": [
+        "Snapshot job + manifest",
+        "Registry pointer",
+        "Deletion rule hook"
+      ],
+      "layman": "We keep an exact frozen copy of the data each model version learned from.",
+      "layman_analogy": "",
+      "layman_needed": "Snapshots exist for every current model version; manifest validated; registry links resolve.",
+      "layman_output": "Snapshots exist for every current model version; manifest validated; registry links resolve.",
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-MT-34",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Vector store operations: tenant namespaces, capacity plan, backup/restore, rebuild-from-source runbook, index versioning",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. Namespace-per-tenant enforced at the client; capacity and cost plan to 1,000 pages; backup and restore proven (with N5-MT-02); a rebuild-from-source runbook for the day the index is corrupted or the embedding model changes (N3-FH-15); index version stamped on every answer.",
+      "why": "The index is the memory of Art-E; it must be rebuildable and isolated per customer.",
+      "area": "Platform",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N2-MT-05"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Rebuild-from-source executed once on staging; restore proven; namespace isolation covered by N4-MT-01's CI proof.",
+      "checklist": [
+        "Namespace enforcement",
+        "Capacity plan",
+        "Backup/restore + rebuild runbook",
+        "Version stamp"
+      ],
+      "layman": "Each customer's Art-E memory is kept separate, backed up, and can be rebuilt from scratch.",
+      "layman_analogy": "",
+      "layman_needed": "Rebuild-from-source executed once on staging; restore proven; namespace isolation covered by N4-MT-01's CI proof.",
+      "layman_output": "Rebuild-from-source executed once on staging; restore proven; namespace isolation covered by N4-MT-01's CI proof.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N5-MT-26",
+      "sprint": "N5",
+      "assignee": "Muteeb",
+      "title": "Shadow and champion/challenger mechanism: mirror traffic to a challenger, log both, compare on the scorecard",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. A routing switch that sends a copy of live scoring requests to a challenger model version, logs both predictions with the version ids, and produces the comparison the retraining policy (N3-FH-29) requires before promotion; never serves the challenger's answer.",
+      "why": "Promotion by eyeballing is how a worse model goes live; the policy needs the mechanism.",
+      "area": "Platform",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N3-MT-27"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "One challenger run against the flop model with the comparison visible on the scorecard.",
+      "checklist": [
+        "Mirror switch",
+        "Dual logging",
+        "Comparison view"
+      ],
+      "layman": "We can test a new model version on real traffic without customers seeing it, and compare the two side by side.",
+      "layman_analogy": "",
+      "layman_needed": "One challenger run against the flop model with the comparison visible on the scorecard.",
+      "layman_output": "One challenger run against the flop model with the comparison visible on the scorecard.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-MT-35",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Prediction-log metrics pipeline: every prediction logged with version and features → warehouse → scorecard and drift watchdogs",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. Structured prediction logs (model version, features hash, score, band, latency, cost) streamed to the warehouse with sampling rules; the scorecard (N3-FH-27), drift watchdogs (N3-FH-08) and alert rules (N3-FH-28) read from these tables rather than ad-hoc queries.",
+      "why": "Monitoring that reads from six different places breaks the first time one moves.",
+      "area": "Data",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Prediction tables live for every model; scorecard and watchdogs read from them; sampling documented.",
+      "checklist": [
+        "Log schema",
+        "Streaming to warehouse",
+        "Point scorecard and watchdogs at it"
+      ],
+      "layman": "Every prediction the models make is recorded in one place so the dashboards and alarms have a single source.",
+      "layman_analogy": "",
+      "layman_needed": "Prediction tables live for every model; scorecard and watchdogs read from them; sampling documented.",
+      "layman_output": "Prediction tables live for every model; scorecard and watchdogs read from them; sampling documented.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-MT-36",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "NLP inference service: batch and online modes, warm pools, autoscaling, p95 targets for the comment fast-lane",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. Package the post and comment NLP models (P0-FH-01/07) as one service with a batch mode for nightly labelling and an online mode for the crisis fast-lane (N2-MT-07); warm pools so first-call latency meets the fast-lane budget; autoscaling policy and p95 targets recorded with N5-MT-11.",
+      "why": "The crisis promise is 15 minutes; a cold model server eats most of it.",
+      "area": "Platform",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [
+        "N3-MT-03"
+      ],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Online p95 within the fast-lane budget under the load test; batch mode used by the nightly run.",
+      "checklist": [
+        "Service packaging",
+        "Warm pools",
+        "Autoscaling policy",
+        "p95 measured"
+      ],
+      "layman": "The language models run as a proper service that is fast when a crisis needs it and cheap at night.",
+      "layman_analogy": "",
+      "layman_needed": "Online p95 within the fast-lane budget under the load test; batch mode used by the nightly run.",
+      "layman_output": "Online p95 within the fast-lane budget under the load test; batch mode used by the nightly run.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N5-MT-27",
+      "sprint": "N5",
+      "assignee": "Muteeb",
+      "title": "Inference cost and autoscaling decision per model: CPU vs GPU, batch windows, cost per 1,000 predictions target",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. For each model: measured cost per 1,000 predictions (with N5-FH-06), CPU vs GPU decision, batch window vs online, scale-to-zero where allowed; targets written into the costing dashboard (N3-MT-16).",
+      "why": "Model serving is the cost line that grows with every page; it needs a number per model.",
+      "area": "Platform",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N1-MT-21"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Decision table per model; targets on the dashboard; one change implemented that lowers cost.",
+      "checklist": [
+        "Measure per model",
+        "Decide CPU/GPU and windows",
+        "Write targets",
+        "Implement one saving"
+      ],
+      "layman": "We know what each AI model costs to run and choose the cheapest way that still meets the speed promise.",
+      "layman_analogy": "",
+      "layman_needed": "Decision table per model; targets on the dashboard; one change implemented that lowers cost.",
+      "layman_output": "Decision table per model; targets on the dashboard; one change implemented that lowers cost.",
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-MT-37",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Model runbooks: one per production model — purpose, inputs, failure modes, dashboards, alerts, rollback, who to page",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. With Faheem: a one-page runbook for flop/draft, crisis, post NLP, comment NLP, Best Times and Art-E: what it does, its inputs and freshness, known failure modes and what they look like on the scorecard, the alert rules that cover it, the rollback command from the registry, and the on-call owner. Linked from the QA Control Center and the docs index.",
+      "why": "When a model misbehaves at 2 am the person paged needs one page, not a repo.",
+      "area": "Ops",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N3-MT-27"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Six runbooks linked from the QA Control Center; one used in a drill.",
+      "checklist": [
+        "Template",
+        "Six runbooks",
+        "Link and drill"
+      ],
+      "layman": "A one-page emergency guide for each AI model.",
+      "layman_analogy": "",
+      "layman_needed": "Six runbooks linked from the QA Control Center; one used in a drill.",
+      "layman_output": "Six runbooks linked from the QA Control Center; one used in a drill.",
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N3-MT-30",
+      "sprint": "N3",
+      "assignee": "Muteeb",
+      "title": "Art-E architecture and ADR: orchestrator, retriever, tools, memory, guards, judge, cache, streaming — one diagram, one decision",
+      "what": "With Asad and Faheem: the Art-E component diagram and the decision record — orchestrator (N4-MT-04), hybrid retriever (knowledge schema), tools layer, conversation/memory store, input/output guards, judge and eval harness, cache, streaming transport, provider routing (N4-AS-27); interfaces between them and who owns each. Filed in the ADR log (N2-AS-22).",
+      "why": "Art-E is the biggest project in the plan and has no architecture document; every later ticket needs the same picture.",
+      "area": "Art-E",
+      "due": "2026-10-16",
+      "priority": "P0",
+      "priority_reason": "Every Art-E build ticket depends on the same architecture",
+      "depends_on": [
+        "N2-AS-22"
+      ],
+      "feeds": [
+        "N3-MT-09"
+      ],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Diagram + ADR merged; every Art-E ticket references its component; owners named per component.",
+      "checklist": [
+        "Draw components and interfaces",
+        "Assign owners",
+        "File the ADR"
+      ],
+      "layman": "One picture of how Art-E is built and who owns each part.",
+      "layman_analogy": "",
+      "layman_needed": "Diagram + ADR merged; every Art-E ticket references its component; owners named per component.",
+      "layman_output": "Diagram + ADR merged; every Art-E ticket references its component; owners named per component.",
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N3-FH-33",
+      "sprint": "N3",
+      "assignee": "Faheem",
+      "title": "Art-E knowledge schema and retrieval design: what is indexed, how metrics are represented, hybrid BM25 + dense with RRF, metadata filters, reranker, chunking",
+      "what": "Specify the index content — posts, comments, page insights, model outputs (flop/crisis/best-times), benchmark rows, product docs (N4-MT-30) — how numeric facts are represented so they can be cited, chunk sizes per content type, hybrid sparse+dense retrieval fused by reciprocal rank fusion, metadata filters (page, date, type), a cross-encoder reranker, and the freshness stamp. Grounded in current production-RAG evidence (hybrid + rerank gives the largest measured lift).",
+      "why": "Most bad answers are retrieval failures; the schema decides what Art-E can ever know.",
+      "area": "Art-E",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [
+        "N2-MT-05",
+        "N4-FH-27"
+      ],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Schema doc merged; N2-MT-05 builds against it; retrieval diagnostics (N4-FH-27) measure it.",
+      "checklist": [
+        "Inventory sources",
+        "Represent metrics and chunks",
+        "Choose hybrid + rerank",
+        "Filters and freshness"
+      ],
+      "layman": "We decide exactly what facts Art-E can look up and how it finds the right ones.",
+      "layman_analogy": "",
+      "layman_needed": "Schema doc merged; N2-MT-05 builds against it; retrieval diagnostics (N4-FH-27) measure it.",
+      "layman_output": "Schema doc merged; N2-MT-05 builds against it; retrieval diagnostics (N4-FH-27) measure it.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-MT-38",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Art-E tools layer: vetted metric functions exposed as callable tools with schemas, allow-list, argument validation and result citations",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. Numeric questions ('how did my posts do last week?') are answered by calling vetted metric functions as tools — JSON schemas, allow-list, argument validation, tenant scoping, timeouts, and a result envelope the citation gate (N4-FH-01) can cite. No model arithmetic (N4-FH-15).",
+      "why": "An LLM must never compute a customer's numbers; it must call the function that does.",
+      "area": "Art-E",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N3-MT-30"
+      ],
+      "feeds": [
+        "N4-FH-15",
+        "N4-FH-01"
+      ],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Ten metric tools callable from the orchestrator with schemas; a wrong-argument call is rejected; results carry citations.",
+      "checklist": [
+        "Tool schemas + allow-list",
+        "Validation and tenant scoping",
+        "Citation envelope",
+        "Ten tools live"
+      ],
+      "layman": "When Art-E is asked for numbers it calls our checked calculators instead of guessing.",
+      "layman_analogy": "",
+      "layman_needed": "Ten metric tools callable from the orchestrator with schemas; a wrong-argument call is rejected; results carry citations.",
+      "layman_output": "Ten metric tools callable from the orchestrator with schemas; a wrong-argument call is rejected; results carry citations.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-MT-39",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Conversation and memory store: sessions, messages, 90-day memory with write policy, forget-this, export, tenant isolation",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. The backend for N3-FZ-02's spec and N4-FH-21's write policy: session and message tables, per-tenant memory entries with source and expiry, the retention job, forget-this and export endpoints (N4-AS-17, N4-MT-15), PII minimisation before anything reaches a vendor (N4-FH-12), and inclusion in the leakage proof (N4-MT-01).",
+      "why": "Memory is where an assistant becomes personal and where privacy breaks; the store must enforce the policy.",
+      "area": "Art-E",
+      "due": "2026-11-01",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N3-FZ-02"
+      ],
+      "feeds": [
+        "N4-MT-04",
+        "N4-AS-17"
+      ],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Store live with retention and forget-this proven; export works; leakage CI covers it.",
+      "checklist": [
+        "Schema and retention job",
+        "Forget-this + export",
+        "PII minimisation hook",
+        "Leakage CI"
+      ],
+      "layman": "Art-E remembers what it should, forgets on request, and never mixes customers.",
+      "layman_analogy": "",
+      "layman_needed": "Store live with retention and forget-this proven; export works; leakage CI covers it.",
+      "layman_output": "Store live with retention and forget-this proven; export works; leakage CI covers it.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-MT-40",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Embedding pipeline: text embeddings for posts, comments and insights — batch backfill, incremental on ingest, re-embed execution, cost",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. Choose and pin the text-embedding model (with N3-FH-15), backfill the corpus in batches with cost tracking (N2-MT-18), embed incrementally on ingest, and execute the re-embed plan when the model changes; index version bumped and stamped.",
+      "why": "The RAG index is only as fresh and complete as the embedding pipeline that feeds it.",
+      "area": "Art-E",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N2-MT-05",
+        "N3-FH-33"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Corpus embedded; incremental path under one hour; re-embed rehearsed on a subset; cost per million tokens recorded.",
+      "checklist": [
+        "Model pin",
+        "Batch backfill",
+        "Incremental path",
+        "Re-embed rehearsal"
+      ],
+      "layman": "Everything Art-E can search is converted into searchable form, kept up to date, and can be redone when the model changes.",
+      "layman_analogy": "",
+      "layman_needed": "Corpus embedded; incremental path under one hour; re-embed rehearsed on a subset; cost per million tokens recorded.",
+      "layman_output": "Corpus embedded; incremental path under one hour; re-embed rehearsed on a subset; cost per million tokens recorded.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-MT-41",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Art-E eval harness as code: golden-set runner, judge, retrieval metrics and safety set — nightly and on every prompt/model change; results to the scorecard",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. Turn the golden set (N4-FH-02), the calibrated judge (N4-FH-13), the retrieval metrics (N4-FH-27) and the safety benchmark into one harness that runs nightly and on every prompt-registry or model change (BL-IN-12), stores results with versions, gates deploys, and feeds the scorecard (N3-FH-27).",
+      "why": "An eval that is run by hand is run less each week; the harness makes it a gate.",
+      "area": "Art-E",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N3-FH-12"
+      ],
+      "feeds": [
+        "N4-FH-02"
+      ],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Harness runs in CI and nightly; a deliberately broken prompt fails the gate; results visible on the scorecard.",
+      "checklist": [
+        "Runner + storage",
+        "Judge and retrieval metrics wired",
+        "CI gate on prompt/model change",
+        "Scorecard feed"
+      ],
+      "layman": "Every change to Art-E is automatically tested against our question set before it goes live.",
+      "layman_analogy": "",
+      "layman_needed": "Harness runs in CI and nightly; a deliberately broken prompt fails the gate; results visible on the scorecard.",
+      "layman_output": "Harness runs in CI and nightly; a deliberately broken prompt fails the gate; results visible on the scorecard.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-MT-42",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Art-E cache: exact + semantic, per tenant, keyed by prompt version, invalidated on index refresh; hit rate on the dashboard",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. Exact-match cache for repeated asks and briefings, a semantic cache with a conservative similarity threshold, both scoped per tenant, keyed by prompt version and index version, purged on refresh (N3-MT-15); hit rate and cost saved on the costing dashboard; this is what N4-MT-03 validates.",
+      "why": "The 60% cache-hit assumption is in the cost model; nothing builds the cache.",
+      "area": "Art-E",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N2-MT-05"
+      ],
+      "feeds": [
+        "N4-MT-03"
+      ],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Cache live; hit rate visible; a stale answer after index refresh is impossible by key.",
+      "checklist": [
+        "Exact cache",
+        "Semantic cache + threshold",
+        "Version keys + purge",
+        "Dashboard"
+      ],
+      "layman": "Art-E remembers answers it already gave so repeated questions are instant and cheap — and forgets them when the facts change.",
+      "layman_analogy": "",
+      "layman_needed": "Cache live; hit rate visible; a stale answer after index refresh is impossible by key.",
+      "layman_output": "Cache live; hit rate visible; a stale answer after index refresh is impossible by key.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-MT-43",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Streaming backend: token streaming through the BFF with backpressure, cancel, partial-answer persistence and reconnect",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. Implement the transport N3-AS-18 decides (SSE/WebSocket through the BFF to the store app): backpressure, client cancel, persistence of partial answers so a dropped connection resumes, and the latency budget instrumentation (N4-MT-14).",
+      "why": "Streaming is the difference between Art-E feeling alive and feeling broken on a train.",
+      "area": "Art-E",
+      "due": "2026-11-01",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N3-AS-18"
+      ],
+      "feeds": [
+        "N4-AS-28"
+      ],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Streaming proven on device builds with cancel and resume; first-token latency measured.",
+      "checklist": [
+        "Transport implementation",
+        "Cancel + backpressure",
+        "Partial persistence + resume",
+        "Latency instrumentation"
+      ],
+      "layman": "Answers appear word by word on the phone and survive a dropped connection.",
+      "layman_analogy": "",
+      "layman_needed": "Streaming proven on device builds with cancel and resume; first-token latency measured.",
+      "layman_output": "Streaming proven on device builds with cancel and resume; first-token latency measured.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N5-MT-28",
+      "sprint": "N5",
+      "assignee": "Muteeb",
+      "title": "Reply-draft service: prompt + brand-voice memory per page, never-say list, output guard, human approval, logging",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. The service behind drafted crisis replies (N3-AS-01) and next-move suggestions: page brand-voice memory, the never-say list from the narrative rulebook, the output guard (N4-FH-11), mandatory human approval before anything is posted, and logging into the transcript store for review (N4-FH-23 gate).",
+      "why": "A drafted reply is the one Art-E output a customer might publish verbatim; it needs its own service and guard.",
+      "area": "Art-E",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [
+        "N4-FH-23"
+      ],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Service live behind the inbox; guard and approval enforced; drafts logged for the weekly review.",
+      "checklist": [
+        "Prompt + voice memory",
+        "Never-say list",
+        "Guard + approval",
+        "Logging"
+      ],
+      "layman": "Art-E can suggest a reply to a comment storm, in the page's own voice, that a human must approve before it goes out.",
+      "layman_analogy": "",
+      "layman_needed": "Service live behind the inbox; guard and approval enforced; drafts logged for the weekly review.",
+      "layman_output": "Service live behind the inbox; guard and approval enforced; drafts logged for the weekly review.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N5-MT-29",
+      "sprint": "N5",
+      "assignee": "Muteeb",
+      "title": "Art-E load test: concurrent asks, vendor rate limits, queueing and degraded mode at the launch projection",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. Load-test the Art-E path separately from the app load test: concurrent asks at the launch projection, vendor rate-limit behaviour, queue depth and shedding (N5-MT-12), cache contribution, and the degraded-mode copy from N3-SD-10; results into the readiness evidence.",
+      "why": "The app load test does not exercise the LLM path, which has the tightest vendor limits.",
+      "area": "Art-E",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [
+        "N5-MT-09"
+      ],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Report with p95 first-token at projection, vendor limits observed, degraded mode demonstrated.",
+      "checklist": [
+        "Scenario design",
+        "Run at projection",
+        "Degraded mode",
+        "Report"
+      ],
+      "layman": "We prove Art-E stays up when everyone asks at once on launch day.",
+      "layman_analogy": "",
+      "layman_needed": "Report with p95 first-token at projection, vendor limits observed, degraded mode demonstrated.",
+      "layman_output": "Report with p95 first-token at projection, vendor limits observed, degraded mode demonstrated.",
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-FH-28",
+      "sprint": "N4",
+      "assignee": "Faheem",
+      "title": "Art-E prompt suite v1 per surface: Q&A, briefing, drafted reply, alert explanation, recommendation card — inside the messaging house and refusal categories, versioned in the registry",
+      "what": "One system prompt per surface with the messaging house (N2-AX-13), Filza's refusal categories (N3-FZ-03) and AI-label strings (N3-FZ-01) baked in; few-shot examples from the golden set; each prompt versioned in the registry (BL-IN-12) and gated by the eval harness.",
+      "why": "Five surfaces sharing one improvised prompt is how tone and refusals drift apart.",
+      "area": "Art-E",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "BL-IN-12"
+      ],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Five prompts in the registry; harness green on each; Saad signs the copy.",
+      "checklist": [
+        "Write five prompts",
+        "Few-shot from golden set",
+        "Register and version",
+        "Harness green"
+      ],
+      "layman": "Art-E gets a carefully written set of instructions for each place it appears, kept under version control.",
+      "layman_analogy": "",
+      "layman_needed": "Five prompts in the registry; harness green on each; Saad signs the copy.",
+      "layman_output": "Five prompts in the registry; harness green on each; Saad signs the copy.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-FH-29",
+      "sprint": "N4",
+      "assignee": "Faheem",
+      "title": "Art-E safety benchmark: 100 adversarial and sensitive prompts with expected behaviour, run nightly",
+      "what": "Jailbreaks, prompt injection via comments (N4-FH-03), self-harm and harassment content in comments, requests for legal/medical/financial advice, competitor and Meta-policy traps, PII requests, off-scope asks (N4-MT-23); expected behaviour per Filza's redlines; refusal accuracy and over-refusal rate reported nightly by the harness.",
+      "why": "Red-team cases exist individually; a maintained benchmark is what proves safety every night.",
+      "area": "Art-E",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N3-FZ-03"
+      ],
+      "feeds": [
+        "N4-MT-41"
+      ],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "100-prompt set in the harness; refusal accuracy ≥95% and over-refusal ≤5% on the golden set.",
+      "checklist": [
+        "Write the set with Filza",
+        "Expected behaviours",
+        "Harness integration",
+        "First nightly run"
+      ],
+      "layman": "A standing set of nasty and sensitive questions Art-E is tested against every night.",
+      "layman_analogy": "",
+      "layman_needed": "100-prompt set in the harness; refusal accuracy ≥95% and over-refusal ≤5% on the golden set.",
+      "layman_output": "100-prompt set in the harness; refusal accuracy ≥95% and over-refusal ≤5% on the golden set.",
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N5-FH-12",
+      "sprint": "N5",
+      "assignee": "Faheem",
+      "title": "Art-E failure taxonomy and clustering: transcript failures → named issues → new eval examples (the closed loop)",
+      "what": "From the weekly transcript reviews (N4-SD-03) and thumbs-down reasons (N4-AS-07): cluster failures into a named taxonomy (retrieval miss, wrong number, tone, over-refusal, hallucinated citation, memory error), score each cluster, and promote representative cases into the golden set every week.",
+      "why": "Evals only improve if production failures flow back into them.",
+      "area": "Art-E",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N4-SD-03"
+      ],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Taxonomy in the repo; weekly promotion of ≥5 cases; cluster sizes on the scorecard.",
+      "checklist": [
+        "Taxonomy",
+        "Clustering routine",
+        "Weekly promotion",
+        "Scorecard"
+      ],
+      "layman": "Every way Art-E goes wrong gets a name, is counted, and becomes a test.",
+      "layman_analogy": "",
+      "layman_needed": "Taxonomy in the repo; weekly promotion of ≥5 cases; cluster sizes on the scorecard.",
+      "layman_output": "Taxonomy in the repo; weekly promotion of ≥5 cases; cluster sizes on the scorecard.",
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-FH-30",
+      "sprint": "N4",
+      "assignee": "Faheem",
+      "title": "Model bake-off per Art-E surface: frontier vs mid-tier on the golden set with cost and latency; route per surface",
+      "what": "Run the golden set and safety set through two or three candidate models per surface; record quality (judge), cost per ask and first-token latency; choose the route per surface for N4-AS-27's routing table; keep BL-LL-22 as the post-launch follow-on.",
+      "why": "Not every surface needs the frontier model; the briefing and alert explanations may not.",
+      "area": "Art-E",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N3-FH-12"
+      ],
+      "feeds": [
+        "N4-AS-27"
+      ],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Bake-off table per surface; routing decision recorded; cost per ask per route on the dashboard.",
+      "checklist": [
+        "Candidates per surface",
+        "Run harness",
+        "Decide routes"
+      ],
+      "layman": "We test which AI model is good enough for each job so we do not pay frontier prices for simple answers.",
+      "layman_analogy": "",
+      "layman_needed": "Bake-off table per surface; routing decision recorded; cost per ask per route on the dashboard.",
+      "layman_output": "Bake-off table per surface; routing decision recorded; cost per ask per route on the dashboard.",
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N5-SD-20",
+      "sprint": "N5",
+      "assignee": "Saad",
+      "title": "Art-E documentation: user guide ('what Art-E can and cannot answer'), in-app explainer, and the design note per surface",
+      "what": "With Jill's macros (N5-SD-09): a plain user guide of what Art-E answers, what it refuses and why, how citations work and how to correct it; the in-app explainer sheet; and an internal design note per surface (purpose, prompt version, tools used, known limits) linked from the docs index.",
+      "why": "Support and reviewers need the same answer to 'why did it say that'.",
+      "area": "Art-E",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [
+        "N5-SD-09"
+      ],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Guide and explainer published; five design notes in the docs index.",
+      "checklist": [
+        "User guide",
+        "In-app explainer",
+        "Five design notes"
+      ],
+      "layman": "Clear explanations of what Art-E can do, for users and for the team.",
+      "layman_analogy": "",
+      "layman_needed": "Guide and explainer published; five design notes in the docs index.",
+      "layman_output": "Guide and explainer published; five design notes in the docs index.",
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N3-AS-27",
+      "sprint": "N3",
+      "assignee": "Asad",
+      "title": "Documentation standard and the docs index: every feature and every model has a design note, contract entry, runbook, user doc and (models) a model card",
+      "what": "Define the five documents per feature and per model, where each lives, who owns it, and the review cadence; build the docs index on the tracker (Overview tab link) with a completeness bar per feature/model; the standard is part of the definition of done (N2-SD-22).",
+      "why": "'Documentation at every level' only happens if it is a checklist with an owner.",
+      "area": "Platform",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N2-SD-22"
+      ],
+      "feeds": [],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Standard published; index live with completeness per feature/model; DoD updated.",
+      "checklist": [
+        "Define the five docs",
+        "Build the index",
+        "Update the DoD"
+      ],
+      "layman": "A rule that every feature and every model has the same five documents, and a page that shows which are missing.",
+      "layman_analogy": "",
+      "layman_needed": "Standard published; index live with completeness per feature/model; DoD updated.",
+      "layman_output": "Standard published; index live with completeness per feature/model; DoD updated.",
+      "timebox_days": 0.5,
+      "launch_stage": "launch",
+      "estimated_days": 0.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N3-FH-34",
+      "sprint": "N3",
+      "assignee": "Faheem",
+      "title": "Model design notes v1 for the six production models: problem, data, features, label, evaluation, known failure modes",
+      "what": "One note per model (flop/draft, crisis, post NLP, comment NLP, Best Times, Art-E) written now, feeding the model cards (N5-FH-09) and the runbooks; includes the label definition after the sibling relabel and the current gate lines.",
+      "why": "Model cards at launch week are too late for a team that has to debug these models in October.",
+      "area": "Models",
+      "due": "2026-10-16",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [
+        "N5-FH-09"
+      ],
+      "gate": "N3",
+      "source": "plan",
+      "acceptance": "Six notes in the docs index; each reviewed by Muteeb.",
+      "checklist": [
+        "Template",
+        "Six notes",
+        "Review"
+      ],
+      "layman": "A short technical description of each AI model, written before launch, not after.",
+      "layman_analogy": "",
+      "layman_needed": "Six notes in the docs index; each reviewed by Muteeb.",
+      "layman_output": "Six notes in the docs index; each reviewed by Muteeb.",
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N4-MT-44",
+      "sprint": "N4",
+      "assignee": "Muteeb",
+      "title": "Per-feature health checks and alerts v0: Today freshness, draft-score latency/errors, alert delivery time, Art-E answer errors, connect success rate, push delivery, briefing generation",
+      "what": "AI/ML backend programme (Asad, 17 Sep): Muteeb owns the ML backend; Faheem owns the models and reviews every contract. One registered check per product surface (N2-MT-20) with a threshold and an alert route (N3-JL-16): Today feed freshness, draft-score p95 and error rate, crisis alert delivery under 15 minutes, Art-E answer error and refusal rates, Facebook connect success rate, push delivery rate, nightly briefing completion; feeds the coverage matrix (N5-MT-24).",
+      "why": "Every feature the customer touches must have a check that fires before the customer does.",
+      "area": "QA",
+      "due": "2026-10-30",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [
+        "N2-MT-20"
+      ],
+      "feeds": [
+        "N5-MT-24"
+      ],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "Seven checks registered with thresholds; each fired once in a staged test; routes verified.",
+      "checklist": [
+        "Define thresholds",
+        "Register checks",
+        "Wire routes",
+        "Fire each once"
+      ],
+      "layman": "Every part of the app has an alarm that goes off if it slows down or breaks.",
+      "layman_analogy": "",
+      "layman_needed": "Seven checks registered with thresholds; each fired once in a staged test; routes verified.",
+      "layman_output": "Seven checks registered with thresholds; each fired once in a staged test; routes verified.",
+      "timebox_days": 1.5,
+      "launch_stage": "launch",
+      "estimated_days": 1.5,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
+    },
+    {
+      "id": "N5-AS-27",
+      "sprint": "N5",
+      "assignee": "Asad",
+      "title": "Per-feature runbooks v0 for the nine launch surfaces, linked from the war-room board",
+      "what": "For Today, Drafts, Alerts, Best Times, connected pages/health, onboarding, Settings, Facebook connect and the morning briefing: symptoms, the check that covers it, first actions, kill switch (N6-AS-03), rollback and owner; feeds N5-MT-05's top-10 runbooks.",
+      "why": "The war-room board needs a page per surface, not per person.",
+      "area": "Ops",
+      "due": "2026-11-13",
+      "priority": "P1",
+      "priority_reason": "AI/ML core: QA, alerts, checks and documentation at every level (Asad, 17 Sep)",
+      "depends_on": [],
+      "feeds": [
+        "N5-MT-05"
+      ],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "Nine runbooks in the docs index; two exercised in the game-day.",
+      "checklist": [
+        "Template",
+        "Nine runbooks",
+        "Link from the board"
+      ],
+      "layman": "An emergency page for each part of the app.",
+      "layman_analogy": "",
+      "layman_needed": "Nine runbooks in the docs index; two exercised in the game-day.",
+      "layman_output": "Nine runbooks in the docs index; two exercised in the game-day.",
+      "timebox_days": 1,
+      "launch_stage": "launch",
+      "estimated_days": 1,
+      "estimate_source": "New ticket 17 Sep (AI/ML backend + Art-E programme); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "Added 17 Sep: AI/ML backend ownership for Muteeb and the Art-E programme's missing core."
+      }
     }
   ],
   "tracks": [
@@ -41329,7 +42473,8 @@ window.LAUNCH_DATA = {
             "N2-MT-20",
             "N3-MT-23",
             "N5-MT-23",
-            "N3-AS-25"
+            "N3-AS-25",
+            "N4-MT-43"
           ]
         },
         {
@@ -41401,7 +42546,11 @@ window.LAUNCH_DATA = {
             "N3-MT-24",
             "N3-FH-24",
             "BL-IN-20",
-            "BL-IN-21"
+            "BL-IN-21",
+            "N4-MT-33",
+            "N3-MT-29",
+            "N4-MT-35",
+            "N4-MT-40"
           ]
         },
         {
@@ -41500,7 +42649,9 @@ window.LAUNCH_DATA = {
             "N4-AS-27",
             "N3-MT-26",
             "N5-MT-24",
-            "N5-MT-25"
+            "N5-MT-25",
+            "N5-MT-29",
+            "N4-MT-44"
           ]
         },
         {
@@ -41565,7 +42716,10 @@ window.LAUNCH_DATA = {
             "N4-AS-30",
             "N5-AS-26",
             "N4-AS-31",
-            "N6-AS-14"
+            "N6-AS-14",
+            "N3-MT-30",
+            "N4-MT-42",
+            "N3-AS-27"
           ]
         },
         {
@@ -41580,6 +42734,28 @@ window.LAUNCH_DATA = {
             "N4-MT-32",
             "N6-SD-11",
             "N4-SD-14"
+          ]
+        },
+        {
+          "id": "ml-backend-serving-registry-batch-scoring-feature-parity-vector-ops",
+          "name": "ML backend: serving, registry, batch scoring, feature parity, vector ops",
+          "tickets": [
+            "N2-MT-01",
+            "N2-MT-05",
+            "N3-MT-15",
+            "N2-MT-11",
+            "N6-MT-02",
+            "N5-MT-07",
+            "N3-MT-27",
+            "N3-MT-28",
+            "N4-MT-33",
+            "N3-MT-29",
+            "N4-MT-34",
+            "N5-MT-26",
+            "N4-MT-35",
+            "N4-MT-36",
+            "N5-MT-27",
+            "N4-MT-37"
           ]
         }
       ]
@@ -42269,7 +43445,11 @@ window.LAUNCH_DATA = {
             "N4-JL-07",
             "N5-MT-22",
             "N2-JL-15",
-            "N5-JL-12"
+            "N5-JL-12",
+            "N4-MT-37",
+            "N5-SD-20",
+            "N3-AS-27",
+            "N5-AS-27"
           ]
         },
         {
@@ -42524,7 +43704,8 @@ window.LAUNCH_DATA = {
           "tickets": [
             "N1-MT-14",
             "N2-FH-05",
-            "N2-FH-09"
+            "N2-FH-09",
+            "N4-MT-36"
           ],
           "delivery_state": "Follow-up work",
           "evidence_links": [
@@ -42648,7 +43829,9 @@ window.LAUNCH_DATA = {
             "N5-FH-04",
             "N5-MT-03",
             "N5-LW-03",
-            "N5-FH-11"
+            "N5-FH-11",
+            "N4-MT-36",
+            "N5-MT-28"
           ]
         },
         {
@@ -42710,82 +43893,111 @@ window.LAUNCH_DATA = {
           "scope": "deferred"
         },
         {
-          "id": "arte",
-          "name": "Art-E (the LLM layer)",
-          "what": "Retrieval, the model cascade, citations, refusals, memory, quotas, the golden set and every red-team gate.",
-          "owners": [
-            "Alex",
-            "Asad",
-            "Faheem",
-            "Filza",
-            "Jill",
-            "Muteeb",
-            "Saad"
-          ],
-          "stack": "Tenant-namespaced vector index (pgvector, Pinecone decision in N3), cheap-to-frontier model cascade with a 60% cache target, hard citation gate, 90-day memory",
-          "platform": "",
-          "note": "Current owners, dates and work status are computed from scheduled tickets below; backlog records are excluded. Historical performance claims require their linked evidence.",
-          "color": "#6366f1",
+          "id": "art-e-product-surfaces-rail-briefing-cards-states-copy",
+          "name": "Art-E · product surfaces: rail, briefing, cards, states, copy",
           "tickets": [
-            "N2-MT-05",
-            "N3-FH-09",
-            "N3-FH-12",
-            "N3-MT-09",
-            "N3-MT-15",
-            "N3-SD-04",
-            "N3-SD-10",
-            "N3-JL-01",
-            "N3-LW-07",
-            "N3-FZ-02",
-            "N3-FZ-03",
-            "N3-FZ-08",
             "N4-AS-01",
             "N4-AS-03",
             "N4-AS-07",
             "N4-AS-13",
             "N4-AS-15",
             "N4-AS-17",
+            "N4-AS-22",
+            "N4-AS-28",
+            "N3-SD-04",
+            "N3-SD-10",
+            "N2-SD-20",
+            "N5-SD-09",
+            "N5-AX-07",
+            "N5-JL-09",
+            "N6-SD-09",
+            "N5-SD-20"
+          ]
+        },
+        {
+          "id": "art-e-knowledge-retrieval-embeddings-and-tools",
+          "name": "Art-E · knowledge, retrieval, embeddings and tools",
+          "tickets": [
+            "N2-MT-05",
+            "N3-MT-15",
+            "N3-FH-15",
+            "N3-JL-01",
+            "N4-MT-30",
+            "N4-FH-27",
+            "N4-MT-34",
+            "N3-FH-33",
+            "N4-MT-38",
+            "N4-MT-40"
+          ]
+        },
+        {
+          "id": "art-e-orchestration-memory-cache-streaming-cost",
+          "name": "Art-E · orchestration, memory, cache, streaming, cost",
+          "tickets": [
+            "N3-MT-09",
+            "N4-MT-04",
+            "N4-MT-14",
+            "N4-MT-23",
+            "N3-AS-18",
+            "N4-MT-03",
+            "N4-MT-15",
+            "N4-AS-27",
+            "N4-MT-12",
+            "N3-MT-30",
+            "N4-MT-38",
+            "N4-MT-39",
+            "N4-MT-42",
+            "N4-MT-43",
+            "N5-MT-28",
+            "N5-MT-29",
+            "N4-FH-30"
+          ]
+        },
+        {
+          "id": "art-e-safety-evals-judge-prompts-and-red-team",
+          "name": "Art-E · safety, evals, judge, prompts and red-team",
+          "tickets": [
             "N4-FH-01",
             "N4-FH-02",
             "N4-FH-04",
-            "N4-MT-01",
-            "N4-MT-03",
-            "N4-MT-04",
-            "N4-MT-12",
-            "N4-MT-14",
-            "N4-MT-15",
-            "N4-SD-03",
-            "N4-AX-01",
-            "N4-LW-03",
-            "N4-FZ-07",
-            "N5-FH-05",
-            "N5-MT-02",
-            "N5-SD-09",
-            "N5-LW-07",
-            "N6-SD-09",
-            "N5-AX-07",
-            "N2-SD-20",
-            "N3-AS-18",
-            "N3-FH-15",
             "N4-FH-11",
-            "N5-JL-09",
-            "N4-FH-12",
             "N4-FH-13",
             "N4-FH-15",
-            "N4-MT-23",
-            "N4-AS-22",
             "N4-FH-21",
-            "N4-MT-30",
+            "N3-FH-09",
+            "N3-FH-12",
+            "N3-LW-07",
+            "N4-LW-03",
+            "N5-FH-05",
+            "N4-SD-03",
+            "N5-LW-07",
+            "BL-IN-12",
+            "N4-FH-12",
+            "N4-MT-41",
+            "N4-FH-28",
+            "N4-FH-29",
+            "N5-FH-12",
+            "N4-FH-30"
+          ]
+        },
+        {
+          "id": "art-e-legal-memory-policy-sign-off-and-post-launch",
+          "name": "Art-E · legal, memory policy, sign-off and post-launch",
+          "tickets": [
+            "N3-FZ-02",
+            "N3-FZ-03",
+            "N3-FZ-08",
+            "N4-FZ-07",
+            "N4-AX-01",
+            "N5-MT-02",
+            "N4-MT-01",
             "BL-LL-02",
             "BL-LL-21",
             "BL-LL-23",
             "BL-LA-19",
             "BL-LA-21",
             "BL-IN-23",
-            "BL-IN-12",
-            "N4-AS-27",
-            "N4-FH-27",
-            "N4-AS-28"
+            "BL-LL-22"
           ]
         },
         {
@@ -42824,7 +44036,14 @@ window.LAUNCH_DATA = {
             "P0-FH-24",
             "P0-FH-27",
             "N4-MT-22",
-            "BL-APP-07"
+            "BL-APP-07",
+            "N3-MT-27",
+            "N3-MT-28",
+            "N4-MT-33",
+            "N3-MT-29",
+            "N5-MT-26",
+            "N5-MT-27",
+            "N4-MT-44"
           ]
         },
         {
@@ -42843,7 +44062,13 @@ window.LAUNCH_DATA = {
             "LW-FH-02",
             "N2-FH-27",
             "N3-FH-31",
-            "N4-FH-25"
+            "N4-FH-25",
+            "N5-MT-26",
+            "N4-MT-35",
+            "N4-MT-37",
+            "N4-MT-41",
+            "N5-FH-12",
+            "N3-FH-34"
           ]
         }
       ]
@@ -42939,7 +44164,13 @@ window.LAUNCH_DATA = {
             "N5-MT-24",
             "N4-MT-31",
             "N5-AS-23",
-            "N5-AS-26"
+            "N5-AS-26",
+            "N3-MT-28",
+            "N4-MT-35",
+            "N4-MT-37",
+            "N3-AS-27",
+            "N4-MT-44",
+            "N5-AS-27"
           ]
         },
         {
@@ -43044,7 +44275,11 @@ window.LAUNCH_DATA = {
             "N2-FH-27",
             "N4-FH-25",
             "N4-FH-26",
-            "N4-SD-18"
+            "N4-SD-18",
+            "N3-MT-27",
+            "N3-MT-28",
+            "N5-MT-26",
+            "N3-FH-34"
           ]
         },
         {
@@ -43090,7 +44325,13 @@ window.LAUNCH_DATA = {
             "N4-FH-21",
             "N4-AS-27",
             "N4-FH-27",
-            "N4-MT-31"
+            "N4-MT-31",
+            "N3-FH-33",
+            "N4-MT-38",
+            "N4-MT-41",
+            "N4-FH-28",
+            "N4-FH-29",
+            "N5-FH-12"
           ]
         },
         {
@@ -43191,7 +44432,10 @@ window.LAUNCH_DATA = {
             "N5-MT-25",
             "N2-MT-23",
             "N4-MT-32",
-            "N4-AS-31"
+            "N4-AS-31",
+            "N4-MT-34",
+            "N4-MT-39",
+            "N5-MT-29"
           ]
         },
         {
@@ -43269,38 +44513,38 @@ window.LAUNCH_DATA = {
     "owners": [
       {
         "owner": "Asad",
-        "tickets": 73,
+        "tickets": 75,
         "focus_rate": 0.6,
-        "effort_days": 101.56,
+        "effort_days": 103.06,
         "capacity_days": 38.4,
-        "gap_days": 63.16,
+        "gap_days": 64.66,
         "capacity_at_hard_limit": 38.4
       },
       {
         "owner": "Muteeb",
-        "tickets": 85,
+        "tickets": 111,
         "focus_rate": 0.7,
-        "effort_days": 137.03,
+        "effort_days": 164.03,
         "capacity_days": 44.8,
-        "gap_days": 92.23,
+        "gap_days": 119.23,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Faheem",
         "tickets": 93,
         "focus_rate": 0.7,
-        "effort_days": 136.13,
+        "effort_days": 143.13,
         "capacity_days": 44.8,
-        "gap_days": 91.33,
+        "gap_days": 98.33,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Saad",
-        "tickets": 133,
+        "tickets": 134,
         "focus_rate": 0.7,
-        "effort_days": 140,
+        "effort_days": 141,
         "capacity_days": 44.8,
-        "gap_days": 95.2,
+        "gap_days": 96.2,
         "capacity_at_hard_limit": 44.8
       },
       {
@@ -43340,7 +44584,7 @@ window.LAUNCH_DATA = {
         "capacity_at_hard_limit": 32
       }
     ],
-    "total_effort_days": 685.75,
+    "total_effort_days": 722.25,
     "total_capacity_days": 268.8
   },
   "ticket_audit": {
@@ -46621,6 +47865,56 @@ window.LAUNCH_DATA = {
         "BL-FZ-01"
       ],
       "note": "Filza covers every contract and agreement; register is the index."
+    },
+    "ml_backend_art_e_17sep": {
+      "reassigned_to_muteeb": [
+        "N2-MT-01",
+        "N2-MT-05",
+        "N3-MT-15",
+        "N2-MT-11",
+        "N6-MT-02",
+        "N5-MT-07"
+      ],
+      "added": [
+        "N3-MT-27",
+        "N3-MT-28",
+        "N4-MT-33",
+        "N3-MT-29",
+        "N4-MT-34",
+        "N5-MT-26",
+        "N4-MT-35",
+        "N4-MT-36",
+        "N5-MT-27",
+        "N4-MT-37",
+        "N3-MT-30",
+        "N3-FH-33",
+        "N4-MT-38",
+        "N4-MT-39",
+        "N4-MT-40",
+        "N4-MT-41",
+        "N4-MT-42",
+        "N4-MT-43",
+        "N5-MT-28",
+        "N5-MT-29",
+        "N4-FH-28",
+        "N4-FH-29",
+        "N5-FH-12",
+        "N4-FH-30",
+        "N5-SD-20",
+        "N3-AS-27",
+        "N3-FH-34",
+        "N4-MT-44",
+        "N5-AS-27"
+      ],
+      "art_e_lanes": [
+        "Art-E · product surfaces: rail, briefing, cards, states, copy",
+        "Art-E · knowledge, retrieval, embeddings and tools",
+        "Art-E · orchestration, memory, cache, streaming, cost",
+        "Art-E · safety, evals, judge, prompts and red-team",
+        "Art-E · legal, memory policy, sign-off and post-launch"
+      ],
+      "ml_backend_lane": "ML backend: serving, registry, batch scoring, feature parity, vector ops",
+      "note": "Muteeb owns the ML backend and the Art-E backend; Faheem owns models, prompts, evals and reviews every contract. Art-E is now five sub-lanes so its size is visible. No done ticket changed."
     }
   }
 };
