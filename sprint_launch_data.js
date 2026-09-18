@@ -9917,6 +9917,66 @@ window.LAUNCH_DATA = {
       },
       "layer": "launch",
       "parked_from": "LW"
+    },
+    {
+      "id": "BL-AS-01",
+      "sprint": "BL",
+      "assignee": "Asad",
+      "title": "Discovery ADR: name the one sanctioned cross-tenant read surface and reconcile it with the isolation attestation",
+      "what": "Founder-checklist N1-first sweep (Asad, 18 Sep): One-page CTO ADR (in the N2-AS-22 ADR set) naming the pre-computed, k=5-floored, de-identified Discovery graph/match table (built by N3-MT-01's weekly warehouse recompute) as the single sanctioned cross-tenant read surface: held in a shared, non-tenant-scoped schema, written only by the recompute job (no tenant claim), and read only through Discovery endpoints that resolve the requesting tenant but return banded facts about other tenants' pages exclusively via that table (never a live cross-tenant browser/BFF query). Correct BL-DS-01's 'tenant-scoped service' wording and N3-MT-02's N1-MT-08/RLS dependency to match, and require the Discovery build's isolation tests plus its attestation extension to carve out this one surface rather than restate an absolute no-cross-tenant-reads invariant. Record explicitly that the launch-build N4-MT-01 proof and N6-FZ-05 attestation remain correct as-is because Discovery is not live at launch.",
+      "why": "OVERALL: the Discovery path is otherwise very well covered and the build deferral is defensible at 746d vs 269d. Every enumerated element has an owner: graph spec (N3-FH-32), candidate-generation rule",
+      "area": "Discovery",
+      "due": "",
+      "priority": "P1",
+      "priority_reason": "Genuinely-uncovered gap from the 18 Sep N1-first checklist sweep; adversarially verified",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "none",
+      "source": "plan",
+      "acceptance": "A filed decision names the sanctioned Discovery cross-tenant read surface and its write/read rules and is acknowledged by Muteeb; the N4-MT-01 leakage-proof spec and the N6-FZ-05 attestation wording are updated to carve it out; Filza confirms it matches the N1-FZ-03 reverse-identification note and the N1-FZ-04 k=5/differencing rule; BL-DS-01's 'tenant-scoped service' wording is corrected.",
+      "checklist": [],
+      "layman": "OVERALL: the Discovery path is otherwise very well covered and the build deferral is defensible at 746d vs 269d. Every enumerated element has an owner: graph spec (N3-FH-32), candidate-generation rule",
+      "layman_analogy": "",
+      "layman_needed": "A filed decision names the sanctioned Discovery cross-tenant read surface and its write/read rules and is acknowledged by Muteeb; the N4-MT-01 leakage-proof spec and the N6-FZ-05 attestation wording are updated to carve it out; Filza confirms it matches the N1-FZ-03 reverse-identification note and the N1-FZ-04 k=5/differencing rule; BL-DS-01's 'tenant-scoped service' wording is corrected.",
+      "layman_output": "A filed decision names the sanctioned Discovery cross-tenant read surface and its write/read rules and is acknowledged by Muteeb; the N4-MT-01 leakage-proof spec and the N6-FZ-05 attestation wording are updated to carve it out; Filza confirms it matches the N1-FZ-03 reverse-identification note and the N1-FZ-04 k=5/differencing rule; BL-DS-01's 'tenant-scoped service' wording is corrected.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (checklist sweep); owner estimate to confirm",
+      "audit": {
+        "decision": "backlog",
+        "reason": "18 Sep founder-checklist sweep; adversarially verified as real and uncovered."
+      },
+      "layer": "launch",
+      "parked_from": "BL"
+    },
+    {
+      "id": "BL-FH-01",
+      "sprint": "BL",
+      "assignee": "Faheem",
+      "title": "Edit-detection reconciler: flag content-changed posts/comments on re-poll so re-ingest and re-score actually fire",
+      "what": "Founder-checklist N1-first sweep (Asad, 18 Sep): On HEIMDALL re-poll, detect posts/comments whose content changed since ingestion by comparing updated_time (or a content hash of message/post_content) against the stored row, and write a content-changed flag/hash into the same reconcile cycle as N3-FH-24 (which handles deleted/hidden only). This flag is the missing connective signal: N3-MT-15 already re-ingests 'new and edited posts, comments' into the RAG index and N4-MT-33 already re-scores 'new and re-polled posts' nightly, but N4-MT-33's idempotency key is (post, model_version) and would silently skip a content-only edit unless a change signal busts it. So: (a) refresh warehouse text tables to the current version, (b) include the content hash in N4-MT-33's idempotency key so edited rows re-score, (c) mark any drafted reply whose source comment/post changed as stale in the composer/alerts. Reuse the N3-FH-24 job; no new pipeline.",
+      "why": "N3-FH-24 explicitly reconciles content 'deleted or hidden on Facebook' but nothing reconciles EDITS. Facebook posts and comments are routinely edited after we ingest and score them (caption changed, o",
+      "area": "Pipelines",
+      "due": "",
+      "priority": "P1",
+      "priority_reason": "Genuinely-uncovered gap from the 18 Sep N1-first checklist sweep; adversarially verified",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "none",
+      "source": "plan",
+      "acceptance": "Editing a post and a comment on a pilot page causes the next reconcile cycle to update the stored content and refresh the dependent model outputs; a test that edits then re-polls shows the warehouse row and downstream scores refreshed, with the change recorded in the reconciliation log.",
+      "checklist": [],
+      "layman": "N3-FH-24 explicitly reconciles content 'deleted or hidden on Facebook' but nothing reconciles EDITS. Facebook posts and comments are routinely edited after we ingest and score them (caption changed, o",
+      "layman_analogy": "",
+      "layman_needed": "Editing a post and a comment on a pilot page causes the next reconcile cycle to update the stored content and refresh the dependent model outputs; a test that edits then re-polls shows the warehouse row and downstream scores refreshed, with the change recorded in the reconciliation log.",
+      "layman_output": "Editing a post and a comment on a pilot page causes the next reconcile cycle to update the stored content and refresh the dependent model outputs; a test that edits then re-polls shows the warehouse row and downstream scores refreshed, with the change recorded in the reconciliation log.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (checklist sweep); owner estimate to confirm",
+      "audit": {
+        "decision": "backlog",
+        "reason": "18 Sep founder-checklist sweep; adversarially verified as real and uncovered."
+      },
+      "layer": "launch",
+      "parked_from": "BL"
     }
   ],
   "features": [
@@ -10193,7 +10253,8 @@ window.LAUNCH_DATA = {
         "N5-FH-12",
         "N3-FH-34",
         "N4-FH-32",
-        "N5-FH-13"
+        "N5-FH-13",
+        "N4-FH-33"
       ],
       "what": "Pilot types a draft; the virality gauge + driver chips move as they type, warning before a flop is published.",
       "why": "The PREDICT promise and the demo wow moment. Descriptive charts are free everywhere; this is not.",
@@ -10234,7 +10295,8 @@ window.LAUNCH_DATA = {
         "N5-FZ-13",
         "BL-DS-01",
         "BL-DS-02",
-        "BL-DS-03"
+        "BL-DS-03",
+        "BL-AS-01"
       ],
       "kind": "surface",
       "scope": "deferred"
@@ -10261,7 +10323,8 @@ window.LAUNCH_DATA = {
         "P0-FH-14",
         "N5-SD-16",
         "N3-SD-15",
-        "N5-AS-28"
+        "N5-AS-28",
+        "N6-AS-16"
       ],
       "kind": "surface",
       "scope": "active"
@@ -10704,7 +10767,11 @@ window.LAUNCH_DATA = {
         "N3-AS-27",
         "N4-MT-44",
         "N5-AS-27",
-        "N4-MT-45"
+        "N4-MT-45",
+        "N1-MT-24",
+        "N5-MT-31",
+        "BL-FH-01",
+        "N4-AX-07"
       ],
       "kind": "foundation",
       "scope": "active"
@@ -10959,7 +11026,11 @@ window.LAUNCH_DATA = {
         "N5-FZ-15",
         "N5-FZ-16",
         "N6-JL-12",
-        "N6-AX-12"
+        "N6-AX-12",
+        "N1-JL-21",
+        "N5-FZ-17",
+        "N2-JL-16",
+        "N1-JL-22"
       ],
       "scope": "active"
     },
@@ -43241,6 +43312,276 @@ window.LAUNCH_DATA = {
       },
       "estimated_days": 0.25,
       "timebox_days": 0.25
+    },
+    {
+      "id": "N4-FH-33",
+      "sprint": "N4",
+      "assignee": "Faheem",
+      "title": "Fold OCR + content-type fusion into the weekly review script, design notes and runbooks",
+      "what": "Founder-checklist N1-first sweep (Asad, 18 Sep): Extend N2-FH-25's weekly manual-review script with an OCR-cascade row and a content-type-fusion row (fresh stratified prediction sample by page tier/content type, a rubric a non-ML reviewer can apply, pass/warn/fail bands, log sheet) so the scorecard's 'last human-review score and date' cell — which N4-FH-32 adds an OCR/fusion row to (N3-FH-27) — is actually fed each week. Add a one-page model note for each, extending the design notes (N3-FH-34) and the model runbooks (N4-MT-37, with Muteeb): purpose, inputs and freshness, known failure modes (e.g. OCR returning plausible-but-wrong text on an unseen image format — a semantic error the confidence/drift watchdog misses; note P0-FH-27 covers fusion drift but not OCR at all), the alert rules that cover it (N4-FH-32 via N3-FH-28), and the rollback command and on-call owner. Link both from the docs index and the QA Control Center. Closes the QA(human-review) + docs legs of the 18-Sep audit that N4-FH-32 left open (it did freshness+alerts+scorecard only).",
+      "why": "The already-shipped OCR cascade (P0-FH-11) and content-type fusion classifier (P0-FH-12) sit in the flop-scoring and Art-E grounding serving paths (per N4-FH-32's own text). The 18-Sep exec audit closed three of the five required cells for ",
+      "area": "Models",
+      "due": "2026-11-01",
+      "priority": "P1",
+      "priority_reason": "Genuinely-uncovered gap from the 18 Sep N1-first checklist sweep; adversarially verified",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "This week's manual-review log sheet contains a scored OCR-cascade row and a content-type-fusion row; the model scorecard's human-review cell for both models is non-empty with a date; a one-page model note/runbook exists for OCR and for content-type fusion, linked from the docs index and QA Control Center. No new model or endpoint is created.",
+      "checklist": [],
+      "layman": "The already-shipped OCR cascade (P0-FH-11) and content-type fusion classifier (P0-FH-12) sit in the flop-scoring and Art-E grounding serving paths (per N4-FH-32's own text). The 18-Sep exec audit closed three of the five required cells for ",
+      "layman_analogy": "",
+      "layman_needed": "This week's manual-review log sheet contains a scored OCR-cascade row and a content-type-fusion row; the model scorecard's human-review cell for both models is non-empty with a date; a one-page model note/runbook exists for OCR and for content-type fusion, linked from the docs index and QA Control Center. No new model or endpoint is created.",
+      "layman_output": "This week's manual-review log sheet contains a scored OCR-cascade row and a content-type-fusion row; the model scorecard's human-review cell for both models is non-empty with a date; a one-page model note/runbook exists for OCR and for content-type fusion, linked from the docs index and QA Control Center. No new model or endpoint is created.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (checklist sweep); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "18 Sep founder-checklist sweep; adversarially verified as real and uncovered."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N6-AS-16",
+      "sprint": "N6",
+      "assignee": "Asad",
+      "title": "Serve the Today feed: ranking, expiry, per-session cap and dedup in the BFF view-model",
+      "what": "Founder-checklist N1-first sweep (Asad, 18 Sep): In Asad's Today BFF view-model (on N2-MT-03's route, behind the existing Today feature flag), implement the serving step the flagship feed currently lacks: apply N3-SD-19's ranking rule (severity x time-sensitivity x confidence x recency), per-type card expiry, per-session cap, and dedup against Crisis Alerts and the morning briefing, and place N3-FH-05's next-move hero card. Tenant/page-scoped; driven off the model coverage/abstain flags, not parsed strings. Consumes N3-SD-19's one-pager and N3-FH-05's rule/table as inputs; Muteeb's read-model (N2-MT-03) supplies the raw typed cards, but ordering/expiry/dedup/cap logic lives in the view-model per the N1-AS-14 ownership map (aggregation/view-models = Asad), resolving the mis-delegation to Muteeb. Acceptance: a seeded pilot page with mixed card types renders urgent-first, deduped, expired cards gone, next-move hero placed.",
+      "why": "The Today feed is the core daily-loop surface (flow 2) and ships at launch in the native app. Its serving endpoint N2-MT-03 (Asad, N4) returns typed cards (crisis/opportunity/signal/prediction/win) 'all filterable by page_id' with NO orderi",
+      "area": "Today",
+      "due": "2026-11-29",
+      "priority": "P1",
+      "priority_reason": "Genuinely-uncovered gap from the 18 Sep N1-first checklist sweep; adversarially verified",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N6",
+      "source": "plan",
+      "acceptance": "A seeded pilot page with mixed, overlapping card types returns cards in the N3-SD-19 order with expired cards removed, per-type caps enforced, and no card duplicated across the feed, Alerts and the briefing; a contract test asserts ordering and expiry and is wired into the flow-2 E2E suite.",
+      "checklist": [],
+      "layman": "The Today feed is the core daily-loop surface (flow 2) and ships at launch in the native app. Its serving endpoint N2-MT-03 (Asad, N4) returns typed cards (crisis/opportunity/signal/prediction/win) 'all filterable by page_id' with NO orderi",
+      "layman_analogy": "",
+      "layman_needed": "A seeded pilot page with mixed, overlapping card types returns cards in the N3-SD-19 order with expired cards removed, per-type caps enforced, and no card duplicated across the feed, Alerts and the briefing; a contract test asserts ordering and expiry and is wired into the flow-2 E2E suite.",
+      "layman_output": "A seeded pilot page with mixed, overlapping card types returns cards in the N3-SD-19 order with expired cards removed, per-type caps enforced, and no card duplicated across the feed, Alerts and the briefing; a contract test asserts ordering and expiry and is wired into the flow-2 E2E suite.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (checklist sweep); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "18 Sep founder-checklist sweep; adversarially verified as real and uncovered."
+      },
+      "estimated_days": 1.5,
+      "timebox_days": 1.5
+    },
+    {
+      "id": "N1-MT-24",
+      "sprint": "N1",
+      "assignee": "Muteeb",
+      "title": "Stop nightly git-commit of raw Facebook UGC (explorer_data.json); name repo snapshots in the deletion/DSAR inventory",
+      "what": "Founder-checklist N1-first sweep (Asad, 18 Sep): .github/workflows/explorer-data.yml runs `git add -f explorer_data.json` and pushes nightly as 'explorer-bot' — verified in-repo: 74 commits already, 1.5MB, 200 preview rows across 24 ODL/RDL tables of real third-party personal data (commenter message text incl. real names in rdl.post_comments.message; rdl.page_posts.message/permalink_url/page_name e.g. 'Council Estate Life','HMP Jail Tales'; post/comment/page IDs). Git history is immutable so no deletion pipeline can propagate an erasure into these copies. Fix, small and sharp: (1) change scripts/generate_explorer_data.py to publish schema + aggregate summaries only (or redacted/synthetic previews with no free-text or identifiers); (2) gitignore explorer_data.json and drop the force-add (or serve previews from an authed runtime endpoint that reads the warehouse live); (3) purge the file from all 74 commits with git-filter-repo/BFG + a coordinated force-push; (4) add 'git-committed snapshots + file exports (repo)' as a named surface in the deletion/DSAR inventory feeding N4-FZ-07, N4-FZ-02 and the N3-MT-24 derived-artefact deletion scope. Steps 1–2 are stop-the-bleed and should land in N1 before more immutable copies accumulate.",
+      "why": "Verified in-repo: .github/workflows/explorer-data.yml runs `git add -f explorer_data.json` then commits and pushes nightly via 'explorer-bot' (74 commits already, one more every night). That file (1.5MB) embeds 200 preview rows across ~24 O",
+      "area": "Data",
+      "due": "2026-09-25",
+      "priority": "P0",
+      "priority_reason": "Genuinely-uncovered gap from the 18 Sep N1-first checklist sweep; adversarially verified",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N1",
+      "source": "plan",
+      "acceptance": "No file in the working tree or full git history contains raw commenter/message text or personal identifiers (grep of history for known commenter strings returns nothing); the nightly job either is gitignored or commits only schema/aggregates; the DSAR runbook (N4-FZ-07) lists snapshots/exports/repo as an in-scope surface and the real DSAR run accounts for them.",
+      "checklist": [],
+      "layman": "Verified in-repo: .github/workflows/explorer-data.yml runs `git add -f explorer_data.json` then commits and pushes nightly via 'explorer-bot' (74 commits already, one more every night). That file (1.5MB) embeds 200 preview rows across ~24 O",
+      "layman_analogy": "",
+      "layman_needed": "No file in the working tree or full git history contains raw commenter/message text or personal identifiers (grep of history for known commenter strings returns nothing); the nightly job either is gitignored or commits only schema/aggregates; the DSAR runbook (N4-FZ-07) lists snapshots/exports/repo as an in-scope surface and the real DSAR run accounts for them.",
+      "layman_output": "No file in the working tree or full git history contains raw commenter/message text or personal identifiers (grep of history for known commenter strings returns nothing); the nightly job either is gitignored or commits only schema/aggregates; the DSAR runbook (N4-FZ-07) lists snapshots/exports/repo as an in-scope surface and the real DSAR run accounts for them.",
+      "launch_stage": "beta",
+      "estimate_source": "New ticket 18 Sep (checklist sweep); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "18 Sep founder-checklist sweep; adversarially verified as real and uncovered."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N1-JL-21",
+      "sprint": "N1",
+      "assignee": "Jill",
+      "title": "Start Apple + Google store org enrolment now: D-U-N-S request + entity verification, chased weekly",
+      "what": "Founder-checklist N1-first sweep (Asad, 18 Sep): In N1, start the store-org enrolment clock so the weeks-long verification runs in parallel with the build: submit Apple Developer Program enrolment as ArtemisAI Ltd (organisation, not personal) — request/verify the legal entity's D-U-N-S number and file the organisation identity documents — and open the Google Play organisation account. Enrol as an organisation to avoid Play's 12-tester/14-day closed-test limit. Track it on the lead-time/decisions board beside Meta business verification (N1-AX-02 / N2-AX-03) with a weekly chase and a named escalation date, then hand the verified accounts to BL-APP-01 (Jill) for signing/keystore custody and on to the BL-APP-07 27 Nov submission gate. Fold in and un-park the D-U-N-S/lead-time lines currently sitting in the parked N5-AS-20 (and BL-APP-05), which were shelved on the stale 16 Sep 'native app is post-launch' decision that the 17 Sep scope change overturned.",
+      "why": "The 17 Sep scope change makes the iOS+Android store app launch-essential for 15 Dec, and BL-APP-07 sets a hard 'submit to both stores no later than Fri 27 Nov' gate. Apple Developer Program enrolment as a Ltd needs a D-U-N-S number plus leg",
+      "area": "Mobile app",
+      "due": "2026-09-25",
+      "priority": "P0",
+      "priority_reason": "Genuinely-uncovered gap from the 18 Sep N1-first checklist sweep; adversarially verified",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N1",
+      "source": "plan",
+      "acceptance": "D-U-N-S number obtained and Apple organisation enrolment submitted before the N1 gate (25 Sep); both store organisation accounts verified in ArtemisAI Ltd's name no later than the N3 gate (18 Oct), leaving >=6 weeks before the 27 Nov submission gate; status tracked weekly with a named escalation owner.",
+      "checklist": [],
+      "layman": "The 17 Sep scope change makes the iOS+Android store app launch-essential for 15 Dec, and BL-APP-07 sets a hard 'submit to both stores no later than Fri 27 Nov' gate. Apple Developer Program enrolment as a Ltd needs a D-U-N-S number plus leg",
+      "layman_analogy": "",
+      "layman_needed": "D-U-N-S number obtained and Apple organisation enrolment submitted before the N1 gate (25 Sep); both store organisation accounts verified in ArtemisAI Ltd's name no later than the N3 gate (18 Oct), leaving >=6 weeks before the 27 Nov submission gate; status tracked weekly with a named escalation owner.",
+      "layman_output": "D-U-N-S number obtained and Apple organisation enrolment submitted before the N1 gate (25 Sep); both store organisation accounts verified in ArtemisAI Ltd's name no later than the N3 gate (18 Oct), leaving >=6 weeks before the 27 Nov submission gate; status tracked weekly with a named escalation owner.",
+      "launch_stage": "beta",
+      "estimate_source": "New ticket 18 Sep (checklist sweep); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "18 Sep founder-checklist sweep; adversarially verified as real and uncovered."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N5-MT-31",
+      "sprint": "N5",
+      "assignee": "Muteeb",
+      "title": "Native build+sign+store-upload CI: archive Capacitor iOS/Android, bump build no., push signed .ipa/.aab to TestFlight/Play internal",
+      "what": "Founder-checklist N1-first sweep (Asad, 18 Sep): Stand up a fastlane/EAS-equivalent CI job on the chosen stack (co-work with Muteeb who owns CI, N1-MT-04) that, from a tagged commit, archives the BL-APP-02 Capacitor iOS and Android apps, signs them with the BL-APP-01 certs/keystore (secrets held in CI, never in the repo), auto-increments the build/version number, and uploads signed .ipa/.aab to TestFlight and Google Play internal testing. Fold the BL-APP-07 Sentry dSYM/Android-mapping/source-map upload into the same job (release+dist tied to store build numbers). One-command, reproducible releases that PRODUCE the store builds N5-AS-06 (nightly device matrix) and BL-APP-06 consume and that make reviewer resubmissions fast inside the 27 Nov -> 15 Dec window. Depends on BL-APP-01 (certs/keystore) and BL-APP-02 (Capacitor shell). Acceptance: from a tag, a green pipeline produces a signed build on TestFlight and Play internal with an auto-bumped build number and symbols uploaded, no manual Xcode/Gradle archive.",
+      "why": "The plan has the ends but not the middle: BL-APP-01 creates signing certs/keystore, BL-APP-02 creates the Capacitor shell, BL-APP-07 submits and adds Sentry symbol upload, N4-SD-19 runs Maestro/Detox on emulators, N5-AS-06 runs nightly E2E ",
+      "area": "Mobile app",
+      "due": "2026-11-15",
+      "priority": "P1",
+      "priority_reason": "Genuinely-uncovered gap from the 18 Sep N1-first checklist sweep; adversarially verified",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "A tagged commit produces signed iOS and Android builds in CI and lands them on TestFlight and Play internal with an incremented build number and symbols uploaded, zero secrets in the repo; a second run reproduces the release with no manual Xcode/Gradle steps.",
+      "checklist": [],
+      "layman": "The plan has the ends but not the middle: BL-APP-01 creates signing certs/keystore, BL-APP-02 creates the Capacitor shell, BL-APP-07 submits and adds Sentry symbol upload, N4-SD-19 runs Maestro/Detox on emulators, N5-AS-06 runs nightly E2E ",
+      "layman_analogy": "",
+      "layman_needed": "A tagged commit produces signed iOS and Android builds in CI and lands them on TestFlight and Play internal with an incremented build number and symbols uploaded, zero secrets in the repo; a second run reproduces the release with no manual Xcode/Gradle steps.",
+      "layman_output": "A tagged commit produces signed iOS and Android builds in CI and lands them on TestFlight and Play internal with an incremented build number and symbols uploaded, zero secrets in the repo; a second run reproduces the release with no manual Xcode/Gradle steps.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (checklist sweep); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "18 Sep founder-checklist sweep; adversarially verified as real and uncovered."
+      },
+      "estimated_days": 2,
+      "timebox_days": 2
+    },
+    {
+      "id": "N5-FZ-17",
+      "sprint": "N5",
+      "assignee": "Filza",
+      "title": "Publish the third-party open-source attribution notice in the store build and on the site",
+      "what": "Founder-checklist N1-first sweep (Asad, 18 Sep): From the SBOM (N5-AS-16) and OSS inventory (N3-FZ-14), generate a complete third-party attribution notice — name, version, licence and required copyright/permission text for every dependency shipped in the store binary and on the site. Publish it as an in-app 'Open source licences' screen reachable from Settings/About (alongside the ToS/Privacy/Cookie/EULA links speced in N4-FZ-14) in both the iOS and Android builds, and as a page on the marketing site; wire it to regenerate from the SBOM at build time. Verify every copyleft dependency flagged in N3-FZ-14 is either absent from the distributed binary or its terms are satisfied. Filza owns the legal text/decision and hands the surface spec to Saad/Asad, mirroring how N4-FZ-14 hands a links spec to Saad. Must land in the freeze-candidate build (N5) so the first distributed binary is compliant.",
+      "why": "The launch ships a cross-platform store binary (iOS+Android) plus a landing site, both of which bundle third-party open-source dependencies. Permissive licences (MIT, BSD, Apache-2.0, ISC) legally require that the copyright notice and licen",
+      "area": "Legal",
+      "due": "2026-11-15",
+      "priority": "P1",
+      "priority_reason": "Genuinely-uncovered gap from the 18 Sep N1-first checklist sweep; adversarially verified",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N5",
+      "source": "plan",
+      "acceptance": "An attribution notice covering 100% of distributed OSS dependencies (name, version, licence, verbatim required notice text) is reachable in the app under Settings/About on both iOS and Android and as a linked page on the site; it is generated from the build SBOM (not hand-maintained) and regenerates on dependency changes; copyleft items from N3-FZ-14 are confirmed compliant in writing. Filed before the N6 build freeze.",
+      "checklist": [],
+      "layman": "The launch ships a cross-platform store binary (iOS+Android) plus a landing site, both of which bundle third-party open-source dependencies. Permissive licences (MIT, BSD, Apache-2.0, ISC) legally require that the copyright notice and licen",
+      "layman_analogy": "",
+      "layman_needed": "An attribution notice covering 100% of distributed OSS dependencies (name, version, licence, verbatim required notice text) is reachable in the app under Settings/About on both iOS and Android and as a linked page on the site; it is generated from the build SBOM (not hand-maintained) and regenerates on dependency changes; copyleft items from N3-FZ-14 are confirmed compliant in writing. Filed before the N6 build freeze.",
+      "layman_output": "An attribution notice covering 100% of distributed OSS dependencies (name, version, licence, verbatim required notice text) is reachable in the app under Settings/About on both iOS and Android and as a linked page on the site; it is generated from the build SBOM (not hand-maintained) and regenerates on dependency changes; copyleft items from N3-FZ-14 are confirmed compliant in writing. Filed before the N6 build freeze.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (checklist sweep); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "18 Sep founder-checklist sweep; adversarially verified as real and uncovered."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
+    },
+    {
+      "id": "N2-JL-16",
+      "sprint": "N2",
+      "assignee": "Jill",
+      "title": "Retention grants + crunch-retention terms for the delivery team (Muteeb/Faheem/Saad)",
+      "what": "Founder-checklist N1-first sweep (Asad, 18 Sep): Jill drafts a one-page retention memo, agreed with Alex, that allocates NAMED option grants from the N2-AX-11 pool to the non-founder delivery owners (Muteeb, Faheem, Saad, and any other non-shareholder on the crunch), with vesting and good/bad-leaver terms, plus a written crunch-retention understanding (recognition/retention terms for staying through 15 Dec). Grants route into the N3 shareholders' agreement and share issue (N3-JL-08) and onto the cap table; cost against runway (N2-JL-11). Pairs with, and must NOT duplicate, N2-AX-11 (pool sizing + founder vesting) or N2-JL-10 (Filza equity).",
+      "why": "The three people the 15 Dec launch actually rests on carry the heaviest open load (Muteeb 172.8d, Faheem 146.1d, Saad 145.0d vs ~70 working days each; workload_review.capacity_status = RED) and N4-JL-06 names them as the sole owners of mode",
+      "area": "Launch management",
+      "due": "2026-10-04",
+      "priority": "P1",
+      "priority_reason": "Genuinely-uncovered gap from the 18 Sep N1-first checklist sweep; adversarially verified",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N2",
+      "source": "plan",
+      "acceptance": "A signed one-page retention memo naming each non-founder delivery owner, their grant from the pool, vesting/leaver terms and the crunch-retention terms; acknowledged by Alex and each person; grants handed to the solicitor for inclusion in the N3 shareholders' agreement / share issue (N3-JL-08) and reflected in the cap table; runway impact recorded in N2-JL-11.",
+      "checklist": [],
+      "layman": "The three people the 15 Dec launch actually rests on carry the heaviest open load (Muteeb 172.8d, Faheem 146.1d, Saad 145.0d vs ~70 working days each; workload_review.capacity_status = RED) and N4-JL-06 names them as the sole owners of mode",
+      "layman_analogy": "",
+      "layman_needed": "A signed one-page retention memo naming each non-founder delivery owner, their grant from the pool, vesting/leaver terms and the crunch-retention terms; acknowledged by Alex and each person; grants handed to the solicitor for inclusion in the N3 shareholders' agreement / share issue (N3-JL-08) and reflected in the cap table; runway impact recorded in N2-JL-11.",
+      "layman_output": "A signed one-page retention memo naming each non-founder delivery owner, their grant from the pool, vesting/leaver terms and the crunch-retention terms; acknowledged by Alex and each person; grants handed to the solicitor for inclusion in the N3 shareholders' agreement / share issue (N3-JL-08) and reflected in the cap table; runway impact recorded in N2-JL-11.",
+      "launch_stage": "beta",
+      "estimate_source": "New ticket 18 Sep (checklist sweep); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "18 Sep founder-checklist sweep; adversarially verified as real and uncovered."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N1-JL-22",
+      "sprint": "N1",
+      "assignee": "Jill",
+      "title": "Weekly wellbeing + sustainable-load watch through the crunch",
+      "what": "Founder-checklist N1-first sweep (Asad, 18 Sep): Jill stands up a light recurring people-health check in N1 (crunch is live as of 17 Sep): (1) a weekly per-person wellbeing + load pulse against an agreed sustainable-hours ceiling; (2) a fortnightly 1:1 cadence across the eight; (3) a written escalation trigger that routes any queue sustained over the ceiling into the Friday scope hammer (N2-AX-02) / the N1-AX-20 workload review, or an explicit contractor pull (unpark N3-JL-18 / N3-JL-14); (4) a booked post-launch recovery / time-off plan. Log kept beside the existing workload report. Five minutes per person per week, not a new board or ceremony; recurring pulse time sits in the operating allowance, so the estimate is the one-time setup only.",
+      "why": "capacity_status is RED with three people sustained at 2-2.5x load for a ~14-week crunch, yet every existing lever manages the WORK, not the humans: N1-AX-20 is a one-time N1 scope-conflict fix, N2-AX-02 cuts backlog weekly, N4-JL-06/N5-JL-1",
+      "area": "Ops",
+      "due": "2026-09-25",
+      "priority": "P1",
+      "priority_reason": "Genuinely-uncovered gap from the 18 Sep N1-first checklist sweep; adversarially verified",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N1",
+      "source": "plan",
+      "acceptance": "A recurring weekly entry (from N1 through launch week) logging each person's wellbeing + load vs the agreed ceiling; a fortnightly 1:1 held and noted; at least one over-ceiling case demonstrably escalated to a scope cut or contractor pull; and a written, dated post-launch recovery/time-off plan for the team.",
+      "checklist": [],
+      "layman": "capacity_status is RED with three people sustained at 2-2.5x load for a ~14-week crunch, yet every existing lever manages the WORK, not the humans: N1-AX-20 is a one-time N1 scope-conflict fix, N2-AX-02 cuts backlog weekly, N4-JL-06/N5-JL-1",
+      "layman_analogy": "",
+      "layman_needed": "A recurring weekly entry (from N1 through launch week) logging each person's wellbeing + load vs the agreed ceiling; a fortnightly 1:1 held and noted; at least one over-ceiling case demonstrably escalated to a scope cut or contractor pull; and a written, dated post-launch recovery/time-off plan for the team.",
+      "layman_output": "A recurring weekly entry (from N1 through launch week) logging each person's wellbeing + load vs the agreed ceiling; a fortnightly 1:1 held and noted; at least one over-ceiling case demonstrably escalated to a scope cut or contractor pull; and a written, dated post-launch recovery/time-off plan for the team.",
+      "launch_stage": "beta",
+      "estimate_source": "New ticket 18 Sep (checklist sweep); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "18 Sep founder-checklist sweep; adversarially verified as real and uncovered."
+      },
+      "estimated_days": 0.5,
+      "timebox_days": 0.5
+    },
+    {
+      "id": "N4-AX-07",
+      "sprint": "N4",
+      "assignee": "Alex",
+      "title": "Source and onboard additional pages/data beyond the pilots to strengthen models and reach",
+      "what": "Founder-checklist N1-first sweep (Asad, 18 Sep): A repeatable path to grow the connected-page footprint past the 5 pilots + Lewis's 15: a target list of pages/creators to recruit, the outreach and consent flow, the onboarding checklist (connect, backfill, QA) reusing N4-MT[ingest health], and a per-page value note (does it improve model coverage, Discovery density, or reach). Lewis may supply leads only — no delivery load on Lewis. This is the PM-owned 'getting more pages' motion the founder asked for, kept modest for launch and scalable after.",
+      "why": "Models, Discovery and social proof all improve with more connected pages; today nothing sources them beyond the fixed pilot set, so the corpus and reach are capped at launch.",
+      "area": "Pilots",
+      "due": "2026-11-01",
+      "priority": "P2",
+      "priority_reason": "Genuinely-uncovered gap from the 18 Sep N1-first checklist sweep; adversarially verified",
+      "depends_on": [],
+      "feeds": [],
+      "gate": "N4",
+      "source": "plan",
+      "acceptance": "A written page-acquisition plan with a target list, a consent+onboarding checklist, and at least the process ready to onboard a page in under a day; Lewis carries no delivery task.",
+      "checklist": [],
+      "layman": "Models, Discovery and social proof all improve with more connected pages; today nothing sources them beyond the fixed pilot set, so the corpus and reach are capped at launch.",
+      "layman_analogy": "",
+      "layman_needed": "A written page-acquisition plan with a target list, a consent+onboarding checklist, and at least the process ready to onboard a page in under a day; Lewis carries no delivery task.",
+      "layman_output": "A written page-acquisition plan with a target list, a consent+onboarding checklist, and at least the process ready to onboard a page in under a day; Lewis carries no delivery task.",
+      "launch_stage": "launch",
+      "estimate_source": "New ticket 18 Sep (checklist sweep); owner estimate to confirm",
+      "audit": {
+        "decision": "retain",
+        "reason": "18 Sep founder-checklist sweep; adversarially verified as real and uncovered."
+      },
+      "estimated_days": 1,
+      "timebox_days": 1
     }
   ],
   "tracks": [
@@ -43430,7 +43771,8 @@ window.LAUNCH_DATA = {
             "N1-AS-20",
             "N4-MT-46",
             "N3-AS-28",
-            "N5-AS-28"
+            "N5-AS-28",
+            "N6-AS-16"
           ]
         },
         {
@@ -43475,7 +43817,10 @@ window.LAUNCH_DATA = {
             "N5-AS-28",
             "N5-SD-22",
             "N5-FZ-15",
-            "N5-FZ-16"
+            "N5-FZ-16",
+            "N1-JL-21",
+            "N5-MT-31",
+            "N5-FZ-17"
           ],
           "scope": "deferred"
         },
@@ -43526,7 +43871,8 @@ window.LAUNCH_DATA = {
             "N4-MT-43",
             "N4-MT-45",
             "N4-MT-46",
-            "N3-AS-28"
+            "N3-AS-28",
+            "N6-AS-16"
           ]
         },
         {
@@ -43603,7 +43949,10 @@ window.LAUNCH_DATA = {
             "N3-MT-29",
             "N4-MT-35",
             "N4-MT-40",
-            "N4-MT-49"
+            "N4-MT-49",
+            "N1-MT-24",
+            "BL-FH-01",
+            "N4-AX-07"
           ]
         },
         {
@@ -43704,7 +44053,8 @@ window.LAUNCH_DATA = {
             "N5-MT-24",
             "N5-MT-25",
             "N5-MT-29",
-            "N4-MT-44"
+            "N4-MT-44",
+            "N1-MT-24"
           ]
         },
         {
@@ -43773,7 +44123,8 @@ window.LAUNCH_DATA = {
             "N3-MT-30",
             "N4-MT-42",
             "N3-AS-27",
-            "N4-MT-45"
+            "N4-MT-45",
+            "N5-MT-31"
           ]
         },
         {
@@ -43787,7 +44138,8 @@ window.LAUNCH_DATA = {
             "N5-SD-18",
             "N4-MT-32",
             "N6-SD-11",
-            "N4-SD-14"
+            "N4-SD-14",
+            "N5-MT-31"
           ]
         },
         {
@@ -44191,7 +44543,8 @@ window.LAUNCH_DATA = {
             "N5-AX-11",
             "LW-AX-06",
             "N3-JL-20",
-            "N3-FZ-22"
+            "N3-FZ-22",
+            "N2-JL-16"
           ]
         }
       ]
@@ -44385,7 +44738,8 @@ window.LAUNCH_DATA = {
             "N2-FZ-14",
             "N5-JL-10",
             "N3-LW-10",
-            "BL-APP-06"
+            "BL-APP-06",
+            "N4-AX-07"
           ]
         },
         {
@@ -44476,7 +44830,9 @@ window.LAUNCH_DATA = {
             "N4-FZ-18",
             "N3-FZ-24",
             "N5-FZ-15",
-            "N5-FZ-16"
+            "N5-FZ-16",
+            "N1-MT-24",
+            "N5-FZ-17"
           ]
         },
         {
@@ -44526,7 +44882,9 @@ window.LAUNCH_DATA = {
             "N5-AS-27",
             "N6-AX-11",
             "N4-JL-12",
-            "N6-JL-11"
+            "N6-JL-11",
+            "N1-JL-21",
+            "N1-JL-22"
           ]
         },
         {
@@ -44668,7 +45026,9 @@ window.LAUNCH_DATA = {
             "N4-AS-31",
             "N6-AS-14",
             "N3-FZ-22",
-            "N3-FZ-23"
+            "N3-FZ-23",
+            "N2-JL-16",
+            "N1-JL-22"
           ]
         }
       ]
@@ -44969,7 +45329,8 @@ window.LAUNCH_DATA = {
             "N5-FZ-13",
             "BL-DS-01",
             "BL-DS-02",
-            "BL-DS-03"
+            "BL-DS-03",
+            "BL-AS-01"
           ],
           "scope": "deferred"
         },
@@ -45132,7 +45493,8 @@ window.LAUNCH_DATA = {
             "N5-MT-27",
             "N4-MT-44",
             "N4-FH-31",
-            "N4-FH-32"
+            "N4-FH-32",
+            "N4-FH-33"
           ]
         },
         {
@@ -45159,7 +45521,8 @@ window.LAUNCH_DATA = {
             "N5-FH-12",
             "N3-FH-34",
             "N4-FH-32",
-            "N5-FH-13"
+            "N5-FH-13",
+            "N4-FH-33"
           ]
         },
         {
@@ -45618,29 +45981,29 @@ window.LAUNCH_DATA = {
     "owners": [
       {
         "owner": "Asad",
-        "tickets": 78,
+        "tickets": 79,
         "focus_rate": 0.6,
-        "effort_days": 106.06,
+        "effort_days": 107.56,
         "capacity_days": 38.4,
-        "gap_days": 67.66,
+        "gap_days": 69.16,
         "capacity_at_hard_limit": 38.4
       },
       {
         "owner": "Muteeb",
-        "tickets": 118,
+        "tickets": 120,
         "focus_rate": 0.7,
-        "effort_days": 172.78,
+        "effort_days": 175.28,
         "capacity_days": 44.8,
-        "gap_days": 127.98,
+        "gap_days": 130.48,
         "capacity_at_hard_limit": 44.8
       },
       {
         "owner": "Faheem",
-        "tickets": 97,
+        "tickets": 98,
         "focus_rate": 0.7,
-        "effort_days": 146.13,
+        "effort_days": 146.63,
         "capacity_days": 44.8,
-        "gap_days": 101.33,
+        "gap_days": 101.83,
         "capacity_at_hard_limit": 44.8
       },
       {
@@ -45654,20 +46017,20 @@ window.LAUNCH_DATA = {
       },
       {
         "owner": "Alex",
-        "tickets": 79,
+        "tickets": 80,
         "focus_rate": 0.4,
-        "effort_days": 52.98,
+        "effort_days": 53.98,
         "capacity_days": 25.6,
-        "gap_days": 27.38,
+        "gap_days": 28.38,
         "capacity_at_hard_limit": 25.6
       },
       {
         "owner": "Jill",
-        "tickets": 82,
+        "tickets": 85,
         "focus_rate": 0.6,
-        "effort_days": 54.81,
+        "effort_days": 56.31,
         "capacity_days": 38.4,
-        "gap_days": 16.41,
+        "gap_days": 17.91,
         "capacity_at_hard_limit": 38.4
       },
       {
@@ -45681,15 +46044,15 @@ window.LAUNCH_DATA = {
       },
       {
         "owner": "Filza",
-        "tickets": 82,
+        "tickets": 83,
         "focus_rate": 0.5,
-        "effort_days": 67.5,
+        "effort_days": 68.5,
         "capacity_days": 32,
-        "gap_days": 35.5,
+        "gap_days": 36.5,
         "capacity_at_hard_limit": 32
       }
     ],
-    "total_effort_days": 745.75,
+    "total_effort_days": 753.75,
     "total_capacity_days": 268.8
   },
   "ticket_audit": {
@@ -49065,6 +49428,22 @@ window.LAUNCH_DATA = {
         "N6-AX-12"
       ],
       "note": "18 Sep 8-lens (CTO/CEO/COO/CMO/CLO/AI-engineer/PM) audit via workflow; 38 findings adversarially verified against the live tracker. Muteeb gains Meta rate governor, connected-pages endpoint, shared metric service, model-output grounding, ingest health, best-times tool/guardrail, reply-draft health. No done ticket changed."
+    },
+    "checklist_sweep_18sep": {
+      "added": [
+        "N4-FH-33",
+        "N6-AS-16",
+        "N1-MT-24",
+        "N1-JL-21",
+        "N5-MT-31",
+        "N5-FZ-17",
+        "N2-JL-16",
+        "N1-JL-22",
+        "BL-AS-01",
+        "BL-FH-01",
+        "N4-AX-07"
+      ],
+      "note": "18 Sep N1-first founder-checklist sweep (10 domains, adversarially verified). Includes the P0 live exposure: nightly CI committing raw commenter text to the public repo. Also employee welfare + retention (COO) and 'getting more pages' (PM). No done ticket changed."
     }
   }
 };
